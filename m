@@ -1,177 +1,168 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA6EC61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 08:12:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86CFBC61DC2
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 08:34:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 13EB56072A;
-	Wed, 26 Aug 2026 08:12:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AB97740574;
+	Wed, 26 Aug 2026 08:34:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TrJYBj4vXskn; Wed, 26 Aug 2026 08:12:38 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ac6bQ-FL1kek; Wed, 26 Aug 2026 08:33:59 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787731958;
-	bh=rS1LcSGo0wyzu0XbYTJhcnoel0UlJFLhq/nflktw+mk=;
+	d=lists.u-boot-project.org; s=default; t=1787733239;
+	bh=XnNYco01tadxfvjPpLUt7feHV/q9uVHo2/2k+5fXAEc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0VDNJGHwNh1SqgPZu+yd9Yz6+wCBECeLGO/p4xmYSEZmbfFE2coZ0GFKxsapmfeLk
-	 frsIb/rKwCyyidZ93xRPFZW8+7oGw+4JISlr2gbt+9RCXVNUv7znqxr4pO7fREGiCJ
-	 dTstHqnkCMc88pHAplJKW/64NXAP1fYQsGbqDkt4ySRwp/DnQg7Vp6FLYg6t8EehOz
-	 PcHbJ1ZOpQg+XddxsDFBm4wu4x4rNfB626j7u0dEoKh0Xdi8F3Jo+10karz9tdGh04
-	 jjszvjQGWx/IeXzme1Hpsij0KpD4RYDoSsUgvpbu4PnXYhj6JBEYAB+Soc2arOywkS
-	 7+q7Chn4y441g==
+	b=vQA31UEp+exBTno63ikbbSCjXFufQpi4rdKuj6rNIY6q6eqzKIx1ba57w2kigOH7r
+	 HOH147HazsE5gacWLN/+OywlLMmsJBDRhHQlx0PpERa0fBwhTs/ESP4cPTriARZrv5
+	 FXVyztkU/3aH7BgSd1ZWRUWE1mNYRB1YXBBIkvzGF0IMXIpzPzagVB2evzsYqufs9G
+	 YC4jlvr9Xw7MX1Kz/wTugQb8HFYMRJuQOgTbQnTqV7NaiYG8G/nqC87Ud/VWxb4QSL
+	 mYV7xWc9EflbjEpJ6PogstHWny/D/PAElfL193mad02NAdVjRtX7vKMtmojRNxI4sr
+	 lkFZRXA20Vfkw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DC28E605F3;
-	Wed, 26 Aug 2026 08:12:37 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id BFC4B2FD
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 08:12:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 431444055E;
+	Wed, 26 Aug 2026 08:33:59 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C40F2105
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 08:33:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B110C40130
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 08:12:36 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id B5F564055E
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 08:33:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uTwdgKWuv8na for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 08:12:36 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3A15hfSh1j6D for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 08:33:56 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::1;
- helo=db3pr0202cu003.outbound.protection.outlook.com;
- envelope-from=frieder.schrempf@kontron.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none) header.from=kontron.de
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kontron.de header.i=@kontron.de header.a=rsa-sha256
- header.s=selector1 header.b=FUXkCjf4
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 281324008B
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 08:12:34 +0000 (UTC)
+ client-ip=2a01:111:f403:c202::7;
+ helo=gvxpr05cu001.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=R0GpT5ZM
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 0E89640556
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 08:33:55 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Xq1+xEy7Ep7qF/GK8GZoNzbUkdfh1WQQ7kByjaWMvFGd9C5S+sN9idVjVFaSN9Lw8EWznn0Bdvllj7QAlVcTvvs9A2YPh+uGZAdQJ/SBMLQM/eq0/J+Vyk/qJVhaGF/pQGKRJUv+V3hOPrkyBC9mpRnQuIh0GPyZbm6HJsMlPSpBAyHpjcpzVexFVYy32dh/XUNWCDLsZ/E51DuuUckkk30qxoM0y0spvq/ZxCgDW/nNZ7UrINBKxM7tAp15rWM0kpGQHj3ukUIhsIG25kedyf1Wb/qzYJeDodgi/ujP5zVzgu7fCY2LYejjmTJr6pDR61c+Fkasunr/eeD+XYKjQQ==
+ b=w3F2t/Mv7Ldg8akpTmg2MvcSqH7XV8kqWnH5W39aeWW/Ea5iVKVssGhisYVlYSSKpiB0QOULaxmL7dlfdSkGJ/ndVplEt3qwTq+Niog1mNN5E6/vz5Q1xqzTd4QVeJ1riYm1sjvl/gv2ao0wfgX/6UCFiRhI2yBvW7L9rh/3/jUOLypW2tXO9PSfprxvxYSQJYCxi9ZncNYrZjWidJBz9qZjOwOSpuKuC2ct9a+kl8RklDu9Bzwp5xjdbkQ8onAW6p51zNVYPW4E4r34XBmMI9fgpSQTMHswu56AM21CyXGDNsixJz5qogr4qNgqLK2eWImt6t2Jx0+yuKS82MlPUQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rS1LcSGo0wyzu0XbYTJhcnoel0UlJFLhq/nflktw+mk=;
- b=GIn/Ja+Q2XZGCQquG13AI6CeipI/fPy70MrgqN7bGYfxL2dRfz44gM4/IW26Qvkh4Me4qhZnkjgU723e3+yzX+RPAd5wtpYZfV+TSxwblHP6izFw3oN9j+n5hvLSwDDKwoo+BEcNvBqrMlJ+e7bUeHmTnHZN2GtGuZ1cQbkNbBK3jsrlDGsAeT1kFR/2SDNX6bhOjnAfwz8pZXKay6mZSkQtmkGfFGpLf+Vklu9ZVUPW9rSu/DSraLxnMTV/Ylz63iTq9Xx8xcaD71R+IV4F45vSSVCVn/uGWmn7wgqn1Acr6wfyr8M3AXp/l6iFZz2PGP+SPZ9G2c7Gsk2XCzEZbg==
+ bh=XnNYco01tadxfvjPpLUt7feHV/q9uVHo2/2k+5fXAEc=;
+ b=PED2HlFGJpjBplbcSRe3KTP6mnroSOzJP+F2DSJFYBRgWz0wjNoqNRpn6g5XydWSPVZyh62lzOTIOpSozKLhPlSeLh39QFt7rNt7DG+1wk55mPlsoFnG8T/HCbLz+bBDPyo0ZqWzaDd8Um610IZjEeP9Q4j8rd04H5DuueRXF6g/gLs9Doe2KChjCPqIIeWwgBjqfY6KyMKwM8NfuKg9X5jp6RDPf4bRPrifXUIWyqipYwVIwYoroKlTFuFbHAgNYDZoMRXbq6NNV7w+Ev56u3oK36xlWDDFfit7Frtmj8yZbyRJqubEJKa0+tNnB1MDny4qeNl3sAJ800tRcxfiQg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
- dkim=pass header.d=kontron.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
- s=selector1;
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rS1LcSGo0wyzu0XbYTJhcnoel0UlJFLhq/nflktw+mk=;
- b=FUXkCjf4zDmceSywpZLN9YlmEg5+3/ODePunHbOBpQguGdynevpBbxbZ/1i2pIgeRDraQur+SEeEgP9q0iQkFjs5Kpw1RRP4b879J+cVnJRatH1QH0ejxEbRbVkhzrSt7leKtNL0BJds897n+cLxoS2/opjxsHwMQpphIQWIi9eXgmFxxGOgRoK20VGM13p1W76fBqvTyLK5688nFRvnndJTFYwhswuRIHWkGiAZIi36WhRM/UC3qe3SsqlQOTTk2sHaXOg3xOFjETNTO8LLVd6r42RjBIIBP/bohSnC9uJdMol11iUEXCd4kcMmUXqohmYoWiLKtCY49YzhR1ZnOg==
+ bh=XnNYco01tadxfvjPpLUt7feHV/q9uVHo2/2k+5fXAEc=;
+ b=R0GpT5ZMHER6oN4QYVlwfPNvpVVDhyBCr1mtkyzu2Lzu0S8HunD2hlHdML1N88o12AHl/lkvLDSo1zDjCoiDtD9bCgwDLbfjFlFq4rPhOlFOGVQFprPeEc7BAwakCACFg94Ebzgb2kAaJl346/cW+i93Fr1X+5U3a1B/JXzsJEI=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kontron.de;
-Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:1fb::23)
- by AS8PR10MB6391.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:56e::22)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by PAXPR04MB9470.eurprd04.prod.outlook.com (2603:10a6:102:2b3::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.6; Wed, 26 Aug
- 2026 08:12:28 +0000
-Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::a276:4ad7:962:da22]) by AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::a276:4ad7:962:da22%6]) with mapi id 15.21.0360.006; Wed, 26 Aug 2026
- 08:12:28 +0000
-Message-ID: <59ed6576-06dd-42bf-8ea2-18de427955a4@kontron.de>
-Date: Wed, 26 Aug 2026 10:12:27 +0200
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Wed, 26 Aug
+ 2026 08:33:45 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%4]) with mapi id 15.21.0360.005; Wed, 26 Aug 2026
+ 08:33:44 +0000
+Message-ID: <d206aa31-c248-4fd1-b915-d42f40aa5c5d@cherry.de>
+Date: Wed, 26 Aug 2026 10:33:42 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] ddr: imx: Allow to call ddr init without logging
- failure
-To: Marek Vasut <marex@nabladev.com>, Frieder Schrempf <frieder@fris.de>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
- <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-Cc: uboot-imx@nxp.com, Simona Toaca <simona.toaca@nxp.com>,
- Viorel Suman <viorel.suman@nxp.com>
-References: <20260819070758.51350-1-frieder@fris.de>
- <20260819070758.51350-3-frieder@fris.de>
- <b8c844ab-7ea8-4044-95e5-edac173b3c9f@nabladev.com>
- <a8be2bf7-aafa-4e8e-9685-5fa100941805@kontron.de>
- <cfe8d0e1-c652-408c-bc47-0ae96dd0a65d@nabladev.com>
- <c81db5f1-600c-41a1-91d3-7638fc4d3d58@kontron.de>
- <b528b642-5010-4843-bfe1-d24e8b709876@nabladev.com>
- <fa652a2f-addc-47a4-b89e-755aba42509d@kontron.de>
- <83ee9efb-e09f-45d8-ac0a-cd9b2797c513@nabladev.com>
-Content-Language: en-US, de-DE
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
-In-Reply-To: <83ee9efb-e09f-45d8-ac0a-cd9b2797c513@nabladev.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0204.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a5::9) To AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:1fb::23)
+Subject: Re: [PATCH v2] rockchip: px30: Fix TPL_STACK overflow into BootROM
+ reserved region
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.u-boot-project.org, Kever Yang <kever.yang@rock-chips.com>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>
+References: <20260810211405.2837550-1-jonas@kwiboo.se>
+ <a0ac40ac-1716-4451-a585-a1bdec39ce84@0leil.net>
+ <89b693b4-ac18-4807-8f1d-59e4338bae5a@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <89b693b4-ac18-4807-8f1d-59e4338bae5a@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ClientProxiedBy: VI1PR06CA0227.eurprd06.prod.outlook.com
+ (2603:10a6:802:2c::48) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR10MB4277:EE_|AS8PR10MB6391:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6635f7ad-327e-4246-d8f7-08df0349c53a
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|PAXPR04MB9470:EE_
+X-MS-Office365-Filtering-Correlation-Id: bfc1b66b-1b62-4d17-9480-08df034cbda7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|366016|1800799024|7416014|376014|6133799003|10067099003|11063799006|4143699003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: icYm1RFC/gV+i7IAUaf0sepnJLTpAnrXnkzfwMWWnIyTBlcpOgqsQQWRCpAcWlPC+Cwzppbly/YXSOZhk1HbWhcU2KdvgyaBItEQuzrVtrNKTnijvPNezXEii0QblJeRudSXzXlnhs8fic3/qTijvuHkbVuYYT7BE2zqw+rR1btHf8l+KqCLXQyqgxfbML4JSXiRzDqpxJjAJW5DpGuP1T6nMzW9sbcl/n++m3w8iPdOgVvHhxZxG/NaPSR1Tg2Wjcwga/KvnwrYlwMZhO95gLzav/Asi8FrDxP/vttxu8A5qkZg6wKilajjPoXRFGDdM32uczOf6z0jC8VaVcUsc9/AVJOgPXoprgxZJ748/R1hbA2wfFdVD64qOlzgZOjh991c02dxLvDY04cLQklfWu8LuWJzNUvoBSgKTpMJNg8dwj5BQ6JTFNtp5L/ISqPO9PwWRArMiZsBR+kEb+ymPEei25uGNi7rp/oWBAcA1yYqpKkOhKcz9WuxFyvKjSZSP3AdG7GK79PQcFUM82Y+2IURJQ2KvZlZBWdc+YzruINbWui8CBR96y5fkdaaxFW9R+1Esox1bkIgFcNL3JkqV6XN0lsDfGOsmyLiLYc1piartB1276Ud9Wl19USEodhNj4jAEVNLG+sCv4ry/NT5d0UnBBeVCTJM3IDIST/sxeU=
+ ARA:13230040|10070799003|1800799024|366016|23010399003|376014|22082099003|18002099003|56012099006|11063799006|4133799003|3023799007|6133799003|10067099003|4143699003;
+X-Microsoft-Antispam-Message-Info: Q5E2iTaISdwCd4r2D38vmielBh5v6fUfJeYws9Zxt3s2wNQcZb/Vf8A20GifbyFzcqfxd34N04UyExUrPDh+cR9Z0iAvtes+ap9pv1eEG+3cTpl7Wx2d2MIYmmJih7CgQNGz1eS2kxI2hbBgRUjKFwyacbyGlkxnneczHYaluEDbcQRKZqC2BkxWg7x7FDNGbrUhvmQd3Wgkvqdgex71YAxZZpf3qiNJr/f8MGOe96IoL67tu+2PG47td3qTpG4otGU6stTy4x039+SuARsErLOvxPZZ0ALcVLw+rMJbSQkPf+zC8PSozPS5s66EisGjcxBz0yVBngOaEihiMQCps08U7b7WPkBF4ZJdf7y/nTjw9Q6knkBNmp6vPxyBjRBw3EqpQitw8ftrFfJW2/5z4NbWZJYWCntbUsoVwpOeM0mvXca9V7WJojEKO726P2bYhIG41MSViIQyb/Bv4d/RxG5UBQw5CrkChToDz1KQNJ8exFfGfN+r4InYVcJk1imbGbXtV+X6PgqH5WIkdc52bSeYGf/LD/gK5Qzoxo72hQv9FJsXQeGiqh925RJrLbw4JNBPvkko///Y25re8d0GvwLr9n0SMTHvsOVXariNOXP1uokDuCjZDnZGdqZvtNKS
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(1800799024)(7416014)(376014)(6133799003)(10067099003)(11063799006)(4143699003)(56012099006)(18002099003)(22082099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?THoreVE3dTVPUmY5Q0lheTR2VDdDWE53NWlIRHpmNVdITE1UcVhFMDVUK0Zp?=
- =?utf-8?B?N3dEcUt1ZmYwU1dNRkszZ1NtVS9PNG1jczIwcHBEYTFUK3VEaysxK2YvOWRH?=
- =?utf-8?B?VjBUSnV0dmdyWUgxbFIyOW9nek9qdEZEbVE1bXJuOUlIMlF1c2hwaVFIWUJm?=
- =?utf-8?B?aE1OQnY4dEQ1Uk9UOE9mVEUyRzNsVjBlRkw2SGtqTjJvRDEvREVORFJGZWVl?=
- =?utf-8?B?Yjk5OGRaSTBHZVRKVVhXdDJSOThXNkR2NHRLR0xFbHdUTFdYMDIxN0hBYUtD?=
- =?utf-8?B?V1J2a3Vaemt6WGk4Ykk1UnMxTHNyVEtCU3l1MlhDb1JUbEZrcE9VMUZZbzhH?=
- =?utf-8?B?dWtCRVdYTHZZMi9jcGE1Njd2TjJHS3NWTG8zYm55UUtCam5nTFZrY09qZ2hE?=
- =?utf-8?B?UU9UeDVJcytiV2RMSythWmhMQ1dha0pnWkh2S0RJQnI4elFPbHZEeGJCSVJu?=
- =?utf-8?B?dzRkWXVKczBnSG5hbGdVTUthUHhnNWRsUnNWQm9XRHI4M3J5czhIMHphdkdL?=
- =?utf-8?B?RGs4SmdMNmpJS2hzamFKdUo5eXBTL25URml3eHhzMXdEZURPRXErT1R3aGJq?=
- =?utf-8?B?VVhIdGFPZGNndGw5ZDNaV1Y3bTdUWHZNcW8rVitFZEJGQ3BpcFZaSDY2eUl2?=
- =?utf-8?B?aG10akVFK2dIcVJQR2o4UVNadXlFRUx6Nkh1UEVKN2Q2OG9UL1lraXZ2ak1x?=
- =?utf-8?B?eVFTeCtHZDA2SUR1WUFDRzlXYUtCQ2FmZ052ckh6UW8waXFmaTNDcEFIRGlW?=
- =?utf-8?B?Z0I3WGw3Qmc0OEdtenBrb0U1YWZ1Tm55bnhCREhRdzd1MUdxWkUvYkxZNjdJ?=
- =?utf-8?B?WlF5YzltT1BMMEZ5TGNLSElGRGhjcFFwL3lETkFJU2wyeHErd0dzUlJabTVS?=
- =?utf-8?B?RzFOUGpVOVVXM1kyQS9GZWxjRVNmTHJoRk5MSU54c01ua2E3Z1Y5bldwVEtF?=
- =?utf-8?B?Q1piODV4Z2ZqTE9veFQxZ0E3MlA4b1hRQmVueEpwZjdONmY0MnNva09sWEc2?=
- =?utf-8?B?UnBrZkxSSzVhN29HSGdTU1R4WTRjdTNmeUdUQTMvTU1rdEZiQ2dhYm5yNDVq?=
- =?utf-8?B?WWpBd0d2U2R1Y3g4QVgxWWlyVFVXWjN2aDY0azZGVi9FR3Z5ZktQTWlUbUNI?=
- =?utf-8?B?MldPcVZ1NDZVU3JvZXZwcWovZDV6cXFiMWtrbEhGZ1QxWVVFUlBicDAvS3k4?=
- =?utf-8?B?UGV2am5JT25iMGlXcG1nVFNVYUxDNlM3ZlVMMmRaUHBSVU96TnhYNjhKUnNK?=
- =?utf-8?B?QlQ0bUJGekoyVnRLUTBWaE9HdFhCd1JFYzYyKzRnOEg4akZaaUsrNGdFYlNN?=
- =?utf-8?B?Slc3TjAxZ3kwWEF5OVJqeUpaZGtpL1hRYnhFUTFpcDRQd29WNy95eXN0ZXFI?=
- =?utf-8?B?aVdGUE0xR28rT1ByTEY5ZGY5cTVkSXZOU1FJTG9jMjZnbjJnSVNGMG1FNVlo?=
- =?utf-8?B?TU16emErNFlISUJOYUNpdG9BTmNneUoxUGpWcVFwSmNGVnFCbzY2M1piOXUv?=
- =?utf-8?B?T3JtSDdqNTBKSjdKSTdiVFhULzNaa1hNWWFTT3Z5M2FLR1AyK21TdXVuWEFN?=
- =?utf-8?B?T0RJdzArVlVQVGxhTGRTNWNEcnFhRVU1ZTdNdnR5L3JJUjhTUStYSlpuZGlj?=
- =?utf-8?B?UkhVY2krNDdkK3FGTFo0S0VsSHRhNzNPS2tNUm15eEdUL00zSDVFVFd6ekpV?=
- =?utf-8?B?aWU0RW43MHVoeVpmOTBJTXROVkUxc1U5Yk1NSzgzLzA3V3VZcHJqQW9yTXVj?=
- =?utf-8?B?YXAwbWxGSUpMUnNMT2lSZjJvU2d2M3IyK0J3UVVwNVhUdDNBTUxQZ2dRd0Vv?=
- =?utf-8?B?RGJScnA2cHRhMFBBZXNFZmxMYlFYNzRqNkZrVE95K1hpVE0xVzRMTGFNTS85?=
- =?utf-8?B?NU1RMnUyT3B4VkV6Z3N5TGdpbFVVM2FYTkpIUWRiQ1lJdHJvdSt6Mlp3YWM1?=
- =?utf-8?B?RWlzZmozdnc5LzhTV2pDL3ZiMzVNRnRXMm5XeHFYWFpGcDZrL3piZ3FwRUtj?=
- =?utf-8?B?Z2c4NWt1S1RlUUZWekE2c1VRYXdqTE52Rk11R01OTm9hRnB2eEo4WlBXS3d1?=
- =?utf-8?B?Nm13S0pURTZRbUYrbnBiR3dVZ0E2ZnF4b0JacmRZTUxWUVRzRDYwdnEwblF6?=
- =?utf-8?B?KzM1T2RYMXVvRmF4SnhnemsreXpIaWZQcUV1YkRWVkt1SGtLWUQ1alcyOS9n?=
- =?utf-8?B?NDRQbVlZaENENHFJSHhiTjAyWjk2OWxCNkFuUGxTVVlMQ2E5L0JqaVJUVHk0?=
- =?utf-8?B?VnBEVWwrMThucWUyUklaejBMbC9taFdmVTh0ZHdzSjdHMkN0Nk5UR0RkT2hv?=
- =?utf-8?B?WTA2ZGpDaFFqVVVYMlRNd2gvNkhtQmErd2ZyWTN3R2lkZkxrUHU4NDExN1hi?=
- =?utf-8?Q?/6fKRKuOU0+9XJv8=3D?=
-X-OriginatorOrg: kontron.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6635f7ad-327e-4246-d8f7-08df0349c53a
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(10070799003)(1800799024)(366016)(23010399003)(376014)(22082099003)(18002099003)(56012099006)(11063799006)(4133799003)(3023799007)(6133799003)(10067099003)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YkNMVGl5RUxRQVVRV0ZxNUVPVXNJWXZHS0pjcnlrUUROd3JndmRKWFR4bnB6?=
+ =?utf-8?B?YzVMejBJcng4RjQyZ0lqaW1md2lDMVd2M3kyeUpCNFg4cUxlb09MVXJuQVpH?=
+ =?utf-8?B?a1NwRU9DMi9KcWs0dEZweUhLZjNsM05jeVFjWVNVOXp1VUtlUGJiNm1uSHFr?=
+ =?utf-8?B?V3ZZaVlpWThCdXExSjVVSXJMWFViZFBISVMxVlNQV2t3VnVOWEhpRUQyalkx?=
+ =?utf-8?B?SHBDQWJkUW1hUFRTMG44UTczY01kMUwwWXRWa1hFY0JJOW8zZkNSdkhWYUZK?=
+ =?utf-8?B?RWdXZi8vb1NyMTZOVGk1NkplNWZYbzQ4SG5sOXJ0YXlFZDBYY0YxNEJYZkNm?=
+ =?utf-8?B?U2JDMU5ueG5OTlFsdUVKcXBmNUUzSUZQV0tHSVRhTDNCU1IweFlmWWx2MHhH?=
+ =?utf-8?B?WjRzVG8wUEt3SllPQXFqdGtpMkZpVnJhZXcxNHp4S3ZMNnFJYS9leFhhUi9K?=
+ =?utf-8?B?ak9mNGFvbVQ2bUVlZDVXZWNITVhmRVY2RzZDV2JyQ25RcENVa29jOCtXWWN5?=
+ =?utf-8?B?Z2lhRW5lUm5KTExRbUlWbG5yZElwTmwyeWVrNmhRczE0ZVB5emg0dVNlL2cx?=
+ =?utf-8?B?VFNqWG5qSE5SYlNuTVFlK2R0SHdaMElSczJ2SXZjR1NNTThwTjNLcW02eENU?=
+ =?utf-8?B?aCtwb1llUHJob09oQTh4cFRhRzA1UnZHVzl5blU1K3BoN0luVWF1d0tIbXJ0?=
+ =?utf-8?B?ak9OMVd3Sm54STg0OHpIS2t5cTlyUjAzSVluVURPQ1JQcTFqVXAxTGNmMDN0?=
+ =?utf-8?B?dnliaHdsQ2QwdnV3NGdYRlF0OUlhUW1mbHJBOGZnamZ2bHpaVkorZ0Z6ZUV4?=
+ =?utf-8?B?QkZkaVRQbGpEYmFMWklpN2s0T01lTUpweWhoMG0wN2REeHBqVEwvc0ZZMnhN?=
+ =?utf-8?B?OFI3cS9KZXd4dlZFcWtiaEMwSU13bzNVWUdJMHVQVnlNZ05YMDl0YTNZQy9z?=
+ =?utf-8?B?dFZJVENYMGJKR3JQUCtKWWEyQ3M5Y2RteHY1T0ZEWlYycEtKUk5KbTlNQkp2?=
+ =?utf-8?B?T3N5NmVJb3hENWI5eFNoTXVqMit6TXFHWVdjcVRHT3ZzU1RqNHdQVU0raWhP?=
+ =?utf-8?B?Nmw4bjFuMFJHakR0ZnhZWEN6VndNRXFxZkZxU0FWMzc2cmErd2pwS3Jjd0RQ?=
+ =?utf-8?B?NWVRZnBoVUVlV3U2T3AwUFhHZXJGVTVTcndNRHc4RmJPaXlkYzgwZE5oM2JL?=
+ =?utf-8?B?WXI5Q2FRcDRYYTlLU3R5N29PVVlDNFZLMXJKbGt2bWptdlB0aTRpVTJuNk5o?=
+ =?utf-8?B?SkxERXlYNTA0aW5IMEljSUdoSk5nWVhQbW1haUk4RFJuOEhmTVF5WU9IOXpW?=
+ =?utf-8?B?emFrYktOWENkNGxqYXcyQ3ZFakNlTEF1bFdOdGlCdTRhWk1NOStBNzE0MzJm?=
+ =?utf-8?B?UUZTMDAwK2xIaHpUM1RkK1dtMFEzenZYeXVLYXVDRFNsRlBYdUowaTVBcEl6?=
+ =?utf-8?B?b2NaOTBYeDd1L2Q0ZVZMU0hPcU0yTlJaMU1UZDNlVFpHN0ZudStTWTlhc05B?=
+ =?utf-8?B?MVVsUHpyWnpSMzAvMFg4R0xpYzA3K1NYWEU2WE1NL0Y2SmljNDJlN2h0ZnVS?=
+ =?utf-8?B?c1NOUEQ5cS9Zb0srdWxWbURHTXNrNHdtYm81dEYzckVLckFwYmJBR1lEOGN4?=
+ =?utf-8?B?dWRkZGtqUmJDc3A3TFh4cy9LK0pNTWl4MUlpUE5QUnR4Y3IzTG1ZZFNoTXVW?=
+ =?utf-8?B?cUxLMVpvc0JhNG51T1p4ZXlESXVHMXRIVmt3L0RnRmRBcnYwejdMREt3OW1H?=
+ =?utf-8?B?dmlxUWpPNHppeHNjUndFenl4WXJUaURFOVdiUlJKU21yNjdZdEtrWlFwOFgv?=
+ =?utf-8?B?bDJkNm9jaW0xQ29YeGNNeTMvVklNRTBBc0oxUVZSOUMvbGR4YWYxSmhiQ1BS?=
+ =?utf-8?B?dytDT1hZdGRha3ppcWkrWG1BRU95dkI1bythU1hmVlhzS3ZxalNEUzZLWThi?=
+ =?utf-8?B?RXJGZXE1Y1p5Vng0akYvT0VkQnNWaUxMeVQ2QmJaK3pZNUNnVXlpOW5Qdm9h?=
+ =?utf-8?B?NHVmUHNPSXRRSktoMG95S2ovaW9BNUZ2aTlHNUxxbGw2bmpUWXZnaEwrMUY4?=
+ =?utf-8?B?SG5mSmpuSWR3VU9KVFJSQThRK2ZqWjNnZkRXM3k2T1pmYll3aVNQL0pMdHE4?=
+ =?utf-8?B?YmFrVDl1MzJ2YVdaTDVkV1lhcVZZQmNqWERiYTVEMXRFeU45QnNYYWM5TW93?=
+ =?utf-8?B?U0pmR05VM3hKcTVqNXhQLzhZOUQ4ZStIMmhyQS9wQmtDOWFnUHdlVDFpM2Jt?=
+ =?utf-8?B?dWMwQlNVeWxKNHRPTUw4Y2IwRGdtbG40SkczMWEyUFBrK0pLdk5IVk1KNDla?=
+ =?utf-8?B?NTFLVFdsWVRUcGo4SmJNZkdoMXVkR1hkWGErS2Ewb2dQWjcvb0FQcnJqT0FY?=
+ =?utf-8?Q?F6Dz7VyRk9waAFGDjsiTGKWa1qQObxGar9SvFQF49FCba?=
+X-MS-Exchange-AntiSpam-MessageData-1: BVWrS2v4fMHN6q0V+HebqaiLOjhYEODKtcI=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: bfc1b66b-1b62-4d17-9480-08df034cbda7
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2026 08:12:28.7503 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2026 08:33:44.6458 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: v5c1+X46ZO60P3Ti59s9GVbcKsXmnR5hOvsSpGj/S/KX2JpFmq/yyhKa2tbgennhd6CWG9z+ReGqfKvr99lN8XSHDVtjuySCldNYkds+Ymc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB6391
+X-MS-Exchange-CrossTenant-UserPrincipalName: TCgTNUh3zXahGYwaenw2FeoZOfDp6GkQKaxib/nY40E4CH09OG2KX0XPSaxjRDTT7/VY8miO9F4AkZbDF1FTr8fqJIzNAPMcImN1NmeT83Y=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9470
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -185,70 +176,328 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 20.08.26 17:25, Marek Vasut wrote:
-> On 8/20/26 4:25 PM, Frieder Schrempf wrote:
->> On 20.08.26 10:05, Marek Vasut wrote:
->>> On 8/20/26 8:34 AM, Frieder Schrempf wrote:
->>>> On 19.08.26 14:47, Marek Vasut wrote:
->>>>> On 8/19/26 12:10 PM, Frieder Schrempf wrote:
->>>>>> On 19.08.26 12:04, Marek Vasut wrote:
->>>>>>> On 8/19/26 9:07 AM, Frieder Schrempf wrote:
->>>>>>>> From: Frieder Schrempf <frieder.schrempf@kontron.de>
->>>>>>>>
->>>>>>>> In some cases we need to call ddr_init() multiple times to try
->>>>>>>> different configurations.
->>>>>>>
->>>>>>> What different configurations ? Details please ?
->>>>>>
->>>>>> The detection of different DDR types/sizes on our SoMs has always
->>>>>> been
->>>>>> based on trying the init and seeing if it succeeds, falling back
->>>>>> to the
->>>>>> smaller sizes on failure. See here [1].
->>>>> Could you maybe bring the interface up in some minimal 400 MTps or 100
->>>>> MTps configuration and then read out the MR ID registers from the DRAM
->>>>> to discern which DRAM configuration is present on your SoM? This would
->>>>> be the ideal generic way of doing this, and it would be reliable since
->>>>> the IDs are stable and surely indicate which DRAM chip and how big it
->>>>> is.
->>>>
->>>> No, unfortunately this doesn't work. We already tried. The MR ID can't
->>>> be used as we have single and dual rank setups that report the same ID.
->>>> We have no way of knowing how many dies are connected unless we try it.
->>>
->>> Is the controller unable to interact with each rank separately ? I would
->>> expect in single rank setup, that read of MR ID from one rank would pass
->>> and from the other rank it would fail ?
+Hi Jonas,
+
+On 8/24/26 5:59 PM, Jonas Karlman wrote:
+> Hi Quentin,
+> 
+> On 8/24/2026 3:45 PM, Quentin Schulz wrote:
+>> Hi Jonas,
 >>
->> I'm not sure, but even if it would work, it would require several
->> separate init attempts only to read the IDs
+>> On 8/10/26 11:14 PM, Jonas Karlman wrote:
+>>> The PX30/RK3326 has 16 KiB SRAM at [0xff0e0000, 0xff0e4000), with the
+>>> initial 4 KiB at [0xff0e0000, 0xff0e1000) reserved for BootROM at boot.
+>>>
+>>> SRAM addressing only seems to use 14 bits, meaning that reading from
+>>> 0xff0e4000+ wraps around and instead reads back data at 0xff0e0000+.
+>>>
+>>> Using a TPL_STACK at 0xff0e4ff0 (16-bytes aligned) means TPL use BootROM
+>>> reserved region for its global data, malloc area and runtime stack.
+>>>
+>>
+>> This should be its own commit.
 > 
-> Why ? Init the bus in slowest mode with widest bus settings, then try
-> MRRD on all available DRAM chips, then figure out which ones report
-> valid IDs and which ones fail the MRd .
+> The main purpose of this patch is to fix the overflow of TPL into lower
+> 4 KiB of SRAM, i.e. the area used as BootROMs stack and state. Returning
+> to BootROM to load next image (SPL) could possible be affected depending
+> on TPLs use of malloc and/or its stack usage.
+> 
 
-As far as I can see this doesn't work. If we use the widest bus setting
-(CsPresent=0x3) on a single rank module, the training fails and the DDR
-remains in a state where the MR read doesn't work yet.
+Yeah but that's already the case no? It's not because there is one issue 
+that there's necessarily one cause to the issue, or many ways to trigger 
+the issue.
 
-So, actually the training failure is what already tells us that there is
-a single rank DDR and that's exactly what our current code does: first
-init with the dual rank config and if that fails, fall back to single rank.
+> All changes have been kept in a single patch to make changes safe for
+> bisect. If we just change TPL_STACK and keep malloc size, or just change
 
-> 
->> , so I'm not sure if there is
->> any benefit.
-> 
-> Generic solution that surely works and does not guess the DRAM size.
-> 
->> Also I'm not seeing anyone doing this kind of thing. It
->> might be worth looking at, but my primary goal now is to land patch 1 of
->> this series in order to fix the regression.
-> 
-> What regression ? (I was not CCed on that)
-> 
-> You can (=should) send bugfixes separately.
+Bisect isn't necessarily useful if we start with a broken state. It 
+matters if we somehow make it worse, which we shouldn't.
 
-Right, I dropped everything but the bugfix in v3 and will continue this
-separately.
+> malloc size TPL may start to accidentally overwrite areas in the BootROM
+> reserved area that affects BootROMs ability to load next image or the
+> TPL stack may start to overwrite end of TPL image.
+> 
+> E.g. if we only change TPL_STACK we end up with 136 byte free for
+> stack usage before stack can start to overwrite TPL BSS/code:
+> 
+>      [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
+>        [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
+>        [0xff0e1000, 0xff0e4000)        12 KiB   TPL area
+>          [0xff0e1000, 0xff0e3800)      10 KiB    code
+>          [0xff0e3800, 0xff0e3848)      72 bytes  BSS
+>          [0xff0e38d0]                            stack pointer
+>            [0xff0e3848, 0xff0e38d0]   136 bytes  stack area
+>          [0xff0e38d0, 0xff0e3ed0)    1536 bytes  malloc area (unused)
+>          [0xff0e3ed0, 0xff0e4000)     304 bytes  global data
+> 
+> And if we change malloc size the TPL stack likely move closer to
+> BootROMs own stack. Current combo of TPL_STACK, GD_SIZE and MALLOC_F_LEN
+> seem to not affect BootROM but that could change if any one of them
+> changes independently.
+> 
+>>
+>>> TPL on PX30/RK3326 does not have any use for the malloc area, the
+>>> generated GD_SIZE is typically around 304 bytes and BSS around 72 bytes.
+>>>
+>>
+>> As far as I understood, this is space/size optimization and not a bug
+>> fix, so should therefore be its own commit.
+> 
+> The only part that possible safely can be moved to its own commit is the
+> increase to 11 KiB for code size. Mostly wanted to keep this together
+> to help for future references as this patch then have all details on why
+> such size change was possible and could be considered safe.
+> 
 
+Once the issues are fixed and merged, you can always point at a git 
+commit hash in another patch.
+
+>>
+>>> Current memory layout possibly looks something like:
+>>>
+>>>     [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
+>>>       [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
+>>>         [0xff0e09f0, 0xff0e0ff0)    1536 bytes  malloc area (unused)
+>>>         [0xff0e08c0, 0xff0e09f0)     304 bytes  global data
+>>>         [0xff0e08c0]                            stack pointer
+>>>       [0xff0e1000, 0xff0e4000)        12 KiB   TPL area
+>>>         [0xff0e1000, 0xff0e3800)      10 KiB    code
+>>>         [0xff0e3800, 0xff0e3848)      72 bytes  BSS
+>>>
+>>> Update TPL_STACK to use the top of SRAM address and reduce MALLOC_F_LEN
+>>> to 0x0 to avoid overflowing global data and stack into BootROM reserved
+>>> region.
+>>>
+>>
+>> Aren't we then missing a build-time check to make sure this is not possible?
+> 
+> Not sure how we could build-time check this without a guesstimate on how
+> deep runtime stack is needed.
+> 
+
+Fair enough, we know the pool we've reserved for the heap (malloc) but 
+we cannot reserve space for the stack so we cannot know.
+
+>>
+>>> After those changes the memory layout looks something like:
+>>>
+>>>     [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
+>>>       [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
+>>>       [0xff0e1000, 0xff0e4000)        12 KiB   TPL area
+>>>         [0xff0e1000, 0xff0e3800)      10 KiB    code
+>>>         [0xff0e3800, 0xff0e3848)      72 bytes  BSS
+>>>         [0xff0e3ed0, 0xff0e4000)     304 bytes  global data
+>>>         [0xff0e3ed0]                            stack pointer
+>>>           [0xff0e3848, 0xff0e3ed0)  1672 bytes  stack area
+>>>
+>>> With these changes the TPL_MAX_SIZE can safely be extended to 11 KiB,
+>>> leaving enough for the stack to grow down around 648 bytes before it
+>>> starts to overlap into TPL or BSS.
+>>>
+>>> And with all changes the memory layout looks something like:
+>>>
+>>>     [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
+>>>       [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
+>>>       [0xff0e1000, 0xff0e4000)        12 KiB   TPL area
+>>>         [0xff0e1000, 0xff0e3c00)      11 KiB    code
+>>>         [0xff0e3c00, 0xff0e3c48)      72 bytes  BSS
+>>>         [0xff0e3ed0, 0xff0e4000)     304 bytes  global data
+>>>         [0xff0e3ed0]                            stack pointer
+>>>           [0xff0e3c48, 0xff0e3ed0)   648 bytes  stack area
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>>> ---
+>>> The overflow/wrapping was runtime validated on a RK3326 ODROID-GO Super
+>>> by printing out content of [0xff0e0000, 0xff0e5000] and comparing the
+>>> initial 4 KiB with the 16-20 KiB and the data matched 1:1.
+>>>
+>>
+>> How did you test that? md.l on either address results in a Synchronous
+>> Abort on my PX30 without your patch. We could also just write a random
+>> pattern only at one address, and if it appears at the other address as
+>> well, then you've discovered an address wrap indeed.
+> 
+> I used something like following to dump content as early as possible
+> from TPL. I used something that printed multiple columns, and compared
+
+That was the hint I was missing. This likely means TF-A protects the 
+area somehow. I removed TF-A from u-boot.itb and I could compare both 
+addresses with:
+
+=> cmp.l 0xff0e0000 0xff0e4000 0x1000
+Total of 4096 word(s) were the same
+
+Funnily enough, I can increase the area to check to 0x3000 words but 
+anything after that results in a Synchronous abort.
+
+> the output for 0x0-0x1000 and 0x4000-0x5000. Think I also tried to write
+> something and could see the values being reflected in both places.
+> 
+
+=> md.l 0xff0e0000 0x4
+ff0e0000: 62144471 b9d836bc 5ef2ce5b e00c1527  qD.b.6..[..^'...
+=> random 0xff0e0000 0x10
+=> md.l 0xff0e0000 0x4
+ff0e0000: a727051d b7145d3f aac7cfa6 3557e1df  ..'.?]........W5
+=> md.l 0xff0e4000 0x4
+ff0e4000: a727051d b7145d3f aac7cfa6 3557e1df  ..'.?]........W5
+=> cmp.l 0xff0e0000 0xff0e4000 0x1000
+Total of 4096 word(s) were the same
+
+=> random 0xff0e0000 0x4000
+16384 bytes filled with random data
+=> cmp.l 0xff0e0000 0xff0e4000 0x1000
+Total of 4096 word(s) were the same
+=> random 0xff0e4000 0x4000
+16384 bytes filled with random data
+=> cmp.l 0xff0e0000 0xff0e4000 0x1000
+Total of 4096 word(s) were the same
+
+So I think this proves what you've just said.
+
+> void tpl_board_init(void)
+> {
+> 	for (int i = 0; i < 0x5000 / sizeof(u32); i++) {
+> 		ulong addr = SRAM_BASE + i * sizeof(u32);
+> 		u32 val = readl(addr);
+> 		if (!val)
+> 			continue;
+> 		printascii("SRAM ");
+> 		printhex8(addr);
+> 		printascii(": ");
+> 		printhex8(val);
+> 		printascii("\n");
+> 	}
+> }
+> 
+>>
+>>> Changes in v2:
+>>> - Mention BSS in commit message
+>>> - Update spelling in commit message
+>>> - Collect r-b tag
+>>>
+>>> With the patch "global_data: Only include driver model fields when DM is
+>>> enabled" [1], the stack area can grow down an additional 48 bytes before
+>>> it starts to overlap into TPL or BSS.
+>>>
+>>> [1] https://patch.msgid.link/20260810204828.2836359-1-jonas@kwiboo.se/
+>>> ---
+>>>    arch/arm/mach-rockchip/px30/Kconfig | 4 ++--
+>>>    common/spl/Kconfig.tpl              | 2 +-
+>>>    tools/rkcommon.c                    | 2 +-
+>>>    3 files changed, 4 insertions(+), 4 deletions(-)
+>>>
+>>> diff --git a/arch/arm/mach-rockchip/px30/Kconfig b/arch/arm/mach-rockchip/px30/Kconfig
+>>> index adba1b49a52b..cc0632cf7b2d 100644
+>>> --- a/arch/arm/mach-rockchip/px30/Kconfig
+>>> +++ b/arch/arm/mach-rockchip/px30/Kconfig
+>>> @@ -81,10 +81,10 @@ config TPL_TEXT_BASE
+>>>    	default 0xff0e1000
+>>>    
+>>>    config TPL_STACK
+>>> -	default 0xff0e4fff
+>>> +	default 0xff0e4000
+>>>    
+>>>    config TPL_SYS_MALLOC_F_LEN
+>>> -	default 0x600
+>>> +	default 0x0
+>>
+>> Disable malloc in TPL on PX30 instead, that's actually what you want to
+>> be doing and not "reserve 0 bytes for malloc". That's gated by
+>> TPL_SYS_MALLOC_F.
+> 
+> Ideally we should disable TPL_SYS_MALLOC_F, but I thought it was too
+> obtrusive to change the default value for TPL_SYS_MALLOC_F as part of
+> this fix, so opted to just use 0x0 as size limit as there was no
+> difference in code for the resulting TPL binary. The only benefit of
+> TPL_SYS_MALLOC_F being disabled, beside being schematically more correct,> is that GD_SIZE could be around 24 bytes smaller.
+> 
+> I can set the TPL_SYS_MALLOC_F_LEN to 0x200 and fully drop the 10 to 11
+> KiB code change in a v3 if you prefer that over this?
+> 
+
+If we don't malloc() today, does it matter how much TPL_SYS_MALLOC_F_LEN 
+is? I won't take the TPL_SYS_MALLOC_F_LEN = 0 change, now or later. If 
+we really can disable malloc in TPL without making our lives much harder 
+in the future, I still think we should aim for separate commits for 
+disabling it and then reclaiming its space on the SRAM for the TPL max size.
+
+Is there any chance you can check we really do not use malloc() (and 
+associated, like realloc, memalign, valloc, pvalloc, calloc, 
+malloc_trim, ...) in TPL, I'm a bit concerned by what this will limit us 
+to in the future as well. The helptext only says the driver model (I'm 
+assuming DM/xPL_DM) needs this but it isn't actually enforced at the 
+Kconfig-level of the DM/xPL_DM symbols.
+
+>>
+>>>    
+>>>    config DEBUG_UART_CHANNEL
+>>>    	int "Mux channel to use for debug UART2/UART3"
+>>> diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
+>>> index a535b61ecd35..cdb9cb188c7c 100644
+>>> --- a/common/spl/Kconfig.tpl
+>>> +++ b/common/spl/Kconfig.tpl
+>>> @@ -129,7 +129,7 @@ config TPL_MAX_SIZE
+>>>    	default 0x2e000 if ROCKCHIP_RK3399
+>>>    	default 0x8000 if ROCKCHIP_RK3288 || ROCKCHIP_RV1126
+>>>    	default 0x7000 if ROCKCHIP_RK322X || ROCKCHIP_RK3328 || ROCKCHIP_RK3368
+>>> -	default 0x2800 if ROCKCHIP_PX30
+>>> +	default 0x2c00 if ROCKCHIP_PX30
+>>>    	default 0x0
+>>>    	help
+>>>    	  The maximum size (in bytes) of the TPL stage.
+>>> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+>>> index b39777fc0607..872fc21c039d 100644
+>>> --- a/tools/rkcommon.c
+>>> +++ b/tools/rkcommon.c
+>>> @@ -137,7 +137,7 @@ struct spl_info {
+>>>    };
+>>>    
+>>>    static struct spl_info spl_infos[] = {
+>>> -	{ "px30", "RK33", 0x2800, false, RK_HEADER_V1 },
+>>> +	{ "px30", "RK33", 0x2c00, false, RK_HEADER_V1 },
+>>
+>> Downstream actually has 0x3000 there with the justification that SRAM is
+>> 16KiB and BootROM has 4KiB reserved for the stack, c.f. 3bbe0d2f9129
+>> ("tools: rkcommon: add rk3326 and correct spl size for px30"), why are
+>> we still 0x400 below?
+> 
+> I actually tried to change to use 0x3000 value in a prior patch, but
+> dropped the change due to a response from Kever [1].
+> 
+
+I understood Kever's comment as "only take what's in downstream, no 
+extra changes" and 0x3000 is coming from downstream. From looking at the 
+changes, the RK3368 one you suggested back then is different from what's 
+downstream (0x10000 - 0x1000 instead of 0x8000 - 0x1000), same for 
+RK3288 with 0x18000 - 0x1000 vs 0x8000. The rest is identical in result 
+although they may be written differently (e.g. 0x2000 - 0x800 instead of 
+0x1800).
+
+> For most RK SoCs mkimage use a hard size limit and only exclude the BROM
+> reserved area, and for some reason on PX30 the size limit also likely
+> leave room for U-Boot TPL runtime needs, e.g. BSS/malloc/stack use.
+> 
+> In my opinion the mkimage tool should not try to impose any limit on
+> what the packaged image does or require during runtime, it should just
+> be a simple tool that packages binary images into bootable idblock
+> format and only apply hard limits.
+
+We need mkimage to validate the generated image is usable. I think 
+0x2800 for the usable SRAM size for PX30 was a mistake made by Rockchip 
+in their downstream and we just used that when upstreaming support for 
+it. Downstream fixed it in 3bbe0d2f9129 ("tools: rkcommon: add rk3326 
+and correct spl size for px30"), dated "Fri Jan 7 15:22:54 2022 +0800", 
+while upstream support for PX30 (in tools/rkcommon.c) got added in 
+c6e66b12e4cd ("rockchip: mkimage: add support for px30"), dated "Fri Jul 
+12 11:43:34 2019 +0200", so it's just that nobody bothered fixing this 
+upstream yet.
+
+I don't know if we take into account the malloc pool size when computing 
+the size of the binary (or if we should), but there's a tool for that I 
+believe in tools/spl_size_limit.c that's triggered if 
+CONFIG_SPL_SIZE_LIMIT != 0x0.
+
+Cheers,
+Quentin
