@@ -4,88 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05E53C61DB9
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 09:28:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC149C61DC7
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 09:50:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F299D406E5;
-	Thu, 27 Aug 2026 09:28:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 64CA5406E5;
+	Thu, 27 Aug 2026 09:50:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id a9kXzUSXsu0S; Thu, 27 Aug 2026 09:28:10 +0000 (UTC)
+ id eWQI1DbHh-EG; Thu, 27 Aug 2026 09:50:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787822889;
-	bh=YPhsXnPdYw9oYJel9r34vqhRQU8ka51zXAJjqweapYU=;
+	d=lists.u-boot-project.org; s=default; t=1787824228;
+	bh=DMySgr28lJjvuH/0jOFc4c+EURb/gDU1lX1tm3H37Yw=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=H+wy/mPGBFsiIw642StafUpLO27lfa+vr6MwXAfoaWotjFwrkIiaB0rFQum19e8He
-	 xAqsY7LEC4mn8niAz6DGD0jzsdSpA4MUr+5YLFfQQbgybDZetHWfWDxdmIX7LjSTW/
-	 lxVMsmIahaDNvZSNdrGfsQNvb2s5gjTeoD6b1JkJfTmrzV855yiYazWRjTkOQrFsmS
-	 CDCgBiws2OWaEl8OI1tTVGDQzye9uqLWSgwyb+lwTxYDfiZcJML9Y/uokgkG2dV45D
-	 9A4vun/4UrE+E4ByLnEQnka0TxSLiTR2jkk9QPIZwvwIv6G85ZQkT5NbAWmMadHUMI
-	 5HT9BIJkedlGw==
+	b=qRNr9Jx+iLFuNOcoOkITtokcD2NYDVYlXEa7jReD2blwcU7kPplMUXDw5zLg0hqbP
+	 mqzWb8OiwG4oD1na+zWnXgrMwArGmyqHrq9N835EjIsyQPA2diqFpk+5SLNMwvuCQW
+	 0IXbnll9RkXD/S114M/u/eEdhP/T2l9q/QJ6t7fQgFxpaNDSXS7BI8YKpE2ek5kBcM
+	 XkFq99yUSddqOT+5zFJMvd5h54M4hwKXedvrfVqRdLx4vBr0MOAMraV9dgyMc9OaGA
+	 AzBMfDkdXV57aEDsJwWuoTUmSzAf6U4zhr/kBYNuw8l3TC4Ye/clsh4VLVE1sh3yb8
+	 PZJZp8TCBYFZw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CECE440693;
-	Thu, 27 Aug 2026 09:28:09 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8671A1DB1
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 09:28:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BE824406B2;
+	Thu, 27 Aug 2026 09:50:28 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4CB373A4
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 09:50:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 78CF24066F
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 09:28:08 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3244080DC6
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 09:50:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id B1Es0ED_C-RK for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 09:28:08 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
- helo=smtpout-03.galae.net; envelope-from=richard.genoud@bootlin.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=Jnl8hSr2
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A4C80406B2
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 09:28:06 +0000 (UTC)
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id BE8134E41314;
- Thu, 27 Aug 2026 09:28:03 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 920CA602B8;
- Thu, 27 Aug 2026 09:28:03 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id r6d2h5_7s3RU for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 09:50:27 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
+ envelope-from=marex@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=Km2MwKEl
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6BF4E807EF
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 09:50:26 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8A00611C787BC; 
- Thu, 27 Aug 2026 11:27:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1787822879; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ with ESMTPSA id 02B7311C4CB; Thu, 27 Aug 2026 11:50:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1787824216;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=YPhsXnPdYw9oYJel9r34vqhRQU8ka51zXAJjqweapYU=;
- b=Jnl8hSr22UgQv3nK5VTABlvXjDicAoo/cHSaQajXLo4leegkODd8y3uyl83R4u4XDJum71
- TnbsIiTfNA5Ofkudw+pxsVyE40wLqJzlJVTOx0vSa0KIxOd1kZ5No+s+IhFeAWizv/yj1X
- x7VmDASgWPEDza1clsBsAcDh/PrUcuY5PdrjQy2xVK0sQn5Pu4TbTECW+S7XQglTE3i0dD
- dwnNG0RGdsQst5JAoZjmEWmgOl6mjj/MUusBdwkxelWa0WPQfxLB8IaashCzA+ceRK8o4U
- wOs4EfH/3UBt1bb4lo3THm10PiuWxANH3KRaTlh527vfgwbVIDNepmJp3pG11Q==
-Message-ID: <5864126e-0282-4681-9135-cf8e89ce69da@bootlin.com>
-Date: Thu, 27 Aug 2026 11:27:55 +0200
+ bh=DMySgr28lJjvuH/0jOFc4c+EURb/gDU1lX1tm3H37Yw=;
+ b=Km2MwKElrA/XsVcN79qzs1bB312lp1EkZucQmNbLBEaDiNPegxahgl7btVBUL9afKq2zNw
+ KodRb/KHPQ2NuvCF5ZEudKFA7DW1ttDakBu6/Vzxs40PIsSSjgulWnTcGw/DD9EJ22f4jX
+ nSsujY/26UdZZa/h30VfKXLVWdxXTRZk/LGdvNdEvOxgWobOJhRUh7eVmktSJP6EVqIAU5
+ GzkHggKHb+p0c3iq6AbbPUnbEoW4prSh22+BIoOh7wuGDES11GPAgMCekCtA4+YVJJsT8j
+ 5hLxNWONm7Q0CgjzbAlaB9OOrhOACNRB0836u3QXLFRFPR7kFIe7aXxrmYJOnA==
+Message-ID: <ae6f34f9-ec68-42e3-8483-4208d6e2e883@nabladev.com>
+Date: Wed, 26 Aug 2026 14:24:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/2] fs/squashfs: bounds checks on image-controlled
- offsets
-To: Pranav Rajendran <pranavkasthuri@gmail.com>,
- u-boot@lists.u-boot-project.org
-Cc: joaomarcos.costa@bootlin.com, thomas.petazzoni@bootlin.com,
- miquel.raynal@bootlin.com, trini@konsulko.com
-References: <20260815220115.11335-1-pranavkasthuri@gmail.com>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <20260815220115.11335-1-pranavkasthuri@gmail.com>
+Subject: Re: [PATCH v2 3/4] ddr: imx: Allow to call ddr init without logging
+ failure
+To: Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Frieder Schrempf <frieder@fris.de>, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
+ <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+Cc: uboot-imx@nxp.com, Simona Toaca <simona.toaca@nxp.com>,
+ Viorel Suman <viorel.suman@nxp.com>
+References: <20260819070758.51350-1-frieder@fris.de>
+ <20260819070758.51350-3-frieder@fris.de>
+ <b8c844ab-7ea8-4044-95e5-edac173b3c9f@nabladev.com>
+ <a8be2bf7-aafa-4e8e-9685-5fa100941805@kontron.de>
+ <cfe8d0e1-c652-408c-bc47-0ae96dd0a65d@nabladev.com>
+ <c81db5f1-600c-41a1-91d3-7638fc4d3d58@kontron.de>
+ <b528b642-5010-4843-bfe1-d24e8b709876@nabladev.com>
+ <fa652a2f-addc-47a4-b89e-755aba42509d@kontron.de>
+ <83ee9efb-e09f-45d8-ac0a-cd9b2797c513@nabladev.com>
+ <59ed6576-06dd-42bf-8ea2-18de427955a4@kontron.de>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <59ed6576-06dd-42bf-8ea2-18de427955a4@kontron.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -100,44 +106,23 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Le 16/08/2026 à 00:01, Pranav Rajendran a écrit :
-> Two out-of-bounds reads reachable from a crafted SquashFS image, found
-> while auditing fs/squashfs for image-controlled values used as buffer
-> offsets without validation. Both were reported to the list earlier; these
-> are the fixes.
-> 
-> Patch 1 covers sqfs_frag_lookup(), where the fragment index is checked
-> only against a superblock field that is itself part of the image, and
-> every subsequent access derived from it is unchecked against the buffer
-> that was actually read.
-> 
-> Patch 2 covers sqfs_dir_offset(). Commit 57e0bb7bf00d ("fs/squashfs: add
-> sqfs_dir_offset() error checks") addressed the negative return value; the
-> positive range is still unbounded, and the callers use it to index the
-> directory table.
-> 
-> Neither patch changes behaviour for well-formed images: the rejected
-> cases all describe inodes that reference data outside the tables the
-> superblock declares.
-> 
-> checkpatch-clean, builds for sandbox with no new warnings at W=1, and
-> test_sqfs_ls and test_sqfs_load both pass against images generated by
-> mksquashfs 4.6.1 (the default plus the three lzo fragment variants).
-> 
-> Review of the exact bounds is welcome, in particular whether patch 2 is
-> too strict in rejecting a directory header that would start within the
-> last SQFS_DIR_HEADER_SIZE bytes of the directory table.
-> 
-> Pranav Rajendran (2):
->    fs/squashfs: bound fragment table accesses in sqfs_frag_lookup()
->    fs/squashfs: bound the offset returned by sqfs_dir_offset()
-> 
->   fs/squashfs/sqfs.c     | 50 ++++++++++++++++++++++++++++++++++++++++--
->   fs/squashfs/sqfs_dir.c | 42 ++++++++++++++++++++++++++++++-----
->   2 files changed, 84 insertions(+), 8 deletions(-)
-> 
-Seems all good!
+On 8/26/26 10:12 AM, Frieder Schrempf wrote:
 
-Reviewed-by: Richard Genoud <richard.genoud@bootlin.com>
+[...]
 
-Thanks!
+>>> I'm not sure, but even if it would work, it would require several
+>>> separate init attempts only to read the IDs
+>>
+>> Why ? Init the bus in slowest mode with widest bus settings, then try
+>> MRRD on all available DRAM chips, then figure out which ones report
+>> valid IDs and which ones fail the MRd .
+> 
+> As far as I can see this doesn't work. If we use the widest bus setting
+> (CsPresent=0x3) on a single rank module, the training fails and the DDR
+> remains in a state where the MR read doesn't work yet.
+
+Do you need training to read the IDs ? Simply force-use the slowest bus 
+mode (100 MTps iirc), the training is only relevant for the high-speed 
+modes.
+
+[...]
