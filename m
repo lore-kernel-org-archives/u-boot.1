@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29290C61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:42:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B17AEC5DF97
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:42:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C1662607A0;
-	Wed, 26 Aug 2026 13:42:51 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1E5EC6078B;
+	Wed, 26 Aug 2026 13:42:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Umlr3zEtXHmE; Wed, 26 Aug 2026 13:42:49 +0000 (UTC)
+ id tz8xQYohlb5N; Wed, 26 Aug 2026 13:42:52 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787751765;
-	bh=vQNcWZx+ayuj1nkQwk6yGePYTSDGFZGUOxIF+QfJaXE=;
+	d=lists.u-boot-project.org; s=default; t=1787751766;
+	bh=JRrLNo9ivFMQ3sMzWZbmNrze4fRiJ1n6Q9zLq+snw0s=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=IgbJNLDMOTHCZiPDvceOy5kz5dN47MC+FOk6vSzyEu9DzMdhGEUd2rSdu871eSOdS
-	 9kpWGla954BcrA0In6neRzKZkZAYd5CcrZVt7WzNv2kECwFYP0BDXeTrH472pKCrCI
-	 0duEzx9CzDUQXx3d48SOcxpdXD9XA9fNn+IumtuxncjFmvssX8loXx58+8uzRuknSi
-	 8HWUFVykJHSbUTtYmBQTGHQxx9Fy+am5IvcK7ml9MgXZl8D3rd5ws/+rlwz10VGA08
-	 510EEqaggjQBC8MAZHhNMlmJdQyGLM3sQ2eRtXSebkex8gAs+k3eq3XWBt1MZ0lXOA
-	 a/ceLY8P/AdIg==
+	b=ByINo/b5htJ51AcSbFdsjRHvkWJnMav+TD3Jt6SATyq71rUkJj/G5dfZqJjBQm6tr
+	 Mw9wwJXqo53YWML9OWPWf/oL0ACDIPaX1E+Je8ZwqZVOU6UARORaUdvbeUN+DAzlH9
+	 hhPl8njVSLdhk2urQHfefRP+GIoZ6qSFESbvU8qTm4CTsXuYCABpQd/pGCDfoPbZxK
+	 EUqg4Tquul9HgOVFSJeHGX/MtR5j8sAkrhU9tTv/KC2spQYzyoGuj2w/1KU+KzfeYg
+	 K0c4clDivX2P7MVFoquPkyOMkVFrk250+XspgEU39IOOHj2sSx9gwgCTRtP7PL8t0w
+	 K+PNbA2MntLIQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 68D2560763;
-	Wed, 26 Aug 2026 13:42:45 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id DBE343C3
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7188C6077A;
+	Wed, 26 Aug 2026 13:42:46 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 226BC3C3
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CE24440115
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:17 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0917740108
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9A-JDsPFuMpw for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 13:35:17 +0000 (UTC)
+ id t77_FNeArayY for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 13:35:19 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=34.2.90.19;
  helo=sonic.asd.mail.yahoo.com; envelope-from=maskachoska@yahoo.com;
  receiver=<UNKNOWN> 
@@ -47,55 +47,55 @@ Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=yahoo.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com
- header.a=rsa-sha256 header.s=s2048 header.b=ovVIQ5Gd
+ header.a=rsa-sha256 header.s=s2048 header.b=UdvKONNz
 Received: from sonic.asd.mail.yahoo.com (sonic-asso1-0020.asd.mail.yahoo.com
- [34.2.90.19]) by smtp2.osuosl.org (Postfix) with ESMTPS id 699C84005F
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:14 +0000 (UTC)
+ [34.2.90.19]) by smtp2.osuosl.org (Postfix) with ESMTPS id A07AB4005F
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787751312; bh=vQNcWZx+ayuj1nkQwk6yGePYTSDGFZGUOxIF+QfJaXE=;
+ t=1787751315; bh=JRrLNo9ivFMQ3sMzWZbmNrze4fRiJ1n6Q9zLq+snw0s=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To;
- b=ovVIQ5Gd3vPXf1nV1tgUnfcFHxxdSeBjjIkByWacN1H9fh434tCaNsGByViaD8GnIGEiGMKJLnv1QuGFBiriM/+tnNCRO+eEFRKLpCbfT02SnE8irGnaEYeKHc4FRRB+aw8yzI1j1Kq7t91q/kRBxwI4HiMMc32Ss/EzlTSvQ6qprDu5ZgUykhxD/fo9hMNQOvB6OHcoDYOoK3nM0Ruab3IX0smoUZKuAhpP+HZ7JTjce/Puiul1JNXoZDk87WLHLCKYYOYetE8fYZDhsOAveoO9rYlCtd3AoEthDVOS2M7TuEB3vU/ELQDGdEsgQJekGgsUuwQaGk5RdNZsEO8F+A==
+ b=UdvKONNzAB4azNjuZ6hrp0a+Il5WsKRCy0U0LggBPrLXyEI10GXSMwOtKg63AvWxbHdI+YabCLlCG69JUip4MLDmacRW10CsY8beQ83cOuMVUY7RXONr+1f8cGy7m2xIXwJnGQWu3Zw6FvXkT873O8kaXHhGBNMQTQbspG/wf+W9r5nGnhmzu+vBXrBg0+uD0K3xP2Bv49OIytWpK1fpl5VynM5IWYzL7oc6flZTp4HEl+INDeuDQEShtT2/dEyQ/PItLvHAhm+fnsuMgiKvrcPr8KgWaRBlaVwtSMEzpXsyzQPMXQIyIgNtL7U0fSGPFLN5/tX56iyGOr0Fbnsrbw==
 X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787751312; bh=l/vqKRFbF3VEEygeX9UIM3m+HVYA3Kx69oFdVuc80c6=;
+ t=1787751315; bh=uF9X0Tcd3eEQ71Cn9NZj3sF5ArzLUOr1cYPcEsg3hU8=;
  h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=oxOiEWQ0lljEjFlC9KD63Y9fuYketqMXQUdJTc0mcxeusCD1fl/tK3SooTkPxf8wwPuU1Lw4FHJMbMcH/MO9WIoBm98G1BUX4og43KG8sHUkcJxnYgMleyecw1ULPOg3RK4tDtKrtqi1KR0U+fqTfATa+CpW4XU1Rn32De6Vq4tzvk+ycCEXOaru1EPjGBZmGGbWGgGnOB7BRiDfDiKfkYWyEXQzYO0zM5QiWA4DELrcHqkrfHHF6T0RD7bmfXrpEWqTs+JvD8uXGZRSo3KLljZQe0TM9pZtqrQ2TCFWSIPjUn2M2tAATgfOSwbqfHEh6CeRTqOU6lnA5J97NuA0+w==
-X-YMail-OSG: 8znNx70VM1no1wGdJWrY7HMuLCIIJ4ek6ERLi1HA2hIXeetiSht0AIgvFrrI5ox
- DchvzbtSPkth_WGEXunJ96Vm_68ujBfoZzNzrGsIulW3Qy8GCukeZ6H.FjYTM4uJT65VRjaWjiGL
- HRIowHNYVKfd5qgttrK8GHAh_JLZXm49_8whgOQpkbcsxP3V6jeAgfO0GW8N7jQurwR5ip44isPW
- GA3jOlT8LuUX.LTpJXZ9L0ynlkRQvFBUEjJFA1jBe7qW.LX3Lk1tp9PNrydLKcok7ArML_fpz.eB
- FghiHObL.2tX6I4O_dCK.5t7opcXHXkaF4zEMGNNpEM4MLb5AC2nSyNO9xN1mzDFqqOdDYRq3Nk3
- Dyufgp5C3Z.q1VAxHXhjP1RfgRlKjCOrOSLgfSA4MSTytkcWb2ylPWuh095U8NUNgKo6G7fx6fo_
- 6lELG6hrasprT1noRcfPel8YUsjqHga9am6VDOuLlzgirEhghTqm3MPySU_QZMUBgWOxeggQN.5W
- h6qqawwWfbnnp6vF9r7NIy5DuqXkW6E6FCSQLoUa3Co0KWsFZCbsTXMY8OrX3MIQ5S0Ni_ugr5WV
- FrBSpTVwJeEIM.iR1XYAQPxRrI9iMoyyp8TziBq1UYydpzFKPtQiv0qtS.eHv.r7e_qUDms5fAwI
- uFzsSLPXl8i2TqAOXYu9bF8ZrMRAvx6gFf7zLvnAsoivZZQ2Wbmo6AXEWtx6tp64th0Db5eA6qoj
- OYu11sFdh9ajV7G5X6jNB5mM4gNoM.CeXFcFsS.yyhG3gIc8yjBJ5WtRMRlF6DejxudQnUPdzkRy
- CJAQiVDZTP4lwctdboVYILWoZH71OgEc0YdjB81PNYM32xZLYcxGnjfZDsQWYIQH2WI6.hol7cwH
- YOgElJmBkdAVuoWBV2Uevd9NWKW5_pTGaOVggABThh_Egt8umrJZNlfhOOoeohLtasYQMOaIQQfT
- kWWoQCh97GGmH1MX_0gqhUK9afpfGsPgDh18LXrBZIhkLxfK4xBvvp6uB1hIseL_zAU6hB1JHjp8
- 0S5q_keTKDlFUmaoIPN5zY_XImeHB7SRBu0.QQJsM0Iip1N1Qd70EzwXnjRcjZFt6L.cKyj6Rsx_
- GqLpM8Zu8KUZiv8qGY3BaFxdcIvHJKUVddBowBNrFTZBBDXX6m.jD8_IaAvqcej.t.3bRXHkoxgt
- Obwz0d.DBzljvh.QASuSrs8klvH2.WOdY_fMNza8TOKrMHzIBksqCsjotOlmtNlHc5GDbWD50u_y
- _ll05aW.XHOn.6rxqd597U6B1ZK3y4ewsX78uALOTpOtRaE4YEzBc0iAJEfJG_Zv63v6bDef9E4a
- u1CBCebisJtgZycX5oQ30QoaOep9q2b6Y2z11mTPOCkpQdM0oBgsw9tFPaPXoB2JLdr.JWMVhz5s
- LPT9piDxI3NCSkEzLRBiLeXg1eG8skPntNZWwL0Yy58bjBbeZRhntRhF72jjdNJiI8G00cPKH_ks
- zySHpT6Psf63GjVcCFzFl2Q0iIPuqTpsbuBNFRLMvHvSq.0GAA7LtUBm5iUwloZC8iiK5NjpgQA.
- PxHS6aZt5tTXnf1pCFceO8Xr8JXIFjFgALKGwenTwt4lbemkEtNK0Ynk.40LuKX5VIp9yTk_rFsy
- BuRs2Lm7icq0HOs1JVQtSoHLpAtcZjkQytJVu4sLQK8NGZp4_UCQ7gDU79g6Qj20ONBWbZL57o.X
- yNWXt7SKUy0hHpKb.aU_Iv4XJN12G7IwPka.d5bpz41cPadiInEdiXIv3SukvWm9C2QekU3vEm8E
- ntIB2SsRYmuYZAfPTS_ldcCrRN_FoEyWA_N8638QCu5IwLyttP7NucnuC_vJL6dV73OXxu73fXnO
- ihlHeY0pgcKsdXaY3EAmDJGvIgwW.epNHCYJQ_Jk_sYC.6d8FJSiTuwP7YnNxIX7ZAMAtJYWk2SJ
- Q_tLFq9RBKafx2Xi8MdHh1JnkoUoeUPBiXlkP4StgtYcg6cDDyKSpxkNjZxXll482.AtTbDyRkDu
- zOj8szyp.wojP02yfjqU976m5sqMDdeQ93BHqWiNpR.ih8u_Z8NE83r825ugNnMqerACLOLhCkTP
- WqA--
+ b=nEGLPNK54yIBDTKzgj5EIm7xejqJybi8U+ALoqXKuNoMOn9Qk/z0SqB3wkgtKBmlwPpQA5bKmeRo/BegCBfAUztPOv6Oa3lQWivCgMphgqaVOK8ZWl3iCmg/t0b86Vl8CC/yKEJaacWDPXR5ymu84HsAxZubfmtSzei4Kh1bMv1XNixtdQw6yhvuavvgNDoU46FrMKRWZ6mLwdGEFb+7AGK9fYbYJapKRRNgSFg721XsZYMNvS05G5VARxNY0S1VJAhPt730Vwt0H2boqDbmwkSrcSae4OTT2KHQRhaQ2PLDbOIMRf6//XcNNi1nwLJfnxzFfIx5Ix6S9h0IN9nC8A==
+X-YMail-OSG: oUJ4LkwVM1kLVBY8Ft41aE3sja792RAo.Dup.rYj0Vou1TIHA1Lct9M9xhVWLB7
+ 3gIPH9zy3ne1Ee7RI1rrmZBDgYD7z2ho2rv6Es8PnHvYQhHMJmeRsWFi0ZqlosqP._1d0dOYO4TX
+ XLNEMvxKGbBXTUIX6TDyaP0IY2UXMszODKF1IVWWMAN8vTshcJbzz9wTK86rteIxER4K_vjCV4f.
+ bS.6xFTt_SgoOygl1JBHULHAgUXLrX9N1BQGVVZucXCCVr6R6lBBsItHa0_HUpTeqdjWfmUe6Yyg
+ LdrhRBRbUHKWnk83eKPikyhmcFKttGq5rgkGfgskwPUEjwyQWlpPLdWa80j8zWF0atD9Et3Di6xc
+ MQS7cWEhqM8BR6h.Rk.shTGzKYP2CvX3hUoSVdDOX0KdfRqTuIjMh6EwNrkIx4cOeDKD7RiET3.t
+ mR1G0xCMuQrCy3p_ALZRtC4W9KDFqC.pzJgTHGgFRP3XiqA6YYB_R8b.VGKl0JJ9QxVWRiIHYMuL
+ Z65tCVF_7HEqX_GyFakIuBRhpt95ZKa0cZUQERgsiyDIRuF45bq83fjZcci2pOWOt0lcvuLuIBFd
+ 01B0NdIROl0n.0XaNlVMpyUMapVAg796KNYkWS9n1oLabol.jYY1W1jYvrzy1HmgbxO.O.G87z4z
+ Z8xx4QqQmMLqIDk2aKDIU.3Uqprr2eOhZU6nLzzQauiv5Y7JYtJLaKZShHk19yfgvHLYvEqBvXrN
+ DkDt3mv2wXtd.Rn08Gw7x7AkiJXTUtIC14uvbLSwDxA_b.JXuknZuTLu3UH9K3AB2rHQdY5Qf9dQ
+ bBtUpUdnHYIGKp9dee.xa_7qzcbKpMRTSrR6QO9NNzAoRVYM1blITIg6k5Xu8JRIXYqmgtauAPxI
+ 9tP9of3emW0Bda8Z1IPjekYKkA4UfC7_Q1jyH8MkkvLBJEq0oTi8NzomOTLjHfQH.eH.7baq3_JL
+ rhOKItiIr8rwwc3Y0MDexCU4W9lG3I_RtQUhO0mAlNXa1iFViStIUnZ3dH1FWJuPJZ8ozYT8.r5o
+ Lxjhc.BHELoPfxlydZ9Baz2hg6SfoTjuAly8t3zcf3ig1WJt4K3Db7vNlJW8GDn_WIEdzm0i9X1R
+ eo6xTDCSgmMiBBTA0gQEFm.LdCELZYXdLZDvzAc4YnmiMr7Ql5zA_xL15XmF2IW9hE9Vhj6lWb0E
+ TEp2wM5AFxq8apUSVcbiO8p.Q1FRqhUYLqBNZu6PbsCkAx1yzBkEjCset8cDDOhzkr49KOvwO2WB
+ DA.giku9wsxwvPbSbBByhiFy8b8.iVq96ur8X8Bj2VEIKmra9Uy358lhvusmfCf99uVOIZco8FSS
+ sQgPK0gEpSttXg7sL8pshP1A0FLuAkUDpVY5u4d2b.zj6N.7f2NUijfWxpxw_Pz2s08lHlvbSaiW
+ l.ePvLxsboaSpE1yr6eKx4qn3y0nNCHkOZ1NjUZUQ9hatBD9XqLgkq4fOY1q1sQZmwAThoaAou6R
+ t_JiW7rbJ5Jl7dSWePo6zdrEJzRMm5GmLYcAnY0H3RwnlAfgrOnfhQkqHhHy56.ElZ3vRBAZtC9m
+ mfgdQbRmEt2fFhWihaRJALKsaECn3C.KgW9VXB2HBNUG0RkhJCK4W3asugOLK0lPHN2EPs8FFAMw
+ L6TYPyWSJuahrbwbSLWOXXyuuanfsEGUZaV.JCL0VpcGDTk4NLHu6ItHqyNc2eb5hY1y8adW2Qp1
+ wEGqaPHDgcZJsNynLgZFnzUp7JZIgirYxAnpPmGPibTWeWpAQqkdfWtP80hOs2jtVeRSutHpE4gm
+ R3sRpb71NrkHUlmhg3VZiVmoAN9V0Zr33u2nNvSSq._48ReXQoXGHTM.6oyl63Dv_JKzlVt38quI
+ rzez1CdwH9SozDSnEqQP4FfGeVcrdYQoZPfVygVWeiVItGOr8KORwgdKEVBt88e8Sv0xVcIXVio4
+ Igrik05HR4F0n9Jb5RsNFpfqT6eMyXuLwXbDXJ.7Db44NPsQ0iwnBkc450pCKp74qwrZTWZtzmsl
+ 9ymUq9rKG7ak7uQh_VHAgo07kVr08c_t9ivekMCnjXiofHcEurF4F3dGbewKOJWTJJq.8BpH9L11
+ 0xmB_5TbXXSq7fZPVgk8q
 X-Sonic-MF: <maskachoska@yahoo.com>
-X-Sonic-ID: e8454780-40ea-4796-b741-234910146828
+X-Sonic-ID: 2ddfab6a-e69e-49f0-9d0f-26c7246d0809
 Received: from sonic.gate.mail.ne1.yahoo.com by
- mail-asdoutdeli-p-cin-asso1-prod-sonicconsumer-svc-101 with HTTP;
- Wed, 26 Aug 2026 13:35:12 +0000
+ mail-asdoutdeli-p-cin-asso1-prod-sonicconsumer-svc-102 with HTTP;
+ Wed, 26 Aug 2026 13:35:15 +0000
 Received: from dip100.lsn.sg3.yahoo.com ([106.10.223.109])
  by hello (SMTP) with SMTP ID acc4f7a299298e219e9ccf723c2619d7;
- Wed, 26 Aug 2026 13:35:07 +0000 (UTC)
+ Wed, 26 Aug 2026 13:35:10 +0000 (UTC)
 From: AK Sharma <maskachoska@yahoo.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>,
@@ -106,9 +106,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@arm.com>, Marek Vasut <marex@denx.de>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  AK Sharma <maskachoska@yahoo.com>
-Subject: [PATCH v2 8/9] board: econet: add EN7528 board support
-Date: Wed, 26 Aug 2026 19:04:42 +0530
-Message-ID: <e58fd82b5a212c7630bf7046e76283e4d2ec9164.1787736704.git.maskachoska@yahoo.com>
+Subject: [PATCH v2 9/9] doc: board: econet: add EN75xx documentation
+Date: Wed, 26 Aug 2026 19:04:43 +0530
+Message-ID: <12f5eb5ed45d3898e56e4c6eeda4bffd10ac56b3.1787736704.git.maskachoska@yahoo.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1787736704.git.maskachoska@yahoo.com>
 References: <20260825222211.712836-1-maskachoska@yahoo.com>
@@ -129,203 +129,117 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add the EcoNet EN7528 board: board glue, the reference and RAM
-defconfigs, and the board header.
+Add the EcoNet documentation index and the EN7528 board documentation.
 
 Signed-off-by: AK Sharma <maskachoska@yahoo.com>
 ---
- board/econet/en7528/MAINTAINERS    | 13 +++++++++
- board/econet/en7528/Makefile       |  2 ++
- board/econet/en7528/board.c        | 37 +++++++++++++++++++++++++
- configs/en7528_ram_defconfig       | 43 ++++++++++++++++++++++++++++++
- configs/en7528_reference_defconfig | 38 ++++++++++++++++++++++++++
- include/configs/en7528.h           |  9 +++++++
- 6 files changed, 142 insertions(+)
- create mode 100644 board/econet/en7528/MAINTAINERS
- create mode 100644 board/econet/en7528/Makefile
- create mode 100644 board/econet/en7528/board.c
- create mode 100644 configs/en7528_ram_defconfig
- create mode 100644 configs/en7528_reference_defconfig
- create mode 100644 include/configs/en7528.h
+ doc/board/econet/en7528.rst | 66 +++++++++++++++++++++++++++++++++++++
+ doc/board/econet/index.rst  | 10 ++++++
+ doc/board/index.rst         |  1 +
+ 3 files changed, 77 insertions(+)
+ create mode 100644 doc/board/econet/en7528.rst
+ create mode 100644 doc/board/econet/index.rst
 
-diff --git a/board/econet/en7528/MAINTAINERS b/board/econet/en7528/MAINTAINERS
+diff --git a/doc/board/econet/en7528.rst b/doc/board/econet/en7528.rst
 new file mode 100644
-index 00000000..44520a14
+index 00000000..32f51bfc
 --- /dev/null
-+++ b/board/econet/en7528/MAINTAINERS
-@@ -0,0 +1,13 @@
-+ECONET/AIROHA EN75XX
-+M:	AK Sharma <maskachoska@yahoo.com>
-+S:	Maintained
-+F:	arch/mips/mach-en75xx/
-+F:	arch/mips/dts/econet,en7528*
-+F:	board/econet/en7528/
-+F:	configs/en7528_*_defconfig
-+F:	doc/board/econet/en7528.rst
-+F:	doc/board/econet/index.rst
-+F:	drivers/serial/serial_en75xx.c
-+F:	include/configs/en7528.h
-+N:	en75xx
-+N:	en7528
-diff --git a/board/econet/en7528/Makefile b/board/econet/en7528/Makefile
++++ b/doc/board/econet/en7528.rst
+@@ -0,0 +1,66 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++EN7528 reference board
++======================
++
++This target provides the U-Boot port for the MIPS-based EcoNet/Airoha
++EN7528 SoC (MIPS 1004Kc, little-endian), used in many GPON/XPON ONT home
++gateways. It replaces the proprietary multi-stage TCBoot flow with the
++U-Boot TPL, SPL and U-Boot proper stages.
++
++Boot flow
++---------
++
++The boot ROM starts the TPL from the uncached flash window at
++``0xbfc00000``. The TPL enables the Front-End SRAM, initializes the serial
++port and reads the DDR calibration image and SPL through the early SFC
++reader. After DDR initialization, SPL loads ``u-boot.img`` into DRAM.
++
++Build
++-----
++
++The RAM / chainloaded build has no external dependency:
++
++.. code-block:: bash
++
++    make en7528_ram_defconfig
++    make CROSS_COMPILE=mipsel-linux-
++
++The reference board additionally packages the vendor DDR calibration blob
++(see below). Build it with ``BINMAN_ALLOW_MISSING=1`` when the blob is not
++present:
++
++.. code-block:: bash
++
++    make en7528_reference_defconfig
++    make CROSS_COMPILE=mipsel-linux- BINMAN_ALLOW_MISSING=1
++
++Defconfigs
++----------
++
++- ``en7528_reference_defconfig`` - reference board (DASAN H660GM-A)
++- ``en7528_ram_defconfig`` - RAM / chainloaded build
++
++DDR calibration blob
++--------------------
++
++The EN75xx TPL runs a small vendor DDR calibration stage that is not part
++of the U-Boot source tree. The TPL reads it from SPI-NAND at the DDR blob
++offset (``0x8000``) with the early SFC reader (see ``tpl/tpl.c``) and
++executes it from FE-SRAM before DRAM is available.
++
++Obtain the blob by extracting the FE-SRAM DDR calibration stage
++(``spram.bin``) from the device's vendor bootloader and flashing it at the
++DDR blob offset. The reference-board binman image expects it as
++``arch/mips/mach-en75xx/en7528_ddr.bin`` (``en7512_ddr.bin`` for the
++EN7512 reference board).
++
++Expected images:
++
++- EN7512 / EN7521: 20336 bytes,
++  sha256 792068a4573b20cb8c39cb27df06c45683c11034e6fd07da24ddf7084828faa5
++- EN7528: 23152 bytes,
++  sha256 c2ff94b25100d46c0f2d8b42ebeb887bd6bfd0d49cd1ba5df61eea84ac227540
++
++Providing a source implementation of the DDR2/DDR3 calibration to remove
++this runtime dependency is a known TODO.
+diff --git a/doc/board/econet/index.rst b/doc/board/econet/index.rst
 new file mode 100644
-index 00000000..bcca1a9f
+index 00000000..d691db07
 --- /dev/null
-+++ b/board/econet/en7528/Makefile
-@@ -0,0 +1,2 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+obj-y += board.o
-diff --git a/board/econet/en7528/board.c b/board/econet/en7528/board.c
-new file mode 100644
-index 00000000..a168f534
---- /dev/null
-+++ b/board/econet/en7528/board.c
-@@ -0,0 +1,37 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/doc/board/econet/index.rst
+@@ -0,0 +1,10 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
-+#include <dm.h>
-+#include <init.h>
-+#include <asm/io.h>
-+#include <linux/bitops.h>
-+#include <linux/delay.h>
-+#include <linux/errno.h>
-+#include <stdio.h>
++EcoNet/Airoha
++=============
 +
-+#if CONFIG_IS_ENABLED(AIROHA_ETH)
-+extern U_BOOT_DRIVER(airoha_eth);
-+#endif
++.. toctree::
++   :maxdepth: 2
 +
-+int board_init(void)
-+{
-+	return 0;
-+}
-+
-+int board_late_init(void)
-+{
-+#if CONFIG_IS_ENABLED(AIROHA_ETH)
-+	struct udevice *dev;
-+	int ret;
-+
-+	/*
-+	 * Probe the EN751221-family Ethernet parent after the console is up and
-+	 * just before initr_net() enumerates UCLASS_ETH devices (mirrors the
-+	 * EN7512 reference board).
-+	 */
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_DRIVER_GET(airoha_eth), &dev);
-+	if (ret && ret != -ENODEV)
-+		printf("EN7528 Ethernet probe failed: %d\n", ret);
-+#endif
-+	return 0;
-+}
-diff --git a/configs/en7528_ram_defconfig b/configs/en7528_ram_defconfig
-new file mode 100644
-index 00000000..17aa465c
---- /dev/null
-+++ b/configs/en7528_ram_defconfig
-@@ -0,0 +1,43 @@
-+CONFIG_MIPS=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_MALLOC_LEN=0x100000
-+CONFIG_SYS_MALLOC_F_LEN=0x10000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_ENV_SIZE=0x1000
-+CONFIG_DEFAULT_DEVICE_TREE="econet,en7528-ram"
-+CONFIG_SYS_LOAD_ADDR=0x81800000
-+CONFIG_ARCH_EN75XX=y
-+CONFIG_BOARD_EN7528_RAM=y
-+CONFIG_SYS_MIPS_TIMER_FREQ=200000000
-+CONFIG_SYS_LITTLE_ENDIAN=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_DISPLAY_CPUINFO=y
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_BOARD_LATE_INIT=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_PROMPT="EN7528> "
-+CONFIG_SYS_MAXARGS=16
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_DM=y
-+CONFIG_CMD_MTD=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_MII=y
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_EFI_PARTITION=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_CLK=y
-+CONFIG_DMA=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_SPI_NAND=y
-+CONFIG_DM_MDIO=y
-+CONFIG_AIROHA_ETH=y
-+CONFIG_PHY=y
-+CONFIG_NOP_PHY=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_AIROHA_SNFI_SPI=y
-+CONFIG_LZMA=y
-diff --git a/configs/en7528_reference_defconfig b/configs/en7528_reference_defconfig
-new file mode 100644
-index 00000000..4b85a7dd
---- /dev/null
-+++ b/configs/en7528_reference_defconfig
-@@ -0,0 +1,38 @@
-+CONFIG_MIPS=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_MALLOC_LEN=0x100000
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_ENV_SIZE=0x1000
-+CONFIG_DEFAULT_DEVICE_TREE="econet,en7528-reference"
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TPL_SYS_MALLOC_F_LEN=0x1000
-+CONFIG_SPL_BSS_START_ADDR=0x80080000
-+CONFIG_SPL_BSS_MAX_SIZE=0x10000
-+CONFIG_SYS_LOAD_ADDR=0x81800000
-+CONFIG_SPL=y
-+CONFIG_ARCH_EN75XX=y
-+CONFIG_BOARD_EN7528_REFERENCE=y
-+CONFIG_SYS_MIPS_TIMER_FREQ=150000000
-+CONFIG_MIPS_CACHE_SETUP=y
-+CONFIG_MIPS_CACHE_DISABLE=y
-+CONFIG_RESTORE_EXCEPTION_VECTOR_BASE=y
-+CONFIG_MIPS_BOOT_FDT=y
-+CONFIG_SYS_LITTLE_ENDIAN=y
-+CONFIG_FIT=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_DISPLAY_CPUINFO=y
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_SPL_MAX_SIZE=0x30000
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_TPL=y
-+# CONFIG_TPL_FRAMEWORK is not set
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_PROMPT="EN7528> "
-+CONFIG_SYS_MAXARGS=8
-+CONFIG_CMD_MEMINFO=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_SPL_DM=y
-diff --git a/include/configs/en7528.h b/include/configs/en7528.h
-new file mode 100644
-index 00000000..b8dc2410
---- /dev/null
-+++ b/include/configs/en7528.h
-@@ -0,0 +1,9 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+#ifndef __CONFIG_EN7528_H
-+#define __CONFIG_EN7528_H
-+
-+#define CFG_SYS_SDRAM_BASE	0x80000000
-+/* Above FIT scratch (0x82000000) and kernel load (0x80020000, up to ~32 MiB). */
-+#define CFG_SYS_INIT_SP_OFFSET	0x04000000
-+
-+#endif
++   en7512
++   en7528
+diff --git a/doc/board/index.rst b/doc/board/index.rst
+index fcb4224b..60d75003 100644
+--- a/doc/board/index.rst
++++ b/doc/board/index.rst
+@@ -29,6 +29,7 @@ Board-specific doc
+    coreboot/index
+    emcraft/index
+    emulation/index
++   econet/index
+    gateworks/index
+    google/index
+    highbank/index
 -- 
 2.53.0
 
