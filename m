@@ -4,130 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E69CC5DF97
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 20:26:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59FE1C61DBE
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 20:42:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CA3D940800;
-	Wed, 26 Aug 2026 20:26:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BFE0A406ED;
+	Wed, 26 Aug 2026 20:42:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id f3s6I0o_q4I5; Wed, 26 Aug 2026 20:26:49 +0000 (UTC)
+ id VRzuudFylhGj; Wed, 26 Aug 2026 20:42:48 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787776009;
-	bh=E2Bgdj+wdMr/R9r9Vy+Re09+EsHhDvoEv6fbktFQYg4=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787776968;
+	bh=3Es1SL21VGuDUJVHzpaP5bCOkwiXj5JskgI44iJUprI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wQBml7inz4g1FKav6eetH7Yg4GVh4Lf/87BUnegpUxAYUPFND1bK296Jg+KalXFVs
-	 I1T7pgpyKM/CjHqGGbi2pJdB2mrEpGRDnEZ0oIO61urR1eH92/v1qFzvIUGoKDAWgs
-	 pDj93hA7LMUcFxuEH5nAtrxuPJ9ElGG3akpJIRrV0p1xpht2bDv3zkUTlok10jTKpg
-	 0XZw7/ZjHYoeS7G1VXPp9Of4syyXgLnv1mEvfadDtJ3cfje78vLzesUY6Dta6GoMp4
-	 xG4oQWf9hP3EYpGu2sz7autBW1PY6wquDwULQthwINdaMIdbB/VPfBnp1znTtIFC6t
-	 +DVGtKTl0Usxw==
+	b=B0HYDxp5kOFlEl+hdzsqlryU0vM2xG6ByVHPNN1rQbK8cYqwx1N2KwGcsRnYlFWJ8
+	 9zHUYz2/yDYjVWoYQ1TnWDPRKBFhps+qkhN02XGRdyiSBYQk5nlbTZbIoBimtQzsRJ
+	 ZWfRyRunz1RHxMZ7IPOn8jOlcsOW8YxjWN/b7hWjwX2ZNmtJ+8aChrg5OOTHCUV2t/
+	 ptlpoqjtinDXqh1/FGUK82xj6e1rar3IOWSQQv0Grjky1VouizHkoLcGJjvCwficrm
+	 bwE0w9cFzlZZ7RkisufSf0+w+Br8QKpmEE+VqXRYdKOPgU53C5Nl3OleReSaly6UdL
+	 zHTowlYmFo8YA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1FC66406AC;
-	Wed, 26 Aug 2026 20:26:49 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 959E2334
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 20:13:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 257BE406E6;
+	Wed, 26 Aug 2026 20:42:48 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1CAE73AD
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 20:42:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D819080E24
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 20:13:09 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1AA834024A
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 20:42:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ez7UDQzkhrPM for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 20:13:09 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YIxGZikExi8w for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 20:42:45 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::531; helo=mail-pg1-x531.google.com;
- envelope-from=yuxiaozhang@google.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=google.com header.i=@google.com
- header.a=rsa-sha256 header.s=20251104 header.b=rRNZUQ0X
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2D7C980BF0
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 20:13:08 +0000 (UTC)
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-cc1c8d4a959so807223a12.3
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:13:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787775188; cv=none;
- d=google.com; s=arc-20260327;
- b=XIT6HTw+9dGOaUCnaUkkuV/vC+kIB0aIWqtnwUopSAlxbLYEFoczTlDAbf+rTcQttU
- B0wNHbrwd06YNl/dAMa2NV3lzn11xUiRGFX+g0Afg4RJ6d8Afw6NYLD7FNTbcHc2+dfy
- ioEfg2FqUJ7ejgFM/1b69ePbIB8MJ8ZBVrOypthwH6r7xnUFdaviJYlayFCvAe2gcH89
- ZRG6F895ErE8U+g5tHBuJ4B24p2OZqzREBppkxylbR/PT7zdGbnxuc+HPEDRDl9utwA/
- GMRz12PWqQ7hIEHChivcifYXBvPHKKYooZahp7SOkgArtSTRFSym76Qkm2Q7vKwHCKsE
- DB0w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=E2Bgdj+wdMr/R9r9Vy+Re09+EsHhDvoEv6fbktFQYg4=;
- fh=9Lh2CAcu2HmcuDgW/9+EU0KyXEZm56DRJ7g4N2GqeMo=;
- b=jhBunZgU0HUdRKyZJcZWMJ63Yiumid5RyGKuntL6LUJyiEkzWpxaT9CwWvKNsLrVZz
- NerW1fTg1L86F0599rid8ek0OH6fJlII/OZ3SloOi0CavtyUHafhb2MKQ1I38DIekF+C
- Q+JtcJVgtXBH3gGwbah0kbjhrSHUG7C4WN72nqZ/ZazQmUGil1XfbvfUN5Fj9A3iRNb3
- hi5r2fEwf9gSamWJsiSpdyuGJEoPBYC/ol3PuVBaWVjhm30O5afdx4j94m7nPV2u/yri
- lDnGpyz+GJ9nxvWsDa4ABzjeOOYK8+/3BySJMNnYScEdNtE6FUs7/KY7CPQBMNXYL2fx
- LY6A==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2607:f8b0:4864:20::336; helo=mail-ot1-x336.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=b3dAoKPt
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 603C640247
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 20:42:44 +0000 (UTC)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7f42ef0b693so1084844a34.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:42:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20251104; t=1787775188; x=1788379988;
+ d=konsulko.com; s=google; t=1787776964; x=1788381764;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=E2Bgdj+wdMr/R9r9Vy+Re09+EsHhDvoEv6fbktFQYg4=;
- b=rRNZUQ0XHUyOYBXWrM3CKrxZoDiXI9Ex1be8f8uHrd1yodCpCV6wT3h0dweVySvD9H
- jnWxPApJzRRKznWqIqcKOYv2GB4+suSQ2wdSdiBhuzfPU3ZucDV7ZNhhq/xfOFPPOf8k
- bSjRh3g/1MoO1byO6k5/VxTgvMYYPJ7mZDue1kFtaZlYfQ0MnaC70a5xnS/4DgPHSDi6
- vJQGd0NS17LEkGRCLy2UsmFGo/7GFRzJ6YgHvhBexc0x0+qlv8iYgPsg2psFtgQhTWkL
- Y/Sty7mh5AOrNZCvD1blvxDBzmdZrJuDOx+zcgXe3lH0eXJGn4b7gwvTej9GN9ViQl8h
- G34w==
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=3Es1SL21VGuDUJVHzpaP5bCOkwiXj5JskgI44iJUprI=;
+ b=b3dAoKPtjiBc72Fe+ApN1NchrTfK/Rxcqkhz4WBZyYYW0Pi0A/D4MSyIdqV/3mKPro
+ zpqPi7mKW0LLgk0DiXL+LLa0c3i6B3b3rxcjf0Iv8nO60DAQF/MK8Ucb3KJ40mftuQz6
+ 6YSIseXQutYvfXfJTc2lIAvnQeevcJrMfdi4w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787775188; x=1788379988;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=E2Bgdj+wdMr/R9r9Vy+Re09+EsHhDvoEv6fbktFQYg4=;
- b=HG5yOK4s1DahpuW6h5X9Ash2Y7QqezRqoErMil9h09KeAhrZ93B03ZHlNYkT1km3mJ
- 6YKnuzCXWI/8BqsQMuIWX7vczvLlHCJOrc0/yZ61xZIChgmahko7afu96lZ2YBP6wVhm
- JW4XTRJqvSlTaQo8Yc6cJ/RkJA53d3yr9nY1sXWZ7dAAgAL8rK1+oLmSpWCC7CNBrMmo
- 8e/48utoMsIAbugf9fhI/SP+TI5huRR/8coHlkTVJGD7PH0/3ZQI6ZrttfTO7NSIJmHI
- GGTQsFyGcWu+Dnx7mEg0nBNrS6Qpd14U3jmDO8rOTLWi8gvzAk4Qf9cAbMfO/ksm9lPh
- n2iQ==
+ d=1e100.net; s=20251104; t=1787776964; x=1788381764;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=3Es1SL21VGuDUJVHzpaP5bCOkwiXj5JskgI44iJUprI=;
+ b=bE+8179A7dGocjoxbHXaRhUJOzoFZnSYQ0KBgKiLLpBLHBDKmIFy6RSx8/ksuPWp36
+ C4YNaVz0fNPQ+Wm3iLVFVaJvrVrbZhsIoodUBJ9Zb7UoCVIyWVWhTnwVBSlW7Da8uVEd
+ 44ui2UFpSShRkNBHx6NGH86EJWthH0WjKccCBzuiFbYdpbkhpsT60LnNvl2X56RVakdC
+ OWRHp0bF7PwhGyMce0lOfrYN1wspUw70hpX0ep1TpJVEJRz/Zdn1WmXFLzK2oIrm8P/z
+ qUWdDvMBv+WxJXD7t797flsGh1Z5xeIPFHre/0r9BuuWIqUY+/lj0nODLx5KDwU82dCL
+ 0NzA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rrus8RvIVoIeG3zOsHiCwgv98rSf3fDSVvL4teiAQNKwtfaljyR/EcYAbVzgrRNBXGIYhsFres=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nNI6TpqKqbpW9DaZkq1u02FG6832Bami88lMVxER2dvrjWBhcP
- UssS6YvOSZ76Tgo2/h+i08IVsHApsPb9lNIg2rTXgEtky4IHk9TToDy5vxJaqHgB6vIbe4DmmkZ
- /ir0+fuoDtTY8SIdo0/DjxL46ki0TciwvPzAsW0fJrLUmR0wUJD0fmeq5vBY=
-X-Gm-Gg: AR+sD12K0poq+3kx7dGQNbo+2EjJVJnbsedyaDSDAKNOEKDw2Xd1BAUGHaUitiRLlZx
- 7DiuOgrd+t/kFwac8F0dGU+avS02dSZ1jSx+u1+KjL9MoyBAHIAuFTfP/JVX+Gzjb8+cNy+BpqT
- ntfzkND2xcBpwwo8fmqPgxOtWC7Oz+MwAsYVHurrz/m/48UZJ4Yjd+vjiSwRqEpxezV75EpPZFP
- od8P0yCzO0NZY4liTmRk8mVtHEj4DOhEdbTEBhRFVuc98IlrOKDlwUs+nK5NheUjurKpsC10B4f
- lysAfxJPW8kpe2guzM/n3Ts8fsWRZPWAMrxL4f0TkSzhdJYVd+5CxUaK/Xj9GZJAHw103Byvh/M
- =
-X-Received: by 2002:a17:90b:3f46:b0:38e:7168:281 with SMTP id
- 98e67ed59e1d1-3966d3d8a07mr20109706a91.10.1787775187408; Wed, 26 Aug 2026
- 13:13:07 -0700 (PDT)
-MIME-Version: 1.0
+ AHgh+RrrXqI/1h06L0cUGzFmqPOPORqkT/JWTHHNiPIkaSCvJIS2mSMBMDwVplWdTelmVnx47dzxG5g=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++ms5jL4uyX3K6Xl8VvjboO4NjpjX5KYj6MUQY4KMveQ5ggJ5fbz
+ SYM+hL3jRK2gCKxRUs1O4zMVaZke+/4Ap1imldcI1/jz0d/R9L8N4a7heKp3oR9B3u0=
+X-Gm-Gg: AR+sD12+ssNW2hrM44WR0PiyidfdHDLngnGGgqV93iUEfXzU/pk24anMdawwu6LPf7U
+ 1TfyvaabWtHn+nOl5P6mszNhpeVwRNb3I+CmwwJhjsTjQLJcaY/RCW5FcXkjW/W1PNSMevddUSN
+ xHAF+oLxhzAX+2W+XU4p+GyjlyOJ/Dj4gKxN+vyo5tQeoYC+Rij5bVwgTvADBVlPGSYJMe+1dGy
+ x+fcpQ3CSslG7CfBg+SK82SOCIiI+BUbI8b/iCYJ2Bl5cN0GA5ONIrEgA8xB5CS519Pfr2mBbx3
+ Mie58jB1AR8BQ24bJRKrSF7HXNk/vpc1GyzdP39aRkYczTKo7NkPHpH4xrnFqIl8bjG8/jQ2a2H
+ 2lxy2WSJlxTW6EBNvTP7CRTjbXlORJWF9YnJGWJVB6JcyQJ3IboBT85XkkDnIpkGdxHWoOYh6Px
+ I57atdSZCI/F2OnQ3bD9FZNl0wB/GetTTi8YeV2Cbc+iEld0GltHHSc7dhDxP9bEG1Fu+RFb0AI
+ nqWRBtXYU1lAdJxh/wLm8kIV08o0FS1U7N+XKHMC07kf+FiDbAJiK6ibA04APv6DflKv9wUZ1il
+ WaOSgjd+DQ==
+X-Received: by 2002:a05:6830:3695:b0:7e6:e8cd:bb7e with SMTP id
+ 46e09a7af769-7f4c4b8b2e5mr10731137a34.4.1787776963643; 
+ Wed, 26 Aug 2026 13:42:43 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7f4c818355csm2516755a34.6.2026.08.26.13.42.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Aug 2026 13:42:42 -0700 (PDT)
+Date: Wed, 26 Aug 2026 14:42:40 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Yuxiao Zhang <yuxiaozhang@google.com>
+Cc: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@arm.com>,
+ u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH] u-boot: fix error check in eth init
+Message-ID: <20260826204240.GC3959812@bill-the-cat>
 References: <20260826181428.1856166-1-yuxiaozhang@google.com>
  <20260826200207.GB3959812@bill-the-cat>
-In-Reply-To: <20260826200207.GB3959812@bill-the-cat>
-From: Yuxiao Zhang <yuxiaozhang@google.com>
-Date: Wed, 26 Aug 2026 13:12:55 -0700
-X-Gm-Features: AcwNN1U87FxKFuxRKpyALKhL3iPRUFLVHv1ZznRaUmZLvzzWRTyGAOj1DaO2kpk
-Message-ID: <CAOOoKeQPDO0FTN0ya+W5-HR0DsadcbXFgfyG=SwG9DaM8S-GWA@mail.gmail.com>
-Subject: Re: [PATCH] u-boot: fix error check in eth init
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@arm.com>, 
- u-boot@lists.u-boot-project.org
-Content-Type: multipart/alternative; boundary="000000000000fd57000659f8d813"
-X-Mailman-Approved-At: Wed, 26 Aug 2026 20:26:47 +0000
+ <CAOOoKeQPDO0FTN0ya+W5-HR0DsadcbXFgfyG=SwG9DaM8S-GWA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="w3tU07rzQYlCsAb+"
+Content-Disposition: inline
+In-Reply-To: <CAOOoKeQPDO0FTN0ya+W5-HR0DsadcbXFgfyG=SwG9DaM8S-GWA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,141 +128,108 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
---000000000000fd57000659f8d813
-Content-Type: text/plain; charset="UTF-8"
+
+--w3tU07rzQYlCsAb+
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-IMHO at least the activation check is a valid case. It just check the
-status flag and returns EINVAL without setting errno:
+On Wed, Aug 26, 2026 at 01:12:55PM -0700, Yuxiao Zhang wrote:
 
-292         if (!device_active(dev))
-293                 return -EINVAL;
+> IMHO at least the activation check is a valid case. It just check the
+> status flag and returns EINVAL without setting errno:
+>=20
+> 292         if (!device_active(dev))
+> 293                 return -EINVAL;
 
-Thanks,
--Yuxiao
+Please don't top-post, it makes following context harder. And, this
+isn't quite what I was asking about. If we look at commit:
+commit 7ad5e878cd850102e13ee2a5f8a5fb69742f70b0
+Author: Jerome Forissier <jerome.forissier@arm.com>
+Date:   Wed Oct 16 12:04:01 2024 +0200
 
+    net: eth-uclass: add function eth_start_udev()
+   =20
+    Add a function to start a given network device, and update eth_init()
+    to use it.
+   =20
+    Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+    Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
+Which introduces this function, and examine the code before/after, we
+aren't quite doing the same things as before.
 
-On Wed, Aug 26, 2026 at 1:02=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
+So yes, we aren't handling the error case you describe correctly, but my
+first thought is that the caller here should be doing eth_errno =3D
+eth_start_udev(); and then setting ret =3D eth_errno if we get a problem.
+But that might not be quite right either, I've only spent a few minutes
+on this,
 
-> On Wed, Aug 26, 2026 at 11:14:19AM -0700, Yuxiao Zhang wrote:
->
-> > eth_start_udev can fail but errno could still be zero which causes the
-> > function ignores the error silently. This fix catches the error
-> > properly.
+>=20
+> Thanks,
+> -Yuxiao
+>=20
+>=20
+>=20
+> On Wed, Aug 26, 2026 at 1:02=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+>=20
+> > On Wed, Aug 26, 2026 at 11:14:19AM -0700, Yuxiao Zhang wrote:
 > >
-> > Signed-off-by: Yuxiao Zhang <yuxiaozhang@google.com>
-> > ---
+> > > eth_start_udev can fail but errno could still be zero which causes the
+> > > function ignores the error silently. This fix catches the error
+> > > properly.
+> > >
+> > > Signed-off-by: Yuxiao Zhang <yuxiaozhang@google.com>
+> > > ---
+> > >
+> > >  net/eth-uclass.c | 11 ++++++-----
+> > >  1 file changed, 6 insertions(+), 5 deletions(-)
+> > >
+> > > diff --git a/net/eth-uclass.c b/net/eth-uclass.c
+> > > index 5c437143a30..5518268bd68 100644
+> > > --- a/net/eth-uclass.c
+> > > +++ b/net/eth-uclass.c
+> > > @@ -347,12 +347,13 @@ int eth_init(void)
+> > >                       debug("Trying %s\n", current->name);
+> > >
+> > >                       ret =3D eth_start_udev(current);
+> > > -                     if (ret < 0)
+> > > -                             ret =3D eth_errno;
+> > > -                     else
+> > > +                     if (ret < 0) {
+> > > +                             if (eth_errno < 0)
+> > > +                                     ret =3D eth_errno;
+> > > +                             debug("%s start failed (ret=3D%d)\n",
+> > current->name, ret);
+> > > +                     } else {
+> > >                               break;
+> > > -
+> > > -                     debug("FAIL\n");
+> > > +                     }
+> > >               } else {
+> > >                       debug("PROBE FAIL\n");
+> > >               }
 > >
-> >  net/eth-uclass.c | 11 ++++++-----
-> >  1 file changed, 6 insertions(+), 5 deletions(-)
+> > Is it a valid case for eth_start_udev to have failed and not set eth_er=
+rno?
 > >
-> > diff --git a/net/eth-uclass.c b/net/eth-uclass.c
-> > index 5c437143a30..5518268bd68 100644
-> > --- a/net/eth-uclass.c
-> > +++ b/net/eth-uclass.c
-> > @@ -347,12 +347,13 @@ int eth_init(void)
-> >                       debug("Trying %s\n", current->name);
+> > --
+> > Tom
 > >
-> >                       ret =3D eth_start_udev(current);
-> > -                     if (ret < 0)
-> > -                             ret =3D eth_errno;
-> > -                     else
-> > +                     if (ret < 0) {
-> > +                             if (eth_errno < 0)
-> > +                                     ret =3D eth_errno;
-> > +                             debug("%s start failed (ret=3D%d)\n",
-> current->name, ret);
-> > +                     } else {
-> >                               break;
-> > -
-> > -                     debug("FAIL\n");
-> > +                     }
-> >               } else {
-> >                       debug("PROBE FAIL\n");
-> >               }
->
-> Is it a valid case for eth_start_udev to have failed and not set eth_errn=
-o?
->
-> --
-> Tom
->
 
---000000000000fd57000659f8d813
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--=20
+Tom
 
-<div dir=3D"ltr">IMHO at least the activation check is a valid case. It jus=
-t check the status flag and returns=C2=A0EINVAL without setting errno:<div>=
-<br></div><div>292 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!device_active(dev))<br>=
-293 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -EINVAL;=
-</div><div><br></div><div>Thanks,</div><div>-Yuxiao<br><div><br><br></div><=
-/div></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D=
-"ltr" class=3D"gmail_attr">On Wed, Aug 26, 2026 at 1:02=E2=80=AFPM Tom Rini=
- &lt;<a href=3D"mailto:trini@konsulko.com">trini@konsulko.com</a>&gt; wrote=
-:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
-8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Wed, Aug 26=
-, 2026 at 11:14:19AM -0700, Yuxiao Zhang wrote:<br>
-<br>
-&gt; eth_start_udev can fail but errno could still be zero which causes the=
-<br>
-&gt; function ignores the error silently. This fix catches the error<br>
-&gt; properly.<br>
-&gt; <br>
-&gt; Signed-off-by: Yuxiao Zhang &lt;<a href=3D"mailto:yuxiaozhang@google.c=
-om" target=3D"_blank">yuxiaozhang@google.com</a>&gt;<br>
-&gt; ---<br>
-&gt; <br>
-&gt;=C2=A0 net/eth-uclass.c | 11 ++++++-----<br>
-&gt;=C2=A0 1 file changed, 6 insertions(+), 5 deletions(-)<br>
-&gt; <br>
-&gt; diff --git a/net/eth-uclass.c b/net/eth-uclass.c<br>
-&gt; index 5c437143a30..5518268bd68 100644<br>
-&gt; --- a/net/eth-uclass.c<br>
-&gt; +++ b/net/eth-uclass.c<br>
-&gt; @@ -347,12 +347,13 @@ int eth_init(void)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0debug(&quot;Trying %s\n&quot;, current-&gt;name);<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0ret =3D eth_start_udev(current);<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0if (ret &lt; 0)<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret =3D eth_errno;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0else<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0if (ret &lt; 0) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (eth_errno &lt; 0)<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret =3D eth_=
-errno;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0debug(&quot;%s start failed (ret=3D%d)\n=
-&quot;, current-&gt;name, ret);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0} else {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-&gt; -<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0debug(&quot;FAIL\n&quot;);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0debug(&quot;PROBE FAIL\n&quot;);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-<br>
-Is it a valid case for eth_start_udev to have failed and not set eth_errno?=
-<br>
-<br>
--- <br>
-Tom<br>
-</blockquote></div>
+--w3tU07rzQYlCsAb+
+Content-Type: application/pgp-signature; name="signature.asc"
 
---000000000000fd57000659f8d813--
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao9PvQAKCRAr4qD1Cr/k
+Cg3WAQDXe+NoQscQZU3CrfyZQKP7k4pdRPap+cAbVLdpyQNsSgEAraM4C1XyrbBu
+dqFr+2TDgZOW9PnIqMViNx1d1BRT5Ag=
+=vijq
+-----END PGP SIGNATURE-----
+
+--w3tU07rzQYlCsAb+--
