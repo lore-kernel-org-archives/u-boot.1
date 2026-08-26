@@ -4,148 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5F34C61DC2
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 09:55:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E3FCC61DC2
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 10:10:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 83E9580BF0;
-	Wed, 26 Aug 2026 09:55:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 32B4180B89;
+	Wed, 26 Aug 2026 10:10:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nTbeV2bwDdVl; Wed, 26 Aug 2026 09:55:01 +0000 (UTC)
+ id ROyTShVSV2DI; Wed, 26 Aug 2026 10:10:11 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787738101;
-	bh=LaaoAIu/SU5EEs6x0Fa2UeXLRfWbJfx7C31VmP3/V6U=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787739011;
+	bh=B4raq7VAw9OEprCZpwx7AP/SGFKr9tdE+e91NxAmw5I=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ETQ3Clgvbd321H+M8KnqeDQyac1q3yw+uPSix3YwupRixb6SQh6PIGlrePFWL88Gt
-	 9mEKlAAiR6ZN9lIUeQTBS0jboGuv3DRQ25t0JUGY1/hZG5Jzfrm9ksaCmYkVUj9VzC
-	 EAZdiI0/A2BTOVb34N1Zcoqe88DPNYK94f+DO7s5T3FrnBOgRwv9jWDzN2yw2vLfap
-	 wHmQl1bvPladIvAzzhUCTTuLWSdpICCEjnPTGQHMtChRhnwbqS05lrPMDpj2q1jln1
-	 LiwYOZAByBec1o5/i17scblDC4Yr+P6gVA1OfvhiQsTQYoece+TklcGI5r6NhkcG7C
-	 rN8u1IhTPEYGQ==
+	b=X/gkHnxTodt5UPhls8jmX/nNu96vMd6HtwXeXF5UiZqtWDJ82j73BZGre6Zbz4vAA
+	 +OXe05BQbdLmfxmC0H3H6xFOMzPe4VHLJr4q+qr1rTGTfRBFV+aL9ei79XgLplwUe8
+	 1zncBfDBwbmnDTLapuLqkaw8EHFC0RAbbMYL+2PCWBAgNlCL6Twgat3F++Q30+HA27
+	 kSsy4Gw6g9vBhH4BjPOqmkb/5u6v8sYLXYLHLxOj9R+qgR4KZtDuUvMxd4e/oPuqKC
+	 M80elZ0UxL9gyhABnv6d0jZFVoq4NIYN7um3OcBb9rfe24U1RnVO4B4N2y4CqBTFyy
+	 GMAaNejBcdl9w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 772DF80BD7;
-	Wed, 26 Aug 2026 09:55:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 59BEB80B7D;
+	Wed, 26 Aug 2026 10:10:11 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id ED8FF3AD
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:55:00 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id F136C39E
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 10:10:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id DF7C56070D
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:55:00 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E2C5E6070D
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 10:10:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cb0ZZ5K1L2AX for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 09:55:00 +0000 (UTC)
+ id n8Yax_1OV00u for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 10:10:09 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::f33; helo=mail-qv1-xf33.google.com;
- envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
+ client-ip=2a01:111:f403:c107::1;
+ helo=ph8pr06cu001.outbound.protection.outlook.com;
+ envelope-from=tanmay.kathpalia@altera.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=DQj76lpJ
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 248346067F
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:54:58 +0000 (UTC)
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-90ccbed6edcso3950846d6.0
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 02:54:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787738097; cv=none;
- d=google.com; s=arc-20260327;
- b=sA+2MhGKe15teg4h4U2JthKSgxpvmutgnhh0XDat6b56SF58+k7NdmNf6E6W+UJxKW
- RDI0wd3cNWEUHECeKZ8iflfclLvM0jV0k0Go4fvpNo9yIXV64QjUXLfFK2YYl3vdsmwB
- Wfx344g3myMW98aawyXhHBl4wXkqebT160+Ys3czocTAqP0fgtMZ3fK0snqOryk0d6/o
- 1MaTwc/e4Rx1Cqu18DWwnSEwFwAW1wxihQWO7R0zpUGBIorLE3ZVtUyL9OFcOsjCf+bJ
- nJc/sW0doFFvzrgbEum6XBGpNF4oj1YzGQ9LqzScBuuRkBSF4/tadBZGCqnDPTghHp5G
- jv+w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=LaaoAIu/SU5EEs6x0Fa2UeXLRfWbJfx7C31VmP3/V6U=;
- fh=JZg4BCDmw6qbNOeNsdxmIQUB3gPIipd9eGitC22fhHc=;
- b=BNlrH3m6/cG2sgI/lAA1JQNHdAoxEIm+9sfx2nhPR0VJRkvOdFjfmwoh/2cvyFW278
- ZvxK0+G3H/hgeELrudwcCnvojEXXQbCbsc3YZws5K99k+vDj2HvUlHe46ywjFXjU6+ad
- UkQlKRJCb4FIyGGJL8nS8LdAxhgn8fPapyZ+FylcLDeCKul3h8ZDMWV2nALleCDHTUzC
- YIklSj0e55LQ0JwjshWPBmgon12LTBs8Co6GIjib5jbdZEXCPfO9mT9Pd1jCv77Lczoz
- pXit8X3cXe0/+1emEQaNnK6a0wa8hOhooJm1Sv1C+xaqjQSO9PWxKPMtu4fm7Lk4Ttrq
- ZnQw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787738097; x=1788342897;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=LaaoAIu/SU5EEs6x0Fa2UeXLRfWbJfx7C31VmP3/V6U=;
- b=DQj76lpJ7lK+4LY8SrQUnS/fRKjsReHIr6vAeNQMdgPpPayrrKXikIa4Bal1yIV9ur
- dqfDvCpbVg2Y/Gbl3KBhaCvhxjwv2iydHiVy8OhwbdnXI6EQjdawXz4xntSNwkw8NMUP
- QXkg5U0D+0N3MzPLfkKAmeVHbod6EbK56bApQt43dcj/I1shfaxoiKzRMeZiJvbotRkb
- lMjPaFYreai0A8dVi0HKTp85iBkfOUr8q/oFTwB//gJKlHmk+bXyKaeMmNORRdgRF8zj
- 3dsxRv0uQU2LiIokIA7gCBl4x6C78nReYf/cJvHVKE6ZXo7QZqU1PMFuI1uGiV8JxbEr
- Kxcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787738097; x=1788342897;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=LaaoAIu/SU5EEs6x0Fa2UeXLRfWbJfx7C31VmP3/V6U=;
- b=IA0Pz13HxM+a0bTTqaUG9qx59aiP6cAFqaHCMaw8ZWu342KCh8UxJNtwrWPUB5xKQx
- KtbX32nzzTLdn8l3PZBcuS6WzBhRF3/fQqjM+7i5/2THbhOa/5lxwtMtl/Q89TOOAMz8
- TFxCgmt77/zztG6LOcjzE8p9F0QLFSrJJTkOCmbCKsFSD6dsT/HJQaDKTE53AR6uNCB8
- NkXaMc2+88jgMaZUpf9ofugTSoHpZUx18hEizawYqR7hNznMg3zDHkkRyqfQykBLka7x
- TS8c3hiK+l7tq3cDfCUF7X1NdcpAiYEiNDwrFl7UfvnVARw4tBJu+/Y89A4E29dUBLWw
- iR/w==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rpn3858V04K3BAwLweFG3q+z45aXlZsDqn3B7kNqTOcFbW/oSDVWwcWMNAVcL0pJMxJsAuLLVI=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nQsKHRB61rfaxQb4ZIUtcClbNvHUE0HnsaRtO7NG/yh5zZFPuH
- Wgfkv+SZ3O41IX6OqM9yf4boSKGoYqhnYbNTaLURfa42PqAbFkwVQwDLMlnigRdrIfED+2ADeat
- kdEmJO1PpyZQ7rYgoMV2ReofHc7Yf2Qo=
-X-Gm-Gg: AR+sD139Y0W0JsIZSqs1Erpl8z7AK82bCJXg/tm8/J4xWNl2wWup9JGR29BTWRVuxFA
- QcS25hqYVsoK3VDsOi4Cei49/d52NoQ+/jAO+VLsOS8FTzb2vJeRG+LbfFDtmPxQqdz1uQP7ALb
- QND5vQw9iNPm1ox2a/Yzu/f54306W7wDIitxUF1BmSBc41ab6zryma62HEmPczsQio06JKSh7CR
- Zf4V76Hohi/AoSu5e0GBSKd9+2rO2OZv8HdkPIXuTuj5kRpwrC86TQjK3veJwkPMDcaoLup5GPM
- KAc+S74WxGieOxu/WexZY51Pbzo19GEjVHSMhwIQ54s2c/KRJi41pi1joHpR4J1esyQfv6HAphF
- QXhlq3ZFou6ZT5NGFoONqC3xDUsCG2B/VllBw4irDNrdoAeX/LzNADtAVeq9xFs8sy1fhpJBd6v
- XLl83EcYqUbrQxLNoWjkHM2Ei8zu5Oy2IROs9dsiRYxgLIwYzg7Q==
-X-Received: by 2002:a05:6214:b6c:b0:907:5c68:54d1 with SMTP id
- 6a1803df08f44-90cc79cd228mr57166806d6.18.1787738097370; Wed, 26 Aug 2026
- 02:54:57 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
+ header.s=selector2 header.b=wrl69NpU
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 388216067F
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 10:10:08 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=URKsqQ8/0FdVy2Htbpa28wX87BTXc+T93+umXTC4Dc41PXAV+x7P1wMo9+YD2bO7jsxT6bNOv1cI9RMLxMyIvDJkoFy+ZNuXf0SpZCFdmJIYWuENXeQlfqSUsCTuORJVHXBpo7IKXTwps/3PCMqEjVREZARKmhixt41Qkvb5AKa/oW8Ou6bkR15x4ecPuhbY7EwdmhHxEgYGlDJ0l6yuwIlKqzooflCiGuZV+vGYve7QxWW0gCMuB+VEtMzYVKABxWqv4HxyoWCF+B97nQcX0QFUozIfjYvMbhJh3gY2kO/d1LN8iFvBVYgTLktV29uJ2/wuZmKCOnf5uNw6eRhdFA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=B4raq7VAw9OEprCZpwx7AP/SGFKr9tdE+e91NxAmw5I=;
+ b=Nu4OxRgJxT1KCJuiTdBLLvbG4hHBs0uuZaJdyTkqMhd4LSAohfk/6+7jdxKgx11VsjmYvG1UgkNZquYyzhAY+zD9Ahojfqy3rBsNfX92hoHjMXenrFmTcrUFLN/s6HgsXHrUia3FOPTVXOrVbPGS2yULd0NDaHcZmFa3amDhTFIH8gDAWYGfOJRJbwoDfz0P3Ck54B+nju6elqXPKT3RsPieA3G1Cw47xWNrQSfscNCFLoTHeeY5989//LwnJ+TwSEPupLVaE4KWxUrUIv8FHlUYxJl6pk2l9I+T1gyHtygfM4HriHlqeJb9yaKYKip/qaAuh5up8DjYZ1cYUjbMdw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=B4raq7VAw9OEprCZpwx7AP/SGFKr9tdE+e91NxAmw5I=;
+ b=wrl69NpUUI4f/N+pEuBtJcxuIfMxZPw2qAgtWIqn5td/u9KVci0sJlvFIBLFuvQHwivYiAq7v+R9Da4pX/1Z8J3SYo4yAhIoRZrRlzgKOkmjLW2odew3lYBVI2ls/+yhmR7QRvTMlCCh4zq2Lv5iiACfG1x39j+w8RB6a6/pvsIHN9zPn+WuCQGLa2ddwHrzCy9Oz/ed4dPRi2afNsSWki1VO2q5rIdmNjGqqgwqrnVMvvy/cXgOivI1JbJkEAsduKjAPnfJCaAEu/IWqnkkPwWM6wfI2ylfxKW13ZLG4kNAJN2O7D1TMNT2m9dwm7c/GlP9W69ugR6oJyKbA54itA==
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by PH0PR03MB989172.namprd03.prod.outlook.com (2603:10b6:510:3b6::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Wed, 26 Aug
+ 2026 10:10:04 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04%3]) with mapi id 15.21.0360.008; Wed, 26 Aug 2026
+ 10:10:04 +0000
+From: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
+To: Peng Fan <peng.fan@oss.nxp.com>, Jan Kiszka <jan.kiszka@siemens.com>
+CC: U-Boot Mailing List <u-boot@lists.u-boot-project.org>, Jens Wiklander
+ <jens.wiklander@oss.qualcomm.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Sai Sree Kartheek Adivi <s-adivi@ti.com>,
+ Alexander Heinisch <alexander.heinisch@siemens.com>, Peng Fan
+ <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
+Subject: Re: [PATCH v2 4/5] mmc: Call back to optee after a successful mmc_init
+Thread-Topic: [PATCH v2 4/5] mmc: Call back to optee after a successful
+ mmc_init
+Thread-Index: AQHdMzg+mp2GFGjKTUW7UZt60PCMabawB82AgAAXrIk=
+Date: Wed, 26 Aug 2026 10:10:04 +0000
+Message-ID: <DM4PR03MB6208B1210583DB7ED1ED4258F9AE2@DM4PR03MB6208.namprd03.prod.outlook.com>
+References: <cover.1787514446.git.jan.kiszka@siemens.com>
+ <ddef88ae1677f4c9b793252483f23eae900b89d1.1787514446.git.jan.kiszka@siemens.com>
+ <ao6nc78dvKK60egJ@nxa18884-linux-1.ap.freescale.net>
+In-Reply-To: <ao6nc78dvKK60egJ@nxa18884-linux-1.ap.freescale.net>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_Enabled=True;
+ MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_SiteId=fbd72e03-d4a5-4110-adce-614d51f2077a;
+ MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_SetDate=2026-08-26T10:09:17.9666413Z;
+ MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_Name=Confidential;
+ MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_ContentBits=3;
+ MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_Method=Standard
+x-ms-reactions: allow
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM4PR03MB6208:EE_|PH0PR03MB989172:EE_
+x-ms-office365-filtering-correlation-id: fc312d52-7391-4147-6d16-08df035a32a3
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|23010399003|376014|10067099003|3023799007|22082099003|8096899003|55112099003|18002099003|11063799006|4143699003|56012099006|38070700021;
+x-microsoft-antispam-message-info: cxxlAVYyOM/vVhaghuhRNJbrrKQyO1l+Zc1JHZ/CsBSUWlSwPfO2vxwQ5k+7t2K91BEIqvRQiFARGddO4bHSK82Zwf7cVw3rJarEfmr8eqxl1w02iIAUS4pcBWii77UKdg3j3i0oIiXxUIf0IrQMnD7ZR5gBx2VkZ5dxgP9DHjy0ucL/nGec1iYJ4eD83W9DozfvSQG36AARSRsJtLuXb5n5RJY8hRh9D0ECSSKVMPtNJuey1swDBDzrVVtpFTt7ajNeYw4u1e45TOx71Go55T6GZJZmAxvRz14UXOhy49l7ixsMgi+XNe5bfrYzec2fuRDEAxhYA9dBujR895tgz5+qQrEK/nCzbEaIB2+TZ2//5EQJx1XHcZUwO/mMsEunvVhOJQCzi2dszeWHAvYzcFJaqCgJWBqhXi0Abxf4NdI9SN6384ZM28ocB3P1zixkaNIfyb2y9vNv7k4yF6DpBe798ERKApRlQeyx72U6qeDE6Dr4lDibQmHfQ5JdOyy+DrB8wIsLhcIa58IwtXYJW13TAVFifQsPZZxa0fNzsnklW71+/qHI+3xnhUgE8EJZXRAP4T/rlDLn6njHqXioLdE5lxGLjS/j+T1vZe5yWmcrku2KribZbCazHeiSOHGGE3ojC03vLd+m1zRGlcT2bVJIoObsFw/VqgcIbIWi1Gl2Vn4F7VyxleKHjSa4orM3nOl/KOwpuoq5H+1l9UchDHlogRe2LgcK/1UjZdPxxE4=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(10067099003)(3023799007)(22082099003)(8096899003)(55112099003)(18002099003)(11063799006)(4143699003)(56012099006)(38070700021);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?ZbiF1GH+LxVXVYTR3HO3AMLnde0XOluIg8eoDNJvU/1KQpzkR9xQ9+4HkiPD?=
+ =?us-ascii?Q?A2mKMyXfwG7LDV1MgSK4gzp8QftHEUYWIOWmQhllwzlkZ8bwP8AcN6gV0Bv5?=
+ =?us-ascii?Q?t8zsEG4dVewnLp3U5QlG9n0BmZB+0hp+0v/MlXIV4YW0e2NnCKgfdurl1wH2?=
+ =?us-ascii?Q?Na7zCMw+4Qsj2I4GUBL0miMiinIAzdWN/JT62hxPlRcNxghO6i7BsTYGXg54?=
+ =?us-ascii?Q?7DXcy8t4o61aNesaHt6KvsV/Yf6CcZvH90LzG/IYGUaL7FcEIMAF4Q5mVOs0?=
+ =?us-ascii?Q?PU62KFfIGeUfqOqFG4yoC8cjQEvTqdX/IiS/6WlXeG6890SAM+FW9GFBWIVq?=
+ =?us-ascii?Q?zSsoCwwX6qwSUMgFNUuW+3bohoO6Yy4L8PDx4/6PU7REX2Dn+HYVKqZI+Xk4?=
+ =?us-ascii?Q?jL6zvT/zpJbEdW6r/GyDHA7b4o/X/Wa3wxWBAHujPfsdgWtBur20poQ+lvX0?=
+ =?us-ascii?Q?VT5RrlDDNUQLnXSLRKxRYA2Ybc4/08BA9TZ5WJvaT0bBe//qgafwJ5d5bnDV?=
+ =?us-ascii?Q?mv15VTAUVgBZg+sLwCXX0hdcB4HEfthRMxsVua3n5Sc6xNMCxKNf2SK5M6I2?=
+ =?us-ascii?Q?GhesxO5TpmIOBFqGGRB5VtHZs9aZ7GqdiNYOp4Slmsn/hbff+FJitYa3sXs1?=
+ =?us-ascii?Q?ELDsYG1zxxpINaDnMf+ENW7Pcu/pbF/AOV3K81A39SPKBloDd1+OT9CFsu2F?=
+ =?us-ascii?Q?sefYLzkct6fDJ21YELPXxSHpBYEJ4sFYaTOp/TmkVhKkbIxoaWBGbBMQyTtn?=
+ =?us-ascii?Q?Jm/T3ZywqBR00WdWHgQWzZW79mG4tb8I8uvlsLjs9TLaUNrqzO+iwHsleuKV?=
+ =?us-ascii?Q?GXS8v5CEPodMRVClAsWZb79D5n/OtTbLVOQ14AmXaq5byxNZAzev/4kfSvkj?=
+ =?us-ascii?Q?e0OB47Jb9sJolCb8mJicU0qLIUrO3JsVWSYh8+viTkNln1n3AEMDweJpWBAS?=
+ =?us-ascii?Q?4zg1CmEPlmZGY8kpp2z4mMPwLCVgO0YHZ0atVOw3rJZBsRkcysm6ufSTFnYs?=
+ =?us-ascii?Q?96Cj7jRkxrzDgL8LuIOIcTupRdvwvdiIrBMQJVwINuziP026B2sk0aHuAoDb?=
+ =?us-ascii?Q?0ZNbuTeQ6cjXF5SCjZ1CG/kNacQ5LPNElMKzH3XOwdX71DRl47TuoHHM/zfd?=
+ =?us-ascii?Q?gLa+fRxf2QXwKRRHVDQlXXDR1hgsy2yuCa8TXql0+YijCPnHjyhCACWMMeFZ?=
+ =?us-ascii?Q?e9r5+oYgdfu7MdZVW8IALF3ASQNA+d9Brkp/OM8eZP5NWMQYlQUHi5gam6Gb?=
+ =?us-ascii?Q?1nR8kIIoWKfq83xlA4ZFPDT8ntsJqkLaNqXDM39aSlqpGOBHJgKkefavLaVq?=
+ =?us-ascii?Q?fXCEFGsaK3ZxzjWIM3nAMEyU2guJOf1U6JNgAJIAQCLFVBqVOG/rPVcHewYc?=
+ =?us-ascii?Q?pAmJyyrIbzuFkUO0jN1hyfNOnl9V/kCD0HhshMbFk3psoDeFga87eUTgG0zM?=
+ =?us-ascii?Q?htwzaMI08/IZJBzs2Z36lDZU27P8IVOqsu32Hi6XfsyAZUVFdv6g6y5h6PeF?=
+ =?us-ascii?Q?TbHfWTTDNXHXpoGeAU4XmDJ4cWkrAKYiQTJBs+HFTrCE1oo4B21fxrgw2b5b?=
+ =?us-ascii?Q?f/X9AilzJLsxpIeZV8d0VjbbpDrOwIdXIMBvPTi5BNRBCFiowrbPYExvq8Ph?=
+ =?us-ascii?Q?2ftUYz/hXwyI9bVJdnRtLZKqRXVaWoTk9GJCkEYtJio01dvQEqg2gAqxhaxZ?=
+ =?us-ascii?Q?UlgQs9qngYd+op+lLWfwr45nozEL6MuxlWNmhxe+ZPmVBK+u4dZ//SBYPWNJ?=
+ =?us-ascii?Q?xhuNxNujq7XgYUqhJZnmw/Xic+l5O/A=3D?=
+Content-Type: multipart/alternative;
+ boundary="_000_DM4PR03MB6208B1210583DB7ED1ED4258F9AE2DM4PR03MB6208namp_"
 MIME-Version: 1.0
-References: <08f68cd8c514140071090a846839632f8cae071c.1787560364.git.michal.simek@amd.com>
- <1b9532296bffb1918b90cfe61fb7692ea355d02f.1787560364.git.michal.simek@amd.com>
- <20260824163956.GH523975@bill-the-cat>
- <c012177e-274e-4c88-bc32-1ec647fad643@amd.com>
- <20260825135036.GS523975@bill-the-cat>
-In-Reply-To: <20260825135036.GS523975@bill-the-cat>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 26 Aug 2026 10:54:42 +0100
-X-Gm-Features: AcwNN1UCza-DpbjqSSPV2YH7HxADHAFhkR10RCODY_aUgkHvcl49WQ2wW0n2HQI
-Message-ID: <CALeDE9N57vehC9F8XTnW3h-CHf=bj=8oxwS745An5iDGzBLCAw@mail.gmail.com>
-Subject: Re: [PATCH 2/2] Clean up emails from non-existing domains
-To: Tom Rini <trini@konsulko.com>
-Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.u-boot-project.org,
- git@amd.com, Andre Przywara <andre.przywara@arm.com>,
- Angelo Dureghello <angelo@kernel-space.org>, 
- Aristo Chen <aristo.chen@canonical.com>, Daniel Golle <daniel@makrotopia.org>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Heiko Schocher <hs@nabladev.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, Marek Vasut <marek.vasut+usb@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Simon Glass <sjg@chromium.org>, 
- "moderated list:ARM STM STM32MP" <uboot-stm32@st-md-mailman.stormreply.com>
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fc312d52-7391-4147-6d16-08df035a32a3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Aug 2026 10:10:04.0833 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 0Y5DK7e1Br+tkKqpM6J91rm8dBHW4SkCyZ8O1hEUvuagVxgKzKiz6WB3nnBqpdqbMu4MtHuNIY4fq0yDnJ5vxrkHAJAhUwJfeauGdOTk5tQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB989172
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -159,48 +178,117 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Tue, 25 Aug 2026 at 14:50, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Aug 25, 2026 at 07:17:36AM +0200, Michal Simek wrote:
-> >
-> >
-> > On 8/24/26 18:39, Tom Rini wrote:
-> > > On Mon, Aug 24, 2026 at 10:32:52AM +0200, Michal Simek wrote:
-> > >
-> > > > There are 5 domains which no longer exist. Remove all email addresses that
-> > > > reference them. Where such an address was the board's only maintainer, mark
-> > > > the board as Orphan.
-> > > >
-> > > > Signed-off-by: Michal Simek <michal.simek@amd.com>
-> > >
-> > > This is generally good idea, however:
-> > > > diff --git a/arch/arm/dts/sun9i-a80-cx-a99.dts b/arch/arm/dts/sun9i-a80-cx-a99.dts
-> > > > index cf126bbd2c57..0642161ec969 100644
-> > > > --- a/arch/arm/dts/sun9i-a80-cx-a99.dts
-> > > > +++ b/arch/arm/dts/sun9i-a80-cx-a99.dts
-> > > > @@ -1,7 +1,7 @@
-> > > >   /*
-> > > >    * sun9i-a80-cx-a99.dts - Device Tree file for the Sunchip CX-A99 board.
-> > > >    *
-> > > > - * Copyright (C) 2017 Rask Ingemann Lambertsen <rask@formelder.dk>
-> > > > + * Copyright (C) 2017 Rask Ingemann Lambertsen
-> > > >    *
-> > > >    * This file is dual-licensed: you can use it either under the terms
-> > > >    * of the GPL or the X11 license, at your option. Note that this dual
-> > >
-> > > I don't think we should be taking email addresses out of headers. This
-> > > kind of information is useful in looking in to history and trying to
-> > > track people down.
-> >
-> > That's why I kept there name. Emails are saved in history anyway.
-> > I don't think having emails in headers will help with anything. They don't
-> > work and they are not going to work.
-> > It means if people ping that author and get nothing back it is IMHO just
-> > driving them in wrong direction with unreasonable delay and hope.
->
-> Having the old email at least used to make it easier to search up for a
-> new one, but I see that's not so much the case anymore. So yeah, OK.
+--_000_DM4PR03MB6208B1210583DB7ED1ED4258F9AE2DM4PR03MB6208namp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Assuming it wasn't just copied from a Linux driver where that person
-doesn't have any context, the email in the git commit likely provides
-better information I think.
+
+Reviewed-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com<mailto:tanmay.ka=
+thpalia@altera.com>>
+
+
+
+
+Altera Confidential
+
+________________________________
+From: Peng Fan <peng.fan@oss.nxp.com>
+Sent: Wednesday, August 26, 2026 2:17:09 pm
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Cc: U-Boot Mailing List <u-boot@lists.u-boot-project.org>; Jens Wiklander <=
+jens.wiklander@oss.qualcomm.com>; Ilias Apalodimas <ilias.apalodimas@linaro=
+.org>; Sai Sree Kartheek Adivi <s-adivi@ti.com>; Alexander Heinisch <alexan=
+der.heinisch@siemens.com>; Kathpalia, Tanmay <tanmay.kathpalia@altera.com>;=
+ Peng Fan <peng.fan@nxp.com>; Jaehoon Chung <jh80.chung@samsung.com>
+Subject: Re: [PATCH v2 4/5] mmc: Call back to optee after a successful mmc_=
+init
+
+On Sun, Aug 23, 2026 at 09:47:25PM +0200, Jan Kiszka wrote:
+>From: Jan Kiszka <jan.kiszka@siemens.com>
+>
+>This is needed to that OP-TEE can re-enumerate services which need RPMB
+>access that may have become available now.
+>
+>Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
+
+
+--_000_DM4PR03MB6208B1210583DB7ED1ED4258F9AE2DM4PR03MB6208namp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+</head>
+<body>
+<div dir=3D"auto" style=3D"font-family: Aptos, Aptos_MSFontService, -apple-=
+system, Roboto, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(3=
+3, 33, 33);">
+<br>
+</div>
+<div id=3D"ms-outlook-mobile-body-separator-line" data-applydefaultfontstyl=
+es=3D"true" style=3D"font-family: Aptos, Aptos_MSFontService, -apple-system=
+, Roboto, Arial, Helvetica, sans-serif; font-size: 12pt;" dir=3D"auto">
+<div dir=3D"auto" style=3D"font-family: Aptos; font-size: 14.6667px;"><span=
+ style=3D"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"></spa=
+n><span style=3D"color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);=
+ text-transform: none;">Reviewed-by: Tanmay
+ Kathpalia &lt;</span><span style=3D"color: rgb(71, 158, 245); background-c=
+olor: rgb(255, 255, 255); text-transform: none;"><a href=3D"mailto:tanmay.k=
+athpalia@altera.com" class=3D"ms-outlook-linkify" style=3D"color: rgb(71, 1=
+58, 245); background-color: rgb(255, 255, 255); text-align: left;">tanmay.k=
+athpalia@altera.com</a></span><span style=3D"color: rgb(0, 0, 0); backgroun=
+d-color: rgb(255, 255, 255); text-transform: none;">&gt;</span></div>
+</div>
+<div style=3D"font-family: Aptos, Aptos_MSFontService, -apple-system, Robot=
+o, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(33, 33, 33);" =
+id=3D"ms-outlook-mobile-signature" dir=3D"auto">
+<div dir=3D"auto" style=3D"font-family: Aptos, Aptos_MSFontService, -apple-=
+system, Roboto, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(3=
+3, 33, 33);">
+<br>
+</div>
+</div>
+<div dir=3D"auto" id=3D"mail-editor-reference-message-container"><br>
+<br>
+<p style=3D"font-family:Calibri;font-size:10pt;color:#000000;margin:5pt;fon=
+t-style:normal;font-weight:normal;text-decoration:none;" align=3D"Left">
+Altera Confidential<br>
+</p>
+<hr style=3D"display: inline-block; width: 98%;">
+<div id=3D"divRplyFwdMsg" style=3D"font-size: 11pt;" dir=3D"auto"><b>From:<=
+/b> Peng Fan &lt;peng.fan@oss.nxp.com&gt;<br>
+<b>Sent:</b> Wednesday, August 26, 2026 2:17:09 pm<br>
+<b>To:</b> Jan Kiszka &lt;jan.kiszka@siemens.com&gt;<br>
+<b>Cc:</b> U-Boot Mailing List &lt;u-boot@lists.u-boot-project.org&gt;; Jen=
+s Wiklander &lt;jens.wiklander@oss.qualcomm.com&gt;; Ilias Apalodimas &lt;i=
+lias.apalodimas@linaro.org&gt;; Sai Sree Kartheek Adivi &lt;s-adivi@ti.com&=
+gt;; Alexander Heinisch &lt;alexander.heinisch@siemens.com&gt;;
+ Kathpalia, Tanmay &lt;tanmay.kathpalia@altera.com&gt;; Peng Fan &lt;peng.f=
+an@nxp.com&gt;; Jaehoon Chung &lt;jh80.chung@samsung.com&gt;<br>
+<b>Subject:</b> Re: [PATCH v2 4/5] mmc: Call back to optee after a successf=
+ul mmc_init<br>
+</div>
+<br>
+<meta name=3D"Generator" content=3D"Microsoft Exchange Server">
+<div dir=3D"auto" class=3D"PlainText" style=3D"font-size: 11pt;">On Sun, Au=
+g 23, 2026 at 09:47:25PM +0200, Jan Kiszka wrote:<br>
+&gt;From: Jan Kiszka &lt;jan.kiszka@siemens.com&gt;<br>
+&gt;<br>
+&gt;This is needed to that OP-TEE can re-enumerate services which need RPMB=
+<br>
+&gt;access that may have become available now.<br>
+&gt;<br>
+&gt;Signed-off-by: Jan Kiszka &lt;jan.kiszka@siemens.com&gt;<br>
+<br>
+Reviewed-by: Peng Fan &lt;peng.fan@nxp.com&gt;<br>
+</div>
+<br>
+</div>
+</body>
+</html>
+
+--_000_DM4PR03MB6208B1210583DB7ED1ED4258F9AE2DM4PR03MB6208namp_--
