@@ -1,115 +1,114 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FC14C61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:09:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6530DC5DF97
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:09:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DE965406E5;
-	Wed, 26 Aug 2026 13:09:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2D79180C73;
+	Wed, 26 Aug 2026 13:09:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xpYMC06qbEEg; Wed, 26 Aug 2026 13:09:48 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pJbPdb8ze3YO; Wed, 26 Aug 2026 13:09:50 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787749788;
-	bh=iWA9t6PxZAbqPys8tHF52SD8+kBt/+v5K9crykp7xec=;
+	d=lists.u-boot-project.org; s=default; t=1787749790;
+	bh=DIh+NRyy6mfbF5e+KGfDVaqlKhXH4a6jii0WVd/Yj+4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=o7v5dtYCd7tFdyfs2oHT5sHuDpJjDsCQlCozNaHF7/WzZZ3LpQCWJNxHCzw5/Ij0V
-	 hwTNK/zSd2OLJQpeRGFW2ZduW8+4uJOknQujjZ1T5jKkSlLXUm1pkJ4HBW6fz11gOU
-	 SPM11pNcybNw7Jd+7jaMO8xOdFGt/EB/nGtJYbwQpSZt7EOgXizQLfSW7EvUNlZ/Dc
-	 nsk1equrkUQuCkSMQa0ADBHqg/+puzXAGmgHmsXsDInVXv6x73PXFNl7CMQF5o88Ry
-	 XVw9DWaUdJC1bvlFtywa2rdyOuIXGbKxr1MPBwqHctEvurrWFShFJNk89aPvGBQvOT
-	 RWBeQCJFLN9ZQ==
+	b=0vjnSnt1E9vz+L7DJl3MJ678TLj6pxW1tnUUvjYpqhlSoFojcJ6nHUk4F7HbRmcN/
+	 q1kvN21akDWWcXJT5ypm1RPQakqSl74hWHHCtHnbOix0XPV2hw/8l3cfLALFJ/+1YJ
+	 e5r+ebdl56Fh9enXJoPVx9XP4p2b0/jSbGlQk4KyibBjEOX3O+Jhxhj4DU3h0AQozC
+	 A6N6HnlekzkTaI8kkDIiAPqZAySp07co68zE8O0VmopprbbJ2ctdWi6Tq1SG3j3ii5
+	 DxotD2yYMeiH8VMmUo6NVG77BVUgCOZRo4DJW70SWWFc8kvEYEbuWC6fZKy0hGUMgK
+	 51HEYuObiJXRQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1D1B9406AC;
-	Wed, 26 Aug 2026 13:09:48 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 6EAB13AD
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 63E2D80C7A;
+	Wed, 26 Aug 2026 13:09:50 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9EAD33AD
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6C357406C3
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:43 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8523D80C6F
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9kqFYjWYAvkh for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 13:09:42 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xbOG2TcgQVQ4 for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 13:09:45 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42a; helo=mail-wr1-x42a.google.com;
+ client-ip=2a00:1450:4864:20::431; helo=mail-wr1-x431.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=TmMAFKJw
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 78A1140684
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:41 +0000 (UTC)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-482e61a34e5so165213f8f.3
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 06:09:41 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=Z/KbuaFH
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8E25D80B6B
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:44 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-47f3b39f2a1so720128f8f.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 06:09:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787749780; x=1788354580;
+ d=baylibre.com; s=google; t=1787749782; x=1788354582;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=iWA9t6PxZAbqPys8tHF52SD8+kBt/+v5K9crykp7xec=;
- b=TmMAFKJwUP9YtbHYjf4lVY76V6Ch35vla6j4jeaf7z9Te6PmD8Ol6g6+mNmS6bVTAD
- 3AQucgQrvLcK2gft4OJdyF/AOjHpwKAjdHmp5eFxyVmxNzbKPUwtMKqdG5TDsu5viPKr
- Zv1PLMdr5671uF6V4gv9WR3xuX3x/90/1oCHnTRB7Q+53pMb1wcWgldPBXC9IkSnNSya
- 79LJJ+DlszLMhGCk36//TpsBrsm0s0iL/YNDc8iBQJxkpvueprjq0oMrD9uWXtVGqESe
- 3Kh+OUNWz1ahy2Svhs0gpcvbruniG91YiXPjs9y6C7dxgXVwY7Wv2hyYWbjzqsGvwqtL
- 3ifg==
+ bh=DIh+NRyy6mfbF5e+KGfDVaqlKhXH4a6jii0WVd/Yj+4=;
+ b=Z/KbuaFHwoTpiES+czscY4n2j59I791fs5z26QsCiHmxQiGdTDCXoW+slvZgZc1kVE
+ NAIKlMBBIUyDT0enIj/ralyhPDLHHH1ce0LXcMmB0bbxiafc6DEs8aIpEJKUV5BlMmHj
+ HaATdMgrK6tQpSFmxe//I3/dA8qEGmfYl0YKszcHuPJbL0iCbLTdZqLBDTJX3LWOAsl5
+ 8Zo89esJdBmN0GXI3ZmG4SHnZQ2/wP38uZJgTayEmiWFPjLog2vJVcirTi6l79J/ouAa
+ JAG+rGYBql5UE3AgztyP6xhhh3FHWiQU+iN0Hx/C4phLm+TC1XGJXJapnxmTMzuxZx+o
+ rxCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787749780; x=1788354580;
+ d=1e100.net; s=20251104; t=1787749782; x=1788354582;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=iWA9t6PxZAbqPys8tHF52SD8+kBt/+v5K9crykp7xec=;
- b=m3gBOpv74wfP+ukC9HSQgNva3DKNZSfGknbnp+4cibnj5GcL2X6T0M8V5T8KHbrYNs
- 7+LWNPbSepeNC6Am6ybj0alwEf8e9vUUz36g7HbCmadursJ/BPak8B09H3+MKlZVL870
- +OWCo+D+JzJB/QBW2gvYpD8PXtp1MLgTIJXMN7q8vRiN7btCaD0YWTeGQKlR68jx7Uvn
- arJFrT5gIGX7GA3X6ofL+R5wCrjiF6PbSqfqm7IckG5E9kv3w+gR4WzlnlERFWagMx32
- oTGV1SWGYbi1s9CT7Qje1eyOQkaVudMg/ktDUTIGgQjfgO/h7UyYmMSacfcK1sFEEPHi
- SCIw==
-X-Gm-Message-State: AFuF++lDLsFWSLY1XDs//ijnT5V/tL0kY/ykq01jp2hmdhQOHnkV7Fq3
- ierWE365DU1xTR/iNYwWkdWV6N8/D9+gwqFXeu94ojJ2uMVfUngF7HlUEdOHT4FjtvJThYXNRvb
- hG7dQ
-X-Gm-Gg: AR+sD10Zx91U++jWZYt6IosrKEqY4ak0Zj/yPV6QfjvWZxVH11DONveNrXmZ/ZIdeF+
- JBpHD2HUlQVNYZYYR8m5HKdH75DV4YDuEEa3cV8PuQcdHPEJpHQ8DrVtPa2UBS13PukBMiofgO9
- 99yBwuRFmzamDnzlya51VtWU6X5BudTieSjVw9RuQXRbTOEzyvL1SVXRylXUOce37RZ//7i67nV
- BRVq/5X9CA2IfCPRcNmMUuAFNs2QtElMkSUX5gNVs695PX1Jrhg6n5/iCGp4bw/YdlGHeO/eHx7
- E+NTNLVI8KAGPVA4w3Y+nMoRTVTJYffxBQNl1/zHGLSdOi4UW8NJolEwfKwzBorzOXmnH/lfBME
- FCAHEgRAldVqJexCVuKBPCGIHTa8TVdIGw9m6ayodhDgor3JNTHu8POTOmaCGxcB3huvGHSrSfz
- VwaiBAbDZMWk/CsjtHcYJEBtbCQiMj1+CMQPdCYvy2WO1Y4/pJejJzW9dCXQTd+QJ1CZ+kSnvCz
- XFeEV1AYZmOTEvRCwtmv7prt30S5d4lguHW6uuKDr+IdRLfZW9YjHykqS5LvOxnhZNGd7B+OjBg
- Rk0FT9IgBf/8MDDT6I859xwjjcnnGMCurCTF5xzcDfnW1uwCuAe1+1Mz
-X-Received: by 2002:a05:6000:4910:b0:482:daf8:a3d7 with SMTP id
- ffacd0b85a97d-482e2673529mr7548056f8f.3.1787749779987; 
- Wed, 26 Aug 2026 06:09:39 -0700 (PDT)
+ bh=DIh+NRyy6mfbF5e+KGfDVaqlKhXH4a6jii0WVd/Yj+4=;
+ b=HXnWpQAmzNsbIXyn6YRox0aeRRrTvFsizEqJx0qGyi6oDuBjlExN0uhcIvcL/D4qj1
+ aH6SJUvgEGVdWaCthfdPeMiPcbHq+E0ySLMt0u7k6LxYgMjS1m+uFbca2M/reLC1xhBN
+ ICNfmNQ+7w+mRXx0OWiYTWTWGourQrW9ul+EouZSrQD+Op4lv20gFGKQ/HtT2xk2G+rc
+ t1AiobdciN3uWBXG4xs8EZ94HqRThk8r6LUjupiNSFdvn5r/ube18Tjmtm57qjea5Hmp
+ 5J1qbvaFsQhdmH1e3ZO9J4oFWqMhnknccJJ9aN4U0VNyl+Yc+zgmZmdWzP0BUPg5OUr4
+ oIVw==
+X-Gm-Message-State: AFuF++kOHUyuumB2hgukqw6Q8YWJhrtkgc4cMbK0xAf3dXyWLb+dFXcS
+ xdJEkjIhEiJQqQonWulhnZCpvmJ0Dg/WsRNYHrZTGCRoVsC4AXr8ubO5Flw24e9dU2s=
+X-Gm-Gg: AR+sD128M+Qf60QaGbNGzFFe+MO1CBzSIsHE2xtU2RgUnPcmtvONpeH1zFsjKSwL11k
+ ij4BuzuxMHurPfnvaHkVuGPKVDdYXLMvMotTROB5hodJSkBK8CXiLF8n0v686nZTKJaUILbtigS
+ G7xRT/0G80QTLVZ3uOL1n8Ft29D5/SdK8bk+sERToG/6ErMUyl0IeybPqi3imb1/XF2GdswnAQm
+ cuu4RBgkVU6R5/+5J+l1rO2Sxue4H9Pxl0DZzD+jLIbYf0/g4E1DBZImEOKeUjRynuWgJgyMD8C
+ rSGGfYWOZ1JTxKxzhk+xC7w3FnDM+SOm8z2Ngy/EYGiCBpIeeRZZtOyvaE/c9+bZ8w/ly1wufET
+ sMVUmmREVHFBKZcrsXhAh8DV9d0aZ16gPcO2lhb304Li0o08lKKCOhObA3SOeCi0ZS1dhlNQ+xG
+ 5GfgXp7HXlJmwr47C8Q37ZV+1CDTSWrkY6wddqlVLpitM4Soc0czuOJ04WKX1fYtJaLgOJbqF2g
+ v6hcxhKGyF9w92++dTnyDzP/NIvcMcx3CfqMYFVIHbwwcD0f2lSSpApmmQMlW8+L/KsfwqNMmQo
+ 3XxPPb4HprpSJfrqhCB8TpWX29Eksu+ZUFqdS3G9yAcB7HP2PDQgAczg
+X-Received: by 2002:a05:6000:4685:b0:47f:8ac0:ccb4 with SMTP id
+ ffacd0b85a97d-482e26d9adbmr5887848f8f.10.1787749782170; 
+ Wed, 26 Aug 2026 06:09:42 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482e28f6917sm2635817f8f.35.2026.08.26.06.09.37
+ ffacd0b85a97d-482e28f6917sm2635817f8f.35.2026.08.26.06.09.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 06:09:37 -0700 (PDT)
+ Wed, 26 Aug 2026 06:09:41 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 26 Aug 2026 15:09:34 +0200
-Subject: [PATCH v2 07/14] video: mediatek: add smi larb driver
+Date: Wed, 26 Aug 2026 15:09:36 +0200
+Subject: [PATCH v2 09/14] asm-generic: unaligned: add get_unaligned_le24()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260826-add-genio-510-and-genio-700-hdmi-v2-7-68ebb1bf17df@baylibre.com>
+Message-Id: <20260826-add-genio-510-and-genio-700-hdmi-v2-9-68ebb1bf17df@baylibre.com>
 References: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
 In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -143,58 +142,34 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The SMI local arbiters (larbs) gate a subsystem's access to DRAM. On the
-MT8188 the display data path feeds through the VDO1 larbs (larb2 and
-larb3), whose clocks must be ungated for the HDMI pipeline to reach the
-framebuffer.
-
-There is no dedicated SMI larb driver upstream, as Linux handles the
-larbs through its SMI/IOMMU framework. Add a minimal U-Boot driver that
-binds the "mediatek,mt8188-smi-larb" nodes and ungates their clocks,
-reusing the display pipeline component helpers for the register window
-and clock bulk.
+Add get_unaligned_le24(), mirroring the helper of the same name in
+Linux, to read a 24-bit little-endian value from a possibly unaligned
+buffer. The MediaTek HDMI driver uses it to pack InfoFrame bytes into
+the 24-bit little-endian controller register fields.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/video/mediatek/mtk_smi_larb.c | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+ include/asm-generic/unaligned.h | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/video/mediatek/mtk_smi_larb.c b/drivers/video/mediatek/mtk_smi_larb.c
-new file mode 100644
-index 00000000000..f180c022126
---- /dev/null
-+++ b/drivers/video/mediatek/mtk_smi_larb.c
-@@ -0,0 +1,30 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * MediaTek SMI local arbiter (larb) driver
-+ *
-+ * Copyright (c) 2026 BayLibre, SAS.
-+ * Author: Julien Stephan <jstephan@baylibre.com>
-+ */
+diff --git a/include/asm-generic/unaligned.h b/include/asm-generic/unaligned.h
+index 9e5d93ec304..8a181ba6682 100644
+--- a/include/asm-generic/unaligned.h
++++ b/include/asm-generic/unaligned.h
+@@ -32,6 +32,13 @@ static inline u64 get_unaligned_le64(const void *p)
+ 	return le64_to_cpu(__get_unaligned_t(__le64, p));
+ }
+ 
++static inline u32 get_unaligned_le24(const void *p)
++{
++	const u8 *_p = p;
 +
-+#include <dm.h>
++	return _p[0] | _p[1] << 8 | _p[2] << 16;
++}
 +
-+#include "mtk_disp_comp.h"
-+
-+/*
-+ * The SMI larbs gate a subsystem's access to DRAM. They have no dedicated
-+ * driver upstream (the SMI/IOMMU framework handles them), so bind a minimal
-+ * driver that just ungates their clocks, reusing the display component
-+ * helpers for the register window and clock bulk.
-+ */
-+static const struct udevice_id mtk_smi_larb_ids[] = {
-+	{ .compatible = "mediatek,mt8188-smi-larb" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(mtk_smi_larb) = {
-+	.name	   = "mtk_smi_larb",
-+	.id	   = UCLASS_MISC,
-+	.of_match  = mtk_smi_larb_ids,
-+	.probe	   = mtk_disp_comp_probe,
-+	.priv_auto = sizeof(struct mtk_disp_comp_priv),
-+};
+ static inline void put_unaligned_le16(u16 val, void *p)
+ {
+ 	__put_unaligned_t(__le16, cpu_to_le16(val), p);
 
 -- 
 2.54.0
