@@ -1,118 +1,117 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4907FC61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:09:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 268F5C5DF97
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:09:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EAC186068A;
-	Wed, 26 Aug 2026 13:09:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B938C405CC;
+	Wed, 26 Aug 2026 13:09:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X-9A8xcb-odT; Wed, 26 Aug 2026 13:09:35 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RwCTcJTDBl1U; Wed, 26 Aug 2026 13:09:36 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787749775;
-	bh=VnmAOrxupbcLakfZluk3Ez9grCT+CgSTDbWvRv41TGE=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=D6W/IftGf92aEb3wiQIKXNgK43KJqzEMlKZe6Nd/3PT7+C51zSGHbs8rnenfffBxw
-	 eHrU2EAy8VuSGlBXaTtBkmWWgHE6l2gaPlIv+AqKDfBRydK9WAAMJLsTUtbufjBKNU
-	 TsdcUs06AA7KJ1FyWkHE8DFsCck3NXIyM8kRkJk8W/qqUP6ZaEBSLklgBBfOA+7e8l
-	 knxKRozsh5EXVEt3qm2ots37x+TSD2Pp5a8o61+8m//8U8W5WUR5Vpv7p8wKbJqyro
-	 VDoljPcA3otXji3EHEiy4iodWn944vJayK/O/YNmacwX9f+KbNTjVUIFK5zOLpaiL3
-	 E9dBFccNJcMsQ==
+	d=lists.u-boot-project.org; s=default; t=1787749776;
+	bh=CeNii/h8x96DAcu+8yRjbxWVbuZsbfyVZa64PDS6CQI=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=p+M2EpWhs/+OLASs8eQY1nTll1Q5unNDcEnGfH3+4swHmSd3m0bEbFv2Xg/AgqawB
+	 Vbcco8F1shJqO5LelzlZ2dSvuQ2kEJAMzDL3PpPV/OIwF2ZGJYnulV7TO6z/hPKZmD
+	 0+fI9JvwY3g8LYQbYYKwMADATNOts59lbFyYlIe//yQWDlKrvOBJlSOi4f5xoJdcej
+	 qGDG6xRPG6/k1oHv9BqQj9I7FsCKm9OdWa+/o/vgEBu+nQBqBSfOPKPqBkXJTb2uS9
+	 UR2QsWdYQE3xrNLmwtTjKd6yildW6MxiI41ea3hka/Y26sbmmwHXtoR2q6kGxC5hDG
+	 bDJ7JIlG2zMAg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DD9E6605F0;
-	Wed, 26 Aug 2026 13:09:34 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id E68B63AD
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0CCD4405FB;
+	Wed, 26 Aug 2026 13:09:36 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id EA4DF472
  for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id CD18D80B6A
+ by smtp4.osuosl.org (Postfix) with ESMTP id D0FC040653
  for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OIbdsDm50tbx for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 13:09:32 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XcMFDGhS5m4n for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 13:09:33 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
+ client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=ETP+0bnC
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 56E2F80A4C
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:30 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-47f96c5b722so451165f8f.0
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 06:09:30 -0700 (PDT)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=WAToGFge
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D65CE405CC
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:32 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-499cb997b8fso5283235e9.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 06:09:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787749769; x=1788354569;
+ d=baylibre.com; s=google; t=1787749770; x=1788354570;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=VnmAOrxupbcLakfZluk3Ez9grCT+CgSTDbWvRv41TGE=;
- b=ETP+0bnCbla6QdZS0NxYtV0HspyqKDyZ9KFgIbaIqc0MtmXHDzZOyJIp4k4J6PDXIK
- 9KLp+riGP7TVCBrvjQ1TeKAt/n15LzLoCnUbED5P79E17ncvDYI/X2SMdridXeMZqQ6v
- 00oI3QQu6oEVOTacgcdAvQvtQ8JjZzGgrBrmjAgKgcZcrlmivjLH2N5h3nAviLVzBClq
- bWsSo+03ntzz3dvXwrjOSkR0bKtbqc0FHTPPMaZeM+qsynTPfGGiUsvMJfUyUSy2GjKm
- IWCTOLJBB6lnur4QJtu7CyET+O2bEZ6hjk95oZhJF7RfGWTh1WhGANuYi2cQeJiST9M+
- SM/Q==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=CeNii/h8x96DAcu+8yRjbxWVbuZsbfyVZa64PDS6CQI=;
+ b=WAToGFgervUEhu4MdWlxsLopjJ2e+4kXkl43cj1yRimTizIaWRT7D0xGqadBm60TGl
+ yFxP2owpc7KjwLlyhy/nNdEmSE7yNhWTqTSRg9mLyixNcLNHRDlY+PRglXZEvZ5RlEDt
+ Zbn2sU+vqPnxw6Ua9Xl9ZwjX5vc2IuckitAPbRDVaIWRaobitdcINRTenVaIaYyCvStJ
+ q+vXIQ8H+Qbhsvv2ccOzhMieZAYgdHqoVIXLnQriQlc91Qo6t63q88iYRBMgpgByHMoy
+ ZfMCEFTy2+CK7MQrVzpJF+P9VZq9/pxNzmlEbJFCOFauFUANr5cS/VHKTf5xpYEAX1/5
+ WENA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787749769; x=1788354569;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=VnmAOrxupbcLakfZluk3Ez9grCT+CgSTDbWvRv41TGE=;
- b=DzTdqyd6zVYFTd10LTP+2xzvV//SbkYCft7XILiTrYz4dzsFL9uVkYDTeL58jyl20U
- yCr5gCmW92FblFPiKJNqahW0IpFFLuQLfbbxNk/skSRmM8VR2eoGVnY14IIaXE2xEyLF
- ebhkSdhdE08NCJNk3TiMEVYjRPY5FsgEF09uhW1lNlddFq+zG6l4w0nuvSjGgDzLRLID
- IXv/K8VTIfMERViD603RI9FtwweU2aPnBRIDbbFbB1yTezTHjUFe2of/3nxvSKSnHAEN
- NBnz1xgJS9+5NwHEgrbleZSnDDqNL3SYCLJTzKkTTW3KQqxUbpd7WcEKCcgPvXJltOQv
- MwUg==
-X-Gm-Message-State: AFuF++lySnV9hSAC2pMCea/sv1qh+f/P4062gZHsi5wcTuPzIdOE3djB
- 1f3BVc1oyibX++sS4xJYYFMpkBjBQSTJZoaY8HTOPve4mar6Kec7GB0HX/KsFarVm7E=
-X-Gm-Gg: AR+sD11m6PvSCQuY71yuS+ufsABgSO04bOkp04yegci7RiHKw6xVOuNR5wmqIRj75yL
- ZYMjGYknvv/Std+HBpXBCKsYj3AHFCwFGBLbOHBTLP/YdcBaXdL4yqjDmnzj055RdlFkMa6biET
- ZJdZwmV8IDCKs/SFnFT9fyJ0RNpkyt08apCMn4U5eQ3cmIQCx4KGXvnPFJjp6EatIH8+32ZHoZX
- 4i0/8K7+P8jPlHnN1MhDquMDBmZXZ3YexGhbiVhCkpFUcgE3i+cD9nIP+68Q8fIBbJDnuSUmWug
- mKc7jMJ4kHltJI+Zpt+p+2qxSxATNBOgbit6rlDeogJNVlQFwiByzqft1IBlKTE3IoHECelvkzR
- dMMcjZV9ENOxdzvoYT6gdfzzBBkMnDLF6P7i4CnsGe5GJFaIQVNJ3v1FAOyWrleW73qEC2WKjuq
- HtxBgwgs58rrFmjmLL14b2LD9Y2qycPeaV30lQ+YbYvxHjLduxOBal0l2CS23WcB5Kbc/1iXJr+
- LrnZihlGQaLRCtRsz32qyr+Qz1mCWc/1Zefqg81Q/DQz1drhywrPg6lPoc0TRddaP7yrs+hFayG
- KGKZDx3F3Ld0OjsqzvHf/riKoxZ55JE4JT7sEE+w14ALVA==
-X-Received: by 2002:a05:6000:4715:b0:482:e2ea:7ff6 with SMTP id
- ffacd0b85a97d-482e2ea82b8mr6863253f8f.4.1787749768662; 
- Wed, 26 Aug 2026 06:09:28 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1787749770; x=1788354570;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=CeNii/h8x96DAcu+8yRjbxWVbuZsbfyVZa64PDS6CQI=;
+ b=GW7Luu/h8cdw3zBuJXokwR3LwP94x8/hY+OFRybyIkioDfIqUypBv/BLHjiixyXbsW
+ 8cfmolCDE5FvUmQSTkEghwMyI5uECBQRN9uBVR0JgiB5LJFf/mb/lpkcnpYl3KldL+Cu
+ fI6bwHIqNNLJTWihjaWDlF1Aj50DUpchfclb1FjyVl3q7+J+WjH5+yADflh0TEYxKRnK
+ ejp//Z/Qsp9d7i1bDEA+4mqdTZC7TcqSGD7EAFQGRgbmwNDzvWJDEtS6XYhaew9k6jT8
+ fKWjqcGbtyqMATAXWe0T1Wb5S3n1AMMkXlcvsFNKYrWhKrvY6nyaEmTWDhpP1rlukggw
+ u6Mg==
+X-Gm-Message-State: AFuF++mD27e+nN6UCCFt4JSv5IyN0XDWA4D2Q96h/dq+iTIHywAE7U7/
+ LYFdV9uj6aFNcqtwVTBxkv6gmrI5nky62nkqMmW4qU7Rk0hiUnQazS+2GcHuKVQ6w1c=
+X-Gm-Gg: AR+sD13A9imydg295WKhVqxxRKYMFtk+y4A7DcjbJudVw7gOwoweh+fPjATe7wnEc9P
+ 4en1XZ2T+gUrxd++RsF69f28f4jZi97FfSvamPs5Hty0IUN8dc+9KcD65ITqJiHay7fzr4mTSnf
+ eXgpnGXLTGjhttsurky+3Kwt0jt8i+QA6DmGkcw+w4drvTVx5BjzruKtOy+TLe/RfiFStFXtXS5
+ Q/o0i0zf+2R1GJv+jfPc2QmtZLtoiSc+zQHqc2SI8I7y4xhn4rp7/yPLIh0MpFx2WDzOY3SiqFl
+ LIYmapR0oYOh7Vp9idbTBJ6SovkqEpq0Uyl6U8gXBYL+x+ea6bLjqI5Y1vnHSNL0XqeVKtUCanv
+ l9XzVyslq/5nOM7+M1NMdBEc2iit+CWSr0m17Y13isR6H55/o1/MNpjBB6aKqnqWC+K+qW4zwkN
+ wbdMKs+Qgnb6T0e1dXNuYU1CT81021kPjQpwAL5N2MqFVXSA0Fe9W1N5v78jdV/Jr2hw/L+VIy9
+ 8P85E5Y1SOWqDHFI9Pze8xK1OgB64I/ECcOpC5j9j4EMywS440fzaCYxw1IZWw6Z3D7uUq78mpw
+ xDDNezbvGQfZa/ItqOXl/zIdZKhV/by4g2Wr0EfjKbQHFA==
+X-Received: by 2002:a05:600c:4e4d:b0:495:5890:8f6c with SMTP id
+ 5b1f17b1804b1-499dc7081f2mr61651815e9.7.1787749770234; 
+ Wed, 26 Aug 2026 06:09:30 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482e28f6917sm2635817f8f.35.2026.08.26.06.09.26
+ ffacd0b85a97d-482e28f6917sm2635817f8f.35.2026.08.26.06.09.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 06:09:27 -0700 (PDT)
+ Wed, 26 Aug 2026 06:09:29 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Subject: [PATCH v2 00/14] mediatek: add HDMI pipeline support for MT8188
- based boards
-Date: Wed, 26 Aug 2026 15:09:27 +0200
-Message-Id: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
+Date: Wed, 26 Aug 2026 15:09:28 +0200
+Subject: [PATCH v2 01/14] video: mediatek: add display pipeline component
+ helpers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4WOyw6CMBREf4V07TVtIwVd+R+GRR9XuEZa0yKRE
- P7dgrp2eSaTOTOzhJEwsVMxs4gjJQo+g9wVzHbatwjkMjPJpeIVF6CdgxY9BSgFB+1/VHEOnes
- JrFbSKlNLwS3LM4+IV3ptikvz4fQ0N7TDurs2OkpDiNP2YRRr76uT9X/dKCDntjwYV5XXo+Jno
- 6c7mYh7G3rWLMvyBuREv8DlAAAA
-X-Change-ID: 20260701-add-genio-510-and-genio-700-hdmi-ca62c6b8210c
+Message-Id: <20260826-add-genio-510-and-genio-700-hdmi-v2-1-68ebb1bf17df@baylibre.com>
+References: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
+In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
 To: u-boot@lists.u-boot-project.org
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -144,155 +143,128 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This series adds HDMI support for MT8188 based boards, such as the Genio
-510 and Genio 700 EVKs, in order to display a boot logo over HDMI. It
-builds on top of the HDMI PHY driver [1], the DDC (I2C) driver [2], the
-clock series [3] and a clock fix [4] already sent earlier.
-
-The drivers here, were inspired by the corresponding kernel driver, but
-were largely modified, mainly because U-Boot has no DRM framework and
-the goal is only to display a framebuffer. The HDMI driver locates each
-pipeline component through phandles in the hdmi node and programs them
-directly. The framebuffer and splash screen live in dedicated
-reserved-memory regions.
-
-The video pipeline looks like this:
-
-        reserved-memory (framebuffer, in DRAM)
-                       |
-          +------------+------------+
-          v                         v
-      mdp_rdma4                 mdp_rdma5      two DMA read engines,
-     (left half)               (right half)   each fetching one frame half
-          |                         |
-       padding4                  padding5      (bypass)
-          |                         |
-          +------------+------------+
-                       v
-                  vpp merge (merge3)           recombine the two halves
-                       |
-                       v
-                 ethdr mixer (ethdr0)
-                       |
-                       v
-                  hdr back-end
-                       |
-                       v
-                  vpp merge (merge5)
-                       |
-                       v
-                     dpi1                       timing generator -> HDMI TX
-                       |
-                       v
-      ddc/i2c ---> hdmi tx controller
-    (read EDID)        |
-                       v
-                   hdmi phy
-                       |
-                       v
-              hdmi connector ---> sink
-
-  mutex1  : hardware SOF synchronization across the pipeline
-  vdosys1 : routing muxes (SEL_IN/SOUT) wiring the blocks above
-
-The series adds the HDMI TX controller (UCLASS_VIDEO), a set of shared
-display-component helpers and the individual pipeline components (mixer,
-merge, mutex, padding, rdma, vdosys1, dpi1), and the device-tree glue
-and config that enable the pipeline.
-
-Tested on  Genio 700 EVK: the U-Boot splash logo shows up on an HDMI display.
-
-[1]: https://patchwork.ozlabs.org/project/uboot/patch/20260717-mt8188-add-hdmi-phy-driver-v1-1-4278457fe2cb@baylibre.com/
-[2]: https://patchwork.ozlabs.org/project/uboot/cover/20260717-mt8188-add-ddc-i2c-driver-v1-0-e89ccd173567@baylibre.com/
-[3]: https://patchwork.ozlabs.org/project/uboot/patch/20260715-mt8188-add-clk-add-display-related-clocks-v2-1-0aaf7accaeb0@baylibre.com/
-[4]: https://patchwork.ozlabs.org/project/uboot/patch/20260728-mt8188-clk-fix-top0-gate-polarity-v1-1-56bc92ba6055@baylibre.com/
+Most of the simple display pipeline components share the same probe
+sequence: remap the register window and enable a bulk of clocks. Add
+the mtk_disp_comp helpers holding this boilerplate so each component
+driver only has to provide its own component-specific programming.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
-Changes in v2:
-- Add a common `get_unaligned_le24()` helper for reading 24-bit little-endian values, ported from kernel
-- Add a common `linux/hdmi.h` header with HDMI colorspace and colorimetry enums, based on the corresponding Linux header.
-- Refactor the HDMI driver to use the new common HDMI definitions and unaligned access helper.
-- Rename the mixer component to ETHDR and configure the ETHDR before the remaining display pipeline components.
-- Add the SMI LARB components and configure the VDOSYS1 routing directly from the HDMI driver.
-- Switch display component lookup from phandles to DT aliases and add proper error unwinding for component clocks, HDMI PHY power, and clock resources.
-- Refactor HDMI register access and InfoFrame handling.
-- Improve HDMI mode handling, YUV420 downsampling, TMDS scrambling, deep-color handling, and InfoFrame generation.
-- Move framebuffer/splash reserved-memory definitions to the Genio common U-Boot DTSI and add the corresponding HDMI override node for MT8390/Genio EVKs.
-- Drop the dedicated MT8188 VDOSYS1 pipeline component and its corresponding DTS node, to avoid having 2 nodes with same reg address.
-- Remove the unnecessary `dm_scan_fdt_dev` bind hook from the HDMI driver.
-- Link to v1: https://patch.msgid.link/20260728-add-genio-510-and-genio-700-hdmi-v1-0-ac54bd75f960@baylibre.com
+ drivers/video/mediatek/mtk_disp_comp.c | 68 ++++++++++++++++++++++++++++++++++
+ drivers/video/mediatek/mtk_disp_comp.h | 30 +++++++++++++++
+ 2 files changed, 98 insertions(+)
 
-To: u-boot@lists.u-boot-project.org
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>
-Cc: Weijie Gao <weijie.gao@mediatek.com>
-Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
-Cc: Igor Belwon <igor.belwon@mentallysanemainliners.org>
-Cc: David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Cc: Johan Jonker <jbx6244@gmail.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Pavlo Yadvychuk <pyadvychuk@baylibre.com>
-Cc: Macpaul Lin <Macpaul.Lin@mediatek.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Carlo Caione <ccaione@baylibre.com>
+diff --git a/drivers/video/mediatek/mtk_disp_comp.c b/drivers/video/mediatek/mtk_disp_comp.c
+new file mode 100644
+index 00000000000..3e76eae7f02
+--- /dev/null
++++ b/drivers/video/mediatek/mtk_disp_comp.c
+@@ -0,0 +1,68 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * MediaTek display pipeline component helpers
++ *
++ * Copyright (c) 2026 BayLibre, SAS.
++ * Author: Julien Stephan <jstephan@baylibre.com>
++ */
++
++#include <asm/io.h>
++#include <clk.h>
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <errno.h>
++
++#include "mtk_disp_comp.h"
++
++void mtk_disp_comp_write(struct udevice *dev, u32 offset, u32 val)
++{
++	struct mtk_disp_comp_priv *priv = dev_get_priv(dev);
++
++	writel(val, priv->base + offset);
++}
++
++int mtk_disp_comp_enable(struct udevice *dev)
++{
++	struct mtk_disp_comp_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	ret = clk_enable_bulk(&priv->clk_bulk);
++	if (ret) {
++		dev_err(dev, "failed to enable clocks: %d\n", ret);
++		return ret;
++	}
++
++	return 0;
++}
++
++int mtk_disp_comp_disable(struct udevice *dev)
++{
++	struct mtk_disp_comp_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	ret = clk_disable_bulk(&priv->clk_bulk);
++	if (ret) {
++		dev_err(dev, "failed to disable clocks: %d\n", ret);
++		return ret;
++	}
++
++	return 0;
++}
++
++int mtk_disp_comp_probe(struct udevice *dev)
++{
++	struct mtk_disp_comp_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	priv->base = dev_remap_addr(dev);
++	if (!priv->base)
++		return -EINVAL;
++
++	ret = clk_get_bulk(dev, &priv->clk_bulk);
++	if (ret) {
++		dev_err(dev, "failed to get clocks: %d\n", ret);
++		return ret;
++	}
++
++	return 0;
++}
+diff --git a/drivers/video/mediatek/mtk_disp_comp.h b/drivers/video/mediatek/mtk_disp_comp.h
+new file mode 100644
+index 00000000000..63d740b9212
+--- /dev/null
++++ b/drivers/video/mediatek/mtk_disp_comp.h
+@@ -0,0 +1,30 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * MediaTek display pipeline component helpers
++ *
++ * Copyright (c) 2026 BayLibre, SAS.
++ * Author: Julien Stephan <jstephan@baylibre.com>
++ */
++
++#ifndef _MTK_DISP_COMP_H
++#define _MTK_DISP_COMP_H
++
++#include <clk.h>
++
++struct udevice;
++
++/*
++ * Common state shared by all the simple display pipeline components:
++ * a register window and a bulk of clocks.
++ */
++struct mtk_disp_comp_priv {
++	void __iomem *base;
++	struct clk_bulk clk_bulk;
++};
++
++int mtk_disp_comp_probe(struct udevice *dev);
++int mtk_disp_comp_enable(struct udevice *dev);
++int mtk_disp_comp_disable(struct udevice *dev);
++void mtk_disp_comp_write(struct udevice *dev, u32 offset, u32 val);
++
++#endif /* _MTK_DISP_COMP_H */
 
----
-Julien Stephan (14):
-      video: mediatek: add display pipeline component helpers
-      video: mediatek: add ethdr component
-      video: mediatek: add merge component
-      video: mediatek: add mutex component
-      video: mediatek: add padding component
-      video: mediatek: add rdma component
-      video: mediatek: add smi larb driver
-      video: mediatek: add dpi1 component
-      asm-generic: unaligned: add get_unaligned_le24()
-      include: linux/hdmi.h: add HDMI colorspace and colorimetry enums
-      video: mediatek: add new hdmi driver
-      arm: dts: mt8390: add framebuffer and splash reserved-memory
-      arm: dts: mt8390: add hdmi override node
-      configs: mediatek: mt8188: enable hdmi pipeline
-
- arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi |    1 +
- arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi |    1 +
- arch/arm/dts/mt8390-genio-common-u-boot.dtsi  |   43 +
- configs/mt8188.config                         |   12 +
- drivers/video/Kconfig                         |    1 +
- drivers/video/Makefile                        |    1 +
- drivers/video/mediatek/Kconfig                |   21 +
- drivers/video/mediatek/Makefile               |   16 +
- drivers/video/mediatek/mtk_disp_comp.c        |   68 ++
- drivers/video/mediatek/mtk_disp_comp.h        |   30 +
- drivers/video/mediatek/mtk_disp_merge.c       |  106 +++
- drivers/video/mediatek/mtk_disp_merge.h       |   19 +
- drivers/video/mediatek/mtk_disp_mutex.c       |   63 ++
- drivers/video/mediatek/mtk_disp_mutex.h       |   14 +
- drivers/video/mediatek/mtk_disp_padding.c     |   37 +
- drivers/video/mediatek/mtk_disp_padding.h     |   16 +
- drivers/video/mediatek/mtk_dpi.c              |  379 +++++++++
- drivers/video/mediatek/mtk_dpi.h              |   20 +
- drivers/video/mediatek/mtk_dpi_regs.h         |  113 +++
- drivers/video/mediatek/mtk_ethdr.c            |   76 ++
- drivers/video/mediatek/mtk_ethdr.h            |   16 +
- drivers/video/mediatek/mtk_hdmi.c             | 1102 +++++++++++++++++++++++++
- drivers/video/mediatek/mtk_mdp_rdma.c         |   97 +++
- drivers/video/mediatek/mtk_mdp_rdma.h         |   20 +
- drivers/video/mediatek/mtk_smi_larb.c         |   30 +
- include/asm-generic/unaligned.h               |    7 +
- include/linux/hdmi.h                          |   30 +
- 27 files changed, 2339 insertions(+)
----
-base-commit: 3fc031686aa1d219a113c5a77c165fd0a656076d
-change-id: 20260701-add-genio-510-and-genio-700-hdmi-ca62c6b8210c
-
-Best regards,
---  
-Julien Stephan <jstephan@baylibre.com>
+-- 
+2.54.0
 
