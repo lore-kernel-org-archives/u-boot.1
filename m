@@ -4,109 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F3EAC61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 16:20:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3768C61DBD
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 16:29:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AE12D4055C;
-	Wed, 26 Aug 2026 16:20:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 85B7640550;
+	Wed, 26 Aug 2026 16:29:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eNbHPIstpnJ1; Wed, 26 Aug 2026 16:20:26 +0000 (UTC)
+ id iN8TIVTH2C_S; Wed, 26 Aug 2026 16:29:41 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787761226;
-	bh=xEMNSiwg3AmMaMlNBx1ortkYw5Q4YIe4d57eJ7ub6kw=;
+	d=lists.u-boot-project.org; s=default; t=1787761781;
+	bh=s26RSoHhq6cgOJVWWihO/N0LYxghjKozD3sg7VlIAc8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=SxNR5lpYU9Nv3NDUtIZtRYKuNWWpaL7DrJeMD5aov1oR1E9gpRoJ0WgWKb/sGaVQX
-	 AnwHkLWs5ORkSHrdQ/o5jQdt1insroUItgTzSql8WacArzrvQyTbjEPY2s+WKeAZKZ
-	 5aSFrDgkHnx+CnExaE0MSWJ+Yk/mZ3lQ1TDdzEpI46VDtx/QdJfSTELBfg5GwsM3Bf
-	 8ITDzxdlxbRukq29lkAJ49P6Fov3PLdClCvkz+RJ97fj5c/Y0prQIdqcE8UKrVK/Fr
-	 KZrJsDeSGEG1nukfnabZKlHs7I8qsiYlXE2DyIFLy2FaXAyu8R2+yBK697IaNfC74m
-	 HXdF/LtafDNuA==
+	b=ziOHPcZ246pS/uHgznAVmlYwjua5DorealtLTYi5SrgJEsU9dcDKOrq2DWbr+iCo6
+	 tq250qCWf7SaN5wlP29cz9XPt41dzXeDlobC4e/oGQDZaWV/e/0skFQSGT7hpUOpQb
+	 /bjmbxacInhtfdzGGGQOk8I3EAYwbD6IX9leqDswwxFSHG6k6MrfLtPiDggzucN/Aj
+	 YrqTkWe68Ntj9sHtX2DHrXgF9R/51W8ZSUBNUZ0OaMeLx5XxFbeJ378BZ6Qn0TEX0c
+	 eHmLZcIQvd1S3LWWp2XJH0va+qDoHTcLQbi4zOKcDIgFW4u5Xt8MotCIE0pX35HoPd
+	 TyivFaZa12qaA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6D7584051D;
-	Wed, 26 Aug 2026 16:20:26 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7213D341
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:20:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B2DF44052E;
+	Wed, 26 Aug 2026 16:29:41 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id BED2B341
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:29:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 58436400DC
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:20:24 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A546F80AEA
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:29:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id g-RkISPHVIuY for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 16:20:23 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Qb_k5esIOehW for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 16:29:40 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32e; helo=mail-ot1-x32e.google.com;
+ client-ip=2001:4860:4864:20::2e; helo=mail-oa1-x2e.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=PM6NCciB
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7124C400C2
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:20:23 +0000 (UTC)
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7eb6573bd52so1256610a34.3
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:20:23 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=c7lSWtOA
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 9921F80AAB
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:29:39 +0000 (UTC)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-44cf70de986so911000fac.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:29:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787761222; x=1788366022;
+ d=baylibre.com; s=google; t=1787761778; x=1788366578;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=xEMNSiwg3AmMaMlNBx1ortkYw5Q4YIe4d57eJ7ub6kw=;
- b=PM6NCciBX7/JQtEXuI1SpHdX/CvAg+xBdOv0QYZUckMyRKiJm9mff9jmIoqq9EY0HD
- 6kpfH8sAwi8jBMvYDbKhiQH5u4nEN8GfBMkhkMXG0aOzDA0lgZUcE/R/jMFDHN3RInb4
- EMZ5tESzO3wR0O5UneR9WvS0kk5ORCROc3G3icbTwoDlwBS9GkYVnT4o17ACdB/f8PGk
- VWRkVkPJQ2Z/IRcr6PqeYUmoHLkNfOjdb5d81bkUnw1Z19blOpPQBNpOob+9DZ/Q3Fwp
- SCx3vt9dDUvVPg6ElL7Vd9PT14wpy1xop+nXtOv27IPa8C2IEySFO73QWNRdr+mnAUBh
- zlUQ==
+ :content-type; bh=s26RSoHhq6cgOJVWWihO/N0LYxghjKozD3sg7VlIAc8=;
+ b=c7lSWtOADCBtMbhZa3pllYw59qSHXyVHQBoNg94rx+dumJxoQsE7fsvdR8jAn42HgC
+ DklDJ3RklzJ2XODcPPZY40BlWivgfzzJ56TRNQD31B7JI3Ve2bE2TlHKcpnMdw4MxEv6
+ NaN576vqIoi3BSebAhBGFkLgqoeZRNf/m5jSsSgwG05w/q6oY3M7PoQOLho0/+Kknyni
+ oz0LKRCVNZ41GZqk/VSnBnVQ4BPKaeXSkFnndjTC/emx+ZIq93f0sxCoaPPPd04TgZhn
+ e4Qge+zaDZLvP+xF0bUWUGNUijO6ehuVjgOXrXl5ZzIh3W9ZyNaYBTNmtWNHdzpSrA4n
+ h7Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787761222; x=1788366022;
+ d=1e100.net; s=20251104; t=1787761778; x=1788366578;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=xEMNSiwg3AmMaMlNBx1ortkYw5Q4YIe4d57eJ7ub6kw=;
- b=Z2X9LO5nCoQ0cOEs1I+RZFGR1NM9akQb0iBk/RBNobY7kXRMzwmVe+pX3i3owS9NA6
- NG85W8MG42mo75DRbUnwjLynSHyd0YWphazuDxgREnT+GMbjdyemghh3+QTLT0MqiKK4
- 81XO8qRZQfKjxvsFihgmyr/cLZLQK9Ui1IVj/24p6koWWdUY1pTb7Uke3gez48C4Nbzq
- LJz4i8oAEnLW2SGg43B+mFt8Ac5aO5WqAv/LeVDJMmijRxr8kVg/akdSTACvDOLPxy6J
- 7h0XhBqo1kg5gP6VkqZsjc9F1ICkPk5f+/iRfAev5pp4lkkL2tCxVTdhL6A2kGQoViWo
- UZew==
+ bh=s26RSoHhq6cgOJVWWihO/N0LYxghjKozD3sg7VlIAc8=;
+ b=eV+d11XFtCMIRmnNmgP/zuEpwAVvNJRhH3iGwDD9+23BP6FqDP0S01jCiCVFgzIljd
+ L437/V6tCPNGSGifVZ2XHpeVq1fDlux4dH5JJAOsh8uGSaB+YwupoPW1N2R7Fvqss1gL
+ 7Vc3IbXQJgq8L4/eaE9iXlc4+QB6T/ZzHeNEYrHKce2YfWsvHreV6Xpza/2qaLHpjrkg
+ J4mE7J3V6aasS0bI0TkY5bQFEsL13CQidAvLD1dQWp0J0TJT3IYfuM2vcP2HWOR8NCan
+ AMV9clMv4a1YkcrALJg0YbaI6ud8NTkZGoyBXtEZxAcMZLoxyMY8fIy+vI1ovOsQ6/wb
+ ybvw==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rqz/+pm9TjG7q3VhVjWCa50kdoapESIPQpB1ouRFUWsqnhixBgHryhpZA8bLea66soeRDqmcno=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++llGoUt7VNS5Ax6TTh98t0XrDcSjIby0JSleqMwJ73V7lUaVjeh
- GIaGhhlp96/b/BnuvGavnEEnKGdDHFZnbbEwLQo2XAKx8RTnuPE6R7Jq/C0okwaRSUk=
-X-Gm-Gg: AR+sD117RkKPgBmo/0o1Gk8mGJYyUgg6WevTy95Fx78s+5YIi6/5lvCKea9cdayglx0
- 1UiU4NepvkYxMeGJHVbGDMGhGq7ku7tnd3RYCnyPQMEXH5UO76brVJt4sU/do1/o1bFAeSmeZk2
- UYrF7actq6Rt20zZ3kf/NlxJdR6KYR2Eg/yqNP2TEISgjI6kygc1tS+JVg/51P2EdhH+VYSzoFL
- e3dZg16U7S6mu23FHh4WTNfy3fwMo0Mad9ZktgyWOYzeWBHi7WcmSHm45AQkzI0L8ex5U5nOoL4
- Rf/udjNonQQ5D6itLP+QSNy6ffnbS4sWzyDc/TT64lvotEZzYnFmr6JOxgYGQZo/5iCljAnmMxQ
- Q/06BjG6jd1TRlqqIRXOl5scCc6CM8yECNhuG1PIjqsVZMyYaS1oos5kpOo2nP7nBCmLUA5fCvM
- nZwCkwiGGW8AKZlxs2DmCx9HIf98pmHGWG8L4QPK07Wh5J0NTnf4HMRG3mB0gCReqsEH+MAhxlr
- u3/FWzBPKWThofC6kj1AZpqvyPgiZ+aroI+rrf4
-X-Received: by 2002:a05:6830:2aa5:b0:7e9:e8a6:6389 with SMTP id
- 46e09a7af769-7f4c4bd5adcmr9175752a34.4.1787761221962; 
- Wed, 26 Aug 2026 09:20:21 -0700 (PDT)
+ AHgh+Rq9IgqTBvTHTvNcrDzONOxksNrXsqxZf+g2XDGOTNBhznNTI+5pACnji1OOOKpPO9F0Fghk0P8=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lBsLIalK1zGmSou9HdTkudbrv+RBaXnam7ajyDkVmkqJkSowKI
+ 4Ht70VCyYUp3E2yeIckEmKRh43+mpvjWvLFiaeSwVTT9M6rlMNmo7yugjQ2fh7TqVCc=
+X-Gm-Gg: AR+sD10ClnNg8ofMZJxr8mgsdpL9R73IC3eGA/NNrCuqQ3WYCLOGFZurRrt9Qscszv7
+ 1jBcpI9JpIDhfA9tnkesl+tLIY2enz/Qxg3j+hKcQY9opaz4/ODW2jJbmdY3OvPfU7Cm8zjBUB2
+ PbL1tWORCrV799orbcONDiAufSUBzTviovp+B44QG8l9wE8W9H71BcqjFa4AKH9bp0x4MEaawD0
+ vfF5wPMstU/Tax2p/Rl/WjrlxQX5tGDDMOK3myuWgtrz1W+JMEVorF+K1+aLi1lkUBx09ibUG/+
+ HJaZxbWs1IMmyq9RWh2cau6WQ/vDNCvTcwKiHz4eCqAZ09ygUJFwDdBSwMEiYZUFcmFUqNQ1hJ1
+ DDmq4b8tAXmnCUL74gvk7kHmAWNqOmauyMwOHAy27+FVk8TZBfLR/VMlZnKqiXBVBuEhj3q5AEz
+ kbh/Q0w1bdqIRY01bQvOmHASgu0i2WrL0we+V68yS9meIou1zgT7DmRnim8Eeq58I9f4Wui6Kuy
+ axX+dwiaYEpUoyCkvSG8Wvj6UQaHbZUTFKS7m5I5qYOcgSOBw==
+X-Received: by 2002:a05:6870:c251:b0:456:9fdc:a86 with SMTP id
+ 586e51a60fabf-4659a8d9ff8mr7790522fac.10.1787761777843; 
+ Wed, 26 Aug 2026 09:29:37 -0700 (PDT)
 Received: from ?IPV6:2600:8803:e7e4:500:162c:81fd:da88:2ea6?
  ([2600:8803:e7e4:500:162c:81fd:da88:2ea6])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f4c818350dsm1945446a34.3.2026.08.26.09.20.20
+ 586e51a60fabf-465ad9f3711sm2612766fac.3.2026.08.26.09.29.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Aug 2026 09:20:21 -0700 (PDT)
-Message-ID: <81f26515-d649-4e83-86aa-03a640e2a84c@baylibre.com>
-Date: Wed, 26 Aug 2026 11:20:20 -0500
+ Wed, 26 Aug 2026 09:29:29 -0700 (PDT)
+Message-ID: <27ca94c2-f4d3-4bc0-862c-6077ed33e0c6@baylibre.com>
+Date: Wed, 26 Aug 2026 11:29:28 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 04/14] video: mediatek: add mutex component
+Subject: Re: [PATCH v2 06/14] video: mediatek: add rdma component
 To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -124,10 +124,10 @@ Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Rasmus Villemoes <ravi@prevas.dk>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>
 References: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
- <20260826-add-genio-510-and-genio-700-hdmi-v2-4-68ebb1bf17df@baylibre.com>
+ <20260826-add-genio-510-and-genio-700-hdmi-v2-6-68ebb1bf17df@baylibre.com>
 Content-Language: en-US
 From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-4-68ebb1bf17df@baylibre.com>
+In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-6-68ebb1bf17df@baylibre.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -144,108 +144,159 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 On 8/26/26 8:09 AM, Julien Stephan wrote:
-> The display mutex synchronizes the components of the video pipeline
-> on some MediaTek SoCs, such as the MT8188. Only the modules of the
-> DPI1 pipeline are attached to mutex1; the module bit indices follow
-> the Linux mtk-mutex driver (MT8188_MUTEX_MOD_DISP1_*).
+> The MDP RDMA is the DMA engine reading the framebuffer on some
+> MediaTek SoCs, such as the MT8188. Two instances are used, each
+> reading one half of the frame; the second one starts at the middle of
+> the line (apply_offset).
 > 
 > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 > ---
->  drivers/video/mediatek/mtk_disp_mutex.c | 63 +++++++++++++++++++++++++++++++++
->  drivers/video/mediatek/mtk_disp_mutex.h | 14 ++++++++
->  2 files changed, 77 insertions(+)
+>  drivers/video/mediatek/mtk_mdp_rdma.c | 97 +++++++++++++++++++++++++++++++++++
+>  drivers/video/mediatek/mtk_mdp_rdma.h | 20 ++++++++
+>  2 files changed, 117 insertions(+)
 > 
-> diff --git a/drivers/video/mediatek/mtk_disp_mutex.c b/drivers/video/mediatek/mtk_disp_mutex.c
+> diff --git a/drivers/video/mediatek/mtk_mdp_rdma.c b/drivers/video/mediatek/mtk_mdp_rdma.c
 > new file mode 100644
-> index 00000000000..8619d9491a2
+> index 00000000000..eb8b673477f
 > --- /dev/null
-> +++ b/drivers/video/mediatek/mtk_disp_mutex.c
-> @@ -0,0 +1,63 @@
+> +++ b/drivers/video/mediatek/mtk_mdp_rdma.c
+> @@ -0,0 +1,97 @@
 > +// SPDX-License-Identifier: GPL-2.0
 > +/*
-> + * Mediatek Video Disp Mutex Support
+> + * Mediatek Video MDP RDMA Support
 > + *
 > + * Copyright (c) 2026 BayLibre, SAS.
 > + * Author: Julien Stephan <jstephan@baylibre.com>
 > + */
 > +
 > +#include <dm.h>
+> +#include <video.h>
 > +
 > +#include "mtk_disp_comp.h"
-> +#include "mtk_disp_mutex.h"
+> +#include "mtk_mdp_rdma.h"
 > +
-> +#define DISP_MUTEX1_EN		0x40
-> +#define DISP_MUTEX1_CTL		0x4c
+> +/* MDP RDMA registers */
+> +#define MDP_RDMA_EN				0x0000
+> +#define MDP_RDMA_EN_ENABLE			BIT(0)
+> +#define MDP_RDMA_EN_DISABLE			0
+> +#define MDP_RDMA_EN_INTERNAL_DCM_EN		GENMASK(23, 4)
+> +
+> +#define MDP_RDMA_SRC_CON			0x0030
+> +#define MDP_RDMA_SRC_FORMAT_BGRA8888		2
 
-This currently hard-codes use of mutex1, but DSI will also use this driver
-with mutex0. Might as well make it support both now to avoid churn later.
+Shouldn't this be XRGB888?
 
-> +#define MUTEX_SOF_DPI1		0x5
-> +#define MUTEX_EOF_DPI1		(0x5 << 7)
-> +#define DISP_MUTEX1_MOD0	0x50
-> +#define DISP_MUTEX1_MOD1	0x54
+> +#define MDP_RDMA_SRC_CON_SRC_FORMAT(x)		((x) & GENMASK(3, 0))
+> +#define MDP_RDMA_ENABLE_UNIFORM_CONFIG		BIT(17)
+> +#define MDP_RDMA_ENABLE_ARGB_OUTPUT		BIT(25)
 > +
-> +/*
-> + * Modules attached to mutex1, bit indices as in the Linux mtk-mutex
-> + * driver (MT8188_MUTEX_MOD_DISP1_*). MOD0 holds modules 0-31, MOD1
-> + * holds modules 32-63.
-> + */
-> +#define MUTEX_MOD0_MDP_RDMA4	BIT(4)
-> +#define MUTEX_MOD0_MDP_RDMA5	BIT(5)
-> +#define MUTEX_MOD0_PADDING4	BIT(12)
-> +#define MUTEX_MOD0_PADDING5	BIT(13)
-> +#define MUTEX_MOD0_VPP_MERGE2	BIT(22)
-> +#define MUTEX_MOD0_VPP_MERGE4	BIT(24)
-> +#define MUTEX_MOD0_DISP_MIXER	BIT(30)
-> +#define MUTEX_MOD1_DPI1		BIT(38 - 32)
+> +#define MDP_RDMA_SRC_BASE_0			0x0f00
+> +#define MDP_RDMA_MF_BKGD_SIZE_IN_BYTE		0x0060
+> +#define MDP_RDMA_MF_SRC_SIZE			0x0070
+> +#define MDP_RDMA_MF_CLIP_SIZE			0x0078
+> +#define MDP_RDMA_SRC_OFFSET_0			0x0118
 > +
-> +void mtk_disp_mutex_config(struct udevice *dev)
+> +#define MDP_RDMA_CON				0x0020
+> +#define MDP_RDMA_CON_SIMPLE_MODE		BIT(4)
+> +
+> +#define MDP_RDMA_TRANSFORM_0			0x0200
+> +#define MDP_RDMA_TRANSFORM_BITEXTEND_ZERO	BIT(15)
+> +
+> +#define FB_BYTES_PER_PIXEL			4
+> +
+> +void mtk_mdp_rdma_config(struct udevice *dev, struct video_uc_plat *plat,
+> +			 const struct display_timing *timing,
+> +			 bool apply_offset)
 > +{
-> +	/* the pipeline for the hdmi connection ends with DPI1 -> HDMI */
-> +	mtk_disp_comp_write(dev, DISP_MUTEX1_CTL,
-> +			    MUTEX_EOF_DPI1 | MUTEX_SOF_DPI1);
+> +	u32 width = timing->hactive.typ;
+> +	u32 height = timing->vactive.typ;
+> +	u32 fb = plat->base;
+
+This breaks if base is ever above 4GB. It probably shouldn't be since it is
+used with DMA, but might not hurt to error if it is out of range rather
+than silently using the wrong address.
+
+> +	int offset = apply_offset ? ((width / 2) * FB_BYTES_PER_PIXEL) : 0;
 > +
-> +	/* attach the modules of the DPI1 pipeline to mutex1 */
-> +	mtk_disp_comp_write(dev, DISP_MUTEX1_MOD0,
-> +			    MUTEX_MOD0_MDP_RDMA4 | MUTEX_MOD0_MDP_RDMA5 |
-> +			    MUTEX_MOD0_PADDING4 | MUTEX_MOD0_PADDING5 |
-> +			    MUTEX_MOD0_VPP_MERGE2 | MUTEX_MOD0_VPP_MERGE4 |
-> +			    MUTEX_MOD0_DISP_MIXER);
-> +	mtk_disp_comp_write(dev, DISP_MUTEX1_MOD1, MUTEX_MOD1_DPI1);
+> +	mtk_disp_comp_write(dev, MDP_RDMA_EN, MDP_RDMA_EN_INTERNAL_DCM_EN);
 > +
-> +	mtk_disp_comp_write(dev, DISP_MUTEX1_EN, 0x1);
+> +	/* set source format and output bit depth */
+> +	mtk_disp_comp_write(dev, MDP_RDMA_SRC_CON,
+> +			    MDP_RDMA_SRC_CON_SRC_FORMAT(MDP_RDMA_SRC_FORMAT_BGRA8888) |
+> +			    MDP_RDMA_ENABLE_ARGB_OUTPUT |
+> +			    MDP_RDMA_ENABLE_UNIFORM_CONFIG);
+> +
+> +	/* set base address */
+> +	mtk_disp_comp_write(dev, MDP_RDMA_SRC_BASE_0, fb);
+> +
+> +	/* stride: aligned width * bytes-per-pixel */
+> +	mtk_disp_comp_write(dev, MDP_RDMA_MF_BKGD_SIZE_IN_BYTE,
+> +			    ALIGN(width, 4) * FB_BYTES_PER_PIXEL);
+
+Should we be using priv->line_length here" from patch 11 (and make sure
+line_length is aligned)?
+
+> +
+> +	/*
+> +	 * each of the two RDMAs reads one half of the frame: size and
+> +	 * clip cover half the width, and the second RDMA (apply_offset)
+> +	 * starts at the middle of the line
+> +	 */
+> +	mtk_disp_comp_write(dev, MDP_RDMA_MF_SRC_SIZE,
+> +			    (height << 16) | (width / 2));
+> +	mtk_disp_comp_write(dev, MDP_RDMA_MF_CLIP_SIZE,
+> +			    (height << 16) | (width / 2));
+> +	mtk_disp_comp_write(dev, MDP_RDMA_SRC_OFFSET_0, offset);
+> +
+> +	/* simple mode + zero bit extension for 8bit -> 10bit */
+> +	mtk_disp_comp_write(dev, MDP_RDMA_CON, MDP_RDMA_CON_SIMPLE_MODE);
+> +	mtk_disp_comp_write(dev, MDP_RDMA_TRANSFORM_0,
+> +			    MDP_RDMA_TRANSFORM_BITEXTEND_ZERO);
+> +
+> +	/* enable engine */
+> +	mtk_disp_comp_write(dev, MDP_RDMA_EN,
+> +			    MDP_RDMA_EN_INTERNAL_DCM_EN | MDP_RDMA_EN_ENABLE);
 > +}
 > +
-> +static const struct udevice_id mtk_disp_mutex_ids[] = {
-> +	{ .compatible = "mediatek,mt8188-disp-mutex" },
+> +static const struct udevice_id mtk_mdp_rdma_ids[] = {
+> +	{ .compatible = "mediatek,mt8188-vdo1-rdma" },
+
+Another one where the mt8189 fallback should work.
+
 > +	{}
 > +};
 > +
-> +U_BOOT_DRIVER(mtk_disp_mutex) = {
-> +	.name	   = "mtk_disp_mutex",
+> +U_BOOT_DRIVER(mtk_mdp_rdma) = {
+> +	.name	   = "mtk_mdp_rdma",
 > +	.id	   = UCLASS_MISC,
-> +	.of_match  = mtk_disp_mutex_ids,
+> +	.of_match  = mtk_mdp_rdma_ids,
 > +	.probe	   = mtk_disp_comp_probe,
 > +	.priv_auto = sizeof(struct mtk_disp_comp_priv),
 > +};
-> diff --git a/drivers/video/mediatek/mtk_disp_mutex.h b/drivers/video/mediatek/mtk_disp_mutex.h
+> diff --git a/drivers/video/mediatek/mtk_mdp_rdma.h b/drivers/video/mediatek/mtk_mdp_rdma.h
 > new file mode 100644
-> index 00000000000..cbf8a9f0537
+> index 00000000000..aa2585e9c27
 > --- /dev/null
-> +++ b/drivers/video/mediatek/mtk_disp_mutex.h
-> @@ -0,0 +1,14 @@
+> +++ b/drivers/video/mediatek/mtk_mdp_rdma.h
+> @@ -0,0 +1,20 @@
 > +/* SPDX-License-Identifier: GPL-2.0 */
 > +/*
+> + * Mediatek Video MDP RDMA Support
+> + *
 > + * Copyright (c) 2026 BayLibre, SAS.
 > + * Author: Julien Stephan <jstephan@baylibre.com>
 > + */
 > +
-> +#ifndef _MTK_DISP_MUTEX_H
-> +#define _MTK_DISP_MUTEX_H
+> +#ifndef _MTK_MDP_RDMA_H
+> +#define _MTK_MDP_RDMA_H
 > +
 > +struct udevice;
+> +struct video_uc_plat;
+> +struct display_timing;
 > +
-> +void mtk_disp_mutex_config(struct udevice *dev);
+> +void mtk_mdp_rdma_config(struct udevice *dev, struct video_uc_plat *plat,
+> +			 const struct display_timing *timing,
+> +			 bool apply_offset);
 > +
 > +#endif
 > 
