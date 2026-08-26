@@ -4,132 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3768C61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 16:29:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83A5EC5DF97
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 16:34:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 85B7640550;
-	Wed, 26 Aug 2026 16:29:42 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4099F4051D;
+	Wed, 26 Aug 2026 16:34:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iN8TIVTH2C_S; Wed, 26 Aug 2026 16:29:41 +0000 (UTC)
+ id hBGV-VbLnRUT; Wed, 26 Aug 2026 16:34:30 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787761781;
-	bh=s26RSoHhq6cgOJVWWihO/N0LYxghjKozD3sg7VlIAc8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ziOHPcZ246pS/uHgznAVmlYwjua5DorealtLTYi5SrgJEsU9dcDKOrq2DWbr+iCo6
-	 tq250qCWf7SaN5wlP29cz9XPt41dzXeDlobC4e/oGQDZaWV/e/0skFQSGT7hpUOpQb
-	 /bjmbxacInhtfdzGGGQOk8I3EAYwbD6IX9leqDswwxFSHG6k6MrfLtPiDggzucN/Aj
-	 YrqTkWe68Ntj9sHtX2DHrXgF9R/51W8ZSUBNUZ0OaMeLx5XxFbeJ378BZ6Qn0TEX0c
-	 eHmLZcIQvd1S3LWWp2XJH0va+qDoHTcLQbi4zOKcDIgFW4u5Xt8MotCIE0pX35HoPd
-	 TyivFaZa12qaA==
+	d=lists.u-boot-project.org; s=default; t=1787762070;
+	bh=3OsZCgGWRFZPs9fH8sR4E2bJnzrOO5oIpNsMRLDA+xg=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=nkJIoBuBB4JViCn5KBPdzgyltb5YntnBxlFdIjTI9/sR2DF9L9OmuUj+Vk7VyYQFg
+	 J+KkhBBqOKX6n/dGLlkpzXz9jj6NGepWZhtM1eGvZHGJJcRyPMyvGUn0N/BIDtgxln
+	 NF0iCuhGzgpq3yuOAWq8f9OALIIAXQzf6EA+h0OCE/fLxHnDEpkx5s8Iw3fUeAI4PH
+	 qgrDa8A636aPeBKVWqC67t3At+BaG+IA7qPMU/vDxwweOuDkKIKcSdCKp3FyAr/2Qv
+	 oSJwDhjxLLWbEjAqzj5xTQwrtuMIyEbiugZT1hbDOtDHmFgpnvo9y5S4e4eZ1D0Dds
+	 MI5a38OpTbJ+g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B2DF44052E;
-	Wed, 26 Aug 2026 16:29:41 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id BED2B341
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:29:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3E4EB4052E;
+	Wed, 26 Aug 2026 16:34:30 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7850629B
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:34:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A546F80AEA
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:29:40 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 69DB280AEA
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:34:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Qb_k5esIOehW for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 16:29:40 +0000 (UTC)
+ id RCaFhicNkM4f for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 16:34:27 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::2e; helo=mail-oa1-x2e.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=c7lSWtOA
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9921F80AAB
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:29:39 +0000 (UTC)
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-44cf70de986so911000fac.0
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:29:39 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::632; helo=mail-ej1-x632.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=lEtIyCWD
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1693980AAB
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:34:26 +0000 (UTC)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-c15e2dab83eso180702066b.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:34:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787761778; x=1788366578;
+ d=flipper.net; s=google; t=1787762064; x=1788366864;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=s26RSoHhq6cgOJVWWihO/N0LYxghjKozD3sg7VlIAc8=;
- b=c7lSWtOADCBtMbhZa3pllYw59qSHXyVHQBoNg94rx+dumJxoQsE7fsvdR8jAn42HgC
- DklDJ3RklzJ2XODcPPZY40BlWivgfzzJ56TRNQD31B7JI3Ve2bE2TlHKcpnMdw4MxEv6
- NaN576vqIoi3BSebAhBGFkLgqoeZRNf/m5jSsSgwG05w/q6oY3M7PoQOLho0/+Kknyni
- oz0LKRCVNZ41GZqk/VSnBnVQ4BPKaeXSkFnndjTC/emx+ZIq93f0sxCoaPPPd04TgZhn
- e4Qge+zaDZLvP+xF0bUWUGNUijO6ehuVjgOXrXl5ZzIh3W9ZyNaYBTNmtWNHdzpSrA4n
- h7Aw==
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=3OsZCgGWRFZPs9fH8sR4E2bJnzrOO5oIpNsMRLDA+xg=;
+ b=lEtIyCWDfJTi0EcbIYsyqsNcEJpIT9PJEjxrY6L1XCr245mF5qKFwTvfIWlp1EgclE
+ VhhYZ9c6H9DkdpZs87T13VcAaaPHex/l4XCJq5GV6cLld6GBXcokMDrnzZwHc/eCY4uf
+ SGyqzxGw2KNnhxk7B0kkG+jcYnFU5NBX4Sosqi6rhsv89xYe0d6dnqVEPvvw2qLfN80a
+ gHDR4CdQh3hpFD6S8JkJnG3c5YvKaEGJdfffz36hbBUch6v0CzOCLct8kiRIKPF2boKb
+ OzMIYvLhC2U62oRXFL4/yeFYXrtYabk8tIGNLjc7ibYXrd4WLLk9nfI0LOrGY/gHppXU
+ Tc9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787761778; x=1788366578;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=s26RSoHhq6cgOJVWWihO/N0LYxghjKozD3sg7VlIAc8=;
- b=eV+d11XFtCMIRmnNmgP/zuEpwAVvNJRhH3iGwDD9+23BP6FqDP0S01jCiCVFgzIljd
- L437/V6tCPNGSGifVZ2XHpeVq1fDlux4dH5JJAOsh8uGSaB+YwupoPW1N2R7Fvqss1gL
- 7Vc3IbXQJgq8L4/eaE9iXlc4+QB6T/ZzHeNEYrHKce2YfWsvHreV6Xpza/2qaLHpjrkg
- J4mE7J3V6aasS0bI0TkY5bQFEsL13CQidAvLD1dQWp0J0TJT3IYfuM2vcP2HWOR8NCan
- AMV9clMv4a1YkcrALJg0YbaI6ud8NTkZGoyBXtEZxAcMZLoxyMY8fIy+vI1ovOsQ6/wb
- ybvw==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rq9IgqTBvTHTvNcrDzONOxksNrXsqxZf+g2XDGOTNBhznNTI+5pACnji1OOOKpPO9F0Fghk0P8=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lBsLIalK1zGmSou9HdTkudbrv+RBaXnam7ajyDkVmkqJkSowKI
- 4Ht70VCyYUp3E2yeIckEmKRh43+mpvjWvLFiaeSwVTT9M6rlMNmo7yugjQ2fh7TqVCc=
-X-Gm-Gg: AR+sD10ClnNg8ofMZJxr8mgsdpL9R73IC3eGA/NNrCuqQ3WYCLOGFZurRrt9Qscszv7
- 1jBcpI9JpIDhfA9tnkesl+tLIY2enz/Qxg3j+hKcQY9opaz4/ODW2jJbmdY3OvPfU7Cm8zjBUB2
- PbL1tWORCrV799orbcONDiAufSUBzTviovp+B44QG8l9wE8W9H71BcqjFa4AKH9bp0x4MEaawD0
- vfF5wPMstU/Tax2p/Rl/WjrlxQX5tGDDMOK3myuWgtrz1W+JMEVorF+K1+aLi1lkUBx09ibUG/+
- HJaZxbWs1IMmyq9RWh2cau6WQ/vDNCvTcwKiHz4eCqAZ09ygUJFwDdBSwMEiYZUFcmFUqNQ1hJ1
- DDmq4b8tAXmnCUL74gvk7kHmAWNqOmauyMwOHAy27+FVk8TZBfLR/VMlZnKqiXBVBuEhj3q5AEz
- kbh/Q0w1bdqIRY01bQvOmHASgu0i2WrL0we+V68yS9meIou1zgT7DmRnim8Eeq58I9f4Wui6Kuy
- axX+dwiaYEpUoyCkvSG8Wvj6UQaHbZUTFKS7m5I5qYOcgSOBw==
-X-Received: by 2002:a05:6870:c251:b0:456:9fdc:a86 with SMTP id
- 586e51a60fabf-4659a8d9ff8mr7790522fac.10.1787761777843; 
- Wed, 26 Aug 2026 09:29:37 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:162c:81fd:da88:2ea6?
- ([2600:8803:e7e4:500:162c:81fd:da88:2ea6])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-465ad9f3711sm2612766fac.3.2026.08.26.09.29.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Aug 2026 09:29:29 -0700 (PDT)
-Message-ID: <27ca94c2-f4d3-4bc0-862c-6077ed33e0c6@baylibre.com>
-Date: Wed, 26 Aug 2026 11:29:28 -0500
+ d=1e100.net; s=20251104; t=1787762064; x=1788366864;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=3OsZCgGWRFZPs9fH8sR4E2bJnzrOO5oIpNsMRLDA+xg=;
+ b=IDX4vbHUiaRg3o6afmkAgtJCWW3QDS6y2UxfiESgIRv+Lk0KsI4xQHQDeOEdhbxrPB
+ NjT8B7eO/9YPNzoptA+59rh6xze3T1dt0iZOi5w2RhP/01yk58avwr2Dlk/1rZRDuOmO
+ IBru86tRdIH5jm78MLvty7/AktteHl39QltC22dKkPd+zR74XPlIPavo8DNzCuuSpHjw
+ bPGAYLHoFlv5c6kbOUGp5R7oMaR+SEWzVwBsj9cHnmWpjG+zHfF2+pQacQZzCPF02pPX
+ 0Bvg/LcJ75h6hzIinKAgOPPmIoJ7Cmsm13iade0yjNbjynVqXuKvrIK4arQJE7STCtnd
+ kgbw==
+X-Gm-Message-State: AFuF++mvcav3FtjDbc0gq21f/RcCtfqsB4I20mm378cGixYDPUTM/9Bi
+ JHkaAWdnsVS+Se9hl9OefXBoodweoBVfyQhYqU0kURiEKoS+4dnGz1H8dhEFy6cx4LQ=
+X-Gm-Gg: AR+sD12w/SWQKjM4YBp/VIjAgYnTJQxiwmjHcZ6/lbiYOQ7jEJi68SUtIqvD2HlKhxY
+ 0myv22GL0oKEC/BAjnCFEIqWxt1MDDyiOJsgvMnHAcyEubWp/CtqGLWmtLEbJOsYSvlljUVdZzh
+ Uw9IQj2/iPV9rnSC1treAp2ag8V2sqS9sWvdMuO9O4gT8RPQ2ZcGMxPOI8xBRvQSQWqsaG31PpN
+ WWIPoNRlZpPfvSXl+n5WoHOogo54xssFh7Cvy3AJncuNXrQBBVUB4av5KJ4wBp6+q9YMpN8gFPr
+ Kn2JiXK6Ko+x5qSmKhnCjNIIrr+tnoXLxR14jfEX7h64YedYkCdx0EvHoZuFkl4L8mPkg1A9OCG
+ d+p/I9V5MIhtRANMyRmeb74cXD7bTvpQvMmAAAyHwsfyfQdzesC8wLC/XDfSmcb/Nhd0eHDzP1Y
+ pI24kLAfzHoEdbAd1PFHId6Q9/o76Aa89Zv2TiCT9lYGR7uvlEv2r8zkGpgY3C9gaY7kAPVZik5
+ F5dawy9hi/YZoesgzDEDKhKBsLV7qa3whaiyPhPmw==
+X-Received: by 2002:a17:907:c408:b0:c24:6045:2a94 with SMTP id
+ a640c23a62f3a-c250bbbefa3mr1310680466b.4.1787762064474; 
+ Wed, 26 Aug 2026 09:34:24 -0700 (PDT)
+Received: from alchark-surface.localdomain (bba-86-98-192-94.alshamil.net.ae.
+ [86.98.192.94]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c250a704e55sm544907666b.21.2026.08.26.09.34.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Aug 2026 09:34:24 -0700 (PDT)
+From: Alexey Charkov <alchark@flipper.net>
+Subject: [PATCH v2 00/13] pxe_utils: small fixups, implement BLS type 1
+ boot on top of them
+Date: Wed, 26 Aug 2026 20:33:52 +0400
+Message-Id: <20260826-bls-v2-0-17df3c9548ba@flipper.net>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/14] video: mediatek: add rdma component
-To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Johan Jonker <jbx6244@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Pavlo Yadvychuk <pyadvychuk@baylibre.com>,
- Macpaul Lin <Macpaul.Lin@mediatek.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Carlo Caione <ccaione@baylibre.com>, Julien Masson <jmasson@baylibre.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-References: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
- <20260826-add-genio-510-and-genio-700-hdmi-v2-6-68ebb1bf17df@baylibre.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-6-68ebb1bf17df@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/1WNQQ6CMBREr0L+2pp+IDW68h6EBS2DfEMKaZFoS
+ O8u4MrlS968WSkiCCLdspUCFoky+g3yU0aub/wDStqNKde50UaXyg5RtdY0hbZXLhrQZk4Bnby
+ PSlX/OL7sE27ep7vRS5zH8DluFt69/+LCSqvSwbQMlBfmezfINCGcPWaqU0pfYnsnF6oAAAA=
+X-Change-ID: 20260604-bls-db6a30b913ae
+To: u-boot@lists.u-boot-project.org
+Cc: Alexey Charkov <alchark@flipper.net>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Daniel Golle <daniel@makrotopia.org>, 
+ Johan Jonker <jbx6244@gmail.com>, "Lucien.Jheng" <lucienzx159@gmail.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>, 
+ Vincent Jardin <vjardin@free.fr>, Denis Mukhin <dmukhin@ford.com>, 
+ Aristo Chen <aristo.chen@canonical.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5344; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=EVb/JCTirL+MwhT5g5e5+1bax4zVP4jRKe/2J79FjaI=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWT1iza9Yxdl+7XGS/R9epnYjYNGAU2bfV7G/6k8NSPr9
+ vt5MlI7OiayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
+ QyMdYx0jBi5OAZjqskCG/1UGUgWWIacFA67J/ed6s9er6EGt1uX9RjbPIt9xci7SOMfwv06vo/f
+ /qQ2Xv6xc9jLEVWXfFR3+v3vEfp/4Z3r86J8DlTwA
+X-Developer-Key: i=alchark@flipper.net; a=openpgp;
+ fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,161 +141,114 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 8/26/26 8:09 AM, Julien Stephan wrote:
-> The MDP RDMA is the DMA engine reading the framebuffer on some
-> MediaTek SoCs, such as the MT8188. Two instances are used, each
-> reading one half of the frame; the second one starts at the middle of
-> the line (apply_offset).
-> 
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> ---
->  drivers/video/mediatek/mtk_mdp_rdma.c | 97 +++++++++++++++++++++++++++++++++++
->  drivers/video/mediatek/mtk_mdp_rdma.h | 20 ++++++++
->  2 files changed, 117 insertions(+)
-> 
-> diff --git a/drivers/video/mediatek/mtk_mdp_rdma.c b/drivers/video/mediatek/mtk_mdp_rdma.c
-> new file mode 100644
-> index 00000000000..eb8b673477f
-> --- /dev/null
-> +++ b/drivers/video/mediatek/mtk_mdp_rdma.c
-> @@ -0,0 +1,97 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Mediatek Video MDP RDMA Support
-> + *
-> + * Copyright (c) 2026 BayLibre, SAS.
-> + * Author: Julien Stephan <jstephan@baylibre.com>
-> + */
-> +
-> +#include <dm.h>
-> +#include <video.h>
-> +
-> +#include "mtk_disp_comp.h"
-> +#include "mtk_mdp_rdma.h"
-> +
-> +/* MDP RDMA registers */
-> +#define MDP_RDMA_EN				0x0000
-> +#define MDP_RDMA_EN_ENABLE			BIT(0)
-> +#define MDP_RDMA_EN_DISABLE			0
-> +#define MDP_RDMA_EN_INTERNAL_DCM_EN		GENMASK(23, 4)
-> +
-> +#define MDP_RDMA_SRC_CON			0x0030
-> +#define MDP_RDMA_SRC_FORMAT_BGRA8888		2
+Add support for the Boot Loader Specification (BLS) type 1 boot entries,
+as generated by default by systemd's kernel-install when loader=bls.
 
-Shouldn't this be XRGB888?
+Given that the format of BLS entries is pretty much the same as PXElinux,
+reuse the existing library for the parsing logic.
 
-> +#define MDP_RDMA_SRC_CON_SRC_FORMAT(x)		((x) & GENMASK(3, 0))
-> +#define MDP_RDMA_ENABLE_UNIFORM_CONFIG		BIT(17)
-> +#define MDP_RDMA_ENABLE_ARGB_OUTPUT		BIT(25)
-> +
-> +#define MDP_RDMA_SRC_BASE_0			0x0f00
-> +#define MDP_RDMA_MF_BKGD_SIZE_IN_BYTE		0x0060
-> +#define MDP_RDMA_MF_SRC_SIZE			0x0070
-> +#define MDP_RDMA_MF_CLIP_SIZE			0x0078
-> +#define MDP_RDMA_SRC_OFFSET_0			0x0118
-> +
-> +#define MDP_RDMA_CON				0x0020
-> +#define MDP_RDMA_CON_SIMPLE_MODE		BIT(4)
-> +
-> +#define MDP_RDMA_TRANSFORM_0			0x0200
-> +#define MDP_RDMA_TRANSFORM_BITEXTEND_ZERO	BIT(15)
-> +
-> +#define FB_BYTES_PER_PIXEL			4
-> +
-> +void mtk_mdp_rdma_config(struct udevice *dev, struct video_uc_plat *plat,
-> +			 const struct display_timing *timing,
-> +			 bool apply_offset)
-> +{
-> +	u32 width = timing->hactive.typ;
-> +	u32 height = timing->vactive.typ;
-> +	u32 fb = plat->base;
+BLS type 2 entries are out of scope, as they are effectively just EFI
+applications and should be booted as such.
 
-This breaks if base is ever above 4GB. It probably shouldn't be since it is
-used with DMA, but might not hurt to error if it is out of range rather
-than silently using the wrong address.
+This implementation is also only allowing a single top-sorting entry to
+boot, as the standard boot infrastruture currently doesn't support
+multiple entries per partition-bootmeth tuple. I have a proposed extension
+to enable that and will post it separately as RFC - that enables the use
+of `bootflow menu` to select the kernel to boot without jumping through
+several menus with different behavior as is currently required with
+extlinux.conf.
 
-> +	int offset = apply_offset ? ((width / 2) * FB_BYTES_PER_PIXEL) : 0;
-> +
-> +	mtk_disp_comp_write(dev, MDP_RDMA_EN, MDP_RDMA_EN_INTERNAL_DCM_EN);
-> +
-> +	/* set source format and output bit depth */
-> +	mtk_disp_comp_write(dev, MDP_RDMA_SRC_CON,
-> +			    MDP_RDMA_SRC_CON_SRC_FORMAT(MDP_RDMA_SRC_FORMAT_BGRA8888) |
-> +			    MDP_RDMA_ENABLE_ARGB_OUTPUT |
-> +			    MDP_RDMA_ENABLE_UNIFORM_CONFIG);
-> +
-> +	/* set base address */
-> +	mtk_disp_comp_write(dev, MDP_RDMA_SRC_BASE_0, fb);
-> +
-> +	/* stride: aligned width * bytes-per-pixel */
-> +	mtk_disp_comp_write(dev, MDP_RDMA_MF_BKGD_SIZE_IN_BYTE,
-> +			    ALIGN(width, 4) * FB_BYTES_PER_PIXEL);
+CI passes all green [1]
 
-Should we be using priv->line_length here" from patch 11 (and make sure
-line_length is aligned)?
+[1] https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/pipelines/1089
 
-> +
-> +	/*
-> +	 * each of the two RDMAs reads one half of the frame: size and
-> +	 * clip cover half the width, and the second RDMA (apply_offset)
-> +	 * starts at the middle of the line
-> +	 */
-> +	mtk_disp_comp_write(dev, MDP_RDMA_MF_SRC_SIZE,
-> +			    (height << 16) | (width / 2));
-> +	mtk_disp_comp_write(dev, MDP_RDMA_MF_CLIP_SIZE,
-> +			    (height << 16) | (width / 2));
-> +	mtk_disp_comp_write(dev, MDP_RDMA_SRC_OFFSET_0, offset);
-> +
-> +	/* simple mode + zero bit extension for 8bit -> 10bit */
-> +	mtk_disp_comp_write(dev, MDP_RDMA_CON, MDP_RDMA_CON_SIMPLE_MODE);
-> +	mtk_disp_comp_write(dev, MDP_RDMA_TRANSFORM_0,
-> +			    MDP_RDMA_TRANSFORM_BITEXTEND_ZERO);
-> +
-> +	/* enable engine */
-> +	mtk_disp_comp_write(dev, MDP_RDMA_EN,
-> +			    MDP_RDMA_EN_INTERNAL_DCM_EN | MDP_RDMA_EN_ENABLE);
-> +}
-> +
-> +static const struct udevice_id mtk_mdp_rdma_ids[] = {
-> +	{ .compatible = "mediatek,mt8188-vdo1-rdma" },
+Signed-off-by: Alexey Charkov <alchark@flipper.net>
+---
+Changes in v2:
+- Dropped "default y" to avoid increasing image size for platforms which
+  don't use Freedesktop-style userspace and won't benefit from BLS (thanks Tom)
+- Fixed typo referring to BLS type 2 when type 1 was meant (thanks Simon)
+- Added a kerneldoc for parse_label_keys() upon factoring it out, not just
+  when it gets exported to a shared header (thanks Simon)
+- Shared the pxelinux getfile helper rather than making a third copy of it
+  in the new bootmeth (thanks Simon). It moves to a translation unit of its
+  own, so that PXE_UTILS users without bootstd don't gain a dependency on
+  the bootmeth uclass, and boards without PXE_UTILS don't pay for it
+- Allocated the entry buffer with ARCH_DMA_MINALIGN rather than 1 (thanks
+  Simon)
+- Stopped retaining the parsed label in bflow->bootmeth_priv, which the core
+  frees flat and would therefore leak (thanks Simon). It turned out to be
+  worse than a leak: a bootflow is shallow-copied into the bootflow list, so
+  the pointer was shared between the iterator's temporary and the stored copy
+  and could be freed twice. bls_boot() now re-parses bflow->buf, as extlinux
+  does
+- Added a test for entries found under the '/boot/' prefix rather than at the
+  root of the filesystem (thanks Simon for asking what happens there). No code
+  change was needed
+- Dropped the number prefix from the driver name (thanks Simon)
+- Added sandbox tests and updated the bootmeth/bootflow expectations that
+  binding a third bootmeth changes, plus a doc/develop/bootstd page (thanks
+  Simon)
+- Added a patch hardening the "append" parser. A bare "append" dereferenced NULL, and
+  an "initrd=" at end-of-line computed a negative length before malloc()
+- Link to v1: https://patch.msgid.link/20260604-bls-v1-0-4ce6d1ee4711@flipper.net
 
-Another one where the mt8189 fallback should work.
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Alexey Charkov <alchark@flipper.net>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Daniel Golle <daniel@makrotopia.org>
+Cc: Johan Jonker <jbx6244@gmail.com>
+Cc: "Lucien.Jheng" <lucienzx159@gmail.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Vincent Jardin <vjardin@free.fr>
+Cc: Denis Mukhin <dmukhin@ford.com>
+Cc: Aristo Chen <aristo.chen@canonical.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-> +	{}
-> +};
-> +
-> +U_BOOT_DRIVER(mtk_mdp_rdma) = {
-> +	.name	   = "mtk_mdp_rdma",
-> +	.id	   = UCLASS_MISC,
-> +	.of_match  = mtk_mdp_rdma_ids,
-> +	.probe	   = mtk_disp_comp_probe,
-> +	.priv_auto = sizeof(struct mtk_disp_comp_priv),
-> +};
-> diff --git a/drivers/video/mediatek/mtk_mdp_rdma.h b/drivers/video/mediatek/mtk_mdp_rdma.h
-> new file mode 100644
-> index 00000000000..aa2585e9c27
-> --- /dev/null
-> +++ b/drivers/video/mediatek/mtk_mdp_rdma.h
-> @@ -0,0 +1,20 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Mediatek Video MDP RDMA Support
-> + *
-> + * Copyright (c) 2026 BayLibre, SAS.
-> + * Author: Julien Stephan <jstephan@baylibre.com>
-> + */
-> +
-> +#ifndef _MTK_MDP_RDMA_H
-> +#define _MTK_MDP_RDMA_H
-> +
-> +struct udevice;
-> +struct video_uc_plat;
-> +struct display_timing;
-> +
-> +void mtk_mdp_rdma_config(struct udevice *dev, struct video_uc_plat *plat,
-> +			 const struct display_timing *timing,
-> +			 bool apply_offset);
-> +
-> +#endif
-> 
+---
+Alexey Charkov (13):
+      pxe_utils: fix W=1 kernel-doc warnings
+      pxe_utils: accept "options" as synonym for "append"
+      pxe_utils: harden the "append" parser against malformed input
+      pxe_utils: extract per-entry key parsing into parse_label_keys()
+      pxe_utils: export per-entry label helpers
+      pxe_utils: optionally ignore unknown keys in parse_label_keys()
+      pxe_utils: accept "title" inside a label as a synonym for "menu label"
+      bootmeth: share the pxelinux getfile helper
+      boot: add a minimal bootmeth for the Boot Loader Specification
+      test: bootstd: add a BLS entry to the Fedora fixture image
+      sandbox: enable BLS boot method
+      test: bootstd: cover BLS entries below a prefix
+      doc: bootstd: describe the BLS bootmeth
+
+ arch/sandbox/dts/test.dts        |  12 +
+ boot/Kconfig                     |  24 ++
+ boot/Makefile                    |   2 +
+ boot/bootmeth_bls.c              | 370 +++++++++++++++++++++++++++++++
+ boot/bootmeth_extlinux.c         |  20 --
+ boot/bootmeth_pxe.c              |  22 +-
+ boot/bootmeth_pxe_common.c       |  34 +++
+ boot/pxe_utils.c                 | 146 +++++++-----
+ configs/sandbox_defconfig        |   1 +
+ doc/develop/bootstd/bls.rst      |  56 +++++
+ doc/develop/bootstd/index.rst    |   1 +
+ doc/develop/bootstd/overview.rst |   1 +
+ include/extlinux.h               |  23 ++
+ include/pxe_utils.h              |  62 ++++++
+ test/boot/bootdev.c              |  14 ++
+ test/boot/bootflow.c             | 467 +++++++++++++++++++++++++++++++--------
+ test/boot/bootmeth.c             |  38 +++-
+ test/py/tests/test_ut.py         | 122 ++++++++--
+ 18 files changed, 1200 insertions(+), 215 deletions(-)
+---
+base-commit: 2d379a529c257606946831a6dac1c37de6a3f8c0
+change-id: 20260604-bls-db6a30b913ae
+
+Best regards,
+--  
+Alexey Charkov <alchark@flipper.net>
 
