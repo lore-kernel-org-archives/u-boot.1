@@ -4,168 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 005C5C5DF97
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 09:18:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC710C61DC2
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 09:49:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D72D840591;
-	Wed, 26 Aug 2026 09:18:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B20AA40580;
+	Wed, 26 Aug 2026 09:49:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dJnwPPVLGeU1; Wed, 26 Aug 2026 09:17:59 +0000 (UTC)
+ id GqpC-KI96kVp; Wed, 26 Aug 2026 09:49:10 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787735879;
-	bh=0aGeMVtFp9e7p3a79YyHD1k4KnWxzbt9nmSJ57MpC7A=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787737750;
+	bh=HPywAFgrkbmvs35SOjn3rQAiWNqWLBQu17zo5jH20RU=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=dWkIwrz7Mm+1GUqhzYRbnAs95Xre4rQvIq5Iq2Rzff24LD+lpOzSuYZtgPX06XinL
-	 rjQZNxDciZa5vo002l5RJ/jlAjquE0rf+7crccGXbYeY52QiIaUefks3qe4/nvDr5J
-	 OJ8S1189nqkw5DcgNiGH8hqJEAqR4wxI6tE2nCeJnDTi8sSRwMViUs7wpxFmnP3Jbt
-	 9Yi65eOJnRBpvffRlnPbmflXB8u7lOf5qZ/z7FpFQd7RZN5cxNFdvYXdtVVEwjyTR1
-	 xcR+sXyic2aL2qt8H12Lc2B62ju8wNE3S/2ByUdsGR0ro8P62TTJKo5m+AXIp1SKBR
-	 60DxLoPDMpM9g==
+	b=vdKsWGa7lZfs6vm3iU/gqB4y+pU+FmYKdAndN2vbj9oVsWeZNMrCK//+xDhMFXWnH
+	 nWwMBFCaxOlXrAuzIq9O7XFBlE51BLpLeGvCz4U4YKfvXkrL2YbrkLc/PL48vTASUQ
+	 4Hvq2aTNNcrlkVJJ8LYP+fTX9O9ALLOh+x6JZb9Est12eI2XCB927o1FFXBgLV8yCY
+	 P+xelAv9Kr3pt+Kq/kH78lRJ5Qg/mzMEw2oZSc9j0OoHnn4zx5IbyDTHnCs2SNrRjk
+	 ItpTgglMbHU+aKOrscOdLFDxE9C9+Ar0e9vrZNmoViSLLgHBvaoNScSieK4PwznrFA
+	 XaZlJF5zrjtCw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6EB3C40545;
-	Wed, 26 Aug 2026 09:17:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 52B3E3AD
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:17:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BFB3840557;
+	Wed, 26 Aug 2026 09:49:10 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4AFAD230
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:49:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5048C40130
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:17:58 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 3D4796070D
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:49:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JAxEX8lNWH0y for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 09:17:57 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com;
- envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=LlI1R4SK; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=aJdsdIOO
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 63D4A400F2
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:17:56 +0000 (UTC)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67Q9Cgek4157845
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:17:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 0aGeMVtFp9e7p3a79YyHD1k4KnWxzbt9nmSJ57MpC7A=; b=LlI1R4SKw/FMgXa5
- InTkWZ6hneFBNMXopFrQ3k4hbM+c5H76Tf/CGWB0xRPJNGIXCWP22KG1K3MtmLm4
- 7oHhOXn92+ACFrkKrmLXLV6zoNcf6jSHvb8TackkqRSpxZZj4YuG7BKtiwMyEze8
- VZFnO+1wUZuWe8xq67H2QW/19jhu0owYAavm74KTMxhmBFLU+i5jzXj5tFesBIdB
- SeZlbv4K45IgzQBzQjgkmgjw/Gxxw/912dmtW6nCfQsfFbRYy/xIK6v4JUUf4oJQ
- bVf8ojWdAhNY+mlEgzk9s/PHJx5YVR/+SzECXA4aw7uq1unhm6bhD13sRbo+bozT
- DvEW/g==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9s9g93a3-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:17:55 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-c85798977dcso1160310a12.0
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 02:17:55 -0700 (PDT)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HZ789CJpYAuk for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 09:49:09 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::f2f; helo=mail-qv1-xf2f.google.com;
+ envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=pIO66FEg
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 39E746067F
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:49:08 +0000 (UTC)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-8f1a8e914a9so6974636d6.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 02:49:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787737747; cv=none;
+ d=google.com; s=arc-20260327;
+ b=YVTimkno6o++H0sQ1LtrXVrevj+KDgoFK73j44AZ1Pdn2WNCrKaAg5vYXVfyLzvRLc
+ dXlUAlyEFqv72uOVU6CHA/6EpxjNMZ9qQiGOEghzFHq4u3tlfmsf8IUGltJjr0MTLmUv
+ WUNKhR+lls8MePegTfmH1/u0jIqfdoYXHMtjKb48v2dr0GqbE4HOYg8fl1DB96tfOnK4
+ Et3rJJe+mBipVyIwmA1tmhQhHETkhR14wSo5bMrTagQryVxZZ1EQUmYvNZAU4Wz85U8N
+ /xDFddk+HhIVNgkOOhb9fw7auQIswZ2iHYsJGnFfulbdkMGZ2EI7nTo9R68vtlm1zhFs
+ XLEw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=HPywAFgrkbmvs35SOjn3rQAiWNqWLBQu17zo5jH20RU=;
+ fh=XOlhkv9q70rVh1XMK2M7J0GiL/IuGijj2jnsjG/+yWY=;
+ b=fPebkjN9B8xq5fLmk63elRW0nP5EBS5UU2IeN3ZPPDyKA+11wK8Z/0puYRKC3aLj9b
+ rViTjqGyB4eSCxje3mZ9Mra6NliPY8+m9cX2yUPkTCTZZmghRcsg2ZHDV2GAwl7PSlUy
+ 4ZHCswFYd0AV1aMKTpffmONZuetj1CEmL2jYECJcEYX/Avk1PiP2um9ui+hzQian+7eW
+ YQlymftAc9r1awufGgzgTeQF9UNdYHege8gy5R+vnwc+Wzi8OFE5nZJDl3vMDvSBWwky
+ DWJ51biK6wsRFwPvI1i0dOcfxkt/m3i2lpTYtR+JAcJHt/006t2d9MCzmGKjBGot+6Vk
+ q7aw==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787735874; x=1788340674;
+ d=gmail.com; s=20251104; t=1787737747; x=1788342547;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=0aGeMVtFp9e7p3a79YyHD1k4KnWxzbt9nmSJ57MpC7A=;
- b=aJdsdIOOI/Zjoa066Hyrg2/77nmLPyhRiD0mkfhls+fUimPd/hZE/27c/qa4TkrbnR
- DT6s+ITup1AwLv/MHQwYoq33vGamD4TsRSYQsNmEFzTUOu5cyewU1jgUXUKzhvWGUXsm
- kqlI/01fblU6j9RzHumaSUr7AkC23hl4qbbkPilvLFa3mMn8GfwD9aS3VAlQj3NfQnma
- ayMUn3yz91Cf/sjbWlkQTss2EL7UD4lutVopppw7FC7gac0mpE44n2vAWCY1q2s1V/VR
- r07goW9++SHB7P7aF2K2F+amoqDB9bmWZGkDjq6RVq/XTOwEApSVEp93DPhACRiX4Ft+
- nkpg==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=HPywAFgrkbmvs35SOjn3rQAiWNqWLBQu17zo5jH20RU=;
+ b=pIO66FEgrBH2cQtA/6M/p63qDYqESkHa6Q0rhkD48ppnKXswYNti0x9+UWwjzH3Rjn
+ BNVvAWvXUUDkhHPD0RSZtfrlop0eye/AJuUtGXrcd/CLUmRNAIx1UV0YfvDGbz1AD0T8
+ 0mrOmzcngZUER+eWSLWcEQ8yBZDPPMRnO5l4zAZN2XcY/38VpG8uc1k5A5A2sb869nK+
+ KKlscKrHEYz+ywi+nDZieT3IKr0EPcsupYr/FSi3e5aFILdQrvCjVQt61guBq1BswqKt
+ hF6VwRERV79eptqjZ44JW5pvHNLyNhkv23RQDSb+3PKnS9IcHiZYtMhiUNY53FfeNrjr
+ /coA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787735874; x=1788340674;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=0aGeMVtFp9e7p3a79YyHD1k4KnWxzbt9nmSJ57MpC7A=;
- b=YJ2ZDgrT23mMrwOoM85Glw0jN9TDtKDCTTWCj8e1ZO80050PeEvwCqR8b8ke6bhqIu
- JzB+Z0VzvSPyEAtaqiPdePVuKZI/d9wY+eapTcA+Bqz/1bWtThvyPfH1atpd5cRUiXac
- DsTrX2KebUu3BXFrUGGyVIOcXbG4/zG1JJEsOR7hvv7E0R/X+80aw0GyyYHgzhvC9RUv
- spuZIkpg7LoexeVaQOjEx42LvNqKs8zhtZAwKUJ4SNG+TULlpo/P46UCJt4CkxqxwZui
- G2ErBmpbCZJ4roG/0l09g5Kt9Rt0bHstmLJWY1cCu1a0qjEvoBR1Sslcq0qyggT1HraA
- BCsg==
-X-Gm-Message-State: AFuF++lGO5v4iwaKSNdQ+mmotKi4yIT49FceQz+dYvDEkG7+j5MGbRpx
- 0uSPM09gnbLypcxn/q+JBfXsj3a3wD+uKccDMSoFd4YwWrxrhJBa0ZpXB/ST7ZTD3a5Q6vp+4mF
- g7O90q21Y3pNx/IEi4VhE2DORJ7kaUtBDbXofDdxh1fIm8Fzw9VSFxufCW0drZuFmCqOsDhsSWE
- FWx0c=
-X-Gm-Gg: AR+sD13gvlleSeGts+9VI0H7CWsf8jmk3ACKv/OHkGs9Q7bKjp/MNrcyCoFNfy9gG6t
- JlN4IIDL50ml+ljSmgCXBBVj31pzureGFD5R9+8id1sEKBXnKSmsBV+1LeOHZzPp3XJBcUIOKYH
- If71fan4Hckg1/Yl2j4Xm2yxz6hrEtJI7zTDS9CN+oZhXl0c1+nIt+rT1LcGnB+6GzfM2dP2QGM
- 05YtTO/WigqXCZKnhJxwcGcxjLclDyauMkOLnB5wSg61mYnMwSZkjftwrykpwDCA5HK8tNJt522
- ybdWIyDD+jQinRwVThjyJN341tx8ZLsL+jfI5AfJeY0BEN9c99jxmkzM1qZl+IclvfhOSa8Bdtq
- 30nP3oYIEilJs+yglGZ0al+C6AcXwra8nAwc=
-X-Received: by 2002:a05:6a21:7002:b0:3cc:9162:6bfe with SMTP id
- adf61e73a8af0-3cf667407ffmr10976218637.0.1787735874480; 
- Wed, 26 Aug 2026 02:17:54 -0700 (PDT)
-X-Received: by 2002:a05:6a21:7002:b0:3cc:9162:6bfe with SMTP id
- adf61e73a8af0-3cf667407ffmr10976137637.0.1787735874008; 
- Wed, 26 Aug 2026 02:17:54 -0700 (PDT)
-Received: from [192.168.0.7] ([49.206.98.18]) by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-141a8f47d8csm6311886c88.8.2026.08.26.02.17.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Aug 2026 02:17:53 -0700 (PDT)
-Message-ID: <4e0138b9-0105-4736-8c68-a913c0b7a502@oss.qualcomm.com>
-Date: Wed, 26 Aug 2026 14:47:48 +0530
+ d=1e100.net; s=20251104; t=1787737747; x=1788342547;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=HPywAFgrkbmvs35SOjn3rQAiWNqWLBQu17zo5jH20RU=;
+ b=T5NqmhXk3pdxybwu7r5NcyXeusAKCnxwa5s9orI73j77NIYur2dB0UDtXJhLDytSom
+ pl/HUku+aWnSodwAlxttXXDxG/0OGhgSySDKW8RBqb92otm2iF2OVMOrJ7ZCsFeBhn6W
+ /41QAowjkxTyG0zDoVWvvtdZzToCgui99pLakU+cDifJsPGbiuRNM4M8L7ctt1DCG7PF
+ 5Rfqk5MKsMjg/nUQqg66zF9BEc43FMCcWfRGyyuq44T4fwUD5A+eDEyOGtwEwC1TIB2q
+ rKPt2HPJ/uX74nBGiKbna7fNclFP8Zsd383nst6TvB227Jq3MfcQtHJIp3wjAdHLCNdh
+ C2VA==
+X-Gm-Message-State: AFuF++nXO5rUYs+XMVn/iiWZ1kKy07Gan7b4iHfmcymbEovGTNQI/JtJ
+ 3dDBSU4+4ulyFQde7xif33YHj1VAtVscnayHyT/hS34uCpfVbT8OrbhdisW/R35wV9jEStth7rE
+ GV6w4cvEt7XiKRRUo8jx/C3F496zsrF0=
+X-Gm-Gg: AR+sD10NbWBceuaFFJOzVATnyGnRU3CT6QqewO81+Qu35ktcaeXAymwByUQOzj1RPEN
+ bZczlm4VgXTrc94VXyv6Xqjgh/YXVt7vFoPxlUR/UZw9WKxDomXfrr9iLs2vHpJspYZbYTl3C9Z
+ c6frWKf/zT2qlrkuvKo9XylLj41Y+MCAE6J8/Cz5y+6nS0eksJ7QDAzaJRuAXw+LC3qxJPoN9PL
+ aKUVk2zZGez35m64ZWWEeaI76o1wVIIeeLK2Xkvmp71H7cFIwwcrSFMn0wcO0qKgSuU4NeEMCq9
+ 1udj6eEWFsdVMUzXGycI4PcNPFAAJDqUXg9N+rNgH2SWJDpDUc/u3b81k+yNtxTbkMNkPo5THGU
+ 4E5kQkimzFFScl2pDyyQtslalRNQYwx2HQr8sK8GJZJwWKZrV/KAyfCB6lwqZhKLKqycNwhv4vW
+ nY49K+/y9Yxc49SmhgcKvH/b0O8CCjyyikLcbo4b0=
+X-Received: by 2002:a05:6214:1d29:b0:8cc:2a92:48e4 with SMTP id
+ 6a1803df08f44-90cc794fb46mr51694806d6.32.1787737747489; Wed, 26 Aug 2026
+ 02:49:07 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] efi_loader: firmware: decouple dfu_alt_num from
- image_index
-To: u-boot@lists.u-boot-project.org
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
- <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>
-References: <20260813-efi-firmware-dfu-alt-num-v1-0-43f034253b21@oss.qualcomm.com>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <20260813-efi-firmware-dfu-alt-num-v1-0-43f034253b21@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: foH_lydRQnAQWa9dYo_S0QlHQjks5b70
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI2MDA3NiBTYWx0ZWRfX0tC/sj1r2LhF
- VMQqgPhSvU+mrE4mVBtD5Uex77NHMXlzkbIivRJQoUUVwuDVNvLEUUCAEoTVnXHNiqwxwZh3SOu
- sZr4pm1UJ9dXS0OrsPVTU7JBha4PhRuCk2AiMPsa0mJwksiYsgj9PRgJRz3AXxkxtpvasCKf5KY
- ZXMj5v0snUe5cwbW/Y1+gcNmFc/CXyX/N9P7RvrZJruoZPbiSZqs+Z9gzSs1LgR6/tZlL65PZSG
- DORjUwmBHbYs9d9fvSdvzWQpA5xBhdhDeeWaCj7eIgGm64WizBApuVfzUnHHIC422Cd9C8JERsF
- HhCFgrBCdAyG5hnMV67+R1BFR/jcD7qU0KaH937bXOsm3FWRU9eA4Xa1UxRiPZpwS90ElBbyz/K
- /rxLuNF2Q2kDiuE49CrtANHmsT4vEqXjwGSeQDieZZrHoeDWI/giLfFreK6occlRe4CnCFvnZmf
- MT/XnVmWkyEKOJI4ASA==
-X-Authority-Analysis: v=2.4 cv=Xfq5Co55 c=1 sm=1 tr=0 ts=6a8eaf43 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ixBiRExtVUu8ZU8EgKly7w==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=94nzaaMePdrSc8wTbkwA:9 a=QEXdDO2ut3YA:10 a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI2MDA3NiBTYWx0ZWRfX9eZ/HNci1wZs
- IGMozD6/03WamClnuJkR8hgxndzswIQEauzN7x7875HXLUdFlhI1nlQ0Df5+qaEOTwTDE3gggf8
- iGLo7bgdLZSrYFmgXlihctZBqcJFrQI=
-X-Proofpoint-ORIG-GUID: foH_lydRQnAQWa9dYo_S0QlHQjks5b70
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-26_02,2026-08-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 phishscore=0 suspectscore=0 priorityscore=1501
- bulkscore=0 clxscore=1015 malwarescore=0 adultscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608260076
+References: <20260825-lwip-syslog-v1-v1-1-53210f44fd76@gmail.com>
+In-Reply-To: <20260825-lwip-syslog-v1-v1-1-53210f44fd76@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 26 Aug 2026 10:48:55 +0100
+X-Gm-Features: AcwNN1Vx8QO_yiQSVReMIpNZmjUEj4TNMZiObOtDJndD16JRyXbXZ4HfbkYJl5w
+Message-ID: <CALeDE9P+gbt0vg4knDR1f4Z-0OmndNvZhqtjN-xuM2e2bXnvtQ@mail.gmail.com>
+Subject: Re: [PATCH] net: lwip: support syslog
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Weijie Gao <weijie.gao@mediatek.com>,
+ David Lechner <dlechner@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -179,56 +140,175 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Ilias,
-
-Request your opinion on this series.
-
-Regards,
-
-Balaji
-
-On 8/13/2026 11:23 AM, Balaji Selvanathan wrote:
-> RAW capsule updates hardcode dfu_alt_num = image_index - 1, which
-> assumes every board's fw_images[] table is a positionally
-> ordered mirror of its dfu_alt_info string. That's true for every
-> board that hand-writes fw_images[], but it breaks down for a platform
-> that builds the table by scanning its partition layout at boot: the
-> set of images and their indices can vary per board, with gaps where a
-> component isn't present, so image_index and dfu_alt_num can't be
-> assumed to stay in lockstep.
+On Tue, 25 Aug 2026 at 19:59, James Hilliard <james.hilliard1@gmail.com> wrote:
 >
-> This series moves that calculation into a __weak
-> efi_firmware_get_dfu_alt_num() a platform can override, the same
-> pattern already used for efi_firmware_get_image_type_id() and the
-> efi_reset_system()/efi_get_time() hooks. The default implementation is
-> the same image_index - 1 every existing board relies on today, so
-> nothing needs to change anywhere else.
+> LOG_SYSLOG depends on NET, but the raw Ethernet and UDP header
+> builders it uses are only available with the legacy network stack. This
+> makes LOG_SYSLOG fail to build with NET_LWIP.
 >
-> This is infrastructure for a follow-on series that builds fw_images[]
-> dynamically on Qualcomm boards, which needs this hook to keep
-> dfu_alt_num correct once the table stops being static.
+> Provide lwIP implementations using the selected Ethernet device and its
+> indexed IP address from the environment. Move the shared declarations to
+> net-common.h and extend the syslog test to check the source MAC address
+> and IPv4 header checksum.
 >
-> This work is part of multi-image capsule update support for
-> Qualcomm boards.
->
-> Balaji Selvanathan (2):
->
-> efi_loader: firmware: decouple dfu_alt_num from image_index
-> test: efi_capsule: add sandbox coverage for dfu_alt_num override
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 > ---
-> Balaji Selvanathan (2):
->        efi_loader: firmware: decouple dfu_alt_num from image_index
->        test: efi_capsule: add sandbox coverage for dfu_alt_num override
+>  include/net-common.h   |  7 ++++++
+>  include/net-legacy.h   |  4 ----
+>  net/lwip/net-lwip.c    | 58 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>  test/log/syslog_test.c |  2 ++
+>  test/log/syslog_test.h |  4 ++--
+>  5 files changed, 69 insertions(+), 6 deletions(-)
 >
->   arch/sandbox/dts/sandbox_capsule.dtsi              | 12 ++++++
->   board/sandbox/sandbox.c                            | 18 +++++++++
->   include/efi_loader.h                               | 17 ++++++++
->   include/sandbox_efi_capsule.h                      |  1 +
->   lib/efi_loader/efi_firmware.c                      | 21 +++++++++-
->   .../test_efi_capsule/test_capsule_firmware_raw.py  | 45 ++++++++++++++++++++++
->   6 files changed, 112 insertions(+), 2 deletions(-)
+> diff --git a/include/net-common.h b/include/net-common.h
+> index 0c260873c2c..3084a2b2a57 100644
+> --- a/include/net-common.h
+> +++ b/include/net-common.h
+> @@ -362,6 +362,13 @@ struct ethernet_hdr {
+>  /* Ethernet header size */
+>  #define ETHER_HDR_SIZE (sizeof(struct ethernet_hdr))
+>
+> +/* Set Ethernet header; returns the size of the header */
+> +int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot);
+> +
+> +/* Set IPv4 and UDP headers */
+> +void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport,
+> +                       int sport, int len);
+> +
+>  /**
+>   * net_random_ethaddr - Generate software assigned random Ethernet address
+>   * @addr: Pointer to a six-byte array containing the Ethernet address
+> diff --git a/include/net-legacy.h b/include/net-legacy.h
+> index d3b122c9062..d7f55d34a30 100644
+> --- a/include/net-legacy.h
+> +++ b/include/net-legacy.h
+> @@ -344,15 +344,11 @@ int net_loop(enum proto_t);
+>  /* Get size of the ethernet header when we send */
+>  int net_eth_hdr_size(void);
+>
+> -/* Set ethernet header; returns the size of the header */
+> -int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot);
+>  int net_update_ether(struct ethernet_hdr *et, uchar *addr, uint prot);
+>
+>  /* Set IP header */
+>  void net_set_ip_header(uchar *pkt, struct in_addr dest, struct in_addr source,
+>                        u16 pkt_len, u8 proto);
+> -void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport,
+> -                       int sport, int len);
+>
+>  /* Callbacks */
+>  rxhand_f *net_get_udp_handler(void);   /* Get UDP RX packet handler */
+> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+> index 8f8f9d69020..4dd8f0d2ce7 100644
+> --- a/net/lwip/net-lwip.c
+> +++ b/net/lwip/net-lwip.c
+> @@ -159,6 +159,64 @@ static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
+>         return 0;
+>  }
+
+If these are specific to LOG_SYSLOG functionality I think they should
+be guarded by LOG_SYSLOG
+
+> +int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot)
+> +{
+> +       struct ethernet_hdr *et = (struct ethernet_hdr *)xet;
+> +       const uchar *src = eth_get_ethaddr();
+> +
+> +       memcpy(et->et_dest, dest_ethaddr, ARP_HLEN);
+> +       if (src)
+> +               memcpy(et->et_src, src, ARP_HLEN);
+> +       else
+> +               memset(et->et_src, 0, ARP_HLEN);
+> +       et->et_protlen = htons(prot);
+> +
+> +       return ETHER_HDR_SIZE;
+> +}
+> +
+> +static void net_lwip_set_ip_header(uchar *pkt, struct in_addr dest,
+> +                                  struct in_addr source, u16 pkt_len,
+> +                                  u8 proto)
+> +{
+> +       static u16 ip_id;
+> +       struct ip_udp_hdr *ip = (struct ip_udp_hdr *)pkt;
+> +
+> +       ip->ip_hl_v = 0x45;
+> +       ip->ip_tos = 0;
+> +       ip->ip_len = htons(pkt_len);
+> +       ip->ip_p = proto;
+> +       ip->ip_id = htons(ip_id++);
+> +       ip->ip_off = htons(IP_FLAGS_DFRAG);
+> +       ip->ip_ttl = 255;
+> +       ip->ip_sum = 0;
+> +       memcpy(&ip->ip_src, &source, sizeof(source));
+> +       memcpy(&ip->ip_dst, &dest, sizeof(dest));
+> +       ip->ip_sum = compute_ip_checksum(ip, IP_HDR_SIZE);
+> +}
+> +
+> +void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport, int sport,
+> +                       int len)
+> +{
+> +       struct ip_udp_hdr *ip = (struct ip_udp_hdr *)pkt;
+> +       struct in_addr source = {};
+> +       ip4_addr_t addr, mask, gateway;
+> +       struct udevice *dev = eth_get_dev();
+> +       u16 pkt_len = IP_UDP_HDR_SIZE + len;
+> +
+> +       if (len & 1)
+> +               pkt[IP_UDP_HDR_SIZE + len] = 0;
+> +
+> +       if (dev && !get_udev_ipv4_info(dev, &addr, &mask, &gateway))
+> +               source.s_addr = addr.addr;
+> +
+> +       net_lwip_set_ip_header(pkt, dest, source, pkt_len, IPPROTO_UDP);
+> +
+> +       ip->udp_src = htons(sport);
+> +       ip->udp_dst = htons(dport);
+> +       ip->udp_len = htons(UDP_HDR_SIZE + len);
+> +       ip->udp_xsum = 0;
+> +}
+> +
+>  /*
+>   * Initialize DNS via env
+>   */
+> diff --git a/test/log/syslog_test.c b/test/log/syslog_test.c
+> index b6c0631aaf6..f848506fb1c 100644
+> --- a/test/log/syslog_test.c
+> +++ b/test/log/syslog_test.c
+> @@ -34,11 +34,13 @@ int sb_log_tx_handler(struct udevice *dev, void *packet, unsigned int len)
+>
+>         /* Check Ethernet header */
+>         ut_asserteq_mem(&eth_hdr->et_dest, net_bcast_ethaddr, ARP_HLEN);
+> +       ut_asserteq_mem(&eth_hdr->et_src, eth_get_ethaddr(), ARP_HLEN);
+>         ut_asserteq(ntohs(eth_hdr->et_protlen), PROT_IP);
+>
+>         /* Check IP header */
+>         buf += sizeof(struct ethernet_hdr);
+>         ip_udp_hdr = (struct ip_udp_hdr *)buf;
+> +       ut_assert(ip_checksum_ok(ip_udp_hdr, IP_HDR_SIZE));
+>         ut_asserteq(ip_udp_hdr->ip_p, IPPROTO_UDP);
+>         ut_asserteq(ip_udp_hdr->ip_dst.s_addr, 0xffffffff);
+>         ut_asserteq(ntohs(ip_udp_hdr->udp_dst), 514);
+> diff --git a/test/log/syslog_test.h b/test/log/syslog_test.h
+> index 39cce4ed498..89c86541f5e 100644
+> --- a/test/log/syslog_test.h
+> +++ b/test/log/syslog_test.h
+> @@ -31,8 +31,8 @@ struct sb_log_env {
+>   *
+>   * The following checks are executed:
+>   *
+> - * * the Ethernet packet indicates a IP broadcast message
+> - * * the IP header is for a local UDP broadcast message to port 514
+> + * * the Ethernet packet uses the selected interface and broadcast destination
+> + * * the IP header checksum is valid and describes a UDP broadcast to port 514
+>   * * the UDP payload matches the expected string
+>   *
+>   * After testing the pointer to the expected string is set to NULL to signal
+>
 > ---
-> base-commit: 36c377b9859ffb53eb1e39ea31e8d96d1e0fe1e5
-> change-id: 20260811-efi-firmware-dfu-alt-num-1289dae96490
+> base-commit: 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc
+> change-id: 20260825-lwip-syslog-v1-a5625eba2ea3
 >
 > Best regards,
+> --
+> James Hilliard <james.hilliard1@gmail.com>
+>
