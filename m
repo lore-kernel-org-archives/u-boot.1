@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 168DCC61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:42:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C0E3C61DBD
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:42:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C31976067F;
-	Wed, 26 Aug 2026 13:42:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 012F260776;
+	Wed, 26 Aug 2026 13:42:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MEOYv-Ss-KmA; Wed, 26 Aug 2026 13:42:29 +0000 (UTC)
+ id 7iD9x_eDIjxH; Wed, 26 Aug 2026 13:42:33 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787751748;
-	bh=yN7X3vgkTJkBVGjdW98Y9xd7lrakrz2s2TmF/uMsynY=;
+	d=lists.u-boot-project.org; s=default; t=1787751752;
+	bh=4GH6LwX3PfRhTn9+pOuclcvfG7bXbMWIr2Ai83binxs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jU++uRjL2p3VnMtxrrekh70Hcmm8X/WtE7QE4XL7H+BRxaVO12SWNH+Ub3vyYwdl2
-	 t/SylLSovsruXyZliOROohDoA47GbUHrvoixiu0tWGLOEf2hQBQtkQ/Q6QjE1tX/Kt
-	 lERpjj/WKE+I3Ri27TS3IYEtkrivujy/3SRVxdeGxbnMjIPq42ReIsJs8TkvUVCAsj
-	 u6P9vcaN2yWCeYnvM+ntHwziyR5HD9sXTLlYoCgK35zrPh5xWHutwO2KVpuoEJDYnq
-	 8epmIWbFEf7ZWJYVvNgjQcELA2N/AFZnEKLWDSgfGngXFE+ZLIJCvhnm5P2/60E7tP
-	 DTaolvc63saWQ==
+	b=JXzQPuFzsLXWY3JMWmXPK0ot4rKWG+TfBdbddHznfQP/TJsHo+QfeZv/vbUPA0g27
+	 PpewmQ99NCUW6vGeHCYIjLJQCUxDsMgTph5UmtW4M/YayzMmhIlHq3ypVfjYfI4LZa
+	 6nDpf7ou7E0JEIONS50Q6kIBGAChngf4dIjViO8w57LJMfAOxioFm6onzdoWy8S88g
+	 1RDoYGOD81GKF0fAgl2vxOCKPaAmP1X6RgnSO5uUMjRiinqu0onzK7Y3IDsW9IQfD1
+	 +SjCpoP2GkGWwEyBFFrcoMc0LVNHtco97G3Z0B4z400vgqHpguCv8Dq/+Sc3phiDQR
+	 PI/ixLDTQmsFA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7335C605AC;
-	Wed, 26 Aug 2026 13:42:28 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3EE5F396
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:34:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 50E646075E;
+	Wed, 26 Aug 2026 13:42:32 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 09CAF39E
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3C9F540108
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:34:57 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id F012D6067B
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5ZKXoBuPnKvQ for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 13:34:56 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5HLPsrchQxlt for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 13:34:59 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=34.2.90.19;
  helo=sonic.asd.mail.yahoo.com; envelope-from=maskachoska@yahoo.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=yahoo.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com
- header.a=rsa-sha256 header.s=s2048 header.b=DH0H/5Oi
+ header.a=rsa-sha256 header.s=s2048 header.b=QjhxhcLm
 Received: from sonic.asd.mail.yahoo.com (sonic-asso1-0020.asd.mail.yahoo.com
- [34.2.90.19]) by smtp2.osuosl.org (Postfix) with ESMTPS id 45C464005F
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:34:54 +0000 (UTC)
+ [34.2.90.19]) by smtp3.osuosl.org (Postfix) with ESMTPS id 13D00605E1
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:34:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787751290; bh=yN7X3vgkTJkBVGjdW98Y9xd7lrakrz2s2TmF/uMsynY=;
+ t=1787751295; bh=4GH6LwX3PfRhTn9+pOuclcvfG7bXbMWIr2Ai83binxs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To;
- b=DH0H/5Oiht8I6QNgO1FWocliT1muHWsDZRTJ7S4ikeb8EzCwz/yZO4H0QBCedRUG132ia4n7lX2bG7TZjYDAKMjRMOwqeIueiCoDjCPRkN1Otbp3HqVFW3Xv4VQeBFFDzPH3qPyCAfAohh3/KkTIqvCO0fAG5UTtmzbM1YlhDKQOSFRg9nZfpw/6YI5nnCZylK6tm5R15L5bVu/0m2n9HhGh6IGtU88DrcIvCIepb46N+hhg3pSMboPFeHtWj5crc91AgEAE9TLyRmnrx1+DyFk42EecZ4P78SD4xNq7tkYweUEvP2P55rPkrkxgzqM9LgyRqLeTESNGbe5C4RNUKg==
+ b=QjhxhcLmVUtGr0QWiISNcJPGFbMHWgyU4zp2T0mNvQjjKT1QpoRdrOjzvn1d/YywaK183BJEiR2smBCKhiBYSfhKEiX+0JW7qOqWewguw3MfFiQGjRFA28qXZM9adcm9vHRWcC6rfLj4lF9anAOLNN1rrdOiXUJdxBtgM9hKT/kkoYN4wxPu71PKJHfHQSNLTj1YBTtVmZm2lHOMoJJUeQu3KKezxlHUf4PhwFDzPY3EwpUqYdMUvw8DpFdDbgoT81K8N1GiurBsf6aahtW8PrMOzKpZYmRsPExOSLPZjEs+J0CvPWn3HEmyYeEPB2cZoaPvqgScbKbh2Zcn151SkA==
 X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787751290; bh=Bz4dx2Tn5HGtA7SmtHbAIImgtIHmveoCrEKFoI1nXCN=;
+ t=1787751295; bh=Ejh4y0MIk/XjoNG/2wh0VlH3IjpgZU28w7OUTt7SR96=;
  h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=L/Z8PoNREhoGxxAb5Uas0C7fj+6omvvOwP+empo1bwRra5cPWzIy0f7lp3yQDTkuGLimm8TlbMlZa7Kwj6YlmEKGvdNFftbcvf64P2Dra2B7wJjbeo8hWYKhCpZQVVngEwLZtonYfcA9zoRvAOOyr8x9VhNDbjQV1Czulj2x2dXcyVgeVFQNPvwQH4hrjcWT4GkmoXlxRQosWFx3UDPYiICg6tInnanHYxrhcoy5+qJ6FbnhzlipM76uRSJrWwNQALSJOck4hz43fseesiJgJAI+/tVNgiJdMvlNBA8Xy0HYKCAXGPWy7P+JwAlroHeIw6W8gZH58Gx48o9WqREi/w==
-X-YMail-OSG: 1uZsg3wVM1npacIM6VIfUN2X1nuggjYWtSFQkh_I0VQ_Rt2audN8lMLaGKj.8R8
- Vsrnu60leuWl6O9lppVQJHG2CjbUvHuxNgeKlCP4oudn0dfR2Iq94NVnhtgLy29pbnUc6pqDZmvo
- gA_Bj2.0g7KvfTobdh2UTCEq9O22BvUfwHuiBC77YHS2fwkf.NjnVqdgLbpp1e_aYcQf7_Hg9R1t
- AufuzrYB.6WtrKKjpiXxpDIhHmBQsz9j0I8Y6eXV6stP5NCDPly630CTrZOIqBGJVOktvK5jzL9b
- zfSE4AxbQ6g488FUBbcCpo.q34hnA..HiVlirNtzQIOuKjUL98EOkvzp7u8S3QS_YEVJjEhFWZWD
- 7_bJT6vuyNur83UqbR9rinMGzGJ.Y6s5DHs4vMli1TV4xcKbcfmmyZhFvN3s5S7oEAD3LhXIGVMU
- 8ed94W5XLKHpQv0yt7t9Wv_N_ucNsnHovk637FQpePbC.obUbC7sq1Tdj7PvkwFEzFOTxnS3ZOYr
- h_73eg8Wjm4Gk2Y8t.Z31W7pQTTXh5M05msH6Yo0pBsM_6ijAEGisUrUY.1uXgFLQwYKyn3qyxI7
- BH5HA6bvVsGCCfzEWlvOtkbfR5cJwGgYq0Bx62PnDefdZbKtmnEFwdAaff1PFEoapK3DI.oLjGox
- 4Y3ie_ah.M2t5zcVe1FvuiJMwt0F8ceCnO.u2k4_fdCKV7GKL9y0zbKCJEAvRAUBh_X.FJyLdyJI
- XhZi4MfV3FLdnwULgJgGaM9X8as5_vbB76f4vkAMQE3if9mFqtWipIdZYHeDG4I8ehRbN0QZ7.fe
- _ruqPk9tdOC_kUvAen._h519sq3FX3rltyFlyyaYbzBnY9LMlvcU7sdEbWONrWejQgeL4ygud9MN
- lFgDuXwEDD2hKOKGgU8YnbNxm3uy7utG0BROrOgxGujer1oO68kZtbbj40L4WHg80vRciZdvDBw8
- cxnTViBAv7IvF5SxWEomJHpLTx56eaOn8aOG.9c.6dlvwGPI8MeAgfJFHoUg8ncve8.WAmCkY3sk
- dEzCW5sPwfMKgxLodJzXflI1HaiO.k2rsVw7mk1G5omPCDoXPOO3IpVeAHUhDfehTbrr7s7PtjPU
- gC4SCwAcfU3mHlIWLlHXq2wl3Oy9OlyryTJEjiI3Wy7c2dBpFCAosfakwD8VRCdPlTAjnZZBH7Pl
- DOQXgvO2Kap7hrI1RY3cLdsPZ9lstmWvO.0F6Ek_IaalRgOb7fuJ3dkbxol4CqQaxhz3HPg2GP5L
- CE84IihiQP00kAmIbH6KKDpEMrOyNgmPbn9qngHL3TEZgUqniw6GjrOQnTnX1SocxqhH0Ls6b4Nm
- RUQF5E1.zZ5Pu4sbVTccaoLUulFxqDYr8D3PhzR.bJx8aJY033KryybyiWhjJt9TU5IUG5zYpcqb
- YsJFsodXDjstGB0a4XvAk8.VlvoLaAK1AdMeJO85J4UpK9Lr3OPc5a6wf3TtykpAwL73BeUGtWmj
- n1tLa7ZiigV90g2qKZ57W5LM7C.VPQ3Q7u60d4kt5Y5SgAFLLb33oj2p.4R.umaaa6J4ENF3p.zr
- McttQoha7hQtYpmnCAhkH1QzByQInhh2.efACPS0p_i0YNFKfiUPPEy1l4Kd.kV4U_i_t4Cv7XVe
- syGJMfUBAnmIkC21q2uAeRvRdQVNKgRUz.PNcqoPDA31HGz.7IyWns8iboM1zXigP0qtz5Sqd2gT
- Lvr.lNeA_vxEHgX4n4XC4rMokKauX7MLdwtEHpxybTG78hae7sRaqaj10lZPFNNvXu323M1Grmk0
- i87U6eNbo1ELVXcRjxfeY8F1kYZDX.3Vecq8CPMi8SyHn38Vib40Wrt3K2yGm35m8FdDuHfVZEyT
- EgBDI6Mq3.6hvjVY7Mody3GmSUewT9BvYw1utm7fbwathryEoL7FDQeF07QTv9cISFlHrGUbhTg_
- PRYwHL8XIGsiWr.O2KCBu2FwoCqqnxtpnSqB1YISBv.rf7XfU6uqxJADYFjL9WlHo.uqKa1V_KDM
- GnDJRvF2qxv5FORJfBIjHn.Siny_UTz90vvIUdL46pXhGgDkHaaj1XeeID5_zv9JMLkCTt4WkQdF
- rzg--
+ b=rNDXq8YxDxzTjj2v6PFUw/VG4YtnlT10wE7uBZJTgpDHryyOSj397FdVW6s8wgFLrJztxYWghvPpYxTCCkpzt5GYHHxu/FMO5dZRq2EbGU0JfWt2bnKgez7xrfp5S7LnTjYFLcyPLw3uYAI68UQWJ4L90hCgryDD9EOC26iy0RrI1DHfY4DGmuJ2cc8OsXepCd7kgABIz+9l67am2cjGrbU2+7tXgbdyPKE2qjLwZ9DUGeGh7A2B9IrGwpq8pK/ZIsiT60cOer7zV5e4NzrxJS99QgjUeCP0QOfCDRg8YESX0aZaCfFSqVJtoPLleNNHYYwqhvsaQrR/+Q37IM80uA==
+X-YMail-OSG: AEIZYKQVM1nx.BvQ7W6U9YrQFib1SO9RREiQsgMvwJPS3fMTL6m7DH7mvhyjndR
+ Zaj23ljANVNb113H6YvV7i05QJzq3u.bvdJ4CRhnYdb8TWidGoq4ipOGGqQAaLiZeEPmU0J7DM3B
+ ue8fMxv_kIh.nJFLMkwYpM99U6JnCa.6W9gUVhhX5N28KO0AoZSAoDLRjUfz1mBhMJf84HI_9Rw2
+ zPtP5NKp9t_GJU8Te3F50fri.8AD7BGb6GqsSM4kdqfER6rgh1YMW1pn3VGVEs0XrKCjNdHRDlUy
+ X9HPD64ban5s0HijCOKUrrQeZSU_Hf1sb89TUB2tdhO0CguJIb5BJMhK.SYjYtH93rb8f7LuQrhP
+ sQ2JMGX9yWArYvlLvlTLEKQsO4ucm8i1ovUAQnePt5XdFZ3Fvwl3vQ7d8LciOyXuycfFUhu.oRwf
+ SYIdIYauVCnIfZ3KVl3f1ZSBvc9.SpLKMCJ29_4awIykj6XDfTP8gmaqj4O.BHjFqf_ocqIZHsJl
+ lwMbQDw88Rp7NyoNtcbIkvwzHY_OWZqLQD9wz4Uy.C980WQ9XhAp.CAPbJ71wgUf7qQND_EP9NDH
+ WAP32y2U0LSc51GNqJVBTPqtbs2ThZnecwi_tgPJ_lM5fyo4qEsG5uXA_gzfs1YHVBBxE4Y4zW5n
+ 9tJLcoLlZovpGBz7MsHkQYj3egoaqymi0wakdy.LRkb54AHTiUKiga3xmZ1OVbotTZxpwqFmzzNw
+ n5VJ8hP6k.xbr4fF.enpf7M5Aqu94XP635m8YU.rGhFWI7x4SXnq28OrSm0jWkcoTlgmQ7f0x_mE
+ yjVzwJA.LE4HYU3Io91N_r1W7rc.naCv5YY2Wy6HcVJ2Gk5xRzdKTcgq2UJOH3KOqN.Sk88__4sn
+ O121iaq24dYsll3CwbgvB91XunjcBqis69M06cVaNp0FHcoNJ09wW7Xu.qBdZgfOPlsIrs_VJH.8
+ iOoJda2nO7I9jgQOq0.JIMHQ1HwnW_cDbNFt2b4cVCTzJcD_z1P28f4tD_6bIKsspg7F76p6fzBP
+ TvRqIkV3idKZyMi8pkpHVQHbP0D0znK7LPDDVQK.Il0gCfeCfFQYAVIyBqR2xtuc9BkOLF_xgkq4
+ 7RTC3.XGb8Nz5nujb1oL_quuYuy0nIC1KHDCd.FJ0ggmCCNRo511cAf8IJ3LjvTIfC7IhnI29Odv
+ CzsTcRtbW2mTqpoO86ERl3xwDBEBwxOutiPEUIuEZ22lCT6uQ8PIJEwsT5e_uSn7L7mdXrnQSDzC
+ U35IXAKiccjIMBDaR3j09Pi8mIb75IrGh7yaoB38a_ttEFu25Tl2u38yL3EmjOB5oVvuh8Ya0ICn
+ AGezcHU97SoS6_0DFeg.WsctElSikFt3LsLlqIJSsE4_q.6GecOBIQBOpwz1ovlIWod0hXNKNbqa
+ 8MbfzaBEdxwQfkKAh.wsnB6sLGViHxWiSRFPyxKWfAsbXHqAw6KHl7nr1VpItYGllhSvc9tAQh51
+ Ub5L1qBE2.fAyRJuz5Bl7tswG9FJwZc12hOuuGLXk0C3XC2gkybeEVI26VBdWYZWCneezyFjpEbA
+ sKXaH9pvc6qH8doe3DiukBSa.qonjE.w3C08XSIOY4bDCU.f36oL0n68wwSAaQgAs3_sg4ALjYr8
+ IiQMujKxd_YnwZLRTgDDq81ggM1nQDZ_32DqE5KHiJzzcsieKW3czKru7LGKGbcezzxgVwcvZ0rd
+ 2dF6nNdJnFRX7KMxuBozp_xI2y5z5MbTQISnLVh.JfywPKQ9fQhNgjqJAtPTtbqUhgerMsIBXQHB
+ j8qMoXAup4iQQM3BNUmRk_8eu6cIZKtbnMViv6qN9T9xSZhKeKIFOaIxb2PyyMriAdRpEMTUFm9j
+ 2Or.T9wpInkog8iTFrClfpnmvg5FOPDavj28LP2TTx6W4DdoBUMmxaylHej.f2BYKlXTBXq8zYR9
+ v9gFyjTdODdskmvN4k5djBJTncUedBExlhjhyRiC.XmxVpepya1z884icQOWhgFqvqYsWQlu7YfF
+ 60OKfIasmAUbFsgsR3wiyJJTZ0nj.Q68x5jfT5_idj4x0NfXuXUAlBZJXHiyunWwxfBF_arg5MIZ
+ iZhQ-
 X-Sonic-MF: <maskachoska@yahoo.com>
-X-Sonic-ID: fb757955-0457-4b94-9b80-e80643fa6c00
+X-Sonic-ID: d78c7834-eebf-4818-9af6-4ee1bf23bce0
 Received: from sonic.gate.mail.ne1.yahoo.com by
  mail-asdoutdeli-p-cin-asso1-prod-sonicconsumer-svc-102 with HTTP;
- Wed, 26 Aug 2026 13:34:50 +0000
+ Wed, 26 Aug 2026 13:34:55 +0000
 Received: from dip100.lsn.sg3.yahoo.com ([106.10.223.109])
  by hello (SMTP) with SMTP ID acc4f7a299298e219e9ccf723c2619d7;
- Wed, 26 Aug 2026 13:34:48 +0000 (UTC)
+ Wed, 26 Aug 2026 13:34:51 +0000 (UTC)
 From: AK Sharma <maskachoska@yahoo.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>,
@@ -106,15 +106,14 @@ Cc: Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@arm.com>, Marek Vasut <marex@denx.de>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  AK Sharma <maskachoska@yahoo.com>
-Subject: [PATCH v2 1/9] mips: en75xx: add EcoNet/Airoha EN75xx SoC support
-Date: Wed, 26 Aug 2026 19:04:35 +0530
-Message-ID: <9fa9bf7e599c459eefa50fe3cee8af3b8edc904b.1787736704.git.maskachoska@yahoo.com>
+Subject: [PATCH v2 2/9] mips: en75xx: add TPL and SPL early boot stages
+Date: Wed, 26 Aug 2026 19:04:36 +0530
+Message-ID: <624fa6727c5540de89f98a8ef0015c413eb79699.1787736704.git.maskachoska@yahoo.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1787736704.git.maskachoska@yahoo.com>
 References: <20260825222211.712836-1-maskachoska@yahoo.com>
  <cover.1787736704.git.maskachoska@yahoo.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 26 Aug 2026 13:42:25 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -130,550 +129,730 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add the core support for the EcoNet/Airoha EN75xx MIPS SoC family: the
-big-endian MIPS34Kc EN7512/EN7521 and the little-endian MIPS1004Kc
-EN7528. This adds the ARCH_EN75XX Kconfig entry, the mach-en75xx CPU and
-cache init, and the SoC register definitions.
+Add the TPL and SPL stages for the EN75xx. The TPL brings up the cache
+and SoC straps, runs the vendor DDR calibration stage from flash via the
+early SFC (serial-flash controller) reader, then the SPL loads U-Boot
+proper.
 
-dram_init() takes the DRAM size published by the DDR stage in
-REG_SAVE_INFO and falls back to probing with get_ram_size() when that
-field reads back an implausibly small value (some bootbases leave it
-unset), sizing through the uncached KSEG1 alias and capping the scan at
-256 MiB to stay clear of the SoC register island.
+The DDR calibration stage is a vendor artifact read from flash at boot
+and is not shipped in-tree; see doc/board/econet/en7528.rst for
+how to obtain it and its checksums.
 
 Signed-off-by: AK Sharma <maskachoska@yahoo.com>
 ---
- arch/mips/Kconfig                           |  29 ++++++
- arch/mips/Makefile                          |   2 +
- arch/mips/cpu/start.S                       |   2 +
- arch/mips/mach-en75xx/Kconfig               | 100 +++++++++++++++++++
- arch/mips/mach-en75xx/Makefile              |  15 +++
- arch/mips/mach-en75xx/cache.c               |  85 ++++++++++++++++
- arch/mips/mach-en75xx/cpu.c                 |  95 ++++++++++++++++++
- arch/mips/mach-en75xx/include/mach/en75xx.h | 103 ++++++++++++++++++++
- 8 files changed, 431 insertions(+)
- create mode 100644 arch/mips/mach-en75xx/Kconfig
- create mode 100644 arch/mips/mach-en75xx/Makefile
- create mode 100644 arch/mips/mach-en75xx/cache.c
- create mode 100644 arch/mips/mach-en75xx/cpu.c
- create mode 100644 arch/mips/mach-en75xx/include/mach/en75xx.h
+ arch/mips/mach-en75xx/early_sfc.c  | 352 +++++++++++++++++++++++++++++
+ arch/mips/mach-en75xx/spl/Makefile |   2 +
+ arch/mips/mach-en75xx/spl/spl.c    |  47 ++++
+ arch/mips/mach-en75xx/tpl/Makefile |   3 +
+ arch/mips/mach-en75xx/tpl/start.S  | 101 +++++++++
+ arch/mips/mach-en75xx/tpl/tpl.c    | 158 +++++++++++++
+ 6 files changed, 663 insertions(+)
+ create mode 100644 arch/mips/mach-en75xx/early_sfc.c
+ create mode 100644 arch/mips/mach-en75xx/spl/Makefile
+ create mode 100644 arch/mips/mach-en75xx/spl/spl.c
+ create mode 100644 arch/mips/mach-en75xx/tpl/Makefile
+ create mode 100644 arch/mips/mach-en75xx/tpl/start.S
+ create mode 100644 arch/mips/mach-en75xx/tpl/tpl.c
 
-diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
-index 36612756..7f105d43 100644
---- a/arch/mips/Kconfig
-+++ b/arch/mips/Kconfig
-@@ -88,6 +88,26 @@ config ARCH_MTMIPS
- 	select SUPPORT_LITTLE_ENDIAN
- 	select SUPPORT_SPL
- 
-+config ARCH_EN75XX
-+	bool "Support EcoNet/Airoha EN75xx MIPS platforms"
-+	select HAS_FIXED_TIMER_FREQUENCY
-+	select DM
-+	select DM_SERIAL
-+	select EN75XX_SERIAL
-+	select OF_CONTROL
-+	select ROM_EXCEPTION_VECTORS
-+	select SUPPORT_BIG_ENDIAN
-+	select SUPPORT_LITTLE_ENDIAN
-+	select SUPPORTS_CPU_MIPS32_R2
-+	select SUPPORT_SPL
-+	select SPL_SKIP_LOWLEVEL_INIT if SPL
-+	select SUPPORT_TPL
-+	select SYS_CACHE_SHIFT_5
-+	select MIPS_TUNE_34KC
-+	help
-+	  Support the EcoNet/Airoha EN75xx MIPS SoCs: the big-endian MIPS34Kc
-+	  EN7512/EN7521 and the little-endian MIPS1004Kc EN7528.
-+
- config ARCH_JZ47XX
- 	bool "Support Ingenic JZ47xx"
- 	select SUPPORT_SPL
-@@ -201,6 +221,7 @@ source "arch/mips/mach-mscc/Kconfig"
- source "arch/mips/mach-bmips/Kconfig"
- source "arch/mips/mach-jz47xx/Kconfig"
- source "arch/mips/mach-pic32/Kconfig"
-+source "arch/mips/mach-en75xx/Kconfig"
- source "arch/mips/mach-mtmips/Kconfig"
- source "arch/mips/mach-octeon/Kconfig"
- 
-@@ -322,6 +343,14 @@ config MIPS_MACH_EARLY_INIT
- 	  and at this stage the PC might not match the linking address
- 	  (CONFIG_TEXT_BASE) - no absolute jump done until this call.
- 
-+config MIPS_SKIP_CP0_COUNT_CLEAR
-+	bool
-+	help
-+	  Do not clear the CP0 Count register (mtc0 zero, CP0_COUNT) at reset
-+	  in arch/mips/cpu/start.S. On some SoCs the Count register is GIC/CM
-+	  backed and that write stalls the CPU; such targets select this.
-+	  Other MIPS targets keep the generic clear.
-+
- config MIPS_CACHE_SETUP
- 	bool "Allow generic start code to initialize and setup caches"
- 	default n if SKIP_LOWLEVEL_INIT
-diff --git a/arch/mips/Makefile b/arch/mips/Makefile
-index 453c7885..7c3976aa 100644
---- a/arch/mips/Makefile
-+++ b/arch/mips/Makefile
-@@ -9,6 +9,7 @@ endif
- 
- ifeq ($(CONFIG_TPL_BUILD),y)
- head-$(CONFIG_SOC_MT7621) := arch/mips/mach-mtmips/mt7621/tpl/start.o
-+head-$(CONFIG_ARCH_EN75XX) := arch/mips/mach-en75xx/tpl/start.o
- endif
- 
- libs-y += arch/mips/cpu/
-@@ -16,6 +17,7 @@ libs-y += arch/mips/lib/
- 
- machine-$(CONFIG_ARCH_ATH79) += ath79
- machine-$(CONFIG_ARCH_BMIPS) += bmips
-+machine-$(CONFIG_ARCH_EN75XX) += en75xx
- machine-$(CONFIG_ARCH_JZ47XX) += jz47xx
- machine-$(CONFIG_MACH_PIC32) += pic32
- machine-$(CONFIG_ARCH_MTMIPS) += mtmips
-diff --git a/arch/mips/cpu/start.S b/arch/mips/cpu/start.S
-index a95c95bc..48eb69b1 100644
---- a/arch/mips/cpu/start.S
-+++ b/arch/mips/cpu/start.S
-@@ -124,7 +124,9 @@ ENTRY(_start)
- #endif
- 
- reset:
-+#ifndef CONFIG_MIPS_SKIP_CP0_COUNT_CLEAR
- 	mtc0	zero, CP0_COUNT	# clear cp0 count for most accurate boot timing
-+#endif
- #if __mips_isa_rev >= 6
- 	mfc0	t0, CP0_CONFIG, 5
- 	and	t0, t0, MIPS_CONF5_VP
-diff --git a/arch/mips/mach-en75xx/Kconfig b/arch/mips/mach-en75xx/Kconfig
+diff --git a/arch/mips/mach-en75xx/early_sfc.c b/arch/mips/mach-en75xx/early_sfc.c
 new file mode 100644
-index 00000000..d5371544
+index 00000000..39fc070d
 --- /dev/null
-+++ b/arch/mips/mach-en75xx/Kconfig
-@@ -0,0 +1,100 @@
-+menu "EcoNet/Airoha EN75xx platforms"
-+	depends on ARCH_EN75XX
-+
-+config SYS_VENDOR
-+	default "econet"
-+
-+# Common SoC-identity flag selected by every EN7528 board (reference/RAM/...).
-+config SOC_EN7528
-+	bool
-+	select MIPS_SKIP_CP0_COUNT_CLEAR
-+
-+config SYS_SOC
-+	default "en7528" if SOC_EN7528
-+	default "en7512"
-+
-+config SYS_BOARD
-+	default "en7528" if SOC_EN7528
-+	default "en7512"
-+
-+config SYS_CONFIG_NAME
-+	default "en7528" if SOC_EN7528
-+	default "en7512"
-+
-+config SYS_MALLOC_F_LEN
-+	default 0x2000
-+
-+config SYS_DCACHE_SIZE
-+	default 32768
-+
-+config SYS_DCACHE_LINE_SIZE
-+	default 32
-+
-+config SYS_ICACHE_SIZE
-+	default 32768
-+
-+config SYS_ICACHE_LINE_SIZE
-+	default 32
-+
-+config TEXT_BASE
-+	default 0x80020000 if BOARD_EN7528_RAM
-+	default 0x81000000
-+
-+config SPL_TEXT_BASE
-+	default 0x80010000
-+
-+config SPL_SIZE_LIMIT
-+	default 0x30000
-+
-+config TPL_TEXT_BASE
-+	default 0xbfc00000
-+
-+config TPL_MAX_SIZE
-+	default 0x8000
-+
-+
-+config BUILD_TARGET
-+	default "u-boot.img" if BOARD_EN7512_REFERENCE
-+	default "u-boot.bin" if BOARD_EN7528_REFERENCE
-+	default "u-boot.bin" if BOARD_EN7528_RAM
-+
-+choice
-+	prompt "EN75xx reference board"
-+	default BOARD_EN7512_REFERENCE
-+
-+config BOARD_EN7512_REFERENCE
-+	bool "EN7512/EN7521 reference board"
-+	select BINMAN
-+	select SPL_LOADER_SUPPORT if SPL
-+	help
-+	  Build a boot image compatible with the EN7512/EN7521 TCBoot flow.
-+	  TPL initializes the serial flash controller, executes the legacy DDR
-+	  calibration stage from FE SRAM and loads SPL into DDR.
-+
-+config BOARD_EN7528_REFERENCE
-+	bool "EN7528 reference board (DASAN H660GM-A)"
-+	select SOC_EN7528
-+	select BINMAN
-+	select SPL_LOADER_SUPPORT if SPL
-+	help
-+	  Build a boot image for the little-endian MIPS1004Kc EN7528. TPL brings
-+	  up the SoC and runs the FE-SRAM DDR3 calibration stage (en7528_ddr.bin,
-+	  extracted from the vendor bootloader) before loading SPL into DDR. The exact
-+	  DDR-stage entry/handoff is validated over UART during bring-up; see
-+	  doc/board/econet/en7528.rst.
-+
-+config BOARD_EN7528_RAM
-+	bool "EN7528 RAM-boot (loaded by the stock bootbase at 0x80020000)"
-+	select SOC_EN7528
-+	help
-+	  Build a standalone U-Boot proper (no TPL/SPL, no DDR blob) linked at
-+	  0x80020000 to be RAM-loaded by the stock bootbase, which has already
-+	  initialized DRAM. XMODEM it in from the bldr> prompt ("xmdm 80020000
-+	  <len>") and run it with "jump 80020000". This is the non-destructive
-+	  bring-up path that exercises the whole upper stack (console, DTS, DM,
-+	  U-Boot proper) on real EN7528 silicon without needing the DDR stage.
-+
-+
-+endchoice
-+
-+endmenu
-diff --git a/arch/mips/mach-en75xx/Makefile b/arch/mips/mach-en75xx/Makefile
-new file mode 100644
-index 00000000..8b9a418f
---- /dev/null
-+++ b/arch/mips/mach-en75xx/Makefile
-@@ -0,0 +1,15 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+ifeq ($(CONFIG_TPL_BUILD),y)
-+obj-y += early_sfc.o
-+obj-y += tpl/
-+else
-+obj-y += cpu.o
-+ifeq ($(CONFIG_SPL_BUILD),y)
-+obj-y += early_sfc.o
-+obj-y += spl/
-+else
-+# U-Boot proper
-+obj-y += cache.o
-+endif
-+endif
-diff --git a/arch/mips/mach-en75xx/cache.c b/arch/mips/mach-en75xx/cache.c
-new file mode 100644
-index 00000000..80f5e718
---- /dev/null
-+++ b/arch/mips/mach-en75xx/cache.c
-@@ -0,0 +1,85 @@
++++ b/arch/mips/mach-en75xx/early_sfc.c
+@@ -0,0 +1,352 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * EN75xx (EN7528) cache and Linux-handoff helpers.
-+ *
-+ * The CM L2 on this part hangs on Hit_Writeback_Inv_SD (cache op 0x17).
-+ * Override the generic MIPS flush routines so they never issue that op,
-+ * decompress kernels through KSEG1, and join the CM coherent domain
-+ * before jumping to Linux.
++ * Minimal EN7512/EN7521 serial-flash reader used before driver model.
++ * Reconstructed from the vendor TCBoot move_data stage.
 + */
 +
-+#include <cpu_func.h>
-+#include <image.h>
-+#include <stdio.h>
-+#include <asm/addrspace.h>
-+#include <asm/cache.h>
-+#include <asm/cacheops.h>
++#include <linux/bitops.h>
++#include <linux/errno.h>
++#include <linux/kernel.h>
++#include <linux/types.h>
 +#include <asm/io.h>
-+#include <asm/mipsregs.h>
-+#include <asm/system.h>
 +#include <mach/en75xx.h>
 +
-+#define EN75XX_L1_LINE	32
-+#define EN75XX_L2_LINE	32
-+#define EN75XX_GCR_CL_COHERENCE	0x2008
++#define SF_READ_IDLE_EN		0x004
++#define SF_MTX_MODE_TOG		0x014
++#define SF_RDCTL_FSM			0x018
++#define SF_MACMUX_SEL			0x01c
++#define SF_MANUAL_EN			0x020
++#define SF_MANUAL_OPFIFO_EMPTY		0x024
++#define SF_MANUAL_OPFIFO_WDATA		0x028
++#define SF_MANUAL_OPFIFO_FULL		0x02c
++#define SF_MANUAL_OPFIFO_WR		0x030
++#define SF_MANUAL_DFIFO_FULL		0x034
++#define SF_MANUAL_DFIFO_WDATA		0x038
++#define SF_MANUAL_DFIFO_EMPTY		0x03c
++#define SF_MANUAL_DFIFO_RD		0x040
++#define SF_MANUAL_DFIFO_RDATA		0x044
++#define SF_SI_CK_SEL			0x09c
++#define SF_STRAP			0x114
 +
-+#define cache_loop(start, end, lsize, op) do {				\
-+	const void *_addr = (const void *)((start) & ~((lsize) - 1));	\
-+	const void *_aend = (const void *)(((end) - 1) & ~((lsize) - 1)); \
-+	if (!(lsize) || (start) == (end))				\
-+		break;							\
-+	for (; _addr <= _aend; _addr += (lsize))			\
-+		mips_cache((op), _addr);				\
-+} while (0)
++#define SF_STRAP_ADDR_4B		BIT(0)
++#define SF_STRAP_SPI_NAND		BIT(1)
++#define SF_STRAP_DUMMY_APPEND		BIT(2)
 +
-+void flush_cache(ulong start_addr, ulong size)
++#define OP_CSH				0x00
++#define OP_CSL				0x01
++#define OP_CK				0x02
++#define OP_OUTS				0x08
++#define OP_INS				0x0c
++
++#define OP_SHIFT			9
++#define OP_CMD_MASK			0x1f
++#define OP_LEN_MASK			0x1ff
++
++#define SPIN_LIMIT			1000000
++#define NAND_PAGE_SIZE			2048
++#define NOR_READ_CHUNK			1024
++
++static inline void __iomem *sf_reg(u32 reg)
 +{
-+	if (!size)
-+		return;
-+
-+	/*
-+	 * Write back L1 D so U-Boot's own cached stores reach DRAM.
-+	 * Do not Hit_Writeback_Inv_SD (hangs). Do not invent an L2 line
-+	 * size here: Hit_Invalidate_SD on U-Boot's working set during
-+	 * DM init fails.
-+	 */
-+	cache_loop(start_addr, start_addr + size, EN75XX_L1_LINE,
-+		   HIT_WRITEBACK_INV_D);
-+	cache_loop(start_addr, start_addr + size, EN75XX_L1_LINE,
-+		   HIT_INVALIDATE_I);
-+	sync();
-+	instruction_hazard_barrier();
++	return (void __iomem *)(EN75XX_SFC_BASE + reg);
 +}
 +
-+void flush_dcache_range(ulong start_addr, ulong stop)
++static int sf_wait_eq(u32 reg, u32 expected)
 +{
-+	if (start_addr == stop)
-+		return;
++	unsigned int timeout = SPIN_LIMIT;
 +
-+	cache_loop(start_addr, stop, EN75XX_L1_LINE, HIT_WRITEBACK_INV_D);
-+	sync();
++	while (timeout--) {
++		if (__raw_readl(sf_reg(reg)) == expected)
++			return 0;
++	}
++
++	return -ETIMEDOUT;
 +}
 +
-+void en75xx_prepare_linux(void)
++static int sf_op(u32 op, u32 len)
 +{
-+	unsigned long cmgcr, cm;
++	u32 val = ((op & OP_CMD_MASK) << OP_SHIFT) | (len & OP_LEN_MASK);
++	int ret;
 +
-+	/* Airoha WDT — same block as EN75XX_TIMER_BASE. */
-+	writel(0, (void __iomem *)EN75XX_WDT_CTRL);
++	ret = sf_wait_eq(SF_MANUAL_OPFIFO_FULL, 0);
++	if (ret)
++		return ret;
 +
-+	/*
-+	 * mips_cm_map() never writes GCR_CL_COHERENCE, so the boot core is
-+	 * out of the coherent domain and a CM/CPS kernel's vector fetches
-+	 * go stale. Same join as arch/mips/mach-mtmips/mt7621.
-+	 */
-+	cmgcr = read_c0_cmgcrbase();
-+	cm = ((unsigned long)cmgcr << 4) + CKSEG1;
-+	writel(0xff, (void __iomem *)(cm + EN75XX_GCR_CL_COHERENCE));
-+	instruction_hazard_barrier();
-+	printf("## EN75xx: WDT off, CM COHERENCE=0xff GCR@%08lx\n", cm);
++	__raw_writel(val, sf_reg(SF_MANUAL_OPFIFO_WDATA));
++	__raw_writel(1, sf_reg(SF_MANUAL_OPFIFO_WR));
++
++	return sf_wait_eq(SF_MANUAL_OPFIFO_EMPTY, 1);
 +}
 +
-+void arch_preboot_os(void)
++static int sf_put_byte(u8 val)
 +{
-+	en75xx_prepare_linux();
++	int ret = sf_wait_eq(SF_MANUAL_DFIFO_FULL, 0);
++
++	if (ret)
++		return ret;
++
++	__raw_writel(val, sf_reg(SF_MANUAL_DFIFO_WDATA));
++	return 0;
 +}
-diff --git a/arch/mips/mach-en75xx/cpu.c b/arch/mips/mach-en75xx/cpu.c
++
++static int sf_put_bytes(const u8 *buf, size_t len)
++{
++	size_t i;
++	int ret;
++
++	for (i = 0; i < len; i++) {
++		ret = sf_put_byte(buf[i]);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++static int sf_get_byte(u8 *val)
++{
++	int ret = sf_wait_eq(SF_MANUAL_DFIFO_EMPTY, 0);
++
++	if (ret)
++		return ret;
++
++	*val = __raw_readl(sf_reg(SF_MANUAL_DFIFO_RDATA)) & 0xff;
++	__raw_writel(1, sf_reg(SF_MANUAL_DFIFO_RD));
++	return 0;
++}
++
++static int sf_finish(void)
++{
++	int ret;
++
++	ret = sf_op(OP_CSH, 1);
++	if (ret)
++		return ret;
++
++	return sf_op(OP_CK, 5);
++}
++
++int en75xx_sfc_init(void)
++{
++	int ret;
++
++	__raw_writel(0x9, sf_reg(SF_SI_CK_SEL));
++	__raw_writel(0, sf_reg(SF_READ_IDLE_EN));
++
++	ret = sf_wait_eq(SF_RDCTL_FSM, 0);
++	if (ret)
++		return ret;
++
++	__raw_writel(0x9, sf_reg(SF_MTX_MODE_TOG));
++	__raw_writel(1, sf_reg(SF_MACMUX_SEL));
++	__raw_writel(1, sf_reg(SF_MANUAL_EN));
++
++	return 0;
++}
++
++static int sf_nand_load_page(u32 page)
++{
++	u8 page_addr[] = { page >> 16, page >> 8, page };
++	u8 status;
++	unsigned int timeout = SPIN_LIMIT;
++	int ret;
++
++	ret = sf_op(OP_CSL, 1);
++	if (ret)
++		return ret;
++	ret = sf_op(OP_OUTS, 1);
++	if (ret)
++		return ret;
++	ret = sf_put_byte(0x13);
++	if (ret)
++		return ret;
++	ret = sf_op(OP_OUTS, ARRAY_SIZE(page_addr));
++	if (ret)
++		return ret;
++	ret = sf_put_bytes(page_addr, ARRAY_SIZE(page_addr));
++	if (ret)
++		return ret;
++	ret = sf_finish();
++	if (ret)
++		return ret;
++
++	while (timeout--) {
++		ret = sf_op(OP_CSL, 1);
++		if (ret)
++			return ret;
++		ret = sf_op(OP_OUTS, 1);
++		if (ret)
++			return ret;
++		ret = sf_put_byte(0x0f);
++		if (ret)
++			return ret;
++		ret = sf_op(OP_OUTS, 1);
++		if (ret)
++			return ret;
++		ret = sf_put_byte(0xc0);
++		if (ret)
++			return ret;
++		ret = sf_op(OP_INS, 1);
++		if (ret)
++			return ret;
++		ret = sf_get_byte(&status);
++		if (ret)
++			return ret;
++		ret = sf_finish();
++		if (ret)
++			return ret;
++		if (!(status & BIT(0)))
++			return 0;
++	}
++
++	return -ETIMEDOUT;
++}
++
++static int sf_nand_read_cache(u32 column, u8 *dst, size_t len,
++			      bool dummy_append)
++{
++	u8 address[3];
++	size_t i;
++	int ret;
++
++	if (dummy_append) {
++		address[0] = column >> 8;
++		address[1] = column;
++		address[2] = 0;
++	} else {
++		address[0] = 0;
++		address[1] = column >> 8;
++		address[2] = column;
++	}
++
++	ret = sf_op(OP_CSL, 1);
++	if (ret)
++		return ret;
++	ret = sf_op(OP_OUTS, 1);
++	if (ret)
++		return ret;
++	ret = sf_put_byte(0x03);
++	if (ret)
++		return ret;
++	ret = sf_op(OP_OUTS, ARRAY_SIZE(address));
++	if (ret)
++		return ret;
++	ret = sf_put_bytes(address, ARRAY_SIZE(address));
++	if (ret)
++		return ret;
++
++	for (i = 0; i < len; i++) {
++		ret = sf_op(OP_INS, 1);
++		if (ret)
++			return ret;
++		ret = sf_get_byte(&dst[i]);
++		if (ret)
++			return ret;
++	}
++
++	return sf_finish();
++}
++
++static int sf_nor_read_once(u32 offset, u8 *dst, size_t len, bool addr4b,
++			    bool dummy_append)
++{
++	u8 address[4];
++	size_t addr_len = 0;
++	size_t i;
++	int ret;
++
++	if (addr4b)
++		address[addr_len++] = offset >> 24;
++	if (dummy_append) {
++		address[addr_len++] = offset >> 8;
++		address[addr_len++] = offset;
++		address[addr_len++] = 0;
++	} else {
++		address[addr_len++] = offset >> 16;
++		address[addr_len++] = offset >> 8;
++		address[addr_len++] = offset;
++	}
++
++	ret = sf_op(OP_CSL, 1);
++	if (ret)
++		return ret;
++	ret = sf_op(OP_OUTS, 1);
++	if (ret)
++		return ret;
++	ret = sf_put_byte(0x03);
++	if (ret)
++		return ret;
++
++	ret = sf_op(OP_OUTS, addr_len);
++	if (ret)
++		return ret;
++	ret = sf_put_bytes(address, addr_len);
++	if (ret)
++		return ret;
++
++	for (i = 0; i < len; i++) {
++		ret = sf_op(OP_INS, 1);
++		if (ret)
++			return ret;
++		ret = sf_get_byte(&dst[i]);
++		if (ret)
++			return ret;
++	}
++
++	return sf_finish();
++}
++
++static int sf_nor_read(u32 offset, u8 *dst, size_t len, bool addr4b,
++		       bool dummy_append)
++{
++	while (len) {
++		size_t chunk = NOR_READ_CHUNK - (offset % NOR_READ_CHUNK);
++		int ret;
++
++		if (chunk > len)
++			chunk = len;
++		ret = sf_nor_read_once(offset, dst, chunk, addr4b,
++				       dummy_append);
++		if (ret)
++			return ret;
++		offset += chunk;
++		dst += chunk;
++		len -= chunk;
++	}
++
++	return 0;
++}
++
++int en75xx_sfc_read(u32 offset, void *dst, size_t len)
++{
++	u32 strap = __raw_readl(sf_reg(SF_STRAP));
++	u8 *buf = dst;
++	int ret;
++
++	if (!(strap & SF_STRAP_SPI_NAND))
++		return sf_nor_read(offset, buf, len, strap & SF_STRAP_ADDR_4B,
++				   strap & SF_STRAP_DUMMY_APPEND);
++
++	while (len) {
++		u32 page = offset / NAND_PAGE_SIZE;
++		u32 column = offset % NAND_PAGE_SIZE;
++		size_t chunk = NAND_PAGE_SIZE - column;
++
++		if (chunk > len)
++			chunk = len;
++
++		ret = sf_nand_load_page(page);
++		if (ret)
++			return ret;
++		ret = sf_nand_read_cache(column, buf, chunk,
++					 strap & SF_STRAP_DUMMY_APPEND);
++		if (ret)
++			return ret;
++
++		offset += chunk;
++		buf += chunk;
++		len -= chunk;
++	}
++
++	return 0;
++}
+diff --git a/arch/mips/mach-en75xx/spl/Makefile b/arch/mips/mach-en75xx/spl/Makefile
 new file mode 100644
-index 00000000..ae1d627b
+index 00000000..d19fc6e6
 --- /dev/null
-+++ b/arch/mips/mach-en75xx/cpu.c
-@@ -0,0 +1,95 @@
++++ b/arch/mips/mach-en75xx/spl/Makefile
+@@ -0,0 +1,2 @@
++# SPDX-License-Identifier: GPL-2.0+
++obj-y += spl.o
+diff --git a/arch/mips/mach-en75xx/spl/spl.c b/arch/mips/mach-en75xx/spl/spl.c
+new file mode 100644
+index 00000000..a42b2837
+--- /dev/null
++++ b/arch/mips/mach-en75xx/spl/spl.c
+@@ -0,0 +1,47 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +
++#include <errno.h>
 +#include <init.h>
-+#include <asm/global_data.h>
-+#include <asm/io.h>
-+#include <linux/sizes.h>
++#include <spl.h>
++#include <spl_load.h>
 +#include <mach/en75xx.h>
 +
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int dram_init(void)
++void __noreturn board_init_f(ulong dummy)
 +{
-+	/*
-+	 * The DDR stage (blob, or the stock bootbase on the chainload path)
-+	 * publishes the DRAM size in REG_SAVE_INFO. EN7528: MB in bits [31:20]
-+	 * (for example, 0x20038400 => 512 MiB).
-+	 */
-+	u32 val = __raw_readl((void __iomem *)EN75XX_REG_SAVE_INFO);
-+	u32 size_mb = (val >> EN75XX_SAVE_DRAM_SHIFT) & EN75XX_SAVE_DRAM_MASK;
++	spl_init();
 +
-+	/*
-+	 * Some bootbases do not publish a valid DRAM size in REG_SAVE_INFO
-+	 * (the field reads back implausibly small). Fall back to sizing the
-+	 * DRAM at runtime in that case, probing through the uncached KSEG1
-+	 * alias to avoid cache-aliasing false positives and capping the scan
-+	 * at 256 MiB to stay clear of the SoC register island at 0x1fa00000.
-+	 */
-+	if (size_mb < 64)
-+		gd->ram_size = get_ram_size((long *)0xa0000000, SZ_256M);
-+	else
-+		gd->ram_size = (phys_size_t)size_mb << 20;
++	if (IS_ENABLED(CONFIG_SPL_SERIAL))
++		preloader_console_init();
 +
-+	return 0;
++	board_init_r(NULL, 0);
 +}
 +
-+int print_cpuinfo(void)
++static ulong en75xx_spl_read(struct spl_load_info *load, ulong offset,
++			     ulong count, void *buf)
 +{
-+	u32 val = __raw_readl((void __iomem *)EN75XX_REG_SAVE_INFO);
-+	u32 clk = (val >> EN75XX_SAVE_CLK_SHIFT) & EN75XX_SAVE_CLK_MASK;
++	if (en75xx_sfc_read(offset, buf, count))
++		return 0;
 +
++	return count;
++}
++
++static int en75xx_spl_load_image(struct spl_image_info *spl_image,
++				 struct spl_boot_device *bootdev)
++{
++	struct spl_load_info load;
++
++	if (en75xx_sfc_init())
++		return -EIO;
++
++	spl_load_init(&load, en75xx_spl_read, NULL, 1);
++	return spl_load(spl_image, bootdev, &load, 0,
++			EN75XX_UBOOT_IMAGE_OFFSET);
++}
++
++SPL_LOAD_IMAGE_METHOD("EN75XX SFC", 0, BOOT_DEVICE_BOARD,
++		      en75xx_spl_load_image);
++
++u32 spl_boot_device(void)
++{
++	return BOOT_DEVICE_BOARD;
++}
+diff --git a/arch/mips/mach-en75xx/tpl/Makefile b/arch/mips/mach-en75xx/tpl/Makefile
+new file mode 100644
+index 00000000..da834c75
+--- /dev/null
++++ b/arch/mips/mach-en75xx/tpl/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0+
++extra-y += start.o
++obj-y += tpl.o
+diff --git a/arch/mips/mach-en75xx/tpl/start.S b/arch/mips/mach-en75xx/tpl/start.S
+new file mode 100644
+index 00000000..1c192e2e
+--- /dev/null
++++ b/arch/mips/mach-en75xx/tpl/start.S
+@@ -0,0 +1,101 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++#include <asm/asm.h>
++#include <asm/regdef.h>
++#include <asm/mipsregs.h>
++#include <mach/en75xx.h>
++
++	.set noreorder
++
++ENTRY(_start)
++	b	reset
++	 mtc0	zero, CP0_COUNT
++
++	/*
++	 * TCBoot image descriptor. The magic is byte-reversed in the vendor
++	 * format, while section offsets are stored as big-endian words.
++	 */
++	.org	0x0c
++	.byte	0x36, 0x35, 0x37, 0x38
++	.word	EN75XX_DDR_BLOB_OFFSET
++	.word	EN75XX_DDR_BLOB_OFFSET + EN75XX_DDR_BLOB_SIZE
++	.word	EN75XX_SPL_IMAGE_OFFSET
++	.word	EN75XX_UBOOT_IMAGE_OFFSET
++
++	/* The vendor reset code begins at offset 0x48. */
++	.org	0x48
++reset:
++	/* Disable interrupts and force KSEG0 uncached before DDR exists. */
++	mfc0	t0, CP0_STATUS
++	li	t1, ~(ST0_IE | ST0_KSU)
++	and	t0, t0, t1
++	li	t1, ST0_BEV | ST0_ERL
++	or	t0, t0, t1
++	mtc0	t0, CP0_STATUS
++	mtc0	zero, CP0_CAUSE
++	mtc0	zero, CP0_COMPARE
++
++	mfc0	t0, CP0_CONFIG
++	li	t1, ~7
++	and	t0, t0, t1
++	ori	t0, t0, 2
++	mtc0	t0, CP0_CONFIG
++	ehb
++
++	/* Arbiter and static-memory mappings copied from TCBoot. */
++	li	t0, EN75XX_SYSCTL_BASE
++	li	t1, 0x80071f1e
++	sw	t1, 0x20(t0)
++	li	t1, 0x00071f1f
++	sw	t1, 0x24(t0)
++	li	t1, 0x80050000
++	sw	t1, 0x34(t0)
++
++	li	t0, EN75XX_SMC_BASE
++	li	t1, 0x102d1040
++	sw	t1, 0x00(t0)
++	li	t1, 0x200028d0
++	sw	t1, 0x14(t0)
++
++	/* Disable the interrupt controller. */
++	li	t0, EN75XX_INTC_BASE
++	sw	zero, 0x00(t0)
++	sw	zero, 0x04(t0)
++
++	/* Enable PBUS access to the 48 KiB FE SRAM. */
++	li	t0, EN75XX_FE_SRAM_SEL
++	lw	t1, 0(t0)
++	ori	t1, t1, 1
++	sw	t1, 0(t0)
++	sync
++
++	li	sp, EN75XX_TPL_STACK_ADDR
++	li	fp, EN75XX_TPL_STACK_ADDR
++
++	la	t9, tpl_main
++	jalr	t9
++	 nop
++
++1:	b	1b
++	 nop
++END(_start)
++
++LEAF(en75xx_run_ddr_blob)
++	li	t0, EN75XX_TPL_SAVED_RA
++	sw	ra, 0(t0)
++
++	la	t1, 1f
++	li	t0, EN75XX_SCREG_WR0
++	sw	t1, 0(t0)
++	sync
++
++	li	t9, EN75XX_DDR_BLOB_ADDR
++	jr	t9
++	 nop
++1:
++	li	t0, EN75XX_SCREG_WR0
++	sw	zero, 0(t0)
++	li	t0, EN75XX_TPL_SAVED_RA
++	lw	ra, 0(t0)
++	jr	ra
++	 nop
++END(en75xx_run_ddr_blob)
+diff --git a/arch/mips/mach-en75xx/tpl/tpl.c b/arch/mips/mach-en75xx/tpl/tpl.c
+new file mode 100644
+index 00000000..ca2b2ca8
+--- /dev/null
++++ b/arch/mips/mach-en75xx/tpl/tpl.c
+@@ -0,0 +1,158 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include <compiler.h>
++#include <linux/byteorder/generic.h>
++#include <linux/types.h>
++#include <asm/io.h>
++#include <mach/en75xx.h>
++
++#define IH_MAGIC	0x27051956
++#define IH_HDR_SIZE	64
++
++struct en75xx_legacy_header {
++	u32 magic;
++	u32 hcrc;
++	u32 time;
++	u32 size;
++	u32 load;
++	u32 ep;
++	u32 dcrc;
++	u8 os;
++	u8 arch;
++	u8 type;
++	u8 comp;
++	u8 name[32];
++};
++
++static u32 get_be32(u32 val)
++{
++	return be32_to_cpu(val);
++}
++
++/*
++ * 16550 register access differs by SoC endianness:
++ *   EN7512 (big-endian): 8-bit registers live in the top byte of each 32-bit
++ *   word, i.e. at byte offset (reg << 2) + 3.
++ *   EN7528 (little-endian, reg-io-width=4, reg-shift=2): 32-bit word access at
++ *   (reg << 2); the 8-bit value sits in the low byte.
++ */
 +#if defined(CONFIG_SOC_EN7528)
-+	printf("CPU:   EcoNet/Airoha EN7528 MIPS1004Kc\n");
++static inline void tpl_uart_wr(u32 reg, u32 val)
++{
++	__raw_writel(val, (void __iomem *)(EN75XX_UART0_BASE + (reg << 2)));
++}
++
++static inline u32 tpl_uart_rd(u32 reg)
++{
++	return __raw_readl((void __iomem *)(EN75XX_UART0_BASE + (reg << 2)));
++}
 +#else
-+	printf("CPU:   EcoNet/Airoha EN7512/EN7521 MIPS34K\n");
++static inline void tpl_uart_wr(u32 reg, u32 val)
++{
++	__raw_writeb(val, (void __iomem *)(EN75XX_UART0_BASE + (reg << 2) + 3));
++}
++
++static inline u32 tpl_uart_rd(u32 reg)
++{
++	return __raw_readb((void __iomem *)(EN75XX_UART0_BASE + (reg << 2) + 3));
++}
 +#endif
-+	if (clk)
-+		printf("Clock: %u MHz\n", clk);
-+	else
-+		printf("Clock: unknown\n");
 +
-+	return 0;
++#define UART_RBR_THR	0	/* +0x00: receive/transmit, DLL when DLAB=1 */
++#define UART_IER_DLM	1	/* +0x04: interrupt enable, DLM when DLAB=1 */
++#define UART_IIR_FCR	2	/* +0x08: FIFO control */
++#define UART_LCR	3	/* +0x0c: line control (DLAB) */
++#define UART_MCR	4	/* +0x10: modem control */
++#define UART_LSR	5	/* +0x14: line status (bit5 = THR empty) */
++
++static void tpl_putc(u8 ch)
++{
++	while (!(tpl_uart_rd(UART_LSR) & 0x20))
++		;
++	tpl_uart_wr(UART_RBR_THR, ch);
 +}
 +
-+ulong notrace get_tbclk(void)
++static void tpl_hang(u8 code)
 +{
-+	u32 val = __raw_readl((void __iomem *)EN75XX_REG_SAVE_INFO);
-+	u32 clk = (val >> EN75XX_SAVE_CLK_SHIFT) & EN75XX_SAVE_CLK_MASK;
-+
-+	/*
-+	 * CP0 Count rate per SoC: EN7528 = clk_field * 2 MHz (hardware-measured
-+	 * via sleep timing), EN7512 = clk_field / 2. See EN75XX_COUNT_HZ_PER_CLK.
-+	 */
-+	if (clk)
-+		return (ulong)clk * EN75XX_COUNT_HZ_PER_CLK;
-+
-+	return CONFIG_SYS_MIPS_TIMER_FREQ;
-+}
-+
-+phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
-+{
-+	/*
-+	 * DRAM is aliased into KSEG0 at 0x80000000, but KSEG0 ends at
-+	 * 0x9fffffff and the SoC MMIO / FE-SRAM island sits at phys 0x1fa00000
-+	 * (= KSEG0 0x9fa00000). On a 512 MiB part, ram_base + size = 0xa0000000
-+	 * would relocate U-Boot past KSEG0 / into the island and hang. Relocating
-+	 * into high DRAM (0x9exxxxxx) also hangs on this SoC (cache-flush over the
-+	 * large range / unstable high DRAM). U-Boot gains nothing from a high top,
-+	 * so clamp to the proven-good 0x90000000 (256 MiB); Linux still gets the
-+	 * full DRAM via the /memory DT node.
-+	 */
-+	phys_addr_t top = 0x80000000UL + gd->ram_size;
-+
-+	if (top > 0x90000000UL)
-+		top = 0x90000000UL;
-+
-+	return top;
-+}
-+
-+void _machine_restart(void)
-+{
-+	__raw_writel(0x80000000, (void __iomem *)EN75XX_RESET_CONTROL);
++	tpl_putc(code);
++	tpl_putc('\r');
++	tpl_putc('\n');
 +
 +	for (;;)
 +		;
 +}
-diff --git a/arch/mips/mach-en75xx/include/mach/en75xx.h b/arch/mips/mach-en75xx/include/mach/en75xx.h
-new file mode 100644
-index 00000000..a42e304b
---- /dev/null
-+++ b/arch/mips/mach-en75xx/include/mach/en75xx.h
-@@ -0,0 +1,103 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Generic register map for the EcoNet/Airoha EN75xx MIPS SoCs.
-+ *
-+ * The EN7512/EN7521 (MIPS 34Kc, big-endian) and the EN7528 (MIPS 1004Kc,
-+ * little-endian) share the same TCBoot-derived boot model and almost the
-+ * same peripheral register map. Values that differ between the two are
-+ * selected here on CONFIG_SOC_EN7528.
-+ */
-+#ifndef __MACH_EN75XX_H__
-+#define __MACH_EN75XX_H__
 +
-+/* --- Peripheral bases (identical across the family) --- */
-+#define EN75XX_FLASH_BASE		0xbfc00000
-+#define EN75XX_SFC_BASE			0xbfa10000
-+#define EN75XX_CHIP_SCU_BASE		0xbfa20000
-+#define EN75XX_FE_SRAM_BASE		0xbfa30000
-+#define EN75XX_FE_SRAM_CACHED		0x9fa30000
-+#define EN75XX_SYSCTL_BASE		0xbfb00000
-+#define EN75XX_SMC_BASE			0xbfb10000
-+#define EN75XX_DRAMC_BASE		0xbfb20000
-+#define EN75XX_INTC_BASE		0xbfb40000
-+#define EN75XX_UART0_BASE		0xbfbf0000
-+#define EN75XX_TIMER_BASE		0xbfbf0100
-+#define EN75XX_WDT_CTRL			0xbfbf0100	/* airoha WDT; writel(0) stops it */
-+#define EN75XX_GPIO_BASE		0xbfbf0200
-+
-+/* --- SYSCTL scratch/handoff registers (identical) --- */
-+#define EN75XX_RESET_CONTROL		(EN75XX_SYSCTL_BASE + 0x040)
-+#define EN75XX_FE_SRAM_SEL		(EN75XX_SYSCTL_BASE + 0x958)
-+#define EN75XX_SCREG_WR0		(EN75XX_SYSCTL_BASE + 0x280)
-+#define EN75XX_REG_SAVE_INFO		(EN75XX_SYSCTL_BASE + 0x284)
-+
-+/* --- Flash image layout: DDR blob offset is common; SPL/U-Boot offsets
-+ *     differ because the EN7528 DDR blob is much larger (see below). --- */
-+#define EN75XX_DDR_BLOB_OFFSET		0x00008000
-+
-+/* --- DRAM-size / clock info in REG_SAVE_INFO (0xbfb00284).
-+ *     Field positions differ per SoC - see the EN7528/EN7512 blocks below.
-+ *     Read as: (val >> _SHIFT) & _MASK. --- */
-+
++static void tpl_uart_init(void)
++{
 +#if defined(CONFIG_SOC_EN7528)
-+/*
-+ * EN7528 (MIPS 1004Kc, little-endian).
-+ *
-+ * The DDR stage (en7528_ddr.bin, extracted from the vendor
-+ * bootloader) is the full FE-SRAM first stage: it self-inits SoC registers,
-+ * calibrates DDR3 and hands control back via *(EN75XX_SCREG_WR0). It is
-+ * loaded at the FE-SRAM base 0x9fa30000 (NOT +0x2800 like EN7512) and is
-+ * 0x5a70 bytes.
-+ *
-+ * NOTE (hardware bring-up): the blob's own entry word is `j 0xbfc00060`,
-+ * i.e. it is a plain subroutine: entry 0x9fa30000 = NOP pad -> stub @+0x290
-+ * -> main(), and one jalr *(SCREG_WR0) hands control back to us.
-+ * The exact entry/handoff must be validated over UART — see
-+ * doc/board/econet/en7528.rst. The constants below build a coherent
-+ * image and are the starting point for that bring-up.
-+ */
-+#define EN75XX_DDR_BLOB_ADDR		(EN75XX_FE_SRAM_CACHED + 0x0000)
-+#define EN75XX_DDR_BLOB_SIZE		0x00005a70
-+/* The 0xf0a0-byte blob at flash 0x8000 ends at 0x170a0, so SPL starts at
-+ * 0x20000 (EN7512 could use 0x10000 with its 0x4f70 blob). */
-+#define EN75XX_SPL_IMAGE_OFFSET		0x00020000
-+#define EN75XX_UBOOT_IMAGE_OFFSET	0x00050000
-+/* Keep TPL scratch clear of the (large) EN7528 blob image. */
-+#define EN75XX_SPL_HEADER_ADDR		(EN75XX_FE_SRAM_BASE + 0x0f000)
-+#define EN75XX_TPL_STACK_ADDR		(EN75XX_FE_SRAM_BASE + 0x0fff0)
-+#define EN75XX_TPL_SAVED_RA		(EN75XX_FE_SRAM_BASE + 0x0ff00)
-+#define EN75XX_SAVE_DRAM_SHIFT		20
-+#define EN75XX_SAVE_DRAM_MASK		0xfff		/* MB, bits [31:20] */
-+#define EN75XX_SAVE_CLK_SHIFT		10
-+#define EN75XX_SAVE_CLK_MASK		0x3ff		/* MHz, bits [19:10] */
-+#define EN75XX_COUNT_HZ_PER_CLK	2000000	/* CP0 Count = clk_field * 2 MHz (measured) */
++	/*
++	 * EN7528 UART fractional divider: 115200 8N1 = XYD 0xEA00FDE8
++	 * (X=round(baud*13/25)=0xEA00, Y=65000), DLL=1, DLM=0. XYD is reg 11 @
++	 * +0x2c.
++	 */
++	tpl_uart_wr(UART_LCR, 0x80);		/* DLAB = 1 */
++	tpl_uart_wr(11, 0xea00fde8);		/* XYD fractional divider */
++	tpl_uart_wr(UART_RBR_THR, 0x01);	/* DLL = 1 */
++	tpl_uart_wr(UART_IER_DLM, 0x00);	/* DLM = 0 */
++	tpl_uart_wr(UART_LCR, 0x03);		/* 8N1, DLAB = 0 */
++	tpl_uart_wr(UART_IIR_FCR, 0x07);	/* enable + clear FIFOs */
++	tpl_uart_wr(UART_MCR, 0x00);
++	tpl_uart_wr(UART_IER_DLM, 0x00);
 +#else
-+/*
-+ * EN7512/EN7521 (MIPS 34Kc, big-endian). The vendor spram DDR-only stage
-+ * is linked for and entered at 0x9fa32800 and is 0x4f70 bytes.
-+ */
-+#define EN75XX_DDR_BLOB_ADDR		(EN75XX_FE_SRAM_CACHED + 0x2800)
-+#define EN75XX_DDR_BLOB_SIZE		0x00004f70
-+#define EN75XX_SPL_IMAGE_OFFSET		0x00010000
-+#define EN75XX_UBOOT_IMAGE_OFFSET	0x00050000
-+#define EN75XX_SPL_HEADER_ADDR		(EN75XX_FE_SRAM_BASE + 0x40)
-+#define EN75XX_TPL_STACK_ADDR		(EN75XX_FE_SRAM_BASE + 0xbff0)
-+#define EN75XX_TPL_SAVED_RA		(EN75XX_FE_SRAM_BASE + 0x00)
-+#define EN75XX_SAVE_DRAM_SHIFT		0
-+#define EN75XX_SAVE_DRAM_MASK		0xfff		/* MB, bits [11:0] */
-+#define EN75XX_SAVE_CLK_SHIFT		12
-+#define EN75XX_SAVE_CLK_MASK		0xfff		/* MHz, bits [23:12] */
-+#define EN75XX_COUNT_HZ_PER_CLK	500000
++	void __iomem *base = (void __iomem *)EN75XX_UART0_BASE;
++
++	__raw_writeb(0x80, base + 0x0f);
++	__raw_writel(0xea00fde8, base + 0x2c);
++	__raw_writeb(0x01, base + 0x03);
++	__raw_writeb(0x00, base + 0x07);
++	__raw_writeb(0x03, base + 0x0f);
++	__raw_writeb(0x0f, base + 0x0b);
++	__raw_writeb(0x00, base + 0x13);
++	__raw_writeb(0x00, base + 0x27);
++	__raw_writeb(0x00, base + 0x07);
 +#endif
++}
 +
-+#ifndef __ASSEMBLY__
-+#include <stddef.h>
-+#include <linux/types.h>
++void __noreturn tpl_main(void)
++{
++	struct en75xx_legacy_header *hdr =
++		(struct en75xx_legacy_header *)EN75XX_SPL_HEADER_ADDR;
++	void (*entry)(void);
++	u32 load, size, ep;
++	int ret;
 +
-+int en75xx_sfc_read(u32 offset, void *dst, size_t len);
-+int en75xx_sfc_init(void);
-+void en75xx_run_ddr_blob(void);
-+void en75xx_prepare_linux(void);
-+#endif
++	tpl_uart_init();
++	if (en75xx_sfc_init())
++		tpl_hang('I');
 +
-+#endif /* __MACH_EN75XX_H__ */
++	ret = en75xx_sfc_read(EN75XX_DDR_BLOB_OFFSET,
++			      (void *)EN75XX_DDR_BLOB_ADDR,
++			      EN75XX_DDR_BLOB_SIZE);
++	if (ret)
++		tpl_hang('F');
++
++	en75xx_run_ddr_blob();
++
++	ret = en75xx_sfc_read(EN75XX_SPL_IMAGE_OFFSET, hdr, IH_HDR_SIZE);
++	if (ret || get_be32(hdr->magic) != IH_MAGIC)
++		tpl_hang('H');
++
++	size = get_be32(hdr->size);
++	load = get_be32(hdr->load);
++	ep = get_be32(hdr->ep);
++
++	if (!size || (load & 0xe0000000) != 0x80000000 ||
++	    (ep & 0xe0000000) != 0x80000000 || load + size < load)
++		tpl_hang('L');
++
++	/* Write through KSEG1 so no dirty cache lines hide the SPL image. */
++	ret = en75xx_sfc_read(EN75XX_SPL_IMAGE_OFFSET + IH_HDR_SIZE,
++			      (void *)(load | 0x20000000), size);
++	if (ret)
++		tpl_hang('S');
++
++	__asm__ volatile("sync" : : : "memory");
++	entry = (void (*)(void))ep;
++	entry();
++	__builtin_unreachable();
++}
 -- 
 2.53.0
 
