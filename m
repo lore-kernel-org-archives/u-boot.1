@@ -1,113 +1,112 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BEA2C61DC6
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 16:42:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 386A5C61DBD
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 17:11:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 46E86403E8;
-	Wed, 26 Aug 2026 16:42:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CEA1180984;
+	Wed, 26 Aug 2026 17:11:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Xki7T9c07ISX; Wed, 26 Aug 2026 16:42:35 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ErEUI7CNsBvi; Wed, 26 Aug 2026 17:11:34 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787762555;
-	bh=qaEIZcEVCTTOiq4MSBxfkUyzgfR70UVkah2CIFM/YM8=;
+	d=lists.u-boot-project.org; s=default; t=1787764294;
+	bh=U6y0vXAVNrTnDpA4dmmh55oFlmyGoo8wFvWsEz6/l90=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=i02fdbxIwytncU5UK27/74KkwDfiCOP/gRd1heC2M/1kY92GwIoQ/IWD9Vrpuvued
-	 ZakUNC+nLGXVJEAa2cWDrSUFmcG7ucvVIHmns/SFFPitFZUswTOjoo2Yx8QXS1KHYw
-	 m/a5tjbyh2X31CGob5lnjnJcDlGQRGIFYScAE0HwNfbzsd9WglGEBh2OGpdUxbyQi1
-	 6KMKl18KWaGowlhIwRyBGxKexnNYJex0KHlWwNPnrqePr4i5tN+WphODNIvQfHks2Q
-	 jGU+ZOophZMBXFPMX8RwYtlT0+nvyJSGF1G+GOQ31pqMhRtCbstnSC+pGsLyAcfWvx
-	 mgoK/2d/3pc1Q==
+	b=hDc2qYXJQk58/3MK4F29b0wgSsxaeITY84jw9lvknac/8gvPoTkbN6Fjiegsv/jzX
+	 jHohLmGt+NgMcKBMpBRU0CAV5C7Rmp2Hxoc5LLb9f90XmBD82KdAaTltIu1zjDgJvi
+	 GOqNjyoIEcYJKnAeRjM4sPfe36UkG+8UKYaZ1yVhYCzF9HfEBJBSj9ewONzc083q/l
+	 FkI/weyScFE1opXeF39mvTzqJoVWFaY37CuyE+0ZgOMzT9Mjva1sasRvgxjt006dYy
+	 xT6otIqs2bXdrt4wWxC4qhOWsKa5pNbrPRIE8jfMhCuVem0MOGLv84A4qAGb1l0e4l
+	 WBClEm8ecbtLw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 34356404A8;
-	Wed, 26 Aug 2026 16:42:35 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id EA46229B
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:42:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 95F9F80992;
+	Wed, 26 Aug 2026 17:11:34 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id B4994230
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 17:11:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id DC7AA40206
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:42:33 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A626180992
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 17:11:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id A7a8aErUvlac for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 16:42:33 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7xPBmKfxLTED for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 17:11:31 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::235; helo=mail-oi1-x235.google.com;
+ client-ip=2607:f8b0:4864:20::22a; helo=mail-oi1-x22a.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=iGK994+U
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2AFE7400C2
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:42:32 +0000 (UTC)
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-49ff971e903so92464b6e.0
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:42:32 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=XGyVocOI
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 51F9A80984
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 17:11:29 +0000 (UTC)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-495c49f8eccso1266852b6e.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 10:11:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787762551; x=1788367351;
+ d=baylibre.com; s=google; t=1787764288; x=1788369088;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=qaEIZcEVCTTOiq4MSBxfkUyzgfR70UVkah2CIFM/YM8=;
- b=iGK994+UVxsw7d49lNENxDrrGbOpUGOJocjpEPci38reuew36nG0wcZrvr5pUSzMOz
- bq6Y58InTq45hayRxFDSsMveaXxHSyVQrQnuSMXrEl5TuvNjBA1M1qDjCnt0K7N310tn
- PqXNWs4y3SR52YhfP0by56ZSY9mdJ+jf+sG0aWzNLwpxYkw9FesBH0mqX13h94mGw6X9
- 78ayfLP8kBdmAsPtVuO9Lf6J23SVfgoIdaPc9CjdS94M65IosodUN0yvaL8DsCmMSpMC
- oJ3L1P8CFuN6kymUhARRnXGaob3PRQNDaA0ZCxsspQhY10gg6Do5nJiQtpAzfQPYb5uw
- aOyQ==
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=U6y0vXAVNrTnDpA4dmmh55oFlmyGoo8wFvWsEz6/l90=;
+ b=XGyVocOIqOCfOcpMliMzajh+JYf4WDQCkXrpPofQibpaFWn3eyKvyygvZW1TYaVgp1
+ 2ZxKSRIQgEHP5TeV+onx7433ZdIQYBMxzTLmX9vGZdM/NWe+1qG7qBC9MI3iE1h+/0Hu
+ 9EqWfWJJcLyrYRDxfOPwVp1azsdOC2JjBjGnyyhwRD++Zq9KOqjuK+Z2S1PiMX7n53L+
+ l3kCqea05gRINJmJysFkDTaRXGtxpQAJE5F3t4J2xDMVXueIlk1CWlZA19ser5WnmbEj
+ SC0aIQ0At3Q7ARL5yAvuWDlZ1Qd21tDYBXJmvXRcwDH4EYQwwYhCpcY27Jd8LGt/pfEY
+ gr5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787762551; x=1788367351;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1787764288; x=1788369088;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=qaEIZcEVCTTOiq4MSBxfkUyzgfR70UVkah2CIFM/YM8=;
- b=tOTL5EadRutVv1pvXedvt9fXyoGojBT5QNFYWVaz0iGw2GF/acDKkd8zLiJF82mkY4
- kio9U1h6WME6KXDUFvn/x/w40qk9/DcUBJNTtSU5uHV7hMIvS12vu+t5e+rh92D7wzit
- VSdDd1NoH5RvZ3YbfpNaEdPYeAGkz8Lxv1wB1yQC5nCXcpTjPsrlJcplNKP7STx9Lvlu
- Ve8x0cOUMpXmmWaTuMpUa2LMR+GqMdM6mvqS5mazlz2t6Z+6uuif2E4QpiaUQAIoSU2/
- G/eymdDaRXJhrhhoylAUnGEd7MSHYYBTgbooENGGLrp/FzGd+TQfbsPmqV/YSfIKsuKv
- Xx3A==
+ bh=U6y0vXAVNrTnDpA4dmmh55oFlmyGoo8wFvWsEz6/l90=;
+ b=PN2mhyvcxkpwUY2JXI+RqLD2rq0IQ+NsM0xbe3jsd1k6w1H3kHcfi4UK4Qg6/AhfOB
+ 5tVYUhwzV6iIETjos3u3AY7FdooptPeFn0fMNP15BBlqm2bGvZ9SJ/PiFNtAz6lw3uiR
+ H3m/QWK9YEFWrdZ3l6Z9ul3Lmhg8l8c6gEKT9Oj9dvR9aRrAiNgnQ6UxewLEIFRIR4b3
+ EXi4Ikdy3X+SDDYVnoc1vPCeGHuB3embLXmfKJA3K7xsdV66zTu23sX6lFrld2TdyACV
+ pX25jwe+u4QecZUCpDIJYTWi9zPKdyJVUQq+LUK1uVLuGymP/UxbfAEu7Ouv2l9SDrX/
+ scpw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoWb/mLgXr+CYDIZa1AKm4JDM7fDEnzw6fiZzXEVMM8zYmeXttoaSDX0lP5wksx2KZMQV2VJV4=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++knpExUnBtF068I+z8MZsg4xxkklr5pft2TOzkDierRL2SLZMxc
- RCWXPjv4J9fAUWdQZt3DCRvDyHmD0xLzTEG2rvkc4rZ+CLLX4PzZe/QkwFv+o2aVhBU=
-X-Gm-Gg: AR+sD12Ir9iqOH0snN8lqewuRdD+TJeq7Sipjnyc4IbuPp0EFPTgJmANURTd+NYoGu0
- mSAuVaAvyH34xTJWNNJgPtpuun1O3aJQKaU1Z2ocSnSwhktEmIhZjTE9vFnQQuig9hpb3Idv27b
- OVqJU95UxZC0wr5IPXR2qZbki8jX2G5SiIUUPZpsEGBQ9u8yTMhu8RODNUiDpNOjww7kxJUaTVF
- d92MtJmpAYuhRm5ebyK1EF8PlXskujZMqnap4p555z9DvoDB900SZYxUOUwnbXHe2sWNL2yhFdb
- Lsv+Epffdb4JEHUbVH8pwUCTI2X7Myy9dXKrsVr4NR966FzTqKaS1AIBwv0pT70taF8VybCRPBx
- 847ScNk7P1BpVbOwy5Z4IRybArBm2+2zWVGi8GnuNpc7iIcwQkKbO+NE7mDcTsfi4g0lnbZlQ1H
- 95FTurl3WX06+1+5rE51TFDSjqKzmWhpLghqVQtkjGc3CZhdn/v5Cyc3xMfDXySMDrZUkJ8gYXV
- cKj6eGoYvNW27KaXIHeKXB/wjpphdt/9V1IotY=
-X-Received: by 2002:a05:6808:508d:b0:4af:9364:b5a9 with SMTP id
- 5614622812f47-4b37c82dc53mr469813b6e.6.1787762551550; 
- Wed, 26 Aug 2026 09:42:31 -0700 (PDT)
+ AHgh+RpigETRxU6NS12EX/p0hBNgpsbWbwFlRdX4eOtII3S6mSYZw0U0llTFh1GOPY/0miqTbVOzteA=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nXMw7UA+oeemtdwNPHjrplJ2X9QfuqZdpqRYW3HrYrnhe53f+m
+ xro0PTMRAshhCiG2YXX86FlBeVC+0HF1flEvYPfIv6dpPHi0wa634ZfKiAXEnqIcMEc=
+X-Gm-Gg: AR+sD10rvTYKvi3qgX74vIevbD2EmghXQ0xc7hHJCfqJJej24XFAlXTMljSAuQEm4Ja
+ 7jFt3i3iGTqBbNq5R+aOmcTEC2qDWCwm85dQFLFkZDxJ6WakLfdbIlsCv6vw0SgHWOYydP4VDm1
+ 9Lj3DabbJK0w/C1Z9JksQuWhpPKJSPAUinChHJ9CxktSueZWPZ5BbgyYCabUlC+RPcZPxRVkZW/
+ q8O3FDUDSBkIS5rogh/i5MK0mp1503c854vx2MSpHIZOeSbVgxFSxsTTwKlt9hQZWQ1BDnBUwsU
+ LHmJmZ3fv63YmO6801nJGoYjFxsnElOPN+J39jXnR82b71/kk1Mn/o+JlLZ7iXsaH9SBCHVCQ+y
+ U93wWF7XyM8tQkSOJisDHuzV//6nsT0r8ps5QpSLds47usdrjf/eZ/PZ40ZftswZz9XoMFip4mv
+ TCHBbG8g6tAlsy7TstN9n0+s/5HDFqUB758Ncq65lrxRf2tMUFET0ZCvmWz3qH9AhvLLwn/oymD
+ 2UX105x036C0Wu0Dajgr+/2htqToxKYlZGpazo=
+X-Received: by 2002:a05:6808:c297:b0:4b2:e95f:380d with SMTP id
+ 5614622812f47-4b36698e87fmr10311526b6e.6.1787764288027; 
+ Wed, 26 Aug 2026 10:11:28 -0700 (PDT)
 Received: from ?IPV6:2600:8803:e7e4:500:162c:81fd:da88:2ea6?
  ([2600:8803:e7e4:500:162c:81fd:da88:2ea6])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4b36abc0827sm2077520b6e.18.2026.08.26.09.42.29
+ 5614622812f47-4b36a7b06c2sm2105797b6e.7.2026.08.26.10.11.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Aug 2026 09:42:29 -0700 (PDT)
-Message-ID: <21736156-823e-46ce-bb19-4c0994371b96@baylibre.com>
-Date: Wed, 26 Aug 2026 11:42:28 -0500
+ Wed, 26 Aug 2026 10:11:27 -0700 (PDT)
+Message-ID: <f7af7e3a-f721-48a3-92e9-2fb48c735a3d@baylibre.com>
+Date: Wed, 26 Aug 2026 12:11:26 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/14] include: linux/hdmi.h: add HDMI colorspace and
- colorimetry enums
+Subject: Re: [PATCH v2 11/14] video: mediatek: add new hdmi driver
 To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -125,10 +124,10 @@ Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Rasmus Villemoes <ravi@prevas.dk>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>
 References: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
- <20260826-add-genio-510-and-genio-700-hdmi-v2-10-68ebb1bf17df@baylibre.com>
-Content-Language: en-US
+ <20260826-add-genio-510-and-genio-700-hdmi-v2-11-68ebb1bf17df@baylibre.com>
 From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-10-68ebb1bf17df@baylibre.com>
+Content-Language: en-US
+In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-11-68ebb1bf17df@baylibre.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -145,55 +144,532 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 On 8/26/26 8:09 AM, Julien Stephan wrote:
-> Import the hdmi_colorspace and hdmi_colorimetry enumerations from Linux'
-> include/linux/hdmi.h. These describe the AVI InfoFrame colorspace and
-> colorimetry fields defined by the HDMI specification and are identical
-> across HDMI transmitters, so keep them in a generic header rather than
-> duplicating them in each driver.
+> Add a UCLASS_VIDEO driver for the HDMI TX v2 IP found on the MT8188.
 > 
+> On probe, the driver waits for a plugged and powered display, reads
+> its EDID through the DDC bus to select the preferred mode, configures
+> the HDMI controller and PHY accordingly, and then programs all the
+> components of the vdosys1 pipeline (MDP RDMA, padding, VPP merge,
+> ETHDR mixer, mutex, DPI1) to scan out the framebuffer. The
+> framebuffer lives in a dedicated reserved-memory region referenced by
+> the "memory-region" property of the hdmi node.
+> 
+> Signed-off-by: Pavlo Yadvychuk <pyadvychuk@baylibre.com>
 > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 > ---
->  include/linux/hdmi.h | 30 ++++++++++++++++++++++++++++++
->  1 file changed, 30 insertions(+)
+>  drivers/video/Kconfig             |    1 +
+>  drivers/video/Makefile            |    1 +
+>  drivers/video/mediatek/Kconfig    |   21 +
+>  drivers/video/mediatek/Makefile   |   16 +
+>  drivers/video/mediatek/mtk_hdmi.c | 1102 +++++++++++++++++++++++++++++++++++++
+>  5 files changed, 1141 insertions(+)
 > 
-> diff --git a/include/linux/hdmi.h b/include/linux/hdmi.h
+> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> index 15000e21840..cb3ba6a6f63 100644
+> --- a/drivers/video/Kconfig
+> +++ b/drivers/video/Kconfig
+> @@ -770,6 +770,7 @@ config VIDEO_LCD_SPI_MISO
+>  	  option takes a string in the format understood by 'sunxi_name_to_gpio'
+>  	  function, e.g. PH1 for pin 1 of port H.
+>  
+> +source "drivers/video/mediatek/Kconfig"
+>  source "drivers/video/meson/Kconfig"
+>  
+>  config VIDEO_MVEBU
+> diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+> index 082b8967982..a20011b9b17 100644
+> --- a/drivers/video/Makefile
+> +++ b/drivers/video/Makefile
+> @@ -92,5 +92,6 @@ obj-$(CONFIG_VIDEO_SEPS525) += seps525.o
+>  obj-$(CONFIG_VIDEO_ZYNQMP_DPSUB) += zynqmp/
+>  
+>  obj-y += bridge/
+> +obj-y += mediatek/
+>  obj-y += sunxi/
+>  obj-y += tegra/
+> diff --git a/drivers/video/mediatek/Kconfig b/drivers/video/mediatek/Kconfig
 > new file mode 100644
-> index 00000000000..dee862d2a63
+> index 00000000000..54cf1b11fdf
 > --- /dev/null
-> +++ b/include/linux/hdmi.h
-> @@ -0,0 +1,30 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-
-Looks like original source is MIT licensed, so `MIT AND ...`
-
+> +++ b/drivers/video/mediatek/Kconfig
+> @@ -0,0 +1,21 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +#
+> +# Copyright (C) 2026 BayLibre, SAS
+> +#
+> +# Author: Julien Stephan <jstephan@baylibre.com>
+> +
+> +config VIDEO_MEDIATEK_HDMI
+> +	bool "Video HDMI Support for Mediatek SoCs"
+> +	depends on VIDEO && ARCH_MEDIATEK
+> +	depends on DM_I2C && PHY && POWER_DOMAIN
+> +	select I2C_EDID
+> +	select MISC
+> +	select PHY_MTK_HDMI
+> +	select MTK_POWER_DOMAIN
+> +	select SYS_I2C_DDC_MTK
+> +	help
+> +	  Enable support for the HDMI TX output found on recent MediaTek
+> +	  SoCs such as the MT8188. The driver reads the EDID of the
+> +	  connected display, selects its preferred mode and drives the
+> +	  vdosys1 display pipeline (MDP RDMA, padding, merge, ETHDR
+> +	  mixer, DPI) to scan out the U-Boot framebuffer over HDMI.
+> diff --git a/drivers/video/mediatek/Makefile b/drivers/video/mediatek/Makefile
+> new file mode 100644
+> index 00000000000..70da9d9662a
+> --- /dev/null
+> +++ b/drivers/video/mediatek/Makefile
+> @@ -0,0 +1,16 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +#
+> +# Copyright (c) 2026 MediaTek Inc.
+> +#
+> +# Author: Julien Stephan <jstephan@baylibre.com>
+> +
+> +obj-$(CONFIG_VIDEO_MEDIATEK_HDMI) += \
+> +	mtk_hdmi.o \
+> +	mtk_disp_comp.o \
+> +	mtk_dpi.o \
+> +	mtk_mdp_rdma.o \
+> +	mtk_disp_merge.o \
+> +	mtk_ethdr.o \
+> +	mtk_disp_mutex.o \
+> +	mtk_disp_padding.o \
+> +	mtk_smi_larb.o
+> diff --git a/drivers/video/mediatek/mtk_hdmi.c b/drivers/video/mediatek/mtk_hdmi.c
+> new file mode 100644
+> index 00000000000..a37fe44b295
+> --- /dev/null
+> +++ b/drivers/video/mediatek/mtk_hdmi.c
+> @@ -0,0 +1,1102 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
 > +/*
-> + * Partial port of Linux' include/linux/hdmi.h, carrying the pieces of the
-> + * HDMI specification that are common to all HDMI transmitters.
-> + *
-> + * Copyright (C) 2012 Avionic Design GmbH
+> + * Copyright (c) 2026 BayLibre, SAS
+> + * Author: Julien Stephan <jstephan@baylibre.com>
 > + */
 > +
-> +#ifndef __LINUX_HDMI_H_
-> +#define __LINUX_HDMI_H_
-> +
-> +enum hdmi_colorspace {
-> +	HDMI_COLORSPACE_RGB,
-> +	HDMI_COLORSPACE_YUV422,
-> +	HDMI_COLORSPACE_YUV444,
-> +	HDMI_COLORSPACE_YUV420,
-> +	HDMI_COLORSPACE_RESERVED4,
-> +	HDMI_COLORSPACE_RESERVED5,
-> +	HDMI_COLORSPACE_RESERVED6,
-> +	HDMI_COLORSPACE_IDO_DEFINED,
-> +};
-> +
-> +enum hdmi_colorimetry {
-> +	HDMI_COLORIMETRY_NONE,
-> +	HDMI_COLORIMETRY_ITU_601,
-> +	HDMI_COLORIMETRY_ITU_709,
-> +	HDMI_COLORIMETRY_EXTENDED,
-> +};
-> +
-> +#endif /* __LINUX_HDMI_H_ */
-> 
+> +#include <asm/io.h>
 
+> +#include <asm/system.h>
+
+Still used?
+
+> +#include <asm/unaligned.h>
+> +#include <clk.h>
+> +#include <dm.h>
+> +#include <dm/device_compat.h>
+> +#include <dm/ofnode.h>
+> +#include <edid.h>
+> +#include <errno.h>
+> +#include <generic-phy.h>
+> +#include <i2c.h>
+> +#include <linux/delay.h>
+> +#include <linux/hdmi.h>
+> +#include <video.h>
+> +
+> +#include "mtk_disp_comp.h"
+> +#include "mtk_disp_merge.h"
+> +#include "mtk_ethdr.h"
+> +#include "mtk_disp_mutex.h"
+> +#include "mtk_disp_padding.h"
+> +#include "mtk_dpi.h"
+> +#include "mtk_mdp_rdma.h"
+> +
+> +/* HDMI TX register definitions */
+> +#define AVI_DIS					(0)
+> +#define AVI_DIS_WR				(0)
+> +#define AVI_EN					(0x1)
+> +#define AVI_EN_WR				BIT(16)
+> +#define AVI_RPT_DIS				(0x0)
+> +#define AVI_RPT_EN				(0x1)
+> +
+> +#define C422_C420_CONFIG_BYPASS			BIT(5)
+> +#define C422_C420_CONFIG_ENABLE			BIT(4)
+> +#define C422_C420_CONFIG_OUT_CB_OR_CR		BIT(6)
+> +#define C444_C422_CONFIG_ENABLE			(0x1)
+> +
+> +#define DEEPCOLOR_MODE_10BIT			BIT(8)
+> +#define DEEPCOLOR_MODE_12BIT			GENMASK(9, 8)
+> +#define DEEPCOLOR_MODE_16BIT			GENMASK(10, 8)
+> +#define DEEPCOLOR_MODE_8BIT			(0)
+
+These are confusing and don't quite match linux. Should be a field with
+GENMASK(9, 8) and values 0, 1, 2, 3.
+
+> +#define DEEPCOLOR_MODE_MASKBIT			GENMASK(10, 8)
+> +#define DEEPCOLOR_PAT_EN			BIT(12)
+> +#define DEEP_COLOR_ADD				BIT(4)
+> +
+> +#define HDMI2_OFF				(0)
+> +#define HDMI2_ON				BIT(2)
+> +
+> +#define HDMITX_SW_HPD				BIT(29)
+> +#define HDMITX_SW_RSTB				BIT(31)
+> +
+> +#define HDMI_MODE_DVI				(0)
+> +#define HDMI_MODE_HDMI				BIT(3)
+> +
+> +#define HDMI_YUV420_MODE			BIT(10)
+> +
+> +#define HPD_DDC_STATUS				0xC60
+> +#define PORD_PIN_STA				BIT(5)
+> +#define HPD_PIN_STA				BIT(4)
+> +
+> +#define NULL_PKT_EN				BIT(2)
+> +#define NULL_PKT_VSYNC_HIGH_EN			BIT(3)
+> +
+> +#define OUTPUT_FORMAT_DEMUX_420_ENABLE		BIT(10)
+> +
+> +#define REG_VMUTE_EN				BIT(16)
+> +
+> +#define SCR_OFF					0
+> +#define SCR_ON					BIT(4)
+> +
+> +#define SPD_DIS					0
+> +#define SPD_DIS_WR				0
+> +#define SPD_EN					BIT(1)
+> +#define SPD_EN_WR				BIT(17)
+> +#define SPD_RPT_DIS				0
+> +#define SPD_RPT_EN				BIT(1)
+> +
+> +#define TOP_CFG00				0x000
+> +#define TOP_CFG01				0x004
+> +#define TOP_INFO_EN				0x01C
+> +#define TOP_INFO_RPT				0x020
+> +#define TOP_AVI_HEADER				0x024
+> +#define TOP_AVI_PKT00				0x028
+> +#define TOP_AVI_PKT01				0x02C
+> +#define TOP_AVI_PKT02				0x030
+> +#define TOP_AVI_PKT03				0x034
+> +#define TOP_AVI_PKT04				0x038
+> +#define TOP_AVI_PKT05				0x03C
+> +#define TOP_INT_MASK00				0x1B0
+> +#define TOP_INT_MASK01				0x1B4
+
+These MASK names don't match Linux.
+
+> +#define TOP_MISC_CTLR				0x1A4
+> +#define TOP_SPDIF_HEADER			0x054
+> +#define TOP_SPDIF_PKT00				0x058
+> +#define TOP_SPDIF_PKT01				0x05C
+> +#define TOP_SPDIF_PKT02				0x060
+> +#define TOP_SPDIF_PKT03				0x064
+> +#define TOP_SPDIF_PKT04				0x068
+> +#define TOP_SPDIF_PKT05				0x06C
+> +#define TOP_SPDIF_PKT06				0x070
+> +#define TOP_SPDIF_PKT07				0x074
+> +#define TOP_VMUTE_CFG1				0x1C8
+> +
+> +#define VID_DOWNSAMPLE_CONFIG			0x8F0
+
+This doesn't match upstream Linux (but does match downstream). We should
+confirm which is correct.
+
+> +#define VID_OUT_FORMAT				0x8FC
+> +
+> +#define ABIST_ENABLE				BIT(31)
+> +
+> +#define HDCP_TOP_CTRL				0xC00
+> +#define HDMI_CONFIG				0xEA0
+> +
+
+...
+
+> +struct mtk_hdmi {
+> +	struct udevice *dev;
+> +	struct udevice *ddc_bus;
+> +	struct udevice *dpi1;
+> +	struct udevice *merge3;
+> +	struct udevice *merge5;
+> +	struct udevice *ethdr;
+> +	struct udevice *mutex;
+> +	struct udevice *padding4;
+> +	struct udevice *padding5;
+> +	struct udevice *rdma4;
+> +	struct udevice *rdma5;
+> +	struct udevice *larb2;
+> +	struct udevice *larb3;
+> +	struct phy phy;
+> +	fdt_addr_t regs;
+
+Should be `void __iomem *`?
+
+> +	struct clk_bulk clk_bulk;
+> +	u64 support_csp_depth;
+
+Unused field.
+
+> +	u64 set_csp_depth;
+> +	enum hdmi_colorspace csp;
+> +	enum hdmi_color_depth color_depth;
+> +	enum hdmi_colorimetry colorimetry;
+> +	struct display_timing mode;
+> +};
+> +
+
+...
+
+> +static void mtk_hdmi_hw_vid_black(struct mtk_hdmi *hdmi, bool black)
+> +{
+> +	if (black)
+> +		mtk_hdmi_update(hdmi, TOP_VMUTE_CFG1, REG_VMUTE_EN, REG_VMUTE_EN);
+> +	else
+> +		mtk_hdmi_update(hdmi, TOP_VMUTE_CFG1, 0, REG_VMUTE_EN);
+
+Can we simplify this like mtk_hdmi_enable_hdmi_mode()?
+
+There are a couple more cases like this below too.
+
+> +}
+> +
+
+...
+
+> +static inline void mtk_hdmi_enable_scrambling(struct mtk_hdmi *hdmi,
+> +					      bool enable)
+> +{
+> +	udelay(150);
+
+Odd to have a delay before doing something.
+
+Should this be moved to mtk_hdmi_change_video_resolution()?
+
+> +
+> +	if (enable)
+> +		mtk_hdmi_update(hdmi, TOP_CFG00, SCR_ON | HDMI2_ON,
+> +				SCR_ON | HDMI2_ON);
+> +	else
+> +		mtk_hdmi_update(hdmi, TOP_CFG00, SCR_OFF | HDMI2_OFF,
+> +				SCR_ON | HDMI2_ON);
+> +}
+> +
+
+...
+
+> +static void mtk_hdmi_output_set_display_mode(struct mtk_hdmi *hdmi,
+> +					     struct display_timing *mode)
+> +{
+> +	unsigned long link_rate = mode->pixelclock.typ;
+> +	int ret;
+> +
+> +	ret = generic_phy_configure(&hdmi->phy, &link_rate);
+> +	if (ret)
+> +		dev_err(hdmi->dev, "Setting clock=%u failed: %d\n",
+> +			mode->pixelclock.typ, ret);
+
+Should propagate error or add comment to explain why it is safe to ignore.
+
+> +
+> +	mtk_hdmi_change_video_resolution(hdmi);
+> +}
+> +
+
+...
+
+> +static int mtk_hdmi_setup_avi_infoframe(struct mtk_hdmi *hdmi, u8 *buffer,
+> +					size_t bufsz,
+> +					struct display_timing *mode)
+> +{
+> +	u8 checksum;
+> +	int i;
+> +
+> +	if (bufsz < HDMI_AVI_INFOFRAME_SIZE)
+> +		return -EINVAL;
+> +
+> +	memset(buffer, 0, HDMI_AVI_INFOFRAME_SIZE);
+> +
+> +	/* AVI InfoFrame header */
+> +	buffer[0] = 0x82;  /* AVI InfoFrame type */
+> +	buffer[1] = 0x02;  /* Version */
+> +	buffer[2] = 0x0D;  /* Length (13 bytes) */
+> +
+> +	/* Data byte 1: Scan info, bar info, active format info, RGB/YCC */
+> +	switch (hdmi->csp) {
+> +	case HDMI_COLORSPACE_YUV422:
+> +		buffer[4] = 0x20;
+> +		break;
+> +	case HDMI_COLORSPACE_YUV444:
+> +		buffer[4] = 0x40;
+> +		break;
+> +	case HDMI_COLORSPACE_YUV420:
+> +		buffer[4] = 0x60;
+> +		break;
+> +	default:
+> +		buffer[4] = 0x00;
+> +		break;
+> +	}
+> +
+> +	/* Data byte 4: Video Identification Code (VIC) */
+> +	if (mode->hactive.typ == 1920 && mode->vactive.typ == 1080)
+> +		buffer[7] = 16;  /* 1920x1080@60Hz */
+> +	else if (mode->hactive.typ == 1280 && mode->vactive.typ == 720)
+> +		buffer[7] = 4;   /* 1280x720@60Hz */
+> +	else if (mode->hactive.typ == 720 && mode->vactive.typ == 480)
+> +		buffer[7] = 2;   /* 720x480@60Hz */
+> +	else
+> +		buffer[7] = 0;   /* Unknown/unsupported timing */
+
+Should we also be validating the refresh rate here instead of assuming 60Hz?
+
+> +
+> +	/*
+> +	 * Data byte 2: picture aspect ratio, active portion same as
+> +	 * picture. VIC 2 is a 4:3 mode, the others are 16:9.
+> +	 */
+> +	buffer[5] = buffer[7] == 2 ? 0x18 : 0x28;
+> +
+> +	/* Data byte 3: Colorimetry, picture scaling */
+> +	switch (hdmi->colorimetry) {
+> +	case HDMI_COLORIMETRY_ITU_709:
+> +		buffer[6] = 0x80;
+> +		break;
+> +	case HDMI_COLORIMETRY_ITU_601:
+> +		buffer[6] = 0x40;
+> +		break;
+> +	default:
+> +		buffer[6] = 0x00;
+> +		break;
+> +	}
+> +
+> +	/* Data byte 5: Pixel repetition */
+> +	buffer[8] = 0x00;  /* No pixel repetition */
+> +
+> +	/* checksum over the full frame, so that the total sums to zero */
+> +	for (checksum = 0, i = 0; i < HDMI_AVI_INFOFRAME_SIZE; i++)
+> +		checksum += buffer[i];
+> +	buffer[3] = 0x100 - checksum;
+> +
+> +	return 0;
+> +}
+> +
+> +static void mtk_hdmi_hw_avi_infoframe(struct mtk_hdmi *hdmi, u8 *buf, u8 len)
+> +{
+
+len is unused.
+
+> +	/* Disable AVI InfoFrame first */
+> +	mtk_hdmi_update(hdmi, TOP_INFO_EN, AVI_DIS_WR | AVI_DIS,
+> +			AVI_EN_WR | AVI_EN);
+> +	mtk_hdmi_update(hdmi, TOP_INFO_RPT, AVI_RPT_DIS, AVI_RPT_EN);
+> +
+> +	/* Write AVI InfoFrame header */
+> +	mtk_hdmi_write(hdmi, TOP_AVI_HEADER, get_unaligned_le24(&buf[0]));
+> +
+> +	/* Write AVI InfoFrame data packets */
+> +	mtk_hdmi_write(hdmi, TOP_AVI_PKT00, get_unaligned_le32(&buf[3]));
+> +	mtk_hdmi_write(hdmi, TOP_AVI_PKT01, get_unaligned_le24(&buf[7]));
+> +	mtk_hdmi_write(hdmi, TOP_AVI_PKT02, get_unaligned_le32(&buf[10]));
+> +	mtk_hdmi_write(hdmi, TOP_AVI_PKT03, get_unaligned_le24(&buf[14]));
+> +
+> +	/* Clear remaining packets */
+> +	mtk_hdmi_write(hdmi, TOP_AVI_PKT04, 0);
+> +	mtk_hdmi_write(hdmi, TOP_AVI_PKT05, 0);
+> +
+> +	/* Enable AVI InfoFrame */
+> +	mtk_hdmi_update(hdmi, TOP_INFO_RPT, AVI_RPT_EN, AVI_RPT_EN);
+> +	mtk_hdmi_update(hdmi, TOP_INFO_EN, AVI_EN_WR | AVI_EN,
+> +			AVI_EN_WR | AVI_EN);
+> +}
+> +
+> +static void mtk_hdmi_hw_spd_infoframe(struct mtk_hdmi *hdmi, u8 *buf, u8 len)
+> +{
+
+ditto
+
+> +	/* Disable SPD InfoFrame first */
+> +	mtk_hdmi_update(hdmi, TOP_INFO_EN, SPD_DIS_WR | SPD_DIS,
+> +			SPD_EN_WR | SPD_EN);
+> +	mtk_hdmi_update(hdmi, TOP_INFO_RPT, SPD_RPT_DIS, SPD_RPT_EN);
+> +
+> +	/* Write SPD InfoFrame header */
+> +	mtk_hdmi_write(hdmi, TOP_SPDIF_HEADER, get_unaligned_le24(&buf[0]));
+> +
+> +	/* Write SPD InfoFrame data packets */
+> +	mtk_hdmi_write(hdmi, TOP_SPDIF_PKT00, get_unaligned_le32(&buf[3]));
+> +	mtk_hdmi_write(hdmi, TOP_SPDIF_PKT01, get_unaligned_le24(&buf[7]));
+> +	mtk_hdmi_write(hdmi, TOP_SPDIF_PKT02, get_unaligned_le32(&buf[10]));
+> +	mtk_hdmi_write(hdmi, TOP_SPDIF_PKT03, get_unaligned_le24(&buf[14]));
+> +	mtk_hdmi_write(hdmi, TOP_SPDIF_PKT04, get_unaligned_le32(&buf[17]));
+> +	mtk_hdmi_write(hdmi, TOP_SPDIF_PKT05, get_unaligned_le24(&buf[21]));
+> +	mtk_hdmi_write(hdmi, TOP_SPDIF_PKT06, get_unaligned_le32(&buf[24]));
+> +	mtk_hdmi_write(hdmi, TOP_SPDIF_PKT07, buf[28]);
+> +
+> +	/* Enable SPD InfoFrame */
+> +	mtk_hdmi_update(hdmi, TOP_INFO_RPT, SPD_RPT_EN, SPD_RPT_EN);
+> +	mtk_hdmi_update(hdmi, TOP_INFO_EN, SPD_EN_WR | SPD_EN,
+> +			SPD_EN_WR | SPD_EN);
+> +}
+> +
+
+...
+
+> +static int mtk_hdmi_read_edid(struct mtk_hdmi *hdmi, u8 *buf, int buf_size)
+> +{
+> +	struct udevice *chip;
+> +	int ret;
+> +
+> +	if (!hdmi->ddc_bus || buf_size < EDID_SIZE)
+> +		return -EINVAL;
+> +
+> +	ret = i2c_get_chip(hdmi->ddc_bus, EDID_ADDR, 1, &chip);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = dm_i2c_read(chip, 0, buf, EDID_SIZE);
+> +	if (ret) {
+> +		dev_err(hdmi->dev, "failed to read EDID: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	/* read the extension block, if any */
+> +	if (buf[0x7e] != 0 && buf_size >= EDID_EXT_SIZE) {
+
+0x7e should probably be a offsetof() or cast to struct edid1_info * and use
+the actual field.
+
+> +		ret = dm_i2c_read(chip, EDID_SIZE, buf + EDID_SIZE,
+> +				  buf_size - EDID_SIZE);
+> +		if (ret)
+> +			dev_warn(hdmi->dev,
+> +				 "error reading extended EDID block\n");
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+
+...
+
+> +static int mtk_hdmi_get_comp_by_alias(struct udevice *dev, const char *alias,
+> +				      struct udevice **compp)
+> +{
+> +	struct udevice *comp;
+> +	ofnode node;
+> +	int ret;
+> +
+> +	node = ofnode_get_aliases_node(alias);
+> +	if (!ofnode_valid(node)) {
+> +		dev_err(dev, "cannot find alias %s\n", alias);
+> +		return -ENODEV;
+> +	}
+> +
+> +	ret = uclass_get_device_by_ofnode(UCLASS_MISC, node, &comp);
+> +	if (ret) {
+> +		dev_err(dev, "cannot get %s: %d\n", alias, ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = mtk_disp_comp_enable(comp);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/* only publish the handle once its clocks are on, so the error */
+> +	/* unwind can rely on a non-NULL pointer meaning "enabled" */
+
+nit: change to single comment
+
+> +	*compp = comp;
+> +
+> +	return 0;
+> +}
+> +
