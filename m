@@ -1,135 +1,124 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5250EC5DF97
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 17:22:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D4FBC61DBD
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 17:36:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1497F605F3;
-	Wed, 26 Aug 2026 17:22:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DEAAE80B32;
+	Wed, 26 Aug 2026 17:36:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1OToVkjETz7v; Wed, 26 Aug 2026 17:22:43 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IPlKCaWoQ6zJ; Wed, 26 Aug 2026 17:36:34 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787764963;
-	bh=ThH+q07QXAUg9m8aCPdLrvu6lBfE/sm0wpobQkYKbAU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=cPYyEucncnb9WqYeMqAM25ViTcY5Dq8SluRdqdJY1/VcDDz3XmXZ6sRiMT7PLWFeV
-	 DDzY5lU7tJ0o5BpEmWIb0Vs/N5mPOsIuXbXpXRkBz/GwIxOn5y5bV9lUL0bMY3LiRr
-	 FKx/L1axa/BEk3ORqF6u4WI0aUbhi2cOOMgCVDBDbgiBdZS+x8u1H31nwhv88H7D0x
-	 N9KV/RoR9ghi51uHMtqRcxIqOm5/5uYExOtAzuhDHe5VUuUdWDpA10MdfrYnWekD3R
-	 LYu8kdJjyq+A7aNjAH47FRdrOE8C8GIp2RY7f2XsTfHOgW1fU5kONs9vT3qzirT2UE
-	 Y1jDuFL0m/HPg==
+	d=lists.u-boot-project.org; s=default; t=1787765794;
+	bh=QIydT3+y0X2ZTvZs+oGfGoKKMfo+uSb+4UEbQ+OrDYY=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=mXDzI16OKcV7Ma6cDa2qwM2w6mxOXo85+dczgPjDWBx8DuuMvbJmlyDAsIt+z4RI7
+	 /n1tRM9a/w5xf5uwibjjin1oQUxPNqWOylp01aemHaEzoN9CVJsSBr3UsNAOoD78yQ
+	 ph3zmUCkCaDt2Ff4Oox9j3bu4irLr7iUMpkA/BveGBZ7Pga7K8wKHKbeBgFttVYDf8
+	 jQVK1Y4SJzOpmmlVlpemcutv42oMBC1eprlJYLzduYZIeb0KpDrDpIjLxgSK3etzdi
+	 XIVoA+vWnem98+d4RC1ohKzE3kFAFG6fFn/62gxazg9er7x68Z9ZecdSiD2TxpIPqs
+	 09/OH8JdUNcOw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2D64260758;
-	Wed, 26 Aug 2026 17:22:43 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id B5EFE39E
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 17:22:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B064080B19;
+	Wed, 26 Aug 2026 17:36:34 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 87780323
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 17:36:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A76C0403DE
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 17:22:41 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 6EBAB40545
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 17:36:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 08tJcgkz3QnL for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 17:22:40 +0000 (UTC)
+ id vJ5UzWxrJpSX for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 17:36:32 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::2b; helo=mail-oa1-x2b.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+ client-ip=2607:f8b0:4864:20::233; helo=mail-oi1-x233.google.com;
+ envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=ddn+LV4k
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 79D47403B5
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 17:22:39 +0000 (UTC)
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-448cf99c133so157509fac.1
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 10:22:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=j06UGOLC
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 35AC34052D
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 17:36:31 +0000 (UTC)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-4b1be215736so1250159b6e.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 10:36:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787764958; x=1788369758;
+ d=gmail.com; s=20251104; t=1787765791; x=1788370591;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=ThH+q07QXAUg9m8aCPdLrvu6lBfE/sm0wpobQkYKbAU=;
- b=ddn+LV4k4GZpL2iW+eKLML7hKWwJ60kQfzb/sB+QHZ4KHHDobx0JNmdApGKhXv7F40
- V+E1Vn9C7BzGn8NTntzCJkLu8NJkcacC5+ZaNIgfiWa0CaeSfzXv18ZY0wUFgIQP/D6/
- DNIo/jQ8Q/0hwBYpcjdxy2qEQK0Z2fRfYU3ALNsZKtHpisAQ+X2Z45FyXa5Z3xzaXNck
- izBSzrI2fEqSva9/fv1SFyducdySz3afMqC146SWo3lJxpAmkrxnq04mCkNx8/lH8XyZ
- wmvDNxHrqkXd8MdDxVwywkFm9/UtYJORfIxDoHRc9wABa9cvnO5fp4APSBLdcexPYWMl
- TkAg==
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=QIydT3+y0X2ZTvZs+oGfGoKKMfo+uSb+4UEbQ+OrDYY=;
+ b=j06UGOLCALgRo0Yvbuw2sM6WwaULVkUF8q86H2WvoEnw+zndnQyjF3nn+TEQ9jLv0T
+ X+hlDO/KLi0ouBfvAt7XD2NiDkkuzgW2KhCjAn7ohDxGpSYcTOWXMrggJWcVt0bkHPq+
+ W3hlQdfqk5DXCRwWTAteCGteAgRpruyoiKmQ4sx2zGkKAsbCau/R4mA6v6q/Y4jQ050Z
+ WR85lD6hN7SgJrkBIeQ5aHUWs9Y/oDTclaoCfVUElT5aOrTqmGKMbripRMH7J6ci1QLy
+ JitwI/1Xe7f/Zlf0FQtJ84NIBJCOIn1rko5LGpZWMnla+ZundOe8sv3Fw48sBGe0/UDl
+ o0iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787764958; x=1788369758;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=ThH+q07QXAUg9m8aCPdLrvu6lBfE/sm0wpobQkYKbAU=;
- b=Vwm1R/JcQB1HkTPnlJ8DnFrBdOkat0B1Sow7REM9WimMAluuICbE4roRfDskCSj7b1
- KTJq9DbowM6BB4T+dhXp3SNS+0VDq80WooloW9zImHJ5KKqESkJRze1NJIBy1REikgMJ
- i1lAWsBBBSXdpaXjfSX81so/a2qD8DiF7O5V/05vXeRkkeovpofSy2ePkPi0/FoO+ZnX
- n+wG373JJv4N5tiYm+P0NEZcMdikgupUfjQf0yE0jS8Oc2/+kdDH+lMRgj8y9QS0GMDx
- tar3tWCT5xBPQYZEVMDNOc//5e2uvSfXItCGwAK0dZTdaj6AMnQuezqPV3okmkgl9Mdm
- E5jw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpXA4bqGj1y5MZnedevoLkB6JVkLZDfjoSbI8J0pJGwWlzGslHAfBmnhsQLJQcUzqWrRCeHT9w=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++klz1z87nawLDbbG/a4dCWZoz+L9IXKMJhLCXKXHHjupwLcjQt3
- Q599LQgs6etGvmhGgYTCaMUp5phzr7yL8xaUXsudLVVOnuuZbSJoHkGigzagXsjVAZg=
-X-Gm-Gg: AR+sD11XXCaBHIfR1KokIE7adJGfZT/R7Cved+okxIXZ1jwWl/La4dADGP/q5RRPm7A
- l+WoPXDwO7O3mhULdDIAV6dIMUdHsYW+rcWGWy/Ic6jGWmIjKP3CzVoOjEQB2J505UMaSYkq5Dz
- RvKPxCXj/oXPeB102JfpT6WxhP0BY33Ul1tA8DzeuFw08GGnURpxr7Td8Im60uO7FwJsuzB0qMw
- HQghY3ZeCIieDOt8E57z1EqnwF/8btcCoND23cXhXCkEYoiwpHzNZD4J/V1xKuMsZ5n4aIh+/JZ
- Ic+9JqvkQXyln7c93qa+odSHdJUSLblXXY2jfWy9SE5c/CKq87Z6KCn3ksQh0rEqHoeHzcW44Kz
- clWJ1xlFiBO4BuTpj71oWpX3pZnvWcGzh39ms2xnAjNyAwROuCjs1UV5whzjnYk9fxjpp5rkCmd
- KIOTZVOQztJK5okyfB29WL3fYTnA1sjPLXFUb5TWhgJjTrQ/WbYRCaum2IuJ03BfTv1a50WaGcy
- 92S0LQyCGRE1tua7fakVub91mXY+jX5i22MotY=
-X-Received: by 2002:a05:6820:6ac2:b0:6b1:349a:8e2c with SMTP id
- 006d021491bc7-6b1b01417a7mr639889eaf.16.1787764958547; 
- Wed, 26 Aug 2026 10:22:38 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:162c:81fd:da88:2ea6?
- ([2600:8803:e7e4:500:162c:81fd:da88:2ea6])
+ d=1e100.net; s=20251104; t=1787765791; x=1788370591;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=QIydT3+y0X2ZTvZs+oGfGoKKMfo+uSb+4UEbQ+OrDYY=;
+ b=M0fNfXigfxJuiEfDqEEApbFBZd+jmeWBGA829EbiALosOiLkiulnliMXPK2Q2TTYcR
+ 3PIrwl+BG4NwLIv8FnhKnaPFHecBUIEhzcHBGLZxELct7zrNgVbHH+actmRLGI+J34Tz
+ XALg+OI2M9upO3FshgkIgV0+qAoIoxLoOc1Rh9TNVR+KvjGyw8cpbZsoWuoR4CkfSnXH
+ 0trwqP3VJuQOio91esEbAJIUiHbiDElrSRitP5NV9pc9SP2qrmVflqUk2y7Jy9yT7sMt
+ xerRmhF3ThkUOrGSX502SaBeYhI1qNHo67/S6ZGFa5vShzSuri00qpygPAI80PM9p/LM
+ YEeg==
+X-Gm-Message-State: AFuF++mz7TGOGkbfr3HlEpZcdCDtobAkrBqF+5tnX5aMFtlxaw9WJABh
+ mw+fceeaEEX2nRusaWtNTQavfbYTR8ZcSaZrCYzFVOo1+FLtJQY6nNjp
+X-Gm-Gg: AR+sD10KLdXf/H1a4+ZgZ2yWbRRDw+lvGsiYYiK6+uScTixJQrfYifUBV5kjEXra2xk
+ SC9MGeb8Bdm6uYJgMAh3vBtoY+zZggL+qWzdjfi16vqlKtOSImdAXxTAKoG1uD6nGK5lvHz0h/F
+ 9kxMPi8z4SS/fdn/mHtPw8KNhUkFyq0q8FSiRxL4WIg1z9jsv7lTdKCWBRKU+iNbaCugg6opZ5W
+ BJRCz1BCF2V95WiSTSHG0HAK3qfFGjV71xXkv/nktjJAMtfP58/l2keCt6EIhrjnKc7nRY2BxH1
+ xnMKj2mpsyCl8XlnIxJC0EHaueQyoAR6mPm0VZNSUkfkFe9unvbxc1bx21k6EHthE3axZc7ANLn
+ sjmzBsXVgoppoiFT7AMnJE9NkKaQ/gYKpbd0X8dtzVYoX9n3+PWVVP3qqh99cl4pv8px7w4nm5L
+ 1HfAlvgd/y48iaYTRUp7J79zw7Y7tPNhmc+7bCjkdDj8zLuEmQgARBSdeExcpgkVjrCp0ObLizo
+ x8grZ9jEk+dGW3G6u88EFyM6Qy624esz2ge+ZfITp0lJuaMrXGCXF/Egij2Jw8QFM5UfpvSq0Vx
+ 7t30ClExX/8j2XYut93B6Wiw4557livmyvbfrbHbrJnVHkddyn5Hmwyu4RglRveuZB/Lpxxt2nQ
+ xci1m+zfmOpD1IB+FAw==
+X-Received: by 2002:a05:6808:4fd1:b0:4aa:d5f:123e with SMTP id
+ 5614622812f47-4b366b0ea25mr9464230b6e.9.1787765790702; 
+ Wed, 26 Aug 2026 10:36:30 -0700 (PDT)
+Received: from [127.0.1.1] (184-96-151-165.hlrn.qwest.net. [184.96.151.165])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-465b03b5593sm2634956fac.17.2026.08.26.10.22.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Aug 2026 10:22:38 -0700 (PDT)
-Message-ID: <95c99191-dc07-400e-83f4-b7530e20daa8@baylibre.com>
-Date: Wed, 26 Aug 2026 12:22:37 -0500
+ 5614622812f47-4b36a7b3783sm2360606b6e.8.2026.08.26.10.36.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Aug 2026 10:36:30 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+Date: Wed, 26 Aug 2026 11:36:18 -0600
+Subject: [PATCH v2] net: lwip: support syslog
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/14] mediatek: add HDMI pipeline support for MT8188
- based boards
-To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Johan Jonker <jbx6244@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Pavlo Yadvychuk <pyadvychuk@baylibre.com>,
- Macpaul Lin <Macpaul.Lin@mediatek.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Carlo Caione <ccaione@baylibre.com>, Julien Masson <jmasson@baylibre.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-References: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
-From: David Lechner <dlechner@baylibre.com>
-Content-Language: en-US
-In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260826-lwip-syslog-v1-v2-1-8c457f2b35ea@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WOwQ6CMAyGX4Xs7JQNhsaT72E4jFGgBjayAkoI7
+ +6GZ5Nevv7t126MwCMQuycb87AgobMB5ClhptO2BY51YCZTWaQ3qXj/xpHTSr1r+SK4VoVUUGk
+ JOmNhafTQ4OcQPssf01y9wEzREicqTcArr63pYmseafKgh8ug0ca8Q5qcX4+PFhE9f4+HElxlU
+ qRNnjf1tXi0wdKfjRtYue/7F5B9VUTeAAAA
+X-Change-ID: 20260825-lwip-syslog-v1-a5625eba2ea3
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Peter Robinson <pbrobinson@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ David Lechner <dlechner@baylibre.com>, 
+ James Hilliard <james.hilliard1@gmail.com>
+X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,38 +132,176 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 8/26/26 8:09 AM, Julien Stephan wrote:
-> This series adds HDMI support for MT8188 based boards, such as the Genio
-> 510 and Genio 700 EVKs, in order to display a boot logo over HDMI. It
-> builds on top of the HDMI PHY driver [1], the DDC (I2C) driver [2], the
-> clock series [3] and a clock fix [4] already sent earlier.
-> 
-> The drivers here, were inspired by the corresponding kernel driver, but
-> were largely modified, mainly because U-Boot has no DRM framework and
-> the goal is only to display a framebuffer. The HDMI driver locates each
-> pipeline component through phandles in the hdmi node and programs them
-> directly. The framebuffer and splash screen live in dedicated
-> reserved-memory regions.
+LOG_SYSLOG depends on NET, but the raw Ethernet and UDP header
+builders it uses are only available with the legacy network stack. This
+makes LOG_SYSLOG fail to build with NET_LWIP.
 
-It would be helpful to add comments in the code where things were
-intentionally modified to make it easier to know if differences were
-intentional or might possibly be bugs.
+Provide lwIP implementations using the selected Ethernet device and its
+indexed IP address from the environment. Move the shared declarations to
+net-common.h and extend the syslog test to check the source MAC address
+and IPv4 header checksum.
 
-> ---
-> Changes in v2:
-> - Add a common `get_unaligned_le24()` helper for reading 24-bit little-endian values, ported from kernel
-> - Add a common `linux/hdmi.h` header with HDMI colorspace and colorimetry enums, based on the corresponding Linux header.
-> - Refactor the HDMI driver to use the new common HDMI definitions and unaligned access helper.
-> - Rename the mixer component to ETHDR and configure the ETHDR before the remaining display pipeline components.
-> - Add the SMI LARB components and configure the VDOSYS1 routing directly from the HDMI driver.
-> - Switch display component lookup from phandles to DT aliases and add proper error unwinding for component clocks, HDMI PHY power, and clock resources.
-> - Refactor HDMI register access and InfoFrame handling.
-> - Improve HDMI mode handling, YUV420 downsampling, TMDS scrambling, deep-color handling, and InfoFrame generation.
-> - Move framebuffer/splash reserved-memory definitions to the Genio common U-Boot DTSI and add the corresponding HDMI override node for MT8390/Genio EVKs.
-> - Drop the dedicated MT8188 VDOSYS1 pipeline component and its corresponding DTS node, to avoid having 2 nodes with same reg address.
-> - Remove the unnecessary `dm_scan_fdt_dev` bind hook from the HDMI driver.
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+Changes v1 -> v2:
+  - Guard the lwIP raw-header helpers with LOG_SYSLOG  (suggested by Peter Robinson)
+  - Link to v1: https://patch.msgid.link/20260825-lwip-syslog-v1-v1-1-53210f44fd76@gmail.com
+---
+ include/net-common.h   |  7 ++++++
+ include/net-legacy.h   |  4 ----
+ net/lwip/net-lwip.c    | 60 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ test/log/syslog_test.c |  2 ++
+ test/log/syslog_test.h |  4 ++--
+ 5 files changed, 71 insertions(+), 6 deletions(-)
 
-Looks like dm_scan_fdt_dev is still there. Perhaps necessary after all?
+diff --git a/include/net-common.h b/include/net-common.h
+index 0c260873c2c..3084a2b2a57 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -362,6 +362,13 @@ struct ethernet_hdr {
+ /* Ethernet header size */
+ #define ETHER_HDR_SIZE	(sizeof(struct ethernet_hdr))
+ 
++/* Set Ethernet header; returns the size of the header */
++int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot);
++
++/* Set IPv4 and UDP headers */
++void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport,
++			int sport, int len);
++
+ /**
+  * net_random_ethaddr - Generate software assigned random Ethernet address
+  * @addr: Pointer to a six-byte array containing the Ethernet address
+diff --git a/include/net-legacy.h b/include/net-legacy.h
+index d3b122c9062..d7f55d34a30 100644
+--- a/include/net-legacy.h
++++ b/include/net-legacy.h
+@@ -344,15 +344,11 @@ int net_loop(enum proto_t);
+ /* Get size of the ethernet header when we send */
+ int net_eth_hdr_size(void);
+ 
+-/* Set ethernet header; returns the size of the header */
+-int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot);
+ int net_update_ether(struct ethernet_hdr *et, uchar *addr, uint prot);
+ 
+ /* Set IP header */
+ void net_set_ip_header(uchar *pkt, struct in_addr dest, struct in_addr source,
+ 		       u16 pkt_len, u8 proto);
+-void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport,
+-			int sport, int len);
+ 
+ /* Callbacks */
+ rxhand_f *net_get_udp_handler(void);	/* Get UDP RX packet handler */
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index 8f8f9d69020..bf916a2a977 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -159,6 +159,66 @@ static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
+ 	return 0;
+ }
+ 
++#if CONFIG_IS_ENABLED(LOG_SYSLOG)
++int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot)
++{
++	struct ethernet_hdr *et = (struct ethernet_hdr *)xet;
++	const uchar *src = eth_get_ethaddr();
++
++	memcpy(et->et_dest, dest_ethaddr, ARP_HLEN);
++	if (src)
++		memcpy(et->et_src, src, ARP_HLEN);
++	else
++		memset(et->et_src, 0, ARP_HLEN);
++	et->et_protlen = htons(prot);
++
++	return ETHER_HDR_SIZE;
++}
++
++static void net_lwip_set_ip_header(uchar *pkt, struct in_addr dest,
++				   struct in_addr source, u16 pkt_len,
++				   u8 proto)
++{
++	static u16 ip_id;
++	struct ip_udp_hdr *ip = (struct ip_udp_hdr *)pkt;
++
++	ip->ip_hl_v = 0x45;
++	ip->ip_tos = 0;
++	ip->ip_len = htons(pkt_len);
++	ip->ip_p = proto;
++	ip->ip_id = htons(ip_id++);
++	ip->ip_off = htons(IP_FLAGS_DFRAG);
++	ip->ip_ttl = 255;
++	ip->ip_sum = 0;
++	memcpy(&ip->ip_src, &source, sizeof(source));
++	memcpy(&ip->ip_dst, &dest, sizeof(dest));
++	ip->ip_sum = compute_ip_checksum(ip, IP_HDR_SIZE);
++}
++
++void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport, int sport,
++			int len)
++{
++	struct ip_udp_hdr *ip = (struct ip_udp_hdr *)pkt;
++	struct in_addr source = {};
++	ip4_addr_t addr, mask, gateway;
++	struct udevice *dev = eth_get_dev();
++	u16 pkt_len = IP_UDP_HDR_SIZE + len;
++
++	if (len & 1)
++		pkt[IP_UDP_HDR_SIZE + len] = 0;
++
++	if (dev && !get_udev_ipv4_info(dev, &addr, &mask, &gateway))
++		source.s_addr = addr.addr;
++
++	net_lwip_set_ip_header(pkt, dest, source, pkt_len, IPPROTO_UDP);
++
++	ip->udp_src = htons(sport);
++	ip->udp_dst = htons(dport);
++	ip->udp_len = htons(UDP_HDR_SIZE + len);
++	ip->udp_xsum = 0;
++}
++#endif
++
+ /*
+  * Initialize DNS via env
+  */
+diff --git a/test/log/syslog_test.c b/test/log/syslog_test.c
+index b6c0631aaf6..f848506fb1c 100644
+--- a/test/log/syslog_test.c
++++ b/test/log/syslog_test.c
+@@ -34,11 +34,13 @@ int sb_log_tx_handler(struct udevice *dev, void *packet, unsigned int len)
+ 
+ 	/* Check Ethernet header */
+ 	ut_asserteq_mem(&eth_hdr->et_dest, net_bcast_ethaddr, ARP_HLEN);
++	ut_asserteq_mem(&eth_hdr->et_src, eth_get_ethaddr(), ARP_HLEN);
+ 	ut_asserteq(ntohs(eth_hdr->et_protlen), PROT_IP);
+ 
+ 	/* Check IP header */
+ 	buf += sizeof(struct ethernet_hdr);
+ 	ip_udp_hdr = (struct ip_udp_hdr *)buf;
++	ut_assert(ip_checksum_ok(ip_udp_hdr, IP_HDR_SIZE));
+ 	ut_asserteq(ip_udp_hdr->ip_p, IPPROTO_UDP);
+ 	ut_asserteq(ip_udp_hdr->ip_dst.s_addr, 0xffffffff);
+ 	ut_asserteq(ntohs(ip_udp_hdr->udp_dst), 514);
+diff --git a/test/log/syslog_test.h b/test/log/syslog_test.h
+index 39cce4ed498..89c86541f5e 100644
+--- a/test/log/syslog_test.h
++++ b/test/log/syslog_test.h
+@@ -31,8 +31,8 @@ struct sb_log_env {
+  *
+  * The following checks are executed:
+  *
+- * * the Ethernet packet indicates a IP broadcast message
+- * * the IP header is for a local UDP broadcast message to port 514
++ * * the Ethernet packet uses the selected interface and broadcast destination
++ * * the IP header checksum is valid and describes a UDP broadcast to port 514
+  * * the UDP payload matches the expected string
+  *
+  * After testing the pointer to the expected string is set to NULL to signal
 
-> - Link to v1: https://patch.msgid.link/20260728-add-genio-510-and-genio-700-hdmi-v1-0-ac54bd75f960@baylibre.com
-> 
+---
+base-commit: 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc
+change-id: 20260825-lwip-syslog-v1-a5625eba2ea3
+
+Best regards,
+--  
+James Hilliard <james.hilliard1@gmail.com>
+
