@@ -1,111 +1,111 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 735D4C61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 16:35:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B43BC61DC4
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 16:35:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3BF9E40636;
+	by smtp1.osuosl.org (Postfix) with ESMTP id D889A80AAB;
 	Wed, 26 Aug 2026 16:35:10 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZgOZ2Z1z_xwT; Wed, 26 Aug 2026 16:35:08 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787762106;
-	bh=JjwwmFVRwsELldJjFVNZEyvsggI2W1mJFGnjEGxjSiU=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Sy48H+TjxQzFm8ajxDRKFbbDjJgqwZ9IZShKW+z6Vhim6P0LvQTj31v6DE0PQKpGr
-	 UUDlEsJPLJVIVQ370eBQqsBvZ8uI+AzKK8GouHMNJoCz0yed9ZrhFj9VksXhTyaMRk
-	 kcgJ7AhGsJ1NL8c8dsrVObGDDnu9C4jq/hm/MnJujnHnfK/CMNtT9usuhpkjxTYNAX
-	 AYJ9u0iDYI8AHo30R8ynJ0NMFyX9xhFlCmxmJD/IwoAp3yy0yI25vn0MTGSO9vCMuU
-	 mQ7ps1zZyo/RQGOe1Uupx10jcWC6/V2SRnPIbQ+k6IexPzUl1XoVSRScJS36ThIDqr
-	 +V2HkEP8d5sqw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B511840697;
-	Wed, 26 Aug 2026 16:35:06 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2D6B639E
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:35:04 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 13C6580B48
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:35:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9LfitxlrYbcP for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 16:35:03 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::635; helo=mail-ej1-x635.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
- header.a=rsa-sha256 header.s=google header.b=KlCWQrTh
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C12C780AAB
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:35:02 +0000 (UTC)
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-c253425b253so30421966b.1
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:35:02 -0700 (PDT)
+ id P9WMqRgkvuAh; Wed, 26 Aug 2026 16:35:10 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1787762100; x=1788366900;
+	d=lists.u-boot-project.org; s=default; t=1787762110;
+	bh=EV1/Zq+xrw1G9SlaRud6zqkIm1KzWDQewvB08SU/Rz4=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=SdSQC9tuO6Lj8Lbvk9+FG6DoeoYcRRP/kb4HPBMdqpkhYmHKknMk7s83NpGRaGxbh
+	 kl3UTPXIUWVkZt58xlaMUG1V9G2iF+H+xewwuaPQ4UvLEwB9VE5tdsaWJyySp+Fjlo
+	 xtioumbkBtFs2nLtejLdqu8gWxnasQDf37kzNQr/YN2BFsHrX7ctpci1aTbc+MpoiF
+	 +9ag1BppXQJ4USuQkyDyq6kHaYyS1niDy4RYSajoads+Jyh6fi3fEVSsWOWYaEL8oj
+	 e4soZSK7r0HCDcf0A2hs100SYDWOBQEGjmR1SLqmF67ic/NanMQR7TuQt1g4fevAPV
+	 RQo+vFACGPhQQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id DC80A80AEA;
+	Wed, 26 Aug 2026 16:35:09 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0A98C323
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:35:07 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 084FB6075D
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:35:07 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rViTgX2MBWEJ for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 16:35:06 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::636; helo=mail-ej1-x636.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
+ header.a=rsa-sha256 header.s=google header.b=zynInnK5
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B40236073D
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:35:05 +0000 (UTC)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-c15e2dab83eso180835366b.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:35:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1787762104; x=1788366904;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=JjwwmFVRwsELldJjFVNZEyvsggI2W1mJFGnjEGxjSiU=;
- b=KlCWQrThpKDiPIw1VQ5VLiyn1cSS+X8iwZ1U/xVlChdfYHDlVR4DyPm+4jnwnqaFEJ
- mlPquj7LgnEZEuifo9koJQlyyijInMdZayAjVI1uekElkidNtLhnIDTaYN7l2SXvIfJ5
- bSwJFBXk9BeldTfv5ZgBkongoJYNCb3Idh+V9UShPwqrf320gvG+ERocRJU7wMHfTy3b
- 8NvYvBjuNXo2w5TDzvNwu97cGEm7UQEN+wRjjgE8WLWugwWMPHh7p0QETWHmv3fw+ECf
- b4KSikyBftHCss9DaW1LetNn8qqMMf+C0TjXS1ALBd//WBlMF3ojtdim1yiRRRcoQ6JT
- tQog==
+ bh=EV1/Zq+xrw1G9SlaRud6zqkIm1KzWDQewvB08SU/Rz4=;
+ b=zynInnK5WAhM2CdTeRyyA9uYB8PBXQdE5z8RQouEF5nTZglfQR69Xc2xNPalePH9vl
+ YDZtjseZgRQOhUsW5ILGbCsw40ur0o6npEzg1ud6/u/vSNVA9sqFryVJCocS6sBX+m5m
+ bgPLvdELb2RBca46oCdx8jYwWcMiDwBCAfV+RddtMRHpWjkqXHmkZKT4VnQAGLgPMMek
+ 074UMFT/UJl2T3A28xyjhX7H0PUS8eery//qwvBJNKXDxqdEu6W5ER42jQYr/hayGE+Y
+ 2kYyoOUdKSkLXwQGb2/UCrJ+zVHdmSq+IhTcxqr9JSTKxRSI8bw4ino9qJDL+7Qeyfwg
+ ydhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787762100; x=1788366900;
+ d=1e100.net; s=20251104; t=1787762104; x=1788366904;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=JjwwmFVRwsELldJjFVNZEyvsggI2W1mJFGnjEGxjSiU=;
- b=dgoFf/e/WDIOP1w2E2TCyA2mLlWBnDLURmcdfYF779UT9aswk8kmziS4+JjImuWnbb
- aKFVZQi/sgA8NicxyODTOoo7O1xfFsbu/fg0MYw0+ckJa5mOCHqcFdGCaXiJMJF7nzxa
- gIVP8v1hJKPOsZYVEDFXdpx3kb9cnAUDOvFCnCqNYYOjX9suC7OMRQlhMFHW7a1WbEH3
- AwrfB0Jg/wpPAKUitidFlU4m+GgbjcYIivXGJqpIn7qOYaV8N4+xuuUmoyyaRonXwWwn
- mBKImq1OYqWSvV03rBMSMAZpEudO8GwnyEMFol+pIMsbWk9PttnffrtEtKs4MC9A6cOw
- PoPg==
-X-Gm-Message-State: AFuF++k5VOjTmUGmPDOhPckdVLuxwsUVwyVlTEyWwBjqB/JN+rz09KAM
- iy5fAAVbcXtRAdMkKuBTiUFm4TVeSsbBdwaJc6pTw6QWuXlNn+Qe4UBJA2s/W15hJXU=
-X-Gm-Gg: AR+sD10to4dQh+XFLVOirIxHOmnHx7Fz1i7NwC09jTBTNT0HMcnlCGMf4YeOM+ESMiy
- vlDja2KqIZwCdmpEh4ZqI0ydXmLx2JZQASYkmBN0/NvEgkJsBaOhpAZ1FI9w67TKmvoV0B/XFdz
- ig0uBjZzXgV8587ekntihTEILJWQfrQs7mghqu/oGVIx+ef8Uvs9n2XlEz/twFmUe7s84LcL69+
- 14ME9CZ7JKD8brmws2e4KK568Ss/nixZM9WdizR/fNF4GL0cafxYtG6ZKycLw4GTfrn7PWIol3G
- hJICCyFaRqiCJ2IWOQq6U7AujjjFbZWvdbSkDjrn64mwGpkOWMEqElUxo8JdzWDgQJ+Xk37iYVI
- sDe32FYG+2UN0pnV/LMkhceHUfQCqOG8oBTJlL6nyIToWHdvsfIvoZj6sh08J6yBvMZzkxiHJfz
- kB94ymKH3KHN9Kay9opc/JM7yakBSX6rYOx71XJAJzmCyldic+bGV5EPNkMt4dP05TEzrU5rP+v
- E28jFw8UX5uv/sKpL/sNaDfOXQv1f8CuxJDA7fndSE=
-X-Received: by 2002:a17:907:9701:b0:c1c:4db0:8314 with SMTP id
- a640c23a62f3a-c250bc2dbfcmr925202366b.13.1787762100503; 
- Wed, 26 Aug 2026 09:35:00 -0700 (PDT)
+ bh=EV1/Zq+xrw1G9SlaRud6zqkIm1KzWDQewvB08SU/Rz4=;
+ b=kz3ueQ/BOaORgELcTSPULQHoerVtWMEtBxg9EUlp8dyE4ZwR8eJZ6cFG8aJiWuWgWr
+ NBHvRKef/4LlKrwnb/4fgpAVhmSgTot2Znqd/qTZNJ9Yz22XbnMbJr2u5SdkzlXzUnLj
+ dGO9UPNX/99ySAPIBqrK7dBFoK+p3gKkTyQ/zTupUZxwbL7XoZGTYwqRf+RqOAcr3eWh
+ RHZ+uAL//RTT48U8NR+srPnmqGDujQJ1/JswkhTDLAuvngGqayDhD3OR3mkw+bWBAM71
+ +jRp4M/y2M8CPONqRVZJUtRgTUJXLSMSREd0wVN+vemWdiz6CElYfJNvFFNZ8JKl2UIe
+ tK7A==
+X-Gm-Message-State: AFuF++mfYhdAazNF/oisb5wcLxdIHZ2Xay/DAHl4OJsgf9dnwFKX7Gi+
+ taHLnyDeClPSInBjLqF+Y4e2r3ImZj/y4lFRISytZu4OdDU9wF2Snwq6iS+Dzj3rM7I=
+X-Gm-Gg: AR+sD12vmu1F8vqqUaPWjyAAEgn7WMe1KOuQJE/wvdPUEmNBNVXX63k0koY+gIGRASL
+ nVsbG1diiDypWdGi8yJMvT9d01DSi+lyO0lVxzzFzJiwyPncvVCFAtd7CC8IQtBj5CEFI2YOWzT
+ nUXEnfgSyx43Pa9RyK4BmqXLI+Rwr410PwYltON14XHy0xDA2o/QsBbLgXLkHBCbvzKuRjIdxnn
+ eNa3jWGQqat3sGuiU0RGMDDGQNJ9JmJbuuikXw26mUrLajiOvejaeQc36of8E77x0Zt7yGaLTbO
+ 4zodVK1KxiF1ZtH/DcrZD2TLbrsld2OWAslTmxdgLoY2wrGcdRWqdOoahz/MyM2TsVh6a4UWHue
+ DM8AnRy9e8QGZoWhWZHeRuSTnAHc1dPdC1lEWqqQTrR+YiyH5d02udyx6C/l9fRe8B8JRjMpues
+ BPwofrg1J59SHcJrfJwzuXTKUabG3Jhh+7xhPydtTAcWKyPiNZOGnC68y3METCwl/tXGDRFgPFy
+ kJA8SdKU33ARjiDBRi7vHeCgbI0/CnaqwHpuwK+Jg==
+X-Received: by 2002:a17:907:80b:b0:c20:9447:bd6d with SMTP id
+ a640c23a62f3a-c250c363b01mr1089203366b.11.1787762103538; 
+ Wed, 26 Aug 2026 09:35:03 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-86-98-192-94.alshamil.net.ae.
  [86.98.192.94]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c250a704e55sm544907666b.21.2026.08.26.09.34.57
+ a640c23a62f3a-c250a704e55sm544907666b.21.2026.08.26.09.35.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 09:35:00 -0700 (PDT)
+ Wed, 26 Aug 2026 09:35:03 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Wed, 26 Aug 2026 20:34:04 +0400
-Subject: [PATCH v2 12/13] test: bootstd: cover BLS entries below a prefix
+Date: Wed, 26 Aug 2026 20:34:05 +0400
+Subject: [PATCH v2 13/13] doc: bootstd: describe the BLS bootmeth
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260826-bls-v2-12-17df3c9548ba@flipper.net>
+Message-Id: <20260826-bls-v2-13-17df3c9548ba@flipper.net>
 References: <20260826-bls-v2-0-17df3c9548ba@flipper.net>
 In-Reply-To: <20260826-bls-v2-0-17df3c9548ba@flipper.net>
 To: u-boot@lists.u-boot-project.org
@@ -119,12 +119,12 @@ Cc: Alexey Charkov <alchark@flipper.net>, Tom Rini <trini@konsulko.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8891; i=alchark@flipper.net;
- h=from:subject:message-id; bh=Qxp6Efr9iJBx5xwKQPx9W1xbyshdNGKiwmFz3FW0lnY=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWT1i/bJRPmohOWlNd8PVE6aYnrd97a+8KTKiedm7l7vf
- MTRVeBzx0QWBjEuBksxRZa535bYTjXim7XLw+MrzBxWJpAh0iINDEDAwsCXm5hXaqRjpGeqbahn
- aKRjrGPEwMUpAFP9WZnhf1Q/x2W9o8pH/u9M21W/kDkqga/j7PXEV5GtzCvCpnJefMXwz1om5Yi
- f6pT6q/ckD3+YkMle8t/3eWDRR20fPw6be3unswEA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4566; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=H/qzI56AoaW6U0kXDS5vvQa8NG7RQ2ns618cLTvYhC8=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWT1i/ZlvVUL27pPe7IaN1/M6s9cn1en31i/6k7ss+ctO
+ S6rHuw83zGRhUGMi8FSTJFl7rcltlON+Gbt8vD4CjOHlQlkiLRIAwMQsDDw5SbmlRrpGOmZahvq
+ GRrpGOsYMXBxCsBUbzrO8D/1XNYqU7lXS2Ytey9xYVLXm0qOvzdvbpb6Ye1q/yV93ek3jAzXTs5
+ gcT5yW+O2th7ruTl96uwzzFa3PTn75V5NquF88Us8AA==
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -140,243 +140,107 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The Fedora image places its BLS entry at the root of the filesystem, so
-the second entry in the bootstd prefix list is never what finds it. Add an
-image for the other layout, where $BOOT is a '/boot/' directory on a
-larger filesystem and only the '/boot/' prefix turns the entry up.
+Every other bootmeth has a page under doc/develop/bootstd/; add one for
+BLS and list it in the index and in the overview's table of drivers.
 
-Its paths still name the kernel, initrd and devicetree relative to the
-partition root, matching what systemd's 90-loaderentry.install writes when
-$BOOT is not a mount point of its own, and booting it checks they are used
-as written rather than rebased onto the prefix. The rescan before booting
-covers freeing a bootflow that is still selected, which is the path a
-retained bootmeth_priv would double-free.
+Besides what the bootmeth does, record the two things a reader is most
+likely to trip over: how paths inside an entry are resolved when $BOOT is
+a directory rather than a partition, and which parts of the spec's entry
+ordering and boot counting are not implemented yet.
 
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- arch/sandbox/dts/test.dts |  8 +++++
- test/boot/bootflow.c      | 90 +++++++++++++++++++++++++++++++++++++++++++++++
- test/py/tests/test_ut.py  | 66 +++++++++++++++++++++++++++++++++-
- 3 files changed, 163 insertions(+), 1 deletion(-)
+ doc/develop/bootstd/bls.rst      | 56 ++++++++++++++++++++++++++++++++++++++++
+ doc/develop/bootstd/index.rst    |  1 +
+ doc/develop/bootstd/overview.rst |  1 +
+ 3 files changed, 58 insertions(+)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 189d83a81cf6..78d52c1eabb7 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -49,6 +49,7 @@
- 		mmc8 = "/mmc8";
- 		mmc9 = "/mmc9";
- 		mmc10 = "/mmc10";
-+		mmc11 = "/mmc11";
- 		pci0 = &pci0;
- 		pci1 = &pci1;
- 		pci2 = &pci2;
-@@ -1372,6 +1373,13 @@
- 		filename = "mmc10.img";
- 	};
+diff --git a/doc/develop/bootstd/bls.rst b/doc/develop/bootstd/bls.rst
+new file mode 100644
+index 000000000000..52e691b70165
+--- /dev/null
++++ b/doc/develop/bootstd/bls.rst
+@@ -0,0 +1,56 @@
++.. SPDX-License-Identifier: GPL-2.0+:
++
++BLS Bootmeth
++============
++
++The `Boot Loader Specification
++<https://uapi-group.org/specifications/specs/boot_loader_specification>`_ (BLS)
++describes a drop-in directory of boot entries, so that a distribution can add
++and remove kernels without rewriting a central configuration file. Type #1
++entries are plain text files, one per bootable kernel; this bootmeth implements
++those. Type #2 entries are EFI binaries and are out of scope here, since the
++EFI bootmeth already covers them.
++
++Entries live in ``<prefix>loader/entries/*.conf``, where ``<prefix>`` comes from
++the bootstd list of prefixes (``{"/", "/boot/"}`` by default, settable with the
++`filename-prefixes` property on the bootstd device). systemd's
++``kernel-install`` writes them in this layout when ``loader=bls``.
++
++The format is close enough to `extlinux.conf` that U-Boot reuses the same
++parser. Two extra keywords are recognised for it: ``title`` (the human-readable
++entry name, equivalent to extlinux's ``menu label``) and ``options`` (the kernel
++command line, equivalent to ``append``). Some spec-envisaged keys such as
++``version``, ``machine-id``, ``sort-key`` and ``architecture`` are not yet
++implemented and are skipped.
++
++Paths inside an entry are used as written: the spec has them "always relative
++to the root directory of the partition they are referenced from", which is
++what the bootmeth sees whichever prefix the entry itself was found under.
++systemd's ``90-loaderentry.install`` agrees, since it strips the mount point
++from the entry directory and so keeps the ``/boot`` component when $BOOT is
++not a mount point of its own.
++
++Entry selection
++---------------
++
++Only the highest-sorting entry on a partition is returned, because the bootstd
++framework currently allows one bootflow per (bootmeth, partition) pair.
++
++Ordering is by filename alone, which suits the common case of distros encoding
++the kernel version into the filename. The spec envisages more than this, none
++of which is implemented yet:
++
++* entries should be ordered by ``sort-key`` first and ``version`` second,
++  falling back to the filename only when those tie;
++
++* an entry may carry a boot counter as a ``+TRIES_LEFT[-TRIES_DONE]`` suffix on
++  its filename, to be decremented on each attempt and skipped once it reaches
++  zero. For now that suffix is left intact in the entry name and otherwise
++  ignored.
++
++When the bootflow is booted, the bootmeth re-parses the entry it read during
++the scan and hands the resulting label to ``label_boot()``, the same code path
++extlinux uses.
++
++The compatible string "u-boot,bls" is used for the driver. It is present if
++``CONFIG_BOOTMETH_BLS`` is enabled.
+diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
+index ec74fc2fb9d7..9271b5eef14e 100644
+--- a/doc/develop/bootstd/index.rst
++++ b/doc/develop/bootstd/index.rst
+@@ -9,6 +9,7 @@ Standard Boot
+    overview
+    extlinux
+    pxelinux
++   bls
+    qfw
+    android
+    cros
+diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
+index ec9fafa0fa05..eb0f68d9bb87 100644
+--- a/doc/develop/bootstd/overview.rst
++++ b/doc/develop/bootstd/overview.rst
+@@ -445,6 +445,7 @@ Available bootmeth drivers
+ Bootmeth drivers are provided for booting from various media:
  
-+	/* This is used for BLS boot tests */
-+	mmc11 {
-+		status = "disabled";
-+		compatible = "sandbox,mmc";
-+		filename = "mmc11.img";
-+	};
-+
- 	pch {
- 		compatible = "sandbox,pch";
- 	};
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index eb8e27fa2253..a1247e7a9e82 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1666,6 +1666,96 @@ static int bootflow_rauc(struct unit_test_state *uts)
- }
- BOOTSTD_TEST(bootflow_rauc, UTF_CONSOLE | UTF_DM | UTF_SCAN_FDT);
- 
-+/*
-+ * Test the BLS bootmeth against entries that live below a '/boot/' prefix,
-+ * so that they are only found via the second bootstd prefix. The Fedora
-+ * image used by the other tests covers the unprefixed layout.
-+ */
-+static int bootflow_bls_prefix(struct unit_test_state *uts)
-+{
-+	static const char *order[] = {NULL, NULL};
-+	const char *mmc_dev = "mmc11";
-+	struct bootstd_priv *std;
-+	struct udevice *bootstd;
-+	const char **old_order;
-+	ofnode root;
-+	ofnode node;
-+
-+	if (!CONFIG_IS_ENABLED(BOOTMETH_BLS))
-+		return -EAGAIN;
-+
-+	order[0] = mmc_dev;
-+
-+	/* Enable the requested mmc node since we need a different bootflow */
-+	root = oftree_root(oftree_default());
-+	node = ofnode_find_subnode(root, mmc_dev);
-+	ut_assert(ofnode_valid(node));
-+	ut_assertok(lists_bind_fdt(gd->dm_root, node, NULL, NULL, false));
-+
-+	/* Change the device and bootmeth order */
-+	ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
-+	std = dev_get_priv(bootstd);
-+	old_order = std->bootdev_order;
-+	std->bootdev_order = order;
-+
-+	ut_assertok(bootmeth_set_order("bls"));
-+
-+	ut_assertok(run_command("bootflow scan", 0));
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("bootflow list", 0));
-+	ut_assert_nextlinen("Showing all");
-+	ut_assert_nextlinen("Seq");
-+	ut_assert_nextlinen("---");
-+	ut_assert_nextlinen("  0  bls          ready   mmc          1  mmc11.bootdev.part_1      /boot/loader/entries/aabbccdd-6.17.0-bls.conf");
-+	ut_assert_nextlinen("---");
-+	ut_assert_skip_to_line("(1 bootflow, 1 valid)");
-+	ut_assert_console_end();
-+
-+	/*
-+	 * The prefix the entry was found under must be recorded, and the BLS
-+	 * 'title' key must surface as the OS name
-+	 */
-+	ut_assertok(run_command("bootflow select 0", 0));
-+	ut_assert_console_end();
-+	ut_assertok(run_command("bootflow info", 0));
-+	ut_assert_skip_to_line("Subdir:    /boot/");
-+	ut_assert_skip_to_line("OS:        BLS prefix test");
-+	ut_assert_skip_to_line("Error:     0");
-+	ut_assert_console_end();
-+
-+	/*
-+	 * Rescan on top of a selected bootflow. This frees the previous
-+	 * bootflow, so it walks the path that would double-free a retained
-+	 * bootmeth_priv: the bootflow is shallow-copied into the bootflow list,
-+	 * leaving the iterator's temporary and the stored copy sharing it.
-+	 */
-+	ut_assertok(run_command("bootflow scan", 0));
-+	ut_assert_console_end();
-+	ut_assertok(run_command("bootflow select 0", 0));
-+	ut_assert_console_end();
-+
-+	/*
-+	 * Paths inside the entry stay relative to the partition root even
-+	 * though the entry itself was found under '/boot/', so they are used
-+	 * as written rather than rebased onto the prefix.
-+	 */
-+	ut_asserteq(1, run_command("bootflow boot", 0));
-+	ut_assert_nextline("** Booting bootflow 'mmc11.bootdev.part_1' with bls");
-+	ut_assert_skip_to_line("Retrieving file: /boot/vmlinuz-6.17.0-bls");
-+	ut_assert_skip_to_line("Retrieving file: /boot/initramfs-6.17.0-bls.img");
-+	ut_assert_skip_to_line("Retrieving file: /boot/dtb-6.17.0-bls/sandbox.dtb");
-+	ut_assert_skip_to_line("sandbox: continuing, as we cannot run Linux");
-+	ut_assert_nextline("Boot failed (err=-22)");
-+	ut_assert_console_end();
-+
-+	/* Restore the order used by the device tree */
-+	std->bootdev_order = old_order;
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(bootflow_bls_prefix, UTF_CONSOLE | UTF_DM | UTF_SCAN_FDT);
-+
- /* Check 'bootflow scan' provides a list of images */
- static int bootstd_images(struct unit_test_state *uts)
- {
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index 28f028453ea9..3035c7095bd7 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -261,6 +261,68 @@ def setup_fedora_image(ubman, devnum, basename):
-     dtbdir = 'dtb-5.3.7-301.fc31.armv7hl'
-     setup_extlinux_bls_image(ubman, devnum, basename, vmlinux, initrd, dtbdir)
- 
-+def setup_bls_prefix_image(ubman):
-+    """Create a disk image holding BLS entries below a '/boot/' prefix
-+
-+    This is the layout where $BOOT is a directory on a larger filesystem
-+    rather than a partition of its own, so the entries are only found via
-+    the second bootstd prefix. The Fedora image covers the other layout,
-+    where they sit at the root of the filesystem.
-+
-+    Paths inside the entry stay relative to the partition root either way,
-+    which is both what the spec requires and what systemd's
-+    90-loaderentry.install writes: it strips the mount point from the entry
-+    directory, so a $BOOT that is not its own mount keeps the '/boot'
-+    component.
-+    """
-+    mmc_dev = 11
-+    vmlinux = 'vmlinuz-6.17.0-bls'
-+    initrd = 'initramfs-6.17.0-bls.img'
-+    dtbdir = 'dtb-6.17.0-bls'
-+
-+    fsh = FsHelper(ubman.config, 'ext4', 8, prefix='bls')
-+    fsh.setup()
-+
-+    boot = os.path.join(fsh.srcdir, 'boot')
-+    mkdir_cond(boot)
-+    bls = os.path.join(boot, 'loader')
-+    mkdir_cond(bls)
-+    bls = os.path.join(bls, 'entries')
-+    mkdir_cond(bls)
-+
-+    # Paths are relative to the partition root, so they keep the '/boot'
-+    script = '''title BLS prefix test
-+version 6.17.0-bls
-+linux /boot/%s
-+initrd /boot/%s
-+devicetree /boot/%s/sandbox.dtb
-+options ro root=/dev/sda1''' % (vmlinux, initrd, dtbdir)
-+
-+    conf = os.path.join(bls, 'aabbccdd-6.17.0-bls.conf')
-+    with open(conf, 'w', encoding='ascii') as fd:
-+        print(script, file=fd)
-+
-+    inf = os.path.join(ubman.config.persistent_data_dir, 'inf')
-+    with open(inf, 'wb') as fd:
-+        fd.write(gzip.compress(b'vmlinux'))
-+    mkimage = ubman.config.build_dir + '/tools/mkimage'
-+    utils.run_and_log(
-+        ubman, f'{mkimage} -f auto -d {inf} {os.path.join(boot, vmlinux)}')
-+
-+    with open(os.path.join(boot, initrd), 'w', encoding='ascii') as fd:
-+        print('initrd', file=fd)
-+
-+    mkdir_cond(os.path.join(boot, dtbdir))
-+    dtb_file = os.path.join(boot, f'{dtbdir}/sandbox.dtb')
-+    utils.run_and_log(ubman, f'dtc -o {dtb_file}', stdin=b'/dts-v1/; / {};')
-+
-+    fsh.mk_fs()
-+
-+    img = DiskHelper(ubman.config, mmc_dev, 'mmc', True)
-+    img.add_fs(fsh, DiskHelper.EXT4)
-+    img.create()
-+    fsh.cleanup()
-+
- def setup_cros_image(ubman):
-     """Create a 20MB disk image with ChromiumOS partitions"""
-     Partition = collections.namedtuple('part', 'start,size,name')
-@@ -648,6 +710,7 @@ def test_ut_dm_init_bootstd(ubman):
-     setup_android_image(ubman)
-     setup_efi_image(ubman)
-     setup_rauc_image(ubman)
-+    setup_bls_prefix_image(ubman)
- 
-     # Restart so that the new mmc1.img is picked up
-     ubman.restart_uboot()
-@@ -665,7 +728,8 @@ def ut_ubman_fixture(ubman, ut_subtest):
- 
-     yield ubman
- 
--    if ut_subtest in ("bootstd bootflow_cmd_boot", "bootstd bootflow_scan_boot"):
-+    if ut_subtest in ("bootstd bootflow_cmd_boot", "bootstd bootflow_scan_boot",
-+                      "bootstd bootflow_bls_prefix"):
-         ubman.restart_uboot()
- 
- 
+    - :doc:`Android <android>` bootflow (boot image v4)
++   - :doc:`BLS <bls>`: Boot Loader Specification type #1 entries from a disk
+    - :doc:`ChromiumOS <cros>` ChromiumOS boot from a disk
+    - EFI boot using bootefi from disk
+    - EFI boot using boot manager
 
 -- 
 2.54.0
