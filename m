@@ -1,115 +1,118 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D1CCC5DF97
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 19:58:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16A1AC5DF97
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 20:02:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9FC7C607D9;
-	Wed, 26 Aug 2026 19:58:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8867040306;
+	Wed, 26 Aug 2026 20:02:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cZqAKWVC7vgk; Wed, 26 Aug 2026 19:58:52 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gh86Wdy9SoZ8; Wed, 26 Aug 2026 20:02:14 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787774331;
-	bh=zPL8oI3qkymW+g+UALUEOQkQJi+xadT9zsDPnJviIC8=;
+	d=lists.u-boot-project.org; s=default; t=1787774534;
+	bh=VQJN04WsGdaqH0fZYzdI44h5IKjFi1WJoEISpZDfNuE=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Dp5NQ5YHaZ3+g8FFdbTTcXr8xN3thlPbo3tjJ5niZQWL1vmkp7pMglT0Dy3f9W2iD
-	 1k5LNR7QV7PgL69kjEti3ua4eYFUxDdl20M057MYoXE2IUmd4dpDNRxKYbUwy8O6m8
-	 Z7DdyPYA8qQfcLVa9UdDZgj2bbBBTbiE04Wg48G5D8jxC03u2x2Mqxo8qR3tN7Sc2w
-	 YGVAsyr0BxOaFriBIpOxkswQc57orxbPWSArl5fQm4bLaW+qEmLGwEz4q0dVb6AOtg
-	 R+be0/FRMdTMTv9qsBoToy5jRGdOtXKc++BXWsc7iB6viBPTWXgNfLld82xhUfyZ19
-	 kDedzW6cktZtg==
+	b=CjNK+UtE+zMFAmFObXrLquR3ZtJ0UhKtkd6ZINyxiWlZrWpxvneUmAb2QLAMgD+pI
+	 ME7HXM7rvkVUeAcrVuVmCPxpFsYZQa+NZUotZShsHDBYfEugVTtyDlac0v4nksBk1N
+	 V7oAOrpaA77eU1oyhGF3bDP0shYj3OxecgvDj8NU/5/z/QIOLpwr40Tpx+Bys4mUes
+	 ndgetYuPaBHpy5HkEiB7x6IbVeWmqbS+bZ93KqZh2JmJr53wq6mHy23EUs/+gc/XET
+	 3QAQsBtGK+j4wXuRdMSkRd2at1tD+M9cNAtTmJ440+3G+dBKUlS026eEPwapLpT/iY
+	 gLiNusmvu3/9g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C8153607B4;
-	Wed, 26 Aug 2026 19:58:51 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id EB8FE334
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 19:58:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 43778402FF;
+	Wed, 26 Aug 2026 20:02:14 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6A0A9230
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 20:02:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D1CB840123
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 19:58:49 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5C041605F3
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 20:02:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rjtJOWnWDgNV for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 19:58:49 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fZwZ-x983_pN for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 20:02:11 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::33; helo=mail-oa1-x33.google.com;
+ client-ip=2607:f8b0:4864:20::32d; helo=mail-ot1-x32d.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=LzAadpJI
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1D2094011F
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 19:58:48 +0000 (UTC)
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-465e7ba7b4bso488177fac.2
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 12:58:48 -0700 (PDT)
+ header.s=google header.b=SYH1R5c8
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A4DAC605E7
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 20:02:11 +0000 (UTC)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7ec3b429a3aso1177542a34.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:02:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787774328; x=1788379128;
+ d=konsulko.com; s=google; t=1787774530; x=1788379330;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=zPL8oI3qkymW+g+UALUEOQkQJi+xadT9zsDPnJviIC8=;
- b=LzAadpJIkLGD2l8Gr1xHiiBl5jX+HGsOyVVGuaCrLSJf8vikn/prxZUtW2TfBu0zbe
- zafmP/OL9uvZER4bH+hR8DQ30KLprJgp9+ulMGacK7/Bqpig1Hsl9ePTrwyMgBOihWp8
- U1ZFRw/Kan3jy+NN84pxjlDx77e8/KrWTAie0=
+ bh=VQJN04WsGdaqH0fZYzdI44h5IKjFi1WJoEISpZDfNuE=;
+ b=SYH1R5c8AkXl83DMTL7v3xDEZwDp0RvRQzVt4Kxlq+7ux0A6xGrn+ZlyJFMaMsGFb/
+ zt0Dx2St3qlIZtpG5A5mcSQzo1owvbFPP2YJjatdOHa+EV92sheljj+68k+qEEVFp+aI
+ 215IpA1pHg0DIXnSNLjklIn1lLviD79/fK3ig=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787774328; x=1788379128;
+ d=1e100.net; s=20251104; t=1787774530; x=1788379330;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=zPL8oI3qkymW+g+UALUEOQkQJi+xadT9zsDPnJviIC8=;
- b=V6891agOA6Y07B8tFz+e96ZI7D5mk1pcyAF5M8H5lDNiuNKpwHoDFLnrNG0vJgG9T4
- mqJkXacbEuk+ioyaXyu3hsJu+xMyMpdyxiQWI64bBV11ytC1OjhXspbfGA0gB6+5MT2w
- BsPmx3h/VulVisqThAwow92KedyzEMHHkVfAB8SuPn9+YAZGe3QdfQmE5pPHJiJ8YlzV
- XsmOjZesfgX26jtO409oS++v7O40uLq4DSCXlCbCV/9mHB1fKYg6+YtQAYM/QGySbLws
- JTBncnXTzvc1UAIHeZjpRBPZrp4KZuOzSmfPk5fnnsJxOFvePPry1/WOPHRVd46uUDCz
- RzQg==
-X-Gm-Message-State: AFuF++lPfyyj03yOPlD5cwZ7QfBjWtFWZ9Sh9gSbTJ5FY4lBoRLY5hny
- 3i+GBkDAy7ni6PjQ+8abyzcjiKdo0upXV7H8gqLssBZoUGpsSioeO0dkMMY9GxR1bwTkf4VduaA
- OmelEyo0Vx1jT
-X-Gm-Gg: AR+sD12PWsoHdbW4zNjK7oibegfiRivbJhrbFNEjDIqcQrWDKct2FYIyw/I7Fq+lRB/
- 1fl3wVMJpt0TMszQgXRKqTJHPqt88UrsirLp9JmuRQUEr/Jum3nWWpdf4BFOzHdN50pSknhmRyL
- f0uzp6JHu9zC1gky4VEhRexudnRKLBJZ0HbOer3gO8EbLPeIwZUa+9pZosOvdXx9EK6kKlA65ru
- aql8jBHyFllYYLASB6Cx4LFxZ/6t0R8luj8LhhdutuWRZ6nCz8q6HZs3cy95WUL9GzE0+4e0o56
- SOzvBiRlQSx/bj2yCJXxo9uGGvpiKXWWrSDcaoJe6rpzolf7X5s/LkJGvF8oDVRhJNIIA/pP475
- 6ELIrXotTRvaScz7shavVKlrnCLGGjGDF3IwdnNhNwmgXnuRygBqHNF/cnRnyqIh+Cb+hZbzjPK
- Q/hyRJbpOJbqt/1fzyjsMOmp2nMhfou5NhnZZKHKNpeF+a/SubloBSe3EPvv7eS0ksuerfbUZYJ
- oHE9FV6m5Cl49RH0yK4/+zkS2yrk6lFB6eqHq4TLL64b8ux5Evv9sT54iPUME63MkLbaNLC8+W/
- 071GSPOv1UBNC5dBu9cY
-X-Received: by 2002:a05:6820:220d:b0:6b1:445d:aaf9 with SMTP id
- 006d021491bc7-6b1a03ac1dbmr8348177eaf.8.1787774326526; 
- Wed, 26 Aug 2026 12:58:46 -0700 (PDT)
+ bh=VQJN04WsGdaqH0fZYzdI44h5IKjFi1WJoEISpZDfNuE=;
+ b=JOUUGHzhBS1HKqqD6ng5uiR3mz6FRLSEbkxEvbbE/cTlr5REnCrT/lagZFaKhZEwPa
+ t/LoKnhWGif5Ht+ZP6VMkeMG9soUi/dOdCH3LOmQb5cDi/3TAMWAkL8zN8WWNj/3Gt5m
+ 0utmtKwsqa31EEwNB2/XWL4NXj8ti6gFWsONvMpmDegYgtQxLisn7RTSzTUrcR+PnjY5
+ R4Wln7D/tNN0rCENnPVG716N1cnGySqnLyLHOyYpHCqPlBPxbOomxTcuzheLyTOfU9gM
+ CdLcvk2uVbDA+cyYEVFMYF1n941DrJhJotDUOe8Odj/AaSi329VVKCjGEM9QBBrqSotv
+ ONZg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Ro2E5VTw7s+Y4S6RSmNAer0RYSsqk6MmuLuxnbkNKoSdX3LUc9gjXAqaIoLNupKIchmbG3h/x4=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lXILDd/sRBfs2QmAmBd49sLdHgxIbxElb0J/06LNaLI2dK/uUl
+ 3txn0S9M2tQ020sOoOXDIFgtuCnOYNCxum3r7zxeMXN+19tJbqtJJovYTW8cXmHD891F61ETeWu
+ BhTwiBSC+x/k7
+X-Gm-Gg: AR+sD13WorC+f+gmj0lEyPLeRGzJsBy32JCts8+CWuq1zR+DmGhy1XyIzdc4q2F6III
+ uhGFyrpau2cNjPXlvOlgDXGSFb4uUCLvonf4z5s6dUpzh6s8b81rwiA6NgYLKIBdOWopM2PJbZF
+ TUpCHdgGxRAcAaLEHp4KciSjC5Chm+Ekl3Il4h8GSCRDIzCO4elFMGfNa2JhJGhAs8FgKYFpfKz
+ rInCjxR1FnAzdAxp+5qJ9Xk1LNCuGFQUU1ES992WlVDqWJqEE/8ezPA2ug9p7GmjgcIkYJZPs4a
+ GMU+gOfjtWEfb2zu+ffT8S88/+LSazor45t/I8sdc+psn8SP5vUrBGaganTINVlY2qi7PeMPoCW
+ +H1hsWFI3uecUkf5+M0CtcjVvSXVKrzE3g9GZCTH8n+/Yz2tAjIzy3UF0onoLaV6IRNUZGOeAh2
+ lmrrA5P06NpBjz/OJkVL2MvmnQ8tFnP1PsXuIebfm9Cm1kkTylp+5lppE9iB7kKKINzVii7lPrT
+ OSCUM76dM5zjhkyNKhydb4rINTWQ3c133p1tTQNbltUmbUYWcsQzI5V7HZHQwsBm+1SiekDtaTy
+ ZNSev2QueA==
+X-Received: by 2002:a05:6820:8593:10b0:6b1:3756:f77a with SMTP id
+ 006d021491bc7-6b1a0389cdcmr7696744eaf.4.1787774530325; 
+ Wed, 26 Aug 2026 13:02:10 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f4c7f50d80sm2373063a34.0.2026.08.26.12.58.45
+ 586e51a60fabf-465b03ae31fsm2989034fac.18.2026.08.26.13.02.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 12:58:45 -0700 (PDT)
-Date: Wed, 26 Aug 2026 13:58:43 -0600
+ Wed, 26 Aug 2026 13:02:09 -0700 (PDT)
+Date: Wed, 26 Aug 2026 14:02:07 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Urvashi Sharma <urvashi.sharma@oss.qualcomm.com>
-Cc: u-boot@lists.u-boot-project.org
-Subject: Re: [SPL] ELF loader support - design discussion
-Message-ID: <20260826195843.GA3959812@bill-the-cat>
-References: <CAJM1RwPMXB8qLm4+4h_hBLqsq9=YBW_GndXroi5En4VGBVq-oA@mail.gmail.com>
+To: Yuxiao Zhang <yuxiaozhang@google.com>
+Cc: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@arm.com>,
+ u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH] u-boot: fix error check in eth init
+Message-ID: <20260826200207.GB3959812@bill-the-cat>
+References: <20260826181428.1856166-1-yuxiaozhang@google.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yXksNFp9HZtM7Gap"
+ protocol="application/pgp-signature"; boundary="Ucy5FgQDNgmFbher"
 Content-Disposition: inline
-In-Reply-To: <CAJM1RwPMXB8qLm4+4h_hBLqsq9=YBW_GndXroi5En4VGBVq-oA@mail.gmail.com>
+In-Reply-To: <20260826181428.1856166-1-yuxiaozhang@google.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -125,62 +128,61 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
---yXksNFp9HZtM7Gap
+--Ucy5FgQDNgmFbher
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 26, 2026 at 11:56:36AM -0700, Urvashi Sharma wrote:
+On Wed, Aug 26, 2026 at 11:14:19AM -0700, Yuxiao Zhang wrote:
 
-> Hi Everyone,
+> eth_start_udev can fail but errno could still be zero which causes the
+> function ignores the error silently. This fix catches the error
+> properly.
 >=20
-> Hope you all are doing well.
+> Signed-off-by: Yuxiao Zhang <yuxiaozhang@google.com>
+> ---
 >=20
-> I'm working on a use case that requires booting via SPL in Falcon Mode,
-> where SPL is the natural choice given its minimal footprint. Our board
-> specifically needs to load an ELF image from storage (e.g., MMC/NAND/SPI)
-> directly into memory as part of this boot flow.
+>  net/eth-uclass.c | 11 ++++++-----
+>  1 file changed, 6 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/net/eth-uclass.c b/net/eth-uclass.c
+> index 5c437143a30..5518268bd68 100644
+> --- a/net/eth-uclass.c
+> +++ b/net/eth-uclass.c
+> @@ -347,12 +347,13 @@ int eth_init(void)
+>  			debug("Trying %s\n", current->name);
+> =20
+>  			ret =3D eth_start_udev(current);
+> -			if (ret < 0)
+> -				ret =3D eth_errno;
+> -			else
+> +			if (ret < 0) {
+> +				if (eth_errno < 0)
+> +					ret =3D eth_errno;
+> +				debug("%s start failed (ret=3D%d)\n", current->name, ret);
+> +			} else {
+>  				break;
+> -
+> -			debug("FAIL\n");
+> +			}
+>  		} else {
+>  			debug("PROBE FAIL\n");
+>  		}
 
-Note that "Falcon Mode" is specifically SPL boots Linux. So please
-explain your use case a bit more, so we can help.
-
-> U-Boot already provides the bootelf shell command for working with ELF
-> binaries: it parses an ELF image, maps each segment to its linked address,
-> and jumps to the entry point. However, bootelf assumes the ELF is already
-> resident in memory - it does not read from storage itself. This differs
-> from the existing SPL image loading methods (MMC, NAND, SPI, etc.), which
-> combine storage access with image parsing in a single step. Since the FIT
-> and legacy image formats also don't meet our needs, there is currently no
-> existing SPL loader path that can take an ELF image from storage into
-> memory.
->=20
-> To close this gap, I'm planning to implement a new ELF loader within SPL,
-> built on the existing spl_image_loader framework (registered via
-> SPL_LOAD_IMAGE_METHOD) that already lets board/SoC vendors plug in their
-> own storage-aware image-loading implementations.
->=20
-> Since this would be a significant effort, I wanted to check with the
-> community before proceeding - has anyone worked on something similar, or
-> have any suggestions/concerns I should consider?
-
-The SPL frameworks, generally speaking, are around ${content} from
-${location} and then executing it. So at the high level, you should just
-be needing to add "validate and execute ELF". But the baseline
-requirement is to explain why you have an ELF and aren't just reading /
-executing something in say a FIT image already.
+Is it a valid case for eth_start_udev to have failed and not set eth_errno?
 
 --=20
 Tom
 
---yXksNFp9HZtM7Gap
+--Ucy5FgQDNgmFbher
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao9FcAAKCRAr4qD1Cr/k
-CtuxAP0SAKfmJsQX4AuI3t7sGjEk2UflU0Yp/042plWGKH99yAD8DAJk1dLTXSIX
-jwuhIgbUNG/MKG15RjRqTwruGx9NjAY=
-=+7Bc
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao9GPwAKCRAr4qD1Cr/k
+CjloAQD0KvwH0u5SND3+TBPI0/sjpe84MmoDF9u/85TZ2rmbKwEArPD93k6PHQay
+IJCq2DFaBL3BcprNXmK3kjfei3UkNA4=
+=g9uH
 -----END PGP SIGNATURE-----
 
---yXksNFp9HZtM7Gap--
+--Ucy5FgQDNgmFbher--
