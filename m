@@ -1,114 +1,114 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE43FC61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:09:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B7CCC5DF97
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:09:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 760B86076A;
+	by smtp4.osuosl.org (Postfix) with ESMTP id D634F406CC;
 	Wed, 26 Aug 2026 13:09:44 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iAD0yJicj1HT; Wed, 26 Aug 2026 13:09:42 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787749782;
-	bh=SsZgI7+JWP7j6LkcIfyieQfBfFCX2Ch/pHC7rk14uGs=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=npMNyoMgdRegT3Xs+pdqgx+sUmej7WgWRHcyJ2Mc+w4dlt2oybV6CcbdTXPN58Rye
-	 9aGrudjUygRYp0igrwQgdkc7sJ5udX7Yfj8rwsJCi9+MtCzguLzCkWpIUQgbshGJqX
-	 Pq3L5/Tqqz7vKistQ5B0Lj6abcPv+ZmA+JjqCxlFPM8fVXtUMLQ5MdKpBFsHrbG3N4
-	 os+y3wBFOlq8RaUTJN8qlJDEwLzW5TANbox3rFYS5SFAp82er3Qcwf9MVVvsw1lxM5
-	 CTlJDlYEK8JV8cU44VQPdJOtR3MDTIhN3fQdI0/7CmRdzU7sfRCiYYeZGwwKC1Rmbo
-	 gHonXW3ZsJNLA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2ECC360758;
-	Wed, 26 Aug 2026 13:09:42 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 14C2C3C3
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:38 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 037C340653
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yHNhgj1R46PO for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 13:09:36 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
- envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=LqWzoloC
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7580840665
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:35 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-47f84023916so746914f8f.3
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 06:09:35 -0700 (PDT)
+ id grpg7DlCSOoJ; Wed, 26 Aug 2026 13:09:43 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787749773; x=1788354573;
+	d=lists.u-boot-project.org; s=default; t=1787749783;
+	bh=Gu8n+0WLqMuZiGOZSctX2V9PL05iQQNUElmEwE1zFws=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=FQG6ESgs9LcSZGLib7FM8S8iOK9/XI+OKIFYnqOw/za83ejd2MREjQQ0800Cv2cMq
+	 3SktLaVLhiTgqU7ASvWeXjk6GfUuAMQm+9VrWqRvJdFO6cyDCa4hJW+zKvL1hWNkUy
+	 DXNdj01639JqKI47JZH8PwzklqiIszzOkL/j1z3zEIKYK8Cbx/W2fsryFVWI8ai0Qt
+	 ebNHLm/U574hstmq9AFleNqqp4rVpvrvQki4IzJoNuLLSLUfnHTDXtljmd8vZzVHiQ
+	 yT0J8D9BnIsoB7Mandx5jUvqysHxF/RtOuLrcPAEVOWVbphcric7up71hW6Hdm6xpK
+	 2jwxbs0+i1r5Q==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6028F406C2;
+	Wed, 26 Aug 2026 13:09:43 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 40F893C3
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:38 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 27DA280B63
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:38 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WVT6fwpqqCHO for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 13:09:37 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::436; helo=mail-wr1-x436.google.com;
+ envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=iAVZOvOV
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2458380A4C
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:36 +0000 (UTC)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-47f93b2fe4cso446761f8f.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 06:09:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1787749774; x=1788354574;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=SsZgI7+JWP7j6LkcIfyieQfBfFCX2Ch/pHC7rk14uGs=;
- b=LqWzoloCjPiwvTMjyHg5JcQU9EyAw9k2XkhdwHk58E9sHaOQ7nlCkdjE/x4kBFHjF+
- z9e3Mq+w3vZSbb+If+zmyjZ9ZtDKjvbaROvFz7qMwUvFPFJPtDZCbAVprGDBguhX8kkX
- UYjSXLNeIuuBuMm8f1/CGKiuYkCSq4iLDNt2v2lUNlKqnGWUxEzbJeRkzVgAbjM7l012
- hYhRqyoMd+uY+PeR1qd2+f+4OY0c/Fhii44Kfz0vQ1JeGNpnaStlD76hc1xUMNvAHL4E
- 3vRu69vzCoj+z4e/mAOtkwcNqtXur+sAiRsQSBDoywZaHbtehYvF1BaiVYr01CfeiLSN
- U8yA==
+ bh=Gu8n+0WLqMuZiGOZSctX2V9PL05iQQNUElmEwE1zFws=;
+ b=iAVZOvOVVDMEyPaJdphs8hmTrydcNoBb9aIY8BqTCXV031jFPGR0y+HAnFuOTT0V3H
+ p/a8uXnHRl8krc8OsjtkBm4dpWb5L/uA/t1HsfWJtBpvyGBPpFQKUQGKEg8knNIUlZ/S
+ vfEliPK8kJnpi6O0MhU2sfSpsHSfGNgp/jxRxGAFASnzOSD+BN4q3sjNHk3pT5JObkaY
+ b2W4OniW9kQmv15LNVeAL5lKbMfNzv5v/XwSJ2SZImzT22px57fmJfi6pstCp/ihKIdM
+ 6eqdFJBvVXXIEpsvMOUBADsiYbsZXvMqzV1kBPeZYbtM2WSd8SVhokitICzRP55M11OU
+ fbPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787749773; x=1788354573;
+ d=1e100.net; s=20251104; t=1787749774; x=1788354574;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=SsZgI7+JWP7j6LkcIfyieQfBfFCX2Ch/pHC7rk14uGs=;
- b=Bfp7+n+vbxD4LNvzUJ5dvKBlN3FNEmIDoHn8gkwTs6E9wqzHDcV+yeXZ2JtfLv9SV8
- UTKWhFwrqC5U80D9v4rtQ8spHrgwCH2gmdWPdF25fIGLcNF61SZUg3BQ9xutQqYNGp8R
- Fug/NFWseHZGH8e+1mvQVL2ooU3KPZKnr8ejmbHmR+1wtEOIdtczLjelhUDF8c0bqpoG
- bir9LSciPhYBz8bde6D2mfXvp6GyZrIGp/QAUUkGfi5SfwZFQAbH2X81nvVyCY7f019H
- xIEV2yUqHiVS6AkiIjGPTbEEbSNzgpCIU8PRgCxcfSuQZyyTN9wy+m48vH8/D6iZpuRY
- +mWA==
-X-Gm-Message-State: AFuF++kSSgTL6SCyApY8EFI/s/8ArQT9RKXkJ9Wpwk+1kZ4+mP2AwtOL
- NbC8SoEBcoI7b6ekOqhk4x8hcHTm9fWbeJvTtEOzjHdZe0lLN54n1c0Jxq+v2rzyHtY=
-X-Gm-Gg: AR+sD13/WB7SdoxhS1ThaSYfJ+FxmRUobkad/yb9+LyqIfLyL6OVd3NycL0Dp39FOba
- jouzmE98r0+S4SlxCrqGPt02APTwEy5ohQZWnFy6AtCzrUhVQrzp1TesW4xdSceNli6jgT/RywI
- yCGtvMTT3JSmwfkQf3dFJnOX2RcIes78AbmiB52Po9oGcROpnc/tDzB/yGtInM5wjGWGi8hfMNX
- 7g1xntRN/1C8zzPi6oV3KijQl+2/6uhtqqlax3OaXcR8EZ6tt3+DrUd/5ulOcpVCdS1YcU4b3Ey
- v4TBjtaQ5cBm+e49xGic8Gl+l5ZzYr0JQrwPaAtdu1Fzvb8p/x7Ofk1dzHNLrhmAB5ZZ1CFkQ0v
- FWB8EJnn28M0zCQp6kJDxu7VhioWfFWrofQcdxMDIIbQj32I0vhUHIz1wLnfiyxA9yMRFt0xmHH
- Is4tinpzc4JsvLr+GUPbGomDsn8bPzMrJ9iZJGJtDFajU1DA1o1U5L1fWsDCNUcGHKlMs3XtxjL
- 0OpbXsL2Q0iZVA0t7rREY8bEUF04bEiSJ4mciE3rYFPCq57TnlXG6/RQZYhM+YreGd2HMiqGc37
- Cdg6KZGUspRo/COf0+LXMJmLcuXR2Lk1moKCW7WQAk2RIQ==
-X-Received: by 2002:a05:6000:46c2:b0:482:abaa:fbc8 with SMTP id
- ffacd0b85a97d-482e26b61cbmr4796876f8f.2.1787749773093; 
- Wed, 26 Aug 2026 06:09:33 -0700 (PDT)
+ bh=Gu8n+0WLqMuZiGOZSctX2V9PL05iQQNUElmEwE1zFws=;
+ b=c06QobWIQNQKxsi/4Q0qcRQlFZIbviJANwerJBaRAErP/BpxEglhzk2EGknArSwRKA
+ 8r0BC1ebOsOV3k58AWqL0CTIwSXTyUjH62HVXviu2mdvV+3RE8m870JfRB7v8c5yfUcG
+ j00IBKjTgT18jT9vVXit2BJmtMDrpc+e8aTZUq0OyWFd+xGswEksJTv8u57Sa780Ux+7
+ lhQ4Myt5Jepka96p2Cq6DlqawDKXgMw2AMwrBU5QS1oJql55SAdd7itO/XOjawQI5QLm
+ 2W0H9SQ9o+6mgYz/vyJS+YLT/8b3ueu/6G9AheGg8J429aMCGElwZZFW24Elu7eq90c7
+ MHJw==
+X-Gm-Message-State: AFuF++ls5SA+5153nDffLuFw3Aiv+I2XL7wn9MvmiqFHkQHQ9Gw3An+m
+ rHREG78tACJheJQ/B7oYD8bW05l5kd6O6+6jk/yeCdx6OT7emh4GVPBJUyoSITZ+4Rg=
+X-Gm-Gg: AR+sD112fx663rHrtwPVybzfRC8A07WG/FpLxS4C7qPPazjbvPfN2TkXcSQgsa7XieT
+ NfAlj1I8V0Kx4SPrVhMOcO15eJSEfMB/rEmQjV8G6xw10A7ZcDff1v0t0IPuyCV6aiHF1DQ/iRx
+ lLOGHGEFwGEyu9gjylWpF1uXSV36WmWtAYgyWgqFgYtpP1PFGgTXLJxguRFyFQS0Fs5yYSKPUYt
+ M1FPhsmHaJ1sQcyxld17I2V0bBZ4R4g42laJMZCkWxq6DpAh1KpzC2mDrqM+spn1JnoZyAomd2f
+ eviTFcxCs54VSFgG+HoJfAhXp7gi7rQSIi7VYgBehzAjHc4IJJ71mAnUJc6EVuXVT8Q0JR8WPAf
+ E8xDQ2u4U3ko7q4VrbtVX+0ALhiamEtvorWX/iUffFB90Qx2mr7hOJxdRNjY9qaqLzA3j1mZc0l
+ zqD/rRCkU+yAxF2oA5INMg5/uYE44xcvK6oO5HNz1Xm4t9/jWr6LAQMhImC4BvfjIU2HL6aBWWa
+ 80DvXWa413ljHqGpr7fWv70DU21Th970JhFR5S5S+m2NaNoNvqkQ0GaYVH0sMoeXbfa7g5YBXFl
+ Mlpy8alV196F+0j+QyFmf8qJ2Y+QEkygpuOQKtF2vPD9H7p3QxrVWmpV
+X-Received: by 2002:a05:6000:430a:b0:482:e658:bb8e with SMTP id
+ ffacd0b85a97d-482e658bdf2mr4186274f8f.12.1787749774580; 
+ Wed, 26 Aug 2026 06:09:34 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482e28f6917sm2635817f8f.35.2026.08.26.06.09.31
+ ffacd0b85a97d-482e28f6917sm2635817f8f.35.2026.08.26.06.09.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 06:09:32 -0700 (PDT)
+ Wed, 26 Aug 2026 06:09:34 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 26 Aug 2026 15:09:30 +0200
-Subject: [PATCH v2 03/14] video: mediatek: add merge component
+Date: Wed, 26 Aug 2026 15:09:31 +0200
+Subject: [PATCH v2 04/14] video: mediatek: add mutex component
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260826-add-genio-510-and-genio-700-hdmi-v2-3-68ebb1bf17df@baylibre.com>
+Message-Id: <20260826-add-genio-510-and-genio-700-hdmi-v2-4-68ebb1bf17df@baylibre.com>
 References: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
 In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -142,25 +142,26 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The merge block is one of the components of the video pipeline on
-some MediaTek SoCs, such as the MT8188. It combines two half-width
-inputs into one output.
+The display mutex synchronizes the components of the video pipeline
+on some MediaTek SoCs, such as the MT8188. Only the modules of the
+DPI1 pipeline are attached to mutex1; the module bit indices follow
+the Linux mtk-mutex driver (MT8188_MUTEX_MOD_DISP1_*).
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/video/mediatek/mtk_disp_merge.c | 106 ++++++++++++++++++++++++++++++++
- drivers/video/mediatek/mtk_disp_merge.h |  19 ++++++
- 2 files changed, 125 insertions(+)
+ drivers/video/mediatek/mtk_disp_mutex.c | 63 +++++++++++++++++++++++++++++++++
+ drivers/video/mediatek/mtk_disp_mutex.h | 14 ++++++++
+ 2 files changed, 77 insertions(+)
 
-diff --git a/drivers/video/mediatek/mtk_disp_merge.c b/drivers/video/mediatek/mtk_disp_merge.c
+diff --git a/drivers/video/mediatek/mtk_disp_mutex.c b/drivers/video/mediatek/mtk_disp_mutex.c
 new file mode 100644
-index 00000000000..185e75231fc
+index 00000000000..8619d9491a2
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_disp_merge.c
-@@ -0,0 +1,106 @@
++++ b/drivers/video/mediatek/mtk_disp_mutex.c
+@@ -0,0 +1,63 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Mediatek Video Disp Merge Support
++ * Mediatek Video Disp Mutex Support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
@@ -169,124 +170,76 @@ index 00000000000..185e75231fc
 +#include <dm.h>
 +
 +#include "mtk_disp_comp.h"
-+#include "mtk_disp_merge.h"
++#include "mtk_disp_mutex.h"
 +
-+/* MERGE registers */
-+#define SUBDISP_DISP_MERGE_ENABLE	0x000
-+#define SUBDISP_DISP_MERGE_CFG_0	0x010
-+#define SUBDISP_DISP_MERGE_CFG_1	0x014
-+#define SUBDISP_DISP_MERGE_CFG_4	0x020
-+#define SUBDISP_DISP_MERGE_CFG_10	0x038
-+#define SUBDISP_DISP_MERGE_CFG_12	0x040
-+#define CFG_10_10_2PI_2PO_BUF_MODE	0x08
-+#define CFG_11_10_1PI_2PO_MERGE		0x12
-+#define SUBDISP_DISP_MERGE_CFG_24	0x070
-+#define SUBDISP_DISP_MERGE_CFG_25	0x074
-+#define SUBDISP_DISP_MERGE_CFG_26	0x078
-+#define SUBDISP_DISP_MERGE_CFG_27	0x07C
-+#define SUBDISP_DISP_MERGE_CFG_30	0x088
-+#define SUBDISP_DISP_MERGE_MUTE_0	0xf00
++#define DISP_MUTEX1_EN		0x40
++#define DISP_MUTEX1_CTL		0x4c
++#define MUTEX_SOF_DPI1		0x5
++#define MUTEX_EOF_DPI1		(0x5 << 7)
++#define DISP_MUTEX1_MOD0	0x50
++#define DISP_MUTEX1_MOD1	0x54
 +
-+void mtk_disp_merge_config(struct udevice *dev,
-+			   u16 width1, u16 height1,
-+			   u16 width2, u16 height2,
-+			   u16 output_width, u16 output_height)
++/*
++ * Modules attached to mutex1, bit indices as in the Linux mtk-mutex
++ * driver (MT8188_MUTEX_MOD_DISP1_*). MOD0 holds modules 0-31, MOD1
++ * holds modules 32-63.
++ */
++#define MUTEX_MOD0_MDP_RDMA4	BIT(4)
++#define MUTEX_MOD0_MDP_RDMA5	BIT(5)
++#define MUTEX_MOD0_PADDING4	BIT(12)
++#define MUTEX_MOD0_PADDING5	BIT(13)
++#define MUTEX_MOD0_VPP_MERGE2	BIT(22)
++#define MUTEX_MOD0_VPP_MERGE4	BIT(24)
++#define MUTEX_MOD0_DISP_MIXER	BIT(30)
++#define MUTEX_MOD1_DPI1		BIT(38 - 32)
++
++void mtk_disp_mutex_config(struct udevice *dev)
 +{
-+	bool dual_input = (width2 != 0 && height2 != 0);
++	/* the pipeline for the hdmi connection ends with DPI1 -> HDMI */
++	mtk_disp_comp_write(dev, DISP_MUTEX1_CTL,
++			    MUTEX_EOF_DPI1 | MUTEX_SOF_DPI1);
 +
-+	/* input 1 */
-+	if (width1 != 0 && height1 != 0)
-+		mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_0,
-+				    height1 << 16 | width1);
++	/* attach the modules of the DPI1 pipeline to mutex1 */
++	mtk_disp_comp_write(dev, DISP_MUTEX1_MOD0,
++			    MUTEX_MOD0_MDP_RDMA4 | MUTEX_MOD0_MDP_RDMA5 |
++			    MUTEX_MOD0_PADDING4 | MUTEX_MOD0_PADDING5 |
++			    MUTEX_MOD0_VPP_MERGE2 | MUTEX_MOD0_VPP_MERGE4 |
++			    MUTEX_MOD0_DISP_MIXER);
++	mtk_disp_comp_write(dev, DISP_MUTEX1_MOD1, MUTEX_MOD1_DPI1);
 +
-+	/* input 2 */
-+	if (dual_input)
-+		mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_1,
-+				    height2 << 16 | width2);
-+
-+	/* output */
-+	mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_4,
-+			    output_height << 16 | output_width);
-+
-+	/* no pixel/channel swap */
-+	mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_10, 0x0);
-+
-+	if (dual_input)
-+		mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_12,
-+				    CFG_11_10_1PI_2PO_MERGE);
-+	else
-+		mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_12,
-+				    CFG_10_10_2PI_2PO_BUF_MODE);
-+
-+	/* size in sram of inputs 0 and 1 */
-+	if (width1 != 0 && height1 != 0)
-+		mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_24,
-+				    height1 << 16 | width1);
-+
-+	if (dual_input)
-+		mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_25,
-+				    height2 << 16 | width2);
-+	else
-+		mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_25,
-+				    height1 << 16 | width1);
-+
-+	/* merged size of inputs 0 and 1 */
-+	if (width1 != 0 && height1 != 0)
-+		mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_26,
-+				    height1 << 16 | width1);
-+
-+	if (dual_input)
-+		mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_27,
-+				    height2 << 16 | width2);
-+	else
-+		mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_27,
-+				    height1 << 16 | width1);
-+
-+	/* 12 bit lsb off */
-+	mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_CFG_30, 0x0);
-+
-+	/* unmute */
-+	mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_MUTE_0, 0x0);
-+
-+	/* enable */
-+	mtk_disp_comp_write(dev, SUBDISP_DISP_MERGE_ENABLE, 0x1);
++	mtk_disp_comp_write(dev, DISP_MUTEX1_EN, 0x1);
 +}
 +
-+static const struct udevice_id mtk_disp_merge_ids[] = {
-+	{ .compatible = "mediatek,mt8188-disp-merge" },
++static const struct udevice_id mtk_disp_mutex_ids[] = {
++	{ .compatible = "mediatek,mt8188-disp-mutex" },
 +	{}
 +};
 +
-+U_BOOT_DRIVER(mtk_disp_merge) = {
-+	.name	   = "mtk_disp_merge",
++U_BOOT_DRIVER(mtk_disp_mutex) = {
++	.name	   = "mtk_disp_mutex",
 +	.id	   = UCLASS_MISC,
-+	.of_match  = mtk_disp_merge_ids,
++	.of_match  = mtk_disp_mutex_ids,
 +	.probe	   = mtk_disp_comp_probe,
 +	.priv_auto = sizeof(struct mtk_disp_comp_priv),
 +};
-diff --git a/drivers/video/mediatek/mtk_disp_merge.h b/drivers/video/mediatek/mtk_disp_merge.h
+diff --git a/drivers/video/mediatek/mtk_disp_mutex.h b/drivers/video/mediatek/mtk_disp_mutex.h
 new file mode 100644
-index 00000000000..cac3982c74e
+index 00000000000..cbf8a9f0537
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_disp_merge.h
-@@ -0,0 +1,19 @@
++++ b/drivers/video/mediatek/mtk_disp_mutex.h
+@@ -0,0 +1,14 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
-+ * Mediatek Video Disp Merge Support
-+ *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
-+#ifndef _MTK_DISP_MERGE_H
-+#define _MTK_DISP_MERGE_H
++#ifndef _MTK_DISP_MUTEX_H
++#define _MTK_DISP_MUTEX_H
 +
 +struct udevice;
 +
-+void mtk_disp_merge_config(struct udevice *dev,
-+			   u16 width1, u16 height1,
-+			   u16 width2, u16 height2,
-+			   u16 output_width, u16 output_height);
++void mtk_disp_mutex_config(struct udevice *dev);
 +
 +#endif
 
