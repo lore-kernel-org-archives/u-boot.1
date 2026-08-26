@@ -4,133 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F9A0C61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 11:17:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0D8EC5DF97
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 11:35:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4C1F660736;
-	Wed, 26 Aug 2026 11:17:42 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3E0B0606F7;
+	Wed, 26 Aug 2026 11:35:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2bDN02AYfU68; Wed, 26 Aug 2026 11:17:40 +0000 (UTC)
+ id q9qDS-GEQhlV; Wed, 26 Aug 2026 11:35:58 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787743060;
-	bh=vfDeWLphrjT/ppCvT3PXcTboGSitVS1sKgK/XOljsVU=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787744158;
+	bh=lbKJIfJneQ6tamUcDqa9u4OhtGSPvSLwRTlRPucJQ5w=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Vj0QsI/OFiC5UB5X/KfJEOmOrpqMdLLFzXfl416FhQyTe1ufk7LeJ+Cdmfyza+cD7
-	 Z81Qw6lqJV9bOWrS9EeqSmF2oE9NuMXgDZVYnHI26HZMz+Jy6x54Iejk/O7mMUS0Hi
-	 9hpd6HQpGFZro3awlFTuaajLHEkTrYuGkUUjes0+GLsbZy5bd0OfMWluIRFIEm8KIm
-	 pMe9tJHAXpWUdw5l66iB3YN35IFus7sSpF3BZW7Y24fG4vmVm1PXeddyKh9g7DCAyQ
-	 3Liq3IgBg771Y/JnLaTwoJEwN3MaOUxZLbwrULnj+BdPtHtFZRw4YeCQ1f+oZj00CZ
-	 dNiM46BbNgkhw==
+	b=qS61BUFMuCvfSUPm1jRmdP7PgNwzTbPgfyoYc38S6Klmz4ONxv7Kgj53whV7d6C2c
+	 SQz5DbsEPfXve8piHxdUnAbY6UQdfZnxWy2v6zI5hc3M/HmqfSDySWUNYWQujeCmKt
+	 s8eFo7ExhHtQY365GQ2FFpSCST9r9OfZ00oGOZIptyNR1bpfQQ8aVQqN+8mMSdlREA
+	 Mwn31J5tU8xmsbukvC2QXpw9eP3ceuR6KZrb24zD4HvWEl279uOl28kTWeOoOzAjdv
+	 XMpokbEKeaPQ8fcO8hVcE5sRPAkBEwHkSK2XeeqHbKX5y1iv5pmk8XflhWjYq2/r4i
+	 E2auVjZy9lEpg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EC2356067B;
-	Wed, 26 Aug 2026 11:17:39 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 460F13C3
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 11:17:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1E2196067B;
+	Wed, 26 Aug 2026 11:35:58 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2C1D63AD
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 11:35:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3853E40071
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 11:17:38 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 125D86067B
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 11:35:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jWwsJihx7ana for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 11:17:37 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nj8DM-afCXkc for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 11:35:55 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b135; helo=mail-yx1-xb135.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=yRtVMRKY
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 60D6D4005F
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 11:17:36 +0000 (UTC)
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-66d0743503aso1341264d50.3
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 04:17:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787743056; cv=none;
- d=google.com; s=arc-20260327;
- b=YJXYDhnUktyDfnYXoI4SN7dQmx1ZcObVINJCMbZ4eOQlu2EyFiKd8wyDMnncJHDnfy
- UUXRGqNNXuh9+y+dNMUTP1Zft9L+3woOfu5uiAmmElAL4mBOUcsuJHequHjwKZowFD0Q
- r1MTqQO+Q2jd4OzFyWZicPVTj8SAtp/6Yvv/6iEDRKVnARYeeG2C2G+jinn6VRR695D+
- UzLEfVVJbp8YhsYmZCSs2PyRIr/g1mClknuMF4+hs02OyTPQ9MiwAogO9HErRmCSzEMd
- oR/aErXN3ttTo6tvJTPHCH8JDU+ph63BcvwvzX9A0oihgNnog2/yemYd73XUw8O2I3hk
- XYPA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=vfDeWLphrjT/ppCvT3PXcTboGSitVS1sKgK/XOljsVU=;
- fh=cDFQcSFjwK1spkQpwRhvx9QrJcp39J1K2A11Q4zJc/Q=;
- b=VC7eseZROsDOBem+xXZXdWaV4oZCth+xNKbWyhzSmfrddH/4QWB9YHCdyWGsd+nz0i
- FsNdgczpEx1G66zGopuIyqW7jqZpnmq/RGTTsfxW4n73YRboHlsjFRDpcPZNelicnqsG
- 5bz5WO6ozFT33g/Mgko+x9nMr5EgLgmqGDOVHwS9znEaIRu+pwCJ72C5GTu5NIbVJADJ
- rHfXxdtJEp7S7wY/qBYF1E5dqt8dMQL27Z3otjQjaW9pqN55ltpEBklVX71qUuL/VmH9
- 3ckHm5X/FYRypLZFmt1uFSgQ5VqshZg1aJc9Vq7HWJnYXiAZXLhXWRRaZnrMGPfEcL9c
- S3Ww==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787743056; x=1788347856;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=vfDeWLphrjT/ppCvT3PXcTboGSitVS1sKgK/XOljsVU=;
- b=yRtVMRKYu3iDdbOpgKhgCvDAo5ve4lCaasI/PkgjAUdQhu3WO1Y5Ll9OIUDei9epOZ
- EKjFBrwyLozAtSdQvwCuLTgaaxPsLyxthPKdRE1RCNF3RjlYMl5N8nx7SJyu8FxS6yM0
- YQzX/xTb83xvB63bRHMTrq0dT2QjX1eVKmRAm1vAjOu5T+16XHn1vSFFuIfEYhF7ZTN5
- jlcjPqbo43Jw9gog8IUwhtmwTUHjAEU73Vtqucq2s0cJ9J7d3qQIia889lzxmT0jBJR8
- 8FIEDt2RyHPWVOZPuQK0El2UBnKDbxyAKiGWSpPVb8dzGETBh/oGIoGw8f4C5JtfuxVC
- G0MA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787743056; x=1788347856;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=vfDeWLphrjT/ppCvT3PXcTboGSitVS1sKgK/XOljsVU=;
- b=dR2gho+fqXmscic86wpluF0YE9Eyqk8Im1BOmXACXtoDuQf0x53YAE9/uFMKOGHjoC
- KSUOxLXoGq47mIAVK2ov1SY84c/OjdcrCV118zLrQKrec6fzDdU7MUOk8VgOHuQjS1wc
- A9QqMy6QGb87t/f7TvNL9BBc93oF9tvM1MrStFgCbXdf7LICH+R7dyDUSCd4g4wrkWuG
- aCkjtcaKQSK2tWxz9cNAmcrJW9OuA4mH1XSUXGxCF+/ivHOmXb7I4jFyat9SgnjSejF7
- B6XkAtoEfOJGspWB7Id5x8cwRFpeLuPC7Xbaovox0KSmZIoBa4uvwrU+fSJo3Fn/OfuK
- OmzQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpwiKeRvwRajA8pnWdiirSn75MqSZUorpm+wT/56XgJR4d/QT8HfNBHld8Ps/VDxbOhUUMHylo=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++m24Vlvb7cyLOVHf8PI+pCwSEkytbH4AJxMkVXuZlxxFMA0Tbx2
- gTcXDfnmjF0xEhgeFoOJkKnZitZrZts6jwqdjvnPOyJGN89a5PBzeX5jHh417FeCr42eqsVb+sO
- rq4y0uLgQsD9zUsf4QbVOvYgW+DQEYYawaTst/CO4Xw==
-X-Gm-Gg: AR+sD11pXsP/W6Y+HLR1CoZCaWuW5VMG9hWmtkWI2swTyKvMdP5QFk3d4uPtOdqNGf0
- +D7IGr6/OCVyl0nr/NteBzNQVS4cc5iPc2WBzc5CoQdvQxmuDjSMc/feuA+7pyYaetV7ApolVkI
- yn9JO4HXqWAsFtF8BeJWl/KiTnHLiCg65KC0NjEJUaXmMoqxLA848+N7FyDWz0rg3bf3O2L8zh4
- hP31wbwRkLE3FVklbj/m/S1sorUC2NEPLlLlGj6LnTErMNnTa5m4jTGoZSaawO++qHo7O+oi4cR
- zCwo86w4EeMsA/7veYTLp8FTvEJNRdzlK17P+CDTq68a84HrrgrFGN6ekXd4KVZ6Flw7k7o9tLF
- 6YIKWT8qhDSw5FXi55r90ojMJ6c24M7oCfCpLMC5boKMMcWd8GnFbfpwJ0Ji0jEj7NHqlIBxn1w
- BkUO0MnxUxmmj0eUuQeQ0y+L4s8ylEOkhWX0XlqhM2vTHaGfNoepoX9kwkGbvSL2bPc8JJIfx49
- +z7FEnX+TCfy62sUpVMUT6oA9h/A3seecRzRKyi2IjjTfl8eIeqpxjrqlkZnUE1QH8dn6LhPH/d
- jS65mDvhyEKD522dsq481bGmjl77b3sjk1nhz9wnqBuHOiHUU+V4hS7H5y8Bf5fQHSna41PRQzU
- xLNdS/azsmfJprTRuSxS+h9LwU39FVIJ7KdCvDpfrHQk=
-X-Received: by 2002:a05:690e:1186:b0:668:8b09:bd13 with SMTP id
- 956f58d0204a3-66d25703226mr1801396d50.18.1787743055549; Wed, 26 Aug 2026
- 04:17:35 -0700 (PDT)
+ client-ip=2a01:111:f403:c110::1;
+ helo=bn1pr04cu002.outbound.protection.outlook.com;
+ envelope-from=jayaramudu.desapogu@amd.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
+ header.s=selector1 header.b=v0duoHwP
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7CEBE605D3
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 11:35:53 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eOi4SojrKejL2Xijl5mxy1x0LEQGUbXcOKEQJgG/bTO+NqBG0uDVbVnoGoQdmPkXXG8TUNDfvKQnr2xiDDuzb61u5tk1z5aVx1P9VOU/g2qPXVRrpfuywaED+uq0xSF+RiooZUzViXjwoUeUocmoAV7E+m2rEAOedkrKE26BJv46f5EsXPm0bCpKFyVBFI+0oBv2xh3P/Qba1IefJT3WRZxu4XO4aP1UuldFwV4jhBb/V7VigeSfT8mtu6tzNOZdrOh/DLGU4ttqaA84xs0ZIv9eV4wVHY1gIjLA8ZWdzojBE0ILiljzwrbljghyYaAqnGtpoiF5T5YMzCRh+D8Bdg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lbKJIfJneQ6tamUcDqa9u4OhtGSPvSLwRTlRPucJQ5w=;
+ b=Rq4qmlmO+p5cHU54GrpLhYDAYe4S967a5sZz4XHmiDxaEFpGeE3oW6ELgeCa6pJZEXvGODnZmIGRnCWlEvx0edRVY8yc3LNy5/oDpclaIud23FObHYKbHMIpg2JY+AklqaF79pptZyJjohLQ5YF2YcL+TzhPMeQIRjnj0FmSjLYVpNnmwJLoHoCyabMRzqpTBscP0y05xPp/ljRgz4AU1FfOCK7CmNd+Jc96mYbA2i4qOuJ9sBUbFPiYoTo79VrBt1xN+F/Fwtc25Mo9oY3dhHjlFq8cJHfGECKIa0/T/V6wjFfhzxLZARhWyLunqlmivFw9nTyJqlAEHUKP+b9qKA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 149.199.90.133) smtp.rcpttodomain=chromium.org smtp.mailfrom=amd.com;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lbKJIfJneQ6tamUcDqa9u4OhtGSPvSLwRTlRPucJQ5w=;
+ b=v0duoHwPTUbHZy08UoIZgEuiPT4+z2Hp+TP4XRDW9IWoCwolceQKmmUVPWigYrr2jAjrKe19vOlZeRimsKK3p6baPyEQiUo43wo8k50qmUrfmGlno2XL9nKr+/02bhAShuwuz3smxRQQcT+YHa0BP3pfcaYzIqgVF1FrZBy8p2A=
+Received: from DS7PR03CA0210.namprd03.prod.outlook.com (2603:10b6:5:3b6::35)
+ by SJ0PR12MB6807.namprd12.prod.outlook.com (2603:10b6:a03:479::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Wed, 26 Aug
+ 2026 11:35:48 +0000
+Received: from SA2PEPF000015C8.namprd03.prod.outlook.com
+ (2603:10b6:5:3b6:cafe::7e) by DS7PR03CA0210.outlook.office365.com
+ (2603:10b6:5:3b6::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.12 via Frontend Transport; Wed,
+ 26 Aug 2026 11:35:47 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is
+ 149.199.90.133) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=amd.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ amd.com discourages use of 149.199.90.133 as permitted sender)
+Received: from satlexmb07.amd.com (149.199.90.133) by
+ SA2PEPF000015C8.mail.protection.outlook.com (10.167.241.198) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.360.3 via Frontend Transport; Wed, 26 Aug 2026 11:35:47 +0000
+Received: from BLRJDESAPOG1.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 26 Aug
+ 2026 06:35:45 -0500
+From: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+To: <sjg@chromium.org>, <trini@konsulko.com>
+CC: <u-boot@lists.u-boot-project.org>, Desapogu Jayaramudu
+ <jayaramudu.desapogu@amd.com>
+Subject: [PATCH v4] x86: cpu: x86_64: Detect CPU vendor and device ID using
+ cpuid
+Date: Wed, 26 Aug 2026 17:05:15 +0530
+Message-ID: <20260826113515.137299-1-jayaramudu.desapogu@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260825144421.184361-1-jayaramudu.desapogu@amd.com>
+References: <20260825144421.184361-1-jayaramudu.desapogu@amd.com>
 MIME-Version: 1.0
-References: <20260820130746.164424-1-heinrich.schuchardt@canonical.com>
- <20260820130746.164424-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260820130746.164424-2-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 26 Aug 2026 14:16:59 +0300
-X-Gm-Features: AcwNN1WQK5x9QR2qN1SQTVU2G6TO3F3c860rN_Sjp2DbN-HsEoGsXElOjcKw57A
-Message-ID: <CAC_iWj+HxQ4HK5_X1qKJT3NNqJbcPq6sQD=PLM8hkT-5k6vdbg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] efi_loader: in platform_get_rng_device() use
- EFI_PRINT()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-Content-Type: multipart/alternative; boundary="000000000000c6b0630659f15d98"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF000015C8:EE_|SJ0PR12MB6807:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3967452d-29b7-4897-e66d-08df03662c55
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|82310400026|1800799024|376014|23010399003|10067099003|56012099006|18002099003|22082099003|11063799006;
+X-Microsoft-Antispam-Message-Info: 3YBihj4E0+Svu3dHMwaOusEZaS+Q35BBQIUAEqWxsXEkeJNC1ZKC1odyDKXhp4EkzKutUjOIotIJwwO5m9xQYPVDKGB+GwCBUdikqXmowF3xSq0uP2NEYYWO7hVHPh5x2KPmvfIBpXzb75/o35B4zCu5N7OzJV3BLDiV2zptEj5867CjyX2IHQDqUjYRMam14uZaNnDIv/FKDQswXuu5QCOzo0NkFMUg632HT1hcF1QFq2AGSVoaLHBxvl6qiCaLp0ppVRt1aTo5ggtJDRlHi6RLxuDujM83CINiej1OYbmFvKtZClj2yIlZC31/WCz4KQp7UnDi388MmN0de5lBScZM3bho09Q+4ktqf9sTAgNmEXM7Z6yIhmBQ1EaLmck+Lk/EA92JFXbP0q+KX2UJhTpf8kmeyyS5HZGaU5xtDpW1OpeBH+UFeiqyPDu5EsSmNmbx+6janVC3QgavdDXpCh4SHRd8F4uVe40l+hdVBjye20f7YNini5qepQmQDaCFXikP++6ln3t3LkHu8znqv5pglLQirzzvQUU07Lfnwqs6Eu6Q/0A60vludDw8Q/NMVqE4MIc6h9GfCgrBaV93NFaYBA7lTIJ6iKho//ecgW6KWHHR3q3hFW21POaVdJ9hleDbxTrWCv0sOnaaE0Avq39zUnsEaHTSK6YsRCrq0c0Lj9kbhwJX4dC1Vofa81F5bS3j8RQmn9TtynR4fpdEcw==
+X-Forefront-Antispam-Report: CIP:149.199.90.133; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:unknown-90-133.xilinx.com;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(23010399003)(10067099003)(56012099006)(18002099003)(22082099003)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: +puXxV5+BUiHHRoHbI/kQPBsvPt5bc1MXWkzGISze56ABgNJn+NJRmFO1chyGSLGPr4s7mf7XZxhrImSOHs1IGZJhoaoOiIbiexJt2FN/BiEvKgV3MnL5elz8eRY+1ICsv7HR8STAP5SdtFK67V7AdzuxR3zD2NihMJNzot320PittgamGmn2clCGMDLnIQ9QksBuBr+i0ob3ZrflEXh8JzIB/htWXgrAlFpPqwlTZnQdibBcPlKRNa76mSAj1SPQAuWh+JLfU7i6pcQi+APWN+A025XP4AbAoWw9LV6wdtTo5Tg3Del36+sM17EV83rKaPMZOeNpo0vZqxFHQeB/V93wf7FtL+Pzzn8IQOJ7Ob/jABSa19tIT3dNvLVr422jkBWwb1ZEOg4aMoVZ8dzdi6wKcDNlmEW5gfjv4owRdrnZzwpEuDJf7CLnOzbqezJ
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2026 11:35:47.4362 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3967452d-29b7-4897-e66d-08df03662c55
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[149.199.90.133];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF000015C8.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6807
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,99 +148,268 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
---000000000000c6b0630659f15d98
-Content-Type: text/plain; charset="UTF-8"
+When U-Boot is configured as a coreboot payload on x86_64, the current
+code leaves the CPU identity at the default Intel vendor and device ID
+0x0, even on non-Intel platforms.
 
-Hi Heinrich,
+Read CPUID leaf 0 and build the 12-byte vendor string from EBX:EDX:ECX
+to identify the CPU vendor at runtime. Set gd->arch.x86_vendor to Intel/AMD
+when matched, with fallback to X86_VENDOR_ANY for unknown vendors. Also
+store cpuid_eax(1) in gd->arch.x86_device so later x86 code can use the
+detected CPU identity.
 
+This avoids relying on a fixed vendor value and keeps vendor-sensitive
+paths (e.g. TSC calibration) aligned with the actual CPU.
 
-On Thu, 20 Aug 2026 at 16:08, Heinrich Schuchardt <
-heinrich.schuchardt@canonical.com> wrote:
+Signed-off-by: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+---
+Changes in v4:
+- Addressed v3 patch review comments.
+- Changed helper function return to X86_VENDOR_UNKNOWN.
 
-> Use EFI_PRINT() instead of debug() to correctly indent the message.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_rng.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_rng.c b/lib/efi_loader/efi_rng.c
-> index 7810b4e47ea..9c5a60ea963 100644
-> --- a/lib/efi_loader/efi_rng.c
-> +++ b/lib/efi_loader/efi_rng.c
-> @@ -31,7 +31,7 @@ __weak efi_status_t platform_get_rng_device(struct
-> udevice **dev)
->
->         ret = uclass_get_device(UCLASS_RNG, 0, &devp);
->         if (ret) {
-> -               debug("Unable to get rng device\n");
-> +               EFI_PRINT("Unable to get rng device\n");
->
+ arch/x86/cpu/Makefile             |  1 +
+ arch/x86/cpu/i386/cpu.c           | 51 ++----------------------------
+ arch/x86/cpu/vendor.c             | 52 +++++++++++++++++++++++++++++++
+ arch/x86/cpu/x86_64/cpu.c         | 25 +++++++++++++--
+ arch/x86/include/asm/u-boot-x86.h | 16 ++++++++++
+ 5 files changed, 93 insertions(+), 52 deletions(-)
+ create mode 100644 arch/x86/cpu/vendor.c
 
-All the users of that function print a similar message on failure. IMHO
-just remove the print completely
+diff --git a/arch/x86/cpu/Makefile b/arch/x86/cpu/Makefile
+index 5150edb833f54f..17443c4ffd2df7 100644
+--- a/arch/x86/cpu/Makefile
++++ b/arch/x86/cpu/Makefile
+@@ -27,6 +27,7 @@ endif
+ extra-$(CONFIG_$(PHASE_)X86_16BIT_INIT) += resetvec.o start16.o
+ 
+ obj-y	+= cpu.o
++obj-y	+= vendor.o
+ ifndef CONFIG_TPL_BUILD
+ obj-y	+= cpu_x86.o
+ endif
+diff --git a/arch/x86/cpu/i386/cpu.c b/arch/x86/cpu/i386/cpu.c
+index ee6dbeb5c48e65..09642b2198f329 100644
+--- a/arch/x86/cpu/i386/cpu.c
++++ b/arch/x86/cpu/i386/cpu.c
+@@ -63,30 +63,6 @@ struct cpuinfo_x86 {
+ 	uint8_t x86_mask;
+ };
+ 
+-/* gcc 7.3 does not wwant to drop x86_vendors, so use #ifdef */
+-#ifndef CONFIG_TPL_BUILD
+-/*
+- * List of cpu vendor strings along with their normalized
+- * id values.
+- */
+-static const struct {
+-	int vendor;
+-	const char *name;
+-} x86_vendors[] = {
+-	{ X86_VENDOR_INTEL,     "GenuineIntel", },
+-	{ X86_VENDOR_CYRIX,     "CyrixInstead", },
+-	{ X86_VENDOR_AMD,       "AuthenticAMD", },
+-	{ X86_VENDOR_UMC,       "UMC UMC UMC ", },
+-	{ X86_VENDOR_NEXGEN,    "NexGenDriven", },
+-	{ X86_VENDOR_CENTAUR,   "CentaurHauls", },
+-	{ X86_VENDOR_RISE,      "RiseRiseRise", },
+-	{ X86_VENDOR_TRANSMETA, "GenuineTMx86", },
+-	{ X86_VENDOR_TRANSMETA, "TransmetaCPU", },
+-	{ X86_VENDOR_NSC,       "Geode by NSC", },
+-	{ X86_VENDOR_SIS,       "SiS SiS SiS ", },
+-};
+-#endif
+-
+ static void load_ds(u32 segment)
+ {
+ 	asm volatile("movl %0, %%ds" : : "r" (segment * X86_GDT_ENTRY_SIZE));
+@@ -247,21 +223,6 @@ static bool has_mtrr(void)
+ 	return cpuid_edx(0x00000001) & (1 << 12) ? true : false;
+ }
+ 
+-#ifndef CONFIG_TPL_BUILD
+-static int build_vendor_name(char *vendor_name)
+-{
+-	struct cpuid_result result;
+-	result = cpuid(0x00000000);
+-	unsigned int *name_as_ints = (unsigned int *)vendor_name;
+-
+-	name_as_ints[0] = result.ebx;
+-	name_as_ints[1] = result.edx;
+-	name_as_ints[2] = result.ecx;
+-
+-	return result.eax;
+-}
+-#endif
+-
+ int x86_cpu_vendor_info(char *name)
+ {
+ 	uint cpu_device;
+@@ -290,8 +251,7 @@ int x86_cpu_vendor_info(char *name)
+ 	} else {
+ 		int cpuid_level;
+ 
+-		cpuid_level = build_vendor_name(name);
+-		name[12] = '\0';
++		cpuid_level = x86_get_vendor_name(name);
+ 
+ 		/* Intel-defined flags: level 0x00000001 */
+ 		if (cpuid_level >= 0x00000001)
+@@ -334,17 +294,10 @@ static void identify_cpu(struct cpu_device_id *cpu)
+ #ifndef CONFIG_TPL_BUILD
+ 	{
+ 		char vendor_name[16];
+-		int i;
+ 
+ 		cpu->device = x86_cpu_vendor_info(vendor_name);
+ 
+-		cpu->vendor = X86_VENDOR_UNKNOWN;
+-		for (i = 0; i < ARRAY_SIZE(x86_vendors); i++) {
+-			if (memcmp(vendor_name, x86_vendors[i].name, 12) == 0) {
+-				cpu->vendor = x86_vendors[i].vendor;
+-				break;
+-			}
+-		}
++		cpu->vendor = x86_vendor_name_to_id(vendor_name);
+ 	}
+ #endif
+ }
+diff --git a/arch/x86/cpu/vendor.c b/arch/x86/cpu/vendor.c
+new file mode 100644
+index 00000000000000..9c972a7db81d71
+--- /dev/null
++++ b/arch/x86/cpu/vendor.c
+@@ -0,0 +1,52 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Shared x86 CPU-vendor helpers
++ */
++
++#include <linux/types.h>
++#include <asm/cpu.h>
++#include <linux/string.h>
++#include <linux/kernel.h>
++
++static const struct {
++	int vendor;
++	const char *name;
++} x86_vendors[] = {
++	{ X86_VENDOR_INTEL,     "GenuineIntel" },
++	{ X86_VENDOR_CYRIX,     "CyrixInstead" },
++	{ X86_VENDOR_AMD,       "AuthenticAMD" },
++	{ X86_VENDOR_UMC,       "UMC UMC UMC " },
++	{ X86_VENDOR_NEXGEN,    "NexGenDriven" },
++	{ X86_VENDOR_CENTAUR,   "CentaurHauls" },
++	{ X86_VENDOR_RISE,      "RiseRiseRise" },
++	{ X86_VENDOR_TRANSMETA, "GenuineTMx86" },
++	{ X86_VENDOR_TRANSMETA, "TransmetaCPU" },
++	{ X86_VENDOR_NSC,       "Geode by NSC" },
++	{ X86_VENDOR_SIS,       "SiS SiS SiS " },
++};
++
++int x86_get_vendor_name(char *name)
++{
++	struct cpuid_result result;
++	unsigned int *name_as_ints = (unsigned int *)name;
++
++	result = cpuid(0x00000000);
++	name_as_ints[0] = result.ebx;
++	name_as_ints[1] = result.edx;
++	name_as_ints[2] = result.ecx;
++	name[12] = '\0';
++
++	return result.eax;
++}
++
++int x86_vendor_name_to_id(const char *name)
++{
++	int i;
++
++	for (i = 0; i < ARRAY_SIZE(x86_vendors); i++) {
++		if (!memcmp(name, x86_vendors[i].name, 12))
++			return x86_vendors[i].vendor;
++	}
++
++	return X86_VENDOR_UNKNOWN;
++}
+diff --git a/arch/x86/cpu/x86_64/cpu.c b/arch/x86/cpu/x86_64/cpu.c
+index 25ae92c702fbca..a8f46c51e74b7a 100644
+--- a/arch/x86/cpu/x86_64/cpu.c
++++ b/arch/x86/cpu/x86_64/cpu.c
+@@ -10,6 +10,7 @@
+ #include <asm/cpu.h>
+ #include <asm/global_data.h>
+ #include <asm/processor-flags.h>
++#include <asm/u-boot-x86.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -48,11 +49,28 @@ static void setup_sse_features(void)
+ 	: : "i" (X86_CR4_OSFXSR | X86_CR4_OSXMMEXCPT) : "eax");
+ }
+ 
+-int x86_cpu_reinit_f(void)
++static void setup_identity(void)
+ {
+-	/* set the vendor to Intel so that native_calibrate_tsc() works */
+-	gd->arch.x86_vendor = X86_VENDOR_INTEL;
++	char vendor_name[13];
++	int vendor;
++	int cpuid_level;
++
++	cpuid_level = x86_get_vendor_name(vendor_name);
++	vendor = x86_vendor_name_to_id(vendor_name);
++	if (vendor == X86_VENDOR_UNKNOWN)
++		gd->arch.x86_vendor = X86_VENDOR_ANY;
++	else
++		gd->arch.x86_vendor = vendor;
++	if (cpuid_level >= 0x00000001)
++		gd->arch.x86_device = cpuid_eax(0x00000001);
++	else
++		gd->arch.x86_device = 0x0;
+ 	gd->arch.has_mtrr = true;
++}
++
++int x86_cpu_reinit_f(void)
++{
++	setup_identity();
+ 	if (IS_ENABLED(CONFIG_X86_HARDFP))
+ 		setup_sse_features();
+ 
+@@ -61,6 +79,7 @@ int x86_cpu_reinit_f(void)
+ 
+ int x86_cpu_init_f(void)
+ {
++	setup_identity();
+ 	return 0;
+ }
+ 
+diff --git a/arch/x86/include/asm/u-boot-x86.h b/arch/x86/include/asm/u-boot-x86.h
+index ed2f6aa38935cf..67feedd3035ff3 100644
+--- a/arch/x86/include/asm/u-boot-x86.h
++++ b/arch/x86/include/asm/u-boot-x86.h
+@@ -68,6 +68,22 @@ void cpu_reinit_fpu(void);
+  */
+ int x86_cpu_vendor_info(char *name);
+ 
++/**
++ * x86_get_vendor_name() - Read CPUID leaf 0 and return vendor string
++ *
++ * @name: 13-byte area to hold the returned NUL-terminated string
++ * Return: Maximum standard CPUID leaf from EAX
++ */
++int x86_get_vendor_name(char *name);
++
++/**
++ * x86_vendor_name_to_id() - Decode a CPUID vendor string to enum value
++ *
++ * @name: 12-byte CPUID vendor string (optionally NUL-terminated)
++ * Return: One of X86_VENDOR_* values, or X86_VENDOR_ANY if unknown
++ */
++int x86_vendor_name_to_id(const char *name);
++
+ int cpu_init_f(void);
+ void setup_gdt(struct global_data *id, u64 *gdt_addr);
+ /*
+-- 
+2.43.0
 
-Cheers
-/Ilias
-
->                 return EFI_DEVICE_ERROR;
->         }
->
-> --
-> 2.53.0
->
->
-
---000000000000c6b0630659f15d98
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_default" style=3D"fon=
-t-family:arial,sans-serif">Hi Heinrich,=C2=A0</div><div class=3D"gmail_defa=
-ult" style=3D"font-family:arial,sans-serif"><br></div></div><br><div class=
-=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr=
-">On Thu, 20 Aug 2026 at 16:08, Heinrich Schuchardt &lt;<a href=3D"mailto:h=
-einrich.schuchardt@canonical.com">heinrich.schuchardt@canonical.com</a>&gt;=
- wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Use EFI_=
-PRINT() instead of debug() to correctly indent the message.<br>
-<br>
-Signed-off-by: Heinrich Schuchardt &lt;<a href=3D"mailto:heinrich.schuchard=
-t@canonical.com" target=3D"_blank">heinrich.schuchardt@canonical.com</a>&gt=
-;<br>
----<br>
-=C2=A0lib/efi_loader/efi_rng.c | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/lib/efi_loader/efi_rng.c b/lib/efi_loader/efi_rng.c<br>
-index 7810b4e47ea..9c5a60ea963 100644<br>
---- a/lib/efi_loader/efi_rng.c<br>
-+++ b/lib/efi_loader/efi_rng.c<br>
-@@ -31,7 +31,7 @@ __weak efi_status_t platform_get_rng_device(struct udevic=
-e **dev)<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D uclass_get_device(UCLASS_RNG, 0, &amp;d=
-evp);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (ret) {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0debug(&quot;Unable =
-to get rng device\n&quot;);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0EFI_PRINT(&quot;Una=
-ble to get rng device\n&quot;);<br></blockquote><div><br></div><div class=
-=3D"gmail_default" style=3D"font-family:arial,sans-serif">All the users of =
-that function print a similar message on failure. IMHO just remove the prin=
-t completely</div><div class=3D"gmail_default" style=3D"font-family:arial,s=
-ans-serif"><br></div><div class=3D"gmail_default" style=3D"font-family:aria=
-l,sans-serif">Cheers</div><div class=3D"gmail_default" style=3D"font-family=
-:arial,sans-serif">/Ilias</div><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
-:1ex">
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return EFI_DEVICE_E=
-RROR;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-<br>
--- <br>
-2.53.0<br>
-<br>
-</blockquote></div></div>
-
---000000000000c6b0630659f15d98--
