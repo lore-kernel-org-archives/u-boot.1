@@ -1,147 +1,136 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CE25C61DBE
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 10:56:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D211C61DBE
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 11:04:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E896660745;
-	Wed, 26 Aug 2026 10:56:49 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7OjaelgKWgpa; Wed, 26 Aug 2026 10:56:46 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787741806;
-	bh=kACzQV5Og47cEOPCxUyhbTWJIyjkgTj7MOSraXCLawY=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=yXnMQ3P477E0ROj5VK+Qx/2ulDtAErkCXQTOyfpht8OZGjk+gcmpKOJmg2n1OM1So
-	 8RZJpVA7M/K2dGIG/DMUMzfijNFVKyZboNgJKT4ezZyBQIv+xxuMV/zZGzE0QGZx2f
-	 cmm8/LrC0FDqvoyma3V3JGotqKwBhI32UPtNtRgTCvaX69FZdfvdJz9d//OPtxLpRF
-	 cxYCVuoq481BbAQmzr6xZDtiIXCP/BCeADtO8bdaGwxBWJfTp9N3LYUNIh9bn0aoCM
-	 bBTmm9QccrOwskLg75mEfDwYXKJ+EcZp6PiVZM5MiROW1U2oWIvtC3VxuOkZqF35Hu
-	 h5uiwycV4+98A==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C27016062B;
-	Wed, 26 Aug 2026 10:56:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 337C1323
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 10:56:45 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 1952B80B97
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 10:56:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 141A180BA2;
+	Wed, 26 Aug 2026 11:04:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ef6vIVaxefhr for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 10:56:44 +0000 (UTC)
+ id AhZ1vKn3bdqv; Wed, 26 Aug 2026 11:04:39 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787742279;
+	bh=BVRS6R5EF9nuJohXgr/VHEE0JYMtFv99oxrxbReTJD0=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=phQCaUM5hay1HxcCmzGynHphebN2K3SDREbPGkRnhwP6lhgmZ7M97DboH8nA0QINm
+	 IJO4uTNjvh4z0iSjCmmU/FH9wohkRwTryj+Vx9vhCUBDi+qMQlrylv/WTHJJzlr/t8
+	 zIR1zA5NSdICH7fo28CsxvPQM9lLw6PF60dU4GNyESbSruNsTQ/uNSfXrbst3VytcO
+	 QMJEXDL3/2TrsC738UvMoVkL62hPAKnlgNEDxad4baeACer9mGfRkzrLXh+pxONwQP
+	 HqF+Py39+QL1ysGdb7mgJVzsvjD+7dEmX/C5Qbt+Y+WCpzHbMkaF7FZ6E78gVL4wri
+	 JdLYFr+3ZC86A==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4EF5080B99;
+	Wed, 26 Aug 2026 11:04:39 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4227F230
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 11:04:38 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 287F980B99
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 11:04:38 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id x7Bh8a7p6Upg for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 11:04:37 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b136; helo=mail-yx1-xb136.google.com;
+ client-ip=2607:f8b0:4864:20::b12c; helo=mail-yx1-xb12c.google.com;
  envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=zxdAIFEJ
-Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
- [IPv6:2607:f8b0:4864:20::b136])
- by smtp1.osuosl.org (Postfix) with ESMTPS id DA0A080B93
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 10:56:43 +0000 (UTC)
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-66cf1f9965dso1077732d50.1
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 03:56:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787741802; cv=none;
+ header.s=google header.b=p7naPind
+Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
+ [IPv6:2607:f8b0:4864:20::b12c])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5083980B97
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 11:04:36 +0000 (UTC)
+Received: by mail-yx1-xb12c.google.com with SMTP id
+ 956f58d0204a3-66d0c8d0d6eso748683d50.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 04:04:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787742275; cv=none;
  d=google.com; s=arc-20260327;
- b=TEN9jolKu5SWIOAfcedGL4bsXwycSFi/rzBhB4PqLRMZPy1BXM9QUc61WMrz2EbBRX
- d5EFSOKzNsMBEISyooWIa7g/hP8/JIx2bJVFbXQ8S9qNKby46t6FA9DsYsVrNIKhQ9jW
- T3zxv6vjMKnAvcbxGUN4TqIA0tWnCtG5n/izBHYM58ltCEnuqDdAsLMkq3DUlqZfrcHn
- IlUhikk4VpfnFbA6Xzw2ISktcxf60g8FGJEsYvn/SqPFgecrL8IMMVf6eQqfHLqRwNwg
- Ni2RFxxFV/NmQJoVni1Qccgdr0UnaHwV9Fu1MQMh1sb1d8oVPFlT74YsLB5aaJeE1bjQ
- kDEQ==
+ b=hYk0P1O8KD+z4niY6eEobtblKpazGHLHZ1lYi+ctwML7k7OJRZU1Ri3OtRUnxSuYUc
+ udtIVD+BTUTvVtFXmoBUws/Yke06DTcnR/1Za4WVuzVuiSIORhjYKYchRoOJuYDy2GET
+ 8MoTD+2bBPYE8Gj0Ekuf+/gVvYo4v/MDZN18ZF0DJ9+6aps2kaqf8X+G5ONa20tYIqnW
+ iXHKDHgEJH9M8a8cjvt1/zvJKkoWsA91179YVI/RF57/u00B+yEmNW8xwp51RqPCDJze
+ N0Cw4OwPC3gbCdeSZk0mGqUTd8JlZpRLpmTVp7FGksJV1rf5pIK/RSTjWEomY07dwwps
+ GDoA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=kACzQV5Og47cEOPCxUyhbTWJIyjkgTj7MOSraXCLawY=;
- fh=YtG6jr1/V4pUq4vFb+vuUrJkMsiN58ijRN7BUUR4j2M=;
- b=S1x9QPFlALN7GANrCytscIEXAryqYESfUcQDPOql4xjiK/d7NW2ENJPPkRH+uiK96K
- oOdJ/hZR+3hnCacQHjmlqtnfAJb4TCdt9QYFxEEvOuASNrwsB4FRaBSjNujKTULLqFqf
- 2cOh+SECmp9rM+cT3TobCWQvFrX3C2pz7nuycBTfrFnI939qTQAyM+/2Kl9t4zJS6Dn3
- WHxVqSlydCJierMQOIoiIL9pp7s5qW73QI681cZjDp2f//i6Ke5ObozUbRcBp/PR2BfV
- MKG5+AcmrVYY0YQPOTXipm/gb4gZB8DKpyYY8sKHvPNB1oo8Y9GkzBhODlv8f0gswYl/
- XClg==; darn=lists.u-boot-project.org
+ bh=BVRS6R5EF9nuJohXgr/VHEE0JYMtFv99oxrxbReTJD0=;
+ fh=+3P6d+dg3SRe0ESje8SXPVI5omHHCBVbtS5Fmn93KlA=;
+ b=jVvT80rr4RCcxPU9e1NNBx23xxkRpX2JTRSu4Fh0MnIC1BT8UWwy4exHsMTiOGMRC3
+ lem0tl3w3tUBBnh1PQC93DCgxL8lhb+tpEmmrtUT3UWDgo2Abp7I8w45Hg4c8wZEuzzU
+ A5jg73FKGhCvulGJyug5YX7Fz+wz+3vWPANe/cAMLjz9q0u1mgrfgQDblXHVZOHvBHMe
+ 1Ea7/kCxJf09I5zgRmRttflcajoagkBHjBim4FeCrLzbeuKCcqX676jH7XWi9tINAEP2
+ m2E18NMhcRhx5Kcc5+VRLSODeNE6XyaZwgGyW0C8XOzRhI/91NwMu1rJrKrL8qExSS7i
+ c5kw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787741802; x=1788346602;
+ d=linaro.org; s=google; t=1787742275; x=1788347075;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=kACzQV5Og47cEOPCxUyhbTWJIyjkgTj7MOSraXCLawY=;
- b=zxdAIFEJIzcYenI/5oCkPMVk86YA6xCy/POtd/YuhOUAOZvkVGdFWu1ZjjO2p33vUC
- sdk+8M7420Fy7wu6QkANr8+ZGOYL85lx1E9xrQAb4CIUEPDbK9CGP3GHvtqBb7UAm5Ej
- ic+YK5LxREoSG3VJMVoD/ZUxxePOdoCxABoYwzgyQgkpiLYP2Joi8uG11zyLstRae/BF
- wlmprTziJgeKhfj2ybmeUGuoZxh86GRkw4XlQSnAGQ7Sx2Zqm8h0WM/tybN6oaWnEMof
- QwAh0qJvEtDW62ZEpJX5KGlGjD/2PKqfo2BpHAo9sVKJV40yg0ReuRh1dzg3Fs4utkuY
- zMEg==
+ :content-type; bh=BVRS6R5EF9nuJohXgr/VHEE0JYMtFv99oxrxbReTJD0=;
+ b=p7naPindru4YRjivGup86MAPhuXUM/69ZkvkZHPWc13SLY5Gm0ny6X/gZ2Gkozm9B2
+ 14bEo435/ESl76wq3OTRfP5F7LGFAJ43tMbjfmUW8wCsLTeKKs3+3nLLZ9ePvUa4FoCV
+ ypAbaVIDeiB2giOt1ho7+Yd1T2ydxcGPcsKf4rYkR6mep9OVZD1R68Vwu78mnW9Al3al
+ uZZ+PPy0JjIy31V1X5rWHhoW7PpqiYATP5Qtgw7JNV43XvI4rDdxkRwwZmtJCmdRGkEw
+ nhpYZvQNm8OYs521WOyg4CPhv9S5RxSM2NZbE18EoNUDocDYVyQFrlved9QpZi/VD86u
+ q7vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787741802; x=1788346602;
+ d=1e100.net; s=20251104; t=1787742275; x=1788347075;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=kACzQV5Og47cEOPCxUyhbTWJIyjkgTj7MOSraXCLawY=;
- b=r6UM9G9HgGI0wFBQQyfhOBe3+3Nx/kayBTvOemKB5tDRSF2+roAO6On8yr7KdIJyMX
- wk/OXpzylsoarRyaROGF4IEkG7cvuLqyN3EE2P3bmgP1pf6wATN4p6BQJychd4tdglDI
- 6K/RAuoQCJxCtMpruOW9wnczw/IJUw7w/oL38y2Nga766+lRvz1mud8gM52sCoaHJHt4
- gIiK62Y1c3hO3lSuxkPPM5Gt3kIg/NC7azTs30EzMwfI9nY6wU6fddIwjgooSbOTtDl+
- jvnAhnR1ihSnhfFrBZ45EUn/lg/zAzfCeL0RH5xJ7KqszaSGIL4qTZDK1keTdKQTuMi5
- hqyw==
-X-Gm-Message-State: AFuF++kwfVnmu4dbCUkK8ep8a6p4bvLpsnSW8ZlHMR3zuhzrMME52zVH
- WqpedH18I8Xt5SP23xM4BrcREivTsZx6AtJyVuD/ZdAOJBHrbHiFG6BPZx+mCw42SrpJquGLu60
- tegIOQSoNmBkNG/HKZE/fF36wqZYV29/glD2il9eWIg==
-X-Gm-Gg: AR+sD117xK3JL9Wq0U2VuNP7CC9wvORzYwRwefLPwfd6Rtz4UEMvou0Vl8K4NVKGhDc
- KHhzli++ew/SZrpzu86FZmoDm1ykm21lerszn6ShYX4dr+XvPo9PgLYoRYVeUzmyHBtfDNiLPAb
- QjIlY92NB972CimqHYJY7P2Ax0NVC8ciDnP4n8LBu0k/aBrUrnVmFlNG0wnL7J5zRTMwXrLGwwY
- CPc6/is68/1iZsYlUwsWyhS4hmhPfTF+IWcboLIRYe38GXIK8hcAv9i+5sEODYtGP0UvOyBDPTi
- mDio91vcIumTuIUi9aydKyjdynNyCM3HCdjYVaVsZgFTdPn03XZwyfsJnZfwJMSl0ZSkwqkVp7r
- D2wFfYZQ/FL8KJsz61YLyr2GzMKlSVDe8ft6BCZV6ZFRGZOOHA7w/rXun6OvPFJdHIbi3dQeTC0
- m4JbSLNmVhGmFXF4YnF/VOqv0qbeUTK2hnitznEVt0pXkVIMUfa/U4n8Ve4Ipki0v4r/1hwlzqM
- 6Eug7i+C/nLcoNFbTge52qMBo29JEOWITZpoCBreR8HnpHS0dS8tNz201MoKD22YAD7eTsyaCoa
- 48Zq3sOZ2PrTGsB2eD83phcLGMvhvgOS9QG2xO23+m7axs36C5ZXiUG04qGmHRyQSf4GPdKbvQm
- YnCugYtEN3mQbPfRM6WBAmxhWH22Svk870k+0PU1w1lw=
-X-Received: by 2002:a05:690e:1443:b0:66d:1a5a:1d27 with SMTP id
- 956f58d0204a3-66d2568aa90mr2158151d50.12.1787741802016; Wed, 26 Aug 2026
- 03:56:42 -0700 (PDT)
+ bh=BVRS6R5EF9nuJohXgr/VHEE0JYMtFv99oxrxbReTJD0=;
+ b=VCXk5uYA5QOhNe5Haj8nAuCQS2ojVf3Qn0MkwLyxSiuo5iPOwJg9rPFBg+y8FZKgnb
+ 2BSB4AsbrKFuo8QVBfNl2Eh7t7k8KhUmgc0WJuq+3yrchCOoCxixCkf1kQNvEC8vNELV
+ QnUqB57q3W03sqriZCSYJJH0lj7GFjZf7fgQTcLjYShbNCd5YDWh4zoH99Jcu52mY9xx
+ YijBr0t6WtxiBQZSbGjx1yrpjrQzkNajmrK9unGjcnxQxBv3Gd352iCk4gfjA33fqYbM
+ Th1Y7J+bRB9EJ7SlM0UZ+Zm9Qn9xMRTXKcxauAm3lPR8nolfvz6a1kifRt1qBvWZTa4M
+ I2eg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqhKkJYRGtWkjiL9N9rpPPkVTeSn54cOnOgYqnuyr6mxxVtolyAPggBEYyIasLNZAvNAYHR/DA=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lx9cn9qd8wvgcroTEFaIWzB1suj9cHXZeGGwWvgtLhvyq4nYuo
+ F/EyJnZrrHem9/DqrkomIbPkZAVvetq27cq2TAtEAPQ7NqaarBTSBiXWpl2rkgxG/zy08UxoG+l
+ EyMQ2upt8+xxAp+XjCq1r1Y3dz4hmylOm0fOHpP5oxg==
+X-Gm-Gg: AR+sD12S/ZWrGlgwKuaNskqcYtiJ4Zqx2KCFzRZKaA+dO/2mihGM0BVtNr2zsXmPExV
+ h8rvkD9T/kg+hYA5+MSekl0ALCr/DLFa+Cp1UwQVdGAl3EEDuauWI668sWk7b2PZJPOe0W/3ThQ
+ 7ZixIq3JQLCJU59SRryp6Cv/c698/8uSqQ77JaCUWKkF/XZ8xZ+D3+FoeZEAKxxc7ExSrvekZ9w
+ NYxE0z/z1rxeWeLbbYVPZdmkZNpkAI824t+DIIawfkydgXCReY3/bhri3mvx6fAK6AgQd/YVm4w
+ T0qnMFz2VcEYHU2SvVS569gt9PzyHNSRC/8ck5wg5iT97TR2JKJV0Ned0AKeT/KgaB6J+CFMECN
+ HcNM8WYX624vTcSay90DkJ9pMsHYWv5Wog8bvmwufoYI6adkVUv0uYgRZlXh7ajlFggRf9LH9Ng
+ 1hRoENEyl8NKmMyft87F9rbfBrwzy3QeY/nEKut1qK1zN0H7A5xhhwSefmkZtfht9J8P+KyU1EB
+ ziFjtMgP6M+oyoHylJdpQGKKmIpul/8WrwQWN0YuigGdy046Q2HO6sm4R/RDmKoQXNEUJvjZQPJ
+ 2mpFcas9IXz0Cf/Mafs3zrxism5Q+99wIw+pdUy4WUMUcYL/IquRc1L3l3kf42s4udW7pJrNHJ0
+ c8g2jP93OTJG3lLsvkWkX3/5eiuB0a/fi40LjiGJPTSg=
+X-Received: by 2002:a05:690e:439b:b0:66c:e8ad:7bef with SMTP id
+ 956f58d0204a3-66d2df088f7mr248405d50.30.1787742275210; Wed, 26 Aug 2026
+ 04:04:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260825-linkcheck-v1-0-ee7573fe3a4a@cherry.de>
- <20260825-linkcheck-v1-11-ee7573fe3a4a@cherry.de>
-In-Reply-To: <20260825-linkcheck-v1-11-ee7573fe3a4a@cherry.de>
+References: <20260820072645.9884-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260820072645.9884-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 26 Aug 2026 13:56:06 +0300
-X-Gm-Features: AcwNN1VLYZ59-WL-ME7Hj9H5ELhHNRUHxsSBI62voLrBlDZWOaxOrEVzQ-1jG4A
-Message-ID: <CAC_iWj+rpZ3ceNVbX3iKpEvci0Nddk99hvnGCLA_5jDhmsU2EA@mail.gmail.com>
-Subject: Re: [PATCH next 11/45] doc: develop: uefi: update link to ipxe git
- repo
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.u-boot-project.org, u-boot-amlogic@groups.io, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Viacheslav Bocharov <adeep@lexina.in>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Soeren Moch <smoch@web.de>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Le Jin <le.jin@siemens.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Peter Robinson <pbrobinson@gmail.com>, Sean Anderson <seanga2@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: multipart/alternative; boundary="0000000000000f447e0659f113d1"
+Date: Wed, 26 Aug 2026 14:03:58 +0300
+X-Gm-Features: AcwNN1W3qUz-7lyyVMtJFI5Vuet14qXvLRG2RiqwhthXF5JA492dE6Jzjfauzak
+Message-ID: <CAC_iWjKNt6T=p5P_UOr-6GR4SryhYR+3KooPUK0ozSPexG=EqQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] tools: build mkeficapsule for
+ CONFIG_EFI_HAVE_CAPSULE_SUPPORT=y
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Linus Walleij <linusw@kernel.org>, 
+ Kory Maincent <kory.maincent@bootlin.com>, u-boot@lists.u-boot-project.org
+Content-Type: multipart/alternative; boundary="00000000000043a3d90659f12fd0"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,96 +144,101 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
---0000000000000f447e0659f113d1
+--00000000000043a3d90659f12fd0
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, 25 Aug 2026 at 19:50, Quentin Schulz <foss+uboot@0leil.net> wrote:
+On Thu, 20 Aug 2026 at 10:26, Heinrich Schuchardt <
+heinrich.schuchardt@canonical.com> wrote:
 
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+> Currently we build mkeficapsule by default even if we don't have EFI
+> capsule support enabled. This adds a host GnuTLS build dependency.
 >
-> http://git.ipxe.org/ipxe.git redirects to https://github.com/ipxe/ipxe
-> so let's use the proper link without a redirect in-between.
+> Only build mkeficapsule by default if CONFIG_EFI_HAVE_CAPSULE_SUPPORT=y.
 >
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> tools-only_defconfig explicitly selects CONFIG_TOOLS_MKEFICAPSULE=y.
+> Hence distro packages like Debian's u-boot-tools will still contain
+> mkeficapsule.
+>
+> Reported-by: Linus Walleij <linusw@kernel.org>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
+ Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 > ---
->  doc/develop/uefi/iscsi.rst | 2 +-
+>  tools/Kconfig | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/doc/develop/uefi/iscsi.rst b/doc/develop/uefi/iscsi.rst
-> index 51d38cde2438..52fa79f35620 100644
-> --- a/doc/develop/uefi/iscsi.rst
-> +++ b/doc/develop/uefi/iscsi.rst
-> @@ -125,7 +125,7 @@ iPXE
+> diff --git a/tools/Kconfig b/tools/Kconfig
+> index ef33295b8ec..e151b30217e 100644
+> --- a/tools/Kconfig
+> +++ b/tools/Kconfig
+> @@ -108,7 +108,7 @@ config TOOLS_SHA512
 >
->  For running iPXE on arm64 the bin-arm64-efi/snp.efi build target is
-> needed::
->
-> -    git clone http://git.ipxe.org/ipxe.git
-> +    git clone https://github.com/ipxe/ipxe
->      cd ipxe/src
->      make bin-arm64-efi/snp.efi -j6 EMBED=myscript.ipxe
->
->
+>  config TOOLS_MKEFICAPSULE
+>         bool "Build efimkcapsule command"
+> -       default y if EFI_LOADER
+> +       default y if EFI_HAVE_CAPSULE_SUPPORT
+>         help
+>           This command allows users to create a UEFI capsule file and,
+>           optionally sign that file. If you want to enable UEFI capsule
 > --
-> 2.55.0
+> 2.53.0
 >
 >
 
---0000000000000f447e0659f113d1
+--00000000000043a3d90659f12fd0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_default" style=3D"fon=
 t-family:arial,sans-serif"><br></div></div><br><div class=3D"gmail_quote gm=
-ail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, 25 Aug 2=
-026 at 19:50, Quentin Schulz &lt;<a href=3D"mailto:foss%2Buboot@0leil.net">=
-foss+uboot@0leil.net</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quo=
-te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
-);padding-left:1ex">From: Quentin Schulz &lt;<a href=3D"mailto:quentin.schu=
-lz@cherry.de" target=3D"_blank">quentin.schulz@cherry.de</a>&gt;<br>
+ail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, 20 Aug 2=
+026 at 10:26, Heinrich Schuchardt &lt;<a href=3D"mailto:heinrich.schuchardt=
+@canonical.com">heinrich.schuchardt@canonical.com</a>&gt; wrote:<br></div><=
+blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
+eft:1px solid rgb(204,204,204);padding-left:1ex">Currently we build mkefica=
+psule by default even if we don&#39;t have EFI<br>
+capsule support enabled. This adds a host GnuTLS build dependency.<br>
 <br>
-<a href=3D"http://git.ipxe.org/ipxe.git" rel=3D"noreferrer" target=3D"_blan=
-k">http://git.ipxe.org/ipxe.git</a> redirects to <a href=3D"https://github.=
-com/ipxe/ipxe" rel=3D"noreferrer" target=3D"_blank">https://github.com/ipxe=
-/ipxe</a><br>
-so let&#39;s use the proper link without a redirect in-between.<br>
+Only build mkeficapsule by default if CONFIG_EFI_HAVE_CAPSULE_SUPPORT=3Dy.<=
+br>
 <br>
-Signed-off-by: Quentin Schulz &lt;<a href=3D"mailto:quentin.schulz@cherry.d=
-e" target=3D"_blank">quentin.schulz@cherry.de</a>&gt;<br></blockquote><div>=
-<br></div>Reviewed-by: Ilias Apalodimas &lt;<a href=3D"mailto:ilias.apalodi=
-mas@linaro.org">ilias.apalodimas@linaro.org</a>&gt;<br><div>=C2=A0</div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t:1px solid rgb(204,204,204);padding-left:1ex">
+tools-only_defconfig explicitly selects CONFIG_TOOLS_MKEFICAPSULE=3Dy.<br>
+Hence distro packages like Debian&#39;s u-boot-tools will still contain<br>
+mkeficapsule.<br>
+<br>
+Reported-by: Linus Walleij &lt;<a href=3D"mailto:linusw@kernel.org" target=
+=3D"_blank">linusw@kernel.org</a>&gt;<br>
+Signed-off-by: Heinrich Schuchardt &lt;<a href=3D"mailto:heinrich.schuchard=
+t@canonical.com" target=3D"_blank">heinrich.schuchardt@canonical.com</a>&gt=
+;<br></blockquote><div><br></div><div>=C2=A0<span style=3D"background-color=
+:transparent">Reviewed-by: Ilias Apalodimas &lt;<a href=3D"mailto:ilias.apa=
+lodimas@linaro.org">ilias.apalodimas@linaro.org</a>&gt;</span></div><blockq=
+uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
+x solid rgb(204,204,204);padding-left:1ex">
 ---<br>
-=C2=A0doc/develop/uefi/iscsi.rst | 2 +-<br>
+=C2=A0tools/Kconfig | 2 +-<br>
 =C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
 <br>
-diff --git a/doc/develop/uefi/iscsi.rst b/doc/develop/uefi/iscsi.rst<br>
-index 51d38cde2438..52fa79f35620 100644<br>
---- a/doc/develop/uefi/iscsi.rst<br>
-+++ b/doc/develop/uefi/iscsi.rst<br>
-@@ -125,7 +125,7 @@ iPXE<br>
+diff --git a/tools/Kconfig b/tools/Kconfig<br>
+index ef33295b8ec..e151b30217e 100644<br>
+--- a/tools/Kconfig<br>
++++ b/tools/Kconfig<br>
+@@ -108,7 +108,7 @@ config TOOLS_SHA512<br>
 <br>
-=C2=A0For running iPXE on arm64 the bin-arm64-efi/snp.efi build target is n=
-eeded::<br>
-<br>
--=C2=A0 =C2=A0 git clone <a href=3D"http://git.ipxe.org/ipxe.git" rel=3D"no=
-referrer" target=3D"_blank">http://git.ipxe.org/ipxe.git</a><br>
-+=C2=A0 =C2=A0 git clone <a href=3D"https://github.com/ipxe/ipxe" rel=3D"no=
-referrer" target=3D"_blank">https://github.com/ipxe/ipxe</a><br>
-=C2=A0 =C2=A0 =C2=A0cd ipxe/src<br>
-=C2=A0 =C2=A0 =C2=A0make bin-arm64-efi/snp.efi -j6 EMBED=3Dmyscript.ipxe<br=
->
-<br>
-<br>
+=C2=A0config TOOLS_MKEFICAPSULE<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 bool &quot;Build efimkcapsule command&quot;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0default y if EFI_LOADER<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0default y if EFI_HAVE_CAPSULE_SUPPORT<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 help<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 This command allows users to create a UE=
+FI capsule file and,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 optionally sign that file. If you want t=
+o enable UEFI capsule<br>
 -- <br>
-2.55.0<br>
+2.53.0<br>
 <br>
 </blockquote></div></div>
 
---0000000000000f447e0659f113d1--
+--00000000000043a3d90659f12fd0--
