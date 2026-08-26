@@ -4,132 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DDFBC61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 14:01:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45A7EC5DF97
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 14:34:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0F82A4054C;
-	Wed, 26 Aug 2026 14:01:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BEDB44051A;
+	Wed, 26 Aug 2026 14:34:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RoTrCsfK1SrC; Wed, 26 Aug 2026 14:01:23 +0000 (UTC)
+ id bzNfb8oyXAfQ; Wed, 26 Aug 2026 14:34:14 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787752883;
-	bh=HaihveUB57n7z+1DY1Py7R0JzasjKGuUpfbjcX2/rLE=;
+	d=lists.u-boot-project.org; s=default; t=1787754854;
+	bh=MDcUAXoVrHqibQhE69jYSnstdVzmA3DKadiRS14cpnk=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HREPoZpHwjIo1Z8yFt0vSg23RDW7+EO0224bEe9m+oUGOPADNdUWTaUxZ7V9ONf7C
-	 WiKPlDGJvfz3108Cc/hTQrZwvFo8STvyTfxT2ZDFvjqW6OaCPBV5rJZ3fepnRNpV0K
-	 //Nv31rZ9MtjSwFd6C0f0SeyMnDRJL1bdle3rEt+JDxRPV/dKinNP9JB9FoYZyd0Yb
-	 ArNHTWHF5m+VZDqG1hHlrY3qP9FTrksxOZUR9m/JXhhnOyGq4kyJBSHIzy71EZ3rX+
-	 xPAu2rBEj2WMymtP1c58oM77wSJwnQZtGoWv9nZ0a36KD14n8CRs0tsyZOMS38E0R2
-	 KT8X/fyvJUKEg==
+	b=rEwgh1PXOK05rDo+THmeMzfX4pck1OTi/ChzludlX/RW+jUPdlH6wLcwvxNH/cJvp
+	 pAu2Vn3AbKa3M6sVyUNjlm7q1I2R+jvOGEkoGrIYOejDSyb5NgGXpkH62k4I7YpRIq
+	 i8OIQ2eHMALefdgqO/I6PeA6sFtqH6PZciqr325vyL0+S2D5QE1kNMxvlmAHlGvMlC
+	 rvIxKD3s9pxsLf1faGkKntQV8H9IvvkdH9jUFwcxVXEb/Mzy2FKgoXDaxV/LGrUw/Y
+	 V35S0o8sHgxdZMhfT2V8CwvRpXjYUQ25JP9rubVuKvQLh8qnKL+XIOWXY5Skd+Be0h
+	 HjR8oTSRMaqnw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2E81F40546;
-	Wed, 26 Aug 2026 14:01:23 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 7C7738F1
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 14:01:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EAC2640435;
+	Wed, 26 Aug 2026 14:34:13 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8E510396
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 14:34:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7A2E94053F
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 14:01:21 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 802326069D
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 14:34:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id A5npfCyZXW29 for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 14:01:21 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JcywcrFKhpDc for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 14:34:12 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::112d; helo=mail-yw1-x112d.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=llZ5lH2u
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B89A640532
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 14:01:20 +0000 (UTC)
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-7dbcb505578so9895817b3.3
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 07:01:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787752879; cv=none;
+ client-ip=2607:f8b0:4864:20::b12a; helo=mail-yx1-xb12a.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=UUIUL6MM
+Received: from mail-yx1-xb12a.google.com (mail-yx1-xb12a.google.com
+ [IPv6:2607:f8b0:4864:20::b12a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id BC4EC605F0
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 14:34:10 +0000 (UTC)
+Received: by mail-yx1-xb12a.google.com with SMTP id
+ 956f58d0204a3-66ceaade3f1so1005977d50.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 07:34:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787754849; cv=none;
  d=google.com; s=arc-20260327;
- b=CzRUFrO/hbJu/XtshriRWzro2R52xKvINvUsFYHDMMlWiqbDEG/V4Lhrd2fyZOeWjy
- 2MEn7eicaVKAbwOnfFCGXih0xKhtMWoXHcpepB7QnPhqSjGtKA7w5S0zuTXtQsP1MwW3
- 1zAPg4folw6qSldmPC3Y0j6FVpxmOz2+8WHRLK1d38HhSec7xMf29TbY9zgWsTVm3YNH
- eZu2vuWLRYZ8cBl94/xuCkk4n3pCuXDf/mDXKaVd3ADQ/Er3uHPu/1oSMLziP9VVbZub
- Y6EKXYGxnv2L00uggdDgmWUlShpkaz+FV8x9hjTMcRjQFEhXISU9IxWZKCpCPu0Zd2OH
- tgYA==
+ b=h9kT5i/6Q1R1Ugc70DevOXWNRus0Isn2uLTU1YFLaP42gvLi025F2IzPAkpYBmW0hQ
+ i6XSw9QRc4Ew109jCV6OGBq1uunBSlnmzOS/EyPdjarx9lb67yeLkiLejuzFiEi4hQ9S
+ /5zwA4etnYxgFEXpgXfbyUeEZbgqIQ3XbvzkKSC5SaZDANwutVSkFZtc4EA1YcnbcLXO
+ C4fSgz0KWRNlQ4o0b/sK4ehV4F90wKPjSMWbV5WSPUoq3bMZruok0JJvBcEHs2B/dmuJ
+ np/YzxzNo/UjQWkNc4W69tUnm3W+HgbVFTo7TDGn+IfnVvXXBPM4kEibElZuydPh8lQp
+ IuFQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=HaihveUB57n7z+1DY1Py7R0JzasjKGuUpfbjcX2/rLE=;
- fh=2SflGqsDiYBlFNcTJ969Tz2TZ3f/ggOjp6JrahleBXE=;
- b=N2YP8IwZGC5BmtaIu3EGJJucAZXjTDg7g6Mvhe3xf/u4MXnaZ/fKqWEbvXIgelOOKK
- BBz7M/xRZ4djtTgRwg4SgkQ2+KZG51Z1MCT2hyPSlKuK6B0r/VwnGR0O9fCbFV5yVtOY
- WIJmR66UKy5Nlv98P6cSR7XTq9GpMs/PpkEkn4OFApRNKrbZ9I6qWecvKPVdZC1bIRwZ
- 3BQNHNvyhGK5mO8AiQhfLK965BxFOywbsLiwFZK7bj8Wzrh/jwxfLZpqNlye+h59gnOp
- yavSO6LLxOjB//mtDHlrAi+bqjtSg16tSZoHjZWi8ujmBBPXuWxPMQXEKpjpeDqg0GEX
- ohoA==; darn=lists.u-boot-project.org
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=MDcUAXoVrHqibQhE69jYSnstdVzmA3DKadiRS14cpnk=;
+ fh=bTGrAUloMYnT2MSEYasO85rVC0SZCH6Mav5rgWDqfSw=;
+ b=U4s51+axfEsy8q5zYEGNZWIzaoKXmF+v1rd0+IzxI3dlAZGXJVlEIlvuE3Agr7islD
+ aG+O1wXBf0MvxMOKX9RfgnT5d+JtjwqDUCnXaiOHg3WWeLoPTtOKMSZ9WnCf++KLefv0
+ qjQDj+l6O38tVUdrCcpy3KxcXkP3PnwXlrABskJTbjQFx7Hw/tMpr+jbCOWRhwO5Fe9D
+ ENNiL8qU04F3ZFe4TSk6TzS1D9lBnSk4LmSNBzC8J4VWkQ8d6K2pt5pSBSsnNCAakKEn
+ aqdM+8k8MtwsGif8q095vRiFLa00If+2NnBbzb/ST1tLcDzY7++gutKTTPrCDoZF5A6E
+ 89tQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787752879; x=1788357679;
+ d=gmail.com; s=20251104; t=1787754849; x=1788359649;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=HaihveUB57n7z+1DY1Py7R0JzasjKGuUpfbjcX2/rLE=;
- b=llZ5lH2uIVPtGE1CTvDo0ldcarsRAl64kYE3E3Cp5aIOtCQIwQMSu7gDX81bDgHmsj
- q95yuVd+M2XtrrOGTiqD8xW0DHz6sCIATK9HULwOTVeOyMQqKFoOTBZOWAwWWdpG00am
- A06+l2ZeIZ1Ny/cAi/nSFs70zlzVQ9M/6DgIUXRtGuWnRYhMSSaPQzIl2BgWEKauIymw
- 33H2RcouTT8smQYWYO5TLsT0MVOhHdsXsCW1ULSdxaDpCaXF6O7sAYaWFkGAcRbApwnQ
- qK1XYTriMxbe9PltbNwU8GNZDhx1l97LuwQx8VqyMn2i6HNrFkpsAoclBgxdi9hWHM+D
- 30+Q==
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=MDcUAXoVrHqibQhE69jYSnstdVzmA3DKadiRS14cpnk=;
+ b=UUIUL6MMIzAQY1kpCJlKJCHjsGvIfWYvI1SGNHBasw/bY8OyomaeW+MjUn5MmiNHDn
+ JHZkwnrN6lADgC4KLgQELbkaTJItDu16jYh4ZTMFPfxncIKjIwlLKXX04yTDFZWK/Oxi
+ FYsrCxpdK6M7/yH7FwqJrPnaQVSza4WM1EWu8ZdsF/qWCyOaT5xrn/58dHFwLcUbZWTu
+ 91UofI4vkM93fJP9VRCpSTw+TwD+GZ2pWuRLrW2LXt9mnhvfI6sRBteu7HyMZxo1VHKK
+ vbcncEuO16+DLOjSd488k9j4AU/IIWdHeYWIKDfPULFNWQIM5lq88TWogPJ8EMowwoYK
+ K/Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787752879; x=1788357679;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=HaihveUB57n7z+1DY1Py7R0JzasjKGuUpfbjcX2/rLE=;
- b=o9mlUufBZmSAYd1enr3UGQSXBMj1USp4J2wZH0HfYlOXp1mRHsRrPoR2Mg1KeoRlHv
- FjDVzUouNjUlx4929Xt47cnFvgk3SH8L0ie/GUllwO40z7eq7eEvetUNZ3qM5XZLILtO
- GefCIMPxK8c4fhSN9nUfQQGEOJIBcsdWmf0xW9nVoiOUu/RSxsbDstWSLhZ4k4zhV0Sz
- wiqMc7qCcD7yspEVsiMWsBsjJgpRvsYQADrRzIJFin2Ipq5Ul1X6mD4Ntyf/F30eZ+cY
- v9oNrjJY0NkmUi9LQBOXEk3L4+8ZNE9btqGgzN/WszO3pljkzst9VR4c+ssjfU4ip4f8
- 7qvA==
-X-Gm-Message-State: AFuF++mn5eGT7rNEclWw/9vHZOXCPN+C9nPImngY7eLLLWC1KiG5eHz3
- slG/shyO8dwIfwsd8GfMreQMoBx1qkR8g6A4rFdiM63LI4YR8+GGNwS40yBKjd59ZlummwIpJcv
- LW81qtaE2akIPPY1cJIczEC+gBPtt+xg3mftrH+4TIH5lm0OZ0+Pqkd0WiA==
-X-Gm-Gg: AR+sD12UpWZsxMXwBuEFU1XIMDXYdKQOigFs+HYGhS0OQVYVD3EdT1rKNCjMHwzdned
- +2eEYTIZMELc7Zy79VFMST6U4TZmax9XVnSNphMz0pQhIqMIBWdGRhsfaWDjRSxLBPbBANs2b7a
- dxMk9hIVCC9oSMIahznObiUd1Ig79WJBY2lhGSMEPAhOg6bPZYaYPP9HglYbfXfV5x660663gIV
- EPIEVMzSWobMqtOtxwA3WdWN9SWwMzC86Q0PZ1FBuiEBlIWZHp1PSXu7rpRiq/gxEf9RKF0D9vO
- sM+Grp3HAf9ckgSE5YQjnppC5S4X7cyFVvfNYG96ZVtiIxP6K8Uq9yocdS+o+YoiuUPFgnGq/Xq
- nq+loIn81xCinNZnwY+mUEGdqigzgyng3W8OsqVgRqO6c9/Y7ETqgywdSuOZ0dpPO/MV/qmJuKc
- i2xc7M4e1W9kLYeIzuTV1sWqxi8iK0pI74nG/YNtG1p26ZNdce0fP1RXucfw092/VIXoVQKuXm2
- Vcu/OPB9qqWDKqykvuYOg+zLMY80PRbwUPd3n1QBX5j1ks9/MIGCcjWIBwrUMOfUwE3RXJKta56
- ExKgWvhp1OXlI7V7sbZ/fyvMImnUrCbnqAAq4llWzsDGP+/KgXWHu5N5pN5WMcyvzEvTKYncFSC
- oJvnRJcAyueVS9yM7z6LwberVh+STJCflZt0ixwRhLdQ4
-X-Received: by 2002:a05:690e:1306:b0:66c:f55f:cd9b with SMTP id
- 956f58d0204a3-66d257cb144mr1929958d50.46.1787752878692; Wed, 26 Aug 2026
- 07:01:18 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1787754849; x=1788359649;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=MDcUAXoVrHqibQhE69jYSnstdVzmA3DKadiRS14cpnk=;
+ b=R+XOvaSFRvgxUp5WHrZCR57un0xR0QTTqdl7lH3xE0H5SqGqFEVd//bCY5q3EDy0fh
+ uSn0CqJtvbACmSxPMmJ976e2mFR5wIToQUsVP2429tfLDf+1gbSizWCW7fcbYwS909o4
+ oXeTHC9PY8nctzPKsME2S7Ljs7T6eOnJsld874ZXyRKvT+DRCg/rUqxswPPQjzGLX8Yc
+ OufSgn6U+bImo5RZ+el/CCCR6TnOdasvFPdN4XlYQA64zrwpWDK86zh46tfBS2eaR+bT
+ rqJ1QnIR3KYCMRFJcA8Q6NI+gs+eUKMSWl1dzrvxtoAO/OldmMjOsHpXIvtCVdNxztgf
+ VtMg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RokgYfz3YRT6s/L9Fvc0fXhX7qPm4SR5PB3DMlfIPoEZOxIZL8Zf8d5Tz7t6xlMmFnhWC1r05o=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nUWZjtQpneYcKVC1KPz5FWVF4eiSnLOq26xiZ222oIrBiYZ4dB
+ orjeS21653Eu1QY23aBl0AeKvybwk0+DVzhUTZgg22XZQsGeQNqVwu9XAnQymaDWeI84fHh4x0C
+ cDN6mtVeKw+v4NqvzkbaEGQI5E5o6NvE=
+X-Gm-Gg: AR+sD11PRqrIrnqkX0DC7B0ELrspE8rnti7254rnXazi+QaRpcyFunVxNmcADK3pvDX
+ 4lZQtcneuRoSlbKZNUFlKMkk/aYfuM1Ug2ufqVs1rNQ14Bgzwf/qsllfU8m+6cguF1FjSuEcfre
+ F0WKskCQItHDvjYR7jSoX3AHwJcDo4MS5akBQsExOEqxI5TQ6N9cNekNOXux64LDDZaJ44/JKax
+ TisgV1c0fjDwPQ415LgtNvMBym3dAJHhmE+q9pfB+0qWbL2gzw5uUrKlxZLrG33ok+oVVolotiN
+ /k2MM4zXOBmmD5twSCcCQPlbPPECa1KB7NvRByfAqYQVyQ0Y4nYeTVriMWhwL1q5DCXMh2NAhfu
+ bycdrvvfta1cXRPrV8MvsPPv0xYs1b60Ikw==
+X-Received: by 2002:a53:e037:0:b0:66d:7f5:37b1 with SMTP id
+ 956f58d0204a3-66d256954d9mr1678661d50.18.1787754849281; Wed, 26 Aug 2026
+ 07:34:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <067b90dbb09718c8c9b73a049702e2df30544849.1787745885.git.michal.simek@amd.com>
- <5908d1dcf2a650cac2b22d82e7f789b978f70748.1787745885.git.michal.simek@amd.com>
-In-Reply-To: <5908d1dcf2a650cac2b22d82e7f789b978f70748.1787745885.git.michal.simek@amd.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 26 Aug 2026 17:00:42 +0300
-X-Gm-Features: AcwNN1WxvK6zGK4M819huODjSLPtHTM_OkMYxA9KgVMAWzqQ_q8B4GwSHnzZoM0
-Message-ID: <CAC_iWjKrkp=T8nZitOZm0e7m8vsjxF2Xn7N1x2CvCpOj5DscZQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] board: xilinx: versal-net: move
- platform_id/platform_version to .data
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.u-boot-project.org, git@amd.com, 
- Suraj Kakade <suraj.hanumantkakade@amd.com>, Tom Rini <trini@konsulko.com>
+References: <20260821070958.6997-1-eichest@gmail.com>
+ <CAOMZO5AY7nkpdyBckixiBTRLK6f1YTL=H14cLnoMLc+Qh5=MvA@mail.gmail.com>
+ <ao1IFKQq7Lni4Kx4@eichest-laptop>
+In-Reply-To: <ao1IFKQq7Lni4Kx4@eichest-laptop>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 26 Aug 2026 11:33:56 -0300
+X-Gm-Features: AcwNN1VgKx9Y8oBeIRecBOynfkv4FaXYrbfO2jqAcCV5l8ybWMtiY4gwaqeADBg
+Message-ID: <CAOMZO5Df=ZoziqoYrAB-3rS+P-giWHjYrhKNBeQE6UKi2a+pBA@mail.gmail.com>
+Subject: Re: [PATCH v1] toradex: {aquila, smarc,
+ verdin}-imx95: add board_fix_fdt
+To: Stefan Eichenberger <eichest@gmail.com>
+Cc: francesco.dolcini@toradex.com, sbabic@nabladev.com, uboot-imx@nxp.com, 
+ trini@konsulko.com, franz.schnyder@toradex.com, 
+ stefan.eichenberger@toradex.com, emanuele.ghidoli@toradex.com, 
+ sjg@chromium.org, u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,64 +147,35 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Wed, 26 Aug 2026 at 15:05, Michal Simek <michal.simek@amd.com> wrote:
->
-> From: Suraj Kakade <suraj.hanumantkakade@amd.com>
->
-> platform_id and platform_version are plain uninitialized statics,
-> placing them in .bss. U-Boot's linker script overlays .bss at the
-> same address as .rela.dyn (the relocation table), which is safe only
-> if nothing writes to .bss before relocation completes.
->
-> soc_detection() writes these variables during early board_init_f(),
-> well before relocation, corrupting live .rela.dyn entries. When
-> relocate_code() later reads the corrupted entry, it writes to an
-> invalid, unaligned address. QEMU 8.x tolerated this silently, QEMU
-> 10.x enforces alignment checks and traps it, causing U-Boot to hang
-> right after printing "DRAM:  2 GiB", never reaching the console
-> prompt.
->
-> Move both variables to .data via __section(".data") so they no longer
-> share an address with the relocation table.
->
-> Fixes: f6aebdf676ed ("arm64: versal-net: Add support for Versal NET platform")
-> Signed-off-by: Suraj Kakade <suraj.hanumantkakade@amd.com>
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
+Hi Stefan,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Tue, Aug 25, 2026 at 4:45=E2=80=AFAM Stefan Eichenberger <eichest@gmail.=
+com> wrote:
 
->
->  arch/arm/mach-versal-net/cpu.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/arch/arm/mach-versal-net/cpu.c b/arch/arm/mach-versal-net/cpu.c
-> index 7df7c49ac711..1555751da2e8 100644
-> --- a/arch/arm/mach-versal-net/cpu.c
-> +++ b/arch/arm/mach-versal-net/cpu.c
-> @@ -1,7 +1,7 @@
->  // SPDX-License-Identifier: GPL-2.0
->  /*
->   * Copyright (C) 2021 - 2022, Xilinx, Inc.
-> - * Copyright (C) 2022, Advanced Micro Devices, Inc.
-> + * Copyright (C) 2022 - 2026, Advanced Micro Devices, Inc.
->   *
->   * Michal Simek <michal.simek@amd.com>
->   */
-> @@ -151,7 +151,8 @@ u8 __weak versal_net_get_bootmode(void)
->         return reg & BOOT_MODES_MASK;
->  }
->
-> -static u32 platform_id, platform_version;
-> +static u32 platform_id __section(".data");
-> +static u32 platform_version __section(".data");
->
->  char *soc_name_decode(void)
->  {
-> ---
-> base-commit: 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc
-> branch: xnext/data_section
->
-> --
-> 2.43.0
->
+> We discussed this internally and decided to implement it in the same way
+> as NXP does in board/nxp/imx95_frdm/imx95_frdm.c, but I'm not sure why
+> it was necessary to put it in the board file. Perhaps because it can
+> only be done in board_fix_fdt, which might be overwritten in the board
+> file anyway? If we were to do this for the entire architecture, we would
+> need to define a weak board_fix_fdt, which could be overwritten, if I
+> understand correctly.
+
+It seems we should handle this similarly to
+arch/arm/mach-imx/imx8m/soc.c, where peripherals are disabled
+according to the SoC fuses.
+
+Since this is a property of the SoC rather than a particular board, I
+would prefer to implement the fuse-based fixup once in the common
+i.MX95 SoC code instead of adding the same board_fix_fdt()
+implementation to every i.MX95 board.
+
+This would also avoid requiring each new i.MX95 board to duplicate
+this code in the future.
+
+Could you please move this to the common i. MX95 SoC code? If there is
+a technical reason we can't do that, we can revisit the per-board
+approach.
+
+Thanks,
+
+Fabio Estevam
