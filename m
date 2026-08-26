@@ -1,45 +1,45 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04037C5DF97
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 168DCC61DBD
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:42:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EE2E380B89;
-	Wed, 26 Aug 2026 13:42:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C31976067F;
+	Wed, 26 Aug 2026 13:42:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X7SifVAS20u6; Wed, 26 Aug 2026 13:42:31 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MEOYv-Ss-KmA; Wed, 26 Aug 2026 13:42:29 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787751751;
-	bh=t15NoZR8zBWtNQN2YjMubUDI2tk1Xe210fuWJbd5WP0=;
+	d=lists.u-boot-project.org; s=default; t=1787751748;
+	bh=yN7X3vgkTJkBVGjdW98Y9xd7lrakrz2s2TmF/uMsynY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=L7q0wV/xXeryKM1e1hRg1st7+E2Dnrsa7385r2dBzqLehSPfwnmXOBGdbvmDobnsl
-	 Xe3kEec+n6EVWldlfNw+bC/BULu5usvxNneImVBZi3a/mcGcuhzEZer6rBnHnSVyEz
-	 UzBScgy+rTJpsk8yZ59zGCoNpvVEMLcAFB20591Br6ICmtGotqiPiDBE8JhT3Brqlv
-	 xRSmqnY+dJs9P6kvMlefHoCXobv11eEt6AR8xsycaIkY0t9wQSWwrRfYudTraWmSIB
-	 HG9r51vj1YUTNwbALi9/gv/Ous98kN88INy1LkMe+hQsy8T2+BBM5WBtvjziyzZXYP
-	 GIvUR9Q9W5F0w==
+	b=jU++uRjL2p3VnMtxrrekh70Hcmm8X/WtE7QE4XL7H+BRxaVO12SWNH+Ub3vyYwdl2
+	 t/SylLSovsruXyZliOROohDoA47GbUHrvoixiu0tWGLOEf2hQBQtkQ/Q6QjE1tX/Kt
+	 lERpjj/WKE+I3Ri27TS3IYEtkrivujy/3SRVxdeGxbnMjIPq42ReIsJs8TkvUVCAsj
+	 u6P9vcaN2yWCeYnvM+ntHwziyR5HD9sXTLlYoCgK35zrPh5xWHutwO2KVpuoEJDYnq
+	 8epmIWbFEf7ZWJYVvNgjQcELA2N/AFZnEKLWDSgfGngXFE+ZLIJCvhnm5P2/60E7tP
+	 DTaolvc63saWQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 29A2B80B6A;
-	Wed, 26 Aug 2026 13:42:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7335C605AC;
+	Wed, 26 Aug 2026 13:42:28 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 792833AD
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:34:59 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 3EE5F396
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:34:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5F5F840108
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:34:59 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3C9F540108
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:34:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Dt8vCRj0Q1BV for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 13:34:58 +0000 (UTC)
+ id 5ZKXoBuPnKvQ for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 13:34:56 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=34.2.90.19;
  helo=sonic.asd.mail.yahoo.com; envelope-from=maskachoska@yahoo.com;
  receiver=<UNKNOWN> 
@@ -47,54 +47,55 @@ Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=yahoo.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com
- header.a=rsa-sha256 header.s=s2048 header.b=AiUgsPpP
+ header.a=rsa-sha256 header.s=s2048 header.b=DH0H/5Oi
 Received: from sonic.asd.mail.yahoo.com (sonic-asso1-0020.asd.mail.yahoo.com
- [34.2.90.19]) by smtp2.osuosl.org (Postfix) with ESMTPS id EB0044005F
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:34:56 +0000 (UTC)
+ [34.2.90.19]) by smtp2.osuosl.org (Postfix) with ESMTPS id 45C464005F
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:34:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787751292; bh=t15NoZR8zBWtNQN2YjMubUDI2tk1Xe210fuWJbd5WP0=;
+ t=1787751290; bh=yN7X3vgkTJkBVGjdW98Y9xd7lrakrz2s2TmF/uMsynY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To;
- b=AiUgsPpP9WGiRiEWk6LE2x/E3JUwwBDF5SKS5BXeBh6BOi5BSDw7O9RyEEe/mbyQ4/MvbjyF9BoVPrGj3cOvptiNfTGidXiWwU6XcINV0/XXnrYJCBkY3Hn5ecwkCLzNgUYNJIoPKMwFlHjB4H/v0Q7PUJGQdX1Y483GoUFmUnzgIEWqMpeu7sBaXpErpWk2bO/Blo32x4glSmttnkKLCbgfMhCerTEGzqsmi+C7dDKRi6F9rEQlujqJDJJZ6WAXGzzWPi17uVgbGvaMb0Bvb4Gz2PC4kruHTmz5Hp5hzy/CeQEGUt5GvznkwgsLmWD2LK0BvT3bZB8KSSSaqsdFLg==
+ b=DH0H/5Oiht8I6QNgO1FWocliT1muHWsDZRTJ7S4ikeb8EzCwz/yZO4H0QBCedRUG132ia4n7lX2bG7TZjYDAKMjRMOwqeIueiCoDjCPRkN1Otbp3HqVFW3Xv4VQeBFFDzPH3qPyCAfAohh3/KkTIqvCO0fAG5UTtmzbM1YlhDKQOSFRg9nZfpw/6YI5nnCZylK6tm5R15L5bVu/0m2n9HhGh6IGtU88DrcIvCIepb46N+hhg3pSMboPFeHtWj5crc91AgEAE9TLyRmnrx1+DyFk42EecZ4P78SD4xNq7tkYweUEvP2P55rPkrkxgzqM9LgyRqLeTESNGbe5C4RNUKg==
 X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787751292; bh=zUMRoI03FelYiv0CkRWZ/PP7ekhtLnvEEyCcy6prntT=;
+ t=1787751290; bh=Bz4dx2Tn5HGtA7SmtHbAIImgtIHmveoCrEKFoI1nXCN=;
  h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=p9rlvyiN3Z9Lqx6UJBWoiGIbU5yCKjbSjS4GsRGjrluL1ZaBCSPWVGEz0zp6rRFGiWXEVZfe2fX53jVSNi73xLeQiUrGtUpMT/nwQI4TX1MXD2iOsw8ZiuqlbxNqgDsPRzEC0rOHJBeiCG79/uuBhv7z98uL0Uhjfjg4X1kePyZhdpQRM6ZCeBje3xaFDrhGxGJ3Muzub669QD3VoR4Q3OwgrQHa1W1Cz6ESiBw1kPLjxipY9Z1utpC8eQFx0Qhl/GaWfD2Y3joRjkYGx9uY3dGtg03f0QRwypqRbnyhk87tBJFLez0JyNPd4ON2WuK8oY9TiVO0wOASi/ssWLIr7A==
-X-YMail-OSG: mpURPAUVM1l.E3nE6YVW6pFkZLAVOQD5W.xxfdoF5vnlFr8tbZ5Tj85MMPBGTY5
- bxE2_WNCgXoe1_Hht5euCjuhPgQMUmKtgPjwXgcD1AmK5SzQ41_EW8bWQIOradAWLHPqhVunE3MZ
- vQm_.GhhLw9l7.JJIaYbi3Edg2gmoZqpN.POtB_WuLT01CQbiTdoHIvgMcS3zJo_TK93hzA4D6nH
- baelGljIIoO8yXfg86_rkqXuJrmMAIyhaDS3Zg06IRboeFPEi8lq.Us8Z3CtgkE0zni8QENS4tzv
- xqGW_lsha0p1o36xTaAf_sGmXb9UXdH4HP.g5qYNcLbC4JXMmjWjpuUAcWwWjBUmMCfwUxcSV..E
- LDI6x.P_upJM3EhXBNFXNiN.xjQirJupCkpcW4b2ONayDQx4hJleg6aq_zrClSWvCFLJigQNSCqQ
- QgeVaHU0HuxmBFRr65eNvNTrhJLeSKRtsZoLYxVTYYPDmG1P3ri63c3ds2sJjadik7aL9QP40iRD
- ua.8fjJDCsTEl.3TvLJ3HoxRJ9LRS8KooBV_RLogaYs8oa.XHZ1BVnxDBNQcRxPaPF0WjGMe0wjS
- JGnUq9iAaCGrXMjK96Y_jACK0GvUf8lOJwvDv_RTvKwchmcY211jIi_klO92RqKMkG70h.DjVu2K
- maO7tcM7ONOM0BdnvpLInrnSQ39QF2YNhqSeDDhAPH5BsjR7mcXwOhgPoHJmqG2GWpzw64gIiLGh
- _zlcpIFYcKQydT6DPkDSa7wqUBzUTiQ26U_PkTwrkNd2oPVOrPXcJbCUQ8_UsOjgTl7ZDcSH5ctS
- mR1vKvufVUI0eeAbMuIPq4z.YHWEXSEi0zr_HmuApkzRB.KVSJFSog3aFCmu218BN6nby0ZhO6mU
- FeECD2b9W4UHIMqK4E_yVcyMlBwSAZVqYNmwT079.RdZTV2ESH1d6nzLHFHTVGcETZFLuu0hzvn3
- qbZvoAVfHfmPfkV6BMjCVT3TDfY8Wi4Xs4k4u3yDE1zYoON36L72.mG.LbewWbiSu1MNfFJROGYH
- rAHKpZUOY6Nzc86WBsamMb6UBhGMFKsyUB.yD1uBrwqa2CEhcXFo_Ug12kcO.jkR3z3QaebQBvbI
- Ic.nidDI16c1n7BoK3A2VB7Y9QEqxY6bBELYju6xjs50duVDRwvHrTXrZeH5z4ZQSA6PdGOWRR4v
- 09Nl6VjEK7BHGfI50I_VqsjrtBpwJKmdomspUk7H3IkowYjEMw3y08QoyHv_5ddzv_ijjbBjA63I
- fLvQaufEdKOD15yHxaH54_9lIgFfkXVc4hdOxMuoh6kcxLo7Gd98F_92i4M24o2dp7x3n1u1T4SV
- 5KhJYAqa8NbF7snxsR0Y7w0WUIgMJZI6nP8V5JEkYn4DiqZXd_XIADSjsD.TnDLxbwo8NTHT42By
- bF_MM8ptRIoi8D6JZblsiZuIDi1fs7Xy1xBoDuDsIsm.Q4EwFNUbNYX.agL_JJIjsMHFC8TfdJXH
- wQcbASFjCCj6FG2ZzBC4uP0ljwHcfKW6azSGnzdw8SYpFxuIcdS1eui8OqKSHOsWFRzrvvZDXO_9
- ZdWAw8eeACFyzBBO5gln8xkOp3nlP2KAfUzJNa7v9HoFZXLFZpzS0AZdJamtMZV2mCpPhfe.kz0E
- UyvNevPn1z88.VBJBF1R4YaPL1aY2NE.v1yqCJRSieG3V0BPG0F_k15BqWK1SrMIcgQ6f0Or64_r
- 5sQAq3ViwVBxArX6rgDfTNlZ_f1Bbs4YEMyedYSGOPCKVLrmoN38gMHHAyaIe8yUTm3im5jvE8UD
- y9wjuKNcOQZtOPO67arP8S9CRlmkQMQkssKUBZOBdm78OXoRpsMQkjVZcFtPp5lprXrtJHxBODtf
- LAnEQiyoVzU77Hw37T726fWdM5BTsfhQPk_En4Elpmas76nIqzTPSjeCSQCpnhFCWzzrAsvJIjvs
- zuqEPSAYy1B4ULO29mwJ3iZvXqYJtxwAW0OQG1QfwdymhzQPDoHj69UlZOVzZ7rFMTwCz0k2s3Yx
- sRx3Zw9QzSSFotwn0.JvTTn5kS5PARd16KGVyspdafhVkDjjIGtqNySfReiYiaYRXeBY-
+ b=L/Z8PoNREhoGxxAb5Uas0C7fj+6omvvOwP+empo1bwRra5cPWzIy0f7lp3yQDTkuGLimm8TlbMlZa7Kwj6YlmEKGvdNFftbcvf64P2Dra2B7wJjbeo8hWYKhCpZQVVngEwLZtonYfcA9zoRvAOOyr8x9VhNDbjQV1Czulj2x2dXcyVgeVFQNPvwQH4hrjcWT4GkmoXlxRQosWFx3UDPYiICg6tInnanHYxrhcoy5+qJ6FbnhzlipM76uRSJrWwNQALSJOck4hz43fseesiJgJAI+/tVNgiJdMvlNBA8Xy0HYKCAXGPWy7P+JwAlroHeIw6W8gZH58Gx48o9WqREi/w==
+X-YMail-OSG: 1uZsg3wVM1npacIM6VIfUN2X1nuggjYWtSFQkh_I0VQ_Rt2audN8lMLaGKj.8R8
+ Vsrnu60leuWl6O9lppVQJHG2CjbUvHuxNgeKlCP4oudn0dfR2Iq94NVnhtgLy29pbnUc6pqDZmvo
+ gA_Bj2.0g7KvfTobdh2UTCEq9O22BvUfwHuiBC77YHS2fwkf.NjnVqdgLbpp1e_aYcQf7_Hg9R1t
+ AufuzrYB.6WtrKKjpiXxpDIhHmBQsz9j0I8Y6eXV6stP5NCDPly630CTrZOIqBGJVOktvK5jzL9b
+ zfSE4AxbQ6g488FUBbcCpo.q34hnA..HiVlirNtzQIOuKjUL98EOkvzp7u8S3QS_YEVJjEhFWZWD
+ 7_bJT6vuyNur83UqbR9rinMGzGJ.Y6s5DHs4vMli1TV4xcKbcfmmyZhFvN3s5S7oEAD3LhXIGVMU
+ 8ed94W5XLKHpQv0yt7t9Wv_N_ucNsnHovk637FQpePbC.obUbC7sq1Tdj7PvkwFEzFOTxnS3ZOYr
+ h_73eg8Wjm4Gk2Y8t.Z31W7pQTTXh5M05msH6Yo0pBsM_6ijAEGisUrUY.1uXgFLQwYKyn3qyxI7
+ BH5HA6bvVsGCCfzEWlvOtkbfR5cJwGgYq0Bx62PnDefdZbKtmnEFwdAaff1PFEoapK3DI.oLjGox
+ 4Y3ie_ah.M2t5zcVe1FvuiJMwt0F8ceCnO.u2k4_fdCKV7GKL9y0zbKCJEAvRAUBh_X.FJyLdyJI
+ XhZi4MfV3FLdnwULgJgGaM9X8as5_vbB76f4vkAMQE3if9mFqtWipIdZYHeDG4I8ehRbN0QZ7.fe
+ _ruqPk9tdOC_kUvAen._h519sq3FX3rltyFlyyaYbzBnY9LMlvcU7sdEbWONrWejQgeL4ygud9MN
+ lFgDuXwEDD2hKOKGgU8YnbNxm3uy7utG0BROrOgxGujer1oO68kZtbbj40L4WHg80vRciZdvDBw8
+ cxnTViBAv7IvF5SxWEomJHpLTx56eaOn8aOG.9c.6dlvwGPI8MeAgfJFHoUg8ncve8.WAmCkY3sk
+ dEzCW5sPwfMKgxLodJzXflI1HaiO.k2rsVw7mk1G5omPCDoXPOO3IpVeAHUhDfehTbrr7s7PtjPU
+ gC4SCwAcfU3mHlIWLlHXq2wl3Oy9OlyryTJEjiI3Wy7c2dBpFCAosfakwD8VRCdPlTAjnZZBH7Pl
+ DOQXgvO2Kap7hrI1RY3cLdsPZ9lstmWvO.0F6Ek_IaalRgOb7fuJ3dkbxol4CqQaxhz3HPg2GP5L
+ CE84IihiQP00kAmIbH6KKDpEMrOyNgmPbn9qngHL3TEZgUqniw6GjrOQnTnX1SocxqhH0Ls6b4Nm
+ RUQF5E1.zZ5Pu4sbVTccaoLUulFxqDYr8D3PhzR.bJx8aJY033KryybyiWhjJt9TU5IUG5zYpcqb
+ YsJFsodXDjstGB0a4XvAk8.VlvoLaAK1AdMeJO85J4UpK9Lr3OPc5a6wf3TtykpAwL73BeUGtWmj
+ n1tLa7ZiigV90g2qKZ57W5LM7C.VPQ3Q7u60d4kt5Y5SgAFLLb33oj2p.4R.umaaa6J4ENF3p.zr
+ McttQoha7hQtYpmnCAhkH1QzByQInhh2.efACPS0p_i0YNFKfiUPPEy1l4Kd.kV4U_i_t4Cv7XVe
+ syGJMfUBAnmIkC21q2uAeRvRdQVNKgRUz.PNcqoPDA31HGz.7IyWns8iboM1zXigP0qtz5Sqd2gT
+ Lvr.lNeA_vxEHgX4n4XC4rMokKauX7MLdwtEHpxybTG78hae7sRaqaj10lZPFNNvXu323M1Grmk0
+ i87U6eNbo1ELVXcRjxfeY8F1kYZDX.3Vecq8CPMi8SyHn38Vib40Wrt3K2yGm35m8FdDuHfVZEyT
+ EgBDI6Mq3.6hvjVY7Mody3GmSUewT9BvYw1utm7fbwathryEoL7FDQeF07QTv9cISFlHrGUbhTg_
+ PRYwHL8XIGsiWr.O2KCBu2FwoCqqnxtpnSqB1YISBv.rf7XfU6uqxJADYFjL9WlHo.uqKa1V_KDM
+ GnDJRvF2qxv5FORJfBIjHn.Siny_UTz90vvIUdL46pXhGgDkHaaj1XeeID5_zv9JMLkCTt4WkQdF
+ rzg--
 X-Sonic-MF: <maskachoska@yahoo.com>
-X-Sonic-ID: 8d4e0bb8-4616-460b-83a0-3181d170af44
+X-Sonic-ID: fb757955-0457-4b94-9b80-e80643fa6c00
 Received: from sonic.gate.mail.ne1.yahoo.com by
- mail-asdoutdeli-p-cin-asso1-prod-sonicconsumer-svc-101 with HTTP;
- Wed, 26 Aug 2026 13:34:52 +0000
+ mail-asdoutdeli-p-cin-asso1-prod-sonicconsumer-svc-102 with HTTP;
+ Wed, 26 Aug 2026 13:34:50 +0000
 Received: from dip100.lsn.sg3.yahoo.com ([106.10.223.109])
  by hello (SMTP) with SMTP ID acc4f7a299298e219e9ccf723c2619d7;
- Wed, 26 Aug 2026 13:34:46 +0000 (UTC)
+ Wed, 26 Aug 2026 13:34:48 +0000 (UTC)
 From: AK Sharma <maskachoska@yahoo.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>,
@@ -105,14 +106,15 @@ Cc: Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@arm.com>, Marek Vasut <marex@denx.de>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  AK Sharma <maskachoska@yahoo.com>
-Subject: [PATCH v2 0/9] mips: add EcoNet/Airoha EN75xx (EN7512/EN7528) SoC
- support
-Date: Wed, 26 Aug 2026 19:04:34 +0530
-Message-ID: <cover.1787736704.git.maskachoska@yahoo.com>
+Subject: [PATCH v2 1/9] mips: en75xx: add EcoNet/Airoha EN75xx SoC support
+Date: Wed, 26 Aug 2026 19:04:35 +0530
+Message-ID: <9fa9bf7e599c459eefa50fe3cee8af3b8edc904b.1787736704.git.maskachoska@yahoo.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260825222211.712836-1-maskachoska@yahoo.com>
+In-Reply-To: <cover.1787736704.git.maskachoska@yahoo.com>
 References: <20260825222211.712836-1-maskachoska@yahoo.com>
+ <cover.1787736704.git.maskachoska@yahoo.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 26 Aug 2026 13:42:25 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -128,165 +130,550 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This series adds U-Boot support for the EcoNet/Airoha EN75xx MIPS SoC
-family: the big-endian MIPS34Kc EN7512/EN7521 and the little-endian
-MIPS1004Kc EN7528, used in many GPON/XPON ONT home gateways. It extends
-the existing Airoha SNFI SPI-NAND and GDM Ethernet drivers.
+Add the core support for the EcoNet/Airoha EN75xx MIPS SoC family: the
+big-endian MIPS34Kc EN7512/EN7521 and the little-endian MIPS1004Kc
+EN7528. This adds the ARCH_EN75XX Kconfig entry, the mach-en75xx CPU and
+cache init, and the SoC register definitions.
 
-This is a minimal core: SoC bring-up (TPL/SPL, cache/CM init), UART,
-SPI-NAND, Ethernet, device trees, EN7512/EN7528 reference boards and
-documentation. It boots to the U-Boot prompt with working Ethernet/TFTP
-and SPI-NAND. The vendor-specific pieces from v1 (the BMT bad-block
-translation, the env/cmd MTD changes, the boot/image decompression hooks
-and the R3-hook boot variant) are dropped from this series and will return
-as separate, justified changes, as discussed on v1.
+dram_init() takes the DRAM size published by the DDR stage in
+REG_SAVE_INFO and falls back to probing with get_ram_size() when that
+field reads back an implausibly small value (some bootbases leave it
+unset), sizing through the uncached KSEG1 alias and capping the scan at
+256 MiB to stay clear of the SoC register island.
 
-The DDR calibration stage is a vendor artifact and is not shipped in-tree.
-The reference board packages it as a binman "blob-ext"; build those configs
-with BINMAN_ALLOW_MISSING=1 and supply the blob to run (see
-doc/board/econet/en7528.rst). A native DDR-init implementation is a known
-TODO.
-
-Tested on a Nokia G-2425G-A (EN7528, MT29F2G01 SPI-NAND) via RAM-loaded
-U-Boot: boots to the prompt with correct 256 MiB DRAM, working
-Ethernet/TFTP and SPI-NAND. All defconfigs build and are in savedefconfig
-form; checkpatch reports no errors.
-
-Apart from the usual registration wiring (arch/mips Makefile/Kconfig for
-the new SoC, the driver Kconfig/Makefile entries and the DT Makefile),
-the only change to generic behaviour is one opt-in Kconfig flag,
-MIPS_SKIP_CP0_COUNT_CLEAR in arch/mips/Kconfig (added alongside the
-existing MIPS_CACHE_SETUP / ROM_EXCEPTION_VECTORS start.S options), and
-the two-line #ifndef guard it gates in arch/mips/cpu/start.S: the
-EN7528 CP0 Count register is GIC/CM backed and the reset-time clear in
-arch/mips/cpu/start.S stalls the CPU. It defaults off and changes nothing
-for other targets; happy to move it to a mach reset path if preferred.
-
-Changes in v2:
- - Reworked from a full vendor port into a minimal bootable core, per
-   review feedback (Tom Rini). Dropped from the series, to return as
-   separate, justified changes:
-   - spi-nand BMT: no chip-specific code in the spinand core; the
-     bad-block-table support will go to the Linux kernel first, then sync
-     to U-Boot (Frieder Schrempf, Tom Rini).
-   - boot/image decompression weak hooks: to be replaced by bootm_size and
-     an uncached load address from the environment (Tom Rini).
-   - cmd/mtd and env/mtd changes: to be resubmitted standalone as generic
-     fixes, not tied to this SoC (Tom Rini).
-   - the R3-hook board variant and its image packaging (to return using
-     binman and a board default environment).
- - Documentation moved to reStructuredText under doc/ (Tom Rini).
- - MAINTAINERS uses N: en75xx / N: en7528 pattern entries (Tom Rini).
- - Device trees noted as not yet in Linux; the bindings and DTs will be
-   submitted to the kernel and kept in sync (Tom Rini).
- - Defconfigs regenerated in savedefconfig form.
-
-Known follow-ups (not in this minimal core; direction welcome):
- - The extended airoha-snfi/airoha-eth drivers use a small CKSEG1 uncached
-   shim for DMA buffers instead of a MIPS dma_alloc_coherent(); a proper
-   arch DMA-mapping implementation would remove the per-arch #if.
- - The SNFI controller selects its variant from the root-node machine
-   compatible; keying off the device's own compatible would be cleaner.
- - A native DDR-init to remove the vendor DDR-blob dependency.
- - USB: the EN7528 xHCI controller and its T-PHY bring-up (reuses the
-   existing MediaTek xHCI driver) is left out of this core and will come
-   back as a follow-up.
-
-Link to v1:
-https://lore.kernel.org/u-boot/20260825222211.712836-1-maskachoska@yahoo.com/
-
-AK Sharma (9):
-  mips: en75xx: add EcoNet/Airoha EN75xx SoC support
-  mips: en75xx: add TPL and SPL early boot stages
-  serial: en75xx: add EcoNet/Airoha EN75xx UART driver
-  spi: airoha-snfi: add EN75xx SPI-NAND controller support
-  net: airoha-eth: add EN7528 Ethernet support
-  mips: dts: add EcoNet EN75xx device trees
-  board: econet: add EN7512 reference board
-  board: econet: add EN7528 board support
-  doc: board: econet: add EN75xx documentation
-
- arch/mips/Kconfig                             |  29 +
- arch/mips/Makefile                            |   2 +
- arch/mips/cpu/start.S                         |   2 +
- arch/mips/dts/Makefile                        |   2 +
- .../dts/econet,en7512-reference-u-boot.dtsi   |  58 ++
- arch/mips/dts/econet,en7512-reference.dts     |  27 +
- arch/mips/dts/econet,en7512.dtsi              |  88 ++
- arch/mips/dts/econet,en7528-ram-u-boot.dtsi   |   6 +
- arch/mips/dts/econet,en7528-ram.dts           |  72 ++
- .../dts/econet,en7528-reference-u-boot.dtsi   |  62 ++
- arch/mips/dts/econet,en7528-reference.dts     |  25 +
- arch/mips/dts/econet,en7528.dtsi              | 154 ++++
- arch/mips/mach-en75xx/Kconfig                 | 100 +++
- arch/mips/mach-en75xx/Makefile                |  15 +
- arch/mips/mach-en75xx/cache.c                 |  85 ++
- arch/mips/mach-en75xx/cpu.c                   |  95 ++
- arch/mips/mach-en75xx/early_sfc.c             | 352 ++++++++
- arch/mips/mach-en75xx/include/mach/en75xx.h   | 103 +++
- arch/mips/mach-en75xx/spl/Makefile            |   2 +
- arch/mips/mach-en75xx/spl/spl.c               |  47 +
- arch/mips/mach-en75xx/tpl/Makefile            |   3 +
- arch/mips/mach-en75xx/tpl/start.S             | 101 +++
- arch/mips/mach-en75xx/tpl/tpl.c               | 158 ++++
- board/econet/en7512/MAINTAINERS               |   8 +
- board/econet/en7512/Makefile                  |   2 +
- board/econet/en7512/board.c                   |  34 +
- board/econet/en7528/MAINTAINERS               |  13 +
- board/econet/en7528/Makefile                  |   2 +
- board/econet/en7528/board.c                   |  37 +
- configs/en7512_reference_defconfig            |  90 ++
- configs/en7528_ram_defconfig                  |  43 +
- configs/en7528_reference_defconfig            |  38 +
- doc/board/econet/en7512.rst                   |  66 ++
- doc/board/econet/en7528.rst                   |  66 ++
- doc/board/econet/index.rst                    |  10 +
- doc/board/index.rst                           |   1 +
- drivers/net/Kconfig                           |   8 +-
- drivers/net/airoha_eth.c                      | 850 +++++++++++++++++-
- drivers/serial/Kconfig                        |   7 +
- drivers/serial/Makefile                       |   1 +
- drivers/serial/serial_en75xx.c                | 170 ++++
- drivers/spi/Kconfig                           |   3 +-
- drivers/spi/airoha_snfi_spi.c                 | 412 +++++++--
- include/configs/en7512.h                      |   8 +
- include/configs/en7528.h                      |   9 +
- 45 files changed, 3339 insertions(+), 127 deletions(-)
- create mode 100644 arch/mips/dts/econet,en7512-reference-u-boot.dtsi
- create mode 100644 arch/mips/dts/econet,en7512-reference.dts
- create mode 100644 arch/mips/dts/econet,en7512.dtsi
- create mode 100644 arch/mips/dts/econet,en7528-ram-u-boot.dtsi
- create mode 100644 arch/mips/dts/econet,en7528-ram.dts
- create mode 100644 arch/mips/dts/econet,en7528-reference-u-boot.dtsi
- create mode 100644 arch/mips/dts/econet,en7528-reference.dts
- create mode 100644 arch/mips/dts/econet,en7528.dtsi
+Signed-off-by: AK Sharma <maskachoska@yahoo.com>
+---
+ arch/mips/Kconfig                           |  29 ++++++
+ arch/mips/Makefile                          |   2 +
+ arch/mips/cpu/start.S                       |   2 +
+ arch/mips/mach-en75xx/Kconfig               | 100 +++++++++++++++++++
+ arch/mips/mach-en75xx/Makefile              |  15 +++
+ arch/mips/mach-en75xx/cache.c               |  85 ++++++++++++++++
+ arch/mips/mach-en75xx/cpu.c                 |  95 ++++++++++++++++++
+ arch/mips/mach-en75xx/include/mach/en75xx.h | 103 ++++++++++++++++++++
+ 8 files changed, 431 insertions(+)
  create mode 100644 arch/mips/mach-en75xx/Kconfig
  create mode 100644 arch/mips/mach-en75xx/Makefile
  create mode 100644 arch/mips/mach-en75xx/cache.c
  create mode 100644 arch/mips/mach-en75xx/cpu.c
- create mode 100644 arch/mips/mach-en75xx/early_sfc.c
  create mode 100644 arch/mips/mach-en75xx/include/mach/en75xx.h
- create mode 100644 arch/mips/mach-en75xx/spl/Makefile
- create mode 100644 arch/mips/mach-en75xx/spl/spl.c
- create mode 100644 arch/mips/mach-en75xx/tpl/Makefile
- create mode 100644 arch/mips/mach-en75xx/tpl/start.S
- create mode 100644 arch/mips/mach-en75xx/tpl/tpl.c
- create mode 100644 board/econet/en7512/MAINTAINERS
- create mode 100644 board/econet/en7512/Makefile
- create mode 100644 board/econet/en7512/board.c
- create mode 100644 board/econet/en7528/MAINTAINERS
- create mode 100644 board/econet/en7528/Makefile
- create mode 100644 board/econet/en7528/board.c
- create mode 100644 configs/en7512_reference_defconfig
- create mode 100644 configs/en7528_ram_defconfig
- create mode 100644 configs/en7528_reference_defconfig
- create mode 100644 doc/board/econet/en7512.rst
- create mode 100644 doc/board/econet/en7528.rst
- create mode 100644 doc/board/econet/index.rst
- create mode 100644 drivers/serial/serial_en75xx.c
- create mode 100644 include/configs/en7512.h
- create mode 100644 include/configs/en7528.h
 
+diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
+index 36612756..7f105d43 100644
+--- a/arch/mips/Kconfig
++++ b/arch/mips/Kconfig
+@@ -88,6 +88,26 @@ config ARCH_MTMIPS
+ 	select SUPPORT_LITTLE_ENDIAN
+ 	select SUPPORT_SPL
+ 
++config ARCH_EN75XX
++	bool "Support EcoNet/Airoha EN75xx MIPS platforms"
++	select HAS_FIXED_TIMER_FREQUENCY
++	select DM
++	select DM_SERIAL
++	select EN75XX_SERIAL
++	select OF_CONTROL
++	select ROM_EXCEPTION_VECTORS
++	select SUPPORT_BIG_ENDIAN
++	select SUPPORT_LITTLE_ENDIAN
++	select SUPPORTS_CPU_MIPS32_R2
++	select SUPPORT_SPL
++	select SPL_SKIP_LOWLEVEL_INIT if SPL
++	select SUPPORT_TPL
++	select SYS_CACHE_SHIFT_5
++	select MIPS_TUNE_34KC
++	help
++	  Support the EcoNet/Airoha EN75xx MIPS SoCs: the big-endian MIPS34Kc
++	  EN7512/EN7521 and the little-endian MIPS1004Kc EN7528.
++
+ config ARCH_JZ47XX
+ 	bool "Support Ingenic JZ47xx"
+ 	select SUPPORT_SPL
+@@ -201,6 +221,7 @@ source "arch/mips/mach-mscc/Kconfig"
+ source "arch/mips/mach-bmips/Kconfig"
+ source "arch/mips/mach-jz47xx/Kconfig"
+ source "arch/mips/mach-pic32/Kconfig"
++source "arch/mips/mach-en75xx/Kconfig"
+ source "arch/mips/mach-mtmips/Kconfig"
+ source "arch/mips/mach-octeon/Kconfig"
+ 
+@@ -322,6 +343,14 @@ config MIPS_MACH_EARLY_INIT
+ 	  and at this stage the PC might not match the linking address
+ 	  (CONFIG_TEXT_BASE) - no absolute jump done until this call.
+ 
++config MIPS_SKIP_CP0_COUNT_CLEAR
++	bool
++	help
++	  Do not clear the CP0 Count register (mtc0 zero, CP0_COUNT) at reset
++	  in arch/mips/cpu/start.S. On some SoCs the Count register is GIC/CM
++	  backed and that write stalls the CPU; such targets select this.
++	  Other MIPS targets keep the generic clear.
++
+ config MIPS_CACHE_SETUP
+ 	bool "Allow generic start code to initialize and setup caches"
+ 	default n if SKIP_LOWLEVEL_INIT
+diff --git a/arch/mips/Makefile b/arch/mips/Makefile
+index 453c7885..7c3976aa 100644
+--- a/arch/mips/Makefile
++++ b/arch/mips/Makefile
+@@ -9,6 +9,7 @@ endif
+ 
+ ifeq ($(CONFIG_TPL_BUILD),y)
+ head-$(CONFIG_SOC_MT7621) := arch/mips/mach-mtmips/mt7621/tpl/start.o
++head-$(CONFIG_ARCH_EN75XX) := arch/mips/mach-en75xx/tpl/start.o
+ endif
+ 
+ libs-y += arch/mips/cpu/
+@@ -16,6 +17,7 @@ libs-y += arch/mips/lib/
+ 
+ machine-$(CONFIG_ARCH_ATH79) += ath79
+ machine-$(CONFIG_ARCH_BMIPS) += bmips
++machine-$(CONFIG_ARCH_EN75XX) += en75xx
+ machine-$(CONFIG_ARCH_JZ47XX) += jz47xx
+ machine-$(CONFIG_MACH_PIC32) += pic32
+ machine-$(CONFIG_ARCH_MTMIPS) += mtmips
+diff --git a/arch/mips/cpu/start.S b/arch/mips/cpu/start.S
+index a95c95bc..48eb69b1 100644
+--- a/arch/mips/cpu/start.S
++++ b/arch/mips/cpu/start.S
+@@ -124,7 +124,9 @@ ENTRY(_start)
+ #endif
+ 
+ reset:
++#ifndef CONFIG_MIPS_SKIP_CP0_COUNT_CLEAR
+ 	mtc0	zero, CP0_COUNT	# clear cp0 count for most accurate boot timing
++#endif
+ #if __mips_isa_rev >= 6
+ 	mfc0	t0, CP0_CONFIG, 5
+ 	and	t0, t0, MIPS_CONF5_VP
+diff --git a/arch/mips/mach-en75xx/Kconfig b/arch/mips/mach-en75xx/Kconfig
+new file mode 100644
+index 00000000..d5371544
+--- /dev/null
++++ b/arch/mips/mach-en75xx/Kconfig
+@@ -0,0 +1,100 @@
++menu "EcoNet/Airoha EN75xx platforms"
++	depends on ARCH_EN75XX
++
++config SYS_VENDOR
++	default "econet"
++
++# Common SoC-identity flag selected by every EN7528 board (reference/RAM/...).
++config SOC_EN7528
++	bool
++	select MIPS_SKIP_CP0_COUNT_CLEAR
++
++config SYS_SOC
++	default "en7528" if SOC_EN7528
++	default "en7512"
++
++config SYS_BOARD
++	default "en7528" if SOC_EN7528
++	default "en7512"
++
++config SYS_CONFIG_NAME
++	default "en7528" if SOC_EN7528
++	default "en7512"
++
++config SYS_MALLOC_F_LEN
++	default 0x2000
++
++config SYS_DCACHE_SIZE
++	default 32768
++
++config SYS_DCACHE_LINE_SIZE
++	default 32
++
++config SYS_ICACHE_SIZE
++	default 32768
++
++config SYS_ICACHE_LINE_SIZE
++	default 32
++
++config TEXT_BASE
++	default 0x80020000 if BOARD_EN7528_RAM
++	default 0x81000000
++
++config SPL_TEXT_BASE
++	default 0x80010000
++
++config SPL_SIZE_LIMIT
++	default 0x30000
++
++config TPL_TEXT_BASE
++	default 0xbfc00000
++
++config TPL_MAX_SIZE
++	default 0x8000
++
++
++config BUILD_TARGET
++	default "u-boot.img" if BOARD_EN7512_REFERENCE
++	default "u-boot.bin" if BOARD_EN7528_REFERENCE
++	default "u-boot.bin" if BOARD_EN7528_RAM
++
++choice
++	prompt "EN75xx reference board"
++	default BOARD_EN7512_REFERENCE
++
++config BOARD_EN7512_REFERENCE
++	bool "EN7512/EN7521 reference board"
++	select BINMAN
++	select SPL_LOADER_SUPPORT if SPL
++	help
++	  Build a boot image compatible with the EN7512/EN7521 TCBoot flow.
++	  TPL initializes the serial flash controller, executes the legacy DDR
++	  calibration stage from FE SRAM and loads SPL into DDR.
++
++config BOARD_EN7528_REFERENCE
++	bool "EN7528 reference board (DASAN H660GM-A)"
++	select SOC_EN7528
++	select BINMAN
++	select SPL_LOADER_SUPPORT if SPL
++	help
++	  Build a boot image for the little-endian MIPS1004Kc EN7528. TPL brings
++	  up the SoC and runs the FE-SRAM DDR3 calibration stage (en7528_ddr.bin,
++	  extracted from the vendor bootloader) before loading SPL into DDR. The exact
++	  DDR-stage entry/handoff is validated over UART during bring-up; see
++	  doc/board/econet/en7528.rst.
++
++config BOARD_EN7528_RAM
++	bool "EN7528 RAM-boot (loaded by the stock bootbase at 0x80020000)"
++	select SOC_EN7528
++	help
++	  Build a standalone U-Boot proper (no TPL/SPL, no DDR blob) linked at
++	  0x80020000 to be RAM-loaded by the stock bootbase, which has already
++	  initialized DRAM. XMODEM it in from the bldr> prompt ("xmdm 80020000
++	  <len>") and run it with "jump 80020000". This is the non-destructive
++	  bring-up path that exercises the whole upper stack (console, DTS, DM,
++	  U-Boot proper) on real EN7528 silicon without needing the DDR stage.
++
++
++endchoice
++
++endmenu
+diff --git a/arch/mips/mach-en75xx/Makefile b/arch/mips/mach-en75xx/Makefile
+new file mode 100644
+index 00000000..8b9a418f
+--- /dev/null
++++ b/arch/mips/mach-en75xx/Makefile
+@@ -0,0 +1,15 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++ifeq ($(CONFIG_TPL_BUILD),y)
++obj-y += early_sfc.o
++obj-y += tpl/
++else
++obj-y += cpu.o
++ifeq ($(CONFIG_SPL_BUILD),y)
++obj-y += early_sfc.o
++obj-y += spl/
++else
++# U-Boot proper
++obj-y += cache.o
++endif
++endif
+diff --git a/arch/mips/mach-en75xx/cache.c b/arch/mips/mach-en75xx/cache.c
+new file mode 100644
+index 00000000..80f5e718
+--- /dev/null
++++ b/arch/mips/mach-en75xx/cache.c
+@@ -0,0 +1,85 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * EN75xx (EN7528) cache and Linux-handoff helpers.
++ *
++ * The CM L2 on this part hangs on Hit_Writeback_Inv_SD (cache op 0x17).
++ * Override the generic MIPS flush routines so they never issue that op,
++ * decompress kernels through KSEG1, and join the CM coherent domain
++ * before jumping to Linux.
++ */
++
++#include <cpu_func.h>
++#include <image.h>
++#include <stdio.h>
++#include <asm/addrspace.h>
++#include <asm/cache.h>
++#include <asm/cacheops.h>
++#include <asm/io.h>
++#include <asm/mipsregs.h>
++#include <asm/system.h>
++#include <mach/en75xx.h>
++
++#define EN75XX_L1_LINE	32
++#define EN75XX_L2_LINE	32
++#define EN75XX_GCR_CL_COHERENCE	0x2008
++
++#define cache_loop(start, end, lsize, op) do {				\
++	const void *_addr = (const void *)((start) & ~((lsize) - 1));	\
++	const void *_aend = (const void *)(((end) - 1) & ~((lsize) - 1)); \
++	if (!(lsize) || (start) == (end))				\
++		break;							\
++	for (; _addr <= _aend; _addr += (lsize))			\
++		mips_cache((op), _addr);				\
++} while (0)
++
++void flush_cache(ulong start_addr, ulong size)
++{
++	if (!size)
++		return;
++
++	/*
++	 * Write back L1 D so U-Boot's own cached stores reach DRAM.
++	 * Do not Hit_Writeback_Inv_SD (hangs). Do not invent an L2 line
++	 * size here: Hit_Invalidate_SD on U-Boot's working set during
++	 * DM init fails.
++	 */
++	cache_loop(start_addr, start_addr + size, EN75XX_L1_LINE,
++		   HIT_WRITEBACK_INV_D);
++	cache_loop(start_addr, start_addr + size, EN75XX_L1_LINE,
++		   HIT_INVALIDATE_I);
++	sync();
++	instruction_hazard_barrier();
++}
++
++void flush_dcache_range(ulong start_addr, ulong stop)
++{
++	if (start_addr == stop)
++		return;
++
++	cache_loop(start_addr, stop, EN75XX_L1_LINE, HIT_WRITEBACK_INV_D);
++	sync();
++}
++
++void en75xx_prepare_linux(void)
++{
++	unsigned long cmgcr, cm;
++
++	/* Airoha WDT — same block as EN75XX_TIMER_BASE. */
++	writel(0, (void __iomem *)EN75XX_WDT_CTRL);
++
++	/*
++	 * mips_cm_map() never writes GCR_CL_COHERENCE, so the boot core is
++	 * out of the coherent domain and a CM/CPS kernel's vector fetches
++	 * go stale. Same join as arch/mips/mach-mtmips/mt7621.
++	 */
++	cmgcr = read_c0_cmgcrbase();
++	cm = ((unsigned long)cmgcr << 4) + CKSEG1;
++	writel(0xff, (void __iomem *)(cm + EN75XX_GCR_CL_COHERENCE));
++	instruction_hazard_barrier();
++	printf("## EN75xx: WDT off, CM COHERENCE=0xff GCR@%08lx\n", cm);
++}
++
++void arch_preboot_os(void)
++{
++	en75xx_prepare_linux();
++}
+diff --git a/arch/mips/mach-en75xx/cpu.c b/arch/mips/mach-en75xx/cpu.c
+new file mode 100644
+index 00000000..ae1d627b
+--- /dev/null
++++ b/arch/mips/mach-en75xx/cpu.c
+@@ -0,0 +1,95 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include <init.h>
++#include <asm/global_data.h>
++#include <asm/io.h>
++#include <linux/sizes.h>
++#include <mach/en75xx.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++int dram_init(void)
++{
++	/*
++	 * The DDR stage (blob, or the stock bootbase on the chainload path)
++	 * publishes the DRAM size in REG_SAVE_INFO. EN7528: MB in bits [31:20]
++	 * (for example, 0x20038400 => 512 MiB).
++	 */
++	u32 val = __raw_readl((void __iomem *)EN75XX_REG_SAVE_INFO);
++	u32 size_mb = (val >> EN75XX_SAVE_DRAM_SHIFT) & EN75XX_SAVE_DRAM_MASK;
++
++	/*
++	 * Some bootbases do not publish a valid DRAM size in REG_SAVE_INFO
++	 * (the field reads back implausibly small). Fall back to sizing the
++	 * DRAM at runtime in that case, probing through the uncached KSEG1
++	 * alias to avoid cache-aliasing false positives and capping the scan
++	 * at 256 MiB to stay clear of the SoC register island at 0x1fa00000.
++	 */
++	if (size_mb < 64)
++		gd->ram_size = get_ram_size((long *)0xa0000000, SZ_256M);
++	else
++		gd->ram_size = (phys_size_t)size_mb << 20;
++
++	return 0;
++}
++
++int print_cpuinfo(void)
++{
++	u32 val = __raw_readl((void __iomem *)EN75XX_REG_SAVE_INFO);
++	u32 clk = (val >> EN75XX_SAVE_CLK_SHIFT) & EN75XX_SAVE_CLK_MASK;
++
++#if defined(CONFIG_SOC_EN7528)
++	printf("CPU:   EcoNet/Airoha EN7528 MIPS1004Kc\n");
++#else
++	printf("CPU:   EcoNet/Airoha EN7512/EN7521 MIPS34K\n");
++#endif
++	if (clk)
++		printf("Clock: %u MHz\n", clk);
++	else
++		printf("Clock: unknown\n");
++
++	return 0;
++}
++
++ulong notrace get_tbclk(void)
++{
++	u32 val = __raw_readl((void __iomem *)EN75XX_REG_SAVE_INFO);
++	u32 clk = (val >> EN75XX_SAVE_CLK_SHIFT) & EN75XX_SAVE_CLK_MASK;
++
++	/*
++	 * CP0 Count rate per SoC: EN7528 = clk_field * 2 MHz (hardware-measured
++	 * via sleep timing), EN7512 = clk_field / 2. See EN75XX_COUNT_HZ_PER_CLK.
++	 */
++	if (clk)
++		return (ulong)clk * EN75XX_COUNT_HZ_PER_CLK;
++
++	return CONFIG_SYS_MIPS_TIMER_FREQ;
++}
++
++phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
++{
++	/*
++	 * DRAM is aliased into KSEG0 at 0x80000000, but KSEG0 ends at
++	 * 0x9fffffff and the SoC MMIO / FE-SRAM island sits at phys 0x1fa00000
++	 * (= KSEG0 0x9fa00000). On a 512 MiB part, ram_base + size = 0xa0000000
++	 * would relocate U-Boot past KSEG0 / into the island and hang. Relocating
++	 * into high DRAM (0x9exxxxxx) also hangs on this SoC (cache-flush over the
++	 * large range / unstable high DRAM). U-Boot gains nothing from a high top,
++	 * so clamp to the proven-good 0x90000000 (256 MiB); Linux still gets the
++	 * full DRAM via the /memory DT node.
++	 */
++	phys_addr_t top = 0x80000000UL + gd->ram_size;
++
++	if (top > 0x90000000UL)
++		top = 0x90000000UL;
++
++	return top;
++}
++
++void _machine_restart(void)
++{
++	__raw_writel(0x80000000, (void __iomem *)EN75XX_RESET_CONTROL);
++
++	for (;;)
++		;
++}
+diff --git a/arch/mips/mach-en75xx/include/mach/en75xx.h b/arch/mips/mach-en75xx/include/mach/en75xx.h
+new file mode 100644
+index 00000000..a42e304b
+--- /dev/null
++++ b/arch/mips/mach-en75xx/include/mach/en75xx.h
+@@ -0,0 +1,103 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Generic register map for the EcoNet/Airoha EN75xx MIPS SoCs.
++ *
++ * The EN7512/EN7521 (MIPS 34Kc, big-endian) and the EN7528 (MIPS 1004Kc,
++ * little-endian) share the same TCBoot-derived boot model and almost the
++ * same peripheral register map. Values that differ between the two are
++ * selected here on CONFIG_SOC_EN7528.
++ */
++#ifndef __MACH_EN75XX_H__
++#define __MACH_EN75XX_H__
++
++/* --- Peripheral bases (identical across the family) --- */
++#define EN75XX_FLASH_BASE		0xbfc00000
++#define EN75XX_SFC_BASE			0xbfa10000
++#define EN75XX_CHIP_SCU_BASE		0xbfa20000
++#define EN75XX_FE_SRAM_BASE		0xbfa30000
++#define EN75XX_FE_SRAM_CACHED		0x9fa30000
++#define EN75XX_SYSCTL_BASE		0xbfb00000
++#define EN75XX_SMC_BASE			0xbfb10000
++#define EN75XX_DRAMC_BASE		0xbfb20000
++#define EN75XX_INTC_BASE		0xbfb40000
++#define EN75XX_UART0_BASE		0xbfbf0000
++#define EN75XX_TIMER_BASE		0xbfbf0100
++#define EN75XX_WDT_CTRL			0xbfbf0100	/* airoha WDT; writel(0) stops it */
++#define EN75XX_GPIO_BASE		0xbfbf0200
++
++/* --- SYSCTL scratch/handoff registers (identical) --- */
++#define EN75XX_RESET_CONTROL		(EN75XX_SYSCTL_BASE + 0x040)
++#define EN75XX_FE_SRAM_SEL		(EN75XX_SYSCTL_BASE + 0x958)
++#define EN75XX_SCREG_WR0		(EN75XX_SYSCTL_BASE + 0x280)
++#define EN75XX_REG_SAVE_INFO		(EN75XX_SYSCTL_BASE + 0x284)
++
++/* --- Flash image layout: DDR blob offset is common; SPL/U-Boot offsets
++ *     differ because the EN7528 DDR blob is much larger (see below). --- */
++#define EN75XX_DDR_BLOB_OFFSET		0x00008000
++
++/* --- DRAM-size / clock info in REG_SAVE_INFO (0xbfb00284).
++ *     Field positions differ per SoC - see the EN7528/EN7512 blocks below.
++ *     Read as: (val >> _SHIFT) & _MASK. --- */
++
++#if defined(CONFIG_SOC_EN7528)
++/*
++ * EN7528 (MIPS 1004Kc, little-endian).
++ *
++ * The DDR stage (en7528_ddr.bin, extracted from the vendor
++ * bootloader) is the full FE-SRAM first stage: it self-inits SoC registers,
++ * calibrates DDR3 and hands control back via *(EN75XX_SCREG_WR0). It is
++ * loaded at the FE-SRAM base 0x9fa30000 (NOT +0x2800 like EN7512) and is
++ * 0x5a70 bytes.
++ *
++ * NOTE (hardware bring-up): the blob's own entry word is `j 0xbfc00060`,
++ * i.e. it is a plain subroutine: entry 0x9fa30000 = NOP pad -> stub @+0x290
++ * -> main(), and one jalr *(SCREG_WR0) hands control back to us.
++ * The exact entry/handoff must be validated over UART — see
++ * doc/board/econet/en7528.rst. The constants below build a coherent
++ * image and are the starting point for that bring-up.
++ */
++#define EN75XX_DDR_BLOB_ADDR		(EN75XX_FE_SRAM_CACHED + 0x0000)
++#define EN75XX_DDR_BLOB_SIZE		0x00005a70
++/* The 0xf0a0-byte blob at flash 0x8000 ends at 0x170a0, so SPL starts at
++ * 0x20000 (EN7512 could use 0x10000 with its 0x4f70 blob). */
++#define EN75XX_SPL_IMAGE_OFFSET		0x00020000
++#define EN75XX_UBOOT_IMAGE_OFFSET	0x00050000
++/* Keep TPL scratch clear of the (large) EN7528 blob image. */
++#define EN75XX_SPL_HEADER_ADDR		(EN75XX_FE_SRAM_BASE + 0x0f000)
++#define EN75XX_TPL_STACK_ADDR		(EN75XX_FE_SRAM_BASE + 0x0fff0)
++#define EN75XX_TPL_SAVED_RA		(EN75XX_FE_SRAM_BASE + 0x0ff00)
++#define EN75XX_SAVE_DRAM_SHIFT		20
++#define EN75XX_SAVE_DRAM_MASK		0xfff		/* MB, bits [31:20] */
++#define EN75XX_SAVE_CLK_SHIFT		10
++#define EN75XX_SAVE_CLK_MASK		0x3ff		/* MHz, bits [19:10] */
++#define EN75XX_COUNT_HZ_PER_CLK	2000000	/* CP0 Count = clk_field * 2 MHz (measured) */
++#else
++/*
++ * EN7512/EN7521 (MIPS 34Kc, big-endian). The vendor spram DDR-only stage
++ * is linked for and entered at 0x9fa32800 and is 0x4f70 bytes.
++ */
++#define EN75XX_DDR_BLOB_ADDR		(EN75XX_FE_SRAM_CACHED + 0x2800)
++#define EN75XX_DDR_BLOB_SIZE		0x00004f70
++#define EN75XX_SPL_IMAGE_OFFSET		0x00010000
++#define EN75XX_UBOOT_IMAGE_OFFSET	0x00050000
++#define EN75XX_SPL_HEADER_ADDR		(EN75XX_FE_SRAM_BASE + 0x40)
++#define EN75XX_TPL_STACK_ADDR		(EN75XX_FE_SRAM_BASE + 0xbff0)
++#define EN75XX_TPL_SAVED_RA		(EN75XX_FE_SRAM_BASE + 0x00)
++#define EN75XX_SAVE_DRAM_SHIFT		0
++#define EN75XX_SAVE_DRAM_MASK		0xfff		/* MB, bits [11:0] */
++#define EN75XX_SAVE_CLK_SHIFT		12
++#define EN75XX_SAVE_CLK_MASK		0xfff		/* MHz, bits [23:12] */
++#define EN75XX_COUNT_HZ_PER_CLK	500000
++#endif
++
++#ifndef __ASSEMBLY__
++#include <stddef.h>
++#include <linux/types.h>
++
++int en75xx_sfc_read(u32 offset, void *dst, size_t len);
++int en75xx_sfc_init(void);
++void en75xx_run_ddr_blob(void);
++void en75xx_prepare_linux(void);
++#endif
++
++#endif /* __MACH_EN75XX_H__ */
 -- 
 2.53.0
 
