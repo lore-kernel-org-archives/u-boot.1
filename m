@@ -1,133 +1,136 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D590C5DF9D
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 08:15:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CEDC5DF9D
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 08:22:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E8A9D406C0;
-	Thu, 27 Aug 2026 08:15:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C618B80851;
+	Thu, 27 Aug 2026 08:22:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tKx1zrnTDGVr; Thu, 27 Aug 2026 08:15:32 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id e9pnh2QIKCXj; Thu, 27 Aug 2026 08:22:08 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787818532;
-	bh=WYv6CeDPlGiGWWGEZnocBYIwLFqV6uk291juYKGhVLQ=;
+	d=lists.u-boot-project.org; s=default; t=1787818928;
+	bh=oXzOItiWco7Dy8z+uypH5SP6Fi7BWC4EcCTEZWTx6xg=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=LnqywtyK82CIxPa6Ww8IyrEWi9z5STpxjUlJHn/IG4WzhERtZvn+GvgkFgntX5lgS
-	 ax0ez+NixTePecEvtAZdWyRZOTuc5H6uHwIe6oJ4579FLsluzoVhCSzVylLMBnnmEm
-	 Jef2/izAKExON+FpuLo5H72kunyN6WLuR2Rq981mrPKI9stWzsgkFcm5nLq7fFY/th
-	 F19ZKAz9St615LtVgZsAWKCK3sz8KT0azrF3wN4PZU86EPXNSYJaYLaUHsSnyyavBC
-	 Um60iDTqWDQ7g//lhKIjqu0mFqujMG/48kNlGDKVGHOMKB0kgAq9xw/x9wl8mfSvVv
-	 cSwDbzkNNa1uA==
+	b=qPjUNkrDuMYnDUSzAzIYOMTeo8F61WddgL+E9ULJuP1tXFCngwByaUKH9mR2qNI6U
+	 sIRJYNdj9leHuIQzu4JHWYDn/mS9PA4v+l6NACnF2UrHSJAaode2WjG7bOlGEKSCrq
+	 NaBS+Vt3esNy+VwTEUVXLVFzgen462md9yc2SIdOekd0/7GSh9p/rnZbx3ElQO0eX1
+	 9JPoJftre3RmFVYMC+Y5qh2XrZKwy97hMNmRDIRLddTLa6qaL/M1UBiYcnuXVyKkCx
+	 ztwzsDcRViXW0gS59eoqUNwb/aYT/RJ++f1V6d02fHXqq55fRLbeh9XTCj8Fyc7hPb
+	 HUOCtizXOwm3A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5A3934069A;
-	Thu, 27 Aug 2026 08:15:32 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id DE0037AA
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:15:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BAF348083F;
+	Thu, 27 Aug 2026 08:22:08 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id A310C7AA
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:22:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BF55E4027C
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:15:30 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8370E60765
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:22:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Yaktg4JpbbSK for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 08:15:30 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id q2uOee4ffVxU for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 08:22:06 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::632; helo=mail-ej1-x632.google.com;
+ client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=rUPZcIM0
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D7FB4402C5
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:15:29 +0000 (UTC)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-c15d3cd51b2so293830666b.3
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 01:15:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787818527; cv=none;
+ header.s=google header.b=e/IjvvPA
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4A5FC60661
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:22:05 +0000 (UTC)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-c25344a8c6cso126486566b.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 01:22:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787818923; cv=none;
  d=google.com; s=arc-20260327;
- b=ZrUa/wOlSVQo93pmH5xzQdVxw85pSwB4fMRM6oI5WGb2DICPyw8igQXFSV1Em+Zl5h
- egFERs/2p9QcAgZ5RCsLQ/Qfqh+Ith9n8yweJryg9mSM+iCZSau4ExNy0ILijlIZy4iL
- NZYAvPWBkNrhOY0WpuArU1xgNHDPIVCrXt4wZJWO+jmlOll4p7U2BQ0M8UeoO4xaCt7o
- LpgFxdjP4xejvh0vhcdNBkunFJqSKsPsLqErlRlGPWBWwqJPJlOZ9Fm4CTzgjzyIVoNb
- 0X0O1W3S/+kcjvB7G/7GN6LfAWGUQi4QCTw+4Gf2rK7kMYRKqqHoB8/JR6QoPPISj28/
- Vn5Q==
+ b=oFx5adyg+XviA1Gu8KWTUaa4pRBLA3BvYvQXwwn090koZ5XnZHIGVClOpiq324hWSS
+ eYL2bScKApc/HRRlQnEBIIe9opTghjO7CD3y7tHnkkMnmUO2ClYYuchHJ5I1CI3T8M5K
+ 8uzu8qjygMgBohInc3M7FYOQvkrvkLx+kBxHQudSO+jqGErw3Rjq/EFkamfqRMesQjRi
+ LYDVyh7fQy7Ez42NjF0Q2jP/MxatDH1g5n4GyUzGYrmTXHJePGPDZB0j/UJFc/R+GZOh
+ HYt6PWsyOlSKEndyIpfhZtWb73ivHXX+9M8D8m/8+qoSNgr3Zoeyq0ofL0+P3zP9w1HD
+ Swxw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=WYv6CeDPlGiGWWGEZnocBYIwLFqV6uk291juYKGhVLQ=;
- fh=j//M4a/wx93vMKVQEAxvjggxlisEMeBn+vVvx9MVDeI=;
- b=ILsPHE4sKJ9Z0LBk5y27MsozXeNx8LFOKu2rAVbqRNX5w9QRkDc0OjTP9EP6yq7LFg
- iMFyKJNNihFWIk54fR/CEhV9PqWUwlcoozGYTdPk58Hn8WdinOZ26UkNsRxkNRwaO5Xw
- 80bm7A7IFufsUQYdN0KH/j0AdCDutUQZU/gPfXk92Zl8j7Y7u+yCWNpM07vtPD2vTVed
- kpib59l98Q7I1IY2In3CflWNYAPEhXtqHCm713Udl4kS+CN2eHLO499g/KIXzkBWMwUZ
- aWvo1cy/wmYobNu0FrMgi5R6aEV3UQAZzOhBD28iIhj8slMpK9DiOecxy3PjFsgjPk1V
- +QEg==; darn=lists.u-boot-project.org
+ bh=oXzOItiWco7Dy8z+uypH5SP6Fi7BWC4EcCTEZWTx6xg=;
+ fh=1qVgzqnnOEG6PkzGvKPeeKqgsBl4RE23x2HfQkQau/4=;
+ b=F0mqFWj+veOnpW5xh/ZfAIbpAS/0l4CyWUkO2BzHkCXMqocyT+h0qvmJbUdsyQI3A1
+ tnEUinxATmyS1bg80t7RMxln+uYTFWw8Y/uvbItSyWKpeJvv3RByhNfzBSp2b6v9JXKb
+ ZtjSJ54K/kAo6I1JBBYUsk0chOLuog6/gRRerObwDuu734Hj1tbzUQ8BOwW4oKuJ9Zv0
+ WqVaVepqu1WUeu67/8/gtbuFQyUOLtUwW+j2rFL+dIUJ1ZnxCssj8M1m+CEYP/51MKjC
+ kCmvG9Cka6WCHg/mA/npgVgmE1Kl3SY74E76fHlqeuouY5kr5OrWyNZsjGkHIAsXaTYe
+ XAxQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1787818527; x=1788423327;
+ d=flipper.net; s=google; t=1787818923; x=1788423723;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=WYv6CeDPlGiGWWGEZnocBYIwLFqV6uk291juYKGhVLQ=;
- b=rUPZcIM0KdSRVMg5+haRPc+J9ON07XaQ6ya56zKb2LRCqH91Po5smH0fv2ybAyCHXM
- 4UZ3rPF41wNBZbvgMDpvf3u1AzrDqfjomlGXAOdxDjfIOq8n4x1MwM7oDf5kG6wxyGFH
- 2FDqz4Qfm+kXe6Lw+17z4cL2Ded/0JDx5xFEAVwojA08Y/aKWMruPmFYzyzKfAYgM1HZ
- SR58mNyUrqZaA/+NcBkA9tRDJbnazHKW2eYe/sH+lZBB37MXKp9Y84AahYAtb1BHQ4r9
- 58gBcxaxNpkxIm+hKWGQGupF96kMZeDRR2YfhVjfG6l4+hxP0Emd2x7NSpG407wlQgTs
- dpUQ==
+ bh=oXzOItiWco7Dy8z+uypH5SP6Fi7BWC4EcCTEZWTx6xg=;
+ b=e/IjvvPAadIzcixLth1ZAAey1SN5sLg280YCOkfodUHu8iWF7qQW+Lav1T2W3o0vrr
+ cFmNYwD5OPi+V6uI/AqArXhgMqNsiIvbi4REULCR/R4E5/SLtQaQHI7b1O6ctYF0s1P1
+ gMXR/j740m1kQS2ZZdsEQ73JlcM8MbLrPpcQoRAVj63QeCABpmBsdvoNOYkYE5bRuAIa
+ UNGbXL+vy/aX+VsnkxXA9AOAMSiOwGAarcnzpkf+gJiy8hY0HbG8p4dw6nDimCmpwLLU
+ KsnrxTQPxu/XUYHLJdFzK6DnpBL3zM4nyiXo9FHIgLYTZ7tUQGp7mFd39e/9j5iIEXMt
+ nHIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787818527; x=1788423327;
+ d=1e100.net; s=20251104; t=1787818923; x=1788423723;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=WYv6CeDPlGiGWWGEZnocBYIwLFqV6uk291juYKGhVLQ=;
- b=AHhlWhes+GbH8n+iXrw/FfejgWNcM4fTW22uehUE+vgtuyDLaXK0SKNTFoRORk0/8u
- ny+MbZZTUrJHubVUPaoaI0Hkg5kVpXdoIhK6Sq6CmFXobGEWQOJSWUbyYtXawDur2huP
- 9MkPMzCkAyDhRyS0XrUQIoD5tWIOykqiAADlifLpLRPmElF23r7c8fZDG4rRw074amxH
- gKIcyPiYW8fVEA3UAQ8MRAhaKEwQfvtNn/opA2fREFGSj/3FllLMgJH3XvCseOawQYvD
- mB5rsBJNs9Eb4SnegjRcnsuwDA5CZrAXd/tLBoLPx7Y0j6dXOAkFEmwB3bz7Q/UsKR+d
- yRgw==
+ bh=oXzOItiWco7Dy8z+uypH5SP6Fi7BWC4EcCTEZWTx6xg=;
+ b=fc+y5maBTBGLSwhhyX693TdJ2YsnPEmJ4znogTULlI0QiNd3RpbDEGEHpZtDNu3u5w
+ CRWxMsINggIlkv8qfi83gYJuiurqKvyM5MThouyDMP0MZIAf5V+zJQ9k1/1/igpw+xTA
+ 5TI24sU3ep4hJw7REBZ+X9eiFzIj+hTDM3KR8Gp2mR1k+uMZzpwebD5CJmrQtBlhWufD
+ /CzNJgUxP5Vc7/5VZPzqfX1x0B3LI5/vJFLjsF5xHuzZDgXaeBI/QTC7NMg3hdGpi5TU
+ VzKSexciUC5wUWnPZEGHJrR3g3hm+Q9d08+0NFW+rL6n/F2PXBAenx0qBsG6WrK5o+a0
+ MGRw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrG01/sYfhsVmPDcwgoDNDDuCSzTycNeC4a7fVxkWrHZStkc1rptIYsLEaHSgs//Fsyk1Z20WU=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lBba4UEmCsLybhZkw7KXHtTqcLm/2+te/XICRKuovyc1kNX5sw
- adilsQtBEU2TmeGj6DzoAyDrgtZ45MdiCYbKWbtTx/yr0trQ/TeOtVZaNiFiqXW9/qQG/Lc2uj5
- MY2QMRha50bErTaNOyrxj8I2/DPEjbqoFoNsznBF8vA==
-X-Gm-Gg: AR+sD10h2rm63Y8EtrTG5jXl4uqBu3h+N7NlH7PEdoBrCUsYZAVBohR7KaZnc03iA6i
- JbaMbEP+R6NL5B+4DeZbIfLoKp0cxwGlk5Od0JINEMO22EEpNqzgoTkRkcbmO9yDzV9AjkcI01q
- zoLDqRsT+qsIu4y1+RcLir++FUpJcuv2vu4SFWmVV2HQ0k/k7Bskbg6oNRnaT7wZxZZIyFgudgo
- LQ9cz+S7C5BbeAG5JexVgq2crzsI7pwZ9pFOE0WgxcRbCGTZanUki+jYSoaomaplrnDtfCOAfsv
- Ph/bnYX6V1wHDWVJOhP5/dSiyrrVjvlfIZL5XD9WoxWjMhCE4xjZnw+FCR8ItYrkN4fslkK1Nj4
- Xog==
-X-Received: by 2002:a17:907:c8c6:b0:c24:6985:d7a1 with SMTP id
- a640c23a62f3a-c250bbcdcb2mr1441731566b.7.1787818527161; Thu, 27 Aug 2026
- 01:15:27 -0700 (PDT)
+ AHgh+RoFhThHiMRqnNy4ybmukU49jSZGu/FpTHZdi9IzjBksDVlLyXUWTkl49Z/qVlo7myPQ/Mg+sPQ=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mdS/tDBLkZn+gGkN9BpZJsgJuiZkMb38fBLG/i+8T83PXAxUkO
+ /tTQDXkp3tHhJL73y27Vj8H2mU9H5awIGxe0uXN0cyGBEravg9Xz+PkJp02GBYXrLEle+ZpE9bF
+ eYLGT5e3lDwKtaDRLG4J9Bf0i/dRLs8FMz9m7mTCEbg==
+X-Gm-Gg: AR+sD133w6HC2igd4dxIEKQMPb8IY6TYp2HPxrqoh7k5BEXBP37Hq6qQkzaBk55KO3+
+ I92MCULmNbtAqzfxcYn9EZQD/NxaU7YapL5x9mLcnhZj5lxg4MVBeOyrdpHDu8i2EaEQJx8VnWg
+ EdmqlD4q9lOVDZOqtFJpCZ9G22pFlNKu6WARwhLsFZm1LTD0WNwOP3pojyQOL+C26mH39Go8qlg
+ mGhAAndjOu0OPVKuVnxdKDBBHaifslvr2C10raFH8RB3RUw5Ko6hXnY6/7Z88jSymCFYS0yeuV+
+ Z6Yk2ZYA5g+3XMGWWWMppHxthy7vu8CfQYTSan26pkT/A9MGHfPgY6OAVGOxtXMiqsfYurROQMZ
+ J
+X-Received: by 2002:a17:907:ea7:b0:c24:cc3c:db11 with SMTP id
+ a640c23a62f3a-c250c362e7cmr1327614366b.21.1787818923460; Thu, 27 Aug 2026
+ 01:22:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
- <20260731-gpt-4k-v1-2-a3f1f16b53ae@flipper.net>
- <e71a191a-1388-461d-bc87-9131e1a4879f@canonical.com>
-In-Reply-To: <e71a191a-1388-461d-bc87-9131e1a4879f@canonical.com>
+ <20260731-gpt-4k-v1-3-a3f1f16b53ae@flipper.net>
+ <cb50976b-917f-4843-8b0d-dc2a32e59d65@canonical.com>
+ <20260825194528.GB523975@bill-the-cat>
+In-Reply-To: <20260825194528.GB523975@bill-the-cat>
 From: Alexey Charkov <alchark@flipper.net>
-Date: Thu, 27 Aug 2026 12:15:19 +0400
-X-Gm-Features: AcwNN1X6T1Z6MwrX81RVAbvu5Ly7UesVZX86936fh0xv7syBZTYIIT6gaReEkJk
-Message-ID: <CAKTNdwFebx34Bvz+Tpj=ay-uK7s6f=qcRXTgCpb=bRczw9x9KA@mail.gmail.com>
-Subject: Re: [PATCH 2/6] disk: part_efi: Add missing endianness conversions
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Anton Burticica <mouse@ya.ru>, 
+Date: Thu, 27 Aug 2026 12:21:55 +0400
+X-Gm-Features: AcwNN1XSy6OfeU3zPR-kCW1kXcZD5AIJbjiryyzb2VXrTNmf46xg_rZlE3mzcWc
+Message-ID: <CAKTNdwGJfC=11vdSzL1wbE5WTF=4S6HS+DYMzJqYEQxD6kThGw@mail.gmail.com>
+Subject: Re: [PATCH 3/6] disk: part_mac: Fix stack corruption on devices with
+ large blocks
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Anton Burticica <mouse@ya.ru>, 
  Javier Martinez Canillas <javierm@redhat.com>, Simon Glass <sjg@chromium.org>, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Andre Przywara <andre.przywara@arm.com>,
@@ -154,44 +157,78 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hello Heinrich,
+Hello Heinrich, Tom,
 
-On Tue, Aug 25, 2026 at 11:03=E2=80=AFPM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Tue, Aug 25, 2026 at 11:45=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
 >
-> On 7/31/26 14:40, Alexey Charkov wrote:
-> > Several GPT header fields are read without converting from
-> > little-endian, which is wrong on big-endian hosts.
+> On Tue, Aug 25, 2026 at 09:37:43PM +0200, Heinrich Schuchardt wrote:
+> > On 7/31/26 14:40, Alexey Charkov wrote:
+> > > part_test_mac(), part_print_mac() and part_get_info_mac() each declar=
+e a
+> > > single-block buffer sized after the descriptor struct:
+> > >
+> > >     ALLOC_CACHE_ALIGN_BUFFER(mac_driver_desc_t, ddesc, 1);
+> > >     ALLOC_CACHE_ALIGN_BUFFER(mac_partition_t, mpart, 1);
+> > >
+> > > Both structs are 512 bytes, but every blk_dread() below them asks for=
+ one
+> > > block, which transfers desc->blksz bytes. On a device with 4096-byte
+> > > logical blocks that writes 4096 bytes into a 512-byte on-stack buffer=
+ and
+> > > corrupts the stack.
+> > >
+> > > part_test_mac() runs on every block device during partition probing, =
+so on
+> > > sandbox with CONFIG_MAC_PARTITION=3Dy this crashes on any access at a=
+ll to a
+> > > device with large blocks, for instance:
+> > >
+> > >     host bind 0 disk.img 4096
+> > >     part list host 0
+> > >
+> > > Pad the buffers out to the block size with ALLOC_CACHE_ALIGN_BUFFER_P=
+AD(),
+> > > which is what part_efi.c already does for its own block buffers.
+> > >
+> > > Signed-off-by: Alexey Charkov <alchark@flipper.net>
 > >
-> > gpt_fill_pte() takes my_lba and partition_entry_lba raw when working ou=
-t
-> > the region a partition must not overlap, so on a big-endian host both
-> > bounds are byte-swapped garbage and the overlap check does not do
-> > anything useful.
+> > Modern Apple Computers use GPT partition tables.
 > >
-> > gpt_verify_partitions() compares the loop counter against
-> > num_partition_entries raw, so its "More partitions than allowed!" guard
-> > never triggers.
+> > Gemini claims:
 > >
-> > It also swaps gpt_part_size, which is already in host order, having bee=
-n
-> > computed from two le64_to_cpu() results a few lines above. Drop the
-> > conversion rather than adding one.
+> > Because APM was functionally obsolete by the time Advanced Format (4Kn)
+> > drives emerged in the 2010s, Apple never updated the specification to
+> > establish official compatibility guidelines for native 4 KiB sectors.
 > >
-> > All of this is a no-op on little-endian targets.
+> > If Apple has not defined how to treat 4 KiB sectors, we should not try =
+to
+> > invent a scheme.
 > >
-> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> > Apple has already deleted the documentation of this outdated partition =
+table
+> > format (http://developer.apple.com/techpubs/mac/Devices/Devices-126.htm=
+l)
+> >
+> > My preference would be to remove this driver completely.
 >
-> This change is not covered by the test in patch 6/6 as it runs only on
-> the sandbox.
->
-> Please, ensure that the GPT tests are also executed on a big-endian
-> systems, e.g malta64_defconfig which run in the CI via QEMU.
->
-> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Yes, this is another case where we can just drop the driver and if
+> someone *needs* this for something, likely emulated, they can bring it
+> back.
 
-I've added malta64 based tests in my WIP v2 version and caught more of
-the same :) Thanks for the suggestion!
+I've sent a separate patch [1] removing the driver altogether, which
+Heinrich has reviewed already. That one is against next though, and I
+believe these fixes would be great to have in main, so I'd rather keep
+this patch in the series for 2026.10. There will be a "change vs.
+remove" merge conflict when main is merged into next which will need
+to be resolved in favor of the removal. The upside is that tests don't
+keep crashing wherever a Mac partition table is probed for with a 4Kn
+storage device.
+
+Does that sound fine?
+
+[1] https://lore.kernel.org/u-boot/20260827-drop-part-mac-v1-1-c81ede492be7=
+@flipper.net/
 
 Best regards,
 Alexey
