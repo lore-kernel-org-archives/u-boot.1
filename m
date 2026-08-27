@@ -1,120 +1,179 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ED85C61DC2
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 13:30:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D854C61DC4
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 13:35:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E5B2C6079B;
-	Thu, 27 Aug 2026 13:30:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 165F4808A8;
+	Thu, 27 Aug 2026 13:35:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9yVVi6x24epP; Thu, 27 Aug 2026 13:30:34 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jNny-dMjK53a; Thu, 27 Aug 2026 13:35:15 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787837434;
-	bh=lmwE5Q+XeaCbgVe3oF/lvIN3X3AktY5mGh0UqJGUrMQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787837715;
+	bh=OdJFmGh7Am/7Jv0z/iBAHxVmnUBAGioeL/O6fyFvAnY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YbROU0JDCIvpZYD2Pty4gUL67LCRFBdroYWNc6JaQcmq1KtiOiMKhNoUqRv9w8WR2
-	 TjD+JDAaBQ+g53SzHyDQ6Kv1JGLZtxHsIwlmEwdUHbEQ+3fgqUhswlLCmshr83Dqe8
-	 waMrwsVXYG2/uHbQ111qrahmQ5UCTbjO28WtLk90V+Ftczd5nUeaWHD7ZHccYZI2ln
-	 8sub79gvRHgEP+GV6lyLSHOdxhWwajFc2UgAMYSLGjHgNQBgjUn/OpFz0yi8JQBVGW
-	 EAYK4CqGjyYTOOfsY9V4dGcqCvOssu4nLH5JIyDXZ4ANlhvVsOq40elDx9k7gY+Wj+
-	 tmPcu6WW3BH3g==
+	b=lsajlco2w9nl2Ma20+urBIHAtg3npq6g3Fj02ZDapOSjcCSimEiKKZYemSABwTPI+
+	 TIpJFJ1dwNquw+Uork+7h8EBVCbzdZzJqzcZl4v5O/C+rrmGhFdhB50MrL4esy9pre
+	 H338kqvEUaksCRZvPoywQP8YVSWaXXLdDsFvTqXEyKPbCqmfsRlZJj46oNhTBtKRIV
+	 hN13i0ZHStXn8h1JrFsiluTaBDun9tyiWAy82SM0xMQGO+X/IAwDxIH8MPdDvCOECr
+	 Pto0YmkNMtodvUBiF7oj78PNlqeYg/z0XF77rIxBEq1R4iCaGpyE7vlv0do1Z27rQj
+	 X3YgNu9URs9NA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DDB9060792;
-	Thu, 27 Aug 2026 13:30:33 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 02C2839E
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:30:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 418CE80B63;
+	Thu, 27 Aug 2026 13:35:15 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id EF7CA3A4
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:35:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E8D0A40308
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:30:32 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id E118880B63
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:35:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GmwdE46NlUDl for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 13:30:32 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bAmDBBJvW--4 for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 13:35:13 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::a30; helo=mail-vk1-xa30.google.com;
- envelope-from=hfranco@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=asmBaHrd
-Received: from mail-vk1-xa30.google.com (mail-vk1-xa30.google.com
- [IPv6:2607:f8b0:4864:20::a30])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 81A4F40304
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:30:29 +0000 (UTC)
-Received: by mail-vk1-xa30.google.com with SMTP id
- 71dfb90a1353d-5bf94664327so1240007e0c.1
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 06:30:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787837428; x=1788442228;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=lmwE5Q+XeaCbgVe3oF/lvIN3X3AktY5mGh0UqJGUrMQ=;
- b=asmBaHrd0YxE89buzl+hQd5eSYLDm8mMjBAKT6UYp9hFtqP5kNlFYnFNjagcuJ284Z
- Ip9Y1zkCyL3mEYHmM+0wtFt13d3fQE7kNVip6GLAYBWMz+d0pwqKHbNw371BR69wCKvf
- AXEQsFIzEY29fJ745pjzfS055f4mFU6wymHFKvHKHYSTQSSwhLxKnPtF01Ele2tYGKHB
- IXTzGwQp47kHZpvOdKsoeq5BaXad6b3XewAtokdMyrzYNgvQ7x/KZonpAqtbCgLcKSS2
- m/89bcfFQ6QQCZh4uSwLUKPWs227MBMxSwNXGFbRykKnpagniV3BGgrhbJ3LzXc3DIPX
- 1GWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787837428; x=1788442228;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=lmwE5Q+XeaCbgVe3oF/lvIN3X3AktY5mGh0UqJGUrMQ=;
- b=izdcNtDlK3HpiipX20IFuAwNm9cd2j3QBzM0oxFo2eLsHvtgzutWOIwaHVjRs0M/Uq
- XfpIXoIMP2AMswqYkV/YV7P2a5twWIHf82CfyOWgvpqzFlUYtu+CMOEzYZSzUYjMVkaE
- U8wMrSLor0BifDgpJ/J8ad8bA+z/TuYkVC745tnj7ork8YPPEEmgUifC773JobhWYSkk
- F0L0UP4r5834htinnAzXT0Hb6khIUDJ/kMEPIX0zvKETAOV+7p3pq+Qmv0A9ntxzzyWp
- M6P0hacnMPbmEPFzhuIxFBV1lnr7ZoTjD1mEdzxotG8nJV6JvXjup/Ad5eEIsLMhPn1V
- sDtg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrhMi9z/1ceWcDRCkqFosmo7ojgP+t8O6GT75MAHFJfkdEEK2VOOkWhB2ZWHO9e+t9pI0kpY6s=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++na5L4iHwEKf/QchvypnF3YImg1N6BkznUTkEnSw5uwrJMhuwt4
- wm5mOfmxrP7j02tQUuDfq9m5SYYp1REuFeK9b3y5nfIqfJhPWa6VXUrismQ8ZMk7cGA=
-X-Gm-Gg: AR+sD10IJtd0ete4qCX69wAx0sJeFVsCoIKUH2ENxmrUy52naknAkhNwvDBTpQSlt8p
- UV8GxG0lywuXiwxosL9Aw0pFakxyP/xyGGFyLU3iWNSGgqO0vlMJHvUGgDR5zdEP9FnEVW2huyP
- xow6AzcV8fl8roj/A01GBbdTW1Nv7SXtWHEXJ/KjLEdOq/y28rRZIDNp4B3phcZcUZ4IzFBDh9O
- o0puW/PhZ90r6+9I7tQ2OR1M8hlKHUPRywCsIskWBi410kbKF7V6u8euSqOzTdj2krfy9JE2A+j
- 9TJgZ+Xk+GbiH1SWCVeZWNF9kj3Zryx9YwbYc4VfsHksBhPIcNVVU/Vvrxg/0PLAmGmzSsvHabe
- UWq81uThL6YQmW7fNPKDylMXS8mXUYLS7rbHmzm9y+38yr5Bjy8Lu+U+D3g77A+NNCmJPpXMHE7
- 6vChv+w4EEvS8H7LkStN6waYP3WbfJgq72TVP3QvRQus1q+a7dvfQQKho61gXcWdqGGPUgzKxcj
- 5fAOnNGf6il7O51nFLKusON
-X-Received: by 2002:a05:6122:3285:b0:5c6:4d41:e99f with SMTP id
- 71dfb90a1353d-5c65c3d9e40mr5422083e0c.5.1787837428203; 
- Thu, 27 Aug 2026 06:30:28 -0700 (PDT)
-Received: from hiagonb ([2804:14c:4c5:9534::f35c])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-5c65fe7bd68sm3653555e0c.5.2026.08.27.06.30.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 06:30:27 -0700 (PDT)
-Date: Thu, 27 Aug 2026 10:30:23 -0300
-From: Hiago De Franco <hfranco@baylibre.com>
-To: Andrei Lalaev <andrey.lalaev@gmail.com>
-Cc: u-boot@lists.denx.de, u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v2 0/2] board: sophgo: add support for Milk-V Duo 256M
-Message-ID: <apA3hSs_P_NYkOCM@hiagonb>
-References: <20260723-add-milkv-duo256m-v2-0-2e1373dbcb8d@baylibre.com>
- <20260822091510.3253162-1-andrey.lalaev@gmail.com>
- <ao2Iqsq-Xp4dQK4c@hiagonb>
- <e3ac37d0-be2a-470a-aaa1-0cdcb3b7b45b@gmail.com>
+ client-ip=2a01:111:f403:c20f::7;
+ helo=osppr02cu001.outbound.protection.outlook.com;
+ envelope-from=frieder.schrempf@kontron.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=kontron.de
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kontron.de header.i=@kontron.de header.a=rsa-sha256
+ header.s=selector1 header.b=Y9QsQjlZ
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2C15C808A8
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:35:11 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=S0d3quk7aZrBB7wIhR8hU18+9XVxHaTtdM4/eResEpm+FH2Qc+oBGnrjN1tdeXHsLp4bK0ixBpohEZqbu3dnlXrc6E4VLgAX7pFzM/Toe+Lwp1BEvuzq+8xR1EjyeGSLIcCjJ8uGs3lNQYwlMTB4InwPjUn0cqjIxjHtZYW/G0ZlaSmnIqJkRO9Uw8ErJ8H16u2jAVsh85v6Gj4SzXggR8j0SBHNv2M2dhztgRNS3kd5tcuahvHPXvRPanzcZpoc1eqcE3ETCoL5gwwL90Qm+/Tj7kOZAgi3E8nLFj9GtR7Njfb79mopxTSFtUGb5RvC57gNoMsbhsHrz4whvxV0nA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OdJFmGh7Am/7Jv0z/iBAHxVmnUBAGioeL/O6fyFvAnY=;
+ b=WGiNaJGCVQuAHWNXB0fo+Aw9lrtbQmqkhTaC6DAEddW2fEqUIlyvPLkobhSYnBezEUfSqvOwfe6J6Eowl8INIP5e5YG7+5Ubs5oklQIinBf8NtGAA62Gqa2EJ559HVt6QTPfp2HPRTmtplQDfYt64mFxPX6/Lz9VvxBX5nPO7VWFFN1EPlM0O5U/7QmhRwgSeFqZ4jqUDDN+I0cFjZHZE+hvU5+PMYNQQYLHC6DoEHEPqiI61ksseiNa2MXSAdj2A/6+/PxAXcJWROKuxAi4Ge1l17SVz217FisiTX6GWtHUoF92k9EY+PIMfOLeMG5n6EufGyn/GI1ixd4Bklpimg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
+ dkim=pass header.d=kontron.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OdJFmGh7Am/7Jv0z/iBAHxVmnUBAGioeL/O6fyFvAnY=;
+ b=Y9QsQjlZpI6sA0wkh8ifLiicBbaW8T+2YwzQarRu/iYuBCmQFByiiB+dH89uMcRIenvovMEw1g58KdxDgE4BWcWBnbMKQfmvevuu+y+rEXABLNR/OCB8fv+1BCUjbV9O918aRtXGxkn9Wa0j+gOQDHvpB4oZiPzHtcrG87gJn3GRULysY6+7TBdN9yFEc6s4ZzYSVMAFUXG7xbZg4hld1YCUhUc65fgUkFptwk+xJcxR5LO0jtF98jJEGILyCcDQ4vsyTwSwDrTzDUGfCIZDfQMT25HABLqlbpf9lsbcBHf0K5cr33q4ZAwiMDSyF8rXKrhjTUCKGXHNPtxfo4uEAA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=kontron.de;
+Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:1fb::23)
+ by DU0PR10MB6726.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:402::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Thu, 27 Aug
+ 2026 13:35:03 +0000
+Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::a276:4ad7:962:da22]) by AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::a276:4ad7:962:da22%6]) with mapi id 15.21.0360.008; Thu, 27 Aug 2026
+ 13:35:03 +0000
+Message-ID: <5ef02e5a-c0ac-4afb-b90d-4d6d075b05e6@kontron.de>
+Date: Thu, 27 Aug 2026 15:35:01 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/4] ddr: imx: Allow to call ddr init without logging
+ failure
+To: Marek Vasut <marex@nabladev.com>, Frieder Schrempf <frieder@fris.de>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
+ <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+Cc: uboot-imx@nxp.com, Simona Toaca <simona.toaca@nxp.com>,
+ Viorel Suman <viorel.suman@nxp.com>
+References: <20260819070758.51350-1-frieder@fris.de>
+ <20260819070758.51350-3-frieder@fris.de>
+ <b8c844ab-7ea8-4044-95e5-edac173b3c9f@nabladev.com>
+ <a8be2bf7-aafa-4e8e-9685-5fa100941805@kontron.de>
+ <cfe8d0e1-c652-408c-bc47-0ae96dd0a65d@nabladev.com>
+ <c81db5f1-600c-41a1-91d3-7638fc4d3d58@kontron.de>
+ <b528b642-5010-4843-bfe1-d24e8b709876@nabladev.com>
+ <fa652a2f-addc-47a4-b89e-755aba42509d@kontron.de>
+ <83ee9efb-e09f-45d8-ac0a-cd9b2797c513@nabladev.com>
+ <59ed6576-06dd-42bf-8ea2-18de427955a4@kontron.de>
+ <ae6f34f9-ec68-42e3-8483-4208d6e2e883@nabladev.com>
+Content-Language: en-US, de-DE
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+In-Reply-To: <ae6f34f9-ec68-42e3-8483-4208d6e2e883@nabladev.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0062.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ce::19) To AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:1fb::23)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e3ac37d0-be2a-470a-aaa1-0cdcb3b7b45b@gmail.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM9PR10MB4277:EE_|DU0PR10MB6726:EE_
+X-MS-Office365-Filtering-Correlation-Id: 18611e43-e0a1-419a-e877-08df043fffd5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|7416014|1800799024|366016|23010399003|10067099003|56012099006|11063799006|4143699003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: RNhoFK5pWKrpOy3ctFL9ni6liLQyNSWgS+pS30a7nWttT8B2m+t06FB8CAXcZ6oMVOQRHVLDcggjI0mgdSvmRKrZiiXMY2WHvr6gopL8PveC+c2NaxWEL38oaKUuAx1e1BWg2Naj28uUM/vxlQMf5NJdSn4xB/ODItmkPe86ezuSFlQu/qLekvvV8csqj7BPQH0dlhnJKRvrV7i0RuqLoOYhFs0Cmvn/7jQ/BSzwLEJVPZ1f3PgW/YIDLyr9RXenf9H0bnP6IsaBJxmuPoTrwhrDeWhNtcaz+52JsZpV43wK3CCgUlr5R7jb095838o5Ry0KkFNtUfyNHIo9LMnq4iqAC7NtBDEOTJh1XEJfbqT1w0iqzyoE0nmMqwFxprAXVNOK1T8UevBfoYnfrzLooFskYY62ws4SSBudpg+pwH16IusnBD3IQT9YG7Yxp2q+96nP/Ajb2gYCuH3aelu013yGnGaEnoTpqa07Gkl8wrQ3bEYoX7aiXXgjPTlgWUeUcF2cngCvW7evALAC7tEyGSTJMJW3ECYbYLfVdx5NX2/jIiUGcHPdTO1JpaYQB5wLSrkDHP5e3HsARKHXWmRusVvxqwuxXduzaZj2910GShK1qGV34z5q9DG671nW+60LUe4EYrSwO/DtloBC/+1E5jLYcraRJgDEyjUFHIEd9oQ=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(1800799024)(366016)(23010399003)(10067099003)(56012099006)(11063799006)(4143699003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TlJ6d0M1MWZDZUhTRTNaSVJKZXR0Z0loVzlkYVgzY3Z2ZllBYVFGZEV1NDhj?=
+ =?utf-8?B?QWFyWkpBQ3VKcnRHK3VINHVsR1dnWXIyMWo4aTBlOFlXMEZvRVUxWEtacHVK?=
+ =?utf-8?B?MXdIZkVmL2hVZmROV0Nlb0F5ckppMXBLQkFkUXhBV3NHMThCRlpvT3drM0E0?=
+ =?utf-8?B?enJ0ZDA5b0RoWU5PMXlUd3BubG9WMWlrTUU1b0hEUDBEWXlWQlh0TnlPZzBY?=
+ =?utf-8?B?RFNyUzdXT2pGTEZKTlF0NzU4cTZaWUhaVmNzQ0lqTVA3VnMycVNZZ0dSZkJG?=
+ =?utf-8?B?c1hKb1dNdHRzRGlMZHRuOVAwVDE0em9rNHVGcndIV1dCOG9FQnl0c2hIb0M5?=
+ =?utf-8?B?UkYycUlqQmxnUkVqdjNrTGlzdkdXbldCK2ZONXZCL1ZKZmU5K1V0cUxYUTQw?=
+ =?utf-8?B?eFRUY2VJQWU1SXBCSVdqSzc2MjBSZ0Z1ZHlRU0w5V3pzSnpzeUFjUkxqUVV2?=
+ =?utf-8?B?Yjh4alNVbFpmQVZITDJYaFpUN3I1OEx0N0RHQlhZbmZrV3J0eWRIUlNWbEMr?=
+ =?utf-8?B?ZTJYcElGK1JCalY5eGtUeHRjWDNpZjk1VUI3dGhOWm9lS1ZIZFFYMDJseVJv?=
+ =?utf-8?B?TDBKV1h0MHR6T1VvYXZyQmVIUGdEekpZMXpEY2w1RUl3bUk4Q3E1Q1k5UlNa?=
+ =?utf-8?B?cTA2eWF6a1NVVFAwaE1KQXp4ODl0STJoOHIwVHpGZk5teENxOENxTVJibFd4?=
+ =?utf-8?B?WElqdy9qLzNwSXpsc0Y2T3U5MTZyWGpDMTN4cjBOakY4Z1U3V2NWMFB3L2Fl?=
+ =?utf-8?B?eVY4ZlpMVG9GekFpR1lhWWt3S0cyTExyVWozM0JvNnE3bWRwbVFyR3BQWGpL?=
+ =?utf-8?B?V0l1Zkh0VHVBUi9tdWFLOFhjTTdVaWtkcEpVWmFKeGlNbDhuNWZUcWJlQXhX?=
+ =?utf-8?B?b0lodVBxTkhpOVJaTTMzNHM2TXZOKzhycndGbmEzQU4zR2dVR1FMUXk0cTM5?=
+ =?utf-8?B?eHVzUk04YldTeXZQR0pSLzRDdEhsdTJ0YkpKSGE5UEQzVlB6c1RwdlVrdVhG?=
+ =?utf-8?B?MlFpSndyM0xNb0hmTHVtalo0QncrRzk2K0tJenZOSVZqYVB0Tm9EVEdUclhY?=
+ =?utf-8?B?bWJEUWkwY0lUM0JjZ0R2L2FIQUF2QmJnZEdkMlpIWjVNZFF0UzhUNE13MXFv?=
+ =?utf-8?B?dW9LRWdqa3hPcUZJUEtLY2VOSTQ5eHhURUdla0Vod2N4T2Mwd3ZjdVpkR1hE?=
+ =?utf-8?B?WHVHQndoYzh2MkpHak1zMjlhZStRSjRlSjVJTGhHVGFaSVVVOVlyZ0xpb1pu?=
+ =?utf-8?B?cmZJMDhMdFB2dzA2MWx5NlJvV2IwK0tTblQzMlZmZS9CWTdxdC9pb05tSU9S?=
+ =?utf-8?B?ZlBkNUNxWUkxVkNRY0hDZld3TWpzdElaUHgwTThJNURjY1lWNXlWeU5aVlVo?=
+ =?utf-8?B?Y1NKK2RTR0JwRXV4b0QwQU9OVVVJOHZWUmNqajc1VFdsdVFZbVNSSU1OWnVm?=
+ =?utf-8?B?YTEwZHVwK0ZJRkxPVEhPRlZ6VE1LbWo0MFJEWEZXekZ4RVFrV2x0aXJLblhs?=
+ =?utf-8?B?ejQxdjFuUC85b1FZam1rYjlCYkVrZGVNTUtoeDhOM2dRTWIzbmN6NUpxanB6?=
+ =?utf-8?B?MTFWMHR0VXE4RnRiLzBZVHhKaUZPQWZlN2J6eVhpY3MyYnRlUFBRRWkza2xv?=
+ =?utf-8?B?bmoxbXJmQlYxbDhubmx6bVNOQkpRVFFiWUNrQlVRSG8xU0xhQ2UxTk1mdDNT?=
+ =?utf-8?B?SE41NjBmZmJFdTdxNVY3MFNnVmp3RTY1bG9aeXYrNVZ2R1dLM21oVW1ib0pw?=
+ =?utf-8?B?RkFITEpoaXc2dlYzU1lrSk5uZi85Wko3Ry9YbGtPSjZqNnprVHVMQXJDcmR4?=
+ =?utf-8?B?dzAybEVxQ2VJaW5kMWZoMFhuOGJMNmxzZi94R0ZFVjZkc3VQUURPa1pEeTBh?=
+ =?utf-8?B?M3AvcTBUZ0FRckNnZkJqSytISDJJZHQ5cERlRXlXSjJvVXVXMSs2SUowL3ZF?=
+ =?utf-8?B?S1Fub1NrcXhxTzZzT2QrSXFnNGZuY0RBL05IWWR2VDVpblFmR2RtK0VzY2po?=
+ =?utf-8?B?OS9UV1A2T3hEZTQrN21QZG1FNmRlblowcC81eHBmSXRaSnNSbkkzbEwxdnh2?=
+ =?utf-8?B?U3hDSUhVQ2JDcGZyQjIzVThkUzNQcm1ocU5JbUg5VHdRTlRkMVFFeUkxRjdy?=
+ =?utf-8?B?RWtYcFh6Q2JUMCtlalFyTUdzY1JoZE0yVVFWVlhSQWdtQUUzdC9TQWJBL0M1?=
+ =?utf-8?B?MGhoeDZmVVd2aS9tUzlUM2ZHYUJJVXJwSlhTL2c5MEN4V3ovUUtUNTBlYStS?=
+ =?utf-8?B?MFNTSi91bndQMVk5eHBwNko1bWxBNzkwZ1RId2ZBdVp5VVYvS05oRU9oMVpk?=
+ =?utf-8?B?T0FSbWVyZWRTWkwyRjAzTk53SUxnUkswWXJOb1lCZnpjUjlza0g5NkZUcnNV?=
+ =?utf-8?Q?p5eCu3dNDdZzBZMw=3D?=
+X-OriginatorOrg: kontron.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 18611e43-e0a1-419a-e877-08df043fffd5
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 13:35:03.2473 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: cFpeZMcF4FrTaBlYrN6C1ovuBMQ8DN9QREyTFPz0mZbMJlfdj07CvWKrCbm30YF7YvA2KqIV1jx1okGvLlD+j0psV6HJFIgQNRV8A84h06U=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB6726
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -128,162 +187,32 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Andrei,
-
-On Tue, Aug 25, 2026 at 08:01:37PM +0200, Andrei Lalaev wrote:
-> On 25.08.26 14:24, Hiago De Franco wrote:
-> > Hi Andrei,
-> > 
-> > On Sat, Aug 22, 2026 at 11:15:10AM +0200, Andrei Lalaev wrote:
-> >> Hi Hiago,
-> >>
-> >> Thank you for the patches.
-> >>
-> >> From your cover letter I understood that SD card is supported.
-> >> However whatever I try, I always get the following error:
-> >>
-> >>     U-Boot 2026.07-00002-gbd5e3de2ed6a (Aug 22 2026 - 10:27:48 +0200)milkv_duo_256m
-> >>
-> >>     DRAM:  256 MiB
-> >>     Core:  20 devices, 13 uclasses, devicetree: separate
-> >>     MMC:   mmc@4310000: 0
-> >>     Loading Environment from nowhere... OK
-> >>     In:    serial@4140000
-> >>     Out:   serial@4140000
-> >>     Err:   serial@4140000
-> >>     Net:
-> >>     Warning: ethernet@4070000 (eth0) using random MAC address - 16:21:8c:10:cd:96
-> >>     eth0: ethernet@4070000
-> >>     Hit any key to stop autoboot: 0
-> >>     milkv_duo_256m# mmc info
-> >>     Card did not respond to voltage select! : -110
-> >>     milkv_duo_256m# mmc rescan
-> >>     Card did not respond to voltage select! : -110
-> >>
-> >>
-> >> I tried 2 different SD cards and got the same result.
-> >>
-> >> Am I doing something wrong, or is there something else I need to configure?
-> > 
-> > You are most likely missing this patch:
-> > 
-> > https://lore.kernel.org/all/20260507234836.284918-1-hfranco@baylibre.com/
-> > 
-> > This is needed in order to make the SD card work. This patch is already
-> > merged on main branch, as commit 3a4a8963aace ("mmc: cv1800b_sdhci:
-> > honor 'no-1-8-v' DT property").
-> > 
-> > Check this patch and let me know if it works now ;)
+On 26.08.26 14:24, Marek Vasut wrote:
+> On 8/26/26 10:12 AM, Frieder Schrempf wrote:
 > 
-> Thank you for your response:)
+> [...]
 > 
-> I also tried the latest main branch (so all patches are definitely included)
-> and had the same problem.
+>>>> I'm not sure, but even if it would work, it would require several
+>>>> separate init attempts only to read the IDs
+>>>
+>>> Why ? Init the bus in slowest mode with widest bus settings, then try
+>>> MRRD on all available DRAM chips, then figure out which ones report
+>>> valid IDs and which ones fail the MRd .
+>>
+>> As far as I can see this doesn't work. If we use the widest bus setting
+>> (CsPresent=0x3) on a single rank module, the training fails and the DDR
+>> remains in a state where the MR read doesn't work yet.
 > 
-> I guess I somehow managed to fix the problem, so below I'll describe what I did
-> and would like to hear your thoughts about it.
-> 
-> 
-> When I generated `fip.bin` using precompiled binaries from fiptool repo [1],
-> it started working most of the time. Previously I was using an FSBL manually generated
-> using official SDK [2]. However, I would still occasionally get
-> voltage select error and timeouts.
-> 
-> So I started comparing FSBL and U-boot from Sophgo (2021.10) and
-> I couldn't find any differences that could explain this behaviour.
-> 
-> Today I found out that the kernel DTS configures the SD0_CLK pin to a different value [3].
-> By default, we have 0x48 in IOBLK_G10_REG_SD0_CLK register, but if I set it to 0x84
-> like kernel does, it magically starts to work all the time.
-> 
-> I understand why increasing the drive strength fixed timeout issues, but I don't understand
-> why I don't see the same problem with the U-Boot from Sophgo (2021.10).
-> 
-> 1 - https://github.com/sophgo/fiptool
-> 2 - https://github.com/milkv-duo/duo-buildroot-sdk-v2/tree/main
-> 3 - https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/riscv/boot/dts/sophgo/sg2002-milkv-duo256m.dts#n68
+> Do you need training to read the IDs ? Simply force-use the slowest bus
+> mode (100 MTps iirc), the training is only relevant for the high-speed
+> modes.
+I don't see any existing code path for any i.MX with DDR4 that doesn't
+do the training before accessing MR registers. Do you have any
+references or examples? Do you have any sources for the claim that the
+training is only relevant for the high-speed modes? I couldn't find
+anything that supports this.
 
-Thanks for digging into this.
-
-I made some tests here on my milkv-duo 256M and I might have the answer
-you are looking for, hopefully.
-
-0x48 is SoC reset value, based on the TRM. This is what I read on my
-U-Boot (main branch, like yours):
-
-0x03001a00 SD0_CLK = 0x48 pull-down, 10800 uA  <-- reset value
-
-So on my board the BootROM already does everything Sophgo's
-cvi_sdio0_pad_setting() does. SD0_CLK is the single register nobody
-programs, exactly as you found. I also checked the FSBL and it never
-touches SD0 and never touches drive strength, from what I could see.
-
-I am not able to reproduce your issue, it works every time for me. I
-suspect there is a difference on the hardware here: maybe your board has
-less margin for the drive strength than mine, it works at the stock
-50MHz even with the CLK drive strength at its minimum.
-
-To trigger the issue, I had to force SDHCI divider from N=4 to N=2, so
-doubling the clock. With that, I triggered your issue. Of course I am
-not sure if this is the same issue that is triggering your, but at least
-now with the double clock I was able to increase the drive strength by
-writing 0x84 (the kernel value) and it fixed the issue (which makes
-sense).
-
-I was not able to properly answer the reason why Sophgo U-Boot works, so
-I used Claude to look at the code for me and compare the differences,
-here is what it found out:
-
-"It is the PHY. cvi_sdhci_set_ios_post() has a DS/HS branch that does:
-
-    PHY_CONFIG    (0x24c) |= BIT(0)          /* TX_BPS */
-    PHY_TX_RX_DLY (0x240)  = 0x01000100
-
-The kernel does the same thing, unconditionally, in
-cv18xx_sdhci_reset() (drivers/mmc/host/sdhci-of-dwcmshc.c):
-
-    val |= CV18XX_PHY_TX_BPS;                     /* PHY_CONFIG bit 0 */
-    val = TX_DLY(0) | TX_SRC(INVERT_CLK_TX)
-        | RX_DLY(0) | RX_SRC(INVERT_RX_CLK);      /* == 0x01000100 */
-
-Upstream U-Boot does neither. cv1800b_sdhci.c only writes
-SDHCI_PHY_TX_RX_DLY from cv1800b_execute_tuning(), reached only through
-platform_execute_tuning - and that never runs on this board, because
-no-1-8-v caps us at High Speed 50MHz / 3.3V and tuning only happens in
-UHS modes."
-
-I am not 100% convinced by that, but I will take a look, we might need a
-patch here on upstream to configure the PHY properly as the downstream
-u-boot and kernel does. Anyway, is funny that I can only reproduce your
-issue on this conditions, but these boards might not be something we can
-blindly trust ;)
-
-Could you dump these on your board, at the U-Boot prompt on unmodified
-upstream main, before touching anything?
-
-    md.l 0x03001a00 8      # SD0_CLK / CMD / D0-D3 pad config
-    md.l 0x03001900 4      # SD0_CD, SD0_PWR_EN
-    md.l 0x030001f4 1      # sd_pwrsw_ctrl
-    md.l 0x0300101c 8      # SD0 pin mux
-    md.l 0x04310240 1      # PHY_TX_RX_DLY
-    md.l 0x0431024c 1      # PHY_CONFIG
-
-Meanwhile I will be able to investigate this further in a couple of
-days.
-
-> 
-> >>
-> >>
-> >> Best regards,
-> >> Andrei Lalaev
-> > 
-> > Regards,
-> > Hiago.
-> 
-> 
-> -- 
-> Best regards,
-> Andrei Lalaev
-
-Regards,
-Hiago.
+Also I would assume that doing the MRRD on an unused CS would give me
+back some arbitrary random values. While I could interpret an unknown
+value as "rank/cs not present", I don't think its reliable enough. Or do
+you know of any error condition being reported for failed MRRD?
