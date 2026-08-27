@@ -1,130 +1,124 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEB0AC61DC4
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 17:44:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 971A7C61DC4
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 19:50:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D29BB80EB3;
-	Thu, 27 Aug 2026 17:44:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 492AA4080C;
+	Thu, 27 Aug 2026 19:50:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rTZOetAG2r_O; Thu, 27 Aug 2026 17:44:32 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9NqhtLXMAq84; Thu, 27 Aug 2026 19:50:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787852672;
-	bh=AeU4YmKld+pXureVH1hCUu14M+sp+sO52UEHmNL3d6s=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ocpkkuvU8GmCx+GrLA5e0ayayH2CWlzGDbak2K7PouD3pI+gI4UM479Tk2lXYnrJL
-	 zsX+M/uHcJYgFx05f8FyrRcjjcjjMu1/2tv+58msZwAerUU2+YmaQ4yE9lnQpehaOf
-	 xZsfxJANkxk8tO9DD9TGjrI+CLXP2KqCs4i58xh9VBT+uf2RazVSixdw9qu7OEjiXZ
-	 k4SLdQrgaSbOQfPHWoaANIe5XTyMfmRA4UAmDo5FHmfll7MEnicbZNexTtgcZxsKGF
-	 Qbz8EOLpw3QYqfabEA3qVYdcAj2Y4BAo6mWvLAPkIDNdaRjFBIiXJpPNj2rv2SmQnf
-	 LoTxJYqYVjTDA==
+	d=lists.u-boot-project.org; s=default; t=1787860240;
+	bh=bilWJIlHktWoEZjHwyNxhF4sv+bJkyHheRkebupSmqk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=vEE/kRAzFUa8jjvVXsY8+qRQrIGXinP2f74HnLBqrqdo0DoyKY+8Ut3EieF4iUdx1
+	 6K/9LMt2rdI/2U6n1wRNQFAZI27AP/ql1RYOISJA6Jq8kvjm7/hHn4BcmWFXb3/ZD0
+	 Wb4tjD8DNs2cndSc7l9zeFs6CbYuAcLrD5T0LmTIlcfPcgC57iaMT4As0rj2eHtydg
+	 w2WtqFRlOG3hCLvl6KA2BwVSI5/OvZzttqYPYVPQ8pIS9qfROjqEXMsnriq+gyW2Ih
+	 kcHN1RSJrrZc7UCsCI9RPy/R9fOrWmaRxC7ZJaKW65QAqBhVzGdLnJsGq6vvl5mN4x
+	 6RdasdIHwVIDQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BCED280EAC;
-	Thu, 27 Aug 2026 17:44:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 47A0240804;
+	Thu, 27 Aug 2026 19:50:40 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 171E2464
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 17:44:31 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 1FE03105
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 15:51:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0904880EAC
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 17:44:31 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 11F4C80E8E
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 15:51:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id o1DOJa4xOtww for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 17:44:30 +0000 (UTC)
+ id QXekH5G0vmKU for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 15:51:33 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42e; helo=mail-wr1-x42e.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ client-ip=2607:f8b0:4864:20::72e; helo=mail-qk1-x72e.google.com;
+ envelope-from=sanderson@brivo.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=brivo.com
 Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=z6FgW+k3
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8347D80EAB
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 17:44:28 +0000 (UTC)
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-47f84023916so75518f8f.3
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 10:44:28 -0700 (PDT)
+ unprotected) header.d=brivo.com header.i=@brivo.com header.a=rsa-sha256
+ header.s=google header.b=aSQMDodZ
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id AAA7080E7B
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 15:51:31 +0000 (UTC)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-92ea24a2dbfso318485a.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:51:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1787852666; x=1788457466;
+ d=brivo.com; s=google; t=1787845890; x=1788450690;
  darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=AeU4YmKld+pXureVH1hCUu14M+sp+sO52UEHmNL3d6s=;
- b=z6FgW+k3m8wm1hqXVyUsN509iSgkaVZ+21X9gNtwcAutr8KK3p1MjP6tCAPIyru4kW
- 6sBLqYW4g+qPw0HpXUqrIykhpgcSoFtMX4+F8zFTMmz3oicR+qW/aRJh8d8f9dvgsus5
- N5ne/Wc12LUXXhgWXfFMbWB7meJkWmivjNtqArKgC8v++mAibg1jvE5mlCXhnY/ChCfi
- HRMShqpePqovgBWf0X3Jl0USyP/Aav9PCIDoi2kJ/5MA6izMIpTA865mAtiP/jtrowyQ
- 23HukVVidHCAJtl9FbADP040pkjZfa5HQIm6uelwy98qypkX0wDb5rMEN6XbVuYfGBOd
- +WGw==
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=bilWJIlHktWoEZjHwyNxhF4sv+bJkyHheRkebupSmqk=;
+ b=aSQMDodZDEIMFPymSyK6kk4M8p+ETncp6UR4Le9n4vWl62hhQQly56uV4H8XPDZw0Q
+ zDRJVe/5zWs8JGLPIhq/8D0jFroig7BaSLG1Wtsbi7IYbwLCGSEKD5zLY7Bba7nAcv4Q
+ TlUyK+XZIw8X1pcPVLs4Dpy8pEN0AFnZrJJuvHmLkSPl/6w2R6UiXiDDCjLt3lYOzVuJ
+ ktf+g48aZwUyvX/YenvWm/zmZNHo3xuEYgtwkzm9rCe0MME8Fh16n40Nwj7iVVb25xim
+ Cys5XOB69bYuXD5iME+smRpY1BlPvgKy8bSgBdWjP+h6VdoRIc6MEdE349OQY5VfQpTT
+ BhoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787852666; x=1788457466;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=AeU4YmKld+pXureVH1hCUu14M+sp+sO52UEHmNL3d6s=;
- b=VXFUOCiLuhabYweUWW+ZLsIIdsq/jqV9DrjNRh/doMGzpg1vgqv/K20NSnYyDjTHGi
- 33qkjgF/422URv/pxQ/g4WGT89xKjlALQnNvnZw6+Cxln3du/dZDuizUMXkB/eMqpcjh
- +7KGNdednFpGJIvzaGKoQ+2ah0SFGF+IsKoPdwozSvm8Kdk4tTtiNLiYvuK+cGQo11Ju
- aJdiju6idrZmjXAv8nQxXqKqX3n2sx6fa74MyNJJREUUn0/Q3NsL0kT6bSZP0nKtw5qI
- IKlYpDYNXDVx/0nDAGWXGSioyIvSCo4DxCqc7/jMrKgl6c/vrwsrZ3pEH7bspVkt3aQD
- aqHQ==
-X-Gm-Message-State: AFuF++l1kDM+y+qwPH5E2VVQAq2h1ogC3nbHUGkse01awYLLW3Fw/W1I
- bmj8FkNhDhTTWR5tU/P8pO9r8pr8SB/y/in6D8BBMNl7ISejm5uev090HmOp9QTugfw=
-X-Gm-Gg: AR+sD12G1UfG1Fp+R/OHn7VdRwfLLigGIpOWFLoOYiCry4dDu8osJx+AxaajLpkduv5
- C4ZzRXArTAeY2QOZEh8yXlBTy2ez8MAqeHPC2ZD1bSE/hHJXwgJYGDmj9TP0PKe3dbmR+QQdgsc
- 5IDydNyK6KW3vLJpMdzehulGB2Lekyx5Bad+1AMoCEC6Tty7+JMVexBa4aK7SvIYCdcwJNnmjGJ
- 0Q1AJ4bTF7uerNmjIuLMBZrXVvjVP5sq9VkwYKO0opVpoVAVsDMK7SZe6ljo1fgE/3mOVr5HH36
- BxUHRDIGXRySbSxBYp7Oz94KEmJoYd6XYDQR9cjUzFP4X71uVxNN3vkAqeOEhAlw/vVajQbb35o
- QWo0ZAfo3dPvwuG+oFSJUzUGHjGpUFO8SkbcgrYtyO/0XQoQnSWvb5uCLQSJhe+0ANk3gvNMYIl
- tOeukcrkqZ7HeskIj4mVdvdQlJ/OIVbuNT+5YPtJ0b5w9pMjxK1qvHFpTbl9uS11qpowM97yc4I
- bI0OwVS90YoASkxlYz7cYTALFdYAbnw5gXZLuRhig==
-X-Received: by 2002:a05:6000:468b:b0:482:ee80:d02b with SMTP id
- ffacd0b85a97d-482f79b1efcmr541932f8f.11.1787852666588; 
- Thu, 27 Aug 2026 10:44:26 -0700 (PDT)
-Received: from alchark-surface.localdomain (bba-86-98-192-94.alshamil.net.ae.
- [86.98.192.94]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482e28dc10asm11075228f8f.19.2026.08.27.10.44.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 10:44:26 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Thu, 27 Aug 2026 21:44:15 +0400
-Subject: [PATCH v2] test: lib/uuid: Fix endianness for dynamic GUIDs
+ d=1e100.net; s=20251104; t=1787845890; x=1788450690;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=bilWJIlHktWoEZjHwyNxhF4sv+bJkyHheRkebupSmqk=;
+ b=KD9azWWyUTC0B9fS0OH7MbiLJHLSpr9h7JIxAjEd/PmQ07HImy/EMd59S1p5phde9X
+ u/QoLxluqr3MOktliZ/bA1Udb9W+YdbMn1RqMfxJUwVDKLps4KZOYN7ui1piv+kxPHvc
+ LT15RqdnknvyKiBooqqlwpNAeTfAnI4PzlgfLdAH7OibGm3FkJmRGBusw6E5NkCvmD04
+ jQYjokPAEe/hRufWQxivlFio6n7MtqBt/YfxZXlvFNcidpaqOl9Mj8z/fKw/bHUj42sv
+ +fM1mA49JvAAqMBYWVhwNa4M2b4Fvmdykk46sOUfKM049gB3P88Bl2xMrl2h4pry+0iv
+ cC2g==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqVsbXm8sHQNsDK3VskSkpyB1smOlbuyU6dmD4hcyXZfQGNCd3wJUXfKFKewFzBwDf3rdslOs0=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nEeqAoe/qSoV26SBOKw44+qNMrMYjMA4sUNDD8B0EPmJ/J6aWQ
+ PPGzR7/mMLPj0SK8f/hjAGcg7Xx3R52XHhGv5NfYBOW9lAorH9eJSWMTmzbQIlyW6MBGC/VJVUG
+ ZgysAf/fHeApMdzSloX/4WcsN+LQ1iLOrySleBAlzPJLVIIyQv4efDniC3xPq/qP/7DJEQGTddl
+ ShH9U=
+X-Gm-Gg: AR+sD13hf0ML62oZQqTOQqqK5qfnrDVR/x3CWB7b7qLIBTtbkLo4xUpwm5o0G8Jh+2H
+ 1wofr+Gta7S/gahFPlz1lHju7TiIpDeSmLbO1c8P21SKFbifAUia8YmTbHQzAaoCO6wxAEbbGZf
+ hWg19O0CYpq2y1Xo0Zq6aPujoByEx6lyWz/3O6unvOWhPowGE3qsY3VgvJs9jIk08N6xrAu44pk
+ 1t9LxjieDUYedWQ2UodK6/mJenZEAmLkGARhN6ASBYre7A5ATKyEbm6EW9dEsa0i2/PoZ9P5ROk
+ Vh/niXPhUWhs9TBZFpOuLCUFzRNNoSx5F4N8z5nOBAzxsmdVROURcF9o301EvhissuzOA7v78B1
+ Zkjsx0W9ymbUrPde8zYzW9/NUH8hThoDQB5E0rYCgGGnASSeDUG2DEAfelzpEx1Jrf8xwm9ERiX
+ tUv++v+dDl2F3RXxPcKpgAPS/SGNzmNk5pAhjbEMk3IRvVFlVoY/Rk6yjIcoiH5fjvSA==
+X-Received: by 2002:a05:620a:4f3:b0:936:dbd7:fcb3 with SMTP id
+ af79cd13be357-9378019b06cmr1262591985a.21.1787845889677; 
+ Thu, 27 Aug 2026 08:51:29 -0700 (PDT)
+Received: from [10.200.233.210] ([71.163.254.246])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-9377e36955bsm480665085a.19.2026.08.27.08.51.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 27 Aug 2026 08:51:29 -0700 (PDT)
+Message-ID: <d943fdf0-f54f-4103-87ea-beb8179206c0@brivo.com>
+Date: Thu, 27 Aug 2026 11:51:28 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260827-uuid-be-v2-1-2f91c9289b18@flipper.net>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/2WNwQ6DIBAFf8XsuTRAI2hP/Y/Gg8Jat2mUAJI2h
- n8v2mOPk8ybt0FATxjgWm3gMVGgZS4gTxWYqZ8fyMgWBsml4o3UbF3JsgFZrVStUfd9wxGK7Ty
- O9D5K9+7HYR2eaOI+342JQlz857hKYvf+q0kwwVprLoOQxqpW3MYXOYf+PGOELuf8BWF1lBmyA
- AAA
-X-Change-ID: 20260827-uuid-be-56657e7aa80e
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Wojciech Dubowik <Wojciech.Dubowik@mt.com>, 
- Alexey Charkov <alchark@flipper.net>, 
- Casey Connolly <casey.connolly@linaro.org>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6559; i=alchark@flipper.net;
- h=from:subject:message-id; bh=lTBgumrGCiIBTTn8a45KqYHr1xSWXQf2o9OlodH6qpw=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRNKK+MvhtukOh0hMfLfF+/Mo/FVgXOizI/lY9OXvzaa
- 4nHzj9RHRNZGMS4GCzFFFnmfltiO9WIb9YuD4+vMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
- oZGOsY4RAxenAEz1s3MMv9ncZyzUFkl7U7fMTFpgq3TDnas21tLpHzpkAhQPqt5R1WBkOJc5452
- V08G1t61vXVm6sLr2KdtR7ZD2Xy3Nal9fMElfZgIA
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/9] arm64: meson: Add s4 SoC support
+To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.u-boot-project.org
+Cc: u-boot-amlogic@groups.io, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20260817171623.1943847-1-sanderson@brivo.com>
+ <20260817171623.1943847-2-sanderson@brivo.com>
+ <a05aabf7-9ef2-48a7-be9f-626c49c21a26@linaro.org>
+Content-Language: en-US
+From: Sean Anderson <sanderson@brivo.com>
+In-Reply-To: <a05aabf7-9ef2-48a7-be9f-626c49c21a26@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 27 Aug 2026 19:50:39 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -138,172 +132,140 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-If LIB_UUID is enabled on a big-endian board, such as when it is pulled
-in by EFI_PARTITION, its tests will fail due to the dynamic capsule GUIDs
-computed by lib_test_dynamic_uuid() using native endianness for the UTF-16
-image name, instead of little-endian:
 
-  malta # ut lib lib_test_dynamic_uuid
-  Test: dynamic_uuid: uuid.c
-  test/lib/uuid.c:114, lib_test_dynamic_uuid_case(): expected_uuid = uuid_str: Expected "985f2937-7c2e-5e9a-8a5e-8e063312964b", got "829f5cb0-1a07-5718-8774-4514bda82c39"
-  Test 'dynamic_uuid' failed 1 times
-  Tests run: 1, 2 ms, average: 2 ms, failures: 1
-  exit not allowed from main input shell.
-  malta #
 
-The image names come from u"" literals, which the compiler lays out in
-the endianness of the target, while the GUIDs they are checked against
-were computed little-endian, as the UEFI specification requires.
+On 8/27/26 11:36 AM, Neil Armstrong wrote:
+> On 8/17/26 19:15, Sean Anderson wrote:
+>> Add support for amlogic s4 (S805X2/S905W2/S905Y4) SoCs. These are very
+>> similar to other recent SoCs, with the exception of a workaround for
+>> some BL2 (mis)behavior.
+>>
+>> Signed-off-by: Sean Anderson <sanderson@brivo.com>
+>> ---
+>>
+>>   arch/arm/include/asm/arch-meson/boot0.h | 14 +++++++
+>>   arch/arm/mach-meson/Kconfig             |  7 ++++
+>>   arch/arm/mach-meson/Makefile            |  1 +
+>>   arch/arm/mach-meson/board-s4.c          | 50 +++++++++++++++++++++++++
+>>   4 files changed, 72 insertions(+)
+>>   create mode 100644 arch/arm/include/asm/arch-meson/boot0.h
+>>   create mode 100644 arch/arm/mach-meson/board-s4.c
+>>
+>> diff --git a/arch/arm/include/asm/arch-meson/boot0.h b/arch/arm/include/asm/arch-meson/boot0.h
+>> new file mode 100644
+>> index 00000000000..7338171be15
+>> --- /dev/null
+>> +++ b/arch/arm/include/asm/arch-meson/boot0.h
+>> @@ -0,0 +1,14 @@
+>> +/* SPDX-License-Identifier: GPL-2.0+ */
+>> +/*
+>> + * Copyright (C) 2026 Brivo Systems LLC
+>> + */
+>> +b reset
+>> +#if IS_ENABLED(CONFIG_MESON_S4)
+>> +/*
+>> + * BL2 copies some keys to the start of DRAM, clobbering anything in the first
+>> + * 2k aside from the initial instruction. I measured the actual data clobbered
+>> + * as 1076 bytes, but I suspect the amount depends on the configuration, so
+>> + * just go with what amlogic does.
+>> + */
+>> +.skip 2048
+>> +#endif
+> 
+> How different is this boot0 with the one posted for T7 at [1] ?
+> 
+> https://lore.kernel.org/all/20260821084603.25974-3-tanure@linux.com/
 
-Spell the names out as UTF-16LE byte strings instead, so that the test
-data no longer depends on how the target stores a u16 and nothing has to
-be converted at run time. Measure them by scanning for a pair of null
-bytes: that comes out the same either way round, and unlike walking the
-string as u16 it assumes nothing about the alignment of a string literal,
-which m68k for one does not guarantee.
+Should be identical. Actually, the size is the same, but I couldn't figure out how
+the "kernel key" was supposed to work. So using the same boot0.h should be fine.
 
-Other callers of gen_v5_guid() are EFI update capsule code, which only
-ever runs on little endian systems (as UEFI is little endian), so keep
-them as they are.
+>> diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfig
+>> index c687ef822a2..91d1e8342e0 100644
+>> --- a/arch/arm/mach-meson/Kconfig
+>> +++ b/arch/arm/mach-meson/Kconfig
+>> @@ -67,6 +67,13 @@ config MESON_A1
+>>       help
+>>         Select this if your SoC is an A113L
+>> +config MESON_S4
+>> +    bool "S4"
+>> +    select MESON64_COMMON
+>> +    select ENABLE_ARM_SOC_BOOT0_HOOK
+>> +    help
+>> +      Select this if your SoC is an S905Y4/S905W2/S805X2
+>> +
+>>   endchoice
+>>   config SYS_SOC
+>> diff --git a/arch/arm/mach-meson/Makefile b/arch/arm/mach-meson/Makefile
+>> index 08a24d4b24f..2157c35c2d5 100644
+>> --- a/arch/arm/mach-meson/Makefile
+>> +++ b/arch/arm/mach-meson/Makefile
+>> @@ -17,3 +17,4 @@ endif
+>>   obj-$(CONFIG_MESON_AXG) += board-axg.o
+>>   obj-$(CONFIG_MESON_G12A) += board-g12a.o
+>>   obj-$(CONFIG_MESON_A1) += board-a1.o
+>> +obj-$(CONFIG_MESON_S4) += board-s4.o
+>> diff --git a/arch/arm/mach-meson/board-s4.c b/arch/arm/mach-meson/board-s4.c
+>> new file mode 100644
+>> index 00000000000..7d0bea9924f
+>> --- /dev/null
+>> +++ b/arch/arm/mach-meson/board-s4.c
+>> @@ -0,0 +1,50 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * (C) Copyright 2023 SberDevices, Inc.
+>> + */
+>> +
+>> +#include <asm/armv8/mmu.h>
+>> +#include <asm/io.h>
+>> +#include <linux/compiler.h>
+>> +#include <linux/errno.h>
+>> +
+>> +void meson_init_reserved_memory(__maybe_unused void *fdt)
+>> +{
+>> +}
+> 
+> No reserved memory at all on S4 ?
 
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
----
-This was uncovered [1] while adding tests for GPT partition labels on big
-endian boards, which pulls in PARTITION_UUIDS, which in turn pulls in
-LIB_UUID and its tests. Turns out no BE board in CI ever enabled LIB_UUID,
-so this went unnoticed to date.
+Well, ATF is signed by amlogic and can't be modified on this platform, so the
+reserved memory can't change unless you use a new version of the ATF binary.
+meson-s4-s905y4-khadas-vim1s.dts just hard-codes the block of memory.
 
-No functional change on little endian.
-
-[1] https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/pipelines/1101
----
-Changes in v2:
-- Dropped the EFI changes, keeping only the test expectations update for
-  big endian systems (thanks Heinrich). Keep the hunk updating the
-  kerneldoc to help others avoid tripping over this in the future.
-- Dropped the runtime endianness conversion loop and instead store the
-  seed strings as explicitly spelled out UTF-16LE bytes in a plain char *
-  string (thanks Heinrich). The length function also had to be replaced,
-  because string literals are not guaranteed to be halfword aligned
-- Link to v1: https://patch.msgid.link/20260827-uuid-be-v1-1-9dc3b12cd691@flipper.net
-
-To: Casey Connolly <casey.connolly@linaro.org>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Cc: Alexey Charkov <alchark@flipper.net>
----
- include/u-boot/uuid.h |  5 +++++
- test/lib/uuid.c       | 37 +++++++++++++++++++++++++++++--------
- 2 files changed, 34 insertions(+), 8 deletions(-)
-
-diff --git a/include/u-boot/uuid.h b/include/u-boot/uuid.h
-index 7f8414dc906c..acdf3a85a6cb 100644
---- a/include/u-boot/uuid.h
-+++ b/include/u-boot/uuid.h
-@@ -149,6 +149,11 @@ struct efi_guid;
- /**
-  * gen_v5_guid() - generate little endian v5 GUID from namespace and other seed data.
-  *
-+ * The seed data is hashed as raw bytes, so any of it that is not a byte string
-+ * has to be supplied in a fixed byte order for the result to be reproducible.
-+ * UTF-16 seed data, such as a firmware image name, must therefore be passed
-+ * little-endian, which is the byte order the UEFI specification uses for it.
-+ *
-  * @namespace:   pointer to UUID namespace salt
-  * @guid:        pointer to allocated GUID output
-  * @...:         NULL terminated list of seed data as pairs of pointers
-diff --git a/test/lib/uuid.c b/test/lib/uuid.c
-index d00e9563a472..f958897dd7b5 100644
---- a/test/lib/uuid.c
-+++ b/test/lib/uuid.c
-@@ -8,7 +8,6 @@
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-  */
- 
--#include <charset.h>
- #include <u-boot/uuid.h>
- #include <test/lib.h>
- #include <test/test.h>
-@@ -86,10 +85,31 @@ LIB_TEST(lib_test_uuid_bits, 0);
- 
- struct dynamic_uuid_test_data {
- 	const char *compatible;
--	const u16 *images[4];
-+	const char *images[4];
- 	const char *expected_uuids[4];
- };
- 
-+/**
-+ * bytes_to_null_pair() - offset of a pair of null bytes within a string
-+ *
-+ * Steps through the string two bytes at a time, looking for a null character,
-+ * which in UTF-16 is a pair of null bytes. The string is walked byte-wise
-+ * rather than as u16, since a string literal carries no alignment guarantee
-+ * and some architectures cannot load a halfword from an odd address.
-+ *
-+ * @str:	UTF-16LE string, terminated by a null character
-+ * Return:	number of bytes preceding the terminator
-+ */
-+static size_t bytes_to_null_pair(const char *str)
-+{
-+	size_t len = 0;
-+
-+	while (str[len] || str[len + 1])
-+		len += 2;
-+
-+	return len;
-+}
-+
- static int lib_test_dynamic_uuid_case(struct unit_test_state *uts,
- 				      const struct dynamic_uuid_test_data *data)
- {
-@@ -101,13 +121,13 @@ static int lib_test_dynamic_uuid_case(struct unit_test_state *uts,
- 
- 	for (j = 0; data->images[j]; j++) {
- 		const char *expected_uuid = data->expected_uuids[j];
--		const u16 *image = data->images[j];
-+		const char *image = data->images[j];
- 		efi_guid_t uuid;
- 		char uuid_str[37];
- 
- 		gen_v5_guid(&namespace, &uuid,
- 			    data->compatible, strlen(data->compatible),
--			    image, u16_strlen(image) * sizeof(uint16_t),
-+			    image, bytes_to_null_pair(image),
- 			    NULL);
- 		uuid_bin_to_str((unsigned char *)&uuid, uuid_str, UUID_STR_FORMAT_GUID);
- 
-@@ -124,9 +144,10 @@ static int lib_test_dynamic_uuid(struct unit_test_state *uts)
- 		{
- 			.compatible = "sandbox",
- 			.images = {
--				u"SANDBOX-UBOOT",
--				u"SANDBOX-UBOOT-ENV",
--				u"SANDBOX-FIT",
-+				/* Forced UTF-16LE to keep these endianness agnostic */
-+				"S\0A\0N\0D\0B\0O\0X\0-\0U\0B\0O\0O\0T\0\0",
-+				"S\0A\0N\0D\0B\0O\0X\0-\0U\0B\0O\0O\0T\0-\0E\0N\0V\0\0",
-+				"S\0A\0N\0D\0B\0O\0X\0-\0F\0I\0T\0\0",
- 				NULL,
- 			},
- 			.expected_uuids = {
-@@ -139,7 +160,7 @@ static int lib_test_dynamic_uuid(struct unit_test_state *uts)
- 		{
- 			.compatible = "qcom,qrb4210-rb2",
- 			.images = {
--				u"QUALCOMM-UBOOT",
-+				"Q\0U\0A\0L\0C\0O\0M\0M\0-\0U\0B\0O\0O\0T\0\0",
- 				NULL,
- 			},
- 			.expected_uuids = {
-
----
-base-commit: 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc
-change-id: 20260827-uuid-be-56657e7aa80e
-
-Best regards,
---  
-Alexey Charkov <alchark@flipper.net>
+>> +
+>> +int meson_get_boot_device(void)
+>> +{
+>> +    return -ENOSYS;
+>> +}
+>> +
+>> +static struct mm_region s4_mem_map[] = {
+>> +    {
+>> +        .virt = 0x00000000UL,
+>> +        .phys = 0x00000000UL,
+>> +        .size = 0x80000000UL,
+>> +        .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>> +            PTE_BLOCK_INNER_SHARE
+>> +    }, {
+>> +        .virt = 0x80000000UL,
+>> +        .phys = 0x80000000UL,
+>> +        .size = 0x7FE00000UL,
+>> +        .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+>> +            PTE_BLOCK_NON_SHARE |
+>> +            PTE_BLOCK_PXN | PTE_BLOCK_UXN
+>> +    }, {
+>> +        /*
+>> +         * This mem region contains in/out shared memory with bl31,
+>> +         * hence it's marked as NORMAL memory type
+>> +         */
+>> +        .virt = 0xFFE00000UL,
+>> +        .phys = 0xFFE00000UL,
+>> +        .size = 0x00200000UL,
+>> +        .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>> +            PTE_BLOCK_INNER_SHARE
+>> +    }, {
+>> +        /* List terminator */
+>> +        0,
+>> +    }
+>> +};
+>> +
+>> +struct mm_region *mem_map = s4_mem_map;
+> 
 
