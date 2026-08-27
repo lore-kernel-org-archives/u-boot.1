@@ -1,150 +1,147 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCF61C61DB9
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 07:50:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24BC0C5DF9D
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 08:13:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 94670406CA;
-	Thu, 27 Aug 2026 07:50:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2308180DC1;
+	Thu, 27 Aug 2026 08:13:35 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id k31bij6RX1II; Thu, 27 Aug 2026 08:13:33 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787818413;
+	bh=S6W0GjvOLsje77xp4P+jRBvs7bZK++S21u0CgVMr8VE=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=UEbTM2iMnyOKbsvX94m/fR6OFAcUOA7HfSVrzK7BKV0VVutKGGoWWHATzEmIhp5YF
+	 EbQ+pDFuCCMaTU13AgeMEKEng9xVbZWuPL1coVua1tIeSeDXDbSlccniK2xA0CQVvB
+	 IdomHW0xBwcOWGzEXKGqIunDzRiVTizPWN5b3xGRP+bgIGLJyIxcZlscvG0QSgzhcp
+	 G/uCYUlMZS80hTczFI//6n/ijMbidptDB3ISKPX5rMKe1atxYRHs5WSS7CBEiNK+dp
+	 w9b+JZaKt4jricxe2N/Ahtfs7morwxjwifBhGOvyu+g1rEt/w3QnoEQeX6/z1ENHkt
+	 UZKvZXyYh/sWw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id EB97A80C84;
+	Thu, 27 Aug 2026 08:13:32 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 882A93A4
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:13:31 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 68F29406BC
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:13:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id njcqbSGquED2; Thu, 27 Aug 2026 07:50:46 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+ id CfrnhnydiVb5 for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 08:13:30 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::533; helo=mail-ed1-x533.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=yp/bW4C5
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3676F4069A
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:13:28 +0000 (UTC)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-6a3e145e1bfso467789a12.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 01:13:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787818407; cv=none;
+ d=google.com; s=arc-20260327;
+ b=ZxKPZnc/ix0GPhSLfu6FoHv9tXMJDzvKr4AdHu3I7U3DdxXi8T6SbSYOcCs56nNHCl
+ UNrRs9shzh0FL+gmyZHA+rduCpG1QtP6vKfFR9N2wO00iWXsX3u+l44PSwhXB80fs5t8
+ 7wg0CxxMWatxapdoQG+OF0OOtVEREkiDnUdMHSs0mCluZPQEIQjLpjOnnLdlfbESFF+q
+ v7UzPrnUeunX+oDFhzVc7Rw3OF9zAHjTf7t+oHiz2LInn/4/sJbc2P4lIg46CRk1js3k
+ jivDTqm+gefzMdKMySQ9/z0F2AglowEv6JXTSip4B0cc1DIHAJ2SesvxgrlqnzSnKAPm
+ sX+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=S6W0GjvOLsje77xp4P+jRBvs7bZK++S21u0CgVMr8VE=;
+ fh=evkcmTNAyIb9LvpjeekKM5nvyZFiyByn53Ds1pEzDUE=;
+ b=R81j7SzTnG66Zg3MNnWrOsPPrmIBS76rcEhPumohg/IIQM5xzujpfkQohzxJZ3aznZ
+ 0KuFWGQzhOuoy+lwedqrdhVElV+QgLbpbTx4B6l2r0TVQYEXEG9wb0FycZlhaGRjUQsY
+ rhYxdEvs5mDs5Kui4OUVDBGZZg3bstYSeqyLX1dhipim8prCjcoDVCbEizlKUazTbG2p
+ /rGBrQl2KNfJG4xIZTFz74am4wypkSO+PbumaHEKTDvWwEjRvvS5oOjJqSFJrk1Ook80
+ 2eTYQxkmSkWGNMFMyl0v9IZ7DNoE6fd2Xc48O/LMhCRbCs5OvcLb3RN248oB3hosm5v6
+ sA8g==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787817046;
-	bh=+uB7gV35SKMiP78g9vTMFsWHd3FnrEuJy1wEIk9KXSc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=anqOOMR6eahaeDmzFhOvUpQW/cbUzK28gCVUTeMZTTWdzhemZ6g8vXgt2SPczMAJi
-	 Xk3Mdl+sKO95V9mcgSIP63tsChRJ/0ST/WqfsobAaG6E/1Dj/tks/m2uyvElS3O+H1
-	 O/SBaLPKyq34rLb3DyGlQgQh6tWYPrVU8sJ+iBwjXOTd++TaY0daY/yir4QwDKCI+h
-	 171sS6HJqfVldz+Crlsnd2BAeT+48gDWfKWAjBtc0Jf+WOxitRboE6Jz66lISiz+/+
-	 5oW3EWsdMS1n/cBvqhQajSuGFzGoASQVIQIt2dhqNFUpdf6gxCn7mP645FxFt6nIer
-	 mMvY8YS4SfoYg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 988B6406D2;
-	Thu, 27 Aug 2026 07:50:46 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 0ED603A4
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 07:50:45 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E428560761
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 07:50:44 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aFLz3cseDhkb for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 07:50:44 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
- envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=GK4aJmsw
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6B9186076F
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 07:50:42 +0000 (UTC)
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 31C183FE2C
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 07:50:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1787817040;
- bh=+uB7gV35SKMiP78g9vTMFsWHd3FnrEuJy1wEIk9KXSc=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=GK4aJmswZLzM47c4gRT4uUXyPPLRPwMtgG4r09X95uof8DAS5eM8RpErOnCtiJOjp
- zV/KIvFD4U332zhl0CyGRhB+Q0hepl2W/XTuYx5WOZF16Z7RAb7+oMIFv9mV9L8DVh
- hsD6HEtBt9Nb9iFphRvszXZQA7UZQr7qXQ6LeoOdLvv20XQgD2S2VTkX6OPFj8Wvrw
- 98n+qxnQHMm2ymGc/rXidWOp1OPM0Gkj9qvJ686KUEC2W6aj5ADtU08sBDXEm+v/lj
- L1MrHxCwgGx7Di2rTSoYCmczmKdO0RPwFQwt8qBZRPB3DFDgNUgMBAS57byyzwvyI0
- kW1jYFwDAGQrrdthk2DaVwaBY8SJaW7Ve2hFok/7PB/wzCuM1Vz0Xf4LalpgRfs6al
- PMMTOHE+Ct67+cJcLvvfGKy8+XAoyhu0RzVCsX9oGKzeCYqjacBUIfIPBBtEQ9MwxQ
- vtstpCJveiqj5bMQ/ijqSaMj2ZYKMNgpL5x88kpS5W18FWmBISpj8FHxfwZjmv9s7n
- ucpIJXxV+KWGI3wkcU1rjjfJCPLXbwe2358Mlr2U/s17Xb40GEQceba3ybYjnJH8Jx
- iyJDSaC5AsEBUDCrjEYoy3tA6TsnpCUcsSwV+OpU31XMmFqrqLODAyQ6OzSRv2Lfql
- OMIWKh8elfYRLTuZ02Spvfm8=
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-47f8f8fde2dso1036096f8f.0
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 00:50:40 -0700 (PDT)
+ d=flipper.net; s=google; t=1787818407; x=1788423207;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=S6W0GjvOLsje77xp4P+jRBvs7bZK++S21u0CgVMr8VE=;
+ b=yp/bW4C5I1Ah3Al+lLsWr7/QAUv6F0MoHsi1HGw2kz2wR8rmYO5/i1E87VepL6yiNp
+ 6P4NR9OuGpxuUvhy7Q2dYnJIzKDQ3i1W6csQYMliO5PVsHaNxSpPMPobIrawtqYQsl5P
+ FeiClSWJWk8aloI/5W6eerTadCm6YjMcoSEABRcj3xBFi+8gqrKv58yzY+UM4hnmVCki
+ n/ErdmCxsKrRhC+9H9UqnxExqhgpAXLOfTvfc8RM9K7u3WjU74bFtRldZiN4aU9CBeGS
+ CaE+c0S1vjfvfBEDLIfWs+ijUvSn3Hmu/eIZMGzXY+I3FhwzZCnF8LtegVcdDRE7Cv2T
+ ezPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787817040; x=1788421840;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=+uB7gV35SKMiP78g9vTMFsWHd3FnrEuJy1wEIk9KXSc=;
- b=CxTDr3K7UWiqicK2E09pUi89TWEAShxOF/HMVMNGBVI1YTZHgEyYKELguj1OB4ra8u
- 0zWKSsdL9tKTMsmHQwD685vYfz2YOQcWdmKwc8uSEXH+/VqzLxD9mf9J44wF5rjJ85Gz
- DEUkUzrTGCmI/nixH9z2WbhPKmlV1AGCMGqm/gNiujv+SElmoW/Tf9AdNMwFfRa/BLr+
- 7bQ0frM9QY1u1ZL4UYSyxHV2qlGwdjg8BXfUS0JtqeR5NnnJgmgmahv8ZGbGzUj2XRnX
- YiOcLr/+/cJ9++GKt47QA0FGpWJDMl7wvMHNyP2U9zqCgFOPhT6jDy+O1XgwW/qmpxey
- Hr6g==
+ d=1e100.net; s=20251104; t=1787818407; x=1788423207;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=S6W0GjvOLsje77xp4P+jRBvs7bZK++S21u0CgVMr8VE=;
+ b=LtVhU8qR9oeWuq6R/t6KCuJQ4Xe8spxqm1Hay2EQK0N1/MGOo/S2Y2WThIbJoOgPSt
+ pHiVni/gbTpIYvPQcI85rOt7UIlPnH2MQQ8yZlvmTVlGwp1xf9K3pk2nYQQPncR6gT0T
+ tsdDdl1/BzOkBza+z3jQcJ2Aa20OUZJ/RBEEvGUz0neg4HcA6L3Q3B52vMnjH12NEaFe
+ l/DS6i339fN96Oz17gay2u6ahnuW2VCNfHXltSxzT6fgkaV0i7X0RtcRyeQ3pc2E45gr
+ +T5H36IwWa7AVxcsi4rDY6B57NzO92qvA99JKzy7i9Btap7s8svKKYaKd3/hNQ0MMD6t
+ 9FOA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrzpyrhLEOcQu1rZxvuBtzEf8Zh5bWMgTY01g16p1XYKtIaauylUC9K3eWYuquv6GKzd2Q5WJU=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lq/JAIGzI/7d+I5WwbKeZx76m4pI4bK8Zp90FkXjSxwA5qkDWl
- DFgL2Wo8lYjZMkfm+yVYqsShFNeKkiB7KRPtBKXe14OhHn+bh2yBZOHZDb7kYWB+vlBZ3lsppAM
- xLyRfP3NXLSGSbOo2V06QzpdG+9Ckb3U8jc0dt5XmbAwGZntXh+PB1yaMS/h3f3TeU9Flj+DdNJ
- qr+s7j7n8t/w==
-X-Gm-Gg: AR+sD10MIKLo7Sq2EcjdtjtP43/DgCGneI2OaJ4DBrpoofYd09IA/4EBryKHwGz9UcR
- 8PtIzDXDtml43UC8bS/3Pt1uqUhpNwmMkgQTKUU487+Mwx9hZU5fizeGNYd5JL9oxYFRl4Q7dPx
- 8m1l7bjiAGRFoykmaiEKA+bRaFk1wrmEd9EThAodyDn5SDGC7CYvw5ZaHzhNWIkMZNf7UAFZc1Q
- w2Vag3f3vHm+GhfxCiwre83x7dLW6tahwpNZjd/KAb+wsaheOi6U9QBH9XaI/xiRPAcgHzbUcre
- JqjRAjIlRigf7AmY8ZIj1Kq5IqRYAsG5Za3UO2ClPKHJBBEinmbi5uGtWP5L5pjjMz24OZ2YBDl
- cm/8qnmsUsYF1/qeJks0woDy/RAmQklCSbwcszLmQ+SOfn8E/D9ohFe8AQbJ9MLYi1derg6v+Yj
- T7kq7UWJ8Wue4HMBl7sdFzFmgb
-X-Received: by 2002:a05:600c:3145:b0:493:bd2a:93be with SMTP id
- 5b1f17b1804b1-499dc703b1dmr133521365e9.6.1787817039536; 
- Thu, 27 Aug 2026 00:50:39 -0700 (PDT)
-X-Received: by 2002:a05:600c:3145:b0:493:bd2a:93be with SMTP id
- 5b1f17b1804b1-499dc703b1dmr133520025e9.6.1787817039068; 
- Thu, 27 Aug 2026 00:50:39 -0700 (PDT)
-Received: from ?IPV6:2a02:908:1242:30e0:d8da:da16:d52e:e57d?
- ([2a02:908:1242:30e0:d8da:da16:d52e:e57d])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499fa55f4f3sm40489525e9.0.2026.08.27.00.50.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Aug 2026 00:50:37 -0700 (PDT)
-Message-ID: <b01546d3-f18c-4546-9d1b-58dd267067b3@canonical.com>
-Date: Thu, 27 Aug 2026 09:50:35 +0200
+ AHgh+Rr4xqVAMpzyrpzzNCMPUqejKVpQkw2gtZ5W19nCXU1YnKGV4BhsKrP3MmHQ2L7oweKDLKk8MEw=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mISHNjQzSMqHbXRnx756eaiBMPPdEfBW5pHnYIrG88KGmWxJSh
+ RqIPATZsi6RI8JM2AFglZ/fQLg1rTD7A74/lnG3XI9oSicPXqv1P7jDVMcdhwckNDFN7RJcHpGb
+ bwTfCU9UVVtfmYcCtuWbsbUEVQWefRODZAmqQ5h/NKg==
+X-Gm-Gg: AR+sD10GtbHEgXcPqTRYTKvr9GZ9Yg9fD/+BGZJKRDmHdW7Q+KKVSbYXbDfiERDuo7M
+ bTVoS/4g5V9dUZN/JVSb63vtirkkCaOqECLNrd/PrmZHvYyzps2nC6tG96sB7KAK6xhh/ot+3WH
+ 2JmaGi1xkqXAHKKjxFnU9RGjogALRQrlWK1fVXyx2J5ynFB13h6dvGdqPk55edLPD2Qcx17I5vD
+ 92i4blqOlWLVi3hA7SsOLjNu9sWmD7OXc3Y1dxk04Q0shnLIU6MA34v9IBD9YV7i6m5qJaj5u3l
+ MFqzj5t6C+gmg/sT9PNoXCUBcsEIpC2ixPqR6nIKdLJGwBe2EYBoZAIAq1yZ/Jo8pHuCtcuKOav
+ AMXL08ocUAyQ=
+X-Received: by 2002:a17:907:6093:b0:c08:417e:3696 with SMTP id
+ a640c23a62f3a-c250c318ec5mr1300892366b.20.1787818406586; Thu, 27 Aug 2026
+ 01:13:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] disk: part_mac: Remove the Apple Partition Map driver
-To: Alexey Charkov <alchark@flipper.net>
-Cc: Tom Rini <trini@konsulko.com>, TsiChung Liew <Tsi-Chung.Liew@nxp.com>,
- Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Jeremy Compostella
- <jeremy.compostella@intel.com>, Robert Marko <robert.marko@sartura.hr>,
- Chris Packham <chris.packham@alliedtelesis.co.nz>,
- Kostya Porotchkin <kostap@marvell.com>, Ben Schneider <ben@bens.haus>,
- Luka Kovacic <luka.kovacic@sartura.hr>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Mario Six <mario.six@gdsys.cc>,
- George McCollister <george.mccollister@gmail.com>,
- =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
- James Hilliard <james.hilliard1@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Pranav Sanwal <pranav.sanwal@amd.com>, Daniel Golle <daniel@makrotopia.org>,
- Peng Fan <peng.fan@nxp.com>, Vincent Jardin <vjardin@free.fr>,
- Johan Jonker <jbx6244@gmail.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
- Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.u-boot-project.org
-References: <20260827-drop-part-mac-v1-1-c81ede492be7@flipper.net>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260827-drop-part-mac-v1-1-c81ede492be7@flipper.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
+ <20260731-gpt-4k-v1-1-a3f1f16b53ae@flipper.net>
+ <73745748-eeb0-4dd8-ba15-6c220037b330@canonical.com>
+In-Reply-To: <73745748-eeb0-4dd8-ba15-6c220037b330@canonical.com>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Thu, 27 Aug 2026 12:13:17 +0400
+X-Gm-Features: AcwNN1U9XoTPFf9PGCyGqmVBLxPrClqlSh5_ah1scwQ7AXlDqnf_-MxlXTMxWK8
+Message-ID: <CAKTNdwHh-MKxHYDjWNgC97Th-4BwbrPoB4irAdBbA7QMa9fBjQ@mail.gmail.com>
+Subject: Re: [PATCH 1/6] disk: part_efi: Size the partition entry array from
+ the block size
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Anton Burticica <mouse@ya.ru>, 
+ Javier Martinez Canillas <javierm@redhat.com>, Simon Glass <sjg@chromium.org>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
+ Jacobe Zang <jacobe.zang@wesion.com>, Jagan Teki <jagan@edgeble.ai>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Jonas Karlman <jonas@kwiboo.se>, 
+ Suniel Mahesh <sunil@amarulasolutions.com>, Klaus Goger <klaus.goger@cherry.de>,
+ Tim Lunn <tim@feathertop.org>, u-boot@lists.u-boot-project.org, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -158,34 +155,46 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 8/27/26 08:08, Alexey Charkov wrote:
-> The Apple Partition Map predates Advanced Format media by two decades.
-> Apple never extended the format to cover 4 Kn logical blocks, has since
-> withdrawn its documentation, and has shipped GPT on its own systems for
-> almost as long. There is therefore no specification left to follow for
-> the one property that matters here: where a partition map entry lives
-> when a block is not 512 bytes.
-> 
-> U-Boot's implementation reflects that. All three entry points read one
-> block into a buffer sized after a 512-byte struct, so they smash the
-> stack on any device with larger blocks, and part_test_mac() runs during
-> partition probing on every block device. Sizing those buffers correctly
-> is easy; deciding what the driver should then parse is not, and guessing
-> at a layout Apple never defined helps nobody.
-> 
-> Nothing in tree depends on the driver either: it has no test, no
-> documentation and no MAINTAINERS entry, and the sole reference to
-> PART_TYPE_MAC is its own partition driver registration.
-> 
-> Drop it. Anyone who needs Apple Partition Map support for emulated
-> hardware can bring it back along with a test.
-> 
-> Link: https://patch.msgid.link/cb50976b-917f-4843-8b0d-dc2a32e59d65@canonical.com
-> Link: https://patch.msgid.link/20260825194528.GB523975@bill-the-cat
-> Suggested-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+Hello Heinrich,
 
-Thank you. LGTM.
+On Tue, Aug 25, 2026 at 10:47=E2=80=AFPM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 7/31/26 14:40, Alexey Charkov wrote:
+> > gpt_fill_header() computes last_usable_lba and first_usable_lba from
+> > hardcoded block counts that silently assumes 512-byte sectors and the
+>
+> Hello Alexey,
+>
+> Thank you for fixing this issue.
+>
+> Nits:
+>
+> %s/assumes/assume/
 
-Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Ack
 
+> > default number of partition entries.
+>  > > The partition entry array holds GPT_ENTRY_NUMBERS entries of 128 byt=
+es
+> > each, so the number of blocks it needs depends on both the entry count
+>
+> The size of the partition table entries is not fixed to 128 bytes.
+> Instead it is 128 * 2 ** n with n >=3D 0. The size is stored in field
+> SizeOfPartitionEntry of the partition table header.
+>
+> You already consider this value in gpt_pte_blocks(). It is just the
+> commit message that is misleading.
+
+Ack
+
+> > and the block size. write_gpt_table() derives that count correctly and
+> > writes the backup array at last_usable_lba + 1, so whenever the two
+> > disagree the backup array no longer immediately precedes the backup GPT
+>
+> It remains unclear which two values might "disagree".
+
+Will reword in v2, thank you for looking into this!
+
+Best regards,
+Alexey
