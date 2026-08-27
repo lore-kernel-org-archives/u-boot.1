@@ -1,123 +1,118 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29FDDC61DB9
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 16:37:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D27BC61DCD
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 17:01:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C91C940550;
-	Thu, 27 Aug 2026 16:37:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 88BA280EAC;
+	Thu, 27 Aug 2026 17:01:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uBd1fr10waUW; Thu, 27 Aug 2026 16:37:41 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dWbRv8EUj7Fu; Thu, 27 Aug 2026 17:01:14 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787848661;
-	bh=KGOczZfbBs/Pwyx1fvwVoP3Fzu7WDOtwYePXUP2vM9U=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787850074;
+	bh=9jfdT+2pLEPxhm0R3X+vXM+Bk2hXFo/YMl1mud71UnI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=X+0lZbWnRNvJ/MR9k5Ka+CdAKtoCOAY2zU+LKGaqHXdiz4vIjiYR/Ii/jLjizBmvs
-	 lJ05ToYiu2hmP70OxAkIDyqy0JyxgMrumXtxCcqhcT28Glv0LDpY7UiD3F032tGvNd
-	 +aPEXP1NTxwuo6GLfPh3J9RgJYs/ZY2xPimF0KjaAjz6umnTzPhBvkvcnWEiSdPEcd
-	 ipzppf/JA6PPmhQqu4WhFzyddMAUDgMMGSWoMGxFZEC+BBWM2ZWR6ZwWNUIIbwwGlC
-	 Wc70UAnJUWelRpX7zFHDHOfwTak0PQh0bSz+gutDi0Nh2pANrcG0RZedOMjQV4VBIv
-	 1vrhCnhFoOFuQ==
+	b=Qr10yEgv7yPJ8RW8eSOeejgEgCBkOp+TeVMgZAkqOwCey6IaUY+hi+rPuV0XUcM/J
+	 zpKtyTKsvS8EmEtHmF33COH5KJsnO6pFsL0epqPZAtPdnT3p0z9YuV99Thj9SqZaOG
+	 F3IWb1xHFcdOTM+3QoDUZ5DpFgVYM0OVxQeukyAuOZA+zpPPZoqFuK2KCmGt5pmxiu
+	 aPXMj+W/LhgfHXHcq473EUtyo5KhSFWc6PDpjqKIAWMeyO40lTqp1Gp7CjrtwAOq+f
+	 n0Wr7pSdoljK8AO3kB1cSUgXNOzp+bG4BtiT2hqTjMhKfKWo+JYTfurpCI+RnGvIMh
+	 nU1e8S1AtsVQg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E332E4047E;
-	Thu, 27 Aug 2026 16:37:40 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 60998E09
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 16:37:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 95A8C80EA3;
+	Thu, 27 Aug 2026 17:01:14 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 59763355
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 17:01:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 466986078A
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 16:37:39 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4B4F7607AE
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 17:01:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OZzCftcZgs_w for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 16:37:38 +0000 (UTC)
+ id UA_8bT4nFv7w for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 17:01:12 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1135; helo=mail-yw1-x1135.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+ client-ip=2001:67c:2050:0:465::202; helo=mout-p-202.mailbox.org;
+ envelope-from=marek.vasut@mailbox.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=gCLyWoxK
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 665ED605D2
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 16:37:37 +0000 (UTC)
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-8565d77c277so486587b3.0
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 09:37:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787848657; x=1788453457;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=KGOczZfbBs/Pwyx1fvwVoP3Fzu7WDOtwYePXUP2vM9U=;
- b=gCLyWoxKqvVcVRv3GKgHmfVt3eA/fKHFSTCkY+Bz5CNo77ZBJv17whu3390m0SBWX1
- cM5SYv/hL1VeBAMd6u9HOI2uDq6dz5BX/YdwbVm/hQwMhIAG7HjqL4QtDdgImsIUljla
- cHqPTbgF6kP8U09fNldchjU2SRxC5ffIRS5Tk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787848657; x=1788453457;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=KGOczZfbBs/Pwyx1fvwVoP3Fzu7WDOtwYePXUP2vM9U=;
- b=S716+ppL4tYZr6BP2VeyfPFNlx/c4BrIqzzl7BIs0MJOyXIRBppa8UoxsyQ0cyFimH
- PcXANddijT+hUHKtJWpz8FIZWq7XQp7uMlYjnITOk2BvLXELx3ZrniW9Hqf1iYZ9DoZD
- 8GJAfcTEjmryrnrcx15wpVCJ4Bsadd4IujClRHI/TMM5C7PF7sJCpsfK08vCMlmNvFOk
- Ed5cMNqO0ZzwP6vKkKszpIWZe06VFgE/RLpcZDmmkoeF8TsauRqOvcd2OcXw5sFRXoJc
- 6yM9ecl8VFhtHcrfk8AVA9bh912Z1Bh3pBTYePDx0pCmYMOFQf3IFJ2ajBdU29UenW4r
- lcoA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrGX8yMTVzi2he+7oNWpwn66N6oTVuyOqOudT2nOaGempSvCVV+CLD0tQFC6X7ASygCUzx36Ck=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nC1VGnanrI2/XHwnSwJXXlASBG8qyJ9sMJnSuh8DrhZPUgnJz7
- YPbZrWvN+7+Ag+EOmwY4R9qCkk96P682Jaq7jikAJZuZQE6nes/xbeHbSEHr6QACi/E=
-X-Gm-Gg: AR+sD11iFKpxxfkr/FFcI4CjooUslgoMbUXkGenSXivpTyjqsKLzOD8xnj5NgGto2G9
- 97A+2QNKQUPTm+bh5Yd5B1JXofdjJKej1S/+fjcfx/jbV2acJVOgmOWtEUsDw1iyX4fKZsd7ehn
- HZyvB8LDdyJ8qxYahCDu50kdBejG94i2NPuAGjP3EwdtB+uwS4pJdujwK3HwsWDDTZqCJTHaMNj
- lYrwqKiPJu0mZZ6qgMq4XlpgqFjKs8jXpI1IjdTcNs5QghTvqfuO936F4SjuuuBfwAr57NjcJEP
- AWkJLrW8RIYkAuGmRAtQARJDlJfSvEP/aZooDEexgyoQm2go32n2AHPCHYZwcPecmkPgZwYonnY
- cAlm1mvqmcKMP4a4e3gB9Xfob2L/rlLxj47cQVhh15Q2b286Tmw8Iqt9cokGqJniop44515xudg
- ecftHy5L5U7tDdv9PyxYfNAu04D+QsC4Ija1dK0Cfb0AN4+cglwVasANut21uHKAM8mRjO5v6tl
- EPdnjK4eNeMSmoafww/EPTB/9BvDpQkl7miXjqcCO+ncWANzA/Iz9+O05dXP3h8Knw0DTO9vsrR
- 8rQa6E7sfg==
-X-Received: by 2002:a05:690c:315:b0:841:773e:8d86 with SMTP id
- 00721157ae682-85d6b464e55mr3938617b3.15.1787848655292; 
- Thu, 27 Aug 2026 09:37:35 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-85b624fa606sm12911457b3.43.2026.08.27.09.37.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 09:37:34 -0700 (PDT)
-Date: Thu, 27 Aug 2026 10:37:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Suraj Kakade <suraj.hanumantkakade@amd.com>,
- u-boot@lists.u-boot-project.org, michal.simek@amd.com, git@amd.com,
- padmarao.begari@amd.com, Simon Glass <sjg@chromium.org>,
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>,
- Borislav Petkov <bp@suse.de>, Michal Marek <mmarek@suse.cz>
-Subject: Re: [PATCH 2/2] Makefile: drop GNU Make < 4.0 compatibility code
-Message-ID: <20260827163731.GE3959812@bill-the-cat>
-References: <20260827121108.1775123-1-suraj.hanumantkakade@amd.com>
- <20260827121108.1775123-3-suraj.hanumantkakade@amd.com>
- <CAC_iWj+WXkNAZPyRup4w09jSyr6TbkjLgZRyDxKzCQdFaK8-4Q@mail.gmail.com>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
+ header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
+ header.b=UFKlLknX; 
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=CegI2QTP
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D8528607A0
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 17:01:11 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4hW78474ZzzMlG4;
+ Thu, 27 Aug 2026 19:01:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1787850069;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9jfdT+2pLEPxhm0R3X+vXM+Bk2hXFo/YMl1mud71UnI=;
+ b=UFKlLknXrrKbj+dIbM2DXyDgLKDD7cHJieXZE9umYbijKnOj4H3j8absRTS8XT+4tmu72f
+ ViLXL7eNPFmwQ2W/ziWU+OJLI+XwikLigd7r7uX2nyFI0iAJvUDcuqH1FcriTJulcZ6PTy
+ PCD0I1ZWS1JmVHu0dqyqYUTJz0cpbuHRdlYnQbKMN4lqYrLKLL2FGyHofMm4sHbIOk5zlp
+ W9XJR00RY3e+Jp1/9NOBaSBhlPLwjcW9qg9LQbgKJ0Q6Zmmh09lqupdnmWrVbPKAjrnDS0
+ qNnGcDHMjFYO+dcoSy/gegrXZB6l1Y2zQfydDxiEQndrcHjF5mp6GUUqElX2yg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=CegI2QTP;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::1 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <125194c0-6055-4233-8f02-904234a0fb2f@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1787850066;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9jfdT+2pLEPxhm0R3X+vXM+Bk2hXFo/YMl1mud71UnI=;
+ b=CegI2QTP3pcZZWZi38UtHEeZmgqOHsLZNuRN5IHHO8G7IFzgTR7fJGjjSGVm4PUflUGrT3
+ Z77drrRgmsaCIetyXJa0N1Qgu+UVsGpdnCKovGuyJpDKHzVdFkmhMA1d72OxijIwlBv5TA
+ IZy6nsXjlOEIjvzzD9UOjZPq6dcW7U6ctG7GMdpctRAVSLdFkpT+zDf6PNUx+fcEa+XSI2
+ Ihwj4n/CptCft8a6OoGE9GFJXzTcs5xDDNifnLcKN+HdgXjhKMo9knnsEV0zdvSa5yRE7K
+ 0W/313c/4srK1/bOAlWBgGrvurb2k5ykl1UlMSyUlV4zNGqOcvzKzsxppsQkiQ==
+Date: Thu, 27 Aug 2026 18:53:57 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/xIx2Fq3FF9zui1z"
-Content-Disposition: inline
-In-Reply-To: <CAC_iWj+WXkNAZPyRup4w09jSyr6TbkjLgZRyDxKzCQdFaK8-4Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH v2] mmc: zynq_sdhci: support Renesas RZ/N1
+To: Ralph Siemsen <ralph.siemsen@linaro.org>
+Cc: u-boot@lists.u-boot-project.org, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Anshul Dalal <anshuld@ti.com>, Johan Jonker <jbx6244@gmail.com>
+References: <20260814-rzn1-2026-10-mmc-v2-1-51e4d8a717b8@linaro.org>
+ <4e3a48d8-d971-402f-9542-820f254abc77@mailbox.org>
+ <ao3xXc7dNbFmKEha@maple.netwinder.org> <apBFzRluireFK8tl@maple.netwinder.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <apBFzRluireFK8tl@maple.netwinder.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: gom8hzumwn85wqsxn5qch3j6bmtq31qa
+X-MBO-RS-ID: 24295a7a8464db5e69c
+X-Rspamd-Queue-Id: 4hW78474ZzzMlG4
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -131,59 +126,57 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-
---/xIx2Fq3FF9zui1z
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Aug 27, 2026 at 04:29:29PM +0300, Ilias Apalodimas wrote:
-> Hi Suraj
->=20
-> On Thu, 27 Aug 2026 at 15:11, Suraj Kakade <suraj.hanumantkakade@amd.com>=
- wrote:
-> >
-> > RHEL/CentOS 7, a popular distribution that installs GNU Make 3.82,
-> > reached EOM/EOL on June 30, 2024. While you may get extended support,
-> > it is a good time to raise the minimum GNU Make version.
-> >
-> > The new requirement, GNU Make 4.0, was released in October, 2013.
-> >
-> > Raise the enforced minimum GNU Make version to 4.0 and drop the
-> > now-unreachable compatibility code for older versions:
-> >
-> > - Add an explicit "GNU Make >=3D 4.0 is required" version-check gate.
-> > - Simplify the "make -s" (silent mode) detection to a single
-> >   unconditional check instead of branching on make-4 vs make-3.8x.
-> > - Drop the GNU Make 3.x sub-make workaround, which is now dead code.
->=20
-> Overall I agree on bumnping the minimum requirements to 4.0. In fact,
-> I think I did that when I did the Makefile bump to 5.x. However, the
-> macOS tools stopped compiling. We need to check the CI for that before
-> merging this.
->=20
-> >
-> > Fixes: ffe29ebc0701 ("kbuild: sync top Makefile with Linux 3.18-rc1")
-> > Fixes: 5f520875bdf0 ("kbuild: Bump the build system to 5.1")
-> > Signed-off-by: Suraj Kakade <suraj.hanumantkakade@amd.com>
->=20
-> Why do we need fixes tags?
-
-Yes, the kernel didn't enforce this requirement as the minimum until
-around v6.10 or so.
-
---=20
-Tom
-
---/xIx2Fq3FF9zui1z
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCapBnxwAKCRAr4qD1Cr/k
-CsqpAQDB4CNDazvxf1B3S9DRygHmti7GPvJRPgQu7CQNimAK5wD+OZByAs+I0M+F
-VkzFxa3P47ZpfcYmk31Wes4pbvblqwk=
-=TOWx
------END PGP SIGNATURE-----
-
---/xIx2Fq3FF9zui1z--
+On 8/27/26 4:12 PM, Ralph Siemsen wrote:
+> On Tue, Aug 25, 2026 at 03:47:41PM -0400, Ralph Siemsen wrote:
+>> On Sat, Aug 15, 2026 at 12:21:11AM +0200, Marek Vasut wrote:
+>>> On 8/14/26 8:30 PM, Ralph Siemsen wrote:
+>>>>         return ret;
+>>>>     }
+>>>> -    clock = clk_get_rate(&clk);
+>>>> +    clock = clk_get_rate(&clks.clks[0]);
+>>>
+>>> Can the clock ever be non-first clock , i.e. do you need to handle 
+>>> clock-names DT property somehow ?
+>>
+>> It's not clear to me if the DT binding specifies the order. It says 
+>> there must be either 2 or 3 clocks, as well as clock-names properties.
+> 
+> I had another look at the clock ordering. According to [1]
+>   "Order in lists is significant, order in dicts is not."
+> 
+> The binding [2] uses a list for the clock names:
+> 
+>    clock-names:
+>      minItems: 2
+>      items:
+>        - const: clk_xin
+>        - const: clk_ahb
+>        - const: gate
+> 
+> And as we can see, the reference clock ("clk_xin") is listed first.
+> 
+> [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/ 
+> tree/Documentation/devicetree/bindings/example-schema.yaml#n47
+> 
+> [2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/ 
+> tree/Documentation/devicetree/bindings/mmc/arasan,sdhci.yaml#n116
+> 
+> As a further check, I reversed the order of the clocks, and then ran 
+> "make dtbs_check" to verify against DT schema. It complains:
+> 
+> arch/arm/dts/r9a06g032-rzn1-snarc.dtb: mmc@40100000 (renesas,r9a06g032- 
+> sdhci): clock-names:0: 'clk_xin' was expected
+>      from schema $id: http://devicetree.org/schemas/mmc/arasan,sdhci.yaml
+> arch/arm/dts/r9a06g032-rzn1-snarc.dtb: mmc@40100000 (renesas,r9a06g032- 
+> sdhci): clock-names:1: 'clk_ahb' was expected
+>      from schema $id: http://devicetree.org/schemas/mmc/arasan,sdhci.yaml
+> 
+> No complaint when the clocks are in the correct order.
+> 
+>> We could try using the name ("clk_xin") and if that fails, fall back 
+>> on using the first clock.
+> 
+> So I think we don't need this extra complexity after all. It should be 
+> fine to rely on the first clock being the correct one.
+I'd still go for the safer option -- look up by name, and if it fails, 
+fall back to look up by ordering.
