@@ -4,176 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D854C61DC4
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 13:35:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55FB7C61DC4
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 13:39:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 165F4808A8;
-	Thu, 27 Aug 2026 13:35:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A8F0C80E25;
+	Thu, 27 Aug 2026 13:39:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jNny-dMjK53a; Thu, 27 Aug 2026 13:35:15 +0000 (UTC)
+ id RUKBq4GMpPYX; Thu, 27 Aug 2026 13:39:57 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787837715;
-	bh=OdJFmGh7Am/7Jv0z/iBAHxVmnUBAGioeL/O6fyFvAnY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787837997;
+	bh=T1S4OUNhx/dRuNbDRWNKDSkAxb4N876rtCWhDQFWKZg=;
+	h=From:Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lsajlco2w9nl2Ma20+urBIHAtg3npq6g3Fj02ZDapOSjcCSimEiKKZYemSABwTPI+
-	 TIpJFJ1dwNquw+Uork+7h8EBVCbzdZzJqzcZl4v5O/C+rrmGhFdhB50MrL4esy9pre
-	 H338kqvEUaksCRZvPoywQP8YVSWaXXLdDsFvTqXEyKPbCqmfsRlZJj46oNhTBtKRIV
-	 hN13i0ZHStXn8h1JrFsiluTaBDun9tyiWAy82SM0xMQGO+X/IAwDxIH8MPdDvCOECr
-	 Pto0YmkNMtodvUBiF7oj78PNlqeYg/z0XF77rIxBEq1R4iCaGpyE7vlv0do1Z27rQj
-	 X3YgNu9URs9NA==
+	b=kUkpvgYE4ZCFJy/ptfI5vFNVq+NQ4PYFOcjZ2GMImWHw+ENQCqX86S9MAQaKG/6oV
+	 Ks3lcBq0AF8md8c+Y98prI5uhhSB7gZvojF+fyJRSbX9QU/BL7iCPl6kyB35PK2+7D
+	 dLt38IuslObSiCJi8J3qMAsqxhikA5FOLZ8zHx1a3zDP+VDoLR5xVzObZjRrLpcSY2
+	 4nzAQRF144hsBj2kvV0CRW9nveWca7IK8xUQy41Fyp8dXzdCfWASjurXCFxcZp2Jxs
+	 jqsA5Lk8/EY8ZwklBB1mpFYbKBOzhQbL5ThQ7+G1kI5NLq+6HJD8pj81BkqR1Bhho8
+	 ysmfZPfk9ok5Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 418CE80B63;
-	Thu, 27 Aug 2026 13:35:15 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id EF7CA3A4
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:35:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9C13580E2A;
+	Thu, 27 Aug 2026 13:39:57 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id A7FA639E
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:39:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E118880B63
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:35:13 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 8EFFB40308
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:39:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bAmDBBJvW--4 for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 13:35:13 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20f::7;
- helo=osppr02cu001.outbound.protection.outlook.com;
- envelope-from=frieder.schrempf@kontron.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none) header.from=kontron.de
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kontron.de header.i=@kontron.de header.a=rsa-sha256
- header.s=selector1 header.b=Y9QsQjlZ
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2C15C808A8
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:35:11 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=S0d3quk7aZrBB7wIhR8hU18+9XVxHaTtdM4/eResEpm+FH2Qc+oBGnrjN1tdeXHsLp4bK0ixBpohEZqbu3dnlXrc6E4VLgAX7pFzM/Toe+Lwp1BEvuzq+8xR1EjyeGSLIcCjJ8uGs3lNQYwlMTB4InwPjUn0cqjIxjHtZYW/G0ZlaSmnIqJkRO9Uw8ErJ8H16u2jAVsh85v6Gj4SzXggR8j0SBHNv2M2dhztgRNS3kd5tcuahvHPXvRPanzcZpoc1eqcE3ETCoL5gwwL90Qm+/Tj7kOZAgi3E8nLFj9GtR7Njfb79mopxTSFtUGb5RvC57gNoMsbhsHrz4whvxV0nA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OdJFmGh7Am/7Jv0z/iBAHxVmnUBAGioeL/O6fyFvAnY=;
- b=WGiNaJGCVQuAHWNXB0fo+Aw9lrtbQmqkhTaC6DAEddW2fEqUIlyvPLkobhSYnBezEUfSqvOwfe6J6Eowl8INIP5e5YG7+5Ubs5oklQIinBf8NtGAA62Gqa2EJ559HVt6QTPfp2HPRTmtplQDfYt64mFxPX6/Lz9VvxBX5nPO7VWFFN1EPlM0O5U/7QmhRwgSeFqZ4jqUDDN+I0cFjZHZE+hvU5+PMYNQQYLHC6DoEHEPqiI61ksseiNa2MXSAdj2A/6+/PxAXcJWROKuxAi4Ge1l17SVz217FisiTX6GWtHUoF92k9EY+PIMfOLeMG5n6EufGyn/GI1ixd4Bklpimg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
- dkim=pass header.d=kontron.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OdJFmGh7Am/7Jv0z/iBAHxVmnUBAGioeL/O6fyFvAnY=;
- b=Y9QsQjlZpI6sA0wkh8ifLiicBbaW8T+2YwzQarRu/iYuBCmQFByiiB+dH89uMcRIenvovMEw1g58KdxDgE4BWcWBnbMKQfmvevuu+y+rEXABLNR/OCB8fv+1BCUjbV9O918aRtXGxkn9Wa0j+gOQDHvpB4oZiPzHtcrG87gJn3GRULysY6+7TBdN9yFEc6s4ZzYSVMAFUXG7xbZg4hld1YCUhUc65fgUkFptwk+xJcxR5LO0jtF98jJEGILyCcDQ4vsyTwSwDrTzDUGfCIZDfQMT25HABLqlbpf9lsbcBHf0K5cr33q4ZAwiMDSyF8rXKrhjTUCKGXHNPtxfo4uEAA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kontron.de;
-Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:1fb::23)
- by DU0PR10MB6726.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:402::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Thu, 27 Aug
- 2026 13:35:03 +0000
-Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::a276:4ad7:962:da22]) by AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::a276:4ad7:962:da22%6]) with mapi id 15.21.0360.008; Thu, 27 Aug 2026
- 13:35:03 +0000
-Message-ID: <5ef02e5a-c0ac-4afb-b90d-4d6d075b05e6@kontron.de>
-Date: Thu, 27 Aug 2026 15:35:01 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] ddr: imx: Allow to call ddr init without logging
- failure
-To: Marek Vasut <marex@nabladev.com>, Frieder Schrempf <frieder@fris.de>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
- <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-Cc: uboot-imx@nxp.com, Simona Toaca <simona.toaca@nxp.com>,
- Viorel Suman <viorel.suman@nxp.com>
-References: <20260819070758.51350-1-frieder@fris.de>
- <20260819070758.51350-3-frieder@fris.de>
- <b8c844ab-7ea8-4044-95e5-edac173b3c9f@nabladev.com>
- <a8be2bf7-aafa-4e8e-9685-5fa100941805@kontron.de>
- <cfe8d0e1-c652-408c-bc47-0ae96dd0a65d@nabladev.com>
- <c81db5f1-600c-41a1-91d3-7638fc4d3d58@kontron.de>
- <b528b642-5010-4843-bfe1-d24e8b709876@nabladev.com>
- <fa652a2f-addc-47a4-b89e-755aba42509d@kontron.de>
- <83ee9efb-e09f-45d8-ac0a-cd9b2797c513@nabladev.com>
- <59ed6576-06dd-42bf-8ea2-18de427955a4@kontron.de>
- <ae6f34f9-ec68-42e3-8483-4208d6e2e883@nabladev.com>
-Content-Language: en-US, de-DE
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
-In-Reply-To: <ae6f34f9-ec68-42e3-8483-4208d6e2e883@nabladev.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0062.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ce::19) To AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:1fb::23)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HX9ytoYCM5dZ for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 13:39:55 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
+ helo=smtp-relay-internal-0.canonical.com;
+ envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=TohX/gbL
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DFF4C40304
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:39:53 +0000 (UTC)
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id C35443F2B1
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 13:39:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1787837990;
+ bh=T1S4OUNhx/dRuNbDRWNKDSkAxb4N876rtCWhDQFWKZg=;
+ h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+ In-Reply-To:Content-Type;
+ b=TohX/gbL5JL9Lc8MXE4FGUZ0W9RnlW/5QDc+tMrW5UOrTYK/X/+S9vNzPc985bzXI
+ w+3wd9ybVtjyNxd4K2SvIyQ+VRM4ZR3NiS+G593CMUUWRWoPr4vUiWMdu728Vd+AYA
+ SzEzCpmsmNwzQAOOuoTTsk/2iVB2pDm9MysqhEb1SgV/Q5RJzfre5nMYi6/w0x3cif
+ L6YtAoB23oQaxXKCr6tCtIfEzbtonWwA64lDqWu3dD9GTtS2MdgVWGnZTxGgxyfRqJ
+ KTgTb0bTPbBv2j3zsZeXjIO+JeNDLooFFhj1oi+MSOj2+EwlVd5x8DxYrLOerPfkK5
+ tVbQOYNXjQNGiuMG+lwRNJ8Z2VZWmYEwAHosQLVtcDk6ay9UpyeyYUKBw0pAlFW9K/
+ wrnpaCjR3ZXVJj5GViMmxA1uT7I/F6sMd3urJQ5NKHUaGK9zQp86umZGJUXuxbu9DP
+ CUqEhfkKdI8QafiQQl4iu42QW8ETQU6YoYJExmioTIknGWWuNW3FHwTFpHkw15D0zl
+ 266/gnRQU+HtxQraBfUWv7aphh1BHrGflK051HZ3Vpo7IgZI7HeZcTP7kSGCpTAhT0
+ 4cyWcRiDmsdJk7IXHuGP8jb3VHrBBijvTKCwk2rz9AGW5XvNeYnycg/gkZBP9trfPk
+ KY5davRg4MBcOxqpL6VoTj2M=
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-4954c2d4081so17663405e9.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 06:39:50 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787837989; x=1788442789;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=T1S4OUNhx/dRuNbDRWNKDSkAxb4N876rtCWhDQFWKZg=;
+ b=W7I5A9igPduQ0WUpoakZeEfe9Tq0+d87JI9SyGU4PG+AUGixkw/DJmwMmuIHalYNbk
+ HAErBQvbigwvIB+jNv2aSjUt3kLdCXG9S9aOyVdFJ7B2WBPJP0RlCx+PufPwNd8b71OS
+ 3ZPc3aby8S4vcat556JvFaByIfob6Fr0KFOyN7Jv8AHByMToibdSq2RVReM+484JoVgD
+ N/Tj84CMVcYl8rMfUtHqeM+BCtsySEDHKY5aHtACmkC+OOgn9MaIqoWxIZbcrEVB+bkU
+ BE/5o1zp0XxtOKNWCe+K4c9MxHg8gyay/gZPx95Uzb1YYcS1HAvObi9v8yAML1TXovAs
+ R7nw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rr2mRcFqCSgdsdK7Aw/A+DG0dia1A0MrcYbf81RxexLveuC6UVwmGDpxMji3Mg1Y1esqB+GDdk=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++k9ED9solww5T900Yh8s9DkOZhnbPinks9+dvL3MJHZLB+jbiDK
+ KBI21S+/pbVhvTDAGS+zIajtDVHqcNzhVsSosiqNXNSI32ByXqyprJrLF806HN7wPQnzXTx13ob
+ lG5/2xCn3IqL5XsjVu8rttTTzyyIiHdCV9KpD90AyAL+w3YT5qegkCvX5H+oWZwvd1A8cOSuXNJ
+ H6FrJFgBKYTg==
+X-Gm-Gg: AR+sD11s5h8jmOTiL0SYDju8MdJipbvCmAxPzJ4OP3fIfhP6yPHPb2a5ZaCbgDOLBCe
+ aM5ZqdrqBEZeqyr3zEaSHj6vIXH8O/p3zautv40kzzbSn5vH7qkrdI0zA50B8GgVPKpwkci2KAI
+ Y+TiNOyfpfX8I8iMYXpnGFph3uO6f5/AetWSTl0WMPPyihC6MWbZaGAgXM4cT8FH0lTTLbCTfJe
+ i3j9rLeMXMT769Qrpf8cQpqrGOADfq5CNUJZ2x0CGbh9QXROLcQozfwg5iICT0Ukgfz17CnUj0k
+ 8j6IsK3RHIzfPhyOGwpidHRItm07UIDPHgTs11K7Jfj5tbhz2Vu09FFE52WHkU0Obv6I90BHTSF
+ n8ulOAHNrlFiChfywe1uK3s9RLquufsHGoBunJE95HdaVqGTstIPgQPVR/zdqSlD9g5s/4qHeIZ
+ N45Kiykrk=
+X-Received: by 2002:a05:600c:c0da:b0:499:5f7a:7ea2 with SMTP id
+ 5b1f17b1804b1-499dc8206famr169280175e9.12.1787837989603; 
+ Thu, 27 Aug 2026 06:39:49 -0700 (PDT)
+X-Received: by 2002:a05:600c:c0da:b0:499:5f7a:7ea2 with SMTP id
+ 5b1f17b1804b1-499dc8206famr169279215e9.12.1787837989151; 
+ Thu, 27 Aug 2026 06:39:49 -0700 (PDT)
+Received: from ?IPV6:2a02:908:1242:30e0:d8da:da16:d52e:e57d?
+ ([2a02:908:1242:30e0:d8da:da16:d52e:e57d])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49b4c321184sm67274135e9.11.2026.08.27.06.39.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 27 Aug 2026 06:39:48 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
+Message-ID: <ea3cbf91-f525-47c8-870f-79e8ef09e30e@gmx.de>
+Date: Thu, 27 Aug 2026 15:39:47 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR10MB4277:EE_|DU0PR10MB6726:EE_
-X-MS-Office365-Filtering-Correlation-Id: 18611e43-e0a1-419a-e877-08df043fffd5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|1800799024|366016|23010399003|10067099003|56012099006|11063799006|4143699003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: RNhoFK5pWKrpOy3ctFL9ni6liLQyNSWgS+pS30a7nWttT8B2m+t06FB8CAXcZ6oMVOQRHVLDcggjI0mgdSvmRKrZiiXMY2WHvr6gopL8PveC+c2NaxWEL38oaKUuAx1e1BWg2Naj28uUM/vxlQMf5NJdSn4xB/ODItmkPe86ezuSFlQu/qLekvvV8csqj7BPQH0dlhnJKRvrV7i0RuqLoOYhFs0Cmvn/7jQ/BSzwLEJVPZ1f3PgW/YIDLyr9RXenf9H0bnP6IsaBJxmuPoTrwhrDeWhNtcaz+52JsZpV43wK3CCgUlr5R7jb095838o5Ry0KkFNtUfyNHIo9LMnq4iqAC7NtBDEOTJh1XEJfbqT1w0iqzyoE0nmMqwFxprAXVNOK1T8UevBfoYnfrzLooFskYY62ws4SSBudpg+pwH16IusnBD3IQT9YG7Yxp2q+96nP/Ajb2gYCuH3aelu013yGnGaEnoTpqa07Gkl8wrQ3bEYoX7aiXXgjPTlgWUeUcF2cngCvW7evALAC7tEyGSTJMJW3ECYbYLfVdx5NX2/jIiUGcHPdTO1JpaYQB5wLSrkDHP5e3HsARKHXWmRusVvxqwuxXduzaZj2910GShK1qGV34z5q9DG671nW+60LUe4EYrSwO/DtloBC/+1E5jLYcraRJgDEyjUFHIEd9oQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(366016)(23010399003)(10067099003)(56012099006)(11063799006)(4143699003)(18002099003)(22082099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TlJ6d0M1MWZDZUhTRTNaSVJKZXR0Z0loVzlkYVgzY3Z2ZllBYVFGZEV1NDhj?=
- =?utf-8?B?QWFyWkpBQ3VKcnRHK3VINHVsR1dnWXIyMWo4aTBlOFlXMEZvRVUxWEtacHVK?=
- =?utf-8?B?MXdIZkVmL2hVZmROV0Nlb0F5ckppMXBLQkFkUXhBV3NHMThCRlpvT3drM0E0?=
- =?utf-8?B?enJ0ZDA5b0RoWU5PMXlUd3BubG9WMWlrTUU1b0hEUDBEWXlWQlh0TnlPZzBY?=
- =?utf-8?B?RFNyUzdXT2pGTEZKTlF0NzU4cTZaWUhaVmNzQ0lqTVA3VnMycVNZZ0dSZkJG?=
- =?utf-8?B?c1hKb1dNdHRzRGlMZHRuOVAwVDE0em9rNHVGcndIV1dCOG9FQnl0c2hIb0M5?=
- =?utf-8?B?UkYycUlqQmxnUkVqdjNrTGlzdkdXbldCK2ZONXZCL1ZKZmU5K1V0cUxYUTQw?=
- =?utf-8?B?eFRUY2VJQWU1SXBCSVdqSzc2MjBSZ0Z1ZHlRU0w5V3pzSnpzeUFjUkxqUVV2?=
- =?utf-8?B?Yjh4alNVbFpmQVZITDJYaFpUN3I1OEx0N0RHQlhZbmZrV3J0eWRIUlNWbEMr?=
- =?utf-8?B?ZTJYcElGK1JCalY5eGtUeHRjWDNpZjk1VUI3dGhOWm9lS1ZIZFFYMDJseVJv?=
- =?utf-8?B?TDBKV1h0MHR6T1VvYXZyQmVIUGdEekpZMXpEY2w1RUl3bUk4Q3E1Q1k5UlNa?=
- =?utf-8?B?cTA2eWF6a1NVVFAwaE1KQXp4ODl0STJoOHIwVHpGZk5teENxOENxTVJibFd4?=
- =?utf-8?B?WElqdy9qLzNwSXpsc0Y2T3U5MTZyWGpDMTN4cjBOakY4Z1U3V2NWMFB3L2Fl?=
- =?utf-8?B?eVY4ZlpMVG9GekFpR1lhWWt3S0cyTExyVWozM0JvNnE3bWRwbVFyR3BQWGpL?=
- =?utf-8?B?V0l1Zkh0VHVBUi9tdWFLOFhjTTdVaWtkcEpVWmFKeGlNbDhuNWZUcWJlQXhX?=
- =?utf-8?B?b0lodVBxTkhpOVJaTTMzNHM2TXZOKzhycndGbmEzQU4zR2dVR1FMUXk0cTM5?=
- =?utf-8?B?eHVzUk04YldTeXZQR0pSLzRDdEhsdTJ0YkpKSGE5UEQzVlB6c1RwdlVrdVhG?=
- =?utf-8?B?MlFpSndyM0xNb0hmTHVtalo0QncrRzk2K0tJenZOSVZqYVB0Tm9EVEdUclhY?=
- =?utf-8?B?bWJEUWkwY0lUM0JjZ0R2L2FIQUF2QmJnZEdkMlpIWjVNZFF0UzhUNE13MXFv?=
- =?utf-8?B?dW9LRWdqa3hPcUZJUEtLY2VOSTQ5eHhURUdla0Vod2N4T2Mwd3ZjdVpkR1hE?=
- =?utf-8?B?WHVHQndoYzh2MkpHak1zMjlhZStRSjRlSjVJTGhHVGFaSVVVOVlyZ0xpb1pu?=
- =?utf-8?B?cmZJMDhMdFB2dzA2MWx5NlJvV2IwK0tTblQzMlZmZS9CWTdxdC9pb05tSU9S?=
- =?utf-8?B?ZlBkNUNxWUkxVkNRY0hDZld3TWpzdElaUHgwTThJNURjY1lWNXlWeU5aVlVo?=
- =?utf-8?B?Y1NKK2RTR0JwRXV4b0QwQU9OVVVJOHZWUmNqajc1VFdsdVFZbVNSSU1OWnVm?=
- =?utf-8?B?YTEwZHVwK0ZJRkxPVEhPRlZ6VE1LbWo0MFJEWEZXekZ4RVFrV2x0aXJLblhs?=
- =?utf-8?B?ejQxdjFuUC85b1FZam1rYjlCYkVrZGVNTUtoeDhOM2dRTWIzbmN6NUpxanB6?=
- =?utf-8?B?MTFWMHR0VXE4RnRiLzBZVHhKaUZPQWZlN2J6eVhpY3MyYnRlUFBRRWkza2xv?=
- =?utf-8?B?bmoxbXJmQlYxbDhubmx6bVNOQkpRVFFiWUNrQlVRSG8xU0xhQ2UxTk1mdDNT?=
- =?utf-8?B?SE41NjBmZmJFdTdxNVY3MFNnVmp3RTY1bG9aeXYrNVZ2R1dLM21oVW1ib0pw?=
- =?utf-8?B?RkFITEpoaXc2dlYzU1lrSk5uZi85Wko3Ry9YbGtPSjZqNnprVHVMQXJDcmR4?=
- =?utf-8?B?dzAybEVxQ2VJaW5kMWZoMFhuOGJMNmxzZi94R0ZFVjZkc3VQUURPa1pEeTBh?=
- =?utf-8?B?M3AvcTBUZ0FRckNnZkJqSytISDJJZHQ5cERlRXlXSjJvVXVXMSs2SUowL3ZF?=
- =?utf-8?B?S1Fub1NrcXhxTzZzT2QrSXFnNGZuY0RBL05IWWR2VDVpblFmR2RtK0VzY2po?=
- =?utf-8?B?OS9UV1A2T3hEZTQrN21QZG1FNmRlblowcC81eHBmSXRaSnNSbkkzbEwxdnh2?=
- =?utf-8?B?U3hDSUhVQ2JDcGZyQjIzVThkUzNQcm1ocU5JbUg5VHdRTlRkMVFFeUkxRjdy?=
- =?utf-8?B?RWtYcFh6Q2JUMCtlalFyTUdzY1JoZE0yVVFWVlhSQWdtQUUzdC9TQWJBL0M1?=
- =?utf-8?B?MGhoeDZmVVd2aS9tUzlUM2ZHYUJJVXJwSlhTL2c5MEN4V3ovUUtUNTBlYStS?=
- =?utf-8?B?MFNTSi91bndQMVk5eHBwNko1bWxBNzkwZ1RId2ZBdVp5VVYvS05oRU9oMVpk?=
- =?utf-8?B?T0FSbWVyZWRTWkwyRjAzTk53SUxnUkswWXJOb1lCZnpjUjlza0g5NkZUcnNV?=
- =?utf-8?Q?p5eCu3dNDdZzBZMw=3D?=
-X-OriginatorOrg: kontron.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 18611e43-e0a1-419a-e877-08df043fffd5
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 13:35:03.2473 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cFpeZMcF4FrTaBlYrN6C1ovuBMQ8DN9QREyTFPz0mZbMJlfdj07CvWKrCbm30YF7YvA2KqIV1jx1okGvLlD+j0psV6HJFIgQNRV8A84h06U=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB6726
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] test: lib/uuid: Fix endianness for dynamic GUIDs
+To: Alexey Charkov <alchark@flipper.net>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
+ Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.u-boot-project.org
+References: <20260827-uuid-be-v1-1-9dc3b12cd691@flipper.net>
+Content-Language: en-US
+In-Reply-To: <20260827-uuid-be-v1-1-9dc3b12cd691@flipper.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -187,32 +147,180 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 26.08.26 14:24, Marek Vasut wrote:
-> On 8/26/26 10:12 AM, Frieder Schrempf wrote:
+On 8/27/26 15:00, Alexey Charkov wrote:
+> If LIB_UUID is enabled on a big-endian board, such as when it is pulled
+> in by EFI_PARTITION, its tests will fail due to the dynamic capsule GUIDs
+> computed by lib_test_dynamic_uuid() using native endianness for the UTF-16
+> image name, instead of little-endian:
 > 
-> [...]
+>    malta # ut lib lib_test_dynamic_uuid
+>    Test: dynamic_uuid: uuid.c
+>    test/lib/uuid.c:114, lib_test_dynamic_uuid_case(): expected_uuid = uuid_str: Expected "985f2937-7c2e-5e9a-8a5e-8e063312964b", got "829f5cb0-1a07-5718-8774-4514bda82c39"
+>    Test 'dynamic_uuid' failed 1 times
+>    Tests run: 1, 2 ms, average: 2 ms, failures: 1
+>    exit not allowed from main input shell.
+>    malta #
 > 
->>>> I'm not sure, but even if it would work, it would require several
->>>> separate init attempts only to read the IDs
->>>
->>> Why ? Init the bus in slowest mode with widest bus settings, then try
->>> MRRD on all available DRAM chips, then figure out which ones report
->>> valid IDs and which ones fail the MRd .
->>
->> As far as I can see this doesn't work. If we use the widest bus setting
->> (CsPresent=0x3) on a single rank module, the training fails and the DDR
->> remains in a state where the MR read doesn't work yet.
+> Add explicit endianness conversion to the test and to other similar
+> callers of gen_v5_guid() to make sure they work uniformly regardless of
+> the host or target endianness.
 > 
-> Do you need training to read the IDs ? Simply force-use the slowest bus
-> mode (100 MTps iirc), the training is only relevant for the high-speed
-> modes.
-I don't see any existing code path for any i.MX with DDR4 that doesn't
-do the training before accessing MR registers. Do you have any
-references or examples? Do you have any sources for the claim that the
-training is only relevant for the high-speed modes? I couldn't find
-anything that supports this.
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
 
-Also I would assume that doing the MRRD on an unused CS would give me
-back some arbitrary random values. While I could interpret an unknown
-value as "rank/cs not present", I don't think its reliable enough. Or do
-you know of any error condition being reported for failed MRRD?
+Thank you for reporting that the test fails on big endian systems.
+
+In lib_test_dynamic_uuid() we define define dynamic_uuid_test_data 
+test_data[].images as u16 string. On a big endian system the characters 
+of the string will not be stored in the same sequence as on a low endian 
+system so the UUID generated in gen_v5_guid() is expected to be different.
+
+test_data[].images should contain unique sequences of bytes.
+
+The relevant code was introduced with
+26e16a850e64 ("test: lib/uuid: add unit tests for dynamic UUIDs")
+
+With that I don't think that the EFI changes are needed. Anyway UEFI is 
+little endian only.
+
+Best regards
+
+Heinrich
+
+> ---
+> This was uncovered [1] while adding tests for GPT partition labels on big
+> endian boards, which pulls in PARTITION_UUIDS, which in turn pulls in
+> LIB_UUID and its tests. Turns out no BE board in CI ever enabled LIB_UUID,
+> so this went unnoticed to date.
+> 
+> The immediate users of this code other than the test suite are EFI capsule
+> updates, which is unlikely to be relevant for anything big endian (given
+> that UEFI is little endian), but the test suite itself seems to be a good
+> reason to get this fixed.
+> 
+> No functional change on little endian either way.
+> 
+> [1] https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/pipelines/1101
+> ---
+>   include/u-boot/uuid.h         |  5 +++++
+>   lib/efi_loader/efi_firmware.c | 19 ++++++++++++++++++-
+>   test/lib/uuid.c               | 15 ++++++++++++++-
+>   tools/mkeficapsule.c          |  3 ++-
+>   4 files changed, 39 insertions(+), 3 deletions(-)
+> 
+> diff --git a/include/u-boot/uuid.h b/include/u-boot/uuid.h
+> index 7f8414dc906c..acdf3a85a6cb 100644
+> --- a/include/u-boot/uuid.h
+> +++ b/include/u-boot/uuid.h
+> @@ -149,6 +149,11 @@ struct efi_guid;
+>   /**
+>    * gen_v5_guid() - generate little endian v5 GUID from namespace and other seed data.
+>    *
+> + * The seed data is hashed as raw bytes, so any of it that is not a byte string
+> + * has to be supplied in a fixed byte order for the result to be reproducible.
+> + * UTF-16 seed data, such as a firmware image name, must therefore be passed
+> + * little-endian, which is the byte order the UEFI specification uses for it.
+> + *
+>    * @namespace:   pointer to UUID namespace salt
+>    * @guid:        pointer to allocated GUID output
+>    * @...:         NULL terminated list of seed data as pairs of pointers
+> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+> index b41969c70fde..7f3b2da3ef89 100644
+> --- a/lib/efi_loader/efi_firmware.c
+> +++ b/lib/efi_loader/efi_firmware.c
+> @@ -279,15 +279,32 @@ static efi_status_t efi_gen_capsule_guids(void)
+>   	}
+>   
+>   	for (i = 0; i < update_info.num_images; i++) {
+> +		size_t len, j;
+> +		u16 *name_le;
+> +
+>   		if (!fw_array[i].fw_name) {
+>   			log_err("fw_name is not defined. Not generating capsule GUIDs\n");
+>   			return EFI_INVALID_PARAMETER;
+>   		}
+> +
+> +		/*
+> +		 * The name is hashed as UTF-16LE, so that a big-endian board
+> +		 * arrives at the same GUID as mkeficapsule running on a
+> +		 * little-endian build host.
+> +		 */
+> +		len = u16_strlen(fw_array[i].fw_name);
+> +		name_le = calloc(len, sizeof(*name_le));
+> +		if (!name_le)
+> +			return EFI_OUT_OF_RESOURCES;
+> +		for (j = 0; j < len; j++)
+> +			name_le[j] = cpu_to_le16(fw_array[i].fw_name[j]);
+> +
+>   		gen_v5_guid(&namespace,
+>   			    &fw_array[i].image_type_id,
+>   			    compatible, strlen(compatible),
+> -			    fw_array[i].fw_name, u16_strlen(fw_array[i].fw_name) * sizeof(uint16_t),
+> +			    name_le, len * sizeof(*name_le),
+>   			    NULL);
+> +		free(name_le);
+>   
+>   		log_debug("Image %ls UUID %pUl\n", fw_array[i].fw_name,
+>   			  &fw_array[i].image_type_id);
+> diff --git a/test/lib/uuid.c b/test/lib/uuid.c
+> index d00e9563a472..1c66021af3ed 100644
+> --- a/test/lib/uuid.c
+> +++ b/test/lib/uuid.c
+> @@ -10,6 +10,7 @@
+>   
+>   #include <charset.h>
+>   #include <u-boot/uuid.h>
+> +#include <asm/byteorder.h>
+>   #include <test/lib.h>
+>   #include <test/test.h>
+>   #include <test/ut.h>
+> @@ -102,12 +103,24 @@ static int lib_test_dynamic_uuid_case(struct unit_test_state *uts,
+>   	for (j = 0; data->images[j]; j++) {
+>   		const char *expected_uuid = data->expected_uuids[j];
+>   		const u16 *image = data->images[j];
+> +		u16 image_le[64];
+>   		efi_guid_t uuid;
+>   		char uuid_str[37];
+> +		size_t len, k;
+> +
+> +		/*
+> +		 * u"..." is native-endian, but the name is hashed as UTF-16LE
+> +		 * so that the GUID does not depend on the endianness of the
+> +		 * board or of the host running mkeficapsule.
+> +		 */
+> +		len = u16_strlen(image);
+> +		ut_assert(len <= ARRAY_SIZE(image_le));
+> +		for (k = 0; k < len; k++)
+> +			image_le[k] = cpu_to_le16(image[k]);
+>   
+>   		gen_v5_guid(&namespace, &uuid,
+>   			    data->compatible, strlen(data->compatible),
+> -			    image, u16_strlen(image) * sizeof(uint16_t),
+> +			    image_le, len * sizeof(*image_le),
+>   			    NULL);
+>   		uuid_bin_to_str((unsigned char *)&uuid, uuid_str, UUID_STR_FORMAT_GUID);
+>   
+> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+> index ec640c57e8a5..55a58f07d56e 100644
+> --- a/tools/mkeficapsule.c
+> +++ b/tools/mkeficapsule.c
+> @@ -1004,8 +1004,9 @@ static int genguid(int argc, char **argv)
+>   			return -1;
+>   		}
+>   
+> +		/* The name is hashed as UTF-16LE, whatever this host is */
+>   		for (int i = 0; i < namelen; i++)
+> -			fw_image[i] = (uint16_t)argv[idx][i];
+> +			fw_image[i] = cpu_to_le16((uint16_t)argv[idx][i]);
+>   
+>   		gen_v5_guid((struct uuid *)&namespace, &image_type_id,
+>   			    compatible, strlen(compatible),
+> 
+> ---
+> base-commit: 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc
+> change-id: 20260827-uuid-be-56657e7aa80e
+> 
+> Best regards,
+> --
+> Alexey Charkov <alchark@flipper.net>
+> 
+
