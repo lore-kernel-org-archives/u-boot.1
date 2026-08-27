@@ -1,138 +1,121 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E8E2C61DC4
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 14:09:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C430C61DC4
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 14:12:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F18156078C;
-	Thu, 27 Aug 2026 14:09:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A9CC680DCF;
+	Thu, 27 Aug 2026 14:12:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zOFdbCUAsz3t; Thu, 27 Aug 2026 14:09:11 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wIfuyj0UFjTL; Thu, 27 Aug 2026 14:12:36 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787839751;
-	bh=kVDhb/SOrMJQlkMBj3NRgZoMAt19r42IE4es8UYqnM0=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787839956;
+	bh=E65WRO+1whBKhAAZPcUCCK9n5toA5Ka+e3vwu8QgyXo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=BZaIm15Audp+XW1nN9TQLh/UrncvZzoy3EeNcm6FLfQMkU9ZuvMLFVuvXX4D2b/JQ
-	 Sw047cco7uj3V+RNFH3vLGn0Z4qf436lw5i2V5UKYsYIwT+lH5b6/nI9+9nRQO+EiN
-	 Hq19Kg7gODBg5lnR5lsQo26s9K6i2ytsnXFrvrENdXJXA1+Yvb/x4oa5ryZsXljNR8
-	 j4cNfoklL6WLP1yVGX0cfdblt8umqPLOIUhnkVlanuEjcKRtPiHOeXVxyMvHayWHuP
-	 763Lc2WlhagcuDE6wEFLvYOzeA1wv+k+kNovTJc4XySD6gv9IRS8u2TEid4/mQ6VPK
-	 OdQJqHBgB4Yiw==
+	b=rdGKp7aKbP/xo8KYDIMNp1s/AGqCLbWWBkrt9y8WcO30KsJ5iuaT6kgt7eFmG5N8f
+	 uQNpMs4ZeRkElJhQ/gE6Oh1gvLcgKmeLbsLPqsi8eA4whs9NHlX7bju48c9jzq1P0Y
+	 UGz1jCuTBnMWPNMne+eRH9hjU/xwJdz0BcDij4o+4MyDSPnMNqvXd0Q5yxlDU/PjkB
+	 OtuiDST020b6WFsz/eQa7J8+QG8dy0gZ+aRXsx1IwyKTNl+BaxSAM/ymAJZFXs+84Y
+	 7nT2FWjptH/XPSufTblYwuhkxFLx7MRDSUeX5DW0AASsD1/F+BcoyUh/GNTZ/Y9iGA
+	 lIlgHRF6+HgwA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2D2426079B;
-	Thu, 27 Aug 2026 14:09:11 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 37471355
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 14:09:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AE29180DA4;
+	Thu, 27 Aug 2026 14:12:36 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id BD5F139E
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 14:12:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1D7B16079B
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 14:09:10 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id AECE940312
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 14:12:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bmJDpRvquaNV for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 14:09:09 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PSfZvIPm8mNL for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 14:12:34 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::629; helo=mail-ej1-x629.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=tYRmqRE0
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3804B6078C
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 14:09:08 +0000 (UTC)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-c2020421077so345624866b.3
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 07:09:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787839747; cv=none;
- d=google.com; s=arc-20260327;
- b=M6l4XKjmCiuFpZdPl1f+7atH0KlVMSqN+LUdi+GUxJ92vKMmFNmkVWBzznEQ+UngeV
- cFOKPfuvUrN1VSkz8MhdSwzRCVXrwhuYvqpevchT/F6iEaG1nWpXFR5wRTDk39B3btcB
- b8OMKsUsirSLtSm8UruzGY+gqNnypYvHqzAECmFnY6j/xcvIIqwe5Onw/9rLusaM7CPf
- zmu3Bvf89A6zmkd/RCeaMNvGwzWm1rU55x2W4f2qvCtAnF84EXNEPZjJZQcdnNSKaLSv
- bzfXeGOItYmWLs+aXJOQzfWHB+2AetVNSZfESQ+3Tfok7yFSdzmVWUYZb9+e1tqJqPJu
- 7zlQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=kVDhb/SOrMJQlkMBj3NRgZoMAt19r42IE4es8UYqnM0=;
- fh=AYmAZo2VibhswYXgS6saIXDvZp4J1oGXw+2MV2DfA/U=;
- b=l0pMnKgHgiPHGKOIA6M6TKqV2VWnmMuVFA4Bk4Zd9eRxmmXRZV0tbywwKx2sOR6W0R
- NKkylqI2qxvotrLvpYjJKpf657vqN3laKJ2db2CXUVQLe8U367/d7zyeqoUO/Pj69F/4
- a/QmGdUOwGVPc5WPqmVLYHtnRvtwuNe9za/iPIE5eiDzRHsNQbC0SFn1pUUic4ZMlkVf
- KZ9B+VzHyvTy0uoT4JKJeMV8wLsUXv3nu8kxGGmSMC6jQXuBnStRFz05atSUlAY9DPbV
- adPa6GbG6GATAKKXnN2MoLnDs0mLVEdOZGfPwzFzLf40vlOvqXX/JN7/8Liy1CB7Jxk2
- IVkw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2607:f8b0:4864:20::f36; helo=mail-qv1-xf36.google.com;
+ envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=LdHziJ4K
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 88FA440304
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 14:12:33 +0000 (UTC)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-90cc0ebbf4bso12369196d6.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 07:12:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1787839747; x=1788444547;
+ d=linaro.org; s=google; t=1787839952; x=1788444752;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=kVDhb/SOrMJQlkMBj3NRgZoMAt19r42IE4es8UYqnM0=;
- b=tYRmqRE0QDvavAnWWhSQzT3CXr5cE4ElTwnJsTQFz1Ef5ILg0KEVzMt1sKS1KMsHXR
- /Di3EvzwVzfp+LmUa39fZI3VvVMmjQS/L3XWr7VlEZPXKF3uqgngJwk7Y0AQAE2uL+vV
- 1iQLz1X8mPWtHaHHHJN7+hJJMhn4NaU/kRQvmL7CcWrO6ruMpIjdp3tarM7pNnLPpvaL
- 7CPyzMVDaR6DqNTW4xKTqbz2iCQC5/XsoxmirW46/8FIR3Q87oHE4op5r3KO/PRXLAcw
- 9zNUr/Hs/cf1lLHrl5ZWkFIDbUfVqFX2d6L5qnZDuSPbVWZOC04gI88X6ZmHu7bAnu8N
- /HYw==
+ bh=E65WRO+1whBKhAAZPcUCCK9n5toA5Ka+e3vwu8QgyXo=;
+ b=LdHziJ4KDgGr0d5Li0Y+uvJ3RPZLK/bg4LHLkwz/kGsjT2HeRojCv6L+YBanwelk8r
+ MvGDzLCx7xgQBY0pl/4nC//XnH5pZd7t/9C2u6bpAFm/Sp1AMNB8YtgtH6NPJOPbxO6v
+ cfiyV0OBq/AngQiQiWNMsw4FYRsDff8DM5jRBbchH6wXhYoLHUDsbFL1EFyFMh7eOpyf
+ ka0SrPTHgFjo2ATzICofNP7rKIxwhW4qQmFAKlEwx3ikYoKqg2sg64/j2vHIptyRoc8Y
+ h8vIW6eKXWuQ/TuLakEGj96xnMeR4mjJxslW68Zl4rs6RknoEnUyaTHqE2C2A0OJhadj
+ Hrcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787839747; x=1788444547;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
+ d=1e100.net; s=20251104; t=1787839952; x=1788444752;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=kVDhb/SOrMJQlkMBj3NRgZoMAt19r42IE4es8UYqnM0=;
- b=hbiGNqbtnrPpZPjTBGToWmPRUrsDmPHaaeosT0+dR+HMaCfXiGYZx67OhgaX4l3pDD
- anuiirLXcFid53rk0w2FeJtLzSMUbBkAzBqeovA5RmGbPRGIQu5DDGtJFcCfwbNFtxoy
- 4MqXLuhhuVhfFPzYKWgw1VJwTgFL1g3KHdsZS2TyljoY9YSNmzMXy7Px9YVZ1E3vzYmU
- EgDXzkLz6ZDBHmljRiM65FK6kqHHz798wOWxglIooO5wz9VKD1sPtCr4fHjAgvQdK5Lv
- CZzMh3FdM6Wbeu6tyby+D4XgXM8rR7/J3hcq9d9YoDJrQMT8CxCC4ktCwpmm3McalQY5
- QNyA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqhcmgstnYMOfYYP/4sQMSbxrHvvTlDJFBuE4WAVDdIgj7dwKo5GQmM20VX3LFxqta9QdOmyCQ=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++k9wwHkGPcJoDo1P4IfgIkd0ZQVr70evmmSjfLdaoFHAPZxntRc
- ILfiT/uApz5eyXpXc7c9Rb4HGSkWWugBmZf21OxTS50ii1a1pmipCeS8P8Ey1fGUo2+SPzPUNft
- 7HqyV+SVU3nKxMYN2Pj6kzN7BaGOWsQtv3xg9ZcejNg==
-X-Gm-Gg: AR+sD138QY9csE/d5+f/MO270G5kCYNTjoDycMCO/4xmlFYor3spIMxt7/+YijuYIA3
- /rPhselMm+Ro4JA/OFIryF8AmLQgwLbBH+mMgpztWFRgFzonzbquG4rhEkHy/gtLz5x0JLCLKH7
- tdCNDLFvis9W3h14t1CCkc2X5+24vNkTe6/Q0DfwAwhm8sMw1aHfUQcAeu2YSNdOMcZLRecmsKf
- LeBXjlK97cQ6rh6HKVBoVgsd8pedfrA2ZvdSnh2dLpUS422nGsXJTiHgWggrz90kgfFcG5O/8fC
- igG91NGqbWMV61wqHeNtmKQzCoL5NWYHj5iaBJLF9U0hXNRM/QoJCBFrv/a1UTA3//7I7xn0jFQ
- W
-X-Received: by 2002:a17:907:3e26:b0:c12:83c9:d41 with SMTP id
- a640c23a62f3a-c250c595aaamr1512363666b.12.1787839746809; Thu, 27 Aug 2026
- 07:09:06 -0700 (PDT)
+ bh=E65WRO+1whBKhAAZPcUCCK9n5toA5Ka+e3vwu8QgyXo=;
+ b=h7K9wgzomSKPC09BNWylACR+v64Xj8LJMRYicABdNmSIdVJwhN+C4w527334aBsx8k
+ TItQ60/YRLqkQDvORGyo9XZnC/pz3TD2cwCQ2evapJTl+JYuGChhbTxoy7AUvid+IXB8
+ /4LTaO/SKeV1tVZTGmM7meWYI30z9Wj8eKvW+AUzHdnO65LDQEq4u9VPsod3G5gxEXzc
+ K31YJsfenW9l+eI0NwzKo1o87iAPZA3BqxuLXZl/7ywa9RD/XFMYXyJl03fIvX52xGo5
+ TGeOFaRlwqfscRlOJY3/9r9DldHzoXQKuE40AWpGGeU8j1i6r6agcPzuNxKPn9EaORwv
+ D//g==
+X-Gm-Message-State: AFuF++nwuy6Ch8r6/Z5B+G6xqUxw/kMrxhMsB9kRR6faCru6f5Y3YDiW
+ M7u6VtsbApbWFSe4SGPmDm5yiHu5zDzKvO0TXE+swpyaZr0PEG6FB5w1Ed0EcFTYDBg=
+X-Gm-Gg: AR+sD11bk5WCMcIkF6ju0WtfSDZH/gFimwUt2js0046KmITBrgW7dpdgZiPCy/JQQ6/
+ mZUPox2uRIHMNPcPcLH5Y2M0YWXG8R9AYb23p0pU7tjoF7O6YWmogQ23GS2I/H8vlPfmUe2XLvo
+ SA5ndAmnx38D/qbDcN9eq6tC5NHaYuN9Ydb+HhhiD+xpL/lMxG9k3t1z9vVejgeZyk3VximhI72
+ iUhThVT1iZ+M42yL+6IDYX7/Q2eCGW73PEplPdIbikZn/ZHS78aDHDCYoRo4JOj9MBGgi007lq4
+ Obq8GDg4m9OsHalTa2kWxeO8BDQsTvi1LJmdwramK/MMl4C3N0psCrW9tbeKXqmVS+A4w0IPBXT
+ AV/ShiJsh9ZetO8LmEFE5xlDEuYN2fHjcHKQpQXht83x2VApfBiQ2X12Xjj8+KxjjtPpFP4CW0H
+ s70a6v8imsfjz2QJ/Ii4Q731le5doJxD3EJ/2AxTTKFUVy2lWv0UWLNOTXfQ8LP0s2aykmJNyg/
+ 2+RtL61mF69nUQbLV5cc0ZxDap1pKREK5DdoWVBGOzSBuLEFu0aUA==
+X-Received: by 2002:a05:6214:2a46:b0:90c:d5f2:2cb7 with SMTP id
+ 6a1803df08f44-90cd5f22dfamr63278146d6.20.1787839951533; 
+ Thu, 27 Aug 2026 07:12:31 -0700 (PDT)
+Received: from localhost ([66.129.139.8]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-90cd700bfefsm17936736d6.5.2026.08.27.07.12.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Aug 2026 07:12:30 -0700 (PDT)
+Date: Thu, 27 Aug 2026 10:12:29 -0400
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.u-boot-project.org, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Anshul Dalal <anshuld@ti.com>, Johan Jonker <jbx6244@gmail.com>
+Subject: Re: [PATCH v2] mmc: zynq_sdhci: support Renesas RZ/N1
+Message-ID: <apBFzRluireFK8tl@maple.netwinder.org>
+References: <20260814-rzn1-2026-10-mmc-v2-1-51e4d8a717b8@linaro.org>
+ <4e3a48d8-d971-402f-9542-820f254abc77@mailbox.org>
+ <ao3xXc7dNbFmKEha@maple.netwinder.org>
 MIME-Version: 1.0
-References: <20260827-uuid-be-v1-1-9dc3b12cd691@flipper.net>
- <ea3cbf91-f525-47c8-870f-79e8ef09e30e@gmx.de>
-In-Reply-To: <ea3cbf91-f525-47c8-870f-79e8ef09e30e@gmx.de>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Thu, 27 Aug 2026 18:08:54 +0400
-X-Gm-Features: AcwNN1VKFX169AmRFq6uMJVwj7N8PK13a2xQla5DPF9CikXZ4Izh6SvIkfBXNzo
-Message-ID: <CAKTNdwGdq+AJQhgqqX9PA3OwhTa3NAWp++m5oOBR7M+s81f8sA@mail.gmail.com>
-Subject: Re: [PATCH] test: lib/uuid: Fix endianness for dynamic GUIDs
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Wojciech Dubowik <Wojciech.Dubowik@mt.com>, 
- Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <ao3xXc7dNbFmKEha@maple.netwinder.org>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,60 +129,52 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Thu, Aug 27, 2026 at 5:39=E2=80=AFPM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Tue, Aug 25, 2026 at 03:47:41PM -0400, Ralph Siemsen wrote:
+>On Sat, Aug 15, 2026 at 12:21:11AM +0200, Marek Vasut wrote:
+>>On 8/14/26 8:30 PM, Ralph Siemsen wrote:
+>>> 		return ret;
+>>> 	}
+>>>-	clock = clk_get_rate(&clk);
+>>>+	clock = clk_get_rate(&clks.clks[0]);
+>>
+>>Can the clock ever be non-first clock , i.e. do you need to handle 
+>>clock-names DT property somehow ?
 >
-> On 8/27/26 15:00, Alexey Charkov wrote:
-> > If LIB_UUID is enabled on a big-endian board, such as when it is pulled
-> > in by EFI_PARTITION, its tests will fail due to the dynamic capsule GUI=
-Ds
-> > computed by lib_test_dynamic_uuid() using native endianness for the UTF=
--16
-> > image name, instead of little-endian:
-> >
-> >    malta # ut lib lib_test_dynamic_uuid
-> >    Test: dynamic_uuid: uuid.c
-> >    test/lib/uuid.c:114, lib_test_dynamic_uuid_case(): expected_uuid =3D=
- uuid_str: Expected "985f2937-7c2e-5e9a-8a5e-8e063312964b", got "829f5cb0-1=
-a07-5718-8774-4514bda82c39"
-> >    Test 'dynamic_uuid' failed 1 times
-> >    Tests run: 1, 2 ms, average: 2 ms, failures: 1
-> >    exit not allowed from main input shell.
-> >    malta #
-> >
-> > Add explicit endianness conversion to the test and to other similar
-> > callers of gen_v5_guid() to make sure they work uniformly regardless of
-> > the host or target endianness.
-> >
-> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
->
-> Thank you for reporting that the test fails on big endian systems.
->
-> In lib_test_dynamic_uuid() we define define dynamic_uuid_test_data
-> test_data[].images as u16 string. On a big endian system the characters
-> of the string will not be stored in the same sequence as on a low endian
-> system so the UUID generated in gen_v5_guid() is expected to be different=
-.
->
-> test_data[].images should contain unique sequences of bytes.
->
-> The relevant code was introduced with
-> 26e16a850e64 ("test: lib/uuid: add unit tests for dynamic UUIDs")
+>It's not clear to me if the DT binding specifies the order. It says 
+>there must be either 2 or 3 clocks, as well as clock-names properties.
 
-Thanks for looking into this!
+I had another look at the clock ordering. According to [1]
+  "Order in lists is significant, order in dicts is not."
 
-Do I get it right that you'd rather have the test_data[].images bytes
-untouched, and instead select different test_data[].expected_uuids
-based on the CPU endianness, rather than patching
-lib_test_dynamic_uuid_case()? Or shall I make the test_data[].images a
-plain byte array to remove the endianness concern altogether?
+The binding [2] uses a list for the clock names:
 
-> With that I don't think that the EFI changes are needed. Anyway UEFI is
-> little endian only.
+   clock-names:
+     minItems: 2
+     items:
+       - const: clk_xin
+       - const: clk_ahb
+       - const: gate
 
-Happy to drop the hunks touching files other than the test
-expectation. However, the test expectation needs an update one way or
-another, as we can't test GPT on BE without it.
+And as we can see, the reference clock ("clk_xin") is listed first.
 
-Best regards,
-Alexey
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/example-schema.yaml#n47
+
+[2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/mmc/arasan,sdhci.yaml#n116
+
+As a further check, I reversed the order of the clocks, and then ran 
+"make dtbs_check" to verify against DT schema. It complains:
+
+arch/arm/dts/r9a06g032-rzn1-snarc.dtb: mmc@40100000 (renesas,r9a06g032-sdhci): clock-names:0: 'clk_xin' was expected
+	from schema $id: http://devicetree.org/schemas/mmc/arasan,sdhci.yaml
+arch/arm/dts/r9a06g032-rzn1-snarc.dtb: mmc@40100000 (renesas,r9a06g032-sdhci): clock-names:1: 'clk_ahb' was expected
+	from schema $id: http://devicetree.org/schemas/mmc/arasan,sdhci.yaml
+
+No complaint when the clocks are in the correct order.
+
+>We could try using the name ("clk_xin") and if that fails, fall back on 
+>using the first clock.
+
+So I think we don't need this extra complexity after all. It should be 
+fine to rely on the first clock being the correct one.
+
+Ralph
