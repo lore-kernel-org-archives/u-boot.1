@@ -4,117 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D8AEC61DC6
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 15:38:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60EDCC61DC6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 15:39:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 33AF5406E7;
-	Thu, 27 Aug 2026 15:38:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2A7D6406E7;
+	Thu, 27 Aug 2026 15:39:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UEYLLfDJRK-u; Thu, 27 Aug 2026 15:38:06 +0000 (UTC)
+ id X2zfwSU1gvxR; Thu, 27 Aug 2026 15:39:05 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787845086;
-	bh=K5qoEqPvqec5Ad6mEHbkA2yhpsPUw/R11eOmhq+5F+8=;
+	d=lists.u-boot-project.org; s=default; t=1787845145;
+	bh=dwtAF7IWh1zQ2TebtVJe5w0zoz6zxTN3+gIZw5HE+os=;
 	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=Of6rUdfu/KeQ28LIezN9vcRc2VNm3uRxQnalAF77GlpSR/06DWqTd504Tzqmg1LlO
-	 HiHMdcIjEAc4mVmMNhFJatzp6/qkamy3okJRaOFMZLqaKQZO4wXTbdkIuliqJpCJmB
-	 GZR71PP6ZrMKTJFMTOc7lG1qSRLwQEAjQ/6QFE7etmpHPac4xyoSS81BOEJA7+OV3E
-	 CeIkwHXXiXFDu1aNTcYqLwhcZqG7rTva3htAK8AWYcH8CRXve992lvvbvkHA9mK7z6
-	 6lLoALdkOf7HkOup4u+yEe86Gu7MWwyXJNRavRT19IrzuXnvu/wXLUGfOWNeb8P1kW
-	 cktOnCo1tmG0A==
+	b=KUKJiVv+ehR4tzbrX0gJt61J4ZgCvrUqSvnPgNgE6CQnJ80oXhDc1xRYoGxFftLuo
+	 PsdBJflOXmzAnV0NGFnJ/uDzrsCLVaPQzKj11EFNJ5jE894Be1qxI01ZTEwjJ1fJ65
+	 0Lw2HcFG3tDJCLRFpsBvEIFtHLLuii/PYE58AM/MYumz+oDjZczSKl7CV1rcFAgBZi
+	 NOvRfXUlyZErdI5n8RwfbRMKYOHfZKNv0fo7aAlGqwhbeF2SJDyVzxbTbqBbD5UGZ9
+	 PHg1xhJcuIp3E+doMo1U1Kluq0KM26uK4fa2TCwyUojDQjdIr8+A/9N/VaJAmjp/c1
+	 2ZMQxV1MYIBSw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3DAD2407C5;
-	Thu, 27 Aug 2026 15:38:06 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 58A72334
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 15:38:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 568BC40732;
+	Thu, 27 Aug 2026 15:39:05 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5CB3E3A4
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 15:39:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4A81A80EA0
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 15:38:04 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 432CB4034D
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 15:39:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id O913CP_OaWLa for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 15:38:03 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NlY6vftCOhb3 for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 15:39:02 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
+ client-ip=2a00:1450:4864:20::432; helo=mail-wr1-x432.google.com;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=AP+tULTS
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 10F8B80E9D
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 15:38:02 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-49954b88fffso19469995e9.0
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:38:02 -0700 (PDT)
+ header.s=google header.b=J5qM2TWE
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 038D640348
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 15:39:01 +0000 (UTC)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-47fe89fb333so525194f8f.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:39:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787845080; x=1788449880;
+ d=linaro.org; s=google; t=1787845140; x=1788449940;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=K5qoEqPvqec5Ad6mEHbkA2yhpsPUw/R11eOmhq+5F+8=;
- b=AP+tULTSFuKWkdqwhZfvozp940wS2vA4HQn5n0vI4hrZa+lbsOSdJB/BWKwHM7EZbX
- CM25ekrtVN84M5MEdpfwy6TOl/ZpOeC/7doNBrWY8EJ6zqhsqP8l8mfqnnANQtxFEuNM
- 2GQyY9zEmko1eLqyxmz8D1YZZL6BYf4Jk4dRwYuS0lYhDrTX939ROFhszzLXEVb0oFHh
- svBz8UuaKYD+L3VKHV1Qvu5XCu7uDnCfm/fhdzgfYM2JK35rjaBz6fz61uMNhHx7kUSw
- ZXDRhYfyfOwIViHy/7Y3KpALnN9irYodanLmfsfmvdlLbKx3Yay7yba74gQmasTW6z/K
- gKJg==
+ bh=dwtAF7IWh1zQ2TebtVJe5w0zoz6zxTN3+gIZw5HE+os=;
+ b=J5qM2TWEwUeGT6QJE+XrK6CShkvFiVLNA6Wxtb5gQ51+oYVufxEJyEjOKK5wiYFk4H
+ DdMk0V/SvIvHhT3JdgNj48EBJPG6V5GoCBYyOabUpqhbL3LuorI580pw6PCEiP7Siwnn
+ f0g+IXC2JEz+akz8h3UltovTkavqF0kCsfObkJ47PGJgBwOtp67df+Axqy3gwn7haatp
+ jusB2X9gwOhLwWvA2cq4SBdn5gXgffsQzftESYhpdQjouJubUJF9lD7mKAtVxCpS0xHF
+ pRrbJz9WRPrkfTXhQTgRMLhCoPY1L1puJnRqb7ArrkF1Byehpm2giHTvXk8xyhdHv8oJ
+ C+4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787845080; x=1788449880;
+ d=1e100.net; s=20251104; t=1787845140; x=1788449940;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=K5qoEqPvqec5Ad6mEHbkA2yhpsPUw/R11eOmhq+5F+8=;
- b=ZdG+CLGk3N7ebdDBVR6XdnwdbPt1hEglve9T4XUQQi27YgnJmuRE4BqEiHwZ377Dll
- bJuKFQyNsHmRiG68KaPiAQ3zfjdHGoPervEO3gJk232oyrbYD4QxYmEWj6J2gv2106mc
- uNmp2JdmVOG3DPoWZjEfgIAYFzLVSPGH9wgGIqXqw345zwX6Nc8Pd2/+BytEAURsB1Cj
- I5JpG3yQU2vOZBSuixyT/cn5AAd4v/ds/pHUBqQlbCivH8+a8UbPBMe9/Tq50GLUS2Hl
- JcoJo/2QzL6vicy7wNlDfouXVv/RKLbXbw9e1R+L92uXJ8CFZB3MTTKJnuXHhUicDyK3
- VqRQ==
+ bh=dwtAF7IWh1zQ2TebtVJe5w0zoz6zxTN3+gIZw5HE+os=;
+ b=YVHt4jpoP7n4NoDvtxlAC4/VoFz60yjbXir1HrcS8X20gSD/HYEDR/BXtaHh2ian7Y
+ eKP1SzP1KddmOZbDbFapiuAM+QjU7ublKZy55UoEn9ja4Wmi+4rS7dLKLMSQzQW51t+m
+ dhrEX50rjpOIrr0ZxyncAysncCV8jBi6SR74YxppGQHmW8r+A3culC2Oo0ENxidRTV4q
+ KF8s9blOr1fkyPU+BYcfZPLBVIhZvnrgNcEaOtE69O7pw2Nvder+hLIHV00eWO+CEAYV
+ nQSqCdQt1vuM65rO3ZfaGo1N4tsowknsBH3tGBr3w1zUSXuaARdzEsLpbRYsmlsS7b0s
+ 1R7A==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rpi02HL8R7JXyUHRsn+m3D/K09IMFYnt5lOnY2/hDBc14kDhvsZvSl7hwvaCD9l41/PFlMeEIg=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kRiqpPslRqdhBYt3NU9pPUUiL7febqmp2rAvAJL+F0WsNVn3JB
- EmiwZFeqIBCJ89cHM7/yoRnXfAy2k/KampkFxtIJnPGBM61U6r5f5+VJ+AexSqSjMyI=
-X-Gm-Gg: AR+sD13RHyDvNpmfeuInlziJpUghmBIglUXhuHAoj/QJXez9PcCxmXPJHCiDQnN32Xj
- SN5kSVfO4RFIkP1/ske/tv/+akbeSiHwjzrDM+l+EOfu7BGnCBDuX2fqSZK/h++FvEcRk2iccRv
- GHCkOGoh+zxa57m+6zWo5eAsyWUzoWipq4rqZ+orVYejYbE8RgL9DuXaRYenAUU4WMcH7K6l7fE
- UOKtI6pNFjmEDibasShABdcj3zDhMIlB+ck/r24otidz34vFbhNHKBecqOEImaOL5F3nBrtxqb/
- zKxbkYMbQAxbH3f+pjJn8SbyhVFcVSg+1xM1VOPvhelmTzoA0Mpt0O1q/adSCH5ZWlyN8hZd5EO
- 3Q2Ro1SX4D3DZHnMy1uORbGgJzOxZ3GNZ+QeLV2Y2pRTT4sYg6P6//kW0fL/xnLWzSzRfBJp9CA
- HdcM6JIqZ4vEqH0tvsLemIw2x2p+EEFEXjtcSLGjGL6OWcmG+70jkrPg9oIGntmmL7WKcV4JMq4
- dl92huSOYtgi2CfEdNcVcILWucHlgPJzXiwUX6ZQ4Zhtg==
-X-Received: by 2002:a05:600c:c4ab:b0:499:a8bd:1930 with SMTP id
- 5b1f17b1804b1-499dc6ef59dmr176721805e9.5.1787845080211; 
- Thu, 27 Aug 2026 08:38:00 -0700 (PDT)
+ AHgh+RpBDbNd3atBlWfOPeNeZrCrTz6moC+dGfeADwSOG5MOQI5Oz2xyhHiy3qKa4oqG6s+ijJcgWAc=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++m5HPhk7spvaA1ZWfEaXMr2pQ1pi7qmqOuZy6BbPR0/NegCl4EG
+ 1MInrai4L39H4of6NqpXY8DIVbLRT+LQfbOWG4WWTOGwkkVQDaGgskDYncTIVmg8dII=
+X-Gm-Gg: AR+sD10V7sHx/fTA/YVwy/3hIHClzN/U4FbJORrX5CkVQicFiPP3oEH965/9LAlsCbG
+ Oh/iSwtKp2UKVn0BzAYA+3dTFB9hLk2IqlC4olH2B3T2QT8LXu2C6F99pkaA37Mrj/MNbEhwNoT
+ +Og4DsTZa7w0WfLntasz/jrlcCur1qgPgUDnkeuQxHMiQGaDk5mmcPGZojqC++f3+M2Gu5pZclK
+ +NOUbCxTGv2qqcnZoCwwgCeJ1iP9ex1OnPgcpDMCBDwxczVfebMJTkyDGa/U45FVMxSccRr+qsd
+ ggw9CilrX3f10tKik8gmlICv6R43WW3DkeJhvB9z5oX6fcK4HmybQdAYHzRbyUCK+JEB3SCMfAB
+ al5MG4Hmqb+RoFa0tS6VgW8MVzQgRUqD0qBONjEqX/LHkNhUwGbJRZ9ZNTBJtObEn1cC6122Z3B
+ hnxbNXod86uLVJrDLPBo5WNNHu/b14/RD1CYZf+2sDihrcDyS+sg1PEFHgG/h4t4/SfqXrpObi0
+ LMjocjtUZshtsOkoPO3j4CqACZyy88tmfzeyTj6DpAw3w==
+X-Received: by 2002:a05:6000:4810:b0:482:c0bd:42a9 with SMTP id
+ ffacd0b85a97d-482e26831c0mr21764654f8f.6.1787845139544; 
+ Thu, 27 Aug 2026 08:38:59 -0700 (PDT)
 Received: from ?IPV6:2a0d:e487:122f:5669:ed69:66c3:c4c3:2b18?
  ([2a0d:e487:122f:5669:ed69:66c3:c4c3:2b18])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49b49610170sm131134735e9.6.2026.08.27.08.37.57
+ ffacd0b85a97d-482e28dbe1dsm10542093f8f.22.2026.08.27.08.38.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Aug 2026 08:37:59 -0700 (PDT)
-Message-ID: <7c78ba1a-f191-4e13-b741-24ba3166dcb2@linaro.org>
-Date: Thu, 27 Aug 2026 17:37:55 +0200
+ Thu, 27 Aug 2026 08:38:59 -0700 (PDT)
+Message-ID: <55e06114-6e52-4809-87a2-d39906174c68@linaro.org>
+Date: Thu, 27 Aug 2026 17:38:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 4/9] clk: meson: Use soc-specific naming for common
- functions
+Subject: Re: [PATCH 5/9] clk: meson: Export a1 functions to common file
 To: Sean Anderson <sanderson@brivo.com>, u-boot@lists.u-boot-project.org
 Cc: u-boot-amlogic@groups.io, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>
 References: <20260817171623.1943847-1-sanderson@brivo.com>
- <20260817171623.1943847-5-sanderson@brivo.com>
+ <20260817171623.1943847-6-sanderson@brivo.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -141,7 +140,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260817171623.1943847-5-sanderson@brivo.com>
+In-Reply-To: <20260817171623.1943847-6-sanderson@brivo.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -159,244 +158,1130 @@ Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 On 8/17/26 19:15, Sean Anderson wrote:
-> In preparation for moving a1 versions of several common functions into a
-> shared file, rename all the conflicting functions to have a soc-specific
-> component.
+> Export several useful functions from a1 to a common file. These will be
+> used for s4 support.
 > 
 > Signed-off-by: Sean Anderson <sanderson@brivo.com>
 > ---
 > 
->   drivers/clk/meson/axg-ao.c  |  8 ++++----
->   drivers/clk/meson/axg.c     | 12 ++++++------
->   drivers/clk/meson/g12a-ao.c |  8 ++++----
->   drivers/clk/meson/g12a.c    | 20 ++++++++++----------
->   drivers/clk/meson/gxbb.c    | 20 ++++++++++----------
->   5 files changed, 34 insertions(+), 34 deletions(-)
+>   drivers/clk/meson/Makefile    |   1 +
+>   drivers/clk/meson/a1.c        | 473 ----------------------------------
+>   drivers/clk/meson/axg-ao.c    |   4 -
+>   drivers/clk/meson/axg.c       |   4 -
+>   drivers/clk/meson/clk_meson.c | 350 +++++++++++++++++++++++++
+>   drivers/clk/meson/clk_meson.h | 143 ++++++++++
+>   drivers/clk/meson/g12a-ao.c   |   4 -
+>   drivers/clk/meson/g12a.c      |   4 -
+>   drivers/clk/meson/gxbb.c      |   4 -
+>   9 files changed, 494 insertions(+), 493 deletions(-)
+>   create mode 100644 drivers/clk/meson/clk_meson.c
 > 
+> diff --git a/drivers/clk/meson/Makefile b/drivers/clk/meson/Makefile
+> index c7a446e86c4..3d1dfcdb640 100644
+> --- a/drivers/clk/meson/Makefile
+> +++ b/drivers/clk/meson/Makefile
+> @@ -3,6 +3,7 @@
+>   # Copyright (c) 2019 Baylibre, SAS
+>   # Jerome Brunet <jbrunet@baylibre.com>
+>   
+> +obj-y += clk_meson.o
+>   obj-$(CONFIG_CLK_MESON_GX) += gxbb.o
+>   obj-$(CONFIG_CLK_MESON_AXG) += axg.o
+>   obj-$(CONFIG_CLK_MESON_AXG) += axg-ao.o
+> diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
+> index 422cdf5f4d1..b6d1887c98a 100644
+> --- a/drivers/clk/meson/a1.c
+> +++ b/drivers/clk/meson/a1.c
+> @@ -34,138 +34,6 @@
+>   
+>   #define EXTERNAL_FIXPLL_IN		(NR_PLL_CLKS + 1)
+>   
+> -#define SET_PARM_VALUE(_priv, _parm, _val)				\
+> -	regmap_update_bits((_priv)->map, (_parm)->reg_off,		\
+> -			   SETPMASK((_parm)->width, (_parm)->shift),	\
+> -			   (_val) << (_parm)->shift)
+> -
+> -#define GET_PARM_VALUE(_priv, _parm)					\
+> -({									\
+> -	uint _reg;							\
+> -	regmap_read((_priv)->map, (_parm)->reg_off, &_reg);		\
+> -	PARM_GET((_parm)->width, (_parm)->shift, _reg);			\
+> -})
+> -
+> -struct meson_clk {
+> -	struct regmap *map;
+> -};
+> -
+> -/**
+> - * enum meson_clk_type - The type of clock
+> - * @MESON_CLK_ANY: Special value that matches any clock type
+> - * @MESON_CLK_GATE: This clock is a gate
+> - * @MESON_CLK_MUX: This clock is a multiplexer
+> - * @MESON_CLK_DIV: This clock is a configurable divider
+> - * @MESON_CLK_FIXED_DIV: This clock is a configurable divider
+> - * @MESON_CLK_EXTERNAL: This is an external clock from different clock provider
+> - * @MESON_CLK_PLL: This is a PLL
+> - */
+> -enum meson_clk_type {
+> -	MESON_CLK_ANY = 0,
+> -	MESON_CLK_GATE,
+> -	MESON_CLK_MUX,
+> -	MESON_CLK_DIV,
+> -	MESON_CLK_FIXED_DIV,
+> -	MESON_CLK_EXTERNAL,
+> -	MESON_CLK_PLL,
+> -};
+> -
+> -/**
+> - * struct meson_clk_info - The parameters defining a clock
+> - * @name: Name of the clock
+> - * @parm: Register bits description for muxes and dividers
+> - * @div: Fixed divider value
+> - * @parents: List of parent clock IDs
+> - * @type: Clock type
+> - */
+> -struct meson_clk_info {
+> -	const char *name;
+> -	union {
+> -		const struct parm *parm;
+> -		u8 div;
+> -	};
+> -	const unsigned int *parents;
+> -	const enum meson_clk_type type;
+> -};
+> -
+> -/**
+> - * struct meson_clk_data - Clocks supported by clock provider
+> - * @num_clocks: Number of clocks
+> - * @clocks: Array of clock descriptions
+> - *
+> - */
+> -struct meson_clk_data {
+> -	const u8 num_clocks;
+> -	const struct meson_clk_info **clocks;
+> -};
+> -
+> -/* Clock description initialization macros */
+> -
+> -/* A multiplexer */
+> -#define CLK_MUX(_name, _reg, _shift, _width, ...)			\
+> -	(&(struct meson_clk_info){					\
+> -		.parents = (const unsigned int[])__VA_ARGS__,		\
+> -		.parm = &(struct parm) {				\
+> -			.reg_off = (_reg),				\
+> -			.shift = (_shift),				\
+> -			.width = (_width),				\
+> -		},							\
+> -		.name = (_name),					\
+> -		.type = MESON_CLK_MUX,					\
+> -	})
+> -
+> -/* A divider with an integral divisor */
+> -#define CLK_DIV(_name, _reg, _shift, _width, _parent)			\
+> -	(&(struct meson_clk_info){					\
+> -		.parents = (const unsigned int[]) { (_parent) },	\
+> -		.parm = &(struct parm) {				\
+> -			.reg_off = (_reg),				\
+> -			.shift = (_shift),				\
+> -			.width = (_width),				\
+> -		},							\
+> -		.name = (_name),					\
+> -		.type = MESON_CLK_DIV,					\
+> -	})
+> -
+> -/* A fixed divider */
+> -#define CLK_DIV_FIXED(_name, _div, _parent)				\
+> -	(&(struct meson_clk_info){					\
+> -		.parents = (const unsigned int[]) { (_parent) },	\
+> -		.div = (_div),						\
+> -		.name = (_name),					\
+> -		.type = MESON_CLK_FIXED_DIV,				\
+> -	})
+> -
+> -/* An external clock */
+> -#define CLK_EXTERNAL(_name)						\
+> -	(&(struct meson_clk_info){					\
+> -		.name = (_name),					\
+> -		.parents = (const unsigned int[]) { -ENOENT },		\
+> -		.type = MESON_CLK_EXTERNAL,				\
+> -	})
+> -
+> -/* A clock gate */
+> -#define CLK_GATE(_name, _reg, _shift, _parent)				\
+> -	(&(struct meson_clk_info){					\
+> -		.parents = (const unsigned int[]) { (_parent) },	\
+> -		.parm = &(struct parm) {				\
+> -			.reg_off = (_reg),				\
+> -			.shift = (_shift),				\
+> -			.width = 1,					\
+> -		},							\
+> -		.name = (_name),					\
+> -		.type = MESON_CLK_GATE,					\
+> -	})
+> -
+> -/* A PLL clock */
+> -#define CLK_PLL(_name, _parent, ...)					\
+> -	(&(struct meson_clk_info){					\
+> -		.name = (_name),					\
+> -		.parents = (const unsigned int[]) { (_parent) },	\
+> -		.parm = (const struct parm[])__VA_ARGS__,		\
+> -		.type = MESON_CLK_PLL,					\
+> -	})
+> -
+>   /* A1 peripherals clocks */
+>   static const struct meson_clk_info *meson_clocks[] = {
+>   	[CLKID_SPIFC_SEL] = CLK_MUX("spifc_sel", A1_SPIFC_CLK_CTRL, 9, 2, {
+> @@ -302,254 +170,6 @@ static const struct meson_clk_info *meson_pll_clocks[] = {
+>   	),
+>   };
+>   
+> -static const struct meson_clk_info *meson_clk_get_info(struct clk *clk,
+> -						       enum meson_clk_type type)
+> -{
+> -	struct meson_clk_data *data = (void *)dev_get_driver_data(clk->dev);
+> -	const struct meson_clk_info *info;
+> -
+> -	if (clk->id >= data->num_clocks)
+> -		return ERR_PTR(-EINVAL);
+> -
+> -	info = data->clocks[clk->id];
+> -	if (!info)
+> -		return ERR_PTR(-ENOENT);
+> -
+> -	if (type != MESON_CLK_ANY && type != info->type)
+> -		return ERR_PTR(-EINVAL);
+> -
+> -	return info;
+> -}
+> -
+> -static ulong meson_clk_get_rate(struct clk *clk);
+> -
+> -static int meson_set_gate(struct clk *clk, bool on)
+> -{
+> -	struct meson_clk *priv = dev_get_priv(clk->dev);
+> -	const struct meson_clk_info *info;
+> -
+> -	debug("%s: %sabling %lu\n", __func__, on ? "en" : "dis", clk->id);
+> -
+> -	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> -	if (IS_ERR(info))
+> -		return PTR_ERR(info);
+> -
+> -	SET_PARM_VALUE(priv, info->parm, on);
+> -
+> -	return 0;
+> -}
+> -
+> -static int meson_clk_enable(struct clk *clk)
+> -{
+> -	return meson_set_gate(clk, true);
+> -}
+> -
+> -static int meson_clk_disable(struct clk *clk)
+> -{
+> -	return meson_set_gate(clk, false);
+> -}
+> -
+> -static ulong meson_div_get_rate(struct clk *clk)
+> -{
+> -	struct meson_clk *priv = dev_get_priv(clk->dev);
+> -	u16 n;
+> -	ulong rate;
+> -	const struct meson_clk_info *info;
+> -	struct clk parent;
+> -
+> -	info = meson_clk_get_info(clk, MESON_CLK_DIV);
+> -	if (IS_ERR(info))
+> -		return PTR_ERR(info);
+> -
+> -	/* Actual divider value is (field value + 1), hence the increment */
+> -	n = GET_PARM_VALUE(priv, info->parm) + 1;
+> -
+> -	parent.dev = clk->dev;
+> -	parent.id = info->parents[0];
+> -	rate = meson_clk_get_rate(&parent);
+> -
+> -	return rate / n;
+> -}
+> -
+> -static int meson_clk_get_parent(struct clk *clk)
+> -{
+> -	uint reg = 0;
+> -	struct meson_clk *priv = dev_get_priv(clk->dev);
+> -	const struct meson_clk_info *info;
+> -
+> -	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> -	if (IS_ERR(info))
+> -		return PTR_ERR(info);
+> -
+> -	/* For muxes we read currently selected parent from register,
+> -	 * for other types there is always only one element in parents array.
+> -	 */
+> -	if (info->type == MESON_CLK_MUX) {
+> -		reg = GET_PARM_VALUE(priv, info->parm);
+> -		if (IS_ERR_VALUE(reg))
+> -			return reg;
+> -	}
+> -
+> -	return info->parents[reg];
+> -}
+> -
+> -static ulong meson_pll_get_rate(struct clk *clk)
+> -{
+> -	struct meson_clk *priv = dev_get_priv(clk->dev);
+> -	const struct meson_clk_info *info;
+> -	const struct parm *pm, *pn;
+> -	ulong parent_rate_mhz;
+> -	struct clk parent;
+> -	u16 n, m;
+> -
+> -	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> -	if (IS_ERR(info))
+> -		return PTR_ERR(info);
+> -
+> -	pm = &info->parm[0];
+> -	pn = &info->parm[1];
+> -
+> -	n = GET_PARM_VALUE(priv, pn);
+> -	m = GET_PARM_VALUE(priv, pm);
+> -
+> -	if (n == 0)
+> -		return -EINVAL;
+> -
+> -	parent.dev = clk->dev;
+> -	parent.id = info->parents[0];
+> -	parent_rate_mhz = meson_clk_get_rate(&parent) / 1000000;
+> -
+> -	return parent_rate_mhz * m / n * 1000000;
+> -}
+> -
+> -static ulong meson_clk_get_rate(struct clk *clk)
+> -{
+> -	struct clk parent;
+> -	const struct meson_clk_info *info;
+> -
+> -	if (IS_ERR_VALUE(clk->id))
+> -		return clk->id;
+> -
+> -	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> -	if (IS_ERR(info))
+> -		return PTR_ERR(info);
+> -
+> -	switch (info->type) {
+> -	case MESON_CLK_PLL:
+> -		return meson_pll_get_rate(clk);
+> -	case MESON_CLK_GATE:
+> -	case MESON_CLK_MUX:
+> -		parent.dev = clk->dev;
+> -		parent.id = meson_clk_get_parent(clk);
+> -		return meson_clk_get_rate(&parent);
+> -	case MESON_CLK_DIV:
+> -		return meson_div_get_rate(clk);
+> -	case MESON_CLK_FIXED_DIV:
+> -		parent.dev = clk->dev;
+> -		parent.id = meson_clk_get_parent(clk);
+> -		return meson_clk_get_rate(&parent) / info->div;
+> -	case MESON_CLK_EXTERNAL: {
+> -		int ret;
+> -		struct clk external_clk;
+> -
+> -		ret = clk_get_by_name(clk->dev, info->name, &external_clk);
+> -		if (ret)
+> -			return ret;
+> -
+> -		return clk_get_rate(&external_clk);
+> -	}
+> -	default:
+> -		return -EINVAL;
+> -	}
+> -}
+> -
+> -/* This implements rate propagation for dividers placed after multiplexer:
+> - *  ---------|\
+> - *     ..... | |---DIV--
+> - *  ---------|/
+> - */
+> -static ulong meson_composite_set_rate(struct clk *clk, ulong rate)
+> -{
+> -	unsigned int i, best_div_val;
+> -	unsigned long best_delta, best_parent;
+> -	const struct meson_clk_info *div;
+> -	const struct meson_clk_info *mux;
+> -	struct meson_clk *priv = dev_get_priv(clk->dev);
+> -	struct clk mux_clk;
+> -
+> -	div = meson_clk_get_info(clk, MESON_CLK_DIV);
+> -	if (IS_ERR(div))
+> -		return PTR_ERR(div);
+> -
+> -	mux_clk.dev = clk->dev;
+> -	mux_clk.id = div->parents[0];
+> -	mux = meson_clk_get_info(&mux_clk, MESON_CLK_MUX);
+> -	if (IS_ERR(mux))
+> -		return PTR_ERR(mux);
+> -
+> -	best_parent = -EINVAL;
+> -	best_delta = ULONG_MAX;
+> -	for (i = 0; i < (1 << mux->parm->width); i++) {
+> -		unsigned long parent_rate, delta;
+> -		unsigned int div_val;
+> -		struct clk parent = {
+> -			.dev = clk->dev,
+> -			.id =  mux->parents[i],
+> -		};
+> -
+> -		parent_rate = meson_clk_get_rate(&parent);
+> -		if (IS_ERR_VALUE(parent_rate))
+> -			continue;
+> -
+> -		/* If overflow, try to use max divider value */
+> -		div_val = min(DIV_ROUND_CLOSEST(parent_rate, rate),
+> -			      (1UL << div->parm->width));
+> -
+> -		delta = abs(rate - (parent_rate / div_val));
+> -		if (delta < best_delta) {
+> -			best_delta = delta;
+> -			best_div_val = div_val;
+> -			best_parent = i;
+> -		}
+> -	}
+> -
+> -	if (IS_ERR_VALUE(best_parent))
+> -		return best_parent;
+> -
+> -	SET_PARM_VALUE(priv, mux->parm, best_parent);
+> -	/* Divider is set to (field value + 1), hence the decrement */
+> -	SET_PARM_VALUE(priv, div->parm, best_div_val - 1);
+> -
+> -	return 0;
+> -}
+> -
+> -static ulong meson_mux_set_rate(struct clk *clk, ulong rate)
+> -{
+> -	int i;
+> -	ulong ret = -EINVAL;
+> -	struct meson_clk *priv = dev_get_priv(clk->dev);
+> -	const struct meson_clk_info *info;
+> -
+> -	info = meson_clk_get_info(clk, MESON_CLK_MUX);
+> -	if (IS_ERR(info))
+> -		return PTR_ERR(info);
+> -
+> -	for (i = 0; i < (1 << info->parm->width); i++) {
+> -		struct clk parent = {
+> -			.dev = clk->dev,
+> -			.id = info->parents[i],
+> -		};
+> -
+> -		ret = clk_set_rate(&parent, rate);
+> -		if (!ret) {
+> -			SET_PARM_VALUE(priv, info->parm, i);
+> -			break;
+> -		}
+> -	}
+> -
+> -	return ret;
+> -}
+> -
+>   /* Rate propagation is implemented for a subcection of a clock tree, that is
+>    * required at boot stage.
+>    */
+> @@ -575,32 +195,6 @@ static ulong meson_clk_set_rate(struct clk *clk, ulong rate)
+>   	return -EINVAL;
+>   }
+>   
+> -static int meson_clk_set_parent(struct clk *clk, struct clk *parent)
+> -{
+> -	unsigned int i, parent_index;
+> -	struct meson_clk *priv = dev_get_priv(clk->dev);
+> -	const struct meson_clk_info *info;
+> -
+> -	info = meson_clk_get_info(clk, MESON_CLK_MUX);
+> -	if (IS_ERR(info))
+> -		return PTR_ERR(info);
+> -
+> -	parent_index = -EINVAL;
+> -	for (i = 0; i < (1 << info->parm->width); i++) {
+> -		if (parent->id == info->parents[i]) {
+> -			parent_index = i;
+> -			break;
+> -		}
+> -	}
+> -
+> -	if (IS_ERR_VALUE(parent_index))
+> -		return parent_index;
+> -
+> -	SET_PARM_VALUE(priv, info->parm, parent_index);
+> -
+> -	return 0;
+> -}
+> -
+>   static int meson_clk_probe(struct udevice *dev)
+>   {
+>   	struct meson_clk *priv = dev_get_priv(dev);
+> @@ -630,73 +224,6 @@ static const struct udevice_id meson_clk_ids[] = {
+>   	{ }
+>   };
+>   
+> -#if IS_ENABLED(CONFIG_CMD_CLK)
+> -static const char *meson_clk_get_name(struct clk *clk)
+> -{
+> -	const struct meson_clk_info *info;
+> -
+> -	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> -
+> -	return IS_ERR(info) ? "unknown" : info->name;
+> -}
+> -
+> -static int meson_clk_dump_single(struct clk *clk)
+> -{
+> -	const struct meson_clk_info *info;
+> -	struct meson_clk *priv;
+> -	unsigned long rate;
+> -	char *state, frequency[80];
+> -	struct clk parent;
+> -
+> -	priv = dev_get_priv(clk->dev);
+> -
+> -	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> -	if (IS_ERR(info) || !info->name)
+> -		return -EINVAL;
+> -
+> -	rate = clk_get_rate(clk);
+> -	if (IS_ERR_VALUE(rate))
+> -		sprintf(frequency, "unknown");
+> -	else
+> -		sprintf(frequency, "%lu", rate);
+> -
+> -	if (info->type == MESON_CLK_GATE)
+> -		state = GET_PARM_VALUE(priv, info->parm) ? "enabled" : "disabled";
+> -	else
+> -		state = "N/A";
+> -
+> -	parent.dev = clk->dev;
+> -	parent.id = meson_clk_get_parent(clk);
+> -	printf("%15s%20s%20s%15s\n",
+> -	       info->name,
+> -	       frequency,
+> -	       meson_clk_get_name(&parent),
+> -	       state);
+> -
+> -	return 0;
+> -}
+> -
+> -static void meson_clk_dump(struct udevice *dev)
+> -{
+> -	int i;
+> -	struct meson_clk_data *data;
+> -	const char *sep = "--------------------";
+> -
+> -	printf("%s:\n", dev->name);
+> -	printf("%.15s%s%s%.15s\n", sep, sep, sep, sep);
+> -	printf("%15s%20s%20s%15s\n", "clk", "frequency", "parent", "state");
+> -	printf("%.15s%s%s%.15s\n", sep, sep, sep, sep);
+> -
+> -	data = (struct meson_clk_data *)dev_get_driver_data(dev);
+> -	for (i = 0; i < data->num_clocks; i++) {
+> -		meson_clk_dump_single(&(struct clk){
+> -			.dev = dev,
+> -			.id = i
+> -		});
+> -	}
+> -}
+> -#endif
+> -
+>   static struct clk_ops meson_clk_ops = {
+>   	.disable	= meson_clk_disable,
+>   	.enable		= meson_clk_enable,
 > diff --git a/drivers/clk/meson/axg-ao.c b/drivers/clk/meson/axg-ao.c
-> index 6ccf52127b0..3215391006e 100644
+> index 3215391006e..5f897d89e9b 100644
 > --- a/drivers/clk/meson/axg-ao.c
 > +++ b/drivers/clk/meson/axg-ao.c
-> @@ -35,12 +35,12 @@ static int meson_set_gate(struct clk *clk, bool on)
->   	return 0;
->   }
+> @@ -10,10 +10,6 @@
 >   
-> -static int meson_clk_enable(struct clk *clk)
-> +static int meson_axg_ao_clk_enable(struct clk *clk)
->   {
->   	return meson_set_gate(clk, true);
->   }
+>   #include "clk_meson.h"
 >   
-> -static int meson_clk_disable(struct clk *clk)
-> +static int meson_axg_ao_clk_disable(struct clk *clk)
->   {
->   	return meson_set_gate(clk, false);
->   }
-> @@ -65,8 +65,8 @@ static int meson_clk_request(struct clk *clk)
->   }
->   
->   static struct clk_ops meson_clk_ops = {
-> -	.disable	= meson_clk_disable,
-> -	.enable		= meson_clk_enable,
-> +	.disable	= meson_axg_ao_clk_disable,
-> +	.enable		= meson_axg_ao_clk_enable,
->   	.request	= meson_clk_request,
->   };
+> -struct meson_clk {
+> -	struct regmap *map;
+> -};
+> -
+>   #define AO_CLK_GATE0		0x40
+>   #define AO_SAR_CLK		0x90
 >   
 > diff --git a/drivers/clk/meson/axg.c b/drivers/clk/meson/axg.c
-> index c421a622a58..e20d3feaade 100644
+> index e20d3feaade..3b5f4af9f4c 100644
 > --- a/drivers/clk/meson/axg.c
 > +++ b/drivers/clk/meson/axg.c
-> @@ -69,12 +69,12 @@ static int meson_set_gate(struct clk *clk, bool on)
->   	return 0;
->   }
+> @@ -20,10 +20,6 @@
 >   
-> -static int meson_clk_enable(struct clk *clk)
-> +static int meson_axg_clk_enable(struct clk *clk)
->   {
->   	return meson_set_gate(clk, true);
->   }
+>   #define XTAL_RATE 24000000
 >   
-> -static int meson_clk_disable(struct clk *clk)
-> +static int meson_axg_clk_disable(struct clk *clk)
->   {
->   	return meson_set_gate(clk, false);
->   }
-> @@ -279,7 +279,7 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
->   	return rate;
->   }
+> -struct meson_clk {
+> -	struct regmap *map;
+> -};
+> -
+>   static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id);
 >   
-> -static ulong meson_clk_get_rate(struct clk *clk)
-> +static ulong meson_axg_clk_get_rate(struct clk *clk)
->   {
->   	return meson_clk_get_rate_by_id(clk, clk->id);
->   }
-> @@ -305,9 +305,9 @@ static int meson_clk_probe(struct udevice *dev)
->   }
+>   static struct meson_gate gates[] = {
+> diff --git a/drivers/clk/meson/clk_meson.c b/drivers/clk/meson/clk_meson.c
+> new file mode 100644
+> index 00000000000..de5aa5ae3c9
+> --- /dev/null
+> +++ b/drivers/clk/meson/clk_meson.c
+> @@ -0,0 +1,350 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * (C) Copyright 2023 SberDevices, Inc.
+> + * Author: Igor Prusov <ivprusov@salutedevices.com>
+> + */
+> +
+> +#include <clk-uclass.h>
+> +#include <dm.h>
+> +#include <regmap.h>
+> +
+> +#include "clk_meson.h"
+> +
+> +static const struct meson_clk_info *meson_clk_get_info(struct clk *clk,
+> +						       enum meson_clk_type type)
+> +{
+> +	struct meson_clk_data *data = (void *)dev_get_driver_data(clk->dev);
+> +	const struct meson_clk_info *info;
+> +
+> +	if (clk->id >= data->num_clocks)
+> +		return ERR_PTR(-EINVAL);
+> +
+> +	info = data->clocks[clk->id];
+> +	if (!info)
+> +		return ERR_PTR(-ENOENT);
+> +
+> +	if (type != MESON_CLK_ANY && type != info->type)
+> +		return ERR_PTR(-EINVAL);
+> +
+> +	return info;
+> +}
+> +
+> +static int meson_set_gate(struct clk *clk, bool on)
+> +{
+> +	struct meson_clk *priv = dev_get_priv(clk->dev);
+> +	const struct meson_clk_info *info;
+> +
+> +	debug("%s: %sabling %lu\n", __func__, on ? "en" : "dis", clk->id);
+> +
+> +	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> +	if (IS_ERR(info))
+> +		return PTR_ERR(info);
+> +
+> +	SET_PARM_VALUE(priv, info->parm, on);
+> +
+> +	return 0;
+> +}
+> +
+> +int meson_clk_enable(struct clk *clk)
+> +{
+> +	return meson_set_gate(clk, true);
+> +}
+> +
+> +int meson_clk_disable(struct clk *clk)
+> +{
+> +	return meson_set_gate(clk, false);
+> +}
+> +
+> +static ulong meson_div_get_rate(struct clk *clk)
+> +{
+> +	struct meson_clk *priv = dev_get_priv(clk->dev);
+> +	u16 n;
+> +	ulong rate;
+> +	const struct meson_clk_info *info;
+> +	struct clk parent;
+> +
+> +	info = meson_clk_get_info(clk, MESON_CLK_DIV);
+> +	if (IS_ERR(info))
+> +		return PTR_ERR(info);
+> +
+> +	/* Actual divider value is (field value + 1), hence the increment */
+> +	n = GET_PARM_VALUE(priv, info->parm) + 1;
+> +
+> +	parent.dev = clk->dev;
+> +	parent.id = info->parents[0];
+> +	rate = meson_clk_get_rate(&parent);
+> +
+> +	return rate / n;
+> +}
+> +
+> +int meson_clk_get_parent(struct clk *clk)
+> +{
+> +	uint reg = 0;
+> +	struct meson_clk *priv = dev_get_priv(clk->dev);
+> +	const struct meson_clk_info *info;
+> +
+> +	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> +	if (IS_ERR(info))
+> +		return PTR_ERR(info);
+> +
+> +	/* For muxes we read currently selected parent from register,
+> +	 * for other types there is always only one element in parents array.
+> +	 */
+> +	if (info->type == MESON_CLK_MUX) {
+> +		reg = GET_PARM_VALUE(priv, info->parm);
+> +		if (IS_ERR_VALUE(reg))
+> +			return reg;
+> +	}
+> +
+> +	return info->parents[reg];
+> +}
+> +
+> +static ulong meson_pll_get_rate(struct clk *clk)
+> +{
+> +	struct meson_clk *priv = dev_get_priv(clk->dev);
+> +	const struct meson_clk_info *info;
+> +	const struct parm *pm, *pn;
+> +	ulong parent_rate_mhz;
+> +	struct clk parent;
+> +	u16 n, m;
+> +
+> +	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> +	if (IS_ERR(info))
+> +		return PTR_ERR(info);
+> +
+> +	pm = &info->parm[0];
+> +	pn = &info->parm[1];
+> +
+> +	n = GET_PARM_VALUE(priv, pn);
+> +	m = GET_PARM_VALUE(priv, pm);
+> +
+> +	if (n == 0)
+> +		return -EINVAL;
+> +
+> +	parent.dev = clk->dev;
+> +	parent.id = info->parents[0];
+> +	parent_rate_mhz = meson_clk_get_rate(&parent) / 1000000;
+> +
+> +	return parent_rate_mhz * m / n * 1000000;
+> +}
+> +
+> +ulong meson_clk_get_rate(struct clk *clk)
+> +{
+> +	struct clk parent;
+> +	const struct meson_clk_info *info;
+> +
+> +	if (IS_ERR_VALUE(clk->id))
+> +		return clk->id;
+> +
+> +	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> +	if (IS_ERR(info))
+> +		return PTR_ERR(info);
+> +
+> +	switch (info->type) {
+> +	case MESON_CLK_PLL:
+> +		return meson_pll_get_rate(clk);
+> +	case MESON_CLK_GATE:
+> +	case MESON_CLK_MUX:
+> +		parent.dev = clk->dev;
+> +		parent.id = meson_clk_get_parent(clk);
+> +		return meson_clk_get_rate(&parent);
+> +	case MESON_CLK_DIV:
+> +		return meson_div_get_rate(clk);
+> +	case MESON_CLK_FIXED_DIV:
+> +		parent.dev = clk->dev;
+> +		parent.id = meson_clk_get_parent(clk);
+> +		return meson_clk_get_rate(&parent) / info->div;
+> +	case MESON_CLK_EXTERNAL: {
+> +		int ret;
+> +		struct clk external_clk;
+> +
+> +		ret = clk_get_by_name(clk->dev, info->name, &external_clk);
+> +		if (ret)
+> +			return ret;
+> +
+> +		return clk_get_rate(&external_clk);
+> +	}
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +}
+> +
+> +/* This implements rate propagation for dividers placed after multiplexer:
+> + *  ---------|\
+> + *     ..... | |---DIV--
+> + *  ---------|/
+> + */
+> +ulong meson_composite_set_rate(struct clk *clk, ulong rate)
+> +{
+> +	unsigned int i, best_div_val;
+> +	unsigned long best_delta, best_parent;
+> +	const struct meson_clk_info *div;
+> +	const struct meson_clk_info *mux;
+> +	struct meson_clk *priv = dev_get_priv(clk->dev);
+> +	struct clk mux_clk;
+> +
+> +	div = meson_clk_get_info(clk, MESON_CLK_DIV);
+> +	if (IS_ERR(div))
+> +		return PTR_ERR(div);
+> +
+> +	mux_clk.dev = clk->dev;
+> +	mux_clk.id = div->parents[0];
+> +	mux = meson_clk_get_info(&mux_clk, MESON_CLK_MUX);
+> +	if (IS_ERR(mux))
+> +		return PTR_ERR(mux);
+> +
+> +	best_parent = -EINVAL;
+> +	best_delta = ULONG_MAX;
+> +	for (i = 0; i < (1 << mux->parm->width); i++) {
+> +		unsigned long parent_rate, delta;
+> +		unsigned int div_val;
+> +		struct clk parent = {
+> +			.dev = clk->dev,
+> +			.id =  mux->parents[i],
+> +		};
+> +
+> +		parent_rate = meson_clk_get_rate(&parent);
+> +		if (IS_ERR_VALUE(parent_rate))
+> +			continue;
+> +
+> +		/* If overflow, try to use max divider value */
+> +		div_val = min(DIV_ROUND_CLOSEST(parent_rate, rate),
+> +			      (1UL << div->parm->width));
+> +
+> +		delta = abs(rate - (parent_rate / div_val));
+> +		if (delta < best_delta) {
+> +			best_delta = delta;
+> +			best_div_val = div_val;
+> +			best_parent = i;
+> +		}
+> +	}
+> +
+> +	if (IS_ERR_VALUE(best_parent))
+> +		return best_parent;
+> +
+> +	SET_PARM_VALUE(priv, mux->parm, best_parent);
+> +	/* Divider is set to (field value + 1), hence the decrement */
+> +	SET_PARM_VALUE(priv, div->parm, best_div_val - 1);
+> +
+> +	return 0;
+> +}
+> +
+> +ulong meson_mux_set_rate(struct clk *clk, ulong rate)
+> +{
+> +	int i;
+> +	ulong ret = -EINVAL;
+> +	struct meson_clk *priv = dev_get_priv(clk->dev);
+> +	const struct meson_clk_info *info;
+> +
+> +	info = meson_clk_get_info(clk, MESON_CLK_MUX);
+> +	if (IS_ERR(info))
+> +		return PTR_ERR(info);
+> +
+> +	for (i = 0; i < (1 << info->parm->width); i++) {
+> +		struct clk parent = {
+> +			.dev = clk->dev,
+> +			.id = info->parents[i],
+> +		};
+> +
+> +		ret = clk_set_rate(&parent, rate);
+> +		if (!ret) {
+> +			SET_PARM_VALUE(priv, info->parm, i);
+> +			break;
+> +		}
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +int meson_clk_set_parent(struct clk *clk, struct clk *parent)
+> +{
+> +	unsigned int i, parent_index;
+> +	struct meson_clk *priv = dev_get_priv(clk->dev);
+> +	const struct meson_clk_info *info;
+> +
+> +	info = meson_clk_get_info(clk, MESON_CLK_MUX);
+> +	if (IS_ERR(info))
+> +		return PTR_ERR(info);
+> +
+> +	parent_index = -EINVAL;
+> +	for (i = 0; i < (1 << info->parm->width); i++) {
+> +		if (parent->id == info->parents[i]) {
+> +			parent_index = i;
+> +			break;
+> +		}
+> +	}
+> +
+> +	if (IS_ERR_VALUE(parent_index))
+> +		return parent_index;
+> +
+> +	SET_PARM_VALUE(priv, info->parm, parent_index);
+> +
+> +	return 0;
+> +}
+> +
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +static const char *meson_clk_get_name(struct clk *clk)
+> +{
+> +	const struct meson_clk_info *info;
+> +
+> +	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> +
+> +	return IS_ERR(info) ? "unknown" : info->name;
+> +}
+> +
+> +static int meson_clk_dump_single(struct clk *clk)
+> +{
+> +	const struct meson_clk_info *info;
+> +	struct meson_clk *priv;
+> +	unsigned long rate;
+> +	char *state, frequency[80];
+> +	struct clk parent;
+> +
+> +	priv = dev_get_priv(clk->dev);
+> +
+> +	info = meson_clk_get_info(clk, MESON_CLK_ANY);
+> +	if (IS_ERR(info) || !info->name)
+> +		return -EINVAL;
+> +
+> +	rate = clk_get_rate(clk);
+> +	if (IS_ERR_VALUE(rate))
+> +		sprintf(frequency, "unknown");
+> +	else
+> +		sprintf(frequency, "%lu", rate);
+> +
+> +	if (info->type == MESON_CLK_GATE)
+> +		state = GET_PARM_VALUE(priv, info->parm) ? "enabled" : "disabled";
+> +	else
+> +		state = "N/A";
+> +
+> +	parent.dev = clk->dev;
+> +	parent.id = meson_clk_get_parent(clk);
+> +	printf("%15s%20s%20s%15s\n",
+> +	       info->name,
+> +	       frequency,
+> +	       meson_clk_get_name(&parent),
+> +	       state);
+> +
+> +	return 0;
+> +}
+> +
+> +void meson_clk_dump(struct udevice *dev)
+> +{
+> +	int i;
+> +	struct meson_clk_data *data;
+> +	const char *sep = "--------------------";
+> +
+> +	printf("%s:\n", dev->name);
+> +	printf("%.15s%s%s%.15s\n", sep, sep, sep, sep);
+> +	printf("%15s%20s%20s%15s\n", "clk", "frequency", "parent", "state");
+> +	printf("%.15s%s%s%.15s\n", sep, sep, sep, sep);
+> +
+> +	data = (struct meson_clk_data *)dev_get_driver_data(dev);
+> +	for (i = 0; i < data->num_clocks; i++) {
+> +		meson_clk_dump_single(&(struct clk){
+> +			.dev = dev,
+> +			.id = i
+> +		});
+> +	}
+> +}
+> +#endif
+> diff --git a/drivers/clk/meson/clk_meson.h b/drivers/clk/meson/clk_meson.h
+> index ef72a416c15..990e9434126 100644
+> --- a/drivers/clk/meson/clk_meson.h
+> +++ b/drivers/clk/meson/clk_meson.h
+> @@ -39,10 +39,153 @@ struct parm {
+>   #define PARM_SET(width, shift, reg, val)                                \
+>   	(((reg) & CLRPMASK(width, shift)) | ((val) << (shift)))
 >   
->   static struct clk_ops meson_clk_ops = {
-> -	.disable	= meson_clk_disable,
-> -	.enable		= meson_clk_enable,
-> -	.get_rate	= meson_clk_get_rate,
-> +	.disable	= meson_axg_clk_disable,
-> +	.enable		= meson_axg_clk_enable,
-> +	.get_rate	= meson_axg_clk_get_rate,
->   };
+> +#define SET_PARM_VALUE(_priv, _parm, _val)				\
+> +	regmap_update_bits((_priv)->map, (_parm)->reg_off,		\
+> +			   SETPMASK((_parm)->width, (_parm)->shift),	\
+> +			   (_val) << (_parm)->shift)
+> +
+> +#define GET_PARM_VALUE(_priv, _parm)					\
+> +({									\
+> +	uint _reg;							\
+> +	regmap_read((_priv)->map, (_parm)->reg_off, &_reg);		\
+> +	PARM_GET((_parm)->width, (_parm)->shift, _reg);			\
+> +})
+> +
+> +struct meson_clk {
+> +	struct regmap *map;
+> +};
+> +
+> +/**
+> + * enum meson_clk_type - The type of clock
+> + * @MESON_CLK_ANY: Special value that matches any clock type
+> + * @MESON_CLK_GATE: This clock is a gate
+> + * @MESON_CLK_MUX: This clock is a multiplexer
+> + * @MESON_CLK_DIV: This clock is a configurable divider
+> + * @MESON_CLK_FIXED_DIV: This clock is a configurable divider
+> + * @MESON_CLK_EXTERNAL: This is an external clock from different clock provider
+> + * @MESON_CLK_PLL: This is a PLL
+> + */
+> +enum meson_clk_type {
+> +	MESON_CLK_ANY = 0,
+> +	MESON_CLK_GATE,
+> +	MESON_CLK_MUX,
+> +	MESON_CLK_DIV,
+> +	MESON_CLK_FIXED_DIV,
+> +	MESON_CLK_EXTERNAL,
+> +	MESON_CLK_PLL,
+> +};
+> +
+> +/**
+> + * struct meson_clk_info - The parameters defining a clock
+> + * @name: Name of the clock
+> + * @parm: Register bits description for muxes and dividers
+> + * @div: Fixed divider value
+> + * @parents: List of parent clock IDs
+> + * @type: Clock type
+> + */
+> +struct meson_clk_info {
+> +	const char *name;
+> +	union {
+> +		const struct parm *parm;
+> +		u8 div;
+> +	};
+> +	const unsigned int *parents;
+> +	const enum meson_clk_type type;
+> +};
+> +
+> +/**
+> + * struct meson_clk_data - Clocks supported by clock provider
+> + * @num_clocks: Number of clocks
+> + * @clocks: Array of clock descriptions
+> + *
+> + */
+> +struct meson_clk_data {
+> +	const u8 num_clocks;
+> +	const struct meson_clk_info **clocks;
+> +};
+> +
+> +/* Clock description initialization macros */
+> +
+> +/* A multiplexer */
+> +#define CLK_MUX(_name, _reg, _shift, _width, ...)			\
+> +	(&(struct meson_clk_info){					\
+> +		.parents = (const unsigned int[])__VA_ARGS__,		\
+> +		.parm = &(struct parm) {				\
+> +			.reg_off = (_reg),				\
+> +			.shift = (_shift),				\
+> +			.width = (_width),				\
+> +		},							\
+> +		.name = (_name),					\
+> +		.type = MESON_CLK_MUX,					\
+> +	})
+> +
+> +/* A divider with an integral divisor */
+> +#define CLK_DIV(_name, _reg, _shift, _width, _parent)			\
+> +	(&(struct meson_clk_info){					\
+> +		.parents = (const unsigned int[]) { (_parent) },	\
+> +		.parm = &(struct parm) {				\
+> +			.reg_off = (_reg),				\
+> +			.shift = (_shift),				\
+> +			.width = (_width),				\
+> +		},							\
+> +		.name = (_name),					\
+> +		.type = MESON_CLK_DIV,					\
+> +	})
+> +
+> +/* A fixed divider */
+> +#define CLK_DIV_FIXED(_name, _div, _parent)				\
+> +	(&(struct meson_clk_info){					\
+> +		.parents = (const unsigned int[]) { (_parent) },	\
+> +		.div = (_div),						\
+> +		.name = (_name),					\
+> +		.type = MESON_CLK_FIXED_DIV,				\
+> +	})
+> +
+> +/* An external clock */
+> +#define CLK_EXTERNAL(_name)						\
+> +	(&(struct meson_clk_info){					\
+> +		.name = (_name),					\
+> +		.parents = (const unsigned int[]) { -ENOENT },		\
+> +		.type = MESON_CLK_EXTERNAL,				\
+> +	})
+> +
+> +/* A clock gate */
+> +#define CLK_GATE(_name, _reg, _shift, _parent)				\
+> +	(&(struct meson_clk_info){					\
+> +		.parents = (const unsigned int[]) { (_parent) },	\
+> +		.parm = &(struct parm) {				\
+> +			.reg_off = (_reg),				\
+> +			.shift = (_shift),				\
+> +			.width = 1,					\
+> +		},							\
+> +		.name = (_name),					\
+> +		.type = MESON_CLK_GATE,					\
+> +	})
+> +
+> +/* A PLL clock */
+> +#define CLK_PLL(_name, _parent, ...)					\
+> +	(&(struct meson_clk_info){					\
+> +		.name = (_name),					\
+> +		.parents = (const unsigned int[]) { (_parent) },	\
+> +		.parm = (const struct parm[])__VA_ARGS__,		\
+> +		.type = MESON_CLK_PLL,					\
+> +	})
+> +
+>   /* MPLL Parameters */
 >   
->   static const struct udevice_id meson_clk_ids[] = {
+>   #define SDM_DEN 16384
+>   #define N2_MIN  4
+>   #define N2_MAX  511
+>   
+> +int meson_clk_enable(struct clk *clk);
+> +int meson_clk_disable(struct clk *clk);
+> +int meson_clk_get_parent(struct clk *clk);
+> +ulong meson_clk_get_rate(struct clk *clk);
+> +ulong meson_composite_set_rate(struct clk *clk, ulong rate);
+> +ulong meson_mux_set_rate(struct clk *clk, ulong rate);
+> +int meson_clk_set_parent(struct clk *clk, struct clk *parent);
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +void meson_clk_dump(struct udevice *dev);
+> +#endif
+> +
+>   #endif
 > diff --git a/drivers/clk/meson/g12a-ao.c b/drivers/clk/meson/g12a-ao.c
-> index 61d489c6e1c..e89638d65b5 100644
+> index e89638d65b5..d9425f900f3 100644
 > --- a/drivers/clk/meson/g12a-ao.c
 > +++ b/drivers/clk/meson/g12a-ao.c
-> @@ -35,12 +35,12 @@ static int meson_set_gate(struct clk *clk, bool on)
->   	return 0;
->   }
+> @@ -10,10 +10,6 @@
 >   
-> -static int meson_clk_enable(struct clk *clk)
-> +static int meson_g12a_ao_clk_enable(struct clk *clk)
->   {
->   	return meson_set_gate(clk, true);
->   }
+>   #include "clk_meson.h"
 >   
-> -static int meson_clk_disable(struct clk *clk)
-> +static int meson_g12a_ao_clk_disable(struct clk *clk)
->   {
->   	return meson_set_gate(clk, false);
->   }
-> @@ -65,8 +65,8 @@ static int meson_clk_request(struct clk *clk)
->   }
->   
->   static struct clk_ops meson_clk_ops = {
-> -	.disable	= meson_clk_disable,
-> -	.enable		= meson_clk_enable,
-> +	.disable	= meson_g12a_ao_clk_disable,
-> +	.enable		= meson_g12a_ao_clk_enable,
->   	.request	= meson_clk_request,
->   };
+> -struct meson_clk {
+> -	struct regmap *map;
+> -};
+> -
+>   #define AO_CLK_GATE0		0x4c
+>   #define AO_SAR_CLK		0x90
 >   
 > diff --git a/drivers/clk/meson/g12a.c b/drivers/clk/meson/g12a.c
-> index f33938e1419..cc7bfe9e2a2 100644
+> index cc7bfe9e2a2..b1ba5881904 100644
 > --- a/drivers/clk/meson/g12a.c
 > +++ b/drivers/clk/meson/g12a.c
-> @@ -194,12 +194,12 @@ static int meson_set_gate_by_id(struct clk *clk, unsigned long id, bool on)
->   	return 0;
->   }
+> @@ -91,10 +91,6 @@
 >   
-> -static int meson_clk_enable(struct clk *clk)
-> +static int meson_g12a_clk_enable(struct clk *clk)
->   {
->   	return meson_set_gate_by_id(clk, clk->id, true);
->   }
+>   #define XTAL_RATE 24000000
 >   
-> -static int meson_clk_disable(struct clk *clk)
-> +static int meson_g12a_clk_disable(struct clk *clk)
->   {
->   	return meson_set_gate_by_id(clk, clk->id, false);
->   }
-> @@ -858,7 +858,7 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
->   	return rate;
->   }
->   
-> -static ulong meson_clk_get_rate(struct clk *clk)
-> +static ulong meson_g12a_clk_get_rate(struct clk *clk)
->   {
->   	return meson_clk_get_rate_by_id(clk, clk->id);
->   }
-> @@ -888,7 +888,7 @@ static ulong meson_pcie_pll_set_rate(struct clk *clk, ulong rate)
->   	return 100000000;
->   }
->   
-> -static int meson_clk_set_parent(struct clk *clk, struct clk *parent)
-> +static int meson_g12a_clk_set_parent(struct clk *clk, struct clk *parent)
->   {
->   	return meson_mux_set_parent(clk, clk->id, parent->id);
->   }
-> @@ -958,7 +958,7 @@ static ulong meson_clk_set_rate_by_id(struct clk *clk, unsigned long id,
->   	return -EINVAL;
->   }
->   
-> -static ulong meson_clk_set_rate(struct clk *clk, ulong rate)
-> +static ulong meson_g12a_clk_set_rate(struct clk *clk, ulong rate)
->   {
->   	ulong current_rate = meson_clk_get_rate_by_id(clk, clk->id);
->   	int ret;
-> @@ -1000,11 +1000,11 @@ static int meson_clk_probe(struct udevice *dev)
->   }
->   
->   static struct clk_ops meson_clk_ops = {
-> -	.disable	= meson_clk_disable,
-> -	.enable		= meson_clk_enable,
-> -	.get_rate	= meson_clk_get_rate,
-> -	.set_parent	= meson_clk_set_parent,
-> -	.set_rate	= meson_clk_set_rate,
-> +	.disable	= meson_g12a_clk_disable,
-> +	.enable		= meson_g12a_clk_enable,
-> +	.get_rate	= meson_g12a_clk_get_rate,
-> +	.set_parent	= meson_g12a_clk_set_parent,
-> +	.set_rate	= meson_g12a_clk_set_rate,
->   };
->   
->   static const struct udevice_id meson_clk_ids[] = {
+> -struct meson_clk {
+> -	struct regmap *map;
+> -};
+> -
+>   static ulong meson_div_get_rate(struct clk *clk, unsigned long id);
+>   static ulong meson_div_set_rate(struct clk *clk, unsigned long id, ulong rate,
+>   				ulong current_rate);
 > diff --git a/drivers/clk/meson/gxbb.c b/drivers/clk/meson/gxbb.c
-> index bf46f4d50bc..24b5f9b5d40 100644
+> index 24b5f9b5d40..62c1e0eed4f 100644
 > --- a/drivers/clk/meson/gxbb.c
 > +++ b/drivers/clk/meson/gxbb.c
-> @@ -236,12 +236,12 @@ static int meson_set_gate_by_id(struct clk *clk, unsigned long id, bool on)
->   	return 0;
->   }
+> @@ -70,10 +70,6 @@
 >   
-> -static int meson_clk_enable(struct clk *clk)
-> +static int meson_gxbb_clk_enable(struct clk *clk)
->   {
->   	return meson_set_gate_by_id(clk, clk->id, true);
->   }
+>   #define XTAL_RATE 24000000
 >   
-> -static int meson_clk_disable(struct clk *clk)
-> +static int meson_gxbb_clk_disable(struct clk *clk)
->   {
->   	return meson_set_gate_by_id(clk, clk->id, false);
->   }
-> @@ -840,12 +840,12 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
->   	return rate;
->   }
->   
-> -static ulong meson_clk_get_rate(struct clk *clk)
-> +static ulong meson_gxbb_clk_get_rate(struct clk *clk)
->   {
->   	return meson_clk_get_rate_by_id(clk, clk->id);
->   }
->   
-> -static int meson_clk_set_parent(struct clk *clk, struct clk *parent)
-> +static int meson_gxbb_clk_set_parent(struct clk *clk, struct clk *parent)
->   {
->   	return meson_mux_set_parent(clk, clk->id, parent->id);
->   }
-> @@ -912,7 +912,7 @@ static ulong meson_clk_set_rate_by_id(struct clk *clk, unsigned long id,
->   	return -EINVAL;
->   }
->   
-> -static ulong meson_clk_set_rate(struct clk *clk, ulong rate)
-> +static ulong meson_gxbb_clk_set_rate(struct clk *clk, ulong rate)
->   {
->   	ulong current_rate = meson_clk_get_rate_by_id(clk, clk->id);
->   	int ret;
-> @@ -954,11 +954,11 @@ static int meson_clk_probe(struct udevice *dev)
->   }
->   
->   static struct clk_ops meson_clk_ops = {
-> -	.disable	= meson_clk_disable,
-> -	.enable		= meson_clk_enable,
-> -	.get_rate	= meson_clk_get_rate,
-> -	.set_parent	= meson_clk_set_parent,
-> -	.set_rate	= meson_clk_set_rate,
-> +	.disable	= meson_gxbb_clk_disable,
-> +	.enable		= meson_gxbb_clk_enable,
-> +	.get_rate	= meson_gxbb_clk_get_rate,
-> +	.set_parent	= meson_gxbb_clk_set_parent,
-> +	.set_rate	= meson_gxbb_clk_set_rate,
->   };
->   
->   static const struct udevice_id meson_clk_ids[] = {
+> -struct meson_clk {
+> -	struct regmap *map;
+> -};
+> -
+>   static ulong meson_div_get_rate(struct clk *clk, unsigned long id);
+>   static ulong meson_div_set_rate(struct clk *clk, unsigned long id, ulong rate,
+>   				ulong current_rate);
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
