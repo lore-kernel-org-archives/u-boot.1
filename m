@@ -1,147 +1,126 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3696BC61DC6
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 12:11:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C0FC61DC6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 12:31:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B3A954070D;
-	Thu, 27 Aug 2026 12:11:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EE8326078C;
+	Thu, 27 Aug 2026 12:31:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lUttbbJ42iFK; Thu, 27 Aug 2026 12:11:55 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cygpOTiezqyR; Thu, 27 Aug 2026 12:31:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787832715;
-	bh=xrFWXWhO1g7HCl1UAcsVO5SK8TMx98MlROUM5u6bzu4=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=HtWdGS3IteCUSMJqE8IqtTV0S5Mpc4bAsBi1siL3doDH8a5o5HUtupOJZgZ68LAzc
-	 1l5rm9eXtFr8MfQULP2qr7zFJwYw37VjSY6eM3dExLhZ8IOVMtYmbjwnzz0Abm0xwY
-	 5iaMeZwszV1w3GL3GBLtEdl83rMZbJJaNM8WLAKb0UKCNyyuK5U+K3UZdYXiR3iWdt
-	 6mNDA20rnVe4ZcieKAPYCTm/eP5m5HRZw8+FhfmFEOWZEUBiayVoTpz8wtuu6cxAHR
-	 HMZDNYlKPIAPytFwvV/h6VS0zf05IH9zUOJC/DsIjn5ztUeB0Sp/MI/aXbC6gVJx7B
-	 p+d9ggeNolq2Q==
+	d=lists.u-boot-project.org; s=default; t=1787833888;
+	bh=RueyYHqVFHPbLdLprKnP8aFE3K3Rlqs/9nnN7UxRmuQ=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=SZE0q+cofHQrs6Vy45jw4VHI7MT+bc8rEEsqypaFJYiSyjP18iAnejdWS8vWhPY0J
+	 Xs4573d2Cp1SmrzK57vQJuFINY1E+C4f4C+SBg3wnCTjBDZ75ngmQRYsPfrSNfuehH
+	 EAmoU5MDKnWZdTDBsttwSmH/OHrf/F0Wcl5J5wSZHxtchELecg1uWnPNaBvqzH1zOg
+	 bCEwI9H6ahm0lAH32L4EXVC5IaFAwSR//dhyBYO8JQldcLyE/KfJeqShTvsfj8zjIk
+	 Ved3zztLzpqb+Rrwv3kloyL7VWKBwxnxU7sDGcUb77aXXDP/0pYEEogm/rCzlNX60I
+	 wTTea3HXcxKTw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 62BDA406F7;
-	Thu, 27 Aug 2026 12:11:55 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 27EC4355
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:11:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 25CDE6070B;
+	Thu, 27 Aug 2026 12:31:28 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 807403A4
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:31:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0DF3C40301
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:11:54 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7E4DC80D66
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:31:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id U5Qi0lL59ICf for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 12:11:53 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 438SD_7secst for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 12:31:26 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c111::5;
- helo=dm1pr04cu001.outbound.protection.outlook.com;
- envelope-from=suraj.hanumantkakade@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=Z35aVTy1
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D995F402E1
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:11:51 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fOuksSjM7PQ/th7LYe9ufK2QSri21gBGHlwV+By24b6mJcH2geDRhg3PUqr3FbOHhAdC2ls4lH8M5q6oFo1uxQWG0m8ejdIxw/0pqrdhEcm+sDa8pEh6JeXoi1uTNmpzBdpiFGxMJc2l90J67E6vTFwiwBl5kQ18tyt1ybHTgRRH3hyuGNF7OcwYUed/Yt7Xz3anvlmX9wfaxWIoav9CtP78KxUD/CeIfCBn69b2Tz1xtlYIX1DFlSgN/8BptB2UutOSfCPHc2300ToPE1q12GkmJLItdX7jR718cIA7PaYrYrnzA090Y7+BXK3lRjxrqFrzjVgvlEcwLaF2wBwvYQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xrFWXWhO1g7HCl1UAcsVO5SK8TMx98MlROUM5u6bzu4=;
- b=X3sKOzT/nkNGCXRhkHIEPd6P8M6ONkD9uu7viHthWfPx8fnzLxYZVjOjI8EqgJq0/r3hDR0ok3tfgD+VIPtWr428Y4jZbd6Ik2MGS+sE+Tq5vd6CWxnveoFYGSBG0RR8fU1JD5nRMB1095B3sCuh6979w3xoH3bV+UQa3s5Lx4VVvI2vsSgNJTof7w5UAh2c2T7zLv1bGuNr3u951d9AgE0TQXcNQyizM3EannJRF+avjNf6GGB80W0y4ValhRE5I+SgIeV/ZARmpVf8KiELZCPJ8AIxQRDGfKdqUw8ijLiFDDPpnvxe8S3SwsrVK5ux1NJcOFx0UPRG1Y/fTGn+AA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
- smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
- action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xrFWXWhO1g7HCl1UAcsVO5SK8TMx98MlROUM5u6bzu4=;
- b=Z35aVTy1t9PkqvkAhO/B95qFRRSdP6K60yHXraXcSMdmeDfDTB4QCy+xINMOSD7FuW0rVOYMn8eqPjoN/hpRAakiHIwPdCA90X1043w85RjC3HEuPySDHPudyYxOGtApHetjSxjfJ6AFs5wU6AJmwH2KKFJfvQZckJer19oe9go=
-Received: from BN9PR03CA0307.namprd03.prod.outlook.com (2603:10b6:408:112::12)
- by MW6PR12MB8866.namprd12.prod.outlook.com (2603:10b6:303:24c::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Thu, 27 Aug
- 2026 12:11:33 +0000
-Received: from BN7PEPF00000094.namprd03.prod.outlook.com
- (2603:10b6:408:112:cafe::72) by BN9PR03CA0307.outlook.office365.com
- (2603:10b6:408:112::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.10 via Frontend Transport; Thu,
- 27 Aug 2026 12:11:32 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN7PEPF00000094.mail.protection.outlook.com (10.167.245.72) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.360.3 via Frontend Transport; Thu, 27 Aug 2026 12:11:31 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 27 Aug
- 2026 07:11:30 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 27 Aug
- 2026 07:11:30 -0500
-Received: from xhdsuhanuma50x.xilinx.com (10.180.168.240) by
- satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.45 via Frontend Transport; Thu, 27 Aug 2026 07:11:27 -0500
-From: Suraj Kakade <suraj.hanumantkakade@amd.com>
-To: <u-boot@lists.u-boot-project.org>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Suraj Kakade
- <suraj.hanumantkakade@amd.com>, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>, "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>,
- Borislav Petkov <bp@suse.de>, Michal Marek <mmarek@suse.cz>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>
-Subject: [PATCH 2/2] Makefile: drop GNU Make < 4.0 compatibility code
-Date: Thu, 27 Aug 2026 17:40:55 +0530
-Message-ID: <20260827121108.1775123-3-suraj.hanumantkakade@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260827121108.1775123-1-suraj.hanumantkakade@amd.com>
-References: <20260827121108.1775123-1-suraj.hanumantkakade@amd.com>
+ client-ip=2a00:1450:4864:20::334; helo=mail-wm1-x334.google.com;
+ envelope-from=msp@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=ldTU0cGI
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0F5D080D05
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:31:23 +0000 (UTC)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4921eed3fa2so5324195e9.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 05:31:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1787833882; x=1788438682;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=RueyYHqVFHPbLdLprKnP8aFE3K3Rlqs/9nnN7UxRmuQ=;
+ b=ldTU0cGIpDczNctZ2dB2mqWc1oourzrcb68g1qNfGGp/EBUh0LjiCzTOo2ZcrBor8z
+ By5JVStFMRYbNvRJDC2FD6kIrvp+NiYbxPlfV6pGpYAtfbp3JDEvOswFxUkzZ147fHZ0
+ Z1WL27fAaLUIfG3dh2QDPp1rEw8hwsZLfRUHcV54qUj1oQrW5dsGT9jyIYKEE0UHOHnp
+ 3Ufj66jF8W/8Cw6xqrd9w/QElu3jaSoOmg5+2HRb5EFoA2H9XbNF8zwm7MbvheQXPRGe
+ 09ZjEPab2fZRtTH2M2NNC9lFNe+4pnsQQ7mnvXrnU8GZ68Q7YyiqQ1IpvU1xXy5x3Cww
+ qiIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787833882; x=1788438682;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=RueyYHqVFHPbLdLprKnP8aFE3K3Rlqs/9nnN7UxRmuQ=;
+ b=M2mgXVSvs4YezkSx+YszUzNZCiXE7i7JArpe48eCvjHJpmKvN1+NDQ01kbu4qCn8iS
+ MX8XAB3fUt9jixMlP4eqUON0XqGkujrjYI3CvqkLYUX5m2izVmf1r4NtbfMRTq6OgEHX
+ 3UJ51G8215QF4YN1SyBvjp4Q+KN1Hp8L/Zc5Nuwsyz+gcRH7MYAm3WFo9QaHIVX0lLLh
+ 2UjDMFCjvOmMWFrja6SS9WCdVt0OJrWAcVn17Upd7K3OHXAUbvoYgYNvJHI8qwm4E6wy
+ gMowSjSRVE+56Rw5R6rEMmvWnRw6qMz03QmbWAvCQqdU8ukfS6CgX+eXBrpM2VvT0ajV
+ MGcg==
+X-Gm-Message-State: AFuF++l6ihFQdrNioxMWfova17fGqasRR7aaP2/zEkTe0WKtruToJGrA
+ HYnAlcgBRo0zMuEJv9sefnfJV/4EE8/QdZfixbwDc68yWo8Tgec3i11kGJkLt2A1D5XITGA3agb
+ 2mgq1
+X-Gm-Gg: AR+sD13G/nsU9iffmyXgc50t2LQpjOjB5v9Y3KfFJldPRcINBE42pRn28IR18cMxm2g
+ wsgZKoTQ/WPjh9aM6MKqlOZpJQ0vb7/Jeu7pg2wSBlLAGSpUUSR+lA83yYNncmaDdJEmGw8Ia9o
+ EGHT+BBIRT4gPGZKfhwq4Bl7Hc3QI/tJ+UN6olgWhqLIDuPuTVwe+28JAAC3kIcgHf2Sq9Es1Qa
+ 3pztq0YIQMXGpZP+fSGTV7V8FZrs3PnCM3mqt7QGXpBAxYqFiUU2gA/LKZfWEzjGsonb3Ev3FKJ
+ CWvdkr9WqMXIn4G0gCsj0gj9exLfmKiehiBWOsTdJRcjQyEXoB/9Ey4Sks7a854CQNeWh6KAubJ
+ G6ViCb+qfXzGeePzxXY21GAG0UfvrGxWYehQ3JY2BzHw4qCUKr61cYjF+651+K8d5Z6tfwmGdNp
+ VVPnOjDYJCIUNarwGafOH5wSDz60n88dXOeoAfVoJN4aHJKdKfyJ+L3HazdA==
+X-Received: by 2002:a05:600c:8518:b0:493:e451:a9e1 with SMTP id
+ 5b1f17b1804b1-499dc6e40acmr181040495e9.2.1787833881895; 
+ Thu, 27 Aug 2026 05:31:21 -0700 (PDT)
+Received: from localhost ([2001:4090:a244:80d4:4373:6c2f:4372:b8ac])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49b4942298fsm51624635e9.1.2026.08.27.05.31.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Aug 2026 05:31:21 -0700 (PDT)
+From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
+Date: Thu, 27 Aug 2026 14:31:10 +0200
+Subject: [PATCH] net: ti: cpsw: Skip disabled ports in switch binding
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN7PEPF00000094:EE_|MW6PR12MB8866:EE_
-X-MS-Office365-Filtering-Correlation-Id: 39ee55b3-77bf-4f76-b3c5-08df04345479
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|82310400026|376014|1800799024|23010399003|6133799003|3023799007|10067099003|56012099006|11063799006|5023799004|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: YtlI7SkfONB/mdb31Ua7Liz6UrYgBTljiW/1pgfPcAJukuFpXKDHwhBnQ+8byEVKF67WbiF2rN6Wnxul8IVChgY0+70VNGp/c9OC2KOTrudQP7YtVR3W/yZcjySuWJHHGtYvnzr8I1GKlVi9DWkK/SiCX/+DJfvWM0KYdK5/UzsUKEktIpcHpNq50RXC6lMW3mIrgJaZzcHWGgGTshfv0veESmKSXK96oOKP5eklwUQPZUKAalLDXrfo13lBPJYJOyIN45LGRPO50JBFu1/SB2yAXw9ANGM0mfcENRf7n+ej8CWnVXfpvt4XQCoIibQ7+86IMgONgMrezw/6DgHh9k/538RSPMOHqpp23aDA5m3sk0z8dfQRaCSzocr2ShyLzZie+7pd4lG7ngZO37ElcYuM1e2nmppK4GQOpaVoVm2tXLppN3VFOpvk6vIDpFNIWsOdzZyt4l3iZZxoqmtIFWKGimWBsyRIUI+Jd0rcCjD1NZ6XGtebwk0TbdH/9iDEfhVaVIezQbhPc/D+AerVPuDANHoluLt6eaCI742y+2sOVGOoyLHqfPzGd03WyNiF0v7OfNYvRWA4SEc+sYDYpZvEa1E6dtbYVkcGjpbhxbfOFdSUUjDPbYvVf0MTx/tpOjJdm6z1E0KkciLit4fS6Yh+sON6vJBQOZ9vYDQ6pk1MLkq+9a5Q1OqCu2+TdHcsUH4WbhNtSJyZlfr8q2oOUg==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(23010399003)(6133799003)(3023799007)(10067099003)(56012099006)(11063799006)(5023799004)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: PzJfDiPjq4EqfeRsewcNmfwrlUFH6k+mbH6LCf4XqIUfDyF2sNHx2NOAQwWbv4s/mWPtcymL89v5JVxBjtwsFVcuFm/+KZRnj5FDccjoA2ZDNOXQyDVOPxpKXP5j6Eop5BxNUsL13lXzBsLv29x9+UGa/LKUkwRdMp/MjPanqVfN1w2GZhUPMP0nKFgqLqc2jatq+WH2C9SvYZME0VK23vIrruXgyrwdD5FhWANonWExayMvusaECNNEglWmAPNtyzYKmiqsB7+0+7x5zaoqMcgFRCCNzTppE5gewIDNfs36C9dYp6pUWkLTxFC+jt8DlMB07clPt4K3pujbtDH4DnzzNnHU94n7e4bUlCZaQixV3Y259z+PCgTVJP7qbHfNeFGt59AunjhnJAJ5euAXFtbHVZSQDJSbeaC88qR3WSKE5yHR4w1APDa4yY6Zmf/A
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 12:11:31.1549 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 39ee55b3-77bf-4f76-b3c5-08df04345479
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN7PEPF00000094.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8866
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260827-v2026-10-next-topic-am45-ofupstream-cpsw-fix-ports-v1-1-764e97251ef9@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAA0ukGoC/yWNQQrCMBBFr1Jm7UBaTIxeRVzEcaIRmoRMWguld
+ zfV3X98eG8F4RJY4NKtUHgOElJs0B86oJeLT8bwaAyDGoyywwnnfWGvMPJSsaYcCN141Jj8lKU
+ WdiNSlg/6sGBOpQqSJauVMV6bMzRxLtzOX/R6+7NM9zdT3UuwbV+xJ94JlgAAAA==
+X-Change-ID: 20260827-v2026-10-next-topic-am45-ofupstream-cpsw-fix-ports-c8c85066f569
+To: u-boot@lists.u-boot-project.org
+Cc: Jerome Forissier <jerome.forissier@arm.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1718; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=N8IVt8hn6g9Zmshlb6RgiFNO4RaTatyqMweGQ1cBmSA=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhqwJeoKmnAn7Xy2dlHxB/O566aM/dvGbtfc9nVfRor7Af
+ t6WX8WRHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjAR2zhGhvPdDnNvbEgx1gx6
+ yGW9YMbiU4X/mg0Yw/UnWs6Iu20r28TIMGvF0i0OH22tdE/O6bjc8PCZkljynqB//l7Oikad/s4
+ n2AE=
+X-Developer-Key: i=msp@baylibre.com; a=openpgp;
+ fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,74 +134,54 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-RHEL/CentOS 7, a popular distribution that installs GNU Make 3.82,
-reached EOM/EOL on June 30, 2024. While you may get extended support,
-it is a good time to raise the minimum GNU Make version.
+cpsw_eth_of_to_plat_switch() tries to parse ethernet-ports that are
+marked disabled which breaks because phy-handle on some boards is not
+set for disabled ports.
 
-The new requirement, GNU Make 4.0, was released in October, 2013.
+Skip disabled ports instead.
 
-Raise the enforced minimum GNU Make version to 4.0 and drop the
-now-unreachable compatibility code for older versions:
-
-- Add an explicit "GNU Make >= 4.0 is required" version-check gate.
-- Simplify the "make -s" (silent mode) detection to a single
-  unconditional check instead of branching on make-4 vs make-3.8x.
-- Drop the GNU Make 3.x sub-make workaround, which is now dead code.
-
-Fixes: ffe29ebc0701 ("kbuild: sync top Makefile with Linux 3.18-rc1")
-Fixes: 5f520875bdf0 ("kbuild: Bump the build system to 5.1")
-Signed-off-by: Suraj Kakade <suraj.hanumantkakade@amd.com>
+Fixes: 5bb7ae8921ee ("net: cpsw: Support new cpsw-switch DT bindings")
+Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
- Makefile | 20 +++++---------------
- 1 file changed, 5 insertions(+), 15 deletions(-)
+ drivers/net/ti/cpsw.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index 436f384f22a..889ac7bade5 100644
---- a/Makefile
-+++ b/Makefile
-@@ -12,6 +12,10 @@ NAME =
- # Comments in this file are targeted only to the developer, do not
- # expect to learn how to build the kernel reading this file.
+diff --git a/drivers/net/ti/cpsw.c b/drivers/net/ti/cpsw.c
+index 7a7cb83bd984..6b1f7764e0d3 100644
+--- a/drivers/net/ti/cpsw.c
++++ b/drivers/net/ti/cpsw.c
+@@ -1220,9 +1220,13 @@ static int cpsw_eth_of_to_plat_switch(struct udevice *dev,
+ 	data->mac_control = GMII_EN;
  
-+ifeq ($(filter output-sync,$(.FEATURES)),)
-+$(error GNU Make >= 4.0 is required. Your Make version is $(MAKE_VERSION))
-+endif
+ 	eth_ports_node = ofnode_find_subnode(dev_ofnode(dev), "ethernet-ports");
+-	data->slaves = ofnode_get_child_count(eth_ports_node);
 +
- $(if $(filter __%, $(MAKECMDGOALS)), \
- 	$(error targets prefixed with '__' are only for internal use))
++	data->slaves = 0;
++	ofnode_for_each_subnode(subnode, eth_ports_node)
++		if (ofnode_is_enabled(subnode))
++			data->slaves++;
+ 	if (!data->slaves) {
+-		pr_err("cpsw: No ethernet-ports defined\n");
++		pr_err("cpsw: No enabled ethernet-ports defined\n");
+ 		return -EINVAL;
+ 	}
  
-@@ -93,15 +97,9 @@ endif
+@@ -1234,6 +1238,9 @@ static int cpsw_eth_of_to_plat_switch(struct udevice *dev,
+ 		struct ofnode_phandle_args args;
+ 		u32 port_id;
  
- # If the user is running make -s (silent mode), suppress echoing of
- # commands
--ifneq ($(filter 4.%,$(MAKE_VERSION)),)	# make-4
--ifneq ($(filter %s ,$(firstword x$(MAKEFLAGS))),)
--  quiet=silent_
--endif
--else					# make-3.8x
--ifneq ($(filter s% -s%,$(MAKEFLAGS)),)
-+ifneq ($(findstring s,$(firstword -$(MAKEFLAGS))),)
-   quiet=silent_
- endif
--endif
- 
- export quiet Q KBUILD_VERBOSE
- 
-@@ -166,14 +164,6 @@ ifneq ($(abs_srctree),$(abs_objtree))
- MAKEFLAGS += --include-dir=$(abs_srctree)
- endif
- 
--ifneq ($(filter 3.%,$(MAKE_VERSION)),)
--# 'MAKEFLAGS += -rR' does not immediately become effective for GNU Make 3.x
--# We need to invoke sub-make to avoid implicit rules in the top Makefile.
--need-sub-make := 1
--# Cancel implicit rules for this Makefile.
--$(this-makefile): ;
--endif
--
- export abs_srctree abs_objtree
- export sub_make_done := 1
- 
--- 
-2.43.7
++		if (!ofnode_is_enabled(subnode))
++			continue;
++
+ 		ret = ofnode_read_u32(subnode, "reg", &port_id);
+ 		if (ret || !port_id || port_id > data->slaves) {
+ 			pr_err("cpsw: invalid or missing reg in port node\n");
+
+---
+base-commit: d3e8597e46b635ec556a057bc42f0b0859654bdf
+change-id: 20260827-v2026-10-next-topic-am45-ofupstream-cpsw-fix-ports-c8c85066f569
+
+Best regards,
+--  
+Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 
