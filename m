@@ -4,135 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01F66C5DF9D
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 08:35:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7046C61DB9
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 09:01:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 82AE34069A;
-	Thu, 27 Aug 2026 08:35:55 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 97470406A0;
+	Thu, 27 Aug 2026 09:01:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JsCYNPcWuM0S; Thu, 27 Aug 2026 08:35:54 +0000 (UTC)
+ id WUPXpLgx5Dlo; Thu, 27 Aug 2026 09:01:35 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787819754;
-	bh=tLhIUIiWjocAsveeSXgFU+iQUIeBJ/NspIoO7jFygQs=;
+	d=lists.u-boot-project.org; s=default; t=1787821295;
+	bh=4Coz0c/AYJiK6eB3ozdAsrugovwNaFV7N/5eiwP/q2M=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=l+niD3qGHZvkGWRQjei81Bj+HQQqA9/XoH1nt4jKxsZIMkILIhtDt9dVGIzMDrrMa
-	 gb8FwbHXtbBfrBsfhRUfDhVvKXKlsUKf9ZuveHqDumKe0/BIaNIG4n2DBEY1DO+v5+
-	 XoAWIZXB6e/8BYy3LAH41Yje9R4+wYFC0/EXxQMBnFUkjLFLunmXBTHXK0rhGPTSIO
-	 xqJukqc5ktj6Ei2GTQWXWjLJiAPOLfLDX9/WkMXv50bRpMY9cPa4FCsuyJhIq2GZuR
-	 Zo6VRwFRxbVaVscREtWsY6zfIN1vdwR69q9rtq/m9T0HdMF2XPec3C+Fg0J0Tdo0Ty
-	 vJBxyeeEB3Wzg==
+	b=P6xxtCpj46g61yzGfUTRFK6SsxKUT0mcqZC/5MfkZzWune2LbTJwIISFCAK7jV9zA
+	 n1WxSPEdbA7wKWfGXrBlyqUO5a202BPbJZqs0qEDIHIAwJVGzONm39FKTceq2zQe2G
+	 YiXIBEuq8XDzCWQfocYvF4LMuCbXzczmSLSmpuj8ee7qnOLVFB5GtQVJ4Wwzn08orH
+	 ZRCh5XV391IBVDhg8WrEmUpLtpEqlq/Wg/RzDhsOwar9DpUBRFG6bbwBNPjPnF6gM7
+	 H3jhRjqX3+MZhbY6tpZpDKHmYIHJPLdGloKwf0FyeqaRVXqdg0xit3QQtL7uUpfA0Y
+	 TMT6je+rfuPtQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0CDBF406BE;
-	Thu, 27 Aug 2026 08:35:54 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id B007E78B
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:35:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id ADCB7406C7;
+	Thu, 27 Aug 2026 09:01:35 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 09AE4105
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 09:01:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9DD3760765
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:35:52 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id E3B6580DD7
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 09:01:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Mf_84PymQHCK for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 08:35:51 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id u-f4mi-3wFnA for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 09:01:34 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::533; helo=mail-ed1-x533.google.com;
+ client-ip=2a00:1450:4864:20::629; helo=mail-ej1-x629.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=PWhKCf+T
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7467960698
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:35:49 +0000 (UTC)
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6a36982a875so526297a12.0
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 01:35:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787819748; cv=none;
+ header.s=google header.b=L+6lhtuj
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id BB84480DD4
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 09:01:32 +0000 (UTC)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-c25099bb1fbso258610366b.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 02:01:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787821291; cv=none;
  d=google.com; s=arc-20260327;
- b=V8o6lgQNpdz/RrzFiheBIMFkqlJtXp5R+s7NwFWAHE1ixkYayn933tVlNzCcsv1gYq
- Obw2U+Vi6DMScQ+DUV0VlSqX9EB88srKGoIj4aDP8TL1FtxobcHGCp29kbXaLtnl+cYt
- FClXKhaMI2gowSUfoS3CX77iELf1rHEiFIbmLtHdWm2tcsA2EoI4b1OFeP9+zsyAVI7+
- 2DZcAuzU+JSEymm1dUTXMNpovIynTMYUToEm46NzlRVANJb8r+9DCxoeFR5ynlrM0ff2
- Q4f9ctA1lLyFbuHMFpYoHxyQkaLQMoqoAWw7p1fYoI1E/PdlPdbCuHFXqppbuV87ylzz
- w0QQ==
+ b=A/8Nhmt/Wzzg+46dm3NjThbULA+2s1WyVLYIBR2J5Dk0o1aO4aDEWBcwjj75A4K0Tu
+ WAykUdoLCPFnA7c2wJFC1eJZ8Y926+HiJEehizBHqHMMCZolrQfhTAlHwbk+90XMZVO/
+ lebIokW9i2MclXnHioRe8Vf5oWhvDa7I6QU1DaD6LD0P2oB4G4FGHyukYfdLLpX82lD9
+ fk7hFCbzyvOZwKzb5XfsbLOUZArf4lxdNjpVUMx1H30ZQ58A4jDVPKWS6+KhjxHMuEyO
+ R1GLvmxa9SYvc73XBfizJUe/XwISAGrvW20yjEa/io6c4fv+2x+NzuzX8t9EvTABWWDv
+ GnKw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=tLhIUIiWjocAsveeSXgFU+iQUIeBJ/NspIoO7jFygQs=;
- fh=1G2e/UfVT6whcjfJp93R2plvwWbq0KHex67HT6Up9e4=;
- b=U6Z2ztMxsAIAXpZuaZE/uMOdPyhSA1aR9OMwpg5Tdo5TEaO0BtlSB5XSpzdzmbXATd
- Fny/tr1S+7I4zWHKdfSQ1WFGYd1P5pSr2TPPOmT80nclJcPCsB6vEQvr1tS7+D9z6l+J
- G7E/5jBwprYZTxZ4WUBbjTG/+zYG3SM0S9I3Ef6D/qCTJkpSKzSLQi6VVrYtru3ErRnk
- s+EVQPbLGdpWFdF3E0qTCB3d8Gq8OstXKrB882MVXQlazFYXRkFXePJp9WHDODOVjFX5
- bL1wVUt7Ii8rNKO6bXbyyAe0TCDGJvC2MVr1yv0mOOYEZQq5hUZbJUB/2PYeSQJjHBkH
- oIAw==; darn=lists.u-boot-project.org
+ bh=4Coz0c/AYJiK6eB3ozdAsrugovwNaFV7N/5eiwP/q2M=;
+ fh=vumf0mqCk6H8YX2aAEpypezQN1x39FbS1mPBItTQgOI=;
+ b=ZGMP3mdyp7B7ZEIM41clKMLg1PgtfxiEKeoYu3FwhKDmPYM1zm0Em+OVH+ae/pqE0B
+ uKdWiIMrwRx/yz70qdNfrpKJk1Qhc+gqiWIXgTb+YifjqjrEQ/hLzD/AOiBWK0wm112G
+ HyQEqrqgpQUzZq/lFwtJW8DA4oSOH3wAnLJybfrOtHOnjEwMALlqFaui1DWwG2RUbSVb
+ /Nt+Dy1ZmCGhz6vEkK72Q6ihP8NmPXqktVn24NHrcM2/fHA3XbXJLm8yWHG/Se1oTjZ2
+ xPzYx79COe5/Al+XlRGRJfetKS7GM93AdypzTOKEod/42DrUu+S1TvSkSPl0I+9BcxT1
+ Vmmg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1787819748; x=1788424548;
+ d=flipper.net; s=google; t=1787821291; x=1788426091;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=tLhIUIiWjocAsveeSXgFU+iQUIeBJ/NspIoO7jFygQs=;
- b=PWhKCf+TZdnf1GlkV7JeLEISvqi56PpBXqwQhZfQRsDEFxDnlofYm//9upG5J2UPO2
- qLblgHhmtOKBnZce3cd2LuX2Xvd5o97V6sjY7+2O/0gtlQ/1lEh+4OOkU2U+8sf1Vhs9
- vzsBLvJUfuibV5U5wbv6j+8l6jJuppfhL4jcWq6p4E7rh9TR4FvTKOpK7+JpoNdvshuN
- aBalqggrbVeiXR/8WtMlpV8hte8PzjWAEZJbPtbrPdKo7qJ/FA367xU3stYUr/LkIf8t
- Dm7Ht1pJbPCCdqSNDX698J2Hc6IUSdYag+3Y0daC2JG2wAm2KjBXNKVYLdLlel2T23s7
- +Xgw==
+ bh=4Coz0c/AYJiK6eB3ozdAsrugovwNaFV7N/5eiwP/q2M=;
+ b=L+6lhtujsVZ7mUmDDNMaPu4nvwrCX/U+QY1/qgekVUJSs27fAoBGcBLY6Ng0vwAY8A
+ gDByHn6FdRNCp0mFGkxKIoULEprBb5pdJV2TI5hfO8CoECkdwURt4d+CbpMzTX0Qo3zY
+ oE8YOI8mklbJh4uzTz5nQhiPqdr4dhs6jYzctotHbon6GLuw9IzEr5j3sHKjfQ6QlU0/
+ 8p08GOxA4xam65PU+MtZT+pwLvXPAXpW0umdulvhDkIQBMpm0yUW0v6XncGqJss+4TWK
+ l86Q9ilM+ukub2u2pNT3j9N3W5FRluabJ+73zpNXjOk5KIFHjQMeDsB0TKv1Ql2h5Iq2
+ dBmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787819748; x=1788424548;
+ d=1e100.net; s=20251104; t=1787821291; x=1788426091;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=tLhIUIiWjocAsveeSXgFU+iQUIeBJ/NspIoO7jFygQs=;
- b=fGw1BmDCehFsz0QIhzQ91l41lrgXisGA9Ipcf6Nz7ZtcRTIw8FiTEBpOmAqb5JNx+r
- BO88AKaWn2pH0gcfnszxPUs8ZYGrpz04UXtUGejusWvnTZKEDH6OnX91vWwS7OkUYx3D
- bsqaheXHcrqzf+Ly2wzGOd3g0cCDDk4XyUSrxfOe4LoWDcBpSihmUJVxHw5EuzYiRQvJ
- wzfS3vC1OBtMCw8vWuaGN7sBlXPiYnlqPLBqI4dmjGM6QHUvmwxbQThzVlFcHY4Xrubw
- sEHCy5CwfxHUbjkM9WAI6YU6mlObEq9aSrbI2q02J+0AJmpMZcGyJi1K28sHJHDEl0mu
- a+5w==
+ bh=4Coz0c/AYJiK6eB3ozdAsrugovwNaFV7N/5eiwP/q2M=;
+ b=U8Xd9lfcN5gATf0vB7CuFfnUYnedxiMy/ngJdMyhbOQek/czKHjwKL1cBMVDtuWg+l
+ rDw6awnN+Esk2yBvigDMcea16iC0v/bHAFp+oMRa+X3nwOHcYm/HkWi+MdhREMR743wu
+ VXafD0UarEps+mMGfNjaTIBTxqBH9HY2UKWQNPhRYOXj+c51TTFhj4YxJwyqSLtqtWmh
+ r+1lRJYzvGoiN28kQ7DTZcp8qwzH8s5T6LVUyDhbs/2KCOtDOGW3qUPQkKztwqvEohUT
+ PySdgfGBI4BW4cLbntsm/LJyy7axx5xdbQI1tycbZKxYVr1b1ix2p4qtZhtYnFTCFuSi
+ 8VBA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrHCW2UIw+aB5yMZVuvVcdCGO5EtmsJH+jokL3SuOZSdA+pfIh/cviBmgFMeWDbFfaK8vgVZKs=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mGmhZBgQid9+6b0FlyheJEdKmvrIR+eLW+VCQ/ZxwvvXUF/n0z
- XCbIbwZtZYFkfcoUsZkM8fwaWtCLA7kMWqlnHaeL08GHsFmGvipckH2mAzFpKvPuHZEzAbQPLRo
- VpcOWB5GlgWfS46lwOuSQ7yRd8GrTcRnd36as5utlyA==
-X-Gm-Gg: AR+sD11jJd3of4NOvovbiurvNv3vcJBdaTera2wDxMlvdt2GcIwH8+sblwarIbwLaLU
- bQDW1TXKZG0J3kcLK9+ZgktdOwsvzzQT6nrfQs38mVq685Qe2HhAegQaGg78esDJB/6RMGPYwuZ
- UAVI38jV5ju17qLjRlcV9Tg8sn0YXQYlQ2l/+5A6uzGKyje4c6TF12IkF4CxMvKkIhI4i/MFANd
- dJW4u2UE0Fu8oxLNXjjN44yjS4W/51UT6s6/XK5ofwLPtqT6nI67Q7VJIFlV7EurJ5tskhz2K9x
- /uYZ7vTorBAdXira8K6J/Fjkz+nIpq0YqHlTotKj/mDzAkhdAfgkZb4cS6sqlpN0VFuz3Vw+waT
- 6QKB2EAYKF4Sh
-X-Received: by 2002:a17:907:94cd:b0:c15:e8c8:340 with SMTP id
- a640c23a62f3a-c250c35241emr1238957566b.23.1787819747649; Thu, 27 Aug 2026
- 01:35:47 -0700 (PDT)
+ AHgh+RoezDYdEN/avVW+ZzwN+9sXJRsvQApIDyK5rSXk9yE64gZoL8Bzr93Hi4Oyj/kHbuVfBkwq02w=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lQGgUoIEda4LDqcnL9yEyOoYP9+m0b4+R2QOdCjvM3jObEb+FT
+ n5XnvbLQa+VhcwDGu9Zl/KLncZQ9SD93UiUhylyoevkNsvxNCBINokv8hNdT36qJm17h2MGwoir
+ 7C2ODZxXTElzC8x88APKPIyTy8//DppEi1nupr6POOA==
+X-Gm-Gg: AR+sD13/KmVtuykzXymmQaj4OGOTIIMYBetBxomJbXnkfQVXR5xSEKlnzctNxpttXAy
+ 8Q48UpTTiuycF4Tt/g+2MYv3t6u/nbOV1OjpYF7y+srDJmJt2leGDl8z3EtG9xqyQwOU6J6OS4s
+ +vjbKpqLNHWEv4wGhwRaTILn3ehz8cPF+MbLQ9Rw3BKTDN7i7xPLF6389czVwPXxn+bdEi33cfT
+ MJHsz1f2hoJHKKJsqflULhwTZIBcWnn5Egp++PbgFcVRbl8OAvEY+Fn6mDUe8twNu/8OsHLB8Md
+ U7o2Nsi/PjtbGaUODX21urxVvUR5brXMgG6ELDO6AWgyNnGIM9t+qQdi3WI9G0Qsak9KGdQRqxe
+ TH8XXZnzc5Yg=
+X-Received: by 2002:a17:907:e1c5:10b0:c25:32ae:a6e4 with SMTP id
+ a640c23a62f3a-c2532aeb691mr479891666b.9.1787821290867; Thu, 27 Aug 2026
+ 02:01:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
- <20260731-gpt-4k-v1-3-a3f1f16b53ae@flipper.net>
- <cb50976b-917f-4843-8b0d-dc2a32e59d65@canonical.com>
- <20260825194528.GB523975@bill-the-cat>
- <CAKTNdwGJfC=11vdSzL1wbE5WTF=4S6HS+DYMzJqYEQxD6kThGw@mail.gmail.com>
- <e3e03c35-4a17-4d0e-8bf3-6c3d47857851@gmx.de>
-In-Reply-To: <e3e03c35-4a17-4d0e-8bf3-6c3d47857851@gmx.de>
+ <20260731-gpt-4k-v1-5-a3f1f16b53ae@flipper.net>
+ <92d57391-aa91-4900-b36b-dea5b85e9694@canonical.com>
+In-Reply-To: <92d57391-aa91-4900-b36b-dea5b85e9694@canonical.com>
 From: Alexey Charkov <alchark@flipper.net>
-Date: Thu, 27 Aug 2026 12:35:39 +0400
-X-Gm-Features: AcwNN1WUTyyyq0K_hNof3t5d4ZbIrP1v66BvjMoM6T7koHtLAhaY43o5ZUTZ_Rs
-Message-ID: <CAKTNdwGmskh2+cLVmOGTmWrFhhGR=v4qF7zR=rmxScY6FOO55Q@mail.gmail.com>
-Subject: Re: [PATCH 3/6] disk: part_mac: Fix stack corruption on devices with
- large blocks
+Date: Thu, 27 Aug 2026 13:01:22 +0400
+X-Gm-Features: AcwNN1VRTrX48NRkIApkvFdl1XTk2jxfP2lVP9OIHOhf92-QOyNTbE0ZVnkyf4w
+Message-ID: <CAKTNdwF6p-to_zwXfwO17GL8SP6q8BsSb5g69O6_aW8hz8TSjA@mail.gmail.com>
+Subject: Re: [PATCH 5/6] test: py: gpt: Bind the disk image in
+ test_gpt_write_part_type()
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Anton Burticica <mouse@ya.ru>,
- Javier Martinez Canillas <javierm@redhat.com>, Simon Glass <sjg@chromium.org>,
+Cc: Tom Rini <trini@konsulko.com>, Anton Burticica <mouse@ya.ru>, 
+ Javier Martinez Canillas <javierm@redhat.com>, Simon Glass <sjg@chromium.org>, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Andre Przywara <andre.przywara@arm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
@@ -142,7 +139,7 @@ Cc: Anton Burticica <mouse@ya.ru>,
  Suniel Mahesh <sunil@amarulasolutions.com>, Klaus Goger <klaus.goger@cherry.de>,
  Tim Lunn <tim@feathertop.org>, u-boot@lists.u-boot-project.org, 
  Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>
+ Patrice Chotard <patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -158,93 +155,65 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Thu, Aug 27, 2026 at 12:25=E2=80=AFPM Heinrich Schuchardt
+On Wed, Aug 26, 2026 at 1:41=E2=80=AFAM Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> On 8/27/26 10:21, Alexey Charkov wrote:
-> > Hello Heinrich, Tom,
+> On 7/31/26 14:40, Alexey Charkov wrote:
+> > Unlike every other test in this file, test_gpt_write_part_type() never
+> > binds the disk image it operates on. It has worked since it was added
+> > only because some test that ran before it left host 0 bound to the
+> > image this fixture provides.
 > >
-> > On Tue, Aug 25, 2026 at 11:45=E2=80=AFPM Tom Rini <trini@konsulko.com> =
-wrote:
-> >>
-> >> On Tue, Aug 25, 2026 at 09:37:43PM +0200, Heinrich Schuchardt wrote:
-> >>> On 7/31/26 14:40, Alexey Charkov wrote:
-> >>>> part_test_mac(), part_print_mac() and part_get_info_mac() each decla=
-re a
-> >>>> single-block buffer sized after the descriptor struct:
-> >>>>
-> >>>>      ALLOC_CACHE_ALIGN_BUFFER(mac_driver_desc_t, ddesc, 1);
-> >>>>      ALLOC_CACHE_ALIGN_BUFFER(mac_partition_t, mpart, 1);
-> >>>>
-> >>>> Both structs are 512 bytes, but every blk_dread() below them asks fo=
-r one
-> >>>> block, which transfers desc->blksz bytes. On a device with 4096-byte
-> >>>> logical blocks that writes 4096 bytes into a 512-byte on-stack buffe=
-r and
-> >>>> corrupts the stack.
-> >>>>
-> >>>> part_test_mac() runs on every block device during partition probing,=
- so on
-> >>>> sandbox with CONFIG_MAC_PARTITION=3Dy this crashes on any access at =
-all to a
-> >>>> device with large blocks, for instance:
-> >>>>
-> >>>>      host bind 0 disk.img 4096
-> >>>>      part list host 0
-> >>>>
-> >>>> Pad the buffers out to the block size with ALLOC_CACHE_ALIGN_BUFFER_=
-PAD(),
-> >>>> which is what part_efi.c already does for its own block buffers.
-> >>>>
-> >>>> Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> >>>
-> >>> Modern Apple Computers use GPT partition tables.
-> >>>
-> >>> Gemini claims:
-> >>>
-> >>> Because APM was functionally obsolete by the time Advanced Format (4K=
-n)
-> >>> drives emerged in the 2010s, Apple never updated the specification to
-> >>> establish official compatibility guidelines for native 4 KiB sectors.
-> >>>
-> >>> If Apple has not defined how to treat 4 KiB sectors, we should not tr=
-y to
-> >>> invent a scheme.
-> >>>
-> >>> Apple has already deleted the documentation of this outdated partitio=
-n table
-> >>> format (http://developer.apple.com/techpubs/mac/Devices/Devices-126.h=
-tml)
-> >>>
-> >>> My preference would be to remove this driver completely.
-> >>
-> >> Yes, this is another case where we can just drop the driver and if
-> >> someone *needs* this for something, likely emulated, they can bring it
-> >> back.
+> > That breaks as soon as a test which binds something else is added
+> > above it, and it means the test silently depends on collection order
+> > rather than on its own fixture. Bind the image like the other tests do.
 > >
-> > I've sent a separate patch [1] removing the driver altogether, which
-> > Heinrich has reviewed already. That one is against next though, and I
-> > believe these fixes would be great to have in main, so I'd rather keep
-> > this patch in the series for 2026.10. There will be a "change vs.
-> > remove" merge conflict when main is merged into next which will need
-> > to be resolved in favor of the removal. The upside is that tests don't
-> > keep crashing wherever a Mac partition table is probed for with a 4Kn
-> > storage device.
+> > Fixes: 7a598e633a53 ("test/py: tests: gpt: add test_gpt_write_part_type=
+")
+> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> > ---
+> >   test/py/tests/test_gpt.py | 1 +
+> >   1 file changed, 1 insertion(+)
 > >
-> > Does that sound fine?
+> > diff --git a/test/py/tests/test_gpt.py b/test/py/tests/test_gpt.py
+> > index e6d8792ac1fc..fb4c8ba67d48 100644
+> > --- a/test/py/tests/test_gpt.py
+> > +++ b/test/py/tests/test_gpt.py
+> > @@ -338,6 +338,7 @@ def test_gpt_write(state_disk_image, ubman):
+> >   def test_gpt_write_part_type(state_disk_image, ubman):
+> >       """Test the gpt command with part type uuid."""
+> >
+> > +    ubman.run_command('host bind 0 ' + state_disk_image.path)
 >
-> Nobody seems to be using the MAC partition driver with 4 KiB devices.
-
-Sure, but the probe runs unconditionally whenever the driver is
-enabled, and it crashes then even if no MAC partition label is found.
-
-> I would rather drop this patch to make merging next after v2026.10 easier=
-.
+> The "0" in the `host bind 0` command is not the device number but a
+> label. If a prior `host bind` command used a different label your device
+> "0" may not have device number 0 as assumed below.
 >
-> Maybe Tom already wants to drop the MAC partition driver in 2026.10.
+> Here is an example:
+>
+> =3D> host bind 1 ../sandbox.img
+> =3D> host bind 0 ../sandbox.img
+> =3D> host info
+> dev       blocks  blksz label           path
+>    0       131072    512 1               ../sandbox.img
+>    1       131072    512 0               ../sandbox.img
 
-That would work too - I just thought a deletion is not appropriate for
-the feature-freeze period.
+Wow, that's very intuitive indeed :-D
+
+> Each test that uses host bind should unbind the device at the end of the
+> test. This also applies to test_gpt_write_part_type().
+
+Added an unbind in my newly introduced test in v2. Shall I produce a
+separate patch to add unbind in the other tests here? Or wait for your
+patch to get merged, so that the tests can be converted to take the
+device number from a variable instead of hardcoding 0?
+
+> For reliable testing we need a host sub-command that writes the
+> device-number (dev_seq(dev)) for a label to a variable. We should extend
+> the `host info` command for this purpose:
+>
+> [PATCH 1/1] cmd/host: allow to retrieve sequence number for label
+> https://lists.u-boot-project.org/pipermail/u-boot/2026-August/629880.html
 
 Best regards,
 Alexey
