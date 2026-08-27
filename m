@@ -1,121 +1,98 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C87C61DB9
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 23:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC371C61DC4
+	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 01:21:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 696FE40849;
-	Thu, 27 Aug 2026 23:54:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 06E0880EC0;
+	Fri, 28 Aug 2026 01:21:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XeZtYtO6Odii; Thu, 27 Aug 2026 23:54:00 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IrD1wOXzvK06; Fri, 28 Aug 2026 01:21:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787874840;
-	bh=EZZ2pMXeItzlMsGVmOd4qDV8At3QdvEzGufZepO0tP0=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787880097;
+	bh=yoP6VEGX2qKT4fJJ41ckjTBIoHRo/cpY0rQo5BL3F5M=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fK3fHvw8PFtlaB/5gZxS8lLdjOj4wUICm2gZ3ufmCRov46FZhZLz60SDim9JEYwHb
-	 LluxWQ6buCw5QDhK8JWZkiROnz7DXOWeUPyOb0RBpUZKROQqkbmtPNRlfLbXEtFY9M
-	 K9DPavexCe/LWUVo9sm3U4eEG+V3a+kZC4ETG+i0alFSg3u0uwPIGiWJNUmTHcnrYx
-	 nJ+1vGEM+quqoqfQW2uP/bX9e59JGMN4ifK7tn0DSneAD+xAF+2rc/HjqOYwsq6l3W
-	 bCW3VFu5cqo+KbjXm5PXuV6qKKXQwqxPXPdHILznBLMnYqXHX9KOjYxdunwYgtlJvA
-	 AJz7ElXcrQmiA==
+	b=PKqABShN6vuqH8TgLZ3yYIrv+80hf/MMoexaapc58l8QcDNBpfT5ZRRMxqlz0nS/B
+	 WaYHtgS3UCgdAOUAxQLrUNpjCM8p5Xm4t3KyEOlKoV6iB740L0FI+w85E5g9gzCs7H
+	 hvAE/f9hVwysYM8nS9Vqsfgw2iJxDxJ4Kqf/yZKQprxZgFUTpP3CXMdzDxGFL78KDh
+	 9sIutfEswV/X4bN/W9VskGJq+4Wtm749EVUFZ2cKY/nnxIiBxZQ856LDcKbxUHMzXP
+	 Lak/rs5WWIPmvj64CM0IRuZ5lgFJsejnhkHKNUlM/oxAdgKeHguLbmOqwYFUwMR5xv
+	 mQHUIpqPSnuaQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5A9B640816;
-	Thu, 27 Aug 2026 23:54:00 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 93B35CBC
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 23:53:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3780D80EF7;
+	Fri, 28 Aug 2026 01:21:37 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id E6EBB75
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 01:21:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8659440816
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 23:53:55 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D88A440063
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 01:21:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gsg_gH1YfRhR for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 23:53:55 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1133; helo=mail-yw1-x1133.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
- header.a=rsa-sha256 header.s=google header.b=dcYdhyXz
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CBC0C40792
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 23:53:54 +0000 (UTC)
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-85dbc24d398so2898497b3.2
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 16:53:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787874833; x=1788479633;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=EZZ2pMXeItzlMsGVmOd4qDV8At3QdvEzGufZepO0tP0=;
- b=dcYdhyXzO14YtMp8Sz6UAyICqO6nydEZjan/smBPGgD3jg6T3+6v+C/tVxpNajZ5+f
- XZey6zg9oDB4k+Pq75SWK1zBV6w8YdgvQR6aJa5SEH3eKyov6De/XDDGLkgYaW6Vw+Ty
- MU+LC07Lqhlggs/WJ6ZopVGV0P6RtlBf357bc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787874833; x=1788479633;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=EZZ2pMXeItzlMsGVmOd4qDV8At3QdvEzGufZepO0tP0=;
- b=QbHonIN+aWwvFyQw1nHJmKp98jD8xRfeDQk2s4oc0fcBQbbJ/0Ygz/2YTbPvxkZ2In
- x7LZOAvuAz4OUmOcNes203u4xUrnNxGIf+Bq74sZYrkmND4QocjcsrXGr4jPa/1D5myG
- R4pxfVin7P0nkG63qtROz03tegyRFC6TKPKN+qc310fZzcrZkRIxrLLI2Ez0NtTWGLsX
- IRtE7cTItcGKz/FEv6wjQyYsGSSn5Z2lsA5yh8tQQdcTtY7VHt7QSuyNXkQ7JqiZZMUQ
- vKW/htzqAMEjcV2k7AEo0WXZja88LAs0P4pHWoJhVoKcZ3Uk2R1eOG1q/3mD0XRtxnlt
- 7y7Q==
-X-Gm-Message-State: AFuF++mPQCig3gs5MKsUX+9loVJA3trPQanWJA9Wbu8/fqAfaaTLDMWL
- gPgeq4H/a0ZttHk7gh+uvu3jGQJmBxT91ZKrV1qz9myluzfo54PVo+sSqEbnBa+vWJ8=
-X-Gm-Gg: AR+sD11z1IJGs0pUldaiiXbfC7KWLafRbC7JJCsDkngQl7Kuj584Zn897kiv5a64fXM
- Ffybgn/dCTnOyCRj+V7aDaoHDmkO3vk1crkbBZm52g9k9RDDdEId7ka6B4hU7/GwMd6mhBSU2wm
- mVhX3+OaTmE1/9CLBlzYlOI6ZESfJNV4B4RDBYu142WxNnFHagG9FE4GmSZIIh02+uxBc+FgJij
- /Tocw6IGk5VgQhSovp373vf8MxplzwAEoVXQeMmGX3HJCRNr7Pals6bVYgShZ43mNOHixjTTFcN
- 0sjwg9eRlolu+v3s1IAzaSfA9nmoAxV3KtxeeWy/eJtInHt7gr4M442ngEv6e8ZmQF7vKPgbdhs
- DMJ+UxJv+pYTNtB3MzwuHGaZIfHOA0BguN3S2Ze2wHWkOiiUOa18g6uwSSzGBSfCz2gSvt2Dp7f
- BMNc51qx0wBPs7NTzawzEdYP/d7E5ojeEscwLLIc9ttveUH3KpqVo9spWUQadD5FzIwan8pYqd+
- xf/1q74w09fuHt+mZrBkmAx5b3i0Kn38MA4U9InWhxedDn2j2jLNcE++3hvZyXaayHYbMwE6Rzy
- XFfamDGG
-X-Received: by 2002:a05:690c:a6c7:b0:830:7633:a1aa with SMTP id
- 00721157ae682-85d6d889bf2mr13382217b3.21.1787874832958; 
- Thu, 27 Aug 2026 16:53:52 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-85b5c603753sm18626277b3.12.2026.08.27.16.53.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 16:53:52 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.u-boot-project.org, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Joao Marcos Costa <joaomarcos.costa@bootlin.com>, 
- u-boot@lists.u-boot-project.org, 
- Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Cc: Richard Genoud <richard.genoud@bootlin.com>, 
- Michael Zimmermann <sigmaepsilon92@gmail.com>, 
- Eric Kilmer <eric.kilmer@trailofbits.com>, Argus <argus@byteray.co.uk>
-In-Reply-To: <20260728-sqfs-oob-fix-v2-0-077d9f0e01c4@byteray.co.uk>
-References: <20260728-sqfs-oob-fix-v2-0-077d9f0e01c4@byteray.co.uk>
-Subject: Re: [PATCH v2 0/2] fs/squashfs: fix directory table integer overflow
-Message-Id: <178787483181.52175.617457714412656629.b4-ty@konsulko.com>
-Date: Thu, 27 Aug 2026 17:53:51 -0600
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wm7zf-FxvIOK for <u-boot@lists.u-boot-project.org>;
+ Fri, 28 Aug 2026 01:21:35 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.251.229.89;
+ helo=mx.nabladev.com; envelope-from=marex@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=DT/+e537
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C23B74005C
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 01:21:34 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 58D1511BDE6; Fri, 28 Aug 2026 03:21:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1787880087;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=yoP6VEGX2qKT4fJJ41ckjTBIoHRo/cpY0rQo5BL3F5M=;
+ b=DT/+e5373uCTY88e5m6Jl2JmLZLvIcsFMu26DVl8YUhvnkLu+0YGy5VBGBnHUrGyPhvS1o
+ zMfrPXoRf0AyX4TGu0eewj+4ICht3H025FAmNn1CUFP+r5f6Zfd2Pk6j4RucPoqOkv2EkJ
+ OjiVFOIyI8G19+MddnBABh7sYRprFMTaDWVSqZVGg7fLO1C5W/SyE0JXNopuKDLzjfKs2o
+ G7ReKAOCtNm3FVauiVo33JuBLNydzVTEdLJ2RhSN1yJbLFOHU6WYRa/B0A0degUKh1g0tq
+ lBIyIswX0kyXL8a6V21i7+l6boIa0PvXRFlJmefquKPYtJFEa5bTUhuGRu/foA==
+Message-ID: <36740ee5-9cac-4bd4-a67a-3ab5cffe9691@nabladev.com>
+Date: Thu, 27 Aug 2026 19:06:06 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/4] ddr: imx: Allow to call ddr init without logging
+ failure
+To: Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Frieder Schrempf <frieder@fris.de>, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
+ <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+Cc: uboot-imx@nxp.com, Simona Toaca <simona.toaca@nxp.com>,
+ Viorel Suman <viorel.suman@nxp.com>
+References: <20260819070758.51350-1-frieder@fris.de>
+ <20260819070758.51350-3-frieder@fris.de>
+ <b8c844ab-7ea8-4044-95e5-edac173b3c9f@nabladev.com>
+ <a8be2bf7-aafa-4e8e-9685-5fa100941805@kontron.de>
+ <cfe8d0e1-c652-408c-bc47-0ae96dd0a65d@nabladev.com>
+ <c81db5f1-600c-41a1-91d3-7638fc4d3d58@kontron.de>
+ <b528b642-5010-4843-bfe1-d24e8b709876@nabladev.com>
+ <fa652a2f-addc-47a4-b89e-755aba42509d@kontron.de>
+ <83ee9efb-e09f-45d8-ac0a-cd9b2797c513@nabladev.com>
+ <59ed6576-06dd-42bf-8ea2-18de427955a4@kontron.de>
+ <ae6f34f9-ec68-42e3-8483-4208d6e2e883@nabladev.com>
+ <5ef02e5a-c0ac-4afb-b90d-4d6d075b05e6@kontron.de>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <5ef02e5a-c0ac-4afb-b90d-4d6d075b05e6@kontron.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -129,27 +106,38 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Tue, 28 Jul 2026 08:55:38 +0200, Shahriyar Jalayeri wrote:
+On 8/27/26 3:35 PM, Frieder Schrempf wrote:
+> On 26.08.26 14:24, Marek Vasut wrote:
+>> On 8/26/26 10:12 AM, Frieder Schrempf wrote:
+>>
+>> [...]
+>>
+>>>>> I'm not sure, but even if it would work, it would require several
+>>>>> separate init attempts only to read the IDs
+>>>>
+>>>> Why ? Init the bus in slowest mode with widest bus settings, then try
+>>>> MRRD on all available DRAM chips, then figure out which ones report
+>>>> valid IDs and which ones fail the MRd .
+>>>
+>>> As far as I can see this doesn't work. If we use the widest bus setting
+>>> (CsPresent=0x3) on a single rank module, the training fails and the DDR
+>>> remains in a state where the MR read doesn't work yet.
+>>
+>> Do you need training to read the IDs ? Simply force-use the slowest bus
+>> mode (100 MTps iirc), the training is only relevant for the high-speed
+>> modes.
+> I don't see any existing code path for any i.MX with DDR4 that doesn't
+> do the training before accessing MR registers. Do you have any
+> references or examples? Do you have any sources for the claim that the
+> training is only relevant for the high-speed modes? I couldn't find
+> anything that supports this.
 
-> This fixes an integer overflow in the SquashFS directory-table reader
-> that leads to a heap out-of-bounds write, and adds a regression test.
-> 
-> sqfs_read_directory_table() sizes the directory table with an int
-> multiply (metablks_count * SQFS_METADATA_BLOCK_SIZE) that wraps for a
-> crafted image, under-allocating the buffer that the fill loop then
-> overruns. It is reached by listing or reading the image (sqfsls /
-> sqfsload). Patch 1 guards the allocation with __builtin_mul_overflow();
-> patch 2 adds a test that a crafted image is rejected.
-> 
-> [...]
+What happens if you simply skip the DDR training, return 0 from 
+ddr_cfg_phy() ?
 
-Applied to u-boot/main, thanks!
+> Also I would assume that doing the MRRD on an unused CS would give me
+> back some arbitrary random values. While I could interpret an unknown
+> value as "rank/cs not present", I don't think its reliable enough. Or do
+> you know of any error condition being reported for failed MRRD?
 
-[1/2] fs/squashfs: fix integer overflow in directory table allocation
-      commit: 561ae28cb56a082cfa90c1c421c4955bc215470b
-[2/2] test: squashfs: add directory table overflow regression test
-      commit: 4750bcfe857c5a0feda86b54f260a11a4e3222cd
--- 
-Tom
-
-
+Try it and see what happens ?
