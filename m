@@ -4,90 +4,175 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D97E9C61DCD
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 19:54:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85719C61DB9
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 19:59:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A413E40822;
-	Thu, 27 Aug 2026 19:54:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A95284082E;
+	Thu, 27 Aug 2026 19:59:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id t4ATmFyy0YVL; Thu, 27 Aug 2026 19:54:29 +0000 (UTC)
+ id zjpIVqmXMrIX; Thu, 27 Aug 2026 19:59:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787860469;
-	bh=gJ/SeMppFy3pOHRIeFR9WFTApK8jIAepwTGVN6EkdZ0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787860767;
+	bh=DuQkdLGHWiH56wM1mZiNHtIFlZsLafqsS0F0iSs4jRA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=QFbR6XPGVNY2arYiPu3c6HaMvs9P4fMM7AOhl3FP0i5gA+7TzvBSNZlmn0u3Kg3rV
-	 leBJtVNPZintPq1c3uOiDHcRLzVvjIdvwJqUNzdxPLf6/zjNUy/zcoXc5ju1zA/2BC
-	 fprh96xUvp7BMfC1MnDXJeLjgpb+KUsYeJgC7oT/0dkVfYQxhCs06+8EKB//5WuBaL
-	 tLPiwEEXbPXjAk2hZWjRYkc+Q1b2kwn2vnNzP19YvyRJ5O8t/kHWP3i09c82mIFTtp
-	 qOV70q7h3HEElQftnmgsG/MYxk8X1oT79Eqlm4Nm0auCxd1wSNtAiDVj44T1bKS5c8
-	 5IzPTDheX7FHQ==
+	b=EmGSsabrMLMbf32SsGHKeqyqJgxIZ6u6dQk2YrG8oqB7m6g0e8uBl2m3mGLzAwj+y
+	 UsW62DJNMlFwGmIjabXguZjLipw4ldduhVpqYkBMYLs5NTddcpOc6TjZ8zfXouNTdZ
+	 7jDbSJ1bZlmByJTm5V2bJ4y91UaVrSScaTBhTYJhPH1Fun1QzcD8BliOMYSqEceDVf
+	 0LTeGmDJ5/ZUooZXKH8GiDybvEdhU1XkrVMNlcW+afsXJ4JflzRSI9Vdjaty3oqU6E
+	 h2L9/222+mS8XRwrhCBxBv9KW5qeu2K5IkZpZcMSjJTI/mYyeGj6fwXm6x6eAUUmRq
+	 xOXbk7rrdW0kA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B3CD340871;
-	Thu, 27 Aug 2026 19:54:29 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 8096C105
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 19:54:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CC13B40817;
+	Thu, 27 Aug 2026 19:59:27 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2F90AB2C
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 19:59:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 73341400D7
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 19:54:17 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 15CD440817
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 19:59:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fFWYBLd8SgZ1 for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 19:54:16 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=84.16.66.173;
- helo=smtp-42ad.mail.infomaniak.ch; envelope-from=foss+uboot@0leil.net;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
- header.a=rsa-sha256 header.s=20231125 header.b=BO0HaThy
-Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
- [84.16.66.173])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 257DC400D5
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 19:54:15 +0000 (UTC)
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hWBzn50jPzq1s;
- Thu, 27 Aug 2026 21:54:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1787860452;
- bh=gJ/SeMppFy3pOHRIeFR9WFTApK8jIAepwTGVN6EkdZ0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=BO0HaThyKh6SPtqUll3cAzXAGt+EGgzgcJbYg5nVxElx+QWRIMKvT/E62Fh1++1RA
- M65utBtDMg1cy2Dy0BdzVKqSjmayRWC65GmpKcz5Y8BM4vjvGjxs6Aaa6HyIpPsbRA
- AvOd/NP04tMZ3o3/N28Do4WvN7ch2eQsdQIGO3g7ful5FPxs/XG3Y+BTmzVVw4dcWq
- 6fHwrQHD4S5GCuf4P6+ciaAL2P6lfbI6ff4z6IO2NZHIpbBQyPEx3xNnjFPZoNhwI+
- Izwm9LmZRaTJS1e76rke2D2i6/khRKRbOOBDYKjZb9N/FsMbWdThHA7BN6J6Pu9tZG
- cxwF9xt4+gUvA==
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4hWBzl3RR0zQfJ; Thu, 27 Aug 2026 21:54:11 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-To: u-boot@lists.u-boot-project.org,
-	u-boot-amlogic@groups.io
-Cc: uboot-imx@nxp.com, trini@konsulko.com, sjg@chromium.org,
- neil.armstrong@linaro.org, marek.vasut+renesas@mailbox.org,
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, adeep@lexina.in,
- sbabic@nabladev.com, festevam@gmail.com, smoch@web.de,
- alpernebiyasak@gmail.com, le.jin@siemens.com, jan.kiszka@siemens.com,
- iwamatsu@nigauri.org, pbrobinson@gmail.com, seanga2@gmail.com,
- bmeng.cn@gmail.com, lukma@denx.de, mkorpershoek@kernel.org,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH 43/45] doc: switch to HTTPS for a few links
-Date: Thu, 27 Aug 2026 21:53:11 +0200
-Message-ID: <20260827195313.129994-22-foss+uboot@0leil.net>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260825-linkcheck-v1-0-ee7573fe3a4a@cherry.de>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UZ48v3fEPSao for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 19:59:26 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c201::3;
+ helo=as8pr04cu009.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=cu/irDdN
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 34E3440816
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 19:59:24 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TuD0BmrE/bHHIkibIC1hCMSgTMlEUuSIUnTf9aZRKC3wrSiPo120h6HdF3PaJ3go6t11WwB+11wB+zY7tR1L52nuBxUVAVOS5EbE7G2uvMb/fHEz1YDA5nT7ECiMWNSR/OSOKXllZVfbWufAMg2wIS26wHaCz2UobS6ALr8Xw3ZmuGMDILkiC/Ug/n9mOtvd7P5sjmD9kUt8P+Trelgrl4tljHiQ3UgtQuRDWk3DS3jGzYGYKgDTx3IgEoEITS+T+zpUnhuY5gok5cVnoK234gK9mi5NTgI57lSZOX95vMl1sLizHiOhu5dnwsQVocbjK1popQG/4/P+rDQX0AS0gg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DuQkdLGHWiH56wM1mZiNHtIFlZsLafqsS0F0iSs4jRA=;
+ b=gRwuxhhFvMFpeyW02luHhucKsFqkRPaTUUSbrAoI0us9V+zLfPqOWQkDIFYyn5nqsWPLpUnuLWla1bFeCzLTT2NanJjaBx0iLiosb2S0SF9jz31g0Wzqles08ZYdIoRH1DBLbxKsWmhelWnM7Nz7d2yp1Lt4mZPEdXs9O1FjLuOdkGb6NsW5Nt9lzyY6B2ANRFFkHAOytWXl8COD9xuzCP6NwM3usqkfc9uyIMEc5xhNXBeC1YH6ZK8RYLEldjmqhm6OOkvER4L953Z03i2sug3JmpbP3I+OiRn+9wYj6UHQHG5gdc0iv+eIFyisG2Qqm4buJE+sCm0uN8oen4HvdQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DuQkdLGHWiH56wM1mZiNHtIFlZsLafqsS0F0iSs4jRA=;
+ b=cu/irDdNpnW4iWvH54AdaU5yXFthCjtiWASUWUzr6NfLZMWob1cY2wd58X7CRIJ6KDQ6IMo1/dOmNhhcKTVL9xC6ht/SC4dOYG3/5+892/AizsMVFAL5E91fd7URyApGkqLUq64X4iNvcvavjl16OXNn3fkkJcLb6KvAnlDdya0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by MMZPR04MB345699.eurprd04.prod.outlook.com (2603:10a6:190:51::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Thu, 27 Aug
+ 2026 19:59:17 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%4]) with mapi id 15.21.0360.008; Thu, 27 Aug 2026
+ 19:59:16 +0000
+Message-ID: <81241329-290d-4c4e-80b4-c3bbdaa26cf8@cherry.de>
+Date: Thu, 27 Aug 2026 21:59:13 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH next 00/45] doc: fix some issues reported by linkcheck
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <foss+uboot@0leil.net>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Viacheslav Bocharov <adeep@lexina.in>, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Soeren Moch <smoch@web.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Le Jin <le.jin@siemens.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Peter Robinson <pbrobinson@gmail.com>,
+ Sean Anderson <seanga2@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ u-boot@lists.u-boot-project.org, u-boot-amlogic@groups.io,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
 References: <20260825-linkcheck-v1-0-ee7573fe3a4a@cherry.de>
+ <a2b54c83-97a2-4b81-9c6c-6be32f127985@gmx.de>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <a2b54c83-97a2-4b81-9c6c-6be32f127985@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ClientProxiedBy: VIUP296CA0138.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:34a::13) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Infomaniak-Routing: alpha
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|MMZPR04MB345699:EE_
+X-MS-Office365-Filtering-Correlation-Id: f0f6c756-4612-4447-7ee1-08df0475ac89
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|10070799003|23010399003|376014|7416014|1800799024|10067099003|6133799003|4133799003|3023799007|22082099003|18002099003|4143699003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: l7x2R+vElhlZF57PwhUvH5fcvJWtsZhq3cK2nO2u0NYt5r/7tTZSqvIuFKg66ZWlezeKCtpZUoXylneGIxzOiw2kRQeFic6Rgkp6Cra9LQIoSG5Zkhx+dRB8AEmGLRFu0DhX7RAJXEM++HHna6yBrfRRQEq1XKg4tlsMuxh77bjQ9vzmss21O+wAQBXdpw6vXLe+Sr151po+Tmn4+gPSMJ1tYk8OPcUM1wkfVnxDFE/JckEe5bptwtgXoB5uwtXZ7arwkYNyfDrOiKeh3n0ksO+HlV4Q9ZeceB87XkJcO1t/AxxkM3nAr7VrJG3Ua32KiX84txSZRv4B3iYqNp9988V/X0Hma7gVdvuNbA6Lgojbh7T0ulpuuzRuC74B5u7FXbzJvyIjy0duEjor4KS8eEmSBiZd4nFj/O/LSNbCV0DJ2767kPQCGCA6KpDAFV679TTbVfJnisGCZhSZvnlQK+lqugKn2wKvSdEmvqrlrJd8oqZu8S4oT04vbXWQh73G8vELGmLNkK6+CZ06DGpgo14u5hPM49Q2ohzivymVUQWiWVvrhPEPd8Shh2bfyaisEngdHZT28DcnbYi4ktTPmLAp82MW4AuOYd6yEbNFsWk=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(10070799003)(23010399003)(376014)(7416014)(1800799024)(10067099003)(6133799003)(4133799003)(3023799007)(22082099003)(18002099003)(4143699003)(11063799006)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NUprTUUvdkFXSko4MkNvbmlHMXFBV1VEZmtVSkRTc0tOWDJuMmRvWkN2NFVh?=
+ =?utf-8?B?UWljcWdzeWIweC9DM3paeE5JV2hOVG85dEVQUjN2RHR5YkJTdElvb1hGS0kv?=
+ =?utf-8?B?VkpRWmdWM1grRW1HdngwaVRTb3U5b0ZLbmhyZm5kOUFTcWRNdHpzMXlxRWM2?=
+ =?utf-8?B?K0ExNkkyaFozbDhzUWtoWjl5aFhwV0l3dFZ2U3paUkgzL0laZmNKYVV0WDNl?=
+ =?utf-8?B?a3VxK28xL3U1eXlmYm9Gdm1tSTVpN3E0dFJmODV0WTdaeVlFdTg4Nk9MZnh4?=
+ =?utf-8?B?MHJuWmRrb1QxdjRGNUROcThPdkJOTFNtc1YxMzhCdSt1bmdJVWFoaUZmZGhq?=
+ =?utf-8?B?SWkzK0Y4c2NDTmZpU3k1VGpKeXFZcEx5bzNYai9RNU5yYVF1aGgzRGhoRW1V?=
+ =?utf-8?B?NklyeEIyTmh0cVAyVTA3YXZCMW1mNm42TUpYSHVVb0J6aEpQcUNwYmtZeEc4?=
+ =?utf-8?B?ZXBkemZDNUZaMjVyVml2eW55K0JSbWtXZ0tvWm9Qb2ZGQXhhdUxxdHRSREVk?=
+ =?utf-8?B?bHJMNXJTeWR2c2RSTU42NTgrRkh5dEJGY1JwM2ZDdThrSkx0eHFNNlp4ZkFy?=
+ =?utf-8?B?ZlV2b2dLL3FLVkw2aDBnMHFncU9KdWdRcitNakxYNWl0cUVnYzhMTHcvc2ox?=
+ =?utf-8?B?ZjA3Rldya1YySi9RNytzNDVvNkoybjl6Y29WVStyelpYQnFBazZURGtydXJN?=
+ =?utf-8?B?a2hIdHpNZm5xT2lsWm1ybDJGaDlYUkNBZldzYy9zY1RLMVNieFdYcFhOR3Fx?=
+ =?utf-8?B?S2pva0o1UmV6U1JiMkVUSU1lVTRLczZLYVJlNW9tT1hER1lXSEVOaGRmd3Bz?=
+ =?utf-8?B?VWxmUkNMYmRuaE1hYjBSRVZyUE4rdVFpQ2V3ZThPSFVXLy9IajJVNVhpeExw?=
+ =?utf-8?B?bjM5cjg5QmRrSDBZMkhwZUlhS01Zb3Q0cUNEYUhPbEJFM0JxY2x2M3NXdmpo?=
+ =?utf-8?B?Nm5IU21ZSS96TU1zT051MXhOOVpNdDRoQy9yNTZJSUZCMFY1c0ZWaXEvUUlv?=
+ =?utf-8?B?QnBXZkZHa1QvNlZ2SmJ4WU1pamw5M3lxWHNacUhwR0VBdjFDWHg0TG9ONTZ6?=
+ =?utf-8?B?dTZjSkRlZGhMZTlyRkVIWG1yS3I1ODJvWlVzQWpldzhNMnQrZVdOR0VYeFFw?=
+ =?utf-8?B?R205cVpLS3NVaXBPZW1LdVRvcmpDM01qS0Zzck55RjdVV2tHZ21HdUJES1VH?=
+ =?utf-8?B?WWcyRHNyMll5dGVQcHpGU3dQK3VIQ1pWUXVLNllQVVY1V2NaMVhjY3ZHYTFD?=
+ =?utf-8?B?RjZDbFFlazE2d2RMdFkySkVCQjE4TlgzNFdqY0JBWGlsVUZOZ0JtREFTNmZl?=
+ =?utf-8?B?ZlJyMk1hd2REL2dydmRwYmhNTWlzMmwzRHIxS1VkK25jZ2xieGY3RjYzRm5S?=
+ =?utf-8?B?Z2E3Tk9XVnd4N2kyRk16ZzJqeTZBQmNQdzJLWVB2VEJNSEhYR1BkK3QyZjJl?=
+ =?utf-8?B?aFBpUG05QkcyV095UnYvcE11Sjc4eTNHbGVlalBSTlgrSG9NMXdjWVV0UENH?=
+ =?utf-8?B?NU9YZ2pqdE1lRzFEN09JSFAyRGoxeTlIWlNYRjgrYkw3VnFPR1RuM2FUQ3gv?=
+ =?utf-8?B?QVYrMlh1RmdFZWVRYzdMTHBkZDEyRTdFOHlJVE0rcTQ0T1BYeTZIZStnV2ZP?=
+ =?utf-8?B?K2R5RjhYa1JmVGh6S0JSbEtjS0ZXRDdKWnJ1MnVWOVpaSTc5Z2ZrbVVHNFVY?=
+ =?utf-8?B?aHNqa2trd0phN013RHMrSkF1WExoL3JIM3BMclRQRDVtR2hqOUFKSWNjWjVS?=
+ =?utf-8?B?T1ZlNVp6SVcrMU9wbmVlOGtXVDZqeDhFZnIyUGJIUVdYVHJJdm5heElzVjhL?=
+ =?utf-8?B?U2NaWTVBS1hMMDV1dnJoTWM0NDRPUEttemt0K3BJeGswcGdSQjVBNlN0QUV0?=
+ =?utf-8?B?ZWJGNkJBeWJ2TitYSFhPSEZmRjJldmJjKzZOQlZvc2h4VUN1QjhQVDNTRmxk?=
+ =?utf-8?B?anIrUEY4K0RncEpCNVF3dmgxaGJmNHpvVFNKMHRrZFBVRndiMUpWUGtyQmZ6?=
+ =?utf-8?B?Y1hjNDMwV21VKzRGb25jRmxjZVYxRkZ2QkpzeHNGRzV0UHV5a2hVVzYrSDVJ?=
+ =?utf-8?B?STQ1UFloWGxHRWVtV0FBeTVDc2xTd29MR1BaZlpTeEZsaFFKL0VKT1N3Nm8z?=
+ =?utf-8?B?M2RmNE10dzR5MDFLWU5jelNubGR4SS85V0xIak1nWkVRUENpVVZLSzFaajg1?=
+ =?utf-8?B?MnJETllWSUwxYllQOW9RS00yZldvTU5tU0tQa01mWUdLdk51cTJhZURkbjVj?=
+ =?utf-8?B?V3hwZ2RJU1p6eGZUTHI4ZUszQ0UvWlE5UUxoUWlXYW1xWEdsK0Y1d2IzWnVi?=
+ =?utf-8?B?cUcyMUF3cStIOXl0QzBDcSsvQmhaOGtib0ZkTmx4VjNyNVNGNEVYQjBCTldT?=
+ =?utf-8?Q?okeZVspwiTd4OnqumaWuaW7O+jugmQmzNf/T5lCFb8kmd?=
+X-MS-Exchange-AntiSpam-MessageData-1: PDiEkkDnxtFXIppONe9xqcHN8F+Oro8mqPw=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: f0f6c756-4612-4447-7ee1-08df0475ac89
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 19:59:16.5469 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZgKftiEPHSjFSz3brYpzeT/8GpLAEmIqUl98ZqfdfITaPECLjWD05ZKWs2wxOrRkXLeJjgqOYnmNUnuq7zl5RUxY0jp7o5k7mGSPJTj/GnA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MMZPR04MB345699
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -101,189 +186,53 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Hi Heinrich,
 
-It's 2026, we really should be using HTTPS wherever possible. The links
-in this commit were individually tested, they work fine (the sipeed one
-sometimes times out but I'm guessing it's hosted in China and it's not
-uncommon for Europeans to have issues reaching servers there).
+On 8/27/26 1:03 PM, Heinrich Schuchardt wrote:
+> On 8/25/26 18:49, Quentin Schulz wrote:
+>> Saw a dead link and made the mistake of running `make linkcheckdocs`.
+>> Now I'm knee-deep in it and cannot ignore all the dead and redirected
+>> links. A day later, I've had enough so this is what I managed to fix in
+>> that time. There are many URLs still redirecting (could be fine, but
+>> needs to be individually checked as some big companies have a tendencies
+>> to redirect to generic pages instead of issuing 404s...) or returning
+>> 4xx. The issue is that those 4xx also need to be individually checked
+>> because since the AIpocalypse has started many websites now have web
+>> crawler protection in place and linkcheck will trigger those and be
+>> denied access (or be heavily rate limited).
+>>
+>> Please be mindful and only run this script once, save its output and
+>> work on fixing individual errors without rerunning the script, otherwise
+>> we would only participate in hammering websites even more (linkcheck
+>> runs multiple workers in parallel and retries when rate-limited).
+>>
+>> Note that linkcheck doesn't check for links in code-blocks so our
+>> instructions may point at dead links also.
+>>
+>> At an attempt to avoid tens of people running linkcheck at the same
+>> time, here's the output sorted and filtered on !ok status:
+> 
+> Hello Quentin,
+> 
+> in patchwork.ozlabs.org, lore.kernel.org/u-boot, and https:// 
+> eur02.safelinks.protection.outlook.com/?url=https%3A%2F%2Flists.u-boot- 
+> project.org%2F&data=05%7C02%7Cquentin.schulz%40cherry.de%7C3c09d2cdb28041d4b5cc08df042aede7%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639234254572323528%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=EVMJd%2FfRl5KHcaDFXZvcck%2F38e8nTUtVCJ61A8CT1Cg%3D&reserved=0 only patches 1 - 21 arrived.
+> 
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- doc/arch/nios2.rst                  |  2 +-
- doc/arch/x86/x86.rst                |  6 +++---
- doc/board/amlogic/index.rst         |  2 +-
- doc/board/sipeed/maix.rst           |  2 +-
- doc/develop/driver-model/virtio.rst |  2 +-
- doc/develop/process.rst             |  2 +-
- doc/develop/sending_patches.rst     | 12 ++++++------
- doc/develop/uefi/iscsi.rst          |  4 ++--
- doc/usage/dfu.rst                   |  2 +-
- 9 files changed, 17 insertions(+), 17 deletions(-)
+I know, 
+https://lists.u-boot-project.org/pipermail/u-boot/2026-August/629812.html 
+(for some reason it didn't make it to lore.kernel.org...).
 
-diff --git a/doc/arch/nios2.rst b/doc/arch/nios2.rst
-index 90b4ddf387bf..a825b244ab7b 100644
---- a/doc/arch/nios2.rst
-+++ b/doc/arch/nios2.rst
-@@ -10,7 +10,7 @@ Please refer to the link for more information on Nios II:
- https://www.altera.com/products/processors/overview.html
- 
- Please refer to the link for Linux port and toolchains:
--http://rocketboards.org/foswiki/view/Documentation/NiosIILinuxUserManual
-+https://rocketboards.org/foswiki/view/Documentation/NiosIILinuxUserManual
- 
- The Nios II port of u-boot is controlled by device tree. Please check
- out :doc:`/develop/devicetree/control`.
-diff --git a/doc/arch/x86/x86.rst b/doc/arch/x86/x86.rst
-index 28726f717f6e..9ba5c2893379 100644
---- a/doc/arch/x86/x86.rst
-+++ b/doc/arch/x86/x86.rst
-@@ -480,9 +480,9 @@ TODO List
- - Audio
- - Chrome OS verified boot
- 
--.. _coreboot: http://www.coreboot.org
--.. _QEMU: http://www.qemu.org
--.. _microcode: http://en.wikipedia.org/wiki/Microcode
-+.. _coreboot: https://www.coreboot.org
-+.. _QEMU: https://www.qemu.org
-+.. _microcode: https://en.wikipedia.org/wiki/Microcode
- .. _SFI: https://en.wikipedia.org/wiki/Simple_Firmware_Interface
- .. _MP: https://en.wikipedia.org/wiki/MultiProcessor_Specification
- .. _SeaBIOS: https://www.seabios.org/
-diff --git a/doc/board/amlogic/index.rst b/doc/board/amlogic/index.rst
-index 23380ac33f2b..e8bb421ed8c9 100644
---- a/doc/board/amlogic/index.rst
-+++ b/doc/board/amlogic/index.rst
-@@ -6,7 +6,7 @@ Amlogic
- Hardware Support Matrix
- -----------------------
- 
--An up-do-date matrix is also available on: http://linux-meson.com
-+An up-do-date matrix is also available on: https://linux-meson.com
- 
- This matrix concerns the actual source code version.
- 
-diff --git a/doc/board/sipeed/maix.rst b/doc/board/sipeed/maix.rst
-index 4568bb3e4b74..9bbc2a93c5b0 100644
---- a/doc/board/sipeed/maix.rst
-+++ b/doc/board/sipeed/maix.rst
-@@ -19,7 +19,7 @@ Currently, only the Sipeed MAIX BiT V2.0 (bitm) and Sipeed MAIXDUINO are
- supported, but the boards are fairly similar.
- 
- Documentation for Maix boards is available from
--`Sipeed's website <http://dl.sipeed.com/MAIX/HDK/>`_.
-+`Sipeed's website <https://dl.sipeed.com/MAIX/HDK/>`_.
- Documentation for the Kendryte K210 is available from
- `Kendryte's website <https://kendryte.com/downloads/>`_. However, hardware
- details are rather lacking, so most technical reference has been taken from the
-diff --git a/doc/develop/driver-model/virtio.rst b/doc/develop/driver-model/virtio.rst
-index 9a5e3240c3ce..e5da9f4301ca 100644
---- a/doc/develop/driver-model/virtio.rst
-+++ b/doc/develop/driver-model/virtio.rst
-@@ -284,5 +284,5 @@ for the remove method to be called before jumping to OS.
- 
- 6. do funny stuff with the driver
- 
--.. _VirtIO: http://docs.oasis-open.org/virtio/virtio/v1.0/virtio-v1.0.pdf
-+.. _VirtIO: https://docs.oasis-open.org/virtio/virtio/v1.0/virtio-v1.0.pdf
- .. _QEMU: https://www.qemu.org
-diff --git a/doc/develop/process.rst b/doc/develop/process.rst
-index 3c783ed5a0e9..8ade440d84b1 100644
---- a/doc/develop/process.rst
-+++ b/doc/develop/process.rst
-@@ -236,7 +236,7 @@ Tooling
- 
- There are a number of tools available to help custodians and
- contributors alike with their contributions. As a project we make use of
--the Patchwork project hosted at `OzLabs <http://patchwork.ozlabs.org/>`__
-+the Patchwork project hosted at `OzLabs <https://patchwork.ozlabs.org/>`__
- and more discussion on how it is used from both a contributor as well as
- custodian point of view can be found :ref:`here <patchwork>`.
- 
-diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
-index 27363a448b23..b4f82eb18e16 100644
---- a/doc/develop/sending_patches.rst
-+++ b/doc/develop/sending_patches.rst
-@@ -15,7 +15,7 @@ resource - use it. Being familiar with the :doc:`process` is also important.
- 
- A good introduction how to prepare for submitting patches can be found in the
- LWN article `How to Get Your Change Into the Linux Kernel
--<http://lwn.net/Articles/139918/>`_ as the same rules apply to U-Boot, too.
-+<https://lwn.net/Articles/139918/>`_ as the same rules apply to U-Boot, too.
- 
- .. _b4_contrib:
- 
-@@ -313,7 +313,7 @@ to observe the following rules.
-   Note: it is *not* sufficient to provide a change log in some cover letter
-   that gets sent as a separate message with the patch series. The reason is
-   that such cover letters are not as easily reviewed in our `patchwork queue
--  <http://patchwork.ozlabs.org/project/uboot/list/>`_ so they are not helpful
-+  <https://patchwork.ozlabs.org/project/uboot/list/>`_ so they are not helpful
-   to any reviewers using this tool. Example::
- 
-    From: Joe Hacker <jh@hackers.paradise.com>
-@@ -380,12 +380,12 @@ Notes
- Patch Tracking
- --------------
- 
--Like some other projects, U-Boot uses `Patchwork <http://patchwork.ozlabs.org/>`__
-+Like some other projects, U-Boot uses `Patchwork <https://patchwork.ozlabs.org/>`__
- to track the state of patches. This is one of the reasons why it is mandatory
- to submit all patches to the U-Boot mailing list - only then they will be
- picked up by patchwork.
- 
--At http://patchwork.ozlabs.org/project/uboot/list/ you can find the list of
-+At https://patchwork.ozlabs.org/project/uboot/list/ you can find the list of
- open U-Boot patches. By using the "Filters" link (Note: requires JavaScript)
- you can also select other views, for example, to include old patches that have,
- for example, already been applied or rejected.
-@@ -470,7 +470,7 @@ Apply patches
- ^^^^^^^^^^^^^
- 
- To apply a patch from the `patchwork queue
--<http://patchwork.ozlabs.org/project/uboot/list/>`_ using ``git``, download the
-+<https://patchwork.ozlabs.org/project/uboot/list/>`_ using ``git``, download the
- mbox file and apply it using::
- 
-    git am file
-@@ -495,7 +495,7 @@ The `pwclient` command line tool can be used for example to retrieve patches,
- search the queue or update the state.
- 
- All necessary information for `pwclient` is linked from the bottom of
--http://patchwork.ozlabs.org/project/uboot/
-+https://patchwork.ozlabs.org/project/uboot/
- 
- Use::
- 
-diff --git a/doc/develop/uefi/iscsi.rst b/doc/develop/uefi/iscsi.rst
-index 52fa79f35620..104ef87705fc 100644
---- a/doc/develop/uefi/iscsi.rst
-+++ b/doc/develop/uefi/iscsi.rst
-@@ -131,11 +131,11 @@ For running iPXE on arm64 the bin-arm64-efi/snp.efi build target is needed::
- 
- The available commands for the boot script are documented at:
- 
--http://ipxe.org/cmd
-+https://ipxe.org/cmd
- 
- Credentials are managed as environment variables. These are described here:
- 
--http://ipxe.org/cfg
-+https://ipxe.org/cfg
- 
- iPXE by default will put the CPU to rest when waiting for input. U-Boot does
- not wake it up due to missing interrupt support. To avoid this behavior create
-diff --git a/doc/usage/dfu.rst b/doc/usage/dfu.rst
-index c825cdcbe5c9..987f287b483e 100644
---- a/doc/usage/dfu.rst
-+++ b/doc/usage/dfu.rst
-@@ -334,7 +334,7 @@ When U-Boot runs the dfu stack, the DFU host tools can be used
- to send/receive firmware images on each configured alternate.
- 
- For example dfu-util is a host side implementation of the DFU 1.1
--specifications(http://dfu-util.sourceforge.net/) which works with U-Boot.
-+specifications(https://dfu-util.sourceforge.net/) which works with U-Boot.
- 
- Usage
- -----
+I once again got rate limited for 24h, so the last three patches will 
+have to wait for this weekend. I'll likely need to split this in two or 
+three for a v2 so I don't get rate-limited in the middle of a series.
+
+> Please, send the rest of the series using
+> 
+> --in-reply-to=20260825-linkcheck-v1-0-ee7573fe3a4a@cherry.de
+> 
+
+Thanks, was wondering how to do that!
+
+Cheers,
+Quentin
