@@ -1,112 +1,116 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3217CC61DC6
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 12:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3696BC61DC6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 12:11:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5F003607A6;
-	Thu, 27 Aug 2026 12:11:37 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id i-QQZwJRnf6W; Thu, 27 Aug 2026 12:11:36 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787832696;
-	bh=8X6wKZqOG1qd1g/yteFXzdI0LSbtfAk8p+PEn7lAmdA=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=upe2c7uVjj1nyWZO4/0RN/1Y7LLrQr6MlH52SYHxsrovyvuKx7Bb30pU11XozyXF+
-	 6sOed+CUX01J9ij6MmakpZoZUUKeg0GW3e+kbON4DfedJnZ6twUg+NOXqtkYD83Osd
-	 s8XyrYqJW/HCmB1ogDsV3OHpCXdEDKVylpNC8XW5l92qQAt7EcLrY2jXvXfR/1gO9G
-	 zXq9etlx15z60PscxDoI+rwhBhkFmHtrrnqD7Ydpj3lE/WGaB73odeJvh0T5gRCUDI
-	 b5psLiHMwqMPjFD5fMaqK0sDUOX/ENfwCEeb+PTxjOHMnBQIrEQvO/sC3Wd89qAZDS
-	 NeL8FRuTbR75g==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F10546079D;
-	Thu, 27 Aug 2026 12:11:35 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id CF0F6334
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:11:33 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C0C81406F7
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:11:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B3A954070D;
+	Thu, 27 Aug 2026 12:11:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ELPJJOCrGakx for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 12:11:33 +0000 (UTC)
+ id lUttbbJ42iFK; Thu, 27 Aug 2026 12:11:55 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787832715;
+	bh=xrFWXWhO1g7HCl1UAcsVO5SK8TMx98MlROUM5u6bzu4=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=HtWdGS3IteCUSMJqE8IqtTV0S5Mpc4bAsBi1siL3doDH8a5o5HUtupOJZgZ68LAzc
+	 1l5rm9eXtFr8MfQULP2qr7zFJwYw37VjSY6eM3dExLhZ8IOVMtYmbjwnzz0Abm0xwY
+	 5iaMeZwszV1w3GL3GBLtEdl83rMZbJJaNM8WLAKb0UKCNyyuK5U+K3UZdYXiR3iWdt
+	 6mNDA20rnVe4ZcieKAPYCTm/eP5m5HRZw8+FhfmFEOWZEUBiayVoTpz8wtuu6cxAHR
+	 HMZDNYlKPIAPytFwvV/h6VS0zf05IH9zUOJC/DsIjn5ztUeB0Sp/MI/aXbC6gVJx7B
+	 p+d9ggeNolq2Q==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 62BDA406F7;
+	Thu, 27 Aug 2026 12:11:55 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 27EC4355
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:11:54 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0DF3C40301
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:11:54 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id U5Qi0lL59ICf for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 12:11:53 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c005::5;
- helo=co1pr03cu002.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c111::5;
+ helo=dm1pr04cu001.outbound.protection.outlook.com;
  envelope-from=suraj.hanumantkakade@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=ElUv2rKH
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
- by smtp4.osuosl.org (Postfix) with ESMTPS id ED539406F3
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:11:32 +0000 (UTC)
+ header.s=selector1 header.b=Z35aVTy1
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D995F402E1
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 12:11:51 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Dz/hnc9NbYNyA80SH027UTmNKC0fAk/Yil/VuYK6ba/Wj0UvOGNabanWo1gTo7HgFBXSpwJkqbFYqMiw6cwYdb2OTx3hlxo21o8rW3dDBiRYSZhjBUHFfiWdGeQTebjWZwX3AFDtLtAvzKEA73MMbsy04hWgOGhJE1HyzFCGUwbPr2wgocvzkQGep8j/zJ4qoV5P49CfITcyNFHY53jzW/gjHSZGQAnWCxOc54DwiQT5D/39HckB8nkiyGvxciCqteXpwX/SEHsJAVkMkkrjM1NZNgi8YctGyJUt8esemxe8VLY+gFPJDLjHpJg29sdizMNmc2uWEPb4FEFS+8hvRA==
+ b=fOuksSjM7PQ/th7LYe9ufK2QSri21gBGHlwV+By24b6mJcH2geDRhg3PUqr3FbOHhAdC2ls4lH8M5q6oFo1uxQWG0m8ejdIxw/0pqrdhEcm+sDa8pEh6JeXoi1uTNmpzBdpiFGxMJc2l90J67E6vTFwiwBl5kQ18tyt1ybHTgRRH3hyuGNF7OcwYUed/Yt7Xz3anvlmX9wfaxWIoav9CtP78KxUD/CeIfCBn69b2Tz1xtlYIX1DFlSgN/8BptB2UutOSfCPHc2300ToPE1q12GkmJLItdX7jR718cIA7PaYrYrnzA090Y7+BXK3lRjxrqFrzjVgvlEcwLaF2wBwvYQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8X6wKZqOG1qd1g/yteFXzdI0LSbtfAk8p+PEn7lAmdA=;
- b=DacrCK94BJ/jSlfuJouD24cSBgdEY4SdLXFjPYj2r3iotcrRwKxKcrQWadUQ7uQDjDRR9lk9dnB5ogrzNFqxTtTKcTGpDmeMcFBnhk+RfuG7ScCzDIRpVsNnedalaGCLQSG2MQ928aD5xhvz1xudR+sfgS1+3R7HioJA5g6+sOs1U5lrtx/iRFt6rQLOfMdGw8i20lz53yJVlHT+6FE/oNa5Ud1E+uoPu4vaZ5k4EU7yJzjP/22Kpf+mcqrp2W8QxC7E+JdO4FeXt86gbw06UlBOanlwraCuhfK3p3A0BxVH9SGJ0Jlgw1sKFQDPQv4Q2ueQJSaNYdxjcnGYp2Vi/w==
+ bh=xrFWXWhO1g7HCl1UAcsVO5SK8TMx98MlROUM5u6bzu4=;
+ b=X3sKOzT/nkNGCXRhkHIEPd6P8M6ONkD9uu7viHthWfPx8fnzLxYZVjOjI8EqgJq0/r3hDR0ok3tfgD+VIPtWr428Y4jZbd6Ik2MGS+sE+Tq5vd6CWxnveoFYGSBG0RR8fU1JD5nRMB1095B3sCuh6979w3xoH3bV+UQa3s5Lx4VVvI2vsSgNJTof7w5UAh2c2T7zLv1bGuNr3u951d9AgE0TQXcNQyizM3EannJRF+avjNf6GGB80W0y4ValhRE5I+SgIeV/ZARmpVf8KiELZCPJ8AIxQRDGfKdqUw8ijLiFDDPpnvxe8S3SwsrVK5ux1NJcOFx0UPRG1Y/fTGn+AA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
  action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8X6wKZqOG1qd1g/yteFXzdI0LSbtfAk8p+PEn7lAmdA=;
- b=ElUv2rKHEWi2VSy6O8H0MDj2Fz65OapOHfX2GLC8JyZT2u4mOWPcw1GwpAmQjpUTRPXTXVO4IuXytygUuLcC8CNHqh/WXdF9YCVWFPz6XptuxloSsmG06ezhW42WPATU8GydSfEx5Kac3DJPJ0ZakN1/+O/s5yQNBd3/xsdkeJw=
-Received: from SA0PR12CA0023.namprd12.prod.outlook.com (2603:10b6:806:6f::28)
- by SA0PR12MB4463.namprd12.prod.outlook.com (2603:10b6:806:92::14)
+ bh=xrFWXWhO1g7HCl1UAcsVO5SK8TMx98MlROUM5u6bzu4=;
+ b=Z35aVTy1t9PkqvkAhO/B95qFRRSdP6K60yHXraXcSMdmeDfDTB4QCy+xINMOSD7FuW0rVOYMn8eqPjoN/hpRAakiHIwPdCA90X1043w85RjC3HEuPySDHPudyYxOGtApHetjSxjfJ6AFs5wU6AJmwH2KKFJfvQZckJer19oe9go=
+Received: from BN9PR03CA0307.namprd03.prod.outlook.com (2603:10b6:408:112::12)
+ by MW6PR12MB8866.namprd12.prod.outlook.com (2603:10b6:303:24c::16)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.11; Thu, 27 Aug
- 2026 12:11:29 +0000
-Received: from SA2PEPF00001507.namprd04.prod.outlook.com
- (2603:10b6:806:6f:cafe::ac) by SA0PR12CA0023.outlook.office365.com
- (2603:10b6:806:6f::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Thu, 27 Aug
+ 2026 12:11:33 +0000
+Received: from BN7PEPF00000094.namprd03.prod.outlook.com
+ (2603:10b6:408:112:cafe::72) by BN9PR03CA0307.outlook.office365.com
+ (2603:10b6:408:112::12) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.10 via Frontend Transport; Thu,
- 27 Aug 2026 12:11:29 +0000
+ 27 Aug 2026 12:11:32 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SA2PEPF00001507.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN7PEPF00000094.mail.protection.outlook.com (10.167.245.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.360.3 via Frontend Transport; Thu, 27 Aug 2026 12:11:28 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.360.3 via Frontend Transport; Thu, 27 Aug 2026 12:11:31 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 27 Aug
- 2026 07:11:24 -0500
+ 2026 07:11:30 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 27 Aug
+ 2026 07:11:30 -0500
 Received: from xhdsuhanuma50x.xilinx.com (10.180.168.240) by
  satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.45 via Frontend Transport; Thu, 27 Aug 2026 07:11:21 -0500
+ 15.2.2562.45 via Frontend Transport; Thu, 27 Aug 2026 07:11:27 -0500
 From: Suraj Kakade <suraj.hanumantkakade@amd.com>
 To: <u-boot@lists.u-boot-project.org>, <michal.simek@amd.com>
 CC: <git@amd.com>, <padmarao.begari@amd.com>, Suraj Kakade
- <suraj.hanumantkakade@amd.com>, Tom Rini <trini@konsulko.com>, "Rasmus
- Villemoes" <rv@rasmusvillemoes.dk>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>, "Jonathan
- Humphreys" <j-humphreys@ti.com>
-Subject: [PATCH 1/2] scripts: pass dtc cpp flags via a GCC response file
-Date: Thu, 27 Aug 2026 17:40:54 +0530
-Message-ID: <20260827121108.1775123-2-suraj.hanumantkakade@amd.com>
+ <suraj.hanumantkakade@amd.com>, Tom Rini <trini@konsulko.com>, Simon Glass
+ <sjg@chromium.org>, "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>,
+ Borislav Petkov <bp@suse.de>, Michal Marek <mmarek@suse.cz>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>
+Subject: [PATCH 2/2] Makefile: drop GNU Make < 4.0 compatibility code
+Date: Thu, 27 Aug 2026 17:40:55 +0530
+Message-ID: <20260827121108.1775123-3-suraj.hanumantkakade@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260827121108.1775123-1-suraj.hanumantkakade@amd.com>
 References: <20260827121108.1775123-1-suraj.hanumantkakade@amd.com>
@@ -115,29 +119,29 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001507:EE_|SA0PR12MB4463:EE_
-X-MS-Office365-Filtering-Correlation-Id: c3410737-9575-4a0d-0c3e-08df043452f3
+X-MS-TrafficTypeDiagnostic: BN7PEPF00000094:EE_|MW6PR12MB8866:EE_
+X-MS-Office365-Filtering-Correlation-Id: 39ee55b3-77bf-4f76-b3c5-08df04345479
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|23010399003|36860700016|1800799024|11063799006|56012099006|10067099003|18002099003|22082099003|3023799007;
-X-Microsoft-Antispam-Message-Info: VXJhGwLwYoMRDHfUguobRif3aWO0gVD2HmkEwXGtMaMUO8p+6L/cdGq14tGJ0z9S2+knytmeC3Fc7BYJDfDprfMIilbF65/LZ15NsI6NwyWWT3ebW/jm8PkxoAPD8DVnRZvcGOdJQukupObOt5+8dbYguuFm4ASpoxrN8zDDJlc36Xf7KGbxMC/uFlKcZygEhvqdkf5R3BfcY1eTecojBtPmMMMNuypYcjvu8Cao+tkIFAAm7jZtz7q6JiYgXXbpdJva5I0ODwpjqkDgDT4nRgKVQ8ZKxD4C98cbdotSk4xm0lpq3mKR6LvR22P31zaqSSVZpIAJmpbtg2ro1nfuT7DDCO/q6fMG/16qG3GB3Tnuwxs9mNTnN/0RHjRTbyGuaK7poQeb0CrELZOGPUK8kWhWKfbjMyQMXElX3UXL47SlNOqd4yAa8+L2GurIkorRTlRZGvRiEXStJXxCxC9tZwCjhyFtWFmILjM30xk5S+lixJAd0iLIQ/itcsM+PGngsqechzni4JvMrn08daDba/QAAxkAmjRWU/lIOGYiWYTL77uxIvk0oePfzkwW/lKOqGRsZWzTtxWudD/OafkiMi6ZSB2FAVk90MxJ73dboKV52mYd7kFDmk6YtPu24gSzzPc8UWPGbisfH6hehGXS7Z2exiLMFZyl7KhNPsfVLL5ryo6+huOHED23qUbsjuTRx17VWQdO9e3jKM05P4yVlA==
+ ARA:13230040|36860700016|82310400026|376014|1800799024|23010399003|6133799003|3023799007|10067099003|56012099006|11063799006|5023799004|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: YtlI7SkfONB/mdb31Ua7Liz6UrYgBTljiW/1pgfPcAJukuFpXKDHwhBnQ+8byEVKF67WbiF2rN6Wnxul8IVChgY0+70VNGp/c9OC2KOTrudQP7YtVR3W/yZcjySuWJHHGtYvnzr8I1GKlVi9DWkK/SiCX/+DJfvWM0KYdK5/UzsUKEktIpcHpNq50RXC6lMW3mIrgJaZzcHWGgGTshfv0veESmKSXK96oOKP5eklwUQPZUKAalLDXrfo13lBPJYJOyIN45LGRPO50JBFu1/SB2yAXw9ANGM0mfcENRf7n+ej8CWnVXfpvt4XQCoIibQ7+86IMgONgMrezw/6DgHh9k/538RSPMOHqpp23aDA5m3sk0z8dfQRaCSzocr2ShyLzZie+7pd4lG7ngZO37ElcYuM1e2nmppK4GQOpaVoVm2tXLppN3VFOpvk6vIDpFNIWsOdzZyt4l3iZZxoqmtIFWKGimWBsyRIUI+Jd0rcCjD1NZ6XGtebwk0TbdH/9iDEfhVaVIezQbhPc/D+AerVPuDANHoluLt6eaCI742y+2sOVGOoyLHqfPzGd03WyNiF0v7OfNYvRWA4SEc+sYDYpZvEa1E6dtbYVkcGjpbhxbfOFdSUUjDPbYvVf0MTx/tpOjJdm6z1E0KkciLit4fS6Yh+sON6vJBQOZ9vYDQ6pk1MLkq+9a5Q1OqCu2+TdHcsUH4WbhNtSJyZlfr8q2oOUg==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(23010399003)(36860700016)(1800799024)(11063799006)(56012099006)(10067099003)(18002099003)(22082099003)(3023799007);
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(23010399003)(6133799003)(3023799007)(10067099003)(56012099006)(11063799006)(5023799004)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: du7hsAj2duXhJ21DiFzac7rTtAWhMDrMqF1P4l6K1NDqt4Re4ww719lLcO0F66B4yuamlUrQHVMvtgt3ci0n35sA1OLxn0p0F8Gdf/Cpmf286dhioip7z+V+QJL5xbFrzPQDgmQtv4upQI56cDfGz2ePo45OrhCfx8RPxvORsOllZ0PF6ZX/TwwPKDYl22ZcjI0wgB5v4UwdyNoGzB3cP0c8fGu2751LU/r+zEesmFk0AKsKi3K74syGMT2jB6Ols/92rSd4nazy1JCeTAvnPKaOqZx18/5RprUGz5eUpVRYQxYgSvwEZZqOC4mrcT/MJMHdA2mnzznInDYXyq6dpAXXp1glyfzZVKyn0oOD4d+5LLOHJNZGEZ90mtaKVDYYwLQ2HGtH9VPsF2ojllpNSHZfxgg4MFM9G4B2P3/NylNcocsc/ocag8WHwNOZDuPl
+X-MS-Exchange-AntiSpam-MessageData-0: PzJfDiPjq4EqfeRsewcNmfwrlUFH6k+mbH6LCf4XqIUfDyF2sNHx2NOAQwWbv4s/mWPtcymL89v5JVxBjtwsFVcuFm/+KZRnj5FDccjoA2ZDNOXQyDVOPxpKXP5j6Eop5BxNUsL13lXzBsLv29x9+UGa/LKUkwRdMp/MjPanqVfN1w2GZhUPMP0nKFgqLqc2jatq+WH2C9SvYZME0VK23vIrruXgyrwdD5FhWANonWExayMvusaECNNEglWmAPNtyzYKmiqsB7+0+7x5zaoqMcgFRCCNzTppE5gewIDNfs36C9dYp6pUWkLTxFC+jt8DlMB07clPt4K3pujbtDH4DnzzNnHU94n7e4bUlCZaQixV3Y259z+PCgTVJP7qbHfNeFGt59AunjhnJAJ5euAXFtbHVZSQDJSbeaC88qR3WSKE5yHR4w1APDa4yY6Zmf/A
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 12:11:28.6047 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c3410737-9575-4a0d-0c3e-08df043452f3
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 12:11:31.1549 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 39ee55b3-77bf-4f76-b3c5-08df04345479
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001507.namprd04.prod.outlook.com
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN7PEPF00000094.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4463
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8866
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,56 +155,74 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-cmd_dtc inlines dtc_cpp_flags (including every upstream dtsi -I
-path) in the HOSTCC command. With a long $(srctree) that command is
-too large for /bin/sh -c and Make fails with "Argument list too
-long" while building a .dtb.
+RHEL/CentOS 7, a popular distribution that installs GNU Make 3.82,
+reached EOM/EOL on June 30, 2024. While you may get extended support,
+it is a good time to raise the minimum GNU Make version.
 
-Write the flags to a per-target .dtc.flags.tmp file and pass @file to
-HOSTCC/CPP so the shell command stays short.
+The new requirement, GNU Make 4.0, was released in October, 2013.
 
-This change requires GNU Make >= 4.0, since $(file ...) is not
-supported by Make 3.x.
+Raise the enforced minimum GNU Make version to 4.0 and drop the
+now-unreachable compatibility code for older versions:
 
-Fixes: d31ff219a833 ("Makefile.lib: find capsule ESL dtsi file with CONFIG_OF_UPSTREAM")
-Fixes: 1e7883f6325a ("dtbo: Fix dtbo generation rules")
+- Add an explicit "GNU Make >= 4.0 is required" version-check gate.
+- Simplify the "make -s" (silent mode) detection to a single
+  unconditional check instead of branching on make-4 vs make-3.8x.
+- Drop the GNU Make 3.x sub-make workaround, which is now dead code.
+
+Fixes: ffe29ebc0701 ("kbuild: sync top Makefile with Linux 3.18-rc1")
+Fixes: 5f520875bdf0 ("kbuild: Bump the build system to 5.1")
 Signed-off-by: Suraj Kakade <suraj.hanumantkakade@amd.com>
 ---
- scripts/Makefile.lib | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ Makefile | 20 +++++---------------
+ 1 file changed, 5 insertions(+), 15 deletions(-)
 
-diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 24b1a581790..6066abed199 100644
---- a/scripts/Makefile.lib
-+++ b/scripts/Makefile.lib
-@@ -448,7 +448,8 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
- 	(cat $< > $(pre-tmp)); \
- 	$(foreach f,$(subst $(quote),,$(dtsi_include_list) $(CONFIG_DEVICE_TREE_INCLUDES)), \
- 	  echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
--	$(HOSTCC) -E $(dtc_cpp_flags) -I$(obj) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
-+	$(file >$(dtc-flags-tmp),$(dtc_cpp_flags) -I$(obj)) \
-+	$(HOSTCC) -E @$(dtc-flags-tmp) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
- 	$(DTC) -O dtb -o $@ -b 0 \
- 		-i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
- 		-d $(depfile).dtc.tmp $(dtc-tmp) || \
-@@ -477,6 +478,7 @@ $(obj)/%.dtb: $(src)/%.dts $(DTC) $(dtsi_include_list_deps) $(DT_TMP_SCHEMA) FOR
+diff --git a/Makefile b/Makefile
+index 436f384f22a..889ac7bade5 100644
+--- a/Makefile
++++ b/Makefile
+@@ -12,6 +12,10 @@ NAME =
+ # Comments in this file are targeted only to the developer, do not
+ # expect to learn how to build the kernel reading this file.
  
- pre-tmp = $(subst $(comma),_,$(dot-target).pre.tmp)
- dtc-tmp = $(subst $(comma),_,$(dot-target).dts.tmp)
-+dtc-flags-tmp = $(subst $(comma),_,$(dot-target).dtc.flags.tmp)
++ifeq ($(filter output-sync,$(.FEATURES)),)
++$(error GNU Make >= 4.0 is required. Your Make version is $(MAKE_VERSION))
++endif
++
+ $(if $(filter __%, $(MAKECMDGOALS)), \
+ 	$(error targets prefixed with '__' are only for internal use))
  
- # DTCO
- # ---------------------------------------------------------------------------
-@@ -486,7 +488,8 @@ quiet_cmd_dtco = DTCO    $@
- # No generation of assembly file either
- # Modified for U-Boot
- cmd_dtco = mkdir -p $(dir ${dtc-tmp}) ; \
--	$(CPP) $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $< ; \
-+	$(file >$(dtc-flags-tmp),$(dtc_cpp_flags)) \
-+	$(CPP) @$(dtc-flags-tmp) -x assembler-with-cpp -o $(dtc-tmp) $< ; \
- 	$(DTC) -@ -O dtb -o $@ -b 0 \
- 		-i $(dir $<) $(DTC_FLAGS) \
- 		-d $(depfile).dtc.tmp $(dtc-tmp) ; \
+@@ -93,15 +97,9 @@ endif
+ 
+ # If the user is running make -s (silent mode), suppress echoing of
+ # commands
+-ifneq ($(filter 4.%,$(MAKE_VERSION)),)	# make-4
+-ifneq ($(filter %s ,$(firstword x$(MAKEFLAGS))),)
+-  quiet=silent_
+-endif
+-else					# make-3.8x
+-ifneq ($(filter s% -s%,$(MAKEFLAGS)),)
++ifneq ($(findstring s,$(firstword -$(MAKEFLAGS))),)
+   quiet=silent_
+ endif
+-endif
+ 
+ export quiet Q KBUILD_VERBOSE
+ 
+@@ -166,14 +164,6 @@ ifneq ($(abs_srctree),$(abs_objtree))
+ MAKEFLAGS += --include-dir=$(abs_srctree)
+ endif
+ 
+-ifneq ($(filter 3.%,$(MAKE_VERSION)),)
+-# 'MAKEFLAGS += -rR' does not immediately become effective for GNU Make 3.x
+-# We need to invoke sub-make to avoid implicit rules in the top Makefile.
+-need-sub-make := 1
+-# Cancel implicit rules for this Makefile.
+-$(this-makefile): ;
+-endif
+-
+ export abs_srctree abs_objtree
+ export sub_make_done := 1
+ 
 -- 
 2.43.7
 
