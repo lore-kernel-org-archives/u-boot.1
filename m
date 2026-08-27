@@ -1,113 +1,117 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BFADC61DB9
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 23:54:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C87C61DB9
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 23:54:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 757AB80EFB;
-	Thu, 27 Aug 2026 23:53:58 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uuUe0E-bpS3Y; Thu, 27 Aug 2026 23:53:56 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787874836;
-	bh=VQwpo7/E2v9iUOez641lI4SvUfSB4O/FPZiB7j2f/fk=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=SbJhvkKzLwuLyGsBHJBXuiDH2/fHUOx+dD4mSgUGkamAbRgY1IqVFb2SaZsEjOUCB
-	 ZNo+kLtYXjz02bEZcCyGbBz2OkI55w2dauryPNMANvyTr56pJ0dvdnRGRsy+132ELG
-	 +GabftIDBJV55NqDz/JFtNkzX4qmyK7Ns4KNV8bl8wP046/kfAZZvyY2DzzR3JmnHH
-	 REaxlqTC7FZilHloqK5sTuAetfVaZmEmdE3a29jW27PS1Pbw66cY59LOc7JrXYCOXf
-	 9wm0YCrWZCW5qHs9oYHfg0IE3vNcI5UAaJlWntYfqKm0DNKGEv7kwhjee78ChYP2/m
-	 QwCeyHlDruUvg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 236AF80EFD;
-	Thu, 27 Aug 2026 23:53:56 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 3F393355
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 23:53:54 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 30BA840786
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 23:53:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 696FE40849;
+	Thu, 27 Aug 2026 23:54:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5jzsrCvVwNlp for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 23:53:53 +0000 (UTC)
+ id XeZtYtO6Odii; Thu, 27 Aug 2026 23:54:00 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787874840;
+	bh=EZZ2pMXeItzlMsGVmOd4qDV8At3QdvEzGufZepO0tP0=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=fK3fHvw8PFtlaB/5gZxS8lLdjOj4wUICm2gZ3ufmCRov46FZhZLz60SDim9JEYwHb
+	 LluxWQ6buCw5QDhK8JWZkiROnz7DXOWeUPyOb0RBpUZKROQqkbmtPNRlfLbXEtFY9M
+	 K9DPavexCe/LWUVo9sm3U4eEG+V3a+kZC4ETG+i0alFSg3u0uwPIGiWJNUmTHcnrYx
+	 nJ+1vGEM+quqoqfQW2uP/bX9e59JGMN4ifK7tn0DSneAD+xAF+2rc/HjqOYwsq6l3W
+	 bCW3VFu5cqo+KbjXm5PXuV6qKKXQwqxPXPdHILznBLMnYqXHX9KOjYxdunwYgtlJvA
+	 AJz7ElXcrQmiA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5A9B640816;
+	Thu, 27 Aug 2026 23:54:00 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 93B35CBC
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 23:53:55 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8659440816
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 23:53:55 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gsg_gH1YfRhR for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 23:53:55 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::112a; helo=mail-yw1-x112a.google.com;
+ client-ip=2607:f8b0:4864:20::1133; helo=mail-yw1-x1133.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=pPeBnjO6
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5AA4040816
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 23:53:52 +0000 (UTC)
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-836cb2fa1bcso2613707b3.1
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 16:53:52 -0700 (PDT)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
+ header.a=rsa-sha256 header.s=google header.b=dcYdhyXz
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id CBC0C40792
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 23:53:54 +0000 (UTC)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-85dbc24d398so2898497b3.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 16:53:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787874831; x=1788479631;
+ d=konsulko.com; s=google; t=1787874833; x=1788479633;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=VQwpo7/E2v9iUOez641lI4SvUfSB4O/FPZiB7j2f/fk=;
- b=pPeBnjO6jiiFqA78A8ZKS9I1wozX/Ov+emjzeu7+d2CDCejOftCVyCuhZP1i7Djnsx
- l8SG00IO92hudAv9XUd1cw1J7p3kk8Kd0tVC3ZeKdwH/hCiJFkJx0BkXRDXRXXAVj0Zy
- xG3TSc/OKylcgmxiwds7c4HhCaB2M8EvUwnhQ=
+ bh=EZZ2pMXeItzlMsGVmOd4qDV8At3QdvEzGufZepO0tP0=;
+ b=dcYdhyXzO14YtMp8Sz6UAyICqO6nydEZjan/smBPGgD3jg6T3+6v+C/tVxpNajZ5+f
+ XZey6zg9oDB4k+Pq75SWK1zBV6w8YdgvQR6aJa5SEH3eKyov6De/XDDGLkgYaW6Vw+Ty
+ MU+LC07Lqhlggs/WJ6ZopVGV0P6RtlBf357bc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787874831; x=1788479631;
+ d=1e100.net; s=20251104; t=1787874833; x=1788479633;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=VQwpo7/E2v9iUOez641lI4SvUfSB4O/FPZiB7j2f/fk=;
- b=bbsYRt4l02PXqjDzHhWRJyQ8sD3TQjXBekR7bBtb7HbyurjePeMmaTSPN0fLCb7L12
- 4qJxF2ir1HsdC52VbEw2C2UEDkDNLsR6YzJvSacIxKw8+bdzHahZ1Q3VaqTUVdj05qvm
- Ky0R1IyG3+mnoXrm8HkPvRPKZ0Uki1n7ir8djhyk6PMi6NQY4ZHQ/7C8RiN98Yg22SsH
- iwb1ngzRU9dH8RcYy89PXMkHQ9RCOETYUaH9LnCO9AIpOxbAIy7zTmMjyNb7mmOL79H5
- 3G7KcHKUH7C9RJLUeaTkHO5FW3VNCmbQYChw2G5CdW5hden78oW+HpltIBi4w7VUF/MR
- /1hQ==
-X-Gm-Message-State: AFuF++nuCSPCivVX80vZcztzPG4NyPfP0vvUjR1lIj/zfFF0mJAbC/IL
- oYrXS0QbnEjU6dX+KsjmnN2jIK+AM6pl1Pe/7QwtnAhDu/zQ4FhzFfEenAM6ZyydAuE=
-X-Gm-Gg: AR+sD12eoza8a2gQqtrXHOjOcnGyktpOzYMrvrdIT82fnT5RZNpUBBJudhTwh8xtLic
- UDEZZRbmWecdY3HRykPcBawtAX3MztBumsPhnEujbb1PI0Uokv5E4EiOPg/Qk+DkdusbqbLMXBg
- dFOiaxC0dLRoiLKIkAzgUxZBYWlILqcQa1IkeRC46LKSoAMeYeQ9/y6nEegdThjCYL7JK4BQR5c
- UMurKnFc2DOor7fo/msXyyNDALHWFImgC5y2Vj8cOE3wx8Wm6Mcy6KdWkiCsrgTu7YShm1VY9Wh
- q7mzmheuTQJ/NJoN7SBobYOagcynU7LjiyMYIuSOeiz0Z4HcrhUUl7lF+Px8nqYc1qnJfetOw1N
- uqt5lFX3JeXKNvXx4B4Eutrv2V+i4SJ9HJ7NfoKieiKTo3eCPOamkSjxDyr0UuPgBYoZkrbyrmi
- YIPrNTpRjpIV+fMXIlsE154vPyRMsEM2DBAN07SdQUKPCKZURf+gJJ1TOFapk8n52BD/puViksl
- wrtjqyaIIv623lOw6VF9rRtjjUPZaOmt/ZP/+5dTlu18N+CqCIZwxWqIkFZCnt+9unowAvknOTi
- QK/EtaFd
-X-Received: by 2002:a05:690c:c513:b0:858:def3:3422 with SMTP id
- 00721157ae682-85d6eff4d34mr15009657b3.27.1787874831655; 
- Thu, 27 Aug 2026 16:53:51 -0700 (PDT)
+ bh=EZZ2pMXeItzlMsGVmOd4qDV8At3QdvEzGufZepO0tP0=;
+ b=QbHonIN+aWwvFyQw1nHJmKp98jD8xRfeDQk2s4oc0fcBQbbJ/0Ygz/2YTbPvxkZ2In
+ x7LZOAvuAz4OUmOcNes203u4xUrnNxGIf+Bq74sZYrkmND4QocjcsrXGr4jPa/1D5myG
+ R4pxfVin7P0nkG63qtROz03tegyRFC6TKPKN+qc310fZzcrZkRIxrLLI2Ez0NtTWGLsX
+ IRtE7cTItcGKz/FEv6wjQyYsGSSn5Z2lsA5yh8tQQdcTtY7VHt7QSuyNXkQ7JqiZZMUQ
+ vKW/htzqAMEjcV2k7AEo0WXZja88LAs0P4pHWoJhVoKcZ3Uk2R1eOG1q/3mD0XRtxnlt
+ 7y7Q==
+X-Gm-Message-State: AFuF++mPQCig3gs5MKsUX+9loVJA3trPQanWJA9Wbu8/fqAfaaTLDMWL
+ gPgeq4H/a0ZttHk7gh+uvu3jGQJmBxT91ZKrV1qz9myluzfo54PVo+sSqEbnBa+vWJ8=
+X-Gm-Gg: AR+sD11z1IJGs0pUldaiiXbfC7KWLafRbC7JJCsDkngQl7Kuj584Zn897kiv5a64fXM
+ Ffybgn/dCTnOyCRj+V7aDaoHDmkO3vk1crkbBZm52g9k9RDDdEId7ka6B4hU7/GwMd6mhBSU2wm
+ mVhX3+OaTmE1/9CLBlzYlOI6ZESfJNV4B4RDBYu142WxNnFHagG9FE4GmSZIIh02+uxBc+FgJij
+ /Tocw6IGk5VgQhSovp373vf8MxplzwAEoVXQeMmGX3HJCRNr7Pals6bVYgShZ43mNOHixjTTFcN
+ 0sjwg9eRlolu+v3s1IAzaSfA9nmoAxV3KtxeeWy/eJtInHt7gr4M442ngEv6e8ZmQF7vKPgbdhs
+ DMJ+UxJv+pYTNtB3MzwuHGaZIfHOA0BguN3S2Ze2wHWkOiiUOa18g6uwSSzGBSfCz2gSvt2Dp7f
+ BMNc51qx0wBPs7NTzawzEdYP/d7E5ojeEscwLLIc9ttveUH3KpqVo9spWUQadD5FzIwan8pYqd+
+ xf/1q74w09fuHt+mZrBkmAx5b3i0Kn38MA4U9InWhxedDn2j2jLNcE++3hvZyXaayHYbMwE6Rzy
+ XFfamDGG
+X-Received: by 2002:a05:690c:a6c7:b0:830:7633:a1aa with SMTP id
+ 00721157ae682-85d6d889bf2mr13382217b3.21.1787874832958; 
+ Thu, 27 Aug 2026 16:53:52 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-85b5c603753sm18626277b3.12.2026.08.27.16.53.50
+ 00721157ae682-85b5c603753sm18626277b3.12.2026.08.27.16.53.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2026 16:53:50 -0700 (PDT)
+ Thu, 27 Aug 2026 16:53:52 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.u-boot-project.org, 
- Pranav Rajendran <pranavkasthuri@gmail.com>
-Cc: joaomarcos.costa@bootlin.com, richard.genoud@bootlin.com, 
- thomas.petazzoni@bootlin.com, miquel.raynal@bootlin.com
-In-Reply-To: <20260815220115.11335-1-pranavkasthuri@gmail.com>
-References: <20260815220115.11335-1-pranavkasthuri@gmail.com>
-Subject: Re: [PATCH v1 0/2] fs/squashfs: bounds checks on image-controlled
- offsets
-Message-Id: <178787483023.52175.17385631781199807900.b4-ty@konsulko.com>
-Date: Thu, 27 Aug 2026 17:53:50 -0600
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Joao Marcos Costa <joaomarcos.costa@bootlin.com>, 
+ u-boot@lists.u-boot-project.org, 
+ Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+Cc: Richard Genoud <richard.genoud@bootlin.com>, 
+ Michael Zimmermann <sigmaepsilon92@gmail.com>, 
+ Eric Kilmer <eric.kilmer@trailofbits.com>, Argus <argus@byteray.co.uk>
+In-Reply-To: <20260728-sqfs-oob-fix-v2-0-077d9f0e01c4@byteray.co.uk>
+References: <20260728-sqfs-oob-fix-v2-0-077d9f0e01c4@byteray.co.uk>
+Subject: Re: [PATCH v2 0/2] fs/squashfs: fix directory table integer overflow
+Message-Id: <178787483181.52175.617457714412656629.b4-ty@konsulko.com>
+Date: Thu, 27 Aug 2026 17:53:51 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -125,26 +129,26 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sat, 15 Aug 2026 23:01:13 +0100, Pranav Rajendran wrote:
+On Tue, 28 Jul 2026 08:55:38 +0200, Shahriyar Jalayeri wrote:
 
-> Two out-of-bounds reads reachable from a crafted SquashFS image, found
-> while auditing fs/squashfs for image-controlled values used as buffer
-> offsets without validation. Both were reported to the list earlier; these
-> are the fixes.
+> This fixes an integer overflow in the SquashFS directory-table reader
+> that leads to a heap out-of-bounds write, and adds a regression test.
 > 
-> Patch 1 covers sqfs_frag_lookup(), where the fragment index is checked
-> only against a superblock field that is itself part of the image, and
-> every subsequent access derived from it is unchecked against the buffer
-> that was actually read.
+> sqfs_read_directory_table() sizes the directory table with an int
+> multiply (metablks_count * SQFS_METADATA_BLOCK_SIZE) that wraps for a
+> crafted image, under-allocating the buffer that the fill loop then
+> overruns. It is reached by listing or reading the image (sqfsls /
+> sqfsload). Patch 1 guards the allocation with __builtin_mul_overflow();
+> patch 2 adds a test that a crafted image is rejected.
 > 
 > [...]
 
 Applied to u-boot/main, thanks!
 
-[1/2] fs/squashfs: bound fragment table accesses in sqfs_frag_lookup()
-      commit: fc557ef9fe116b3245265629cf1d3ab4ac7a480c
-[2/2] fs/squashfs: bound the offset returned by sqfs_dir_offset()
-      commit: e007b43a272edae8a63ad66f0151ceaf8cf003c1
+[1/2] fs/squashfs: fix integer overflow in directory table allocation
+      commit: 561ae28cb56a082cfa90c1c421c4955bc215470b
+[2/2] test: squashfs: add directory table overflow regression test
+      commit: 4750bcfe857c5a0feda86b54f260a11a4e3222cd
 -- 
 Tom
 
