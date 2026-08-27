@@ -1,132 +1,131 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24BC0C5DF9D
-	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 08:13:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D590C5DF9D
+	for <u-boot@archiver.kernel.org>; Thu, 27 Aug 2026 08:15:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2308180DC1;
-	Thu, 27 Aug 2026 08:13:35 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id k31bij6RX1II; Thu, 27 Aug 2026 08:13:33 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787818413;
-	bh=S6W0GjvOLsje77xp4P+jRBvs7bZK++S21u0CgVMr8VE=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=UEbTM2iMnyOKbsvX94m/fR6OFAcUOA7HfSVrzK7BKV0VVutKGGoWWHATzEmIhp5YF
-	 EbQ+pDFuCCMaTU13AgeMEKEng9xVbZWuPL1coVua1tIeSeDXDbSlccniK2xA0CQVvB
-	 IdomHW0xBwcOWGzEXKGqIunDzRiVTizPWN5b3xGRP+bgIGLJyIxcZlscvG0QSgzhcp
-	 G/uCYUlMZS80hTczFI//6n/ijMbidptDB3ISKPX5rMKe1atxYRHs5WSS7CBEiNK+dp
-	 w9b+JZaKt4jricxe2N/Ahtfs7morwxjwifBhGOvyu+g1rEt/w3QnoEQeX6/z1ENHkt
-	 UZKvZXyYh/sWw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EB97A80C84;
-	Thu, 27 Aug 2026 08:13:32 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 882A93A4
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:13:31 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 68F29406BC
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:13:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E8A9D406C0;
+	Thu, 27 Aug 2026 08:15:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CfrnhnydiVb5 for <u-boot@lists.u-boot-project.org>;
- Thu, 27 Aug 2026 08:13:30 +0000 (UTC)
+ id tKx1zrnTDGVr; Thu, 27 Aug 2026 08:15:32 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787818532;
+	bh=WYv6CeDPlGiGWWGEZnocBYIwLFqV6uk291juYKGhVLQ=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=LnqywtyK82CIxPa6Ww8IyrEWi9z5STpxjUlJHn/IG4WzhERtZvn+GvgkFgntX5lgS
+	 ax0ez+NixTePecEvtAZdWyRZOTuc5H6uHwIe6oJ4579FLsluzoVhCSzVylLMBnnmEm
+	 Jef2/izAKExON+FpuLo5H72kunyN6WLuR2Rq981mrPKI9stWzsgkFcm5nLq7fFY/th
+	 F19ZKAz9St615LtVgZsAWKCK3sz8KT0azrF3wN4PZU86EPXNSYJaYLaUHsSnyyavBC
+	 Um60iDTqWDQ7g//lhKIjqu0mFqujMG/48kNlGDKVGHOMKB0kgAq9xw/x9wl8mfSvVv
+	 cSwDbzkNNa1uA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5A3934069A;
+	Thu, 27 Aug 2026 08:15:32 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id DE0037AA
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:15:30 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id BF55E4027C
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:15:30 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Yaktg4JpbbSK for <u-boot@lists.u-boot-project.org>;
+ Thu, 27 Aug 2026 08:15:30 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::533; helo=mail-ed1-x533.google.com;
+ client-ip=2a00:1450:4864:20::632; helo=mail-ej1-x632.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=yp/bW4C5
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3676F4069A
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:13:28 +0000 (UTC)
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6a3e145e1bfso467789a12.1
- for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 01:13:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787818407; cv=none;
+ header.s=google header.b=rUPZcIM0
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D7FB4402C5
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 08:15:29 +0000 (UTC)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-c15d3cd51b2so293830666b.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 27 Aug 2026 01:15:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787818527; cv=none;
  d=google.com; s=arc-20260327;
- b=ZxKPZnc/ix0GPhSLfu6FoHv9tXMJDzvKr4AdHu3I7U3DdxXi8T6SbSYOcCs56nNHCl
- UNrRs9shzh0FL+gmyZHA+rduCpG1QtP6vKfFR9N2wO00iWXsX3u+l44PSwhXB80fs5t8
- 7wg0CxxMWatxapdoQG+OF0OOtVEREkiDnUdMHSs0mCluZPQEIQjLpjOnnLdlfbESFF+q
- v7UzPrnUeunX+oDFhzVc7Rw3OF9zAHjTf7t+oHiz2LInn/4/sJbc2P4lIg46CRk1js3k
- jivDTqm+gefzMdKMySQ9/z0F2AglowEv6JXTSip4B0cc1DIHAJ2SesvxgrlqnzSnKAPm
- sX+A==
+ b=ZrUa/wOlSVQo93pmH5xzQdVxw85pSwB4fMRM6oI5WGb2DICPyw8igQXFSV1Em+Zl5h
+ egFERs/2p9QcAgZ5RCsLQ/Qfqh+Ith9n8yweJryg9mSM+iCZSau4ExNy0ILijlIZy4iL
+ NZYAvPWBkNrhOY0WpuArU1xgNHDPIVCrXt4wZJWO+jmlOll4p7U2BQ0M8UeoO4xaCt7o
+ LpgFxdjP4xejvh0vhcdNBkunFJqSKsPsLqErlRlGPWBWwqJPJlOZ9Fm4CTzgjzyIVoNb
+ 0X0O1W3S/+kcjvB7G/7GN6LfAWGUQi4QCTw+4Gf2rK7kMYRKqqHoB8/JR6QoPPISj28/
+ Vn5Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=S6W0GjvOLsje77xp4P+jRBvs7bZK++S21u0CgVMr8VE=;
- fh=evkcmTNAyIb9LvpjeekKM5nvyZFiyByn53Ds1pEzDUE=;
- b=R81j7SzTnG66Zg3MNnWrOsPPrmIBS76rcEhPumohg/IIQM5xzujpfkQohzxJZ3aznZ
- 0KuFWGQzhOuoy+lwedqrdhVElV+QgLbpbTx4B6l2r0TVQYEXEG9wb0FycZlhaGRjUQsY
- rhYxdEvs5mDs5Kui4OUVDBGZZg3bstYSeqyLX1dhipim8prCjcoDVCbEizlKUazTbG2p
- /rGBrQl2KNfJG4xIZTFz74am4wypkSO+PbumaHEKTDvWwEjRvvS5oOjJqSFJrk1Ook80
- 2eTYQxkmSkWGNMFMyl0v9IZ7DNoE6fd2Xc48O/LMhCRbCs5OvcLb3RN248oB3hosm5v6
- sA8g==; darn=lists.u-boot-project.org
+ bh=WYv6CeDPlGiGWWGEZnocBYIwLFqV6uk291juYKGhVLQ=;
+ fh=j//M4a/wx93vMKVQEAxvjggxlisEMeBn+vVvx9MVDeI=;
+ b=ILsPHE4sKJ9Z0LBk5y27MsozXeNx8LFOKu2rAVbqRNX5w9QRkDc0OjTP9EP6yq7LFg
+ iMFyKJNNihFWIk54fR/CEhV9PqWUwlcoozGYTdPk58Hn8WdinOZ26UkNsRxkNRwaO5Xw
+ 80bm7A7IFufsUQYdN0KH/j0AdCDutUQZU/gPfXk92Zl8j7Y7u+yCWNpM07vtPD2vTVed
+ kpib59l98Q7I1IY2In3CflWNYAPEhXtqHCm713Udl4kS+CN2eHLO499g/KIXzkBWMwUZ
+ aWvo1cy/wmYobNu0FrMgi5R6aEV3UQAZzOhBD28iIhj8slMpK9DiOecxy3PjFsgjPk1V
+ +QEg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1787818407; x=1788423207;
+ d=flipper.net; s=google; t=1787818527; x=1788423327;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=S6W0GjvOLsje77xp4P+jRBvs7bZK++S21u0CgVMr8VE=;
- b=yp/bW4C5I1Ah3Al+lLsWr7/QAUv6F0MoHsi1HGw2kz2wR8rmYO5/i1E87VepL6yiNp
- 6P4NR9OuGpxuUvhy7Q2dYnJIzKDQ3i1W6csQYMliO5PVsHaNxSpPMPobIrawtqYQsl5P
- FeiClSWJWk8aloI/5W6eerTadCm6YjMcoSEABRcj3xBFi+8gqrKv58yzY+UM4hnmVCki
- n/ErdmCxsKrRhC+9H9UqnxExqhgpAXLOfTvfc8RM9K7u3WjU74bFtRldZiN4aU9CBeGS
- CaE+c0S1vjfvfBEDLIfWs+ijUvSn3Hmu/eIZMGzXY+I3FhwzZCnF8LtegVcdDRE7Cv2T
- ezPw==
+ bh=WYv6CeDPlGiGWWGEZnocBYIwLFqV6uk291juYKGhVLQ=;
+ b=rUPZcIM0KdSRVMg5+haRPc+J9ON07XaQ6ya56zKb2LRCqH91Po5smH0fv2ybAyCHXM
+ 4UZ3rPF41wNBZbvgMDpvf3u1AzrDqfjomlGXAOdxDjfIOq8n4x1MwM7oDf5kG6wxyGFH
+ 2FDqz4Qfm+kXe6Lw+17z4cL2Ded/0JDx5xFEAVwojA08Y/aKWMruPmFYzyzKfAYgM1HZ
+ SR58mNyUrqZaA/+NcBkA9tRDJbnazHKW2eYe/sH+lZBB37MXKp9Y84AahYAtb1BHQ4r9
+ 58gBcxaxNpkxIm+hKWGQGupF96kMZeDRR2YfhVjfG6l4+hxP0Emd2x7NSpG407wlQgTs
+ dpUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787818407; x=1788423207;
+ d=1e100.net; s=20251104; t=1787818527; x=1788423327;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=S6W0GjvOLsje77xp4P+jRBvs7bZK++S21u0CgVMr8VE=;
- b=LtVhU8qR9oeWuq6R/t6KCuJQ4Xe8spxqm1Hay2EQK0N1/MGOo/S2Y2WThIbJoOgPSt
- pHiVni/gbTpIYvPQcI85rOt7UIlPnH2MQQ8yZlvmTVlGwp1xf9K3pk2nYQQPncR6gT0T
- tsdDdl1/BzOkBza+z3jQcJ2Aa20OUZJ/RBEEvGUz0neg4HcA6L3Q3B52vMnjH12NEaFe
- l/DS6i339fN96Oz17gay2u6ahnuW2VCNfHXltSxzT6fgkaV0i7X0RtcRyeQ3pc2E45gr
- +T5H36IwWa7AVxcsi4rDY6B57NzO92qvA99JKzy7i9Btap7s8svKKYaKd3/hNQ0MMD6t
- 9FOA==
+ bh=WYv6CeDPlGiGWWGEZnocBYIwLFqV6uk291juYKGhVLQ=;
+ b=AHhlWhes+GbH8n+iXrw/FfejgWNcM4fTW22uehUE+vgtuyDLaXK0SKNTFoRORk0/8u
+ ny+MbZZTUrJHubVUPaoaI0Hkg5kVpXdoIhK6Sq6CmFXobGEWQOJSWUbyYtXawDur2huP
+ 9MkPMzCkAyDhRyS0XrUQIoD5tWIOykqiAADlifLpLRPmElF23r7c8fZDG4rRw074amxH
+ gKIcyPiYW8fVEA3UAQ8MRAhaKEwQfvtNn/opA2fREFGSj/3FllLMgJH3XvCseOawQYvD
+ mB5rsBJNs9Eb4SnegjRcnsuwDA5CZrAXd/tLBoLPx7Y0j6dXOAkFEmwB3bz7Q/UsKR+d
+ yRgw==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rr4xqVAMpzyrpzzNCMPUqejKVpQkw2gtZ5W19nCXU1YnKGV4BhsKrP3MmHQ2L7oweKDLKk8MEw=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mISHNjQzSMqHbXRnx756eaiBMPPdEfBW5pHnYIrG88KGmWxJSh
- RqIPATZsi6RI8JM2AFglZ/fQLg1rTD7A74/lnG3XI9oSicPXqv1P7jDVMcdhwckNDFN7RJcHpGb
- bwTfCU9UVVtfmYcCtuWbsbUEVQWefRODZAmqQ5h/NKg==
-X-Gm-Gg: AR+sD10GtbHEgXcPqTRYTKvr9GZ9Yg9fD/+BGZJKRDmHdW7Q+KKVSbYXbDfiERDuo7M
- bTVoS/4g5V9dUZN/JVSb63vtirkkCaOqECLNrd/PrmZHvYyzps2nC6tG96sB7KAK6xhh/ot+3WH
- 2JmaGi1xkqXAHKKjxFnU9RGjogALRQrlWK1fVXyx2J5ynFB13h6dvGdqPk55edLPD2Qcx17I5vD
- 92i4blqOlWLVi3hA7SsOLjNu9sWmD7OXc3Y1dxk04Q0shnLIU6MA34v9IBD9YV7i6m5qJaj5u3l
- MFqzj5t6C+gmg/sT9PNoXCUBcsEIpC2ixPqR6nIKdLJGwBe2EYBoZAIAq1yZ/Jo8pHuCtcuKOav
- AMXL08ocUAyQ=
-X-Received: by 2002:a17:907:6093:b0:c08:417e:3696 with SMTP id
- a640c23a62f3a-c250c318ec5mr1300892366b.20.1787818406586; Thu, 27 Aug 2026
- 01:13:26 -0700 (PDT)
+ AHgh+RrG01/sYfhsVmPDcwgoDNDDuCSzTycNeC4a7fVxkWrHZStkc1rptIYsLEaHSgs//Fsyk1Z20WU=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lBba4UEmCsLybhZkw7KXHtTqcLm/2+te/XICRKuovyc1kNX5sw
+ adilsQtBEU2TmeGj6DzoAyDrgtZ45MdiCYbKWbtTx/yr0trQ/TeOtVZaNiFiqXW9/qQG/Lc2uj5
+ MY2QMRha50bErTaNOyrxj8I2/DPEjbqoFoNsznBF8vA==
+X-Gm-Gg: AR+sD10h2rm63Y8EtrTG5jXl4uqBu3h+N7NlH7PEdoBrCUsYZAVBohR7KaZnc03iA6i
+ JbaMbEP+R6NL5B+4DeZbIfLoKp0cxwGlk5Od0JINEMO22EEpNqzgoTkRkcbmO9yDzV9AjkcI01q
+ zoLDqRsT+qsIu4y1+RcLir++FUpJcuv2vu4SFWmVV2HQ0k/k7Bskbg6oNRnaT7wZxZZIyFgudgo
+ LQ9cz+S7C5BbeAG5JexVgq2crzsI7pwZ9pFOE0WgxcRbCGTZanUki+jYSoaomaplrnDtfCOAfsv
+ Ph/bnYX6V1wHDWVJOhP5/dSiyrrVjvlfIZL5XD9WoxWjMhCE4xjZnw+FCR8ItYrkN4fslkK1Nj4
+ Xog==
+X-Received: by 2002:a17:907:c8c6:b0:c24:6985:d7a1 with SMTP id
+ a640c23a62f3a-c250bbcdcb2mr1441731566b.7.1787818527161; Thu, 27 Aug 2026
+ 01:15:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
- <20260731-gpt-4k-v1-1-a3f1f16b53ae@flipper.net>
- <73745748-eeb0-4dd8-ba15-6c220037b330@canonical.com>
-In-Reply-To: <73745748-eeb0-4dd8-ba15-6c220037b330@canonical.com>
+ <20260731-gpt-4k-v1-2-a3f1f16b53ae@flipper.net>
+ <e71a191a-1388-461d-bc87-9131e1a4879f@canonical.com>
+In-Reply-To: <e71a191a-1388-461d-bc87-9131e1a4879f@canonical.com>
 From: Alexey Charkov <alchark@flipper.net>
-Date: Thu, 27 Aug 2026 12:13:17 +0400
-X-Gm-Features: AcwNN1U9XoTPFf9PGCyGqmVBLxPrClqlSh5_ah1scwQ7AXlDqnf_-MxlXTMxWK8
-Message-ID: <CAKTNdwHh-MKxHYDjWNgC97Th-4BwbrPoB4irAdBbA7QMa9fBjQ@mail.gmail.com>
-Subject: Re: [PATCH 1/6] disk: part_efi: Size the partition entry array from
- the block size
+Date: Thu, 27 Aug 2026 12:15:19 +0400
+X-Gm-Features: AcwNN1X6T1Z6MwrX81RVAbvu5Ly7UesVZX86936fh0xv7syBZTYIIT6gaReEkJk
+Message-ID: <CAKTNdwFebx34Bvz+Tpj=ay-uK7s6f=qcRXTgCpb=bRczw9x9KA@mail.gmail.com>
+Subject: Re: [PATCH 2/6] disk: part_efi: Add missing endianness conversions
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Anton Burticica <mouse@ya.ru>, 
  Javier Martinez Canillas <javierm@redhat.com>, Simon Glass <sjg@chromium.org>, 
@@ -157,44 +156,42 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 Hello Heinrich,
 
-On Tue, Aug 25, 2026 at 10:47=E2=80=AFPM Heinrich Schuchardt
+On Tue, Aug 25, 2026 at 11:03=E2=80=AFPM Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
 > On 7/31/26 14:40, Alexey Charkov wrote:
-> > gpt_fill_header() computes last_usable_lba and first_usable_lba from
-> > hardcoded block counts that silently assumes 512-byte sectors and the
+> > Several GPT header fields are read without converting from
+> > little-endian, which is wrong on big-endian hosts.
+> >
+> > gpt_fill_pte() takes my_lba and partition_entry_lba raw when working ou=
+t
+> > the region a partition must not overlap, so on a big-endian host both
+> > bounds are byte-swapped garbage and the overlap check does not do
+> > anything useful.
+> >
+> > gpt_verify_partitions() compares the loop counter against
+> > num_partition_entries raw, so its "More partitions than allowed!" guard
+> > never triggers.
+> >
+> > It also swaps gpt_part_size, which is already in host order, having bee=
+n
+> > computed from two le64_to_cpu() results a few lines above. Drop the
+> > conversion rather than adding one.
+> >
+> > All of this is a no-op on little-endian targets.
+> >
+> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
 >
-> Hello Alexey,
+> This change is not covered by the test in patch 6/6 as it runs only on
+> the sandbox.
 >
-> Thank you for fixing this issue.
+> Please, ensure that the GPT tests are also executed on a big-endian
+> systems, e.g malta64_defconfig which run in the CI via QEMU.
 >
-> Nits:
->
-> %s/assumes/assume/
+> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Ack
-
-> > default number of partition entries.
->  > > The partition entry array holds GPT_ENTRY_NUMBERS entries of 128 byt=
-es
-> > each, so the number of blocks it needs depends on both the entry count
->
-> The size of the partition table entries is not fixed to 128 bytes.
-> Instead it is 128 * 2 ** n with n >=3D 0. The size is stored in field
-> SizeOfPartitionEntry of the partition table header.
->
-> You already consider this value in gpt_pte_blocks(). It is just the
-> commit message that is misleading.
-
-Ack
-
-> > and the block size. write_gpt_table() derives that count correctly and
-> > writes the backup array at last_usable_lba + 1, so whenever the two
-> > disagree the backup array no longer immediately precedes the backup GPT
->
-> It remains unclear which two values might "disagree".
-
-Will reword in v2, thank you for looking into this!
+I've added malta64 based tests in my WIP v2 version and caught more of
+the same :) Thanks for the suggestion!
 
 Best regards,
 Alexey
