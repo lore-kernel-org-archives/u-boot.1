@@ -1,44 +1,45 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF63BC61DBD
-	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 04:28:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EB20C61DBD
+	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 04:28:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7A36960725;
-	Fri, 28 Aug 2026 04:28:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A4CCA40840;
+	Fri, 28 Aug 2026 04:28:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DhaZqkmmNGOw; Fri, 28 Aug 2026 04:28:45 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xhljFPfPk0eN; Fri, 28 Aug 2026 04:28:51 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787891325;
-	bh=YJxPR8d+zhz6/6ZS3dukQHM9Lmpi7Qt7kN/WAcnOHAc=;
-	h=From:To:CC:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=sx+dJXWBhmpSkIx2V/24QtRlKQIrLV+Wk1XAnYoYIg7hzfYPKPA70QBVg7AmttS82
-	 dSlCMBD+8Dk/Vh3zV4Cy1t/eiqzleR4Ih4qXhMtEDX1pvkL840ndXidRFiEACXG0wR
-	 swUBBTSl1DyjBi7vwiQiXIlAlW3NE0IFOWM813krOjOvimQYK8DRp/tjUyH/XZJthk
-	 OEb9pIQP9AqqFdwEiA7JVawBW/72TJJyU7VVz2NRx1NUTgUeeqcK9iAcUlDvjNM2L5
-	 iLR6tFA8LrVxGVc1vrlsamzP6g5wrNo+8WqiBQKA+0oBYJufPQ+CXCuG146t5Fs6ea
-	 iSE2YFa/13TDQ==
+	d=lists.u-boot-project.org; s=default; t=1787891331;
+	bh=m5B3DKuZfmw4BS1zupVa7GSS3rzR85U+ckO8cHigIZg=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=KqVsYd+Q+CUjeTKdrsbz3ZrHtIBC+O40imDmec26YxMavRNSCc902tUwOmZhfC4np
+	 QnSHEoyxF6FywIEZ0VYV8rNgY7tPEIANsT7Ub034TT+noyMK25goZ0FmFy+wiPeNwE
+	 HQl6NWCSi0hSmmvXgIznAZMgQAIymEFG74O8wAjcgYKRKEf65R92RCvSYEvp1zNzh+
+	 /wK8G/MTi8lSusFAMfcp2XXD4vxnzHV9KSOzMHUQ6Rks9+1ZUuAxm/EmUe/EByWryi
+	 TgM0LOh5v3AFO4P5PhD0f4Oupv/s4FjIUgJ8sfOh+WmKqQRwW0vDV5OP8+4pExbKQz
+	 anGhI/AoDr2BQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7727D606B9;
-	Fri, 28 Aug 2026 04:28:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9205340825;
+	Fri, 28 Aug 2026 04:28:51 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 729E523E
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 04:28:44 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id B9AC7CBC
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 04:28:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 58D1140111
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 04:28:44 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A02F740176
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 04:28:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4MfcZ-zpRE0M for <u-boot@lists.u-boot-project.org>;
- Fri, 28 Aug 2026 04:28:43 +0000 (UTC)
+ id BCIT96iqdAUD for <u-boot@lists.u-boot-project.org>;
+ Fri, 28 Aug 2026 04:28:48 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a01:111:f403:c107::1;
  helo=ph8pr06cu001.outbound.protection.outlook.com;
@@ -47,90 +48,96 @@ Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=Qb6bYreM
+ header.s=selector1 header.b=FK0dp7f0
 Received: from PH8PR06CU001.outbound.protection.outlook.com
  (mail-westus3azlp170120001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c107::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5740140063
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 04:28:41 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A39B840111
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 04:28:48 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BpHIpQvUVtWrHrTxNdPYETyQRO6ZE0mnuIerKTsAHcN4iPYs9PcGSYs4FrMG7k3N5DnqJWwhUlTJ78uTC8jMSkpWoSpEVc+kDNF3vlVjT0qUJSDXp5+RoKc2aHHOucYapUuKNaPcqp7HLmT9iihB2FBuGKu8cAuAJQtXtesxnPegVoLO5FPWeWYPfNdt2PNuHTVQFw1OrDsEUbT7q40KTWNoimg9TeS4wYGtwebyFaaEGm8EpqaXXqWxldkLe+VyNSdA9bZatzXfXWEEybGp434FPrXEy/nW1UK5ysIM2HPtFTe2LRVPr7elCCLJs45IQWcgnC7CMbLdhwTBEVDVyA==
+ b=HuOzOPUmXieCei1XfDKxpIV3ZzpXQu5sLPBM5yfTGhdaqI9uYenUI9d48XIJHoGFfuJHjdHq9K1URg2S5Q78Z+4fhx4zLqe33iq5GcWY+geIgq1OffviI+LgsXdjWwejrjfHntRGrVM6mSjdk9ZTeReUm/xPIVakQ+46bfsfmXt/ebKBUe+CsTgJ9PUpBZRiA+zmgVa6S3xxyj8KF9eipt9aXCTHOIKcG+dFtBhwmQvBxYqLnoykPf+3ciQOIp6ETUXFovzVcmfzx/pMzYKDioXYCaSbqRRz3idoF6BFQIpfhN6LwVKLQtyTK27+eWDzc9qectYfrncOC6s5OUiFXg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YJxPR8d+zhz6/6ZS3dukQHM9Lmpi7Qt7kN/WAcnOHAc=;
- b=lJ+tFkXjmQL/o41QMC5OxtWd2OivF0xT2SGbdA62SEKRo4B9OJP8911C2mUNNiDTT4zdlu2BBw8h+EiWH9nACQw2R+7yDGOuEaphbIgU3VClm9B9WHc3UIkUosGg1hFu60aT7p5YkfwZDCJX94KOH1txpTi1iNcHBz7ljWD+9jTisl3I/oWGyYCJkFiPtRurna/DmkFFNEGMXy5M+9EcdXvyUhm859piAvBdYHsue+CEAKLYPEPgZwyPLiqBhtpzmgaT1jVOhX5wdCR8uYnOgPmXNqmiD/En3b9A11hWOxnldpGa9eJXsaxlbdplsOJHFaUkFs1fJ1Lm7fR9vPcn9A==
+ bh=m5B3DKuZfmw4BS1zupVa7GSS3rzR85U+ckO8cHigIZg=;
+ b=qkBbpfSca3VWBbp05tO5XZPZvP8QSBAVIxyQYGEJazi4ZpjNAwBDYvjfUFmkcYVmMSAajcTr8Ueqcvowv/7PQPVErknKBAcpHVrwMdUO+ugMR12NkLJihzltLatNhdOzn9R6isFYmYXyq2RG7uP17LwV5Ck4pfQqdnbPHFQTzdsVjx2PmKzy+si2rJYDPcpONZzzhJ4jqKppOnLQxveTa/ngCrkGfi9VRQq5gI2cO1myz5/H8VuyLjH6PuBHqpOG7EHpikkKSJ68QNn/yc0wxTiYUE8uK4Kf7MB/50v18zzV2cAwG5El6llMNo/EgO5uH0kvUI2yUI7uoPCNHXMK4Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
  action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YJxPR8d+zhz6/6ZS3dukQHM9Lmpi7Qt7kN/WAcnOHAc=;
- b=Qb6bYreMySXdG2h7HuulKfW175LZ+JGWL+BOcvw1EVvRbNMcjTghAkY+IAuLhVTsP9L4jzi5nC9YQRIhq7cud7xqo8IQhig57vTfCKx0Ybp7eJGLKsHyxU7yL/zRyyfLoSA5dUbGQo+zfgOzPCJwNPEOo378+qa41EZRfc6rf8s=
-Received: from CYZPR02CA0023.namprd02.prod.outlook.com (2603:10b6:930:a1::21)
- by BL4PR12MB9533.namprd12.prod.outlook.com (2603:10b6:208:58f::21)
+ bh=m5B3DKuZfmw4BS1zupVa7GSS3rzR85U+ckO8cHigIZg=;
+ b=FK0dp7f0HCETgDMhT4LmIukPVrfZKByuoq2r+GToitahP/ovc20BSuZNxlf2tMFVx00j9I4c5UCUOI6JEKYvM3NsLrin/5eHWpgSIT5M+e+47l5oHslTHfWb8UqGa9TRyy1GR6klQUYArtjmj+NMFb2jNPFwKrdQI7qnnZzxQfk=
+Received: from MW3PR05CA0005.namprd05.prod.outlook.com (2603:10b6:303:2b::10)
+ by MN0PR12MB6032.namprd12.prod.outlook.com (2603:10b6:208:3cc::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Fri, 28 Aug
- 2026 04:28:39 +0000
-Received: from CY4PEPF0000E9D6.namprd05.prod.outlook.com
- (2603:10b6:930:a1:cafe::63) by CYZPR02CA0023.outlook.office365.com
- (2603:10b6:930:a1::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.10 via Frontend Transport; Fri,
- 28 Aug 2026 04:28:39 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.10; Fri, 28 Aug
+ 2026 04:28:44 +0000
+Received: from CO1PEPF00012E81.namprd03.prod.outlook.com
+ (2603:10b6:303:2b:cafe::6e) by MW3PR05CA0005.outlook.office365.com
+ (2603:10b6:303:2b::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.8 via Frontend Transport; Fri, 28
+ Aug 2026 04:28:43 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CY4PEPF0000E9D6.mail.protection.outlook.com (10.167.241.69) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CO1PEPF00012E81.mail.protection.outlook.com (10.167.249.56) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.382.8 via Frontend Transport; Fri, 28 Aug 2026 04:28:37 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.382.8 via Frontend Transport; Fri, 28 Aug 2026 04:28:43 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 27 Aug
- 2026 23:28:36 -0500
+ 2026 23:28:42 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 27 Aug
+ 2026 23:28:41 -0500
 Received: from xhdpabegari40x.xilinx.com (10.180.168.240) by
  satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.45 via Frontend Transport; Thu, 27 Aug 2026 23:28:35 -0500
+ 15.2.2562.45 via Frontend Transport; Thu, 27 Aug 2026 23:28:40 -0500
 From: Padmarao Begari <padmarao.begari@amd.com>
 To: <u-boot@lists.u-boot-project.org>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>
-Subject: [PATCH v2 0/2] efi_loader: show drive details in the boot menu
-Date: Fri, 28 Aug 2026 09:57:56 +0530
-Message-ID: <20260828042828.3421664-1-padmarao.begari@amd.com>
+CC: <git@amd.com>, <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/2] lib: display_options: add snprint_size()
+Date: Fri, 28 Aug 2026 09:57:57 +0530
+Message-ID: <20260828042828.3421664-2-padmarao.begari@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260828042828.3421664-1-padmarao.begari@amd.com>
+References: <20260828042828.3421664-1-padmarao.begari@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D6:EE_|BL4PR12MB9533:EE_
-X-MS-Office365-Filtering-Correlation-Id: 13ee859f-6595-437b-fb0d-08df04bcd4a7
+X-MS-TrafficTypeDiagnostic: CO1PEPF00012E81:EE_|MN0PR12MB6032:EE_
+X-MS-Office365-Filtering-Correlation-Id: 15fd056c-9f4f-4276-d461-08df04bcd80f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|82310400026|1800799024|23010399003|10067099003|11063799006|56012099006|18002099003;
-X-Microsoft-Antispam-Message-Info: UGIbijqaoP2K5GOuGzCRad4kxK0KoDWQuA8FUR9e23bti3MbSswh0g5zryx51X3TcQbCqZqnn5WVt212GxtYFVRw5P/tDuCRwCAcOe1ZMsIE0VMUW2XpjEN5uZbGOvzlgGIsLdFISyVspvwxqtiqee7wJrAaFpXkO+iCsf+x4IhRf5elqvCkCSREy9VmThg7eQcBFCaFK+EtcK2Gyz7dsWWeWORnVZ6bx+Q1wHZB8ZjkANAPIZEaxpa0aaqahu0sYwvArzHYdwUHULwJF02ohDyNYOapd5SFVhYDK4kFagWJLFVNmDgx2otT74vMJL+AGEslWwaZiUPqkOm7YLbQVyVm9kLw/C7PXxV7iVBSw1EYK793KDZjB/3pU53qRuWeIE0818KvDVwfrgl5XfdGa+Q1lP1xCPhG0UY8bOHRox16ycRYYaYMClJpzj08XlIO8vLHcWtmuL+2GNtajYvg3RX1bQ3wqIkOslIa6x3FWAj0CEsOdaL3vUrBBh1v5tDY41HkJp/lB2M+HM6bqVg4o+4dX31ri3EqJ77FPecBU+4mtd2j8aydDrXgS/G4OPtm8U1GzpknUbSFGqcweQnjT3bWYfbVNGx4omHnQ/mGykl6i3acGhMWOjXrDhdcBMo6E2UnU9+pMSQorvCBlbU4/2G5j8Nj2JQqNXRpF6Obl85rkJlbcezjZ67Vf9DX7yNa1J+GlQKmrSwLrOeNdLY26A==
+ ARA:13230040|23010399003|82310400026|36860700016|376014|1800799024|10067099003|11063799006|56012099006|3023799007|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: mC+cgLyAXHAwmfjmYyHI7HpDUwKM9ElQedAWO9HMi9C+DPjdsU2LbXvJ9TkUaLbrW8oZAEN6DfdQwA2m+gosnbxH9HxLmaI15hBizN7EPKSSmK59iSBNAikAC+nTN0m4mNfhV8JdgY2d0If1p2ecogL3bbiZ8hLVOHnUcbu8j6bIUQSro9sB+7aNpnEhGSTiU2cAKoUxXevWO0/Sbhl2iUKrkJZwYqRMbAmbqMuA7tbCeNawhOpL6Vsc3UdAve7Za+r8Gzx9rQR4Dw+ZtMXPMxTBJdVRp9ogK6rUXyMrrSC3i6+x6GcNF5364fUSAWauKkcu1fsnrL9kTJ4UdKt8abKpDRKMnKUg5jRzCmRQO4M14REjga+s8GbvQcZoiA7TUNkPTl+XZI/GqvoraIXKRsa9c/2Wm4mBxhUtgamiryUDOtE06T5UIXVra3akP6oHXwqsTQk1/MhalB2poDBynhhfsAUw9YYJiiRLWCpov3ZxRJh8Q/Gd0G4GAWumfhlhWAkMbpLpwS5GY1i/yzId74pT0btm+py6fLsTVqyFNdJ8unkd4a87Vd0DxHbXheKcj+saerrfZAcnCK893EejBSHM5Gv+NJped9CJwCr8XDlKqw5Gh2ZzPjEGMjzjwBcm/21wHeNk7cahNRyhryr6nDoWKgWr/CbPnLCWXxoKG04/y6Jb9WhFsSxEvaXx5RQYToQF8kzaDMZfXXWlxWcUtQ==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(23010399003)(10067099003)(11063799006)(56012099006)(18002099003);
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(23010399003)(82310400026)(36860700016)(376014)(1800799024)(10067099003)(11063799006)(56012099006)(3023799007)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: lBmd2VsfhwSD2cPUVhE1TNpbwTdsczbvz4uoJsWt5izhXOGU+M8cSpg8J71oQEioLzq/+uxvhgByTE8rRZAydDxi8XI2QJh7KGjLihDDP/jidAQLPnk0e+meuHhAEn1bofA2MJgeRYlHobpZNRnLO9SaYkBEBOBz4bro5F4kDA5tMBJ9xJ/lNXWMPpTa1RiPJo1JGVJcf+SPNyI22QpImWGfBq2SboWoKlNz9HINIOi2teY/MQQ5Mg6G4KKh4SwclX8+I2Rf6NRzA0PcTz23CfNn9z2nL3ILZaFScTptkgdRht63IXZFI/a4ZQwBCcjz/slEvaPMC8VqOz8hD0tHZaNVLdaRo9uL3f+2zk8mloIUAlil/IFTYh9U8HCfASlaNTMu8VOMsMZ7a2nUPWeoDKdjED1J16uKVmjj739SIZAWdxU6RqewlhRdVVXAkBwI
+X-MS-Exchange-AntiSpam-MessageData-0: tRIayxS0XavyONTdQ/XjY8hosk27M6V73bGajRfUda9Azc0FZn8SgmCXRExdfHbeMRsNEFV4g775o6oUKkFzSrVp2w8wfBB71KkV2b9YPR06mJMsPkoIA2Gvmt2eTOkOpVi9ZnUAzenlJKPSh1LT/HxVzINqLlcPLYZ+VqGjsmjmnyuru76pUMwK9VQ5yB0Yxe/hVwRffajhOhnRxgq7OaRBkwKi4rrLrcGTXrQyn9VcGEBx6NtSDwdlpX4XZkyxMVF4u7qo5pgV1n+zQh9dW8GCGvwbsoATBiDBzRbDNwtRKbbwDKypaCNQM/iqzF69on6/I4fV0573pwITxvN7KEDiVOlU1XlzlMYIX4LYWDUCh7CW71DcXv1pBHOA4gl5ZbiqzjgiZRo+7m5nsypJzAwCcla3XsxktL90w3yaO6S0s0HghG7rGY0GPbTb1G2Y
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2026 04:28:37.7169 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 13ee859f-6595-437b-fb0d-08df04bcd4a7
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2026 04:28:43.3794 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 15fd056c-9f4f-4276-d461-08df04bcd80f
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D6.namprd05.prod.outlook.com
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF00012E81.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL4PR12MB9533
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6032
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,34 +151,97 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The EFI boot menu only shows entries like "usb 0" or "scsi 0", which is
-of little help when several drives of the same type are attached. Append
-the capacity and the vendor/product strings of the drive so that the
-entries read:
+print_size() formats a size with a binary unit, but can only write
+it to the console. Move the formatting into a new snprint_size()
+helper which writes to a buffer and let print_size() use it, so that
+callers which build up a string, e.g. a boot menu entry, can present
+sizes the same way as the console output does.
 
-    usb 0 (29.7 GiB, Generic Ultra HS-COMBO)
-    usb 1 (28.6 GiB, USB SanDisk 3.2Gen1)
-    scsi 0 (1 GiB, MICRON MT064GBCAV1U31AA)
-
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+---
 Changes in v2:
-- Address Heinrich Schuchardt review comments
-- Reuse the print_size() formatting
-- Add a new snprint_size() helper
-- Build the suffix with a single snprintf() instead of a chain of
-  strlcat() calls.
-- Limit the name to 64 instead of 128 characters.
-- Document the limitation in the commit message.
+- New patch, replaces the open-coded unit selection of the v1 patch.
+---
+ include/display_options.h | 18 ++++++++++++++++++
+ lib/display_options.c     | 22 ++++++++++++++--------
+ 2 files changed, 32 insertions(+), 8 deletions(-)
 
-Padmarao Begari (2):
-  lib: display_options: add snprint_size()
-  efi_loader: expand disk device names with drive details
-
- include/display_options.h | 18 +++++++++++
- include/efi_loader.h      | 12 +++++--
- lib/display_options.c     | 22 ++++++++-----
- lib/efi_loader/efi_disk.c | 66 ++++++++++++++++++++++++++++++++++++++-
- 4 files changed, 107 insertions(+), 11 deletions(-)
-
+diff --git a/include/display_options.h b/include/display_options.h
+index 66e59607737..2baf6859917 100644
+--- a/include/display_options.h
++++ b/include/display_options.h
+@@ -11,6 +11,24 @@
+ 
+ #include <linux/types.h>
+ 
++/* Maximum length of a string produced by snprint_size(), including the NUL */
++#define SIZE_STR_LEN	32
++
++/**
++ * snprint_size() - Write a size with a unit to a buffer
++ *
++ * Format sizes as "xxx KiB", "xxx.y KiB", "xxx MiB", "xxx.y MiB",
++ * xxx GiB, xxx.y GiB, etc as needed. Sizes below 1 KiB are formatted as
++ * "xxx Bytes".
++ *
++ * @buf:	Buffer to write to
++ * @bufsize:	Size of @buf in bytes
++ * @size:	Size to format
++ * Return:	number of characters which would be written if @buf were large
++ *		enough, not counting the terminating NUL (as with snprintf())
++ */
++int snprint_size(char *buf, size_t bufsize, uint64_t size);
++
+ /**
+  * print_size() - Print a size with a suffix
+  *
+diff --git a/lib/display_options.c b/lib/display_options.c
+index 2c15cc5b5c4..287eb247061 100644
+--- a/lib/display_options.c
++++ b/lib/display_options.c
+@@ -93,7 +93,7 @@ void print_freq(uint64_t freq, const char *s)
+ 	printf(" %cHz%s", c, s);
+ }
+ 
+-void print_size(uint64_t size, const char *s)
++int snprint_size(char *buf, size_t bufsize, uint64_t size)
+ {
+ 	unsigned long m = 0, n;
+ 	uint64_t f;
+@@ -115,8 +115,7 @@ void print_size(uint64_t size, const char *s)
+ 		 * We have just checked that the size is small enought to fit
+ 		 * unsigned int safely.
+ 		 */
+-		printf("%u Bytes%s", (unsigned int)size, s);
+-		return;
++		return snprintf(buf, bufsize, "%u Bytes", (unsigned int)size);
+ 	}
+ 
+ 	n = size >> d;
+@@ -138,11 +137,18 @@ void print_size(uint64_t size, const char *s)
+ 		}
+ 	}
+ 
+-	printf ("%lu", n);
+-	if (m) {
+-		printf (".%ld", m);
+-	}
+-	printf (" %ciB%s", c, s);
++	if (m)
++		return snprintf(buf, bufsize, "%lu.%ld %ciB", n, m, c);
++
++	return snprintf(buf, bufsize, "%lu %ciB", n, c);
++}
++
++void print_size(uint64_t size, const char *s)
++{
++	char buf[SIZE_STR_LEN];
++
++	snprint_size(buf, sizeof(buf), size);
++	printf("%s%s", buf, s);
+ }
+ 
+ #define MAX_LINE_LENGTH_BYTES		64
 -- 
 2.34.1
 
