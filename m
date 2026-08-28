@@ -1,141 +1,192 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C14EC61DBD
-	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 04:29:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D20C61DD3
+	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 07:40:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0D6C06072C;
-	Fri, 28 Aug 2026 04:29:03 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6A16140805;
+	Fri, 28 Aug 2026 07:40:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6LwOowl6f1sD; Fri, 28 Aug 2026 04:29:01 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EjSo4_Uj56KV; Fri, 28 Aug 2026 07:40:51 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787891341;
-	bh=nFwkN7KRt8fUtYnZOkrpBmHwJvJszCOTmu1aFCQ+0i0=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787902851;
+	bh=YEvbAPeZMTroDoJhA62VJP2s4X4acbfZ9RsCmsa4ki4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VkxUYyab6N1E0emejKrtYeXGlWHAokg3+T8R8um6ISNc2eIYexAezFchWjH0XzfpH
-	 gcg2cUUo5V2IO5BhffLMH5pU53ITZkx2Bikt3FV4n4EDE5k0vRzmOMASpQydaqDN8r
-	 IYuveBUbKTL0TDB45nJ6L5YktC4Bn65UU/5r9CuZKS/2gyeMhzdBZW8NrxhbHTWPyS
-	 WrlLEWCNopRKN/L7xvbo+Xcddcy7kLSREMPTyipi8RLtdK7YTca2mnUNhdP3AEYqso
-	 00X4in74ATP1XPKJXvFR/LgwB+2GdG5JkTO77Q2/jfCgpIy06ldhg339SG+bJpHL6P
-	 tk/MpzAl8xRLw==
+	b=CPrqO1iZJyOMbQXfuITraxU6talCkyvldOAz68GXVyzY8ujiqLk1j9c00GNAG55Dj
+	 zBkxgtyxmeiiDfaeTyzQ6A56MqurRDxlnDqcv8ZNc9vsu1br+gbUM4EtbewwzFRluS
+	 u5G3ulenEUiFVvhtLdF7GlnJTsQhQ0gPCct6/vW9jSN93sTk1wGJp4huW5rckgf/3S
+	 H73kNEBAbB436CGj6MtE4KILn+Q8iit1oGHolmlIXX2J2HfHBuexVFusArGd6W1rJg
+	 Pbs119YerKToaH2rfK2Y3JCERf904VK9XLU+rNUYyQrErSJn9omEiwJqHFmOkpqirY
+	 GN3UrqYmog5tQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9A990606D6;
-	Fri, 28 Aug 2026 04:29:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A62A9407CF;
+	Fri, 28 Aug 2026 07:40:51 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id D0642386
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 04:28:59 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 6085A23E
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 07:40:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C210F80ECC
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 04:28:59 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5255D80E83
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 07:40:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nlRglhwLZp_W for <u-boot@lists.u-boot-project.org>;
- Fri, 28 Aug 2026 04:28:59 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c110::3;
- helo=bn8pr05cu002.outbound.protection.outlook.com;
- envelope-from=padmarao.begari@amd.com; receiver=<UNKNOWN> 
+ id AkY0mQsHrV6f for <u-boot@lists.u-boot-project.org>;
+ Fri, 28 Aug 2026 07:40:49 +0000 (UTC)
+X-Greylist: delayed 825 seconds by postgrey-1.37 at util1.osuosl.org;
+ Fri, 28 Aug 2026 07:40:48 UTC
 Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=XhnN/LnB
-Received: from BN8PR05CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::3])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 94D2080EC6
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 04:28:57 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GHiUlwG2Vm0OPLkyj6RitR1DnLlMaaNNFZAE61ERp+TX6X7Ok+FN8i7YGetjFwGT6VgdWSRDiDUujQ+yBeBusmaajitzXItMXxn9SOEKP4MRsrUsn0+MGRfX9U52wKUxg7KHKyLZdXZ1X/H84WvsBE+5Hgozd0regyATEzKRQLy3rr8Bz+Z2/x8Gob9vJPoCal3691D+OqVpQ9I0zXMXvrIS5xGzVPprQT1y2RXvVcM54YxijGMrLRkFtFeOTpFIdXXE7euaahQvooOmmNn3W5guWPvbqL9EswZT0lIVxbPccZGaocZ+8wYjMVvSu5KshlEeYJsXWV2iNGUWG2lrrQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nFwkN7KRt8fUtYnZOkrpBmHwJvJszCOTmu1aFCQ+0i0=;
- b=FPlzQgrMzrTlt1txSV3y5brOJXxoO8m90eV2ChCQFRf5wkHGrc324M3uKeRSdFYIyZ93/zEYNRnp6/ZaglSMhpzhXKUhW9BAHYUeAb02sqZv312uKubcCuv59WAKfIsFtQZwAxmh+qIZe4vzv8OGEL22rvBKGRyvwaICD8158qhJuLobhBglaeTM0kKq/JMFx/OPZ/attLh9IgSinbcwQtGIuolFYuPBMgRS0kEB4SEvzilx+1QRWhIBiEl9tMLt1b7T/0Mp7GiYLsAiPVBViMSVZhtDmr5a9X473sYImsUWD8mG8pnJnH+tILpa2hwJj+ibEvb+2AcPkEIG2poC5A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
- smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
- action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nFwkN7KRt8fUtYnZOkrpBmHwJvJszCOTmu1aFCQ+0i0=;
- b=XhnN/LnBfc3T1+Qc01c8bDVlc8izEGaKBDZCQAfOLYl0rONAe15zvwJ3DkrWmXY978CA6niJY2CXglGbZLFZEYDhzbVKuFXRfJgBB1p+r63bgIJrq2qVOHje6Bi/55CO3qG7V5K823cvQc4uV9MLD+HUYNoa3q1fZTWz1NOdkog=
-Received: from MW4PR04CA0357.namprd04.prod.outlook.com (2603:10b6:303:8a::32)
- by SJ2PR12MB9211.namprd12.prod.outlook.com (2603:10b6:a03:55e::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Fri, 28 Aug
- 2026 04:28:49 +0000
-Received: from CO1PEPF00012E7D.namprd03.prod.outlook.com
- (2603:10b6:303:8a:cafe::b) by MW4PR04CA0357.outlook.office365.com
- (2603:10b6:303:8a::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.10 via Frontend Transport; Fri,
- 28 Aug 2026 04:28:49 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CO1PEPF00012E7D.mail.protection.outlook.com (10.167.249.52) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.382.8 via Frontend Transport; Fri, 28 Aug 2026 04:28:48 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 27 Aug
- 2026 23:28:47 -0500
-Received: from xhdpabegari40x.xilinx.com (10.180.168.240) by
- satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.45 via Frontend Transport; Thu, 27 Aug 2026 23:28:45 -0500
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.u-boot-project.org>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 2/2] efi_loader: expand disk device names with drive details
-Date: Fri, 28 Aug 2026 09:57:58 +0530
-Message-ID: <20260828042828.3421664-3-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260828042828.3421664-1-padmarao.begari@amd.com>
-References: <20260828042828.3421664-1-padmarao.begari@amd.com>
+ dmarc=pass (p=quarantine dis=none) header.from=web.de
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=web.de header.i=smoch@web.de header.a=rsa-sha256
+ header.s=s29768273 header.b=F9qYLKUY
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.17.11;
+ helo=mout.web.de; envelope-from=smoch@web.de; receiver=<UNKNOWN> 
+Received: from mout.web.de (mout.web.de [212.227.17.11])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id EEB1080E7A
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 07:40:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+ s=s29768273; t=1787902846; x=1788507646; i=smoch@web.de;
+ bh=YEvbAPeZMTroDoJhA62VJP2s4X4acbfZ9RsCmsa4ki4=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=F9qYLKUYvsBInLFCISqAkY/5Xlanj82d8izRHFORz9TrozB6PbzZmKlRAaQ+IoKH
+ AmpYLKqkI4ysatQ9jnkuTlTtvOfeRykkLgEOTW7GKh3i5GsE1mPVAfSvZ+cCRql9y
+ tJ6P95pWCv18HYoY35EOfcC2/2inhObO2cukjOBo9ljh+JZFdaIbFSrDHGfXlhE5C
+ b2xg6zM5QFm84c3RZdoSa8VcSmfp39udIBh7DwrDV8w44h8iBkRaJa4t0CEe5udjN
+ dqV3kll8sNS4NrYK2XdZc0THr4+ps5z+4+s3RoY2CdVPHv68AzAnJSY0P9TvQ803K
+ IKO6PceS7j5pOcYFdw==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from client.hidden.invalid by smtp.web.de (mrweb105
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 1MCGSW-1x9Adn31gA-0060S3; Fri, 28
+ Aug 2026 09:26:41 +0200
+Message-ID: <a6c01add-fc9a-45c5-8336-c5978355b32e@web.de>
+Date: Fri, 28 Aug 2026 09:26:34 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF00012E7D:EE_|SJ2PR12MB9211:EE_
-X-MS-Office365-Filtering-Correlation-Id: c0382ad8-3599-4388-3238-08df04bcdb23
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|82310400026|1800799024|23010399003|10067099003|11063799006|56012099006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: iBJxDDdA4ZeJZ5njIm+m+7nbtaNogk2HKa682FIUt13riSaVidoG1+uCNotQ35oAugbud5f7TZEwTFWf1of9pCDqVqkgw1gxJ2k66Kbjh8d0dSZmA2HN6DflRJpwkqHLKc+6vk/GhlsYlW1Iv4h6N/VohYrN6p/ycg0FliWyHSQc0dum/eC9S6GrIGB4myjnH233wC44pQEDng7jW/DFnwhkLkBGdsH86aKWIX1bkBstVq/MGJCKW76oW24wDnkjH/KEXnVmmk5tWNA6Z3LZ+2R/UpIwwZ0nUWcql/kps5VUJmo0K7F34HZgKalLD7mCICROxs8TGd/UhIMIXK1kFIINpocgK+E28TvxGcUWeGPxZSbDSoAJe/Idbc9FXLNFrPTPWs5u+yi7aD/5mVeKy2YV7w7xHJgJT5q21L4yKWK29OruaaDBI9/hiCCPnIZu9fGH9sfaY+UMj4GIj1g1OwhSkZ0kEPY0XV2kmPW0Fsx/XDD/UT4wNEM8WHqUHjIx3HrieZoPoVZolwkTwkmPAMGzz3tugqwBi4JYWA9TUrhmFYv51Oy5XL5BqMhDLtiA+HIdlRg4tnZiv6RUSXXyU1E30JCZVVZHS+CgRd6wdP4nS56PLVOhHpPBKFNhdc+bmG89wngiof+8z6qADJL18LpeivEvo+5qhV31tLkBo+aRKXIzgAunFCcBsrrwBT+v2vVjG3qFuBPPq0mlTjUVmg==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(23010399003)(10067099003)(11063799006)(56012099006)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: FHyykuYzzU36PzhFbJHzRZH3VVX9x2zW7caEm/Y1dq9lPbrHqWu4kUm2cLxNVUsRswk2yzD4dkj3mzP3V6vI+EEPJcgRJ3rdyLOpjM5aHX2XTDsOQMZIA30Bd2wRWC4hO5qT08yNg0hfB4GoO4yd+pHyIFxJ4zHWrqSW2YYY2c08FyoXh9gQi4OWPAjmB2Xni1g6aG/BSOsCmbkxuCj+wJNzPQpzv/GLXdMKkd1cVp+vUlKS/yJy9q3AzsYcAaqNIO36QHnH3lsFhZtP9Gblg+eMPX/LHwJuk2r3MZZfZX+9fyPGxO9s7iEoiIPq9uEt7MM/EmQhRZJjKASzOY/Qwt/BswMCD/2ggwMMb5pHFnmv2B/3t8HzhGw1cW/0te9ThAipwSbeoMExFMJ28yBOB1R9mJj1p2SzmxDNn8x295PGKgCFt6ZNZEY1WNXAK1pp
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2026 04:28:48.5394 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c0382ad8-3599-4388-3238-08df04bcdb23
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF00012E7D.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB9211
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 29/45] doc: board/tbs: update link to TRM
+To: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.u-boot-project.org
+Cc: uboot-imx@nxp.com, trini@konsulko.com, sjg@chromium.org,
+ neil.armstrong@linaro.org, marek.vasut+renesas@mailbox.org,
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, adeep@lexina.in,
+ sbabic@nabladev.com, festevam@gmail.com, alpernebiyasak@gmail.com,
+ le.jin@siemens.com, jan.kiszka@siemens.com, iwamatsu@nigauri.org,
+ pbrobinson@gmail.com, seanga2@gmail.com, bmeng.cn@gmail.com, lukma@denx.de,
+ mkorpershoek@kernel.org, Quentin Schulz <quentin.schulz@cherry.de>
+References: <20260825-linkcheck-v1-0-ee7573fe3a4a@cherry.de>
+ <20260827195313.129994-8-foss+uboot@0leil.net>
+Content-Language: en-US, de-DE
+From: Soeren Moch <smoch@web.de>
+In-Reply-To: <20260827195313.129994-8-foss+uboot@0leil.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Provags-ID: V03:K1:NACIuEIZMEe9iJ2WszF1XMlSfI40U5vucxJgJDInUfRF9Yx+P7A
+ pRI5uFTWNS3+mCCusEwAs6Ds4t7hXzK62FOKtH5/98qWtt9zfxKM8fzRcLJedjlo/WLX8TI
+ E6p51I6zne+Um00KKCBKonukLs3Hyu7Ox3aYKoYRgy1XXUbDE+57p871eq4vKSKOX6nJ5md
+ 6DScGAkj/ZMOKLtJkk3YQ==
+UI-OutboundReport: notjunk:1;M01:P0:CXFdUgkE4YE=;ZsViAGEyIT8dpSPffGK/3t9YI7J
+ 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
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,187 +200,30 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Increase the boot menu device name buffer so that extra metadata can
-be appended. Append the disk capacity and trimmed vendor/product
-strings to the device name so users can differentiate drives in the
-EFI boot menu. Also pull in linux/string.h for the strl* helpers.
+On 27.08.26 21:52, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> The link to the TRM doesn't exist anymore, so let's replace it with one
+> that provides the first part of the TRM where the BOOT_CFG is explained.
+>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+Acked-by: Soeren Moch <smoch@web.de>
 
-For example, the U-Boot boot menu now shows entries such as:
-
-    usb 0 (29.7 GiB, Generic Ultra HS-COMBO)
-    usb 1 (28.6 GiB, USB SanDisk 3.2Gen1)
-    scsi 0 (1 GiB, MICRON MT064GBCAV1U31AA)
-
-The menus are drawn with absolute cursor positioning starting at
-column 7, see bootmenu_print_entry() and eficonfig_print_entry(), and
-the titles are not truncated. A title which does not fit into a line
-would wrap and thereby corrupt the menu layout. The name is therefore
-limited to 64 characters, which leaves the longest description above
-at 46 columns. Should the identification strings not fit, the
-capacity is shown alone rather than a string cut in the middle:
-
-    usb 0 (1023.9 GiB)
-
-Note the limitation of this approach: the description is built from
-what struct blk_desc carries, so devices reporting the same capacity
-and the same identification strings still get the same description.
-Two identical USB sticks, several namespaces of one NVMe drive, or
-several sandbox host devices remain indistinguishable:
-
-    nvme 0 (953.9 GiB, SKHynix_HFS001TEM4X169N)
-    nvme 1 (953.9 GiB, SKHynix_HFS001TEM4X169N)
-
-    host 0 (64 MiB, U-Boot hostfile)
-    host 1 (64 MiB, U-Boot hostfile)
-
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
-Changes in v2:
-- Reuse the print_size() formatting through the new snprint_size()
-  helper instead of open-coding the unit selection.
-- Build the suffix with a single snprintf() instead of a chain of
-  strlcat() calls into an intermediate buffer.
-- Limit the device name to 64 instead of 128 characters and fall back to
-  the capacity alone when the identification strings do not fit, so that
-  the entries stay within an 80 column terminal.
-- Document the limitation of the approach in the commit message.
----
- include/efi_loader.h      | 12 +++++--
- lib/efi_loader/efi_disk.c | 66 ++++++++++++++++++++++++++++++++++++++-
- 2 files changed, 75 insertions(+), 3 deletions(-)
-
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 3a4d502631c..2bf48d2e169 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -289,8 +289,16 @@ const char *__efi_nesting_dec(void);
- #define EFI_CACHELINE_SIZE 128
- #endif
- 
--/* max bootmenu title size for volume selection */
--#define BOOTMENU_DEVICE_NAME_MAX 16
-+/*
-+ * Max bootmenu title size for volume selection.
-+ *
-+ * The menu entries are drawn with absolute cursor positioning starting at
-+ * column 7, see bootmenu_print_entry() and eficonfig_print_entry(), and are
-+ * not truncated. A title which does not fit into a line wraps and thereby
-+ * corrupts the menu layout, so keep it short enough for a terminal with
-+ * 80 columns.
-+ */
-+#define BOOTMENU_DEVICE_NAME_MAX 64
- 
- /* Key identifying current memory map */
- extern efi_uintn_t efi_memory_map_key;
-diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-index 4a3ace3a304..a9913ad33c4 100644
---- a/lib/efi_loader/efi_disk.c
-+++ b/lib/efi_loader/efi_disk.c
-@@ -8,6 +8,7 @@
- #define LOG_CATEGORY LOGC_EFI
- 
- #include <blk.h>
-+#include <display_options.h>
- #include <dm.h>
- #include <dm/device-internal.h>
- #include <dm/tag.h>
-@@ -20,6 +21,8 @@
- #include <part.h>
- #include <malloc.h>
- 
-+#include <linux/string.h>
-+
- struct efi_system_partition efi_system_partition = {
- 	.uclass_id = UCLASS_INVALID,
- };
-@@ -814,9 +817,68 @@ int efi_disk_remove(void *ctx, struct event *event)
- 
- }
- 
-+/**
-+ * efi_disk_append_detail() - append capacity and vendor info to a device label
-+ *
-+ * Appends a " (size, vendor product)" suffix to @buf when the block
-+ * descriptor carries readable capacity or identification strings.
-+ *
-+ * @desc:	block device descriptor
-+ * @buf:	label buffer to append to (already contains base name)
-+ * @size:	total size of @buf in bytes
-+ */
-+static void efi_disk_append_detail(const struct blk_desc *desc,
-+				   char *buf, int size)
-+{
-+	u64 capacity = (u64)desc->lba * desc->blksz;
-+	char capacity_str[SIZE_STR_LEN];
-+	char vendor_buf[BLK_VEN_SIZE + 1];
-+	char product_buf[BLK_PRD_SIZE + 1];
-+	char *vendor, *product;
-+	int len = strlen(buf);
-+	int ret;
-+
-+	capacity_str[0] = '\0';
-+
-+	if (capacity)
-+		snprint_size(capacity_str, sizeof(capacity_str), capacity);
-+
-+	/*
-+	 * Some drivers, e.g. usb_storage and nvme, do not strip the blanks the
-+	 * identification strings are padded with. Use copies as strim()
-+	 * modifies the string.
-+	 */
-+	strlcpy(vendor_buf, desc->vendor, sizeof(vendor_buf));
-+	strlcpy(product_buf, desc->product, sizeof(product_buf));
-+	vendor = strim(vendor_buf);
-+	product = strim(product_buf);
-+
-+	if (!capacity_str[0] && !vendor[0] && !product[0])
-+		return;
-+
-+	ret = snprintf(buf + len, size - len, " (%s%s%s%s%s)", capacity_str,
-+		       capacity_str[0] && (vendor[0] || product[0]) ? ", " : "",
-+		       vendor, vendor[0] && product[0] ? " " : "",
-+		       product);
-+	if (ret >= size - len) {
-+		/*
-+		 * The identification strings are too long to be shown in a
-+		 * menu entry. Fall back to the capacity instead of displaying
-+		 * a string cut in the middle.
-+		 */
-+		buf[len] = '\0';
-+		if (capacity_str[0])
-+			snprintf(buf + len, size - len, " (%s)", capacity_str);
-+	}
-+}
-+
- /**
-  * efi_disk_get_device_name() - get U-Boot device name associated with EFI handle
-  *
-+ * Fills @buf with a human-readable label such as "mmc 0 (7.5 GiB, SanDisk
-+ * AJTD4R)". Capacity and trimmed vendor/product strings are appended when
-+ * available.
-+ *
-  * @handle:	pointer to the EFI handle
-  * @buf:	pointer to the buffer to store the string
-  * @size:	size of buffer
-@@ -834,7 +896,7 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
- 	bool is_partition = false;
- 	struct disk_part *part_data;
- 
--	if (!handle || !buf || !size)
-+	if (!handle || !buf || size <= 0)
- 		return EFI_INVALID_PARAMETER;
- 
- 	dev = handle->dev;
-@@ -862,6 +924,8 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
- 	if (count < 0 || (count + 1) > size)
- 		return EFI_INVALID_PARAMETER;
- 
-+	efi_disk_append_detail(desc, buf, size);
-+
- 	return EFI_SUCCESS;
- }
- 
--- 
-2.34.1
+Thanks,
+Soeren
+> ---
+>   doc/board/tbs/tbs2910.rst | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/doc/board/tbs/tbs2910.rst b/doc/board/tbs/tbs2910.rst
+> index 9d4be61783ed..4f2838bc9bd8 100644
+> --- a/doc/board/tbs/tbs2910.rst
+> +++ b/doc/board/tbs/tbs2910.rst
+> @@ -187,5 +187,5 @@ Links:
+>   ------
+>     - https://www.tbsdtv.com/download/document/tbs2910/TBS2910-Matrix-ARM-mini-PC-SCH_rev2.1.pdf
+>       - The schematics for the revision 2.1 of the TBS2910 Matrix ARM miniPC.
+> -  - https://cache.freescale.com/files/32bit/doc/ref_manual/IMX6DQRM.pdf - The
+> +  - https://community.nxp.com/t5/i-MX-Processors-Knowledge-Base/i-MX-6DQ-Reference-Manual-IMX6DQRM-R2-Part-1/ta-p/1115983 - The
+>       SoC reference manual for additional details on the BOOT_CFG registers.
 
