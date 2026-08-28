@@ -1,152 +1,119 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5C63C61DCB
-	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 15:06:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39232C61DBD
+	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 15:50:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 562C760867;
-	Fri, 28 Aug 2026 15:06:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2D74240872;
+	Fri, 28 Aug 2026 15:50:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id r5AwBOW4YFYV; Fri, 28 Aug 2026 15:06:19 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Lp2dyYr15KKu; Fri, 28 Aug 2026 15:50:51 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787929579;
-	bh=YYprW6OPnHcr3jF9aMMBkEsHv2XP05PuhB11gHmcpSk=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=rSCv84VJfSFqRMVvxsu93hJmK3EceS6DvJCF9vSIYkYepJKus6fuGwDxo96okaN8l
-	 t0wrTUR/OcmQ4VKT2Q3r8BDP1YhMrIc/LSul7asxMz2QNemVIrX00dSQqynIybC0e3
-	 Mik8rObDCd3XSTmfGCsSRXsHUkXEdTe+8uvR5qrWAhUl+gsJvoxnYOGeyPSJeS32J4
-	 +nMMRO+lq48JUHP0+K7sPFG6x8yNcE9uNq4Yxw4dt2HBmazaKHJ7PLdawX9G0dyfUW
-	 XrUsMjfa+Q02t8K+SEaVtLqnjtlFuxCbDvXdZQPTZP59Q6y1C7gt5ujdf1NyZ7G1vo
-	 3xGNN3QA3XFHw==
+	d=lists.u-boot-project.org; s=default; t=1787932251;
+	bh=R45DQBtYKMe+XIXX+JETfSpJQzgP1zVCGi6WAy3WuYc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=RjD+6lPOns/fwSUD/oCL3x9S2b4HRx0DTXX6I7FoGRRt84GjpkT3zDgQ9GJSWYwHp
+	 jQCOuQ7nSCulPQMoP4OEIs707neevc1QGwiJz3zq5vI4d5GILYcaeDUQmFMgYhrS3q
+	 9Ijyf5UtWbyzoekVeEM3m7PBtv3MpcFswmXIqjkJ2qytY94PANpZynNS7cwjOA76Zu
+	 y3ivyV7rlRxzw0nNRvcxEdGrIyTsuMEplZxvzKfeipMQJWu2cLCMEo5xBR6t1boGhA
+	 mNx0jGbadrYu0HZeg6D7lWydGxQdTUaNQbndAaXTCPecmUCoMARTR6nZ8Z2ntcNiEf
+	 QCaOmQ6uxHA9g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3C55760652;
-	Fri, 28 Aug 2026 15:06:19 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id DC86578B
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 15:06:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4EEAE407FF;
+	Fri, 28 Aug 2026 15:50:51 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2FB46336
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 15:50:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CE11260652
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 15:06:17 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 22449401A0
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 15:50:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9rI32lVUDE4a for <u-boot@lists.u-boot-project.org>;
- Fri, 28 Aug 2026 15:06:17 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4DikfSz5bZ50 for <u-boot@lists.u-boot-project.org>;
+ Fri, 28 Aug 2026 15:50:49 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c201::1;
- helo=am0pr83cu005.outbound.protection.outlook.com;
- envelope-from=rasmus.villemoes@prevas.dk; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=prevas.dk header.i=@prevas.dk header.a=rsa-sha256
- header.s=selector1 header.b=gbYQ77mx
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 56171605E7
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 15:06:12 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=irLuRnsQkBlvsHaMsDgyqxz5B6sCk+YQ2fuSRx9P+q5aD7h+EoHSoTNc91/dMADmyfCjrXHv53cKmIjZwfTHNSn9dqef5Lnv/B9NMfB2aQpz/lVeN/6AB1+Lihy8LsB2/Gy/AYIxCPH1D4PWuJCCCpay//+10CuBuzExCx6ts14/21hms+V0qwNrqMR/3AZEjhBTbQtp2rrXJaMr2f9qGDJQmuWXW+0/wzxNDeC3ZlVNgGXTmqZjN4REZX1h5ItnyMLp3i+WZufyVjS/cmssdFMXY0xMZC+fC4g8djRRw5BPjQwWwxqF21Cn4s5PuLhWAGpTZg7lpMfAsp1zVvprJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YYprW6OPnHcr3jF9aMMBkEsHv2XP05PuhB11gHmcpSk=;
- b=dwXF1SrobkUsRAcqlgONbuxmtJVabxF0h9RBxc8e/9Hb2pBpIj5LXypeZsbTDrZXoL8iEoG9DORaqaMmHIcyOz2dnKkq6rwbIQYrwbQ1SpE91a74URigaIwQPETUMTeQ/xAeP//tGeciftlDiShcFGhaSkWrfv2DnWeP/GrBMe0AvkIuGlnUWIna2aVMO+mq7BqW25/xsQEEh0082D23DFKEompgZiJgalITOIf9iZjZ/7wndibyvCloRVcRkC41QCm/c08bWMHbr5i0qPVqWi/MYn3y3SUu49EO2DA6Lbdw2peIsP9BAaeFGU17zkxLVQwAey4Ae6B1nXnG0EiMZg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YYprW6OPnHcr3jF9aMMBkEsHv2XP05PuhB11gHmcpSk=;
- b=gbYQ77mxvIV/Fp9eSdpMPrMYaolm8MoAwnluyBVBKmfE0w9zGnAB4b+eWffh4T5y5O6mbSu5NT5ExqfQ5+1ZW64dVoLd+URvy17LvuNAZfkKLiRzrqWqKslvXSW/VOCFIvQCbzKV8BT8v7YZwSZQ11pFq/5mtnw2+oiq3qsNi7E=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by AS2PR10MB7780.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:648::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Fri, 28 Aug
- 2026 15:06:06 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%3]) with mapi id 15.21.0360.008; Fri, 28 Aug 2026
- 15:06:06 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: u-boot@lists.u-boot-project.org
-Cc: Jacky Cao <Jacky.Cao@sony.com>, Tom Rini <trini@konsulko.com>,
+ client-ip=2607:f8b0:4864:20::32b; helo=mail-ot1-x32b.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=jBrP1IGl
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 18BD140070
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 15:50:48 +0000 (UTC)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7eb6573bd52so1298337a34.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 08:50:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1787932247; x=1788537047;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=R45DQBtYKMe+XIXX+JETfSpJQzgP1zVCGi6WAy3WuYc=;
+ b=jBrP1IGlb9PeTEkU6lm/Y7ZK+e1R98lzH5VitiR10p+lW8nPkXAumnlwaxIN6QGlRq
+ AICRYBFNAZhT1lfd07knUTyiUYEdOxVzntxs6BgV09rOvwZ4P85CD7AyA2yQc3xMMLhm
+ S1anfaf0U8dGMS3U1AJIAs3wG/YVhwOJspyCo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787932247; x=1788537047;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=R45DQBtYKMe+XIXX+JETfSpJQzgP1zVCGi6WAy3WuYc=;
+ b=IVbQX4POxw59EIeYicE9y1sC0U7vgsAvHiP7zc9UUf8p2ZikdtA1+bcMFv5M5XFsVR
+ 6J5RztOehX7yrptBVGwib0R5rqHmrQEvzxeVl3idm/DAvdoCCDAOM/iD9Hjp6SW/Dvj2
+ DqsjACRanSGURoaBDdet3ZW3uv4ngD3nv7vkrtqTmD6GHVza5z5II5RqtVAtR3LuPkQP
+ 7QLtWVl7PFP/zqZ0zscVdze221JDZ38wihf/2PI9hJZIdKuseUrGwJJBmbBOgGPL9xb8
+ MdzIaNxVCkq2dEXPXloN8CmJFpvIaX2SPRioV2pH2bwRI6JgmW2JjVG8+inMqVReqxW8
+ RGXA==
+X-Gm-Message-State: AFuF++loHQQlnU7jSjoCxee/u02OBFERTIPIEw5ovaakogZgz++T1Ddc
+ kv4eJXFus0Wz0sJuC7TJqXrweDkvnNOmj+7VgZ6h1e3OfQap6xqzMntfskrNlOpdLirqx1kMooG
+ bPURhGwz6WgAU
+X-Gm-Gg: AR+sD11A7mbLGX6iKR6gzwjl9p07hP7KHKLqbpKzYRcFhdcYzX5g2q/zI0x3XR66HHe
+ imHU2y2eDW1pAy/AxOFWa0B8p4HwWe2ngNph0iq4sQpEXiWSFUDTofydhvsVekKnzjEgdPLtaho
+ YFH8ItWbIOxCWKyHpUHIVKxjR8oPCYZSWFnWJLbnDfiovj8vRS6uPcGV6mDwlVMWHk/mDUb7j6T
+ D0IhNbEsl7MrNJ6vpsxAcVRu7ClZHBBPDo0m7UxIbZI/iKWhUO9HGG559BKBZ/+D4ovv1D9XA7m
+ COPa+VrHn3rAt+RLYWekLkSpyYuwvZgf6r/bvfsOZFK/oX4O+2Pn8pn4Kxf5FpO4ZIhKJBIUQpI
+ oNZkA0h0ScFmfRiopWkHTDmGUwYn/6KJbOjgOOkdvSGHhK38t+V4gXczYjbwFxLx8Azs40AF1s+
+ gBzizJyKALSrTv7eE2dsBOdi6jo+fXGQ6Ar4z6NFF29+c3TNf+ZyTVj2lOkhM2GHLlv3AfbHGid
+ 1NKxQa/usKWKX2zsMPioOOROreElpmiF7HjyQ9dkdij/miqgHv/dDuI8Nhgbmf8cEZzAJ6UNbRL
+ 8T1Qxv35SA==
+X-Received: by 2002:a4a:e081:0:b0:6b1:4fe1:9464 with SMTP id
+ 006d021491bc7-6b1c66289ebmr5801547eaf.22.1787932246977; 
+ Fri, 28 Aug 2026 08:50:46 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-468a354165fsm1767066fac.8.2026.08.28.08.50.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Aug 2026 08:50:46 -0700 (PDT)
+Date: Fri, 28 Aug 2026 09:50:43 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.u-boot-project.org, Jacky Cao <Jacky.Cao@sony.com>,
  "nora.schiffer@ew.tq-group.com" <nora.schiffer@ew.tq-group.com>,
- "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH] include/env.h: use plain old #ifdef
+ "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Subject: Re: [PATCH] include/env.h: use plain old #ifdef
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
-Date: Fri, 28 Aug 2026 17:06:00 +0200
-Message-ID: <20260828150600.918158-1-ravi@prevas.dk>
-X-Mailer: git-send-email 2.55.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: CPBP307CA0010.DNKP307.PROD.OUTLOOK.COM (2603:10a6:380:1::9)
- To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+Message-ID: <20260828155043.GI3959812@bill-the-cat>
+References: <20260828150600.918158-1-ravi@prevas.dk>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|AS2PR10MB7780:EE_
-X-MS-Office365-Filtering-Correlation-Id: f79aa367-961d-4f1f-fead-08df0515e2a4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|23010399003|1800799024|376014|10067099003|6133799003|18002099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: IbQVaZolfTkUhwLQNhZxbBVLk/iLYP0D62Uk+OLqcbc872Rn4hAE5tqgN3UwAauktA7/COJ/DtJROHoKP/JS13zoG/IMcMsi1qeVuYYvJKzpDp4l/6sdq/eCVygat0L9PQan8RxVA5nLLN+mMHbQ+MajIeaWoOygiliFxZYPi4Jjy8V/6wslDi5Zj1B0z2qO6IV6YSFPcyqyrObR5Z+kb0wYtX088lt4xscHPngIPsanvEeC2dprBDptRiMvfLd/57p/FrauwSnSSXoK2uXr1/YQJ7iZy2es+X2IfX17u06gv9SehGboofXx8FPcJPjdu3tafOXPwn3xggwy1soZ64v2IcYWQlBGlsVdmljm1MhhF5uWcXUwepUk0zqLYOCASqVL8Lac9a3JGz1dbQbow07dWKBsNbck96ZcTkFTRYOo41AXRkRchPNd3xs+iBYVH7zd0/rHnMI0KKht/gwAlkQI4c1Ktx8uF2yPo7Mktorma4djk+efmPoFBxrCaEqWxj6E2Y7+EAWZ0b9MchFCb83dTc5aMCXO0Jxt/l2pGQMYdXhQZ6O1qpOcCfm0UfRh8o57IdYzaOghRRuLqZ8ATfRikKORXuk7FhZ7ojSPmOWnnOonAeJLGSh3wIOKPn9sHppKnyJPxvqa9ffJKojlzxaL7Bi/BbFGGbH6OJdbcuA=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(10067099003)(6133799003)(18002099003)(11063799006)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tH1vyv/zb0XlhJFe+BL71NpSdHjbRBQDjChd/90DvvGwAJXqaBTNWrjrA9kn?=
- =?us-ascii?Q?KnaOjN9WDnCkp5h9jEyG2BFTgHlrHzQ6N5OjV5Xo4j+um9Hfbqq6ZN6n5LXp?=
- =?us-ascii?Q?FiGwopBGPH74xkJI6RwSCiQHm9w0W3rbAD1+vhm4m1pnWY7RmAbHZUi1YD7r?=
- =?us-ascii?Q?Kwevdx3ndAp2Ld9+1tqUJjYX0C4qBMmqCV7ycmGmEMElEjVIxj5sfUnYnpk4?=
- =?us-ascii?Q?zRlD5M9HX5GSxlHO/Th+4ozoRIhXIuDr5tBLPK8H4DGk0i7dY7wTckd5xmp0?=
- =?us-ascii?Q?TcQVYDh9jUkWa6AQl1iwrssfuLcbgv5migcj+3No4cxVVz9oiAVmHRZgV8An?=
- =?us-ascii?Q?2DnbbLN9xPxbyq8BHnU45qVdowI2X58z3bJwuuBzM3j7asg50uW3fgNxGvhU?=
- =?us-ascii?Q?idutFcmtHUzHqIFy1CaSQJDYIQjwcmOOGbjkIcrUjP4DxWrfWUDpiFv3BcLN?=
- =?us-ascii?Q?Ef3JePhf5xPPrDX9Dxn7ZuvhCI/yFYOjwhnhk7fqVj7NGgcxYN/Wtmm9Wqfe?=
- =?us-ascii?Q?+Drc38LipFdPZQoMvD3CVCdLHSOEIrS9iZW7KBGS5QttkfFvxOJAwf4KPCvO?=
- =?us-ascii?Q?OLw7FK4pA4dvgG3HRHxQOSfQpklDEAKXgA8rha97H+RIMBERqPpr7eohMXm2?=
- =?us-ascii?Q?xN/WjthnBM/qRMaBH3kTbW4jxG9Gxp+VSYiTXpBH3bcLxqWEh2LVydFyRKsl?=
- =?us-ascii?Q?c6aKojohRc0pPevnrozNvgOyUjT4BcggNZ7DfIiwuJSMYMKjM2jaaKFfRWUk?=
- =?us-ascii?Q?oQXsLiGn/gKsJ4rO84mwCEG3L1DHsjMu7bewYWwmn83X35Xe/zYdbHO9LPU7?=
- =?us-ascii?Q?56faGnVR2kYN7TITedMgcRRGKuA/lqt5sWfJV23EhuBZIP1HqnYln9+M3ROm?=
- =?us-ascii?Q?91AyfeUB5oJm4jWh/agAfq3qAz84rsyFMGt9IsgwUeelyUVPy+iIjg5LVd0V?=
- =?us-ascii?Q?Zv9a8lAXVAi5XNLoc+CM0FFjG4iTQtrc3A6nevUMAnD8ccMg7DVVvJsXevIW?=
- =?us-ascii?Q?noHDf9QiBZRLC4TUakJGff9LQ5kOXUrKXQbhm/Uo47f0WxqOWveeLOdzOzFi?=
- =?us-ascii?Q?7nmaUFC0EeascXRkuhIlm1Zdw5iZYd93R/bO7jf++ZY8DgO8FDQIGBV3hIMY?=
- =?us-ascii?Q?MFUPWSYgcXULjr59ajjpqq47FjwDng5lNoF/U9U4FmSYJYLVGLefQgZdRUnm?=
- =?us-ascii?Q?Uj63rcgSMp5D2hUX2IlVLw4mJrtEhiuM1N7URZYX8pDtVlzcAWBR3BRWuL+N?=
- =?us-ascii?Q?1jtGrVQhS9lzJL2M5sFPmInoOv+vntqKJcFn8VcbG5LsD1FgHIzPSUymXBW7?=
- =?us-ascii?Q?uMm4YPi/TQbEEbsWe+fWw3unYRKNfIVeyo/oy4x875ntQPQteGKyoddX0DOH?=
- =?us-ascii?Q?OiRdrLfGvHLXWgKka9ARN2D6mnsXw7bocLIWc2yvmRYt+DXkeKG9IJP7auiM?=
- =?us-ascii?Q?Vqsv7da1hrUbjH0Azv6PGArFaGg6skswsE7RCh+ZrbgojuTV3FUQYW/sZ2/a?=
- =?us-ascii?Q?QjIRzLvr4LGD4Y1BblkCwMHhoBP7tsnW6u1gUuDPm1kQ6SUHV0CbxEJ8JWyv?=
- =?us-ascii?Q?nUIOqAZtofNB1HgmTqEwjWFbesuo4V9Wv+CzxbWr0qe0g2tBO6kUpH8fdQh4?=
- =?us-ascii?Q?+UJyeiRWEARyzMumVdWg96q34xrPAeKv58K/R6+Z2yyd/sKdRTT0mUO6XwCF?=
- =?us-ascii?Q?2C8A80sfSya7sZBRJ9U4b9oJhIq50wsiTQ7yl7UE/VkgyQCwh+O0w4UqPPkV?=
- =?us-ascii?Q?DRCQATDRYpdMF4Flv2awVeiK0ePwqWs=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: f79aa367-961d-4f1f-fead-08df0515e2a4
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2026 15:06:06.6592 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: f3UNFK/eS8/Oc0qVMBsulBfzL2aAMN4hNqPkwfZ0SlQB1DOFDdWan7kNuX7F0cx2bQjMCm1xFDi2xaK70F35VxwIhCcSxzZD3YWiChhSp04=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7780
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="yUhQV1gv20XSzBIs"
+Content-Disposition: inline
+In-Reply-To: <20260828150600.918158-1-ravi@prevas.dk>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -160,54 +127,40 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Commit 9f1807e57cb ("env: add env_set_runtime() helper") broke the use
-of "make envtools" to create the target fw_setenv/fw_printenv
-binaries. The problem is that the #include <config.h>, in addition to
-pulling in linux/kconfig.h to get the IS_ENABLED() helper, also ends
-up pulling in lots of architecture/board specific headers.
 
-Fix it by simply using an #ifdef.
+--yUhQV1gv20XSzBIs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
+On Fri, Aug 28, 2026 at 05:06:00PM +0200, Rasmus Villemoes wrote:
 
-Tom said "Just using a normal #if/#else/#endif would be the better fix
-here." so here it is.
+> Commit 9f1807e57cb ("env: add env_set_runtime() helper") broke the use
+> of "make envtools" to create the target fw_setenv/fw_printenv
+> binaries. The problem is that the #include <config.h>, in addition to
+> pulling in linux/kconfig.h to get the IS_ENABLED() helper, also ends
+> up pulling in lots of architecture/board specific headers.
+>=20
+> Fix it by simply using an #ifdef.
+>=20
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 
-I'm still far from convinced of the value of this helper, but if the
-tq-group folks want it it's not a hill I'm gonna die on, I just want
-to be able to build and ship v2026.07.
+Thanks for picking this issue up.
 
- include/env.h | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-diff --git a/include/env.h b/include/env.h
-index 9b872fb26eb..8bd6cf23932 100644
---- a/include/env.h
-+++ b/include/env.h
-@@ -9,7 +9,6 @@
- #ifndef __ENV_H
- #define __ENV_H
- 
--#include <config.h>
- #include <compiler.h>
- #include <stdbool.h>
- #include <linux/types.h>
-@@ -174,10 +173,11 @@ int env_set(const char *varname, const char *value);
-  */
- static inline int env_set_runtime(const char *varname, const char *value)
- {
--	if (IS_ENABLED(CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG))
--		return env_set(varname, value);
--
-+#ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
-+	return env_set(varname, value);
-+#else
- 	return 0;
-+#endif
- }
- 
- /**
--- 
-2.55.0
+--=20
+Tom
 
+--yUhQV1gv20XSzBIs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCapGuTAAKCRAr4qD1Cr/k
+Ci0oAQDybR4K7MHqGRr3oKJmyCeXC13bzd4Rm4AMBR9ncijdggD+JIl4eGrJGlkV
+hhWl3H+j5eP3rePJrYD76RVyuaMQggI=
+=pgIk
+-----END PGP SIGNATURE-----
+
+--yUhQV1gv20XSzBIs--
