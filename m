@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDB6C61DCB
-	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 13:58:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85C68C61DD3
+	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 13:58:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 259D380F88;
-	Fri, 28 Aug 2026 13:58:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4F58880F95;
+	Fri, 28 Aug 2026 13:58:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id L1rphrnX3kYg; Fri, 28 Aug 2026 13:58:39 +0000 (UTC)
+ id rG_fxWGj9R0f; Fri, 28 Aug 2026 13:58:42 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787925519;
-	bh=XzXhdHGYQvLyQYjuVZgn36+i5is5ofcOjAZ0zlm3eCE=;
+	d=lists.u-boot-project.org; s=default; t=1787925522;
+	bh=DF8pZQBfy393JEbkLXnzgCQUuHX6bkQ3boDr0nsLF48=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Aqlg0lCdT1tpYM6ugy1O+QtYp5FmE4g/GqalwvvG5zUgLm0PM6/pKlWlCpxXi2qPT
-	 BPE0xz1ElU5Duz2KtodZZvpomOCqZmZHp8XJPXZ9vrUirv8HVuXn2Bw2f1+wIzeiIT
-	 NKT3dM6+GMLvWaNNMebn+uN3y0Wc5mvliuzTwXjmGeki2SOQ97LavL6R1jyk5i8L9C
-	 QZ9WjL0FnlCGnh/oyeY6XJVr2KqGc9uQbdrU98PIxkageu4EFyvy+biDGqpw1Wy7IG
-	 DoV5L0Kvm2x14EakmQPO9DxDsMk9jUCuu7FKXJQpUkEYF9e0z1KYQLn7bt7HhJY8af
-	 9fB4hg9oqJybQ==
+	b=X2CnY9ywfTz9SwzB0ycKJ12FWVfu3PX71HKX5GmX0ciVzEcimH2o5WIZjTxTMFmET
+	 dC8cuU+bs7XRgOhQbBQAbZli1GBUnU2P/khKdFJ7f0e+sqf0g8mgf/YYbI5HzafI/9
+	 BMEamsmD2RSzHm5cRLIHkBlDdc/pW9/j3Y/lDxDbzpu0ytz5ndZIULtQ0niJGmJ0+t
+	 NSFHPawuvspxQ4rTks9tpgA4sH2AXw+RURYQBAwvu0uKB1KhiVd/uoaG5ksUHA9YXg
+	 oEGZz3K/xncJAUn681GHsbRcS6fH+O25brWdbT71IKMHvuorTY9cumRk1UZForWxUI
+	 fvwc+h8kcWq8g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5C58880F4D;
-	Fri, 28 Aug 2026 13:58:39 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 54036334
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:58:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BF3DF80F34;
+	Fri, 28 Aug 2026 13:58:42 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 94F85334
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:58:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 506B780F7C
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:58:36 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 77F6240875
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:58:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VNnpNSDDu8MO for <u-boot@lists.u-boot-project.org>;
- Fri, 28 Aug 2026 13:58:35 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zp4RiBB9XAmO for <u-boot@lists.u-boot-project.org>;
+ Fri, 28 Aug 2026 13:58:38 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
  helo=smtpout-02.galae.net; envelope-from=richard.genoud@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
- header.a=rsa-sha256 header.s=dkim header.b=awNjHIet
+ header.a=rsa-sha256 header.s=dkim header.b=fiOOEx0s
 Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E8D8B80F82
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:58:34 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 05C2C4088B
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:58:37 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 1317A1A18A3;
- Fri, 28 Aug 2026 13:58:33 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 27E891A18A3;
+ Fri, 28 Aug 2026 13:58:36 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id DB2AE60537;
- Fri, 28 Aug 2026 13:58:32 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id E8CE860537;
+ Fri, 28 Aug 2026 13:58:35 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9B6C611C781DF; 
- Fri, 28 Aug 2026 15:58:29 +0200 (CEST)
+ with ESMTPSA id 2DD7111C78068; 
+ Fri, 28 Aug 2026 15:58:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1787925511; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1787925514; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=XzXhdHGYQvLyQYjuVZgn36+i5is5ofcOjAZ0zlm3eCE=;
- b=awNjHIet3aRKTevDADENVOX76Ya3EvfEawT9mgO//feBvU8b3MjHpSMNgKCnp8LJtY5CrK
- eQQOuT9WJiZNdto7QoZK38a0jqub9MgD5xajIa+5VtTi+X3GGWtQ4WDkpv4oyx1W9z9yty
- TJeCYdSUe0Z0p9Hok5JjvhAigHS59MGkAmt+Sf1Slwxne5UdgxM2SmoahlaMze+ZfEfZ7v
- NnH2pQHQxVeCNg+3rt0J6PW9LOqj4tGyvWwCzp5vw0s0Y3uUHf2Kw9KXbd7JYfJ0aAhVCv
- Ag9MoUhjYf14NESmLfvJmK15AQh4YUcyAFaqRFDeJjujP/3v9hcJ7nUt0ZGlgw==
+ bh=DF8pZQBfy393JEbkLXnzgCQUuHX6bkQ3boDr0nsLF48=;
+ b=fiOOEx0sZPC1M7Q1M+8rfAjqWFxBUZY/HUxIvSpTTL1MI0T634ubKiQ0U6CsYlAAjgWjFd
+ kcEf5zhrBsfrTN1Pk4o0ypZuCevzjR3C77mPrdUY4Bm45KkqOqKbL3MiQfxormrJwgkqWm
+ QvXr15LZDuPhFM1a3XUMmDt765vUPikJf+gyTihw++mIPqFSH9vywme8NxJ/Ll0XhOTB0l
+ YbO6Zry9JrpE0NrCD0QQgMu5PRaBp00V+qI5sbQPwShW1pwnRaXdMpQXSwDUzCJiSZAkBT
+ FvrOquMSVbElOA1e8FerSz0pEePBIfkcQNCoyNClUWgEDJb3HimcaT15KQKUvA==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -83,9 +83,10 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>,
  u-boot@lists.u-boot-project.org
-Subject: [PATCH v5 14/21] ram: k3-ddrss: support j784s4/j721e/j721s2 DDR resume
-Date: Fri, 28 Aug 2026 15:57:23 +0200
-Message-ID: <20260828135730.1565643-15-richard.genoud@bootlin.com>
+Subject: [PATCH v5 15/21] arm: mach-k3: j721e: Enable LPM resume flow for
+ J7200/J721e SOC
+Date: Fri, 28 Aug 2026 15:57:24 +0200
+Message-ID: <20260828135730.1565643-16-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260828135730.1565643-1-richard.genoud@bootlin.com>
 References: <20260828135730.1565643-1-richard.genoud@bootlin.com>
@@ -105,64 +106,97 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-j78s4/j721e/j7200/J721s2 can't use the standard resume sequence.
-Typical DDR resume sequence is:
-- exit DDR from retention
-- de-assert the DDR_RET pin
-- restore DDR max frequency
-- exit DDR from low power
+From: "Thomas Richard (TI)" <thomas.richard@bootlin.com>
 
-We have to separate each action in order to de-assert the DDR_RET pins
-at the right time, because the DDR_RET pins are all tied together in
-hardware.
+Add support for resuming from suspend in board_init_f.
+The resume state of the SOC is identified and lpm resume
+sequence is followed accordingly.
 
-At resume, only the initialization of the DDR is done by the driver, the
-rest is handled in boart_init_f().
-So, introduce lpm_init_only flag to only initialize the DDR when resume
-is detected for those boards.
+First, add the board specific part of the exit retention sequence for
+k3-ddrss following the DDR resume sequence:
+   - exit DDR from retention
+   - de-assert the DDR_RET pin
+   - restore DDR max frequency
+   - exit DDR from low power
 
+Then:
+   - Extract context address from devicetree and send to TIFS.
+   - Power on the rproc cluster.
+   - Replay the certificates attached to saved images of ATF and OPTEE.
+   - Resume sequence for context restore and rproc resume.
+   - Image entry to DM firmware.
+(All those steps are done in do_resume())
+
+The context address area is firewalled by TIFS to protect it from
+other hosts.
+
+Co-developed-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
+Signed-off-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
+Signed-off-by: Thomas Richard (TI) <thomas.richard@bootlin.com>
+Co-developed-by: Prasanth Babu Mantena <p-mantena@ti.com>
+Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- drivers/ram/k3-ddrss/k3-ddrss.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ arch/arm/mach-k3/j721e/j721e_init.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-index 3af360f191df..60f54a72adea 100644
---- a/drivers/ram/k3-ddrss/k3-ddrss.c
-+++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-@@ -123,6 +123,7 @@ enum intrlv_size {
+diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
+index f9af0288cf66..fce6702be687 100644
+--- a/arch/arm/mach-k3/j721e/j721e_init.c
++++ b/arch/arm/mach-k3/j721e/j721e_init.c
+@@ -20,9 +20,12 @@
+ #include <mmc.h>
+ #include <remoteproc.h>
+ #include <k3-avs.h>
++#include <power/pmic.h>
++#include <mach/k3-ddr.h>
  
- struct k3_ddrss_data {
- 	u32 flags;
-+	bool lpm_init_only;
- 	bool (*is_lpm_resume)(void);
- 	void (*ddrss_deassert_retention)(void);
- };
-@@ -1158,6 +1159,9 @@ static int k3_ddrss_probe(struct udevice *dev)
- 	k3_lpddr4_init(ddrss);
- 	k3_lpddr4_hardware_reg_init(ddrss);
+ #include "../sysfw-loader.h"
+ #include "../common.h"
++#include "../lpm-common.h"
  
-+	if (is_lpm_resume && ddrss_data->lpm_init_only)
-+		return k3_ddrss_init_freq(ddrss);
+ /* NAVSS North Bridge (NB) registers */
+ #define NAVSS0_NBSS_NB0_CFG_MMRS		0x03802000
+@@ -46,6 +49,10 @@
+ #define DEV_A72SS0_CORE0_ID 4
+ #define DEV_A72SS0_CORE0_MSMC_CLK_ID 1
+ 
++/* DDR retention bits */
++#define DDR_RET_VAL BIT(1)
++#define DDR_RET_CLK BIT(2)
 +
- 	if (is_lpm_resume)
- 		k3_ddrss_self_refresh_exit(ddrss->ddrss_ctl_cfg);
+ #ifdef CONFIG_K3_LOAD_SYSFW
+ struct fwl_data cbass_hc_cfg0_fwls[] = {
+ #if defined(CONFIG_SOC_K3_J721E)
+@@ -298,6 +305,7 @@ void board_init_f(ulong dummy)
+ {
+ 	int ret;
+ #if defined(CONFIG_K3_J721E_DDRSS) || defined(CONFIG_K3_LOAD_SYSFW)
++	struct k3_ddrss_regs regs;
+ 	struct udevice *dev;
+ #endif
+ 	/*
+@@ -410,6 +418,22 @@ void board_init_f(ulong dummy)
+ 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+ 	if (ret)
+ 		panic("DRAM init failed: %d\n", ret);
++
++	if (j7xx_board_is_resuming()) {
++		/*
++		 * The DDR resume sequence is:
++		 * - exit DDR from retention
++		 * - de-assert the DDR_RET pin
++		 * - restore DDR max frequency
++		 * - exit DDR from low power
++		 */
++		k3_ddrss_lpddr4_exit_retention(dev, &regs);
++		k3_deassert_ddr_ret("pmic@4c", DDR_RET_VAL, DDR_RET_CLK, true);
++		k3_ddrss_lpddr4_change_freq(dev);
++		k3_ddrss_lpddr4_exit_low_power(dev, &regs);
++
++		do_resume();
++	}
+ #endif
+ 	spl_enable_cache();
  
-@@ -1289,6 +1293,8 @@ static struct ram_ops k3_ddrss_ops = {
- 
- static const struct k3_ddrss_data k3_data = {
- 	.flags = SINGLE_DDR_SUBSYSTEM,
-+	.lpm_init_only = true,
-+	.is_lpm_resume = j7xx_board_is_resuming,
- };
- 
- static const struct k3_ddrss_data am62xx_data = {
-@@ -1299,6 +1305,8 @@ static const struct k3_ddrss_data am62xx_data = {
- 
- static const struct k3_ddrss_data j721s2_data = {
- 	.flags = MULTI_DDR_SUBSYSTEM,
-+	.lpm_init_only = true,
-+	.is_lpm_resume = j7xx_board_is_resuming,
- };
- 
- static const struct k3_ddrss_data j722s_data = {
