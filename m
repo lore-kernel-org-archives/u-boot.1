@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14490C61DCB
-	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 13:58:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A820DC61DBD
+	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 13:58:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C24D780F24;
-	Fri, 28 Aug 2026 13:58:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7D58D80F3E;
+	Fri, 28 Aug 2026 13:58:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qHmnxYPhytes; Fri, 28 Aug 2026 13:57:58 +0000 (UTC)
+ id t3L1DCx8RMCW; Fri, 28 Aug 2026 13:58:06 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787925478;
-	bh=h/SSYJv1sBzYNyV7CSmutsjJX7sZPT4oZSggDHTmheY=;
+	d=lists.u-boot-project.org; s=default; t=1787925486;
+	bh=S1k2LXI/kXlUJLzaT3s1yc1orbi+AL3yLduVukqxVbw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MGaAqjoBjX7v8FrwM8ELDA8x91n3ETeUDUavzJZkxvJd2Fzkfyf+LeBvR9qdi4hDu
-	 uzJ5kiNG6vVPmWA3YYWgrGmF8TG5UzJ2YxAkWDA+yust6i41DQNPJpm7VaMzQPXHz/
-	 9woWrrT9ZJ1mqThZPT+8/mMsHYGAISJkSts4v82K+znpwW4Q6Q15LyLfwPAL4EzS0P
-	 59xKz0UZFlwyBzn+Tvx749wWfLhhnGirHW5lj4Miz+oYo+E/GyoIRaXPfuv6xka4+O
-	 Nysa+420356OA3atuTfnkwMOOjS7M0GviZsKrjZ3/0HohapzbZHJjX+NJebwGHu5iD
-	 +Zr1HoUFaCWiA==
+	b=nV5gEMXVyWPxcxBpOQwMfnnS++r0ngnaeFKORIMbFjer9/E7boRbyoP1hjokhNPBV
+	 H/cdhVRG8LBcKfwgI73mRwGlzIHc/YaJqa+ZlALFbAkyqP/IeTqOFV34OgcoQBVw7C
+	 ld7C2oio+o8uq3EzjPFeBHiEWGfmjwjjf4aTj1C+/enYTo102MS+q9BGTsbivpnzRc
+	 EzrPYNSUkrgsS+X1RUOIJ3HYj2Q0ji6rz2UYIPpGz+ySWDSQjITgtWe7hoNSa7bnRH
+	 ED22IBP2S/YNGBJEc92hXG9vXEtz8DaPZFY3QZtBzjQE3pT1y/BRB9Kz/qiXbGUAW5
+	 mfP2rs7wK3tOA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BF2B980F26;
-	Fri, 28 Aug 2026 13:57:58 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 4606E78B
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:57:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0699C80F27;
+	Fri, 28 Aug 2026 13:58:06 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id A9A0D386
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:58:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3765A40867
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:57:58 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 9B4BC80EB6
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:58:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 67ERnKck_xbL for <u-boot@lists.u-boot-project.org>;
- Fri, 28 Aug 2026 13:57:57 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
- helo=smtpout-03.galae.net; envelope-from=richard.genoud@bootlin.com;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MkJ2I6cWbIl5 for <u-boot@lists.u-boot-project.org>;
+ Fri, 28 Aug 2026 13:58:03 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
+ helo=smtpout-02.galae.net; envelope-from=richard.genoud@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=Cf5jHIpt
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E4B08407E7
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:57:56 +0000 (UTC)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
+ header.a=rsa-sha256 header.s=dkim header.b=KSQH64dL
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 051B180F27
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 13:58:02 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 6DE374E41401;
- Fri, 28 Aug 2026 13:57:54 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 222031A18A3;
+ Fri, 28 Aug 2026 13:58:01 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 3AEE760537;
- Fri, 28 Aug 2026 13:57:54 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id EABD860537;
+ Fri, 28 Aug 2026 13:58:00 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3330D11C781F3; 
- Fri, 28 Aug 2026 15:57:46 +0200 (CEST)
+ with ESMTPSA id 956A211C781F6; 
+ Fri, 28 Aug 2026 15:57:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1787925468; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1787925475; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=h/SSYJv1sBzYNyV7CSmutsjJX7sZPT4oZSggDHTmheY=;
- b=Cf5jHIptceqyZRxKOnjSho92OdMRWH80cjUQnMBqICbgA1wgS+BOB3wuGxwWhVwXMz5aBi
- YM6p4/BGfot0Ukv2ZRmYwxD3Q4ltkTW+W4soAM0MqBIff7Z5je9m3iXBFi8fm4P+sK04kA
- 50wITGAY336Qqn6K+r6LKBUqROdLyF3HxyddFH7w6ktyGaxkxsCi+30ruEbBm8beS06cCY
- QYoyKeq1jSTL4mB7wYH1eYhCRWJ20G1CiYM083vOuxM0oCgzkFkmIPajaay59GaXI3HyPp
- YBTC3SrIS2xW0vu/tcNuxOEf1qD2FCvxbXQms1CPRHVAin7VqYAB2B3gHLElMg==
+ bh=S1k2LXI/kXlUJLzaT3s1yc1orbi+AL3yLduVukqxVbw=;
+ b=KSQH64dLDF5bhyTI+UVBFvKrLQCwYU5K/Mno+eFLLqmujc65a5C1uHPDBIMRq7ffoefwoP
+ /k9PhszhmNlEBZoG8KIiWvBgae5KNK5pq2Z9ru0PlqnAyyLEqNVRuEmSW78n8tIfpjlBvM
+ haGq7Iz1N300UevTnSMsUoEKcFYGG5Vsx0Mb7njF4gcrhSK5vNSABWw121eJ0XbzOx+Hov
+ shDMzx+JrG4pPhEJIOEE5PHJI+Gd8eX2giZxG5tge/fDbJlTsasNQpEgq8mK3xERaOLQw4
+ 0OlxUA7b4YMHiZnhANDvWTOFSyKOwO3Zkuq9Qz2iDhjfW6BSplUbVdFya0DS/Q==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -83,9 +83,9 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>,
  u-boot@lists.u-boot-project.org
-Subject: [PATCH v5 02/21] firmware: ti_sci: Add TI_SCI_MSG_MIN_CONTEXT_RESTORE
-Date: Fri, 28 Aug 2026 15:57:11 +0200
-Message-ID: <20260828135730.1565643-3-richard.genoud@bootlin.com>
+Subject: [PATCH v5 03/21] firmware: ti_sci: add low power mode operations
+Date: Fri, 28 Aug 2026 15:57:12 +0200
+Message-ID: <20260828135730.1565643-4-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260828135730.1565643-1-richard.genoud@bootlin.com>
 References: <20260828135730.1565643-1-richard.genoud@bootlin.com>
@@ -105,31 +105,140 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
+From: Prasanth Babu Mantena <p-mantena@ti.com>
 
-This patch adds code to be able to call TI_SCI_MSG_MIN_CONTEXT_RESTORE.
-The context needs to be restored after booting SPL when resuming from
-IO+DDR.
+On TI-k3 platform, at resume, uboot SPL needs to do several tasks:
+- restore TIFS minimal context from DDR
+- send DDR save address to TIFS
+- load TFA and its context in MSMC
+- set TFA resume vector to its warm_entrypoint
+- authenticate certificates and apply firewalls
 
-Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
+All those operations are now done by TIFS with those messages:
+ti_sci_cmd_min_context_restore
+ti_sci_cmd_decrypt_tfa
+ti_sci_cmd_core_resume
+ti_sci_cmd_lpm_save_addr
+ti_sci_cmd_proc_auth_apply_fwls
+
+https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/pm/lpm.html
+https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/security/PROC_BOOT.html
+
+Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
+Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- drivers/firmware/ti_sci.c              | 38 ++++++++++++++++++++++++++
- drivers/firmware/ti_sci.h              | 16 +++++++++++
- include/linux/soc/ti/ti_sci_protocol.h |  9 ++++++
- 3 files changed, 63 insertions(+)
+ arch/arm/mach-k3/include/mach/security.h |   1 +
+ arch/arm/mach-k3/security.c              |  62 ++++++++
+ drivers/firmware/ti_sci.c                | 181 +++++++++++++++++++++++
+ drivers/firmware/ti_sci.h                |  92 ++++++++++++
+ include/linux/soc/ti/ti_sci_protocol.h   |   8 +
+ 5 files changed, 344 insertions(+)
 
+diff --git a/arch/arm/mach-k3/include/mach/security.h b/arch/arm/mach-k3/include/mach/security.h
+index 8502b57bd80a..fa90fed7c427 100644
+--- a/arch/arm/mach-k3/include/mach/security.h
++++ b/arch/arm/mach-k3/include/mach/security.h
+@@ -9,3 +9,4 @@
+ #include <linux/types.h>
+ 
+ void ti_secure_image_post_process(void **p_image, size_t *p_size);
++void ti_secure_image_auth_apply_fwls(void **p_image, size_t image_size);
+diff --git a/arch/arm/mach-k3/security.c b/arch/arm/mach-k3/security.c
+index c7017bba99ab..2df922a2fa27 100644
+--- a/arch/arm/mach-k3/security.c
++++ b/arch/arm/mach-k3/security.c
+@@ -133,3 +133,65 @@ void ti_secure_image_post_process(void **p_image, size_t *p_size)
+ 	      spl_boot_device() == BOOT_DEVICE_UART))
+ 		printf("Authentication passed\n");
+ }
++
++void ti_secure_image_auth_apply_fwls(void **p_image, size_t image_size)
++{
++	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
++	struct ti_sci_proc_ops *proc_ops = &ti_sci->ops.proc_ops;
++	u64 image_addr;
++	u32 backup_size;
++	int ret;
++
++	if (!image_size) {
++		debug("%s: Image size is null\n", __func__);
++		return;
++	}
++
++	if (get_device_type() == K3_DEVICE_TYPE_GP)
++		return;
++
++	if (get_device_type() != K3_DEVICE_TYPE_HS_SE &&
++	    !ti_secure_cert_detected(*p_image)) {
++		printf("Warning: Did not detect image signing certificate. "
++		       "Skipping authentication to prevent boot failure. "
++		       "This will fail on Security Enforcing(HS-SE) devices\n");
++		return;
++	}
++
++	/* Clean out image so it can be seen by system firmware */
++	image_addr = dma_map_single(*p_image, image_size, DMA_BIDIRECTIONAL);
++
++	debug("Authenticating image at address 0x%016llx\n", image_addr);
++	debug("Authenticating image of size %zu bytes\n", image_size);
++
++	/*
++	 * Authenticate image
++	 * The size argument is modified by proc_auth_apply_fwls and may be 0
++	 * when the authentication process has moved the image.
++	 * When this happens no further processing on the image is needed or
++	 * often even possible as it may have also been placed behind a firewall
++	 * when moved.
++	 * And moreover it expects a u32*. So, use the backup_size.
++	 */
++	backup_size = image_size;
++	ret = proc_ops->proc_auth_apply_fwls(ti_sci, &image_addr, &backup_size);
++	if (ret) {
++		printf("Authentication failed..but assume pass!\n");
++		hang();
++	}
++
++	/* Invalidate any stale lines over data written by system firmware */
++	dma_unmap_single(image_addr, image_size, DMA_BIDIRECTIONAL);
++
++	/*
++	 * Output notification of successful authentication to re-assure the
++	 * user that the secure code is being processed as expected. However
++	 * suppress any such log output in case of building for SPL and booting
++	 * via YMODEM. This is done to avoid disturbing the YMODEM serial
++	 * protocol transactions.
++	 */
++	if (!(IS_ENABLED(CONFIG_XPL_BUILD) &&
++	      IS_ENABLED(CONFIG_SPL_YMODEM_SUPPORT) &&
++	      spl_boot_device() == BOOT_DEVICE_UART))
++		printf("Certificate replay passed\n");
++}
 diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-index 0f5e180e9e94..c015bd3cc245 100644
+index c015bd3cc245..050f4d61562a 100644
 --- a/drivers/firmware/ti_sci.c
 +++ b/drivers/firmware/ti_sci.c
-@@ -2710,6 +2710,41 @@ static int ti_sci_cmd_change_fwl_owner(const struct ti_sci_handle *handle,
+@@ -2014,6 +2014,64 @@ static int ti_sci_cmd_set_proc_boot_ctrl(const struct ti_sci_handle *handle,
  	return ret;
  }
  
-+static int ti_sci_cmd_min_context_restore(const struct ti_sci_handle *handle, u64 ctx_addr)
++/**
++ * ti_sci_cmd_proc_auth_apply_fwls() - Command to authenticate certificate and
++ *				       apply the firewalls present in it.
++ * @handle:	Pointer to TI SCI handle
++ * @image_addr:	Memory address at which payload image and certificate is
++ *		located in memory, this is updated if the image data is
++ *		moved during authentication.
++ * @image_size: This is updated with the final size of the image after
++ *		authentication.
++ *
++ * Return: 0 if all went well, else returns appropriate error value.
++ */
++static int ti_sci_cmd_proc_auth_apply_fwls(const struct ti_sci_handle *handle,
++					   u64 *image_addr, u32 *image_size)
 +{
-+	struct ti_sci_msg_min_restore_context_req req;
-+	struct ti_sci_msg_hdr *resp;
++	struct ti_sci_msg_req_proc_auth_boot_image req;
++	struct ti_sci_msg_resp_proc_auth_boot_image *resp;
 +	struct ti_sci_info *info;
 +	struct ti_sci_xfer *xfer;
 +	int ret = 0;
@@ -141,7 +250,67 @@ index 0f5e180e9e94..c015bd3cc245 100644
 +
 +	info = handle_to_ti_sci_info(handle);
 +
-+	xfer = ti_sci_setup_one_xfer(info, TI_SCI_MSG_MIN_CONTEXT_RESTORE,
++	xfer = ti_sci_setup_one_xfer(info, TISCI_MSG_PROC_AUTH_APPLY_FWLS,
++				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
++				     (u32 *)&req, sizeof(req), sizeof(*resp));
++	if (IS_ERR(xfer)) {
++		ret = PTR_ERR(xfer);
++		dev_err(info->dev, "%s Error making the tisci command\n",
++			__func__);
++		return ret;
++	}
++	req.cert_addr_low = *image_addr & TISCI_ADDR_LOW_MASK;
++	req.cert_addr_high = (*image_addr & TISCI_ADDR_HIGH_MASK) >>
++				TISCI_ADDR_HIGH_SHIFT;
++
++	ret = ti_sci_do_xfer(info, xfer);
++	if (ret) {
++		dev_err(info->dev, "%s Error sending the tisci command\n",
++			__func__);
++		return ret;
++	}
++
++	resp = (struct ti_sci_msg_resp_proc_auth_boot_image *)xfer->tx_message.buf;
++
++	*image_addr = (resp->image_addr_low & TISCI_ADDR_LOW_MASK) |
++			(((u64)resp->image_addr_high <<
++			  TISCI_ADDR_HIGH_SHIFT) & TISCI_ADDR_HIGH_MASK);
++	*image_size = resp->image_size;
++
++	return ret;
++}
++
+ /**
+  * ti_sci_cmd_proc_auth_boot_image() - Command to authenticate and load the
+  *			image and then set the processor configuration flags.
+@@ -2745,6 +2803,125 @@ static int ti_sci_cmd_min_context_restore(const struct ti_sci_handle *handle, u6
+ 	return ret;
+ }
+ 
++/**
++ * ti_sci_cmd_decrypt_tfa() - Request for decrypting TFA to specific address.
++ * @handle:    pointer to TI SCI handle
++ * @unencrypted_address: Address where the unencrypted TFA will be restored to.
++ *
++ * Return: 0 if all went well, else returns appropriate error value.
++ */
++static int ti_sci_cmd_decrypt_tfa(const struct ti_sci_handle *handle,
++				  u64 unencrypted_address)
++{
++	struct ti_sci_msg_decrypt_tfa_req req;
++	struct ti_sci_msg_decrypt_tfa_resp *resp;
++	struct ti_sci_info *info;
++	struct ti_sci_xfer *xfer;
++	int ret = 0;
++
++	if (IS_ERR(handle))
++		return PTR_ERR(handle);
++	if (!handle)
++		return -EINVAL;
++
++	info = handle_to_ti_sci_info(handle);
++
++	xfer = ti_sci_setup_one_xfer(info, TISCI_MSG_LPM_DECRYPT,
 +				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
 +				     (u32 *)&req, sizeof(req), sizeof(*resp));
 +	if (IS_ERR(xfer)) {
@@ -149,14 +318,90 @@ index 0f5e180e9e94..c015bd3cc245 100644
 +		return ret;
 +	}
 +
-+	req.ctx_lo = (u32)(ctx_addr & 0xffffffff);
-+	req.ctx_hi = (u32)(ctx_addr >> 32);
++	req.unencrypted_address = unencrypted_address;
 +
 +	ret = ti_sci_do_xfer(info, xfer);
-+	if (ret) {
-+		dev_err(info->dev, "Failed restoring context %d\n", ret);
++
++	return ret;
++}
++
++/**
++ * ti_sci_cmd_core_resume() - Request for resuming TFA.
++ *
++ * The TIFS will launch the TFA from the entrypoint saved via the ENTER_SLEEP
++ * message.
++ *
++ * @handle:    pointer to TI SCI handle
++ *
++ * Return: 0 if all went well, else returns appropriate error value.
++ */
++static int ti_sci_cmd_core_resume(const struct ti_sci_handle *handle)
++{
++	struct ti_sci_msg_core_resume_req req;
++	struct ti_sci_msg_core_resume_resp *resp;
++	struct ti_sci_info *info;
++	struct ti_sci_xfer *xfer;
++	int ret = 0;
++
++	if (IS_ERR(handle))
++		return PTR_ERR(handle);
++	if (!handle)
++		return -EINVAL;
++
++	info = handle_to_ti_sci_info(handle);
++
++	xfer = ti_sci_setup_one_xfer(info, TISCI_MSG_CORE_RESUME,
++				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
++				     (u32 *)&req, sizeof(req), sizeof(*resp));
++	if (IS_ERR(xfer)) {
++		ret = PTR_ERR(xfer);
 +		return ret;
 +	}
++
++	ret = ti_sci_do_xfer(info, xfer);
++
++	return ret;
++}
++
++/**
++ * ti_sci_cmd_lpm_save_addr() - Message to inform TIFS about the context save address.
++ *
++ * By restoring its context, TIFS will restore its firewall.
++ *
++ * @handle:    pointer to TI SCI handle
++ * @context_addr:  address where the context will be store to and restored from
++ * @size:	   Size of the context save region
++ *
++ * Return: 0 if all went well, else returns appropriate error value.
++ */
++static int ti_sci_cmd_lpm_save_addr(const struct ti_sci_handle *handle,
++				    u64 context_addr, u32 size)
++{
++	struct tisci_msg_lpm_save_ctx_addr_req req;
++	struct tisci_msg_lpm_save_ctx_addr_resp *resp;
++	struct ti_sci_info *info;
++	struct ti_sci_xfer *xfer;
++	int ret = 0;
++
++	if (IS_ERR(handle))
++		return PTR_ERR(handle);
++	if (!handle)
++		return -EINVAL;
++
++	info = handle_to_ti_sci_info(handle);
++
++	xfer = ti_sci_setup_one_xfer(info, TISCI_MSG_LPM_SAVE_ADDR,
++				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
++				     (u32 *)&req, sizeof(req), sizeof(*resp));
++	if (IS_ERR(xfer)) {
++		ret = PTR_ERR(xfer);
++		return ret;
++	}
++
++	req.ctx_addr = context_addr;
++	req.size = size;
++
++	ret = ti_sci_do_xfer(info, xfer);
 +
 +	return ret;
 +}
@@ -164,79 +409,165 @@ index 0f5e180e9e94..c015bd3cc245 100644
  /*
   * ti_sci_setup_ops() - Setup the operations structures
   * @info:	pointer to TISCI pointer
-@@ -2728,6 +2763,7 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
- 	struct ti_sci_rm_psil_ops *psilops = &ops->rm_psil_ops;
- 	struct ti_sci_rm_udmap_ops *udmap_ops = &ops->rm_udmap_ops;
- 	struct ti_sci_fwl_ops *fwl_ops = &ops->fwl_ops;
-+	struct ti_sci_lpm_ops *lpm_ops = &ops->lpm_ops;
+@@ -2813,6 +2990,7 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
+ 	pops->set_proc_boot_cfg = ti_sci_cmd_set_proc_boot_cfg;
+ 	pops->set_proc_boot_ctrl = ti_sci_cmd_set_proc_boot_ctrl;
+ 	pops->proc_auth_boot_image = ti_sci_cmd_proc_auth_boot_image;
++	pops->proc_auth_apply_fwls = ti_sci_cmd_proc_auth_apply_fwls;
+ 	pops->get_proc_boot_status = ti_sci_cmd_get_proc_boot_status;
+ 	pops->proc_shutdown_no_wait = ti_sci_cmd_proc_shutdown_no_wait;
  
- 	bops->board_config = ti_sci_cmd_set_board_config;
- 	bops->board_config_rm = ti_sci_cmd_set_board_config_rm;
-@@ -2795,6 +2831,8 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
- 
- 	fw_ops->get_dm_version = ti_sci_cmd_get_dm_version;
+@@ -2833,6 +3011,9 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
  	fw_ops->query_dm_cap = ti_sci_cmd_query_dm_cap;
-+
-+	lpm_ops->min_context_restore = ti_sci_cmd_min_context_restore;
+ 
+ 	lpm_ops->min_context_restore = ti_sci_cmd_min_context_restore;
++	lpm_ops->decrypt_tfa = ti_sci_cmd_decrypt_tfa;
++	lpm_ops->core_resume = ti_sci_cmd_core_resume;
++	lpm_ops->lpm_save_addr = ti_sci_cmd_lpm_save_addr;
  }
  
  /**
 diff --git a/drivers/firmware/ti_sci.h b/drivers/firmware/ti_sci.h
-index ce50bf6800eb..68908c6c8c46 100644
+index 68908c6c8c46..d6ae08144d46 100644
 --- a/drivers/firmware/ti_sci.h
 +++ b/drivers/firmware/ti_sci.h
-@@ -45,6 +45,9 @@
- #define TI_SCI_MSG_QUERY_CLOCK_FREQ	0x010d
- #define TI_SCI_MSG_GET_CLOCK_FREQ	0x010e
+@@ -57,6 +57,7 @@
+ #define TISCI_MSG_PROC_AUTH_BOOT_IMAGE	0xc120
+ #define TISCI_MSG_GET_PROC_BOOT_STATUS	0xc400
+ #define TISCI_MSG_WAIT_PROC_BOOT_STATUS	0xc401
++#define TISCI_MSG_PROC_AUTH_APPLY_FWLS	0xc402
  
-+/* Low Power Mode Requests */
-+#define TI_SCI_MSG_MIN_CONTEXT_RESTORE	0x0308
+ /* Resource Management Requests */
+ #define TI_SCI_MSG_GET_RESOURCE_RANGE	0x1500
+@@ -85,6 +86,24 @@
+ #define TISCI_MSG_FWL_GET		0x9001
+ #define TISCI_MSG_FWL_CHANGE_OWNER	0x9002
+ 
++/* LPM requests */
++#define TISCI_MSG_SYNC_RESUME			(0x0302U)
++#define TISCI_MSG_CONTINUE_RESUME		(0x0303U)
++#define TISCI_MSG_CORE_RESUME			(0x0304U)
++#define TISCI_MSG_ABORT_ENTER_SLEEP		(0x0305U)
++#define TISCI_MSG_LPM_WAKE_REASON		(0x0306U)
++#define TISCI_MSG_SET_IO_ISOLATION		(0x0307U)
++#define TISCI_MSG_MIN_CONTEXT_RESTORE		(0x0308U)
++#define TISCI_MSG_LPM_SET_DEVICE_CONSTRAINT	(0x0309U)
++#define TISCI_MSG_LPM_SET_LATENCY_CONSTRAINT	(0x030AU)
++#define TISCI_MSG_LPM_GET_DEVICE_CONSTRAINT	(0x030BU)
++#define TISCI_MSG_LPM_GET_LATENCY_CONSTRAINT	(0x030CU)
++#define TISCI_MSG_LPM_GET_NEXT_SYS_MODE		(0x030DU)
++#define TISCI_MSG_LPM_GET_NEXT_HOST_STATE	(0x030EU)
++#define TISCI_MSG_LPM_ENCRYPT			(0x030FU)
++#define TISCI_MSG_LPM_DECRYPT			(0x0310U)
++#define TISCI_MSG_LPM_SAVE_ADDR			(0x0313U)
 +
- /* Processor Control Messages */
- #define TISCI_MSG_PROC_REQUEST		0xc000
- #define TISCI_MSG_PROC_RELEASE		0xc001
-@@ -1572,4 +1575,17 @@ struct ti_sci_msg_fwl_change_owner_info_resp {
- 	u16			owner_permission_bits;
+ /**
+  * struct ti_sci_msg_hdr - Generic Message Header for All messages and responses
+  * @type:	Type of messages: One of TI_SCI_MSG* values
+@@ -1588,4 +1607,77 @@ struct ti_sci_msg_min_restore_context_req {
+ 	u32			ctx_hi;
  } __packed;
  
-+/**
-+ * struct ti_sci_msg_min_restore_context_req - Request to restore context from DDR
++/*
++ * struct ti_sci_msg_core_resume_req - Request for TISCI_MSG_CORE_RESUME.
 + *
-+ * @hdr:		Generic Header
-+ * @ctx_lo		Low 32-bits of physical pointer to address to use for context restore.
-+ * @ctx_hi		High 32-bits of physical pointer to address to use for context restore.
++ * @hdr:			Generic Header
++ *
++ * This message is to be sent to start the TFA on the main core.
++ * The TIFS will launch the TFA from the entrypoint saved via the ENTER_SLEEP
++ * message.
 + */
-+struct ti_sci_msg_min_restore_context_req {
++struct ti_sci_msg_core_resume_req {
 +	struct ti_sci_msg_hdr	hdr;
-+	u32			ctx_lo;
-+	u32			ctx_hi;
++} __packed;
++
++/**
++ * struct ti_sci_msg_core_resume_resp - Response for TISCI_MSG_CORE_RESUME.
++ *
++ * @hdr:			Generic Header
++ */
++struct ti_sci_msg_core_resume_resp {
++	struct ti_sci_msg_hdr	hdr;
++} __packed;
++
++/**
++ * struct ti_sci_msg_decrypt_tfa_req - Request for TISCI_MSG_LPM_DECRYPT.
++ *
++ * @hdr:			Generic Header
++ * @unencrypted_address:	Address where the TFA should be decrypted
++ * @encrypted_address:		Address where the TFA lies encrypted
++ *
++ * This message is to be sent when the system is resuming from suspend, in order
++ * to restore the TFA.
++ * The TIFS will decrypt the TFA at specified location and restore it in SRAM.
++ */
++struct ti_sci_msg_decrypt_tfa_req {
++	struct ti_sci_msg_hdr	hdr;
++	u64			unencrypted_address;
++} __packed;
++
++/**
++ * struct ti_sci_msg_decrypt_tfa_resp - Response for TISCI_MSG_LPM_DECRYPT.
++ *
++ * @hdr:			Generic Header
++ */
++struct ti_sci_msg_decrypt_tfa_resp {
++	struct ti_sci_msg_hdr	hdr;
++} __packed;
++
++/**
++ * struct tisci_msg_lpm_save_ctx_addr_req - Request for TISCI_MSG_LPM_SAVE_ADDR.
++ *
++ * @hdr:			Generic Header
++ * @ctx_addr:	Address where the LPM data is to be saved
++ * @size:		Size of the context save memory region
++ *
++ * This message is sent to TIFS to inform it about the address where it
++ * will save the context to in case of system suspend and where to get the
++ * context back from when resuming the system
++ */
++struct tisci_msg_lpm_save_ctx_addr_req {
++	struct ti_sci_msg_hdr	hdr;
++	u64			ctx_addr;
++	u32			size;
++} __packed;
++
++/**
++ * struct tisci_msg_lpm_save_ctx_addr_resp - Response for TISCI_MSG_SAVE_ADDR.
++ *
++ * @hdr:			Generic Header
++ */
++struct tisci_msg_lpm_save_ctx_addr_resp {
++	struct ti_sci_msg_hdr	hdr;
 +} __packed;
 +
  #endif /* __TI_SCI_H */
 diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
-index 52696763ecf6..6b1dd801f5f8 100644
+index 6b1dd801f5f8..1d0a6340e1ee 100644
 --- a/include/linux/soc/ti/ti_sci_protocol.h
 +++ b/include/linux/soc/ti/ti_sci_protocol.h
-@@ -632,6 +632,14 @@ struct ti_sci_fwl_ops {
- 	int (*change_fwl_owner)(const struct ti_sci_handle *handle, struct ti_sci_msg_fwl_owner *owner);
+@@ -336,6 +336,8 @@ struct ti_sci_proc_ops {
+ 				    u32 *sts_flags);
+ 	int (*proc_shutdown_no_wait)(const struct ti_sci_handle *handle,
+ 				     u8 pid);
++	int (*proc_auth_apply_fwls)(const struct ti_sci_handle *handle,
++				    u64 *image_addr, u32 *image_size);
  };
  
-+/**
-+ * struct ti_sci_lpm_ops - Low Power Mode operations
-+ * @min_context_restore: Request restoring context from DDR.
-+ */
-+struct ti_sci_lpm_ops {
-+	int (*min_context_restore)(const struct ti_sci_handle *handle, u64 ctx_addr);
-+};
-+
+ #define TI_SCI_RING_MODE_RING			(0)
+@@ -635,9 +637,15 @@ struct ti_sci_fwl_ops {
  /**
-  * struct ti_sci_ops - Function support for TI SCI
-  * @board_ops:	Miscellaneous operations
-@@ -654,6 +662,7 @@ struct ti_sci_ops {
- 	struct ti_sci_rm_psil_ops rm_psil_ops;
- 	struct ti_sci_rm_udmap_ops rm_udmap_ops;
- 	struct ti_sci_fwl_ops fwl_ops;
-+	struct ti_sci_lpm_ops lpm_ops;
+  * struct ti_sci_lpm_ops - Low Power Mode operations
+  * @min_context_restore: Request restoring context from DDR.
++ * @decrypt_tfa: Request for decrypting TFA at specific address.
++ * @core_resume: Request for resuming TFA once decrypted.
++ * @lpm_save_addr: Send DDR Save address to TIFS
+  */
+ struct ti_sci_lpm_ops {
+ 	int (*min_context_restore)(const struct ti_sci_handle *handle, u64 ctx_addr);
++	int (*decrypt_tfa)(const struct ti_sci_handle *handle,	u64 unencrypted_address);
++	int (*core_resume)(const struct ti_sci_handle *handle);
++	int (*lpm_save_addr)(const struct ti_sci_handle *handle, u64 context_addr, u32 size);
  };
  
  /**
