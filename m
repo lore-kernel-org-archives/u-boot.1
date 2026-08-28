@@ -4,90 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0476C61DD3
-	for <u-boot@archiver.kernel.org>; Sat, 29 Aug 2026 03:01:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A29C6C61DD3
+	for <u-boot@archiver.kernel.org>; Sat, 29 Aug 2026 03:02:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 19EBF40854;
-	Sat, 29 Aug 2026 03:01:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6038140A27;
+	Sat, 29 Aug 2026 03:02:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AnF7H7D_loHW; Sat, 29 Aug 2026 03:01:55 +0000 (UTC)
+ id Tqeo21UIB7Ex; Sat, 29 Aug 2026 03:02:04 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787972515;
-	bh=rTIJBiTlNpG7xwzSg5Lw1j8Kcbx1WbPovWL/krSO2OY=;
+	d=lists.u-boot-project.org; s=default; t=1787972524;
+	bh=X1WyPCjJCsfG/9OXcuMvHS/n769R3bs1AHWhgH61LS0=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=cWqkU0KA12CAIW+EQKe+Xqakf8DSGI9QpepS7XwgU5FBp6IEhltJ6XshC/n+RnTZo
-	 ojOktTfQqoMP7Whi00rw1sJHu+kVPno+iMR1WP+8oVhKcQbJkclBo8ydIeFOIH3JLB
-	 5olPJCqaOTgpTmHPzqBNbjfuWCS3T8BSSiGdNjOd21tLs/5PtiX4I5jM+cG7hJfe7U
-	 O+FTG4gEue7641w9l+0JQ1AtAb/55hhicBNJKvHDe4CSGiX19YCIU/LYfIyqAybgJe
-	 ME8sz4pgFYbsJABtdyWWwTlirepWYMzrT2op4zsvkTVGl9RdnjD07ElmaK7HgQAkrx
-	 ba2izejHnZTdA==
+	b=k55ONzmFJ4Bxzwso6khT154DGbC5kteOdoCX321jy+gpzx5q5Dfenr1du8N1NVUVm
+	 8+bZIKxL6UNmFhU7f/gu7MOP8fCRS0U7jsoRHFb2njLTO6xQ+zdD8bMdil3/3EgX62
+	 p3133CpQ3bSBsH6pS5Fo/RdhHszFjcfqxZ2XWGxbW/QoYiUkqr8DK5vTdKR2jevBOP
+	 0ki5ZTVx1Ng+EOkrsMqbuTRUKiARcQaL5CxXj+vjPeNB/8gqcR8cbHCjefgve1AGzs
+	 X5KUKb60tQ2JhR6ZPHg86UueDQw4XlFwCnsBBIvFoFfez6c2WHfz9OSgcE9wkJe4Zb
+	 x6Ycjv0x8OZTw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AB6F740812;
-	Sat, 29 Aug 2026 03:01:55 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 4129B23E
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 03:01:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F029340A0C;
+	Sat, 29 Aug 2026 03:02:03 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id BF05A1DE
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 03:01:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 32B5B40812
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 03:01:54 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 956EC40087
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 03:01:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AkMq_SS_AeVN for <u-boot@lists.u-boot-project.org>;
- Sat, 29 Aug 2026 03:01:53 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.172;
- helo=mout-p-202.mailbox.org; envelope-from=marek.vasut@mailbox.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GNNdEWxp4W_R for <u-boot@lists.u-boot-project.org>;
+ Sat, 29 Aug 2026 03:01:56 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.171;
+ helo=mout-p-201.mailbox.org; envelope-from=marek.vasut@mailbox.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=nfESf7BE
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6F014407F6
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 03:01:53 +0000 (UTC)
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
+ header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
+ header.b=tF93ahoP; 
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=OljmvGO6
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E12DE40068
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 03:01:55 +0000 (UTC)
 Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4hX0Qh5Np1zMlFW;
- Sat, 29 Aug 2026 05:01:48 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4hX0Qm3Xx7zMlBT;
+ Sat, 29 Aug 2026 05:01:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1787972508;
+ s=mail20150812; t=1787972512;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=rTIJBiTlNpG7xwzSg5Lw1j8Kcbx1WbPovWL/krSO2OY=;
- b=nfESf7BEA12kU53tto3engKQGIbhapx5ot2tWSlKN2YVdm3T4TKnXXGHxKyF6c9Jakp3II
- M9Ctiulg94SjcUMiC2LAkh0nIGbFFiECToWezlwfzQYlrA6zbu3UPQ3MEq5hpp5vDArK0l
- wi7CXbJi5dIUp9sfqz3MiGiWCdTxWA00d1Xp9RMnYFgzMY9MpElXzAexINsfm8gefM9tGT
- roS2FVDKnseNX6AT85yr2s7DiLUt9Yure5RjD/O/7zQArA9v3gB0UOVHLyM9d1F5n5C/66
- jjmdtoZd3Gfm6dRJdd0G83VoP5oHBxx6z8kSVM00/mZkLYKp0xFUw99dRVKY1A==
-Message-ID: <d1468bd5-f56c-47e7-9da1-06d23d8f0339@mailbox.org>
-Date: Fri, 28 Aug 2026 23:15:13 +0200
+ bh=X1WyPCjJCsfG/9OXcuMvHS/n769R3bs1AHWhgH61LS0=;
+ b=tF93ahoPRvDbDjZDafwsqmcZ1Cujmiv8cdBFU4eJdQSUS/EQW5GTuedacu/faZpNA5whwX
+ 863TBYInNaRASl1PYe5ZPGwUo3fKB6Ll4ICCcdMuEjAA1t/ww7Z4EykBS8AGUI2+M211gd
+ n9SDEP7Jbt0F/HJY24xY506eJsfFE33e5Sd/ufNYKaTt+nklmB+XvlgMKuNjYwWHFz/dVS
+ Rcs2GQS3ol5VoxPdt1t5Rr4YnsH6UfuqJRxDgMDtf6wuGdK7GDvK+f+glJyHsEZsxodBqh
+ bY/GnvSi+k0/gphbL88VvjU8HXnEdy70Nj06mzt4HJceRGqejFQgWKO8jVbitw==
+Message-ID: <89aa40df-e38d-45a0-a422-4ef045153771@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1787972511;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=X1WyPCjJCsfG/9OXcuMvHS/n769R3bs1AHWhgH61LS0=;
+ b=OljmvGO637x9DAVI028LeX0R+KFIfE8Y5fmTxYNSQqa+8FfpNzho2qhylGGRuXx555SXhF
+ P2U6C/atN2Y+hkTJ/96p5jU1k1NAzIOuQYYCICy/tegjekNL7nV+tlntVteu2Za1ivHvil
+ nOFyVq7lFqIlMEuQHwDXYsHaV2z0J7umMdxq/n2Iga4NDBMUQkLw5f/wjrkSDtqnzV1Qt6
+ HJQYPmdmfwZatUN/Y+iG0vUgW1AZJK/AP+v9aTbb5z3jElPtpAKGUuc+93bO2gUINBziUY
+ bEpXXX6S3vLULvMNROY1wlATgheqbh5b29Hqeiq9+AGSwCPuM1b+OHMlFkcIdg==
+Date: Fri, 28 Aug 2026 23:18:30 +0200
 MIME-Version: 1.0
-Subject: Re: [QUESTION] Architecture and roadmap for Synopsys XPCS driver with
- APB3 indirect access
-To: Akash Nair <akashn@marvell.com>, u-boot@lists.u-boot-project.org,
- boon.khai.ng@altera.com, jerome.forissier@arm.com, trini@konsulko.com,
- clamor95@gmail.com, maxime.chevallier@bootlin.com,
- Peng Fan <peng.fan@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- Simon Glass <sjg@chromium.org>
-Cc: rkannoth@marvell.com
-References: <5skppezbdkanp336d4nr2jv7yp24kngxs2wcewll6mrxgwdtug@mygftq2jjbjo>
+Subject: Re: [PATCH v2 4/8] ARM: renesas: RZ/N1 QSPI controller features
+To: Ralph Siemsen <ralph.siemsen@linaro.org>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Udit Kumar <u-kumar1@ti.com>
+References: <20260814-rzn1-2026-10-v2-0-56b6acef0439@linaro.org>
+ <20260814-rzn1-2026-10-v2-4-56b6acef0439@linaro.org>
+ <7243d0c9-1466-4236-9d41-5d78fa1cae4f@mailbox.org>
+ <apHK_Q-dogLc3Mkr@maple.netwinder.org>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <5skppezbdkanp336d4nr2jv7yp24kngxs2wcewll6mrxgwdtug@mygftq2jjbjo>
+In-Reply-To: <apHK_Q-dogLc3Mkr@maple.netwinder.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: kmzq43f8qkfpxekqqfqt3fknk948duz5
-X-MBO-RS-ID: cfb673117d136c37817
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: aeenikz5h4bb9s65b5mhed95znu46txo
+X-MBO-RS-ID: 3d7253b7558f8e70295
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -101,36 +117,46 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 8/4/26 7:41 AM, Akash Nair wrote:
-
-Hi,
-
-sorry for the late reply, I am buried in emails.
-
-+CC Alice, Peng, Simon, since they might have something to say here.
-
-> I am currently working on Ethernet driver integration for Synopsys IP in U-Boot, specifically focusing on the Synopsys XPCS (Physical Coding Sublayer) block.
+On 8/28/26 7:53 PM, Ralph Siemsen wrote:
+> On Sat, Aug 15, 2026 at 12:25:10AM +0200, Marek Vasut wrote:
+>> On 8/14/26 8:38 PM, Ralph Siemsen wrote:
+>>>
+>>> diff --git a/arch/arm/mach-renesas/Kconfig b/arch/arm/mach-renesas/ 
+>>> Kconfig
+>>> index f86acc31039..4d16d541443 100644
+>>> --- a/arch/arm/mach-renesas/Kconfig
+>>> +++ b/arch/arm/mach-renesas/Kconfig
+>>> @@ -70,9 +70,13 @@ config RZN1
+>>>      select DM
+>>>      select DM_ETH
+>>>      select DM_SERIAL
+>>> +    select DM_SPI
+>>>      select PINCTRL
+>>>      select PINCONF
+>>>      select REGMAP
+>>> +    select SPI
+>>
+>> Shouldn't this be in board config ? Not all RZN1 boards likely require 
+>> SPI ?
 > 
-> After reviewing the current codebase, I noticed that while Linux has a dedicated XPCS subsystem driver (drivers/net/pcs/pcs-xpcs.c), U-Boot does not currently have a standalone equivalent.
-> 
-> Before starting development on a standalone driver, I would appreciate your guidance on a few architectural questions:
-> 
-> 1. Existing References:
->     Is there any existing/in-flight work or reference implementation in U-Boot or vendor trees for Synopsys XPCS handling?
-> 
-> 2. APB3 Indirect Access vs. Clause 45 MDIO:
->     Most typical implementations access the XPCS registers over MDIO Clause 45. In our hardware architecture, the XPCS is accessed via an indirect access mechanism using an APB3 management interface instead of MDIO. Are there any existing driver patterns or abstractions in U-Boot handling XPCS/PCS over non-MDIO register buses?
-> 
-> 3. Design Context:
->     Is the lack of a dedicated XPCS driver in U-Boot primarily due to design preference (e.g., relying on TF-A/BootROM pre-configuration, or embedding initialization into SoC glue code), or simply that a generic driver model port has not yet been submitted?
+> Any RZ/N1 board that makes use of the QSPI will want this.
 
-The later, nobody implemented the XPCS yet.
+That means, move to board defconfig.
 
-> 4. Upstream Integration & Guidelines:
->     Is there interest in upstreaming a standalone Synopsys XPCS driver? If we implement this driver under U-Boot's Driver Model (DM), what key requirements or design points should we keep in mind to ensure it aligns with current networking uclass standards?
+> It could be 
+> done in the defconfig, but it is easy to miss, and not fun to debug 
+> (took many hours of printf() for me to find it)
+
+That is board defconfig bug then.
+
+>>> +    select SPI_MEM
+>>> +    select SPI_DIRMAP
+>> Shouldn't this be selected by the SPI NOR driver instead ?
 > 
-> Any insights, historical context, or recommendations on how best to approach this within U-Boot would be greatly appreciated.
+> The same driver has other users, but they may not all want DIRMAP.
 
--- 
-Best regards,
-Marek Vasut
+Why would they not want dirmap ?
+
+> I will move these settings under TARGET_SCHNEIDER_RZN1 so they are 
+> specific to this board.
+OK
