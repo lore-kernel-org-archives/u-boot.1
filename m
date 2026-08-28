@@ -1,128 +1,155 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26B9EC61DBD
-	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 09:28:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E93C61DB9
+	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 10:50:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A5836407F5;
-	Fri, 28 Aug 2026 09:28:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3A34280ED1;
+	Fri, 28 Aug 2026 10:50:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dP43kjkI3e-m; Fri, 28 Aug 2026 09:28:57 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id k4Lrg8KU_nHp; Fri, 28 Aug 2026 10:50:21 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787909336;
-	bh=rzzcLC3Bx+g7mxkOgY4W0sfFqnMT0XuvCxskcktkRN8=;
-	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=KNvjby98V3PgsMveJ62v9jMQeMQuQzdjPwuUkV7Tgx+ZwkK/hVKeEXPpFScv3E6Ag
-	 TUfgavM0WsgPG+V9WGNt+MMs+X2gpj9RNaw5szNHtGpcjSDAQE8x3TYSdK/GILEJxz
-	 PbNX7mTM2IkSnc4MZ1ZT0/FPLp9Wc5uu2LsaQriiXJ9jeJzVbDkwNNv5SjpEOBZ1l5
-	 ZqdX9qgnpIGmJCM7myrBPPUobqQEdwmYg/zyQEBBeqZSG18Vjfyht2aq7+ArzZ2XcH
-	 5zhAghvY/3gaJ4fXXDn+/KzM3CwH5ABxxQmCLX3fEaZg+3nhrfbF4IRm25V7Rs9DKl
-	 9+XU35UcLkvHQ==
+	d=lists.u-boot-project.org; s=default; t=1787914221;
+	bh=Whc1v39abiv3ZQte9+0aRMlR5xiwrTdl+7JiHlJpWiI=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=L3RQ6Lb/PHqpp/Tn8c5SFeooRiWnvUd/j4yT6M7dZHV1Wjsdg3ShucjIEgq1pWMSq
+	 KN4hr6CjCCVWdjv7w/k8PC9PVz5ORUWc2nma6klY1DM2xXYnY3N9BztJfcX+HostL3
+	 T21QKyu2VyILrt69fcEXgq/wAtSjqPJrF/vW75YBdpVg7OcVctufQDh9AAS+WS+AwQ
+	 Da5WY2QX/MKiZ8v7c32tKzyYZR5WFPQcajlmDGMZ3YYTUIyIs48+xQteedpE62Nnwq
+	 dq68ymdOKIkoFUzpn0X6KeYSrzyYjKcf36JUaLFrZ0EfrvDHUkwQjA4QgVf4Hwi8dy
+	 Ln9qxfdRT9juA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D15C340692;
-	Fri, 28 Aug 2026 09:28:56 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id F1018465
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 09:28:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5025780EB6;
+	Fri, 28 Aug 2026 10:50:21 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 67F4A334
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 10:50:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E275B40692
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 09:28:54 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 59FB840834
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 10:50:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZTnM0OzuU8MA for <u-boot@lists.u-boot-project.org>;
- Fri, 28 Aug 2026 09:28:54 +0000 (UTC)
+ id vxNQx1f5P57j for <u-boot@lists.u-boot-project.org>;
+ Fri, 28 Aug 2026 10:50:19 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::430; helo=mail-wr1-x430.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+ client-ip=2a01:111:f403:c20a::7;
+ helo=pa4pr04cu001.outbound.protection.outlook.com;
+ envelope-from=rasmus.villemoes@prevas.dk; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=kVqDceSR
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D4C6A40649
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 09:28:53 +0000 (UTC)
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-47f96c5b722so457538f8f.0
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 02:28:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787909331; x=1788514131;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-type:content-transfer-encoding:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=rzzcLC3Bx+g7mxkOgY4W0sfFqnMT0XuvCxskcktkRN8=;
- b=kVqDceSR4L7XXhwz11Hra9vkaluguxEqHDKNcisOtaRp6G67W85Tpk6OktIJq4x0LD
- yCrVheu/TWgcvtaFLq8lmdzeKu7fdno/YFLZ2YrjfAwZ0gGjzxoh/4l2iR4QG/+oFrdk
- 7NATMAA6Ip8py0o9ikEB88x22BTHcKBd5TUHGG06102/IhpypPGuqz/TfevGkhCoREI0
- L0LSdx5bBDKXQ5rt9UaIqaKvEffjFiB9HcgimABKiEyfqV2sxcDsEBd5Pd4rBhSllSla
- ZZzwwy5ylXf+YkMRwgjFLWHPN9j9E5c/KSQib2xMRbo82Vs2FSFYvOxfHVpHWNRP57Bf
- tlvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787909331; x=1788514131;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-type:content-transfer-encoding:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=rzzcLC3Bx+g7mxkOgY4W0sfFqnMT0XuvCxskcktkRN8=;
- b=aAPNGMoBKTb7VISfSnz8rsqSw9FNAvmZbtjfzFMtT/fMawrmp+Tbw1u2BSTMk8v6TV
- IbQFgBnnxEad9I1YS1zloGQFuaGpZZAFfP9MbMpGiMoRk7XutSKqQqrM9362bCpnDVIX
- tYR9i6krAQ++4M0c8q23pDDIvwIh4u+Smb8TJJSya1NsoLKrzS/FGz7Z9f5sqeJVNZcX
- BdehmWldg85E8D++K38vN/79isjNScdypv89ZrNda3+Q5c+IF+XgAvNZgBymP2EEvG6N
- fJsgv7VPjPjX8hE460OdQCM41EwNys4qi9WaO+mYjMQu6LKvYhtYYxprX3j0jKs6ZVHe
- Yd9Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpEvy8OjzdW/qDg5idT+7L+YA5Xatm5hV4XzzsJlabIbkHhTLV7crCWwYWNlRasW9S6FNWY3F4=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lIdKP+lDmY6D0grP4XaOyCAiVByuajBdCmo6mEBuE5GNlc2UBU
- WI5PzqsIv3hXUSI0Wpx2GXj3E+7oVfbL8g5crw/kGVliLpmgq0UfCQ8AGm1Go/7W3ZdzLquhFCu
- kWZL/JF8=
-X-Gm-Gg: AR+sD122UgrNrDXbKmyjkhi9O/8vehuKBFiK53D6M+htfTh4mp6SUlnE+NV4OYtlTls
- 6Xy76ILNxs76slNUvFlzJ2t8HHPLxeuZjTb4jo9ko0E6wTeDCZFAsmJT0G62nwJ+SWVVUDPRvV5
- RyBh9ZUERY0S1bcfXRYLqig+t4RVkGgXG6SUnimVrHoDyu5q0UVJMLCtUoE8/okuxg0robo7J2a
- 5f/JuOyAcRReNDuyDIeq3Ns/8mHDtrayXht7l7Vvu/yFbWD4lO6BEqlL2JFBK/pYRiWkXvAhqu+
- xAvGKyalfVj02MVn6j0DLj5WoS8xq3g/hwJ4xwnj1TFsFqDx1bJR+TyYAQIw9MoWRwZPkkShvH9
- rnBYScXGFGdqnl++Fyvwp+DZ79ELX3b5BnE5gG4KfpyaG5W+n5Ib1AO7KLIPhoTkBxZTVa/8OEf
- RPt7dcNV/meqjAI7uvZvi0K/0xznY7ELKUrjzw+qSKJCJxZ2RkfK5JlLRxM0RHzgFJo66kJuBsb
- EZQ9hs0EO1eJpXrHp+LZcTC+wqyLiTPodJ80syCymHcud85Bo8PsE22AQUUpfQi9PXyPi08vEOP
- cI07ix44f3hxJzQUJTYAw2WDp54BlZtLExlCTtYTOvEO2b0BT1jYWHJeYRrnfxE2u1RUE2XqqiU
- 45rk6wZQGGM0TMbqRYN55JIjeWvLmSfxyOn17pKk8sbism+jahqaVadsdw/Lm18RDXVAKIkHhFm
- IHKIXgKOE6IqYhL99aT1+iVleUH9b5Lg6YfE+vWp2dwy/NrFT+6SPY9RUsZniWiKDqgbUtX5yZY
- R8vg7auBjfRMZo5oPrb17u57kNaCsdoDrcDAVPbLojTIIv7pPckJYevU4If/9qceCqw
-X-Received: by 2002:a05:6000:4008:b0:482:e2f2:19cb with SMTP id
- ffacd0b85a97d-482f79870f9mr7555872f8f.5.1787909331305; 
- Fri, 28 Aug 2026 02:28:51 -0700 (PDT)
-Received: from localhost ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482fbab3f16sm2749999f8f.1.2026.08.28.02.28.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Aug 2026 02:28:50 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 28 Aug 2026 12:28:49 +0300
-Message-Id: <DL0GYMY2PH5B.3TCLPY0T7YFMX@linaro.org>
-Cc: "Heinrich Schuchardt" <xypron.glpk@gmx.de>, "Tom Rini"
- <trini@konsulko.com>, "Michal Simek" <michal.simek@amd.com>,
- =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, "Simon Glass"
- <sjg@chromium.org>, "Mario Six" <mario.six@gdsys.cc>
-Subject: Re: [PATCH 1/2] efi_loader: firmware: decouple dfu_alt_num from
- image_index
-From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-To: "Balaji Selvanathan" <balaji.selvanathan@oss.qualcomm.com>,
- <u-boot@lists.u-boot-project.org>
-X-Mailer: aerc 0.17.0
-References: <20260813-efi-firmware-dfu-alt-num-v1-0-43f034253b21@oss.qualcomm.com>
- <20260813-efi-firmware-dfu-alt-num-v1-1-43f034253b21@oss.qualcomm.com>
-In-Reply-To: <20260813-efi-firmware-dfu-alt-num-v1-1-43f034253b21@oss.qualcomm.com>
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=prevas.dk header.i=@prevas.dk header.a=rsa-sha256
+ header.s=selector1 header.b=QSqkJ1HS
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A18044082B
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 10:50:16 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=uUIjnvkUmTt2gN13lvwAW5puBlYCfbjrKCXoJwrHL6Owiin0cBckJpkzwRDAUUw8tg4JnL2WNpzrLYAInDGuCEgD1+173mPTL17R3qYi5vd2/60Ipe4qbASeYAoE9xZzTx9nKhS8IAJ5Y9fH8yuDgczr2DeFFb1aoQpdHqEX5SITXM5DSCMmuailEydCJDCUeoiQEHEuMWs+nO3jS8ZrFS8FIQsAM2zh9uh30i4vo7GS8Qd1SYdaRh9Zmk6wvbnP5FZfUBisIAr7of0i4m0bAFBwIaHWRoAEH2P74wbOzxTbzuLOY5puzwxAfb8fUQsdROdRkn6lH5KSPkrjEysM/A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Whc1v39abiv3ZQte9+0aRMlR5xiwrTdl+7JiHlJpWiI=;
+ b=Wnz1BJHvN7thcBe39rxCvQXtDUkEw1igrROZYWQOx0I1dqWikQAJV4nCuEesSepB6H1gFGah8nA3rUag4EGVnxnkkDwLPnTSBYMGikmEJ3X/nvkbHR5qlpSHba8zYvfoC2j3vFFm+H/u83tghL4wl+rHOvDJOdJg9Hl0uTgUYDQ4Xjj9WQBcke7CClWp3/SYd8DkYzNlQy36rkJjv5m/pelrQWsA3i1kcp2fA3oZPJ7cpyFfDJx60XoLQ1dSkQ+GDrLWUvoydsOw9KqADDAkeiwKZwqOTkDXZD3xD8twZpnTQHuEmSogSNm9uSNhXnfKBYCivfe6spkhEImlp+sZIQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Whc1v39abiv3ZQte9+0aRMlR5xiwrTdl+7JiHlJpWiI=;
+ b=QSqkJ1HSl8Dr/ivf4hxDwHk6BugVyzRjlu3co4OhxZZc9jbobI8rCuU8Q2Af1u0dtIjfEIfw8Jt8MUAAHw+cKubpBqGLlafdVNUEXM8IzFHqVltgbou4sGz4m/DtX4UJONM6KfMlt3ifwWHu3nzOA42KDx6B8f5YewMeTLUSx+E=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by PAXPR10MB5757.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:247::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Fri, 28 Aug
+ 2026 10:50:08 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8%3]) with mapi id 15.21.0360.008; Fri, 28 Aug 2026
+ 10:50:08 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: u-boot@lists.u-boot-project.org
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Rasmus Villemoes <ravi@prevas.dk>
+Subject: [PATCH 0/3] avb: start handling too small buffer for reading
+ persistent values
+Date: Fri, 28 Aug 2026 12:50:02 +0200
+Message-ID: <20260828105005.200338-1-ravi@prevas.dk>
+X-Mailer: git-send-email 2.55.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: GV3PEPF0001DBD2.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:158:401::6b9) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|PAXPR10MB5757:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3ad93132-6efd-4aaf-bfe1-08df04f22060
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|23010399003|376014|10067099003|11063799006|56012099006|18002099003;
+X-Microsoft-Antispam-Message-Info: GfI38qIzzP5lFW68LRFBCFYZHDDbNjkevaunTqjqi+lnNX1g21Kmr3ozlyJtyEdwT6qiPjz/40Qsbjjm+ASCOUblVMQlyo2IySOUFgnVeb6rbEi2Jg8+ZDFs8rjc4kSJWlElK+WTfp81AGwblh5g5DmPu+/QtywyoHH8PFSod5lU87ptv68JWTG9vADBeFBrTFX3W6T/5GrU19zrSbdubf6jukZUEgcH0mFUcM8j503imhKoIQTfApquctoKwBbYVkjFciKNj96QLx0+3joPIsUhX3Ltx+fRRcVXzfdUq/pQfVIYnmxGt1yC1BskIXqG5VrV+pbjbatHSZV5/nZyioQ8MrhYH1cdsWz153YoYCrK6ftDNFJQXOOj2NLF5P84z0jKM8i9hAOIV8+SiERzQF+v8N5zRp9Q+eEHWwsdEChK4pND0G3NgavBbEO04PJ1EeuINU+6bd4c+yyftvYlQ9EsZhmyRLLmWzMVo7Iaj4fGRscmjJtqJrvsOKNvuH+MMy5+IO+BFtQULL68GbTZuXpW2GDvRSVL7gCQuMwpMDYffWFII8mC0fjhnHrcPnBFasQ/AexHfuuGlltq9I/99tgTIGSwdtbGf3g8Din4LyoME2t6W6G3+PY4IrdJWLvFZA0IQmvKG0HlNZ+nGMH/2e9pQBIb4UXYxglPkXV8H3c=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(10067099003)(11063799006)(56012099006)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?MOjL2RGikEcSInN96KGY7bflYPzwOvfFdJfLDsGQjGhzARDnO17oLVdabwQh?=
+ =?us-ascii?Q?42m0uBwTsSrb+L42I/tnIx0FwWy5YBStB7BgAtS3HZZbm4zhY83ecGRyASCi?=
+ =?us-ascii?Q?Jv6zU19zRDHA540JDe/vrU46N51IHtwmfRDGsO9B26tuLjnlbTRtqPg0HLXJ?=
+ =?us-ascii?Q?OPaK1xQdpZ6Pb0iZuyfWHsK6hhpRTYt/Bt7hO8DHxxPSVNYeT2cYkyyM14U4?=
+ =?us-ascii?Q?useQHS3jjfpgoC6G3Ekpp1T/rriiJozlQ8wYrDoDSEJ8qGvD9tFiO0SqGTQ6?=
+ =?us-ascii?Q?NfrNe9ZIhGiCcLIuSrY4LnCmwfYD/t4fFoTowro5+sKSbsDi9lMYng5A4BWc?=
+ =?us-ascii?Q?laAWhkCWICy4pnI9GHVSf+9yCXECSlHwxCsiZ7zClkbUxIp8qbNPDC/uhng3?=
+ =?us-ascii?Q?/2eOvWIgFPl8oD578ERB0caiYQqI3K/0D8bQtmV9ZYEMaoio+gHBYe1QADGw?=
+ =?us-ascii?Q?0IqHLd2j5GVrwsc4hty6n1+dGez8EI8ZUGJ8ACu492LCLcUpzskogJFgHCdF?=
+ =?us-ascii?Q?kAXwYipuP5SGs0bSo8EGDGcpdJzqqJxntKhlw5sfr7QZkgb5GZRfvEbLioq/?=
+ =?us-ascii?Q?qQrC4wSY0Qf+JcXhLhGc51mRK24OyRRar9LlhaUzZRrXUohpahObUT8/6zzU?=
+ =?us-ascii?Q?CgJl0vNFCCjvAK5yBfDPkodmnOSyVjDlIgE4E3bT4YMyCUvONC9MuUDVZcNk?=
+ =?us-ascii?Q?oTITwAj7mhz++QQsDAR8lR6xPKZ6QkrpJgKYgxudGjjJsbhExEiA6S2eCzkx?=
+ =?us-ascii?Q?70cVzl7q4H245DqYVvOXh4Ff5V5ziHZGwTjRcIvb5fMjCBTePx59Up/hgNhh?=
+ =?us-ascii?Q?CTitHoLmZID1ZyBHBuJAThadHYIYVZcFskKZJY9qdSYlNgCdSvNtbkEbSrEW?=
+ =?us-ascii?Q?vq/43zxCOG9Ty6l7nXfkV398em10gq2ex/QwBqmijHBh6HjXAKtM4mT9BIDr?=
+ =?us-ascii?Q?jXTL6ozXE+7lbmtKbTJaMhOnRBck0xNnewpA57szN7Wvdpp+Y/fwrJcEUMF8?=
+ =?us-ascii?Q?qjEjik5Uz+zUXFkS7Vjag1eqd7Ru9Ts97PijorxvMRRhA4WHT5rlX+KbEl3o?=
+ =?us-ascii?Q?LCdk7wkONGiNrLdmmIE/GgnukfzH/Wf1AKFkBsaIblAJiM6Ca7ZVlScu9A+o?=
+ =?us-ascii?Q?IQdCM3VbbBfs1+kS8P6YDMyd0a7NRYkZXT8SEFiVcjwi/x24tVtXhh0En4Pe?=
+ =?us-ascii?Q?BTj2gnVADE0Ohk5Qt+tPoRck9ajsPeI5DHJs1AavugC1S/FoyyNtkcr+f2m2?=
+ =?us-ascii?Q?Wq9P94XaP1gZRDrpXEq9Cf70eoWyinfYvtZ1eYzu8Bx6/vKPUMkFF/shM5mR?=
+ =?us-ascii?Q?jTM7UkOWfVHgBxOcgOa6ALIw6pO2HrCV81lqLDVPyxP5D1FsYnII4HDXsMYl?=
+ =?us-ascii?Q?EyniVFfS16Zu7NRIEylRJFxEjHoNabBbzq1zG1s1zPC6ZLbw3IQjU+CmDzv6?=
+ =?us-ascii?Q?qYHKumBzoOeQ5L6dAIlc0I+M+CrnWvSoLtmcR8pdo+YvnoQPD8oh9cvsFyH4?=
+ =?us-ascii?Q?VkP1RTFymzpHx/FJHfTG6OnAnCMX40ofkgdiVK1AamQIP4vDcFGmH5D3KzEY?=
+ =?us-ascii?Q?ryPpRG2dil9AHq7VuWtL9k6tVzTejDFE7C+W2u8rqm1p9rBgZS0yxGfElUz/?=
+ =?us-ascii?Q?vnCxpgkK9X2XBpFUy/mYQCRDX8evV4muz0geff0MHZYw6AezWlvyh4a9qg1z?=
+ =?us-ascii?Q?VpOSdAO0xND7rQXzdOzFdTcbQFahjGW15c60X7e8LP72fiJiPwF0X8Llj+St?=
+ =?us-ascii?Q?nIwHlZ6rl0sn55TL5RLPi5D4Er6Y4VM=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3ad93132-6efd-4aaf-bfe1-08df04f22060
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2026 10:50:08.3389 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: PSxBl3gg8oR2Ur8gtL1BAf24c3XdYyMItn/KvPuaY81dM55U4+k7QMZyUWokuIZ4oCMGyvBoI4rBqaNqympbDDn/Mf9Bi6otjsmBAZPQb8U=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR10MB5757
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,129 +163,37 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Balaji,
+The avb_ops.h header clearly indicates that it should be possible for
+the callers of the read_persistent_value interface to know that they
+provided too small a buffer, and the interface should also tell the
+callers how big a buffer would need to be.
 
+However, that was never really implemented, neither here nor on the
+op-tee side. So if a too small buffer is passed, the caller simply
+gets a silently truncated result.
 
-On Thu Aug 13, 2026 at 8:53 AM EEST, Balaji Selvanathan wrote:
-> RAW capsule updates assume dfu_alt_num is always image_index - 1, i.e.
-> that fw_images[] is a positionally-ordered mirror of the DFU alt
-> settings. That holds for every board that builds its fw_images[] table
-> by hand, but a platform whose image list is discovered at runtime
-> (varying per board, with gaps for missing components) can't guarantee
-> image_index and dfu_alt_num stay in lockstep.
->
-> Move the (image_index - 1) calculation into a __weak function that
-> platforms can override, following the pattern already used for
-> efi_firmware_get_image_type_id(). The default keeps the
-> existing behaviour, so no other board needs any change.
+I've proposed a fix on the op-tee side:
+https://github.com/OP-TEE/optee_os/pull/7959 . Since that is an ABI
+change (returning an error where it previously "succeeded", for some
+definition of succeed), the maintainer would like to see client side
+updates as well before that can be merged. So here are some of the
+changes that would be needed in U-Boot.
 
-*efi_firmware_get_image_type_id() was always static, which funtion did you =
-mean?
-fwu_plat_get_alt_num()?
+I have not yet looked at any of the callers of the
+->read_persistent_value method via the avb_ops structure, only the
+implementation of that method itself.
 
->
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
->  include/efi_loader.h          | 17 +++++++++++++++++
->  lib/efi_loader/efi_firmware.c | 21 +++++++++++++++++++--
->  2 files changed, 36 insertions(+), 2 deletions(-)
->
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 3a4d502631c..6626674f738 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -1187,11 +1187,15 @@ efi_status_t efi_capsule_authenticate(const void =
-*capsule,
->   * @fw_name:		Name of the firmware image
->   * @image_index:	Image Index, same as value passed to SetImage FMP
->   *                      function
-> + * @dfu_alt_num:	DFU alt setting number for this image. Only consulted
-> + *                      by a platform's efi_firmware_get_dfu_alt_num()
-> + *                      override
->   */
->  struct efi_fw_image {
->  	efi_guid_t image_type_id;
->  	u16 *fw_name;
->  	u8 image_index;
-> +	u8 dfu_alt_num;
+Rasmus Villemoes (3):
+  cmd: optee_rpmb: sanitize TEE_ERROR -> E* translations
+  cmd: optee_rpmb: try to allocate large enough buffer when reading
+    persistent value
+  avb_verify: read_persistent_value: honour contract regarding too small
+    buffer
 
-Why do we need the extra struct member? The code doesn't update it to store=
- any updates values.
-Can't we just use the runtime result every time?
+ cmd/optee_rpmb.c    | 45 ++++++++++++++++++++++++++++++---------------
+ common/avb_verify.c |  5 ++++-
+ 2 files changed, 34 insertions(+), 16 deletions(-)
 
->  };
->
->  /**
-> @@ -1240,6 +1244,19 @@ efi_status_t efi_ecpt_register(void);
->  efi_status_t efi_esrt_populate(void);
->  efi_status_t efi_load_capsule_drivers(void);
->
-> +/**
-> + * efi_firmware_get_dfu_alt_num() - get the DFU alt setting number for a=
-n image
-> + * @image_index:	image index
-> + *
-> + * Return the DFU alt setting number to use when writing the image
-> + * identified by @image_index. Weak default derives it positionally as
-> + * (image_index - 1); a platform whose fw_images[] is not laid out 1:1 w=
-ith
-> + * DFU alt numbers should override this function.
-> + *
-> + * Return:		DFU alt setting number
-> + */
-> +u8 efi_firmware_get_dfu_alt_num(u8 image_index);
-> +
->  efi_status_t platform_get_eventlog(struct udevice *dev, u64 *addr, u32 *=
-sz);
->
->  efi_status_t efi_locate_handle_buffer_int(enum efi_locate_search_type se=
-arch_type,
-> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.=
-c
-> index b41969c70fd..c7339412055 100644
-> --- a/lib/efi_loader/efi_firmware.c
-> +++ b/lib/efi_loader/efi_firmware.c
-> @@ -80,6 +80,22 @@ efi_guid_t *efi_firmware_get_image_type_id(u8 image_in=
-dex)
->  	return NULL;
->  }
->
-> +/**
-> + * efi_firmware_get_dfu_alt_num - get the DFU alt setting number for an =
-image
-> + * @image_index:	image index
-> + *
-> + * Return the DFU alt setting number to use when writing the image
-> + * identified by @image_index. The generic default derives it positional=
-ly
-> + * from @image_index; a platform whose fw_images[] is not laid out 1:1 w=
-ith
-> + * DFU alt numbers should override this function.
-> + *
-> + * Return:		DFU alt setting number
-> + */
-> +u8 __weak efi_firmware_get_dfu_alt_num(u8 image_index)
-> +{
-> +	return image_index - 1;
-> +}
+-- 
+2.55.0
 
-This is one of the things you need to support swapping image indexes on the=
- fly, but there's way
-more. One of the compromises we had to make to plug in capsuile updates via=
- DFU is that the image
-index *must* match the dfu command array member. IOW if you define the arra=
-y with this
-
-{guid_a, "u-boot", 1}, {guid_b, "u-boot-env", 2}
-the dfu_string *must* list u-boot first and u-boot-env second.
-
-IIRC we already check for a mismatch of GUID/Index in FWU code, but in the =
-normal code we only have
-a check in the efi_fmp_find(). The way you are switching happens after the =
-check so you might end up
-updating the partition with the wrond kind of firmware.
-
-[...]
-
-Cheers
-/Ilias
