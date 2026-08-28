@@ -1,149 +1,122 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E3B6C61DCB
-	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 12:22:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCEF9C61DBD
+	for <u-boot@archiver.kernel.org>; Fri, 28 Aug 2026 13:15:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DA76980E34;
-	Fri, 28 Aug 2026 12:22:52 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id t6ZGmNzZ61DO; Fri, 28 Aug 2026 12:22:52 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787919772;
-	bh=qYGGru6Q6MC2vSiLpOrFrKNT/xMCqRAhi22Au8+TSuk=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=lEVSpli++H/VFEPW6XLmg7VhhYLoMjhhqrkKTO5SS+p8bTMaJQOStCxhdN3p4UKPg
-	 lNpQapvJFqMCnFyC7/Q/Vfw05ZFYcixy08dqKzA2F0Xi9fof99L8LAeXaxAdJWVI3A
-	 hFf9IhEccmKiou6jx0nZuWk4CgZywsdrjHmM7se4ciKmBRxCCEgv+5I3vmcX/BRnzB
-	 C8APCvkEz6dPMKsBdij8aghiHh+m2TEm2q417PVuh15WG+AH0FdH33OjrTAwsFPhqS
-	 +Teu+kvu5BBnhN6Sg8OBflpORfjHSRn98ibBUH8hKddbXuZE31Hu4WyTLQtW+0j98H
-	 GZ06SS7R3/bdg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E155480E52;
-	Fri, 28 Aug 2026 12:22:51 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id D745C334
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 12:22:49 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C914440762
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 12:22:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5A34940851;
+	Fri, 28 Aug 2026 13:15:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9Fmz0pDIveq5 for <u-boot@lists.u-boot-project.org>;
- Fri, 28 Aug 2026 12:22:49 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62d; helo=mail-ej1-x62d.google.com;
- envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=YMeqWIvZ
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 23C1A4075C
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 12:22:47 +0000 (UTC)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-c25420fe973so162336566b.0
- for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 05:22:47 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787919765; cv=none;
- d=google.com; s=arc-20260327;
- b=g46hTuy1MPP0XxxfHjPaPkSvMYxkd+naZ2lKIN/XU/aG650nidMFgmwEc2ncr5AIGU
- /TF2LZGH5whm1e/wFbcpGJMEdf4g8FayOsr/cUYESswOkAhymKWWLFPtzLJWxsN72h7Y
- UiyD+IlllwYT/ErtOknXIzfSGMcgIYWBrAUgXdXNe8QgE2UMXHkizqU8f0ZipHtD1rYX
- CnHX3hX4IvXzqBaRYElqkHvIShx85wDKJ4gcc7ylkRKLE3bgRXMVnTcnGPsxeuTZCtTw
- JfOnHYP/4UM5ee9qbcV0mhdx8R9UXEhDME2/ZU9hacCaVdd2pq6/PJruccYshVVzUMQY
- Jj5w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=qYGGru6Q6MC2vSiLpOrFrKNT/xMCqRAhi22Au8+TSuk=;
- fh=W5ufc5128iPdz6U/yL9G/KPbU406LNOTGgTtj4pdRx4=;
- b=Avc24LYT9cbtdjXRaD/ZAElGF76mpGN+sNq/6zVJFudEikstb+hlQanLLH6E8XQCOn
- Y8ww+b4syVVNczCHFIu+1wFwfaFNnm3rJvr3OhVyV0jIHIAvbNCCl04su1ds7lLBbHiq
- Qzpmqh2FPuP/C8NAplUaHLF1yKqJY4qGH3+niNK93ACIK/MjntiCy/dxGjK9WNGmrnNW
- X0b+s1M7G+ajuFli4CND9R8Kjek81DEGe/uieDc+Lfe6ZpcNComgyiw3cPAJUoj+PcHt
- /H01UCIbQnDPfdeCol+yewdMexLP2GBUmSwlg/EKjY4TGuFe/cVcZNxE9ea5u051nutB
- lZeQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ id o8TazJdVGlse; Fri, 28 Aug 2026 13:15:27 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787919765; x=1788524565;
+	d=lists.u-boot-project.org; s=default; t=1787922927;
+	bh=MCbWDuoGRN8TtNWkdXeWfAnKcw9N0coQEJvN5agZuE4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=TuH8UZ9C/7vns5o2/8RtrKWBhDhA28lxV7avl62CrMplsZl/A5li87ologAw7PU/F
+	 +U/4hfXXfecYIYtfHeKfvze4qJRE6L8O7c+FwwpWp44LDyeEnkXBcG52TYekwvg+FF
+	 e9ooSnyACzzKfkDjZGliGcnsSIrbH1iWWT5k91FUCplRsjLZcrCB71amXbDhdtZ12e
+	 xamJNcoWOEkrlF5I4eiqmycDKZbTgTjb5iFjFv0+0NeTZrYTS6MAhIdDvf8KiPTYGd
+	 WAhgBaJdQXZOYBsX4y+Q0LCu5KIH9o6MH8iK/kUxNMabi8AKElvw8q5RJtcdC9SamC
+	 QkT7sXYHUTvOQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 92D334084B;
+	Fri, 28 Aug 2026 13:15:27 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 29908386
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 12:26:19 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 10745401A3
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 12:26:19 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hjprFet7nSR8 for <u-boot@lists.u-boot-project.org>;
+ Fri, 28 Aug 2026 12:26:18 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
+ envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=FQkrqRYF
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DED0D400A6
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 12:26:16 +0000 (UTC)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-c15b51ba80dso13197666b.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 28 Aug 2026 05:26:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1787919974; x=1788524774;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=qYGGru6Q6MC2vSiLpOrFrKNT/xMCqRAhi22Au8+TSuk=;
- b=YMeqWIvZyj2MTy68z31XSUa3UKIYWaipb+ASYFnZm/CraKE1nsr9a6mpRw5zWFMGYE
- wiIaAD8X2dHpz/6NKpsTsqqQK0AgE3TAg3DwBrQY9l/83GhWRynFNF6InYgSU7KgWCYb
- gBAjagFhECgzJPomRK605chG74jb5MTuzLR7rPFpuqDtx3l8nGN/olqYOETJ1NO2IokH
- cR7IcLDNSJ60vyNFZPBq2N8C1GkUQTQE8tp+WcaEjkQKWIjo7kHjF1+l4Pz7E47eZf4Q
- 8kjm9FW1bkYeLqyLKlv9x/jn5o107DOJifhSBjOdlADF/iowtprklm8QoykL2cGC3q2h
- DWEA==
+ bh=MCbWDuoGRN8TtNWkdXeWfAnKcw9N0coQEJvN5agZuE4=;
+ b=FQkrqRYFi/bs494dVuvjMzhYbjjU2coHvPLnrcQoS0hRRNWO0aWguWHc2nRFQxT+lw
+ V/HxV40HK/qVKJtwIyQUI+gqzdhzy9pDLH/KDcrpONTmy98oMwKcASR9EYvAu4PJ6fNq
+ 9Lkurw7To4CM8iyb57hXM44HQ+YAR/9+AEZWHBXg4USbY0pvbz3/fAqu5t+u+8BDMwKA
+ R0CgtBQqFKyD3Wzk17DlF7r57rdBJZURggYaM7tgZjvC3TsTvbgdPaajs5nAcPtU1G1N
+ 8PYYIxl8UiKkc/WRshv4B1DW7tj+OygXtyjcqWgO+TDQnG+ERlm6RhhP0jOMFSdDxdB1
+ sMjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787919765; x=1788524565;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
+ d=1e100.net; s=20251104; t=1787919974; x=1788524774;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=qYGGru6Q6MC2vSiLpOrFrKNT/xMCqRAhi22Au8+TSuk=;
- b=dttyozRFOR59ieOiZMg0AamoPGQFRinq750IypswAtCEvP85j8CY0L41Vv0+f16CZ0
- IFndxuyw+QzBALlQPidZmIY7bTeItN+ffOdn/XbbvVkES90ajRiIHPUfQTaE8D23tLr2
- jvEa1uK7R2w/nNrLGhNrYLlOdc74n5yRzIyOTRXZ70leb6VJI+9N1YhKcB0cUnSbvAbf
- OllUewDtJHffxN253tP3jYdsNlJjUaKOB4SslBbhuoHBGV/Tl1DXSY1urKRvBOEmKb5P
- 10TpiIoGLnn8C49bqnfVrcN4VfUz/sJ42iG4hvmXn+iLMefQOmv1cIpw0ovp4v0x71ia
- uSSA==
-X-Gm-Message-State: AFuF++nNKd71M+MnAWwvroeMj/7EvnMxfsv6IEmIPkcQktUSpAqEzAP1
- AtNNui8q2Rl2KU4upNDpRim8mfy2qCGDgr4LE007H7ygyvLm9a5CtQjxHc10B0fvy+UoMgQqNVP
- 9c+oB/F0nO47/Mx1ouO+Xafj+2iP7LWP4fSVqZGctKA==
-X-Gm-Gg: AR+sD11bJp4n7lLjlo3q7Ktt3xzJLSUKk7dGhAIBvLms4fftu6b8BXjAjIYtS5aL2C4
- CzdKPKazAWPugxeCc+j3qahOsMwAbLQzyhbwXeSSxiP1A9hR8O6S8hnAp42l4t0YlKRCbXxazIp
- WwaIwC7noSeznATsu6p/ZBqBWTmyKgjDTs62Gj/zQpzyVh+dknu/AEzuOizlTxzOs6HaTEKhXvt
- zXAY81csipuxPgMqF48RWEjNVHtxZLluEF5ffXYiV09p84b6knm/eGQscbPd5Hw00bVj2NbXWsM
- INJhbc4ilGt31v1fIn1FEQRo6tf4dQFgCyJIzPSfQcHH8PgKHrOoWP/iG/pzSzFm79LcTbt8S81
- M5VORoWo6sMLyz/AoseEGroOH7Mh4I4lVuOxr+PSMqiiGN0eOha/gTCr2Zw4SyVdB
-X-Received: by 2002:a17:906:730e:b0:c25:254:292e with SMTP id
- a640c23a62f3a-c25567a9274mr471406166b.0.1787919765346; Fri, 28 Aug 2026
- 05:22:45 -0700 (PDT)
+ bh=MCbWDuoGRN8TtNWkdXeWfAnKcw9N0coQEJvN5agZuE4=;
+ b=erjF3opOqT0cPDTH2yRI7daWGc8wwIESiwCz6j6/ehKtDmv+SAcWSa7aRFWR7zSJcf
+ evtVVzwpRt2pSmpkf4tFOV2G0XGRZwavhAUlDAZltgu6gNMPW9ih6Eipd5CU7c8yxf0Z
+ 8JwOjo+j1Wu1jXbyg6jof/zWNtzP76C6NcN4HWEdMnKwRnFdJVsWazsjMs3zIDRHdhe2
+ WkNF5uLtfOGLboNOAcQFEjrOIN4MPZzyWVBcz8kWbb0sbu1gSD2L07oBbG5CceZPXN9v
+ W2Gs9ycLTy7Sj5LWiRHOPnUvukpPESDRwwQu2GdwkHLt8tfhv8Yw9kBRIr/GzmIkWJ9q
+ V0ag==
+X-Gm-Message-State: AFuF++lwXSS4d6Ve+9zr4HTFl/AB60bBATtd+qPwFLPB9VUlaXyTIvCM
+ Jmi3fXbER/veUmObP8JNK8PsJveOtq9jSb93fKU5uIGw2NS4K8SnERa7UjVLU5xPN14=
+X-Gm-Gg: AR+sD11bFJiqgUf7HOaZTTEHlNupGOcV2TrqmbvSGpTm+om9KR7MJwiScwYNN1PT1R2
+ qI85uT8jAq2qXd3G5KKVW9Sg5vMMCVkXKAHAoSxYBqwwvM+k0uIt68SSogtUWrVqyqTRZ8HDOym
+ FW7o16ErJfNtj3TXZU5YxYmGMpTtGUglNXKa3TsOzf0KKSwLN2UVvOwTb055sv+HPKExiAdOa8h
+ RTXLt4BSo/9DeBPALryvE1mmSs4gST76813bc6FvP9hXZEeOGK3I0BasCSR5UV2qL/26igqVJVo
+ Kq7YXmGaLiNnI36TE2d7qJKkzzhjG/GUUsmpXK6xySIpOqTQwqqhHIb5GHdzRexAIIDsHlEvxzz
+ tZzs2iQknVTAFYMAsWSQQNPbYrqovVpcj1c5TwmPLhUeVcyh72Hy42uPuyipPWILZySBWkwWMHw
+ QvSATYtM5SvPtK906nguO9772uf/65UrXdmuKwLRSYVAQ9wYBQYgAXZ3VPwcideic0ZZUPsevfm
+ 4fT27KOZ7B3St1/YQfRLtM=
+X-Received: by 2002:a17:907:9618:b0:c25:3ccf:bd9c with SMTP id
+ a640c23a62f3a-c25571c7be7mr231637166b.2.1787919974028; 
+ Fri, 28 Aug 2026 05:26:14 -0700 (PDT)
+Received: from monster (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c2564e31462sm44345366b.60.2026.08.28.05.26.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Aug 2026 05:26:13 -0700 (PDT)
+Date: Fri, 28 Aug 2026 14:26:11 +0200
+From: Anders Roxell <anders.roxell@linaro.org>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.u-boot-project.org, marek.vasut@mailbox.org,
+ trini@konsulko.com, ilias.apalodimas@linaro.org,
+ michal.simek@amd.com, lukma@denx.de, alchark@flipper.net,
+ jerome.forissier@arm.com, dlechner@baylibre.com, sjg@chromium.org,
+ Chintan Vankar <c-vankar@ti.com>, Siddharth Vadapalli <s-vadapalli@ti.com>
+Subject: Re: [PATCH v7 00/24] usb: dwc3: part 2, make the resynced code work
+Message-ID: <apF-Y29Nk1g0WkUI@monster>
+References: <20260824154133.217744-1-anders.roxell@linaro.org>
+ <178765097973.1498018.5668901885485543636.b4-review@b4>
+ <ao6kAOgauISZ1-dx@monster> <DKZK7EJH891Z.2NDLCYZZ1OXF0@ti.com>
 MIME-Version: 1.0
-References: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
- <20260826-add-genio-510-and-genio-700-hdmi-v2-11-68ebb1bf17df@baylibre.com>
- <f7af7e3a-f721-48a3-92e9-2fb48c735a3d@baylibre.com>
-In-Reply-To: <f7af7e3a-f721-48a3-92e9-2fb48c735a3d@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 28 Aug 2026 14:22:36 +0200
-X-Gm-Features: AcwNN1X2LeQk7mo0df_joGeOqBL8ZFA6MfvlxJd3v5bZH-D65GrlZOL4FwxCKPM
-Message-ID: <CAEHHSvajfMbFeJXqGOBOAFBZ7xv00ykt8QgW4BWKKDGdbZt7LA@mail.gmail.com>
-Subject: Re: [PATCH v2 11/14] video: mediatek: add new hdmi driver
-To: David Lechner <dlechner@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Lukasz Majewski <lukma@denx.de>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Tom Rini <trini@konsulko.com>, 
- Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Johan Jonker <jbx6244@gmail.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>, 
- Pavlo Yadvychuk <pyadvychuk@baylibre.com>,
- Macpaul Lin <Macpaul.Lin@mediatek.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Carlo Caione <ccaione@baylibre.com>, 
- Julien Masson <jmasson@baylibre.com>, Rasmus Villemoes <ravi@prevas.dk>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <DKZK7EJH891Z.2NDLCYZZ1OXF0@ti.com>
+X-Mailman-Approved-At: Fri, 28 Aug 2026 13:15:26 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -157,126 +130,90 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Le mer. 26 ao=C3=BBt 2026 =C3=A0 19:11, David Lechner <dlechner@baylibre.co=
-m> a =C3=A9crit :
->
-> On 8/26/26 8:09 AM, Julien Stephan wrote:
-> > Add a UCLASS_VIDEO driver for the HDMI TX v2 IP found on the MT8188.
+On 2026-08-27 13:18, Anshul Dalal wrote:
+> On Wed Aug 26, 2026 at 1:59 PM IST, Anders Roxell wrote:
+> > On 2026-08-25 15:12, Anshul Dalal wrote:
+> >> On Mon, 24 Aug 2026 17:41:09 +0200, Anders Roxell <anders.roxell@linaro.org> wrote:
+> >> > [...]
+> >> > dwc2 with and without DM_USB_GADGET, at91_udc, atmel_usba_udc, ci_udc,
+> >> > musb-new and mtu3. 17 boards in total.
+> >> > 
+> >> > DFU is tested on hardware on BeagleBoard-X15, and on BeaglePlay by
+> >> > Anshul. ci_udc is tested on an i.MX93 board with ums. The rest is build
+> >> > tested only.
+> >> 
+> >> Hi Anders,
+> >> 
+> >> Thanks for reworking the series, I was able to get DFU boot to work properly
+> >> and the usb devices are being discovered properly too.
+> >> 
+> >> Though I ran into an issue while using ums with your patches as the host isn't
+> >> able to detect the connected device. With default logs I only see a
+> >> '\dwc3-generic-peripheral usb@31000000: unknown endpoint event 0'.
+> >> 
+> >> Further debug logs are below on TI's AM62p EVM:
+> >> 
+> >> @    => ums mmc 1
+> >> @    UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x3b72400
+> >> @    g_dnl_register: g_dnl_driver.name = usb_dnl_ums
+> >> @    g_dnl_bind: gadget: 0x00000000fde7fb68 cdev: 0x00000000fde5cdd0
+> >> @    usb_add_config: adding config #1 'usb_dnload'/00000000fde83cc0
+> >> @    g_dnl_do_config: configuration: 0x00000000fde83cc0 composite dev: 0x00000000fde5cdd0
+> >> @    adding 'Mass Storage Function'/00000000fde5c110 to config 'usb_dnload'/00000000fde83cc0
+> >> @    cfg 1/00000000fde83cc0 speeds: high full
+> >> @    usb_add_config: interface 0 = Mass Storage Function/00000000fde5c110
+> >> @    g_dnl_bind: calling usb_gadget_connect for controller 'dwc3-gadget'
+> >> @    usb_dnl_ums: ready
+> >> @    -dwc3-generic-peripheral usb@31000000: unknown endpoint event 0
+> >> @    |set_config: high speed config #1: usb_dnload
+> >> @    \non-core control reqa1.fe v0000 i0000 l1
+> >> 
+> >> I observed a similar issue on the beagleplay too. Regards!
 > >
-> > On probe, the driver waits for a plugged and powered display, reads
-> > its EDID through the DDC bus to select the preferred mode, configures
-> > the HDMI controller and PHY accordingly, and then programs all the
-> > components of the vdosys1 pipeline (MDP RDMA, padding, VPP merge,
-> > ETHDR mixer, mutex, DPI1) to scan out the framebuffer. The
-> > framebuffer lives in a dedicated reserved-memory region referenced by
-> > the "memory-region" property of the hdmi node.
+> > Hi Anshul,
 > >
-> > Signed-off-by: Pavlo Yadvychuk <pyadvychuk@baylibre.com>
-> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> > ---
-...
-> > +
-> > +#define DEEPCOLOR_MODE_10BIT                 BIT(8)
-> > +#define DEEPCOLOR_MODE_12BIT                 GENMASK(9, 8)
-> > +#define DEEPCOLOR_MODE_16BIT                 GENMASK(10, 8)
-> > +#define DEEPCOLOR_MODE_8BIT                  (0)
->
-> These are confusing and don't quite match linux. Should be a field with
-> GENMASK(9, 8) and values 0, 1, 2, 3.
+> > I could reproduce it on my BeagleBoard-X15. First I only saw it connect
+> > and got happy, so I forgot to look for the disk. It never shows up, and
+> > the host gives up after 20 seconds.
+> >
+> > The resync dropped the cache maintenance in dwc3 gadget.c. The
+> > controller reads a stale trb and nothing moves, that is your "unknown
+> > endpoint event 0". DFU still worked because it only uses ep0.
+> >
+> > With the diff below the disk shows up and 64 MiB reads back correctly.
+> > It applies on v7.
+> >
+> > Can you try ums on AM62p and BeaglePlay? Please let me know how it goes
+> > before I send the next version.
+> 
+> Thanks for the fix Anders, the block device shows up properly now.
+> However the 'dwc3-generic-peripheral usb@31000000: unknown endpoint
+> event 0' error log remains, is this expected?
 
-Hi David,
 
-Right. These defines are actually wrong. I'll use the header from
-upstream kernel verbatim, this will fix this issue and some other name
-that do not match kernel, with one exception see below.
-By the way, deep color is just dead code, only 8 bit is used right
-now, so I'll drop the c code.
+Good, thanks for testing.
 
->
-> > +#define DEEPCOLOR_MODE_MASKBIT                       GENMASK(10, 8)
-> > +#define DEEPCOLOR_PAT_EN                     BIT(12)
-> > +#define DEEP_COLOR_ADD                               BIT(4)
-> > +
-> > +#define HDMI2_OFF                            (0)
-> > +#define HDMI2_ON                             BIT(2)
-> > +
-> > +#define HDMITX_SW_HPD                                BIT(29)
-> > +#define HDMITX_SW_RSTB                               BIT(31)
-> > +
-> > +#define HDMI_MODE_DVI                                (0)
-> > +#define HDMI_MODE_HDMI                               BIT(3)
-> > +
-> > +#define HDMI_YUV420_MODE                     BIT(10)
-> > +
-> > +#define HPD_DDC_STATUS                               0xC60
-> > +#define PORD_PIN_STA                         BIT(5)
-> > +#define HPD_PIN_STA                          BIT(4)
-> > +
-> > +#define NULL_PKT_EN                          BIT(2)
-> > +#define NULL_PKT_VSYNC_HIGH_EN                       BIT(3)
-> > +
-> > +#define OUTPUT_FORMAT_DEMUX_420_ENABLE               BIT(10)
-> > +
-> > +#define REG_VMUTE_EN                         BIT(16)
-> > +
-> > +#define SCR_OFF                                      0
-> > +#define SCR_ON                                       BIT(4)
-> > +
-> > +#define SPD_DIS                                      0
-> > +#define SPD_DIS_WR                           0
-> > +#define SPD_EN                                       BIT(1)
-> > +#define SPD_EN_WR                            BIT(17)
-> > +#define SPD_RPT_DIS                          0
-> > +#define SPD_RPT_EN                           BIT(1)
-> > +
-> > +#define TOP_CFG00                            0x000
-> > +#define TOP_CFG01                            0x004
-> > +#define TOP_INFO_EN                          0x01C
-> > +#define TOP_INFO_RPT                         0x020
-> > +#define TOP_AVI_HEADER                               0x024
-> > +#define TOP_AVI_PKT00                                0x028
-> > +#define TOP_AVI_PKT01                                0x02C
-> > +#define TOP_AVI_PKT02                                0x030
-> > +#define TOP_AVI_PKT03                                0x034
-> > +#define TOP_AVI_PKT04                                0x038
-> > +#define TOP_AVI_PKT05                                0x03C
-> > +#define TOP_INT_MASK00                               0x1B0
-> > +#define TOP_INT_MASK01                               0x1B4
->
-> These MASK names don't match Linux.
+I do not see that message on my X15. In your first log it comes once,
+between "ready" and set_config, so it is during enumeration and not on
+the transfer path. The event loop is the same as in Linux v6.16.
 
-fixed by using verbatim header
+Do you see it on plain mainline, without my patches? If it is there too
+then the resync did not cause it, and it can be fixed on its own. If
+mainline is clean then I broke it, and then it has to be fixed in this
+series.
 
->
-> > +#define TOP_MISC_CTLR                                0x1A4
-> > +#define TOP_SPDIF_HEADER                     0x054
-> > +#define TOP_SPDIF_PKT00                              0x058
-> > +#define TOP_SPDIF_PKT01                              0x05C
-> > +#define TOP_SPDIF_PKT02                              0x060
-> > +#define TOP_SPDIF_PKT03                              0x064
-> > +#define TOP_SPDIF_PKT04                              0x068
-> > +#define TOP_SPDIF_PKT05                              0x06C
-> > +#define TOP_SPDIF_PKT06                              0x070
-> > +#define TOP_SPDIF_PKT07                              0x074
-> > +#define TOP_VMUTE_CFG1                               0x1C8
-> > +
-> > +#define VID_DOWNSAMPLE_CONFIG                        0x8F0
->
-> This doesn't match upstream Linux (but does match downstream). We should
-> confirm which is correct.
+If it is new, can you print the raw word and send me what it says?
+Event 0 is not a real endpoint event, the defined ones are 1 to 7, so
+some word is decoded that should not be.
 
-According to the datasheet, correct value is 0x8f0. Upstream driver is
-wrong. Confirmed with MediaTek.
-Here is the patch sent upstream to fix it in the kernel
-https://lore.kernel.org/all/20260828-mtk-hdmi-v2-fix-register-offset-v1-1-1=
-18ad5d7ebe3@baylibre.com/
+  --- a/drivers/usb/dwc3/gadget.c
+  +++ b/drivers/usb/dwc3/gadget.c
+  @@ static void dwc3_process_event_entry(struct dwc3 *dwc,
+   		const union dwc3_event *event)
+   {
+  +	printf("evt raw %08x\n", event->raw);
+  +
+   	if (!event->type.is_devspec)
 
->
-> > +#define VID_OUT_FORMAT                               0x8FC
-> > +
-> > +#define ABIST_ENABLE                         BIT(31)
-> > +
-> > +#define HDCP_TOP_CTRL                                0xC00
-> > +#define HDMI_CONFIG                          0xEA0
-> > +
-...
+Cheers,
+Anders
