@@ -1,120 +1,117 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 874E9C61DD6
-	for <u-boot@archiver.kernel.org>; Sat, 29 Aug 2026 22:44:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 679E5C61DDE
+	for <u-boot@archiver.kernel.org>; Sat, 29 Aug 2026 22:44:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2D9AF4068B;
+	by smtp1.osuosl.org (Postfix) with ESMTP id 31DC280E37;
 	Sat, 29 Aug 2026 22:44:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hESyUgNvgIXh; Sat, 29 Aug 2026 22:44:56 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id L0vLCJ7Oli_k; Sat, 29 Aug 2026 22:44:55 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788043496;
-	bh=0OZQDol4XT5zGx1AVAhTnwMv/xF3sKgbYYBSBQofzIo=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org; s=default; t=1788043495;
+	bh=8+nN/B3kzAkc40KCbvTJYsw4MFl7bi51rMOMlRvqRAQ=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=xodVGjuxQQ2JP0O3hl1y3JtQYeN+a7UIdSno4EPBhW+OdUDNteKFU2a9E/ym3ceaM
-	 b68LapQOH/3hHzPsjSR5EgmyQrfJF+0AKzu+H8QzSFD+gggLkCb8YQb0+v5XyBPHBS
-	 rym7rpqkPct/M+wejCRBA5mZzEO5XK7nvB/rEcZjTTIrYOezv6Tc3KM6i7iUkkMA17
-	 aBRxryZdbNj7cc8zkh3YoVVKM3xlWtA52RTJBQBmEu55MrSKJytlhePhdtIIa7ljEG
-	 5cZjwgtA30I8/ejFqZdujdaDM3C7ciRsVpg8rSlmbXAJMDT/ipSXEN8eK55KWJB/Rc
-	 LGrKpXge+XqKg==
+	b=Xw0WprYovWuhsROY5HSh5JeIf3H2sSndYHniH9vFkK/9dZoC6mT7BaTnn38nSQMQ3
+	 ij1OevgRyXWYk6ltdlSwS8D9cBZYhX8FTN1NKDF6CKJaHozofVrlVeYM7beqkwex75
+	 Dzm54vi0l+/wXkdXJISN+WA8KFxHGbrdU8T9DeEAzxBpn3fHCpGBUCS5cPKTa0mrWh
+	 eBLW9lVKS0kKSisgsVEt3Uc7Ge2HncaeUYd4CMothaKespAfCM1Jzh3Cxq0WVR9rSs
+	 jxPlCkJrpItWNv4oTvodzujUSDmAZD9ule8ezI8sRAiXM1hsiBfp9xGOMNy6OAS2xG
+	 oxnTO8mRkSmDg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8FE194068F;
-	Sat, 29 Aug 2026 22:44:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 48C9F80E30;
+	Sat, 29 Aug 2026 22:44:55 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 210F1355
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 17:03:33 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 58B76118
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 15:53:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1276A4009A
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 17:03:33 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 56C5C40052
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 15:53:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CpaxBb06Aodi for <u-boot@lists.u-boot-project.org>;
- Sat, 29 Aug 2026 17:03:32 +0000 (UTC)
+ id INW8wddBRRKd for <u-boot@lists.u-boot-project.org>;
+ Sat, 29 Aug 2026 15:53:27 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42e; helo=mail-wr1-x42e.google.com;
- envelope-from=massimo.pegorer+oss@gmail.com; receiver=<UNKNOWN> 
+ client-ip=2a00:1450:4864:20::432; helo=mail-wr1-x432.google.com;
+ envelope-from=graeme.harker@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=jqxXjHtO
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1868040052
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 17:03:31 +0000 (UTC)
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-482e067e908so1431630f8f.2
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 10:03:31 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=T+iwaWMx
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6228840068
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 15:53:26 +0000 (UTC)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-4798bea72f9so1321526f8f.1
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 08:53:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788023010; x=1788627810;
+ d=gmail.com; s=20251104; t=1788018804; x=1788623604;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:sender:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=0OZQDol4XT5zGx1AVAhTnwMv/xF3sKgbYYBSBQofzIo=;
- b=jqxXjHtOHwtVBskQW7Byry0qVgyWH+UAZM9cVHheEmSi/e+aIRC/Vz4Dkpgw5PIGR+
- /MP4Y7kPsgFIp2HDyuGrp8jjoIxNw2KdSgMJTOZCWW3Ql5YndyeQ701pgRRm7Gtmhoh+
- pR6Z2yHTb4DZBwrf7GUFTyCWnHR2iZ/c/veaQ7XMCigi0I4AX+DZGb4w6uPgVujhFJMW
- 12eKc9Ba/SHmtOwvb044hD11Fz9ndVDJKpsIZ/IEgaU34GTb1yWomt0reHEr+o3MxgiO
- R1BS/JC8cxWua2/VQXWgV2nLC9Zws6nXsy7/+5AzC8LqBu7zq26JKKu0ON+Lbv1LXa4O
- nAew==
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=8+nN/B3kzAkc40KCbvTJYsw4MFl7bi51rMOMlRvqRAQ=;
+ b=T+iwaWMxx6icuqMlVd0Foo/lmMpK8cuj1YfCtDE3LTE6KuadM85J+HxHlPmu38Lhlf
+ zFa+zRBmcvftJCKFJAeUXtFy3h1x4AwJ+q20vfwvag74ViJG0VZO9BJpjNHkul6p8tfE
+ VZVdS03iGS9sevwIiD1AMkOBdTFdGoYBWZfN1g6GxxGNN+fu9ZKddYFvXBbkOsGqSOMN
+ w0IScluWM+yCybOJ1tTiDka+vVzwIByBGaf+Eb55u9JbSX1qihI2iCrSfxj2nWP2Y3z8
+ NJxZDO3VjbhnpQ9y87QSPxvgWxqKX2IZ+HxLSp/XiXZqtTR2yVeyc/4Z2Hoev8A+KAPv
+ ms6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788023010; x=1788627810;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:sender:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=0OZQDol4XT5zGx1AVAhTnwMv/xF3sKgbYYBSBQofzIo=;
- b=hweS1r2FSI+XgcC4IwB8uoB+omcdaIat7DLV8iaBFo9+ELYZQizHtHL5mVxrPpcEk8
- mVLP+oelgZugdzXdnQbl8xRNjwWH8DFmIVU7IISQkbgIZWEi0Bn7mw71PJLvWtZKBcYm
- SOZ6soBa4a6ZKmPFbJ82sz72+xFzD1HdE1ppQkhPu8/RZU9kFzyk7N4GVZHazs/tWT/g
- bF65loZ2g2q8M7ipkgg3yHoFqSvx0M+I52ygKr9Q0omFE7wquwUqdcVkJmdxivWCikCL
- PHksoMdlirXUULfWG6O1Zof3F+fY54v792fhWib04MovQT5Xp/UkdMpwSOYylkyFoVcj
- FoFA==
+ d=1e100.net; s=20251104; t=1788018804; x=1788623604;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=8+nN/B3kzAkc40KCbvTJYsw4MFl7bi51rMOMlRvqRAQ=;
+ b=eq/HFijqxyfb7jyywJlfZXH0hGz+LfGNxuaBT+TuNa9h8zS8K1rLMQ0XrZemlUVSPE
+ v3KZ4PZUprby4KghxvuoTWspoUwODaICb5w4ceecX17sXQihvA/foQ1wNFpNFYLnnNmu
+ npD2qn14T/3icswYtkXKLWlqdJ4UHI8bXQkzeNsnS5JxHL26naNzDJWc0K5cfNgMOzW2
+ nQ3Mazr57xZaax90goUqVOV9CCboYniK04bmGSPiv8VbXP7lqbNZkv6wMEERjxFtoLjr
+ Qo9H2NFuPomnoF9wyp0jbCRV3rNNr7hYlvYuSCVLNCWIIr0d8ecZeTJwGEDEY474CicE
+ 8MmA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxJxn41xE5mL28uNxABdv6+8tTEbf2LbJWg1hKCXUBD5IpsrupesHZ4c5orgCmnZPfi5YksTdc=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kpg85UJyRSZw5AxMa24fZnzh2rsj69859Rt0W6PQ3OrTdA3yZ8
- D/de6JkAoQL1za2MyQ2douFvlQKpuMBmGBliijbH0PZXC6s5Nn5sguKv
-X-Gm-Gg: AYBFou046OqcKdEzv34GGTxQ90zOTiq2U/lwg0pEFmJr4C2gyjrDTPD5EaN+Q9nPprc
- tzK9xd/HjZqsD654pAkRCBBSNMR+aLe7OqiBGphbMBqf3+jKGoQQSXrDXOLeqUyBm72Y3I0oEWF
- aMCE/QqBFQ1jdsFG/MI6qm3hOfr28Vaa5n3MPoqV7FpFs/3+xvH3rjKEZ01azGUmNkOTWZv5rjg
- W9rmAArJXLAtb0lmwIh6cvdLKEU82zXPm1p88rBE6Plgwip2JnBPhJv0REqhhEsdyH0ktkf4CYJ
- 3iNCcas7bS7Dm50dayKNDcBuBJuWPpFwvDunG61CRkwjtcm4/aUeZj2w7c8NfRGMIn85atZlSvy
- gIMIaYKcZ0yGNcd2FeUlAbySgritrItflDspGIfPgx7tYtH+cIcUp2bI60k+F0XCb7ASiUzFJoK
- AdiLGh5w+nDA6aRc1W7BiGfgrA7SM2d6TMdfk0OSMNz2uHhK6XoyOzGyriXC5mGd5cybnzvMVNG
- LX8VVK1NA==
-X-Received: by 2002:a05:6000:2403:b0:484:3310:f394 with SMTP id
- ffacd0b85a97d-4843310f432mr4717993f8f.23.1788023009638; 
- Sat, 29 Aug 2026 10:03:29 -0700 (PDT)
-Received: from [127.0.1.1] ([151.51.168.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482fbb32ce2sm12163133f8f.33.2026.08.29.10.03.28
+ AKwUvBzSFgrtBwLqqjjUVMm8UUiVjRo7Z6mbM3u4K0KWv1mBahTjI+lj1aHMukHhlHQ/nDIMbiyjzlI=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lC4qS+wkBNJ+ubbrmQPOY8F0f9tTSARgpCvXlzqM/dhXd2ulNh
+ agIYOydb3RS0dbuQOmKduasFnS14vVg+AoE/6sAUfr29xR5IBaZrOebH
+X-Gm-Gg: AYBFou1jsZTe2WqosgnJ80+hHUy7XGZaa79PE415+550T1sHYFJZs5Rc6KXugx32VP9
+ DeqRKPEINP1hvPGpzXsc0JFf2+eH9ViiKXBwhtoDf5hHM10Ds4CVGjnAKjQVvHbyT6t2E9zKjHr
+ w+x0CxgSaQz2De0V/tZkbPDzvf//7djaTORTd4Jz/mu0uEAlFvI/kAWIQFj3Hr5W4MC9FxlVvs6
+ NdjZjpkSr3K0IEaF9nIPCMokLNztbv+5YHHiGRLSA1zDgm5A+RVquMDPB1+Wj2CeYSipty1sQbL
+ 43wycdd1ZxiquuzEVVcR36Wk4gs0cLSs3HKSB2gCiwCL6/dP0/tkeb4WkbIAthqXC8fIIPf4FHW
+ 8rTv+6uicNHv+8Isefksq9V7cnKGf5hVOQ8nsSdC3n+o9MFJJ8o0S+hGZ4duuxXiNyn+5j4JQTK
+ pD16Hbgdo0FBRV/XB+7f/vqGgo/f1l4jaM9WRI+4oydQq8u5+AVz1x4tAYPmrYUS9pnA==
+X-Received: by 2002:a05:6000:4213:b0:484:3310:f397 with SMTP id
+ ffacd0b85a97d-4843310f427mr5652417f8f.24.1788018804261; 
+ Sat, 29 Aug 2026 08:53:24 -0700 (PDT)
+Received: from [127.0.1.1] ([147.148.142.177])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4843310ab29sm3486757f8f.0.2026.08.29.08.53.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 29 Aug 2026 10:03:29 -0700 (PDT)
-Sender: Massimo Pegorer <massimo.pegorer@gmail.com>
-From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Subject: [PATCH 0/2] Support multiple DDR configs in PX30 TPL
-Date: Sat, 29 Aug 2026 19:03:10 +0200
-Message-Id: <20260829-ddr-multi-v1-0-c0c7837aed20@gmail.com>
+ Sat, 29 Aug 2026 08:53:23 -0700 (PDT)
+From: Graeme Harker <graeme.harker@gmail.com>
+Date: Sat, 29 Aug 2026 16:53:07 +0100
+Subject: [PATCH] ide: Fix truncation of device strings by one character
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAM4Qk2oC/yXM3wpAMBSA8VdZ59qKWVpeRS7YDo4Y7Y+UvLvh8
- ldf3wUeHaGHml3g8CBPm00oMgZ66uyInEwyiFxUuRKKG+P4GpdAXGg5mEqWUmoFqd8dDnR+r6b
- 97WM/ow7vAO77AZgaoxRtAAAA
-X-Change-ID: 20260828-ddr-multi-2c4fd64344c8
+Message-Id: <20260829-ide-strlcpy-fix-v1-1-05676b02d822@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAGIAk2oC/yXMQQ5EQBCF4atIrXVCDaJdRSxohRJBupgQcXc1Y
+ /m95P0XCHkmgSK4wNOXhZdZEYcBuKGeezLcqgEjzKIcrZKMbH5y62k6Pkz+QUyb2tqkTUFfqye
+ d/8Wyei17M5Lbfhm47wdldaI8cwAAAA==
+X-Change-ID: 20260829-ide-strlcpy-fix-83225ba994d5
 To: Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
-Cc: Quentin Schulz <u-boot@0leil.net>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
- Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-X-Mailer: b4 0.15.2
+Cc: Tom Rini <trini@konsulko.com>, Graeme Harker <graeme.harker@gmail.com>
+X-Mailer: b4 0.16.0
 X-Mailman-Approved-At: Sat, 29 Aug 2026 22:44:54 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -129,53 +126,58 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-TPL max size for Rockchip PX30 SoC is very low, but 10240 bytes are
-enough to store in two DDR configuration parameters sets if option
-CONFIG_RAM_ROCKCHIP_DEBUG is deselected.
+strlcpy() takes the full destination buffer size, including room for the
+NUL terminator, and copies at most size - 1 characters. The vendor,
+product and revision fields of struct blk_desc are declared
+char[BLK_*_SIZE + 1], so passing BLK_*_SIZE drops the last character of a
+maximum-length string.
 
-The approach is trivial: apply supported DDR config sets in a predefined
-order (DDR4, LPDDR2, LPDDR3, DDR3) stopping at the first one that makes
-SDRAM initialization function to complete with success. If a smarter
-cleverer or more reliable approach exists, suggestions are welcome.
+This dates from the conversion of these copies from strncpy() to
+strlcpy(), which kept the size argument unchanged even though the two
+functions interpret it differently. The original was correct:
 
-The patches have been tested on two boards, one equipped with DDR3 and
-the other with DDR4. All possible sets selections have been tested,
-even with orders different from predefined one (e.g. DDR3, LPDDR2,
-LPDDR3, DDR4). It would be useful if further tests will be run on other
-PX30 based boards.
+	strncpy(desc->vendor, ..., BLK_VEN_SIZE);
+	desc->vendor[BLK_VEN_SIZE] = '\0';
 
-The patches does not affect binary code of TPL for any of the existing
-U-Boot configurations.
+copying up to BLK_VEN_SIZE characters into a BLK_VEN_SIZE + 1 byte
+buffer, where strlcpy(..., BLK_VEN_SIZE) copies only BLK_VEN_SIZE - 1.
 
-The first patch improves clarity of DDR type support selection for
-Rockchip SoCs at Kconfig level. Not all the DDR type config options
-named in the Kconfig are supported by each one of the Rockchip SoCs.
-Moreover, the LPDDR4 option has a different meaning in the context of
-the RK3399 SoC than in the RV1126 one. Thus, split options with ad-hoc
-specific help sections and use depends on conditionals.
+An 8-character firmware revision such as "HDX 5.08" on a SanDisk
+CompactFlash card is therefore reported by "ide info" as "HDX 5.0". The
+boot-time banner is unaffected, as it prints the local blk_desc filled
+by ide_ident() before this copy.
 
-The second patch splits RV1126 options (at most one should be selected)
-from PX30 options (more options can be selected), and adds DDR3 option
-for PX30. The PX30 sdram driver includes all of the selected DDR type
-sets or just the DDR3 one if none is selected: not like it too much but
-I preferred to preserve default fallback behavior (include DDR3 support
-if no option is selected) to avoid modifing boards configs relying on
-it. The parameters sets are applied as already described.
+Pass sizeof() the destination instead.
 
-Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Fixes: db89e72302d0 ("ide: Move setting of vendor strings into ide_probe()")
+Signed-off-by: Graeme Harker <graeme.harker@gmail.com>
 ---
-Massimo Pegorer (2):
-      ram: rockchip: improve ddr type configs selection
-      ram: rockchip: px30: allow multiple DDR types selection
+ drivers/block/ide.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- drivers/ram/rockchip/Kconfig      | 78 ++++++++++++++++++++++++++++++++++++---
- drivers/ram/rockchip/sdram_px30.c | 35 +++++++++++-------
- 2 files changed, 93 insertions(+), 20 deletions(-)
+diff --git a/drivers/block/ide.c b/drivers/block/ide.c
+index c1a46dd2a94..44ce054bdf5 100644
+--- a/drivers/block/ide.c
++++ b/drivers/block/ide.c
+@@ -1045,9 +1045,9 @@ static int ide_probe(struct udevice *udev)
+ 
+ 		/* fill in device vendor/product/rev strings */
+ 		desc = dev_get_uclass_plat(blk);
+-		strlcpy(desc->vendor, pdesc.vendor, BLK_VEN_SIZE);
+-		strlcpy(desc->product, pdesc.product, BLK_PRD_SIZE);
+-		strlcpy(desc->revision, pdesc.revision, BLK_REV_SIZE);
++		strlcpy(desc->vendor, pdesc.vendor, sizeof(desc->vendor));
++		strlcpy(desc->product, pdesc.product, sizeof(desc->product));
++		strlcpy(desc->revision, pdesc.revision, sizeof(desc->revision));
+ 		desc->removable = pdesc.removable;
+ 		desc->atapi = pdesc.atapi;
+ 		desc->lba48 = pdesc.lba48;
+
 ---
-base-commit: 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc
-change-id: 20260828-ddr-multi-2c4fd64344c8
+base-commit: 67a095a6896828056e4a1a0ba0e9bb20f5595c59
+change-id: 20260829-ide-strlcpy-fix-83225ba994d5
 
 Best regards,
 --  
-Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Graeme Harker <graeme.harker@gmail.com>
 
