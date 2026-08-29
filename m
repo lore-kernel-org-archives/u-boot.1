@@ -4,111 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 860BBC61DCB
-	for <u-boot@archiver.kernel.org>; Sat, 29 Aug 2026 19:21:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2041EC61DCB
+	for <u-boot@archiver.kernel.org>; Sat, 29 Aug 2026 19:21:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5491F60631;
-	Sat, 29 Aug 2026 19:21:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D67086062D;
+	Sat, 29 Aug 2026 19:21:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SqpRyZBmgM6A; Sat, 29 Aug 2026 19:21:49 +0000 (UTC)
+ id pCXDgoDUq7Z9; Sat, 29 Aug 2026 19:21:56 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788031309;
-	bh=5UhbcLL8av2D1uMewEDVySnCIZuCS552Vv+WO0QEfrk=;
+	d=lists.u-boot-project.org; s=default; t=1788031316;
+	bh=qBMW/HJWdL06vL5OSvwdPWOr1AxYoUVmmKU8biaoED0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NBsVAxS8lVYSClGUmwuO0IOH/ToPZ42tnNAUcD242/nSmpW7WiLT/09L8Zse9vynm
-	 uZ9LBZK3NvM0/7kUto3fe2G6D8Tyzn4UJ7UIwbWUEns+3DklwWufUYxuiAHbO5QlDU
-	 UxffasC1Co3x5vkk7JdYRNPktpEpnn3Q/OpQ2agMO+wUhxV9i/DbkBRMz7PfnEIH3S
-	 qEPO12GIRRdg9DoUd9sTwbr6zANuFAIW/RSbKwkg0tuV48w636eNgGlZpcKbntsTDu
-	 nS2QTM+sICRcAk83kaklym1OUmq3TUrBURGJUYGNEDZopj7SO8dBqLN7akVqUzsAdK
-	 Q4MNoliWISpUg==
+	b=jm+xC2F6ouxbj7vxwvq2hyWRQkW9Qol+/bOveTh+GApz5abPrEfYZoCVZS0Z0TSAW
+	 FLXI2YHM/VWTQ8ePwwEslHuiJlNfl9tnjc33pJd8eRog3M6cPXvRNUZURt4PQFz47Z
+	 F6Bbl6OVyhnFtowlMQjK8u/QSmqNbDMkfYCAgx/A6u20NwrguoQqajuL8m8CwK+UZe
+	 ZBhFPi68ky/TfJvwu3ZG6eU+xRtL4ERuM7n5tjzzldWJrabCNncPQ52LK5hoErvlRl
+	 llcpmAPUgOhBoS528VDcuyvvdfYHpstMHjDmokcjjSDZ8e4LgcY8+IhjZjd4x7KmjC
+	 vCVkzJD4+5e2Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8D51C60621;
-	Sat, 29 Aug 2026 19:21:49 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E049B127
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 19:21:48 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A28F16061F;
+	Sat, 29 Aug 2026 19:21:56 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 29421118
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 19:21:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C67B960621
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 19:21:48 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1BB9680E59
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 19:21:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 01L8od9XsjMr for <u-boot@lists.u-boot-project.org>;
- Sat, 29 Aug 2026 19:21:48 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WzmELrpZ56kH for <u-boot@lists.u-boot-project.org>;
+ Sat, 29 Aug 2026 19:21:54 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::102e; helo=mail-pj1-x102e.google.com;
+ client-ip=2607:f8b0:4864:20::1034; helo=mail-pj1-x1034.google.com;
  envelope-from=visitorckw@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=go8cePbZ
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id EC29960627
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 19:21:47 +0000 (UTC)
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-38d489b6b71so2430780a91.0
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 12:21:47 -0700 (PDT)
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=YRmoWJ7a
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5324280E53
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 19:21:53 +0000 (UTC)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-398a4dcf289so1007222a91.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 12:21:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788031307; x=1788636107;
+ d=gmail.com; s=20251104; t=1788031313; x=1788636113;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=5UhbcLL8av2D1uMewEDVySnCIZuCS552Vv+WO0QEfrk=;
- b=go8cePbZNFsOO7/0YgBO82Nv8oKdgiItKyKnGlpe4uy24YlxK8ZmleZ1hSsVjTKv1U
- vwWhm8X/E6yy0v14JDuy1ZIIymGLUxANzNlEJ+iQQXyH6vLC43m1WH0zRloG8Evwz/RY
- 5fqKxBTXwrWEOCvQnDuFh/2JK7CbiNsLUpWJoNzGxHIUk/3q8FoX2NcbhXzqLOkh/KDj
- XPWiUME5doRV6noBqspv9/gTuK9D2AXWpcNo0ArFlGlKfKhvJiBceKA4JHKDZ55Rdp/X
- ji4AIZJ8R6et6+P+hHgRpEdKzfzpFAm8/HWzL3Fs5iLs1z3zmPEg7UmGZbvcPd+LRjRv
- miGg==
+ bh=qBMW/HJWdL06vL5OSvwdPWOr1AxYoUVmmKU8biaoED0=;
+ b=YRmoWJ7akvSJR6Wjurf3WjyKj3PiHCXPGodwxVbuugtefchd4IpcjRaaCPLLNiGYs5
+ jmF9CGouWCaWA4TAcBIA7kw1N0vrAar6sCPuSehkP+mgVKgk568V6KErKYxD8aKChfQ8
+ fDuhJD95VCPD49qxp1A1Yv4gBGFofOpA21y/kbBBuYGDLzJenngkDvW4C+6YQCDcAaFg
+ 41+Onuq4a61oxPBkomiBH2IEukhur676DOGYKDzXbycywABiWtUr0eDvbffPopWBzQ82
+ 7syO8HhyDEmUG7O2BNbB5xGcpPA0Fgmh4knX/37Lf9CQduIYQWVV5eUKxRymtKAefALH
+ m2Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788031307; x=1788636107;
+ d=1e100.net; s=20251104; t=1788031313; x=1788636113;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=5UhbcLL8av2D1uMewEDVySnCIZuCS552Vv+WO0QEfrk=;
- b=LV6zeH84mGZFhwd8Slea1cE40RzfzgiHU/gdOznMmdX/EdlIjM4Z69Grc7Xsbl2ggA
- f7vBUJTrOvduUGxLC1g1lCcaviKtM95HkWDI3ELQElY3R7+PYGNDLJTkAMvOHQleWcIt
- J19R9wkv2hf5Jt3zD3g6EXlJVnhrJHqcy2bbzH65sdAExlmWygdwVaVLinzM9xDXRc0C
- 64nVSzBHDYawGMk7cyncF6YIqrJ3H0BcmdKTskBD6tVvE/cFRimuQ+skvdGwaz5Phmmk
- KeEJHsMK3l+c2zmHh/biWdbRjKHUfSIwXMe/IFDPIyZzeiLh2oZe0hfMO6AqAYoR/ZPE
- sA+A==
+ bh=qBMW/HJWdL06vL5OSvwdPWOr1AxYoUVmmKU8biaoED0=;
+ b=VFlQYjmWw4p9KzZVjFc54p368gRO9QMKQvgi3oaSAAeR4i4zuQq5L3k01XK3Bqu+bn
+ pWm0w/N3N6rsejc4NHpvZitMFJ0yphhxLfFqS4K3a4geOWBs16qs8QtPuNr9hKMdBLRV
+ fXjdX9r+O7yv6Me0XJ8gLgUjuKuOjqSGKS4wP5NJC4/4uZXlDkPOYLvqXrDCUrqRqJMv
+ Ijn24FakoEDEvERsE9Do6YNU2whnp46RyETZOQp8wU6a+XbryLJBZLVdbBI27Q8UQuMU
+ O1VOImvmFG+UlBEyVlNYkAwPrfiZ9OBR7YUicfPHziZx3fA51/By+txehk8WdND+XQxW
+ hWRA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxjDOEjNU8kge+mtBgJpYGmzHtDoH/5m/4iPCaCr9yozgWalR1WP4vbLUV8/cys4fHOGdhe50o=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++l2xctMMCFRVphKE9kxO3HqvOceVu1NF6vzddeoO3PRpQkB9J/O
- l9pnrCztgQTZYHt8vQEFG301stUhlAMjDUWKKaYoi6JZTkOoT20RHbp+
-X-Gm-Gg: AYBFou3nCIR5gCHp18r4nUkurI1lTRLFt2olmZDMyUpozaiqPDwrF4he9Ckelij1Xpy
- 83FK0bIYgG7CfEHwH0rsSrOl0YMSKhteF+xIB6t8bvm30jsvPqG4d4Yf/cxWyeL6lMFmL31Ktlc
- OQu4t9U88ppQZB9eRyl9RkacnUZIkDLWow79nEsPyfi5VaE86HIkgkqAhNvZihC7hVLNzlcgg5V
- eA2HonkTddpANd8F8oHD56BuOogzrERO3OkEYMYi5ouWtAbLFMzae6vEQMCSAVXb8U23NBnpDNC
- zwrJ/Kdl+Hd6yLRBd3jeD4ZVMQWUU5pZRH9r3Y0uT35nk+r6yfE23BUiAQU0E6LaOZOIp/Ys+ji
- t7oqqsziir3P83xiExT1FuiYT18Q1cVsU7kHrmmYyY33knTALBf5XItfec2aNSMsXrPH68FMjTK
- Cf4jQC9cuQqi/Qd+0Xy9Us1I1S1PSdf6JSRPilRy8aVQIvMRi1FEZyuBq9E+grwgU/wTgmQmR+C
- 9kExSG+hV5k3fIlKyhBALLmA/EJsrBFrDp7Cn7ZK2H/Kan987DZ0UXoEAcsDOsAVw==
-X-Received: by 2002:a17:90b:2c87:b0:398:c9be:cca8 with SMTP id
- 98e67ed59e1d1-398c9bed0c2mr209349a91.2.1788031307020; 
- Sat, 29 Aug 2026 12:21:47 -0700 (PDT)
+ AKwUvBy/TJdweEZ0Zp1CAYwqWgp7KAwI/QpBMDxehVOhiSoheKVSAoZTjH72pJjv81O6bZaNR73++oo=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++k86two1ZJFW5NVFQe0s6jIVfPzo2EUrkN65ZIKJqpuvA3uNNDi
+ rWloRRVrEw6a5DpeVTRRmfljAq4ehXDChsNjhbH9pJjVQkYom+1a++SQ
+X-Gm-Gg: AYBFou1et57f91bSUKXpNFV71uS1bI3BKuWsvDuo8VtgUgPRDLC2g2anB9PA7C0/cbD
+ cV0B/kQVGyeBnBFaImJvP8+3cscmX+ZAlGE130lI6DcKIhSakMTNiqs6cpf7Awqj9ztQxIgmnfh
+ A9yYfEbRGIhlZpMvpk1nNh5YZzpWRXzP2la86sV1kPlYUfRwagqBFDDBH88NwEHdQsEfckqY6SV
+ WuPgMrTMvg89J+eGb1ACSVQBW/VbDCa6Ab8vrJTIItTbao4b66WqIsfq01RWtA8AmL0NCbpJfWz
+ 2QDUr62vBgVuGSJZzu+COIp6YZb1swpSGitsFphHsPidu2YgDDKYTxXMCfeKExwGHpz4TlOFWa2
+ PZijInt10F1dAEnP1g5YXQoOhaNCf5MNv1/exGp7quqh/fvcT+OG/SVPSYhZCVVU3ABw3QTBirr
+ TMfir/cY4MhhmKbI1KvJ5MlTpXkU3tMDKbYLqXZdDZC4X0z9km04J58HVWPhLPbX3lNQI5zZmoi
+ wNrLiFGMHZEWJyrnGWGYW83ZjZYNHq5xbGIFwKz+bmEkUt5V2+tlXq7YXp3KDKbNw==
+X-Received: by 2002:a17:90b:518f:b0:38e:9eb2:9d43 with SMTP id
+ 98e67ed59e1d1-396d0ff2eccmr27462978a91.16.1788031313238; 
+ Sat, 29 Aug 2026 12:21:53 -0700 (PDT)
 Received: from visitorckw-work01.c.googlers.com.com
  (184.247.229.35.bc.googleusercontent.com. [35.229.247.184])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-396b0ea7fa9sm12837034a91.4.2026.08.29.12.21.43
+ 98e67ed59e1d1-396b0ea7fa9sm12837034a91.4.2026.08.29.12.21.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 29 Aug 2026 12:21:46 -0700 (PDT)
+ Sat, 29 Aug 2026 12:21:52 -0700 (PDT)
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
 To: trini@konsulko.com, tuomas.tynkkynen@iki.fi, bmeng.cn@gmail.com,
  sjg@chromium.org, jerome.forissier@arm.com
 Cc: jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, marscheng@google.com,
  u-boot@lists.u-boot-project.org, Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH v2 4/6] doc: 9p: Add 9P filesystem documentation
-Date: Sat, 29 Aug 2026 19:21:17 +0000
-Message-ID: <20260829192119.2658328-5-visitorckw@gmail.com>
+Subject: [PATCH v2 5/6] test: 9p: Add test for 9P filesystem
+Date: Sat, 29 Aug 2026 19:21:18 +0000
+Message-ID: <20260829192119.2658328-6-visitorckw@gmail.com>
 X-Mailer: git-send-email 2.55.0.897.gb25b4bd76c-goog
 In-Reply-To: <20260829192119.2658328-1-visitorckw@gmail.com>
 References: <20260829192119.2658328-1-visitorckw@gmail.com>
@@ -127,86 +127,126 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add documentation for 9P filesystem support, including configuration
-options, QEMU configuration, and basic usage examples.
+Add automated pytest for the 9P filesystem testing directory listing
+(ls) and file loading (load) over virtio-9p in QEMU ARM64. Also enable
+the relevant configurations in qemu_arm64_defconfig.
 
 Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 ---
- doc/usage/filesystems/9p.rst | 55 ++++++++++++++++++++++++++++++++++++
- doc/usage/index.rst          |  1 +
- 2 files changed, 56 insertions(+)
- create mode 100644 doc/usage/filesystems/9p.rst
+ configs/qemu_arm64_defconfig |  3 ++
+ test/py/tests/test_9p.py     | 82 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 85 insertions(+)
+ create mode 100644 test/py/tests/test_9p.py
 
-diff --git a/doc/usage/filesystems/9p.rst b/doc/usage/filesystems/9p.rst
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+index ae6dd770f3e..75b50eeb5ea 100644
+--- a/configs/qemu_arm64_defconfig
++++ b/configs/qemu_arm64_defconfig
+@@ -40,6 +40,7 @@ CONFIG_CMD_TPM=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_CMD_SPAWN=y
+ CONFIG_ENV_IS_IN_FLASH=y
++CONFIG_NET_9P=y
+ CONFIG_AHCI=y
+ CONFIG_SCSI_AHCI=y
+ CONFIG_AHCI_PCI=y
+@@ -73,6 +74,8 @@ CONFIG_SYSRESET_PSCI=y
+ CONFIG_TPM2_MMIO=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_PCI=y
++CONFIG_VIRTIO_9P=y
++CONFIG_FS_9P=y
+ CONFIG_MBEDTLS_LIB=y
+ CONFIG_TPM=y
+ CONFIG_TPM_PCR_ALLOCATE=y
+diff --git a/test/py/tests/test_9p.py b/test/py/tests/test_9p.py
 new file mode 100644
-index 00000000000..ca44b74de12
+index 00000000000..7b3b17c8366
 --- /dev/null
-+++ b/doc/usage/filesystems/9p.rst
-@@ -0,0 +1,55 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. Copyright (C) 2026, Kuan-Wei Chiu <visitorckw@gmail.com>
++++ b/test/py/tests/test_9p.py
+@@ -0,0 +1,82 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++# Copyright (c) 2026, Kuan-Wei Chiu <visitorckw@gmail.com>
 +
-+9P Filesystem
-+=============
++import os
++import pytest
++import utils
++import zlib
 +
-+The 9P filesystem is a network-based file sharing protocol. It is primarily
-+used to share files between a host and a guest over virtio, providing a way
-+to load kernels, device trees, and initial ramdisks without needing a disk
-+image or networking setup like TFTP.
++@pytest.mark.buildconfigspec("fs_9p")
++@pytest.mark.buildconfigspec("cmd_virtio")
++def test_fs_9p(ubman):
++    """Test the 9P filesystem commands."""
 +
-+Configuration
-+-------------
++    test_file_name = "9p_test_small.txt"
++    test_file_content = b"9PFS_AUTOMATED_TEST_CONTENT_1234567890\n" * 10
++    test_file_size = len(test_file_content)
++    test_file_crc = zlib.crc32(test_file_content) & 0xffffffff
++    test_file_path = os.path.join(ubman.config.build_dir, test_file_name)
 +
-+To enable the 9P filesystem support, you must enable the following configuration
-+options:
++    with open(test_file_path, "wb") as f:
++        f.write(test_file_content)
 +
-+* ``CONFIG_FS_9P``: Enables the 9P filesystem layer.
-+* ``CONFIG_NET_9P``: Enables the core 9P2000.L client protocol.
-+* ``CONFIG_VIRTIO_9P``: Enables the virtio transport driver for 9P.
++    large_file_name = "9p_test_large.bin"
++    large_file_content = b"".join(bytes([i % 256]) for i in range(128 * 1024))
++    large_file_size = len(large_file_content)
++    large_file_crc = zlib.crc32(large_file_content) & 0xffffffff
++    large_file_path = os.path.join(ubman.config.build_dir, large_file_name)
 +
-+QEMU Setup
-+----------
++    with open(large_file_path, "wb") as f:
++        f.write(large_file_content)
 +
-+To use 9P with QEMU, you need to expose a host directory to the guest using
-+the ``-fsdev`` and ``-device`` parameters.
++    sub_dir_name = "9p_subdir"
++    sub_dir_path = os.path.join(ubman.config.build_dir, sub_dir_name)
++    os.makedirs(sub_dir_path, exist_ok=True)
++    nested_file_name = "nested.txt"
++    nested_file_content = b"NESTED_FILE_DATA_OK\n"
++    nested_file_path = os.path.join(sub_dir_path, nested_file_name)
 +
-+For example, to share the host's `/tmp/shared` directory with the guest under
-+the mount tag `rootfs`:
++    with open(nested_file_path, "wb") as f:
++        f.write(nested_file_content)
 +
-+.. code-block:: bash
++    ubman.run_command("virtio scan")
++    addr = utils.find_ram_base(ubman)
 +
-+    qemu-system-aarch64 \
-+        -machine virt \
-+        -nographic \
-+        -fsdev local,id=fsdev0,path=/tmp/shared,security_model=none \
-+        -device virtio-9p-device,fsdev=fsdev0,mount_tag=rootfs
++    output = ubman.run_command("ls 9p - /")
++    assert test_file_name in output
++    assert sub_dir_name in output
 +
-+U-Boot Usage
-+------------
++    output = ubman.run_command("ls 9p rootfs /")
++    assert test_file_name in output
++    assert large_file_name in output
 +
-+Once booted into U-Boot, you must first probe the virtio subsystem. You can then
-+access the 9P filesystem using the ``9p`` interface name. You can specify a mount tag
-+(such as ``rootfs``), a device index (such as ``0``), or use ``-`` to select the
-+default (first) device.
++    output = ubman.run_command("ls 9p 0 /")
++    assert test_file_name in output
 +
-+.. code-block:: bash
++    output = ubman.run_command(f"ls 9p rootfs /{sub_dir_name}")
++    assert nested_file_name in output
 +
-+    => virtio scan
-+    => ls 9p rootfs /
-+    => ls 9p 0 /
-+    => ls 9p - /
-+    => load 9p rootfs $kernel_addr_r /Image
-+    => load 9p rootfs $ramdisk_addr_r /initramfs.cpio
-+    => booti $kernel_addr_r $ramdisk_addr_r:$filesize $fdtcontroladdr
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index 6f477b842ca..6d7ca6b9aec 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -46,3 +46,4 @@ File Systems
-    :maxdepth: 1
- 
-    filesystems/ext4
-+   filesystems/9p
++    output = ubman.run_command(f"size 9p rootfs /{test_file_name}")
++    output = ubman.run_command("printenv filesize")
++    assert f"filesize={test_file_size:x}" in output
++
++    output = ubman.run_command(f"load 9p rootfs {addr:x} /{test_file_name}")
++    assert f"{test_file_size} bytes read" in output
++
++    output = ubman.run_command(f"crc32 {addr:x} $filesize")
++    assert f"{test_file_crc:08x}" in output
++
++    output = ubman.run_command(f"load 9p rootfs {addr:x} /{large_file_name}")
++    assert f"{large_file_size} bytes read" in output
++
++    output = ubman.run_command(f"crc32 {addr:x} $filesize")
++    assert f"{large_file_crc:08x}" in output
++
++    output = ubman.run_command(f"load 9p rootfs {addr:x} /{sub_dir_name}/{nested_file_name}")
++    assert f"{len(nested_file_content)} bytes read" in output
++
++    output = ubman.run_command(f"load 9p rootfs {addr:x} /non_existent_file_9p.txt")
++    assert "bytes read" not in output
++
++    output = ubman.run_command("ls 9p invalid_tag /")
++    assert test_file_name not in output
 -- 
 2.55.0.897.gb25b4bd76c-goog
 
