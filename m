@@ -4,115 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EBE3C61DD9
-	for <u-boot@archiver.kernel.org>; Sat, 29 Aug 2026 15:53:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60821C61DD6
+	for <u-boot@archiver.kernel.org>; Sat, 29 Aug 2026 15:54:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DC7C960617;
-	Sat, 29 Aug 2026 15:53:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2363260626;
+	Sat, 29 Aug 2026 15:54:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id N1571QhnwRx0; Sat, 29 Aug 2026 15:53:20 +0000 (UTC)
+ id 0HZh61EEpR1l; Sat, 29 Aug 2026 15:54:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788018800;
-	bh=OHBDr4sWkUvZo7/gJA71dlCB41FkOT83VUJ1fEM+OlA=;
+	d=lists.u-boot-project.org; s=default; t=1788018880;
+	bh=mLwugNA8RANpyh5iMjHoPYGybTzlW903UeoEXSmvSSE=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jb3XEWHv6/vpa13+VyImWTxaoowlpSjZyuOH8EMdLkxeoJvikJX8MIBiqQjra0a1i
-	 qVu62/pNofboKQ7HbQjU/a5R2uqXxkWyRw3uOZhy89zLUAfgq5/nxaWNKWggz4Syk1
-	 w8MVa1leD/uf96XC+3VwZfLf0WCL+fEvJpA9ZnHrxDjhOOtCnbojlFDek86sDpxkFs
-	 iYLOtpGGSZjJ2ZrkGD83+6zanl2PyFK6VotqRbLI5Gu7Y27h9w7f7bfGpR9Ja+nJn4
-	 yOYYZcBormeZMI4dXwUIxIzyGq0mqrTi9FGwjYCHuk+Os8aLVWbvb8sWgH3u9eb+eH
-	 Cb5MpYpv5Z+9w==
+	b=005in2XEF4bL55/3Ioj1myB9qgw7PnCRCQTo+aPjdoa0BHAyr2H4Kk3cekPW1BVWJ
+	 i/FaDV1jE9j8Ow2hVMSRj+t5ZnQZrDGzI5gK5QFHIZaZyqUTaLWQfBuDAL8lwfF1oT
+	 nWOf7F+s012Z6LJgAX4E5yg5QIhleoXJgcAw3LihcHcvuIBuKytNuKJLMJ0pxHYZ1e
+	 RKt/R44wjFwtyqcqhwL9Vj0NbUaBlcv9nvLa+QG4Dg5ImPMXtD2YlMEyUwhuFtZdN5
+	 S+R+u2mZu3O3iDCiLMHmoFumWlytWegsbnMNjyHS1Tuv+GV3iD3JqNP2GYCR4Bouac
+	 6+vpfIJuOcAYg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6245160609;
-	Sat, 29 Aug 2026 15:53:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5B9C66060C;
+	Sat, 29 Aug 2026 15:54:40 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1EA36118
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 15:53:19 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 78F75118
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 15:54:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1C4CF40586
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 15:53:19 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 6AB084070E
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 15:54:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JVClBJE0VXKK for <u-boot@lists.u-boot-project.org>;
- Sat, 29 Aug 2026 15:53:18 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:32::3;
- helo=mail-oi2-x03.google.com; envelope-from=trini@konsulko.com;
- receiver=<UNKNOWN> 
+ id ZnWZLvD9D-I9 for <u-boot@lists.u-boot-project.org>;
+ Sat, 29 Aug 2026 15:54:37 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::c34; helo=mail-oo1-xc34.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=pDgTorFc
-Received: from mail-oi2-x03.google.com (mail-oi2-x03.google.com
- [IPv6:2607:f8b0:4864:32::3])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2B0D240574
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 15:53:17 +0000 (UTC)
-Received: by mail-oi2-x03.google.com with SMTP id
- 006d021491bc7-6b1bebb3ae8so177659eaf.1
- for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 08:53:17 -0700 (PDT)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
+ header.a=rsa-sha256 header.s=google header.b=Pif/zyNU
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 89F01406FE
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 15:54:36 +0000 (UTC)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-6b13496112cso312966eaf.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 29 Aug 2026 08:54:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1788018796; x=1788623596;
+ d=konsulko.com; s=google; t=1788018876; x=1788623676;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=OHBDr4sWkUvZo7/gJA71dlCB41FkOT83VUJ1fEM+OlA=;
- b=pDgTorFc93h16q3ooErnBescgckbsy0m8rdUPO7bNne01/vAMRcHbnQ2b0IZAy6neR
- 1Kgh1Ywj10ztbFjLnkBEk3BLdC1jRFnlxYPuZXZxN7ni8P29hjqk7HQTptKlFnVzUQxa
- cSNy73aVSf8yzRJbDls/P2bykU5xEGNQ+bFAQ=
+ bh=mLwugNA8RANpyh5iMjHoPYGybTzlW903UeoEXSmvSSE=;
+ b=Pif/zyNUKkablhRdyxhHS6cc7ZM9k6ep5SgjJukfODF2TgXR+7tST2pCJyc8vGEAc0
+ ff8EkuefE/VVcYSIua6R/6uYTaQMDExRosrSJDSpt5z280pqo+YFa+2fuNIwBt0qDYjF
+ xpE/LXo67ZEkPl852+CiZA0JOa0ht7MIF+k3A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788018796; x=1788623596;
+ d=1e100.net; s=20251104; t=1788018876; x=1788623676;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=OHBDr4sWkUvZo7/gJA71dlCB41FkOT83VUJ1fEM+OlA=;
- b=CBdBhW5RLAkg53HG0lsOW1wieVR6ugUOfADX0z8lkhalOgYrNMhVux45LIAHxtNdSJ
- lX9HI9oxdsS3NkggLx/2Weqe6OB4wIhGQFvv8FFXDTOFPe5ulb19MvaoR5W5kaXISa8h
- E7pBkY9pnHRop/A1rvy56Diu09pa8foUAzdHftIYItERVuzP3fh/0Kt2rYDWzIeYKCMe
- OMs2tJTQF2QSqwCK3nb8qAk8U5L+36a2HtJbycKr5bvUjBOwirYH83WYQHeJeUDPGxKC
- yYznnhAIUtUUSIAZbN3U7U+lV1YeqTQctzyXZxjQJ2nK2eg/mloywdS8w1gQqcbngJn6
- MWNg==
-X-Gm-Message-State: AFuF++nMhbCy0KPqsSA0umpT1wFxohg8w8VqwPkM2VkzNmmwQIi8lwLv
- rcGZ3Rb07VjXF6H/qq9c1dnsxi75Ve0Dvr9LM2BACfAvr9d31SNM/UCsTKQoHxjNaL19qn91IvF
- 8jTnl3NAmhc2SkI0=
-X-Gm-Gg: AR+sD11lZ0T5xPcEVm46YPXsj5GiVfRsGpM+hEW0Bd1y/4PUuscfFDuvD6W+0VWMrFp
- +CF80AJ2WaGCPqsbyvvit0xJewrcmXFtcTlAiTnpn+QtNrzWbsNXp7/bsGoy/hHjfWFr+KYJ4J1
- WcPsz0i0KR1W9icB7UljWDOCsVtQZBHrgfTkE8sU1GCuac04g8OSnvinXucEKQpW5bV4a7GBZWU
- pA/fiomV+G2JvP31BaHSJ7pVQi9BdKChGxnq8ogZCFNRSRKkghb5vnYI+/GrrgA9wSuYH/pQcrs
- Kg/wM614BhaAB1O8Hc3e/XII0SA9WuXJJ+gxxIZYUTlR9JWuMrJU0xhxgVm0/6pniOb5IiHN37F
- MBV1BSzfvZ2gzoc0xXO7Tphi580GmPWA6k9cj2WzggH2qU3X7ZNYl39ze5QtmMWCLjmhgM3zhrR
- hrl4+3+C/AjA+jyC+QJh0IP7dGxCT3pznxXKZktwKrZB+vGeiGPqGpASbfqpId9STamRQAgC84J
- c5kZG56ggcycJaD/8z2uQtIJ4D48N04/2mkAPcPYyK2Py+bqTD7SVaA3xNVWRVnNRYVhtRhMr7X
- gVz9nqJkKYk4HIGeyURq
-X-Received: by 2002:a4a:ea56:0:b0:6aa:fac5:a3af with SMTP id
- 006d021491bc7-6b1c65f7463mr10721236eaf.16.1788018796254; 
- Sat, 29 Aug 2026 08:53:16 -0700 (PDT)
+ bh=mLwugNA8RANpyh5iMjHoPYGybTzlW903UeoEXSmvSSE=;
+ b=sziYs05td6KoR1b53kjgXt+2GJhSGNeFqUZLiqlUVWVTDmsE9xsiuj/I6gksmyRcKh
+ pqIYfk00PPxFzC99Oo5+ro35qzXmZcOHXTO8Zf6IfPq2I3GVRLkTvlZRFdHpd/pvqUKq
+ 36IZjQHskXWCcqIDPstS8RstE7qn59RoF28FDuph5LnMVT8JYnBhpAXapCBdfw0G0/0o
+ wjmGf8y+uZ+OCB11kf7AzwiCB+qxNW/eZYJg+rf3HkvqvQ/47zpWbvG6LJd7zQDJxSDq
+ 4WU398pWgvLmaTE1PjkFmcfFV7xZtjF+V/JkhZeKU6Ym+Am70fCuQissO2SWqFfAnCl7
+ jpzQ==
+X-Gm-Message-State: AFuF++nMIob9kKFJTzPa00k2S0oYmjnImNLpzLzO1+7jRQ/6R2j/xsZn
+ uKzZAVCWtg5iO6eqpmTA++30/c/zZxxfsaBfhpqg7MedjjQF14lUxpULsmBIQH6mbVnDzgakSnl
+ V8BhACCKOmnzd
+X-Gm-Gg: AR+sD13AAedSAxlJkH9PPLXLE52hEgrXvFFgOw/gymrqApsp5UaEirpmdA52RjK2Jy0
+ PV6ULT/jqvw0hUb+ShCVtnWUPQmu0GPqocHDWdQYshleiJgp0M0XMBbPTEKndR0rf6er1invNEK
+ +dY5F5BebIs1W61ubwsbTZLQXYoTVQlcRqdoh59chgMw1Z/eiOzncxs95DOfPPnxwYJqmogduFY
+ PWvLXwt27HeBPpKVnOdQrijcyrE1F2YUBG5pVRdx8Yqv9rXzW/kOD4i2t3J24eGql0KKnFhh3sy
+ 0VjIKOdmiQfMTZAWRIROiR5tsNSvY8HHwPm0zPA2Ku6LnEb55kk1DHbC833HOccu0Zv7VDnyQo0
+ DbLTZTYlYheYML3W5q2W6rCQOOMKvQKq8Ar6FSv/RRSE7vT1Kl+8JAXGAtsxjoZ+52tn6CFy49S
+ qKT2i/dmYHbEYBUOHxF+pLTw3uV5qERi95VeOV9us1Rq2IZGDWZpy1q8BBXBDJzTnHEct58gUBl
+ DqBDPsnrQnwAnruUAA8zo9oXwAxqHRVzlXb88Nd0ME9h70BePivRb4Aix5S8hE3w7JHCm+6R9Gw
+ 47qA5ICBmw==
+X-Received: by 2002:a05:6820:e079:b0:6ae:9e00:c8ef with SMTP id
+ 006d021491bc7-6b1c65b117dmr11728436eaf.14.1788018876003; 
+ Sat, 29 Aug 2026 08:54:36 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b1ce3c487fsm4793811eaf.15.2026.08.29.08.53.14
+ 006d021491bc7-6b1ce2f7004sm4821786eaf.12.2026.08.29.08.54.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 29 Aug 2026 08:53:15 -0700 (PDT)
-Date: Sat, 29 Aug 2026 09:53:13 -0600
+ Sat, 29 Aug 2026 08:54:35 -0700 (PDT)
+Date: Sat, 29 Aug 2026 09:54:33 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Bryan Brattlof <bb@ti.com>
-Cc: u-boot@lists.u-boot-project.org, Vignesh Raghavendra <vigneshr@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>,
- Jayesh Choudhary <j-choudhary@ti.com>, Apurva Nandan <a-nandan@ti.com>
-Subject: Re: [PATCH 00/14] board: ti: update and correct files MAINTAINERS
- entries
-Message-ID: <20260829155313.GN3959812@bill-the-cat>
-References: <20260829-maintainer-fixes-v1-0-e4e03971e14c@ti.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.u-boot-project.org, Michal Simek <michal.simek@amd.com>,
+ Thierry Reding <treding@nvidia.com>
+Subject: Re: [PATCH v2 2/7] MAINTAINERS: tegra: Update and correct entries
+Message-ID: <20260829155433.GO3959812@bill-the-cat>
+References: <20260829015026.473134-1-trini@konsulko.com>
+ <20260829015026.473134-3-trini@konsulko.com>
+ <CAPVz0n2EQAiqCGeDGosfrytB6908iPfvAt4JwNHtua6QE_ETOw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lZz7fh+hOy+hndZi"
+ protocol="application/pgp-signature"; boundary="ANcYVOtuSO8KV+6e"
 Content-Disposition: inline
-In-Reply-To: <20260829-maintainer-fixes-v1-0-e4e03971e14c@ti.com>
+In-Reply-To: <CAPVz0n2EQAiqCGeDGosfrytB6908iPfvAt4JwNHtua6QE_ETOw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -128,46 +128,54 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
---lZz7fh+hOy+hndZi
-Content-Type: text/plain; charset=us-ascii
+--ANcYVOtuSO8KV+6e
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Aug 29, 2026 at 09:34:18AM -0500, Bryan Brattlof wrote:
+On Sat, Aug 29, 2026 at 06:13:27PM +0300, Svyatoslav Ryhel wrote:
+> Hello Tom!
+>=20
+> =D1=81=D0=B1, 29 =D1=81=D0=B5=D1=80=D0=BF. 2026=E2=80=AF=D1=80. =D0=BE 04=
+:50 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
+> >
+> > Update the main MAINTAINERS entry for Tegra to make use of the "N:"
+> > syntax to catch everything with tegra in the filename. This lets us
+> > remove the incorrect board config header entries for a large number of
+> > platforms while still having the used header files have a maintainer be
+> > found. Furthermore, correct some platform MAINTAINERS files that other
+> > obvious issues (such as .dtb rather than .dts in listings).
+> >
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Cc: Michal Simek <michal.simek@amd.com>
+> > Cc: Thierry Reding <treding@nvidia.com>
+> > Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+> >
+> > This is slightly different than Michal's version because it adds the "N"
+> > entry for Tegra overall and so catches include/configs/tegra.h which all
+> > of the boards which had their include/configs/ line removed actually
+> > use.
+>=20
+> That is smart. You don't need to replace device specific header with
+> tegra.h in some files, you can just drop them. Thank you!
 
-> Hello Everyone!
->=20
-> While updating the check_maintainers_files.sh it was noticed many of the=
-=20
-> MAINTAINERS entries in board/ti/ are out of date[0].
->=20
-> So this series aims as trying to update all entries by splitting each=20
-> board into their own block, sorting the F: entries, correcting any file=
-=20
-> names, and finally adding any missing files I noticed.
->=20
-> Happy Hacking
-> ~Bryan
->=20
-> [0] https://lore.kernel.org/all/cover.1787555916.git.michal.simek@amd.com/
->=20
-> Signed-off-by: Bryan Brattlof <bb@ti.com>
-
-Thanks for doing this, I'll drop the boards/ti/ parts of the series I
-just posted.
+My thought process on keeping them was that if a change is made to the
+header then all of the board maintainers should get cc'd in case the
+change impacts them. I can drop them if you still prefer in v3 however.
 
 --=20
 Tom
 
---lZz7fh+hOy+hndZi
+--ANcYVOtuSO8KV+6e
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCapMAZQAKCRAr4qD1Cr/k
-Co20AP9jZuq/JKRXVTP7K0NIt19hV/4V6Vcz70RUWZs/N32x5AD/bW2pdV3TxXkz
-rpf6pP2eTCH7fNIk6dsvE4mlKR0qWAE=
-=NbEb
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCapMAuQAKCRAr4qD1Cr/k
+CjvZAQCJE2VX/wuBfBCHGcndl2aHybDZC8dRKJDNm0Vata8NBwD/V71uwgen9R4H
+1TdFsn+CyrXjY4WqWnP/+WnOnfKKWA4=
+=0K7m
 -----END PGP SIGNATURE-----
 
---lZz7fh+hOy+hndZi--
+--ANcYVOtuSO8KV+6e--
