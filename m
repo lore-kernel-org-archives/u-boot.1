@@ -1,132 +1,142 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ED1FC61DB9
-	for <u-boot@archiver.kernel.org>; Sun, 30 Aug 2026 10:42:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E1C5C61DB9
+	for <u-boot@archiver.kernel.org>; Sun, 30 Aug 2026 10:57:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 21BCE80B9D;
-	Sun, 30 Aug 2026 10:42:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 20CD66061D;
+	Sun, 30 Aug 2026 10:57:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 148xBKZ4rGy3; Sun, 30 Aug 2026 10:42:05 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ToIkACo2-F5O; Sun, 30 Aug 2026 10:56:58 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788086525;
-	bh=JnuJYaMGWERU8UOJcRTYWS7njvzD8eJ0UZ+v6aTDJmQ=;
+	d=lists.u-boot-project.org; s=default; t=1788087418;
+	bh=U2+J/Sq0fJJMwK99iBoa+J0PFsTf7G+bmbTvhmBfUhg=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=085vYEJfrbLX4R7L2uvgGrr3F70oQlHOz27o6h6WHjCQ/iDKMhERozOgBbJImBNc8
-	 lu+H1aCtrATrvfwRdntfCkKm73/+nT7vKuLcetuTGVLLdYxU5DfbwrkIi0tUtWrBEa
-	 oT/uZgdg8xr1M/M2Rk+FUM+xfPrqU+wc+d/wJOEQpuIyXxtPZUDIB+cOUrZjtCCPt7
-	 quROv/HnmIuH63p8Bi607kmD4DKtMkjy/GuubGu/GnZ5vmCpmWl+UOdvcApKVmdpUX
-	 W1jx+KLtuTqYNaYZKNefz76N5BHo3N7eZD8loLvy5/7aSoPnFG0zME3i6NHpG/y6+4
-	 yBQvuCpQViLDg==
+	b=YAnOb/i0TsVN+ZFFfcuAHuhgWLWWnMcKHe8mvjRg8M+0u8C68s39rLSqr447cBcEP
+	 kUBF+adGCh68so2pWcoYQyBMejyyCxVsVlgdIlj4J7eVZvyRkYiC3yNoNbPlWXvxvp
+	 YP7LnAcBMOgbS8hM1veAH0juMQAp0kmKeNEIt57gCm6RXx0LHGSHgDsHuguxyngUef
+	 Pp7TWekQxgfzkbBCKkRqQu7t8xf63ApKxCgOFAoWM4jI1cj8dJtKTud0XJBKAcbAX8
+	 jsNdw/njeg/kaK80e5R4FabvsfkeQa6LOZnjpyZD9kq7grcmzQit7L2feHMsawHfY0
+	 yiplCflfd3FLA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4D7FD80BA3;
-	Sun, 30 Aug 2026 10:42:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 12678605DF;
+	Sun, 30 Aug 2026 10:56:58 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 44CAC1DE
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:42:03 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 2E790230
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:56:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2A4DB80BA3
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:42:03 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2030A80DCD
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:56:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GEFyD5FyY6_F for <u-boot@lists.u-boot-project.org>;
- Sun, 30 Aug 2026 10:42:02 +0000 (UTC)
+ id DCEZqbLNCSdc for <u-boot@lists.u-boot-project.org>;
+ Sun, 30 Aug 2026 10:56:55 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::f2d; helo=mail-qv1-xf2d.google.com;
+ client-ip=2607:f8b0:4864:20::f34; helo=mail-qv1-xf34.google.com;
  envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=WDbYIfKp
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 457BD80B9D
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:42:01 +0000 (UTC)
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-90cc64f7f86so31007776d6.2
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 03:42:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788086520; cv=none;
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=cv6s840C
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 25C8D80DCC
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:56:54 +0000 (UTC)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-90e7c71f86eso4307276d6.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 03:56:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788087413; cv=none;
  d=google.com; s=arc-20260327;
- b=Tx3dClNGYJ4zGum57qFlDGca6b6z+r4DgNNhcWtxSo9kcGukc07f4/Xs4IdFO1P7bj
- aWu2rW39ilSmZI+BVe5lRaYDVQRtSKxmIn4iRqBb98oyqX/jGLwE4V5b10U+xcvUNRfZ
- 2uiNtrb3w5XKYLlg9dLi9bX/fNVH+PcR9f2p6UZXI/3hElq4K2LORrZI8hq3CzchF58d
- 1++I+VXcGy8K/f3TZSE7o9oTm4A8MEf4+Y8JLaF8llqalCacjFqw236800nSXHPujtuu
- nSfli2six6//xJqaH9xhtYAXs/j+9cr9cSFb+NiGQrlkVQPhKKeyXB7LyopEUqSV3vJ4
- cbwA==
+ b=qw1+UppKD0/1NZTpVU3qlMJnWmi/h6McFC2ZDKC4xkKt66lnLSVs8brQ/Zv4VeJJu6
+ Sj3sM2eq5gGBjv2y2KIA/wNAp6RMvQrsfKiflBYAg33VQhtNKyW4mYyR3RnxaG8fvmFo
+ +fMUi5RC7GeBCKBepXgf5eWRC5H0SeARpXNkRR4FXemyTt3o8o6iExbMwzlZPlozgLIW
+ l76aMS9X9+zCMCFDCWgHD4qkEe6xi0oGlglDbkTUNs+tqCa0o2+BqyPPdggAXyvW5seX
+ z+rm8cuvi3a4+Ypi807PWRO7wCPU6IVyXfY+ymjMIm7rHF29wgdgGOVNBVl/v0fHy5+i
+ O8+g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=JnuJYaMGWERU8UOJcRTYWS7njvzD8eJ0UZ+v6aTDJmQ=;
- fh=e0JkGs2omtkuwDtYja7WDaTNcJA2/ErGx3TJSh8Rp+s=;
- b=ZrXymAoaJBz2FHNRRNujIfJX8gqH5hPeZoX7Cs3vvWK2grkX9z9tFsya/04EgpMAtl
- Cg8fVve3JtrfIDUMgjU3M185u8Fnb43BUFB6k3QVB+Z7m8L6r+DtM7Qo1F9MQPhsqTrr
- my215OW0teOkjysy5m/gqwDBIMLcxqIFg9uf4DbmDHmzp2gTQJV3DWbG1dFgObRUUhmX
- ow9/iWVWpcVX+cB8xy/71LC804kMAi8FVR+ocUc/OoLL6u4DBDkwx6F06KZyYDqja4Op
- rYig4GbJjaSNmdKlWXkO1TPoe7jJOUETQ22MVH7XkIUt4xEoiS0oemhuiUt3tCnscwOd
- aOVg==; darn=lists.u-boot-project.org
+ bh=U2+J/Sq0fJJMwK99iBoa+J0PFsTf7G+bmbTvhmBfUhg=;
+ fh=dvM9ICcfIcwF1MRE7lQGoMRE4wFDudmYlb0Z2dEscBA=;
+ b=rwnusXghA3nsU2BAVD8GvKbjbLEa/Q7IeHN11F4kSK4FVuqj/ZLUay2WC8elgHmSrj
+ IIpCarenka8fpis5DirNPodWtoT39FPI0BC8sgweU4ZlnKyMBw8TBJPeJfpKqwRKIxqf
+ /DMr7ubff85/YcexGvbJT3kdccDMvAsMfe7lSBJ7r3OieIxRRoxuRDwJr51+CqIY+J8K
+ RNMXaj8b7wtlbH3anSQgpLhVP4LypBvxJqma1lRZqbBjbwK+zPvczJWXyFJPtxK0Ozi4
+ /UkzmSMhT0U1sL/i+eW+qZPWrUXJB0DA6LQLDrmIJEDqE+wYYMHIpa7CyxohizV/MCGG
+ A+mw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788086520; x=1788691320;
+ d=gmail.com; s=20251104; t=1788087413; x=1788692213;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=JnuJYaMGWERU8UOJcRTYWS7njvzD8eJ0UZ+v6aTDJmQ=;
- b=WDbYIfKpQUx7wk7kzTCUCVSEpwgGcGE1FwS1oehzVKuHHAKxDe/LuxU66zn8Y9dAmD
- 9ECgadEiQEY56lVWjbeHyUlIsNwPXm5fBc9HQMcjMUlss9eCmsaB+R0P6sHN0zyGZFK5
- SMgQ2evB5eCaGEondHbFxAkcuJ+GVl87d6RREK/PKL1SxsuaM6thbf0LULU0xTezFuyz
- nzW8xfWmYYciEYn85Q9s7UR6mN0csR8wnBYoKSpYFUfp5KKtZ2Ft4in+YQfZEJhSerWe
- oaKJj2jxCP28Zwmo4ciXPgYqd4GmAeVlBk+OGkjjDqenID3KR/2g3AOJyEV6iOUtOJQc
- WEbw==
+ :content-type; bh=U2+J/Sq0fJJMwK99iBoa+J0PFsTf7G+bmbTvhmBfUhg=;
+ b=cv6s840CdPFBHTeX9h0f/7QsGkaYEGaY1MQQw2zSrSzTwwhe5X38Q9DJpg7MEVGxv6
+ b5w+5MmVboGm8ErhA0wgQlGJqnRPd/qogLu7ybBoJudrvb8S7QU2lkTDWc8LP5D+p238
+ iuUdTRwaHHoNt1oWs7xDp3Xpv/EWW0i0f6rXuIDI2PclMQcpjZ5YBJki6+JPsXJRcpd5
+ LhBfd+nI6hwRguCb9ewuHrtdLqYXqMhVqPsKVinexMle3wXNom/RDJBH6jXgg872aVkW
+ nz701hIHWtUfJu+r4flzFpp+KEHIywHkzsBzcZs3iqx1HYayEGrFf9HO0+Q9Rowz94gx
+ 688g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788086520; x=1788691320;
+ d=1e100.net; s=20251104; t=1788087413; x=1788692213;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=JnuJYaMGWERU8UOJcRTYWS7njvzD8eJ0UZ+v6aTDJmQ=;
- b=Srh4J+pE3lHKapH7cmuC4YOgHvezVXhLrvsPdtoV7Na2FCfuUrlvskIABD/s/Rt7eX
- ZAAwZZolvRs2qcJePtcuVBoeW6bQyFijoTxz5n0p78wqtl4O+8Se8QLqqtA3do9aQX4s
- 0UgQwGpmuQRxyyVzdwt5v/uNcWSyToN3++BZFCi5uO7dDLmNPPtmkhpBx8C30mWreeSX
- FlCwcNrka0I2tYUp4VvkBRBtxvYCf3rNwoIUtDseVPdT4JAtIRmmoDAPCooHgq2NFHUw
- l6b0sT2mbKGtgV6sVBkeJyD1rLhJ/AZCDlayjCNSlP5SprLv6hq0sOsMQiYyq56QmDd4
- q7HA==
+ bh=U2+J/Sq0fJJMwK99iBoa+J0PFsTf7G+bmbTvhmBfUhg=;
+ b=Qdpjjzo6U0NbmBjzhXLmiYU1cF1gJHQokd82F77pH687Ec11nIoaB5F1jNBh1FEQ/h
+ UMmjQtfMv2w9P8SFxSanozKzzq/GE1BfAWKQJHy2uFR1x75jf5AHrLgIllNZLLZFVTm4
+ mPIQeF+6+WiuIo5e6g3wzxLBUSyHVH8Pxg2I9NYvMnOR8e8jEz1Mz8Qe2xNNFSM10UFs
+ KsK65nVAV7AG8PE98iWGmO2xfw/vQSmLWzzw+mS2h72YkPPJmKMyLydA55ZSF3ASNE4c
+ H+QoPHhBdb8qFEB64wDuqROQNiNPUTG2BkW6+owahDYov63LJwwZFaukapIcqh0H1qTb
+ b8vg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx3s+Y+p+nT/9KqzASXigZcAhMBbrq18cFFBHf7B0GsNdFOGiHq1F4sIFHRnuDNac+Lh3cSzJw=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mCBbMG0G9jDoCa+UMuDx0SyItlXO/hON5GUVvechkcqoFTN1Y9
- y4Etn4/CdFPPgtxY1RqY2Ylk9zlcc36+LcaG+yEQL4CW/kMkpRfSCQfuZf92Lh4EIaEQJHifSb/
- E9+riLwAQkPse0Y5S+105sd5YDgcYS3w=
-X-Gm-Gg: AYBFou2xgtyWgvr2bGU4159DSr49zMtjjwriohUqkV8LNVtApAGpneX2IRSZRbbWvd+
- 3/XKfK3MhCukcJDYbDNDA5manlRFGahUTpOUUxFYonhiTsUZLi7SBZmv8j5O4Ijm4FnRagG7NSc
- 1SisIn0nfLrqTlSaN0JSRVeX7yFBaCoGGX41n2zMLpfTgNYtKT7ZKG/G/3A6RDIfTpBgMGZvZ1u
- bsBjkIcfqVVdbPBZdIlwcb3rJ7QEt5eoDOsfTVSNyUwR9Sb1AtKkAeEWuSgctiino+IKGxZ6Up7
- quCWEqh7x7DkLeukbDCRn3swgQdnfWqvyEHqPO0vj0IyxZckgvFpyXNCf1GiBpi9fBeRoNuP6+r
- 6xbcHlClamNxIKYpWBPOhnFgZb9KmQ68K7VBNC8ERgg9na2LGr7h6FbJYpX2b+21vimhD5weD17
- PXLgdvS5UrYt17BiVLs4fmbMCNDjk1bxpsTBTSW3fkT5sg5q0LvQ==
-X-Received: by 2002:a05:6214:2266:b0:90e:8399:6d2c with SMTP id
- 6a1803df08f44-90e83996e3emr34024696d6.6.1788086520369; Sun, 30 Aug 2026
- 03:42:00 -0700 (PDT)
+ AKwUvBwg8Tc80SZ36f0Ru5iQSjkbSGogs23Qoz59iea75s+aFXnZmqgHmFEhLqamsMbdoyQwW1GEiCo=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lSOscWpB47oxLiCRFpvYPes9iI7wvtMnckmob7IoeEVCLAt7Lh
+ 9YIewrLnl6oC4S60TXy1dGWxOcMytS15/T1zgrfNKKrjxUzXDKUjFkAeawILkEN3HGwCAZh7GFW
+ etmpTpEE2O9/22HNstcvUNvBasIAaXsc=
+X-Gm-Gg: AYBFou0zOqYvq7c9Qmicz9jt/JWjYeIQF80DD4h9RsQ1iRl8tXML2Q+08wA6RkYpQaq
+ FPjjGl7szI8XX3vjfCphTwotWzd3j2n+/5RbKZ0AgY1fgG3tyeVOAIjr6dsxnSWuuBTb/gAmT9r
+ 72E27XCX8h0dSuBAJFJPwlElSZA7nogdZUUIGAleOJz4WPPCXmlPkhfbbormC0ianNE2LawnLCi
+ DG5XHqmexPMiTzzI1b5pH/P5U4gvqc+CwvY0cn3SpUZVfhWdFZmsy8xTVU71ZmPTRO6CpatwAQd
+ ga0QcPSGEPuJJO88l6Dwu+iutwwouJlnOccjz5DQmuXplcQFEzIbNSgbCMJTclYAWf8PJATcqDR
+ P8UZe3dBBwXTBYCtuSUnlfLdea4T5TcwZFVabnEXCE3rqTJAm2bDC7A80NDaLNGINlPtmFb8hsf
+ lcln39q0wZnaGZm7g6PZXMz1I8QpYQySqKJP74ao8=
+X-Received: by 2002:a05:6214:d6d:b0:8ef:91c5:8edb with SMTP id
+ 6a1803df08f44-90ce0c5b40fmr216408746d6.10.1788087413500; Sun, 30 Aug 2026
+ 03:56:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260829192119.2658328-1-visitorckw@gmail.com>
-In-Reply-To: <20260829192119.2658328-1-visitorckw@gmail.com>
+References: <20260830-ccaione-upstream-mtk-fdt-prepare-v2-0-f9cfce2ed42a@baylibre.com>
+In-Reply-To: <20260830-ccaione-upstream-mtk-fdt-prepare-v2-0-f9cfce2ed42a@baylibre.com>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sun, 30 Aug 2026 11:41:48 +0100
-X-Gm-Features: AcwNN1XO1A39lYzoUT3Dw0KeEt-24zlqvSa9TiX9zRRimpSROKtDjySXflJLf-M
-Message-ID: <CALeDE9P7UoeyBNfJycD2dUHkEeXiFgi+XaP9hAzKTp+71fvx1Q@mail.gmail.com>
-Subject: Re: [PATCH v2 0/6] fs: Add 9P filesystem support over virtio
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: trini@konsulko.com, tuomas.tynkkynen@iki.fi, bmeng.cn@gmail.com, 
- sjg@chromium.org, jerome.forissier@arm.com, jserv@ccns.ncku.edu.tw, 
- eleanor15x@gmail.com, marscheng@google.com, u-boot@lists.u-boot-project.org
+Date: Sun, 30 Aug 2026 11:56:40 +0100
+X-Gm-Features: AcwNN1UGJmybLfWLqVdAGcCEowZ6tc7mrqht1h42q4QAFk0PBBXGPbvYamx8wO0
+Message-ID: <CALeDE9O3Taz2Q-NgEM4Prjn_Q=z6mXduMR7y_iSvwgBR6yKGXw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/3] Add RITY devicetree preparation support
+To: Carlo Caione <ccaione@baylibre.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.u-boot-project.org, 
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, Julien Stephan <jstephan@baylibre.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ =?UTF-8?B?UGFibG8gU3VuICjlravmr5Pnv5Qp?= <pablo.sun@mediatek.com>, 
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Vincent Jardin <vjardin@free.fr>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ =?UTF-8?B?UmFtYXggTG8gKOe+heaYjumBoCk=?= <Ramax.Lo@mediatek.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -141,101 +151,72 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Kuan-Wei,
-
-> Add 9P network filesystem support to U-Boot.
+On Sun, 30 Aug 2026 at 11:18, Carlo Caione <ccaione@baylibre.com> wrote:
 >
-> It allows U-Boot to directly mount host directories in virtualization
-> environments via virtio.
+> RITY images select a base devicetree and an ordered list of overlays
 
-It would be useful to give an overview in the cover letter how/where
-you expect to be used. While new features are always welcome they also
-come with a maintenance burden so some background is always useful to
-provide more information.
+What's an RITY image?
 
-From a network stack PoV does this work, been tested, with both the
-legacy stack and LWIP stack? I would tend to push this towards working
-with the LWIP stack as we're moving towards that being the default for
-standard U-Boot (not in SPL) and I wouldn't expect 9P to be supported
-in SPL.
-
-Peter
-
-> The functionality has been verified on qemu arm64 by successfully
-> loading a Linux kernel image and an initramfs image via 9P, and booting
-> to the Linux shell.
+> through the storage, storage_dev, dtb_path, boot_dtb, fdtfile and list_dtbo
+> environment variables. EFI boot needs the selected tree to be assembled
+> and published through fdt_addr before the operating system is started.
 >
-> To test with QEMU:
->   -fsdev local,id=fsdev0,path=/path/to/host/dir,security_model=none \
->   -device virtio-9p-device,fsdev=fsdev0,mount_tag=rootfs
+> The environment interface, source-discovery rules and appended-image layout
+> form a MediaTek-specific RITY contract. The referenced data uses existing
+> U-Boot image formats, filesystems and storage stacks.
 >
-> U-Boot usage:
->   => virtio scan
->   => ls 9p rootfs /
->   => ls 9p 0 /
->   => ls 9p - /
->   => load 9p rootfs $kernel_addr_r /Image
->   => load 9p rootfs $ramdisk_addr_r /initramfs.cpio
->   => booti $kernel_addr_r $ramdisk_addr_r:$filesize $fdtcontroladdr
+> Add MediaTek support to consume that interface. It locates the selected
+> source on GPT block partitions or on the RITY UBI/UBIFS NOR layout, loads
+> the base DTB, applies list_dtbo in order and publishes the completed tree.
+> Both raw and authenticated DTB and DTBO inputs are supported.
 >
+> Expose mtk_fdt_prepare for interactive use. Retain the dtbprobe and
+> fdtprobe command names and positional arguments used by RITY EFI boot
+> environments. Also provide bootembedded for legacy boot. It locates and
+> runs the appended RITY boot script through the standard source command,
+> leaving the legacy policy and authentication to source and bootm.
+>
+> The command entry points live under cmd/mediatek and are documented under
+> doc/usage/cmd. The implementation uses existing block, MTD, UBI/UBIFS,
+> libfdt overlay, image verification, source and bootm services.
+>
+> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+> ---
 > Changes in v2:
-> - Introduce DM UCLASS_9P and dm_p9_ops for transport devices.
-> - Support selecting devices by mount tag, sequence index, or default.
-> - Integrate 9p into disk/part.c and generic VFS null_dev_desc handling.
-> - Consistently use 9P2000.L naming across subjects, code, and Kconfig.
-> - Add kerneldoc comments and separate filesystem header.
-> - Add timeout handling, feature negotiation, and remove callback.
-> - Add 9P documentation.
-> - Add automated pytest and enable in qemu_arm64_defconfig.
-> - Fix error checking, bounds checks, and memory leaks.
+> - Clarify that the RITY contract is MediaTek-specific and uses existing
+>   U-Boot formats and storage stacks.
+> - Move command entry points and command configuration under cmd/mediatek.
+> - Add documentation for mtk_fdt_prepare, dtbprobe, fdtprobe and
+>   bootembedded.
+> - Rebase onto commit 658fc6aee957 ("fs/squashfs: fix directory table integer
+>   overflow" series merge).
+> - Link to v1: https://patch.msgid.link/20260828-ccaione-upstream-mtk-fdt-prepare-v1-0-bf80b489eb0f@baylibre.com
 >
-> Kuan-Wei Chiu (6):
->   net: 9p: Add 9P2000.L protocol support
->   fs: 9p: Add 9P filesystem support
->   virtio: 9p: Add 9P transport driver
->   doc: 9p: Add 9P filesystem documentation
->   test: 9p: Add test for 9P filesystem
->   MAINTAINERS: Add entry for 9PFS
+> ---
+> Carlo Caione (3):
+>       arm: mediatek: add RITY devicetree preparation
+>       arm: mediatek: add RITY devicetree compatibility commands
+>       arm: mediatek: add bootembedded compatibility command
 >
->  MAINTAINERS                    |  11 +
->  configs/qemu_arm64_defconfig   |   3 +
->  disk/part.c                    |  16 ++
->  doc/usage/filesystems/9p.rst   |  55 +++++
->  doc/usage/index.rst            |   1 +
->  drivers/virtio/Kconfig         |   7 +
->  drivers/virtio/Makefile        |   1 +
->  drivers/virtio/virtio-uclass.c |   1 +
->  drivers/virtio/virtio_9p.c     | 119 ++++++++++
->  fs/9p/9p.c                     | 185 +++++++++++++++
->  fs/9p/Kconfig                  |   8 +
->  fs/9p/Makefile                 |   5 +
->  fs/Kconfig                     |   2 +
->  fs/Makefile                    |   1 +
->  fs/fs.c                        |  25 ++
->  include/9p.h                   | 203 ++++++++++++++++
->  include/9pfs.h                 |  60 +++++
->  include/dm/uclass-id.h         |   1 +
->  include/fs.h                   |   1 +
->  include/virtio.h               |  12 +-
->  net/9p/Kconfig                 |   5 +
->  net/9p/Makefile                |   5 +
->  net/9p/client.c                | 408 +++++++++++++++++++++++++++++++++
->  net/Kconfig                    |   2 +
->  net/Makefile                   |   1 +
->  test/py/tests/test_9p.py       |  82 +++++++
->  26 files changed, 1219 insertions(+), 1 deletion(-)
->  create mode 100644 doc/usage/filesystems/9p.rst
->  create mode 100644 drivers/virtio/virtio_9p.c
->  create mode 100644 fs/9p/9p.c
->  create mode 100644 fs/9p/Kconfig
->  create mode 100644 fs/9p/Makefile
->  create mode 100644 include/9p.h
->  create mode 100644 include/9pfs.h
->  create mode 100644 net/9p/Kconfig
->  create mode 100644 net/9p/Makefile
->  create mode 100644 net/9p/client.c
->  create mode 100644 test/py/tests/test_9p.py
+>  MAINTAINERS                                      |   3 +
+>  arch/arm/include/asm/arch-mediatek/fdt_prepare.h |  10 +
+>  arch/arm/mach-mediatek/Kconfig                   |  25 ++
+>  arch/arm/mach-mediatek/Makefile                  |   1 +
+>  arch/arm/mach-mediatek/fdt_prepare.c             | 501 +++++++++++++++++++++++
+>  cmd/Kconfig                                      |   1 +
+>  cmd/Makefile                                     |   3 +
+>  cmd/mediatek/Kconfig                             |  31 ++
+>  cmd/mediatek/Makefile                            |   4 +
+>  cmd/mediatek/bootembedded.c                      |  59 +++
+>  cmd/mediatek/fdt_prepare.c                       |  65 +++
+>  doc/usage/cmd/bootembedded.rst                   |  51 +++
+>  doc/usage/cmd/mtk_fdt_prepare.rst                |  90 ++++
+>  13 files changed, 844 insertions(+)
+> ---
+> base-commit: 658fc6aee95784139f070f9945cb3bc5da8d7d22
+> change-id: 20260827-ccaione-upstream-mtk-fdt-prepare-68f51a5fd2ea
 >
+> Best regards,
 > --
-> 2.55.0.897.gb25b4bd76c-goog
+> Carlo Caione <ccaione@baylibre.com>
 >
