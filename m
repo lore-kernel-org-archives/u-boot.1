@@ -4,115 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 796D5C61DB9
-	for <u-boot@archiver.kernel.org>; Sun, 30 Aug 2026 10:18:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8FCAC61DD9
+	for <u-boot@archiver.kernel.org>; Sun, 30 Aug 2026 10:18:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 067E360621;
-	Sun, 30 Aug 2026 10:18:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 47E6760639;
+	Sun, 30 Aug 2026 10:18:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vYrQIBfoJoPg; Sun, 30 Aug 2026 10:18:51 +0000 (UTC)
+ id DFqMrWE84Y4K; Sun, 30 Aug 2026 10:18:56 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788085131;
-	bh=7y7jhSlTwNBR5dD50OfmQNXxlxJ8h7GKx2tAuemkYL0=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=V26xwWUvSlkr3KQL0a71tFBx+mVQ2/JUArEy5kqqnOGyJhr9OvtO67H3TbzVXGU+Z
-	 ACwDlYuzTlYQdq0630VAqqnu4zBjf361JOCqKNXA5izxlMVgKzKjOVNhS1KoHvVcZT
-	 fcjQTBMPoPT11QRuj5B5x4V6f/KspO7XdjSr4rxrCAMHGHCFEG/xociNmpiFUAzJBl
-	 8XbnM9Cel9KDSaRS0PZq5/1wZ/d6yycTr1l2RAx1zyH5p50pX8L9KhrnkH8/N/R0Dv
-	 YbBs76tb7OrDFskvdLfxqzF08bSiBaQCQHkI54EUYg20ZZQkloxgJ+ZRTFP3QTmyHp
-	 yyqXWQh+N7ysw==
+	d=lists.u-boot-project.org; s=default; t=1788085136;
+	bh=fcbhmLDFNyF4EedyunkC0OODhfm/CZfxzQ0pII7A8Fs=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=H8qLzZv6wLfCjWi8ahI03+M5ypOebt4OoZY1EbN7YAjr5JLnuzDIFbH5rhY/NQeuK
+	 kJdHoqBhMOCcBHMZF2FN2GAC3Zutb0FGdPhy33UYhINnXBKtHBKheg9RnErjUrJyE2
+	 9dmDHp8IZhMIKWWzE0DTM3ooiZXIgAFY3pDiGciQOmNDn20UFs5AGiwN4ITtAZMeAB
+	 CMyxiaE/251ES5jZjha0ZE4aMXxre1dKH77X5yxOcEtDnU/P0iR1mfT+eKZLYAYmUk
+	 bdJjoxJWBj6CNcWWoYPIWVD1Y35QMqlmYPbAYb5aSSFlv1pMHOPiN937cPr/ITKVq3
+	 G4cLS1AQC3jNg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7206960611;
-	Sun, 30 Aug 2026 10:18:51 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A5B3660613;
+	Sun, 30 Aug 2026 10:18:56 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0CFCD2FD
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:18:50 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 6772F230
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:18:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id F2E3380E09
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:18:49 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5938C80E09
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:18:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9bm7Ezsze-G7 for <u-boot@lists.u-boot-project.org>;
- Sun, 30 Aug 2026 10:18:49 +0000 (UTC)
+ id Ee1PmT9kCOiQ for <u-boot@lists.u-boot-project.org>;
+ Sun, 30 Aug 2026 10:18:51 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
+ client-ip=2a00:1450:4864:20::42d; helo=mail-wr1-x42d.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=jeFsBgYJ
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 510DD80E07
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:18:46 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-47c2b362ee2so2113921f8f.1
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 03:18:46 -0700 (PDT)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=TlvYu99i
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id AC7C380E07
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:18:49 +0000 (UTC)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-47c2b362ee2so2113950f8f.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 03:18:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788085124; x=1788689924;
+ d=baylibre.com; s=google; t=1788085128; x=1788689928;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=7y7jhSlTwNBR5dD50OfmQNXxlxJ8h7GKx2tAuemkYL0=;
- b=jeFsBgYJDEn2E8o1aW1hNJQvhMfD9d2t/EULexx1+/wke4aS77S1yASC9WeodQH7Ln
- dIKBsOvhrbDcYgsSCeb4X10KPAcUpQZZUH4AzSiF9j32ND5J3+JDAPIZAo7KF00DKDwG
- HMANKSjDv8mGcEqDP7iapf+ntezvgSKNeM0bdn3nuM+ftO13mgDIDLVVf7QjazbnE30c
- gIsedS2CsyLpZq/ipJk13aC4pOTH5U2rOLWsWwHkyRUNVbbnztaFUY83L109+O+EWwKE
- pNeFOKwNCvRUYaxrZ8s8Fq6/kbA21U/84IvTlmetd8wxAYxZTiCrjzvVkkBQsxHsxbDP
- IgRg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=fcbhmLDFNyF4EedyunkC0OODhfm/CZfxzQ0pII7A8Fs=;
+ b=TlvYu99idzMSnwje38XerpRpfH4BlOszgZGDc0ImnYLrRwkxP6AtkGOOZeAtvhWxTc
+ QQTrGAeOdUbc0EgETbGkI8h1k2zpUHpwn3zYNt89uyGtv2vNzv0EaYi0JV/3QybL0V1c
+ OwSfizOjMgMYQxo402+Tyg3mrpwx2mCwYrJ51063P4rQW80k5CRfwtEg2Dzg7pEHEQVb
+ PV2QS8TMw/sVk5JlFnoFhpT46UXyEPeVJt7F1baj8aziMOA2Mgm0euRlGDRVqq+DFbFj
+ AFsNTD6xZn4Lt8OO7+1kX95l2TdKMTtzxhW+R99i8E0zB81uMfYCITrTjnu9xzvEh8FZ
+ Ab2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788085124; x=1788689924;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=7y7jhSlTwNBR5dD50OfmQNXxlxJ8h7GKx2tAuemkYL0=;
- b=PCZtr23GaI/McIYGPvRBo2hLr5EQjpv926aPLCyVWOqzBliZct/Qi488Ihs5IYMxDf
- DtOpllZ8bVC75o1bPLqsz8SjSxilS3xr0jqdr7eyi4que8xeXmcdcw/eQZ5nASkjFhvk
- 6Juf1bWiWHNqnRl4cIttoobd1UwIc+2mgqTsrhzMNhcHrPaiRHyuEam40Ev6LkdADWDl
- fq87iaG5daYXvgft0bBKrd/ODxrThJa6knRh55M3IXh+jfx74t/t50/oLfSWw6zIqq96
- bPxzpAgz7/jvZN2Oh05ysoRInHxwpqEvXZrj1BtB/fVEIvexN1fGDmJ03w+lkqo7hELn
- 2Ojg==
+ d=1e100.net; s=20251104; t=1788085128; x=1788689928;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=fcbhmLDFNyF4EedyunkC0OODhfm/CZfxzQ0pII7A8Fs=;
+ b=JmNTU/m60lX3ymJDYWnthKxVF3hiuJJJpSPE8k8zXxDHZK7dLQxhrBO9xPOj83QLPn
+ ujgtkb5+SQZRC52POZ6d/9hZZUVYuz25TQlN4eX/AvYloQtYb3PT8el4g6AdRzV9kYx8
+ 1bAaUH1otcrWdj9I1Sr+kTlbgdpQKJ0Jp8t3CqSneqr7zc0EzBCz7yCFNJd7SBepUWc3
+ cYG2vChkHv+LW8mJN/bpE7dROJ0bgDMRTduR2bU8jtqbN3+zwJJZ6KML2yA/qHUCh7O2
+ 2parRepxCasOeafFZgDtN97exQjNmnQv75gimVa+NZvq5PIRVP4wfVsUK7n+kUNErg6k
+ 1fkA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxzC5+OTbb8YSpgOYARVPjwBsk1exIbNAmGHb4Je3bZKzrdyODbNrJuNiM7yqk6VR3hvFpPhrw=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lLsl5y9zikxAuvJ/nUw5DE7RkDRGYzHtOSru/p13pfdXSN4lEU
- G9RCVPNyPG0lJZYz3DnPmdh8To/HjHT8N4B6N2W9Tf218nO1JLMsC8jYEpD1f0eAq0U=
-X-Gm-Gg: AYBFou16sV5WpnMgSdWew4ps3uTef53XFgAyP2a/eskNauNPPQzu3ynuSCGs6TGMpyH
- HgJP5fuWMRfZQSCgm+Rs2IVUDXvhhX/XHgcjQqG9Nu2Q0ll5vmo/3NOByz3NWyhPtjwMqlzC7BN
- BMejUGuJjVNelYHFPaLcf10H3hWr6JEO9ceaYxOUdugoeoXVpO1Bg4JUphXjCVXzEGPI9UaSIOl
- NAlY6RjQUjHnviYZuwDdfvDhY1RJj4dJ/XmCp5zLlQzvxB+f8TwP7/PBMAiFZ40llqV+Z0mg7RU
- ks0hK6ECPJKcUgVDQ8bah4Obbms6eQ00IDc3HadzOVmF5jNOo48XSxi+h1XL6p2YK3979y0Ze4R
- t7q26pxJXkV7yELZ2D80d5ca7NBzQPzWUzmsBFPnP8fTZsc2KbcDMYByYDiOvumNG2FPljN7cyM
- +YPIlDZsoMRc2j4aXTOgNAmjyr1rGx1PfAMmvKtWV78Z4YDSIxn0SXsRaXAFcbvizkzVi0ryvkq
- Vy34XUGeS07uU6+m79Tst6huI5P2IMYlJNdUThwqhROgJyNV9YynxtfT+yC7jeL5w8bZ6i7+j17
- H0cB
-X-Received: by 2002:a05:6000:2f8a:b0:481:5021:33cd with SMTP id
- ffacd0b85a97d-482f799da69mr26646699f8f.3.1788085124072; 
- Sun, 30 Aug 2026 03:18:44 -0700 (PDT)
+ AKwUvBy5rW/2luyR1T6jhcm9GRVzeodeiqiE0BUogNlPCm0JZEXv+naCyDfM+udwmNRIZtd6h/gIvWA=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nd3AdWBdvw2ErhzNc4BgpqhUs0Beh88vfqlCKP1FUqx67jUOt8
+ xeWv0/C1uaL0UkvGFXfbbaFdW+DDxeMXBHp7ggqZx65mQID4pudxBrPgZd3hZtL7hsU=
+X-Gm-Gg: AYBFou2+u39bSBWL69TZd+6AWux5FurpG4pq26Xz7HCUSRBWo7lyCykJzK+hsrtQjWm
+ 0p/wUqlEqFYAxCaGzc9gjAqHdSGLgBwiRS4Ba/2WlKqAnw/nMSZ8I860w5EmR8QsoSjHjdrcLZ4
+ AR2qX6JfEGGALCnT8rCQfs+HyzZx/JmS1L1iIZ6dyOS9FS4C5Y5Wlrd8u6DqMJ+9qvazHcX7kPE
+ ZiEIA+XRNRKTLbjnoLSoU+DvFtsdLlvu/H7M5qp+cfUvEfbtV+XEMKDLX54JjG3oPV5/8ulYYQ8
+ uPs2pZvWiHEACK/z+O2ZRGciue25eVs+GsXQy3j4JIGyzl93fX9I4Khik7VyoG+lQGuW3jjjuK4
+ lQ9I3uNc30eQYhTMzvEWuJ8P+2qUVftGCJw8veaBQQBuASE3tSVnKfn+qC93l4md6vocLiSQN12
+ 6bIDldMC6VNhjvDpdHsibOlnn/TxaWCqlf0Habj4awLEc2daF6/AydGPvIPSQSeEuzqKW9WRcWJ
+ bW232TyKdtKhTohaMdjlClRKKAyrcHz1cwz+frd+aVaDlhZO1m3xQwI0Thdo5LSWK5zDQYsmhEX
+ 4xA2
+X-Received: by 2002:a05:6000:2403:b0:484:3310:f394 with SMTP id
+ ffacd0b85a97d-4843310f432mr10196575f8f.23.1788085127937; 
+ Sun, 30 Aug 2026 03:18:47 -0700 (PDT)
 Received: from macbook.homenet.telecomitalia.it
  (host-95-232-147-181.retail.telecomitalia.it. [95.232.147.181])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482fbab3fcesm14644619f8f.5.2026.08.30.03.18.42
+ ffacd0b85a97d-482fbab3fcesm14644619f8f.5.2026.08.30.03.18.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Aug 2026 03:18:43 -0700 (PDT)
+ Sun, 30 Aug 2026 03:18:47 -0700 (PDT)
 From: Carlo Caione <ccaione@baylibre.com>
-Subject: [PATCH v2 0/3] Add RITY devicetree preparation support
-Date: Sun, 30 Aug 2026 12:18:38 +0200
-Message-Id: <20260830-ccaione-upstream-mtk-fdt-prepare-v2-0-f9cfce2ed42a@baylibre.com>
+Date: Sun, 30 Aug 2026 12:18:40 +0200
+Subject: [PATCH v2 2/3] arm: mediatek: add RITY devicetree compatibility
+ commands
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4WOzQ6CMBAGX8X07JrSCFZPvofhsC1bqcpPtoVIC
- O9uwXj2OJvJNzuLQOwpiMtuFkyjD75rE6j9Ttga2zuBrxILJVUhtTqBtZgUgqEPkQkbaOITXBW
- hZ+qRCQrt8gxzVylCkWbS3fn3lriVXw6DeZCN6+5q1D7EjqfthzFbvV9O/8+NGUgwTktz1Gcy0
- l0NTi9vmA62a0S5LMsHEdEZBeUAAAA=
-X-Change-ID: 20260827-ccaione-upstream-mtk-fdt-prepare-68f51a5fd2ea
+Message-Id: <20260830-ccaione-upstream-mtk-fdt-prepare-v2-2-f9cfce2ed42a@baylibre.com>
+References: <20260830-ccaione-upstream-mtk-fdt-prepare-v2-0-f9cfce2ed42a@baylibre.com>
+In-Reply-To: <20260830-ccaione-upstream-mtk-fdt-prepare-v2-0-f9cfce2ed42a@baylibre.com>
 To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, 
@@ -147,67 +147,142 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-RITY images select a base devicetree and an ordered list of overlays
-through the storage, storage_dev, dtb_path, boot_dtb, fdtfile and list_dtbo
-environment variables. EFI boot needs the selected tree to be assembled
-and published through fdt_addr before the operating system is started.
+RITY boot environments invoke dtbprobe before EFI boot, or fdtprobe when
+devicetree authentication is enabled. These command names and their
+positional arguments form part of the RITY image interface.
 
-The environment interface, source-discovery rules and appended-image layout
-form a MediaTek-specific RITY contract. The referenced data uses existing
-U-Boot image formats, filesystems and storage stacks.
+Register compatibility aliases beside mtk_fdt_prepare in cmd/mediatek and
+share the common argument parser and preparation service. Expose only the
+alias appropriate to the selected security mode.
 
-Add MediaTek support to consume that interface. It locates the selected
-source on GPT block partitions or on the RITY UBI/UBIFS NOR layout, loads
-the base DTB, applies list_dtbo in order and publishes the completed tree.
-Both raw and authenticated DTB and DTBO inputs are supported.
+Keep the authenticated fdtprobe failure policy: failure to authenticate a
+signed DTB or DTBO wrapper is fatal and panics with the established
+diagnostic. Other preparation failures return to the caller, and
+mtk_fdt_prepare remains recoverable for interactive diagnosis.
 
-Expose mtk_fdt_prepare for interactive use. Retain the dtbprobe and
-fdtprobe command names and positional arguments used by RITY EFI boot
-environments. Also provide bootembedded for legacy boot. It locates and
-runs the appended RITY boot script through the standard source command,
-leaving the legacy policy and authentication to source and bootm.
-
-The command entry points live under cmd/mediatek and are documented under
-doc/usage/cmd. The implementation uses existing block, MTD, UBI/UBIFS,
-libfdt overlay, image verification, source and bootm services.
+Document both aliases, their shared syntax and the authentication-failure
+behavior.
 
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
-Changes in v2:
-- Clarify that the RITY contract is MediaTek-specific and uses existing
-  U-Boot formats and storage stacks.
-- Move command entry points and command configuration under cmd/mediatek.
-- Add documentation for mtk_fdt_prepare, dtbprobe, fdtprobe and
-  bootembedded.
-- Rebase onto commit 658fc6aee957 ("fs/squashfs: fix directory table integer
-  overflow" series merge).
-- Link to v1: https://patch.msgid.link/20260828-ccaione-upstream-mtk-fdt-prepare-v1-0-bf80b489eb0f@baylibre.com
+ cmd/mediatek/Kconfig              |  4 ++++
+ cmd/mediatek/fdt_prepare.c        | 47 ++++++++++++++++++++++++++++++++++-----
+ doc/usage/cmd/mtk_fdt_prepare.rst | 11 +++++++++
+ 3 files changed, 56 insertions(+), 6 deletions(-)
 
----
-Carlo Caione (3):
-      arm: mediatek: add RITY devicetree preparation
-      arm: mediatek: add RITY devicetree compatibility commands
-      arm: mediatek: add bootembedded compatibility command
+diff --git a/cmd/mediatek/Kconfig b/cmd/mediatek/Kconfig
+index 777b9778e1f..31fa6e8d528 100644
+--- a/cmd/mediatek/Kconfig
++++ b/cmd/mediatek/Kconfig
+@@ -17,4 +17,8 @@ config CMD_MTK_FDT_PREPARE
+ 	  arguments the command uses storage, storage_dev and dtb_path from the
+ 	  environment. It also accepts the interface, device and path arguments
+ 	  explicitly.
++
++	  Also provide the RITY-compatible dtbprobe command, or fdtprobe
++	  when devicetree authentication is enabled.
++
+ endif
+diff --git a/cmd/mediatek/fdt_prepare.c b/cmd/mediatek/fdt_prepare.c
+index a861fe8804e..482deb0d581 100644
+--- a/cmd/mediatek/fdt_prepare.c
++++ b/cmd/mediatek/fdt_prepare.c
+@@ -4,20 +4,31 @@
+  */
+ 
+ #include <command.h>
++#include <vsprintf.h>
+ #include <asm/arch-mediatek/fdt_prepare.h>
++#include <linux/errno.h>
+ 
+-static int do_mtk_fdt_prepare(struct cmd_tbl *cmdtp, int flag, int argc,
+-			      char *const argv[])
++static int run_mtk_fdt_prepare(int argc, char *const argv[], int *retp)
+ {
+-	int ret;
+-
+ 	if (argc == 1)
+-		ret = mtk_fdt_prepare();
++		*retp = mtk_fdt_prepare();
+ 	else if (argc == 4)
+-		ret = mtk_fdt_prepare_from(argv[1], argv[2], argv[3]);
++		*retp = mtk_fdt_prepare_from(argv[1], argv[2], argv[3]);
+ 	else
+ 		return CMD_RET_USAGE;
+ 
++	return CMD_RET_SUCCESS;
++}
++
++static int do_mtk_fdt_prepare(struct cmd_tbl *cmdtp, int flag, int argc,
++			      char *const argv[])
++{
++	int ret, status;
++
++	status = run_mtk_fdt_prepare(argc, argv, &ret);
++	if (status)
++		return status;
++
+ 	return ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
+ }
+ 
+@@ -28,3 +39,27 @@ static int do_mtk_fdt_prepare(struct cmd_tbl *cmdtp, int flag, int argc,
+ U_BOOT_CMD(mtk_fdt_prepare, 4, 1, do_mtk_fdt_prepare,
+ 	   "load and assemble the MediaTek RITY devicetree",
+ 	   MTK_FDT_PREPARE_USAGE);
++
++#if CONFIG_IS_ENABLED(MTK_FDT_AUTH)
++static int do_mtk_fdt_prepare_auth(struct cmd_tbl *cmdtp, int flag, int argc,
++				   char *const argv[])
++{
++	int ret, status;
++
++	status = run_mtk_fdt_prepare(argc, argv, &ret);
++	if (status)
++		return status;
++	if (ret == -EKEYREJECTED)
++		panic("Invalid dtb/dtbo.");
++
++	return ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
++}
++
++U_BOOT_CMD(fdtprobe, 4, 1, do_mtk_fdt_prepare_auth,
++	   "load and assemble an authenticated MediaTek RITY devicetree",
++	   MTK_FDT_PREPARE_USAGE);
++#else
++U_BOOT_CMD(dtbprobe, 4, 1, do_mtk_fdt_prepare,
++	   "load and assemble a MediaTek RITY devicetree",
++	   MTK_FDT_PREPARE_USAGE);
++#endif
+diff --git a/doc/usage/cmd/mtk_fdt_prepare.rst b/doc/usage/cmd/mtk_fdt_prepare.rst
+index aa10516c2b1..35b505a068a 100644
+--- a/doc/usage/cmd/mtk_fdt_prepare.rst
++++ b/doc/usage/cmd/mtk_fdt_prepare.rst
+@@ -3,6 +3,8 @@
+ 
+ .. index::
+    single: mtk_fdt_prepare (command)
++   single: dtbprobe (command)
++   single: fdtprobe (command)
+ 
+ mtk_fdt_prepare command
+ =======================
+@@ -72,6 +74,15 @@ default image contains the flat devicetree payload. The command loads the FIT
+ at ``fw_fdt_wrapper_addr_r``, verifies the selected image and extracts it
+ before assembly.
+ 
++Compatibility commands
++----------------------
++
++RITY environments use the same positional arguments with compatibility
++command names. Without ``CONFIG_MTK_FDT_AUTH``, ``dtbprobe`` is an alias for
++``mtk_fdt_prepare``. With authentication enabled, ``fdtprobe`` provides the
++same interface and panics if a DTB or DTBO fails authentication. Other errors
++are returned to the caller.
++
+ Configuration
+ -------------
+ 
 
- MAINTAINERS                                      |   3 +
- arch/arm/include/asm/arch-mediatek/fdt_prepare.h |  10 +
- arch/arm/mach-mediatek/Kconfig                   |  25 ++
- arch/arm/mach-mediatek/Makefile                  |   1 +
- arch/arm/mach-mediatek/fdt_prepare.c             | 501 +++++++++++++++++++++++
- cmd/Kconfig                                      |   1 +
- cmd/Makefile                                     |   3 +
- cmd/mediatek/Kconfig                             |  31 ++
- cmd/mediatek/Makefile                            |   4 +
- cmd/mediatek/bootembedded.c                      |  59 +++
- cmd/mediatek/fdt_prepare.c                       |  65 +++
- doc/usage/cmd/bootembedded.rst                   |  51 +++
- doc/usage/cmd/mtk_fdt_prepare.rst                |  90 ++++
- 13 files changed, 844 insertions(+)
----
-base-commit: 658fc6aee95784139f070f9945cb3bc5da8d7d22
-change-id: 20260827-ccaione-upstream-mtk-fdt-prepare-68f51a5fd2ea
-
-Best regards,
---  
-Carlo Caione <ccaione@baylibre.com>
+-- 
+2.55.0
 
