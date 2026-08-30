@@ -1,138 +1,133 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04964C61DE5
-	for <u-boot@archiver.kernel.org>; Sun, 30 Aug 2026 10:19:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ED1FC61DB9
+	for <u-boot@archiver.kernel.org>; Sun, 30 Aug 2026 10:42:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 37EBE60650;
-	Sun, 30 Aug 2026 10:19:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 21BCE80B9D;
+	Sun, 30 Aug 2026 10:42:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TqtG85lxY5Xa; Sun, 30 Aug 2026 10:18:58 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 148xBKZ4rGy3; Sun, 30 Aug 2026 10:42:05 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788085138;
-	bh=wO4Az9WH4jzQhmeiEqCK0hxgVpcwZ4ZmBmCoqHKe8zI=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788086525;
+	bh=JnuJYaMGWERU8UOJcRTYWS7njvzD8eJ0UZ+v6aTDJmQ=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0tRHnV3wghG7SQXOx+lbZGnPoKqJyb2kTritugZqmpoPphh2mqbFFmd+kKr6J2XvY
-	 nDF2ZS5ETVto4H4ldtgQhaCmzBZTSSplkXKbTUVXsqYAAor0nTHIjpuo1ZU2qoqvKm
-	 rxdUbAbYlAzeXkSUFR18neKXiExMapXLEiVkQQ5LKpOSwEhZcsdV+lHQVHujXL12al
-	 69bNRJVObXyK+rLft+OesjYpsrrsJb8XJyUiop5YM3RQNnbSzczRNno1nxecHqP1xX
-	 4rvy/idLlohAVcm5DRkUhGRUDDRNrYdYgDq7uITIgnsG1E5wwERkQXqsC9WIegAqIi
-	 sfCA1PagbFbkA==
+	b=085vYEJfrbLX4R7L2uvgGrr3F70oQlHOz27o6h6WHjCQ/iDKMhERozOgBbJImBNc8
+	 lu+H1aCtrATrvfwRdntfCkKm73/+nT7vKuLcetuTGVLLdYxU5DfbwrkIi0tUtWrBEa
+	 oT/uZgdg8xr1M/M2Rk+FUM+xfPrqU+wc+d/wJOEQpuIyXxtPZUDIB+cOUrZjtCCPt7
+	 quROv/HnmIuH63p8Bi607kmD4DKtMkjy/GuubGu/GnZ5vmCpmWl+UOdvcApKVmdpUX
+	 W1jx+KLtuTqYNaYZKNefz76N5BHo3N7eZD8loLvy5/7aSoPnFG0zME3i6NHpG/y6+4
+	 yBQvuCpQViLDg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EFDB16062D;
-	Sun, 30 Aug 2026 10:18:57 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 0871C2FD
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:18:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4D7FD80BA3;
+	Sun, 30 Aug 2026 10:42:05 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 44CAC1DE
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:42:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id EDE50405E8
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:18:53 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2A4DB80BA3
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:42:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 14BlYBi7aZa3 for <u-boot@lists.u-boot-project.org>;
- Sun, 30 Aug 2026 10:18:53 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GEFyD5FyY6_F for <u-boot@lists.u-boot-project.org>;
+ Sun, 30 Aug 2026 10:42:02 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=CDtoaGNf
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CB588405D8
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:18:51 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-484392e3d33so108768f8f.2
- for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 03:18:51 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::f2d; helo=mail-qv1-xf2d.google.com;
+ envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=WDbYIfKp
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 457BD80B9D
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 10:42:01 +0000 (UTC)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-90cc64f7f86so31007776d6.2
+ for <u-boot@lists.u-boot-project.org>; Sun, 30 Aug 2026 03:42:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788086520; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Tx3dClNGYJ4zGum57qFlDGca6b6z+r4DgNNhcWtxSo9kcGukc07f4/Xs4IdFO1P7bj
+ aWu2rW39ilSmZI+BVe5lRaYDVQRtSKxmIn4iRqBb98oyqX/jGLwE4V5b10U+xcvUNRfZ
+ 2uiNtrb3w5XKYLlg9dLi9bX/fNVH+PcR9f2p6UZXI/3hElq4K2LORrZI8hq3CzchF58d
+ 1++I+VXcGy8K/f3TZSE7o9oTm4A8MEf4+Y8JLaF8llqalCacjFqw236800nSXHPujtuu
+ nSfli2six6//xJqaH9xhtYAXs/j+9cr9cSFb+NiGQrlkVQPhKKeyXB7LyopEUqSV3vJ4
+ cbwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=JnuJYaMGWERU8UOJcRTYWS7njvzD8eJ0UZ+v6aTDJmQ=;
+ fh=e0JkGs2omtkuwDtYja7WDaTNcJA2/ErGx3TJSh8Rp+s=;
+ b=ZrXymAoaJBz2FHNRRNujIfJX8gqH5hPeZoX7Cs3vvWK2grkX9z9tFsya/04EgpMAtl
+ Cg8fVve3JtrfIDUMgjU3M185u8Fnb43BUFB6k3QVB+Z7m8L6r+DtM7Qo1F9MQPhsqTrr
+ my215OW0teOkjysy5m/gqwDBIMLcxqIFg9uf4DbmDHmzp2gTQJV3DWbG1dFgObRUUhmX
+ ow9/iWVWpcVX+cB8xy/71LC804kMAi8FVR+ocUc/OoLL6u4DBDkwx6F06KZyYDqja4Op
+ rYig4GbJjaSNmdKlWXkO1TPoe7jJOUETQ22MVH7XkIUt4xEoiS0oemhuiUt3tCnscwOd
+ aOVg==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788085129; x=1788689929;
+ d=gmail.com; s=20251104; t=1788086520; x=1788691320;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=wO4Az9WH4jzQhmeiEqCK0hxgVpcwZ4ZmBmCoqHKe8zI=;
- b=CDtoaGNfS29dWIubTCEUCUkORDV+phnJR3amK/nJ0rOsuIplya+/ommhGC0nso8lB5
- JJ0xGVXNdQsmu6uI+L69mrHpFFIWEtPm3hW+epS4TzAo+hYIGjEDQM7QIR4XBkzHehSn
- PyMaF7PyfY6tpEoAyz3th3vzkxEM1rvqPAmC4jwE3475Y9g1D3E/Yro3iPfmjxpggtUI
- 36sNVTVcBnwojw24SL1XG4kGuB85OPzjF+x59eIPFvsDyyS4xDJbMdAZzcTBQxdK3c7V
- lR7NXPy2EM5qSc+o2jS/TrSSIEQetN8ibmpD1K90k+lLCcw7HtHwm/NH2wVZYWehKDfq
- rEEg==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=JnuJYaMGWERU8UOJcRTYWS7njvzD8eJ0UZ+v6aTDJmQ=;
+ b=WDbYIfKpQUx7wk7kzTCUCVSEpwgGcGE1FwS1oehzVKuHHAKxDe/LuxU66zn8Y9dAmD
+ 9ECgadEiQEY56lVWjbeHyUlIsNwPXm5fBc9HQMcjMUlss9eCmsaB+R0P6sHN0zyGZFK5
+ SMgQ2evB5eCaGEondHbFxAkcuJ+GVl87d6RREK/PKL1SxsuaM6thbf0LULU0xTezFuyz
+ nzW8xfWmYYciEYn85Q9s7UR6mN0csR8wnBYoKSpYFUfp5KKtZ2Ft4in+YQfZEJhSerWe
+ oaKJj2jxCP28Zwmo4ciXPgYqd4GmAeVlBk+OGkjjDqenID3KR/2g3AOJyEV6iOUtOJQc
+ WEbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788085129; x=1788689929;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=wO4Az9WH4jzQhmeiEqCK0hxgVpcwZ4ZmBmCoqHKe8zI=;
- b=MNGwRnqiep4mSM+3Kl1/AJnX8q1mjo6tGi9b2PV6uS6ZFa5/r0b2CeL8agv2agNRU8
- Tfy8UXfOp64ky6R20UerUfRdwEOShAxifK6yN3ZcUNCsAAkS9Ecq5Jm+xsE8afcmomEp
- sKRAEjlqF8C0QaWNO8gwEsfq9VxGS5UBUAofBmeUQsS2McGrPL+gbQscs///OU0N5AyM
- X1XcSn8takqCnlJNkNi2tv2kPL8sDs3dlpQugOR1OPQ8MJckUssJyjmxIPTn71/b22/r
- 8ld5lkrpy86Ss9krMMotR8jJcywAO8LgLWBJN+FKzCFl8VChzkOOnPF+N8KR+R4X/evZ
- jWzw==
+ d=1e100.net; s=20251104; t=1788086520; x=1788691320;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=JnuJYaMGWERU8UOJcRTYWS7njvzD8eJ0UZ+v6aTDJmQ=;
+ b=Srh4J+pE3lHKapH7cmuC4YOgHvezVXhLrvsPdtoV7Na2FCfuUrlvskIABD/s/Rt7eX
+ ZAAwZZolvRs2qcJePtcuVBoeW6bQyFijoTxz5n0p78wqtl4O+8Se8QLqqtA3do9aQX4s
+ 0UgQwGpmuQRxyyVzdwt5v/uNcWSyToN3++BZFCi5uO7dDLmNPPtmkhpBx8C30mWreeSX
+ FlCwcNrka0I2tYUp4VvkBRBtxvYCf3rNwoIUtDseVPdT4JAtIRmmoDAPCooHgq2NFHUw
+ l6b0sT2mbKGtgV6sVBkeJyD1rLhJ/AZCDlayjCNSlP5SprLv6hq0sOsMQiYyq56QmDd4
+ q7HA==
 X-Forwarded-Encrypted: i=1;
- AKwUvByRV8s0CtaePapGSxu1Lrn2WpdoEkqm8wW+kvoJuKM7yZp5P1Wmsypno1IhIEipVzh10G1G6Pg=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++n+i2oRvhQjBGcNBOOvyYC76eP9zdkDmqykveY3CgIWLrvC+fyt
- L6n6MWZ9qsyKuzZRy28VropphENyhNURzulIv+62lKaJV7KU8csWnWWClhv4wrQXxVg=
-X-Gm-Gg: AYBFou28m9MhbARsLYyYVbFuonfi/nG3iMvMxbgWjOx2rfC6gpAPzS/24AuISHrFET+
- 8gLrsY305exnafYUca7v0qapxGFRmor/tbpGBi7Fe5ZRBgyMyeikYJl2slOYd4rfBd52qx0jQ0W
- +DQeGzxRUcTPGuQt3Yk/SGZelflSu1PnYL+XyeiiuSSc2L5JOdTXkyDf4LUxi/AoKLWNohTbK4V
- wkoPgLXazysusdjsQ5jNkI0UfMegfFuGXyx1tCvUWCGqEsaNNPsJGDhMt67Mm2jhWZjFqv82FH6
- Q1XYz00SIG9W23+7LYZgFaVnZBd5N33sUP5ZLTQAIiOXqmiNdU7gbDfIY+EMnqp4bg1MFPM/1J2
- eTRQNBXso8VbAVWCeh5ZgzHUpR57FYZej9yCqOXJqn3+4EvSJXHuBg5pVjQYjnkfn/clcXKvqPZ
- tPYbo8yPUNIc5EqtNj/xzxyvMRyOiPUQsjTM57zhQSXUAVRPTzFawL0FcKeoZZPIEFRL8zdmZ1O
- fK/lb8u63t1P9lqnatH1/JCaJjyAvDAmruyzxnmD1ygyy1oWLMIokiZGswmwnVjMiyiV3dhHriV
- /ENw
-X-Received: by 2002:a05:6000:71d:b0:481:57ef:9221 with SMTP id
- ffacd0b85a97d-482f79fbba8mr33326101f8f.22.1788085129433; 
- Sun, 30 Aug 2026 03:18:49 -0700 (PDT)
-Received: from macbook.homenet.telecomitalia.it
- (host-95-232-147-181.retail.telecomitalia.it. [95.232.147.181])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482fbab3fcesm14644619f8f.5.2026.08.30.03.18.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Aug 2026 03:18:49 -0700 (PDT)
-From: Carlo Caione <ccaione@baylibre.com>
-Date: Sun, 30 Aug 2026 12:18:41 +0200
-Subject: [PATCH v2 3/3] arm: mediatek: add bootembedded compatibility command
+ AKwUvBx3s+Y+p+nT/9KqzASXigZcAhMBbrq18cFFBHf7B0GsNdFOGiHq1F4sIFHRnuDNac+Lh3cSzJw=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mCBbMG0G9jDoCa+UMuDx0SyItlXO/hON5GUVvechkcqoFTN1Y9
+ y4Etn4/CdFPPgtxY1RqY2Ylk9zlcc36+LcaG+yEQL4CW/kMkpRfSCQfuZf92Lh4EIaEQJHifSb/
+ E9+riLwAQkPse0Y5S+105sd5YDgcYS3w=
+X-Gm-Gg: AYBFou2xgtyWgvr2bGU4159DSr49zMtjjwriohUqkV8LNVtApAGpneX2IRSZRbbWvd+
+ 3/XKfK3MhCukcJDYbDNDA5manlRFGahUTpOUUxFYonhiTsUZLi7SBZmv8j5O4Ijm4FnRagG7NSc
+ 1SisIn0nfLrqTlSaN0JSRVeX7yFBaCoGGX41n2zMLpfTgNYtKT7ZKG/G/3A6RDIfTpBgMGZvZ1u
+ bsBjkIcfqVVdbPBZdIlwcb3rJ7QEt5eoDOsfTVSNyUwR9Sb1AtKkAeEWuSgctiino+IKGxZ6Up7
+ quCWEqh7x7DkLeukbDCRn3swgQdnfWqvyEHqPO0vj0IyxZckgvFpyXNCf1GiBpi9fBeRoNuP6+r
+ 6xbcHlClamNxIKYpWBPOhnFgZb9KmQ68K7VBNC8ERgg9na2LGr7h6FbJYpX2b+21vimhD5weD17
+ PXLgdvS5UrYt17BiVLs4fmbMCNDjk1bxpsTBTSW3fkT5sg5q0LvQ==
+X-Received: by 2002:a05:6214:2266:b0:90e:8399:6d2c with SMTP id
+ 6a1803df08f44-90e83996e3emr34024696d6.6.1788086520369; Sun, 30 Aug 2026
+ 03:42:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260830-ccaione-upstream-mtk-fdt-prepare-v2-3-f9cfce2ed42a@baylibre.com>
-References: <20260830-ccaione-upstream-mtk-fdt-prepare-v2-0-f9cfce2ed42a@baylibre.com>
-In-Reply-To: <20260830-ccaione-upstream-mtk-fdt-prepare-v2-0-f9cfce2ed42a@baylibre.com>
-To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, Johan Jonker <jbx6244@gmail.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, 
- Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
- =?utf-8?q?Pablo_Sun_=28=E5=AD=AB=E6=AF=93=E7=BF=94=29?=
- <pablo.sun@mediatek.com>, 
- Carlo Caione <ccaione@baylibre.com>, Simon Glass <sjg@chromium.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Peter Robinson <pbrobinson@gmail.com>, Vincent Jardin <vjardin@free.fr>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- =?utf-8?q?Ramax_Lo_=28=E7=BE=85=E6=98=8E=E9=81=A0=29?= <Ramax.Lo@mediatek.com>,
- =?utf-8?q?Chris-qj_Chen_=28=E9=99=B3=E5=A5=87=E9=80=B2=29?=
- <Chris-qj.Chen@mediatek.com>
-X-Mailer: b4 0.16.0
+References: <20260829192119.2658328-1-visitorckw@gmail.com>
+In-Reply-To: <20260829192119.2658328-1-visitorckw@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sun, 30 Aug 2026 11:41:48 +0100
+X-Gm-Features: AcwNN1XO1A39lYzoUT3Dw0KeEt-24zlqvSa9TiX9zRRimpSROKtDjySXflJLf-M
+Message-ID: <CALeDE9P7UoeyBNfJycD2dUHkEeXiFgi+XaP9hAzKTp+71fvx1Q@mail.gmail.com>
+Subject: Re: [PATCH v2 0/6] fs: Add 9P filesystem support over virtio
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: trini@konsulko.com, tuomas.tynkkynen@iki.fi, bmeng.cn@gmail.com, 
+ sjg@chromium.org, jerome.forissier@arm.com, jserv@ccns.ncku.edu.tw, 
+ eleanor15x@gmail.com, marscheng@google.com, u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,175 +141,101 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-RITY boot environments use bootembedded as the legacy boot target. The
-command is part of the interface shared by the generated environment and
-U-Boot.
+Hi Kuan-Wei,
 
-Locate the appended RITY FIT script after U-Boot's separate control
-devicetree and execute it through the standard source command. This avoids
-duplicating the legacy boot policy in C and retains source and bootm
-authentication for secure builds.
+> Add 9P network filesystem support to U-Boot.
+>
+> It allows U-Boot to directly mount host directories in virtualization
+> environments via virtio.
 
-Keep the command independently selectable because legacy FIT boot does
-not depend on mtk_fdt_prepare. Place it under cmd/mediatek and document the
-expected appended-image layout and execution path.
+It would be useful to give an overview in the cover letter how/where
+you expect to be used. While new features are always welcome they also
+come with a maintenance burden so some background is always useful to
+provide more information.
 
-Signed-off-by: Carlo Caione <ccaione@baylibre.com>
----
- cmd/mediatek/Kconfig           |  7 +++++
- cmd/mediatek/Makefile          |  1 +
- cmd/mediatek/bootembedded.c    | 59 ++++++++++++++++++++++++++++++++++++++++++
- doc/usage/cmd/bootembedded.rst | 51 ++++++++++++++++++++++++++++++++++++
- 4 files changed, 118 insertions(+)
+From a network stack PoV does this work, been tested, with both the
+legacy stack and LWIP stack? I would tend to push this towards working
+with the LWIP stack as we're moving towards that being the default for
+standard U-Boot (not in SPL) and I wouldn't expect 9P to be supported
+in SPL.
 
-diff --git a/cmd/mediatek/Kconfig b/cmd/mediatek/Kconfig
-index 31fa6e8d528..1a06c25c627 100644
---- a/cmd/mediatek/Kconfig
-+++ b/cmd/mediatek/Kconfig
-@@ -21,4 +21,11 @@ config CMD_MTK_FDT_PREPARE
- 	  Also provide the RITY-compatible dtbprobe command, or fdtprobe
- 	  when devicetree authentication is enabled.
- 
-+config CMD_MTK_BOOTEMBEDDED
-+	bool "Enable the RITY-compatible 'bootembedded' command"
-+	depends on CMD_SOURCE && OF_SEPARATE
-+	help
-+	  Provide the RITY legacy-boot command. Locate and run the boot script
-+	  appended after the separate U-Boot control devicetree.
-+
- endif
-diff --git a/cmd/mediatek/Makefile b/cmd/mediatek/Makefile
-index 82f3d0dc412..93e6847d7ac 100644
---- a/cmd/mediatek/Makefile
-+++ b/cmd/mediatek/Makefile
-@@ -1,3 +1,4 @@
- # SPDX-License-Identifier: GPL-2.0+
- 
- obj-$(CONFIG_CMD_MTK_FDT_PREPARE) += fdt_prepare.o
-+obj-$(CONFIG_CMD_MTK_BOOTEMBEDDED) += bootembedded.o
-diff --git a/cmd/mediatek/bootembedded.c b/cmd/mediatek/bootembedded.c
-new file mode 100644
-index 00000000000..99f92667223
---- /dev/null
-+++ b/cmd/mediatek/bootembedded.c
-@@ -0,0 +1,59 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 Carlo Caione <ccaione@baylibre.com>
-+ */
-+
-+#include <asm-generic/sections.h>
-+#include <command.h>
-+#include <mapmem.h>
-+#include <linux/kernel.h>
-+#include <linux/libfdt.h>
-+
-+static int do_bootembedded(struct cmd_tbl *cmdtp, int flag, int argc,
-+			   char *const argv[])
-+{
-+	ulong control_fdt_addr, script_addr;
-+	const void *control_fdt, *script;
-+	int ret;
-+
-+	/*
-+	 * The control devicetree and the boot script are appended to the
-+	 * U-Boot binary, so they stay at the load address even after U-Boot
-+	 * has relocated itself. Derive that address from the image size,
-+	 * which is relocation invariant, instead of from _end, which moves
-+	 * with the relocated image.
-+	 */
-+	control_fdt_addr = CONFIG_TEXT_BASE + (ulong)(_end - (char *)&_start);
-+	control_fdt = map_sysmem(control_fdt_addr, 0);
-+	ret = fdt_check_header(control_fdt);
-+	if (ret) {
-+		printf("Invalid appended U-Boot control devicetree (%d)\n", ret);
-+		goto unmap_control_fdt;
-+	}
-+
-+	/*
-+	 * RITY image generation pads the image to a multiple of 8 bytes before
-+	 * appending the script ('dd bs=8 conv=sync'), because libfdt requires
-+	 * 8-byte alignment. Keep both sides in sync.
-+	 */
-+	script_addr = ALIGN(control_fdt_addr + fdt_totalsize(control_fdt), 8);
-+	unmap_sysmem(control_fdt);
-+
-+	script = map_sysmem(script_addr, 0);
-+	ret = fdt_check_header(script);
-+	unmap_sysmem(script);
-+	if (ret) {
-+		printf("No valid appended MediaTek boot script (%d)\n", ret);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	printf("Running appended MediaTek boot script at 0x%lx\n", script_addr);
-+	return run_commandf("source %lx", script_addr);
-+
-+unmap_control_fdt:
-+	unmap_sysmem(control_fdt);
-+	return CMD_RET_FAILURE;
-+}
-+
-+U_BOOT_CMD(bootembedded, 1, 1, do_bootembedded,
-+	   "run the appended MediaTek embedded boot script", "");
-diff --git a/doc/usage/cmd/bootembedded.rst b/doc/usage/cmd/bootembedded.rst
-new file mode 100644
-index 00000000000..ebb2e5a32b0
---- /dev/null
-+++ b/doc/usage/cmd/bootembedded.rst
-@@ -0,0 +1,51 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. Copyright (C) 2026 Carlo Caione <ccaione@baylibre.com>
-+
-+.. index::
-+   single: bootembedded (command)
-+
-+bootembedded command
-+====================
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    bootembedded
-+
-+Description
-+-----------
-+
-+The ``bootembedded`` command runs the RITY legacy boot script appended to the
-+U-Boot image. It locates U-Boot's separate control devicetree immediately
-+after the binary, validates it and uses its size to locate the script at the
-+next 8-byte-aligned address.
-+
-+The appended script is passed to the standard :doc:`source` command. The
-+script retains the legacy boot policy and can use the standard ``bootm``
-+authentication path for secure boot.
-+
-+Image layout
-+------------
-+
-+The command expects this layout at ``CONFIG_TEXT_BASE``::
-+
-+    +----------------------------+
-+    | U-Boot binary              |
-+    +----------------------------+
-+    | separate control DTB       |
-+    +----------------------------+
-+    | padding to 8-byte boundary |
-+    +----------------------------+
-+    | RITY FIT boot script       |
-+    +----------------------------+
-+
-+RITY image generation pads the control devicetree and script boundary with
-+``dd bs=8 conv=sync``.
-+
-+Configuration
-+-------------
-+
-+The command is available when ``CONFIG_CMD_MTK_BOOTEMBEDDED`` is enabled. It
-+requires ``CONFIG_CMD_SOURCE`` and ``CONFIG_OF_SEPARATE``.
+Peter
 
--- 
-2.55.0
-
+> The functionality has been verified on qemu arm64 by successfully
+> loading a Linux kernel image and an initramfs image via 9P, and booting
+> to the Linux shell.
+>
+> To test with QEMU:
+>   -fsdev local,id=fsdev0,path=/path/to/host/dir,security_model=none \
+>   -device virtio-9p-device,fsdev=fsdev0,mount_tag=rootfs
+>
+> U-Boot usage:
+>   => virtio scan
+>   => ls 9p rootfs /
+>   => ls 9p 0 /
+>   => ls 9p - /
+>   => load 9p rootfs $kernel_addr_r /Image
+>   => load 9p rootfs $ramdisk_addr_r /initramfs.cpio
+>   => booti $kernel_addr_r $ramdisk_addr_r:$filesize $fdtcontroladdr
+>
+> Changes in v2:
+> - Introduce DM UCLASS_9P and dm_p9_ops for transport devices.
+> - Support selecting devices by mount tag, sequence index, or default.
+> - Integrate 9p into disk/part.c and generic VFS null_dev_desc handling.
+> - Consistently use 9P2000.L naming across subjects, code, and Kconfig.
+> - Add kerneldoc comments and separate filesystem header.
+> - Add timeout handling, feature negotiation, and remove callback.
+> - Add 9P documentation.
+> - Add automated pytest and enable in qemu_arm64_defconfig.
+> - Fix error checking, bounds checks, and memory leaks.
+>
+> Kuan-Wei Chiu (6):
+>   net: 9p: Add 9P2000.L protocol support
+>   fs: 9p: Add 9P filesystem support
+>   virtio: 9p: Add 9P transport driver
+>   doc: 9p: Add 9P filesystem documentation
+>   test: 9p: Add test for 9P filesystem
+>   MAINTAINERS: Add entry for 9PFS
+>
+>  MAINTAINERS                    |  11 +
+>  configs/qemu_arm64_defconfig   |   3 +
+>  disk/part.c                    |  16 ++
+>  doc/usage/filesystems/9p.rst   |  55 +++++
+>  doc/usage/index.rst            |   1 +
+>  drivers/virtio/Kconfig         |   7 +
+>  drivers/virtio/Makefile        |   1 +
+>  drivers/virtio/virtio-uclass.c |   1 +
+>  drivers/virtio/virtio_9p.c     | 119 ++++++++++
+>  fs/9p/9p.c                     | 185 +++++++++++++++
+>  fs/9p/Kconfig                  |   8 +
+>  fs/9p/Makefile                 |   5 +
+>  fs/Kconfig                     |   2 +
+>  fs/Makefile                    |   1 +
+>  fs/fs.c                        |  25 ++
+>  include/9p.h                   | 203 ++++++++++++++++
+>  include/9pfs.h                 |  60 +++++
+>  include/dm/uclass-id.h         |   1 +
+>  include/fs.h                   |   1 +
+>  include/virtio.h               |  12 +-
+>  net/9p/Kconfig                 |   5 +
+>  net/9p/Makefile                |   5 +
+>  net/9p/client.c                | 408 +++++++++++++++++++++++++++++++++
+>  net/Kconfig                    |   2 +
+>  net/Makefile                   |   1 +
+>  test/py/tests/test_9p.py       |  82 +++++++
+>  26 files changed, 1219 insertions(+), 1 deletion(-)
+>  create mode 100644 doc/usage/filesystems/9p.rst
+>  create mode 100644 drivers/virtio/virtio_9p.c
+>  create mode 100644 fs/9p/9p.c
+>  create mode 100644 fs/9p/Kconfig
+>  create mode 100644 fs/9p/Makefile
+>  create mode 100644 include/9p.h
+>  create mode 100644 include/9pfs.h
+>  create mode 100644 net/9p/Kconfig
+>  create mode 100644 net/9p/Makefile
+>  create mode 100644 net/9p/client.c
+>  create mode 100644 test/py/tests/test_9p.py
+>
+> --
+> 2.55.0.897.gb25b4bd76c-goog
+>
