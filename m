@@ -1,125 +1,116 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0A36C624A4
-	for <u-boot@archiver.kernel.org>; Mon, 31 Aug 2026 16:57:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 986F7C61DFD
+	for <u-boot@archiver.kernel.org>; Mon, 31 Aug 2026 20:43:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6D12360658;
-	Mon, 31 Aug 2026 16:57:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4787E80A90;
+	Mon, 31 Aug 2026 20:43:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Pcq9X7C6w_Ak; Mon, 31 Aug 2026 16:57:57 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 34pQxzsD10hy; Mon, 31 Aug 2026 20:43:02 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788195477;
-	bh=/D6v3LAQGDzIQ1Vx1gtiCq97NveasOxhFeLIyCs9L4I=;
+	d=lists.u-boot-project.org; s=default; t=1788208982;
+	bh=gz7YsqrJCrjwt0aV8kSg23tqGhML183jv0zLE31iOU4=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=bxA89/n49SnUdcIfF6z/z6BQndOcOgzb0g6qJ+ihBAE+lTIX2cqdWxrem5DJteaGT
-	 OIQ01MnRTkh84CqshFhjQAc6Ur4PgcF6BazgQ0Lvoe6CaJa4TONEYRF0dHd+Mk2DWu
-	 5JtERFL519UEgZSg3HbQeykU4QuIU/6j7ntf2MzcBTj9nC4Y3MxMKZyec/BQ2qmrHa
-	 3Zn9kzZht6mKc/fue4J3UINN5dT5j+ljoHIobr3MZp1JNaIAkuTAssbZWXrvNdsyxT
-	 jhpqtQyvO8CejUw3MepuY96mMex8F7j2hmEUvP63qvQl7T6Vw9MZNws3dNG6R5w7X7
-	 mbI4pWVQ2lWwA==
+	b=g57U53P2Jyn7s4ZKk4qaz3sujTjZdKLwrkKCjtwnb6wtn+LPyV1vMrKxnch0b7FzO
+	 vraL7j6eSYWRMq6DmQGILmThoMnLw0F5zTt2Rxmr7SkoFVy7cCfWC0CkSu1bXzUO4Q
+	 G/g2BhMFUDKfiFAuSAwwocrqW+EmOW26/knNREu+Fh8aiORkEZFyEfOf3lJ+TnL9j3
+	 PHPe89W8eUj16wCqxrLU1hOxSL61DiHcnogofm2B7JxGbL6NOyRhCe/pBR482KO5a5
+	 lHPPSHEVwEQYxAuG+e+WE8S4ekxBcHY5EQGclN+qC5aBvG6So8aMLMfAnubfrsuo/Q
+	 EFhP5wFonztww==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9180D60627;
-	Mon, 31 Aug 2026 16:57:57 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 9E8EF2AA
- for <u-boot@lists.u-boot-project.org>; Mon, 31 Aug 2026 16:31:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7E95780A9A;
+	Mon, 31 Aug 2026 20:43:02 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5B3122FC
+ for <u-boot@lists.u-boot-project.org>; Mon, 31 Aug 2026 20:43:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 84157404F6
- for <u-boot@lists.u-boot-project.org>; Mon, 31 Aug 2026 16:31:16 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 411DF80A9A
+ for <u-boot@lists.u-boot-project.org>; Mon, 31 Aug 2026 20:43:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jvGJJ_TBU5JB for <u-boot@lists.u-boot-project.org>;
- Mon, 31 Aug 2026 16:31:16 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
- helo=smtp-relay-internal-1.canonical.com;
- envelope-from=valentin.haudiquet@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=m810gzn5
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7A478404F2
- for <u-boot@lists.u-boot-project.org>; Mon, 31 Aug 2026 16:31:14 +0000 (UTC)
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 5EE093F610
- for <u-boot@lists.u-boot-project.org>; Mon, 31 Aug 2026 16:31:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1788193872;
- bh=/D6v3LAQGDzIQ1Vx1gtiCq97NveasOxhFeLIyCs9L4I=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=m810gzn5eNnhir2r4LAqh+YCYcABPLSAp/yf520tAQ00F6aXLQKAYkp6yu1FIefhl
- 4SohPilXjFYfRiMG3PLd6ANioETEvs0Iz+v3tZtTUthcwt1ooc9qjeneiNyxhG56tg
- MaP00IR+LkYrjlcDWARfys8s6erkNV79bZrC8gMLFBSu5y75ev9vq9QiFmkQkxjoit
- r62NZDPv4gXUmy5NXMPzVy/2N+jtD3FyLGKUo1o4isdBU0pqsBaOcDw2/2iKuuIcBd
- h1dqGRPZJzuugqjkTwPle8N8ntCdLpu6AEaOrviXKmVZ8hWBr1P4FBAw5QEueQwG6t
- 7KnJ7NAui0Gvyssop1GaJWJdCTT+6yfKoNfJIvSyMGmVw1EFZA6NG+GTBaYZeWLAUP
- CkAQLYF3G1TYJQEwwqlA/Yym1+HEwsGjHtMWOjvD40p8krFy4HQjO8FV7ElrcK9niN
- GvQqcIukNIoJK3aTZ8lioiKTLAkNROfOHuF8BRyvyr5mckkVcLLvpJ+uSm5bHEWa6s
- J62E6j1+xM0gNZyrDEn2Q9k8tvdAe0h6/S8vFzkAtyzHeW9zIxbJqF5dF3eqCXBoyw
- TEaPe+mGQnsfgFqb68QE7Pjw6rsSV99Bn8VNz162jcxfei+H0DcTzOtGogY5jDoNtC
- L2qUEjkxmgbg5SWJrB2khlBg=
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4997b060af8so22272175e9.1
- for <u-boot@lists.u-boot-project.org>; Mon, 31 Aug 2026 09:31:12 -0700 (PDT)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xAd-OFQKWBOE for <u-boot@lists.u-boot-project.org>;
+ Mon, 31 Aug 2026 20:43:00 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::42a; helo=mail-wr1-x42a.google.com;
+ envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=DxqvdWkZ
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 89E4380A90
+ for <u-boot@lists.u-boot-project.org>; Mon, 31 Aug 2026 20:42:59 +0000 (UTC)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-48442ea8f59so27301f8f.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 31 Aug 2026 13:42:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1788208977; x=1788813777;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=gz7YsqrJCrjwt0aV8kSg23tqGhML183jv0zLE31iOU4=;
+ b=DxqvdWkZ/65pu74Plz4sdeDJPmd0A++rRSu3wx12FHiiMXF59IPf9f9Q0aCv/3Zba+
+ JW4aJHPAoHtkC1Y7Vt94CLBvNToXn+JJPvOs2ii8X1jw1pyDm0vcWOKMrd9K4GIQnP7A
+ sO+0/7M/ctd7zhDjy4sTMkqbITe8OcbuWKk3fJ4jVvDptnObTNdIxzdlhtHBpldDx+LF
+ SuTx5yJPtRKRdkUN/8FNIVjjFPoYedA2PJxvAIWy1zWapkqB8N71DhDjVxSvlkSlPgtI
+ bwT2baGGw8WlRBfS7piNz8GRnhMBga2olZ/KEr71uvBhx6MMmhLdNbsHj82j5jIPToG+
+ irFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788193872; x=1788798672;
+ d=1e100.net; s=20251104; t=1788208977; x=1788813777;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=/D6v3LAQGDzIQ1Vx1gtiCq97NveasOxhFeLIyCs9L4I=;
- b=I/k6xK7HCZGHzKynLrNDYLj+Iv6KNsv/dKBVObPAauEUwBcYAEBgJIL8pihwCyFL57
- L3dW4IksDJi98mgLcCw+oCdHtjkYcHfvlO7WLydRushf6ZufGco7N8oHr684MzwOwmyA
- cgQotvJA7K65Ro15gR3f6bawDL0ylVkVMeLoAbbub7RvZAL9XQabTA/VarylOlRp8McK
- +PUe/rKU18STUd0trmKXCkxVd5WNtyz4YPli/yMaVDPzadUiiEH4xtM1nYZqQ3kZgn0O
- EbvJ5W1SINtERId3XBlc3hO/b8cOO4UNywZtjXZlzZ1rwjXS9Bf87AVLYw9H4MXvIQ46
- 4dbg==
-X-Gm-Message-State: AFuF++nBHU4biwMqG/nikK8+PFfAUhiSodKyPjB7MLBBQ6+ae54FO4AE
- EFPKzOvmFY1j+e2OUjtqMYqBs1wgXHmS/CeR6kgGCRLr4SknrzWBIzCqz2EZiXoioTkh1O/Hq3m
- Y51D7oRQHVjeOhMofBOmpt0Tn2LZeugv4qw4h/jRWMgx5IRLPeT/aKIEECY0rSlN0HKKlMY/3Aj
- rQf6ZAWl4LAGok6GXv/Q==
-X-Gm-Gg: AR+sD10OgU2ezl1b+HKK30LTxIyUZgHOm2mAC7SldjcXmBV/ySWfaGxAr/DLvxGJjR6
- OdIW6ysjRobC1eWNzMRCEl7wiPYz3c+qwob/EQeJlG9CmSV7LEs1CibhaADtr3Ff7wBCOTlzVE5
- Dkzme0wycqJ9wNkohV/GoNzPY9qfquSLEgDcv5gTtcyPQsLZpDr8dYOQpsBwtbKelqIErnr2fWD
- gV+Kvq8lnEJVJD9gMfdszPKeD/CCMNx1lz5+wEKoHYb4eo2JH7A4/oAMyd/VjJZAnj2jezUMTg9
- RPoF60mSUwr26VZsHV75oymfyhX7L3XVTomY0YRDd13jxw9/XNvJm+46n8ckkFK/vMSc3hx/SN3
- Z4lBTx6IoL3UlvzpdF6dRAJNnbkL/f20Wng==
-X-Received: by 2002:a05:600c:1c0a:b0:493:bd2a:93be with SMTP id
- 5b1f17b1804b1-49b91c276efmr446689495e9.6.1788193871785; 
- Mon, 31 Aug 2026 09:31:11 -0700 (PDT)
-X-Received: by 2002:a05:600c:1c0a:b0:493:bd2a:93be with SMTP id
- 5b1f17b1804b1-49b91c276efmr446688485e9.6.1788193871255; 
- Mon, 31 Aug 2026 09:31:11 -0700 (PDT)
-Received: from k6.lan (141.175.65.37.rev.sfr.net. [37.65.175.141])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cca3e642dsm180013475e9.2.2026.08.31.09.31.10
+ bh=gz7YsqrJCrjwt0aV8kSg23tqGhML183jv0zLE31iOU4=;
+ b=liPkyBYWOoTIBD5h+tfeLw8IM3/kif2+r1ity4atgmRIsziQk9gIilToGBMKM1lrTt
+ jRZmhMYjIY0MHABCZSiQDM0ga8MaaZeWq+9F8r6bH1GVDvbhWOrI5j7h42ViLPnLQN7Z
+ Zs4q9yCIsCb5m2RNXOGyCW/6qilEoqfE0J5FREeO9sV/mMC/x8tlSwuP/N9KhStdfLSd
+ KRKI9wvnUeKKyoISxZ8aGa5sgm4S0Z4fJPYd2Wu5tm/1Vu306owF5cfGOYQ96lhdaxvN
+ /JYjiG6ah4iZazFQc4PwN6U8rEqlcUMyXMfggUWH8CWCDkHUEIZZmVXmoQTEjnWw7T17
+ 2RHQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzNajGkYAWqb8NoAgv+0wo5FTjJwrG2atKdWdOofPGQDNhu43N20txYC71qwEWJ7vL7nliKLZM=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mFLhNzCHSSBrsXSf2BrSJLgZsjc/43MCc+b0mrxSbmwl/qTEgh
+ Gr7uoPrrc5bUwIegUP87l3w/H2ambZ0tXPi/TrXwSpg+eKprE66MECEVRK15Se/Bf7U=
+X-Gm-Gg: AYBFou02ot5dVxUUmjCRo4cRr8feTvcpD7QSZxw+uLMd8+0pEbZZAku8qzH43Vo8e7G
+ P0+jbrK2FNaP70+YiLqbn2jwEPDy2FRt/ONEdDRfLcpgJtSXYLcX8SaltBAK823ow+V2EX5JwOj
+ mUYbncwC+CV5UI965qt3epUIQ/7BIDFT5cZqjFwPDAuyp6u+pZeZNKfAIZrZaAnR1e4bbfOPGMi
+ 8yf6PEeryOOgfggAcqJhdzdZHh9ILOOauKZuBlS/kbYa+luSGVROqEgJ4CZWmevhzpK5PCOqaY6
+ SKKEucWaD4B9GFpLJ/bTClsnhMSJGuF+D4XXFXD9SEQ7aQDAYMNDLzbnCUsjfQkTE6+t+DmXD3+
+ Rhj5laL2we8VTBjqrHthsXtPrPocULtmaKq6nMBeLzUFO9Pw7V7+8rgtxsjId2q8kxYgsKt8RTX
+ EQ2pa8NA6aReGI30RB7lcSXdPUkiv24w7JTC0Al/DDt9+WxJxlwrfwCjDM7cAVrSk+TCfgbHiLr
+ VwJtpzAig1LLTL1afWYmi9VgZLnIfnvy4eP486iYyEqmUcT+sBa7cqWc04k8g5QkOaYWAxqpRDd
+ nCEVjhM8pWaamctwfrenbJt/OHBDyRT2G3MFYq2Bk4Vsc7E2yzSHhVk8gNcuFFO+K2oisN8Ujrv
+ rUrdsnbh7or8r1A+XGMqqvmS+jOvTFtyjcLesnZSgDF/1uPRxTM8o8/BLYUq0rif61cU3Tn8Pgt
+ aMq1bni2JVh/MuJ25zLO9+I4A+tFInchMFokVz+H6vIMbJb28PrBC82K+zUXKOiE6/MpkGn9yLu
+ AbpCCKctc5g4VnF9JuXtfRWds+cC/h91V6qCM2p9wuKvFE1UU5lrNewBEqwvBFyhg==
+X-Received: by 2002:a05:6000:4716:b0:482:e66d:aad2 with SMTP id
+ ffacd0b85a97d-484421d9150mr1476527f8f.13.1788208977110; 
+ Mon, 31 Aug 2026 13:42:57 -0700 (PDT)
+Received: from hades.. ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48442d787b8sm224453f8f.29.2026.08.31.13.42.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Aug 2026 09:31:10 -0700 (PDT)
-From: Valentin Haudiquet <valentin.haudiquet@canonical.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH] video: console: fix scrolling on rotated consoles
-Date: Mon, 31 Aug 2026 18:30:56 +0200
-Message-ID: <20260831163056.3854693-1-valentin.haudiquet@canonical.com>
-X-Mailer: git-send-email 2.53.0
+ Mon, 31 Aug 2026 13:42:56 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: heinrich.schuchardt@canonical.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+Subject: [PATCH] efi_loader: Remove duplicate declarations
+Date: Mon, 31 Aug 2026 23:42:51 +0300
+Message-ID: <20260831204253.1382974-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 31 Aug 2026 16:57:55 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -133,51 +124,31 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-For odd rotations (rot=1 and rot=3) the console rows advance along the
-physical X axis by the font height (priv->y_charsize): console_move_rows()
-and console_set_row() treat a row as fontdata->height physical columns.
+commit f4bbd7b9faa4 ("efi_loader: Separate device path into its own header")
+split some function declarations to their own header file. Remove two
+remaining duplicates efi_dp_from_lo() and efi_dp_concat()
 
-But the scroll condition in vidconsole_newline() compared the cursor
-position against the font *width* (priv->x_charsize):
-
-    priv->ycur + priv->x_charsize > vid_priv->xsize
-
-The condition is only met at the bottom boundary when
-(xsize % font_height) < font_width. With CONFIG_VIDEO_FONT_16X32 on a
-1200x1920 panel used with rot=3, xsize % 32 == 16 == font_width, so the
-condition is never true at the boundary: the console fills the visible
-rows and then keeps drawing past the right screen edge, corrupting the
-following scanout line (and past the framebuffer allocation on the last
-scanout line), with no visible scrolling.
-
-Use priv->y_charsize in the odd-rotation branch, matching the even-
-rotation branch which already correctly compares against the character
-height. With this the cursor wraps back to row 0 and scrolling advances
-by one row per newline as expected.
-
-Fixes: 18a85cf7b5da ("video: Avoid starting a new line to close to the bottom")
-Signed-off-by: Valentin Haudiquet <valentin.haudiquet@canonical.com>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
+ include/efi_loader.h | 5 -----
+ 1 file changed, 5 deletions(-)
 
-Tested on a Kukui-Krane Lenovo IdeaPad Duet ARM Chromebook (rot=3 panel), 
-while experimenting with getting U-Boot to run on that platform. 
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 3a4d502631c5..ef25124fd84b 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -1026,11 +1026,6 @@ struct efi_load_option {
+ 	const u8 *optional_data;
+ };
 
- drivers/video/vidconsole-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
-index f1b2d61bd8f..008c8b70e08 100644
---- a/drivers/video/vidconsole-uclass.c
-+++ b/drivers/video/vidconsole-uclass.c
-@@ -95,7 +95,7 @@ static void vidconsole_newline(struct udevice *dev)
- 
- 	/* Check if we need to scroll the terminal */
- 	if (vid_priv->rot % 2 ?
--	    priv->ycur + priv->x_charsize > vid_priv->xsize :
-+	    priv->ycur + priv->y_charsize > vid_priv->xsize :
- 	    priv->ycur + priv->y_charsize > vid_priv->ysize) {
- 		vidconsole_move_rows(dev, 0, rows, priv->rows - rows);
- 		for (i = 0; i < rows; i++)
--- 
-2.53.0
+-struct efi_device_path *efi_dp_from_lo(struct efi_load_option *lo,
+-				       const efi_guid_t *guid);
+-struct efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
+-				      const struct efi_device_path *dp2,
+-				      size_t split_end_node);
+ struct efi_device_path *search_gpt_dp_node(struct efi_device_path *device_path);
+ efi_status_t efi_deserialize_load_option(struct efi_load_option *lo, u8 *data,
+ 					 efi_uintn_t *size);
+--
+2.43.0
 
