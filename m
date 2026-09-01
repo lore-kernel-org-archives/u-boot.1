@@ -1,113 +1,113 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2016DC61DD3
-	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 17:09:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F397C624D5
+	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 17:09:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7F17480E62;
-	Tue,  1 Sep 2026 17:09:55 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 37B27407BA;
+	Tue,  1 Sep 2026 17:09:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cjkSKCbdtD3q; Tue,  1 Sep 2026 17:09:52 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5cs1OAqMl2z4; Tue,  1 Sep 2026 17:09:57 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788282592;
-	bh=8E2mRdmavLoQo26QKJCcQwyIQOHXXd3cmOULwif2dVY=;
+	d=lists.u-boot-project.org; s=default; t=1788282597;
+	bh=GG91exDkbJxW3sE81/CLe3y18QtiSmy5LYzVyP8TeHU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=LNSjXNu9Vc5hTudhNxPYKJrpGIJprcDWAkr+Boysrpgb53gaNPmXxr0RZEIpRz0LE
-	 hm3uDbz+cGW4A0RnlAjM3lq6ddBClUdolwSRsNTSOxZH9ZiLPl95AXJKDyOdcVRQr5
-	 bwZsvSj045ExAy2Z32DSGSZeSWD4CZXVTg+klxDpzj8E5Yjr3hZoQSXnPH0KaIGXje
-	 /CbMqLcWbTvn3cp8XOprmyIW6mPP/8GOa/Vk1C8GI4PUrFWRsU+Y2/tlSfZ39DqjCi
-	 05hIhI6SYbFqRd0HsVr03imd2+Z4KellHQ5DZwPW247vr5p6eULzchLubsKd4BfJ88
-	 Xtv0nGSmUwP0w==
+	b=arJ1JaztfRDI5HBpnBE9gShRE4jRHVP3OvFnZNxGE+Fk9Jd1KcKTAbuD3dl3q0RjV
+	 1gEEu3fCTkjArhoGT6gzd9vFrY0S/KVOwahD+0C4wrh3Z+WqZbEDgSgBio7+rPyijx
+	 PgFC1wCbtPUdjdEcq0Z9ziqKmbM6dzBI4Alkn2c+UENA2EMOppARsFnLdqdF7Oomi/
+	 wsu5+rZGwpBIBVw8aJ6THCfPHEgRrn7/tcxdLr8Gu66sMqn/KKXRFRKWdzWoQE2Ngi
+	 OKAkSsDEjd7rO2k3RZyJcpOdqh2bZswbto+/Lft+7v8VUakTOmy6m5LfAByBhcoey8
+	 cqm2LD1QXewfw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3437680E4B;
-	Tue,  1 Sep 2026 17:09:52 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 885452FD
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 49FE140795;
+	Tue,  1 Sep 2026 17:09:57 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id B0BB5279
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 7717780E2D
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:47 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9690740791
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id r6sUMCmue-OD for <u-boot@lists.u-boot-project.org>;
- Tue,  1 Sep 2026 17:09:46 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jaTKbF8oABpj for <u-boot@lists.u-boot-project.org>;
+ Tue,  1 Sep 2026 17:09:49 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32c; helo=mail-ot1-x32c.google.com;
+ client-ip=2607:f8b0:4864:20::334; helo=mail-ot1-x334.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=Te/vID5Y
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id AF4E080DDE
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:46 +0000 (UTC)
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7f4f3683fbcso91155a34.0
- for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 10:09:45 -0700 (PDT)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=jgOJUnhm
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9D6D740743
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:48 +0000 (UTC)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7f6617c7536so1605031a34.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 10:09:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788282585; x=1788887385;
+ d=gmail.com; s=20251104; t=1788282587; x=1788887387;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=8E2mRdmavLoQo26QKJCcQwyIQOHXXd3cmOULwif2dVY=;
- b=Te/vID5YEwrfmO2HBYvLPLzBgzvGLv7hTsrQXRLzWmDjpJRHqxcrX+GBV+CsgDlW65
- uYW6AiDXYjjZZ3blwRgcwqsvj2heiXZ1Iy+rBSOyFMA+dUh/2jARnD0GDdTsM4gThNqw
- znzLkYkMTprknwUTAh8MGFlAFp6ts/PBwFi4wFINFG2fAGOyaWrT7h5l2VBWyLXrfobr
- lqK2czsWXozdVJaEsXvJKT0rhav0UFejo9+bSgN4b+iYDqML/K2SvYwE0WAJisfnhR22
- F8Q33LXVXoNa+gZuIWt9nrzfcUIZntFiKToi3Ohdl57YLdcPGkm3qfIKrFHsvVnBhhb8
- N0CQ==
+ bh=GG91exDkbJxW3sE81/CLe3y18QtiSmy5LYzVyP8TeHU=;
+ b=jgOJUnhmc6hKDMMIX25G/Tn4UcW5yT9fZ5EJBz2lN1bT56P2sGHQ1FpjrrL5G92n7z
+ AXl5e/Db0eDjAXxSkCQyfbv8b+f6ULpIGKHtZDUNGvJwCl67pUVGzzgdiywFqn4s4q64
+ FnogLROUpOq4QW2bPAaj+3h5NAqVN8ibSRsdQp6GuCwnvriEVrZ0rUD41guI7gTfj2df
+ zCIQIPs0cu5BZPdBqKvAjL3RlwtY/ENjvvi1GuTscdKPWQzPS7X32vyg8FMxKyMwmPxK
+ Ce7M9NvqxsACimMovKC8pfhpReIxgpAwZ22pqLOnGEMYK7lglbjlEUf0b6FNzesEU9zA
+ 7EXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788282585; x=1788887385;
+ d=1e100.net; s=20251104; t=1788282587; x=1788887387;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=8E2mRdmavLoQo26QKJCcQwyIQOHXXd3cmOULwif2dVY=;
- b=Y/Gc9p23WevZLAIK6KmL1GXs6jcu8bvCNt0ET1qCNZGAIT9XCcn5trvOjkec4CgHhb
- 4ttAEELCSLrkSi+JHA7vKCDK7YrS0GqCqneYt1zQJk+5rCCpXWpD3i5DqG24Sxlf5UQN
- 4W/22Ld3s1VjuBFz0NxHYf/8EFZ9UBNJ0CY5y/1WACIdy93jMW+CIM6DAJzwTEhNb3wV
- tN3lT+xal7AJxfXzNlZK0Z50ejwdgpdnHHh/LrzRj34egEknSX+YTAos4vY0XZwEk/SE
- BMny1XLrN/Ed9fFsgTO6REThQ083l6tsuGmeZF7qqJ0YkzHi5dCLVyyQVWF1f2vicR5P
- 5vvg==
-X-Gm-Message-State: AFuF++k8ORbg+3qJkIsK/QHTKkoBwVpJyY0Wz7yQ4K6E+8egZBAYWjU2
- IlTe0pTl68cou/gr2ZK8f6vENY0rsVX9TbgOuAToKQv4edGbEuMpPkLW
-X-Gm-Gg: AR+sD11BruS742ftEkNlMUAhR/c4EcMSihAXmuHcenne4NhLVrMVBv0Cr1twrv+6/e2
- fEYCokHJCeriGp97Ns1vTLUlFYVW7b1lTbyEhdz6wJk9KnpXRCCjtyGgGitt/wq7pAei0URU1Dw
- efXSqivNMsCqh0efXJI7yeHh5LOaoKjJYpbk1O4sTCIn145yuAiDN96eM9oa279+mm22ZMvB22r
- FO9T05rQ9FPIubvUC00o0fEKW5d/ejlv8bgiAknGqAGzHd+fTzHTwpPu2FIjD9a6YcL6cgZAFot
- BajY9NtWn0HWo5sSlzmoIbr1W+UUnnibKQ4xRAkD0BX8KKTWi+j3oWvvvhXHwuHue4O8UnUt+pp
- NORHERs9QCzh6zn5a3zcCtSdcwN/eEQd20OerPoYm9Rs4r2OhG/cu7NPEPJzBbu71SOk7r5b/FU
- FSOQuQloGezxLiqT/8Sumr2IoXbTscUKg9xQ85J/oskH9MlusuZ6rfPfWVzwCpga6cMmLRkORog
- n9ROKUfIC/Rp7DL7fM7eQz/EssgfGO6V9KN0krEyp0ZmvJidG6/SLZn0CNDXu50u+0iR7WFen8I
- 3s5pJoE4WZyHTkvWqQUv5YdIMUrNxxLslUtDyEDF8u8cBhP+4xsyU0zHBBS2/cblUY+g9pNJo+B
- qNRkjPHCWKDQeE5mj130=
-X-Received: by 2002:a05:6830:3c81:b0:7e9:dc11:5920 with SMTP id
- 46e09a7af769-7f68f756e5amr6032066a34.8.1788282584562; 
- Tue, 01 Sep 2026 10:09:44 -0700 (PDT)
+ bh=GG91exDkbJxW3sE81/CLe3y18QtiSmy5LYzVyP8TeHU=;
+ b=AT2YHaMfESXSi75zLinLsH8g3osK+42Dnbxq0EEXrWBcV3m0xPRoiNLKkFg9akjidX
+ 4x0UwYRsthS4hnNI3djl6vui3l/hNPsf4uDiGFWZiaNmFtiSg9EdQIhBnRAuTXa/ZNDx
+ s2VUxaBe3vS0YM2BItsNIwANpiefQidW745178sKcsSPGl4t9IGTHHhsombCdLYZKMJD
+ JEP6xZWzDCfIMD9aZFzaBG8dLsn0WQ+CA8QyjchXASuwjb5E0xrvOCPl+zTZXYcQEqyx
+ p+2RxfAVN52RYGJW3vCFLvCa126jCrrM4Mhx06bxhAzOuoLM0AnYN6HYVd7yDQUCJ8Of
+ 92Ew==
+X-Gm-Message-State: AFuF++mdGPIvUpdVSWmowU1YYukUwGBmYmPMhdYcTHHB8+oB0whVCjte
+ lPf4n3l8T3l6Eetdud+e0AEAW5weA3dOsaUXqQbiivzJbDYGJn+v8xum
+X-Gm-Gg: AR+sD11c3JjjqDS4VYDknjsX2RWUtrv8dZ9s3irkbQYMaQPIYY7ei9QCwum+n6fz7f6
+ f//niN72XgdXtdXplINCWFi6ArdzXSnGIipXQeFGA8otsBlr9xZfahuOqqQLpXUNTWM663F4yVP
+ YgM6Z8rAzDhrVW57zigNKwoKgyTmYto5FtLSUWUo53uywcaKtNphuZIOx89H0F/VZlO7QM5x2G+
+ Dw9ehhqjoDExGuEjPeYoqUfOlZ1TH1WaIUDtcDStSPQa77l7uxzyJ0FHEmG7BlSgwinbFCCwiBm
+ fzy3yk3T399Y02M+GnLOseh8baEbIzKGisDUZAcNfOV8Q1exB7KcpyYQfFHQonNrieNcNGus+Zs
+ pqTjS7Ryeyo0MWTItsYGgz6kGYKrb5vw8qjt+YD/t3jGljIZ79FJD5TjlTQmkqIYhFJYVvPK8fh
+ AEQWpi/vXXcYsHglQ7Kyx/MnRm9wBkNXymkI6i57w4biCMl/DohgZ1+2OBt0SXx2t0+GM4Pw99X
+ W+eJCHDjX++rzwHZxqLCo+p+/VOZXbwtD4M5qn6XhxdmTTRfjUoCyLeFuoCDHQ8qAUzefu4wYm5
+ IM0dj5x+AKkA2l+1kWcGsa5xtsAFzuuESycb3Z1KDx5lHgFN58wrCEsm5v2HYxJIzrWOBu3T44/
+ 3EPpdi+XpzgQrA9b6D5o=
+X-Received: by 2002:a05:6830:3745:b0:7e9:e488:3bce with SMTP id
+ 46e09a7af769-7f4f22bd9c3mr37988985a34.6.1788282585777; 
+ Tue, 01 Sep 2026 10:09:45 -0700 (PDT)
 Received: from [127.0.1.1] (184-96-151-165.hlrn.qwest.net. [184.96.151.165])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f4fa99d927sm10892218a34.19.2026.09.01.10.09.43
+ 46e09a7af769-7f4fa99d927sm10892218a34.19.2026.09.01.10.09.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Sep 2026 10:09:44 -0700 (PDT)
+ Tue, 01 Sep 2026 10:09:45 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Tue, 01 Sep 2026 11:08:59 -0600
-Subject: [PATCH v2 05/10] net: lwip: allow DNS callbacks to be canceled
+Date: Tue, 01 Sep 2026 11:09:00 -0600
+Subject: [PATCH v2 06/10] net: lwip: add an HTTP client abort operation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260901-submit-lwip-runtime-netconsole-v1-v2-5-3e3d95627cf9@gmail.com>
+Message-Id: <20260901-submit-lwip-runtime-netconsole-v1-v2-6-3e3d95627cf9@gmail.com>
 References: <20260901-submit-lwip-runtime-netconsole-v1-v2-0-3e3d95627cf9@gmail.com>
 In-Reply-To: <20260901-submit-lwip-runtime-netconsole-v1-v2-0-3e3d95627cf9@gmail.com>
 To: u-boot@lists.u-boot-project.org, 
@@ -137,84 +137,157 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-A caller can stop waiting for a DNS result while the resolver keeps
-the request and callback. If another lwIP client continues polling, that
-callback can later use state which its owner has already released.
+The HTTP client has no public way to cancel a request. Returning from
+wget while DNS or TCP work remains pending can therefore leave callbacks
+referencing its released command state.
 
-Add dns_cancel() to remove matching callbacks without canceling a
-query shared by other callers. Use it when stopping SNTP so a pending
-name lookup cannot outlive the client.
+Track pending DNS resolution and add httpc_abort(). The operation removes
+a pending DNS callback, detaches the HTTP callbacks and immediately
+aborts the altcp connection. Report a local abort through the normal
+result callback.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- lib/lwip/lwip/src/apps/sntp/sntp.c   |  3 +++
- lib/lwip/lwip/src/core/dns.c         | 26 ++++++++++++++++++++++++++
- lib/lwip/lwip/src/include/lwip/dns.h |  1 +
- 3 files changed, 30 insertions(+)
+ lib/lwip/lwip/src/apps/http/http_client.c         | 71 ++++++++++++++++++++---
+ lib/lwip/lwip/src/include/lwip/apps/http_client.h |  1 +
+ 2 files changed, 64 insertions(+), 8 deletions(-)
 
-diff --git a/lib/lwip/lwip/src/apps/sntp/sntp.c b/lib/lwip/lwip/src/apps/sntp/sntp.c
-index 0e7f36520fa..a37699f65b7 100644
---- a/lib/lwip/lwip/src/apps/sntp/sntp.c
-+++ b/lib/lwip/lwip/src/apps/sntp/sntp.c
-@@ -711,6 +711,9 @@ void
- sntp_stop(void)
- {
-   LWIP_ASSERT_CORE_LOCKED();
-+#if SNTP_SERVER_DNS
-+  dns_cancel(sntp_dns_found, NULL);
+diff --git a/lib/lwip/lwip/src/apps/http/http_client.c b/lib/lwip/lwip/src/apps/http/http_client.c
+index 1973e79e723..2bc2a0db97e 100644
+--- a/lib/lwip/lwip/src/apps/http/http_client.c
++++ b/lib/lwip/lwip/src/apps/http/http_client.c
+@@ -146,15 +146,23 @@ typedef struct _httpc_state
+   u32_t rx_content_len;
+   u32_t hdr_content_len;
+   httpc_parse_state_t parse_state;
++#if LWIP_DNS
++  u8_t dns_pending;
 +#endif
-   if (sntp_pcb != NULL) {
- #if SNTP_MONITOR_SERVER_REACHABILITY
-     u8_t i;
-diff --git a/lib/lwip/lwip/src/core/dns.c b/lib/lwip/lwip/src/core/dns.c
-index 6540f143bac..5762647ee27 100644
---- a/lib/lwip/lwip/src/core/dns.c
-+++ b/lib/lwip/lwip/src/core/dns.c
-@@ -387,6 +387,32 @@ dns_getserver(u8_t numdns)
-   }
- }
+ #if HTTPC_DEBUG_REQUEST
+   char* server_name;
+   char* uri;
+ #endif
+ } httpc_state_t;
  
-+/**
-+ * @ingroup dns
-+ * Cancel pending callbacks registered by dns_gethostbyname().
-+ *
-+ * DNS queries shared with other callers continue so their result can still be
-+ * cached and delivered. Only callbacks matching both arguments are removed.
-+ *
-+ * @param found callback passed to dns_gethostbyname()
-+ * @param callback_arg callback argument passed to dns_gethostbyname()
-+ */
-+void
-+dns_cancel(dns_found_callback found, void *callback_arg)
-+{
-+  u8_t i;
+-/** Free http client state and deallocate all resources within */
+-static err_t
+-httpc_free_state(httpc_state_t* req)
++#if LWIP_DNS
++static void httpc_dns_found(const char* hostname, const ip_addr_t *ipaddr,
++                            void *arg);
++#endif
 +
-+  LWIP_ASSERT_CORE_LOCKED();
-+
-+  for (i = 0; i < DNS_MAX_REQUESTS; i++) {
-+    if ((dns_requests[i].found == found) &&
-+        (dns_requests[i].arg == callback_arg)) {
-+      dns_requests[i].found = NULL;
-+      dns_requests[i].arg = NULL;
-+    }
++/** Free http client state and detach its connection callbacks */
++static struct altcp_pcb *
++httpc_detach_state(httpc_state_t* req)
+ {
+   struct altcp_pcb* tpcb;
+ 
+@@ -168,16 +176,26 @@ httpc_free_state(httpc_state_t* req)
+   }
+ 
+   tpcb = req->pcb;
+-  mem_free(req);
+-  req = NULL;
+-
+   if (tpcb != NULL) {
+-    err_t r;
+     altcp_arg(tpcb, NULL);
+     altcp_recv(tpcb, NULL);
+     altcp_err(tpcb, NULL);
+     altcp_poll(tpcb, NULL, 0);
+     altcp_sent(tpcb, NULL);
 +  }
++  mem_free(req);
++  return tpcb;
 +}
 +
- /**
-  * The DNS resolver client timer - handle retries and timeouts and should
-  * be called every DNS_TMR_INTERVAL milliseconds (every second by default).
-diff --git a/lib/lwip/lwip/src/include/lwip/dns.h b/lib/lwip/lwip/src/include/lwip/dns.h
-index 091341544f3..82579f09f35 100644
---- a/lib/lwip/lwip/src/include/lwip/dns.h
-+++ b/lib/lwip/lwip/src/include/lwip/dns.h
-@@ -111,6 +111,7 @@ err_t            dns_gethostbyname(const char *hostname, ip_addr_t *addr,
- err_t            dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
-                                    dns_found_callback found, void *callback_arg,
-                                    u8_t dns_addrtype);
-+void             dns_cancel(dns_found_callback found, void *callback_arg);
++/** Free http client state and deallocate all resources within */
++static err_t
++httpc_free_state(httpc_state_t* req)
++{
++  struct altcp_pcb* tpcb;
++
++  tpcb = httpc_detach_state(req);
++  if (tpcb != NULL) {
++    err_t r;
+     r = altcp_close(tpcb);
+     if (r != ERR_OK) {
+       altcp_abort(tpcb);
+@@ -202,6 +220,38 @@ httpc_close(httpc_state_t* req, httpc_result_t result, u32_t server_response, er
+   return ERR_OK;
+ }
  
++/** Abort an HTTP client request. */
++err_t
++httpc_abort(httpc_state_t *req)
++{
++  struct altcp_pcb *tpcb;
++
++  if (req == NULL) {
++    return ERR_ARG;
++  }
++
++#if LWIP_DNS
++  if (req->dns_pending) {
++    dns_cancel(httpc_dns_found, req);
++    req->dns_pending = 0;
++  }
++#endif
++
++  if (req->conn_settings != NULL) {
++    if (req->conn_settings->result_fn != NULL) {
++      req->conn_settings->result_fn(req->callback_arg,
++        HTTPC_RESULT_LOCAL_ABORT, req->rx_content_len, 0, ERR_ABRT);
++    }
++  }
++
++  tpcb = httpc_detach_state(req);
++  if (tpcb != NULL) {
++    altcp_abort(tpcb);
++  }
++
++  return ERR_OK;
++}
++
+ /** Parse http header response line 1 */
+ static err_t
+ http_parse_response_status(struct pbuf *p, u16_t *http_version, u16_t *http_status, u16_t *http_status_str_offset)
+@@ -447,6 +497,7 @@ httpc_dns_found(const char* hostname, const ip_addr_t *ipaddr, void *arg)
  
- #if DNS_LOCAL_HOSTLIST
+   LWIP_UNUSED_ARG(hostname);
+ 
++  req->dns_pending = 0;
+   if (ipaddr != NULL) {
+     err = httpc_get_internal_addr(req, ipaddr);
+     if (err == ERR_OK) {
+@@ -479,9 +530,13 @@ httpc_get_internal_dns(httpc_state_t* req, const char* server_name)
+   if (err == ERR_OK) {
+     /* cached or IP-string */
+     err = httpc_get_internal_addr(req, &req->remote_addr);
+-  } else if (err == ERR_INPROGRESS) {
++  }
++#if LWIP_DNS
++  else if (err == ERR_INPROGRESS) {
++    req->dns_pending = 1;
+     return ERR_OK;
+   }
++#endif
+   return err;
+ }
+ 
+diff --git a/lib/lwip/lwip/src/include/lwip/apps/http_client.h b/lib/lwip/lwip/src/include/lwip/apps/http_client.h
+index d39e1bf829a..3f62150dca1 100644
+--- a/lib/lwip/lwip/src/include/lwip/apps/http_client.h
++++ b/lib/lwip/lwip/src/include/lwip/apps/http_client.h
+@@ -143,6 +143,7 @@ err_t httpc_get_file(const ip_addr_t* server_addr, u16_t port, const char* uri,
+                      altcp_recv_fn recv_fn, void* callback_arg, httpc_state_t **connection);
+ err_t httpc_get_file_dns(const char* server_name, u16_t port, const char* uri, const httpc_connection_t *settings,
+                      altcp_recv_fn recv_fn, void* callback_arg, httpc_state_t **connection);
++err_t httpc_abort(httpc_state_t *connection);
+ 
+ #if LWIP_HTTPC_HAVE_FILE_IO
+ err_t httpc_get_file_to_disk(const ip_addr_t* server_addr, u16_t port, const char* uri, const httpc_connection_t *settings,
 
 -- 
 2.53.0
