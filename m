@@ -1,114 +1,114 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0D05C61DD3
-	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 14:39:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70BF7C624D4
+	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 14:39:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A38AB80DB8;
-	Tue,  1 Sep 2026 14:39:02 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LA54ws_HVV08; Tue,  1 Sep 2026 14:39:01 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788273541;
-	bh=hss58b9cl4NnfeSl8E9355QiZ+V5FZb1XDQvYAo2Vis=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=DYx4auraS0mDYHRaHwNP+9s5tH6qNbDZqMlkH2t0AaSwnlfZt8loJsSMY5JYMCH0p
-	 iHJNe1DpHBZnCdyq5oA1AMlgSRtMTDRWsroPJTjoSzLcuFRhadbQF/WfEQkP3b65qS
-	 QRKM/SpNVuQkoJtriywzzQUe7V+GEUhyy29jbL+Zbxtg0QEGI2VLcGt7BpbrgtKzkM
-	 SJ7X6BXjFqh10fbW+TPcGE6furBTVGGnM7GoYO1k8w0FywVe97ttWPLTuO4KSeJ0dD
-	 JceoUN4YhQiE/JXSo6/gluGDbMcM5z2/DWCva8w/rpkI6/Kgg7tV/dMpSpUumFQHWV
-	 s/j/DHl+m50dQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D60CF80DB3;
-	Tue,  1 Sep 2026 14:39:00 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id D9119279
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:56 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C6D6260759
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 17E406077E;
+	Tue,  1 Sep 2026 14:39:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Uk_PdqZ9_Cs9 for <u-boot@lists.u-boot-project.org>;
- Tue,  1 Sep 2026 14:38:56 +0000 (UTC)
+ id NZRQ9o4lkX58; Tue,  1 Sep 2026 14:39:02 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1788273542;
+	bh=E/0zfH+b/PORYmHDK+GsBzrZ+B993FwrMyo2sncncqU=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ypc9oE1SHANB5GaPi3gFa3wgkJkjQ88weCXqMCNgCpxulSSLiu4vUxOM9oSIW37sZ
+	 ZJQDDnx2NMOlDMdGykUPdEXrAoTXsnzpEnCIOVB68psIgkDoiR3JjKhUjdQtf/XX9J
+	 ZpWgPZ7OYNosA7qctFxjNV258ss+k0BWu+Q9Ln9yvObbQT5ztg8dkOB1J/SqN0Fptl
+	 Cgbjuy2FTuU1Y43ijNrpsDAjZphMQuTcZ4EewSRYYmXptRGcNx23CBMEV3HQtC0Mgz
+	 /XO4Fn2vAagpIK+TpfdSBu6T1trlx1gG7kOTlprEjGbGaJNyKINtsni0Nw8uGdp2XG
+	 tbOfr23t6l3Dw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3EBD460765;
+	Tue,  1 Sep 2026 14:39:02 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 24098279
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:58 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0DC6460766
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:58 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id eghgBsxCEtGv for <u-boot@lists.u-boot-project.org>;
+ Tue,  1 Sep 2026 14:38:57 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32d; helo=mail-wm1-x32d.google.com;
+ client-ip=2a00:1450:4864:20::431; helo=mail-wr1-x431.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=D/Do1aqw
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4EB1A60743
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:52 +0000 (UTC)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4921eed3fa2so48863405e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 07:38:52 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=dQTb0qvQ
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id DA1C260743
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:56 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-484415c8bf2so683010f8f.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 07:38:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788273531; x=1788878331;
+ d=baylibre.com; s=google; t=1788273534; x=1788878334;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=hss58b9cl4NnfeSl8E9355QiZ+V5FZb1XDQvYAo2Vis=;
- b=D/Do1aqwIi6sz8Wjvkg91e36sEt4rKFa+vgbFI+GX7NhLFH7hmVaOPyEscXX8qoY2n
- GtHUkKxKb84U7Rt6RIybrAaxu6ZK0fFrAG/nQw1AX3nVXg/k1ywEQEnLVcCYoRHCQgK+
- kSq/Qe/z6yCk9Ag3wk2o6ZNSqe7X59X9Kp5ahPVReI1CcdsdTARKijtyQsOfNcGQH+kO
- yGZFK6RIVRJY7Yum9qNHl5VHf03xGbjyBr+IYsAqrSrg7I4+3AXwF/zfAFl43aAekA8H
- oXJI2XqhRFWODpGxa0d8VQKh/wpZ+bOP3QEmtgjxX+X2MetuneXosG/1bgp7FjsgxCx0
- tnxg==
+ bh=E/0zfH+b/PORYmHDK+GsBzrZ+B993FwrMyo2sncncqU=;
+ b=dQTb0qvQZSAZSUMhVU+XQ4RAn2Awvcj9X3ZpZbnYmNR7w7C8k6KnQvF81XZUG9/ubq
+ kcA9+YgTcdG45+qNJ99moCKmU4cmg75Htixy3RMz6/q4qPRr2JW7BuLrpfkdOWTQU8Hd
+ Cler1mO4jVlKVqEJp7WnVZrPHatBtdmSWKO+S9w8fVuLuOu5kPlFa4gmzdf1u4/Ju88B
+ B2Hd5BDgh5qUCcgxvH46v+fWGstZejREL4+y09ZTEylo3BoO5Zp+xdelQvylNe6L9U+8
+ P/7sjUhRfNGV9TK25paGNwfksgYV3K4O55ZTXtk+hwOu4EYEVUaQcQNWewb0nqPWGdsr
+ b4Jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788273531; x=1788878331;
+ d=1e100.net; s=20251104; t=1788273534; x=1788878334;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=hss58b9cl4NnfeSl8E9355QiZ+V5FZb1XDQvYAo2Vis=;
- b=IYW5BJJDtpdTmGkveiO24/KOTQuQ+GmfVDkz+ONkCCVSt8RDyJ7G4+Ysc2H2GHtQAn
- VXtj8nGBEP0wNt5Q/+ZMso40cMoxdhD4G+n0yEp04s67F5OV0gB65zrGcwITKyUSAXP0
- aBQlsXVMrlQd/NcpU+XfCikHERQu1nNzGR3Sm3tbTPvbbkQIG+codZ//jMCEM1gga9IQ
- rIjNloSs1fUDuQ3a34xMq2NpI3nxjCC4LePSDPgUsAMnIf+GXBa6Fy37WOeWnWqNDar2
- uoaK7br5krpbMLpZLjuOGIaemZ4TtC+uE1WN2d2VG2IsXcrzq0Z024l/v3QvL53kqKF/
- J/kw==
-X-Gm-Message-State: AFuF++nGIkl2/aMIwuSiMkwnOJCF6AJu0v2NG7Uj+Nh5lP79RQmkRTMb
- NmtA3Za6ZMPnkcSGugIW4/ZeNgmF8NayImQB2AEUpxZ741fAbhs4zbvSEr9kwJV7CEE=
-X-Gm-Gg: AR+sD10M8GkIVv7jKzTLET/Ii+D0y6Jh3u8NTvRhamd3jhvO+6BsD4OoKNR5AYP75tx
- 04my0yt74Irpk+ibSTwZo7XVtsTlJ/ginSz/kwKj05cdnjgNEEohsrjes4G3Vx43uey/B8n1xIx
- bVNbJ2hPafJD5+WGXo0IbE2eDtpBl+90601qpjEfy3pQ2KSF7dD1gFDzN9PSm//xC2xp+6XhvCF
- RL2r9V9dHlRGlUXchFLDTCWxZaXDYYLNwzBzBD+Mzl/Nhf5TZH1LOxMZKAE1VQ/5RTvV1FIfjUP
- /pVUDIEZhF0b9tUQ9lQIOGt3nh9KovKCsYSM9pVRwGaJLLRLoQy6fp+rSSdFjsdNsWUYf3DPiaO
- 1qUQgyjX+Zc2dLNa2R2+lMlq3ax8hrn6ijgnDsnmV5eYAJllveEdmquYtf7KJoZ1dfdubMkbI1k
- /DSLLlPhk/xfNOyR1psXJo6bgcN1NaGkS031xDl2yCE+bWpS2t8jfw5/cB6F9nZvm995N8iTtiF
- ilEaIzA3Git4UOd8XeVDv5Cw/Fx5f8PhAwBp7wiWg21yZ0IcuPc/gGeRg6mXjqhhCucqiCw/2+p
- EE3AkJpCznbE6tSarKeIBJcMvU/qJSXjaAIzzNHjG7Oj
-X-Received: by 2002:a05:600d:11:b0:49c:d818:8771 with SMTP id
- 5b1f17b1804b1-49cdc41c424mr180830265e9.7.1788273530907; 
- Tue, 01 Sep 2026 07:38:50 -0700 (PDT)
+ bh=E/0zfH+b/PORYmHDK+GsBzrZ+B993FwrMyo2sncncqU=;
+ b=WDK2ZhMoy/kfsA6WRtwruKtMCZbe32OH7mFlvIAGqcHJnQVx4csXxdgHjCnWdLluYX
+ NiJvaorJ4WfEbE9n5AFTy92NEQejrpQCyWauXZdQpTNCT7clYNDzeGq3AZaVENE5Cdyr
+ Ct8xu6afDV939ZguEGjCJk5nBr8KqHKsauUDgdUB2BJ+n/g+84DZQxUkIjsgxAvz5bHE
+ UeKZMRJW9RKEtAojhaADELkPwHXvEkMeQaQ4PUjkM+CVsQtbSgqfHxDBvJ5KdWX96R3T
+ KvKFx6ZYVZnjwMWfEQ0ArQgeqBA0aOSFH9ufVvGYfijvkK9ja5zqDEdKUJ4vlqHwGqjH
+ tZRA==
+X-Gm-Message-State: AFuF++kAuEnszFXK6/c+C0OgYiDvwrnWN5dDysHs8iKuODPs3BDgeG32
+ oY5iQ9pwtDYe9qNC7l8r5fCl+tEWtQC3smW5gWw+WYZKiJOf6WKsUwdbevYGA0XNKhM=
+X-Gm-Gg: AR+sD13wPfMk5gEZWZ925THCqAPRCMkJl7IE0uhXEqXXmQ/FiTX2pjlfkx7IY+dXAmh
+ k0sv9sb5sQa+V2RPccuE6MsZNA2sxeTMF8LEaQaSWPKWffEBSihgLxF/FRXj7yKIPRpTHvLdj7C
+ aXvc6TZu2ceTP6W1Mkqk/dnmzUG2iTYMV+3UB6DC/HZE2bIZBSw8pxPPKvka1ArwqMkYogu0lGP
+ ySCcQoBj8xONnwc3Q6K/ebWZd6Bp1d9gyQYeTjbkKmtDqUnvl2HeN+3ZE7NuMemMW+jWGZ+rNbv
+ j0+1ubf4tjstVuyYLXMUzo+bH5yu/PPNMWKPv3BZX/ikagovagwdyDHlMPr5rl6/v9IUpIISELl
+ ErPNZ46Q8uqifNEwO6srmm3YqVfcxUCBle1xYI8ltr2VbKcfoTw/OVBnbjLdiGmx48+P1w3eQQM
+ W0oR/nwQdxKqDDrrWzqo6kVvCR718rvdtLLUDyDZzupKA1VycHEnoo3Z/1vuzikbB+iUybUExvg
+ BiAR5ZKRtvMX1jC3IrPVldf8GLX3zjIarHD4PfjPMBBQJL7dlvsJweOo8oy5GzGh+6d4AnCqNTg
+ PRe7US5z/obzcEjGOuDfos1E/pe54zZtVYgJKk1kHXMcS4u6P9ELRoM=
+X-Received: by 2002:a05:600c:3145:b0:499:79b9:e220 with SMTP id
+ 5b1f17b1804b1-49b91c44f6cmr523034745e9.10.1788273532800; 
+ Tue, 01 Sep 2026 07:38:52 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cdce1e3a9sm71533655e9.15.2026.09.01.07.38.50
+ 5b1f17b1804b1-49cdce1e3a9sm71533655e9.15.2026.09.01.07.38.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Sep 2026 07:38:50 -0700 (PDT)
+ Tue, 01 Sep 2026 07:38:52 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 01 Sep 2026 16:38:51 +0200
-Subject: [PATCH v3 05/14] video: mediatek: add padding component
+Date: Tue, 01 Sep 2026 16:38:53 +0200
+Subject: [PATCH v3 07/14] video: mediatek: add smi larb driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260901-add-genio-510-and-genio-700-hdmi-v3-5-38194a531b9f@baylibre.com>
+Message-Id: <20260901-add-genio-510-and-genio-700-hdmi-v3-7-38194a531b9f@baylibre.com>
 References: <20260901-add-genio-510-and-genio-700-hdmi-v3-0-38194a531b9f@baylibre.com>
 In-Reply-To: <20260901-add-genio-510-and-genio-700-hdmi-v3-0-38194a531b9f@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -142,25 +142,31 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The padding block is one of the components of the video pipeline on
-some MediaTek SoCs, such as the MT8188. It is configured in bypass
-mode.
+The SMI local arbiters (larbs) gate a subsystem's access to DRAM. On the
+MT8188 the display data path feeds through the VDO1 larbs (larb2 and
+larb3), whose clocks must be ungated for the HDMI pipeline to reach the
+framebuffer.
+
+There is no dedicated SMI larb driver upstream, as Linux handles the
+larbs through its SMI/IOMMU framework. Add a minimal U-Boot driver that
+binds the "mediatek,mt8188-smi-larb" nodes and ungates their clocks,
+reusing the display pipeline component helpers for the register window
+and clock bulk.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/video/mediatek/mtk_disp_padding.c | 40 +++++++++++++++++++++++++++++++
- drivers/video/mediatek/mtk_disp_padding.h | 16 +++++++++++++
- 2 files changed, 56 insertions(+)
+ drivers/video/mediatek/mtk_smi_larb.c | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-diff --git a/drivers/video/mediatek/mtk_disp_padding.c b/drivers/video/mediatek/mtk_disp_padding.c
+diff --git a/drivers/video/mediatek/mtk_smi_larb.c b/drivers/video/mediatek/mtk_smi_larb.c
 new file mode 100644
-index 00000000000..4a69670bff2
+index 00000000000..9e4440ce294
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_disp_padding.c
-@@ -0,0 +1,40 @@
++++ b/drivers/video/mediatek/mtk_smi_larb.c
+@@ -0,0 +1,30 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * Mediatek Video Disp Padding Support
++ * MediaTek SMI local arbiter (larb) driver
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
@@ -169,57 +175,25 @@ index 00000000000..4a69670bff2
 +#include <dm.h>
 +
 +#include "mtk_disp_comp.h"
-+#include "mtk_disp_padding.h"
 +
-+#define PADDING_CONTROL_REG	0x00
-+#define PADDING_BYPASS			BIT(0)
-+#define PADDING_ENABLE			BIT(1)
-+#define PADDING_PIC_SIZE_REG	0x04
-+#define PADDING_H_REG		0x08 /* horizontal */
-+#define PADDING_V_REG		0x0c /* vertical */
-+#define PADDING_COLOR_REG	0x10
-+
-+void mtk_disp_padding_config(struct udevice *dev)
-+{
-+	mtk_disp_comp_write(dev, PADDING_CONTROL_REG,
-+			    PADDING_ENABLE | PADDING_BYPASS);
-+	mtk_disp_comp_write(dev, PADDING_PIC_SIZE_REG, 0x0);
-+}
-+
-+static const struct udevice_id mtk_disp_padding_ids[] = {
-+	{ .compatible = "mediatek,mt8188-disp-padding" },
++/*
++ * The SMI larbs gate a subsystem's access to DRAM. They have no dedicated
++ * driver upstream (the SMI/IOMMU framework handles them), so bind a minimal
++ * driver that just ungates their clocks, reusing the display component
++ * helpers for the register window and clock bulk.
++ */
++static const struct udevice_id mtk_smi_larb_ids[] = {
++	{ .compatible = "mediatek,mt8188-smi-larb" },
 +	{}
 +};
 +
-+U_BOOT_DRIVER(mtk_disp_padding) = {
-+	.name	   = "mtk_disp_padding",
++U_BOOT_DRIVER(mtk_smi_larb) = {
++	.name	   = "mtk_smi_larb",
 +	.id	   = UCLASS_MISC,
-+	.of_match  = mtk_disp_padding_ids,
++	.of_match  = mtk_smi_larb_ids,
 +	.probe	   = mtk_disp_comp_probe,
 +	.priv_auto = sizeof(struct mtk_disp_comp_priv),
 +};
-diff --git a/drivers/video/mediatek/mtk_disp_padding.h b/drivers/video/mediatek/mtk_disp_padding.h
-new file mode 100644
-index 00000000000..f3cdd363b12
---- /dev/null
-+++ b/drivers/video/mediatek/mtk_disp_padding.h
-@@ -0,0 +1,16 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Mediatek Video Disp Padding Support
-+ *
-+ * Copyright (c) 2026 BayLibre, SAS.
-+ * Author: Julien Stephan <jstephan@baylibre.com>
-+ */
-+
-+#ifndef _MTK_DISP_PADDING_H
-+#define _MTK_DISP_PADDING_H
-+
-+struct udevice;
-+
-+void mtk_disp_padding_config(struct udevice *dev);
-+
-+#endif
 
 -- 
 2.55.0
