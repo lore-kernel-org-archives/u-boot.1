@@ -4,112 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA597C624D4
-	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 14:38:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA7CCC624D6
+	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 14:38:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7AD6380D92;
-	Tue,  1 Sep 2026 14:38:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CB52F80D9D;
+	Tue,  1 Sep 2026 14:38:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 35BLmya97J3B; Tue,  1 Sep 2026 14:38:52 +0000 (UTC)
+ id 5sn0feK3Yk8I; Tue,  1 Sep 2026 14:38:56 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788273532;
-	bh=A3CCZhmC6ul9Johiq9Y4kJEC4x78uyGlzeDkVBgJG7w=;
+	d=lists.u-boot-project.org; s=default; t=1788273536;
+	bh=1I1vuQxV/Z8i2qDECVlVnDlM3x/aUj5wxWYD6+XB4d8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=WoZ0t4YzSZScVjm5nnnKx/s+IWv/zM2o89i04kYXA9VQw3d18FhhPZqMOvuRU23zh
-	 D2YMvPp/aNdVXRGuLsovspautNXRIL3IqrlMAWXfEudm4rmMpqhgzCaNGBAbIIO56w
-	 cLVh/5FrfTku9Nldf91Z1HCl8KEYzYCcRQSR4WM8V6XzpsZGR2RSWpCzW5QRYf6UUA
-	 FzNSkpSXwurI5UL38W9jbxkLs/8ef0umNEpUmsJlEcIPd/lZZISmG41fFzeh4gXjJC
-	 AT5j0ivR7LTBaJqnnpYE//XXxS60CrA5IoqjYKzsk1g/Epa0yzRshY7nze/xlxV56L
-	 Y0dHhLs4LTnqA==
+	b=eVsxO6FHsOVy5nX3J/IsQHisuN3/j6eRzkxgdzBiTbLNNieDruAV+h5ha4t63Tmbe
+	 2jb/ExViJ90Y25rTxRHGSmFpLVA5o15KCosvlW/VN8UaPJ+fMHv86DPjCaJ8f1134G
+	 baaM69fxw4Kb9zujSBVSYFE5TAKKAFM9FzBIOakHdn4Mu3R2bUtlVbMPJSfqc4Jb+J
+	 s95/vpRVK35MPhiC6w6IQWpGyOKZyW3j6bhXOV0x9kQEtpCQuJAXUX6+Qn29FHsEhF
+	 knmSa4uPkGxywj4R+l1ml15A+8EMk4x2pfjLgu5uVQ115EUCmbMXE/Be8aJ0/ZKbyg
+	 S/3wptuGnBNnw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3CC1380D17;
-	Tue,  1 Sep 2026 14:38:52 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 044D280D93;
+	Tue,  1 Sep 2026 14:38:56 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id C6649363
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:50 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 64883E45
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id B84CF406D8
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:50 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 56F33406D4
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id z-uLqslGoQcQ for <u-boot@lists.u-boot-project.org>;
- Tue,  1 Sep 2026 14:38:50 +0000 (UTC)
+ id PxB_B8SlZXH4 for <u-boot@lists.u-boot-project.org>;
+ Tue,  1 Sep 2026 14:38:52 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
+ client-ip=2a00:1450:4864:20::333; helo=mail-wm1-x333.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=fgqdrxC/
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9CFA4406D4
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:49 +0000 (UTC)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-49ccfae359fso7441785e9.3
- for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 07:38:49 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=lW4lH/Ku
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1D2AB406C3
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:50 +0000 (UTC)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-49b0eab380eso12037275e9.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 07:38:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788273527; x=1788878327;
+ d=baylibre.com; s=google; t=1788273528; x=1788878328;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=A3CCZhmC6ul9Johiq9Y4kJEC4x78uyGlzeDkVBgJG7w=;
- b=fgqdrxC/fvxNfVi9a/rMN4kX4OXnMrWwSqtwwBL9sg6V2/P7XTkfm/EHQUU70f3uWM
- eKXwhn/98d59L9+kU7ozGAbfQqA3fMSuLjshy9FJIzSK/dXaDOpzrQCYSGy775bPDdaN
- Ny8mdMH1j5gEwmJSBe1yUVaE3v3gpOjdub0Os0s3XC76bjN+jSeyDr7HzsD7Y7sONWdp
- iZLl5V/vlGtjF1h3dvDLCL79i/sDnoSda4t7STNz/cH4+YoTb0UeWE5JGvJualNyZfFJ
- oDj0jzYG/w518Rxny+SvTHuMeyoydsGDtbGq1LszlMZnNNIDSuz+1maWUV69xBRGtPJP
- R97A==
+ bh=1I1vuQxV/Z8i2qDECVlVnDlM3x/aUj5wxWYD6+XB4d8=;
+ b=lW4lH/KulXrDohNgIQCwJ62+v+2fLt9wqMu3WabURFo/5/49OQhAOhIHpTYSoFA9CC
+ f8A+rDQ30cTiV/XvHdKUioMtUnulvw3PA74FwvKqMZ28EjfYEXHfau+i/Q9dyO21uvku
+ HSeOVcLlS4Wsffp4PHkZMmMINQyTdrEvJ6/UXcggx6uDmKo+ZAK5pJmCwt6KDbYmWF7R
+ rgZ6pCE086t4kHe/sYyEA9pO/Io2r9NvmngNANWl860kguSA7kNQtehReVoo7UZXTIDh
+ UfElzZJh96vUvaJAmDj3ZF3ee9wFBWYRwxlFVJEaYqIgnJwMgOevaMqf/SVFSG6mktqi
+ JaSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788273527; x=1788878327;
+ d=1e100.net; s=20251104; t=1788273528; x=1788878328;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=A3CCZhmC6ul9Johiq9Y4kJEC4x78uyGlzeDkVBgJG7w=;
- b=swz1CJ/VfNR2g9dXJHsmp8rzqlQuMNMtIMoRNVLDljMC8d6LJUvoVvSiyQ8QhKF/t6
- dqzNBtHOo8pI6ZkhYHlL4O/09GXhku7edT7D4/bNF4oA00E6Sn5lF8J+bT+kfet6nb67
- kx1EXAorY5AkAkl1pvVWzYYWLb7h3ghTmHnT3vCMG3qOj+U8m22i2H7K/9nXm8WZWgBL
- hkOAEK0qZi79WJ7wufGUGY9OTxlcgG7F6T/oqNfrTwHHi7q1Wtez9HUoAwS+S4NhPFlu
- 9f2jtZDjRxaYKbNykHZ8c9JBXUECxxguY1Ps/O8OX5CV2oHiH98SN9QT3XZj2d5bOUWY
- p6Iw==
-X-Gm-Message-State: AFuF++lRKj+6xyOHWb+JMXnx5uCDLbQQgcTrlG3UF71uYnAV9W6Nf+5L
- j2emxPJxUFokroiMziWS5ivMYKikn/gjRtkpcEyR5ltYMDLpjcvIXDPYTpfuCuXU/4Q=
-X-Gm-Gg: AR+sD13PCI43hbNlrxYeEHJxF6PmiHid8zS2iouKM6FmJDlBc2IReW6mN9nxRgAX4bc
- 8Cxz3U6uHkNDq26e5N0qsGsRTtPCl+q3xF5ziSAfWeFK+9zRrbrItHYOK2+g5r65y+ZZie/9Wfy
- tYBuBFcFsCXg3CpaMMwGqx5jJo168AqGuN/Fs1+ci4XuJSf7cv66i2GdkcBWvM/3vzTmd6BGGfg
- Tq3onw1cFWNe0Nn5jF7ari1tAshKt+xpjixQGQUHacCwKZAtVS1bYR99CBPIVN/QM98KnMw6edB
- eg+nNlrUPaVp7MZrhieOH087NB97CO62hPsgge8zWYATpuWRlUIce9EpqccbPYwnH421ZKODA9J
- p5PrwsA1Ce5ZIAsC97ahICXDkIqy7C+vs8Kq5PoE1eIet1f6sP7OvK6VlLTAp1KDUP7hrIbwqfB
- Amm4CKkN/iR1ZpQekWaSINPpevCPov5nE4B5veL9NcITmrfpMnt1xnR/hevDAPxTwMLUnmaK46n
- na/24gEVl4wODRGiEE7pkTarBtWn22ogKre1yyPk4OAWq/cBffisaUJdoKIqGbclOOFsNUzzzUc
- qK5gqO+bPRMPNVoVYOUiR255UGzK0vvVcgjg4f1phwSdpIQuAArttLs=
-X-Received: by 2002:a05:600c:4445:b0:499:900c:9c69 with SMTP id
- 5b1f17b1804b1-49b91c44fbfmr480853655e9.9.1788273527099; 
- Tue, 01 Sep 2026 07:38:47 -0700 (PDT)
+ bh=1I1vuQxV/Z8i2qDECVlVnDlM3x/aUj5wxWYD6+XB4d8=;
+ b=p7dlqG6JsrOFZn/BRyqHZOqZx2LTWqHPSSLmNnGqafsb288s+Szvhla1Unj12bnJbU
+ a+OlugupfZGeu31n36wBsJnpeJyxjkbQiUGXqXp58kBmOeVq00hfUlVxACsgxLQFjNd+
+ XvPLY0DHT6RdJNEszYJ5Lczo/tRjPqGY7YbfB5gMTx/hXxQSvnRMbqQpRZTsL60K+OI8
+ YJhl3Orh7x6b47HgQJ3BIrkO3RoLqVQNO3ZdBHq4rbothpa9LzKxoE9xPYHOrVyqEhu3
+ S/nw8C3q4CnkkNMKnQyPj977xx8oaJWu7waF/4MfCmVUuiOa8kNFYs4F7l/TQLmlhhV7
+ Twqg==
+X-Gm-Message-State: AFuF++nbHEmOIHyQBj1+i5pEyzV69ICUR4nFFOvvGdLQr2dTG5iXhyW9
+ zZ79tBAECY+EowuZC4DvFaoZmHhsckVJ7S9eUL1mdXrkizaEB4yvkFfGGPwXF4vMFFg=
+X-Gm-Gg: AR+sD12fOCgnRdDp4CNArFUW9sjqquJEYfGa/yPV/jpMfi1kidAUHVjgR7IjJrpQxL1
+ F+4jmHQoH44vdFUv3ccPjVRzd81L4hariuhiwaXBM+nHuOSC6hCiq+3/JOXoN/xqbzDzcemgCPo
+ gLqpUGfNez+n1UgunJbmPZUvx8sEVcqUl4wDBywL8xVgY5N6cif9BLri3sF7Wyo6JD50Snxn+kK
+ vSxxXSF9nHLQm7hCvPIAuPEb5DlF9+0EOUMS7osZ2jdOQ9kvg+VeltqQd2Ktv+VbmK7Ip9T9pXL
+ +grSW5TlLaSpCYFQlUZB0gf+d5w/0D9v4VYSBbYocshbIaQD1oZO2pImJ0o2mF1foovo6Y6xNtQ
+ +WOl9nYx3t5CUUFOj2aLbnX6uv/uxNuq4mKmzbFqWpmYpdIk7y3if2AOcBhOnITmWCOT8uZLtR5
+ 2fXJOOhW+KD31X80X42x54yJPPzImZQrFTG8bt425fcX8IoUb6Z9dJ6vqj2sjiVoY8Fx5fie+Pj
+ tO1d2wMGOp9AUHsZf3YXL6Oi3eF3oDmyghJSffZAKKJ7KNwINX/PfFwkK7zlYNRzkq9bOdgQ8m7
+ ISIkwleAL1JOB726vMpALe0xotbMiTG0RiZTnXTDlUgZ
+X-Received: by 2002:a05:600c:468d:b0:49b:4eb6:6ffd with SMTP id
+ 5b1f17b1804b1-49cdd418c7cmr76896945e9.5.1788273528007; 
+ Tue, 01 Sep 2026 07:38:48 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cdce1e3a9sm71533655e9.15.2026.09.01.07.38.46
+ 5b1f17b1804b1-49cdce1e3a9sm71533655e9.15.2026.09.01.07.38.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Sep 2026 07:38:46 -0700 (PDT)
+ Tue, 01 Sep 2026 07:38:47 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 01 Sep 2026 16:38:47 +0200
-Subject: [PATCH v3 01/14] video: mediatek: add display pipeline component
- helpers
+Date: Tue, 01 Sep 2026 16:38:48 +0200
+Subject: [PATCH v3 02/14] video: mediatek: add ethdr component
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260901-add-genio-510-and-genio-700-hdmi-v3-1-38194a531b9f@baylibre.com>
+Message-Id: <20260901-add-genio-510-and-genio-700-hdmi-v3-2-38194a531b9f@baylibre.com>
 References: <20260901-add-genio-510-and-genio-700-hdmi-v3-0-38194a531b9f@baylibre.com>
 In-Reply-To: <20260901-add-genio-510-and-genio-700-hdmi-v3-0-38194a531b9f@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -143,139 +142,116 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Most of the simple display pipeline components share the same probe and
-enable sequence: remap the register window and enable a bulk of clocks.
-Add the mtk_disp_comp helpers holding this boilerplate so each component
-driver only has to provide its own component-specific programming.
+The ETHDR is one of the components of the video pipeline on some
+MediaTek SoCs, such as the MT8188. Only its mixer sub-block is used,
+which is the block's first register window.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/video/mediatek/mtk_disp_comp.c | 78 ++++++++++++++++++++++++++++++++++
- drivers/video/mediatek/mtk_disp_comp.h | 32 ++++++++++++++
- 2 files changed, 110 insertions(+)
+ drivers/video/mediatek/mtk_ethdr.c | 72 ++++++++++++++++++++++++++++++++++++++
+ drivers/video/mediatek/mtk_ethdr.h | 16 +++++++++
+ 2 files changed, 88 insertions(+)
 
-diff --git a/drivers/video/mediatek/mtk_disp_comp.c b/drivers/video/mediatek/mtk_disp_comp.c
+diff --git a/drivers/video/mediatek/mtk_ethdr.c b/drivers/video/mediatek/mtk_ethdr.c
 new file mode 100644
-index 00000000000..07ba29e3393
+index 00000000000..7584fd565f5
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_disp_comp.c
-@@ -0,0 +1,78 @@
++++ b/drivers/video/mediatek/mtk_ethdr.c
+@@ -0,0 +1,72 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * MediaTek display pipeline component helpers
++ * Mediatek Video ETHDR support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
-+#include <asm/io.h>
-+#include <clk.h>
 +#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <errno.h>
 +
 +#include "mtk_disp_comp.h"
++#include "mtk_ethdr.h"
 +
-+void mtk_disp_comp_write(struct udevice *dev, u32 offset, u32 val)
++#define MIX_EN				0xc
++#define MIX_ROI_SIZE			0x18
++#define MIX_DATAPATH_CON		0x1c
++#define OUTPUT_NO_RND				BIT(3)
++#define SOURCE_RGB_SEL				BIT(7)
++#define BACKGROUND_RELAY			(4 << 9)
++#define MIX_ROI_BGCLR			0x20
++#define BGCLR_BLACK				0xff000000
++#define MIX_SRC_CON			0x24
++#define MIX_L_SRC_CON(n)		(0x28 + 0x18 * (n))
++#define NON_PREMULTI_SOURCE			(2 << 12)
++#define MIX_L_SRC_SIZE(n)		(0x30 + 0x18 * (n))
++#define MIX_FUNC_DCM0			0x120
++#define MIX_FUNC_DCM1			0x124
++#define MIX_FUNC_DCM_ENABLE			0xffffffff
++
++/* Fields used by this driver but not present in the upstream driver */
++#define MIX_SRC_L2_EN				BIT(2)
++#define L2_SRC_SEL				(2 << 20)
++#define L2_OUT_SEL				(2 << 22)
++
++void mtk_ethdr_config(struct udevice *dev, u16 width, u16 height)
 +{
-+	struct mtk_disp_comp_priv *priv = dev_get_priv(dev);
++	/* enable internal clocks */
++	mtk_disp_comp_write(dev, MIX_FUNC_DCM0, MIX_FUNC_DCM_ENABLE);
++	mtk_disp_comp_write(dev, MIX_FUNC_DCM1, MIX_FUNC_DCM_ENABLE);
 +
-+	writel(val, priv->base + offset);
++	/* enable mixer */
++	mtk_disp_comp_write(dev, MIX_EN, 0x1);
++
++	mtk_disp_comp_write(dev, MIX_ROI_SIZE, (height << 16) | width);
++	mtk_disp_comp_write(dev, MIX_DATAPATH_CON,
++			    OUTPUT_NO_RND | SOURCE_RGB_SEL | BACKGROUND_RELAY);
++	mtk_disp_comp_write(dev, MIX_L_SRC_SIZE(2), (height << 16) | width);
++	mtk_disp_comp_write(dev, MIX_ROI_BGCLR, BGCLR_BLACK);
++
++	/* only configure L2 since only rdma4 and rdma5 are used */
++	mtk_disp_comp_write(dev, MIX_L_SRC_CON(2), NON_PREMULTI_SOURCE);
++	mtk_disp_comp_write(dev, MIX_SRC_CON,
++			    MIX_SRC_L2_EN | L2_SRC_SEL | L2_OUT_SEL);
 +}
 +
-+int mtk_disp_comp_enable(struct udevice *dev)
-+{
-+	struct mtk_disp_comp_priv *priv = dev_get_priv(dev);
-+	int ret;
++static const struct udevice_id mtk_ethdr_ids[] = {
++	{ .compatible = "mediatek,mt8195-disp-ethdr" },
++	{ }
++};
 +
-+	/* ungate the feeding SMI larb first, if any */
-+	if (priv->larb) {
-+		ret = mtk_disp_comp_enable(priv->larb);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	ret = clk_enable_bulk(&priv->clk_bulk);
-+	if (ret) {
-+		dev_err(dev, "failed to enable clocks: %d\n", ret);
-+		if (priv->larb)
-+			mtk_disp_comp_disable(priv->larb);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+int mtk_disp_comp_disable(struct udevice *dev)
-+{
-+	struct mtk_disp_comp_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = clk_disable_bulk(&priv->clk_bulk);
-+	if (ret)
-+		dev_err(dev, "failed to disable clocks: %d\n", ret);
-+
-+	if (priv->larb)
-+		mtk_disp_comp_disable(priv->larb);
-+
-+	return ret;
-+}
-+
-+int mtk_disp_comp_probe(struct udevice *dev)
-+{
-+	struct mtk_disp_comp_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	priv->base = dev_remap_addr(dev);
-+	if (!priv->base)
-+		return -EINVAL;
-+
-+	ret = clk_get_bulk(dev, &priv->clk_bulk);
-+	if (ret) {
-+		dev_err(dev, "failed to get clocks: %d\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-diff --git a/drivers/video/mediatek/mtk_disp_comp.h b/drivers/video/mediatek/mtk_disp_comp.h
++/*
++ * The mixer is the first register window ("mixer" in reg-names) of the
++ * ethdr block, so binding the ethdr node with default register index 0
++ * gives the mixer registers.
++ */
++U_BOOT_DRIVER(mtk_ethdr) = {
++	.name	   = "mtk_ethdr",
++	.id	   = UCLASS_MISC,
++	.of_match  = mtk_ethdr_ids,
++	.probe	   = mtk_disp_comp_probe,
++	.priv_auto = sizeof(struct mtk_disp_comp_priv),
++};
+diff --git a/drivers/video/mediatek/mtk_ethdr.h b/drivers/video/mediatek/mtk_ethdr.h
 new file mode 100644
-index 00000000000..9012dda3918
+index 00000000000..5242b362268
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_disp_comp.h
-@@ -0,0 +1,32 @@
++++ b/drivers/video/mediatek/mtk_ethdr.h
+@@ -0,0 +1,16 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * MediaTek display pipeline component helpers
++ * Mediatek Video ETHDR support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
-+#ifndef _MTK_DISP_COMP_H
-+#define _MTK_DISP_COMP_H
-+
-+#include <clk.h>
++#ifndef _MTK_ETHDR_H
++#define _MTK_ETHDR_H
 +
 +struct udevice;
 +
-+/*
-+ * Common state shared by all the simple display pipeline components:
-+ * a register window and a bulk of clocks. @larb is an optional SMI larb
-+ * enabled and disabled together with the component (used by the RDMAs).
-+ */
-+struct mtk_disp_comp_priv {
-+	void __iomem *base;
-+	struct clk_bulk clk_bulk;
-+	struct udevice *larb;
-+};
++void mtk_ethdr_config(struct udevice *dev, u16 width, u16 height);
 +
-+int mtk_disp_comp_probe(struct udevice *dev);
-+int mtk_disp_comp_enable(struct udevice *dev);
-+int mtk_disp_comp_disable(struct udevice *dev);
-+void mtk_disp_comp_write(struct udevice *dev, u32 offset, u32 val);
-+
-+#endif /* _MTK_DISP_COMP_H */
++#endif
 
 -- 
 2.55.0
