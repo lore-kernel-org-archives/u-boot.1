@@ -4,122 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54416C61DD6
-	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 15:25:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA0DDC61DD6
+	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 15:34:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AF7F4605E3;
-	Tue,  1 Sep 2026 15:25:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4282660757;
+	Tue,  1 Sep 2026 15:34:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ccXyB1nZ3_3Q; Tue,  1 Sep 2026 15:25:03 +0000 (UTC)
+ id s_tqaL9-M9VL; Tue,  1 Sep 2026 15:34:52 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788276302;
-	bh=vr27VVtHznrlkXXtH95MbGmwxSlnoPyi9XLHD+cY6T8=;
+	d=lists.u-boot-project.org; s=default; t=1788276892;
+	bh=qBI51anOU3PE1zcxWfr3a/9u1eJO0cW3wVexyyClQCo=;
 	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=O9EEBusPCFgAu+FRX+DsuwK/gJesErNkJLP7uK3lqKUdA0MEYX6TC6uhbMuSFc9E0
-	 Nerr/Uh7/BUTkHDZg9D3Movo68mlksVXQTHn9aOo1RzFSePiqn8sGDYSgE4DmJ1s54
-	 evdMGCmEU5cejujuo3D/9Og7UFNrIFPaBBS40ze/UndLlUNqmuRuhM81xIEJnHyTHP
-	 OJbL2ih1oxnObD6roPkniimVW+k/hoMygkoBe2WQ2Rlh3O33dsC0Fspo1n2NFwD71k
-	 vv94etpqXabFIu0XYcE2rzfB9Udqm0cD7qKDVFkjHv4ob7syEqErEPPLd0r0OQDx6n
-	 B7QCd3fT7r9Hw==
+	b=zN0aG1Scg8lUPLAzmCifjYihVy+D5tLRsDhMiPpsNwrkCNnR9rknBkXGSCXAVKGX8
+	 hXrhnoiqXdHy7p+CWviKkNp7luyzVHkTQuUhdO/mWiwXdJvywNo2rcy+vROHTQLFOy
+	 kLNxQPP93Cjr1HE3Cm4zHoBfkmzxANFgml3M0eboZqSAtfwhqsAk+HYUETC0uKllNm
+	 Y/J2oX1zzeMCRkUoGlO9yPpilS6LbehHeGs7gAB5aD66X3mGs6GY43o+WFyQj0VR+G
+	 5401yu9UJzqlMvoMZD5S18W6cY9LeyHQv4CHjbttwjE4WFAIT4VsoWnkdrekh+glFb
+	 06FsZk7ZUXMQg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CEEB8606E5;
-	Tue,  1 Sep 2026 15:25:02 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id BE1F8265
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 15:25:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EF2E3606E5;
+	Tue,  1 Sep 2026 15:34:51 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E4913127
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 15:34:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id AF44F606F2
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 15:25:00 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id CB07B80D09
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 15:34:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZhrpLEmkl_Zu for <u-boot@lists.u-boot-project.org>;
- Tue,  1 Sep 2026 15:25:00 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vAHyg7Zu3xYF for <u-boot@lists.u-boot-project.org>;
+ Tue,  1 Sep 2026 15:34:49 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
- envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=airz2K34
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6FE95606E5
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 15:24:57 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-49b8e527d63so11560705e9.2
- for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 08:24:57 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::72e; helo=mail-qk1-x72e.google.com;
+ envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=ztI1bHtb
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DC01980A55
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 15:34:47 +0000 (UTC)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-938cd95b06eso113831585a.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 08:34:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788276296; x=1788881096;
+ d=linaro.org; s=google; t=1788276887; x=1788881687;
  darn=lists.u-boot-project.org; 
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=vr27VVtHznrlkXXtH95MbGmwxSlnoPyi9XLHD+cY6T8=;
- b=airz2K34SW6m25AX9BqL6JA1Y9s9UwvTJ+ZKuqaW8w3jmwV7Yho3KmCTHAMYwDVYsy
- 0mGFEh1UQa7IboSzCW+s4a8kzJZ05UWSZOBT7wlcf2vz4GkzRuO5umpMBPEVgCf4TCtx
- 6NcOCWIHSVJmQ1TVNdlm5FakEsofItKjcUn7ghFHWOL0Qb9jHPsC9YKYwv0NpvYqN23/
- 2vKC12nmkX9Up1mj7Cn3t7iS+H9uCYGeHLWdyaDNSB1RZvvkGYFFCW3vBo8bPad19bQI
- jAtVzsuBkigZhYgal816acJD5H1C7mj/aNbl7ic9vX48p6dWFqhCXk/WQ2i08oSmh/HI
- IItQ==
+ bh=qBI51anOU3PE1zcxWfr3a/9u1eJO0cW3wVexyyClQCo=;
+ b=ztI1bHtb1dMHlAfeXPIDzPogy+feLq8VMfcbQ1zmbfKBEQo1dwc068T0wx2u4QrvS7
+ Bkopeu0/RD6UX9dUKc0Y/qHw6RTf/lXMlEaGJUY8lwPRIcDgJrwlXfLG4qRWnNBsHz8k
+ YUk4HWD/JE3XMWBTKA1VbypAo5PVqfG4PtkSrJ1lNccdN8y0covdIuVyuCKH7y2DK1Qj
+ liLrlO5Ml5QGxNWxFmYU1LwpxcJMa4dpRCsfhQezN6MLDy8dX/IJCj5NdSCL93T8SIdi
+ vNkIMqHSQ2Ii0QrPfPC8dcrNG8ZUiY6ZdnJ0Ai9aNneGdX/wG8wj4fSx7YfynrmXIheh
+ 1mYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788276296; x=1788881096;
+ d=1e100.net; s=20251104; t=1788276887; x=1788881687;
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=vr27VVtHznrlkXXtH95MbGmwxSlnoPyi9XLHD+cY6T8=;
- b=OpR/A1fNm9WY8nu3IdlSBG+COd8LtJ33xeiIDyk7LXmv0vXEpKypJ7SbMTp7WSvi6y
- Gh1vPk8dhzUa+6d+oVLKaqDhnSV6KDtexW24buJj4y5scTMm/+aDcWZZ+YMTRLEY4fTl
- 4OG5bB5pjXTmFWCh9d6z3rK0yfODOOXQeQMEo0jFiiXuDasn2U1bxBtDaP28G65ABc9l
- a4eA5BqI5FkkOzhcTT1/BxVrGsKIs7vMQiY7sq0oKnIkue++ywc++SrkMOeb+mKAwmRN
- cpFlmoBd93IS35zGfrAK1RKrKz+VWawibpE3xrISFb76TIkRbDX9g3QZOCyLICp97+Pq
- ON8w==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoVUxnOmowuVBqsBjn5jIE8uKBVkFqacusH5NjyRV0YOqXtkyB8cyzCwtY3dILsRCm5IlODXAM=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kYZKMwjsxi2PlHIk43yyYMpqjW0LDBdCHYuBIDCq69ZZdV44w8
- 2gH4E239aZ5eZzJkjS5/hou322Cbeizo2ftw55NTqVDXAFJFWzfT26YH3OBbKYUG4e8=
-X-Gm-Gg: AR+sD11QA5zJM9nrBSPR+xHGHF7jjjS5L3Q6pzZtbKxoX8FH0L1vPJg6o2cKkn9GtxA
- 9RJyEG05p8AfDxLUFKniNcDgBm1P1UXP6iwxPFEOhH9bM8q4Ab+XknhtjlJ7/TFrM+oC5Tjzg6p
- NYB7rbQ0SKRkNMtabIu96BXoZwvKdTcL/sP98XXfzSm/oZKW8vr8a4O4hnd77LwsuwXKG+1ru+p
- szubrgeNMkAZl1ZRjeYsZaZfJV0FxgEu3N3tBVEpqhn3CuF2wOXnSL97GM/lfc6B6f9wcVildR5
- 06qHS0RML4p4z2P+lvdPmHqIam6L5Y2zl4YLhVEAXKp9Tw9/3RJ/QBT2myhknmdLGJT8FKo0bfS
- A/HIvyK55eajqGLFv9FZIYG4EZKMKhBwagKpLCwHDOTx9qWlo2rDOXEHxU+isLme7IDYnUgayJZ
- Ce/MFgo/hUKkZOVW1GOMiMtcxLS84ph2wEcPQrmUzt54HQV8ha6mYb3gfD4s+7A7MC2UKU0jxlR
- kEjrQcBugMy/8bxhdWMx+t73D/zLrBbOnszPSSs6otH1jPxhrYNDAWFsGGtrCWCxuwlOO+ra+Nu
- YcftjtOyWXKM7bljNx8OctMklcJMtkPQz4Yj5eEaWgpW
-X-Received: by 2002:a05:600c:1393:b0:49b:12c2:104f with SMTP id
- 5b1f17b1804b1-49b91c2660amr497241835e9.1.1788276295932; 
- Tue, 01 Sep 2026 08:24:55 -0700 (PDT)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
- [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
+ bh=qBI51anOU3PE1zcxWfr3a/9u1eJO0cW3wVexyyClQCo=;
+ b=AmA3dGpjuBbOE6dceFpHQs21DgtjtT8ZQFAbWq0nL/ArzZHwAxg+Y1nmxHCHCaFJP3
+ nCzN/Dcew9g46FwgIoWunvp41us7sZTnxgarACtItc1BOb7cjccWWAfWhtLTqtiqTWKG
+ ExEIYZQPvTSVsR9ubr69Jphyo9NRhCexOioHjZbVQS6u6hDhGyWxqefG8EVOxz8KrZM2
+ lnPVKniLUeBbj5XpRnE8qpBssXSWxYl36Viwt1D3vCIFKhJeu/Photwgs8H4f4QSiKW1
+ vUQxpcgf5MUE9kkXIUIRFwslC5v/pBdut84+bHx90TPqvf3Xw/bf/iBAOdgf9eD/0Jkg
+ KytQ==
+X-Gm-Message-State: AFuF++n3dNthIL2OXkshIweHrVOSPXB4pshUAoALh+Ql66zRyXQkcSBz
+ OcGwaoKlKMWDF+eb36AnjNmE04DeKdl/n6OXkp2kKnblRzuhQ7ZpcPaKeMRzxe4BfuT5ErDOpKl
+ 5EpMZ
+X-Gm-Gg: AR+sD10cFnT/jHfd9Et6FdWnNP7IpDscdFi6W6h+slPkaMbQV9YEdEMpvsJYXimTv5i
+ fhHv9HXAfwPI+YzwSCytlnG/Vty8dyrEOb32XXGY0NHClysVKcq+21MOSEbBCLaK3yRAB3QUGGA
+ 10X41Q0SFRrBA5u9PE8xSHdchR1o85I5f6K8BYa9SXhbNdmb1EJEJjGvCvcSw5PY8HC8MmL1iRI
+ V5rfLZuDevF+8QTrkufQPty7QOnSgm2yPPWhRJsOJ1i1b1PiHgwVQ2fhDUjgOYvol4oMy4DJXEe
+ IYbJrqJAMi9o0/yKN/gmb5z7UaIsOzl1oZq6AdNwFEo1nyaV0EtEWe1aLAYONjs2kmaN00wWSRg
+ 95SV2UwuMjcxZ/PgeWnSvtWQm4NGbmSV7eSsYqfBegKT9nAhK8/4SuC1CCET0OVFS8OKXuuTijs
+ OmFyk2Qvdlk2kjnvTMEUn5ZBc3Lvg8i/08YTHkPdlDX4G86v/P4D0vRQ6qozEDCNQbxmfYT1JNg
+ pjLe1bfSZf27G13f94EcHU/9xyALOAbzzFgC0m/7JbIyNQC6eQk/j1I
+X-Received: by 2002:a05:620a:5d92:b0:92e:fed1:beba with SMTP id
+ af79cd13be357-9394bbd5cfemr646785585a.3.1788276886553; 
+ Tue, 01 Sep 2026 08:34:46 -0700 (PDT)
+Received: from maple.netwinder.org ([66.129.139.8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cdce089c2sm74487405e9.2.2026.09.01.08.24.55
+ af79cd13be357-9391740bb62sm1071452585a.43.2026.09.01.08.34.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Sep 2026 08:24:55 -0700 (PDT)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 01 Sep 2026 17:24:51 +0200
-Subject: [PATCH] stdio: gate splash_display() on CONFIG_BMP instead of
- CONFIG_CMD_BMP
+ Tue, 01 Sep 2026 08:34:45 -0700 (PDT)
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+Date: Tue, 01 Sep 2026 11:34:41 -0400
+Subject: [PATCH] dfu: mtd: probe before get_mtd_device_nm()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260901-stdio-splash-fix-bmp-guard-v1-1-78e2e75ae441@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBA0avIrDuQxKq0VykuojPqSKsho6Ug3
- r1Rlw8+fwPlKKzwzDaI/BWVeUqwtwzawU89o1AyOONK8zAWdSGZUcPb64Cd/LD5BOxXHwnzwpJ
- xVOX3ooI0CJFTcM5f9WVdm5Hb5TjCvv8BJqjAW34AAAA=
-X-Change-ID: 20260901-stdio-splash-fix-bmp-guard-351d02d73457
-To: Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.u-boot-project.org
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Rasmus Villemoes <ravi@prevas.dk>, dlechner@baylibre.com, 
- Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.15.2
+Message-Id: <20260901-rzn1-2026-10-mtd-v1-1-516e2177cd20@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAJDwlmoC/yXMQQ5AMBBA0avIrE0ylWhwFbGgBiNR0iJC3F2xf
+ Iv/L/DshD0U0QWOd/Ey2wAVR2CG2vaM0gZDQommnBS60yp8hYpwWlvMUk067RpDZCBki+NOjm9
+ ZVr/91oxs1vcD9/0AyUvZMHQAAAA=
+X-Change-ID: 20260901-rzn1-2026-10-mtd-856065fbc00c
+To: u-boot@lists.u-boot-project.org
+Cc: Lukasz Majewski <lukma@denx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Tom Rini <trini@konsulko.com>, Ralph Siemsen <ralph.siemsen@linaro.org>
+X-Mailer: b4 0.16-dev-401aa
+X-Developer-Signature: v=1; a=openssh-sha256; t=1788276885; l=1538;
+ i=ralph.siemsen@linaro.org; h=from:subject:message-id;
+ bh=uJZFgPNyYLuRa0lO+CU8FcQseFTJ+pE3wLK46pdWn58=;
+ b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgG/ALfT0jfT5dAzjFlh+rTh9j4pAiw
+ vPQ/tR3mihuAFYAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
+ QK9wrBofYy1KHgGLLGdWkMjNDHPxCyNRqfhV3RvkzJ9QgIobQBHliXqjMxKs/Za8Md2MDVVrNTN
+ nUf7t00EBCgs=
+X-Developer-Key: i=ralph.siemsen@linaro.org; a=openssh;
+ fpr=SHA256:12SQdavZEBUxPbBBtqQJgZ9F8vSvwTB6kFlSNgb4IcM
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -133,38 +137,50 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-stdio_add_devices() calls splash_display() only when CONFIG_CMD_BMP is
-enabled. However splash_display() depends on the BMP display support
-selected by CONFIG_BMP, not on the "bmp" command (CONFIG_CMD_BMP).
+Parsing dfu_alt_info depends on matching MTD device names, so it is
+necessary for all MTD devices to be probed first. Move the existing
+call to mtd_probe_devices() accordingly.
 
-As a result the boot splash is not shown when BMP display support is
-enabled without the bmp command. Gate the call on CONFIG_BMP instead.
+This fixes a failure of the "dfu usb" command that occurs when:
+- dfu_alt_info contains SF devices listed as via MTD
+- there is no persistent environment stored in SF
+- "sf probe" has not been executed prior to "dfu usb"
 
-Fixes: 5eb83c0ac114 ("splash: display splash in DM_VIDEO configurations")
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
 ---
- common/stdio.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/dfu/dfu_mtd.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/common/stdio.c b/common/stdio.c
-index 038e576147b..271a37e959c 100644
---- a/common/stdio.c
-+++ b/common/stdio.c
-@@ -332,7 +332,7 @@ int stdio_add_devices(void)
- 			}
- 		}
- 		if (IS_ENABLED(CONFIG_SPLASH_SCREEN) &&
--		    IS_ENABLED(CONFIG_CMD_BMP))
-+		    IS_ENABLED(CONFIG_BMP))
- 			splash_display();
- 	}
+diff --git a/drivers/dfu/dfu_mtd.c b/drivers/dfu/dfu_mtd.c
+index c36ac09189f..da19bc21492 100644
+--- a/drivers/dfu/dfu_mtd.c
++++ b/drivers/dfu/dfu_mtd.c
+@@ -289,6 +289,9 @@ int dfu_fill_entity_mtd(struct dfu_entity *dfu, char *devstr, char **argv, int a
+ 	struct mtd_info *mtd;
+ 	int part;
  
++	/* register partitions with MTDIDS/MTDPARTS or OF fallback */
++	mtd_probe_devices();
++
+ 	mtd = get_mtd_device_nm(devstr);
+ 	if (IS_ERR_OR_NULL(mtd))
+ 		return -ENODEV;
+@@ -324,9 +327,6 @@ int dfu_fill_entity_mtd(struct dfu_entity *dfu, char *devstr, char **argv, int a
+ 		if (*s)
+ 			return -EINVAL;
+ 
+-		/* register partitions with MTDIDS/MTDPARTS or OF fallback */
+-		mtd_probe_devices();
+-
+ 		partnum = 0;
+ 		list_for_each_entry(partition, &mtd->partitions, node) {
+ 			partnum++;
 
 ---
-base-commit: cd5bd0cb98ececd1e2eb69d0093e4940b25c9941
-change-id: 20260901-stdio-splash-fix-bmp-guard-351d02d73457
+base-commit: 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc
+change-id: 20260901-rzn1-2026-10-mtd-856065fbc00c
 
 Best regards,
 --  
-Julien Stephan <jstephan@baylibre.com>
+Ralph Siemsen <ralph.siemsen@linaro.org>
 
