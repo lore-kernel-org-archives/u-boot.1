@@ -1,168 +1,167 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D2D2C624D0
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 04:21:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 145ECC624D0
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 04:21:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D8EA860603;
-	Wed,  2 Sep 2026 04:21:10 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kKQaV1WGMSJH; Wed,  2 Sep 2026 04:20:55 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788322855;
-	bh=SdsWrbtzwklVN5+MJ4UmxgmEexnJ5jITv8aO/qgbdeA=;
-	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=lbLcM9IB0St8T6oQeHlKtlBikNYBn7M7FJltXaV3vnk/tKUDYPN8Xs0wQhBEhTGqR
-	 tyImco/GRgR6cZ4yRDgIBUV+IwHzvTwmW+e4JID/10paiGk6013YPXHbTFWwR5tjtp
-	 wGqlvxeNkREAlGUqfmA1+z63k/wii0Rb3vVMEfhq1Pu7GTtFAiaiIDDFYkyOq3GZgX
-	 7rq+OhO+xAlWugx/wxtuUEgEcqhv94+IsYDBqoSpRmO5r9pIBEP3SHpjRbRkFYTQnK
-	 uXYwDQngaaXkzItIIB/lx4mBLzPbDZAWDnvkmewaXhwn+BOYLpoNXOmR5JJo4+J5fR
-	 kgv6kZbmYysLw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 89D9660665;
-	Wed,  2 Sep 2026 04:20:55 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 28D8A118
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 19:58:39 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0E86B4063E
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 19:58:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C7C5A40556;
+	Wed,  2 Sep 2026 04:21:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qOsCwm2xOy1l for <u-boot@lists.u-boot-project.org>;
- Tue,  1 Sep 2026 19:58:38 +0000 (UTC)
+ id wKGZKAYdr6Ay; Wed,  2 Sep 2026 04:21:07 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1788322859;
+	bh=7wJ2OQzNYdnNmFEUmDubJSlvYKgsATJRdA+hN4ap2ag=;
+	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Gq7Ud2NYqOthk/cQqCgNSP/MD8cHGrQ79S13frBT5FGoxqe1YeDmwf6Sys1r5PG8U
+	 cNFjL33E5CQvBafJq/ZcYOpMuPGFC1QRaWEXrTl+1vlOPWz3nDb5hoPBkz51PTZUyE
+	 Mm00SWfpFSFawxNYSju3Cc81xdFKvYjOnw5cj12vAi0OpWLjVnP+IYU9HvImoX7yiC
+	 XoPDStEREvo89HkGgxAKP8IgPZ3xsa1R7QF4b1ohDCgH160QZ5c3PWGHuzrIyOkfsw
+	 RZPwtYzVfUvBHrJcEg1Ai/CAHHnNv6vwmRme1zYq/xwCs3pggf5nwfyDgFcMvZ52Zp
+	 0bIwyi8AHqXDQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id D416A406DD;
+	Wed,  2 Sep 2026 04:20:59 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6E46F2FE
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 19:58:46 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 60D004063E
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 19:58:46 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MnTnKsj4vVxR for <u-boot@lists.u-boot-project.org>;
+ Tue,  1 Sep 2026 19:58:45 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
  helo=mx0a-0031df01.pphosted.com; envelope-from=sumit.dhami@oss.qualcomm.com;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=WbXkKgnJ; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=V6G0Tejp
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=CCvMOQl2; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=WnCgIADx
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 013234069C
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 19:58:37 +0000 (UTC)
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 609AE40641
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 19:58:44 +0000 (UTC)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 681HgqIE2748276
- for <u-boot@lists.u-boot-project.org>; Tue, 1 Sep 2026 19:58:36 GMT
+ 681HgDPf199658
+ for <u-boot@lists.u-boot-project.org>; Tue, 1 Sep 2026 19:58:44 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=SdsWrbtzwkl
- VN5+MJ4UmxgmEexnJ5jITv8aO/qgbdeA=; b=WbXkKgnJPt1udjvd2MoPHSuE/uG
- U7B2cZ4uxURlhJ7Cb+adLJcuD4F1TVif2AjV/OkGyQXsI/d62Pxpkm2wJ5qMb268
- yq/XBqfd3enPjeeFbc0DByv0LRuzb1Q+ouEBSmBmTqpSXMzp1Ay+irPYNywjzG7u
- Va27uL7PfUyUv1PFyiA2/fanUPypU5qBDlD8l0FYcpzTkJ7cNBszEnB7gm8puVoq
- KuypON+14R1pBdOy4UvtQulTEQSWJ3jOXQCy1UAJ0fkHT8jd1lwTeFlFojqDYIG8
- bAJJVMYjKRYBd+k/zAOyT+PGItQrBw3NunE5nC8BoMudMoTHwrzAr4JTmUQ==
+ :mime-version:references:subject:to; s=qcppdkim1; bh=7wJ2OQzNYdn
+ NmFEUmDubJSlvYKgsATJRdA+hN4ap2ag=; b=CCvMOQl234YaoHR84/U7tM7L86m
+ tYU5WXDEfzEWgM0x3so3oUxRstoz3fqYoz9nI0Gl9Cl9W8y6JcZ46o/Iozc3gZzd
+ EXbBf5gUncbcFHQxOU+ieryWnloRNNPQP36oJ353O+ww4Z41tPMmw9CdiSQ0yW23
+ StwEgEzIZuJvqoDm6wFGhgFLihgnKQvORnQWvGbBHTfYHlqx+169X0xQe1DP7Fki
+ Pzg1lD6XV1Mi6FkUI18k1Rmf8M83bHxQpohpu+caL1RFB6/vzeOmJADMd0f6Fe7q
+ KS7yynin0jYaCDMv2O1Z2mLs04uSLwa/ID24AnyPGubRY3y2jkSx/s7me8A==
 Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
  [209.85.216.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ge1wp946s-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdsnu3rg6-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 19:58:36 +0000 (GMT)
+ for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 19:58:44 +0000 (GMT)
 Received: by mail-pj1-f72.google.com with SMTP id
- 98e67ed59e1d1-38f283baf1fso282233a91.3
- for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 12:58:36 -0700 (PDT)
+ 98e67ed59e1d1-38e475f83a2so350331a91.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 12:58:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788292716; x=1788897516;
+ d=oss.qualcomm.com; s=google; t=1788292724; x=1788897524;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=SdsWrbtzwklVN5+MJ4UmxgmEexnJ5jITv8aO/qgbdeA=;
- b=V6G0TejpX0nQLnXeQH0pib6XIs1pinvodrW3Lnl+TzhbOYhLU+fOtwizmktjnj13uN
- PG+uVsho2TiY+NGQVjaI2/fqt8D0jbUM3+uiJmZfvxH5yArrdd4NfjejZ3QLhp3CTmAy
- gDqlXKKEaRQpGicuVPJM4CZ9VQDXR5hLDX8y29JXUmqN88gHSjmAuFTEGdj2/gZMsFiN
- VF17GFgOVithRhnfyH5ZQBd+QLe0uIAAGh66WfVzxTbBqHHSMUpowjW/5CpdlhUCPyyt
- YNt6WSGCn3okVVosm1l3M0oaheA82HKkeu7qC1bWOfWDL9O4KBYvbYT0CRx9xR0sEHOw
- kKEA==
+ bh=7wJ2OQzNYdnNmFEUmDubJSlvYKgsATJRdA+hN4ap2ag=;
+ b=WnCgIADx4OiABp/C2AvuCCL343QSvAHo4Aj1+3spzr1MBjoFuFyjnmYulUY+Yj4x7S
+ XiclgO32yDfa9fIiCKTPfmBnnp5oW9GAkPcs5ZX1DjACvAEKk4iphZNtJfdGFkWaRR/T
+ nrpGbRx1T9VugGHtIBU/34a9kgAclAZS2dMbt8VYGh1iNS3zyxVW5WUnamdzlv8742B1
+ w4mRrXFh92CkqurdKBrH30tVAJJ70LSyJA3Yo8OiboTZDpEEdk/7leA2F9j+dIdxhzV8
+ xVXsG6dgQyd95ZImijQqIoQPJjPhs9eVEj2lnhKCyGGiodi3clYfz+v26rnPF2kK6tLf
+ 7CaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788292716; x=1788897516;
+ d=1e100.net; s=20251104; t=1788292724; x=1788897524;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=SdsWrbtzwklVN5+MJ4UmxgmEexnJ5jITv8aO/qgbdeA=;
- b=mUzGsIwfoRoJVOynhQxLqAnP2BvxqSxcDyioTRtzEwk/AWJH/NJ/wRXmy2SGaNux+b
- 7lXFOeh+zwDh0jMvPgw23eRDaA3cTMA2wNWVUoA8fWPWIvh42UAClQ0q03z9bdcRsCzD
- 6J5lhJo797seUU7+4NtYzIlIfpWvf+AsM+B8Gg3wTlbV/HM40oxT3xbZxjXRzv1GaP+y
- HqdZQ6NnzpeYNIiYsM8yaC2DBbpVDkdQ0RXpZtIYmBHFydSpml8ln7I9sNeSHRfpQunE
- 0wuI7dAOXct+aDH4B4ffBuzfMYxf2OUwBzpxVp+riTyzY8TbmD1Ga6GriPs80/Zzk/qK
- elSw==
+ bh=7wJ2OQzNYdnNmFEUmDubJSlvYKgsATJRdA+hN4ap2ag=;
+ b=pcmsrqTvj2nMckAB+Y6kaCNbigfM7VA+XBLrIE/mVHBL6EU8MglvXaFxMgVicdL2Uu
+ 53ZjLKj6vIT3NYy7YwOoA/jcdEQi1hUVUqbpseREj7dp5QPbLL/7DL3uXVdcWg56iRiU
+ 8141yP9BRlr4fE+mNolzKJUIIbvkCUMWxQ5S6PRxQ3NzEQb9iHDVxhCwri/aN/WK1pwt
+ cnGbxJsfVQaLK7bxYXK3EztdaFBfqJiZuXQNfXoGC+Fg8eEtvlc3o+AfsG1hOS6/e0X6
+ XNV0op4Olcsi4yA0PfCBk0LGRiKgM9p2tPnBv/pCNKb5FvkDCECR9ffCpJYL5+IzPYRV
+ 85Xw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzSLVQkjJPMLVW6zoea5ZIJOf6Tc/Wo0j/sZLSCnyr/41F7YfHNlsnrPr/NsFz/bO+JVephPFk=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lhFT6Jd9ie3uoZn9A/D2GOJzuqv4omft4usu5QkpJ+Nhe310bF
- gWmbjeEDsZmYlv9SdhCaHZK2f4bHiIdhQe4jf31Ww1Xfu955H0pAofO41NW2yrKk8NJjGi9z3TB
- HFLzxTninhc39K5EfAcIoYxQv9HzX/a1+T/QLCpMqhSA+AiNgy4ysj+IZ05dT0AqgX1vvg/4=
-X-Gm-Gg: AYBFou3rGwUzPgM04k1T8SO2pP+zWgMfEyT4AV2QSPWbQpKDEwuFRoeFV4nUXx+xko+
- GoRbu5LiGsRzLV8gdOq1XobKqoIF7F2wO8zMO11RVcfAob5V/28rf2IS35IDDl3Yv9CpXyyK28V
- kRxYQ22eputBod6PBTIB869JX5ZOgdFyNmmUtx8w+Cncubgk7blgQGowBTnyLjGl4ilfQjNpa16
- b9aWE77LnEaFKbFyY+SWeukv+7QgWOK0+xpV2tL0xcBxqcsxWEfx042Hs1RjBCPzDHpbjEWuAs0
- /N8Xk2HDmX7ms8koYOuCA2PcLysqB9Yu0OXoLUv1bfhmcfs07BBp2p5iIOFJ5a6p0SxQElWemTE
- qp0BePIrMmIobI/C/zKhIf6KRG3rgFtLo20o1/MWjtBKTOCzyXD9QWw+67uirKuMQinkFzEr+oG
- nbzYKJu5vuNl4HhpRa
-X-Received: by 2002:a17:90b:534e:b0:398:e6b6:acc2 with SMTP id
- 98e67ed59e1d1-398e6b6aed3mr25291553a91.12.1788292715928; 
- Tue, 01 Sep 2026 12:58:35 -0700 (PDT)
-X-Received: by 2002:a17:90b:534e:b0:398:e6b6:acc2 with SMTP id
- 98e67ed59e1d1-398e6b6aed3mr25291473a91.12.1788292715448; 
- Tue, 01 Sep 2026 12:58:35 -0700 (PDT)
+ AKwUvByWw4IEJj9JjiCcbXFBwzFw7LjqV24w9U77MtqRbra67cdDVA1oVpayaJ/Jm9daCSkUTScSPE8=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mQoECXX8H/D0K3YZNQnZG2M8r2e9XcWfHurKdhFZazaALJxr6G
+ vQUyImVoJYsfnkdFY8LKk9oRr149JPMjj9qO8N2WRp4kmja3epzWc0FoVJ+PF745S9KKvOeLJCs
+ ITh8TZLlS5QZgBVC7lN8GXJP8mENDvYdePu8gAKFozJxqSAqwPGg4KGs4Vu3Jez3JDOkGdyc=
+X-Gm-Gg: AYBFou1p66BihATy22cKWQsK8UP+cYHzX3fs/4i2x/6YJwvx0ecy0jCQo1FRHshYJLl
+ wATpDC3DGGP5fVmKsBsUqFPIwmWVrxYhiSxQ3TH8ke1cNC86JudlZo5nkX8jEKA74dex6d0Gde5
+ D+Zc1KQoslxdLvs/HJqIgokpJbliZCfAkthV1R9obzgfWBX0HetaOc/6Gr7lrA1L9AOHKDAo5/m
+ wcB7a8518ADsfM1Ny85HQAwNeh5u1WJy5ar5G4cV4XAJ5FcVK5x0qpfQBrE45NErefUdobb1OtQ
+ zpWMZI4hNJUK004UIBWIz8QFfTAa7zf5hI7tgX8aNWRq1rF9higtGS94gjp2H909XTuIWgQWjw0
+ HdHr1hht3aoJC8swYpjLjCBDZ4MVZtzf8aqdMfymIWX/QCrfXB2L+eWnj85+qPteMTAufp9QwYe
+ 1kO81l2i/DKPyQSyug
+X-Received: by 2002:a17:90b:3904:b0:398:bc52:825b with SMTP id
+ 98e67ed59e1d1-39907e82897mr15022116a91.21.1788292723629; 
+ Tue, 01 Sep 2026 12:58:43 -0700 (PDT)
+X-Received: by 2002:a17:90b:3904:b0:398:bc52:825b with SMTP id
+ 98e67ed59e1d1-39907e82897mr15022040a91.21.1788292723119; 
+ Tue, 01 Sep 2026 12:58:43 -0700 (PDT)
 Received: from hu-sdhami-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1430eb4854csm726433c88.15.2026.09.01.12.58.32
+ a92af1059eb24-1430eb4854csm726433c88.15.2026.09.01.12.58.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Sep 2026 12:58:35 -0700 (PDT)
+ Tue, 01 Sep 2026 12:58:42 -0700 (PDT)
 From: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>
 To: trini@konsulko.com, ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
  neil.armstrong@linaro.org, sumit.garg@kernel.org,
  aswin.murugan@oss.qualcomm.com, balaji.selvanathan@oss.qualcomm.com,
  sumit.dhami@oss.qualcomm.com, u-boot@lists.u-boot-project.org,
  u-boot-qcom@groups.io
-Subject: [PATCH v1 1/3] sysreset: qcom-pshold: Configure PON reset type
-Date: Wed,  2 Sep 2026 01:27:46 +0530
-Message-ID: <20260901195748.1192630-2-sumit.dhami@oss.qualcomm.com>
+Subject: [PATCH v1 3/3] configs: disable CMD_POWEROFF in snagboot config
+Date: Wed,  2 Sep 2026 01:27:48 +0530
+Message-ID: <20260901195748.1192630-4-sumit.dhami@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260901195748.1192630-1-sumit.dhami@oss.qualcomm.com>
 References: <20260901195748.1192630-1-sumit.dhami@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=F8JnsKhN c=1 sm=1 tr=0 ts=6a972e6c cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDE3NSBTYWx0ZWRfX12jYTN9ffq8i
+ GpyFxPagLSpORL2R2kfrVZM7oxOuyUvLUJsU75MAXQFGLY2Agf/L4zWvIri0CMhrIuKOW6pn7KB
+ S0Ol6pMQN/k71OVPkOfh0gWR55pJvGQa+DhpSPmreLtuR/xU+Wq8wdp3XaXjvDmSc3/ORK/lGoQ
+ yjPCNLzMQWdHL3bFJ/Npkb54YUXFpwIHKqvtOQdzyNzuGlr8YzNoIhxoniRu0fCn6yGHFDhNqCA
+ uS53dxpNq2OfMAvxOT8JnSdqR9iwnoY5jStCpjFy/2umtxi2WTrJdRPoOd9jGE9sRgU58sXH47h
+ KP9LDJi+wV3dKAK2qfWBQHoUP+xplItaczY+reR6h5U+d8JpyLvNqeiNphewT1sXtT+IVZa5mMi
+ mNq1b5bOF5D95rhTkJ7vub3L2C5dSM+yj/u0I0UUEXO0aZJgb/zMjDo0Uqe1vgItnApH0VgwLzZ
+ YRTgYwKhk16vpaAqFKQ==
+X-Authority-Analysis: v=2.4 cv=L6ItheT8 c=1 sm=1 tr=0 ts=6a972e74 cx=c_pps
  a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
- a=LW9D_-4wNyH7aS83yREA:9 a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-GUID: q0THMptFdP4niTTY5cMbReYRtEKUPn1A
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDE3NSBTYWx0ZWRfX/m7PXW4txUbl
- 03YiG06T6FCZjdq3/8YPe4d6LedY7Buk7CznREbHRj3wxh5PVDct6Pf2XJJ8n3Nl5uw929H4Zcc
- WvXxQNfD905af0rSbaSQKbZCN9H1sgU=
-X-Proofpoint-ORIG-GUID: q0THMptFdP4niTTY5cMbReYRtEKUPn1A
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDE3NSBTYWx0ZWRfX6lXzP7TMMcVL
- HukqmoVMeG+xyZg+ndlDwFl6Hw0XRamc0mqgv0qxUq58xWtEpab7aAigiVx2lUqcT8rk5hCR2Hb
- FP2m/tl7zhhJIlaxRNRKe9nioVGAMrJN6t8j61NQ6niav7AwdixtjoozsU+24Mssy4IpSK8YxWp
- P8M2d6Sf0vsC0O07jmSZ4KilIP2Fi7EdB6ZzGEt8QkHGWEOVYOWbb7+UXwvBMjK4/aSVRkz71Mv
- slz3hjIj2HPvvi0ZQRxp+ofYRChI4TXBAKn/TqpRkVZMd7oij0BV8DuF5CB/OelRp1NIbKvkBDS
- mwipE45i4wY8ry4uupZd4tOy9Dgfo7uOystv7HbUCExwJ/vIoXPB7NCL0t4b+CMFqlcbVkxwEVh
- t2zuuUMjtPOhmkSE84YduUdn8szpcU/aJnzqb0fV4GlTPzAfNrgTuKlgSonDQSSziOSpuhK6rDc
- /cOaF2SOs4pNsgPVWCg==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
+ a=eDiLCjgS2gUGnAqvYTQA:9 a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDE3NSBTYWx0ZWRfX+vwkkkrZj/AK
+ vfXbXfjkKVEaUpi2jnyDJJ+rFpHD6kP5jVmfE2S0+uWd+3mHi7dpDURGYv6xWtb7fsKG+8gY6ME
+ LQFVg6FXGlwLHfb0KifKinve3dH7oxw=
+X-Proofpoint-ORIG-GUID: i6mECGzQuQj2_orDzWqFlETHGFpHdvEG
+X-Proofpoint-GUID: i6mECGzQuQj2_orDzWqFlETHGFpHdvEG
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-01_05,2026-09-01_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 priorityscore=1501 spamscore=0 lowpriorityscore=0 impostorscore=0
- adultscore=0 malwarescore=0 suspectscore=0 clxscore=1011 phishscore=0
+ clxscore=1011 spamscore=0 phishscore=0 suspectscore=0 priorityscore=1501
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 bulkscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609010175
 X-Mailman-Approved-At: Wed, 02 Sep 2026 04:20:49 +0000
@@ -179,188 +178,27 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Configure the PMIC PON PBS reset type before deasserting MPM PS_HOLD.
-
-The PON PBS reset sequence requires PS_HOLD_RESET_CTL2 to be cleared,
-the requested reset type to be written to PS_HOLD_SW_CTL, and
-PS_HOLD_RESET_CTL2 to be enabled again before deasserting MPM_PS_HOLD.
+CMD_POWEROFF requires do_poweroff(), normally provided by psci.c,
+but PSCI_RESET is disabled in snagboot mode, causing a link
+failure. Poweroff isn't needed for snagboot recovery, so disable it.
 
 Signed-off-by: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>
 ---
- drivers/sysreset/sysreset_qcom-pshold.c | 137 ++++++++++++++++++++++--
- 1 file changed, 130 insertions(+), 7 deletions(-)
+ configs/qcom-snagboot.config | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/sysreset/sysreset_qcom-pshold.c b/drivers/sysreset/sysreset_qcom-pshold.c
-index 45290478536..de7c0b388aa 100644
---- a/drivers/sysreset/sysreset_qcom-pshold.c
-+++ b/drivers/sysreset/sysreset_qcom-pshold.c
-@@ -13,15 +13,94 @@
- #include <sysreset.h>
- #include <asm/io.h>
- #include <linux/delay.h>
-+#include <power/pmic.h>
-+
-+#define PON_PBS_RESET_TYPE_WARM		0x01
-+#define PON_PBS_RESET_TYPE_HARD		0x07
-+
-+/*
-+ * Reset State of PON_PBS_PS_HOLD_RESET_CTL2 register
-+ */
-+#define PON_PBS_PS_HOLD_RESET_CTL2_S2_RESET_EN_BMSK	0x80
+diff --git a/configs/qcom-snagboot.config b/configs/qcom-snagboot.config
+index d19ad453029..579bcc7732d 100644
+--- a/configs/qcom-snagboot.config
++++ b/configs/qcom-snagboot.config
+@@ -8,6 +8,7 @@ CONFIG_QCOM_SNAGBOOT_MODE=y
+ # CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR is not set
+ # CONFIG_IOMMU is not set
+ # CONFIG_REBOOT_MODE_ENV_UPDATE is not set
++# CONFIG_CMD_POWEROFF is not set
  
- struct qcom_pshold_priv {
- 	phys_addr_t base;
-+
-+	struct udevice *pmic;
-+	u32 pbs_base;
-+	bool have_pon;
-+
-+	u32 pon_pbs_pshold_sw_ctl_offset;
-+	u32 pon_pbs_pshold_reset_ctl2_offset;
- };
- 
-+static int qcom_pshold_pon_cfg(struct qcom_pshold_priv *priv, u8 reset_type)
-+{
-+	int ret;
-+
-+	ret = pmic_reg_write(priv->pmic,
-+			     priv->pbs_base +
-+			     priv->pon_pbs_pshold_reset_ctl2_offset,
-+			     0x00);
-+	if (ret)
-+		return ret;
-+
-+	udelay(100);
-+
-+	ret = pmic_reg_write(priv->pmic,
-+			     priv->pbs_base + priv->pon_pbs_pshold_sw_ctl_offset,
-+			     reset_type);
-+	if (ret)
-+		return ret;
-+
-+	udelay(300);
-+
-+	ret = pmic_reg_write(priv->pmic,
-+			     priv->pbs_base + priv->pon_pbs_pshold_reset_ctl2_offset,
-+			     PON_PBS_PS_HOLD_RESET_CTL2_S2_RESET_EN_BMSK);
-+	if (ret)
-+		return ret;
-+
-+	udelay(100);
-+
-+	return 0;
-+}
-+
-+static int qcom_pshold_read_pon_offset(struct udevice *dev, struct qcom_pshold_priv *priv)
-+{
-+	int ret;
-+
-+	ret = dev_read_u32(dev,
-+			   "qcom,pbs-pshold-sw-ctl",
-+			   &priv->pon_pbs_pshold_sw_ctl_offset);
-+	if (ret)
-+		return ret;
-+
-+	ret = dev_read_u32(dev,
-+			   "qcom,pbs-pshold-reset-ctl2",
-+			   &priv->pon_pbs_pshold_reset_ctl2_offset);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
- static int qcom_pshold_request(struct udevice *dev, enum sysreset_t type)
- {
- 	struct qcom_pshold_priv *priv = dev_get_priv(dev);
- 
-+	if (priv->have_pon) {
-+		u8 reset_type = (type == SYSRESET_WARM) ?
-+				 PON_PBS_RESET_TYPE_WARM :
-+				 PON_PBS_RESET_TYPE_HARD;
-+		int ret;
-+
-+		ret = qcom_pshold_pon_cfg(priv, reset_type);
-+		if (ret)
-+			debug("%s: failed to configure PON reset type: %d\n",
-+			      dev->name, ret);
-+	}
-+
- 	writel(0, priv->base);
- 	mdelay(10000);
- 
-@@ -35,9 +114,53 @@ static struct sysreset_ops qcom_pshold_ops = {
- static int qcom_pshold_probe(struct udevice *dev)
- {
- 	struct qcom_pshold_priv *priv = dev_get_priv(dev);
-+	struct ofnode_phandle_args args;
-+	ofnode pmic_node;
-+	int index, ret;
-+
-+	priv->have_pon = false;
- 
- 	priv->base = dev_read_addr(dev);
--	return priv->base == FDT_ADDR_T_NONE ? -EINVAL : 0;
-+	if (priv->base == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+
-+	ret = dev_read_phandle_with_args(dev, "qcom,pon", NULL, 0, 0, &args);
-+	if (ret)
-+		return 0;
-+
-+	index = ofnode_stringlist_search(args.node, "reg-names", "pbs");
-+	if (index < 0) {
-+		debug("%s: referenced PON node has no 'pbs' reg\n", dev->name);
-+		return 0;
-+	}
-+
-+	ret = ofnode_read_u32_index(args.node, "reg", index, &priv->pbs_base);
-+	if (ret) {
-+		debug("%s: failed to read PON 'pbs' reg: %d\n", dev->name, ret);
-+		return 0;
-+	}
-+
-+	ret = qcom_pshold_read_pon_offset(dev, priv);
-+	if (ret) {
-+		debug("%s: failed to read PON offset configs: %d\n", dev->name, ret);
-+		return 0;
-+	}
-+
-+	pmic_node = ofnode_get_parent(args.node);
-+	if (!ofnode_valid(pmic_node)) {
-+		debug("%s: failed to get PON's parent PMIC node\n", dev->name);
-+		return 0;
-+	}
-+
-+	ret = uclass_get_device_by_ofnode(UCLASS_PMIC, pmic_node, &priv->pmic);
-+	if (ret) {
-+		debug("%s: failed to get PMIC device: %d\n", dev->name, ret);
-+		return 0;
-+	}
-+
-+	priv->have_pon = true;
-+
-+	return 0;
- }
- 
- static const struct udevice_id qcom_pshold_ids[] = {
-@@ -46,10 +169,10 @@ static const struct udevice_id qcom_pshold_ids[] = {
- };
- 
- U_BOOT_DRIVER(qcom_pshold) = {
--	.name 		= "qcom_pshold",
--	.id 		= UCLASS_SYSRESET,
--	.of_match 	= qcom_pshold_ids,
--	.probe 		= qcom_pshold_probe,
--	.priv_auto	= sizeof(struct qcom_pshold_priv),
--	.ops 		= &qcom_pshold_ops,
-+	.name       = "qcom_pshold",
-+	.id         = UCLASS_SYSRESET,
-+	.of_match   = qcom_pshold_ids,
-+	.probe      = qcom_pshold_probe,
-+	.priv_auto  = sizeof(struct qcom_pshold_priv),
-+	.ops        = &qcom_pshold_ops,
- };
+ # Use default environment instead of loading from storage
+ # This ensures snagboot mode works even with corrupted environment
 -- 
 2.55.0
 
