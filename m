@@ -1,113 +1,113 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4399EC624D6
-	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 17:09:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F6A4C624D5
+	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 17:09:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id EA258407A1;
-	Tue,  1 Sep 2026 17:09:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E0F7C80E49;
+	Tue,  1 Sep 2026 17:09:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4QUYefV3Yuly; Tue,  1 Sep 2026 17:09:51 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id peWvbZp-Mic2; Tue,  1 Sep 2026 17:09:49 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788282591;
-	bh=GQW0pwqeN1QS31ge4KITeUwSENzJgroI67hI1Ww1hbY=;
+	d=lists.u-boot-project.org; s=default; t=1788282589;
+	bh=n6IQVvs+//tzixIbtAg9AR6B13IDlVn256/OLCMEA9A=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=00Rw1Ue5TwzuMArBiFnan6YQ5Bgc/uBoIQWZNWV+VVGY+enYl0wUKtch8KrHZsKQI
-	 vGLGpmISNjIfOhTF94onxfzXf2Z5Cuc2vu30uIRqYITgDzjlL64GtJUnTFNQpPnGdA
-	 0kMmulqSw/nxO1lBUHxH61vOGDkfwsXOOvysW1cLMUS8W70PWEVM4maTmXoBc05yig
-	 abdAaWvIl4RRByVjYAD2KbArCUGLa+qQH3T5vLmHeZD9mwcO3iGiR3MuPg4VHJY3AU
-	 2kY7lt7xp9hHhpQ8UNtXyEvmeKcUSfbIhZfwbV9PTWZrtu5gLbobC78u/aHiMVxfjG
-	 W3shbYYI0x5Gw==
+	b=YVNaw4+m5gSQE7ocoh9tD3J5z13zaGvQmC5IvrVstMRaVRCiPAXZ0s4B2VrCdzM9G
+	 kZ7tRtRYDS8qjlwqhRrJaZshfWCcj7Ver2z+1HW0xOnCMXwFrI8bve1skjXCgotHs0
+	 ngSgY4x8nbJDnidqWSsiTnun1304PlWq2yPQEaIJkFpTuWnaJAhQMK7pkAccZ4wR13
+	 /RugNuMJ+8h8ufT0n/6VmfbXSbOgugdYrj3686V+RWUjpYJ49354hUPuGZQYh9P3Iu
+	 EjHujsvQKD0KykZP6qmBOdQ/fvi98uNkooD8mUI1qeMwMqCtLmilbVjbX8+83abHBK
+	 xqVTX1mpW04jg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D555E40791;
-	Tue,  1 Sep 2026 17:09:50 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 2AEC72FE
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:46 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 16E6680DE0;
+	Tue,  1 Sep 2026 17:09:49 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id BB75C2FD
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 11765606F6
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:46 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id AD9D040743
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kwSCKW0SEGrD for <u-boot@lists.u-boot-project.org>;
- Tue,  1 Sep 2026 17:09:45 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Pb9rwbDJCF1F for <u-boot@lists.u-boot-project.org>;
+ Tue,  1 Sep 2026 17:09:44 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::331; helo=mail-ot1-x331.google.com;
+ client-ip=2607:f8b0:4864:20::330; helo=mail-ot1-x330.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=IdktXeQy
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1FA4160633
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:44 +0000 (UTC)
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7f4f3683fbcso91133a34.0
- for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 10:09:44 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=Fo+Lx8lk
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 631A640731
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 17:09:43 +0000 (UTC)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7f4df360cc9so58911a34.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 10:09:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788282584; x=1788887384;
+ d=gmail.com; s=20251104; t=1788282583; x=1788887383;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=GQW0pwqeN1QS31ge4KITeUwSENzJgroI67hI1Ww1hbY=;
- b=IdktXeQyu9qb3dietw1H+g1Y0uUQXykftACrksWtvBJlrAhjYyBl48ELKSZ0Tpb0vf
- VgvF4Ow672ixboqwDnIWPtJql0ZLXiz4s/cDJywY4ZHaoWDtWznXbAKSub6+r0yS/10w
- IgsPxnujQUrrFiJrAsBTwsDlPkz4mnSKOhtTsvEEO0TeRJV/Oa6qIdIt3OJAHheCvvkl
- X99t8x8O07Dh5u1L2YseBex28KJYcj1dKio91FZsgujBr7AFfJtPS9zVWCUpL/511vxT
- 5SAKGZtC63Vspw8IH5eMDfZmQXu2X1lGp4AHreQ2F7j+KWKIGY4VvPDdYz09rdIURMJT
- 2Iow==
+ bh=n6IQVvs+//tzixIbtAg9AR6B13IDlVn256/OLCMEA9A=;
+ b=Fo+Lx8lk32rAIrxpDEiVxw0SawVyW2jr37dtHCCJ3Hg14vtxg5q6he4bXawW5sGXi3
+ VCOzk6BIbEg1EyRxg6HxqwVK/aW+lbtdCYiuStKZny/p10zym3PyUnQnQ1as3zDQS/t8
+ Lv8eqVbKd3HieAMx7SKL18RlaKZIEwh+b6h5vsFnnrX+lZWPTbl1RvdQ3WqlTynlC04h
+ 916UJTVbdYhRL/D8PKVBVVswGLpkEuNsP54LHY6gLQsLuiOMH8+pNGRzx2Wqt8CGK/+W
+ 271c4AyDVtDShdPWzmg0FQaxQ7v3wZN8/rZ8ZoLhDppKKqtjzb0Yn5f/6ACegOMB33Bm
+ dDFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788282584; x=1788887384;
+ d=1e100.net; s=20251104; t=1788282583; x=1788887383;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=GQW0pwqeN1QS31ge4KITeUwSENzJgroI67hI1Ww1hbY=;
- b=f0KEqHvoi2zSR7RpKbz7fIYNi1Y59DDXo5931ViqxVu0BFlsBDKfI4uxvNc8dPJAlH
- 4Ln9igihhEJ3F+pd2wlNRoF4LmEKgSnAPe4WEo4yWWe+fwoRva89yLodmqo8sm0YKV3N
- VcU7G1IJ9+nkg4H0WQmvf6mHB1Nyy/A1HXIPuqjXrLuBOQh0j0sgqVCSH5LgPVoVPWDH
- 9WhajJpLP9XqkS9HUvs0D6lrcL2f2KPBt12M0lyy9etr+/CVo4FkcKwsFvMZVxaYUvHR
- wbBqGAsh5hZYjmXFW/0md4ZrFjPTAAYPNBbAWECgeV0ipIWincjzclO7297OypfsBqCC
- 8Mqw==
-X-Gm-Message-State: AFuF++lZ6wrsctvwXWF2AyIyTKg6ROo5YvMB6JW6RYh06UXBC4LHlKLC
- kRk9U0DqW/uGfo0Ue0n89QFPd5CbM2P5gU87RXOUFPCPNFvSwwN8EE9i
-X-Gm-Gg: AR+sD11flXWWn08dBfZ+Z+IV3GhpfuuVH/wiWn2ckXCJR5pQkmzBb/PHAE7fkKWkaI8
- p6FDZxW1qfx83IzSvqMRqKT0yq62lpVvSPf4gkY4XIIPIywjZIUbacUqH1TZAiFzFpZbhlHrRBL
- hAisu7eY8ND0fXaOuC+AIdbZV5cafQIfJRt+4St1zXXjnFaje1RpkL0pq4NlkoxqXDN41f0znp/
- /2fkzpy3wXaqfOh1IlG0Wfw4eqh/HVtle6Ncccu1DOHyD5FiGvpkDx4cuBLcHbzbNiT+MXR1HxI
- RA+r9+QXEmOgp7+JTP+/2SGMKnB3gue77JQVxStJs0Q+SrAPQoZ+SprSeUQ9CmlQW2BMV6Zdr1V
- b5lWA94Fo2Uop4wr9Jqv7VP5P9s7ZZRlnXZ3btl50S3eGrDrJ9KgcNJ1eEDJjdMzOviPCEIuix6
- +0ebwtUOC+6SK8lLYpjAOUkFIgABGiwmfomxW9fj9uR1I3oR3ZMUA2UZA1H6HlFnC5QIe0g5ZKM
- QwG9dEzD4Ag3DRn2QFDG8cacK0MkBQE7H2eY8pHXJAK7xiEEBQlIrNphSHPH92jHE32+xil8MAb
- +z8dR1EwAUdFY5onj001lufK/1NpOSDlTc/I8eeIuxaKdh3WMi2H6dylvVoeSs+7yMbC/72jc35
- Wi7KjpUFc15QY/Am1aNIX
-X-Received: by 2002:a05:6830:84d4:20b0:7e9:f6b7:7752 with SMTP id
- 46e09a7af769-7f68f7ad81cmr3868021a34.12.1788282583534; 
- Tue, 01 Sep 2026 10:09:43 -0700 (PDT)
+ bh=n6IQVvs+//tzixIbtAg9AR6B13IDlVn256/OLCMEA9A=;
+ b=SPINKVatwOSfxpfBYgU95XE1lRJdmaB+nnlyTTjxkyMcvtjv4UE+FKp2XKmFPjywtW
+ +vAhIIHIIRooGZNxHVrHo+VEuQa/1x4ccgEk+/j0kiQd18/Fslu3m+ez6ZpcCgsSeSE9
+ Yysk88vq7ZecyJ0lLEl9L9UA2kplflp1AEDijS+KAInPOD8LqAH2U5cFD9eQJXOOz3jk
+ 4lXEkf1VIQEVLWRgFYXL8V8jX0FfXl/yABqVIdpbuDcxpOq7F2MWP8Z5wO1LSnfsPqNm
+ GVpxs50YN0Iw7ujueb7CHeOePAAxJQ9XfJ/QX/Ii/U7LCwN52Wjay8W1IyCd947JQtgJ
+ jI/w==
+X-Gm-Message-State: AFuF++nWdQkENf60SnCWm75zuafsmq9SO2a83u1KufnR2ljUkLOIMUBn
+ RiIvYGulaRdP6sBE4rvN1A+ZgJcA6bxmtpHOZdj0AFNc2RgJWHmvXZkb
+X-Gm-Gg: AR+sD112bMqfJeEX4WG4nce1DVwwMuZCC6Y+7vxJh/lMGqB0QFdJw5dR4ROL1kcZAiL
+ iq33IXDZDJ3X8JCkOATdUelETd0b4vA+4HRzjxuIXPX7cLOMxb+jil61i28swk6/ZW1YRcigpQ/
+ rEoPtvxjlfmZ6MIFtX2pfAdBgITac8Y0kghs1/asCW2VEoF0qC5Qhje3x8tR3dZV3omA8B3zR+F
+ MB19KCjra8P6pl87M8DCN+E+K9GUjr7stpvimQBnsOh/dGGqVX2+8IhzkG3X3ulQ6bsJrlabyLp
+ cDTRNw5v1JZCx8CIAzXSQSlvsROwCfwQHcc25rECMsJXjb+Ao4/H+OYYxpZlMOH3Lx3zu9+4q9x
+ 5QEBTKWuWDK5Ijxf6YkAz+liZm6ljhfvA00vROxBRmX7jGhdUw/OPDKPh2SVHai/ZeSfrBEEiRi
+ 6/H6grZQ7wV5Z1QkB0k9pvRggsm9I/LHM1IhalVFN7jhxt9UMuAdzmbV4JNpste1YObIWeVFUnh
+ rZ7mnndBLjzMn4FTeh8bDsgNve6qleYtfsgoA1TP3WQep2a6VY1ODFN+MAWz1XB1WQj6sd3wbTZ
+ c0s2qidA3jEjb9DGac4/5riPu5GXAfGIR740/qA7TLxAFpHIOvdm76aDUMCg8PJDBvBkvDu26en
+ 62iCky0Oe3osioTi3XyA=
+X-Received: by 2002:a05:6830:82ec:b0:7e9:e5df:5ee2 with SMTP id
+ 46e09a7af769-7f68f6d3fa9mr5892781a34.6.1788282581213; 
+ Tue, 01 Sep 2026 10:09:41 -0700 (PDT)
 Received: from [127.0.1.1] (184-96-151-165.hlrn.qwest.net. [184.96.151.165])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f4fa99d927sm10892218a34.19.2026.09.01.10.09.42
+ 46e09a7af769-7f4fa99d927sm10892218a34.19.2026.09.01.10.09.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Sep 2026 10:09:42 -0700 (PDT)
+ Tue, 01 Sep 2026 10:09:40 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Tue, 01 Sep 2026 11:08:58 -0600
-Subject: [PATCH v2 04/10] net: netconsole: cache environment settings
+Date: Tue, 01 Sep 2026 11:08:56 -0600
+Subject: [PATCH v2 02/10] net: split netconsole transport from stdio frontend
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260901-submit-lwip-runtime-netconsole-v1-v2-4-3e3d95627cf9@gmail.com>
+Message-Id: <20260901-submit-lwip-runtime-netconsole-v1-v2-2-3e3d95627cf9@gmail.com>
 References: <20260901-submit-lwip-runtime-netconsole-v1-v2-0-3e3d95627cf9@gmail.com>
 In-Reply-To: <20260901-submit-lwip-runtime-netconsole-v1-v2-0-3e3d95627cf9@gmail.com>
 To: u-boot@lists.u-boot-project.org, 
@@ -137,103 +137,539 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-nc_refresh_settings_from_env() compares the current environment ID
-with a cached value, but never updates the cache. It consequently
-reparses the environment for every packet.
+Netconsole's environment handling, input buffer and stdio registration
+do not depend on a particular network stack. Packet transmission and
+polling do.
 
-Build a complete settings value from the defaults whenever the
-environment changes, publish it after successful parsing and record the
-new ID. Keeping the defaults with the cached settings also avoids
-resetting configured ports when another stdio stream starts.
+Move the existing net_loop and raw-packet code into a legacy transport
+file. This leaves legacy behavior unchanged and provides a transport
+interface for other network stacks.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- drivers/net/netconsole.c | 34 +++++++++++++++++++++-------------
- 1 file changed, 21 insertions(+), 13 deletions(-)
+ drivers/net/Makefile            |   5 +-
+ drivers/net/netconsole-legacy.c | 156 ++++++++++++++++++++++++++++++++++
+ drivers/net/netconsole.c        | 184 ++++++++--------------------------------
+ drivers/net/netconsole.h        |  29 +++++++
+ 4 files changed, 226 insertions(+), 148 deletions(-)
 
+diff --git a/drivers/net/Makefile b/drivers/net/Makefile
+index 4c1f4094ab2..32bf86e14ae 100644
+--- a/drivers/net/Makefile
++++ b/drivers/net/Makefile
+@@ -82,7 +82,10 @@ obj-$(CONFIG_MVGBE) += mvgbe.o
+ obj-$(CONFIG_MVMDIO) += mvmdio.o
+ obj-$(CONFIG_MVNETA) += mvneta.o
+ obj-$(CONFIG_MVPP2) += mvpp2.o
+-obj-$(CONFIG_NETCONSOLE) += netconsole.o
++ifdef CONFIG_NETCONSOLE
++obj-y += netconsole.o
++obj-$(CONFIG_NET_LEGACY) += netconsole-legacy.o
++endif
+ obj-$(CONFIG_NET_NPCM750) += npcm750_eth.o
+ obj-$(CONFIG_NET_OCTEON) += octeon/
+ obj-$(CONFIG_NET_OCTEONTX) += octeontx/
+diff --git a/drivers/net/netconsole-legacy.c b/drivers/net/netconsole-legacy.c
+new file mode 100644
+index 00000000000..c3c69a94a21
+--- /dev/null
++++ b/drivers/net/netconsole-legacy.c
+@@ -0,0 +1,156 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2004
++ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
++ */
++
++#include <log.h>
++#include <net.h>
++
++#include "netconsole.h"
++
++static int net_timeout;
++static uchar nc_ether[ARP_HLEN];
++static const char *output_packet;
++static int output_packet_len;
++
++/*
++ * Start with a default last protocol.
++ * We are only interested in NETCONS or not.
++ */
++enum proto_t net_loop_last_protocol = BOOTP;
++
++static void nc_wait_arp_handler(uchar *pkt, unsigned int dest,
++				struct in_addr sip, unsigned int src,
++				unsigned int len)
++{
++	net_set_state(NETLOOP_SUCCESS);
++}
++
++static void nc_handler(uchar *pkt, unsigned int dest, struct in_addr sip,
++		       unsigned int src, unsigned int len)
++{
++	if (nc_has_input())
++		net_set_state(NETLOOP_SUCCESS);
++}
++
++static void nc_timeout_handler(void)
++{
++	net_set_state(NETLOOP_SUCCESS);
++}
++
++static int nc_legacy_refresh_settings(void)
++{
++	int ret;
++
++	ret = nc_refresh_settings_from_env();
++	if (ret <= 0)
++		return ret;
++
++	if (nc_is_broadcast(nc_settings.ip))
++		memset(nc_ether, 0xff, sizeof(nc_ether));
++	else
++		memset(nc_ether, 0, sizeof(nc_ether));
++
++	return 0;
++}
++
++/**
++ * nc_start() - Configure the legacy network loop for netconsole
++ *
++ * Called from net_loop() before processing each packet.
++ */
++void nc_start(void)
++{
++	nc_legacy_refresh_settings();
++	if (!output_packet_len || memcmp(nc_ether, net_null_ethaddr, ARP_HLEN)) {
++		net_set_udp_handler(nc_handler);
++		net_set_timeout_handler(net_timeout, nc_timeout_handler);
++	} else {
++		uchar *pkt;
++
++		net_set_arp_handler(nc_wait_arp_handler);
++		pkt = (uchar *)net_tx_packet + net_eth_hdr_size() +
++			IP_UDP_HDR_SIZE;
++		memcpy(pkt, output_packet, output_packet_len);
++		net_send_udp_packet(nc_ether, nc_settings.ip,
++				    nc_settings.out_port, nc_settings.in_port,
++				    output_packet_len);
++	}
++}
++
++void nc_transport_send(const char *buf, int len)
++{
++	struct udevice *eth;
++	int inited = 0;
++	uchar *pkt;
++
++	debug_cond(DEBUG_DEV_PKT, "output: \"%*.*s\"\n", len, len, buf);
++
++	eth = eth_get_dev();
++	if (!eth)
++		return;
++
++	if (!memcmp(nc_ether, net_null_ethaddr, ARP_HLEN)) {
++		if (eth_is_active(eth))
++			return;
++		output_packet = buf;
++		output_packet_len = len;
++		nc_set_input_recursion(true);
++		net_loop(NETCONS);
++		nc_set_input_recursion(false);
++		output_packet_len = 0;
++		return;
++	}
++
++	if (!eth_is_active(eth)) {
++		if (eth_is_on_demand_init()) {
++			if (eth_init() < 0)
++				return;
++			eth_set_last_protocol(NETCONS);
++		} else {
++			eth_init_state_only();
++		}
++
++		inited = 1;
++	}
++
++	pkt = (uchar *)net_tx_packet + net_eth_hdr_size() + IP_UDP_HDR_SIZE;
++	memcpy(pkt, buf, len);
++	net_send_udp_packet(nc_ether, nc_settings.ip, nc_settings.out_port,
++			    nc_settings.in_port, len);
++
++	if (inited) {
++		if (eth_is_on_demand_init())
++			eth_halt();
++		else
++			eth_halt_state_only();
++	}
++}
++
++void nc_transport_poll(bool block)
++{
++	struct udevice *eth = eth_get_dev();
++
++	if (eth_is_active(eth))
++		return;
++
++	net_timeout = block ? 0 : 1;
++	net_loop(NETCONS);
++}
++
++int nc_transport_start(void)
++{
++	int ret;
++
++	ret = nc_legacy_refresh_settings();
++	if (ret)
++		return ret;
++
++	return net_init();
++}
++
++int nc_transport_stop(void)
++{
++	return 0;
++}
 diff --git a/drivers/net/netconsole.c b/drivers/net/netconsole.c
-index 305a6cf12c6..63b92e12bf4 100644
+index c2ce4a80d12..305a6cf12c6 100644
 --- a/drivers/net/netconsole.c
 +++ b/drivers/net/netconsole.c
-@@ -16,12 +16,18 @@
+@@ -4,13 +4,14 @@
+  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+  */
+ 
+-#include <command.h>
+ #include <env.h>
+ #include <log.h>
+ #include <stdio_dev.h>
+ #include <net.h>
+ #include <vsprintf.h>
+ 
++#include "netconsole.h"
++
+ #ifndef CFG_NETCONSOLE_BUFFER_SIZE
  #define CFG_NETCONSOLE_BUFFER_SIZE 512
  #endif
- 
-+#define NC_DEFAULT_PORT 6666
-+
- static char input_buffer[CFG_NETCONSOLE_BUFFER_SIZE];
- static int input_size; /* char count in input buffer */
+@@ -20,39 +21,9 @@ static int input_size; /* char count in input buffer */
  static int input_offset; /* offset to valid chars in input buffer */
  static int input_recursion;
  static int output_recursion;
--struct nc_settings nc_settings;
-+struct nc_settings nc_settings = {
-+	.ip.s_addr = ~0,
-+	.out_port = NC_DEFAULT_PORT,
-+	.in_port = NC_DEFAULT_PORT,
-+};
+-static int net_timeout;
+-static uchar nc_ether[6]; /* server enet address */
+-static struct in_addr nc_ip; /* server ip */
+-static short nc_out_port; /* target output port */
+-static short nc_in_port; /* source input port */
+-static const char *output_packet; /* used by first send udp */
+-static int output_packet_len;
+-/*
+- * Start with a default last protocol.
+- * We are only interested in NETCONS or not.
+- */
+-enum proto_t net_loop_last_protocol = BOOTP;
+-
+-static void nc_wait_arp_handler(uchar *pkt, unsigned dest,
+-				 struct in_addr sip, unsigned src,
+-				 unsigned len)
+-{
+-	net_set_state(NETLOOP_SUCCESS); /* got arp reply - quit net loop */
+-}
++struct nc_settings nc_settings;
  
- bool nc_is_broadcast(struct in_addr ip)
+-static void nc_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+-		       unsigned src, unsigned len)
+-{
+-	if (input_size)
+-		net_set_state(NETLOOP_SUCCESS); /* got input - quit net loop */
+-}
+-
+-static void nc_timeout_handler(void)
+-{
+-	net_set_state(NETLOOP_SUCCESS);
+-}
+-
+-static int is_broadcast(struct in_addr ip)
++bool nc_is_broadcast(struct in_addr ip)
  {
-@@ -46,8 +52,13 @@ bool nc_is_broadcast(struct in_addr ip)
+ 	static struct in_addr netmask;
+ 	static struct in_addr our_ip;
+@@ -73,7 +44,7 @@ static int is_broadcast(struct in_addr ip)
+ 		 (netmask.s_addr | ip.s_addr) == ~0)); /* bcast to our net */
+ }
  
- int nc_refresh_settings_from_env(void)
+-static int refresh_settings_from_env(void)
++int nc_refresh_settings_from_env(void)
  {
-+	struct nc_settings settings = {
-+		.ip.s_addr = ~0,
-+		.out_port = NC_DEFAULT_PORT,
-+		.in_port = NC_DEFAULT_PORT,
-+	};
  	const char *p;
--	static int env_changed_id;
-+	static int env_changed_id = -1;
- 	int env_id = env_get_id();
- 
+ 	static int env_changed_id;
+@@ -82,56 +53,41 @@ static int refresh_settings_from_env(void)
  	/* update only when the environment has changed */
-@@ -55,25 +66,25 @@ int nc_refresh_settings_from_env(void)
+ 	if (env_changed_id != env_id) {
  		char *tmp = env_get("ncip");
- 
++
  		if (tmp) {
--			nc_settings.ip = string_to_ip(tmp);
--			if (!nc_settings.ip.s_addr)
-+			settings.ip = string_to_ip(tmp);
-+			if (!settings.ip.s_addr)
+-			nc_ip = string_to_ip(tmp);
+-			if (!nc_ip.s_addr)
++			nc_settings.ip = string_to_ip(tmp);
++			if (!nc_settings.ip.s_addr)
  				return -1;	/* ncip is 0.0.0.0 */
  			p = strchr(tmp, ':');
  			if (p != NULL) {
--				nc_settings.out_port = dectoul(p + 1, NULL);
--				nc_settings.in_port = nc_settings.out_port;
-+				settings.out_port = dectoul(p + 1, NULL);
-+				settings.in_port = settings.out_port;
+-				nc_out_port = dectoul(p + 1, NULL);
+-				nc_in_port = nc_out_port;
++				nc_settings.out_port = dectoul(p + 1, NULL);
++				nc_settings.in_port = nc_settings.out_port;
  			}
--		} else {
--			nc_settings.ip.s_addr = ~0;
+ 		} else {
+-			nc_ip.s_addr = ~0; /* ncip is not set, so broadcast */
++			nc_settings.ip.s_addr = ~0;
  		}
  
  		p = env_get("ncoutport");
  		if (p != NULL)
--			nc_settings.out_port = dectoul(p, NULL);
-+			settings.out_port = dectoul(p, NULL);
+-			nc_out_port = dectoul(p, NULL);
++			nc_settings.out_port = dectoul(p, NULL);
  		p = env_get("ncinport");
  		if (p != NULL)
--			nc_settings.in_port = dectoul(p, NULL);
-+			settings.in_port = dectoul(p, NULL);
- 
-+		nc_settings = settings;
-+		env_changed_id = env_id;
- 		return 1;
- 	}
- 
-@@ -130,9 +141,6 @@ int nc_input_packet(uchar *pkt, struct in_addr src_ip, unsigned dest_port,
- 
- static int nc_stdio_start(struct stdio_dev *dev)
- {
--	nc_settings.out_port = 6666;
--	nc_settings.in_port = nc_settings.out_port;
+-			nc_in_port = dectoul(p, NULL);
 -
- 	return nc_transport_start();
+-		if (is_broadcast(nc_ip))
+-			/* broadcast MAC address */
+-			memset(nc_ether, 0xff, sizeof(nc_ether));
+-		else
+-			/* force arp request */
+-			memset(nc_ether, 0, sizeof(nc_ether));
++			nc_settings.in_port = dectoul(p, NULL);
++
++		return 1;
+ 	}
++
+ 	return 0;
  }
  
+-/**
+- * Called from net_loop in net/net.c before each packet
+- */
+-void nc_start(void)
++bool nc_has_input(void)
+ {
+-	refresh_settings_from_env();
+-	if (!output_packet_len || memcmp(nc_ether, net_null_ethaddr, 6)) {
+-		/* going to check for input packet */
+-		net_set_udp_handler(nc_handler);
+-		net_set_timeout_handler(net_timeout, nc_timeout_handler);
+-	} else {
+-		/* send arp request */
+-		uchar *pkt;
+-		net_set_arp_handler(nc_wait_arp_handler);
+-		pkt = (uchar *)net_tx_packet + net_eth_hdr_size() +
+-			IP_UDP_HDR_SIZE;
+-		memcpy(pkt, output_packet, output_packet_len);
+-		net_send_udp_packet(nc_ether, nc_ip, nc_out_port, nc_in_port,
+-				    output_packet_len);
+-	}
++	return input_size != 0;
++}
++
++void nc_set_input_recursion(bool enable)
++{
++	input_recursion = enable;
+ }
+ 
+ int nc_input_packet(uchar *pkt, struct in_addr src_ip, unsigned dest_port,
+@@ -139,10 +95,11 @@ int nc_input_packet(uchar *pkt, struct in_addr src_ip, unsigned dest_port,
+ {
+ 	int end, chunk;
+ 
+-	if (dest_port != nc_in_port || !len)
++	if (dest_port != nc_settings.in_port || !len)
+ 		return 0; /* not for us */
+ 
+-	if (src_ip.s_addr != nc_ip.s_addr && !is_broadcast(nc_ip))
++	if (src_ip.s_addr != nc_settings.ip.s_addr &&
++	    !nc_is_broadcast(nc_settings.ip))
+ 		return 0; /* not from our client */
+ 
+ 	debug_cond(DEBUG_DEV_PKT, "input: \"%*.*s\"\n", len, len, pkt);
+@@ -171,75 +128,17 @@ int nc_input_packet(uchar *pkt, struct in_addr src_ip, unsigned dest_port,
+ 	return 1;
+ }
+ 
+-static void nc_send_packet(const char *buf, int len)
++static int nc_stdio_start(struct stdio_dev *dev)
+ {
+-	struct udevice *eth;
+-	int inited = 0;
+-	uchar *pkt;
+-	uchar *ether;
+-	struct in_addr ip;
+-
+-	debug_cond(DEBUG_DEV_PKT, "output: \"%*.*s\"\n", len, len, buf);
+-
+-	eth = eth_get_dev();
+-	if (eth == NULL)
+-		return;
++	nc_settings.out_port = 6666;
++	nc_settings.in_port = nc_settings.out_port;
+ 
+-	if (!memcmp(nc_ether, net_null_ethaddr, 6)) {
+-		if (eth_is_active(eth))
+-			return;	/* inside net loop */
+-		output_packet = buf;
+-		output_packet_len = len;
+-		input_recursion = 1;
+-		net_loop(NETCONS); /* wait for arp reply and send packet */
+-		input_recursion = 0;
+-		output_packet_len = 0;
+-		return;
+-	}
+-
+-	if (!eth_is_active(eth)) {
+-		if (eth_is_on_demand_init()) {
+-			if (eth_init() < 0)
+-				return;
+-			eth_set_last_protocol(NETCONS);
+-		} else {
+-			eth_init_state_only();
+-		}
+-
+-		inited = 1;
+-	}
+-	pkt = (uchar *)net_tx_packet + net_eth_hdr_size() + IP_UDP_HDR_SIZE;
+-	memcpy(pkt, buf, len);
+-	ether = nc_ether;
+-	ip = nc_ip;
+-	net_send_udp_packet(ether, ip, nc_out_port, nc_in_port, len);
+-
+-	if (inited) {
+-		if (eth_is_on_demand_init())
+-			eth_halt();
+-		else
+-			eth_halt_state_only();
+-	}
++	return nc_transport_start();
+ }
+ 
+-static int nc_stdio_start(struct stdio_dev *dev)
++static int nc_stdio_stop(struct stdio_dev *dev)
+ {
+-	int retval;
+-
+-	nc_out_port = 6666; /* default port */
+-	nc_in_port = nc_out_port;
+-
+-	retval = refresh_settings_from_env();
+-	if (retval != 0)
+-		return retval;
+-
+-	/*
+-	 * Initialize the static IP settings and buffer pointers
+-	 * incase we call net_send_udp_packet before net_loop
+-	 */
+-	net_init();
+-
+-	return 0;
++	return nc_transport_stop();
+ }
+ 
+ static void nc_stdio_putc(struct stdio_dev *dev, char c)
+@@ -248,7 +147,7 @@ static void nc_stdio_putc(struct stdio_dev *dev, char c)
+ 		return;
+ 	output_recursion = 1;
+ 
+-	nc_send_packet(&c, 1);
++	nc_transport_send(&c, 1);
+ 
+ 	output_recursion = 0;
+ }
+@@ -264,7 +163,7 @@ static void nc_stdio_puts(struct stdio_dev *dev, const char *s)
+ 	len = strlen(s);
+ 	while (len) {
+ 		int send_len = min(len, (int)sizeof(input_buffer));
+-		nc_send_packet(s, send_len);
++		nc_transport_send(s, send_len);
+ 		len -= send_len;
+ 		s += send_len;
+ 	}
+@@ -278,9 +177,8 @@ static int nc_stdio_getc(struct stdio_dev *dev)
+ 
+ 	input_recursion = 1;
+ 
+-	net_timeout = 0;	/* no timeout */
+ 	while (!input_size)
+-		net_loop(NETCONS);
++		nc_transport_poll(true);
+ 
+ 	input_recursion = 0;
+ 
+@@ -295,23 +193,14 @@ static int nc_stdio_getc(struct stdio_dev *dev)
+ 
+ static int nc_stdio_tstc(struct stdio_dev *dev)
+ {
+-	struct udevice *eth;
+-
+ 	if (input_recursion)
+ 		return 0;
+ 
+ 	if (input_size)
+ 		return 1;
+ 
+-	eth = eth_get_dev();
+-	if (eth_is_active(eth))
+-		return 0;	/* inside net loop */
+-
+ 	input_recursion = 1;
+-
+-	net_timeout = 1;
+-	net_loop(NETCONS);	/* kind of poll */
+-
++	nc_transport_poll(false);
+ 	input_recursion = 0;
+ 
+ 	return input_size != 0;
+@@ -327,6 +216,7 @@ int drv_nc_init(void)
+ 	strcpy(dev.name, "nc");
+ 	dev.flags = DEV_FLAGS_OUTPUT | DEV_FLAGS_INPUT;
+ 	dev.start = nc_stdio_start;
++	dev.stop = nc_stdio_stop;
+ 	dev.putc = nc_stdio_putc;
+ 	dev.puts = nc_stdio_puts;
+ 	dev.getc = nc_stdio_getc;
+diff --git a/drivers/net/netconsole.h b/drivers/net/netconsole.h
+new file mode 100644
+index 00000000000..b2c3ecee6dd
+--- /dev/null
++++ b/drivers/net/netconsole.h
+@@ -0,0 +1,29 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#ifndef __NETCONSOLE_INTERNAL_H
++#define __NETCONSOLE_INTERNAL_H
++
++#include <linux/types.h>
++#include <net-common.h>
++
++struct nc_settings {
++	struct in_addr ip;
++	short out_port;
++	short in_port;
++};
++
++extern struct nc_settings nc_settings;
++
++bool nc_has_input(void);
++bool nc_is_broadcast(struct in_addr ip);
++int nc_refresh_settings_from_env(void);
++int nc_input_packet(uchar *pkt, struct in_addr src_ip, unsigned int dest_port,
++		    unsigned int src_port, unsigned int len);
++void nc_set_input_recursion(bool enable);
++
++int nc_transport_start(void);
++int nc_transport_stop(void);
++void nc_transport_send(const char *buf, int len);
++void nc_transport_poll(bool block);
++
++#endif /* __NETCONSOLE_INTERNAL_H */
 
 -- 
 2.53.0
