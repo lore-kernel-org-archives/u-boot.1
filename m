@@ -4,204 +4,186 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB36C624D4
-	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 13:16:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A85BEC624D4
+	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 13:18:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0067180B89;
-	Tue,  1 Sep 2026 13:16:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5779A80BCF;
+	Tue,  1 Sep 2026 13:18:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uoyfr-y_F-4K; Tue,  1 Sep 2026 13:16:56 +0000 (UTC)
+ id OIugNT7zvLmv; Tue,  1 Sep 2026 13:18:11 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788268616;
-	bh=JFHDA1MJgA+akA/RtyAkZy8LIpBLkMezKK1UlE3+F8Y=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788268691;
+	bh=plf3XvgBrtAMl6lrHApAM/Mhp66CpdBfjysFvSe8I8o=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VoWKM9mt5HGr5Bqg7UjUHZQjFXcx2/FkzL+L0YT0YsLFJuKJAbnyCtIkydfPXkl8/
-	 BLEus6wiQi5ZT+pSTssPXz0QqnCR4nJLNUAyxxMxYnfPjpFG6HmaTzjth62xt8+u94
-	 W4XbHbO0c3NURKsETupQkJWix2Zc2daARdubmsCTuh8PqV91sN18X1vHwbw8pqrZSE
-	 Osu13STGeGEC1kpUSeWbF+gNCVJO+58Xc1g2OvkcjHKCF01y+rSB9muf2fjFTUDkoN
-	 L0MTDQfLiQQBlTQhYrTL0UExuh2a7hacDuoufsG9TblvMa7bfEHeTOB9A6sayYY7Dt
-	 M8A6XedQ/VweQ==
+	b=O/1VXvXuMZs0gs7KUrL+q/K+aoaKr829AV6uCePEv6P5WSWZeYU69tWfMTY02+/8+
+	 8qpQvazYqghlMtCg+fJ2s+ICVcPOHefIQESZz+LJdeJGqE5BmuNt0PcKCu3qtBvlei
+	 q63hubP3OhFEZ1IenZGSnyKpTVtNpT7SNyO8UKEuiK+Je5zPblsiYiXEZ/nvWNwY+c
+	 rbxYVeE3nMF7G3SRshIRUCzwdhNPOeII0Xiz3A57eOLmKeettSx5OgUDgpO8g27oZN
+	 n5omOSPXEvNpBBDPGcPDMdb3YHVb3j3vYagMtkdNUjU2Vgsf2XKb0R8Ic0Fc1ew9DO
+	 0veL2X7iqUcLg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 03A9580A66;
-	Tue,  1 Sep 2026 13:16:56 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id B183E265
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 13:16:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E67B680BE5;
+	Tue,  1 Sep 2026 13:18:10 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id EC2B9105
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 09:42:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A352E80A66
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 13:16:54 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C677C4046C
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 09:42:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4tBHsaq1_Sm3 for <u-boot@lists.u-boot-project.org>;
- Tue,  1 Sep 2026 13:16:53 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id O6lK_rprMlsy for <u-boot@lists.u-boot-project.org>;
+ Tue,  1 Sep 2026 09:42:20 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c110::1;
- helo=bn1pr04cu002.outbound.protection.outlook.com;
- envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=DfQZof1L
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 65CA680A5A
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 13:16:50 +0000 (UTC)
+ client-ip=2a01:111:f403:c201::1;
+ helo=am0pr83cu005.outbound.protection.outlook.com;
+ envelope-from=harsimransingh.tungal@arm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=selector1 header.b=B2ttNUrq; 
+ dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=selector1 header.b=B2ttNUrq
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A11E840448
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 09:42:18 +0000 (UTC)
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=qJZyoo+KzU5F+ypZzs3WTZK1ZjLhpCychABCbH9f2w2f8PDFbMSmuiaYUMbe0kYXMyD6FComzz5dQh1JhnSwwXPun5R8wPvCv163OxlLHDIJdqb+wF9xSBcfnhhqHlgP4KqdyBqkZ+TLZOe2lpXyHZlq3EooLPueSEEeI/scB5neuI8XuYZlakbeAWsUpEUMzspnLPIiMqLN2lnHXiJ/PtQzmRzLwbuWx3fPUehUNi4N3LRoJGiZ2G0fjRYnrbsjc771/jKQOyP1KVIKJ4O+xz7ujnjyU56ix+ZjfsiZ0aUl4iyU1jwk1F2v+fz7UeX1k9cGnG/8epCplTlT3R7CVQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=plf3XvgBrtAMl6lrHApAM/Mhp66CpdBfjysFvSe8I8o=;
+ b=p0LJ8hGcmg6oHXb52758fwF5DJF30FDxHKPnpKPrSGCXkz0N9zqpgH6oR8FhZUWUQj30TA1zp4VcvrhwvJ2Bp+jBdtyd1Gi4AlTgEbEjX6Jt13cZHl2C1ItDfuJHS2VoM4ziU4dKk8QFMvCnM7E10mREb0yZ+tRMHlFXfJCuJw9Z8BVfMkPij4VvWT89llIvhrK3p4QR0zHPBFtE5eeY1kk9iWraUUzMNtWs8q6DSZBInja/UM9Azv9gAzROjCFfImLzI7mhbWuqQm4bVXi2wx9y1ZnyySBf3Wm4rldZziD2r9tDa0uws3y0ZRVCDFci5wBGKSvP883riFDKh/D7OA==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=linaro.org smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=plf3XvgBrtAMl6lrHApAM/Mhp66CpdBfjysFvSe8I8o=;
+ b=B2ttNUrqs9eV8yt/Odp309bflbBNLZlGGYQzkseNWOgYSub8MtQwtuzLkRSGJv7SHl4wPj6ZokXxbehjtSFXLgGQbvTPMTO1TeuTWmeyrbzORm+qO0eg8ALJQUqSqM3sxYgTjhnVlt61Bp7UHOYcua6Mdprrrvb68yX1U2JxXR8=
+Received: from PAZP264CA0217.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:237::26)
+ by AM8PR08MB5617.eurprd08.prod.outlook.com (2603:10a6:20b:1dc::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.10; Tue, 1 Sep
+ 2026 09:42:11 +0000
+Received: from MI3PEPF00008558.eurprd05.prod.outlook.com
+ (2603:10a6:102:237:cafe::7f) by PAZP264CA0217.outlook.office365.com
+ (2603:10a6:102:237::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.13 via Frontend Transport; Tue, 1
+ Sep 2026 09:42:11 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ MI3PEPF00008558.mail.protection.outlook.com (10.167.240.20) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.8
+ via Frontend Transport; Tue, 1 Sep 2026 09:42:11 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=B4tG5ZLe7MNBX/DCEqRCKe+K7ntiY2ggajCXwdFSf6EuIqR0rBOs0uJqk+w+ztL//JEnB7HMN1o33QM6QCPcu3ltn81xHyoeweBVmuJKAI6YOFM8mMDZ3vNquf8xJAUBFIn8niRvRwYz9cLLHoCPNz/dz/k2on+7ta3TD7ZtBNUDL3hTLgKbPQjam1mGJK5cdaV11phPrvhQe4QKTjqMZj5y3CwpYx3X86/+DDxmHKaKQwHBp8LgrenbsuBJQ8k31YmDfIk4DxfIqXKvEDqq9tKSznQ1MnNLe02gmR5XcpgPzKg8FRvkh4iCbaorJ7FKxneO933b0Qfs1fRp5b/stA==
+ b=MZ+OZU6xSCkjGJ2iWhfmaV9RjBtsJQokDQLcg0lz48JscKhmNj0OpvVQFolraK1hOuRXe12Yuz1mdr/PkVz9firUFQi1xi1vnNlA5w9RGDQt+6P1eVX7kt+XDgXgiuqVqN8iQQFzhXyMPtZiI+UBcmZAgpXYim0iTIMsQLNVqxfvBU/BofeVEh0wpLuXsmBW0wsEckuq2VcWU2sfFxml7+Y/J8jWHD5CNP8hUih9xEHudtUB6z7Y706TdQ/rurBIESKE4MRL4jCPxkOg/qrgr11JI3ehO6Ov5mhfzc6yU5SdAukXdDja3WekuV36ONkJJxbmwrWbsDH9x4CyNrZxLg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JFHDA1MJgA+akA/RtyAkZy8LIpBLkMezKK1UlE3+F8Y=;
- b=y7lQqL2UwD2C1/nefKx1Ma3SZZmYykf1aczfi6nuMHl4xq7NJRJ4O7CWYBoQloK2Ot6Y5VFR/n115yd+g2DuZ2Djf69+/wN1MWaY90yEPdmGVxHMVA91IQUeNXNd+qlriq+OeHzyhsj+HCUavhjd9/bb3b0Tlef69/iQsZn38BrWV98QFQwX17tZ6rPbCnKJQHl3EcSW33hm2rtTj6jaXvRGPSfIqUhng0VjqxQ7cTV9oI5Ie/zZYXp8EraWP8L5fWLeWGM8uVbezTpwXwF06zHF7Odp5gdLrAKxJWesoR32ptAdvvHnF2D9kjJIoW0QiHxTgJ7F6TIHLBEKRuIqyQ==
+ bh=plf3XvgBrtAMl6lrHApAM/Mhp66CpdBfjysFvSe8I8o=;
+ b=PwYOLq35yM4phHnjBV8vJbozPSJu3pMUWHbusiSKRGkHwAyapUhdhkB+W4Sx8Ilqja1Mpwht8l+DqDleChx7F8AeJ36yUw1ppEwyqqc/6q+qWg1dqftfZJi3XWiGpCywYqu7vFDsV4fPR9tkIvzMshRHg2VzIawH2zEWLaHwGDg9n6mKlBMKKVzsafEICnd2jlV+H2Bp6R14VpR/zZ0AQ6br8DSJVdVyoL8suf3E/6jIDNiSJva9iNIVPaLPhyz321sWlS3GC4uIH/YfyoxFd+N28DbEGbnraIlPu80S793yG+/Id0i+utl7STuW1OE0uij4dtSTz0eiWXZ/x5j4fg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JFHDA1MJgA+akA/RtyAkZy8LIpBLkMezKK1UlE3+F8Y=;
- b=DfQZof1LgCSDnLX9byhthuViJtpdk+26vH2E2cwfFEk9k2pvMlbLPMBNgBmEocAmOgcP8GBva14tqIWw7BjmGSTk22DfW5QwP7l1MWhDB14L5/JLBixvFDF7Q4/YKbkAydPJxIciT4JlmHx3G3SfTUallRfcC4HbqzARxvECqdw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by CY5PR12MB6430.namprd12.prod.outlook.com (2603:10b6:930:3a::12)
+ bh=plf3XvgBrtAMl6lrHApAM/Mhp66CpdBfjysFvSe8I8o=;
+ b=B2ttNUrqs9eV8yt/Odp309bflbBNLZlGGYQzkseNWOgYSub8MtQwtuzLkRSGJv7SHl4wPj6ZokXxbehjtSFXLgGQbvTPMTO1TeuTWmeyrbzORm+qO0eg8ALJQUqSqM3sxYgTjhnVlt61Bp7UHOYcua6Mdprrrvb68yX1U2JxXR8=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AM8PR08MB5620.eurprd08.prod.outlook.com (2603:10a6:20b:1c6::23)
+ by AS1PR08MB7537.eurprd08.prod.outlook.com (2603:10a6:20b:481::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Tue, 1 Sep
- 2026 13:16:40 +0000
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287%5]) with mapi id 15.21.0360.008; Tue, 1 Sep 2026
- 13:16:39 +0000
-Message-ID: <93821214-2b8e-40fd-bd49-f7cb2d7b6ebe@amd.com>
-Date: Tue, 1 Sep 2026 15:16:33 +0200
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.10; Tue, 1 Sep
+ 2026 09:41:33 +0000
+Received: from AM8PR08MB5620.eurprd08.prod.outlook.com
+ ([fe80::618d:6218:6962:17ad]) by AM8PR08MB5620.eurprd08.prod.outlook.com
+ ([fe80::618d:6218:6962:17ad%6]) with mapi id 15.21.0382.007; Tue, 1 Sep 2026
+ 09:41:33 +0000
+Message-ID: <4dadf23a-91fe-423b-9e73-e31d7da5c9e1@arm.com>
+Date: Tue, 1 Sep 2026 10:41:32 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xilinx: Move u-boot-microblaze to u-boot-amd
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.u-boot-project.org, git@amd.com
-Cc: Tom Rini <trini@konsulko.com>
-References: <0284af854ed280d87d0d083cb7a2c62b358dda6d.1787556846.git.michal.simek@amd.com>
+Subject: Re: [PATCH v4 00/22] arm64: FF-A runtime transport for EFI variables
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Devaraj Ranganna <Devaraj.Ranganna@arm.com>,
+ u-boot@lists.u-boot-project.org
+References: <20260729085124.2618817-1-harsimransingh.tungal@arm.com>
+ <CAC_iWjL48ub3bD-3iKbCrKnZ_Oc3zQALDZrg14arMwq2pyvf+w@mail.gmail.com>
+ <CALeDE9NCJhrX3kNMhWD_UYZ+Sh0=0A_xSYyrfwTSW6=H-HHYVg@mail.gmail.com>
+ <CAC_iWj+z1G5bALcGoZob_RbuEvXsqvG0vsxgyz47ZMJnT4kd7Q@mail.gmail.com>
+ <b4f8d148-ae3d-43e9-88b7-1362608985d3@arm.com>
+ <CAC_iWj+35n7J2D6EvHr7LZB7L1t2+kNmxY7mBP+w7xgr6=A2jQ@mail.gmail.com>
 Content-Language: en-US
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <0284af854ed280d87d0d083cb7a2c62b358dda6d.1787556846.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR08CA0262.eurprd08.prod.outlook.com
- (2603:10a6:803:dc::35) To LV5PR12MB9779.namprd12.prod.outlook.com
- (2603:10b6:408:301::14)
+From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+In-Reply-To: <CAC_iWj+35n7J2D6EvHr7LZB7L1t2+kNmxY7mBP+w7xgr6=A2jQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: LO4P265CA0090.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2bc::11) To AM8PR08MB5620.eurprd08.prod.outlook.com
+ (2603:10a6:20b:1c6::23)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|CY5PR12MB6430:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5b11fdda-2852-4aa9-8864-08df082b423b
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-TrafficTypeDiagnostic: AM8PR08MB5620:EE_|AS1PR08MB7537:EE_|MI3PEPF00008558:EE_|AM8PR08MB5617:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4ca237d0-480a-4c6d-1a77-08df080d4c0a
+x-checkrecipientrouted: true
+NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|366016|376014|1800799024|23010399003|22082099003|18002099003|3023799007|56012099006|4143699003|5023799004|6133799003|11063799006|10067099003;
+X-Microsoft-Antispam-Message-Info-Original: k1KWM40+u5Ycvug8JsTg/NIZhBM0wNDr17EovI8NxrLTLOy3uKWr7Mpz6skQ02lUarPBUTFx56FeL/eSbW1757s6cPgQIBMTeWZlB8sfKw6CvEE5hEfVAhtW8RDVJfLotE29Zz+CMhFaVwSrtd0LatLgUzL8vL9l4ZMvwTRH6meiUj6pYhE/rJKUDGcGqy+GE3LpFB62P5EME2eLiTOlr0Adt5BEii5N+AAvb+jgGRyPJ+He3DaxbdOx5QnDB2NqcO/9zPMrSqYaaJVoxzPEXpLmSP4aRwXvXGK+JJFOVSw7xOrDTUXy3/q5Sj0wwmpX2xxwYA2aXeA/NqC86oiqaoU1JCZoI4tX53Sk8pylu1oBfHeJrkDuGt/AC1AEhwHRXPRQS9imKC2pY9kZemPOX3Voq7nRs9tYMEe1uo7oUT5WCc/MT8wgMVhXVuMHNRtCIzOI7PrrZ0L8Wb/E8C8kKO/DX5nUxbuDVSvr61jLtBeNzm3xI462nDdIdLAlNd1RdF1uJ/e8/Auqzt294TBkFdRYZD52+9BjdLKX3XFT8+5a/+FYI1CuNLjJMIyrj67guLVLfIK17nqM61r7H++d/+zDgyBFknbrlI8q+9SUa7CdCc0+SHs/LDJACCfFRftXU5BlhfU30E3Yeny9fsAeQlJBnu/sRA8oyqYGe/QrkMo=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM8PR08MB5620.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(22082099003)(18002099003)(3023799007)(56012099006)(4143699003)(5023799004)(6133799003)(11063799006)(10067099003);
+ DIR:OUT; SFP:1101; 
+X-Exchange-RoutingPolicyChecked: xMwwg8Wj4chPVuYY+h7GAkq6Y2vRYMf3mSFWyu8t0CCHxNmDpdiKPxH8C+vUUG8k/Jb4cQ/qGJeXD/4/17wiyygSaqsc7qZNT1Zde/GnH9GJECaPgNI9Gy+/Mr5yTDOeI2sUI8h6cjCZhHgtOQbBXaMZ0GtxEOcYjAfE+FcESrEa/2s7UUMn2QQWZPp1M84NPFQc8UJA7VECyC3QLgrLOclJGeQ2wxAaW+YHbEWfz2YZIvxUaAHa+dx+4JskpiUUpKFwWPKUmFVvpApGp3f1bNPNYD6+pXIHV9syO+Bm5azo2x9J/nPYNF9XOhelsWEjjRoRgEdYXG6sq5MXcsn/8Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR08MB7537
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: MI3PEPF00008558.eurprd05.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 4fc33a46-91d7-4bf7-4615-08df080d350f
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|366016|1800799024|376014|13003099007|22082099003|18002099003|10067099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: q0tQFRuwDgEbHiLPj8Dw0VJaS4pV0Y73XVQppkgD4KHw3aRnrLTsUskueJ7xSpCU54YAvlsqP9nDDNV1cBBiiuz5pvlsB3NdsYVkxAYANApzZJPM5SsfrSlLAIhEcJcOoRZ2xorn/CNgGLTQvvtJ2J4s8hGAX5FhdhE4NXsYd/2bdOAedQiMAkPICFkU43vOh8Mo4q9HnLc+4yt/cMDaBdMQyMPVIWQ8txvN+9xb91O0Ys3q9zohedck60ueLXdkF4Cor4mSQ4rUHqUbLRqcBMchWznU34mKYajavheXWsBiXboiCE7a86Kf0m4rkyVH499Fpw9YqWkgQaXMQAXvNNgFWtFpFb9grY6aCKJx/3uog4DIvdClRvAP4sWVpOW5j5IQfS3yz8fVEV+Pkb2wuNNM/LM3Ieg1/nv4zzaDc2hsYTOo7fuejRjSCN3CEg/tK1a4/qLX+cTAsUe8jTnAcEkQweodpWCILVDapa3U+263vwdAfMnZJOpwWYNxC7gKw3/HC94dmTl4cvO3bmukZ/R5NtwJcsUspf9a1613DlfWQ/4QKfhtcvH9v0QgVzk9VKj88tFBF5+nyf1i2HeGSoikZsqAOMyTWiOVX9L3M2nEXhmg0tjFKmIM4XMuGQI0
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(13003099007)(22082099003)(18002099003)(10067099003)(56012099006)(11063799006);
+ ARA:13230040|1800799024|23010399003|82310400026|35042699022|376014|36860700016|14060799003|18002099003|22082099003|3023799007|56012099006|6133799003|4143699003|10067099003|5023799004|11063799006;
+X-Microsoft-Antispam-Message-Info: SOPYLoGSxkNU+wX+9n1hhqOF3TpXlyL0ffBMJxwy7j21AUBpRYUuVVajwiauBjREd8h0k2zxQf6weBFPeOq+p8jm9nheXpCFRPLNMiWOKH2MrY9W6CWu/Vx8Vf6BUbWIXT2NxA9csjOaGA3lFebJGiDEQHhYo6G8HfWUQldbcv1cVkwbRM1rVydGIeWbHS/2McdOxBlqz8Gs4ErrcKo5k3tm2WomfmZ2kcpBLJgbfCh+qaumF9N7F67JBxrbQ/bfi/p2UJssiFbFT+ire72jtnCIhFwrkySQOyT7zci4zjh0te9KCJ55NW6WaCtVHbgiHq879wJNn4XSjggxaIUpU+YL6AUWFYjSqgq9bDoBaWo6gMpbcVOUMtZvQzKW6uyECnoIpZmY7CAeHrKkmdzG4uuxGxJCK//SJxi0dQKPU8KlqAhbuYaEKaZ87acB7hxre13N807q11PcWj7Nx6IxioZu0Opvq3zc8R8eIXIculEh7JjMQpPLM4irGfd6wjSvA7PwjlVifz8aSYj2i/tmbYUlCckUENntK7sXK0BK/fs0EwqTIvsrduImbO+LEZpPN7V2QzRFa+GqC75E0l6U/CFHQUMqWTbDSvxK6opdkgmksk6QvAn7Sc9VwUiC+7w76WyJhoyhiUnRIju+DCVZvHmpEXzShBgUf9YPvaMmS933eZoPg1rja458FQkugwl9gifN5jtazP6kLkWD9g5fWw==
+X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(23010399003)(82310400026)(35042699022)(376014)(36860700016)(14060799003)(18002099003)(22082099003)(3023799007)(56012099006)(6133799003)(4143699003)(10067099003)(5023799004)(11063799006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bUtOVHFhVjA5ZS9OVGxJRlhkLzZUbjhJRUI4Z2VWcGRlZEN2N0RVMjRSTTJQ?=
- =?utf-8?B?T0UyWThxTXZjb2cySGVhMlo5aFQvc1FYdXEwOW52Ri9QTEpQTSticmtHRjdR?=
- =?utf-8?B?WDFVb0RMMkZHeEF4Njc4NlZkZlIzbGJ3N3VTRVFub2ZEK1BnVm43bFl4YkFa?=
- =?utf-8?B?MUpOdjk2TEYyY1g2alpoMGNvMm9YVFI5V1JYdHpQckRmdVd3TG1IRVFtR3VY?=
- =?utf-8?B?cEp5NC9oRHh0R1g5OWRiaG41NzBHb1dnOGI5WjBTNGd1VjVZOWF6WWIwazlH?=
- =?utf-8?B?K09TdzBvTGFTSHI3b3dUV3VITEJ2ZitxRnRTL1pkZU5pUkNGMUJSZUdVZFBT?=
- =?utf-8?B?U1NhRVE0YVhSbit0b2hhbkRxYkoyV1U5cW1Td1dyVDZvbHJRMll3aTZGc3Fj?=
- =?utf-8?B?ZGJodmtvQzlIRmVGREZtVDFOSjRZRjgxRkpsZ1FwTjl4VjFVNm01WjdvQkVV?=
- =?utf-8?B?T3Bvb2U4SGtKSFN6SGtKQVZCZUpjTGF1ekJVakJ5cjNOQmt4bFRCUFFjTkk1?=
- =?utf-8?B?dDdLTmc0MTN6N1pTSVVPa05SWnJqc3Z0Q2Vxd1BYM1ZRc05UbC95YnB2c0FV?=
- =?utf-8?B?UmFkdTBUendYS3ZBTU0zVnQvbXFzUzVjeGRBcVNvRHQ4K1FYaTJqT3V6Qi8y?=
- =?utf-8?B?U0lBaFlXc2IyWmJaaFVmUjQ3NjZlTlZaRFM3RlZ5a1k5Wlo2ei9ueEhSeHoz?=
- =?utf-8?B?Sy81VldacEZSbGFnOW9uaWg2VUVkc0t0R1ZJMFlHelRtWHlpMzhYU2I0YUEx?=
- =?utf-8?B?VXVBZUtKNnBlQWpzT1ZLOTBMcUU1RVZlVmVwMFRCOElvRHliaWNqK1REdGdE?=
- =?utf-8?B?VHUzTERyQXJsS255MUcveW9qcHNqMlNaTTJkYk1EWE8wVkRlUURhQURDK04y?=
- =?utf-8?B?VXNiNGF4Rmo3QjhsckV2aUVMT2psNUdkL0V0Y2pQZ1RQbGhkR3dsWFgrdm9r?=
- =?utf-8?B?WHpuK2h2TklMK29xYjM0OXY0WkU3aEtYREI5ZUc1djZ3MU1mUGlEZ0NVcEtC?=
- =?utf-8?B?YTJRbFBuQTc1WGdudzhhZmthUjg0ZWtKQWZHSmJaRUVvZ0RDWURzdUJxbFFS?=
- =?utf-8?B?MkpldkRubGJIQ1ZySUkzTjNnbWIyOEFoVWFET2VpUmVldjBFdUVGaTVKd2xM?=
- =?utf-8?B?ay9FQVpWbCs3QUE1djMrMlVzSUp3V2dVMlJXNkJCRWFOSW92bmoyM1pBMUdT?=
- =?utf-8?B?aTVrSzlWUEhjUE0yd2paUmgvb1VWRTU3a284QkxTZUYydlpReTZnUWRzaDVu?=
- =?utf-8?B?M00rVTJIdmlDSVRwL3QvdW1zT0dwWDd2SWJMU0hhSGRYczlUQUhnbEV1NFNK?=
- =?utf-8?B?QUtBaVdWbzVubkZxUnZkTE9aa0VVNTJJaUI3SzAzWkhGNVFaSXhIVlBjRWRM?=
- =?utf-8?B?Wi9GREhiZjE5aXZvZndueDBMOVF3SlQ2UitDYVh5NHpxMUVTWm9KQkFiZmUy?=
- =?utf-8?B?NGswNkdPNXF2ZnZPZU9TUHlRSVdOcHFCU0NZcXJ2QmZBZGxtSFBBYVFLaWZ3?=
- =?utf-8?B?a0p0YldURG85aVFRSHhTcXhUak5VNFV3UHpmQUhtanlyTXZTaFVCam5yM3ZJ?=
- =?utf-8?B?NjRudWgyVEtMQ2x3OUgxS2p6WFVvS3FpTE5HbFJhTjlZL1FnTGM4bWpPMUQ1?=
- =?utf-8?B?Zy9PMEJTcHl4N0o4THgzMWNQTzgvWmx2NGZXekJtZFEzQ3MyUDMxSjZ4UEFn?=
- =?utf-8?B?Tkd3Z0dFaUE1VGdKNmtHK0x4aGF6b3NBcGVrQlBlVUxQcFdmaW5jWmtSdW9h?=
- =?utf-8?B?OE1ieDdwd0x1U3JUVUEwNUlOcTF6RVZWWUVJWVY5bEl0ZFRDQ1ozS2F1NDNt?=
- =?utf-8?B?eUFZUFppTUlrQ25lNXNicm1oRHducHRTSWpoYXA4alZybDVKT3k3SklBZEo2?=
- =?utf-8?B?Njg5cHF1UStOZEIzb3RPWUZyT0Rrby9nbkJrWmxpTDlNRGxyanVOR3EwenhS?=
- =?utf-8?B?ZFZlQjVOcGdubC9ZYWoydnFwaC9RY2lyR0dIa002VFdWVGNFd0xraFBiK1NY?=
- =?utf-8?B?Q3hkb1NlUXROUmVTNmJPbkFoMFgxK3dGZnJmUm93ckxmOHRwU0Fidm40STZi?=
- =?utf-8?B?MUI3Ym9wQ25JNDIrdkdHMXpsMUkxNmdtWHhtdmZJYm9SZVFyaWw0bkJXREN2?=
- =?utf-8?B?eEIvZWZuaEY0eGgyT3RtZDQvOFZJZXRUV3JlMTAyaFRUcy9GYlhVT1VQZkRP?=
- =?utf-8?B?dHRsNWRsRjJvd3NJbjhWeWUyUVQ3UFBFbWZqWW9ZTVZuYVZxY0ZSM0h4YlFL?=
- =?utf-8?B?M3lqNklQRlRmTVEyTjZiZkxaVWRqL2NSUjNudFNoWkhDbXVvSERRSjRIQkwy?=
- =?utf-8?B?eTZlZUpEZFYyT245RGZHZnFjamYwK3JwQ01rSTNYYUtDL0hTazhEZz09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5b11fdda-2852-4aa9-8864-08df082b423b
-X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2026 13:16:39.9533 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jvJm/voTjzvgQK/Vvp+D0jZRIDOv5ourzjNHZacbNUyChdMqFgxQd/8g3fkrHl2O
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6430
+X-MS-Exchange-AntiSpam-MessageData-0: Cdzen29g8yfR6Pm2QaZousKCJdff5WCWhhKeKXTPjYQXWiMPtuuP/lyRfh9bbJFko95PTTtnibYD9W2Bz+TGpS9re1k28T9YoUzfvR5vkZ+EogO2VHTABQyVU3nR7euAM5WmOLlVA1PMWwpLh8RlSY2wudgyndHy9kF+zDCU0Nax2x28I+0jZA0btGAxTjBACWLfQh8DrctAxwGpcgRxyBcM9lP8X0QOV0Qmsx/wJdZ6Fkmyra+As85jkQ5xza2uQbFmEsjePkYTD8zB4h/Lp0qR32NQkjuagYsrb18AG5tBqG9TntQBA0EXamWDdLKuYiPD6UsZ9pdSEprpHkMmBTOI8EoqUeh3HTqE+3xuy866iQuyyFypk4g3XqoICxFbwn1noG/aTl3bEJzZ/pdEzeyh5hi1AqNIMiS2xZTelJ+vRPWR3fsqguvY/m0up+l7
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2026 09:42:11.1319 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4ca237d0-480a-4c6d-1a77-08df080d4c0a
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
+ Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: MI3PEPF00008558.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5617
+X-Mailman-Approved-At: Tue, 01 Sep 2026 13:18:09 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -215,90 +197,348 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+On 7/31/26 15:43, Ilias Apalodimas wrote:
+> Hi Harsimran
+>
+> On Fri, 31 Jul 2026 at 17:17, Harsimran Singh Tungal
+> <harsimransingh.tungal@arm.com> wrote:
+>>
+>> On 7/30/26 13:12, Ilias Apalodimas wrote:
+>>> Hi Peter,
+>>>
+>>>>
+>>>> Hi Ilias,
+>>>>
+>>>>> I'll be off next week so this is going to take some time for a wider =
+review.
+>>>>> Since this is quite a lot of code to review, I'd prefer being able to
+>>>>> test all of the cases to make sure nothing breaks and add more
+>>>>> selftests in the future. I don't have access to a Corstone-1000.  The
+>>>>
+>>>> You can get the Corstone-1K FVP here:
+>>>> https://corstone1000.docs.arm.com/en/corstone1000-2026.05/index.html
+>>>>
+>>>
+>>> Ok thanks. I'd still prefer to have this on QEMU since we can
+>>> reproduce all the cases there (variables in RPMB as of today + the
+>>> FF-A variant). Even if we do use the FVP, I'd like to have information
+>>> of how to build & test this as part of the cover letter, since Tom
+>>> includes that in pull requests.
+>>>
+>>> Cheers
+>>> /Ilias
+>>
+>> Hi Ilias,
+>>
+>> The instructions to build the Corstone-1000 FVP can be found here:
+>> https://corstone1000.docs.arm.com/en/corstone1000-2026.05/user-guide.htm=
+l.
+>>
+>
+> Thanks
+>
+>> For the QEMU/RPMB/OP-TEE question: QEMU RPMB would cover the storage
+>> backend, but the FF-A runtime transport also needs the secure world to
+>> expose the MM variable service through an FF-A secure partition. OP-TEE
+>> alone would exercise the existing CONFIG_EFI_MM_COMM_TEE transport, not
+>> the FF-A runtime transport, unless OP-TEE/SPMC is hosting an FF-A SP
+>> that implements the same MM variable communication protocol.
+>
+> OP-TEE can also be configured to run in SPMC mode and load SPs. The
+> question is what is the backing storage of your SP
+>
+>>
+>> For Corstone-1000 we are already using the Trusted Services SMM Gateway
+>> SP. That SP implements the MM variable service and exposes the MM
+>> Communicate endpoint over FF-A direct messages, which is the path used
+>> by this series.
+>>
+>> I agree that QEMU would be better for wider review and CI. I will have
+>> to investigate the QEMU setup using the same SMM Gateway SP along with
+>> OP-TEE/SPMC and RPMB, so we can reproduce the FF-A runtime variable path
+>> without access to Corstone-1000.
+>
+> I can help, I just need a bit more info on that SP. I'll have a look
+> at the public docs as well
+>
+>>
+>> Do you suggest that I investigate this QEMU setup for the
+>> next revision?
+>
+> I'd like to at least see the gap, but I suspect it's going to be small
+> if it even exists.
+>
 
+Thanks Ilias.
 
-On 8/24/26 09:34, Michal Simek wrote:
-> By moving to u-boot-project.org custodian tree has been also renamed to
-> reflect current situation around AMD/XILINX SOCs but links to repo haven't
-> been updated.
-> 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
-> 
->   board/amd/versal2/MAINTAINERS       | 2 +-
->   board/xilinx/versal-net/MAINTAINERS | 2 +-
->   board/xilinx/versal/MAINTAINERS     | 2 +-
->   board/xilinx/zynq/MAINTAINERS       | 2 +-
->   board/xilinx/zynqmp/MAINTAINERS     | 2 +-
->   5 files changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/board/amd/versal2/MAINTAINERS b/board/amd/versal2/MAINTAINERS
-> index af7913d8db3a..282eaddd7532 100644
-> --- a/board/amd/versal2/MAINTAINERS
-> +++ b/board/amd/versal2/MAINTAINERS
-> @@ -1,7 +1,7 @@
->   XILINX_VERSAL2 BOARDS
->   M:	Michal Simek <michal.simek@amd.com>
->   S:	Maintained
-> -T:	git https://gitlab.denx.de/u-boot/custodians/u-boot-microblaze.git
-> +T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-amd.git
->   F:	arch/arm/dts/versal2*
->   F:	board/amd/
->   F:	configs/amd*
-> diff --git a/board/xilinx/versal-net/MAINTAINERS b/board/xilinx/versal-net/MAINTAINERS
-> index 50120a88d6e7..85d858ad3a01 100644
-> --- a/board/xilinx/versal-net/MAINTAINERS
-> +++ b/board/xilinx/versal-net/MAINTAINERS
-> @@ -1,7 +1,7 @@
->   XILINX_VERSAL_NET BOARDS
->   M:	Michal Simek <michal.simek@amd.com>
->   S:	Maintained
-> -T:	git https://gitlab.denx.de/u-boot/custodians/u-boot-microblaze.git
-> +T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-amd.git
->   F:	arch/arm/dts/versal-net*
->   F:	board/xilinx/versal-net/
->   F:	include/configs/xilinx_versal_net*
-> diff --git a/board/xilinx/versal/MAINTAINERS b/board/xilinx/versal/MAINTAINERS
-> index 07173ee916fd..00170a9cf665 100644
-> --- a/board/xilinx/versal/MAINTAINERS
-> +++ b/board/xilinx/versal/MAINTAINERS
-> @@ -1,7 +1,7 @@
->   XILINX_VERSAL BOARDS
->   M:	Michal Simek <michal.simek@amd.com>
->   S:	Maintained
-> -T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-microblaze.git
-> +T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-amd.git
->   F:	arch/arm/dts/versal*
->   F:	board/xilinx/versal/
->   F:	include/configs/xilinx_versal*
-> diff --git a/board/xilinx/zynq/MAINTAINERS b/board/xilinx/zynq/MAINTAINERS
-> index 3eb1a451b580..d505a78ba667 100644
-> --- a/board/xilinx/zynq/MAINTAINERS
-> +++ b/board/xilinx/zynq/MAINTAINERS
-> @@ -1,7 +1,7 @@
->   ZYNQ BOARD
->   M:	Michal Simek <monstr@monstr.eu>
->   S:	Maintained
-> -T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-microblaze.git
-> +T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-amd.git
->   F:	arch/arm/dts/zynq-*
->   F:	board/xilinx/zynq/
->   F:	include/configs/zynq*.h
-> diff --git a/board/xilinx/zynqmp/MAINTAINERS b/board/xilinx/zynqmp/MAINTAINERS
-> index de753c8fe4e5..dd585bae790b 100644
-> --- a/board/xilinx/zynqmp/MAINTAINERS
-> +++ b/board/xilinx/zynqmp/MAINTAINERS
-> @@ -1,7 +1,7 @@
->   XILINX_ZYNQMP BOARDS
->   M:	Michal Simek <michal.simek@amd.com>
->   S:	Maintained
-> -T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-microblaze.git
-> +T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-amd.git
->   F:	arch/arm/dts/zynqmp-*
->   F:	arch/arm/dts/avnet-ultra96*
->   F:	board/xilinx/common/
-> ---
-> 
+The SP we use on Corstone-1000 is the Trusted Services SMM Gateway SP.
+It is built from the Trusted Services smm-gateway deployment and exposes
+the MM Communicate endpoint over FF-A direct messages. The generated SP
+manifest uses the SMM Gateway UUID.
 
-Applied.
-M
+The main gap I found so far is on the QEMU/TF-A side. Trusted Services
+already provides the SMM Gateway SP, and QEMU has RPMB support, but I
+could not find a QEMU-specific OP-TEE SPMC manifest in TF-A. The FVP
+platform has fvp_spmc_el1_optee_manifest.dts, but there does not appear
+to be an equivalent QEMU manifest in the TF-A tree.
+
+So I think the QEMU work is likely to be:
+- add a QEMU OP-TEE SPMC manifest for TF-A
+- package the SMM Gateway SP with OP-TEE SPMC
+- wire QEMU RPMB into the secure storage backend
+
+Do you suggest that I continue investigating this QEMU setup for the
+next revision?
+
+Regards
+Harsimran Singh Tungal
+
+>>
+>> The setup I am currently testing is Corstone-1000 FVP with the MM
+>> variable service exposed through FF-A. The FF-A runtime path is tested
+>> in two phases as follows:
+>>
+>> The first phase (setup phase) creates the non-volatile runtime variable
+>> before reset. On U-Boot prompt:
+>>
+>> corstone1000# setenv efi_selftest 'variables at runtime setup'
+>> corstone1000# bootefi selftest
+>>
+>>
+>> Then reset the Corstone-1000 FVP and run the second phase.
+>> The second phase verifies that the variable is available after reset,
+>> then exercises runtime get/set/append/delete paths.
+>> On U-Boot prompt after reset, execute the following commands:
+>>
+>> corstone1000# setenv efi_selftest 'variables at runtime verify'
+>> corstone1000# bootefi selftest
+>>
+>> The testing steps are documented in the bootefi documentation commit:
+>> doc: bootefi: note two-phase runtime variables selftest
+>>
+>> For v5, I can add these tested steps to the cover letter.
+>
+> There's no need for a v5 yet, I'll take some time and reprod with the
+> FVP. Just keep in mind I'll be off for the next ~20 days so this is
+> going to take a while, apologies.
+>
+> Cheers
+> /Ilias
+>>
+>> Thanks
+>> Harsimran Singh Tungal
+>>
+>>>>> latest version of QEMU do support emulating an RPMB device. Would the
+>>>>> changes above work with with an SP, QEMU RPMB and OP-TEE?
+>>>>>
+>>>>> Thanks
+>>>>> /Ilias
+>>>>>
+>>>>> On Wed, 29 Jul 2026 at 11:51, Harsimran Singh Tungal
+>>>>> <harsimransingh.tungal@arm.com> wrote:
+>>>>>>
+>>>>>> Hi all,
+>>>>>>
+>>>>>> This series adds FF-A runtime transport support so EFI variable runt=
+ime
+>>>>>> services can communicate with the secure world after ExitBootService=
+s().
+>>>>>> It also extends tests, documentation, and Corstone-1000 configuratio=
+n to
+>>>>>> validate the runtime path and keep boot-time behavior aligned with t=
+he
+>>>>>> runtime flow.
+>>>>>>
+>>>>>> Changes in this series:
+>>>>>> - Add EFI runtime-safe memset helper and FF-A runtime transport supp=
+ort.
+>>>>>> - Add runtime-safe FF-A direct-message handling and ExitBootServices=
+ setup.
+>>>>>> - Implement FF-A runtime communication in the EFI variable TEE backe=
+nd.
+>>>>>> - Enable EFI runtime SetVariable(), GetVariable(), GetNextVariableNa=
+me(),
+>>>>>>    and QueryVariableInfo() over the FF-A transport.
+>>>>>> - Add sandbox FF-A runtime transport tests.
+>>>>>> - Extend EFI selftests for runtime variables and enable bootefi self=
+test
+>>>>>>    on Corstone-1000.
+>>>>>> - Document the FF-A runtime transport and runtime-variable selftest =
+flow.
+>>>>>>
+>>>>>> Changes in v4:
+>>>>>>
+>>>>>> Address Ilias Apalodimas's review comments:
+>>>>>> - Split FF-A bus runtime support into smaller patches covering runti=
+me
+>>>>>>    private data, SMC invocation, direct-message helpers, boot-time r=
+euse,
+>>>>>>    and ExitBootServices setup.
+>>>>>> - Split the ARMv8 cache range-maintenance runtime annotations into a
+>>>>>>    separate patch.
+>>>>>> - Split the EFI variable TEE runtime SetVariable(), GetVariable(),
+>>>>>>    GetNextVariableName(), and QueryVariableInfo() support into separ=
+ate
+>>>>>>    patches.
+>>>>>> - Replace MM SP status macros with an enum.
+>>>>>> - Keep OP-TEE as the runtime fallback when FF-A runtime mode is not
+>>>>>>    enabled.
+>>>>>>
+>>>>>> Other changes:
+>>>>>> - Rebased the series onto current U-Boot master.
+>>>>>>
+>>>>>> Changes in v3:
+>>>>>>
+>>>>>> Address Simon Glass's review comments:
+>>>>>> - Move FF-A ExitBootServices event registration to the end of probe =
+and
+>>>>>>    clean up RX/TX buffer handling on failure.
+>>>>>> - Rename FF-A runtime-context helpers to the ffa_runtime_context_* f=
+orm.
+>>>>>> - Rework FF-A/MM cache maintenance to cover only rounded request and
+>>>>>>    response ranges.
+>>>>>> - Add SetVirtualAddressMap handling for the FF-A shared buffer.
+>>>>>> - Document FF-A shared-buffer ownership and alignment assumptions.
+>>>>>> - Add EFIAPI to the TEE runtime GetVariable and GetNextVariableName
+>>>>>>    entry points.
+>>>>>> - Tighten sandbox FF-A runtime tests and reset runtime state between
+>>>>>>    test cases.
+>>>>>> - Update FF-A and bootefi documentation for the runtime transport an=
+d
+>>>>>>    split runtime-variable selftests.
+>>>>>> - Rework commit messages to drop redundant information.
+>>>>>>
+>>>>>> Address Ilias Apalodimas's review comments:
+>>>>>> - Keep efi_var_common.c unchanged and drop commit 6 from v2 patchset=
+.
+>>>>>> - Rename the TEE/FF-A runtime handlers to the *_int_runtime form.
+>>>>>> - Remove log_*() calls from __efi_runtime FF-A/MM communication path=
+s.
+>>>>>>
+>>>>>> Other:
+>>>>>> - Fix FF-A memory-share sender_id to use the runtime private endpoin=
+t
+>>>>>>    ID after rebasing.
+>>>>>> - Fix the expected QueryVariableInfo() return status for the
+>>>>>>    TEE-backed runtime selftest path.
+>>>>>>
+>>>>>>
+>>>>>> Changes in v2:
+>>>>>>
+>>>>>> Address Simon Glass's review comments:
+>>>>>> - Fix efi_memset_runtime() style, declaration, and byte cast
+>>>>>> - Tighten the FF-A runtime context failure path, clean up arm-ffa-ru=
+ntime.c
+>>>>>>    style issues, and move ExitBootServices event registration earlie=
+r in probe
+>>>>>> - Add shared-buffer bounds/alignment checks, and tightening comments=
+/kernel-doc
+>>>>>> - Document the FF-A shared buffer cacheline-alignment requirement an=
+d add
+>>>>>>    BUILD_BUG_ON() checks for the address
+>>>>>> - Cache attributes before the shared buffer is reused, moving the re=
+ad-only
+>>>>>>    check earlier, and split the u16_strsize() related change in sepa=
+rate patch
+>>>>>> - Reword commit messages for the runtime helper relocation
+>>>>>> - Rework the non-volatile runtime variable selftest into setup/verif=
+y phases
+>>>>>> - Extend the sandbox FF-A runtime tests with no-context coverage,
+>>>>>>    runtime-context reset, and separate errno-mapping coverage
+>>>>>> - Refresh the FF-A runtime transport and bootefi documentation
+>>>>>> - Drop patch 12 in v1, as ffa_mm_communicate handles both runtime an=
+d
+>>>>>>    boottime capabilities in v2
+>>>>>> - Squash patch 8 and patch 9 from v1
+>>>>>>
+>>>>>> Address Ilias Apalodimas's review comments:
+>>>>>> - Reuse common MM SP error mapping for boot and runtime paths
+>>>>>> - Rename runtime-phase tracking to reflect the ExitBootServices tran=
+sition
+>>>>>> - Collapse duplicated boot-time and runtime MM communication helpers=
+ into common
+>>>>>>    implementations
+>>>>>> - Keep the arm64 cache-maintenance path runtime-safe
+>>>>>> - Move FF-A shared-buffer runtime memory-map registration to the end=
+ of
+>>>>>>    variable-service initialization
+>>>>>>
+>>>>>> Link to v3: https://lore.kernel.org/u-boot/20260627144421.2067410-1-=
+harsimransingh.tungal@arm.com/
+>>>>>> Link to v2: https://lore.kernel.org/u-boot/20260514124924.1804332-1-=
+harsimransingh.tungal@arm.com/
+>>>>>> Link to v1: https://lore.kernel.org/u-boot/20260424173151.371134-1-h=
+arsimransingh.tungal@arm.com/
+>>>>>>
+>>>>>> Harsimran Singh Tungal (22):
+>>>>>>    efi_loader: add runtime memset helper
+>>>>>>    arm-ffa: store boot-discovered runtime data separately
+>>>>>>    arm-ffa: add runtime-safe FF-A SMC wrapper
+>>>>>>    arm-ffa: add runtime direct-message support
+>>>>>>    arm-ffa: reuse direct-message helper at boot time
+>>>>>>    arm-ffa: enable runtime context at ExitBootServices
+>>>>>>    arm: cache: keep range maintenance available at EFI runtime
+>>>>>>    efi_loader: add MM SP status mapping for FF-A variables
+>>>>>>    efi_loader: make MM transport selection runtime-safe
+>>>>>>    efi_loader: make FF-A MM SP notification runtime-safe
+>>>>>>    efi_loader: make FF-A MM communication runtime-safe
+>>>>>>    efi_loader: reserve FF-A shared buffer for runtime variables
+>>>>>>    efi_loader: enable TEE runtime SetVariable() over FF-A
+>>>>>>    efi_loader: enable TEE runtime GetVariable() over FF-A
+>>>>>>    efi_loader: enable TEE runtime GetNextVariableName() over FF-A
+>>>>>>    efi_loader: enable TEE runtime QueryVariableInfo() over FF-A
+>>>>>>    charset: mark u16_strsize() as __efi_runtime
+>>>>>>    corstone1000: enable bootefi selftest
+>>>>>>    efi: selftest: add runtime variable tests with non-volatile stora=
+ge
+>>>>>>    test: dm: add sandbox FF-A runtime transport tests
+>>>>>>    doc: arm64: document FF-A runtime path for EFI variables
+>>>>>>    doc: bootefi: note two-phase runtime variables selftest
+>>>>>>
+>>>>>>   arch/arm/cpu/armv8/cache.S                    |   8 +
+>>>>>>   arch/arm/cpu/armv8/cache_v8.c                 |  13 +-
+>>>>>>   arch/sandbox/include/asm/sandbox_arm_ffa.h    |  16 +-
+>>>>>>   configs/corstone1000_defconfig                |   3 +
+>>>>>>   doc/arch/arm64.ffa.rst                        |  88 ++-
+>>>>>>   doc/usage/cmd/armffa.rst                      |  11 +
+>>>>>>   doc/usage/cmd/bootefi.rst                     |  31 +
+>>>>>>   drivers/firmware/arm-ffa/Kconfig              |  11 +
+>>>>>>   drivers/firmware/arm-ffa/Makefile             |   4 +-
+>>>>>>   drivers/firmware/arm-ffa/arm-ffa-runtime.c    | 294 +++++++
+>>>>>>   drivers/firmware/arm-ffa/arm-ffa-uclass.c     | 114 +--
+>>>>>>   drivers/firmware/arm-ffa/arm-ffa.c            |  16 +-
+>>>>>>   drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  49 +-
+>>>>>>   include/arm_ffa.h                             |  16 +-
+>>>>>>   include/arm_ffa_priv.h                        |  22 +-
+>>>>>>   include/arm_ffa_runtime.h                     | 191 +++++
+>>>>>>   include/efi_loader.h                          |   3 +
+>>>>>>   lib/charset.c                                 |   2 +-
+>>>>>>   lib/efi_loader/Kconfig                        |   4 +
+>>>>>>   lib/efi_loader/efi_runtime.c                  |  20 +
+>>>>>>   lib/efi_loader/efi_variable_tee.c             | 739 ++++++++++++++=
++---
+>>>>>>   .../efi_selftest_variables_runtime.c          | 715 +++++++++++---=
+---
+>>>>>>   test/dm/Makefile                              |   3 +-
+>>>>>>   test/dm/ffa.c                                 |   6 +-
+>>>>>>   test/dm/ffa_runtime.c                         | 123 +++
+>>>>>>   25 files changed, 2004 insertions(+), 498 deletions(-)
+>>>>>>   create mode 100644 drivers/firmware/arm-ffa/arm-ffa-runtime.c
+>>>>>>   create mode 100644 include/arm_ffa_runtime.h
+>>>>>>   create mode 100644 test/dm/ffa_runtime.c
+>>>>>>
+>>>>>> --
+>>>>>> 2.34.1
+>>>>>>
+>>
+>> IMPORTANT NOTICE: The contents of this email and any attachments are con=
+fidential and may also be privileged. If you are not the intended recipient=
+, please notify the sender immediately and do not disclose the contents to =
+any other person, use it for any purpose, or store or copy the information =
+in any medium. Thank you.
+
+IMPORTANT NOTICE: The contents of this email and any attachments are confid=
+ential and may also be privileged. If you are not the intended recipient, p=
+lease notify the sender immediately and do not disclose the contents to any=
+ other person, use it for any purpose, or store or copy the information in =
+any medium. Thank you.
