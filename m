@@ -1,113 +1,123 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3B40C61DD3
-	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 11:48:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52E27C61DD3
+	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 11:49:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7150660749;
-	Tue,  1 Sep 2026 11:48:27 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 04B9C80BAE;
+	Tue,  1 Sep 2026 11:49:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pflBK2aoyPHK; Tue,  1 Sep 2026 11:48:26 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hEowsrpEZu9w; Tue,  1 Sep 2026 11:49:42 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788263306;
-	bh=c8LmaIXUahbclwpT+v+aoH2q7UQLakzAX+V+s7sllL4=;
-	h=Date:From:Subject:To:CC:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=sVB8wuitvCv4VWB9hG3QPl2WWOJ4cd6ksSF8V2rkq3nGe7dHtUnxlA2e59/9tx1Ht
-	 VYnl3N+J7aoAr1sZNvNQQ14974xYzeG3yGRZbFNJVWHLnFvewCckDUrokdlDmP82py
-	 V1VewgAIPoZWltkMBQ7OMb6NMMoXTOf3sdBpSvdkjvu887r6kmoF1zCIfyuuGIUzra
-	 C7SNEs4dWWQo6VloU3wLbFlY0pQYqDBdc2z+hMoBMN4twVaeVsaT4Yl0JIfov9IKO+
-	 EKJ9gwRvmjT1mlVKvIHOb5aPRBfG8FZDXHcJ4m1U89eRaJ0vf3pJZwte+6XFGQDfFp
-	 dufPQv9ftHKow==
+	d=lists.u-boot-project.org; s=default; t=1788263382;
+	bh=XDfOLaHaUZ0G28gOtoKhv/z5t29bacnEZEZA/hDT9kE=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=O1OKdoEUzdMe9OoxFG9VW+1LW7Rbb4+d16IcPY7yDIKAr1ESoG2NcX7/hLEsgZKGv
+	 D0zumXJHMDeqcom3O0aBo5tQ2IH/yo7x5QDD6VyjEC9XEV1x0RMSk3nThcFnIpCuht
+	 ci5zoBOUGJ3lF+nfLW8pISbHjWpSU9GDsYWeo0awjf28Dyh3XAtu0o6YTsGb7a9cYx
+	 2da14V3FRwTcjWIL709LiAglAnuHPHrpCBPM3oo6MsqGASEx2va4TenZHfrSMq0baA
+	 krYB6hJ+zTQs/0LP5ZlsRtTjNj1rfa1aMfBmj4wyXn4xhZaEhHvv/keH9iA4deOdY+
+	 Ws58NQWm7s01w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D4B95606E5;
-	Tue,  1 Sep 2026 11:48:25 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id BAF47105
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 11:48:23 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3C76E80B5C;
+	Tue,  1 Sep 2026 11:49:42 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9B887377
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 11:49:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id ACE8F401CE
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 11:48:23 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8181480B5C
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 11:49:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mWG__6F42Mt8 for <u-boot@lists.u-boot-project.org>;
- Tue,  1 Sep 2026 11:48:23 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZtDvWxoo8iMv for <u-boot@lists.u-boot-project.org>;
+ Tue,  1 Sep 2026 11:49:41 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::1;
- helo=db3pr0202cu003.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c201::6;
+ helo=am0pr02cu008.outbound.protection.outlook.com;
  envelope-from=patrice.chotard@foss.st.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256
- header.s=selector2 header.b=KTK2RxUw
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1050F401CA
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 11:48:21 +0000 (UTC)
+ header.s=selector2 header.b=Br/sfHqf
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id AE1D280B2E
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 11:49:40 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DSd3lXjH9kvBDOLzLtbNqTt2dz04bSFMUfB+8BdFvC6ntatnVUw1rBD4SnT+m70+1gods41A5YKh9aIi8mKDDn6FaMenZkRfJKX2CDPHOo1FbkziToEhyVoAzdaRstJtwPMU8a5p59mkeRpmERodDYn7B0j2CO3sHIkgETdOSVjphTcaAX2QY58XNftxrfROA5vE7QT2iVhu5wYBDgWjpDejotHgW23y9p0epUbN9LfRSgLTB1YCdifb3eWYylMbVQtngzWq0k4nbz+X3W7V1lZzualPZOEYt7zo0u+Szm1IjKjvxg7l35LYB5hsdYuxd+LS6I1tEC50rEq+B3upsA==
+ b=r1azrwv/0EZckNjnUt6xagJ6zFD04+Qkf5UgK5cBE8ljXIBUTa9/8z6Zpu0yQK/fsFWYdqLc4EGVFo7D7RiXVsFdzy38u5NKiwExy/+FC1XFZ1yYOp6T9rfNsAEUB6OVeM8osS2T9MYyMf/o2WLSHHx6606rhRnMoB2UupCmrTiOKLwx6axYWrisnQUL/LfVvPfb2F+YOL6wctzLWr40Ebz5vhOwHM3+rtadPDZ2y6RHrM0KpYOOoVocZQumORmsuXV0JtaEzVHBruMiu2DOiCXQaHVR0pTE4glZwkolaaQFTMbVTEHYm/u6DrJ54CDgFnUaWOHdFb1SeziCjuhcAA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=c8LmaIXUahbclwpT+v+aoH2q7UQLakzAX+V+s7sllL4=;
- b=ErCNC/cLc1gCoWaLkHeG5z/oMWCKphOz5VmMYvrusjJzayCyB/Lm8b4F3gaLLjuG1s/7OPpD74TfJnP/DKMcjH2Nh2T8C7JfHqI4n9V/AiggetfoGiIWjWyUeq2lVWg/h3r4YGZXny2WGAOIaIEaF9XSh4dWWu6zhYk0gh8FPuErpw3q92ScL7c4GgzqvJzVh1F/EOnifaG/lwD8zbGeYXBKrQc1ZH4WcH616a53xvVi00ZYv0xl24gwTdmYl0fF6sAv25YaOwNtskflEMMXzvKrO6YLXSi7EWaE/McX//64sGDoysCXHpRneNuu0j53QMBZTLE4ZTUogW1ov5Pq5g==
+ bh=XDfOLaHaUZ0G28gOtoKhv/z5t29bacnEZEZA/hDT9kE=;
+ b=CVdj/otW51ZXTRrWAimyqw/r4yxNh3y/peqQtQw9dWm9SP+UZXwXsS5oQJUHd9x5vjwkbBnWBtOvZy0towyYgcEGU6XQp1Xq4z9J66KwwNMU3lSQFm6QcmRGosEiDAFhxWulxzgk7dWAb+aOgHLuUNyrzZFt4V4ysgkTz2M8dyqq1zgemmcIOARmw+V3eEJIZMwZn+vWV2xJ1Ywpna267lSlTPTZfSar/CSwVFAFfrZoGxQipsrZMMVdFZls6wzwEIDLUKFpgH59vlKzD2bLHq0MR6nKNwb/kOaArjGk+s+pOw7JrYtjAmeL/qF1aGso1u8SrhYV43DbnugMNkW+YQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.88) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
+ 164.130.1.87) smtp.rcpttodomain=geanix.com smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=c8LmaIXUahbclwpT+v+aoH2q7UQLakzAX+V+s7sllL4=;
- b=KTK2RxUwbIXXOVtR/cyCvmRzn+xmUhJ7FpXdNGX7o4WNjk7/aZeVDEW8/b0Qeq3s+PZH3ERYvXsuUFgwXJxqVn6KfZDYd6LnvWpK74ghHO0vBy6DPVRRWIT9pExD0pV+bBwFJTgVu0Dvnjw6OoURx+XrB9+RQnwYDwfdtawVwtZR9r4A/J8As25zrst7GRt6ZVCOYbGqIqHSdwLGYkwESqn0YnP8JjI8qRrHqSEReHsU63J193FzbdI40etxSmHim6bStzws6XlK0vZUB8aSWl7OC2pennk4AhUpYU7s2l3ylt5mH3HuTVnKrCZYYJ2j2nVkzxd84kqZojhbqz2XcA==
-Received: from AM8P191CA0013.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:21a::18)
- by PA2PR10MB8699.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:426::5)
+ bh=XDfOLaHaUZ0G28gOtoKhv/z5t29bacnEZEZA/hDT9kE=;
+ b=Br/sfHqfZBwqIvR2cWuC2O4wT9CykibbNjkqVVr7LdMfjDlMY4Q+R8BK5zdf8cof/v+GWSCsqSLj1ukOUnY7QdCAmT+8T1cBZsW15hL/LpRCxllcVqKHaFHqbM5bj2z1qEjfhMUgx4Lf/DuL8wGQVmVsyJKJdcBWBK3HlTpVpI80f/k1muuKNkhABdtFNS1/7Fs/rSzNrWorkYCa96B6Gp+1ZVorUQtIXotAY3lUnOD8vCWqP9A65M7Odh5se555ur/knSL+KIWV5zB0BmQiV/Xz3qZoOR/9rtHp682MBp8GRFBEMRiueRoKP2dlRWzqWTj3hJiq8K9xlmUEMpA2/A==
+Received: from DU2PR04CA0239.eurprd04.prod.outlook.com (2603:10a6:10:2b1::34)
+ by PA3PR10MB9311.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:4d7::19)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Tue, 1 Sep
- 2026 11:48:15 +0000
-Received: from AM4PEPF00027A6C.eurprd04.prod.outlook.com
- (2603:10a6:20b:21a:cafe::1d) by AM8P191CA0013.outlook.office365.com
- (2603:10a6:20b:21a::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Tue, 1 Sep
+ 2026 11:49:34 +0000
+Received: from DU2PEPF00028D13.eurprd03.prod.outlook.com
+ (2603:10a6:10:2b1:cafe::4f) by DU2PR04CA0239.outlook.office365.com
+ (2603:10a6:10:2b1::34) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.10 via Frontend Transport; Tue, 1
- Sep 2026 11:48:15 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.88)
+ Sep 2026 11:49:34 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.87)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.88 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.88; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.88) by
- AM4PEPF00027A6C.mail.protection.outlook.com (10.167.16.90) with Microsoft
+ designate 164.130.1.87 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.87; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.87) by
+ DU2PEPF00028D13.mail.protection.outlook.com (10.167.242.27) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.382.8 via Frontend Transport; Tue, 1 Sep 2026 11:48:15 +0000
+ 15.21.360.3 via Frontend Transport; Tue, 1 Sep 2026 11:49:34 +0000
 Received: from ENXDAG1NODE3.st.com (10.75.129.196) by smtpo365.st.com
- (10.250.44.75) with Microsoft SMTP Server (version=TLS1_2,
+ (10.250.44.74) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Tue, 1 Sep
- 2026 13:45:33 +0200
+ 2026 13:51:31 +0200
 Received: from [10.48.87.93] (10.48.87.93) by ENXDAG1NODE3.st.com
  (10.75.129.196) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Tue, 1 Sep
- 2026 13:48:14 +0200
-Message-ID: <1b650381-f4ca-4293-88ea-496e825ab9fe@foss.st.com>
-Date: Tue, 1 Sep 2026 13:48:12 +0200
+ 2026 13:49:33 +0200
+Message-ID: <39a8f709-412b-4788-bea2-0e4cadcf8a71@foss.st.com>
+Date: Tue, 1 Sep 2026 13:49:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] stm32mp1: spl: support loading U-Boot proper from eMMC
+ hardware partitions
+To: Sean Nyekjaer <sean@geanix.com>
+CC: "trini@konsulko.com" <trini@konsulko.com>, "patrick.delaunay@foss.st.com"
+ <patrick.delaunay@foss.st.com>, "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+References: <20260618092855.3702905-1-sean@geanix.com>
+ <a0c2d561-a2e3-4c66-a9a1-e810009f262b@foss.st.com>
+ <04e0480a-2e4f-479a-801e-54699d854875@foss.st.com>
+ <AVOkeKKkQAoWpdG0kyASXbfyu96CsaHLok9_DQCEG5xW6hVGSaAk3tb6g4UZXdDa_uByOjgb2qA8Wq6cIy63baubWNMpGb8i_pZahNST4jw=@geanix.com>
+ <93ceb2ea-7e83-4b8d-8af2-5afae304da5d@foss.st.com>
+ <Jzny_6oiskgk1COrRgIO9-7yU03pscZqE31eAaI6jzIgCELNkJrJSz40g48d4s1jIIP8wrk0dxa1l5qdO-xVXTGA5Mxcsch485FzWkid3TY=@geanix.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: [PULL] Pull request for u-boot next / v2027.01 = u-boot-stm32_20260901
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.u-boot-project.org>
-CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>, Marek Vasut <marex@denx.de>, "Sean
- Nyekjaer" <sean@geanix.com>, Patrice Chotard <patrice.chotard@foss.st.com>
+In-Reply-To: <Jzny_6oiskgk1COrRgIO9-7yU03pscZqE31eAaI6jzIgCELNkJrJSz40g48d4s1jIIP8wrk0dxa1l5qdO-xVXTGA5Mxcsch485FzWkid3TY=@geanix.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.93]
@@ -115,29 +125,29 @@ X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To ENXDAG1NODE3.st.com
  (10.75.129.196)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A6C:EE_|PA2PR10MB8699:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0ed678b7-9922-49d6-7132-08df081ee884
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D13:EE_|PA3PR10MB9311:EE_
+X-MS-Office365-Filtering-Correlation-Id: 16c8647e-f84f-41dc-bd47-08df081f17a4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|1800799024|23010399003|376014|18002099003|56012099006|13003099007|11063799006|10067099003;
-X-Microsoft-Antispam-Message-Info: 0lzG8v1souyb53HK/XtuRsPeSXCFX8WVryA8ZQtL8eAc4UTOV9+3fydhmAQnGFYuCLZXrH8beP7GehN0CYnHAkTDbHYb0sQwS4eKJ2WaUfkjFZ5BK6RxvGtwU1Lnasl80PqZ4p6CAegiXvi7XQ+JWChNwqjRrRSkzoeGivLxr8iRxp/J6yK/r2CCnjR1j4cpVBDuWHXEHjOv8lAFHXp5AJQnOPOC1gZH7OtE1ItietxYqNKLchuUvL3jK/gMY71sgOEBC4n8zval2Z9CXokICtqqHP5rW/ebM2RTYFR2k1sWyc3VanurVeU1xOmituBQGUHS7ntO131txr7joA9u7oMxhcoO2Bm4lZ1UEghjtp+QkTBQ2HwXY+I5WItcuffYBljDrlb/eJzknwNlCX4DsexXd56sxzfABErUL97aae/Wb9k+zZ/JryHFN5b5p1TokvMSLIGjZZRcTqRkmBMYz+2H0BUsMfs0yWj/+EJKJMVTDPDt2/Wv+orxzjQ7XNlQXr7l/UIJkp92OTG+OPDaXPRYySj+Gm08Hfp5cdHVtr1PWHaE3Ulf5HyTOmCBYbc3ZV7+2iZOHX0O4oqdXFMq1NCdqBEWAvmZn23rVauVUuMs8SVTR/9PyyzuxhQywxxU52SHw1fPvdVL88OccyIf1A==
-X-Forefront-Antispam-Report: CIP:164.130.1.88; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|36860700016|1800799024|82310400026|23010399003|376014|10067099003|6133799003|22082099003|11063799006|56012099006|4143699003|18002099003;
+X-Microsoft-Antispam-Message-Info: ueeS1S3gSmD1J7EKEFqmbxUtfpaRyUmJQw/Y14hlA70lE0a6M6k1Ow5UH0HF7llteddSD9M7o+4kWzAQoqxU+my5FLK0+AH9tSyu2ybCHdJtKiaw2P84t3IFPsMPEqw0Uy8yo2QI+WbXHam5/X0DBSDU0/xrmjMfcLqXHZaqUH4IQN7CPJRJJNToNPb8H3IawBa5AVG4QJKz42YtQzPm1mNSWNAQTfV7nas5fxvPko78XVjNMSUXs+VV4vWuZay72cuPprn/BoSnRTMo5+ZfgI0wrGTjVcScuyXdVFOsPG3o1pzPunQs2IzwmZSo3aFBMU0Vqh2jZL9+W4lW+pf/OYRFOj9iuwTBX8KuJKY8dPkEyBxxk1ACa9H58FC6LU8gjhiiwQl3QJOIZEMa0ER8Ie1VQIXLRcib4ZRET7aBHSCwJ6MIKeOqW2ViPO0Ws1wLcU89vwqbbMcO1idR20m5X/tKb0Ml+GBPYWaFvjpNVaEH0WmusVMFJxTwF+g6mfEbAd3azp0ISdCS8gd/gRfcPNjMCRj8lE3/eyEOZLFPWZwZqpt0m85y4EAAzXvxx1fUmlHJI/G+UIYkuiz90bgyF80vUNNuT2Lil+PGAc7a59pfEfIuWW2DT53qhZ+EIWCwYAFpqFWlQFtMctb7gh4JgHrL6TAjQJNFhnS8mUtKnu9/jH+ibXydwDY/1FyW/gPtSYMAXhPY+rYuE9lbVOpOVw==
+X-Forefront-Antispam-Report: CIP:164.130.1.87; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(1800799024)(23010399003)(376014)(18002099003)(56012099006)(13003099007)(11063799006)(10067099003);
+ SFS:(13230040)(36860700016)(1800799024)(82310400026)(23010399003)(376014)(10067099003)(6133799003)(22082099003)(11063799006)(56012099006)(4143699003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: NkdFAdbKTslQd66MSVQb3L1X2BFBI1RhVUTz1BxAAeCm1sAlDeGjygZfAbNB6TkxajnUcDGDTTcu/eZ/h7suO+85Ws0O/kq5sb4R9s+sdWrD+WaBvsTFM33Jn1HMhpzPC1nlwayWrTX1yv/9gbqKLolTc4efeauicEF6HiQdX/o7fZaPRhy35nRgYUSqNk9HLIqfQtKENI3C72DdCCQVl+RJtXlqiGs5dsUm4XANxVSMH9Gtr5HExpRZ7Lp2G013I0/UuqHRKJyv/lv+HmUytu4O0SW5J0kfmjW4wswuQFi27RFXtHQb/vVtDsNS5/2o94oTZI5zfrncyDG070faBFenKVZQffJeVo0LVcIIcUDNKU7cNcihU4Y/UVXjHkP4KT5wpk1KT9woyRyUvN9nKJxzELKYiO+IBcQ83mf6MP6yPhqDt+alwMTWDC/uiki1
+X-MS-Exchange-AntiSpam-MessageData-0: 5P5hgoYNtQFJ+9ZUaGUPsIdbnxMYDju+yueN2AiwdLrG0dA6p7YMddrEsGJyUfVrVV2tojmdJT/7ROqC9D3YDo+GOKZ7mIp9wKNJhLU2c5+ciAuUIp4/9Y5oMGRUFm2OgOMb6teZyLZALmUDX0lBa4q2nk0VQc5Y5PxKbO1L8y8Bl7MR7U/PVd0jZsYDvv/CWIJSkzRkfkiB+RDpIhzYjzoKanjdkifcUzmY7II2xlmAH0WdOMXHmzcbJWCQnCTnY2XMeNcGf6MA9L9aSEtxHtgKXk8PTk+LfktwBZxs9YgBP8iyOLIcWWE5xg/tlbqaU9PKeIuqGmtun9kRK7McOSrpq/reatC+pTwtzTtBwCNZHcTjz1mA/tZ4NjdZ3JYjYjnB8IpCG7khn7BPaoUcad5Znh6nmjRP3w6panVMm2YFKejPTTj25C7T8/tV7906
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2026 11:48:15.2127 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0ed678b7-9922-49d6-7132-08df081ee884
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2026 11:49:34.2400 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 16c8647e-f84f-41dc-bd47-08df081f17a4
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.88];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.87];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A6C.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D13.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR10MB8699
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA3PR10MB9311
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,53 +161,105 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Tom
 
-Please pull the STM32 related fixes for u-boot/next, v2027.01: u-boot-stm32_20260901
 
-CI status: https://git.u-boot-project.org/u-boot/custodians/u-boot-stm/-/pipelines/1143
+On 8/5/26 07:50, Sean Nyekjaer wrote:
+> Oh, I accidentality dropped the CC to the list :/
+> 
+> 
+> 
+> On Tuesday, 4 August 2026 at 15:28, Patrice CHOTARD <patrice.chotard@foss.st.com> wrote:
+> 
+>>
+>>
+>> On 7/15/26 12:57, Sean Nyekjaer wrote:
+>>> Hi Patrice,
+>>>
+>>>
+>>>
+>>> On Monday, 29 June 2026 at 08:50, Patrice CHOTARD <patrice.chotard@foss.st.com> wrote:
+>>>
+>>>>
+>>>>
+>>>> On 6/25/26 08:14, Patrice CHOTARD wrote:
+>>>>>
+>>>>>
+>>>>> On 6/18/26 11:28, Sean Nyekjaer wrote:
+>>>>>> When CONFIG_SUPPORT_EMMC_BOOT is enabled, make spl_mmc_boot_mode()
+>>>>>> return MMCSD_MODE_EMMCBOOT instead of MMCSD_MODE_RAW.
+>>>>>>
+>>>>>> This allows the SPL MMC loader to honor the standard configuration
+>>>>>> options CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION and
+>>>>>> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR when locating U-Boot proper,
+>>>>>> whether it is stored in a GPT partition or in an eMMC hardware boot
+>>>>>> partition.
+>>>>>>
+>>>>>> As a result, both U-Boot SPL and U-Boot proper can be placed in the
+>>>>>> eMMC hardware boot partitions.
+>>>>>>
+>>>>>> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
+>>>>>> ---
+>>>>>>  arch/arm/mach-stm32mp/stm32mp1/spl.c | 5 -----
+>>>>>>  1 file changed, 5 deletions(-)
+>>>>>>
+>>>>>> diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+>>>>>> index d2e41b8e65f..d2af705a5d1 100644
+>>>>>> --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
+>>>>>> +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+>>>>>> @@ -56,11 +56,6 @@ u32 spl_boot_device(void)
+>>>>>>  	return BOOT_DEVICE_MMC1;
+>>>>>>  }
+>>>>>>
+>>>>>> -u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+>>>>>> -{
+>>>>>> -	return MMCSD_MODE_RAW;
+>>>>>> -}
+>>>>>> -
+>>>>>>  #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+>>>>>>  int spl_mmc_boot_partition(const u32 boot_device)
+>>>>>>  {
+>>>>>
+>>>>> Hi Sean
+>>>>>
+>>>>> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>>>>>
+>>>>> Thanks
+>>>>> Patrice
+>>>>
+>>>> Hi Sean
+>>>>
+>>>> After a discussion with Patrick, it should be safer to keep spl_mmc_boot_mode()
+>>>> implemented as following:
+>>>>
+>>>> u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+>>>> {
+>>>> 	return IS_SD(mmc) ? MMCSD_MODE_RAW : MMCSD_MODE_EMMCBOOT;
+>>>> }
+>>>
+>>
+>> Hi Sean
+>>
+>>> So like the arch/arm/mach-mvebu/spl.c ?
+>>
+>> Yes
+>>
+>>> But it's still a compile time option to choose where the U-boot proper is located.
+>>> When just removing the ST special here, we also gain support for loading U-boot proper from a filesystem.
+>>
+>> In our defconfig, we always got MMCSD_MODE_EMMCBOOT enabled, but we support boot from eMMC or SD-card.
+>> It allows to distinguish the boot device at runtime.
+>>
+> 
+> You will still need to have:
+> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
+> or
+> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
+> 
+> So still a compile time option.
+> 
+> /Sean
+Applied to u-boot-stm32/next
 
 Thanks
-
-The following changes since commit 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc:
-
-  Prepare v2026.10-rc3 (2026-08-24 18:46:24 -0600)
-
-are available in the Git repository at:
-
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20260901
-
-for you to fetch changes up to 295f19cae3f4cbebdb8685e3fe063c983a46fd1d:
-
-  stm32mp1: spl: support loading U-Boot proper from eMMC hardware partitions (2026-09-01 10:20:03 +0200)
-
-----------------------------------------------------------------
-STM32MP1:
-  - Add stm32mp157f-dk2-u-boot.dtsi file
-  - use debug() for image entry point message
-  - spl: support loading U-Boot proper from eMMC hardware partitions
-
-Various fixes:
-  - MAINTAINERS: Replace STM32 and STPMIC with N:
-  - treewide: Fix STMicroelectronics spelling
-
-----------------------------------------------------------------
-Dario Binacchi (1):
-      ARM: dts: stm32: add U-Boot specific dtsi for stm32mp157f-dk2
-
-Marek Vasut (2):
-      MAINTAINERS: Replace STM32 and STPMIC with N:
-      treewide: Fix STMicroelectronics spelling
-
-Sean Nyekjaer (2):
-      stm32mp1: use debug() for image entry point message
-      stm32mp1: spl: support loading U-Boot proper from eMMC hardware partitions
-
- MAINTAINERS                              | 36 +-----------------------------------
- arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi | 11 +++++++++++
- arch/arm/mach-stm32mp/stm32mp1/cpu.c     |  2 +-
- arch/arm/mach-stm32mp/stm32mp1/spl.c     |  5 -----
- include/configs/stm32mp21_st_common.h    |  2 +-
- include/configs/stm32mp23_st_common.h    |  2 +-
- 6 files changed, 15 insertions(+), 43 deletions(-)
- create mode 100644 arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi
+Patrice
