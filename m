@@ -1,115 +1,114 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30FE6C624D3
-	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 14:39:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29594C624D4
+	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 14:39:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F063660796;
-	Tue,  1 Sep 2026 14:39:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E873C4077C;
+	Tue,  1 Sep 2026 14:39:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id n8KuDYfZVwE6; Tue,  1 Sep 2026 14:39:06 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mdh-mZI7ja-F; Tue,  1 Sep 2026 14:39:07 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788273546;
-	bh=eS13Q7dxpUJOaeaBP6rTHcOYtUPH9t8nFE8VoufbCKg=;
+	d=lists.u-boot-project.org; s=default; t=1788273547;
+	bh=Wx9jTZKIGnt9GRjIRwJ71VMElZ1boGnDobHMLDryY0M=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nRZc3+hogfaPe7mU64pZZ/CkdLhvCBCp82D4EJXEjsc4sDjAlr5Eh85HqfsORWH1J
-	 xXifbhCv3Kx1Nu+VhVr/oQN5WnsmwR1JKzGOvYektHqkjCnVGC+dbyX0aeHf5KGV8s
-	 W6pDQMXFzwtoDXjgQV0A0LxM+FhmGtN9B2Mns99ymNE+5JFr9u5/Xq+gQKn5AoCRRv
-	 1YYhUEJ2OWOe0jeUJlaMs4vGBg727B++lAzLiFT5KqcGXGcVRqyFyUp+PpZ07JK5L9
-	 4SiAtJMmC9zjewARZxGkGKV9GoUV3PXf46dywk9LqR6HZMrovNGWU0FeITB7mH/w5E
-	 K/2w0ThtM7mAQ==
+	b=nr2ZhCVaC2Qmp0GSIBkqDzGeiLxp6LVsscG6cpx8XFiEQEcpuHRCLV6/0xL3qBUZk
+	 rlxTeA3Mk37eNB6Nfz44eD8Sy8X+4YkpmWfqwqt40xOXU9IC7FlJhlW3ygy0TSV9Mm
+	 BRHw9qE9obEkDZ6irLVmLtiXybc33+DzWx5R+DMf4ytDlQtCmZi5kLmJAJK6/jbrLy
+	 CO/8YpPamd0pr4yMpyWAvBtiV9qc6KKHhUwfVqmY16Kdviiyls0v5OPgYULN46D6Ci
+	 dVW8MtZW3r2ncvqlIJ6FcakngoBVWh00w0QIZPhbyUm3Ukzq86uSS0QNHIYuQRGf+1
+	 DnPtWvWDMFp/A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 265536077B;
-	Tue,  1 Sep 2026 14:39:06 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id B6807279
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 459F14072C;
+	Tue,  1 Sep 2026 14:39:07 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1BA80279
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:39:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9D07F401CE
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:59 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0DA5F80DB4
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:39:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KkYXfQxkW48K for <u-boot@lists.u-boot-project.org>;
- Tue,  1 Sep 2026 14:38:59 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vqBmeDQt4hOn for <u-boot@lists.u-boot-project.org>;
+ Tue,  1 Sep 2026 14:39:00 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
+ client-ip=2a00:1450:4864:20::32d; helo=mail-wm1-x32d.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=R3eO/MJc
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 92991401CA
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:58 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-49954b88fffso34969765e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 07:38:58 -0700 (PDT)
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=h7WudMIv
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 04ACC80DB2
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 14:38:59 +0000 (UTC)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-49b96837ca3so27644475e9.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 07:38:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788273536; x=1788878336;
+ d=baylibre.com; s=google; t=1788273538; x=1788878338;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=eS13Q7dxpUJOaeaBP6rTHcOYtUPH9t8nFE8VoufbCKg=;
- b=R3eO/MJcPPFmgmQSAZmioNU9MPqTG2hZhIgllS/yHXPCkTvqPPrfhHxLSv+mXp62Nc
- Q/uB+J6GQ4Y7afsYmUOqq9kVx1c0woPdE7pKiJhhDQ0fc+lDDQm8utHZlVxd7nEck8Ac
- 02BgRjn/x1N8BTiUnyrVR4vsU/KZgp6xyGGh3XfiTxD5ZeE9a3I2N4r/xIIXRnEup4fD
- Q7ir2Vw7G9DKmWPJNxddFdsfrWNgRowZ90KeY5kjViixOOckfuB9Avf/eSMkVBVa1sF8
- 3NTV8RLrAzOni7sm52hY9lytxsx52zjTH1D42BPksHtUlZWHEqy/h1bXEZTdPXQa6ZqB
- 6UZA==
+ bh=Wx9jTZKIGnt9GRjIRwJ71VMElZ1boGnDobHMLDryY0M=;
+ b=h7WudMIvAilupbR2qpDaF8LK/l1uGsLwiIOq4LzLO5a7e+/5X8FMk5nlpQJaJ6ih5J
+ AlJApYmyzknNMF+AsFP0fS/75BjWYIyiFLp6gnbLUOdxchq08s2bNt+iOsCcLcf1xcdD
+ xYJ8/DZgeqF9uh15TKVTFJMcXucvV7IcfzhUQqwcRr94/Ru3VscSetMaYBtNM2NtUCbO
+ JqZAKu9q9isIp+8UDUQ8DoBrzN+9AtAC4Q/gp9DvednodlNNdbAzAgIFuxOuCSwDUiHo
+ aZdGhq52s0D4o2j8bpGSZM1HlGj4ihnf8IJnM+rPykPTLk/9Eti6uiXvazy1NWIuC+PG
+ smRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788273536; x=1788878336;
+ d=1e100.net; s=20251104; t=1788273538; x=1788878338;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=eS13Q7dxpUJOaeaBP6rTHcOYtUPH9t8nFE8VoufbCKg=;
- b=IKJjs8udAXXH9TU4jjsJ3pnlEQH05//d6+4hgp4gP3d71wPOzd8cgTqVYMipK0NZVM
- JqI4DRnJS9AU+/Bi1OfUApwCHlyKigUYIhkeeoSqSHk0gk98vVb+uVgWWfNbeE3szSDl
- DNRJmaI3KAkApn7PSZZnxBPpL2ZViQse/XUsu7NJvG5tkkh1VPFJagfkkHw8Rw1e7X2p
- bUlfjtQMWoFrXLsLfXkkxQD17n8KBsZeb7A+bccY59ng18ooG7gM3HmH3rz8xDKblNbX
- pyENmY+q8UjX2005WGZ2u5k0hfNqhm7fWeOKQ/ZHIlKf8/Iu5F1QzAnWCKOVsLLgKYPO
- RDfw==
-X-Gm-Message-State: AFuF++lJqhJiVNdOdG20yGi6vnI1zfWWzO74i7iDbIKRAi8S6xfzcHkh
- xc6EW/Ewo23uDafLOLjMEljhw8HUWRfDX8UYWxJbuiNdsYfw+/VyaEyLhlCQ2ZCwFTY=
-X-Gm-Gg: AR+sD11w1CvEOPJTcjB/ePq/+eWFZnIxgLACh7xQHkEOpfwOFNxq95H2hHIzj0HBvM1
- 2mrTBML5JVRMlDbuH04eBYwdw4DEptbpkIoFIqi4bWGhDI/RaPhJgMufGzzD7WpOEUShfMGinEw
- thSrBAkv2IL82DRxAuBRxahjEeqNCGbuUwKb1saFzi6K4jwaKqC4enN1uVJa3EPzYBznFGYe88c
- wibCyH4spwATAC2roDOIUJya4LdbTzCXuOVEXLKwPTVMfXPKE7Dt1GvOz3cbKvqmWAyPxfR44IB
- 4t5eCX4FckI0q5mj2oFDzPnoTWdphEvv7wb26MuhMY/4/+Oz25NvFmAnxaYhhXyP2wBYoDYiyC3
- UPGQHAwW05G6th45fffw4ws3swo+xZu3rnoQsXxw2FXOOae9jvzp7g6EmWFFfB0tdHbJhVWaLMr
- Zxb9qSpSJlK35E0ezBL2LDEEQBCetKiTQ/P/2VH1w+rjIDeudiSgz5Rycf1/6XXwLoU/GoJeQN5
- 4eWcZpjfULuGv6akUNLhLBVJLzjcK8XE4gQBGy7McXQz8/mmBeAH+vR5T/ywl7p1SZOYeM+KEqv
- up628BO3/xLxWiDDPr06/K4CNlEKCb9kg0OqZe8ky4S0
-X-Received: by 2002:a05:600c:4e44:b0:49c:dca2:ac47 with SMTP id
- 5b1f17b1804b1-49cdca2ac80mr146681345e9.2.1788273535776; 
- Tue, 01 Sep 2026 07:38:55 -0700 (PDT)
+ bh=Wx9jTZKIGnt9GRjIRwJ71VMElZ1boGnDobHMLDryY0M=;
+ b=pawc1+Ai0v3ahQDprblJVuRe/QEH63J/uaRmij9b0yj9wT0Qm0v7fjbT7QFgvk2Fli
+ 3/o2ji2Q++8O7ti2458K/xrE6FEMO1o1NChaI6HxA74C/WSVno3X7aszcG6g+RDRSt/Q
+ IFXOV2izqdGHA0NK/jUoIJWQszi5gLSclJd+rEz1W7imphkUW0Q9kdDcjeLa20CVpQuA
+ /jn0lPxMi3ACB/eLgwispYz0zTvTZV5gMNIQbjyxJ2v/LyWOQPyodnQ2m7kl5QCVvUHr
+ x7P+vOIDU4cW4vHiMdqRrqYQWWMewSt1twId+/wOSf7bW5XaCFO9OOLD4N3eS4ku1/GI
+ 4U2Q==
+X-Gm-Message-State: AFuF++n4Tbk3Fz6MJuXRIqTZ7BNhPginYC6vkgB0oi5AmKSrwKB9Ltlz
+ 0QUtBAL4Lm10Am603RsSaoU1XgeGph1+zuGSofoclVg3h8UGDCxSewMw2Y/zxmzmh0U=
+X-Gm-Gg: AR+sD13t12JBUUG877tdqX+b4OoPKQGHQBNqObT39WdLwxheNdGULwd0cmEUHN9PmXU
+ 9itYecAh2lfU0swjfwCvMGXN4JKtWoZb627JwMz2lRxmW3lHzR0AUDJcwjvBHs4sO8/3tZFdQBD
+ W+yxntAE2EWoDBNzIbeDAwzcwIJzTxDg7Bdqx+dLkZU1Czt+lm4p+cOico7UUBM8p8va/YbHPo5
+ yQC0ptGVyu7WQsQnm0yy430ct8c/7vMJKrHCRbe2CDOIJHI/6l5bdwxxlTt5bFxco1u0/MJYNCB
+ D2hqcvSvVntM1jxxhw7Q0dypwiVulyFV8KO7NZtKWeZmy1w2ojT5D7Qc2pf6yz0kaxz6qZc/ALj
+ 1yabdlU3r1Te/tukmF3t+/VE4EWJQx/q/4dRHN8VMcJ6hcIazAvlBVX2311MQ226k/9c8g8M2yc
+ wpyC0Ygrrxqv+aaZ4CtI5Fi3K/83OP1mvXVVXqIWwb7mjwNJwXt8tblg3pFE3nWTYniuN/pZrBv
+ HXq3VoyPO+fD0SeT/0+z+0CBKGwtv0tr5fLifj2mgp9YWlaRy/hehdoti7CK0afOhNSc7I13Hn4
+ d3WHYTjFExsow3SNlnANUdmp4rBlLSUj3avB3vgWbd8z
+X-Received: by 2002:a05:600c:1389:b0:499:49f3:77b1 with SMTP id
+ 5b1f17b1804b1-49b91c1713emr490972415e9.3.1788273537809; 
+ Tue, 01 Sep 2026 07:38:57 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cdce1e3a9sm71533655e9.15.2026.09.01.07.38.54
+ 5b1f17b1804b1-49cdce1e3a9sm71533655e9.15.2026.09.01.07.38.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Sep 2026 07:38:55 -0700 (PDT)
+ Tue, 01 Sep 2026 07:38:57 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 01 Sep 2026 16:38:56 +0200
-Subject: [PATCH v3 10/14] include: linux/hdmi.h: add HDMI colorspace and
- colorimetry enums
+Date: Tue, 01 Sep 2026 16:38:58 +0200
+Subject: [PATCH v3 12/14] arm: dts: mt8390: add framebuffer reserved-memory
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260901-add-genio-510-and-genio-700-hdmi-v3-10-38194a531b9f@baylibre.com>
+Message-Id: <20260901-add-genio-510-and-genio-700-hdmi-v3-12-38194a531b9f@baylibre.com>
 References: <20260901-add-genio-510-and-genio-700-hdmi-v3-0-38194a531b9f@baylibre.com>
 In-Reply-To: <20260901-add-genio-510-and-genio-700-hdmi-v3-0-38194a531b9f@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -143,72 +142,67 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Import the hdmi_colorspace and hdmi_colorimetry enumerations from Linux'
-include/linux/hdmi.h. These describe the AVI InfoFrame colorspace and
-colorimetry fields defined by the HDMI specification and are identical
-across HDMI transmitters, so keep them in a generic header rather than
-duplicating them in each driver.
+This region is specific to U-Boot and only needed by boards driving the
+HDMI output, so define it in mt8390-genio-common-u-boot.dtsi (included by
+the Genio 510 and 700 EVKs) rather than in the SoC-wide
+mt8188-u-boot.dtsi. It is placed at 0x72000000 to stay clear of the
+reserved-memory pools declared by the boards using this SoC (the Genio
+EVKs reserve the range 0x60000000-0x61100000 for the ADSP and AFE DMA
+pools) and of the kernel load window (the Genio kernel FIT images load
+and decompress the kernel at 0x64000000).
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- include/linux/hdmi.h | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 49 insertions(+)
+ arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi |  1 +
+ arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi |  1 +
+ arch/arm/dts/mt8390-genio-common-u-boot.dtsi  | 21 +++++++++++++++++++++
+ 3 files changed, 23 insertions(+)
 
-diff --git a/include/linux/hdmi.h b/include/linux/hdmi.h
+diff --git a/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi b/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
+index 586d15bf72e..dda05bcf7f4 100644
+--- a/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
++++ b/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
+@@ -5,3 +5,4 @@
+  */
+ 
+ #include "mt8188-u-boot.dtsi"
++#include "mt8390-genio-common-u-boot.dtsi"
+diff --git a/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
+index 586d15bf72e..dda05bcf7f4 100644
+--- a/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
++++ b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
+@@ -5,3 +5,4 @@
+  */
+ 
+ #include "mt8188-u-boot.dtsi"
++#include "mt8390-genio-common-u-boot.dtsi"
+diff --git a/arch/arm/dts/mt8390-genio-common-u-boot.dtsi b/arch/arm/dts/mt8390-genio-common-u-boot.dtsi
 new file mode 100644
-index 00000000000..6e4828eb192
+index 00000000000..a4db2186e2e
 --- /dev/null
-+++ b/include/linux/hdmi.h
-@@ -0,0 +1,49 @@
-+/* SPDX-License-Identifier: MIT */
++++ b/arch/arm/dts/mt8390-genio-common-u-boot.dtsi
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
 +/*
-+ * Partial port of Linux' include/linux/hdmi.h, carrying the pieces of the
-+ * HDMI specification that are common to all HDMI transmitters.
-+ *
-+ * Copyright (C) 2012 Avionic Design GmbH
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sub license,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice (including the
-+ * next paragraph) shall be included in all copies or substantial portions
-+ * of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
++ * Copyright (c) 2026 BayLibre, SAS.
++ * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
-+#ifndef __LINUX_HDMI_H_
-+#define __LINUX_HDMI_H_
-+
-+enum hdmi_colorspace {
-+	HDMI_COLORSPACE_RGB,
-+	HDMI_COLORSPACE_YUV422,
-+	HDMI_COLORSPACE_YUV444,
-+	HDMI_COLORSPACE_YUV420,
-+	HDMI_COLORSPACE_RESERVED4,
-+	HDMI_COLORSPACE_RESERVED5,
-+	HDMI_COLORSPACE_RESERVED6,
-+	HDMI_COLORSPACE_IDO_DEFINED,
++/ {
++	reserved-memory {
++		/*
++		 * Keep this region clear of the board reserved-memory
++		 * pools (the boards using this SoC reserve regions up to
++		 * 0x61100000 for the adsp/afe DMA pools) and of the kernel
++		 * load window: the kernel FIT images load and decompress
++		 * the kernel at 0x64000000.
++		 */
++		framebuffer: memory@72000000 {
++			reg = <0 0x72000000 0 0x02000000>;
++			no-map;
++		};
++	};
 +};
-+
-+enum hdmi_colorimetry {
-+	HDMI_COLORIMETRY_NONE,
-+	HDMI_COLORIMETRY_ITU_601,
-+	HDMI_COLORIMETRY_ITU_709,
-+	HDMI_COLORIMETRY_EXTENDED,
-+};
-+
-+#endif /* __LINUX_HDMI_H_ */
 
 -- 
 2.55.0
