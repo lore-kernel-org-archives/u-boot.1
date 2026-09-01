@@ -1,137 +1,149 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63F91C61DD3
-	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 09:00:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD172C61DD3
+	for <u-boot@archiver.kernel.org>; Tue,  1 Sep 2026 09:02:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1CD6660749;
-	Tue,  1 Sep 2026 09:00:27 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 47BE3406AE;
+	Tue,  1 Sep 2026 09:02:02 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0QyuFL1ffeOs; Tue,  1 Sep 2026 09:02:00 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1788253320;
+	bh=dZXROtjS4UWJKlC7AytBP2qMDg7cXQPrCw0iFo1ycUk=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=QUVn+mLTY+0L0Mwp6Gp3EPJMMB8JXM/lG7POScS7p67h5gY0O8iqUQXpPacohJCDx
+	 7xBgJmgM3shaYOV0GxoE0sduFqTsojlbr75Zcp9xXX4nqCxOyhVGe/qFsPjKFyvY/R
+	 NammjkLlKatIZrPg+YeK9utE8d8UtkN6Iub5k3RdWkH4NeFLw2pOH9MkxEkULqzPqx
+	 ZsGLYz8Sql20VGA1RzyuW2qf/bEziftfhjwz/Y6aLRW/wXwHh4kK/NrDDN50rhUWLe
+	 +8/ZANMasgSKSvon+Undm/BlpBm+Zoft4FcbLukgmD9SLglCYFw+oyWlUw4OcgYl7d
+	 fkN+dFAVEu8vw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id A4DCF4051D;
+	Tue,  1 Sep 2026 09:02:00 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id F0C16363
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 09:01:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id D3A78606E5
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 09:01:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MwPUH5u6wuRv; Tue,  1 Sep 2026 09:00:25 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788253225;
-	bh=BZ6BwN8IWp6c9Pixz3e4kJObWQpxMqMnMXYxk9uzAek=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=nxl8R45qwIZ26H4J+61O2KLQnew1qGLqq+Yi58kvipVsW9CfwLddgLxC4CK/0p8cC
-	 bbDtBaWuymrmp2D1YJJm9KawK49mu68g1wyaTE55tRqk0ATxennGtp6uWe5HU1Xa2z
-	 0wMNn9tv5x1QcL52p6Nvto3ukq69ez8v86NAqGfDtZYwHO+K9oqzycQpwyfEK4STOq
-	 27bkOdBKKpr7oO/PBd7MBnU0irm1nCRtF/5zDHJOpkSzVekHS2c0TaSDdoh/BJ9N3X
-	 IMItGZBFv00V3nlywJXrPoHtbUTmJSLSIfyr4ifdBQC2xJHNYzi2RPbth+z9tKaIsv
-	 thU+g4N4OAPnA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 671E86073D;
-	Tue,  1 Sep 2026 09:00:25 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 739F8363
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 09:00:24 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 63AFC80B2E
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 09:00:24 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id f0zp78Af3xap for <u-boot@lists.u-boot-project.org>;
- Tue,  1 Sep 2026 09:00:23 +0000 (UTC)
+ id VvKyfAcjnXdW for <u-boot@lists.u-boot-project.org>;
+ Tue,  1 Sep 2026 09:01:59 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1133; helo=mail-yw1-x1133.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=zhvK13t6
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 96A6D80B07
- for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 09:00:22 +0000 (UTC)
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-8615bb9d857so5382247b3.2
- for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 02:00:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788253221; cv=none;
- d=google.com; s=arc-20260327;
- b=YRYFV0ubV0d6tIBy9lUKjcEOwuyf22ra6HYomHRvQWP4MNPPspNNs2a2/EypEJdlFf
- pkm8JKvAA2ZXP518MJCfy54EKjgHa01dcMiGpF/XOSUerHjV9fPa7DKz3jT5VBXyxzkQ
- DFu8LaR9YACoAmDpVkTv2QiSQM0R+O6vj5//9onqy38m6tGdZaDrY0njBKsl4XS8pNzV
- 24dMuT1NIpc7qD9Lqu1IqdvIm3Yd5GeFi9gvF+1HLHb2SwkxKkTMRTJ7a4YUBPFDaPJa
- zJ6hC73fCP+uaL74eLQjJ62P7ENERAshKv1fGccNJrUy8qh5h1Phis1U/Rl1VB+iwU2z
- aeAA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=BZ6BwN8IWp6c9Pixz3e4kJObWQpxMqMnMXYxk9uzAek=;
- fh=HTA1PY7guaH4TjSkpoY9aUBef0p+3e6pJD5Dzr61EXM=;
- b=G5+wo+Bm5xs20tuiSKQQUG9QtrUNZXOTNlA6jnWb+i6Vk7K7bVvY1RZWVa/2PrYzxY
- lup22H4ex8WwyfCtQM9RgitS51T08oIWAL6Zaa8dnkZRnjKXJgrLFOgSYqx3kKsBvpxF
- tSLwB4UEQ39yeRMqQYt6FMJdbjmoHS57g094FldSStHcCJePw6Z8yBo/r5JNagzkfXqg
- AqfsBPgGd9ZQC6Z0GXS4yO/my3rbuQjob4HEEhuOsi8IbuYpytdZg+IAjs7i4U/8Lxv9
- fP5/nlCfKoicwtaOElEq47elMgMi/AkWOp6AS/8Cl10SnMAH0A2NLucTJXWT17GY5pt4
- d1hQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1788253221; x=1788858021;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=BZ6BwN8IWp6c9Pixz3e4kJObWQpxMqMnMXYxk9uzAek=;
- b=zhvK13t65QhRbD/2RenCesstb56GBU8SjDPtvl6ayJuDO8jD5cs3LAebUnWSjhC9Tk
- ZEhd0ROrPFehRvVH0M2qHEC+AhLXp1lQEhQgP9FBGTfqno+UfyLll6ar0wEDpaFGb2vp
- ykHAtL3k658fc/VRsxXIYJB4FRlIQ4T8Wy7KnIhl7d5TOefKH8Y8XVYfeVdlhs7gvc7t
- X33YXDzRQm3m3/wvj3PDfUJl2dSWFWPHhxEmvvm41WjtyC8kEDTa0yVrJ5yQsnh10Z/e
- QrR/CeMk5PPjfzDL0dMZKO4SThLVvBOCOSGCoHSgaq+Btq6Xr/5uNT5DGxRdAzZT6Tim
- WSYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788253221; x=1788858021;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=BZ6BwN8IWp6c9Pixz3e4kJObWQpxMqMnMXYxk9uzAek=;
- b=pcWQhuzFYPPhpyEaFgoc/OWn8UFlY6FILIrxvMKVI74jrxzfHxduKdgg+sKaINVuy3
- FN6FESNVUMb+QjaiB07Y4Cwz+TpmD5RAQBoOngw06ri+PkGtrJIJxdmQmPo2qHefkLSb
- fWo6wgskkRWQJ1wSQK3T6JMlK+pjuvd7in08w47cS61cIE2yBQN7WEdPNDoFpdlTP0SI
- wfuW4qzW5IAnOKMY47utUiXdMxKa4TUiwyEiE1n1365eI3RSPV8ie88jgxEzmbAkZNKA
- 9SYtzeH22KMR8j39VACJY0g9YVW8IYmZDwgRZyhK9hSokjYSkGg1y9bJHdR/CJIjPVt1
- GfRw==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzE89Qv7uMvuVE0CrajMyV21yE3W86F9tbfzO/+EvBChCVp2nlgqnSNFxackXs0LCgKTSBdKC0=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mi6dWo8+M73O7Y3pS8ZbO/Nz4rkRZvDaxzV0HMBuLhrJWByD4M
- PlQqZl2a8CpUMnW+NOhl6P1AgbCmqOsw7GCFjMmFX22yKJrdcFEpRzLbQ6Rx3NZHQsepRDgvp09
- k/BfCdrXMjDQMX2JM0rMffXy9cdcKJve1aYVT1iMYhQh7cYLmDbbqqC5KLg==
-X-Gm-Gg: AYBFou0rHFnPOnX+r8mV3fh9BCZsHh8L1JpMB8b8f+CqNEjXx/x3ojzmVCfy9pXpr69
- J7prgc5fnzGLyVePXWhbtDkU3eQa5nFLjWaQTGr00fkbM95K4QTodL8VaeCGE+hszLo9Epo8LwI
- BwCEXcqs5El1y+7duOZdCixPf/zvF3Jb2W/DC1IVOl+cXep5dtdBk6Eni9yaNg9BwOaFy1Xwhgr
- YRBUC7skyIXk3gQHco/nVit9xuaq3uUZjV5iicb7Ex01MfeVGhQc5rXw2qIU7IfMXOkR4/Cq/j7
- DTo7n1AmEriUhdbP+syWIxFd5m1Y3b9dgw0gmr4T4WfV11SoWe/+WBv35zgkYRnuuxVfm6DmJlm
- 7PnghDavESZPTSqXC1okBKdaaPO9b78heOLtsH37gtvd/kiw76kaDT0WDkgS2az2D7K+GTYbxvk
- C0TRxAKWtkw7IFj5SRDcnbk1NbWmxRLxrNKpqke/J0Fhl9BA/4v21slDgTDolxEnrL1/yOxfDy0
- /3iQkn7OhZjxtg8JHc8xf4jf99iYCtwvRnlvyLAZf7v8bKg8n6NUkaZ3b05KBse2p0MdVF4KL9n
- rhFagqTxMXaiXXGPmp1ChSuJRXI4QBY91YL/vrLm/Hf0CR9Rp3wwCqih3W4omSGAHqJRlryf1L+
- ssbVdMwyTGQ8j25lQOTOz7WzeeEaK1wN4nu/3sfwQdEA=
-X-Received: by 2002:a05:690c:6e84:b0:860:607a:93d2 with SMTP id
- 00721157ae682-86060a881b6mr93917987b3.0.1788253221131; Tue, 01 Sep 2026
- 02:00:21 -0700 (PDT)
+ client-ip=2a01:111:f403:c201::3;
+ helo=as8pr04cu009.outbound.protection.outlook.com;
+ envelope-from=patrick.delaunay@foss.st.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256
+ header.s=selector2 header.b=ha25GRNv
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7E720605E8
+ for <u-boot@lists.u-boot-project.org>; Tue,  1 Sep 2026 09:01:57 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cWNE4c6OJg++CuOYqOgnfWYTT0t/vpb9Zni5SKq8T4afN7zwWicJg4DXuQLM9fb/LUltntY38aESn9hO/gDJxQSzllzWzqKoVjFf1pCxRg+vcup/NP+BKaoNRQShnuLXY9+qFhPJi9qb/hBtfFE/d/FAF69kBPIPW+N4bB6tTlHOhgiaUt8JC8vuhxFKFFJPu9+083nhmhegTl/GxCc+uhBjdyk7Fah18rx6VwoX+zO+2p/b5N2zXSBR+9FCiWt51K3ny1WiNGVWGhrGpyqQyNX4uWolA2xf8TVQ+jqqu5Q2g1n/fv+T6J1INdc7R57Rcv2BgHwcdFhUW9MykUEWbw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dZXROtjS4UWJKlC7AytBP2qMDg7cXQPrCw0iFo1ycUk=;
+ b=upuTCi/d/kRVLCdTBhh4sCWW9CvKjondd7wppWPn2ZwlXzNdgWQE/zvdzm5eLMtoGJ7h4nihXMTA8tWITVVz385HsuSm2S1sqiMc4vjkFb08LsVdZA7tZiZDcsTNLI36FJnKJjmnNunFdYN2ucH1rkez60++l5mSRqa7bgb/mJ+01sYO96senshLwn9AlnoPMj85i4hyyjztzGrjX4+YTb5f7SkdjOXYWeyRtYOtFB6P1YoYkmnf1xBTcF0O488zJ8S+obBddfZVSnIjlbV3OpqeN9C1Is0JbDEjJ6lbzaJjdgrEtB20SrAyu1W9js7e033MdV5vLY+U4i/6CzBbbw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.88) smtp.rcpttodomain=st-md-mailman.stormreply.com
+ smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dZXROtjS4UWJKlC7AytBP2qMDg7cXQPrCw0iFo1ycUk=;
+ b=ha25GRNvk+AKP7zjnRc31/axGlMl15Y+3FTrUssijStJ6xgAyAlaT1xF89gUiS97koFYXFE/haZP6bULBCkd9NfNOaq91FKrM6KrMpCaaD9IRUu7twaIkKa82G+aUQ8g6L0lROVOeC03a2QjNItO09QzOq/rFgOT9UgMwuznciCU7CA705jk0ckXn4xDtORXncRAAFUObTGWQUwhfb2OudAmFy/9jakDYIOYiUEDcMDAjxLw6/clKeO+o5NH1ZFQ44OHmEayy7qXaJqv9jV6bYFKp7C13JnnUnINEXg03682WoKozyeuxe6cwriZVvcaYvBYm1hv06OUrdBiVCklpw==
+Received: from AS4P195CA0023.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:5d6::14)
+ by BESPR10MB992323.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:b10:108::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Tue, 1 Sep
+ 2026 09:01:52 +0000
+Received: from AM4PEPF00027A69.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5d6:cafe::63) by AS4P195CA0023.outlook.office365.com
+ (2603:10a6:20b:5d6::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.10 via Frontend Transport; Tue, 1
+ Sep 2026 09:01:52 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.88)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.88 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.88; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.88) by
+ AM4PEPF00027A69.mail.protection.outlook.com (10.167.16.87) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.382.8 via Frontend Transport; Tue, 1 Sep 2026 09:01:51 +0000
+Received: from ENXDAG1NODE4.st.com (10.75.129.197) by smtpo365.st.com
+ (10.250.44.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Tue, 1 Sep
+ 2026 10:59:10 +0200
+Received: from [10.48.87.100] (10.48.87.100) by ENXDAG1NODE4.st.com
+ (10.75.129.197) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Tue, 1 Sep
+ 2026 11:01:50 +0200
+Message-ID: <5968db82-3945-4446-a03c-b02547605d79@foss.st.com>
+Date: Tue, 1 Sep 2026 11:01:50 +0200
 MIME-Version: 1.0
-References: <20260830084400.250238-1-heinrich.schuchardt@canonical.com>
- <20260830084400.250238-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260830084400.250238-3-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 1 Sep 2026 11:59:45 +0300
-X-Gm-Features: AcwNN1VzORBhSuu9aDzV98w7iopqd7U9_agXHsz-_AgKE-EJ49FVPZg85rA_wy8
-Message-ID: <CAC_iWj+-_tA2WdLJ+ZKJkVC5BV=KKju8GCq6AGWKip-Vq8ypbQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] efi_loader: consider type of
- platform_get_rng_device() return value
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Denis Mukhin <dmukhin@ford.com>, 
- u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] board: st: Fix compilation issue
+To: Patrice Chotard <patrice.chotard@foss.st.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ <u-boot@lists.u-boot-project.org>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>
+CC: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>
+References: <20260818-fix_tamp_fwu_boot_idx_mask-offset_definition-v1-0-611201a282ce@foss.st.com>
+ <20260818-fix_tamp_fwu_boot_idx_mask-offset_definition-v1-2-611201a282ce@foss.st.com>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20260818-fix_tamp_fwu_boot_idx_mask-offset_definition-v1-2-611201a282ce@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.87.100]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To ENXDAG1NODE4.st.com
+ (10.75.129.197)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM4PEPF00027A69:EE_|BESPR10MB992323:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9453237d-c83e-4245-663d-08df0807a9e3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|23010399003|36860700016|82310400026|1800799024|10067099003|11063799006|4143699003|22082099003|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info: xdwEFUSsNGLUnBcSiCTrvvy3cHI36gPV08PWXMPFFOlcUj//nk4cNeYPQyrdlOuSFCAoqQbrXFwzwe6IYHPDfqcG4GV/4U0GAMf+qpn0JSMtoBcRgkJINQTS6dafn5lhdbnmf4KjZUK4ol17S9Tce2V5+Z9eA7vTVnEQgjSQTosdhN/BwK2R3aKIOca+liWanhyUspMmhCqaxAJBnzkn7qW79OY1pIyz2be7+KOc0Zko/7ifPMuJrmduQcipZIE3vfMPSH1yfvwsTjAVAuE6zoDX5MxWb1eevQ6UC8GKeSE6EDNrea2VdJBvPSLxwNmRkw+XAXJ25/Es/o0kh8mCP+5m5QXbI2DiwmC+0dih3pG0YWY5aU0loP8FtKV+rIPijz78YFFUO8IBkWBCgigsbcphwh9B8MgYlEMUEtpQWeb9s+giLE60b0XqX8kN1gqvkgjXNHApnyPiik2NWEy1ccjPKBXDdCfLcT36CXBsDhmwMTx9OksLEOJrnamEdmuDC78xrjdENbXbkGoD7bBqKVYY82Jcs5uFf6RmXphbYae7nsUOmzztY99CLSIeUVie+x8eU1szlqt/HdWSOpKUmDdH79RJcMjebbtqYRF7szDbKBjRAmuTttiecMLWNuPX6NzRM7fMAqUmUkOL+UaH8JbzADTGZoZwTMMKc2m4sScmCt5Kbhc4RWukbURvFCXiybar3QkbS3ovPYGFhd14wQ==
+X-Forefront-Antispam-Report: CIP:164.130.1.88; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(23010399003)(36860700016)(82310400026)(1800799024)(10067099003)(11063799006)(4143699003)(22082099003)(18002099003)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: P/Ec28mvwM6Y4A8Sws4yPC6MynOp/dBfOMLZs/ACkYIPeH7heuC/e0mdMLXpcnp91bv0ywGxTm5YimhAydMUDojyztamuWCPfN7YdA5Fjlho6Ix/zpJIv5hyJxsILttxYMCqNkWvOpRzUxgRqEjL+mQOu8Sc/xTMg2VmGujI3dsauNHmLmSXmUz8sAthj6fPeH6819YUw90SKWgnFwMBHjJ77MvH4l9UdhBd7NBNxvUfKtWYHFQoUEZZYzCz6LolZ28LpckXGJ/6WDmyTOQ3sBASpSXBq8kEk+ZJorEo+1voKOfkJYlRgc1fQ72RfvNacQNMOmr1BGs6BBNGtcnGqn6Gxqch/FPIZOV/SerK4LhdabRPCaRQmp7TGUOMeOFOzDh0Ad7Bdl+1/QcCUJiOgOrr6uPKMzwQMZWHP5igg3jI+6kLM3mGZkoJckf9akSc
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2026 09:01:51.7111 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9453237d-c83e-4245-663d-08df0807a9e3
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.88];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A69.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BESPR10MB992323
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,54 +157,44 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sun, 30 Aug 2026 at 11:44, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> The return value of platform_get_rng_device() is efi_status_t.
-> It does not fit into an integer variable ret. Use variable status.
->
-> The RNG device was available when registering the protocol. When it is no
-> longer available in GetRng(), this is a device error and not an unsupported
-> algorithm. Use EFI_DEVICE_ERROR returned by platform_get_rng_device() as
-> return value of GetRng().
->
-> Addresses-Coverity-ID: 532068 Overflowed constant
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
->         keep the EFI_PRINT() debug message
-> ---
+Hi,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->  lib/efi_loader/efi_rng.c | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
+On 8/18/26 17:11, Patrice Chotard wrote:
+> This patch solves a STM32MP2 compilation issue in
+> board/st/common/stm32mp_fwu.c when CONFIG_FWU_MULTI_BANK_UPDATE
+> is activated :
+>      - error: ‘TAMP_FWU_BOOT_INFO_REG’ undeclared
+>      - error: ‘TAMP_FWU_BOOT_IDX_OFFSET’ undeclared
+>      - error: ‘TAMP_FWU_BOOT_IDX_MASK’ undeclared
+>      - error: implicit declaration of function ‘env_set’
 >
-> diff --git a/lib/efi_loader/efi_rng.c b/lib/efi_loader/efi_rng.c
-> index e920eec9d7b..3a831e2232b 100644
-> --- a/lib/efi_loader/efi_rng.c
-> +++ b/lib/efi_loader/efi_rng.c
-> @@ -103,7 +103,7 @@ static efi_status_t EFIAPI getrng(struct efi_rng_protocol *this,
->                                   uint8_t *rng_value)
->  {
->         int ret;
-> -       efi_status_t status = EFI_SUCCESS;
-> +       efi_status_t status;
->         struct udevice *dev;
->         const efi_guid_t rng_raw_guid = EFI_RNG_ALGORITHM_RAW;
+> Fixes: 4369c6a05035 ("board: st: factorize STM32MP FWU multi-bank support")
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>   board/st/common/stm32mp_fwu.c | 2 ++
+>   1 file changed, 2 insertions(+)
 >
-> @@ -123,10 +123,9 @@ static efi_status_t EFIAPI getrng(struct efi_rng_protocol *this,
->                 }
->         }
+> diff --git a/board/st/common/stm32mp_fwu.c b/board/st/common/stm32mp_fwu.c
+> index ac7ca6bdca2..cff020a99bb 100644
+> --- a/board/st/common/stm32mp_fwu.c
+> +++ b/board/st/common/stm32mp_fwu.c
+> @@ -3,9 +3,11 @@
+>    * Copyright (C) 2026 Amarula Solutions, Dario Binacchi <dario.binacchi@amarulasolutions.com>
+>    */
+>   
+> +#include <env.h>
+>   #include <fwu.h>
+>   #include <part_efi.h>
+>   #include <asm/io.h>
+> +#include <asm/arch/stm32.h>
+>   /**
+>    * fwu_plat_get_bootidx() - Get the value of the boot index
+>    * @boot_idx: Boot index value
 >
-> -       ret = platform_get_rng_device(&dev);
-> -       if (ret != EFI_SUCCESS) {
-> +       status = platform_get_rng_device(&dev);
-> +       if (status != EFI_SUCCESS) {
->                 EFI_PRINT("Rng device not found\n");
-> -               status = EFI_UNSUPPORTED;
->                 goto back;
->         }
->
-> --
-> 2.53.0
->
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
+
+
