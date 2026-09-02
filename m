@@ -1,137 +1,136 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77875C624D0
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 09:08:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 741C9C61DFD
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 09:21:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1F73F80F3B;
-	Wed,  2 Sep 2026 09:08:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1F9696086A;
+	Wed,  2 Sep 2026 09:21:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mlF3b7xyRodQ; Wed,  2 Sep 2026 09:08:01 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id a7QBE_z8osqO; Wed,  2 Sep 2026 09:21:41 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788340081;
-	bh=vcPBSEfuUgmyUgx+5CT6Fb3N0jPHmU6gv7p0FH2vsD8=;
+	d=lists.u-boot-project.org; s=default; t=1788340901;
+	bh=bl2vlfwvvQ4JLwMipAgCLCpoKA4VFVLWBvkZlhYqtkk=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=peivtZjWjVNsJqZ3hL9mho+D5gxstj6a4IOxr9odkSD+WJfUReiPXPUh5Uro4tyG6
-	 ZE/sB5LWcBoI7kWzwEDkwLxalOtk20Jw3aemdp6KYwKkXj/U3RF0MNYIkJRIK+n6VI
-	 UDceZpoNA0qWezIXYyepoUfMIYb+6DW2LKSDqBoFifvWIH9C+UEb7H5NsvCcUg+6rn
-	 oJ/HgzCk1Rdpl5mpf5yEAG+aSxNPkmhvF2SL5hlDSAyckcFSDPGLnuKX9EpGOdmWit
-	 bPuU0vtarBS0VPi84XpxcpVfr1u/DzK7lJFsZKIKsdyCajqa21cY5njgzwVFG5IzZW
-	 JqyW20BOwQqAA==
+	b=xboOZBLkMGFefRid1wdMl8YNM/DmAq0GPG0QudrsfKEaJaXp79eG1XOdxWVHwZ73g
+	 QqmRgSBwp7uISvK7OtVPtF9RZEJCZFdm71iu8HeUSXHyLWVCex3OcxSVo9mASoVAih
+	 RVzVTcOZXgYdlpi+1NhC0YR0CvRIjW1nLaTIPXpQVtInlVFpZU74JDmFRiApDa/ycM
+	 kHgb+T4FcCp8O5dsTzjEzW04n+jLzr/uOt3kAdRoPJ8cDsCzIT5tv49mAJMemsq9j2
+	 04TvBE685P/vXlRjZGzvSYvU4tNcx4BavY+a0/bnnDW4YFZMxry3zkHqDUxP+dvIE1
+	 z2j9mdu2SRtBw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3037180E7B;
-	Wed,  2 Sep 2026 09:08:01 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 01808118
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 09:08:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 11C1660829;
+	Wed,  2 Sep 2026 09:21:41 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5AA3E2FE
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 09:21:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DB7A0402D7
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 09:07:59 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 4C40140852
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 09:21:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WG1QX4Hnv9K9 for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 09:07:58 +0000 (UTC)
+ id rqMlu2YQv4XA for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 09:21:38 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
+ client-ip=2a00:1450:4864:20::631; helo=mail-ej1-x631.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=SL8BItYk
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1725B4023C
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 09:07:54 +0000 (UTC)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-c25420fe973so115113366b.0
- for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 02:07:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788340072; cv=none;
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=l+rNWA00
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 55FD4407ED
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 09:21:36 +0000 (UTC)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-c250c6a6a6eso111462766b.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 02:21:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788340894; cv=none;
  d=google.com; s=arc-20260327;
- b=KqkPlwwQe00Se5+CNaNWR2oooc+sacjBDo5L6X1LR+U3E2C20PmhNVEHs2VD3IX+l+
- 4XsrwhZrtPxqnuBJ5V7SYIuW0RaWUgi/ousr8H8VBR8U47u9D267RQN9xt07DXPV4+9n
- eLdfUABHZ7RMyLo9skOu3CtD1KeDOTp7W375cfjyWOnRe3zKkLOo/fDpagK0fXVKKmCk
- oErf4xGitQLgV7YsIGwJ8eWQ2sM66JecFLI53IbQOhkmUbh7KKxGa4woCMw7OJn+NN7U
- aVbe+e5sHjZLuowqwOBWRpMb9mjTU+yi/AuYwkocUfr45DI9IE1/tfWtER/b5mL1Gg4C
- Y3RA==
+ b=fHjQpW9cJdjPbtXwaIjX06+5+Q2Z/w3jj5pPmhRdNEcSJaOy7wCw6NKKt0sx2s32CW
+ KIi8x+r2ais84+/YG7vfCxzdkeHZh4C9J/TxL8S8utJvkIkq8kd11bjNjwl0bR+rLM7M
+ mgTX7onTUkGCw2qCydV3ULXWrqFywBG99c+xdwQ3PMXm3zJ/i8m3mJuK+FhwU22qcaMF
+ 9Xl7aLR8xRc5sHowsYZ3Cghyx7gnpDKJiLBA+jStkWd9oNsjvhUqHVwGsNOl+Lm2iooG
+ /8tnAy8iDEGXA3DoXQsbVbwLLOzldcbxWpbYL2UHQ/vqfpBPatm0PiGRS8Cpj7XdUQqg
+ jrMg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=vcPBSEfuUgmyUgx+5CT6Fb3N0jPHmU6gv7p0FH2vsD8=;
- fh=UhF5w8H4HJ/K9BROtZYai+0CkLFbD1oo1Yv4Tc3mtn0=;
- b=UNjWjEXTPyKULBzaWSSjWRCpZ7RuiaISQJsQjdlzoft0Wza4qL3Xs2GIqcR/xZ/1FE
- 3xFS5I1nVL6Mt73OOdNDvCoDBPTQHYOekKwbdxUJbfo0RuiWMvPOp2irqATnuMCUFbkL
- yPAdD3PA5Jbf3ihIjED392dFb4FxLn2zXnyjrGrdRpMf+cNCqvLzsBEMlel7JYWdmJEL
- pDE8W6O0yqsAzb/f9U+TCxZYWQZU3Lzi7kk9fMt6meqS5IA4dBW/0zcmtSVOaTK50Vad
- lZmPWN+2ll/wmqyRqymkeqUH5f+1x899dbmsHDWJypV06yJUJnRTY7pD8w0ufpgxqv4j
- ZnBg==; darn=lists.u-boot-project.org
+ bh=bl2vlfwvvQ4JLwMipAgCLCpoKA4VFVLWBvkZlhYqtkk=;
+ fh=2m6p1x5/JpwxysHz1mM+EbXGt6aN26qlKnrzTcB3ctc=;
+ b=MAqbd6reXoF5/XmAa0uVlyWyt7b2aPV/lHtoOVxEWnYzX4fWRNEpPcN8VqreQoD37X
+ Ij1ex2nXZErqiTbK0FYXj1N9asRKTlpTolbDkPUGGdRR++BRR0IBlA62bmx+b1R7rXlt
+ lTGZ2+txbyR4TGLjhW43VfNFIEzXTiYUqe4uogjcQSri8MuWOA9VHaIdM9QORD1qpsLG
+ aoWcHOjbYW0vybXoC7BOuKe/DHDgRebFlQFQf4c72Z3dTlOPmzaFGB3umdGc4Id6oktd
+ QYKxabC8EBEfMM5XcQiQV/GHeCRr8loHoY/JnCoerJD49k74VRhq9hcodWCeiYspY8//
+ TWfQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788340072; x=1788944872;
+ d=baylibre.com; s=google; t=1788340894; x=1788945694;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=vcPBSEfuUgmyUgx+5CT6Fb3N0jPHmU6gv7p0FH2vsD8=;
- b=SL8BItYkw9azu8lZBoBGFKHOpeP6sbp5dqmYEDusd34VV1HR9AhT2aTpi0tuVG5o36
- STcNRv8W9/Tu+2WNSy1lSBr9kVCPLVI5Xoam5oAkf222bRi4IkasQoPW/Lh2kdCM+IGv
- jCI+zEVnnCma+5Y3/JTTQ0p4tgEq9wRXInR5KPw6F1ayfUVTwES/7nF2Xum4tLNBD+KS
- xvn+ocOiNQ0eV8hnuf0YD4B7QbdqilpTQQkOiUn9Myq+29YPjNQ7ms66vRmfje9pXIQ+
- QSrgtAQ6YRhLmB0tl7kFs9/hekHYhLLABvM/KGaYb5EoVbQlfqtbPYEozcA2ANmmYME4
- mPRw==
+ bh=bl2vlfwvvQ4JLwMipAgCLCpoKA4VFVLWBvkZlhYqtkk=;
+ b=l+rNWA00lQvXf0q/XHhQMVqWQzhNcSXmDxOg7pRw93qkCOxBljjWRC8SrgcIDVU/3z
+ BhbtTz4B6jmJIJ9MsNm1Oc9rXQf3HWlrd1Wwcl6hlNHDlt12IXguPIFzXg0aAHRXkrJS
+ vk5fvp5bYjibpSg+tTmwVReQ1kyNobfpe/NNeGf35wNhInd810KyYyqPDqTdk7LVYx+h
+ T61ZZr9jHxRmOsgc5+TL4aOo+U9jsTpS2ehoweOsJ+N+31QjD450v4Ye3ojZ2Wu/2FX9
+ tb7XjLhdggSKguUvTy2eY4xZtJEv0eq6t99ECJmZgo5RYcxYMCdP11ru8vlFCL/Mxepz
+ jaOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788340072; x=1788944872;
+ d=1e100.net; s=20251104; t=1788340894; x=1788945694;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=vcPBSEfuUgmyUgx+5CT6Fb3N0jPHmU6gv7p0FH2vsD8=;
- b=GfxFj5FqkycE90Mtc5uDfmuKm/EUc+EiBgTB/MphIqXt+4rl8/17nH4gSu+YX+8R6X
- DDPvWrAN8TtZCWndgt0sAVTPY849/za4bFQFkvG+Lieg/gB4PbP/M9TrQR6CKB/xelfI
- wiu7Yprnog7fHJP83cwdACdbtmnAnorTU+uF9Hoeip5pHhAANULCQEcQMR3q/4LBj46y
- rT1cF2uggWFJ0AxlqOijzFGHPol5tGm9IQJZHIZ9wnNVT1rWKMZ20lpoVLntv/axywxv
- w8TImQnhZkhtVPdRhJA6wR6eD0/tEg3qSOoc+QzoilzIqlfxyNuHFWRtY/pePAZ9gQtl
- lvbg==
+ bh=bl2vlfwvvQ4JLwMipAgCLCpoKA4VFVLWBvkZlhYqtkk=;
+ b=kMKwptcoXpfF/n9MsTC939Tnp+S0ZUz3viTC8PPmeUBDCS2EwBLgBsQsQtWRWR20Sy
+ Ir4HV6UwWrsZQQVkbB18Ix8vROg8k4Cq4BPizVKpfM8tv2G+BY7hnsB4Q2aI5/A4VU9/
+ VDkA6URxvmpEiR3sCl47K/UVhpLKYqVeV4GISlWmRuqwL3onih9evK+OeVMWq20O6d5G
+ iea+Uj03+lKjeNudd3OaksScR0rL4biybNZAM6aQ87z53OVj5UPuLhNErrZ19yl5jkoh
+ fgIVFBhS3B3MpNavgkNcU49WmTAyNYjOpGk4LFMQd/U8BNZmCiqGGGZ7vTzbESkrlR2K
+ EREQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzvvjnYwo0lYo3xG0vqFDbSN9NKMR7l7Ca9afbZrI719IBw6y36xWtUSOfTYGV9VBDE5MdNTtk=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++krgNt5zUP2qyfK3tYk/WS0pO2Fhewyw/vvQUUrhtWVvK0WfzBw
- hf4S5FbvXHcUmNA+esktmic9H+jMwZs+r1p16xg/+dEKSurHeURlLAkmlNjhnQYbyuR/XAKHhX+
- HdI5+ifYJB12KCjXoMm04cdcHBXVdZk7nU62znkqpwg==
-X-Gm-Gg: AYBFou3OMskGjx6BKAbhlMz0+xuECXRVY24MdVxupQdLapQBf4qpWoVzn46hWmYmZDJ
- E8JZux8ij4ryLwCfukzeCu/wfya1OpPuG+HG9O2Og6ql89grE4V2TtrN8QqD1EM4IDE4Qxo/iOZ
- McVw39lf/jqdaXRgoiTu7yapKItbYnBX8CPhurxLvQBWFEFRm7mdi/thyOqOFxrqHR9f4AbzrBN
- CExMaNcbstVzUcasNS/7F/daGiBB/Bwfv12pJ7hV8SooxeVJd3qF5CDc3gAaU7hPlk1TWjPI8Da
- D2HiC0pvNaNHbHFCaUqKc5z7nCBJptqvvbaw08Xn2+gADjLB6/mn7C2m5/KrPXDf+1te0uWe0Tu
- T6R+K8G72XVX1oomA69aQNRnLKfS4t42VtgHqCszvawE0VkVS1H5O+DGJ3ecWMrdl
-X-Received: by 2002:a17:907:3f87:b0:c21:726b:34eb with SMTP id
- a640c23a62f3a-c25d54528e4mr180074866b.8.1788340072221; Wed, 02 Sep 2026
- 02:07:52 -0700 (PDT)
+ AHgh+RoolZ2Rar3jph2ssd7P6M/YN7kGLURWOsLcYWRTYUIQK9CAOgtigL4pWehIj4mrDw4WTdjVbME=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nxo69QCjxUniT3Pgq6f6i5VTG5y3hd9dFWGu64wLVDkLpa5/Aq
+ rFSaXZP6/s1W6y2Lt1iPVq0liEV5YA/BShgLyvAIi4hrrT+czdDmwkJfXSq2m7F4KQB33KsjFTi
+ uZffmYL0xz6sstXVMuc44Cnczhvod+pPbhjFehBlNrQ==
+X-Gm-Gg: AYBFou125z08nvDLCz7GOZyuYhCQhy2IaqhrQQKBWooxOAkXf+0yV6bWYnflPCzIZcv
+ lgjLTecdNm3Ct954TMltLgkXlEQ8tsb9nXDPJUmWrJtO1A7faLTRcwWqJRXpWLQF8/xw+VuRNRB
+ BUmf6VT6FhTo7rwtRELdcLkIPeL+JgyL9fA6y16bUeaIwYp4SO2i9l4ZKtjtz9CafJPlHzOIuWE
+ XPvowQJBfa22IgcSwCatNsu/XDVRGNr7//QLBGpyxWiru3/ACw38NMbKhYnCnkHVf0aJSdLyGr2
+ I8/jLeWBqSuhl3X8h3So5/VkhnKyzjFqp/chXORO1cSkvXJrS/I4w3ooAjVuaj6NSHo3DVuz4EC
+ w1XElReSfk+xnHDzPzfZI4B3LMPD56sq2Iv2TihEfR/9ae2kr7zPCQ4VeA29uau2KuXSf0fPXSA
+ g7
+X-Received: by 2002:a17:906:6a05:b0:c24:c24f:e176 with SMTP id
+ a640c23a62f3a-c25d5440617mr177443966b.15.1788340894358; Wed, 02 Sep 2026
+ 02:21:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260814-mtk-genio-720-remove-ufs-defconfig-v1-1-000eb476030f@baylibre.com>
-In-Reply-To: <20260814-mtk-genio-720-remove-ufs-defconfig-v1-1-000eb476030f@baylibre.com>
+References: <20260814-mtk-pwm-disp-backlight-v1-1-847992f0b815@baylibre.com>
+In-Reply-To: <20260814-mtk-pwm-disp-backlight-v1-1-847992f0b815@baylibre.com>
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 2 Sep 2026 11:07:42 +0200
-X-Gm-Features: AcwNN1V908Aevd4MCChMeoPD1XvwTg0JrmYTydHpczQKIyAE5z6bvi0C3vkL_hU
-Message-ID: <CAEHHSvY_kNWA1W1TONSwe-7MTHLK3wjLe18Bn0qto7+XePvBeQ@mail.gmail.com>
-Subject: Re: [PATCH] configs: mediatek: remove UFS defconfigs
+Date: Wed, 2 Sep 2026 11:21:25 +0200
+X-Gm-Features: AcwNN1XriLDQd18h8V_om3gADrsFXiUAK9CLXxsSvL-awej69lnOE5I6B-YGoxA
+Message-ID: <CAEHHSvYvw3c54QCthkhCuD9Hgo_G-YHHJkvMEA1GxRX=3Z-B4g@mail.gmail.com>
+Subject: Re: [PATCH] pwm: add MediaTek display PWM driver
 To: David Lechner <dlechner@baylibre.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Carlo Caione <ccaione@baylibre.com>, 
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, u-boot@lists.u-boot-project.org
+ u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -147,176 +146,267 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Le ven. 14 ao=C3=BBt 2026 =C3=A0 23:21, David Lechner <dlechner@baylibre.co=
+Le ven. 14 ao=C3=BBt 2026 =C3=A0 21:30, David Lechner <dlechner@baylibre.co=
 m> a =C3=A9crit :
 >
-> Remove the UFS defconfigs for Genio 520/720/1200 and enable the UFS
-> options in the remaining defconfigs. This simplifies things a bit, e.g.
-> it makes fewer builds to run when testing. Users can instead use the
-> base defconfigs and pass DEVICE_TREE=3D to select the correct devicetree
-> for the target. Or alternatively, include devicetree overlays in a FIT
-> image that can be selected at runtime by the SPL.
+> Add a new driver for MediaTek display PWM controller. This is generally
+> used for backlight control on MediaTek SoCs.
 >
 > Signed-off-by: David Lechner <dlechner@baylibre.com>
 > ---
-> A bit more on the motivation behind this...
->
-> As we are working on adding support for DSI displays for these that
-> are removable (and there are dip switches to select different types
-> of displays wired to the same pins) we need to add additional devicetree
-> overlays for these EVKs. We don't want to keep adding more defconfigs
-> for every permutation of the devicetree overlays. So better to go with
-> a single defconfig that has everything enabled and just control what
-> probes at runtime via the devicetree overlays.
+> This driver will be used by MediaTek Genio 360 EVK that we are currently
+> working on bringing up.
 > ---
->  board/mediatek/MAINTAINERS                  | 4 ----
->  configs/mt8189-ufs.config                   | 8 --------
->  configs/mt8189.config                       | 4 ++++
->  configs/mt8195.config                       | 5 +++++
->  configs/mt8371_genio_520_evk_ufs_defconfig  | 4 ----
->  configs/mt8391_genio_720_evk_ufs_defconfig  | 4 ----
->  configs/mt8395_genio_1200_evk_ufs_defconfig | 8 --------
->  7 files changed, 9 insertions(+), 28 deletions(-)
+>  drivers/pwm/Kconfig        |   8 ++
+>  drivers/pwm/Makefile       |   1 +
+>  drivers/pwm/pwm-mtk-disp.c | 178 +++++++++++++++++++++++++++++++++++++++=
+++++++
+>  3 files changed, 187 insertions(+)
 >
-> diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-> index d99c6d708b2..47f91d6e81c 100644
-> --- a/board/mediatek/MAINTAINERS
-> +++ b/board/mediatek/MAINTAINERS
-> @@ -5,12 +5,9 @@ F:     arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi
->  F:     arch/arm/dts/mt8371-genio-common-u-boot.dtsi
->  F:     arch/arm/dts/mt8371-genio-common-ufs.dtso
->  F:     arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi
-> -F:     configs/mt8189-ufs.config
->  F:     configs/mt8189.config
->  F:     configs/mt8371_genio_520_evk_defconfig
-> -F:     configs/mt8371_genio_520_evk_ufs_defconfig
->  F:     configs/mt8391_genio_720_evk_defconfig
-> -F:     configs/mt8391_genio_720_evk_ufs_defconfig
+> diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
+> index a69fe37caff..8a2b140fe97 100644
+> --- a/drivers/pwm/Kconfig
+> +++ b/drivers/pwm/Kconfig
+> @@ -74,6 +74,14 @@ config PWM_MTK
+>           This PWM is found on MT7622, MT7623, and MT7629. It supports a
+>           programmable period and duty cycle.
 >
->  MT8365 EVK
->  M:     Julien Masson <jmasson@baylibre.com>
-> @@ -34,4 +31,3 @@ M:    Julien Stephan <jstephan@baylibre.com>
->  S:     Maintained
->  F:     configs/mt8195.config
->  F:     configs/mt8395_genio_1200_evk_defconfig
-> -F:     configs/mt8395_genio_1200_evk_ufs_defconfig
-> diff --git a/configs/mt8189-ufs.config b/configs/mt8189-ufs.config
-> deleted file mode 100644
-> index 8a7afb95b1b..00000000000
-> --- a/configs/mt8189-ufs.config
-> +++ /dev/null
-> @@ -1,8 +0,0 @@
-> -#include <configs/mt8189.config>
-> -
-> -CONFIG_PHY=3Dy
-> -CONFIG_PHY_MTK_UFS=3Dy
-> -CONFIG_SCSI=3Dy
-> -CONFIG_UFS=3Dy
-> -CONFIG_UFS_MEDIATEK=3Dy
-> -CONFIG_CMD_UFS=3Dy
-> diff --git a/configs/mt8189.config b/configs/mt8189.config
-> index ab56c90a17c..8db5815e9e0 100644
-> --- a/configs/mt8189.config
-> +++ b/configs/mt8189.config
-> @@ -16,6 +16,7 @@ CONFIG_CMD_CLK=3Dy
->  CONFIG_CMD_GPIO=3Dy
->  CONFIG_CMD_GPT=3Dy
->  CONFIG_CMD_MMC=3Dy
-> +CONFIG_CMD_UFS=3Dy
->  CONFIG_CMD_USB=3Dy
->  CONFIG_CMD_PMIC=3Dy
->  CONFIG_CMD_REGULATOR=3Dy
-> @@ -42,6 +43,7 @@ CONFIG_DM_PMIC_MTK_PWRAP=3Dy
->  CONFIG_DM_REGULATOR=3Dy
->  CONFIG_DM_REGULATOR_FIXED=3Dy
->  CONFIG_DM_REGULATOR_MT6359=3Dy
-> +CONFIG_SCSI=3Dy
->  CONFIG_BAUDRATE=3D921600
->  CONFIG_DM_SERIAL=3Dy
->  CONFIG_MTK_SERIAL=3Dy
-> @@ -51,5 +53,7 @@ CONFIG_MTK_SNOR=3Dy
->  CONFIG_USB=3Dy
->  CONFIG_USB_XHCI_HCD=3Dy
->  CONFIG_USB_XHCI_MTK=3Dy
-> +CONFIG_UFS=3Dy
-> +CONFIG_UFS_MEDIATEK=3Dy
->  CONFIG_WDT=3Dy
->  CONFIG_WDT_MTK=3Dy
-> diff --git a/configs/mt8195.config b/configs/mt8195.config
-> index 03f57d46708..909b495e015 100644
-> --- a/configs/mt8195.config
-> +++ b/configs/mt8195.config
-> @@ -13,9 +13,11 @@ CONFIG_BOOTSTD_FULL=3Dy
->  CONFIG_CMD_CLK=3Dy
->  CONFIG_CMD_GPT=3Dy
->  CONFIG_CMD_MMC=3Dy
-> +CONFIG_CMD_UFS=3Dy
->  CONFIG_OF_UPSTREAM=3Dy
->  CONFIG_CLK=3Dy
->  CONFIG_MMC_MTK=3Dy
-> +CONFIG_PHY=3Dy
->  CONFIG_PINCTRL=3Dy
->  CONFIG_PINCONF=3Dy
->  CONFIG_PINCTRL_MT8195=3Dy
-> @@ -23,8 +25,11 @@ CONFIG_DM_PMIC=3Dy
->  CONFIG_DM_PMIC_MTK_PWRAP=3Dy
->  CONFIG_DM_REGULATOR=3Dy
->  CONFIG_DM_REGULATOR_MT6359=3Dy
-> +CONFIG_SCSI=3Dy
->  CONFIG_BAUDRATE=3D921600
->  CONFIG_DM_SERIAL=3Dy
->  CONFIG_MTK_SERIAL=3Dy
-> +CONFIG_UFS=3Dy
-> +CONFIG_UFS_MEDIATEK=3Dy
->  CONFIG_WDT=3Dy
->  CONFIG_WDT_MTK=3Dy
-> diff --git a/configs/mt8371_genio_520_evk_ufs_defconfig b/configs/mt8371_=
-genio_520_evk_ufs_defconfig
-> deleted file mode 100644
-> index a0b365a86a2..00000000000
-> --- a/configs/mt8371_genio_520_evk_ufs_defconfig
-> +++ /dev/null
-> @@ -1,4 +0,0 @@
-> -#include <configs/mt8189-ufs.config>
-> -
-> -CONFIG_DEFAULT_DEVICE_TREE=3D"mt8371-genio-520-evk-ufs"
-> -CONFIG_DEFAULT_FDT_FILE=3D"mt8371-genio-520-evk-ufs"
-> diff --git a/configs/mt8391_genio_720_evk_ufs_defconfig b/configs/mt8391_=
-genio_720_evk_ufs_defconfig
-> deleted file mode 100644
-> index f1de9d5fa1e..00000000000
-> --- a/configs/mt8391_genio_720_evk_ufs_defconfig
-> +++ /dev/null
-> @@ -1,4 +0,0 @@
-> -#include <configs/mt8189-ufs.config>
-> -
-> -CONFIG_DEFAULT_DEVICE_TREE=3D"mt8391-genio-720-evk-ufs"
-> -CONFIG_DEFAULT_FDT_FILE=3D"mt8391-genio-720-evk-ufs"
-> diff --git a/configs/mt8395_genio_1200_evk_ufs_defconfig b/configs/mt8395=
-_genio_1200_evk_ufs_defconfig
-> deleted file mode 100644
-> index 525638f5800..00000000000
-> --- a/configs/mt8395_genio_1200_evk_ufs_defconfig
-> +++ /dev/null
-> @@ -1,8 +0,0 @@
-> -#include <configs/mt8195.config>
-> -
-> -CONFIG_DEFAULT_DEVICE_TREE=3D"mediatek/mt8395-genio-1200-evk-ufs"
-> -CONFIG_CMD_UFS=3Dy
-> -CONFIG_PHY=3Dy
-> -CONFIG_SCSI=3Dy
-> -CONFIG_UFS=3Dy
-> -CONFIG_UFS_MEDIATEK=3Dy
+> +config PWM_MTK_DISP
+> +       bool "Enable support for MediaTek display PWM"
+> +       depends on ARCH_MEDIATEK
+> +       help
+> +         This PWM is found on the display subsystem of several MediaTek
+> +         SoCs (e.g. MT8183, MT8366). It is typically used to drive the
+> +         backlight of a display panel.
+> +
+>  config PWM_ROCKCHIP
+>         bool "Enable support for the Rockchip PWM"
+>         depends on ARCH_ROCKCHIP
+> diff --git a/drivers/pwm/Makefile b/drivers/pwm/Makefile
+> index 2682c536c6f..7c409c3c620 100644
+> --- a/drivers/pwm/Makefile
+> +++ b/drivers/pwm/Makefile
+> @@ -18,6 +18,7 @@ obj-$(CONFIG_PWM_EXYNOS)      +=3D exynos_pwm.o
+>  obj-$(CONFIG_PWM_IMX)          +=3D pwm-imx.o
+>  obj-$(CONFIG_PWM_MESON)                +=3D pwm-meson.o
+>  obj-$(CONFIG_PWM_MTK)          +=3D pwm-mtk.o
+> +obj-$(CONFIG_PWM_MTK_DISP)     +=3D pwm-mtk-disp.o
+>  obj-$(CONFIG_PWM_ROCKCHIP)     +=3D rk_pwm.o
+>  obj-$(CONFIG_PWM_SANDBOX)      +=3D sandbox_pwm.o
+>  obj-$(CONFIG_PWM_SIFIVE)       +=3D pwm-sifive.o
+> diff --git a/drivers/pwm/pwm-mtk-disp.c b/drivers/pwm/pwm-mtk-disp.c
+> new file mode 100644
+> index 00000000000..540539e6167
+> --- /dev/null
+> +++ b/drivers/pwm/pwm-mtk-disp.c
+> @@ -0,0 +1,178 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * MediaTek display pulse-width-modulation controller driver.
+> + *
+> + * Copyright (c) 2015 MediaTek Inc.
+> + * Copyright (C) 2026 BayLibre, SAS
+> + */
+> +
+> +#include <clk.h>
+> +#include <dm.h>
+> +#include <pwm.h>
+> +#include <asm/io.h>
+> +#include <linux/bitfield.h>
+> +#include <linux/bitops.h>
+> +#include <linux/errno.h>
+> +#include <linux/time.h>
+> +
+> +#define DISP_PWM_EN            0x00
+> +
+> +#define PWM_CLKDIV_MASK                GENMASK(25, 16)
+> +
+> +#define PWM_PERIOD_BIT_WIDTH   12
+> +#define PWM_PERIOD_MASK                GENMASK(PWM_PERIOD_BIT_WIDTH - 1,=
+ 0)
+> +
+> +#define PWM_HIGH_WIDTH_MASK    GENMASK(28, 16)
+> +
+> +struct mtk_disp_pwm_data {
+> +       u32 enable_mask;
+> +       u32 con0;
+> +       u32 con0_sel;
+> +       u32 con1;
+> +       bool has_commit;
+> +       u32 commit;
+> +       u32 commit_mask;
+> +       u32 bls_debug;
+> +       u32 bls_debug_mask;
+> +};
+> +
+> +struct mtk_disp_pwm_priv {
+> +       void __iomem *base;
+> +       struct clk clk_main;
+> +       struct clk clk_mm;
+> +       const struct mtk_disp_pwm_data *data;
+> +};
+> +
+> +static void mtk_disp_pwm_update_bits(void __iomem *base, u32 offset, u32=
+ mask, u32 data)
+> +{
+> +       u32 value =3D readl(base + offset);
+> +
+> +       value &=3D ~mask;
+> +       value |=3D data;
+> +
+> +       writel(value, base + offset);
+> +}
+> +
+> +static void mtk_disp_pwm_set_bits(void __iomem *base, u32 offset, u32 ma=
+sk)
+> +{
+> +       mtk_disp_pwm_update_bits(base, offset, mask, mask);
+> +}
+> +
+> +static void mtk_disp_pwm_clear_bits(void __iomem *base, u32 offset, u32 =
+mask)
+> +{
+> +       mtk_disp_pwm_update_bits(base, offset, mask, 0);
+> +}
+> +
+> +static int mtk_disp_pwm_set_config(struct udevice *dev, u32 channel,
+> +                                  u32 period_ns, u32 duty_ns)
+> +{
+> +       struct mtk_disp_pwm_priv *priv =3D dev_get_priv(dev);
+> +       const struct mtk_disp_pwm_data *data =3D priv->data;
+> +       u64 rate, div, clk_div, period, high_width;
+> +
+> +       rate =3D clk_get_rate(&priv->clk_main);
+> +
+> +       /*
+> +        * period_ns =3D 10^9 * (clk_div + 1) * (period + 1) / rate
+> +        * duty_ns =3D 10^9 * (clk_div + 1) * high_width / rate
+> +        */
+> +       clk_div =3D (((u64)period_ns * rate) / NSEC_PER_SEC) >> PWM_PERIO=
+D_BIT_WIDTH;
+> +       if (!FIELD_FIT(PWM_CLKDIV_MASK, clk_div))
+> +               return -EINVAL;
+> +
+> +       div =3D NSEC_PER_SEC * (clk_div + 1);
+> +       period =3D ((u64)period_ns * rate) / div;
+> +       if (period > 0)
+> +               period--;
+> +
+> +       high_width =3D ((u64)duty_ns * rate) / div;
+> +
+> +       if (data->bls_debug && !data->has_commit) {
+> +               /* Disable double buffer and select manual mode before wr=
+iting */
+> +               mtk_disp_pwm_set_bits(priv->base, data->bls_debug, data->=
+bls_debug_mask);
+> +               mtk_disp_pwm_set_bits(priv->base, data->con0, data->con0_=
+sel);
+> +       }
+> +
+> +       mtk_disp_pwm_update_bits(priv->base, data->con0, PWM_CLKDIV_MASK,
+> +                                FIELD_PREP(PWM_CLKDIV_MASK, clk_div));
+> +       mtk_disp_pwm_update_bits(priv->base, data->con1,
+> +                                PWM_PERIOD_MASK | PWM_HIGH_WIDTH_MASK,
+> +                                FIELD_PREP(PWM_PERIOD_MASK, period) |
+> +                                FIELD_PREP(PWM_HIGH_WIDTH_MASK, high_wid=
+th));
+> +
+> +       if (data->has_commit) {
+> +               mtk_disp_pwm_set_bits(priv->base, data->commit, data->com=
+mit_mask);
+> +               mtk_disp_pwm_clear_bits(priv->base, data->commit, data->c=
+ommit_mask);
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +static int mtk_disp_pwm_set_enable(struct udevice *dev, u32 channel, boo=
+l enable)
+> +{
+> +       struct mtk_disp_pwm_priv *priv =3D dev_get_priv(dev);
+> +
+> +       mtk_disp_pwm_update_bits(priv->base, DISP_PWM_EN, priv->data->ena=
+ble_mask,
+> +                                field_prep(priv->data->enable_mask, enab=
+le));
+> +
+> +       return 0;
+> +}
+> +
+> +static int mtk_disp_pwm_probe(struct udevice *dev)
+> +{
+> +       struct mtk_disp_pwm_priv *priv =3D dev_get_priv(dev);
+> +       int ret;
+> +
+> +       priv->data =3D (const void *)dev_get_driver_data(dev);
+> +
+> +       priv->base =3D dev_read_addr_ptr(dev);
+> +       if (!priv->base)
+> +               return -EINVAL;
+> +
+> +       ret =3D clk_get_by_name(dev, "main", &priv->clk_main);
+> +       if (ret)
+> +               return ret;
+> +
+> +       ret =3D clk_get_by_name(dev, "mm", &priv->clk_mm);
+> +       if (ret)
+> +               return ret;
+> +
+> +       ret =3D clk_enable(&priv->clk_main);
+> +       if (ret)
+> +               return ret;
+> +
+> +       ret =3D clk_enable(&priv->clk_mm);
+> +       if (ret)
+> +               return ret;
+
+should we disable clk_main here?
+
+> +
+> +       return 0;
+> +}
+> +
+> +static const struct pwm_ops mtk_disp_pwm_ops =3D {
+> +       .set_config =3D mtk_disp_pwm_set_config,
+> +       .set_enable =3D mtk_disp_pwm_set_enable,
+> +};
+> +
+> +static const struct mtk_disp_pwm_data mt8183_pwm_data =3D {
+> +       .enable_mask =3D BIT(0),
+> +       .con0 =3D 0x18,
+> +       .con0_sel =3D 0x0,
+> +       .con1 =3D 0x1c,
+> +       .has_commit =3D false,
+> +       .bls_debug =3D 0x80,
+> +       .bls_debug_mask =3D GENMASK(1, 0),
+> +};
+> +
+> +static const struct udevice_id mtk_disp_pwm_ids[] =3D {
+> +       { .compatible =3D "mediatek,mt8183-disp-pwm", .data =3D (ulong)&m=
+t8183_pwm_data },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(mtk_disp_pwm) =3D {
+> +       .name           =3D "mtk_disp_pwm",
+> +       .id             =3D UCLASS_PWM,
+> +       .of_match       =3D mtk_disp_pwm_ids,
+> +       .ops            =3D &mtk_disp_pwm_ops,
+> +       .probe          =3D mtk_disp_pwm_probe,
+> +       .priv_auto      =3D sizeof(struct mtk_disp_pwm_priv),
+> +};
 >
 > ---
 > base-commit: d3e8597e46b635ec556a057bc42f0b0859654bdf
-> change-id: 20260814-mtk-genio-720-remove-ufs-defconfig-d3e026765d4b
+> change-id: 20260814-mtk-pwm-disp-backlight-3951aeb966f7
 >
 > Best regards,
 > --
 > David Lechner <dlechner@baylibre.com>
 >
 
-Hi David,
+Except for the error-path unwind of clk_main, which can be fixed while
+applying:
 
 Reviewed-by: Julien Stephan <jstephan@baylibre.com>
