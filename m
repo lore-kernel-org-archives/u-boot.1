@@ -4,111 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 529F9C624D7
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:17:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45EE8C624D3
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:17:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 91B8F80F6B;
-	Wed,  2 Sep 2026 14:17:07 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0940E81099;
+	Wed,  2 Sep 2026 14:17:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WVfvqSfK7ogR; Wed,  2 Sep 2026 14:17:05 +0000 (UTC)
+ id gZp2nGzaFyhN; Wed,  2 Sep 2026 14:17:09 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788358609;
-	bh=OHF/shYzABG/mP6wplNfvYlGm84JFqGiwG6b4N912Ag=;
+	d=lists.u-boot-project.org; s=default; t=1788358612;
+	bh=zaHoEUwRGmt16iqJfruLbjPP94O5Km04ZeciuPhYI+E=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wMwsbEdsosOpQ3YLCHWsOVlAlFIhUhkNNU2VXAAZlGqfZXOQ7zpFWfdLgMsfsuoVB
-	 uqtgCEQAmt2xChLBZpxg/pCd+oQiQvmCBRbxup73/x3UjeUFSQf1i5T4S3pfwuWOsB
-	 hOFz7zlypXbq0BjWVeb3+wW7IvwxKbAtuh4SWH8VJVea6BXbK9PXDCGZ843Pl/Weh7
-	 c6yS1j9LY6+L2DGSe35lt3gNTpuVamKNQHV2N213Mqklo6qkznmQh0580yyUuYsMxh
-	 VV5oC9nQ4Ax49+Ab3fooiKNrjpVpCXrPP92TRa3CF4Am1LawN89KDU27U4wu9sAYuD
-	 4aPTxkHrjSs9A==
+	b=sK+zo2vOnjtO7Myv7zJ+uCFz9LyGFVViqLiLkiRjwqnPZzQhTO53V5rAxEaIYmFSF
+	 ABhrBjiDynZ4h8lm8pH0KMnVr46xZ7JKNEheBIFhSx3N046F+7cbGxrtwlyE7LJymL
+	 kG2+IYMec9W6H3o/jm8SSnl9pt5t4TLxfZGY7bb3oJfw84rHhxrMpJB6SFPgwcA8OF
+	 OozTh7r/nDsEVElJhZ64d+RntzmTkd4gc8ISutIB6KpE528JxIjSwx+oixUOz1zsiN
+	 KubQcWxQhepGEducH2vL8/w3GaVxxsgj/wDnd2pg4YMWhHWDLYOt5PqvELwiyTgyb+
+	 2FlpEMOcCHdDA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 60DA680F72;
-	Wed,  2 Sep 2026 14:16:48 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 59799230
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:16:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A423E80F73;
+	Wed,  2 Sep 2026 14:16:51 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8F242363
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:16:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 4B482606CF
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:16:40 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6B37081010
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:16:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id deqDpoHXjnrt for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 14:16:39 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id s8Vm_xQP9Syn for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 14:16:44 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::431; helo=mail-wr1-x431.google.com;
+ client-ip=2a00:1450:4864:20::432; helo=mail-wr1-x432.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=LgZnhZk1
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 68FA6606B4
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:16:38 +0000 (UTC)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-484415c8bf2so890297f8f.0
- for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 07:16:38 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=nOGNBYhZ
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7CB2780F1F
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:16:34 +0000 (UTC)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-47ddf7b09e5so1099870f8f.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 07:16:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788358596; x=1788963396;
+ d=baylibre.com; s=google; t=1788358592; x=1788963392;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=OHF/shYzABG/mP6wplNfvYlGm84JFqGiwG6b4N912Ag=;
- b=LgZnhZk1iogSppoibFDjX1U2JecrD0UxwbyD4GsxsnZvI1f75A4yUde+XB9rDwTfUx
- rLORsjxnrhW6BhF9P6GN2cl0X5MUSXoABX85ouKa+Fu16sDUm7F7bP2v3f6iGaoijn14
- vi5t65NNIMiHWMpz/liUTkl+dniexCMA70ThfsC5GQugCBMsFvMquo6x8x7tKOyH/Wie
- S4hG1fy8idECC4HRirREu3i7+2IrInjwDsihjyIhvB02nyewoc/uR6jdVIZ8TfcVZuWU
- kPuI4to9bwLMZ6PVB0Pyf8iVDiGhPLZP9bBzktHzzfHRG7474EThdCIkMUbQUoVUzCDa
- 4BZQ==
+ bh=zaHoEUwRGmt16iqJfruLbjPP94O5Km04ZeciuPhYI+E=;
+ b=nOGNBYhZlSeinQeGzh6C/ncnBAjcfD2t3wz6RnkGjQSaIHXWSRPeMY1WJJDq7GoeZq
+ /qw0w9xu0lneaIxcNyQ2NsnfkCttvJRF0BLomueHY61vKSXKcJTt1UPzlVtCuwG6lHFj
+ XKF1XMEu+BmwI5eUn6r1wUPDISu2Km5iyfp+ISoz2wyzuQT93hR8RzhmcU7YJqV75qfN
+ QvI2IE2zLNIdP9S3qeoltRpu639An9cuGJm1+poGYSlQNuZUPU3J5WzGin72/XD7I4v5
+ xyjscbryqJZTyExbgew8XAd0T6bhbP8zLQpH5Ded9M+/8NRvZM7FRaCNAMtq1PAHWLne
+ YHrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788358596; x=1788963396;
+ d=1e100.net; s=20251104; t=1788358592; x=1788963392;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=OHF/shYzABG/mP6wplNfvYlGm84JFqGiwG6b4N912Ag=;
- b=JVlaMeIn2fv+VPN6TzRmyaYzIjssLyzRmfPTUinCKaKFGQw6Z9yNTSdcXQF+KxF4ay
- Sk9cpaWv+WADW1s25a9k1/HJIMNvaFMd8C+piTqxsK3Fh+1I5GOg2iNKSVHLL6z+3xBD
- UYGpOnWd5NzQ2nlB5VdmXiFHCf5B8TRcVw7yWZsMbZX/Oh0Tz+0pP8HV5VjeIHhXkvMa
- tjVoIVKX1B6qtubaKyECfbl4D63YiqZ/gH1hjIpXQA5PYh985yuU083WYXYuIUsRHjXv
- vQM5nuxS6KdUz5qs9fLFToXBP3K3uhEgHSnRlweNpe01PCHj2doKyGfhVpBpX/Ctb0pq
- XLyw==
-X-Gm-Message-State: AFuF++nIUX/NSS2+7r18B/ohUlaI9SDujBVac+F5DPTD1t2YSre/DoQ+
- 84JqE0ZrbgmQjeGuvXahn/uhH2Csz0W3jvDU17Q5et9qDVtjWF3zgJg3A7AlN351WfQ=
-X-Gm-Gg: AYBFou07VLWZ5mF4lKH5cOOHEZysDDJtghYOyoPXfVFSFniptkrQLcYvyT96jXS1/rw
- UzEdEi+4HqDv9oZDWMUs0VuwrV9ZICXOmI8P5LsTV3ukW/vhdxCxurMTu9I7INYqNcD2NE1vbQX
- klBjARtmbtUBMSt8lnpuZwpCUdcpQpwMiWhZO43t2qFbASjG/4LO2xaxJqnGIchZyh9F5fKRcjv
- vGV3uwjURmTDf4qdYKU/hIEnEF4WRsw9wbCTVlzHZ2k600lB8g4B1R8kirH1pwVrOs7M9LWk07K
- LqYFvz30avLrbjK3v8BdwaPPB8tmifzyhsa7GGmLEopVV5Wflj2TNchCsC5/ekxO+q2s/08AG83
- Ekp0DW874HnxoURVvmqOs52BAk2aqUJsxrBrS2vHgPFTyxZkT/tTMYTm57iJo8eCr58bbt/coC4
- Cg8W2lcDbUVOwrKFNt1NJXI4rJYEtFKohhpu0jNC0urNJfvZNujFUCXksQY8Zl0NgIR7qpBAdIL
- EWf4P2QFp5m6eiBIal7wpBi30I1wxzhr/xaX3grCN63siSs5iDxYchN1GK0ZuNWaaGl1fNN2v4a
- Wp8fG80cVaNzHNJdo4FdgZdJlVZ1n0n+fNmrbf4mDMch
-X-Received: by 2002:a05:6000:471a:b0:484:3311:3176 with SMTP id
- ffacd0b85a97d-48488f22290mr9701077f8f.23.1788358596278; 
- Wed, 02 Sep 2026 07:16:36 -0700 (PDT)
+ bh=zaHoEUwRGmt16iqJfruLbjPP94O5Km04ZeciuPhYI+E=;
+ b=cGGo3DO4Rg99g8gu6/afJy9FJ6FWV5T71khY3eFYWwWtuijZJltkOVGTT/jNkyuYK/
+ tsYtWkwTOr/WHTqZpmH52ZoDhUvqeEBOTJCssvXG021qavFf0kvETL+H+IcNu/mnf41q
+ jVM7ZBeM18TASfmVJHZ6UIHSzo60JxsBLQK8T/S/DEfwetfWdoBzUUV2Y2cY/hMFNaff
+ nTChkja7wWa/ZQ3KuWcqKWlY3vgSDSPzNIyQKjgGOl0tV3OSzwwwUxCRozLKSHr1sN2a
+ uUa9Oh8XgK/rJyRcWl1Y9cVM190YpbCaP7yFOOGmlW0cmm2kyn6XSj+ZYGQxGfseHCrB
+ L9tw==
+X-Gm-Message-State: AFuF++mINGHmsa/CZugqV/9hQhwTrPP8g6gUY9AQBwDUFr6bVMBORNv/
+ cNjPefchPOKqP8Wk9z6KwGOx8kX3+Stxsla/7JDCM+vxeCToxG6pGyxE5K4NxJVmuyU=
+X-Gm-Gg: AYBFou3sU2MmL071zACY4YyeINTr5RSOGvxcT0kFI5PtPXtGKVpNiCVgZyacc3z9X6g
+ dLW/pxpRr7lB9TUVHwSFWZy+E81/mEFcs1ueg9jT6FxfHpWNbDSqe61IZcqbOX3WZWnmf3IPGg3
+ j3wCFDmP03ean96rWs1h7aIOFSBb1uSe1xuPOu3Ic5QPTqCVGsQx9pmT8LvCqjs2HEcqe2MbRKy
+ eIjl2DSJ/FhrflyixXXsI4RMwQPVIw6Sab5Z/Jy/8oP+gXYNMZ8/pvSgN+6XafpkaZXtGYje6Y/
+ 8WRXT55CKr6+MYCL/iEFI56jp/2DLJPtYIHza4wvBKZz/r9LFkdKq1jdqJlmsmTDqxuFgHZvCjy
+ hEM0tDzlhYuLlE5aC7taGroX1VPyrrPDTlO3wxooJOnU/Gc0d8ITOwGMk6yH/DQYvzYR5PbvcMQ
+ v0cODbh299tEFvMLkDFSubzEu9JHBTGrRUJYFSl8aELvqHdeaDsAO48alRwvKPiqwwTAibMIEFm
+ mvm1Igy6E9j0DzjOVbyFq9fOSWZD6IKw0t267CSzAGG/1zBT+3PwN+Y4TT0NAyhlx3i2S0I5iJb
+ ktg1CkVmIv8pcpMMDyUQ1r6anmq7qpSaOFtcs7kkARjoQwL+I4/nLCg=
+X-Received: by 2002:a05:6000:1847:b0:484:3931:c698 with SMTP id
+ ffacd0b85a97d-48488dee004mr9041047f8f.5.1788358592088; 
+ Wed, 02 Sep 2026 07:16:32 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448ed3706sm6619546f8f.18.2026.09.02.07.16.35
+ ffacd0b85a97d-48448ed3706sm6619546f8f.18.2026.09.02.07.16.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Sep 2026 07:16:35 -0700 (PDT)
+ Wed, 02 Sep 2026 07:16:31 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 02 Sep 2026 16:16:03 +0200
-Subject: [PATCH v4 13/14] arm: dts: mt8390: add hdmi override node
+Date: Wed, 02 Sep 2026 16:15:59 +0200
+Subject: [PATCH v4 09/14] asm-generic: unaligned: add get_unaligned_le24()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260902-add-genio-510-and-genio-700-hdmi-v4-13-7c3b4f068a56@baylibre.com>
+Message-Id: <20260902-add-genio-510-and-genio-700-hdmi-v4-9-7c3b4f068a56@baylibre.com>
 References: <20260902-add-genio-510-and-genio-700-hdmi-v4-0-7c3b4f068a56@baylibre.com>
 In-Reply-To: <20260902-add-genio-510-and-genio-700-hdmi-v4-0-7c3b4f068a56@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -142,31 +142,34 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The mt8188 SoC provides an HDMI encoder and PHY fed through the DPI1
-interface attached to the vdosys1 display data path.
-
-Add the U-Boot specific bits to mt8390-genio-common-u-boot.dtsi: a
-"memory-region" phandle on the hdmi node pointing at the framebuffer
-reserved-memory region;
+Add get_unaligned_le24(), mirroring the helper of the same name in
+Linux, to read a 24-bit little-endian value from a possibly unaligned
+buffer. The MediaTek HDMI driver uses it to pack InfoFrame bytes into
+the 24-bit little-endian controller register fields.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- arch/arm/dts/mt8390-genio-common-u-boot.dtsi | 5 +++++
- 1 file changed, 5 insertions(+)
+ include/asm-generic/unaligned.h | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/arch/arm/dts/mt8390-genio-common-u-boot.dtsi b/arch/arm/dts/mt8390-genio-common-u-boot.dtsi
-index a4db2186e2e..be1543d1499 100644
---- a/arch/arm/dts/mt8390-genio-common-u-boot.dtsi
-+++ b/arch/arm/dts/mt8390-genio-common-u-boot.dtsi
-@@ -19,3 +19,8 @@
- 		};
- 	};
- };
+diff --git a/include/asm-generic/unaligned.h b/include/asm-generic/unaligned.h
+index 9e5d93ec304..8a181ba6682 100644
+--- a/include/asm-generic/unaligned.h
++++ b/include/asm-generic/unaligned.h
+@@ -32,6 +32,13 @@ static inline u64 get_unaligned_le64(const void *p)
+ 	return le64_to_cpu(__get_unaligned_t(__le64, p));
+ }
+ 
++static inline u32 get_unaligned_le24(const void *p)
++{
++	const u8 *_p = p;
 +
-+&hdmi {
-+	/* U-Boot specific: the framebuffer lives in this reserved region */
-+	memory-region = <&framebuffer>;
-+};
++	return _p[0] | _p[1] << 8 | _p[2] << 16;
++}
++
+ static inline void put_unaligned_le16(u16 val, void *p)
+ {
+ 	__put_unaligned_t(__le16, cpu_to_le16(val), p);
 
 -- 
 2.55.0
