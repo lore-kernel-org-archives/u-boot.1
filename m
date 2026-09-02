@@ -1,87 +1,135 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39E4FC61DD6
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 15:53:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AD61C61DD6
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 15:56:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0B19380EFE;
-	Wed,  2 Sep 2026 15:53:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 21CB260726;
+	Wed,  2 Sep 2026 15:56:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HHtcHA6dGHIi; Wed,  2 Sep 2026 15:53:28 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UiY_oZu5-egz; Wed,  2 Sep 2026 15:56:17 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788364408;
-	bh=ZhHaWIs5fFDEgmoGYfCAfgdtU0chYvWiTZn46/Klonc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788364576;
+	bh=zOKkkiTvOdmoM+2yy6WrXS5hmm6h81JI5BLfIKCoGpM=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=yoMfcdKRCCP8qPbM/VRN9aGQcLuODNLgfs2m+3W2hOoWIPv4eGW0DJt2JhoNGq3pB
-	 PM0ZphSdLgcUT0VDVUas9Wye92seXd1yIU1m33wOkR+Dz7jQr9ZDo/DLEEWuuMj/pv
-	 vohPVD9ibzecZe18xefOfQU+bI5IOhns+Jxx0X+DNYeKFxV29EQjUpXGjcM3adWZW3
-	 ztMZ0FpxIbYiV7AG/qa3NT25/LctW342ODeePwG0sb4mWQOY8NmS7qB3q/lxJKsArQ
-	 gSiqvlCaZqFG1FdXdtqujuu6ZKBmQaOCv+pQelU7x+4x6hJeeaZZR5k4yeZGowlGNC
-	 H/9Qy45z1AUUg==
+	b=HDxsmtjvn2OJLbs5jIYzL/f66uB99YqGDdq7WcJQsv0Q6CKn5ouvwgu+V52OnqgGJ
+	 nGq2huH7bA/Q6968vSzefZR43nIaP15bienvBTGwMtPmAe6W2n7Re4OZC5FreCPMmw
+	 duqGGFPJ+yj4CJGXQZ1G3bJRq/2DVegGc1rgzeWLcpdphkznsjrNe2ywW2+pQ/jRlu
+	 RI9ZZf/6T+9lpHZAg/UWiWg+Z4PACx7nrWvmgehbIpNJHJky2R7Uck8Ias7C176zAW
+	 p1gOTK3b5jlcuEXXVQaU+tdFPzqf/r8udPrMD9/TJGryj+s8BSDi1S9q+w2078Pxmj
+	 +wxJFtPwudXSw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7885680EF8;
-	Wed,  2 Sep 2026 15:53:28 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id B6396127
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:53:26 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CAD9C606C4;
+	Wed,  2 Sep 2026 15:56:16 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id ACBA22B2
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:56:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9CF3A400A6
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:53:26 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 92A1840099
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:56:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5pgBBamh9af9 for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 15:53:25 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.251.229.89;
- helo=mx.nabladev.com; envelope-from=marex@nabladev.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=EwGbhQni
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A11F740099
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:53:25 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8D53711CECA; Wed, 02 Sep 2026 17:53:18 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1788364399;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=ZhHaWIs5fFDEgmoGYfCAfgdtU0chYvWiTZn46/Klonc=;
- b=EwGbhQniO3tMP91YcS9WR6kEq7qL8pGbicq1OLLQxLrPFWTPYDSBhcW+nfq2cPn3rtICbK
- LgfpP3UxRCl5qxlix6DW+9zaAxskDaCSo6U8w5STDFRlecBIhRD1slAqs5bmiKb3U0eTOI
- gvrSD1Uvdw+4ZPEMj/RSq0WISKA2AhZvyFERTLUkYpX2j+XOsXh7zvbvu6hoF2pBn5RovI
- lfUNL+Gxoz/HDldYGWsMYxh0GoukunDv5BJ6dl8+wRBq/nHkt5t4OvGCtQAtkg+KyULNLy
- VEAAOcp4YKW8RFD2DnIL+4fSIYpjxHqsVqGnVyUJz4RL6hagxT9H5LQszb3Peg==
-Message-ID: <6ad35fab-5fba-4a79-b5fc-4819cf199938@nabladev.com>
-Date: Wed, 2 Sep 2026 17:53:17 +0200
+ id W0vDKYKpjsLr for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 15:56:15 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::32f; helo=mail-ot1-x32f.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=JFXu6x/g
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2B7D840096
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:56:13 +0000 (UTC)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7e9ef94c0e2so571441a34.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 08:56:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1788364572; x=1788969372;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=zOKkkiTvOdmoM+2yy6WrXS5hmm6h81JI5BLfIKCoGpM=;
+ b=JFXu6x/gsuHUwesKMcnB4jArRomjsLwwM6eof588lQGTdaE/KL+/HrdI1ab40XY+T0
+ FOH7zv+ntgZsS85bJ9kZj4gUFdJTTQwoGeEqLUXdoY/9JAP68QWXgsQg9EHStXsx2IXA
+ IklRRQVNlQprhhuhFjtQ0Kc5Wa2Cows9sMCOrlFw4Si6qtwm70Hs/A9af9mt9HaZ13yZ
+ kmdrC9gC1rU1lSMP/eMA0sLEdSBi1AwJJg93Arxb0FB7JUVhJiMqz7MzTqr1YHLeNChK
+ C52mu88jEPbWd/8USyXaF2L/0ICwZeXKAOGlGYAt8SG6F52BwMapKqVKY0wC/JL43pqL
+ i9lw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788364572; x=1788969372;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=zOKkkiTvOdmoM+2yy6WrXS5hmm6h81JI5BLfIKCoGpM=;
+ b=fWcfYfFBr1JduTcBW25x/A8cTkfqGxdoNxrRA3K/VVrcMSSpXYwLVMQ3lCZuQy/pce
+ NHA9JNky5rBT3HiDMTGIjiBjhXHA2W0a7QIafbDxg46YuQl6wPpW+u4k+w7iiio7lxxg
+ RafdnIu0U/FQBC0sT3zBRQ4llzlXl6urUSRlfMxSks9UD8FZtde7WkSBzN5p9GOlV9AI
+ DErgfCT24m/8aZiV/Ct3PrS1YL6w1pPQYBeKM0BvIsO8thLMKO4iSzcYef3/EIGaiG94
+ voXSd278mu/Nu2jmtPH5vJfFN1QthhcdPfxxqwCVtpPAtU5S2Va9Y+zBbTvKK4JS8ljx
+ e4WA==
+X-Gm-Message-State: AFuF++nWhmQt30bJBrFviT1/euXXH22Ergtkj4LqDm3oIIRpD/slBKsO
+ NKKfX0ulLCmq0hk2KotN2Pfl/5g3RsV758UV5vlKzBt/9Ajt3eeilqN2WtWqikv/KhGtFxcwn3O
+ y6wMQ
+X-Gm-Gg: AR+sD10wXup6dnKTmQntZsWHWRx0MLFc917CKhKkhd3ZQgo0Rc48TK4rNDRGQncgvUW
+ kZcvlZ1BUzxIWVAbY3At5gL9wyQ2VBTl7BAstGc+XrBJmR9WPfyc4clbK6vUMhjXQkmLrDW2Ixx
+ SS1iIP8LIBhZRCJKHVRcJGZHuoYqKMVNC9zV5nxF8CJraZlviH/i/IJmxWMc4vwAjGkMqvjgQV6
+ GsHEfqMORp4T/BAgTgy/orxv/Hun6E7xLMbg2Dlgjal5wK1E3+vca/ensV/4CRLziPFPtd5mrfm
+ mQCOj+IVmcpH+mPqeFMizsBNfCEOC0dpyhJnh/ErqFjwus+IrKGzop+f8LMHRliMI8vVAZuTqkh
+ N2sQS5IVyMv+GmDZxkQ7ukPU2vJDhrWt1+jmkcBZsFcCQB7oWJTaOnnkOILHrhxcAxTLi4dvhe0
+ x9Beu3YU1aAIj4Y8f4P2beN/AO4MLU9vxfwkr0xXK5zyIrocao0xb9cWK66n0tDX2Aqw==
+X-Received: by 2002:a05:6830:4c15:b0:7ee:41ca:e7b0 with SMTP id
+ 46e09a7af769-7f782cdb2d3mr4948095a34.14.1788364572173; 
+ Wed, 02 Sep 2026 08:56:12 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:518a:9db8:615b:293f])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7f74d2a7763sm2648220a34.12.2026.09.02.08.56.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Sep 2026 08:56:11 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+ David Lechner <dlechner@baylibre.com>
+Cc: u-boot@lists.u-boot-project.org
+In-Reply-To: <20260814-mtk-genio-720-remove-ufs-defconfig-v1-1-000eb476030f@baylibre.com>
+References: <20260814-mtk-genio-720-remove-ufs-defconfig-v1-1-000eb476030f@baylibre.com>
+Subject: Re: [PATCH] configs: mediatek: remove UFS defconfigs
+Message-Id: <178836456090.2649860.12656677272932650954.b4-ty@b4>
+Date: Wed, 02 Sep 2026 10:56:00 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: imx: Fix EEPROM address on Data Modul i.MX8M
- Plus eDM SBC
-To: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Stefano Babic <sbabic@nabladev.com>
-References: <20260816232404.1223819-1-marex@nabladev.com>
- <CAOMZO5AOmyEbHS7tMdLaWuEoGgkOWSiVUG6Ln54ATPCUqWxCkQ@mail.gmail.com>
- <c5a9255d-b56d-4c05-bc75-f1a5688b9ad2@nabladev.com>
- <CAOMZO5A1gbzoFFc9PrvTpNBgz1WV8eb9aabhc7_EM2OqSjRvcA@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <CAOMZO5A1gbzoFFc9PrvTpNBgz1WV8eb9aabhc7_EM2OqSjRvcA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=310; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=UPvYB5tfGP85uBfJRY8V0KWkUeRv5qTjhTRbueQFqTQ=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqmEcT330VSjAiGhybWlkSyndj3tG+igDT4gDLa
+ HhbmrTTQ8iJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaphHExYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ak34H/jao/McTC2cTkhLQzKhY40MKI3kijUSGLoIrIJs
+ ZDQU5e4OdbglgpN8hh+k5F1hW6Js/IOSkRlo4pF3dQoqom49xvzNdTu6QiOGig3X6hPBg3KKGPw
+ WpUT8grUR3aq7qLJ36g2y5AbOZ34TL5/rFGtEt0f0u8Fin5X6Wcu/UsoqZC6AUPPS4u8dJuKmbW
+ xrYvWR8YDLCLvNNSiA8NhenqLInxjJo/eKIQn+uJScZH0Jg7Mwotq3LqsbDqtzaPjzJ620B957J
+ zVhwuXHZMAxxzl9WX4C6rAaJLMEazzJ3KzQ7CtAghdrW+vHTrSL55AJOm3xBQCt3iHaPrePNBYw
+ tyl4=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -95,24 +143,15 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 8/18/26 2:04 PM, Fabio Estevam wrote:
-> On Sun, Aug 16, 2026 at 8:58 PM Marek Vasut <marex@nabladev.com> wrote:
-> 
->>> Does this need to go to main, or can it go to next?
->>
->> main would be nice, since this is a (long overdue) fix.
-> 
-> Reviewed-by: Fabio Estevam <festevam@gmail.com>
-> 
-> Tom,  at the moment I don't have any outstanding patches queued for main.
-> 
-> Please apply this one directly, thanks.
+On Fri, 14 Aug 2026 16:21:25 -0500, David Lechner wrote:
+> configs: mediatek: remove UFS defconfigs
 
-I have sent one more fix
+Applied to mediatek-for-next, thanks!
 
-[PATCH] arm64: dts: imx: Increase malloc area size on Data Modul i.MX8M 
-eDM SBC
+[1/1] configs: mediatek: remove UFS defconfigs
+      commit: df4f9b66d9e354c4feec3de29c98778b7a84479b
 
-This is still not in main, so maybe you could pick both and do a PR ?
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
-Thank you !
