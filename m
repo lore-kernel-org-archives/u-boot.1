@@ -4,103 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED07C624D6
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:18:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31512C624D6
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:18:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B9A4E810A2;
-	Wed,  2 Sep 2026 14:18:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EEEE6810A3;
+	Wed,  2 Sep 2026 14:18:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1BPfcHucNCI7; Wed,  2 Sep 2026 14:18:28 +0000 (UTC)
+ id A4flt8w18t2O; Wed,  2 Sep 2026 14:18:35 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788358708;
-	bh=MuLdyq2PpfomWbe6VFPur/XQBOe3vw9kUIuy5tvY5lw=;
+	d=lists.u-boot-project.org; s=default; t=1788358715;
+	bh=hdMmtuwvd4NXad8NGvILpD/EczfH9q7bNqVN0cRYYpY=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gxSFVH2BE8Xi6nmj7JpKDnaiEcaA15jxuqssOuCIsUGRyXKFqEKnPdV79kvu2GUwN
-	 tBXI3dXmJupl7rIHtAwXObXJlmSnY20mxKt2JR39gjWcofI+jPeitMyhQI1PV5uWjB
-	 KaCLuvNIeYexCA78r7omsUWaOm/n3wYg4tR0WRJLzbTsMtreGTLrOjLoHTJbDU6naP
-	 ZpiafNwNvLdFl2qQzBJK/ALfEAiZKOZinrVNHiEPwgkbnT4uYkluzbBaoQphMbX0/D
-	 DIWjYOIk6/Pz4+lVWcZKK6efjTqJouBaLyRVfHLpNwbF4rT01nPZDD9MFvXm6kzUmG
-	 niAhFdBdiwugw==
+	b=G+FyyZ5vseUVXQPyexmwYTyfc9ki8doui7D85EDjeAQ7zarvqCG6bfljbQ7jsNdVF
+	 frwx/nXzWLJmAHw93wFBEtp+fbpLG5czyR7uiS7ecN4Av3KozbIyXc6Z2ZZFHgrQqL
+	 bSdsWRO4v9cN+9lGmnYpZeFH++WMRoWUNqLMDFfKn5JH7V9ZmoqtreG6sKEkAapshH
+	 BlskgVC1fCmkwSzjzgf4ucKWNFGwgkfgF/OlIcXgWIKtKgm9XqSM24j0imX/0ZETog
+	 RTadQzCHCnThxyvrasPXsM85W0IHsxkWNvbX0KqLeuuS6Z/V9ALMcE/PDBp3QgEXCe
+	 zVgNmYEE3gNYg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5ADF981016;
-	Wed,  2 Sep 2026 14:18:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A85D281003;
+	Wed,  2 Sep 2026 14:18:35 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 512381D9
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:27 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id AF91B363
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 42BD880FAE
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:27 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A948E80EC2
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 31FWCVTFYad6 for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 14:18:26 +0000 (UTC)
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=prvs=698db811e=charles.perry@microchip.com; receiver=<UNKNOWN> 
+ id qMJczWGaL9S5 for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 14:18:32 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=prvs=698db811e=charles.perry@microchip.com;
+ receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: smtp1.osuosl.org; spf=fail smtp.mailfrom=microchip.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=microchip.com header.i=@microchip.com
- header.a=rsa-sha256 header.s=mchp header.b=Tayegcti
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 14E1C81016
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:24 +0000 (UTC)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com
+ header.a=rsa-sha256 header.s=mchp header.b=IL9N8jkE
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 279E1810A3
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:30 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73C808424C; Wed,  2 Sep 2026 16:18:22 +0200 (CEST)
+ id CFA738424C; Wed,  2 Sep 2026 16:18:28 +0200 (CEST)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
+ [68.232.153.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57AB983EEF
- for <u-boot@lists.denx.de>; Wed,  2 Sep 2026 16:18:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA7E183EEF
+ for <u-boot@lists.denx.de>; Wed,  2 Sep 2026 16:18:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=698db811e=Charles.Perry@microchip.com
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
  unprotected) header.d=microchip.com header.i=@microchip.com
- header.b="Tayegcti"; dkim-atps=neutral
+ header.b="IL9N8jkE"; dkim-atps=neutral
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1788358699; x=1819894699;
+ t=1788358706; x=1819894706;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=IsrFyHfOx5YBR+6uPRQW4L5iu1BVyES+zDq2KBDdWtU=;
- b=Tayegcti9a0ZpPR2W9jUroQ0XfDh1IDc7Sb72Mbkbw/8zg0p1XU9qTw+
- 9L5C/UDh7/KPXjXxKXqhcVL+90fZRp0ttqE1knRha4q9FNHm4ftLpPWg6
- bbMs2RMC1NcUDGB8nXpIQY9SeM91u1HTEi9ZTjcA1Y4PUPwx/ErVxujsK
- zBINUTsqMU15yiMTeHJmtM023war0WnMNOYr3rSkCm0PQDPZcoZRlOoW7
- cgbY+gqYlhXhQlmRtev0ETuBdETFDpFAtobOO/P/0jJjhdyDuH2w5NWsJ
- XePYbLkFQbxvDwBDf6gr4qfqXiByLQfBr/ber8RlDjnszZwRPrB6etW7d g==;
-X-CSE-ConnectionGUID: E6RM/RG3TAmi8KiYmufYDA==
-X-CSE-MsgGUID: Yw9GNVcSSeC/JwTlBGAZew==
-X-IronPort-AV: E=Sophos;i="6.25,258,1779174000"; d="scan'208";a="62141796"
+ bh=gP/BPxbQtg28z9JCQAVUjVCRujz98AA3xz2Ipwgshow=;
+ b=IL9N8jkEe4VrNYSo8K7msT5xPvmvwSbCBMe4JnMGNFWlAPr7aCN85pcv
+ vNJqX5iECSJBrC4zDQq1fPd3MUlz+S0/H5vmca7Cci7zhMTUBNUUHD0Mu
+ y1Kfxss/qLCN6Fbh6qfBw/k9k3qrENJaQtaQXN+cLKc9FHuQvYjbRYusM
+ mCZYbxYQVl/zIA1KdlFBiUXW+0ZC2TgTdSHfU289BDJuGepxBS5Hd0wBu
+ VKpsT41dqFdEzMa9KqcAfsAfNoqMXuCsOazcoip8i2sthqQ71dSHw5sIt
+ REZCQ0Cv/cWu7nHt6PNAOEk+463HuLegXCrQahfAwlIbRxEE2J6+tV+p3 g==;
+X-CSE-ConnectionGUID: WnbJ27e5Tl28o10t1fgVeQ==
+X-CSE-MsgGUID: +h+/4ZcETHO95d/u1iI6WQ==
+X-IronPort-AV: E=Sophos;i="6.25,258,1779174000"; d="scan'208";a="294454702"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 02 Sep 2026 07:18:17 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Sep 2026 07:18:23 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.87.151) by
+ chn-vm-ex1.mchp-main.com (10.10.87.30) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Wed, 2 Sep 2026 07:18:17 -0700
+ 15.2.2562.45; Wed, 2 Sep 2026 07:18:22 -0700
 Received: from bby-cbu-swbuild03.eng.microchip.com (10.10.85.11) by
  chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Wed, 2 Sep 2026 07:18:16 -0700
+ 15.1.2507.58 via Frontend Transport; Wed, 2 Sep 2026 07:18:21 -0700
 From: Charles Perry <charles.perry@microchip.com>
 To: <u-boot@lists.denx.de>
-CC: <charles.perry@microchip.com>, Tom Rini <trini@konsulko.com>, Rahul Pathak
- <rahul.pathak@oss.qualcomm.com>, <u-boot@lists.u-boot-project.org>
-Subject: [PATCH v3 2/5] firmware: rpmi: add support for shared memory transport
-Date: Wed, 2 Sep 2026 07:17:28 -0700
-Message-ID: <20260902141744.2422566-3-charles.perry@microchip.com>
+CC: <charles.perry@microchip.com>, Tom Rini <trini@konsulko.com>, "Lukasz
+ Majewski" <lukma@denx.de>, Quentin Schulz <quentin.schulz@cherry.de>, "Marek
+ Vasut" <marek.vasut+renesas@mailbox.org>, Johan Jonker <jbx6244@gmail.com>,
+ Junhui Liu <junhui.liu@pigmoral.tech>, Peng Fan <peng.fan@nxp.com>,
+ "Alexander Sverdlin" <alexander.sverdlin@siemens.com>,
+ <u-boot@lists.u-boot-project.org>
+Subject: [PATCH v3 3/5] drivers: clk: add support for RPMI clocks
+Date: Wed, 2 Sep 2026 07:17:29 -0700
+Message-ID: <20260902141744.2422566-4-charles.perry@microchip.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260902141744.2422566-1-charles.perry@microchip.com>
 References: <20260902141744.2422566-1-charles.perry@microchip.com>
@@ -122,19 +125,11 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add support for transport of RPMI messages over shared memory as
-described in the RPMI spec [1]. This uses two or four ring buffers
-composed of a fixed number of "slots" to pass messages between the AP
-and the PuC. U-Boot is the Application processor (AP) and sends messages
-through the a2p-req queue and receives response though the p2a-ack
-queue. There is no support for platform microcontroller (PuC) initiated
-requests nor notifications.
+The RISC-V Platform Management Interface (RPMI) defines a service group
+for control and monitoring of clocks [1]. This can be exposed as a
+UCLASS_CLK driver.
 
-This transport can be used in M or S mode U-Boot, but in the S-mode
-case, one must make sure that the supervisor software isn't already
-using the AP side of the shared memory.
-
-[1]: https://github.com/riscv-non-isa/riscv-rpmi (chapter 2)
+[1]: https://github.com/riscv-non-isa/riscv-rpmi (chapter 4.8)
 
 Signed-off-by: Charles Perry <charles.perry@microchip.com>
 ---
@@ -143,547 +138,457 @@ Changes in v3: None
 Changes in v2: (from Yao Zi review)
  - Reorder headers
  - Don't null check pointers before free()
+ - Remove transition_latency from struct rpmi_clk_def as its unused
+ - Simplify last return path of _rpmi_clk_enable_disable()
+ - Move the call to _rpmi_clk_get_rate() from _rpmi_clk_set_rate() to
+   rpmi_clk_set_rate()
 ---
- drivers/firmware/rpmi/Kconfig      |   8 +
- drivers/firmware/rpmi/Makefile     |   1 +
- drivers/firmware/rpmi/rpmi-shmem.c | 473 +++++++++++++++++++++++++++++
- include/rpmi_proto.h               |  23 ++
- 4 files changed, 505 insertions(+)
- create mode 100644 drivers/firmware/rpmi/rpmi-shmem.c
+ MAINTAINERS            |   1 +
+ drivers/clk/Kconfig    |   7 +
+ drivers/clk/Makefile   |   1 +
+ drivers/clk/clk_rpmi.c | 344 +++++++++++++++++++++++++++++++++++++++++
+ include/rpmi_proto.h   |  39 +++++
+ 5 files changed, 392 insertions(+)
+ create mode 100644 drivers/clk/clk_rpmi.c
 
-diff --git a/drivers/firmware/rpmi/Kconfig b/drivers/firmware/rpmi/Kconfig
-index 708d931263ff..421a1fa9deba 100644
---- a/drivers/firmware/rpmi/Kconfig
-+++ b/drivers/firmware/rpmi/Kconfig
-@@ -16,3 +16,11 @@ config RPMI_SBI_MPXY
- 	  (MPXY) extension of the supervisor binary interface (SBI). The
- 	  specification for the MPXY extension is available at:
- 	  https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
-+
-+config RPMI_SHMEM
-+	bool "RPMI over shared memory transport"
-+	depends on RPMI_FIRMWARE
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 5f559d58470f..29ee5bd2d5b9 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1623,6 +1623,7 @@ F:	doc/README.rockusb
+ RPMI
+ M:	Charles Perry <charles.perry@microchip.com>
+ S:	Maintained
++F:	drivers/clk/clk_rpmi.c
+ F:	drivers/firmware/rpmi/
+ F:	include/rpmi*
+ 
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index 47da49c83148..b6df8a8ce5ac 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -181,6 +181,13 @@ config CLK_OCTEON
+ 	help
+ 	  Enable this to support the clocks on Octeon MIPS platforms.
+ 
++config CLK_RPMI
++	bool "Enable RPMI clock driver"
++	depends on CLK && RPMI_FIRMWARE
 +	help
-+	  Enable support for transport of RPMI messages over shared memory as
-+	  described in chapter 2 of the RPMI specification, available at:
-+	  https://github.com/riscv-non-isa/riscv-rpmi
-diff --git a/drivers/firmware/rpmi/Makefile b/drivers/firmware/rpmi/Makefile
-index 71c4aeaed910..4f4bcb929db4 100644
---- a/drivers/firmware/rpmi/Makefile
-+++ b/drivers/firmware/rpmi/Makefile
-@@ -1,2 +1,3 @@
- obj-y	+= rpmi-uclass.o
- obj-$(CONFIG_RPMI_SBI_MPXY) += rpmi-sbi-mpxy.o
-+obj-$(CONFIG_RPMI_SHMEM) += rpmi-shmem.o
-diff --git a/drivers/firmware/rpmi/rpmi-shmem.c b/drivers/firmware/rpmi/rpmi-shmem.c
++	  Enable this option if you want to support clock devices exposed
++	  by RISC-V Platform Management Interface (RPMI).
++
+ config SANDBOX_CLK_CCF
+ 	bool "Sandbox Common Clock Framework [CCF] support"
+ 	depends on SANDBOX
+diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+index 4b241a9240ac..9e19e6f6d845 100644
+--- a/drivers/clk/Makefile
++++ b/drivers/clk/Makefile
+@@ -46,6 +46,7 @@ obj-$(CONFIG_CLK_OWL) += owl/
+ obj-$(CONFIG_CLK_QCOM) += qcom/
+ obj-$(CONFIG_CLK_RENESAS) += renesas/
+ obj-$(CONFIG_$(PHASE_)CLK_RS9_PCIE) += clk-renesas-pcie.o
++obj-$(CONFIG_CLK_RPMI) += clk_rpmi.o
+ obj-$(CONFIG_$(PHASE_)CLK_SCMI) += clk_scmi.o
+ obj-$(CONFIG_CLK_SIFIVE) += sifive/
+ obj-$(CONFIG_CLK_SOPHGO) += sophgo/
+diff --git a/drivers/clk/clk_rpmi.c b/drivers/clk/clk_rpmi.c
 new file mode 100644
-index 000000000000..8014e86d336f
+index 000000000000..42b1616ee7ec
 --- /dev/null
-+++ b/drivers/firmware/rpmi/rpmi-shmem.c
-@@ -0,0 +1,473 @@
-+// SPDX-License-Identifier: GPL-2.0
++++ b/drivers/clk/clk_rpmi.c
+@@ -0,0 +1,344 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
 + */
 +
-+#define LOG_CATEGORY UCLASS_RPMI
++#define LOG_CATEGORY UCLASS_CLK
 +
-+#include <asm/barrier.h>
-+#include <asm/io.h>
 +#include <asm/types.h>
++#include <clk-uclass.h>
 +#include <dm.h>
 +#include <dm/device_compat.h>
-+#include <linux/delay.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <rpmi-uclass.h>
++#include <dm/device-internal.h>
++#include <linux/clk-provider.h>
++#include <rpmi.h>
 +
-+#define RPMI_SLOT_SIZE_MIN 64
-+
-+enum rpmi_queue_idx {
-+	RPMI_QUEUE_IDX_A2P_REQ = 0,
-+	RPMI_QUEUE_IDX_P2A_ACK = 1,
-+	RPMI_QUEUE_IDX_P2A_REQ = 2,
-+	RPMI_QUEUE_IDX_A2P_ACK = 3,
-+	RPMI_QUEUE_IDX_MAX_COUNT = 4,
-+	RPMI_A2P_DOORBELL = 5,
++struct rpmi_get_num_clocks_rx {
++	__le32 status;
++	__le32 num_clocks;
 +};
 +
-+struct shmem_queue {
-+	u32 num_slot;
-+	__le32 *headptr;
-+	__le32 *tailptr;
-+	void *buffer;
++struct rpmi_get_rate_rx {
++	__le32 status;
++	__le32 lo;
++	__le32 hi;
 +};
 +
-+struct rpmi_shmem {
-+	struct udevice *dev;
-+	struct shmem_queue a2p_req;
-+	struct shmem_queue p2a_ack;
-+	int slot_size;
-+	int rx_timeout_ms;
-+	u32 token;
-+	void *doorbell;
-+	u32 doorbell_value;
-+	u32 spec_version;
-+	u32 impl_version;
-+	u32 impl_id;
++struct rpmi_get_config_rx {
++	__le32 status;
++	__le32 state;
 +};
 +
-+struct rpmi_shmem_chan_priv {
-+	struct rpmi_shmem *priv;
-+	u32 servicegroup_id;
-+	u32 servicegroup_version;
++struct rpmi_set_rate_tx {
++	__le32 clkid;
++	__le32 flags;
++	__le32 lo;
++	__le32 hi;
 +};
 +
-+static int rpmi_shmem_queue_idx(const char *name)
++struct rpmi_set_config_tx {
++	__le32 clkid;
++	__le32 config;
++};
++
++struct rpmi_get_attrs_rx {
++	__le32 status;
++#define RPMI_CLK_TYPE_MASK GENMASK(1, 0)
++	__le32 flags;
++	__le32 num_rates;
++	__le32 transition_latency;
++	char name[RPMI_CLK_NAME_LEN];
++};
++
++struct rpmi_clk_def {
++	u32 num_rates;
++	enum rpmi_clock_type type;
++	char name[RPMI_CLK_NAME_LEN + 1];
++};
++
++struct rpmi_clk_priv {
++	struct rpmi_chan chan;
++	u32 num_clocks;
++	struct rpmi_clk_def *defs;
++};
++
++static int _rpmi_clk_enable_disable(struct rpmi_clk_priv *priv, u32 clkid,
++				    bool ena)
 +{
-+	static const struct {
-+		int id;
-+		const char *name;
-+	} id_names[] = {
-+		{ RPMI_QUEUE_IDX_A2P_REQ, "a2p-req" },
-+		{ RPMI_QUEUE_IDX_P2A_ACK, "p2a-ack" },
-+		{ RPMI_QUEUE_IDX_P2A_REQ, "p2a-req" },
-+		{ RPMI_QUEUE_IDX_A2P_ACK, "a2p-ack" },
-+		{ RPMI_A2P_DOORBELL, "a2p-doorbell" },
++	struct rpmi_set_config_tx tx = {
++		.clkid = cpu_to_le32(clkid),
++		.config = cpu_to_le32(ena ? RPMI_CLK_STATE_ENABLED :
++					    RPMI_CLK_STATE_DISABLED),
 +	};
++	__le32 rx;
++	int ret, status;
 +
-+	for (int i = 0; i < ARRAY_SIZE(id_names); i++) {
-+		if (strcmp(name, id_names[i].name) == 0)
-+			return id_names[i].id;
-+	}
++	ret = rpmi_send_with_resp(&priv->chan, RPMI_CLK_SRV_SET_CONFIG, &tx,
++				  sizeof(tx), &rx, sizeof(rx), NULL);
++	if (ret)
++		return ret;
 +
-+	return -ENODEV;
++	status = le32_to_cpu(rx);
++
++	return rpmi_to_linux_error(status);
 +}
 +
-+static bool rpmi_smq_queue_full(struct shmem_queue *qctx)
++static ulong _rpmi_clk_get_rate(struct rpmi_clk_priv *priv, u32 clkid)
 +{
-+	return ((le32_to_cpu(*qctx->tailptr) + 1) % qctx->num_slot ==
-+		le32_to_cpu(*qctx->headptr));
++	__le32 tx = cpu_to_le32(clkid);
++	struct rpmi_get_rate_rx rx;
++	int ret, status;
++
++	ret = rpmi_send_with_resp(&priv->chan, RPMI_CLK_SRV_GET_RATE, &tx,
++				  sizeof(tx), &rx, sizeof(rx), NULL);
++	if (ret)
++		return ret;
++
++	status = le32_to_cpu(rx.status);
++	if (status)
++		return rpmi_to_linux_error(status);
++
++	return (((u64)(le32_to_cpu(rx.hi)) << 32) | (u32)(le32_to_cpu(rx.lo)));
 +}
 +
-+/* 31                                            0
-+ * +---------------------+-----------------------+
-+ * | FLAGS | SERVICE_ID  |   SERVICEGROUP_ID     |
-+ * +---------------------+-----------------------+
-+ * |        TOKEN        |     DATA LENGTH       |
-+ * +---------------------+-----------------------+
-+ * |                 DATA/PAYLOAD                |
-+ * +---------------------------------------------+
-+ */
-+struct rpmi_message_header {
-+	__le16 servicegroup_id;
-+	u8 service_id;
-+	u8 flags;
-+	__le16 datalen;
-+	__le16 token;
-+} __packed;
-+
-+static int rpmi_smq_rx(struct rpmi_shmem *priv, struct shmem_queue *qctx,
-+		       u32 service_group_id, u32 service_id, u16 token,
-+		       void *response, unsigned long max_response_len,
-+		       unsigned long *out_response_len)
++static __maybe_unused int _rpmi_clk_get_config(struct rpmi_clk_priv *priv,
++					       u32 clkid)
 +{
-+	struct rpmi_message_header *msg;
-+	u32 dlen, headidx, tailidx;
-+	int rxretry = 0;
-+	void *src;
++	__le32 tx = cpu_to_le32(clkid);
++	struct rpmi_get_config_rx rx;
++	int ret, status;
 +
-+	headidx = le32_to_cpu(*qctx->headptr);
++	ret = rpmi_send_with_resp(&priv->chan, RPMI_CLK_SRV_GET_CONFIG, &tx,
++				  sizeof(tx), &rx, sizeof(rx), NULL);
++	if (ret)
++		return ret;
 +
-+	/* Wait for the Rx message with matching token, discard any other
-+	 * messages received in the mean time
-+	 */
-+	while (true) {
-+		tailidx = le32_to_cpu(*qctx->tailptr);
++	status = le32_to_cpu(rx.status);
++	if (status)
++		return rpmi_to_linux_error(status);
 +
-+		if (headidx != tailidx) {
-+			msg = (void *)qctx->buffer +
-+			      (headidx * priv->slot_size);
-+			if (le16_to_cpu(msg->token) == token)
-+				break;
++	return le32_to_cpu(rx.state);
++}
 +
-+			headidx = (headidx + 1) % qctx->num_slot;
-+		}
++static int _rpmi_clk_set_rate(struct rpmi_clk_priv *priv, u32 clkid,
++			      unsigned long rate)
++{
++	struct rpmi_set_rate_tx tx = {
++		.clkid = cpu_to_le32(clkid),
++		.flags = 0,
++		.lo = cpu_to_le32(lower_32_bits(rate)),
++		.hi = cpu_to_le32(upper_32_bits(rate)),
++	};
++	__le32 rx;
++	int ret, status;
 +
-+		mdelay(1);
-+		rxretry += 1;
-+		if (rxretry > priv->rx_timeout_ms)
-+			return -ETIMEDOUT;
-+	}
++	ret = rpmi_send_with_resp(&priv->chan, RPMI_CLK_SRV_SET_RATE, &tx,
++				  sizeof(tx), &rx, sizeof(rx), NULL);
++	if (ret)
++		return ret;
 +
-+	/* Extract data from the message */
-+	if (response) {
-+		dlen = le16_to_cpu(msg->datalen);
-+		if (dlen > max_response_len)
-+			dlen = max_response_len;
-+		if (out_response_len)
-+			*out_response_len = dlen;
-+		src = (void *)msg + sizeof(struct rpmi_message_header);
-+		memcpy(response, src, dlen);
-+	}
++	status = le32_to_cpu(rx);
 +
-+	/* Update the head index */
-+	headidx = (headidx + 1) % qctx->num_slot;
-+	*qctx->headptr = cpu_to_le32(headidx);
++	return rpmi_to_linux_error(status);
++}
++
++static int _rpmi_clk_get_num_clocks(struct rpmi_clk_priv *priv)
++{
++	struct rpmi_get_num_clocks_rx rx;
++	int ret, status;
++
++	ret = rpmi_send_with_resp(&priv->chan, RPMI_CLK_SRV_GET_NUM_CLOCKS,
++				  NULL, 0, &rx, sizeof(rx), NULL);
++	if (ret)
++		return ret;
++
++	status = le32_to_cpu(rx.status);
++	if (status)
++		return rpmi_to_linux_error(status);
++
++	priv->num_clocks = le32_to_cpu(rx.num_clocks);
 +
 +	return 0;
 +}
 +
-+static int rpmi_smq_tx(struct rpmi_shmem *priv, struct shmem_queue *qctx,
-+		       u32 service_group_id, u32 service_id,
-+		       enum rpmi_message_type type, u16 token,
-+		       const void *request, unsigned long request_len)
++static int rpmi_clk_enable(struct clk *clk)
 +{
-+	struct rpmi_message_header header = { 0 };
-+	u32 tailidx;
-+	void *dst;
-+
-+	/* Tx sanity checks */
-+	if (request_len >
-+	    (priv->slot_size - sizeof(struct rpmi_message_header)))
-+		return -EINVAL;
-+
-+	if (rpmi_smq_queue_full(qctx))
-+		return -ENOMEM;
-+
-+	tailidx = le32_to_cpu(*qctx->tailptr);
-+
-+	/* Prepare the header to be written into the slot */
-+	header.servicegroup_id = cpu_to_le16(service_group_id);
-+	header.service_id = service_id;
-+	header.flags = type;
-+	header.datalen = cpu_to_le16(request_len);
-+	header.token = cpu_to_le16(token);
-+
-+	/* Write header into the slot */
-+	dst = (char *)qctx->buffer + (tailidx * priv->slot_size);
-+	memcpy(dst, &header, sizeof(header));
-+	dst += sizeof(header);
-+
-+	/* Write data into the slot */
-+	if (request)
-+		memcpy(dst, request, request_len);
-+
-+	/* Make sure queue chanages are visible to PuC before updating tail */
-+	wmb();
-+
-+	/* Update the tail/write index */
-+	tailidx = (tailidx + 1) % qctx->num_slot;
-+	*qctx->tailptr = cpu_to_le32(tailidx);
-+
-+	/* Ring the RPMI doorbell if present */
-+	if (priv->doorbell)
-+		writel(priv->doorbell_value, priv->doorbell);
-+
-+	return 0;
++	return _rpmi_clk_enable_disable(dev_get_plat(clk->dev),
++					clk->id & CLK_ID_MSK, true);
 +}
 +
-+static int rpmi_shmem_request_priv(struct rpmi_shmem *priv, u32 servicegroup_id,
-+				   u32 service_id, const void *request,
-+				   unsigned long request_len, void *response,
-+				   unsigned long max_response_len,
-+				   unsigned long *out_response_len)
++static int rpmi_clk_disable(struct clk *clk)
 +{
-+	enum rpmi_message_type type = response ? RPMI_MSG_NORMAL_REQUEST :
-+						 RPMI_MSG_POSTED_REQUEST;
-+	int err;
-+
-+	if (!request && request_len)
-+		return -EINVAL;
-+
-+	err = rpmi_smq_tx(priv, &priv->a2p_req, servicegroup_id, service_id,
-+			  type, priv->token, request, request_len);
-+	if (err) {
-+		dev_err(priv->dev, "tx failed %i\n", err);
-+		goto out;
-+	}
-+
-+	if (response) {
-+		err = rpmi_smq_rx(priv, &priv->p2a_ack, servicegroup_id,
-+				  service_id, priv->token, response,
-+				  max_response_len, out_response_len);
-+		if (err) {
-+			dev_err(priv->dev, "rx failed %i\n", err);
-+			goto out;
-+		}
-+	}
-+
-+out:
-+	priv->token++;
-+	return err;
++	return _rpmi_clk_enable_disable(dev_get_plat(clk->dev),
++					clk->id & CLK_ID_MSK, false);
 +}
 +
-+static int rpmi_shmem_request(struct rpmi_chan *chan, u32 service_id,
-+			      const void *request, unsigned long request_len,
-+			      void *response, unsigned long max_response_len,
-+			      unsigned long *out_response_len)
++static ulong rpmi_clk_get_rate(struct clk *clk)
 +{
-+	struct rpmi_shmem *priv = dev_get_priv(chan->dev);
-+	struct rpmi_shmem_chan_priv *chan_priv = chan->con_priv;
-+
-+	return rpmi_shmem_request_priv(priv, chan_priv->servicegroup_id,
-+				       service_id, request, request_len,
-+				       response, max_response_len,
-+				       out_response_len);
++	return _rpmi_clk_get_rate(dev_get_plat(clk->dev), clk->id & CLK_ID_MSK);
 +}
 +
-+static int rpmi_shmem_get_attr(struct rpmi_chan *chan,
-+			       enum rpmi_attribute_id id, u32 *data)
++static ulong rpmi_clk_set_rate(struct clk *clk, ulong rate)
 +{
-+	struct rpmi_shmem *priv = dev_get_priv(chan->dev);
-+	struct rpmi_shmem_chan_priv *chan_priv = chan->con_priv;
-+
-+	switch (id) {
-+	case RPMI_ATTR_SPEC_VERSION:
-+		*data = priv->spec_version;
-+		break;
-+	case RPMI_ATTR_MAX_MSG_DATA_SIZE:
-+		*data = priv->slot_size - sizeof(struct rpmi_message_header);
-+		break;
-+	case RPMI_ATTR_SERVICEGROUP_ID:
-+		*data = chan_priv->servicegroup_id;
-+		break;
-+	case RPMI_ATTR_SERVICEGROUP_VERSION:
-+		*data = chan_priv->servicegroup_version;
-+		break;
-+	case RPMI_ATTR_IMPL_ID:
-+		*data = priv->impl_id;
-+		break;
-+	case RPMI_ATTR_IMPL_VERSION:
-+		*data = priv->impl_version;
-+		break;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+
-+	return 0;
-+}
-+
-+static int rpmi_shmem_base_service_req(struct rpmi_shmem *priv, u32 service_id,
-+				       const u32 *arg_in, u32 *arg_out)
-+{
-+	int len = 0;
-+	u32 rx[2];
-+	u32 tx[1];
 +	int ret;
 +
-+	if (arg_in) {
-+		tx[0] = cpu_to_le32(*arg_in);
-+		len = sizeof(*arg_in);
-+	}
-+
-+	ret = rpmi_shmem_request_priv(priv, RPMI_SRVGRP_BASE, service_id, tx,
-+				      len, rx, sizeof(rx), NULL);
-+	if (ret) {
-+		dev_err(priv->dev, "BASE service %i failed (%i)\n", service_id,
-+			ret);
++	ret = _rpmi_clk_set_rate(dev_get_plat(clk->dev), clk->id & CLK_ID_MSK,
++				 rate);
++	if (ret)
 +		return ret;
-+	}
 +
-+	if (rx[0]) {
-+		ret = rpmi_to_linux_error(le32_to_cpu(rx[0]));
-+		dev_err(priv->dev, "BASE service %i returned code %i\n",
-+			service_id, ret);
-+		return ret;
-+	}
-+
-+	if (arg_out)
-+		*arg_out = le32_to_cpu(rx[1]);
-+
-+	return 0;
++	return _rpmi_clk_get_rate(dev_get_plat(clk->dev), clk->id & CLK_ID_MSK);
 +}
 +
-+static int rpmi_shmem_of_xlate(struct rpmi_chan *chan,
-+			       struct ofnode_phandle_args *args)
++static __maybe_unused void rpmi_clk_dump(struct udevice *dev)
 +{
++	struct rpmi_clk_priv *priv = (struct rpmi_clk_priv *)dev_get_plat(dev);
++	struct rpmi_clk_def *def;
++	u64 clk_rate = 0;
++	int i, state;
++
++	printf("              Rate State  Id Name\n");
++	printf("--------------------------------------\n");
++
++	for (i = 0; i < priv->num_clocks; i++) {
++		def = &priv->defs[i];
++		clk_rate = _rpmi_clk_get_rate(priv, i);
++		state = _rpmi_clk_get_config(priv, i);
++		printf("%18lld %s %4i %s\n", clk_rate,
++		       (state == RPMI_CLK_STATE_ENABLED) ? "   ON" : "  OFF", i,
++		       def->name);
++	}
++}
++
++static int rpmi_clk_xlate(struct clk *clk, struct ofnode_phandle_args *args)
++{
++	struct rpmi_clk_priv *priv = dev_get_plat(clk->dev);
++
 +	if (args->args_count != 1)
 +		return -EINVAL;
 +
-+	// args[0] is the servicegroup id.
-+	chan->id = args->args[0];
++	if (args->args[0] >= priv->num_clocks)
++		return -EINVAL;
++
++	clk->id = CLK_ID(clk->dev, args->args[0]);
++	clk->data = 0;
 +
 +	return 0;
 +}
 +
-+static int rpmi_shmem_open(struct rpmi_chan *chan)
++static int rpmi_clk_get_attrs(struct rpmi_clk_priv *priv, u32 clkid,
++			      struct rpmi_clk_def *def)
 +{
-+	struct rpmi_shmem *priv = dev_get_priv(chan->dev);
-+	u32 servicegroup_id, servicegroup_version;
-+	struct rpmi_shmem_chan_priv *chan_priv;
-+	int ret;
++	__le32 tx = cpu_to_le32(clkid);
++	struct rpmi_get_attrs_rx rx;
++	u8 format;
++	int ret, status;
 +
-+	servicegroup_id = chan->id;
-+
-+	ret = rpmi_shmem_base_service_req(priv,
-+					  RPMI_BASE_SRV_PROBE_SERVICE_GROUP,
-+					  &servicegroup_id,
-+					  &servicegroup_version);
++	ret = rpmi_send_with_resp(&priv->chan, RPMI_CLK_SRV_GET_ATTRIBUTES, &tx,
++				  sizeof(tx), &rx, sizeof(rx), NULL);
 +	if (ret)
 +		return ret;
 +
-+	chan_priv = malloc(sizeof(*chan_priv));
-+	if (!chan_priv)
-+		return -ENOMEM;
++	status = le32_to_cpu(rx.status);
++	if (status)
++		return rpmi_to_linux_error(status);
 +
-+	chan->con_priv = chan_priv;
++	format = le32_to_cpu(rx.flags) & RPMI_CLK_TYPE_MASK;
++	if (format >= RPMI_CLK_TYPE_MAX)
++		return -EINVAL;
 +
-+	chan_priv->priv = priv;
-+	chan_priv->servicegroup_id = servicegroup_id;
-+	chan_priv->servicegroup_version = servicegroup_version;
++	def->type = format;
++	def->num_rates = le32_to_cpu(rx.num_rates);
++	memcpy(def->name, rx.name, RPMI_CLK_NAME_LEN);
++	def->name[RPMI_CLK_NAME_LEN] = '\0';
 +
 +	return 0;
 +}
 +
-+static void rpmi_shmem_close(struct rpmi_chan *chan)
++static int rpmi_clk_probe(struct udevice *dev)
 +{
-+	free(chan->con_priv);
-+}
++	struct rpmi_clk_priv *priv = (struct rpmi_clk_priv *)dev_get_plat(dev);
++	struct rpmi_chan *chan = &priv->chan;
++	int ret, i;
 +
-+static int rpmi_shmem_probe(struct udevice *dev)
-+{
-+	struct rpmi_shmem *priv = dev_get_priv(dev);
-+	int i, ret, qidx, qcount, qslotcnt;
-+	struct shmem_queue *queue;
-+	u32 arg_in, arg_out;
-+	const char *qname;
-+	fdt_size_t qsize;
-+	void *start;
++	ret = rpmi_open(chan);
++	if (ret)
++		return ret;
 +
-+	priv->dev = dev;
-+	priv->rx_timeout_ms = 20;
++	ret = rpmi_check_versions(chan, RPMI_MKVER(1, 0), RPMI_SRVGRP_CLOCK,
++				  RPMI_MKVER(1, 0));
++	if (ret)
++		goto err_out;
 +
-+	priv->slot_size = dev_read_u32_default(dev, "riscv,slot-size", 0);
-+	if (priv->slot_size < RPMI_SLOT_SIZE_MIN)
-+		return -EINVAL;
++	ret = _rpmi_clk_get_num_clocks(priv);
++	if (ret)
++		goto err_out;
 +
-+	priv->doorbell_value =
-+		dev_read_u32_default(dev, "riscv,a2p-doorbell-value", 0);
-+
-+	qcount = dev_read_string_count(dev, "reg-names");
-+	if (qcount < 0 || qcount > 5)
-+		return -EINVAL;
-+
-+	for (i = 0; i < qcount; i++) {
-+		ret = dev_read_string_index(dev, "reg-names", i, &qname);
-+		if (ret)
-+			continue;
-+
-+		qidx = rpmi_shmem_queue_idx(qname);
-+		if (qidx < 0)
-+			continue;
-+
-+		start = dev_read_addr_size_index_ptr(dev, i, &qsize);
-+		if (!start)
-+			continue;
-+
-+		if (qidx == RPMI_A2P_DOORBELL) {
-+			priv->doorbell = start;
-+		} else {
-+			qslotcnt = qsize / priv->slot_size;
-+			if (qslotcnt < 4)
-+				continue;
-+
-+			if (qidx == RPMI_QUEUE_IDX_A2P_REQ)
-+				queue = &priv->a2p_req;
-+			else if (qidx == RPMI_QUEUE_IDX_P2A_ACK)
-+				queue = &priv->p2a_ack;
-+			else
-+				continue;
-+
-+			queue->headptr = start;
-+			queue->tailptr = start + priv->slot_size;
-+			queue->buffer = start + (2 * priv->slot_size);
-+			queue->num_slot = qslotcnt - 2;
-+		}
++	priv->defs = calloc(priv->num_clocks, sizeof(struct rpmi_clk_def));
++	if (!priv->defs) {
++		ret = -ENOMEM;
++		goto err_out;
 +	}
 +
-+	if (!priv->a2p_req.num_slot || !priv->p2a_ack.num_slot)
-+		return -EINVAL;
++	for (i = 0; i < priv->num_clocks; i++) {
++		ret = rpmi_clk_get_attrs(priv, i, &priv->defs[i]);
++		if (ret)
++			goto err_out;
++	}
 +
-+	arg_in = RPMI_SRVGRP_BASE;
-+	ret = rpmi_shmem_base_service_req(
-+		priv, RPMI_BASE_SRV_PROBE_SERVICE_GROUP, &arg_in, &arg_out);
-+	if (ret)
-+		return ret;
++	dev_dbg(dev, "num clock = %i\n", priv->num_clocks);
 +
-+	if (arg_out < RPMI_MKVER(1, 0))
-+		return -EINVAL;
++	return 0;
 +
-+	ret = rpmi_shmem_base_service_req(
-+		priv, RPMI_BASE_SRV_GET_IMPLEMENTATION_VERSION, NULL, &arg_out);
-+	if (ret)
-+		return ret;
-+	priv->impl_version = arg_out;
++err_out:
++	free(priv->defs);
++	rpmi_close(chan);
 +
-+	ret = rpmi_shmem_base_service_req(
-+		priv, RPMI_BASE_SRV_GET_IMPLEMENTATION_IDN, NULL, &arg_out);
-+	if (ret)
-+		return ret;
-+	priv->impl_id = arg_out;
++	return ret;
++}
 +
-+	ret = rpmi_shmem_base_service_req(priv, RPMI_BASE_SRV_GET_SPEC_VERSION,
-+					  NULL, &arg_out);
-+	if (ret)
-+		return ret;
-+	priv->spec_version = arg_out;
++static int rpmi_clk_remove(struct udevice *dev)
++{
++	struct rpmi_clk_priv *priv = (struct rpmi_clk_priv *)dev_get_plat(dev);
++	struct rpmi_chan *chan = &priv->chan;
++
++	free(priv->defs);
++	rpmi_close(chan);
 +
 +	return 0;
 +}
 +
-+static const struct udevice_id rpmi_shmem_ids[] = {
-+	{ .compatible = "riscv,rpmi-shmem-mbox" },
++static int rpmi_clk_to_plat(struct udevice *dev)
++{
++	struct rpmi_clk_priv *priv = (struct rpmi_clk_priv *)dev_get_plat(dev);
++
++	return rpmi_get_by_index(dev, 0, &priv->chan);
++}
++
++static struct clk_ops rpmi_clk_ops = {
++	.of_xlate = rpmi_clk_xlate,
++	.set_rate = rpmi_clk_set_rate,
++	.get_rate = rpmi_clk_get_rate,
++	.enable = rpmi_clk_enable,
++	.disable = rpmi_clk_disable,
++#if IS_ENABLED(CONFIG_CMD_CLK)
++	.dump = rpmi_clk_dump,
++#endif
++};
++
++static const struct udevice_id rpmi_clk_ids[] = {
++	{ .compatible = "riscv,rpmi-clock" },
 +	{}
 +};
 +
-+static const struct rpmi_transport_ops rpmi_shmem_ops = {
-+	.of_xlate = rpmi_shmem_of_xlate,
-+	.get_attr = rpmi_shmem_get_attr,
-+	.request = rpmi_shmem_request,
-+	.open = rpmi_shmem_open,
-+	.close = rpmi_shmem_close,
-+};
-+
-+U_BOOT_DRIVER(rpmi_shmem) = {
-+	.name = "rpmi-shmem",
-+	.id = UCLASS_RPMI,
-+	.of_match = rpmi_shmem_ids,
-+	.probe = rpmi_shmem_probe,
-+	.priv_auto = sizeof(struct rpmi_shmem),
-+	.ops = &rpmi_shmem_ops,
++U_BOOT_DRIVER(rpmi_clk) = {
++	.name = "rpmi-clk",
++	.id = UCLASS_CLK,
++	.of_match = rpmi_clk_ids,
++	.probe = rpmi_clk_probe,
++	.remove = rpmi_clk_remove,
++	.ops = &rpmi_clk_ops,
++	.of_to_plat = rpmi_clk_to_plat,
++	.plat_auto = sizeof(struct rpmi_clk_priv),
 +	.flags = DM_FLAG_PRE_RELOC,
 +};
 diff --git a/include/rpmi_proto.h b/include/rpmi_proto.h
-index 012ae93d7317..4b557bfeedf5 100644
+index 4b557bfeedf5..dc0937ce7053 100644
 --- a/include/rpmi_proto.h
 +++ b/include/rpmi_proto.h
-@@ -60,4 +60,27 @@ enum rpmi_servicegroup_id {
- 	RPMI_SRVGRP_VENDOR_END		= 0xFFFF,
+@@ -83,4 +83,43 @@ enum rpmi_message_type {
+ 	RPMI_MSG_NOTIFICATION = 0x3,
  };
  
-+/** RPMI Base ServiceGroup Service IDs */
-+enum rpmi_base_service_id {
-+	RPMI_BASE_SRV_ENABLE_NOTIFICATION = 0x01,
-+	RPMI_BASE_SRV_GET_IMPLEMENTATION_VERSION = 0x02,
-+	RPMI_BASE_SRV_GET_IMPLEMENTATION_IDN = 0x03,
-+	RPMI_BASE_SRV_GET_SPEC_VERSION = 0x04,
-+	RPMI_BASE_SRV_GET_PLATFORM_INFO = 0x05,
-+	RPMI_BASE_SRV_PROBE_SERVICE_GROUP = 0x06,
-+	RPMI_BASE_SRV_GET_ATTRIBUTES = 0x07,
++/* RPMI clock service IDs */
++enum rpmi_clock_service_id {
++	RPMI_CLK_SRV_ENABLE_NOTIFICATION = 0x01,
++	RPMI_CLK_SRV_GET_NUM_CLOCKS = 0x02,
++	RPMI_CLK_SRV_GET_ATTRIBUTES = 0x03,
++	RPMI_CLK_SRV_GET_SUPPORTED_RATES = 0x04,
++	RPMI_CLK_SRV_SET_CONFIG = 0x05,
++	RPMI_CLK_SRV_GET_CONFIG = 0x06,
++	RPMI_CLK_SRV_SET_RATE = 0x07,
++	RPMI_CLK_SRV_GET_RATE = 0x08,
++	RPMI_CLK_SRV_ID_MAX_COUNT
 +};
 +
-+/** RPMI Messages Types */
-+enum rpmi_message_type {
-+	/* Normal request backed with ack */
-+	RPMI_MSG_NORMAL_REQUEST = 0x0,
-+	/* Request without any ack */
-+	RPMI_MSG_POSTED_REQUEST = 0x1,
-+	/* Acknowledgment for normal request message */
-+	RPMI_MSG_ACKNOWLDGEMENT = 0x2,
-+	/* Notification message */
-+	RPMI_MSG_NOTIFICATION = 0x3,
++/** Clock rate match mode */
++enum rpmi_clock_rate_match {
++	RPMI_CLK_RATE_MATCH_PLATFORM	= 0,
++	RPMI_CLK_RATE_MATCH_ROUND_DOWN	= 1,
++	RPMI_CLK_RATE_MATCH_ROUND_UP	= 2,
++	RPMI_CLK_RATE_MATCH_MAX
 +};
++
++/** Supported clock states */
++enum rpmi_clock_state {
++	RPMI_CLK_STATE_DISABLED	= 0,
++	RPMI_CLK_STATE_ENABLED	= 1,
++	RPMI_CLK_STATE_MAX
++};
++
++/** Clock type based on rate format */
++enum rpmi_clock_type {
++	RPMI_CLK_TYPE_DISCRETE	= 0,
++	RPMI_CLK_TYPE_LINEAR	= 1,
++	RPMI_CLK_TYPE_MAX
++};
++
++#define RPMI_CLK_NAME_LEN 16
++
++#define RPMI_CLOCK_RATE_INVALID		(-1ULL)
 +
  #endif
 -- 
