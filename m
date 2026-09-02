@@ -4,96 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87581C61DD3
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 00:03:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07E3EC61DD6
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 01:51:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 390F940753;
-	Wed,  2 Sep 2026 00:03:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A1D3A407AD;
+	Wed,  2 Sep 2026 01:51:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AwEtknRDg9du; Wed,  2 Sep 2026 00:03:43 +0000 (UTC)
+ id zkwXA1jIikaf; Wed,  2 Sep 2026 01:51:14 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788307423;
-	bh=i5cG60JUn4F71k97n79KTATlR5HHZArans6w4LF33Ms=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=WwxYrVeHRbyMzmvXMe8W7B8dhetUdM494zieWaU4JswaSwYP3nMJyu+R5i0xVEuQe
-	 4IAKEEiZnRQOkxbADU5boBhVTlAKClNMFZ5dDD2GCi1FI24MZbp8g7glONBD0wyCIt
-	 SRkooxQjxjdsapoa5jP5IuE4EDhGDYj8vocnIN/qdHEAOwAIbKjSLrhgtlW+UQXUu2
-	 XYe+dzi2Y4OZN1/6pogclsaClTwr9v/rhs5TrprrxTVibXcttLmbZcKwA3/TA4kJhQ
-	 GoHxLW3KeQG2kyfrriOkCs6BSlRMj/o5p5XZPzuYPuEFv1spN48yBlu2I8rQTPcq8G
-	 YMmwZXRcMOmpg==
+	d=lists.u-boot-project.org; s=default; t=1788313874;
+	bh=SVONeo7bN2IUFMKkF7BYuzDT2Gh9ZjoRA2RjiO4frZY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=L+CdeK638v+9p0zjospsPuAnm8A12kGwBe6KRsQD/YM1bAgTrc6a4y0EcaG40dkW/
+	 AJqtuUSt34T2pmK21DKtnGHd6Xq8xDUvc4KlpccrVp+U/WgMLwYVjl3P58uMzXBS0T
+	 9m/+wTiLDlHtsM1XXxT6JECO71xa4PY65vusuxlyrqU4T5GN+p03wzY7AhZo+JTQdx
+	 PzKPNh0+3ZijFg46uTp7W+IuStiJw+PsUg3CdFO99WNdLwTYUwrCM4qVL7mUshyLyT
+	 4lUFF7fjRPnsZZkXNF3G2pgiQUE3gbojTs85+ImmGhGyJbfoTrcYjb2lLEBJmUJaEv
+	 UwNTxnJAVM8Kg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6CC0F40756;
-	Wed,  2 Sep 2026 00:03:43 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 726532FE
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 00:03:41 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 604F140795;
+	Wed,  2 Sep 2026 01:51:14 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7AFEA2FC
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 01:51:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6401B40756
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 00:03:41 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6C81A6067F
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 01:51:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Mxs67-dP_2a4 for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 00:03:40 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FBTCL6moOsOd for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 01:51:13 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::103; helo=mout-p-103.mailbox.org;
- envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
- header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
- header.b=qfgh6Elx; 
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=TVMmzESG
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9B6C440753
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 00:03:40 +0000 (UTC)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4hZNHG1vZczKmDD;
- Wed, 02 Sep 2026 02:03:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1788307418;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=i5cG60JUn4F71k97n79KTATlR5HHZArans6w4LF33Ms=;
- b=qfgh6Elx2zZkWdj+/4+m46dc7pdS+G3F5BmRiys/Z84rH1KQnw6dgWShk6jZHhWD5D6S5s
- EWKQRHWvUfjpN361eUhu71MjVPhD2ovGtjASW2ZSk8Mla0qtHcweavW0Vn+AgqEX/KxrDg
- a9MbHRtkXsdLEXbfyqT5zC+uTRfFPUgJXHfFGhTLkuFjO93AtHDiyfZh1vziIZ78n5dKwx
- cM/7sPmd7yOsmZQsyiSugXrrZeIUc+n3G9Tnkw8D6JQV566ocU/lCYwe3F18ga5Ah+q9zk
- WEukD7AyXlq6YOfgEAkSETLke6aKipQ5uL1W1TP0to5HyGdl+tWSWM8xgM5SOg==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1788307416;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=i5cG60JUn4F71k97n79KTATlR5HHZArans6w4LF33Ms=;
- b=TVMmzESGobDFMYhWHi0jCoy3qLGcbMdWOFSakCtdRBxaTh7PhzuHxQUhrufGCbH5GVrUs4
- X7OLU8zp42BCOaHg03GgdU8gPtfjxsSGqu9dSBmPcrmPZXyicS+03nqBYKHj11/TRAo8GY
- kMHCbe+MIaIQEmoJlljlKlXE2tR7/3/lQ8hVjnCzY3REp2p51pFmU1STI/mnDpyL8UxjFy
- Riw/lIV1d5QhlF5y5IpLQS+bizukHL7JhvJ/iazFxlSC2xzJ+m9iFQY5l+yZ9qbdWnmaYx
- zFkdZ+TRqichXFt/m+9KTJA4YoeZ6RtnoPdhFCEM+MgqFF63ktjHou2stbL14w==
-To: u-boot@lists.u-boot-project.org
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: renesas: Drop empty board_early_init_f() from Renesas
- R-Car Gen5 common code
-Date: Wed,  2 Sep 2026 02:03:15 +0200
-Message-ID: <20260902000335.350866-1-marek.vasut+renesas@mailbox.org>
+ client-ip=2607:f8b0:4864:20::62c; helo=mail-pl1-x62c.google.com;
+ envelope-from=visitorckw@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=BlH1cKBG
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C287660665
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 01:51:11 +0000 (UTC)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-2d7195706f1so5154415ad.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 01 Sep 2026 18:51:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1788313870; x=1788918670;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=SVONeo7bN2IUFMKkF7BYuzDT2Gh9ZjoRA2RjiO4frZY=;
+ b=BlH1cKBGOOqot5VWPNL5Ds/xsCSJ118/fRn5sn6jT/PqNmkYzRBXusrHYOHrfQZcI9
+ zDzdyGMdbqbYMaKuzbOdqPWaWWzP5xGADLA26t6Lbc3vkO3uQs7svhyFTP3hm/T8eLDZ
+ S1aa2B9U+SPYzp0QsFUdaryRWdKsY/hxBr7dY9gSzS22AMgfznaGntO2pj8R3VC4LkGE
+ buNFNC0f/9pbKwJCGENeGXHB1Pcov5M4Gq3ieERDn157E+JAH+FZrXLXsVyTd4axg90t
+ UaK6jFh6Sq0xKMw5F3HMGPsWu08AIc8/4tN5jB3nVxuWBY9/Luk9HsRZIKiGS2VlSw+6
+ KIkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788313870; x=1788918670;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=SVONeo7bN2IUFMKkF7BYuzDT2Gh9ZjoRA2RjiO4frZY=;
+ b=OR6ZfffAWjlZPMthj2M3VXmoJj5OLLGJmYGXQ3bM69DSh/jHwGVfTULHYXK7GFp8+P
+ M17I2cQHhqCmjZbjr4Nadfs6hMWQjIuGc5N+mG/Bg1hfLn7B1o9vkxmtksWFUoM3Zt3I
+ H8OJRkvJEUcIeWXpigFbZmDyrYrOFjbOmHIUk6z06UYzSVNHhUat6K1O2b2P6ADKlSWL
+ akqST5FNbbpN+L+OGuP5fh4vRRczLv6JPLHLZ09R0f2kB1o3e0QMSJzCt+ndeAhH2IX4
+ EFG8BygvQ2+E0uZhrKyCWpgz1/qcpYvcstnZnZB9ILC5dHC414ivxs4csiqkjIX6te6f
+ kLbQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBz0bnYTqAGv3bMqYICrEzzQxc5/DcnpeVCLGFtqru4nzfrrsSkFsjFW4+wlFTfKWcOgRT7CDEg=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nKYlChopouUOyvYMJT/RkfkGdMJ/CwYJi8uJwdFRYnU4UKnh7w
+ Ke8XWMndPUmptz8kUA6O0cum3Xpsv0boFYhsylEm5smvfKhLtb98r/Rp
+X-Gm-Gg: AYBFou25CicFBZdlVPia2QkfZ1LC55HPqDdLUvnbrvjlXiubWrWRaOpyw4r9NCObX7S
+ Z3ET33TdqJCVg5lEA8siD4w9zfVMVZLQSD8afKnGQL+WNhVvoQADT3t/keULDxYMoTpRjxzGoKz
+ IHZAIgvjlJr3Jv2AHquiQT1FIWtdSc7MhQJQmka4cr48lgTvSjaZvQ6UchAKOQVx1HjKeSO0NMJ
+ dd+Xxyo4arXPRIwun5NoWpesVRDu/PrK3wgazbEfpM9m7owsVOgx75QhZ6tiFg5AuS/m9ghh72g
+ eURc/ciDFkD9+Mvw35WE+gjFoRk7ZCJ1bpHj1/SncyBluP36rXKkxMs1wiD07G9syjzkYtWdXox
+ d1frwk0/qSU6r6ugHrpuwxlI2/wGYjdw+6Z6hLlLwxpVFwrdKRrZU0hFa/EB2ZSEFKQWhylhJAh
+ tDMlNHPAppiGhihapgq7BiOLgSKSOAlDDocDT7IWetU2qre5HJ0UUMPSJR+qUdDMUZsc29QDrDi
+ bQTvj+PloOeA32exIH4Bo8+67+RHPwU
+X-Received: by 2002:a17:903:b83:b0:2d0:cc92:f7a3 with SMTP id
+ d9443c01a7336-2daec5d3dd7mr22743445ad.2.1788313870364; 
+ Tue, 01 Sep 2026 18:51:10 -0700 (PDT)
+Received: from google.com ([2a00:79e0:2039:4:46c6:e690:266d:b84])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2dadd4885ddsm5059145ad.49.2026.09.01.18.51.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Sep 2026 18:51:09 -0700 (PDT)
+Date: Wed, 2 Sep 2026 09:51:05 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: trini@konsulko.com, tuomas.tynkkynen@iki.fi, bmeng.cn@gmail.com,
+ sjg@chromium.org, jerome.forissier@arm.com, jserv@ccns.ncku.edu.tw,
+ eleanor15x@gmail.com, marscheng@google.com, u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH v2 0/6] fs: Add 9P filesystem support over virtio
+Message-ID: <apeBCdth8Rj32qPw@google.com>
+References: <20260829192119.2658328-1-visitorckw@gmail.com>
+ <CALeDE9P7UoeyBNfJycD2dUHkEeXiFgi+XaP9hAzKTp+71fvx1Q@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: jmi1nnzdtqfgx4q6p6rgfr63tncmer6e
-X-MBO-RS-ID: d9ab3de810e86bebcd3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CALeDE9P7UoeyBNfJycD2dUHkEeXiFgi+XaP9hAzKTp+71fvx1Q@mail.gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -107,48 +128,44 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The board_early_init_f() is empty, remove it, and instead disable
-CONFIG_BOARD_EARLY_INIT_F configuration option to prevent the core
-from calling board_early_init_f().
+Hi Peter,
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org
----
- board/renesas/common/gen5-common.c | 5 -----
- configs/renesas_rcar5.config       | 1 +
- 2 files changed, 1 insertion(+), 5 deletions(-)
+On Sun, Aug 30, 2026 at 11:41:48AM +0100, Peter Robinson wrote:
+> Hi Kuan-Wei,
+> 
+> > Add 9P network filesystem support to U-Boot.
+> >
+> > It allows U-Boot to directly mount host directories in virtualization
+> > environments via virtio.
+> 
+> It would be useful to give an overview in the cover letter how/where
+> you expect to be used. While new features are always welcome they also
+> come with a maintenance burden so some background is always useful to
+> provide more information.
 
-diff --git a/board/renesas/common/gen5-common.c b/board/renesas/common/gen5-common.c
-index 51bab2aa19e..1d7e7d2ab15 100644
---- a/board/renesas/common/gen5-common.c
-+++ b/board/renesas/common/gen5-common.c
-@@ -25,11 +25,6 @@ static void init_gic_v3(void)
- 	writel(0xffffffff, GICR_SGI_BASE + GICR_IGROUPR0);
- }
- 
--int board_early_init_f(void)
--{
--	return 0;
--}
--
- int board_init(void)
- {
- 	/* Allow WDT reset */
-diff --git a/configs/renesas_rcar5.config b/configs/renesas_rcar5.config
-index fbf158dfdb3..14fbe68655c 100644
---- a/configs/renesas_rcar5.config
-+++ b/configs/renesas_rcar5.config
-@@ -6,6 +6,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTARGS=y
- CONFIG_USE_BOOTCOMMAND=y
- 
-+# CONFIG_BOARD_EARLY_INIT_F is not set
- CONFIG_BOOTARGS="root=/dev/nfs rw nfsroot=192.168.0.1:/export/rfs ip=192.168.0.20"
- CONFIG_CMD_MMC=y
- CONFIG_DM_ETH_PHY=y
--- 
-2.53.0
+The use case is loading images directly from the host into the VM. That
+way I don't need to rebuild and repack disk images like ext4 every time
+I modify the kernel, and I also don't have to bother setting up a TFTP
+server.
 
+I got the idea a while ago while browsing the upstream LK code and
+noticed it had 9P support. I thought it would be cool to have something
+similar in U-Boot for kernel loading and testing in qemu.
+
+I will add this background to the cover letter if a v3 is needed.
+
+> 
+> From a network stack PoV does this work, been tested, with both the
+> legacy stack and LWIP stack? I would tend to push this towards working
+> with the LWIP stack as we're moving towards that being the default for
+> standard U-Boot (not in SPL) and I wouldn't expect 9P to be supported
+> in SPL.
+> 
+I have only implemented and tested 9P over virtio, so it uses
+virtqueues and doesn't go through the network stack at all. It's
+independent of both legacy and LWIP stacks. I am not sure if anyone
+would actually want 9P over TCP in U-Boot, but if there is demand for
+it, I can look into adding a transport driver over the network stack.
+
+Regards,
+Kuan-Wei
