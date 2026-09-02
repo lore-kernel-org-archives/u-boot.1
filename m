@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49996C624D6
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 13:42:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45578C624D6
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 13:42:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0F44380EC7;
-	Wed,  2 Sep 2026 13:42:23 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0D18A80F8D;
+	Wed,  2 Sep 2026 13:42:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4rC1f3f5mnX8; Wed,  2 Sep 2026 13:42:20 +0000 (UTC)
+ id Rj0VTm4c5962; Wed,  2 Sep 2026 13:42:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788356540;
-	bh=P0NaZhI8Smm6d4p612Z0Z4/gTuBMK1/2o0awUyyi6bo=;
+	d=lists.u-boot-project.org; s=default; t=1788356548;
+	bh=8nSgbs0qy5Cylg0ptpitkdje6NNdsMAY5MziO5geMpI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=td9gIA0CfO5Q3Jo2ruxheP1Jn0iIFkvNoKV5fXbE6tm0K72pyUEJHlTJKtUx2EwLz
-	 DpLJkfIUCdeMV52oJ29z1A2fOI4yZBXJ20QdTFR4QjJONTaaOZZyPzTp63hs1uxLSJ
-	 Bu3MnJRp6qgwakRVBuYzme70f+KwWEXoA3jH/HQWn+hmjwywWzYOsADRXvZ9VzlDv6
-	 Obf3bvAEP/r+ILfVNt3JoxcufPgGfMg2QJsPRvccXzpUiQg1btRXVi3VtYlQ7h2kwC
-	 odWhHVHb+2hSc9ltyLGKBqsMbKbqjF8BVQN5zcnx3IEsBXehHyxClr1IWA+CJLXgiT
-	 5eJyZ7r6VYLxg==
+	b=IXB8ryG1C7phog6UYJQ+FUWaO85R8tawBbDJZ4ga8JjlBaeUuIoxcNRhcCqaZkyV5
+	 lCP5L5tVuSzVY7tSSv0W/PiF46Nv86nW09XeFXXUKwuQtJtQrYnNFy0soV2zkdSV4J
+	 EekJnQ2uZaHshDsQJYq18KGb9odnzeptWhGxeg1NB6NB8QI2XRyGPZb80UyaZZLxkT
+	 ywwV2vbWzNVKzK5P7r9bAfGSNBnY7QA+yS1I7qrw+1zmFqvGA0v0WEwdemwPIhvu+2
+	 bBYvse8+vWrQCM/rSPV5Vfb/TwARtf2UDjBUzbpHXa+8MkOjkTmyhPLUMG8Fg0GUi5
+	 PbrvEiTBXCA6w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B0BE280D1C;
-	Wed,  2 Sep 2026 13:42:20 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 4D31A230
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:42:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 28A7C80F7E;
+	Wed,  2 Sep 2026 13:42:28 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E50992FD
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:42:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 333F440A4D
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:42:19 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id D67EF80EDB
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:42:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5ls9c_AXlheS for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 13:42:17 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
- helo=smtpout-02.galae.net; envelope-from=jeremie.dautheribes@bootlin.com;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hkiTeAxWAO7L for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 13:42:24 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
+ helo=smtpout-03.galae.net; envelope-from=jeremie.dautheribes@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=o84T2YzE
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- by smtp4.osuosl.org (Postfix) with ESMTPS id BE1C540A46
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:42:16 +0000 (UTC)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
+ header.a=rsa-sha256 header.s=dkim header.b=bnpkO/y9
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 723B180D1C
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:42:23 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 84F391A195E;
- Wed,  2 Sep 2026 13:42:14 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 9D84D4E414D1;
+ Wed,  2 Sep 2026 13:42:21 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 572776053C;
- Wed,  2 Sep 2026 13:42:14 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 6AB3E6053C;
+ Wed,  2 Sep 2026 13:42:21 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9CAB511C79786; 
- Wed,  2 Sep 2026 15:42:04 +0200 (CEST)
+ with ESMTPSA id 8991811C79A84; 
+ Wed,  2 Sep 2026 15:42:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1788356528; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1788356536; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=P0NaZhI8Smm6d4p612Z0Z4/gTuBMK1/2o0awUyyi6bo=;
- b=o84T2YzEzKXVJFdWs3+fY7Z4B/vrJcm3iGXCifKPE3tcM3BpfAQH6GPZ+qTtxWMkxMIuX7
- rkt5HuM9PDn9AzRLXWpp67mbPIatJ0P/FQ34k5YAQ2ii4tPiwbybicfoNxs2RtfZw3FS2a
- 7C4jBltJObm+daveFrm5hUVYBlDqcflEP0ILCXqoKbXh5QCnO1EicfZZKJ5L9OXn2PH3d6
- y9ArMv56jEUNP3JLwchSY3Zk3MIfP8B2NWXZeaCjc4iI7q8llBhXwU4RxBBIkNcfaR5bMP
- glAqr7IG44F54utiOzZO0IWuAwCIemaAYY1moDAYTLDQPA4Iz8HbPyR/+0A/JA==
+ bh=8nSgbs0qy5Cylg0ptpitkdje6NNdsMAY5MziO5geMpI=;
+ b=bnpkO/y9O7qLMgcrcIA8xpPN1KmthSc8hsM5kzdgi05Wj4/PWXiHT2gUCt1lqyFIAjUhoW
+ tuRKLcDLQUAQ2W4koYxDntcgqqs/VQytl6+dMnW1SRYmp2y78AO0558cGaELk/1lB8sflx
+ 0rEzWxoyZ5coc4uI6h86kIrYorh8WKhUjBZZb41Tbd8SDlIzQR1NyjHegYvEyYtzEI0NgL
+ UWBbfZfaIdeFwWj9feZs8WTYY2+jBeE0LS5nBaZbf7zcKW8xARthAdwgQlTwA1rO765vrH
+ iI8UUP9AWXD9rEaWFU5bXhuxwj55UTbCvEQI15Rc3wSCgdb4JcAbCxp9iKuXjQ==
 From: =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
  <jeremie.dautheribes@bootlin.com>
-Date: Wed, 02 Sep 2026 15:41:32 +0200
-Subject: [PATCH v2 5/7] doc: imx: ahab: add AHAB introduction
+Date: Wed, 02 Sep 2026 15:41:33 +0200
+Subject: [PATCH v2 6/7] doc: imx: ahab: add i.MX93 secure boot guide
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260902-imx93-secureboot-v2-5-5947b92a5072@bootlin.com>
+Message-Id: <20260902-imx93-secureboot-v2-6-5947b92a5072@bootlin.com>
 References: <20260902-imx93-secureboot-v2-0-5947b92a5072@bootlin.com>
 In-Reply-To: <20260902-imx93-secureboot-v2-0-5947b92a5072@bootlin.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
@@ -97,21 +97,21 @@ Cc: =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
  Quentin Schulz <quentin.schulz@cherry.de>, 
  Christophe Guerreiro <christophe.guerreiro@non.se.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=60392;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=25812;
  i=jeremie.dautheribes@bootlin.com; h=from:subject:message-id;
- bh=4Me5D4jW26YOEE1x2BiV6NwzqTSB0wL8fW+KSE0L0WI=;
- b=owEBbQKS/ZANAwAKASsAXqAbWo8DAcsmYgBqmCeVREnwLwtSruaBWXT5LXGw1CYBe1dcNfNIi
- u4EKdM4A4OJAjMEAAEKAB0WIQT7FK2Qhtu4QpBIBAkrAF6gG1qPAwUCapgnlQAKCRArAF6gG1qP
- A4v7D/0fuzg4iq2FxhJI+YpVQZPUBySG/RQ2KIR+5p7Ji3odNZ3Qu3MvkQYWrtGxkBkct+vPRsx
- hobgOD+12vafQ3vDapRu2OyuO9cb0UtE5OvngdLQ1ScsoV/l26PKYcdEHW+ECaZPE2Dxg6P8quQ
- L51eF1gD00JSlYza7ePX6DWP4G1ubtA3JLSjvNanvgHF4Tvcb87GW20kHI6ny932BNRzMcNNRMV
- yR1+SIahpt9QLaO0Ol97TTRvANlkdAb0FL+K4//c8FPeKJAcG3WF0uHE8XPIm5zQJQZmTo+sMvi
- /lRWdFgYdB18Gl6rPskrpJQ1irNrrgdh6/a36ruGC9zawEsAsjHMC/i4leBfMuzCjaazc2vu8RD
- bBrkftZAfVuuwYLUzxBTWSWvFB/2V+qNmNy3zRNHS4pdhfqZHHy2u1pYEChqXATNepGmnjGE7oy
- +vHZJ3RlApzyWEmyEo6dKRPozEhf66zeM91cX1vM/4I4ynYDtvAtY1nfWDtAwyN4urxAfjeIEV0
- Bthgnf4fljMwmi1axfisQogJcOUAxLeBpW60U6sbBVVYp4D3tEbC/vKfTdeBEpPUN5VYr2FCVWq
- TbGUkFmuumQY8gJvNBQALSMDOJlSBNjPgS+c+CZQ1leqh1N6LZVyv/5gm1jUVKvOHt4bjA5ZUI2
- /87iYRuwHRTWQrw==
+ bh=aav0byNmo9G6ENoy9uLVpz2Jfyo+q+nya026e26/BJ8=;
+ b=owEBbQKS/ZANAwAKASsAXqAbWo8DAcsmYgBqmCeVuKEldC7O0Y2e31q9xznunLmtnT00UAckY
+ V9MzWf/LWiJAjMEAAEKAB0WIQT7FK2Qhtu4QpBIBAkrAF6gG1qPAwUCapgnlQAKCRArAF6gG1qP
+ A+DoD/9D8jx0q8GLHWq+RSJG1e/TxdWoSgSDQk5E1ujziPf4wMzbYSMp8/BITCDDFMRSMo4k0G7
+ coe0G0tMjFa4R9dn8YIDWGJpw/8+D4gNneEuXXZ2GvRBajh5kL+pDWbHnmoEJgnu2QJWKaw5/7D
+ zGjfu60Ykzgn3H+AkA/8wQoE2xCH+ahMFBi8eVnmW242kY19/HMcBcDr0n/cx7VzRRG4X3Z0ppc
+ LSouz5RnvtQnvFRjpaSom0Admfq12PraS31uys4Ig0EZ/WPvk3FUbGxHx5DWftaLhhcgjgqC+fw
+ DAUBAIjQGoLZiZmK3pY6kqSlZxK1YrOjnIfijfMQtZOEEC6OgByOH5zjBeKeQpYHtTLGXaSk1OZ
+ KvZohwfAYzDOUOCN9HfsQotPUsb08/OxtstqCob/Y/DIfrZH8glcDy5ywt+48LRJGbP4wFTPtk9
+ WOok7HNjkFPWTuJQ4b3hBLvLBCwg6tHzVg7EIdzC02hVWfubPcPubvtwO8R2ow7IIBTaSOgEnqJ
+ Ob2ZhM9y2sJ5pZ/8WGLRSx5AOzeOWjIBewfGIKDaNFqNBE9LqQgVrXP7C7Gh84aqLrwrPwiGXrb
+ Zmme9GkYgOiMf8f4e5gZ3aVHsNZy1ht21TEqiTR6aBYA6DJpWP7yx6sLvPGZ9vp9KjJloXWbUTN
+ XQ/SRo2cOLWK2SQ==
 X-Developer-Key: i=jeremie.dautheribes@bootlin.com; a=openpgp;
  fpr=FB14AD9086DBB842904804092B005EA01B5A8F03
 X-Last-TLS-Session-Version: TLSv1.3
@@ -128,982 +128,621 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add an introductory document describing the AHAB (Advanced High
-Assurance Boot) secure and encrypted boot flow, covering the
-following topics:
-- AHAB architecture overview (SCU, SECO, PKI tree)
-- AHAB secure boot and encrypted boot flow
-- PKI tree generation (ahab_pki_tree.sh)
-- SRK Table and SRK Hash generation (srktool)
-- SRK Hash fuse programming and sanity check notes
-- i.MX 8ULP/93 secure boot support
+Add a step-by-step guide describing how to securely boot an i.MX93
+image using AHAB.
 
-This is based on doc/imx/ahab/introduction_ahab.txt from uboot-imx
-(lf_v2026.04). Originally written by Breno Lima, with contributions
-from Ye Li, Vanessa Maegima, and Utkarsh Gupta upstream in
-uboot-imx.
+This guide is largely based on the following documents:
+  - doc/imx/ahab/guides/mx8ulp_9x_secure_boot.txt, from uboot-imx
+  (lf_v2026.04), originally written by Utkarsh Gupta
+  - doc/imx/habv4/guides/mx8m_spl_secure_boot.txt, from this tree,
+  originally written by Marek Vasut
 
 Signed-off-by: Jérémie Dautheribes (Schneider Electric) <jeremie.dautheribes@bootlin.com>
 ---
- doc/board/nxp/index.rst            |   2 +
- doc/imx/ahab/introduction_ahab.rst | 464 +++++++++++++++++++++++++++++++++++++
- doc/imx/ahab/introduction_ahab.txt | 445 +++++++++++++++++++++++++++++++++++
- doc/imx/index.rst                  |  13 ++
- 4 files changed, 924 insertions(+)
+ doc/imx/ahab/guides/mx93_secure_boot.rst | 294 +++++++++++++++++++++++++++++++
+ doc/imx/ahab/guides/mx93_secure_boot.txt | 269 ++++++++++++++++++++++++++++
+ doc/imx/ahab/introduction_ahab.rst       |   3 +-
+ doc/imx/index.rst                        |   1 +
+ 4 files changed, 566 insertions(+), 1 deletion(-)
 
-diff --git a/doc/board/nxp/index.rst b/doc/board/nxp/index.rst
-index b28e5b6ceb9..29a90297675 100644
---- a/doc/board/nxp/index.rst
-+++ b/doc/board/nxp/index.rst
-@@ -29,6 +29,8 @@ NXP Semiconductors
-    mx6sabresd
-    mx6ul_14x14_evk
-    mx6ullevk
-+
-+   i.MX AHAB secure boot <../../imx/index>
-    rproc
-    psb
-    quickboot
-diff --git a/doc/imx/ahab/introduction_ahab.rst b/doc/imx/ahab/introduction_ahab.rst
+diff --git a/doc/imx/ahab/guides/mx93_secure_boot.rst b/doc/imx/ahab/guides/mx93_secure_boot.rst
 new file mode 100644
-index 00000000000..aef75b5e841
+index 00000000000..2a966ffed1b
 --- /dev/null
-+++ b/doc/imx/ahab/introduction_ahab.rst
-@@ -0,0 +1,464 @@
++++ b/doc/imx/ahab/guides/mx93_secure_boot.rst
+@@ -0,0 +1,294 @@
 +.. SPDX-License-Identifier: GPL-2.0+
 +
-+i.MX Secure and Encrypted Boot using AHAB
-+=========================================
++i.MX93 Secure boot guide using AHAB
++===================================
 +
-+1. Introduction
-+---------------
++This document provides a step-by-step guide on how to securely boot an
++i.MX93 boot image. It is assumed that the reader is familiar with basic
++AHAB concepts and with the PKI tree generation. Details about AHAB can be
++found in the :doc:`AHAB introduction <../introduction_ahab>` document and
++in the processor Security Reference Manual (SRM). The i.MX93 signing
++procedure is integrated in the U-Boot build thanks to binman.
 +
-+The i.MX 8/8x/8ULP/9x family of applications processors introduce a new secure
-+boot concept. Due to the multi-core architecture, the Security Controller (SECO)
-+and System Control Unit (SCU) in i.MX 8/8x, and EdgeLock secure enclave (ELE)
-+in i.MX 8ULP/9x are heavily involved in the secure boot process.
++1. Preparing the environment to build a secure boot image
++---------------------------------------------------------
 +
-+Step-by-step guides are available under doc/imx/ahab/guides/ directory,
-+users familiar with AHAB architecture and CST PKI tree generation should
-+refer to these documents instead.
++Secure boot image preparation requires the U-Boot build system to build
++the image and the Code Signing Tool (CST) to sign it.
 +
-+1.1 The AHAB Secure Boot Architecture
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++The following files are needed to prepare the boot image:
 +
-+The Advanced High Assurance Boot (AHAB) feature relies in digital signatures to
-+prevent unauthorized software execution during the device boot sequence. In
-+case a malware takes control of the boot sequence, sensitive data, services and
-+network can be impacted.
++  - EdgeLock secure enclave Firmware (ELE) (Optional).
++  - DDR PHY initialization firmware.
++  - U-Boot proper and SPL.
++  - ARM Trusted Firmware (ATF).
++  - OPTEE (Optional)
 +
-+The AHAB authentication is based on public key cryptography in which image
-+data is signed offline using one or more private keys. The resulting signed
-+image data is then verified on the i.MX processor using the corresponding
-+public keys. The public keys are included in the final binary and the SRK
-+Hash is programmed in the SoC fuses for establishing the root of trust.
++The ELE FW is distributed by NXP and is already signed using NXP keys.
++In the following sections, <work> designates the repository where all
++parts have been downloaded and built.
 +
-+In i.MX8 and i.MX8x families the SCU is responsible to interface with the boot
-+media, managing the process of loading the firmware and software images in
-+different partitions of the SoC. The SECO is responsible to authenticate the
-+images and authorize the execution of them.
++2. Preparing U-Boot to support AHAB secure boot features
++--------------------------------------------------------
 +
-+1.1.1 [i.MX 8/8x] The System Control Unit (SCU)
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++The U-Boot/SPL provides extra AHAB supported functionalities that include
++extension of Root of Trust, checking any events(issues) after image
++authentication, chip lifecycle status, securing the target etc.
 +
-+The System Control Unit SCU is a subsystem equipped with a programmable M4
-+core, which is responsible to handle the resource allocation, power, clocking,
-+IO configuration and muxing.
++The support is enabled by adding CONFIG_AHAB_BOOT to the defconfig file
++used by your target:
 +
-+The SCU is also responsible to interface between the rest of the system. In the
-+secure boot flow the SCU interfaces with the Security Controller (SECO),
-+requesting the image authentication.
++  - Defconfig:
++    CONFIG_AHAB_BOOT=y
++  - Kconfig:
++    ARM architecture -> Support i.MX9 AHAB features
 +
-+The System Control Unit FW (SCFW) is responsible to control all the
-+functionalities of the SCU. This firmware is distributed in a porting kit form.
-+Instructions to download the SCFW Porting Kit are available in the Linux BSP
-+Release Notes.
++Enabling this feature allows the SPL and U-Boot images to extend the Root
++of Trust by using the AHAB API call via ELE FW. It also enables binman to
++automatically sign the SPL and U-Boot containers while building
++flash.bin, as described in the next sections.
 +
-+Details about SCU can be found in the processors Reference Manual (RM).
++3. i.MX93 AHAB image layout
++---------------------------
 +
-+1.1.2 [i.MX 8/8x] The Security Controller (SECO)
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The SECO is a M0+ core dedicated to handle the SoC security subsystem. The
-+controller communicates with SCU domain through a dedicate message unit (MU).
-+
-+The SECO has a dedicate ROM which is responsible to initialize low level
-+security features and to authenticate the SECO firmware previously loaded by
-+the SCU ROM.
-+
-+The SECO firmware provides security services at run-time to different domains
-+of the SoC, one of these being the capability of authenticate images.
-+
-+The SECO firmware is signed and distributed by NXP and is always authenticated
-+in OEM open and closed configuration, instructions to download the SECO FW are
-+available in the Linux BSP Release Notes.
-+
-+Details about SECO can be found in the processors Security Reference Manual
-+(SRM).
-+
-+1.1.3 [i.MX 8ULP/9x] The EdgeLock secure enclave
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+EdgeLock Secure Enclave is the security subsystem based on a dedicated core
-+(RISC-V) to manage security tasks with a tight control on security resources
-+along with other enhancements.
-+
-+The secure enclave has a dedicate ROM which is responsible to initialize low
-+level security features and to authenticate the secure enclave firmware
-+previously loaded by the boot management core.
-+
-+The secure enclave firmware provides security services at run-time to different
-+domains of the SoC, one of these being the capability of authenticate images.
-+
-+The secure enclave firmware is signed and distributed by NXP and is always
-+authenticated in OEM open and closed configuration, instructions to download
-+this FW are available in the Linux BSP Release Notes.
-+
-+Details about EdgeLock secure enclave can be found in the processors Security
-+Reference Manual (SRM).
-+
-+.. note::
-+
-+   The terms Sentinel, S400, and EdgeLock secure enclave (ELE)
-+   are used interchangeably throughout the document.
-+
-+1.2 The image container
-+~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Due to the new architecture, multiple firmwares and software are required to
-+boot AHAB supporting devices. In order to store all the images in a single
-+binary the container image structure is used.
-+
-+At least two containers are needed for the boot process, the first container
-+must include only the Security Subsystem FW (SECO/ELE FW provided by NXP).
-+Additional containers can contain one or multiple images, depending on the
-+users specific application.
-+
-+The final binary is generated by the binman tool.
-+
-+1.3 The i.MX8/8x secure boot flow
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+As mentioned in the introduction, due to the multiple cores architecture the
-+i.MX8 boot sequence involves SCU ROM, SCFW, SECO ROM, and SECO FW.
-+
-+The diagram below illustrate the secure boot flow overview:
++The i.MX93 flash.bin image is built by binman and is composed of up to
++three containers. The ELE FW container is optional and is provided by NXP,
++it is appended at the beginning of the image when the file
++mx93a1-ahab-container.img is present in the build directory. The SPL and
++U-Boot containers are built by the nxp-imx9image etype and signed by the
++nxp-imx93cst etype.
 +
 +.. code-block:: text
 +
-+   System Controller   │  Security Controller  │     Cortex-M     │   Cortex-A
-+         (SCU)         │        (SECO)         │                  │
-+                       │                       │                  │
-+    ╔═════════════╗    │   ╔═════════════╗  ┌───────────┐       ┌─────────┐
-+    ║   SCU INIT  ║    │   ║  SECO INIT  ║  │  │        │       │ │       │
-+    ╚══════╤══════╝    │   ╚══════╤══════╝  │  │        v       │ │       v
-+           │           │          │         │  │  ┌──────────┐  │ │ ┌────────────┐
-+    ╔══════╧══════╗    │          │         │  │  │ Start M4 │  │ │ │  Start AP  │
-+    ║Load SECO FW ║    │          │         │  │  │   IMG    │  │ │ │    IMG     │
-+    ╚══════╤══════╝    │   ╔══════╧══════╗  │  │  └──────────┘  │ │ └─────┬──────┘
-+           ├──────────────>║Auth SECO FW ║  │  │                │ │       │
-+    ╔══════╧══════╗    │   ╚══════╤══════╝  │  │   ┌────────────┘ │       │
-+    ║ Load SCU FW ║    │          │         │  │   │              │       │
-+    ║   and DCD   ║    │          │         │  │   │              │ ┌─────┴──────┐
-+    ╚══════╤══════╝    │   ┌──────┴──────┐  │  │   │              │ │    Load    │
-+           ├──────────────>│ Auth SCU FW │  │  │   │              │ │ Add AP IMG │
-+           │           │   │   and DCD   │  │  │   │              │ └─────┬──────┘
-+    ╔══════╧══════╗    │   └──────┬──────┘  │  │   │              │       │
-+    ║   Run DCD   ║<──────────────┤         │  │   │              │       │
-+    ╚══════╤══════╝    │          │         │  │   │      ┌───────────────┤
-+           │           │          │         │  │   │      │       │       │
-+    ╔══════╧══════╗    │          │         │  │   │      │       │       │
-+    ║ Load M4 IMG ║    │          │         │  │   │      │       │       │
-+    ╚══════╤══════╝    │   ┌──────┴──────┐  │  │   │      │       │       │
-+           ├──────────────>│ Auth M4 IMG │  │  │   │      │       │       │
-+    ╔══════╧══════╗    │   └──────┬──────┘  │  │   │      │       │ ┌─────┴──────┐
-+    ║ Load AP IMG ║    │          │         │  │   │      │       │ │     Run    │
-+    ╚══════╤══════╝    │   ┌──────┴──────┐  │  │   │      │       │ │ Add AP IMG │
-+           ├──────────────>│ Auth AP IMG │  │  │   │      │       │ └────────────┘
-+    ╔══════╧══════╗    │   └─────────────┘  │  │   │      │       │
-+    ║Start SCU FW ║    │ ┌──────────────────┘  │   │      │       │
-+    ╚══════╤══════╝    │ │                     │   │      │       │
-+           │           │ │   ┌─────────────────────┘      │       │
-+    ┌──────┴──────┐    │ │   │                 │          │       │
-+    │  Start M4   ├──────┘   │     ┌──────────────────────┘       │
-+    └──────┬──────┘    │     │     │           │                  │
-+           │           │     │     │           │                  │
-+    ┌──────┴──────┐    │     │     │           │                  │
-+    │  Start AP   ├──────────┘     │           │                  │
-+    └─────────────┘    │           │           │                  │
-+           ┌───────────────────────┘           │                  │
-+           │           │                       │                  │
-+           v           │                       │                  │
-+    ┌─────────────┐    │   ┌─────────────┐     │                  │
-+    │Request SECO ├───────>│ Auth AP IMG │     │                  │
-+    └─────────────┘    │   └─────────────┘     │                  │
-+                       │                       │                  │
++              *start ----> +---------------------------+ ---------
++                           |   1st Container header    |   ^
++                           |       and signature       |   |  Authenticated at
++                           +---------------------------+   |  ELE ROM/FW Level
++                           |          Padding          |   |
++                           +---------------------------+   |
++                           |           ELE FW          |   v
++       *start + 0x400 ---> +---------------------------+ ---------
++                           |   2nd Container header    |   ^
++                           |       and signature       |   |  Authenticated at
++                           +---------------------------+   |  ELE ROM/FW Level
++                           |          Padding          |   |
++                           +---------------------------+   |
++                           |            SPL            |   v
++                           +---------------------------+ ---------
++                           |   3rd Container header    |   ^
++                           |       and signature       |   |  Authenticated at
++                           +---------------------------+   |  SPL Level
++                           |          Padding          |   |
++                           +---------------------------+   |
++                           |    ARM Trusted FW (ATF)   |   |
++                           +---------------------------+   |
++                           |       U-Boot proper       |   |
++                           +---------------------------+   |
++                           |      OPTEE (optional)     |   v
++                           +---------------------------+ ---------
 +
-+Notes: All boxes enclosed by double dash (═) are performed at SCU/SECO ROM
-+level.
++The first container includes the ELE FW which is signed using NXP keys,
++this container is authenticated by ELE ROM.
 +
-+The sequence below explains the i.MX8 and i.MX8x boot flow:
++The second container includes the SPL which is signed using OEM keys,
++this container is authenticated at ELE FW level.
 +
-+1. At reset, the SCU ROM and SECO ROM both start execution.
-+2. The SCU ROM reads the boot configuration and loads the SECO FW (First
-+   container) from the boot media to the SECO TCM.
-+3. A message is sent by the SCU ROM via MU requesting the SECO ROM to
-+   authenticate the SECO FW which is signed using NXP key.
-+4. The SCU ROM loads the second container from the boot media, this container
-+   must contain at least the SCFW which is signed using the OEM keys.
-+5. The SCU ROM loads the SCFW to the SCU TCM, a message is sent via MU
-+   requesting the SECO FW to authenticate the SCFW and DCD table.
-+6. The SCU ROM configures the DDR and loads the M4 and AP images included in
-+   the second container to their respective load addresses.
-+7. The SCU ROM request the SECO FW to authenticate the M4 image.
-+8. The SCU ROM request the SECO FW to authenticate the AP image. This image
-+   is the initial AP core software, depending in the U-Boot target it can
-+   be the U-Boot and ATF or only SPL.
-+9. The SCFW is initialized and starts the ARM Cortex-M and Cortex-A cores.
-+10. From this point additional containers can be loaded by Cortex-M and
-+    Cortex-A cores and authenticated by SECO, the AP SW must interface with
-+    SCU by calling the sc_misc_seco_authenticate() API function. In current
-+    U-Boot implementation the additional image can be the Linux Kernel binary
-+    or the U-Boot proper and ATF.
++The third container includes the U-Boot proper and the ATF. The SPL is in
++charge to load this container and also to interface with ELE FW to
++authenticate the additional container.
 +
-+1.4 The i.MX 8ULP/9x secure boot flow
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+The secure boot sequence involves multiple cores booting up at same time and
-+EdgeLock secure enclave ensure authentication of any boot software being loaded.
-+
-+The diagram below illustrate the secure boot flow overview for dual boot
-+scenario in i.MX 8ULP:
++The signing procedure is slightly different when compared with HABv4
++series. On AHAB the signature is directly included in the container, the
++CST is responsible to sign and handle the "Signature Block":
 +
 +.. code-block:: text
 +
-+       Cortex-M(CM)     │   EdgeLock Secure   │    Cortex-A(CA)   │   uPower(uP)
-+                        │    Enclave(ELE)     │                   │
-+              │          │          │          │         │         │        │
-+       ┌┬─────┴─────┬┐   │   ┌┬─────┴─────┬┐   │         │         │ ┌┬─────┴─────┬┐
-+       ││   INIT    ││   │   ││   INIT    ││   │         │         │ ││   INIT    ││
-+       └┴─────┬─────┴┘   │   └┴─────┬─────┴┘   │         │         │ └┴─────┬─────┴┘
-+              │          │          │          │  ┌┬─────┴─────┬┐  │        │
-+       ┌┬─────┴─────┬┐   │          │          │  ││Load CA FW ││  │ ┌──────┐  │
-+       ││Load uP FW ││   │          │          │  └┴─────┬─────┴┘  ││     │  │
-+       └┴─────┬─────┴┘   │          │          │         │        ││ ┌┬──v──┴─────┬┐
-+              │          │   ┌┬─────┴─────┬┐   │┌────────┤        ││ ││Load &Start││
-+              ├─────────────>├│Auth uP FW ││   ││        │        ││ ││   uP FW   ││
-+              │          │   └┴─────┬─────┴┘   ││        │        ││ └┴───────────┴┘
-+       ┌┬─────┴─────┬┐   │          │          ││        │        ││
-+       ││Load CM  FW││   │          ├────────────────────┼────────┘│
-+       └┴─────┬─────┴┘   │          │          ││        │         │
-+              │          │   ┌┬─────┴─────┬┐   ││        │         │
-+              ├─────────────>├│Auth CM FW ││   ││ ┌┬─────┴─────┬┐  │
-+              │          │   └┴─────┬─────┴┘   ││ ││Start CA FW││  │
-+       ┌┬─────┴─────┬┐   │          │          ││ └┴─────┬─────┴┘  │
-+       ││Load ELE FW││   │          │          ││        │         │
-+       └┴─────┬─────┴┘   │          │          ││        │         │
-+              │          │   ┌┬─────┴─────┬┐   ││        │         │
-+              ├─────────────>├│Auth ELE FW││   ││        │         │
-+              │          │   └┴─────┬─────┴┘   ││ ┌┬─────┴─────┬┐  │
-+       ┌┬─────┴─────┬┐   │          │          ││ ││ Load SPL  ││  │
-+       ││Start CM FW││   │          │          ││ └┴─────┬─────┴┘  │
-+       └┴─────┬─────┴┘   │          │          ││        │         │
-+              │          │   ┌┬─────┴─────┬┐   ││   ┌────┤         │
-+              │          │   ││Auth CA FW │┤<───┘   │    │         │
-+              │          │   └┴─────┬─────┴┘   │    │    │         │
-+              │          │          │          │    │    │         │
-+              │          │   ┌┬─────┴─────┬┐   │    │    │         │
-+              │          │   ││ Auth SPL  │┤<───────┘    │         │
-+              │          │   └┴─────┬─────┴┘   │         │         │
-+              │          │          ├─────────────────┐  │         │
-+              │          │          │          │      │  │         │
-+              │          │          │          │  ┌┬──v──v─────┬┐  │
-+              │          │          │          │  ││  Run SPL  ││  │
-+              │          │          │          │  └┴───────────┴┘  │
++               +----------------------------+ ---------
++               |                            |  ^
++               |                            |  |
++               |      Container header      |  |
++               |                            |  |
++               |                            |  |
++               +---+------------------------+  |
++               | S | Signature block header |  | Signed
++               | i +------------------------+  |
++               | g |                        |  |
++               | n |                        |  |
++               | a |        SRK table       |  |
++               | t |                        |  |
++               | u |                        |  v
++               | r +------------------------+ ---------
++               | e |       Signature        |
++               |   +------------------------+
++               | B |                        |
++               | l |        SGK Key         |
++               | o | Certificate (optional) |
++               | c |                        |
++               | k |                        |
++               +---+------------------------+
 +
-+The diagram below illustrate the secure boot flow overview for single boot
-+scenario in i.MX 9x:
++The certificate block is divided into:
 +
 +.. code-block:: text
 +
-+       Cortex-A(CA)     │   EdgeLock Secure   │    Cortex-M(CM)
-+                        │    Enclave(ELE)     │
-+              │          │          │          │         │
-+       ┌┬─────┴─────┬┐   │   ┌┬─────┴─────┬┐   │         │
-+       ││   INIT    ││   │   ││   INIT    ││   │         │
-+       └┴─────┬─────┴┘   │   └┴─────┬─────┴┘   │         │
-+              │          │          │          │  ┌┬─────┴─────┬┐
-+              │          │          │          │┌>││   INIT    ││
-+              │          │          │          ││ └┴─────┬─────┴┘
-+       ┌┬─────┴─────┬┐   │          │          ││        |
-+       ││Load ELE FW││─────────────>│          ││        │
-+       └┴─────┬─────┴┘   |          |          |│        │
-+              │          │   ┌┬─────┴─────┬┐   ││ ┌┬─────┴─────┬┐
-+              │          │   ├│Auth ELE FW││   ││ ││Start CM FW││
-+              │          │   └┴─────┬─────┴┘   ││ └┴─────┬─────┴┘
-+              |          |          |          |│        |
-+       ┌┬─────┴─────┬┐   │          │          ││        │
-+       ││Load CM  FW││   │          |          ││        │
-+       └┴─────┬─────┴┘   │          │          ││        │
-+              │          │   ┌┬─────┴─────┬┐   ││        │
-+              ├─────────────>├│Auth CM FW ││   ││        │
-+              │          │   └┴─────┬─────┴┘   ││        │
-+              |          │          │          ││        │
-+              │          │          |───────────┘        │
-+       ┌┬─────┴─────┬┐   │          │          │         │
-+       ││Load  CA FW││   │          │          │         │
-+       └┴─────┬─────┴┘   │          │          │         │
-+              │          │   ┌┬─────┴─────┬┐   │         │
-+              ├─────────────>├│Auth CA  FW││   │         │
-+              │          │   └┴─────┬─────┴┘   │         │
-+       ┌┬─────┴─────┬┐   │          │          │         │
-+       ││Start CA FW││   │          |          │         │
-+       └┴─────┬─────┴┘   │          │          │         │
-+              |          │          │          │         │
-+              |          │          │          │         │
-+              |          │          │          │         │
++                      +---------------+ ^
++                      |  Public key   | | Signed
++                      |  Permission   | |
++                      +---------------+ v
++                      |   Signature   |
++                      +---------------+
 +
-+More details on the boot flow can be found in respective Security Reference
-+Manual (SRM).
++The first block (public key permission) verifies the Signature block
++preceding (between SRK table and Certificate blocks), while the second
++block (signature) is verified by the SRK table block.
 +
-+2. Generating a PKI tree
-+------------------------
++In case not using the subordinate key, the container signature is
++verified against the SRK keys directly.
 +
-+The first step is to generate the private keys and public keys certificates.
-+The AHAB architecture is based on a Public Key Infrastructure (PKI) tree.
++4. Signing the images
++---------------------
 +
-+The Code Signing Tools package contains an OpenSSL based key generation script
-+under keys/ directory. The ahab_pki_tree.sh script generates a PKI tree
-+containing 4 Super Root Keys (SRK), possible to also include a subordinate
-+SGK key.
++Internally, Command Sequence Files (CSF) are used. The CSF files contain
++all the commands that the AHAB executes during the secure boot. These
++commands instruct the AHAB code on which memory areas of the image to
++authenticate, which keys to install and use, and so on. The CSF is generated
++using the CST Code Signing Tool based on input configuration file. This
++tool input configuration file is generated using binman, and the tool
++is invoked from binman as well.
 +
-+The AHAB supports both RSA and ECC keys, a new PKI tree can be generated by
-+following the example below:
++The existing file structure is automatically collected by the nxp-imx93cst
++etype and submitted as a single signing operation: the container header
++and the signature block offsets are read from the i.MX container header,
++so the offsets in the CST configuration file are always correct, whether
++the ELE FW is bundled in the image or not.
 +
-+- Generating a P384 ECC PKI tree on CST (starting from v3.1.0):
++Per default the AHAB keys and certificates need to be located in the
++build directory, this means creating a symbolic link or copying the
++following files from the AHAB PKI tree directory into the u-boot build
++directory for the CST Code Signing Tool to locate them:
++
++- ``crts/SRK_1_2_3_4_table.bin``
++- ``crts/SRK1_sha384_secp384r1_v3_usr_crt.pem``
++- ``keys/SRK1_sha384_secp384r1_v3_usr_key.pem``
++- ``keys/key_pass.txt``
++
++See the :doc:`AHAB introduction <../introduction_ahab>` document for the
++PKI tree generation procedure (ahab_pki_tree tool) and for the SRK Table
++generation (srktool).
++
++The paths to the SRK table and the certificate can be modified via
++changes to the nxp-imx93cst device tree node(s) or via the environment
++variables.
++
++The nxp-imx93cst etype is configurable using either DT properties or
++environment variables. The following DT properties and environment
++variables are supported. Note that environment variables override DT
++properties.
++
++.. list-table::
++   :header-rows: 1
++
++   * - DT property
++     - Variable
++     - Description
++   * - ``nxp,srk-table``
++     - ``SRK_TABLE``
++     - full path to ``SRK_1_2_3_4_table.bin``
++   * - ``nxp,srk-crt``
++     - ``SRK_KEY``
++     - full path to the SRK certificate ``SRK1_sha384_secp384r1_v3_usr_crt.pem``
++
++
++The SRK private key (``SRK1_sha384_secp384r1_v3_usr_key.pem``) must be located
++next to the certificate so that can find it.
++
++Environment variables can be set as follows to point the build process
++to external key material:
++
++.. code-block:: console
++
++   $ export SRK_TABLE=$CST_DIR/crts/SRK_1_2_3_4_table.bin
++   $ export SRK_KEY=$CST_DIR/crts/SRK1_sha384_secp384r1_v3_usr_crt.pem
++   $ make flash.bin
++
++5. Programming SRK Hash
++-----------------------
++
++As explained in the :doc:`AHAB introduction <../introduction_ahab>`
++document, the SRK Hash fuse values are generated by the srktool and
++should be programmed in the SoC SRK_HASH[255:0] fuses.
++
++Be careful when programming these values, as this data is the basis for
++the root of trust. An error in SRK Hash results in a part that does not
++boot.
++
++The U-Boot fuse tool can be used for programming eFuses on i.MX SoCs.
++
++- Dump SRK Hash fuses values in host machine:
++
++  On i.MX93 family, the SRK Hash uses sha256 and dump 8 words fuses:
 +
 +  .. code-block:: console
 +
-+     $ ./ahab_pki_tree.sh
-+     ...
-+     Do you want to use an existing CA key (y/n)?: n
-+     Do you want to use Elliptic Curve Cryptography (y/n)?: y
-+     Enter length for elliptic curve to be used for PKI tree:
-+     Possible values p256, p384, p521:  p384
-+     Enter the digest algorithm to use: sha384
-+     Enter PKI tree duration (years): 5
-+     Do you want the SRK certificates to have the CA flag set? (y/n)?: n
++     $ od -t x4 SRK_1_2_3_4_fuse.bin
++     0000000 db2959f2 90dfc39c 53394566 e0b75829
++     0000020 85e6f3b1 af00983d e5e804fe 7a451024
 +
-+The diagram below illustrate the PKI tree generated:
++- Program SRK_HASH[255:0] fuses:
 +
-+.. code-block:: text
++On i.MX93:
 +
-+                            ┌─────────┐
-+                            │   CA    │
-+                            └────┬────┘
-+                                 │
-+                                 │
-+        ┌───────────────┬────────┴────────┬───────────────┐
-+        │               │                 │               │
-+        │               │                 │               │
-+        v               v                 v               v
-+   ┌────────┐       ┌────────┐       ┌────────┐       ┌────────┐
-+   │  SRK1  │       │  SRK2  │       │  SRK3  │       │  SRK4  │
-+   └────────┘       └────────┘       └────────┘       └────────┘
++.. code-block:: console
 +
-+2.1 Generating a PKI tree including a subordinate SGK key
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++   => fuse prog 16 0 0xdb2959f2
++   => fuse prog 16 1 0x90dfc39c
++   => fuse prog 16 2 0x53394566
++   => fuse prog 16 3 0xe0b75829
++   => fuse prog 16 4 0x85e6f3b1
++   => fuse prog 16 5 0xaf00983d
++   => fuse prog 16 6 0xe5e804fe
++   => fuse prog 16 7 0x7a451024
 +
-+The ahab_pki_tree.sh script is also able to generate a PKI tree containing a
-+subordinate key of the SRK, this key can be used to verify the signature
-+included in the final signed image.
++6. Verify AHAB events
++---------------------
 +
-+Users should set the CA flag when generating the SRK certificates.
++If the fuses have been burned properly, there should be no AHAB events
++after boot. To validate this, power on the board, and run ahab_status
++command on U-Boot terminal.
 +
-+- Generating a P384 ECC PKI tree with a subordinate SGK key on CST (starting
-+  from v3.1.0):
++No events should be returned after this command:
 +
-+  .. code-block:: console
++.. code-block:: console
 +
-+     $ ./ahab_pki_tree.sh
-+     ...
-+     Do you want to use an existing CA key (y/n)?: n
-+     Do you want to use Elliptic Curve Cryptography (y/n)?: y
-+     Enter length for elliptic curve to be used for PKI tree:
-+     Possible values p256, p384, p521:  p384
-+     Enter the digest algorithm to use: sha384
-+     Enter PKI tree duration (years): 5
-+     Do you want the SRK certificates to have the CA flag set? (y/n)?: y
++   => ahab_status
++   Lifecycle: 0x00000008, OEM Open
 +
-+The diagram below illustrate the PKI tree generated:
++           No Events Found!
 +
-+.. code-block:: text
-+
-+                            ┌─────────┐
-+                            │   CA    │
-+                            └────┬────┘
-+                                 │
-+                                 │
-+        ┌───────────────┬────────┴────────┬───────────────┐
-+        │               │                 │               │
-+        │               │                 │               │
-+        v               v                 v               v
-+   ┌────────┐       ┌────────┐       ┌────────┐       ┌────────┐
-+   │  SRK1  │       │  SRK2  │       │  SRK3  │       │  SRK4  │
-+   └────┬───┘       └───┬────┘       └────┬───┘       └───┬────┘
-+        │               │                 │               │
-+        v               v                 v               v
-+   ┌────────┐       ┌────────┐       ┌────────┐       ┌────────┐
-+   │  SGK1  │       │  SGK2  │       │  SGK3  │       │  SGK4  │
-+   └────────┘       └────────┘       └────────┘       └────────┘
-+
-+2.2 Generating a SRK Table and SRK Hash
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+The next step is to generated the SRK Table and its respective SRK Table Hash
-+from the SRK public key certificates created in one of the steps above.
-+
-+In the AHAB architecture, the SRK Table is included in the signed image and the
-+SRK Hash is programmed in the SoC SRK_HASH[511:0]/SRK_HASH[255:0] fuses.
-+
-+On the target device during the authentication process the AHAB code verify the
-+SRK Table against the SoC SRK_HASH fuses, in case the verification is successful
-+the root of trust is established and the AHAB code can progress with the image
-+authentication.
-+
-+The srktool can be used to generate the SRK Table and its respective SRK
-+Table Hash.
-+
-+- Generating SRK Table and SRK Hash in Linux 64-bit machines:
-+  - In i.MX 8/8x family, the expected SRK HASH is of 512 bit.
-+
-+    .. code-block:: console
-+
-+       $ cd ../crts/
-+       $ ../linux64/bin/srktool -a -s sha384 -t SRK_1_2_3_4_table.bin \
-+             -e SRK_1_2_3_4_fuse.bin -f 1 -c \
-+             SRK1_sha384_secp384r1_v3_usr_crt.pem,\
-+             SRK2_sha384_secp384r1_v3_usr_crt.pem,\
-+             SRK3_sha384_secp384r1_v3_usr_crt.pem,\
-+             SRK4_sha384_secp384r1_v3_usr_crt.pem
-+
-+  - In i.MX 8ULP/9x, the expected SRK HASH is of 256 bit.
-+
-+    .. code-block:: console
-+
-+       $ cd ../crts/
-+       $ ../linux64/bin/srktool -a -d sha256 -s sha384 -t SRK_1_2_3_4_table.bin \
-+             -e SRK_1_2_3_4_fuse.bin -f 1 -c \
-+             SRK1_sha384_secp384r1_v3_usr_crt.pem,\
-+             SRK2_sha384_secp384r1_v3_usr_crt.pem,\
-+             SRK3_sha384_secp384r1_v3_usr_crt.pem,\
-+             SRK4_sha384_secp384r1_v3_usr_crt.pem
-+
-+    Regenerate the SRK HASH (SRK_1_2_3_4_fuse.bin) by using SHA256 with
-+    SRK_1_2_3_4_table.bin:
-+
-+    .. code-block:: console
-+
-+       $ openssl dgst -binary -sha256 SRK_1_2_3_4_table.bin
-+
-+- Optionally users can check if the sha512sum/sha256sum of SRK_1_2_3_4_table
-+  matches with the SRK_1_2_3_4_fuse.bin:
-+
-+  .. code-block:: console
-+
-+     $ od -t x4 --endian=big SRK_1_2_3_4_fuse.bin
-+     0000000 01b04697 0253376b 2066fe56 aaef9a91
-+     0000020 e62e09d8 14fb7e36 d5b38d05 0982edab
-+     0000040 7ada6576 2f6b4f59 1fd9347e 46e7305d
-+     0000060 46e34bf0 89780bd1 c809e714 a17e2f4e
-+
-+     $ sha512sum SRK_1_2_3_4_table.bin
-+     01b046970253376b2066fe56aaef9a91\
-+     e62e09d814fb7e36d5b38d050982edab\
-+     7ada65762f6b4f591fd9347e46e7305d\
-+     46e34bf089780bd1c809e714a17e2f4e\
-+     SRK_1_2_3_4_table.bin
-+
-+.. note::
-+
-+   The commands above cannot be used as reference to program the SoC
-+   SRK_HASH fuses.
-+
-+3 Known limitations
++7. Close the device
 +-------------------
++.. warning::
 +
-+- Due to a limitation in i.MX8QXP B0 silicon it's not possible to use RSA
-+  4096-bit SRK keys with an additional subordinate SGK key.
-diff --git a/doc/imx/ahab/introduction_ahab.txt b/doc/imx/ahab/introduction_ahab.txt
++   Before closing the device, please ensure your sample is in OEM Open state,
++   OEM SRK hash has been fused, and you are able to boot a signed image
++   successfully without any AHAB events reported . If not, your sample will be
++   unrecoverable.
++
++After the device successfully boots a signed image without generating any
++AHAB security events, it is safe to close the device. The chip lifecycle
++should be changed from OEM open to OEM closed. Be aware this step can
++damage your board if a previous step failed. It is also irreversible. Run
++on the U-Boot terminal:
++
++.. code-block:: console
++
++   => ahab_close
++
++Now reboot the target, and run:
++
++.. code-block:: console
++
++   => ahab_status
++   Lifecycle: 0x00000020, OEM Closed
++
++           No Events Found!
+diff --git a/doc/imx/ahab/guides/mx93_secure_boot.txt b/doc/imx/ahab/guides/mx93_secure_boot.txt
 new file mode 100644
-index 00000000000..4a5b6f795c4
+index 00000000000..45a70926d51
 --- /dev/null
-+++ b/doc/imx/ahab/introduction_ahab.txt
-@@ -0,0 +1,445 @@
-+          +=======================================================+
-+          +       i.MX Secure and Encrypted Boot using AHAB       +
-+          +=======================================================+
++++ b/doc/imx/ahab/guides/mx93_secure_boot.txt
+@@ -0,0 +1,269 @@
+++=========================================================+
+++       i.MX93 Secure boot guide using AHAB               +
+++=========================================================+
 +
-+1. Introduction
-+----------------
++1. AHAB secure boot process
++----------------------------
 +
-+The i.MX 8/8x/8ULP/9x family of applications processors introduce a new secure
-+boot concept. Due to the multi-core architecture, the Security Controller (SECO)
-+and System Control Unit (SCU) in i.MX 8/8x, and Edgelock secure enclave (ELE)
-+in i.MX 8ULP/9x are heavily involved in the secure boot process.
++This document provides a step-by-step guide on how to securely boot an
++i.MX93 boot image. It is assumed that the reader is familiar with basic
++AHAB concepts and with the PKI tree generation. Details about AHAB can be
++found in the introduction_ahab.txt document and in processors Security
++Reference Manual Document (SRM). The i.MX93 signing procedure is
++integrated in the U-Boot build thanks to binman.
 +
-+Step-by-step guides are available under doc/imx/ahab/guides/ directory,
-+users familiar with AHAB architecture and CST PKI tree generation should
-+refer to these documents instead.
++1.1 Preparing the environment to build a secure boot image
++-----------------------------------------------------------
 +
-+1.1 The AHAB Secure Boot Architecture
-+--------------------------------------
++Secure boot image preparation requires the U-Boot build system to build
++the image and the Code Signing Tool (CST) to sign it.
 +
-+The Advanced High Assurance Boot (AHAB) feature relies in digital signatures to
-+prevent unauthorized software execution during the device boot sequence. In
-+case a malware takes control of the boot sequence, sensitive data, services and
-+network can be impacted.
++Based on boot mode, the following files are needed to prepare the boot
++image:
 +
-+The AHAB authentication is based on public key cryptography in which image
-+data is signed offline using one or more private keys. The resulting signed
-+image data is then verified on the i.MX processor using the corresponding
-+public keys. The public keys are included in the final binary and the SRK
-+Hash is programmed in the SoC fuses for establishing the root of trust.
++- All boot modes
++  - Edgelock secure enclave Firmware (ELE) (Optional).
++  - DDR PHY initialization firmware.
++  - U-Boot proper and SPL.
++  - ARM Trusted Firmware (ATF).
++  - OPTEE (Optional)
 +
-+In i.MX8 and i.MX8x families the SCU is responsible to interface with the boot
-+media, managing the process of loading the firmware and software images in
-+different partitions of the SoC. The SECO is responsible to authenticate the
-+images and authorize the execution of them.
++The ELE FW is distributed by NXP and is already signed using NXP keys.
++In the following sections, <work> designates the repository where all
++parts have been downloaded and built.
 +
-+1.1.1 [i.MX 8/8x] The System Control Unit (SCU)
-+------------------------------------
-+
-+The System Control Unit SCU is a subsystem equipped with a programmable M4
-+core, which is responsible to handle the resource allocation, power, clocking,
-+IO configuration and muxing.
-+
-+The SCU is also responsible to interface between the rest of the system. In the
-+secure boot flow the SCU interfaces with the Security Controller (SECO),
-+requesting the image authentication.
-+
-+The System Control Unit FW (SCFW) is responsible to control all the
-+functionalities of the SCU. This firmware is distributed in a porting kit form.
-+Instructions to download the SCFW Porting Kit are available in the Linux BSP
-+Release Notes.
-+
-+Details about SCU can be found in the processors Reference Manual (RM).
-+
-+1.1.2 [i.MX 8/8x] The Security Controller (SECO)
-+-------------------------------------
-+
-+The SECO is a M0+ core dedicated to handle the SoC security subsystem. The
-+controller communicates with SCU domain through a dedicate message unit (MU).
-+
-+The SECO has a dedicate ROM which is responsible to initialize low level
-+security features and to authenticate the SECO firmware previously loaded by
-+the SCU ROM.
-+
-+The SECO firmware provides security services at run-time to different domains
-+of the SoC, one of these being the capability of authenticate images.
-+
-+The SECO firmware is signed and distributed by NXP and is always authenticated
-+in OEM open and closed configuration, instructions to download the SECO FW are
-+available in the Linux BSP Release Notes.
-+
-+Details about SECO can be found in the processors Security Reference Manual
-+(SRM).
-+
-+1.1.3 [i.MX 8ULP/9x] The Edgelock secure enclave
-+-------------------------------------
-+
-+EdgeLock™ Secure Enclave is the security subsystem based on a dedicated core
-+(RISC-V) to manage security tasks with a tight control on security resources
-+along with other enhancements.
-+
-+The secure enclave has a dedicate ROM which is responsible to initialize low
-+level security features and to authenticate the secure enclave firmware
-+previously loaded by the boot management core.
-+
-+The secure enclave firmware provides security services at run-time to different
-+ domains of the SoC, one of these being the capability of authenticate images.
-+
-+The secure enclave firmware is signed and distributed by NXP and is always
-+authenticated in OEM open and closed configuration, instructions to download
-+this FW are available in the Linux BSP Release Notes.
-+
-+Details about Edgelock secure enclave can be found in the processors Security
-+Reference Manual (SRM).
-+
-+NOTE: The terms Sentinel, S400, and EdgeLock secure enclave (ELE), and ELE
-+are used interchangeably throughout the document.
-+
-+1.2 The image container
-+------------------------
-+
-+Due to the new architecture, multiple firmwares and software are required to
-+boot AHAB supporting devices. In order to store all the images in a single
-+binary the container image structure is used.
-+
-+At least two containers are needed for the boot process, the first container
-+must include only the Security Subsystem FW (SECO/ELE FW provided by NXP).
-+Additional containers can contain one or multiple images, depending on the
-+users specific application.
-+
-+The final binary is generated by the imx-mkimage tool.
-+
-+1.3 The i.MX8/8x secure boot flow
-+----------------------------------
-+
-+As mentioned in the introduction, due to the multiple cores architecture the
-+i.MX8 boot sequence involves SCU ROM, SCFW, SECO ROM, and SECO FW.
-+
-+The diagram below illustrate the secure boot flow overview:
-+
-+System Controller   │  Security Controller  │     Cortex-M     │   Cortex-A
-+      (SCU)         │        (SECO)         │                  │
-+                    │                       │                  │
-+ ╔═════════════╗    │   ╔═════════════╗  ┌───────────┐       ┌─────────┐
-+ ║   SCU INIT  ║    │   ║  SECO INIT  ║  │  │        │       │ │       │
-+ ╚══════╤══════╝    │   ╚══════╤══════╝  │  │        v       │ │       v
-+        │           │          │         │  │  ┌──────────┐  │ │ ┌────────────┐
-+ ╔══════╧══════╗    │          │         │  │  │ Start M4 │  │ │ │  Start AP  │
-+ ║Load SECO FW ║    │          │         │  │  │   IMG    │  │ │ │    IMG     │
-+ ╚══════╤══════╝    │   ╔══════╧══════╗  │  │  └──────────┘  │ │ └─────┬──────┘
-+        ├──────────────>║Auth SECO FW ║  │  │                │ │       │
-+ ╔══════╧══════╗    │   ╚══════╤══════╝  │  │   ┌────────────┘ │       │
-+ ║ Load SCU FW ║    │          │         │  │   │              │       │
-+ ║   and DCD   ║    │          │         │  │   │              │ ┌─────┴──────┐
-+ ╚══════╤══════╝    │   ┌──────┴──────┐  │  │   │              │ │    Load    │
-+        ├──────────────>│ Auth SCU FW │  │  │   │              │ │ Add AP IMG │
-+        │           │   │   and DCD   │  │  │   │              │ └─────┬──────┘
-+ ╔══════╧══════╗    │   └──────┬──────┘  │  │   │              │       │
-+ ║   Run DCD   ║<──────────────┤         │  │   │              │       │
-+ ╚══════╤══════╝    │          │         │  │   │      ┌───────────────┤
-+        │           │          │         │  │   │      │       │       │
-+ ╔══════╧══════╗    │          │         │  │   │      │       │       │
-+ ║ Load M4 IMG ║    │          │         │  │   │      │       │       │
-+ ╚══════╤══════╝    │   ┌──────┴──────┐  │  │   │      │       │       │
-+        ├──────────────>│ Auth M4 IMG │  │  │   │      │       │       │
-+ ╔══════╧══════╗    │   └──────┬──────┘  │  │   │      │       │ ┌─────┴──────┐
-+ ║ Load AP IMG ║    │          │         │  │   │      │       │ │     Run    │
-+ ╚══════╤══════╝    │   ┌──────┴──────┐  │  │   │      │       │ │ Add AP IMG │
-+        ├──────────────>│ Auth AP IMG │  │  │   │      │       │ └────────────┘
-+ ╔══════╧══════╗    │   └─────────────┘  │  │   │      │       │
-+ ║Start SCU FW ║    │ ┌──────────────────┘  │   │      │       │
-+ ╚══════╤══════╝    │ │                     │   │      │       │
-+        │           │ │   ┌─────────────────────┘      │       │
-+ ┌──────┴──────┐    │ │   │                 │          │       │
-+ │  Start M4   ├──────┘   │     ┌──────────────────────┘       │
-+ └──────┬──────┘    │     │     │           │                  │
-+        │           │     │     │           │                  │
-+ ┌──────┴──────┐    │     │     │           │                  │
-+ │  Start AP   ├──────────┘     │           │                  │
-+ └─────────────┘    │           │           │                  │
-+        ┌───────────────────────┘           │                  │
-+        │           │                       │                  │
-+        v           │                       │                  │
-+ ┌─────────────┐    │   ┌─────────────┐     │                  │
-+ │Request SECO ├───────>│ Auth AP IMG │     │                  │
-+ └─────────────┘    │   └─────────────┘     │                  │
-+                    │                       │                  │
-+
-+
-+Notes:
-+All boxes enclosed by double dash (═) are performed at SCU/SECO ROM level.
-+
-+The sequence below explains the i.MX8 and i.MX8x boot flow:
-+
-+1  - At reset, the SCU ROM and SECO ROM both start execution.
-+2  - The SCU ROM reads the boot configuration and loads the SECO FW (First
-+     container) from the boot media to the SECO TCM.
-+3  - A message is sent by the SCU ROM via MU requesting the SECO ROM to
-+     authenticate the SECO FW which is signed using NXP key.
-+4  - The SCU ROM loads the second container from the boot media, this container
-+     must contain at least the SCFW which is signed using the OEM keys.
-+5  - The SCU ROM loads the SCFW to the SCU TCM, a message is sent via MU
-+     requesting the SECO FW to authenticate the SCFW and DCD table.
-+6  - The SCU ROM configures the DDR and loads the M4 and AP images included in
-+     the second container to their respective load addresses.
-+7  - The SCU ROM request the SECO FW to authenticate the M4 image.
-+8  - The SCU ROM request the SECO FW to authenticate the AP image. This image
-+     is the initial AP core software, depending in the U-Boot target it can
-+     be the U-Boot and ATF or only SPL.
-+9  - The SCFW is initialized and starts the ARM Cortex-M and Cortex-A cores.
-+10 - From this point additional containers can be loaded by Cortex-M and
-+     Cortex-A cores and authenticated by SECO, the AP SW must interface with
-+     SCU by calling the sc_misc_seco_authenticate() API function. In current
-+     U-Boot implementation the additional image can be the Linux Kernel binary
-+     or the U-Boot proper and ATF. Details about current U-Boot implementation
-+     can be found in AHAB guides included in doc/imx/ahab/guides/ directory.
-+
-+1.4 The i.MX 8ULP/9x secure boot flow
-+----------------------------------
-+
-+The secure boot sequence involves multiple cores booting up at same time and
-+Edgelock secure enclave ensure authentication of any boot software being loaded.
-+
-+The diagram below illustrate the secure boot flow overview for dual boot
-+scenario in i.MX 8ULP:
-+
-+
-+    Cortex-M(CM)     │   Edgelock Secure   │    Cortex-A(CA)   │   uPower(uP)
-+                     │    Enclave(ELE)     │                   │
-+          │          │          │          │         │         │        │
-+   ┌┬─────┴─────┬┐   │   ┌┬─────┴─────┬┐   │         │         │ ┌┬─────┴─────┬┐
-+   ││   INIT    ││   │   ││   INIT    ││   │         │         │ ││   INIT    ││
-+   └┴─────┬─────┴┘   │   └┴─────┬─────┴┘   │         │         │ └┴─────┬─────┴┘
-+          │          │          │          │  ┌┬─────┴─────┬┐  │        │
-+   ┌┬─────┴─────┬┐   │          │          │  ││Load CA FW ││ ┌──────┐  │
-+   ││Load uP FW ││   │          │          │  └┴─────┬─────┴┘ ││     │  │
-+   └┴─────┬─────┴┘   │          │          │         │        ││ ┌┬──v──┴─────┬┐
-+          │          │   ┌┬─────┴─────┬┐   │┌────────┤        ││ ││Load &Start││
-+          ├─────────────>├│Auth uP FW ││   ││        │        ││ ││   uP FW   ││
-+          │          │   └┴─────┬─────┴┘   ││        │        ││ └┴───────────┴┘
-+   ┌┬─────┴─────┬┐   │          │          ││        │        ││
-+   ││Load CM  FW││   │          ├────────────────────┼────────┘│
-+   └┴─────┬─────┴┘   │          │          ││        │         │
-+          │          │   ┌┬─────┴─────┬┐   ││        │         │
-+          ├─────────────>├│Auth CM FW ││   ││ ┌┬─────┴─────┬┐  │
-+          │          │   └┴─────┬─────┴┘   ││ ││Start CA FW││  │
-+   ┌┬─────┴─────┬┐   │          │          ││ └┴─────┬─────┴┘  │
-+   ││Load ELE FW││   │          │          ││        │         │
-+   └┴─────┬─────┴┘   │          │          ││        │         │
-+          │          │   ┌┬─────┴─────┬┐   ││        │         │
-+          ├─────────────>├│Auth ELE FW││   ││        │         │
-+          │          │   └┴─────┬─────┴┘   ││ ┌┬─────┴─────┬┐  │
-+   ┌┬─────┴─────┬┐   │          │          ││ ││ Load SPL  ││  │
-+   ││Start CM FW││   │          │          ││ └┴─────┬─────┴┘  │
-+   └┴─────┬─────┴┘   │          │          ││        │         │
-+          │          │   ┌┬─────┴─────┬┐   ││   ┌────┤         │
-+          │          │   ││Auth CA FW │┤<───┘   │    │         │
-+          │          │   └┴─────┬─────┴┘   │    │    │         │
-+          │          │          │          │    │    │         │
-+          │          │   ┌┬─────┴─────┬┐   │    │    │         │
-+          │          │   ││ Auth SPL  │┤<───────┘    │         │
-+          │          │   └┴─────┬─────┴┘   │         │         │
-+          │          │          ├─────────────────┐  │         │
-+          │          │          │          │      │  │         │
-+          │          │          │          │  ┌┬──v──v─────┬┐  │
-+          │          │          │          │  ││  Run SPL  ││  │
-+          │          │          │          │  └┴───────────┴┘  │
-+
-+
-+The diagram below illustrate the secure boot flow overview for single boot
-+scenario in i.MX 9x:
-+
-+
-+    Cortex-A(CA)     │   Edgelock Secure   │    Cortex-M(CM)
-+                     │    Enclave(ELE)     │
-+          │          │          │          │         │
-+   ┌┬─────┴─────┬┐   │   ┌┬─────┴─────┬┐   │         │
-+   ││   INIT    ││   │   ││   INIT    ││   │         │
-+   └┴─────┬─────┴┘   │   └┴─────┬─────┴┘   │         │
-+          │          │          │          │  ┌┬─────┴─────┬┐
-+          │          │          │          │┌>││   INIT    ││
-+          │          │          │          ││ └┴─────┬─────┴┘
-+   ┌┬─────┴─────┬┐   │          │          ││        |
-+   ││Load ELE FW││─────────────>│          ││        │
-+   └┴─────┬─────┴┘   |          |          |│        |
-+          │          │   ┌┬─────┴─────┬┐   ││ ┌┬─────┴─────┬┐
-+          │          │   ├│Auth ELE FW││   ││ ││Start CM FW││
-+          │          │   └┴─────┬─────┴┘   ││ └┴─────┬─────┴┘
-+          |          |          |          |│        |
-+   ┌┬─────┴─────┬┐   │          │          ││        │
-+   ││Load CM  FW││   │          |          ││        │
-+   └┴─────┬─────┴┘   │          │          ││        │
-+          │          │   ┌┬─────┴─────┬┐   ││        │
-+          ├─────────────>├│Auth CM FW ││   ││        │
-+          │          │   └┴─────┬─────┴┘   ││        │
-+          |          │          │          ││        │
-+          │          │          |───────────┘        │
-+   ┌┬─────┴─────┬┐   │          │          │         │
-+   ││Load  CA FW││   │          │          │         │
-+   └┴─────┬─────┴┘   │          │          │         │
-+          │          │   ┌┬─────┴─────┬┐   │         │
-+          ├─────────────>├│Auth CA  FW││   │         │
-+          │          │   └┴─────┬─────┴┘   │         │
-+   ┌┬─────┴─────┬┐   │          │          │         │
-+   ││Start CA FW││   │          |          │         │
-+   └┴─────┬─────┴┘   │          │          │         │
-+          |          │          │          │         │
-+          |          │          │          │         │
-+          |          │          │          │         │
-+
-+More details on the boot flow can be found in respective Security Reference
-+Manual (SRM).
-+
-+
-+2. Generating a PKI tree
-+-------------------------
-+
-+The first step is to generate the private keys and public keys certificates.
-+The AHAB architecture is based on a Public Key Infrastructure (PKI) tree.
-+
-+The Code Signing Tools package contains an OpenSSL based key generation script
-+under keys/ directory. The ahab_pki_tree.sh script generates a PKI tree
-+containing 4 Super Root Keys (SRK), possible to also include a subordinate
-+SGK key.
-+
-+The AHAB supports both RSA and ECC keys, a new PKI tree can be generated by
-+following the example below:
-+
-+- Generating a P384 ECC PKI tree on CST (starting from v3.1.0):
-+
-+  $ ./ahab_pki_tree.sh
-+  ...
-+  Do you want to use an existing CA key (y/n)?: n
-+  Do you want to use Elliptic Curve Cryptography (y/n)?: y
-+  Enter length for elliptic curve to be used for PKI tree:
-+  Possible values p256, p384, p521:  p384
-+  Enter the digest algorithm to use: sha384
-+  Enter PKI tree duration (years): 5
-+  Do you want the SRK certificates to have the CA flag set? (y/n)?: n
-+
-+The diagram below illustrate the PKI tree generated:
-+
-+                             ┌─────────┐
-+                             │   CA    │
-+                             └────┬────┘
-+                                  │
-+                                  │
-+         ┌───────────────┬────────┴────────┬───────────────┐
-+         │               │                 │               │
-+         │               │                 │               │
-+         v               v                 v               v
-+    ┌────────┐       ┌────────┐       ┌────────┐       ┌────────┐
-+    │  SRK1  │       │  SRK2  │       │  SRK3  │       │  SRK4  │
-+    └────────┘       └────────┘       └────────┘       └────────┘
-+
-+2.1 Generating a PKI tree including a subordinate SGK key
++1.2 Preparing U-Boot to support AHAB secure boot features
 +----------------------------------------------------------
 +
-+The ahab_pki_tree.sh script is also able to generate a PKI tree containing a
-+subordinate key of the SRK, this key can be used to verify the signature
-+included in the final signed image.
++The U-Boot/SPL provides extra AHAB supported functionalities that include
++extension of Root of Trust, checking any events(issues) after image
++authentication, chip lifecycle status, securing the target etc.
 +
-+Users should set the CA flag when generating the SRK certificates.
++The support is enabled by adding CONFIG_AHAB_BOOT to the defconfig file
++used by your target:
 +
-+- Generating a P384 ECC PKI tree with a subordinate SGK key on CST (starting
-+from v3.1.0):
++  - Defconfig:
++    CONFIG_AHAB_BOOT=y
++  - Kconfig:
++    ARM architecture -> Support i.MX9 AHAB features
 +
-+  $ ./ahab_pki_tree.sh
-+  ...
-+  Do you want to use an existing CA key (y/n)?: n
-+  Do you want to use Elliptic Curve Cryptography (y/n)?: y
-+  Enter length for elliptic curve to be used for PKI tree:
-+  Possible values p256, p384, p521:  p384
-+  Enter the digest algorithm to use: sha384
-+  Enter PKI tree duration (years): 5
-+  Do you want the SRK certificates to have the CA flag set? (y/n)?: y
++Enabling this feature allows the SPL and U-Boot images to extend the Root
++of Trust by using the AHAB API call via ELE FW. It also enables binman to
++automatically sign the SPL and U-Boot containers while building
++flash.bin, as described in the next sections.
 +
-+The diagram below illustrate the PKI tree generated:
++1.3 i.MX93 AHAB image layout
++-----------------------------
 +
-+                             ┌─────────┐
-+                             │   CA    │
-+                             └────┬────┘
-+                                  │
-+                                  │
-+         ┌───────────────┬────────┴────────┬───────────────┐
-+         │               │                 │               │
-+         v               v                 v               v
-+    ┌────────┐       ┌────────┐       ┌────────┐       ┌────────┐
-+    │  SRK1  │       │  SRK2  │       │  SRK3  │       │  SRK4  │
-+    └────┬───┘       └───┬────┘       └────┬───┘       └───┬────┘
-+         │               │                 │               │
-+         v               v                 v               v
-+    ┌────────┐       ┌────────┐       ┌────────┐       ┌────────┐
-+    │  SGK1  │       │  SGK2  │       │  SGK3  │       │  SGK4  │
-+    └────────┘       └────────┘       └────────┘       └────────┘
++The i.MX93 flash.bin image is built by binman and is composed of up to
++three containers. The ELE FW container is optional and is provided by NXP,
++it is appended at the beginning of the image when the file
++mx93a1-ahab-container.img is present in the build directory. The SPL and
++U-Boot containers are built by the nxp-imx9image etype and signed by the
++nxp-imx93cst etype.
 +
-+2.2 Generating a SRK Table and SRK Hash
-+----------------------------------------
++            *start ----> +---------------------------+ ---------
++                         |   1st Container header    |   ^
++                         |       and signature       |   |  Authenticated at
++                         +---------------------------+   |  ELE ROM/FW Level
++                         |          Padding          |   |
++                         +---------------------------+   |
++                         |           ELE FW          |   v
++     *start + 0x400 ---> +---------------------------+ ---------
++                         |   2nd Container header    |   ^
++                         |       and signature       |   |  Authenticated at
++                         +---------------------------+   |  ELE ROM/FW Level
++                         |          Padding          |   |
++                         +---------------------------+   |
++                         |            SPL            |   v
++                         +---------------------------+ ---------
++                         |   3rd Container header    |   ^
++                         |       and signature       |   |  Authenticated at
++                         +---------------------------+   |  SPL Level
++                         |          Padding          |   |
++                         +---------------------------+   |
++                         |    ARM Trusted FW (ATF)   |   |
++                         +---------------------------+   |
++                         |       U-Boot proper       |   |
++                         +---------------------------+   |
++                         |      OPTEE (optional)     |   v
++                         +---------------------------+ ---------
 +
-+The next step is to generated the SRK Table and its respective SRK Table Hash
-+from the SRK public key certificates created in one of the steps above.
++The first container includes the ELE FW which is signed using NXP keys,
++this container is authenticated by ELE ROM.
 +
-+In the AHAB architecture, the SRK Table is included in the signed image and the
-+SRK Hash is programmed in the SoC SRK_HASH[511:0]/SRK_HASH[255:0] fuses.
++The second container includes the SPL which is signed using OEM keys,
++this container is authenticated at ELE FW level.
 +
-+On the target device during the authentication process the AHAB code verify the
-+SRK Table against the SoC SRK_HASH fuses, in case the verification is successful
-+the root of trust is established and the AHAB code can progress with the image
-+authentication.
++The third container includes the U-Boot proper and the ATF. The SPL is in
++charge to load this container and also to interface with ELE FW to
++authenticate the additional container.
 +
-+The srktool can be used to generate the SRK Table and its respective SRK
-+Table Hash.
++The signing procedure is slightly different when compared with HABv4
++series. On AHAB the signature is directly included in the container, the
++CST is responsible to sign and handle the "Signature Block":
 +
-+- Generating SRK Table and SRK Hash in Linux 64-bit machines:
-+  - In i.MX 8/8x family, the expected SRK HASH is of 512 bit.
-+    $ cd ../crts/
-+    $ ../linux64/bin/srktool -a -s sha384 -t SRK_1_2_3_4_table.bin \
-+	  -e SRK_1_2_3_4_fuse.bin -f 1 -c \
-+	  SRK1_sha384_secp384r1_v3_usr_crt.pem,\
-+	  SRK2_sha384_secp384r1_v3_usr_crt.pem,\
-+	  SRK3_sha384_secp384r1_v3_usr_crt.pem,\
-+	  SRK4_sha384_secp384r1_v3_usr_crt.pem
++             +----------------------------+ ---------
++             |                            |  ^
++             |                            |  |
++             |      Container header      |  |
++             |                            |  |
++             |                            |  |
++             +---+------------------------+  |
++             | S | Signature block header |  | Signed
++             | i +------------------------+  |
++             | g |                        |  |
++             | n |                        |  |
++             | a |        SRK table       |  |
++             | t |                        |  |
++             | u |                        |  v
++             | r +------------------------+ ---------
++             | e |       Signature        |
++             |   +------------------------+
++             | B |                        |
++             | l |        SGK Key         |
++             | o | Certificate (optional) |
++             | c |                        |
++             | k |                        |
++             +---+------------------------+
 +
-+  - In i.MX 8ULP/9x, the expected SRK HASH is of 256 bit.
-+    $ cd ../crts/
-+    $ ../linux64/bin/srktool -a -d sha256 -s sha384 -t SRK_1_2_3_4_table.bin \
-+	  -e SRK_1_2_3_4_fuse.bin -f 1 -c \
-+	  SRK1_sha384_secp384r1_v3_usr_crt.pem,\
-+	  SRK2_sha384_secp384r1_v3_usr_crt.pem,\
-+	  SRK3_sha384_secp384r1_v3_usr_crt.pem,\
-+	  SRK4_sha384_secp384r1_v3_usr_crt.pem
++The certificate block is divided into:
 +
-+    Regenerate the SRK HASH (SRK_1_2_3_4_fuse.bin) by using SHA256 with
-+    SRK_1_2_3_4_table.bin.
-+    $ openssl dgst -binary -sha256 SRK_1_2_3_4_table.bin
++                    +---------------+ ^
++                    |  Public key   | | Signed
++                    |  Permission   | |
++                    +---------------+ v
++                    |   Signature   |
++                    +---------------+
 +
++The first block (public key permission) verifies the Signature block
++preceding (between SRK table and Certificate blocks), while the second
++block (signature) is verified by the SRK table block.
 +
++In case not using the subordinate key, the container signature is
++verified against the SRK keys directly.
 +
-+- Optionally users can check if the sha512sum/sha256sum of SRK_1_2_3_4_table
-+matches with the SRK_1_2_3_4_fuse.bin:
++1.4 Signing the images
++-----------------------
 +
-+  $ od -t x4 --endian=big SRK_1_2_3_4_fuse.bin
-+  0000000 01b04697 0253376b 2066fe56 aaef9a91
-+  0000020 e62e09d8 14fb7e36 d5b38d05 0982edab
-+  0000040 7ada6576 2f6b4f59 1fd9347e 46e7305d
-+  0000060 46e34bf0 89780bd1 c809e714 a17e2f4e
++Internally, Command Sequence Files (CSF) are used. The CSF files contain
++all the commands that the AHAB executes during the secure boot. These
++commands instruct the AHAB code on which memory areas of the image to
++authenticate, which keys to install, use and etc. The CSF is generated
++using the CST Code Signing Tool based on input configuration file. This
++tool input configuration file is generated using binman, and the tool
++is invoked from binman as well.
 +
-+  $ sha512sum SRK_1_2_3_4_table.bin
-+  01b046970253376b2066fe56aaef9a91\
-+  e62e09d814fb7e36d5b38d050982edab\
-+  7ada65762f6b4f591fd9347e46e7305d\
-+  46e34bf089780bd1c809e714a17e2f4e\
-+  SRK_1_2_3_4_table.bin
++The existing file structure is automatically collected by the nxp-imx93cst
++etype and submitted as a single signing operation: the container header
++and the signature block offsets are read from the i.MX container header,
++so the offsets in the CST configuration file are always correct, whether
++the ELE FW is bundled in the image or not.
 +
-+NOTE: The commands above cannot be used as reference to program the SoC
-+      SRK_HASH fuses.
++Per default the AHAB keys and certificates need to be located in the
++build directory, this means creating a symbolic link or copying the
++following files from the AHAB PKI tree directory into the u-boot build
++directory for the CST Code Signing Tool to locate them:
 +
-+The SRK_1_2_3_4_table.bin and SRK_1_2_3_4_fuse.bin files can be used in further
-+steps as explained in AHAB guides available under doc/imx/ahab/guides/
-+directory.
++- `crts/SRK_1_2_3_4_table.bin`
++- `crts/SRK1_sha384_secp384r1_v3_usr_crt.pem`
++- `keys/SRK1_sha384_secp384r1_v3_usr_key.pem`
++- `keys/key_pass.txt`
 +
-+3 Known limitations
-+----------------------------------------
++See the introduction_ahab.txt document for the PKI tree generation
++procedure (ahab_pki_tree tool) and for the SRK Table generation
++(srktool, use the SHA256 variant for i.MX93).
 +
-+- Due to a limitation in i.MX8QXP B0 silicon it's not possible to use RSA
-+4096-bit SRK keys with an additional subordinate SGK key.
++The paths to the SRK table and the certificate can be modified via
++changes to the nxp-imx93cst device tree node(s) or via the environment
++variables.
++
++The nxp-imx93cst etype is configurable using either DT properties or
++environment variables. The following DT properties and environment
++variables are supported. Note that environment variables override DT
++properties.
++
+++--------------------+-------------+--------------------------------------------------------------+
++| DT property        | Variable    | Description                                                  |
+++====================+=============+==============================================================+
++| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table.bin                           |
+++--------------------+-------------+--------------------------------------------------------------+
++| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_sha384_secp384r1_v3_usr_crt.pem|
+++--------------------+-------------+--------------------------------------------------------------+
++
++Environment variables can be set as follows to point the build process
++to external key material:
++
++  $ export SRK_TABLE=$CST_DIR/crts/SRK_1_2_3_4_table.bin
++  $ export SRK_KEY=$CST_DIR/crts/SRK1_sha384_secp384r1_v3_usr_crt.pem
++  $ make flash.bin
++
++1.5 Programming SRK Hash
++-------------------------
++
++As explained in introduction_ahab.txt document, the SRK Hash fuse values
++are generated by the srktool and should be programmed in the SoC
++SRK_HASH[255:0] fuses.
++
++Be careful when programming these values, as this data is the basis for
++the root of trust. An error in SRK Hash results in a part that does not
++boot.
++
++The U-Boot fuse tool can be used for programming eFuses on i.MX SoCs.
++
++- Dump SRK Hash fuses values in host machine:
++
++  On i.MX93 family, the SRK Hash uses sha256 and dump 8 words fuses
++  $ od -t x4 SRK_1_2_3_4_fuse.bin
++  0000000 db2959f2 90dfc39c 53394566 e0b75829
++  0000020 85e6f3b1 af00983d e5e804fe 7a451024
++
++- Program SRK_HASH[255:0] fuses:
++
++On i.MX93:
++
++  => fuse prog 16 0 0xdb2959f2
++  => fuse prog 16 1 0x90dfc39c
++  => fuse prog 16 2 0x53394566
++  => fuse prog 16 3 0xe0b75829
++  => fuse prog 16 4 0x85e6f3b1
++  => fuse prog 16 5 0xaf00983d
++  => fuse prog 16 6 0xe5e804fe
++  => fuse prog 16 7 0x7a451024
++
++1.6 Verify AHAB events
++-----------------------
++
++If the fuses have been burned properly, there should be no AHAB events
++after boot. To validate this, power on the board, and run ahab_status
++command on U-Boot terminal.
++
++No events should be returned after this command:
++
++  => ahab_status
++  Lifecycle: 0x00000008, OEM Open
++
++          No Events Found!
++
++1.7 Close the device
++---------------------
++
++After the device successfully boots a signed image without generating any
++AHAB security events, it is safe to close the device. The chip lifecycle
++should be changed from OEM open to OEM closed. Be aware this step can
++damage your board if a previous step failed. It is also irreversible. Run
++on the U-Boot terminal:
++
++  => ahab_close
++
++Warning: Please ensure your sample is in OEM Open state, OEM SRK hash
++has been fused, and you are able to boot a signed image successfully
++without any SECO events reported. If not, your sample will be
++unrecoverable.
++
++Now reboot the target, and run:
++
++  => ahab_status
++  Lifecycle: 0x00000020, OEM Closed
++
++          No Events Found!
+diff --git a/doc/imx/ahab/introduction_ahab.rst b/doc/imx/ahab/introduction_ahab.rst
+index aef75b5e841..8c40c840ab5 100644
+--- a/doc/imx/ahab/introduction_ahab.rst
++++ b/doc/imx/ahab/introduction_ahab.rst
+@@ -292,7 +292,8 @@ scenario in i.MX 9x:
+               |          │          │          │         │
+ 
+ More details on the boot flow can be found in respective Security Reference
+-Manual (SRM).
++Manual (SRM) and in the :doc:`i.MX93 Secure boot guide
++<guides/mx93_secure_boot>`.
+ 
+ 2. Generating a PKI tree
+ ------------------------
 diff --git a/doc/imx/index.rst b/doc/imx/index.rst
-new file mode 100644
-index 00000000000..cc5f427de92
---- /dev/null
+index cc5f427de92..daf846947cc 100644
+--- a/doc/imx/index.rst
 +++ b/doc/imx/index.rst
-@@ -0,0 +1,13 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+i.MX AHAB secure boot
-+======================
-+
-+This section provides documentation for the NXP i.MX AHAB (Advanced
-+High Assurance Boot) secure boot mechanisms, covering the AHAB
-+architecture introduction and the i.MX93 secure boot guide.
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   ahab/introduction_ahab
+@@ -11,3 +11,4 @@ architecture introduction and the i.MX93 secure boot guide.
+    :maxdepth: 2
+ 
+    ahab/introduction_ahab
++   ahab/guides/mx93_secure_boot
 
 -- 
 2.55.0
