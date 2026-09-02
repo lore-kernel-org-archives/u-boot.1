@@ -1,79 +1,88 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 240D0C624D0
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 10:32:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7508DC61DD6
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 11:42:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 202CA80874;
-	Wed,  2 Sep 2026 10:32:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2C4F54083D;
+	Wed,  2 Sep 2026 11:42:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id y-jctoxiF2JC; Wed,  2 Sep 2026 10:32:05 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SISJfV0vGEgw; Wed,  2 Sep 2026 11:42:12 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788345125;
-	bh=cXiaFU0eM31o+lHdklXsZ8xT4+6Su36WExCaEqpjRms=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788349332;
+	bh=p9gjnAlUQCT8jJ83Xhe4vmkAviDI4TaYhDVpi3W0YpE=;
+	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mriKY3PFTEcT/N5KKqSICkFWtDkOTaP3ndWdkfy1bLooMdf15yHdzYlFC1qOl/2+N
-	 zxKzlGtZU0PEu+fiyfnLEJTJyEAWg7HH3YSJdfZR164SsGQoBNRTkCKYCg6lYvofkP
-	 p63KBNck8j4gDYQdd8ccCLvTzqQ6E0K3sTsZGW02NuPvIyegUaf6Uq3aS0ga+hFZVX
-	 JCUeSX34q8WM906+sBRcAP0GICVvQguw2yWihsSEZuEh60T/++vnMhhWnl7YyrHLd9
-	 z/0Gj+fJSwmUcy4tvuqR6KTvYo5sbanjDBGD0jl90/JY1LZ+Pw8s2PQzUvvt6AA8v3
-	 MlkhXnPpPgg2A==
+	b=WEiLeYhD2Mfsv2y1l92ANf5Ds9YDMqX8LD3dYlAX9agpas0ihtJaMMoOOEbPaFIdR
+	 BYvMq5Vr4QZxqKgjrF4YACyXPv1dMy/VTppm8RRrVjlhgYSRgZirIOH8EPkIEUU/0o
+	 W6w364Y8EAjgAnE2C7huGQxTMEI37+8Jg5s5llidl8nRFFCDNgvzX68MzXiC3i1aJT
+	 SfsKrEAsMkljEXPWPOgkKOjrDHyrYXJyh39Q/fDeIQmJDMKxw/X0iXTk7tm61cTTIG
+	 wRTG4wcwbMksNzL4GRse4vU62BXmzrHj5a0px6mMkjqYlwgPW/sx/rqt3EDQgRN7ot
+	 JFyjUaFGnwLnA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B1B1D80798;
-	Wed,  2 Sep 2026 10:32:05 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 9F5E0118
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 10:06:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5B4E940821;
+	Wed,  2 Sep 2026 11:42:12 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A0F811DE
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 11:42:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 916AF80F2F
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 10:06:23 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 92CFD40821
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 11:42:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id q4Z8mgPZrpRi for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 10:06:23 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=45.254.49.197;
- helo=mail-m49197.qiye.163.com; envelope-from=amadeus@jmu.edu.cn;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=jmu.edu.cn
-Received: from mail-m49197.qiye.163.com (mail-m49197.qiye.163.com
- [45.254.49.197])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7F08A80F28
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 10:06:18 +0000 (UTC)
-Received: from Vostro-3710.. (unknown [14.220.232.127])
- by smtp.qiye.163.com (Hmail) with ESMTP id 4c4222fea;
- Wed, 2 Sep 2026 18:01:10 +0800 (GMT+08:00)
-From: Chukun Pan <amadeus@jmu.edu.cn>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
- Chukun Pan <amadeus@jmu.edu.cn>, Quentin Schulz <u-boot@0leil.net>,
- Kever Yang <kever.yang@rock-chips.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.u-boot-project.org
-Subject: [PATCH 2/2] board: rockchip: add HINLINK H28K
-Date: Wed,  2 Sep 2026 18:01:01 +0800
-Message-Id: <20260902100101.2001026-2-amadeus@jmu.edu.cn>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260902100101.2001026-1-amadeus@jmu.edu.cn>
-References: <20260902100101.2001026-1-amadeus@jmu.edu.cn>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0aa06190bcda03a2kunm8c6ed80d1e7f34
-X-HM-MType: 10
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkZSUxNVh1ITk8dSBoeH0hJGVYeHw
- 5VEwETFhoSFyQUDg9ZV1kYEgtZQVlKT1VJSUtVSUhJVUpJTFlXWRYaDxIVHRRZQVlPS0hVSktJT0
- 9PS1VKS0tVS1kG
-X-Mailman-Approved-At: Wed, 02 Sep 2026 10:31:56 +0000
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 24vS4dBpXrag for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 11:42:10 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:41d0:1004:224b::c5; helo=mta0.migadu.com;
+ envelope-from=funderscore@postmarketos.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=postmarketos.org header.i=@postmarketos.org
+ header.a=rsa-sha256 header.s=key1 header.b=CLaFNy1o
+Received: from mta0.migadu.com (out-197.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::c5])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8C0664081D
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 11:42:07 +0000 (UTC)
+X-Envelope-To: u-boot@lists.u-boot-project.org
+DKIM-Signature: a=rsa-sha256; bh=9nZXIBV9eVKh4RG4+P83N+0fGouzl/jvI8VQgO+kb+0=; 
+ c=simple/simple; d=postmarketos.org;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1788349323; v=1; x=1788954123;
+ b=CLaFNy1oI4PjPyDoWbXLbBN2ridFq6ZMTLxJfCK3PeaRV/N7w2/hYXiXSDI6MhnVXWlP9uNf
+ vp3Dh3+NuArxvzgr/adnDkSFnSJRHrzaO/hJSZPuou1rAB0eog1ETQiFGtgNHgRChd/d76yg81v
+ P0+DPb52Rls9X9QtI2Zp6BOicoOXl+T0BE4SnB0SepKgNsgammB7Oj+a9Gcl0U8RV/9EmiFXHKR
+ JOyYJwFME/HyppcKr79m4N83ZL+LA8B29yCLQZe4W1RE+cBAjbLhXW6bJQrxmRUw+cKl77127sD
+ 0Yom4J8xdgwZxahcJQtOpB6QoNJm3HAJt/gqZIy6Axr6Q==
+X-Envelope-To: u-boot@lists.u-boot-project.org
+Received: by smtp.migadu.com with ESMTPS id 1a0da2cb27795407;
+ Wed, 02 Sep 2026 11:42:03 +0000
+X-Mizu-Trace-ID: 1a0da2cb27795407
+X-Migadu-Flow: FLOW_OUT
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 02 Sep 2026 11:42:03 +0000
+Message-Id: <DL4SXDBLA651.1HE98H79C5FJX@postmarketos.org>
+Cc: "Tom Rini" <trini@konsulko.com>, "Ilias Apalodimas"
+ <ilias.apalodimas@linaro.org>, "Daniel Golle" <daniel@makrotopia.org>
+Subject: Re: [PATCH] spl: rename DISABLE_ALL_EXECPTIONS
+From: "Ferass El Hafidi" <funderscore@postmarketos.org>
+To: <u-boot-amlogic@groups.io>, <neil.armstrong@linaro.org>,
+ =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ <u-boot@lists.u-boot-project.org>
+X-Mailer: aerc 0.21.0
+References: <20260901-typo-v1-1-89ea773a9a05@arm.com>
+ <afe6836f-5366-4177-ab57-7563380e8b74@linaro.org>
+In-Reply-To: <afe6836f-5366-4177-ab57-7563380e8b74@linaro.org>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -87,140 +96,128 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The HINLINK H28K is a single board computer based on the
-RK3528 SoC. Add support for the HINLINK H28K board.
+Hi,
 
-Features tested on HINLINK H28K:
-- SD-card boot
-- eMMC boot
-- Ethernet
+On Tue Sep 1, 2026 at 4:35 PM UTC, Neil Armstrong via groups.io wrote:
+> On 9/1/26 18:20, Vincent Stehl=C3=A9 wrote:
+>> The DISABLE_ALL_EXECPTIONS define has a typo; fix all occurrences using =
+the
+>> following command:
+>>=20
+>>    find '(' -type d -name .git -prune ')' -o -type f -print |\
+>>      xargs sed -i 's/DISABLE_ALL_EXECPTIONS/DISABLE_ALL_EXCEPTIONS/g'
+>>=20
+>> This can be verified by pre-processing, for example with the following
+>> commands:
+>>=20
+>>    make libretech-cc_v2_defconfig
+>>    make spl/arch/arm/mach-meson/spl.i spl/common/spl/spl_atf.i
+>>=20
+>> (Adjust as needed for cross-compilation.)
+>>=20
+>> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+>> ---
+>>   arch/arm/mach-meson/spl.c | 2 +-
+>>   common/spl/spl_atf.c      | 8 ++++----
+>>   include/atf_common.h      | 2 +-
+>>   3 files changed, 6 insertions(+), 6 deletions(-)
+>>=20
+>> diff --git a/arch/arm/mach-meson/spl.c b/arch/arm/mach-meson/spl.c
+>> index 28a63f39d36..73445064e4d 100644
+>> --- a/arch/arm/mach-meson/spl.c
+>> +++ b/arch/arm/mach-meson/spl.c
+>> @@ -84,7 +84,7 @@ void board_init_f(ulong dummy)
+>>  =20
+>>   		SET_PARAM_HEAD(&spl_ep_info, ATF_PARAM_BL31, ATF_VERSION_1, 0);
+>>   		spl_ep_info.pc =3D CONFIG_SPL_TEXT_BASE;
+>> -		spl_ep_info.spsr =3D SPSR_64(MODE_EL3, MODE_SP_ELX, DISABLE_ALL_EXECP=
+TIONS);
+>> +		spl_ep_info.spsr =3D SPSR_64(MODE_EL3, MODE_SP_ELX, DISABLE_ALL_EXCEP=
+TIONS);
+>>  =20
+>>   		regs.regs[0] =3D 0xc0000000;
+>>   		regs.regs[1] =3D (unsigned long)&spl_ep_info;
 
-Signed-off-by: Chukun Pan <amadeus@jmu.edu.cn>
----
- arch/arm/dts/rk3528-hinlink-h28k-u-boot.dtsi | 11 ++++
- arch/arm/mach-rockchip/rk3528/MAINTAINERS    |  6 ++
- configs/hinlink-h28k-rk3528_defconfig        | 64 ++++++++++++++++++++
- doc/board/rockchip/rockchip.rst              |  1 +
- 4 files changed, 82 insertions(+)
- create mode 100644 arch/arm/dts/rk3528-hinlink-h28k-u-boot.dtsi
- create mode 100644 configs/hinlink-h28k-rk3528_defconfig
+Nice catch
 
-diff --git a/arch/arm/dts/rk3528-hinlink-h28k-u-boot.dtsi b/arch/arm/dts/rk3528-hinlink-h28k-u-boot.dtsi
-new file mode 100644
-index 000000000000..3e2fbd81da17
---- /dev/null
-+++ b/arch/arm/dts/rk3528-hinlink-h28k-u-boot.dtsi
-@@ -0,0 +1,11 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3528-u-boot.dtsi"
-+
-+&vdd_arm {
-+	regulator-init-microvolt = <953000>;
-+};
-+
-+&vdd_logic {
-+	regulator-init-microvolt = <900000>;
-+};
-diff --git a/arch/arm/mach-rockchip/rk3528/MAINTAINERS b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-index 111fe0270dfd..95543b40dd3e 100644
---- a/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-+++ b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-@@ -4,6 +4,12 @@ S:	Maintained
- F:	arch/arm/dts/rk3528-generic*
- F:	configs/generic-rk3528_defconfig
- 
-+HINLINK-H28K-RK3528
-+M:	Chukun Pan <amadeus@jmu.edu.cn>
-+S:	Maintained
-+F:	arch/arm/dts/rk3528-hinlink-h28k*
-+F:	configs/hinlink-h28k-rk3528_defconfig
-+
- NANOPI-ZERO2-RK3528
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
-diff --git a/configs/hinlink-h28k-rk3528_defconfig b/configs/hinlink-h28k-rk3528_defconfig
-new file mode 100644
-index 000000000000..bcd87bc02381
---- /dev/null
-+++ b/configs/hinlink-h28k-rk3528_defconfig
-@@ -0,0 +1,64 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3528-hinlink-h28k"
-+CONFIG_ROCKCHIP_RK3528=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART_BASE=0xFF9F0000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3528-hinlink-h28k.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_BOARD_RNG_SEED=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_MEMINFO_MAP=y
-+CONFIG_CMD_ADC=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MISC=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_RNG=y
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_BUTTON=y
-+CONFIG_BUTTON_ADC=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_REGULATOR_PWM=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index de2df3046e28..2c0232d36a0b 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -105,6 +105,7 @@ List of mainline supported Rockchip boards:
-      - ArmSoM Sige1 (sige1-rk3528)
-      - FriendlyElec NanoPi Zero2 (nanopi-zero2-rk3528)
-      - Generic RK3528 (generic-rk3528)
-+     - HINLINK H28K (hinlink-h28k-rk3528)
-      - Radxa E20C (radxa-e20c-rk3528)
-      - Radxa ROCK 2A/2F (rock-2-rk3528)
- 
--- 
-2.34.1
+Acked-by: Ferass El Hafidi <funderscore@postmarketos.org> # mach-meson spl
 
+Best regards,
+Ferass
+
+>> diff --git a/common/spl/spl_atf.c b/common/spl/spl_atf.c
+>> index 17acd3665df..cb0604ce034 100644
+>> --- a/common/spl/spl_atf.c
+>> +++ b/common/spl/spl_atf.c
+>> @@ -75,7 +75,7 @@ struct bl31_params *bl2_plat_get_bl31_params_default(u=
+long bl32_entry,
+>>   	bl32_ep_info->args.arg3 =3D fdt_addr;
+>>   	bl32_ep_info->pc =3D bl32_entry ? bl32_entry : 0;
+>>   	bl32_ep_info->spsr =3D SPSR_64(MODE_EL1, MODE_SP_ELX,
+>> -				     DISABLE_ALL_EXECPTIONS);
+>> +				     DISABLE_ALL_EXCEPTIONS);
+>>  =20
+>>   	bl2_to_bl31_params->bl32_image_info =3D &bl31_params_mem.bl32_image_i=
+nfo;
+>>   	SET_PARAM_HEAD(bl2_to_bl31_params->bl32_image_info,
+>> @@ -91,7 +91,7 @@ struct bl31_params *bl2_plat_get_bl31_params_default(u=
+long bl32_entry,
+>>   	bl33_ep_info->args.arg0 =3D 0xffff & read_mpidr();
+>>   	bl33_ep_info->pc =3D bl33_entry;
+>>   	bl33_ep_info->spsr =3D SPSR_64(MODE_EL2, MODE_SP_ELX,
+>> -				     DISABLE_ALL_EXECPTIONS);
+>> +				     DISABLE_ALL_EXCEPTIONS);
+>>  =20
+>>   	bl2_to_bl31_params->bl33_image_info =3D &bl31_params_mem.bl33_image_i=
+nfo;
+>>   	SET_PARAM_HEAD(bl2_to_bl31_params->bl33_image_info,
+>> @@ -149,7 +149,7 @@ struct bl_params *bl2_plat_get_bl31_params_v2_defaul=
+t(ulong bl32_entry,
+>>   	bl_params_node->ep_info->args.arg3 =3D fdt_addr;
+>>   	bl_params_node->ep_info->pc =3D bl32_entry ? bl32_entry : 0;
+>>   	bl_params_node->ep_info->spsr =3D SPSR_64(MODE_EL1, MODE_SP_ELX,
+>> -						DISABLE_ALL_EXECPTIONS);
+>> +						DISABLE_ALL_EXCEPTIONS);
+>>   	SET_PARAM_HEAD(bl_params_node->image_info, ATF_PARAM_IMAGE_BINARY,
+>>   		       ATF_VERSION_2, 0);
+>>  =20
+>> @@ -166,7 +166,7 @@ struct bl_params *bl2_plat_get_bl31_params_v2_defaul=
+t(ulong bl32_entry,
+>>   	bl_params_node->ep_info->args.arg0 =3D 0xffff & read_mpidr();
+>>   	bl_params_node->ep_info->pc =3D bl33_entry;
+>>   	bl_params_node->ep_info->spsr =3D SPSR_64(MODE_EL2, MODE_SP_ELX,
+>> -						DISABLE_ALL_EXECPTIONS);
+>> +						DISABLE_ALL_EXCEPTIONS);
+>>   	SET_PARAM_HEAD(bl_params_node->image_info, ATF_PARAM_IMAGE_BINARY,
+>>   		       ATF_VERSION_2, 0);
+>>  =20
+>> diff --git a/include/atf_common.h b/include/atf_common.h
+>> index 03cfcc69cd7..9ef1ef186e1 100644
+>> --- a/include/atf_common.h
+>> +++ b/include/atf_common.h
+>> @@ -69,7 +69,7 @@
+>>   #define DAIF_IRQ_BIT (1<<1)
+>>   #define DAIF_ABT_BIT (1<<2)
+>>   #define DAIF_DBG_BIT (1<<3)
+>> -#define DISABLE_ALL_EXECPTIONS	\
+>> +#define DISABLE_ALL_EXCEPTIONS	\
+>>   	(DAIF_FIQ_BIT | DAIF_IRQ_BIT | DAIF_ABT_BIT | DAIF_DBG_BIT)
+>>  =20
+>>   #ifndef __ASSEMBLY__
+>>=20
+>> ---
+>> base-commit: 3f19667468fb93bcb5702d23aa057b72639e3ac8
+>> change-id: 20260901-typo-465ee352485c
+>>=20
+>> Best regards,
+>> --
+>> Vincent.
+>>=20
+>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+>
+> Thanks,
+> Neil
