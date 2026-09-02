@@ -4,119 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58CBBC624D6
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:26:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E2D6C624D7
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:27:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EBBEE80F58;
-	Wed,  2 Sep 2026 14:26:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 049A480F8D;
+	Wed,  2 Sep 2026 14:27:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id f-4NGb9xneuG; Wed,  2 Sep 2026 14:26:17 +0000 (UTC)
+ id OYPKJ6UwdFQp; Wed,  2 Sep 2026 14:27:41 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788359177;
-	bh=j1/PDguSX/l8NauF6176GSBZSE+tpPAmKP0+vBY0t5Y=;
+	d=lists.u-boot-project.org; s=default; t=1788359260;
+	bh=4jCHehVQL+kWxmRZe1A5gJQpfTKPtwwTTgFBrOpydjQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Y8QmHcm2t7lBCZ3ayXpjJUIZ+Q61poSVzt9lJ/PR0LJBb8D69lVVZPulTztPyySOh
-	 QH7dUll5P9kOJ++rrE1V5D4HpXCY+kILAuHAlMq8tNlA7UfS6XyYR+KDx2gBAdBTLE
-	 XSQNlXSPSsOv2aCZx6uUtaKxmAzOcB/wq3H6fhNufajm65X2aPQJqYaoNEpfjEBW/q
-	 sq7Xc29Osq4rf8XWqTN7WW72RDHBy1C/5fXA3pV+VY5lo2QKp/qVxr48Sq0bTZYhAU
-	 XS0F2qkFSmQ6ITyfzcJl6TuZ2XuHq+K7vU0RpNcu7v95LpOwNZ0XlBn8j4hShfXriH
-	 C1JyYaLttVvlA==
+	b=db2vQdnxrbpHnzfMo6BJ+A6A5FyDN6tJXnJncr+Hz/Kktes1Fsanzrn6x1c2OTzOa
+	 Brw9UHrHnleDWvhaeBljtTMaW24WTPEWit4jBL64XC4T7hy8OEjxFRBE7PhzshVeTl
+	 qzY7RQ4H5rfgO1y62B3iyf/s2YdpFyHtH8OXHK6JI6fK8oIaWr4zJwNf/6ugxcUm55
+	 2J0p0RJUSYwXivNmzrghR7bafMXuci5DDu4y/yzq92lw+WXXh9PA5SdFByaoGVcjzx
+	 MUyNyedzzvIEdrfmzBvWy3VwyRrjwhw39bhDL8d9eKniU8d3zvjQuqol8IEOnHtgdQ
+	 acNv6eogoG3iQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1F88680F1C;
-	Wed,  2 Sep 2026 14:26:17 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 00C3E230
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:26:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C697A80F77;
+	Wed,  2 Sep 2026 14:27:40 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 755CB465
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:27:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D500A606C4
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:26:15 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5B86E400A6
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:27:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Q6PmM2Qg2BcG for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 14:26:15 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::331; helo=mail-ot1-x331.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id womOw5IqUlI6 for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 14:27:38 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:32::;
+ helo=mail-oi2-x00.google.com; envelope-from=trini@konsulko.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=SFmxZU/W
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1E0D2606B4
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:26:14 +0000 (UTC)
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7f48c750afcso707311a34.0
- for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 07:26:14 -0700 (PDT)
+ header.s=google header.b=f9hd4CxT
+Received: from mail-oi2-x00.google.com (mail-oi2-x00.google.com
+ [IPv6:2607:f8b0:4864:32::])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6A3734006F
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:27:37 +0000 (UTC)
+Received: by mail-oi2-x00.google.com with SMTP id
+ 5614622812f47-495d5d27acfso313759b6e.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 07:27:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1788359173; x=1788963973;
+ d=konsulko.com; s=google; t=1788359257; x=1788964057;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=j1/PDguSX/l8NauF6176GSBZSE+tpPAmKP0+vBY0t5Y=;
- b=SFmxZU/WKlajTJoVHrNobtW3q0BFXJ0rTdWfyt7GKybyp3o4p+t/PuKO8xUEk72NPI
- yOM2VW2Pd3k/+jwBY0U9nW7iL7cydVAQqJuFyUp+lR4Yywg4f1QyoCqCQTUTDsayZEX5
- sZ8NmXBqrcwmx0o1tNLie+OgK6Ak8xRKX/zUo=
+ bh=4jCHehVQL+kWxmRZe1A5gJQpfTKPtwwTTgFBrOpydjQ=;
+ b=f9hd4CxTzY6ag47gLZRt0MduU5jfMThQJ4ARbKwrVOD398FtFKVFQEpxaM2YJy78qQ
+ htTef7p8/D2NGCeKmAMM0sLQZ5GFlAbL384sVdy6JGJ9Guxarzln39LkrPE+P9MgguQy
+ 9pp9VxK+HewdIlyiP0G8K5zDJB/C6TXbjydvw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788359173; x=1788963973;
+ d=1e100.net; s=20251104; t=1788359257; x=1788964057;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=j1/PDguSX/l8NauF6176GSBZSE+tpPAmKP0+vBY0t5Y=;
- b=oA2eyJBeAllqJmFjZFOYT7LZ9HiU/oab5r+xRznU7JR7CzTdkemgo0CUclN6sROIHf
- l5VCz/C+Auad6UENhTl5TBCa+es7lbx1eGcvgVIShnJ2IYrIirdJXZ3bzxBDojGWyD+O
- 4syIg9utLMbbQvaXJEzJivZ6mLk3bLl5J72F9eedWQY/jCBk1G/CrVQgmKdiXvVvJl+s
- 7R7OQzCBEZn/o74sErcCInWIU8xiQXTYKP0n9taD5gg4cNXmPbacAo2lvV9WLMadZrRf
- HvCKbrXEVsWOrgn9U1c1mbkQntbkTy5rDCABppmT3TqkzQGxXrQ9GZf4Gs8RD90rK2Ad
- /6jQ==
-X-Gm-Message-State: AFuF++kBoZT96+zwoaw5Gi1CmSmpuEtOp08sUCDhgDXcHnIpF9DrSAhO
- ORTVWg/Xyda12jbf2lhSItniidr89yVGd8mvPVWuLVouV7PRkG/53wmH79Y0urN/0G8=
-X-Gm-Gg: AR+sD11CpcbcAR6Fw9RWMs2OrIo4Ie1682N9ZNUEydBiWjDjEQyfOs1dF0kRvW92X5e
- b3CTfnrfqq4IRr4XNaLqZZwvl/kclWpfqpBGwDMlBYAMZBD4px5HXHsrluyTLmj15w8uGUWyluj
- POj2Q9mYF9EoTFbtY4ZoVjbwclKjSzABKVKgrrIHRww2DSxiHOzVEBmvroeA3o579Zf3gWodU4u
- +TWEb15gHIg/ihhpa/o9jw7ZLkkmJkGBk0RzNEWQGP1ODTF5pzkoNdp1op5RT5m+SLEdXFXC4sf
- lDYzSfm+MW9EcjSTdglK5fHZHZTcVYP+MqArti6bUBzM/CMBCCZmmUN1eNvV39AIUOOPnugszUg
- 0SW2ENp3rVuknYOM1E2+/+1khx7wvYgw4hSXKpKfNhw4IaXmXDsjwCKzu2G4hrucmuK8+R2n1Mk
- K0QDEtodqX0UylSdwhYoZ0avPGveZiFgdZxgbNgyOZZN/V2Gn4tI5qkr7Dbtbamq22alV96VOYu
- /R5FjzmXDtYxDmOhG0pvGA1usdcIV2KOAnsPn1axDL35nPWHyPKnluup3GF9Bq/YN9NK+Ost+jr
- 1ZSNheNGDA==
-X-Received: by 2002:a05:6820:2d0b:b0:6b1:4e36:fb80 with SMTP id
- 006d021491bc7-6b47fd3531bmr4195954eaf.15.1788359173480; 
- Wed, 02 Sep 2026 07:26:13 -0700 (PDT)
+ bh=4jCHehVQL+kWxmRZe1A5gJQpfTKPtwwTTgFBrOpydjQ=;
+ b=RNDcN3zJf9ZQXs0xwtISi1yZJvPUsy2P8EL/FRmDprYZYglPgcZXAZIbqeqB0nG3pv
+ Hh3CtYpEsnyeHlN24jhnBaSjB6pFSTKIEOR3H8kcC5MjyWBYnQ5gCvWtnnqIpJwnaJDe
+ PLrEMlFFOrkTgCtNQgH6NCBO2c2kz8KPoj9DkAKrFM+oP861cmlC1vUuToJWPj2IzuKT
+ /ThnXR3dVMGUIlWZWFXkmpwkFoo9NJjQggcUduGUqTOYbhQtFX9VJlmfRyeLmtaY2j9h
+ ealQkwO7oWAQ0FBylXDKgSD1AU/PhskYyf9FAQqnjcSSY6GmqTpv+rJ/dAjMl4JhTGqx
+ +Nbg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rprrc7TZDTYojXWAOKZ9jXU8LksJ9ULGf83XTwszudx0rOPYZFOzYQ/mKQKd++w8duy6Rwvayc=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++l1gLYd/FQZ/ky/KqbkSJxQx5fPDi9AVZ6NA1M/iZFjV+IygDwB
+ qwobDmsDeG3o1RLlcmKDzXJ0Bkvxel2cAdPbH3nEocxqAfPtb2vaIRX0L+sKhDFWC6g=
+X-Gm-Gg: AR+sD106juPne6rrtbBIzpZAa3pHEyykD0UhpGmvEFcS8PJE0VWog600bwwxn39Ly0Y
+ 4mLC5RoERofEW9w3ZFsC288F5ik0vEn9wExhCSBndBuxcElBmKGyMpul/h3ej3oHFeQqZ3xD4eG
+ 42oPryzaAYjNr1Z+jvnTqC93Wk/VxPggVRhNHKiQo9/VUXvadAiUGNf4GkuOVnQRBOynutLYsDf
+ 8Cg3x53d7zTpGyU1nMWH+YPwqgpofqk9bVfMY09EHR+bNKxy6aLvcoSLZtwtSrmCwDD42sa83nj
+ hBXD4NIVNLBWD2KQYcJO/w0ns7qBQOpy7cfHd5UXl5InTMJpSkLQLPdrp3myqZmSy5+lEPVozgo
+ fydvxh9qdrUJLUw841LZNjvvHK1VabHxdHu8UNZQgycD705HjgiJKJXKVJhriCFRIIrZIdOSpkW
+ /qMCw0ynQonNOt3UP2Uhjt5EXZ+OiMKCjhM0OkGlLVb3fYcfa69u52/9KM+9+9qogqydzwLFQSu
+ U/Z7wuEBz+oXA36wKzEGRLYa+Aybqx6kbaWik2IeUuCU5B+HZU7wbkrJvcqgZLwBlclc6OGXpZ5
+ 2QYlndCU+Q==
+X-Received: by 2002:a05:6808:3518:b0:49b:c387:36b6 with SMTP id
+ 5614622812f47-4b6be1fdb51mr4262996b6e.13.1788359256890; 
+ Wed, 02 Sep 2026 07:27:36 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b40c833ad9sm2472138eaf.7.2026.09.02.07.26.12
+ 5614622812f47-4b69bd2638csm2148644b6e.18.2026.09.02.07.27.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Sep 2026 07:26:12 -0700 (PDT)
-Date: Wed, 2 Sep 2026 08:26:10 -0600
+ Wed, 02 Sep 2026 07:27:36 -0700 (PDT)
+Date: Wed, 2 Sep 2026 08:27:34 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Julien Stephan <jstephan@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>, dlechner@baylibre.com
-Subject: Re: [PATCH 2/2] video: fix build with CONFIG_VIDEO &&
- !CONFIG_VIDEO_LOGO
-Message-ID: <20260902142610.GG1145425@bill-the-cat>
-References: <20260901-fix-build-with-config-video-but-config-video-logo-disabled-v1-0-9dc80d307790@baylibre.com>
- <20260901-fix-build-with-config-video-but-config-video-logo-disabled-v1-2-9dc80d307790@baylibre.com>
- <20260901164245.GE1145425@bill-the-cat>
- <CAEHHSvbPWGishhJ13jDUBWC8TBH0wMqyVS7qBMEZu90ug-ntrw@mail.gmail.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Anshul Dalal <anshuld@ti.com>, Simon Glass <sjg@chromium.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ David Lechner <dlechner@baylibre.com>, u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH v2] airoha: add support for Airoha AN7583 SoC
+Message-ID: <20260902142734.GH1145425@bill-the-cat>
+References: <20260821070345.138264-1-ansuelsmth@gmail.com>
+ <20260902021814.GA1592625@bill-the-cat>
+ <4716de2e-50b9-4b2b-803d-74f9d33e3fcd@iopsys.eu>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6EgLPVWYFwvhNDKL"
+ protocol="application/pgp-signature"; boundary="7v04OLt9QqQM83nd"
 Content-Disposition: inline
-In-Reply-To: <CAEHHSvbPWGishhJ13jDUBWC8TBH0wMqyVS7qBMEZu90ug-ntrw@mail.gmail.com>
+In-Reply-To: <4716de2e-50b9-4b2b-803d-74f9d33e3fcd@iopsys.eu>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -132,124 +134,104 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
---6EgLPVWYFwvhNDKL
+--7v04OLt9QqQM83nd
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 02, 2026 at 10:48:38AM +0200, Julien Stephan wrote:
-> Le mar. 1 sept. 2026 =E0 18:42, Tom Rini <trini@konsulko.com> a =E9crit :
-> >
-> > On Tue, Sep 01, 2026 at 10:52:43AM +0200, Julien Stephan wrote:
-> > > Building with CONFIG_VIDEO enabled but CONFIG_VIDEO_LOGO disabled fai=
-ls
-> > > at link time:
-> > >
-> > >   video-uclass.o: in function `video_get_u_boot_logo':
-> > >   video-uclass.c:593: undefined reference to `__splash_u_boot_logo_be=
-gin'
-> > >
-> > > The __splash_u_boot_logo_begin/_end symbols are provided by
-> > > u_boot_logo.bmp.o, which is only built when CONFIG_VIDEO_LOGO is set:
-> > >
-> > >   obj-$(CONFIG_VIDEO_LOGO) +=3D u_boot_logo.bmp.o
-> > >
-> > > video_get_u_boot_logo() and show_splash() reference those symbols
-> > > unconditionally, so with the logo disabled the reference is left
-> > > dangling. show_splash() alone would be dead-code eliminated (it is
-> > > static and only reached under a CONFIG_IS_ENABLED(VIDEO_LOGO) guard),
-> > > but video_get_u_boot_logo() is an exported function and is always
-> > > emitted.
-> > >
-> > > Guard the splash helpers and their symbol references with
-> > > CONFIG_IS_ENABLED(VIDEO_LOGO), and provide a static inline
-> > > video_get_u_boot_logo() stub returning NULL for the disabled case in
-> > > video.h. Callers already handle a NULL logo pointer (e.g.
-> > > bootflow_menu.c), so no caller changes are needed.
-> > >
-> > > Reproduce with any board that enables VIDEO without VIDEO_LOGO or
-> > > enabling SPLASH_SCREEN (it disables automatically VIDEO_LOGO).
-> > >
-> > > Fixes: 0d3890188d6b ("video: Add function to obtain the U-Boot logo")
-> > > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> > > ---
-> > >  drivers/video/video-uclass.c | 7 +++++--
-> > >  include/video.h              | 9 ++++++++-
-> > >  2 files changed, 13 insertions(+), 3 deletions(-)
-> > >
-> > > diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclas=
-s.c
-> > > index de161054d52..4c959a57619 100644
-> > > --- a/drivers/video/video-uclass.c
-> > > +++ b/drivers/video/video-uclass.c
-> > > @@ -579,6 +579,7 @@ int video_get_ysize(struct udevice *dev)
-> > >       return priv->ysize;
-> > >  }
-> > >
-> > > +#if CONFIG_IS_ENABLED(VIDEO_LOGO)
-> > >  #define SPLASH_DECL(_name) \
-> > >       extern u8 __splash_ ## _name ## _begin[]; \
-> > >       extern u8 __splash_ ## _name ## _end[]
-> > > @@ -598,6 +599,7 @@ static int show_splash(struct udevice *dev)
-> > >
-> > >       return video_bmp_display(dev, map_to_sysmem(data), -4, 4, true);
-> > >  }
-> > > +#endif
-> > >
-> > >  int video_default_font_height(struct udevice *dev)
-> > >  {
-> > > @@ -716,14 +718,15 @@ static int video_post_probe(struct udevice *dev)
-> > >               return ret;
-> > >       }
-> > >
-> > > -     if (CONFIG_IS_ENABLED(VIDEO_LOGO) &&
-> > > -         !CONFIG_IS_ENABLED(SPLASH_SCREEN) && !plat->hide_logo) {
-> > > +#if CONFIG_IS_ENABLED(VIDEO_LOGO)
-> > > +     if (!CONFIG_IS_ENABLED(SPLASH_SCREEN) && !plat->hide_logo) {
-> > >               ret =3D show_splash(dev);
-> > >               if (ret) {
-> > >                       log_debug("Cannot show splash screen\n");
-> > >                       return ret;
-> > >               }
-> > >       }
-> > > +#endif
-> >
-> > Is this hunk really needed? I can see getting here as part of debugging
-> > the problem, but before the change it should evaluate to 'if (0 && ...)'
-> > and be link-time eliminated.
-> >
->=20
-> Hi Tom,
->=20
-> Yes it is needed since I moved show_splash() inside the #if
-> CONFIG_IS_ENABLED(VIDEO_LOGO) guard above.
-> I can go back to the runtime check, and keep show_splash() outside of
-> the guard, but I'll have to use video_get_u_boot_logo() instead of
-> relying on SPLASH_START(u_boot_logo);
->=20
-> What do you prefer?
+On Wed, Sep 02, 2026 at 11:59:49AM +0300, Mikhail Kshevetskiy wrote:
 
-Ah, I see now, that wasn't clear to me from the context. Looking at 1/2
-and then 2/2 now, can we just remove show_splash() and call
-video_bmp_display directly? That means not guarding SPLASH_START but
-again it should optimize away. I do complain about how if
-(CONFIG_IS_ENABLED(...)) isn't always great, but I think mixing that and
-#if together just reads awkwardly too. So if we can't restructure the
-code to keep if (CONFIG_IS_ENABLED(...)) then we should #if the whole
-block there. Thanks.
+> Tom, could you use
+>=20
+> =A0
+> https://lore.kernel.org/u-boot/20260902085311.1550804-1-mikhail.kshevetsk=
+iy@iopsys.eu/
+>=20
+> instead of this patch?
+>=20
+> The above patch series based on the same commit, but provides much more
+> complete an7583 support.
+> Changes from above patch:
+> =A0* fixed arch/arm/mach-airoha/an7583/init.c compilation issue
+> =A0* added an7583 specific helper needed for clk-airoha
+> =A0* patches for proper support of clk, reset, network
+
+I will look at that series instead, thanks.
+
+>=20
+> Regards,
+> Mikhail Kshevetskiy
+>=20
+> On 9/2/26 05:18, Tom Rini wrote:
+> > On Fri, Aug 21, 2026 at 09:03:44AM +0200, Christian Marangi wrote:
+> >
+> >> Add support for Airoha AN7583 SoC. This adds the Kconfig and Makefile
+> >> entry for the SoC, DTSI and initial config for it. Also add the code f=
+or
+> >> CPU and RAM initialization. Everything is mostly based on AN7581 that
+> >> share lots of common piece.
+> >>
+> >> Acked-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> >> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> >> ---
+> >> Changes v2:
+> >> - Rebase on top of next
+> > I see:
+> >    aarch64:  +   an7583_evb
+> > +(an7583_evb) arch/arm/mach-airoha/an7583/init.c: In function 'dram_ini=
+t_banksize':
+> > +(an7583_evb) arch/arm/mach-airoha/an7583/init.c:26:15: error: 'struct =
+bd_info' has no member named 'bi_dram'
+> > +(an7583_evb)    26 |         gd->bd->bi_dram[0].start =3D gd->ram_base;
+> > +(an7583_evb)       |               ^~
+> > +(an7583_evb) arch/arm/mach-airoha/an7583/init.c:27:15: error: 'struct =
+bd_info' has no member named 'bi_dram'
+> > +(an7583_evb)    27 |         gd->bd->bi_dram[0].size =3D get_effective=
+_memsize();
+> > +(an7583_evb) arch/arm/mach-airoha/an7583/init.c:30:23: error: 'struct =
+bd_info' has no member named 'bi_dram'
+> > +(an7583_evb)    30 |                 gd->bd->bi_dram[1].start =3D gd->=
+ram_base + SZ_2G;
+> > +(an7583_evb)       |                       ^~
+> > +(an7583_evb) arch/arm/mach-airoha/an7583/init.c:31:23: error: 'struct =
+bd_info' has no member named 'bi_dram'
+> > +(an7583_evb)    31 |                 gd->bd->bi_dram[1].size =3D gd->r=
+am_size - SZ_2G;
+> > +(an7583_evb) make[3]: *** [scripts/Makefile.build:272: arch/arm/mach-a=
+iroha/an7583/init.o] Error 1
+> > +(an7583_evb) make[2]: *** [scripts/Makefile.build:497: arch/arm/mach-a=
+iroha/an7583] Error 2
+> > +(an7583_evb) make[1]: *** [Makefile:2221: arch/arm/mach-airoha] Error 2
+> > +(an7583_evb) drivers/clk/airoha/clk-airoha.c:19:10: fatal error: asm/a=
+rch/scu-regmap.h: No such file or directory
+> > +(an7583_evb)    19 | #include <asm/arch/scu-regmap.h>
+> > +(an7583_evb)       |          ^~~~~~~~~~~~~~~~~~~~~~~
+> > +(an7583_evb) compilation terminated.
+> > +(an7583_evb) make[4]: *** [scripts/Makefile.build:272: drivers/clk/air=
+oha/clk-airoha.o] Error 1
+> > +(an7583_evb) make[3]: *** [scripts/Makefile.build:497: drivers/clk/air=
+oha] Error 2
+> > +(an7583_evb) make[2]: *** [scripts/Makefile.build:497: drivers/clk] Er=
+ror 2
+> > +(an7583_evb) make[1]: *** [Makefile:2221: drivers] Error 2
+> > +(an7583_evb) make: *** [Makefile:189: __sub-make] Error 2
+> >     0    0    1 /1              an7583_evb
+> >
+> > When trying to build on current next, please look in to this, thanks.
+> >
 
 --=20
 Tom
 
---6EgLPVWYFwvhNDKL
+--7v04OLt9QqQM83nd
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCapgx9wAKCRAr4qD1Cr/k
-CotfAP0XE0rAG4K7jsNpGbQPuQJzDpdT4ws/bXdylZwTKCBxwQD9GdGqv/0vokYk
-LAS3he5QQDfs+0axuSvHy7lE2ZBNGQM=
-=CIft
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCapgyVQAKCRAr4qD1Cr/k
+CgYwAP0Yf/ftLypVbjLeUcmBnLvvVYMfTJxGd8VYMJCBJKNFQwEAmOTUojYCuIKA
+kzA2HhLsOoodOw9w9r8qe3M6YARWPwg=
+=m/X9
 -----END PGP SIGNATURE-----
 
---6EgLPVWYFwvhNDKL--
+--7v04OLt9QqQM83nd--
