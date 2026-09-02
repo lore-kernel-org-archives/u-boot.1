@@ -1,86 +1,84 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7665BC624D7
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 13:41:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E86D0C624D6
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 13:41:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BD9FA40863;
-	Wed,  2 Sep 2026 13:41:54 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mhBfkxHoKsB0; Wed,  2 Sep 2026 13:41:53 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788356513;
-	bh=ktzjfN+mZOEAFEOywCqhorxHn890pGKfcirJftWV4zk=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=krwdJsAgK0onGFqw6csEO+IQtGwC6hzFKrXMPRGOfgW/nvg6RMMfWJlVtvI2Ccva9
-	 au4mLU8HhlLrM490FSBzTU9f3djmAnP42UHYzCeFAWMzxDYeUtagD0R23/78WupLX+
-	 yDYcQD8ngso+t6FbHtBphF/8RTtRNDMrM/9+1OmNv61KheONLLVs8i0qsGHqBuaugG
-	 mbNkf0WTnsOKQGzE9GF8fLZTyUD2e4TGHZefTzo4LKXO+6Zcb2koCYQ6ESL/NaummG
-	 a/BTTvl9y4UPx+bMm6A9dCANiDSBXCo+tG69upV7zX+Gn30IGUDGGoxTyb1ZNyXw1Y
-	 VSMGa9p9WndnA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E598440834;
-	Wed,  2 Sep 2026 13:41:52 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id DE550230
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:41:51 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id BFDAD80EB4
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:41:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5A74780EEC;
+	Wed,  2 Sep 2026 13:41:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZA7CNBmVFcjB for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 13:41:51 +0000 (UTC)
+ id k409eE72Sh9a; Wed,  2 Sep 2026 13:41:56 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1788356516;
+	bh=bcgBAQQ9l2yg4Dv0Bz/e6sHcs+0K+LO2YO+3TspM+GE=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=DnZOyKf6HtXbFWOyz9PAfJwNGMTZhRQsmtf1KrJo95tOwJ1RMQJc4Z6pGPNQqw8rl
+	 fIUlsnzItqYzlXS5UklOw3E1gSZOoB42y6UzHIfSjRC3a/12ZRbUBtZFnIUKcIJ8ou
+	 1ydYcNjuiVTFgQlonZ6WfsE6oHVbIX9RcvWPVnl8rarVXn42DJ+cuqDHCG5MZ07hIw
+	 eNCpru8Ugov8YyDS0/RJeDtMwvJFgMd8OM676FahI2cZ0Ce1/2nNCz3KASTrEBxFw/
+	 FS/ZBuUbndf+0nKcDhkZG5CW+fZCv79vHh27+iqPi/Ec1BOYyF+S5JpNpKC6tQOIVv
+	 TwBZxPylPezvA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6238A80EB4;
+	Wed,  2 Sep 2026 13:41:56 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 594131D9
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:41:55 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4B17F606CF
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:41:55 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MnTFvU_Nh0C1 for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 13:41:54 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
  helo=smtpout-02.galae.net; envelope-from=jeremie.dautheribes@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=BXXU+bWc
+ header.s=dkim header.b=nhTELMHN
 Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9653A8098C
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:41:50 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 679936069C
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 13:41:54 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 4AC151A194E;
- Wed,  2 Sep 2026 13:41:48 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 206971A1957;
+ Wed,  2 Sep 2026 13:41:52 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 145E06053C;
- Wed,  2 Sep 2026 13:41:48 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id E5FE66053C;
+ Wed,  2 Sep 2026 13:41:51 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 73AD411C792E0; 
- Wed,  2 Sep 2026 15:41:41 +0200 (CEST)
+ with ESMTPSA id 1FE8A11C7977F; 
+ Wed,  2 Sep 2026 15:41:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1788356506; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding; bh=ktzjfN+mZOEAFEOywCqhorxHn890pGKfcirJftWV4zk=;
- b=BXXU+bWcZgBg3XcTrsyHQmSjdBAc8cMESWVWZABf7v2qJqKjtRZIgjAJ3LkInu/0OigyKp
- 6Qqn22kEDqdojAh/Wo/554qR6bCx3VSEu7FX/L000JWfE2xDSQH3qIvv5hSPVFnp63VMug
- 98GwAs06tSVrcNKAazsmheduoF7PQ9rafIpSXTRDV16x+2THtzlAwhDUYxomT2+EKO07j3
- apx+WzB2oblm38/KXO/AbcjzTN2fy3nzsYU+hfrlt3EjPqn8SY6hsyl6W5qycbl4FTDIwn
- MyLwXx4SsUzI3TJNb7aoAIq5BNP/5/Rs9umoahPENcbTudpI4eHogWsqxUB3JA==
+ t=1788356510; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=bcgBAQQ9l2yg4Dv0Bz/e6sHcs+0K+LO2YO+3TspM+GE=;
+ b=nhTELMHN4m/zifptizVTQgIEizk8ZXcLrNWSdmDJPs+X3265UorjpgCKutwMSGWqr0ByDC
+ 5TR+PsUbi4/nfHqMo00drR4My87LSICUZVY+OZmNk8eFD5WRV+jevohWD9IevbeaivKP0l
+ WX/XAFcqkKLgmG1SfzFM1xtDepXIxbs0OrjaVhLrlVCasT9iuXAUUtplKd1jTKggU1wbJ5
+ KqQ+kdeMQXKdfu0hKVvsgF446RPPmRjg4s7WTGASXykzWRGiCKCiRE/HJsxlF+7Qj6NhTD
+ JgE+lgqtmM0V6qyhBID5xdo7oRbu+9vUfRl7XyiYm95AdmM+QT/hqg0WMlOZ5g==
 From: =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
  <jeremie.dautheribes@bootlin.com>
-Subject: [PATCH v2 0/7] binman: add nxp_imx93cst etype for i.MX93 flash.bin
- signing
-Date: Wed, 02 Sep 2026 15:41:27 +0200
-Message-Id: <20260902-imx93-secureboot-v2-0-5947b92a5072@bootlin.com>
+Date: Wed, 02 Sep 2026 15:41:28 +0200
+Subject: [PATCH v2 1/7] binman: add nxp_imxcst base etype for i.MX CST signing
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NzQ6CMBCEX4Xs2ZptIfx48j0MB7ssskaoaYFgC
- O8uxbvHbzLzzQqBvXCAS7KC51mCuGEHc0qAuvvwYCXNzmDQ5FjqTEm/VKkKTJNn69yobKUzLmx
- O1rawz96eW1kO5a3+cZjsk2mMntjoJIzOf47PWcfeH/2sFSqklIoSDTaYXmP8kuFMrod627YvZ
- CDzqcQAAAA=
-X-Change-ID: 20260814-imx93-secureboot-b914e7b6cbbf
+Message-Id: <20260902-imx93-secureboot-v2-1-5947b92a5072@bootlin.com>
+References: <20260902-imx93-secureboot-v2-0-5947b92a5072@bootlin.com>
+In-Reply-To: <20260902-imx93-secureboot-v2-0-5947b92a5072@bootlin.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
  u-boot@lists.u-boot-project.org
 Cc: =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
@@ -99,21 +97,21 @@ Cc: =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
  Quentin Schulz <quentin.schulz@cherry.de>, 
  Christophe Guerreiro <christophe.guerreiro@non.se.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3864;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4959;
  i=jeremie.dautheribes@bootlin.com; h=from:subject:message-id;
- bh=xZ+lrd9+oWuHXLytFMa+AdiAUcUVkFHzNaS9Jq2Bvrc=;
- b=owEBbQKS/ZANAwAKASsAXqAbWo8DAcsmYgBqmCeU39nVS+/Pfebv1MJ8ybwddwsLUgNPpPbV9
- 0UXJY+oViKJAjMEAAEKAB0WIQT7FK2Qhtu4QpBIBAkrAF6gG1qPAwUCapgnlAAKCRArAF6gG1qP
- A/J7D/9MWk72hAv2/P3Cl9cBePC7Pq35ABstogeOtbToVh2kQUxF69YHcJVDURomGV6r5P9zGFX
- D9cVg4gSNxoDCBoBe5x5rH3/CzTMfgOwsFcL+R+DE2/FuSS62s9GXcTieuuRioA5LApiv/MWUhR
- d4u30PNBF8066K3JCNeY+uJE+N5uAQuyn7ICV3Jhs6zfUDoOr4T862d6d6GG22RUdbpMGjkA/9x
- n/B9nk6jR+auKIyAY9tJ5s4d4XKgBe2ehtFZZqqHodJIDpghEhOdRoVWBUE11HtXELu1ZG5vDP1
- MawPl/i1DBb59ybsdfF42h0/gyBNjfhE85g6tUzKlNtXW5SiWLr67H+o2jIDy3dPRPH//QC6enF
- k6T0nnlqwESvimsMEOKyXFUqHpQGLoVzRttK2XQFDEfwl7ZT89FPgQebFT2JTdprgYW4oRNNhzw
- arb2ROY1RxvQHoceBxYu6f2Uesp74kVquLu8z6LgKH0FlH0f+CEBiu4mN4zH9654CYQAN+bN3hu
- b0SJ5z9c7llcgbqyXS0sVbXN+WQer30k3e72F8JzT1bwzqSi+R1dZ1i62YRcJrOzgQQRY0yD++p
- y536Rv+3UGfJgUlp6NqZvwDK8SdtFjSm2/0HW1ziYfWhzwH5+qFfNy21lj+/7O/NhrUpQwREzNK
- rNFG6j7YnwTO5DA==
+ bh=kAUr5fYXN/6NRqAj3EpxrY/RE5CMTIm6sHATadyaies=;
+ b=owEBbQKS/ZANAwAKASsAXqAbWo8DAcsmYgBqmCeUE1rMGnAvjDW32eA5SLOB1hMKFLohAXdPa
+ Kp1qz5RcxKJAjMEAAEKAB0WIQT7FK2Qhtu4QpBIBAkrAF6gG1qPAwUCapgnlAAKCRArAF6gG1qP
+ Awu3D/wIWzjVgLf6huKudyigRWrg1u7w+volUknphpPQMJlwUdMb7bkqOvv7AgVFll3FyS5zezc
+ n/S3ddwFUNczIEFJce/jKWcL0eoHwDs9xDAnQUR2+zxkCYVnibtO90AUrhyIAOheuAJNdFksSYS
+ v08FUOF3yBB//LVdXpm55QXmRx2A5yvGoq0z3V9xBZPawXcriGWfXJmKvemxeHw1NaHV9ylwSAQ
+ NAvqjUSIfE9Gzyg80ndkf+YPCEzMeknD3C98sCWKKy97ov8aAuLUPS3uNeO+IqCwKgM/BB8EUpL
+ E1S2pmz574URMvHdaTvN0jxDdYWxE6/SHIfMHDRMy+rlzy3z18u0Az6hhsz6y3jSBaWPk17P25v
+ Dvy2lshOK7PynmOqWPBPDZESqiIXV/r1Af7dB3Al/GDd2fb/wXAYbOawCQY4Zl+EXCGp/ME2gh8
+ UBJ5IbZKIFT56uDrC67Rn9u1f/mfm6JkN/UNgO/XqUZHXbq7o/mrCXoDQtXJvQtQLgf+pe/WEx8
+ aIx7g2SVFui3vFOQbzpAS9uuwm+2aw2z9RLo8HEsiah821Lv5HXOOPD2iEG2e0DyAyqCoPzrNks
+ kF0SnIVpDj6xpLDw+8FQbbGqcsbRs4HJPucL296OD46DVSmPcZgtQF7kcF3VrQ7zx9fSaPaj1rj
+ 0/JL0HER9OB5R3Q==
 X-Developer-Key: i=jeremie.dautheribes@bootlin.com; a=openpgp;
  fpr=FB14AD9086DBB842904804092B005EA01B5A8F03
 X-Last-TLS-Session-Version: TLSv1.3
@@ -130,89 +128,149 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hello,
+Add a common etype which provides the shared functionality for signing
+i.MX images with the NXP Code Signing Tool (CST). This includes the SRK
+table property handling, the CST bintool registration, and helpers for
+writing the input data and configuration files and for running cst.
 
-This series adds support for signing i.MX93 images by leveraging binman 
-and CST, the NXP tool used for secure boot. This introduces a new binman 
-entry type (etype) for this purpose.
+The nxp_imx8mcst etype and the upcoming nxp_imx93cst etype will be
+converted to use this common base in the following commits.
 
-As the implementation is largely similar to the existing i.MX8M support, 
-this series also introduce a new common nxp_imxcst etype to share the 
-common functionnalities.
-
-This procedure has been tested on the imx93-evk board, using both ECDSA 
-and RSA-PSS keys.
-
-Patches 1-2: introduces the new common etype and convert the imx8cst one
-Patch 3: introduce the new nxp_imx93cst etype
-Patch 4: updates the imx93-u-boot.dtsi description to include the new 
-signing nodes
-Patches 5-6: documentation
-Patch 7: adds test coverage
+No functional changes.
 
 Signed-off-by: Jérémie Dautheribes (Schneider Electric) <jeremie.dautheribes@bootlin.com>
 ---
-Changes in v2:
-- Following Simong Glass' feedback:
-    - Created a new common class shared between the nxp_imx8mcst and the
-    nxp_imx93cst etypes
-    - rewrote the doc in reStructuredText and mention binman instead of 
-    imx-mkimage
-    - took into account the other minor suggestions
-- Link to v1: https://patch.msgid.link/20260814-imx93-secureboot-v1-0-0c3c78020d03@bootlin.com
+ tools/binman/etype/nxp_imxcst.py | 121 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 121 insertions(+)
 
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Miquèl Raynal <miquel.raynal@bootlin.com>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Stefano Babic <sbabic@nabladev.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: "Jérémie Dautheribes (Schneider Electric)" <jeremie.dautheribes@bootlin.com>
-Cc: Marek Vasut <marex@nabladev.com>
-Cc: Denis Mukhin <dmukhin@ford.com>
-Cc: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Krzysztof Drobiński <krzysztof@kd-solutions.pl>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Alice Guo <alice.guo@nxp.com>
-Cc: Simona Toaca <simona.toaca@nxp.com>
-Cc: Ye Li <ye.li@nxp.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Christophe Guerreiro <christophe.guerreiro@non.se.com>
+diff --git a/tools/binman/etype/nxp_imxcst.py b/tools/binman/etype/nxp_imxcst.py
+new file mode 100644
+index 00000000000..3f863704b87
+--- /dev/null
++++ b/tools/binman/etype/nxp_imxcst.py
+@@ -0,0 +1,121 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2026 (C) Bootlin
++# Author: Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>
++#
++# Derived from nxp_imx8mcst.py
++# Copyright 2023-2024 Marek Vasut <marex@denx.de>
++
++# Entry-type module for NXP i.MX Code Signing Tool (CST) base class
++#
++
++import configparser
++import os
++
++from binman.etype.mkimage import Entry_mkimage
++from binman.etype.section import Entry_section
++from dtoc import fdt_util
++from u_boot_pylib import tools
++
++
++class Entry_nxp_imxcst(Entry_mkimage):
++    """NXP i.MX CST .cfg file generator and cst invoker base class
++
++    Properties / Entry arguments:
++        - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
++    """
++
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node)
++        self.cst = None
++        self.srk_table = None
++
++    def ReadNode(self):
++        super().ReadNode()
++        self.srk_table = os.getenv(
++            'SRK_TABLE',
++            fdt_util.GetString(self._node, 'nxp,srk-table', 'SRK_1_2_3_4_table.bin'),
++        )
++
++    def SetImagePos(self, image_pos):
++        # Customized SoC specific SetImagePos which skips the mkimage etype
++        # implementation and removes the 0x48 offset introduced there. That
++        # offset is only used for uImage/fitImage, which is not the case in
++        # here.
++        upto = 0x00
++        for entry in super().GetEntries().values():
++            entry.SetOffsetSize(upto, None)
++
++            # Give up if any entries lack a size
++            if entry.size is None:
++                return
++            upto += entry.size
++
++        Entry_section.SetImagePos(self, image_pos)
++
++    def AddBintools(self, btools):
++        super().AddBintools(btools)
++        self.cst = self.AddBintool(btools, 'cst')
++
++    def write_input_data(self, data, uniq):
++        """Write input data to a temporary file for CST
++
++        Args:
++            data: Data to write
++            uniq: Unique string for naming output files
++
++        Returns:
++            str: Path to the written file
++        """
++        output_dname = tools.get_output_filename(f'nxp.cst-input-data.{uniq}')
++        tools.write_file(output_dname, data)
++        return output_dname
++
++    def get_config(self, template):
++        """Get a ConfigParser loaded with the given template
++
++        Args:
++            template: Configuration template string
++
++        Returns:
++            ConfigParser instance
++        """
++        config = configparser.ConfigParser()
++        # Do not make key names lowercase
++        config.optionxform = str
++        config.read_string(template)
++        return config
++
++    def write_config(self, config, uniq):
++        """Write ConfigParser object to a temporary file for CST
++
++        Args:
++            config: ConfigParser instance
++            uniq: Unique string for naming output files
++
++        Returns:
++            str: Path to the written configuration file
++        """
++        cfg_fname = tools.get_output_filename(f'nxp.csf-config-txt.{uniq}')
++        with open(cfg_fname, 'w') as cfgf:
++            config.write(cfgf)
++        return cfg_fname
++
++    def run_cst(self, cfg_fname, uniq, backend=None):
++        """Run CST tool with given configuration file
++
++        Args:
++            cfg_fname: Filename of the CST configuration file
++            uniq: Unique string for naming output files
++            backend: Optional backend (e.g. 'ssl' or 'pkcs11')
++
++        Returns:
++            bytes: Output data from CST, or None if bintool is missing
++        """
++        output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
++        args = ['-i', cfg_fname, '-o', output_fname]
++        if backend:
++            args.extend(['-b', backend])
++        if self.cst.run_cmd(*args) is not None:
++            return tools.read_file(output_fname)
++        self.record_missing_bintool(self.cst)
++        return None
 
----
-Jérémie Dautheribes (Schneider Electric) (7):
-      binman: add nxp_imxcst base etype for i.MX CST signing
-      binman: nxp_imx8mcst: use the nxp_imxcst base etype
-      tools: binman: add nxp_imx93cst etype for i.MX93 flash.bin signing
-      imx93-u-boot: wrap SPL and U-Boot nodes in a CST node if AHAB_BOOT enabled
-      doc: imx: ahab: add AHAB introduction
-      doc: imx: ahab: add i.MX93 secure boot guide
-      binman: test: add code coverage for nxp_imx93cst etype
-
- .gitignore                                         |   2 +
- arch/arm/dts/imx93-u-boot.dtsi                     |  54 ++-
- doc/board/nxp/index.rst                            |   2 +
- doc/imx/ahab/guides/mx93_secure_boot.rst           | 294 +++++++++++++
- doc/imx/ahab/guides/mx93_secure_boot.txt           | 269 ++++++++++++
- doc/imx/ahab/introduction_ahab.rst                 | 465 +++++++++++++++++++++
- doc/imx/ahab/introduction_ahab.txt                 | 445 ++++++++++++++++++++
- doc/imx/index.rst                                  |  14 +
- tools/binman/etype/nxp_imx8mcst.py                 |  60 +--
- tools/binman/etype/nxp_imx93cst.py                 | 112 +++++
- tools/binman/etype/nxp_imxcst.py                   | 121 ++++++
- tools/binman/ftest.py                              |  85 ++++
- tools/binman/test/vendor/nxp_imx93_csf.dts         |  18 +
- .../binman/test/vendor/nxp_imx93_csf_imagename.dts |  24 ++
- 14 files changed, 1896 insertions(+), 69 deletions(-)
----
-base-commit: 4a4bcb0ada8d43390e2819e62f4baee723631f5d
-change-id: 20260814-imx93-secureboot-b914e7b6cbbf
-
-Best regards,
---  
-Jérémie Dautheribes (Schneider Electric) <jeremie.dautheribes@bootlin.com>
+-- 
+2.55.0
 
