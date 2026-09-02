@@ -1,119 +1,118 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A59C61DFD
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 07:26:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA3E0C61DFD
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 07:30:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3ADF260829;
-	Wed,  2 Sep 2026 07:26:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3057580ED8;
+	Wed,  2 Sep 2026 07:30:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sTtZ2uB41XgF; Wed,  2 Sep 2026 07:26:42 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZVNqkavYavsV; Wed,  2 Sep 2026 07:30:13 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788334002;
-	bh=4BG0s4frpPuQ1r4+CFqUtBmdLvhT7NvShngZkBYLeYs=;
+	d=lists.u-boot-project.org; s=default; t=1788334213;
+	bh=+z2qolB8iuBAKZZ5BJsGsgfUrc4rG+IO6wBrBRX4ewc=;
 	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YhUhCflea95vI/ycIibaVvgXcNlQltl/P3URq4Xe0mMGLxi4EBiltKzpzU+jI/Cr1
-	 VZLK5hhyHvWuyG1XcQqeVcDBlNVDHF0qE63+BsFR8pm2k3H3nSXblaVW4rQe4j9AIU
-	 MhwY2jsrzcUrwGlX1tVz7ZsUijEevMrMMMBoIFy//BGkGeQ9uy5S/JrfYIEhtgW6Hu
-	 L3oK8HHXG3cs3GyWJfz/ig6rXiAGD9nMKrEKQLOTqSmXjEuZtvPFeIB2P6gGhjbSlA
-	 BkA2qKnIQ3wAJlo3a2+VIK/3Obp57jyPbr5qV16q5uIxciPFz8D6aLXfVpWDzfHch1
-	 JJVUq4HPBLqvA==
+	b=pQtp9ScuzzLwWkzJ5AM42xoL8xFSNQFW+FzEp1o+rYURqRotrnxgTHXVp7XvGmGNM
+	 5klNDR3i5jNenZZKKYuleySoy77Ni1F35wph32+O1poom3wrowgyqyZgOEA9l5LB1d
+	 98E4zDca67EbX3xqXS9SAcanrLNZ06wVF2Tqw92tzn/TvEOVRoFEvR6V66aWFabr8B
+	 Z65xJn/dCurfVErHQgou0Qu3vlDXNdshb2MOFW9WK7ULDml7rkksv75ZjxoTuFzrz/
+	 NGadSxo+Uuvt5UgAa6A0lAO/IsZKplee4NW8ZVj1dFou7mNa9W5YJR7hBVv2Jkq8CE
+	 0MD630Gd3c/Zg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7152A6080F;
-	Wed,  2 Sep 2026 07:26:42 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5D98D755
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 07:26:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 079C880EA9;
+	Wed,  2 Sep 2026 07:30:13 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6F595230
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 07:30:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3D511607FB
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 07:26:41 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5584580EA9
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 07:30:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3CkWf1zTb4IU for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 07:26:40 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6AJOEWuCijIc for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 07:30:11 +0000 (UTC)
 Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
+ client-ip=2a00:1450:4864:20::62a; helo=mail-ej1-x62a.google.com;
  envelope-from=monstr@monstr.eu; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=monstr-eu.20251104.gappssmtp.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=monstr-eu.20251104.gappssmtp.com
  header.i=@monstr-eu.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=gGFKFkLo
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0065C6080F
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 07:26:39 +0000 (UTC)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c15e592da74so76462466b.1
- for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 00:26:39 -0700 (PDT)
+ header.s=20251104 header.b=uM4ZWB5m
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0CFD880E4A
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 07:30:10 +0000 (UTC)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-c25366c9b42so72048866b.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 00:30:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20251104.gappssmtp.com; s=20251104; t=1788333997; x=1788938797;
+ d=monstr-eu.20251104.gappssmtp.com; s=20251104; t=1788334208; x=1788939008;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:autocrypt
  :content-language:references:cc:to:from:subject:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=4BG0s4frpPuQ1r4+CFqUtBmdLvhT7NvShngZkBYLeYs=;
- b=gGFKFkLoK3gY1lV+30XJck07lavf+g5H80BUSqvxQpy8e5bZ91B1B+MUaIkkft3fHe
- o4jwuPzkkFDZlO9LisBTYM99RLcLeki+sYpbMckl7HhbfAtgHkNfAi/8bqbD3Zmvjoxu
- FJArGnDMECbAATXlW+71wlA3MM3kzk1/XaWEWBuhQ8vtEuO8klb0PBKZW5IV9ORnWhjk
- 7e17fCT39uz+foiHIuz1MYZL7y8wwPTvIGn8bRYsCO1pufKJ6FQgtntBqvHYrYFcZCC0
- 4gOLn8DEoNoPri3GHnFx58MAtvECb9gAB+XUiUQxbVlfW9NTBZmJP7eiEVYpGzh4badp
- awMw==
+ bh=+z2qolB8iuBAKZZ5BJsGsgfUrc4rG+IO6wBrBRX4ewc=;
+ b=uM4ZWB5mwFdYUoTdcx4DkMa/PsyKfQRDUaHVMKNOlGx/NO+ion9tbOZAKINu5WRdE6
+ k9zaStv83HXIZm34qWI3ucMD04fkSMYvqFbBigi/qg9Jfl50zNDubD3xadBKEVUJI/bg
+ jpQV7/YdW/oGBhzOdCym0r6hBzdJb8tlwgrZM0y9YlUeHxIPHxj5BHvuWxceIqIj4oeg
+ J1NbrddLC7rVo01RqKnmEY2LTIAgYcK1O8SqZgI15eVg6y8YYQwf/H8bsZokKV7KNzGt
+ Px+0GZiYdvA/VBLLBr3ZbAZ3zwDWZ0bY92vnBZ6MaXhqnEyx2vgNAq0L05HV6+7MY0a/
+ pCGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788333997; x=1788938797;
+ d=1e100.net; s=20251104; t=1788334208; x=1788939008;
  h=content-transfer-encoding:content-type:in-reply-to:autocrypt
  :content-language:references:cc:to:from:subject:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=4BG0s4frpPuQ1r4+CFqUtBmdLvhT7NvShngZkBYLeYs=;
- b=pf4Uxe4OPol8K9036i06Oh7+4/2/O5eRC6z3hQQ8bqeRVmk5DjqBnmjWxWNnuAIDGj
- g0EJ5Z8OTYNa2j/xgJjHGpC3y7C91+o1ylDV3QpGL36SLu6bvhsuBxuGUrR9G422qqnG
- 80KuqX3pEB/SG4cAjyGRUsqNL2HrlYdWRmklHbpnNiIePICop8eb13BbB2Wt2fIMi0sr
- Wd3p7j255Q/qGdtnXt2pOoHQIzMZ9iUNqZWRsL5fQJj41e8v7V+gDkKWRSgdFUi7KBCF
- 76e2F3NyIkSEIb1byJwSm7Z63q4lO8rsw7zA6MvAMUxVQHjXJRriQMNycRmXzbevUlZe
- Tj4A==
-X-Gm-Message-State: AFuF++ksl5w1a/+g4WsG3YZ41JS7+Io8meee7GMb6BQYE8+4BgV8/rnr
- y284CO96pXG/nDIAo1eHPlLpxXcxAAUJ9ARQw+yWwk/+tN1z7jAWg9Uy7Ox/WFgNssReXuzeAfJ
- OH6XMGTJr
-X-Gm-Gg: AYBFou3pd9XJIqsi0YnxmTZkYmQtJ0t3IJRi8lQ12RmsSbxbopIeevTTX7TX2Zmbnae
- mRst8pON4vU8UMJRR4jnrsIMHrax1xcyG9DORXDkzt0vyABa6CfV84FKURucu57TkD1gfu9sxYi
- +cNl/OkR5XiuL4rykK6a6FbqJqBrroGEzmozXCeOzZTJ1hQxMlU3ZLaGT4rBbgz/USgkuxFp2Ly
- SsPjLaAtNLgxjGre48corUk1X/dhzSo/smk66ojVsuSF8QPYS8NQqxVzxU3sJDQUnENHmHVq70d
- A/bcU3JKM+0Mg7cAXRwelIsbuvTvcyExRXQamdilfAzRwp6fIE0Pf1FRxtGTddltkWsu6Hff7V/
- cpFOb2urK0OE9k4ks2VEcMXbmP1SnwA6x9fQrzZGvBc8c/A0kdCfogGE8GoEbQvEb/BigFhcUFr
- WdTNvMtqklKBezaheQJbz3uDwQLLt+gCJgD3xf7VykQd/G9b8wgcPHQt/SynIB/79qPhw4vTFAh
- +fBJdlWOn+2mE/nRt3NKgHFfggti9OUG9tBjT1kSRttAA==
-X-Received: by 2002:a17:907:7243:b0:c16:14d1:b529 with SMTP id
- a640c23a62f3a-c25d55fe069mr139495566b.18.1788333997371; 
- Wed, 02 Sep 2026 00:26:37 -0700 (PDT)
+ bh=+z2qolB8iuBAKZZ5BJsGsgfUrc4rG+IO6wBrBRX4ewc=;
+ b=M4EC+ozBb7lZwamHQ2iuz33xZcu58GulpYiyLvXxr7BAY1Ja58n4+DoAykOhUHhzr2
+ zDLot9V1gs5gQpxvQFvRd/+md6L1yy6Y0dD9LYVxpJGUZDC5ga/XC/lUHugVXCzYANEp
+ 1f9rucD4muzJ0hu94Fw5Wbm3q21bfSv4SlVWLQNCmtXeuZmuzyfh3IFgVO1m7+tSJsa0
+ oc68GsNWauY4UrWsjrPRVHot/3iPvkc9rUgLtqI3cGppPDE1LctXYNaBWMSVKHcd3QBB
+ KxBzQFriT54OKFUoQIlPLHcCzHx3B+cYyV65nAKdy43QfNP4UhC9JG6UgM8L+m/l2v7j
+ lORQ==
+X-Gm-Message-State: AFuF++kTbnrJmHeLPRk6CISRJZErMGnS5qBJ/IzW6CXjMnWJyercPO1n
+ VpFzUlcKtoJ7BY56sOaclSGgLtNrfa91vllINnd0ORKpMLsfrSjVoEVxHfHOgnXjKurzDYeGSVy
+ y2PufMCZL
+X-Gm-Gg: AYBFou1MlRJMtbcrWa7nFyeVIg2smAHf+oqQo+4Gd5fiLGJ5BKViiNm2jEsCddIehKm
+ i+RxnJlT+vsqxabKx1wFuKDG2x6geZW1bruQd6MAzz5/nZTgY9T3b/YH5iwsnkSwMRXVPdjKtxb
+ G+gGQic+YyO1DCJaqQGiOfKuDMFwuASdmcyc+0LxuLDtRwoL31IY1HDinb4KCjg+8b0MmPkogik
+ xDdg1Hu0/rBfJVZbNpYz+V50NJCIc+AjBtSLq2g8RV1RFsTprSUh1r6FS4OYloH8nzu2UgC+qcg
+ i9Z6QG55kDW/ckBHnx1dOO5+X14FTtQaFJvnnpEUxKdpgNLHx35PELQwX42wXsfZkU+xUIjfKsJ
+ 2znV93WSv8ZqgqZTPGTBNOjkSJDOq1HWUCbNLAwrMBqLPZTfjWk2vYSj+LO4rfans+0OWcCS1XO
+ 3l0mRtLeIDVLUDrePUkusSQYBz9M6OffCiL1DEYRKE044ptZld9ohfSKkXv2cJMpSlrkbY25yrv
+ saMY9krK/B9ES2L5UbxZ1KrWZEV2D5FgynYMezXAhYW0M+uCEA5SAm8
+X-Received: by 2002:a17:907:7b82:b0:c24:d6f0:2071 with SMTP id
+ a640c23a62f3a-c25d5560851mr118719266b.12.1788334207875; 
+ Wed, 02 Sep 2026 00:30:07 -0700 (PDT)
 Received: from [10.0.0.13] (89-24-185-125.customers.tmcz.cz. [89.24.185.125])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c25d002df62sm81696066b.15.2026.09.02.00.26.36
+ a640c23a62f3a-c25d039d2e5sm81102466b.38.2026.09.02.00.30.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Sep 2026 00:26:36 -0700 (PDT)
-Message-ID: <c6495ace-4c3b-4da5-baec-a4c7a4331e88@monstr.eu>
-Date: Wed, 2 Sep 2026 09:26:20 +0200
+ Wed, 02 Sep 2026 00:30:07 -0700 (PDT)
+Message-ID: <200cac59-2218-4369-9afb-14117f92888e@monstr.eu>
+Date: Wed, 2 Sep 2026 09:30:06 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] board: xilinx: versal-net: move
+Subject: Re: [PATCH 1/2] board: amd: versal2: move
  platform_id/platform_version to .data
 From: Michal Simek <monstr@monstr.eu>
 To: u-boot@lists.u-boot-project.org, git@amd.com
-Cc: Suraj Kakade <suraj.hanumantkakade@amd.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
 References: <067b90dbb09718c8c9b73a049702e2df30544849.1787745885.git.michal.simek@amd.com>
- <5908d1dcf2a650cac2b22d82e7f789b978f70748.1787745885.git.michal.simek@amd.com>
 Content-Language: en-US
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -159,7 +158,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <5908d1dcf2a650cac2b22d82e7f789b978f70748.1787745885.git.michal.simek@amd.com>
+In-Reply-To: <067b90dbb09718c8c9b73a049702e2df30544849.1787745885.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -178,8 +177,6 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
 On 8/26/26 14:04, Michal Simek wrote:
-> From: Suraj Kakade <suraj.hanumantkakade@amd.com>
-> 
 > platform_id and platform_version are plain uninitialized statics,
 > placing them in .bss. U-Boot's linker script overlays .bss at the
 > same address as .rela.dyn (the relocation table), which is safe only
@@ -196,29 +193,19 @@ On 8/26/26 14:04, Michal Simek wrote:
 > Move both variables to .data via __section(".data") so they no longer
 > share an address with the relocation table.
 > 
-> Fixes: f6aebdf676ed ("arm64: versal-net: Add support for Versal NET platform")
-> Signed-off-by: Suraj Kakade <suraj.hanumantkakade@amd.com>
+> Fixes: 40f5046c221a ("arm64: versal2: Add support for AMD Versal Gen 2")
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
->   arch/arm/mach-versal-net/cpu.c | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
+>   arch/arm/mach-versal2/cpu.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff --git a/arch/arm/mach-versal-net/cpu.c b/arch/arm/mach-versal-net/cpu.c
-> index 7df7c49ac711..1555751da2e8 100644
-> --- a/arch/arm/mach-versal-net/cpu.c
-> +++ b/arch/arm/mach-versal-net/cpu.c
-> @@ -1,7 +1,7 @@
->   // SPDX-License-Identifier: GPL-2.0
->   /*
->    * Copyright (C) 2021 - 2022, Xilinx, Inc.
-> - * Copyright (C) 2022, Advanced Micro Devices, Inc.
-> + * Copyright (C) 2022 - 2026, Advanced Micro Devices, Inc.
->    *
->    * Michal Simek <michal.simek@amd.com>
->    */
-> @@ -151,7 +151,8 @@ u8 __weak versal_net_get_bootmode(void)
->   	return reg & BOOT_MODES_MASK;
+> diff --git a/arch/arm/mach-versal2/cpu.c b/arch/arm/mach-versal2/cpu.c
+> index d72f66f4fbac..19baa1331bdd 100644
+> --- a/arch/arm/mach-versal2/cpu.c
+> +++ b/arch/arm/mach-versal2/cpu.c
+> @@ -241,7 +241,8 @@ void versal2_timer_setup(void)
+>   	debug("timer 0x%llx\n", get_ticks());
 >   }
 >   
 > -static u32 platform_id, platform_version;
