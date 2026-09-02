@@ -1,118 +1,119 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68479C624D3
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:35:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA1DC624D3
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:37:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 249F860726;
-	Wed,  2 Sep 2026 14:35:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5B2CC80F35;
+	Wed,  2 Sep 2026 14:37:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oXznL1IKNl-G; Wed,  2 Sep 2026 14:35:35 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hJj3usBa9IGL; Wed,  2 Sep 2026 14:37:48 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788359735;
-	bh=1DFzsMR394ryqSszL9SMAnrRH7x7uLTcZCkW0pOSo8M=;
+	d=lists.u-boot-project.org; s=default; t=1788359868;
+	bh=ij0xYkvbozkHUlDgtsGfZtdZmvbhRCpXSEebPYG/Tl8=;
 	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=EHDZTkhFIE4Oa+3cIVrm9OqVFrLfnVDKs/hSqL/sCHYA7XYpMLyHIK23iEM7WDLfS
-	 jRGSJPFyxTKLs2Q8eg4O0rQSOXTjvmWIp8Q77R1NpRr3EjZA84+rGQeTcv8+sk5UFn
-	 zoXAvl37sXWPrs9WemzDlri5KazBSOK/cQ7RnTVlxsywNVTaze7DJs8SKbeO7HooKF
-	 dsiPD8ZJ5nPHQrLv9loLoCMV/GV3c9l3TQUgtScnF+H0fO9j00E9UNhNCSflG1oz7o
-	 qrBR9U538d8qVMSpFOKxS53wAVdu7SgjYlPIZ3/3A7O8kQLIetmZ/Y1DZr4OaSDG0j
-	 TIvLdNOJGSQcQ==
+	b=Gj5dGzn4fxUtwqheIp2DFo7nN0tlVr87f89Tdvdv8GCg8KXPyYQfcXB/5tJvhj6Pd
+	 eus+K/OBy6NxXG2AdFknrnjE81QzQ+7ZwjuWkz8D9s4ddEP+cBevMk/Xk8X5tE8lYD
+	 xzA+K99GowoXEIZAPLYHmeuoYQmuojI1L2OyuxClH7AcHEI0xD1kvjOEhaZf3iiz7b
+	 GySjUw/UIQAUuky2iwcHzKE+FTOReNeffCI6zkS0wyBR3Xp4KgJK0DpyNxEBgiGm2e
+	 ScfCu+/ioe2gqEPEWTQ3zpmfHys7P3FXZ5bYtKR9GloMyTmbaOZwM1tCsBDbVcpWug
+	 i+3WIf42R3smg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4DCDC606F5;
-	Wed,  2 Sep 2026 14:35:35 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id E836B127
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:35:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8584D80EC5;
+	Wed,  2 Sep 2026 14:37:48 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0180C363
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:37:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id DA23E401B0
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:35:33 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id E6FD280EC2
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:37:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id E8Ojwxt2f4xO for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 14:35:33 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5NZ83NiY-mXr for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 14:37:47 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::533; helo=mail-ed1-x533.google.com;
+ client-ip=2a00:1450:4864:20::52b; helo=mail-ed1-x52b.google.com;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=cObFHymV
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D10A240191
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:35:32 +0000 (UTC)
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6a20319d030so1658986a12.2
- for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 07:35:32 -0700 (PDT)
+ header.s=google header.b=Ls0497ZR
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D1FCC80EC5
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:37:46 +0000 (UTC)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-6a051b737d8so1193188a12.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 07:37:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1788359730; x=1788964530;
+ d=linaro.org; s=google; t=1788359864; x=1788964664;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=1DFzsMR394ryqSszL9SMAnrRH7x7uLTcZCkW0pOSo8M=;
- b=cObFHymVjjyc7a0W9fxg2czH5+5bKbfhMZ6LSxCswM80ihlW5sL/q/U0vADgKdMcTL
- Q4xPRbRRxYztRbrxqkUzPXpEylGHNwx7nMFLP0HJB8HoeHoyb713qeF14/YFiuWja6Xu
- d/f6s9Dbob63Lr5dF8uxW5s+osxtZz7IUzH2viYBlTIYpjegPtUE/i7KrIAvTTfhpsh5
- +ETJAaPs0cH6z7mH5IWCupYNCLbTkuB9SPa5h1lUYpLD41cnHCuvuy5hkpfHNVUOUYss
- iTtadpZumezDTFEJSiwafpMOKNqk78LlH9C6wrznX8NV6OatjpK3KpET1ux6vTNXfuNR
- sn/A==
+ bh=ij0xYkvbozkHUlDgtsGfZtdZmvbhRCpXSEebPYG/Tl8=;
+ b=Ls0497ZR2sDjTzRqdhIo9SVV5JJb9HSXW2Ch46TflvOzqHY9dgPqPIN5Afzy9hr9P1
+ 45ZL1ECp0Cc2bCccVzrH3fDi93xQNTlVrDU8h77i5xfWwZVO4pI44EpaZi2XKEtxm+vf
+ 06EFAliXDrQyP37FQ1+h1Tj6WwOaPsATcoCtMIlK8ANoDNzDfIfw0UWsVwncP85rt5Ob
+ z0a+0N2QnCRt0/YGQxPUnCDAGISJQW6KTj+4tL1xGeXU4UxllueJy/ucPmxpYt59p6gB
+ bJMzbH+ySMobiJzDL0+TcFSNxUQRHRpk2ZEOjAZuX+lenO0C7QchNx1f6Sip9ELC+Fvd
+ DhIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788359730; x=1788964530;
+ d=1e100.net; s=20251104; t=1788359864; x=1788964664;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=1DFzsMR394ryqSszL9SMAnrRH7x7uLTcZCkW0pOSo8M=;
- b=JvyWtpUXSUTBOEUztuQazOP2d7tWEMaWJeCg7fOM0pelWbrpkNx9S9G8Znq761Sxdq
- zTvnlrVjlNKhtwQ2e0caHj9KjcNbBqcD7nKVLI4RrOFRVWip8j0K/duSoHVwroiDA7wv
- pRn41Q48VnMf58l/sF2sQhau57tuY5d680ciIHCkEhZFGjSwpVlzmytj+vTFEofSyXki
- Y+zIRTXi3pxQne7erbVqlGFo9ch10MFsSPohCuUJ1Jnn4feH+skJGaR5+EZ7RaA8X0YM
- kLsp1Kr5fWqKHO3CV7g78xpVHUJKGFGCJa5c6dqgm/2QBYztBTsnqgRw/YWHkJ0QZd8X
- vBjg==
-X-Gm-Message-State: AFuF++l35u4JBSnoEHTWte0hXUHBEVOmFtgItYoz1/+qqgEU0ImG8wBT
- +3VSw2AqQH7PNLLpZgPs/6VWiIuimms1fsTZcnUWuBIumuUYrPHkRZjRYA6oQDjMprI=
-X-Gm-Gg: AYBFou1HLse3xFiUMffO+QfBkR8+Xa07ekauWeovYrfNB5bfZBEd1uc75A30qxEHDVz
- meCV5qPzUFwgRoi0NI2pWLmsjLXCJ5kNmPHN8NVi4eqaDdq8DujrHKOo8Knd/GoUSOUJqg9MAYN
- 1Zr+z9ZnhdwTW/lLnNNVKJ4AhlqqmciG+Qp6M7loHlZmYl73d1sb4gUl6PiRpYa61XaxzLcUUmI
- dyAvcKvjRWUlJleLvaNgTfyuw6tOosK4OeTWMuUM43j0TkhPFAudf6rvyfTB/nXhxaw8JuU/Bs1
- D2ki/9Yk8gnfBYXJT3/upRfmVd3xcIif5HurgLkYE51QNORrnayn5CjHN/xgDFUZgRaxUqYD+4L
- fnHHC5xkg/qCpDXWI38L5YFkWerI8FDhU7FcxHWOEA3nGh+RKJ7/mauWjhHBY/1Hr87XOqdJQ12
- WbCjVcfcks4NceHMvCM7xLTzfBJghSTGLYxfL32OKmDLJZbYr6VRUll3KrJt1TP8M/Kdiwvalhg
- dk5HQRqs2Ctb6aSX+sRNCas4dYnOG7hKk72MOmFLykaij3B
-X-Received: by 2002:a05:6402:2349:b0:6a3:fdb0:c374 with SMTP id
- 4fb4d7f45d1cf-6a682abafe9mr3571453a12.13.1788359730128; 
- Wed, 02 Sep 2026 07:35:30 -0700 (PDT)
+ bh=ij0xYkvbozkHUlDgtsGfZtdZmvbhRCpXSEebPYG/Tl8=;
+ b=owy0FhibRWMmRvHAh9LaO98HkynMY/QGu/qBFifa9JLmO24TXgk8wJKUJ/yzQZ7TI1
+ Bcm18MkKqU7AAEWVRZzCiAY8rdgCd7rSHBsDfeTYuT+F3L/J0olQTNA0IzYJp1wrB+j5
+ W9pGBPPAGK+h8LREV7gdI4lD/s60xsZ8RbYgLJiHeW8pde/N7lNWR+wyUnnO/OsMwAuO
+ 5uaGZ9HT4zTAak2A5768ZiElGyO56aEuSxGeX+jG0rbRTI0I16/s+QJMDiRGSqX8Zl0C
+ mrfbJVniadEJe+aCIboKXVfvot8PrnpXDDACL0mD0gwYYF9O3XpXfHL52SzMbkvl2Cf4
+ Dyqw==
+X-Gm-Message-State: AFuF++lRQiGpIQkuQsnmh9n2Gm+EZz8IVg5XOTnjzeLfZGC1Aq1uDkRh
+ FU8JDHG21cNxM5dc56kq4HocQKfB6iggGYtqK6JL56eN+zWz9sn9KrJ3VskK8bewEu4=
+X-Gm-Gg: AYBFou3HnTv517+56xZDjzcJ/zR9HhJeKT/KJMYkj/kGu+f7/IU4ExcFxixfxbviJSH
+ IhkwMTdGATx4SeOyIZ+RGKtmmQVQhB4zW2UZJ/pfhfyZ3xAEtJ8dbOBgtPx4ws+BtCEVVQyeQGO
+ uvTtv4xB279poiFwRaqQbjO9/27Zej1pSotglagqRGmw9osQavsL5hgjQkXEz9oX3NEPP+HGB0R
+ tD07sww60kYHBFdedZfxUHRF2V3DLXdPH/csiKEATT4vd5RBh2WR6qCvTdI3PBeuHTyAuW/SqsZ
+ DpL2gNBdsbkvqHmxHeioOUr3ih2KjY4VgFRcj5c7+FqqcWDXb19K8Sy1PwJoI0zzrraGez5Zki0
+ D2NHYKTuD6dQxSJL02egI8Y9Y6pMSzGtd90ABASGJ2ms/LXn5BdHO7tnIW9Rm4fZDA1F8nVtWMd
+ jLSKY4KF9Kw66B3nMy5v9AYvLqpqD8rwrWzBCXKjGh1VenlkgTS+yAPPP79TO59Ph8PZ7UfQ4Yv
+ opYN0Dxyr0ELrIB9j8KbnuyHh82Grflo3RB8Sc=
+X-Received: by 2002:a05:6402:a0d2:b0:6a3:fee5:adcf with SMTP id
+ 4fb4d7f45d1cf-6a6825668e2mr3478298a12.1.1788359864424; 
+ Wed, 02 Sep 2026 07:37:44 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:e9e:e6f8:a41a:72c?
  ([2a01:e0a:106d:1080:e9e:e6f8:a41a:72c])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a67f9329b4sm1186377a12.19.2026.09.02.07.35.23
+ 4fb4d7f45d1cf-6a67f942fe4sm1233794a12.25.2026.09.02.07.37.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Sep 2026 07:35:23 -0700 (PDT)
-Message-ID: <c960ead2-4dad-4ed3-bca8-04760fe47884@linaro.org>
-Date: Wed, 2 Sep 2026 16:35:22 +0200
+ Wed, 02 Sep 2026 07:37:38 -0700 (PDT)
+Message-ID: <07617824-547e-4723-a228-91b2b8b55766@linaro.org>
+Date: Wed, 2 Sep 2026 16:37:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] gpio: qcom_spmi_gpio: add pmk8350/pm8350c
+Subject: Re: [PATCH] gpio: qcom_spmi_gpio: fix bias-pull-down
 To: Casey Connolly <casey.connolly@linaro.org>,
+ David Wronek <david.wronek@mainlining.org>,
  Jens Reidel <adrian@mainlining.org>, Luca Weiss <luca.weiss@fairphone.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+ Petr Hodina <petr.hodina@protonmail.com>, Sumit Garg
+ <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org, u-boot-qcom@groups.io
-References: <20260902142937.2422919-1-casey.connolly@linaro.org>
+References: <20260902142736.2419504-3-casey.connolly@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -139,7 +140,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260902142937.2422919-1-casey.connolly@linaro.org>
+In-Reply-To: <20260902142736.2419504-3-casey.connolly@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -156,27 +157,47 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 9/2/26 16:29, Casey Connolly wrote:
+On 9/2/26 16:27, Casey Connolly wrote:
+> A small logic error resulted in bias-pull-down being interpreted as
+> bias-pull-up, fix this.
+> 
 > Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 > ---
->   drivers/gpio/qcom_spmi_gpio.c | 2 ++
->   1 file changed, 2 insertions(+)
+>   drivers/gpio/qcom_spmi_gpio.c | 7 ++-----
+>   1 file changed, 2 insertions(+), 5 deletions(-)
 > 
 > diff --git a/drivers/gpio/qcom_spmi_gpio.c b/drivers/gpio/qcom_spmi_gpio.c
-> index b218a3d3d585..bf2c11ebf8cd 100644
+> index bd1d7a16e852..b218a3d3d585 100644
 > --- a/drivers/gpio/qcom_spmi_gpio.c
 > +++ b/drivers/gpio/qcom_spmi_gpio.c
-> @@ -766,8 +766,10 @@ static const struct udevice_id qcom_spmi_pmic_gpio_ids[] = {
->   	{ .compatible = "qcom,pm8550b-gpio" },
->   	{ .compatible = "qcom,pm8550ve-gpio" },
->   	{ .compatible = "qcom,pm8550vs-gpio" },
->   	{ .compatible = "qcom,pm8998-gpio" },
-> +	{ .compatible = "qcom,pm8350c-gpio" },
-> +	{ .compatible = "qcom,pmk8350-gpio" },
->   	{ .compatible = "qcom,pmk8550-gpio" },
->   	{ .compatible = "qcom,pmr735d-gpio" },
->   	{ }
->   };
+> @@ -795,9 +795,9 @@ static const struct pinconf_param qcom_spmi_pmic_pinctrl_conf_params[] = {
+>   	{ "drive-open-drain", PIN_CONFIG_DRIVE_OPEN_DRAIN, 0 },
+>   	{ "drive-open-source", PIN_CONFIG_DRIVE_OPEN_SOURCE, 0 },
+>   	{ "bias-disable", PIN_CONFIG_BIAS_DISABLE, 0 },
+>   	{ "bias-pull-up", PIN_CONFIG_BIAS_PULL_UP, PMIC_GPIO_PULL_UP_30 },
+> -	{ "bias-pull-down", PIN_CONFIG_BIAS_PULL_UP, 0 },
+> +	{ "bias-pull-down", PIN_CONFIG_BIAS_PULL_DOWN, 0 },
+>   	{ "bias-high-impedance", PIN_CONFIG_BIAS_HIGH_IMPEDANCE, 0 },
+>   	{ "power-source", PIN_CONFIG_POWER_SOURCE, 0 },
+>   	{ "input-disable", PIN_CONFIG_INPUT_ENABLE, 0 },
+>   	{ "input-enable", PIN_CONFIG_INPUT_ENABLE, 1 },
+> @@ -879,12 +879,9 @@ static int qcom_spmi_pmic_pinctrl_pinconf_set(struct udevice *dev, unsigned int
+>   	case PIN_CONFIG_BIAS_PULL_UP:
+>   		pad->pullup = PMIC_GPIO_PULL_UP_30;
+>   		break;
+>   	case PIN_CONFIG_BIAS_PULL_DOWN:
+> -		if (arg)
+> -			pad->pullup = PMIC_GPIO_PULL_DOWN;
+> -		else
+> -			pad->pullup = PMIC_GPIO_PULL_DISABLE;
+> +		pad->pullup = PMIC_GPIO_PULL_DOWN;
+>   		break;
+>   	case PIN_CONFIG_BIAS_HIGH_IMPEDANCE:
+>   		pad->is_enabled = false;
+>   		break;
+
+Good catch
+
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
