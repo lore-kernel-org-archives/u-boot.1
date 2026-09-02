@@ -4,112 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D02B6C624D6
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:18:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58CBBC624D6
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:26:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9E7E380FAC;
-	Wed,  2 Sep 2026 14:18:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EBBEE80F58;
+	Wed,  2 Sep 2026 14:26:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4q3ZR3m1Kdg7; Wed,  2 Sep 2026 14:18:53 +0000 (UTC)
+ id f-4NGb9xneuG; Wed,  2 Sep 2026 14:26:17 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788358733;
-	bh=b7hC81Cbh1E3W7XAE0HD1BHnR/J1DJJLlDvdrBp/c0U=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788359177;
+	bh=j1/PDguSX/l8NauF6176GSBZSE+tpPAmKP0+vBY0t5Y=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wT9A3Q9dMpgh9Q1C2TLh4D6sbxmNyL1CHWpyby881KHvoHsgJ0n0GZ5DBZVI6JiNk
-	 zHVe64rpMnbFD3PK0x/ShH9R4+TdjlgSMnVqOjvAODKpyxO90NjCBOILCdslQDiWth
-	 gLSomPONdBzmkvPphkNDgYF/0EYfIHmLWDphER7nT4MxtqMHmk4Du3TWf7+EogMM01
-	 3heDKEac/ri5gKy2li3svvAx6cmw2An7Onm7pM1r2ma2AsjKoyLZ7HqeeSiPGfNyQu
-	 sOCc+oU7pocOFcCday+/KNwac7N+GbC/4gsjVMmVrFsId/yqaVCvscsvzTClwfkKBt
-	 bMhQp4ZQuDfzQ==
+	b=Y8QmHcm2t7lBCZ3ayXpjJUIZ+Q61poSVzt9lJ/PR0LJBb8D69lVVZPulTztPyySOh
+	 QH7dUll5P9kOJ++rrE1V5D4HpXCY+kILAuHAlMq8tNlA7UfS6XyYR+KDx2gBAdBTLE
+	 XSQNlXSPSsOv2aCZx6uUtaKxmAzOcB/wq3H6fhNufajm65X2aPQJqYaoNEpfjEBW/q
+	 sq7Xc29Osq4rf8XWqTN7WW72RDHBy1C/5fXA3pV+VY5lo2QKp/qVxr48Sq0bTZYhAU
+	 XS0F2qkFSmQ6ITyfzcJl6TuZ2XuHq+K7vU0RpNcu7v95LpOwNZ0XlBn8j4hShfXriH
+	 C1JyYaLttVvlA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3799380FAE;
-	Wed,  2 Sep 2026 14:18:53 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id D1783363
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1F88680F1C;
+	Wed,  2 Sep 2026 14:26:17 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 00C3E230
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:26:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B7DD6400A6
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:51 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id D500A606C4
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:26:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uaCE-p5jUY5L for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 14:18:50 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=prvs=698db811e=charles.perry@microchip.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: smtp2.osuosl.org; spf=fail smtp.mailfrom=microchip.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com
- header.a=rsa-sha256 header.s=mchp header.b=2FXxQ9iQ
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 161EB4006F
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:49 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 779158424C; Wed,  2 Sep 2026 16:18:48 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48A6383EEF
- for <u-boot@lists.denx.de>; Wed,  2 Sep 2026 16:18:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=698db811e=Charles.Perry@microchip.com
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=microchip.com header.i=@microchip.com
- header.b="2FXxQ9iQ"; dkim-atps=neutral
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1788358725; x=1819894725;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=ahuxu1ye6+Z4l5ywK7ic4Z4Luprt0D9kQnaeT+5QLnw=;
- b=2FXxQ9iQe13mFLl6sVxln9knBjk4iX2ExIkA1925unsMRqGwcAQAXvTh
- yksPM/WigfJOlh83LBKElLBKTYpW90fUkODKqcDd6xdyB1Byhny7jipuA
- kSu3CtLtmMJ8CXSOdH8KgkurKiDc7GXzJ4LaUTcWWJho1w5A22Y8rcOlz
- DdcrxUzpuT5NKdkiZPphOmv0MwMCv0sNEEFe/HlRUnGReCsWtaZgSACxy
- XUgPDdXBNcBCOKNNILUVi6tVXQN5cqK+TGE77NKp3AhSEJodowe/LWmou
- im+PSnyq9Gbh4WOyynUSjoOiECJul5QZY1RHWLgL0VI5tBGNFBqsIoCUW A==;
-X-CSE-ConnectionGUID: 2MjAL5VYTByuuPbssGv9hg==
-X-CSE-MsgGUID: g1tRBYhgQyyZcyvMuanciQ==
-X-IronPort-AV: E=Sophos;i="6.25,258,1779174000"; d="scan'208";a="63050737"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Sep 2026 07:18:37 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.87.151) by
- chn-vm-ex1.mchp-main.com (10.10.87.30) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.2562.45; Wed, 2 Sep 2026 07:18:36 -0700
-Received: from bby-cbu-swbuild03.eng.microchip.com (10.10.85.11) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Wed, 2 Sep 2026 07:18:36 -0700
-From: Charles Perry <charles.perry@microchip.com>
-To: <u-boot@lists.denx.de>
-CC: <charles.perry@microchip.com>, Rahul Pathak
- <rahul.pathak@oss.qualcomm.com>, Tim Ouyang <tim609@andestech.com>, Leo Liang
- <leo.liang@sifive.com>, Yao Zi <me@ziyao.cc>, Tom Rini <trini@konsulko.com>,
- <u-boot@lists.u-boot-project.org>
-Subject: [PATCH v3 5/5] drivers: firmware: rpmi: Add the mpxy command
-Date: Wed, 2 Sep 2026 07:17:31 -0700
-Message-ID: <20260902141744.2422566-6-charles.perry@microchip.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260902141744.2422566-1-charles.perry@microchip.com>
-References: <20260902141744.2422566-1-charles.perry@microchip.com>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Q6PmM2Qg2BcG for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 14:26:15 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::331; helo=mail-ot1-x331.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=SFmxZU/W
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1E0D2606B4
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:26:14 +0000 (UTC)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7f48c750afcso707311a34.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 02 Sep 2026 07:26:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1788359173; x=1788963973;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=j1/PDguSX/l8NauF6176GSBZSE+tpPAmKP0+vBY0t5Y=;
+ b=SFmxZU/WKlajTJoVHrNobtW3q0BFXJ0rTdWfyt7GKybyp3o4p+t/PuKO8xUEk72NPI
+ yOM2VW2Pd3k/+jwBY0U9nW7iL7cydVAQqJuFyUp+lR4Yywg4f1QyoCqCQTUTDsayZEX5
+ sZ8NmXBqrcwmx0o1tNLie+OgK6Ak8xRKX/zUo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788359173; x=1788963973;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=j1/PDguSX/l8NauF6176GSBZSE+tpPAmKP0+vBY0t5Y=;
+ b=oA2eyJBeAllqJmFjZFOYT7LZ9HiU/oab5r+xRznU7JR7CzTdkemgo0CUclN6sROIHf
+ l5VCz/C+Auad6UENhTl5TBCa+es7lbx1eGcvgVIShnJ2IYrIirdJXZ3bzxBDojGWyD+O
+ 4syIg9utLMbbQvaXJEzJivZ6mLk3bLl5J72F9eedWQY/jCBk1G/CrVQgmKdiXvVvJl+s
+ 7R7OQzCBEZn/o74sErcCInWIU8xiQXTYKP0n9taD5gg4cNXmPbacAo2lvV9WLMadZrRf
+ HvCKbrXEVsWOrgn9U1c1mbkQntbkTy5rDCABppmT3TqkzQGxXrQ9GZf4Gs8RD90rK2Ad
+ /6jQ==
+X-Gm-Message-State: AFuF++kBoZT96+zwoaw5Gi1CmSmpuEtOp08sUCDhgDXcHnIpF9DrSAhO
+ ORTVWg/Xyda12jbf2lhSItniidr89yVGd8mvPVWuLVouV7PRkG/53wmH79Y0urN/0G8=
+X-Gm-Gg: AR+sD11CpcbcAR6Fw9RWMs2OrIo4Ie1682N9ZNUEydBiWjDjEQyfOs1dF0kRvW92X5e
+ b3CTfnrfqq4IRr4XNaLqZZwvl/kclWpfqpBGwDMlBYAMZBD4px5HXHsrluyTLmj15w8uGUWyluj
+ POj2Q9mYF9EoTFbtY4ZoVjbwclKjSzABKVKgrrIHRww2DSxiHOzVEBmvroeA3o579Zf3gWodU4u
+ +TWEb15gHIg/ihhpa/o9jw7ZLkkmJkGBk0RzNEWQGP1ODTF5pzkoNdp1op5RT5m+SLEdXFXC4sf
+ lDYzSfm+MW9EcjSTdglK5fHZHZTcVYP+MqArti6bUBzM/CMBCCZmmUN1eNvV39AIUOOPnugszUg
+ 0SW2ENp3rVuknYOM1E2+/+1khx7wvYgw4hSXKpKfNhw4IaXmXDsjwCKzu2G4hrucmuK8+R2n1Mk
+ K0QDEtodqX0UylSdwhYoZ0avPGveZiFgdZxgbNgyOZZN/V2Gn4tI5qkr7Dbtbamq22alV96VOYu
+ /R5FjzmXDtYxDmOhG0pvGA1usdcIV2KOAnsPn1axDL35nPWHyPKnluup3GF9Bq/YN9NK+Ost+jr
+ 1ZSNheNGDA==
+X-Received: by 2002:a05:6820:2d0b:b0:6b1:4e36:fb80 with SMTP id
+ 006d021491bc7-6b47fd3531bmr4195954eaf.15.1788359173480; 
+ Wed, 02 Sep 2026 07:26:13 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6b40c833ad9sm2472138eaf.7.2026.09.02.07.26.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Sep 2026 07:26:12 -0700 (PDT)
+Date: Wed, 2 Sep 2026 08:26:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Julien Stephan <jstephan@baylibre.com>
+Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>, dlechner@baylibre.com
+Subject: Re: [PATCH 2/2] video: fix build with CONFIG_VIDEO &&
+ !CONFIG_VIDEO_LOGO
+Message-ID: <20260902142610.GG1145425@bill-the-cat>
+References: <20260901-fix-build-with-config-video-but-config-video-logo-disabled-v1-0-9dc80d307790@baylibre.com>
+ <20260901-fix-build-with-config-video-but-config-video-logo-disabled-v1-2-9dc80d307790@baylibre.com>
+ <20260901164245.GE1145425@bill-the-cat>
+ <CAEHHSvbPWGishhJ13jDUBWC8TBH0wMqyVS7qBMEZu90ug-ntrw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6EgLPVWYFwvhNDKL"
+Content-Disposition: inline
+In-Reply-To: <CAEHHSvbPWGishhJ13jDUBWC8TBH0wMqyVS7qBMEZu90ug-ntrw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -123,488 +131,125 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Rahul Pathak <rahul.pathak@oss.qualcomm.com>
 
-Add the mpxy command which allows listing MPXY channels, reading/writing
-arbitrary channel attributes and sending raw messages.
+--6EgLPVWYFwvhNDKL
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The mpxy command is useful for interacting with custom RPMI service groups
-that have no associated driver. It can also be useful for debugging and
-testing SBI proxy drivers as well as the PuC firmware.
+On Wed, Sep 02, 2026 at 10:48:38AM +0200, Julien Stephan wrote:
+> Le mar. 1 sept. 2026 =E0 18:42, Tom Rini <trini@konsulko.com> a =E9crit :
+> >
+> > On Tue, Sep 01, 2026 at 10:52:43AM +0200, Julien Stephan wrote:
+> > > Building with CONFIG_VIDEO enabled but CONFIG_VIDEO_LOGO disabled fai=
+ls
+> > > at link time:
+> > >
+> > >   video-uclass.o: in function `video_get_u_boot_logo':
+> > >   video-uclass.c:593: undefined reference to `__splash_u_boot_logo_be=
+gin'
+> > >
+> > > The __splash_u_boot_logo_begin/_end symbols are provided by
+> > > u_boot_logo.bmp.o, which is only built when CONFIG_VIDEO_LOGO is set:
+> > >
+> > >   obj-$(CONFIG_VIDEO_LOGO) +=3D u_boot_logo.bmp.o
+> > >
+> > > video_get_u_boot_logo() and show_splash() reference those symbols
+> > > unconditionally, so with the logo disabled the reference is left
+> > > dangling. show_splash() alone would be dead-code eliminated (it is
+> > > static and only reached under a CONFIG_IS_ENABLED(VIDEO_LOGO) guard),
+> > > but video_get_u_boot_logo() is an exported function and is always
+> > > emitted.
+> > >
+> > > Guard the splash helpers and their symbol references with
+> > > CONFIG_IS_ENABLED(VIDEO_LOGO), and provide a static inline
+> > > video_get_u_boot_logo() stub returning NULL for the disabled case in
+> > > video.h. Callers already handle a NULL logo pointer (e.g.
+> > > bootflow_menu.c), so no caller changes are needed.
+> > >
+> > > Reproduce with any board that enables VIDEO without VIDEO_LOGO or
+> > > enabling SPLASH_SCREEN (it disables automatically VIDEO_LOGO).
+> > >
+> > > Fixes: 0d3890188d6b ("video: Add function to obtain the U-Boot logo")
+> > > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> > > ---
+> > >  drivers/video/video-uclass.c | 7 +++++--
+> > >  include/video.h              | 9 ++++++++-
+> > >  2 files changed, 13 insertions(+), 3 deletions(-)
+> > >
+> > > diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclas=
+s.c
+> > > index de161054d52..4c959a57619 100644
+> > > --- a/drivers/video/video-uclass.c
+> > > +++ b/drivers/video/video-uclass.c
+> > > @@ -579,6 +579,7 @@ int video_get_ysize(struct udevice *dev)
+> > >       return priv->ysize;
+> > >  }
+> > >
+> > > +#if CONFIG_IS_ENABLED(VIDEO_LOGO)
+> > >  #define SPLASH_DECL(_name) \
+> > >       extern u8 __splash_ ## _name ## _begin[]; \
+> > >       extern u8 __splash_ ## _name ## _end[]
+> > > @@ -598,6 +599,7 @@ static int show_splash(struct udevice *dev)
+> > >
+> > >       return video_bmp_display(dev, map_to_sysmem(data), -4, 4, true);
+> > >  }
+> > > +#endif
+> > >
+> > >  int video_default_font_height(struct udevice *dev)
+> > >  {
+> > > @@ -716,14 +718,15 @@ static int video_post_probe(struct udevice *dev)
+> > >               return ret;
+> > >       }
+> > >
+> > > -     if (CONFIG_IS_ENABLED(VIDEO_LOGO) &&
+> > > -         !CONFIG_IS_ENABLED(SPLASH_SCREEN) && !plat->hide_logo) {
+> > > +#if CONFIG_IS_ENABLED(VIDEO_LOGO)
+> > > +     if (!CONFIG_IS_ENABLED(SPLASH_SCREEN) && !plat->hide_logo) {
+> > >               ret =3D show_splash(dev);
+> > >               if (ret) {
+> > >                       log_debug("Cannot show splash screen\n");
+> > >                       return ret;
+> > >               }
+> > >       }
+> > > +#endif
+> >
+> > Is this hunk really needed? I can see getting here as part of debugging
+> > the problem, but before the change it should evaluate to 'if (0 && ...)'
+> > and be link-time eliminated.
+> >
+>=20
+> Hi Tom,
+>=20
+> Yes it is needed since I moved show_splash() inside the #if
+> CONFIG_IS_ENABLED(VIDEO_LOGO) guard above.
+> I can go back to the runtime check, and keep show_splash() outside of
+> the guard, but I'll have to use video_get_u_boot_logo() instead of
+> relying on SPLASH_START(u_boot_logo);
+>=20
+> What do you prefer?
 
-Signed-off-by: Rahul Pathak <rahul.pathak@oss.qualcomm.com>
-Signed-off-by: Charles Perry <charles.perry@microchip.com>
----
-Changes in v3:
- - Add this patch
----
- cmd/riscv/Makefile                    |   1 +
- drivers/firmware/rpmi/Kconfig         |   7 +
- drivers/firmware/rpmi/rpmi-sbi-mpxy.c | 392 +++++++++++++++++++++++++-
- 3 files changed, 396 insertions(+), 4 deletions(-)
+Ah, I see now, that wasn't clear to me from the context. Looking at 1/2
+and then 2/2 now, can we just remove show_splash() and call
+video_bmp_display directly? That means not guarding SPLASH_START but
+again it should optimize away. I do complain about how if
+(CONFIG_IS_ENABLED(...)) isn't always great, but I think mixing that and
+#if together just reads awkwardly too. So if we can't restructure the
+code to keep if (CONFIG_IS_ENABLED(...)) then we should #if the whole
+block there. Thanks.
 
-diff --git a/cmd/riscv/Makefile b/cmd/riscv/Makefile
-index 1e6ac364e341..40caf68d0df7 100644
---- a/cmd/riscv/Makefile
-+++ b/cmd/riscv/Makefile
-@@ -2,3 +2,4 @@
- 
- obj-$(CONFIG_CMD_EXCEPTION) += exception.o
- obj-$(CONFIG_CMD_SBI) += sbi.o
-+obj-$(CONFIG_CMD_MPXY) += sbi_mpxy_cmd.o
-diff --git a/drivers/firmware/rpmi/Kconfig b/drivers/firmware/rpmi/Kconfig
-index b462d3693987..c6a6b6fe61de 100644
---- a/drivers/firmware/rpmi/Kconfig
-+++ b/drivers/firmware/rpmi/Kconfig
-@@ -18,6 +18,13 @@ config RPMI_SBI_MPXY
- 	  specification for the MPXY extension is available at:
- 	  https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
- 
-+config CMD_MPXY
-+	bool "mpxy command"
-+	depends on RPMI_SBI_MPXY
-+	help
-+	  Enable the 'mpxy' U-Boot command for listing MPXY channels,
-+	  reading/writing arbitrary channel attributes and sending raw messages.
-+
- config RPMI_SHMEM
- 	bool "RPMI over shared memory transport"
- 	depends on RPMI_FIRMWARE
-diff --git a/drivers/firmware/rpmi/rpmi-sbi-mpxy.c b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
-index 9ccca0eb59b2..d83906f5539b 100644
---- a/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
-+++ b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
-@@ -1,6 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-  * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
-+ * Copyright (c) 2026, Rahul Pathak <rahul.pathak@oss.qualcomm.com>
-  */
- 
- #define LOG_CATEGORY UCLASS_RPMI
-@@ -60,10 +61,10 @@ enum sbi_mpxy_attribute_id {
- 
- /* RPMI message protocol specific MPXY attributes */
- enum sbi_mpxy_rpmi_attribute_id {
--	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID,
--	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION,
--	SBI_MPXY_RPMI_ATTR_IMPL_ID,
--	SBI_MPXY_RPMI_ATTR_IMPL_VERSION,
-+	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID = 0x00,
-+	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION = 0x01,
-+	SBI_MPXY_RPMI_ATTR_IMPL_ID = 0x02,
-+	SBI_MPXY_RPMI_ATTR_IMPL_VERSION = 0x03,
- 	SBI_MPXY_RPMI_ATTR_MAX_ID
- };
- 
-@@ -87,6 +88,13 @@ struct rpmi_sbi_mpxy {
- 	struct sbi_mpxy_chan_desc *channel_descs;
- };
- 
-+static struct rpmi_sbi_mpxy *g_mpxy;
-+
-+static __maybe_unused struct rpmi_sbi_mpxy *mpxy_get_global(void)
-+{
-+	return g_mpxy;
-+}
-+
- static int rpmi_sbi_mpxy_read_attrs(struct rpmi_sbi_mpxy *mpxy, u32 channel_id,
- 				    u32 base_attrid, u32 attr_count,
- 				    u32 *attrs_buf)
-@@ -105,6 +113,24 @@ static int rpmi_sbi_mpxy_read_attrs(struct rpmi_sbi_mpxy *mpxy, u32 channel_id,
- 	return 0;
- }
- 
-+static __maybe_unused int
-+rpmi_sbi_mpxy_write_attrs(struct rpmi_sbi_mpxy *mpxy, u32 channel_id,
-+			  u32 base_attrid, u32 attr_count, u32 *attrs_buf)
-+{
-+	struct sbiret sret;
-+	int i;
-+
-+	for (i = 0; i < attr_count; i++)
-+		((__le32 *)mpxy->shmem)[i] = cpu_to_le32(attrs_buf[i]);
-+
-+	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_WRITE_ATTRS, channel_id,
-+			 base_attrid, attr_count, 0, 0, 0);
-+	if (sret.error)
-+		return sbi_to_linux_error(sret.error);
-+
-+	return 0;
-+}
-+
- static int rpmi_sbi_mpxy_send_message(void *shmem, u32 mpxy_fid, u32 channel_id,
- 				      u32 msg_id, const void *tx,
- 				      unsigned long tx_len, void *rx,
-@@ -368,6 +394,8 @@ static int rpmi_sbi_mpxy_probe(struct udevice *dev)
- 			    desc->attrs[SBI_MPXY_ATTR_MSG_MAX_LEN]);
- 	}
- 
-+	g_mpxy = mpxy;
-+
- 	return 0;
- 
- err:
-@@ -408,3 +436,359 @@ U_BOOT_DRIVER(rpmi_sbi_mpxy) = {
- 	.ops = &rpmi_sbi_mpxy_ops,
- 	.flags = DM_FLAG_PRE_RELOC,
- };
-+
-+#if CONFIG_IS_ENABLED(CMD_MPXY) && !CONFIG_IS_ENABLED(XPL_BUILD)
-+
-+#include <command.h>
-+#include <hexdump.h>
-+
-+static const char *mpxy_proto_to_str(u32 proto_id)
-+{
-+	switch (proto_id) {
-+	case SBI_MPXY_MSGPROTO_RPMI_ID:
-+		return "RPMI";
-+	default:
-+		return "Unknown";
-+	}
-+}
-+
-+/**
-+ * mpxy list
-+ *
-+ * List the mpxy channels
-+ */
-+static int do_mpxy_list(struct cmd_tbl *cmdtp, int flag, int argc,
-+			char *const argv[])
-+{
-+	struct rpmi_sbi_mpxy *mpxy = mpxy_get_global();
-+	struct sbi_mpxy_chan_desc *chan;
-+	u32 proto;
-+	int i;
-+
-+	if (!mpxy)
-+		return CMD_RET_FAILURE;
-+
-+	for (i = 0; i < mpxy->channel_count; i++) {
-+		chan = &mpxy->channel_descs[i];
-+		proto = chan->attrs[SBI_MPXY_ATTR_MSG_PROT_ID];
-+		printf("Channel 0x%x: proto_id=0x%x (%s), ver=0x%x\n", chan->id,
-+		       proto, mpxy_proto_to_str(proto),
-+		       chan->attrs[SBI_MPXY_ATTR_MSG_PROT_VER]);
-+	}
-+
-+	printf("sbi_mpxy: found %d channels\n", mpxy->channel_count);
-+	return CMD_RET_SUCCESS;
-+}
-+
-+static void mpxy_print_capability(u32 val)
-+{
-+	static const struct {
-+		u32 bit;
-+		const char *name;
-+	} caps[] = {
-+		{ SBI_MPXY_CHAN_CAP_MSI, "MSI" },
-+		{ SBI_MPXY_CHAN_CAP_SSE, "SSE_EVENT" },
-+		{ SBI_MPXY_CHAN_CAP_EVENTS_STATE, "EVENTS_STATE" },
-+		{ SBI_MPXY_CHAN_CAP_SEND_WITH_RESP, "SEND_WITH_RESP" },
-+		{ SBI_MPXY_CHAN_CAP_SEND_WITHOUT_RESP, "SEND_WITHOUT_RESP" },
-+		{ SBI_MPXY_CHAN_CAP_GET_NOTIFICATIONS, "GET_NOTIFICATIONS" },
-+	};
-+
-+	bool any = false;
-+	int i;
-+
-+	printf(" (");
-+
-+	if (!val) {
-+		printf("none)\n");
-+		return;
-+	}
-+
-+	for (i = 0; i < ARRAY_SIZE(caps); i++) {
-+		if (val & caps[i].bit) {
-+			if (any)
-+				printf("|");
-+			printf("%s", caps[i].name);
-+			any = true;
-+		}
-+	}
-+	printf(")\n");
-+}
-+
-+/* Decode well-known field values for selected standard attributes */
-+static void mpxy_print_std_attr(u32 attr_id, u32 val)
-+{
-+	/* Standard MPXY attribute names, indexed by attr_id */
-+	static const char *const mpxy_std_attr_names[] = {
-+		[SBI_MPXY_ATTR_MSG_PROT_ID] = "MSG_PROT_ID",
-+		[SBI_MPXY_ATTR_MSG_PROT_VER] = "MSG_PROT_VER",
-+		[SBI_MPXY_ATTR_MSG_MAX_LEN] = "MSG_MAX_LEN",
-+		[SBI_MPXY_ATTR_MSG_SEND_TIMEOUT] = "MSG_SEND_TIMEOUT",
-+		[SBI_MPXY_ATTR_MSG_COMPLETION_TIMEOUT] =
-+			"MSG_COMPLETION_TIMEOUT",
-+		[SBI_MPXY_ATTR_CHANNEL_CAPABILITY] = "CHANNEL_CAPABILITY",
-+		[SBI_MPXY_ATTR_SSE_EVENT_ID] = "SSE_EVENT_ID",
-+		[SBI_MPXY_ATTR_MSI_CONTROL] = "MSI_CONTROL",
-+		[SBI_MPXY_ATTR_MSI_ADDR_LO] = "MSI_ADDR_LO",
-+		[SBI_MPXY_ATTR_MSI_ADDR_HI] = "MSI_ADDR_HI",
-+		[SBI_MPXY_ATTR_MSI_DATA] = "MSI_DATA",
-+		[SBI_MPXY_ATTR_EVENTS_STATE_CONTROL] = "EVENTS_STATE_CONTROL",
-+	};
-+
-+	printf("  [0x%02x] %-28s: 0x%08x", attr_id,
-+	       mpxy_std_attr_names[attr_id], val);
-+
-+	switch (attr_id) {
-+	case SBI_MPXY_ATTR_MSG_PROT_ID:
-+		printf(" (%s)\n", mpxy_proto_to_str(val));
-+		break;
-+	case SBI_MPXY_ATTR_MSG_PROT_VER:
-+		printf(" (v%u.%u)\n", (val >> 16) & 0xffff, val & 0xffff);
-+		break;
-+	case SBI_MPXY_ATTR_MSG_MAX_LEN:
-+		printf(" (%u bytes)\n", val);
-+		break;
-+	case SBI_MPXY_ATTR_MSG_SEND_TIMEOUT:
-+	case SBI_MPXY_ATTR_MSG_COMPLETION_TIMEOUT:
-+		printf(" (%u ms)\n", val);
-+		break;
-+	case SBI_MPXY_ATTR_CHANNEL_CAPABILITY:
-+		mpxy_print_capability(val);
-+		break;
-+	default:
-+		printf("\n");
-+		break;
-+	}
-+}
-+
-+static const char *mpxy_rpmi_proto_attr_name(u32 attr_id)
-+{
-+	switch (attr_id) {
-+	case SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID:
-+		return "SERVICEGROUP_ID";
-+	case SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION:
-+		return "SERVICEGROUP_VERSION";
-+	case SBI_MPXY_RPMI_ATTR_IMPL_ID:
-+		return "IMPLEMENTATION_ID";
-+	case SBI_MPXY_RPMI_ATTR_IMPL_VERSION:
-+		return "IMPLEMENTATION_VER";
-+	default:
-+		return "UNKNOWN";
-+	};
-+}
-+
-+static void mpxy_print_proto_attr(u32 attr_id, u32 val, bool is_rpmi)
-+{
-+	u32 rpmi_attr_id = attr_id - SBI_MPXY_ATTR_MSGPROTO_ATTR_START;
-+	const char *name = is_rpmi ? mpxy_rpmi_proto_attr_name(rpmi_attr_id) :
-+				     "UNKNOWN";
-+
-+	printf("  [0x%08x] %-24s: 0x%08x", attr_id, name, val);
-+
-+	if (is_rpmi &&
-+	    (rpmi_attr_id == SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION ||
-+	     rpmi_attr_id == SBI_MPXY_RPMI_ATTR_IMPL_VERSION)) {
-+		printf(" (v%u.%u)\n", (val >> 16) & 0xffff, val & 0xffff);
-+	} else {
-+		printf("\n");
-+	}
-+}
-+
-+/**
-+ * mpxy readattr <channel_id> <attr_id>
-+ *
-+ * Read the attribute on a channel
-+ */
-+static int do_mpxy_readattr(struct cmd_tbl *cmdtp, int flag, int argc,
-+			    char *const argv[])
-+{
-+	struct rpmi_sbi_mpxy *mpxy = mpxy_get_global();
-+	u32 chan_id, attr_id, attr_val;
-+	int ret;
-+
-+	if (argc < 3)
-+		return CMD_RET_USAGE;
-+
-+	if (!mpxy)
-+		return CMD_RET_FAILURE;
-+
-+	chan_id = simple_strtoul(argv[1], NULL, 0);
-+	attr_id = simple_strtoul(argv[2], NULL, 0);
-+
-+	ret = rpmi_sbi_mpxy_read_attrs(mpxy, chan_id, attr_id, 1, &attr_val);
-+	if (ret) {
-+		printf("Read attr 0x%x on channel 0x%x failed (%d)\n", attr_id,
-+		       chan_id, ret);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	printf("Channel 0x%x: attr[0x%x] = 0x%x\n", chan_id, attr_id, attr_val);
-+	return CMD_RET_SUCCESS;
-+}
-+
-+/**
-+ * mpxy readattrall <channel_id>
-+ */
-+static int do_mpxy_readattr_all(struct cmd_tbl *cmdtp, int flag, int argc,
-+				char *const argv[])
-+{
-+	struct rpmi_sbi_mpxy *mpxy = mpxy_get_global();
-+	u32 chan_id, attr_val[SBI_MPXY_ATTR_STD_ATTR_MAX_IDX];
-+	bool is_rpmi;
-+	int i, ret;
-+
-+	if (argc < 2)
-+		return CMD_RET_USAGE;
-+
-+	if (!mpxy)
-+		return CMD_RET_FAILURE;
-+
-+	chan_id = simple_strtoul(argv[1], NULL, 0);
-+
-+	ret = rpmi_sbi_mpxy_read_attrs(mpxy, chan_id, SBI_MPXY_ATTR_MSG_PROT_ID,
-+				       SBI_MPXY_ATTR_STD_ATTR_MAX_IDX,
-+				       attr_val);
-+	if (ret) {
-+		printf("Read attr on channel 0x%x failed (%d)\n", chan_id, ret);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	/* Standard attributes */
-+	printf("Channel 0x%x standard attributes:\n", chan_id);
-+	for (i = 0; i < SBI_MPXY_ATTR_STD_ATTR_MAX_IDX; i++)
-+		mpxy_print_std_attr(i, attr_val[i]);
-+
-+	/* Protocol-specific attributes */
-+	printf("Channel 0x%x protocol attributes:\n", chan_id);
-+
-+	for (i = SBI_MPXY_ATTR_MSGPROTO_ATTR_START;
-+	     i < SBI_MPXY_ATTR_MSGPROTO_ATTR_END; i++) {
-+		ret = rpmi_sbi_mpxy_read_attrs(mpxy, chan_id, i, 1,
-+					       &attr_val[0]);
-+		if (ret)
-+			break;
-+
-+		is_rpmi = mpxy->channel_descs[chan_id]
-+				  .attrs[SBI_MPXY_ATTR_MSG_PROT_ID] ==
-+			  SBI_MPXY_MSGPROTO_RPMI_ID;
-+		mpxy_print_proto_attr(i, attr_val[0], is_rpmi);
-+	}
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+/**
-+ * mpxy writeattr <channel_id> <attr_id> <value>
-+ */
-+static int do_mpxy_writeattr(struct cmd_tbl *cmdtp, int flag, int argc,
-+			     char *const argv[])
-+{
-+	struct rpmi_sbi_mpxy *mpxy = mpxy_get_global();
-+	u32 chan_id, attr_id, attr_val;
-+	int ret;
-+
-+	if (argc < 4)
-+		return CMD_RET_USAGE;
-+
-+	if (!mpxy)
-+		return CMD_RET_FAILURE;
-+
-+	chan_id = simple_strtoul(argv[1], NULL, 0);
-+	attr_id = simple_strtoul(argv[2], NULL, 0);
-+	attr_val = simple_strtoul(argv[3], NULL, 0);
-+
-+	ret = rpmi_sbi_mpxy_write_attrs(mpxy, chan_id, attr_id, 1, &attr_val);
-+	if (ret) {
-+		printf("Write attr 0x%x on channel 0x%x failed (%d)\n", attr_id,
-+		       chan_id, ret);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	printf("Channel 0x%x: attr[0x%x] written 0x%x\n", chan_id, attr_id,
-+	       attr_val);
-+	return CMD_RET_SUCCESS;
-+}
-+
-+/**
-+ * mpxy send <channel_id> <msg_id> [payload_word ...]
-+ *
-+ * For RPMI, msg_id is the service_id. Payload words follow.
-+ */
-+static int do_mpxy_send(struct cmd_tbl *cmdtp, int flag, int argc,
-+			char *const argv[])
-+{
-+	struct rpmi_sbi_mpxy *mpxy = mpxy_get_global();
-+	u32 tx[64];
-+	u32 rx[64];
-+	unsigned long tx_words, rx_bytes;
-+	u32 chan_id, service_id;
-+	int i, ret;
-+
-+	if (argc < 3)
-+		return CMD_RET_USAGE;
-+
-+	if (!mpxy)
-+		return CMD_RET_FAILURE;
-+
-+	chan_id = simple_strtoul(argv[1], NULL, 0);
-+	service_id = simple_strtoul(argv[2], NULL, 0);
-+	tx_words = argc - 3;
-+
-+	if (tx_words > ARRAY_SIZE(tx)) {
-+		printf("Too many words (max %ld)\n", ARRAY_SIZE(tx));
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	for (i = 0; i < tx_words; i++)
-+		tx[i] = simple_strtoul(argv[3 + i], NULL, 0);
-+
-+	ret = rpmi_sbi_mpxy_send_message(mpxy->shmem,
-+					 SBI_EXT_MPXY_SEND_MSG_WITH_RESP,
-+					 chan_id, service_id, tx, tx_words * 4,
-+					 rx, sizeof(rx), &rx_bytes);
-+	if (ret) {
-+		printf("Send on channel 0x%x failed (%d)\n", chan_id, ret);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	printf("Response (%ld word(s)):\n", rx_bytes / 4);
-+	print_hex_dump(" ", DUMP_PREFIX_OFFSET, 4, 4, rx, rx_bytes, true);
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+/**
-+ * Subcommand table and top-level dispatch
-+ */
-+static struct cmd_tbl cmd_mpxy_sub[] = {
-+	U_BOOT_CMD_MKENT(list, 1, 0, do_mpxy_list, "", ""),
-+	U_BOOT_CMD_MKENT(readattr, 3, 0, do_mpxy_readattr, "", ""),
-+	U_BOOT_CMD_MKENT(readattrall, 2, 0, do_mpxy_readattr_all, "", ""),
-+	U_BOOT_CMD_MKENT(writeattr, 4, 0, do_mpxy_writeattr, "", ""),
-+	U_BOOT_CMD_MKENT(send, CONFIG_SYS_MAXARGS, 0, do_mpxy_send, "", ""),
-+};
-+
-+static int do_mpxy(struct cmd_tbl *cmdtp, int flag, int argc,
-+		   char *const argv[])
-+{
-+	struct cmd_tbl *c;
-+
-+	if (argc < 2)
-+		return CMD_RET_USAGE;
-+
-+	c = find_cmd_tbl(argv[1], cmd_mpxy_sub, ARRAY_SIZE(cmd_mpxy_sub));
-+	if (!c)
-+		return CMD_RET_USAGE;
-+
-+	return c->cmd(cmdtp, flag, argc - 1, argv + 1);
-+}
-+
-+U_BOOT_CMD(
-+	mpxy, CONFIG_SYS_MAXARGS, 0, do_mpxy, "SBI MPXY channel debug commands",
-+	"list                              - list discovered channels\n"
-+	"mpxy readattr    <chan> <attr>         - read one attribute\n"
-+	"mpxy readattrall <chan>                - read all attributes\n"
-+	"mpxy writeattr   <chan> <attr> <val>   - write an attribute\n"
-+	"mpxy send        <chan> <msg_id> [payload_word ...]  - send message\n");
-+
-+#endif // CONFIG_CMD_MPXY
--- 
-2.52.0
+--=20
+Tom
 
+--6EgLPVWYFwvhNDKL
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCapgx9wAKCRAr4qD1Cr/k
+CotfAP0XE0rAG4K7jsNpGbQPuQJzDpdT4ws/bXdylZwTKCBxwQD9GdGqv/0vokYk
+LAS3he5QQDfs+0axuSvHy7lE2ZBNGQM=
+=CIft
+-----END PGP SIGNATURE-----
+
+--6EgLPVWYFwvhNDKL--
