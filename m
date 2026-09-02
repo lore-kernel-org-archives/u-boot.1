@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8591C624D6
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:18:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D02B6C624D6
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 14:18:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B342780B34;
-	Wed,  2 Sep 2026 14:18:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9E7E380FAC;
+	Wed,  2 Sep 2026 14:18:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Pws6VS7U3nEx; Wed,  2 Sep 2026 14:18:42 +0000 (UTC)
+ id 4q3ZR3m1Kdg7; Wed,  2 Sep 2026 14:18:53 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788358722;
-	bh=efq+fs9PjGc2Mr5j5bx6C81yP79QVtBiy2oDt6+W+h4=;
+	d=lists.u-boot-project.org; s=default; t=1788358733;
+	bh=b7hC81Cbh1E3W7XAE0HD1BHnR/J1DJJLlDvdrBp/c0U=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NLJ7NRylOpRc3mJSXPrLKtrZsdwdWw2V5HSHaw75LpvqWz9vm3n0QpAupES17eGi7
-	 ucceAnjOR+N9PTIm0La1EgGHQ5tCecBaKCRh2YM61iSbNqy2nHhtQcxgqDMfYAPRfA
-	 zHEI5GL0W9n45eUPQBv3VYxuuOYaThf7i631nZdOvI9QdM0SSXkgKh6YW5IzW6lg1D
-	 DAJgTgEA+McpRb7LmbmNEcHjtL8cl8LfbGDHJR+e3IjvUy7nrPvjXh8v95m8gpci3R
-	 DHFS9U3zZr9rGhkrxgadN6T0W2Y16BaaqAEEzz4V486tqw5rddnKDt2TjlrKG7U87g
-	 qK4ixjHHclCog==
+	b=wT9A3Q9dMpgh9Q1C2TLh4D6sbxmNyL1CHWpyby881KHvoHsgJ0n0GZ5DBZVI6JiNk
+	 zHVe64rpMnbFD3PK0x/ShH9R4+TdjlgSMnVqOjvAODKpyxO90NjCBOILCdslQDiWth
+	 gLSomPONdBzmkvPphkNDgYF/0EYfIHmLWDphER7nT4MxtqMHmk4Du3TWf7+EogMM01
+	 3heDKEac/ri5gKy2li3svvAx6cmw2An7Onm7pM1r2ma2AsjKoyLZ7HqeeSiPGfNyQu
+	 sOCc+oU7pocOFcCday+/KNwac7N+GbC/4gsjVMmVrFsId/yqaVCvscsvzTClwfkKBt
+	 bMhQp4ZQuDfzQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id ECB8580FB1;
-	Wed,  2 Sep 2026 14:18:41 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id E8802230
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3799380FAE;
+	Wed,  2 Sep 2026 14:18:53 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D1783363
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CF057400A6
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:40 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B7DD6400A6
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uZIs32ZThxjW for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 14:18:39 +0000 (UTC)
+ id uaCE-p5jUY5L for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 14:18:50 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
  helo=phobos.denx.de; envelope-from=prvs=698db811e=charles.perry@microchip.com;
  receiver=<UNKNOWN> 
@@ -48,63 +48,60 @@ Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
 Authentication-Results: smtp2.osuosl.org; spf=fail smtp.mailfrom=microchip.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com
- header.a=rsa-sha256 header.s=mchp header.b=mUbPOur+
+ header.a=rsa-sha256 header.s=mchp header.b=2FXxQ9iQ
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 196794006F
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:38 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 161EB4006F
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 14:18:49 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B49A8424C; Wed,  2 Sep 2026 16:18:36 +0200 (CEST)
+ id 779158424C; Wed,  2 Sep 2026 16:18:48 +0200 (CEST)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
+ [68.232.153.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 104D483EEF
- for <u-boot@lists.denx.de>; Wed,  2 Sep 2026 16:18:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48A6383EEF
+ for <u-boot@lists.denx.de>; Wed,  2 Sep 2026 16:18:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=698db811e=Charles.Perry@microchip.com
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
  unprotected) header.d=microchip.com header.i=@microchip.com
- header.b="mUbPOur+"; dkim-atps=neutral
+ header.b="2FXxQ9iQ"; dkim-atps=neutral
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1788358713; x=1819894713;
+ t=1788358725; x=1819894725;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=IJEDA+ka4ih6f3yeSxebGam9emzpMY+6OnHoVaNav88=;
- b=mUbPOur+Cz9l56pMx76EUJcUQDHlcaldgDn1Adwgvsh/6tuEXiJ05hIx
- V5noJxmGS2LbSGpFl7v5BCaNKMr3cXzujDaYwRfMtA7MaBDpH4hswaAO1
- 7i1jEvqvz6ko9X8DEvy7ssuqAV3ZFYJzm94Hg1EeLo42+AK5xjwAITFv0
- 0nxBPYHd5BHG5kb/TNBvZaNTLFDp1BzLDGaxB96EAvpvUqfp9HVF4Ue5S
- 4qS0gZVwtZZ5GniaFLkl5LmpbvaBNHpr7x6g6AIG27xwYqNe7v2mSL0at
- m90TMn5RgzC9+eRD46Ckwsf56DCTgiHmcjeVhjIpFSvFx81N/7Jsyo3UM w==;
-X-CSE-ConnectionGUID: TXg1PouqSgm8ThQ+Ug16aQ==
-X-CSE-MsgGUID: lTw+TYzIR8q+aJsciXrW/w==
-X-IronPort-AV: E=Sophos;i="6.25,258,1779174000"; d="scan'208";a="63361223"
+ bh=ahuxu1ye6+Z4l5ywK7ic4Z4Luprt0D9kQnaeT+5QLnw=;
+ b=2FXxQ9iQe13mFLl6sVxln9knBjk4iX2ExIkA1925unsMRqGwcAQAXvTh
+ yksPM/WigfJOlh83LBKElLBKTYpW90fUkODKqcDd6xdyB1Byhny7jipuA
+ kSu3CtLtmMJ8CXSOdH8KgkurKiDc7GXzJ4LaUTcWWJho1w5A22Y8rcOlz
+ DdcrxUzpuT5NKdkiZPphOmv0MwMCv0sNEEFe/HlRUnGReCsWtaZgSACxy
+ XUgPDdXBNcBCOKNNILUVi6tVXQN5cqK+TGE77NKp3AhSEJodowe/LWmou
+ im+PSnyq9Gbh4WOyynUSjoOiECJul5QZY1RHWLgL0VI5tBGNFBqsIoCUW A==;
+X-CSE-ConnectionGUID: 2MjAL5VYTByuuPbssGv9hg==
+X-CSE-MsgGUID: g1tRBYhgQyyZcyvMuanciQ==
+X-IronPort-AV: E=Sophos;i="6.25,258,1779174000"; d="scan'208";a="63050737"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 02 Sep 2026 07:18:30 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Sep 2026 07:18:37 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.87.151) by
+ chn-vm-ex1.mchp-main.com (10.10.87.30) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Wed, 2 Sep 2026 07:18:30 -0700
+ 15.2.2562.45; Wed, 2 Sep 2026 07:18:36 -0700
 Received: from bby-cbu-swbuild03.eng.microchip.com (10.10.85.11) by
  chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Wed, 2 Sep 2026 07:18:29 -0700
+ 15.1.2507.58 via Frontend Transport; Wed, 2 Sep 2026 07:18:36 -0700
 From: Charles Perry <charles.perry@microchip.com>
 To: <u-boot@lists.denx.de>
-CC: <charles.perry@microchip.com>, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Lucien.Jheng <lucienzx159@gmail.com>,
- Michal Simek <michal.simek@amd.com>, Aristo Chen <aristo.chen@canonical.com>, 
- Peng Fan <peng.fan@nxp.com>, Vincent Jardin <vjardin@free.fr>, Rahul Pathak
- <rahul.pathak@oss.qualcomm.com>, Mateusz Furdyna <mateusz.furdyna@nokia.com>, 
+CC: <charles.perry@microchip.com>, Rahul Pathak
+ <rahul.pathak@oss.qualcomm.com>, Tim Ouyang <tim609@andestech.com>, Leo Liang
+ <leo.liang@sifive.com>, Yao Zi <me@ziyao.cc>, Tom Rini <trini@konsulko.com>,
  <u-boot@lists.u-boot-project.org>
-Subject: [PATCH v3 4/5] firmware: rpmi: add a test and a sandbox driver
-Date: Wed, 2 Sep 2026 07:17:30 -0700
-Message-ID: <20260902141744.2422566-5-charles.perry@microchip.com>
+Subject: [PATCH v3 5/5] drivers: firmware: rpmi: Add the mpxy command
+Date: Wed, 2 Sep 2026 07:17:31 -0700
+Message-ID: <20260902141744.2422566-6-charles.perry@microchip.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260902141744.2422566-1-charles.perry@microchip.com>
 References: <20260902141744.2422566-1-charles.perry@microchip.com>
@@ -126,850 +123,488 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Create a new transport layer that sends the messages to a simulated RPMI
-firmware.
+From: Rahul Pathak <rahul.pathak@oss.qualcomm.com>
 
-For now, this only contains a simulation of the clock service group
-which is implemented using code from librpmi [1] and adapted.
+Add the mpxy command which allows listing MPXY channels, reading/writing
+arbitrary channel attributes and sending raw messages.
 
-Also add a test in test/dm that makes use of the RPMI clock driver.
+The mpxy command is useful for interacting with custom RPMI service groups
+that have no associated driver. It can also be useful for debugging and
+testing SBI proxy drivers as well as the PuC firmware.
 
-[1]:
-https://github.com/riscv-software-src/librpmi/blob/3f3c4ca47339a8795432e260f17e1fc5091c9a3a/lib/rpmi_service_group_clock.c
-
+Signed-off-by: Rahul Pathak <rahul.pathak@oss.qualcomm.com>
 Signed-off-by: Charles Perry <charles.perry@microchip.com>
 ---
-Changes in v3: None
-
-Changes in v2:
- - Reorder headers
+Changes in v3:
+ - Add this patch
 ---
- MAINTAINERS                                |   1 +
- arch/sandbox/dts/test.dts                  |  12 +
- configs/sandbox_defconfig                  |   2 +
- drivers/firmware/rpmi/Kconfig              |   3 +-
- drivers/firmware/rpmi/Makefile             |   1 +
- drivers/firmware/rpmi/rpmi-sandbox-clock.c | 446 +++++++++++++++++++++
- drivers/firmware/rpmi/rpmi-sandbox.c       | 156 +++++++
- drivers/firmware/rpmi/rpmi-sandbox.h       |  47 +++
- test/dm/Makefile                           |   1 +
- test/dm/rpmi.c                             |  48 +++
- 10 files changed, 716 insertions(+), 1 deletion(-)
- create mode 100644 drivers/firmware/rpmi/rpmi-sandbox-clock.c
- create mode 100644 drivers/firmware/rpmi/rpmi-sandbox.c
- create mode 100644 drivers/firmware/rpmi/rpmi-sandbox.h
- create mode 100644 test/dm/rpmi.c
+ cmd/riscv/Makefile                    |   1 +
+ drivers/firmware/rpmi/Kconfig         |   7 +
+ drivers/firmware/rpmi/rpmi-sbi-mpxy.c | 392 +++++++++++++++++++++++++-
+ 3 files changed, 396 insertions(+), 4 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 29ee5bd2d5b9..5546c2001d7a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1626,6 +1626,7 @@ S:	Maintained
- F:	drivers/clk/clk_rpmi.c
- F:	drivers/firmware/rpmi/
- F:	include/rpmi*
-+F:	test/dm/rpmi.c
+diff --git a/cmd/riscv/Makefile b/cmd/riscv/Makefile
+index 1e6ac364e341..40caf68d0df7 100644
+--- a/cmd/riscv/Makefile
++++ b/cmd/riscv/Makefile
+@@ -2,3 +2,4 @@
  
- SANDBOX
- M:	Simon Glass <sjg@chromium.org>
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index d24feec54223..d2270e1ac530 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -874,6 +874,18 @@
- 		sm: secure-monitor {
- 			compatible = "sandbox,sm";
- 		};
-+
-+		rpmi: rpmi {
-+			compatible = "sandbox,rpmi-transport";
-+			#mbox-cells = <1>;
-+		};
-+
-+		rpmi_clock: rpmi-clock {
-+			compatible = "riscv,rpmi-clock";
-+			mboxes = <&rpmi 0x8>;
-+			#clock-cells = <1>;
-+			clocks = <&rpmi_clock 0>, <&rpmi_clock 1>, <&rpmi_clock 2>, <&rpmi_clock 3>;
-+		};
- 	};
- 
- 	fpga {
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 79f46317e454..8f504f71c203 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -195,6 +195,7 @@ CONFIG_BUTTON_GPIO=y
- CONFIG_CLK=y
- CONFIG_CLK_K210=y
- CONFIG_CLK_K210_SET_RATE=y
-+CONFIG_CLK_RPMI=y
- CONFIG_SANDBOX_CLK_CCF=y
- CONFIG_CLK_SCMI=y
- CONFIG_CPU=y
-@@ -211,6 +212,7 @@ CONFIG_FASTBOOT_FLASH=y
- CONFIG_FASTBOOT_FLASH_MMC_DEV=0
- CONFIG_ARM_FFA_TRANSPORT=y
- CONFIG_SCMI_FIRMWARE=y
-+CONFIG_RPMI_FIRMWARE=y
- CONFIG_FPGA_ALTERA=y
- CONFIG_FPGA_STRATIX_II=y
- CONFIG_FPGA_STRATIX_V=y
+ obj-$(CONFIG_CMD_EXCEPTION) += exception.o
+ obj-$(CONFIG_CMD_SBI) += sbi.o
++obj-$(CONFIG_CMD_MPXY) += sbi_mpxy_cmd.o
 diff --git a/drivers/firmware/rpmi/Kconfig b/drivers/firmware/rpmi/Kconfig
-index 421a1fa9deba..b462d3693987 100644
+index b462d3693987..c6a6b6fe61de 100644
 --- a/drivers/firmware/rpmi/Kconfig
 +++ b/drivers/firmware/rpmi/Kconfig
+@@ -18,6 +18,13 @@ config RPMI_SBI_MPXY
+ 	  specification for the MPXY extension is available at:
+ 	  https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
+ 
++config CMD_MPXY
++	bool "mpxy command"
++	depends on RPMI_SBI_MPXY
++	help
++	  Enable the 'mpxy' U-Boot command for listing MPXY channels,
++	  reading/writing arbitrary channel attributes and sending raw messages.
++
+ config RPMI_SHMEM
+ 	bool "RPMI over shared memory transport"
+ 	depends on RPMI_FIRMWARE
+diff --git a/drivers/firmware/rpmi/rpmi-sbi-mpxy.c b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
+index 9ccca0eb59b2..d83906f5539b 100644
+--- a/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
++++ b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
 @@ -1,6 +1,7 @@
- config RPMI_FIRMWARE
- 	bool "Enable RPMI support"
--	depends on RISCV && DM && OF_CONTROL
-+	depends on RISCV || SANDBOX
-+	depends on DM && OF_CONTROL
- 	select FIRMWARE
- 	help
- 	  RISC-V Platform Management Interface (RPMI) defines an OS-agnostic
-diff --git a/drivers/firmware/rpmi/Makefile b/drivers/firmware/rpmi/Makefile
-index 4f4bcb929db4..150e98a72df9 100644
---- a/drivers/firmware/rpmi/Makefile
-+++ b/drivers/firmware/rpmi/Makefile
-@@ -1,3 +1,4 @@
- obj-y	+= rpmi-uclass.o
- obj-$(CONFIG_RPMI_SBI_MPXY) += rpmi-sbi-mpxy.o
- obj-$(CONFIG_RPMI_SHMEM) += rpmi-shmem.o
-+obj-$(CONFIG_SANDBOX)	+= rpmi-sandbox.o rpmi-sandbox-clock.o
-diff --git a/drivers/firmware/rpmi/rpmi-sandbox-clock.c b/drivers/firmware/rpmi/rpmi-sandbox-clock.c
-new file mode 100644
-index 000000000000..fa205d067b24
---- /dev/null
-+++ b/drivers/firmware/rpmi/rpmi-sandbox-clock.c
-@@ -0,0 +1,446 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2024 Ventana Micro Systems Inc.
-+ * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
-+ */
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+  * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
++ * Copyright (c) 2026, Rahul Pathak <rahul.pathak@oss.qualcomm.com>
+  */
+ 
+ #define LOG_CATEGORY UCLASS_RPMI
+@@ -60,10 +61,10 @@ enum sbi_mpxy_attribute_id {
+ 
+ /* RPMI message protocol specific MPXY attributes */
+ enum sbi_mpxy_rpmi_attribute_id {
+-	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID,
+-	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION,
+-	SBI_MPXY_RPMI_ATTR_IMPL_ID,
+-	SBI_MPXY_RPMI_ATTR_IMPL_VERSION,
++	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID = 0x00,
++	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION = 0x01,
++	SBI_MPXY_RPMI_ATTR_IMPL_ID = 0x02,
++	SBI_MPXY_RPMI_ATTR_IMPL_VERSION = 0x03,
+ 	SBI_MPXY_RPMI_ATTR_MAX_ID
+ };
+ 
+@@ -87,6 +88,13 @@ struct rpmi_sbi_mpxy {
+ 	struct sbi_mpxy_chan_desc *channel_descs;
+ };
+ 
++static struct rpmi_sbi_mpxy *g_mpxy;
 +
-+#define LOG_CATEGORY UCLASS_RPMI
-+
-+#include <asm/types.h>
-+#include <asm/io.h>
-+#include <asm/byteorder.h>
-+#include <linux/kernel.h>
-+#include <linux/string.h>
-+#include <rpmi.h>
-+#include "rpmi-sandbox.h"
-+
-+struct rpmi_clock {
-+	enum rpmi_clock_type type;
-+	const char *name;
-+	u32 rate_count;
-+	const u64 *rate_array;
-+	u32 transition_latency;
-+	enum rpmi_clock_state state;
-+	u64 rate;
-+};
-+
-+const u64 discrete_rates[] = { 20000000, 333333333, 500000000, 1000000000 };
-+
-+const u64 linear_rates[] = { 50000000, 100000000, 1000000 };
-+
-+#define DISCRETE_CLOCK(name, current_state, current_rate) \
-+	{ RPMI_CLK_TYPE_DISCRETE,                         \
-+	  name,                                           \
-+	  ARRAY_SIZE(discrete_rates),                     \
-+	  discrete_rates,                                 \
-+	  0,                                              \
-+	  current_state,                                  \
-+	  current_rate }
-+
-+#define LINEAR_CLOCK(name, current_state, current_rate)         \
-+	{ RPMI_CLK_TYPE_LINEAR, name, ARRAY_SIZE(linear_rates), \
-+	  linear_rates,		0,    current_state,            \
-+	  current_rate }
-+
-+struct rpmi_clock clock_simulation[] = {
-+	DISCRETE_CLOCK("CLK0", RPMI_CLK_STATE_DISABLED, discrete_rates[0]),
-+	DISCRETE_CLOCK("CLK1", RPMI_CLK_STATE_DISABLED, discrete_rates[1]),
-+	DISCRETE_CLOCK("CLK2", RPMI_CLK_STATE_ENABLED, discrete_rates[2]),
-+	LINEAR_CLOCK("CLK3", RPMI_CLK_STATE_ENABLED, linear_rates[0]),
-+};
-+
-+static u32 clock_count = ARRAY_SIZE(clock_simulation);
-+
-+static struct rpmi_clock *rpmi_get_clock(u32 clkid)
++static __maybe_unused struct rpmi_sbi_mpxy *mpxy_get_global(void)
 +{
-+	if (clkid >= clock_count)
-+		return NULL;
-+
-+	return &clock_simulation[clkid];
++	return g_mpxy;
 +}
 +
-+static enum rpmi_error_codes
-+rpmi_clock_set_rate(u32 clkid, enum rpmi_clock_rate_match match, u64 rate)
+ static int rpmi_sbi_mpxy_read_attrs(struct rpmi_sbi_mpxy *mpxy, u32 channel_id,
+ 				    u32 base_attrid, u32 attr_count,
+ 				    u32 *attrs_buf)
+@@ -105,6 +113,24 @@ static int rpmi_sbi_mpxy_read_attrs(struct rpmi_sbi_mpxy *mpxy, u32 channel_id,
+ 	return 0;
+ }
+ 
++static __maybe_unused int
++rpmi_sbi_mpxy_write_attrs(struct rpmi_sbi_mpxy *mpxy, u32 channel_id,
++			  u32 base_attrid, u32 attr_count, u32 *attrs_buf)
 +{
-+	struct rpmi_clock *clk = rpmi_get_clock(clkid);
-+
-+	if (!clk)
-+		return RPMI_ERR_INVALID_PARAM;
-+
-+	clk->rate = rate;
-+
-+	return RPMI_SUCCESS;
-+}
-+
-+static enum rpmi_error_codes rpmi_clock_set_state(u32 clkid,
-+						  enum rpmi_clock_state state)
-+{
-+	struct rpmi_clock *clk = rpmi_get_clock(clkid);
-+
-+	if (!clk)
-+		return RPMI_ERR_INVALID_PARAM;
-+
-+	clk->state = state;
-+
-+	return RPMI_SUCCESS;
-+}
-+
-+static enum rpmi_error_codes rpmi_clock_get_state(u32 clkid,
-+						  enum rpmi_clock_state *state)
-+{
-+	struct rpmi_clock *clk = rpmi_get_clock(clkid);
-+
-+	if (!clk || !state)
-+		return RPMI_ERR_INVALID_PARAM;
-+
-+	*state = clk->state;
-+
-+	return RPMI_SUCCESS;
-+}
-+
-+static enum rpmi_error_codes rpmi_clock_get_rate(u32 clkid, u64 *rate)
-+{
-+	struct rpmi_clock *clk = rpmi_get_clock(clkid);
-+
-+	if (!clk || !rate)
-+		return RPMI_ERR_INVALID_PARAM;
-+
-+	*rate = clk->rate;
-+
-+	return RPMI_SUCCESS;
-+}
-+
-+static enum rpmi_error_codes
-+rpmi_clock_sg_get_num_clocks(struct rpmi_transport *trans, u16 request_datalen,
-+			     const u8 *request_data, u16 *response_datalen,
-+			     u8 *response_data)
-+{
-+	u32 *resp = (void *)response_data;
-+
-+	resp[0] = cpu_to_le32((u32)RPMI_SUCCESS);
-+	resp[1] = cpu_to_le32(clock_count);
-+
-+	*response_datalen = 2 * sizeof(*resp);
-+
-+	return RPMI_SUCCESS;
-+}
-+
-+static enum rpmi_error_codes
-+rpmi_clock_sg_get_attributes(struct rpmi_transport *trans, u16 request_datalen,
-+			     const u8 *request_data, u16 *response_datalen,
-+			     u8 *response_data)
-+{
-+	struct rpmi_clock *clk;
-+	u16 resp_dlen;
-+	u32 flags = 0;
-+
-+	u32 *resp = (void *)response_data;
-+
-+	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
-+
-+	clk = rpmi_get_clock(clkid);
-+	if (!clk) {
-+		resp_dlen = sizeof(*resp);
-+		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
-+		goto done;
-+	}
-+
-+	/* encode CLOCK_FORMAT */
-+	if (clk->type == RPMI_CLK_TYPE_LINEAR)
-+		flags |= 1;
-+
-+	resp[3] = cpu_to_le32(clk->transition_latency);
-+	resp[2] = cpu_to_le32(clk->rate_count);
-+	resp[1] = cpu_to_le32(flags);
-+	resp[0] = cpu_to_le32((u32)RPMI_SUCCESS);
-+
-+	if (clk->name)
-+		strlcpy((char *)&resp[4], clk->name, RPMI_CLK_NAME_LEN);
-+
-+	resp_dlen = 8 * sizeof(*resp);
-+
-+done:
-+	*response_datalen = resp_dlen;
-+
-+	return RPMI_SUCCESS;
-+}
-+
-+static enum rpmi_error_codes
-+rpmi_clock_sg_get_supp_rates(struct rpmi_transport *trans, u16 request_datalen,
-+			     const u8 *request_data, u16 *response_datalen,
-+			     u8 *response_data)
-+{
-+	u32 i = 0, j = 0;
-+	u32 rate_count;
-+	u32 resp_dlen = 0, clk_rate_idx = 0;
-+	u32 max_rates, remaining = 0, returned = 0;
-+	const u64 *rate_array;
-+	struct rpmi_clock *clk;
-+
-+	u32 *resp = (void *)response_data;
-+
-+	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
-+
-+	clk = rpmi_get_clock(clkid);
-+	if (clk) {
-+		resp_dlen = sizeof(*resp);
-+		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
-+		goto done;
-+	}
-+
-+	rate_count = clk->rate_count;
-+	rate_array = clk->rate_array;
-+	if (!rate_count || !rate_array) {
-+		resp_dlen = sizeof(*resp);
-+		resp[0] = cpu_to_le32((u32)RPMI_ERR_NOTSUPP);
-+		goto done;
-+	}
-+
-+	clk_rate_idx = cpu_to_le32(((const u32 *)request_data)[1]);
-+
-+	if (clk->type == RPMI_CLK_TYPE_LINEAR) {
-+		/* max, min and step */
-+		for (i = 0; i < 3; i++) {
-+			resp[4 + 2 * i] = cpu_to_le32((u32)(rate_array[i]));
-+			resp[5 + 2 * i] =
-+				cpu_to_le32((u32)(rate_array[i] >> 32));
-+		}
-+		remaining = 0;
-+		returned = 3;
-+	} else if (clk->type == RPMI_CLK_TYPE_DISCRETE) {
-+		if (clk_rate_idx > rate_count) {
-+			resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
-+			resp_dlen = sizeof(*resp);
-+			goto done;
-+		}
-+
-+		/* max rates a rpmi message can accommodate */
-+		max_rates = (trans->msg_data_size - (4 * sizeof(*resp))) /
-+			    sizeof(u64);
-+		remaining = rate_count - clk_rate_idx;
-+		if (remaining > max_rates)
-+			returned = max_rates;
-+		else
-+			returned = remaining;
-+
-+		for (i = clk_rate_idx, j = 0;
-+		     i <= (clk_rate_idx + returned - 1); i++, j++) {
-+			resp[4 + 2 * j] = cpu_to_le32((u32)(rate_array[i]));
-+			resp[5 + 2 * j] =
-+				cpu_to_le32((u32)(rate_array[i] >> 32));
-+		}
-+
-+		remaining = rate_count - (clk_rate_idx + returned);
-+	} else {
-+		return RPMI_ERR_FAILED;
-+	}
-+
-+	resp[3] = cpu_to_le32((u32)returned);
-+	resp[2] = cpu_to_le32((u32)remaining);
-+	/* No flags currently supported */
-+	resp[1] = cpu_to_le32(0);
-+	resp[0] = cpu_to_le32((u32)RPMI_SUCCESS);
-+
-+	resp_dlen = (4 * sizeof(*resp)) + (returned * sizeof(u64));
-+
-+done:
-+	*response_datalen = resp_dlen;
-+
-+	return RPMI_SUCCESS;
-+}
-+
-+static enum rpmi_error_codes
-+rpmi_clock_sg_set_config(struct rpmi_transport *trans, u16 request_datalen,
-+			 const u8 *request_data, u16 *response_datalen,
-+			 u8 *response_data)
-+{
-+	enum rpmi_error_codes status;
-+	u32 cfg, new_state;
-+	u32 *resp = (void *)response_data;
-+
-+	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
-+
-+	if (clkid >= clock_count) {
-+		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
-+		goto done;
-+	}
-+
-+	cfg = cpu_to_le32(((const u32 *)request_data)[1]);
-+
-+	/* get command from 0th index bit in config field */
-+	new_state = (cfg & 0b1) ? RPMI_CLK_STATE_ENABLED :
-+				  RPMI_CLK_STATE_DISABLED;
-+
-+	/* change clock config synchronously */
-+	status = rpmi_clock_set_state(clkid, new_state);
-+	resp[0] = cpu_to_le32((u32)status);
-+
-+done:
-+	*response_datalen = sizeof(*resp);
-+
-+	return RPMI_SUCCESS;
-+}
-+
-+static enum rpmi_error_codes
-+rpmi_clock_sg_get_config(struct rpmi_transport *trans, u16 request_datalen,
-+			 const u8 *request_data, u16 *response_datalen,
-+			 u8 *response_data)
-+{
-+	u16 resp_dlen;
-+	enum rpmi_error_codes status;
-+	enum rpmi_clock_state state;
-+	u32 *resp = (void *)response_data;
-+
-+	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
-+
-+	if (clkid >= clock_count) {
-+		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
-+		resp_dlen = sizeof(*resp);
-+		goto done;
-+	}
-+
-+	status = rpmi_clock_get_state(clkid, &state);
-+	if (status) {
-+		resp[0] = cpu_to_le32((u32)status);
-+		resp_dlen = sizeof(*resp);
-+		goto done;
-+	}
-+
-+	/** RPMI config field only return enabled or disabled state */
-+	state = (state == RPMI_CLK_STATE_ENABLED) ? 1 : 0;
-+
-+	resp[1] = cpu_to_le32((u32)state);
-+	resp[0] = cpu_to_le32((u32)RPMI_SUCCESS);
-+
-+	resp_dlen = 2 * sizeof(*resp);
-+
-+done:
-+	*response_datalen = resp_dlen;
-+	return RPMI_SUCCESS;
-+}
-+
-+static enum rpmi_error_codes
-+rpmi_clock_sg_set_rate(struct rpmi_transport *trans, u16 request_datalen,
-+		       const u8 *request_data, u16 *response_datalen,
-+		       u8 *response_data)
-+{
-+	enum rpmi_error_codes status;
-+	enum rpmi_clock_rate_match rate_match;
-+	u32 flags;
-+	u32 rate_low, rate_hi;
-+	u64 rate_u64;
-+	u32 *resp = (void *)response_data;
-+
-+	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
-+
-+	if (clkid >= clock_count) {
-+		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
-+		goto done;
-+	}
-+
-+	flags = cpu_to_le32(((const u32 *)request_data)[1]);
-+
-+	/* get rate match mode from flags */
-+	rate_match = flags & 0b11;
-+	if (rate_match >= RPMI_CLK_RATE_MATCH_MAX) {
-+		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
-+		goto done;
-+	}
-+
-+	rate_low = cpu_to_le32(((const u32 *)request_data)[2]);
-+	rate_hi = cpu_to_le32(((const u32 *)request_data)[3]);
-+
-+	rate_u64 = ((u64)rate_hi << 32) | rate_low;
-+	if (rate_u64 == RPMI_CLOCK_RATE_INVALID || rate_u64 == 0) {
-+		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
-+		goto done;
-+	}
-+
-+	status = rpmi_clock_set_rate(clkid, rate_match, rate_u64);
-+	resp[0] = cpu_to_le32((u32)status);
-+
-+done:
-+	*response_datalen = sizeof(*resp);
-+	return RPMI_SUCCESS;
-+}
-+
-+static enum rpmi_error_codes
-+rpmi_clock_sg_get_rate(struct rpmi_transport *trans, u16 request_datalen,
-+		       const u8 *request_data, u16 *response_datalen,
-+		       u8 *response_data)
-+{
-+	u16 resp_dlen;
-+	enum rpmi_error_codes status;
-+	u64 rate_u64;
-+	u32 *resp = (void *)response_data;
-+
-+	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
-+
-+	if (clkid >= clock_count) {
-+		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
-+		resp_dlen = sizeof(*resp);
-+		goto done;
-+	}
-+
-+	status = rpmi_clock_get_rate(clkid, &rate_u64);
-+	if (status) {
-+		resp[0] = cpu_to_le32((u32)status);
-+		resp_dlen = sizeof(*resp);
-+		goto done;
-+	}
-+
-+	resp[2] = cpu_to_le32((u32)(rate_u64 >> 32));
-+	resp[1] = cpu_to_le32((u32)(rate_u64));
-+	resp[0] = cpu_to_le32((u32)RPMI_SUCCESS);
-+
-+	resp_dlen = 3 * sizeof(*resp);
-+
-+done:
-+	*response_datalen = resp_dlen;
-+	return RPMI_SUCCESS;
-+}
-+
-+static const struct rpmi_service rpmi_clock_services[RPMI_CLK_SRV_ID_MAX_COUNT] = {
-+	[RPMI_CLK_SRV_GET_NUM_CLOCKS] = {
-+		.service_id = RPMI_CLK_SRV_GET_NUM_CLOCKS,
-+		.min_a2p_request_datalen = 0,
-+		.process_a2p_request = rpmi_clock_sg_get_num_clocks,
-+	},
-+	[RPMI_CLK_SRV_GET_ATTRIBUTES] = {
-+		.service_id = RPMI_CLK_SRV_GET_ATTRIBUTES,
-+		.min_a2p_request_datalen = 4,
-+		.process_a2p_request = rpmi_clock_sg_get_attributes,
-+	},
-+	[RPMI_CLK_SRV_GET_SUPPORTED_RATES] = {
-+		.service_id = RPMI_CLK_SRV_GET_SUPPORTED_RATES,
-+		.min_a2p_request_datalen = 8,
-+		.process_a2p_request = rpmi_clock_sg_get_supp_rates,
-+	},
-+	[RPMI_CLK_SRV_SET_CONFIG] = {
-+		.service_id = RPMI_CLK_SRV_SET_CONFIG,
-+		.min_a2p_request_datalen = 8,
-+		.process_a2p_request = rpmi_clock_sg_set_config,
-+	},
-+	[RPMI_CLK_SRV_GET_CONFIG] = {
-+		.service_id = RPMI_CLK_SRV_GET_CONFIG,
-+		.min_a2p_request_datalen = 4,
-+		.process_a2p_request = rpmi_clock_sg_get_config,
-+	},
-+	[RPMI_CLK_SRV_SET_RATE] = {
-+		.service_id = RPMI_CLK_SRV_SET_RATE,
-+		.min_a2p_request_datalen = 16,
-+		.process_a2p_request = rpmi_clock_sg_set_rate,
-+	},
-+	[RPMI_CLK_SRV_GET_RATE] = {
-+		.service_id = RPMI_CLK_SRV_GET_RATE,
-+		.min_a2p_request_datalen = 4,
-+		.process_a2p_request = rpmi_clock_sg_get_rate,
-+	},
-+};
-+
-+const struct rpmi_service_group rpmi_sandbox_clock_sg = {
-+	.name = "clk",
-+	.max_service_id = RPMI_CLK_SRV_GET_RATE,
-+	.servicegroup_version = RPMI_MKVER(1, 0),
-+	.services = rpmi_clock_services,
-+};
-diff --git a/drivers/firmware/rpmi/rpmi-sandbox.c b/drivers/firmware/rpmi/rpmi-sandbox.c
-new file mode 100644
-index 000000000000..5597c27067eb
---- /dev/null
-+++ b/drivers/firmware/rpmi/rpmi-sandbox.c
-@@ -0,0 +1,156 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
-+ */
-+
-+#define LOG_CATEGORY UCLASS_RPMI
-+
-+#include <dm.h>
-+#include <log.h>
-+#include <rpmi-uclass.h>
-+#include <dm/device_compat.h>
-+
-+#include "rpmi-sandbox.h"
-+
-+#define RPMI_SANDBOX_MIN_SLOT_SIZE 64
-+#define RPMI_SANDBOX_SHMEM_HEADER_SIZE 8
-+#define RPMI_SANDBOX_MAX_MSG_SIZE \
-+	(RPMI_SANDBOX_MIN_SLOT_SIZE - RPMI_SANDBOX_SHMEM_HEADER_SIZE)
-+
-+#define DRIVER_NAME "rpmi-sandbox"
-+#define DRIVER_NAME_LEN (sizeof(DRIVER_NAME))
-+
-+struct rpmi_sandbox {
-+	struct udevice *dev;
-+};
-+
-+const struct rpmi_service_group *rpmi_sandbox_sg(u32 servicegroup_id)
-+{
-+	switch (servicegroup_id) {
-+	case RPMI_SRVGRP_CLOCK:
-+		return &rpmi_sandbox_clock_sg;
-+	default:
-+		return NULL;
-+	}
-+}
-+
-+static int rpmi_sandbox_get_attr(struct rpmi_chan *chan,
-+				 enum rpmi_attribute_id id, u32 *data)
-+{
-+	const struct rpmi_service_group *sg = rpmi_sandbox_sg(chan->id);
-+
-+	if (!sg)
-+		return -EOPNOTSUPP;
-+
-+	switch (id) {
-+	case RPMI_ATTR_SPEC_VERSION:
-+		*data = RPMI_MKVER(1, 0);
-+		break;
-+	case RPMI_ATTR_MAX_MSG_DATA_SIZE:
-+		*data = RPMI_SANDBOX_MAX_MSG_SIZE;
-+		break;
-+	case RPMI_ATTR_SERVICEGROUP_ID:
-+		*data = chan->id;
-+		break;
-+	case RPMI_ATTR_SERVICEGROUP_VERSION:
-+		*data = sg->servicegroup_version;
-+		break;
-+	case RPMI_ATTR_IMPL_ID:
-+		*data = 0;
-+		break;
-+	case RPMI_ATTR_IMPL_VERSION:
-+		*data = RPMI_MKVER(1, 0);
-+		break;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
++	struct sbiret sret;
++	int i;
++
++	for (i = 0; i < attr_count; i++)
++		((__le32 *)mpxy->shmem)[i] = cpu_to_le32(attrs_buf[i]);
++
++	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_WRITE_ATTRS, channel_id,
++			 base_attrid, attr_count, 0, 0, 0);
++	if (sret.error)
++		return sbi_to_linux_error(sret.error);
 +
 +	return 0;
 +}
 +
-+static int rpmi_sandbox_request(struct rpmi_chan *chan, u32 service_id,
-+				const void *request, unsigned long request_len,
-+				void *response, unsigned long max_response_len,
-+				unsigned long *out_response_len)
+ static int rpmi_sbi_mpxy_send_message(void *shmem, u32 mpxy_fid, u32 channel_id,
+ 				      u32 msg_id, const void *tx,
+ 				      unsigned long tx_len, void *rx,
+@@ -368,6 +394,8 @@ static int rpmi_sbi_mpxy_probe(struct udevice *dev)
+ 			    desc->attrs[SBI_MPXY_ATTR_MSG_MAX_LEN]);
+ 	}
+ 
++	g_mpxy = mpxy;
++
+ 	return 0;
+ 
+ err:
+@@ -408,3 +436,359 @@ U_BOOT_DRIVER(rpmi_sbi_mpxy) = {
+ 	.ops = &rpmi_sbi_mpxy_ops,
+ 	.flags = DM_FLAG_PRE_RELOC,
+ };
++
++#if CONFIG_IS_ENABLED(CMD_MPXY) && !CONFIG_IS_ENABLED(XPL_BUILD)
++
++#include <command.h>
++#include <hexdump.h>
++
++static const char *mpxy_proto_to_str(u32 proto_id)
 +{
-+	const struct rpmi_service_group *sg = rpmi_sandbox_sg(chan->id);
-+	const struct rpmi_service *service;
-+	u8 slot[RPMI_SANDBOX_MAX_MSG_SIZE];
-+	struct rpmi_transport trans = {
-+		.msg_data_size = sizeof(slot),
++	switch (proto_id) {
++	case SBI_MPXY_MSGPROTO_RPMI_ID:
++		return "RPMI";
++	default:
++		return "Unknown";
++	}
++}
++
++/**
++ * mpxy list
++ *
++ * List the mpxy channels
++ */
++static int do_mpxy_list(struct cmd_tbl *cmdtp, int flag, int argc,
++			char *const argv[])
++{
++	struct rpmi_sbi_mpxy *mpxy = mpxy_get_global();
++	struct sbi_mpxy_chan_desc *chan;
++	u32 proto;
++	int i;
++
++	if (!mpxy)
++		return CMD_RET_FAILURE;
++
++	for (i = 0; i < mpxy->channel_count; i++) {
++		chan = &mpxy->channel_descs[i];
++		proto = chan->attrs[SBI_MPXY_ATTR_MSG_PROT_ID];
++		printf("Channel 0x%x: proto_id=0x%x (%s), ver=0x%x\n", chan->id,
++		       proto, mpxy_proto_to_str(proto),
++		       chan->attrs[SBI_MPXY_ATTR_MSG_PROT_VER]);
++	}
++
++	printf("sbi_mpxy: found %d channels\n", mpxy->channel_count);
++	return CMD_RET_SUCCESS;
++}
++
++static void mpxy_print_capability(u32 val)
++{
++	static const struct {
++		u32 bit;
++		const char *name;
++	} caps[] = {
++		{ SBI_MPXY_CHAN_CAP_MSI, "MSI" },
++		{ SBI_MPXY_CHAN_CAP_SSE, "SSE_EVENT" },
++		{ SBI_MPXY_CHAN_CAP_EVENTS_STATE, "EVENTS_STATE" },
++		{ SBI_MPXY_CHAN_CAP_SEND_WITH_RESP, "SEND_WITH_RESP" },
++		{ SBI_MPXY_CHAN_CAP_SEND_WITHOUT_RESP, "SEND_WITHOUT_RESP" },
++		{ SBI_MPXY_CHAN_CAP_GET_NOTIFICATIONS, "GET_NOTIFICATIONS" },
 +	};
-+	u16 response_data_len = 0;
-+	enum rpmi_error_codes err;
 +
-+	if (!sg)
-+		return -EOPNOTSUPP;
++	bool any = false;
++	int i;
 +
-+	if (service_id > sg->max_service_id)
-+		return -EOPNOTSUPP;
++	printf(" (");
 +
-+	service = &sg->services[service_id];
++	if (!val) {
++		printf("none)\n");
++		return;
++	}
 +
-+	if (!service)
-+		return -EOPNOTSUPP;
-+
-+	if (request_len < service->min_a2p_request_datalen)
-+		return -EINVAL;
-+
-+	if (!service->process_a2p_request)
-+		return -ENOSYS;
-+
-+	err = service->process_a2p_request(&trans, request_len, request,
-+					   &response_data_len, slot);
-+
-+	if (err)
-+		return rpmi_to_linux_error(err);
-+
-+	if (out_response_len)
-+		*out_response_len = response_data_len;
-+
-+	if (response)
-+		memcpy(response, slot,
-+		       min(max_response_len, (unsigned long)response_data_len));
-+
-+	return 0;
++	for (i = 0; i < ARRAY_SIZE(caps); i++) {
++		if (val & caps[i].bit) {
++			if (any)
++				printf("|");
++			printf("%s", caps[i].name);
++			any = true;
++		}
++	}
++	printf(")\n");
 +}
 +
-+static int rpmi_sandbox_of_xlate(struct rpmi_chan *chan,
-+				 struct ofnode_phandle_args *args)
++/* Decode well-known field values for selected standard attributes */
++static void mpxy_print_std_attr(u32 attr_id, u32 val)
 +{
-+	if (args->args_count != 1)
-+		return -EINVAL;
++	/* Standard MPXY attribute names, indexed by attr_id */
++	static const char *const mpxy_std_attr_names[] = {
++		[SBI_MPXY_ATTR_MSG_PROT_ID] = "MSG_PROT_ID",
++		[SBI_MPXY_ATTR_MSG_PROT_VER] = "MSG_PROT_VER",
++		[SBI_MPXY_ATTR_MSG_MAX_LEN] = "MSG_MAX_LEN",
++		[SBI_MPXY_ATTR_MSG_SEND_TIMEOUT] = "MSG_SEND_TIMEOUT",
++		[SBI_MPXY_ATTR_MSG_COMPLETION_TIMEOUT] =
++			"MSG_COMPLETION_TIMEOUT",
++		[SBI_MPXY_ATTR_CHANNEL_CAPABILITY] = "CHANNEL_CAPABILITY",
++		[SBI_MPXY_ATTR_SSE_EVENT_ID] = "SSE_EVENT_ID",
++		[SBI_MPXY_ATTR_MSI_CONTROL] = "MSI_CONTROL",
++		[SBI_MPXY_ATTR_MSI_ADDR_LO] = "MSI_ADDR_LO",
++		[SBI_MPXY_ATTR_MSI_ADDR_HI] = "MSI_ADDR_HI",
++		[SBI_MPXY_ATTR_MSI_DATA] = "MSI_DATA",
++		[SBI_MPXY_ATTR_EVENTS_STATE_CONTROL] = "EVENTS_STATE_CONTROL",
++	};
 +
-+	chan->id = args->args[0];
++	printf("  [0x%02x] %-28s: 0x%08x", attr_id,
++	       mpxy_std_attr_names[attr_id], val);
 +
-+	return 0;
++	switch (attr_id) {
++	case SBI_MPXY_ATTR_MSG_PROT_ID:
++		printf(" (%s)\n", mpxy_proto_to_str(val));
++		break;
++	case SBI_MPXY_ATTR_MSG_PROT_VER:
++		printf(" (v%u.%u)\n", (val >> 16) & 0xffff, val & 0xffff);
++		break;
++	case SBI_MPXY_ATTR_MSG_MAX_LEN:
++		printf(" (%u bytes)\n", val);
++		break;
++	case SBI_MPXY_ATTR_MSG_SEND_TIMEOUT:
++	case SBI_MPXY_ATTR_MSG_COMPLETION_TIMEOUT:
++		printf(" (%u ms)\n", val);
++		break;
++	case SBI_MPXY_ATTR_CHANNEL_CAPABILITY:
++		mpxy_print_capability(val);
++		break;
++	default:
++		printf("\n");
++		break;
++	}
 +}
 +
-+static int rpmi_sandbox_probe(struct udevice *dev)
++static const char *mpxy_rpmi_proto_attr_name(u32 attr_id)
 +{
-+	struct rpmi_sandbox *priv = dev_get_priv(dev);
-+
-+	priv->dev = dev;
-+
-+	return 0;
++	switch (attr_id) {
++	case SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID:
++		return "SERVICEGROUP_ID";
++	case SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION:
++		return "SERVICEGROUP_VERSION";
++	case SBI_MPXY_RPMI_ATTR_IMPL_ID:
++		return "IMPLEMENTATION_ID";
++	case SBI_MPXY_RPMI_ATTR_IMPL_VERSION:
++		return "IMPLEMENTATION_VER";
++	default:
++		return "UNKNOWN";
++	};
 +}
 +
-+static const struct udevice_id rpmi_sandbox_ids[] = {
-+	{ .compatible = "sandbox,rpmi-transport" },
-+	{}
-+};
++static void mpxy_print_proto_attr(u32 attr_id, u32 val, bool is_rpmi)
++{
++	u32 rpmi_attr_id = attr_id - SBI_MPXY_ATTR_MSGPROTO_ATTR_START;
++	const char *name = is_rpmi ? mpxy_rpmi_proto_attr_name(rpmi_attr_id) :
++				     "UNKNOWN";
 +
-+static const struct rpmi_transport_ops rpmi_sandbox_ops = {
-+	.of_xlate = rpmi_sandbox_of_xlate,
-+	.get_attr = rpmi_sandbox_get_attr,
-+	.request = rpmi_sandbox_request,
-+};
++	printf("  [0x%08x] %-24s: 0x%08x", attr_id, name, val);
 +
-+U_BOOT_DRIVER(rpmi_sandbox) = {
-+	.name = "rpmi-sandbox",
-+	.id = UCLASS_RPMI,
-+	.of_match = rpmi_sandbox_ids,
-+	.probe = rpmi_sandbox_probe,
-+	.priv_auto = sizeof(struct rpmi_sandbox),
-+	.ops = &rpmi_sandbox_ops,
-+};
-diff --git a/drivers/firmware/rpmi/rpmi-sandbox.h b/drivers/firmware/rpmi/rpmi-sandbox.h
-new file mode 100644
-index 000000000000..132d1e9e8be6
---- /dev/null
-+++ b/drivers/firmware/rpmi/rpmi-sandbox.h
-@@ -0,0 +1,47 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
++	if (is_rpmi &&
++	    (rpmi_attr_id == SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION ||
++	     rpmi_attr_id == SBI_MPXY_RPMI_ATTR_IMPL_VERSION)) {
++		printf(" (v%u.%u)\n", (val >> 16) & 0xffff, val & 0xffff);
++	} else {
++		printf("\n");
++	}
++}
++
++/**
++ * mpxy readattr <channel_id> <attr_id>
++ *
++ * Read the attribute on a channel
 + */
-+
-+#ifndef _RPMI_SANDBOX_H
-+#define _RPMI_SANDBOX_H
-+
-+#include <stdbool.h>
-+#include <asm/types.h>
-+#include <rpmi.h>
-+
-+struct rpmi_transport {
-+	int msg_data_size;
-+};
-+
-+struct rpmi_service {
-+	/** ID of the service */
-+	u8 service_id;
-+
-+	/** Minimum data length for handling request */
-+	u16 min_a2p_request_datalen;
-+
-+	/** Callback to process a2p request */
-+	enum rpmi_error_codes (*process_a2p_request)(
-+		struct rpmi_transport *trans, u16 request_data_len,
-+		const u8 *request_data, u16 *response_data_len,
-+		u8 *response_data);
-+};
-+
-+struct rpmi_service_group {
-+	/** Name of the service group */
-+	const char *name;
-+
-+	/** Maximum service ID of the service group */
-+	int max_service_id;
-+
-+	/** Service group version */
-+	u32 servicegroup_version;
-+
-+	/** Array of services indexed by service ID */
-+	const struct rpmi_service *services;
-+};
-+
-+extern const struct rpmi_service_group rpmi_sandbox_clock_sg;
-+
-+#endif
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index fb3e6a7008fb..1a89ae858f37 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -111,6 +111,7 @@ obj-$(CONFIG_CMD_RKMTD) += rkmtd.o
- obj-$(CONFIG_$(PHASE_)DM_RNG) += rng.o
- obj-$(CONFIG_DM_RTC) += rtc.o
- obj-$(CONFIG_SCMI_FIRMWARE) += scmi.o
-+obj-$(CONFIG_RPMI_FIRMWARE) += rpmi.o
- obj-$(CONFIG_SCSI) += scsi.o
- obj-$(CONFIG_DM_SERIAL) += serial.o
- obj-$(CONFIG_DM_SPI_FLASH) += sf.o
-diff --git a/test/dm/rpmi.c b/test/dm/rpmi.c
-new file mode 100644
-index 000000000000..7cb4fd11a46d
---- /dev/null
-+++ b/test/dm/rpmi.c
-@@ -0,0 +1,48 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
-+ */
-+
-+#include <clk.h>
-+#include <dm.h>
-+#include <dm/device-internal.h>
-+#include <dm/test.h>
-+#include <rpmi.h>
-+#include <stdio.h>
-+#include <test/ut.h>
-+
-+static int dm_test_rpmi_clock(struct unit_test_state *uts)
++static int do_mpxy_readattr(struct cmd_tbl *cmdtp, int flag, int argc,
++			    char *const argv[])
 +{
-+	struct udevice *rpmi_dev, *clk_dev;
-+	struct clk clk0, clk1, clk2, clk3;
++	struct rpmi_sbi_mpxy *mpxy = mpxy_get_global();
++	u32 chan_id, attr_id, attr_val;
++	int ret;
 +
-+	ut_assertok(uclass_get_device_by_name(UCLASS_RPMI, "rpmi", &rpmi_dev));
++	if (argc < 3)
++		return CMD_RET_USAGE;
 +
-+	ut_assertok(
-+		uclass_get_device_by_name(UCLASS_CLK, "rpmi-clock", &clk_dev));
++	if (!mpxy)
++		return CMD_RET_FAILURE;
 +
-+	// Grab clock 0 and retrieve the rate
-+	ut_assertok(clk_get_by_index(clk_dev, 0, &clk0));
-+	ut_asserteq_64(20000000, clk_get_rate(&clk0));
++	chan_id = simple_strtoul(argv[1], NULL, 0);
++	attr_id = simple_strtoul(argv[2], NULL, 0);
 +
-+	// Change to 1GHz
-+	ut_asserteq(1000000000, clk_set_rate(&clk0, 1000000000));
++	ret = rpmi_sbi_mpxy_read_attrs(mpxy, chan_id, attr_id, 1, &attr_val);
++	if (ret) {
++		printf("Read attr 0x%x on channel 0x%x failed (%d)\n", attr_id,
++		       chan_id, ret);
++		return CMD_RET_FAILURE;
++	}
 +
-+	// Revert back to 200MHz
-+	ut_asserteq(20000000, clk_set_rate(&clk0, 20000000));
-+
-+	// Grab clock 1
-+	ut_assertok(clk_get_by_index(clk_dev, 1, &clk1));
-+	ut_asserteq_64(333333333, clk_get_rate(&clk1));
-+
-+	// Grab clock 2
-+	ut_assertok(clk_get_by_index(clk_dev, 2, &clk2));
-+	ut_asserteq_64(500000000, clk_get_rate(&clk2));
-+
-+	// Grab clock 3
-+	ut_assertok(clk_get_by_index(clk_dev, 3, &clk3));
-+	ut_asserteq_64(50000000, clk_get_rate(&clk3));
-+
-+	return 0;
++	printf("Channel 0x%x: attr[0x%x] = 0x%x\n", chan_id, attr_id, attr_val);
++	return CMD_RET_SUCCESS;
 +}
-+DM_TEST(dm_test_rpmi_clock, UTF_SCAN_FDT);
++
++/**
++ * mpxy readattrall <channel_id>
++ */
++static int do_mpxy_readattr_all(struct cmd_tbl *cmdtp, int flag, int argc,
++				char *const argv[])
++{
++	struct rpmi_sbi_mpxy *mpxy = mpxy_get_global();
++	u32 chan_id, attr_val[SBI_MPXY_ATTR_STD_ATTR_MAX_IDX];
++	bool is_rpmi;
++	int i, ret;
++
++	if (argc < 2)
++		return CMD_RET_USAGE;
++
++	if (!mpxy)
++		return CMD_RET_FAILURE;
++
++	chan_id = simple_strtoul(argv[1], NULL, 0);
++
++	ret = rpmi_sbi_mpxy_read_attrs(mpxy, chan_id, SBI_MPXY_ATTR_MSG_PROT_ID,
++				       SBI_MPXY_ATTR_STD_ATTR_MAX_IDX,
++				       attr_val);
++	if (ret) {
++		printf("Read attr on channel 0x%x failed (%d)\n", chan_id, ret);
++		return CMD_RET_FAILURE;
++	}
++
++	/* Standard attributes */
++	printf("Channel 0x%x standard attributes:\n", chan_id);
++	for (i = 0; i < SBI_MPXY_ATTR_STD_ATTR_MAX_IDX; i++)
++		mpxy_print_std_attr(i, attr_val[i]);
++
++	/* Protocol-specific attributes */
++	printf("Channel 0x%x protocol attributes:\n", chan_id);
++
++	for (i = SBI_MPXY_ATTR_MSGPROTO_ATTR_START;
++	     i < SBI_MPXY_ATTR_MSGPROTO_ATTR_END; i++) {
++		ret = rpmi_sbi_mpxy_read_attrs(mpxy, chan_id, i, 1,
++					       &attr_val[0]);
++		if (ret)
++			break;
++
++		is_rpmi = mpxy->channel_descs[chan_id]
++				  .attrs[SBI_MPXY_ATTR_MSG_PROT_ID] ==
++			  SBI_MPXY_MSGPROTO_RPMI_ID;
++		mpxy_print_proto_attr(i, attr_val[0], is_rpmi);
++	}
++
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * mpxy writeattr <channel_id> <attr_id> <value>
++ */
++static int do_mpxy_writeattr(struct cmd_tbl *cmdtp, int flag, int argc,
++			     char *const argv[])
++{
++	struct rpmi_sbi_mpxy *mpxy = mpxy_get_global();
++	u32 chan_id, attr_id, attr_val;
++	int ret;
++
++	if (argc < 4)
++		return CMD_RET_USAGE;
++
++	if (!mpxy)
++		return CMD_RET_FAILURE;
++
++	chan_id = simple_strtoul(argv[1], NULL, 0);
++	attr_id = simple_strtoul(argv[2], NULL, 0);
++	attr_val = simple_strtoul(argv[3], NULL, 0);
++
++	ret = rpmi_sbi_mpxy_write_attrs(mpxy, chan_id, attr_id, 1, &attr_val);
++	if (ret) {
++		printf("Write attr 0x%x on channel 0x%x failed (%d)\n", attr_id,
++		       chan_id, ret);
++		return CMD_RET_FAILURE;
++	}
++
++	printf("Channel 0x%x: attr[0x%x] written 0x%x\n", chan_id, attr_id,
++	       attr_val);
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * mpxy send <channel_id> <msg_id> [payload_word ...]
++ *
++ * For RPMI, msg_id is the service_id. Payload words follow.
++ */
++static int do_mpxy_send(struct cmd_tbl *cmdtp, int flag, int argc,
++			char *const argv[])
++{
++	struct rpmi_sbi_mpxy *mpxy = mpxy_get_global();
++	u32 tx[64];
++	u32 rx[64];
++	unsigned long tx_words, rx_bytes;
++	u32 chan_id, service_id;
++	int i, ret;
++
++	if (argc < 3)
++		return CMD_RET_USAGE;
++
++	if (!mpxy)
++		return CMD_RET_FAILURE;
++
++	chan_id = simple_strtoul(argv[1], NULL, 0);
++	service_id = simple_strtoul(argv[2], NULL, 0);
++	tx_words = argc - 3;
++
++	if (tx_words > ARRAY_SIZE(tx)) {
++		printf("Too many words (max %ld)\n", ARRAY_SIZE(tx));
++		return CMD_RET_FAILURE;
++	}
++
++	for (i = 0; i < tx_words; i++)
++		tx[i] = simple_strtoul(argv[3 + i], NULL, 0);
++
++	ret = rpmi_sbi_mpxy_send_message(mpxy->shmem,
++					 SBI_EXT_MPXY_SEND_MSG_WITH_RESP,
++					 chan_id, service_id, tx, tx_words * 4,
++					 rx, sizeof(rx), &rx_bytes);
++	if (ret) {
++		printf("Send on channel 0x%x failed (%d)\n", chan_id, ret);
++		return CMD_RET_FAILURE;
++	}
++
++	printf("Response (%ld word(s)):\n", rx_bytes / 4);
++	print_hex_dump(" ", DUMP_PREFIX_OFFSET, 4, 4, rx, rx_bytes, true);
++
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * Subcommand table and top-level dispatch
++ */
++static struct cmd_tbl cmd_mpxy_sub[] = {
++	U_BOOT_CMD_MKENT(list, 1, 0, do_mpxy_list, "", ""),
++	U_BOOT_CMD_MKENT(readattr, 3, 0, do_mpxy_readattr, "", ""),
++	U_BOOT_CMD_MKENT(readattrall, 2, 0, do_mpxy_readattr_all, "", ""),
++	U_BOOT_CMD_MKENT(writeattr, 4, 0, do_mpxy_writeattr, "", ""),
++	U_BOOT_CMD_MKENT(send, CONFIG_SYS_MAXARGS, 0, do_mpxy_send, "", ""),
++};
++
++static int do_mpxy(struct cmd_tbl *cmdtp, int flag, int argc,
++		   char *const argv[])
++{
++	struct cmd_tbl *c;
++
++	if (argc < 2)
++		return CMD_RET_USAGE;
++
++	c = find_cmd_tbl(argv[1], cmd_mpxy_sub, ARRAY_SIZE(cmd_mpxy_sub));
++	if (!c)
++		return CMD_RET_USAGE;
++
++	return c->cmd(cmdtp, flag, argc - 1, argv + 1);
++}
++
++U_BOOT_CMD(
++	mpxy, CONFIG_SYS_MAXARGS, 0, do_mpxy, "SBI MPXY channel debug commands",
++	"list                              - list discovered channels\n"
++	"mpxy readattr    <chan> <attr>         - read one attribute\n"
++	"mpxy readattrall <chan>                - read all attributes\n"
++	"mpxy writeattr   <chan> <attr> <val>   - write an attribute\n"
++	"mpxy send        <chan> <msg_id> [payload_word ...]  - send message\n");
++
++#endif // CONFIG_CMD_MPXY
 -- 
 2.52.0
 
