@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09604C61DD6
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 06:31:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A131C624D4
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 06:31:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 82DAF4083F;
-	Wed,  2 Sep 2026 06:31:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3BBB1407E5;
+	Wed,  2 Sep 2026 06:31:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QssvLF6LRIv4; Wed,  2 Sep 2026 06:31:28 +0000 (UTC)
+ id lJIm4W5ZE7dv; Wed,  2 Sep 2026 06:31:30 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788330688;
-	bh=Hi632BLtZsjN/oXFTB9dfjl9R+3i4hCBzM949zW/DM4=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ckm8LGzLtyYzqAelI9uiMghXC9QZxdyFvPyqRmbe4MR4Md6ub8eqhlGY99gyzoOQ+
-	 Qajq5V3c3S4fZ4tKsysrG+20AJyX/b8H9T6fMFQN2BG7ZV9nTRo0ZXQOkNw4ZgsZMT
-	 hIbuzYzH+i6zxObXjMFR1cWPG5/tCoAzl8fR/pWVULt4bJ9Re46e3j8THOlrUvI4/f
-	 gDW/xB+01l+lOXr2tDY1xFFZvUNWpwcJMUTdPgJrW970lchqW2m4peqzxj9dTp3rJQ
-	 mpKIpC1FxTfR9KRjalDiCEJkkRvXVtquTuHauhPXLlktq5O7ZbUzv357CmDCqzTGjf
-	 nR33rWE0XkSiQ==
+	d=lists.u-boot-project.org; s=default; t=1788330690;
+	bh=ehNO1SW4NYhBj24MIF0UR65naqU3RqdDVOQCXvKK6NI=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=cgJuKioo1WCci7TRHYAAtdmDCes5XIFCGrOhKMq7+oDR+fVLQHfyfh/fA48RHlGVP
+	 x3RvT8KPeyQtaTMEPjJV+3ttHuKpDpNBoYVpS/9jom7chTMicwry/V9g+Kl4yFJkJ+
+	 KaJhAEceqqgkwJkx7Q+UkUkdm8bzxCPR0Ao9uyyOU/jKxCcALUtuy8IIgcNgxqVIyI
+	 1zsoBLcQWIklRK7xWTe90DRYq21xo4HeZ/EuW5vDOSuP0Dgt/vAIRircs0pRibkVhH
+	 EMt1egPnHM1ZyLFY4933kGt1v+NqXzxLweKHcNXrgWG4IerpNAL+c28SNeIjBPMslM
+	 cSA94N/QDY5OQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7024140828;
-	Wed,  2 Sep 2026 06:31:28 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id A61EB465
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3EF344083D;
+	Wed,  2 Sep 2026 06:31:30 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id EFA3D465
  for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 06:31:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8C20480E58
+ by smtp1.osuosl.org (Postfix) with ESMTP id D560F80E54
  for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 06:31:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id R0LIBCwoikIq for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 06:31:22 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.154.239.83;
- helo=forward100a.mail.yandex.net; envelope-from=nikita.shubin@maquefel.me;
+ id 7I-EZMMVw-7j for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 06:31:23 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.154.239.85;
+ helo=forward102a.mail.yandex.net; envelope-from=nikita.shubin@maquefel.me;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=maquefel.me
 Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=maquefel.me header.i=@maquefel.me header.a=rsa-sha256
- header.s=mail header.b=k0fapSmD
-Received: from forward100a.mail.yandex.net (forward100a.mail.yandex.net
- [178.154.239.83])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8A3CC80E54
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 06:31:22 +0000 (UTC)
+ header.s=mail header.b=LAU7woEm
+Received: from forward102a.mail.yandex.net (forward102a.mail.yandex.net
+ [178.154.239.85])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 48D1F80DCC
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 06:31:21 +0000 (UTC)
 Received: from mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net
  (mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net
  [IPv6:2a02:6b8:c17:2010:0:640:2180:0])
- by forward100a.mail.yandex.net (postfix) with ESMTPS id AC881C01BE;
- Wed, 02 Sep 2026 09:31:11 +0300 (MSK)
+ by forward102a.mail.yandex.net (postfix) with ESMTPS id 8F9D8C00B2;
+ Wed, 02 Sep 2026 09:31:15 +0300 (MSK)
 Received: by mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net (smtp)
- with ESMTPSA id 9VdE69DeMiE0-o0y6ocbN; 
- Wed, 02 Sep 2026 09:31:10 +0300
+ with ESMTPSA id 9VdE69DeMiE0-BL05Zrtv; 
+ Wed, 02 Sep 2026 09:31:15 +0300
 X-Yandex-Fwd: 1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maquefel.me; s=mail;
- t=1788330671; bh=Hi632BLtZsjN/oXFTB9dfjl9R+3i4hCBzM949zW/DM4=;
- h=Cc:To:Message-Id:Date:Subject:From;
- b=k0fapSmDoB3pdYj4XdNny8lSPrMpMI8wP9+SXcjJNnrTvUJ1Pg40erdcHK0Ps2Dk6
- X3efyQcnP9jDIIyFmJ7j61hTbnN73gZ9ZwWfTGIw2iEJHDA84hOr3b36ZC5DxBwqzQ
- dUiB3iK9L4jRd7h4oU+uxa5uAxLCnVybKVgNX/zs=
+ t=1788330675; bh=ehNO1SW4NYhBj24MIF0UR65naqU3RqdDVOQCXvKK6NI=;
+ h=Cc:In-Reply-To:Message-Id:To:Date:References:From:Subject;
+ b=LAU7woEmieBbNi/EvPOILUKpgBo/L9mtlzLIxoHG12ZZpYMfGFXWz7YQtRwlYC8wx
+ Od+5Pb6Rpr5FzGcuBErh1KKvxwlsGiVTygHgLQ3gEMIpFsaD6SayJGGZrBxf0qn9JG
+ U88wiXSKvD60gixalyyqHhOqNEkVTB8pvetOyfKA=
 Authentication-Results: mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net;
  dkim=pass header.i=@maquefel.me
 From: Nikita Shubin <nikita.shubin@maquefel.me>
-Subject: [PATCH v2 0/6] RISC-V SPL: fix OpenSBI FULL FIT loading
-Date: Wed, 02 Sep 2026 09:31:10 +0300
-Message-Id: <20260902-riscv-full-fit-support-v2-0-493e904a129e@maquefel.me>
+Date: Wed, 02 Sep 2026 09:31:14 +0300
+Subject: [PATCH v2 4/6] test: spl: Zero spl_image_info
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WNSQ6CQBBFr0JqbZkeVNCV9zAssKmWMgjYUzSEu
- 8uwdvmS/98bwZNj8nDJRnCU2HPfzaB2GZim6h6EXM8MSqiTyLVEx94ktLFt0XJAH4ehdwG1ErU
- ubKGlJJjPgyPLn1V8Kzf28f4kExbbsmjYh95913KSy26LFCL/F0kSBSpZ6YPNz0YfxfVVvSNZa
- vcvgnKaph/M3Dcf0AAAAA==
-X-Change-ID: 20260731-riscv-full-fit-support-320d38f8311e
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260902-riscv-full-fit-support-v2-4-493e904a129e@maquefel.me>
+References: <20260902-riscv-full-fit-support-v2-0-493e904a129e@maquefel.me>
+In-Reply-To: <20260902-riscv-full-fit-support-v2-0-493e904a129e@maquefel.me>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Daniel Golle <daniel@makrotopia.org>, 
@@ -88,11 +86,11 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Francesco Valla <francesco@valla.it>, Anton Ivanov <anton@binarly.io>, 
  Nikita Shubin <nikita.shubin@maquefel.me>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788330671; l=3605;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788330671; l=920;
  i=nikita.shubin@maquefel.me; s=20230718; h=from:subject:message-id;
- bh=tsAs/QHOX0E5OD/F15LUbIT/nRRjPrYM6JCAd6+RAUU=;
- b=nb9bOSp7z/0yrnpypzHcHl3yDzEqceVlssXjsu8vPX1e8A+XMMdArbpJciqTDyBh24VI9el30
- /kbrSAtfNNxAW6R4FuHICarhOz2oZ5mTaJCTEh4Wpgldf89cBjhNW1n
+ bh=eX6E4rG1ViIZYEBmeJmyTvmdfxfI7FU8Vbe75QGnPaE=;
+ b=d70sstEEIAi5I9lFejsH6MOmikARWQEJxUpNk+2DR3fvZ++dm5A9mOii5IIm3TWSflclizM3z
+ 3OFLDHl0cYiBaiwWnL8yrMP5c/lbnUkBRLujbJse23ibCp9/JwPPsyG
 X-Developer-Key: i=nikita.shubin@maquefel.me; a=ed25519;
  pk=vqf5YIUJ7BJv3EJFaNNxWZgGuMgDH6rwufTLflwU9ac=
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -108,80 +106,36 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi all,
-
-This series improves CONFIG_SPL_LOAD_FIT_FULL support on RISC-V, primarily to enable loading OpenSBI as firmware and recording loadable images (e.g., U-Boot) into the FDT passed to the next boot stage. This aligns spl_load_fit_image() with the behaviour already present in spl_load_simple_fit().
-
-Patch summary:
-
-1/6: Allow IH_OS_OPENSBI in fit_image_load() so OpenSBI firmware can be loaded without error.
-
-2/6: Enable spl_load_fit_image() for RAM boot when CONFIG_SPL_LOAD_FIT_FULL is selected.
-
-3/6: Use map_sysmem() for FDT address handling to keep the code sandbox‑friendly.
-
-4/6: Initialize spl_image_info in spl_test_load()/spl_test_load_fit_full().
-
-5/6: Record loadables into spl_image->fdt_addr during FIT load, providing the entry addresses needed by subsequent stages (e.g., OpenSBI).
-
-6/6: Add a unit test to verify that loadables are correctly recorded in the FDT.
-
-Tested with provided sandbox test with a grafted FIT image containing OpenSBI (firmware), U‑Boot (loadable) and a DTB.
+Make sure spl_image_info is inited before passing it.
 
 Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
 ---
-Changes in v2:
+ test/image/spl_load_os.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Addressed all review comments from Simon Glass:
-
-- Patch 2/6: common: spl: ram: Add LOAD_FIT_FULL support:
-  - Reworded commit message to explain that FULL parser is needed for full image verification (CONFIG_SPL_FIT_FULL_CHECK)
-  - Added fallback: if spl_load_fit_image() fails, try spl_load_simple_fit()
-  - Mentioned fallback behavior in commit message
+diff --git a/test/image/spl_load_os.c b/test/image/spl_load_os.c
+index ba9d7979a09..7cf7ea6bc34 100644
+--- a/test/image/spl_load_os.c
++++ b/test/image/spl_load_os.c
+@@ -12,7 +12,7 @@
  
-- Patch 4/6: test: spl: Zero spl_image_info:
-  - New patch added to zero-initialize spl_image_info structures in tests
-
-- Patch 5/6: spl: fit: Record loadables to spl_image->fdt_addr
-  - Fixed typo: "lodable" → "loadable" (subject, commit message, code)
-  - Replaced -1 with FDT_ERROR (from image.h) for missing entry point
-  - Moved FDT size adjustment before loop: use fdt_shrink_to_minimum() once instead of fdt_increase_size() per iteration
-  - Extracted duplicated code into helper function fit_record_loadable()
-  - Replaced debug() with log_debug()
-  - Removed backslashes from debug string concatenation
-  - Added note about gd->fdt_blob limitation in commit message
+ static int spl_test_load(struct unit_test_state *uts)
+ {
+-	struct spl_image_info image;
++	struct spl_image_info image = { };
+ 	char fname[256];
  
-- Patch 6/6: spl: fit: Add test to check loadables
-  - Fixed typo: "lodables" → "loadables" (subject, commit message)
-  - Removed unused variables (uname, str)
-  - Added FDT size fix after fdt_finish() to prevent external data offset drift
-  - Replaced #address-cells = 2 with ADDRESS_CELLS macro
-  - Replaced fdt_property_u64() with fdt_property_addr() for entry/load properties
-  - Extracted duplicated image node creation into helper append_fit_node()
-  - Fixed assertion: ut_assert(noffset > 0) instead of ut_assert(noffset)
+ 	ut_assertok(sandbox_spl_load_fit(fname, sizeof(fname), &image));
+@@ -23,7 +23,7 @@ SPL_TEST(spl_test_load, 0);
+ 
+ static int spl_test_load_fit_full(struct unit_test_state *uts)
+ {
+-	struct spl_image_info image;
++	struct spl_image_info image = { };
+ 	char fname[256];
+ 
+ 	ut_assertok(sandbox_spl_load_fit_full(fname, sizeof(fname), &image));
 
-- Link to v1: https://patch.msgid.link/20260807-riscv-full-fit-support-v1-0-21a34f79c350@maquefel.me
-
----
-Nikita Shubin (6):
-      image: fit: allow IH_OS_OPENSBI in fit_image_load()
-      common: spl: ram: Add LOAD_FIT_FULL support
-      spl: fit: Use map_sysmem() with buffers for fdt address
-      test: spl: Zero spl_image_info
-      spl: fit: Record loadables to spl_image->fdt_addr
-      spl: fit: Add test to check loadables
-
- boot/image-fit.c         |   1 +
- common/spl/spl_fit.c     |  66 ++++++++++++-----
- common/spl/spl_ram.c     |  19 +++--
- test/image/spl_load.c    | 184 +++++++++++++++++++++++++++++++++++++++++++++++
- test/image/spl_load_os.c |   4 +-
- 5 files changed, 250 insertions(+), 24 deletions(-)
----
-base-commit: cc8c034e78eba6b2a3845783889b80753bb1af1e
-change-id: 20260731-riscv-full-fit-support-320d38f8311e
-
-Best regards,
 -- 
-Nikita Shubin
+2.54.0
 
