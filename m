@@ -1,78 +1,85 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBF98C624D4
-	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 15:51:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39E4FC61DD6
+	for <u-boot@archiver.kernel.org>; Wed,  2 Sep 2026 15:53:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4312A606F1;
-	Wed,  2 Sep 2026 15:51:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0B19380EFE;
+	Wed,  2 Sep 2026 15:53:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XlaIm4ISbLGm; Wed,  2 Sep 2026 15:51:01 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HHtcHA6dGHIi; Wed,  2 Sep 2026 15:53:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788364261;
-	bh=DhBBbMoREafZ3Yb7o7FgakyImHKUfBdNIVma6yCaXdE=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=A9tm5NB9yu63Av8IWWIktvVObKvdii+Tldb3ZL0AnUHCCWuXRdOSi5zaGqyq65wp7
-	 URO4KL5YQyGT9foVqGKAD4jwqoyxDU2F4xZJPtc3pyHV7wCL+aU+Z1Xlxpt53fDAKL
-	 aFl9WKKR4h82KFw1liFjVONiEBYPTkl3r0HFDnsxdGmbEHi4dzfxNxEsUi4a9GV6OA
-	 hBwJsgCoVI2PXzA8l4g/MO8zrf4qKrJR5ypbuH3k20Gr6kPOb5yKmFsVutIrbJkbK5
-	 RJJn8zlCkmmq/4TogkE9KZSybwkQDMTN/dA8O5FUl0/R2JlxtgKef8IRG+DYh1cq28
-	 Q0KM1T3uSh8rQ==
+	d=lists.u-boot-project.org; s=default; t=1788364408;
+	bh=ZhHaWIs5fFDEgmoGYfCAfgdtU0chYvWiTZn46/Klonc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=yoMfcdKRCCP8qPbM/VRN9aGQcLuODNLgfs2m+3W2hOoWIPv4eGW0DJt2JhoNGq3pB
+	 PM0ZphSdLgcUT0VDVUas9Wye92seXd1yIU1m33wOkR+Dz7jQr9ZDo/DLEEWuuMj/pv
+	 vohPVD9ibzecZe18xefOfQU+bI5IOhns+Jxx0X+DNYeKFxV29EQjUpXGjcM3adWZW3
+	 ztMZ0FpxIbYiV7AG/qa3NT25/LctW342ODeePwG0sb4mWQOY8NmS7qB3q/lxJKsArQ
+	 gSiqvlCaZqFG1FdXdtqujuu6ZKBmQaOCv+pQelU7x+4x6hJeeaZZR5k4yeZGowlGNC
+	 H/9Qy45z1AUUg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 23150606C4;
-	Wed,  2 Sep 2026 15:51:01 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id C7F161D9
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:50:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7885680EF8;
+	Wed,  2 Sep 2026 15:53:28 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B6396127
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:53:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C59E940753
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:50:59 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9CF3A400A6
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:53:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ILQuPWYX6lZz for <u-boot@lists.u-boot-project.org>;
- Wed,  2 Sep 2026 15:50:59 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
- envelope-from=marex@nabladev.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5pgBBamh9af9 for <u-boot@lists.u-boot-project.org>;
+ Wed,  2 Sep 2026 15:53:25 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.251.229.89;
+ helo=mx.nabladev.com; envelope-from=marex@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=Qu6GtXSa
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0AD8C4074A
- for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:50:58 +0000 (UTC)
+ header.s=dkim header.b=EwGbhQni
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A11F740099
+ for <u-boot@lists.u-boot-project.org>; Wed,  2 Sep 2026 15:53:25 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 75DC011D5D1; Wed, 02 Sep 2026 17:50:50 +0200 (CEST)
+ with ESMTPSA id 8D53711CECA; Wed, 02 Sep 2026 17:53:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1788364251; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=DhBBbMoREafZ3Yb7o7FgakyImHKUfBdNIVma6yCaXdE=;
- b=Qu6GtXSaKrdECjy6LpVIsJ2HNnp4dxNhQahH9ZQn6X4TgFHViu3k90KIEG5gZ+Q6iIy/Le
- FF4sOuXUycJmMsEH1nuBL8zgQJWV2ea5B4aWKgZ5+F8KdFymBCEaPrSrvtBt230U0AyGOI
- kLEAelFDzRrs5mo1+Ca6DXHjGLXHVRAGp39KU1VIGU9iQStoVC7ldBOnHf/k4BnFB71aPJ
- CmuA+4cmHI3p1OZUyBwX0nNthHXmdYLjodgz9VRThqwid/Ek8IKeCaJ3lrGeIYcYJelrDl
- WW91wpxiuzN9arE8FhOCtk8JSnZ55HkkZDmI6X4Kn8wejHywsZO6nYZHzBIu+A==
-From: Marek Vasut <marex@nabladev.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Marek Vasut <marex@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@nabladev.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: dts: imx: Increase malloc area size on Data Modul
- i.MX8M eDM SBC
-Date: Wed,  2 Sep 2026 17:50:39 +0200
-Message-ID: <20260902155048.801588-1-marex@nabladev.com>
-X-Mailer: git-send-email 2.53.0
+ s=dkim; t=1788364399;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=ZhHaWIs5fFDEgmoGYfCAfgdtU0chYvWiTZn46/Klonc=;
+ b=EwGbhQniO3tMP91YcS9WR6kEq7qL8pGbicq1OLLQxLrPFWTPYDSBhcW+nfq2cPn3rtICbK
+ LgfpP3UxRCl5qxlix6DW+9zaAxskDaCSo6U8w5STDFRlecBIhRD1slAqs5bmiKb3U0eTOI
+ gvrSD1Uvdw+4ZPEMj/RSq0WISKA2AhZvyFERTLUkYpX2j+XOsXh7zvbvu6hoF2pBn5RovI
+ lfUNL+Gxoz/HDldYGWsMYxh0GoukunDv5BJ6dl8+wRBq/nHkt5t4OvGCtQAtkg+KyULNLy
+ VEAAOcp4YKW8RFD2DnIL+4fSIYpjxHqsVqGnVyUJz4RL6hagxT9H5LQszb3Peg==
+Message-ID: <6ad35fab-5fba-4a79-b5fc-4819cf199938@nabladev.com>
+Date: Wed, 2 Sep 2026 17:53:17 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm64: dts: imx: Fix EEPROM address on Data Modul i.MX8M
+ Plus eDM SBC
+To: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Stefano Babic <sbabic@nabladev.com>
+References: <20260816232404.1223819-1-marex@nabladev.com>
+ <CAOMZO5AOmyEbHS7tMdLaWuEoGgkOWSiVUG6Ln54ATPCUqWxCkQ@mail.gmail.com>
+ <c5a9255d-b56d-4c05-bc75-f1a5688b9ad2@nabladev.com>
+ <CAOMZO5A1gbzoFFc9PrvTpNBgz1WV8eb9aabhc7_EM2OqSjRvcA@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <CAOMZO5A1gbzoFFc9PrvTpNBgz1WV8eb9aabhc7_EM2OqSjRvcA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -88,34 +95,24 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The malloc area size may run out during DFU usage for bootloader update
-with "dfu_get_buf: Could not memalign 0x800000 bytes" error message.
-Increase the malloc area size to prevent this problem.
+On 8/18/26 2:04 PM, Fabio Estevam wrote:
+> On Sun, Aug 16, 2026 at 8:58 PM Marek Vasut <marex@nabladev.com> wrote:
+> 
+>>> Does this need to go to main, or can it go to next?
+>>
+>> main would be nice, since this is a (long overdue) fix.
+> 
+> Reviewed-by: Fabio Estevam <festevam@gmail.com>
+> 
+> Tom,  at the moment I don't have any outstanding patches queued for main.
+> 
+> Please apply this one directly, thanks.
 
-Signed-off-by: Marek Vasut <marex@nabladev.com>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Stefano Babic <sbabic@nabladev.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org
----
- configs/imx8m_data_modul.config | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I have sent one more fix
 
-diff --git a/configs/imx8m_data_modul.config b/configs/imx8m_data_modul.config
-index 18c7bb536fa..92940ddb947 100644
---- a/configs/imx8m_data_modul.config
-+++ b/configs/imx8m_data_modul.config
-@@ -196,7 +196,7 @@ CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=20
- CONFIG_SYS_EEPROM_SIZE=16384
- CONFIG_SYS_I2C_EEPROM_ADDR=0x50
- CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
--CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_ENV_MMC_EMMC_HW_PARTITION=1
- CONFIG_SYS_MONITOR_LEN=1048576
--- 
-2.53.0
+[PATCH] arm64: dts: imx: Increase malloc area size on Data Modul i.MX8M 
+eDM SBC
 
+This is still not in main, so maybe you could pick both and do a PR ?
+
+Thank you !
