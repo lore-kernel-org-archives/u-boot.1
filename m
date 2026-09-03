@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89375C61DD3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52640C624A4
 	for <u-boot@archiver.kernel.org>; Thu,  3 Sep 2026 08:17:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 375B2608A4;
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0BD57810EC;
 	Thu,  3 Sep 2026 08:17:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rH_i4Ak9OzoW; Thu,  3 Sep 2026 08:17:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 518CD60B0D
-Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788423462;
-	b=BqP1h1kEkEmiqSyV7PDwVAQXu6V1G+RKarxSTuwFxeG6o8bohmt2t9mlqiz0wRoAqRSx
-	 6A2F1VUYCr+bsxFOiJ5pISKY8+rmhd3KKmGhaGX7HJEityyy+y3WXVVP4cb9asbGodZOn
-	 PBrnBbWJzEkEOG2NZpWp9xlYlyB8+MoNtPvgGjSbKWHuAlNSJpc9tjRDWZkTL+E+7fb/O
-	 52teXY7bltfAEKGaGjMx9zfuoQ+05leVhd0/TrneJcSOy12DmNkAfEo9yZK8uS97llu7v
-	 F5tpJRcJV2PcU/0lLAEPK8xD5H7N2tNPelvu4mZLpY/rwogHH02S4zOtNMv9D+ku/wA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xGiQz_d3FRiH; Thu,  3 Sep 2026 08:17:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4D1B9810D4
+Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788423460;
+	b=LiZU3fyTsI9thj7c8eV+WIOfi5XkqnA4C5R7S4sq8ZoFgxtGdZk/l8qnjKSVxCGq0vs6
+	 kHMKz9COdcn6KqUrSYVTpVirRBZ/dz1pk0jv0aLhQGVVqfe7wT8BPBKz9iINiIFKzvO76
+	 SMUKpK09FApLY0fh05ov/ge4kmkRbA40Jx2kYusfxBwCbKPndTT5w551/u629kf4zWhO1
+	 P9R87lfoaFPxDVk55hAZw2uJrdS4BU7//YblRZw0DIpmc5dJ98EVVfggeRoO+/AL4JC+W
+	 H5/smasNgrDC2A67UaydnbYnCwv8lmLCuFYi3mdiaRVzHpIU/iiF+jFaJsjdo87iMeg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788423462;
+	c=relaxed/relaxed; t=1788423460;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -45,49 +45,49 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=BJoVPykgyU95lNOsohc8UczZKGo40zeKV5onL9l4SHQ=;
-	b=Ka41GRbIrvNkLHsDxmFXwzssI580sncReUPdsPVUI5vNcZ1EChWLNpqOsenKPA3qgtsZ
-	 YLUKfQeF6oAlXpbdWgMXG48yO167BLB1PjAFVH/UedOKX4Hra7IEsrr846T2Zv73Xj8D/
-	 ixUmMD9LYFwQPQ1FOr2Ff1+5akGtr1V+dbACd4twyfM8aPdlF2TTqHZ486nbS9kWMzpVJ
-	 TFZgtmfBMrPX6Ktl9BiqyRQPnxV72drJI1f464x8ro1rCHXSGg6i9/EAz/Q+pEwy9KlNw
-	 AWzqEViebdopzw3FacKzxn5g1kaYDFeaFIkN5dShS84Kkfb3DciWDjtGHTOsf73WqUQ==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+	bh=MPvnH8uyVFgbLHxyDjKaVzWxzFSWR2oGoH3Lp7X5zoQ=;
+	b=QiGrkBmfbfLgcC9ZFPRFyBdu85Qx6ZnuMOmCDx1qgtD6PVwl7AwGZLhxIxDLvMktLO+I
+	 MIxHzn/G6Z9kodIf0KxysX3B7FLqA252vSf5BkKDu1j2k8RsrIKCqVIbUMIZdr3VqwH5W
+	 /HXTrDFcahmhAxge1Hd5mnmEb86vyeaMHbYKIJeLOwxe+YB65GzYgQKdwXyIHM++Um1cB
+	 86ztPYuoWR/zLXwhEGtl4bE/Rwz8borgk6gycDwuOzNGCJR7R7fZHwDaxR9HPaArjeCWW
+	 9t2EmP+onaqjgjLTGt3z2/M3tD7QxMM/+sKVIC+P68HRDcwQX7jOmn/t/t+XPMWd1cQ==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788423462;
-	bh=BJoVPykgyU95lNOsohc8UczZKGo40zeKV5onL9l4SHQ=;
+	d=lists.u-boot-project.org; s=default; t=1788423460;
+	bh=MPvnH8uyVFgbLHxyDjKaVzWxzFSWR2oGoH3Lp7X5zoQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=PIifjWQDMrO4OaHJTBGYLgLzjUdGnhlvbRauiqVx09QZn0CLhDzBe8PP8E4DO9MRt
-	 bcdSJmqsGyDQsSvsVMWjjJ1UDDuK2u88fWI6pZlKIAT8MoIA3lLPCe3lG8Ud7glzQW
-	 ThkmQJ354oSR/2FubGoHjhFJkq3qyASAqD29P0T7pTc1n3fM3/ayS4pl3bljhuRGv0
-	 vbeeC3Ar6JjRnVqHHjhi7XY9J9bGbemDVCZUWI0TZTPXFdp1/CR/yaTe657qIl28Ya
-	 XWOCgalVaaWus+I0EyfPCmIvWU5AvrfJAfwxirIQ5oQ/Vi+DueSkiiiIdGH2zHcDdJ
-	 s2cjKZEw+YwyA==
+	b=DDbHhJkXwoP1BCA1PPKsYV1jzt+CTqj2n87gtCkjBwUETNcLrRTaMTCEKSsBFAu0S
+	 lLdlkO2wmAG0A4cTDw3uLgBX/j1R+4qSsgU6DulZnl7SNUEVB6Adl0mGrtsPVR9z8M
+	 fSdTAixQfvW3/CwWSKQfQ89Rar/cew2y4+gKCv2K618NajgARx/eakORCg4W01Yjc+
+	 gutM/8nXPBFiAK9BNvrow7MNP6t4Vv0n1npKW8o2Eb4DzprljC7FtmFJTeG1uPeH4E
+	 YuVgWjGnxprwFPyj5CVZZq7/NHV1o503oyPfVqu2qzgWoNnoCS0iw7QKcHx0kIECQs
+	 BJntSQI2H6n+w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 518CD60B0D;
-	Thu,  3 Sep 2026 08:17:42 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id ADBA822F
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4D1B9810D4;
+	Thu,  3 Sep 2026 08:17:40 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5542120F5
  for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 08:17:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 93B6340A99
+ by smtp2.osuosl.org (Postfix) with ESMTP id 52F9840084
  for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 08:17:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IN4SvmOaxyXm for <u-boot@lists.u-boot-project.org>;
- Thu,  3 Sep 2026 08:17:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A2273406E6
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20a::"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bp-px52FMMhr for <u-boot@lists.u-boot-project.org>;
+ Thu,  3 Sep 2026 08:17:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 13B9C403BB
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c20a::4"
 ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788423442;
- b=D48dCq10Ca/qPjACe93CUvk8sWrDk6vjVN6DcksnDS3fTH4v2nnflomvE613z1TDRynC
- so7qt1q08/9kOzrhP2bfjFGLZrPtlkSQnfeDSB65g7hsOFITGaoMXrCrnrOSjzStr596I
- QnJKjz+hs6z+ifw5L5umX2WVNWiTr8mRUidzk4j/6vrMwez4NQWhYOoNLOEh/ASbCVkb0
- qKHr+/Cz7+JLs5nxL4TQY7wGvwgq8xXC8HGvA00L3UuGHVYlCnX5NB3Jms+pcMrvtRgQF
- jMTr9Ib2LFMWfWwQeDtch43WyrivG/zhV5ot+F2z/q+vLyeAiBnWL/HakfPEGSwlouw==
+ b=ExxdKiBp6SsZnA40awph+hS5bMlMuRL/2DPdq0BrDy8wx5bAV5die5mVX6Whd2AYApPB
+ 9xxWdgYWwZy7sWNW7+IL8UjQgaTq4GaIwDw3ipCR9cc1q6MDszYhKhUn7UaVsARK0pGr8
+ M7kI5BwuNKe58jjNOnrsI4QlOBeSrB5uB08VYnuzhzgQrUR8o2FLIyzzpYHAEXlZ07bjx
+ 3MQAPywX0FlhS30MH0pR82TmSgxZbNZHOC/BxbW1aeESwH7hi8bbXjKt83Ee6EyZH/Ys4
+ W2If9ckyu6PyiBfIfAdAXWR/dBST0ZzBigGQC4icrF4pfv1i2KRAQOsa/amBiHyU4aQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1788423442;
  h=Received-SPF:DKIM-Signature:Received:Received:
@@ -107,39 +107,40 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
  X-MS-Exchange-CrossTenant-FromEntityHeader:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=BJoVPykgyU95lNOsohc8UczZKGo40zeKV5onL9l4SHQ=;
- b=crWKYrr/rLxX4QSmmtoqzPb0/55ZyfqzKqRxEqhAPR2xwGSRG4REx8IS9jg9d11SuUbS
- WhjBxVqll5Bm+2OfuJZemY08SskFwnJ5jXXbDXJRx3V1Aq0yoqDHmqqrLoZZ/djChsqjm
- vCMctvLEcG1iNCnrG3MCpkBbv49jhdlcth0Ic3T8H190u1v4Sh1zPfwnqP5WFkjfO0FqQ
- 91mB7v8vBapolvBOAuMIEmlEtSfHm7Ox09vA8nENkPrrf+Ii8xjeHmi7akGvMVIxdLUEh
- Le4Q4/h5+7fEM2Y9WsiS9SYCLejIu957BGHaPlXeUiJTS9FDuGewHTgkknFZXw9nGKA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ bh=MPvnH8uyVFgbLHxyDjKaVzWxzFSWR2oGoH3Lp7X5zoQ=;
+ b=hW5Whiqqrdmogsu7nXXteHOQmKS7C1XN5iH7dvHtTXl/rcE0Yq8+7wln/zFnb2pqnbhR
+ 2doWplkswROEizJvoBEWc20BmMKV37eckr+iTsgcz07byV7k25JK1Lc6OzrbcqppYU9wY
+ NZVa323WWpQ4+tlTuR1kOzwxHYWkoq+7AoeI4svBpeTQRyENKv/vJMTQTIDfQbmE/+MYR
+ CE5eG6R2chiVXcIQI8xjA9c+EUxlK2sJHGi1LFNXNR27GBt2dRANo/wyD0X5WNDJZHqz3
+ 18Kf4z9jGRf910dJxlCHfPSx+waAE6B0CVXoiBg/vxJi9MLoNu97hCp71LlInHryNSw==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
  dmarc=none header.from=softathome.com; 
  dkim=pass header.d=softathome1.onmicrosoft.com
  header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=jlPrrJsI; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20a::"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:111:f403:c20a::;
- helo=pa5p264cu001.outbound.protection.outlook.com;
+ header.s=selector1-softathome1-onmicrosoft-com header.b=B1v5xF5m; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20a::4"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c20a::4;
+ helo=pr0p264cu014.outbound.protection.outlook.com;
  envelope-from=philippe.reynes@softathome.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=none (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
  header.from=softathome.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=softathome1.onmicrosoft.com
  header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=jlPrrJsI
-Received: from PA5P264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A2273406E6
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 08:17:22 +0000 (UTC)
+ header.s=selector1-softathome1-onmicrosoft-com header.b=B1v5xF5m
+Received: from PR0P264CU014.outbound.protection.outlook.com
+ (mail-francecentralazlp170120004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::4])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 13B9C403BB
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 08:17:21 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AjICB22OoClemp7htmRyY8gVyb2Bq3wpH5+tm9itZ7cFDiB9nLjSiqnM+/tvkaLUtfwuUeDfwyfJxZeJ3prktdKqeLJDGTv5yC/52Ka1kVqkAEnpvpFBRVVKsh6KFBRNq7IG2HBL02BsmsTpP3WfjfjPc+uH1HKowHh7OybMeSfGrnsVVdA6ss1sAG32ycBFxxUFLdIcwZRy8GKAj9QAWDfcwSnZasvrOZtvMlOkeNMsheHZ4PcltouCIOCUr/yq093+howkGsEUXZ3dyvQvBwPJ/kTNYxzoKb8rHnH1OoN3wwEnLW7q0SHzJINGg2M1hqybiXOY5J9oBu2hwV82aQ==
+ b=MXDrQak9U2tWnUgqSXQW1lRIMWfdkbyIQKqBX5T0kzoIxbfX8npTAXpNkvdV79R5y5l23m3/1IEnLP2tbeEm4ulHmc073bAHdY2tw7y2aP4dMFKtNLfXmQVqzi12lPFfIoLU+8oFZTQejhj8THMYF3oJiryqt7DDwyhlC7wyyFsCd/7WZ+l3GIatsFgonGyEJhHN5OUQH+Euhmmq6+jbJG5Q7FqbxBFAsoq76p0BsZ0o0BH0R6ldbxtELl7VLt40JZZZvhUhJj029U0YkQ97TKigywN9BuB+mZXYsgDdPavX0uPrmypCdGfzq/GOXhDxW+407jGbLXcoDSLVGKGQjw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BJoVPykgyU95lNOsohc8UczZKGo40zeKV5onL9l4SHQ=;
- b=hNAyCu6UmkgxylsvrykhUmcraJe0O905skldcozqI7OO+TPW+02WvQ9UI2naAQFpF9BrupoCKSCQO0BIb6brvWCfmXZOqN7a9x4y20mqDEvi1YeZC4oWcd8PX7DOBTYsJeagQj4UTBsYeVZWZoydB/kfvDEF3pDV+AuDU2t8tZ9sUF3xvih+n754pe0y6zPyfUpgNcSrNy7faxI6QvjHGafpm7PDKsSQWlyp7l9Mm0/XdUpD/bIr4WIUmUPfWwAyEUcpnO7ltfv2p+M2X8Sq2sHu0yh8wO05zc1SLDqPIWnHCAu1dIcV4zqbSPKDjfV9cGWTBWbljbRenu/g+t5L+Q==
+ bh=MPvnH8uyVFgbLHxyDjKaVzWxzFSWR2oGoH3Lp7X5zoQ=;
+ b=PfjEEcgw3SoJSNvklP0hKoXkTjT8NsAfOQJlg81XH1uqyxFQQ6d4I1CSwtBik8r49G5o/uyoKPf7fUZdJu+NdP9Wq9jEVGmeE93U4GgjbW3euOjZuec7DSdGMRdOStrr9zIxIGPAQ3tC6GAiy0nF/kC+7D5yDYvCtulwG+kZLoxgXYgt6HOKzHQCJxTMI9K/IwWs+3Wfazrf3MekETi5o8lbclEaHXuW1IDqlFWXiZinP+Ytx1vtW229yX5/U8ycxl/6fjnycHg1FQgVpIJr6jAlfFxRVUl+JrsQFX+iDQgUDnzNp6dQ3/bMAWX7uVAtcuFV7gSSgJOnnq65Gb4UIg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -147,18 +148,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BJoVPykgyU95lNOsohc8UczZKGo40zeKV5onL9l4SHQ=;
- b=jlPrrJsIKtFRQAssRDH3WbbWOYKl/xOv4LkmfMunzePHBoPJg6rC6Z4mSBjE6y5vFjWQYjgSRMpthgL9W5b1959CA+LCIsedGiRZ5mLG8CvQ7EkDnI7NI9P+QEaN7O/4l/rUbuDRFlyTdnAvwGJszNfSPL9zSm7CPr4sPJG9U86z1lJwgB8kB3lEayao47LLvr1vffx4fE9rSnYwXMmZv0jv8AY8MLWJOHOqAN4aCtUzoTdf8FDwNVnxXt0SPhn051qcAe87r16928R17L/ylbHx5OYul+/IU9iIotbhH55AVgwebGrBA1XXO4pWOicNfrnWazqTbDkbyaNw+xZ5Vg==
-Received: from MR1P264CA0216.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:56::14)
- by PA0P264MB7443.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:575::6) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=MPvnH8uyVFgbLHxyDjKaVzWxzFSWR2oGoH3Lp7X5zoQ=;
+ b=B1v5xF5mEpV8d9KX+1/UEy3A4JdD1KoJ07Iprn4GMqCDUjxsRvtAk/53EDUP9Ssig91e15zFIS/yndyEvoQfjU5hN/FhtO7WvWMcTR3Idrk/9b6vAYiuX7YZyJvdEdA8pLw4pS8tZy4TPZVPijxD7lWtBGjg4f2I8zV5/dbhXse0ZfWJ/SADCHRq41ZYKGME/E6Qo6W0iOQzIpPtRruKpRsLDX9ZxQ4lZ8RLKrUFfBRrLKGykexIbEb3msLYSUqU+2L0a+vTrA4DuZFwSm1R841KM3j9QW5SMieN3wEhBGyhsaM0rufS3Y+59KazwoHvGkZBRBFm4DpruImF8/6dow==
+Received: from PAZP264CA0137.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1f8::15)
+ by PAZP264MB2832.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1f7::16)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Thu, 3 Sep
- 2026 08:17:17 +0000
-Received: from MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:56:cafe::58) by MR1P264CA0216.outlook.office365.com
- (2603:10a6:501:56::14) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 08:17:16 +0000
+Received: from PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:1f8:cafe::9) by PAZP264CA0137.outlook.office365.com
+ (2603:10a6:102:1f8::15) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.11 via Frontend Transport; Thu, 3
- Sep 2026 08:17:17 +0000
+ Sep 2026 08:17:16 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
  header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
@@ -167,21 +168,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D59.mail.protection.outlook.com (10.167.241.6) with Microsoft
+ PA2PEPF00019233.mail.protection.outlook.com (10.167.242.39) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.8
- via Frontend Transport; Thu, 3 Sep 2026 08:17:17 +0000
+ via Frontend Transport; Thu, 3 Sep 2026 08:17:16 +0000
 Received: from sah1lpt726.softathome.com (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id 3A8D1202C1;
- Thu,  3 Sep 2026 10:17:17 +0200 (CEST)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 4AA662017B;
+ Thu,  3 Sep 2026 10:17:16 +0200 (CEST)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com, simon.glass@canonical.com
 Cc: u-boot@lists.u-boot-project.org,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v9 12/15] boot: pre-load: add support of ecdsa
-Date: Thu,  3 Sep 2026 10:17:02 +0200
-Message-ID: <20260903081705.12894-13-philippe.reynes@softathome.com>
+ Philippe Reynes <philippe.reynes@softathome.com>
+Subject: [PATCH v9 02/15] mbedtls: enable support of ecc
+Date: Thu,  3 Sep 2026 10:16:52 +0200
+Message-ID: <20260903081705.12894-3-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260903081705.12894-1-philippe.reynes@softathome.com>
 References: <20260903081705.12894-1-philippe.reynes@softathome.com>
@@ -189,30 +189,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D59:EE_|PA0P264MB7443:EE_
+X-MS-TrafficTypeDiagnostic: PA2PEPF00019233:EE_|PAZP264MB2832:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 6946a371-f6b7-484c-42c1-08df0993c4ba
+X-MS-Office365-Filtering-Correlation-Id: 45bb29fb-8564-4dce-4701-08df0993c419
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|36860700016|82310400026|376014|1800799024|56012099006|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: Mdah2qh4SJM2kBvKv/hml86ZDKG71BgfCTauSMF9FaBFwUby9CfQuhpG0S4kq6k5Wng2SGGTMoc2TjiOvmZElxDmd/gCW9vdb0uagZ1M8SV/2Qrf4nxjWhcC5ciWx9u0z8UpqVSyVRAjEnemrZd3mUGUj5DrZC7xkHVWZhJmLuZfYxDI099SGp/pLZYLbO5/kFmhLoUo4NzIrS7hoCLa84FkEg61HXGIXnF6cm2HT2nFocm0guELORi771ULB5FMdAnkoaUe3ipXen57IkBVYUGyeuY+6jGVDFDvU8lxW2FgUVfRLhDTf1JbUJBo1BiAm7t1d06fSeK0Lwkalk66DHP1m0ouT3ieayB+qkvvOhS4KuH3fWYzLSTd6DT5d56vr7BXxOtDTPBJqe81TjzfuvNgb8U5n+XDLAho7pHAIKplkbgX7cVdDZxILS4wR7UUR0qWKMwri7YLkyML1sOZc5/RqzSePf69o27M3yebboMhLvuAEnafLCkOe9eTG0rTtjZ/UHeHC12ONeaYvLrixwlVZmxwDRYPSMINL/djQHthoIHaDtjr2tv+Q89+HvyxH+cxc3C2Qzfb7yUOtcbYWqSSOnbqwexcCoZIcHiLPVh6Vb1vBgZg5qYA/waKT4CKk3J8jGNua8wxEzNoGr8KTugDkOltmWCgbmIskd2lDiy0GvPXp5c2pxI7e8sUkyMhxKq2Q74a9XQ2dzIDkiPkDw==
+ ARA:13230040|36860700016|376014|82310400026|1800799024|23010399003|10067099003|22082099003|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info: E4Rnxm1oD8WgNQyvDTlVYz/zAunf8tL/w4rhutppYdmeuOoetZvdIogTyNiSV6C/x1i/6723Fj4+O/fpbjfbPFr/AWwJCY6SQn2HDqX9bfhFclk3DJ7KB3zNFIozlVEqu5XAYQJLkGnLaQ9goKVKQgMF15dKCyKVTxYt71LL/xdTUSLq1vOF+Vh9KMpoA2P/m6Pt08o8NGwMFzlOUP83ET/bmmRoeGbHmQDwtuvJTZ31SbkdoUCacLAOB4CClQ69Fq3CPjJC/PJO369BBE69MnUiBoUDlztXjx0S8no7raHbzurYoUX5piTASoY4+RpOsBo03RMIJGxZTycXvkjspfIvTFWemATdpbH6D5cRm+wwbVWd5xmbp+jbeC5pE8HLnTqmga3HgDBGBk7/yfNp3IfNsLmq1AsGrrs7vsZPhPtmYid8Tlh0rrpwmLpUXYbQrwE5rbAhJCmNehtmOPmerpBghIJezjnpGitRcrIR3XQ8Z612BgT70BEmPclYXSDKcvTLIPBsF5WpRQrdjbrIyMy/AP7qArNXDHRt4tkW0LXp935SlGVqoGcUNwCzhIiz4WGSQRo4Jgh2rDCMPlFULT6yxqYm6G3YNlY6XZ97o+lQq9OBilLYg4gZ6siQlZ/mlGe3HVlfd1KJMjCZ13Z18FxCG39IFiJ9xhEl8CZm3W3NtZVthO2aomtGw4HquViPjGsBHHTqO1V0w07AwKWYVA==
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(36860700016)(82310400026)(376014)(1800799024)(56012099006)(10067099003)(18002099003)(22082099003);
+ SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(23010399003)(10067099003)(22082099003)(18002099003)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: YV6IwCVJQVI7VAuthQl25X+QrTuwzSW/BADfybLcF8UefJmJfvGueXUf/05virQvY2nCkj5RU+Re+vPosJSG7PSDGvBit0n0pqYou0tg+Csyw50np1tlSQ+66Or/9aOUxfX8pizDBbEvqc5MI94tRVGqwzVhBP/6V/cmuUdc0ozGiB1zbqK8/xNjgWl92+ElzhajfEF9KrqSyxjGBhbfBCBgZR6MzFermSKZFW6qG55NKV5Vh9FenLT034eABHIlnmglsj+wG85/Cs9NWcYid5DvTykMp5PiXMMmcJA4jRcAj9hR0wxYCRG/7fwPBqlytU9WZK4r+PfPznFjUQGc/iLm6gL0rubA5wTNEr7nBoc6DfEaAXo6sSAwLm3xdEqM6VyHc2/sXm2iXlBlFvOq5zJyoaxq7Qyq+piShhpFqmbUf362qV6xg6ksaKuxyhq0
+X-MS-Exchange-AntiSpam-MessageData-0: +CXCpbokLoQ9JpCuXtvbQWzyMa89Za22+JzZ1s6hPEQl7BouFdN0vFbBzi03j5C785/rGJqff4+XYs9S0PDREC0pXCIaf3d7700obtg9Gwn5NLQLaAZyBoReApzT1Kwl0kMHOYvSFA00fIqh2rKzk9vqA/2uiuJXwCycpchqmwcXPRIt/wpZZRHJrNhf6QNUnz1/bqGfPpaKVrlyPp2f4RvK+tafaphAsVGhoe+vdcX5JplR5Pmy2HBlGxNhwUco2HE+LpRy966Qb5lLaiLyX9gCr8SbGjWvWib37L2cswJ8XliSUjYKcf4C7QOo4aPJBflau8Mb7Hn5+NwadhI8rjQfvVqDkaae6c5s8/dWLKw+pt5uOCvvUmZ21+NPtnfBPpHOFK96p2o5VF+3AAJh3/B70vnavn/bk1ApDFGRQwC3va55RQbVbvvAoj6UsL/R
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2026 08:17:17.4625 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6946a371-f6b7-484c-42c1-08df0993c4ba
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2026 08:17:16.4276 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45bb29fb-8564-4dce-4701-08df0993c419
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA0P264MB7443
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAZP264MB2832
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -226,127 +226,260 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Right now, u-boot can only boot image with a
-pre-load header with rsa. We add the support
-of ecdsa.
+Prepares the support of ecdsa signature check
+using MbedTLS. It introduces the option ECDSA_MBEDTLS
+to enable (or not) the support of ecdsa in MbedTLS.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+So now, ecdsa is no longer supported by default in the lib TLS.
+To get it, the option ECDSA_MBEDTLS must be enabled.
+
+The option ECDSA_MBEDTLS only enables the ecdsa support
+in MbedTLS, it doesn't provide any API to use it for
+signature check. It will be done in another commit
+by adding the option ECDSA_VERIFY_MBEDTLS.
+
+Two internal options are also added BIGNUM_MBEDTLS
+and ECC_MBEDTLS. Those options are used to share code
+between different option and avoid duplication.
+
 Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
+v2:
+- move ecdsa to MBEDTLS_LIB_X509
+- enhance depencendies
 v3:
-- initial version
+- do not use _MBEDTLS in mbedtls_def_config.h
 v4:
-- avoid calling image_get_crypto_algo several times
+- do not select ECDSA on some configs
+- remove duplicated MBEDTLS_ECP_DP_SECP256K1_ENABLED
+- change dependencies for ECDSA configs
 v5:
-- simplify the function is_ecdsa
-- re-use already computed crypto in function image_pre_load_sig_setup
+- MBEDTLS_LIB_TLS depends en ECDSA_MBEDTLS
+- update some configs according to previous change
+- build of ecdsa is conditionned by ECDSA_MBEDTLS
 v6:
-- no change
+- fix dependencies for ecdsa and ecc on mbedtls
+- ecdsa is no longer mandatory for tls
 v7:
 - no change
 v8:
-- no change
+- enhance the commit message
+- use /* */ instead of //
 v9:
 - no change
 
- boot/image-pre-load.c | 53 +++++++++++++++++++++++++++++++++----------
- 1 file changed, 41 insertions(+), 12 deletions(-)
+ configs/sandbox_defconfig        |  1 +
+ lib/ecdsa/Kconfig                |  1 +
+ lib/mbedtls/Kconfig              | 17 +++++++++++++
+ lib/mbedtls/Makefile             | 17 +++++++------
+ lib/mbedtls/mbedtls_def_config.h | 41 +++++++++++++++++++++-----------
+ 5 files changed, 56 insertions(+), 21 deletions(-)
 
-diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
-index 2f851ebb28c..af72ea6d547 100644
---- a/boot/image-pre-load.c
-+++ b/boot/image-pre-load.c
-@@ -70,6 +70,12 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 	return 0;
- }
- #else
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 5c97418783f..b9991d269d9 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -389,6 +389,7 @@ CONFIG_PMBUS=y
+ CONFIG_CMD_DHRYSTONE=y
+ CONFIG_MBEDTLS_LIB=y
+ CONFIG_HKDF_MBEDTLS=y
++CONFIG_ECDSA_MBEDTLS=y
+ CONFIG_ECDSA=y
+ CONFIG_ECDSA_VERIFY=y
+ CONFIG_RSASSA_PSS=y
+diff --git a/lib/ecdsa/Kconfig b/lib/ecdsa/Kconfig
+index ca13b6bfa1f..dac8bcf23dd 100644
+--- a/lib/ecdsa/Kconfig
++++ b/lib/ecdsa/Kconfig
+@@ -1,6 +1,7 @@
+ config ECDSA
+ 	bool "Enable ECDSA support"
+ 	depends on DM
++	select ASN1_DECODER
+ 	help
+ 	  This enables the ECDSA (elliptic curve signature) algorithm for FIT
+ 	  image verification in U-Boot. The ECDSA algorithm is implemented
+diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+index 789721ee6cd..e019f17d6bd 100644
+--- a/lib/mbedtls/Kconfig
++++ b/lib/mbedtls/Kconfig
+@@ -247,6 +247,12 @@ config MBEDTLS_LIB_X509
+ 
+ if MBEDTLS_LIB_X509
+ 
++config BIGNUM_MBEDTLS
++	bool
 +
-+static int is_ecdsa(struct crypto_algo *crypto)
-+{
-+	return crypto && !strncmp(crypto->name, "ecdsa", 5);
-+}
++config ECC_MBEDTLS
++	bool
 +
- /*
-  * This function gathers information about the signature check
-  * that could be done before launching the image.
-@@ -86,6 +92,7 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 	int key_len;
- 	int node, ret = 0;
- 	char *sig_info_path = NULL;
-+	struct crypto_algo *crypto;
+ config ASN1_DECODER_MBEDTLS
+ 	bool "ASN1 decoder with MbedTLS certificate library"
+ 	depends on MBEDTLS_LIB_X509 && ASN1_DECODER
+@@ -264,6 +270,7 @@ config RSA_PUBLIC_KEY_PARSER_MBEDTLS
+ 	bool "RSA public key parser with MbedTLS certificate library"
+ 	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+ 	select ASN1_DECODER_MBEDTLS
++	select BIGNUM_MBEDTLS
+ 	help
+ 	  This option chooses MbedTLS certificate library for RSA public key
+ 	  parser.
+@@ -292,6 +299,15 @@ config MSCODE_PARSER_MBEDTLS
+ 	  This option chooses MbedTLS certificate library for MS authenticode
+ 	  parser.
  
- 	if (!info) {
- 		log_err("ERROR: info is NULL for image pre-load sig check\n");
-@@ -114,11 +121,24 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 		goto out;
- 	}
- 
--	padding_name = fdt_getprop(gd_fdt_blob(), node,
--				   IMAGE_PRE_LOAD_PROP_PADDING_NAME, NULL);
--	if (!padding_name) {
--		log_info("INFO: no padding_name provided, so using pkcs-1.5\n");
--		padding_name = "pkcs-1.5";
-+	crypto = image_get_crypto_algo(algo_name);
-+	if (!crypto) {
-+		printf("ERROR: can't find a valid crypto algo from %s\n",
-+		       (char *)algo_name);
-+		ret = -EINVAL;
-+		goto out;
-+	}
++config ECDSA_MBEDTLS
++	bool "Enable ECDSA support with MbedTLS certificate library"
++	depends on MBEDTLS_LIB_X509 && ASN1_DECODER_MBEDTLS
++	select BIGNUM_MBEDTLS
++	select ECC_MBEDTLS
++	help
++	  This option enables support of ECDSA with the MbedTLS certificate
++	  library.
 +
-+	if (is_ecdsa(crypto)) {
-+		padding_name = NULL;
-+	} else {
-+		padding_name = fdt_getprop(gd_fdt_blob(), node,
-+					   IMAGE_PRE_LOAD_PROP_PADDING_NAME,
-+					   NULL);
-+		if (!padding_name) {
-+			log_info("INFO: no padding_name provided, so using pkcs-1.5\n");
-+			padding_name = "pkcs-1.5";
-+		}
- 	}
+ endif # MBEDTLS_LIB_X509
  
- 	sig_size = fdt_getprop(gd_fdt_blob(), node,
-@@ -129,12 +149,17 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 		goto out;
- 	}
+ config MBEDTLS_LIB_TLS
+@@ -301,6 +317,7 @@ config MBEDTLS_LIB_TLS
+ 	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+ 	depends on ASN1_DECODER_MBEDTLS
+ 	depends on MBEDTLS_LIB
++	select ECC_MBEDTLS
+ 	help
+ 	  Enable MbedTLS TLS library. Required for HTTPs support
+ 	  in wget
+diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+index c5b445bd85c..0c86c90d15a 100644
+--- a/lib/mbedtls/Makefile
++++ b/lib/mbedtls/Makefile
+@@ -39,13 +39,21 @@ mbedtls_lib_crypto-$(CONFIG_$(PHASE_)HKDF_MBEDTLS) += \
+ # MbedTLS X509 library
+ obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
+ mbedtls_lib_x509-y := $(MBEDTLS_LIB_DIR)/x509.o
++mbedtls_lib_x509-$(CONFIG_$(PHASE_)ECC_MBEDTLS) += \
++	$(MBEDTLS_LIB_DIR)/ecp.o \
++	$(MBEDTLS_LIB_DIR)/ecp_curves.o \
++	$(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
++	$(MBEDTLS_LIB_DIR)/pk_ecc.o
++mbedtls_lib_x509-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) += \
++	$(MBEDTLS_LIB_DIR)/ecdsa.o
++mbedtls_lib_x509-$(CONFIG_$(PHASE_)BIGNUM_MBEDTLS) += \
++	$(MBEDTLS_LIB_DIR)/bignum.o \
++	$(MBEDTLS_LIB_DIR)/bignum_core.o
+ mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASN1_DECODER_MBEDTLS) += \
+ 	$(MBEDTLS_LIB_DIR)/asn1parse.o \
+ 	$(MBEDTLS_LIB_DIR)/asn1write.o \
+ 	$(MBEDTLS_LIB_DIR)/oid.o
+ mbedtls_lib_x509-$(CONFIG_$(PHASE_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += \
+-	$(MBEDTLS_LIB_DIR)/bignum.o \
+-	$(MBEDTLS_LIB_DIR)/bignum_core.o \
+ 	$(MBEDTLS_LIB_DIR)/rsa.o \
+ 	$(MBEDTLS_LIB_DIR)/rsa_alt_helpers.o
+ mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
+@@ -64,7 +72,6 @@ mbedtls_lib_tls-y := \
+ 	$(MBEDTLS_LIB_DIR)/mps_reader.o \
+ 	$(MBEDTLS_LIB_DIR)/mps_trace.o \
+ 	$(MBEDTLS_LIB_DIR)/net_sockets.o \
+-	$(MBEDTLS_LIB_DIR)/pk_ecc.o \
+ 	$(MBEDTLS_LIB_DIR)/ssl_cache.o \
+ 	$(MBEDTLS_LIB_DIR)/ssl_ciphersuites.o \
+ 	$(MBEDTLS_LIB_DIR)/ssl_client.o \
+@@ -82,8 +89,4 @@ mbedtls_lib_tls-y := \
+ 	$(MBEDTLS_LIB_DIR)/cipher.o \
+ 	$(MBEDTLS_LIB_DIR)/cipher_wrap.o \
+ 	$(MBEDTLS_LIB_DIR)/ecdh.o \
+-	$(MBEDTLS_LIB_DIR)/ecdsa.o \
+-	$(MBEDTLS_LIB_DIR)/ecp.o \
+-	$(MBEDTLS_LIB_DIR)/ecp_curves.o \
+-	$(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
+ 	$(MBEDTLS_LIB_DIR)/gcm.o \
+diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
+index dda3f4dd6e4..d55f31acfda 100644
+--- a/lib/mbedtls/mbedtls_def_config.h
++++ b/lib/mbedtls/mbedtls_def_config.h
+@@ -62,6 +62,25 @@
  
--	key = fdt_getprop(gd_fdt_blob(), node,
--			  IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_len);
--	if (!key) {
--		log_err("ERROR: no key for image pre-load sig check\n");
--		ret = -EINVAL;
--		goto out;
-+	if (is_ecdsa(crypto)) {
-+		key = NULL;
-+		key_len = 0;
-+	} else {
-+		key = fdt_getprop(gd_fdt_blob(), node,
-+				  IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_len);
-+		if (!key) {
-+			log_err("ERROR: no key for image pre-load sig check\n");
-+			ret = -EINVAL;
-+			goto out;
-+		}
- 	}
+ #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
  
- 	info->algo_name		= (char *)algo_name;
-@@ -152,9 +177,13 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 	info->sig_info.name     = info->algo_name;
- 	info->sig_info.padding  = image_get_padding_algo(info->padding_name);
- 	info->sig_info.checksum = image_get_checksum_algo(info->sig_info.name);
--	info->sig_info.crypto   = image_get_crypto_algo(info->sig_info.name);
-+	info->sig_info.crypto   = crypto;
- 	info->sig_info.key      = info->key;
- 	info->sig_info.keylen   = info->key_len;
-+	if (is_ecdsa(crypto)) {
-+		info->sig_info.required_keynode = node;
-+		info->sig_info.fdt_blob = gd_fdt_blob();
-+	}
++#if CONFIG_IS_ENABLED(BIGNUM_MBEDTLS)
++#define MBEDTLS_BIGNUM_C
++#endif
++
++#if CONFIG_IS_ENABLED(ECC_MBEDTLS)
++#define MBEDTLS_ECP_C
++#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
++#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
++#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
++#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
++#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
++#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
++#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
++#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
++#define MBEDTLS_ECP_DP_BP256R1_ENABLED
++#define MBEDTLS_ECP_DP_BP384R1_ENABLED
++#define MBEDTLS_ECP_DP_BP512R1_ENABLED
++#endif
++
+ #if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
+ #define MBEDTLS_X509_USE_C
+ #define MBEDTLS_X509_CRT_PARSE_C
+@@ -74,7 +93,6 @@
+ #endif
  
-  out:
- 	return ret;
+ #if CONFIG_IS_ENABLED(RSA_PUBLIC_KEY_PARSER)
+-#define MBEDTLS_BIGNUM_C
+ #define MBEDTLS_RSA_C
+ #define MBEDTLS_PKCS1_V15
+ #endif
+@@ -89,6 +107,10 @@
+ #define MBEDTLS_ASN1_WRITE_C
+ #endif
+ 
++#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
++#define MBEDTLS_ECDSA_C
++#endif
++
+ #endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
+ 
+ #if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS)
+@@ -122,7 +144,9 @@
+ 
+ /* ECDSA */
+ #if CONFIG_IS_ENABLED(ASN1_DECODER)
++#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+ #define MBEDTLS_ECDSA_C
++#endif /* #if CONFIG_IS_ENABLED(ECDSA_MBEDTLS) */
+ #define MBEDTLS_ECP_C
+ #define MBEDTLS_ECDH_C
+ #endif
+@@ -130,24 +154,13 @@
+ #define MBEDTLS_HMAC_DRBG_C
+ 
+ #define MBEDTLS_CAN_ECDH
++#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+ #define MBEDTLS_PK_CAN_ECDSA_SIGN
+ #if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
+ #define MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+ #define MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+ #endif
+-
+-#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+-#define MBEDTLS_ECP_DP_BP256R1_ENABLED
+-#define MBEDTLS_ECP_DP_BP384R1_ENABLED
+-#define MBEDTLS_ECP_DP_BP512R1_ENABLED
++#endif /* #if CONFIG_IS_ENABLED(ECDSA_MBEDTLS) */
+ 
+ #endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS) */
+ 
 -- 
 2.43.0
 
