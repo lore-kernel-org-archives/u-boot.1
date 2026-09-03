@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3927C61DD3
-	for <u-boot@archiver.kernel.org>; Thu,  3 Sep 2026 14:37:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 913A6C61DD3
+	for <u-boot@archiver.kernel.org>; Thu,  3 Sep 2026 14:38:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5181B80F48;
-	Thu,  3 Sep 2026 14:37:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4EB9F60B73;
+	Thu,  3 Sep 2026 14:38:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id s57ZlfTrSkRH; Thu,  3 Sep 2026 14:37:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org EEBB780F26
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788446261;
-	b=oEtX4qNT6nixEkcQ3MAUfVn4VHmvjEH31oqaj5cOoWi2yaXHC182dV3e9+xWlU2PDcSO
-	 GKZVhzIbJ1jMdH6MDHUvfytJYzTCu/gxoD+2xXqsSL3Qy/AyfMlNdS0p6mLP3ayQfvmxv
-	 GA2MgCq2DeJ0KIYw1n1SntrvqB4J2vsioQnP4J9Emn+T8X7DHTHDhRv+wTtSLmtx3nq8J
-	 Ho16zM04gN/IDJIQm7KGYc6lJzVIBR0mr6QvjL1uXNu93rRLdrMA8ZuBV8xC6dYHYYJWc
-	 qEtCFjQ7WPqlh3krTTM3aQSzWqj3hQsqnatUT98taYJqsopSC+Jc9Xe+wc+TkwxkLbQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KgxSLaLnaSx3; Thu,  3 Sep 2026 14:38:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org D63F860B43
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788446319;
+	b=LR/cfQ8Qk5uHqwk4YdZYOZnuvdIwTz3XRsdY5q+YoGnLreA3nUJpjyRs3ZdzpRKxE0UY
+	 5YU+8Sl7KeeJY22OrkqZQ3JmHmAE2C7j8z0p7Cqw6yEenElz6VV07SBXGMFP8ILblY2gp
+	 EJUyP9b6p/SSVUO5NbOB4tdpJocevjM5Gqj7EJ/N4pD9qTBP0BX0gUFfwQ6xDJgjvrfWY
+	 MXQbMhZ0WPhSvnRPTGua1KHwJ4UqBjUsG6LQcS3pDlkdQSHgJrvL/t1MS/pwiwWVOc37P
+	 3HHAM4GcVR65V8F28rCaLa96WK9HIApfloRaSnB4fykAPt9xLs83Zo8GucTV5y7ZR+g==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788446261;
+	c=relaxed/relaxed; t=1788446319;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,150 +32,150 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=mE4uMcgKwQ9NcSAkjbg9IHEU2CxW+51N8uOn/Ypgf84=;
-	b=UZB9FaVczDB+XUIUAO+PG/XX4QHCJlSlKUG1TFwWznMoLsAWZbsrCBfMhJwXegKc/cvU
-	 YrCY78pLqHeKj10x6MtopLwVUjafmeRnUzhKAv0egur9pbjcTDA+voJolzjdhjp5+wRmn
-	 mDW/MlF0gZjQLeLNcWQbHUR1t7FPuS1mDFA6UmyMHnA6ut7hjplKW+ft/sX1j9+si3ip8
-	 bxosv3fzaaaigDlRjQbrmczsibIcpr9dEsSSAEqBcOyMTxzvPvG92e/TtyctIH9lDs1fx
-	 V33uJcRCP1djPCjMzbKdYTxSDy5IYeWGjAJ3hCgbGU9nm+s4poOTvy+B8LqQZ2xb9mg==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=/Tm7m0tDkSVc/SzgB5loNPweDdBi8/hIRRUVblRzu2k=;
+	b=qXuBjh193b051MDDjvmQZyZIEyX+e7eMCsYT+h397UHlZpc9+I4E9dYcP9+JadKQ0pUG
+	 SnjiOmZoMGonEC3FEvVRdyxq9yhBWeSM+UtJ8DBI2pDy946s3mo7jiyCSeyaEj9Fn0Fr8
+	 dbCLnMiw3KFUidE9hyqmrnvuDFAbjVNcQIInHzxksnIntisPBJesqAoYRUhKOxK7FWt11
+	 BDoTaBoEiMkdvPjtwDR74/W5ujAbk9CJGOD/d2Z5iOKFPzGS++AQkYFnvdvW9Ejlc1CSb
+	 FJahHJ196MqXTdz9eY4RuVobmdrQLsJW5wdcoxnI98Xw1GgeG94sEuOaKZtYUL8RlZw==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788446261;
-	bh=mE4uMcgKwQ9NcSAkjbg9IHEU2CxW+51N8uOn/Ypgf84=;
+	d=lists.u-boot-project.org; s=default; t=1788446319;
+	bh=/Tm7m0tDkSVc/SzgB5loNPweDdBi8/hIRRUVblRzu2k=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=o9Lpq90ZD5dOjJOU9xVxn1X8OpcH64tYHtAAFmfJHGwbaSK4zn0jdXSllvwNeFyM0
-	 BY5iQc9Acvk1wMnSqeUh42OYWL1zY6j/JmvJG+7NR5oCc+hMs6EhNeA0HZ9KGGwhUf
-	 Q1foEaFd4m+D6VyhdyU0ql7L0Q9GPVtAanHrgzp7nmbJ9VN5Fzan1hqojL9zuOFIB5
-	 sFTgDDvHapX4hOsd2Rtx96Peom/761WyXqNkO8aCkE7SuGSmdshzwPxF4RfiyptInV
-	 92M0Nt6AV1kbEWGmuYIl8RkyvkWmDBRZwDtefCgmVdFDdEKQPzHWz/hbrCgtMxzsaP
-	 M30ZMEpu9ab9w==
+	b=uyMkruhDN+qjyTwveZs+fkAqtZryQX0rYfpB/9adm5WWK3NqJB2P6CtfEc6TQbuoq
+	 s6e9xICHW++jKUV0I3T8EDM1fq4P4Ck9YQCOc1AnqB6aqBPLbjiUqTpVAFmVlV7LJF
+	 TBYFTBgFqVyNPq0ay6FrYJ8+mzgx6DkdiIrI5eIr+ujhBmaSGRjkwpPA4YrBb/fO8h
+	 /BBPsVwKO6z7hw8gn+avZd82FZ6JGK4bi1Cr4+k800akC2DIe6LesJZWgBl4gJskP8
+	 DwURmcbOKeKI5KqX1Vw3YpEQdDbOFq7TpjdxhhMLQflBlsPrkbaDHwWP+bZj2H0/d2
+	 mf+u38LyTpH7w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EEBB780F26;
-	Thu,  3 Sep 2026 14:37:40 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 3D4DC498
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:37:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D63F860B43;
+	Thu,  3 Sep 2026 14:38:38 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5E8A2279
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:38:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2EA5060B8D
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:37:40 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 54BF180CCE
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:38:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KG96R95oyF2K for <u-boot@lists.u-boot-project.org>;
- Thu,  3 Sep 2026 14:37:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 02EFB60B71
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::92b"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788446259;
- b=iq6loutdVmALy/f1vv+4NczPJ4N6PneVqVZaZtUwWzKsvRZpkDCNNRuixc54z/YwAAKy
- VnBUREBJ9qk5toQTy+TqJutESBOrUMPobUfUOXUyHQiaPI4z9sBmU5QcX5UcuWaxnT8sr
- MD5hgiDoI3TY3NndMvzyGcajNz79UW2VCBUxgSUot2Zpaj1RECUD7DBZIR9RCzY39A9T4
- aqFi9StOlJyst0GoMznIgu2404nPnmEG8yr83cfAFXLAliAmES1wsmiNT3bIpm5Es5lNd
- SoqyXaDGtqA6ZspTHCE+q9sX0lJceQcJBiIzoDnW0ngnj49KCMsYFXvk8Ixym+9MTZg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KL-b-MUWSI8C for <u-boot@lists.u-boot-project.org>;
+ Thu,  3 Sep 2026 14:38:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 71C3280EF0
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::92f"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788446310;
+ b=TpMIiWT5WuEqgu1CyD5N+jMaSVmyWufTN8HXLQANaaUEzlQlHy43JDgQySg+Wf0uzcLQ
+ mumjILAA05U0iJwyyAck0/Ufp1/ksQ/MuCEgfqRfuQMjWJHGqif+arxZn8yNclNfVMwxF
+ Nd6FmnIfh8ZaCbFpW1Rig0Jl5xUyCsTM1JxYKV7BKS99gvZU0l010lvWx2hVeeFmHwFlG
+ fanhYEy4uCTIvNMrTZYzcdO+wT2pMbllvDopVVuo2LC/V1SHbvthhJ2jvtWI6F57kJTfB
+ 8pStSzomJZveti5opyJ7gH2Dqh8vxDU7l+ySzLY9s2hhFZC2+9Yuu8TzBz1bYdHS4CQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788446259;
+ c=relaxed/relaxed; t=1788446310;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
  MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
- bh=mE4uMcgKwQ9NcSAkjbg9IHEU2CxW+51N8uOn/Ypgf84=;
- b=A+okfFpK8odTcQ6jgKLCFl+B2Xw60WWGdovETwBCL4y/g0+kY9QR7VCvv0u5nNqs8Y6T
- fgvpJ7B4OxReBerI+0La/aU9WgIJeglion9upugvDQrnNFFbCxGzDchSHhfCi4DilBxcC
- pAYBZovLRhm0GoCM9AN26pfnBCgjfFVZNS+DEVS2AZT/7RtNIXc0tubiRZgn5OOz5/gJH
- EP3tZBhozBb6MTDRuvG6Qq/yHJmj/GQngu+9zl2K8eqWNyeb8OA1GBOT9hWwmQmR/U9jw
- HACakgpns8t1u4lmf4FrVz4pxjrhoF/wX5XEw6/oPNDmrgzgyOrot+Oh7Z4no9nja7A==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org;
+ bh=/Tm7m0tDkSVc/SzgB5loNPweDdBi8/hIRRUVblRzu2k=;
+ b=eKFf2SOhxIw16H9QxHh/HXM1sawoHQBwT3p3UHvqqwHYKvmCfBNtFa1+zZmHg7EI9g75
+ ypvGvW4o911ZWPMNQ7Nobrc3OjrqFPBhl4fqjkBirhv3Enn3vjkqupocSkVKB8BHcnVYy
+ AYK/lcT9MQHhOegeYTn5ytThAtH7MrFyS4CTnKC9tjLLSj/WKRBV27lkbzDm/qsluOD6n
+ tpGrf11eT1k/Y1E44DzbWoFl7ca3kJNcy1Yl971PRYKlZ143wMEa+27MZgZjocpx8BkSE
+ Tip2lhDx8g4SEjKrra2tctyaPXC2T5QMDP5i942RUSd4SGc/nSYOk1wkwS+aSi6Pjog==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=Ykf8Jz0q; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::92b"
+ header.s=20251104 header.b=F9HLdJr9; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::92f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::92b; helo=mail-ua1-x92b.google.com;
+ client-ip=2607:f8b0:4864:20::92f; helo=mail-ua1-x92f.google.com;
  envelope-from=raymondmaoca@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=Ykf8Jz0q
-Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
- [IPv6:2607:f8b0:4864:20::92b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 02EFB60B71
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:37:38 +0000 (UTC)
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-97cbbdfc2e0so893582241.0
- for <u-boot@lists.u-boot-project.org>; Thu, 03 Sep 2026 07:37:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788446257; cv=none;
+ header.a=rsa-sha256 header.s=20251104 header.b=F9HLdJr9
+Received: from mail-ua1-x92f.google.com (mail-ua1-x92f.google.com
+ [IPv6:2607:f8b0:4864:20::92f])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 71C3280EF0
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:38:29 +0000 (UTC)
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-97ca72f2cd9so1212341241.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 03 Sep 2026 07:38:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788446309; cv=none;
  d=google.com; s=arc-20260327;
- b=btnpXmkN+WK81Ba65Zoh2TOvV2luXsAOYZNWZbjqb3ciUO+XkVCSTFQC371853DFU6
- TDHakd3wLCrXdDLCU7lkWmIYvWlXiUCy9NmDdWlju2pJf2pJPahrfjc/2ozxrE7TBR69
- DWoQvs++mEwAXNXioZRafeeHhppuDO3JC1IxKsf/VpfDdO7d34AHlNNmM+WOELYwK3Ej
- xbFxxx4PQbAj5ysqwA7PCS+0FwLNDmUatPAoBYUXcriNbL+CNQtcv7qNJduNcsG8R5yR
- iGZATkV/P/yPKSxS88WvDjHHftT6kxfsy5yCC/m+cz9E7ZMtp6F2505ezbpHg5YSVCvd
- B+pg==
+ b=Iom9Lhwvfz8RoaAF0l9wvLbwBy8UPvZ8p44iSsBkqOGTVgBzbykpIJgSDbaLyhWezQ
+ nBBsn1MFEnj163BmpCtpC3kxMepvPLfrIpnD2SwKAZSjaDNmscuMqyOafOL3hPnA1tgC
+ Xq2TRIVphvt1m5xOVzH+sfvJ6XU4n3yplfNc+U8uevz6VMTqgj8VyrlyD8pp2i8jfYGj
+ yh95zX6Hu52mHZTc2Jv+nPAcGDJRYd3RrEyCEj8B+UbYfFeO6v+cYkG2J4gN929zVQf7
+ BC5flC8CFTnZZpjklz1YTo6RSDMWujj/mCWuidMEMKtZfdyDMsVklBn6rGuByrp5AflO
+ 32fA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=mE4uMcgKwQ9NcSAkjbg9IHEU2CxW+51N8uOn/Ypgf84=;
- fh=GKiQb09UDV0/BhVmtgY4Lx/iPF7Y98a9Upz2uCnkxWQ=;
- b=jPwfaVqvAnlAgH4kYIavcVhe8JTZliv4ShLBqNYF07XoPyf37zUx/4h7dMbMDsygc+
- QaRl570c3xUT9P4mlTnIoQHQH/uNhxR9ksdu2l/fxabdjEMdrccsPI7cKVyaVGAfk5Rs
- +bXu3OzBudjCkwZh6AVShyYEBQSHgo0JrQthoZKq1XiYDN2gJcZxNC9ZIkb03EmPyw1A
- PjJXxjI5TKPmypPTqcA6Qtt+SHX2cMaoW3tNPJ2h690zdNob4vHgmwP/EComLPhAmLj+
- UoD8xspkQfZA0iWl+7CAXa9kAamo8wG2vc3BRKVqOZTBOVlR8HSi+5yOkr2vTm9fmMHT
- hQKg==; darn=lists.u-boot-project.org
+ bh=/Tm7m0tDkSVc/SzgB5loNPweDdBi8/hIRRUVblRzu2k=;
+ fh=FlzMlNxNHKSw8Zv4FH2lxGmuLigz9krl3KVAnzJQ6cs=;
+ b=AtJ1UriZgZoC4UG71C12Zej3v32uR/2CFyeoYfuZOeEMj12DDmIXT9sa1Z/OOranEg
+ 19qm6M082VL/R5pd5fW8cyU5pxqzc+hU/Ku+0QOvW1+4BWxAS7OiLIvQ/c3nnPF6u8jf
+ Tqg5taVJlTEtSJtjvWKvWUpJzmMUQpZ6cPnepQ9rcFXVZLqYoN0rDqtMaZjPKOFgTFVo
+ 7q3xk37wwGCcw7E3WXj+09RPDiRtGA7Y8EaSjnpbkmWCDACGMOso1FGN8OsJ0HjInQaI
+ jtzQZ7Hc5j2phEUKOuchYXDgpVIfLv3TT3Routje2SNf6DzDlkTNacKm5QjYWgLZb1yC
+ hoZw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788446257; x=1789051057;
+ d=gmail.com; s=20251104; t=1788446309; x=1789051109;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=mE4uMcgKwQ9NcSAkjbg9IHEU2CxW+51N8uOn/Ypgf84=;
- b=Ykf8Jz0qZac4qKq8lmbRjurWWLigpL+JwL7xU7ldLDuLFJ0O1TJSAqLt70CX4GrErE
- oY9hri/LVOuJB/4K1bOXDmBt9bFFb3URZezF5gwiGb0nINgU6oja2hb4EF8SL85DWuN8
- aVi7401saSVvUs/PMP1joyCHslTU1RpI7lGqyiz5rmczRDNvrAY6hbmkfjD5RtYNHVZN
- CqL44zf/EE4ZWYSErtXBIpr1LBO9G+Lonu6Q07PQIzcB4q0CQ23l5wrdTG8FQ5iZ9pWD
- g+HfwuAWAA1a1cftY+2aTQMLbxysEi1S1L0l0MK3gAMLht/BH+HHwmWcaXq7C6YFBhvo
- SW6A==
+ bh=/Tm7m0tDkSVc/SzgB5loNPweDdBi8/hIRRUVblRzu2k=;
+ b=F9HLdJr9QpFXyCNpJfwbJTRS3lhRlQEBi9INvMf3P+0UqgCdAHjn5RahIM0Wof7fok
+ DsHuKxlgnU64vu6lLy1WlXsryTaHu1O/EAsW5z7aBXAo5H9L6+ymIkZzx4T6q5RAhx/g
+ uYxrMuGwD9eUCUyujeqcXhyiB/Sekp/CScsA4v4dMTG3vyghR0QDbRxqBob/oCX7wqKl
+ ye2O4LZ1kq1Z9mod6n3VRKeltTlxocvF9XWgO1K39NysjDIQwfIJIJuTafsIVT6hY4OV
+ EVfl+LOtwAGmGD9Fxe9sYLJEHgGgtRjt422ztY87Ld4fY6es4+6Q/LzUvpWTc8e6OmsR
+ MEuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788446257; x=1789051057;
+ d=1e100.net; s=20251104; t=1788446309; x=1789051109;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=mE4uMcgKwQ9NcSAkjbg9IHEU2CxW+51N8uOn/Ypgf84=;
- b=bGdrG/6Kvd9kO0MWTAzJ3ITBzKnYRxBef2JpAXeyMqeZiXcMdepvuWCZVS3YerUSXD
- IztS67skJOK9sA0/p1/gz2n9WzempEhIIRcFbemHmhxV8tZ1o4eQNEHDaD+YN+WoidJZ
- e0X/MbGZQev7iJpgTvgdJH1SW7eymM7YHyh2diZAxgZw+RrkiKn/0nK23WVjOG6QZI0c
- iZuhPqCLFgYF03yKNu1/pRq6aqoHDRBiQRSoSfjqJVItYw/KX6qQmEAe1Ly5ihrp1Mp/
- mgfa2vFb8/hPLaFOosnV3vu+ERWvF9SNtrHWgaT8zyKlDtJ5TP2iA6pLyfVnCs5lDuRJ
- /yig==
+ bh=/Tm7m0tDkSVc/SzgB5loNPweDdBi8/hIRRUVblRzu2k=;
+ b=nfgTSRnv/vY2QMyvEYmOWXTgE30geAzRL7vVanS+PyNxMvueCslcVfojtalcU4/Wab
+ O/vMXKi7cotnxSTDugwx9Uo1TS09uyw9XjISANAuu+E+y1biG66zNfwqAjGHZ3R6QPgv
+ 5+IGaCuRsLXK5viYz4JFiajNboOrmDOQP2AHzh32djRNjWiG+MmwhNILZfAw2oauA8pJ
+ FDXYnlU/P4cQ4tde0/OFhvR7zBuKb0g38ya0frwA9qV7x2jmDoJ/boOwGcNRolLYiQoU
+ qy+CFAHTrw+fYOul4nlvkpNMXuj7TepSonlwP2U5nMtrf+yY8bBXH2hrzAQuQlSnP+O3
+ hKzQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwn8DDbY5oTjZPmzEuEZcIuzePBkOJhcOT56nXa8PUlGyX7TXBXchlrREIfFBgwWauOqWCrkrI=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mj069kdjklSMPiC1j/kTTGWD30K5yriwfJZgH0BsQnDoCk5Uma
- CQvc62g7kZUBfuMkKP0HBlCisegZnhsCNlzfKd0eDanx+gnXbsHxzzBuhKOPTpalRw5hLNzNXRk
- irJ+v9JoiOc7z0urbCg/U1ST8A86T2MM=
-X-Gm-Gg: AYBFou2ZAf8GmvkFLfrxAVk5B3cHFNIQMg6FiJ7kPy2pxnFBuL6NnNMEttIdNrVRYJK
- G1oka6BjKYV8T0MvSII6/qtBOxQu9yTi2QUuLypu6hrvpptSKTDUI4lqm0iHmo5u5NSz/qYoF1c
- TExf3hjp6GiowpWrVl3yVhS+0LcFvcCazLTlZET2TWugSGtsO51q2tdSdulC+kGj0FMQXmqmy9a
- uGqnisi96wx7rxcH0BW3FFUuBlZAQg5ya49pZ9sDU+wUlpfTRK616KH76Gtpq7gm6vWOs2g0Sw3
- 3Uwk+k9yBmhbQ+TpL/MU3PQ+4VVog3q2gmRX6UZ0BcUZorg56KomqtYXfQ==
-X-Received: by 2002:a05:6102:6441:b0:783:f3bf:f9aa with SMTP id
- ada2fe7eead31-78a1f2e063amr3936462137.8.1788446256809; Thu, 03 Sep 2026
- 07:37:36 -0700 (PDT)
+ AKwUvByaQcR8VQ4nHHxFlLubfVFN3YlHv4HNZzkpP7x5socQ96cyI/GbiIM8/CMOFtQcOS1PJ7arDqM=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++kj8LdZKMw1JZaKITlR/gHoBFiWA+d6v3jXTOK3aFfxu6Us1atJ
+ UO5pu0F9BNUIxSG18euRbcaRT9jk29WeMg3IydD/y3uHvSs/ZdgqwE7FB7qd6fr1AMzrFJ1ADmt
+ +2dF9jWDjewvdh0SJ+UhanLv2SmnvI2o=
+X-Gm-Gg: AYBFou1aSUTF/QegkZK0D/CB2mZ0ycOZegjubInOQUxRoUrtYqdGRDDVZ30dNtXmUlJ
+ vltwVpTvr/rkuTDlkfLkJ5+kvEea5Ye3FC9XR+TLZN6BgfsIMd0np4Tp1/Y349uC71hW4ZOqK7g
+ T7vOB8gLQOlbvsfYOK7qe4Q+YrpjGOTI561Oqco0IqBOdJ2Fv3yRWPtbOEBrH8Qhmj2sIg5K55+
+ loQT8ZGQz8HK3AmEA8SulYvG/0ibb/Vwtq0WNQJc5ixtwjCNOqcRceSR1TRUwE4fdwMNa7I6CsP
+ BdTtnio4TW1em0e9uY+trI1bgGOytEKLYndG9FWA7Im5hHk=
+X-Received: by 2002:a05:6102:5247:b0:785:a48a:e3b9 with SMTP id
+ ada2fe7eead31-78a1f21a6b7mr5457238137.4.1788446308680; Thu, 03 Sep 2026
+ 07:38:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260903081705.12894-1-philippe.reynes@softathome.com>
- <20260903081705.12894-12-philippe.reynes@softathome.com>
-In-Reply-To: <20260903081705.12894-12-philippe.reynes@softathome.com>
+ <20260903081705.12894-13-philippe.reynes@softathome.com>
+In-Reply-To: <20260903081705.12894-13-philippe.reynes@softathome.com>
 From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Thu, 3 Sep 2026 10:37:24 -0400
-X-Gm-Features: AcwNN1VgFnNpGirSwKb5WcjWSoBjF1zEkwD-FmwwdBsLgEpOUKT_H8IMmhKgDx0
-Message-ID: <CAMDkj5xoSKAGFwhQBN02eTTwZNN0XCwj1fKO7kxmtE_mnNXjiA@mail.gmail.com>
-Subject: Re: [PATCH v9 11/15] tools: binman: pre-load: add support of ecdsa
+Date: Thu, 3 Sep 2026 10:38:15 -0400
+X-Gm-Features: AcwNN1WiLfu3qUFTI9Je2XKFgo1xSQUdRpplF46nNfozgduqpvnnJtzfAA1zgww
+Message-ID: <CAMDkj5xhfm_PSS8SH7D3bFjxCQGx3_KDBJKJX8t=tJOnFiBKtw@mail.gmail.com>
+Subject: Re: [PATCH v9 12/15] boot: pre-load: add support of ecdsa
 To: Philippe Reynes <philippe.reynes@softathome.com>
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
  simon.glass@canonical.com, u-boot@lists.u-boot-project.org, 
@@ -200,8 +200,9 @@ Hi Philippe,
 On Thu, Sep 3, 2026 at 4:17=E2=80=AFAM Philippe Reynes
 <philippe.reynes@softathome.com> wrote:
 >
-> Right now, binman can only create pre-load header
-> using rsa. We add the support of ecdsa.
+> Right now, u-boot can only boot image with a
+> pre-load header with rsa. We add the support
+> of ecdsa.
 >
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 > Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
@@ -210,15 +211,10 @@ On Thu, Sep 3, 2026 at 4:17=E2=80=AFAM Philippe Reynes
 > v3:
 > - initial version
 > v4:
-> - merge patch 11 that was adding test for ecdsa pre-load
-> - add key size check
-> - use exc instead of simply e
-> - rename dts filaneme
-> - add a test to check key size
+> - avoid calling image_get_crypto_algo several times
 > v5:
-> - compute ecdsa521 sig instead of using hardcoded value 132
-> - fix english: don't -> doesn't
-> - avoid line too long
+> - simplify the function is_ecdsa
+> - re-use already computed crypto in function image_pre_load_sig_setup
 > v6:
 > - no change
 > v7:
@@ -228,22 +224,8 @@ On Thu, Sep 3, 2026 at 4:17=E2=80=AFAM Philippe Reynes
 > v9:
 > - no change
 >
->  tools/binman/etype/pre_load.py                | 78 ++++++++++++++++---
->  tools/binman/ftest.py                         | 50 ++++++++++++
->  tools/binman/test/ecdsa521.pem                |  7 ++
->  tools/binman/test/security/pre_load_ecdsa.dts | 22 ++++++
->  .../security/pre_load_ecdsa_invalid_algo.dts  | 22 ++++++
->  .../security/pre_load_ecdsa_invalid_key.dts   | 22 ++++++
->  .../security/pre_load_ecdsa_invalid_sha.dts   | 22 ++++++
->  7 files changed, 214 insertions(+), 9 deletions(-)
->  create mode 100644 tools/binman/test/ecdsa521.pem
->  create mode 100644 tools/binman/test/security/pre_load_ecdsa.dts
->  create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_alg=
-o.dts
->  create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_key=
-.dts
->  create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_sha=
-.dts
+>  boot/image-pre-load.c | 53 +++++++++++++++++++++++++++++++++----------
+>  1 file changed, 41 insertions(+), 12 deletions(-)
 >
 
 Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
@@ -252,345 +234,115 @@ Thanks!
 Regards,
 Raymond
 
-> diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load=
-.py
-> index 0d953cb258e..7890c1c62a8 100644
-> --- a/tools/binman/etype/pre_load.py
-> +++ b/tools/binman/etype/pre_load.py
-> @@ -16,8 +16,10 @@ from binman.entry import EntryArg
->
->  from Cryptodome.Hash import SHA256, SHA384, SHA512
->  from Cryptodome.PublicKey import RSA
-> +from Cryptodome.PublicKey import ECC
->  from Cryptodome.Signature import pkcs1_15
->  from Cryptodome.Signature import pss
-> +from Cryptodome.Signature import DSS
->
->  PRE_LOAD_MAGIC =3D b'UBSH'
->
-> @@ -27,6 +29,12 @@ RSAS =3D {
->      'rsa4096': 4096 / 8
+> diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
+> index 2f851ebb28c..af72ea6d547 100644
+> --- a/boot/image-pre-load.c
+> +++ b/boot/image-pre-load.c
+> @@ -70,6 +70,12 @@ static int image_pre_load_sig_setup(struct image_sig_i=
+nfo *info)
+>         return 0;
 >  }
->
-> +ECDSAS =3D {
-> +    'ecdsa256': 256 / 8 * 2,
-> +    'ecdsa384': 384 / 8 * 2,
-> +    'ecdsa521': (521 + 7) / 8 * 2
+>  #else
+> +
+> +static int is_ecdsa(struct crypto_algo *crypto)
+> +{
+> +       return crypto && !strncmp(crypto->name, "ecdsa", 5);
 > +}
 > +
->  SHAS =3D {
->      'sha256': SHA256,
->      'sha384': SHA384,
-> @@ -86,24 +94,17 @@ class Entry_pre_load(Entry_collection):
->          if self.key_path is None:
->              self.key_path =3D ''
+>  /*
+>   * This function gathers information about the signature check
+>   * that could be done before launching the image.
+> @@ -86,6 +92,7 @@ static int image_pre_load_sig_setup(struct image_sig_in=
+fo *info)
+>         int key_len;
+>         int node, ret =3D 0;
+>         char *sig_info_path =3D NULL;
+> +       struct crypto_algo *crypto;
 >
-> -    def _CreateHeader(self):
-> -        """Create a pre load header"""
-> -        hash_name, sign_name =3D self.algo_name.split(',')
-> -        padding_name =3D self.padding_name
-> -        key_name =3D os.path.join(self.key_path, self.key_name)
-> -
-> +    def _CreateHeaderRsa(self, hash_name, sign_name, padding_name, key_n=
-ame):
->          # Check hash and signature name/type
->          if hash_name not in SHAS:
->              self.Raise(hash_name + " is not supported")
-> -        if sign_name not in RSAS:
-> -            self.Raise(sign_name + " is not supported")
+>         if (!info) {
+>                 log_err("ERROR: info is NULL for image pre-load sig check=
+\n");
+> @@ -114,11 +121,24 @@ static int image_pre_load_sig_setup(struct image_si=
+g_info *info)
+>                 goto out;
+>         }
 >
->          # Read the key
->          key =3D RSA.import_key(tools.read_file(key_name))
+> -       padding_name =3D fdt_getprop(gd_fdt_blob(), node,
+> -                                  IMAGE_PRE_LOAD_PROP_PADDING_NAME, NULL=
+);
+> -       if (!padding_name) {
+> -               log_info("INFO: no padding_name provided, so using pkcs-1=
+.5\n");
+> -               padding_name =3D "pkcs-1.5";
+> +       crypto =3D image_get_crypto_algo(algo_name);
+> +       if (!crypto) {
+> +               printf("ERROR: can't find a valid crypto algo from %s\n",
+> +                      (char *)algo_name);
+> +               ret =3D -EINVAL;
+> +               goto out;
+> +       }
+> +
+> +       if (is_ecdsa(crypto)) {
+> +               padding_name =3D NULL;
+> +       } else {
+> +               padding_name =3D fdt_getprop(gd_fdt_blob(), node,
+> +                                          IMAGE_PRE_LOAD_PROP_PADDING_NA=
+ME,
+> +                                          NULL);
+> +               if (!padding_name) {
+> +                       log_info("INFO: no padding_name provided, so usin=
+g pkcs-1.5\n");
+> +                       padding_name =3D "pkcs-1.5";
+> +               }
+>         }
 >
->          # Check if the key has the expected size
->          if key.size_in_bytes() !=3D RSAS[sign_name]:
-> -            self.Raise("The key " + self.key_name + " don't have the exp=
-ected size")
-> +            self.Raise("The key " + self.key_name + " doesn't have the e=
-xpected size")
+>         sig_size =3D fdt_getprop(gd_fdt_blob(), node,
+> @@ -129,12 +149,17 @@ static int image_pre_load_sig_setup(struct image_si=
+g_info *info)
+>                 goto out;
+>         }
 >
->          # Compute the hash
->          hash_image =3D SHAS[hash_name].new()
-> @@ -151,6 +152,65 @@ class Entry_pre_load(Entry_collection):
+> -       key =3D fdt_getprop(gd_fdt_blob(), node,
+> -                         IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_len);
+> -       if (!key) {
+> -               log_err("ERROR: no key for image pre-load sig check\n");
+> -               ret =3D -EINVAL;
+> -               goto out;
+> +       if (is_ecdsa(crypto)) {
+> +               key =3D NULL;
+> +               key_len =3D 0;
+> +       } else {
+> +               key =3D fdt_getprop(gd_fdt_blob(), node,
+> +                                 IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_le=
+n);
+> +               if (!key) {
+> +                       log_err("ERROR: no key for image pre-load sig che=
+ck\n");
+> +                       ret =3D -EINVAL;
+> +                       goto out;
+> +               }
+>         }
 >
->          return data + pad
+>         info->algo_name         =3D (char *)algo_name;
+> @@ -152,9 +177,13 @@ static int image_pre_load_sig_setup(struct image_sig=
+_info *info)
+>         info->sig_info.name     =3D info->algo_name;
+>         info->sig_info.padding  =3D image_get_padding_algo(info->padding_=
+name);
+>         info->sig_info.checksum =3D image_get_checksum_algo(info->sig_inf=
+o.name);
+> -       info->sig_info.crypto   =3D image_get_crypto_algo(info->sig_info.=
+name);
+> +       info->sig_info.crypto   =3D crypto;
+>         info->sig_info.key      =3D info->key;
+>         info->sig_info.keylen   =3D info->key_len;
+> +       if (is_ecdsa(crypto)) {
+> +               info->sig_info.required_keynode =3D node;
+> +               info->sig_info.fdt_blob =3D gd_fdt_blob();
+> +       }
 >
-> +    def _CreateHeaderEcdsa(self, hash_name, sign_name, key_name):
-> +        # Check hash and signature name/type
-> +        if hash_name not in SHAS:
-> +            self.Raise(hash_name + " is not supported")
-> +
-> +        # Read the key
-> +        key =3D ECC.import_key(tools.read_file(key_name))
-> +
-> +        # Check if the key has the expected size
-> +        if key.pointQ.size_in_bytes() * 2 !=3D ECDSAS[sign_name]:
-> +            self.Raise("The key " + self.key_name + " doesn't have the e=
-xpected size")
-> +
-> +        # Compute the hash
-> +        hash_image =3D SHAS[hash_name].new()
-> +        hash_image.update(self.image)
-> +
-> +        # Compute the signature
-> +        signer =3D DSS.new(key, 'fips-186-3')
-> +        sig =3D signer.sign(hash_image)
-> +
-> +        hash_sig =3D SHA256.new()
-> +        hash_sig.update(sig)
-> +
-> +        version =3D self.version
-> +        header_size =3D self.header_size
-> +        image_size =3D len(self.image)
-> +        ofs_img_sig =3D 64 + len(sig)
-> +        flags =3D 0
-> +        reserved0 =3D 0
-> +        reserved1 =3D 0
-> +
-> +        first_header =3D struct.pack('>4sIIIIIII32s', PRE_LOAD_MAGIC,
-> +                                   version, header_size, image_size,
-> +                                   ofs_img_sig, flags, reserved0,
-> +                                   reserved1, hash_sig.digest())
-> +
-> +        hash_first_header =3D SHAS[hash_name].new()
-> +        hash_first_header.update(first_header)
-> +        sig_first_header =3D signer.sign(hash_first_header)
-> +
-> +        data =3D first_header + sig_first_header + sig
-> +        pad  =3D bytearray(self.header_size - len(data))
-> +
-> +        return data + pad
-> +
-> +    def _CreateHeader(self):
-> +        """Create a pre load header"""
-> +        hash_name, sign_name =3D self.algo_name.split(',')
-> +        padding_name =3D self.padding_name
-> +        key_name =3D os.path.join(self.key_path, self.key_name)
-> +
-> +        if sign_name in RSAS:
-> +            return self._CreateHeaderRsa(hash_name, sign_name, padding_n=
-ame, key_name)
-> +
-> +        if sign_name in ECDSAS:
-> +            return self._CreateHeaderEcdsa(hash_name, sign_name, key_nam=
-e)
-> +
-> +        self.Raise(sign_name + " is not supported")
-> +
->      def ObtainContents(self):
->          """Create a placeholder for the header"""
->          self.SetContents(tools.get_bytes(0, self.header_size))
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> index 5f0de4c74a7..a3209bb1595 100644
-> --- a/tools/binman/ftest.py
-> +++ b/tools/binman/ftest.py
-> @@ -5925,12 +5925,62 @@ fdt         fdtmap                Extract the dev=
-icetree blob from the fdtmap
->
->          image_fname =3D tools.get_output_filename('image.bin')
->          is_signed =3D self._CheckPreload(image_fname, self.TestFile("dev=
-.key"))
-> +        self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
-> +        self.assertEqual(PRE_LOAD_VERSION, data[4:4 + len(PRE_LOAD_VERSI=
-ON)])
-> +        self.assertEqual(PRE_LOAD_HDR_SIZE, data[8:8 + len(PRE_LOAD_HDR_=
-SIZE)])
-> +        self.assertEqual(is_signed, True)
->
-> +    def testPreLoadEcdsa(self):
-> +        """Test an image with a pre-load header using ecdsa key"""
-> +        entry_args =3D {
-> +            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
-> +        }
-> +        data =3D self._DoReadFileDtb(
-> +            'security/pre_load_ecdsa.dts', entry_args=3Dentry_args,
-> +            extra_indirs=3D[os.path.join(self._binman_dir, 'test')])[0]
-> +
-> +        image_fname =3D tools.get_output_filename('image.bin')
-> +        is_signed =3D self._CheckPreload(image_fname,
-> +                                       self.TestFile('ecdsa521.pem'),
-> +                                       'sha256,ecdsa521')
->          self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
->          self.assertEqual(PRE_LOAD_VERSION, data[4:4 + len(PRE_LOAD_VERSI=
-ON)])
->          self.assertEqual(PRE_LOAD_HDR_SIZE, data[8:8 + len(PRE_LOAD_HDR_=
-SIZE)])
->          self.assertEqual(is_signed, True)
->
-> +    def testPreLoadEcdsaInvalidSha(self):
-> +        """Test an image with a pre-load ecdsa header with an invalid ha=
-sh"""
-> +        entry_args =3D {
-> +            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
-> +        }
-> +        with self.assertRaises(ValueError) as exc:
-> +            self._DoReadFileDtb('security/pre_load_ecdsa_invalid_sha.dts=
-',
-> +                                entry_args=3Dentry_args)
-> +        self.assertIn("Node '/binman/pre-load': sha2560 is not supported=
-",
-> +                      str(exc.exception))
-> +
-> +    def testPreLoadEcdsaInvalidAlgo(self):
-> +        """Test an image with a pre-load header with an invalid algo"""
-> +        entry_args =3D {
-> +            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
-> +        }
-> +        with self.assertRaises(ValueError) as exc:
-> +            data =3D self._DoReadFileDtb('security/pre_load_ecdsa_invali=
-d_algo.dts',
-> +                                       entry_args=3Dentry_args)
-> +        self.assertIn("Node '/binman/pre-load': ecdsa5210 is not support=
-ed",
-> +                      str(exc.exception))
-> +
-> +    def testPreLoadEcdsaInvalidKey(self):
-> +        """Test an image with a pre-load header with an invalid key size=
-"""
-> +        entry_args =3D {
-> +            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
-> +        }
-> +        with self.assertRaises(ValueError) as exc:
-> +            data =3D self._DoReadFileDtb('security/pre_load_ecdsa_invali=
-d_key.dts',
-> +                                       entry_args=3Dentry_args)
-> +        self.assertIn("Node '/binman/pre-load': The key ecdsa521.pem doe=
-sn't have the expected size",
-> +                      str(exc.exception))
-> +
->      def _CheckSafeUniqueNames(self, *images):
->          """Check all entries of given images for unsafe unique names"""
->          for image in images:
-> diff --git a/tools/binman/test/ecdsa521.pem b/tools/binman/test/ecdsa521.=
-pem
-> new file mode 100644
-> index 00000000000..ac1904d3955
-> --- /dev/null
-> +++ b/tools/binman/test/ecdsa521.pem
-> @@ -0,0 +1,7 @@
-> +-----BEGIN EC PRIVATE KEY-----
-> +MIHcAgEBBEIBM+CNnraGci2/mw1wPq44l2HccHnoBbdP3DiU6zqsBOq8IR8uegz2
-> +FLzWsjxcW7hwROCdEm6tW99wqsyPE25RZ3egBwYFK4EEACOhgYkDgYYABABu5bWV
-> +aQ4EgnXFjojX9df3gBEBipphEEFAoG87GuoWBdlimFC8UEEXiKNU37w0wlJn4bG0
-> +8uOKwDqBk3uF+DrmZwB45lCSKkjdRWsJeDt+iEuFe2O/mbXoL4p5D8MM2OsDV5GT
-> +srUbxhXq+T/i5lV7XXm2+tT/7zU8ZQce6WRufbd9KQ=3D=3D
-> +-----END EC PRIVATE KEY-----
-> diff --git a/tools/binman/test/security/pre_load_ecdsa.dts b/tools/binman=
-/test/security/pre_load_ecdsa.dts
-> new file mode 100644
-> index 00000000000..247b85aad4c
-> --- /dev/null
-> +++ b/tools/binman/test/security/pre_load_ecdsa.dts
-> @@ -0,0 +1,22 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/dts-v1/;
-> +
-> +/ {
-> +       #address-cells =3D <1>;
-> +       #size-cells =3D <1>;
-> +
-> +       binman {
-> +               pre-load {
-> +                       content =3D <&image>;
-> +                       algo-name =3D "sha256,ecdsa521";
-> +                       key-name =3D "ecdsa521.pem";
-> +                       header-size =3D <4096>;
-> +                       version =3D <0x11223344>;
-> +               };
-> +
-> +               image: blob-ext {
-> +                       filename =3D "refcode.bin";
-> +               };
-> +       };
-> +};
-> diff --git a/tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts b=
-/tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts
-> new file mode 100644
-> index 00000000000..be71edbbdcd
-> --- /dev/null
-> +++ b/tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts
-> @@ -0,0 +1,22 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/dts-v1/;
-> +
-> +/ {
-> +       #address-cells =3D <1>;
-> +       #size-cells =3D <1>;
-> +
-> +       binman {
-> +               pre-load {
-> +                       content =3D <&image>;
-> +                       algo-name =3D "sha256,ecdsa5210";
-> +                       key-name =3D "ecdsa521.pem";
-> +                       header-size =3D <4096>;
-> +                       version =3D <0x11223344>;
-> +               };
-> +
-> +               image: blob-ext {
-> +                       filename =3D "refcode.bin";
-> +               };
-> +       };
-> +};
-> diff --git a/tools/binman/test/security/pre_load_ecdsa_invalid_key.dts b/=
-tools/binman/test/security/pre_load_ecdsa_invalid_key.dts
-> new file mode 100644
-> index 00000000000..15d71cf0324
-> --- /dev/null
-> +++ b/tools/binman/test/security/pre_load_ecdsa_invalid_key.dts
-> @@ -0,0 +1,22 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/dts-v1/;
-> +
-> +/ {
-> +       #address-cells =3D <1>;
-> +       #size-cells =3D <1>;
-> +
-> +       binman {
-> +               pre-load {
-> +                       content =3D <&image>;
-> +                       algo-name =3D "sha256,ecdsa384";
-> +                       key-name =3D "ecdsa521.pem";
-> +                       header-size =3D <4096>;
-> +                       version =3D <0x11223344>;
-> +               };
-> +
-> +               image: blob-ext {
-> +                       filename =3D "refcode.bin";
-> +               };
-> +       };
-> +};
-> diff --git a/tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts b/=
-tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts
-> new file mode 100644
-> index 00000000000..1017707375e
-> --- /dev/null
-> +++ b/tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts
-> @@ -0,0 +1,22 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/dts-v1/;
-> +
-> +/ {
-> +       #address-cells =3D <1>;
-> +       #size-cells =3D <1>;
-> +
-> +       binman {
-> +               pre-load {
-> +                       content =3D <&image>;
-> +                       algo-name =3D "sha2560,ecdsa521";
-> +                       key-name =3D "ecdsa521.pem";
-> +                       header-size =3D <4096>;
-> +                       version =3D <0x11223344>;
-> +               };
-> +
-> +               image: blob-ext {
-> +                       filename =3D "refcode.bin";
-> +               };
-> +       };
-> +};
+>   out:
+>         return ret;
 > --
 > 2.43.0
 >
