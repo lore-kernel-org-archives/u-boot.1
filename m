@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50706C61DD3
-	for <u-boot@archiver.kernel.org>; Thu,  3 Sep 2026 14:30:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B77BC61DD3
+	for <u-boot@archiver.kernel.org>; Thu,  3 Sep 2026 14:31:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D537A810F6;
-	Thu,  3 Sep 2026 14:30:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 848B660B7C;
+	Thu,  3 Sep 2026 14:31:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FNWzD7bLFqoc; Thu,  3 Sep 2026 14:30:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 6E6CA810EA
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788445839;
-	b=qPm4uVW48T7qAbL/2CvOtdrxb0V1dfJrcRHJeB1TzGB3iPbWqiax8P5j2YO9VaSuS5Ee
-	 ACIlbjQwOPRptWARvXrV9pP7KqxeeVAJPalaQX0To/eaBWHtsHnZVuC145sAIy1ePslib
-	 HKEXlm44jYrXZZIArZfEE7BBFiWX7d1vTQX9BcVw5UwzuamCIwqe8GbI9s13zfUXRscDB
-	 eSA9+ZJY68EXpMZBeqlyQcnDUCjXj+K3liNu0aMMEbAxACe4jyjvtCYzmJT5/4adFBl96
-	 kvNlKdGDz1yt02HFubMD4CBXZfM52TLuFzzgugeWW4wM3p0Wg6l8/8aTz2BwNebkt9w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id l-JU-n35lO4m; Thu,  3 Sep 2026 14:31:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4314960B72
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788445893;
+	b=O54rvr3wJS7kFelGHHEmjWQcMbXx+fi6Szh6Q8rRuxPf61IBj5GgbPEOCfnNmrt8mvL8
+	 0qWpYJr3HmJYT7ccCxL4keVe85VBVZWNNPWK+xQjIYEJm/W/+2sBE6jWeQmnQXFEWa9gu
+	 MM4QyCnQ5pTPoE76kJJAE+7y/PDZNSANBzhT2O0kj6lkigIyt1vRcrzzr+gqhqM5hReQF
+	 UNXxB180j+WTKiQrWaVoWoIosEheXFmV7MecG5Qln216yu2JVsWJKR64OXVLh62V5aw7z
+	 1jXbqvZ3JFlTiQyZ6CpEhVVNDkfwhe/uBu5pLvNs8Y9QAimZ80EJCkSI/9NzE3u+SJw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788445839;
+	c=relaxed/relaxed; t=1788445893;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,150 +32,150 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=9AfptzCPzuyy+WZs4nOWG42+QzZzIc0Sei2a+jzisCM=;
-	b=DEwHr8/upB6Nc61wfCBiUkYIjpcTlCe7SeI+8Yv6vCvf0Ztgsx36sgU2LrrRARI25OAD
-	 wp1mSHG9Vgg+sqRtWABNccXpQz3ximKkh+JmCjb65JDNF7ZPNlpEzETNQoA6x0GWp3ZCn
-	 a/5GrRoZGa38I5mRD9apcPpfxGGJFZnjE3FDNPDMvZAElMtf0b1LJLwnp6vNge3aQy2ZC
-	 +3fArWGTQQNFa+okG367JqVEfbQ9o5KB0oPQ/r0A8opinPWxJqqQ6ZA9mc43P/LcXTTGe
-	 OpLnPzYjFAPyg0nrk4KYU9nEgZ3ib/3HuBgTtWZOLG6uUIYcmcGfs+hCNJA5OWvIz1w==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=uSTAJD9ninz4TSQaCVUVq/HQ/cJLU6VVdBlgrX3Ks/k=;
+	b=QXGLY4UB6V0FZYZHr8v5n6S/oqKhIJ8P7JeLQWL5qa8b8J5nPPJDuUA1nVWNrGrE2Q3I
+	 cYDJl8YXOnMlewi5A/BVz5b2pg5/m1zU31/ETNaodA9fvwlFJsvWjLxQedfY8UGsHcE2D
+	 QjWJIhZkzTgfMyya/MlRYQTTLkbL/zblwD7wq7J2QFtZ31amnoz/3ookxs+kPf1Q6hOrq
+	 Dz95auI2xoS5R49wW5vZR91K+Jx4HajHsAzzdVHPFyfvIT6u/rqDaE/lPoUtchAZFudIP
+	 2XlIfEmw9j8bd0wY7qea5pp27BjZqBMwlVW4G9dqvQQCZg66+m4ylq/VJZrYzmZf42w==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788445839;
-	bh=9AfptzCPzuyy+WZs4nOWG42+QzZzIc0Sei2a+jzisCM=;
+	d=lists.u-boot-project.org; s=default; t=1788445893;
+	bh=uSTAJD9ninz4TSQaCVUVq/HQ/cJLU6VVdBlgrX3Ks/k=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wF+vEctOjAW6fAggzMNnbCQoJxAOpXj5O5EMqDqzEEdF1eK/ipwd4iZqyKaVEhW8k
-	 Sl5FRprryCVzOpkH5gYjhZ42wWi3QlggEvgyg1LBPtIluTQAQ4KeEfqu2XxcaVasEB
-	 4ETqJZnwEfN8bi366IY2ysPmdODDynvMYGVEvFelG+/KHqxqTTdIDtP/35n4Ma6LEC
-	 TOulVXSRuT3p2/MwsXcqZuNQtOeLkFZ/NAWXvv8OQ5AGydW0ONrTzIigHEBf/5VihS
-	 VezE9Fa4agC7BMJ4EjO0ocZ/sHRrhpqAX+egGFZyfuy6ikYDs+2/yunXoMQulGueWC
-	 b32R5227Qz7ig==
+	b=b3uOa1miPWHEj8UljYL2S/vgY40gFauEElrJ/RB+Yz6VF8k3KAnlBfWJM+zjUGNHW
+	 yCWbuDDexdLJju03SKXwf2m01gQsPys2JSXZ5MyoItZIljEBSouoHB6iLuOHbj7mT1
+	 SnZqdvLVDfbkbN4ChWppFCRDzPtBFqs7K7qP8XVwpaBIKuRaayuNgVHOmGIjtIHUoW
+	 shdjEPp5MoH0Fc+MIcJT+nM2RiCFItpYhfE+Wn/ye2TpWasbOez5wuQ/S6uBZWKeTc
+	 NUyoXVfkfjOU7FJPUIvdQkjqNiAP0Ysia1KrIZx0jGJuoEJhSZvm+EtznaIFDTQ8/a
+	 9qSYHSWz6+1FA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6E6CA810EA;
-	Thu,  3 Sep 2026 14:30:39 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id BFA3334E
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:30:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4314960B72;
+	Thu,  3 Sep 2026 14:31:33 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 631E4D5C
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:31:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A551D60B6B
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:30:37 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 49CB240AE5
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:31:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kKBt2uh1hoSp for <u-boot@lists.u-boot-project.org>;
- Thu,  3 Sep 2026 14:30:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7086360B4B
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::934"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788445834;
- b=B8Xed8p+2Z0EZNuzgA8fGUkBC29ayYJ1mtSPRfEJedsTImlJ/PAc5XZxoefK6REo2UHi
- Wp4QIeYx1wRMFRrMekCCN8/pwkElUybHnAw3K/sjEAGh5CWmSHT5tUuCzMJj4jQscsmtF
- RXpfSO058jcBVASkJwLIW+On+g3e34L5p05fSbcpI0GYtYAY9dMIo43OSwgegLZmhjDiY
- YEHvEG9KXGXrzqlSb1ZHtTfmo3IYZDBaMGdLsuDbWXXUahmz/FvF042BdOh/qI5ZJ1f57
- XzITv45YtKXiLXLsykz5B0ETkzFWrRMH9alf6Dyv55LrPZPZJTIPjA3kxk5efq/AjSg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ASBStpRZGwCi for <u-boot@lists.u-boot-project.org>;
+ Thu,  3 Sep 2026 14:31:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org D700940ADF
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::a29"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788445886;
+ b=dZrJG7jZyo8BuWda2wpJaVr3rAadrSonPsyVREAci6P41wDOWDsmsH3Nllmhui4cVG1W
+ YnMJStOkxsAG2V9AKpauLm43kRpbeoeZJJ68M5m7On6M/0ONdxJ1C+MNQFfdZjYB5hpiN
+ MTm561RlVXmlYdAY/QkeoE4tUSgpt6bhTm7kqUmrGsQ2+wgvfEd3rv4J60nofn93DCbHe
+ BwIa1VzNdu2oPN27/K7UujWk4G2zAGhn+NB0CRYdSHjZtQ94SUKnRno2WFZKfJ1z+I61q
+ 7QqgixH6j5HRr6/sXklHAVJSSgLx0ItHfoLmfmTeRA40xMvP4ec+Nfi1XRjht55uLkw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788445834;
+ c=relaxed/relaxed; t=1788445886;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
  MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
- bh=9AfptzCPzuyy+WZs4nOWG42+QzZzIc0Sei2a+jzisCM=;
- b=c4FwC6LlTzS+ceWmUTu534F39U2WjVrObmVMyOXxcI5gR9JcyMFWaLOBr/0dDzl0s4YC
- /GlaydFBlj6Nx0JZviHmpbJ+xSnxnDeb+RiZox41Ec8oW3JDOE+NwwxU1rZ7PDNt9ae2I
- TmpRM2BRx7/Sh1ymxwwntQDf3MIln6Fz/S1fVIbYdFtxmrIZ4ho9BINvHknPwuXlypvYu
- OX8gYdO0Ami54hGSCrY39UeQuqkZssBMemG6GNkwES6GTnHCtcXbmQrwY+K8vo2vxl46Z
- zsaRHtD290PIqrhfOVrjci7J24BCS4TvaTImohc3kGb+q2/dMgSf+M8848L878m2GpQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org;
+ bh=uSTAJD9ninz4TSQaCVUVq/HQ/cJLU6VVdBlgrX3Ks/k=;
+ b=Jj3C5fs++BZIhfoq11LsVceVIOjKNTJL7KM6A428VsfkKqFFKk5erch/Ie9jtynIyQuY
+ uCWV1GNnIEgVfr+IA9E91VpvA8HjDGgApWf3rgbS4kLKOYVUzDoto4fzvukXFG2QSwzMO
+ vpxyd73YJdJ301fKQ2yIrE4E+nd6wYHOn17tY+zs0nMvRDIn03GVoqK59QtHvkcvd9HNn
+ 31C9pWPEUhp/B1WgpVVQmMfnDVNA9LG+1WvwKz6sP3DNBWmGRxZwyQGS0adO1Xtbt7V6R
+ Y0A5hTPJ0q14dvQY9CtrZ+dnisV6DMn1S9/MmsJh6q7XaFWglQNsGxdfg9Il6l3Zt6g==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=kdTG9x+g; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::934"
+ header.s=20251104 header.b=EO2kfu15; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::a29"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::934; helo=mail-ua1-x934.google.com;
+ client-ip=2607:f8b0:4864:20::a29; helo=mail-vk1-xa29.google.com;
  envelope-from=raymondmaoca@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=kdTG9x+g
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7086360B4B
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:30:34 +0000 (UTC)
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-97bf8f6a31eso854367241.1
- for <u-boot@lists.u-boot-project.org>; Thu, 03 Sep 2026 07:30:34 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788445833; cv=none;
+ header.a=rsa-sha256 header.s=20251104 header.b=EO2kfu15
+Received: from mail-vk1-xa29.google.com (mail-vk1-xa29.google.com
+ [IPv6:2607:f8b0:4864:20::a29])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D700940ADF
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:31:25 +0000 (UTC)
+Received: by mail-vk1-xa29.google.com with SMTP id
+ 71dfb90a1353d-5c675de8e1dso1001633e0c.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 03 Sep 2026 07:31:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788445884; cv=none;
  d=google.com; s=arc-20260327;
- b=sBPaSxjNWfgsG+Jja7q/hL4h/ojJw6kxM8a+AY2G9g1WNxx19JPLRy8YznJLWH4b2O
- T6/31l9sCr5DBZMc/0BSjQk9Yfrt9FGUhj0coL3fTpuucFpDp7PJ/G8hh/tKOXj8yXI0
- CwnqFHqCjZCq/iUfHgSqBZR+DflKJR4Fiq06TxnSWuaEKqBhIVQwBoG3Ay+QKTfUDd1J
- VeziOW2QCWXw4IKmx5QmTfEYB5y4vqFnPk3vZ7NRQq5MO+E9Gp7vI+nCq8ckD9ZEqteL
- spGfK90WfO4Q1Lc+vi5Y9j4yXmuy53wPWHYYSPoRnRQ0Gf26XjDK8Lky61a35y5nMq94
- zP/w==
+ b=iuEOib5v7Dcp9rff7vn90NX56ncc0t8X6HJ1vYE7qWkA0PFij5M4kDzA9XrNamw2kG
+ Gyxux8gf3Aq5/dKxNNhJ3Wkih6qhmN99WURw50mUJ7mFHDAxcSxRh1kbSw2E6lLZNXqP
+ 9tyT0HMrGBH9vLOrc0HOt42ZoABPQ1mjmE4xhJZgnivg8g2600qqMP+Md7z+6vHYorLH
+ svqEzdODXbMApDia7v/e7TkvUoZVpyk+o16Oqyzl8GUyJDyOkbxk7Mzz4MTM8HS2j+ks
+ sKyrDYkNXlGJeo5eiLchz5d1EI/cjUXSHv2LeksfG7NPp/f/xNTHIEAE7ODUowFHvljb
+ 6y0w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=9AfptzCPzuyy+WZs4nOWG42+QzZzIc0Sei2a+jzisCM=;
- fh=cj07GK8AAc9owMHIWSQyNb8XyDEzLPVEq0a05/foYxw=;
- b=q7lIIC3FCEwqhLbjXSSghUHmzqXOH5PG0KZWBiqeVFlBYMHEMWxOHn0ujDZT8sCRcj
- 5DbEozohSF8YB5j0de41WFU3E7ocM4ONQXPUwZZljcSF9Lt/RJRK5BFilHZ3b5pq4Lp/
- kQchxEyPRDOU1viCdyRpfD71M6fVhYyr4dTIwHEndXV0lKwbllESqsmqRTqClc1mWsqm
- cADn9J9xi3tBg0e7mJ3nnEdcGrpzwpqkYwHGxJqTh5yVm4dmGSkbbblyTm2e9NzFT891
- YM2BARELtmCy2FBLIa2bNstfekQaar0qBnpIb+NjZG3TpDT21vMRlBIGnq8eTvDqPDdi
- eQ+A==; darn=lists.u-boot-project.org
+ bh=uSTAJD9ninz4TSQaCVUVq/HQ/cJLU6VVdBlgrX3Ks/k=;
+ fh=Awbblk7Wf/6pmn4EA8n/hdE6XsEaLDwFivmGXzDiVqU=;
+ b=AVeIJGSwcPVMVrc2pNuGaeaqhtEmBBXa6l2SK0O8i+s9M0Rd9bKLpyOQ4cXXfQMMXw
+ mi8RetC59IovbnXWN67Twe1nAjSK9MU/2SMeujahn0d03Q1DhU6pS+hhctK6VfphuxYo
+ zMoHg1uXlng0t0wKRkFY/oJFWRXkN4L/S4caFSw05oq67AIjWQUNrPQ2o8XhIPEuG+T8
+ vhszAOg218FZQ/AoV6q4J8jL4+XcBgUOjMQYDutvQFfGjvyLLmGYOD8gxu2/2ZZkXHQR
+ riYBdfIJ9z/WPXprZ71qa3ezFbhwaxvg5Lt1/oO+hVK38C7k3jEwADeq/TD4eRlSBwUw
+ 7psw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788445833; x=1789050633;
+ d=gmail.com; s=20251104; t=1788445884; x=1789050684;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=9AfptzCPzuyy+WZs4nOWG42+QzZzIc0Sei2a+jzisCM=;
- b=kdTG9x+g8gxY/ywiQJJomxSTTDRqQbIqUSbNjLxTX7eAxFp17l0o4e65bTfiTdSAZi
- tVlVd3XtFQc40ny4Mabp41mwKNPjsTDRbrxIAtG7UYIryqBLjUigGFgv3W2q6bAhbrO6
- 7Mir4e0WjPCwQdrexPWG5sPL7Ky/lhS7OB/j5Rfo3uOmmySmXUQCFeIec6wf3DOsh9mA
- 5E+rzvbTBnFMQilCysJMTwcPjV4KVrPangGO+bX9F62K1FUrvKYG0GMLbH0aJxjEb8TO
- /3i8OT7DM7POKDLG9DEpmIEQxSjKtUOOiCarkuwKRzUoT6ro3/i8t+8hVaSNoQhUFEMI
- e6BQ==
+ bh=uSTAJD9ninz4TSQaCVUVq/HQ/cJLU6VVdBlgrX3Ks/k=;
+ b=EO2kfu15EIx2pyBtBOVaLLHZdGh32x9vrMAP9rDzre2AYRoYNYzVScSoB+CsJ73q03
+ fnB6h9K3441ZfV4z8Br4IhVw86QlwYtqCAGhwLq5bckKaZ+ktpr2mwdEs1aGiNenxgrh
+ T3lJ4edokenML0S5XUUPq1qxK0K4jUb4OkM2dJHCOCAvy9Vk1n0JXykMIJPnrg/SrxiY
+ LqBEqlHlDuWQDRwYxG2MeWHX4rChfxKifOqLZ9T2uIim2S32wmW9GeoxZ/016NV+8MgH
+ Svese0PfDrxI6WBqX1TJEYlIb8hrjfnPKX49BeWKQFcUGQs/WSqHF6T6KNWr4sxkIEIc
+ RE+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788445833; x=1789050633;
+ d=1e100.net; s=20251104; t=1788445884; x=1789050684;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=9AfptzCPzuyy+WZs4nOWG42+QzZzIc0Sei2a+jzisCM=;
- b=OOhzmD5XTdtlzmEDjkWmlOKDOzB6P5HAAzwXt/+N9Ffm7LZhq1+8TftTX8AHSbNyvk
- 4xOPhT3djbfB8uZH+LWebIYEGTHUUjhl1VvkT7EpSPXXvbQNimCZJ2jlwZuROwf2bBN/
- 4pbj4pO/kPyjsPdftQtvolWkopYTzVaK/SqHxlHo3NC1pxQXSaGfBk8DNjBXI+giX8PK
- pmauGUUKvr6Sx9cJnFl1QBD1Xn15ArfVzHCr0i4nYaz7Q7CmHkG7x2Ys8dfkKRaTVcY2
- TmvuNAvxeiiNnPdUcE5nn8oK+T0JLqCMLQXx++YtBHKIX/19kcTlMmn4mKTWgTM+6hxL
- 92nA==
+ bh=uSTAJD9ninz4TSQaCVUVq/HQ/cJLU6VVdBlgrX3Ks/k=;
+ b=PDFa3hf3xuZQFS/aQwGD20b0od8eI1vd5AE7mlZj8r9ZKOsOClfnaeeu9eiXrxJD/X
+ 3Bpf9jTqJ3+kCWoXtP8J7AGyM33o5fXCRKfasV/MjVbMexrcQhvQPdCIpPdHt78VaLVS
+ q9TVPIDVyB/O82rUYi8WJkBrr0fpPKeJZB1KcSSzG3Nf9f4VUzDElReJcGivgNoJSnU4
+ 7/wKhFqT2LGVMJp7ghGex6Duqwq+hcE6SGDTOprfetSiidzaXpOfnIIriVJPVehfd1ux
+ l3ALbH7SUhpuc0Rvv4wgGpX3CzjiyYast1OQF+uyKRwxLLLl0nJ44V6iCXgIQF4+cYo7
+ cRoA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy/DqKWt6yUL+KjlVbXiKSFkhLoMxfUX4zkCAMBP4kBYwnDRELMBBErBze3g1uG+XufAUXo/5A=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mhNCWrwJL7GwUXT+BQJ52ipnmN1PCthdCauiEaUP/X8b9I4fh1
- hVbLBFMYJx5DgSkBA2v3DCeqGZKx3PJbp1kEK8qBUrOerZO6Iax1Jvk5hNGgsP1L8wlVi3Uwv4/
- 3Eqi/lxC22sGKyr0ZqjAfSXEuxEWA1W0=
-X-Gm-Gg: AYBFou15wjET3TKuM7Mz88BO3373ozosubjl5YIvIk59NnIdyUcgDkWPtro3zxJYf75
- urlSIXtaWiWVEY098x6pM9uMUzMbcsfRyqyAfqx0z/3usLchf/UW4SLe7Ef0w1ZeEptXzMyQ1zc
- 3DjiY9moK2Kw3FgwlxWpCgXpBTGFpBmPCqRgoVnFM2dx5E0Ex2Vv8ahPtk1g6ftYh1H1Nl6OWuT
- Y8wsYMRtLO7BlZdWVtV2bEsmCx/jBMxiXsUb57zYZwKBX6wFAevvZNLdAfz1sreNYOGoeLGgfWr
- ESIXERW24ZqqioG4whfN5C/OqYNIE27pQyd2eUV4i2YqGiQ=
-X-Received: by 2002:a05:6102:3fa8:b0:784:5883:9cc4 with SMTP id
- ada2fe7eead31-78a1f326a40mr4007479137.11.1788445832620; Thu, 03 Sep 2026
- 07:30:32 -0700 (PDT)
+ AKwUvBww6SAoKXOlGBB5QDt29ocWgxe4fout7NZiGPjysv9EaZqoous5WmHuS4tGPMUw9Jcp+N//+NA=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mFkAxbchoW66ixQ7SbEXQocuiRN9Rd4FhI42/4/g8QGmTj8ny1
+ 5md2kHXzhpvQhvEa49FmHXSVgtrhuBYztRJ/rXqXDgqgi0Wz/mzBAYpI4vlBvgJVgwUS3sGWYv6
+ j6J/THakEFSUBP1WdnHzk0Y+C0qynh18=
+X-Gm-Gg: AYBFou2Ka3YGS+ohPjvB0pq1lOerutPehggf/sdkpJeijqYT7n/2DUiBYB5bphjjbQu
+ ig8ar1NWdNTBMPYMzDn+jfQYoTlLyFcpVY1veUDlr/1z9L4oWYKg22P5DP81nO1gkF6aFHKoALK
+ SUrSy5JrqS5zPSXIrejPBW+RpXetVG/u/aMnP8BA3yFXf+fSWvmtVuTCRAbpx4kVeEvgZdP9UfI
+ BpEt4Ly/Xg7L2YX9KZ1m5YSe1aZLZy0TF45xTltFY8CrNZx++Yyvf4kN9+e+smhFRpAD4SmiACR
+ fSbnHaTZmMxIJXaVxNx2vPxT/z1hPtdg0PeGGvtsyGvbSWk=
+X-Received: by 2002:a05:6122:507:b0:5c7:c2dc:f1ff with SMTP id
+ 71dfb90a1353d-5c7d2705702mr4974199e0c.1.1788445879512; Thu, 03 Sep 2026
+ 07:31:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260903081705.12894-1-philippe.reynes@softathome.com>
- <20260903081705.12894-2-philippe.reynes@softathome.com>
-In-Reply-To: <20260903081705.12894-2-philippe.reynes@softathome.com>
+ <20260903081705.12894-3-philippe.reynes@softathome.com>
+In-Reply-To: <20260903081705.12894-3-philippe.reynes@softathome.com>
 From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Thu, 3 Sep 2026 10:30:19 -0400
-X-Gm-Features: AcwNN1U0rcUdyWAZVqf3ws69JLz0fqx0lnW3VtlHFyQcmtQv4_rOjScP8muOZ_g
-Message-ID: <CAMDkj5x49U1pJPByhYQWhpKH5odH09x_YiLGnhXPK3E6k0+1wQ@mail.gmail.com>
-Subject: Re: [PATCH v9 01/15] ecdsa: fix support of secp521r1
+Date: Thu, 3 Sep 2026 10:31:06 -0400
+X-Gm-Features: AcwNN1WvzKi82UAnK1otftVfzoAkz6pA7O3mo63bgcTv84TrLCbU224qWYfX_JU
+Message-ID: <CAMDkj5y0DzA2XpvAFzsUKF8JTQbkebxPZZMr_k2B-_Yg3oF3hw@mail.gmail.com>
+Subject: Re: [PATCH v9 02/15] mbedtls: enable support of ecc
 To: Philippe Reynes <philippe.reynes@softathome.com>
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
  simon.glass@canonical.com, u-boot@lists.u-boot-project.org
@@ -199,46 +199,55 @@ Hi Philippe,
 On Thu, Sep 3, 2026 at 4:17=E2=80=AFAM Philippe Reynes
 <philippe.reynes@softathome.com> wrote:
 >
-> Current implementation of ecdsa only supports key len aligned on
-> 8 bits. But the curve secp521r1 uses a key of 521 bits which is not
-> aligned on 8 bits. In this commit, we update the keys management
-> for ecdsa to support keys that are not aligned on 8 bits.
+> Prepares the support of ecdsa signature check
+> using MbedTLS. It introduces the option ECDSA_MBEDTLS
+> to enable (or not) the support of ecdsa in MbedTLS.
+>
+> So now, ecdsa is no longer supported by default in the lib TLS.
+> To get it, the option ECDSA_MBEDTLS must be enabled.
+>
+> The option ECDSA_MBEDTLS only enables the ecdsa support
+> in MbedTLS, it doesn't provide any API to use it for
+> signature check. It will be done in another commit
+> by adding the option ECDSA_VERIFY_MBEDTLS.
+>
+> Two internal options are also added BIGNUM_MBEDTLS
+> and ECC_MBEDTLS. Those options are used to share code
+> between different option and avoid duplication.
 >
 > Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 > ---
 > v2:
-> - intitial version
+> - move ecdsa to MBEDTLS_LIB_X509
+> - enhance depencendies
 > v3:
-> - fix typo in comments
+> - do not use _MBEDTLS in mbedtls_def_config.h
 > v4:
-> - fix commit message
-> - clean code with DIV_ROUND_UP-
-> - duplicate data before shifting
-> - support ecdsa521 and secp521r1
-> - clean code
+> - do not select ECDSA on some configs
+> - remove duplicated MBEDTLS_ECP_DP_SECP256K1_ENABLED
+> - change dependencies for ECDSA configs
 > v5:
-> - check that x and y are not null before using them
-> - free keys when keys not found
-> -v6:
-> - free x and y if x and y are not null
-> - do not free key when an error has occured
+> - MBEDTLS_LIB_TLS depends en ECDSA_MBEDTLS
+> - update some configs according to previous change
+> - build of ecdsa is conditionned by ECDSA_MBEDTLS
+> v6:
+> - fix dependencies for ecdsa and ecc on mbedtls
+> - ecdsa is no longer mandatory for tls
 > v7:
 > - no change
 > v8:
-> - check the exact size read in the dtb instead of doing a simple
->   test on the expected size
-> - change memdup api to use the same as in the header include/linux/string=
-.h
-> - code cleanup
+> - enhance the commit message
+> - use /* */ instead of //
 > v9:
 > - no change
 >
->  lib/ecdsa/ecdsa-libcrypto.c | 75 ++++++++++++++++++++++++++++++++++++-
->  lib/ecdsa/ecdsa-verify.c    | 71 +++++++++++++++++++++++++++++++++--
->  lib/fdt-libcrypto.c         |  2 +-
->  tools/image-sig-host.c      |  7 ++++
->  4 files changed, 148 insertions(+), 7 deletions(-)
+>  configs/sandbox_defconfig        |  1 +
+>  lib/ecdsa/Kconfig                |  1 +
+>  lib/mbedtls/Kconfig              | 17 +++++++++++++
+>  lib/mbedtls/Makefile             | 17 +++++++------
+>  lib/mbedtls/mbedtls_def_config.h | 41 +++++++++++++++++++++-----------
+>  5 files changed, 56 insertions(+), 21 deletions(-)
 >
 
 Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
@@ -247,357 +256,217 @@ Thanks!
 Regards,
 Raymond
 
-> diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
-> index c4bfb2cec61..b3fc75fac48 100644
-> --- a/lib/ecdsa/ecdsa-libcrypto.c
-> +++ b/lib/ecdsa/ecdsa-libcrypto.c
-> @@ -26,6 +26,8 @@
->  #include <openssl/ec.h>
->  #include <openssl/bn.h>
+> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+> index 5c97418783f..b9991d269d9 100644
+> --- a/configs/sandbox_defconfig
+> +++ b/configs/sandbox_defconfig
+> @@ -389,6 +389,7 @@ CONFIG_PMBUS=3Dy
+>  CONFIG_CMD_DHRYSTONE=3Dy
+>  CONFIG_MBEDTLS_LIB=3Dy
+>  CONFIG_HKDF_MBEDTLS=3Dy
+> +CONFIG_ECDSA_MBEDTLS=3Dy
+>  CONFIG_ECDSA=3Dy
+>  CONFIG_ECDSA_VERIFY=3Dy
+>  CONFIG_RSASSA_PSS=3Dy
+> diff --git a/lib/ecdsa/Kconfig b/lib/ecdsa/Kconfig
+> index ca13b6bfa1f..dac8bcf23dd 100644
+> --- a/lib/ecdsa/Kconfig
+> +++ b/lib/ecdsa/Kconfig
+> @@ -1,6 +1,7 @@
+>  config ECDSA
+>         bool "Enable ECDSA support"
+>         depends on DM
+> +       select ASN1_DECODER
+>         help
+>           This enables the ECDSA (elliptic curve signature) algorithm for=
+ FIT
+>           image verification in U-Boot. The ECDSA algorithm is implemente=
+d
+> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> index 789721ee6cd..e019f17d6bd 100644
+> --- a/lib/mbedtls/Kconfig
+> +++ b/lib/mbedtls/Kconfig
+> @@ -247,6 +247,12 @@ config MBEDTLS_LIB_X509
 >
-> +#define DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
+>  if MBEDTLS_LIB_X509
+>
+> +config BIGNUM_MBEDTLS
+> +       bool
 > +
->  /* Image signing context for openssl-libcrypto */
->  struct signer {
->         EVP_PKEY *evp_key;      /* Pointer to EVP_PKEY object */
-> @@ -41,10 +43,36 @@ struct ecdsa_public_key {
->         int size_bits;
->  };
->
-> +/*
-> + * This function returns a valid pointer so
-> + * the caller must then free this pointer.
-> + */
-> +static char *memdup(const void *src, size_t len)
-> +{
-> +       char *p;
+> +config ECC_MBEDTLS
+> +       bool
 > +
-> +       p =3D malloc(len);
-> +       if (!p)
-> +               return NULL;
+>  config ASN1_DECODER_MBEDTLS
+>         bool "ASN1 decoder with MbedTLS certificate library"
+>         depends on MBEDTLS_LIB_X509 && ASN1_DECODER
+> @@ -264,6 +270,7 @@ config RSA_PUBLIC_KEY_PARSER_MBEDTLS
+>         bool "RSA public key parser with MbedTLS certificate library"
+>         depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+>         select ASN1_DECODER_MBEDTLS
+> +       select BIGNUM_MBEDTLS
+>         help
+>           This option chooses MbedTLS certificate library for RSA public =
+key
+>           parser.
+> @@ -292,6 +299,15 @@ config MSCODE_PARSER_MBEDTLS
+>           This option chooses MbedTLS certificate library for MS authenti=
+code
+>           parser.
+>
+> +config ECDSA_MBEDTLS
+> +       bool "Enable ECDSA support with MbedTLS certificate library"
+> +       depends on MBEDTLS_LIB_X509 && ASN1_DECODER_MBEDTLS
+> +       select BIGNUM_MBEDTLS
+> +       select ECC_MBEDTLS
+> +       help
+> +         This option enables support of ECDSA with the MbedTLS certifica=
+te
+> +         library.
 > +
-> +       memcpy(p, src, len);
+>  endif # MBEDTLS_LIB_X509
+>
+>  config MBEDTLS_LIB_TLS
+> @@ -301,6 +317,7 @@ config MBEDTLS_LIB_TLS
+>         depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+>         depends on ASN1_DECODER_MBEDTLS
+>         depends on MBEDTLS_LIB
+> +       select ECC_MBEDTLS
+>         help
+>           Enable MbedTLS TLS library. Required for HTTPs support
+>           in wget
+> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+> index c5b445bd85c..0c86c90d15a 100644
+> --- a/lib/mbedtls/Makefile
+> +++ b/lib/mbedtls/Makefile
+> @@ -39,13 +39,21 @@ mbedtls_lib_crypto-$(CONFIG_$(PHASE_)HKDF_MBEDTLS) +=
+=3D \
+>  # MbedTLS X509 library
+>  obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_X509) +=3D mbedtls_lib_x509.o
+>  mbedtls_lib_x509-y :=3D $(MBEDTLS_LIB_DIR)/x509.o
+> +mbedtls_lib_x509-$(CONFIG_$(PHASE_)ECC_MBEDTLS) +=3D \
+> +       $(MBEDTLS_LIB_DIR)/ecp.o \
+> +       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
+> +       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
+> +       $(MBEDTLS_LIB_DIR)/pk_ecc.o
+> +mbedtls_lib_x509-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) +=3D \
+> +       $(MBEDTLS_LIB_DIR)/ecdsa.o
+> +mbedtls_lib_x509-$(CONFIG_$(PHASE_)BIGNUM_MBEDTLS) +=3D \
+> +       $(MBEDTLS_LIB_DIR)/bignum.o \
+> +       $(MBEDTLS_LIB_DIR)/bignum_core.o
+>  mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASN1_DECODER_MBEDTLS) +=3D \
+>         $(MBEDTLS_LIB_DIR)/asn1parse.o \
+>         $(MBEDTLS_LIB_DIR)/asn1write.o \
+>         $(MBEDTLS_LIB_DIR)/oid.o
+>  mbedtls_lib_x509-$(CONFIG_$(PHASE_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) +=3D \
+> -       $(MBEDTLS_LIB_DIR)/bignum.o \
+> -       $(MBEDTLS_LIB_DIR)/bignum_core.o \
+>         $(MBEDTLS_LIB_DIR)/rsa.o \
+>         $(MBEDTLS_LIB_DIR)/rsa_alt_helpers.o
+>  mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) +=3D \
+> @@ -64,7 +72,6 @@ mbedtls_lib_tls-y :=3D \
+>         $(MBEDTLS_LIB_DIR)/mps_reader.o \
+>         $(MBEDTLS_LIB_DIR)/mps_trace.o \
+>         $(MBEDTLS_LIB_DIR)/net_sockets.o \
+> -       $(MBEDTLS_LIB_DIR)/pk_ecc.o \
+>         $(MBEDTLS_LIB_DIR)/ssl_cache.o \
+>         $(MBEDTLS_LIB_DIR)/ssl_ciphersuites.o \
+>         $(MBEDTLS_LIB_DIR)/ssl_client.o \
+> @@ -82,8 +89,4 @@ mbedtls_lib_tls-y :=3D \
+>         $(MBEDTLS_LIB_DIR)/cipher.o \
+>         $(MBEDTLS_LIB_DIR)/cipher_wrap.o \
+>         $(MBEDTLS_LIB_DIR)/ecdh.o \
+> -       $(MBEDTLS_LIB_DIR)/ecdsa.o \
+> -       $(MBEDTLS_LIB_DIR)/ecp.o \
+> -       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
+> -       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
+>         $(MBEDTLS_LIB_DIR)/gcm.o \
+> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_c=
+onfig.h
+> index dda3f4dd6e4..d55f31acfda 100644
+> --- a/lib/mbedtls/mbedtls_def_config.h
+> +++ b/lib/mbedtls/mbedtls_def_config.h
+> @@ -62,6 +62,25 @@
+>
+>  #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
+>
+> +#if CONFIG_IS_ENABLED(BIGNUM_MBEDTLS)
+> +#define MBEDTLS_BIGNUM_C
+> +#endif
 > +
-> +       return p;
-> +}
+> +#if CONFIG_IS_ENABLED(ECC_MBEDTLS)
+> +#define MBEDTLS_ECP_C
+> +#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+> +#define MBEDTLS_ECP_DP_BP256R1_ENABLED
+> +#define MBEDTLS_ECP_DP_BP384R1_ENABLED
+> +#define MBEDTLS_ECP_DP_BP512R1_ENABLED
+> +#endif
 > +
-> +/*
-> + * This function fills keys with valid pointers (x and y) so
-> + * the caller must then free those pointers with fdt_free_key().
-> + */
->  static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, in=
-t node)
->  {
-> +       const char *x;
-> +       const char *y;
->         int x_len;
->         int y_len;
-> +       int expected_len;
+>  #if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
+>  #define MBEDTLS_X509_USE_C
+>  #define MBEDTLS_X509_CRT_PARSE_C
+> @@ -74,7 +93,6 @@
+>  #endif
+>
+>  #if CONFIG_IS_ENABLED(RSA_PUBLIC_KEY_PARSER)
+> -#define MBEDTLS_BIGNUM_C
+>  #define MBEDTLS_RSA_C
+>  #define MBEDTLS_PKCS1_V15
+>  #endif
+> @@ -89,6 +107,10 @@
+>  #define MBEDTLS_ASN1_WRITE_C
+>  #endif
+>
+> +#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+> +#define MBEDTLS_ECDSA_C
+> +#endif
 > +
-> +       memset(key, 0, sizeof(*key));
+>  #endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
 >
->         key->curve_name =3D fdt_getprop(fdt, node, "ecdsa,curve", NULL);
->         if (!key->curve_name)
-> @@ -54,6 +82,8 @@ static int fdt_get_key(struct ecdsa_public_key *key, co=
-nst void *fdt, int node)
->                 key->size_bits =3D 256;
->         else if (!strcmp(key->curve_name, "secp384r1"))
->                 key->size_bits =3D 384;
-> +       else if (!strcmp(key->curve_name, "secp521r1"))
-> +               key->size_bits =3D 521;
->         else
->                 return -EINVAL;
+>  #if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS)
+> @@ -122,7 +144,9 @@
 >
-> @@ -63,12 +93,45 @@ static int fdt_get_key(struct ecdsa_public_key *key, =
-const void *fdt, int node)
->         if (!key->x || !key->y)
->                 return -EINVAL;
+>  /* ECDSA */
+>  #if CONFIG_IS_ENABLED(ASN1_DECODER)
+> +#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+>  #define MBEDTLS_ECDSA_C
+> +#endif /* #if CONFIG_IS_ENABLED(ECDSA_MBEDTLS) */
+>  #define MBEDTLS_ECP_C
+>  #define MBEDTLS_ECDH_C
+>  #endif
+> @@ -130,24 +154,13 @@
+>  #define MBEDTLS_HMAC_DRBG_C
 >
-> -       if (x_len !=3D key->size_bits / 8 || y_len !=3D key->size_bits / =
-8)
-> +       /*
-> +        * The public key is stored as an array of u32, so if the key siz=
-e is
-> +        * not a multiple of 32 (for example 521), we may have extra byte=
-s.
-> +        * To avoid any issue later, we shift the x and y pointer to the =
-first
-> +        * useful byte.
-> +        */
-> +       expected_len =3D DIV_ROUND_UP(key->size_bits, 8);
-> +
-> +       if (x_len < expected_len || y_len < expected_len)
->                 return -EINVAL;
+>  #define MBEDTLS_CAN_ECDH
+> +#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+>  #define MBEDTLS_PK_CAN_ECDSA_SIGN
+>  #if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
+>  #define MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+>  #define MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+>  #endif
+> -
+> -#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+> -#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
+> -#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
+> -#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+> -#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
+> -#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
+> -#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
+> -#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
+> -#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+> -#define MBEDTLS_ECP_DP_BP256R1_ENABLED
+> -#define MBEDTLS_ECP_DP_BP384R1_ENABLED
+> -#define MBEDTLS_ECP_DP_BP512R1_ENABLED
+> +#endif /* #if CONFIG_IS_ENABLED(ECDSA_MBEDTLS) */
 >
-> +       x =3D memdup(key->x + (x_len - expected_len), expected_len);
-> +       if (!x) {
-> +               fprintf(stderr, "Cannot allocate memory for point X");
-> +               return -ENOMEM;
-> +       }
-> +       key->x =3D (const uint8_t *)x;
-> +
-> +       y =3D memdup(key->y + (y_len - expected_len), expected_len);
-> +       if (!y) {
-> +               fprintf(stderr, "Cannot allocate memory for point Y");
-> +               free((char *)x);
-> +               return -ENOMEM;
-> +       }
-> +       key->y =3D (const uint8_t *)y;
-> +
->         return 0;
->  }
+>  #endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS) */
 >
-> +static void fdt_free_key(struct ecdsa_public_key *key)
-> +{
-> +       if (!key)
-> +               return;
-> +       if (key->x)
-> +               free((char *)key->x);
-> +       if (key->y)
-> +               free((char *)key->y);
-> +}
-> +
->  static int read_key_from_fdt(struct signer *ctx, const void *fdt, int no=
-de)
->  {
->         struct ecdsa_public_key pubkey;
-> @@ -89,8 +152,11 @@ static int read_key_from_fdt(struct signer *ctx, cons=
-t void *fdt, int node)
->                 nid =3D NID_X9_62_prime256v1;
->         } else if (!strcmp(pubkey.curve_name, "secp384r1")) {
->                 nid =3D NID_secp384r1;
-> +       } else if (!strcmp(pubkey.curve_name, "secp521r1")) {
-> +               nid =3D NID_secp521r1;
->         } else {
->                 fprintf(stderr, "Unsupported curve name: '%s'\n", pubkey.=
-curve_name);
-> +               fdt_free_key(&pubkey);
->                 return -EINVAL;
->         }
->
-> @@ -100,6 +166,7 @@ static int read_key_from_fdt(struct signer *ctx, cons=
-t void *fdt, int node)
->         ec_key =3D EC_KEY_new_by_curve_name(nid);
->         if (!ec_key) {
->                 fprintf(stderr, "Failed to allocate EC_KEY for curve %s\n=
-", pubkey.curve_name);
-> +               fdt_free_key(&pubkey);
->                 return -ENOMEM;
->         }
->
-> @@ -108,10 +175,11 @@ static int read_key_from_fdt(struct signer *ctx, co=
-nst void *fdt, int node)
->         if (!point) {
->                 fprintf(stderr, "Failed to allocate EC_POINT\n");
->                 EC_KEY_free(ec_key);
-> +               fdt_free_key(&pubkey);
->                 return -ENOMEM;
->         }
->
-> -       len =3D pubkey.size_bits / 8;
-> +       len =3D DIV_ROUND_UP(pubkey.size_bits, 8);
->
->         uint8_t buf[1 + len * 2];
->
-> @@ -123,6 +191,7 @@ static int read_key_from_fdt(struct signer *ctx, cons=
-t void *fdt, int node)
->                 fprintf(stderr, "Failed to convert (x,y) point to EC_POIN=
-T\n");
->                 EC_POINT_free(point);
->                 EC_KEY_free(ec_key);
-> +               fdt_free_key(&pubkey);
->                 return -EINVAL;
->         }
->
-> @@ -130,11 +199,13 @@ static int read_key_from_fdt(struct signer *ctx, co=
-nst void *fdt, int node)
->                 fprintf(stderr, "Failed to set EC_POINT as public key\n")=
-;
->                 EC_POINT_free(point);
->                 EC_KEY_free(ec_key);
-> +               fdt_free_key(&pubkey);
->                 return -EINVAL;
->         }
->
->         fprintf(stderr, "Successfully loaded ECDSA key from FDT node %d\n=
-", node);
->         EC_POINT_free(point);
-> +       fdt_free_key(&pubkey);
->         ctx->ecdsa_key =3D ec_key;
->
->         return 0;
-> diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
-> index 629b662cf6c..494b60b4ab0 100644
-> --- a/lib/ecdsa/ecdsa-verify.c
-> +++ b/lib/ecdsa/ecdsa-verify.c
-> @@ -10,6 +10,7 @@
->
->  #include <crypto/ecdsa-uclass.h>
->  #include <dm/uclass.h>
-> +#include <malloc.h>
->  #include <u-boot/ecdsa.h>
->
->  /*
-> @@ -24,13 +25,23 @@ static int ecdsa_key_size(const char *curve_name)
->                 return 256;
->         else if (!strcmp(curve_name, "secp384r1"))
->                 return 384;
-> +       else if (!strcmp(curve_name, "secp521r1"))
-> +               return 521;
->
->         return 0;
->  }
->
-> +/*
-> + * This function fills keys with valid pointers (x and y) so
-> + * the caller must then free those pointers with fdt_free_key().
-> + */
->  static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, in=
-t node)
->  {
-> -       int x_len, y_len;
-> +       int expected_read, expected_len, x_len, y_len;
-> +       const char *x;
-> +       const char *y;
-> +
-> +       memset(key, 0, sizeof(*key));
->
->         key->curve_name =3D fdt_getprop(fdt, node, "ecdsa,curve", NULL);
->         if (!key->curve_name) {
-> @@ -50,15 +61,50 @@ static int fdt_get_key(struct ecdsa_public_key *key, =
-const void *fdt, int node)
->         if (!key->x || !key->y)
->                 return -EINVAL;
->
-> -       if (x_len !=3D (key->size_bits / 8) || y_len !=3D (key->size_bits=
- / 8)) {
-> +       expected_read =3D DIV_ROUND_UP(key->size_bits, 32) * 4;
-> +       if (x_len !=3D expected_read || y_len !=3D expected_read) {
->                 printf("%s: node=3D%d, curve@%p x@%p+%i y@%p+%i\n", __fun=
-c__,
->                        node, key->curve_name, key->x, x_len, key->y, y_le=
-n);
->                 return -EINVAL;
->         }
->
-> +       /*
-> +        * The public key is stored as an array of u32, so if the key siz=
-e is
-> +        * not a multiple of 32 (for example 521), we may have extra byte=
-s.
-> +        * To avoid any issue later, we shift the x and y pointer to the =
-first
-> +        * useful byte.
-> +        */
-> +       expected_len =3D DIV_ROUND_UP(key->size_bits, 8);
-> +
-> +       x =3D memdup(key->x + (x_len - expected_len), expected_len);
-> +       if (!x) {
-> +               debug("Cannot allocate memory for point X\n");
-> +               return -ENOMEM;
-> +       }
-> +       key->x =3D (const uint8_t *)x;
-> +
-> +       y =3D memdup(key->y + (y_len - expected_len), expected_len);
-> +       if (!y) {
-> +               debug("Cannot allocate memory for point Y\n");
-> +               free((char *)x);
-> +               key->x =3D NULL;
-> +               return -ENOMEM;
-> +       }
-> +       key->y =3D (const uint8_t *)y;
-> +
->         return 0;
->  }
->
-> +static void fdt_free_key(struct ecdsa_public_key *key)
-> +{
-> +       if (!key)
-> +               return;
-> +       if (key->x)
-> +               free((char *)key->x);
-> +       if (key->y)
-> +               free((char *)key->y);
-> +}
-> +
->  static int ecdsa_verify_hash(struct udevice *dev,
->                              const struct image_sign_info *info,
->                              const void *hash, const void *sig, uint sig_=
-len)
-> @@ -76,8 +122,11 @@ static int ecdsa_verify_hash(struct udevice *dev,
->                 if (ret < 0)
->                         return ret;
->
-> -               return ops->verify(dev, &key, hash, algo->checksum_len,
-> -                                  sig, sig_len);
-> +               ret =3D ops->verify(dev, &key, hash, algo->checksum_len,
-> +                                 sig, sig_len);
-> +               fdt_free_key(&key);
-> +
-> +               return ret;
->         }
->
->         sig_node =3D fdt_subnode_offset(info->fdt_blob, 0, FIT_SIG_NODENA=
-ME);
-> @@ -93,6 +142,8 @@ static int ecdsa_verify_hash(struct udevice *dev,
->                 ret =3D ops->verify(dev, &key, hash, algo->checksum_len,
->                                   sig, sig_len);
->
-> +               fdt_free_key(&key);
-> +
->                 /* On success, don't worry about remaining keys */
->                 if (!ret)
->                         return 0;
-> @@ -135,6 +186,18 @@ U_BOOT_CRYPTO_ALGO(ecdsa384) =3D {
->         .verify =3D ecdsa_verify,
->  };
->
-> +U_BOOT_CRYPTO_ALGO(ecdsa521) =3D {
-> +       .name =3D "ecdsa521",
-> +       .key_len =3D ECDSA521_BYTES,
-> +       .verify =3D ecdsa_verify,
-> +};
-> +
-> +U_BOOT_CRYPTO_ALGO(secp521r1) =3D {
-> +       .name =3D "secp521r1",
-> +       .key_len =3D ECDSA521_BYTES,
-> +       .verify =3D ecdsa_verify,
-> +};
-> +
->  /*
->   * uclass definition for ECDSA API
->   *
-> diff --git a/lib/fdt-libcrypto.c b/lib/fdt-libcrypto.c
-> index ecb0344c8f6..090246b44e9 100644
-> --- a/lib/fdt-libcrypto.c
-> +++ b/lib/fdt-libcrypto.c
-> @@ -10,7 +10,7 @@
->  int fdt_add_bignum(void *blob, int noffset, const char *prop_name,
->                    BIGNUM *num, int num_bits)
->  {
-> -       int nwords =3D num_bits / 32;
-> +       int nwords =3D (num_bits + 31) / 32;
->         int size;
->         uint32_t *buf, *ptr;
->         BIGNUM *tmp, *big2, *big32, *big2_32;
-> diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
-> index 5285263c616..285547994ca 100644
-> --- a/tools/image-sig-host.c
-> +++ b/tools/image-sig-host.c
-> @@ -83,6 +83,13 @@ struct crypto_algo crypto_algos[] =3D {
->                 .add_verify_data =3D ecdsa_add_verify_data,
->                 .verify =3D ecdsa_verify,
->         },
-> +       {
-> +               .name =3D "ecdsa521",
-> +               .key_len =3D ECDSA521_BYTES,
-> +               .sign =3D ecdsa_sign,
-> +               .add_verify_data =3D ecdsa_add_verify_data,
-> +               .verify =3D ecdsa_verify,
-> +       },
->         {
->                 .name =3D "secp521r1",
->                 .key_len =3D ECDSA521_BYTES,
 > --
 > 2.43.0
 >
