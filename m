@@ -1,170 +1,167 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6210DC61DD3
-	for <u-boot@archiver.kernel.org>; Thu,  3 Sep 2026 13:10:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DFD4C624DB
+	for <u-boot@archiver.kernel.org>; Thu,  3 Sep 2026 13:10:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C21E3810D8;
-	Thu,  3 Sep 2026 13:10:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BFBDE60B92;
+	Thu,  3 Sep 2026 13:10:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CFYaIo25xDQO; Thu,  3 Sep 2026 13:10:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 99D9381090
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788441005;
-	b=dyRkmkuJ6CgsKrx31gjfIw/dNEL4y6TTFRslgHvfFqutIuTtLkMIM/4tW22lQQZKBD6G
-	 ZnRVprXhO/KtlZbuO01DEhRPTmwA0VcqPH+9vLJK+h20JDkUzj/v9EGVaMbITJgvAyXwr
-	 ns9SQ+G1GXPm/DtIxQ0Y6VFHZy6LXOkA4G5mdP2LDV0/z/denDJ3HZ36F20w8GX+2Ze6C
-	 ArW2Z9Vn5UOQaaPuDEQx7WUBf/NRGGpDso4Euk14V0CA1TKsJfofOdtUlsV4gX+A+NmoO
-	 MIVp8HEd043xTtzkQShgPqFrgXpPw3NkWWpBO+6PfSH/DaoYwZ9iH0EZ5URbswRhzDA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id C5Ay_kXOK4Zf; Thu,  3 Sep 2026 13:10:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org B5F7C60B6D
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788441007;
+	b=nEtcxaW5yMrcUZ0HGLprHLaKsIFO3aDTwh0qjxi519GOcSluSUK/57A4O9JxP9f0YY+g
+	 vxR/t7wvE/rzSJt0WGInaRK9VSBOg5YhocwisLwhU5ylMBj7shf8uX2D/BrSBSXS20ivR
+	 W+TsIlJ5l+acBMOmC8ifuPK+DFLxLuRzsms9L9uV9gWc+jHBNuSjfkdH4z9GD/twyPyQw
+	 NTh9u3OY9Cvaju0WJjt5FL1jM9OStmBBn54LakvwyoHi1gqMvTfEbBChUkjjL+F3d46Ev
+	 OF6jeBm9IEo93rFw94TTOCaA5y4lEByBLegyTk9GkuKNXCz8qI/i6FkXLbDurnEkymA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788441005;
+	c=relaxed/relaxed; t=1788441007;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=cmidAeEAP7Qjtl31cRZdGIijSwx+AU5qtUa+1n6cs3E=;
-	b=haY9CFZ163gFdthhEM8bQb6DlLw0+wd//9rSuu9fmervyuyfphH0oUbGDw4fC36FvERO
-	 iuUaSzKHNzs2nRLW0KU+8ZD7R9m1h2mNeeNUo+FqwammckLyU+M7pEBKu2wsvi751uGTC
-	 w6n+Jq8FisgMDfAvTn4aiZQukPd6ORWlY7XV7x/vQJvce01kDeXhCZF2aIXqUi7qzpROL
-	 L68DJlAyBFyBW984B9ZGh2O9S6E+8ivFQxj1DMXjByBFOrt3EYPfo9hGxEBsO9jI1XEfp
-	 C7OCdgjyyx7oyMLfXB79DgD5/7lM/wN98E9M3VAnqbZZN5C6QLbUWDrQ+hXjAUsoXPw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=LJYcYx+MVMCeEhYVM58rii8oOFcXAWR26C6yKzp+p9Y=;
+	b=UJYgJDBzHYqYViqWM0ci2Ak+wMWGloYjz7f+B2ZrSmN5AJyG7LpKrQ9X9rRKxKas12Ah
+	 CXwL2bNNmHqj34HufLvRtSSuof58usiOtRF45uDRhya9AocVYCgw255quzqjXL8ecVFN/
+	 JPfZhMs8MNmUpwrWQjv0KosGrqRT5w2dzXDcaQ0e5vRMfSWfrfoEK1lQ+5uH2kSb9V3S+
+	 wUN4L5C7A+zZsOGK4plVyLaNHku9O7ae3+iZRoJMqCpclvmxiY5SxSWkFY3oSU6JF3kU2
+	 9X5FcokPJoWXSi/nUNGqB6e9sVMMWH3zBVMpqZvXYnQuPmeLga/vMwpwcS9uPu6UjJw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788441005;
-	bh=cmidAeEAP7Qjtl31cRZdGIijSwx+AU5qtUa+1n6cs3E=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=fN/q/nw5DM3pDduLYOz8xHTtpkJjrmfPzpZHmFpp1lOJqhR93Siwhg/JDIC3ZeYhR
-	 lPQVmGON8kZ/kiYqVDxHyxRCXmp/MpgXVeBvOYCabqB7dB/QUd1LbpcnmrA198qxe7
-	 xxee2vAdfpcx1n27+JH5N0gL3JAKggYQ4UTXcqrF20X+zKo1abH+xe6hwBrQ6f3pqJ
-	 tY/W6ZtHC/PlfIMXMo+QYVQfjN/QMSTeOAaClk4JARg1Cx+zfuH4EstTpASE+qti4Z
-	 k7t090apEg9qLhgg5PjqmxzxdPZpE/8NL1Cv6bktDEq/1k6n8zrzLZhWr5Kyy6tTx1
-	 EPvWbfzqNzOxQ==
+	d=lists.u-boot-project.org; s=default; t=1788441007;
+	bh=LJYcYx+MVMCeEhYVM58rii8oOFcXAWR26C6yKzp+p9Y=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=d3EUSgEDQj/W5lG/i0gbYlqnHwKGjLsrIrKsk0Pihh9LA/8mXITKZdxEPwVkQ3mZx
+	 ZohrW3xe2Fzu3DDm5TqPENkElnBiojeCJgNN9WfjhzpntE7jXLaFNrZcM+UmOIdOBC
+	 M3NcqcD69ZC0crxnNc6EJFRmqq2K8vlDofK6tmzzT5QarPuEo6VyFGxpCzx52ZcGh7
+	 LKdILFixl+7jo4rCY0T5xfIxFZZdn9Np087QpUo1N98UgnWgJqug/4sZrgQNrbGG8q
+	 srNFbO3RdGjBbxMSn+bjRXDShyC9iaro3mNho0KuIVQjzveZ8cGfOC5jM+7MUxzf56
+	 sEGBe0FUPdXRQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 99D9381090;
-	Thu,  3 Sep 2026 13:10:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B5F7C60B6D;
+	Thu,  3 Sep 2026 13:10:07 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id DEF7FD5C
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 13:10:02 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id C6160279
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 13:10:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C32E540469
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 13:10:02 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id AC5C140469
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 13:10:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7MXrYrtBRoHQ for <u-boot@lists.u-boot-project.org>;
- Thu,  3 Sep 2026 13:10:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org D11BE40454
+ id rewnYsaWMmAA for <u-boot@lists.u-boot-project.org>;
+ Thu,  3 Sep 2026 13:10:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 8634440462
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::436"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788441001;
- b=JypJFnB2S9nC4Q3qkso3gMgDOSd7kMZHXF72ybg3st6CBkZ75DFf601HDFTVfzJuuiEp
- CZBYFwW2eyi/9Imo4n7P9cDMZX/v1YZIhDaEsJplhRs8kZxU6I/kdlRbTJtchGDyO8qm5
- tbVx/SaCODejbKlMqV5Tfy2iUPLMuoxIZLBZmCEnNC6DZAft/Cscbb+v11bxGMfz/r7ct
- dp009zaiRPf374Ucrbuiuv0HOAwAGAKdC1FDWk30Tei53PyFwOx99XykleBXLDMbW4j1c
- WFKhBUdRirhaxHarcnnWRhCX6KkKBiaOuxUA6njxZXpnY9Aq+at1eKBuRm/68SPToOA==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42f"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788441005;
+ b=cag3K1SDgUqI7AGXSWb/bZoDZN1xjSuWee6hekZ/YefiYpAq5Wn+5qMb04WlZLC0G6UA
+ Ye8UFKNUs6Tisf9baPod5tvIIDvAneyZn9JQpE6YJFoatcDO3FRQW8qBVIfC43tpHOrgF
+ ceSEdAPSgQ+QBUAYHEUwQxQdZHTCn4qf+yMinMAfuOwAN1j9dgeud3sMPV8qdpkC8fvts
+ f0A7+sSuYrI8UtRu/4Hku2KQluWJpUylzJF/mVs4RkX1M878mhhHJrXvWn1lYzaGTafeI
+ d9NOA9gYFTlA01IxcT++z0qnaZLSnfUyDzmX6i7IWPdxKvMe6g1UlwwaebeyEHn2XZw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788441001;
+ c=relaxed/relaxed; t=1788441005;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
- Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
- bh=cmidAeEAP7Qjtl31cRZdGIijSwx+AU5qtUa+1n6cs3E=;
- b=hksLJ3BJhojQ4aa+bMayjt68FCAf4yXjVVttDqGhQLWS+ecbZPuI+5hpwSovMY4l1Nax
- jR8b+BF++sMxGPd1hT5MKW08DLpODxiQcsWolyk2OiFxvcb2RDm6yAFcjVGIhGJNrFuGE
- XbhO4jZLtZzTZkXBUUTaKqKcrL49wZmdFd9sflW1YjFgryTTk8dsanXqVA3wLi70kLjoD
- wKYp6VxfulGQm/6KDQFl8Npqg12TgqDeiqBLF1/cpMUoYOdW8s3C4JMShAWSl8WEdcVmx
- zCYl3tvzv550aZsVw7bKaaIX7yCF2t1Z4qI+WjxrvYj+yla9m7OYFHDvnqy0qxwCK1A==
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer;
+ bh=LJYcYx+MVMCeEhYVM58rii8oOFcXAWR26C6yKzp+p9Y=;
+ b=qapBVbrQxf1p3CQrBGgMNd7lY6S23BLbRIb900nObnqZ8w8F7Ez8ZjCgrubtGJ/qSVNN
+ xfnQAGKSmh7ok1EePLtdpGZ4aBgG5YH7oGPb/ddGSL396A8Vq/qby+PModI5a4+OP6QZL
+ IL7uho3f21FrVc6dnnvpA85s6bTK4jtxRbKrGfts0zgf0kW/WmAWH/p5tRZtdrXRWDqds
+ uhHWRkMyrJeH0I2rXuSFVcumB8Y+KpyxzEIhbg3I89KChuKk8TRRLfqFswZYxBT9xuT3P
+ XFwfLMMgRSdKsqvk7sorfYI/6IdOqi+o/hCIGn4zMiqcPjwqsh9H0wQT4gdOyrzMi9w==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=A1d6Bf2A; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::436"
+ header.s=google header.b=GG7nPxTm; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::436; helo=mail-wr1-x436.google.com;
+ client-ip=2a00:1450:4864:20::42f; helo=mail-wr1-x42f.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=A1d6Bf2A
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D11BE40454
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 13:09:59 +0000 (UTC)
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-485850cbac3so183020f8f.3
- for <u-boot@lists.u-boot-project.org>; Thu, 03 Sep 2026 06:09:59 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=GG7nPxTm
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8634440462
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 13:10:04 +0000 (UTC)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-4843f205a5bso1633305f8f.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 03 Sep 2026 06:10:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788440998; x=1789045798;
+ d=baylibre.com; s=google; t=1788441002; x=1789045802;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=cmidAeEAP7Qjtl31cRZdGIijSwx+AU5qtUa+1n6cs3E=;
- b=A1d6Bf2AIEyaC8Y/u3QYqRolHARq+zGun8WWwFbGNZEFkgGBU5OJ83Ejad2DqDF3Er
- 5gSZIRPEWjTWochQfgID0W1lvbpmssvAHr5zS2x99CEWF83i3ReA1R0tCD00l3Un+8wr
- 6fvpA+8RDFa2ANOm/ZBAWMOEoNfsTicx6ZfQMzhX1LZaRFZnnpfqNwK8F/U5YV2FX2FI
- mQYVYdjsHzIhoGcEETa45Wt2s5z93b+Ew8QPP0Xy39ZFVgD48DMoQxhiTvWv+kNq1wyV
- BTQ5Pe+A8/Ws1LX/PxfKGT7n50ttxaFLiHcSBdPWzGJoiaNLNvSd9RSKONsspu+Ck1EY
- LWMw==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=LJYcYx+MVMCeEhYVM58rii8oOFcXAWR26C6yKzp+p9Y=;
+ b=GG7nPxTm+PUTHMR8lPFKKsfMhYI2fnjUImQuPVR7WVvLCVRf/POua1DelnTkeMSz4n
+ VlnwFzJx5x1gxkqv8WxFaEWREOgssTD3hbASzKhSSMV8V8b1mUhvOGMLPGI0WvhBon+4
+ 0HAt0uFqLBaKRXkNWy0I418EWzja3WxPWhVsBqvR1NHmH6Ippx4nPx4Zq/mZBsd09zfz
+ +gjmctzctLq/gg7CbanPEwXHAKSQXZYlIutPtybGF+Z2NsBaIzbemtLC3TeQtVDrkHCw
+ YEdxKM8i2bFsL1AEUxIDw4i2geMAJlqq/ZlLiRQpH21z6p7QXq6AHvRklInczNOBduiO
+ MVFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788440998; x=1789045798;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=cmidAeEAP7Qjtl31cRZdGIijSwx+AU5qtUa+1n6cs3E=;
- b=FC+D5SardmIXxL0nosaUHABctzJocCu8YXums3NtdQQe36Wmp9WrbNrqauP/ws4y5M
- W4h9SlsWyV4u0ymfY2nZas5wVE6mKR76jCdiqJKAtz+3/k/v+IPdt9yi0yjeJHBNb/ku
- Y9J//a6ZMccvg4vqdJkkEQvARu5lFr96nWFzd7zvsftINCVaaswKfN5m7+WZJxQWuuxX
- NlEtAeq1ZtYJVs2SRxhGj7VIV6VSOUhEaig13N8xvGoRNe3I8c4yJvmga8DTIa38gIbe
- f1XItcO1Bo98/q3SN6lE9V5ZG9gGRtJdugUr0oE/weePDekag8OLWo25+4nh4WVhGybo
- 1nDA==
-X-Gm-Message-State: AFuF++n+aBLBd1bP/y/3CtyKOZxIHKisQzcoN3B9p8MUyqpWsQLz9BDK
- xSzZKYTgx6L3Bcy+xhbVf/t+Ww4Wv2kiHeRhvJOSNfujcmOoUU1zo5YCxxlywR/qlNuHW78Z3Jd
- 1Wr6mfN4=
-X-Gm-Gg: AYBFou3LWc8yGTo1/AGvXSkM38LIvvm/s3/4uB7xSTAYVdAWxSmOv0xw0TtzU8ZrsBu
- +ft2whaT+J6T1uXWYBKzzbUfdvEb/AnXRDgqUtUnEgnF5gCN/eRoeT388k9aHee3BGnQ8UpF1cR
- vRrDps5DKKGp9YBphuMMbyACHbWTsDteHO0OdBOAhmUoihN4DvhJpert4ipqIzjYq6ZtuT36LSt
- ev63Cc8LpkyupYh/v9dptuemuZaNt5gR/KT6+f2rcKrdn2k3EMpQlKOU1OcvvOb3Ggn4sRTPisv
- QtuLtVyB9JDzW0iS2huh6sAtv7wCEa1kQwzF4bu7SqGd3L+EhrpPh3+3Xsl7i0T5LhczFH1zC/3
- dJU4qVxVIIgg2FRLMOpuFwUVdM6mvwlOUFHpwZ+anrb4CXYiUq5zQ2rJakKHvx2CksuQSjU4aBq
- 6c0UOj6OJUF9em54OQgbN/f2Ejh8rf4ASlBgUnqn+DoCBPV1KmW/AHhQtE+FII5S4veaI+OMcVY
- EsIriGZQjO8Bj18IrTDV/0HqLArEc04DLQRundiOQdtV5GT3tTgYBUzKXnekd5yccZCxGGqE+2A
- qgrTu6H6OUknpeRc
-X-Received: by 2002:a05:6000:601:b0:484:36c8:ffb9 with SMTP id
- ffacd0b85a97d-48586022058mr432194f8f.4.1788440997865; 
- Thu, 03 Sep 2026 06:09:57 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1788441002; x=1789045802;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=LJYcYx+MVMCeEhYVM58rii8oOFcXAWR26C6yKzp+p9Y=;
+ b=Mge/71PWXtYpOPzdIKbxFCSXxrvIP55XNHr0ODuPwfGpLrnleVlDuNe7n10z1lmF/Y
+ tbxYEA0kZizom2/Cv3VfTaIuumUyemecTKaVKP4lYOXPY8kSRfm/kmGrhj6tizRCP4zB
+ nEqMvaWZuMOJzJlIH4/DmwbNjoFLnzFyj+Y0LAia9G2toFXtP1bNazzoY8BqNN3iiQgX
+ v+cAkL4nGEuABsFAWSE/iw8RA6Vl/r4WKLueHoh+tyaiovGXuEJRiFgaT/zwQM45tUuD
+ nbsEryxRydz5y/ciWstMlqCtE56sTMa9sugXivOhuWNmk+ZekYAgwOfab371dveAtOPQ
+ jYmg==
+X-Gm-Message-State: AFuF++ly3C7Ph0FtiIVHXZCNKOGL7jvdw9HyyNPanITL/BvnB6HKlRjT
+ h4xyd2ZvN91s2X9aQaGMZChq8Td+gBkjICa5SaZLdMpAlNT3g/sUYSdFLJQiPIcofPM=
+X-Gm-Gg: AYBFou1/6K6LWCDv2SBC/iqNxIzG2z8ItMhzeCpjuua0Ou2EnGlBtGHCm8HEULrfwt8
+ dg1DFOJMIciAnii678hxX70S/FfU9r+Uj8Q1xVlHXJOg/zpKdgb+mhU0PHFRSvxiJzAFEKZPRN2
+ VmIScOjLE6nz3wFJRrEHWMqTbgOaJYQWCpDbUmgvYgqJaftwdnhCOKYhU09yLpMs9QB1V+9wMEA
+ 2sLWVvmmv6avCBF/AmGHWq7s2tvnB3XR/9Hxyt7Nl9fx0EDD68HTYcYbHFETeE1YWGu7fNHwV98
+ vVA4OITkPRIYktikDuSwK352e5CnXFbPJzceiLZ2sk7mOW0W8k0qipXoNyXNT6sZFDledpbyF+Q
+ bBrNuL7lmPuaI8oiLyLbulE3M7OPOlU1FPJgT/GIr/ZVRdoQvRZch/zWDAEwcLMSa8jbYHm40MR
+ bscvLEHQq1PfrWqpMtcxF4EE73QFTW4zTBUMxwDJpq1d8Mj0KiWXtQc7IuvsdVU6CKSLTWJlJMP
+ rvn2tAvgYIIutXl8tG+QK5FESim9el+T5m1Xc1kUfK9M/xXsnFP8i4/1R2LLrd/CDuovZT9qX0n
+ jYWO
+X-Received: by 2002:a05:6000:3106:b0:481:51b7:290b with SMTP id
+ ffacd0b85a97d-48488f20a95mr19776729f8f.14.1788441002195; 
+ Thu, 03 Sep 2026 06:10:02 -0700 (PDT)
 Received: from macbook.homenet.telecomitalia.it
  (host-95-232-147-181.retail.telecomitalia.it. [95.232.147.181])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48448ed38cfsm12755807f8f.19.2026.09.03.06.09.56
+ ffacd0b85a97d-48448ed38cfsm12755807f8f.19.2026.09.03.06.10.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Sep 2026 06:09:57 -0700 (PDT)
+ Thu, 03 Sep 2026 06:10:01 -0700 (PDT)
 From: Carlo Caione <ccaione@baylibre.com>
-Subject: [PATCH v3 0/5] firmware-owned devicetree for EBBR / SystemReady
- DeviceTree
-Date: Thu, 03 Sep 2026 15:09:47 +0200
-Message-Id: <20260903-ccaione-upstream-ebbr-v3-0-016658d0b6ba@baylibre.com>
+Date: Thu, 03 Sep 2026 15:09:50 +0200
+Subject: [PATCH v3 3/5] bootmeth: efi: use the firmware-owned devicetree
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4WNyw6CMBQFf4V0bU25haKu/A/joo+L1MgjLTQSw
- r/b4saYGJeTzJmzEI/OoienbCEOg/W27yLwXUZ0I7sbUmsiE2AgWMUE1VpGBek0+NGhbCkq5Sg
- woTlTyCWXJG4Hh7V9bt3L9c1+UnfUY4olo7F+7N28HYc8ef8+Qk4ZxaoAbYyQCsuzkvPDKod73
- bck3QT4CMHhVwhiqMBalXDMC2bEV2hd1xeCgu+uGAEAAA==
-X-Change-ID: 20260706-ccaione-upstream-ebbr-206c30be3a3a
+Message-Id: <20260903-ccaione-upstream-ebbr-v3-3-016658d0b6ba@baylibre.com>
+References: <20260903-ccaione-upstream-ebbr-v3-0-016658d0b6ba@baylibre.com>
+In-Reply-To: <20260903-ccaione-upstream-ebbr-v3-0-016658d0b6ba@baylibre.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Ahmad Fatoum <a.fatoum@barebox.org>, 
  David Lechner <dlechner@baylibre.com>, Julien Masson <jmasson@baylibre.com>, 
@@ -193,122 +190,118 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-EBBR-style firmware owns the devicetree: the OS is booted via UEFI and
-receives the devicetree from the firmware through the EFI configuration
-table instead of shipping its own. U-Boot has the handoff mechanism
-(efi_install_fdt()), but no generic way to describe and load the
-firmware-owned source. As a result, platforms carry downstream commands
-to provide it.
+When a firmware-owned devicetree source is configured, stage it at the
+same fdt_addr_r value used by the normal EFI bootmeth fallback and pass it
+through bflow->fdt_addr to efi_install_fdt().
 
-This series adds a firmware-FDT uclass with storage-specific source
-drivers and common FIT selection, verification, overlay assembly and
-caching:
+Use firmware_fdt_stage() in both disk and network paths. Only -ENOENT,
+meaning that no source is configured, permits the existing ESP, network
+or prior-stage fallback. Any failure after a source is configured ends
+that bootflow.
 
-- one FIT ("fdt.itb" by default) carries the base devicetree and its
-  overlays. FIT configurations describe valid combinations, so a signed
-  configuration authenticates the base, overlay set and ordering;
-
-- the first backend, selected by a standalone
-  'u-boot,firmware-fdt-block' control-DT node, reads the FIT from a
-  filesystem on a GPT partition. The compatible suffix leaves room for
-  drivers which obtain the same FIT from other firmware storage;
-
-- 'fw_fdt_part' can override the partition for A/B firmware selection,
-  while 'fw_fdt_config' can select the configuration for the current boot
-  policy. Otherwise compatible best-match against the control devicetree
-  is used, falling back to the FIT default;
-
-- the source device caches the assembled result by those two selectors,
-  avoiding repeated reads and verification while the EFI bootmeth scans
-  bootflow candidates;
-
-- once a source is configured, any failure to assemble the devicetree is
-  fatal rather than silently falling back to an unverified source. Every
-  image is verified up front so a corrupt overlay cannot be silently
-  skipped.
-
-The loader does not depend on standard boot. EFI is its first consumer,
-but the source drivers, FIT handling and staging interface are generic.
-Both the EFI bootmeth and EFI boot manager use the same staging helper.
-
-Patch 1 makes an FDT passed to efi_bootmgr_run() outrank a Boot#### FDT,
-as an independent behaviour fix. Patch 2 adds the uclass, block backend,
-documentation and staging interface. Patches 3 and 4 integrate the EFI
-bootmeth and boot manager. Patch 5 adds sandbox coverage.
+The firmware-owned devicetree is complete and authoritative, so do not
+apply extension-board overlays on top of it; those combinations belong in
+the FIT.
 
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
-Changes in v3:
-- Model firmware-FDT sources as a uclass with storage backend drivers;
-  split out the block backend and reject multiple enabled sources.
-- Cache the verified, assembled devicetree by the partition and
-  configuration runtime selectors.
-- Rename efi_stage_firmware_fdt() to the generic firmware_fdt_stage().
-- Add separate configurable size limits for the input FIT and assembled
-  devicetree.
-- Validate the assembled devicetree before publishing it and avoid
-  duplicating the internal FIT filename.
-- Keep EFI and firmware-FDT sizes separate in the boot manager and retain
-  the FIT filename for failure diagnostics.
-- Extend sandbox coverage for caching and selector invalidation, a missing
-  FIT and multiple configured sources.
-- Use the current SystemReady DeviceTree name.
-- Clarify fw_fdt_part as the A/B partition override and fw_fdt_config as
-  the per-boot-target configuration override accepted in the v2 review.
-- Add Reviewed-by tags from Ilias Apalodimas and Simon Glass to patch 1.
-- Link to v2: https://patch.msgid.link/20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com
+ boot/bootmeth_efi.c | 45 +++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 39 insertions(+), 6 deletions(-)
 
-Changes in v2:
-- Make the loader independent of bootstd and describe EFI as its first
-  consumer.
-- Describe the source with a standalone compatible node which points to
-  the backing media through a phandle.
-- Rename 'boot_dtb' to 'fw_fdt_part' and document both environment
-  variables in doc/usage/environment.rst.
-- Factor EFI staging and fail-closed policy into one helper used by all
-  three call sites.
-- Track the assembled FDT's ownership explicitly and own the FIT filename.
-- Select FIT_BEST_MATCH and add explicit compatible-selection coverage.
-- Split the passed-FDT precedence change into its own first patch.
-- Build the entire sandbox source topology at runtime, store mmc11.img in
-  persistent_data_dir and add staging, configuration-chaining and corrupt
-  base/overlay fail-closed coverage.
-- Link to v1: https://patch.msgid.link/20260706-ccaione-upstream-ebbr-v1-0-e742cdd6abe5@baylibre.com
+diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+index e187dc39912..f58e90b6d21 100644
+--- a/boot/bootmeth_efi.c
++++ b/boot/bootmeth_efi.c
+@@ -17,6 +17,7 @@
+ #include <efi_loader.h>
+ #include <env.h>
+ #include <extension_board.h>
++#include <firmware_fdt.h>
+ #include <fs.h>
+ #include <malloc.h>
+ #include <mapmem.h>
+@@ -100,7 +101,7 @@ static int distro_efi_check(struct udevice *dev, struct bootflow_iter *iter)
+ static int distro_efi_try_bootflow_files(struct udevice *dev,
+ 					 struct bootflow *bflow)
+ {
+-	ulong fdt_addr, size, overlay_addr;
++	ulong fdt_addr, fw_fdt_size, size, overlay_addr;
+ 	const struct extension *extension;
+ 	struct fdt_header *working_fdt;
+ 	struct blk_desc *desc = NULL;
+@@ -130,6 +131,22 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
+ 
+ 	fdt_addr = env_get_hex("fdt_addr_r", 0);
+ 
++	/*
++	 * A staged firmware-owned devicetree is complete and authoritative,
++	 * so return without considering any other devicetree source. The
++	 * extension overlays below are deliberately not applied on top:
++	 * such combinations belong in the FIT as configurations.
++	 */
++	ret = firmware_fdt_stage(fdt_addr, &fw_fdt_size,
++				 &bflow->fdt_fname);
++	if (!ret) {
++		bflow->fdt_size = fw_fdt_size;
++		bflow->fdt_addr = fdt_addr;
++		return 0;
++	}
++	if (ret != -ENOENT)
++		return log_msg_ret("fwf", ret);
++
+ 	/* try the various available names */
+ 	ret = -ENOENT;
+ 	*fname = '\0';
+@@ -222,9 +239,9 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+ 	char file_addr[17], fname[256];
+ 	char *tftp_argv[] = {"tftp", file_addr, fname, NULL};
+ 	struct cmd_tbl cmdtp = {};	/* dummy */
+-	const char *addr_str, *fdt_addr_str, *bootfile_name;
++	const char *addr_str, *bootfile_name;
+ 	int ret, arch, size;
+-	ulong addr, fdt_addr;
++	ulong addr, fdt_addr, fw_fdt_size;
+ 	char str[36];
+ 
+ 	ret = get_efi_pxe_vci(str, sizeof(str));
+@@ -268,6 +285,24 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+ 	if (!bflow->fname)
+ 		return log_msg_ret("fi0", -ENOMEM);
+ 
++	/*
++	 * Read fdt_addr_r once so the firmware-FDT source and network fallback
++	 * below stage at the same address. A configured firmware-owned
++	 * devicetree outranks the network-provided one (and the prior-stage /
++	 * built-in devicetree below), so a DHCP/TFTP server cannot replace it.
++	 */
++	fdt_addr = env_get_hex("fdt_addr_r", 0);
++	ret = firmware_fdt_stage(fdt_addr, &fw_fdt_size,
++				 &bflow->fdt_fname);
++	if (!ret) {
++		bflow->fdt_size = fw_fdt_size;
++		bflow->fdt_addr = fdt_addr;
++		bflow->state = BOOTFLOWST_READY;
++		return 0;
++	}
++	if (ret != -ENOENT)
++		return log_msg_ret("fwf", ret);
++
+ 	/* read the DT file also */
+ 	ret = efi_get_distro_fdt_name(fname, sizeof(fname), 0);
+ 	if (ret == -EALREADY) {
+@@ -279,10 +314,8 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+ 		return log_msg_ret("nam", ret);
+ 	}
+ 
+-	fdt_addr_str = env_get("fdt_addr_r");
+-	if (!fdt_addr_str)
++	if (!fdt_addr)
+ 		return log_msg_ret("fdt", -EINVAL);
+-	fdt_addr = hextoul(fdt_addr_str, NULL);
+ 	sprintf(file_addr, "%lx", fdt_addr);
+ 
+ 	bflow->fdt_fname = strdup(fname);
 
----
-Carlo Caione (5):
-      efi_loader: bootmgr: preserve a passed devicetree
-      boot: add a firmware-owned devicetree source
-      bootmeth: efi: use the firmware-owned devicetree
-      efi_loader: bootmgr: install the firmware-owned devicetree
-      test: boot: add firmware-FDT source tests
-
- MAINTAINERS                               |   3 +
- boot/Kconfig                              |  49 +++
- boot/Makefile                             |   2 +
- boot/bootmeth_efi.c                       |  45 ++-
- boot/firmware_fdt.c                       | 303 ++++++++++++++++++
- boot/firmware_fdt_block.c                 | 143 +++++++++
- boot/image-fdt.c                          |   3 +-
- boot/image-fit.c                          |   9 +-
- configs/sandbox_defconfig                 |   1 +
- doc/develop/uefi/firmware_fdt.rst         | 118 +++++++
- doc/develop/uefi/index.rst                |   1 +
- doc/device-tree-bindings/firmware-fdt.txt | 160 ++++++++++
- doc/usage/environment.rst                 |  13 +
- include/dm/uclass-id.h                    |   1 +
- include/firmware_fdt.h                    | 106 +++++++
- include/image.h                           |   5 +-
- lib/efi_loader/efi_bootmgr.c              |  45 ++-
- test/boot/Makefile                        |   1 +
- test/boot/firmware_fdt.c                  | 498 ++++++++++++++++++++++++++++++
- test/py/tests/test_ut.py                  | 183 +++++++++++
- 20 files changed, 1670 insertions(+), 19 deletions(-)
----
-base-commit: 3f19667468fb93bcb5702d23aa057b72639e3ac8
-change-id: 20260706-ccaione-upstream-ebbr-206c30be3a3a
-
-Best regards,
---  
-Carlo Caione <ccaione@baylibre.com>
+-- 
+2.55.0
 
