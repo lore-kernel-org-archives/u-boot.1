@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EE6CC61DD3
-	for <u-boot@archiver.kernel.org>; Thu,  3 Sep 2026 14:33:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E22DC61DD3
+	for <u-boot@archiver.kernel.org>; Thu,  3 Sep 2026 14:33:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CEEAE810F1;
-	Thu,  3 Sep 2026 14:33:04 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5390C60B71;
+	Thu,  3 Sep 2026 14:33:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1N8QqPQsHoeS; Thu,  3 Sep 2026 14:33:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 81A8E80DFA
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788445981;
-	b=n8Y88lzDBbCdMPu94XoP/MD/N2gj8FTWBFtUXaN4OLPzWrBm5VDjdWWmEnoqURN3j5Cy
-	 ZjK8AGN+XsmFr6UL3af2+oWBAsyq8YgOn5t1EZm2MyEmUFB5G2MPh8oCeceYfirFx3Qwc
-	 6lFj7oXULoU81aOdg165a7mA1bi3hZ97u4RBMEnMqxuxmeBxHWUPAQnZQP+zxAMCV4wwO
-	 1Rb8Zboo0NQqtoMT/MEEWVEOuLpMlFbhVOx6pLCwdDWMXR18hG9euhSuqtgSq6OFkCtCh
-	 S1TNGnqpT+mUbS6Zf3o0E7XctH6wRraqVg6QZB5/y1S/OVFKB+9rGahGlZeIe2Za1FA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uyYjhoDkZd5S; Thu,  3 Sep 2026 14:33:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 6EF7560B66
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788446025;
+	b=cTL+zkhBrx29EiTWr7/v4xpj1NYw1iczfWOI6NuraIBTogxig+caEaVCdTVqHb+oDAzf
+	 /15I+7tNurszSZ/+uw2b8pWc7PgoYymi1KT7VhBi3SWd6lT6+aDrF4AqXSwYbGKgv1mbi
+	 40xGCSPHTpqnG7SOMx9rFLzY26yG8asyNeg1u+x59yOGDwYQqm9VbGCy1kTfHKSLAI5ss
+	 8p6+c1L2yw9PtP/SLltXcyQyJI00zjEzCFIXSQ+Xw74+fZ9KTlZFFkFJAmBOmkwnJf2EA
+	 BrutyzKQaKLshhOVcuYHtteGvDiL8h1bIXTKmX8ZrMWdibw4Ak5RMcpSDkpskde/F9g==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788445981;
+	c=relaxed/relaxed; t=1788446025;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,154 +32,156 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=prVCGQMmFQIdkR1Wio7jYd8np8Yv8LIJ6kKbSs66zaA=;
-	b=Mg5ylSB+GrOTOI/TkL742EkAHuO/a//CoOJOB6tlP863xLxcxIvywGumrYFD/TJtWXyN
-	 rkfvBjDetMAwpUk+iNBxY90yW6M3DPvvyorm4/vj/Wt8XmqEGPuoi+mTp/4MKXxj/V2ib
-	 vLPskdRq08iCcTS8W5Ye/vu2SPRfUVq9Ra1FDa7XwgQkLkB8Od+Ux8yMN36gBJH07HYxy
-	 XOfvWJFaxhiYma0HtAJ5TJGThmlXJ5N2eZgXt3XR7iUYJlvKRn9V5kQEE36PJba2SpHQC
-	 cPYnAx87Coq0C+vYeUSqwbfBEpFVJHBrPAPE3bSpTKI0CZCnEXyPP9UlU/GKVMl/eDQ==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=HgIC350AlYnt8zxxqmr2FE/zbKdRm5UGQwQlh70Edag=;
+	b=mu6f5UPRCtkyAAy0fMzruASNYeF8/Rbr8Yt4TEKTbNcUA/nBzGECvTRh/BHvgn3BU0Cb
+	 66U5gss3S/EEw4YE8bK2YtJrEjqJVr23MLjfVsLau3By3Ec1Cq7RHIMjrm+DnY7lX2MjY
+	 rr+JrJo/SCfeSUJgPPXbnrcQHGTbh3bTStZz1nSFejs9z+IYCLWmDAQM39Rg7kYJ4pz9t
+	 ShMTrMdMeY6Srh3L4C3F6cf+dphQK1Xapy7ovnuZnGokJ6Vs/ce+9w+OXfpsCagdsgKwH
+	 UMvKGUjwf1twZ2/3IJqoA496Zl6Rg2VPKZIbRr1xRU7srSZ6HrDXVrejcFM765TnMzg==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=FOQB5Q2s;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788445981;
-	bh=prVCGQMmFQIdkR1Wio7jYd8np8Yv8LIJ6kKbSs66zaA=;
+	d=lists.u-boot-project.org; s=default; t=1788446025;
+	bh=HgIC350AlYnt8zxxqmr2FE/zbKdRm5UGQwQlh70Edag=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=q0XDnA5yz7Mzq+VwnVUQCBPqzxYSPPr+SDJu3IOXrTaJlc1+1a1Q+bdv3qqA6TyQW
-	 eYgab/U6L3CaihtNQvgZN7d3m0H/+PzyOLyvfNQDdICm0jFFWVWGmEIFY1b0A/eEB6
-	 mtcKkJTSAiqjcczzrabhZPs0NSJ1izq5M4abK6lQF4Qpn9XsyouLGcnqU/hKWTYWsN
-	 xDCpguw7UeWYnFSg6J3+p6N+L1o0EHOdYryCzP6+aCeahI1iV7Oq1fHoVXUj0CVtzP
-	 JrFsubycrqOZifWPZqm2m8i6GtkNXrqx+VMXn735V/3cFOvh2hhN0j/Kx9SCsZGwMw
-	 C+8pAQuZXFJdA==
+	b=tjl690Mf2a4u+cAQX8/24vrjKvjK4Zu8HpKnMKr7qVMow3zOe1DtfhSPdIgIPcQFq
+	 O5rsuSQW5AsKiOzMc5hvhDKDGsO+sYxW5MD3XokAbZb06zBHdACCWzmjykb1K8fgRI
+	 laA4cxWVFB91pdaBdIr0LY21l9puOFt1vrTbjZksXI8ZzNUbBQfC5lF7m7sJDSNgz5
+	 drczIJvLWzLbrC2soyGp5lgGaQElFEABIjYcuFmurwf9Q9rbXofABEFMCif3azdCB8
+	 6rECkPPGTlWalijSpvwk/CL79fe8GJ59KZfYYG9z0qNG34UGwVs9mC+J1Q95bQ+1wK
+	 TW4G+vXaU4SOw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 81A8E80DFA;
-	Thu,  3 Sep 2026 14:33:01 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6347B34E
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:33:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6EF7560B66;
+	Thu,  3 Sep 2026 14:33:45 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id D82412FE
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:33:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6044540462
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:32:58 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CA06C60B66
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:33:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id knDslZo79AWy for <u-boot@lists.u-boot-project.org>;
- Thu,  3 Sep 2026 14:32:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 0361D40454
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::e2d"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788445976;
- b=PNlf5CEqGJvKoQgOC3+cRKd1Ok9oRgQ7+O2cITW+ZOOE5cqFD6jv5WzhpNvy69v6aPkM
- z46odrBGkGW5dstOqSCDftYQ9N7FEzOk+Bq8AGywmJkV1J/e3hFo/T4a7rMHEfNRt2b+t
- GVemqprJerZLD/d8ZqW8rVDt14S36H9zF4bXPM9pwpVOSYtNrrpBtcXWQ9dSwHDqJFV2E
- 46RwAnQNy92QP6iLmlFIewmONtltcaDel/m9oufmdRwgL4hrjUzEjou7BRNZU53IaeHj+
- ZyWgCYwOncEhk8KDbHqIdi4ub6YFXGxQvXwDEsHI6YThbRPXWOd5Dr4JNZbktZUfeWQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id emT9CSSNUxNH for <u-boot@lists.u-boot-project.org>;
+ Thu,  3 Sep 2026 14:33:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E0F40607F5
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::e2f"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788446023;
+ b=QxTc7JT0V6YaaQiXTJBhFFBOYn1CWmjqAXWc22xXZGrHMGWUuVauN0VRSnJemMmVkmV5
+ Z46897B4LTA6Ds19WRI0EkskVI4m5U4fyhIng5OfpDw4HiyHtdvCaoQmQNNhqMKuIYY6X
+ Du2IfmKEeB/weYac/e4vVr6hnX76NfujWL1vnjUF4TNMrVhvBvx8dTzEInahihJhob+0M
+ zjjOexa09mw16VQptdvce5th+0v2iJ66UuyC0+FPhxWAGR6ovz7rVlnXYdLK2IhAqhmir
+ kWbs1OWfUYdVbQ3a0jM1YMGA0U7BPaUaXlfht2801meV97hPftjFU6fvNs1XZprNCtg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788445976;
+ c=relaxed/relaxed; t=1788446023;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
  MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
- bh=prVCGQMmFQIdkR1Wio7jYd8np8Yv8LIJ6kKbSs66zaA=;
- b=RcZKpbyLTC3rEmmBNlgGnGh1t2XyybRYTIaCE4lWb2/FN+MdwZKvNlVdr2rrAoK1UaMS
- 5gDnDGbYStnccfvE4HBeuki0UGg/NXNfGvNnUfKnmAe2sWu5+v2y/CkYv19hH6QUlcC0F
- NAqyqFSVsz5veFoIQZV194MtCQrKRjvSwA15IdDA+NRhQqbFmzOw8I7Ek3mwaLOczItdW
- DmD2R4ujAe4cZdWaLkWcavq/pZApCY7FcdFVZNm6ttP4d2f6J6VBSyLc7d48wlN3hiE6E
- 9zwFq1jFpsE0ZUZ3MftvGv+8gVvc6/U1fkyekbH/tImKEF8W3kvgNkA632KES26LX9A==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ bh=HgIC350AlYnt8zxxqmr2FE/zbKdRm5UGQwQlh70Edag=;
+ b=XroJDw/ugcAiKRaCNrt8RCN4y+HNBWbMAGifkDDpIpdjmanKBLidyMAhBogw4HOynLYN
+ wiMTW+0r/wV3LrGzFOYDaQ/+msmN3o+1NPqSFtjejfBFDQvccrTE+3kfcFKhLmscX+Iwd
+ GwL6tLJcDDy9cxRdARQhANTCEAdRvwWBUWLONLRMfSV/osK7mZZSU7RV1yVwuXGp0W7Z7
+ bPsw33QK7/cLFg9G8SD6QL9qjxz7by3XW1DCdK9NZEDAumQi74X7RvupJg8tRJBLPf/ns
+ tRLswCmd3IRiuZWgk7wMivKkgoEw+5gRJtQ/Xn3xjQEBIiwwxVXXxt44bSlRPV1T+gA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=V8XEkKkN; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::e2d"
+ header.s=20251104 header.b=FOQB5Q2s; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::e2f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::e2d; helo=mail-vs1-xe2d.google.com;
+ client-ip=2607:f8b0:4864:20::e2f; helo=mail-vs1-xe2f.google.com;
  envelope-from=raymondmaoca@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=V8XEkKkN
-Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
- [IPv6:2607:f8b0:4864:20::e2d])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0361D40454
- for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:32:55 +0000 (UTC)
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-782e0fc1e55so961521137.3
- for <u-boot@lists.u-boot-project.org>; Thu, 03 Sep 2026 07:32:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788445974; cv=none;
+ header.a=rsa-sha256 header.s=20251104 header.b=FOQB5Q2s
+Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
+ [IPv6:2607:f8b0:4864:20::e2f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id E0F40607F5
+ for <u-boot@lists.u-boot-project.org>; Thu,  3 Sep 2026 14:33:42 +0000 (UTC)
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-75e2905c09aso579260137.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 03 Sep 2026 07:33:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788446021; cv=none;
  d=google.com; s=arc-20260327;
- b=B9RXxj8m9Zw9ziDBom69pG8OltEMkZOTvw0wNEqAF8oAVzPzfnwI92wHb2L8NgyNK1
- ASHY9MTvlkEgi+XtkghmiRMECcnzUkUqzIZhiVAZF++2gnXgd1//OVMcHE30crxoy7uR
- 315kRUhGoEOmKrJ4+HWZNMm5qqU9OQuQnyghdJ+62lIOiSAhrev6aGHS5cSUrnvBLTFC
- C6+TitpSxeb/YO+lXZDGfncMWVxfaqKgkAHLK5f+eyigoa9PZ7LE+5otMqsPi1Q6fLxP
- dWZbCt0dbN/n/EWuhU86jaKe4Mbr/2tCN16+dFKHeFOVUbl9Ad+6eoV79S1aTc7XodJS
- quyA==
+ b=jH1iMyHFONzVBHftERa7At1QqlIzvwFpxwH7ZvicMv/HOC301IGpkXQwpErEowAk8I
+ Rp2ExiLC0cO9q899JtT5nN/rzsEu9gS0dyw/l03V7sGH8LqJUkzvHJgEz5VLcKPXvHSg
+ mifzWVkEbhK7X5W470Dq+JQYoPKKt6it/dBDjB0tCWXFdqCjmvJHO63IR9JWT0wjj6qS
+ mFgQwPmNBOAv0rsTrAYRbFJYW8q2fqzfNmadpnFhfCeAH8ueg+AHi/z0NxuCSGXbMKQN
+ baSFyNXBFHXC+zc+EAmo8n1sLX6PNTX4u1ETWaSLIgU+oBbL5ABPfVTpLVH5MwPoLZQj
+ jxkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=prVCGQMmFQIdkR1Wio7jYd8np8Yv8LIJ6kKbSs66zaA=;
- fh=n3e9LofUo98w14q5uByLvvjCHWRWrYVCOJfZ25KjRzU=;
- b=YKLtcodptedd9Kn+yoBAJFikXMRMPOjZ1Vkcc3EfsY/GmIFwTLZH121+FMoIcPTy/+
- sqCiXijW1IhlZtB/rp710d9JK2vWld3qGy5B267qcFKSq0EiDTPUXfbqtgJ7M+e/LVIe
- Z+ohs6mwWQ5yCMTn6PYgtoRc/TwE9ySXr9JhAu7VUekzGpF+CiTbxqJyyssPsz+7jeND
- Qmmsab1SO1/FEZbwQwyHwIHnooHaSKR7BDoGeoqKfKTIo2P0U8ZdQXjTXwTSbnxwROdX
- BsoH7RvJPo0W09EfDVgbWX0renXMfXQFrO5jt+J/QRNWYabWq2/jc3lmqIDdjekgshmE
- VzpA==; darn=lists.u-boot-project.org
+ bh=HgIC350AlYnt8zxxqmr2FE/zbKdRm5UGQwQlh70Edag=;
+ fh=kABJAN0z8vNvuio6PwQStEIhq1Xiw6aInZKLCjmtm3o=;
+ b=GGKcg5n68sfZ/Y4MyWtBi79Jh7mpt+h3eSdZOGKqTbN25BFmP4Qu+Zw1EITlgVZvKy
+ eFpgWG9qEafbaBeENlDgC1hO8NRBdXA296+H+5vLALXoikpQIXrYq6uAl8gUwbJDXXz0
+ QQh1kr8rlE6s22Lhn/6FaJN9JJrlZWnobQLX0EYDZR17XKYwHqDGYHjmNdUjCqJWFItL
+ SCzcMIhCxVgOFo2B7zhgbLc4FuobtO/KrBlqT9xXA7oo9EBRBmrSKQ/zOuf9J2QRBtHw
+ HQiTannNRahWWiwbNOLStVIDzzjSMe3xQYKR8tzNFHlEex+uI5uTGLeNUDxOw4/oVlhu
+ Qw8A==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788445974; x=1789050774;
+ d=gmail.com; s=20251104; t=1788446021; x=1789050821;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=prVCGQMmFQIdkR1Wio7jYd8np8Yv8LIJ6kKbSs66zaA=;
- b=V8XEkKkN9Z+KTGZAkc+C7zL/tiRZlUwLZPpQe6F955vFykXL397sHsFk7507ySe9x6
- UDGLXzNArZmH0eMMr6QTOezlHIw4vHbv91I4S2gZF7tk1Sk0qYLQ4KaQ3eo3hLmfhamz
- iSW0ulDzJw82Ec4YLECBtC/pmS0JPLRpqYeU1nQ912o4Vzk/sv7V5hXvm6EdBzZz2E6w
- FlL+x0lpDCAwI6PR+ZKQoUyCiu/n3kxqIvzuzuaomR4kxIDD+cujkSaT2q96t1Da1ewt
- Im0DRlQCKkj6bnFGGE+2iu2OneDs/SxR5X9qCzt0ScCFvAjueeW+NvO8IROGPepjBTRm
- JhXg==
+ bh=HgIC350AlYnt8zxxqmr2FE/zbKdRm5UGQwQlh70Edag=;
+ b=FOQB5Q2sJLKGdAyXsjlXBpejYlXUlr5b5DUppQPBMljb1NM/MipTWtsPV54MJnZf8Z
+ 0Y111JECH27YSHGu2EsjElqIp/GFLMg9PgQg0CWsFF5u1VNqUfmutsCU8EYorw1RosbC
+ 53Mlxed4jHwlXu7WiW7mGbkE9Fs+kjbzD0H2g7v5Eu8+1ZE5MXeYkHYxKN9yDxuSGtb1
+ n/HJQAZx4nl7qf7TnDXbt3DB64u/use9igxSbNem5Cv/0JykY2uHfQ2HoH63GK6d2qvE
+ ltBG3d81RGMEX3Ly6mIppda5ImYn5UBkONnpaSG40Be9pNE5suzgzxUUeKsKsUJiH722
+ iTiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788445974; x=1789050774;
+ d=1e100.net; s=20251104; t=1788446021; x=1789050821;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=prVCGQMmFQIdkR1Wio7jYd8np8Yv8LIJ6kKbSs66zaA=;
- b=PlX41XqW6aIulTpwzmKpD8XtdN+eMitPj0pc9rGnqV7xRwGjaaoHcN1LtdOlyLHPGZ
- R3ZkqI2OdgIkPEuAv1WVryf8NCdkJd6vkljiTE9SKuDWBJ1Kct57QdEE9xBlRpZOEfAI
- bXOjg/cQyq7nZLW2Z2xooII3Fgw9fze4Kb28o99HSoZuHxscWXfbbtZfD2qMyroiZ739
- MCogfV3GqhZBNnKlq+wGs1E5IRAbbGGBZRO9m77aGWRtr5Na70breHRQRZ6nKrtCJ564
- FQbn6QWeLATY+dVOcGSPHJM8afw18uwBqQZiaOzOF8JOcFQjo2wLZlyk5rKFHt/ATPYG
- pmjg==
+ bh=HgIC350AlYnt8zxxqmr2FE/zbKdRm5UGQwQlh70Edag=;
+ b=aLiiQVOnOHpcoQ94eps6EFLctRscTXrJXD8VakIjQukjRhlkwazOvSSui5VWrmSaLp
+ 3AVt3D7J9Zbd2gBhNJ+BLAxOaBc5XdJtNwBTdGcXWPmrrSKszx1mOXUJkaZxCg6FCuvL
+ 9tXTvoSJ2UoDyMSPwNKquJM/zNg3Lf0U/3vPdhkeLrauFHc4EkyG3eRlClxUSkU+7t1X
+ HQLj0i+GWM3xuaXpK+j2WX7yqdX0MIMahpbOq1flwUlYVJOYmdi5mFxlShfnJ0OQPXAg
+ 8GVpNzhwq68XfLeOOzH7wcrl9Y4ZuMBmAECxcQwN2OjWjSo8oJUYOKhNZMWta+wAbjkU
+ 3wXA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxedvHq0egqnoJWDarDpvln5FLb5GiekJOx0vie8Ppq7nGIVcISP7u/SGXTwfz26/Wx+jWQNh4=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lNz2nHRqUmUUKHo4GM0JKH8HPQPyuV3Z/0zIq7+125hhCDb/0Y
- cSMSVg8AlEYbAgcEBdcWdsickHIKGW445jsAVkyM3sq5m8nE5AvhTBglJrpgUnCsvYnH7lfwC5G
- aJgTE6bflKXoSeibPQN8U20yV/bMAReA=
-X-Gm-Gg: AYBFou3xgHnh3vG+X42FU8iLxnGdLagPfuu3lkd4XVtUjdqHI1Fk94oq/fcX3an0daP
- CCTlBukHrN4/sCPjEOAHgN6hdDPx4VcNK/JCQhM5Qzk3LXbUIWK+bJQ8mwOvb/jvCdIKrUvSKKN
- qKkvK2fyJVm38A/8KuPSEAKMj6qQfxP0KhMj4sXtkP13ZRtxmFB0dXBaw9hBzqwIyVFIrvo16GJ
- D+0ZaMaK4WsdOEOC+oqdtKhC8VXqdr+9o1asQZ1E/G3aD83V/oWVDv7zSGEmqGeOUEjnWwSCZLY
- 5OpWx0/7CxCAaCMm7D2MGM45ykPo7p6HY6gJnif9Qc2V/1DTuTmSPf35u4KxPiUinK0FUA==
-X-Received: by 2002:a05:6102:6d2:b0:785:76cd:ce88 with SMTP id
- ada2fe7eead31-78a1f1576d3mr3973427137.3.1788445974081; Thu, 03 Sep 2026
- 07:32:54 -0700 (PDT)
+ AKwUvByWAlXQ7SJGNcbFN1B5QEM9LR/hFKa/EbWh7/Mp7Yx6/JfVZ7R1J9RoN2Hupx8DkBXdlT/JYds=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mfGx0aJ6pgzGPPiXs22IMLzequLMK7WnJARrUbdOeT7JB3RpYJ
+ baYB0AXrxbehmtKIbVNfj46pM4OmBT4hs+L2oY/P1IBEbfh3BoOH3+T2iDpdlEkos+Xu+jh+tDr
+ T3MKbrMpeCm8dSZPhGaDDFFWLO46Y6P/tJ36M
+X-Gm-Gg: AYBFou3rVdLOTFxikqtIY80Uh/LH/2CEnnUViLhqLyGFAKaYnPDG791mN/ylXWF+/tM
+ TPgjnHYnt6C5ajfMT7nlsFr7jSvcPpERrOrfHXe2dKGvcDG+gCI+7MZIoYd/Vg7RuM4mxq0gs9u
+ XSAgviItjz9ZaXgamw8JHeZMsxWhy9QvxP8FISpaMfjNkZvpEpwgo9mz1N8EyUn72s7YW9Kp6NA
+ tv75T8ydhI5HT1Yvpt8HQ160dk5zCitxhMQoAW8dROJnHhnCij0qcVYI3RhULzbP0HuOQWLJqT/
+ Z+aE5jUWUooyATpOIfVq+cmy0WAxwu1kyxeS/mwUjwfc3OM=
+X-Received: by 2002:a05:6102:2d0e:b0:782:de7b:eead with SMTP id
+ ada2fe7eead31-78a1f15745bmr4066349137.1.1788446021107; Thu, 03 Sep 2026
+ 07:33:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260903081705.12894-1-philippe.reynes@softathome.com>
- <20260903081705.12894-6-philippe.reynes@softathome.com>
-In-Reply-To: <20260903081705.12894-6-philippe.reynes@softathome.com>
+ <20260903081705.12894-7-philippe.reynes@softathome.com>
+In-Reply-To: <20260903081705.12894-7-philippe.reynes@softathome.com>
 From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Thu, 3 Sep 2026 10:32:41 -0400
-X-Gm-Features: AcwNN1W_bqJELe4ITsB4n9JcgX1fpe2vGCLR-APStlxpM-FDiXlQGfLDNC4eZMU
-Message-ID: <CAMDkj5yhVhSZtV4z+=Vy1qdTO9zh5p66UyM0QsGNnFA7xOkxPw@mail.gmail.com>
-Subject: Re: [PATCH v9 05/15] drivers: crypto: add software ecdsa support
+Date: Thu, 3 Sep 2026 10:33:27 -0400
+X-Gm-Features: AcwNN1UYF7sRJu90E05ZvvlRH5SJsHVNhGzPz3dytl9utAmd2ZkUiZ2nF18drkA
+Message-ID: <CAMDkj5yFijksGHKH9xFUYGoFzzAeuyF3f=iRvsbg=EwOCf3A7A@mail.gmail.com>
+Subject: Re: [PATCH v9 06/15] test: dm: ecdsa.c: clean this test as software
+ ecdsa is now implemented
 To: Philippe Reynes <philippe.reynes@softathome.com>
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
- simon.glass@canonical.com, u-boot@lists.u-boot-project.org, 
- Simon Glass <sjg@chromium.org>
+ simon.glass@canonical.com, u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -200,39 +202,40 @@ Hi Philippe,
 On Thu, Sep 3, 2026 at 4:17=E2=80=AFAM Philippe Reynes
 <philippe.reynes@softathome.com> wrote:
 >
-> Add a software ecdsa driver so it is
-> now possible to use ecdsa signature on
-> board without ecdsa hardware support.
+> The test ecdsa was done when ecdsa was only supported by hardware.
+> So it wasn't possible to test ecdsa on sandbox, and there is a test
+> to check that ecdsa is not supported on sandbox.
+> Now, there is a software implementation of ecdsa. So we add a test
+> to verify that ecdsa_verify may be used on sandbox.
 >
-> Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 > ---
 > v2:
-> - no change
+> - initial version
 > v3:
-> - add depends on ECDSA_VERIFY to ECDSA_SW
-> - change sw_ecdsa_verify to ecdsa_hash_verify
-> - v4
-> - use ECDSA_MBEDTLS to build the driver
-> - clean include (change order)
+> - no change
+> v4:
+> - add a test that use ecdsa_verify
 > v5:
-> - use $(PHASE_) in the Makefile for the driver
+> - change secp256r1 to ecdsa256
+> - check that checksum and crypto are not null
 > v6:
-> - remove include u-boot/ecdsa.h from ecdsa-sw.c
+> - update commit message
+> - remove fdt_strerror in macro CHECK
+> - return ENOMEM when malloc fails
+> - add a define FDT_MAX_SIZE to avoid hardcoded value
 > v7:
-> - no change
+> - change uint8_t to u8
+> - set required_keynode to -1
 > v8:
-> - no change
+> - remove macro CHECK with a goto inside
+> - use lowercase for hex data
+> - code cleanup
 > v9:
 > - no change
 >
->  drivers/crypto/Makefile         |  1 +
->  drivers/crypto/ecdsa/Makefile   |  6 ++++++
->  drivers/crypto/ecdsa/ecdsa-sw.c | 32 ++++++++++++++++++++++++++++++++
->  3 files changed, 39 insertions(+)
->  create mode 100644 drivers/crypto/ecdsa/Makefile
->  create mode 100644 drivers/crypto/ecdsa/ecdsa-sw.c
+>  test/dm/ecdsa.c | 107 +++++++++++++++++++++++++++++++++++++++++++-----
+>  1 file changed, 97 insertions(+), 10 deletions(-)
 >
 
 Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
@@ -241,71 +244,154 @@ Thanks!
 Regards,
 Raymond
 
-> diff --git a/drivers/crypto/Makefile b/drivers/crypto/Makefile
-> index e4a4482b7f3..8170e4cae9c 100644
-> --- a/drivers/crypto/Makefile
-> +++ b/drivers/crypto/Makefile
-> @@ -4,6 +4,7 @@
->  #      http://www.samsung.com
+> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
+> index d7eac7115f7..261ca3f9f73 100644
+> --- a/test/dm/ecdsa.c
+> +++ b/test/dm/ecdsa.c
+> @@ -3,36 +3,123 @@
+>  #include <crypto/ecdsa-uclass.h>
+>  #include <dm.h>
+>  #include <dm/test.h>
+> +#include <malloc.h>
+>  #include <test/ut.h>
+>  #include <u-boot/ecdsa.h>
 >
->  obj-$(CONFIG_EXYNOS_ACE_SHA)   +=3D ace_sha.o
-> +obj-$(CONFIG_ECDSA) +=3D ecdsa/
->  obj-y +=3D aes/
->  obj-y +=3D rsa_mod_exp/
->  obj-y +=3D fsl/
-> diff --git a/drivers/crypto/ecdsa/Makefile b/drivers/crypto/ecdsa/Makefil=
-e
-> new file mode 100644
-> index 00000000000..89be50824cb
-> --- /dev/null
-> +++ b/drivers/crypto/ecdsa/Makefile
-> @@ -0,0 +1,6 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +#
-> +# Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
-> +#
+> +#define FDT_MAX_SIZE           512
 > +
-> +obj-$(CONFIG_$(PHASE_)ECDSA_VERIFY_MBEDTLS) +=3D ecdsa-sw.o
-> diff --git a/drivers/crypto/ecdsa/ecdsa-sw.c b/drivers/crypto/ecdsa/ecdsa=
--sw.c
-> new file mode 100644
-> index 00000000000..2af1405f73b
-> --- /dev/null
-> +++ b/drivers/crypto/ecdsa/ecdsa-sw.c
-> @@ -0,0 +1,32 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
-> + */
-> +#include <crypto/ecdsa-uclass.h>
-> +#include <crypto/internal/ecdsa.h>
-> +#include <dm.h>
-> +#include <linux/types.h>
-> +
-> +static int ops_sw_ecdsa_verify(__always_unused struct udevice *dev,
-> +                              const struct ecdsa_public_key *pubkey,
-> +                              const void *hash, size_t hash_len,
-> +                              const void *signature, size_t sig_len)
+> +static int set_fdt_ecdsa_point(char *fdt, const char *name, const char *=
+data)
 > +{
-> +       return ecdsa_hash_verify(pubkey, hash, hash_len, signature, sig_l=
-en);
+> +       char *value =3D NULL;
+> +       size_t len;
+> +       int ret =3D 0;
+> +
+> +       if (!fdt || !name || !data) {
+> +               ret =3D -EINVAL;
+> +               goto out;
+> +       }
+> +
+> +       len =3D strlen(data) / 2;
+> +       if (!len) {
+> +               ret =3D -EINVAL;
+> +               goto out;
+> +       }
+> +
+> +       value =3D malloc(len);
+> +       if (!value) {
+> +               ret =3D -ENOMEM;
+> +               goto out;
+> +       }
+> +
+> +       ret =3D hex2bin(value, data, len);
+> +       if (ret)
+> +               goto out;
+> +
+> +       ret =3D fdt_property(fdt, name, value, len);
+> +       if (ret)
+> +               goto out;
+> +
+> +out:
+> +       free(value);
+> +       return ret;
 > +}
 > +
-> +static const struct ecdsa_ops sw_ecdsa_ops =3D {
-> +       .verify =3D ops_sw_ecdsa_verify,
-> +};
+> +static int create_fdt_with_ecdsa_key(struct unit_test_state *uts,
+> +                                    char *fdt, size_t size,
+> +                                    const char *name, const char *curve,
+> +                                    const char *x, const char *y)
+> +{
+> +       ut_assertok(fdt_create(fdt, size));
+> +       ut_assertok(fdt_finish_reservemap(fdt));
+> +       ut_assertok(fdt_begin_node(fdt, ""));
+> +       ut_assertok(fdt_begin_node(fdt, "signature"));
+> +       ut_assertok(fdt_begin_node(fdt, name));
+> +       ut_assertok(fdt_property_string(fdt, "algo", "sha256,ecdsa256"));
+> +       ut_assertok(set_fdt_ecdsa_point(fdt, "ecdsa,y-point", y));
+> +       ut_assertok(set_fdt_ecdsa_point(fdt, "ecdsa,x-point", x));
+> +       ut_assertok(fdt_property_string(fdt, "ecdsa,curve", curve));
+> +       ut_assertok(fdt_property_string(fdt, "key-name-hint", name));
+> +       ut_assertok(fdt_end_node(fdt)); /* name */
+> +       ut_assertok(fdt_end_node(fdt)); /* "signature" */
+> +       ut_assertok(fdt_end_node(fdt)); /* "" */
+> +       ut_assertok(fdt_finish(fdt));
+> +       ut_assertok(fdt_pack(fdt));
 > +
-> +U_BOOT_DRIVER(sw_ecdsa) =3D {
-> +       .name   =3D "sw_ecdsa",
-> +       .id     =3D UCLASS_ECDSA,
-> +       .ops    =3D &sw_ecdsa_ops,
-> +       .flags  =3D DM_FLAG_PRE_RELOC,
-> +};
+> +       return 0;
+> +}
 > +
-> +U_BOOT_DRVINFO(sw_ecdsa) =3D {
-> +       .name =3D "sw_ecdsa",
-> +};
+>  /*
+>   * Basic test of the ECDSA uclass and ecdsa_verify()
+>   *
+> - * ECDSA implementations in u-boot are hardware-dependent. Until we have=
+ a
+> - * software implementation that can be compiled into the sandbox, all we=
+ can
+> - * test is the uclass support.
+> + * ECDSA software implementation is tested in another test,
+> + * so we only check that the UCLASS_ECDSA uclass may be used.
+>   *
+> - * The uclass_get() test is redundant since ecdsa_verify() would also fa=
+il. We
+> - * run both functions in order to isolate the cause more clearly. i.e. i=
+s
+> - * ecdsa_verify() failing because the UCLASS is absent/broken?
+> + * The data used in this test come from RFC6979 and use the
+> + * sample with curve NIST P-256, hash sha256 and text "sample".
+>   */
+>  static int dm_test_ecdsa_verify(struct unit_test_state *uts)
+>  {
+>         struct uclass *ucp;
+> +       const char *full_name =3D "sha256,ecdsa256";
+> +       const char *name =3D "key-ecdsa-256";
+> +       const char *curve =3D "prime256v1";
+> +       const char *x =3D "60fed4ba255a9d31c961eb74c6356d68c049b8923b61fa=
+6ce669622e60f29fb6";
+> +       const char *y =3D "7903fe1008b8bc99a41ae9e95628bc64f2f1b20c2d7e9f=
+5177a3c294d4462299";
+> +       const char *r =3D "efd48b2aacb6a8fd1140dd9cd45e81d69d2c877b56aaf9=
+91c34d0ea84eaf3716";
+> +       const char *s =3D "f7cb1c942d657c41d436c7a1b6e29f65f3e900dbb9aff4=
+064dc4ab2f843acda8";
+> +       u8 sig[64];
+> +       char fdt[FDT_MAX_SIZE];
+>
+> -       struct checksum_algo algo =3D {
+> -               .checksum_len =3D 256,
+> +       struct image_region region[] =3D {
+> +               {
+> +                       .data =3D "sample",
+> +                       .size =3D strlen("sample"),
+> +               },
+>         };
+>
+>         struct image_sign_info info =3D {
+> -               .checksum =3D &algo,
+> +               .checksum =3D image_get_checksum_algo(full_name),
+> +               .crypto =3D image_get_crypto_algo(full_name),
+> +               .required_keynode =3D -1,
+> +               .fdt_blob =3D fdt,
+>         };
+>
+> +       ut_assertnonnull(info.checksum);
+> +       ut_assertnonnull(info.crypto);
 > +
+> +       /* create a fdt with the public key */
+> +       ut_assertok(create_fdt_with_ecdsa_key(uts, fdt, sizeof(fdt), name=
+, curve, x, y));
+> +
+> +       /* prepare the signature */
+> +       ut_assertok(hex2bin(sig + 0, r, strlen(r) / 2));
+> +       ut_assertok(hex2bin(sig + 32, s, strlen(s) / 2));
+> +
+>         ut_assertok(uclass_get(UCLASS_ECDSA, &ucp));
+>         ut_assertnonnull(ucp);
+> -       ut_asserteq(-ENODEV, ecdsa_verify(&info, NULL, 0, NULL, 0));
+> +       ut_assertok(ecdsa_verify(&info, region, 1, sig, sizeof(sig)));
+>
+>         return 0;
+>  }
+> +
+>  DM_TEST(dm_test_ecdsa_verify, UTF_SCAN_PDATA | UTF_SCAN_FDT);
 > --
 > 2.43.0
 >
