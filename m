@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C13FC79F82
-	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 13:50:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A2E3C79F88
+	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 13:50:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 597C1811C4;
-	Fri,  4 Sep 2026 13:50:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2FB6F40BF7;
+	Fri,  4 Sep 2026 13:50:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tplEUgDT4Z1I; Fri,  4 Sep 2026 13:50:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 57773811B3
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788529822;
-	b=SOFtATy+8RmoyeDuABC6+X5f9Ua7eWgr1Ri+nnCezPr5/xwv8Bb+nT9PQD9O7jEJ+yhp
-	 x2qkMDu1Il7OR01SoqwPrmRVbh3EDetHv0jnZZirQhz9debsdYIyNuj3JLd1Icm/yZ4ax
-	 fshNxuTqjHNoHJVK7BLYE4eeZ24diydUcTaTix5OUbjANSrVnR1atQNoz5he/NSsmWe4n
-	 0l456/cY0W+4LhCzoIa6UVWqktwa/PrFeT4JrUYj8yQwJSz5uql+aFIY28tZwg6oKhpZN
-	 TXSX1NTl0Q5lzcNNxv/yI/8L4mDq3I2x+VW4kXVx4ul+4JQLfx7XNdLLybzh1y8Hemw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tASqxgWKOt7T; Fri,  4 Sep 2026 13:50:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 05DEE40BF1
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788529827;
+	b=rSsFZwO3QCJ27zMC9iWsiFhOz6AjpkwLmCEi3wwSmS/qAfa145B5el1pWzK0uRZ+tCbZ
+	 5vBNKPqDqutbfV7woddZHgr8lrBrkO2wGvLGZATNv4oqvQsrhpQ9j3T+DZ2WH8ocsk0LA
+	 0FHa5ss/xNhkDZ0SJgUjiPi3obYvBvCLcnfFj+Vl/BvOLah+iutdkppxWI9Lcl0Eruip1
+	 HmRY2ATh9Ufq9sZoEMrlru6RIw/pdYC7n7Nz/V/UGehrSe8+1rLuPxKtuLp6b9X2iNrNx
+	 scSTdxjMie+euzTCArgQMlnKKfTfPd/75nQ26/jPbwheZTw812sBZpeESRFVSInk9eQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788529822;
+	c=relaxed/relaxed; t=1788529827;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,137 +32,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=8JQHqOSBscb1dqB6+jGOsVG5HMvnv3AbPP5NZAqMgko=;
-	b=A8Wcpj4BqiqTbWj8SM2ijK4mYniZUbJGdJJRXi1b5ehBKjSW6zrx6xz83g5sdbS3nyiI
-	 OdzMyfufx2KJUVmhZXAVwZduUZBpwZOWUQPeBc8vgq93eWKhlliX2JcaJOxdaVQGYdzNo
-	 +HW5aBqbALOhzDrbgwX4RZRl+NwB4+1lHNzSqNbSEfBlL7H82TFeX2KKfHQqzIrySR2Ou
-	 xOMAX1HIIMR4pW+25jBZcZI/e+BynRcHQDO9CYP9gFxm0jIJ4+JF2CsdTb4QbFoR9ZltZ
-	 qQjtN/fssZwbtZL4D56Rwfq+pSIqZQ+CZJ3+2keQBoFwW38UmQmoN3QtMsDfG7HW9fA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=FOH++Umc;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=z42ktJto/chtI5y97oQWgDKhUy7R4QAGVNaS9RVv+yM=;
+	b=kHmFo7sK+PEXOOXWGAzszPX3VgyMJzY0mXIO/rj4Ff6+26ylzVXTHqGHzyOorylvYYKq
+	 viiRlrR3XUyRLcKLQbiOPA7IEkYpk62Fq3KxRiP5sxSp4z1l7sFx6CVRhr4Eq1Hp51WQp
+	 HN6vJw3A/2WGixbtYr8GkeOCoPcCJecN+dIjEwPWzGYFr2kEIMiNXJ9GpUu7Br2vREV3b
+	 qBl3wk4s25Ah+Z0JDIbRnLlIX/fGMMB+BLAN50ccfCp+XFYYxn3FEwT/aQREqcQ6Sna2z
+	 UZETQ6/nNLVgy6+yoDaFMruuVZ7u/+ZliJ7m1QGXdE73Yq7cE3Q3xy4Ax7mQNLGF26Q==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788529822;
-	bh=8JQHqOSBscb1dqB6+jGOsVG5HMvnv3AbPP5NZAqMgko=;
+	d=lists.u-boot-project.org; s=default; t=1788529827;
+	bh=z42ktJto/chtI5y97oQWgDKhUy7R4QAGVNaS9RVv+yM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=r7fUltvd4YpE2PUennKWUliI5NueD7cMl0gwqlpM+6L/36D83DnC/m7EotjHonqzs
-	 IdXNHQ+AnQ1ah3LuoC9g8L9QBip5jmvj0fKAFJQJfvErxE8QeEbyU4hup7ebw43a72
-	 bmGMJfHntScvtOrEGFdmA4mWqURHYvmBCkD+8SMyhGtjtB1gfXZeARSEzY3h7YVTHz
-	 7q0mKetxm0GRcPQUW8OPJ4gkyXFB2zr4px5BWE3j2eqc3U/RtKzK14eZIE1tyZ0U9h
-	 glpFgseOUH/vrmDmxmZqlPWnIpSe3wa+BuQ5TvkU7dr8c6aIgxkjIsm+ZyZccDzpqV
-	 AMOvxI3V1MzWQ==
+	b=QJRA2yvyLOpBwxWo3B3qV7fjrZKOSrGRjANPo66bPS3s2Q5EdczbPp8x5IhV6M9NB
+	 9QXEp3TE/CGiNJDG9Q3tWqOpHFU00UBNMVFqNa9fWt2JC6npEllq6a++eCE32TScGh
+	 Jku8cvefoifi3V/E94C7z153iVRNTL/Notb/KvB+r63GfiELZu+4VqW6elwkVjD+dJ
+	 scTIEv23Lk4ymRLiNW5Gh34f819d4/WSDyCbIe4FUZ5+n1YMJFsmOi3LaVK4bB6+Wp
+	 FmGY+IJYNdv0ID/1bowwNbPwlb0gFr5uVu+Y9hw8jo0wBFPQ+pqkAGe1ANIoEXUDTb
+	 G14p0NKW9JuzQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 57773811B3;
-	Fri,  4 Sep 2026 13:50:21 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id D636577F
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:50:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 05DEE40BF1;
+	Fri,  4 Sep 2026 13:50:27 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1DCD310E
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:50:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C820A811A6
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:50:17 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0423A60BF3
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:50:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id asuHFQ-UHrtn for <u-boot@lists.u-boot-project.org>;
- Fri,  4 Sep 2026 13:50:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 8EA508119F
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::336"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788529817;
- b=YRVknmj8rkiAJy62KV5mHR6Q6R7o0Xbfz0e0XC+jh/NiWPRdXWpu2T6UvHXGW3SS4GFb
- U+lfOTWoqsgjHI/NxVCT+h03yot2pgLqXG/wIvJBTB1eNCHxp2tb6dYEMKYJOsH+mphR7
- KE3xnsfiVqqOiM61DKuFM2/VZpKJlMx4sDh+hpMfbXk//h093SO/0qTaUyOX3f90gzroL
- ubyzGQp4Lf+3XEejuwgv8uLa28rhOtGre0DkfJMjDG+hUTm87ht8WALxuUW1o0Mg/few9
- gGHuWnssH8wia/WwHmoT4Z+nnBnfNRqlBXcX0pS17f5pKEc1syNbGbQqWoy1nTQ5H9w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pWBM3EZs2jkx for <u-boot@lists.u-boot-project.org>;
+ Fri,  4 Sep 2026 13:50:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0A6A260BBD
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788529818;
+ b=Pg9kMjUcpD72VHbbr9dgYDtsmT7BDT0NyM4RvLTzAdvdODssmS3wAgdKR7mRq28c42JK
+ 0naB09dMA7B9Wu9xLurBJia5KzYa7bdUqL+2yFUP7I4cn3EFp/ysQazrYg/GJWjpNn+ii
+ YjQIDGgpu15VGrGRU7aYglbQSZLoMQeee5W70jS9/C399PdRu690FmglnadSH6sYrCAzs
+ FttRkYeLoKXxVgNAIJdgBR2SKEbKmD7XE/o5hqdIa9AwEdnZ+u+xoViI+uihviwIQF2K5
+ +Y1cyVfhE1EcPjYTlWa5TZPoxNQQhZ93u9LaNfuOAtYhpYQNLJfvRzG99pdDZ5yroOg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788529817;
+ c=relaxed/relaxed; t=1788529818;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=8JQHqOSBscb1dqB6+jGOsVG5HMvnv3AbPP5NZAqMgko=;
- b=GWXJeAXxjGOa5h6kUU63P+ta0+yCAjT4czy3Xbp3Y1QsF9DTRcRExCLmDGwQpOZVvXG1
- EZdZloyG1oXCv4akAOYLxmffa8o+MFHgw77IaJz9Txa8OAHvIXZQO9iu19WgTjNnJrAry
- XTJR7yvfh2u2OPc51D9hc81wKyf+bJHLI8NWBp2da63tOjbq781SaN60Xv5dH92AghlmI
- H8PS+zhXhmGsHv2H1rKRopvx7ppGYrgY3Zr97BtX9IqAQUq08z0egH4ZrSTeqgSvBGRlp
- o+NNnIpPd4BNbb0CqfZFZs6q/a3PSDtnhKVuClcsYksGsUVrbtF+OeCvJCYQtJuMMMw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=z42ktJto/chtI5y97oQWgDKhUy7R4QAGVNaS9RVv+yM=;
+ b=as6Hw04bCW/Xy74C8vb9RtDCDxOa6uvs1HSTwn4POpYi7vMh9s15bZOLT5hazQbFLV4t
+ pb5YR/LywK5lU9Gk4YpxBiPvVgYw0XWa5xbeHvnSQmBfRChXe1H96bXw3e4rUMy5xJrSQ
+ uTRt0a326Cv6RnjxbvQ/k7rpnNj9wukvB+agxbs8WXm6y1HHIcNNTY9GGZHT5OJpjnpAK
+ 9X1tDXmjMJcU/c/rFtcddkKVhw7NTs6eS4GCeSMzKXUYxGdtpDovm2lwbb98igwP98sNn
+ t30Zdb9p7NbVHt27T3ITlJuGR3py/3mPVEy6qO8x1qS5pPwyo0SSZheQ9/XSDxIo/sQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=FOH++Umc; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::336"
+ header.s=google header.b="Bn4/Rztv"; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
+ client-ip=2a00:1450:4864:20::42b; helo=mail-wr1-x42b.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=FOH++Umc
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8EA508119F
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:50:14 +0000 (UTC)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-495590dde14so14287385e9.0
- for <u-boot@lists.u-boot-project.org>; Fri, 04 Sep 2026 06:50:14 -0700 (PDT)
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=Bn4/Rztv
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0A6A260BBD
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:50:17 +0000 (UTC)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-4858c1c4b4eso387768f8f.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 04 Sep 2026 06:50:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788529812; x=1789134612;
+ d=baylibre.com; s=google; t=1788529816; x=1789134616;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=8JQHqOSBscb1dqB6+jGOsVG5HMvnv3AbPP5NZAqMgko=;
- b=FOH++Umcs56c6KO2jJB/QdQKC3NueUUCBDZ4+eHWH3PiANcRRI5gJYOe9NviZr4YMS
- MzBwcIV48KUwgiai+8HlQ7BXHgyurPJj5QHmeeyCYHtAJBLeGBe22IyrR933KpRUG94S
- cWTILjXq1ZA6vCyIUfJa60gEpk86OAxhPjx7Y/lGu3TqI9Gu1iQH11YmREgxPqxMSWHB
- 6N/rgyuAju5+lVpMsgnMp0dMupu1fvWd+yxYPm9fDmUVkuf2yiV16ceS13khB/sJE+e9
- U6mlRrY/a85HfqK4Xr4EhviRFuN4+xfMt2DfCMcskPoGBymVyf7duN8jA81Mzrh0Aawx
- GvIw==
+ bh=z42ktJto/chtI5y97oQWgDKhUy7R4QAGVNaS9RVv+yM=;
+ b=Bn4/RztvGaUK7tjGvoRHWRKmvbhaep5xhR3ehXY7GMvJg18sih3heCjL3ragMf4nb0
+ LdeP6P4FNnBdlapSF/AgErqChVCrhv79iB24vI2sBJPBdbSFU4/9Pz3uvsTLFz+cQwJS
+ IbcFQfFZ/L2O208eiN6wp/d+bdEsmM5i29XiTTZaYo6lOtN1pVuq5xyKLrhjvwvUhpVS
+ MoGM4mJrZVwpqZgHQ3xqige91rJ6gYBfoMvRJ+KpZCUtGnOn8Gt3ajUE+KZwrv3IRA5p
+ /WAMwj6CylXrGajqDHZZr+3Kma8OA45+Hk1AGp36AWSdaih9amkbfcMKlgjXVzftMpyq
+ sGCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788529812; x=1789134612;
+ d=1e100.net; s=20251104; t=1788529816; x=1789134616;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=8JQHqOSBscb1dqB6+jGOsVG5HMvnv3AbPP5NZAqMgko=;
- b=Q8M33LyWFScZ8+fnOn77SQxFNg/IgjPpmZ8/WEN6M2UrOX/z2S9w0Ue/AaGwHHz6hC
- 2ssNJ4giD9OJZCUSTUoAssIq9kV10/K3NbC5JsNaKhbtDasv8DUebYgON0pkATFHnCZ7
- gd/b3xPMtH382nQiHvPIxwWJLgMWE7zly7Zh+aZj/9U5XukQOs/rkkBx+gnWkJ96c0Ix
- IvxAgiMiX2onKIkkvf5/TboNJo54YgthoMxkWMJRoQprDT2RFx7w6wAcNf+jwgaUc70P
- UTVDrQr801iAMiSu3OZRXojt8HSSw0332ukw0sy2AUHF3zx9w0Gw5qKUEbdW3KtvoQmf
- ek+Q==
-X-Gm-Message-State: AFuF++k/2VEOVAth1IqL7f7IC3FRdqI/RYxgNLdA6TUk1/qsMEgL19+b
- papGL/wmE8MEGe7UcT92yBL8xzCyKekdS1t1alGYMQwgqsM0we1kJ/tM1nn85WjTvNM=
-X-Gm-Gg: AYBFou1FB2amBy58LMcoc051zDZ94g8FRJAubEeCcOf9zuaBR9nFXJY2Ttb5vjFSjB7
- bHIXwAKEHvjWiWPj+z/7DUKZ7nh0pxTUWC6X5qiJzb4XxNMjwi8POQ3NoI13DQfjjyMXsiPxtmA
- BFvh5wJL8FXk4riJtwIrUOTwQsPk3HpEg8JhIdodEPZW8BbmppTvfLeOlpM27JA1rDvYJi6kxxd
- ebo8T5S/shmdr495zMzw8EBXo2M4L0Jwt/VKdr4UqhFdGsEU0TkYwrjvigdOSwOVsD4kkDQTpKg
- SyAdC9sH/ZoOldoVVg6MIN/1yoewFtwD7hVTbcVo7GEm9c/NhlCv5KbZWyVzqgflQciOHOJ3lnn
- lKJxs8GjIwzo+P5nToG1TcYAAfAJgLltcoNI53JUZ30Cwe3ra1LOaueE3tBr0aQ+O4y38x/w859
- mvFH2s0EJpWHUd0Wb8BUqicXVgrlWpRwuqPEzAd6PEk1JiE/ewfIP9YAQkEdHwsA7I5iDMcK4Ol
- rp1fwM1PmLRsv29BMcqfffXCv846N1o7zdOuQ1aqkrtCuEYTwEadUqWq0YhICfuBeOKsX8pt40e
- prcwJyNeLDPSPUgRKPukujLeA1v4IiIidD2CJMAHzGA=
-X-Received: by 2002:a05:600c:3b11:b0:49c:f7c4:dc54 with SMTP id
- 5b1f17b1804b1-49cf82512b9mr93769265e9.14.1788529812378; 
- Fri, 04 Sep 2026 06:50:12 -0700 (PDT)
+ bh=z42ktJto/chtI5y97oQWgDKhUy7R4QAGVNaS9RVv+yM=;
+ b=I1sZm6M3Iz4KpHzn49L2ENe/RkAOODFOUk3mzwAt1OupU+iQR7eRCH6vQXwiYn2ecM
+ ye/n8Hh/lkL2/zJ/PFvjxRrisl2lHc1CyfJX2cgZyVsJhbxQ3iuwKLpGnMCEeiYbr1vr
+ mhno06aEIGgzb8FmCbszn9DTMVviyZIp5XLfNqHNaJvmUiDuYDLMeF4woMme1QtJTJta
+ bC396jiM81AAbk94esfPtxb1DCVC4hnt0aWCFH42odTF6gv0dnM+gTZCZDSnhnr/jP53
+ 1/WUf/7ieQOcp6kK2HEUDkadxUs2cIyiwK3Z9r7AfQborsBgjDHAa9a12tJcKhC3brMQ
+ bkMQ==
+X-Gm-Message-State: AFuF++lB9Q5sUN5z/dF9xOBhgcuKeShC2yJl0eIGkKGr3rsMkf6sD4GH
+ QtF3IKKmPCLirnvAqfg/0/IAMMH4XowGxymvuY/I7HUYmlcdCX1xTB1MkF/qTXEobOY=
+X-Gm-Gg: AYBFou2qnqNa9uFaYY+oDtCb0PbEHGGb6ATdsUYNNrZ1Ao9rwaYvGOPYwX/OBPcHjDj
+ iLkOp21uLZEhsGg3jR/6Nz0ctbmtQJk8NU0c9lg+sziR9Bm83jHinzUoAK40DGjvUmKNRWz/p78
+ I7HT8BlmoV39qNXxZadYX7mOuVC0kJjdR0XFXmU9hFkKhfusLvG7RuXxQ9e0tfjYQTjXbmou+S2
+ k+Vdr+thUhBjE+WOa/NW9FgACpVHwhhuOXj7TdKGN2NC3PFpQedwO4YhUGk9DQt/YGmWvseCO/X
+ /71s++eA2+4gc8tcsznNc4GYJCLlxKg1z0tY5O9nrEc6E0CNXvUagZWf4y63TG7xxa8aIIImk9z
+ 0so1qH4ZYnDvjSYz04oF8Aj9B8qKlkvx3vpn612Vb/LqQQY0aqbIBzZAiMomxW3jBW8h58SIIO4
+ otyu4XTTVvTR49XHpaSoRQaoOZVzu3kUJZM3gAq/h5ENIqBVmYVcSOY/REuACLaduT/6s0+cjpd
+ +eoPK2zq0DL9xqgU7J1kzz1AdeamZ4sZbc9h+dR1astTb+z7SmSv+7E9dHQ5FIURs9Dk4nLREh9
+ 4t3bw7Z+zt1RjHQW/OhYt2FfemqNSurIbYeqtRc0+5KegN1NZ2ddqQ==
+X-Received: by 2002:adf:e98e:0:b0:484:41f5:5b0a with SMTP id
+ ffacd0b85a97d-485872bf5a9mr6874822f8f.28.1788529815720; 
+ Fri, 04 Sep 2026 06:50:15 -0700 (PDT)
 Received: from [192.168.1.60]
  (2a02-8428-ae02-5a01-b206-d095-5e9b-f35f.rev.sfr.net.
  [2a02:8428:ae02:5a01:b206:d095:5e9b:f35f])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-485881353e8sm6708786f8f.1.2026.09.04.06.50.11
+ ffacd0b85a97d-485881353e8sm6708786f8f.1.2026.09.04.06.50.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Sep 2026 06:50:11 -0700 (PDT)
+ Fri, 04 Sep 2026 06:50:15 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 04 Sep 2026 15:50:10 +0200
-Subject: [PATCH v5 04/13] video: mediatek: add ethdr component
+Date: Fri, 04 Sep 2026 15:50:13 +0200
+Subject: [PATCH v5 07/13] video: mediatek: add padding component
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260904-add-genio-510-and-genio-700-hdmi-v5-4-dd9dde2f972e@baylibre.com>
+Message-Id: <20260904-add-genio-510-and-genio-700-hdmi-v5-7-dd9dde2f972e@baylibre.com>
 References: <20260904-add-genio-510-and-genio-700-hdmi-v5-0-dd9dde2f972e@baylibre.com>
 In-Reply-To: <20260904-add-genio-510-and-genio-700-hdmi-v5-0-dd9dde2f972e@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -197,161 +195,93 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The ETHDR is one of the components of the video pipeline on some
-MediaTek SoCs, such as the MT8188. Two of its sub-blocks are used: the
-mixer, which is the block's first register window and does the
-compositing, and the HDR video back-end, which sits on the same data
-path and is put in bypass since this pipeline does no tone mapping.
+The padding block is one of the components of the video pipeline on
+some MediaTek SoCs, such as the MT8188. It is configured in bypass
+mode.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/video/mediatek/mtk_ethdr.c | 104 +++++++++++++++++++++++++++++++++++++
- drivers/video/mediatek/mtk_ethdr.h |  27 ++++++++++
- 2 files changed, 131 insertions(+)
+ drivers/video/mediatek/mtk_disp_padding.c | 49 +++++++++++++++++++++++++++++++
+ drivers/video/mediatek/mtk_disp_padding.h | 16 ++++++++++
+ 2 files changed, 65 insertions(+)
 
-diff --git a/drivers/video/mediatek/mtk_ethdr.c b/drivers/video/mediatek/mtk_ethdr.c
+diff --git a/drivers/video/mediatek/mtk_disp_padding.c b/drivers/video/mediatek/mtk_disp_padding.c
 new file mode 100644
-index 00000000000..08ce5fbf518
+index 00000000000..ffdba561879
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_ethdr.c
-@@ -0,0 +1,104 @@
++++ b/drivers/video/mediatek/mtk_disp_padding.c
+@@ -0,0 +1,49 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * Mediatek Video ETHDR support
++ * Mediatek Video Disp Padding Support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
-+#include <asm/io.h>
 +#include <dm.h>
-+#include <errno.h>
 +#include <linux/bitops.h>
 +
 +#include "mtk_disp_comp.h"
-+#include "mtk_ethdr.h"
++#include "mtk_disp_padding.h"
 +
-+#define MIX_EN				0xc
-+#define MIX_ROI_SIZE			0x18
-+#define MIX_DATAPATH_CON		0x1c
-+#define OUTPUT_NO_RND				BIT(3)
-+#define SOURCE_RGB_SEL				BIT(7)
-+#define BACKGROUND_RELAY			(4 << 9)
-+#define MIX_ROI_BGCLR			0x20
-+#define BGCLR_BLACK				0xff000000
-+#define MIX_SRC_CON			0x24
-+#define MIX_L_SRC_CON(n)		(0x28 + 0x18 * (n))
-+#define NON_PREMULTI_SOURCE			(2 << 12)
-+#define MIX_L_SRC_SIZE(n)		(0x30 + 0x18 * (n))
-+#define MIX_FUNC_DCM0			0x120
-+#define MIX_FUNC_DCM1			0x124
-+#define MIX_FUNC_DCM_ENABLE			0xffffffff
++#define PADDING_CONTROL_REG	0x00
++#define PADDING_BYPASS			BIT(0)
++#define PADDING_ENABLE			BIT(1)
++#define PADDING_PIC_SIZE_REG	0x04
++#define PADDING_H_REG		0x08 /* horizontal */
++#define PADDING_V_REG		0x0c /* vertical */
++#define PADDING_COLOR_REG	0x10
 +
-+/* HDR video back-end registers, in the "vdo_be" register window */
-+#define HDR_VDO_BE_0204_VDO_DM_BE	0x204
-+#define HDR_VDO_BE_0204_BYPASS_ALL		0x7e
-+
-+/* Fields used by this driver but not present in the upstream driver */
-+#define MIX_SRC_L2_EN				BIT(2)
-+#define L2_SRC_SEL				(2 << 20)
-+#define L2_OUT_SEL				(2 << 22)
-+
-+void mtk_ethdr_config(struct udevice *dev, u16 width, u16 height)
++void mtk_disp_padding_config(struct udevice *dev)
 +{
-+	struct mtk_ethdr_priv *priv = dev_get_priv(dev);
++	mtk_disp_comp_write(dev, PADDING_CONTROL_REG,
++			    PADDING_ENABLE | PADDING_BYPASS);
 +
 +	/*
-+	 * The HDR video back-end sits between the mixer output and the final
-+	 * merge, so put it in bypass: this pipeline does no tone mapping.
++	 * Even in bypass mode all the settings must be cleared to 0 or
++	 * undefined behaviours could happen.
 +	 */
-+	writel(HDR_VDO_BE_0204_BYPASS_ALL,
-+	       priv->vdo_be + HDR_VDO_BE_0204_VDO_DM_BE);
-+
-+	/* enable internal clocks */
-+	mtk_disp_comp_write(dev, MIX_FUNC_DCM0, MIX_FUNC_DCM_ENABLE);
-+	mtk_disp_comp_write(dev, MIX_FUNC_DCM1, MIX_FUNC_DCM_ENABLE);
-+
-+	/* enable mixer */
-+	mtk_disp_comp_write(dev, MIX_EN, 0x1);
-+
-+	mtk_disp_comp_write(dev, MIX_ROI_SIZE, (height << 16) | width);
-+	mtk_disp_comp_write(dev, MIX_DATAPATH_CON,
-+			    OUTPUT_NO_RND | SOURCE_RGB_SEL | BACKGROUND_RELAY);
-+	mtk_disp_comp_write(dev, MIX_L_SRC_SIZE(2), (height << 16) | width);
-+	mtk_disp_comp_write(dev, MIX_ROI_BGCLR, BGCLR_BLACK);
-+
-+	/* only configure L2 since only rdma4 and rdma5 are used */
-+	mtk_disp_comp_write(dev, MIX_L_SRC_CON(2), NON_PREMULTI_SOURCE);
-+	mtk_disp_comp_write(dev, MIX_SRC_CON,
-+			    MIX_SRC_L2_EN | L2_SRC_SEL | L2_OUT_SEL);
++	mtk_disp_comp_write(dev, PADDING_PIC_SIZE_REG, 0x0);
++	mtk_disp_comp_write(dev, PADDING_H_REG, 0x0);
++	mtk_disp_comp_write(dev, PADDING_V_REG, 0x0);
++	mtk_disp_comp_write(dev, PADDING_COLOR_REG, 0x0);
 +}
 +
-+static int mtk_ethdr_probe(struct udevice *dev)
-+{
-+	struct mtk_ethdr_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = mtk_disp_comp_probe(dev);
-+	if (ret)
-+		return ret;
-+
-+	priv->vdo_be = dev_remap_addr_name(dev, "vdo_be");
-+	if (!priv->vdo_be)
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id mtk_ethdr_ids[] = {
-+	{ .compatible = "mediatek,mt8195-disp-ethdr" },
++static const struct udevice_id mtk_disp_padding_ids[] = {
++	{ .compatible = "mediatek,mt8188-disp-padding" },
 +	{ }
 +};
 +
-+/*
-+ * The mixer is the first register window ("mixer" in reg-names) of the
-+ * ethdr block, so binding the ethdr node with default register index 0
-+ * gives the mixer registers.
-+ */
-+U_BOOT_DRIVER(mtk_ethdr) = {
-+	.name	   = "mtk_ethdr",
++U_BOOT_DRIVER(mtk_disp_padding) = {
++	.name	   = "mtk_disp_padding",
 +	.id	   = UCLASS_MISC,
-+	.of_match  = mtk_ethdr_ids,
-+	.probe	   = mtk_ethdr_probe,
-+	.priv_auto = sizeof(struct mtk_ethdr_priv),
++	.of_match  = mtk_disp_padding_ids,
++	.probe	   = mtk_disp_comp_probe,
++	.priv_auto = sizeof(struct mtk_disp_comp_priv),
 +};
-diff --git a/drivers/video/mediatek/mtk_ethdr.h b/drivers/video/mediatek/mtk_ethdr.h
+diff --git a/drivers/video/mediatek/mtk_disp_padding.h b/drivers/video/mediatek/mtk_disp_padding.h
 new file mode 100644
-index 00000000000..4a1bae3ddbf
+index 00000000000..f8f0305dfa0
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_ethdr.h
-@@ -0,0 +1,27 @@
++++ b/drivers/video/mediatek/mtk_disp_padding.h
+@@ -0,0 +1,16 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * Mediatek Video ETHDR support
++ * Mediatek Video Disp Padding Support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
-+#ifndef _MTK_ETHDR_H
-+#define _MTK_ETHDR_H
++#ifndef _MTK_DISP_PADDING_H
++#define _MTK_DISP_PADDING_H
 +
-+#include "mtk_disp_comp.h"
++struct udevice;
 +
-+/*
-+ * @comp must be the first member: the shared component helpers cast the
-+ * private data of every pipeline component to struct mtk_disp_comp_priv.
-+ * @comp holds the "mixer" register window, @vdo_be the HDR video back-end
-+ * one.
-+ */
-+struct mtk_ethdr_priv {
-+	struct mtk_disp_comp_priv comp;
-+	void __iomem *vdo_be;
-+};
++void mtk_disp_padding_config(struct udevice *dev);
 +
-+void mtk_ethdr_config(struct udevice *dev, u16 width, u16 height);
-+
-+#endif /* _MTK_ETHDR_H */
++#endif /* _MTK_DISP_PADDING_H */
 
 -- 
 2.55.0
