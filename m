@@ -4,137 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AB5CC79F82
-	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 19:18:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE07C79F82
+	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 19:26:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B317240B7B;
-	Fri,  4 Sep 2026 19:18:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B142340B80;
+	Fri,  4 Sep 2026 19:26:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aOR7i4W6w0U3; Fri,  4 Sep 2026 19:18:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 867AB40AD4
+ id 0S0e13B_R-Wt; Fri,  4 Sep 2026 19:26:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 641CF40A7F
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788549513;
-	b=IutiI9eNv86Z2n3RRNYpYKaSI1mVToIIdDTiAHMfqBIJvG8AFZon1EeVJoW18LrPTlzW
-	 5pr6ajgW9fU+CX8PT/uNVNCfP/bttpZ4LGJYesnf+Oiz2yoo5ILQ0VmgpHq9hGNSqNJL5
-	 /J8a9Y3x+S6KOi3oVREeWnKb/UBwAE8FiE5NUM3bVqPIZr4/q/w5DFcOqQutshfWc8S2n
-	 BtqwG7lUqyR9E4tId4UA0vehegNYU+ZhDXzuO58N+D/dFOOFhg3K4bkLHKGBaUQjoIp9D
-	 zk0vQKxZm3m8q2Hovy8wUU7dJMS5ewfQjY1g6ZzBTgZn4DU35TRozi4XsUFmnokiV7Q==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788549513;
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788549972;
+	b=T31YzcesHFgpwHFfjQS3OWKMwKcvU6Qjrxz9YXoMoUmwB8jIkDxhJQ9DdgyP4bM3J+r+
+	 jxYX5RIKhFR+nL9ciazEP+UOql3OnXL3bodb+Mgnn4P8fN5ab99q1r7lNKIwBUf7Fnz1o
+	 oxt+deNXcfD1LHNawuTQF5/gR+YjwINHf1ytSUNkUK/yj6PHRoFGnEAT0ijx8JPxRb7sT
+	 kQN44b6ujVHmOOKT5FqrBt0yup9yjHjYIqYvwU2UZRi2n8yYL+Df+9cJ+Dyl03bkxpXed
+	 5ALyS9/EbCt+W1nTnAzAycA/635HdT8xJF53RO0TszR50kTqdJDhBjZU7uKRtcnCqdQ==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1788549972;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
+	 X-Originating-IP:X-CM-SenderInfo:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=58KnlNaawtguXfx+Ew0VvNV3i9DL/4zFxg7Q1aIFMZk=;
-	b=UpFRmWSMI7+CSlMYEwnY/w5J0NXR89omPT0hljmc/+3U8+EhZivXPh3yDGBJJAQTnsyF
-	 jZIC5Se9tyjERnLZW4M+NLJm+hzr1SRfmuF3c9+vnSF/W+tQ4XVJkeXC0o/6s0+YpqDg2
-	 QjjFF3ozwT/5tU8sJcwYswCyDj44ot8Q0hMBEjjTy7m4OScouOymPuoE1KQ0LbYwQztwo
-	 HzTQpiBnvJeNAE8ZGhNZK4RM7WCVMWOXd6qr8aFDjmDCZBfF65SoQgxhWIrgCA0OA954e
-	 zdH08ccVYfF+qlGEm7hqaVEbmp0UhcuIusEw7Dg+gUr6Y8jnqpBoGZIOSxlnoCj2wsw==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=KcpwnS+oUk7edeyaOAYVkROYYD774R2jEMd/whMQkn0=;
+	b=LjCuuTH1AcaYMcSYuKJncH2yWjLnIIuNi5Hc8escEXsEnj1Z44XO1MPrlcQoM7riZBVp
+	 X7BEjHSWuuy/m9EISFYEtvl1gKjTX8Un2VC2MYGMDrwdwANvmQjEt0ndmq11EGVXnBSC5
+	 VDKXDbXAOQaBlhZJn0/r0PGjUQ+HMrGUZqsIY6Sjou5gFTXOijfnduXsFUbPVtZqLwMWF
+	 Ksbs4AsMRs2G74nciZjEci8/nnur7mBwUcA8gydhO+ghbchv52CD/CAchJKZraiYCfj6F
+	 MQT5h2t97rWnhZFjELkJzdN913k7m8Cw5K0Mi6tjxF2fMh++o8wAo+ew7KvUWKBoL7A==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=none header.from=iscas.ac.cn;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788549513;
-	bh=58KnlNaawtguXfx+Ew0VvNV3i9DL/4zFxg7Q1aIFMZk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=veIZ2HTjAFiVWfeXTCp2QKusgIWNiWqK9owdXbkjBpA81g2HwUiLMzUQACMoGRsIJ
-	 PM8Zk4zgWJjoNjjCyE5SJHYBAgRAgn6NnXHc2pyN6k88c3T8AqQpM+ErzHZGmXVc84
-	 xohVHAny64OsrHfITpwC+n1kWBsPXhHDqtcyk/9DnUHMmub/hOy0tgGpj3+BjA9HPK
-	 77gWA2sjWbh77Zan+ahwR6Yr6v4ZlGdRbSkOn8mz4U9OKIwsxJE3BIkDFJOH6KQk+n
-	 +JbwrCK//5eZM/FzCUkPl8LEmwfbKmKKczgVLxMKi5yJ0SZW2w2+1WhPGPw5bNTtpa
-	 nyYWmbfwnp8KA==
+	d=lists.u-boot-project.org; s=default; t=1788549972;
+	bh=KcpwnS+oUk7edeyaOAYVkROYYD774R2jEMd/whMQkn0=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=J3PU+g2ufkQY/zlS9Ne20U9AuD1YQLj6hhlZpAowOpFEUjdUVU6qKgLUjVwDuOzLC
+	 6F94YTpx40YBIuai9XbUODMmowo+RgICedmI/5ObJl1AkICb5EH4BlcJXCzCw4GdQ7
+	 na7AUjaQuSlK7HNBcxIDQfAgkQRw7EZAngA/dQZBlLjeQoEx8sWbD4W5Wqot32HHj/
+	 CklfiNqCLL/smfRiUqI4pymv+g7ZmzFRZnvZBw8LlYobbQM8W7Ajum52l5MJWPvJqs
+	 WqFFzsXooWmA+DC6Sxzk98Zi4CeEqWz6ylVr+3apFLyRKQfzix7gvXq3/5EErNfqC1
+	 v+hthPlm5Z9vQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 867AB40AD4;
-	Fri,  4 Sep 2026 19:18:33 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id C93A9388
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 19:18:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 641CF40A7F;
+	Fri,  4 Sep 2026 19:26:12 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id F1DF52FC
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:16:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AFA5280F19
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 19:18:31 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id EFAA740BBF
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:16:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FBXu-jGF_0YH for <u-boot@lists.u-boot-project.org>;
- Fri,  4 Sep 2026 19:18:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 7436480F17
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.182.15
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788549510;
- b=jet+1NDmkp2dLiwduBe2r9BzoTVMoVK8czx2SIZkXTlcV54+qlLFKp8DBq30uU+yVuZ8
- ANBfui5AUw+TfxYdQfskIzMilEyiEqgrRyc1rq2FW1Qni2ZzgcR5EiXn+mv+53FGWdisv
- DdITGZfXK5LnmgDmLVmR/asKkEaiYegnoHLXb7vcFR7bIdY5pwmLdmT+FgE+2ozGQYbWg
- Z3/wrHm1zzORgn3i1b2x305YZMIRqYwdqfAao1QTHDhC302Niw2vwO1PJkb0/MOqEXSSA
- 35saYzvOOb8HRpcBCNV8zYjZcz38PEvx/mc5UaZSPnQXi3bcOqAn4XR5+EiQpT7oGOw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788549510;
- h=Received-SPF:DKIM-Signature:Received:Date:From:To:Cc:Subject:
- Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
- In-Reply-To:X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient;
- bh=58KnlNaawtguXfx+Ew0VvNV3i9DL/4zFxg7Q1aIFMZk=;
- b=X1dkAafswKVmxgoJl7z7gyp16INfOQTQpTIVxURJUKM5KIfBuqVIqeC/l/pN4pQy87mG
- Ig5Yvsh7QkJwfp4Q+awOqOe5iETgKf/AagQCZTy2QrwzzbBDnUvemCGXuoprvcXLUaKzn
- BQVB4xDvWH8QgpWtWmqpyClEg8MLNYWAhKGwVau3ixTCbqkClChntspvtcz8lDHJUO5f/
- Ks7CCO51dGufZwIgnOJtex0Z/zorWBdfbhni786YLOC8ImlHIA55s4tHGzuzH4n6KDw8G
- EVAddX3NetOPxyGo+FtYa+4P/ulC10jKdT2q2bTUmhXQUBqOhXnApd5Lr49M61sd/wA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org;
- dmarc=pass header.from=ziyao.cc; 
- dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b="Z7/Vi5IT"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.182.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
- helo=sender5-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=Z7/Vi5IT
-Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
- [165.173.182.15])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7436480F17
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 19:18:29 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1788549496; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=GB1nwp6EstPnVWu/UYJGv1Jp9T+cZny5pXRoQ5sp0Xc73NCkiZ9KBurvu7lepNQjdnlJIlDZOI/jgbUG/U5K/fKrl/1SbAGPUDKztMakI0SxwvqPXLSM61n/ZD0X9++Pm1TKoF7jpM/IXjhsl6gBC3j0e4iPZBcM1voH3P4JHic=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1788549496;
- h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=58KnlNaawtguXfx+Ew0VvNV3i9DL/4zFxg7Q1aIFMZk=; 
- b=A29KHJ/b562nqDvkFQU7BV9WsWlIh7gdVzIWS0PNa2aUx7vSQqIGGGayz+iBbtCaQ+C08J2ExQjr43XxelwdSn+iVtcKuC3Qyt+QRblKnZQSLe5CVR9zhaX4uHvJKMNcpJi2S86PTefUfb8hpQMKfeMEVf5N9hwtP6JaNssPp9I=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1788549496; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=58KnlNaawtguXfx+Ew0VvNV3i9DL/4zFxg7Q1aIFMZk=;
- b=Z7/Vi5ITr9+mHwsI8KHEZdDq2WhLTqGir+yU/s/chaOJ8WqbEMRXHphuWhVWCKif
- XB22hU8ULhCAt1sd0sBwhU51c0pbO9zkLpK7zyQL2cd8FycLDIh+qh7SIzlHain4z0p
- 5jAsaeJKw7HHsmBRRGHJdUZCRsHozVYdy7QfU5Co=
-Received: by mx.zohomail.com with SMTPS id 1788549493168552.7783812857151;
- Fri, 4 Sep 2026 12:18:13 -0700 (PDT)
-Date: Fri, 4 Sep 2026 19:17:55 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Nikita Shubin <nikita.shubin@maquefel.me>, u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
-Subject: Re: [PATCH] riscv: timer: Fix M-Mode timer
-Message-ID: <apsZY2QgTXuJUivy@pie>
-References: <20260904-riscv_fix_early_timer_mmode-v1-1-210e769b0ac2@maquefel.me>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LmOL2dCGXRAd for <u-boot@lists.u-boot-project.org>;
+ Fri,  4 Sep 2026 13:16:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 2FC8A40BB3
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=159.226.251.25
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788527811;
+ b=Ru0lHxXMC3DBvX5tMNkJOH63A9XS8TtaVyRTwBODZ9t3wWMusFcMXLRzCN2FbHCoXFKZ
+ NcTTJ17DotX0M95wHYk3VHft8e49Y4PBuOOX2V/6CB+hntJJTLuoowNtxqezhjD9sv+bG
+ GBRC4bxuP5gqP7ml7/lQf+lXih8DhMhhtfiMhLrbwX5p2XSWgV2G5lawOfnMxSYB92DJa
+ Bn1kyEaiXHgBWBqQVdfvJixs17fACL5tZ/h9AlkMuEQRDrJZg9Q/iDAGyFx1kI6e88P1L
+ I22FzFeDGPnTOEeJaOEgZ8Trr9ljKEXujKQfliKbA0BOsW59sGPjbbHn5Pu5lQqeP8Q==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1788527811;
+ h=X-Greylist:Received-SPF:Received:From:To:Cc:Subject:Date:Message-ID:
+ X-Mailer:MIME-Version:Content-Transfer-Encoding:X-CM-TRANSID:
+ X-Coremail-Antispam:X-Originating-IP:X-CM-SenderInfo;
+ bh=KcpwnS+oUk7edeyaOAYVkROYYD774R2jEMd/whMQkn0=;
+ b=RuWxTvHMl7oMMSQcTpGt2B3w0dj9wCMfvWJJW9MNLiMCvMXd4+V0EFvRe4O246AA/eYG
+ qWqj/kLwmLwa44F70RIVcHTepU47fICok5TDvWyezl76mhKgMSP5bNc4fz9kMQND5rIYl
+ CsVPi9LteVfByRegeo0XU9B1IctdfI0Ygn2E3kB1Spe4etMpwAVIE8z8B0GbPOa3Tobni
+ f7uHBo6GlVgehiVl6dqUtErBgpgoedZr7kco/ij6+QnZ/WeAeiTfvsP+ZaKFqwOjPMcF5
+ eno0b8CfWQmrOBmvGEbuhoQoCVRNY1LngobUbgrtxG8GjwOCxdddLZlXprIPgQt/R0Q==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=none header.from=iscas.ac.cn; 
+ arc=none smtp.remote-ip=159.226.251.25
+X-Greylist: delayed 102 seconds by postgrey-1.37 at util1.osuosl.org;
+ Fri, 04 Sep 2026 13:16:49 UTC
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=iscas.ac.cn
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=159.226.251.25;
+ helo=cstnet.cn; envelope-from=pengpeng@iscas.ac.cn; receiver=<UNKNOWN> 
+Received: from cstnet.cn (smtp25.cstnet.cn [159.226.251.25])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2FC8A40BB3
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:16:48 +0000 (UTC)
+Received: from localhost.localdomain (unknown [111.196.241.250])
+ by APP-05 (Coremail) with SMTP id zQCowABnlkClxJpq5tZYBw--.1228S2;
+ Fri, 04 Sep 2026 21:16:21 +0800 (CST)
+From: Pengpeng Hou <pengpeng@iscas.ac.cn>
+To: u-boot@lists.u-boot-project.org
+Cc: Pengpeng Hou <pengpeng@iscas.ac.cn>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] efi_loader: imply the FS_FAT Kconfig symbol
+Date: Fri,  4 Sep 2026 21:15:48 +0800
+Message-ID: <20260904131619.42621-1-pengpeng@iscas.ac.cn>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260904-riscv_fix_early_timer_mmode-v1-1-210e769b0ac2@maquefel.me>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/288.530.38
-X-ZohoMailClient: External
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: zQCowABnlkClxJpq5tZYBw--.1228S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrZFy3JrW3uw43Xw1DAr1kZrb_yoWfXFX_Aw
+ 40v393Ja4UuFWIgayUZrWrtw15Aa1SqFyxGFsxtrsxXFW3WF4fJ3s5XF9Yyry7Wa1jkF15
+ WFW0yFnxAr1UJjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbcAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+ Cr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s
+ 1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0
+ cI8IcVAFwI0_Jrv_JF1lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8Jw
+ ACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7CjxVAaw2AFwI0_JF0_
+ Jw1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxV
+ WUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI
+ 7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r
+ 4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI
+ 42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU5oGQDUUUU
+X-Originating-IP: [111.196.241.250]
+X-CM-SenderInfo: pshqw1xhqjqxpvfd2hldfou0/
+X-Mailman-Approved-At: Fri, 04 Sep 2026 19:26:11 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,77 +144,32 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Fri, Sep 04, 2026 at 09:12:55AM +0300, Nikita Shubin wrote:
-> RISC-V timer is missing timer_early_get_rate() for M-Mode.
-> 
-> Also timer_early_get_count() is guarded by RISCV_SMODE for no
-> clear reason.
+EFI_LOADER implies FAT, but FAT has no Kconfig definition. The filesystem
+capability is named FS_FAT, and FAT_WRITE and FAT_RENAME both depend on
+it.
 
-This driver is described as "support for a generic RISC-V S-Mode timer
-driver", which should be the original reason to mark it as S-Mode only.
-It should be intentionally to split M-mode (riscv_aclint_timer.c,
-guarded by CONFIG_RISCV_ACLINT) and S-mode timers, since riscv_timer.c
-reads ticks from TIME CSR, while at least SiFive cores miss it in
-M-mode, and rely on OpenSBI to emulate them.
+Imply FS_FAT so enabling EFI_LOADER can establish the intended FAT
+filesystem dependency instead of referencing an undefined symbol.
 
-But this separation is indeed unnecessary, there are as well cores
-implementing TIME CSR, so riscv_timer.c works on them even in M-mode,
-too, e.g., T-Head ones.
+Fixes: 93f6201af71d ("efi_loader: imply FAT, FAT_WRITE")
+Signed-off-by: Pengpeng Hou <pengpeng@iscas.ac.cn>
+---
+ lib/efi_loader/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I've summarized the situation here[1], but didn't find enough time and
-energy to send out a series to fix issues up...
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 4cb13ae7c8a..c4b0c2137b8 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -28,7 +28,7 @@ config EFI_LOADER
+ 	select OF_LIBFDT
+ 	imply PARTITION_UUIDS
+ 	select REGEX
+-	imply FAT
++	imply FS_FAT
+ 	imply FAT_WRITE
+ 	imply FAT_RENAME
+ 	imply USB_KEYBOARD_FN_KEYS
+-- 
+2.50.1 (Apple Git-155)
 
-Anyway, please fix the Kconfig help text, too.
-
-> Make timer_early_get_rate() use RISCV_MMODE_TIMER_FREQ in M-Mode and
-> move timer_early_get_count() out of define.
-> 
-> Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
-> ---
->  drivers/timer/riscv_timer.c | 11 +++++++++--
->  1 file changed, 9 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/timer/riscv_timer.c b/drivers/timer/riscv_timer.c
-> index 1f4980ceb38..65f174fb879 100644
-> --- a/drivers/timer/riscv_timer.c
-> +++ b/drivers/timer/riscv_timer.c
-
-At start of the file, a comment mentions "This driver provides generic
-timer support for S-mode U-Boot". Please update it along the way.
-
-> @@ -33,14 +33,22 @@ static u64 notrace riscv_timer_get_count(struct udevice *dev)
->  	return ((u64)hi << 32) | lo;
->  }
->  
-> -#if CONFIG_IS_ENABLED(RISCV_SMODE) && IS_ENABLED(CONFIG_TIMER_EARLY)
->  /**
->   * timer_early_get_rate() - Get the timer rate before driver model
->   */
-> +#if IS_ENABLED(CONFIG_TIMER_EARLY)
-> +#if CONFIG_IS_ENABLED(RISCV_SMODE)
->  unsigned long notrace timer_early_get_rate(void)
->  {
->  	return RISCV_SMODE_TIMER_FREQ;
->  }
-> +#elif CONFIG_IS_ENABLED(RISCV_MMODE)
-> +unsigned long notrace timer_early_get_rate(void)
-> +{
-> +	return RISCV_MMODE_TIMER_FREQ;
-> +}
-> +#endif
-> +#endif
-
-For platforms like starfive_visionfive2_defconfig where both
-CONFIG_RISCV_TIMER and CONFIG_RISCV_ACLINT are enabled, riscv_timer.c
-and riscv_aclint_timer.c would each provide their own early timer
-symbols and causing linking errors when building with defconfig.
-
-These platforms might depend on the IPI functionality provided by
-aclint_ipi.c, which is also guarded by CONFIG_RISCV_ACLINT; and
-riscv_timer.c might not work on them, either, thus simply disabling
-CONFIG_RISCV_ACLINT isn't an option.
-
-Regards,
-Yao Zi
-
-[1]: https://lore.kernel.org/all/Z7dMY_GqLHsC-5gl@pie.lan/
