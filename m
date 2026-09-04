@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA17CC79F87
-	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 14:47:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC310C61DD6
+	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 14:47:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 42F1240BF9;
-	Fri,  4 Sep 2026 14:47:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AB9BD40C8D;
+	Fri,  4 Sep 2026 14:47:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AHMEk_yyqJgF; Fri,  4 Sep 2026 14:47:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 5598440BDE
+ id lj5YzNZGky1x; Fri,  4 Sep 2026 14:47:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 3CE0A40BFA
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788533253;
-	b=rpmnl1ghvG9UXHTyuw3nOR7hEeU5Jp6TDfMhAZfPz+D4fvqqvFZNO4NTitEHKCgBVeyq
-	 mlnvAeraeU739+MfGQWmUkEbgnguoIn/GRuCSKBM5wuxV5iSb9gKKTOQ6oY8YkGpleDLu
-	 dL12KyRuOK44Ht643EwblWlhjIAjredY275tuedRTSbVOAplBflQ3Rx1pfcuM+KqV5WR8
-	 0mMEKN5b2YVv+e2f8fhBFuSfQuRfHdMJdfKAsta9ySvuA1Kjb/j6sLo1ATEzcQ2Ia6Ltg
-	 SHU7D+7Mm23kNzZMMF5XCFtiG69Vh3QaZh0C8TNjog8j7aOeSUj+iLUVIVL1sB1FEfw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788533255;
+	b=cTWBlzqCCgiSOBj5as8ExaD5Jbsjk0m8oAwRp4qDh8cjLylC+9Q7OyT6fNAlxzFTTtEI
+	 7auXK81tETqP7TghEqNIO1k6HEGUFcEEupjd3mjAOeHm8mTN7uUF1jFcvO2nppw7yeTY/
+	 FquNccszQ18eyxcQB9i8lwUDJtl9V1bossz2V7nrbGod+UcWnP0C7A9HSQXQAtXboTpz+
+	 Uf9rmxpICT173jNGiIOM+16SOEkFBn6mycm5NMU9OkaVlW+3bSFT9KrtQ+2PvD3cryKyB
+	 848ldC/BGxBpgoxrmLURRdq2eQ6mKoVXY0KrgdXGzjqA0Y3gy1qn+sEkz+3VrNXwqVA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788533253;
+	c=relaxed/relaxed; t=1788533255;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,134 +32,132 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=VgSeVJ8WzoeOidizRaeiWXO1qpoadOrjynnMUfTjGNw=;
-	b=G4YpBaezuNo/SPRqiIAxdHqpxxzc9E9D3VO2lQ1dK/rwo50z4mHEhmuenk0Xzbo8avey
-	 0ki3HpTmGKm/qA4J7o4+mFgNQ++9B65sgpRAfzZG9oBBKjorXuTCOBN4KAacSjwMFCiBz
-	 EDfpyjYJU1rBmLn06AYwUnXyi+x5IuxD0lwsHFQOa06NtG4YLb1KujukfoUdHz9oUrbsx
-	 IFv2lY1ABJpW4BgCdruYpUWcxaOmwG+4/5UxzhRkON49yp14VILoMYCpp41pKvuhDDgrP
-	 m7daQbon/fYYKFNNCL4qcunBcvHaYtj/bdJ+GS5F9CsuMvtiZT9YOzZmHcGSxPQ1vtA==
+	bh=5/jrBLaMTtXfJbs+c3h2YlEhImx3sdGvN3ec6y3eH/Q=;
+	b=N81f4lQVKqrttSkimFu6xYacIF/F0IiIMWMWv1MCQ7i3QgI7yZNha6O+fnyJ0jN6XYEM
+	 dxX2ECeSa2UwVovPT9ZrYTQYZ9oR2317FJoudcXW6tVws451rtV2YETzwNxx+8/OqXMXS
+	 cZconEg3YdvR2L+FQCHYJcvbHD6Zd0mdHq0spA0e1XsXE5xhDj7oO9jf3mOAQrsjpKgtW
+	 tT4v4FskmocuGG4pA4tfDNTUTFh89QMHIC7hyFKgRb+F6oMSjoN/wVQ0U+H9PjIOMs7r7
+	 Vsn19em0LsOX/WL8NMnTAeeA5y93xk7PvxsEKcm0mYotj5g/0ij/LCVXsKX7phTN6mw==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788533253;
-	bh=VgSeVJ8WzoeOidizRaeiWXO1qpoadOrjynnMUfTjGNw=;
+	d=lists.u-boot-project.org; s=default; t=1788533255;
+	bh=5/jrBLaMTtXfJbs+c3h2YlEhImx3sdGvN3ec6y3eH/Q=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uEUMf/tRdoCF6ZKJGpYNhgTaf+eTneaUYfB3o/4nLBCYIhtwJBnqJ18ssVB3vsMsE
-	 veKOVEycRkdKsP+dPVbOlgG2BZKA8uTPZheM5rZG5mWWA7JFsauyG8uWOsQ42u45p0
-	 dkXAyQ5d3QL+B+zgom+eiJyEp0tzTcOoXpV2rrOAIlCsVT1WTn0iqf+Pv9GqZTAWp4
-	 Ev7PlXy4UdZQO9zEhALbAjRHm44zsjgHFj53OfdNZIBZQHdpqhcQ8vcnHf8FIBYqx4
-	 4DVCjBIebvIvHNj6UFhogt1G67uqGS9v4/7eBxBoKc07KSmgltCzv+bOmHnYyHc3oa
-	 EXz91ALeV01tw==
+	b=oWE5MTFET8z62wjC6b97fVuEM0RBVB9k3r6Oo2ysYRssVU0A/3pxH2XxrqQmGO3xE
+	 +X3lglRbAn4N817my+GaS27YwSLhQSoBYORj+lRds3Dp5J6bplgSQrLitBSkfkJ4Gr
+	 anlHUOmlcHKkOEkgdZ0ASa3H4kgHsWuArHIPagXJrkcK7ByS1FZHMkF55MiPvEsfC1
+	 O0XWHXHDaPbFFn+jD7FV4Km25q6RLHzrFYL+eGfJcrAI8gNeaVKP1ah9hWpBfYqlqV
+	 V2YdZ4ooWwxxfNwfyrpEMM55K4uvOjfmJeh/kiSvLhYR4NTMfMYadG/TC9FRxxVXva
+	 /aFuhCOHeym1g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5598440BDE;
-	Fri,  4 Sep 2026 14:47:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3CE0A40BFA;
+	Fri,  4 Sep 2026 14:47:35 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 45F432FC
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:47:29 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 3905410E
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:47:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2C75A404CE
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:47:29 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 36F7940376
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:47:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZsxOeSvNyyXm for <u-boot@lists.u-boot-project.org>;
- Fri,  4 Sep 2026 14:47:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 67EFF404B3
+ id YUqyiKHsw_S3 for <u-boot@lists.u-boot-project.org>;
+ Fri,  4 Sep 2026 14:47:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 5C384404CE
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2001:4860:4864:20::2b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788533248;
- b=QMO4AVBERQ6ILH3JqFcaZ2+aQhoWIvNweolhaO3PyZERNKWmZBgj4pbgbKdOwj5XLhO6
- REyS5nEpJBCox+bUSbaZ+xK5ShAgsl1FfLkW2d8CfodtPCeJ2x8udfSJ05GP88FstovP3
- WMSMsnGvhqOwg/RoDZLmODbYFeiV8DMzL33saz00PgyCwxx3/x5RsUyrqVYP6UwBID+0U
- w7iSfxYTucVphEXvQKC+J9HTgRstxIfsoW35COKA4rUnrLqhiVofDwdi8p1Jj48Jx4m/S
- j/2xOoUoeyZopGkFjB97OmQVNXpnD3Xadu3TQcUEsVLsQDe5BBCZRkXjf3If00HLbhA==
+ arc=none smtp.remote-ip="2001:4860:4864:20::2d"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788533249;
+ b=Z0QRA71fAf30q/UgSpIAFnNKIVOCWHt768fmrNlyogrAEP+NUEZONqEGPCjQ5q/BBWVg
+ xZJ03Wg35hJ57kQdHpUE5Oo+g2+Zc1ndJ3geTmEJNWs6RrGxyIaVUSmUXe823DZQUIoNn
+ oH7Ortt0b9b3EdkgyFMuVVH0FW0mAYYzwmACsSeqyv3MSgzFijlqjlNhWqwzSDFKuHxmp
+ KWv+7UhNgrV1nlGJ89nbIqwdJo3uZ0Asqz1Gp6PaxsFnrfFcPQQ5wDkiXrFEPto0VZbrL
+ tMsHqeNSij/dhdBVAGkCjPA6O31Pu/CID7/WpqjymfXtJ/d02IGW6Ghb1Dd2vjwhaOg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788533248;
+ c=relaxed/relaxed; t=1788533249;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=VgSeVJ8WzoeOidizRaeiWXO1qpoadOrjynnMUfTjGNw=;
- b=LczMgjFBRmur7FttcdUugiNihMPgbmX7em1TSoWZJSKug5BS7rRzLGtp0bYePjQUMbZ0
- gTO0Ml8l49CYoAOvQ/SM83fVpMiJnryv0zZPAQNJ0+0cVeJbmDFus4Sd9zuuukdM+EgQm
- wyYdrmYGPvpLAi3GODYJjpUBASf4PnBHSygttCTbcy9gpIYajt9Blu7jsdJeZTy0wtY2i
- f2riO7DZXO0Aa2pSpuQ/u28qYB2dB/PFP0rBVj7DRq7/KYbwazp2lKKsQfohbe/1IMSPY
- 06lXlDYQ3F/f4blIGjwgsR3EDO7slpq9QECq0RnnIKTo653ckfTfwi0ufVRDGgWGY5w==
+ bh=5/jrBLaMTtXfJbs+c3h2YlEhImx3sdGvN3ec6y3eH/Q=;
+ b=eKxr6/WOVmz0xMVEYQ/GgmrgK7vqtEY1S/u55qiXfQm5zks13RopDTDfe7G9ZMRcw85x
+ yZIEAwTGuDUDRBkCqy5Rg5RAhptFBDq9xLfaTGY5NRpLPCIVGI+5W40PBRxV7ufbnPgDE
+ jAquYD8/wzHFQxetKg7RX6Q28YF/48ACwP04Hg4dVDbb8s4CbEnHmZTMyz6ZGk2TgqJVK
+ tGS7CQS3zn3FqCuwBaQOV2nIfL5i3Fl78p5WLihxtl56Asoxf8LoeJ9VZJCr8Yws/f/zl
+ AQqcFaCOeykNdbB9Qct7b4RgsW2D5Lt1ZoVyFf2Lu35eF4hLA1F0hRLggqKfMLzFA9w==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=N7ylJb0s; 
- arc=none smtp.remote-ip="2001:4860:4864:20::2b"
+ header.s=google header.b=gHyVkGvN; 
+ arc=none smtp.remote-ip="2001:4860:4864:20::2d"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::2b; helo=mail-oa1-x2b.google.com;
+ client-ip=2001:4860:4864:20::2d; helo=mail-oa1-x2d.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=N7ylJb0s
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 67EFF404B3
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:47:27 +0000 (UTC)
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-4679f619d3bso746362fac.1
- for <u-boot@lists.u-boot-project.org>; Fri, 04 Sep 2026 07:47:27 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=gHyVkGvN
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5C384404CE
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:47:28 +0000 (UTC)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-467a6834028so633715fac.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 04 Sep 2026 07:47:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788533246; x=1789138046;
+ d=baylibre.com; s=google; t=1788533248; x=1789138048;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=VgSeVJ8WzoeOidizRaeiWXO1qpoadOrjynnMUfTjGNw=;
- b=N7ylJb0sFT7HfzXDqhto0vrNc7Ck5tYWmK+R3Md6wthdbFiBeD9uH2Qh/+Vq1YYwRA
- e3jtFZ6lteodPxEnRoz/LC8qbHHWXNgIdHuiWEhNUL/AQSWpIY/Ir6BBd4lD5ACYpuT1
- gQ9Ya/cvg35fUiyvtO2aE6K6RGCVW93rhHZBIrUoORXwo5BrjBQCjUKsFjEiHKx0Rryd
- s/7Wm+I9Men/rNopEm/dQ7Chb99utQLW2hqlRFBldwD+4xeQpTSpp+j7OUAjd7Kf1wxx
- B3SIGRE2Grd8hOAG1XlS6IAoSkpj5OiyQsPCQFP+ezJ1oaFwcebezN/MS0nVSlXCYEw/
- w85w==
+ bh=5/jrBLaMTtXfJbs+c3h2YlEhImx3sdGvN3ec6y3eH/Q=;
+ b=gHyVkGvNlaoo+23lQHnVSUuGHsgrvyCOjBw8s6qKQrwnINlvxEnFLNrREcaXbygqoA
+ jlkCu019C4PlKWsO2bnxTh4CGkiBHuLEXO8SvYMH9Nc5e1MQAusIBx7dJqbHIKKZ63El
+ YkznkQ+tlGF9XhLCYoR5fdyOQ0d2W54dfNDaPIqhzkz2GbM7Spu9qWYVto+yxTHAOuBR
+ GFbuEG74pZsJMyJocfDZ1nC0mOlQ2PSDMO3EnFCP7L/wu5ly+pNtEOt2aNkLYkUOyHFu
+ dTBmdJhIIpK1BMQ79aSe3U6kFm7zYS6GiJmf79QsxCo8VJZMIgYWf7uIyLYnbQzQgzJQ
+ 8jKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788533246; x=1789138046;
+ d=1e100.net; s=20251104; t=1788533248; x=1789138048;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=VgSeVJ8WzoeOidizRaeiWXO1qpoadOrjynnMUfTjGNw=;
- b=dsvsILMXEpIJiupmZI5tTXyjXs1DVg0e/itzfQ1/Zp9Q5OXjEiH8X++SX76Xu1QovI
- ZSUIhZn0pHyTFfRo7N+KBe1qvWLeRXepSSBRF4ikx496nwQ4wlLHhjZJpRpgV9+xVWwR
- rhYeIxgLwknAQMogj9AVT8/rcFyqbHrtoTzQUtnwCUUZ2VjRaFLCQbdqEdULKikPSubY
- /Hv4hR4TDt6flhwHoqmUIMdMkLbp+X1BPB1+uO34OAwWfk/D8oVyXl7QLUf4M659/6SD
- kt9H6H3H8vWkiWvAVad/5mII8YMfVVr7RwZf3O8ytA0brVZSgowy8kEc7Q5w7xTp/Gm1
- ++aQ==
-X-Gm-Message-State: AFuF++k3wKpot6Hdt4mbuV8LrGxjdC0SqCC0ayiQ/+/DWBSK0oF3/wEo
- dj3s66En0DDX0s8H05HUzCLBW+uMovKDiFgWWVFpi3gW66oYQBU5pqnj40BENY7ufyE=
-X-Gm-Gg: AYBFou2pWkbbZcfF7IuYZJOb16TCTZK1DlncCWXjvoj/24MZPrU5jSZUtvDoqrHa8bW
- 7B4f9hbsZWpCJ7KOOadHOWN+J/KLKspnoIe7J0Opgfuo8Ffl19FXaYvGtOzCWrYFuQmmNbD4t+6
- 7rnKiWKbggLsLiXymCHsiTFPH9+lvA4g/ipm6Ljk+FHIqMbaM4xzUppv/4Y865FwoNE+44YVmhQ
- bwIYYjLs/Bm3EMvDAfdxK84wGwxjJ1gKuP7ZDy6ptBcfgOvqeXHtnx7xaq3QGNXwgObaxT6xioj
- ygMS6XjtqcUWOkGQ57emL8JLokAXuMVw4qdOysJeeuHqpFnv0sXM1J25jRERvK7fU8HVamkEw17
- ns4o9ODG75CgwFsci40ruDz29aofsDUmnnP3kYA4ITEH7xKaDN7TfvHEX2iW6AVkouCjawsi1HN
- +pG6dZpj4P0tufJWTydNBNbHiryC4ZPv/o3NfsLbU2o7A8qm1y/G/Wlwla6FTzYoHtzGK978JMN
- gZz
-X-Received: by 2002:a05:6870:c24c:b0:417:4693:ca0 with SMTP id
- 586e51a60fabf-475523c61b8mr5328872fac.14.1788533246542; 
- Fri, 04 Sep 2026 07:47:26 -0700 (PDT)
+ bh=5/jrBLaMTtXfJbs+c3h2YlEhImx3sdGvN3ec6y3eH/Q=;
+ b=bDsldRmXvTPk+c6PhYIwAnW1XhYOB5nql0G5zVIQHNrqRF3tibSP/fGmo8KlGrtvjL
+ GGfnSRshSJsjspjlmJhpOd/qOipw43Sch3r048s+Kk93Q7DeYJ66/DaCNlbP2ga9YA3+
+ ugH/W/BeZE1EW7oBnGlXVsACujI/MdvSRkI9fK4hMV23c4e/CrrUmErU0l2DxtTabOoi
+ J5FpMY3VSdNSYRClDhBJGpXMNOPSeYLmLMHk/a7lCG3ueThcyoU8RsQPJuObdoTwWsRc
+ 1JmYKZa/30MjVQCQ0+5BiFKAurW0GwNMjh12ZK4rfjUzb4MVoe2MQ/r6uv4aQBXybyGb
+ PWrQ==
+X-Gm-Message-State: AFuF++nGEdORDDIoQtJyeD0bQk3m5gn98oOfw9bc6W/9AUC82c5yIf+e
+ 6IHyLgsotrtuIKlziguc9enAq0KhRNkozLPvg4ghPvH3hGtLSfLakoxhbpfuK1+geEc=
+X-Gm-Gg: AYBFou2YTyBqiemIq5cbmL6GLMWAhlrHtCLpxRf+NqXot3Bu56CXSint+t3/VOWir8+
+ 8xhSTEVLysO20epHEYDf6bVN+lHt2IZ022Qt/9W4Z4dEHeqZcS07Yh9F3e5MVM9Q7u3bqTuVcmu
+ xtZ/tknKdyJWGccZXxvRHQhI1SeqxpsB8nQKcoF4KoI9wzlOfuwU5tk/32ikTMiU+1i85Gs1zrs
+ 6WRErmBqjsEIIurySWnh7jwICBtAzGFr/OAk0MQ4cJPqQyGfvuIALdqb5avlWa1VmONzhd+Ceh4
+ XHHzflomGxkYihFmBmtaP3BeLG2qLJNvGZrfIwnpYaVnsUlpJsJMIXRgMRON1suVqQWmlNhrVBG
+ sIEWCIHkupWFnt7T+/bQ04nzc4abwtHiwa5MFwbpDTvO9n3FtcuaZQHmJOqKxiTYCdhPdu+jhg9
+ pnqh5pCLHkoibWVS/Gh78APtCFZ8M+Mv6Y71a1RuEcOOSAtb+/ciTZ+QTn3XSYapta5g==
+X-Received: by 2002:a05:6871:a84f:b0:46a:d6a3:8c22 with SMTP id
+ 586e51a60fabf-47552a618e7mr6193426fac.12.1788533247795; 
+ Fri, 04 Sep 2026 07:47:27 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:4a5f:f4c7:21f3:4b8a])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-47554935962sm2118988fac.12.2026.09.04.07.47.25
+ 586e51a60fabf-47554935962sm2118988fac.12.2026.09.04.07.47.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Sep 2026 07:47:26 -0700 (PDT)
+ Fri, 04 Sep 2026 07:47:27 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 04 Sep 2026 09:46:29 -0500
-Subject: [PATCH 2/6] configs: mediatek: drop no longer needed POWER_DOMAIN
- options
+Date: Fri, 04 Sep 2026 09:46:30 -0500
+Subject: [PATCH 3/6] power: domain: mtk: support two-phase bus protection
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260904-mtk-power-domain-mt8189-v1-2-ab9d8cd0f01a@baylibre.com>
+Message-Id: <20260904-mtk-power-domain-mt8189-v1-3-ab9d8cd0f01a@baylibre.com>
 References: <20260904-mtk-power-domain-mt8189-v1-0-ab9d8cd0f01a@baylibre.com>
 In-Reply-To: <20260904-mtk-power-domain-mt8189-v1-0-ab9d8cd0f01a@baylibre.com>
 To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
@@ -174,17 +172,17 @@ To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2955; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5725; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=zNjzuAWw7XZwPCZ0Vemw1DCbjT+hxMavVLKK9pTDz7w=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqmtnVE48fVlGbPFrgw6soF6MeeQRdelDjhWwNo
- 7aswl4whg2JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaprZ1RYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ASLQIAIKSqA2mxhaCjnNrGK5jGmKUR1mBpPWlTgYg+0v
- ZL5UZOZI+Gm1fbMmDCRKcFq6/n60QnPSJ9uwvyQVO+NfxxEhrWS3drqlEiCvhqJlWqOxooEbfYE
- Tpn5rVbbotpD0/R9u+XnWLIEiqYftmzi27maHA4N2l3FWd4SoVyEcK0r2AymKD2PrwMsrRi2HMs
- KuoilLORl/Ei8QPxoeSGGUdmcqKfQxMVvfbyQMfvDFbUb/Qb6b9vmPBEF9SqGL1K2/RNQ3LqwG+
- mt0UqDbirPEBKG4CUwUPFA60n3P7pVmwIPkIANRBGEOvH6cZacoemPTlb1zsLuTBxjZFN3Pb+6E
- 8BJM=
+ bh=VIGsupdbsvwnNrGkhziouCrjN+Q+LLAavyfjUfhUYEM=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqmtndDS06HXeGBQs+UOWKA28tVMiFmh0F8hoDX
+ whE2l9IRjWJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaprZ3RYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AhAUH/iLSDTlzVOmNllvoT/Z1ml2+UjlTAG/ApDgYHAH
+ u/du0/0/TawwTSSgkmDd2HnPy9Qe4cfi4Ce5lmxUag0YWAbn3PlxlXmpQ0U+uJ2//ir31jCq2at
+ Ad1Kj+Jqebo8ZviaLIWo3j0Ye9LrdAggRCH3tbkPzWsrUW2RzpBmsgU8FpKAn7Q3QEmJYtxfSu+
+ Qswv9mM/opH8QqD5yLTA3leM4/iiEcxQbf/yHvkvmPDBWRybOka08PyAyyHYpTh4weEjq4lQTdz
+ WgbgkdZ0wBGJ96OcwgNOXxe78lLIieS+15N+W2DpNfao0PisE4aTzrzPlSMLraKHVaJ/IT7A9yz
+ FMGQ=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -200,92 +198,162 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Drop CONFIG_MTxxxx_POWER_DOMAIN from all MediaTek defconfig files. These
-options no longer exist and MTK_POWER_DOMAIN is enabled by default when
-POWER_DOMAIN is enabled.
+Add a MT8189-specific feature to the mtk-power-domain driver.
+
+Some domains split their bus protection policy in two: one part has to
+be released before the subsys clocks are enabled and the rest
+afterwards, and correspondingly re-applied in the opposite order on
+power off. The MT8189 mm-infra domain is the first user.
+
+Add a subclk flag to the bus protection data and a
+BUS_PROT_WR_IGN_SUBCLK() macro to set it, then run the enable and
+disable loops twice, once for each phase. Existing entries all have the
+flag clear, so they keep being released after the subsys clocks are
+enabled exactly as before.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- configs/mt7622_rfb_defconfig               | 1 -
- configs/mt7623a_unielec_u7623_02_defconfig | 1 -
- configs/mt7623n_bpir2_defconfig            | 1 -
- configs/mt7629_rfb_defconfig               | 1 -
- configs/mt8188.config                      | 1 -
- configs/mt8366_genio_360_evk_defconfig     | 1 -
- 6 files changed, 6 deletions(-)
+ drivers/power/domain/mtk-power-domain.c | 30 ++++++++++++++++++++++++++----
+ drivers/power/domain/mtk-power-domain.h | 19 ++++++++++++++-----
+ 2 files changed, 40 insertions(+), 9 deletions(-)
 
-diff --git a/configs/mt7622_rfb_defconfig b/configs/mt7622_rfb_defconfig
-index d35bed49afa..d67c7ce3da0 100644
---- a/configs/mt7622_rfb_defconfig
-+++ b/configs/mt7622_rfb_defconfig
-@@ -49,7 +49,6 @@ CONFIG_PHY_FIXED=y
- CONFIG_PCIE_MEDIATEK=y
- CONFIG_PINCTRL=y
- CONFIG_POWER_DOMAIN=y
--CONFIG_MT7622_POWER_DOMAIN=y
- CONFIG_RAM=y
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
-diff --git a/configs/mt7623a_unielec_u7623_02_defconfig b/configs/mt7623a_unielec_u7623_02_defconfig
-index 13fe8766b98..974a169c7f5 100644
---- a/configs/mt7623a_unielec_u7623_02_defconfig
-+++ b/configs/mt7623a_unielec_u7623_02_defconfig
-@@ -47,7 +47,6 @@ CONFIG_MEDIATEK_ETH=y
- CONFIG_PHY_FIXED=y
- CONFIG_PINCTRL=y
- CONFIG_POWER_DOMAIN=y
--CONFIG_MT2701_POWER_DOMAIN=y
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
- CONFIG_SYSRESET=y
-diff --git a/configs/mt7623n_bpir2_defconfig b/configs/mt7623n_bpir2_defconfig
-index 13fd033b2f7..eb695f91feb 100644
---- a/configs/mt7623n_bpir2_defconfig
-+++ b/configs/mt7623n_bpir2_defconfig
-@@ -49,7 +49,6 @@ CONFIG_MEDIATEK_ETH=y
- CONFIG_PHY_FIXED=y
- CONFIG_PINCTRL=y
- CONFIG_POWER_DOMAIN=y
--CONFIG_MT2701_POWER_DOMAIN=y
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
- CONFIG_SYSRESET=y
-diff --git a/configs/mt7629_rfb_defconfig b/configs/mt7629_rfb_defconfig
-index 4b2412cc571..8629f88a358 100644
---- a/configs/mt7629_rfb_defconfig
-+++ b/configs/mt7629_rfb_defconfig
-@@ -81,7 +81,6 @@ CONFIG_PHY=y
- CONFIG_PHY_MTK_TPHY=y
- CONFIG_PINCTRL=y
- CONFIG_POWER_DOMAIN=y
--CONFIG_MT7622_POWER_DOMAIN=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_RAM=y
-diff --git a/configs/mt8188.config b/configs/mt8188.config
-index b234da6734b..ba0f6086478 100644
---- a/configs/mt8188.config
-+++ b/configs/mt8188.config
-@@ -21,7 +21,6 @@ CONFIG_MMC_MTK=y
- CONFIG_PHY=y
- CONFIG_PINCTRL=y
- CONFIG_POWER_DOMAIN=y
--CONFIG_MT8188_POWER_DOMAIN=y
- CONFIG_BAUDRATE=921600
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
-diff --git a/configs/mt8366_genio_360_evk_defconfig b/configs/mt8366_genio_360_evk_defconfig
-index 03de6573aa5..36ad9f93af3 100644
---- a/configs/mt8366_genio_360_evk_defconfig
-+++ b/configs/mt8366_genio_360_evk_defconfig
-@@ -26,7 +26,6 @@ CONFIG_NET_LWIP=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_CLK=y
- CONFIG_POWER_DOMAIN=y
--CONFIG_MT8366_POWER_DOMAIN=y
- CONFIG_MMC_MTK=y
- CONFIG_FS_FAT=y
- CONFIG_MTD=y
+diff --git a/drivers/power/domain/mtk-power-domain.c b/drivers/power/domain/mtk-power-domain.c
+index 8696ac21245..24b4991e469 100644
+--- a/drivers/power/domain/mtk-power-domain.c
++++ b/drivers/power/domain/mtk-power-domain.c
+@@ -83,11 +83,14 @@ static int _scpsys_bus_protect_disable(const struct mtk_scpsys_bus_prot_data *bp
+ }
+ 
+ static int scpsys_bus_protect_enable(const struct mtk_scpsys_bus_prot_data *bpd,
+-				     int bpd_size, void __iomem *reg)
++				     int bpd_size, void __iomem *reg, bool subclk)
+ {
+ 	int ret, i;
+ 
+ 	for (i = 0; i < bpd_size; i++) {
++		if (bpd[i].subclk != subclk)
++			continue;
++
+ 		ret = _scpsys_bus_protect_enable(&bpd[i], reg);
+ 		if (ret)
+ 			return ret;
+@@ -97,11 +100,14 @@ static int scpsys_bus_protect_enable(const struct mtk_scpsys_bus_prot_data *bpd,
+ }
+ 
+ static int scpsys_bus_protect_disable(const struct mtk_scpsys_bus_prot_data *bpd,
+-				      int bpd_size, void __iomem *reg)
++				      int bpd_size, void __iomem *reg, bool subclk)
+ {
+ 	int i, ret;
+ 
+ 	for (i = bpd_size - 1; i >= 0; i--) {
++		if (bpd[i].subclk != subclk)
++			continue;
++
+ 		ret = _scpsys_bus_protect_disable(&bpd[i], reg);
+ 		if (ret)
+ 			return ret;
+@@ -189,6 +195,15 @@ static int mtk_scpsys_power_on(struct power_domain *power_domain)
+ 	val |= PWR_RST_B_BIT;
+ 	writel(val, ctl_addr);
+ 
++	/*
++	 * Some domains split the bus protection policy in two: one part has to
++	 * be released before the subsys clocks are enabled and the rest after.
++	 */
++	ret = scpsys_bus_protect_disable(data->bp_infracfg, SPM_MAX_BUS_PROT_DATA,
++					 infracfg, true);
++	if (ret < 0)
++		return ret;
++
+ 	ret = clk_enable_bulk(&domain->subsys_clks);
+ 	if (ret)
+ 		return ret;
+@@ -206,7 +221,8 @@ static int mtk_scpsys_power_on(struct power_domain *power_domain)
+ 		if (ret)
+ 			return ret;
+ 	}
+-	ret = scpsys_bus_protect_disable(data->bp_infracfg, SPM_MAX_BUS_PROT_DATA, infracfg);
++	ret = scpsys_bus_protect_disable(data->bp_infracfg, SPM_MAX_BUS_PROT_DATA,
++					 infracfg, false);
+ 	if (ret < 0)
+ 		return ret;
+ 
+@@ -243,7 +259,8 @@ static int mtk_scpsys_power_off(struct power_domain *power_domain)
+ 			return ret;
+ 	}
+ 
+-	ret = scpsys_bus_protect_enable(data->bp_infracfg, SPM_MAX_BUS_PROT_DATA, infracfg);
++	ret = scpsys_bus_protect_enable(data->bp_infracfg, SPM_MAX_BUS_PROT_DATA,
++					infracfg, false);
+ 	if (ret < 0)
+ 		return ret;
+ 
+@@ -260,6 +277,11 @@ static int mtk_scpsys_power_off(struct power_domain *power_domain)
+ 	if (ret)
+ 		return ret;
+ 
++	ret = scpsys_bus_protect_enable(data->bp_infracfg, SPM_MAX_BUS_PROT_DATA,
++					infracfg, true);
++	if (ret < 0)
++		return ret;
++
+ 	val |= PWR_ISO_BIT;
+ 	writel(val, ctl_addr);
+ 
+diff --git a/drivers/power/domain/mtk-power-domain.h b/drivers/power/domain/mtk-power-domain.h
+index 09f9fb3e5e9..ef2603bbdbc 100644
+--- a/drivers/power/domain/mtk-power-domain.h
++++ b/drivers/power/domain/mtk-power-domain.h
+@@ -72,6 +72,11 @@ struct mtk_scpsys_bus_prot_data {
+ 	u32 bus_prot_sta;
+ 	bool bus_prot_reg_update;
+ 	bool ignore_clr_ack;
++	/*
++	 * Release this protection before the subsys clocks are enabled and
++	 * re-apply it after they are disabled, instead of the other way round.
++	 */
++	bool subclk;
+ };
+ 
+ struct mtk_scp_domain_data {
+@@ -112,7 +117,7 @@ struct mtk_scpsys {
+ 	struct mtk_scp_domain *domains;
+ };
+ 
+-#define _BUS_PROT(_mask, _set, _clr, _sta_mask, _sta, _update, _ignore) { \
++#define _BUS_PROT(_mask, _set, _clr, _sta_mask, _sta, _update, _ignore, _subclk) { \
+ 	.bus_prot_mask = (_mask),				\
+ 	.bus_prot_set = (_set),					\
+ 	.bus_prot_clr = (_clr),					\
+@@ -120,19 +125,23 @@ struct mtk_scpsys {
+ 	.bus_prot_sta = (_sta),					\
+ 	.bus_prot_reg_update = (_update),			\
+ 	.ignore_clr_ack = (_ignore),				\
++	.subclk = (_subclk),					\
+ }
+ 
+ #define BUS_PROT_WR(_mask, _set, _clr, _sta)			\
+-	_BUS_PROT(_mask, _set, _clr, _mask, _sta, false, false)
++	_BUS_PROT(_mask, _set, _clr, _mask, _sta, false, false, false)
+ 
+ #define BUS_PROT_WR_IGN(_mask, _set, _clr, _sta)		\
+-	_BUS_PROT(_mask, _set, _clr, _mask, _sta, false, true)
++	_BUS_PROT(_mask, _set, _clr, _mask, _sta, false, true, false)
++
++#define BUS_PROT_WR_IGN_SUBCLK(_mask, _set, _clr, _sta)		\
++	_BUS_PROT(_mask, _set, _clr, _mask, _sta, false, true, true)
+ 
+ #define BUS_PROT_WR_STA_MASK(_mask, _sta_mask, _set, _clr, _sta) \
+-	_BUS_PROT(_mask, _set, _clr, _sta_mask, _sta, false, false)
++	_BUS_PROT(_mask, _set, _clr, _sta_mask, _sta, false, false, false)
+ 
+ #define BUS_PROT_WR_IGN_STA_MASK(_mask, _sta_mask, _set, _clr, _sta) \
+-	_BUS_PROT(_mask, _set, _clr, _sta_mask, _sta, false, true)
++	_BUS_PROT(_mask, _set, _clr, _sta_mask, _sta, false, true, false)
+ 
+ int mtk_scpsys_probe(struct udevice *dev);
+ int mtk_power_controller_probe(struct udevice *dev);
 
 -- 
 2.43.0
