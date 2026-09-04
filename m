@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F41DDC79F80
-	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 08:37:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C08C79F83
+	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 08:37:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AF36560BEC;
-	Fri,  4 Sep 2026 08:37:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E62CB81172;
+	Fri,  4 Sep 2026 08:37:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VT8_H7mih5IA; Fri,  4 Sep 2026 08:37:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 5B8BB60BD2
-Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788511057;
-	b=d2e5sBzk7iJ3ozo8L7ENX3Ae0g/bA5D7SOGGgAb4+8i5UT9cxmRM/1GO07bxRhTTlCzq
-	 B9P0wzbThxrpypXblzeN0mu9eceWPpNa/goX+7fttUJlFBamXWJu3cKYumdkOhVgOhoU9
-	 NkuA0C2DmXi+f8CobsfMNq/2W2Ea76QLpKbiisAA3Zw+D6sKkPd4/qGBHSc1k2YsaATYC
-	 AhPA6nRXbzNQlVo4PA09GXoN+V/6jbu888MkUTQiKdxukD/lqiUxmK3EgMrSLjAmtnHTV
-	 MQZg1XMjP9SOpSViYt6qas/9kEdm1RVgZiuX4wAnB3JQjWTub+oUuZIg5ypUE98+fFA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DJvbCguu_FtJ; Fri,  4 Sep 2026 08:37:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org E4AEA81173
+Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788511060;
+	b=HB4TyyAcVBMKyvjGHJAVmJS0Q+JuPodcMmCFkVhh9vQM4UiYkljqrhLSiY13fWRAbvIp
+	 B2zvUPw8VGM08N0BjyHkFsDFpnvfhOj6zrTwy/ARhu2oPxXV8VxokyxccxDqG7c+PCfPa
+	 QD3zKVqfEJ9Bd6mR+bR4Sy95xKmmbKGuoorwz05H4m6Ujw/0LBTUv4/M4fTHP/o6tRfRr
+	 EUupv71XH3WPyhcE9pM5D0Q3jrIYSs6A1ShCzm9GvHvhnNrK54Avsuj2fEzak+3d4iVCS
+	 cvihD9e9IqA44wnbXwr6giJaG0ak55Q63AUA5SqeqQMM21XhmuXvxXUUWAYxcsPhxfg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788511057;
+	c=relaxed/relaxed; t=1788511060;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -45,49 +45,49 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=e5VcqDr5pKeQlkmRcZjPpiIyH68psOKjpCO47hOTmZ0=;
-	b=NT18OOtY86BnrOJbnjkonj4nMf9Sp6bujmyMSlD8V+YnZhdmsek1zSbyj3LYzS0z3EK3
-	 V+1cTOuxMpewPOTSYvSHJ9ipbCSI+5h1SooaavvwsTi0TuugwmrGQL0swo1832vt4PPG4
-	 /bWal248aTVJgD1k03MoMjC7gMMsB0dFhLlDUo8Q2Et0B4fEWTZZ9Z8axDREMoUf8T1qG
-	 LmWXWYm/kYrUZqGa5n+1SkdcOv0QLw0oF7v6PqEmnUgjXecP+Rmkqs/isnEKj/eJ7WEUO
-	 MWAokg6Qv9uoCN06w6myM55IdlNSACaXNGzMPGTo+jtSQUNkdcGmGzmQesIb0Q+i2gg==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+	bh=vDheWDcFY1UOfZNDDR3Ro6TWoqNe0RMuul5g/vnPZv0=;
+	b=bjD0RwN/wCGvAym8dUqlyMWWofJHyMYfQJpb7W1Da2YHVZlHYfWxvH38vo7yeLCaoS79
+	 0b+TCxLHpC8I+Yk1xAxIlwRDTZi5Sc9K8P8AVR2xtLGHU5NPBPK37Rf/IXBTZ3/9bVuXP
+	 MIjSAq4iCdbIttjB8WpAL55SyOKqmDdF1fStTaSw8tLYcGu8CeTdSbJSMqLZudWvugFDB
+	 WK1fqEbExy4sfBIR3PLlQi4VFoU9Xhe1Vsy1tChl46AdfvFGXA8gJHSaXq3ZOpNxg+5xU
+	 8hK+x9erPw+DsbXtbLKfy3kIit+LgVDezQa+M9MDRnNJEFDpusqGbLHYkojPNm1baDg==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788511057;
-	bh=e5VcqDr5pKeQlkmRcZjPpiIyH68psOKjpCO47hOTmZ0=;
+	d=lists.u-boot-project.org; s=default; t=1788511060;
+	bh=vDheWDcFY1UOfZNDDR3Ro6TWoqNe0RMuul5g/vnPZv0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=QORsZUbdYE+WOU5W30TRImLx0y8Rj7oPv1R0h8jIStgFiHxMm1GXDthY0tBQ0uRPU
-	 hYCAP8XCqWTXo0G+jan8GIn2RjE+Clhw4nBA3SsnpkLhs3HLpIKeTfh0DhTHgr6M1l
-	 nfEAWuBFcGaEvPhsp7pJoHO7mhRYO/mPwQkMicWoiFV3O6M9KAP1JbjpfJawsCSJaV
-	 nZHebiJUERDo3RKnTwpyUNfJliTdPAIc/vxzMCfBRkuth8RYC3PZdavfFJM7rKhyvB
-	 hwR7GyVWFxAnJMy/+BykL4XjxXihj9GTm9LS+x5QWbXPafJvYZ6TD9jX9KJyslG3Wr
-	 IK8t4mTsAx03g==
+	b=pOKMfbl6Bp0TG9u7RNdNdXDVadZdYyRn9dHiJZMWJS2qA8S7vKvir6UKvlj0KnE6b
+	 RASVpO6Dqh/WbhDvJWvV+GvwR+rKhWRiMfLYACKmwgWFDWr/3ZqdNYitrPjo1Y2zc9
+	 vMfxIqrpgv2kst6Man4b9lqpV2xXOd7xlo5qygY0Z9xHGGenv6yJNUGtLFYA3OCk9A
+	 j9mxtmiIp4wSICqsP4+xtF03WAGGAaIYU22BwfVaacA7m6AKKFoiEPh09zbFaa0mpv
+	 gaYb45ZwaecPFTgz5xRa5+y4LCsPuFeYZtzf1MUeyEOnGHmFLegLpaMLWUQXbc9Ql8
+	 aalX0y8v4j++Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5B8BB60BD2;
-	Fri,  4 Sep 2026 08:37:37 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id AB73E3DA
+	by smtp1.osuosl.org (Postfix) with ESMTP id E4AEA81173;
+	Fri,  4 Sep 2026 08:37:39 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C6B873AF
  for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 917A540B3C
+ by smtp2.osuosl.org (Postfix) with ESMTP id AC4D140398
  for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ob_34LwBck6V for <u-boot@lists.u-boot-project.org>;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5aFXawWeA7t7 for <u-boot@lists.u-boot-project.org>;
  Fri,  4 Sep 2026 08:37:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org C38BD40ACB
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org BD8334031A
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2a01:111:f403:c20a::4"
 ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788511049;
- b=pEBOkcr/rTc/5hLldVd+/Ly/AR/hmQm4iAAvrHMuOsHkl2x6QqkMjUMCs0CKdl3xWBas
- xpwWcbNtZ1rj27wtHkqR2pAHGvLJ9BM79M/HAEPDFYWiZhWK9bTvq+lRctxehnk1ZsmFt
- 27xq4hZzbT1v3MFhrckmSpbfcg+XQm9wJrnFDWqmZH7p+/PPnTRuRRoWL8M/sI5Tx/YS5
- ZQtokK2k37LriZ6KXkm38dyH0ekbm5UUU2XnVGKtxReJPBHiMS+jUI2hK6jjG4iFODI5f
- OZVHIkyZrBq0lVrGnEY4gozycFAtzV1qMKNpocRohoBPK0Ze4urIImLytGnD8MCUbjQ==
+ b=ItAC5mEIpplIZrsyz1xdo5IZ5LlLuy8dukCJVkwonhxhkDOYl7t1UkTcCH69uUDQ7zNk
+ N3VX5/PO1wY6ThqSGGauNXBScnwSXY4dzvmd6poS8A4lzVav1o8APOet/m/V/GnFiMQNA
+ +CyEy6Q6eBXO5XxK+DGZcOetObKTP3lwV6/5ryRuMH3seS6WgQ1+uy6OZQgFjUyALFz8c
+ 5ewtSPp0fax5JHsV3q3c1Cq0KsmhaMIAqTSAWuI8Q/hMNVRcW/IPNeYlWWoc4a9aPkF4R
+ MU55ck8uYGnG4ssiHYKyusuK9zvANlBZrvSuwQYgmrHf6Xem8Q2OhoRHvO7dy4gRbTg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1788511049;
  h=Received-SPF:DKIM-Signature:Received:Received:
@@ -107,40 +107,40 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
  X-MS-Exchange-CrossTenant-FromEntityHeader:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=e5VcqDr5pKeQlkmRcZjPpiIyH68psOKjpCO47hOTmZ0=;
- b=tc+L6vr0Pf39hLo2el/jz5aFTYBhYASrzlIF+Wi8DTfQf5K4FbJhI1xrO5NgSe4k0q0Y
- /KmWIWVZfEQNDzd48WPvQy0pLmqHGUsz67B5m/vQNGQJCFt6EKBmAPspiuaDzcSkuLDpz
- 1QyMyyP2kSSGSFz6KfWOsxnYdhG63ln+R3DSGGVaIC5OsWrKPbO+2UX0rj4jjq2I0ea9e
- pdcxKD9TbYAgQ/mNiJoiLwUjqTO4uakZaC3HSNUOHzrzkuElAbAj/luTIpNRZraqZ+atC
- CB9Dz5zYU3CnIR1Yx82VQ3hgMKiNbuer+ajLs398t7HEJmVkvSASmo2RsDU1ZsY9MgQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ bh=vDheWDcFY1UOfZNDDR3Ro6TWoqNe0RMuul5g/vnPZv0=;
+ b=ZkQ34AatJF/3v72bghEH9pIM3FG9ulmD5pmtEKLFq7joCIWkIDnyWuou2eW6DC5Jedba
+ 7cttLVEgMSs2vt5JNlYtm9A3x3VxW2Y24bJ7fq+hxguvc8R2oRba1fyFDQoC4/DaD1rae
+ wMrWcM5SkOG5RAK/HEHEkSLpAVEewDpLDqiJ9iytVrb3+9GlmZndDCIrfJZJGYKJdavdy
+ LYZkhsqWOfH9wDaTR+VPTzxZgwJdLAC8XQLp3TaZx+XDrB60i6mqY+aus3PedidD1ry5n
+ mqj4GwvQLWD6Aask5EXbpAYRxKOg7zWGLDcaJv711jbkglrML4b83jzzadnRMfpKblg==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
  dmarc=none header.from=softathome.com; 
  dkim=pass header.d=softathome1.onmicrosoft.com
  header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=u3U7yJxZ; 
+ header.s=selector1-softathome1-onmicrosoft-com header.b=rgSP7jHk; 
  arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20a::4"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a01:111:f403:c20a::4;
  helo=pr0p264cu014.outbound.protection.outlook.com;
  envelope-from=philippe.reynes@softathome.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=none (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
  header.from=softathome.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=softathome1.onmicrosoft.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=softathome1.onmicrosoft.com
  header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=u3U7yJxZ
+ header.s=selector1-softathome1-onmicrosoft-com header.b=rgSP7jHk
 Received: from PR0P264CU014.outbound.protection.outlook.com
  (mail-francecentralazlp170120004.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::4])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C38BD40ACB
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BD8334031A
  for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:28 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uE9rAOrGK25tCo1QbKvX3u/fUkZjdrIUiqenR1gp7KSaD0RZ5LdeXzoZX5jkzXN5fjOGe9RWqMr2zdnYuCCOCurZZPcj8WgwY9PcAcwNU5+RxylyURJkMAIbWu4MzyUfQex1P52kdVsRaDQexRkCUpq8J2WUFJYHhJ9gU+45Yz5nPlc7zBj2+x5lwupZtTKkMAL4yzSqbP7XrdE8uwS21olzq+cvw+HhUcsV3TTux13XpZm5kNzLdrvd09tyeKHPT3cf50O/yMoivOIUgc8tVcprjoWvL6C8zcjBipYUeD8MyU/cL8iXOtwRRJYYPEeGZhChPAnkr+u8C0VycEKAgQ==
+ b=dgQ7psyuYNyLonTKWFztvjH6dReTJlv/nNoJDmYjLCi5TBEvcBPF4hrUVoultkeigzkkxGnNcVO2S/wjFO+KknZyGyYAvenPiPsIUl+5BLxhY2qfF1L7SBEp5aQudBfNWtD1We/0cONrkLMmZsN9F7RGKO0oMvpDwEL+D3GTd46wJzRBeVPzxxD8K3YQAN9ZBi5oS01UdWyoV0gqK994srCknXMjUrgX4BU8VPydPkBE06cYk2uu3a+O9kr1sAkwDJimgREi4gyREWBCM7PEJpF0gv4+XmCbpc80QEVhSNaiKEJCGncV88jEqwOSekqTa4JIOJYt4XHUxyI8JZwF1g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e5VcqDr5pKeQlkmRcZjPpiIyH68psOKjpCO47hOTmZ0=;
- b=RLSVFY62BBQS/luX2oH7ToxNq5rXAHCp8pjDboI2B5htemNrU4VRq7NjBycBSZ+W7yhGK7Kf1jZwa9NCWnPPqgbBCC3oPIclOfh8hXYcHJBjxMAtetxbgICmUw7+yPJQjMLXK9aabUuLRiQYkzhaaFxlMwi2T4ol8V9jGu3oSrppOC8XhnC7XozglqkdK3tFhbi2+RDFTYVQC5AXxebeU+QBwjZLUCMMwKpnexpasIHDzwdr11C49zMLNVUjyf8Ydc3PZDrpkYhI4SaAuXtgWuJi5ofWeSVV6ivnbI4uHhMChhZXyu2d5oiEkI7rGIHd3eB0EsNrrTMI6FOhDSW/vA==
+ bh=vDheWDcFY1UOfZNDDR3Ro6TWoqNe0RMuul5g/vnPZv0=;
+ b=QddyfJGCs4W3l02whqsE8a99gbCy4Z2o0/Jmh3iD+RMKTkhpXPGggmsclLgRL+Bh2SYc/0BgY6QRI1O86U18iMRXXkNC0B0VXiei5tsTeXeGiveEhMsNuyYLu+A63uQV/Uff2/vP0FyxA1YLXm48Tj5qjUr/rTHbN3AVINSYBmlpc5dIk1aD5KTe0sjJmKMse3CjLZEeMIJner9kDM9aK5fQqRDODMvyE3ZxbIdV2dM8UDCskMrfggamQmjw3LuMB6kD1Cwgn6HnYOs1SI8w4JM3qen6Jbr+JcLh0DvjkssqNS1sHy6Sd0qqhgh7/gWfgketqsmaFWzuR5Vm9t70GQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -148,17 +148,17 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e5VcqDr5pKeQlkmRcZjPpiIyH68psOKjpCO47hOTmZ0=;
- b=u3U7yJxZUAgvRI6VBT6R0pTRAItBZ4vGu9m0lDc/KFul/a3NM02dDAz62MEf3wErMSXZCfG6DJrvBSti0+w9ydxXwUerjP9lI78FbeQ5d7QSYkzycWCPmr/m0Z96yXID9CaV3yf4gJoHuhvMrWhtswiOgpxxCKUQjmBfERNMN5RSGfJzCV9/Gu17BbOuJiQZUL43yM/8+xAf0seaqgpVPjMINgpA4wmwHNs3AwZzvBYVwNTLSBeM2D7mO5EnGUBpzT1Faez84Svp8LR2b5y3sFZcqrhWYmVVjCUmyM4GZKEIP6MJ08SUy0CnzkJr16zSnF812+RSX5jU4Vo8MIx1yg==
-Received: from MR1P264CA0093.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:3f::21)
- by PATP264MB7194.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:58b::14) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=vDheWDcFY1UOfZNDDR3Ro6TWoqNe0RMuul5g/vnPZv0=;
+ b=rgSP7jHkpwgDr+eWFzfbvTxTxdZ4Fi4uRSLg00rgdKKwxMngOIW4m3se7rLDjuvdPgpzUOlSiQbg0TvLrdJsD2k1hZ4ha64qxJ4DNTjfUQWZPnhjmP1vewZ/EKl9AsL8+gBv0mcDv69teTtWqFTVIIuFBa0K3HadgCcVhRv8eMHc9/rUmRy17k5ZFDzsLlvpamEz5TjuD2WwH+c4SRwrvgoFXwuikn8aAVKVVhjzUYntXz5YsHLUdxq4syHkn/4nWbsugdrTkGRPlPl08cIy61d5Jk9M6L0G3yF+Q1pHb1eiLu57WOSucBbM1VtJZ88NlLK9oWbuVqHJzoH0xUgEVg==
+Received: from PR3PR09CA0014.eurprd09.prod.outlook.com (2603:10a6:102:b7::19)
+ by PATP264MB7540.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:58d::20)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Fri, 4 Sep
  2026 08:37:23 +0000
-Received: from MR1PEPF00000D58.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:3f:cafe::45) by MR1P264CA0093.outlook.office365.com
- (2603:10a6:501:3f::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.13 via Frontend Transport; Fri, 4
+Received: from PA2PEPF00019230.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:b7:cafe::4) by PR3PR09CA0014.outlook.office365.com
+ (2603:10a6:102:b7::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.12 via Frontend Transport; Fri, 4
  Sep 2026 08:37:23 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
@@ -168,21 +168,22 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D58.mail.protection.outlook.com (10.167.241.5) with Microsoft
+ PA2PEPF00019230.mail.protection.outlook.com (10.167.242.36) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.8
  via Frontend Transport; Fri, 4 Sep 2026 08:37:23 +0000
 Received: from sah1lpt726.home (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id F069A20061;
- Fri,  4 Sep 2026 10:37:22 +0200 (CEST)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 14DF8203AA;
+ Fri,  4 Sep 2026 10:37:23 +0200 (CEST)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com, simon.glass@canonical.com
 Cc: u-boot@lists.u-boot-project.org,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v10 13/15] tools: preload_check_sign: add support of ecdsa
-Date: Fri,  4 Sep 2026 10:37:17 +0200
-Message-ID: <20260904083719.53132-14-philippe.reynes@softathome.com>
+Subject: [PATCH v10 14/15] test: py: vboot: prepare test for global signature
+ with ecdsa
+Date: Fri,  4 Sep 2026 10:37:18 +0200
+Message-ID: <20260904083719.53132-15-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260904083719.53132-1-philippe.reynes@softathome.com>
 References: <20260904083719.53132-1-philippe.reynes@softathome.com>
@@ -190,30 +191,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D58:EE_|PATP264MB7194:EE_
+X-MS-TrafficTypeDiagnostic: PA2PEPF00019230:EE_|PATP264MB7540:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 1073d179-11f9-4c51-db01-08df0a5fbdd2
+X-MS-Office365-Filtering-Correlation-Id: b05b5074-c787-422a-b9b6-08df0a5fbdd1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|36860700016|1800799024|82310400026|6133799003|56012099006|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: lwvnUN5LwKC+cyTGefpFyCGHLZ63ijsyYVlfBYCx3lSxriL56T7Pj7qwFjLYVfjf/Q80acUPIzXHe1yJcH6jtsalvRdRGJKorbk1mUwn3aRWAt6yOJ+m6RKP/SfEq4DBrhWXRjwSa3Bq/aBZWjJMsiwkwA+YT8VKMwgiX79O46DzzbZotIouCpL1Ppz9DBHp5m+EtxEZ6i/tYh1p++EGvN7A1raxlrdelXgB+vfqxWnlCIZljLuGmcNXT2pq8BGfDQsMmqpXq8FNnLfCgkWvCVong9rHTkBGTzsOPJ4QCDZ+dq50RO1rpApgVNR8Lb4xgZp4PEP/eZJBsDzAh3fBkAgkk8AN0I1J4Rou267DWGYD9woEFHKAhs1DYDuY4qjmN/i+Fr4JEt9BxJ4Sbn0w9fxQAGFyM0R6nawr/LPZY3tY/MVbVjsMNVbPt3BZGeBlOin7rDGmeA96t60MdkeuROdj90fHBVf5A6Ky9Q8LAm1TnJvu+HLJRkIPBs3x3zOmSfcyaI2lW4KT62ZiaZlsfkGFbT+NZztAtYbLn2xEgvHNkcfHRYXIQj/AX3Y55FZ4I6jKlgm9wc+Jbptjg/wvBOLME6k/B6OjzLGwyQUne3jYheWJVX9UMmbI8ECre8CBvVt/i57dt/5xFSZMuRmJG/1uBMQBEJl8lu8fhUf16Ma0RzdoSEXENEex0sHfQez6rfanB2dlgjIUZlkCiRZvWg==
+ ARA:13230040|82310400026|1800799024|23010399003|376014|36860700016|18002099003|22082099003|56012099006|10067099003;
+X-Microsoft-Antispam-Message-Info: T+GhaKxlvn/NZVLWtZKUoA74RazH2bSr2rcChJuUSD5woHWBWQSe7VasSXScUKCL9R1j0cgcFcLmkxwYjmwpTkPuOF4AUTXpu3TicL4bqIyW1cvX+vzFnzheae8CxVXQUG/SCZGcZ8KVRnUl1WYu39jsAN07evB0gW7ZyPV1chTWddGeucfmsc+lNdMMG8GD4ciDVmvxGjgLrN2ibihc2pVcD3oq6uX7zV4eoXy6bMZSxUVNqf09gcw/qpgq5BEO04ynLCgL4TjF856NtNJ6qzgwoaREU5HUdCjqx1aGIbBecp5fsxnMrOm5jKTeh07s1dKgd5YBYMgzN1H+pqb6+2AurIPz8wYhbYBCnh3QKZ3DoNkJMubg7Oab/xujGS2NejQSW7VV+XeZNavjemdau4kVKLEpHMnyfORsXASDIQPkGhQr67asIccr+bbugrPUBfcgX1ASxlbnrwa+CGoWzqtlaWrLDtPFV/g94xJs1J9b0xBBXOFRm8pn5DqNQ9swIB9jT5rvGPz93Skmc2K/N2aq7dRhj565phmwsTzIHEv6zZmNvDd0bUQjX9zOURLnfNzjipphDW5GNMi7ohcfYH/zlhogf3UXtqf1GEiOtOkz1zdRhxvNlhDDNHhfV2cfFMe7iNT7VnOrIJ2KIoSYNLs1bgMz6f0uOg4fkVtSYdDzlONXBUG1FbPe/ZwiVgHbqzYzIvJU05TFDCWWq2aIRA==
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(36860700016)(1800799024)(82310400026)(6133799003)(56012099006)(10067099003)(18002099003)(22082099003);
+ SFS:(13230040)(82310400026)(1800799024)(23010399003)(376014)(36860700016)(18002099003)(22082099003)(56012099006)(10067099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: QI3dAaWTsZq4w9IKaBxUZfG329YJVKSP6mLkYhl8QfG7Q1j3nWiEMBweekEQZEapGZ2CYKaXb1sJ5qXEFI6sWVHOU0XJmArPgchFSqKKQ8gk6eQd99Oue3Px7JOyMr7EUa/tnE9y+3ujZ1YXSf+0/9CUqQN7F8NwWVCZu1CdA3r5MjPBJZDBBr5d3ncCk9WfsVw0ME5V0KFroZB7ktindjTHCu4RsWbxmGazOg4RIrNZWWhczZQKos2HWyqjxAwhQFZluQTdtTcyNiwpQBMe7WF0BQOTDd3yg6vlGSNQLXa45I7bNcRwW3UwH388hi4GenKPFgxc/ih3CCTfj88GPm8/o64f4vOs8ZTvIlj+svJtAeDc7iy6xSsMSFi7MQWB7PUMKFh679aCwexuX5eZ2EbFURRt5Zu8E+hjA5/fDzOzAPUZDD8c8OQmir2Ai8/W
+X-MS-Exchange-AntiSpam-MessageData-0: jDwqfm/7B5KCR19tIkGanb8yDKIF3zLEVh11OGjnBBw/x/riWfStlPrLev4S0zDian2cVTIIrA5cNfC4pih0uprM6lMfB06Sg12ojlSsb93DYcdSuB+gHwgXquocMjOZO8E+0SXR7t39nDqxpKe1SpqHVG3hd2cOFKRwSVvmSrYliKMEYmdouma+6kbRP+s9AQwQ/uwDXJVAP4MoM80/Hq7AStnjproj4hr2FU3GyG0poejcWflJgd2r2URulzwL6SffkRbWy1VZdrr2yo+sfMXndw5v5nj0EY1inkTlC5Uc/KN6tbWV8O8xxVwV0YXw6oP4ZDLWffjSXzclAxhyPdAPxuGv3fAoli/sFcGV4/W8Huz26TawBLzYxHCL84NAyIP9Uq2U40vgoTSQQgr/1B1k+FFpRdFCuB3nuPvY60twe7vkJSmMSf0ancAgV2yU
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2026 08:37:23.2117 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1073d179-11f9-4c51-db01-08df0a5fbdd2
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2026 08:37:23.2202 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b05b5074-c787-422a-b9b6-08df0a5fbdd1
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D58.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019230.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PATP264MB7194
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PATP264MB7540
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -227,9 +228,9 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-right now, the tool preload_check_sign may only
-checks an image with a pre-load header with rsa.
-We add the support of pre-load header with ecdsa.
+The vboot tests only consider rsa for test with global signature.
+To prepare the integration of test with ecdsa test, the signature
+algo is now explicit.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
@@ -238,10 +239,9 @@ Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 v3:
 - initial version
 v4:
-- free key to avoid mem leak
-- fix error management (set ret before goto out)
+- no change
 v5:
-- add include ec.h, evp.h, err.h and image.h
+- no change
 v6:
 - no change
 v7:
@@ -253,60 +253,86 @@ v9:
 v10:
 - no change
 
- tools/preload_check_sign.c | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+ test/py/tests/test_vboot.py                          | 12 ++++++------
+ ...binman-pss.dts => sandbox-binman-rsa2048-pss.dts} |  0
+ ...sandbox-binman.dts => sandbox-binman-rsa2048.dts} |  0
+ ...pss.dts => sandbox-u-boot-global-rsa2048-pss.dts} |  0
+ ...-global.dts => sandbox-u-boot-global-rsa2048.dts} |  0
+ 5 files changed, 6 insertions(+), 6 deletions(-)
+ rename test/py/tests/vboot/{sandbox-binman-pss.dts => sandbox-binman-rsa2048-pss.dts} (100%)
+ rename test/py/tests/vboot/{sandbox-binman.dts => sandbox-binman-rsa2048.dts} (100%)
+ rename test/py/tests/vboot/{sandbox-u-boot-global-pss.dts => sandbox-u-boot-global-rsa2048-pss.dts} (100%)
+ rename test/py/tests/vboot/{sandbox-u-boot-global.dts => sandbox-u-boot-global-rsa2048.dts} (100%)
 
-diff --git a/tools/preload_check_sign.c b/tools/preload_check_sign.c
-index ebead459273..d94f0509e74 100644
---- a/tools/preload_check_sign.c
-+++ b/tools/preload_check_sign.c
-@@ -8,9 +8,13 @@
-  * complete file. The tool preload_check_sign allows to verify and authenticate
-  * a file starting with a preload header.
-  */
-+
-+#define OPENSSL_API_COMPAT 0x10101000L
-+
- #include <stdio.h>
- #include <unistd.h>
- #include <openssl/pem.h>
-+#include <openssl/ec.h>
- #include <openssl/evp.h>
- #include <openssl/err.h>
- #include <image.h>
-@@ -144,6 +148,32 @@ int main(int argc, char **argv)
- 	info.sig_info.key      = info.key;
- 	info.sig_info.keylen   = info.key_len;
+diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+index 89876ff030a..e3996486ab6 100644
+--- a/test/py/tests/test_vboot.py
++++ b/test/py/tests/test_vboot.py
+@@ -536,7 +536,7 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+                           dtb)
+         run_bootm(sha_algo, 'multi required key', '', False)
  
-+	/* For ecdsa key, we have to update some values */
-+	if (EVP_PKEY_id(pkey) == EVP_PKEY_EC) {
-+		EC_KEY *ecdsa_key;
-+		const EC_GROUP *group;
-+
-+		ecdsa_key = EVP_PKEY_get1_EC_KEY(pkey);
-+		if (!ecdsa_key) {
-+			fprintf(stderr, "Can not extract ECDSA key\n");
-+			ret = EXIT_FAILURE;
-+			goto out;
-+		}
-+
-+		group = EC_KEY_get0_group(ecdsa_key);
-+		if (!group) {
-+			fprintf(stderr, "Can not extract ECDSA group\n");
-+			EC_KEY_free(ecdsa_key);
-+			ret = EXIT_FAILURE;
-+			goto out;
-+		}
-+
-+		info.sig_info.keyfile  = keyfile;
-+		info.sig_size          = (EC_GROUP_order_bits(group) + 7) / 8 * 2;
-+
-+		EC_KEY_free(ecdsa_key);
-+	}
-+
- 	/* Check the signature */
- 	image_pre_load_sig_set_info(&info);
- 	ret = image_pre_load_sig((ulong)buffer);
+-    def test_global_sign(sha_algo, padding, sign_options):
++    def test_global_sign(sha_algo, sig_algo, padding, sign_options):
+         """Test global image signature with the given hash algorithm and padding.
+ 
+         Args:
+@@ -545,14 +545,14 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+                     rsa signature algorithm.
+         """
+ 
+-        dtb = '%ssandbox-u-boot-global%s.dtb' % (tmpdir, padding)
++        dtb = '%ssandbox-u-boot-global%s%s.dtb' % (tmpdir, sig_algo, padding)
+         ubman.config.dtb = dtb
+ 
+         # Compile our device tree files for kernel and U-Boot. These are
+         # regenerated here since mkimage will modify them (by adding a
+         # public key) below.
+         dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, dtb)
+-        dtc_options('sandbox-u-boot-global%s.dts' % padding, '-p 1024')
++        dtc_options('sandbox-u-boot-global%s%s.dts' % (sig_algo, padding), '-p 1024')
+ 
+         # Build the FIT with dev key (keys NOT required). This adds the
+         # signature into sandbox-u-boot.dtb, NOT marked 'required'.
+@@ -561,11 +561,11 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+ 
+         # Build the dtb for binman that define the pre-load header
+         # with the global sigature.
+-        dtc('sandbox-binman%s.dts' % padding, ubman, dtc_args, datadir, tmpdir, dtb)
++        dtc('sandbox-binman%s%s.dts' % (sig_algo, padding), ubman, dtc_args, datadir, tmpdir, dtb)
+ 
+         # Run binman to create the final image with the not signed fit
+         # and the pre-load header that contains the global signature.
+-        run_binman('sandbox-binman%s.dtb' % padding)
++        run_binman('sandbox-binman%s%s.dtb' % (sig_algo, padding))
+ 
+         # Check that the signature is correctly verified by u-boot
+         run_bootm(sha_algo, 'global image signature',
+@@ -615,7 +615,7 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+     try:
+         ubman.config.dtb = dtb
+         if global_sign:
+-            test_global_sign(sha_algo, padding, sign_options)
++            test_global_sign(sha_algo, sig_algo, padding, sign_options)
+         elif required:
+             test_required_key(sha_algo, sig_algo, padding, sign_options)
+         else:
+diff --git a/test/py/tests/vboot/sandbox-binman-pss.dts b/test/py/tests/vboot/sandbox-binman-rsa2048-pss.dts
+similarity index 100%
+rename from test/py/tests/vboot/sandbox-binman-pss.dts
+rename to test/py/tests/vboot/sandbox-binman-rsa2048-pss.dts
+diff --git a/test/py/tests/vboot/sandbox-binman.dts b/test/py/tests/vboot/sandbox-binman-rsa2048.dts
+similarity index 100%
+rename from test/py/tests/vboot/sandbox-binman.dts
+rename to test/py/tests/vboot/sandbox-binman-rsa2048.dts
+diff --git a/test/py/tests/vboot/sandbox-u-boot-global-pss.dts b/test/py/tests/vboot/sandbox-u-boot-global-rsa2048-pss.dts
+similarity index 100%
+rename from test/py/tests/vboot/sandbox-u-boot-global-pss.dts
+rename to test/py/tests/vboot/sandbox-u-boot-global-rsa2048-pss.dts
+diff --git a/test/py/tests/vboot/sandbox-u-boot-global.dts b/test/py/tests/vboot/sandbox-u-boot-global-rsa2048.dts
+similarity index 100%
+rename from test/py/tests/vboot/sandbox-u-boot-global.dts
+rename to test/py/tests/vboot/sandbox-u-boot-global-rsa2048.dts
 -- 
 2.43.0
 
