@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E2DDC79F83
-	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 07:57:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E38EC79F80
+	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 08:02:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 26B4640B37;
-	Fri,  4 Sep 2026 07:57:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BCC5240B59;
+	Fri,  4 Sep 2026 08:02:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id adRfnrnH8I4K; Fri,  4 Sep 2026 07:57:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 4DF6640B38
+ id CEOhG625Wwsc; Fri,  4 Sep 2026 08:02:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 654B140A54
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788508641;
-	b=eH1IAldTtQaDIBQyiskM7AGRRJoslLHXyR9ZwAYgRCJ0xxeJHjO3KJytI1rAYSJL4sJ+
-	 HJGUtMhI8FPKWDqwUt73cOcgGIL+sQ8NQkoocjfSxvi9iqTEnVzV+uMzvRzB/Qdx4K8jj
-	 FiQ5duu3HgFLIktBs8J4Sz6KExBfGWECzxrbFTA+S7N07Vjuyfljq7Y07wgRZgLSb7mWw
-	 5DcPoAndGhTO9wtQPe6o/FGrQKmf3QAKdW8vLmmLU5kLWuIEgSbfARfVJRred+bnWrpbW
-	 P7XV8tDIAwznWDLvPXSH9Gel4gSXW4DljqR9CiH1FVKERl7+6XQnqgQKf3MjNN/QBwg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788508920;
+	b=Qy9C8siBxIUG9R/mcdX4SNqO5cH1tQaopv0Btbr4+6B1Sy4qCeAXROowlN7WwLdQxtlw
+	 178/7FzzW16IpaIe2niW/oCSpG6IRFrirfFm657cVxPys1+y5qWnE2g4t2Mi7coebNTRt
+	 YVuHem7/N9ikpnFTS0olX7oRbbY1+Uer9XpLkGW16MWMRzrZTVzHsc4ZC7uvuXff06s4t
+	 WpsLYjRxq4BIE5wB3gYl8kE+8mgmlcEIc8VP9E0CPEbKjecIHH/xIYir9fbFMCnxua5jq
+	 bUf2S1a4qwMEfZVOs2VRHG2qOGcR6aS+3fO+olhSFIsZj8/1sF7ezsbNz8a01pW2zhg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788508641;
+	c=relaxed/relaxed; t=1788508920;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,138 +33,136 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Reply-To:Errors-To;
-	bh=cjx5Xx2RJJV2wpJVmHrI/RbkvOjtaciMhPU4xU3E+oU=;
-	b=JLkcBMmfybp4VHdFyw3EYSiKkmQwxXxx+YRcRnT17RKRxdznIQkCJfeVBQPiQ7MLiHDT
-	 Ws1wFptI89yig237/fMCBRfsOjVF0KCtUBozGlf2itIuzMko7tvZrQeieAEcS4uF3AVaz
-	 zVqc6lKRzsf4dIM3+ZmQPiZs8BtcMr3YIxBA2hymedBc2wNSTjTBhwMgpkqpCUhq+mMoQ
-	 Dz2ywSVngxj9f9ErrAMNVsnt5cSmQ3vBObl6xQpl1UKGPhUb+6b/Lam+HN2Y0wXdx6t/0
-	 mWgPzjI6OamTdcH3iGS+6hC1PhbhNWkGhX8lnLudWR+iCWDRw31SE75eAGEPQQo7mSQ==
+	bh=h/YMZwgbGNahw/cgN6jHApv9SpDQMWrmVhba03iQBOU=;
+	b=kOWbNQ+8dt94JFDBN6AuomEUE357SL2f0vzx5adqlZ2BOlHSxEYYr5hBLGiy10CDJR83
+	 Vl2cbrVtDZki39I9XF4V0oAAYyahn8kek0NtGVCqEqFes8H9uESDVADMscM3knzuic3km
+	 s8C2OtMTEWwUY9NOJ5ezY61D+fioiGrVqA9qyVTCM/w3yI5i+ruNO/LjobzHAMIBgL+zD
+	 XrJeIIIGJ8wBBQbQoh1D1k8AvPW0m9zbh7D1StKA2wyZpCA7J5EeZrG+V2xfG9G4TA9cp
+	 u0sSN7J7J/O62La7sff1Po5Hkz2QZHGHvXALWEm7Z4yMaigfEXgDAL6kxmRYoigCb8Q==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788508641;
-	bh=cjx5Xx2RJJV2wpJVmHrI/RbkvOjtaciMhPU4xU3E+oU=;
+	d=lists.u-boot-project.org; s=default; t=1788508920;
+	bh=h/YMZwgbGNahw/cgN6jHApv9SpDQMWrmVhba03iQBOU=;
 	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=ncO2zOLfnyDEq5kNsIfq6jkMMNvDmLDpfiU0S8KWOVN7q5KQF16LCTL2VwdpN0Gxq
-	 Sp4wv5FIw6+OdTlK9IhoD35O3QEhmysF9iAoA8ipl3x55xhkK8Ues5lEkkOlWbExKQ
-	 Nlejlt1UfeYJoof+3Djnb0UAY+Pqg7tJLX+EFuL8A/vVLfQayjRZ0Gecr6xfRDfTK/
-	 iipHrlgwwsij1WN1h2QhPBYhxP2RUKzwKJEbZplRlIbHq44G2kIFZTePiDJKym/kq/
-	 4xGwIh1fRqQPrD5KbLp3ikdEjL0bKuoa4nLj505c84S/HUJou0WBAOGS0Ro2i2UGhE
-	 22EIZYq2rdA8Q==
+	b=zhaPClEPc0N4yN5/cKJHAIJdPvJ+2GFr9nOCPzccQ6vtrkLrm5CnCz1BPXvkb8lwP
+	 44bzaXmY9isIj04EutCgCTE5sVTYa6lLsmJMyr6PpyGwWucVxdnFopQK71b5GX1sNW
+	 AUjgXqRN3m4pnhLdbhV/y3zZjR+9lFGj9dsSM3WyOzz9ZqvJBBtsooBn9YbYmQvIGj
+	 CfvW6ESvXJAChVxxc4q0rrUXJJ0hDWCHCMspdfKUtN2Ep2a+JmP6h8hhxomjtPKMUb
+	 Ik2Iv+iaS4A+m+QklQAyhTKIIays1DagP4d6JjLPA377ZXZX3Zj4pe6RYCBqC09MFP
+	 I1yxkbPAwkVMw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4DF6640B38;
-	Fri,  4 Sep 2026 07:57:21 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id DECD3363
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 07:57:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 654B140A54;
+	Fri,  4 Sep 2026 08:02:00 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5EC76363
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:01:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C49B481140
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 07:57:19 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 452BF4013E
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:01:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VQTyDzV2_eqf for <u-boot@lists.u-boot-project.org>;
- Fri,  4 Sep 2026 07:57:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 7D99F810DD
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788508639;
- b=Lw1+AVzZjxMVaagOWafKXBOY2DefFZduDI9qq4nYS39YUPUXqNFqPcnvEiDkPc0kpMkG
- FXKsGBCfwSKNPsL1K94Xur8S/By8ncZHPt57TB2IKLKJKvAxTUnPZ8lIjmvAJgRuWg8NP
- mcoinNyBF+3lzHhmROmmFad2jxQ3Myi8cHVL4tsSB4VCifpvkflzuXNkGqjqwJWNCKrGA
- +UVc978+9t5446jTK+R6rxbcZ9WX+z7ICUu8iCKAu0EP9Ocm1FUZpbvXuoli/mj3sN14i
- +gx1HNm+E2k92D7Y6CBz6MFZUmoYAekmWERYem2sfb+zlmd9aFtcrDNik4hp5o7I5iw==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YKAdy5P-Fidy for <u-boot@lists.u-boot-project.org>;
+ Fri,  4 Sep 2026 08:01:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 1B0DC40080
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::432"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788508918;
+ b=d3/DJnv7Cc46ooKRB3CHdZ/360G05xAgKdSu3dnP3A5PjI1epScQ3UOFDCyJp34vr9m2
+ W0PGh1n/Okt+ZXN8UX5Scren/ET2mD7mtHjDnGXdHo0cm4J3CO/ECRQi7dk0SeIOP32Rv
+ 19FsZuFX7pWHHHCRyt+4zC2lRDLl/AKVK7WJ8htCjOJ+P9eb6wkKeXbwKQtIpvZGr8Be8
+ k5xkAvrD0oy8hNVCBTKoRAnn96x8tZoSDKfjY/YUN2vQiuIGELTSWtGdHn2HitQnY4N5k
+ lm6tBuXNWd7CHwuuWXzruhM8AwtdDGnDSC3MnZJL7MFeh1cJs1FrDBk58AfxAEVqY5w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788508639;
+ c=relaxed/relaxed; t=1788508918;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Message-ID:Date:MIME-Version:User-Agent:From:Reply-To:Subject:To:Cc:
  References:Content-Language:Autocrypt:Organization:In-Reply-To:
  Content-Type:Content-Transfer-Encoding;
- bh=cjx5Xx2RJJV2wpJVmHrI/RbkvOjtaciMhPU4xU3E+oU=;
- b=NhwM+2EjrNIoT/EfrWvGwZ0l+SEksbLps5gBLS921L8NvGcSSzGJ+plQcOxZueLVyMaV
- oTDPLcrKyKZKINmjN1xzGTCDSeWfHBlvqKHYTzJpFhQ830tN20SdfqYy6lbIcwbVQyTb+
- jM9Y876qUs9CEz/ZbKbo8DeAbXbCagnyZu+wwJ2MnbA/VOHckVLKFYbAds+CTR3lshjEz
- mgwSURZg2Yy7K8+KohREGkWXH3gqOV7UzYUNQtmNZ1rpGXf1gEkP1kCDF2ceEljsXk+4/
- 8EREF7WYvZFAKOoY0br0OILYj0ynDHQ+X7KKLwXn4eJtg4ntRELFLr6MUJcsaSpuo8A==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=h/YMZwgbGNahw/cgN6jHApv9SpDQMWrmVhba03iQBOU=;
+ b=rak/IxWkaZKdAioyuXJzr4pAJSekiKEa+P6RQoEUL+QoRFa9z4q7CzcXL5adPS2eN5/s
+ KH8/OTs8LeMZKr0eyj9RZQCnZM40XJa1HuiAw2ZtXDI4Km3ka/sBE9sbZ1/nGaVUmrCu5
+ Malcl4p6L5fF4+U1jsL0CYbrNw53oAtcEJooVAB0mANEl/+TIJps7Zudf2GXQm9rNHIPk
+ lV/ox6mB6ZptrhTyQq7JgEf+xjqAba+9iyvYvMNBN1ODXKI27gwQcGAsGM78DtUk2uepG
+ Oy5FTkvZT1mvvbAqwb/LQudldu/WYRYWMJufk21W+WPFnpu9rlU3NXEHznDxj36JfnQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=linaro.org; 
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=TIjFRjgh; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::42b"
+ header.s=google header.b=YdCUReeL; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::432"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42b; helo=mail-wr1-x42b.google.com;
+ client-ip=2a00:1450:4864:20::432; helo=mail-wr1-x432.google.com;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=TIjFRjgh
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7D99F810DD
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 07:57:17 +0000 (UTC)
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-4843f205a5bso430379f8f.1
- for <u-boot@lists.u-boot-project.org>; Fri, 04 Sep 2026 00:57:17 -0700 (PDT)
+ header.s=google header.b=YdCUReeL
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1B0DC40080
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:01:57 +0000 (UTC)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-48436216a98so439515f8f.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 04 Sep 2026 01:01:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1788508636; x=1789113436;
+ d=linaro.org; s=google; t=1788508916; x=1789113716;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=cjx5Xx2RJJV2wpJVmHrI/RbkvOjtaciMhPU4xU3E+oU=;
- b=TIjFRjghbZncCG3Xo3EioLK5eEp3PQa1B4I2f8RGW24Xp1K2+pk6iYCp8E3idTlRrO
- UCZPuPfLwCJKb0tsOPUfX3rZgaCrxgW6wR5Bfv4AH6vpik0K0f4w0LT7oHtY68jQmYQZ
- raA0h5CcwLLOq4NmtBJbUaoZ+NTgt2adraCgrveoGgvi2SAKG4MgUGr8525JLNOcPd83
- XBQzekH8cgtrvvnkOkuhOCDmycdvmlCULIlp28E5cenJrda1BG57QSuQ5uoWQj2qgV66
- EaoygrI14lyalALCKK/5Hdqc2trOd1+b6qq2M3WpwnSl0svmovv5fcP/6yvgQdq5F5LK
- 5uNw==
+ bh=h/YMZwgbGNahw/cgN6jHApv9SpDQMWrmVhba03iQBOU=;
+ b=YdCUReeL2eDPonB0Kze+TUw3bEGI1EITd8r7jrAi3PSHfXhwA8eAU11DqbC45ZPh+v
+ RiXOIvnPdwdCj6V5+H0AN0QWsBUk0DF7+ea7HZFYA8bq/RVDMIB4tbXQ/M7LkxYtHss4
+ Z6HfF1lVl6DyhW3IiN57bNP87Kkd/q07ep+/hU6Lrs2MOx3NT2BQ5wfQEkvKhUV8t7C0
+ g42+652rh7demISQoUBrBG/+gOPTPsdD8pEaMqjbHre/DQw2IWytdnpragX13Tf14faK
+ Mx/485wrhuRQJZrsYhr/e+c6n1gH0yBXWpXvl7TC9mJ97wJ+1+DGgBGzPq3jnOgc0L10
+ 84XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788508636; x=1789113436;
+ d=1e100.net; s=20251104; t=1788508916; x=1789113716;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=cjx5Xx2RJJV2wpJVmHrI/RbkvOjtaciMhPU4xU3E+oU=;
- b=iaqqVPLvOOjmp4T9+RNHg3ksX5ZCPHwr50Z5fQdFnY0J8SSzoPHT5q7A37HqQg+xYs
- fOlXwdMqD+/D5Fp7AdIEXl+l1Vbu00fM1iEVtNHNgh2dt8f4N6YDqMyRsXPKOa8ZXQeD
- Yp7SH7qgEeLcScb9BpV5vId6nq7qM8YRqQGZx5AMsvJwX5Gs9khFgi6vaSD1hv5g0Gey
- 7A0glK0jY2evcunjXvqBDhE43V85KG6t1Rh6bNQ4JX5VbjZN9tZ7VNv990n+IRCVt5Yi
- t1/NCHnb9HhsZdXqtVtlAg2LE7Mhr+Sms8vDP8Sjfueir1OuvRlh59o90Zbb6xlLJjgE
- ehgQ==
+ bh=h/YMZwgbGNahw/cgN6jHApv9SpDQMWrmVhba03iQBOU=;
+ b=fCoZiaqbOQcPv5W6HUiN4GhOAc5L7P7M7RbN/ee+AlekwlaL3okbcEueldhvSvcZyR
+ nCsD0Hi3ljTtT8QqoOWuVvCVUcYphY4UhrrL1rmm89/hO5dEcwhC/hxJzQGXHBYAaiKk
+ 45/+fp/IK8K/aR2PnMNtydt8xnBMBLI58hfCQuQzsworsyIBCO6hdbR+q3Hm9EILBsUe
+ KdHZKWDZHgvi3xrhLjIfRM3ZqwjZ/FeA239aRu+qbUoTgfCCXW+nbug+8orhDjvzJOSu
+ rX4TcRiorO/NtQoNa0JdNJYju03GrQSAir7FQgQ7LVHbnWJIjex5Ia0UX5R0RmRPxZGg
+ z2Uw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxNLOuSlgMxgK/ibXRPHbz9FhLwd8/2+hH/MTIOGZW+IfBmIyu4PR5u3MU64PpJJ6ZA7GyGrYI=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kCZjAkhOfMGUwOad5r48HKKTm4e+k5ImMecrHVSubE8YrxYmT8
- 18orE2kUXZHxMcyC/dkQ1n27ZvkpRbnr3jHnZCMmgclTooJ7lzA4xJKpoOPgTwIDCb2HkamqBh2
- H3tcs3/U=
-X-Gm-Gg: AYBFou1xWHSam9RbfqKzCUpbyYjerFAkCbKdZqUcLwjttw7RGMJ5buQuKjOW1Toi4vX
- PPahmreKE3RIrndIYtTB61KpijoEjR3yUWCfYL8WSI63ysXrVko/DL3olXylJfTL/mXvMPqtnM5
- VIWuLWoxofm+QcKLiYA1PGdN54TxsytuEpXEYFuspW6AX4JTV8658Ytl1hlPLPycKr8u4EO3RIF
- FLtOzM6OmLHQqPEXpFtQBOXRtS7BQpHV9KdCqh50WIu+wHU7e0yvnFgNbIiTcAYqKYpBo46CdqR
- Zl87m4WW1dOTl0d2TGlngh8/eeC1OidTXFiKBkgbnnaDxbxNUAlehvd7u58ZmeviPPGMfpJtY4l
- r5JLkc/dy5JnnVhkdAPt4/g/gABBS9Q6ZlqBsvEe+dw2upYWoM+avdVM98X+yNaZNsChXZkhawx
- zzMZfvnUVii+NFtW5yKmS4M3hoM9U5NE9TuPc6EP8ioE2vHo54QJFoRUbDE+kNo3xB/a+vfIY5f
- dwj2TM6I66v4tq2UbQ3c513Myb2TQnscyyrQb2jtF8=
-X-Received: by 2002:a05:6000:230c:b0:485:8a46:b3cc with SMTP id
- ffacd0b85a97d-4858a46b4fcmr2340611f8f.52.1788508635761; 
- Fri, 04 Sep 2026 00:57:15 -0700 (PDT)
+ AKwUvBxPHBullGBkyfVwZ6gGX0IX8kKUdeO8w1T/bJT3VDpoXG6hmJstITC9w0PgNnTaqi7LVmHKQ6M=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mKzyuABozVqF6XttvvEjAoG+7ZtDGGtqsWcKhptDl9swUFDZr/
+ 7QTcShJKKXGskHjgcDQwIUrxX1Hy2pm5M7ex03AKvuAlQvigv9gxnCGmm2eFMKZqoTs=
+X-Gm-Gg: AYBFou3CLPvZiLKlsoHrlC62b6Xy5djqe8W9w2C27UZzQXrY2xMlePeq5rsqGE1O5GJ
+ jEMzUqpgO3ogaA/1oXGM6VSplWHP67z7fsAKUiobJ7PFWk0MABvRq+WdPj8sWdpXnhm7pPZQcg7
+ 9wOQB7hU5GoC823oil3gJQ8HuCWJhs//YEcuCqsFd1bS3rJek+mxJVCBtQddWZRsEVCIBPKarhT
+ 1acrS4DZcQMn7oQAYd8gdFV6xW/xMQngJx1LlY+5GKyd6llLrv5nkBiIKM10MoT6cIk5Vk7m8Y3
+ NqUuejcgAitCM1cH6qZMwwLMVPyU3P6yxlgp028BoP7xFBsBIjAuP5B653j/B3U95XjsZ64Pkt5
+ fvxpl/yK4qgAeaE+TcytpP0egJbhxruqpuFqdGrFowYBQ+imE8X1lj92y28XdLGn2p6EHPlzfKH
+ djkdo916xMi9o3OhtNlrdVNldJbdKAQH/546V4OOiD8Av7U9Pwz0eABnYPZjmqDF9C+VBAhfAVy
+ e0XmILN/zNTW3lcGms2IRCBVhVulKHOJOID/9pLNTM=
+X-Received: by 2002:a05:6000:2311:b0:485:8c17:9769 with SMTP id
+ ffacd0b85a97d-4858c17992fmr1378315f8f.43.1788508895514; 
+ Fri, 04 Sep 2026 01:01:35 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:e8f4:b358:2087:5bd3?
  ([2a01:e0a:106d:1080:e8f4:b358:2087:5bd3])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48588392b3esm5363914f8f.12.2026.09.04.00.57.15
+ ffacd0b85a97d-485885b1320sm4656111f8f.27.2026.09.04.01.01.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Sep 2026 00:57:15 -0700 (PDT)
-Message-ID: <bc3a2bb1-00f4-4c49-a85b-b38132b502b9@linaro.org>
-Date: Fri, 4 Sep 2026 09:57:14 +0200
+ Fri, 04 Sep 2026 01:01:35 -0700 (PDT)
+Message-ID: <c850c6d5-2413-4ca6-aca7-28401bdfd18a@linaro.org>
+Date: Fri, 4 Sep 2026 10:01:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 04/10] scsi: allow a controller to declare well known
- logical units
+Subject: Re: [PATCH 01/10] ufs: hand sense data to the SCSI layer
 To: Alexey Charkov <alchark@flipper.net>, u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Neha Malcom Francis <n-francis@ti.com>, David Lechner
@@ -176,7 +174,7 @@ Cc: Tom Rini <trini@konsulko.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Richard Genoud <richard.genoud@bootlin.com>,
  Casey Connolly <casey.connolly@linaro.org>, Johan Jonker <jbx6244@gmail.com>
 References: <20260904-ufs-spl-boot-wlu-v1-0-59aeea16c4de@flipper.net>
- <20260904-ufs-spl-boot-wlu-v1-4-59aeea16c4de@flipper.net>
+ <20260904-ufs-spl-boot-wlu-v1-1-59aeea16c4de@flipper.net>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -203,7 +201,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260904-ufs-spl-boot-wlu-v1-4-59aeea16c4de@flipper.net>
+In-Reply-To: <20260904-ufs-spl-boot-wlu-v1-1-59aeea16c4de@flipper.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -221,79 +219,77 @@ Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 On 9/4/26 09:12, Alexey Charkov wrote:
-> The scan walks a contiguous LUN range, so units that a bus places outside
-> it stay unreachable. UFS puts its well known units at 0x80 and above, far
-> past the ordinary maximum of 0x7f.
-> 
-> Let a controller list such units separately and probe them once the
-> ordinary range is done, so that block devices already created keep the
-> device numbers they had.
+> A logical unit explains a CHECK CONDITION through its sense data, and
+
+I'm not sure about the "A logical unit explains a CHECK CONDITION through its sense data",
+I would say instead "A logical unit exposes a CHECK CONDITION through its sense data".
+
+> without it a caller cannot tell a transient condition from a permanent
+> one. struct scsi_cmd has carried a sense buffer all along that no driver
+> ever filled, so fill it, and clear the length in scsi_exec() so that one
+> command cannot be read as another's sense.
 > 
 > Signed-off-by: Alexey Charkov <alchark@flipper.net>
 > ---
->   drivers/scsi/scsi.c | 13 ++++++++++++-
->   include/scsi.h      |  4 ++++
->   2 files changed, 16 insertions(+), 1 deletion(-)
+>   drivers/scsi/scsi-uclass.c |  3 +++
+>   drivers/ufs/ufs-uclass.c   | 23 ++++++++++++++++++++++-
+>   2 files changed, 25 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-> index a60843e505ea..55915a021864 100644
-> --- a/drivers/scsi/scsi.c
-> +++ b/drivers/scsi/scsi.c
-> @@ -685,6 +685,7 @@ int scsi_scan_dev(struct udevice *dev, bool verbose)
->   	int ret;
->   	int i;
->   	int lun;
-> +	int j;
+> diff --git a/drivers/scsi/scsi-uclass.c b/drivers/scsi/scsi-uclass.c
+> index 39b4c7476d45..54afac6eaf51 100644
+> --- a/drivers/scsi/scsi-uclass.c
+> +++ b/drivers/scsi/scsi-uclass.c
+> @@ -22,6 +22,9 @@ int scsi_exec(struct udevice *dev, struct scsi_cmd *pccb)
+>   	if (!ops->exec)
+>   		return -ENOSYS;
 >   
->   	/* probe SCSI controller driver */
->   	ret = device_probe(dev);
-> @@ -694,10 +695,20 @@ int scsi_scan_dev(struct udevice *dev, bool verbose)
->   	/* Get controller plat */
->   	uc_plat = dev_get_uclass_plat(dev);
->   
-> -	for (i = 0; i < uc_plat->max_id; i++)
-> +	for (i = 0; i < uc_plat->max_id; i++) {
->   		for (lun = 0; lun < uc_plat->max_lun; lun++)
->   			do_scsi_scan_one(dev, i, lun, false, verbose);
->   
-> +		/*
-> +		 * Well known units live outside the ordinary LUN range, and
-> +		 * are scanned last so that they do not shift the device
-> +		 * numbers of the units before them.
-> +		 */
-> +		for (j = 0; j < uc_plat->wlun_count; j++)
-> +			do_scsi_scan_one(dev, i, uc_plat->wluns[j], true,
-> +					 verbose);
-
-Perhaps check uc_plat->wluns is not NULL ?
-
-It's not a serious issue since only UFS will declare it, and it will be valid.
-
-> +	}
+> +	/* Whatever a previous command left behind is not this command's sense */
+> +	pccb->sensedatalen = 0;
 > +
->   	return 0;
+>   	return ops->exec(dev, pccb);
 >   }
 >   
-> diff --git a/include/scsi.h b/include/scsi.h
-> index 72fb6e4bd90d..fea2d0152098 100644
-> --- a/include/scsi.h
-> +++ b/include/scsi.h
-> @@ -269,12 +269,16 @@ struct __packed scsi_write10_req {
->    * @max_lun: Maximum number of logical units
->    * @max_id: Maximum number of target ids
->    * @max_bytes_per_req: Maximum number of bytes per read/write request
-> + * @wluns: Well known logical units to scan on top of 0..@max_lun - 1, or NULL
-> + * @wlun_count: Number of entries in @wluns
->    */
->   struct scsi_plat {
->   	unsigned long base;
->   	unsigned long max_lun;
->   	unsigned long max_id;
->   	unsigned long max_bytes_per_req;
-> +	const u8 *wluns;
-> +	int wlun_count;
->   };
+> diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+> index 6ef01f8e4aa7..acaecfa1e341 100644
+> --- a/drivers/ufs/ufs-uclass.c
+> +++ b/drivers/ufs/ufs-uclass.c
+> @@ -1657,6 +1657,24 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
+>   	ufshcd_cache_flush(req_desc, sizeof(*req_desc));
+>   }
 >   
->   /* Operations for SCSI */
+> +/**
+> + * ufshcd_copy_sense_data - hand the response sense data to the SCSI layer
+> + *
+> + * A logical unit explains a CHECK CONDITION through its sense data, which the
+> + * caller needs to tell a transient condition from a permanent one.
+> + */
+> +static void ufshcd_copy_sense_data(struct ufs_hba *hba, struct scsi_cmd *pccb)
+> +{
+> +	struct utp_upiu_rsp *rsp = hba->ucd_rsp_ptr;
+> +	u16 len = be16_to_cpu(rsp->sr.sense_data_len);
+> +
+> +	len = min_t(u16, len, RESPONSE_UPIU_SENSE_DATA_LENGTH);
+> +	len = min_t(u16, len, sizeof(pccb->sense_buf));
+> +
+> +	memcpy(pccb->sense_buf, rsp->sr.sense_data, len);
+> +	pccb->sensedatalen = len;
+> +}
+> +
+>   static int ufs_scsi_exec(struct udevice *scsi_dev, struct scsi_cmd *pccb)
+>   {
+>   	struct ufs_hba *hba = dev_get_uclass_priv(scsi_dev->parent);
+> @@ -1683,8 +1701,11 @@ static int ufs_scsi_exec(struct udevice *scsi_dev, struct scsi_cmd *pccb)
+>   			result = ufshcd_get_rsp_upiu_result(hba->ucd_rsp_ptr);
+>   
+>   			scsi_status = result & MASK_SCSI_STATUS;
+> -			if (scsi_status)
+> +			if (scsi_status) {
+> +				ufshcd_copy_sense_data(hba, pccb);
+> +				pccb->status = scsi_status;
+>   				return -EINVAL;
+> +			}
+>   
+>   			break;
+>   		case UPIU_TRANSACTION_REJECT_UPIU:
 > 
 
