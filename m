@@ -4,217 +4,285 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C3AC624DE
-	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 08:38:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 547AFC624DE
+	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 08:46:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A04B160BD1;
-	Fri,  4 Sep 2026 08:38:11 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DA4AA60BBA;
+	Fri,  4 Sep 2026 08:46:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RcdT9fPqISIE; Fri,  4 Sep 2026 08:38:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4DEFF60C13
+ id 0fczudQb252O; Fri,  4 Sep 2026 08:46:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E6AFB606B0
 Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788511081;
-	b=XCM+ElqSwidByc4lnZX7TIHl6P0JqB9h/CuImRuYIDvn1BX+wTBHEIHN+z/zzE5C1r43
-	 s9xEI3mBR4zREb3cAp7IZDqPoCcA+s4DzM6/P9FyQFhBm5AjrEoydjk1XlR/CDsCc0tk3
-	 ndd51XnIG46TJyAY3UbHDabmGyB3aO09dRNlJDQ6QgZuQCr0e6iOLrBUUHxXLCnFI184w
-	 LBiP+O/NlfYsbte5xyc6JUqWiFn9QAm5zfZKPWUiw4WL7ggPbUc1I/KQm35nFaoohrmV0
-	 Olc0d/Fl1GQsIamFHhe8XhbYxL7WNXrirpmqFE+3D2aspc7KL8mbeziwoMeHZGNKUsg==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788511564;
+	b=KP1LmmgYeAbYeovo77RTJGM4nHu/CEbBmTe11MJX/6dGdk7wtbE3FJ+6CIAXybrribf0
+	 LKsCiXXdwxuY1gxtISZAz2R/A4UPXutpog1HAeUdHJa9V4Y3c4PF/Pdxw1abzrYSPPP5c
+	 dWdVSbg30CiGJJOAEXeGNNEXbb/sQVD65WJ9EWmTWwKmiljKEKKXEyPjxaMV/U0WyEtPv
+	 DjqHnZBzT6as++9B4Ul3qFntAxGRkrN4MtiwtJ/1cdgiUEMmKNIFKZjBF5JzsZ27+Hh7r
+	 SFWjZHKJ7TZho1W9zxPkd7vgRbmHIqMORGMScNM5maXdVqhRSWTkzB+OwNi8cIzNkKw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788511081;
+	c=relaxed/relaxed; t=1788511564;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
-	 Received-SPF:Received:Received:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-EOPAttributedMessage:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:Content-Type:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-LD-Processed:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
 	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
 	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
 	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
 	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
 	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=gNhxXAiuyX75WotetN+RFYf661vzvOQ7+NWjlQYCLTY=;
-	b=EVcUPW7rT9mb8Lz+1BD1Cy2TiPm74J8tFJzYEka/BhYOMi7RHWXgjab1M351Gk0bmX7n
-	 pOcCAUJ2hUCJd7VvD3Y7wK2YoeUUkRBwR98C4v5D2LaFMa4hqJRNDnKcaMhZmlqNpFzUo
-	 sehAoWE9vLjreRHyvdtOOxcdzYLgaZN7XHwqF63FVVyb5zoyPMUTLOOftSSFX/R9EZnvG
-	 BQ6krudG8gfh8UjJ97yZl3rA74LsJboQY2tAIyYlRVY9SUJiwfcqI2q4+uZ3E28Hh+sna
-	 8x7GSfRigCq+kWbNWBHLKEefHSpXJ1AVx+yDK8vMtfil9ofljL2NliggMgUfri5jemA==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=none header.from=softathome.com;
-	dkim=pass header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-softathome1-onmicrosoft-com header.b=uAqY7jW8;
+	bh=xxBsXNuGadQv3/xH+1UrOzHNWhSWtnl8Y6XT1zs0XMY=;
+	b=Yi+Rd2u0i1hJkQ2JviZtTPYGDTuJaKEwjN+ipFIvRaYiSbNs0uyt1re8yCxYpFu7TUkZ
+	 l+Jp3do4FL8iPlCuXOLQCeVVuY/1saVhlDrRUoO6yALFhhXOBu5r/aI7eI0pxpwfpgMW5
+	 AkKC1Me+fXBn8ADK2CXb0RqHmsw1Q3OAAWWOHtIe1jQOYmJByCutIbdvhPu5HdnPGiieM
+	 xG0io7Q9xDZ2ye5bKO+Mj3jQ2mV6C8xNU1UejsDs62yr3XGjrpsa7ETT5D8gMBsNgze/F
+	 tdROq03nz0qB6S9Qs9xaNdqjAobML7EMWKwrkiiu1aIJBU935Uuz8YGRuN4lHGMS/7w==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=pass header.from=amd.com;
+	dkim=pass header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=0VFyMwLs;
 	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788511081;
-	bh=gNhxXAiuyX75WotetN+RFYf661vzvOQ7+NWjlQYCLTY=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788511564;
+	bh=xxBsXNuGadQv3/xH+1UrOzHNWhSWtnl8Y6XT1zs0XMY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zc6xq64CHEakE/p+eq8FpuK+dK8H+I+Wtt5K0CsZBI9CJ9ANeqV7qnISoXoyKL65S
-	 DdKTs6StscZJ5gWcHiY59jnTMC65JQHpK1SdOhWyTzvV9HDrD11imkQd6vEN4TdmMt
-	 /uT88zKbbY8l5usoceu//4+JJTnB4bAU8dkpZ5iOc0jsJ0C5TdxEYzUor/RpwbKKKd
-	 zYeNnM8TUBUwNVprMUg0ZVxRjd4aCxBXJ0gUyjrknoo4Fqv3NPVaEDTo9F06KCoDTh
-	 8iPoEa3gUCh5MoZs8/OCjrlmJ2DYknRgJ3xPY128isiGsLpvYQkw5M6p2w9RHLg9cu
-	 vBsPh8Hpp6scw==
+	b=OF4ZZoa85Lc/99Z85PK8p8Ls5M/ZMSCNT5NvDUP/oT29IMgup8II/bzdDFM58cKIB
+	 M2pCqguFnga2dTjlAOcxTsqjD2+4rAglxVgNzmxWFzIy8jXjhCQ4SSe1l8LUNTdoL/
+	 njtNBkHrKZ0F06UsMDyLzm2fkfGSftZRsW2ALf/hmdbHVcYGC9mQLNFEYWbDCFiPED
+	 ajCR2lTcX4xTl/w/f8NsXWgb0+zeorVxCvOV9CIHGRfEIO1cLvifQ1P6qsf6SGGTD0
+	 bY4epluuVdLRJuxr64FhjHMv4ps88XQc5Vvdg6gkD6/ATpcgcUZoFb4O6xaXV8vp8h
+	 VxVIGfuGEZsfQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4DEFF60C13;
-	Fri,  4 Sep 2026 08:38:01 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E6AFB606B0;
+	Fri,  4 Sep 2026 08:46:03 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 00EAD3AF
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:35 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 7A09A3AF
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:46:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id BFB8C607FF
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:34 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6B79F6070F
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:46:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JIxb4uNq2YmP for <u-boot@lists.u-boot-project.org>;
- Fri,  4 Sep 2026 08:37:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7B92760BB6
+ id u3jCUqu0IfeL for <u-boot@lists.u-boot-project.org>;
+ Fri,  4 Sep 2026 08:46:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0158560616
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20a::"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788511052;
- b=aZvo8pSxY1waaN7ZHK4+S8pN8fD69abMmQP69xmj3PC0xW/YoSMVYuw/r9yYyBdVcWHG
- Va99OMp/GUvkyqX59DWQUTbdcCRZgi7vN99fs2htpNAqR2yU+03uZvrT3QIONS5y7vv5B
- Atqv6cuV7HVJBUR+uccziEz4QfAs8B9mO7iscRhFwQxp8QIwgmj0miZxCAOr4VHFkIbJs
- k8KBTMnl1VYiCkrM6jzqv1fyOWbxOSjWYEPn6jXo7QrKM/7UquAhr0m8jWqFvzYwduCcU
- uEdPVLQFi2WwTDpQPcl5IufyAjDYDqRMCPIX1CvgxeRJd7jqzT1pdAyJrdNFAjqxcrA==
+ smtp.remote-ip="2a01:111:f403:c110::3"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788511561;
+ b=q307Nu2csEoqCXEVzgBjtnQHrNB/eUUWMyKVRNNkFfZhXfa7mNzWvkbMI1JuobPdMSll
+ KAJZZTGCFTZ+EQR6AixBzxGHloPRGQL9IHEXWqoyQhFWkxwwvnv/s//fZZAvHxbVWd2rr
+ O+1EYB9iP8q0rUdX2pCBSK9vkI4eT78iQBLQl/AjpiKSQ1XY2j0T19HfRpeSP4n0eituk
+ aaSuihMZxn7j+W+6pC6n2sFOPTsr3+aduaskbtaHLAKjqK1GZQbskIDv4cMvBsO/ytrAL
+ L06XsXsxAVsQILkn/H1VAtaVJF42QZILJkZNLV8kEk+aX1nKHetmqyxfTuwGwVD8O4A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788511052;
- h=Received-SPF:DKIM-Signature:Received:Received:
- X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
- From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
- MIME-Version:Content-Transfer-Encoding:X-EOPAttributedMessage:
- X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:Content-Type:
- X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
- X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+ c=relaxed/relaxed; t=1788511561;
+ h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
+ User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
+ In-Reply-To:Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:
+ MIME-Version:X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+ X-MS-Office365-Filtering-Correlation-Id:X-LD-Processed:
+ X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+ X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+ X-Forefront-Antispam-Report:
  X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
  X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
  X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-Id:
- X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
  X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
  X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+ X-MS-Exchange-CrossTenant-UserPrincipalName:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=gNhxXAiuyX75WotetN+RFYf661vzvOQ7+NWjlQYCLTY=;
- b=WIde1/S1XI7MXKm2yxkx99xkCFy4rp81VrEyXsaYoy0Ee8m7BBSAQTS0P50B5b4LV+Jj
- R2dY09x4+bulU1xr9nLBgtTyDphAwXFFqoeu2jQcBwhCsdYhF2ud3JaKaYDHqR165bXh0
- npyjHrSGNfOoHhSU6bAeUt31eLWr8Dr70wYRUJhqWPKmzpGAugADs1Ua4ffngU7RoLm3s
- iPMJJuJBZP3TLsXD0lOmN8hEzzJVtSMOjVQEZQtTGnRSp9XYufKrSpCSz9T1cRsvWlZbM
- Jap8aVhjji04ig8gRFrr5InjSe8fx1Oll/H9sKgtjbpXtX3U5hFKC6WBC83i8wE28/w==
+ bh=xxBsXNuGadQv3/xH+1UrOzHNWhSWtnl8Y6XT1zs0XMY=;
+ b=V9lsHyi2Ke4bCvAxO7MqpBFRUnumWxNDPk+LMzQlwD3MBiz7hJc9NmKGBRYTDDSCLXAR
+ 34hapU4iEeXewCEDlbKb6fJueRLk9W1O/dqkCBoFCk0LKwCyCXE/fYbOfS73dzPGmjjw2
+ PRakseSjtMijvjQKG1WX69ybls4Y4n2xxaUlbh58o5/slZ8R2AOlg1RldRaU1c7DKsDNE
+ 6LidWJ/zbz9cVABD0aY1Xk+PMZAeOHkxcCvviRLA1LerS3fCOypFFmuggsSWjTCwF67f+
+ pM+U/J8TQjiqz4KoqG5HqQ207VzGYuZPSioVhxtqiH4laASDUVYbL9NTE+XJCI6L4wA==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org;
- dmarc=none header.from=softathome.com; 
- dkim=pass header.d=softathome1.onmicrosoft.com
- header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=uAqY7jW8; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20a::"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:111:f403:c20a::;
- helo=pa5p264cu001.outbound.protection.outlook.com;
- envelope-from=philippe.reynes@softathome.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ dmarc=pass header.from=amd.com; 
+ dkim=pass header.d=amd.com header.i=@amd.com header.a=rsa-sha256
+ header.s=selector1 header.b=0VFyMwLs; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c110::3"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c110::3;
+ helo=bn8pr05cu002.outbound.protection.outlook.com;
+ envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=softathome1.onmicrosoft.com
- header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=uAqY7jW8
-Received: from PA5P264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7B92760BB6
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:30 +0000 (UTC)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
+ header.s=selector1 header.b=0VFyMwLs
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::3])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0158560616
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:45:58 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zJa/tx4jgJU4HXkllOdV+BbSzq+4woxuQ06wInkXCdor077XxbDwlCD6OFFgM+N9Vj+G6+XqVR21HpFoosqgu29BKqu4Y9hI2bvJA7qOjASIXG/AhV4c62eZCx6ClHp+GgEnRx2LE54B9XsEOd0X5sj4IfDROI5+KeG3z9FuSxoXVBg8CnotC/ASe8bO98iwM/dP7NOMkDwwaiL+Bghg+LlWndKinVw4frNuxZ7+eB8l9YKngia+VHVWwRHM3nhIycJTHzq5i6gnJC5BTGEFRY1xIMuMUFlWL/pxc3vygy6nNSNurpGvymyYIAYGs0d4UkSUsejikygv+mKkhdjh3g==
+ b=a92mGyQtdXJdbsjd0NYKSq5IW2FVHelDhz5xBQoW9CyA/OhNuUeFm07idQvLyrDnf9b02Hk4BsRKbrWI9Sds517OzpOY1Ce63QBVTjmEv/ZVOOgsLLWlpQmbAopTJfMLGVxGyGMRgE4ICSC4PLOeYwK6oZ2v5PgBbJFbrcXqZsEa2sHmhiKVvY7k9n+UU/IW7cywQv8EIaNXXUsqDkyn2WMhS4MDfCwYQisR4E2HQ/qjJKDe4lSZBpjN6l+Gr8PBV9hgALICjx4PmsgrpM//UeBIvJnwqryLn9oSzMsY8OWnVxXDxZH1BljU3uIb2X7y5HcmGLS7ht4qRhWnFqtS5A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gNhxXAiuyX75WotetN+RFYf661vzvOQ7+NWjlQYCLTY=;
- b=bb01SIA+Mc08pm1f6XG0LzJ+mYt/+76GPiUryOSEjdwf7QHHw0opeGjWsR3BCwPxUikmR/FPIF/7fC5pQl/lH1VsElDwZsq9KZMmqCBFHCN1mAnC/MS7jOQYo0djEq0Kyi/bSCYiQSL63WalzRfIs59ZmpIBrAvx/pZZHUSqrUpGLcQa1G6KuLIrE7pTSwPLGjPQ0jXMrGLC3069H8ElG9aO6zZb2hn5F7VecvlG703vircAVLAb18cbRGFVASc19ete2HgMY9zlFfkF0oUZ1Au1ra3otUJBflJL0+8dukX3i7dBsEivmckTPMvg2eD2cIhycJtPx43LQbxAQKj9ng==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
- dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ bh=xxBsXNuGadQv3/xH+1UrOzHNWhSWtnl8Y6XT1zs0XMY=;
+ b=b2oJC1VT6pCK8Mgo5vfKgVEQReLz/HLMIdo+DoZ0ZaeAk7l2H3ef3bTYKKog2pBvN9UGSrM8njRHFSGGd2GUpvdOKnrhnBdxcsEYjC2tJElDJQodOkfExYh+nJv14/L3C3QgTK1NVj8sMsseYDpFFtodOqiWe2UM2trKrOou2JtbFu/wIjS7vlPnvkFUNjVlJQrMHDBhVjna1NfGLjebinT8YxpJ53Ui9+g1Y+inSMIWJA4cCT/ItSrmOdpOoWiLIA5pQopJr2ayw4gAHLeFH9RbZC7eIhD3dpsyBfHxaUfebCbGv3KvuvgexRa6rzPDXtVbcXk/D8jNfDx3WgtTFw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gNhxXAiuyX75WotetN+RFYf661vzvOQ7+NWjlQYCLTY=;
- b=uAqY7jW85a9+de/D1e5p79uDBGMSVrBZh04RieYSKi8KH6OdDVCZ1gDcvQGPZN5797uN9dhPFHs3fJ9YQ76t/1SQ4JQoeD+fezj2M+LSK57nI8kfuZz5vhut9KGF3F0Ih8LFoxOofhT5lbZkmtWzUpcZRtxmrSF+2i/XqLdiy9jNZlsg//esgyw0V5CvX/hRs5EfNExY1nzqdicTslAATiQK9/Kz03GeKjTq71CS3WCpdTYLMa/IJUQohwgwCkyk57h+D9FdhZaGpvcQnx7MUBqsMvdmd4geA1hlDuhXgnztmDZ0MaktoJEd3t2PYFK2eyW/LohFUw8h9jAgynrNYQ==
-Received: from PAYP264CA0031.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:11f::18)
- by PR0P264MB3337.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:110::12)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=xxBsXNuGadQv3/xH+1UrOzHNWhSWtnl8Y6XT1zs0XMY=;
+ b=0VFyMwLsiYXN2ShUt7aJuOLbroIR4wmoqNw11ZZd5vFfCG66QaWzBA82RIR7pX8JKpYQ7YMQPNTbFgrK3lQ9HYnQrImN+Hte9GEXFhPFvGALCIFkDrXPL8bM8N0w0qwxp1Mk8B0j7cGMlElAMseCI+sAyvLOmWceueUQTtvDAp4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
+ by CH1PPF2EB7CF87B.namprd12.prod.outlook.com
+ (2603:10b6:61f:fc00::60b) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Fri, 4 Sep
- 2026 08:37:22 +0000
-Received: from PA3PEPF000089B9.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:11f:cafe::4) by PAYP264CA0031.outlook.office365.com
- (2603:10a6:102:11f::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.13 via Frontend Transport; Fri, 4
- Sep 2026 08:37:22 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
- smtp.mailfrom=softathome.com; dkim=none (message not signed)
- header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
-Received-SPF: Pass (protection.outlook.com: domain of softathome.com
- designates 149.6.166.170 as permitted sender)
- receiver=protection.outlook.com; client-ip=149.6.166.170;
- helo=proxy.softathome.com; pr=C
-Received: from proxy.softathome.com (149.6.166.170) by
- PA3PEPF000089B9.mail.protection.outlook.com (10.167.242.21) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.8
- via Frontend Transport; Fri, 4 Sep 2026 08:37:22 +0000
-Received: from sah1lpt726.home (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id 614E920061;
- Fri,  4 Sep 2026 10:37:22 +0200 (CEST)
-From: Philippe Reynes <philippe.reynes@softathome.com>
-To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
- trini@konsulko.com, simon.glass@canonical.com
-Cc: u-boot@lists.u-boot-project.org,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v10 07/15] test: py: vboot: prepare integration test for ecdsa
-Date: Fri,  4 Sep 2026 10:37:11 +0200
-Message-ID: <20260904083719.53132-8-philippe.reynes@softathome.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260904083719.53132-1-philippe.reynes@softathome.com>
-References: <20260904083719.53132-1-philippe.reynes@softathome.com>
+ 2026 08:45:53 +0000
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287%5]) with mapi id 15.21.0360.008; Fri, 4 Sep 2026
+ 08:45:53 +0000
+Message-ID: <301c1635-fcd7-4fd7-9a70-bb1c2e230e64@amd.com>
+Date: Fri, 4 Sep 2026 10:45:48 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/3] soc/board: decouple SoC identification reads from
+ firmware calls
+To: Akshay Belsare <akshay.belsare@amd.com>, u-boot@lists.u-boot-project.org
+Cc: git@amd.com, padmarao.begari@amd.com
+References: <20260820145459.246717-1-akshay.belsare@amd.com>
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ mpwx1d8=
+In-Reply-To: <20260820145459.246717-1-akshay.belsare@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PH5P222CA0004.NAMP222.PROD.OUTLOOK.COM
+ (2603:10b6:510:34b::7) To LV5PR12MB9779.namprd12.prod.outlook.com
+ (2603:10b6:408:301::14)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PEPF000089B9:EE_|PR0P264MB3337:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: e130eb9c-42e3-415d-5d1d-08df0a5fbd75
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|CH1PPF2EB7CF87B:EE_
+X-MS-Office365-Filtering-Correlation-Id: 103a4498-57ca-47ba-2e70-08df0a60ed92
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|1800799024|23010399003|82310400026|10067099003|6133799003|22082099003|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info: 1V2ABAncp6o6gRrKzcziPxKpxBiD86y+CM2FhBwed5L5WtjUw84pth/e96//FYrNtqbPyRzTT6MZhwidlr/RyK3l1EoiDZVpoqe/TAFJOJXWiHax2O9+5A7o0Y1r5dSyh7hp3g7+vp2uTnYAadnuJE6RxTGTUBFCyXAnoeAeQfZDk2rI2J8HXjaZPojE/25WgKXH5DY7FoO2wlZfDzit1ebqePth0pW1w/XgiYDxVBhMUI3BVf8qrPLoQd63w3ptM1M34a6iWhc75SMnKDto82bu/QIbfmP4xWcuh05jGgJTXTeV0b4XQUZ6PdaZLrU+zwxkv9vCiv7HBZcfdAS7shExSjIKf+Gdgj+nGWjgn1biOa5T3H9GyxXFsWHY9Zatic7JsqyxYeXQfDG+YaCxBzwnX05zi2QJjI0ccyU++0i+jQnN2hT4WTUkS80gEGdkJxhl/gK3bqVCVemlvCiVNSFJ54Gb6kb2BYVDye5lN07V/snKgKKzgQnhmmbJdDulm5OgAekIvr7ySyDWhe6JAjBXOAPIRtEEBvqMzyR+BrTLzyZ/6A8dDEmeGvwTbsud4dEn2YGWsIHT4kNR49hdz02Tjdkk4HBozUx1iXWVRMyHh5DBxE9QX8yQbWvLvNisvXfxivrm4jRH1s9q1xCir9sAqr35QDKG97nMUC426tNfb8GtDXgHO54uZXFPHzRwKiO0CQ6rtAjEda8MiHmIXA==
-X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(1800799024)(23010399003)(82310400026)(10067099003)(6133799003)(22082099003)(18002099003)(56012099006);
+ ARA:13230040|376014|23010399003|366016|1800799024|11063799006|10067099003|6133799003|22082099003|18002099003|3023799007|56012099006;
+X-Microsoft-Antispam-Message-Info: TIPxqIfwlaj01ARLeQNTZuP5swNFg2pRxCFOmLCT5GUqhnLKeB7XivBVnPyuAgI6raHfs2svPI+EAlccOF/GnaLNGx/MBJYQAFWtJO80ErBiciyn4WLgEN0mHZTMkKdgRq5M9c67kFrVbpgJxjq+cgF2qUtKhgcQdL8+Zgknmg2H+SvRyyD1DrPECl1JgrIQrOdU9Gd4NJQ5B7GUZ4yPUaoiP8yJBJoB1CNIGtXpOw03Ac473AS49K2trjv7X9QkSoJkYKbf66cKtgkCE9+B2KDbQlHJJZPtnkxDsPPjRUG2l5dXNzHxYRocNKcA/ek65abcHaQYiP5TDxvkHDjciDjDVx1wBzEN+osHyVoUsP83hSDSqk8LscN10LWAgRx7S9fOR/I9q//8q7YFT7Umd+H74tJ0925ScqRRb9dEiqak6CCvThwXgsYqMcnODMC6P1b0SLlOH5pUOOdZyLzl+KkMa2fqL/x89QIQy1Ng/fCpRj3oLFIxy/NSzFXDEksF0mEhddow3WsiYedgotpr9vzZ0OL8G63C/BDuOwz8CYMZHpqPG7/Zn8KoKjSzOrIjRs2zvEFAGeBSv+Zv6tdS0LrL661N0dw8meiUTYfuhVzEUTTTGsV4YqA+apz7iiM07fVDrLb7qfkBorXzb4H9BYOnGHTRvHFLqDm65ON1ZEA=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(11063799006)(10067099003)(6133799003)(22082099003)(18002099003)(3023799007)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 0uXCkQmQelwnYuUO/ch44YhCm9wl0WRfKIjvLyVHa5k0a/ziFanAw/3gwWeKls0AsEBCSfF/lHGtgvm8Nmw7Pzwt2iHRJjWLx9MmcuUTcDjm3Myz09Pvq3kgUZVlBxyeCFz9PIb+Bg+Qrw9GkUF7kXH265QkUwmlBuWtBuDQKBK6W/nXnLy3O1pDOG9a76A9dxzeDApGVfS5vlGSUknqNQHkv7Tgl1WlIz36Bpok/b77Tsw8289TCJovgeczAWnNhjdheuKECm8P8ZMxRRvzabc5fbkUq3KKuBVPB26R3Mw4D/Be2jJuvZOhLtfPwZKI4jORcRRC4Exlx0ta/vyYo43a+/LzCjk25zzPihKFYcw/fKZfLjvLtxeMXPRdjLDeOrIj+Mk/ZX26HtHObzUPD+JDbeWzNzlj6+BLHjLITzeEubNxQ91asEF6w9A9ygdx
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2026 08:37:22.6207 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e130eb9c-42e3-415d-5d1d-08df0a5fbd75
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
- Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089B9.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB3337
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OW5BZzZrZmw1K1dKczhyWlFDbVNnZDlVTFhocFh6NlZXR0NLaDJkTzJTU25Z?=
+ =?utf-8?B?a0FJc2E3Tjh0c3lHWFAvNjhadDF0WDVUclV6NFphOTAvdGV4QWwvUVUzMWFy?=
+ =?utf-8?B?ejhXZjd2WHNXVTBMRFBUclBDM3hGUS9Wc3F2RFQyMkZFUnBWazdlOHNob0hK?=
+ =?utf-8?B?aW4zSWN6dUtPdmpraWtLQThKRVBsSHgxZ2MzRGxHR1BjVWlEUDBXLzdIcDhm?=
+ =?utf-8?B?QndxaE0wbm54aHkvSkVqYnhSZE9td3pidVJLQnl2VEFRdStqU3o3S1JRZlhO?=
+ =?utf-8?B?ZnJxOVJEODZVbXQ3RzVsc2I5S3ROSytYRlJRc3V6emdsK0duSUZscmVHdURE?=
+ =?utf-8?B?bmE3STIrL0Y1aUpmekpJU2xYcVI2VzU2WURpQWtacytmQUN0MUFmcFduWWFG?=
+ =?utf-8?B?MkJpbTR6ZXF2c2VHSFhDMkpCSGhkOHRFQ0ZEUExYWHhhM1I3QUFDWFRkRHVH?=
+ =?utf-8?B?NW5tWER1Q0F2TnZtV0E4bmsyNkt5OW41OEhZWFlpdXg4b0E1VVlPamhRdUdn?=
+ =?utf-8?B?OXRrSHBvTnBrQkUxMXYzRUdNSHlheWM2em5IN29mL3M5SmRGeXIxNzBLaDRT?=
+ =?utf-8?B?WWxwcWZ5c2g3UEd1Y0MvMy9oR0NmM1BQTUlNUEcxcDNCTmhjbVBabHg0LytV?=
+ =?utf-8?B?QUIrT0hqb0YwNEVudWF0Ly9pTUVhL3ZaYWFJUU4vQjlZWkIwNVBnOXdkVkk4?=
+ =?utf-8?B?eWpVenJySjBXNjZZM0o0NHltZm85andkVDYxRFZRT09OUmE5WGFmM3F3R0pP?=
+ =?utf-8?B?N1J4Q1I0cXlOK25tNHVDaFQ3WXFoanA3eEdDZitOeWVwWmcvVDdvdUNoZWx0?=
+ =?utf-8?B?bnhUakVNTWs1T1o2elJSNjRKZTAvRjNwTEcxK3RtR1VPd2FORlJMQ2tSK05F?=
+ =?utf-8?B?RHBwYjl0TXdnU2liQ05EUUI1eTEvR1pMeXJyNzlOY09WblFROG9GOXo3amNk?=
+ =?utf-8?B?ZUJlUzJCczFvVVIrY0JtRFEwbFcvdkNpc3kzZ004Uk0vQUpGNUpGMEJpL3BY?=
+ =?utf-8?B?NURabk4wMlZGeUhmZ1FUSVVRZ3VlbHEzem9iMnEySjJmcXQ0YVpWQkYxWVFX?=
+ =?utf-8?B?UGU3bEQ2N05JZVZUaUVaU3BaMi93YzBUcUlGTE5xWmxBQVlaRlBVRGl5YjNQ?=
+ =?utf-8?B?SytBVGtWd0NNazZMN2FrQzhJVW5CQitEaUhUd3FiaHdzajJrbGg0aTZpNlZL?=
+ =?utf-8?B?NUNJV1VoYlkwcXdOYTZlcnlSTXZHUVdxNkdhZ2p5M3ptcVd1OWxFbm84UnZj?=
+ =?utf-8?B?bDk4WG8yeTJtMVkxeEFLck4xTXdsT2JEb1ZkL0swV3pZcXREblpFdGVKUW9h?=
+ =?utf-8?B?MVR0VWVsZko4M2RtMTM3MEc4aWQyeWtmckpoZUFhZDRXRjNmT1Z1MllTT3JP?=
+ =?utf-8?B?SzRVZWFKUGFOMno1QllXR1FrYjBsci9iVTBwYkFMeWE4V2JGby93NE1tTWtr?=
+ =?utf-8?B?d0ozYmJwM2VmK1VZM2x2WVV5cGVMUkI2bC9KZ1hVcXp2Vk81bkp5Q0RPUjhI?=
+ =?utf-8?B?a0V4cTVQeDFyZHNObmhXZ2JqeXRkeXBYdDU2R1dpY2RKMFVxc05HemJ4ZDZ2?=
+ =?utf-8?B?ZUYwZ3JUQzQyTzhoRmdqWGZXTUcxTHczaW9vUGdaVU80dUxpNEc1STFVSVpH?=
+ =?utf-8?B?N2tOYXhWQVEybTJXejNmcmR5Y2svL010dGIxNFVPc3VxckNFY3YvU1JGdkRS?=
+ =?utf-8?B?UzhHNUtuMGR4bFFWOXcrVUoxcHhMWGI5SG5sVTdiZ3FHdnZTQzc4ZzdxeEhk?=
+ =?utf-8?B?aVdxM3htOUtNVW9pOXFwcGdKaDgxRGgrMjVodFV0QUo0Nm90K1EvSlNKTzVv?=
+ =?utf-8?B?ai9kOXUvczYrWk1CTUIyMnduajZMLzJydTlrcGdSdEF4Q09vd1U3YlBtbXo0?=
+ =?utf-8?B?Vis3YUpXR0tBK3luQnA4STA3ZVViMTR2a2FIQUJrYXdLTWZyTjBvNzhpcU9l?=
+ =?utf-8?B?OE1wYVdkZ2hDc3U4UTR4QWYwM2VuaXJSTE9yMDdaNE1DU0h5WjBMSmk4c3p4?=
+ =?utf-8?B?M0NNOUJabEM4SS9Wa2lMOFdhSHpLQUdvMm9vK090cklVL1FGNWtVNURlQWIz?=
+ =?utf-8?B?QzdxUmtmazN5UVY4cUtuTzdTTnhKcU45VzVtQzVlUUhIekJoZlY1RS9zM2dr?=
+ =?utf-8?B?cG1qbFdZajhzSUFEbDVnQjVtbWlkejY0V3dYclBnKzhFekY5dW94K1laVnJF?=
+ =?utf-8?B?M0g2SWJrYmRtSTJlVkRHTEdwRys2UzZpNmVuSWRoamJrajlNSEREdEhza0t1?=
+ =?utf-8?B?L2hySEpYOUw3ZVVpd0hGLzBpUUgyQzUrNW5ZZThWOWpJYVRxQzJjWVkyTG8z?=
+ =?utf-8?B?U3VqcTVyVkdINTJuV1hhczZDYUh3MDdtNnRWUFVMWTZKcDVBSEFDZz09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 103a4498-57ca-47ba-2e70-08df0a60ed92
+X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2026 08:45:53.0078 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WwY26o3+B6WMRDm7LP6g/hP91Jr9q+/VrFfIZRckcRGV2ubWLB0Ik++bMu3Iudhg
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PPF2EB7CF87B
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -228,361 +296,41 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The vboot tests only consider rsa algo for signature.
-To prepare the integration of ecdsa test, the signature
-algo is now explicit.
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
-Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
----
-v2:
-- initial version
-v3:
-- no change
-v4:
-- no change
-v5:
-- no change
-v6:
-- no change
-v7:
-- no change
-v8:
-- no change
-v9:
-- some minor update to fix rebase on next
-v10:
-- no change
 
- test/py/tests/test_fit_ecdsa.py               |   2 +-
- test/py/tests/test_vboot.py                   | 104 +++++++++---------
- ....its => sign-configs-sha1-rsa2048-pss.its} |   0
- ...sha1.its => sign-configs-sha1-rsa2048.its} |   0
- ... sign-configs-sha256-rsa2048-pss-prod.its} |   0
- ...ts => sign-configs-sha256-rsa2048-pss.its} |   0
- ...56.its => sign-configs-sha256-rsa2048.its} |   0
- ...84.its => sign-configs-sha384-rsa3072.its} |   0
- ...s.its => sign-images-sha1-rsa2048-pss.its} |   0
- ...-sha1.its => sign-images-sha1-rsa2048.its} |   0
- ...its => sign-images-sha256-rsa2048-pss.its} |   0
- ...256.its => sign-images-sha256-rsa2048.its} |   0
- ...384.its => sign-images-sha384-rsa3072.its} |   0
- 13 files changed, 54 insertions(+), 52 deletions(-)
- rename test/py/tests/vboot/{sign-configs-sha1-pss.its => sign-configs-sha1-rsa2048-pss.its} (100%)
- rename test/py/tests/vboot/{sign-configs-sha1.its => sign-configs-sha1-rsa2048.its} (100%)
- rename test/py/tests/vboot/{sign-configs-sha256-pss-prod.its => sign-configs-sha256-rsa2048-pss-prod.its} (100%)
- rename test/py/tests/vboot/{sign-configs-sha256-pss.its => sign-configs-sha256-rsa2048-pss.its} (100%)
- rename test/py/tests/vboot/{sign-configs-sha256.its => sign-configs-sha256-rsa2048.its} (100%)
- rename test/py/tests/vboot/{sign-configs-sha384.its => sign-configs-sha384-rsa3072.its} (100%)
- rename test/py/tests/vboot/{sign-images-sha1-pss.its => sign-images-sha1-rsa2048-pss.its} (100%)
- rename test/py/tests/vboot/{sign-images-sha1.its => sign-images-sha1-rsa2048.its} (100%)
- rename test/py/tests/vboot/{sign-images-sha256-pss.its => sign-images-sha256-rsa2048-pss.its} (100%)
- rename test/py/tests/vboot/{sign-images-sha256.its => sign-images-sha256-rsa2048.its} (100%)
- rename test/py/tests/vboot/{sign-images-sha384.its => sign-images-sha384-rsa3072.its} (100%)
+On 8/20/26 16:54, Akshay Belsare wrote:
+> Chip ID, PMC TAP IDCODE/VERSION/USERCODE, and the PGGS boot index are
+> currently read either directly through MMIO or via firmware, depending
+> on the platform and configuration. This series introduces common helper
+> APIs with weak MMIO-based defaults for each platform and firmware-backed
+> overrides in firmware-zynqmp.c when CONFIG_ZYNQMP_FIRMWARE is enabled.
+>   
+> This removes firmware-specific conditionals from callers, centralizes
+> the access mechanism, and provides a consistent interface across
+> ZynqMP, Versal, Versal Net, and Versal Gen 2 platforms.
+> 
+> Akshay Belsare (3):
+>    soc: xilinx: decouple chip ID retrieval from direct firmware calls
+>    soc: xilinx: route PMC TAP register access through firmware
+>    board: xilinx: decouple PGGS boot index read from firmware
+> 
+>   arch/arm/mach-versal-net/cpu.c                | 34 ++++++++++-
+>   .../mach-versal-net/include/mach/sys_proto.h  |  6 ++
+>   arch/arm/mach-versal/cpu.c                    | 18 ++++++
+>   arch/arm/mach-versal/include/mach/sys_proto.h |  4 ++
+>   arch/arm/mach-versal2/cpu.c                   | 39 ++++++++++++-
+>   .../arm/mach-versal2/include/mach/sys_proto.h |  8 +++
+>   arch/arm/mach-zynqmp/cpu.c                    |  8 +++
+>   arch/arm/mach-zynqmp/include/mach/sys_proto.h |  2 +
+>   board/xilinx/common/board.c                   |  6 +-
+>   drivers/firmware/firmware-zynqmp.c            | 57 +++++++++++++++++++
+>   drivers/soc/soc_amd_versal2.c                 | 23 +++-----
+>   drivers/soc/soc_xilinx_versal.c               | 23 +++-----
+>   drivers/soc/soc_xilinx_versal_net.c           | 23 +++-----
+>   drivers/soc/soc_xilinx_zynqmp.c               | 21 +++----
+>   include/zynqmp_firmware.h                     |  5 +-
+>   15 files changed, 204 insertions(+), 73 deletions(-)
+> 
 
-diff --git a/test/py/tests/test_fit_ecdsa.py b/test/py/tests/test_fit_ecdsa.py
-index 3e816d68eb6..e59390374af 100644
---- a/test/py/tests/test_fit_ecdsa.py
-+++ b/test/py/tests/test_fit_ecdsa.py
-@@ -102,7 +102,7 @@ def test_fit_ecdsa(ubman):
-     with open(key_file, 'w') as f:
-         f.write(key.export_key(format='PEM'))
- 
--    assemble_fit_image(fit_file, f'{datadir}/sign-images-sha256.its', tempdir)
-+    assemble_fit_image(fit_file, f'{datadir}/sign-images-sha256-rsa2048.its', tempdir)
- 
-     fit = SignableFitImage(ubman, fit_file)
-     nodes = fit.find_signable_image_nodes()
-diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index e9259584e32..33cbcea5c24 100644
---- a/test/py/tests/test_vboot.py
-+++ b/test/py/tests/test_vboot.py
-@@ -84,21 +84,21 @@ def make_fit(its, ubman, mkimage, dtc_args, datadir, fit):
- # Only run the full suite on a few combinations, since it doesn't add any more
- # test coverage.
- TESTDATA_IN = [
--    ['sha1-basic', 'sha1', '', None, False, True, False, False],
--    ['sha1-pad', 'sha1', '', '-E -p 0x10000', False, False, False, False],
--    ['sha1-pss', 'sha1', '-pss', None, False, False, False, False],
--    ['sha1-pss-pad', 'sha1', '-pss', '-E -p 0x10000', False, False, False, False],
--    ['sha256-basic', 'sha256', '', None, False, False, False, False],
--    ['sha256-pad', 'sha256', '', '-E -p 0x10000', False, False, False, False],
--    ['sha256-pss', 'sha256', '-pss', None, False, False, False, False],
--    ['sha256-pss-pad', 'sha256', '-pss', '-E -p 0x10000', False, False, False, False],
--    ['sha256-pss-required', 'sha256', '-pss', None, True, False, False, False],
--    ['sha256-pss-pad-required', 'sha256', '-pss', '-E -p 0x10000', True, True, False, False],
--    ['sha384-basic', 'sha384', '', None, False, False, False, False],
--    ['sha384-pad', 'sha384', '', '-E -p 0x10000', False, False, False, False],
--    ['algo-arg', 'algo-arg', '', '-o sha256,rsa2048', False, False, True, False],
--    ['sha256-global-sign', 'sha256', '', '', False, False, False, True],
--    ['sha256-global-sign-pss', 'sha256', '-pss', '', False, False, False, True],
-+    ['sha1-basic', 'sha1', '-rsa2048', '', None, False, True, False, False],
-+    ['sha1-pad', 'sha1', '-rsa2048', '', '-E -p 0x10000', False, False, False, False],
-+    ['sha1-pss', 'sha1', '-rsa2048', '-pss', None, False, False, False, False],
-+    ['sha1-pss-pad', 'sha1', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
-+    ['sha256-basic', 'sha256', '-rsa2048', '', None, False, False, False, False],
-+    ['sha256-pad', 'sha256', '-rsa2048', '', '-E -p 0x10000', False, False, False, False],
-+    ['sha256-pss', 'sha256', '-rsa2048', '-pss', None, False, False, False, False],
-+    ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
-+    ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, False, False, False],
-+    ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', True, True, False, False],
-+    ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False, False],
-+    ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, False, False, False],
-+    ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False],
-+    ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False, False, False, True],
-+    ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False, False, False, True],
- ]
- 
- # Mark all but the first test as slow, so they are not run with '-k not slow'
-@@ -111,9 +111,9 @@ TESTDATA += [pytest.param(*v, marks=pytest.mark.slow) for v in TESTDATA_IN[1:]]
- @pytest.mark.requiredtool('fdtget')
- @pytest.mark.requiredtool('fdtput')
- @pytest.mark.requiredtool('openssl')
--@pytest.mark.parametrize("name,sha_algo,padding,sign_options,required,full_test,algo_arg,global_sign",
-+@pytest.mark.parametrize("name,sha_algo,sig_algo,padding,sign_options,required,full_test,algo_arg,global_sign",
-                          TESTDATA)
--def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-+def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-                full_test, algo_arg, global_sign):
-     """Test verified boot signing with mkimage and verification with 'bootm'.
- 
-@@ -287,7 +287,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.key '
-                           '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
- 
--    def test_with_algo(sha_algo, padding, sign_options):
-+    def test_with_algo(sha_algo, sig_algo, padding, sign_options):
-         """Test verified boot with the given hash algorithm.
- 
-         This is the main part of the test code. The same procedure is followed
-@@ -308,7 +308,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
- 
-         # Build the FIT, but don't sign anything yet
-         ubman.log.action('%s: Test FIT with signed images' % sha_algo)
--        make_fit('sign-images-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-images-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         run_bootm(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-', True)
- 
-         # Sign images with our dev keys
-@@ -319,7 +319,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
- 
-         ubman.log.action('%s: Test FIT with signed configuration' % sha_algo)
--        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         run_bootm(sha_algo, 'unsigned config', '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
- 
-         # Sign images with our dev keys
-@@ -390,7 +390,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             run_bootm(sha_algo, 'evil clone', 'Bad Data Hash', False, efit)
- 
-         # Create a new properly signed fit and replace header bytes
--        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit(sha_algo, sign_options)
-         bcfg = ubman.config.buildconfig
-         max_size = int(bcfg.get('config_fit_signature_max_size', 0x10000000), 0)
-@@ -424,7 +424,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
- 
-         # Create a new properly signed fit and replace hashed-strings
-         # size property
--        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit(sha_algo, sign_options)
-         utils.run_and_log(ubman, 'fdtput -t x %s %s hashed-strings 0' %
-                           (fit, sig_node))
-@@ -448,7 +448,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-                   'Bad Data Hash', False)
-         ubman.log.action('%s: Check in-bounds hashed-strings size' % sha_algo)
- 
--    def test_required_key(sha_algo, padding, sign_options):
-+    def test_required_key(sha_algo, sig_algo, padding, sign_options):
-         """Test verified boot with the given hash algorithm.
- 
-         This function tests if U-Boot rejects an image when a required key isn't
-@@ -470,12 +470,12 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
- 
-         # Build the FIT with prod key (keys required) and sign it. This puts the
-         # signature into sandbox-u-boot.dtb, marked 'required'
--        make_fit('sign-configs-%s%s-prod.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s-prod.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit(sha_algo, sign_options)
- 
-         # Build the FIT with dev key (keys NOT required). This adds the
-         # signature into sandbox-u-boot.dtb, NOT marked 'required'.
--        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit_norequire(sha_algo, sign_options)
- 
-         # So now sandbox-u-boot.dtb two signatures, for the prod and dev keys.
-@@ -487,7 +487,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
- 
-         # Build the FIT with dev key (keys required) and sign it. This puts the
-         # signature into sandbox-u-boot.dtb, marked 'required'.
--        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit(sha_algo, sign_options)
- 
-         # Set the required-mode policy to "any".
-@@ -567,8 +567,9 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-     dtb = '%ssandbox-u-boot.dtb' % tmpdir
-     sig_node = '/configurations/conf-1/signature'
- 
--    create_rsa_pair('dev')
--    create_rsa_pair('prod')
-+    if sig_algo == "-rsa2048" or sig_algo == "-rsa3072" or sig_algo == "":
-+        create_rsa_pair('dev')
-+        create_rsa_pair('prod')
- 
-     # Create a number kernel image with zeroes
-     with open('%stest-kernel.bin' % tmpdir, 'wb') as fd:
-@@ -587,9 +588,9 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         if global_sign:
-             test_global_sign(sha_algo, padding, sign_options)
-         elif required:
--            test_required_key(sha_algo, padding, sign_options)
-+            test_required_key(sha_algo, sig_algo, padding, sign_options)
-         else:
--            test_with_algo(sha_algo, padding, sign_options)
-+            test_with_algo(sha_algo, sig_algo, padding, sign_options)
-     finally:
-         # Go back to the original U-Boot with the correct dtb.
-         ubman.config.dtb = old_dtb
-@@ -616,6 +617,7 @@ def test_vboot_ext_data_bounds(ubman):
-     by U-Boot to hold public keys from the signing process.
-     """
-     sha_algo = 'sha256'
-+    sig_algo = '-rsa2048'
- 
-     def run_bootm(test_type, expect_string):
-         """Run a 'bootm' command in U-Boot and expect it to fail.
-@@ -684,7 +686,7 @@ def test_vboot_ext_data_bounds(ubman):
-         sign_fit() overwrites the FIT, so a new one is built before each test
-         case mutates its external-data properties.
-         """
--        make_fit('sign-configs-%s.its' % sha_algo, ubman, mkimage, dtc_args,
-+        make_fit('sign-configs-%s%s.its' % (sha_algo, sig_algo), ubman, mkimage, dtc_args,
-                  datadir, fit)
-         sign_fit('-E')
- 
-@@ -762,21 +764,21 @@ def test_vboot_ext_data_bounds(ubman):
- 
- 
- TESTDATA_IN = [
--    ['sha1-basic', 'sha1', '', None, False],
--    ['sha1-pad', 'sha1', '', '-E -p 0x10000', False],
--    ['sha1-pss', 'sha1', '-pss', None, False],
--    ['sha1-pss-pad', 'sha1', '-pss', '-E -p 0x10000', False],
--    ['sha256-basic', 'sha256', '', None, False],
--    ['sha256-pad', 'sha256', '', '-E -p 0x10000', False],
--    ['sha256-pss', 'sha256', '-pss', None, False],
--    ['sha256-pss-pad', 'sha256', '-pss', '-E -p 0x10000', False],
--    ['sha256-pss-required', 'sha256', '-pss', None, False],
--    ['sha256-pss-pad-required', 'sha256', '-pss', '-E -p 0x10000', False],
--    ['sha384-basic', 'sha384', '', None, False],
--    ['sha384-pad', 'sha384', '', '-E -p 0x10000', False],
--    ['algo-arg', 'algo-arg', '', '-o sha256,rsa2048', True],
--    ['sha256-global-sign', 'sha256', '', '', False],
--    ['sha256-global-sign-pss', 'sha256', '-pss', '', False],
-+    ['sha1-basic', 'sha1', '-rsa2048', '', None, False],
-+    ['sha1-pad', 'sha1', '-rsa2048', '', '-E -p 0x10000', False],
-+    ['sha1-pss', 'sha1', '-rsa2048', '-pss', None, False],
-+    ['sha1-pss-pad', 'sha1', '-rsa2048', '-pss', '-E -p 0x10000', False],
-+    ['sha256-basic', 'sha256', '-rsa2048', '', None, False],
-+    ['sha256-pad', 'sha256', '-rsa2048', '', '-E -p 0x10000', False],
-+    ['sha256-pss', 'sha256', '-rsa2048', '-pss', None, False],
-+    ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False],
-+    ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, False],
-+    ['sha256-pss-pad-required', 'sha256', '-rsa2048' , '-pss', '-E -p 0x10000', False],
-+    ['sha384-basic', 'sha384', '-rsa3072', '', None, False],
-+    ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False],
-+    ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', True],
-+    ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False],
-+    ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False],
- ]
- 
- # Mark all but the first test as slow, so they are not run with '-k not slow'
-@@ -787,8 +789,8 @@ TESTDATA += [pytest.param(*v, marks=pytest.mark.slow) for v in TESTDATA_IN[1:]]
- @pytest.mark.buildconfigspec('fit_signature')
- @pytest.mark.requiredtool('dtc')
- @pytest.mark.requiredtool('openssl')
--@pytest.mark.parametrize("name,sha_algo,padding,sign_options,algo_arg", TESTDATA)
--def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
-+@pytest.mark.parametrize("name,sha_algo,sig_algo,padding,sign_options,algo_arg", TESTDATA)
-+def test_fdt_add_pubkey(ubman, name, sha_algo, sig_algo, padding, sign_options, algo_arg):
-     """Test fdt_add_pubkey utility with bunch of different algo options."""
- 
-     def sign_fit(sha_algo, options):
-@@ -807,7 +809,7 @@ def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
-         ubman.log.action('%s: Sign images' % sha_algo)
-         utils.run_and_log(ubman, args)
- 
--    def test_add_pubkey(sha_algo, padding, sign_options):
-+    def test_add_pubkey(sha_algo, sig_algo, padding, sign_options):
-         """Test fdt_add_pubkey utility with given hash algorithm and padding.
- 
-         This function tests if fdt_add_pubkey utility may add public keys into dtb.
-@@ -830,7 +832,7 @@ def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
-                             'rsa3072' if sha_algo == 'sha384' else 'rsa2048'),
-                            '-k', tmpdir, '-n', 'dev', '-r', 'conf', dtb])
- 
--        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
- 
-         # Sign images with our dev keys
-         sign_fit(sha_algo, sign_options)
-@@ -852,4 +854,4 @@ def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
- 
-     # keys created in test_vboot test
- 
--    test_add_pubkey(sha_algo, padding, sign_options)
-+    test_add_pubkey(sha_algo, sig_algo, padding, sign_options)
-diff --git a/test/py/tests/vboot/sign-configs-sha1-pss.its b/test/py/tests/vboot/sign-configs-sha1-rsa2048-pss.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha1-pss.its
-rename to test/py/tests/vboot/sign-configs-sha1-rsa2048-pss.its
-diff --git a/test/py/tests/vboot/sign-configs-sha1.its b/test/py/tests/vboot/sign-configs-sha1-rsa2048.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha1.its
-rename to test/py/tests/vboot/sign-configs-sha1-rsa2048.its
-diff --git a/test/py/tests/vboot/sign-configs-sha256-pss-prod.its b/test/py/tests/vboot/sign-configs-sha256-rsa2048-pss-prod.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha256-pss-prod.its
-rename to test/py/tests/vboot/sign-configs-sha256-rsa2048-pss-prod.its
-diff --git a/test/py/tests/vboot/sign-configs-sha256-pss.its b/test/py/tests/vboot/sign-configs-sha256-rsa2048-pss.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha256-pss.its
-rename to test/py/tests/vboot/sign-configs-sha256-rsa2048-pss.its
-diff --git a/test/py/tests/vboot/sign-configs-sha256.its b/test/py/tests/vboot/sign-configs-sha256-rsa2048.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha256.its
-rename to test/py/tests/vboot/sign-configs-sha256-rsa2048.its
-diff --git a/test/py/tests/vboot/sign-configs-sha384.its b/test/py/tests/vboot/sign-configs-sha384-rsa3072.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha384.its
-rename to test/py/tests/vboot/sign-configs-sha384-rsa3072.its
-diff --git a/test/py/tests/vboot/sign-images-sha1-pss.its b/test/py/tests/vboot/sign-images-sha1-rsa2048-pss.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-images-sha1-pss.its
-rename to test/py/tests/vboot/sign-images-sha1-rsa2048-pss.its
-diff --git a/test/py/tests/vboot/sign-images-sha1.its b/test/py/tests/vboot/sign-images-sha1-rsa2048.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-images-sha1.its
-rename to test/py/tests/vboot/sign-images-sha1-rsa2048.its
-diff --git a/test/py/tests/vboot/sign-images-sha256-pss.its b/test/py/tests/vboot/sign-images-sha256-rsa2048-pss.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-images-sha256-pss.its
-rename to test/py/tests/vboot/sign-images-sha256-rsa2048-pss.its
-diff --git a/test/py/tests/vboot/sign-images-sha256.its b/test/py/tests/vboot/sign-images-sha256-rsa2048.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-images-sha256.its
-rename to test/py/tests/vboot/sign-images-sha256-rsa2048.its
-diff --git a/test/py/tests/vboot/sign-images-sha384.its b/test/py/tests/vboot/sign-images-sha384-rsa3072.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-images-sha384.its
-rename to test/py/tests/vboot/sign-images-sha384-rsa3072.its
--- 
-2.43.0
-
+Applied.
+M
