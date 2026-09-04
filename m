@@ -4,130 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE07C79F82
-	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 19:26:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50035C624D3
+	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 19:26:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B142340B80;
+	by smtp4.osuosl.org (Postfix) with ESMTP id F151540B82;
 	Fri,  4 Sep 2026 19:26:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0S0e13B_R-Wt; Fri,  4 Sep 2026 19:26:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 641CF40A7F
+ id 5Fa0Q7y2B1Sg; Fri,  4 Sep 2026 19:26:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org F058640AD4
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788549972;
-	b=T31YzcesHFgpwHFfjQS3OWKMwKcvU6Qjrxz9YXoMoUmwB8jIkDxhJQ9DdgyP4bM3J+r+
-	 jxYX5RIKhFR+nL9ciazEP+UOql3OnXL3bodb+Mgnn4P8fN5ab99q1r7lNKIwBUf7Fnz1o
-	 oxt+deNXcfD1LHNawuTQF5/gR+YjwINHf1ytSUNkUK/yj6PHRoFGnEAT0ijx8JPxRb7sT
-	 kQN44b6ujVHmOOKT5FqrBt0yup9yjHjYIqYvwU2UZRi2n8yYL+Df+9cJ+Dyl03bkxpXed
-	 5ALyS9/EbCt+W1nTnAzAycA/635HdT8xJF53RO0TszR50kTqdJDhBjZU7uKRtcnCqdQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788549974;
+	b=As6lsAJic8SELgIfpbuL6EXmigfqSGy9SqR6hwXXijLNwM1O73bMcMJLRxsUg7OAYcQj
+	 H7pLP11vVSZ/+2/9Ui+GAMZO4I4ln31mVkuG2iqIE1ODqrkj7fITZV7YGlPUzJW7ibWFq
+	 5bPGs6Y5MLurm5uivu8/ap336bs7U2IRH9q/GXH6h7qgCrqrV0YtaPbzs5kE+kMvfk7a0
+	 abYuOMVT1BN9YqMsHevrXaS/yCxR0muOPPhbWgVvcY6rTmZbL2wYnwQKj/qH4Xew6Fo3M
+	 N+r7HSQGC5JVrwGNFAeK4fqBGqxfsNTqFK6hJM4THoFHg+9pMlmnlKrivRhfHcnLOlg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788549972;
+	c=relaxed/relaxed; t=1788549974;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:From:
+	 To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
 	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
 	 X-Originating-IP:X-CM-SenderInfo:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=KcpwnS+oUk7edeyaOAYVkROYYD774R2jEMd/whMQkn0=;
-	b=LjCuuTH1AcaYMcSYuKJncH2yWjLnIIuNi5Hc8escEXsEnj1Z44XO1MPrlcQoM7riZBVp
-	 X7BEjHSWuuy/m9EISFYEtvl1gKjTX8Un2VC2MYGMDrwdwANvmQjEt0ndmq11EGVXnBSC5
-	 VDKXDbXAOQaBlhZJn0/r0PGjUQ+HMrGUZqsIY6Sjou5gFTXOijfnduXsFUbPVtZqLwMWF
-	 Ksbs4AsMRs2G74nciZjEci8/nnur7mBwUcA8gydhO+ghbchv52CD/CAchJKZraiYCfj6F
-	 MQT5h2t97rWnhZFjELkJzdN913k7m8Cw5K0Mi6tjxF2fMh++o8wAo+ew7KvUWKBoL7A==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=none header.from=iscas.ac.cn;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=YL10xCBjXEv9f/YYlIYM9yS2tCTO0ISh8s5Pf9RauL4=;
+	b=XmlrhWD92kjqiOFyS/yPLJaC3Ie3L3Bdmze5CrAgSk6UFma2A7Wa8bZ3PHWY4M3qtywu
+	 gWiYcC6wYgRI76zhoSIfrx52pPlLip3Ydn3ZaQHAVj5ZPrzea21rw2n+Br5z72zF2r+Qd
+	 QAwaU4D+dQ3kZfxg25PTUuGt4nKxGRUh/LwOaI1vlHv4ZKewJ7tGftjU/0IV1P3w8PSHT
+	 eOoDI+V6a/rgEAR+7fNspM1cayf2l7Xd3QuVByEwdpmA9DN6uU9CW7HV73XSdsdw99888
+	 8LT0B9J/TMHFv8fY2WGyV3WjMYxHdmuuxTI+LiOzEU4zDYwjzid/hcFl/uNq1lkKOew==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788549972;
-	bh=KcpwnS+oUk7edeyaOAYVkROYYD774R2jEMd/whMQkn0=;
+	d=lists.u-boot-project.org; s=default; t=1788549974;
+	bh=YL10xCBjXEv9f/YYlIYM9yS2tCTO0ISh8s5Pf9RauL4=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=J3PU+g2ufkQY/zlS9Ne20U9AuD1YQLj6hhlZpAowOpFEUjdUVU6qKgLUjVwDuOzLC
-	 6F94YTpx40YBIuai9XbUODMmowo+RgICedmI/5ObJl1AkICb5EH4BlcJXCzCw4GdQ7
-	 na7AUjaQuSlK7HNBcxIDQfAgkQRw7EZAngA/dQZBlLjeQoEx8sWbD4W5Wqot32HHj/
-	 CklfiNqCLL/smfRiUqI4pymv+g7ZmzFRZnvZBw8LlYobbQM8W7Ajum52l5MJWPvJqs
-	 WqFFzsXooWmA+DC6Sxzk98Zi4CeEqWz6ylVr+3apFLyRKQfzix7gvXq3/5EErNfqC1
-	 v+hthPlm5Z9vQ==
+	b=dRN9t7y58neLwD2kE+FjOujkh8ztutHe4C98l77YpVaj3Q8i4L+C7FZdaTGlnGCVH
+	 9N4Pvj30fs6eIYefylrRg9R8mrRv8qhPXM5O+eSO97XkZ9TskhH/ZkEHMF0ia0SGv+
+	 KGyFYiDA6c2T+DOeQ9TK02ACVXDRC7MMqJB/fzRBDvf9PHXOoKCxcsTFs7fw+egcKi
+	 m6U2c1cbtiQWRjazceI+exP9ict1mnknZhrskw7RjynIjtWpyzdfov2w5/f4OUhsHs
+	 WNp417zTz9Z0gEa1WOa5mwL0Qoi9wHnByK2JnRHxvPD8liMyFzjpEV8CrcoQ8GuhQa
+	 QYl23yL781J/w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 641CF40A7F;
-	Fri,  4 Sep 2026 19:26:12 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id F1DF52FC
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:16:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F058640AD4;
+	Fri,  4 Sep 2026 19:26:13 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id BCAD1F14
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:18:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id EFAA740BBF
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:16:51 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id AE494810DC
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:18:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LmOL2dCGXRAd for <u-boot@lists.u-boot-project.org>;
- Fri,  4 Sep 2026 13:16:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 2FC8A40BB3
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ryzi_dddv4VO for <u-boot@lists.u-boot-project.org>;
+ Fri,  4 Sep 2026 13:18:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5066E80F71
+Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip=159.226.251.25
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788527811;
- b=Ru0lHxXMC3DBvX5tMNkJOH63A9XS8TtaVyRTwBODZ9t3wWMusFcMXLRzCN2FbHCoXFKZ
- NcTTJ17DotX0M95wHYk3VHft8e49Y4PBuOOX2V/6CB+hntJJTLuoowNtxqezhjD9sv+bG
- GBRC4bxuP5gqP7ml7/lQf+lXih8DhMhhtfiMhLrbwX5p2XSWgV2G5lawOfnMxSYB92DJa
- Bn1kyEaiXHgBWBqQVdfvJixs17fACL5tZ/h9AlkMuEQRDrJZg9Q/iDAGyFx1kI6e88P1L
- I22FzFeDGPnTOEeJaOEgZ8Trr9ljKEXujKQfliKbA0BOsW59sGPjbbHn5Pu5lQqeP8Q==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788527889;
+ b=Ty5Kx7JaIWRgKO5M0nmj3S48U0+Lqk9V5hry3quyhhzTjkvSZJ3aYf6O4MtU0PqS2zMw
+ M5EOgxXfhtocYrih27DxQcAcxtcfB2PtvxRlZDICGG/j1GZYL7Jbe/zD5BXFLBJI4CrnS
+ ziSdRJsreXRhoWga1lsyenbdeueOaI/Nsz/uC8fMkyWJKY20Qy0G1kPLe0iA0ajzEDqzK
+ cy8f+sVd6yVmwUcYyHxv3Ea7uCklzdE8pTkf1TBIlyYnACJJ61Nl+eXhwa0nQfnywKlYj
+ XD4c9NbmJ3rsdZ75qP4YsE37gZvFIJvu4cG7Ddn08J29jznjRkNTWkePm09ffNJeucA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788527811;
- h=X-Greylist:Received-SPF:Received:From:To:Cc:Subject:Date:Message-ID:
- X-Mailer:MIME-Version:Content-Transfer-Encoding:X-CM-TRANSID:
+ c=relaxed/relaxed; t=1788527889;
+ h=Received-SPF:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+ MIME-Version:Content-Transfer-Encoding:X-CM-TRANSID:
  X-Coremail-Antispam:X-Originating-IP:X-CM-SenderInfo;
- bh=KcpwnS+oUk7edeyaOAYVkROYYD774R2jEMd/whMQkn0=;
- b=RuWxTvHMl7oMMSQcTpGt2B3w0dj9wCMfvWJJW9MNLiMCvMXd4+V0EFvRe4O246AA/eYG
- qWqj/kLwmLwa44F70RIVcHTepU47fICok5TDvWyezl76mhKgMSP5bNc4fz9kMQND5rIYl
- CsVPi9LteVfByRegeo0XU9B1IctdfI0Ygn2E3kB1Spe4etMpwAVIE8z8B0GbPOa3Tobni
- f7uHBo6GlVgehiVl6dqUtErBgpgoedZr7kco/ij6+QnZ/WeAeiTfvsP+ZaKFqwOjPMcF5
- eno0b8CfWQmrOBmvGEbuhoQoCVRNY1LngobUbgrtxG8GjwOCxdddLZlXprIPgQt/R0Q==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=YL10xCBjXEv9f/YYlIYM9yS2tCTO0ISh8s5Pf9RauL4=;
+ b=WIJadPY0a7hOzZU3tIv3HKHbOz/Nw54DqUvs2/qm30uKp+Del7FCWIOCblXRRyctor2Q
+ /1G+cNhyVw/6gi4CB5J8FkrW7+GPgC0fb4NdoOV2wWsl+gcbEx+WNsWHb/GEvIOKjgXUd
+ vjePSkmFYPJDgE10Gsvc0l7fs7TkebsBbXun16w8dfz38GQkRoPJG8rlzc+fzjlY7BQY0
+ dWSdNSbH269/sisVa5nFlOrhbkNrt2MyCl2ydnUxRzJqfJfUu9smZbc8Nqsn1Q0iHRsCp
+ v8ODgxAe0BGZDFUV3aA+Ws+ichTPJjPp1bTpHlJzGIolQj1wfABWXTZvjz5QFrDwA2A==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=none header.from=iscas.ac.cn; 
  arc=none smtp.remote-ip=159.226.251.25
-X-Greylist: delayed 102 seconds by postgrey-1.37 at util1.osuosl.org;
- Fri, 04 Sep 2026 13:16:49 UTC
-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none) header.from=iscas.ac.cn
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=159.226.251.25;
  helo=cstnet.cn; envelope-from=pengpeng@iscas.ac.cn; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=iscas.ac.cn
 Received: from cstnet.cn (smtp25.cstnet.cn [159.226.251.25])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2FC8A40BB3
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:16:48 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5066E80F71
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 13:18:08 +0000 (UTC)
 Received: from localhost.localdomain (unknown [111.196.241.250])
- by APP-05 (Coremail) with SMTP id zQCowABnlkClxJpq5tZYBw--.1228S2;
- Fri, 04 Sep 2026 21:16:21 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowABXwjz1xJpqzNpYBw--.9007S2;
+ Fri, 04 Sep 2026 21:17:42 +0800 (CST)
 From: Pengpeng Hou <pengpeng@iscas.ac.cn>
 To: u-boot@lists.u-boot-project.org
-Cc: Pengpeng Hou <pengpeng@iscas.ac.cn>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] efi_loader: imply the FS_FAT Kconfig symbol
-Date: Fri,  4 Sep 2026 21:15:48 +0800
-Message-ID: <20260904131619.42621-1-pengpeng@iscas.ac.cn>
+Cc: Pengpeng Hou <pengpeng@iscas.ac.cn>, Tim Ouyang <tim609@andestech.com>,
+ Leo Liang <leo.liang@sifive.com>, Yao Zi <me@ziyao.cc>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] riscv: mpfs: imply the CoreQSPI driver
+Date: Fri,  4 Sep 2026 21:17:06 +0800
+Message-ID: <20260904131738.43312-1-pengpeng@iscas.ac.cn>
 X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABnlkClxJpq5tZYBw--.1228S2
-X-Coremail-Antispam: 1UD129KBjvdXoWrZFy3JrW3uw43Xw1DAr1kZrb_yoWfXFX_Aw
- 40v393Ja4UuFWIgayUZrWrtw15Aa1SqFyxGFsxtrsxXFW3WF4fJ3s5XF9Yyry7Wa1jkF15
- WFW0yFnxAr1UJjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbcAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+X-CM-TRANSID: zQCowABXwjz1xJpqzNpYBw--.9007S2
+X-Coremail-Antispam: 1UD129KBjvdXoW7JFyDKFW8JFWrJw1kurWUCFg_yoWDtrb_K3
+ W8Jw1vqw43Z3yFkw1UWF4FgryxKa4ruF93Gw1ftr17A347Wr1aqa1qgr17Xa43G3yjvFn3
+ WrZ7ZrySyr1ayjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbcAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
  6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
  Cr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s
  1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0
  cI8IcVAFwI0_Jrv_JF1lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8Jw
  ACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7CjxVAaw2AFwI0_JF0_
  Jw1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxV
- WUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI
+ WUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI
  7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r
  4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI
- 42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU5oGQDUUUU
+ 42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOgAwDUUUU
 X-Originating-IP: [111.196.241.250]
 X-CM-SenderInfo: pshqw1xhqjqxpvfd2hldfou0/
 X-Mailman-Approved-At: Fri, 04 Sep 2026 19:26:11 +0000
@@ -144,32 +141,33 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-EFI_LOADER implies FAT, but FAT has no Kconfig definition. The filesystem
-capability is named FS_FAT, and FAT_WRITE and FAT_RENAME both depend on
-it.
+When the MPFS SoC-level options were moved to the CPU Kconfig, the QSPI
+implication was changed from MICROCHIP_COREQSPI to the undefined
+MICROCHIP_QSPI symbol.
 
-Imply FS_FAT so enabling EFI_LOADER can establish the intended FAT
-filesystem dependency instead of referencing an undefined symbol.
+Restore the existing driver symbol so MPFS configurations can inherit the
+same CoreQSPI capability that the board Kconfig previously implied.
 
-Fixes: 93f6201af71d ("efi_loader: imply FAT, FAT_WRITE")
+The provider-less SIFIVE_CLINT options were removed separately in
+12a9c83cba29. CoreQSPI instead has an in-tree driver and matching MPFS
+DT nodes.
+
+Fixes: 2f7420ccaacb ("riscv: mpfs: move SoC level options to the CPU Kconfig")
 Signed-off-by: Pengpeng Hou <pengpeng@iscas.ac.cn>
 ---
- lib/efi_loader/Kconfig | 2 +-
+ arch/riscv/cpu/mpfs/Kconfig | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 4cb13ae7c8a..c4b0c2137b8 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -28,7 +28,7 @@ config EFI_LOADER
- 	select OF_LIBFDT
- 	imply PARTITION_UUIDS
- 	select REGEX
--	imply FAT
-+	imply FS_FAT
- 	imply FAT_WRITE
- 	imply FAT_RENAME
- 	imply USB_KEYBOARD_FN_KEYS
+diff --git a/arch/riscv/cpu/mpfs/Kconfig b/arch/riscv/cpu/mpfs/Kconfig
+index 8054313d182..3f0dca53665 100644
+--- a/arch/riscv/cpu/mpfs/Kconfig
++++ b/arch/riscv/cpu/mpfs/Kconfig
+@@ -28,4 +28,4 @@ config MICROCHIP_MPFS
+ 	imply MMC_HS200_SUPPORT
+ 	imply SPI
+ 	imply DM_SPI
+-	imply MICROCHIP_QSPI
++	imply MICROCHIP_COREQSPI
 -- 
 2.50.1 (Apple Git-155)
 
