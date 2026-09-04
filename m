@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ECA0C79F80
-	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 08:37:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79A9AC624DE
+	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 08:37:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BE3A960BE9;
-	Fri,  4 Sep 2026 08:37:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4760081176;
+	Fri,  4 Sep 2026 08:37:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YKCH43ebdmTw; Fri,  4 Sep 2026 08:37:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4685360C10
-Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788511069;
-	b=WFyEpP2HZWzbJFXtzzM3t2O5GkkPWjRMyDbo+GvnkL+ZGdmCVsH4LgdBHSIBDA4RDGX6
-	 34pKbTUTg8h/olQZXDTAhoE3fbd5rkplGNOKsKl5i+UK3r2EpdvchiFCPdJ2hrojUGi7d
-	 8f4/1RyVUt8hyW6HosgwQAQDY2X+uSq7J8sthe7kc9Bxw3WFF6NpRI3JuOdRLcUYaiNxb
-	 drkVAMOWF1pNyHRNdfRGoLc1fMqNmKv7QjZ5Gw5CxROBnlDgTsIiC7gfvpAG1x87grcEJ
-	 a2PvvMEE0W6X4o+g/SBRn+2Ywwa9UAwXG1LbCHpCgSdkg+Vbwsj+rOVY3Y9Gbs/3zhg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id V8C2fjZv5lNW; Fri,  4 Sep 2026 08:37:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 082C78118E
+Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788511078;
+	b=FBkhYMYrlbZ02Ox5c4uUuuuF6xtN2k6qgHArfrT05y3i8gxnnjetwvvFsudxy23+9K86
+	 DsGyVUNWcFaf9yE/Istpc+JU78iND2eFKeFYc1Bm3akNxfu7yub8S6D+aUGheEjh2Ucgk
+	 w2mc7qgkqMzMQWutS8IyU7whkl05bYAL0qUecdb9lpyq//bA1CzXVmSiKprCYQqjj25Lh
+	 LzxoVPPigKLoWzMWQ5NXWtAdQJLb9mgl4389OwtTXF/7Vzt+qUOvZRP4zQlO/uWiomr8S
+	 pjThNCFu+zgoH3nKBbBLdbq863C7yzqD4MHHVgavymoMkCz4NNXyyjsbyjp6N9gl/bA==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788511069;
+	c=relaxed/relaxed; t=1788511078;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -45,49 +45,49 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=M2QLqjHADZvfbJQXVdae1uXQLUObLab6NqHVssR+i2c=;
-	b=l+bcMKDiZJRgr0YVCPsSICg7rU91TrGTtqDSPLV1PYbab6DtUL4NaArTTNqXJs0rk4py
-	 B1MD9JOacMUm6v+XYcHPOIDYa7UzcWGJm3GTz+RPVikPeRwVpcGZxKD25RdoY9N6kgR21
-	 GD/uheb3hHHv7mNNtAIx0OIkWIIEHD+KyRYIA8MC19eUkxJbZwG3H6MFNThrBMKNnS4TH
-	 Osu7K0FhQo7aY8w7p/SL6ykPS3FSUnijJt1HZ9i4wVs5Zr5hPHza368Y7g6qfL90yrkM5
-	 R2agU7ddFTu/q/A3qrRBba2PKyslTbMEe4DZq6f1fi78S3v3dRsoCIijoNFZ/JXeL1A==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+	bh=iJop89DrqEJ521O9dYXWTJ20Ef6/5O3wCXxC7Ij/biY=;
+	b=fnaRUY6BF6AxV349RYe6uzFRktCjXCUbNuMOlRbYZ6dtyn7pZcNNdefC1u0p7FlFPLXb
+	 5FPeBxbbWaI5dSXVKZsVtKuHvXdODgaa5egtxSX/5FoQMaBAYQMIdaO1s2Px8S73PGgiH
+	 Qvh56MgYS+WAPA7arU7Tr4BSnA6y1BKSDuOUaZdCwtJ85L0BiDFbDO6qGWblmmdE9dYm1
+	 +5qVK5ohr25yB5hG8BCp4FeY//B7V2PYDRCY0vxwwrE2S5Mrp6r2s6tgywfcJ+TDB+LSK
+	 //XpJ0PSJcI9/vZUiUTnr24Q7kCVLj6zp0QJ6BxlJh08Y2NTK6Sato8ZOtejimI8ghQ==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788511069;
-	bh=M2QLqjHADZvfbJQXVdae1uXQLUObLab6NqHVssR+i2c=;
+	d=lists.u-boot-project.org; s=default; t=1788511078;
+	bh=iJop89DrqEJ521O9dYXWTJ20Ef6/5O3wCXxC7Ij/biY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wkLyU+DMDT/FI75pxr6Vxq3ok5vByVFclfaLOpzy46asm+EDgC3iuhUO3WEBR2q15
-	 GDMLI20wY+G9q87ZZVutrJKguFX6M/2FAwufFBWwdcVz9FWU/dxJSnSddhRCjKDA8S
-	 NyzOZiRDjxyrpGl/d5+ow5sppKXl8ze8b5rKPvf1xhSLR7UW1JgzB6Zvwd663s0Qtx
-	 FR/V/CxMY/LgjAGmAxbfZKGUCkLSErwyV1cRXXTptYT0i44Hxvs7FAyFcCDgxDv5ML
-	 PGaQOR3MmQnoUwWR0oZOMfxsUqH8rSGJUNgpUtt6IsT5+J1S9qeZklGrtaoom/783p
-	 TYLPx9kdDiqYg==
+	b=EtnxSM1iC0KgwAQFnQBpQDcZdBmhU2LtMPGSr/jq+Dj7cDTcAHTYkBUM5YtXt718W
+	 rYwFbtiRZyMeYl/MpYkEHTyN+A0XLNaiUyEgsX64LX66+YTc2mGVEPB5WpnKyke3g+
+	 BrLBKmaXZ6jcu1gi/vAopscfdVnx9WMgz7uWd8MVJwCLHtYAzelHb7a/FrYKTSI7tB
+	 qWsl7ni0il9vUeD0qdBNeFlfO2BzYCNNo6jKUmQ3EwRNoM/HBXS6t93eu03Hkwvk9j
+	 IaUeKIylbEAxcrvsyZDpBAcRCN7FT0bLbsARSe1I9wabE1+dY1WUkDkjUC+TtiIGze
+	 kcBfHQw4uvijA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4685360C10;
-	Fri,  4 Sep 2026 08:37:49 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id A36C43DA
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 082C78118E;
+	Fri,  4 Sep 2026 08:37:58 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 49D963AF
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A162C4013E
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:30 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 35C3A60BB6
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Nh3CqZGasdiK for <u-boot@lists.u-boot-project.org>;
- Fri,  4 Sep 2026 08:37:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 542D640080
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20a::2"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QCEWQrnq8UFQ for <u-boot@lists.u-boot-project.org>;
+ Fri,  4 Sep 2026 08:37:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7DD8E6070F
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c207::1"
 ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788511049;
- b=aMfyGlJQzD9E4nAOo1P8xGPlq2g6E5RHxftHiLZ3usxC3WJgD+9TJC7SIH0Un1vZZJbS
- hxOLNyLxlpvOEVlTEk1Yl0kMkh83kM/ef1pSIvigl77T7Ig55nZZoIiiYThYWE9JYe1Dx
- O2sOkfzloqIySa12ASEyOD38kCYMqck7YGTluCMZxgawJgRcM5IDie71w2kgVN8vVls6O
- orjf5vwEg/hT/dZAZf0HMZGTDcKQMwPN2iQdEKGMjppUb4ulgIqulUcIdoZUyvudwMuOA
- pvWTncLm9ZfvvLaphWlcgTDMLBgYp9AEZqx+Zz5i3A6dshUOuMKeeLk7/ng1cCbnRWg==
+ b=pbj/z0V92IcXKOG/eytS22qN3C8REgLdhwVpZ91g3VdWMir/uZcXsrbyOC78kRS1URSI
+ 5k2RsRaKVciz1DShQA2dxJrI+nLSITTlwQ/M2FV434Tc4skFsOyZYLuxWBXbsJ81Zt91L
+ gKsy/laGRt/SsHmRTs5wjK3HgT6pz6vLQbGa1oj2II09rLP3QPY5JLTr4DMMpKbtNvwU7
+ 0zc6tHXiugn4wpQLEVXAWosco7CDxA/XYRhR3It76EgnEyBVXBJ3GDANwGnE+dk5u4URi
+ iinN9we68guVDm/+9BVmcfECelndci/CUMWq2FxAV2enO4ZNuJ/KWTtmWflcVKjUR4A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1788511049;
  h=Received-SPF:DKIM-Signature:Received:Received:
@@ -107,40 +107,40 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
  X-MS-Exchange-CrossTenant-FromEntityHeader:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=M2QLqjHADZvfbJQXVdae1uXQLUObLab6NqHVssR+i2c=;
- b=EYlBKGx5HYZ9bgzGQ1nVFY8Zek8JZJNl7qeTPX/YZ2Z8pta6/yUN5w0KS77ces4rQbs0
- KolbRDb1jxocippm/BRis3GObOlks3tImGOHt292+p8yjhcxpjyHSWhzZ1iOd1CXfq/Fd
- E4obnxHs6n2mfsH7CDYB5Q9b9vmTL/DuSu2/iwnZArHOOyD8UjThpJWdipuMA52KoJVHH
- 1tyJKBvELJW04snbtIfv18ePtIt3TKlSpZrFz+t6syMW/BJvQQaMJgREBpaa6NRk2uU9S
- Oa3KlQ5YRDJiMaKm3BzNRf6p01WdYHxwnZgsMTas5Q8FlHns4h2fgdqoa5Tbkv5k65w==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ bh=iJop89DrqEJ521O9dYXWTJ20Ef6/5O3wCXxC7Ij/biY=;
+ b=a4/JfNkupP7lzO+SNedy6+ZIFZjg29570+BxeufVMI0XYgsQO8EMPWMBonvY/t0lpezh
+ Zq1UJJV4DJ5ttpBJmfc4IaauNFwOEuQQQCUeTZcRafEBvCbG5nwYHuSFNbVg8vVLoQnJ/
+ dpP9lRsHHhx+83LtWXm/e9A0JKSmYvKuZ3P/RbaoVlXS5SHR+FcLBFQJ0+LtZRw6mYfJ/
+ 3aAcX4isS9NRh1Ak+TatCsPQUS3I2w8T/OxPoCgXlDDbGuVx0vYXq6p/NkvRYk5Pbs9jB
+ FY6zPFQzrPYCPd4fvUIDdPpDEHrfy2h9WtkdIRYTV0z8y725P8Ui/KRe7u4fWBsZprA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
  dmarc=none header.from=softathome.com; 
  dkim=pass header.d=softathome1.onmicrosoft.com
  header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=iUX6TFiv; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20a::2"
+ header.s=selector1-softathome1-onmicrosoft-com header.b=tSB1giZt; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c207::1"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20a::2;
- helo=paup264cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c207::1;
+ helo=mrzp264cu002.outbound.protection.outlook.com;
  envelope-from=philippe.reynes@softathome.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=none (p=none dis=none)
  header.from=softathome.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=softathome1.onmicrosoft.com
  header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=iUX6TFiv
-Received: from PAUP264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170110002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::2])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 542D640080
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:27 +0000 (UTC)
+ header.s=selector1-softathome1-onmicrosoft-com header.b=tSB1giZt
+Received: from MRZP264CU002.outbound.protection.outlook.com
+ (mail-francesouthazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7DD8E6070F
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 08:37:29 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=C4RelQYZuQZel47oKl9ZZUIx/bXxkGSxjMAV+9gbIA9snhdkMdujMU9xzgKkZfAZDAUCHtIYLuZytqxEFv4kwcli84y5jUjkzA2XbOgLH8tsgH1sr+z5G32OzorALVjTuRxdj7bbxk1lqIitomrozggel0w9Q9rjseac7MjKgMH01z1Nb5h9WNwMcrKPEdUw2+4066ReZSWqk2oCdSryNYANhcj6jYSXm/2fv0XskJ6WNfXoElsaA19jY5F8kFGoZqfeG497vZVEzpuzLL0JjLB2LNG0gxqtUvY+bj91o4OvFmtr7IbVKLLSpzMdB4ukLdrKDHI0S6TgcsIfjdMigQ==
+ b=BvzDwM8TfyrjBubbx5DSGv8tJfAUJ4SwoHH6qxPKWMvEQ3xhq3bQdjXgcBRZCI5wLmRpKjpHidpb0SIDAdmXt5NI6kBj/k5OLwbFiCWIAwgw1+kVlzSa5o8Si6JrTX7lAtWqNdGVnjCM8U14kwFjCl2Y0UNmAq2c/FXZijEQE/dHo/xh8YnkFXeOgPNdDuJUcn9rrN2GPus6mL9x9l94AhiWXHwbPwzbEr/QE3HFcgYrN/rniI131Aq2lKWJQ+CsC5vSX7tBSQfMso4l7dDmJ6HpqyPCIQXX1mp3v7baUBzeKX722wNEGGth89sZW8mA5jhTR6t/xyeujU1L2F3PFw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=M2QLqjHADZvfbJQXVdae1uXQLUObLab6NqHVssR+i2c=;
- b=RTnB7ynLgtfbUBV2XJ4DskPGeO3DQ7KeojdCI6fQ+4UofGWC1+3068KD7Qcc958J9s2HJg7DrlpqqGJhrYiQkhnr9OdyCqIyrRROoD7h3AbT6YzErBPvKjciP0vnyN6RP9LHSI9wzsNIlXJuYXITNz34WzGi6Zl62Ths9I/nAJLLqt8cOap4JeRMc6FkLZOyyPDREIiN/WQuIuPSmJZ+hmWJ5avdLPkkNodBijQgWjMAeWB6JAtG09aYwjN4xF1Pmgh8S5w3f+lO9L6BsUG2AaWCZIzo/6tmnGnrxM+Mqtu1cn7j51vTXNN2aD3NO1iCCCCWF4eJJmUMKAS6rvemiw==
+ bh=iJop89DrqEJ521O9dYXWTJ20Ef6/5O3wCXxC7Ij/biY=;
+ b=MdeabPng1XbOqsxv2nESHmJYLCoamueav3NxLVAPJw+FzLZtEo10CODSushhL7Qme4CBMS+uNADvAwWdKTdF0xm1dGPfzHR6er5sFyi8hMaVcJexR1/elWUnouu/cGQzRkG5QPY98uv4xead4JW4dDmxyPqQcv6U6bOG+L2FsPtAH81YeCEXb8yXOBBYWvlqSDZ0s9sohoQ6+2U510GjVRtbP/EhB6oQ81XeOpjUqSfZIv1egjbDg8fCTaXvclrzzeKQUp5j1Lh8ExUmivNgWqFAAZ2EwGhTHaAAwmrNFNXbrWOF8Fw2r6f462jlXxu0ynEdlsDVXQqAJg7r4ojnbA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -148,18 +148,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=M2QLqjHADZvfbJQXVdae1uXQLUObLab6NqHVssR+i2c=;
- b=iUX6TFivfPhhZxxMJd1GzB9SG1kVVKuEupDkIQapAihzOEOmBFdT0+aK2IkzIFc6RSey/o/sIemq9nIC3k1wc9pWPDBnItE2mpjOOmXR3ugOV85xXNjE60bY80vOoPiysqomtsEMqC2xPXxLCv8nKA8m0vVfoz9NgbSOuPVWLS6mHgfIPK5G/0OUILCMI3fdh+cbZkjpfWlcefqIMhTvt9FgqjFzpXoTP4fJwTB5tZmuG8taC+BCyurhTYypvkAYOYMq9sADmdSgapq2XwG4RCdd6EOyrBZitYKyk92IvASVytd5Qjs1sYNr29dKUcjX/dSkYYyYfP4yW4jXSpDStA==
-Received: from PA7P264CA0208.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:36d::10)
- by PR0P264MB3158.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1d5::8) with
+ bh=iJop89DrqEJ521O9dYXWTJ20Ef6/5O3wCXxC7Ij/biY=;
+ b=tSB1giZt5bLFQCfUJ7uGhJEm61fVJNBpR8sWWvAToS70iQcs7Yya30DrG1/uSzQM3Sord/n1sFy0jUMh1ZYZa+c+SeqSPrCoOrA8g3fXyP7BBYOm92KF2xcuq+tmJHAfeGFbef/1hLMNgsa/8IJNfyjov9cRF9KXIuksDS2lIpIvJ8i9+bSKMm9T0P/kll5JTasD4uXBJyqhLx+T15F3z/TSVSc38eLdXdVVzJigsGxXpRkovkLudRPm6Ak+RXy/h9lUflPDeawg8XhJjWcFp5Y5sN254AOG4H+4rXrt2cnCpdip7iYrCQX6GXGxc7E/kDh0qpBRDmUftnoxrOj0pQ==
+Received: from PA7P264CA0211.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:374::7)
+ by PATP264MB4641.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:42a::18) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Fri, 4 Sep
- 2026 08:37:23 +0000
-Received: from PA3PEPF000089BA.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:36d:cafe::7e) by PA7P264CA0208.outlook.office365.com
- (2603:10a6:102:36d::10) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 08:37:22 +0000
+Received: from PA1PEPF000CC3FB.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:374:cafe::67) by PA7P264CA0211.outlook.office365.com
+ (2603:10a6:102:374::7) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.12 via Frontend Transport; Fri, 4
- Sep 2026 08:37:23 +0000
+ Sep 2026 08:37:22 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
  header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
@@ -168,11 +168,11 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- PA3PEPF000089BA.mail.protection.outlook.com (10.167.242.22) with Microsoft
+ PA1PEPF000CC3FB.mail.protection.outlook.com (10.167.242.6) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.8
- via Frontend Transport; Fri, 4 Sep 2026 08:37:23 +0000
+ via Frontend Transport; Fri, 4 Sep 2026 08:37:22 +0000
 Received: from sah1lpt726.home (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id D9EFF202FE;
+ by proxy.softathome.com (Postfix) with ESMTPSA id 79F5E2044F;
  Fri,  4 Sep 2026 10:37:22 +0200 (CEST)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
@@ -180,9 +180,9 @@ To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
 Cc: u-boot@lists.u-boot-project.org,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v10 12/15] boot: pre-load: add support of ecdsa
-Date: Fri,  4 Sep 2026 10:37:16 +0200
-Message-ID: <20260904083719.53132-13-philippe.reynes@softathome.com>
+Subject: [PATCH v10 08/15] test: vboot: add test for ecdsa
+Date: Fri,  4 Sep 2026 10:37:12 +0200
+Message-ID: <20260904083719.53132-9-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260904083719.53132-1-philippe.reynes@softathome.com>
 References: <20260904083719.53132-1-philippe.reynes@softathome.com>
@@ -190,30 +190,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PEPF000089BA:EE_|PR0P264MB3158:EE_
+X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3FB:EE_|PATP264MB4641:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 64533c14-4ca1-4880-a831-08df0a5fbdac
+X-MS-Office365-Filtering-Correlation-Id: 8cc8cd1a-ff00-40dd-1831-08df0a5fbd79
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700016|23010399003|82310400026|56012099006|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 6JZ5dN7sIW7zBvk4mPDjPMQrDwwGDgs+fjyU6SUTFlTBOun3uakpjxTbeA/egg0B3fFLxVb4hk/jRbnraY8Dyv9mvuBUcV+6+VVnXPgOFdI0iA3uv0/Bs+x8wDVkXwhqH262mEksIyWfgz6sGtX5xPe/IaZPm1Id6sC0LpSKIEW3IzEgawPgQyajx1yuFAjx+amf7pEqj0VKK0fasCUDIBBRC6D0ZaW62kDjW7IzF5VAwiT6zbvXITDoMUXnvDXRgvQA7GmPWWh7Mni5aSMbkTgqu2WtmF13xUOmVNHv6VC3nndVb1hz/fmyRpVBczCHgLduYwB2FhIGD2WIkQFfTM6qABVHhc6j4Z3bIHJtSQJu7ThYjfRmuiQ3XFuVO/nm81JudciM9+46Dlg2W61lt3bHl5h2JWcT7CLjSxx9KMKfyQr8qmuUiBYmCg/1DzjZ0pV3RYtQzza1C2Py9kVvQS/pTcr3MG3Ds7xmBolHHljF5LVtd+BfSnM9eDRxB3qoQ1CHgGO2s01DrSialcMRn9SEuD/x390UMBjUitLBzEyZdikladxDBRg4FUZSTM0VMcPBVyY2nD4XWnA9w5VI9ce7KHagBNdTY7MX5C9KfwOU/eIHxOTtlhrwM52JAqvq1fooET2vLjOzjLk7Q/JqV8qs8T1GvgNW0en0jCKYY68HOdL0FUScb2MEdmPbc3KzCO13NLMJpUSvdFvf+5oPUg==
+ ARA:13230040|36860700016|376014|1800799024|82310400026|23010399003|10067099003|6133799003|18002099003|22082099003|56012099006;
+X-Microsoft-Antispam-Message-Info: zsdNM+g5D+u9suF8/9jU90SphJuOEmB5xo2yPjFINmcpCNv9EjpSGlOUpyuLmpHwPghVIutbouUUv4mC47qIwcWvIoWQlkPgSnZAQCRURsQpA50tfDDKQxdC0Dx3v+mLUyZvGZb/uzskdeEGDU4aNhB3HU8DBGxd3Cgjtv5HLTz2faOdX4qrQyf8TROig0bj7UwSq+AJ95MCvKNUeFGxxsGsErGz5kLvWl76jhxJ2VgpZPDN3WTKmnX3NySaiqU7gsRF0UPTzed2y1epePkxQOCL6v14EUA/hu7xN6BKPwBk5Kq/26IbQ/Ev8M8G9Z3lYAQ0TsYrtczX+zkumIJ55+6rLzbBgiTxaJ//fuUWx5b3D9+t7CGkQs4scqtpx+6cijP52MVoJnslNwAM4K0HcUJFSpU/TMmK4TCiYdk48Tk3fA5A5TBPGJ3aElVqPAjM/7L9WMLyuLGnK8OQDRT/iyK/OH5r1korg5jOm2UNearxsCRVqs4CxR12+QgHpjrn9d1A9dDxB/efH9I0eunzDC4HO03RYZEghZYnVwN4NFjty8i2sWwzIrfabGzZ0Jpq+tuwchH+8tDlCT3Zh10wLLn51Lp9yMP5e+WXReupCxHDH2rGglqDssJrLEvKFdDhvEVLsGSCoCZaR0j+P23lq0LSkqkkrNybeBfIQgMbz9Cv3tKWqJM+Gun3SUS6ppvPW5ckFXb5BG7hsIxtTvnbhg==
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700016)(23010399003)(82310400026)(56012099006)(10067099003)(18002099003)(22082099003);
+ SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(23010399003)(10067099003)(6133799003)(18002099003)(22082099003)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: fbDhHiVCAxH4J/Afvk56oBJU0XXJ+ccmb4TdDwgnA3Wkz7Q11R15dsrCm64biWqqPjWxS42S4ko/ee6DH1vsx8C75y4m01P6LqPPw4qDTfxZwXnx43kXj3G7Zv1+A4NKV7Xh4/DHSQbmBwCHelJnCRlKy/Y/DnK766CYZOhNv6XFeMNut6pSbei6UJCdGgG8GfZa0lbTxuVIrC0j6R0XaLzpg4UE5UZ8HTEaDYXRflD5ex5V4OUtyLBK5hNz4gd4Rh13ay//JIKuccPXZaE5+sycYYZPKkQrMKerEFKKP18qKwy7mxC5MvlUnYdgX3I91JKDulV0xvXJk5DS8eby7i36SRhPselhJV86DndFP3Dqsq02drlV6cpc6GzoSFgyfYjXWstONPg0Xxy6mRlY70T8rP329qQEQyWGz09LKP1qBuD/Y++r377RjsgGjU5x
+X-MS-Exchange-AntiSpam-MessageData-0: j1mKrJ2M/cqaqRpissMM6JpAIzEgcCElek8+Urq5mR6ew1J6UTIFvJhdCLo3dbxKJzUiFCS44qicxsEVqd6gl3xaTPX7eMZ/cx8v4B8YpMLuYm1eqeRdePVizQdyzSsiOy3TmSO89v8NWBzyXJru6Dn30e0MtHLIHo3SCSs614S8Hhq6z4sB50KvYHZEOEniL2m1f0qWTgHrbmXH0gpvmtlBXP8nrkm45QQe1BHq1lF113g61w8jAikq7rAcor9TRQbbqMEPD0/LhWNNt/DIKfNWzE6XXb33DW2rI6d0SqkbBdqA2+S+6RpblJ0/x2u6SCsKhFlC62ud+U6wlqzloh57PqV4bJCR4WWdYTvBneNHP3NscbPRSav4hEqoWw/dAIO9IGmUoclmvi4R34GyfMqlnxpCeJiutuV+WR1ubVPLMVoaAZvYnvp9C9vY+V0r
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2026 08:37:23.0145 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 64533c14-4ca1-4880-a831-08df0a5fbdac
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2026 08:37:22.6430 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8cc8cd1a-ff00-40dd-1831-08df0a5fbd79
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089BA.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3FB.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB3158
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PATP264MB4641
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -227,21 +227,22 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Right now, u-boot can only boot image with a
-pre-load header with rsa. We add the support
-of ecdsa.
+This commit adds test case for ecdsa on fit, but not (yet) for
+the global image signature (preload).
 
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
-v3:
+v2:
 - initial version
+v3:
+- no change
 v4:
-- avoid calling image_get_crypto_algo several times
+- no change
 v5:
-- simplify the function is_ecdsa
-- re-use already computed crypto in function image_pre_load_sig_setup
+- no change
 v6:
 - no change
 v7:
@@ -249,107 +250,373 @@ v7:
 v8:
 - no change
 v9:
-- no change
+- some minor changes to fix rebase on next
 v10:
 - no change
 
- boot/image-pre-load.c | 53 +++++++++++++++++++++++++++++++++----------
- 1 file changed, 41 insertions(+), 12 deletions(-)
+ test/py/tests/test_vboot.py                   | 29 ++++++++++++
+ .../vboot/sign-configs-sha256-ecdsa256.its    | 44 +++++++++++++++++++
+ .../vboot/sign-configs-sha256-ecdsa384.its    | 44 +++++++++++++++++++
+ .../vboot/sign-configs-sha256-ecdsa521.its    | 44 +++++++++++++++++++
+ .../vboot/sign-images-sha256-ecdsa256.its     | 42 ++++++++++++++++++
+ .../vboot/sign-images-sha256-ecdsa384.its     | 42 ++++++++++++++++++
+ .../vboot/sign-images-sha256-ecdsa521.its     | 42 ++++++++++++++++++
+ 7 files changed, 287 insertions(+)
+ create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
+ create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
+ create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
+ create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa256.its
+ create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa384.its
+ create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa521.its
 
-diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
-index 2f851ebb28c..af72ea6d547 100644
---- a/boot/image-pre-load.c
-+++ b/boot/image-pre-load.c
-@@ -70,6 +70,12 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 	return 0;
- }
- #else
+diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+index 33cbcea5c24..89876ff030a 100644
+--- a/test/py/tests/test_vboot.py
++++ b/test/py/tests/test_vboot.py
+@@ -94,6 +94,9 @@ TESTDATA_IN = [
+     ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
+     ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, False, False, False],
+     ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', True, True, False, False],
++    ['sha256-basic-ecdsa256', 'sha256', '-ecdsa256', '', None, False, False, False, False],
++    ['sha256-basic-ecdsa384', 'sha256', '-ecdsa384', '', None, False, False, False, False],
++    ['sha256-basic-ecdsa521', 'sha256', '-ecdsa521', '', None, False, False, False, False],
+     ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False, False],
+     ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, False, False, False],
+     ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False],
+@@ -287,6 +290,29 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+         utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.key '
+                           '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
+ 
++    def create_ecdsa_pair(name):
++        """Generate a new ECDSA key pair
 +
-+static int is_ecdsa(struct crypto_algo *crypto)
-+{
-+	return crypto && !strncmp(crypto->name, "ecdsa", 5);
-+}
++        Args:
++            name: Name of the key (e.g. 'dev')
++        """
 +
- /*
-  * This function gathers information about the signature check
-  * that could be done before launching the image.
-@@ -86,6 +92,7 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 	int key_len;
- 	int node, ret = 0;
- 	char *sig_info_path = NULL;
-+	struct crypto_algo *crypto;
- 
- 	if (!info) {
- 		log_err("ERROR: info is NULL for image pre-load sig check\n");
-@@ -114,11 +121,24 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 		goto out;
- 	}
- 
--	padding_name = fdt_getprop(gd_fdt_blob(), node,
--				   IMAGE_PRE_LOAD_PROP_PADDING_NAME, NULL);
--	if (!padding_name) {
--		log_info("INFO: no padding_name provided, so using pkcs-1.5\n");
--		padding_name = "pkcs-1.5";
-+	crypto = image_get_crypto_algo(algo_name);
-+	if (!crypto) {
-+		printf("ERROR: can't find a valid crypto algo from %s\n",
-+		       (char *)algo_name);
-+		ret = -EINVAL;
-+		goto out;
-+	}
++        if sig_algo == "-ecdsa256":
++            curve_name = "secp256r1"
++        elif sig_algo == "-ecdsa384":
++            curve_name = "secp384r1"
++        elif sig_algo == "-ecdsa521":
++            curve_name = "secp521r1"
++        else:
++            curve_name = "unknownCurve"
 +
-+	if (is_ecdsa(crypto)) {
-+		padding_name = NULL;
-+	} else {
-+		padding_name = fdt_getprop(gd_fdt_blob(), node,
-+					   IMAGE_PRE_LOAD_PROP_PADDING_NAME,
-+					   NULL);
-+		if (!padding_name) {
-+			log_info("INFO: no padding_name provided, so using pkcs-1.5\n");
-+			padding_name = "pkcs-1.5";
-+		}
- 	}
++        utils.run_and_log(ubman, 'openssl ecparam -name %s -genkey -noout -out %s%s.pem' %
++                     (curve_name, tmpdir, name))
++
++        # Create a certificate containing the public key
++        utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.pem '
++                          '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
++
+     def test_with_algo(sha_algo, sig_algo, padding, sign_options):
+         """Test verified boot with the given hash algorithm.
  
- 	sig_size = fdt_getprop(gd_fdt_blob(), node,
-@@ -129,12 +149,17 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 		goto out;
- 	}
+@@ -570,6 +596,9 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+     if sig_algo == "-rsa2048" or sig_algo == "-rsa3072" or sig_algo == "":
+         create_rsa_pair('dev')
+         create_rsa_pair('prod')
++    elif sig_algo == "-ecdsa256" or sig_algo == "-ecdsa384" or sig_algo == "-ecdsa521":
++        create_ecdsa_pair('dev')
++        create_ecdsa_pair('prod')
  
--	key = fdt_getprop(gd_fdt_blob(), node,
--			  IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_len);
--	if (!key) {
--		log_err("ERROR: no key for image pre-load sig check\n");
--		ret = -EINVAL;
--		goto out;
-+	if (is_ecdsa(crypto)) {
-+		key = NULL;
-+		key_len = 0;
-+	} else {
-+		key = fdt_getprop(gd_fdt_blob(), node,
-+				  IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_len);
-+		if (!key) {
-+			log_err("ERROR: no key for image pre-load sig check\n");
-+			ret = -EINVAL;
-+			goto out;
-+		}
- 	}
- 
- 	info->algo_name		= (char *)algo_name;
-@@ -152,9 +177,13 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 	info->sig_info.name     = info->algo_name;
- 	info->sig_info.padding  = image_get_padding_algo(info->padding_name);
- 	info->sig_info.checksum = image_get_checksum_algo(info->sig_info.name);
--	info->sig_info.crypto   = image_get_crypto_algo(info->sig_info.name);
-+	info->sig_info.crypto   = crypto;
- 	info->sig_info.key      = info->key;
- 	info->sig_info.keylen   = info->key_len;
-+	if (is_ecdsa(crypto)) {
-+		info->sig_info.required_keynode = node;
-+		info->sig_info.fdt_blob = gd_fdt_blob();
-+	}
- 
-  out:
- 	return ret;
+     # Create a number kernel image with zeroes
+     with open('%stest-kernel.bin' % tmpdir, 'wb') as fd:
+diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
+new file mode 100644
+index 00000000000..6bd291a40c2
+--- /dev/null
++++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
+@@ -0,0 +1,44 @@
++/dts-v1/;
++
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++			signature {
++				algo = "sha256,ecdsa256";
++				key-name-hint = "dev";
++			};
++		};
++	};
++};
+diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
+new file mode 100644
+index 00000000000..68c482acff2
+--- /dev/null
++++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
+@@ -0,0 +1,44 @@
++/dts-v1/;
++
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++			signature {
++				algo = "sha256,ecdsa384";
++				key-name-hint = "dev";
++			};
++		};
++	};
++};
+diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
+new file mode 100644
+index 00000000000..f673accd39a
+--- /dev/null
++++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
+@@ -0,0 +1,44 @@
++/dts-v1/;
++
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++			signature {
++				algo = "sha256,ecdsa521";
++				key-name-hint = "dev";
++			};
++		};
++	};
++};
+diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa256.its b/test/py/tests/vboot/sign-images-sha256-ecdsa256.its
+new file mode 100644
+index 00000000000..009003bb601
+--- /dev/null
++++ b/test/py/tests/vboot/sign-images-sha256-ecdsa256.its
+@@ -0,0 +1,42 @@
++/dts-v1/;
++
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			signature {
++				algo = "sha256,ecdsa256";
++				key-name-hint = "dev";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			signature {
++				algo = "sha256,ecdsa256";
++				key-name-hint = "dev";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++		};
++	};
++};
+diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa384.its b/test/py/tests/vboot/sign-images-sha256-ecdsa384.its
+new file mode 100644
+index 00000000000..567de687a06
+--- /dev/null
++++ b/test/py/tests/vboot/sign-images-sha256-ecdsa384.its
+@@ -0,0 +1,42 @@
++/dts-v1/;
++
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			signature {
++				algo = "sha256,ecdsa384";
++				key-name-hint = "dev";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			signature {
++				algo = "sha256,ecdsa384";
++				key-name-hint = "dev";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++		};
++	};
++};
+diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa521.its b/test/py/tests/vboot/sign-images-sha256-ecdsa521.its
+new file mode 100644
+index 00000000000..74ed45b21b8
+--- /dev/null
++++ b/test/py/tests/vboot/sign-images-sha256-ecdsa521.its
+@@ -0,0 +1,42 @@
++/dts-v1/;
++
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			signature {
++				algo = "sha256,ecdsa521";
++				key-name-hint = "dev";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			signature {
++				algo = "sha256,ecdsa521";
++				key-name-hint = "dev";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++		};
++	};
++};
 -- 
 2.43.0
 
