@@ -1,172 +1,190 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70CAFC61DD6
-	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 14:33:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7ED7C624D3
+	for <u-boot@archiver.kernel.org>; Fri,  4 Sep 2026 14:47:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2BAE540BD6;
-	Fri,  4 Sep 2026 14:33:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8DD9D8119D;
+	Fri,  4 Sep 2026 14:47:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ScjShRcx9DOG; Fri,  4 Sep 2026 14:33:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 86BF140B5C
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788532380;
-	b=a2Ao7hxYobK9Iqpm1OV04x0c3DAadA4NUBrEYfexbD38TB8MtleiaRYikpTmqtZ56Qq7
-	 YQdqk42Bd9j3o/J3z6vY2Sg/g8yp1AG1T2oaEWiBMSYX8sWG4fOzxI8H/8u1Y4+H8/nHD
-	 gmFkIqsEi1lFAYvEKVKrwaohOBBY0cAiK4MJ/rR0GzuBDhvhVYI4hjNwIt8Dp8gc63hkj
-	 1Dcx/2lNMuT43vBEvoX9V7/KKssVHFAgM1cmQwVgwA4YShalZN9ur4opQ4rB/uZGHV/xI
-	 sHWT8dK+LwNUTIATPezdgR78UloKOwoq2NVpIMzCKH4KDm9qhrwsORYy9Wuj+9HcgVA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cSldb-ghzUHx; Fri,  4 Sep 2026 14:47:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org AD4E7811AC
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788533251;
+	b=M2lG1N6bLc7NVPBWi7sTWO2g9JYIo0OrVAFprLpGlnROTIZWpt+oVyNz5y0uwgs7DvpN
+	 LWfmg+ZFWZ0i7HK2beLlsCrHgq6bIYlH9kugC2wloH+wGeHhx4797pv+XvqNARIO9Nm/j
+	 CVEYT+bfOFIye6lMDL5VS63eOHcDC1hr0vZHZygyH25AYSAkKpAc8nlKF1SYXQZN09dSF
+	 doYmHTE3a2XltSYbTBexPe3HGZ4+f8rAtjnKNVOm9/FoztUlKeylaSB/LOBDgJGRYXraT
+	 JeZxiU571jnFYKZXEaoQhhkB0oVkYP7JZWRQkOBapn23mmA95By79Dn6F/q+8GODu3w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788532380;
+	c=relaxed/relaxed; t=1788533251;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=2GFz2G4TvFAQmNfo2sz19Dj/yLOcHuLc2Pg+XpTGavM=;
-	b=GDsolDi96ek2l8wgalD2t46ftxBdzXOa/gMmraC4q9O1kKVxp6En7VChPHfm/uOJOxkJ
-	 l54BoXxEaszEQUbGs2hLO4/MgDbWRCf+ui9qrQ47ws89ElXRVmvgJDTeroJ0IV8+Ygaq4
-	 GSZPO9NZfFEplux2U7aqfBrjqP2MBtQUIvwJTi+ZoNieyb+Mf0BE/HCUdkIlpuVLJrGD3
-	 oDWXKneWA4ZMob/2iwfi9vx3IOS2psbsX0HbKRZXl5L0tVkLpiTL40NHPZNqdn5WTGMB+
-	 T+B11q/pIF9TrllWnMjNkxIzEjVJEBYWgjkmOsKy9njYplpHdDHRDwRDDSlFdyEOt/A==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=p+02YZWWGP42e9qnumCD09Z4qS6auujKhuwBdnafJLw=;
+	b=k8xl46tYJ+rPabg95CVjRpVy8bGJBNftCQljXjmJjiWXzGzcQkqho7i/QGZS8AEp3fYd
+	 ekJjCcTt0JeTmW534PpZVKb4uAPNgeHwpqBfFT6wZeUk7hxoFH9LtNUA3HWMzpzUncqax
+	 8Kt5SL8dYxOjnhbnLYd/z+S9o9FDnWBpEseh86MmfyYy1a43mSRYZMCh+qYT8KL/49nIH
+	 SpV6UQacMI65/E6OwRzG0XMlds/Eq66gOkJ6YKEkNZH9nIWG36x04Foe+7ZsYaDSAtCDV
+	 IXvQhhRlNiMg7943UV428ABPvxOZSNEIOsAIpMxtTWvP0CkyzcIkgAjr5GZLWeK6lhQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788532380;
-	bh=2GFz2G4TvFAQmNfo2sz19Dj/yLOcHuLc2Pg+XpTGavM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788533251;
+	bh=p+02YZWWGP42e9qnumCD09Z4qS6auujKhuwBdnafJLw=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=aqpaIxC8l1ZUSps5uzUZMG/uAsonMD+mNgTJK4nkoZTqCIq8C62QlcKEZSdejU47I
-	 9y4YXB4zIghYluWEQVbyzBqOqTPCvHmdgYh4zA27//TeK/A/26oBVwhlJ1lsnBcZP+
-	 ZGu0sSrxX0ghoBX9D0blVqQXJybrpmHzyKdah5jwAac+WIqOm2IAz8CXOijVPv+zGj
-	 7LDXyN2GT7Y2quaHIcIs+GLaVR0xHooAKP7hR1CQnt3TcRbdkPjYB7140Z3jqn3HKz
-	 uMOD4AOZPb6BSbNgNXgwEVbL8QEtPM0fJTkbUnIIMbC7w2aA6yfzoLVPY1d1NsB1nM
-	 kASe/w0gTkQ3w==
+	b=zgTWpHp2uJHkr1YRiHWWikclp/N1mkxYi42p5ur0dgyhL51SLZ5N08aDSCXp6oyxZ
+	 AyaJ5gF7ZdFKKKXm/QttOzAOHDYK+JimA1EosfLZCwC0b17vuK0i1WsgyhVfg9KSHi
+	 y/hI4hOHyXXr3tm+GLgnc+gx1qWUytaNCm6FGrfX3tMkHJq1vyCgbDwdCjqQjy13rZ
+	 hifjRqPz4pZJ0tYUmLzIhKIXrs+znobgQS4Jxc1rGaxXL2kNUTK2SdZxP6jgxj9wHc
+	 WKNZTLhmUhzejfkk8v5ESMYAnJ1L7O12zZr4MNFnfSO8lUDP/L1u9NIimxrmkRmD3p
+	 HBPL1xUdVdRhQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 86BF140B5C;
-	Fri,  4 Sep 2026 14:33:00 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id D29AF2FD
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:32:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AD4E7811AC;
+	Fri,  4 Sep 2026 14:47:31 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 792843DA
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:47:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B856260BFF
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:32:58 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5F47840376
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:47:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ER2hQ1Q8oB4j for <u-boot@lists.u-boot-project.org>;
- Fri,  4 Sep 2026 14:32:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 05BF560BC8
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::333"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788532378;
- b=jtDbC4heKMkVz14Xmqqju3LcSvtwCSEouNVyA+oWU+PxQA3qkpqY0k4drsmJmPY/AvgN
- yoimHip/fJDSUkGHCqI7+okViufxqvHibHrVzZkZ0POXUcGThjQC0nOQ7vAgXFFOLxSSe
- ofKgLI5QUgXN3XHB+CG+bQ4ND1u1xFPhsjQaEE6XdJtSodNxXJgeIvAs7WLIVYq7AxOzc
- Cvlzg3o7Wzwk0Mf/igYiP4/9AUed8mjyHvxo5e963sgmHlHtnasXq3WmfMJK574CJzbEq
- WdPKmWmS9GyO1oadwxgw/YkyQci925NuBczxQ4OOup0UVj1wrTuH5XzU1rG1fQmwb7g==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qS7PBRssQBXn for <u-boot@lists.u-boot-project.org>;
+ Fri,  4 Sep 2026 14:47:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 2C7C8404CE
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::22e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788533247;
+ b=saOZQzal89ub34PGOcYRSfjuL7QyhSvSWrd86UkYmZupZmoYZM6DggT6S17LO1IVwP47
+ dXN8cJBzGgZsDa9QvgJuaLqg58AIncbdbVFlQxsqf5/0mSQ6LjFj+f+VNYK8y0eEGiUM0
+ Sleu7qSqvRZuZOrZjH4u0hJ8LJvrhErXYsFQG2ncGbl8L9QOibUQ68MQAA8ZZZXAILk2s
+ dXPToJ60srA/0LBC96w55dIFUZ+t1eQ8esDI+9SBSS5U9Ctii4pTHTKqolxW/YA1wRIgY
+ iGExWQhpMSMjqAyIDvSsUarw1s+1BqYT3Sh8FFOzeyundkVzogSzVQmVZLc2Yquzx8w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788532378;
+ c=relaxed/relaxed; t=1788533247;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
- Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=2GFz2G4TvFAQmNfo2sz19Dj/yLOcHuLc2Pg+XpTGavM=;
- b=nvF8/vk7nKhf5T4LPsdRhqUp75FkO0h0tlKiuT9LZwoI2KGdr1gHtCBqNnLCl/KK0gvS
- dgPJOaRAsl5W0LboQPH/Ou4hb4lPQXMSZG1n424TBl+ydlkIOjK2qhlVz8cfi0+mRniPx
- e1BaEBcYTRJ+IgihWY2YrlpKeNEBoXuoT3AurHrwTd5A5gfKYVJM/v8ncBu9Qm1NSNrbj
- BK6nM43nlX6mkj+BzCEwJDbSmS9fLAaqufuoWk5irTEq1vJ1vXRKuR4rwI5IGxR+DW/lm
- ARIz4nihXEajDUG4oqdHADsT3irUXrp/A9njhOr/+FHjaXxEV/OK2NbgjQfciBI/gAQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=konsulko.com; 
- dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=bQo3fybH; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::333"
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Developer-Key;
+ bh=p+02YZWWGP42e9qnumCD09Z4qS6auujKhuwBdnafJLw=;
+ b=qiS+IIPDpecz2QQtvk3AW/xCq0dIgyV+Qq4eOWJofjPsdIxjWb/FzC7RlAfVOawVjVQ4
+ 3ut0mb4e0ZeGHe9Z3DgIwsMdlHTgCa8ft6zN402TwPI0/Fpo9lkdVjur7dKMHLJtbEBeF
+ aCUd0htAHlpcmHSRl1L5yUtsdJQudWXCd4B+Yj2+nReHw3pHBR6VBCT/GaqMWyBYvlvWH
+ o64eu1Cr1O4DJoFoh5xIGidaEa8p5GR/8t7a6pjIV0s8TnoPHVRKen/bM89CI9VsjmYKb
+ 3QN0tWJtmf9kueRwiJxFX8B8AqWzRzR0rEMqCvwKYTP6qsPgXIIamcJLzp3ZEDk8d8g==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=none header.from=baylibre.com; 
+ dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b="hjVfN/sA"; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::22e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::333; helo=mail-ot1-x333.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=bQo3fybH
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 05BF560BC8
- for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:32:57 +0000 (UTC)
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7ee4f241f42so1821020a34.1
- for <u-boot@lists.u-boot-project.org>; Fri, 04 Sep 2026 07:32:57 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::22e; helo=mail-oi1-x22e.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=hjVfN/sA
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2C7C8404CE
+ for <u-boot@lists.u-boot-project.org>; Fri,  4 Sep 2026 14:47:26 +0000 (UTC)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-4b28db31b89so707946b6e.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 04 Sep 2026 07:47:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1788532376; x=1789137176;
+ d=baylibre.com; s=google; t=1788533245; x=1789138045;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=2GFz2G4TvFAQmNfo2sz19Dj/yLOcHuLc2Pg+XpTGavM=;
- b=bQo3fybHkoHZwacOu697ht9pakgx96YqW4T/4mf6vCkIPWvhhq5G9R2YIevmKn997c
- PQCCCUCWJasCNj2WbOs/YcaoP+p1QeV70RSudpEmhZC4R+hPRa3mbrTIebucD2DmPCEF
- 4/UDW3NkDgp4DkzbSEyXvuknImJ+erLMJq0zg=
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=p+02YZWWGP42e9qnumCD09Z4qS6auujKhuwBdnafJLw=;
+ b=hjVfN/sA+ebk9UEND44nhM6/MtGKsVw2FB4R25iUmPICqkSLrAiIr3EC7FZ/cUr5QY
+ qZ55oCirEdLMQem0rubZ52sIOjZDoxg+/m3hccOaJDnLM4HbTLDFo4m/KxwXLHD/b/sQ
+ TkMalWQKBROLZ9pk4hpF3VqeLUNyPorHRUhnK8w8w7bLbT5ULnOUqZ5OM8ybVlx1MyDe
+ TmwWUF2I8as+6+s24kCKsKBYY6NC9tvke1KHovKd9jHnHRnN7oq7sawKxMQdRe7V6oZF
+ isai1rQB7u8yyZXGXswhhophiBboD/x1qIL5dO07CoCi2CO3vAHeRKWELIxRttIk3x3/
+ pGSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788532376; x=1789137176;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
+ d=1e100.net; s=20251104; t=1788533245; x=1789138045;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=2GFz2G4TvFAQmNfo2sz19Dj/yLOcHuLc2Pg+XpTGavM=;
- b=OHOYEYD5knHdhn32CHkpU5JSEo8gJVaNhwioxNukPLAOftcpVtPOpxqkBA9cB+1t3w
- S1PTFsRPIMYvUb1c+5lQDqXLCt2vqB2FNOUyXV+RQ0QOX99CLBP7Sq7qJ6WFInH4WMZV
- iLFvj6JfM061WG+QpzAEa8AkMvvdONsA933A0rJ2YZoNStxxNlPDuDCcaY0WmpAkp5/i
- VNJStzJRmWZZoBkGXfTbfsb7mqpIcrGdPGpsYgvmFwrjQFSY6SOSvIUToqnHmNzP+XgG
- lwtnHf2NYj298VxS0wOJuf3afvSgwydbEN0C1Y5isAya2kWqsVZtFKJQXa/SlX9Z7U8L
- sMgA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzF5STmVAMlXWL+uPbd7KsesJRkjYAw8qPVEzJV+bHhaORhfIWP779cypFXQdyACI7dww+Zukw=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kmudLlRTgt6T5EqSIql41NNVfM18HotV73acAocHumc0QkqSo1
- tb+W4ygnU5by07lmC2wSHrAicoKSG9TJI55cvpTmeTOysVd82x782JURzO2LqhTfVHg=
-X-Gm-Gg: AYBFou3I2PahRMOmZ4bP7lXtpxnrYxk0H4cUnAAeMCKTgsLucsNJy2Jz7A9p5A/suQm
- FSx5NUdcrnL6xIqQ7+pugzjs1dno9eefD6KyboSzyXwaSWbxEkuLV5w8cJW5kyVAYydYw9eALnF
- sHshspPnQw9ssMDCrPTX1GKws70bA7y60H20T/77OwIJeS75Oz9UDM8lmjz5Sr3oC3Z7DUsCqZZ
- jJEPbJnRmPvieh1z6RNmhx8MExDX2Kl/8cDiGSAEcFSL1adAt8D8N/k5qDbCHNvfh23MA6VMKUj
- JXICBc3fpnZ2XBHxVbInWdO2n7KwlVsFfjE066ohSRfJWFfNl42gjF74GmFbrvBo6Mex4fH8+kV
- dwMJL/ud9waNMx2K/jH2m5snHukQGnlOsh1UjjDAlqYaSdP8FQV9ET+ptudb69KmpxipGqJhECZ
- JAcbbELv2ZQCvpfnhUeAdTXzOAT3FL8sWWPjsWTTVxrqhym708f2n5VW21DuRCbPSTRMDUvr7IP
- cKv3t6Un6YUkR2BZ0rIEpnCH801B3v3b5ChII9A7meUSnLkH7Gz2Qvyvt0071ZDCYfzxHdV2GDr
- lQmygTy/VN4YdBhvxJigXPc=
-X-Received: by 2002:a05:6830:3591:b0:7f4:d6ff:230f with SMTP id
- 46e09a7af769-7f8969e9ae0mr6316303a34.0.1788532376249; 
- Fri, 04 Sep 2026 07:32:56 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f9f4615a20sm2805159a34.1.2026.09.04.07.32.53
+ bh=p+02YZWWGP42e9qnumCD09Z4qS6auujKhuwBdnafJLw=;
+ b=n8kN4f6j1+TmxdFBQUag/zX7ZAce5QxjrF+j/AS4xh1B/V2+IluAcKY/7yNf8RDa1H
+ WGDSCvegWZAzeujukAdMe2OSSjOwSD6uKojjoQKu0nllFhTtbmGla86hf5mQCRLilrhv
+ r/gpcGAe/A+aJ4Zyw33gKfGlv4lKhPlkiSRC2N4kDir817PUWlOeZ6Im7vWW1UdIs4bb
+ JXOK2DCRWma441BYuB8Oacxtwr76TThJ5wWEFKTIcHLWy/948/BW0wssHsEikdu1zAie
+ FYjaSTlKNXs44+YUkDqNXmRZw0bQQDQZNbuV4j1QGsqDNth1MZugDca5OIbc/WdIsAcN
+ OcwQ==
+X-Gm-Message-State: AFuF++lF/GPCnCQyZ6tf+pHRmR68Ln8RNZES9tgcTe8R0TQjYy8frpjL
+ Fd8uJ8Wd+nrrbq8BorHHWxI4CHevaLSkYedZNhibhuTO/g8IHfpiQ+XavaQMTv0Yb8c=
+X-Gm-Gg: AYBFou3dEqyS3thuq7ggj2tiyBYiz3uMYgxkZ5QKv+MHcgUxlxIAVe8NeWCg54X+GpY
+ vknd0xWIw6Dlw/yV+Bs/CVMU3vQdcWNGNtYkqzsDSehyNvKK6klqQseeeGYxBsArLUhi2FMyXeg
+ 3kORv0itteNfVl/Uu0W/KFANIGFFpk2kF2W2T+NCqP8rx0cB4J2P5ZdEPEQeDRMw75AypK6MbzG
+ j6kFJIKF3BccTUHmUcueGHXPCEQlgL/yUHLHZ85stS7gE/nsSrzovBJW6R/vDiaMA0OmGFAszZt
+ i63WDkM6Ip4lhw4fnHIZ5KceW5SvjMk1UF6HoaV1HjQsfbfLz7Ug0oKN9Q2hF8x8AAJlMXiLGQK
+ 88uFPJIiwTHM5g//cgxHJAxko2Wr3h+MLjXH9jCGTOMLylXuvsIxCm2KkpHi416FkzMC+pej+++
+ zMwgKGTHsc0tbaLefiqetP8QTUmqxEOlNm4mBlMRZ8Pa32kkyeymV266xvrJhAK/vejg==
+X-Received: by 2002:a05:6808:1828:b0:4b9:e6ab:d085 with SMTP id
+ 5614622812f47-4b9e6abd51bmr2209423b6e.37.1788533245454; 
+ Fri, 04 Sep 2026 07:47:25 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:4a5f:f4c7:21f3:4b8a])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-47554935962sm2118988fac.12.2026.09.04.07.47.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Sep 2026 07:32:54 -0700 (PDT)
-Date: Fri, 4 Sep 2026 08:32:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
- simon.glass@canonical.com, u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v9 00/15] add software ecdsa support
-Message-ID: <20260904143252.GP1764417@bill-the-cat>
-References: <20260903081705.12894-1-philippe.reynes@softathome.com>
- <20260903183521.GL1764417@bill-the-cat>
- <9c0d700d-04f3-4ad0-9453-bae0dbe6e471@softathome.com>
+ Fri, 04 Sep 2026 07:47:25 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Date: Fri, 04 Sep 2026 09:46:28 -0500
+Subject: [PATCH 1/6] power: domain: mtk: simplify Kconfig
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XW99Md+TZSBoHsbp"
-Content-Disposition: inline
-In-Reply-To: <9c0d700d-04f3-4ad0-9453-bae0dbe6e471@softathome.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260904-mtk-power-domain-mt8189-v1-1-ab9d8cd0f01a@baylibre.com>
+References: <20260904-mtk-power-domain-mt8189-v1-0-ab9d8cd0f01a@baylibre.com>
+In-Reply-To: <20260904-mtk-power-domain-mt8189-v1-0-ab9d8cd0f01a@baylibre.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, Sam Shih <sam.shih@mediatek.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, David Woodhouse <dwmw2@infradead.org>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Macpaul Lin <Macpaul.Lin@mediatek.com>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5095; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=cS0jV2EeX6DpwkvyjCgxEUh1eqgMX3xnZVI4PWp57Rw=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqmtnORlR0qGLF2LcKcWa6z7B3s0FTfNL/HU8tP
+ u2OIMMT7AaJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaprZzhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AhXUIAJhiC+WOtl5ZT9DZMv37/oW4ITcevEzvL8uQnvw
+ aljOHH9EeQ0PQjFD8njszIlJQtHdJaxFcCL3DtVEOn7ucCC7uCIqM/L21c5jsjzs5LV2jxOblWG
+ tnzqwNZSd1TRD72YvyMccUQsqXahDqFBMsLZhpkWKGI4QH5tcI/w2xRxaIXl9uTbdJgi2UUaGfy
+ FOZpZnqUIRaHPNfAHvdEH75e1aijZCsplmi9RZHcYrkVBXDGy0x3YoViT2F5XTkv269cT31JXVu
+ LTve6PsH6QM76W1uriZlyQaYENbjWZJye6lqPFAkXIkkYab0iLBIvFMr4cwbxSUK04SAZJ1JGEo
+ KxC8=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -180,90 +198,115 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Change the MediaTek power domain Kconfig to just have a single option
+for all targets. This will simplify adding new targets in the future.
 
---XW99Md+TZSBoHsbp
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Targets that have no power domain driver simply do not enable
+POWER_DOMAIN, so the option can default to y.
 
-On Fri, Sep 04, 2026 at 10:10:24AM +0200, Philippe Reynes wrote:
-> Hi Tom,
->=20
-> Le 03/09/2026 =E0 20:35, Tom Rini a =E9crit=A0:
-> > On Thu, Sep 03, 2026 at 10:16:50AM +0200, Philippe Reynes wrote:
-> >=20
-> > > This series adds the support of ecdsa with software
-> > > using mbedtls. So boards without ecdsa hardware may
-> > > also use signature with ecdsa.
-> > >=20
-> > > To achieve this goal, several changes are done:
-> > > - fix the support of secp521r1
-> > > - enable support of ecdsa in mbedtls
-> > > - add software ecdsa signature check using mbedtls
-> > > - add support of ecdsa for internal fit signature
-> > > - add test for ecdsa for internal fit signature in vboot
-> > > - add support of ecdsa for pre-load signature
-> > > - add test for ecdsa for pre-load signature in vboot
-> > > - enable software ecdsa signature check in sandbox
-> > OK, so it's enabled on sandbox.
-> >=20
-> > > To test this new feature, just follow those steps:
-> > >=20
-> > > 0) build u-boot using sandbox_defconfig and adding those options:
-> > >=20
-> > > CONFIG_ECDSA_MBEDTLS=3Dy
-> > > CONFIG_ECDSA_VERIFY_MBEDTLS=3Dy
-> > > CONFIG_ECDSA=3Dy
-> > > CONFIG_ECDSA_VERIFY=3Dy
-> > >=20
-> > > 1) add a signature node to an its file
-> > > 	signature-256 {
-> > > 		algo =3D "sha256,ecdsa256";
-> > > 		key-name-hint =3D "private-key-256";
-> > > 	};
-> > >=20
-> > > 2) generate an ecdsa key
-> > > openssl ecparam -name prime256v1 -genkey -noout -out private-key-256.=
-pem
-> > >=20
-> > > 3) create the itb file
-> > > ./tools/mkimage -f <file.its> -k . -K arch/sandbox/dts/test.dtb <file=
-=2Eitb>
-> > >=20
-> > > 4) launch sandbox u-boot
-> > >=20
-> > > ./u-boot -d arch/sandbox/dts/test.dtb
-> > >=20
-> > > 5) on sandbox u-boot prompt, load the itb and launch bootm on it
-> > >=20
-> > > =3D> host load hostfs - 1000000 uboot-ecdsa.itb
-> > > 4628674 bytes read in 1 ms (4.3 GiB/s)
-> > > =3D> bootm 1000000
-> > > ...
-> > > ...
-> > >     Verifying Hash Integrity ... sha256,ecdsa256:private-key-256+ OK
-> > Does this mean the new tests aren't run automatically?
-> The tests for software ecdsa are added in vboot, so they are run
-> automatically.
-> Ecdsa signature in fit and ecdsa signature in pre-load header are tested.
-> This last paragraph was for human being, to explain how to use it. Sorry =
-if
-> this adds confusion.
+In the Makefile, use the target config symbol to automatically select the
+correct SoC data file, so a new SoC only needs a new .c file and one
+Makefile line rather than a Kconfig option of its own. The SoC files are
+guarded by the common option because this Makefile is shared with the
+other vendors.
 
-Ah, OK, thanks.
+Note that some drivers are named after the first SoC they supported
+rather than after a target, so mt2701-power-domain.c is selected by
+TARGET_MT7623 and mt7622-power-domain.c by either TARGET_MT7622 or
+TARGET_MT7629. Only one target can be selected at a time, so
+concatenating the two symbols is safe.
 
---=20
-Tom
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+ drivers/power/domain/Kconfig  | 47 +++++++------------------------------------
+ drivers/power/domain/Makefile | 11 ++++++----
+ 2 files changed, 14 insertions(+), 44 deletions(-)
 
---XW99Md+TZSBoHsbp
-Content-Type: application/pgp-signature; name="signature.asc"
+diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
+index bd8b1f8cf5b..13a661ce04f 100644
+--- a/drivers/power/domain/Kconfig
++++ b/drivers/power/domain/Kconfig
+@@ -83,49 +83,16 @@ config MESON_SECURE_POWER_DOMAIN
+ 	  Enable support for manipulating Amlogic Meson Secure power domains.
+ 	  Support for Amlogic A1 series.
+ 
+-config MT2701_POWER_DOMAIN
+-	bool "Enable the MediaTek power domain driver for MT2701 compatible SoC"
+-	depends on POWER_DOMAIN && ARCH_MEDIATEK
+-	select MTK_POWER_DOMAIN
+-	help
+-	  Enable support for manipulating MediaTek power domains via MMIO
+-	  mapped registers for MT2701 compatible SoC. The driver powers
+-	  the SoC power domains on and off and handles the associated bus
+-	  protection bits. It is also used on MT7623.
+-
+-config MT7622_POWER_DOMAIN
+-	bool "Enable the MediaTek power domain driver for MT7622 compatible SoC"
+-	depends on POWER_DOMAIN && ARCH_MEDIATEK
+-	select MTK_POWER_DOMAIN
+-	help
+-	  Enable support for manipulating MediaTek power domains via MMIO
+-	  mapped registers for MT7622 compatible SoC. The driver powers
+-	  the SoC power domains on and off and handles the associated bus
+-	  protection bits. It is also used on MT7629.
+-
+-config MT8188_POWER_DOMAIN
+-	bool "Enable the MediaTek power domain driver for MT8188 compatible SoC"
+-	depends on POWER_DOMAIN && ARCH_MEDIATEK
+-	select MTK_POWER_DOMAIN
+-	help
+-	  Enable support for manipulating MediaTek power domains via MMIO
+-	  mapped registers for MT8188 compatible SoC. The driver powers
+-	  the SoC power domains on and off and handles the associated bus
+-	  protection steps, per-domain clocks and parent domains.
+-
+-config MT8366_POWER_DOMAIN
+-	bool "Enable the MediaTek power domain driver for MT8366 compatible SoC"
++config MTK_POWER_DOMAIN
++	bool "Enable the MediaTek power domain driver"
+ 	depends on POWER_DOMAIN && ARCH_MEDIATEK
+-	select MTK_POWER_DOMAIN
++	default y
+ 	help
+ 	  Enable support for manipulating MediaTek power domains via MMIO
+-	  mapped registers for MT8366 compatible SoC. The driver powers
+-	  the SoC power domains on and off and handles the associated bus
+-	  protection steps, per-domain clocks and parent domains.
+-
+-config MTK_POWER_DOMAIN
+-	bool
+-	depends on POWER_DOMAIN && ARCH_MEDIATEK
++	  mapped registers. The driver powers the SoC power domains on and
++	  off and handles the associated bus protection steps, per-domain
++	  clocks and parent domains. The data for the SoC selected by
++	  TARGET_MTxxxx is built in automatically.
+ 
+ config QCOM_RPMH_POWER_DOMAIN
+ 	bool "Enable the QCOM RPMH Power domain driver"
+diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
+index 74f22d57981..dd14981fca9 100644
+--- a/drivers/power/domain/Makefile
++++ b/drivers/power/domain/Makefile
+@@ -14,11 +14,14 @@ obj-$(CONFIG_IMX8MP_MEDIAMIX_BLKCTRL) += imx8mp-mediamix.o
+ obj-$(CONFIG_MESON_EE_POWER_DOMAIN) += meson-ee-pwrc.o
+ obj-$(CONFIG_MESON_GX_VPU_POWER_DOMAIN) += meson-gx-pwrc-vpu.o
+ obj-$(CONFIG_MESON_SECURE_POWER_DOMAIN) += meson-secure-pwrc.o
+-obj-$(CONFIG_MT2701_POWER_DOMAIN) += mt2701-power-domain.o
+-obj-$(CONFIG_MT7622_POWER_DOMAIN) += mt7622-power-domain.o
+-obj-$(CONFIG_MT8188_POWER_DOMAIN) += mt8188-power-domain.o
+-obj-$(CONFIG_MT8366_POWER_DOMAIN) += mt8366-power-domain.o
+ obj-$(CONFIG_MTK_POWER_DOMAIN) += mtk-power-domain.o
++ifdef CONFIG_MTK_POWER_DOMAIN
++# Some drivers are named after the first SoC they supported, not after a target.
++obj-$(CONFIG_TARGET_MT7623) += mt2701-power-domain.o
++obj-$(CONFIG_TARGET_MT7622)$(CONFIG_TARGET_MT7629) += mt7622-power-domain.o
++obj-$(CONFIG_TARGET_MT8188) += mt8188-power-domain.o
++obj-$(CONFIG_TARGET_MT8366) += mt8366-power-domain.o
++endif
+ obj-$(CONFIG_QCOM_RPMH_POWER_DOMAIN) += qcom-rpmhpd.o
+ obj-$(CONFIG_RENESAS_R8A78000_POWER_DOMAIN) += renesas-r8a78000-power-domain.o
+ obj-$(CONFIG_SANDBOX_POWER_DOMAIN) += sandbox-power-domain.o
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.43.0
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaprWkAAKCRAr4qD1Cr/k
-CnfYAP9D92YGYMO3A7ajbcdAuZhl50hqH+QBQNrSRtxoeUKyNQD7B481hms5023b
-AXycouYG/JlBhmgZY0bJYgZ6Nmf6gQU=
-=RPSl
------END PGP SIGNATURE-----
-
---XW99Md+TZSBoHsbp--
