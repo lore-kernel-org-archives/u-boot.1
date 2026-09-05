@@ -1,236 +1,186 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D2E9C624D3
-	for <u-boot@archiver.kernel.org>; Sat,  5 Sep 2026 12:49:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E862C624DB
+	for <u-boot@archiver.kernel.org>; Sat,  5 Sep 2026 13:02:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 192DC40C89;
-	Sat,  5 Sep 2026 12:49:03 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id c06nqYPPmKOn; Sat,  5 Sep 2026 12:49:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 6283140C9B
-Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788612542;
-	b=URN2jeIpoWgMKkaAGZCecm1RthuLpvikB6izj2jabQ78/1kSOKhUshA4RYn+rHJslY2I
-	 4Z/ck7agZeoD2QKQr/6uYciLLG4f/t+S726GMFRK2UZ1gM1VvLwU+Q66oSpIoMFx8iOes
-	 KLvohHfcoYRcfVWSvoNBXN0FBa32MpCExm/duPAc9lNGhhrmpB/mkbO1w5fZBSnzTWZfP
-	 AtxuhjtMrRyp6Gs3rQyY6RRGnyKJEmDdVcx10ENBi9+A4w0ihqJnmwawAJ+1ElKG9RRGc
-	 AzBUdOFgQktFfUcsrR5hNxDNBkRw7nmI3Oz8ZGG01CKBcdiUNvEIwig43cUhOuEi0Sw==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788612542;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Date:From:To:Cc:Subject:Message-ID:
-	 References:Content-Type:Content-Disposition:In-Reply-To:
-	 X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=gjzSDrK3B2psAFv40UwPEVIrSs8UBvDJ5TfrIx2Q77s=;
-	b=DKUW+XOWP/3SPmcfpFOMT6HzUSgGsS0PlwWKBPvEYqhcH+4DBMk4ANCbQzK1nWxDbbWu
-	 QFbM+XKetwM5bgcN0s+dowCX5de0lsSR6u980Bn6ipf6AkhZi61dTZQVR7t+vOzyED2b9
-	 sa8hG66cNZQZ0DH0k+j9P/c6QiW5GLcTphghDqlwxhLNTc0iqG5RfGVG6trOuYWInCS+w
-	 ZIIxx6HyK5d2vMOEFYSKVYE4sEC9s2gpQtExKXY5A1mvvMCZXki+SbYsux54MDTMYdIUA
-	 yMNccTwXBXnRO5220qFxe0QvzVzrt7uuOMe+nnBHE4FIWN4rzKJExLnISNJKOcL9U3A==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788612542;
-	bh=gjzSDrK3B2psAFv40UwPEVIrSs8UBvDJ5TfrIx2Q77s=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=CRJZ1YXUs0w50uYiy6nk6h7csBAKHEY65jq8cvHi0UmpF6vn4++Eyh4A4mpi9yXLP
-	 Lpzt2fJoVpk0I2fH+Bvva/3VzS8VOqaVqEE2YztGDRhZP6JIRSrr9SLPq9q9Hdu0ib
-	 pNl5RljlTIGWvf2b/f1cms7dfLzGv36psxKzqAW9qfwByUYmKLJBx0eZHTwFkEy0Em
-	 LUuL9HZ4GJngh0iEimUITAx81o0tnHpwycKy+wZFXMUMA24f6mAG5KbdQvfszMymE4
-	 K6E2G6c3nhFIl9CEIALlK0pO38WnUJBbSTNpERQowU8NlAfcUA+jQ917J/5BCQh8vG
-	 TDFYPpj9lVdQQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6283140C9B;
-	Sat,  5 Sep 2026 12:49:02 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 91B1949D
- for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 12:49:00 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 76D5D810C3
- for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 12:49:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1F4ED8107D;
+	Sat,  5 Sep 2026 13:02:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Dn0SmR_frbfV for <u-boot@lists.u-boot-project.org>;
- Sat,  5 Sep 2026 12:48:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4C680810C0
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20f::7"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788612539;
- b=YHrVNY1Qw32Dsr4DEFxbY5+SpGvua2LSCcTlaVxsfphk3jwvE1oDhiTAnuc/8OFe0Cke
- X8weAt+P+eLz+Ysy35WhzZZ7aVkAsVI8XRryiI0uLv/wMUAmE8kqlT56fVNKQnTwmKGV+
- PiboNqDeMp3if3tY8KyFqn9cqtJc2jNyV/hAQK8CrWS7Q1OSf704wkwYBtmXh+KIFdHN4
- pZfnDYt+HGOz5fCDpTe7ARmzv/sK16FAbL1Id3GYQn1zpmdo7GB+GWV1GetOGcOF+raHJ
- QsS4pYT4RCbDHUh+qvFSOdHINAJDlnVl5FsMBU53r3Ge+BLPSzzk2Ygc/DEb/IkUpxg==
+ id Pi4pvneukoym; Sat,  5 Sep 2026 13:02:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org D4325810C8
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788613326;
+	b=ssUsxpP/vN7iTmzKlIg7TaqLryz4hXApcsKRfeIjxBLmqCVB8xsd3EMTMBdRkOJN9rtz
+	 BqVM2CXsCKAc7O5YRYUbXO1s8yfXuczxz5o1XoM1m5eOn5XJKhbNayJ37u4EbWCzsXiIC
+	 AJogbmrFe3W3K2Aq5D4iyx5hPYuIrZY5Q4ra9h2ebEdSGEzjOfk2Flgvbcxd6jDnBw9Su
+	 q0RCh3ORbNVhlUsHAGzm1107L0SbEKDNkzetOqLLePeLHaXQbIQMhXNfpRxGQnYqGELJQ
+	 U74M3Wmulu0turK+DZF4z4vLr9ThRhy9nbzjwVEv63ELEQHCUXcTuCyFgwm5kWRjgqw==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1788613326;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:Received:From:In-Reply-To:References:MIME-Version:
+	 Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=0s9+OhAXw9MjU8sTLz1cC3nsTUfCthVMhvZczN2lYRo=;
+	b=NHOMzwYLWIq7dFyR8laTl+oMT0cEZZxRidbq83Ce9UXo3STfoBYxhvDi4uE2GkNMAyUq
+	 w3oE+NYcbUEP5/dFF9fGpIuoXP7ous/+qHb+HBBRINXO3QEZwV5eySLbRqKeI9cmfesoh
+	 zNZ3WB7Nnd+0RA+WG9v9RKm/ftm4o/iCM4h/l/zY+GElvuRT57lz61MEPIhtpTW3OD8ei
+	 X4pGNWCKTYVqk13cM2STDVRSoDSwKpG43W0l0JGS7nfRUrl0YzDEHnc6QHMdYbYlWZiYa
+	 oxjUl3lRB0xxr0CQUKeqbv1Dep/ra+YQ5l9+mrrEaHfxpE8/wTz9RT//itZJX8zwkgw==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1788613326;
+	bh=0s9+OhAXw9MjU8sTLz1cC3nsTUfCthVMhvZczN2lYRo=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=BS0c9VnvH47w2nYcZYSAmmLfnK72u43RKsa+ELBe9kH3h1fXMFov9QbMKNe+hAKvW
+	 sexOPPr2MUoz54L9Y3d8wFnvmDTIu/zWWhz5l6QW00ZQAwsbzxrKOgVY4xsTC0Apy8
+	 aOBrq2MIylJqNzBBrgC9KUuzXxcvRZDuHkkU/c7OxzWZ/UzLh91Mv67Ks0VTVqOO+p
+	 0QR4bTMOszZOJY9Km5iB5qjk7ResRIW657h4/KAPlkZBCgnkDy6HjbuDeEydNzjRoi
+	 uDC6BTLUcvTaMOUmKcf4FY9J0BT3vdOO1jAaFPCWaH5+8851gNu9O8RxPMPz99NijB
+	 plAPVuNg1aQEQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id D4325810C8;
+	Sat,  5 Sep 2026 13:02:05 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7C855970
+ for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 10:14:39 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 625AB40024
+ for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 10:14:39 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NURO4RAKv2WA for <u-boot@lists.u-boot-project.org>;
+ Sat,  5 Sep 2026 10:14:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 4129540051
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::532"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788603278;
+ b=hd0tagV9lswkLlKtpbrrdjM4tEZHfKobAe8P5WKYJgphfbxXH2TbH46AYROaCQebPgFK
+ ZMW4QBn6BOSQguMfOP0f49bBG5lYHvBi1RA9cNzdpe51xJtclyvsaK7+1+Rz4Ak+SQb3/
+ cUJMuU26sb+H6KSc50Fw341YXYWkZNNNHjUjOPkIvr/M1b6cpQsrvvBoPgwttemKY/Diw
+ FhXLcrnWXeem8/OEal3TSj1g35QZKmFu+B4X32wUsgZpF48LfBZ6zN+7KAr7uZwZOYku/
+ C8ax0UgUNki8DGp0nQ1evJn0Wu6qdRymAUT0EQT5fT5ybZm+FBsZrmGDXji/SEAy6BA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788612539;
- h=Received-SPF:DKIM-Signature:Received:Received:Date:From:To:Cc:
- Subject:Message-ID:References:Content-Type:Content-Disposition:
- In-Reply-To:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
- X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
- X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
- X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
- X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=gjzSDrK3B2psAFv40UwPEVIrSs8UBvDJ5TfrIx2Q77s=;
- b=r3HlOI9c+mYJx8BlUaF/qt0tqlqfvXnCsDeQtfcctIpXI2nZJ+4s6kl16GalOtLDzJmB
- ELo6/qxXAp28dyFeY4bD1ziun5QFhh+Pc7SDditOeX4ebL44YYdTGIGRI8ijkXVqAv6su
- /OrxKn3nVwxlsl1XfHSBSjIaZvjoEFdmxlMSqZ5Qz5iayy3zQQTHv84BaMLzpgRVKhKMg
- +F6SdrrpCRI2RoUUdSaDBzD1XI7494VBwc2tIOEx6nloRhD0Iv9vaZxC/ygatmb5VH+KZ
- iv0PUBAHtMHP8a0ErxouIFhNrglGsKDdiHuXNZj1xqnc8rjul+4PyqdhKhsumsSJIFA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org;
- dmarc=fail header.from=oss.nxp.com; 
- dkim=pass header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com
- header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=O+xOC9SK;
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20f::7"
-Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20f::7;
- helo=osppr02cu001.outbound.protection.outlook.com;
- envelope-from=peng.fan@oss.nxp.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=fail (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com
- header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=O+xOC9SK
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4C680810C0
- for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 12:48:59 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=f7rqsBMil4QFTCtBzkw2+r1A45e3huS+NGrQRk76ZTgdYrivmLtwIGZimkWUwKYpYevNU77MQ8WxvQihqHD4kMZBZS+qXHhQCsrEv7AeXjdBSK1Ih//Mk16dYOi2q11hxYTMWGacZQRCpbJ7X2vk4lz+ZwkilT8JhrBR0+3Bjr7uAuEeAn6e2xWVnp9J35TNQ8boq/a8E6d6n6IFxS+ztfVJxZBbhxQVVNZkbc5n/a6XDEi6FoVmjDDLHPn5hPgb5WEJeUaE3Bm/HktlkXgZOLNS6Gv3VWFlKBW337ok/ecl+J1HDaTW+s6IyUJU5ch3Qmn+LYfEzmmP7yx28dessg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gjzSDrK3B2psAFv40UwPEVIrSs8UBvDJ5TfrIx2Q77s=;
- b=rY3pZJ7EpuNoGpSVLRmeFTQu/o2ez+CfugEgi1COLbBzoVDcGc2Cw7yIsl1iqogYu3rJ631Kukj9DsVERWWh5dxDEHrcQd6x8yPbrVhV83xZwzTnj5b8HGsrkvSJOK0Ot7kHbqePLUPd52HH6cukjtgEmM7GdI31KanaQQ5A7nQlecyI3+RmKXa0eHOvEW6sJ6tl5a8RcIv3mYsW2Q/0aCZhN6hP22kg+ur3GRYxMCSDj8Rbd6QKRAAWbhEnaShXuJFSmP/3YbRO3c5smrEg9YdPIDTX79jgTjAB84CeQr1SdBrUzAQSrlJoAr+GLvkWbkBDkL1WLemlrVsGlQu3pw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gjzSDrK3B2psAFv40UwPEVIrSs8UBvDJ5TfrIx2Q77s=;
- b=O+xOC9SKK+wbzLZq53G2vOZ5lpyjBWMvGRMweNMf6aqhOeoKO+NtIoxLoQRGaDWh8vt5IRgseAGMslv4snzMgAlNzmTkrYIQQOHSvYBsq3WuFw0drERfT9gOhgVCC8HNeQSHdZrKZ7JIZUXULHJPC6dZpIiz7xsCv9fLlKSU/mWAK4E0HYdCTTUuO2dg0RZIJfnsxGCLY4rsRf/dFGn/bkJswB63arx4HvC8bL1MBPftjJBjE/wbIZAlEJVeoThONeW+j7CgomtWjcw6ATDv9t5N9jxTTWOKybXPrFkdir9A39vohMwid0grhbCm9OWlHpeOcDtW3EYQfH8xy8IWCQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by DB9PR04MB11693.eurprd04.prod.outlook.com (2603:10a6:10:60b::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Sat, 5 Sep
- 2026 12:48:54 +0000
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9%6]) with mapi id 15.21.0382.007; Sat, 5 Sep 2026
- 12:48:54 +0000
-Date: Sat, 5 Sep 2026 20:46:07 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Torsten Rupp <torsten.rupp@8tronix.de>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.u-boot-project.org,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Eric Chung <eric.chung@riscstar.com>, Han Xu <han.xu@nxp.com>
-Subject: Re: [PATCH] fix 32bit silent truncation of 64bit offset in
- mmc_get_env_addr()
-Message-ID: <apwPD0rMKoxENO-W@nxa18884-linux-1.ap.freescale.net>
-References: <20260903-mmc-fixes-v1-1-946242839347@8tronix.de>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260903-mmc-fixes-v1-1-946242839347@8tronix.de>
-X-ClientProxiedBy: SI3PR03CA0005.apcprd03.prod.outlook.com
- (2603:1096:4:297::10) To AM8PR04MB7874.eurprd04.prod.outlook.com
- (2603:10a6:20b:24d::9)
+ c=relaxed/relaxed; t=1788603278;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Received:From:
+ In-Reply-To:References:MIME-Version:Date:X-Gm-Features:Message-ID:
+ Subject:To:Cc:Content-Type;
+ bh=0s9+OhAXw9MjU8sTLz1cC3nsTUfCthVMhvZczN2lYRo=;
+ b=qdS5HOCORc432oCaQTtjWT3AvdNsuSV+kipY7bzHnBF9To+GYdOSL4AVpNlhv9AzLklU
+ sC8QfGPmisPBtJOoF+ApC9cYJCU3/b1b5fk26Km8N3ApWp5quTQV+Vc9JvApxzTJcO0y3
+ ZLk5/LNKwvE/W7BsB2gnhqSnUoR3xlBN31n/g1Xazz9pgD+TBDSgfNlqU9xyb2cfNxQh5
+ JPLtE4UNdCP43YKkkaTNyK5PVRjoqhSrBF/80JE+oMux9fGEgasjlz2Pkn15rAIcZbQg8
+ cvmkjAW2HdCiUENFduQZ7V1qAjaMWrFOBhkqRq1GFdD7p5ySyslhUCNM7H1jstv2SPQ==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ dmarc=pass header.from=gmail.com; 
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=mcVJQMiF; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::532"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::532; helo=mail-pg1-x532.google.com;
+ envelope-from=joaofl@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=mcVJQMiF
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 4129540051
+ for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 10:14:37 +0000 (UTC)
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-cbe827e3cb4so1990252a12.3
+ for <u-boot@lists.u-boot-project.org>; Sat, 05 Sep 2026 03:14:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788603277; cv=none;
+ d=google.com; s=arc-20260327;
+ b=fPd0fqmvddKglPPPlthWYdOV511xznbzMbWU523zWL0cZilg3xBsTBwfJQ3dSDPzuv
+ +HNdnykdVEtT/zz/JCvgU6nxHD5Q4dwNlFGWhVEEhgNBtTD9RBawh81n+i4aqtoRl5qN
+ qIxb6orlYQQiCquIt+RsAySxezTPTF5n1svEMtuK76l8ZY76lQbK24MTSvGmXL9bm4tc
+ e5zDi3qVRYbei8mJNP9srE7KT2zuAXfD+Tu1gbe/bI3F2ozMfzdxEhH5ENgNeiTXF9hL
+ K+uUwKJcM3p6jsoByHYsogv6b9Mkb2zIIbvobkGal9R9GU4qKBFwDZq6nbihssIvyyPw
+ 5EGg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+ :from:dkim-signature;
+ bh=0s9+OhAXw9MjU8sTLz1cC3nsTUfCthVMhvZczN2lYRo=;
+ fh=1okNdpvSDmZ40nm3aapBsX320K+aNROHLCirbnfD+i0=;
+ b=KBOq14o/XkYBpReee364FTVYj9lMxvIeAFOrKbUW+WzSQpPCdRwf8RkoV5gT3b/h7O
+ +fLqFZAYqxL0PgMXmLkmYS9iYHK/i11F2wIvV0zOTgpitDD+cWuf8yYYSz98dyFFli4z
+ wvJJtqSksp96W1Rcdqg0Zeu2TGH6bqSOrc9Pv5WXWJj4ibSXeD3vqRUNVc6hCuvUbE0+
+ KM0ZQPLXntxQCBCDyBWCxkWyhwVEFdVKD4GQlnUCFZSHYyZRJnU5QGjqBR5XmY2JtHpZ
+ YP/GJxtIaTLNNtuNovf9D13zGnfpwWfn7VL+fDP9M+fVVjxHVkOWEzYfwc9x5Gm5htvu
+ MJVw==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1788603277; x=1789208077;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:mime-version:references
+ :in-reply-to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=0s9+OhAXw9MjU8sTLz1cC3nsTUfCthVMhvZczN2lYRo=;
+ b=mcVJQMiFj3ibCOdpTGpxLyOrMekQxcRJGDlxoK5XbkIzMHL/YnZ2C6xl83LLq29eZl
+ X1voTCkAM0nLDpjALYoxWOpPs9hL6Y2oN94RwMoRYG4xWFZFmTJxGyybpeaDiP1z4XVm
+ UPDjXXprwganpIL8bCq/u0WcIwk4dIv5Q6PeJamqvhLBMo0thmkDO845sIQvyLTkX02w
+ tzGo8+Ob9iwMmBsw8CnvMYpoM3rTuVGs7UwErOsFT+YrYBHnVNTSdsIyglzPQDHOSj/C
+ I9d6uKEw8Y4NMd/TqcbL4A6qvFXEdJ4fIcXqU4g3V+EM/6hz9d6eiZcMCcmWK4xIfSfa
+ Kk1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788603277; x=1789208077;
+ h=content-type:cc:to:subject:message-id:date:mime-version:references
+ :in-reply-to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=0s9+OhAXw9MjU8sTLz1cC3nsTUfCthVMhvZczN2lYRo=;
+ b=G8dBbZvMCZRUXLwtx7MI09kp904eJtu74ObMKi+FNvQLGKCFoISrXM+n5OA4pwTXBH
+ Q2TTlwEdK+egMXvMMKKZxwteYSWEF25nnkRh+0xg476+JjsSwJ6sqD3bnmmfZ0ObWvTh
+ g3uojP7Ejr3eXc+RIyERaKrKUGCpi0F4xHMEikaYPerZiDAdaCeR8z/84SPma697Ilrq
+ Xs2Fs+GM9TTeKVeV+NUZMXvea/j3amYuBUW/aMgJ60Om9/O32xQICzr0HsLky8l8DVtd
+ r3zWATv/xAkAW7/rYOv+jwfxqsCUG7dFDiTMVq9GrVvhgyTONuriOb+nmeIlH7NVHMZu
+ +iDw==
+X-Gm-Message-State: AFuF++mCPQLaFvwq+PNToN2l0ekSv4642mKVSNokKnB3ND0KzLEkjpeH
+ qbN4BSxD3ocUwZgC40huUyJXp2pS2cb08DxPyGVIvx2yO5WecYRaI3UjgEmAGohFZw12UU4Xs8c
+ f2k5UY/U9OEMkJUIMr2zQasvU+teA4Sjj9w==
+X-Gm-Gg: AYBFou0NFB+txZHC73Y9JhFZeT7MaM5kEHV8LOlRAhjV2tCA/EvhasOm+QD+zHlLNrF
+ L//NhvTflt1XB6WR6NPlzGgolHCttEXAdbCxTcuXafb49mBuMWw/1Hi1Dxa1A8IQSNEsVtX+9pn
+ 4OowxqmpNEL/nfm8GptjOagutaDSc+IdNZ1fm4liijpNlheBZWaphzo/R7vMdaZKOZDjYSkbWyn
+ 1p1AdvCSZL4AQEDUOULn+X+RQlYoVBEnUEKnHZdH4q+cncpK1K/upJRCkH2Uir9xqs7akdXCzCn
+ uQZvvxnBiSwLpotMIyhnXwXJaVgjAIxRgrGUk33xtha8iP/5JzCH6ic9VzXoDTSjtV9CiDMv15X
+ lGTy+wICAH48KH+/6MFv9uDjX54pUPoilmSkwC55KOaiBUE/ru8RvJsRLRA==
+X-Received: by 2002:a05:6a20:729e:b0:3d0:d1f1:6ec5 with SMTP id
+ adf61e73a8af0-3da39bb5957mr16284518637.4.1788603276971; Sat, 05 Sep 2026
+ 03:14:36 -0700 (PDT)
+Received: from 101988054943 named unknown by gmailapi.google.com with
+ HTTPREST; Sat, 5 Sep 2026 03:14:35 -0700
+Received: from 101988054943 named unknown by gmailapi.google.com with
+ HTTPREST; Sat, 5 Sep 2026 03:14:35 -0700
+From: =?UTF-8?Q?Jo=C3=A3o_Loureiro?= <joaofl@gmail.com>
+In-Reply-To: <CAFLszTiPQriMWYNzDtfvPyoctVjQLagXFQVp7kVixrv2_oAPcg@mail.gmail.com>
+References: <CAFLszTiPQriMWYNzDtfvPyoctVjQLagXFQVp7kVixrv2_oAPcg@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|DB9PR04MB11693:EE_
-X-MS-Office365-Filtering-Correlation-Id: c55dcd04-5fb8-436c-0932-08df0b4c0aff
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|19092799006|23010399003|376014|3023799007|22082099003|18002099003|56012099006|11063799006|10067099003;
-X-Microsoft-Antispam-Message-Info: +rnRcgJMAGhJp2lMnBnzEO3yLISwKhTh5L02/sPDvjHc0eTYj1mpdTdxIH5TeWqRXqjLh1r65NPHCw2Bgy0kqKx2lrRj39gmmi2N6blQ5LHamF7KLvt/TD6Wo+E36kYq3gz3fhZqpaYzwuXxgDevIbLBcROkiWvbygBI7dTGI3na+4uhdG4Uilztd52IJ0vhrBFkicD+zHOoyk/+NmpJm+q4IHAyff1jb6nrEoPlWkH/MzD/1DVaMtpxGxUGQHb/UjtK1np3tfSUBVLMkH93NS908eQY70LTrTCVe0Y5Ozeu9fXqF0IaXulwr8fxXeKobM/kJXL6sp8FUNgiVznFb3bGGRnpO5DSrjK6T6SB//h4TOw6Tl09ImF8cMJauv+uErHqUuhiIGMA2Wo3u8yK0Ky+v5TfNNawpVh4u9v9I81vBbnUeebELCIRRi3VX0ImIDio4/RFIUuh36q11QCof8qI5cqY4YMkqSU785DBcEfGAtxExwTE425qKnWgdr9CXeybOYqeMrQK91dSMxjDUk4t3EFpIKRyUjs4MLsUb9FzDSAlyepMh32JOxBcSNwQ825iFsY/iDIsnCvpRo3OGF2BgP3t89eTTpY+NTDZyzxVY6XNF97HHpXn/h2xMuRITeIj9zlf5Fo2yc4ENQLv0HkktQLU63E5ni5HsxYnjsk=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(19092799006)(23010399003)(376014)(3023799007)(22082099003)(18002099003)(56012099006)(11063799006)(10067099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?aZUVgRpuO8RoNzenwZnv+sLT1Y0sxsNFZYI3oydIERObLGvHWzTektqUGtOX?=
- =?us-ascii?Q?QtiM8DhOIY1NwHNW7bf8NqpCgPJnrZ64nxS2B/lyozJYSuZ0QkDc6TrZKgbl?=
- =?us-ascii?Q?MwgJMjFIkefaZx0CH+gGBqiJslYPHQZRpQXPFHtyosrqugzMpt0hxYAqTeRT?=
- =?us-ascii?Q?s/C9mF5AoAYqCrp/IyqeAmzFMa4Ufgt5PkS3DNqY08+Wg8R4F66il5oh8/+B?=
- =?us-ascii?Q?WvY2owbmmf2g4M8wqEhA+RRaoG180+sNqSsLOeC3V9HumuKYwVGInrKVF93x?=
- =?us-ascii?Q?1zDzWqCWvwTMN4yE8ogzfNIW+f6H3bAfbiJ+mJr8f9ZdP5Pjz9SS5MF4Pl4v?=
- =?us-ascii?Q?J9RvU2F9kkOyx0v6nesk/mpx86KQyaleafpvNjLxK0jnuroMMqf9mBaRgw6y?=
- =?us-ascii?Q?yL8G6BVqpFc/jMx9FPHKm9wOXlWlqMTHCf4fHOQtQT7bTXQe7iVsbjwQDYpd?=
- =?us-ascii?Q?xgTmqxWDTqjBuhH6yPLVQ6ns2dZViQy2v0jxtFjZDsKM1JGXA49YBaW7hs1S?=
- =?us-ascii?Q?MyDwe4S4O8PRqaXsH1/3rQQr7z3UvVm3jvZ6mwK6J41KAuLcS8mRq7JAfrlG?=
- =?us-ascii?Q?0YuzJy2RkLzcbkLXdSrjP9yix0vqEXPNO2hg1UW+Iig3ozRCIUKl5YF/VWDJ?=
- =?us-ascii?Q?oNQ5dFiYUp2wvdouDbZpa31HKs8wavYKacbLOiTR22UcXyuGGSp4e3dOOMuy?=
- =?us-ascii?Q?d5MKvAmGj1AzrZ7PzeUrtS5hcpM8vMV8pQEN3AqnN2ZikuijIWst85j7kAaS?=
- =?us-ascii?Q?ebDtzZ3w6l8GE9IQCD5zpLqwHElFsjvhfDUPqyeDIqVKPIDfY7apr6AqdGAN?=
- =?us-ascii?Q?zpI7vWLgHoa9yF1TheawQSW/+fTaR0gKffnE6DcduVw4IZG6kwcw8tetHNFo?=
- =?us-ascii?Q?EkX95yQeCXAkolL0uTyJmciOzH6roY9X/TIA6mtbO0lP9GuISC9JHb7x1lgQ?=
- =?us-ascii?Q?d/0yrbJ1bodS7d+KmlaZJlh4MbCqXZW3A44w0WQZ6QBJ9SYSF9V5+WN2X1Q8?=
- =?us-ascii?Q?iKiAzq6rRj8QYbEM2cSx8NfNvDJ9OSRKxXN3IHYKogsDGCVwvnQEjMRGfa/k?=
- =?us-ascii?Q?Nq37+2I69sWH2ffw8BjsavqwxWSMaiOBWPyEd8xWVRSli2CsFIYmHqcwzHmD?=
- =?us-ascii?Q?4crJUVHuA6eJePB7t8Swv7fA+rk/Pg6682SAwsQJi22F1etXDf8tfPx23ZoE?=
- =?us-ascii?Q?V4fjqb2uRV3Xknoe+g56/0y4QEkucHmq/orpiYnRPQu5IEG1aeBwk2O2as2t?=
- =?us-ascii?Q?rq9amYJEEwp9HzgizjF60za0LgEKFt/iOjH23REzM9UE2Y/spCr/e8Xz4Y+n?=
- =?us-ascii?Q?N+tBoM7i2v41qsuqykkD+lJzAEdcBo+dge09swsc9TtmTwBDhak6lUDX36TZ?=
- =?us-ascii?Q?5qpotK/lznEq8a9JRUIzYllQEkJRPuPY09ggkGyCosvQfL/VCW2sQujgT+Ms?=
- =?us-ascii?Q?GfZEyag/6kAs6CUKmqL2VzikJ9gLNl8q/+3xTZQ/mfCwwCgRFK73Qw/LK4NX?=
- =?us-ascii?Q?JUcVQDxT8RndyDp9qsuQnPS8e8BuQauYrbLNiYAE1aK5TXgYgDkFiaRrPUaE?=
- =?us-ascii?Q?xYnugnaSMwMGVKVCSmCCUDrkAu/aN94ccIYdyras+BmN8FGr5A06/NCIe2Jj?=
- =?us-ascii?Q?2ml3r0h1LXBNm60REoH6XWqg/kPaUNzJR1AbFnG6kt9u3ePQabAXqPC8ZyFv?=
- =?us-ascii?Q?ByTIPCYw/TxEVAbOiK+hf6MewzQYu+OIODrU+PnnfXzKIPV3qv9uauCZ7C+y?=
- =?us-ascii?Q?zVNXdGNORdCMTJXhahGTOOXUavoIcodXmpMZMmz+LTBsS1gIDzZe?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c55dcd04-5fb8-436c-0932-08df0b4c0aff
-X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2026 12:48:54.1668 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ERCZfgPvaA+6bw293GZVSgGpUJLRQbx7kNkJyjpta2lUujylxyAYAVna8GREPAueR3G0w0GCSey8uwazbl3IsBryfz7yEp78BX9iSc8lpLxday7UJ/pxRKbx32bwvasT
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB11693
+Date: Sat, 5 Sep 2026 03:14:35 -0700
+X-Gm-Features: AcwNN1UANWlipeobIkXGQKQzGM94V6OeZdGLrLNizJGuq7oM5Vhwv1BlW3adYMo
+Message-ID: <CAJMWnCgv6PZ0mbAXpRfHu=EmhFAo7ekMZPGQV9OYSkE+2t3yCw@mail.gmail.com>
+Subject: Re: Re: [PATCH v4 1/2] spi: Introduce initial EEPROM driver mode
+ support
+To: sjg@chromium.org
+Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com
+Content-Type: multipart/alternative; boundary="000000000000f7d3a2065ab9a64a"
+X-Mailman-Approved-At: Sat, 05 Sep 2026 13:02:04 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -244,16 +194,371 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Thu, Sep 03, 2026 at 09:20:42AM +0200, Torsten Rupp wrote:
->The function mmc_get_env_addr() return the address (offset) of the
->enviroment variables. Internally it calculates a 64bit value, but
->the value is silently truncated by the provided 32bit return value.
->For offsets greater than 4GB the environment is read from and written
->to the wrong place in e. g. the flash memory and may override
->arbitrary data.
+--000000000000f7d3a2065ab9a64a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Simon,
+
+Thank you for the detailed review of v4 =E2=80=94 genuinely useful. I'll
+address the points in v5. The hard-coded 16-bit address in particular
+sent this somewhere better, and chasing your comment on the
+non-standard 'size' and 'pagesize' properties turned up the
+atmel,at25 binding already in tree, which now drives the whole
+geometry.
+
+Thanks,
+Jo=C3=A3o
+
+On Mon, Jul 13, 2026 03:04 PM, Simon Glass <sjg@chromium.org> wrote:
+
+> Hi Jo=C3=A3o,
 >
->Signed-off-by: Torsten Rupp <torsten.rupp@8tronix.de>
+> On 2026-06-15T17:51:16, Jo=C3=A3o Loureiro <joaofl@gmail.com> wrote:
+> > spi: Introduce initial EEPROM driver mode support
+> >
+> > This patch introduces the initial SPI EEPROM driver mode support
+> > analogous to the I2C EEPROM driver mode support. The SPI EEPROM
+> > driver mode support is enabled by default in the sandbox_defconfig.
+> >
+> > Signed-off-by: Jo=C3=A3o Loureiro <joaofl@gmail.com>
+> >
+> > MAINTAINERS               |   6 ++
+> >  configs/sandbox_defconfig |   1 +
+> >  drivers/misc/Kconfig      |   6 ++
+> >  drivers/misc/Makefile     |   1 +
+> >  drivers/misc/spi_eeprom.c | 185 ++++++++++++++++++++++++++++++
+> ++++++++++++++++
+> >  include/dm/uclass-id.h    |   1 +
+> >  include/spi_eeprom.h      |  91 +++++++++++++++++++++++
+> >  7 files changed, 291 insertions(+)
+>
+> Sorry I didn't notice the earlier versions of this patch, but I do
+> have a few comments.
+>
+> > This patch introduces the initial SPI EEPROM driver mode support
+> > analogous to the I2C EEPROM driver mode support. The SPI EEPROM
+> > driver mode support is enabled by default in the sandbox_defconfig.
+>
+> 'driver model', not 'driver mode' - three times. Please also use the
+> imperative: 'Introduce initial driver-model support for SPI EEPROMs,
+> analogous to ...' matches the subject and U-Boot convention.
+>
+> Please explain the motivation briefly (why now, what will consume it)
+> before your current commit msg.
+>
+> > diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> > @@ -567,6 +567,12 @@ config I2C_EEPROM
+> > +config SPI_EEPROM
+> > +     bool "SPI EEPROM support"
+> > +     depends on MISC
+> > +     help
+> > +       Enable support for SPI EEPROM devices.
+> > +       Currently with only read access.
+>
+> Please expand the help text - mention that this provides a uclass with
+> a small AT25-style driver, that only 16-bit-addressed parts are
+> handled, and that only read is implemented.
+>
+> Does this really need 'depends on MISC'? The driver does not use the
+> misc uclass; it sits on its own UCLASS_SPI_EEPROM. i2c_eeprom does not
+> depend on MISC either.
+>
+> > diff --git a/drivers/misc/spi_eeprom.c b/drivers/misc/spi_eeprom.c
+> > @@ -0,0 +1,185 @@
+> > +/* 1 command byte followed by a 16-bit address */
+> > +#define SPI_EEPROM_CMD_SIZE  3
+>
+> This lives in the public header and hard-codes a 16-bit address, but
+> the uclass is presented as generic. Anything larger than 64 KiB
+> (AT25M02, AT25512, most 24-bit-addressed parts) will not work. Please
+> either:
+>
+>   - move SPI_EEPROM_CMD_SIZE into spi_eeprom.c and derive the address
+> length from driver-data (an addr_len field), so growing the compatible
+> list later does not need an ABI change; or
+>   - state explicitly in the commit message and Kconfig help that
+> initial support is limited to 16-bit-addressed AT25-style parts.
+>
+> I'd prefer the first.
+>
+> > +     if (offset < 0 || size < 0 || offset + size > priv->size) {
+> > +             log_err("Read out of bounds (offset %d, size %d, max
+> %lu)\n",
+> > +                     offset, size, priv->size);
+> > +             return -EINVAL;
+> > +     }
+>
+> offset + size is an int and can overflow before the comparison against
+> the unsigned long priv->size. Please check the two ranges
+> independently:
+>
+>     if (offset < 0 || size < 0 || offset >=3D priv->size ||
+>         size > priv->size - offset)
+>
+> > +     cmd[0] =3D data->cmd_read_data;
+> > +     cmd[1] =3D (offset >> 8) & 0xff;
+> > +     cmd[2] =3D offset & 0xff;
+>
+> If you keep the 16-bit assumption, please reject offsets that don't
+> fit in 16 bits rather than silently truncating. priv->size can be
+> overridden from DT via the 'size' property with any value.
+>
+> > +static int spi_eeprom_std_of_to_plat(struct udevice *dev)
+> > +{
+> > +     const struct spi_eeprom_drv_data *data =3D
+> > +             (const struct spi_eeprom_drv_data
+> *)dev_get_driver_data(dev);
+> > +     struct spi_eeprom *priv =3D dev_get_priv(dev);
+> > +
+> > +     priv->size =3D dev_read_u32_default(dev, 'size', data->size);
+> > +     priv->pagesize =3D dev_read_u32_default(dev, 'pagesize',
+> data->pagesize);
+>
+> Two things:
+>
+> 'size' and 'pagesize' don't seem to be standard bindings for SPI
+> EEPROM nodes - the size is normally determined by the compatible.
+> Please either drop these overrides or point at a binding that
+> documents them.
+>
+> Also, this writes into priv from of_to_plat(). Per driver-model
+> convention, of_to_plat() should populate plat data (auto_plat) and
+> probe() should use plat or can put a few things in priv if it likes.
+> Since there is no write path using pagesize yet, the simpler fix is to
+> move this into spi_eeprom_std_probe()
+>
+> > +static const struct udevice_id spi_eeprom_std_ids[] =3D {
+> > +     { .compatible =3D 'microchip,at25160bn', .data =3D
+> (ulong)&atmel25_data },
+> > +     { }
+> > +};
+>
+> Only one compatible for a generic driver feels thin - any reason not
+> to add the rest of the AT25 family that shares this command set
+> (at25010b, at25020b, at25040b, at25080b, at2532b, at25640b etc)? Each
+> just needs a drv_data entry.
+>
+> > diff --git a/include/spi_eeprom.h b/include/spi_eeprom.h
+> > @@ -0,0 +1,91 @@
+> > +/* AT25-style command set */
+> > +#define AT25_CMD_READ_DATA   0x03    /* Read data from memory array */
+> > +#define AT25_CMD_READ_STATUS 0x05    /* Read status register */
+> > +
+> > +/* 1 command byte followed by a 16-bit address */
+> > +#define SPI_EEPROM_CMD_SIZE  3
+>
+> These are only used by drivers/misc/spi_eeprom.c and
+> drivers/misc/spi_eeprom_emul.c - implementation details rather than
+> uclass API. Please move them into a private header shared by the
+> driver and emulator, or duplicate the two opcodes locally.
+>
+> > +#if CONFIG_IS_ENABLED(SPI_EEPROM)
+> > +/*
+> > + * spi_eeprom_read() - read bytes from an SPI EEPROM chip
+>
+> Please switch to kerneldoc (/** rather than /*) - new code should
+> carry proper kerneldoc even where i2c_eeprom.h has not been updated.
+>
+> > +#endif /* SPI_EEPROM */
+> > +
+> > +#endif
+>
+> Please add /* __SPI_EEPROM */ after the outer #endif to match the inner
+> one.
+>
+> Regards,
+> Simon
+>
 
-LGTM: 
+--000000000000f7d3a2065ab9a64a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+<html><body><div dir=3D"auto">Hi Simon,<br><br>Thank you for the detailed r=
+eview of v4 =E2=80=94 genuinely useful. I&#39;ll<br>address the points in v=
+5. The hard-coded 16-bit address in particular<br>sent this somewhere bette=
+r, and chasing your comment on the<br>non-standard &#39;size&#39; and &#39;=
+pagesize&#39; properties turned up the<br>atmel,at25 binding already in tre=
+e, which now drives the whole<br>geometry.<br><br>Thanks,<br>Jo=C3=A3o<br><=
+/div></body></html><br><div class=3D"gmail_extra"><div>On Mon, Jul 13, 2026=
+ 03:04 PM, Simon Glass &lt;<a href=3D"mailto:sjg@chromium.org">sjg@chromium=
+.org</a>&gt; wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 =
+0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Hi Jo=C3=A3o,<br>
+<br>
+On 2026-06-15T17:51:16, Jo=C3=A3o Loureiro &lt;<a href=3D"mailto:joaofl@gma=
+il.com" target=3D"_blank">joaofl@gmail.com</a>&gt; wrote:<br>
+&gt; spi: Introduce initial EEPROM driver mode support<br>
+&gt;<br>
+&gt; This patch introduces the initial SPI EEPROM driver mode support<br>
+&gt; analogous to the I2C EEPROM driver mode support. The SPI EEPROM<br>
+&gt; driver mode support is enabled by default in the sandbox_defconfig.<br=
+>
+&gt;<br>
+&gt; Signed-off-by: Jo=C3=A3o Loureiro &lt;<a href=3D"mailto:joaofl@gmail.c=
+om" target=3D"_blank">joaofl@gmail.com</a>&gt;<br>
+&gt;<br>
+&gt; MAINTAINERS=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
+=A0 =C2=A06 ++<br>
+&gt;=C2=A0 configs/sandbox_defconfig |=C2=A0 =C2=A01 +<br>
+&gt;=C2=A0 drivers/misc/Kconfig=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A06 ++<br>
+&gt;=C2=A0 drivers/misc/Makefile=C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A01 +<br>
+&gt;=C2=A0 drivers/misc/spi_eeprom.c | 185 ++++++++++++++++++++++++++++++<w=
+br>++++++++++++++++<br>
+&gt;=C2=A0 include/dm/uclass-id.h=C2=A0 =C2=A0 |=C2=A0 =C2=A01 +<br>
+&gt;=C2=A0 include/spi_eeprom.h=C2=A0 =C2=A0 =C2=A0 |=C2=A0 91 ++++++++++++=
++++++++++++<br>
+&gt;=C2=A0 7 files changed, 291 insertions(+)<br>
+<br>
+Sorry I didn&#39;t notice the earlier versions of this patch, but I do<br>
+have a few comments.<br>
+<br>
+&gt; This patch introduces the initial SPI EEPROM driver mode support<br>
+&gt; analogous to the I2C EEPROM driver mode support. The SPI EEPROM<br>
+&gt; driver mode support is enabled by default in the sandbox_defconfig.<br=
+>
+<br>
+&#39;driver model&#39;, not &#39;driver mode&#39; - three times. Please als=
+o use the<br>
+imperative: &#39;Introduce initial driver-model support for SPI EEPROMs,<br=
+>
+analogous to ...&#39; matches the subject and U-Boot convention.<br>
+<br>
+Please explain the motivation briefly (why now, what will consume it)<br>
+before your current commit msg.<br>
+<br>
+&gt; diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig<br>
+&gt; @@ -567,6 +567,12 @@ config I2C_EEPROM<br>
+&gt; +config SPI_EEPROM<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0bool &quot;SPI EEPROM support&quot;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0depends on MISC<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0help<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0Enable support for SPI EEPROM devices.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0Currently with only read access.<br>
+<br>
+Please expand the help text - mention that this provides a uclass with<br>
+a small AT25-style driver, that only 16-bit-addressed parts are<br>
+handled, and that only read is implemented.<br>
+<br>
+Does this really need &#39;depends on MISC&#39;? The driver does not use th=
+e<br>
+misc uclass; it sits on its own UCLASS_SPI_EEPROM. i2c_eeprom does not<br>
+depend on MISC either.<br>
+<br>
+&gt; diff --git a/drivers/misc/spi_eeprom.c b/drivers/misc/spi_eeprom.c<br>
+&gt; @@ -0,0 +1,185 @@<br>
+&gt; +/* 1 command byte followed by a 16-bit address */<br>
+&gt; +#define SPI_EEPROM_CMD_SIZE=C2=A0 3<br>
+<br>
+This lives in the public header and hard-codes a 16-bit address, but<br>
+the uclass is presented as generic. Anything larger than 64 KiB<br>
+(AT25M02, AT25512, most 24-bit-addressed parts) will not work. Please<br>
+either:<br>
+<br>
+=C2=A0 - move SPI_EEPROM_CMD_SIZE into spi_eeprom.c and derive the address<=
+br>
+length from driver-data (an addr_len field), so growing the compatible<br>
+list later does not need an ABI change; or<br>
+=C2=A0 - state explicitly in the commit message and Kconfig help that<br>
+initial support is limited to 16-bit-addressed AT25-style parts.<br>
+<br>
+I&#39;d prefer the first.<br>
+<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0if (offset &lt; 0 || size &lt; 0 || offset + size=
+ &gt; priv-&gt;size) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0log_err(&quot;Read ou=
+t of bounds (offset %d, size %d, max %lu)\n&quot;,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0offset, size, priv-&gt;size);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -EINVAL;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+offset + size is an int and can overflow before the comparison against<br>
+the unsigned long priv-&gt;size. Please check the two ranges<br>
+independently:<br>
+<br>
+=C2=A0 =C2=A0 if (offset &lt; 0 || size &lt; 0 || offset &gt;=3D priv-&gt;s=
+ize ||<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 size &gt; priv-&gt;size - offset)<br>
+<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0cmd[0] =3D data-&gt;cmd_read_data;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0cmd[1] =3D (offset &gt;&gt; 8) &amp; 0xff;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0cmd[2] =3D offset &amp; 0xff;<br>
+<br>
+If you keep the 16-bit assumption, please reject offsets that don&#39;t<br>
+fit in 16 bits rather than silently truncating. priv-&gt;size can be<br>
+overridden from DT via the &#39;size&#39; property with any value.<br>
+<br>
+&gt; +static int spi_eeprom_std_of_to_plat(stru<wbr>ct udevice *dev)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0const struct spi_eeprom_drv_data *data =3D<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(const struct spi_eep=
+rom_drv_data *)dev_get_driver_data(dev);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0struct spi_eeprom *priv =3D dev_get_priv(dev);<br=
+>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0priv-&gt;size =3D dev_read_u32_default(dev, &#39;=
+size&#39;, data-&gt;size);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0priv-&gt;pagesize =3D dev_read_u32_default(dev, &=
+#39;pagesize&#39;, data-&gt;pagesize);<br>
+<br>
+Two things:<br>
+<br>
+&#39;size&#39; and &#39;pagesize&#39; don&#39;t seem to be standard binding=
+s for SPI<br>
+EEPROM nodes - the size is normally determined by the compatible.<br>
+Please either drop these overrides or point at a binding that<br>
+documents them.<br>
+<br>
+Also, this writes into priv from of_to_plat(). Per driver-model<br>
+convention, of_to_plat() should populate plat data (auto_plat) and<br>
+probe() should use plat or can put a few things in priv if it likes.<br>
+Since there is no write path using pagesize yet, the simpler fix is to<br>
+move this into spi_eeprom_std_probe()<br>
+<br>
+&gt; +static const struct udevice_id spi_eeprom_std_ids[] =3D {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0{ .compatible =3D &#39;microchip,at25160bn&#39;, =
+.data =3D (ulong)&amp;atmel25_data },<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0{ }<br>
+&gt; +};<br>
+<br>
+Only one compatible for a generic driver feels thin - any reason not<br>
+to add the rest of the AT25 family that shares this command set<br>
+(at25010b, at25020b, at25040b, at25080b, at2532b, at25640b etc)? Each<br>
+just needs a drv_data entry.<br>
+<br>
+&gt; diff --git a/include/spi_eeprom.h b/include/spi_eeprom.h<br>
+&gt; @@ -0,0 +1,91 @@<br>
+&gt; +/* AT25-style command set */<br>
+&gt; +#define AT25_CMD_READ_DATA=C2=A0 =C2=A00x03=C2=A0 =C2=A0 /* Read data=
+ from memory array */<br>
+&gt; +#define AT25_CMD_READ_STATUS 0x05=C2=A0 =C2=A0 /* Read status registe=
+r */<br>
+&gt; +<br>
+&gt; +/* 1 command byte followed by a 16-bit address */<br>
+&gt; +#define SPI_EEPROM_CMD_SIZE=C2=A0 3<br>
+<br>
+These are only used by drivers/misc/spi_eeprom.c and<br>
+drivers/misc/spi_eeprom_emul.c - implementation details rather than<br>
+uclass API. Please move them into a private header shared by the<br>
+driver and emulator, or duplicate the two opcodes locally.<br>
+<br>
+&gt; +#if CONFIG_IS_ENABLED(SPI_EEPROM)<br>
+&gt; +/*<br>
+&gt; + * spi_eeprom_read() - read bytes from an SPI EEPROM chip<br>
+<br>
+Please switch to kerneldoc (/** rather than /*) - new code should<br>
+carry proper kerneldoc even where i2c_eeprom.h has not been updated.<br>
+<br>
+&gt; +#endif /* SPI_EEPROM */<br>
+&gt; +<br>
+&gt; +#endif<br>
+<br>
+Please add /* __SPI_EEPROM */ after the outer #endif to match the inner one=
+.<br>
+<br>
+Regards,<br>
+Simon<br>
+</blockquote></div></div>
+
+--000000000000f7d3a2065ab9a64a--
