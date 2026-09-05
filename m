@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED4B1C624DB
-	for <u-boot@archiver.kernel.org>; Sat,  5 Sep 2026 13:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F3BDC624D3
+	for <u-boot@archiver.kernel.org>; Sat,  5 Sep 2026 13:02:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 835A88119F;
-	Sat,  5 Sep 2026 13:02:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 309D260613;
+	Sat,  5 Sep 2026 13:02:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hgswqo-snrZx; Sat,  5 Sep 2026 13:02:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org BD1758118F
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788613332;
-	b=f5uoAAcnjGioF27ihWx3w9j7uhAyFhI2LOE64qg3sPRNERjI68SnsUWFKNwh1XfQr+yy
-	 ue3rEn6+MCDahOaiSEafR0YCdvZunKoDwr2XtdxUwp7MjglWCtT7SLB9cj2xfwZYBfE0M
-	 NORgtG9wbjr39W4c2b2v3oE3J6JdUeospNyWCVUartJdh/z0b/CZcNMK0w7H3LXDCd1+r
-	 KTTjFhsf0Vo1YJRWPa8k/4RI7LwfKeZDXyuIlODBRtEIcQx5bq0KpxSxik3PNnUrLx8BA
-	 tSHYoHnal/ExY7yZjBW3oMJvbV2PVE5av0t5rRl40vBfxhTPfkfFSmN0xZlIy1+jcxw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id l2_ss9SXCB7q; Sat,  5 Sep 2026 13:02:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 9EB0460616
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788613334;
+	b=nBP4bC1I2Dj2yxxUK2bu9Zl/r7X5x2ywvV3qn6etjfcDFyjY0gyWP6phk9+nt3PKUyM9
+	 Zt5ZajxPZDnLxxdJEi9LXqzpUgjdsudKZQ4ogTPg1Epo70kriQgKe6O1HhuX+EnL0lkEA
+	 D1Y/Aej2NUCZWT2fgat8oR0cMwupwOwt8N3G/jLzskP0juvJgk2sUEFCPHm7Od+w2PwYe
+	 pamL9+zgoVbv8thUuh5q9UA6M2L7pJ9zGkps3uqMAueGdZNhjCwfoRiBLSBf0mQh2rECQ
+	 fSSfPQIrGFsxJYRTH8LFsBkeMYsO6Q19ZcXh+U0q3cvTdahdbXQzYXHpb470iVBmE7g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788613332;
+	c=relaxed/relaxed; t=1788613334;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,133 +32,136 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=4nhLVZ73LDmLopIxg3LQs3CLNj6nYQ12cgHF8PUKMvE=;
-	b=XfMmtSGmCwNG1/7DymKhTStnHM4dc8s/K4//SEYAZwDflsh1VIRzIwruuqMUlqFk/PXu
-	 vbEOD0gDidiRkP7UkwY7+EKg+hraOmtOQOb5i/I7zUz+tWulNqVwqukHoU/5Et0eWUGdr
-	 /PmLl1qDDZQRxV4Qqi6uvOhb+bth1+uy2PLyU18aivfn7pfNKxecJFhSVCy1gCwl5cV2i
-	 lvpAhnGtWg5oJDoVukk3GCjq/8ftlCzGpnyIOULmVmg6+uuba/t5NbxufvO31d4/tvWNt
-	 7C7piy8DHze0aEqfOTczGPPfRrLp/b8ohMcHsBCxa/WSqNfqXsUmFtUgHy56ZRBzOMA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=9BORKccSFJL+Xf4/llKsmDtlnpUgEH/WzcR6UB+97lI=;
+	b=Vuttl4gpptaSYNjgGMBfT7df4M1Xbgwtus53IWdIsJVUQxnkat0UcY0WjbFm8ZLNXmfr
+	 szgmpaBqrR+N6FVsIEUoBWg16EJZ7U/d50x4tQwNsAzAi+Xuo/kUglAEUXQlplV98qYZh
+	 PQ2El6PEHidYYLfb7LKILYBv13WQAt6DASXpt8uRHAiFDjDvF5OUDhy2vsboCOgXSoG8n
+	 irM1f7qdUXGDEWgh9Xvj7nzXPLBnl34N7gIj6vbUa7lty8GpjJNqlH6loJZs3ZOVJWdop
+	 dC98Po+HvaJU16pvZZBatjdMEaYXf7kpnyjPQVjIQO2JGdnzQXMYCRru956He+R2UMQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=KJojB8Kl;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788613332;
-	bh=4nhLVZ73LDmLopIxg3LQs3CLNj6nYQ12cgHF8PUKMvE=;
+	d=lists.u-boot-project.org; s=default; t=1788613334;
+	bh=9BORKccSFJL+Xf4/llKsmDtlnpUgEH/WzcR6UB+97lI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0uJtxG4+sRX/0HbKMWQBjNLhylx1v1NfSu3hsFwhlM+Dc0TrBB66YayB0wIWZSeKW
-	 580zED9jXt+cDz70V2DR2rIjW6mHwmD9q6Lpln1hKoqqPgOh/vU5iEXLBVcjz1Ttyk
-	 X5mvDCN/6WekhibIC17iCH6+yufvorcQOueXjiuiq3pZ1+g9+z9mroXHNnKcPmbDur
-	 9/Wl6dEw1N6jqqUrhaqHA5mqnyAnu0NyA4gc5j5Kj/YYnBfquRS9nzQiRQn/YNpmts
-	 WIfiIXRE+rd/QEDp1/+ZFQuBDxGHmsmynU3VdOu9U+sCAe2yyWIvDmei5JHxvbLOG2
-	 0R7+XexqZuQhQ==
+	b=r5I387vhiMCvcjts4nwp5RFTCRS6zy9iXkHlHULsG4kYizyaB1A/Qw9O+kEd77XqU
+	 Q0OxrDuRrGT6SbQXwYxGq+JYMFAWuvulZBHwbQbqirQZhF3xyauf7VRrvhwiZzTBYe
+	 qDKPMYiFTH7OB7ZRK9GZkd3sbiSbvBdoujNZlmiMZrWBYY1Kj3J/mAiPOLLtq78AJ+
+	 lmltnYXwG6t0f2rrZV9tH7zyPLGVFJX77NSxsCKih3s4sUTzyopQOpwUdY8BxXZKKw
+	 vgfasvDuAEOB3o46e5F8UZamDzE3qhDlRz+cQgPToCzGccZ8hnNriGs18GRZwxSzA4
+	 fey7fhiKDoWDw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BD1758118F;
-	Sat,  5 Sep 2026 13:02:11 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id E956C388
- for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 10:24:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9EB0460616;
+	Sat,  5 Sep 2026 13:02:14 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1EAC12FC
+ for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 10:25:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CE8AE40073
- for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 10:24:59 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1BFE76060E
+ for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 10:25:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MzFGW7V65sAz for <u-boot@lists.u-boot-project.org>;
- Sat,  5 Sep 2026 10:24:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 8C79040024
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788603899;
- b=g6/ir6Pzm5mtvw355lP7AYd8owig+Z0po4xCVNec/RIXV0xEOWspIAjmnxaECm/yh4YE
- 6ilIkGN+7mlq+nHPBmE6TZAfrSeGs5fGvl2aOKLbVM5EJvRsY0yfEYTrmuARTh2d1JUmz
- OOPoaFiszS2XrHLjpuchdrWL2MkkGBx5DUxDvO7pg+p3VGsRRRUMFwe13aXlDwEwKQiKz
- tPD+QZUHNITb10EN5BbT6Okf8If0y4utKWNxjaHiDcFM/AZfqxJq4cDDELEqtOv+hX/QU
- Ik8Bl0CqLhFmXTU1YTrvhCmHj6WqKyU0qhPvmNgGq6gT1MY4yKaCuj36cXrzgVhT2Ag==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id r7xzkdxNprlS for <u-boot@lists.u-boot-project.org>;
+ Sat,  5 Sep 2026 10:24:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 52184605EA
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788603898;
+ b=MkDBqjGQyPifzSd+KEjKWiXRuSRGjuc/h8XVf6RlP2a5cIDzfyjevXm3MIWM22vuzWcb
+ fpsCybdXt+pJzdKNWBSDTyZrlasZmZLP7AEHIQK8J+yshMdktUPVu7KBtAHNk6h/Dmrcj
+ 6+RZYt9JK0G5lE0DriT+YdiPIkbg74nObYMk1otAyGnD+FRTHKo/yHdGrPU/gM53Uv1kF
+ Nv96pAy9vHlvCTaE+e9LS99V28gj5JXUuWTFIWU4SpR82Q2663YltUmcPNac5BBasiTgK
+ eROzdFf309T9FTdnrLKeDfoV5Ge7AUIhdxszQnJ1vmcyT1PEc6h5NDrdUCkf3akqq5A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788603899;
+ c=relaxed/relaxed; t=1788603898;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Type:Content-Transfer-Encoding;
- bh=4nhLVZ73LDmLopIxg3LQs3CLNj6nYQ12cgHF8PUKMvE=;
- b=Ysejk/HoHu/+odd6h1lRvOL/JpgcvxGqdtZOrRfstoRbD3lAYoEpGLYDsz/sOZYtgbwR
- qTFyUnIMQj/PwFqaQvz7xZny+HDJ766LCpc6lC4M5eP3kz2PZsX1mCO1VvvXm8hH0StXK
- dnShPy9f7Y/eElXkLMkqWBp5RV31Qa9NZ/HO/PKFJWXQmUfink0MfVMPe19+VIBEXQhWh
- DMuQx9jnnbv+lfIVzcemuUhEDkyaaK7sAy8TRv+aj1ezSh6kfjppaxuoZkNWtR3MC+1Ea
- Htd0wvbwveU610g1zSPKaVKPNlGEU4wAzzJZlwGjFRW0CUgrOnjAkpT3R1lLkStQkNg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=9BORKccSFJL+Xf4/llKsmDtlnpUgEH/WzcR6UB+97lI=;
+ b=XtNIV1Khk36/+2t6jPXJt27OpruI7T5/MwWc4RBzQEo2XhFcebopKlPAuZ/xBU6GGgGO
+ T1lv9kI6QRofH6tl3zPnU3Ki8rBovDev3gPCS+9YJwNG1NLcDHtX11PXRPCK95XExnBeb
+ 7hSp6d5ct/tbQGeqD+0UV+03aWh/lO5k0jgBkTcFmU5CZjzphgaE4u4mN1Xyd6tgxe/gV
+ BdP7zEJW3AAAHSwJbvZW/DFbbVifIhQtX8R5GUxFBuV0OprvMx+ixjIgN90ZoJMvoIuB/
+ 0GVV1OEh7eFPe3N/LdWEr8xVdDSfAh3Ng2+a3Xn6/30ooWy2yXD1JAlvo4Q44Dt+5pQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=rEspQp6c; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
+ header.s=20251104 header.b=KJojB8Kl; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
+ client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
  envelope-from=joaofl@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=rEspQp6c
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 8C79040024
- for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 10:24:58 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4954a9e8490so16167305e9.1
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=KJojB8Kl
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 52184605EA
+ for <u-boot@lists.u-boot-project.org>; Sat,  5 Sep 2026 10:24:57 +0000 (UTC)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-482ea739de2so1236555f8f.0
  for <u-boot@lists.u-boot-project.org>; Sat, 05 Sep 2026 03:24:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788603896; x=1789208696;
+ d=gmail.com; s=20251104; t=1788603895; x=1789208695;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=4nhLVZ73LDmLopIxg3LQs3CLNj6nYQ12cgHF8PUKMvE=;
- b=rEspQp6cjfGQUBxkYr7o9mEM2K0fsxih4puZg6QteHWnYYCXu3KJF5VDQwdeKekSUs
- 4+n5UW0hn0W1iDYlSabCIvKa0dh8K2Q50pevku7lHu9q7oPz3AX3o9P3uKuFIuuhKPdO
- d8AxS370lrJbu1wXQnb6hW6tL0wqOYkSEgpfTDAMiXTDrXBjojEHj/+LTGPfWMwRV3h/
- 3rPpXq4TeCi/D3zv2kvLpKNGpKRxU3jkzvZlDTCgHiO2EtP8rxqd8sOSv8zfdlbAmwJL
- ag36HORvESU2q5krxIrP7mtYmf9nqLbybXtjQehI3aVTg+5Pt6voGYfdp0rnUDoxDJDi
- UP1w==
+ bh=9BORKccSFJL+Xf4/llKsmDtlnpUgEH/WzcR6UB+97lI=;
+ b=KJojB8KlNwCFNxoXVre2vTQwCg1MDvnfJkciQuyLvwioyiNZ4RnjbxeWUNDJy+Ve9D
+ UOgzjXJXDxzsbHx1fOsdWmXZ4jqOnSzqQIcFB6Tx2ltDY+MI6QNui2dw7eLmnfLlZcan
+ u6quceNz5Td8yXCgB8Po9HIOHE63rcCilWIpPrJBgbK/7AMTJD4DUcyQLBeYwo1ztyj6
+ fYBZYCucAiLYCxxa0zopGw8fJq2fMftxVz2FBeVqvPjk0S12O0r1z4QsGnkJUo48rdde
+ U/w5eG4J0E9cP4CuuinPo/gqyBnQ+eQO12j85Ofn70PZC3XcJDYZ/s7mCvaukeultoFj
+ 3u4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788603896; x=1789208696;
+ d=1e100.net; s=20251104; t=1788603895; x=1789208695;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=4nhLVZ73LDmLopIxg3LQs3CLNj6nYQ12cgHF8PUKMvE=;
- b=Ijdvn2lc38UFRoOMUeokeSnD7UM10zE4CEww3Ya1qihj2OCTu1sBK5ofgkT4VOnb8+
- inAt3csYPkw78joDdaqWBVI/6IxI5iWoFqhy8d6Bmpuam2pGxtn5dXhCZxGwOaCVaO4Q
- XwPdv9mROmKZdcgVfV5HW6qLZEiKLDZCZQZad3N89lGKAcujVrMxVAqMN1dQPrvk65nn
- kU8ycFckgiI9wQS21630lonFVhzDsRStz31MhIuSUr4SUOCOl6hNS93BoU51JLR/cT9a
- qvXWWsiX2cpcHOPFwErwEJ/R69ZCre2Ke75JYD1sXg3b32KUguJ5XqJdUqQt+mC0ulKc
- JdlA==
-X-Gm-Message-State: AFuF++mjkBqvQLYl/3AWe7qMAf+EA082kvM2iogc0Zp7wocDuNM7SusT
- pP5C2zvNpvU6cb4NKrYfOmLvNHaG4CoZ6xw5sF5+OrF1MwRj/Vpj/jQdNnVgOA==
-X-Gm-Gg: AYBFou1oYZxQ//ZHXEpQ79fK3SZ42LJByAHbhiG4qqjG8rqQd2hFZue4nJbm4wMQrtO
- na/jzQYKUImvBDQsWBK1SkV7fiDvPk4G5FE0d6ireyyBx6Mg+MB0bY8EV3rU1AedFjUnMe26lJG
- hVaNwSyR326rSQoq/QmWMNUy8CwCvZUScmbjHJxNhlscoqMnNUYideKtGhEKK2bD7A47PTyTbO2
- EuVVUk6GSC55pWoM6+Rup85ABJOgjUmncRG99AXjHxthPRqYPmkNMHWE0PEV5d9YD3yXuMOSSQM
- Ux6e9f4jR6uJRhxR1KhsTAuDgDEBPkJBBOfq4O3bUo+vidcaRkrfxVno4p3mH1vb+hTUra80wFW
- xuDAQaCRRtHrA98GoL6SPMjUiXdunahlp6wKX0nEdFLzWYn+8cwK63s4JlF3eU8vb0yogmLKRpQ
- aE2wUz87ivXgh5MnLjnn5ssmswQI6rQ1BK5G0Nd3EXodGztGp5Xg0E8cJeEl3LM9qyGRQcXiwCf
- 1bzI181IQKfxursP5u0M6DoiXKyeuvcHMfHMvfOy/u5M6id/9gXykZ/gi4QgMrseT/MuoC8P67Z
- r0dudKg=
-X-Received: by 2002:a05:600c:3105:b0:499:59fd:dbfc with SMTP id
- 5b1f17b1804b1-49cf82bea15mr99161545e9.1.1788603896036; 
- Sat, 05 Sep 2026 03:24:56 -0700 (PDT)
+ bh=9BORKccSFJL+Xf4/llKsmDtlnpUgEH/WzcR6UB+97lI=;
+ b=XORyGPQAAafWGXCsLFXs8EHJkE/Bjlhz/8Gpz0Fria/GKQ60h7+m9Hb/asOEEECrZr
+ PhaBFbRWb/fFun5bmk2H1MfdZ8iGHqM4pmG28+eDHqoTX289MwIvo9AL41vjTJeEl9Bh
+ NTbDQmeGlqanIyv9Q3kGxkH1BoetmIXsSELiM1MoIN83KSFT4e2oWVWCt4enm5uuO0vH
+ 3PkiCzQuzVN1gmUC4yamB2Shkyf3OENwGzT5+ckNQbabXFm+jpfbcZV8lpdVkCJ6RQqf
+ hcbOtT3aTRViiJmH6QiOBOZYl3XOMSfR+ay1uu+BA8YINiFPtlx7CeZqg74eHbWRoR96
+ 5DGQ==
+X-Gm-Message-State: AFuF++nOEOw4qJs0WjUzlTiTZ2DhFNbkK8X8OHZZpVPr7HdQg9ZJRPDD
+ Szo3UsnV6YgzvgBnAteOaVTWFaajkQFWieERkSi/NHlatLDtoYTM9YkZbyfI2Q==
+X-Gm-Gg: AYBFou1JsC/YAbDUwcUYKmgQCxAemwizNsbsaki7qYFs2lTc64I94vB+oON+Q0RHWbn
+ gmGZszEbYAHIrtOaPDbXliaPyq6jW/28VdXZnLr1wnqaQLSxt8m+1+xDiDiSxKAbwZGG9CjvFVF
+ xg2mLObuT1KSryF9tMzXsYVhnlXAmf8uRImk7ArO36yFzd7TbbUZ5XltcyIb1qjEfaxvh0LcXl5
+ zoEfx5IW86MrWUFtcA1tgxq8dRVZIWT4lcnVckz2snIzBK+50hPioxyg04jVA2Weg+3MCZ/WAc+
+ W0RMTYK3bNtxx1aASCoZn4cVdc+XFo/oGWnP4dPlCSq/AIvk0GK0eNsiSEU3Sgz+uM7WQ0e9E8M
+ 9cLPyYw6x8wuDxFQlKzneM5CImdQ7bQnpo0J4QGCX3mi0L8lx435d2k1+GJ8XetgqEz+U6j5qC5
+ qn/+LN/vzS9NVxKidB+Lt+S0gfaDeDDvsXSsdcJqCWt06M0VBG7vaUzSfEAoMOZAN6n1ItueC0b
+ ZjtTJnZKS8TZ5fADyAub2LPa3RIrhdtSRi8hKk9ONFMBJ8eEgXDEUwUHX7FhkvFqvWtz7hZQ3hU
+ vgHei0nj
+X-Received: by 2002:a05:600c:4f12:b0:499:da8b:1476 with SMTP id
+ 5b1f17b1804b1-49cf825a5bcmr122799885e9.14.1788603895101; 
+ Sat, 05 Sep 2026 03:24:55 -0700 (PDT)
 Received: from lap.lan (xcpe-178-82-236-193.dyn.res.sunrise.net.
  [178.82.236.193]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cf772692dsm164424635e9.10.2026.09.05.03.24.55
+ 5b1f17b1804b1-49cf772692dsm164424635e9.10.2026.09.05.03.24.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 05 Sep 2026 03:24:55 -0700 (PDT)
+ Sat, 05 Sep 2026 03:24:54 -0700 (PDT)
 From: =?UTF-8?q?Jo=C3=A3o=20Loureiro?= <joaofl@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  =?UTF-8?q?Jo=C3=A3o=20Loureiro?= <joaofl@gmail.com>
-Subject: [PATCH v5 3/3] sandbox: spi: Add SPI EEPROM emulator and DM test
-Date: Sat,  5 Sep 2026 12:24:31 +0200
-Message-ID: <20260905102431.426747-4-joaofl@gmail.com>
+Subject: [PATCH v5 2/3] spi: Introduce initial driver-model support for SPI
+ EEPROMs
+Date: Sat,  5 Sep 2026 12:24:30 +0200
+Message-ID: <20260905102431.426747-3-joaofl@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260615175118.53720-1-joaofl@gmail.com>
 References: <20260615175118.53720-1-joaofl@gmail.com>
@@ -179,362 +182,527 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a sandbox emulator for an AT25-style SPI EEPROM so the new SPI
-EEPROM uclass can be exercised without real hardware.
+U-Boot has driver-model support for EEPROMs on several buses - I2C
+through UCLASS_I2C_EEPROM and 1-Wire through UCLASS_W1_EEPROM - but
+nothing for SPI, even though SPI EEPROMs are common and are usually the
+faster part of the two.
 
-The sandbox SPI controller previously always bound the SPI flash
-emulator for every chip select. Allow a slave node to select its own
-emulator through a sandbox,emul phandle (mirroring the sandbox I2C
-bus), falling back to the SPI flash emulator when none is given so that
-existing behaviour is preserved.
+These devices typically hold a board's identity: its serial number, a
+unique device ID and the hardware variant. U-Boot needs that early,
+both to decide which device tree and overlays to load for the variant
+it happens to be running on, and to hand the unique IDs to the system
+it is about to boot. Today a board that wants any of this has to
+open-code raw SPI transfers in board code, which is neither reusable
+nor testable.
 
-A test EEPROM is wired up on chip select 3 of the sandbox SPI bus and a
-test/dm test verifies size reporting, patterned reads, out-of-bounds
-rejection and the unimplemented write path. The node follows the
-atmel,at25 binding: it carries the "atmel,at25" fallback compatible and
-the required size, pagesize and address-width properties.
+Introduce a UCLASS_SPI_EEPROM uclass with read/write/size operations,
+analogous to the I2C EEPROM uclass, along with a driver for AT25-style
+parts. The chip geometry - total size, page size and address width - is
+taken from the device tree as described by the atmel,at25 binding in
+dts/upstream/Bindings/eeprom/at25.yaml, which requires those properties,
+falling back to per-compatible defaults held in driver data. Devices
+using 8-, 16- and 24-bit addressing are therefore all covered, and
+adding a part later is a driver-data entry rather than a change to the
+uclass API. The 9-bit addressing mode the binding also allows, where the
+ninth address bit travels in the opcode, is not implemented.
+
+Only reading is implemented for now; spi_eeprom_write() returns -ENOSYS.
+Enable the uclass in sandbox_defconfig so that the emulator and DM test
+added by the next patch are built.
 
 Signed-off-by: João Loureiro <joaofl@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Tested-by: Simon Glass <sjg@chromium.org>  # sandbox
 ---
-Simon: I have kept your Tested-by, but please do re-test rather than
-rely on it. The v4 tree segfaulted on a full "ut dm" - test/dm/sf.c
-took the first UCLASS_SPI_EMUL device as the flash emulator, which the
-emulator added here displaces, so sandbox_sf_set_block_protect() wrote
-past the end of the wrong private struct. Running "ut dm spi_eeprom"
-alone passes and hides it. Patch 1 fixes the test.
-
-Also changed since v4: the DT node now carries the "atmel,at25"
-fallback compatible with the required size/pagesize/address-width, and
-the emulator includes drivers/misc/spi_eeprom_priv.h.
- MAINTAINERS                    |   2 +
- arch/sandbox/dts/test.dts      |  16 +++-
+ MAINTAINERS                    |   7 +
+ configs/sandbox_defconfig      |   1 +
+ drivers/misc/Kconfig           |  15 ++
  drivers/misc/Makefile          |   1 +
- drivers/misc/spi_eeprom_emul.c | 130 +++++++++++++++++++++++++++++++++
- drivers/spi/sandbox_spi.c      |  37 +++++++++-
- test/dm/Makefile               |   1 +
- test/dm/spi_eeprom.c           |  46 ++++++++++++
- 7 files changed, 231 insertions(+), 2 deletions(-)
- create mode 100644 drivers/misc/spi_eeprom_emul.c
- create mode 100644 test/dm/spi_eeprom.c
+ drivers/misc/spi_eeprom.c      | 267 +++++++++++++++++++++++++++++++++
+ drivers/misc/spi_eeprom_priv.h |  18 +++
+ include/dm/uclass-id.h         |   1 +
+ include/spi_eeprom.h           |  95 ++++++++++++
+ 8 files changed, 405 insertions(+)
+ create mode 100644 drivers/misc/spi_eeprom.c
+ create mode 100644 drivers/misc/spi_eeprom_priv.h
+ create mode 100644 include/spi_eeprom.h
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 893cf421378..92e26829e1a 100644
+index eb48eea55c5..893cf421378 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1712,8 +1712,10 @@ SPI EEPROM
- M:	João Loureiro <joaofl@gmail.com>
- S:	Maintained
- F:	drivers/misc/spi_eeprom.c
-+F:	drivers/misc/spi_eeprom_emul.c
- F:	drivers/misc/spi_eeprom_priv.h
- F:	include/spi_eeprom.h
-+F:	test/dm/spi_eeprom.c
+@@ -1708,6 +1708,13 @@ T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-spi.git
+ F:	drivers/spi/
+ F:	include/spi*
  
++SPI EEPROM
++M:	João Loureiro <joaofl@gmail.com>
++S:	Maintained
++F:	drivers/misc/spi_eeprom.c
++F:	drivers/misc/spi_eeprom_priv.h
++F:	include/spi_eeprom.h
++
  SPI NAND
  M:	Dario Binacchi <dario.binacchi@amarulasolutions.com>
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index d24feec5422..7d7f0376348 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -1618,7 +1618,7 @@
- 		#size-cells = <0>;
- 		reg = <0 1>;
- 		compatible = "sandbox,spi";
--		cs-gpios = <0>, <0>, <&gpio_a 0>;
-+		cs-gpios = <0>, <0>, <&gpio_a 0>, <0>;
- 		pinctrl-names = "default";
- 		pinctrl-0 = <&pinmux_spi0_pins>;
+ M:	Michael Trimarchi <michael@amarulasolutions.com>
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 79f46317e45..f6373af8217 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -266,6 +266,7 @@ CONFIG_SYS_NAND_USE_FLASH_BBT=y
+ CONFIG_NAND_SANDBOX=y
+ CONFIG_SYS_NAND_ONFI_DETECTION=y
+ CONFIG_SYS_NAND_PAGE_SIZE=0x200
++CONFIG_SPI_EEPROM=y
+ CONFIG_SPI_FLASH_SANDBOX=y
+ CONFIG_BOOTDEV_SPI_FLASH=y
+ CONFIG_SPI_FLASH_ATMEL=y
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index 44415f24ae1..8409635ef17 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -567,6 +567,21 @@ config I2C_EEPROM
+ 	help
+ 	  Enable a generic driver for EEPROMs attached via I2C.
  
-@@ -1636,6 +1636,20 @@
- 			spi-cpol;
- 			spi-cpha;
- 		};
-+		eeprom@3 {
-+			reg = <3>;
-+			compatible = "microchip,at25160bn", "atmel,at25";
-+			spi-max-frequency = <1000000>;
-+			size = <2048>;
-+			pagesize = <32>;
-+			address-width = <16>;
-+			sandbox,emul = <&spi_eeprom_emul>;
-+		};
-+	};
++config SPI_EEPROM
++	bool "Enable driver for generic SPI-attached EEPROMs"
++	help
++	  Enable a generic driver for EEPROMs attached via SPI.
 +
-+	spi_eeprom_emul: spi-eeprom-emul {
-+		compatible = "sandbox,spi-eeprom";
-+		sandbox,size = <2048>;
- 	};
++	  This provides the UCLASS_SPI_EEPROM uclass together with a driver
++	  for AT25-style parts, i.e. devices described by the "atmel,at25"
++	  device tree binding. The chip geometry (size, pagesize and
++	  address-width) is read from the device tree, with per-compatible
++	  defaults for the parts listed in the driver. Parts using 8-, 16-
++	  and 24-bit addressing are supported; 9-bit addressing, where the
++	  ninth address bit travels in the opcode, is not.
++
++	  Only read access is implemented at present; spi_eeprom_write()
++	  returns -ENOSYS.
  
- 	syscon0: syscon@0 {
+ config SPL_I2C_EEPROM
+ 	bool "Enable driver for generic I2C-attached EEPROMs for SPL"
 diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index 8c9f8eb9cfa..8fa0fe75b53 100644
+index e2170212e5a..8c9f8eb9cfa 100644
 --- a/drivers/misc/Makefile
 +++ b/drivers/misc/Makefile
-@@ -45,6 +45,7 @@ obj-$(CONFIG_IRQ) += irq-uclass.o
+@@ -44,6 +44,7 @@ obj-$(CONFIG_GDSYS_SOC) += gdsys_soc.o
+ obj-$(CONFIG_IRQ) += irq-uclass.o
  obj-$(CONFIG_SANDBOX) += irq_sandbox.o irq_sandbox_test.o
  obj-$(CONFIG_$(PHASE_)I2C_EEPROM) += i2c_eeprom.o
- obj-$(CONFIG_$(PHASE_)SPI_EEPROM) += spi_eeprom.o
-+obj-$(CONFIG_SANDBOX) += spi_eeprom_emul.o
++obj-$(CONFIG_$(PHASE_)SPI_EEPROM) += spi_eeprom.o
  obj-$(CONFIG_IHS_FPGA) += ihs_fpga.o
  obj-$(CONFIG_IMX8) += imx8/
  obj-$(CONFIG_IMX_ELE) += imx_ele/
-diff --git a/drivers/misc/spi_eeprom_emul.c b/drivers/misc/spi_eeprom_emul.c
+diff --git a/drivers/misc/spi_eeprom.c b/drivers/misc/spi_eeprom.c
 new file mode 100644
-index 00000000000..397e73cf0cd
+index 00000000000..3c64c0ef9f5
 --- /dev/null
-+++ b/drivers/misc/spi_eeprom_emul.c
-@@ -0,0 +1,130 @@
++++ b/drivers/misc/spi_eeprom.c
+@@ -0,0 +1,267 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * Sandbox emulation of an AT25-style SPI EEPROM.
-+ *
 + * Copyright (c) 2024 Koninklijke Philips N.V.
 + * Copyright (c) 2026 João Loureiro <joaofl@gmail.com>
 + */
 +
-+#define LOG_CATEGORY UCLASS_SPI_EMUL
++#define LOG_CATEGORY UCLASS_SPI_EEPROM
 +
 +#include <dm.h>
-+#include <malloc.h>
 +#include <spi.h>
++#include <spi_eeprom.h>
 +#include <linux/err.h>
 +
 +#include "spi_eeprom_priv.h"
 +
-+#define SANDBOX_SPI_EEPROM_SIZE		2048
++/* Longest address accepted by spi_eeprom_std_read(), in bytes */
++#define SPI_EEPROM_MAX_ADDR_LEN		3
 +
 +/**
-+ * struct sandbox_spi_eeprom - state of the emulated EEPROM
++ * struct at25_chip - geometry defaults for an AT25-style EEPROM
 + *
-+ * @data:	Backing store for the memory array
-+ * @size:	Size of the memory array in bytes
-+ * @cmd:	Opcode of the command currently being processed
-+ * @cmd_len:	Number of command/address bytes consumed so far
-+ * @addr:	Byte address decoded from the command
++ * The atmel,at25 binding (dts/upstream/Bindings/eeprom/at25.yaml) requires
++ * "size", "pagesize" and "address-width" to be present in the device tree.
++ * These values are used when a device tree omits them, and are all zero for
++ * the generic "atmel,at25" compatible, where nothing can be assumed.
++ *
++ * @size:	Total capacity in bytes
++ * @pagesize:	Write page size in bytes
++ * @addr_len:	Number of address bytes sent after the command opcode
 + */
-+struct sandbox_spi_eeprom {
-+	u8 *data;
-+	uint size;
-+	u8 cmd;
-+	uint cmd_len;
-+	uint addr;
++struct at25_chip {
++	u32 size;
++	u32 pagesize;
++	u8 addr_len;
 +};
 +
-+static int sandbox_spi_eeprom_xfer(struct udevice *dev, uint bitlen,
-+				   const void *dout, void *din, ulong flags)
++int spi_eeprom_read(struct udevice *dev, int offset, u8 *buf, int size)
 +{
-+	struct sandbox_spi_eeprom *priv = dev_get_priv(dev);
-+	const u8 *tx = dout;
-+	u8 *rx = din;
-+	uint bytes = bitlen / 8;
-+	uint i;
++	const struct spi_eeprom_ops *ops = device_get_ops(dev);
 +
-+	if (bitlen % 8)
++	if (!ops->read)
++		return -ENOSYS;
++
++	return ops->read(dev, offset, buf, size);
++}
++
++int spi_eeprom_write(struct udevice *dev, int offset, const u8 *buf, int size)
++{
++	const struct spi_eeprom_ops *ops = device_get_ops(dev);
++
++	if (!ops->write)
++		return -ENOSYS;
++
++	return ops->write(dev, offset, buf, size);
++}
++
++int spi_eeprom_size(struct udevice *dev)
++{
++	const struct spi_eeprom_ops *ops = device_get_ops(dev);
++
++	if (!ops->size)
++		return -ENOSYS;
++
++	return ops->size(dev);
++}
++
++static int spi_eeprom_read_cmd(struct udevice *dev, u8 *buf, int size,
++			       const u8 *cmd, int cmd_size)
++{
++	struct spi_slave *slave = dev_get_parent_priv(dev);
++	int ret;
++
++	ret = dm_spi_claim_bus(dev);
++	if (ret) {
++		log_err("Failed to claim SPI bus: %d\n", ret);
++		return ret;
++	}
++
++	/* Send the command, keeping the transaction open */
++	ret = spi_xfer(slave, cmd_size * 8, cmd, NULL, SPI_XFER_BEGIN);
++	if (ret) {
++		log_err("Failed to send command: %d\n", ret);
++		goto release;
++	}
++
++	/* Read the data back and close the transaction */
++	ret = spi_xfer(slave, size * 8, NULL, buf, SPI_XFER_END);
++	if (ret)
++		log_err("Failed to read data: %d\n", ret);
++
++release:
++	dm_spi_release_bus(dev);
++	return ret;
++}
++
++/*
++ * Read the status register. Returns the register value on success or a
++ * negative error code on failure.
++ *
++ * Status register layout (AT25-style devices):
++ *   Bit 0    Ready/Busy: 1 while an internal write cycle is in progress
++ *   Bit 1    Write Enable Latch
++ *   Bits 2-3 Block write protection
++ *   Bits 4-6 Reserved
++ *   Bit 7    Write-protect enable
++ */
++static int spi_eeprom_read_status(struct udevice *dev, u8 *status)
++{
++	u8 cmd = AT25_CMD_READ_STATUS;
++
++	return spi_eeprom_read_cmd(dev, status, 1, &cmd, 1);
++}
++
++static int spi_eeprom_std_read(struct udevice *dev, int offset, u8 *buf,
++			       int size)
++{
++	struct spi_eeprom *priv = dev_get_priv(dev);
++	u8 cmd[1 + SPI_EEPROM_MAX_ADDR_LEN];
++	int i;
++
++	if (offset < 0 || size < 0 || offset >= priv->size ||
++	    size > priv->size - offset) {
++		log_err("Read out of bounds (offset %d, size %d, max %lu)\n",
++			offset, size, priv->size);
 +		return -EINVAL;
-+
-+	/* A new transaction starts with the command/address phase */
-+	if (flags & SPI_XFER_BEGIN) {
-+		priv->cmd = 0;
-+		priv->cmd_len = 0;
-+		priv->addr = 0;
 +	}
 +
-+	for (i = 0; i < bytes; i++) {
-+		if (tx) {
-+			/* Command phase: first byte is the opcode */
-+			if (priv->cmd_len == 0)
-+				priv->cmd = tx[i];
-+			else if (priv->cmd == AT25_CMD_READ_DATA)
-+				priv->addr = (priv->addr << 8) | tx[i];
-+			priv->cmd_len++;
-+		} else if (rx) {
-+			/* Data phase: serve the requested register/array */
-+			switch (priv->cmd) {
-+			case AT25_CMD_READ_STATUS:
-+				/* Ready, write disabled, not protected */
-+				rx[i] = 0x00;
-+				break;
-+			case AT25_CMD_READ_DATA:
-+				rx[i] = priv->addr < priv->size ?
-+					priv->data[priv->addr] : 0xff;
-+				priv->addr++;
-+				break;
-+			default:
-+				rx[i] = 0xff;
-+				break;
-+			}
-+		}
-+	}
++	cmd[0] = AT25_CMD_READ_DATA;
++	for (i = 0; i < priv->addr_len; i++)
++		cmd[1 + i] = offset >> (8 * (priv->addr_len - 1 - i));
 +
-+	return 0;
++	return spi_eeprom_read_cmd(dev, buf, size, cmd, 1 + priv->addr_len);
 +}
 +
-+static int sandbox_spi_eeprom_probe(struct udevice *dev)
++static int spi_eeprom_std_size(struct udevice *dev)
 +{
-+	struct sandbox_spi_eeprom *priv = dev_get_priv(dev);
-+	uint i;
++	struct spi_eeprom *priv = dev_get_priv(dev);
 +
-+	priv->size = dev_read_u32_default(dev, "sandbox,size",
-+					  SANDBOX_SPI_EEPROM_SIZE);
-+	priv->data = calloc(1, priv->size);
-+	if (!priv->data)
-+		return -ENOMEM;
-+
-+	/* Fill with a known pattern so reads can be verified */
-+	for (i = 0; i < priv->size; i++)
-+		priv->data[i] = i & 0xff;
-+
-+	return 0;
++	return priv->size;
 +}
 +
-+static int sandbox_spi_eeprom_remove(struct udevice *dev)
-+{
-+	struct sandbox_spi_eeprom *priv = dev_get_priv(dev);
-+
-+	free(priv->data);
-+
-+	return 0;
-+}
-+
-+static const struct dm_spi_emul_ops sandbox_spi_eeprom_ops = {
-+	.xfer	= sandbox_spi_eeprom_xfer,
++static const struct spi_eeprom_ops spi_eeprom_std_ops = {
++	.read	= spi_eeprom_std_read,
++	.size	= spi_eeprom_std_size,
 +};
 +
-+static const struct udevice_id sandbox_spi_eeprom_ids[] = {
-+	{ .compatible = "sandbox,spi-eeprom" },
++/* Geometry is described by the device tree for the generic compatible */
++static const struct at25_chip at25_generic = { };
++
++static const struct at25_chip mchp_25aa010a = {
++	.size		= 128,
++	.pagesize	= 16,
++	.addr_len	= 1,
++};
++
++static const struct at25_chip mchp_at25160bn = {
++	.size		= 2048,
++	.pagesize	= 32,
++	.addr_len	= 2,
++};
++
++static const struct at25_chip atmel_at25256b = {
++	.size		= 32768,
++	.pagesize	= 64,
++	.addr_len	= 2,
++};
++
++static const struct at25_chip st_m95640 = {
++	.size		= 8192,
++	.pagesize	= 32,
++	.addr_len	= 2,
++};
++
++static const struct at25_chip st_m95256 = {
++	.size		= 32768,
++	.pagesize	= 64,
++	.addr_len	= 2,
++};
++
++static const struct at25_chip st_m95m02 = {
++	.size		= 262144,
++	.pagesize	= 256,
++	.addr_len	= 3,
++};
++
++static int spi_eeprom_std_probe(struct udevice *dev)
++{
++	const struct at25_chip *chip =
++		(const struct at25_chip *)dev_get_driver_data(dev);
++	struct spi_eeprom *priv = dev_get_priv(dev);
++	u32 addr_bits;
++	u8 status;
++	int ret;
++
++	if (!chip)
++		chip = &at25_generic;
++
++	priv->size = dev_read_u32_default(dev, "size", chip->size);
++	priv->pagesize = dev_read_u32_default(dev, "pagesize", chip->pagesize);
++	addr_bits = dev_read_u32_default(dev, "address-width",
++					 chip->addr_len * 8);
++
++	if (!priv->size || !priv->pagesize || !addr_bits) {
++		log_err("Missing 'size'/'pagesize'/'address-width', required by the atmel,at25 binding\n");
++		return -EINVAL;
++	}
++
++	/*
++	 * The binding also allows 9-bit addressing, where the ninth address
++	 * bit travels in the opcode. That is not implemented here.
++	 */
++	switch (addr_bits) {
++	case 8:
++	case 16:
++	case 24:
++		priv->addr_len = addr_bits / 8;
++		break;
++	default:
++		log_err("Unsupported address width %u\n", addr_bits);
++		return -EOPNOTSUPP;
++	}
++
++	if (priv->size > 1UL << addr_bits) {
++		log_err("Size %lu exceeds the %u-bit address range\n",
++			priv->size, addr_bits);
++		return -EINVAL;
++	}
++
++	ret = spi_eeprom_read_status(dev, &status);
++	if (ret) {
++		log_err("Failed to read status register: %d\n", ret);
++		return ret;
++	}
++
++	log_debug("status register: 0x%02x\n", status);
++
++	return 0;
++}
++
++static const struct udevice_id spi_eeprom_std_ids[] = {
++	{ .compatible = "microchip,25aa010a",
++	  .data = (ulong)&mchp_25aa010a },
++	{ .compatible = "microchip,at25160bn",
++	  .data = (ulong)&mchp_at25160bn },
++	{ .compatible = "atmel,at25256B",
++	  .data = (ulong)&atmel_at25256b },
++	{ .compatible = "st,m95640", .data = (ulong)&st_m95640 },
++	{ .compatible = "st,m95256", .data = (ulong)&st_m95256 },
++	{ .compatible = "st,m95m02", .data = (ulong)&st_m95m02 },
++	/* Fallback compatible required by the binding; must be last */
++	{ .compatible = "atmel,at25", .data = (ulong)&at25_generic },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(sandbox_spi_eeprom) = {
-+	.name		= "sandbox_spi_eeprom",
-+	.id		= UCLASS_SPI_EMUL,
-+	.of_match	= sandbox_spi_eeprom_ids,
-+	.probe		= sandbox_spi_eeprom_probe,
-+	.remove		= sandbox_spi_eeprom_remove,
-+	.priv_auto	= sizeof(struct sandbox_spi_eeprom),
-+	.ops		= &sandbox_spi_eeprom_ops,
++U_BOOT_DRIVER(spi_eeprom_std) = {
++	.name		= "spi_eeprom",
++	.id		= UCLASS_SPI_EEPROM,
++	.of_match	= spi_eeprom_std_ids,
++	.probe		= spi_eeprom_std_probe,
++	.priv_auto	= sizeof(struct spi_eeprom),
++	.ops		= &spi_eeprom_std_ops,
 +};
-diff --git a/drivers/spi/sandbox_spi.c b/drivers/spi/sandbox_spi.c
-index 3ee97d67f4a..aa4edcf64b2 100644
---- a/drivers/spi/sandbox_spi.c
-+++ b/drivers/spi/sandbox_spi.c
-@@ -77,6 +77,41 @@ static int sandbox_spi_set_wordlen(struct udevice *dev, unsigned int wordlen)
- 	return 0;
- }
- 
-+/**
-+ * sandbox_spi_emul_get() - find the emulator for a SPI slave
-+ *
-+ * A slave can name a dedicated emulator through a "sandbox,emul" phandle (for
-+ * example an SPI EEPROM). When no such phandle is present we fall back to the
-+ * built-in SPI flash emulator, preserving the previous behaviour.
-+ *
-+ * @state: Sandbox state, used to cache the bound emulator per chip select
-+ * @bus: SPI bus the slave is attached to
-+ * @slave: SPI slave to find the emulator for
-+ * @emulp: Returns the emulator device on success
-+ * Return: 0 if OK, -ve on error
-+ */
-+static int sandbox_spi_emul_get(struct sandbox_state *state, struct udevice *bus,
-+				struct udevice *slave, struct udevice **emulp)
-+{
-+	struct sandbox_spi_info *info;
-+	int ret;
 +
-+	info = &state->spi[dev_seq(bus)][spi_chip_select(slave)];
-+	if (info->emul) {
-+		*emulp = info->emul;
-+		return 0;
-+	}
-+
-+	ret = uclass_get_device_by_phandle(UCLASS_SPI_EMUL, slave, "sandbox,emul",
-+					   emulp);
-+	if (!ret) {
-+		info->emul = *emulp;
-+		return 0;
-+	}
-+
-+	return sandbox_spi_get_emul(state, bus, slave, emulp);
-+}
-+
- static int sandbox_spi_xfer(struct udevice *slave, unsigned int bitlen,
- 			    const void *dout, void *din, unsigned long flags)
- {
-@@ -106,7 +141,7 @@ static int sandbox_spi_xfer(struct udevice *slave, unsigned int bitlen,
- 		       busnum, cs);
- 		return -ENOENT;
- 	}
--	ret = sandbox_spi_get_emul(state, bus, slave, &emul);
-+	ret = sandbox_spi_emul_get(state, bus, slave, &emul);
- 	if (ret) {
- 		printf("%s: busnum=%u, cs=%u: no emulation available (err=%d)\n",
- 		       __func__, busnum, cs, ret);
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index fb3e6a7008f..3a8599d6bc2 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -120,6 +120,7 @@ obj-$(CONFIG_SMEM) += smem.o
- obj-$(CONFIG_SOC_DEVICE) += soc.o
- obj-$(CONFIG_SOUND) += sound.o
- obj-$(CONFIG_DM_SPI) += spi.o
-+obj-$(CONFIG_SPI_EEPROM) += spi_eeprom.o
- obj-$(CONFIG_SPMI) += spmi.o
- obj-y += syscon.o
- obj-$(CONFIG_RESET_SYSCON) += syscon-reset.o
-diff --git a/test/dm/spi_eeprom.c b/test/dm/spi_eeprom.c
++UCLASS_DRIVER(spi_eeprom) = {
++	.id	= UCLASS_SPI_EEPROM,
++	.name	= "spi_eeprom",
++};
+diff --git a/drivers/misc/spi_eeprom_priv.h b/drivers/misc/spi_eeprom_priv.h
 new file mode 100644
-index 00000000000..b943ada0035
+index 00000000000..142ffc736c7
 --- /dev/null
-+++ b/test/dm/spi_eeprom.c
-@@ -0,0 +1,46 @@
-+// SPDX-License-Identifier: GPL-2.0-only
++++ b/drivers/misc/spi_eeprom_priv.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * Tests for the SPI EEPROM uclass
++ * Command set shared by the AT25-style SPI EEPROM driver and its sandbox
++ * emulator. These opcodes are an implementation detail of the driver, not
++ * part of the UCLASS_SPI_EEPROM API.
 + *
 + * Copyright (c) 2024 Koninklijke Philips N.V.
 + * Copyright (c) 2026 João Loureiro <joaofl@gmail.com>
 + */
 +
-+#include <dm.h>
-+#include <spi_eeprom.h>
-+#include <dm/test.h>
-+#include <test/test.h>
-+#include <test/ut.h>
++#ifndef __SPI_EEPROM_PRIV_H
++#define __SPI_EEPROM_PRIV_H
 +
-+/* Read from the emulated SPI EEPROM and check the uclass operations */
-+static int dm_test_spi_eeprom(struct unit_test_state *uts)
++/* AT25-style command set */
++#define AT25_CMD_READ_DATA	0x03	/* Read data from memory array */
++#define AT25_CMD_READ_STATUS	0x05	/* Read status register */
++
++#endif /* __SPI_EEPROM_PRIV_H */
+diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+index 36b5d87c304..d24b4a1a121 100644
+--- a/include/dm/uclass-id.h
++++ b/include/dm/uclass-id.h
+@@ -138,6 +138,7 @@ enum uclass_id {
+ 	UCLASS_SOC,		/* SOC Device */
+ 	UCLASS_SOUND,		/* Playing simple sounds */
+ 	UCLASS_SPI,		/* SPI bus */
++	UCLASS_SPI_EEPROM,	/* SPI EEPROM device */
+ 	UCLASS_SPI_FLASH,	/* SPI flash */
+ 	UCLASS_SPI_GENERIC,	/* Generic SPI flash target */
+ 	UCLASS_SPMI,		/* System Power Management Interface bus */
+diff --git a/include/spi_eeprom.h b/include/spi_eeprom.h
+new file mode 100644
+index 00000000000..64b5d3130be
+--- /dev/null
++++ b/include/spi_eeprom.h
+@@ -0,0 +1,95 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (c) 2024 Koninklijke Philips N.V.
++ * Copyright (c) 2026 João Loureiro <joaofl@gmail.com>
++ */
++
++#ifndef __SPI_EEPROM
++#define __SPI_EEPROM
++
++#include <linux/errno.h>
++#include <linux/types.h>
++
++struct udevice;
++
++/**
++ * struct spi_eeprom_ops - operations provided by an SPI EEPROM driver
++ *
++ * @read:	Read @size bytes from @offset into @buf
++ * @write:	Write @size bytes from @buf at @offset
++ * @size:	Return the capacity of the device in bytes
++ */
++struct spi_eeprom_ops {
++	int (*read)(struct udevice *dev, int offset, u8 *buf, int size);
++	int (*write)(struct udevice *dev, int offset, const u8 *buf,
++		     int size);
++	int (*size)(struct udevice *dev);
++};
++
++/**
++ * struct spi_eeprom - geometry of an SPI EEPROM device
++ *
++ * @pagesize:	The EEPROM's page size in bytes
++ * @size:	The EEPROM's capacity in bytes
++ * @addr_len:	Number of address bytes sent after the command opcode
++ */
++struct spi_eeprom {
++	unsigned long pagesize;
++	unsigned long size;
++	u8 addr_len;
++};
++
++#if CONFIG_IS_ENABLED(SPI_EEPROM)
++/**
++ * spi_eeprom_read() - read bytes from an SPI EEPROM chip
++ *
++ * @dev:	Chip to read from
++ * @offset:	Offset within chip to start reading
++ * @buf:	Place to put data
++ * @size:	Number of bytes to read
++ * Return: 0 on success, -ve on failure
++ */
++int spi_eeprom_read(struct udevice *dev, int offset, u8 *buf, int size);
++
++/**
++ * spi_eeprom_write() - write bytes to an SPI EEPROM chip
++ *
++ * @dev:	Chip to write to
++ * @offset:	Offset within chip to start writing
++ * @buf:	Buffer containing data to write
++ * @size:	Number of bytes to write
++ * Return: 0 on success, -ve on failure
++ */
++int spi_eeprom_write(struct udevice *dev, int offset, const u8 *buf,
++		     int size);
++
++/**
++ * spi_eeprom_size() - get size of SPI EEPROM chip
++ *
++ * @dev:	Chip to query
++ * Return: +ve size in bytes on success, -ve on failure
++ */
++int spi_eeprom_size(struct udevice *dev);
++
++#else /* !SPI_EEPROM */
++
++static inline int spi_eeprom_read(struct udevice *dev, int offset, u8 *buf,
++				  int size)
 +{
-+	struct udevice *dev;
-+	u8 buf[16];
-+	int i;
-+
-+	ut_assertok(uclass_get_device_by_name(UCLASS_SPI_EEPROM, "eeprom@3",
-+					      &dev));
-+
-+	/* The emulator advertises a 2 KiB array */
-+	ut_asserteq(2048, spi_eeprom_size(dev));
-+
-+	/* The backing store is filled with a (addr & 0xff) pattern */
-+	ut_assertok(spi_eeprom_read(dev, 0, buf, sizeof(buf)));
-+	for (i = 0; i < sizeof(buf); i++)
-+		ut_asserteq(i & 0xff, buf[i]);
-+
-+	/* Reads honour the requested offset */
-+	ut_assertok(spi_eeprom_read(dev, 0x100, buf, sizeof(buf)));
-+	for (i = 0; i < sizeof(buf); i++)
-+		ut_asserteq((0x100 + i) & 0xff, buf[i]);
-+
-+	/* Reads past the end of the array are rejected */
-+	ut_asserteq(-EINVAL, spi_eeprom_read(dev, 2040, buf, sizeof(buf)));
-+
-+	/* Writing is not implemented yet */
-+	ut_asserteq(-ENOSYS, spi_eeprom_write(dev, 0, buf, 1));
-+
-+	return 0;
++	return -ENOSYS;
 +}
-+DM_TEST(dm_test_spi_eeprom, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++
++static inline int spi_eeprom_write(struct udevice *dev, int offset,
++				   const u8 *buf, int size)
++{
++	return -ENOSYS;
++}
++
++static inline int spi_eeprom_size(struct udevice *dev)
++{
++	return -ENOSYS;
++}
++
++#endif /* SPI_EEPROM */
++
++#endif /* __SPI_EEPROM */
 -- 
 2.55.0
 
