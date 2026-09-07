@@ -4,131 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9FD5C79F89
-	for <u-boot@archiver.kernel.org>; Mon,  7 Sep 2026 12:09:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52183C79F9E
+	for <u-boot@archiver.kernel.org>; Mon,  7 Sep 2026 12:14:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 89E8D606B3;
-	Mon,  7 Sep 2026 12:09:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E4C89605F5;
+	Mon,  7 Sep 2026 12:14:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id V3ZvrbX8IJrh; Mon,  7 Sep 2026 12:09:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A2B4E60693
+ id gNSxMAP2IyYK; Mon,  7 Sep 2026 12:14:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org D962560686
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788782985;
-	b=f2LMOCNxWpmPIX8i8eFhjhU3WOClzhT0nfpcsByEDGh4UhnCWr7RYcEhfayOpDaqbQku
-	 Own4k3ZdF40Rxem8sfx9lB0dJi5mylebfTxZB3Y70YqaUUesYY7PTNfZDSyS5alxgqOyb
-	 +9A1fVjRtIYyGaJ8m85fXsrOfl+mlbFx+2yCqZDIoU/YCnzBWhq4MXX3+U950gRvxoYHt
-	 xmREyYLVBHFCXXM78gTreDVrRic9WSQhMnjsJ+rL4tnpt4Ed5iDoBp/i3qNCjTrYL1bvT
-	 fw1cs+5ghUG2BCiiCmw6skXo9ix6q+7jeh5LoUpnQ+uWbjeDc/bfaRZrj74RbcV4l8g==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788783242;
+	b=idM7lagyAO0eUJtzp/KYCU3rLSC2ApGI4oedJdL8351vcfDiPsILl1ks4Gbkuk82IxTz
+	 5dmyNh1Yk2U5o5ebGOOsWQqNFqYxNajUAlkzPj/X/0U9+wla/duEbavtWy0ps5b/oNSOf
+	 gCqhTMCtsSfadconvxB/D7eVWBKgJM6iXphDc0Uj9zBpJPs1Xs+kmQqsmuU8t16nq8Zck
+	 kw/l/2P5UbvTNiEWQn/RKdE90FI+V8uF/4g2gpA2VIJMehJpwQHPCOu9gDj/Ba17AlqAH
+	 EtoZv3xyPHW+gMh4vXuMed7R2tIemqjtyGyY073dL7AZ4JFr+S68vyomaI5JcRV+p+A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788782985;
+	c=relaxed/relaxed; t=1788783242;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
-	 Date:Message-ID:MIME-Version:Content-Type:X-BeenThere:
+	 DKIM-Signature:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=+5Q6XQvvVe4googP4KKs9rb8mrJgnyhwM0erInUkInU=;
-	b=XvKblgweD8iXHpgl/wpWh8+TIAaySBv801xivIiyaWZPSzEbX/H84W7MH7EewnOzHvr3
-	 ypunT8fcU8Kc1Fau3s7d8di1o1QIYWQUrQQDGXbdShTuv19BEZ9qObTvFKFgKVGoCg/hr
-	 0nle7R7XrSmOnZ+Wup/V3RyCM2KnCwPYj7/v1oOD4NlYdTDMf1G8ztZqPOnT8bBci2A3x
-	 ViHa1196a7ZClp390P1vJ6PTCS4W+ytp3yxRGF/O8lmCMbQvfaJr/tV1u/ypORYhJ14mr
-	 j958HARJhw4EPCPZ9yD/FDZuMf25+nNBpwPj3tjvHPWicbh1ryfZrbtKQUKzhG4+7kg==
+	bh=BgTB0A3042MbYx6mb3ppgahNcs4N5KoTy6a/lFgqwt4=;
+	b=sTiErqQcD1ztGf8I1fUiYU+CBOP+oi3PjeBhb7/x7gObJxcTyPYkb09hRfKM2fUZO1MW
+	 I7tvaa898rDyh3oDPN2mD7LQEa7aNh5V/k2q7GtH0bUXlMo3optaOEKAyEqxUsel2FguL
+	 7s+WjxS8LG69qwGpA25Mdv/Wgt9Yd3lj8xOVfeMKltkS70esQJuVZmbz2/w4fbKxr52xf
+	 80t2Hp44x1TZV1WWq7pRcx2MA4uNNPVXhN5UWUn9NmMJT1Pm3tjckpKo93mXNxwEuJY4n
+	 hBohyHzkR7a4Q5hKx3SqKpf4jYm82KmhmVz90XOXBb5KGk1sm61IgHVkgR6otZ7WyRA==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788782985;
-	bh=+5Q6XQvvVe4googP4KKs9rb8mrJgnyhwM0erInUkInU=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788783242;
+	bh=BgTB0A3042MbYx6mb3ppgahNcs4N5KoTy6a/lFgqwt4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZAfOwZeCTeYr9Zw3muXWjBDfJ2YzYrdngSisqYkPIMp2podZ4sI/IOHr3H/E1eMeJ
-	 ad6zXBZYJsWg2zvHWvBVc84XYH6t6lw413nfbLjplbHY7Rj4cQ67sa1t752cOANWLt
-	 4qaRZiNS7VVAgFzKooPFVF3rClzpJ6s/iT7rU+H9Ei3RAPY/PDn3OZppEbpwpuVjnn
-	 WHt8jo9py0BWaOoc5cgg1auVCp65jQ1AhBnkw8WFK0sX+hNpRsP4sD6Pu84GxzhLrz
-	 GqXzFKX08SeqFwAtN3Atebuqmx2hZaqCsrD+QLcaC/BnBMnWLSzFi6BxeNG4Fdj2VZ
-	 mXMYSCTXTxZpg==
+	b=O63Ady/Anup3chE7EswGF69V7FXInW4/2LnJYMgsvll6tJ+r6xNpajb4gfynGHY5A
+	 gWkKmzvc4ve2DYOsuFNzG9s+H5+k13iafvXZrgCRwdT4yoLPXMcBG+pAHCqIkgguhu
+	 EAmO1xpyGsofL2Wn0En+xi+9tl9t3I7krMGHoBsLQbUF12oQPGc6KFQCNlpgZJ1zYz
+	 HonFTlySpNRO1GOwf4RRySh1BKWqTCpVH3ct4hF/vSgIIOVfiIWPn+Y1l7iG0/RGOG
+	 Zd90CT+MqCUp+QwAf1QCxeygu8TiKyrEhZTQ1sZbGdzVyA1xd6EB5Xt3b7oseLB/nH
+	 ekhLUSgIrFe2A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A2B4E60693;
-	Mon,  7 Sep 2026 12:09:45 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id A8B27A48
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 12:09:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D962560686;
+	Mon,  7 Sep 2026 12:14:01 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3CE36388
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 12:14:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8E77780C8A
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 12:09:44 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 230114059E
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 12:14:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ed1-HsClS87y for <u-boot@lists.u-boot-project.org>;
- Mon,  7 Sep 2026 12:09:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org A4FE380C6E
-Authentication-Results: smtp1.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788782983;
- b=j17HS2CXFxlzo3iuPomX8Xfk7daK96LYnR1anDd3RUmPz2XhkllaSHZfS9oP2wFnka1A
- /zGBswhsdWMpBLi9G8LgrK3VOKiczHYpybqrCsIWMMzUz+kNJTXRcTTuJ2j+stOQ8kz69
- cgc25w54QvJY7i8rCcW96Rlk7k9MOcRQtIGbqglRWqPAr5hxgMuAHO4qDqIgAV5XHTOCj
- qNmygBMNsUxdccz4FNBY6rhHO7lB5Ivq8ayV7q4aeEr9PkCG23Dm+et7JjxfKf9+xLt7F
- ViyrO2FDn4cGsIYSlEAewWIkYirEcoPGKP+A0Gl7HyjQPAgTirrPYad5q+BuwlCby1Q==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZJSTPy8R4c2w for <u-boot@lists.u-boot-project.org>;
+ Mon,  7 Sep 2026 12:13:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 298E54059C
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.161
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788783238;
+ b=Lp+yLWNGchY8YB+8znz/7cBVsf+MEszeWk1v0KCb83U8r1I2FZj7S260zxfnsVBevL7x
+ 1rVdxmsPV0Q2U70YnN8xHQMv6mTbVsxdikXrykA4XpX3VKB+XiXnntG1U42TW7XHtdqHs
+ nxNQPLb3np+28fIR5Zl+JSPT5CA+Jy+IGjUkQ2o43kbQkgdk76L0IY/ksymL9Pt7iZNS+
+ yDNVzM51jDnNgn11YcsQtpNpHVsKM2AG7H5QmXUhhgxpdt4i7W7dQEPckIZlrLAyilsys
+ IteMh97H7AxvbU/CM0OCUkk1yaoDnHqWpTwOJ3bjSlJH0ER57oNlyudAZ7ERF4a723w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788782983;
- h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
- In-Reply-To:References:Date:Message-ID:MIME-Version:Content-Type;
- bh=+5Q6XQvvVe4googP4KKs9rb8mrJgnyhwM0erInUkInU=;
- b=VJVEy4viodlXXXGpS8wtvnmM2P8Mh3FsMA5KynjdgBUwktRgHCLYK8UqlWcn0CoD2q8U
- BYJf7H3h8DcyETj/KCG0sE/uAhp/kKE2YcVtXAP726B/KXSZM6nX/7HJVYag4zFJEWRV4
- 8VEfql+6lKnYv/0TdcCeZauyMciFPYbS/yHUb6XkAxtOgjyWwY8a8uuq/+XItG6dW7Bzk
- 8tcqpUXMhTSK78nXDLBzi5m0CiJ6WmpQzs1gI6IFs56w2zYIoO2b8WzqXiwDf13A6IH9T
- 7wKJN8KcnOgskUq/2UNA21uNzQyTMHOHuwNA/+UdIpwp2sk3d8b8Ziuv4feEYLavZJQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=kernel.org; 
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=RAcncz3u; 
- arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
- envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=RAcncz3u
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp1.osuosl.org (Postfix) with ESMTPS id A4FE380C6E
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 12:09:43 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id F05764435C;
- Mon,  7 Sep 2026 12:09:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2D4211F00ACA;
- Mon,  7 Sep 2026 12:09:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1788782982;
- bh=+5Q6XQvvVe4googP4KKs9rb8mrJgnyhwM0erInUkInU=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=RAcncz3uIY7mK3pb5woCxrj/8Eo1Etx/B6vyiTawiFmQBZ36+Uep8o+WzFHfWH/8S
- Q+v6mhBElFMjmhbvmkWdWmNw5PZzGsvdncHkmBbVrfApnNqf1jJNfv3AH8YyDV+VJB
- tYMqSno0ctWMq7KTu4YVh3Jqar5UPKJfnp6TXQqNsh/IkQW/FsePNQGZA2n1kPjnD1
- U8OZFMZQho9HD83XLvoMqO9o3owNpMs+2nbcM/Wx95hVVcfSEDMU6gI/8MW0RRbiiL
- GgG44On2XLmrxonxWOaWiIFHLR0lRpRBeGb9V2il3hzXqvIsajNjHLrvpJ7B27hKU9
- 6IUOQ0ZRPAKgw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.u-boot-project.org
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, Rasmus
- Villemoes <ravi@prevas.dk>
-Subject: Re: [PATCH v2 3/4] cmd: optee_rpmb: allocate large enough buffer
- when reading persistent value
-In-Reply-To: <20260903212215.2331118-4-ravi@prevas.dk>
-References: <20260903212215.2331118-1-ravi@prevas.dk>
- <20260903212215.2331118-4-ravi@prevas.dk>
-Date: Mon, 07 Sep 2026 14:09:40 +0200
-Message-ID: <877bkxtg8r.fsf@kernel.org>
+ c=relaxed/relaxed; t=1788783238;
+ h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+ Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID;
+ bh=BgTB0A3042MbYx6mb3ppgahNcs4N5KoTy6a/lFgqwt4=;
+ b=oUAKNZg22Hg+FME8CJYstiFOe87xLvZr2F5YkF9DZalGK9i5+JzWSKekGMOO4ywCwEb1
+ u5T0MTvIe47g0ylB0TJVFK3hf+2qKDv8ddAovwuOC2Wul+1aSIk99kgqYURNmDx1CJM1D
+ v9zS8II1y+QmMqXrzIjvSCpUZ4UkCY+nRbD5pgpZB9VrrSLLt33R7qfozwh8sjB9OUfIk
+ sUP0qpjgzjdC80K10fXf0qitqn9Srv+cWKKcEUCVqs3SlKWptoDgpvpqwZ3ks7yL7LgMn
+ JQnVGUfIGQNxWauFCrsDUHI0hvFIYwV1E1gXJ1bArnBj1zzEz2YVEPBPXXuGyQ0P2tg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=mailbox.org; 
+ dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=hoWm8hMr; 
+ arc=none smtp.remote-ip=80.241.56.161
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.161;
+ helo=mout-p-103.mailbox.org; envelope-from=marek.vasut@mailbox.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=hoWm8hMr
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 298E54059C
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 12:13:57 +0000 (UTC)
+Received: from smtp202.mailbox.org (unknown [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4hdmFZ1w7KzKmT7;
+ Mon, 07 Sep 2026 14:13:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1788783234;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=BgTB0A3042MbYx6mb3ppgahNcs4N5KoTy6a/lFgqwt4=;
+ b=hoWm8hMrC0nnfOpbiqRn2GxUnTiEWS/MV9EwIYqALOv8xTarBWaKRkZC103MUO1bQoJBi6
+ a2biplJ4qshynfBpL/Ldxk+xQGFWQt4Cufy50ks+QdfrVp98U6vxRKEFw+53HRipVSmS8c
+ oEoeTbQ1AootQqdcxY8uPx/C96TleExi6xUttz+7DTcw1ASc+nUi/avHe6PM2rEnhB7Cc2
+ 76k9qWNLXfEZ/7Swq9N0kBXRAR70prSIPk6TpT6LXdUBzdUV2YzFYMVE+dCGTFliHq7J80
+ 0vK24sDuVXEizwy8d54c1rFUuSAKOhHZaVehJ3QB+vcPW/uLco3zgIcs7OzkWQ==
+Message-ID: <6e0b7172-b3c5-455e-b00f-370d43083b2b@mailbox.org>
+Date: Mon, 7 Sep 2026 14:13:51 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+Subject: Re: [PATCH] lib: lmb: return -EFAULT for partial bank-boundary overlap
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Randolph Sapp <rs@ti.com>
+References: <20260907-lmb-alloc-addr-efault-v1-1-7a5b73c2318c@oss.qualcomm.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260907-lmb-alloc-addr-efault-v1-1-7a5b73c2318c@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 1uoiygy1agr7arr4fj8p374gk3ymoo6m
+X-MBO-RS-ID: 0414b29a988a3ca85d0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,43 +148,14 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Rasmus,
-
-Thank you for the patch.
-
-On Thu, Sep 03, 2026 at 23:22, Rasmus Villemoes <ravi@prevas.dk> wrote:
-
-> It is implied by the comments in avb_ops.h and the translation of
-> TEE_ERROR_STORAGE_NO_SPACE to AVB_IO_RESULT_ERROR_INSUFFICIENT_SPACE
-> done in common/avb_verify.c:invoke_func() that the
-> TA_AVB_CMD_READ_PERSIST_VALUE could return TEE_ERROR_STORAGE_NO_SPACE
-> when the value is longer than the passed buffer size, and that
-> param[1].u.memref.size would be set to the actual size, so that one
-> can allocate an appropriate buffer and re-read.
->
-> However, that has AFAICT never been the case; there is no mention of
-> TEE_ERROR_STORAGE_NO_SPACE in the history of ta/avb/ in
-> https://github.com/OP-TEE/optee_os.git, and what the code does instead
-> is to return a value truncated to the given buffer size. In other
-> words, not only can one not determine the correct buffer size to
-> allocate, one is not even told that truncation happened.
->
-> Changing the ABI of the existing TA_AVB_CMD_READ_PERSIST_VALUE method
-> to return an error in the case of a too small buffer was
-> rejected. Instead, a new TA_AVB_CMD_READ_PERSIST_VALUE2 method is
-> implemented which does return an error in case of a too small buffer
-> <https://github.com/OP-TEE/optee_os/pull/7959>.
->
-> Make use of that method, thus making the <bytes> argument to
-> read_pvalue redundant - continue to accept it, but only use it as a
-> hint for the initial size, defaulting to 64.
->
-> This obviously requires running against an updated op-tee, but as the
-> optee_rpmb command so far has not been usable programmatically (the
-> values read are only printed to the console), no existing boot logic
-> can have been relying on this command.
->
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
+On 9/7/26 1:56 PM, Balaji Selvanathan wrote:
+> _lmb_alloc_addr() returns -EINVAL when a reservation overlaps an
+> available memory bank but does not fully fit inside it, and -EFAULT
+> when it does not overlap any bank at all.
+> 
+> So for the partial-overlap case, it returns -EINVAL and
+> boot_fdt_handle_region() in boot/image-fdt.c prints "ERROR: reserving
+> fdt memory region failed" during boot which makes it sound like a
+> serious error.
+The commit message does not explain why do you think the overlap is not 
+a serious error, and why it could be ignored.
