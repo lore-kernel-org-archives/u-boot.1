@@ -4,296 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 921E4C79F9E
-	for <u-boot@archiver.kernel.org>; Mon,  7 Sep 2026 08:51:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DAC8C79F9E
+	for <u-boot@archiver.kernel.org>; Mon,  7 Sep 2026 08:51:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6A6B980BCA;
-	Mon,  7 Sep 2026 08:51:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 49E4A80C8B;
+	Mon,  7 Sep 2026 08:51:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RWLyn4DLtqgL; Mon,  7 Sep 2026 08:51:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org A61DE80BCF
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788771064;
-	b=QKP+VSwao3ETZ69bW94h/dzG8uSYNwb+uqbc0PK9/RAi5tbhKDxU9MIVpXPSv0gsYm2R
-	 SNhCsZgn29cG3ZKNecnXs2Win4HHmF3QbPi7XpUT5HQ+CSDYnRD03XBz/KnBzq+k4D9G4
-	 POSXqVKUUJNXYDLLsQJoOYFRzHNVmKWnaxMU7WA/rEmJtSgGL/QpMebxtD5NeXrqPdJgF
-	 /eyC9vjGhONDOeqiyOnD4iuAOsC2855cs2gFRYLXXEQgg+gA+LZ2BVbwmEJtPQxkbxrDc
-	 RID7Ms7FjcyAkYkYfTpYXktR1GKSC8KfKLscVn+U7mBw8388PPCcnEVQMETnIFFAQQQ==
+ id iYIpzRHvrm3s; Mon,  7 Sep 2026 08:51:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5DC5D80C2D
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788771067;
+	b=c4gX7oKIhkKio9LFpKH2ZObhuxW4YPZxtYJ2oIfT+Bl2fMB8kQi+DlTrJlM+89G2DWZD
+	 Y+61ykCvT8sKhuil+XHipqypewDqfE4IbrxnuYUbTHY4mCSKuaboCBx7UQ7bfpu9fx5gJ
+	 AWiSV1SbTezfUaiXUVuk3Sftgfv8ExDWE5nB19/rBDAdhQwk+19KUDSsXwYZW+Qdg+kOR
+	 +8Yt8t3H4Or7eVWwOh6eelhTOaocLvIEPLmpbi9t9mVCjQqrsxfkQXac6IsFebDbSH0OO
+	 jJQ0CyaLpKusGRhIpBE5S/cK+78JgISdA691phe0eiLJjwqgM+kmnaTpmfB15aoYbaQ==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788771064;
+	c=relaxed/relaxed; t=1788771067;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:DKIM-Signature:Received:Received:
-	 X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
-	 Received:Received:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:CC:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-EOPAttributedMessage:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
-	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=IcuGa2wv9ab2qPltCsq1aQpDkOBEV3y5vSbuEleTRlg=;
-	b=C6/k0yLTE41KhSSuIXJ/vHbj0lwgBKnN2LHuoYIzOB2mBLtAwaHWLzeimo1mCpsEVD2i
-	 QwTmdENDptchT7fjHm5+L3OTvTI2Y3ZQJrX1lbYsSeWdaZZKV3YMHeHAReW95+2WUxTBo
-	 Mmq5eerGUeek04qBprUViQxTCc5UXlNEn/b7flShWuYQXlfy7rnv2gEZCdcKX12tM+Qn6
-	 QpEiMzv+J1Y+VTIGcpMYwpUwxQZSOWTILWucdckUxE485At6YGhp7gx7S4VwZBJnqrNl8
-	 eqFqea8vH1E7OXC1LH76iZlkKi6qATTR2xHpw/yFKRo6c0D5B74Ko/baPKOrofwr2sw==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; dmarc=pass header.from=ti.com;
-	dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=mDxy3m+f;
-	dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256 header.s=selector1 header.b=QYYPWh5H;
-	arc=fail smtp.remote-ip=140.211.166.142
+	bh=WjuT2FB7/zjSs8Pcw9F9xHQv9JRRIVGAl04qdP5IDdQ=;
+	b=HVKSwf0Fza/vzu/SN9lruYFoWKj+S+0U+BOHaJ6d9eIvpyO317jOqOAQsAT1Cb+rQ50N
+	 mkdRyQaEGU1jFnwtqvvG5VXMIyeCUTFhMvU478g0poI+UjltcyU+urCwmGUQY4juB4gwk
+	 SOyLMORjpkxe+8W3NKfm3ZMCvDtptHWsFKjOUZNCoyv0me0pSdq2JMtKyKX8v6SzqbQgo
+	 AtrzV1Oi6E2S3s0JNF+roQ71OsjjOlJ6aVxUQB5FBPdl0bAu0k9LqbK7/DDTXe+Ts7zUA
+	 G1wCsOSszsZddGoyyOFuLyt17ienZ0TxPnvmjCEK9EgbMZNuwJcBGrpSMnLnOnWPiYw==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788771064;
-	bh=IcuGa2wv9ab2qPltCsq1aQpDkOBEV3y5vSbuEleTRlg=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788771067;
+	bh=WjuT2FB7/zjSs8Pcw9F9xHQv9JRRIVGAl04qdP5IDdQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=AMrf/7HYyMC0qNqQWyM4p421i8LUTCw99wBzbP7RH5Sb3/H4tvhx43eWgVr8PGp7Z
-	 DornuYbz2ix4k7kfIAZ0XnFNc5zPTyIJ4cX/L5iFUMHpjYGl1/8d4jGe+V+QmmxQRb
-	 NIgFvAl5eWJsGJ4VHIxBFzuT15S/anW1HFhKE1w9SmA7yYG3xGy8VKv+NQ1GYh6vfZ
-	 foYvxb695OhW2Esr6XLEpNphWekt1Th+h4Cn0gA5xgLJLpcBlI8aY+3HB6Lr5TGIJu
-	 FxmDxJQXFVWFDAwxtnzgxWXiK2VMUC2gJz4Tx4mNzsyTRQkpYpv7eqvuaBqEsMnl2c
-	 rgvHcM/aY2VQw==
+	b=rVqMOVMaXVv7bakK0QVCltGfUwMzokRazjVbACTCaXfoAeSNnUHVzPjb5pLTA2WAp
+	 lDBVGNFMOa/0J8Q0Bw+AZr89h1rMpCqaXhR0zkxEDBxd4dLizvolb5HGBEJpliSNfR
+	 n8MwRIkpRmJ/vpLNEvKkfCzQd3nG+MIUz/QXevavJMYowop7laOvk9BIVDSzYTwTFc
+	 KBMijjRX/AnuYKHWfuVaBy2T13AUIBzU5ajB+oDdWLnVzs+EU/dJDJHQi0HIEQAHWd
+	 WRuXef5SD04IZqLMoFoGgr5FKrGTC02U1wuJ5OzvYp+mFDzMsdW+A5SO5qJZjaFzhL
+	 fyJhSrXDY5BOg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A61DE80BCF;
-	Mon,  7 Sep 2026 08:51:04 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 6090B72C
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:51:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5DC5D80C2D;
+	Mon,  7 Sep 2026 08:51:07 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9BCB89CF
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:51:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4615280BCF
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:51:03 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8D2A4605E6
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:51:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YAy3d4Sm_Bca for <u-boot@lists.u-boot-project.org>;
- Mon,  7 Sep 2026 08:51:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 93A4780BCA
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=148.163.150.75
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788771062;
- b=j6BwXZ3uNCG9gXOZKvsvN9XhAYeK5lp1XCDf9T/AarxZp7SzIIciDI9SyxbY8q96xypL
- vFcL4WhiYU2F+jXlqQGgF5Fe3R+nrn/p9/c1hQYu3ApIHgw80I951ukJOmKeB+tWWboHn
- TFjcEe8RhHE/IAE7IU2i/96ErhGNc13bGhLw24+FI7raC5nl5ObhngHDFlZEe7nXnn99T
- q8r/CiGTO2Xhb1NZ/OSl2AObeZIxtUBt1iUfA5awLivWrzhP+3nVkBrGSpqnTrc88n3Ya
- FLgzXrk/Uc7+PnLEEV1HNpZ/0kdeetguUz7rPJCb+5eO887UYxSWbEp0NhiCffwL7JA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JYtOAi9JFj92 for <u-boot@lists.u-boot-project.org>;
+ Mon,  7 Sep 2026 08:51:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 83508605DF
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=165.173.180.15
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788771061;
+ b=VnodVFIM659oXNKyArGG4GbV3DXhy4117hV+WaC0m3W8SdY8pluOQkvlPLr8ezErRcvX
+ 8dlI3Thq2gMQtQwQ8/of9LqrW0c2amFTiX/gYtrH/nVlUN3sZ0OO2+7MMvDAE8nLCLf20
+ AthmzSg8CaEW4J605Pm2JQquTXDJ7qI8L4K2lGf9P4x7OF10wibX/BL58Vn2HsMjSU+FW
+ csAAJdyHyF+Y3qcH+H9U9sEig4E0LlJh7n2j2YDS3CdJRwZzB+g89SK9Z1qDuQ17M4e07
+ RF3IwVb/ZsLm2V1HTdjBF4PFKLCtd2mi4iyxRrJATk1rfyqcTu7l30qk8dyc/0H4Obw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788771062;
- h=Received-SPF:Received:DKIM-Signature:Received:DKIM-Signature:
- Received:Received:X-MS-Exchange-Authentication-Results:Received-SPF:
- Received:Received:Received:Received:Received:Message-ID:Date:
- MIME-Version:User-Agent:Subject:To:CC:References:Content-Language:
- From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- X-EOPAttributedMessage:X-MS-PublicTrafficType:
- X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
- X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
- X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
- X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
- X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-Id:
- X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Proofpoint-GUID:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
- X-Proofpoint-Spam-Info:X-Authority-Analysis:
- X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=IcuGa2wv9ab2qPltCsq1aQpDkOBEV3y5vSbuEleTRlg=;
- b=iVxRDrCMTTDgiVnWnPM9vWbUdLNmOk39DI9T6wxjTcWYM8q2ZArhGKfdJpgsdw/tfhu8
- HBwexnxQNosR4KMmEPR6jlOXznhTmxtaduEiknK+JOVtjUaL73/5SDL4BWpCZ9R42N7d/
- n8SiGuNixkV2pAfxT0yDClMZGr74Wsuy62d+FR2WLG3eONpdKxxc5blZAsmQQbBhZYp77
- vmjVn5hzen6wofC6WjQtoQM/6W7wAuMtdnJonr2iLDoBjPY2D1LgsVsRToKcNbYgYp20O
- iuOgGfpCO2oxj+FNmtzCRjuhl6VvOkqivyi25Di3Vm6aby3wajsfRQ2r2nFWvilFzUA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org;
- dmarc=pass header.from=ti.com; 
- dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=proofpoint-05-2026 header.b=mDxy3m+f; 
- dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=QYYPWh5H; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=148.163.150.75
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
- helo=mx0a-0002e601.pphosted.com; envelope-from=u-kumar1@ti.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=proofpoint-05-2026 header.b=mDxy3m+f; 
- dkim=pass (1024-bit key,
- unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=QYYPWh5H
-Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
- [148.163.150.75])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 93A4780BCA
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:51:01 +0000 (UTC)
-Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
- by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 68775pcR2615411;
- Mon, 7 Sep 2026 03:50:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=IcuGa2wv9ab2qPltCsq1aQpDkOBEV3y5vSbuEleTR
- lg=; b=mDxy3m+fCAsKLScxaZyUezsSuIn1wRaBVVwLFdg0pLiI5La97EeJAqzX3
- 78fduaRXVNBLADg7THv4AioqSYVF+1bcfMH9xOrzLF+iURVv6ggYVfVOJg8fFhLY
- LJlCtSMORCycPYrszCy21khm2Fe+jrRlHLIy4KX3xFKrfTpZEnbKxrfEsi/nOFQm
- 7qCHnj4cve0OoWVSnYCEosoGnlx1ZBc6NXPK2L7kFHZhUbBAasB0e6pTdRHXmbPN
- DpYFgH3iJZgzAYqq3Yn4sf91F8ZTi8SdUJ7zjWFi9JI293QRj6KYTFfqlLAX9XUf
- k38/L0s7CFAAU+hXVCgaVUFUxQDMg==
-Received: from dm1pr04cu001.outbound.protection.outlook.com
- (mail-centralusazon11010062.outbound.protection.outlook.com [52.101.61.62])
- by m0380145.ppops.net (PPS) with ESMTPS id 4gh43n4rum-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Mon, 07 Sep 2026 03:50:56 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JNTyk39UfB/qbAeCvnBxI9dL/Y3993R9iJ4t/a1eg0DASPtGw6rVDMWLh5W5BFmdfDmrU9W94FtDTNNJhshnq2h10wTb6peoEkSz6ffz0zo/ADmru1y7REGpxMCv53oblZPJhw/L5ooB6boYxSr5AG3fwrH8UV8VDcIJ1Q5t8DwRCRMHuE7l3ZcpSJ8CRCv3Ky9E5P8deenW62NrwOYeZgdchaWnXk/eC/D1YbRfRHnv6DNzgsOIRrBdlpHFpd8gEBXllqTOSVFNfqWMBDLj9L8X9zqynB3l0f6sD8xShAqZ6SOnZkNjKr9SbFMB+xI0+WawZjvylh0ffDnv8ZDeqg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IcuGa2wv9ab2qPltCsq1aQpDkOBEV3y5vSbuEleTRlg=;
- b=F7cb15J25btxaQ8jGr6GgxGB4P6etCrAIU6pkgJElRsfyT3YVPO7y12ld8o2pHE46RIKLVE+HpZanfvUiYXOrD+QT3DaNnbjKM71JEK9+w8kldWmcvevLezp2FLVFzKgSmlZDfw8Yo1OUhHYyZx5gpYRr1R7tSv9940yo9Feocmko08YmIrJqWv8/3k0AbLQiqjv5t3yVe1NZntSLae/Z0HwvlLhVY7UkAYTNTt5xWDEyA0NcANw6TkDabOAOnBstCTuRbSQ9T47hiOyFurFvWHOlbJIlot0Ln4c7SH2ORg5Qr76XK7lxSRgoiUK6p1N9zL0qqoi2pBm/Vrt5f8Hrg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.u-boot-project.org
- smtp.mailfrom=ti.com; dmarc=pass (p=quarantine sp=none pct=100) action=none
- header.from=ti.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IcuGa2wv9ab2qPltCsq1aQpDkOBEV3y5vSbuEleTRlg=;
- b=QYYPWh5H0oPlvBu3otVWogedmS7uCZ8bglc9VmoAGDcZ1/2LVJm/BKBGf3uuLqjLrY9XOoe3vXuzclJS6p5FEs4iUetaPzUMLilrda1JbzBQgWQQPicWYWgGszc7KFYNFPUzuAM4+z7O2flxe3J9h1D61/sXqCawtdwBSyidUks=
-Received: from SJ2P221CA0008.NAMP221.PROD.OUTLOOK.COM (2603:10b6:a03:5db::11)
- by MN6PR10MB8000.namprd10.prod.outlook.com (2603:10b6:208:4f5::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.4; Mon, 7 Sep 2026
- 08:50:54 +0000
-Received: from SJ1PEPF00001CE6.namprd03.prod.outlook.com
- (2603:10b6:a03:5db:cafe::6e) by SJ2P221CA0008.outlook.office365.com
- (2603:10b6:a03:5db::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.15 via Frontend Transport; Mon, 7
- Sep 2026 08:50:53 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SJ1PEPF00001CE6.mail.protection.outlook.com (10.167.242.22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.406.5 via Frontend Transport; Mon, 7 Sep 2026 08:50:52 +0000
-Received: from DLEE203.ent.ti.com (157.170.170.78) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 7 Sep
- 2026 03:50:39 -0500
-Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 7 Sep
- 2026 03:50:38 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Mon, 7 Sep 2026 03:50:38 -0500
-Received: from [172.24.21.163] (lt5cg60819vj.dhcp.ti.com [172.24.21.163])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6878oYQC1192638;
- Mon, 7 Sep 2026 03:50:34 -0500
-Message-ID: <fc42d7fe-b2f1-4fff-8461-89889843b122@ti.com>
-Date: Mon, 7 Sep 2026 14:20:33 +0530
+ c=relaxed/relaxed; t=1788771061;
+ h=Received-SPF:DKIM-Signature:Received:Date:From:To:Cc:Subject:
+ Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
+ In-Reply-To:X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient;
+ bh=WjuT2FB7/zjSs8Pcw9F9xHQv9JRRIVGAl04qdP5IDdQ=;
+ b=r7bdbnbXev1/OqwiROFBtlRIhknRwkQ8AZ6D6WSD3vAUj/wTIogYSVGlpbkTFoq1U/FP
+ QcN00tsr1l4b+xjjAPtmYBofYboQGAesBP2+vZjHUdFPkcXq0vCUZ0JMF5zVRh0toYj7F
+ H9Ke2rQkaL8hyDqXrt95OYDh3jHPm3jJmSj7/VxhvzccsiUCFkTwNMA34xclAEbKV8Zo0
+ Ipvfr3eLdzaMZvUrQ+my3UOAo1NAEV7EAhByxuYVFNsElGPshTB803T/IXzFlmjFkHmtb
+ NqnTm4+goUY4zGY1Mu1y+5Rqa3yfXBwvbftQAs8HZn2JUcs4I48Sj30WPPtI0Bc0mGQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
+ dmarc=pass header.from=ziyao.cc; 
+ dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
+ header.s=zmail header.b="DiJ/egfx"; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
+ helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key) header.d=ziyao.cc header.i=me@ziyao.cc
+ header.a=rsa-sha256 header.s=zmail header.b=DiJ/egfx
+Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
+ [165.173.180.15])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 83508605DF
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:51:00 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1788771041; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=K0JJbUtzqNbZhwUiaoDv8RqpGgZh1QatoVdMyWtg0cBZXhnb6nvoBaaoP8hhHqHIdgXz9xmJ9m8orkkmlRMXC93jEaxRBUBLvecbtlKJl/85q0FxnXfUpf3Sfma2LZMsBJuwitew74C2o/4aY+j4ZyThQYpTGU7Hyo74FkXsJNA=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1788771041;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=WjuT2FB7/zjSs8Pcw9F9xHQv9JRRIVGAl04qdP5IDdQ=; 
+ b=dEscmfaXbyhKOTPDRyOZgfPsP4AtN9CISZcdSEIlats+IrfnbKgyutx6hq4TX9GKDOmPASSAcs+kvEUaTMJkQYuC3ZuXi8kCBIksAJS8wcPTQvXj6G0kSKrlgR2XxMKt2XmQOo4QYqj8Dy/UbxlGWq0/Hgp7kHN4g2kdHqpECxI=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1788771041; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=WjuT2FB7/zjSs8Pcw9F9xHQv9JRRIVGAl04qdP5IDdQ=;
+ b=DiJ/egfxBPl7qUG+tobuLWI6N/rA2Ck+cdsoqHIG7MRRCINa35l32MDl2t3e7WTv
+ yicta99FXStUGJv2pXohTIjyNCCRXy/MdVk8BU3Y4WKRH+PP+LMCI/HoM925PuBzd7V
+ VtuxuysriFPEHiLtp34hXKscFcAnmbQ6iFQaWRGk=
+Received: by mx.zohomail.com with SMTPS id 1788771037766115.06585715109043;
+ Mon, 7 Sep 2026 01:50:37 -0700 (PDT)
+Date: Mon, 7 Sep 2026 08:50:24 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Eric Chung <eric.chung@riscstar.com>, u-boot-spacemit@groups.io,
+ u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>,
+ Leo Liang <leo.liang@sifive.com>, Yao Zi <me@ziyao.cc>,
+ Wei Fu <wefu@redhat.com>, Huan Zhou <pericycle.cc@gmail.com>,
+ Guodong Xu <guodong@riscstar.com>,
+ Raymond Mao <raymond.mao@riscstar.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Anshul Dalal <anshuld@ti.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Johan Jonker <jbx6244@gmail.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Yixun Lan <dlan@kernel.org>,
+ Iker Pedrosa <ikerpedrosam@gmail.com>,
+ Alex Elder <elder@riscstar.com>, Andre Heider <a.heider@gmail.com>,
+ Trevor Gamblin <tgamblin@baylibre.com>
+Subject: Re: [PATCH v12 6/7] doc: spacemit: flash on K1 SoC based boards
+Message-ID: <ap560PSIq5GenBe4@pie>
+References: <20260906-m4-v12-0-89eb5a8f879d@riscstar.com>
+ <20260906-m4-v12-6-89eb5a8f879d@riscstar.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 21/21] arm: dts: k3-j7200: Extend firewall for ATF
- region to TIFS
-To: "Richard Genoud (TI)" <richard.genoud@bootlin.com>, Tom Rini
- <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>, "Andrew F .
- Davis" <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof
- <bb@ti.com>, Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>
-CC: Markus Schneider-Pargmann <msp@baylibre.com>, Kendall Willis
- <k-willis@ti.com>, Abhash Kumar <a-kumar2@ti.com>, Thomas Richard
- <thomas.richard@bootlin.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- <u-boot@lists.u-boot-project.org>, <u-kumar1@ti.com>
-References: <20260828135730.1565643-1-richard.genoud@bootlin.com>
- <20260828135730.1565643-22-richard.genoud@bootlin.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20260828135730.1565643-22-richard.genoud@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CE6:EE_|MN6PR10MB8000:EE_
-X-MS-Office365-Filtering-Correlation-Id: 83fa0c33-24de-4414-20eb-08df0cbd1f6e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|23010399003|376014|82310400026|56012099006|4143699003|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 2vEsXuSwy4mg3rNjFogzI76vx1urFDoRPgkAY1s8YemmTaIc/CxHZgGf+fznDwIh95VhEUPbQkj942hU4wXrsov/bi5oMRXkItAICsNoL+xCpmFMVTLJ3YzC5fDUglpCZMG2WtCZM1qejduT6Ae7bQL+/82bFlxikbtP6KNulyo6bYikQSPzYZVC+KBHC7wVHxBq7v5nKUMWsFjwsiLhhUmSQMmmJzBZaGC0jy0XiZf3Xp3AAhOKrgei0W76T99OKUWrCLrvXb+02hxYmqA2J9h6SRmkZwfOUx8IlGFSpx/f/7HqPDuKPgfjdJQ601bPEiB1mcbyN0ydne1q+vVYLkiSqJJmHP5cuLsFkldm1AfwmpwmzS3yQXFENhF4eVD8bP1eC3aZatEC1xHaYl97/XIODr8kJRdXxDKoJatOA8FSvYk+BwdM6Va/HJe3z/UPF8NGpypit8gI5nkn7x0d2KoOujeXf6IAM7BWV0dAGyRjkKpgh8QqnbrShvzvNm/4CTrKCMtKdUUsUIR9nD9YHY2X7lMVhndc94EMHYV52luE2pSHm5zztKKCmz9cpJq9l3WK5x5rILYC34ENFvoeTZdQpLG+sXgYGyzxUnAz56z8nFwzTQhOFhoICfI6fOf2681pt/GjGXyCkhGv3uOCiQZMMCmAT+5AJUu7fJ+1+oeSKWux/FxJhmh3/RIjUQVVlbePHr0umFmCt3jLVOH4yw==
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(23010399003)(376014)(82310400026)(56012099006)(4143699003)(10067099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: lYMZ95AndoE5sTmt8AhvNIbTf/D4UzmUf6hEJahmqZTS+i90MDiWHyr6CS8f9hAidUH4f9NbOGAJPrmu7mw54SzYL0TvnAK2z0SdY5m49rGvpu5bGFEpsCRHpkgWUUMpxMeQ5NEHJmqaV58v5PqVgRUmk7ozMSw9Gwv/+9Xsx3lPiNcyQHLxhP7OLHdzrTsdl9szzGzgZGP8ahxnATIW9DOPIZ/ECxjF0E8/95APUewZhHT9ZofSaxO+pjqkzxK0giRrphwf/F2WfdIJm+/hnocONKqB9VpHwYFIj/qCbA4OIkocVDptTAmpUOznDkHeCxKipa9FV4eRgkFgjemmuGfCSdYeW6z7kNj13dQW2wyQixZNu2XwhM3t0qjQJFt7D+arNqxWKZlHMfe7b/3aiupkylZcNKy0C2GUoa+2TM9zFqnWlPnXX+Mc0i76RgS2
-X-Exchange-RoutingPolicyChecked: mWMZ91/ViZkdBAg+B1gUbH121wFgyXyTwarSLDK0GNDBhN264AkvAMeN0q/xMMQL5wlh2hGh6MqCl4lIuPcDvGw3RO7f2o9qnJ1lxSzCuq8SCzp0M0OUIRW4QMO6dtzZIVM3py8zlSoLwiCOPb2nonP92MKoa85/sU2HX3lpiqk1eEsQX282/pczzSfXp2VqRKbstlwa9jTgvEEpCg2mu17HT/G6vinUhKjpGIZhb7Aw2G+ySsKEnHHyvh+nR7wPSt03lWQB/CdqZZvV1nRC4xZs9qV3EqRfj8EuzDMCGNqf/seFhzhfD8px1bLTpi0219wV+Zw475Nzq1D9ME5y+Q==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2026 08:50:52.4199 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 83fa0c33-24de-4414-20eb-08df0cbd1f6e
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CE6.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR10MB8000
-X-Proofpoint-GUID: wy_LzqKT_e_2x0civExi_nDfeVGgn1Pa
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA5NiBTYWx0ZWRfX4PCqeUDIVgwJ
- JTMHzt8SZ1e9yatUeO+rDnF7nHXLQ/kZu3RXJ1vZZwb5p1oPblqtB7AKvqzqq8QezooeYv6e17e
- v9+87xVYyKFV/wpjf5chq9ToxBVmRDWmCyAL37a5HmWXShBPx7Ql7zsF8G9d24H5Ji/3WHbFsIx
- lkqEIYfspCD5G2PCZs2Y4UuwehGCTS9fpvW3hQTUPZg5m+gv0xdsSGUuNq/AIFGDKqi3YkI1E0E
- iUqagXizCk+wzf9ndHR0zWOT4l2zIjUF5Iv6vQmXf2iIAT+T1lY8+XNZaRa8P6VVMK3KxgrrzBS
- vLZ7V2l+KcglB+d1vcbGC2Hh6Jq4m7KeUR7uqGK5XOA05p3p+wLXvuVeZB+6Oqdjmt5spGWqM5J
- KcqPyILm/myyM/Nmnbt2vKvGhQ69Qu6eNEuvBT4/cZ68TmcMJhF/dEeTGQmytOXPCRtRMVQ3YJ0
- NhnFzEXa2RLpeLWvvPg==
-X-Proofpoint-ORIG-GUID: wy_LzqKT_e_2x0civExi_nDfeVGgn1Pa
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA5NiBTYWx0ZWRfX7GRH71ngOSA2
- +Y3flCkufRV7YSH81qEf6fyqriTCqYEBrsFmYegRQrh64DAkS9vu1hE9+183L4ZzTpXrtzWG+vB
- g8oVPZ8Ggqe6Be3Z1BsbRk6KIugzrxI=
-X-Authority-Analysis: v=2.4 cv=JdSMa0KV c=1 sm=1 tr=0 ts=6a9e7af0 cx=c_pps
- a=rA8xTxhMCG4Q6PG1LLvkJA==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=Z8NIEmU8O1QQgoT56wFK:22 a=gO1vWkAQAl3rybz1DQOp:22 a=sozttTNsAAAA:8
- a=P-IC7800AAAA:8 a=BmZN3poPZwLbovA9AcgA:9 a=QEXdDO2ut3YA:10
- a=d3PnA9EDa4IxuAV0gXij:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-07_02,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 adultscore=0 spamscore=0 lowpriorityscore=0 bulkscore=0
- malwarescore=0 suspectscore=0 clxscore=1015 priorityscore=1501 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070096
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260906-m4-v12-6-89eb5a8f879d@riscstar.com>
+X-Zoho-Virus-Status: 1
+X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/288.762.58
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -307,57 +161,147 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-
-
-On 8/28/2026 7:27 PM, Richard Genoud (TI) wrote:
-> From: Prasanth Babu Mantena <p-mantena@ti.com>
+On Sun, Sep 06, 2026 at 05:11:08PM +0800, Eric Chung wrote:
+> Add document on how to flash images into eMMC of K1 SoC based boards.
 > 
-> Extend the access to SRAM region of ATF to TIFS as well. This is
-> needed for TIFS for encryption and decryption of ATF as a part of
-> low power mode sequence. TIFS encrypts the ATF while entering into
-> low power mode and decrypts it back while resuming back.
-> So, giving permissions for TIFS to access this region.
+> Signed-off-by: Eric Chung <eric.chung@riscstar.com>
 > 
-> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
-> Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
-> Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 > ---
->  arch/arm/dts/k3-binman.dtsi | 7 ++++++-
->  arch/arm/dts/k3-security.h  | 1 +
->  2 files changed, 7 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-> index ad127663d03b..1cf417ed7dcd 100644
-> --- a/arch/arm/dts/k3-binman.dtsi
-> +++ b/arch/arm/dts/k3-binman.dtsi
-> @@ -475,7 +475,12 @@
->  					FWCTRL_CACHE)>;
->  		permissions = <((FWPRIVID_ARMV8 << FWPRIVID_SHIFT) |
->  						FWPERM_SECURE_PRIV_RWCD |
-> -						FWPERM_SECURE_USER_RWCD)>;
-> +						FWPERM_SECURE_USER_RWCD)>,
-> +					<((FWPRIVID_TIFS << FWPRIVID_SHIFT) |
-> +						FWPERM_SECURE_PRIV_RWCD |
-> +						FWPERM_SECURE_USER_RWCD |
-> +						FWPERM_NON_SECURE_PRIV_RWCD |
-> +						FWPERM_NON_SECURE_USER_RWCD)>;
+> v9:
+> - Add to generate the partition table of SD card.
+> v3:
+> - Add document on how to flash images into SD card.
+> ---
+>  board/spacemit/k1/MAINTAINERS |   2 +-
+>  doc/board/spacemit/index.rst  |   1 +
+>  doc/board/spacemit/k1-mmc.rst | 271 ++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 273 insertions(+), 1 deletion(-)
 
-LGTM, to give TIFS access.
+...
 
+> diff --git a/doc/board/spacemit/k1-mmc.rst b/doc/board/spacemit/k1-mmc.rst
+> new file mode 100644
+> index 000000000000..0be5d5fa1c39
+> --- /dev/null
+> +++ b/doc/board/spacemit/k1-mmc.rst
 
->  		start_address = <0x0 CONFIG_K3_ATF_LOAD_ADDR>;
->  		end_address = <0x0 (CONFIG_K3_ATF_LOAD_ADDR + CONFIG_K3_ATF_RESERVED_SIZE - 1)>;
->  	};
-> diff --git a/arch/arm/dts/k3-security.h b/arch/arm/dts/k3-security.h
-> index 33609caa8fb5..3e066bca6ad7 100644
-> --- a/arch/arm/dts/k3-security.h
-> +++ b/arch/arm/dts/k3-security.h
-> @@ -7,6 +7,7 @@
->  #define DTS_ARM64_TI_K3_FIREWALL_H
->  
->  #define FWPRIVID_ALL    0xc3
-> +#define FWPRIVID_TIFS   0xca
->  #define FWPRIVID_ARMV8  1
->  #define FWPRIVID_SHIFT  16
->  
+...
 
+> +Chapter 2: SD Card Boot
+> +=======================
+> +
+> +
+> +SpacemiT K1 Bianbu SD Card Image Flashing and U-Boot Update Guide
+> +==================================================================
+> +
+> +This guide explains how to prepare a bootable SD card with Bianbu OS for
+> +SpacemiT K1 based boards and how to replace the U-Boot binary on the SD
+> +card with a custom build.
+> +
+> +Prerequisites
+> +~~~~~~~~~~~~~
+> +
+> +- A SpacemiT K1 based development board
+> +- A microSD card (at least 4GB capacity recommended)
+> +- A card reader for your host computer
+> +- A Linux host system (for ``dd``, ``sgdisk``, ``lsblk`` commands)
+> +- The Bianbu release package from
+> +  <https://archive.spacemit.com/image/k1/version/bianbu/v2.3.3/Bianbu-Minimal-K1-V2.3.3-20260128183217.zip>
+> +- A custom ``FSBL.bin`` and ``u-boot.itb`` file to be written to the U-Boot
+> +  partition
+> +
+> +Prepare the SD Card & the image
+> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> +
+> +**1. Obtain the release images**
+> +
+> +Unpack the release package to get the image files. Replace the ``FSBL.bin``
+> +and ``u-boot.itb`` with your custom builds.
+> +
+> +**2. Identify the SD card device**
+> +
+> +Insert the microSD card into your card reader, then run:
+> +
+> +.. code-block:: console
+> +
+> +   $ lsblk
+> +
+> +Compare the output before and after inserting the card to identify
+> +the new device. It will typically appear as ``/dev/sdb``, ``/dev/sdc``,
+> +or ``/dev/mmcblk0``.
+> +
+> +**3. Write the image to the SD card**
+> +
+> +Run ``sgdisk`` to generate the partition table, then use ``dd`` to write
+> +the images to the corresponding partitions.
+> +
+> +.. code-block:: console
+> +
+> +    $sudo sgdisk -o /dev/sdb
+> +    $sudo sgdisk -a 128 \
+> +        -n 1:256:767 -t 1:8300 \
+> +        -n 2:768:895 -t 2:8300 \
+> +        -n 3:2048:4095 -t 3:8300 \
+> +        -n 4:4096:8191 -t 4:8300 \
+> +        -n 5:8192:532479 -t 5:8300 \
+> +        -n 6:532480:4726783 -t 6:8300 \
+> +        /dev/sdb
+> +    $sudo dd if=FSBL.bin of=/dev/sdb1 bs=512 seek=0 status=progress
+> +    $sudo dd if=env.bin of=/dev/sdb2 bs=512 seek=0 status=progress
+> +    $sudo dd if=fw_dynamic.itb of=/dev/sdb3 bs=512 seek=0 status=progress
+> +    $sudo dd if=u-boot.itb of=/dev/sdb4 bs=512 seek=0 status=progress
+> +    $sudo dd if=bootfs.img of=/dev/sdb5 bs=1M status=progress
+> +    $sudo dd if=rootfs.ext4 of=/dev/sdb6 bs=1M status=progress
+
+The bootfs/rootfs part aren't U-Boot-related stuff, so please omit them
+from this documentation to keep it simplified.
+
+Then the only binary we need to extract from the "SpacemiT release
+package" is env.bin and fw_dynamic.bin.
+
+For env.bin, I think this U-Boot port depends on no specific environment
+setttings? If no, please omit it, too; otherwise please provide a .env
+file in upstream U-Boot tree, and make it the default environment to
+use.
+
+For fw_dynamic.bin, I think SpacemiT K1 support has been landed in the
+upstream OpenSBI tree? Please check if it works with upstream U-Boot.
+If no, please try fixing it, and then it's okay to stick to the
+downstream OpenSBI, but you need providing a guidance to build it from
+source if possible.
+
+Then you could fully omit the step of downloading the "SpacemiT release
+package".
+
+> +The SD card is now ready as a bootable system disk.
+> +
+> +Understanding the SD Card Partition Layout
+> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> +
+> +The role of each partition:
+> +
+> ++----------+----------+------------------------------------+
+> +| Partition| Size     | Purpose                            |
+> ++==========+==========+====================================+
+> +| ``sdb1`` | 256 KB   | FSBL (First Stage Bootloader)      |
+> ++----------+----------+------------------------------------+
+> +| ``sdb2`` | 64 KB    | ENV                                |
+> ++----------+----------+------------------------------------+
+> +| ``sdb3`` | 1 MB     | OpenSBI                            |
+> ++----------+----------+------------------------------------+
+> +| ``sdb4`` | 2 MB     | U-Boot binary (``u-boot.itb``)     |
+> ++----------+----------+------------------------------------+
+> +| ``sdb5`` | 256 MB   | Boot partition (kernel)            |
+> ++----------+----------+------------------------------------+
+> +| ``sdb6`` | 2 GB     | Root filesystem (ext4)             |
+> ++----------+----------+------------------------------------+
+
+...
+
+> +- If the board boots successfully, the new device tree or U-Boot image
+> +  is compatible with your hardware.
+
+This sentence looks extra, please drop it.
+
+Best regards,
+Yao Zi
