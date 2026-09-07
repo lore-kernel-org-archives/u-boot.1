@@ -1,141 +1,132 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D2C7C79F9E
-	for <u-boot@archiver.kernel.org>; Mon,  7 Sep 2026 08:24:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CEC1C79F89
+	for <u-boot@archiver.kernel.org>; Mon,  7 Sep 2026 08:29:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9D28B80AFB;
-	Mon,  7 Sep 2026 08:24:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9483440566;
+	Mon,  7 Sep 2026 08:29:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bZl_NufX314L; Mon,  7 Sep 2026 08:24:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 9964380AEA
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788769497;
-	b=KBHU87fRTl4HhJN6APY0/32wo7MSfMDp78540SKAwn7ucirXRkWz3vSO4+FJ5D1GQ4zz
-	 bsjWUsp+EUgm9BWUFdUM5lXJIAb94D9a/IC2I0tS2gZLXAB3W/UCZjrUVZeikHrhWV+o5
-	 EyhBH9k1nrXRYqYOGbKau92n8q3vDVODPtoiy43JY/5eFxAhPB6PGchMW/DrxKUDOl8S8
-	 lHhYdUav4Cgjf4WkKtioCutbabmGQrI4F17BINOw5D4mld9hPPF9FzMMnoErKvlMRWsq8
-	 A+rARemhkg0olHjzSE60eZUusnuLrmSxadiG/kMBYIHaRgjuGtWXPRZA+4czkRZOUxw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dY08okRYqAHU; Mon,  7 Sep 2026 08:29:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org E0C224055B
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788769766;
+	b=lfSQkqWmnIOv8wfQAC+hZEPNxh/jTpdtfLHJ40QDQbki2FkrVH/aQ0Rjd2DuOdreU4go
+	 HSra6gYLhqK7N54/LG8Ca0Q8ocyql7qLPJVx1Y5jMAI7UFEhWJzc2T8HzuHrOwJ4WmGmb
+	 NLyGHJ7Zr7oY8KXcZG0Onymv7P//aMoQgWwXo8PZRXJWCE6pTEgH4A6TOqDyafnzNUeac
+	 pzI7fVDi7g77rw6dn3Ev8wqmpUT7b0Pypj1Kz6esAz+2U4uykXnhW0Vqu1qoW0ZIxEjfj
+	 3yBXcmhvq2FrlqYjayZFVpWCZ06TP9xpVE/SPbJvfV4Y1aHabrLQR4KS+mjCvJJ6r5w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788769497;
+	c=relaxed/relaxed; t=1788769766;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Subject:From:To:Cc:Date:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:
-	 User-Agent:MIME-Version:X-Virus-Scanned:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=UaWQJZPkRAVIa/QYYwip8mtBu8LYSj1C5uU2vMGzaws=;
-	b=tYPjZa1cw0wb6nhsaR/mZNN1HvuvsCO1+RQtCEbiLRQwa2wsjuznncn0S/rnFSk8p2v+
-	 Xjr9EJYFL2SWZ1ttQfQKWpl8XSVIKhJ2SL1DUbgW6efBz1XSeeACIvE4H5Xndes+1Y+xh
-	 QUaDO4qWlGvSBpBXtGpTFlHJ9HCbCRR584bOvHdWUuJ5HRLFe5mKGQ2opD7bGMXNtVqx/
-	 4+Qh+U7MO4dZHhjIJJAY0hcZ8CG1DIhSDD3Xt/wB24KzKt03ujDSDbCMllKzW5XD4gr2A
-	 TOU0WUhXVTGIJ1rESeVYE65HdJcM4Qjn4/17UH+SgOy4Hy/VfCXBMjL61dGvE/ryKtg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=ew.tq-group.com;
-	dkim=pass header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=E+VleQsL;
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
+	 Date:Message-ID:MIME-Version:Content-Type:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=3Aw3DQ4th/dg/H2kPEAVFMNXIEUkx8Nn9v4M8L+VgIc=;
+	b=eUe94UUIMN2oNzb3+9if7jPEFzN7Yu41VrcProGMuPvRVN51YEeS3aOGRtLgI9b+jcVl
+	 ndwe8VH075znrQFQXgXCgFzUB9q/97TyInIiUqlxbugGf/okxV8lfBNztnjPbGDb/x0yA
+	 VMvWtUJoMluIaDLcUZIAnSfoi8zicaXDFFeZF6xtL7vZvGP6q++V11X/du/KixoKPJJCf
+	 bPxRmCzN7uZSsdSMw7Kv5yVSUuFsq0llM7sWEc51Fc6zM69Psv44vyhr/SKc/nwx8neYE
+	 huaoyx1c0+FG33UIhWSkqyHuky1AekZyrE4WybgZ37yiCnzX5f6btGtfjAOX2q0HcpA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ItCYyJsB;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788769497;
-	bh=UaWQJZPkRAVIa/QYYwip8mtBu8LYSj1C5uU2vMGzaws=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788769766;
+	bh=3Aw3DQ4th/dg/H2kPEAVFMNXIEUkx8Nn9v4M8L+VgIc=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GD27MI++N/aKRIIH2bIYueB/GAZ/4Rb0d2i404ud1j8JBeQ545MDgwcCuivsnkXUR
-	 jkHemlKh3wq6YkN9HhsV4pBeP5hQHkPHNE1me1yoenTsoGKj+x/bR6XQz3zaGhMtcY
-	 nKUJu4irF7AsvDwvxxKnZS0/1U8DBp3k9h176GeJD/oNv+Y93Oe48Cil8xAav9g5sQ
-	 k/S2DunfwrcJaNS3A5NR5iPwbh9OEpuYxVUn++w4fd019OMTBHdhUyx2XXIkd/eXcs
-	 VPNJ6ZskcQogeUPLU6MZrYfg5JUKnuyDx5qwA1t5xpjvFkKPoOuevGXjWyoaWGoP49
-	 vUzg3cFtUqFuA==
+	b=LxCgH3pu1H3a98T+SiKv35y4/Y/Hlzo76TKMWyIV0armWbaMuvYN5ZT6qLjnG1KQm
+	 B/mWhh6FoZVjR6t0GtKEaADiXmWhkptzAlgnJksNhX6fv4iZWiYXodNSCW0n8HXTtV
+	 VYIoinyYjuWwFvRkhWb67GhfmaLRxo/3t8kVVSYVvV8BJrXM3dvo4vD1Kp89ASAzB6
+	 VhB8HrXbs3HWB1pyqzU1ea5nMTwFtVDem2xFCSVdrZtuhtROUAhA3X3DqF7N34DYQh
+	 7Wo0CAEgnecKNL4Njk+LnK1qmYcbnrdtCTFi6dgKaNmeD040zyk5IkY9Zc6xGnBVEA
+	 qnr0uDRznZYdQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9964380AEA;
-	Mon,  7 Sep 2026 08:24:57 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 94D3172C
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:24:55 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E0C224055B;
+	Mon,  7 Sep 2026 08:29:25 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 870449CF
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:29:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 82EBC80AEA
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:24:55 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 6D7E24055A
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:29:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id doq4CJ1tfDJg for <u-boot@lists.u-boot-project.org>;
- Mon,  7 Sep 2026 08:24:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 786FA80AE8
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788769493;
- b=j5ZhsYTBd2Q/Q6dpeQsHeZaTVw/nLqKz4CIdxyUCYqowOeY8OfEAC9BvXbxRTMjhs2Na
- /TDeUmd+m/H/MfVuBl4N4HWh8M5z+qySzGGZgRsPMLNZaZdYwY1VPZs3beTg2dzmEI7CU
- vs1Z/cY048knZOoC9fqhA5mV4QMOaAqjsh7NnP4ovLWgcnr8ly6ltuWL9G5ufhsmqhblq
- yxOCstoMZhZb5+aBeGHVQFs6oXkLwK/gDQTDAXHvn7hng663aFiSNaOiYLdrF1QPvPI9j
- ANXHStmU4ovXKvjHchwWbcn+GHJ9ZGKuTYshxphxXdAmltnYBI9gREC7Z1SClho769w==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BsKq3gZG68BP for <u-boot@lists.u-boot-project.org>;
+ Mon,  7 Sep 2026 08:29:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 9C0B44055B
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788769763;
+ b=n8pCUShOgqe7CQ65junbM1uUvZwEUPgc6ZBLCv7St0u5qswPVB8mZOGTqHf256uSuPqQ
+ o1liSOUJAC/RWRJGmaKUrx+WMwEJGRUazewc4I6tIh7ekLapvzjsUXPWp6fsmBKuiqz9c
+ 14FhjIs4+uYb2wDSre12FGjjAhumiPDIIQGCpls6gouYGBcV7qUWsIV0bCZsHMYDkcUlt
+ teIpZy/7BW8YyzNKv73P3Ou2Cl8GI4fhWl0MRuWcEfcOk/u3VP0jPI37ebu4rQBZFgotZ
+ 5ZvdQxu600UWpHquvEi1DuzPnrtS+XNwQpZ9BHgv3qtLAMuAcUfVqMNLyXNJN5imjdQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788769493;
- h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Subject:
- From:To:Cc:Date:In-Reply-To:References:Content-Type:
- Content-Transfer-Encoding:User-Agent:MIME-Version:X-Virus-Scanned;
- bh=UaWQJZPkRAVIa/QYYwip8mtBu8LYSj1C5uU2vMGzaws=;
- b=jbFu7gRngeXgBiRbhCycGrMAEN8yJFAfYHAvOIvlmMsTLA77uuc5kvmIMy1Pf/403F3j
- F7JTQOM5xhAMzxwEg0rFb8D67rq79bh7HIv6Ztqs3MsctpYBRlArEFNBqcCIb3IBLFqaG
- bgjFaUGukHMGg+kuNZpyxGJUCztI2WQJ1tMJk8Wka0FQaAXSefQ+b04bFctH1HCbPXma/
- bNavjF3C17H1znOweQaaJRneFMvM8ZgeBPXbk7wz5yDxfdmFjTwsK0LErAEblTaRawsyz
- ZH6SqKKJ1nx/s2TYaVUkgWAi3+RZeNBblTc1P9iZ5Ifo6swZtPw8uYeic8LM3uNE9yg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=ew.tq-group.com; 
- dkim=pass header.d=ew.tq-group.com header.i=@ew.tq-group.com
- header.a=rsa-sha256 header.s=default2602 header.b=E+VleQsL; 
- arc=none smtp.remote-ip=188.40.3.216
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
- helo=www537.your-server.de; envelope-from=nora.schiffer@ew.tq-group.com;
+ c=relaxed/relaxed; t=1788769763;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
+ In-Reply-To:References:Date:Message-ID:MIME-Version:Content-Type;
+ bh=3Aw3DQ4th/dg/H2kPEAVFMNXIEUkx8Nn9v4M8L+VgIc=;
+ b=UJ8IPEVQIXDKI56OJynud82LDhiP/WsH5SXcvNblrTNYW7YZ3uQliHF1kgyJJmNunN4P
+ VAL4W+FHt6j8rpCFiiuLQROwnd99VT9FCo7Co9LMXWBLHSD3noUdTiW4aVY/RC5/xXK2j
+ i7bN+4Eib1fAFM7Q7+L6qRVDEQdqzU+KvZwYFpuIe3HmVnUiPo1OzbXJd4UO2/fwdZ3ou
+ VrODUvS2geB4N/f/h/5mF3ikrxNF6bd5t7iwk9DUQcRh1CNAXuVj9bevzXgYZ6Bmh3VaC
+ j/a8SOqd8e/E+WdtBFzpNqG1+blNyvLcr/AZCu6ZhOsiRThvRyqApJI6EXaq364bnnA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=kernel.org; 
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=ItCYyJsB; 
+ arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com
- header.a=rsa-sha256 header.s=default2602 header.b=E+VleQsL
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 786FA80AE8
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:24:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=MIME-Version:Content-Transfer-Encoding:
- Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=UaWQJZPkRAVIa/QYYwip8mtBu8LYSj1C5uU2vMGzaws=; b=E+VleQsLuoSeQn1LDA6I9JqXog
- S3ZwbFxMa2KjRtik0f+rVQxcdmwLj+37XIxsBDOI0JctQfYj9ID+GsP4sSJYRP2PXuKacOZka2btM
- u3MBQLmC19NfdtMJNzqw6ZVFLKzODSuhWt7ct+iTs4urdk9Xe1X0dEUhgQyK7uJBN5tlUtzZam0VO
- ZtQZZhWgSGw3ToWjpSXbij+TI32at8OSMYx7vIu7SPxZRiuc3Lkr2P+068HDenF0h94E/7p0soIfk
- YtwnhA8Z+AR3dgjEZ80MdtgucD3380+Rv4JaPhwAVz/naEXbq7fJyLt+fz6ekruUYIPV73kLPNHj7
- vVF3hiGw==;
-Received: from sslproxy07.your-server.de ([78.47.199.104])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1x3Uek-000Obl-2u; Mon, 07 Sep 2026 10:24:46 +0200
-Received: from localhost ([127.0.0.1])
- by sslproxy07.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1x3Uek-000D6R-1k; Mon, 07 Sep 2026 10:24:46 +0200
-Message-ID: <7b9f9f2f27e8f35a4728a41105ff95d96daed0cb.camel@ew.tq-group.com>
-Subject: Re: [PATCH] board: tqma7: imply the DP83867 PHY symbol
-From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=ItCYyJsB
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9C0B44055B
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 08:29:23 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 1E59A60D93;
+ Mon,  7 Sep 2026 08:29:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37B651F00A3D;
+ Mon,  7 Sep 2026 08:29:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1788769760;
+ bh=3Aw3DQ4th/dg/H2kPEAVFMNXIEUkx8Nn9v4M8L+VgIc=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=ItCYyJsBA4Mv48tMEYB/uX4bJdFEIlsegUZR8Xhi+y1aZfswdMXJK8RTQw8PoWarw
+ g+LmU38R/dXG7Vbh0ZDd1sDgDMQk1PMyfyhCorxi3p2KIw2oV2ip6nVcLGW/bAvCvO
+ N+hvbaDdwiyPuDY3E7oMdIqF9Aat9DT6/BwRnnHImLabDENayLFPY2lhyeVN0bLw+D
+ 5OvV4C+SHzdyjRh3MRRfESuAca23EDCLMa36JpmfEvunPJYLbnSkHC1I3qROrTBY0P
+ QwgkY8/o4aMwiaVGUWZD1mfsQjvXvXssNc/ANKygJKaEHeob42QKWivZ7mp4SfXIl/
+ SBLRLd4ZK5+sw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Pengpeng Hou <pengpeng@iscas.ac.cn>, u-boot@lists.u-boot-project.org
-Cc: u-boot@ew.tq-group.com, Alexander Feilke
- <alexander.feilke@ew.tq-group.com>,  Peng Fan <peng.fan@nxp.com>, Fabio
- Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>
-Date: Mon, 07 Sep 2026 10:24:45 +0200
-In-Reply-To: <20260904131855.43972-1-pengpeng@iscas.ac.cn>
-References: <20260904131855.43972-1-pengpeng@iscas.ac.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.3-0ubuntu1.1 
+Cc: Pengpeng Hou <pengpeng@iscas.ac.cn>, Quentin Schulz <u-boot@0leil.net>,
+ Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] fastboot: fix the RK3328 buffer-address default
+In-Reply-To: <20260904131951.44451-1-pengpeng@iscas.ac.cn>
+References: <20260904131951.44451-1-pengpeng@iscas.ac.cn>
+Date: Mon, 07 Sep 2026 10:29:17 +0200
+Message-ID: <87qzj5tqg2.fsf@kernel.org>
 MIME-Version: 1.0
-X-Virus-Scanned: Clear (ClamAV 1.4.3/28116/Mon Sep  7 08:24:32 2026)
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,42 +140,41 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Fri, 2026-09-04 at 21:18 +0800, Pengpeng Hou wrote:
-> Kconfig expressions use symbol names without the CONFIG_ prefix. MBA7
-> currently implies CONFIG_PHY_TI_DP83867, which is undefined, while the
-> driver is controlled by PHY_TI_DP83867.
->=20
-> Use the actual Kconfig symbol so the board selection can imply the PHY
-> driver as intended.
->=20
-> Fixes: d000ce5efee3 ("board: tqma7: add code for u-boot with spl")
+Hi Pengpeng,
+
+Thank you for the patch.
+
+On Fri, Sep 04, 2026 at 21:19, Pengpeng Hou <pengpeng@iscas.ac.cn> wrote:
+
+> The default fastboot buffer address tests ROCKCHIP_RK3329, but U-Boot has
+> no such SoC symbol. The supported SoC is ROCKCHIP_RK3328.
+>
+> Use the existing RK3328 symbol so custom RK3328 configurations that do
+> not override FASTBOOT_BUF_ADDR receive the intended Rockchip default.
+> Existing in-tree RK3328 defconfigs that set the address explicitly are
+> unchanged.
+>
+> Fixes: 48f6232e5897 ("Kconfig: Migrate all of cmd/fastboot/Kconfig to defconfigs")
 > Signed-off-by: Pengpeng Hou <pengpeng@iscas.ac.cn>
 
-Reviewed-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
 > ---
->  board/tq/tqma7/Kconfig | 2 +-
+>  drivers/fastboot/Kconfig | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/board/tq/tqma7/Kconfig b/board/tq/tqma7/Kconfig
-> index 477ce3f3d53..afda49bea4f 100644
-> --- a/board/tq/tqma7/Kconfig
-> +++ b/board/tq/tqma7/Kconfig
-> @@ -82,7 +82,7 @@ config MBA7
->  	imply CMD_USB
->  	imply USB_STORAGE
->  	imply PHYLIB
-> -	imply CONFIG_PHY_TI_DP83867
-> +	imply PHY_TI_DP83867
->  	select MXC_UART
->  	select DM_MMC
->  	select DM_SPI
-
---=20
-TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Germ=
-any
-Amtsgericht M=C3=BCnchen, HRB 105018
-Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan Sch=
-neider
-https://www.tq-group.com/
+>
+> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+> index 90212fcf9ef..1887f78bcec 100644
+> --- a/drivers/fastboot/Kconfig
+> +++ b/drivers/fastboot/Kconfig
+> @@ -57,7 +57,7 @@ config FASTBOOT_BUF_ADDR
+>  	default 0x22000000 if ARCH_SUNXI && MACH_SUN9I
+>  	default 0x60800800 if ROCKCHIP_RK3036 || ROCKCHIP_RK3188 || \
+>  				ROCKCHIP_RK322X
+> -	default 0x800800 if ROCKCHIP_RK3288 || ROCKCHIP_RK3329 || \
+> +	default 0x800800 if ROCKCHIP_RK3288 || ROCKCHIP_RK3328 || \
+>  				ROCKCHIP_RK3399
+>  	default 0x280000 if ROCKCHIP_RK3368
+>  	default 0x100000 if ARCH_ZYNQMP
+> -- 
+> 2.50.1 (Apple Git-155)
