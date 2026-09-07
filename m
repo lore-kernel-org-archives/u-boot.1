@@ -1,134 +1,145 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2E9FC79F9E
-	for <u-boot@archiver.kernel.org>; Mon,  7 Sep 2026 09:07:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA4C9C79F9E
+	for <u-boot@archiver.kernel.org>; Mon,  7 Sep 2026 09:09:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 20D1E405A6;
-	Mon,  7 Sep 2026 09:07:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8CDAB80C46;
+	Mon,  7 Sep 2026 09:09:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cAe27MIQsklH; Mon,  7 Sep 2026 09:07:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 6C3ED40402
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788772033;
-	b=XiBW0reKbU95jDE++6SdGmEmZkAHrYccQzmatPgQjTAu+YLovw6l6J/kPhGpylLl7j+N
-	 auOaHvxJ0n8MEadttW60N5ifdUWtRWJaGgE03yReu0A2tqGowDoTfuUJcvgkbd4ujBQtr
-	 KTZ+PQyRLsxtCzbCGbJqcesk9hA1KfNpgTfaw6+4qi6aluRtIbRrPuFRukjutEpwAK1Q1
-	 Dl27yMA+gSJBx1Wcpzu2TkqH6v++rWceelZLoX24T+MQFSU4mb8mVLzmSGJGMgbO2jEFU
-	 c03bee1sJXua80UzE+t+lopDkDb3O2MbJWKyAjWuHSkherBK+NdrDBdGWB/8G1EVOvQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788772033;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id i3gHjVYVidLV; Mon,  7 Sep 2026 09:09:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 8421980BCF
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788772179;
+	b=JF6nMDQ5XEvT3vSdfA5LgbW2ytjvLbmKBMJMpW2BOO0UgMGoQqPLStyc04rUkjSQAMDa
+	 ECxCNw6lMvKC/uwhlSJIjK8cJ7vfkJdKUrKCoU7mNyXoODfGN6OXDKQ+OtcC0CIbd1FC7
+	 g4brl+QlNCbY8im0rhG4o/pgfDygMDgAVQUYwF+Yb1Qkcu2ptpxHzhn2e9q0pmT2E/Mew
+	 eCyye/4+x/pfe9Q6arQOnb66k+R2XZYIHBQQaBT1z2pheKqeetRwbikpxvRHME6NdsSWT
+	 rJiwCkqNXTD0rMeu3cnz+UG2++nRCWJJCgu2Imn1Jz+ryul2QVZWJqY4XbVwTwpkHiQ==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1788772179;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
-	 Date:Message-ID:MIME-Version:Content-Type:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=sPrUQe/aOTroJvOtYVfCP8il9hC9JUs2WYYrYBlShPI=;
-	b=Nw0x4ma9SBjXXHcrb79f+STfJyYeqAvVMIJ2sQ2bDbracMfuXwFungb7dXDjHavCjZ70
-	 4H/oT+Bna89g/LrFSLrcftvOG76HAQ1sAJgt0ofT5xOPlip/i3KAvpfStM0BGExJJntcs
-	 fRWrFdeBXCklnFtj7db8eUfe0ci6Op/0Z1/Cn1XFirl1Tzn4IL4g4V59YmEOVzd6YJumA
-	 4BZMSCa2lsxWyQJFJb+HqlVCfanyp6JYKQvfizGeXs252bSnRXgcsVw+VXlsorSCIZ3lr
-	 sIc7trpfeBmZ2HhsCH7NGqRVhVI9VUgKPRhW/kyMNZnarcH1S5PeNbQ9mnZ2oxTnLcw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=FTEkfBH+NEjmrEJCh7H6uvxBwDymNG5wAJTr0d7ZctU=;
+	b=gAQz/Q5GdhByJ27zS4/oQS3D/oNd6sKhLiFvIc57K68WU6tOZAiWf/SG3XyO5XeHTtNo
+	 78hRQUbgl3ZTxer/5/MwvYFHNkFxtJBC0kme9JqtPxuHeQ4vypHzBxF5t5EvxN9ylRS8z
+	 25OMNA+PqlQtkb/s/ojUfzhG2l2JBEUkNgqdbGM4cfj9Sx51yQkrUJGXd5R+qH//+0KuV
+	 HndMChV8v0fL1pFD6hhB0lkj/WnYBvXja9TZiQk7zz4CYM7cMPuxoL77WXqAptrfErQTY
+	 wV7FpUeIY577ZfhNgGCGzMWFZPRzB9tRcZzFK2wkOs/8h6C3cmI6dHWVCMxDpMfjQuA==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; dmarc=pass header.from=ziyao.cc;
+	dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=BxuJ9epD;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788772033;
-	bh=sPrUQe/aOTroJvOtYVfCP8il9hC9JUs2WYYrYBlShPI=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788772179;
+	bh=FTEkfBH+NEjmrEJCh7H6uvxBwDymNG5wAJTr0d7ZctU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uFu42xSoOHTRs/Qu5N4SwVn3pYflZ63rs3Qt+ggpfEm8pv5zPZ5nDLBwysvPGKKDm
-	 yOUtBDNLwY1RyQ8+HQT5GWO35pyuh6fP4RNZpqfXG+mNSH0OD7MJSpwkPnn3IjEnTp
-	 wKNKodzt0p13UHEmPLGgRa/gok8yjORK9eV8ycad9i2CT8lElUol+gg0cgxQdT6IOd
-	 JXfD7OgKZx7DdvIEqGVszGR1Qvw8g3Zl1KFLRf4+DOdlJB0PCwZKYk9/UKkdizMjQj
-	 AhpO6Z7Zs+MH88u0gunagOHY+VTau7nVND5SerXL5xcXRkxIy/DeMNi755x2bV8ImS
-	 ZbbYRp6BwoPzg==
+	b=uDD6LURKByH0Ls288jOCx2wYCUcp/8xWJWr93YadkbAQUsPn5CVxalu/0QcwrR/IF
+	 PM3dY4Kz6PZwzwBJ/LnXnhUWk12wqRb9KHnrhcoxbDe6FV/ROdGLnCRPz3XpbhjEXQ
+	 uZq9Pei9yZbr9pDyOvxY/Oboq5KfbmFxU+rHCGXpt32qyXtEx+276e79ynLxf7QeDK
+	 CFKQ2MCOTOz6eHhGY4Fa22W9d08NHjunr7ixKfmRsjqMyAP3uFYfZ6MHpAbrP8B8Qi
+	 0+0qL2R/Mi850279cQASeN3RRaKO1NCO3p+dbhktCPUraLysi5o8QPnHJBmUPZcOxc
+	 0EYtdaVBXGHtA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6C3ED40402;
-	Mon,  7 Sep 2026 09:07:13 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id B9013A48
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 09:07:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8421980BCF;
+	Mon,  7 Sep 2026 09:09:39 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 38EBBA48
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 09:09:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9EF93605D4
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 09:07:11 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1DBA680BCF
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 09:09:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vCGcOt5fEfiJ for <u-boot@lists.u-boot-project.org>;
- Mon,  7 Sep 2026 09:07:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E858F605CF
-Authentication-Results: smtp3.osuosl.org; arc=none
- smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788772031;
- b=cxtt/+RX9hQ68mmhXd8ni3EBJdyOnF5ipNc3aez/WLlGZWWWJLBcR7WiJ/AYanXKeF3+
- O0oQGtL0GyyFbTrpnuHaiOBaT6Bf83Tic38B1+MN68ZImyE2GAOx6lTsajL5eID3hv5T8
- 8gqkN5OCAsb1U18Bjx6i2WpRvaWsdEYUj4xfyfzTXJHxV7ICBttirhDmhASPnnOmmQ3SW
- uIOwOS6ol2X1Xsu7S0yI64pbAuITUizOzGeurSNaVZKZfU142qxIWh4NDyGfF7xhfs7Lh
- TaOc26GKQ+IgtH9hGbW6o8yj1lJxfyWlM3ETZRooE5wjHax/nBv5grTdTYTWryygh7g==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788772031;
- h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
- In-Reply-To:References:Date:Message-ID:MIME-Version:Content-Type;
- bh=sPrUQe/aOTroJvOtYVfCP8il9hC9JUs2WYYrYBlShPI=;
- b=TqnLpBbA/dKLMJMn9L3zI6/vGPWUO66N4fOIr4dih8e1LY1IM4DXsLt3yoOI1HPbjKeb
- /h+biax5pPAYHC7UjTXjM5XD0K3P8/cD2nf3mhozrUcMJk4VEIeyQ4YN8a2UEZ4rzcL+4
- UnziLaY04l7Yh3j8hLfmrxuS8w5utPPMe6mW43id7vDzJ7cwdAKqO9f7pEdTjb2TgFfIM
- JUJprX32car80olhfu8WDqtixYRKRYTb/c4eUx+7t42NGOXl/bnrSfDRVG69xWyVHsR2h
- eHQZ662ooBqeDJMYld2lfAcrinqz/FwF6t10oIgzP3qIeb0IZdLU99sVXKRtnKEnRFQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=kernel.org; 
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=QyqNNNeH; 
- arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
- envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=QyqNNNeH
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E858F605CF
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 09:07:10 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 01E0060052;
- Mon,  7 Sep 2026 09:07:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23E3A1F00A3A;
- Mon,  7 Sep 2026 09:07:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1788772027;
- bh=sPrUQe/aOTroJvOtYVfCP8il9hC9JUs2WYYrYBlShPI=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=QyqNNNeHZPCH71YM69C1REUSffMYG5PsTbe0eAD+KkY9KnMZfBXDkJbL8Db/2DcFE
- ArLqG+rkhlSAEcD/27FknMXf5Pk6sb/WH2VDLhNzq5EaqXCP5ZxR4kTOjxWqJIhkWe
- UyH1M25W7ArzVGgtg17062JL3tteIu+zjVmsRqA8BeGm29tI6vCqJjCX5EqGzz9RQB
- J7uVGXgzfnRw+rCcwdE2BJIcGcaB21EgdVE52T91XGAcOHC8/fdzlIvlt51n6z9hAG
- 2MlS3Xj9xbqs3Sn9s7sd0KM76bBIiAMqWtaPQpHXq9qMsy00sJqrmNNDSbJF95rApH
- 8+IZb1m/VtiaA==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Patrice Chotard <patrice.chotard@foss.st.com>,
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id c7dU3zZbdq0e for <u-boot@lists.u-boot-project.org>;
+ Mon,  7 Sep 2026 09:09:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org E0BBF80B80
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=136.143.188.15
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788772177;
+ b=goSc4rVhyaZNGnrgKVrKWxw8oX/pGxQar9nOwdop0eIw5eGI1qNuohsp3B4/gPg8E84u
+ u9CQ0TlT3Ywhp5FzO1g4gQdVGNUIMquMoeRHq7dVH/mMYMaNNhZruL+JfqsFNV4cxTEvB
+ FsBQTkDv58Mlw4MRJ+RY8SogPooZ1+W+onaW9jEEbssnF6mterhC8n2+fdAW1eiQricET
+ 5A5zPPuw7KnHTb06JMdSn8bmvuVvt0ZDEBKGRj4dDYHAdXSU2jGj4m0204w6o96MdYH5f
+ 9r7xzLNmj55+K0WYzvyHYdz2EZysvhfxoUzLhx6u48v9zDawkx7rb9EW34WOCPeTsPg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1788772177;
+ h=Received-SPF:DKIM-Signature:Received:Date:From:To:Cc:Subject:
+ Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
+ In-Reply-To:X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient;
+ bh=FTEkfBH+NEjmrEJCh7H6uvxBwDymNG5wAJTr0d7ZctU=;
+ b=gma5rlqbcVhi08cR5AfHsvTl3rdF38CbLNxbQrD50c03+szYtd2vVvY8cmnU5GM6Vjs0
+ yOl6+dMZ6yivMdQKkVNZRwqE1QvTESLo0qvTW/xdFqbWfpXrzqUuVG2QrK4SINTQ9+yoV
+ HpsmErEH4d3+2X4rnPbgrI15RHsIg2cXZ9vUeGgRY3unoJg6FGN0LT6inOMS/0hEkM7FM
+ nKQs+wiMvpOXYTuJ8OMKWVq65kDczf+CsgJRRCj8ZWvbVan4IaRefNWWrSFIhUXTlQL8u
+ DdyFHHakLmFvTjoE4r5rbIaGYoiTLC89zw+HHWTSoR/0FI5ajFcFsyzxxiyJm0zZdfQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org;
+ dmarc=pass header.from=ziyao.cc; 
+ dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
+ header.s=zmail header.b=BxuJ9epD; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=136.143.188.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
+ helo=sender4-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
+ header.s=zmail header.b=BxuJ9epD
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E0BBF80B80
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 09:09:36 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1788772166; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=bDLH3iGAiH8Wi9T915yI2RAZjpXZ5A9QHgxs9ighsHpV6/1jR+xfPypz5lnwEU0qzVmaHjJ7EiFaaIreNr8+91xKXQyTBVfFRfxrppaExI9nG3ZVYMjyi98i3EguRpsj1QWk1ue4HLr7gm4afT91Wqj1FGre/daf1HeDuKacm8Q=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1788772166;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=FTEkfBH+NEjmrEJCh7H6uvxBwDymNG5wAJTr0d7ZctU=; 
+ b=JBTn9BUuWMxCiEhWAg3Be7hFoG1pK1WeN9bNPlZRkTezIjS3qC8L2CNGPw1AR7Uw7qVBuw7arxXxq3GfkCoq+8cdiSjX8CuwiFGKdK9cWitUW6T9lAaHSKEWquX9wvlVRKrYLC2R5sOFAJOnvqqZshB5c7lRu1YvnS8iMrH6NXQ=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1788772166; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=FTEkfBH+NEjmrEJCh7H6uvxBwDymNG5wAJTr0d7ZctU=;
+ b=BxuJ9epDQQqxEMZH/sfnH0jtPHCEt92FJeQFU01wy3vYGiWb3XG9QCwY3N1kd3cn
+ 3FIOeTssq/O7WEIFgH3c0/ZA6f6GC5bYVbMgShrPO5Vk+2h1eihmzUMEDpTfPK660On
+ L5ig4usrEOCh9s1tGUiJJRcUHsbtETZkGKBg9vag=
+Received: by mx.zohomail.com with SMTPS id 1788772164416269.7155741210422;
+ Mon, 7 Sep 2026 02:09:24 -0700 (PDT)
+Date: Mon, 7 Sep 2026 09:09:18 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Nikita Shubin <nikita.shubin@maquefel.me>, Yao Zi <me@ziyao.cc>,
  u-boot@lists.u-boot-project.org
-Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut
- <marek.vasut+usb@mailbox.org>, Tom
- Rini <trini@konsulko.com>, Patrice Chotard <patrice.chotard@foss.st.com>
-Subject: Re: [PATCH 2/2] usb: gadget: f_mass_storage: Optimize schedule() call
-In-Reply-To: <20260817-move_schedule_inside_sleep_thread-v1-2-0023194e8c47@foss.st.com>
-References: <20260817-move_schedule_inside_sleep_thread-v1-0-0023194e8c47@foss.st.com>
- <20260817-move_schedule_inside_sleep_thread-v1-2-0023194e8c47@foss.st.com>
-Date: Mon, 07 Sep 2026 11:07:04 +0200
-Message-ID: <87fqzltop3.fsf@kernel.org>
+Cc: Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] riscv: timer: Fix M-Mode timer
+Message-ID: <ap5_PoYJjvvb4yOj@pie>
+References: <20260904-riscv_fix_early_timer_mmode-v1-1-210e769b0ac2@maquefel.me>
+ <apsZY2QgTXuJUivy@pie>
+ <37844d7d5ff5ff7e391cdc226ad58884621c9271.camel@maquefel.me>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <37844d7d5ff5ff7e391cdc226ad58884621c9271.camel@maquefel.me>
+X-Zoho-Virus-Status: 1
+X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/288.762.58
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,65 +153,73 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Patrice,
+On Mon, Sep 07, 2026 at 10:22:54AM +0300, Nikita Shubin wrote:
+> Hi Yao Zi,
+> 
+> > https://lore.kernel.org/all/Z7dMY_GqLHsC-5gl@pie.lan/
+> 
+> > TIME CSR only when Zicntr extension exists,
+> 
+> Indeed, also TIME CSR obviously is available for M-Mode in that case.
+> 
+> > - Remove the timer-binding code in drivers/cpu/riscv_cpu.c
+> 
+> There is a caveat that, we have "riscv,timer" compatible which is
+> defined in documentation, but never used anywhere.
 
-Thank you for the patch and sorry for the review delays.
+Yes, I later noticed this.
 
-On Mon, Aug 17, 2026 at 17:41, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
+> So we must manually instantiate it somewhere. May be it's a good idea
+> to move it into `riscv_cpu_setup()`, we can also check extension there
+> (in case they specified in dts for those who rely on it).
 
-> schedule was added in sleep_thread() by commit 4b6a3e860878
-> ("usb: gadget: f_mass_storage: Add schedule() in sleep_thread()").
-> to ensure that watchdog is still reset periodically even on platform
-> that doesn't implement g_dnl_board_usb_cable_connected() and in case USB
-> cable is not connected.
->
-> Instead of calling schedule() for each for() loop iteration, call
-> schedule() only in case g_dnl_board_usb_cable_connected() is not
-> overloaded, in this particular case, g_dnl_board_usb_cable_connected()'s
-> return value is -EOPNOTSUPP.
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->  drivers/usb/gadget/f_mass_storage.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
-> index 621852080e2..f467693d2cb 100644
-> --- a/drivers/usb/gadget/f_mass_storage.c
-> +++ b/drivers/usb/gadget/f_mass_storage.c
-> @@ -651,6 +651,7 @@ static void busy_indicator(void)
->  static int sleep_thread(struct fsg_common *common)
->  {
->  	int i = 0, k = 0;
-> +	int ret;
->  
->  	/* Wait until a signal arrives or we are woken up */
->  	for (;;) {
-> @@ -673,13 +674,15 @@ static int sleep_thread(struct fsg_common *common)
->  				return -EPIPE;
->  
->  			/* Check cable connection */
-> -			if (!g_dnl_board_usb_cable_connected())
-> +			ret = g_dnl_board_usb_cable_connected();
-> +			if (!ret)
->  				return -EIO;
-> +			if (ret == -EOPNOTSUPP)
-> +				schedule();
+We already have similar logic in riscv_cpu.c, but I have concerns for it,
 
-What happens on boards that override g_dnl_board_usb_cable_connected()
-that return a positive value?
+- Instantiate the timer in riscv_cpu.c is quite surprising
+- This prevents timer-uclass.c from probing the timer driver ahead of
+  time when udelay(), and etc. is called.
 
-Per my understanding, schedule() will never be called, and the watchdog
-will be triggered at some point, no?
+  For example, a specific board might want to make use of udelay() in
+  board_init_f(); if we only instantiate the timer in riscv_cpu.c, the
+  board code must manually bind the CPU, or the timer isn't available.
 
->  
->  			k = 0;
->  		}
->  
-> -		schedule();
->  		dm_usb_gadget_handle_interrupts(udcdev);
->  	}
->  	common->thread_wakeup_needed = 0;
->
-> -- 
-> 2.43.0
+> > - Correct help text and comments for riscv_timer.c, just like what
+> has
+> > been done in this patch.
+> 
+> Agree.
+> 
+> > - Rename RISCV_SMODE_TIMER_FREQ to RISCV_EARLY_TIMER_FREQ, clean up
+> >  preprocessor instructions that limit some functions to S-Mode only.
+> >  They shouldn't be S-mode only stuff.
+> 
+> Agree. But still RISCV_SMODE_TIMER_FREQ/RISCV_MMODE_TIMER_FREQ in
+> theory might differ, if, for example we are switching clock source
+> somewhere in SPL phase.
+
+Yes, you're right. And in case that S-Mode timer (TIME CSR) is emulated
+by M-mode firmware, they might not derive from the clock source at all.
+
+> > - For future RISC-V cores that are capable of reading timestamp from
+> >  TIME CSR, we could either register the compatible string of its
+> timer
+> >  to riscv_timer.c (T-Head case, the underlying CLINT isn't a real
+> >  SSTC-capable device) or add a "riscv,timer" node.
+> 
+> > +	{ .compatible = "thead,c900-clint" },
+> 
+> I think Zicntr is orthogonal to a particular CLINT implementation.
+> There might be some cases when MMIO access is compatible with some
+> existing CLINT implementations, but the hart lacks Zicntr.
+
+Yes. But T-Head's CLINT is kind of special, it lacks of a MTIME
+register, but only exports the timer through the TIMER CSR in HART...
+which is different from SiFive's implementation. I think in this case
+it's not valuable to split the HART implementation and CLINT
+implementation, and discuss them separately.
+
+Anyway, you're not required to fix all these issues up to get this
+patch merged :)
+
+Thanks,
+Yao Zi
