@@ -4,166 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94523C79F9E
-	for <u-boot@archiver.kernel.org>; Sun,  6 Sep 2026 20:13:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AA0AC79F8C
+	for <u-boot@archiver.kernel.org>; Mon,  7 Sep 2026 01:13:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1FB594059C;
-	Sun,  6 Sep 2026 20:13:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6F5BF4057E;
+	Mon,  7 Sep 2026 01:13:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ujfg4OJHPgHW; Sun,  6 Sep 2026 20:13:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 48F6340589
+ id ntiW3yEBXX7Y; Mon,  7 Sep 2026 01:13:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 6AFE440562
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788725591;
-	b=Jt6TILhEZLuAuauiqTai9QohCZTHn/2lIZA+RUnLHinYW8CYoY4caf7OEuV2f0jx1mKk
-	 MRc1HKwfowg21H58TOHMXnLoQDG07hsyWyf4pXuhH0bmFJgxyaAVB6rbSagi7d5Xf+A3s
-	 TNGKezKW/vSG1UVMizNZQPlYzB+9OW4W1qVWBRP3psQpKCr4ufwrnOUDPTFK+mha9bQ5r
-	 oI6ue6f39QqFn7DrPOgkYOwe/f+1BJfr8JMy51TZxpflCIX9neg3ZKD/A5FKS4HR7vE9q
-	 Vrg5toN/GB4VdPYD9N72fIgiRbnTikWXvPxH64h7KtUdkZNM6W8Pi+pnRERaTTMqX6Q==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788743632;
+	b=X9IsJIipwcSeUeO5Co1riHvH8e6UWh4m9U1mhOe3pQYVn70B4BuMS6qWIsI4jL1vfO70
+	 8PFFTnpHKtQ//qvsze6InmH2YuOyo7wG+WQJBaFjq0wFwsEjE/GJvmvJXDznlZLvZwVrZ
+	 5EF1o0gBqNheqyiah9OmDB9krpZWc76uid9UBKvz27S7Rtrnp1PVgRXSP+6Ot7C+3ohAk
+	 mPVq0zgIai5ahdAeNgyHWMtzyUd+Kx1n876yTFpMC5eKFqWYSrHECA4gCmLTPy9Qj4jp4
+	 auMN81sl6QIMb0oMZ5s9O9G3WyyRr73U0Y4OjKTmWCduOMY4xAYqmOWLYYo73jB2UhA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788725591;
+	c=relaxed/relaxed; t=1788743632;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=23Rs7Iw3pwragO2tfUhyxhnS56ZS6Y7xj9TAbv/PPg8=;
-	b=rMA/844pI3Udg3sRehFtzkBB0FEDcfKHKv0903TXytmcy7mTVh+E+8YxXfKU0l9kWJ2y
-	 lvKlILmGpT8Q4Eu7ZhfcHo+KpjZ40AokRWutxRbGghh4xzSMOfekHO+WClf8HzSIWWSPZ
-	 zUHm52vB64U+9BKHtKqazlYWvyPtcG5LYTagH75QSPkue0e2B7HBBsRnhz7Jn+f/cjPUQ
-	 ne40qRPK7UuRvOkY3l8ZhA3lsLxM8eX2Hy0pKOqFq9k2kvN7G0V3cPieGslSaVo2CpPNp
-	 oipt90kK2ySahnT1A8ziUIeF2ZgjbvvtXW3jpFbzYwDWxsChaQCS0qcR/IPhkglvLTg==
+	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=nFg6c263nvglo8IB6ZvOfkHTLKsDcAINqXhTVjqBwS8=;
+	b=o0c+OHw3a3RnwnQ4lW0vXZeLkZmZXs8X5qCw1ftNSPp58n+qi/GfrJkCb8FstHKnHxAM
+	 uvq4a4X/gy72VYrh+xwsCtVi03EThp4AoPlYOOYYcrNW4TKePXkBaAYBFzvt223x17bJ2
+	 7eYc4NEn6vHz6rijKABEXnuTDD9bDcmskWq76AXG7tMWzB8uZIYnvCc5sZHbcXRC1u6/u
+	 z0pdlR3BMxCdHido6UjTSyetapXYm9IRVUcUmSXBfqIUI52XG3oyVrB9CT6GFGRY5hOwz
+	 IBewdnFdn6H0gyXgBbb6+itmkBHMFL4HMekTDK9alXInAzYw1zgprd/2ziCBvO0km8g==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788725591;
-	bh=23Rs7Iw3pwragO2tfUhyxhnS56ZS6Y7xj9TAbv/PPg8=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=wph2I6DFm9aFvB+PpglCnaPxpjos+gUbQdorfJ3npcG6vDGJ9xi4Tr7kO6XSdI/jm
-	 juAP68F81a54UdxZffc0Lqv+qBnC6vwfe6vbf7bz1wtG1UPluXSTJZQD9zwRU8n+ZI
-	 EnTyopbNZwtmwqC1Ti8nKlUDYRjfdFeF6lYS+k5FbIt0TPbKBmp/9M4pWy8lq3xybI
-	 zxMnTS+vr6Ut5/5hss5k7kY7E4Xt/zla9rmmJqm8JdPt4eyNrZNIwV/AQjKL6PT+j3
-	 dwsx3KSLGIrW80anybDlksMy/OmmtZ5JUJoH8PcJqj9ofNn7B/fIbyrVXBOSofnGTM
-	 PJrEKkDD1kJgQ==
+	d=lists.u-boot-project.org; s=default; t=1788743632;
+	bh=nFg6c263nvglo8IB6ZvOfkHTLKsDcAINqXhTVjqBwS8=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=qSVhq0Ecu3z5Ojj/I/DL4quqovZCH6otpJS03cd5YkHq8/LjxtopBw3F2EImiHCfJ
+	 7l2q6o+XzmFkzscmpZpjB7UDUZehEKEojXGTj3DW/uutFe4aErtir4WcIlkZBfmT2w
+	 tmKPmoCcndXDGFFuBxGnOv9xCKEdYae0uuRySmYOXwLF/zLc81QHon2fJiMqXKf84/
+	 Qi1oISP/eQkFe+i7j8V+n+1rxF5ekOZPSg+m8ZdT8Cn+OihvkUTYUVPetnDu5pHBPp
+	 Fpx26pWlpc6+b4Nj16Tvbq4Xpxfof4unmk6ppOqiSMdEWELf7PTjiZXpb6nwZvl1vr
+	 GWgJlOK/zswmw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 48F6340589;
-	Sun,  6 Sep 2026 20:13:11 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 302BC388
- for <u-boot@lists.u-boot-project.org>; Sun,  6 Sep 2026 20:13:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6AFE440562;
+	Mon,  7 Sep 2026 01:13:52 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2C24F9CF
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 01:13:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 15F25807C1
- for <u-boot@lists.u-boot-project.org>; Sun,  6 Sep 2026 20:13:10 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 29E68605F7
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 01:13:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2YyFy38TW5UZ for <u-boot@lists.u-boot-project.org>;
- Sun,  6 Sep 2026 20:13:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org DC1A480733
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2c"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788725589;
- b=Kaa2Oiyshf0LexluE8JSPQ0lIYGSwK5SQaEbTF1vKZgimWcD8u+D5ymepniFXWxeLwMj
- b9wwhm6xJ10SmZ5rh8jLU8tSFnk3Qfy7u8445f5g7Qst2gzMriNLSfkRvc6VFH2v3DHjc
- Hzs4Gvuag2QP8LcgN7q7zoBh5aMBxguw8k4KF78HwbW38N13ZDdcSIA/VN5EGB97Vf2ul
- WBb+jGrbBueTqlmR6Qf5yTa/BRtG5Hox8rezdAGjPL7ZZO12kbvuCuUnxC2cRCH4OVtSZ
- WeOhNZZ4gFSeXD3LEmPXMPQ85hAiMeBgnOOKLxV3qCuvW0xqpXne+MjYfJtSuq++ZhQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YCRHnpOy9JPo for <u-boot@lists.u-boot-project.org>;
+ Mon,  7 Sep 2026 01:13:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 1F509605F5
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::b12f"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788743629;
+ b=LOQzhNh2VF1a1UTzP2GVda49VVyduw32JL3uci+to3y4TSZAKT1HilpB/VnifjQ0eahy
+ tVNYVwIvaUc0dEkiCl6LZ//Q2EZmN5/d1umwC1Nt0jxX6d/We1k0skpl3Qtq3Or26TNxW
+ gBoPy2x5lTS/kXtlTqXv+Gg3JnSiQ+I/gAdCxqaLDB71xoPki1xSwD7HohUHzKQ/xZRg4
+ 2flQ3fQdfs2b+fkgDDYNYrcc73c1+/fvZ5wcLoufaM8+BXQE+CQtDV8ZGsNqv8mfGiOgr
+ Yl1Jk2h3gp4VA3S6p966/j8+awX5Y869Sn25HKCz5lvMgpSoGNFqMMEbfCRoxox2Aow==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788725589;
+ c=relaxed/relaxed; t=1788743629;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:In-Reply-To:
- References:Subject:Message-Id:Date:MIME-Version:Content-Type:
- Content-Transfer-Encoding:X-Mailer;
- bh=23Rs7Iw3pwragO2tfUhyxhnS56ZS6Y7xj9TAbv/PPg8=;
- b=MDMqGMx4b3mRJ4IV9yASuGO+DioNb9RKv9zQqEBxLaveFdlUmtR0/xVzMr69zeqbl1Md
- 0zxnOWnKb/T58dvvArPVf9pB5frdg9DUec+FFwzIivoOeYV2BaPmjk4YS9gDJWTCqTLQ9
- OQ6ms02cFcJdwCWl8m+jgT/xkgo2w6/+IUwHriwOz+KTbDfST61acxju874e5h9xDGaPl
- eQSG7huZIWduaf0tPrEFksstpg5NZGPv0Tviw5vBHJS7xinZkDr1qaIvVwWlJrvrZEZns
- gEpa0c8U5NNJ13sdTU9DziabNSCPNLHWmiFxZA7mrmmbkC7FCKkwA/V8gLn+aoBTmAA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=konsulko.com; 
- dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=Dh+c5y9O; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2c"
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+ Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+ bh=nFg6c263nvglo8IB6ZvOfkHTLKsDcAINqXhTVjqBwS8=;
+ b=AsqiCgYOgQxXbTO+nwdedGySWdf8ih063nMYcSHLdgBaqg4nB2aAhNTKpBL7U3l/s++A
+ LqB2N65UD3sucR2/xP95GQfEogRSlZsR0xtd6YcylDqoS3mVhMFuPgFowoqsDyzhmb3MU
+ exgYp2BX9T+gocKAH+1JjYK/2zpABNF5B+C1haTj1Q98GlosNv9PMWVh8jzkJQQayngh/
+ VyLA1QtLt08kshOS3eW6LRATEHvrTQ65XEiLT54lZ6TZTm3lzK9LKtKTP41f7Q6qxcfPR
+ uEVK0rvsTkPmLxqvRqzqiFTivUhML/Npafa0TLxYJbsjheoJVe6wYFo3ZjxJhPgUhSw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ dmarc=pass header.from=gmail.com; 
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b="kfP0DiO/"; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::b12f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2c; helo=mail-oo1-xc2c.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
- header.a=rsa-sha256 header.s=google header.b=Dh+c5y9O
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id DC1A480733
- for <u-boot@lists.u-boot-project.org>; Sun,  6 Sep 2026 20:13:07 +0000 (UTC)
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-6aaf3f54dbeso2984688eaf.2
- for <u-boot@lists.u-boot-project.org>; Sun, 06 Sep 2026 13:13:07 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::b12f; helo=mail-yx1-xb12f.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=kfP0DiO/
+Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
+ [IPv6:2607:f8b0:4864:20::b12f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1F509605F5
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 01:13:47 +0000 (UTC)
+Received: by mail-yx1-xb12f.google.com with SMTP id
+ 956f58d0204a3-66fdf2a9aacso341024d50.0
+ for <u-boot@lists.u-boot-project.org>; Sun, 06 Sep 2026 18:13:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1788725586; x=1789330386;
+ d=gmail.com; s=20251104; t=1788743627; x=1789348427;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=23Rs7Iw3pwragO2tfUhyxhnS56ZS6Y7xj9TAbv/PPg8=;
- b=Dh+c5y9OnFOIn857o7RwsBP5sxQ8z+csFgXRmIbCBMmu13sZE2d2ydS3r4gFvWARGP
- gnoKuT+kTbVSBRc/xhGZzUSC0/Uppp2TEVYD2K9RS5akvrnwzLo1O40H8iu2s2LGOu5y
- q/cynPwoFlVRMx+0ELEkkfXgbOCl4cRAfloxQ=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=nFg6c263nvglo8IB6ZvOfkHTLKsDcAINqXhTVjqBwS8=;
+ b=kfP0DiO/b91UGfMcyy/+ehcbz0VZ6kyuFISjRSjSUDCRJE0pVyI0JJjm4hdvEDvlBw
+ bfrOyxb/ljo4Hs/ZaG83Foi5KH9EUhh2QQP0B28XisnKBjq+haKIQqjgtchCcG+Tx2RI
+ m4L8Lt+2irdPxbXBtJsHrB9zdKqgCpB3k2HGTSCQcrLMgXPmhBxewp4lSKKhZXWraPlV
+ CXAQs+fzR3Y0mdvrkqdRReTR2gJp8DmWl7ION0C7mkf1sp0znEB3B0djHNDU38yeQjGm
+ Zki43crxz552/MhnEovUJuS00jmqt27NpMufCUkyv1eK/mlccUWTL6l+UCKrmv0ou1+B
+ 6dWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788725586; x=1789330386;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=23Rs7Iw3pwragO2tfUhyxhnS56ZS6Y7xj9TAbv/PPg8=;
- b=CLWxE+GzN7TdcixtHTTgJ0z2GKgEMw5J1clevsQfNMANYEZrl5b7xI2tiJqOMqw81K
- spigbPWTnWupz4rKC0PWebG7aYPhATdaXqy6SRpCU24DKvJPDqgmIZsSS3w8KiJQBQ5D
- 0w8yJEcGftF676yoP4mU9pV22uBmXOhIIexdjK8WjEdB+W967YCQgmMR3NEsGgOgXQyW
- 3VihCSxaCNmzCXWJgF9bd1a+Tz2b8vXmr0I/f+EKBkbcAUqyR7kwaCDuKuLpYOqLB4cP
- EeZPd1EisOrMsz+mr7+zqlD6W7BMlMvXs9ayn7pbCcXmkA607zeTyBfpWtz4d33cgEok
- KUjQ==
-X-Gm-Message-State: AFuF++nuXtT0Qmj8iYLnPX/Snx3BmHog3vStLwgKXIwoe4+l3dqIlw/a
- OY65z0fO1Yjhtu6Vyt0Lwmn6/+nul6dRaAfZyjmQcMX3f5EhWhzweuG06UHYxU9XSpQ=
-X-Gm-Gg: AYBFou1PBThTM9cE2GujXqQppORHEXgtO86lfyfHfmkUhov2Kzcj2h4yTEavcTiWRO9
- dvYOvGUXpoOkIs7PJ1L+lA5JpkRHjbzQLG1QEBOxfuQOrmtWMoTE4GfJoSDbZQDWyuPt1h7lf15
- Nt+np4SBDUcqocyMDPOfJmY8MpNCN3E9NV/7ZcFBpxtmn3Fhr86REZlL9TB5dhTXqWDId07j7Eu
- 5+G9T5Phl9Z0nggDSSXq+5ChRN62CN+k0vOP3c9SwdnKbPzwkUcv2MraazBjqW1UOao+I5yLYht
- vYv2fP16/iIa4FcIT2ZSDfAGrWA3b2RHH6XS+9cbZOUYlXWoz8hbXL3krxTuCtGNtj97eV9c1fN
- w7T600Az0hOMI35c3Q4I/cA+nPU4jvF1CtQRNAtRgB6xeofw4+JS6DbpZHixjTUVyJaDq7gJja/
- KUoS2TIAm3+lYNXpVJIR/Cha4cU6R1YBkkjOr0XMTRkQRSBV3grek0GpzdbFQAApp3SmrATul82
- V8M5y6fgKUxwL7pckESWCZ3j/E2BKirZHaiSfeGoCv2njqa3JNWw6p0rru9HAb+7wNfy/d5iEB1
- itSaeRdY
-X-Received: by 2002:a4a:e916:0:b0:6a1:47c8:c86 with SMTP id
- 006d021491bc7-6b6fb4e7a5fmr11531224eaf.10.1788725586288; 
- Sun, 06 Sep 2026 13:13:06 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4762bb39439sm7039074fac.9.2026.09.06.13.13.04
+ d=1e100.net; s=20251104; t=1788743627; x=1789348427;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=nFg6c263nvglo8IB6ZvOfkHTLKsDcAINqXhTVjqBwS8=;
+ b=r5u5XFBbdXq9D0NMpbERfq6MkUs36HcbgQlYSOIRLmZrNLm33NFPRc3z3GWWQMDgIe
+ 9FCyWOUTEi6ELfbRVlTQoblCzYpna4wVJQv1KC9KUZJXkq72wvdkFI/zYpoTVLOaYxwU
+ mkJRzHUvkgXeQiJ114owxuexJB6wh52ve/+3FXsg+wH77RN9WjcuP2dTyuvtseT5mnYk
+ asXwr+7Q1AEhjhCCd8gvFDGTwT8FZWMe19NHD84ybe8XNHxQuBdU7JBXF+JXNfS+Pp0K
+ keRzAiJnXEXlHfw0XU/cdjm3SGm5zs3KlttEfUeC3LwUXRxExwOUgRKXBYtI895kM7jN
+ zWTw==
+X-Gm-Message-State: AFuF++nMCAU0y3Pgq4z3EFhSjx8OaiyqRJFuFUs7VXEfMUhBzGVQhypT
+ bvubK+O6ibhELl/kPgjVfIuTppuQomGNLQYPbgrnUOaF/8q+TnVpLMxo
+X-Gm-Gg: AYBFou3i37BUMA/txKHis09NkRspnWMdyvnUaRFEjjmlAA65dOrSh+1tj4MODcgZ/MB
+ U9DY8fOt/CEJd6YcHYzA226SCFmPls0YD/2raeEHkdMNeDaiFTWlJGS1xOER2QtqQRwbHkbyPhO
+ LWY6CkuKfuOIfIt5UKCmVtgpQowoqud9iQ23x8rGrgCNR4HAZ3Vp5Uku89CY315Y3rqJKGUAtk3
+ Qw0/lYQ2XedNRl47J6UkPw5ohs3uOEHFGOVYpW7L5VibAFpzoTpgCRIV0U5tgR7EJMsbkkK7KuY
+ kybs7kqSVVVbUiZYco7ZCz9h2eiZZnvGRm5QSpeqaJ7EtbOufuuMD0F0xdHtygvU8tI6/wDETn7
+ PmSMf4bzr40sadYaaloka5GJcZc3ZfcLGTFnh5GQtndnMqjrM3kd+1TaEto2GjhLlg3m+Nd3KYE
+ 7aGLktmPzNfo61ZyHAEEfi1a9MGEwDDyGJcDG6TscJrLO+HbZD6+Kpkb2MfJrEGzG3qCrfQADBg
+ h3jUwvcHYs9RIh7yqnX53vjxSOpdKxWogpgMg==
+X-Received: by 2002:a05:690c:319:b0:841:8f97:e898 with SMTP id
+ 00721157ae682-871288e0f77mr93941787b3.32.1788743626780; 
+ Sun, 06 Sep 2026 18:13:46 -0700 (PDT)
+Received: from fabio-X870-EAGLE-WIFI7..
+ ([2804:1b3:a803:6c49:a12a:bd33:6635:9572])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-871493155d3sm63503677b3.16.2026.09.06.18.13.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 06 Sep 2026 13:13:05 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.u-boot-project.org, Bryan Brattlof <bb@ti.com>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>, 
- Jayesh Choudhary <j-choudhary@ti.com>, Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <20260829-maintainer-fixes-v1-0-e4e03971e14c@ti.com>
-References: <20260829-maintainer-fixes-v1-0-e4e03971e14c@ti.com>
-Subject: Re: [PATCH 00/14] board: ti: update and correct files MAINTAINERS
- entries
-Message-Id: <178872558496.3634654.4200111512353964189.b4-ty@konsulko.com>
-Date: Sun, 06 Sep 2026 14:13:04 -0600
+ Sun, 06 Sep 2026 18:13:45 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.u-boot-project.org, alice.guo@nxp.com, marex@nabladev.com,
+ Max.Merchel@ew.tq-group.com, stefan.eichenberger@toradex.com, ye.li@nxp.com
+Subject: [GIT PULL] Please pull u-boot-imx-next-20260906
+Date: Sun,  6 Sep 2026 22:13:40 -0300
+Message-ID: <20260907011340.6031-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -177,48 +170,98 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sat, 29 Aug 2026 09:34:18 -0500, Bryan Brattlof wrote:
+Hi Tom,
 
-> While updating the check_maintainers_files.sh it was noticed many of the
-> MAINTAINERS entries in board/ti/ are out of date[0].
-> 
-> So this series aims as trying to update all entries by splitting each
-> board into their own block, sorting the F: entries, correcting any file
-> names, and finally adding any missing files I noticed.
-> 
-> [...]
+Please pull from u-boot-imx/next, thanks.
 
-Applied to u-boot/main, thanks!
+The following changes since commit 75df64103873fac09642860cedadaffb8cf6b2c7:
 
-[01/14] board: ti: sort file entries in MAINTAINERS files
-        commit: 4231d50c067003169cfed53b6dce753211aa46ed
-[02/14] board: ti: correct names in MAINTAINERS file
-        commit: f1a98de73e3a8e9ceeb93e04ab218687648fd5ab
-[03/14] board: ti: am62x: split board variants into separate maintainer entries
-        commit: 81e8aa8d426efc5f9ba87af4cf79846b0bc96863
-[04/14] board: ti: am64x: split the EVM and SK board entries
-        commit: 8944fe91356188e4caba14421b22083b2f453345
-[05/14] board: ti: j721e: split boards into separate maintainer entries
-        commit: 5a08a113fed2261a748f574aeaf2c8d769a94794
-[06/14] board: ti: j721s2: split boards into separate maintainer entries
-        commit: 7ce170d9507d2add5ab02182fe1c2cd4149ace32
-[07/14] board: ti: am62x: add files to MAINTAINERS entries
-        commit: 774e11aaebd373979d4525c66a052c9c32bdd31d
-[08/14] board: ti: am62ax: update MAINTAINERS entries
-        commit: 2954465b7de8588a2c3b64ae4c0dbbb16abd52d9
-[09/14] board: ti: am62dx: update MAINTAINERS entries
-        commit: 7ee8164bd0682e01a7bfe315d81ac0929051c3ff
-[10/14] board: ti: am62px: update MAINTAINERS entries
-        commit: c305e0cd6155c932202e290a032491161df6d803
-[11/14] board: ti: j7200: update MAINTAINERS entries
-        commit: f2e95ad4b02afe8a671cf2905f111d708c4e4b46
-[12/14] board: ti: j721e: update MAINTAINERS entries
-        commit: 5579e96029bbe5029cf2975462ba477774bffc73
-[13/14] board: ti: j721s2: update MAINTAINERS entries
-        commit: f6959b909fa564bfbb78976c7e3a82b3fd8776ab
-[14/14] board: ti: j722s: update the MAINTAINERS entry
-        commit: 23c2aedbd786f7fc13b4b8c11b1194b19d51c741
--- 
-Tom
+  Merge patch series "Fix logic of OF_OMIT_DTB and remove useless dts files" (2026-09-03 16:12:28 -0600)
 
+are available in the Git repository at:
 
+  https://git.u-boot-project.org/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20260906
+
+for you to fetch changes up to d97390107f52447aa109b38106c234f55ee19fee:
+
+  imx: imx8mm_evk: Indent the config with tabs (2026-09-06 10:25:49 -0300)
+
+u-boot-imx-next-20260906
+------------------------
+
+CI: https://git.u-boot-project.org/u-boot/custodians/u-boot-imx/-/pipelines/1194
+
+- Add support for the i.MX93W EVK board.
+- Revert patch that added bootph- properties on the TQ Group boards as these
+changes landed upstream.
+- Several cleanups on Toradex i.MX95 boards.
+----------------------------------------------------------------
+Alice Guo (5):
+      imx93: clock: add 900MHz entry to fractional PLL rate table
+      board: imx93w_evk: add board support for i.MX93W EVK
+      net: fsl_enetc_xpcs_phy: Extract common PMA MMD init sequence into helper function
+      net: fsl_enetc_xpcs_phy: Add SGMII 1G support for i.MX95 Ethernet PHY Wrapper
+      net: fsl_enetc: Add 1G SGMII mode support for i.MX95
+
+Marek Vasut (1):
+      imx: imx8mm_evk: Indent the config with tabs
+
+Max Merchel (3):
+      Revert "ARM: dts: tqma6: add boot phase properties"
+      Revert "ARM: dts: tqma6ul: add boot phase properties"
+      Revert "arch: arm: dts: tqma7x: add boot phase properties"
+
+Stefan Eichenberger (3):
+      configs: {aquila, verdin, toradex-smarc}-imx95: remove CONFIG_SPI
+      imx: verdin-imx95: remove unused WDOG_BASE_ADDR
+      toradex: {aquila, smarc, verdin}-imx95: add board_fix_fdt
+
+Ye Li (2):
+      imx93: clock: add 450MHz DDR PLL rate
+      board: imx93_evk: add LPDDR4X 3600MTS timing tables
+
+ arch/arm/dts/imx6qdl-mba6-u-boot.dtsi              |   32 -
+ arch/arm/dts/imx6qdl-tqma6-u-boot.dtsi             |   36 -
+ arch/arm/dts/imx6qdl-tqma6a-u-boot.dtsi            |    4 -
+ arch/arm/dts/imx6qdl-tqma6b-u-boot.dtsi            |    8 -
+ arch/arm/dts/imx6ul-tqma6ul-common-u-boot.dtsi     |   32 -
+ arch/arm/dts/imx6ul-tqma6ul1-mba6ulx-u-boot.dtsi   |    2 -
+ arch/arm/dts/imx6ul-tqma6ul2-mba6ulx-u-boot.dtsi   |    2 -
+ arch/arm/dts/imx6ul-tqma6ul2l-mba6ulx-u-boot.dtsi  |    2 -
+ arch/arm/dts/imx6ull-tqma6ull2-mba6ulx-u-boot.dtsi |    2 -
+ .../arm/dts/imx6ull-tqma6ull2l-mba6ulx-u-boot.dtsi |    2 -
+ arch/arm/dts/imx7s-mba7-u-boot.dtsi                |   21 -
+ arch/arm/dts/imx7s-tqma7-u-boot.dtsi               |   24 -
+ arch/arm/dts/imx93w-evk-u-boot.dtsi                |  171 ++
+ arch/arm/dts/mba6ulx-u-boot.dtsi                   |   26 -
+ arch/arm/mach-imx/imx9/Kconfig                     |   12 +
+ arch/arm/mach-imx/imx9/clock.c                     |    2 +
+ board/nxp/imx93_evk/Kconfig                        |    2 +-
+ board/nxp/imx93_evk/MAINTAINERS                    |    2 +
+ board/nxp/imx93_evk/Makefile                       |   12 +
+ board/nxp/imx93_evk/lpddr4x_timing_3600mts.c       | 1998 +++++++++++++++++++
+ board/nxp/imx93_evk/lpddr4x_timing_3600mts_ecc.c   | 1999 ++++++++++++++++++++
+ board/toradex/aquila-imx95/aquila-imx95.c          |    8 +
+ board/toradex/smarc-imx95/smarc-imx95.c            |    8 +
+ board/toradex/verdin-imx95/verdin-imx95.c          |    8 +
+ configs/aquila-imx95_defconfig                     |    2 +-
+ configs/imx93w_evk_defconfig                       |  172 ++
+ configs/imx93w_evk_inline_ecc_defconfig            |    3 +
+ configs/toradex-smarc-imx95_defconfig              |    2 +-
+ configs/verdin-imx95_defconfig                     |    2 +-
+ doc/board/nxp/imx93w_evk.rst                       |   72 +
+ doc/board/nxp/index.rst                            |    1 +
+ drivers/ddr/imx/phy/ddrphy_utils.c                 |    4 +
+ drivers/net/fsl_enetc.c                            |   20 +
+ drivers/net/fsl_enetc.h                            |    1 +
+ drivers/net/fsl_enetc_xpcs_phy.c                   |  695 ++++++-
+ include/configs/imx8mm_evk.h                       |   22 +-
+ include/configs/verdin-imx95.h                     |    2 -
+ 37 files changed, 5121 insertions(+), 292 deletions(-)
+ create mode 100644 arch/arm/dts/imx93w-evk-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/mba6ulx-u-boot.dtsi
+ create mode 100644 board/nxp/imx93_evk/lpddr4x_timing_3600mts.c
+ create mode 100644 board/nxp/imx93_evk/lpddr4x_timing_3600mts_ecc.c
+ create mode 100644 configs/imx93w_evk_defconfig
+ create mode 100644 configs/imx93w_evk_inline_ecc_defconfig
+ create mode 100644 doc/board/nxp/imx93w_evk.rst
