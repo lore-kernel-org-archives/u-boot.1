@@ -1,199 +1,244 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6877CC79F89
-	for <u-boot@archiver.kernel.org>; Mon,  7 Sep 2026 10:41:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5903BC79F9E
+	for <u-boot@archiver.kernel.org>; Mon,  7 Sep 2026 11:56:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F26AF80C77;
-	Mon,  7 Sep 2026 10:41:55 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id O-v2131ojAkE; Mon,  7 Sep 2026 10:41:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0D8D780C79
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788777715;
-	b=N/YbutanqZtPs/9xv6zxclE8+94U0EfPHFlfaq5Sreyxy/fqp+NiOrM/wQQanFggxLWO
-	 1kskqexBSTA6qOj5UiXNEsoDLJDNvi3np/qtfFN48AZlmitmk00VhXsXWq0bMy/MULT5w
-	 BmwxmiZcj4HtsnstYwi9llXPVk5slhdT9sZA4ucl1Pltx/A/dof4sMN/4m4Y7skB5+HYD
-	 LOQM2911/23OU+xK7u/8cGOnbKOb2z0RFSEOFcnhPBN80shIEzzVOgm4uMXLN3PLgzU1N
-	 HjaEUa/++fuiugufTwCDksYeD30dNaoXfpWMGFGxOeCbGG05e8tu3ZcuuhXOn7lCoDQ==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788777715;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=K5kcJruOKknshQNjBEkBGXDZj7JNdVWYPY/G+7TGqGI=;
-	b=GWUblG0ITGQZiBk05KCrYKHOfOTk2d9q/tENRcoHbS0H/TR+DAvGvhRViEJYtj+VKFi3
-	 EljmIkk5SpslvCZGHyMDVmF/9ofU5bbQu2hUTUzcaT5IR+SNeuIah2lkMmbqaXL4n6LrC
-	 vGiDqtZvg8atmXCuTp/jZHFLyIYskz2zYdmX1elmRo4DzVUQE7HYoCZ88yJYHWtuRSvS6
-	 bF56uSHXPEAvMAUUXa0kcRz5tSaPGO//WwkomH6x/w7SNkAWotemeyhnCfJGAuMrfOAiM
-	 qyMCv0BKdbaMLSZK9UP5bcLypl/h/imiB26JPiNm4oEWk0dslNirooBtbVBgn1AhQ/g==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788777715;
-	bh=K5kcJruOKknshQNjBEkBGXDZj7JNdVWYPY/G+7TGqGI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Jir0JaOP5wvqe3/ay83Cq/E67gk0nr8tvDVHCbWgo+wWsnzmgsKKEkMqJz/vP8eu1
-	 Qo98M7DVZxbtgmtH0PGBuX3zmHqUaWd5AZ8EyJqNsP6ScL/0d+HNJ6pmpsUCNpmm88
-	 SRsgurUWRX3j48Ark1rsCOj5OIitG08WnVTC0XBFkvvaTwZh4s9+VCzkz5GHQJIC1i
-	 woYJe8V+sfmGew7m5Pns+yOiRlwLeSvEU1kBPTQzi/R8V2VROt9VZF+Un0jq7SnW9O
-	 ElwNuIpsuWVXFshTbv2SBneVmh9jKcIml8WorJG0AfVYi27HhNNhBy6Fqh4dtodGM8
-	 0LQ7wdkcBIaJg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0D8D780C79;
-	Mon,  7 Sep 2026 10:41:55 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 118FC49D
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 10:41:54 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 021EE6067B
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 10:41:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AF66560693;
+	Mon,  7 Sep 2026 11:56:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mUiPOSpoonIK for <u-boot@lists.u-boot-project.org>;
- Mon,  7 Sep 2026 10:41:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org AC02B60631
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::b133"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788777713;
- b=cAYVcszEVutPuNGK9YtxEPvsbdrzhiWXTJAvngnbT4Q8w69tVFO7SniSlDJPbwvpaODl
- lhxd4Gzjk0oLYwa7Uxrm4t96g2AVC/f55Swh5aSuQwV5bcV3wE0uByO16dLC/pI9QOW97
- Gd5R76LytoW9KC0sW4TYdfTH1ulNnQAJZ6qHXWw2CFPXPwfZRIKpVEZEo5IbwpbMJpMQU
- aQAzfsNOIy/7d3N/FGCDyMJbAGN9Au8HAWXtq6SwZBzwjZ4df+Ib7n1HLQ4yv7uD38b7B
- +hRlTgGxr8u9qt5Jl5LWjepD47OSDg2VXF9gixds5WYWFLpyvS0H3wa83nmukfATTxA==
+ id PeEkA6Ck6joD; Mon,  7 Sep 2026 11:56:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org C776260686
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788782184;
+	b=D+ax3btD55QY5z+txSFVr914VJ+ZSkrTGoIa3l2H1t2MciLulFYfLHMLQxzF43MAbqlL
+	 9ipqYwU1jY5L4SyShwyo+4Jsnz6whUm1lLamNOeS2FnBfGtqB2XeJzt8UKsWISnTa/zlJ
+	 lGx6i0aiYRu4wT47iM7QpaW/NK6kuuU+1ippOmDv6BFe91zU+XXILXRGVXMfs5/DqnBlS
+	 WpTbPE4wBO3vfs9dxtxf6pBQOqrCNGg7eDMNByokQTWId3xgFQo1eXddp0qOmif5rrxuD
+	 LnfxUvIhbiK/PmmIuso9Wy++qHFcVMsqX6AYG/WxMZnIaoHRcj2gpSqlcJL1NzyhMyg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788777713;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
- MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
- Message-ID:Subject:To:Cc:Content-Type;
- bh=K5kcJruOKknshQNjBEkBGXDZj7JNdVWYPY/G+7TGqGI=;
- b=X5FABlTbu9341WCPjyt3Pz1Jyapr/kBhhWAcHNIvd0HQs+O3aEDvTdXAK6aG3xkFaAxt
- dDLGwgTuCb4XN3xctIPAt65anMK1Y00xRTa/bIx3jH2fWUl7DCRumS0p5J4BDs9W8lq95
- oDCO5Rqj0GK2W1XB9WNp1GW93EnZBLQmoOPMT5vzMMZYyOn2XQruQm6e3E+TJxZ7rsmn4
- 29ddQ4RoabWCe4cAmWYwJmjMIymshkHu0VWL59bVCvsoAflQBrwp32U+WVE650KrTOSbV
- vJrsnGETBea+ERa15waF7JzRQ3vwxIjlP/YYOkrFtdL7MnyGPxcvMARQyPytQUHx8kQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org;
- dmarc=pass header.from=linaro.org; 
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=NnmX7zy2; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::b133"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b133; helo=mail-yx1-xb133.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=NnmX7zy2
-Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
- [IPv6:2607:f8b0:4864:20::b133])
- by smtp3.osuosl.org (Postfix) with ESMTPS id AC02B60631
- for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 10:41:51 +0000 (UTC)
-Received: by mail-yx1-xb133.google.com with SMTP id
- 956f58d0204a3-66fca0709caso1093018d50.1
- for <u-boot@lists.u-boot-project.org>; Mon, 07 Sep 2026 03:41:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788777711; cv=none;
- d=google.com; s=arc-20260327;
- b=oP989Rsk6EE8QjT1OVk9uPHkq+pfDg9aNvOe8s7nR6cYmBrR21ulQnoLkI+GveYNjt
- BJkr7Q1Ct7W8eD9CVjeW0lUEExW1nZTvdgogTf+LGbYaGmpj2RlkeoL9wA8Baj6YF4g6
- SftGewtjOJCu9RlUBJ9S2Ja9K190UBGZTqmf3iPvOqS2V7O3YGeuPhxOSIdoE+m6Ltug
- AV/hBDFWstdtJmPJrKm7fkpWD3ywQTykG02XcYtV3vBD3EhqESbMdjzzSkffgYV4oU72
- FWBBZM7qGneUxxDph0a6W1ltZzmxxhNIy3AtdOhcX91UTnq5ddfmlxtEibf0jfiNuYFI
- KMAA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=K5kcJruOKknshQNjBEkBGXDZj7JNdVWYPY/G+7TGqGI=;
- fh=KOHScgS57aWppvWk57f2AZd6dlIGFfLL7hQjSQnvDIo=;
- b=Oa3L9DmI7BQlYvZIohgjmgiJBKAjB6GtVj+NC3wvnv3fajsO+I8V7t5dPjHV+NKAh3
- bX4miFNoH+FRPa1+ymBhj7nj485dnDijrb/4Bfjj8w9zaxvnAe4VaRZIlDw3XzHTvCTh
- VN4vvknY9tPZjC5wvjugV/znlqIkYuQbXUV59s2vg3ykuAZLf+pKpNrRWUrdAdNtfDc8
- TsoWVs2Y7fpBb/HSGJxQ+RUFN7KldmLt/hr7HStFRBKoRgsm+qV6FXTwIHUonj0sKOx2
- 94xmynDaWG3HvdHAOJVeQrGQH36SplKeJqE3KkmHFkXrEpT1NdeBk3NsWAKjBTfsHz7F
- sz5Q==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	c=relaxed/relaxed; t=1788782184;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=TwepCkWWlhPMy7d4ogTauUlLSEikkODbQ9InHv6ixyI=;
+	b=ahORk+AbnsE8Y/tnK4bhPL6zV0YBEz5qFzQ6jz4ja4z/8u2SWG6VLpYJZtlWnIWJhw/S
+	 1BIsFPQEnO76VigoE5AHjF+/UWBF6vnCMfLkS+jTSCSwrvbQXxDUO7moOExUzNlVDp6L6
+	 1LW6dzMifh5ROga9z7VeOLLSxpsQ+jYx+tgR05uxF4NjF+NGGHMrbmEwt7cOt+nLiZNCx
+	 Ys8T59epqX7aHGsZ4/R/q31yUp/Qu75CeEnjILQBMc1ikh3soGeosM/uLFAILAbOBniqm
+	 uc5XPffF9i0Oy7TaeNIcX58wc+Dqf15/Q7J6AidcGmWbsAP40r5QNqUr0u7xBBuzsqw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=euhkcfPu;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=RF2YVBZa;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1788777711; x=1789382511;
+	d=lists.u-boot-project.org; s=default; t=1788782184;
+	bh=TwepCkWWlhPMy7d4ogTauUlLSEikkODbQ9InHv6ixyI=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=LCFtrRGQrRbOUz5x1TdTP8oBNOSLxKGxOLRMtGQEjhlcLvD/Jxdt0a7Y/lB4Ashmi
+	 3OEBSDsrfoW7HgNZx6AGcLW85m6uWdJX4AdDVXlUpqyjZP9Uk93Jah++8xvmJhPFde
+	 hicJMDVptMyshwjIV5kTMtBigDcYwskBjtEh63mSjVBenzOXUfnpNdONw1UMJSGEG6
+	 ZZyNxICB3Jvkw2KbI91js2cd06lI7Fz5ywFc9TkNg++mIhyS/j/gPM/JxD3A5xUGqS
+	 wfpT5fQ+K5bYnjkbcEq6FENprQQIqkgKSzThIoQEB9Lhki5RJojsESxCTz75OzFJCw
+	 Gy7TcTGrRsbgw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id C776260686;
+	Mon,  7 Sep 2026 11:56:24 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8B24A990
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 11:56:23 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7D48C60686
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 11:56:23 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JjLmUvRdhwtV for <u-boot@lists.u-boot-project.org>;
+ Mon,  7 Sep 2026 11:56:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A5DB1605F5
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788782182;
+ b=CBnoy+mC5lzJxcNnL76zLNMKNWrVn8yy3LL3TV4KM8V1WtmhTNbhDT9f4zD3wECjrmQ7
+ c+IOdPuMtPmlHBZvKo9my5LqHGV341u70RnlDNff2GtNeeyUU3FCPx8M5iXARW4XboJ5O
+ Uea6+J1Fww9eU5E2ASJFLuxm4onfiinySDEXsTlmQxEXOgcCG5hffqHFR7Zyzvm3+FBvL
+ kZBn8gIFn+y+YCiMea7PbvosUOP/2HVjcjIcXfb6iC9C9dli0swfm4wSQRFbjgxMhKbjO
+ hLu+osde+ujjRcyJ7DQBU1mOTK9kw2GVVtuTHBUYaxQFfxfa1fdOAyYqK+BA6je8Okg==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1788782182;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+ X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
+ X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+ X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+ X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+ bh=TwepCkWWlhPMy7d4ogTauUlLSEikkODbQ9InHv6ixyI=;
+ b=eDj8aUU0uQKYziS27rG+koy1rheRZ4zmOo2zYsFJXLARdfKJv1gNX5RE1MGCHP5HS5Y3
+ ekA8PA18bqKH/eZkXuxe1D2f5Ae+wLt5woJWXG66vUuQFq1ZBKuiQDNfWZP1cPXEOGuWw
+ sJldW1Q0B2K02G+55UX+QP+90kWGqwetlDejuUJk+OsLFowQGlmVcvjYKjUvYwXDqcXq4
+ c03EbvZnOIXmF0LdDuryV68dQbf/doATqhJef9RBe8R2wlcFdvpd1Ma+nUKTjudQVDOLc
+ oZO8LaYT10CE6k6krjCW1RpiLYIhD6UORkjra8HeZUdZXncsaOeQdHuRETzW878scfg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ dmarc=pass header.from=oss.qualcomm.com; 
+ dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
+ header.s=qcppdkim1 header.b=euhkcfPu; 
+ dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=RF2YVBZa; 
+ arc=none smtp.remote-ip=205.220.168.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com;
+ envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=euhkcfPu; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=RF2YVBZa
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A5DB1605F5
+ for <u-boot@lists.u-boot-project.org>; Mon,  7 Sep 2026 11:56:21 +0000 (UTC)
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 687AmuTc3349032
+ for <u-boot@lists.u-boot-project.org>; Mon, 7 Sep 2026 11:56:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=TwepCkWWlhPMy7d4ogTauU
+ lLSEikkODbQ9InHv6ixyI=; b=euhkcfPuw3yRZKRerOqOgj4qmcdEq5QzZYtRkB
+ /XZCLEl+GykR4FPW74Y+SzE2cujci910m46EuQkxeKhi9riZgDCCU9k6Pb9yIABo
+ hVxHmiH8EL+gj68DDImdHahKrQijMSof9DzAV4JtaOAQIg8kjHZsjDer/BqsmHB2
+ g7VGjT+V5dgQNE4slOUbL+IMf1v9PLp4E4P0zZoSLqCrbIAnG+XEWvXVir8RsrWz
+ tXf6qvynHGQw9h5puilfKV0P/H6LMfcg5634X+k+N05WPxiocL05LonomhRjMP+M
+ X35iD4Q5Ym6Weh13OmwpDY570ivZLX5LgKk7oiGBtH5LgcVw==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghtfx0mr6-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Mon, 07 Sep 2026 11:56:20 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2d959904658so60794145ad.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 07 Sep 2026 04:56:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1788782180; x=1789386980;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=K5kcJruOKknshQNjBEkBGXDZj7JNdVWYPY/G+7TGqGI=;
- b=NnmX7zy2djD1V0tIsCjTjF19NDt1FxX0qMFIFnYpuuRZw/MYlWbCnnB4mgKK9EbNhj
- 7m28Suy2GoJlf1aLGr/thn7TKw3Nd+wIR9JPSbfMAnBJjHXXxBmmRqJVInOlGcVN8P5g
- FWHWLjmEs0wRSVA7VwcGYZnVTGALpJrV+F63mxuc2qxWAmTJ5G/2cifUeSfcLZylMpkg
- heTfa9G1+gumWEfLDToGBuwNzfEOwJCRjeP/1l1mx3Wz2LZwQq5qnVansXpVy0JtMbmj
- dkmxyZzhznDIssGJ8GUckBL4G9ajX95l7H9ujvKiRoOzXILk66w6nyVvDopV57oqsuJc
- fecA==
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=TwepCkWWlhPMy7d4ogTauUlLSEikkODbQ9InHv6ixyI=;
+ b=RF2YVBZaOu/W8BqI+Y2uv874I2ZW+ZmI5tXX15IgCs38plrunl0Ix7HUqjdl0Azwo5
+ Uau6Y09EowMsktoT8pK+f/I3mJ+csnO59yu00BSTgQ06UVcLWVEHqMQdOvCtO4eszkzC
+ hQOQOxJdNXNZDGtxMjL2POOj3Znd2nBcITLgxO1WNSTwKFjKDtMrN+CAdq2IJKC57Vxy
+ xdkJPmfmkWF7/UNYYh0WLlIjIF/FR8TgTMEsx1nVsasjHgcDZGb4BtsvDn02R5RDMgYg
+ Fbc+Jw1lwpwpFy505N3YPBPgpfEzVOGs+WNdy5wLUZcZtllPbXckRzdws4Yda8MLJMm7
+ dqzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788777711; x=1789382511;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=K5kcJruOKknshQNjBEkBGXDZj7JNdVWYPY/G+7TGqGI=;
- b=dRsEPO+CgQ4+SOk1FV8pNge6zKwYFkDcm33TCnkVJohpDMJdd0jDH1sQEX28OZwxcn
- qubaIgl1uA35eu8sAFmaW2HFRO/4FXi3J643aO4yGdyUq/iElyLsa2twWdR4Vt1/vc6I
- 0f1VVWkd8SqdTEf+hSSdN+tMTWEXWA8nbujiTuB1HUMIDzJSM/DoJ8FrQ6qbWb/P8lbc
- LEbSM+TlRoBQhlBRA6zAIh0jornLCEGEIiAuoal94jWCqt3edpFKmEnsFnpLj0hS9V0s
- iyi3gfHegIN7RAo0aLMJocS4Y/OeV1sZYWE4ACbVCwgWMnYHHwbr7PifQny5ctesEnIv
- 7qpQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzRLahoQLb/lyMeqo2ata5o8tyuS+uYQf3XsPBVG1EcI2bvExwShChm0mPcc3pDPBPPnZDz888=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mW3Fvj/hlotTYI1GXTSi884Ej2+kQdounoobtY/Tu3DXnFD9E5
- f9/bXCp0K4A/blamV/ShqrrzEIlRbod5JyQBBXTst+E/gaUfLzBFGWUgqOLCjxNC3kIQ40CArKG
- HQHyCBC5zEL4tpwfXfQYRvVTO1vq4IiXdVkKgXt5Ogw==
-X-Gm-Gg: AYBFou27G3MOCy8P7YROQ5Hx0/B280htwEYptCVfv36nMTuGlfgKU0VQDAFMxOpfZGF
- 3LwYgiJm4bgUIhYkzjxhREpyrnMHlpF98eLQoazOTr6QlVLuqs3Dsj7n+yCpm1SRtfsEDIAi4/B
- Wcdpk00yZwsYyd31krDt0+aXHz6iU7lh2pH4mDItE3GEHcxD0Rn02+2QNG7KLUqDb4cTqOifNtc
- RjDMYWnD9S36Fkd3Z4ipUImfe6J/AqTvYdeTQznVil71gwJsv2fEWdc+DMfFZ//6HHFz7XS7QVt
- AbIm0ay1DvaWnDhrke+1Lfb698l5+8xfpy/lahoJkPbyFPSzkDwpB6J0rMlwGs7lkRSLBsxRr0I
- Rc/hZDWObjzVyzxnawYPlVhIpU0wRe+dzzTXu7oqL832Evdvh9AKXPSteuUbsS/GvQzXGPlfNSJ
- 5kP7P4DWNQEj604EMrLmEYJCJXLBAFb+m4bRv93srrWTJcKbgKm1JUcpgvQCgQQ9amM0O2pe0mZ
- HyN9TpNP2zNiptzRTZ7xPqNGBfBAjgvxOfJO9RkMbMiSR0DQ7rf4EjVZIKOLIOLLJ/l6or2VzCV
- uaJTpz4B4oXrZrsxxmHkUzyR3IMGbBrP66RsM1c+9BOZ7PWRMd2zcC9AqMonLq4QNubtoBOcbW7
- EIh73xuz4F3DdgqGtU48h1Sl45kI3U3FvMzlFA0M2Hl4=
-X-Received: by 2002:a05:690e:191a:b0:66c:5045:d9aa with SMTP id
- 956f58d0204a3-66fb5a6f8e8mr6868934d50.29.1788777710547; Mon, 07 Sep 2026
- 03:41:50 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1788782180; x=1789386980;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=TwepCkWWlhPMy7d4ogTauUlLSEikkODbQ9InHv6ixyI=;
+ b=SruiiWy7zN+oT4btr4F1x0QKGtG2TafmjU8sX2zhxalbtTAxm2TY4vpYP6ThlEh2vv
+ Reu62l03aQlyyMYAA0WGM9t0mDjptP8fwuezAGlyfg8NuhT1mVx2PU+c0BxUgpJWOUru
+ Oj2jbzOsq+WMYLWqRHiuzznOLnLSryTX4Fco0rlySKacFqcpnUOqbptH6S1a0aMqZl4V
+ D3SWpbHRs2woL9IMsWjj9KOzu8UsXPK6rn2Tg/eKame5rQauHx5i7K7CK49K/3ee32L7
+ tjl5gZ4WrvHm4EseLi//A3VaXwut/fkPUo0vv4yR5/OlYEe4jZdspNIyvF2xbOjzFWWm
+ 1paQ==
+X-Gm-Message-State: AFuF++nMWvcA/sFYpIXlSCAmJconL+rxCwvsJ9FNgWFvpSYa12WfAkcr
+ IWySGFbJXbubS0gTfA+MPM0ZnXLogWwqrNn7yT1/15JE27cifb7Jz4ZAP6OepM6zp5uL482uClK
+ O+N7nbW3XJnPVDmkdqyWYNuYuV28Dik8eLWHkFiAUJ9tVdyU7fAIUKnSeqWGr2oR/S20YdsA=
+X-Gm-Gg: AYBFou3gYx+lo5MFuLC5QZLf0YZfJISNHoCrrhi9tXXOaJDQaeAEnGkbSa97oXU/cFz
+ 9e75RTmugNScAHEXaC/z68SROHXXsBsxPY1cPFCWRVp8ahcgZ+S2+FNM5w95MSPisE+2Ri37y4l
+ jyAx1faEhFO81HahhmEMsc8rM5cpXlJEUq5JOkDDmcYGvbZ2C22830AnqhuiNIgP5IYfYNgCQmF
+ 4MbvXmVtr6mrP7vLyFHljwqv0NiOVskhRTe1C5MCv6+Hh5rxyNmBEjktuuD9iMA+eLNBG+X+S+l
+ WaHCzbjNL7iK3ULGW/jPzf3WTK96a2Pl1OZqqTJCWTgSi99deiRXgSOBciF2Lc0TksqlniuTc/a
+ y7ACT9CFHIC6zIIAqoOm8om8V5PXZaTJW3aLXjpIxwO51w/8BnN+iBObh9vGABp7LfYMfnpeyjn
+ 29oGOMfrU+QEot4gQ9c+Qnd0ynoq66
+X-Received: by 2002:a17:903:1a4d:b0:2d9:43f5:b462 with SMTP id
+ d9443c01a7336-2db125a4758mr367922455ad.5.1788782179981; 
+ Mon, 07 Sep 2026 04:56:19 -0700 (PDT)
+X-Received: by 2002:a17:903:1a4d:b0:2d9:43f5:b462 with SMTP id
+ d9443c01a7336-2db125a4758mr367921915ad.5.1788782179514; 
+ Mon, 07 Sep 2026 04:56:19 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-33688cfc714sm10492029eec.20.2026.09.07.04.56.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Sep 2026 04:56:19 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Date: Mon, 07 Sep 2026 17:26:14 +0530
+Subject: [PATCH] lib: lmb: return -EFAULT for partial bank-boundary overlap
 MIME-Version: 1.0
-References: <20260827121108.1775123-1-suraj.hanumantkakade@amd.com>
- <20260827121108.1775123-3-suraj.hanumantkakade@amd.com>
- <CAC_iWj+WXkNAZPyRup4w09jSyr6TbkjLgZRyDxKzCQdFaK8-4Q@mail.gmail.com>
- <20260827163731.GE3959812@bill-the-cat>
- <IA1PR12MB952914F6FB38C8B02761B6C189B22@IA1PR12MB9529.namprd12.prod.outlook.com>
-In-Reply-To: <IA1PR12MB952914F6FB38C8B02761B6C189B22@IA1PR12MB9529.namprd12.prod.outlook.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 7 Sep 2026 13:41:14 +0300
-X-Gm-Features: AcwNN1UWIfUsh3lI6mw9qg0Z0cCjL5xzTgGYBXeuyQ6uQ4gfvu_zW8AM2xVpJGM
-Message-ID: <CAC_iWj+EvSRi+O3fH2CsTT59vk8u8RyAcYNdEm28Vhq7acxRfA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] Makefile: drop GNU Make < 4.0 compatibility code
-To: "Hanumant Kakade, Suraj" <Suraj.HanumantKakade@amd.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260907-lmb-alloc-addr-efault-v1-1-7a5b73c2318c@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAF2mnmoC/x3MQQqEMAxA0atI1hNos1D0KjKLTBM1UHVoVQTx7
+ haXb/H/BVmTaYauuiDpYdnWpcB/KggTL6OiSTGQo9q1rsE4/5BjXAOySEIdeI8bMrXkSbghL1D
+ af9LBzvfbf+/7AS9j3WxnAAAA
+X-Change-ID: 20260907-lmb-alloc-addr-efault-a29212da721d
+To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>,
- "mark.kettenis@xs4all.nl" <mark.kettenis@xs4all.nl>, 
- "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>, "Simek,
- Michal" <michal.simek@amd.com>, 
- "git (AMD-Xilinx)" <git@amd.com>, "Begari, Padmarao" <Padmarao.Begari@amd.com>,
- Simon Glass <sjg@chromium.org>, 
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>,
- Borislav Petkov <bp@suse.de>, Michal Marek <mmarek@suse.cz>, 
- "Belsare, Akshay" <akshay.belsare@amd.com>, "Kummari,
- Prasad" <Prasad.Kummari@amd.com>
-Content-Type: multipart/alternative; boundary="00000000000005070b065ae244e4"
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Randolph Sapp <rs@ti.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788782176; l=1990;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=8PdCm26FFpmLAbGrWuokO780DJY0KsK5cAwpmhhgkHo=;
+ b=ZO/uDbtEY9LxSJ6M5Yd3FYFADMBskdhndyBE9gGBPTV7UGHuEc1qPbIgFKblKAJaTJ9ZS2WFc
+ 2um3xp/vax/A6VIeMC+zNoEDnTbl1JHUNRaX17MFKccp3A9M1XltzHs
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Authority-Analysis: v=2.4 cv=Weg8rUhX c=1 sm=1 tr=0 ts=6a9ea664 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=NA7I0oHMnQhyuj0z4kAA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-GUID: 86wGw2w7a66iXnr7XH27naE3YwlHPpV9
+X-Proofpoint-ORIG-GUID: 86wGw2w7a66iXnr7XH27naE3YwlHPpV9
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDEzMiBTYWx0ZWRfX9+BGJ2n0GiV0
+ tBRsn6jmdQEUOHm7TF5S7RyKhHF3b6e6k2ExgqKo/rm0SvVuMhB+MnVUDhLpuYFGAXw8l/46Uz7
+ PO3cc/UU9Q7d0sYYEHbdDzMKenF6sVY=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDEzMiBTYWx0ZWRfX63IJRgs9Arrz
+ 8vKmRWq+tq70OSXIl//k4fr9G1ORm8fXrnTvyKyOVhb//PpipDgGxk1x6jkPFc9IDihOLc59R33
+ Y3LeUOT3jXa4k4TPuQOZtA0V0CvuZUVKnA9dmHTVWCyRONupL/EGSmNqErAzZkus6cNPx4Y0m+x
+ cxt8zCzDeusvUA5jP3u5g9lCPFBquihVYeB2M1oiBT/LLAeKJJSBMLp2QmYU2bDJFrBjv4LhTP2
+ H5ONfEY/4ek9hkfi3hr+xgrUBUZ3guYQN9p8X30zcfu04CNmQxKpx7ZtwN9MOLWVKYaXJHBh8+9
+ Vkup+hlaiYelcTHN4+y8JfmcDswP0VCUKIEISIUsTJqIKxH6Qr/aMH0SxwDwepDMuAzoAm4TYOL
+ dGTUcx9lySLM7LxQn8ZHAB+PbsQ9HzZ4PNKELNN6FI2OC8nt0dVPuodUY1R7/dbTATU3mS6uYLJ
+ wuyb2qAskinjXyTqLmg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-07_03,2026-09-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 clxscore=1015 suspectscore=0 phishscore=0
+ bulkscore=0 spamscore=0 adultscore=0 priorityscore=1501 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070132
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -207,225 +252,62 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
---00000000000005070b065ae244e4
-Content-Type: text/plain; charset="UTF-8"
+_lmb_alloc_addr() returns -EINVAL when a reservation overlaps an
+available memory bank but does not fully fit inside it, and -EFAULT
+when it does not overlap any bank at all.
 
-On Mon, 7 Sept 2026 at 08:24, Hanumant Kakade, Suraj <
-Suraj.HanumantKakade@amd.com> wrote:
+So for the partial-overlap case, it returns -EINVAL and
+boot_fdt_handle_region() in boot/image-fdt.c prints "ERROR: reserving
+fdt memory region failed" during boot which makes it sound like a
+serious error.
 
-> AMD General
->
-> Hi @Ilias Apalodimas <ilias.apalodimas@linaro.org>,
->
-> I do not have access to a macOS machine, so I cannot check whether the
-> host tools still build with this change. If you have macOS or access to the
-> macOS CI jobs, could you please look at that?
->
+So to avoid this, return -EFAULT for the partial-overlap case also, so
+boot_fdt_handle_region() suppresses it.
 
-The tests run as part of the github pipeline. If you open a PR there you'd
-be able to test it
+Updated the -EINVAL assertions in test/lib/lmb.c's test_alloc_addr()
+that cover this boundary case to expect -EFAULT.
 
-Cheers
-/Ilias
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+ lib/lmb.c      | 2 --
+ test/lib/lmb.c | 4 ++--
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
->
-> @mark.kettenis@xs4all.nl <mark.kettenis@xs4all.nl>, would you be able to
-> test this on BSD and let me know if you run into any issues with the GNU
-> Make 4.0 requirement?
->
-> Thanks,
-> Suraj Kakade
->
-> ------------------------------
-> *From:* Tom Rini
-> *Sent:* Thursday, August 27, 2026 10:07 PM
-> *To:* Ilias Apalodimas
-> *Cc:* Hanumant Kakade, Suraj; u-boot@lists.u-boot-project.org; Simek,
-> Michal; git (AMD-Xilinx); Begari, Padmarao; Simon Glass; Markus
-> Schneider-Pargmann (TI); Borislav Petkov; Michal Marek
-> *Subject:* Re: [PATCH 2/2] Makefile: drop GNU Make < 4.0 compatibility
-> code
->
-> On Thu, Aug 27, 2026 at 04:29:29PM +0300, Ilias Apalodimas wrote:
-> > Hi Suraj
-> >
-> > On Thu, 27 Aug 2026 at 15:11, Suraj Kakade <suraj.hanumantkakade@amd.com>
-> wrote:
-> > >
-> > > RHEL/CentOS 7, a popular distribution that installs GNU Make 3.82,
-> > > reached EOM/EOL on June 30, 2024. While you may get extended support,
-> > > it is a good time to raise the minimum GNU Make version.
-> > >
-> > > The new requirement, GNU Make 4.0, was released in October, 2013.
-> > >
-> > > Raise the enforced minimum GNU Make version to 4.0 and drop the
-> > > now-unreachable compatibility code for older versions:
-> > >
-> > > - Add an explicit "GNU Make >= 4.0 is required" version-check gate.
-> > > - Simplify the "make -s" (silent mode) detection to a single
-> > >   unconditional check instead of branching on make-4 vs make-3.8x.
-> > > - Drop the GNU Make 3.x sub-make workaround, which is now dead code.
-> >
-> > Overall I agree on bumnping the minimum requirements to 4.0. In fact,
-> > I think I did that when I did the Makefile bump to 5.x. However, the
-> > macOS tools stopped compiling. We need to check the CI for that before
-> > merging this.
-> >
-> > >
-> > > Fixes: ffe29ebc0701 ("kbuild: sync top Makefile with Linux 3.18-rc1")
-> > > Fixes: 5f520875bdf0 ("kbuild: Bump the build system to 5.1")
-> > > Signed-off-by: Suraj Kakade <suraj.hanumantkakade@amd.com>
-> >
-> > Why do we need fixes tags?
->
-> Yes, the kernel didn't enforce this requirement as the minimum until
-> around v6.10 or so.
->
-> --
-> Tom
->
+diff --git a/lib/lmb.c b/lib/lmb.c
+index ca00047f624..745410a8895 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -752,8 +752,6 @@ static int _lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
+ 				      base + size - 1, 1))
+ 			/* ok, reserve the memory */
+ 			return lmb_reserve(base, size, flags);
+-
+-		return -EINVAL;
+ 	}
+ 
+ 	return -EFAULT;
+diff --git a/test/lib/lmb.c b/test/lib/lmb.c
+index 168c66ae649..e6c05a492df 100644
+--- a/test/lib/lmb.c
++++ b/test/lib/lmb.c
+@@ -781,9 +781,9 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
+ 		ret = lmb_alloc_addr(ram_end, 1, LMB_NONE);
+ 		ut_asserteq(ret, -EFAULT);
+ 		ret = lmb_alloc_addr(ram_end - 1, 2, LMB_NOMAP);
+-		ut_asserteq(ret, -EINVAL);
++		ut_asserteq(ret, -EFAULT);
+ 		ret = lmb_alloc_addr(ram_end - 1, 2, LMB_NOOVERWRITE);
+-		ut_asserteq(ret, -EINVAL);
++		ut_asserteq(ret, -EFAULT);
+ 	}
+ 	if (ram != 0) {
+ 		ret = lmb_alloc_addr(ram - 1, 1, LMB_NONE);
 
---00000000000005070b065ae244e4
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+---
+base-commit: 509312dc5386ff4c5adabf53a573abca0aac4ce5
+change-id: 20260907-lmb-alloc-addr-efault-a29212da721d
 
-<div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_default" style=3D"fon=
-t-family:arial,sans-serif"><br></div></div><br><div class=3D"gmail_quote gm=
-ail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, 7 Sept 2=
-026 at 08:24, Hanumant Kakade, Suraj &lt;<a href=3D"mailto:Suraj.HanumantKa=
-kade@amd.com">Suraj.HanumantKakade@amd.com</a>&gt; wrote:<br></div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
- solid rgb(204,204,204);padding-left:1ex"><div class=3D"msg-260954884333892=
-075">
+Best regards,
+-- 
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
-
-
-
-<div dir=3D"ltr">
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-<div>
-<div style=3D"font-family:Calibri;text-align:left;color:rgb(0,0,255);margin=
--left:5pt;font-size:10pt">
-AMD General</div>
-<br>
-</div>
-Hi <a href=3D"mailto:ilias.apalodimas@linaro.org" id=3D"m_-2609548843338920=
-75OWAAM452375" target=3D"_blank">
-@Ilias Apalodimas</a>,</div>
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-<br>
-</div>
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-I do not have access to a macOS machine, so I cannot check whether the host=
- tools still build with this change. If you have macOS or access to the mac=
-OS CI jobs, could you please look at that?</div></div></div></blockquote><d=
-iv><br></div><div class=3D"gmail_default" style=3D"font-family:arial,sans-s=
-erif">The tests run as part of the github pipeline. If you open a PR there =
-you&#39;d be able to test it</div><div class=3D"gmail_default" style=3D"fon=
-t-family:arial,sans-serif"><br></div><div class=3D"gmail_default" style=3D"=
-font-family:arial,sans-serif">Cheers</div><div class=3D"gmail_default" styl=
-e=3D"font-family:arial,sans-serif">/Ilias</div><blockquote class=3D"gmail_q=
-uote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,2=
-04);padding-left:1ex"><div class=3D"msg-260954884333892075"><div dir=3D"ltr=
-">
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-<br>
-</div>
-<div style=3D"line-height:20px;font-family:Aptos,Aptos_EmbeddedFont,Aptos_M=
-SFontService,Calibri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-<a href=3D"mailto:mark.kettenis@xs4all.nl" id=3D"m_-260954884333892075OWAAM=
-843157" target=3D"_blank">@mark.kettenis@xs4all.nl</a>, would you be able t=
-o test this on BSD and let me know if you run into any issues with the GNU =
-Make 4.0 requirement?</div>
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-<br>
-</div>
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-Thanks,<br>
-Suraj Kakade</div>
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif;font-size:12pt=
-;color:rgb(0,0,0)">
-<br>
-</div>
-<hr style=3D"display:inline-block;width:98%">
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif;font-size:12pt=
-;color:rgb(0,0,0)">
-<b>From:</b> Tom Rini<br>
-<b>Sent:</b> Thursday, August 27, 2026 10:07 PM<br>
-<b>To:</b> Ilias Apalodimas<br>
-<b>Cc:</b> Hanumant Kakade, Suraj; <a href=3D"mailto:u-boot@lists.u-boot-pr=
-oject.org" target=3D"_blank">u-boot@lists.u-boot-project.org</a>; Simek, Mi=
-chal; git (AMD-Xilinx); Begari, Padmarao; Simon Glass; Markus Schneider-Par=
-gmann (TI); Borislav Petkov; Michal Marek<br>
-<b>Subject:</b> Re: [PATCH 2/2] Makefile: drop GNU Make &lt; 4.0 compatibil=
-ity code </div>
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif;font-size:12pt=
-;color:rgb(0,0,0)">
-<br>
-</div>
-<div style=3D"font-size:11pt">On Thu, Aug 27, 2026 at 04:29:29PM +0300, Ili=
-as Apalodimas wrote:<br>
-&gt; Hi Suraj<br>
-&gt;<br>
-&gt; On Thu, 27 Aug 2026 at 15:11, Suraj Kakade &lt;<a href=3D"mailto:suraj=
-.hanumantkakade@amd.com" target=3D"_blank">suraj.hanumantkakade@amd.com</a>=
-&gt; wrote:<br>
-&gt; &gt;<br>
-&gt; &gt; RHEL/CentOS 7, a popular distribution that installs GNU Make 3.82=
-,<br>
-&gt; &gt; reached EOM/EOL on June 30, 2024. While you may get extended supp=
-ort,<br>
-&gt; &gt; it is a good time to raise the minimum GNU Make version.<br>
-&gt; &gt;<br>
-&gt; &gt; The new requirement, GNU Make 4.0, was released in October, 2013.=
-<br>
-&gt; &gt;<br>
-&gt; &gt; Raise the enforced minimum GNU Make version to 4.0 and drop the<b=
-r>
-&gt; &gt; now-unreachable compatibility code for older versions:<br>
-&gt; &gt;<br>
-&gt; &gt; - Add an explicit &quot;GNU Make &gt;=3D 4.0 is required&quot; ve=
-rsion-check gate.<br>
-&gt; &gt; - Simplify the &quot;make -s&quot; (silent mode) detection to a s=
-ingle<br>
-&gt; &gt;=C2=A0=C2=A0 unconditional check instead of branching on make-4 vs=
- make-3.8x.<br>
-&gt; &gt; - Drop the GNU Make 3.x sub-make workaround, which is now dead co=
-de.<br>
-&gt;<br>
-&gt; Overall I agree on bumnping the minimum requirements to 4.0. In fact,<=
-br>
-&gt; I think I did that when I did the Makefile bump to 5.x. However, the<b=
-r>
-&gt; macOS tools stopped compiling. We need to check the CI for that before=
-<br>
-&gt; merging this.<br>
-&gt;<br>
-&gt; &gt;<br>
-&gt; &gt; Fixes: ffe29ebc0701 (&quot;kbuild: sync top Makefile with Linux 3=
-.18-rc1&quot;)<br>
-&gt; &gt; Fixes: 5f520875bdf0 (&quot;kbuild: Bump the build system to 5.1&q=
-uot;)<br>
-&gt; &gt; Signed-off-by: Suraj Kakade &lt;<a href=3D"mailto:suraj.hanumantk=
-akade@amd.com" target=3D"_blank">suraj.hanumantkakade@amd.com</a>&gt;<br>
-&gt;<br>
-&gt; Why do we need fixes tags?<br>
-<br>
-Yes, the kernel didn&#39;t enforce this requirement as the minimum until<br=
->
-around v6.10 or so.<br>
-<br>
---<br>
-Tom<br>
-</div>
-</div>
-
-</div></blockquote></div></div>
-
---00000000000005070b065ae244e4--
