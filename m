@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 068FBC79F99
-	for <u-boot@archiver.kernel.org>; Tue,  8 Sep 2026 05:15:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F335C79F9E
+	for <u-boot@archiver.kernel.org>; Tue,  8 Sep 2026 05:15:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C03534052B;
-	Tue,  8 Sep 2026 05:15:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 563296067E;
+	Tue,  8 Sep 2026 05:15:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id a424K-PY74ne; Tue,  8 Sep 2026 05:15:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org C9AF7404EF
-Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788844513;
-	b=FRykrVbmM7fDhnFf15sXq0IIqS/4FNA0c7yaSEXUXrOixjncjeOER5UXBaHQZFqOjnib
-	 fyIRD/p+oZ38irzqtgnOQgGKUZ3lxPK5E7wIPKe+xEzLjCy8xKg6jvtGoj/yvSb7Trbvb
-	 Vo29/jMaXS7NktRx23dnz9l4pITSoynvlmLQylZFSvIuGPZvwpf6FLbCuR+x9F4fLDDNr
-	 yUa3FHzCR55QE/hHD2OSRSgrDenjrwdIEw09pg4RZl7gWzfQZzJNutml4gZSOm5pWUkbH
-	 9U0SPqQw2OFuXIx+y+SFGnMTVU/ZoNvBmHnCetTiRPdurYKUCe+Btq+6mX2QR2xyutw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3jX3UBiMSTGX; Tue,  8 Sep 2026 05:15:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 5DD9260650
+Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788844516;
+	b=HlTwPMF9nyMtk+UiBfkd7r0ZYd6+ARE0aRamVoXU28BtU60xXZl6GwB+iDjwK+g1zwam
+	 mp4faliN/FL9jixBqNipFa4AOYm3H2DEmfE2159scfzZ4SZHbtOlCFwJ3b41E/RoUAZvc
+	 /FoFb5Hox3fruY3V3ib3PnerL3zO3y/3ZB9tLxjY1HxtH76VX8CqRdRt1+m8kWfb7XKMd
+	 8kVTrHNjZOD7oR6dFaNVLS0b1uthas+LEOQKnj8/u1D0aBK5a9kmWvYZwJEGtRi/8cWls
+	 mDCk3FFt5WfAgA7VHynom4xkllAH6PxNklBCVUArhRYtwZGk8Mq4jHLgmfCmYmLpu3A==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788844513;
+	c=relaxed/relaxed; t=1788844516;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -44,57 +44,54 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
 	 X-MS-Exchange-CrossTenant-FromEntityHeader:
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Proofpoint-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=/YbIr4gAsvQjZNcN1yx/jA/7qP5lxjNY+8lJy+J38YQ=;
-	b=ad4dFtsRTQzHPWmcod4FSPGXqceNmNxJQis3nSTqKZZJcqjg3AmHswl6PcHYdLgVZpMK
-	 heoruvu4fBGaFmJoxV7PM2sXesQ+6707eU7G55HLyVUCkCWo5P7X7GbQuwx09Y09aLFwS
-	 LoZLGqAxuELhZLaQKY7dVdrggJfFgDFDv2KNeB6ekx36vbvOr0JxtcxW2+/f7vXgQaWwg
-	 INP0jhi0GMNOSwI/Iy6OyB0GO38BE2mXHtxuTuNeqbtLe5DidnfEPJTOfX+ryhpyZ5pbp
-	 jQ4hVlI9ZTlH4MgagbBpGHCGptNwLoiweenwUXYMV/0iqmxRDyzui0HwTAGizpXweYw==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; dmarc=pass header.from=ti.com;
-	dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=K1fh72pk;
-	dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256 header.s=selector1 header.b=mIaJBAJA;
-	arc=fail smtp.remote-ip=140.211.166.142
+	bh=yA1ntFD7ot1eFGtUxTsqpkoytXa9Fc7QMndzmvtPnok=;
+	b=oIeaOcCU/R80Fo0J1AdGYL9rEpw5MZyObAbbHv8uTecNyjKlsu0TmwkIOlbt/qYY01jW
+	 QtSGpc+pzCB1MWkS/7W0vMzyorDDliwjhrDW9MOCSxcjHRGcrRYi9g2xTr7BmBIIGp+vQ
+	 9JN2bPzPuZM3oxMGa/fccK96TlgSlYIxxkKaUYVZMk4odFl2lme0W1qOuZfZzSIaexhFt
+	 R1bQhTTZaW7HgI/1N+9otDma4hAZv0pX3wZ7k9EF33n6ed0ZyjJbpvRX37ZYboLurLBQR
+	 4ms8/rTj0mAukDx4wv/+lIQ+7O57HW48w19V4Ev4Gm0C3yprZ5zvKj/L7RZk4U19+Hw==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788844512;
-	bh=/YbIr4gAsvQjZNcN1yx/jA/7qP5lxjNY+8lJy+J38YQ=;
+	d=lists.u-boot-project.org; s=default; t=1788844516;
+	bh=yA1ntFD7ot1eFGtUxTsqpkoytXa9Fc7QMndzmvtPnok=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qNFUeL6Mz8Q77GOmSf6NFP0LiT18VFM8ZEc47LsdREsM5cakaTfcHV1o4J4mejo7S
-	 FTuGSHv6TmhBvqGMdT06cxwBoPkVMJ6LexvKZE55kjnSEVUZeMEk9oDjoWDIArpNCS
-	 hOBdNl8A8aAQG97njWS6RixmmAWH+UOqF3hFU5SiANVoV5cXJ4XtifcFJS/c8pudLS
-	 vxt3+lbV3eK9xcOJYdwbwxdewUUWUmAv1pWBH/w4LJkxu4Vs5fRLiYy5F5l9HYNgtJ
-	 DwjCBIoYa/3p+mGb693fbaLIvm7Edxxl6huFmWruk3o3hDGkps7uhl5ZF4/xVW+S4B
-	 T9DNn4hVBEZTw==
+	b=VzxkCOuSwtklDVBQCZLkxyP9TXBDnvUm6bhVjX5/eMoASu/is1I5SNyQuTF1uKEzo
+	 bkeAM5o7JtVQKDBJBYXyN8mJRfEBPK0f27ny9NCDnnS6Z4lFYgLXGEf82JHfC66I7J
+	 grWRzH5R4YYmTQoKz/NdYQAIW4pWEcLgmWiGXFEIJ2c/nrMnrce+KtUCzy54YFJ0mS
+	 SKyyWO5k1Ce/RUYT0GUIRmenP/6mHDVnAhCzHmjw6VCRVhB13AuO5NFMR3POe0jyZv
+	 86UJjkyiXjHmc6iXSyYgPoz8at3mrmkdOxwMoPDSI1kJeITzO+pOxivXA2E1v44FiG
+	 QeiZLLXAyJZlw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C9AF7404EF;
-	Tue,  8 Sep 2026 05:15:12 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id E37B0970
- for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 05:15:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5DD9260650;
+	Tue,  8 Sep 2026 05:15:16 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0BD98970
+ for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 05:15:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D5D2D4053A
+ by smtp1.osuosl.org (Postfix) with ESMTP id F18C6808A2
  for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 05:15:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id m-PXswCKWYN0 for <u-boot@lists.u-boot-project.org>;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GCM3Nu5VOUmD for <u-boot@lists.u-boot-project.org>;
  Tue,  8 Sep 2026 05:15:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org D6C8A40538
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=148.163.150.75
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 388E380898
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=148.163.154.28
 ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788844509;
- b=H22ojO8sPln5/CfGaV1SzVY8xzXkUSEGzzA1ojcOcz5csj4SevznqUX+CEiBpnva76sY
- 1dc8+4GLJUSSYyRgH4jpcvxqEdpnRdqjK2kQZUbDrDEC3wd9Av+14R/xq0ztyaKhWP+Kd
- 0vPZdFLhZPSW48cG5SVpp0iybjHU4Jnp36cY/oJSuxQgwtdHdBXxB2Cjw/DtJXPpKv45f
- pC4ry1jaiAktXVhM1c+oMS489Zv7pmrhfY4DzhcvDSbbtw3pjSFjl3JdTNfJJiisE2Xg2
- 5IyhQ7x7PpcG4VBbe/AQ6RO5CpEMdK5OYdKsRW83JoqoQxO8U1eNhMCfGg7UdShV5ag==
+ b=Awttgk4qdQt+1b+jgGFxfYEPxMLfkibMvgRcIgc2lzRrnVASNqOj8U3LU0p70/0feZ6h
+ gzh3PgmqUMQtYk+XmsG4TeJn+QAAY86YrGIWGeHDaexUOpOYF0bq+UzNEJkMpmm7xHnOa
+ RneAcYXWDAPa/U+rmQ94Si4Ak5Ntvh0UUMnQeSwhZNsBUHow3GgIqI/7XZ3PRYLO2blQs
+ 4kOLBm1AwqlTAwzot5aLVkYCNncRP7iIf6Cek3/DmhKog3NKtkGsVHNdLeDOKcmY5MPi4
+ Yu8Oex7c1fccsaK4Uc6IYqurDGZ4TSoMjHxhuXSePyXZ3KBTpu/bViHTmtJR8HdIy1A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1788844509;
  h=Received-SPF:Received:DKIM-Signature:Received:DKIM-Signature:
@@ -115,80 +112,80 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
  X-MS-Exchange-CrossTenant-FromEntityHeader:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Proofpoint-GUID:
- X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
- X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+ X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
  X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=/YbIr4gAsvQjZNcN1yx/jA/7qP5lxjNY+8lJy+J38YQ=;
- b=j9judKcLUbbdzNXfRQxpt4PdEAWBFJsshY3ePsjz8pkj8KuLEZYgzxWI3CVSrJ2ZE/7k
- sCEnKa/oj14pq+kkq+9IIc4koDAC3tT7wF+TIS2XWFCrLXRQuh2RRF404epVImVgZ6MZG
- nuPMOT7POIR1M3lxv9V/6hDs7yUOTdcrb1ctJCPVgU8K5fN44kfUY2lF4xqr2Y5jSgwYl
- kg2MFz6RZN8C37LGBgCXuGEa7uXIn1BaloGsqbMQCC8NHOj+J3BFxaPiPybv3UxgDi8ee
- e9cs37kOCeAkh8Rcl45vnmWiQC2BdL9ArtT3aNdS1MKs6KTjrsK0u4zLU+qQx8rqBBw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ bh=yA1ntFD7ot1eFGtUxTsqpkoytXa9Fc7QMndzmvtPnok=;
+ b=pmBvKQ2NkZHNBtXUW70fkZ+J/22hWb1mNQiHdPz75MPEk9oIWWKNU0RcCj+5XRu/CFu6
+ kPDVtalpeZBLObIccvzEjnHdUfx6Y+YKgUbbzUTRRIYdKAX0QSBDYl219Qm6NT4kwdpbA
+ siGq2RresD6mjN3HdSEL8xv94AptWTg3eH8nc3ebx+34iwr3c7zyPKgre4zQgNIULoEem
+ 4nAYbxh+kqFux1r4JdArt4P3oaM728WQugseCnBEBsdt6j6eNYPI9hYMfDnEcaoD4QN6I
+ doobKXmdTWo6LiaW1mtdos8HoFwWN0WoEDFdrtvSsbiivMk7Z9hwalcrqblRi2zUB7Q==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org;
  dmarc=pass header.from=ti.com; 
  dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=proofpoint-05-2026 header.b=K1fh72pk; 
+ header.s=proofpoint-05-2026 header.b=LGy6dcoa; 
  dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=mIaJBAJA; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=148.163.150.75
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
- helo=mx0a-0002e601.pphosted.com; envelope-from=s-vadapalli@ti.com;
+ header.s=selector1 header.b=CjcSmwFi; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=148.163.154.28
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.154.28;
+ helo=mx0b-0002e601.pphosted.com; envelope-from=s-vadapalli@ti.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
- header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=K1fh72pk; 
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
+ header.s=proofpoint-05-2026 header.b=LGy6dcoa; 
  dkim=pass (1024-bit key,
  unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=mIaJBAJA
-Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
- [148.163.150.75])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D6C8A40538
- for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 05:15:07 +0000 (UTC)
-Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
- by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 687Nnlxa2679351;
- Tue, 8 Sep 2026 00:15:05 -0500
+ header.s=selector1 header.b=CjcSmwFi
+Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
+ [148.163.154.28])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 388E380898
+ for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 05:15:09 +0000 (UTC)
+Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
+ by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6881rZI4714343; Tue, 8 Sep 2026 00:15:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=/YbIr4gAsvQjZNcN1yx/jA/7qP5lxjNY+8lJy+J38
- YQ=; b=K1fh72pkKqkJwQtt+K9R5azQW3GqGqqKq+fRDvJP2/NhkBEyOsGBYMrPk
- rhXVp9FjN6Ecjcj47FO6ZDtIbcI7P3W11GytWeKgmO4j99mO3eK4UJnYZWSk5lPg
- zpTuwkowZLhWv+5CdB2HPlCgT92L7hSH8qytZaJe7bm395Nm8bA6WTe3TzHOoEVS
- BgwxLEqW5YErkoB0OXkHby5JXsht7ll/0QRtqxl/I9HefpNLuwZ8aqFfeVHGzGI0
- jhY1TSisy/tZNDv0j1L/CJMbY5gCJ6Ka1y27kn0eArq+k7NkhUdHFJ9+VZCGnDzI
- b1rJPPwTvAdY99yE3YfLiLpR36d9g==
-Received: from bn8pr05cu002.outbound.protection.outlook.com
- (mail-eastus2azon11011026.outbound.protection.outlook.com [52.101.57.26])
- by m0384305.ppops.net (PPS) with ESMTPS id 4ght65nd2v-1
+ proofpoint-05-2026; bh=yA1ntFD7ot1eFGtUxTsqpkoytXa9Fc7QMndzmvtPn
+ ok=; b=LGy6dcoacFxK+s5bI8qM6uEY8rIlmxU5Nxmkd9yXs1DI3BBZRf5Lg/kgN
+ C2L+1jvB4chA4ErMWL8mWKD+L+L76wjfBc76SG9oLYAZo/MdDZtGpUIl4AJnYAW+
+ mY9ccQIwVUfmkaGMk8eytnzkvxDCcgwWDbtDmPW6EzWJF/j8pNE00ZvOF97Yk0HA
+ ZLr3Kn58cek3UsfIYTKfjEz4vlMXtt/XRfr3XzhN5BpImOKUF39AwqIxEPyccUhR
+ icwzadi+Bl401c0Qh2Xh/OPN+qQZVA3fmllklkiDD5bnPohaxiHU+d7jTWsbCPOb
+ uZvoOfZdP3E3XJTXLBlmnO1Na6z3w==
+Received: from bl0pr03cu003.outbound.protection.outlook.com
+ (mail-eastusazon11012035.outbound.protection.outlook.com [52.101.53.35])
+ by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4gj93q8st9-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Tue, 08 Sep 2026 00:15:04 -0500 (CDT)
+ Tue, 08 Sep 2026 00:15:07 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aaz6pXQQroZ/ezE9hu7Xi41HZVM/5FPcJtvQybrgbKBQZGReFwWEAHjxiunrIdkAwSfRdL1d5hOin6PkM+i+NTj8obiVkhCINN74d7DaXDkkJx+q6c6soXSyY4m26UZ3MDzpeGPL+QRjDWNHF+Ax1GVWa4sZ/byi2C9Vaaz97iYk48+1SESGNSsPj3+ELtlcQwWPmZfltxexgh5yv/MB69nsuIU0zTJD5ROqWANixDwpVt2i/Ymc/5ljjjNudGHfymNAK8nX7u1Fymt3aYpLh1jJ5P3MroXG6GYPUdAIRgUwA4/rMqa3rg0bgZQzqnCyEzGvP9PWDi49dgHMmJccwA==
+ b=w3L6QfJ86nKZT7pujIg/ALKTED8P14mONui7w8Kt+XtLC7tRh8govYVRmYFfHXVKF/ffj3Am1H2BodYphcU07lWptnHIPgiebywGnlLD6SLpw/lfltaIhw4stm96DoiGf46zanrU2EV6mcmdDIOkQBuRrloCupL4ElxJ4CyT9y7jxNN4SvnJ/7nr6v16fAEo6dbPTzfnGwza5lF0mBXYyCISl31svMlR/gGJO8xo7MiFdU5imB06VNmyRp805wUvhBi9o9YDrJPY3iaOQIUybXUuiwTrnz2Q8dI991Fybm/6qzmrCuOkAAhsHIZMURzrVwlRtlizaPHDhQZCna1slw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/YbIr4gAsvQjZNcN1yx/jA/7qP5lxjNY+8lJy+J38YQ=;
- b=EUSCgLRmGChcYShY2JNAyzYkf/rKELPVhTR+oCFkDkKfewZ8LPQtdBtO8VN7bCQ5FMU6kbGJ+gtiZQu15Z+SORsY7C8xuNkd9WAffLOJqKpWEcuZWaq8jOoI2UlK0kEIu2q3gRhifV7xDJQEE2/m5Nmpd7EQzXntmDlgMMkPFp7sW4zFBFI/yMPJFkKbn0XWwMpPdx//JJ/XiKID2xFFV7N1b1dkm82qaJLP6cchiv/S9Je4NcL1G7hTl8H1et4+Yce1MPu2fL4Qigz7Q3TJAu6g4Ty0iZfgxaeUPpfmlr494oAI+Ul61BQQqaZxrWhequO52O0GMkizLdadS7Fswg==
+ bh=yA1ntFD7ot1eFGtUxTsqpkoytXa9Fc7QMndzmvtPnok=;
+ b=hHBPY9bqmshTCW+43S9miF+iVQMGkhMTITDe5ZTxkbPJwY1RpXFau/2JKZoRPFU6e3QJIuju1nWyZIo8Z2wea0ktcNjfhPnPg4LTK4LiX9qDb3r5MQa9/QT7SW/47Q822NKnWtZ4gQjINz9VTEuD/FpM5zsSFl2CtAkPJWs2J9lEHzbyXNG5+95LvGZlZ7WOkWQOOi34traH1HUaZyuJi5rp5/b/wJH+nje4sF/e+wvo6XFOpByGHJp6KDkEZrUvMGmeBpAzDGtUk3jy1wlejHJQp4wq0DjoCnu/t6tjWIYeD9EkQvppuY5SuubJ9kq1mkR6kzaS2fgKDrvgVFndiA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.194) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=ti.com; dmarc=pass (p=quarantine sp=none pct=100) action=none
  header.from=ti.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/YbIr4gAsvQjZNcN1yx/jA/7qP5lxjNY+8lJy+J38YQ=;
- b=mIaJBAJA86C0VMvST8QF6jT6u5uiI1RpnROOzfK819ft4WDUqGIoOelpB+G0disHUTiJmXSgrhByeuOV746lKZ15nHcgSdZY1XvSsWfcqRall0oSdKpOFn+vZ5wkunVfqvj4eU56MZxyGvu41F6g++W9eRrS7e5L3WJHZB1xNzM=
-Received: from MN2PR15CA0047.namprd15.prod.outlook.com (2603:10b6:208:237::16)
- by BY5PR10MB4385.namprd10.prod.outlook.com (2603:10b6:a03:20a::8)
+ bh=yA1ntFD7ot1eFGtUxTsqpkoytXa9Fc7QMndzmvtPnok=;
+ b=CjcSmwFiFgMt4MEDxGpY96aw2v3ywUilOefc+i7tWiDWXHnYNruoaEjkQTACscof0CQrq1PRNP9//x9FRR4uvVG4sPZ40Ohm5o3aqzD44mD0K1NDkuxT7utmrr9FP90bpAkpWLWVwUFLOa5gluRJyRnObYjAN0NUXzrmgN+tFak=
+Received: from BN1PR13CA0022.namprd13.prod.outlook.com (2603:10b6:408:e2::27)
+ by SA1PR10MB7555.namprd10.prod.outlook.com (2603:10b6:806:378::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.10; Tue, 8 Sep
- 2026 05:14:59 +0000
-Received: from BN3PEPF0000B077.namprd04.prod.outlook.com
- (2603:10b6:208:237:cafe::5) by MN2PR15CA0047.outlook.office365.com
- (2603:10b6:208:237::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.15 via Frontend Transport; Tue, 8
- Sep 2026 05:14:58 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.6; Tue, 8 Sep 2026
+ 05:15:03 +0000
+Received: from BN3PEPF0000B071.namprd04.prod.outlook.com
+ (2603:10b6:408:e2:cafe::37) by BN1PR13CA0022.outlook.office365.com
+ (2603:10b6:408:e2::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.6 via Frontend Transport; Tue, 8
+ Sep 2026 05:15:02 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -196,32 +193,32 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.21.194 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
 Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BN3PEPF0000B077.mail.protection.outlook.com (10.167.243.122) with Microsoft
+ BN3PEPF0000B071.mail.protection.outlook.com (10.167.243.116) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.406.5 via Frontend Transport; Tue, 8 Sep 2026 05:14:56 +0000
-Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet200.ext.ti.com
+ 15.21.406.5 via Frontend Transport; Tue, 8 Sep 2026 05:15:01 +0000
+Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet200.ext.ti.com
  (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 8 Sep
- 2026 00:14:10 -0500
-Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 00:14:17 -0500
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 8 Sep
- 2026 00:14:10 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 00:14:17 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Tue, 8 Sep 2026 00:14:10 -0500
+ Transport; Tue, 8 Sep 2026 00:14:17 -0500
 Received: from toolbox.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.68.110])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6885Dwd82811953;
- Tue, 8 Sep 2026 00:14:08 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6885DwdB2811953;
+ Tue, 8 Sep 2026 00:14:15 -0500
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <trini@konsulko.com>, <ilias.apalodimas@linaro.org>,
  <neil.armstrong@linaro.org>
 CC: <u-boot@lists.u-boot-project.org>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH v2 4/7] board: ti: am65x: evm: add support for SPL to update
- U-Boot device-tree
-Date: Tue, 8 Sep 2026 10:47:29 +0530
-Message-ID: <20260908051741.868824-5-s-vadapalli@ti.com>
+Subject: [PATCH v2 7/7] configs: am65x_evm_a53_defconfig: enable support for
+ PCI-USB2 daughtercard
+Date: Tue, 8 Sep 2026 10:47:32 +0530
+Message-ID: <20260908051741.868824-8-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <20260908051741.868824-1-s-vadapalli@ti.com>
 References: <20260908051741.868824-1-s-vadapalli@ti.com>
@@ -230,56 +227,57 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B077:EE_|BY5PR10MB4385:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0f782d11-161a-4e1c-3fa3-08df0d681fc3
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B071:EE_|SA1PR10MB7555:EE_
+X-MS-Office365-Filtering-Correlation-Id: 49bc7ff9-9c69-4cf9-404b-08df0d6822c0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|23010399003|36860700016|10067099003|18002099003|22082099003|56012099006;
-X-Microsoft-Antispam-Message-Info: Z55w0lbh4sK540xbUgcaIyAksvfnt8/7/xPvjCr6cTC/F8Q17LYVc92sfGnMTyfY0AtChTtj/KWw/hhjnBI3aQVhNGsXGy79ch7SQtr1I73Z2VdxOU41XHzIvM0TgQ3k2m8CFRF5D9JTraobrvbhR36+ZQatsbPEWynhVgJtLzqpyytW6llG8wQn++4EC7E/mvN3IQw1CQwu+ZqAMi1rvFLqZpzhC1T2ahsm+Awh4pFRG5cMxVCv4Oc1GRwXgP5a4oqLz4DdG4IxUkMLhjMoF2yCutDaIN6vaCVg2MhqfAO1yxBTxD2usAimlMCEfKtC06WtceDgHYSRTgVPTre12Nj0X7mwMkq0yvNzptMPR3vBK0aRi5PviTcIMHxjbritw4oabcidJYpxatmEgC1ukJszI9LsOXjQl7VEjZ5xBqwcyInL3qkMtq8+eowC0xqLeQuMwQuginqCzyxlArhr+WUMvccwgw61b3zWi2UzDSdmorPtAR0KCcxlblH6Wzau6oJNQmKJNE83QA9bvbl5PankcTtqwbCAHENgubiVvM4YYb1mUytj2PnZmre0H497/HerH9Zt+g+uhDMNBij9hmGfC1hsZJUHtGQCi5MMyg3L5JIFT+vC2Fx4eHr8P7u38IKcCElhHRRlmJSxdC5n8fvCtnvN5Ok3LeSDPIO4b+MfXJiUdfTXhGkY+hGqsovhDgCkXc5T5H/rgG3+vri7sA==
+ ARA:13230040|376014|82310400026|36860700016|23010399003|1800799024|10067099003|56012099006|22082099003|18002099003|3023799007;
+X-Microsoft-Antispam-Message-Info: cuDZDDjmQtsKG1RMV6SZSyPMo+yJlc5skHYwSQZRlWB2UNV65ZTBm7Z5HED0Q7LnvFhOg+pGUPY91HUJ5RWyA0bYJCASNNE9T8z4W9O+KcIc3G+wWH9suE2UK32SbCBj5LAxi/WYVy6mCikrwnaRQ/gNYqOIpWic5qXZkag8lE73hzfBHPc1EkNpRlwwv1tulfWgpgvfdtHRE1bjAYXzmsWbt6IQrIF33gQmUvC76sG2t+TfSeDCoRBc3aNeaIdY/rlYAZt3utoOj2s5YtpdlTORaubXmow4hxqIuphTr7H1/cWJjIyvAEOUt9+kADa6UAV4ctBlWCeaC34WYWpDz4MWjbm6EsRZgrL6grxaqLwzrr3k9yvrUbuzIrs1hSyp63BOqPaq+KoUxLrOoVtF/0mgKSNkVgFfiPd2BZhrg+7HPxTbu0jrwagZrJe6FHU7ivtX38o0Q//qbHra/Wg4FSkT+wGafXjNx4zXjj4GCFfdLNAAXBvLrhWBgPlGY5yESQBQC0YRZTh1sMy6WKH/tl1zZdcfGPqK4yEzqsaj50k5u935fvnJzAwLDTmAV2XIPIS/wQ8WH5JemalyTCVO3/zFEIPTJGeiNNkqEFOlnBt/rUUq98JO6BgzGflloRCp61T4pU0ytgarqJi2RWh98VqTz3T0i9QmRoYR2rWBAHw3D36bW7bcrmXIpJyfqNE4+wppvnJjBxNpGsVK1P5ZYg==
 X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(376014)(23010399003)(36860700016)(10067099003)(18002099003)(22082099003)(56012099006);
+ SFS:(13230040)(376014)(82310400026)(36860700016)(23010399003)(1800799024)(10067099003)(56012099006)(22082099003)(18002099003)(3023799007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: UtHq0e7K3HGGNi6Dc1SzETBdLwT8V7m/agZ/DO2eIr0TBpYUu0naS8U4usBgqHh92J9WkxvZVNZWCx4oVA6FneL9SkYS0S+w4drmW37c/QH11WfZddPKjJWFoy3uAUcc5WZ6nIrRIXOIRJAWGAn/hIMqoeAQNN/r/L75mYmtI1Mj1QCSlXGuTfS+s8+6YaDARWV+QN0tr1SV0Z75AaFvhcaIdEEENYcYWb7qRZAgCTWzELZOsPJJyat8iGA6b2XhGKyQEhMX4WcdhP6JE03n342K3hjrPyq0bk+RfgCN2Ye3ETGOxGG/gWZCZoX0FMiYSRpu0C3DhqBWo+GMHbVsI73QCYF9w+6rWfKTJga7F1q8A/qBvyOhLL6r78KatEc/HrotN2D/BcuAatexmDja3qwiFyhQGeMPPD1ZiUnchiS25yqfVQrhCe3G8cXAamfq
-X-Exchange-RoutingPolicyChecked: NK3B8nUl71rWBE1bsmDFVEwBP1b5lKeqSf0XvizuEw36UtiHIqTfLGn0lpIgbRUK9m4lY2oenNhxzaImTZtGtASYPeN5+XexOw33X45R4siKWe6PZisSha6v8kXbfh6/4wJD5ct/0FJ2qPnC1A+ko4UMHaXVWpNuWsqPDbnNvxeLYX+98+zVULOzOlBS/2B6Da6XqiSWDx3HsZjo0jhD8/A4/WkNltt/zwT0LqyIbJz0WpeaQVlYtSzHqyU5E1xh4+azCL89/GXvdphvtgqx6naRk8al4Zl0oSDFhR0DCSfIKVfQ105xST63WPckbUSDVbelkAdl/UCAjVCS04Zpsg==
+X-MS-Exchange-AntiSpam-MessageData-0: UZoxNTjGSOJFHb+/+rno+RQMxEphVwREK48M4a3MgxgI/pBbzvel+4JJ5PmRR9FVB/2EFI4R7tCr+ISEiTs5xmWWpIFVVrDGTR8olUuzz8omB7CLdYznXjHKaROuDBZQ8L20TBhdrFJ+Nky05INFN9P92u3D5qsNLlnI/a1SEmZznwYpPs1cZV84sZPyQkG+e1ynvfbifdle6VXbCadfWH3oSmX7XGxFZutDLuAbepyQbyRYIvV+he9paA36JN09VnaKaR5ZNQGRkBDId+Z6g/LTFYL84uT9bjKWHenbaIwad6QmmANSsfdJCzIRUsabc4X9tGbhqQ/uDXm+oqdpO987I2Gryp39KZWk/Lps+odOoo/jz73XdejeLjI+KXW5zopfilcBRLAjv2ddsMePNhki3SyyADBc76Gg7lMeKDNMXRWONM7hpKXlB5fyq///
+X-Exchange-RoutingPolicyChecked: p8kO3lda5yJpKc6vEx7PuDb4w3jNuqW3oFHWysPClv432hy+4g2oJGMnnkFk/RcWsRla2qPy2UM5imUFYRvkW+n0ZsbzLE2P6npTxwE/FLkNBayWmG8roQY/ISb1v279T46PnXhvpSp8jM3Pv2cNA40PUo94vfNrc0980Jf24BUn1cmf/VcEyLXlVUhFjEgOoB8xliHO4Ew7OPB7TytQxVaArfbiOjxn5hD9jIDCtCXhz3mIlZZn6qlDfmtRilbZHBVkBCI9fjL0Ve8phE33Z5lVWjEwCtAQU0i2X7rN078FAASvPWx4zH8TwbebbIs20xESWbMjMn+15gEFqfiF/A==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2026 05:14:56.9441 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0f782d11-161a-4e1c-3fa3-08df0d681fc3
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2026 05:15:01.9550 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 49bc7ff9-9c69-4cf9-404b-08df0d6822c0
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
  Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B077.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B071.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4385
-X-Proofpoint-GUID: c5bCkuvvzKe-a57LxjQoC9BchWOFcM5o
-X-Authority-Analysis: v=2.4 cv=I95Vgtgg c=1 sm=1 tr=0 ts=6a9f99d9 cx=c_pps
- a=pvbKGUK/Si0pumwNLfsG/w==:117 a=iwqwCZQqcuTv3JOpYdM7/Q==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB7555
+X-Proofpoint-GUID: vC0OS1tz-nCNf2HS5S_Z8MriktAlAF0S
+X-Authority-Analysis: v=2.4 cv=FvQ1OWrq c=1 sm=1 tr=0 ts=6a9f99db cx=c_pps
+ a=3/9ZW+mBBPtU5+OO10+n1Q==:117 a=iwqwCZQqcuTv3JOpYdM7/Q==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=VdqzKS8jKosA:10 a=V5UXEbMT0ywA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=taLDd7a_hP9WKsMzeGRc:22
- a=sozttTNsAAAA:8 a=CJpyKn4wwkOrDLVWNK8A:9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDA1NSBTYWx0ZWRfX0vAJM3IOaz3o
- X0lMU9jLLKqM5JcCdkrnmKwrAoC1wgy0lz7Yfqvlft9WIpx0+HgXu/d9bAvo4drDU25qzZGsfxJ
- N38x7hHIikAmy3dej+yhCyW0Jti1Yn6NqCdKLeBHp2321YptQHwzd84lcA37izYd7qSuWmFGqQw
- rquJz4ynI4OGUhyKCMhXgx01Bi7SPYW0fVtIQGLEe9UVoIx1bniFfmA44YI3sh0tou0rohmkgdr
- io5xS56VrRGkGK1ylEKR+lF1va0u3FigGTiw+u4oRtu+x0wfqAX+PkZYZP8Ef/PETnol1C0qCUc
- FkGKSAb3rtYtNb6rwBXWz+o3DIVZ5l//Y4oStdnO22CGivjeZ2y4zubIuGSBpaEL+51oV5gA5I9
- //us1xwSEl1H7GgX2SOKZs978FQK6KHh6X3fzvOhqgaru1hqcMm4Mf0J8Rdp87Chw1kzsjH7uIj
- hDaJHnP+eamFtBMB/Cw==
-X-Proofpoint-ORIG-GUID: c5bCkuvvzKe-a57LxjQoC9BchWOFcM5o
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDA1NSBTYWx0ZWRfXx60xxYsEmmLu
- wuUjIMVAaMVnr8Nhh7w2sRZA1XFcLMSv2zjZ6viE/AfSILzlFwXlgSFq4oMZ+4eB8OUDRQEdXDs
- BWglMhMwiltlVyHsdQMme0Iwpyx0Cn4=
+ a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=fPAWb5peG099m5CrUpKH:22
+ a=sozttTNsAAAA:8 a=V7vL_nJxelFXuZnW9_MA:9
+X-Proofpoint-ORIG-GUID: vC0OS1tz-nCNf2HS5S_Z8MriktAlAF0S
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDA1NSBTYWx0ZWRfX9l0SQRrbwHex
+ fT0J4JCARf8AgHNIMzHiWKo4aENOogX756XjoiAMcLu+xEb3YMW98Av5Gmr1Deg0jVs+0fVkV1a
+ WbrCfpyQ5Xr5PnztaYZM5JkgJjwHE0/KXmYO4j163e6NySw8qjdMaao4UE7q/UYl1Ij3gar3JET
+ Jr0Vdy+tPCXvwj0mL9bcpfP7+bYbAcljXg+rWQVKc7coyHT1kT4He8oPGPa1ShZzME3ONTgYqY0
+ J3Fb/yJ3u1wtNRvHCl+9Eo+VE31HJg8z/MsQweHULfgzHhC2+0HHZjGVGbk6pyPzbM6WLpI76+Q
+ 2dNKViWmB71x2OSEKLcpQftr8TVjW6vFWa+4/N7it8uDSyTsZbBtgFiTsinxtyj9a8YhAXDHHa+
+ HBxRoALoCwPAkgAa8dCRPLPKIZ+Czm4dmPeGRIvLHsCs+drYc7iknIawQ5aomKTpJ6NJoUIaZ9u
+ dYfTZfXC+rubAgZxorQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDA1NSBTYWx0ZWRfX19nO66Fvxxj8
+ uVoRxevXI8qdCTj0GosjENYH0esGh2OteHbOOasAPSe1Jn9mCDXwnn4p3pT48bsYp12ptIo46KO
+ Q594D6K/7MtxbJ05UHaWLyKIEzuJyZ8=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-07_07,2026-09-07_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 adultscore=0 impostorscore=0 bulkscore=0
- phishscore=0 suspectscore=0 clxscore=1015 priorityscore=1501 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080055
+ bulkscore=0 impostorscore=0 clxscore=1015 suspectscore=0 spamscore=0
+ malwarescore=0 priorityscore=1501 lowpriorityscore=0 adultscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609080055
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -293,149 +291,66 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Since the device-tree description of the peripherals contained on
-daughtercards that can be mounted on the base-board is present in the
-device-tree overlays for the respective daughtercards, in order to utilize
-the functionality offered by the daughtercards, it is necessary to have the
-device-tree overlay applied for the current stage bootloader by the previous
-stage bootloader.
-
-Two such use-cases are that of the PCI x2 Lane + USB 2.0 daughtercard
-and the PCI x1 Lane + USB 3.0 daughtercard which provide PCI and USB
-functionality. For U-Boot proper to detect and use them, SPL has to update
-U-Boot proper's device-tree by applying the corresponding device-tree
-overlay at runtime.
-
-Hence, add support for this.
+The PCI-USB2 daughtercard can be mounted on the AM654 Base-Board (EVM)
+to enable PCI x2 Lane and USB2.0 functionality. Adding support for this
+involves:
+1. Detecting the daughtercard at A53 SPL stage
+   => CONFIG_SPL_BOARD_INIT (to probe daughtercards)
+2. Packaging the device-tree overlay for A53 SPL to modify U-Boot
+   proper's device-tree at runtime
+   => CONFIG_OF_OVERLAY_LIST (updated to include k3-am654-pcie-usb2")
+3. GPIO support at A53 SPL stage for detecting the daughtercard using
+   GPIO pin 38 on WKUP I2C0
+   => CONFIG_SPL_GPIO
+   => CONFIG_SPL_DM_GPIO
+   => CONFIG_SPL_DM_PCA953X
 
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 ---
 
 No changes since v1.
 
- board/ti/am65x/evm.c | 76 ++++++++++++++++++++++++++++++++++++++++----
- 1 file changed, 69 insertions(+), 7 deletions(-)
+ configs/am65x_evm_a53_defconfig | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/board/ti/am65x/evm.c b/board/ti/am65x/evm.c
-index b35a9229033..1ee7ce5e30f 100644
---- a/board/ti/am65x/evm.c
-+++ b/board/ti/am65x/evm.c
-@@ -126,6 +126,14 @@ static int init_daughtercard_det_gpio(char *gpio_name, struct gpio_desc *desc)
- 	return dm_gpio_set_dir_flags(desc, GPIOD_IS_IN);
- }
- 
-+#ifdef CONFIG_XPL_BUILD
-+/*
-+ * Populated by probe_daughtercards() in SPL and used by
-+ * board_spl_fit_append_fdt_skip().
-+ */
-+static char spl_detected_overlays[1024];
-+#endif
-+
- static int probe_daughtercards(void)
- {
- 	struct ti_am6_eeprom ep;
-@@ -133,8 +141,7 @@ static int probe_daughtercards(void)
- 	char mac_addr[DAUGHTER_CARD_NO_OF_MAC_ADDR][TI_EEPROM_HDR_ETH_ALEN];
- 	u8 mac_addr_cnt;
- 	char name_overlays[1024] = { 0 };
--	int i, j;
--	int ret;
-+	int ret, i;
- 
- 	/*
- 	 * Daughter card presence detection signal name to GPIO (via I2C I/O
-@@ -242,9 +249,10 @@ static int probe_daughtercards(void)
- 		 * Populate any MAC addresses from daughtercard into the U-Boot
- 		 * environment, starting with a card-specific offset so we can
- 		 * have multiple cards contribute to the MAC pool in a well-
--		 * defined manner.
-+		 * defined manner. Not applicable to SPL.
- 		 */
--		for (j = 0; j < mac_addr_cnt; j++) {
-+#ifndef CONFIG_XPL_BUILD
-+		for (int j = 0; j < mac_addr_cnt; j++) {
- 			if (!is_valid_ethaddr((u8 *)mac_addr[j]))
- 				continue;
- 
-@@ -252,6 +260,7 @@ static int probe_daughtercards(void)
- 						      cards[i].eth_offset + j,
- 						      (uchar *)mac_addr[j]);
- 		}
-+#endif
- 
- 		/*
- 		 * It has been observed that setting SERDES0 lane mux to USB prevents USB
-@@ -283,13 +292,66 @@ static int probe_daughtercards(void)
- 		strcat(name_overlays, " ");
- 	}
- 
-+	if (!strlen(name_overlays))
-+		return 0;
-+
-+#ifdef CONFIG_XPL_BUILD
-+	/* Store for board_spl_fit_append_fdt_skip() */
-+	strlcpy(spl_detected_overlays, name_overlays,
-+		sizeof(spl_detected_overlays));
-+	return 0;
-+#else
- 	/* Apply device tree overlay(s) to the U-Boot environment, if any */
--	if (strlen(name_overlays))
--		return env_set("name_overlays", name_overlays);
-+	return env_set("name_overlays", name_overlays);
-+#endif
-+}
-+
-+#ifdef CONFIG_XPL_BUILD
-+void spl_board_init(void)
-+{
-+	/*
-+	 * Detect daughtercards to allow board_spl_fit_append_fdt_skip()
-+	 * to apply the overlays to U-Boot FIT image itself, allowing
-+	 * U-Boot proper to enable and use the peripherals on the
-+	 * daughtercards.
-+	 */
-+	probe_daughtercards();
-+}
-+
-+/*
-+ * Mapping between FDTs in binman.dtsi and their corresponding Device-Tree
-+ * overlays. Depending on the daughtercards detected, we conditionally
-+ * apply the device-tree overlay's fdt if it is packaged.
-+ */
-+static const struct {
-+	const char *fit_node;
-+	const char *dtbo_name;
-+} spl_fit_overlay_map[] = {
-+	{ "fdt-am654-pcie-usb2", "k3-am654-pcie-usb2.dtbo" },
-+	{ "fdt-am654-pcie-usb3", "k3-am654-pcie-usb3.dtbo" },
-+};
-+
-+int board_spl_fit_append_fdt_skip(const char *name)
-+{
-+	int i;
- 
-+	/*
-+	 * For the overlays to be 'conditionally' applied, return 0 to apply them
-+	 * if the daughtercard corresponding to them was detected and return 1
-+	 * otherwise to skip applying the overlay.
-+	 */
-+	for (i = 0; i < ARRAY_SIZE(spl_fit_overlay_map); i++) {
-+		if (!strcmp(name, spl_fit_overlay_map[i].fit_node))
-+			return strstr(spl_detected_overlays,
-+				      spl_fit_overlay_map[i].dtbo_name) ? 0 : 1;
-+	}
-+
-+	/* Any overlay not in the list of 'conditional' overlays is always applied */
- 	return 0;
- }
--#endif
-+#endif /* CONFIG_XPL_BUILD */
-+
-+#endif /* CONFIG_TI_I2C_BOARD_DETECT */
- 
- int board_late_init(void)
- {
+diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
+index 5878816f63b..036efbb0e35 100644
+--- a/configs/am65x_evm_a53_defconfig
++++ b/configs/am65x_evm_a53_defconfig
+@@ -11,6 +11,8 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0x680000
+ CONFIG_DM_GPIO=y
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am654-base-board"
+ CONFIG_DM_RESET=y
+@@ -31,6 +33,7 @@ CONFIG_SPL_SPI=y
+ CONFIG_PCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY=y
++CONFIG_SPL_BOARD_INIT=y
+ CONFIG_BOOTSTD_FULL=y
+ CONFIG_BOOTSTD_BOOTCOMMAND=y
+ CONFIG_DISTRO_DEFAULTS=y
+@@ -64,7 +67,7 @@ CONFIG_CMD_UBI=y
+ # CONFIG_ISO_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+-CONFIG_OF_OVERLAY_LIST="ti/k3-am654-icssg2"
++CONFIG_OF_OVERLAY_LIST="ti/k3-am654-icssg2 ti/k3-am654-pcie-usb2"
+ CONFIG_SPL_MULTI_DTB_FIT=y
+ CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+ CONFIG_ENV_OVERWRITE=y
+@@ -89,6 +92,7 @@ CONFIG_TI_K3_NAVSS_UDMA=y
+ CONFIG_TI_SCI_PROTOCOL=y
+ CONFIG_DA8XX_GPIO=y
+ CONFIG_DM_PCA953X=y
++CONFIG_SPL_DM_PCA953X=y
+ CONFIG_DM_I2C=y
+ CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+ CONFIG_DM_I2C_GPIO=y
 -- 
 2.51.1
 
