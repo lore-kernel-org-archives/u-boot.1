@@ -1,187 +1,146 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99F0EC79FAE
-	for <u-boot@archiver.kernel.org>; Tue,  8 Sep 2026 20:59:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D72C79FA1
+	for <u-boot@archiver.kernel.org>; Tue,  8 Sep 2026 21:03:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3AA7E60749;
-	Tue,  8 Sep 2026 20:59:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2BD7B80879;
+	Tue,  8 Sep 2026 21:03:13 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id O_IUIcP0YPPs; Tue,  8 Sep 2026 21:03:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 24FEB8085C
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788901392;
+	b=b2MT4wrvkD0XI3i9r6E1EGD6RYIfcRRNTbTp+aVBi0tQTDrLc6RuWbp6gFDK+p6VIwi4
+	 w6duJYI2/cgEcXRIICS4SQ2QC7Plrq8AVUSXm9PsCEFijdDiDcb0B0bzHCJVDxRgvIg4a
+	 L2KSqyoVCgmw+9V1XyNF/8vAXnHNRAAAh9IRcjczICJE/GpZVofV1CnMzOvp/unSudbNJ
+	 Nu7VjWVeicz66bnVKUKwsrENOTQDS14UlW2tQmsM7nm8UI1izS40gNsyjkoghED/mYCc0
+	 jZbjuMVfy1h+w8tSuszJp74cT7gBPlMt9cO5d366CU1UIBLEYQzCTr8IND0UR+zkeOA==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1788901392;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=B3f8adbztUDW11yGZakkK39VqiMmnDm/4lzMl7T5m5s=;
+	b=IY+y4kbhY7QU+DMMiCjXOUUs/8etV8ZDwrFHe+IXDj39Jmk5fiYIb9uMCTBqInXfZ9iw
+	 MZQSTzc6I6HXLTpLKnYFQ+DtOidWcz7eY29kH3XXAFI8ZEJCppPqphj3XLMU1h9toQG34
+	 kCp+MtJRhRXiysmb3Poh0lUjdAU49kaMBN01if/QUG2C45zqaXljIxzS50M77XRIcGvaN
+	 qgXS1omlW+riYZosWHowQPj8GS2mD3qkZ29G9H7u/zdA15LIQ5o76e50FdXYrquUclM+H
+	 91b0MDgLBKquQAQXuDVZvUr2V5Muap69o8EChKobQCTXiLMbEQlN14hegm/+Xx7dRIA==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1788901392;
+	bh=B3f8adbztUDW11yGZakkK39VqiMmnDm/4lzMl7T5m5s=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=UG4wSXhXfYn4bfcOMFuZEwdQTDEaT6yd3SjLHNxBd/Xdq+MiLe7gesSacXVfScwuC
+	 iXFk4juR2gfkg3g4cnw4T02yw6DefRb3MCdxM1QyFcRDxkYuhPv5Yj29llaGU3cYkL
+	 XxMLTlwKl0aGim6U8XWkLtatizjJSCHiRmIykTMXYR4dutWQxUb0/lQUAeBwb9mRCM
+	 3y3h1m8qJt24HL5MEGZgjhkrzSgP2aW4+E2/TkSCtuYZhR0rN8sK/Y2x1FqEpdfqQm
+	 U4tjkWBJJQ4sVYzvNQLpvDPCMd9cNB5AUfqmUKqDmyV8XvOH7EywRSeaOnDFnQeFtC
+	 b6fRfVCtYd/VA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 24FEB8085C;
+	Tue,  8 Sep 2026 21:03:12 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0F84F230
+ for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 21:03:11 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0B72460702
+ for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 21:03:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vbqDhVt6mNXn; Tue,  8 Sep 2026 20:59:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0DED2606F8
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788901140;
-	b=ErD83a+psL/Osb7DHncEEZLDNtBEVE6+A4y3jp3hUZIJCnQcBitlf1KO8AnX4Acl7jkh
-	 +5eGrmjj+5iq962tlc3ojRqHdGDdR5MzdEB/zVreWEsbRHDUt4OjwNi6QDYNO9Iu8h8it
-	 Pj9u/LT8Rn9hOJj7upD8JzDj7a6TXHmzcSUpy/yTwlmgLwgrgjP+s/LQQ0kYLKa/5Zf2Y
-	 XItb+7Qdh0csxcJQ6M088kLA9gJvjrkgnUE3IVZV4wfwgbNNp+daZqtjB8LyMiZMy9G/U
-	 6JP5HOoC1gP+7VwHL1jx4aro35vJyDKXbZYdg1GMwO2Se+Rj0hiqTQPySgrSJiZ+MGA==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788901140;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=FgbkoSuk2a5qNweKA6SRfiB1VzJ0K1IApMeKckXuXlg=;
-	b=VEZMrP1IqpAlJ4FJL6Z78bH0EXqmdK6T1bIP9JngixL23dGAOUdOXw6yeT4neJoEN/wO
-	 wJM7k+kDyjaTvRM3bP22+rg0S4xHAugQRQxzCRCGvzP0IZbH0MQHi35V8IczzOjmsJS+t
-	 mMcdYXJSnjvyiLjVJktGY7ZSLBR9FLbhipM1ujRqd0LOXxIXGjzwGobv+YEFOOt0xsQRS
-	 VYDzSRXBVu9xm64k8GasU55l9mmi46F+CLbToda8YekyT716yIc8sryL9xSB+S7A+2nCb
-	 qpa24aUYJH+Xy+NLstXEgk89mVlPOYJ16CTfhxo8b5T1mG6GTSWO7udeDEqiDYBm+dQ==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788901140;
-	bh=FgbkoSuk2a5qNweKA6SRfiB1VzJ0K1IApMeKckXuXlg=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=C0LoRrifZ4hLzCJalGXacO/QAUDN5HB3DqNLqVtM892p1OsQN9W9+gkRpmBfS6MAE
-	 qFDg4hMdEuhBfxC3ydBEg9sKgMaW/Nxa/ZQqrMDV0r4oZhy9qDe5avr5OiQjTZkiEE
-	 MrcW7YvFrXzcYTrovFqGlsgo4U5s2ayovuY2GUokBVbZsj2VM/WrvuWjrzDpnlUaKF
-	 s602s1SsnxIiYMgKBvR9U2vZ4auoX32FtYCfHqtg0yDjxDsub28pcI9YISQymwYHWk
-	 +f8RAg3+JeYr66Qm8DtcFSA9AUQMFXtDSqptVleaSB1BaRAX1Xlik40dqHNs52/pjR
-	 SHJQaxoAIUK7w==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0DED2606F8;
-	Tue,  8 Sep 2026 20:59:00 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 685332D2
- for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 20:55:25 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 37B9E4018D
- for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 20:55:25 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VeklLd5hAWaP for <u-boot@lists.u-boot-project.org>;
- Tue,  8 Sep 2026 20:55:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 1409E4009A
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::102d"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788900924;
- b=mjIo0YYJxQY1qyB1EzJ2EFlF/9xtONEotKiXVAAPE7/nwf6NHvPGQJkoIb66wzM5C6ZS
- HiuLr1V3cXbWwk9d/wqsgJAbaaA0KEo3kbL24K9E53qr1W0YSxGXlQW9dsyMNuf4AIgwk
- dQHaCSOjiv0eaRvz7zimy2Nva3+kNttAbK5102NjL//gt/aqFh1oLhFrvk+N3eTqdMxit
- RJO6/ialUcR80jXb9ht9ziV9uKenZX6c08uJuEYvqGKv/dtkVJjfKDuqsILszDE6oyPYK
- 4NAAOZIxA5lzus3n6lYt9GxRLBKgArDZePfJ5OAzlKxPu/jkTJOr6Ew6iAUewuKHURg==
+ id puW4hlVWfuDj for <u-boot@lists.u-boot-project.org>;
+ Tue,  8 Sep 2026 21:03:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org D05B7606D3
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=165.173.180.15
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788901390;
+ b=R5MDuueK97Kht24+6I5GpEaIlsTfa+HlXfse38wO8R85xlgOu42nRyycCkDBQ7c+9edA
+ mSJ5AtKfcTwRDYQ1G/AQRqgzwgD4RCaNsSmrfJrQGJmEvLtzhH6V6hc4K8KX29pL8TeSU
+ t6YPzwDv7bJOrhGdD9WHYDi0saObi+KAQ9QAA0N0lt85E/FJHPisZmCgwze/McXrajRjj
+ RIgsBtnH/GcP+hYbkJXjvRqruEXJrgym3KeyRaJ11oU9PMx1CZ/5BjV3Fwk29a1hEvgLV
+ sL+/EO1whVQ/McQJo7F073QtCyOlsYJYd+2a5HzC/X1Y7LbzBMqZfGhmQjLuteFz9XA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788900924;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
- MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
- Message-ID:Subject:To:Cc:Content-Type;
- bh=FgbkoSuk2a5qNweKA6SRfiB1VzJ0K1IApMeKckXuXlg=;
- b=W+tZS3PkHd4cY8yM0e/SyTeK5HImOR1tMtsH+7ocAySMEBlR4bi2MCZC4r9CbNfxtSF4
- Qt77+sUZfND0AD1SyYU2uUX6idQLcUUrQRprQkRmC2EO8M2SNBDbZ4xV192u1Sq/SerCB
- BDIbowc9kS4I+fuy1o/s8WAPBNlUbgvV4NK896D5TMHKnSIbAu7fs/brgVm0DBCLqNW8l
- C892WARHJsMC3iEt5A29m5YvBxSY8N1/KRrpbLRA8DSRmveSNx74iqiwqq5zkN+tfzzHb
- zy2AKHMSND+oXx8A0iOdi+DHiMAgWUOZwVxzJXoFizjSjxKEwR9PY0fzUdpYiP0wx1g==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
- dmarc=pass header.from=google.com; 
- dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256
- header.s=20251104 header.b="M/jcEAHB"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::102d"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::102d; helo=mail-pj1-x102d.google.com;
- envelope-from=yuxiaozhang@google.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256
- header.s=20251104 header.b=M/jcEAHB
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1409E4009A
- for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 20:55:23 +0000 (UTC)
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-382ef647e20so5393245a91.1
- for <u-boot@lists.u-boot-project.org>; Tue, 08 Sep 2026 13:55:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788900923; cv=none;
- d=google.com; s=arc-20260327;
- b=NWmSklwSqPmLJNIgiY/1xsnZuEDI9MrVo8tn06qk9Lx+H497Qi9tCWx80TpLYU5r2x
- PjiqkcGp8evhPKwrWREl+O7tDlvvMtiphKczcVK8SHOrmfebURUa7H5O44K1z2MUb9zK
- X41hs/rkgp/Og/K/tJRVsipsZ6Jq4uc4g4+vtM17tprokuQ9i3uFIO6TeKL1LyijbGSO
- 5jMjp1ga8Lb48jXtINkMxWB+uPgVgcbCKWwhtLyX3qlKSz+6ACoWBFBNtFfqJuS+tUbj
- hmPowrht07ZsI9fW08LCyt47wnyOq/nRGr5nFAV8cU3QX+jSYRHDT0YKYkR5aEKmMspy
- xLIQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=FgbkoSuk2a5qNweKA6SRfiB1VzJ0K1IApMeKckXuXlg=;
- fh=4p2nh7U32o8U0jml9uoUEJsQeRAzV/1RHbyNvyoMcXk=;
- b=W/EJpWe9zzKCakxKMJz6A6zAoSzGQr1V7RvmAEAFtM0s6GPYHUtyNa6YoinbfE7deN
- Aytqq6JX95jMTsAwc6ZSANSKAORs2grLtodnUshW0+u1MdgXoEWSljYy8NrHJrDi9Wme
- NythzE9VeKfM3p7qgFcD0wIrmPRcUWpykAtuMYEZ2riNQ9HfPkOEnXqYVWhi3IGqY3XO
- 0tAVMbAa306xdy6r3KEhQDkanMaAB6JppAXYxSy0wX2QtDD0balaFzAuePLw41Bh3wM2
- 869S5xpImNvd3s6esPcQPY+DaUd+jduSRWXe5URGg/dG41MV0nO39XcyKu3NRYUiJAFo
- KjBA==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20251104; t=1788900923; x=1789505723;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=FgbkoSuk2a5qNweKA6SRfiB1VzJ0K1IApMeKckXuXlg=;
- b=M/jcEAHBd7Dr1gWDV3F4lyLowrMBIQJxeV1jGKqoirA1LnIjKAJIp3OGO8n6dacW1n
- xUZOKxbwx9IYoVPknfnkWnxI7MA75hfJ2rgfXuaAEjFo/OSM20leuXNCSdmD30wF8JkZ
- W9RFA+ztXc5wueWvjIt5sC8wg1ycT9dNXg8aDfcpRI82HSxuuNgmqW+2vx89Y2W3vjUl
- Ti7EUC7Kl4mwLJN5hG9PHNQBXvS6jhnujeWq+r4tb/53tqdb4DDBWh1tv06TTctffyL1
- Ryhi7LnL6qHTCYbNmto81wL82olBMF9YL4bxfhjMujXX+KlwG7Y+YUB5H1K63VAgpJep
- /1Cw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788900923; x=1789505723;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=FgbkoSuk2a5qNweKA6SRfiB1VzJ0K1IApMeKckXuXlg=;
- b=n1llD64UEtNfuixwGoCubgb182Mx0CvzJz9AMKxVokzsNWjrDs6/eLN7xYotKseld+
- DcqfN2AhSNSsMC4+HVda0dn8DWFPv6CHwQKNUlFYQ9rIHXFEeKbfmX9Wal6fmeORDqwj
- J5HOSDn9hFoqENR2L6Nd0T36JoQ69pXKRLueoUaVy8beWFWGDT08TLYaT2eh1nZR159+
- 8C4O7KA8R8ji9Wc06lN6l2rye4+vbHT+p7IZw6hwvHm9TMDKQDooH7DUhlRQ8ZpSkYdJ
- isoGuXvsX+KrMsv2s8qo3oxGoElP2eoCXQdYC3oM79nGO+xcKhGei7k52tXi74fBmwCU
- 36xQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwIhrzPJI0g7Zbahfmf0iXNoOS5ElBsTCQb7Fz68307J54qxwN8/Qwh5KcXioa4VdoGTAn7sic=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mfC9hz2FXdGpkQXo3BEm+ij+n3Ko0vZ+LYxCH4DI8hKnzQUE6L
- 3WcGhUT5e6O5g4sVF/3BFzAOvIrgU1WfVl0CFq5rZIa7SV5YzTJzSzrSgGhq3A1b81Enj+g19Ir
- FHl7SkyslhD0leFfovs6ZoAzJKzjtPoccIZJmTEi0
-X-Gm-Gg: AYBFou21rhSKKTVyPKRVqkqqh1oL6LwBbPM60czBjIsCoutK1V+OKAnDiTNC++OAmbG
- Sf84QvoI2vSTnHswiLIKKrE+PRkMtczxCEovfdyw/0QSW06Cw2xL2gMREnKOgEyeqlOmV2NfNvH
- n/zmQBM1cN1yd7CCPlEKjq50AB0s6E01R8MJnEaVGYPUbIRrDTvdW3ovuJHnKQJ7mSvX4sKdv8P
- x/0ALb1R2iuyZwju5MeD8uKbEZBreguW3rzdV3UsiW3acot/9R2wup+Mpks70Dw1u0w559Rx2jB
- TiWtKB2t2WNVzO8LfGycTbxGKu9q2zevxAXXcXYBo6EC6S793CRuPn8rYnDZDY3ijEycnMj2sqE
- =
-X-Received: by 2002:a17:90b:2681:b0:38f:5801:dc0e with SMTP id
- 98e67ed59e1d1-39b261d52a4mr46803037a91.15.1788900922246; Tue, 08 Sep 2026
- 13:55:22 -0700 (PDT)
+ c=relaxed/relaxed; t=1788901390;
+ h=Received-SPF:DKIM-Signature:Received:Date:From:To:Cc:Subject:
+ Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
+ In-Reply-To:X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient;
+ bh=B3f8adbztUDW11yGZakkK39VqiMmnDm/4lzMl7T5m5s=;
+ b=NwRSCxcHMn1NYIRAoieQ8EJSkrF6CBvWr82KMS0xhlfRfMBnY3DU5waRUypEe3brFpPC
+ nLpn58I0JgzcakYd9qnNWfPr/cwMJtV0wqtxSzEeop2FoZgiJ9iNBvgcdZGwWa/99VC4A
+ WhfJkJNI1i1tN6WxTZyZDyC45utJHE7bhYmAUw2qr4avjZDqZ/P16BS+EJCUa1Nhlv0dp
+ 5ks/bOYCycr+iJmD19V5p6orumA1Rt2hLMJITZRmWs3TtJB8vhNN08HcIAow40xA+piRu
+ uS64V0SxkcMwy6Fn6yD030ThTih2STQzrXSxORkTee/hnmX0+K7Bi2YLKwrH7CMOvzQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
+ dmarc=pass header.from=ziyao.cc; 
+ dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
+ header.s=zmail header.b=fFQPXHNl; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
+ helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
+ header.s=zmail header.b=fFQPXHNl
+Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
+ [165.173.180.15])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D05B7606D3
+ for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 21:03:09 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1788901367; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=MqSXF6xoP7PcrBDIjjykpK4DyITZtc9safxuEzIQsd9LBSGLuTXu/GZ2Jq5LSuyYHw4xImByUSlhHznYtT1q0qNDmFUT9i56PuukwDim12tCQztrMIzdVuwNrvSykMOw/Eca7nbRiGe4D8ugdMEBU6yZdShgYwLqZqitp5MKoe4=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1788901367;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=B3f8adbztUDW11yGZakkK39VqiMmnDm/4lzMl7T5m5s=; 
+ b=VgEx/OGRyQkUokhQm1vcakw9im5p/dgzrLxX9NdHtrvbZbNB0VtUba0ZHlCLoiDdIEGWBwIBPuXCdWA7QnSM5Tr+wxWB3rmTjMoNjrGZbU/c0oyspTCdX8M+Tiy//LHFYjkfqcDBaNTwLZSUlZY3zUUIgyttP4y3uJa1TkJzzfs=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1788901367; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=B3f8adbztUDW11yGZakkK39VqiMmnDm/4lzMl7T5m5s=;
+ b=fFQPXHNlALcn+IyT3e6ginWiyFyEeragkgUMjA2iBiWNR0e6Q0MVyK8gzM9w7fC2
+ d3V2u4GdhxyLlVYWtsPUkoHsLKHmPIz0aeH/8sJcpsPZItDKJ7D0JHrdG7ZezzMWpFJ
+ 2WETbzDu2O58Ovq/GOuzf35FrZRtHnPHCXT4/ZkQ=
+Received: by mx.zohomail.com with SMTPS id 1788901363965724.0991187610223;
+ Tue, 8 Sep 2026 14:02:43 -0700 (PDT)
+Date: Tue, 8 Sep 2026 21:02:36 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Andrei Lalaev <andrey.lalaev@gmail.com>, Yao Zi <me@ziyao.cc>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Kongyang Liu <seashell11234455@gmail.com>, u-boot@lists.u-boot-project.org
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>, Hiago De Franco <hfranco@baylibre.com>
+Subject: Re: [PATCH] mmc: cv1800b_sdhci: configure SDHCI PHY
+Message-ID: <aqB37CllzDTb9ggX@pie>
+References: <20260907-milkv-duo-sdhci-configure-v1-1-606b59eaafa0@gmail.com>
+ <ap79pdnPCUfaG5gE@pie>
+ <f26f9e30-2f18-46aa-9d02-58933dd1ebc2@gmail.com>
+ <0b3c324e-b1fe-4c87-a89c-887f6306def6@gmail.com>
 MIME-Version: 1.0
-References: <20260825175417.1068611-1-yuxiaozhang@google.com>
- <63520249-a647-47ea-bd14-c9b6a41b35f8@arm.com>
-In-Reply-To: <63520249-a647-47ea-bd14-c9b6a41b35f8@arm.com>
-From: Yuxiao Zhang <yuxiaozhang@google.com>
-Date: Tue, 8 Sep 2026 13:55:10 -0700
-X-Gm-Features: AcwNN1VEC5LzwCo4nxSlenFMLLSupjyfY_Ak5E5eKJFdT920pnU35PP3Y8O1_2g
-Message-ID: <CAOOoKeSLKjWaeGBxvrMmc2MqvgdNahcBrbV=-aRQFLL0_caLnA@mail.gmail.com>
-Subject: Re: [PATCH v2] dhcpv6: support rapid commit dhcp6 option
-To: Jerome Forissier <jerome.forissier@arm.com>
-Cc: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>, 
- Johan Jonker <jbx6244@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@lists.u-boot-project.org, nd <nd@arm.com>
-Content-Type: multipart/alternative; boundary="00000000000003dbbc065afef411"
-X-Mailman-Approved-At: Tue, 08 Sep 2026 20:58:57 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0b3c324e-b1fe-4c87-a89c-887f6306def6@gmail.com>
+X-Zoho-Virus-Status: 1
+X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/288.888.69
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -195,450 +154,100 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
---00000000000003dbbc065afef411
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Tue, Sep 08, 2026 at 05:27:43PM +0200, Andrei Lalaev wrote:
+> On 07.09.26 20:44, Andrei Lalaev wrote:
+> > Hi Yao,
+> > 
+> > On 07.09.26 20:08, Yao Zi wrote:
+> >> On Mon, Sep 07, 2026 at 04:54:35PM +0200, Andrei Lalaev wrote:
+> >>> Some samples of the Milk-V Duo and Duo 256M have issues with SD card
+> >>> communication. As a result, the SD card is not detected, or the correct
+> >>> mode is not selected.
+> >>>
+> >>> Configure SDHCI PHY in the same way as in downstream, to ensure
+> >>> that the PHY is initialized properly.
+> >>>
+> >>> Fixes: eb36f28ff721 ("mmc: cv1800b: Add sdhci driver support for cv1800b SoC")
+> >>> Signed-off-by: Andrei Lalaev <andrey.lalaev@gmail.com>
+> >>> Link: https://lore.kernel.org/u-boot/20260822091510.3253162-1-andrey.lalaev@gmail.com/
+> >>> ---
+> >>>  drivers/mmc/cv1800b_sdhci.c | 25 +++++++++++++++++++++++++
+> >>>  1 file changed, 25 insertions(+)
+> >>>
+> >>> diff --git a/drivers/mmc/cv1800b_sdhci.c b/drivers/mmc/cv1800b_sdhci.c
+> >>> index b756649f90f3..5c129682daba 100644
+> >>> --- a/drivers/mmc/cv1800b_sdhci.c
+> >>> +++ b/drivers/mmc/cv1800b_sdhci.c
+> >>> @@ -8,11 +8,17 @@
+> >>>  #include <sdhci.h>
+> >>>  #include <linux/delay.h>
+> >>>  
+> >>> +#define CV18XX_SDHCI_MSHC_CTRL  0x200
+> >>> +#define CV18XX_SDHCI_PHY_CONFIG 0x24c
+> >>>  #define SDHCI_PHY_TX_RX_DLY  0x240
+> >>>  #define MMC_MAX_CLOCK        375000000
+> >>>  #define TUNE_MAX_PHCODE      128
+> >>>  
+> >>>  #define PHY_TX_SRC_INVERT  BIT(8)
+> >>> +#define PHY_RX_SRC_INVERT  BIT(24)
+> >>> +
+> >>> +#define CV18XX_LATANCY_1T BIT(1)
+> >>> +#define CV18XX_PHY_TX_BPS BIT(0)
+> >>>  
+> >>>  struct cv1800b_sdhci_plat {
+> >>>  	struct mmc_config cfg;
+> >>> @@ -64,10 +70,29 @@ static int cv1800b_execute_tuning(struct mmc *mmc, u8 opcode)
+> >>>  }
+> >>>  #endif
+> >>>  
+> >>> +static int cv1800b_deferred_probe(struct sdhci_host *host)
+> >>> +{
+> >>> +	u32 val;
+> >>> +
+> >>> +	val = sdhci_readl(host, CV18XX_SDHCI_MSHC_CTRL);
+> >>> +	val |= CV18XX_LATANCY_1T;
+> >>> +	sdhci_writel(host, val, CV18XX_SDHCI_MSHC_CTRL);
+> >>> +
+> >>> +	val = sdhci_readl(host, CV18XX_SDHCI_PHY_CONFIG);
+> >>> +	val |= CV18XX_PHY_TX_BPS;
+> >>> +	sdhci_writel(host, val, CV18XX_SDHCI_PHY_CONFIG);
+> >>> +
+> >>> +	val = PHY_TX_SRC_INVERT | PHY_RX_SRC_INVERT;
+> >>> +	sdhci_writel(host, val, SDHCI_PHY_TX_RX_DLY);
+> >>> +
+> >>> +	return 0;
+> >>> +}
+> >>> +
+> >>>  const struct sdhci_ops cv1800b_sdhci_sd_ops = {
+> >>>  #if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
+> >>>  	.platform_execute_tuning = cv1800b_execute_tuning,
+> >>>  #endif
+> >>> +	.deferred_probe = cv1800b_deferred_probe,
+> >>
+> >> Is there a reason to create a new function, instead of including the
+> >> logic somewhere already existing, for example, cv1800b_sdhci_reset()?
+> >> It seems to fit in cv1800b_sdhci_reset(), too, if it's for
+> >> initialization of the PHY.
+> > 
+> > 
+> > No, there is no particular reason. I simply didn't think about cv1800b_sdhci_reset (:
+> > 
+> > Thank you for the hint! I'll check it and will probably move it to reset.
+> > 
+> > 
+> 
+> I've rechecked, and unfortunately, moving it to cv1800b_sdhci_reset() is not
+> an option because reset is called only from cv1800b_execute_tuning() and
+> not accessible to SDHCI core (unlike in Linux MMC subsystem).
+> 
+> So I think I'll just drop deferred_probe() (wasn't actually required)
+> and call the function directly from probe().
 
-On Thu, Sep 3, 2026 at 2:01=E2=80=AFAM Jerome Forissier <jerome.forissier@a=
-rm.com>
-wrote:
+Sounds reasonable, too. Thanks.
 
-> Hi Yuxiao,
->
-> On 25/08/2026 19:53, Yuxiao Zhang wrote:
-> > Support rapid commit option code 14 which bypass the advertise and
-> > request state. The option is enabled by DHCP6_RAPID_COMMIT.
-> >
-> > Signed-off-by: Yuxiao Zhang <yuxiaozhang@google.com>
-> > ---
-> >
-> > Changes in v2:
-> > - Reject rapid commit option if option_len !=3D 0
-> > - Drop redundant NULL check on dhcp6_hdr
-> >
-> >  cmd/Kconfig  |  8 ++++++++
-> >  net/dhcpv6.c | 43 ++++++++++++++++++++++++++++++++++++-------
-> >  net/dhcpv6.h |  2 ++
-> >  3 files changed, 46 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > index ff90a87024c..b3cf3a6d8b6 100644
-> > --- a/cmd/Kconfig
-> > +++ b/cmd/Kconfig
-> > @@ -1996,6 +1996,14 @@ config DHCP6_ENTERPRISE_ID
-> >       int "Enterprise ID to send in DHCPv6 Vendor Class Option"
-> >       default 0
-> >
-> > +config DHCP6_RAPID_COMMIT
-> > +     bool "Request Rapid Commit (2-message exchange) from DHCPv6 serve=
-r"
-> > +     default n
-> > +     help
-> > +       Request the Rapid Commit option (option 14) in DHCPv6 Solicit
-> > +       messages to enable a 2-message exchange (Solicit-Reply) rather
-> > +       than the default 4-message exchange.
-> > +
-> >  endif
-> >
-> >  config BOOTP_MAY_FAIL
-> > diff --git a/net/dhcpv6.c b/net/dhcpv6.c
-> > index 640f089a2e1..5ed8449edb5 100644
-> > --- a/net/dhcpv6.c
-> > +++ b/net/dhcpv6.c
-> > @@ -115,6 +115,9 @@ static int dhcp6_add_option(int option_id, uchar
-> *pkt)
-> >
-> >               opt_len =3D sizeof(struct dhcp6_option_ia_na);
-> >               break;
-> > +     case DHCP6_OPTION_RAPID_COMMIT:
-> > +             opt_len =3D 0;
-> > +             break;
-> >       case DHCP6_OPTION_ORO:
-> >               oro_opt =3D (struct dhcp6_option_oro *)dhcp_option_start;
-> >               oro_opt->req_option_code[num_oro++] =3D
-> htons(DHCP6_OPTION_OPT_BOOTFILE_URL);
-> > @@ -194,6 +197,8 @@ static void dhcp6_send_solicit_packet(void)
-> >       pkt +=3D dhcp6_add_option(DHCP6_OPTION_ELAPSED_TIME, pkt);
-> >       pkt +=3D dhcp6_add_option(DHCP6_OPTION_IA_NA, pkt);
-> >       pkt +=3D dhcp6_add_option(DHCP6_OPTION_ORO, pkt);
-> > +     if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT))
-> > +             pkt +=3D dhcp6_add_option(DHCP6_OPTION_RAPID_COMMIT, pkt)=
-;
-> >       if (CONFIG_DHCP_PXE_CLIENTARCH !=3D 0xFF)
-> >               pkt +=3D dhcp6_add_option(DHCP6_OPTION_CLIENT_ARCH_TYPE,
-> pkt);
-> >       pkt +=3D dhcp6_add_option(DHCP6_OPTION_VENDOR_CLASS, pkt);
-> > @@ -448,6 +453,16 @@ static void dhcp6_parse_options(uchar *rx_pkt,
-> unsigned int len)
-> >                       }
-> >                       sm_params.rx_status.preference =3D *option_ptr;
-> >                       break;
-> > +             case DHCP6_OPTION_RAPID_COMMIT:
-> > +                     if (option_len !=3D 0) {
-> > +                             debug("Invalid rapid commit option
-> length\n");
-> > +                             break;
-> > +                     }
-> > +                     if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT)) {
-> > +                             debug("DHCP6_OPTION_RAPID_COMMIT FOUND\n"=
-);
-> > +                             sm_params.rx_status.rapid_commit_found =
-=3D
-> true;
-> > +                     }
-> > +                     break;
-> >               default:
-> >                       debug("Unknown Option ID: %d, skipping parsing\n"=
-,
-> >                             ntohs(option_hdr->option_id));
-> > @@ -618,14 +633,28 @@ static void dhcp6_state_machine(bool timeout,
-> uchar *rx_pkt, unsigned int len)
-> >               break;
-> >       case DHCP6_SOLICIT:
-> >               if (!timeout) {
-> > -                     /* check the rx packet and determine if we can
-> transition to next
-> > -                      * state.
-> > -                      */
-> > -                     if (dhcp6_check_advertise_packet(rx_pkt, len))
-> > -                             return;
-> > +                     struct dhcp6_hdr *dhcp6_hdr =3D (struct dhcp6_hdr
-> *)rx_pkt;
-> > +
-> > +                     if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT) &&
-> > +                         dhcp6_hdr->msg_type =3D=3D DHCP6_MSG_REPLY) {
-> > +                             if (dhcp6_check_reply_packet(rx_pkt, len)=
-)
-> > +                                     return;
-> > +                             if
-> (!sm_params.rx_status.rapid_commit_found) {
-> > +                                     debug("[DHCPv6] REPLY received
-> without Rapid Commit option, ignoring\n");
-> > +                                     return;
-> > +                             }
->
-> dhcp6_check_reply_packet() calls dhcp6_parse_options(), which has side
-> effects such as updating the bootfile information. I think the Rapid
-> Commit check
-> needs to happen before applying the other reply options.
->
-> > +                             debug("REPLY (Rapid Commit) good,
-> transition to DONE\n");
-> > +                             sm_params.next_state =3D DHCP6_DONE;
-> > +                     } else {
-> > +                             /* check the rx packet and determine if w=
-e
-> can transition to next
-> > +                              * state.
-> > +                              */
-> > +                             if (dhcp6_check_advertise_packet(rx_pkt,
-> len))
-> > +                                     return;
-> >
-> > -                     debug("ADVERTISE good, transition to REQUEST\n");
-> > -                     sm_params.next_state =3D DHCP6_REQUEST;
-> > +                             debug("ADVERTISE good, transition to
-> REQUEST\n");
-> > +                             sm_params.next_state =3D DHCP6_REQUEST;
-> > +                     }
-> >               } else if (sm_params.retry_cnt =3D=3D 1)  {
-> >                       /* If a server UID was received in the first
-> SOLICIT period
-> >                        * transition to REQUEST
-> > diff --git a/net/dhcpv6.h b/net/dhcpv6.h
-> > index d41a3c30615..49f20390730 100644
-> > --- a/net/dhcpv6.h
-> > +++ b/net/dhcpv6.h
-> > @@ -24,6 +24,7 @@
-> >  #define DHCP6_OPTION_PREFERENCE              7
-> >  #define DHCP6_OPTION_ELAPSED_TIME    8
-> >  #define DHCP6_OPTION_STATUS_CODE     13
-> > +#define DHCP6_OPTION_RAPID_COMMIT    14
-> >  #define DHCP6_OPTION_OPT_BOOTFILE_URL        59
-> >  #define DHCP6_OPTION_OPT_BOOTFILE_PARAM      60
-> >  #define DHCP6_OPTION_SOL_MAX_RT              82
-> > @@ -152,6 +153,7 @@ struct dhcp6_rx_pkt_status {
-> >       enum dhcp6_status       ia_status_code;
-> >       enum dhcp6_status       status_code;
-> >       u8                      preference;
-> > +     bool                    rapid_commit_found;
-> >  };
-> >
-> >  /**
-> > ---
-> > base-commit: 527115ef6783cec49e5610c523c124b399011361
-> > branch: main
-> >
->
-> Thanks,
-> --
-> Jerome
->
+> -- 
+> Best regards,
+> Andrei Lalaev
 
-Hi Jerome,
-
-The rapid commit validation relies on dhcp6_check_reply_packet to set
-rapid_commit_found field so it cannot run before dhcp6_check_reply_packet.
-If we want early return we can add a rapid_commit parameter in
-dhcp6_check_advertise_packet
-and do the validation inside it. Let me know your preference.
-
-Thanks,
--Yuxiao
-
---00000000000003dbbc065afef411
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><span style=3D"background-color:transpare=
-nt">On Thu, Sep 3, 2026 at 2:01=E2=80=AFAM Jerome Forissier &lt;<a href=3D"=
-mailto:jerome.forissier@arm.com">jerome.forissier@arm.com</a>&gt; wrote:</s=
-pan></div><div class=3D"gmail_quote gmail_quote_container"><blockquote clas=
-s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
-gb(204,204,204);padding-left:1ex">Hi Yuxiao,<br>
-<br>
-On 25/08/2026 19:53, Yuxiao Zhang wrote:<br>
-&gt; Support rapid commit option code 14 which bypass the advertise and<br>
-&gt; request state. The option is enabled by DHCP6_RAPID_COMMIT.<br>
-&gt; <br>
-&gt; Signed-off-by: Yuxiao Zhang &lt;<a href=3D"mailto:yuxiaozhang@google.c=
-om" target=3D"_blank">yuxiaozhang@google.com</a>&gt;<br>
-&gt; ---<br>
-&gt; <br>
-&gt; Changes in v2:<br>
-&gt; - Reject rapid commit option if option_len !=3D 0<br>
-&gt; - Drop redundant NULL check on dhcp6_hdr<br>
-&gt; <br>
-&gt;=C2=A0 cmd/Kconfig=C2=A0 |=C2=A0 8 ++++++++<br>
-&gt;=C2=A0 net/dhcpv6.c | 43 ++++++++++++++++++++++++++++++++++++-------<br=
->
-&gt;=C2=A0 net/dhcpv6.h |=C2=A0 2 ++<br>
-&gt;=C2=A0 3 files changed, 46 insertions(+), 7 deletions(-)<br>
-&gt; <br>
-&gt; diff --git a/cmd/Kconfig b/cmd/Kconfig<br>
-&gt; index ff90a87024c..b3cf3a6d8b6 100644<br>
-&gt; --- a/cmd/Kconfig<br>
-&gt; +++ b/cmd/Kconfig<br>
-&gt; @@ -1996,6 +1996,14 @@ config DHCP6_ENTERPRISE_ID<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0int &quot;Enterprise ID to send in DHCPv6 Ve=
-ndor Class Option&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0default 0<br>
-&gt;=C2=A0 <br>
-&gt; +config DHCP6_RAPID_COMMIT<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0bool &quot;Request Rapid Commit (2-message exchan=
-ge) from DHCPv6 server&quot;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0default n<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0help<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0Request the Rapid Commit option (option 14=
-) in DHCPv6 Solicit<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0messages to enable a 2-message exchange (S=
-olicit-Reply) rather<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0than the default 4-message exchange.<br>
-&gt; +<br>
-&gt;=C2=A0 endif<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 config BOOTP_MAY_FAIL<br>
-&gt; diff --git a/net/dhcpv6.c b/net/dhcpv6.c<br>
-&gt; index 640f089a2e1..5ed8449edb5 100644<br>
-&gt; --- a/net/dhcpv6.c<br>
-&gt; +++ b/net/dhcpv6.c<br>
-&gt; @@ -115,6 +115,9 @@ static int dhcp6_add_option(int option_id, uchar *=
-pkt)<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0opt_len =3D size=
-of(struct dhcp6_option_ia_na);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0case DHCP6_OPTION_RAPID_COMMIT:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0opt_len =3D 0;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0case DHCP6_OPTION_ORO:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0oro_opt =3D (str=
-uct dhcp6_option_oro *)dhcp_option_start;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0oro_opt-&gt;req_=
-option_code[num_oro++] =3D htons(DHCP6_OPTION_OPT_BOOTFILE_URL);<br>
-&gt; @@ -194,6 +197,8 @@ static void dhcp6_send_solicit_packet(void)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0pkt +=3D dhcp6_add_option(DHCP6_OPTION_ELAPS=
-ED_TIME, pkt);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0pkt +=3D dhcp6_add_option(DHCP6_OPTION_IA_NA=
-, pkt);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0pkt +=3D dhcp6_add_option(DHCP6_OPTION_ORO, =
-pkt);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT))<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0pkt +=3D dhcp6_add_op=
-tion(DHCP6_OPTION_RAPID_COMMIT, pkt);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (CONFIG_DHCP_PXE_CLIENTARCH !=3D 0xFF)<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0pkt +=3D dhcp6_a=
-dd_option(DHCP6_OPTION_CLIENT_ARCH_TYPE, pkt);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0pkt +=3D dhcp6_add_option(DHCP6_OPTION_VENDO=
-R_CLASS, pkt);<br>
-&gt; @@ -448,6 +453,16 @@ static void dhcp6_parse_options(uchar *rx_pkt, un=
-signed int len)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0sm_params.rx_status.preference =3D *option_ptr;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0break;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0case DHCP6_OPTION_RAP=
-ID_COMMIT:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0if (option_len !=3D 0) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0debug(&quot;Invalid rapid commit option =
-length\n&quot;);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT)) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0debug(&quot;DHCP6_OPTION_RAPID_COMMIT FO=
-UND\n&quot;);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sm_params.rx_status.rapid_commit_found =
-=3D true;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0break;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0default:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0debug(&quot;Unknown Option ID: %d, skipping parsing\n&quot;,<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ntohs(option_hdr-&gt;option_id));<br>
-&gt; @@ -618,14 +633,28 @@ static void dhcp6_state_machine(bool timeout, uc=
-har *rx_pkt, unsigned int len)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0case DHCP6_SOLICIT:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (!timeout) {<=
-br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0/* check the rx packet and determine if we can transition to next<br=
->
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 * state.<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 */<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0if (dhcp6_check_advertise_packet(rx_pkt, len))<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0struct dhcp6_hdr *dhcp6_hdr =3D (struct dhcp6_hdr *)rx_pkt;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT) &amp;&amp;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0dhcp6_hdr-&gt;msg_type =3D=3D DHCP6_MSG_REPLY) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (dhcp6_check_reply_packet(rx_pkt, len=
-))<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (!sm_params.rx_status.rapid_commit_fo=
-und) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0debug(&quot;=
-[DHCPv6] REPLY received without Rapid Commit option, ignoring\n&quot;);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-<br>
-dhcp6_check_reply_packet() calls dhcp6_parse_options(), which has side<br>
-effects such as updating the bootfile information. I think the Rapid Commit=
- check<br>
-needs to happen before applying the other reply options.<br>
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0debug(&quot;REPLY (Rapid Commit) good, t=
-ransition to DONE\n&quot;);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sm_params.next_state =3D DHCP6_DONE;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0} else {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* check the rx packet and determine if =
-we can transition to next<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * state.<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (dhcp6_check_advertise_packet(rx_pkt,=
- len))<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-&gt;=C2=A0 <br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0debug(&quot;ADVERTISE good, transition to REQUEST\n&quot;);<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0sm_params.next_state =3D DHCP6_REQUEST;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0debug(&quot;ADVERTISE good, transition t=
-o REQUEST\n&quot;);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sm_params.next_state =3D DHCP6_REQUEST;<=
-br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0} else if (sm_pa=
-rams.retry_cnt =3D=3D 1)=C2=A0 {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0/* If a server UID was received in the first SOLICIT period<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 * transition to REQUEST<br>
-&gt; diff --git a/net/dhcpv6.h b/net/dhcpv6.h<br>
-&gt; index d41a3c30615..49f20390730 100644<br>
-&gt; --- a/net/dhcpv6.h<br>
-&gt; +++ b/net/dhcpv6.h<br>
-&gt; @@ -24,6 +24,7 @@<br>
-&gt;=C2=A0 #define DHCP6_OPTION_PREFERENCE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 7<br>
-&gt;=C2=A0 #define DHCP6_OPTION_ELAPSED_TIME=C2=A0 =C2=A0 8<br>
-&gt;=C2=A0 #define DHCP6_OPTION_STATUS_CODE=C2=A0 =C2=A0 =C2=A013<br>
-&gt; +#define DHCP6_OPTION_RAPID_COMMIT=C2=A0 =C2=A0 14<br>
-&gt;=C2=A0 #define DHCP6_OPTION_OPT_BOOTFILE_URL=C2=A0 =C2=A0 =C2=A0 =C2=A0=
- 59<br>
-&gt;=C2=A0 #define DHCP6_OPTION_OPT_BOOTFILE_PARAM=C2=A0 =C2=A0 =C2=A0 60<b=
-r>
-&gt;=C2=A0 #define DHCP6_OPTION_SOL_MAX_RT=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 82<br>
-&gt; @@ -152,6 +153,7 @@ struct dhcp6_rx_pkt_status {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0enum dhcp6_status=C2=A0 =C2=A0 =C2=A0 =C2=A0=
-ia_status_code;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0enum dhcp6_status=C2=A0 =C2=A0 =C2=A0 =C2=A0=
-status_code;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0u8=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 preference;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0bool=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 rapid_commit_found;<br>
-&gt;=C2=A0 };<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 /**<br>
-&gt; ---<br>
-&gt; base-commit: 527115ef6783cec49e5610c523c124b399011361<br>
-&gt; branch: main<br>
-&gt; <br>
-<br>
-Thanks,<br>
--- <br>
-Jerome<br></blockquote><div><br></div><div>Hi=C2=A0Jerome,</div><div><br></=
-div><div>The rapid commit validation relies on=C2=A0<span style=3D"backgrou=
-nd-color:transparent">dhcp6_check_reply_packet to set=C2=A0</span><span sty=
-le=3D"background-color:transparent">rapid_co</span><span style=3D"backgroun=
-d-color:transparent">mmit_found field so it cannot run before=C2=A0</span><=
-span style=3D"background-color:transparent">dhcp6_check_reply_packet. If we=
- want early return we can add a rapid_commit parameter in=C2=A0</span><span=
- style=3D"background-color:transparent">dhcp6_check_advertise_packet and do=
- the validation inside it. Let me know your preference.</span></div><div><s=
-pan style=3D"background-color:transparent"><br></span></div><div><span styl=
-e=3D"background-color:transparent">Thanks,</span></div><div><span style=3D"=
-background-color:transparent">-Yuxiao</span></div></div></div>
-
---00000000000003dbbc065afef411--
+Best regards,
+Yao Zi
