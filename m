@@ -1,140 +1,139 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2AEBC79F9E
-	for <u-boot@archiver.kernel.org>; Tue,  8 Sep 2026 15:05:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B391CC79FAA
+	for <u-boot@archiver.kernel.org>; Tue,  8 Sep 2026 16:30:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 71DA14064C;
-	Tue,  8 Sep 2026 15:05:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EBDB480C6C;
+	Tue,  8 Sep 2026 16:30:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MId3cqyCN9nl; Tue,  8 Sep 2026 15:05:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 863464063E
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788879902;
-	b=NRfkrj5IHF3Rchh1nF57jC/nn2tEgW8bT3hQJMk95QbDklWMmNwvCCwGal6nt7yO/lOQ
-	 o/+UrGBuq4BhoUovDzOobgVFh5peuGUmc29Y6KzOGpKvcru8S6/ogVh/fWIwV8Zghbydo
-	 8VTTgRPPpDFfBZIYe5LloH/OS/FHztkJRixly7ISTGyT5EdWhLSPJP1+OKzIWpxkEghSa
-	 YMzsIK6iDr0v912iRQaw07jV5ssMU5aMjf2mwISNvdQ3cm0aAfB7k6Fpw0Wwx55L6v8Xe
-	 a85j+m7Tcc54JX48V7R2y39YBSx7hGfyrXyrt83qWK8Rt2KyMv+l2lOcjNw7u6sJyaA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hcXQvB0_CEsY; Tue,  8 Sep 2026 16:30:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 1DC1480C47
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788885030;
+	b=B17bq1PCHodGIyyAhnmvRT/T505L+EaWtotsf6mN0m5uVt08p+Fse8zhNI1mGfxZNFry
+	 rBdMtDELNma3A70KhDhlltKjZBXBrmI9TuEMrNJZSZ89kAofK3SIqkjWLU0Nj3NCvOsu6
+	 yPKAAW49FSKtzy/PxFtn2/2REQTLZ0OuZCA4oy2cCVfdmFJonnHyT6ISb3a/oxHG3Mx/x
+	 JJCCtUgUapEe+s7+ekZHQlHXylzR5HrKOOWsrCfO+IPy+tGlKJTSQo5DwY9fW/bbzVINg
+	 9+WjLZJTOqZVWY1cQ80A8PRf7EKWnMehUfRqNt4mrVVIZVQTb7E78fAeQuCNI+srlLA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788879902;
+	c=relaxed/relaxed; t=1788885030;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-Flowmailer-Platform:Feedback-ID:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=2ER57ajvPDcbB+0bTGny30AjAqDOoN0Qd/rOFf9IHGk=;
-	b=AVHsV8hh3W/7HLeA/pY9szBTxaN14NZwGnNUwy9C7SKcsX+7uExbcc70fSuU44J5YqEK
-	 SjDrnsOh/h4KgAc6Agp9ridi20PRpkkeZ5DnYltnZ+2E/C0rdnBhawaKCtnQEC1kVFPlo
-	 kvpMw5FWXXatFZ4NtSAc0KOSfVQWF12v8IukDT5+20JEi2oi2m7c4VI2Vxz766oDIGPPd
-	 OnRHnBNNO5sYGAiV/Vmx4jHDGs5qH9w1VQqWEKPd2nlgg+Dva8D7NVf7WHkIE2YgCykK/
-	 /NKdlsdQB9Hn1FFHuZtSwWpInfq5Eus8SwSXjLeKjK03dscYli5SemRnS4F3AFNUnwg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=kCD6hYfkHhxPDWk5VM290dhMRqclS6Cui4OcHi7cz/Q=;
+	b=noII0A8inTHOeXfTF1FEPmJJqKOq5VFE9tFGxqow63QZLHAF4JjdLfE+68z78eRlDCjc
+	 lrtTR8TOWm4jscAtot6UctZ4Aznl9+qqOvhqzjzxFqIEmmaDEHXmiIntV6zlgeRXwxKWQ
+	 JzgDw9BXnaLoRMblEw5uWVzG7usIuoX+5ma4OafWGLvHs3DZ2t+RAKqJVawnY00gVLqWG
+	 U2qN6ilM37RUJSJ0O5vov1MbmVUP5d2hgHkNctzj1ScVV/AFnj/sC+mHlE/CdXNlRcqTJ
+	 Qf9itHUABcUQ2Kox0wFXBqJ6340olh0YsBg69h/03z32ICQSMo46WBJeF5kYJJviyEg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788879902;
-	bh=2ER57ajvPDcbB+0bTGny30AjAqDOoN0Qd/rOFf9IHGk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788885030;
+	bh=kCD6hYfkHhxPDWk5VM290dhMRqclS6Cui4OcHi7cz/Q=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=G9c0H6FOBYVIQh29sf0RUpnyxtdTWwR4RRUVBJa4mZVgpqPZYNVdL/UXh2rKBs+tA
-	 v4DnYv1ZS8JpTVX67fEEYKWHnNgjRHLiucpu3ZRUsuK1BXL8O/YjGK3z8K+NWNPVWe
-	 GVcobaF9eyZT4W/YQM6LfJNa/+ODo9wyLrtoLCEHvze2P99a2LwStWzvn7AT/A+0/9
-	 4yUt2ZYvm88cTmgXDCrQOCPVwGfeQFAKDHnQmvUk0XLmrMKF4exEw4V7IC07MzC8Zo
-	 0HkX4q+BrrRFE5kHy6x4jxGIoxZkn9cIf3qQmzYDcviztDK0YzCCA34O4P0zOZx6op
-	 8O5EJN7DBA0Kw==
+	b=lv/NLC5l47rj9ZvGP9Q8s9+1k6rjkdr97KFqLRlAjWmr9hoMCdxep8l8UYnLSI7O4
+	 tOpKYDiTp6jKgvxPQaJ09iXOdq/08ODK3GSmlFv3PCF5Kw7F81gaiiX14wm9Ck/csn
+	 PVowAjahBlJrwQIk7t86GGC0aZXR8hYh3aSgD31RjU9OWHdPXL/JLRiUg1J+XyMpWy
+	 pDedor2/jEv7w7CvP/sxSqAfN70ycL2AwaTk6ngYUYvBGJsXdtCAR1GWShwugm/2sm
+	 430BCYcxOKaZ5V1pzOxicFLVapA6q9w2Q+WP1F4zHgTXKDfxkQeWM7W5UZsUdwYeVH
+	 ldgR9hMK48Zww==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 863464063E;
-	Tue,  8 Sep 2026 15:05:02 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E4BF1AEB
- for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 15:04:49 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1DC1480C47;
+	Tue,  8 Sep 2026 16:30:30 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 09C29990
+ for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 16:30:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CB03D606F5
- for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 15:04:49 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id EFF716072B
+ for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 16:30:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KVhMDz6MgAW7 for <u-boot@lists.u-boot-project.org>;
- Tue,  8 Sep 2026 15:04:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3CD8160719
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=185.136.65.227
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788879888;
- b=sllqoaJOjx0KTgohRGKp3bJOgNW6DkEOM6ChR1KWKNfuyGRnnLtC0oMCOC1DLiQZeMv2
- K7bMYLGWNkgXU8UQgHuGqrR0X7bCz/fnRFGXkPCj9i6kJI0CB8lShommIvVg8uTb1z82h
- v1v2aMRFN8e+PU4mTSGGoyQnCb/+AnVZ+Vaz6RKXtLY00JC0lrHr7CG/C/SId+6gtlGXo
- GgIsrONlM+z7Z9vaRVzITP7SOtMXF67awHfGvRgTiEnWE/p3xPS2VFXNB3pruULy4h+rt
- /NE+A5GoxS0lvCVev8psPnHBCKOD2uO9hozZJtS0Zyca5AmWUebNrqZlaDfj4WJGHlw==
+ id k4lvH8WdZwGo for <u-boot@lists.u-boot-project.org>;
+ Tue,  8 Sep 2026 16:30:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 8562A606F3
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=80.241.56.151
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788885026;
+ b=SSNcsfZrN8qs1NkJntzTqrJLp97gCumSMw68GB04UxnD/tBEapWe4UmRxXqj3ulONI7y
+ 11/cfs8gH3DnUHYWdTUD2GQDdma97fok71RheVGNkgZbbATQilFFs5qQoLYueiEJvlrq+
+ GO2xpH5IPLIDy+Wif2EBYzAC7Uo2q0nwwrZZCI5t71VMadm1A3AwSTSM8dfBJdFBfnpY+
+ eWdaQh3PKU1v2Qsc4Lp5svuNn1WQK7ZXrumCpbsnutTi3VDokhZCgwgfc29jbcpjtBA/G
+ ZdbGSxNR2oCF5CKxml4V93qF3rjhRSE8tdhH60erHtODfn374tU4+gyU2L2wqhdbC0g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788879888;
- h=X-Greylist:Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:
- Date:Message-ID:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding:X-Flowmailer-Platform:Feedback-ID;
- bh=2ER57ajvPDcbB+0bTGny30AjAqDOoN0Qd/rOFf9IHGk=;
- b=gtUDiF5j5mRpPXqSLXcpI+/twiK8QFaUHGkOHz2hzCfaZ/xIU1C5rVIGgObIgn0Yq7KJ
- f6XmvP4e8j360t0AAQLSD21UUzSKCcIuDSQsUInL8kywNVWLZeFnisXtd8jaFvGBQVZ4q
- DmMZLYfEU2M0nHIHVCT+zo7HD/KL+sZayLICz8ywFO8rRgL74I3xHaVOc1GaIhcUYkw16
- J4jzgCXbBVa4ALqVb2NmIVYYqyZXHnFVp38yM3v+4ruh824/46Wud2le6oi4Vy7rB6kyU
- X5lkz07Jps7YJOFlRg9CFBiFMmYCsTmtURQd1JNu4mSNvTj+e9Rs4WoeMg1aRaz7pmg==
+ c=relaxed/relaxed; t=1788885026;
+ h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+ Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META;
+ bh=kCD6hYfkHhxPDWk5VM290dhMRqclS6Cui4OcHi7cz/Q=;
+ b=Crv4IJiU3xyT0CRwqUD0qnx+LroOoICNnOn3uVBdD+XVSahBKstJcm03CjzaV2EgBh8p
+ Rn6wwqzhamJcB+tcBxMXJh2g0HYMJxXBBwXurmlvGhnEZ2iSTMmDTfBCJP6aUDaT73YIw
+ sr9OUvZRbc5lddXf9NVAzyjzINs64t7PiKC5U16Jr6IoNLxilp9PbPHPGEKZkd7eBW4Xe
+ T/vs1GvXj35TsD1o8Rek4T4YsDrmNaKWhoRsxySrPtDqltuWZWAY87JH9XAZVRMoV/QJn
+ iCKM5M6A/mWXwRNdbTuGtWAsFkgGhEkie50cfgJErc6iDJmA99BW6QAmVllh1n0QPYQ==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=siemens.com; 
- dkim=pass header.d=siemens.com header.i=jan.kiszka@siemens.com
- header.a=rsa-sha256 header.s=fm2 header.b=TOWQmbb6; 
- arc=none smtp.remote-ip=185.136.65.227
-X-Greylist: delayed 63 seconds by postgrey-1.37 at util1.osuosl.org;
- Tue, 08 Sep 2026 15:04:46 UTC
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=siemens.com header.i=jan.kiszka@siemens.com
- header.a=rsa-sha256 header.s=fm2 header.b=TOWQmbb6
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.65.227;
- helo=mta-65-227.siemens.flowmailer.net;
- envelope-from=fm-294854-202609081503400e399fd873000207d1-fcwkfv@rts-flowmailer.siemens.com;
+ dmarc=pass header.from=mailbox.org; 
+ dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=PThhN0FD; 
+ arc=none smtp.remote-ip=80.241.56.151
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.151;
+ helo=mout-p-101.mailbox.org; envelope-from=marek.vasut@mailbox.org;
  receiver=<UNKNOWN> 
-Received: from mta-65-227.siemens.flowmailer.net
- (mta-65-227.siemens.flowmailer.net [185.136.65.227])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3CD8160719
- for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 15:04:46 +0000 (UTC)
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
- 202609081503400e399fd873000207d1
- for <u-boot@lists.u-boot-project.org>;
- Tue, 08 Sep 2026 17:03:40 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=jan.kiszka@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=2ER57ajvPDcbB+0bTGny30AjAqDOoN0Qd/rOFf9IHGk=;
- b=TOWQmbb6ZBjHIMEPev6o4sOAdp+UH5e8yKRD1gNTw9ARoL+BtVd0jpy21q69nffboTPpVi
- BgWtvD2qxuw742sUo3kYLAb+Q/9x4NLJlSrhPg79IZQXgFxr/i+hkUmixCAO1+kI6NyE/eaD
- dZNJKQenlJnunzapfixK3kBR6ph33AcLspgT3eG3k0MtIBwwfC/ZWdp61tilkKW/k3VL38oi
- +LektJa1SIwIHmDuLPFiKOea+i3US2x8Z/ahi+cojnhGK4F+EZaa6yfNHdWNBhrsb1pezwn+
- ayHSShug+RAby8UyL10PolMQDEs6NVHMwAEHAovaFSjmtQl+ynNFRDeg==;
-From: Jan Kiszka <jan.kiszka@siemens.com>
-To: U-Boot Mailing List <u-boot@lists.u-boot-project.org>
-Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sai Sree Kartheek Adivi <s-adivi@ti.com>,
- Alexander Heinisch <alexander.heinisch@siemens.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH v3 5/5] mmc: Make "MMC Device not found" a debug output
-Date: Tue,  8 Sep 2026 17:03:38 +0200
-Message-ID: <3c69f2bdf4a455ab8f0fe686e19e2c1a24c10721.1788879818.git.jan.kiszka@siemens.com>
-In-Reply-To: <cover.1788879818.git.jan.kiszka@siemens.com>
-References: <cover.1788879818.git.jan.kiszka@siemens.com>
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=PThhN0FD
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8562A606F3
+ for <u-boot@lists.u-boot-project.org>; Tue,  8 Sep 2026 16:30:26 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4hfTv23c6tz8tyL;
+ Tue, 08 Sep 2026 18:30:22 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1788885022;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kCD6hYfkHhxPDWk5VM290dhMRqclS6Cui4OcHi7cz/Q=;
+ b=PThhN0FDNB1bsn/PPZnoRbJb+8Hjhdi/8yug1AS6MpIbUIoS/2RU91mJFgRAO0wf9GGthH
+ n5HLwnUX8NS7uhCeNoCFKHx34UMJVEi24FrVq0njxDdy46KffuH6QvIfT/R3FJsenAXykZ
+ JDPAgMUfQ8a8aKaAahYZD6ezug6B4dlp2AndBau6iQWGsu9/EzZhD9VxPnTqRkxLUirP8P
+ IRgT4SjTZNauCai8u12lPcX+f2QUryuX/Vne7BiHuDkqzZ8q8aZgpPZE8faKvtg4wzIa+Z
+ 7S0nTSsBdeOgoblKKuNuF7WSj/xjYnAkEkJcXz4UYG1GkQal5DzLzbYV2NHafQ==
+Message-ID: <7308a087-a490-4e66-b1d0-d382c6409c27@mailbox.org>
+Date: Tue, 8 Sep 2026 18:30:19 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-294854:519-21489:flowmailer
+Subject: Re: [PATCH v2] dfu: mtd: probe before get_mtd_device_nm()
+To: Ralph Siemsen <ralph.siemsen@linaro.org>, u-boot@lists.u-boot-project.org
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>
+References: <20260908-rzn1-2026-10-mtd-v2-1-6a99d054d61a@linaro.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260908-rzn1-2026-10-mtd-v2-1-6a99d054d61a@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 7545f8f64041aa52cc6
+X-MBO-RS-META: raja36f95rndptb9ogit9ypwp95cfmrz
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,50 +147,15 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Jan Kiszka <jan.kiszka@siemens.com>
-
-Callers of find_mmc_device are generally processing and informing about
-errors already, e.g.
-
-=> mmc dev 2
-MMC Device 2 not found
-no mmc device at slot 2
-
-Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
----
-CC: Peng Fan <peng.fan@nxp.com>
-CC: Jaehoon Chung <jh80.chung@samsung.com>
----
- drivers/mmc/mmc-uclass.c | 2 +-
- drivers/mmc/mmc_legacy.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-index 698530088fe..cd930807802 100644
---- a/drivers/mmc/mmc-uclass.c
-+++ b/drivers/mmc/mmc-uclass.c
-@@ -319,7 +319,7 @@ struct mmc *find_mmc_device(int dev_num)
- 
- 	if (ret) {
- #if !defined(CONFIG_XPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
--		printf("MMC Device %d not found\n", dev_num);
-+		debug("MMC Device %d not found\n", dev_num);
- #endif
- 		return NULL;
- 	}
-diff --git a/drivers/mmc/mmc_legacy.c b/drivers/mmc/mmc_legacy.c
-index 8f8ba34be71..2a4a8a83fb3 100644
---- a/drivers/mmc/mmc_legacy.c
-+++ b/drivers/mmc/mmc_legacy.c
-@@ -45,7 +45,7 @@ struct mmc *find_mmc_device(int dev_num)
- 	}
- 
- #if !defined(CONFIG_XPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
--	printf("MMC Device %d not found\n", dev_num);
-+	debug("MMC Device %d not found\n", dev_num);
- #endif
- 
- 	return NULL;
--- 
-2.47.3
-
+On 9/8/26 5:03 PM, Ralph Siemsen wrote:
+> Parsing of dfu_alt_info depends on matching MTD device names, so it is
+> necessary for all MTD devices to be probed first.
+> 
+> This fixes a failure of the "dfu usb" command that occurs when:
+> - dfu_alt_info contains SF devices listed as via MTD
+> - there is no persistent environment stored in SF
+> - "sf probe" has not been executed prior to "dfu usb"
+> 
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
+Reviewed-by: Marek Vasut <marek.vasut+usb@mailbox.org>
