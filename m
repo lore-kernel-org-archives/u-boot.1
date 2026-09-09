@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F9EEC79FB6
-	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 12:46:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26FD6C79FB7
+	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 12:46:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6181D40755;
-	Wed,  9 Sep 2026 12:46:03 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B949C4076D;
+	Wed,  9 Sep 2026 12:46:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1oikdZ9NjmFc; Wed,  9 Sep 2026 12:46:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 000A34073B
+ id oirLeLAvJsnD; Wed,  9 Sep 2026 12:46:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 54E8740758
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788957962;
-	b=i0c5FgvZbN3R6oYkKo8McHF2h1PwdAXadmwTz2a1/wvMm+WtuuWCweo27QRIC2eMrPx9
-	 ULznf2Od130qvWhYVkzPgx7GniwZZccN1F7+4yZYuiMTZoPVSnhHC/hfmCkMbW+GY67wu
-	 q1u5SKfTMoSuVDlkiv9Y8lBTiFxQU04N/1wpfFQt8TeGzWeApLLzP1ZJPSSoIRl/1IwHn
-	 EBc6R8R1FSVtSfBdxXWk81CSU15M3a6VwuhhKMM2KTuN/ppcO8IcaGrMszdKejylR+Dkl
-	 ffiA1oPgG82lUmJiLTN+6XmUXAo4cDzSdkk4wr24yrvhv47gxLDiv0e+3lZ8DErh4tA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788957965;
+	b=eaNSzBcN2Syd0rrUN0klUCbDnhE8inp2VcLxxMH4UCHEkY7/jJ1hEASCsJSIKY64ZbrC
+	 fhGSwPCugeDEwAUagSrZdvtK82vYZLl1CrwopDSXqRN7o4C+OQpXqmLLALm+7nzule22E
+	 fmmo8PTyisaWcn6bBBfuy7gO1VotfS9Q5YqlMrngIyiI1D12WawR2UWBaUg+pscdlVn8H
+	 qvpzuvAH8kTGloeYmidx8YF8HUE3JTV1UrcwYMvwrY96zxyQQeQ2+SbRMEZBTpWt/k3Do
+	 UZ3BdQj+s/O3uPikt/M4VCdQaFmya/iVMX6jovMDl7ZSL/TmkXByZ/qG5glxWicXgAg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788957962;
+	c=relaxed/relaxed; t=1788957965;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,125 +32,125 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Zu4myBCENGDa39S6adNwIcYjaDG/BKNJ9paH9K5+/3g=;
-	b=VTkRaHXFotr/9BG6GBJhhMMTsvLYIKyfKpuIzRARp+Yrra13Jlt7EuS+quNMve1nQTdQ
-	 nfMGlPvy0M0fLcGdxDdDJOW0/KSBb+dApiDPuQDmuzMgzptKtw8k3zGXJ0XCrrsQhogw1
-	 oPLNJ2z5D3zwGQkSGCehZTglLUbKgQx6XHFHT1Lo/WguMHxLxEe5cq29wGIScNNiLCAqY
-	 /dmIrT/RciG08FGRzXf5ev5xoV8AAzsi08y2XumKi08/pvv86Wer9Hq5RY/9De/IzdbNM
-	 HiMeVWWzS1ljrbg+kt7A1fuBMkvrfIk2yzo2tkHcAvLCMckgZPqCcmlziCs6f1gbi0w==
+	bh=fvE3Z5jJo58BdvFrg+hdn5Yq4bPK6YDLXOU1vfcZyTY=;
+	b=tGORu6jar3/rcaNm2rdKLkhrP8kndYxErfSTP9+5KvV1RJKhcBewK9VH4bi72RWjZ5K7
+	 7bnmT3OFFuoq/hsq3+MW7NhT3s7H+24JAu3qnjx8Ie7TxvKLc5ECDcP3jdbDyb8GJiDPs
+	 GSCHdPjK3rumgnv27HLAgdjAJtkNoT2GbzNnul1kCXTBfxiiyDl+2cIVPvsfHei/zik7F
+	 wogfs9aHTQI39AbCQll+M4c9h+utfQHBaGq3S1HSXJa/oIGmPbN121FaevELd/CVNN4nJ
+	 pgPL1BPIJnAZQJjcUTXVO/rgoUnaW1SQ2+qwNK9s3N92rgLD6X9I7ao9ukYMzQQWd7g==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788957962;
-	bh=Zu4myBCENGDa39S6adNwIcYjaDG/BKNJ9paH9K5+/3g=;
+	d=lists.u-boot-project.org; s=default; t=1788957965;
+	bh=fvE3Z5jJo58BdvFrg+hdn5Yq4bPK6YDLXOU1vfcZyTY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=oo4Ry9BZ3ZNGnYoEcqtRpjySg0rEhlc0jBLto5OKA/huSdvgQzSkneiTWfY1LpWs5
-	 UuwV/IVgz/qof68Jx5XMtopkjCCvgMhiv48KbmaDhvX/zX51lE4s/MT8yhuFMAEPPb
-	 OCXWjrj+MXMf3mCa4K7SABUN2S8/wYkczNO/L7sAhRlWfZbdIa3dsYxQMTEaaYr7L3
-	 11Pl4H6RyaFksimsNU/xlPy5HyxsCCNlpEzAJNDYDTzj0I97/eQ3T9QbUX/JACuyBP
-	 gADC0vAO+Gdtyy2SkY8Ju0o0UT7ZXSv9ohedwp+j+hRvlUCnPmw9od9Ncngj73nFnu
-	 HEfZ6SbyHbgGg==
+	b=Yuudhvi44En0nKs9wucfpJ31XFv7nPQupAa5t8xu7gojz79iPjqaxGIGbmyFSI1NR
+	 mY0H6HFw+5t26c4rFvCowSdG+A0F+RSAC1nOZJX8/0ly6ZkmzZztp9eSO+Gct6DgLE
+	 uXdY+RLlZiXzPppN1KBRcSMTRpx/U1oF7JWpP6xWOAkfOy4JpmUzlrTRLfN/2hicnO
+	 Ci1ad7v1e9/M32riaxs6B3hiTpaGHJS6JPmhWRHCtEmOOOTb8y1xwqc9ZxTJdR4Y5e
+	 umVuLdnnoLQIRR4yimw5FLQubGvOTuzeCWtoaMG7AL5dYOzwDTsaW7HthyzJeFz5md
+	 Xcwey8zKDA9Rw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 000A34073B;
-	Wed,  9 Sep 2026 12:46:01 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id A70153AF
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 54E8740758;
+	Wed,  9 Sep 2026 12:46:05 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6E048769
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9908E400AA
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:19 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5F5C180D3C
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id omV5BEdSwDA4 for <u-boot@lists.u-boot-project.org>;
- Wed,  9 Sep 2026 08:51:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org AEA7C40055
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hs7xspZx0g6Z for <u-boot@lists.u-boot-project.org>;
+ Wed,  9 Sep 2026 08:51:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 86A0980D58
+Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip="2a00:1450:4864:34::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788943879;
- b=k0OuwZSUnLshK70mf467D0JTa6yymQmET1pGV+vVqekUC254qczecj+iDA3npiPkXN1r
- gQmVEbFl2KTokoSgnkxenLbV++G3u0IOVk5aay3dueCU5iJbOAL4iKruFJXnl3KkqCvAo
- 3szs3MnFnj3ePS08vRf0SkytXSiblnYG8HobtWnYMJ3yLvygnsgxODpUWTsduu/zMTJoe
- Y2oR6QWNc7I1IRpuSKxwTwhLReq49zVjnvxh3C33O9ndf+6ldh+/QxXj3PFkSmfJ0U0D/
- yTyUgCvASB6DTshY84XnpggDDrpBJTmJv4RuCL04IO+S4zOTwTP67TBT5A9asHPeWiQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788943881;
+ b=iXVxQOdBfqgV6pnI2SmIbmJGKLZd0aGctd57KluXi2s2Z3cFOU//d/amHHmUQfb+0zEF
+ 7Bx94+J/8gAxs0x/DAhpg7TXdtylSnfcX3W3xuVdqoVT8JI8dq1FM1V0BdhJWYjBNmB/n
+ wUTL/CDZRiOtNMWK6bXBXGhGRFDPzKCwN+8hgElnAbMPoFbGYfnVkbjTlx+04/e/nYoCH
+ fX+EMG47snmtUU4Uu+Y7WlrriR9ehFMD+FE/FOc3Ekb76vXOzbPd1J7F1D4Lft92Wvos+
+ QlAw4eS3v5yilHDve3KDMgOocup6jum/TbFlUC6GKIwqk+N6MrSpO7ozk4fRCxG2UuQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788943879;
+ c=relaxed/relaxed; t=1788943881;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=Zu4myBCENGDa39S6adNwIcYjaDG/BKNJ9paH9K5+/3g=;
- b=BUZkccJSIaCPkr4BzeetIJpaH5u4WGZ8W3J60RdDqprbjBgavj19MJHDO7v7a9VhLaU+
- ObGClJixY1LWwHH/bhdsrquoG54bxkR/S13BpfcAUSBDIF+RLugTm/2vsJqpCVoxb5Nck
- 7fmdOfA9YjyXMPMKegwdxd2DktV/oXmrPvsDSJvtIwWofFemUAaw49orS4uy1QCkmueK4
- a133J+KTFnvT3EsOEQ8zhvwL5Tk6BTTRHHX7mE0PbYyZE0oQBMffo4AlP7CUgLki71wqm
- j6S2k0LX67EnU7NZVVjeta3Hm5cSAbFxzds1mvVIc/+FogCxzlEJD6hE4lunuiFZWcA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=fvE3Z5jJo58BdvFrg+hdn5Yq4bPK6YDLXOU1vfcZyTY=;
+ b=Yd5l04nZ772I8lB59+jAPrYzxS3vOGkQDmZXqtbkl3TMicH6I9Gxdf0awc10CyEraOyK
+ SwQ/tFI/jiGgF2TJmDVKDW8YMIfTcYh+eLPWO5qfrvoUDXUUxQa9WUKlac02n2OvbwoXf
+ mw2yNFYmcITplYgLMcLCb6HhM9ofsGHNPcJlIdpZODuxnYuOXhQmQANQgt0UKnCxK0M1B
+ jXuskSc4ZS1kan4Kz4kr6wV9dr7C/1lfscB87Ayd+ILRfRqF8z9/+qUHdcEf8Uaq6j3mU
+ 6RpBWRFk/jSnPkmAxu0YsbQsJr7D2lboHfHv+YO1KY1ZNEyCSfXzoT12M1lV1SwJujg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=linaro.org; 
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=JbfNxwXj; 
+ header.s=google header.b=k3gSNy+h; 
  arc=none smtp.remote-ip="2a00:1450:4864:34::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:34::10; helo=mail-ej2-x10.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=JbfNxwXj
+ header.a=rsa-sha256 header.s=google header.b=k3gSNy+h
 Received: from mail-ej2-x10.google.com (mail-ej2-x10.google.com
  [IPv6:2a00:1450:4864:34::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id AEA7C40055
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:18 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 86A0980D58
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:21 +0000 (UTC)
 Received: by mail-ej2-x10.google.com with SMTP id
- a640c23a62f3a-c254c50ff6fso68891066b.2
- for <u-boot@lists.u-boot-project.org>; Wed, 09 Sep 2026 01:51:18 -0700 (PDT)
+ a640c23a62f3a-c25085f2422so66517966b.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 09 Sep 2026 01:51:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1788943876; x=1789548676;
+ d=linaro.org; s=google; t=1788943879; x=1789548679;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Zu4myBCENGDa39S6adNwIcYjaDG/BKNJ9paH9K5+/3g=;
- b=JbfNxwXjw9yuM0JgTL5auAaaV2NvU5LtEA18pzZtbGndCtY5aMeM780TB0TzEoncOX
- z7QZwByni+Z7lnmw02BAXeADrFOPd2ey1adBrD7zMu+JNDRTZt67ty8dnv9B8ocEMl8W
- 76RMbsS3dADeAAUc0NzO9JMdZjoCquoix0OZRgcO3UYe5WqyYDXxmuTTB5HPOyUqyroL
- T4ArB3Y6e00kCClM2viPud7KCiSIAJqepoyUtm7/baJGJaBErIb5HmscFvCuloUr5pxu
- wgNW2+uJu8vaakrf92S8aCfLVFmV+ar31kSdljLUdetD7I6gB45NPdSlzhLqapIFRR9W
- gDrw==
+ bh=fvE3Z5jJo58BdvFrg+hdn5Yq4bPK6YDLXOU1vfcZyTY=;
+ b=k3gSNy+hNkOLzFpa4+7ooGNNW/2sQ2luMmZ3AlIWwsiaD0UhgHh1OV6N4+svyWwa7Y
+ T93agC8k9FrvqxZuD9GVQm6BjHg7Ie0l+/cLJD92yVnsufO9xNlhDNVN5Ehfe08Il7Wf
+ RfSSuRlXYrgtTHiXCRNq7AMxs001TlB6ngY1f1VggiRoqQdL0WN6Br3DnscvoHswCfyW
+ IPZuKje8Rolf1Dd25eAvkZmDZJIQCweUbgBracxS/j21f3dQ9KJilTbNEiOi9EyRTIf1
+ kbmfxC7xa3gHgx39q9w5V28MAvdDxXJOC32V164iLmtbbewzCIlGzDFRU+vvxncvstEq
+ Eniw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788943876; x=1789548676;
+ d=1e100.net; s=20251104; t=1788943879; x=1789548679;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=Zu4myBCENGDa39S6adNwIcYjaDG/BKNJ9paH9K5+/3g=;
- b=hrLYm3GvvAEn4PuvVtTjr82qnQiPwb6aF5Xq8GX9PJQSTDq+X7BoB0kdolpxkQYOm/
- 5Ff2nqLkA1Q+d8HOcnsYNRHqvNnesXa5NRUndkknqWQYW7DsN2z8H8TDckD+ucsOY+kl
- 0ijqPjGd1CiwPWlx9k65pxOi64n8EnTMx6XZFk8lT3/nZ3ztAPK6ErjH6ADjff+Z1SzS
- qYG+wSTZYQq+zAjOOlO0nxbbdonuUSwzUT8lzfP1Ry/L3XJ7H9hKN3bR1cFngvksNlyE
- HoYEXKYGozUMhUYZBpOYyHzw3LsT0gAlBC7fo75fIovrlR+Bu3Jg2vKntKs7eeciPN4r
- KzQg==
-X-Gm-Message-State: AFuF++nBpogg3jCVh7bn1C3dY+uyTmvI9g45iGVtS8BULuj41qBWp6mB
- /gM+riOFP8D1bvielXbjxynp7o4c63OSz4FnkrO5aZPpFqyLOSj6r3z9lwhlJXD8J0mSXDH0Zo8
- PPD2f
-X-Gm-Gg: AYBFou0AlZiXwyA/qCjrmUNqzqLznQk8+k4JT0OvQHRuapVr1nySakzCm4OZ6rswNmb
- hD5NoWVaT0tw6vQ22YIT0+SygDGUsy8gmfxKPvs1BC4pbtiPgr3coNRLmj3C30/zuzRjkQikb8U
- nAeiqkec37dXgzGz9ApnyIFiCikgvTLcCbEj161QureAzIG8osPDyBK3ikFpU3CSV/5yZqhVS2E
- tIixZzn+PdtQ+CIQW4teaE6Ltg8pstf0YV+Hlj9+vT55LfpoHuHtBdEZ7k2JciI7UEpbtM6Ywjn
- ZaEGU0pDjy4TxLWp7rC1v3EwEfPkfuuTVi5a0YZ4NCZcfc8kmwItTn6S9nLVz5PxNXscNgQepwk
- +Z3OcjFCcKezaohd9BNXBvjW7v62BNqh9l3ZHaUk8qu8Z2Qi/N9oKF3A2W9Dn3KxQLxsJCG00dh
- lMNE7f8kPHNyT8TGEXHUBGbNGphRqdaCQwGSYKVCz95E86O6nMlF5pXAWQ6Ih6U/Ai3kvH6maaR
- 75HL0mKsh0zsyL4rVCDkXoqr+15wbXRGmh+x4Z4rsQ=
-X-Received: by 2002:a17:907:c1b:b0:c15:ccda:26d5 with SMTP id
- a640c23a62f3a-c2612b8e83fmr1437797366b.4.1788943876536; 
- Wed, 09 Sep 2026 01:51:16 -0700 (PDT)
+ bh=fvE3Z5jJo58BdvFrg+hdn5Yq4bPK6YDLXOU1vfcZyTY=;
+ b=PF2/q2B65/eE5C3EKRVGPhiAAduZ12y2rKSr44e+IyT1e1yZDJaIFuBbr/giMAGfEW
+ nxlrQ6acD5MHULTqRbbGhJ6Jqj5GOUyn1X0wQ/ML7GHdjY6M+KiysTT8HpsuDykyo76f
+ 4E69KutTFMsJKZrGFP9m1Z/fV0kJoiQxx6yBt+m4uAHlscYAmitbf7SRytt0TRQvW2Ue
+ xb4J/2STYmNR+hqdVj05hDtkbgvYSyOStS3zjU7R0CqdB8cPiGSsX42+GaBfuR4odBlQ
+ z7GCfvWKAZsz+WHpKCz1Acf/ZzLv7cR0H1ceR/5jsmSkfiw4dinUNKQOPL/a2zsE0EHR
+ U5EQ==
+X-Gm-Message-State: AFuF++mHRddtlfwjXNmX7//Uobsxghh5QX/h+sOxkpBR8Q8BI6HbOnwY
+ FuAG+DJWzao1z6rEquSeCOr5UrE7AxoVTofoZtFSOE8E5QUhIn064PnxxI6YN++YlO5vhIVnwFq
+ tBmuy
+X-Gm-Gg: AYBFou30ZoDklY0zbAYxeH6Ut5+OWSQZUY7mC7h74dAt7Nav5vkU7OXcdtopeNawYs2
+ xSYIRZWYsMddxj4RXygGRMaThyUafo8a+00jV31Ydekh7rXXSaMnU4rSYGoBCnuF6obbfTrGiyl
+ i5WvdUBb53sXAvTUdQBg572M0gRYog/AjU9OUTkvYt9wfY/PJtDB/e8fDt4VQnHgCwTPfdtWF1k
+ Nd7mnOz9rqQLtSyow2RELKqnYWOhKmuNd+rK+NUvtZD0TwYrqRiK6ttds6R3PFkNFBpmHWy2Qqo
+ 0Ndcx6p2+YZW28ZEX10Z7lN6bW6X2cvzbLrmhJ24v3dh5TNbVEWOvtTIKHGR2L93ZK4lKBfdPoa
+ dPXNO1fbXotwt3lzlx/cEvpljKi1r2ZOvX5IYB9odkoFy9uBTAOJW78cB9+POw1GrWTbGKe2Ni2
+ 5u4WpsCcy+4FuwWvd2lsym9nSuKYJUJCC8YE3cr7rFgQyOEpGRbiqsSzEb8027d9SN7RbhfMvZa
+ NAPE6q+5qUV926U+MLA/Zz73WtMMwqE
+X-Received: by 2002:a17:907:1c24:b0:c12:6db4:4bf4 with SMTP id
+ a640c23a62f3a-c2624cfedbemr999392166b.0.1788943879121; 
+ Wed, 09 Sep 2026 01:51:19 -0700 (PDT)
 Received: from monster (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c292c14c6a8sm90988566b.47.2026.09.09.01.51.15
+ a640c23a62f3a-c292c14c6a8sm90988566b.47.2026.09.09.01.51.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Sep 2026 01:51:16 -0700 (PDT)
+ Wed, 09 Sep 2026 01:51:18 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
@@ -158,9 +158,9 @@ Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  jerome.forissier@arm.com, dlechner@baylibre.com, anshuld@ti.com,
  sjg@chromium.org, Thinh.Nguyen@synopsys.com,
  Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH v8 06/25] usb: dwc3: bring back the samsung usb phy driver
-Date: Wed,  9 Sep 2026 10:49:56 +0200
-Message-ID: <20260909085015.2480097-7-anders.roxell@linaro.org>
+Subject: [PATCH v8 08/25] usb: gadget: udc: enable async callbacks on bind
+Date: Wed,  9 Sep 2026 10:49:58 +0200
+Message-ID: <20260909085015.2480097-9-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260909085015.2480097-1-anders.roxell@linaro.org>
 References: <20260909085015.2480097-1-anders.roxell@linaro.org>
@@ -180,116 +180,52 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The restore commit at the start of this series deletes samsung_usb_phy.c,
-because the file was not part of the original v3.19-rc1 import. It never
-came from the kernel, it is u-boot code added later.
+The dwc3 driver was synced from Linux v6.16. The new ep0 code only calls
+the gadget driver setup() when dwc->async_callbacks is set. In Linux the
+udc core sets this flag after udc_start. U-Boot never did.
 
-Nothing added it back, but CONFIG_USB_DWC3_PHY_SAMSUNG is still in
-Kconfig and odroid-xu3_defconfig still selects it. exynos5-dt.c calls
-exynos5_usb3_phy_init() from this file, so that board would lose its USB
-3.0 phy setup.
+Without the flag every delegated control request, like GET_DESCRIPTOR,
+returns -EINVAL and ep0 stalls. The device never enumerates, so fastboot,
+DFU and UMS do not work on any dwc3 board.
 
-Bring the file back unchanged and add it to the Makefile again.
+Enable async callbacks after udc_start, and disable them on unbind, the
+same way Linux does it.
 
+Reported-by: Anshul Dalal <anshuld@ti.com>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/dwc3/Makefile          |  1 +
- drivers/usb/dwc3/samsung_usb_phy.c | 77 ++++++++++++++++++++++++++++++
- 2 files changed, 78 insertions(+)
- create mode 100644 drivers/usb/dwc3/samsung_usb_phy.c
+ drivers/usb/gadget/udc/udc-core.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/usb/dwc3/Makefile b/drivers/usb/dwc3/Makefile
-index 63c7c6063002..a5775c4bea04 100644
---- a/drivers/usb/dwc3/Makefile
-+++ b/drivers/usb/dwc3/Makefile
-@@ -21,3 +21,4 @@ obj-$(CONFIG_USB_DWC3_OMAP)		+= dwc3-omap.o
- obj-$(CONFIG_USB_DWC3_STI)		+= dwc3-generic-sti.o
- obj-$(CONFIG_USB_DWC3_UNIPHIER)		+= dwc3-uniphier.o
- obj-$(CONFIG_USB_DWC3_PHY_OMAP)		+= ti_usb_phy.o
-+obj-$(CONFIG_USB_DWC3_PHY_SAMSUNG)	+= samsung_usb_phy.o
-diff --git a/drivers/usb/dwc3/samsung_usb_phy.c b/drivers/usb/dwc3/samsung_usb_phy.c
-new file mode 100644
-index 000000000000..3563070cb85d
---- /dev/null
-+++ b/drivers/usb/dwc3/samsung_usb_phy.c
-@@ -0,0 +1,77 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/**
-+ * samsung_usb_phy.c - DesignWare USB3 (DWC3) PHY handling file
-+ *
-+ * Copyright (C) 2015 Samsung Electronics
-+ *
-+ * Author: Joonyoung Shim <jy0922.shim@samsung.com>
-+ */
+diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/udc-core.c
+index a01a7e6dc21f..79f249cbb114 100644
+--- a/drivers/usb/gadget/udc/udc-core.c
++++ b/drivers/usb/gadget/udc/udc-core.c
+@@ -949,6 +949,8 @@ static inline void usb_gadget_udc_set_speed(struct usb_udc *udc,
+ 		gadget->ops->udc_set_speed(gadget, s);
+ }
+ 
++static inline void usb_gadget_enable_async_callbacks(struct usb_udc *udc);
 +
-+#include <asm/io.h>
-+#include <asm/arch/power.h>
-+#include <asm/arch/xhci-exynos.h>
-+#include <linux/delay.h>
-+
-+void exynos5_usb3_phy_init(struct exynos_usb3_phy *phy)
-+{
-+	u32 reg;
-+
-+	/* Reset USB 3.0 PHY */
-+	writel(0x0, &phy->phy_reg0);
-+
-+	clrbits_le32(&phy->phy_param0,
-+			/* Select PHY CLK source */
-+			PHYPARAM0_REF_USE_PAD |
-+			/* Set Loss-of-Signal Detector sensitivity */
-+			PHYPARAM0_REF_LOSLEVEL_MASK);
-+	setbits_le32(&phy->phy_param0, PHYPARAM0_REF_LOSLEVEL);
-+
-+	writel(0x0, &phy->phy_resume);
-+
-+	/*
-+	 * Setting the Frame length Adj value[6:1] to default 0x20
-+	 * See xHCI 1.0 spec, 5.2.4
-+	 */
-+	setbits_le32(&phy->link_system,
-+			LINKSYSTEM_XHCI_VERSION_CONTROL |
-+			LINKSYSTEM_FLADJ(0x20));
-+
-+	/* Set Tx De-Emphasis level */
-+	clrbits_le32(&phy->phy_param1, PHYPARAM1_PCS_TXDEEMPH_MASK);
-+	setbits_le32(&phy->phy_param1, PHYPARAM1_PCS_TXDEEMPH);
-+
-+	setbits_le32(&phy->phy_batchg, PHYBATCHG_UTMI_CLKSEL);
-+
-+	/* PHYTEST POWERDOWN Control */
-+	clrbits_le32(&phy->phy_test,
-+			PHYTEST_POWERDOWN_SSP |
-+			PHYTEST_POWERDOWN_HSP);
-+
-+	/* UTMI Power Control */
-+	writel(PHYUTMI_OTGDISABLE, &phy->phy_utmi);
-+
-+		/* Use core clock from main PLL */
-+	reg = PHYCLKRST_REFCLKSEL_EXT_REFCLK |
-+		/* Default 24Mhz crystal clock */
-+		PHYCLKRST_FSEL(FSEL_CLKSEL_24M) |
-+		PHYCLKRST_MPLL_MULTIPLIER_24MHZ_REF |
-+		PHYCLKRST_SSC_REFCLKSEL(0) |
-+		/* Force PortReset of PHY */
-+		PHYCLKRST_PORTRESET |
-+		/* Digital power supply in normal operating mode */
-+		PHYCLKRST_RETENABLEN |
-+		/* Enable ref clock for SS function */
-+		PHYCLKRST_REF_SSP_EN |
-+		/* Enable spread spectrum */
-+		PHYCLKRST_SSC_EN |
-+		/* Power down HS Bias and PLL blocks in suspend mode */
-+		PHYCLKRST_COMMONONN;
-+
-+	writel(reg, &phy->phy_clk_rst);
-+
-+	/* giving time to Phy clock to settle before resetting */
-+	udelay(10);
-+
-+	reg &= ~PHYCLKRST_PORTRESET;
-+	writel(reg, &phy->phy_clk_rst);
-+}
+ static int udc_bind_to_driver(struct usb_udc *udc, struct usb_gadget_driver *driver)
+ {
+ 	int ret;
+@@ -968,6 +970,7 @@ static int udc_bind_to_driver(struct usb_udc *udc, struct usb_gadget_driver *dri
+ 		driver->unbind(udc->gadget);
+ 		goto err1;
+ 	}
++	usb_gadget_enable_async_callbacks(udc);
+ 	udc->allow_connect = true;
+ 	usb_gadget_connect(udc->gadget);
+ 
+@@ -1164,6 +1167,7 @@ static void usb_gadget_remove_driver(struct usb_udc *udc)
+ 			udc->driver->function);
+ 
+ 	udc->allow_connect = false;
++	usb_gadget_disable_async_callbacks(udc);
+ 	usb_gadget_disconnect(udc->gadget);
+ 	udc->driver->disconnect(udc->gadget);
+ 	udc->driver->unbind(udc->gadget);
 -- 
 2.53.0
 
