@@ -4,248 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C371BC79F8C
-	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 05:29:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB24C79FAA
+	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 06:31:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5A86D606AF;
-	Wed,  9 Sep 2026 05:29:18 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 682D260770;
+	Wed,  9 Sep 2026 06:31:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4TWC7C-SZedK; Wed,  9 Sep 2026 05:29:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A8828606CA
-Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788931757;
-	b=cbftyoCMIkQi/HbDlCluJYrlqc2rF1rjarttieAIxm8TMOt6K4THvgq2tce5OD5h1iEK
-	 vxx1/pKUBDbfEgg4LBokWz/+BweJI4buCLIWWRJkMS9NRHXDPR3REQHtskUFGlSjpEhJD
-	 kpC+hYvCuEOWfLkUNXCKHWR9V+GWpKA49T6oll55IxdPECeum5Nxrb/0KHq3lvDZG3n/M
-	 KXWhebpfvwyauqd1J0uYsRadF3JmUys3sUYgoRlygXypvec3hEXvVJpXcRUyMEvTLwDKw
-	 767cuxsoRnVHro+eh5jsILPexOKfKBstER3a38WOgZl5dR/v4KGNoR/HwJyFZ36MSpg==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788931757;
+ id Y63-OYSF_zVS; Wed,  9 Sep 2026 06:31:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 6ACAD606CA
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788935470;
+	b=jWKewD/CFUtUdI4AECqFltoz8Uc06YXeMekZJcTqFRtEQY7ssOBWCIceOfUNF0EnzI+1
+	 KhTnsAgE2S9euTGIF4X2EP1CysWW/buXeubiSX1g2BasjSiouYsr/pqb5/p/Q1HMWqzh+
+	 EovV80uoFoqvQSoQV2D62XDCxcrO6jUDUWaryqGExuCT7JmY1X3rITxpZqlMrwSgNah5d
+	 wgvZefQCfox2yDNsVScAbE1n6RlfwanbiUOtfDQDfSwTiHpRld9fkamEJ+HDg6og8dP+D
+	 RD65c8tK6w63/SBjcPUil7RFR84TM3JrG0IWcyS3ep6kuCWYSrS9NpvWwfJTVstnaew==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1788935470;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-AtpMessageProperties:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=mbsi6+IXfg2oZ+bt2Qoqc9moxJ/GtjcN7pb3a8LKYp4=;
-	b=Ivw90si5tPj53hp6tRWYDGZ3c8iBMwuGEkNGLMXKLZ53D3CzzQRFflwtKuyaxlb9xSG6
-	 us4dvNxCcFGgjRDBsNWMZHMn2Og5xqaKFCthSjGjE1QoNk5o6VSUSGVTRYSw/6cy+WrdD
-	 9zyi+YEa7I+J7Ar58hwRlMuq9dw9DB14Mvb5vETpqJP9q8YUpIv0+/F56P3XIuAiNvKZ6
-	 8ALPnz7o1mZ1uZ3Q0yxR773E+B58ClVkua8hvXggPO2k9pppGsw2YLPSDUfsM55bvXvwl
-	 0skRMQX2ZyQLWliXtQD3kkuMI5j0WY4PkQoz1rg0RVU8HtM85icNjecXa3EESQP3AeA==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=pass header.from=altera.com;
-	dkim=pass header.d=altera.com header.i=@altera.com header.a=rsa-sha256 header.s=selector2 header.b=DoGSk5CR;
-	arc=fail smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:X-Yandex-Fwd:DKIM-Signature:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=z1b52XsiOkL+ntRQ7FVIh3DVc6Nq0JqrokqSSevMWnM=;
+	b=ncJxa0rTKRUs52UlNwgUni9bfDU5yaRjQMaScmhWCkyrHf7apIn4uIwCmJxT4kgpjj0s
+	 zpntjLFfq+l435Nm7I6lQa1sTUTo49N6Gv88/pyuPAw48LDrt7wYjNugpe1NMrOeJ4bRM
+	 v2SUxm5CLpAZlmhtHOCWNoN1bEj4ZHXGh5BcZ20xCbepzgOg0G8v2vnWyWAI39Ms1ks8j
+	 8QTr2Erf5K3mZkZfvh6dKP8kctmeVz5QSqtGxm95BhNHip96LerbDr8rvQmYHWEWAzPBz
+	 SVWh266snIIqDP/TJy7kqu4B8vV1BuD1CDjcPghGSUgbnBrzfePvi+ZBqhXzoa3mSXQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788931757;
-	bh=mbsi6+IXfg2oZ+bt2Qoqc9moxJ/GtjcN7pb3a8LKYp4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788935470;
+	bh=z1b52XsiOkL+ntRQ7FVIh3DVc6Nq0JqrokqSSevMWnM=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=R0ZA1SFzuzHqelLk4CbJk9k0lOqKnpKRNr4p7u2ZGbUGCvl/RWdHIgmGapuKMXsJv
-	 ClDCIXXOhGUYdDcLUxLRU/LC6SavK86LiKQ2tHgEcNpRqu5cGZkoqHxxiW3A04Ata5
-	 vPt4X9IxtLzBDMFk8sEJv/QCVNP2rweHV1WFNDTkL/bIr6Ti8yVT9PiVF6Vx1eauYa
-	 qU37Sj5AY7FwDpj29BQgAnQOEfF9AOTxnS9kIid61Onjum6crBXxr7dPdyECc7boZu
-	 S2pDy+xgi9/DIk3dpSHfcRxT6nNXhfRByeJGfiDf/pepV973GPuRTUzxAtn5Wl9NtF
-	 DBE7/+CC5mszw==
+	b=MEwxCBckk4j8J+sXv/qdTXHdQ2nVo3R3COretv9r1cNZh8XlajVtDIWrdVp9NQNtU
+	 YrjBSIKuiKnxh9deVH/3lNfNFfmFDLR74up+62WmFwfIM7X5/KgE9NPgf239GJLzOh
+	 kVzzo3Pq6cYN+BDOt41zz0sNlORMg9MpRJynXbjXayyu8h7B1hUB/Hs4ZVG97JiyaU
+	 /8OvXh4kjAkYApkTOOxqaW6apMidP/nFH1J/TR/Um9MehRVesEAELTmLuX4c6FhXuh
+	 5MbRzXiJ2sMIsvKLtN9Ab4gRNPid1SLy8oylml6S4pHqArV8asb3VyPTZaD7VqeqYE
+	 UCz8FsKnklnmg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A8828606CA;
-	Wed,  9 Sep 2026 05:29:17 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id B5A7A29B
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 05:29:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6ACAD606CA;
+	Wed,  9 Sep 2026 06:31:10 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8403F4CC
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 06:31:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9B6EC606CA
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 05:29:15 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 75884400C2
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 06:31:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ipWqQ8wQtmlb for <u-boot@lists.u-boot-project.org>;
- Wed,  9 Sep 2026 05:29:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org B85B8606AF
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c107::1"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788931755;
- b=NhQvVwKOa3XKqsQNenAQpSDMoarFXYZOURegEza5n7DWYPWcIKXVh4IF7UYUNNu5yqg+
- dJ2u27k/NOfbB/dzaWy1Vhp4ch33uxAHGTyrnguBi+QtA7vrLL1btS/uVmYxmjXQpG7kl
- BmGgZd1NjVVIhpBfBeXCRUkZQVEM2I45A9QvW6gS0HSK48Xw5yy2WSu4DXT6CvDclYKMf
- T8FEs3mRC4MRmdx7PZAfTPiEnqbc+tLgss7FQfsY/0xXr+nvsR7HgJ+lqisUNuWLu2loN
- 1s2UkTzL2D2tZhVf85v52mT0LwHSsg8FYyYGnsiCRx47ulzMNtHuh0tqhvzqrv8NWgQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788931755;
- h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
- User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
- X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
- X-MS-Office365-Filtering-Correlation-Id:
- X-MS-Exchange-AtpMessageProperties:X-MS-Exchange-SenderADCheck:
- X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=mbsi6+IXfg2oZ+bt2Qoqc9moxJ/GtjcN7pb3a8LKYp4=;
- b=tYJJj7P8wnuW011He6VJ58/ny8mCwrh+xvlqpBpE4JeO2YPBMR9wDiTazRJhejn0UJF0
- jslU3mkzEYjyGVwhCsm2sa25hoSsLRrHYNq8rZ6GMffHYWXbrzLNdb3DLsT5AHUJiosxz
- 8Lbd4a4z4DTAKkQalfzklnx7/5tTEmBfL4r0TrShWvTx7ssAkHzKDYG9rhrUogLRlVkaa
- vKeoDawckfrEo1FKmTIeZPqhU8RQVNOknlTAyNXNpHMVNj/E2GzhqNSVcJISS1yh/6LH2
- hw1qJO0XI9eyKaAesZeLL018bZiqL/CsTukvLyM4Xg8hZgJsyJ9Nm1hdD9Zw/YPPH6Q==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org;
- dmarc=pass header.from=altera.com; 
- dkim=pass header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=DoGSk5CR; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c107::1"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c107::1;
- helo=ph8pr06cu001.outbound.protection.outlook.com;
- envelope-from=tanmay.kathpalia@altera.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=DoGSk5CR
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B85B8606AF
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 05:29:11 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TEskXfokX1bw7YmOXBYWcXYt1NzF8wOrW5Bo2KtF22lYgLh+1j2o2xHJKeCdTDm3ek1wLLVkfuPnrEw1+MZNLvky/hgWyL3rdlBI984u6eJ3hR9XxA7n9q/LzmG//8Vub+g+5cYy/tUAXrCSQVd43QpcaGug/V6uDdLLz0t1HZOe65SaBWGYP4IzJheCjaE8WJHgjqTgFp+FhdMlLP4ZReqXOP5NKRewx/t5EPflGnfm9zZ8xe2dhrUS4OgSgcOvFjT5r5vRB2E+0mHn8uRRQvjiUAl+dBFZwlK5U1HpeE9u7gcvOSzNX4oRtA0yi9UnYj6k8TdBrnodQbMf9e4XzA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mbsi6+IXfg2oZ+bt2Qoqc9moxJ/GtjcN7pb3a8LKYp4=;
- b=iBRGY6xEnsEBmSAVNtKjUIGZbos3lOgpflYdmen/1yLCiiLgLVaFlsN420QDbUrjsNsXpCgzD3RrNP7d6cq0RnOIEbDXa/Y54jtOxu0g45lC6kUvxzSzVhN5EFjCR/r9FNsJUsP2BaurmQe5q7s4zPBxgnQgCzpERcc8vcBprgyqZHcpzPi4MkLhRMDs688wjsLuLVShUik5rilUIqjKHCVEEupT091qeIvhfrlUJl25g33wghpdJxf0Zdpc4N9w7bGhtqrNQx1OUryYLmjQwNbB6f1Tf4psdqjJsY/pivIX/ofkQIbLrfergliUDIttZz5mZQtNid84VlptR25Fwg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mbsi6+IXfg2oZ+bt2Qoqc9moxJ/GtjcN7pb3a8LKYp4=;
- b=DoGSk5CR2g8Qvt1fWGI90rlbQioydmKpHJz66kSYW1ojC65OzSIOIsvtwYSYgSg8KbcRvxCgAAf6c3G14Wz6sWOxT1Hc7k5B/ulhf91gZ60Sh1wz4yFBVZJ3d4YUZGhUCu1iz1842oUR3+LcPz5J3ZmjIYUEB6FpPrsW9NEtbt0M93EzCUMcZ5YU9g8XMsVOiIqdf5rzUAvvA5GAwPWn4GS+7x+gzmi2L2XwGDNww2Ezci3w2EaDVz0Qwh9RNDmLXTlmRsrM4zVhfnzguSDCur8bqrUPGf3vuWV+3vriFPEjtoPSNMRC2A+rFXCy8TKhK/SJCgaf/fiodnBawh/Rkg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
- by SA1PR03MB989317.namprd03.prod.outlook.com (2603:10b6:806:4f1::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.15; Wed, 9 Sep
- 2026 05:29:07 +0000
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::2216:93ef:67b:9e04%3]) with mapi id 15.21.0406.005; Wed, 9 Sep 2026
- 05:29:07 +0000
-Message-ID: <480e5a19-e0e3-4b85-a09c-c4f0cc1760f9@altera.com>
-Date: Wed, 9 Sep 2026 10:58:58 +0530
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/5] mmc: Make "MMC Device not found" a debug output
-To: Jan Kiszka <jan.kiszka@siemens.com>,
- U-Boot Mailing List <u-boot@lists.u-boot-project.org>
-Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sai Sree Kartheek Adivi <s-adivi@ti.com>,
- Alexander Heinisch <alexander.heinisch@siemens.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-References: <cover.1788879818.git.jan.kiszka@siemens.com>
- <3c69f2bdf4a455ab8f0fe686e19e2c1a24c10721.1788879818.git.jan.kiszka@siemens.com>
-Content-Language: en-US
-From: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
-In-Reply-To: <3c69f2bdf4a455ab8f0fe686e19e2c1a24c10721.1788879818.git.jan.kiszka@siemens.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MA5PR01CA0233.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:1f4::14) To DM4PR03MB6208.namprd03.prod.outlook.com
- (2603:10b6:5:39c::19)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KSUYxlFU0mKx for <u-boot@lists.u-boot-project.org>;
+ Wed,  9 Sep 2026 06:31:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 7311C40055
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=178.154.239.214
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788935467;
+ b=R9RT0ekMGH0unlqfHQGdvxONoCkzd7BgqCo5GkMkB97BBnB7cW9FIlQeBbYoH9xd/aSf
+ Myc8j2TY61C9Gdm6bKnQNvAXv7y62LqX7ONckP+CCjb+xdm1vMvTJY4o+ST1XsZVBAuoJ
+ Ubk5kEYQ/wfhPcbkiTbUCOQm8Zv1/qZp0sIsYsiX05XrspKe8sY9ST/2xsYqRvuMYtFad
+ 3iA49X6SA/JJqjJZA8IPA53AVx2/9SiYBCZpCDvFgVgRARMBLDlArBtxhmnUKyuXvwEKr
+ BWqZv4gKqfgXsq41glCj/JRxN2y0DfKiUh17uMREUWLodWOGXGYAtW/ibOpODv+59RA==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1788935467;
+ h=Received-SPF:Received:Received:X-Yandex-Fwd:DKIM-Signature:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+ X-Developer-Signature:X-Developer-Key;
+ bh=z1b52XsiOkL+ntRQ7FVIh3DVc6Nq0JqrokqSSevMWnM=;
+ b=LptF8v9kCo/TZ9xGhlUVkoslcvir3Fd8MmXyNO0QjaD+9Pyol76MoxWpS0zwBIzK6/1B
+ 5e5AmStep87ehi49OMT3hULg/tz2gCq7RVSL8s4tD/b+TmgTYU0BK3c06Rx5fatIs0dbb
+ Mp9pOQ+6GwaSGDUo36oeE4z1xuBvHBDMCEdrwLqli5//rCgm70g54zkjo5RelPMhYecEx
+ Bh5bT1Y3PrhAxBgwfcEOb1R9OSOllwQ29VxDS2eSerNJwO5914Rxf6Xkglg6Nl1ayPn0j
+ InqHm7/yFaDJSjar5zwdVh5xOFQkecC6kYhVR04xw4WinOvXaazdeh6dCNovfLeCn/w==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=none header.from=maquefel.me; 
+ dkim=pass header.d=maquefel.me header.i=@maquefel.me header.a=rsa-sha256
+ header.s=mail header.b=i4R55F9W; 
+ arc=none smtp.remote-ip=178.154.239.214
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.154.239.214;
+ helo=forward103d.mail.yandex.net; envelope-from=nikita.shubin@maquefel.me;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=maquefel.me
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=maquefel.me header.i=@maquefel.me header.a=rsa-sha256
+ header.s=mail header.b=i4R55F9W
+Received: from forward103d.mail.yandex.net (forward103d.mail.yandex.net
+ [178.154.239.214])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7311C40055
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 06:31:03 +0000 (UTC)
+Received: from mail-nwsmtp-smtp-production-main-63.klg.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-63.klg.yp-c.yandex.net
+ [IPv6:2a02:6b8:c42:49a1:0:640:3edd:0])
+ by forward103d.mail.yandex.net (postfix) with ESMTPS id 60396C0095;
+ Wed, 09 Sep 2026 09:30:59 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-63.klg.yp-c.yandex.net (smtp)
+ with ESMTPSA id vUHHbfWlcSw0-dNQnZFME; 
+ Wed, 09 Sep 2026 09:30:59 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maquefel.me; s=mail;
+ t=1788935459; bh=z1b52XsiOkL+ntRQ7FVIh3DVc6Nq0JqrokqSSevMWnM=;
+ h=Cc:In-Reply-To:Message-Id:To:Date:References:From:Subject;
+ b=i4R55F9W2VSLsFYQ7cKSHM4R9wXJHaY01trTWA/BD1QyoOyigY3CwpoQxw1h6LzjJ
+ KR4smnsqZz7R/uk8il2AXm6CMcpJRDQWF579xHcGyDdpFTTBjdj+Ufv2UY/OhEvpub
+ cvP1QAQiszmuMmMBNsfJjZcqfgExAeHx6Oov4LfM=
+Authentication-Results: mail-nwsmtp-smtp-production-main-63.klg.yp-c.yandex.net;
+ dkim=pass header.i=@maquefel.me
+From: Nikita Shubin <nikita.shubin@maquefel.me>
+Date: Wed, 09 Sep 2026 09:31:00 +0300
+Subject: [PATCH v2 2/2] riscv: timer: Make RISCV_TIMER definitions weak
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|SA1PR03MB989317:EE_
-X-MS-Office365-Filtering-Correlation-Id: 65f22af9-424a-4733-fff5-08df0e3344ab
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|23010399003|1800799024|10067099003|55112099003|4143699003|56012099006|11063799006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: pPpfooew3xAVbAbHnMVpKiP/ns43BcCK+xfaP1Wt0KK6G0Qv7WcvW6SFu0WW1Boi+yLkGV1eb11JjZJDGkIAacDH3HmkOIqI8zC9zIokiJm/0WDH26RJgL39n+z9NeQe0bKLDyB8udY4Qmh9EceZ3kNrHl+lvLtlmoctAMiMsp9ozuStXt5Q+w0C4Fci59Uw1M7ppJGbwd/eSlH+w/ialtfdHUc8XX51E7Tzu+9Y76HHSi/F/u7jMlOeRxOXMxwWZI/AmOjEB0I1AM1cYmfxaErVHOGjRsgz6xqUXDblsN2gX3DecwIq8PgxgaHOsUbKoZ02pMyhT9m7AQv6OUjvYH8PLxSoL/cdTXWn8fo+kzycv9pp4Dap/E7Q4c/jsse7HJBBaI2qClDQin3i/WoR2Jdca1MhkCeDEHCSFaEOm3vXAsLRWUsNpptYwFtMVJl8zdrcmNMd/E+MOzEKMVQlAmi2vkZDRWC3SADSokenfaHdLZ6we/lcMy1GNdQgafVeBq2sr4lN+ZzTkYNAuIl0/uaI484yMKRgqfcbccBdQt1z4oXKyaOXWsGspV5kH/rCmtkxGkv6q6bLH3vg952B27WOjTXAbpwh7EWVC83lHZO1N0rJ70Ou9VwY06bMqIfOQpXRNg+PsjT4NQQBbtlV3cJkaDbDLpOl9JVEcXGTQH0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(23010399003)(1800799024)(10067099003)(55112099003)(4143699003)(56012099006)(11063799006)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dnk4MTlYaXhRTTMyYis2THZCayt3aEYyT1NUMTlpQmZIMHZRa0V6T29EMUZL?=
- =?utf-8?B?ZU5hb2dyaFcvTmxJZy9FWlE3RWZMM3loZ1JUTklMQ0tQRkRqVnVwVlpKNzdy?=
- =?utf-8?B?Y1h5bDM0RTh5SzQzQlUwK2xFWCs5dDV6bVlrOUowYW9RZk1FdlJOMmNPVTE0?=
- =?utf-8?B?NUtuQ3lXTHo1Mk1YNTZiN3Y3SWgvR2RML2tCeW5NRmxNaW9uOW9kNnZRcDg4?=
- =?utf-8?B?Qk9wV1VSUzhISjErN0NMOFRqZ0hIOEVRajVGOW9FejhjcWcvWG5qSXJBVSt2?=
- =?utf-8?B?cmVha3d5SCszR2xDSjBzM2k1cmxtRThhd1FUN0lLOU9DNmJHVVNTS0lTcHpk?=
- =?utf-8?B?NHkzaEFmSkNERVZ6aTdPN09rOCs4RFpXb2dVL1Fqa1VHK29vWDlqN3RGWUVY?=
- =?utf-8?B?Zk5ENm5CdEF6SThkQTdYZDlVbkZzb2RWQlUwWjBON0RTd0hiU3ZadGgzU2Jk?=
- =?utf-8?B?aHRDTmFjMmJjYXZhSm9wR1ZZTTlNSi9TbXRKa0RaYnR4TlVHSjVrVUcrdVhH?=
- =?utf-8?B?TjdTWDVGdWJKd2ZWSmZmZ2wwR2JOVS9UNkVqTGlNbWYwNXpEcXBhODFVb01x?=
- =?utf-8?B?RnRkRDJpaElKZi8wQVdOS2dQUmR4b29lZWZVU1NSSlNMK2VtU1VsUnlHVHNG?=
- =?utf-8?B?THNTNHJLM2xSWmJ3dm1mYWtJRkxsZVFFcVdWc1h2bTZDMFZwSXp1T2hhN01m?=
- =?utf-8?B?Q0tlSVF0Uy9PT1BVTHRZSTc2OHdDaXhRSWJVT2hYbC9yR3k3SlllY1pEVktk?=
- =?utf-8?B?UkdlN2JIa0FLZXEyVVJXcTA3aHYxaW4wcGZvSEFkbzJrS3FMQjlzSERuR2ZV?=
- =?utf-8?B?dmxYbHBYMm8vMmNBZ1hwVW9GbVM1dUZPQXRyWWtFUUo1R1VteFVrQ3VxcnlN?=
- =?utf-8?B?NVFKL2IxdDNSSWI0a0VkT0VaRTlEZUxGTjlQNjJhajVxc2Ruc1JDbm1hNVdM?=
- =?utf-8?B?VGE4bkVDUEw2TE9NZW1ha0kyeDlkOVFPTU91UUtlcml4cE8waUZaOTVFTzl1?=
- =?utf-8?B?MDg0eTFINGI4eEpzVlYyTTdoUkIyOFplNjA2RVc4K0k0b2E4NmRKUTE4dGRJ?=
- =?utf-8?B?VGhlQ0NNRXdpaUx1S0cyN0FqcXFyNWxMUE0rZ0NObjB6M1piTThydWhrTlFp?=
- =?utf-8?B?UUVrcFN2SzJSQUN4SWdEWjNsZmJteEZXSGhlbWpQUE8zWW5tVHVEam9nNzVD?=
- =?utf-8?B?d2dyK3JFbTdQT2ZHVFlWbjlBdHBZYi9DT0hZNk5oNDN4RGQyb2krZUQ4N2pM?=
- =?utf-8?B?NnhzN1Z5c3BYL1hRTmFwV3d3Skt6Y1l1aXJKbXJsNTlSaXo4VFdQSXFqSnBU?=
- =?utf-8?B?SzFQSkVETmVadUdlTGdHTnhMbTAzY2tNVE50cnljZGkvTVNKeDVCbEtJMVFW?=
- =?utf-8?B?QVJxbXVvUnh2dHJNVURjZkRLM1hHSjRQbnRUMGc3Mk4rYXdLd2pVeUhhbkU5?=
- =?utf-8?B?Zk82d0R2bi8zZ01KaVo1YkI3Z3JpTCt1UFJsRGIyVWNLOEEvek9XcWNKRVk0?=
- =?utf-8?B?d1BXbW5IanVKd1NKTUQ0R0RMT1FwS21tL2dkcWpsbWl6RHlrclRRdkJVK3Vk?=
- =?utf-8?B?RENsRU5nMmdOenkwTHNLU2g0R3NETjJjMEUvZlJjOEJwZ01yamxlUE14bkt6?=
- =?utf-8?B?NEgzaG9KNkV3dlVtMGNNdGczcER6bnVEQTE0L0NpVWZxbUJYWFZ1RWNNZFpk?=
- =?utf-8?B?R0NRQ2NYNWlkRmRteG55NFd3MTh4MkNXN3BQOUhmVkFtM21FSDRiZUtDQlor?=
- =?utf-8?B?ckJ2Snpnb2hSZGhXVGRiNGRSdlRuSWZFK0VRUno0dHV1d1JaeXdaMFZ3Z01I?=
- =?utf-8?B?bXZmZmZVT0cyRVM0Y0NNaG9iRU16aDVoL2JJUTBaR1dZaGlsQlJlSEdnQXNG?=
- =?utf-8?B?SDVJSmgySDBXOUVwdlpMOXlYbXBqbGhPbEpoKzlreGEzN3NvbDREc2tEYUdp?=
- =?utf-8?B?bWlxRzEvSTlENmZDU1FPSVNFeklGek1Fb3BzVyt1UDN0N2hiT05wc0YzZzVx?=
- =?utf-8?B?cFZRZmNVS0R2bEdlWWdvNE9oa3NCOGVkZGlXTTY3U2J4Q3h6clg4Rjk4RXlF?=
- =?utf-8?B?T1c0enlKM2FiaGlnamdURE85aFoyL1RxWThsWTBCSk9SMVZKR2hTRVZiMlZr?=
- =?utf-8?B?UFpTQStlUTU5dVNYVEhjNG94WThYcmVaMFFqZURuajIxUVpGRHl3cUFaZWs0?=
- =?utf-8?B?bzE5azkxazRYV1hlV1lPZ1RkVTJ5bkFFSUtCS2xqME9ua01tVU95QWNmZERQ?=
- =?utf-8?B?d1FLdjVYV1ZSOWg4Vjl6WVRkZ2xyUGJPZFBuZjNXQUZlTUV4YUNDYVA2Y2ox?=
- =?utf-8?B?emJjKzZ3VmF4Q3dlTkdIYk8xU2JraFlDb1hlQkpiWE0rZW90bjNCVmpucFlR?=
- =?utf-8?Q?pqZFxUeGJ5Yqbq+I=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 65f22af9-424a-4733-fff5-08df0e3344ab
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2026 05:29:07.5670 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ANR9pmwJjuWTRkuB+ELWqmLKDJjeBiqb0IHwvsbSXxhUTUSeChpLY7X5b8hy9KO0PAiE/PCvq4cWuZEaGDMR1lo5MNRTHy37Y47ung0FXVo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB989317
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260909-riscv_fix_early_timer_mmode-v2-2-563bff2a50c5@maquefel.me>
+References: <20260909-riscv_fix_early_timer_mmode-v2-0-563bff2a50c5@maquefel.me>
+In-Reply-To: <20260909-riscv_fix_early_timer_mmode-v2-0-563bff2a50c5@maquefel.me>
+To: u-boot@lists.u-boot-project.org
+Cc: Yao Zi <me@ziyao.cc>, Tom Rini <trini@konsulko.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Nikita Shubin <nikita.shubin@maquefel.me>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788935459; l=1206;
+ i=nikita.shubin@maquefel.me; s=20230718; h=from:subject:message-id;
+ bh=e8Oh1SzaadRXZPBu96qPPngChE5WboGSlnyG5g41XwM=;
+ b=fpYp3496pqk9hD4tluEKqaKEKRnMXhKQa4G/tCpq0CFefWFIF2lvCmpUD2f4cs9CXLyJJBBJ1
+ iJhqWTD8go+Bl4v1B4te8Oypy9x2/XSh/x0P6zDFHX27OPODP4e99aj
+X-Developer-Key: i=nikita.shubin@maquefel.me; a=ed25519;
+ pk=vqf5YIUJ7BJv3EJFaNNxWZgGuMgDH6rwufTLflwU9ac=
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -259,18 +154,39 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Mark timer_early_get_rate() and timer_early_get_count()
+as __weak to avoid link conflict with other drivers
+(e.g., ACLINT MTIMER) that also provide this function
+when both are enabled.
 
-On 08-09-2026 20:33, Jan Kiszka wrote:
-> From: Jan Kiszka <jan.kiszka@siemens.com>
->
-> Callers of find_mmc_device are generally processing and informing about
-> errors already, e.g.
->
-> => mmc dev 2
-> MMC Device 2 not found
-> no mmc device at slot 2
->
-> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
+---
+ drivers/timer/riscv_timer.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Reviewed-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+diff --git a/drivers/timer/riscv_timer.c b/drivers/timer/riscv_timer.c
+index c2e617317aa..58878445e4c 100644
+--- a/drivers/timer/riscv_timer.c
++++ b/drivers/timer/riscv_timer.c
+@@ -39,7 +39,7 @@ static u64 notrace riscv_timer_get_count(struct udevice *dev)
+  * timer_early_get_rate() - Get the timer rate before driver model
+  */
+ #if IS_ENABLED(CONFIG_TIMER_EARLY)
+-unsigned long notrace timer_early_get_rate(void)
++unsigned long notrace __weak timer_early_get_rate(void)
+ {
+ #if CONFIG_IS_ENABLED(RISCV_SMODE)
+ 	return RISCV_SMODE_TIMER_FREQ;
+@@ -53,7 +53,7 @@ unsigned long notrace timer_early_get_rate(void)
+  * timer_early_get_count() - Get the timer count before driver model
+  *
+  */
+-u64 notrace timer_early_get_count(void)
++u64 notrace __weak timer_early_get_count(void)
+ {
+ 	return riscv_timer_get_count(NULL);
+ }
+
+-- 
+2.54.0
 
