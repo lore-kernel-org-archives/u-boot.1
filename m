@@ -1,126 +1,130 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9D01C79FB6
-	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 20:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 886CAC79FB7
+	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 20:44:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A070480EEE;
-	Wed,  9 Sep 2026 20:44:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3CCDD607F8;
+	Wed,  9 Sep 2026 20:44:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id V4ZVCalesu98; Wed,  9 Sep 2026 20:44:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org E620A80EFE
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788986692;
-	b=AYJha79hvnQFBBP/SoJqpnvlGFvmWZNiXLJsFeWbLnLxwGb8+LzIf0x6KxNaH1F7VNo4
-	 3SIQyUPNjsQvmd0Gun+b9oPJWJpvW5zfi8v+77ebmasm2Rowzj0DIOpezVFPfiiugfmjJ
-	 C5RYCtERXicwAXk41ibXFHI4Ekf3mAv8a/oRUtdWKZL5VMs501Z/uSQM10a6KIxMFMpcP
-	 vCbKMxbXy2DtHtQ+d+nBToX7TjNKCbvmRt/MmCiL/ZrsotkGoVSc6KNV6J+MaBncY8C+1
-	 ot6vnc2tq5g2iiqt2FySfON3NrqKjc4/FgHOXhCPJVMPQBmZ3FbnVQH77/GbL5Jix4g==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zZ9R6ZCbUPL6; Wed,  9 Sep 2026 20:44:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 854FC607FD
+Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788986693;
+	b=GeDMfmEuDyMyhQpH05YvqKfJ+Ifjj5mz00R5Df+BWFvw/65kf35EZvoOeCa49SGU6R4j
+	 BZLGI3dOwfKW54fES8i4gknwpWCFhh6Szp7Ea8rIoLnF2TD9C/7zE7HInZVK9cSZE3ESe
+	 hodGFN8H/egTh46iIjnzByS0pTvhnHW0AtGNjEzWmQX7ollFxJVaB4+Yiydi83ktyRJXm
+	 f+560aug73mIc7okvIYpbk21WCc6nZpd2FefLm1tWDyIA4iafSDrgw0TetwfPGvI6JuFY
+	 fY4C12VzPrRVQB3Rv0GYiijBhEaQfRFuUT3CNjaekPP+pbzP3zkxGjAVxt66fY7YgiA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788986692;
+	c=relaxed/relaxed; t=1788986693;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Filter:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=0N0gEBdF78Azeo0zrEm1QEoX97TtVniYpp2Q+Ked5mM=;
-	b=OpzsDk8lr4WfmsB+sJnlWg6HihRNLxEOqF0aCAnaaENo2ntbSzphTLho5a1I+xhQ74lH
-	 AbavM6BvlKvgA5CYHJGdjO7Ko2N/l63rucERzQx8/uGAFmEE6UZw8aaHKK7gV63+SyRBV
-	 A30KNtSIFLmbT6pmsoU04yeKifZ15/zBCLxkJW3/jHQn3GN295HvHLagQ0uj2f0Zsk5VV
-	 yMcgH/XHhDojAFdUIKaJiwccc1TmIV6rWl+ZI8FEQjN5tmyCzwUhaljihwrXdawZZqGLh
-	 O3u+sMJaXR2xFN0kQj/Vjs2oSva6hJdkz2UpQ6PfqBUwrt+OTxFMN/FhPXctTx2nOhA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=linux.microsoft.com;
-	dkim=pass header.d=linux.microsoft.com header.i=@linux.microsoft.com header.a=rsa-sha256 header.s=default header.b=MUyqopsr;
-	arc=fail smtp.remote-ip=140.211.166.142
+	 X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=KQk1Kpn0Rn3cChZdefNz77lsgaoifq1Xm3AaYeM4q8Q=;
+	b=fsSlOuzjBI39l0Lq8Q5KBJZM2gHuTNPUSf1BdlR6KmXk0IR0O4Ggr1p4bn1z9/n8FeWF
+	 YH2ppu8LEnBUmS3+NeRgrd+KVaLfVOrN6wHYV2TCSImUM6seMxOwV6WdNg7t/pGLrf15Z
+	 OAJQh8RDajHF3GjYseJESgHjh2LNL4l+PE18U6+w8Zme5aN0Z4ym7zHugYPogl0EmWvy6
+	 D8rKAPMhFVaOCI21voNME596/iJCxrtrmsKApKt8lB0z1m/w9GT4P7MLD1S6GUHOSacVu
+	 r2cD1hdqLExu7nNEmwWAXkI03jrxmajb8G+tCrs+c1ne+y07QVjuZYxvbzrYiiVYt6g==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788986692;
-	bh=0N0gEBdF78Azeo0zrEm1QEoX97TtVniYpp2Q+Ked5mM=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=N43Sc9obsY4XRTcQjYXfNGiK4whrPZweb6jlZFBvQkS7L4gGZM/I+IX4kV0d1FO3c
-	 1bwCff8WeBHpHayL+q6k0XWFZuaT9yzmQSarcaqgA9quDY7f1yGtrq0fBGV/bWfwn0
-	 j23Te9j3+bS03PGaEI0bousRtYGTPZU+HSlRLHNuzbEzn31QxTTF51L1D6szk1wbug
-	 5sFiI9doqIy/2miDHGTrKOYf+AmYUqjlTCXglKGQbSfYsTpSCxOAwKb8axfvphYvHG
-	 SkX2LSqDVhYsFMNqDV2e9WBZIfehLmrPPQ69QCVkh3yGgHyb73OjurHpxHRpIaEXrf
-	 KmFLxpmn7Zlug==
+	d=lists.u-boot-project.org; s=default; t=1788986693;
+	bh=KQk1Kpn0Rn3cChZdefNz77lsgaoifq1Xm3AaYeM4q8Q=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=pRUis/FjqgcXh37ycaHCoAGv5y9JBwgk8CBIMC+pfJcZWLKeZA3wtc4iKSEDmm8WC
+	 /ap73ZZPDzthkTL46P9hjMUunTw41kRssd4BZvB+tUebaTOrwP9A85MGdxA/canpy0
+	 XRiW4dklx1aYT1xMbF5g7xswR785q6k26t6v0++MsciHzfyemFbhewpdovBtX4g7ma
+	 rfQJBLEyCdZFkIroRBgcFiu02Y3VBKJEu2aNKLMxbsTNyM9O5SVYb46T02bD5vk02P
+	 xKqP/G9k+qV3JczRcH6QehspbyV7OZIXG7CZXIvlbUz0eF3QO/+ni/BiR7p6MjJlmF
+	 P8FyiE8G4/C0g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E620A80EFE;
-	Wed,  9 Sep 2026 20:44:51 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 7E8F23AF
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 19:20:25 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 854FC607FD;
+	Wed,  9 Sep 2026 20:44:53 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D43222FC
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 19:20:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 64B0F81858
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 19:20:25 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B958A81858
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 19:20:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X5Qc2rMQcBKY for <u-boot@lists.u-boot-project.org>;
- Wed,  9 Sep 2026 19:20:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org AEEAF81854
+ id Kyfa245UmS2l for <u-boot@lists.u-boot-project.org>;
+ Wed,  9 Sep 2026 19:20:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 1AA2881854
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=13.77.154.182
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788981624;
- b=l5J5DhF7s2v2g5I63wVzuhrEjPiyZ3LFTAbW6CYrQI8VCci/HSIyAFOotXqogwsoBBmY
- FsUPbP4oh+3s+yjcbfeZ3uL87/TJyA+e3Lq8OZP16ZBoII4lgSyErBD77+ZnIWCH6vQZf
- MgRvoW3UiSRImCYzv5aCz9hSp8HR7ieXsyWI4TuzpQKSrgfkbSHEhCObPAcg1FBi8Hi5W
- fpufuNVW8DafUtDnHw7V0JhgHZLr8tsQTqTwPJJMQLzYzd/YJc6KXV6uOnVKOd6C/uCqm
- 4qamQwgISSBenFIROGA+EU2SePUR5kPczqVsLBoDHWbtksqi8Ty6FT54EaucOgopiLw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788981629;
+ b=IW975mYkxawOzGLaeWP5Ws+cP6Ilm0PmirgsM0H6mByaJAt13L6tBcAkSGCDuQf1178x
+ oXHZSQkUy4xnWrlI/UUxzirPaYGc67J2j5AZv7FPRHdYxsJxbkWcs5CmoMaVV3GtsDRtl
+ wItc2NFkxv993+aKxzEInKhaf6ImhqctYrTOpH6TfFniBSbZ291gpTJ/5iuPOaODOfsEg
+ Iu6BCUWmaBjT6mqs24JGN3OKGzCthtfgLhzx1124wKZzTab3TTtoOnE0sXWDQC4KdaCnd
+ TLbSpzsslZBGYMuvMoPpLw4pY1iuEWkuNuTWYJkIrlJr8uOWxUZZWhusZaMdJ3qRjEg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788981624;
+ c=relaxed/relaxed; t=1788981629;
  h=Received-SPF:Received:DKIM-Filter:DKIM-Signature:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
- X-Spam-Status:X-Spam-Checker-Version;
- bh=0N0gEBdF78Azeo0zrEm1QEoX97TtVniYpp2Q+Ked5mM=;
- b=h0muaj9vos+urkrCd5AH8iUfbKLyhii9ZoHajeqEhDiOur6d29BYXA5FAmj27FRkeb5i
- CH3D/yPnfAWGgdC8yMAZh3fzuIdBrFR7bne/MdDoNMDjfLEi9nsDJgr8Ege6eV8D9UB66
- Wlb/c4qY20yX8ZY0fAVpnXUF/ZaG3gPwmlbnycc8aLqGS3UksuDezglVBjpSQChZDu+cI
- F8hVmTqL52Lr4k1dSJb//n5ZrSc89rQ65jddT/qNWlvjhPN0iRBWGwekQXAjT/U2fC9tT
- LC8fAuAX7gqIkf0NFEd3G+2iufJBcerJgD5BS86rER8g8kd27Nzim9Wv0ty7kLM5svg==
+ Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding:X-Spam-Status:X-Spam-Checker-Version;
+ bh=KQk1Kpn0Rn3cChZdefNz77lsgaoifq1Xm3AaYeM4q8Q=;
+ b=UEN5EG6MU3CiiC5qmjd1pte0y28Ca+1MRdPvwUE7q22Z+saklNyupJIuI2Ihpe3R/5ud
+ gzo3eXRbKC4sJGIyR6Kv6D1LxEoGRRR0u6CfhwaxOGtX8qjbFdKf62yisTuBtTxiC9VSR
+ /LotK9M4saCVJYyaIe0yud8adBw/wZp9ojA4G0wnFuoCU2Z5Etjz4CkO6XE2V1fMutXux
+ UEE/ipkssGpd/TbRy3VahXnF7OgU9XuXBbCnzGOEbGLYc0H2sqsuYNmvbddcyO0M+BbZ4
+ mPjHeCwwvoYLYwUYPjOHoHQTIJddtj63nTRQonSGxs5gnNmTO+F2NiOZ8ScwK28mGeQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=linux.microsoft.com; 
  dkim=pass header.d=linux.microsoft.com header.i=@linux.microsoft.com
- header.a=rsa-sha256 header.s=default header.b=MUyqopsr; 
+ header.a=rsa-sha256 header.s=default header.b=Uq3hRxum; 
  arc=none smtp.remote-ip=13.77.154.182
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=13.77.154.182;
  helo=linux.microsoft.com; envelope-from=sriramsriram@linux.microsoft.com;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=linux.microsoft.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com
- header.a=rsa-sha256 header.s=default header.b=MUyqopsr
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=linux.microsoft.com
+ header.i=@linux.microsoft.com header.a=rsa-sha256 header.s=default
+ header.b=Uq3hRxum
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by smtp1.osuosl.org (Postfix) with ESMTP id AEEAF81854
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 19:20:24 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1AA2881854
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 19:20:28 +0000 (UTC)
 Received: from srirambuild.corp.microsoft.com (unknown [167.220.26.49])
- by linux.microsoft.com (Postfix) with ESMTPSA id 194BA20B7169;
- Wed,  9 Sep 2026 12:19:42 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 194BA20B7169
+ by linux.microsoft.com (Postfix) with ESMTPSA id 2402A20B7169;
+ Wed,  9 Sep 2026 12:19:47 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 2402A20B7169
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1788981582;
- bh=0N0gEBdF78Azeo0zrEm1QEoX97TtVniYpp2Q+Ked5mM=;
- h=From:To:Cc:Subject:Date:From;
- b=MUyqopsrJLjWcEn0ZqjfhmJdGmQX8yj4te8UlsTqU+J23zE68O0W6hpkG4G1m9wSk
- 5v8Hul3taLGIFnPsng/w2yhS5ufEVKk2UyCqHc1si14+VgNu94k4O9iXJOtVzskmfI
- NWC6k4bC/zB06M7f999Rhd/x7SlHiPqt9VnvS3ek=
+ s=default; t=1788981587;
+ bh=KQk1Kpn0Rn3cChZdefNz77lsgaoifq1Xm3AaYeM4q8Q=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Uq3hRxumnPWKsQgy3V90Vx3ZMsfdt3r0wglXRZtm8mtnxzyQ3rZCuCB9as4/vu4cL
+ ENhnrXHStSMzk0J+IRf+JMqBQKsmpx3b+Xw4toSfLcAuPbGXRi/pJmMBzZVm2IzU8o
+ xVseeJJosw7s/oRMIdeTeLzzzc2jLuhpxLLspERY=
 From: Sriram Sriram <sriramsriram@linux.microsoft.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Jerome Forissier <jerome.forissier@arm.com>,
  Simon Glass <sjg@chromium.org>, Drew Kluemke <ankluemk@microsoft.com>,
  Daniel Munic <v-dmunic@microsoft.com>,
  Sriram Sriram <sriramsriram@linux.microsoft.com>
-Subject: [PATCH 0/4] Bounds/overflow hardening in NFS, FIT, TFTP and ext4
-Date: Wed,  9 Sep 2026 12:20:12 -0700
-Message-ID: <20260909192016.217183-1-sriramsriram@linux.microsoft.com>
+Subject: [PATCH 1/4] net: nfs: add bounds checks on memcpy into
+ stack-allocated rpc_pkt
+Date: Wed,  9 Sep 2026 12:20:13 -0700
+Message-ID: <20260909192016.217183-2-sriramsriram@linux.microsoft.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20260909192016.217183-1-sriramsriram@linux.microsoft.com>
+References: <20260909192016.217183-1-sriramsriram@linux.microsoft.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 09 Sep 2026 20:44:50 +0000
@@ -137,52 +141,71 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This series collects four independent robustness fixes to network, boot
-image and filesystem code that handle attacker-influenced or on-disk
-input. Each was found by auditing length handling around memcpy(),
-integer arithmetic on packet/image data, and loop-counter widths.
+From: Drew Kluemke <ankluemk@microsoft.com>
 
-  1. net: nfs: the NFS client copies received UDP payloads into a
-     stack-allocated struct rpc_t with memcpy() using the wire length
-     without checking it against the destination size, allowing a
-     malicious NFS server to overflow the stack buffer. Add a bounds
-     check at each copy site.
+Multiple NFS reply handlers (rpc_lookup_reply, nfs_mount_reply,
+nfs_umountall_reply, nfs_lookup_reply, nfs_readlink_reply) copy network
+data into a stack-allocated struct rpc_t without verifying that the UDP
+payload length fits within the buffer. A malicious or malformed NFS
+server response with len > sizeof(rpc_pkt) overwrites the stack frame.
 
-  2. boot: image-fit: the decompression path computes the output buffer
-     size as 'len * 20', which can wrap on 32/64-bit ulong for a large
-     image and cause a heap buffer overflow. Reject sizes that would
-     overflow before the multiplication.
+Add a bounds check before each memcpy to drop oversized packets.
 
-  3. net: tftp: the OACK option parser uses strcasecmp() on packet data
-     that may not be NUL-terminated within the received length, causing
-     an out-of-bounds read. Use a bounded strncasecmp() plus an explicit
-     terminator check.
+Signed-off-by: Drew Kluemke <ankluemk@microsoft.com>
+Signed-off-by: Sriram Sriram <sriramsriram@linux.microsoft.com>
+---
+ net/nfs-common.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-  4. fs: ext4: ext4fs_update() walks all block groups with a signed
-     16-bit loop counter while fs->no_blkgrp is a uint32_t. A filesystem
-     with more than 32767 block groups overflows the counter (undefined
-     behaviour) and the bitmap write-back loops fail to terminate
-     correctly. Widen the counter to u32.
-
-The fixes are independent and can be applied in any order. Built for
-sandbox (net/tftp.o, boot/image-fit.o, fs/ext4/ext4_write.o, and
-net/nfs-common.o with CONFIG_CMD_NFS=y) and checked with
-scripts/checkpatch.pl.
-
-Daniel Munic (1):
-  fs: ext4: widen ext4fs_update() block-group loop counter
-
-Drew Kluemke (3):
-  net: nfs: add bounds checks on memcpy into stack-allocated rpc_pkt
-  boot: image-fit: add overflow guard for FIT decompression buffer
-  net: tftp: use bounded string compare for OACK option parsing
-
- boot/image-fit.c     | 10 +++++++++-
- fs/ext4/ext4_write.c |  2 +-
- net/nfs-common.c     | 10 ++++++++++
- net/tftp.c           | 13 +++++++++----
- 4 files changed, 29 insertions(+), 6 deletions(-)
-
+diff --git a/net/nfs-common.c b/net/nfs-common.c
+index 637fcfd9bb8..226e3fe5798 100644
+--- a/net/nfs-common.c
++++ b/net/nfs-common.c
+@@ -503,6 +503,8 @@ static int rpc_lookup_reply(int prog, uchar *pkt, unsigned int len)
+ {
+ 	struct rpc_t rpc_pkt;
+ 
++	if (len > sizeof(rpc_pkt.u.data))
++		return -NFS_RPC_DROP;
+ 	memcpy(&rpc_pkt.u.data[0], pkt, len);
+ 
+ 	if (ntohl(rpc_pkt.u.reply.id) > rpc_id)
+@@ -532,6 +534,8 @@ static int nfs_mount_reply(uchar *pkt, unsigned int len)
+ 	struct rpc_t rpc_pkt;
+ 	int ret;
+ 
++	if (len > sizeof(rpc_pkt.u.data))
++		return -NFS_RPC_DROP;
+ 	memcpy(&rpc_pkt.u.data[0], pkt, len);
+ 
+ 	if (ntohl(rpc_pkt.u.reply.id) > rpc_id)
+@@ -561,6 +565,8 @@ static int nfs_umountall_reply(uchar *pkt, unsigned int len)
+ {
+ 	struct rpc_t rpc_pkt;
+ 
++	if (len > sizeof(rpc_pkt.u.data))
++		return -NFS_RPC_DROP;
+ 	memcpy(&rpc_pkt.u.data[0], pkt, len);
+ 
+ 	if (ntohl(rpc_pkt.u.reply.id) > rpc_id)
+@@ -584,6 +590,8 @@ static int nfs_lookup_reply(uchar *pkt, unsigned int len)
+ 	struct rpc_t rpc_pkt;
+ 	int ret;
+ 
++	if (len > sizeof(rpc_pkt.u.data))
++		return -NFS_RPC_DROP;
+ 	memcpy(&rpc_pkt.u.data[0], pkt, len);
+ 
+ 	if (ntohl(rpc_pkt.u.reply.id) > rpc_id)
+@@ -645,6 +653,8 @@ static int nfs_readlink_reply(uchar *pkt, unsigned int len)
+ 	int rlen;
+ 	int nfsv3_data_offset = 0;
+ 
++	if (len > sizeof(rpc_pkt))
++		return -NFS_RPC_DROP;
+ 	memcpy((unsigned char *)&rpc_pkt, pkt, len);
+ 
+ 	if (ntohl(rpc_pkt.u.reply.id) > rpc_id)
 -- 
 2.49.0
 
