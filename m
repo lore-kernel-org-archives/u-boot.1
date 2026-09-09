@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E8A5C79FBF
-	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 12:45:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6593C79FB6
+	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 12:45:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 17F9140718;
-	Wed,  9 Sep 2026 12:45:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 70761607A1;
+	Wed,  9 Sep 2026 12:45:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id i3Vopz-wRZHg; Wed,  9 Sep 2026 12:45:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org C94594071B
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788957953;
-	b=W5RlHdPNUAbXj7fJTIL7jZ5WFvbkEBZnk0aJ8miYAYDVgU+Nmo+QwBjawyL6UBaMt9tr
-	 kJWp1odERRBVAD5HMFdFwxx5QKRX+9Ri7+JwB6e9QToOk5T9od3ZurX0a+8ze17VkQjcE
-	 Te8xkrjzE9f4Pkwn/4+p6zc6UXoBMdY2i2IPPW2fOBK9fXA/XtJbkug3WYeK5SuTNRihS
-	 uFzRwwiBY1Anw9JEgRkvlGMGWiHt2A9MDsPDOdqOniXmblH0wDzgKEMvTnq3LEjs8scfD
-	 rei8nZ/uPFsfqVPBn3Cz+XAfa7D1G3iF+b8rrO4M2lYu0zFgq5qMV+Jez92ODPoCc6w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UbwSH2x3PduO; Wed,  9 Sep 2026 12:45:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A0C8560773
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788957954;
+	b=QdnDGoTW0WYQNrRGHxIWomcnNfj+JVYiMAbe+IUBs+kxrHsXnTLTDREFwsZl+8i4MoWP
+	 aJtdG8wydhWSTvZ6y5gZL08iqc50HuPfk07Cl12Z51rMcZFWdxyiwVa5Bt52qNnq2tP0u
+	 GWtkSrAcYqZPJodQMCa43HZxlRaGuoRH8h3sb7dwD6eGR/JKEbquZvQ6VAXqRESmAyZ6x
+	 KrERBxfwRkduyqoafwC3a/O1UtY9pEM3BMAkHWn1avByAX1bai1Z/+io6R59WU2NC9ZBy
+	 mHpQLpG1p7Od4Yj+8DXZPBVfsH0PSvQtB65Qc86L/WN0w3up0HeKwQr39o5Ie4pxA7Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788957953;
+	c=relaxed/relaxed; t=1788957954;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,127 +32,125 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=oY/U63xg7cvS8opOBV0PPbU2cGbeU1DYdySFVn/4dSo=;
-	b=CGLXvAxqTQQqk2LgyrSxh5tvp9/0Xf1PDMMEMKrya+JvQN15/VM+eRQSIMrsKO0J/EK3
-	 lKKfyhh97bkQO9rt+iHenifLjggcjW1xFX+vQPaFaxcG/wcc6NYl+RtKFEfJ/vfJyCLCR
-	 PqLxpIxnOedOY3PSVdOAhZzEmMq0fgUkBzoSn4/z3XSIxjVbu9qbnTB6imS+goyF4skWz
-	 vg0Kc5dRVS9NigKD+LAGh4gISrHGj6IyvfjRNf8p+RoKmsZeaMs35SNltIguplHvYg0pL
-	 SCPaCbciDRVgqjM4ZZs21s6/mr8LcorvqC/KxYvi2E/FqwB0TFcmmrbSijKg7sRPEug==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=zESgZPMT;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=KfXSzYmKP5dgUGZ6x6ZSftij1y+hP8gg2vRGEL+9o8w=;
+	b=nXvriS212UDQ2Vg2BjYfOi60juFMSfVzhj+jCzQPCCsiezN6UQxFSOj8p0QBXQvBXv6b
+	 o3F3W/6MVI7txOO5PcrLTs9nvHJqqzPASnViNFlw5RJD7Nil4V8xofS3XmlYTRecSRrTm
+	 pxufxRJj8rQK2yIGxqZQXYIZs3+loSrgQZbeoBP0VoMV2j/xuA7qSNk0WTNbYyfsbTa7G
+	 jm9F98t9nXdegBCFmN8EFdk0Leo8IrC8tRdSIkCHYDPILTJPupAGPgw1Njt9DeoZRLs7L
+	 td2QIDjKf+epZF+OHIGOtNUHkCMKt++c18qFAxsg0T4hNNy22FvRu0xynMj/o1bdd8g==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788957952;
-	bh=oY/U63xg7cvS8opOBV0PPbU2cGbeU1DYdySFVn/4dSo=;
+	d=lists.u-boot-project.org; s=default; t=1788957954;
+	bh=KfXSzYmKP5dgUGZ6x6ZSftij1y+hP8gg2vRGEL+9o8w=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fOXdYx7a3E90BKsK+fjMbeiUBmOPtS7AWv0cFRq2fs9JZEWJH0NLH3SDhowY/aQOL
-	 KL8ORjSOAmkAGTl7Dc7HdPSeRg4uydC9+xChdVCTOw+6JBY+qUlAsbDdJV6wm0wWaX
-	 8OKi2DJzlMs8ndMXe5v/81pDsb0eEIQFsH0o8QulDzPAtqhNxQq4gtBOfBhvLXUw3G
-	 PNVug5kXbn4LfZdV5MDqrI/q8U65PT33PI/NPgRqm0xfLc9hggVfNnN4PFYNqLTPci
-	 /Vq141e3qiczXZ0z/OsnmMUshy4oUJDS8og4zEG1aY+loGzzU7+/9fnrpj23aH3iGd
-	 ZDa5m2LbAPxeA==
+	b=0FNIRCQIqVdYFh+uALjKTOAP50F6pj26Y8gMKxfjMTSC4d1nBQqvo0nKiCuzWEGGO
+	 DNsModz98V3dJSUbqmRM1Gl8jSusrLURLDy8R5dj8R0Oh+OxcdQiqIeoT4cJxscVBN
+	 EeQmnoKjhuh3lk3oDp25XBjzbhBrd90V2T0F9XreI1QyMY9rRpm1+OXAVe/Sl2NZ7s
+	 GnTAExIIHy6wJNXHeIzwmpfayXyTfPgDZypuKnUAJRKzaeOzGAeSfVt0aeeoS0MDFs
+	 hctgRx8iP2btr/0boyt7Dlwkh8vyzV7wfIQ3i11Gn1W863eOPgWHodYAS7k/FC+YEu
+	 dlH0dUOBT9GBQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C94594071B;
-	Wed,  9 Sep 2026 12:45:52 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id EB1002D2
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A0C8560773;
+	Wed,  9 Sep 2026 12:45:54 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3B082755
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DCC71406D1
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:15 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 209DB400AA
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id f8LafKbAEp2c for <u-boot@lists.u-boot-project.org>;
- Wed,  9 Sep 2026 08:51:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org D05F0406AF
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Rw1d0SAoEjXv for <u-boot@lists.u-boot-project.org>;
+ Wed,  9 Sep 2026 08:51:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 1190640055
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip="2a00:1450:4864:34::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788943875;
- b=iBFur4Mjl3gbiuQmoO6YKdbnq9QZ+llLHWB1yuI3rL7z31sk8CQXiHSHGJrjGzVn/Uxc
- If3mScT+FbLg/OqETv26tJoz+k4WH26vma8joORum+/Ot39ji5DyUCn2pvx7ZQS45lsbE
- iilPTH4KmjLCdfaJQEKUii5ouJ7ps8vQ/gAiqfF5IfD3PWhPmAOygs+x+/geEeREGkZ/c
- itzUod2Rk/LRJALYTJQJ/vy3nwlop9ov5EI7alDwYe5NpxWbHZyCBmZRoE750NomBAx8r
- RyYBREYsJhA4O8NaJZ+yfDI59SZYM2Kx4C7n6SCxJO98SzilnDnfAmaV/A2xZwraUVg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788943876;
+ b=O2w+hplAqLbp9ZcOJhnEmiKWIK+igoBOd4qiVqTInowWUaoymIJNbTv7rnHDSsVkVrX5
+ KTteJNhP398s3WFEjyaEEtAv657uzKD0fKyJdgKT3Whz7zrK4poJ5ug4UD0s66tNgnRJz
+ 716aQkM/zeZTT/JhzNQw5kKV6oyGNRJgEguX+GBULdWwyGNZt08WDtiKcI8hnZPc2KoTJ
+ IY+UiugXA5tKwxkai2FO0WWZKWnPi/OoVbi9Jy6OUFgH7CzEcEKeJbbAk13tPY2ShyEJY
+ EoDHiWyiH+SlpRo2jzYk7p4N3IyytsToUlE+n/8EK1oP/ohxsLjabv3pbyALU28kG7A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788943875;
+ c=relaxed/relaxed; t=1788943876;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=oY/U63xg7cvS8opOBV0PPbU2cGbeU1DYdySFVn/4dSo=;
- b=VsYXImYJzocbwCpXFNDfaRPZ/IvaW66YhRw88lr/ofaoiUgm8ynndUKWYDser2yQe6EA
- 4jDeUcqPs/wX3T1sctE6NllfbqUM4gR9RWpCkNfRLkKBrn0lSu5IX6efKFaKsGurzCLaL
- RhWX5Q2fBrN5lbD+qcVQCjtSDzsG8H51fpbBcO2Ew+XkrUtcBSlA3UXmmYJX4iEAgby6g
- FZRzFbmUkcRV2DGWLew1GbNJxOysgwbSX+7+XQ+4e8cmxbSurwZBmtoLEBCNWczoBjfJ8
- RbXWAXxM0V9KYBiLeJrjzvT4+gbNjEXnOi2bqCo6oCHFVFR8XnMVBR8iexSgXRJJavA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=KfXSzYmKP5dgUGZ6x6ZSftij1y+hP8gg2vRGEL+9o8w=;
+ b=VPepE6niEwWauT7CO5OP6Z4gwJiCUIRkMEVURjlQM+pmOLp4y0qDv6V9Jtjoi3vGmaTi
+ aivQleiwyuyQLHc+O43SlUcFEEb0wffyt7T1XAKQdCRKbv8EJ4nXPOztMzvLPWUuzzRzL
+ MTHjrkqiGhNgxKV3Eir0emkyN+/jeZOZmk7p5CFF69cDM0p3qIXGVGxLbTYYWTJ/lTIVT
+ QlY8zGP0NWhULWCZyxe/yb0nt7/3QspleS47o23VeAKrrT4z1C62FDcVxOd0X/a0ZZIXG
+ giLufTZIsnoLiCv/UUW38bkzc0lzMlZ90aU1P3cjkB9cbKIuL+NLVKQ1XK/4rMZdi3Q==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=linaro.org; 
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=zESgZPMT; 
+ header.s=google header.b=E49Bs4Yz; 
  arc=none smtp.remote-ip="2a00:1450:4864:34::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:34::10; helo=mail-ej2-x10.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=zESgZPMT
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
+ header.a=rsa-sha256 header.s=google header.b=E49Bs4Yz
 Received: from mail-ej2-x10.google.com (mail-ej2-x10.google.com
  [IPv6:2a00:1450:4864:34::10])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D05F0406AF
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:12 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1190640055
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 08:51:14 +0000 (UTC)
 Received: by mail-ej2-x10.google.com with SMTP id
- a640c23a62f3a-c25331b31e8so80180366b.2
- for <u-boot@lists.u-boot-project.org>; Wed, 09 Sep 2026 01:51:12 -0700 (PDT)
+ a640c23a62f3a-c2533bd37f0so67217166b.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 09 Sep 2026 01:51:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1788943871; x=1789548671;
+ d=linaro.org; s=google; t=1788943872; x=1789548672;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=oY/U63xg7cvS8opOBV0PPbU2cGbeU1DYdySFVn/4dSo=;
- b=zESgZPMTOPwlhVEj/85nAP7v6jneOb8tb4v89NdqoIsZSfh1QjcnbBE1Vl0ng9t5+n
- xsZh/S72S873iSNfRd6RmPTv7Y+lJ0hF2dYtJZTIMFKfX2INtX1VEu+qNO0JkEpk2kxi
- 8PCc5xDFrBWdqk1tGBnuYFpyY7pr8Kc+bTYfJZksl8yYoCAM+vhEPb1DfHKSnprp+ZRG
- K0NVhk8g4ptxhrgf9V4eRJLc6Dp/YhblGEVU56UQIErMZ5v4AzUa+x4dFVmg03UQleDV
- P8k5ug780jzSTyFzFCMvU7gHkDD0Uc4E/1sTyqB1Mgpc7yEFx2uzt0a96a7FuvcfMKQf
- yMJQ==
+ bh=KfXSzYmKP5dgUGZ6x6ZSftij1y+hP8gg2vRGEL+9o8w=;
+ b=E49Bs4YzmXxy7V1SexZOKcbDTTpFRklpZ9aF35wb24tbXRNB/kRfoQHVCyeO5mbya3
+ aXlHspqmIV8ACN0iAXEMk70DY8nI7u2ESqA4EhXciwr9GF+N90jEW8n5iA7wTfff0iNJ
+ SVBrCGpyraeZJOzjy05gde+eqRtkZZCZMI7ydgTE77/PgxqtUCdSJDMWM6tubtAEwqHR
+ R4/s+s/XwCahCZRvVscNkZ+zsmWP5adpPj8a7mgugGjBBvbpW5RuRi1Z29ZkreTqurxM
+ 9a2XmMTzS0FYcYnjHc+5tU0fYkzD8/SNtamU72BKqj9J6qCAQcnyLtpa4RpIsFFNT7J5
+ x9Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788943871; x=1789548671;
+ d=1e100.net; s=20251104; t=1788943872; x=1789548672;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=oY/U63xg7cvS8opOBV0PPbU2cGbeU1DYdySFVn/4dSo=;
- b=RkObgGvEhbzjp2IQa+C1i21/zg+LZC0GfNf2ruXVYlElUanMfbgB0GZygor+pM31/a
- z6NvVp/r8+ZByMAHwCsA18OdK8LuzRlw1YAupFtwF01L081lSdwh3tesTqRP5PVJKolw
- 73DMOLnq/6AcFbPgisXUOH64OfLV4onQwhb7TnNVnyvqgKMCQQrJMGUswOp4D447xbCq
- TN3zPjcMCZ48p7LvmDMlnEUdMtYiSjS11VBagKGYnn62A9liItz4OizX3fdtFSsEfP1P
- +hXZ6It8nQ+b32s/g6sQ9vRT9+Vvam4TAikmx8SYcKwUjZsQhmUNmwFv09QjDrer9dLi
- ByFA==
-X-Gm-Message-State: AFuF++mlSqPiNVL2Dglt6b2VucrSeiLn0Op5oTYQ8piwmSX9w1z3/CR3
- pSGjHVPmc2QW8jaIw+3NK+DNHW/Lol5EMkXZ7Y5bTqo0lp5AooROf2rMmRHloWahaXtsTb85jr5
- 5pnEl
-X-Gm-Gg: AYBFou1GhvK5Pfj4YjtW8zMdTA6azh3IGcjauUhFAi2qDgRpoT4TWaeBINFjtCz4QPh
- P6FQpA5m4krHri3hy70XKMAKl6AYGlnX62Uv3sbfSuzRy1farRJk9x4uc5ox05/sdgBomR2wT7h
- 4O5n3qFjjXvl0EnwYbAODSRWcfUaRGCKvU1bIOdJTj2rcE8fw53oaUprC6jYt5ei5yA/paNkFfF
- xZA0eCY70m+DuoCnHvYQ4zIKYKTo/GY9xGZxdMDbNJ+uxfdO2Ggd+z7JPAtmJbyZPWx3PKcgKOy
- 2M06BlL1JwxkE6zw9VHMCJl4DF61WN86+XR0TtqlDQnHKLF7Q5FZgT1TgKKZvqgjGrVRD9wUy3a
- jxiBw0O3maoV2Kd3YxTl9i0wzUqFZAOT/BP3RUKBKzF7DkI8vkFQRE4hCTlvNOQumr5BpOY68y9
- t1OEEyN4L0krs7k0JxYQdcL4LGWDn7pK8fUqojArSLEqTraAEtNcSwSn1DnUBWbctIPfv6IjfUq
- tb4rmvGYA0bFS8nhfiZPbxCJlEzvvYAtg==
-X-Received: by 2002:a17:906:4784:b0:c25:3ccf:bd9c with SMTP id
- a640c23a62f3a-c2625012ec1mr1041516166b.2.1788943870492; 
- Wed, 09 Sep 2026 01:51:10 -0700 (PDT)
+ bh=KfXSzYmKP5dgUGZ6x6ZSftij1y+hP8gg2vRGEL+9o8w=;
+ b=keXVmDHVvawtfbf9eOls8I4UNE5zSIQ3qNKVtfF0ogzi9X0SicEmKMWgHriEX8XIQS
+ ln3O3yV27GgmkxODuSYr0Da6siaA4nXMcx5BvcAsmQTyUDDCluOupXkcGGbpYEw8ogqA
+ lpRKe9YQ/GmZBbDcek/rqhzeFUVjh0Rqpanm2Vx84OgLuKqM9axPyeXchVPfiCczKrsI
+ 1Vw+vU956m9mOw7j3t6LMe8rqX2HQYdsoZfS11sFfZt5Iv8EURWxptgZkBP7ydapwloT
+ MnHqW07akAUC8vobOi0PAsWPOIFjZNmFcGdnPC1LQjGdU2XVGmCuE56f+Ox8iXNb3MPZ
+ HUxA==
+X-Gm-Message-State: AFuF++nTmKuO7Y1DY7ACJfQrxGr++LO+tDzNl5vNGV/Es5OIPzc6ASOS
+ FZybB8E3c6q7v9rJ5VTQeJeVWcRLVHcgYqPU2PTtXPbYO+EaZyEI/AYZuGuEJNAM4ZgpqypgqER
+ xG4wt
+X-Gm-Gg: AYBFou0B92vYtCvqeL5wMGJvl/lemVs8JGzRdHgmoe8cavm6UUPnftlBKPxPtDuLKMz
+ QmpKW15QjM9PG/t1FCVZ3OhtyZ0HjoazhpOg+clhxwPgmEyFU5K3ye6plzNHqFwG+8ccwC1ULOm
+ YqO7ta6r5wxS1Wdq2ly4wamwp8tVrd5Guo6TbqAVyImpL22WDPP608NCsmQUNuVS78ojLRKszK7
+ CLHdzcqClmCmENrw8QnHH5OJ1EFCyNe3xQDEKurgjotXwUvP8Zks2lvv5JJulgyjLpjpyr2ZpRe
+ 8vlIGVNTBrGpMVtncQSFpRe9e4qamZJqA/UipqaCztsMuW8F41oOXfunZ2SqNTWXmT3tv9SWVAK
+ 9vls77cb9PJtCD3Rvo05EpfUVXj5CiuT72klOm7UGk0C6RSFnO1KLF6xvqaL3rNyFT3TKb3lIjC
+ fQl29XYqt1UJZWBk0ruHG/NFVC/6P3qkmEBuHpCu27piykg54OBK1Ml3mhtu+wF3/r4aKpeDrIL
+ Ah9BSgwpiHUDflxnBCFzK1pT1c2OTQ/
+X-Received: by 2002:a17:907:9717:b0:c15:c651:f28f with SMTP id
+ a640c23a62f3a-c262505e28fmr1044088166b.3.1788943871868; 
+ Wed, 09 Sep 2026 01:51:11 -0700 (PDT)
 Received: from monster (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c292c14c6a8sm90988566b.47.2026.09.09.01.51.09
+ a640c23a62f3a-c292c14c6a8sm90988566b.47.2026.09.09.01.51.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Sep 2026 01:51:10 -0700 (PDT)
+ Wed, 09 Sep 2026 01:51:11 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
@@ -162,10 +160,9 @@ Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  Anders Roxell <anders.roxell@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Jens Wiklander <jens.wiklander@linaro.org>
-Subject: [PATCH v8 02/25] usb: phy: add the usb_phy helpers needed by the
- resynced DWC3 code
-Date: Wed,  9 Sep 2026 10:49:52 +0200
-Message-ID: <20260909085015.2480097-3-anders.roxell@linaro.org>
+Subject: [PATCH v8 03/25] usb: gadget: adapt the gadget API after the resync
+Date: Wed,  9 Sep 2026 10:49:53 +0200
+Message-ID: <20260909085015.2480097-4-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260909085015.2480097-1-anders.roxell@linaro.org>
 References: <20260909085015.2480097-1-anders.roxell@linaro.org>
@@ -185,19 +182,14 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The resynced DWC3 core includes linux/usb/phy.h and uses struct usb_phy,
-usb_phy_init(), usb_phy_shutdown(), usb_phy_set_power() and
-usb_phy_set_suspend(). u-boot has none of them.
+Make the gadget API match the resynced DWC3 driver. This is not only a
+trim. It drops the parts u-boot does not use and adds the new members
+the driver needs, for example in struct usb_request. It also fixes up
+ch9.h.
 
-Add a cut down version of include/linux/usb/phy.h from Linux v6.16. Only
-the parts the DWC3 core needs are here.
-
-usb_phy_set_suspend() is a stub that returns 0. u-boot never suspends
-the controller, so there is nothing to do.
-
-Linux calls usb_phy_set_charger_current() from usb_phy_set_power().
-u-boot has no charger framework, so the call is left as a comment. It
-marks where the call goes if someone adds one later.
+struct usb_request and struct usb_ep come from Linux v6.16, like the
+driver. Two things are left out. usb_request drops the scatter-gather
+members, u-boot has no scatterlist. usb_ep drops mult, nothing reads it.
 
 Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
@@ -205,81 +197,716 @@ Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- include/linux/usb/phy.h | 56 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 56 insertions(+)
+ include/linux/usb/ch9.h    |  25 +-
+ include/linux/usb/gadget.h | 526 +++++++------------------------------
+ 2 files changed, 110 insertions(+), 441 deletions(-)
 
-diff --git a/include/linux/usb/phy.h b/include/linux/usb/phy.h
-index 14b2c7eb2e63..afda7870e21e 100644
---- a/include/linux/usb/phy.h
-+++ b/include/linux/usb/phy.h
-@@ -21,6 +21,13 @@ enum usb_phy_interface {
- 	USBPHY_INTERFACE_MODE_HSIC,
+diff --git a/include/linux/usb/ch9.h b/include/linux/usb/ch9.h
+index c8c553b930ac..fc853b376a32 100644
+--- a/include/linux/usb/ch9.h
++++ b/include/linux/usb/ch9.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * This file holds USB constants and structures that are needed for
+  * USB device APIs.  These are used by the USB device model, which is
+@@ -5,7 +6,7 @@
+  * Wireless USB 1.0 (spread around).  Linux has several APIs in C that
+  * need these:
+  *
+- * - the master/host side Linux-USB kernel driver API;
++ * - the host side Linux-USB kernel driver API;
+  * - the "usbfs" user space API; and
+  * - the Linux "gadget" slave/device/peripheral side driver API.
+  *
+@@ -131,11 +132,11 @@
+  * Test Mode Selectors
+  * See USB 2.0 spec Table 9-7
+  */
+-#define	TEST_J		1
+-#define	TEST_K		2
+-#define	TEST_SE0_NAK	3
+-#define	TEST_PACKET	4
+-#define	TEST_FORCE_EN	5
++#define	USB_TEST_J		1
++#define	USB_TEST_K		2
++#define	USB_TEST_SE0_NAK	3
++#define	USB_TEST_PACKET		4
++#define	USB_TEST_FORCE_ENABLE	5
+ 
+ /*
+  * New Feature Selectors as added by USB 3.0
+@@ -873,9 +874,6 @@ struct usb_ss_cap_descriptor {		/* Link Power Management */
+ 	__le16 bU2DevExitLat;
+ } __attribute__((packed));
+ 
+-#define USB_DEFAULT_U1_DEV_EXIT_LAT     0x01	/* Less then 1 microsec */
+-#define USB_DEFAULT_U2_DEV_EXIT_LAT     0x01F4	/* Less then 500 microsec */
+-
+ #define USB_DT_USB_SS_CAP_SIZE	10
+ 
+ /*
+@@ -1055,4 +1053,13 @@ struct usb_string {
+ 	const char *s;
  };
  
-+/* associate a type with PHY */
-+enum usb_phy_type {
-+	USB_PHY_TYPE_UNDEFINED,
-+	USB_PHY_TYPE_USB2,
-+	USB_PHY_TYPE_USB3,
++/* USB 3.2 SuperSpeed Plus phy signaling rate generation and lane count */
++
++enum usb_ssp_rate {
++	USB_SSP_GEN_UNKNOWN = 0,
++	USB_SSP_GEN_2x1,
++	USB_SSP_GEN_1x2,
++	USB_SSP_GEN_2x2,
 +};
 +
- #if CONFIG_IS_ENABLED(DM_USB)
- /**
-  * usb_get_phy_mode - Get phy mode for given device_node
-@@ -37,4 +44,53 @@ static inline enum usb_phy_interface usb_get_phy_mode(ofnode node)
- }
- #endif
+ #endif /* __LINUX_USB_CH9_H */
+diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
+index fe79bf64a0e1..7137f0faf3c6 100644
+--- a/include/linux/usb/gadget.h
++++ b/include/linux/usb/gadget.h
+@@ -88,6 +88,7 @@ struct usb_request {
+ 	dma_addr_t		dma;
  
-+struct usb_phy {
-+	struct device		*dev;
+ 	unsigned		stream_id:16;
++	unsigned		is_last:1;
+ 	unsigned		no_interrupt:1;
+ 	unsigned		zero:1;
+ 	unsigned		short_not_ok:1;
+@@ -97,6 +98,7 @@ struct usb_request {
+ 	void			*context;
+ 	struct list_head	list;
+ 
++	unsigned		frame_number;		/* ISO ONLY */
+ 	int			status;
+ 	unsigned		actual;
+ };
+@@ -153,6 +155,8 @@ struct usb_ep_caps {
+  * @ops: Function pointers used to access hardware-specific operations.
+  * @ep_list:the gadget's ep_list holds all of its endpoints
+  * @caps:The structure describing types and directions supported by endoint.
++ * @enabled: The current endpoint enabled/disabled state.
++ * @claimed: True if this endpoint is claimed by a function.
+  * @maxpacket:The maximum packet size used on this endpoint.  The initial
+  *	value can sometimes be reduced (hardware allowing), according to
+  *      the endpoint descriptor used to configure the endpoint.
+@@ -162,6 +166,8 @@ struct usb_ep_caps {
+  * @max_streams: The maximum number of streams supported
+  *	by this EP (0 - 16, actual number is 2^n)
+  * @maxburst: the maximum number of bursts supported by this EP (for usb3)
++ * @address: used to identify the endpoint when finding descriptor that
++ *      matches connection speed
+  * @driver_data:for use by the gadget driver.  all other fields are
+  *	read-only to gadget drivers.
+  * @desc: endpoint descriptor.  This pointer is set before the endpoint is
+@@ -179,301 +185,73 @@ struct usb_ep {
+ 	const struct usb_ep_ops	*ops;
+ 	struct list_head	ep_list;
+ 	struct usb_ep_caps	caps;
++	bool			claimed;
+ 	bool			enabled;
+-	unsigned		maxpacket:16;
+-	unsigned		maxpacket_limit:16;
+-	unsigned		max_streams:16;
+ 	unsigned		maxburst:5;
++	u8			address;
++	u16			maxpacket;
++	u16			maxpacket_limit;
++	u16			max_streams;
+ 	const struct usb_endpoint_descriptor	*desc;
+ 	const struct usb_ss_ep_comp_descriptor	*comp_desc;
+ };
+ 
+ /*-------------------------------------------------------------------------*/
+ 
+-/**
+- * usb_ep_set_maxpacket_limit - set maximum packet size limit for endpoint
+- * @ep:the endpoint being configured
+- * @maxpacket_limit:value of maximum packet size limit
+- *
+- * This function shoud be used only in UDC drivers to initialize endpoint
+- * (usually in probe function).
+- */
++#if IS_ENABLED(CONFIG_USB_GADGET)
++void usb_ep_set_maxpacket_limit(struct usb_ep *ep, unsigned maxpacket_limit);
++int usb_ep_enable(struct usb_ep *ep);
++int usb_ep_disable(struct usb_ep *ep);
++struct usb_request *usb_ep_alloc_request(struct usb_ep *ep, gfp_t gfp_flags);
++void usb_ep_free_request(struct usb_ep *ep, struct usb_request *req);
++int usb_ep_queue(struct usb_ep *ep, struct usb_request *req, gfp_t gfp_flags);
++int usb_ep_dequeue(struct usb_ep *ep, struct usb_request *req);
++int usb_ep_set_halt(struct usb_ep *ep);
++int usb_ep_clear_halt(struct usb_ep *ep);
++int usb_ep_set_wedge(struct usb_ep *ep);
++int usb_ep_fifo_status(struct usb_ep *ep);
++void usb_ep_fifo_flush(struct usb_ep *ep);
++#else
+ static inline void usb_ep_set_maxpacket_limit(struct usb_ep *ep,
+-					      unsigned maxpacket_limit)
+-{
+-	ep->maxpacket_limit = maxpacket_limit;
+-	ep->maxpacket = maxpacket_limit;
+-}
+-
+-/**
+- * usb_ep_enable - configure endpoint, making it usable
+- * @ep:the endpoint being configured.  may not be the endpoint named "ep0".
+- *	drivers discover endpoints through the ep_list of a usb_gadget.
+- * @desc:descriptor for desired behavior.  caller guarantees this pointer
+- *	remains valid until the endpoint is disabled; the data byte order
+- *	is little-endian (usb-standard).
+- *
+- * when configurations are set, or when interface settings change, the driver
+- * will enable or disable the relevant endpoints.  while it is enabled, an
+- * endpoint may be used for i/o until the driver receives a disconnect() from
+- * the host or until the endpoint is disabled.
+- *
+- * the ep0 implementation (which calls this routine) must ensure that the
+- * hardware capabilities of each endpoint match the descriptor provided
+- * for it.  for example, an endpoint named "ep2in-bulk" would be usable
+- * for interrupt transfers as well as bulk, but it likely couldn't be used
+- * for iso transfers or for endpoint 14.  some endpoints are fully
+- * configurable, with more generic names like "ep-a".  (remember that for
+- * USB, "in" means "towards the USB master".)
+- *
+- * returns zero, or a negative error code.
+- */
+-static inline int usb_ep_enable(struct usb_ep *ep,
+-				const struct usb_endpoint_descriptor *desc)
+-{
+-	int ret;
+-
+-	if (ep->enabled)
+-		return 0;
+-
+-	ret = ep->ops->enable(ep, desc);
+-	if (ret)
+-		return ret;
+-
+-	ep->enabled = true;
+-
+-	return 0;
+-}
+-
+-/**
+- * usb_ep_disable - endpoint is no longer usable
+- * @ep:the endpoint being unconfigured.  may not be the endpoint named "ep0".
+- *
+- * no other task may be using this endpoint when this is called.
+- * any pending and uncompleted requests will complete with status
+- * indicating disconnect (-ESHUTDOWN) before this call returns.
+- * gadget drivers must call usb_ep_enable() again before queueing
+- * requests to the endpoint.
+- *
+- * returns zero, or a negative error code.
+- */
++		unsigned maxpacket_limit)
++{ }
++static inline int usb_ep_enable(struct usb_ep *ep)
++{ return 0; }
+ static inline int usb_ep_disable(struct usb_ep *ep)
+-{
+-	int ret;
+-
+-	if (!ep->enabled)
+-		return 0;
+-
+-	ret = ep->ops->disable(ep);
+-	if (ret)
+-		return ret;
+-
+-	ep->enabled = false;
+-
+-	return 0;
+-}
+-
+-/**
+- * usb_ep_alloc_request - allocate a request object to use with this endpoint
+- * @ep:the endpoint to be used with with the request
+- * @gfp_flags:GFP_* flags to use
+- *
+- * Request objects must be allocated with this call, since they normally
+- * need controller-specific setup and may even need endpoint-specific
+- * resources such as allocation of DMA descriptors.
+- * Requests may be submitted with usb_ep_queue(), and receive a single
+- * completion callback.  Free requests with usb_ep_free_request(), when
+- * they are no longer needed.
+- *
+- * Returns the request, or null if one could not be allocated.
+- */
++{ return 0; }
+ static inline struct usb_request *usb_ep_alloc_request(struct usb_ep *ep,
+-						       gfp_t gfp_flags)
+-{
+-	return ep->ops->alloc_request(ep, gfp_flags);
+-}
+-
+-/**
+- * usb_ep_free_request - frees a request object
+- * @ep:the endpoint associated with the request
+- * @req:the request being freed
+- *
+- * Reverses the effect of usb_ep_alloc_request().
+- * Caller guarantees the request is not queued, and that it will
+- * no longer be requeued (or otherwise used).
+- */
++		gfp_t gfp_flags)
++{ return NULL; }
+ static inline void usb_ep_free_request(struct usb_ep *ep,
+-				       struct usb_request *req)
+-{
+-	ep->ops->free_request(ep, req);
+-}
+-
+-/**
+- * usb_ep_queue - queues (submits) an I/O request to an endpoint.
+- * @ep:the endpoint associated with the request
+- * @req:the request being submitted
+- * @gfp_flags: GFP_* flags to use in case the lower level driver couldn't
+- *	pre-allocate all necessary memory with the request.
+- *
+- * This tells the device controller to perform the specified request through
+- * that endpoint (reading or writing a buffer).  When the request completes,
+- * including being canceled by usb_ep_dequeue(), the request's completion
+- * routine is called to return the request to the driver.  Any endpoint
+- * (except control endpoints like ep0) may have more than one transfer
+- * request queued; they complete in FIFO order.  Once a gadget driver
+- * submits a request, that request may not be examined or modified until it
+- * is given back to that driver through the completion callback.
+- *
+- * Each request is turned into one or more packets.  The controller driver
+- * never merges adjacent requests into the same packet.  OUT transfers
+- * will sometimes use data that's already buffered in the hardware.
+- * Drivers can rely on the fact that the first byte of the request's buffer
+- * always corresponds to the first byte of some USB packet, for both
+- * IN and OUT transfers.
+- *
+- * Bulk endpoints can queue any amount of data; the transfer is packetized
+- * automatically.  The last packet will be short if the request doesn't fill it
+- * out completely.  Zero length packets (ZLPs) should be avoided in portable
+- * protocols since not all usb hardware can successfully handle zero length
+- * packets.  (ZLPs may be explicitly written, and may be implicitly written if
+- * the request 'zero' flag is set.)  Bulk endpoints may also be used
+- * for interrupt transfers; but the reverse is not true, and some endpoints
+- * won't support every interrupt transfer.  (Such as 768 byte packets.)
+- *
+- * Interrupt-only endpoints are less functional than bulk endpoints, for
+- * example by not supporting queueing or not handling buffers that are
+- * larger than the endpoint's maxpacket size.  They may also treat data
+- * toggle differently.
+- *
+- * Control endpoints ... after getting a setup() callback, the driver queues
+- * one response (even if it would be zero length).  That enables the
+- * status ack, after transfering data as specified in the response.  Setup
+- * functions may return negative error codes to generate protocol stalls.
+- * (Note that some USB device controllers disallow protocol stall responses
+- * in some cases.)  When control responses are deferred (the response is
+- * written after the setup callback returns), then usb_ep_set_halt() may be
+- * used on ep0 to trigger protocol stalls.
+- *
+- * For periodic endpoints, like interrupt or isochronous ones, the usb host
+- * arranges to poll once per interval, and the gadget driver usually will
+- * have queued some data to transfer at that time.
+- *
+- * Returns zero, or a negative error code.  Endpoints that are not enabled
+- * report errors; errors will also be
+- * reported when the usb peripheral is disconnected.
+- */
+-static inline int usb_ep_queue(struct usb_ep *ep,
+-			       struct usb_request *req, gfp_t gfp_flags)
+-{
+-	return ep->ops->queue(ep, req, gfp_flags);
+-}
+-
+-/**
+- * usb_ep_dequeue - dequeues (cancels, unlinks) an I/O request from an endpoint
+- * @ep:the endpoint associated with the request
+- * @req:the request being canceled
+- *
+- * if the request is still active on the endpoint, it is dequeued and its
+- * completion routine is called (with status -ECONNRESET); else a negative
+- * error code is returned.
+- *
+- * note that some hardware can't clear out write fifos (to unlink the request
+- * at the head of the queue) except as part of disconnecting from usb.  such
+- * restrictions prevent drivers from supporting configuration changes,
+- * even to configuration zero (a "chapter 9" requirement).
+- */
++		struct usb_request *req)
++{ }
++static inline int usb_ep_queue(struct usb_ep *ep, struct usb_request *req,
++		gfp_t gfp_flags)
++{ return 0; }
+ static inline int usb_ep_dequeue(struct usb_ep *ep, struct usb_request *req)
+-{
+-	return ep->ops->dequeue(ep, req);
+-}
+-
+-/**
+- * usb_ep_set_halt - sets the endpoint halt feature.
+- * @ep: the non-isochronous endpoint being stalled
+- *
+- * Use this to stall an endpoint, perhaps as an error report.
+- * Except for control endpoints,
+- * the endpoint stays halted (will not stream any data) until the host
+- * clears this feature; drivers may need to empty the endpoint's request
+- * queue first, to make sure no inappropriate transfers happen.
+- *
+- * Note that while an endpoint CLEAR_FEATURE will be invisible to the
+- * gadget driver, a SET_INTERFACE will not be.  To reset endpoints for the
+- * current altsetting, see usb_ep_clear_halt().  When switching altsettings,
+- * it's simplest to use usb_ep_enable() or usb_ep_disable() for the endpoints.
+- *
+- * Returns zero, or a negative error code.  On success, this call sets
+- * underlying hardware state that blocks data transfers.
+- * Attempts to halt IN endpoints will fail (returning -EAGAIN) if any
+- * transfer requests are still queued, or if the controller hardware
+- * (usually a FIFO) still holds bytes that the host hasn't collected.
+- */
++{ return 0; }
+ static inline int usb_ep_set_halt(struct usb_ep *ep)
+-{
+-	return ep->ops->set_halt(ep, 1);
+-}
+-
+-/**
+- * usb_ep_clear_halt - clears endpoint halt, and resets toggle
+- * @ep:the bulk or interrupt endpoint being reset
+- *
+- * Use this when responding to the standard usb "set interface" request,
+- * for endpoints that aren't reconfigured, after clearing any other state
+- * in the endpoint's i/o queue.
+- *
+- * Returns zero, or a negative error code.  On success, this call clears
+- * the underlying hardware state reflecting endpoint halt and data toggle.
+- * Note that some hardware can't support this request (like pxa2xx_udc),
+- * and accordingly can't correctly implement interface altsettings.
+- */
++{ return 0; }
+ static inline int usb_ep_clear_halt(struct usb_ep *ep)
+-{
+-	return ep->ops->set_halt(ep, 0);
+-}
+-
+-/**
+- * usb_ep_fifo_status - returns number of bytes in fifo, or error
+- * @ep: the endpoint whose fifo status is being checked.
+- *
+- * FIFO endpoints may have "unclaimed data" in them in certain cases,
+- * such as after aborted transfers.  Hosts may not have collected all
+- * the IN data written by the gadget driver (and reported by a request
+- * completion).  The gadget driver may not have collected all the data
+- * written OUT to it by the host.  Drivers that need precise handling for
+- * fault reporting or recovery may need to use this call.
+- *
+- * This returns the number of such bytes in the fifo, or a negative
+- * errno if the endpoint doesn't use a FIFO or doesn't support such
+- * precise handling.
+- */
++{ return 0; }
++static inline int usb_ep_set_wedge(struct usb_ep *ep)
++{ return 0; }
+ static inline int usb_ep_fifo_status(struct usb_ep *ep)
+-{
+-	if (ep->ops->fifo_status)
+-		return ep->ops->fifo_status(ep);
+-	else
+-		return -EOPNOTSUPP;
+-}
+-
+-/**
+- * usb_ep_fifo_flush - flushes contents of a fifo
+- * @ep: the endpoint whose fifo is being flushed.
+- *
+- * This call may be used to flush the "unclaimed data" that may exist in
+- * an endpoint fifo after abnormal transaction terminations.  The call
+- * must never be used except when endpoint is not being used for any
+- * protocol translation.
+- */
++{ return 0; }
+ static inline void usb_ep_fifo_flush(struct usb_ep *ep)
+-{
+-	if (ep->ops->fifo_flush)
+-		ep->ops->fifo_flush(ep);
+-}
++{ }
++#endif /* USB_GADGET */
+ 
+ /*-------------------------------------------------------------------------*/
+ 
+ struct usb_dcd_config_params {
+ 	__u8  bU1devExitLat;	/* U1 Device exit Latency */
++#define USB_DEFAULT_U1_DEV_EXIT_LAT     0x01    /* Less then 1 microsec */
+ 	__le16 bU2DevExitLat;	/* U2 Device exit Latency */
++#define USB_DEFAULT_U2_DEV_EXIT_LAT     0x1F4   /* Less then 500 microsec */
++	__u8 besl_baseline;	/* Recommended baseline BESL (0-15) */
++	__u8 besl_deep;         /* Recommended deep BESL (0-15) */
++#define USB_DEFAULT_BESL_UNSPECIFIED    0xFF    /* No recommended value */
+ };
+ 
+ struct usb_gadget;
+@@ -491,7 +269,8 @@ struct usb_gadget_ops {
+ 	int	(*pullup) (struct usb_gadget *, int is_on);
+ 	int	(*ioctl)(struct usb_gadget *,
+ 				unsigned code, unsigned long param);
+-	void	(*get_config_params)(struct usb_dcd_config_params *);
++	void	(*get_config_params)(struct usb_gadget *,
++				     struct usb_dcd_config_params *);
+ 	int	(*udc_start)(struct usb_gadget *,
+ 			     struct usb_gadget_driver *);
+ 	int	(*udc_stop)(struct usb_gadget *);
+@@ -503,6 +282,10 @@ struct usb_gadget_ops {
+ 			struct usb_endpoint_descriptor *);
+ 	void	(*udc_set_speed)(struct usb_gadget *gadget,
+ 				 enum usb_device_speed);
++	void    (*udc_set_ssp_rate)(struct usb_gadget *gadget,
++			enum usb_ssp_rate rate);
++	void    (*udc_async_callbacks)(struct usb_gadget *gadget, bool enable);
++	int	(*check_config)(struct usb_gadget *gadget);
+ };
+ 
+ /**
+@@ -552,13 +335,23 @@ struct usb_gadget_ops {
+  * device is acting as a B-Peripheral (so is_a_peripheral is false).
+  */
+ struct usb_gadget {
++	struct usb_udc			*udc;
+ 	/* readonly to gadget driver */
+ 	const struct usb_gadget_ops	*ops;
+ 	struct usb_ep			*ep0;
+ 	struct list_head		ep_list;	/* of usb_ep */
+ 	enum usb_device_speed		speed;
+ 	enum usb_device_speed		max_speed;
 +
-+	/* initialize/shutdown the phy */
-+	int     (*init)(struct usb_phy *x);
-+	void    (*shutdown)(struct usb_phy *x);
++	/* USB SuperSpeed Plus only */
++	enum usb_ssp_rate		ssp_rate;
++	enum usb_ssp_rate               max_ssp_rate;
 +
-+	/* enable/disable VBUS */
-+	int     (*set_vbus)(struct usb_phy *x, int on);
+ 	enum usb_device_state		state;
++	unsigned			isoch_delay;
 +
-+	/* effective for B devices, ignored for A-peripheral */
-+	int     (*set_power)(struct usb_phy *x,
-+			     unsigned int mA);
-+};
-+
-+static inline int
-+usb_phy_init(struct usb_phy *x)
++	unsigned			out_epnum;
++	unsigned			in_epnum;
+ 	unsigned			is_dualspeed:1;
+ 	unsigned			is_otg:1;
+ 	unsigned			is_a_peripheral:1;
+@@ -568,6 +361,10 @@ struct usb_gadget {
+ 	const char			*name;
+ 	struct device			dev;
+ 	unsigned			quirk_ep_out_aligned_size:1;
++	unsigned			is_selfpowered:1;
++	unsigned			deactivated:1;
++	unsigned			wakeup_armed:1;
++	unsigned			connected:1;
+ };
+ 
+ static inline void set_gadget_data(struct usb_gadget *gadget, void *data)
+@@ -585,6 +382,15 @@ static inline struct usb_gadget *dev_to_usb_gadget(struct device *dev)
+ 	return container_of(dev, struct usb_gadget, dev);
+ }
+ 
++static inline void usb_put_gadget(struct usb_gadget *gadget)
 +{
-+	if (x && x->init)
-+		return x->init(x);
-+
-+	return 0;
 +}
 +
-+static inline void
-+usb_phy_shutdown(struct usb_phy *x)
-+{
-+	if (x && x->shutdown)
-+		x->shutdown(x);
-+}
++void usb_initialize_gadget(struct device *parent,
++			   struct usb_gadget *gadget,
++			   void (*release)(struct device *dev));
++int usb_add_gadget(struct usb_gadget *gadget);
 +
-+static inline int
-+usb_phy_set_power(struct usb_phy *x, unsigned int mA)
-+{
-+	if (!x)
-+		return 0;
+ /* iterates the non-control endpoints; 'tmp' is a struct usb_ep pointer */
+ #define gadget_for_each_ep(tmp, gadget) \
+ 	list_for_each_entry(tmp, &(gadget)->ep_list, ep_list)
+@@ -630,168 +436,18 @@ static inline int gadget_is_superspeed(struct usb_gadget *g)
+ 	return g->max_speed >= USB_SPEED_SUPER;
+ }
+ 
+-/**
+- * usb_gadget_frame_number - returns the current frame number
+- * @gadget: controller that reports the frame number
+- *
+- * Returns the usb frame number, normally eleven bits from a SOF packet,
+- * or negative errno if this device doesn't support this capability.
+- */
+-static inline int usb_gadget_frame_number(struct usb_gadget *gadget)
+-{
+-	return gadget->ops->get_frame(gadget);
+-}
+-
+-/**
+- * usb_gadget_wakeup - tries to wake up the host connected to this gadget
+- * @gadget: controller used to wake up the host
+- *
+- * Returns zero on success, else negative error code if the hardware
+- * doesn't support such attempts, or its support has not been enabled
+- * by the usb host.  Drivers must return device descriptors that report
+- * their ability to support this, or hosts won't enable it.
+- *
+- * This may also try to use SRP to wake the host and start enumeration,
+- * even if OTG isn't otherwise in use.  OTG devices may also start
+- * remote wakeup even when hosts don't explicitly enable it.
+- */
+-static inline int usb_gadget_wakeup(struct usb_gadget *gadget)
+-{
+-	if (!gadget->ops->wakeup)
+-		return -EOPNOTSUPP;
+-	return gadget->ops->wakeup(gadget);
+-}
+-
+-/**
+- * usb_gadget_set_selfpowered - sets the device selfpowered feature.
+- * @gadget:the device being declared as self-powered
+- *
+- * this affects the device status reported by the hardware driver
+- * to reflect that it now has a local power supply.
+- *
+- * returns zero on success, else negative errno.
+- */
+-static inline int usb_gadget_set_selfpowered(struct usb_gadget *gadget)
+-{
+-	if (!gadget->ops->set_selfpowered)
+-		return -EOPNOTSUPP;
+-	return gadget->ops->set_selfpowered(gadget, 1);
+-}
+-
+-/**
+- * usb_gadget_clear_selfpowered - clear the device selfpowered feature.
+- * @gadget:the device being declared as bus-powered
+- *
+- * this affects the device status reported by the hardware driver.
+- * some hardware may not support bus-powered operation, in which
+- * case this feature's value can never change.
+- *
+- * returns zero on success, else negative errno.
+- */
+-static inline int usb_gadget_clear_selfpowered(struct usb_gadget *gadget)
+-{
+-	if (!gadget->ops->set_selfpowered)
+-		return -EOPNOTSUPP;
+-	return gadget->ops->set_selfpowered(gadget, 0);
+-}
+-
+-/**
+- * usb_gadget_vbus_connect - Notify controller that VBUS is powered
+- * @gadget:The device which now has VBUS power.
+- *
+- * This call is used by a driver for an external transceiver (or GPIO)
+- * that detects a VBUS power session starting.  Common responses include
+- * resuming the controller, activating the D+ (or D-) pullup to let the
+- * host detect that a USB device is attached, and starting to draw power
+- * (8mA or possibly more, especially after SET_CONFIGURATION).
+- *
+- * Returns zero on success, else negative errno.
+- */
+-static inline int usb_gadget_vbus_connect(struct usb_gadget *gadget)
+-{
+-	if (!gadget->ops->vbus_session)
+-		return -EOPNOTSUPP;
+-	return gadget->ops->vbus_session(gadget, 1);
+-}
+-
+-/**
+- * usb_gadget_vbus_draw - constrain controller's VBUS power usage
+- * @gadget:The device whose VBUS usage is being described
+- * @mA:How much current to draw, in milliAmperes.  This should be twice
+- *	the value listed in the configuration descriptor bMaxPower field.
+- *
+- * This call is used by gadget drivers during SET_CONFIGURATION calls,
+- * reporting how much power the device may consume.  For example, this
+- * could affect how quickly batteries are recharged.
+- *
+- * Returns zero on success, else negative errno.
+- */
+-static inline int usb_gadget_vbus_draw(struct usb_gadget *gadget, unsigned mA)
+-{
+-	if (!gadget->ops->vbus_draw)
+-		return -EOPNOTSUPP;
+-	return gadget->ops->vbus_draw(gadget, mA);
+-}
+-
+-/**
+- * usb_gadget_vbus_disconnect - notify controller about VBUS session end
+- * @gadget:the device whose VBUS supply is being described
+- *
+- * This call is used by a driver for an external transceiver (or GPIO)
+- * that detects a VBUS power session ending.  Common responses include
+- * reversing everything done in usb_gadget_vbus_connect().
+- *
+- * Returns zero on success, else negative errno.
+- */
+-static inline int usb_gadget_vbus_disconnect(struct usb_gadget *gadget)
+-{
+-	if (!gadget->ops->vbus_session)
+-		return -EOPNOTSUPP;
+-	return gadget->ops->vbus_session(gadget, 0);
+-}
+-
+-/**
+- * usb_gadget_connect - software-controlled connect to USB host
+- * @gadget:the peripheral being connected
+- *
+- * Enables the D+ (or potentially D-) pullup.  The host will start
+- * enumerating this gadget when the pullup is active and a VBUS session
+- * is active (the link is powered).  This pullup is always enabled unless
+- * usb_gadget_disconnect() has been used to disable it.
+- *
+- * Returns zero on success, else negative errno.
+- */
+-static inline int usb_gadget_connect(struct usb_gadget *gadget)
+-{
+-	if (!gadget->ops->pullup)
+-		return -EOPNOTSUPP;
+-	return gadget->ops->pullup(gadget, 1);
+-}
+-
+-/**
+- * usb_gadget_disconnect - software-controlled disconnect from USB host
+- * @gadget:the peripheral being disconnected
+- *
+- * Disables the D+ (or potentially D-) pullup, which the host may see
+- * as a disconnect (when a VBUS session is active).  Not all systems
+- * support software pullup controls.
+- *
+- * This routine may be used during the gadget driver bind() call to prevent
+- * the peripheral from ever being visible to the USB host, unless later
+- * usb_gadget_connect() is called.  For example, user mode components may
+- * need to be activated before the system can talk to hosts.
+- *
+- * Returns zero on success, else negative errno.
+- */
+-static inline int usb_gadget_disconnect(struct usb_gadget *gadget)
+-{
+-	if (!gadget->ops->pullup)
+-		return -EOPNOTSUPP;
+-	return gadget->ops->pullup(gadget, 0);
+-}
++int usb_gadget_frame_number(struct usb_gadget *gadget);
++int usb_gadget_wakeup(struct usb_gadget *gadget);
++int usb_gadget_set_selfpowered(struct usb_gadget *gadget);
++int usb_gadget_clear_selfpowered(struct usb_gadget *gadget);
++int usb_gadget_vbus_draw(struct usb_gadget *gadget, unsigned mA);
++int usb_gadget_vbus_disconnect(struct usb_gadget *gadget);
++int usb_gadget_connect(struct usb_gadget *gadget);
++int usb_gadget_disconnect(struct usb_gadget *gadget);
+ 
+ /*-------------------------------------------------------------------------*/
+ 
 +
-+	/* TODO usb_phy_set_charger_current(x, mA); */
+ /**
+  * struct usb_gadget_driver - driver for usb 'slave' devices
+  * @function: String describing the gadget's function
+@@ -980,6 +636,12 @@ extern void usb_gadget_giveback_request(struct usb_ep *ep,
+ 
+ /*-------------------------------------------------------------------------*/
+ 
++/* utility to check if endpoint caps match descriptor needs */
 +
-+	if (x->set_power)
-+		return x->set_power(x, mA);
-+	return 0;
-+}
++extern int usb_gadget_ep_match_desc(struct usb_gadget *gadget,
++		struct usb_ep *ep, struct usb_endpoint_descriptor *desc,
++		struct usb_ss_ep_comp_descriptor *ep_comp);
 +
-+static inline int
-+usb_phy_set_suspend(struct usb_phy *x, int suspend)
-+{
-+	return 0;
-+}
- #endif /* __LINUX_USB_PHY_H */
+ /* utility wrapping a simple endpoint selection policy */
+ 
+ extern struct usb_ep *usb_ep_autoconfig(struct usb_gadget *,
 -- 
 2.53.0
 
