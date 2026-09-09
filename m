@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79A02C79FB6
-	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 15:52:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B8BC79FB7
+	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 15:52:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 01C5A607C4;
-	Wed,  9 Sep 2026 15:52:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B6E4B407B2;
+	Wed,  9 Sep 2026 15:52:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lRgqJeQj3NZq; Wed,  9 Sep 2026 15:52:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org B273460608
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788969170;
-	b=tWHbgA1z+X43ehz7BeZKE4u9wJiowBcS/P1Q2KuC7ScGhC+8zfCFlL/zCHUdlitjwFmW
-	 nAUX+klpNAQ3z+j+KhLIJW7pPBk3lp/0C/m4HQiruOyMm2I/CtLebkh4aPQDrnRBqWVOG
-	 FVwgTpK2xU6GJZpA7qzffR2PZAGvkm5Hzll6wZ/aguiUWKxaR2ozUJxDgj8kK+1J8cdLy
-	 Mgoc6yleR0ZK48DnYNyi4JcWQsSxbMsSGJbQwdbZpKUQcA1a6qMblwLJ7Icl/wtxl4bow
-	 VK9fgRB5XTkjAPPHA9OA0m0ovfIJ2JEVFglucfSdc6ZNDM7c/8gkV+tw31X49jgOwCg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gzMIa58FW7-G; Wed,  9 Sep 2026 15:52:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 518594078F
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788969172;
+	b=WjUHAMnqlhkqBPxvr82Il6WmPvoWn8LjEAzO/32JSKdk1Hp68q8cDu7mLAQ5Pg75LvWg
+	 JHXO1VMlJBAeXcKErKEOfttuPFH063AWAl4xSTwyt3GkaNrOarRYUJZq9Oyy9mws4TwXK
+	 ZJoDVHzNO1/Ga2UdSz1D9xGp3ig0A/3O+7e/tOteS6R2/wXFRb6bqepr9NVCE7J97tdzq
+	 9gcqc+qEFxU2xG+WkTWYBqyT4doZAczSd6rrRHT0k7TnxFFJmKXMU6aKf0QvPwsrd+7lI
+	 EFg7hr6Zqq63TcEcG7FjKHUy8SWflbcFlUE2/RMCVZ+RmcbUyg8nWQzz3NyHV97mETQ==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788969170;
+	c=relaxed/relaxed; t=1788969172;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,65 +31,65 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-ZohoMailClient:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=w6zzq4tGGhquLe6UQ/IqzEJFehOL6lsEtW+jwzPJSfk=;
-	b=AnntC/Rw8oFPYBE2HWkkHSiXBaenjpYjPf26Il5W8adaIhZIQNYIVCfzRvMETe464gnn
-	 ER8PXV9L2hjbmXidjAuGZSW/hqfAVLvGEY6cyPi8+BdGC7H6W0EswqEbG/c3nS4+O/Nml
-	 rCTCIHnFSAfmpqJ+I33AHLhqj0YmYFoCbemWttH72Fye3itrXuV57DlGvX7UnqLyjdVho
-	 tFe+QK8MXWgUsFGv8g13nLciPYQRnAmaXamlT62R64jHUaMqLJofBnBmvagto44jd3uqG
-	 8E37NhVMZtJm3U9EalP2oFMuoc0fRj6K2Dt+1rLyp6dlVMaNeJlf+/2Nl+wqqaIZhkA==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=4M4ebechJgweK3Db2s3tbcLsMAA4lQtwM25vWhfOf20=;
+	b=Pkf29KcavymYN8Mi9rCZ70VB7JYM/dY/6b0/tzoo7kUFJEBzt9J/+lgzUWgisVKJu/TF
+	 fhk8qIERoG6ONG3BYe2G9SUA+SHZKjELrEMsogZfMDLBow3/0lYXtQNup6I9iv0XNyUZX
+	 tCMELM7P+E0Jv0fLXK9OyW/b1sdc8L9VOlYz4jh4UjslBvNusEtEo5+HLTAOU7M1IGp8N
+	 y1bD8x6R5YtsLxNNBtrOGDYlk75PnaJsx83jpbaZddRswpiuzd7yFdsnH5NavDgzoca0u
+	 EY6uw4HqZoA0HH7arPMvbipeXrJmml/4jUSQMH6QE7GxGt+uCZ5N6pbmxjNgGk0ckfw==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788969170;
-	bh=w6zzq4tGGhquLe6UQ/IqzEJFehOL6lsEtW+jwzPJSfk=;
+	d=lists.u-boot-project.org; s=default; t=1788969172;
+	bh=4M4ebechJgweK3Db2s3tbcLsMAA4lQtwM25vWhfOf20=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jzUoha6ovhv76XPjjcajOyr17L7I/jqyej8Dcnzyvcgkz0AjFHPRY7xXUMBC2hSnC
-	 jsjeDs2uZnn20QZPlUTMqww83CSaIWSxp/yPCZc7xPcPXXS5uGfoYWL5OyqEUyn2UV
-	 xgNGczvbxRpvRM8ZH5W5qDBXOZBoLzpeCNlS+3N8OYrcaIVFC9KfekuvB5avRW49xH
-	 VsO2ecSNnf/A3ssEfVnZPiI3myHPSz2B4hK29hUXaoV3EyPZdZImsaCFVsWhCvMoug
-	 Q5GapAs0ZhIAr8AeRjEhbFEhVpRnKZNh26nkvKu7pLZoGBQkhcgt24wLH60P1WF2Ud
-	 tfCuQGoKsWWLA==
+	b=H1CbipCLdRxCkSiPfB8l6ooZi8riQfDThjtDhm8zTfPfvFOOqidXNsmKYZhY3RaEE
+	 r+dabeJMSTrObnbwo5kEA5qiYZVeMDHUrrze1Ss0p6oOF4aaGZWzmz3P5t738SPBF6
+	 pMN22/PNj69jvaXsrvmpHPYwT9mPzUpxIYZt5lGO0Ug32BfwToTjlKuDmjzJNFzoUs
+	 sUgtyup+WBzU8apWFbfGCZh053EvOJH1XQtlk7CxwgoUo5F37HHjxDmt/LFZCN8J/c
+	 gqQEEBvLbkxa+Uq1VGyjUz6ggbutKnzpCK8AIGi1EYDBjecjzUfnuMhUNAJKN8H4XN
+	 vXw27sZIcfWKA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B273460608;
-	Wed,  9 Sep 2026 15:52:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 518594078F;
+	Wed,  9 Sep 2026 15:52:52 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id A43582D2
+ by lists1.osuosl.org (Postfix) with ESMTP id B288D755
  for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 15:52:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9258A806F2
+ by smtp1.osuosl.org (Postfix) with ESMTP id 95E4A8029C
  for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 15:52:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iu7lZEUz6eYL for <u-boot@lists.u-boot-project.org>;
+ id glTZyIGUjPFd for <u-boot@lists.u-boot-project.org>;
  Wed,  9 Sep 2026 15:52:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org EC9C18029C
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 1A2C480440
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=136.143.188.15
 ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788969168;
- b=O2gyzbjtTI2jgq0dYEmwbQj+2vxT7tmqmatZYwYRbwDXPLtYmdemsoJ404tFopuxDTL8
- cB9RglCCnBkZXRy6PA++mJorE58tpnMMRQan17alNwsEuFgindTpWEUzjtF89ltPxPD3T
- H35Tms1cy53udBrd5PaETsHKhDQDe9lec+/aguFLd5Bj3SP16RqFcEVMVwMGrvQw7+RWR
- um7oCdUPZa5QPy/vXlGNMCt3LBpa7KCpClqAg9QJbSb6/66PJQT3nOpGeAcw0L/tFwUjR
- FsVtJLXhBelxWQ+bDOQhmenZP/wNw1pnRhCFz6YaaT+yG8oRYWeVuwO2Jj9Os7L+4Rg==
+ b=RnUjrv+UFzLl1Oi/8ChgM3rL1QTTDz3fdRqX3DUsC3ujBShpnJx7WX92a45G18v9hEdD
+ q+pSOFnlTDtHppTgSUY/O9UiPcS0PAEedAynUhHtR1fCTDiimniEB5ymdJablTeUCvWAs
+ 5g0CYy7+T1a3O2ZJliHPkdjgkcV/bXdHFOpY2LRlj2dutfWWRIEJmyp4cRVvSPCn2vX5X
+ 1t9sIOP8n3mpJ6dDb4UKOSGKNVvyItOHU8Kf6KT3VplwAkulEu3r58oP6AoTzwGG/XfXc
+ W8Qcr/CZR/lhOFDbwat55YYMJ+BehRC1UvfIPHDpRHiHdic2BDYwR1dJigZEO2B0TCQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1788969168;
  h=Received-SPF:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
  Content-Type:Content-Transfer-Encoding:Message-Id:References:
  In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
  X-ZohoMailClient;
- bh=w6zzq4tGGhquLe6UQ/IqzEJFehOL6lsEtW+jwzPJSfk=;
- b=SL2AUqpi2Oj1J3JIHyT64Hj5eV6/LuVt/iP9d1okyxMO4vF09J4byzPSFnQubuJYf4UY
- YPuolMSlhK9/ZBxTCEbvCQeRhOPDGmkwAeQZsAV9vFnvZ3r53ZDule3yhAWyXIp2IDzEh
- 4n6rKIKUj8g3f0OSgPY3hxD1o+4Eb24bpryYOixPHgNtfa7MQHcaD/7kcdFX/uuCJIEfa
- Ho3hji+RlgEbTIyaSoj0qS601DzusZNZF/Xr/btLZoOt1lUPb7KBdPvNDE+BczaXI69va
- vaxgaP9ZBa6DCyb1kcbgUPCizTMjR9GAiNsMqprb7wBgsFQdCcyjyx82izYfU/L963w==
+ bh=4M4ebechJgweK3Db2s3tbcLsMAA4lQtwM25vWhfOf20=;
+ b=Gjea7s+Yhues3Gwpam0fIxMugCcyo1CTTZh4nc+wmJfnZbpx9YNLR6c2ksHLGSnaGE4A
+ eWdMEDTajCw03PdPio4nWQV2MXZrlIg7Y8OvajlX+fg5UJz9QnnZcHxSzFP96WQr6qmBD
+ 4Hp15/njygJ6MZuti7I6DgabgybgvSMgex1S6XOZbbCPqj13A2cd7J2K9eIvmQNGYg5L0
+ 4qNbXq3wgBAjtxTgzfCW2LY2567OSWyjhzu5ZBuotdwMF3oYRVqtCeJt7fDIW6qgCtIfj
+ 4RHemSyXACSTT7i8B2yIyT5EufZxWpE92l5VreXJDk2mqcMYudUnHbP2hhgfX1qGVjw==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org;
  dmarc=none header.from=pigmoral.tech; 
  dkim=pass header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech
- header.a=rsa-sha256 header.s=zmail header.b=o8qnqSzJ; 
+ header.a=rsa-sha256 header.s=zmail header.b="UCNvUR/C"; 
  arc=pass header.oldest-pass=0 smtp.remote-ip=136.143.188.15
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
  helo=sender4-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
@@ -99,40 +99,39 @@ Authentication-Results: smtp1.osuosl.org;
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key) header.d=pigmoral.tech
  header.i=junhui.liu@pigmoral.tech header.a=rsa-sha256 header.s=zmail
- header.b=o8qnqSzJ
+ header.b=UCNvUR/C
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
- by smtp1.osuosl.org (Postfix) with ESMTPS id EC9C18029C
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1A2C480440
  for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 15:52:47 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1788969142; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1788969134; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=MZzo1loyiqQByPKxiiwJiOjGwzOjt7Lx1+Bbt0hJ1yqy64f/ONWuPmlvXUvxZFyg6RRlQ7vuREDN/YdgvPCKDZ7gjZ3C0cOywyfj1nadpqxZKNX4fxy0o5REXRLYmx2l8O4b6Ce7mjGtclvUM519ByFLEBmkR4C5nQInlAwnfGA=
+ b=Ip0ub5wyfy18h+u/2y62coUNpHBH8q1OayM4QaN5vjC8lfoQx+wdp+4C1UZwt2Dhrv4VW9YguxHAf/gUnS9jA0e+YgKRFcTwMfkvNrptNMtcyNOf2biOMRSTIowUCiGi2x92WMTxUnpdO0IBE4QllCkGeuGYhyD1G14egUNB0vg=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1788969142;
+ s=zohoarc; t=1788969134;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=w6zzq4tGGhquLe6UQ/IqzEJFehOL6lsEtW+jwzPJSfk=; 
- b=a3t0/izeoF6LY7Sqh8GJBuffJi+/nJwWTCIdG2XyX4E4/CbYXrWhtUsC8PDcRQVzD6VCnYVKD886hvpPEevYeFtPVl2ZHKwTRm2eUPLTQuQAk7+RA7GSB6DTYVesCu8II8Q6uE3H0hV6wKciIsRTpCnsRXM1ciEovQ7vBwrFvQI=
+ bh=4M4ebechJgweK3Db2s3tbcLsMAA4lQtwM25vWhfOf20=; 
+ b=Mj4lYjQ+w814puR5DSDsYha5sQKzPhcFghJ1qxs4hsQdgR/GfRTfLsCOkXBt8C2TZrrU5KBw91IwvhshabDbZEfoZdBSmfIcczHZ4JRGfCIn/rKJmM/vG5uCOqm+e9KUZviVl5aqpd/uB0k4FN5drPIPtxoewB12RHKAXp2Mfjw=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=pigmoral.tech;
  spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
  dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1788969142; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1788969134; 
  s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
  h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:In-Reply-To:To:To:Cc:Cc:Reply-To;
- bh=w6zzq4tGGhquLe6UQ/IqzEJFehOL6lsEtW+jwzPJSfk=;
- b=o8qnqSzJD6z07NF+CNXe6KOAaqy4pBdYp9SnE+Al6Xi22LpBXtnnYmQZ5vwOLYaH
- ZOqIzEfaOBGch2K0oIupdky9qTZfdCsoRcx353cK9TqbYV00MpP0ZrPjQIyka4gHgJH
- JcsKqNmuK+s23rkGySGzLDUpLLxHvim4druVNxYQ=
-Received: by mx.zohomail.com with SMTPS id 178896914030794.50219767383362;
- Wed, 9 Sep 2026 08:52:20 -0700 (PDT)
+ bh=4M4ebechJgweK3Db2s3tbcLsMAA4lQtwM25vWhfOf20=;
+ b=UCNvUR/CyJABY1F73zDIrBMeEX3AKCUOxp+aHG7m/ug2ykHVbx1v5Y9ahIRkmjyQ
+ x91F1iu3mk4smELDW1Hy3FLeQcXAWfhYXGgUdS743DszxjEIOgrRIlJ2W51/rooFlll
+ AyqU55Wd7cGVpEE4YxfhmkwNgayAzrM/GJD2BzzU=
+Received: by mx.zohomail.com with SMTPS id 1788969133082493.8197259349247;
+ Wed, 9 Sep 2026 08:52:13 -0700 (PDT)
 From: Junhui Liu <junhui.liu@pigmoral.tech>
-Date: Wed, 09 Sep 2026 23:51:09 +0800
-Subject: [PATCH v2 2/2] doc: board: spacemit: document the SpacemiT boot
- image format
+Date: Wed, 09 Sep 2026 23:51:08 +0800
+Subject: [PATCH v2 1/2] tools: mkimage: add SpacemiT K3 boot image support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260909-spacemit-aihd-v2-2-780e98cf2fec@pigmoral.tech>
+Message-Id: <20260909-spacemit-aihd-v2-1-780e98cf2fec@pigmoral.tech>
 References: <20260909-spacemit-aihd-v2-0-780e98cf2fec@pigmoral.tech>
 In-Reply-To: <20260909-spacemit-aihd-v2-0-780e98cf2fec@pigmoral.tech>
 To: u-boot@lists.u-boot-project.org
@@ -143,13 +142,13 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Kory Maincent <kory.maincent@bootlin.com>, E Shattow <e@freeshell.de>, 
  Yixun Lan <dlan@kernel.org>, spacemit@lists.linux.dev
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5374;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8615;
  i=junhui.liu@pigmoral.tech; h=from:subject:message-id;
- bh=3uvel5a9qRu2FYnNf3EA6uNL6gvopvxjdQ2FmJxvde4=;
- b=owGbwMvMwCWWvDb1VEXc8j+Mp9WSGLIWNsx2VXx38KjylMa9/7h+RrmuWb1M/1tJuOqUsh9z4
- p99Y4qS6ChlYRDjYpAVU2Th8hf/Z63D8+2IQOt9mDmsTCBDGLg4BWAix70ZGbqOhnvVqG+9eO6V
- e/7rhQ3BP6Vmyt/NXpBq9XbSb509DksZ/ucxe1/lWZBiUC19njmqoXx377aP904e/6+9+v7N/jm
- 5J5gA
+ bh=vDeP6QzawO0bDcECoJRdBXLD47+QsmYhX8YIDGl3BO8=;
+ b=owGbwMvMwCWWvDb1VEXc8j+Mp9WSGLIWNszYH9b4I/xr0a4K76a9p8x1md/Yp2Yv2VCY9euvt
+ 1umQD97RykLgxgXg6yYIguXv/g/ax2eb0cEWu/DzGFlAhnCwMUpABOJNmT4n2+q8fe5kbHw1AC3
+ GafthVgl9676V+tzbj2bUOoJ6VqGtYwMHW6vX75ccOH/2x9Tda9yzyrcW/xXvF+C42i/UI70y0d
+ ePAA=
 X-Developer-Key: i=junhui.liu@pigmoral.tech; a=openpgp;
  fpr=15B30CC69C4BF0CC3C08F85A2A90CDC122DF37BF
 X-ZohoMailClient: External
@@ -166,178 +165,278 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Document the boot image layout shared by the SpacemiT K1 and K3
-BootROMs, including the metadata headers and authentication areas.
+The SpacemiT BootROM loads the FSBL from a boot image consisting of a
+fixed 4 KiB header with two metadata headers and authentication
+information, followed by a 32-byte-aligned SPL payload and a trailing
+authentication area. K1 and K3 share the same layout, but use different
+integrity and authentication schemes. K1 requires RSA-signed images,
+while K3 uses CRC32 to verify images in non-secure boot mode.
 
-Describe the K3 non-secure CRC32 path supported by mkimage and provide
-an example using the "smtimage" image type with "-n k3".
+Add mkimage type "smtimage" for the K3 CRC32 path. Populate both
+metadata headers, fill their CRC32 values and the payload CRC32, and
+reserve the authentication areas required by the layout.
+
+The image header has no reliable K1/K3 identifier, so select the SoC
+with -n. Omit dumpimage support since it cannot take -n to distinguish
+between the variants.
+
+Only "-n k3" in non-secure boot mode is supported. Route SoC differences
+through a variant table so K1 and RSA authentication support can be
+added later.
 
 Tested-by: E Shattow <e@freeshell.de>
 Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
 ---
- doc/board/spacemit/index.rst    |   2 +-
- doc/board/spacemit/smtimage.rst | 143 ++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 144 insertions(+), 1 deletion(-)
+ boot/image.c     |   1 +
+ include/image.h  |   1 +
+ tools/Makefile   |   1 +
+ tools/smtimage.c | 202 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 205 insertions(+)
 
-diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
-index a5e35ee12ab6..5797ada37d15 100644
---- a/doc/board/spacemit/index.rst
-+++ b/doc/board/spacemit/index.rst
-@@ -7,4 +7,4 @@ SpacemiT
+diff --git a/boot/image.c b/boot/image.c
+index 185d52ba492f..3a31ef663710 100644
+--- a/boot/image.c
++++ b/boot/image.c
+@@ -179,6 +179,7 @@ static const table_entry_t uimage_type[] = {
+ 	{	IH_TYPE_TFA_BL31, "tfa-bl31",  "TFA BL31 Image", },
+ 	{	IH_TYPE_STM32IMAGE_V2, "stm32imagev2", "STMicroelectronics STM32 Image V2.0" },
+ 	{	IH_TYPE_AMLIMAGE,   "amlimage",   "Amlogic Boot Image" },
++	{	IH_TYPE_SMTIMAGE, "smtimage", "SpacemiT Boot Image" },
+ 	{	-1,		    "",		  "",			},
+ };
  
-    bananapi-f3
-    k1-spl
--
-+   smtimage
-diff --git a/doc/board/spacemit/smtimage.rst b/doc/board/spacemit/smtimage.rst
+diff --git a/include/image.h b/include/image.h
+index 6edcb1995bfe..53aad2dfde3f 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -235,6 +235,7 @@ enum image_type_t {
+ 	IH_TYPE_TFA_BL31,		/* TFA BL31 image */
+ 	IH_TYPE_STM32IMAGE_V2,		/* STMicroelectronics STM32 Image V2.0 */
+ 	IH_TYPE_AMLIMAGE,		/* Amlogic Boot Image */
++	IH_TYPE_SMTIMAGE,		/* SpacemiT Boot Image */
+ 
+ 	IH_TYPE_COUNT,			/* Number of image types */
+ };
+diff --git a/tools/Makefile b/tools/Makefile
+index 535a5d51c89e..fc0aa52455aa 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -138,6 +138,7 @@ dumpimage-mkimage-objs := aisimage.o \
+ 			pbl_crc32.o \
+ 			renesas_spkgimage.o \
+ 			sfspl.o \
++			smtimage.o \
+ 			vybridimage.o \
+ 			stm32image.o \
+ 			$(ROCKCHIP_OBS) \
+diff --git a/tools/smtimage.c b/tools/smtimage.c
 new file mode 100644
-index 000000000000..edcc3091e8e7
+index 000000000000..96e8b5d8d171
 --- /dev/null
-+++ b/doc/board/spacemit/smtimage.rst
-@@ -0,0 +1,143 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
++++ b/tools/smtimage.c
+@@ -0,0 +1,202 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (C) 2026 Junhui Liu <junhui.liu@pigmoral.tech>
++ *
++ * The SpacemiT boot image consists of a fixed image header followed by an
++ * aligned SPL payload and a trailing authentication area. The image header
++ * contains two metadata headers and areas reserved for authentication data.
++ *
++ * The image layout is:
++ *
++ *   0x000             root key
++ *   0x100             header0
++ *   0x120             key metadata
++ *   0x300             OEM keys
++ *   0xb00             signature0
++ *   0xfe0             header1
++ *   0x1000            SPL payload, with its end aligned to 32 bytes
++ *   payload end       signature1 (0x100 bytes)
++ */
 +
-+SpacemiT boot image format
-+=========================
++#include <image.h>
++#include <u-boot/crc.h>
++#include "imagetool.h"
 +
-+The SpacemiT K1 and K3 BootROMs load a SpacemiT boot image as the first-stage
-+bootloader (FSBL), either from persistent storage or over USB in MaskROM mode.
++#define SMT_MAGIC		"AIHD"
++#define SMT_PAYLOAD_ALIGN	32
++#define SMT_AUTH_SIZE		0x100
 +
-+Image layout
-+------------
++#define SMT_FLAG_CRC32		(1U << 0)
 +
-+K1 and K3 share the same layout. A fixed 4 KiB prefix contains two 32-byte
-+metadata headers, key slots, and signature slots. The aligned SPL payload and
-+a trailing authentication area follow::
++/**
++ * struct smtimage_header - metadata header within a SpacemiT boot image header
++ *
++ * @magic:	Magic (must be SMT_MAGIC)
++ * @version:	Image version used when anti-rollback is enabled by eFuse
++ * @secure:	Version slot used when anti-rollback is enabled by eFuse
++ * @reserved:	Reserved
++ * @image_size:	Header0 stores the image header size
++ *		Header1 stores the aligned payload size
++ * @load_addr:	Unused
++ * @header_crc:	Header0 and Header1 store the CRC32 of the preceding 24 bytes on K3
++ * @image_crc:	Header1 stores the CRC32 of the aligned payload on K3
++ */
++struct smtimage_header {
++	uint8_t magic[4];
++	uint8_t version;
++	uint8_t secure;
++	uint16_t reserved;
++	uint64_t image_size;
++	uint64_t load_addr;
++	uint32_t header_crc;
++	uint32_t image_crc;
++} __packed;
 +
-+    offset                                    size
-+    0x000  +-------------------------------+
-+           | root RSA-2048 modulus         |  0x100
-+    0x100  +-------------------------------+
-+           | header0                       |  0x020
-+    0x120  +-------------------------------+
-+           | key-selection metadata        |  0x1e0
-+    0x300  +-------------------------------+
-+           | OEM public-key slots          |  0x800
-+    0xb00  +-------------------------------+
-+           | signature0                    |  0x100
-+    0xc00  +-------------------------------+
-+           | reserved                      |  0x3e0
-+    0xfe0  +-------------------------------+
-+           | header1                       |  0x020
-+    0x1000 +-------------------------------+
-+           | SPL payload (32-byte aligned) |
-+           +-------------------------------+
-+           | signature1                    |  0x100
-+           +-------------------------------+
++/**
++ * struct smtimage_image_header - fixed header area of a SpacemiT boot image
++ *
++ * @root_key:	Root public key
++ * @header0:	Image layout and load information
++ * @key_data:	Key metadata
++ * @oem_keys:	OEM public-key area
++ * @signature0:	Signature of the image configuration
++ * @reserved:	Reserved
++ * @header1:	SPL payload information
++ */
++struct smtimage_image_header {
++	uint8_t root_key[0x100];
++	struct smtimage_header header0;
++	uint8_t key_data[0x1e0];
++	uint8_t oem_keys[0x800];
++	uint8_t signature0[SMT_AUTH_SIZE];
++	uint8_t reserved[0x3e0];
++	struct smtimage_header header1;
++} __packed;
 +
-+For payload size ``P`` and ``A = ALIGN(P, 32)``, the image size is
-+``0x1000 + A + 0x100``.
++/**
++ * struct smtimage_variant - SoC-specific image properties
++ *
++ * @name:	SoC name passed to mkimage with -n
++ * @flags:	SoC-specific image flags
++ */
++struct smtimage_variant {
++	const char *name;
++	unsigned int flags;
++};
 +
-+Metadata header
-+---------------
++static const struct smtimage_variant smtimage_variants[] = {
++	{
++		.name = "k3",
++		.flags = SMT_FLAG_CRC32,
++	},
++};
 +
-+Both header0 and header1 use the following format:
++static const struct smtimage_variant *smtimage_get_variant(const char *name)
++{
++	int i;
 +
-+.. list-table::
-+   :header-rows: 1
++	if (!name || !*name)
++		return NULL;
 +
-+   * - Offset
-+     - Size
-+     - Field
-+     - Description
-+   * - 0x00
-+     - 4
-+     - ``magic``
-+     - ``AIHD``
-+   * - 0x04
-+     - 1
-+     - ``version``
-+     - Anti-rollback image version
-+   * - 0x05
-+     - 1
-+     - ``secure``
-+     - Zero selects anti-rollback bank 0
++	for (i = 0; i < ARRAY_SIZE(smtimage_variants); i++)
++		if (!strcmp(name, smtimage_variants[i].name))
++			return &smtimage_variants[i];
 +
-+       Non-zero selects anti-rollback bank 1
-+   * - 0x06
-+     - 2
-+     - ``reserved``
-+     - Reserved
-+   * - 0x08
-+     - 8
-+     - ``image_size``
-+     - header0: prefix information
++	return NULL;
++}
 +
-+       header1: aligned payload size
-+   * - 0x10
-+     - 8
-+     - ``load_addr``
-+     - Unused by the common authentication code
-+   * - 0x18
-+     - 4
-+     - ``header_crc``
-+     - K3: CRC32 over header bytes ``[0x00, 0x18)``
-+   * - 0x1c
-+     - 4
-+     - ``image_crc``
-+     - K3: CRC32 over the payload in header1 only
++static void smtimage_init_header(struct smtimage_header *header, uint64_t image_size,
++				 const struct smtimage_variant *variant)
++{
++	uint32_t crc;
 +
-+``header1.image_size`` records the aligned payload size and therefore
-+determines the location of signature1.
++	memcpy(header->magic, SMT_MAGIC, sizeof(header->magic));
 +
-+Authentication
-+--------------
++	header->image_size = cpu_to_le64(image_size);
 +
-+K1 and K3 apply different authentication policies:
++	if (variant->flags & SMT_FLAG_CRC32) {
++		crc = crc32(0, (uint8_t *)header,
++			    offsetof(struct smtimage_header, header_crc));
++		header->header_crc = cpu_to_le32(crc);
++	}
++}
 +
-+.. list-table::
-+   :header-rows: 1
++static int smtimage_check_params(struct image_tool_params *params)
++{
++	if (!smtimage_get_variant(params->imagename)) {
++		fprintf(stderr, "%s: SpacemiT SoC must be specified with -n\n",
++			params->cmdname);
++		return EXIT_FAILURE;
++	}
 +
-+   * - Area
-+     - K1
-+     - K3 non-secure boot mode
-+     - K3 secure boot mode
-+   * - Root and OEM keys
-+     - RSA-2048 moduli with an eFuse root-hash check when secure boot is
-+       enabled
-+     - Unused
-+     - RSA-2048 moduli with an eFuse root-hash check
-+   * - Header CRC
-+     - Not checked separately
-+     - header1 verified
++	if (!params->dflag)
++		return EXIT_FAILURE;
 +
-+       header0 ignored
-+     - Both verified and covered by RSA
-+   * - Image CRC
-+     - Not checked separately
-+     - Payload CRC32 in header1
-+     - Covered by RSA but not checked separately
-+   * - signature0
-+     - Verified with the root key over ``[0x100, 0xb00)``
-+     - Unused
-+     - Verified with the root key over ``[0x100, 0xb00)``
-+   * - signature1
-+     - Verified with the SPL key over header1 and the aligned payload
-+     - Unused
-+     - Verified with the SPL key over header1 and the aligned payload
++	return EXIT_SUCCESS;
++}
 +
-+K1 verifies both signatures even without a programmed root-key hash. In this
-+case, the root key comes from the image and is not authenticated by hardware,
-+so the image, keys, and signatures can be replaced together.
++static void smtimage_print_header(const void *buf, struct image_tool_params *params)
++{
++	const struct smtimage_image_header *image_header = buf;
++	const struct smtimage_header *header1 = &image_header->header1;
++	uint64_t payload_size = le64_to_cpu(header1->image_size);
 +
-+K3 uses CRC32 in non-secure boot mode and hardware-rooted RSA in secure boot
-+mode.
++	printf("SpacemiT Boot Image (%s)\n", params->imagename);
++	printf("Total Size: %llu bytes\n",
++	       (unsigned long long)(sizeof(*image_header) + payload_size + SMT_AUTH_SIZE));
++	printf("Payload Size: %llu bytes\n", (unsigned long long)payload_size);
++}
 +
-+Creating an image
-+-----------------
++static void smtimage_set_header(void *buf, struct stat *sbuf, int infd,
++				struct image_tool_params *params)
++{
++	const struct smtimage_variant *variant = smtimage_get_variant(params->imagename);
++	struct smtimage_image_header *image_header = buf;
++	struct smtimage_header *header0 = &image_header->header0;
++	struct smtimage_header *header1 = &image_header->header1;
++	size_t payload_size;
++	uint32_t crc;
 +
-+U-Boot currently creates only K3 images for non-secure boot mode. Package an
-+SPL payload with::
++	payload_size = sbuf->st_size - sizeof(*image_header) - SMT_AUTH_SIZE;
 +
-+    $ tools/mkimage -T smtimage -n k3 -d u-boot-spl.bin FSBL.bin
++	smtimage_init_header(header0, sizeof(*image_header), variant);
++	smtimage_init_header(header1, payload_size, variant);
 +
-+K1 images and RSA-authenticated K3 images are not yet supported.
++	if (variant->flags & SMT_FLAG_CRC32) {
++		crc = crc32(0, (uint8_t *)(image_header + 1), payload_size);
++		header1->image_crc = cpu_to_le32(crc);
++	}
++}
++
++static int smtimage_check_image_type(uint8_t type)
++{
++	if (type == IH_TYPE_SMTIMAGE)
++		return EXIT_SUCCESS;
++
++	return EXIT_FAILURE;
++}
++
++static int smtimage_vrec_header(struct image_tool_params *params,
++				struct image_type_params *tparams)
++{
++	size_t payload_size = params->file_size - tparams->header_size;
++
++	tparams->hdr = calloc(tparams->header_size, 1);
++
++	return ALIGN(payload_size, SMT_PAYLOAD_ALIGN) - payload_size + SMT_AUTH_SIZE;
++}
++
++U_BOOT_IMAGE_TYPE(
++	smtimage,
++	"SpacemiT Boot Image support",
++	sizeof(struct smtimage_image_header),
++	NULL,
++	smtimage_check_params,
++	NULL,
++	smtimage_print_header,
++	smtimage_set_header,
++	NULL,
++	smtimage_check_image_type,
++	NULL,
++	smtimage_vrec_header
++);
 
 -- 
 2.55.0
