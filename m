@@ -1,190 +1,194 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13541C79F8C
-	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 07:08:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 524AAC79FAA
+	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 07:12:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A9C51406C3;
-	Wed,  9 Sep 2026 07:08:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E493980D6E;
+	Wed,  9 Sep 2026 07:12:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MCma-zq7dBzW; Wed,  9 Sep 2026 07:08:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org E271D406D4
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788937727;
-	b=XU0OAi7eI+YvPLn2+IiKoye0r+94qbe04lBXVVQA2HcslSfzU+lNRLDqcMu3qzR8j3HL
-	 XI3IebwZwCzIqBBIyr7ThZsi3EjmBW+qCfLCuxVybTiFYWjKP4BW+iYBbyZ+795E78s/u
-	 HaI8bJkFN+gp9EsI2ntFaK7bWXth02hElrSSwOGtmEME6SinW3cZ5hide87NUYxJlC0yk
-	 UkPMlYuwU8qdQ5kBnkRprA+bHj5M1K92WEn4e2uOs5uSxNifmRVbpUsfYNU+eFM0TmW0x
-	 NABBYrKtcJg1ABVg5T+EB/vyuYm7HzzTBzdq3CcIznGtoKTBSlceurXcYIMiUU1K3YA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mXe4eowKZLt0; Wed,  9 Sep 2026 07:12:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 3604680D6F
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788937927;
+	b=ZjPstL32ASRmXxopXTMjOwDLbSh/XPxRhnT8i3CbwG5ecujDFGhQYhRWSp3khWowAYkz
+	 EfsywXqeUgdtlLTdGWlQwGttFaqtz7zxbX1e4LmoNxQWwIv5Eh0/QY6WXJAFhDk6Sk9NN
+	 vqQQjAmhhgJXzeOm+AoCIhKeoefRtXFmpCR0Wb2T9LJqdxonSgCBr5w2anNoF+7LrkEPe
+	 26ncegCU3bav90V7mj9cYi+ib/CjZ9EENr9xCwLMmQb6uPTJqrz/k/opNpPDL8uyC57fu
+	 R54WV0ifQfynbqn4TBHwaezMojSveclIKz4RCU48Vmf2RX+a0wKA3KEI2qxsUrEdd0A==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788937727;
+	c=relaxed/relaxed; t=1788937927;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=pzzlMbT9zR2b7T/uoO168PYKrkmF7HQhXQelK6zSY9M=;
-	b=AlyvWw7EB5NwixNebSdUkhbr7cRvRbqlLNXat51mw31E4DGyqtQq/562xJto0B6LPP5m
-	 X2eCtOIU0ts2qowDTMbAgpX8tOy/nEI4ASdl7Lc8KkH/xkLuhhlHVBp3idbjvvBtmQNrG
-	 Q42YfnrIq0hohvGAZ0drjDVxQPCDEplfj9ZAO0bO0TDdZJG04U3lTbOfXElF5NLJDLgRz
-	 Jn5DmlR/BVFSYyMoLCNe2bLxpjLZyu7ZBXgi4zSeoVvljA7IsZwYWdX/u7Loblo8gKvmL
-	 O21Qe/LM/gvom9m/DCHptVvm/7M1B49VlOfb7Rt3sU+PlpfNqVnBc6Bmvjs3XIPS/1w==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="X8B/wB+H";
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=NOC0ikd0nckjMCLspqdnaDAs4llwj3zRRNZMEhTOw5Y=;
+	b=FW4WgqOnYExDiX2TficjqHDRKg1z52ZrjRx76Rb681VlnBCvzi0E7q/ydIKww1cVNZxY
+	 Q3oc25HnnMQOuZR6AU5isQw44fA9n2RvGa0h4/xv+0pjIUcY4iUpWPeNtb2QKJZ9Bs8JF
+	 x0qewQVpAMUxrtAz0TuVXEgw9B5gWtSs9JiyhCp2hZ0gcjKbKIPQkYP7rPagPRvNmSquv
+	 BjiZjf9YRtQe8oMqm4788mH3QCScblRhKDmDBprMsCMf8Nleg78SoiA+n6sN02sXSOHOb
+	 0o5Y5drJP4JDAe6RsYesWsLnupiX6+EXjxec5FuH/EuX22sVIa20IZrDQ2F6Gc9oObw==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; dmarc=pass header.from=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=nGFFsclO;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788937727;
-	bh=pzzlMbT9zR2b7T/uoO168PYKrkmF7HQhXQelK6zSY9M=;
+	d=lists.u-boot-project.org; s=default; t=1788937927;
+	bh=NOC0ikd0nckjMCLspqdnaDAs4llwj3zRRNZMEhTOw5Y=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zB9cR5QmPV6W1hk0YzvM7qaYBXepKsfPWphRyFoBrwYAgEFM/reElcaULGh27U+hE
-	 cCLPxP6FUu+saxmkFZYl4V6d5GiqarRvdjEAbiisyXzYv7h/3+y0lqG7h6bZgkQYRS
-	 ZhGd2W3R4hFiutnzCDqFc18HWyB9rWY+ZroOutLZPwW3gEV/a0Wwp/zs6HB5e4/gEf
-	 QsXy6yww+DeEta5htTFTU5LxG8SFWY0w8P1/eHSyoOw8HIxOFO1tnCQcJPS3ldt2/8
-	 4E4Ym45esZ+Xgle2x9ibc1Jlc+HRHmAr8BS+kqo0XvODj8m3IF+vUoqgtdPReOoqId
-	 LxEZTVpdPrW5Q==
+	b=HNnRndRtsgrIwAsdXSWi0b0TpcCqfJVf9Ui9sPIo27970CSwQo+HqP1nk3JmUGzZV
+	 iFRugX/6yCmr1CWGWmeKKvDPVukAnWXYrA20SgfaBMVpvsE4PosJAPYUJ8VPx/xeQ+
+	 OU7quEB+xdDnfHZy0FNRrDKnDuLsowl71j6/v4twBbKXN9QgcVpl/zgk77MV8FQ81U
+	 5+w2x7UuELYKkSjLaxLztefgRPus45lR+cpfLF4u3lvGycNUzgsm9OnFHqnYY1zXPZ
+	 gw4mMEiobiDrjA5T9y9Q3wXyebb+OQYVQF5vkPD6yh3dKn8hRn8x6r371xQavseuMV
+	 CwfycWPWwaslQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E271D406D4;
-	Wed,  9 Sep 2026 07:08:46 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8F5D229B
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 07:08:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3604680D6F;
+	Wed,  9 Sep 2026 07:12:07 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 241D7724
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 07:12:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 81169406D4
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 07:08:43 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 153EC80D6F
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 07:12:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CMPf4DR9VETH for <u-boot@lists.u-boot-project.org>;
- Wed,  9 Sep 2026 07:08:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 83806406C3
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1129"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788937722;
- b=SR1D6waaf+B/mRwmwaAOVjB95JHvSpMYI9HJHb5BRpj0oSsq0S/SBTIfXWxjpAaVvn+b
- F+nXTtdWeSxs3CwTZBUWZ+gOReMjfQLJvAnC6E3fPxSSyHPLE+LzoMrT92OC07Frw/lNg
- uZAPeVDhmrvhFZF/26rPz99vVEus019XNPI3bvdL9906vWNuzdoDd4KuqUGCrrD5bwYss
- 6oJZCDPkqnyC1CCZIkSejL6axhL0WfqJMKsZK9oPfPJapIR2E//vHbR1++VpbtB9GWmFY
- rg6FOXqQAfDdNYT/r9VLhQrwODPmp1GZ22ssqGzNF7wDlSqlf4pC1dXRFw4pboFPiJw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sX0xI4cpT1JB for <u-boot@lists.u-boot-project.org>;
+ Wed,  9 Sep 2026 07:12:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 38D7A80D6E
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::1131"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788937924;
+ b=Fa9kvJIpcLWAYoV0tZYf42k6CH7Lb474dBZNkIP0j0R2qujtFvusjMhX3Qk4xknlblzU
+ DhAurn8FgUuexg1uko3M26YrzVoyxZD32vPRrtggJHzCbirCHcM/0ixwSqFituL3hP15f
+ wuXHnCV2LuosC3M+7DtAP9ApyWN7Y6xnG96Aq6yZVF7O5x3n4315W9woW20MRWk3qZsZq
+ HySlHS2dHQeHa4Oqq6f5InZGKhOqlDpKVAwQDBuMz0AvNtcdjQTHUr6GDEeCc0Dyj+LRP
+ OHdP4dRDq9X2po07gdMxtZbkfNdpmf2XSuOYbdQ/bwYJVTm3EMdoh4x8dEvs7f1UaZg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788937722;
+ c=relaxed/relaxed; t=1788937924;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type;
- bh=pzzlMbT9zR2b7T/uoO168PYKrkmF7HQhXQelK6zSY9M=;
- b=tcjmRkLsav1D+glPk4K2xyihw0TaJiI6EnL4EWOd2ZH1sUhU4k9CPIvPqaDcrQPBYXfX
- Zsqnu0Y4S/mq4GWAk/PLH5Pg+rjvuVEIiJ8etHB3dJurwJ78x4GJumoyBnxDV21v3fb7j
- KtnGGtxeJPajzT6/ewpsI+DoTBTN9538Z2pKxhHSxQW3iJHLpB+CFoQpRpwQmvGwJ80Ya
- rhMop8E+P9Dovs8uOEX/SZyiekdccUQ9LC//lBK9Udlq49cWjvJ7Y7VS+nJl4/c12lmeE
- SAlgHCflcFmczOthVI7khjUQtqE74omZwN1cORbgvMtl3xRXnGXwojros9sD7EEkZUQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+ Message-ID:Subject:To:Cc:Content-Type;
+ bh=NOC0ikd0nckjMCLspqdnaDAs4llwj3zRRNZMEhTOw5Y=;
+ b=jHuTo3knABLLnK6fVaKTBfezhUAAbR1HdsQ2JB2r6MsHmq0cgEDoKToptDq2wXm4krou
+ s3uknTj4oXUb/3K/CKJmBAQapFprXfUADpcOourJjrfU88elnEnf15BjclKmUI2L7/TAd
+ uRCrRJ+XQNZ5vrlnqPCe4/Q3OBZJOCyKf/Jpc8AFROsPz3qNTiGHVjemOK83WMMmU+zZj
+ zvhnAFR/DSEbkccrt8izpFp5/E//qQbnLNSfQQreKctwFDOgomqHh7mUHCp8kv8C7UDkC
+ oNdKWUn7cqa9Ws4AdO0s9S85IyhsZ2xdZ91nHeC5TIwXdfcB+ebm6+CxNMRppdfl2lg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org;
  dmarc=pass header.from=linaro.org; 
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b="X8B/wB+H"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1129"
+ header.s=google header.b=nGFFsclO; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1131"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1129; helo=mail-yw1-x1129.google.com;
+ client-ip=2607:f8b0:4864:20::1131; helo=mail-yw1-x1131.google.com;
  envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=X8B/wB+H
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 83806406C3
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 07:08:41 +0000 (UTC)
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-8565d77c277so71796097b3.0
- for <u-boot@lists.u-boot-project.org>; Wed, 09 Sep 2026 00:08:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788937720; cv=none;
+ header.s=google header.b=nGFFsclO
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 38D7A80D6E
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 07:12:02 +0000 (UTC)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-86c0e4dd49cso70627817b3.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 09 Sep 2026 00:12:02 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788937921; cv=none;
  d=google.com; s=arc-20260327;
- b=TIb0qDpFhl8qBRnolnkkMRuB1un50Hf4JnZnf0ZGVlmtXFS29bvket9IMximcTI8w0
- FgZ1jBNUOXnzAmRUFBLH8f/8ymEOjLx4jHNQZdmGr6BhGCtpy8Tq5iwC/+KmziCqY8V4
- ex1Blq2Zik5Hboh/b9mmlsGCVi9aqDFvI1dbxHzta9rnYcE7+wQ2qJZPlwccy8bUqaW1
- hvI4VfWkRO7EC6i8TfFZimM4x68HTNlCW1jt4/tJAtDUL4l8JlGcmiCT0qptXeC4iOOL
- wdTm/rTCivZ+vwJblJrWA7Azlh4iNoRbSpTXMIdFzPZWP/lmjTzIlrZic4A0M0RWVTAI
- Qdmw==
+ b=PWLeXYppf29MEE2bipVxuV2jg16zni+TL+X+hUWcDXIF8YV3gunjOIn+uH3DaLHmXO
+ RD8bM6FAhnUgVDxeyWwrO0JmHMoIoyKo2iqa51AdTtjea7ZlgxLmQDSlXX+XOa/ODbKU
+ m6Y292orBKffiLsnHS+myKMLcDo4Jer53CE+UxmVWakmrV/hDkM0T4M3+w5myrdZW0SI
+ tPmakp+mdeIRqqi1tZms5Wg9DLOwl9D1BXy3gM5QuPbiYzMgeNXNytZThLuPv54T1h6w
+ SDNmp1q0bFwkx+ZOHrqNfBR/ydDjFrkoUukA9I0pYQQgEIaLmskNJ5JEyhNVikH4ek2L
+ riHw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=pzzlMbT9zR2b7T/uoO168PYKrkmF7HQhXQelK6zSY9M=;
- fh=tNLf/+MrBZDRr7Ng5fSui9q2ZXbx1IfYZXPMDuKbLt4=;
- b=qd6BqCdABQ8yJPZELChPWExHKHjrHMwiUKNtJ5yM/dJY+8OSCWMRNRefLxxh4sfMfQ
- HanTHqUfLpcM7+r194sP0BRaYgKRip/X8QiNMOOZNjd81nBH/d3IB2/u/BMUyGe8vkvY
- 4fWO95D4rtJUmDzn95tRUk6iLK+QnqdJFDWf6cCgJrMXFgNe2ZjApQ5JtRWmPqzJtDq6
- k7kyFvocoheKJMlIhjloAkqwxZH3ypZxcDu4Vf315GHcpnPG/QUHi0U8am4EYy3Zue5N
- XCnpGmN6+mAWPSNR0Rob4AwV+sCNr9h0mnPpTGSJr1kvL5IghccxKu3HLSLyKKZILx0F
- mO+Q==; darn=lists.u-boot-project.org
+ bh=NOC0ikd0nckjMCLspqdnaDAs4llwj3zRRNZMEhTOw5Y=;
+ fh=jFBvuo+ib4jA+vG9rFSDSOBPhj9gTYHDiJCnFxRsElk=;
+ b=aJLuFXLM+fmLH75UhhK6SgR0euD981KuxHXG2iWRGuVhAT8LY627PlUHitrnsb3lhr
+ Divcm9gPRqWye9o8qkakObIp8xgzyc+j7hEKCCbypSo2I//UKngtrroXWS94S/gXHkVM
+ 7wzDWhmkrPvBPxhzgdkKOgyKq2RG5jimxcdPzmH1tVOj2pLz6LZSOfkv03zGhhy7A+WL
+ v1zF3UWPS/SAltE9NGpN0Cx+aib3da9NxtqlEfEwkKWpd/D3UJl2Z5fYCPhpmrPi9p56
+ U4WWRZxsnPhdRX+OE5yX4z44ElopJZxdwwz86qpXzRg7ncnPWYzucjj6OVIQDYLL6DRn
+ e14A==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1788937720; x=1789542520;
+ d=linaro.org; s=google; t=1788937921; x=1789542721;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=pzzlMbT9zR2b7T/uoO168PYKrkmF7HQhXQelK6zSY9M=;
- b=X8B/wB+H3jTwb9FBQnBUmvZnNQ50+3+pwf66eJgnZcyUxBZXAKmL7ouWWmRrv6DikE
- rN1ATwaXveHo1FjJ3eyPS4DAelbtTrdMbBrRUznZhBGOw6FMHNK3BOa7byNrmT59JkOy
- VlIGlandRHsQf756jUJ3Mg6+RrSqPngzmR7O9yRer2aR4zex9DAVLxUFARNZqNYQM0+M
- vIhn9nw93iEaOau+MRCbnmrgXlssf4pPNPYbMCVtBwGEtsley9JSerWWbn7KFUjZfxLL
- /vScnqE3q92YlGvQ8y9Ab9HzSkjyf+ySqT52sKFWKExsGR88VDPJa6+QpdmV1FzeG0mX
- mm3w==
+ :content-type; bh=NOC0ikd0nckjMCLspqdnaDAs4llwj3zRRNZMEhTOw5Y=;
+ b=nGFFsclOAvFDJSwfGNjeK9xgUgKVlvT3EtIiUW2SD0Rxd03Zx9DiFF1btG8u/s+Yj6
+ Nlk/hg58o+/2Q7UQ9duIw+p54PAeKvE6oQNWnUNycYu31wSZC/E6Ej9n4CDp2sPTovVd
+ 6trx1t5BcXWtf+SNNr2hy6DRCEqqwt8bbA4jqUSlHxIBX4bEKuJsBecFlkABRCaZTo5D
+ YS6a/bs9NLQ4bN8p/QBtoS9oZha9GWoggA5xkl6wDqsrUel4wc0n9ItigO/JsTm8f0+Y
+ +tx6u/AH/tSotBFJs0SLwAyFkmNunfaKJCDgsHE8vAMV0D6lOOiQnZlmzqqnfCODdLPi
+ M4Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788937720; x=1789542520;
+ d=1e100.net; s=20251104; t=1788937921; x=1789542721;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=pzzlMbT9zR2b7T/uoO168PYKrkmF7HQhXQelK6zSY9M=;
- b=rWZuyjRCRbgRmWWNgZItXZHcHldY9i3A66qRl1IBezC3BXO8+9gnkymBukHb3LWJFE
- 2jAdfopXR7euiUXc+o9cwSFCkZWt2sQeWEsU0d4UEkZrU6Ig3TCBN6a4i9aBwwv68iZl
- cBYfliYnQs1hkw2N4/WBejU7khrC0OXyXlCExZ4klZia7ILta8CFnVxrBNrNwtsVZyKB
- qEYnsr8LXC+WhkNLtkcVdpmnmV9f/3AB0/jE6cqhOBmvuHkniFq57//RU/SYv+coCD8F
- GKfBMKJJ27oJHSN1erU6Iol3UKOcAbSth7zCrBKuJXqvjDA3QrwCbwpSRHOp+AdsoMMF
- 8N/Q==
-X-Gm-Message-State: AFuF++lkn3wLr2t8HGtPp+2pLWRVgFj3/c3qSEzZjYyJapmMwMohOEch
- lnjtd3537eh2NogLAk/Ombx9BhwfJYpp+JFyIpXEA3AtUfXQSlTzlKH6/lMzCbJGZQ7ehMVQMGB
- JAf0gS22uFFBEbqKhp5iSCn7OtT+5eTYy4OZIFjJ44NKs1ggWXJQGjAX/+w==
-X-Gm-Gg: AYBFou0umY8JD1nGFxA8wnHX9LA5TkvByf8Svish5G7W9Kah9n5It+nTrWUG9htO5eD
- NKsLUweN5VALMZcLrX4XCMM9bSlTbgfJluEkQmfh9IQkTTJVNXun/TZWKazE39dkxNsg8mYzkyz
- 4umpAiVFyFdKtGHtOYwV9bN3KKvB9p1JR+6wn/MkVvIKBNQdpsVYwDbCANz8AegiR+7/zAh6rVF
- 9TaeTfvzPGRUCo6CCX+AYasM8Yr7WFdsw1a7QQ4Ly3AjXzNRM6yLIiGokOBl0msvoOhtvqBbeJz
- m0+a4/o1zk7k5qtT8Fl3d+bcP5RGBsb0lhels8bkSQg6VbhHfFa617awDmNjqAxHZBRPPCSIEZM
- ZJ8pUhRZ61MtIoECC8s14xCKM4/4/4zCdYrNyafGS7X6xNjCt8b0eOjf5/nsNjkLWGIic85T+yB
- par3+5+cfoq1WHpAHBZc722xqOEo7Oe8k0p+FFJyQ9dEI8mtwt6Bp+gwxwvwap26jpFjcCHPj3L
- L/3uQTSiErFLFo5uPQJ0MWdLvrVfWllon8+ZpOptG2iXIefAwdl94G/dgv1hfkQHCgcCd525zR/
- U/dFIZN2z3G367FhxYJjvzat6g3PA0Kcb4i3rMUIP/P5zlyJgLVPISmu/MsuwOJGGSjHpk5Qmv0
- 3nyKz8d04tkJJZ6d6ag4WhBA2jB4YuYi8G+KxJEL25VDphxLJJ/D6GQ==
-X-Received: by 2002:a05:690c:c:b0:873:5c6b:a2f8 with SMTP id
- 00721157ae682-8735c6ba5e3mr98716437b3.38.1788937719688; Wed, 09 Sep 2026
- 00:08:39 -0700 (PDT)
+ bh=NOC0ikd0nckjMCLspqdnaDAs4llwj3zRRNZMEhTOw5Y=;
+ b=LTR3GXKLwnpEgRaG/sDHa2oizzEeUdBKvmrD8U6Wfb6o5KJaqunG1b43Vu2N8mvDxs
+ 115z0itIw9ZY06yiRfuc3kCjrNSNNGNleFT36TJa6mc79XIly5ryLXUup2mXkC4ucjTU
+ Nuij68xO4isGIKSIKOoYpFvk/W/+HwfZkCVHRbEzqsNNUqOhIPvBEgcakFarLTJ/DmP/
+ TRuAXqJQ+QVXLw/70MZyZZt3qoIlPTwElz4i1/Udci0wv/bkF6WvzfWH8vTqdYxOfM8t
+ n1OgMbOWrb0GyAerhnHcwNqGOtW/a278HpP6p7rDa+kzVmyn7KivFylvt0tZLPwp9MgR
+ gizQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBz2Ydfib7YsW1+D0Oc0nmn0dNyNMo7GXuN7p1OSmEesoLxfcPSOfGyIOWHr8OsAVabt405iNhU=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lVp7DBmAxFoOuV6p0xMCsLby2Bw3rQXHQuxdkgquR5fqo0owZO
+ OtTKy1CjdiepFoodX4y9Rai8PkdRhyORAyeJYRzYzTHhAbtAOdi/aRKL85QO+QWksXUKRlP7RTf
+ 4B13ByLmJiNDsMzlU3WVrnhJSeEA/oSLUv48Q+dKZAA==
+X-Gm-Gg: AYBFou3LWiz/8lY+imMIf+d8KQSxEjqXL5XgGHf9qeUz+xhb5ATdD82jx/5nJvOo3ML
+ bVrK6qAate8n8poIyFXmJ0mHikEodbJtVI7+642+mQz70Ym4LWURhPgtEPqoU1znJa4QmWE0A6D
+ Ppnuz0wDJHpPcedJ/XQvxSJjA6sJHAJpu+Qjh767wwvAkvWkgXANBiHeUHxRGvR1EccKhIhs2St
+ sZgvlTTPiKeJBOmS8nSBZekF6h79h4nZOTiY8rAoUJ1vyCFDomQMdeVMG3M+zAjPt8qKMubTYwU
+ Dx1fByy01sCkxWiHkn+RiLAVwyFtfxNdU0dgglXpObBxt4Dp8XjvYxpHl3h/obdB0Cc6DkRpPSh
+ ejUF/I/GLXYuGxOT5Y6Vgy+1uja7haVLqqzdGr7quSqBS2a1BngrejNNcKmXI4Jiqtq6VAwL/wB
+ hrdHS6uZFYPSJ7GcvMsz/fJ4SA1emCIceAi/e3IUwCCzUXphi4rSnYHkNDaZKRK2MvECAdEEi/f
+ U7lpcma5sTM+sCGTxtJYCg0TCAohSHN785Y+yuvW4Z5IgEj2KCJnhJac5ByQ9RcbHMOWnH4IoYE
+ MbMDwZXwEaxsN5FU0pecIw+bMuGsVt6mMq2txPC4yKgNOwi+uMSC3boN399aL4ZNUyQkKLgjgI5
+ X7MvDTQ07RRBIQ9pNSdoDW1UMuXAXPDhNpqT5JebhMf2S73nhgvAVBA==
+X-Received: by 2002:a05:690c:884:b0:873:5c7b:c0f8 with SMTP id
+ 00721157ae682-8735c7bc660mr88479547b3.48.1788937921171; Wed, 09 Sep 2026
+ 00:12:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1788879818.git.jan.kiszka@siemens.com>
- <be1c09bab90ef372999f78b8e369d8c0eb2d6246.1788879818.git.jan.kiszka@siemens.com>
-In-Reply-To: <be1c09bab90ef372999f78b8e369d8c0eb2d6246.1788879818.git.jan.kiszka@siemens.com>
+ <3c69f2bdf4a455ab8f0fe686e19e2c1a24c10721.1788879818.git.jan.kiszka@siemens.com>
+ <480e5a19-e0e3-4b85-a09c-c4f0cc1760f9@altera.com>
+In-Reply-To: <480e5a19-e0e3-4b85-a09c-c4f0cc1760f9@altera.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 9 Sep 2026 10:08:03 +0300
-X-Gm-Features: AcwNN1UU7pH7o9_fNMKPrcU-XFKkP8fsUo5LTdeX3U4FYD94Wv3Cf-P2e8OLl_o
-Message-ID: <CAC_iWj+b_9BSxym2CuhA4+uMsc6pnN=a0rPmKfmr27Quh8fBMQ@mail.gmail.com>
-Subject: Re: [PATCH v3 1/5] tee: optee: Factor out service enumeration and
- binding functions
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: U-Boot Mailing List <u-boot@lists.u-boot-project.org>, 
+Date: Wed, 9 Sep 2026 10:11:24 +0300
+X-Gm-Features: AcwNN1WNO8iS-GXWjQKkUEn-KXgLyexN_iuK60t80iVpi9lUehen6wMDEYTJNVE
+Message-ID: <CAC_iWjJcE6x3DNcsXappEybbqc0RbrAw0xw7NP4KaZu_j9DscQ@mail.gmail.com>
+Subject: Re: [PATCH v3 5/5] mmc: Make "MMC Device not found" a debug output
+To: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
+Cc: Jan Kiszka <jan.kiszka@siemens.com>, 
+ U-Boot Mailing List <u-boot@lists.u-boot-project.org>, 
  Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
  Sai Sree Kartheek Adivi <s-adivi@ti.com>, 
- Alexander Heinisch <alexander.heinisch@siemens.com>, 
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+ Alexander Heinisch <alexander.heinisch@siemens.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -199,99 +203,23 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Tue, 8 Sept 2026 at 18:03, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+On Wed, 9 Sept 2026 at 08:29, Kathpalia, Tanmay
+<tanmay.kathpalia@altera.com> wrote:
 >
-> From: Jan Kiszka <jan.kiszka@siemens.com>
 >
-> This already avoids code duplication between the different enumeration
-> commands. It will furthermore allow to implement a third one for
-> services with RPMB needs.
+> On 08-09-2026 20:33, Jan Kiszka wrote:
+> > From: Jan Kiszka <jan.kiszka@siemens.com>
+> >
+> > Callers of find_mmc_device are generally processing and informing about
+> > errors already, e.g.
+> >
+> > => mmc dev 2
+> > MMC Device 2 not found
+> > no mmc device at slot 2
+> >
+> > Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
 >
-> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
-> ---
+> Reviewed-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+>
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->  drivers/tee/optee/core.c          | 33 +++++++++++++++++--------------
->  drivers/tee/optee/optee_private.h |  3 +++
->  2 files changed, 21 insertions(+), 15 deletions(-)
->
-> diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
-> index 4d67c948ec1..2871760a7b7 100644
-> --- a/drivers/tee/optee/core.c
-> +++ b/drivers/tee/optee/core.c
-> @@ -156,7 +156,7 @@ static int enum_services(struct udevice *dev, struct tee_shm **shm, size_t *coun
->         return ret;
->  }
->
-> -static int open_enum_session(struct udevice *dev, u32 *tee_sess)
-> +int optee_open_enum_session(struct udevice *dev, u32 *tee_sess)
->  {
->         const struct tee_optee_ta_uuid pta_uuid = PTA_DEVICE_ENUM;
->         struct tee_open_session_arg arg = { };
-> @@ -176,31 +176,34 @@ static int open_enum_session(struct udevice *dev, u32 *tee_sess)
->         return 0;
->  }
->
-> -static int bind_service_drivers(struct udevice *dev)
-> +int optee_bind_services(struct udevice *dev, u32 tee_sess,
-> +                       unsigned int pta_cmd)
->  {
->         struct tee_shm *service_list = NULL;
->         size_t service_count;
-> -       u32 tee_sess;
-> -       int ret, ret2;
-> -
-> -       ret = open_enum_session(dev, &tee_sess);
-> -       if (ret)
-> -               return ret;
-> +       int ret;
->
->         ret = enum_services(dev, &service_list, &service_count, tee_sess,
-> -                           PTA_CMD_GET_DEVICES);
-> +                           pta_cmd);
->         if (!ret && service_count)
->                 ret = bind_service_list(dev, service_list, service_count);
->
->         tee_shm_free(service_list);
-> -       service_list = NULL;
->
-> -       ret2 = enum_services(dev, &service_list, &service_count, tee_sess,
-> -                            PTA_CMD_GET_DEVICES_SUPP);
-> -       if (!ret2 && service_count)
-> -               ret2 = bind_service_list(dev, service_list, service_count);
-> +       return ret;
-> +}
-> +
-> +static int bind_service_drivers(struct udevice *dev)
-> +{
-> +       u32 tee_sess;
-> +       int ret, ret2;
->
-> -       tee_shm_free(service_list);
-> +       ret = optee_open_enum_session(dev, &tee_sess);
-> +       if (ret)
-> +               return ret;
-> +
-> +       ret = optee_bind_services(dev, tee_sess, PTA_CMD_GET_DEVICES);
-> +       ret2 = optee_bind_services(dev, tee_sess, PTA_CMD_GET_DEVICES_SUPP);
->
->         tee_close_session(dev, tee_sess);
->
-> diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
-> index 1f07a27ee4b..25b6b3c3218 100644
-> --- a/drivers/tee/optee/optee_private.h
-> +++ b/drivers/tee/optee/optee_private.h
-> @@ -27,6 +27,9 @@ struct optee_msg_arg;
->
->  void optee_suppl_cmd(struct udevice *dev, struct tee_shm *shm_arg,
->                      void **page_list);
-> +int optee_open_enum_session(struct udevice *dev, u32 *tee_sess);
-> +int optee_bind_services(struct udevice *dev, u32 tee_sess,
-> +                       unsigned int pta_cmd);
->
->  #ifdef CONFIG_SUPPORT_EMMC_RPMB
->  /**
-> --
-> 2.47.3
->
