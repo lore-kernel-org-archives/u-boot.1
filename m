@@ -4,137 +4,278 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04BF9C79FAD
-	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 09:19:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E71EC79F8C
+	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 09:43:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0682F406E0;
-	Wed,  9 Sep 2026 09:19:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C6925406A3;
+	Wed,  9 Sep 2026 09:43:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xlaikdxw7UMz; Wed,  9 Sep 2026 09:19:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B14F2406D1
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788945547;
-	b=r5pKJCui1RNM4MRan7qT2JYBfnTob2x55Kp4AlJA/1O2+la6xxzcA4Wycg43URp++DwX
-	 qjHPA0hVmoEqn3nZRoh7oMOiY0Bk0q1UGQAzD7+eEU54es2IY0M/1JYcceoZgiNaiS6aG
-	 St6kfBZucxfVH7BKhN3Qcn+pVfE8zMyzglyTcWjdVkGIekSV2hjeIpCxA1h1ttRn7dSqW
-	 RbVvcO4myFEnABIHukCfo6aCXTgv0sZvp3g9gZvKGZ0qUAlB20PgBDct5YY/Hb3Ag13ht
-	 vmGWhK5HtRpuqmB86eLNBfX2XLXlIIxsJuv9XfOZtcWFESEbqG/jSXQ3Q4q8BjcA6nQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788945547;
+ id 5jyWfDVE7Whh; Wed,  9 Sep 2026 09:43:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org C45B4406D1
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=4; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1788947007;
+	b=F/yjPpUdH8l79IDXKOONQrEyHdjKNf6tphl8RvevsDPjDRzKwtuSkehMjxdtuBCUlLZd
+	 LJB3Bry1QdRH8uAEpPnevvpiASNZQyA3t/xTtkNFzxDzp3M88LCU+JJMu5n/MwP+aLSiC
+	 jBZQzbSXpUMEMh7S09N2JfpnBfUMgg3ntQSGUSM5SmHWiTW/SmWErgtFyTO2b37zPQJ7k
+	 wxfTQKlNlCK/Z8Bl/+1So88OPW+BnRWTV9HpGva47OTdUBrTlwO+YtFOu9LRXa8hIh00J
+	 ABcCn90l7XmDyxF7xRfqBBrwdeKpPsk3A18X5OwN1BDWcmhfOwglAvpJblU4RizqczQ==
+ARC-Message-Signature: i=4; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1788947007;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
-	 Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=V46pi6Zoy2+vtqushQJiByEfLl0y2qJK5TxylxW6ZRY=;
-	b=RXFw5LKVlc6FBBx2R0W9XZBLMvPLyf5V49LeJs+jeuZ0PIUVR5y+Sv2gEar0WLZ0LhXS
-	 bK5YvpqfpFyUqo33v4W70wW11MGV2ZiMhQ1mDhAOCMCHPIT3EzOWi9VgXTY3a8kNuh7Bt
-	 EvOlnJiHwuX526w/JPglJASR+3zO7jvoUy+rignoPI39X7Jij78RFwNuWLjo2bsYgfQqd
-	 BjD4Kj9Mx3/VYj5dw9rRUFDFB/6GGUTxbMGH1rVyWY2jzjH5jt1SkXjD9k1wb1vsrMnmD
-	 gQ93hGhOwNAXb7Q/PBJFsjjklnj+oi4OBgtBbo5AteSbLddcFiLm9RbQKFNVWeWcuIA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ORZEHwz0;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
+	 Received-SPF:Received:DKIM-Signature:Authentication-Results-Original:
+	 Received:Received:Message-ID:Date:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 x-checkrecipientrouted:NoDisclaimer:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam-Untrusted:
+	 X-Microsoft-Antispam-Message-Info-Original:
+	 X-Forefront-Antispam-Report-Untrusted:X-Exchange-RoutingPolicyChecked:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+	 X-EOPAttributedMessage:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+	 X-MS-PublicTrafficType:X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-Id:
+	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=doLeCJOwR0QSQL7/uRTzZtyNWoT9Am8Px+cL3QAnwLQ=;
+	b=HVGgBXYtUbfsH4PFsr+HIQT7Be0EUFXHNk9KJ4wm3JhpOEwT2y9Ge0aCH6kvDqepC2YF
+	 V1dCEXivRB/O0zA+qRyPDUHRkpPgQWRhLe1QHSofJOd9FztVGYeCuG3RtBD6dL2ppz9Dz
+	 tdxCtGQDtOJ3byzdNzLy18h27guehDdG1Sw0sjWBAhh75+zRo62Y157mW5b/qVadR5Q/7
+	 1vUCQxSt8KFzhTzfzc8zbCpbYkqccSPZjf4HSYIeue5QiZqm+EEA/JBWoeQnCKZ/3tMVQ
+	 G/UznvB/K/rFjagnMVbtTKZlGC1ldwlegyGRf3p7yVrlAJNqEwSMnH41QMjRxDy3CFw==
+ARC-Authentication-Results: i=4; smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788945547;
-	bh=V46pi6Zoy2+vtqushQJiByEfLl0y2qJK5TxylxW6ZRY=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1788947006;
+	bh=doLeCJOwR0QSQL7/uRTzZtyNWoT9Am8Px+cL3QAnwLQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=b6jXEgb+tg2dmmIyF2oEq5+6lqQDM9/5GoOdaJiYzyfPG1+/xOdhMkq1tth1RJ8tA
-	 88P0D5Jt5lbwNU40duYRocZTb88kyT2l8lWLxkAoBAaNFV9rv+nt1csykdcKP0kzPr
-	 mhw04yRKJtT917h2asNtmpbvHise4qhAbuInUDlmw2g0JeRjsV6vxXLMQiGh8m/djd
-	 AT8MIbjsvWjjox6CnCMl/SoEDPhPJ+bAq8jSdFgKSJY872htOpRzbeBDJmaizHq3y7
-	 47AM1zXAKAswuKPUdUCvA5fkVuyZ2qTZKm6SJ4H0bchnefqSmk99GUSQcGtoc0i87w
-	 rJ0NNdZxtY3Lw==
+	b=YyUvoc1LSByg4PRdbGutK0i05QVsef+tszRNeQOGQttx0O9I5zpsJRRHwtlsm/Ge9
+	 wBL/mNR6ePn9m+J19vtlgLMDuCCrIJ+IF5/KZaBr6tf4AlDj1fUB/ZRtwU/NbKgbcB
+	 PywQgXdusMFVM2T1PamBRt5isf+tmAY3bZNjB3oIG++SFv+aYbwLs47oG4AXpbtI2F
+	 cDMzMT/OuyguOC6jC4VEZbjfeiEfHpS5NZoYrI5+pR9/Y3uaUSgqWzp0MFDY/g07E2
+	 WeSM/NEk0Ru7FEGcEPL8CQWs0fIE3ci4UMnsetwJLjKjIm50ndlpHsDPiTsvzZvhes
+	 PYpcOsTHvbDFQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B14F2406D1;
-	Wed,  9 Sep 2026 09:19:07 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 3A36A2D2
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 09:19:06 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C45B4406D1;
+	Wed,  9 Sep 2026 09:43:26 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id BC9282D2
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 09:43:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 20199406D1
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 09:19:06 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A292380C8A
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 09:43:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ywBnzW3ec5iw for <u-boot@lists.u-boot-project.org>;
- Wed,  9 Sep 2026 09:19:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org D66C4406C3
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788945545;
- b=lqrtvD/+r+0FVK8yZtDBuMeebp3qw7T1lq7Up0ZVMj2Z+04AcKDHsqB+KbfTd2boy7h6
- sntfCZZIdRUIWKBWO3Hgh56UexpZVv7DC7WHyvhaC+yvd71h7R+8bOo5fQ/Fi/d0qCOzC
- tuLzm5BZq6wrwmGPxXSbwb3r2IWc/U9O9F2WOAnb+habd9+OUT67WDLi1U8dLR6k3NDKs
- tVovmlIDTwhlNXHNfPwDwAIi5vaj/CjVsJAOa5GTOaTWrHWWDPTe35jR09Qhu4DTNIui8
- 7SsNIclJFva4sJrKiLn9QMrnfSGPuythN0ddU6CLh4dGY8OQRc3qzlOqp6NJxEsxcUQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788945545;
- h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
- In-Reply-To:References:Date:Message-ID:MIME-Version:Content-Type:
- Content-Transfer-Encoding;
- bh=V46pi6Zoy2+vtqushQJiByEfLl0y2qJK5TxylxW6ZRY=;
- b=Uwg1S9KftqyZYfJdbnOwyDkJ/POJoS1vTFudDkevb3gNj1rdXrw/gbtutJ10FRZBcGsE
- q4gQjiz2q6NvkLblJicv/EycDhL8XkOBcBddbdnViJp3HcAtZMOXZmy7tEYjLPaTFYc0B
- wYwLog93HOtRpKiZLGosFZE7ojO+dX3OgYnH1OOKhT3ShNsl+0YImHFTgPmwVKJr7pZMa
- Rn8clwVKUPsU47D2t1sALzz7pWbxJocgLtE29c2+aT6KPGwhY7oOf2EP6aURXIMPsvsH0
- 6kBvsPEeI/+omBWgK8topk9b/GvijVYw2RBU2VTDCNy34T5TRV0KZLXo6DAPUvILq8w==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
- dmarc=pass header.from=kernel.org; 
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=ORZEHwz0; 
- arc=none smtp.remote-ip=172.105.4.254
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
- helo=tor.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=ORZEHwz0
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D66C4406C3
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 09:19:04 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 6D625601FD;
- Wed,  9 Sep 2026 09:19:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 735D71F00A3A;
- Wed,  9 Sep 2026 09:19:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1788945542;
- bh=V46pi6Zoy2+vtqushQJiByEfLl0y2qJK5TxylxW6ZRY=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=ORZEHwz0cEUw48ITCn3reY0IjoCO61C7bGtj6YVrzbwhyx8Ri1JiIw2n6I7f16sQ4
- f7/1PwrynHYj+31yvuaUHJ8UVXQGn1GdOPyYmvcGKo5fAVrfzwbGtblwSHc+WRCC8f
- NCkCNja1Pm6+pj+zEvA6JDaxIiu7g+UD+q9w7PRUOJLlXy7ioIB5tJ5zJGHtEt+wWK
- mjbtkLQB74ecBu7IqnHliUpjUoIu0+AWXS9TBc9He8al7Keh+msMpbPnws/3o7oc0n
- zQb6IvVI1Ki7552anIeMjkExE8EwLJ62pVMqZqY+wMfwUNTk+3jenmbwp8NWJza86q
- vpPkTX528nDhg==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Guillaume La Roque <glaroque@baylibre.com>, Simon Glass
- <sjg@chromium.org>, =?utf-8?B?5YiY5Z6j6L6w?= <valentinliu@icloud.com>
-Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com,
- igor.opaniuk@gmail.com, alchark@flipper.net, quentin.schulz@cherry.de,
- marek.vasut+renesas@mailbox.org, daniel@makrotopia.org, rs@ti.com
-Subject: Re: [PATCH v1 1/2] boot: android: Add Android 13+ bootflow support
- to bootmeth.
-In-Reply-To: <715b99a0-6e08-42d5-9d22-64a9f81efa28@baylibre.com>
-References: <20260818175301.818739-1-valentinliu@icloud.com>
- <CAFLszTj8g4xxzt9A7txOhDMU6hLe2=twZoZPo_sr7Z5m=6BC4A@mail.gmail.com>
- <05f6b482-fb91-4979-a513-c991657b55bb@me.com>
- <CAFLszTiTiYHCzwc6yN9hn49FQUeOkPRjP5H-JxJr45_Pae-_Gg@mail.gmail.com>
- <715b99a0-6e08-42d5-9d22-64a9f81efa28@baylibre.com>
-Date: Wed, 09 Sep 2026 11:18:59 +0200
-Message-ID: <87qzj26av0.fsf@kernel.org>
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Tj8Wv9X7G6Lk for <u-boot@lists.u-boot-project.org>;
+ Wed,  9 Sep 2026 09:43:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 361D380C63
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=2
+ smtp.remote-ip="2a01:111:f403:c20f::7"
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788947004;
+ b=qT7HREseJPZ1OqR4weyXixBTTSj8h3F7pSd3VRJaUvg7IspF5EJJs4hl90p8WrgKMjce
+ wN2SrcPa/frCY0io4bkRW0KXoIds2eCSkxAVNquJhvmoWUtOgNHUwYC/sQsPnuRzAZDF2
+ x0maqblW13Ph8MYD0QdftPIh2nN6k1uzLyVjhUdGByURlFgYesoY/2tS85yg7XvZyC2Lj
+ htFpYNq4RBrm4RlVEEVxB/7wSMKy3rZYEJuTROS42+4OO3mwj3SDD9osXAXO8E9+usjIX
+ rSUFMwP9CEZHBZd1PNFcphRssAAsFzFmg5ebQw8rEYRCD+UoLNHGxX3mdNoh6JfEy9w==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1788947004;
+ h=Received-SPF:DKIM-Signature:Received:Received:
+ X-MS-Exchange-Authentication-Results:Received-SPF:Received:
+ DKIM-Signature:Authentication-Results-Original:Received:Received:
+ Message-ID:Date:User-Agent:Subject:To:Cc:References:Content-Language:
+ From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+ X-ClientProxiedBy:MIME-Version:X-MS-TrafficTypeDiagnostic:
+ X-MS-Office365-Filtering-Correlation-Id:x-checkrecipientrouted:
+ NoDisclaimer:X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+ X-Microsoft-Antispam-Untrusted:
+ X-Microsoft-Antispam-Message-Info-Original:
+ X-Forefront-Antispam-Report-Untrusted:X-Exchange-RoutingPolicyChecked:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+ X-EOPAttributedMessage:
+ X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ X-MS-PublicTrafficType:X-MS-Office365-Filtering-Correlation-Id-Prvs:
+ X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+ X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-Id:
+ X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=doLeCJOwR0QSQL7/uRTzZtyNWoT9Am8Px+cL3QAnwLQ=;
+ b=I7baFdx1NHvmzHeJjR2mxvm83XenU35EXdXRa80iRDyMNEh2hYl+s3WfSQC/C4F0gX4f
+ i3v7YoPzrGcJiPsdFOUnq6RKmOiUtADZOpFtQ04YvhDNVia3WggQpXpry3tmG5qVypjGa
+ nVlBjvtY344P2xG8esC+xQLKjnzSATuqASIEolCEMFu+eb7Ot4JxRACGN+Gzvcfl10ncd
+ RDepVkQnK8ldvSnYecwVRBYPh4uXK20XYFSptOvydrNNPfC6CfO+2FsHkYRxA97c6VyiA
+ 5C6M6ZB/whX5OoDbNabQVCiqmF6p97ulXWTonbri9dGyoT64ELJaG2fInaS+gzsdAEw==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org;
+ dmarc=pass header.from=arm.com; 
+ dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256
+ header.s=selector1 header.b=TC+Qr7oO; 
+ dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256
+ header.s=selector1 header.b=TC+Qr7oO; 
+ arc=pass header.oldest-pass=2 smtp.remote-ip="2a01:111:f403:c20f::7"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c20f::7;
+ helo=osppr02cu001.outbound.protection.outlook.com;
+ envelope-from=jerome.forissier@arm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=selector1 header.b=TC+Qr7oO; 
+ dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=selector1 header.b=TC+Qr7oO
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 361D380C63
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 09:43:20 +0000 (UTC)
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=fz2o9+j0eQJpkXPiOlDjej3TlU3Ne949SnnmXEOYayDeM85rYDZpFVFEewfSzdZtdPpgfydNWD4k/PslpYqHjpnkcdi4vhdBl7NOUwnPSvMGsAYQD/PbOy0o2rM5Fx1BlSLb5WuxqBeMQ3Gj6m7lK9sKUJwyW4IU2pJ9F/0uv4JeDpahdH6YJX47Mn4mrFZwE8Y+RwjX+PB5z+05qJ0iZpo5AuRlIxPrXdpbdgUMBfATY6QRt7RknVG5aNQWN1/iq32TQsB9ni6TzxltL9Wqr6j0NY7NAJmYVHUPaZ+zZq4mRHWCfN78Jk+0rRTYgWLiD1pqs0/hmZYWAne03EXBEA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=doLeCJOwR0QSQL7/uRTzZtyNWoT9Am8Px+cL3QAnwLQ=;
+ b=bxQqIwF9TcMbrpLTiC1NguoeLD/qecUzo7wiFGu5n1+RenZ0rZy3FvlZMbu2t6voqbm/RrHKcj/mQQbvkkhdGHjeap51JihaK/cHSEHwHRP2dVLuSnzjnJxFFDpZzosOszR/H5J7Ur583h2QRDpptrnDwU+w/0kyXn/nxIyda4XmY13wRm+8I3PTHwQ43Vyf+tGRQk5TaWCZi3xOrAsLOHuym14UNsPlFwSp5J+LhMF/8v/D1hNLOjZED7bhY94f7yv8GZWGg/yrtwAq+zU/GfrxeLjpwCTk3of5JNXZAER7NSly8Imxy/7ugO90PQ8H37OhDERUDqjqmYywZh8AcA==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=google.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=doLeCJOwR0QSQL7/uRTzZtyNWoT9Am8Px+cL3QAnwLQ=;
+ b=TC+Qr7oOhGXwa53i5BGdwD2SqjARss43uev6KwCLDD2mca/4/bf58bfBokUB5x7LnLqtsfybIjSPJ2zRRdtQwmg56bp56buowip2nTH/oilFji8hVRPpMcRovHPeQJoEkQYBvPPG33pSPCbFElTfYIYmhGp+jn8XLqeQNVRh8Ak=
+Received: from AM9P193CA0017.EURP193.PROD.OUTLOOK.COM (2603:10a6:20b:21e::22)
+ by AS2PR08MB9690.eurprd08.prod.outlook.com (2603:10a6:20b:606::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.7; Wed, 9 Sep 2026
+ 09:43:14 +0000
+Received: from AMS1EPF0000009C.eurprd02.prod.outlook.com
+ (2603:10a6:20b:21e:cafe::9c) by AM9P193CA0017.outlook.office365.com
+ (2603:10a6:20b:21e::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.7 via Frontend Transport; Wed, 9
+ Sep 2026 09:43:14 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ AMS1EPF0000009C.mail.protection.outlook.com (10.167.242.73) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.5
+ via Frontend Transport; Wed, 9 Sep 2026 09:43:14 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lWdeLQAeIlFviPt2kvO2Jn6uzq2+EwmkWktDRTn7iAVT+aIkgRa8Ygv20/Ni3bf116qwQbuxU9afWRCERM/nP9BhppqPdgz7WXgyI9ELyE/1K67fOm1y8cSQaUWkdLU7yUJ4DB4EU9mShQ/Grik+x3gBRAOlsok3+cew27mJQUCw+PxPdvQ/8YWM1PLr9n1r1CagXhazEJa4igLwBmVS0RyjTldmARKCMgq4b/fMEeYdgeC2t2bYBOI+pLzTXwMfQfZebiAMk7BRsSsbW+fQPVgodCt+iXGg1k25xaNCvuktTeAzJiPdLJNbGX2yl77aDSf1PIgzPtT6fpN0/DRucg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=doLeCJOwR0QSQL7/uRTzZtyNWoT9Am8Px+cL3QAnwLQ=;
+ b=hirV8xV5Rb67PZjxuoChBEHDvFhXiBI/ckvT25DN2yqbEh34iNERevsj2NgmRikgLf/Kr9/Moxd20oihAkGpBUPlTQbjVqxnWgG6WYokr9eDnJMX/JLaycQpRVxbFIeg+QiCbiVpzbPDq4v/T8xX6C/dV3r40t6ZcmZg9KsGzOI16FbZE26BUCxOBl3du+fGKW0VW9b8iVIBH68EPpvy9DiFe/lCFFnsdyMMh3nIWn57nHRvnqieZptWoIxaSRM5bxHbHeEpMnWwZcx4WexCwM1JIdLYOEUM/V/IVzGgqTsRdKBBSNzjfPWTkYoLBDZCyql1SeX4wnJdyJRSjZvU6w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=doLeCJOwR0QSQL7/uRTzZtyNWoT9Am8Px+cL3QAnwLQ=;
+ b=TC+Qr7oOhGXwa53i5BGdwD2SqjARss43uev6KwCLDD2mca/4/bf58bfBokUB5x7LnLqtsfybIjSPJ2zRRdtQwmg56bp56buowip2nTH/oilFji8hVRPpMcRovHPeQJoEkQYBvPPG33pSPCbFElTfYIYmhGp+jn8XLqeQNVRh8Ak=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16) by DBBPR08MB6027.eurprd08.prod.outlook.com
+ (2603:10a6:10:20c::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.6; Wed, 9 Sep 2026
+ 09:42:41 +0000
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3%3]) with mapi id 15.21.0406.005; Wed, 9 Sep 2026
+ 09:42:41 +0000
+Message-ID: <5e256015-056a-4599-94f5-d995af7b285b@arm.com>
+Date: Wed, 9 Sep 2026 11:42:33 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] dhcpv6: support rapid commit dhcp6 option
+To: Yuxiao Zhang <yuxiaozhang@google.com>
+Cc: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>,
+ Johan Jonker <jbx6244@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
+ nd <nd@arm.com>
+References: <20260825175417.1068611-1-yuxiaozhang@google.com>
+ <63520249-a647-47ea-bd14-c9b6a41b35f8@arm.com>
+ <CAOOoKeSLKjWaeGBxvrMmc2MqvgdNahcBrbV=-aRQFLL0_caLnA@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@arm.com>
+In-Reply-To: <CAOOoKeSLKjWaeGBxvrMmc2MqvgdNahcBrbV=-aRQFLL0_caLnA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AU2P273CA0114.AREP273.PROD.OUTLOOK.COM
+ (2603:1086:200:6e::7) To AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|DBBPR08MB6027:EE_|AMS1EPF0000009C:EE_|AS2PR08MB9690:EE_
+X-MS-Office365-Filtering-Correlation-Id: 68914bfa-6051-496e-a85b-08df0e56c4e5
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|366016|376014|23010399003|1800799024|4143699003|11063799006|10067099003|56012099006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info-Original: rwV3H0J3lLe6kbPmfDyWKg+JK0owHF65gwUftRGKNdktA+yGiTeYp56rOZdERXnACOVZDHbvGNgU8irY406dwmDP3bDD2daS6+/rwJ1cngy9qx3viBRo9vjQgag0vL92l1JevwbIM1TYPWDp3k9HfvcivQy3GKWaR6ibOenZEHxsZ35E+AhVdqAAIf4I6Ry6S0q8WvLx7UxUIDKj1R5QZK5vjj2jOuXHhJCgcuNd9xie/vXIZcHdrG7U+DIQ1d4Hh4xzcTXOqTBCC+V8hg5KoEUaY2w8vzGM9dHlw3m6mQoy8uWMPxQXwbgl7yT8x6LIlhn8InOHkcYE2Mftm5N3RoA05D4JHZcRxAMfocai5MLmOcOH+m4VGg683BzQmYQvXf0r6by0sDM1nNKEMVKr4QYB5pWl0/WaKxILP3YWY08oUeYQCL+Aln/jp2BnDimj0BeSKt9YO4UVMiVHSXIatgBdbtz4itGexrcsaFL9xhNH1SJuFmg7U1ZMA1mgO2Ah27FOJuWqsAOlIjGfpW5bazwsIwigLkRksujJlzvf60sljTPY+bwRu03vgr/wO11J30N31RTorEAHW3GKc4kKQ7NykZ6SDjX9moa8Fkvg3k25SL41jYR27wlIDSN9/gP8bmwf/5c4uJnY6uY8wMov5HBJtySSR6f00GVGlj3rwbU=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(4143699003)(11063799006)(10067099003)(56012099006)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-Exchange-RoutingPolicyChecked: pAYpuLPjc53efJjx6q/SnCSTubb32AjJGipusOtjCt7MrY9sqfORHyWmVmHIdiWCs3N5E8zGvOCjkaV2IAXkBJYYl/p89MgSvXJP5v10/C+I/CC8kTFgIbfSB7xYOlRGSmbgBSkAt7nwywut48PXxGlUyUQ+qZgNJUqPmUR09Ds8ds8pMbvlUgnTgAlKBkBRGnlmXietpxEU3acT9W9YVjxCH2xlWVPLInuU8oAz+/EILrQv3anDVlDYVAAYde2a3xsfDvCrh7u3iid10USNQ/YcbRVW6EaRg06URkFdiuIYs8yS3xfkderKfGoheAgbfDx5KXLIsmy8usD/peIWYQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB6027
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS1EPF0000009C.eurprd02.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 8ff9da7c-49cd-4568-1e3f-08df0e56b109
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|35042699022|376014|32650700020|36860700016|1800799024|82310400026|14060799003|10067099003|22082099003|18002099003|11063799006|56012099006|4143699003;
+X-Microsoft-Antispam-Message-Info: rhx5SDGQJ+1dyIy9JR4fwNfprLemMw727QnJmjGrvvsGPr0VGJYPka7mTH8PZUl13JEO9UaqINtvOIIc9r7/d1H2DtH+u9G/j+OaiM7dQgUeNEhbrOUcpYIHTrJVA8SNTVUgnPt7Hkkm26+kOkbJr6cMcszYiz+Sim5kBt/UMhpYQycgxqc3R3yLFvLjzG6K5HH6AMsHKJVl88WT4aWSicO9qIVOV1cWcnFfDMFMO/712BkUCEAJaxCw+P6hO2QYlDkAp1VphyYt60aHFYzF0ZGwkJilaHp9W2YibEYWp1nKzso7UazPgCxjB2mUUG6Rv3pgNi93b/cnO6FrhyyflqDlGfxOXspXC83FgZIcEs0QF6R/iOPGZGexwaopl+BD2UN9680h4X1B7LFwynwsgjFlnQ1BUg6p+MVZUDptmqfYG0D+0thyJHjM7CADcUwwOYeDMq2DHmruh+WcfDIibi9j/0+J3dy7FlQjxa0Y99h6ZCZ0FYEo30tvhKdt5ThNknpDZR3uhzyBBzQXElzLLgYROqr9NXkdxObDIn/Qs8fVT8bLrb4gKm7J07NpNXoFEmuXL6UwJtrKomKYBRHkyqlD/x4sr44iqBNo/1K3pWiHnQEQ3kl9s4hrF7Bs1CQo2EooYAnw0EqcFkG6rngs0rEFwGi6rxsKR0Ub9fosXk1G4j79XCG/NB85QrtjccK/
+X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(23010399003)(35042699022)(376014)(32650700020)(36860700016)(1800799024)(82310400026)(14060799003)(10067099003)(22082099003)(18002099003)(11063799006)(56012099006)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 80bX0XbpnwxUy7FYzqJo6xDtwq/oAHgI5+PzwMpIDKUoBSecchql5Mtpr/mz4+lO2zB0FQcKSzXMbe1ssWxIXIwMLYVjJZExy+y0+3lzz2A5wejR1/XhSARH9dHiAVkDd1hoHJDLrTgBeISJHab+Um0zdJeZoDjYVctdEgYAtQiKN0QsaN32Vkuqa5fdbA5GVprzVtwiyR3GbvMsp2bLniRAtUkpM0BMo44x7v66kdDhbXMvSbJjtpLfHshP/7Lq4Gc2sPyACdNo3RV0tADr0GT0cm02hAiXqhxe8EuVzaB0juYDi25B6MxwYu5hYIIYNHv/uT8P6uGigxsMQgofjPCE51yyn2qL95IPdkWVx4X5lo9hPud+T2f5atXMwKfdT8SnGNbRZe2gAGugHNyDs1Oc6cc/xOZAmlt1ePQJPiLaN0Z2pSYpH6lrqlaqRpvj
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2026 09:43:14.2277 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68914bfa-6051-496e-a85b-08df0e56c4e5
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
+ Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF0000009C.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB9690
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,265 +289,173 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Tue, Sep 08, 2026 at 14:58, Guillaume La Roque <glaroque@baylibre.com> w=
-rote:
+Hi Yuxiao,
 
-> Le 25/08/2026 =C3=A0 15:16, Simon Glass a =C3=A9crit=C2=A0:
->> Hi =E5=88=98=E5=9E=A3Valentin,
->>
->> On Thu, 20 Aug 2026 at 10:41, =E5=88=98=E5=9E=A3=E8=BE=B0<valentinliu@ic=
-loud.com> wrote:
->>> Hi Simon,
->>>
->>> Thanks for your reviewing and suggestions.
->>>
->>> I can merge all scanning function into one "helper", just introduce a n=
-ew variable to condition which partition we needed.
->>>
->>> But I have no idea about test and document and I have not seen anything=
- in test/ or doc/ folder. Can you give me some advice?
->> Yes you can see the documentation here:
->>
->> https://docs.u-boot-project.org/en/latest/develop/index.html#testing
->>
->> The android tests are in test/boot/bootflow.c and
->> test/py/tests/test_android/test_abootimg.py for example. Let me know
->> if you have trouble running them.
->>
->> BTW we try to avoid top-posting as it makes the thread confusing.
->>
->> Regards,
->> Simon
->>
->>> I will refactor the AVB logic in the next patch in future.
->>>
->>> Best regards,
->>> Valentin Liu
->>>
->>> 2026=E5=B9=B48=E6=9C=8820=E6=97=A5=E4=B8=8B=E5=8D=888:31=EF=BC=8CSimon =
-Glass<sjg@chromium.org> =E5=86=99=E9=81=93=EF=BC=9A
->>>
->>>
->>> Hi Valentin,
->>>
->>> On 2026-08-18T17:53:00, Valentin Liu<valentinliu@icloud.com> wrote:
->>>
->>> boot: android: Add Android 13+ bootflow support to bootmeth.
->>>
->>>
->>> Please drop the trailing period and keep the subject under 60 character=
-s.
->>>
->>>
->>> The devices launching Android 13+ were using a new partition
->>> named init_boot to store generic ramdisk.
->>>
->>>
->>>
->>> In the new bootflow, kernel still be stored in boot image,
->>> however, the First Stage files in ramdisk were moved to
->>> init_boot image. We should load it to memory and verify it
->>> so that the kernel can execute init program to continue booting.
->>>
->>> Currently, we have supported loading the init_boot image by
->>> abootimg command, but we still need bring this ability to
->>> bootmeth, so that booting Android 13+ will be more easily.
->>>
->>>
->>> Please use present/imperative tense throughout: 'were using' -> 'use',
->>> 'kernel still be stored' -> 'the kernel is still stored', 'were moved'
->>> -> 'are moved', 'we still need bring' -> 'we still need to bring',
->>> 'more easily' -> 'easier'.
->>>
->>>
->>> In the new bootflow, kernel still be stored in boot image,
->>> however, the First Stage files in ramdisk were moved to
->>> init_boot image. We should load it to memory and verify it
->>> so that the kernel can execute init program to continue booting.
->>>
->>> Currently, we have supported loading the init_boot image by
->>> abootimg command, but we still need bring this ability to
->>> bootmeth, so that booting Android 13+ will be more easily.
->>> Bootmeth will be able to recognize the new partition layout,
->>> and boot Android normally.
->>>
->>> Link:https://source.android.com/docs/core/architecture/partitions/gener=
-ic-boot
->>> Signed-off-by: Valentin Liu<valentinliu@icloud.com>
->>>
->>> boot/bootmeth_android.c | 67 ++++++++++++++++++++++++++++++++++++++++
->>> boot/image-android.c | 16 ++++++++++
->>> cmd/abootimg.c | 5 +++
->>> doc/develop/bootstd/overview.rst | 3 ++
->>> include/android_image.h | 1 +
->>> include/image.h | 35 +++++++++++++++++++++
->>> 6 files changed, 127 insertions(+)
->>>
->>>
->>> Please can you look at how to add a test for this addition?
->>>
->>> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
->>> @@ -113,6 +115,51 @@ static int scan_boot_part(struct udevice *blk, str=
-uct android_priv *priv)
->>> +static int scan_init_boot_part(struct udevice *blk, struct android_pri=
-v *priv)
->>> +{
->>> + struct blk_desc *desc =3D dev_get_uclass_plat(blk);
->>> + struct disk_partition partition;
->>> + char partname[PART_NAME_LEN];
->>> + ulong num_blks, bufsz;
->>> + char *buf;
->>> + int ret;
->>> +
->>> + if (priv->slot)
->>> + sprintf(partname, INIT_BOOT_PART_NAME "_%s", priv->slot);
->>> + else
->>> + sprintf(partname, INIT_BOOT_PART_NAME);
->>>
->>>
->>> This is a near-duplicate of scan_boot_part() and
->>> scan_vendor_boot_part(). Please factor the common logic (build
->>> partname, read the header block, check magic, extract size) into a
->>> helper rather than adding a third copy.
->
-> For this i'm not agreed with simon which asking a complete rework .
-> you ask a big rework to be able to do a common function, for me it's=20
-> more a task to do after of before but not in "i add init_boot support"
+On 08/09/2026 22:55, Yuxiao Zhang wrote:
+> On Thu, Sep 3, 2026 at 2:01 AM Jerome Forissier <jerome.forissier@arm.com <mailto:jerome.forissier@arm.com>> wrote:
+> 
+>     Hi Yuxiao,
+> 
+>     On 25/08/2026 19:53, Yuxiao Zhang wrote:
+>     > Support rapid commit option code 14 which bypass the advertise and
+>     > request state. The option is enabled by DHCP6_RAPID_COMMIT.
+>     >
+>     > Signed-off-by: Yuxiao Zhang <yuxiaozhang@google.com <mailto:yuxiaozhang@google.com>>
+>     > ---
+>     >
+>     > Changes in v2:
+>     > - Reject rapid commit option if option_len != 0
+>     > - Drop redundant NULL check on dhcp6_hdr
+>     >
+>     >  cmd/Kconfig  |  8 ++++++++
+>     >  net/dhcpv6.c | 43 ++++++++++++++++++++++++++++++++++++-------
+>     >  net/dhcpv6.h |  2 ++
+>     >  3 files changed, 46 insertions(+), 7 deletions(-)
+>     >
+>     > diff --git a/cmd/Kconfig b/cmd/Kconfig
+>     > index ff90a87024c..b3cf3a6d8b6 100644
+>     > --- a/cmd/Kconfig
+>     > +++ b/cmd/Kconfig
+>     > @@ -1996,6 +1996,14 @@ config DHCP6_ENTERPRISE_ID
+>     >       int "Enterprise ID to send in DHCPv6 Vendor Class Option"
+>     >       default 0
+>     > 
+>     > +config DHCP6_RAPID_COMMIT
+>     > +     bool "Request Rapid Commit (2-message exchange) from DHCPv6 server"
+>     > +     default n
+>     > +     help
+>     > +       Request the Rapid Commit option (option 14) in DHCPv6 Solicit
+>     > +       messages to enable a 2-message exchange (Solicit-Reply) rather
+>     > +       than the default 4-message exchange.
+>     > +
+>     >  endif
+>     > 
+>     >  config BOOTP_MAY_FAIL
+>     > diff --git a/net/dhcpv6.c b/net/dhcpv6.c
+>     > index 640f089a2e1..5ed8449edb5 100644
+>     > --- a/net/dhcpv6.c
+>     > +++ b/net/dhcpv6.c
+>     > @@ -115,6 +115,9 @@ static int dhcp6_add_option(int option_id, uchar *pkt)
+>     > 
+>     >               opt_len = sizeof(struct dhcp6_option_ia_na);
+>     >               break;
+>     > +     case DHCP6_OPTION_RAPID_COMMIT:
+>     > +             opt_len = 0;
+>     > +             break;
+>     >       case DHCP6_OPTION_ORO:
+>     >               oro_opt = (struct dhcp6_option_oro *)dhcp_option_start;
+>     >               oro_opt->req_option_code[num_oro++] = htons(DHCP6_OPTION_OPT_BOOTFILE_URL);
+>     > @@ -194,6 +197,8 @@ static void dhcp6_send_solicit_packet(void)
+>     >       pkt += dhcp6_add_option(DHCP6_OPTION_ELAPSED_TIME, pkt);
+>     >       pkt += dhcp6_add_option(DHCP6_OPTION_IA_NA, pkt);
+>     >       pkt += dhcp6_add_option(DHCP6_OPTION_ORO, pkt);
+>     > +     if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT))
+>     > +             pkt += dhcp6_add_option(DHCP6_OPTION_RAPID_COMMIT, pkt);
+>     >       if (CONFIG_DHCP_PXE_CLIENTARCH != 0xFF)
+>     >               pkt += dhcp6_add_option(DHCP6_OPTION_CLIENT_ARCH_TYPE, pkt);
+>     >       pkt += dhcp6_add_option(DHCP6_OPTION_VENDOR_CLASS, pkt);
+>     > @@ -448,6 +453,16 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
+>     >                       }
+>     >                       sm_params.rx_status.preference = *option_ptr;
+>     >                       break;
+>     > +             case DHCP6_OPTION_RAPID_COMMIT:
+>     > +                     if (option_len != 0) {
+>     > +                             debug("Invalid rapid commit option length\n");
+>     > +                             break;
+>     > +                     }
+>     > +                     if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT)) {
+>     > +                             debug("DHCP6_OPTION_RAPID_COMMIT FOUND\n");
+>     > +                             sm_params.rx_status.rapid_commit_found = true;
+>     > +                     }
+>     > +                     break;
+>     >               default:
+>     >                       debug("Unknown Option ID: %d, skipping parsing\n",
+>     >                             ntohs(option_hdr->option_id));
+>     > @@ -618,14 +633,28 @@ static void dhcp6_state_machine(bool timeout, uchar *rx_pkt, unsigned int len)
+>     >               break;
+>     >       case DHCP6_SOLICIT:
+>     >               if (!timeout) {
+>     > -                     /* check the rx packet and determine if we can transition to next
+>     > -                      * state.
+>     > -                      */
+>     > -                     if (dhcp6_check_advertise_packet(rx_pkt, len))
+>     > -                             return;
+>     > +                     struct dhcp6_hdr *dhcp6_hdr = (struct dhcp6_hdr *)rx_pkt;
+>     > +
+>     > +                     if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT) &&
+>     > +                         dhcp6_hdr->msg_type == DHCP6_MSG_REPLY) {
+>     > +                             if (dhcp6_check_reply_packet(rx_pkt, len))
+>     > +                                     return;
+>     > +                             if (!sm_params.rx_status.rapid_commit_found) {
+>     > +                                     debug("[DHCPv6] REPLY received without Rapid Commit option, ignoring\n");
+>     > +                                     return;
+>     > +                             }
+> 
+>     dhcp6_check_reply_packet() calls dhcp6_parse_options(), which has side
+>     effects such as updating the bootfile information. I think the Rapid Commit check
+>     needs to happen before applying the other reply options.
+> 
+>     > +                             debug("REPLY (Rapid Commit) good, transition to DONE\n");
+>     > +                             sm_params.next_state = DHCP6_DONE;
+>     > +                     } else {
+>     > +                             /* check the rx packet and determine if we can transition to next
+>     > +                              * state.
+>     > +                              */
+>     > +                             if (dhcp6_check_advertise_packet(rx_pkt, len))
+>     > +                                     return;
+>     > 
+>     > -                     debug("ADVERTISE good, transition to REQUEST\n");
+>     > -                     sm_params.next_state = DHCP6_REQUEST;
+>     > +                             debug("ADVERTISE good, transition to REQUEST\n");
+>     > +                             sm_params.next_state = DHCP6_REQUEST;
+>     > +                     }
+>     >               } else if (sm_params.retry_cnt == 1)  {
+>     >                       /* If a server UID was received in the first SOLICIT period
+>     >                        * transition to REQUEST
+>     > diff --git a/net/dhcpv6.h b/net/dhcpv6.h
+>     > index d41a3c30615..49f20390730 100644
+>     > --- a/net/dhcpv6.h
+>     > +++ b/net/dhcpv6.h
+>     > @@ -24,6 +24,7 @@
+>     >  #define DHCP6_OPTION_PREFERENCE              7
+>     >  #define DHCP6_OPTION_ELAPSED_TIME    8
+>     >  #define DHCP6_OPTION_STATUS_CODE     13
+>     > +#define DHCP6_OPTION_RAPID_COMMIT    14
+>     >  #define DHCP6_OPTION_OPT_BOOTFILE_URL        59
+>     >  #define DHCP6_OPTION_OPT_BOOTFILE_PARAM      60
+>     >  #define DHCP6_OPTION_SOL_MAX_RT              82
+>     > @@ -152,6 +153,7 @@ struct dhcp6_rx_pkt_status {
+>     >       enum dhcp6_status       ia_status_code;
+>     >       enum dhcp6_status       status_code;
+>     >       u8                      preference;
+>     > +     bool                    rapid_commit_found;
+>     >  };
+>     > 
+>     >  /**
+>     > ---
+>     > base-commit: 527115ef6783cec49e5610c523c124b399011361
+>     > branch: main
+>     >
+> 
+>     Thanks,
+>     -- 
+>     Jerome
+> 
+> 
+> Hi Jerome,
+> 
+> The rapid commit validation relies on dhcp6_check_reply_packet to set rapid_commit_found field so it cannot run before dhcp6_check_reply_packet. If we want early return we can add a rapid_commit parameter in dhcp6_check_advertise_packet and do the validation inside it. Let me know your preference.
 
-I don't mind a third copy either. The code is pretty simple.
-We could rework this later.
+You’re right. Looking at this again, I don’t think we need to complicate the code.
+So this is:
 
-Note that MediaTek has a similar patch to enable init_boot here:
-https://gitlab.com/mediatek/aiot/bsp/u-boot/-/commit/38055024d20c17d67fd863=
-a393011554885e5a6e
+Acked-by: Jerome Forissier <jerome.forissier@arm.com>
 
-The approach there seems a bit simpler to me.
-Could we work on having a simpler patch for this submission as well and
-add future improvements on top?
+Thanks,
+-- 
+Jerome
 
-Thanks
-Mattijs
+> 
+> Thanks,
+> -Yuxiao
 
->
->>>
->>> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
->>> @@ -291,6 +338,17 @@ static int android_read_bootflow(struct udevice *d=
-ev, struct bootflow *bflow)
->>> + if (priv->header_version >=3D 4) {
->>> + ret =3D scan_init_boot_part(bflow->blk, priv);
->>> + if (ret < 0) {
->>> + /*
->>> + * Android 12 devices do not have the init_boot partition.
->>> + * Some devices upgraded to Android 13 or later from
->>> + * earlier Android versions may also not have one.
->>> + */
->>> + log_debug("scan init_boot failed: err=3D%d\n", ret);
->>> + }
->>> + }
->>>
->>>
->>> priv is allocated with plain malloc() above, so it is not zeroed. On
->>> failure here priv->init_boot_img_size is left uninitialised, then
->>> boot_android_normal() and (in patch 2) run_avb_verification() read it
->>> back as 'priv->init_boot_img_size > 0'. Please use calloc()/memset(),
->>> or explicitly set priv->init_boot_img_size =3D 0 before the call and on
->>> the failure path.
->>>
->>> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
->>> @@ -556,6 +614,7 @@ static int boot_android_normal(struct bootflow *bfl=
-ow)
->>> ulong loadaddr =3D env_get_hex("loadaddr", 0);
->>> + ulong iloadaddr =3D env_get_hex("init_boot_comp_addr_r", 0);
->>> ulong vloadaddr =3D env_get_hex("vendor_boot_comp_addr_r", 0);
->>>
->>>
->>> If init_boot_comp_addr_r is unset, env_get_hex() returns 0 and you
->>> silently load init_boot at address 0 and call
->>> set_ainit_bootimg_addr(0). Please check that iloadaddr is non-zero and
->>> error out with a clear message before using it - the vendor_boot path
->>> has the same weakness, but let's not extend the pattern.
-> do read_slotted_partition=C2=A0 function should fail in this case ?
-> if not in this case we have same issue on vendor_boot_comp_addr_r
->
->>>
->>> diff --git a/boot/image-android.c b/boot/image-android.c
->>> @@ -326,6 +326,22 @@ bool android_image_get_data(const void *boot_hdr, =
-const void *vendor_boot_hdr,
->>> +bool android_image_get_data_v4(const void *boot_hdr, const void *vendo=
-r_boot_hdr,
->>> + const void *init_boot_hdr, struct andr_image_data *data)
->>> +{
->>> + if (!android_image_get_data(boot_hdr, vendor_boot_hdr, data))
->>> + return false;
->>> +
->>> + if (!is_android_boot_image_header(init_boot_hdr)) {
->>> + printf("Incorrect init boot image header\n");
->>> + return false;
->>> + }
->>> +
->>> + android_boot_image_v3_v4_parse_hdr(init_boot_hdr, data);
->>> +
->>> + return true;
->>> +}
->>>
->>>
->>> I can't find any caller of android_image_get_data_v4(). Please either
->>> wire it up to whatever consumes init_boot_img_total_size, or drop it
->>> (and the new struct field, and the header declaration) until it is
->>> needed.
-> not exactly this , this function should be integrate in=20
-> android_image_get_data , same we do for vendor_boot. so remove it and at=
-=20
-> this new check on init_boot partition in android_image_get_data function
->>>
->>> diff --git a/include/image.h b/include/image.h
->>> @@ -2167,6 +2184,17 @@ bool android_image_print_dtb_contents(ulong hdr_=
-addr);
->>> +/**
->>> + * is_android_init_boot_image_header() - Check the magic of init boot =
-image
->>> + *
->>> + * This checks the header of Android init boot image and verifies the
->>> + * magic is "ANDROID!" (same with the boot image)
->>> + *
->>> + * @init_boot_img: Pointer to boot image
->>> + * Return: non-zero if the magic is correct, zero otherwise
->>> + */
->>> +bool is_android_init_boot_image_header(const void *init_boot_img);
->>>
->>>
->>> Declared but never defined or called - scan_init_boot_part() uses
->>> is_android_boot_image_header() directly, which is correct since the
->>> magic is identical. Please drop the declaration.
-> perhaps update is_android_boot_image_header description to say it's=20
-> included too init_boot image.
->>>
->>> diff --git a/include/image.h b/include/image.h
->>> @@ -2199,6 +2227,13 @@ void set_abootimg_addr(ulong addr);
->>> +/**
->>> + * set_ainit_bootimg_addr() - Set Android init boot image address
->>> + *
->>> + * Return: no returned results
->>> + */
->>> +void set_ainit_bootimg_addr(ulong addr);
->>>
->>>
->>> Missing @addr: description, and a void function does not need a
->>> Return: line - please drop it.
->>>
->>> diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/ove=
-rview.rst
->>> @@ -293,6 +293,9 @@ script_offset_f
->>> +init_boot_comp_addr_r
->>> + Address to which to load the init_boot Android image, e.g. 0xd0000000
->>>
->>>
->>> Since this env var is required for Android 13+ to boot, please also
->>> document it in the relevant board README(s) / sample env, and handle
->>> the missing case gracefully in the code (see comment on
->>> boot_android_normal()).
->>>
->>> Regards,
->>> Simon
->>>
->>>
