@@ -4,192 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C18DCC79FB6
-	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 16:23:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18980C79FB6
+	for <u-boot@archiver.kernel.org>; Wed,  9 Sep 2026 16:30:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 57702607C8;
-	Wed,  9 Sep 2026 16:23:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C4551607C9;
+	Wed,  9 Sep 2026 16:30:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5ysyzwm5YJje; Wed,  9 Sep 2026 16:23:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4293F60626
+ id FSxw5ZKSPskU; Wed,  9 Sep 2026 16:30:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org F009E607C4
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788971023;
-	b=pJNVoOnqMtD2+rt928UwXuyTGZZ98tZnDH4odr1ihjNVu+6RmxW8xhVda9oxMV8d9Vye
-	 Mxd+gnhUoqCSUQJKmUKzCEhIfUnYl6iA0PyxV3mV/CqJ16JPr2z0lFp3lIsC/0IUeXyt2
-	 m8p5iD7r76vNJisZ+pBK6BalKBmpU4AWXFvXvnHVYSQzO/izIaWOD3KxMl9YJvXZtxR+0
-	 SRJAtuGOXKDjam7JFtuiEvvPDVDKx308lXXlQojSSrP1RSO7og9mX05pqSJtNPtCee2Mk
-	 yKJVhG5zqEFwPAKUOPLQdV9gUM5zpyIiOfjd1Y6jIZrfHimL4CWFqdb2aFyCYGqFPtg==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1788971023;
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788971454;
+	b=KvCOMlPgwpnU6p6J4lOsGfjzf/n1JMnQb3wf4pONGJy8RvRu1PRawvc9tHNCa/wxIS+R
+	 bqooiWDToQqhA9jCCsBAUupLVuATACL1a47VuPCyLBrEAVPVj/smwWjALr57cG37gvp7/
+	 xR/PwByAYKW100zDWpOeaE9W9Xdtj68NKbaxLrgPAZvWVdiasa7RqXjDnaN5dUzUKAvPW
+	 Z/WsGXHdioQnVi3hhQPZ9444U7CZ63ZeJrv3r4Ito+FFS22z/iHnhZGaIZIsNo/cJgnV3
+	 lN/4vDiTbSqi4pWeGQ+IBLpK7FijjTwG/S3gYuUlWdgDuODBYN46FmoiI6a3lR+pXIg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1788971454;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:MIME-Version:
+	 Content-Type:Content-Disposition:X-Clacks-Overhead:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=v4ryuKdYoQ3LF4ONcFh7R6jTvfIxi7kTwzuguNve4D8=;
-	b=YZT6NnW/RU0edPLpKjJkZCkIIOkmq8jciebwyAu6CXlzJ5xjG+4ZoFNpp40GyocriHyx
-	 0Fjq9+/dXMZTij075z1n9PJ7dAGzLvRsqbXlsNNh9usZv4IbvSXMuBme0aGu9jsZOc5mg
-	 GRtqGiRnHvUnMf4UKxgRMkkHBjki1jeUlmC7DSpgeOYNpnr8p/rILjmbS8PZexkXn9v/Z
-	 liMVq600GKpc2DaPl1kiMiiA0qBUOvpHpI48tzn2SUsYGJ+sntscjaMx+WqvXYI5w4g/y
-	 j871pfYJCOlorVZUTqbEoXJ+zfIgtJGSCyrAh9tBbxSXyNM8O6H661L4hzQEFDwGAgw==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=IHq2Huf81ejMNxzxWZ2ZuIOAT7vrN1YyCzlOIf9YYKg=;
+	b=Cx+p1iP4UyUTTzA3dNFUZ+iMbV4YTT6+SFjG2PLpm/svB8iQnNtHh5rAPqVp+B1Nh7UB
+	 RM5lhV1E2ynuaNLe1HE16oNe3YSsPCT7hJlgvVRw/Yey67n6CJxlSyeQekfNNKmzTVCeF
+	 21qKo+lZJlJC6j6ecg8vXV6FHJpU6y16oDElmDS5F/zRXXsgzIjngW9Etdi9hr4EQnmEm
+	 t2sSCiRtETD5OJ7rm6k6sd/LwR9gOicLRTGj8WyNicBcy6d2CGILLpze7CDCW7rbl+U5g
+	 /MIE7Fw2tJh2yqchsdwcr8N/qYeZB6NN2Po6tcUwxT34bB6HG1ajpglVn83JYfWnbrw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1788971023;
-	bh=v4ryuKdYoQ3LF4ONcFh7R6jTvfIxi7kTwzuguNve4D8=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=bC3v3+05sBqYk2Sa4HJTtTUlk3bB+3eZ+tYCkT3SdL14iDqL0rQ2f7HFybBMBN4WB
-	 HBid7kQIPtDxV9FuypNn5gg3bKkbVAm3GWcjjG4ZAKmG72i+WKqLMRbj+UCad8hIua
-	 tQzO2Z1ZJNdydNLa4268QaMhLg3ZAHHqh5FWuwAlrDGOF/5WACNHXwnoVtH8pZm9Pv
-	 /GRd2PwUweNKQ0q8z64uxyI59jsky1TMUeN9Ra4JGmT0Q4jiPMa4b09XrtyhgBa28Z
-	 eB3UjT1X210n8rIwhvLfRwghYlz3GkZmfbuwfZrvQTIOil9HY8sMcnxGpRrPW+iEOm
-	 Bz2imtNYLj33Q==
+	d=lists.u-boot-project.org; s=default; t=1788971454;
+	bh=IHq2Huf81ejMNxzxWZ2ZuIOAT7vrN1YyCzlOIf9YYKg=;
+	h=Date:From:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=INkJ1jlHklfNcOp0MfnlXL+qDH76doxiN+P/Dfc7OZ9DVk/FR7ompASVQuC72v0Vl
+	 xPuFFQKehFeL0Ta+VUeAH1H3kSZEhoHV6hczQ3QlE9CSvrbwq9CuOT7q+eNv5KdWFX
+	 P0OY52srDT7Cfkm5DkgQT2QspwgCx9YqMBqmhv48CLnRaUkKog4iEmHfLUcPR/Y3jp
+	 1uN7jGXislLhlqBAHkaI7mEzI+7WcVlCTf7lTBUnLae3UpyOXCi1s712HC/JSknrja
+	 6pNbOYenru/LgKTeRwj/q7OGN+woDrkw7/JA8T7BZHL0St02unbgJl+D/LMBAhEWIE
+	 /e4OIHTnN3msw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4293F60626;
-	Wed,  9 Sep 2026 16:23:43 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id B682D2FC
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 16:23:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id F009E607C4;
+	Wed,  9 Sep 2026 16:30:53 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 24BA0268
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 16:30:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9C657407A3
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 16:23:41 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0A7D680DE6
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 16:30:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QkdzeQ-FWVlo for <u-boot@lists.u-boot-project.org>;
- Wed,  9 Sep 2026 16:23:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 63DDC4079D
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1136"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1788971021;
- b=gnAOrdGa3zGZEgOwyXGCMfoQfkyMNuHfLxzuKzbBmzYvQ5Oil1SdhnY8BNUE+enoa/xL
- Lo1f7/Z+HoRuTUcfGcez9wMWWAkC5WR6LSJxt9IWTPdH7M2oCDsC9Ms0Bo07luOUfGPr0
- QxygfHTLZwIodoZaB0/sMeCW4pXGEBVr0XuC8sWRKB1dyh807zYqAKAQhowbkFJee750+
- ldjywvTxbZklZv+A/vbs6o9FadL38M9SCSxn8pA6GJ8oLn1iMXxwG8YVKh211GgMw7mB5
- UJ6L04YBnUGpuOAp8xPxHjGKewlY1PGbVVuZpuildxf1yeK3iYsId+ISJGXQGlexVSQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1788971021;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id exEJMvau5o8F for <u-boot@lists.u-boot-project.org>;
+ Wed,  9 Sep 2026 16:30:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 596C080DDD
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::231"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1788971450;
+ b=RPsi62adlN/GVnauEjbuiSYQX1TCXNt7ChQpSYT7J+VmV+azdbwUNWdMB/9g6xBN5ga8
+ mzdG3awGKumGPgBngm/TuT1ISZDyMUtMBOqBXMI4MWp1QGHmvzLXgoqSd6wLkzuWvVzMd
+ GY1EFVrYO3ynoyH3/jlIu0CvTmZRf5XG0DsZJR9mVNoKKj5PJ72HTAGjfcXhi1arq211V
+ por6VOSOqhtkgnZdht2u3pfB2OCT0jEthe7bUsNSjNfzVv3fiyfFHBznM0VTIrwx2XuTh
+ BqbqDnNKQqRBQmMQAUKRLEDMVT/xaKDFM5KyEzJtfX1nC+MwAE25B1bn7Hk8dTfk6hQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1788971450;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type;
- bh=v4ryuKdYoQ3LF4ONcFh7R6jTvfIxi7kTwzuguNve4D8=;
- b=gemdGh37oQ/cYkj5EVP+7NEYTWbmy5QL4yy5Dv4zTu03qT3vWgCLPSQGrdJTnUyYFJ6K
- T7AHAEVh1/tQMLBccn8o8XtNezCJOEtOvUKLrv8pRRyeNji8JEzDL4Thltf+EFpBXqnMa
- 6hbP1C2+G0d90tNGXeUnEHCtcwcHR1wjie59zzMBimFjkWWN7Jobyf0d8xQf/zbZ08AR9
- UmJDO5soOxQBpFHpnn51NR5j+AzSx4+CdEyptS7NQeGyCfGL4dHINBl8dOzQInZ4b1ulx
- 6TDNk7gCxv0WUGU4lpW+UIA+FVhKGRA0FJOiawD9TGZyJ0oMTmuB2fyojHz+nayYv6Q==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org;
- dmarc=pass header.from=linaro.org; 
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=Q6C2sjqG; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1136"
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+ Subject:Message-ID:MIME-Version:Content-Type:Content-Disposition:
+ X-Clacks-Overhead;
+ bh=IHq2Huf81ejMNxzxWZ2ZuIOAT7vrN1YyCzlOIf9YYKg=;
+ b=Rz9b21kaa7wb/asuf2ZmH4gWwqY48U2b2XBRe6dz2yqNi5chL636nKcnI2dDy82ResWz
+ RskUpWZiQRNKdVA+BnBN6B4IyIIOIHcDYusWYFBXk/5DTVFyR8nW+sz8xt8vcL2Mb+OmB
+ UDvdXrFvwULpTXCjFYB2IZ4ydZDg14eF1vYo8HJWxtY9GrJSbVcLzASyCBSMq3elTSCWh
+ QamQN6PzVps5mCSmSDlQ5pIAJLHC+AMy2iF4GZ/oP+hiSimY9Fxn9bA5Q9AwglpQiLS5c
+ 4ledmYbyKGojDfn0kFsr+zqJhSJLSsm7iqGV+3oZnyO6LJLeW9Q5QphrKUvXdpQL08Q==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ dmarc=pass header.from=konsulko.com; 
+ dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=o4+urkcX; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::231"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1136; helo=mail-yw1-x1136.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=Q6C2sjqG
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 63DDC4079D
- for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 16:23:39 +0000 (UTC)
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-8664769db58so42487877b3.3
- for <u-boot@lists.u-boot-project.org>; Wed, 09 Sep 2026 09:23:39 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788971019; cv=none;
- d=google.com; s=arc-20260327;
- b=I6gVrKVkKuqR5c0n+/6xvRSIiG708SvOW1huwDsLMG2TEE4ifM/SPozVGQwUDxNBDT
- wQFcKFdB+6qYIEd1SM8Vv+Wpa/WahSxQU0h3dmo3IdpbpFEl91adYA7bJ/czZNzJNR55
- Uhl0Gwq3CxaNK1C5zoqPWR5TX5MQ6zBxZAM+pnTwfaxQh3K7Ljr4EDQ5TJ4LM8nZG/q4
- Ebi3UaGW7CdZjPXCuKOqJHO4W8FntwQIkvA730014+NtrTCeCPL/42ZjucoHSfK8mx6x
- r5hzBiHgvhqo7kbKpLWfMyDfr7TjKMV9V1qpqLvls0t0YZ5vjY3yndDvJpk3ZDS2W3qR
- qJGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=v4ryuKdYoQ3LF4ONcFh7R6jTvfIxi7kTwzuguNve4D8=;
- fh=SgX3lzKXsL5uOHPUteg8m8HKJkb5mKF9KCqOub2vpgM=;
- b=QuIpC43V7x/w1qgbluhvCILvNjHfnFyg/nayqj9tCdmY8n+mwghNDMnDiO368YXelt
- O3Gxh8mVdMny4feoAgVf31oLAILnbqG2iePfp+vOiPaN8Zuee4A2SSk97HjOraMigGaU
- d7OW/eulg5C+l0w36wEfiBj2Gl1p+Lz5mkFeMY4Nj8azXeA1MK/OFXOtsC2smS3HhVsc
- lfHJNYS83ZuEl7+edM+1SnwzDKtPrtT2CUlXzFAgIk6Ei2eU9rUC+4Ohrg3utnR6W9Jn
- azc4DBkdRSKCtjYZOFToLurqNPwhs1iqVyhdHsYPlw8GUQmSzHYJRoMo44FEJUtA5Zqg
- DYXA==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2607:f8b0:4864:20::231; helo=mail-oi1-x231.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=o4+urkcX
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 596C080DDD
+ for <u-boot@lists.u-boot-project.org>; Wed,  9 Sep 2026 16:30:49 +0000 (UTC)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-4c14d66d922so245689b6e.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 09 Sep 2026 09:30:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1788971019; x=1789575819;
+ d=konsulko.com; s=google; t=1788971449; x=1789576249;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=v4ryuKdYoQ3LF4ONcFh7R6jTvfIxi7kTwzuguNve4D8=;
- b=Q6C2sjqG9JRc3DrYgeLLYgViLUvRzYX/+jWPaihcclMywRkXZ+X5QWZ2kelg2Efr2P
- s1GF0sEJJS2We9Z1ItOOULPkjsY0F8o2Ut97fdrz8V3vFZgQeci9BejglqupRpp1P0/s
- zFoWMEhIxjdyrgFkRkIR1gI5yzwkRJlhOGj9C+t0zBFzMyQjn/Fz9oe+bQVmQWqj6SzU
- ujvMprX8Sitjak0kivzEEzf3gJyPLXPu9wdxTKEDhbwhffdfBEfj3GPUb8Hmthnro83l
- 2b/+KqQibIgqKTVh4g+cPDzI/3qAKFwauijDFqcBXR2YCarihq08JRsQc1bFnf7vdXYH
- Y0cg==
+ h=content-disposition:content-type:mime-version:message-id:subject:cc
+ :to:from:date:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=IHq2Huf81ejMNxzxWZ2ZuIOAT7vrN1YyCzlOIf9YYKg=;
+ b=o4+urkcXFuISV+DSmKSqGzS0pWTbNiXb+Y/DqZCj8DiG0w9TbpI1/NnD206dtdyZAE
+ UbJth77dacgrZ3F1RG+03bf7+2cuSopdYYXcHO+tiSvZkV2z172h4Skr0cXK78UqkWkD
+ uRl0IrQ0/ix1FsEY8uvJ1GxUkk0Gc/rb2xUlQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788971019; x=1789575819;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=v4ryuKdYoQ3LF4ONcFh7R6jTvfIxi7kTwzuguNve4D8=;
- b=Y5lvP93HEvhu7wYI+ttpdUJEes4F9dtdKsH4DDdM+V5z6Pia91z7SOw3BwQaHwBsMo
- LTAAPPeLPxcse6ZXdAJIn41xnk9mhUIRDkQzwcvmoZhR6jnNBvjVzHlVDZk1563Fvx1E
- ehqm0VExpm5VMKzicjMF5DJ63Ap3VhZv416vZxYIuuOPJFoDFgkxdMY1Os8njqTgUanp
- bSgIM9QAYCVikaE5ozyq+42FZReAj157FNuqZs5T7nIz+SDPSq5EKz2AICBF9ZdYk/aT
- AGkwN/2mhhCwm3egbQ0hBSvdKnl0PRBuKvRTG2+N4Jp9d7gJCut3jkF2lLbj4xsNFSmz
- vdrw==
-X-Gm-Message-State: AFuF++lcT2SMeqYQhwsKm7uvKnqvclJeaia39bEqqkfiyglX7Tv4FdUH
- YPBeNsyMpYDeBWoTqLHl+nL5Ldl4XnBW1zZMM0uKLehN6BvXChjsipfV8wDQDihtZNHn3Ivk8WY
- Ht+WIOH9Z5gCTF/lp6GH/6nMg8sdT+3rEGjR8+tbfP8y2vXgS7KBguFcUTg==
-X-Gm-Gg: AYBFou1iRQ0cM0PPnxvHrtfymtD7EzbCCNJTWK3t7E1I7x6vMlq+soam7Tcopa5TNNP
- GVdS5AZa8Fpr3Az05MhpSfOeJTc0Z36u4+Tx9Ob+0xUYJuZHs6f9DFUL6i+PkbNCNoyxEJOBI9U
- 50hs9v+fksKzOBKPjFB2i6YVP4UGxrU1wMuV6pDgiZzmn9It8k3OZ6LJOqbp3hSs/USaF7bSQf2
- vMt2wQNgRY7dbjo59AcFoy+JEhuvEfeRpeba7EX3m56K23n6PFZRombiplZlD5zreVXHVg5OrwY
- SNBYRjfIXB+IFw8IIdDNMHCkx+9oNX7ROnRaOXJ0Rrc6Rnnb/4x2bLHHVzkv+msVF4F8hN5Narm
- KbDZ3+6Y+xpP0pwEVMOMr7kSCyiiviltk81QWGoQN4F7xzF1fjKAbJLnVMAMHRQY/D+q+vVAhMY
- lTuJ3jdlp7tPZkV4tY9BLypHsnGhpWB5bfHaaAksnlJQwX2eeiHL9hvYI0zgA1+E/89kdD+g3gu
- Tk2aJiXGxneDk3p/nLCvRlYP7D2CdkjhlmbXFiNa3MTaYJ6vECV1HR1Fd4pJXOhnwXIfTyt/RuZ
- PfWShUpqNHusFYnoenRMjvp6bmVpjTY7DlTJ1fHFvfnkIZT0iI8H+8oUDN/7TQZ97B/xNLLahDq
- e6b/VBWUI8Ncga74xLU7brhWt+1rlk97LEpGOSLSxlyf7tSQWq2S+g8l2e66NhSBn
-X-Received: by 2002:a05:690c:6906:b0:862:cd8e:78fb with SMTP id
- 00721157ae682-871221a80a8mr148558647b3.2.1788971018499; Wed, 09 Sep 2026
- 09:23:38 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1788971449; x=1789576249;
+ h=content-disposition:content-type:mime-version:message-id:subject:cc
+ :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=IHq2Huf81ejMNxzxWZ2ZuIOAT7vrN1YyCzlOIf9YYKg=;
+ b=qLkFNFe4Ebwxdbiii28QJatqCVVok/C3P/UWHv5jsfaLbr9ctSykQWaTxxx4fZ/W3j
+ ayEHUNZ7nH3fuDcwK1kmx2jmjZs660hgYGNrzWEbad2byWCxdqNH8PNDaWgXkHiBK3I4
+ qQiAb7eM7Ji8C/5ToidfxMPGOJDQ9uHqEisNvUa4pGdiVL8FpWcNzJsvcavPeh3E0J1o
+ OQa9AwarsIHpV8XsxS3pwtV3EKtaOUjA/umX/r/s3iOCpNk4RLJEUQts9ANht6ordXD3
+ KqocTxcCmKbfb+ai33na3s5sfypwerxV9U1wRLu2o3US5ra14I11KfzMg5zzT9vOaU+s
+ ab0g==
+X-Gm-Message-State: AFuF++mjQNwWghiEOg4E2Kh5HZWVF9fbP9Jl89fsW8d1d+a/3OiVrG4E
+ u++M+Vmf1/zZCA7SK4ujB3W2bmsvWapi/EOsoQrXduBpqPIcXb8IqZV4MKpn8BTJKnU4KvpUVL3
+ vb0vajUvhvpNJ
+X-Gm-Gg: AYBFou2w+P1uw9Amyq2LXt0uQG/2xiVnF2hUdKLEbf662bxvR/0+pFog0rXOntSlPNM
+ 0D7QmZwOEj3uaxyngGD31Ue/5vjJdq00Y5v9XGp6yjq/qhXQsnkN7PAZoBuDMd+dLmQDAstbLpr
+ QAdRSSu8oAwHEnCSta0/xkCvOvaXqzbKesRAutOjQoi7ug3bt+V0MHQYNIAJSNsLTDz0gFuSUGf
+ oZX78qKkzv2OTZqBlrd9nZ+PJ4Gq+CnSbV7UYVRdTyFHMi6f6uwlAXFJ9bmW62eAy41Ud1A+hei
+ m9sO3Jh5bhjtP/2/cEtjBR2egD+mEKkJBMzr22G4cdi2mrcJKsormTX6JhQrmlodNlEqvIAjQ+w
+ UbJIpljkcj/9xIDB0C2gXFxS/cox+KlBevY3iO+toYPU19zkdCuuw6cIangDGXsKwckUqRt5f7J
+ cE6WFBHZCiG/yLaykKedpykWhU0y79JxvV+P1RpFquDkzNwE/qT4iUGYc5HePkLBArSRF+DvWNj
+ SSP4SqIrBa3U+ATRaUKXjOMh5JJaFe3Qmy02wcd1ACcYXOBecxnJLtVvLbkZgxcclM5Frp6zK4x
+ cGCRNhaqenFTynR3ZG5v3/Mrbc2k1X0=
+X-Received: by 2002:a05:6808:318c:b0:48f:c907:7a40 with SMTP id
+ 5614622812f47-4b966ace384mr19085705b6e.11.1788971448576; 
+ Wed, 09 Sep 2026 09:30:48 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4b96babc2c3sm18379674b6e.0.2026.09.09.09.30.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Sep 2026 09:30:47 -0700 (PDT)
+Date: Wed, 9 Sep 2026 10:30:44 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.u-boot-project.org
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: List of unused Kconfig symbols
+Message-ID: <20260909163044.GH1764417@bill-the-cat>
 MIME-Version: 1.0
-References: <cover.1788879818.git.jan.kiszka@siemens.com>
- <598cd2523e3b2a8b7a613468747fe740b1f35fbd.1788879818.git.jan.kiszka@siemens.com>
- <CAC_iWjL9fOYDdyfHRh+LHAeAh_AjNA6tajAFsjb59V6PccLwPg@mail.gmail.com>
- <f78cecea-5651-44b8-a817-18c084001354@siemens.com>
- <CAC_iWjKsyfFQA+ASq4WQvQf1t2uKqsa0CTCdLvXP7MuuRuTYrw@mail.gmail.com>
- <7eacb72e-e147-4ca6-a704-25a7753f02fa@siemens.com>
- <b8a8ee0b-17e0-4353-a3c0-3baab12e95af@siemens.com>
- <a7544672-3379-4fad-9e39-033ca7a93918@siemens.com>
-In-Reply-To: <a7544672-3379-4fad-9e39-033ca7a93918@siemens.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 9 Sep 2026 19:23:01 +0300
-X-Gm-Features: AcwNN1UZ31C8uWK0crltEy-L2-TdUUFBdAxlNmnjFNrlmzp1xNuGSd9moWTuusQ
-Message-ID: <CAC_iWjK24kQg1Oahs+JArjZuiPALVEjQfykRCT4ZTCmZnUK9ug@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] mmc: Call back to optee after a successful mmc_init
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: U-Boot Mailing List <u-boot@lists.u-boot-project.org>, 
- Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
- Sai Sree Kartheek Adivi <s-adivi@ti.com>, 
- Alexander Heinisch <alexander.heinisch@siemens.com>, 
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="IZSCUnyivEiYeL49"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -203,106 +170,1333 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Wed, 9 Sept 2026 at 18:14, Jan Kiszka <jan.kiszka@siemens.com> wrote:
->
-> On 09.09.26 16:35, Jan Kiszka wrote:
-> > On 09.09.26 13:46, Jan Kiszka wrote:
-> >> On 09.09.26 12:04, Ilias Apalodimas wrote:
-> >>> On Wed, 9 Sept 2026 at 12:12, Jan Kiszka <jan.kiszka@siemens.com> wrote:
-> >>>>
-> >>>> On 09.09.26 09:50, Ilias Apalodimas wrote:
-> >>>>> Hi Jan
-> >>>>>
-> >>>>> [...]
-> >>>>>
-> >>>>>> --- a/drivers/mmc/mmc.c
-> >>>>>> +++ b/drivers/mmc/mmc.c
-> >>>>>> @@ -27,6 +27,7 @@
-> >>>>>>  #include <linux/list.h>
-> >>>>>>  #include <linux/printk.h>
-> >>>>>>  #include <div64.h>
-> >>>>>> +#include <tee/optee.h>
-> >>>>>>  #include "mmc_private.h"
-> >>>>>>
-> >>>>>>  #define DEFAULT_CMD6_TIMEOUT_MS  500
-> >>>>>> @@ -3168,6 +3169,9 @@ int mmc_init(struct mmc *mmc)
-> >>>>>>                                 mmc->cfg->name);
-> >>>>>>         }
-> >>>>>>
-> >>>>>> +       if (CONFIG_IS_ENABLED(OPTEE) && mmc->capacity_rpmb > 0)
-> >>>>>> +               optee_rpmb_available();
-> >>>>>
-> >>>>> With this we'll end up calling the optee bind methods again for
-> >>>>> discovered devices calling bind_service_list(). I haven't tested this
-> >>>>> locally yet, but is there any chance this ends up binding the devices
-> >>>>> that depend on an RPMB twice?
-> >>>>
-> >>>> I don't think we will have an issue here: Either OP-TEE isn't ready yet,
-> >>>> or RPMB wasn't yet when we called it first. So I do not see yet who
-> >>>> actual successful listing could be done twice.
-> >>>
-> >>> The question is what happens if OP-TEE & the RPMB is ready and you
-> >>> issue an mmc rescan. That will force optee_rpmb_available() to re-run
-> >>> and rediscover all the devices no?
-> >>
-> >> Hmm, let me check...
-> >>
-> >
-> > It's a problem. Is there a helper/service to check the binding state, or
-> > should we track that via a static flag in optee_rpmb_available?
-> >
->
-> Didn't find anything, would go with something like this:
 
+--IZSCUnyivEiYeL49
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I am not sure if I am correct here but looking at the call path
-optee_bind_services -> bind_service_list -> device_bind_driver_to_node
--> device_bind_with_driver_data.
-The latter sets DM_FLAG_BOUND. I don't know the DM code too well
-though to be 100% the flag is safe to use.
-There's also DM_FLAG_ACTIVATED
+Hey all,
 
-Cheers
-/Ilias
->
->
-> diff --git a/drivers/tee/optee/rpmb.c b/drivers/tee/optee/rpmb.c
-> index 7ae6045511b..bcad14a7251 100644
-> --- a/drivers/tee/optee/rpmb.c
-> +++ b/drivers/tee/optee/rpmb.c
-> @@ -194,9 +194,14 @@ void optee_suppl_rpmb_release(struct udevice *dev)
->
->  void optee_rpmb_available(void)
->  {
-> +       static bool rpmb_services_bound;
->         struct udevice *dev;
->         struct uclass *uc;
->         u32 tee_sess;
-> +       int ret;
-> +
-> +       if (rpmb_services_bound)
-> +               return;
->
->         uclass_id_foreach_dev(UCLASS_TEE, dev, uc) {
->                 if (strcmp(dev->driver->name, "optee") != 0 ||
-> @@ -206,8 +211,13 @@ void optee_rpmb_available(void)
->                 if (optee_open_enum_session(dev, &tee_sess) != 0)
->                         continue;
->
-> -               optee_bind_services(dev, tee_sess, PTA_CMD_GET_DEVICES_RPMB);
-> +               ret = optee_bind_services(dev, tee_sess, PTA_CMD_GET_DEVICES_RPMB);
->
->                 tee_close_session(dev, tee_sess);
-> +
-> +               if (!ret) {
-> +                       rpmb_services_bound = true;
-> +                       break;
-> +               }
->         }
->  }
->
-> Jan
->
-> --
-> Siemens AG, Foundational Technologies
-> Linux Expert Center
+On the most recent community call Heinrich noted that after removing the
+not really used partition table formats, we probably have other
+not-enabled code. The following is the un-audited list of symbols that
+are not enabled anywhere. It was generated by:
+$ ./tools/qconfig.py -b
+$ rg -g Kconfig '^config ' | grep -v /tests/ | grep -v /test/ | \
+	cut -d : -f 2 | cut -d ' ' -f 2 | sort -u > syms
+$ for SYM in `cat syms`;do=20
+	CHECK=3D`./tools/qconfig.py -f $SYM | wc -c`; [ "$CHECK" =3D=3D "11" ] && \
+		echo $SYM;
+done | tee unused-syms
+
+8xx_CONS_SMC2
+98DX4251
+ACR_APARK_DISABLE
+ACR_APARK_LAST
+ACR_PARKM_DMA_ESDHC_USB
+ACR_PARKM_E300
+ACR_PARKM_ENC_CORE
+ACR_PARKM_PEX
+ACR_PARKM_TSEC_1_2
+ACR_PIPE_DEP_1
+ACR_PIPE_DEP_2
+ACR_PIPE_DEP_UNSET
+ACR_RPTCNT_1
+ACR_RPTCNT_2
+ACR_RPTCNT_5
+ACR_RPTCNT_6
+ACR_RPTCNT_7
+ACR_RPTCNT_8
+ACR_RPTCNT_UNSET
+ALTERA_SPI
+ALTERA_UART
+AM335X_USB0_HOST
+AM335X_USB1_PERIPHERAL
+APALIS_T30_PCIE_EVALBOARD_INIT
+APALIS_TK1_PCIE_EVALBOARD_INIT
+APL_BOOT_FROM_FAST_SPI_FLASH
+APL_SPI_FLASH_BOOT
+ARC_DBG_IOC_ENABLE
+ARCH_B4420
+ARCH_B4860
+ARCH_BSC9131
+ARCH_BSC9132
+ARCH_C29X
+ARCH_IPQ40XX
+ARCH_MPC8313
+ARCH_MPC831X
+ARCH_MPC834X
+ARCH_MPC8536
+ARCH_MPC8540
+ARCH_MPC8560
+ARCH_P1011
+ARCH_P1021
+ARCH_P1023
+ARCH_P1024
+ARCH_P1025
+ARCH_P3041
+ARCH_P4080
+ARCH_P5040
+ARCH_S5P6818
+ARC_MMU_V2
+ARC_SERIAL
+ARM_ERRATA_801819
+ARM_ERRATA_833069
+ARM_ERRATA_852421
+ARM_ERRATA_852423
+ARM_ERRATA_855873
+ARMV7_PSCI_0_2
+ARMV8_SEC_FIRMWARE_ERET_ADDR_REVERT
+ASAN
+ASPEED_ACRY
+ASPEED_BYPASS_SELFTEST
+ASPEED_CPTRA_ECDSA
+ASPEED_CPTRA_SHA
+ASPEED_DDR_1600
+ASPEED_DDR_2400
+ASPEED_DDR4_1333
+ASPEED_DDR4_400
+ASPEED_DDR4_800
+ASPEED_DDR4_DUALX8
+ASPEED_ECC
+ASPEED_ECC_SIZE
+ASPEED_HACE
+ASPEED_SGPIO
+AT91SAM9G10EK
+AT91SAM9G20EK
+AT91_USB_CLK
+AUTOBOOT_MENUKEY
+AUTOBOOT_USE_MENUKEY
+AVB_ROOT_KEY_BOARD
+AVB_ROOT_KEY_TEE
+AVB_ROOT_KEY_TEE_NAME
+AXP318W_POWER
+AXP_ALDO3_VOLT_SLOPE_16
+AXP_DISABLE_BOOT_ON_POWERON
+B2_SAMPLE
+BAT0_ACCESS_NONE
+BAT0_ACCESS_RO
+BAT0_LENGTH_128_KBYTES
+BAT0_LENGTH_16_MBYTES
+BAT0_LENGTH_1_MBYTES
+BAT0_LENGTH_256_KBYTES
+BAT0_LENGTH_2_MBYTES
+BAT0_LENGTH_32_MBYTES
+BAT0_LENGTH_4_MBYTES
+BAT0_LENGTH_512_KBYTES
+BAT0_LENGTH_8_MBYTES
+BAT1_ACCESS_NONE
+BAT1_ACCESS_RO
+BAT1_DCACHE_WRITETHROUGH
+BAT1_LENGTH_128_KBYTES
+BAT1_LENGTH_128_MBYTES
+BAT1_LENGTH_16_MBYTES
+BAT1_LENGTH_1_MBYTES
+BAT1_LENGTH_256_KBYTES
+BAT1_LENGTH_2_MBYTES
+BAT1_LENGTH_32_MBYTES
+BAT1_LENGTH_512_KBYTES
+BAT1_LENGTH_64_MBYTES
+BAT2_ACCESS_NONE
+BAT2_ACCESS_RO
+BAT2_DCACHE_MEMORYCOHERENCE
+BAT2_DCACHE_WRITETHROUGH
+BAT2_LENGTH_128_KBYTES
+BAT2_LENGTH_16_MBYTES
+BAT2_LENGTH_1_MBYTES
+BAT2_LENGTH_256_KBYTES
+BAT2_LENGTH_2_MBYTES
+BAT2_LENGTH_32_MBYTES
+BAT2_LENGTH_4_MBYTES
+BAT2_LENGTH_512_KBYTES
+BAT2_LENGTH_64_MBYTES
+BAT3_ACCESS_NONE
+BAT3_ACCESS_RO
+BAT3_DCACHE_MEMORYCOHERENCE
+BAT3_LENGTH_128_MBYTES
+BAT3_LENGTH_16_MBYTES
+BAT3_LENGTH_1_MBYTES
+BAT3_LENGTH_256_KBYTES
+BAT3_LENGTH_2_MBYTES
+BAT3_LENGTH_32_MBYTES
+BAT3_LENGTH_4_MBYTES
+BAT3_LENGTH_512_KBYTES
+BAT3_LENGTH_64_MBYTES
+BAT3_LENGTH_8_MBYTES
+BAT4_ACCESS_NONE
+BAT4_ACCESS_RO
+BAT4_DCACHE_MEMORYCOHERENCE
+BAT4_ICACHE_INHIBITED
+BAT4_LENGTH_128_MBYTES
+BAT4_LENGTH_16_MBYTES
+BAT4_LENGTH_1_MBYTES
+BAT4_LENGTH_256_KBYTES
+BAT4_LENGTH_256_MBYTES
+BAT4_LENGTH_2_MBYTES
+BAT4_LENGTH_4_MBYTES
+BAT4_LENGTH_512_KBYTES
+BAT4_LENGTH_8_MBYTES
+BAT5_ACCESS_NONE
+BAT5_ACCESS_RO
+BAT5_DCACHE_MEMORYCOHERENCE
+BAT5_ICACHE_INHIBITED
+BAT5_LENGTH_128_MBYTES
+BAT5_LENGTH_16_MBYTES
+BAT5_LENGTH_1_MBYTES
+BAT5_LENGTH_256_KBYTES
+BAT5_LENGTH_2_MBYTES
+BAT5_LENGTH_32_MBYTES
+BAT5_LENGTH_4_MBYTES
+BAT5_LENGTH_512_KBYTES
+BAT5_LENGTH_8_MBYTES
+BAT6_ACCESS_NONE
+BAT6_ACCESS_RO
+BAT6_DCACHE_WRITETHROUGH
+BAT6_ICACHE_INHIBITED
+BAT6_LENGTH_128_KBYTES
+BAT6_LENGTH_128_MBYTES
+BAT6_LENGTH_16_MBYTES
+BAT6_LENGTH_1_MBYTES
+BAT6_LENGTH_256_KBYTES
+BAT6_LENGTH_2_MBYTES
+BAT6_LENGTH_32_MBYTES
+BAT6_LENGTH_512_KBYTES
+BAT6_LENGTH_64_MBYTES
+BAT6_LENGTH_8_MBYTES
+BAT7_ACCESS_NONE
+BAT7_ACCESS_RO
+BAT7_DCACHE_MEMORYCOHERENCE
+BAT7_DCACHE_WRITETHROUGH
+BAT7_ICACHE_MEMORYCOHERENCE
+BAT7_LENGTH_128_MBYTES
+BAT7_LENGTH_16_MBYTES
+BAT7_LENGTH_1_MBYTES
+BAT7_LENGTH_256_KBYTES
+BAT7_LENGTH_2_MBYTES
+BAT7_LENGTH_32_MBYTES
+BAT7_LENGTH_4_MBYTES
+BAT7_LENGTH_512_KBYTES
+BAT7_LENGTH_64_MBYTES
+BAT7_LENGTH_8_MBYTES
+BCMBCA_HSSPI
+BCM_SR_PCIE_PHY
+BNXT_ETH
+BOARD_INTENO_XG6846
+BOARD_ROMSIZE_KB_4096
+BOARD_ROMSIZE_KB_512
+BOOTCOUNT_AT91
+BOOTCOUNT_FS
+BOOTMETH_VBE_ABREC
+BOOTP_RANDOM_XID
+BOOTP_TIMEOFFSET
+BOOT_ROM_INTERFACE_DDR_SDRAM
+BOOT_ROM_INTERFACE_GPCM_32BIT
+BOOT_ROM_INTERFACE_GPCM_8BIT
+BOOT_ROM_INTERFACE_NAND_FLASH_8BIT_LARGE
+BOOT_ROM_INTERFACE_NAND_FLASH_8BIT_SMALL
+BOOT_ROM_INTERFACE_ON_CHIP_BOOT_ROM
+BOOT_ROM_INTERFACE_PCI1
+BOOT_SEQUENCER_EXTENDED_I2C
+BOOT_SEQUENCER_NORMAL_I2C
+BROKEN
+B_SAMPLE
+C2_SAMPLE
+C3_SAMPLE
+CADENCE_XSPI
+CC_COVERAGE
+CC_IS_CLANG
+CC_OPTIMIZE_FOR_DEBUG
+CC_OPTIMIZE_FOR_SPEED
+CHROMEOS_VBOOT
+CLEARFOG_CON2_SATA
+CLEARFOG_CON3_SATA
+CLEARFOG_GTR_SERDES0_SATA
+CLEARFOG_SFP_25GB
+CLK_K3
+CLK_K3_PLL
+CLK_MESON_MSR
+CLK_QCOM_IPQ4019
+CLK_VEXPRESS_OSC
+CLK_XLNX_CLKWZRD
+CMD_BSP
+CMD_C5_PL330_DMA
+CMD_CONITRACE
+CMD_ELF_FDT_SETUP
+CMD_FASTBOOT_ABORT_KEYED
+CMD_FPGAD
+CMD_FUSE_WRITEBUFF
+CMD_HISTORY
+CMD_HISTORY_USE_CALLOC
+CMD_HVC
+CMD_KGDB
+CMDLINE_FLUSH_STDIN
+CMD_MTD_MARKBAD
+CMD_MTD_NAND_READ_TEST
+CMD_MTD_NAND_WRITE_TEST
+CMD_MTD_OTP
+CMD_MVEBU_COMPHY_RX_TRAINING
+CMD_NAND_WATCH
+CMD_NVEDIT_INDIRECT
+CMD_PART_DUPCHECK
+CMD_PD
+CMD_PRIBLOB
+CMD_READ_EDID
+CMD_SM3SUM
+CMD_TERMINAL
+CMD_TRACE
+CMD_UBI_RENAME
+CMD_WOL
+CMD_ZFS
+CMO_BY_VA_ONLY
+COMPILE_TEST
+CONSOLE_FLUSH_ON_NEWLINE
+CONSOLE_TRUETYPE_DEJAVU
+CONSOLE_TRUETYPE_RUFSCRIPT
+CONS_SCIF1
+CONS_SCIF2
+CONS_SCIF4
+CONS_SCIFA0
+CORE_DISABLE_MODE_ON
+CORE_PLL_BYPASS
+CORE_PLL_RATIO_1_1
+CORE_PLL_RATIO_15_1
+CORE_PLL_VCO_DIVIDER_4
+CORE_PLL_VCO_DIVIDER_8
+CORTINA_SFLASH
+CPU_ARC750D
+CPU_ARCHS36
+CPU_FREQ_480MHZ
+CPU_FREQ_500MHZ
+CPU_FREQ_520MHZ
+CPU_FREQ_540MHZ
+CPU_FREQ_560MHZ
+CPU_FREQ_600MHZ
+CPU_FREQ_620MHZ
+CPU_MICROBLAZE
+CPU_MIPS64_R1
+C_SAMPLE
+DDR_ECC_CMD
+DDRMC_VF610_CALIBRATION
+DDRTYPE_MT41J128M16HA
+DDRTYPE_MT41K128M16JT
+DDRTYPE_MT41K256M16
+DEBUG_ARC_SERIAL
+DEBUG_UART_ALTERA_JTAGUART
+DEBUG_UART_ALTERA_UART
+DEBUG_UART_APBUART
+DEBUG_UART_BCM6345
+DEBUG_UART_ESP32
+DEBUG_UART_GOLDFISH
+DEBUG_UART_NS16550_CHECK_ENABLED
+DEBUG_UART_OMAP
+DEBUG_UART_PIC32
+DEBUG_UART_SEMIHOSTING
+DEBUG_UART_SIFIVE
+DEBUG_UART_STM32
+DEBUG_UART_UARTLITE
+DEBUG_UART_UNIPHIER
+DEBUG_UART_XTENSA_SEMIHOSTING
+DEPRECATED
+DFU_NAND_TRIMFFS
+DISPLAY_ROCKCHIP_LVDS
+DM_BOOTCOUNT_I2C
+DM_BOOTCOUNT_ZYNQMP
+DM_DEBUG
+DM_MOD_EXP
+DM_PMIC_PF9453
+DM_REGULATOR_MPQ8785
+DM_REGULATOR_MT6358
+DM_REGULATOR_PF9453
+DM_REGULATOR_QCOM_USB_VBUS
+DM_REGULATOR_TPS6287X
+DM_THERMAL_JC42
+DRA7_DSPEVE_OPP_HIGH
+DRA7_DSPEVE_OPP_OD
+DRA7_GPU_OPP_HIGH
+DRA7_GPU_OPP_OD
+DRA7_IVA_OPP_HIGH
+DRA7_IVA_OPP_OD
+DRAM_16BIT_RANK
+DRAM_1T_MODE
+DRAM_2T_MODE
+DRAM_DDR3
+DRAM_DDR4
+DRAM_DQS_CORR
+DRAM_ONE_RANK
+DRAM_SIZE
+DRAM_TIMINGS_DDR3_1066F_1333H
+DRAM_TWO_DIFF_RANKS
+DRAM_TWO_IDENTICAL_RANKS
+DSP_CLUSTER_START
+DWC_ETH_QOS_INTEL
+E1000_SPI_GENERIC
+EFI_CONSOLE_DISABLE_ANSI
+EFI_TCG2_PROTOCOL_MEASURE_DTB
+EFI_VARIABLE_SF_DEVICE_INDEX
+EFI_VARIABLE_SF_OFFSET
+EFI_VARIABLE_SF_STORE
+EFI_VARIABLES_PRESEED
+EFI_VAR_SEED_FILE
+ELBC_BR_OR_NAND_PRELIM_0
+ELBC_BR_OR_NAND_PRELIM_1
+ELBC_BR_OR_NAND_PRELIM_2
+ELBC_BR_OR_NAND_PRELIM_3
+ELBC_BR_OR_NAND_PRELIM_4
+EMMC_BOOT
+EMMC_MODE
+ENABLE_VMX
+ENV_IS_IN_EEPROM
+ENV_MMC_SW_PARTITION
+ENV_MMC_USE_SW_PARTITION
+ENV_OFFSET_REDUND_RELATIVE_END
+ENV_OFFSET_RELATIVE_END
+ENV_UBI_VOLUME_CREATE
+ENV_UBI_VOLUME_STATIC
+ESP32_SERIAL
+ESSEDMA
+EXAMPLES
+EXTCON_SANDBOX
+EXTENDED_FEATURES
+EXYNOS_MIPI_DSIM
+FASTBOOT_CMD_OEM_CONSOLE
+FASTBOOT_FLASH_BLOCK
+FASTBOOT_FLASH_BLOCK_DEVICE_ID
+FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
+FASTBOOT_FLASH_NAND_TRIMFFS
+FASTBOOT_FLASH_SPI
+FASTBOOT_OEM_BOARD
+FASTBOOT_OEM_RUN
+FEC2_PHY_NORXERR
+FLASH_CFI_LEGACY
+FRAMEBUFFER_VESA_MODE_100
+FRAMEBUFFER_VESA_MODE_101
+FRAMEBUFFER_VESA_MODE_102
+FRAMEBUFFER_VESA_MODE_103
+FRAMEBUFFER_VESA_MODE_104
+FRAMEBUFFER_VESA_MODE_105
+FRAMEBUFFER_VESA_MODE_106
+FRAMEBUFFER_VESA_MODE_107
+FRAMEBUFFER_VESA_MODE_108
+FRAMEBUFFER_VESA_MODE_109
+FRAMEBUFFER_VESA_MODE_10A
+FRAMEBUFFER_VESA_MODE_10B
+FRAMEBUFFER_VESA_MODE_10C
+FRAMEBUFFER_VESA_MODE_10D
+FRAMEBUFFER_VESA_MODE_10E
+FRAMEBUFFER_VESA_MODE_10F
+FRAMEBUFFER_VESA_MODE_110
+FRAMEBUFFER_VESA_MODE_111
+FRAMEBUFFER_VESA_MODE_112
+FRAMEBUFFER_VESA_MODE_113
+FRAMEBUFFER_VESA_MODE_115
+FRAMEBUFFER_VESA_MODE_116
+FRAMEBUFFER_VESA_MODE_117
+FRAMEBUFFER_VESA_MODE_119
+FRAMEBUFFER_VESA_MODE_USER
+FRAMEPOINTER
+FRU_SC
+FS_EROFS_ZIP_DEFLATE
+FSL_DDR_SYNC_REFRESH
+FSL_DMA
+FSL_ESDHC_33V_IO_RELIABILITY_WORKAROUND
+FSL_ESDHC_VS33_NOT_SUPPORT
+FSL_MFGPROT
+FSL_NGPIXIS
+FUZZ
+GDSYS_LEGACY_DRIVERS
+GENERATE_SFI_TABLE
+GPIO_SCMI
+GXP_ECC
+GXP_VROM_32MB
+H5TQ2G63DFR
+H5TQ4G63AFR
+HASH_ASPEED
+HASH_CRC8
+HASH_SOFTWARE
+HAS_LDR
+HAS_NAND_SMALL_BADBLOCK_POS
+HAS_TEE_IN_BUILD_ENV
+HETROGENOUS_CLUSTERS
+HID0_FINAL_ABE
+HID0_FINAL_CLKOUT_BUS
+HID0_FINAL_CLKOUT_CORE
+HID0_FINAL_CLKOUT_CORE_HALF
+HID0_FINAL_DCE
+HID0_FINAL_DCFI
+HID0_FINAL_DECAREN
+HID0_FINAL_DLOCK
+HID0_FINAL_DOZE
+HID0_FINAL_EBA
+HID0_FINAL_EBD
+HID0_FINAL_ECPE
+HID0_FINAL_FBIOB
+HID0_FINAL_ICFI
+HID0_FINAL_IFEM
+HID0_FINAL_ILOCK
+HID0_FINAL_NAP
+HID0_FINAL_NOOPTI
+HID0_FINAL_PAR
+HID0_FINAL_SLEEP
+HID0_INIT_ABE
+HID0_INIT_CLKOUT_BUS
+HID0_INIT_CLKOUT_CORE
+HID0_INIT_CLKOUT_CORE_HALF
+HID0_INIT_DCE
+HID0_INIT_DCFI
+HID0_INIT_DECAREN
+HID0_INIT_DLOCK
+HID0_INIT_DOZE
+HID0_INIT_DPM
+HID0_INIT_EBA
+HID0_INIT_EBD
+HID0_INIT_ECPE
+HID0_INIT_EMCP
+HID0_INIT_FBIOB
+HID0_INIT_ICE
+HID0_INIT_ICFI
+HID0_INIT_IFEM
+HID0_INIT_ILOCK
+HID0_INIT_NAP
+HID0_INIT_NOOPTI
+HID0_INIT_PAR
+HID0_INIT_SLEEP
+HID2_DWLCK_0
+HID2_DWLCK_1
+HID2_DWLCK_2
+HID2_DWLCK_3
+HID2_DWLCK_4
+HID2_DWLCK_5
+HID2_DWLCK_6
+HID2_EBQS
+HID2_ELRW
+HID2_ICWP
+HID2_IFEC
+HID2_IWLCK_0
+HID2_IWLCK_1
+HID2_IWLCK_2
+HID2_IWLCK_3
+HID2_IWLCK_4
+HID2_IWLCK_5
+HID2_IWLCK_6
+HID2_LET
+HID2_MESISTATE
+HID2_NOKS
+HIFEMAC_ETH
+HIFEMAC_MDIO
+HOST_32BIT
+IMX8M_LPDDR4_FREQ0_2400MTS
+IMX8MN_FORCE_NOM_SOC
+IMX8MN_LOW_DRIVE_MODE
+IMX8MP_MEDIAMIX_BLKCTRL
+IMX8M_VDD_SOC_850MV
+IMX8ULP_DRAM_PHY_PLL_BYPASS
+IMX8ULP_LD_MODE
+IMX8ULP_ND_MODE
+IMX_LCDIF
+IMX_LDB
+IMX_OPTEE_DEK_ENCAP
+IMX_SNVS_SEC_SC_AUTO
+INIT_STACK_WITHOUT_MALLOC_F
+IOT2050_EMBED_OTPCMD
+IPROC
+IPROC_GPIO
+IPROC_QSPI
+JFFS2_LZO
+JTAG_MODE
+K3_BIST
+K3_FUSE
+K3_INLINE_ECC
+K3_OPP_LOW
+K3_SYSFW_IMAGE_MMCSD_RAW_MODE_PART
+LBLAW0_LENGTH_128_KBYTES
+LBLAW0_LENGTH_128_MBYTES
+LBLAW0_LENGTH_16_KBYTES
+LBLAW0_LENGTH_16_MBYTES
+LBLAW0_LENGTH_1_GBYTES
+LBLAW0_LENGTH_1_MBYTES
+LBLAW0_LENGTH_256_KBYTES
+LBLAW0_LENGTH_2_GBYTES
+LBLAW0_LENGTH_2_MBYTES
+LBLAW0_LENGTH_32_KBYTES
+LBLAW0_LENGTH_32_MBYTES
+LBLAW0_LENGTH_4_KBYTES
+LBLAW0_LENGTH_4_MBYTES
+LBLAW0_LENGTH_512_KBYTES
+LBLAW0_LENGTH_512_MBYTES
+LBLAW0_LENGTH_64_KBYTES
+LBLAW0_LENGTH_8_KBYTES
+LBLAW1_LENGTH_128_KBYTES
+LBLAW1_LENGTH_16_KBYTES
+LBLAW1_LENGTH_16_MBYTES
+LBLAW1_LENGTH_1_GBYTES
+LBLAW1_LENGTH_256_KBYTES
+LBLAW1_LENGTH_256_MBYTES
+LBLAW1_LENGTH_2_GBYTES
+LBLAW1_LENGTH_2_MBYTES
+LBLAW1_LENGTH_32_MBYTES
+LBLAW1_LENGTH_4_MBYTES
+LBLAW1_LENGTH_512_KBYTES
+LBLAW1_LENGTH_512_MBYTES
+LBLAW1_LENGTH_64_KBYTES
+LBLAW1_LENGTH_64_MBYTES
+LBLAW1_LENGTH_8_KBYTES
+LBLAW1_LENGTH_8_MBYTES
+LBLAW2_LENGTH_128_MBYTES
+LBLAW2_LENGTH_16_KBYTES
+LBLAW2_LENGTH_16_MBYTES
+LBLAW2_LENGTH_1_GBYTES
+LBLAW2_LENGTH_256_KBYTES
+LBLAW2_LENGTH_2_GBYTES
+LBLAW2_LENGTH_2_MBYTES
+LBLAW2_LENGTH_32_KBYTES
+LBLAW2_LENGTH_32_MBYTES
+LBLAW2_LENGTH_4_KBYTES
+LBLAW2_LENGTH_4_MBYTES
+LBLAW2_LENGTH_512_KBYTES
+LBLAW2_LENGTH_512_MBYTES
+LBLAW2_LENGTH_64_KBYTES
+LBLAW2_LENGTH_8_KBYTES
+LBLAW2_LENGTH_8_MBYTES
+LBLAW3_LENGTH_128_KBYTES
+LBLAW3_LENGTH_128_MBYTES
+LBLAW3_LENGTH_16_KBYTES
+LBLAW3_LENGTH_16_MBYTES
+LBLAW3_LENGTH_1_GBYTES
+LBLAW3_LENGTH_1_MBYTES
+LBLAW3_LENGTH_256_KBYTES
+LBLAW3_LENGTH_2_GBYTES
+LBLAW3_LENGTH_2_MBYTES
+LBLAW3_LENGTH_32_KBYTES
+LBLAW3_LENGTH_32_MBYTES
+LBLAW3_LENGTH_4_KBYTES
+LBLAW3_LENGTH_4_MBYTES
+LBLAW3_LENGTH_512_KBYTES
+LBLAW3_LENGTH_64_KBYTES
+LBLAW3_LENGTH_8_KBYTES
+LBLAW3_LENGTH_8_MBYTES
+LBMC_CLOCK_MODE_1_2
+LDP_PIN_MUX_STATE_1
+LED_ACTIVITY
+LED_BCM6753
+LED_BCM6858
+LED_CORTINA
+LED_LP5562
+LED_SW_BLINK
+LITEETH
+LOG_ERROR_RETURN
+LOGF_FILE
+LOG_SYSLOG
+LPDDR2
+LS2_SFP
+LWIP_ASSERT
+LWIP_DEBUG
+LWIP_DEBUG_RXTX
+M5271
+M68K_QEMU
+MACB_ZYNQ
+MAX_DSP_CPUS
+MBEDTLS_LIB_HASHING_ALT
+MDIO_GPIO_BITBANG
+MDIO_IPQ4019
+MDIO_MSCC_MIIM
+MDIO_MUX_MMIOREG
+MEASURE_IGNORE_LOG
+MEMORY
+MESON_AXG_MIPI_DPHY
+MESON_AXG_MIPI_PCIE_ANALOG_PHY
+MESON_SECURE_POWER_DOMAIN
+MICROCHIP_COREQSPI
+MIPS_TUNE_14KC
+MIPS_TUNE_34KC
+MMC_TRACE
+MPC83XX_SPISEL_BOOT
+MT29PZZZ4D4BKESK
+MT41K128M16JT
+MT42L256M32D2LG
+MT7621_DRAM_DDR2_1024M_W971GG6KB18_1066MHZ
+MT7621_DRAM_DDR2_1024M_W971GG6KB25_800MHZ
+MT7621_DRAM_DDR2_512M
+MT7621_DRAM_DDR2_512M_W9751G6KB_A02_1066MHZ
+MT7621_DRAM_DDR3_1024M
+MT7621_DRAM_DDR3_1024M_KGD
+MT7621_DRAM_DDR3_4096M
+MT7621_DRAM_FREQ_1066
+MT7621_DRAM_FREQ_400
+MT7621_DRAM_FREQ_800
+MT8366_POWER_DOMAIN
+MTD_UBI_BLOCK
+MTK_AHCI
+MTK_NET_PHYLIB
+MTK_SNFI_SPI
+MVEBU_EFUSE_FAKE
+MVEBU_SPL_BOOT_DEVICE_PEX
+MVEBU_SPL_BOOT_DEVICE_UART
+MX6D
+MXS_AUART_SERIAL
+MXS_OCOTP
+NAND_LBLAWBAR_PRELIM_0
+NAND_LBLAWBAR_PRELIM_1
+NAND_LBLAWBAR_PRELIM_2
+NAND_LBLAWBAR_PRELIM_3
+NAND_MESON
+NAND_MODE
+NAND_MXS_USE_MINIMUM_ECC
+NAND_OMAP_ECCSCHEME_HAM1_CODE_SW
+NEVER_ASSERT_ODT_TO_CPU
+NEW_EXCEPTION_VECTOR_BASE
+NOBQFMAN
+NOR
+NOR_BOOT
+NULLDEV_SERIAL
+NXP_TDA19988
+OCTEON_CN70XX
+OCTEON_CN78XX
+OF_SERIAL_BAUD
+OMAP_WATCHDOG
+OVERRIDE_EXCEPTION_VECTOR_BASE
+PCI_CLOCK_OUTPUT_DRIVE_ENABLE
+PCIE_CADENCE_EP
+PCIE_DW_QCOM
+PCIE_IPROC
+PCIE_MEDIATEK_GEN3
+PCIE_UNIPHIER
+PCIEX_LENGTH_128MB
+PCIEX_LENGTH_64MB
+PCI_IOMMU_EXTRA_MAPPINGS
+PHY_AIROHA_EN8811
+PHY_AQUANTIA_FW_MAX_SIZE
+PHY_AQUANTIA_UPLOAD_FW
+PHYCORE_AM62X_RAM_SIZE_1GB
+PHYCORE_AM62X_RAM_SIZE_2GB
+PHYCORE_AM62X_RAM_SIZE_4GB
+PHYCORE_AM62X_RAM_SIZE_FIX
+PHYCORE_AM64X_RAM_SIZE_1GB
+PHYCORE_AM64X_RAM_SIZE_2GB
+PHYCORE_AM64X_RAM_SIZE_FIX
+PHYCORE_IMX8MM_RAM_SIZE_1GB
+PHYCORE_IMX8MM_RAM_SIZE_2GB
+PHYCORE_IMX8MM_RAM_SIZE_4GB
+PHYCORE_IMX8MM_RAM_SIZE_FIX
+PHYCORE_IMX8MM_RAM_STATIC_SOM_REV
+PHYCORE_IMX8MM_USE_SOM_REV_6
+PHYCORE_IMX8MM_USE_SOM_REV_7
+PHYCORE_IMX8MP_RAM_FREQ_FIX
+PHYCORE_IMX8MP_RAM_SIZE_1GB
+PHYCORE_IMX8MP_RAM_SIZE_2GB
+PHYCORE_IMX8MP_RAM_SIZE_4GB
+PHYCORE_IMX8MP_RAM_SIZE_8GB
+PHYCORE_IMX8MP_RAM_SIZE_FIX
+PHYCORE_IMX8MP_USE_1_5GHZ_RAM_TIMINGS
+PHYCORE_IMX8MP_USE_2GHZ_RAM_TIMINGS
+PHYCORE_IMX91_93_RAM_TYPE_FIX
+PHYCORE_IMX91_93_RAM_TYPE_LPDDR4_1GB
+PHYCORE_IMX91_93_RAM_TYPE_LPDDR4X_1GB
+PHYCORE_IMX91_93_RAM_TYPE_LPDDR4X_2GB
+PHY_ET1011C
+PHY_MEDIATEK_2P5GE
+PHY_MICREL_KSZ9021
+PHY_MICREL_KSZ9031
+PHY_MTK_HDMI
+PHY_NORXERR
+PHY_NXP_C45_TJA11XX
+PHY_QCOM_IPQ4019_USB
+PHY_QCOM_QMP_PCIE
+PHY_UNIPHIER_PCIE
+PIC32_SPI
+PINCTRL_AIROHA_AN7583
+PINCTRL_PFC_FULL
+PINCTRL_QCA953X
+PINCTRL_QCOM_SC7180
+PINCTRL_SCMI
+PINCTRL_SX150X
+PL022_SPI
+POWER_FSL_MC34704
+POWER_MT6323
+POWER_PCA9450
+PPC_CLUSTER_START
+PWM_ASPEED
+PWM_AT91
+PWM_NX
+QSPI_MODE_24BIT
+QSPI_MODE_32BIT
+QUICC_DIV_FACTOR_2
+QUICC_MULT_FACTOR_10
+QUICC_MULT_FACTOR_11
+QUICC_MULT_FACTOR_12
+QUICC_MULT_FACTOR_13
+QUICC_MULT_FACTOR_14
+QUICC_MULT_FACTOR_15
+QUICC_MULT_FACTOR_16
+QUICC_MULT_FACTOR_17
+QUICC_MULT_FACTOR_18
+QUICC_MULT_FACTOR_19
+QUICC_MULT_FACTOR_2
+QUICC_MULT_FACTOR_20
+QUICC_MULT_FACTOR_21
+QUICC_MULT_FACTOR_22
+QUICC_MULT_FACTOR_23
+QUICC_MULT_FACTOR_24
+QUICC_MULT_FACTOR_25
+QUICC_MULT_FACTOR_26
+QUICC_MULT_FACTOR_27
+QUICC_MULT_FACTOR_28
+QUICC_MULT_FACTOR_29
+QUICC_MULT_FACTOR_30
+QUICC_MULT_FACTOR_31
+QUICC_MULT_FACTOR_4
+QUICC_MULT_FACTOR_5
+QUICC_MULT_FACTOR_7
+QUICC_MULT_FACTOR_8
+QUICC_MULT_FACTOR_9
+QUICC_VCO_DIVIDER_4
+RAM_ROCKCHIP_LPDDR2
+RAM_ROCKCHIP_LPDDR3
+REBOOT_MODE_NVMEM
+REGULATOR_RZG2L_USBPHY
+REMOTEPROC_TI_IPU
+RESERVE_ALLWINNER_BOOT0_HEADER
+RESET_DRA7
+RESET_RZG2L_USBPHY_CTRL
+RETRY_BOOTCMD
+REVISION_TAG
+RISCV_ISA_ZBB
+RISCV_ISA_ZICBOM
+ROCKCHIP_FAST_SPL
+ROCKCHIP_MASKROM_IMAGE
+ROCKCHIP_NAND
+ROCKCHIP_NAND_SKIP_BBTSCAN
+ROCKCHIP_RK3506
+ROCKCHIP_USB_UART
+RSA_ASPEED_EXP
+RTC_DAVINCI
+RTC_DS1337_NOOSC
+RTC_DS1672
+RTC_PCF85063
+RTC_RV3029
+RTC_RV3032
+RTC_SNVS
+RTL8211F_PHY_FORCE_EEE_RXC_ON
+RUN_LED_GREEN
+RUN_LED_OFF
+S3_VGA_ROM_RUN
+SANDBOX_CRASH_RESET
+SANDBOX_MEMORY
+SATA_BOOT
+SBI_IPI
+SBI_V01
+SCMI_ID_VENDOR_81
+SD1_LSHFT_MODE
+SD_MODE
+SD_MODE1
+SECONDARY_DDR_IO_ENABLE
+SECURED_MODE_CSK_INDEX
+SECURED_MODE_IMAGE
+SEMIHOSTING_SERIAL
+SERIAL_CONSOLE_UART2
+SERVERIP_FROM_PROXYDHCP
+SHA512_HW_ACCEL
+SH_GPIO_PFC
+SH_I2C_8BIT
+SH_I2C_CLOCK
+SH_I2C_DATA_HIGH
+SH_I2C_DATA_LOW
+SILENT_CONSOLE_UNTIL_ENV
+SKIP_EARLY_DM
+SL28_BL31_ENTRY_ADDR
+SL28_BL32_ENTRY_ADDR
+SL28_ENABLE_SER0_CONSOLE
+SL28_SPL_LOADS_ATF_BL31
+SL28_SPL_LOADS_OPTEE_BL32
+SM3SUM_VERIFY
+SOCFPGA_SECURE_VAB_AUTH_ALLOW_NON_FIT_IMAGE
+SOFTWARE_WATCHDOG_ENABLED
+SPI_FLASH_DOSILICON
+SPI_FRAM_FUJITSU
+SPI_MXIC
+SPI_NOR_BOOT_SOFT_RESET_EXT_INVERT
+SPI_QUP
+SPI_SN_F_OSPI
+SPL_ACPI_GPE
+SPL_ADP5585_GPIO
+SPL_AHCI_PCI
+SPL_AM33XX_MMCSD_MULTIPLE
+SPL_ARCH_VERY_EARLY_INIT
+SPL_ARMV8_SEC_FIRMWARE_SUPPORT
+SPL_ASN1_DECODER
+SPL_ASN1_DECODER_LEGACY
+SPL_ASN1_DECODER_MBEDTLS
+SPL_ASYMMETRIC_KEY_TYPE
+SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
+SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+SPL_ATF_LOAD_IMAGE_V2
+SPL_BIOSEMU
+SPL_BLK_FS
+SPL_BLOBLIST_ALLOC
+SPL_BMP_16BPP
+SPL_BOOTI
+SPL_BOOTMETH_VBE_ABREC
+SPL_BOOTMETH_VBE_ABREC_FW
+SPL_BOOTMETH_VBE_REQUEST
+SPL_BZIP2
+SPL_CLK_GPIO
+SPL_CLK_IMX8MQ
+SPL_CMT
+SPL_CROS_EC
+SPL_CROS_EC_KEYB
+SPL_CROS_EC_LPC
+SPL_CROS_EC_SANDBOX
+SPL_DM_KEYBOARD
+SPL_DM_PMIC_DA9063
+SPL_DM_PMIC_FAN53555
+SPL_DM_PMIC_PF9453
+SPL_DM_REGULATOR_DA9063
+SPL_DM_REGULATOR_FAN53555
+SPL_DM_REGULATOR_LP873X
+SPL_DM_REGULATOR_LP87565
+SPL_DM_REGULATOR_PALMAS
+SPL_DM_REGULATOR_PF9453
+SPL_DM_REGULATOR_PFUZE100
+SPL_DM_RNG
+SPL_DM_STATS
+SPL_DM_WARN
+SPL_ECDSA_VERIFY
+SPL_ENV_IS_IN_EXT4
+SPL_EVENT_DYNAMIC
+SPL_FAT_WRITE
+SPL_FPGA_LOAD_SECURE
+SPL_FRAMEPOINTER
+SPL_FSL_CAAM_RNG
+SPL_FS_SQUASHFS
+SPL_HKDF_MBEDTLS
+SPL_IMAGE_PRE_LOAD
+SPL_IMAGE_PRE_LOAD_SIG
+SPL_IMAGE_TYPE_SUNXI_TOC0
+SPL_INPUT
+SPL_ISO_PARTITION
+SPL_LIB_BOOTI
+SPL_LIB_BOOTM
+SPL_LMB_ARCH_MEM_MAP
+SPL_LZ4
+SPL_MBEDTLS_LIB
+SPL_MBEDTLS_LIB_CRYPTO
+SPL_MBEDTLS_LIB_HASHING_ALT
+SPL_MBEDTLS_LIB_TLS
+SPL_MBEDTLS_LIB_X509
+SPL_MD5
+SPL_MD5_LEGACY
+SPL_MD5_MBEDTLS
+SPL_MEMORY
+SPL_MESON_GX_VCCK_1000MV
+SPL_MESON_GX_VCCK_1100MV
+SPL_MESON_GX_VCCK_1120MV
+SPL_MESON_GX_VDDEE_1000MV
+SPL_MESON_GX_VDDEE_1100MV
+SPL_MMC_PWRSEQ
+SPL_MULTI_DTB_FIT_GZIP
+SPL_MULTI_DTB_FIT_USER_DEF_ADDR
+SPL_MULTI_DTB_FIT_USER_DEFINED_AREA
+SPL_NVME
+SPL_NVME_BOOT_DEVICE
+SPL_NVME_PCI
+SPL_OID_REGISTRY
+SPL_OPTEE_LOAD_ADDR
+SPL_OS_BOOT_SECURE
+SPL_PARTITION_TYPE_GUID
+SPL_PHY_ATHEROS
+SPL_PHY_TI_DP83867
+SPL_PINCTRL_STMFX
+SPL_PINCTRL_SX150X
+SPL_PINCTRL_ZYNQMP
+SPL_PMIC_AXP
+SPL_PMIC_LP873X
+SPL_PMIC_LP87565
+SPL_PMIC_PALMAS
+SPL_POST_MEM_SUPPORT
+SPL_READ_ONLY
+SPL_REGULATOR_AXP
+SPL_RELOC_LOADER
+SPL_RISCV_SMODE
+SPL_RSA_PUBLIC_KEY_PARSER
+SPL_RSA_PUBLIC_KEY_PARSER_LEGACY
+SPL_RSA_PUBLIC_KEY_PARSER_MBEDTLS
+SPL_RSASSA_PSS
+SPL_RSA_VERIFY_WITH_PKEY
+SPL_SEMIHOSTING
+SPL_SEMIHOSTING_FALLBACK
+SPL_SHA1_MBEDTLS
+SPL_SHA256_MBEDTLS
+SPL_SHA384_MBEDTLS
+SPL_SHA512_MBEDTLS
+SPL_SHOW_ERRORS
+SPL_SHOW_REGS
+SPL_SIMPLE_PM_BUS
+SPL_STACKPROTECTOR
+SPL_SYS_STDIO_DEREGISTER
+SPL_TPM
+SPL_TPM2_CR50_I2C
+SPL_UBI_LOAD_BY_VOLNAME
+SPL_UBI_LOAD_MONITOR_VOLNAME
+SPL_USB_MTU3
+SPL_USB_MTU3_GADGET
+SPL_USB_MTU3_HOST
+SPL_USE_ARCH_STRCMP
+SPL_USE_ARCH_STRLEN
+SPL_USE_ARCH_STRNCMP
+SPL_USE_SEPARATE_FAULT_HANDLERS
+SPL_UT_LOAD_FS
+SPL_VIDEO_HANDOFF
+SPL_VIDEO_REMOVE
+SPL_WDT_GPIO
+SPL_X86_64
+SPL_ZSTD
+SPL_ZYNQMP_ALT_BOOTMODE
+SPL_ZYNQMP_ALT_BOOTMODE_ENABLED
+SPL_ZYNQMP_DRAM_BANK1_BASE
+SPL_ZYNQMP_DRAM_BANK1_LEN
+SPL_ZYNQMP_DRAM_BANK2_BASE
+SPL_ZYNQMP_DRAM_BANK2_LEN
+SPL_ZYNQMP_DRAM_ECC_INIT
+SPL_ZYNQMP_RESTORE_JTAG
+STARFIVE_TIMER
+STM32_ECDSA_VERIFY
+STM32_IPCC
+STM32MP1_DDR_INTERACTIVE
+STM32MP1_DDR_INTERACTIVE_FORCE
+STM32MP1_DDR_TESTS
+STM32MP1_DDR_TUNING
+SUNXI_DRAM_A133_DDR4
+SUNXI_DRAM_DDR4
+SUNXI_DRAM_TYPE_DDR2
+SUNXI_DRAM_TYPE_LPDDR2
+SUNXI_DRAM_TYPE_LPDDR3
+SW_SATA_MODE
+SW_USBHOST_MODE
+SYS_ARM_CACHE_WRITEALLOC
+SYS_AUTOMATIC_SDRAM_DETECTION
+SYS_BOOTCOUNT_FS_DEVPART
+SYS_BOOTCOUNT_FS_INTERFACE
+SYS_BOOTCOUNT_FS_NAME
+SYS_CORTINA_FW_IN_REMOTE
+SYS_CPRI
+SYS_CPRI_CLK
+SYS_DEFAULT_LPDDR2_TIMINGS
+SYS_ETVPE_CLK
+SYS_FLASH_CFI_WIDTH_64BIT
+SYS_FPGA_FLAVOR_LEGACY
+SYS_FSL_DDR1
+SYS_FSL_DDRC_GEN1
+SYS_FSL_DDR_EMU
+SYS_FSL_DDR_VER_44
+SYS_FSL_DDR_VER_46
+SYS_FSL_ERRATUM_A004580
+SYS_FSL_ERRATUM_A004699
+SYS_FSL_ERRATUM_A005434
+SYS_FSL_ERRATUM_A005812
+SYS_FSL_ERRATUM_A006384
+SYS_FSL_ERRATUM_A006475
+SYS_FSL_ERRATUM_A009660
+SYS_FSL_ERRATUM_CPC_A002
+SYS_FSL_ERRATUM_CPC_A003
+SYS_FSL_ERRATUM_DDR111_DDR134
+SYS_FSL_ERRATUM_DDR_115
+SYS_FSL_ERRATUM_ESDHC13
+SYS_FSL_ERRATUM_SATA_A001
+SYS_FSL_PCIE_COMPAT_P4080_PCIE
+SYS_FSL_QSPI_SKIP_CLKSEL
+SYS_FSL_RAID_ENGINE
+SYS_FSL_SEC_COMPAT_6
+SYS_I2C_DDC_MTK
+SYS_I2C_IPROC
+SYS_I2C_MT7621
+SYS_I2C_MXC_I2C5
+SYS_I2C_MXC_I2C6
+SYS_I2C_MXC_I2C7
+SYS_I2C_MXC_I2C8
+SYS_I2C_SH
+SYS_I2C_SH_BASE0
+SYS_I2C_SH_BASE1
+SYS_I2C_SH_BASE2
+SYS_I2C_SH_BASE3
+SYS_I2C_SH_BASE4
+SYS_I2C_SH_NUM_CONTROLLERS
+SYS_I2C_VERSATILE
+SYS_I2C_XILINX_XIIC
+SYS_JFFS2_SORT_FRAGMENTS
+SYS_MALLOC_DEFAULT_TO_INIT
+SYS_MAPLE
+SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_0K
+SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_128K
+SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_256K
+SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_384K
+SYS_MXC_I2C5_SLAVE
+SYS_MXC_I2C5_SPEED
+SYS_MXC_I2C6_SLAVE
+SYS_MXC_I2C6_SPEED
+SYS_MXC_I2C7_SLAVE
+SYS_MXC_I2C7_SPEED
+SYS_MXC_I2C8_SLAVE
+SYS_MXC_I2C8_SPEED
+SYS_NAND_DBW_16
+SYS_NAND_HW_ECC
+SYS_NAND_SOFT_ECC
+SYS_NVME_BOOT_PARTITION
+SYS_P4080_ERRATUM_CPU22
+SYS_P4080_ERRATUM_PCIE_A003
+SYS_P4080_ERRATUM_SERDES8
+SYS_P4080_ERRATUM_SERDES9
+SYS_P4080_ERRATUM_SERDES_A001
+SYS_P4080_ERRATUM_SERDES_A005
+SYS_QE_FMAN_FW_IN_FS
+SYSRESET_SPL_X86
+SYSRESET_TPL_X86
+SYS_SATA_FAT_BOOT_PARTITION
+SYS_SKIP_UART_INIT
+SYSTEM_PLL_FACTOR_10_1
+SYSTEM_PLL_FACTOR_11_1
+SYSTEM_PLL_FACTOR_12_1
+SYSTEM_PLL_FACTOR_13_1
+SYSTEM_PLL_FACTOR_14_1
+SYSTEM_PLL_FACTOR_15_1
+SYSTEM_PLL_FACTOR_16_1
+SYSTEM_PLL_FACTOR_3_1
+SYSTEM_PLL_FACTOR_6_1
+SYSTEM_PLL_FACTOR_7_1
+SYSTEM_PLL_FACTOR_8_1
+SYSTEM_PLL_FACTOR_9_1
+SYSTEM_PLL_VCO_DIV_1
+SYSTEM_PLL_VCO_DIV_8
+SYS_ULB_CLK
+TARGET_CLEARFOG_BASE
+TARGET_CM_T54
+TARGET_FENNEC_RK3288
+TARGET_GAMEFORCE_ACE_RK3588S
+TARGET_GXP2
+TARGET_KM_KIRKWOOD
+TARGET_KMP204X
+TARGET_KMTEGR1
+TARGET_LS2080A_EMU
+TARGET_LS2081ARDB
+TARGET_OMAP3_OVERO
+TARGET_OMAP3_PANDORA
+TARGET_P3041DS
+TARGET_P4080DS
+TARGET_P5040DS
+TARGET_POWKIDDY_X55_RK3566
+TARGET_PUMA_RK3399_RAM_DDR3_1600
+TARGET_PUMA_RK3399_RAM_DDR3_1866
+TARGET_ROCK_5_ITX_RK3588
+TARGET_TAO3530
+TCP_FUNCTION_FASTBOOT
+TDX_APALIS_IMX6_V1_0
+TDX_CFG_BLOCK_IS_IN_EEPROM
+TDX_CFG_BLOCK_IS_IN_NOR
+TDX_HAVE_EEPROM
+TDX_HAVE_NOR
+TEGRA_ENABLE_UARTC
+TEGRA_ENABLE_UARTE
+TEGRA_PRAM
+TEGRA_PRAM_SIZE
+TEGRA_SUPPORT_NON_SECURE
+TEGRA_UARTA_SDB_SDD
+TEST_KCONFIG
+TEST_KCONFIG_ENABLE
+TEST_KCONFIG_VALUE
+TFTPSERVERIP
+TI_GPMC
+TI_GPMC_DEBUG
+TOOLS_DEBUG
+TPL_ACPI_GPE
+TPL_BLK
+TPL_BLOBLIST_ALLOC
+TPL_BLOCK_CACHE
+TPL_BOOTMETH_VBE_ABREC
+TPL_BOOTMETH_VBE_ABREC_FW
+TPL_BOOTMETH_VBE_SIMPLE_FW
+TPL_CRC8
+TPL_CROS_EC
+TPL_CROS_EC_KEYB
+TPL_CROS_EC_LPC
+TPL_CROS_EC_SANDBOX
+TPL_DM_KEYBOARD
+TPL_DM_MMC
+TPL_DM_SEQ_ALIAS
+TPL_ENV_IS_IN_EXT4
+TPL_ENV_IS_IN_FAT
+TPL_ENV_IS_IN_FLASH
+TPL_ENV_IS_IN_MMC
+TPL_ENV_IS_IN_SPI_FLASH
+TPL_FIT
+TPL_GZIP
+TPL_HASH
+TPL_HKDF_MBEDTLS
+TPL_INPUT
+TPL_LOAD_FIT
+TPL_LOG
+TPL_LOG_CONSOLE
+TPL_LOG_MAX_LEVEL
+TPL_LZ4
+TPL_LZMA
+TPL_MBEDTLS_LIB
+TPL_MBEDTLS_LIB_CRYPTO
+TPL_MBEDTLS_LIB_HASHING_ALT
+TPL_MD5_LEGACY
+TPL_MD5_MBEDTLS
+TPL_OF_TRANSLATE
+TPL_OPTIMIZE_INLINING
+TPL_PARTITIONS
+TPL_POWEROFF_GPIO
+TPL_SHA1_LEGACY
+TPL_SHA1_MBEDTLS
+TPL_SHA256_LEGACY
+TPL_SHA256_MBEDTLS
+TPL_SHA384_LEGACY
+TPL_SHA384_MBEDTLS
+TPL_SHA512_LEGACY
+TPL_SHA512_MBEDTLS
+TPL_STACKPROTECTOR
+TPL_SYSRESET_GPIO
+TPL_TPM
+TPL_TPM2_CR50_I2C
+TPL_USE_ARCH_MEMMOVE
+TPL_USE_ARCH_STRCMP
+TPL_USE_ARCH_STRLEN
+TPL_USE_ARCH_STRNCMP
+TPL_ZLIB
+TPM2_TIS_I2C
+TPM_LIST_RESOURCES
+TPM_LOAD_KEY_BY_SHA1
+TPM_TIS_I2C_BURST_LIMITATION
+TPM_TIS_I2C_BURST_LIMITATION_LEN
+TQMA6UL_RAM_SINGLE_256M
+TQMA6UL_RAM_SINGLE_512M
+TQMA7_RAM_SINGLE_1G
+TQMA7_RAM_SINGLE_2G
+TQMA7_RAM_SINGLE_512M
+TRACE
+TRACE_BUFFER_SIZE
+TRACE_CALL_DEPTH_LIMIT
+TRACE_EARLY
+TRACE_EARLY_ADDR
+TRACE_EARLY_CALL_DEPTH_LIMIT
+TRACE_EARLY_SIZE
+TRUE_LITTLE_ENDIAN_LITTLE_ENDIAN
+TSEC1_MODE_MII
+TSEC1_MODE_RMII
+TSEC1_MODE_RTBI
+TSEC1_MODE_SGMII
+TSEC2_MODE_MII
+TSEC2_MODE_RMII
+TSEC2_MODE_RTBI
+TSEC2_MODE_SGMII
+TULIP_IGNORE_TX_NO_CARRIER
+TULIP_MULTIPLE_TX_DESC
+TULIP_SUPPORT_NON_PCI
+UART0_PORT_F
+UART1_UART1
+UART2_EIM_D26_27
+UBI_SPL_SILENCE_MSG
+UBOOT_ROMSIZE_KB_4096
+UBOOT_ROMSIZE_KB_512
+UPDATE_TFTP
+USB_MODE
+USB_MTU3_DEBUG
+USB_MTU3_HOST
+USB_OHCI_LPC32XX
+USB_SOF_UCODE_PATCH
+USB_TCPC
+USB_UHCI_HCD
+USB_XHCI_BRCM
+USE_ARCH_STRCMP
+USE_ARCH_STRLEN
+USE_ARCH_STRNCMP
+USE_TFTPSERVERIP
+UT_OPTEE
+VALGRIND
+VEXPRESS_CONFIG
+VIDEO_BRIDGE_PARADE_DP501
+VIDEO_FONT_4X6
+VIDEO_FONT_6X8
+VIDEO_LCD_HIMAX_HX8394
+VIDEO_LCD_ILITEK_ILI9806E
+VIDEO_LCD_RENESAS_R61307
+VIDEO_LCD_RENESAS_R69328
+VIDEO_LCD_SAMSUNG_S6E63M0
+VIDEO_LCD_TDO_TL070WSH30
+VIDEO_NX_MIPI
+VIDEO_OMAP3
+VIDEO_REMOVE
+VPL_BLOBLIST_ALLOC
+VPL_BOOTMETH_VBE_ABREC
+VPL_BOOTMETH_VBE_ABREC_FW
+VPL_CLK
+VPL_CROS_EC
+VPL_CROS_EC_LPC
+VPL_CROS_EC_SANDBOX
+VPL_DM_GPIO
+VPL_DM_RTC
+VPL_HKDF_MBEDTLS
+VPL_LOAD_FIT_FULL
+VPL_LOG
+VPL_LOG_CONSOLE
+VPL_LOG_MAX_LEVEL
+VPL_LZ4
+VPL_MBEDTLS_LIB
+VPL_MBEDTLS_LIB_CRYPTO
+VPL_MBEDTLS_LIB_HASHING_ALT
+VPL_MD5_LEGACY
+VPL_MD5_MBEDTLS
+VPL_OF_TRANSLATE
+VPL_PINCTRL
+VPL_PINCTRL_FULL
+VPL_POWEROFF_GPIO
+VPL_RAM
+VPL_SHA1_MBEDTLS
+VPL_SHA256_MBEDTLS
+VPL_SHA384_LEGACY
+VPL_SHA384_MBEDTLS
+VPL_SHA512_LEGACY
+VPL_SHA512_MBEDTLS
+VPL_SYSRESET_GPIO
+VPL_TPM
+VPL_TPM2_CR50_I2C
+VPL_USE_TINY_PRINTF
+W1_EEPROM_DS2502
+W1_MXC
+WATCHDOG_RESET_DISABLE
+WDT_BCM2835
+WDT_BOOKE
+WDT_DAVINCI
+WDT_MESON_GXBB
+WDT_MT7620
+WDT_RENESAS
+WDT_TEGRA
+WDT_XILINX
+WERROR
+WGET_BUILTIN_CACERT
+WGET_BUILTIN_CACERT_PATH
+WRU4
+XILINX_MICROBLAZE0_PVR
+XTENSA_SIMCALL_GDBIO
+XTFPGA_LX110
+XTFPGA_LX200
+XTFPGA_LX60
+XTFPGA_ML605
+ZYNQMP_PSU_INIT_ENABLED
+
+--=20
+Tom
+
+--IZSCUnyivEiYeL49
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaqGJsAAKCRAr4qD1Cr/k
+CgU2AP9Ri6sn7QxaFOAfqqtdPehwwtLFNHM4Kh+UhI4b9ix3SQD/V5X1WqQ0C3w9
+ZfCuw1YfdaOfChxxaxiUinQr7sEbawE=
+=ctcA
+-----END PGP SIGNATURE-----
+
+--IZSCUnyivEiYeL49--
