@@ -1,143 +1,144 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ACD0C79F9F
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 12:23:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1356BC79FBB
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 12:36:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 38EF16087A;
-	Thu, 10 Sep 2026 12:23:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7B04440A67;
+	Thu, 10 Sep 2026 12:36:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vQ4QmLtEZOrG; Thu, 10 Sep 2026 12:23:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7357E608AA
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789043037;
-	b=Rc4dwV/sSv7CCnS5dWhLm0GKUWGuvASYqIBztVNKV0ewVmXt19o1zEUUaGoIZF94lOuE
-	 FHulKnbfrHNuTqmcjheF/8LXZkRXhgCX0PaHinkeuZmZgW3SsuyFzWCNN7WJlq3QrKP24
-	 78cCCoLDsdYvSUL2zqgtiR3/N11qWYnJxpK9lAmqF46Tfnfpv/SVBAHagYyg7T5gg4yGj
-	 4Ht91Zbs/sy7zFuwhpnIil6xDa+n1IVZHpFkibvjRCNazImvlXI2DzmixPZgvUxht+Me6
-	 RyuHwC/Dj05dfuZ3qu6KcWTVPHizkFjGDjTKkj2ud7c1wDdVOZy3vgyrTuFebXfS2Cg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id llHTv4gPwwye; Thu, 10 Sep 2026 12:36:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A89A640A55
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789043762;
+	b=YDfaPAn+X9vlpTzLLu3Rh4RObDw+JxffTg8NNvdQ3Ff6v7tNfofL7Ncfs+N0j501fhSJ
+	 ZW6BO+jby8QfAQhQYdwr/Isl+wtRjXVv8Lxw3sAZoc6QJgteUPrRYrTPl5yXRjUogB/dK
+	 xWDkTNdliZ8/KTYLmN+k6oNloGl9jykzfoeqAsxD7nGdW+ZbRNO1jbGbbYbxIFfj+0Vup
+	 ghPJ26lXp9N8g+kJcHziMyX2GFU0Yu/ipPqcBhtdAKY/FhlBiIjLzyMKIYXsJHP3UKBTp
+	 aR4egKwTMuJIy8aCX1+e3rMKx+p3hbs1BehDmoG5QmcAwmoKtYqTAAKRNH0ALU2ENog==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789043037;
+	c=relaxed/relaxed; t=1789043762;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
 	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:X-Zoho-Virus-Status:
-	 X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=y2nlc3bO4SBvtDu+nJlU3jydQdawmIuPggybW6eILCA=;
-	b=HkSEW/PJUxas4EgYpTE2AC810FD+auFrfq8G+IByLQfvzu+N15fEwQGRKo/dkV5fLJpT
-	 UOdeyeztBz756l4S1Zq6ITYH4ZiWyBRrRJx/N82dO9c4J5D/dOaDf7pX0eOg6Y6ermi4e
-	 gJaSI9ruvfihPMY1qjTuS3Y0xJ1ETttz6r0gOYQ9wtMYJMueICfsdQk0za47EQGH5JCeY
-	 vNenZ1rd/4yhhaoz1b1xTiHmgOUdKVAXAYisvu/MEovE0P+DAN3/SfYPtLndCGRFlYGCV
-	 3n6YAHw8U5YGhhNOrrDIKVBuYz8FEE2rctESs3CPZSN7jcM6Z96P8Wd4kSBb6NEZxyQ==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=rFxi++1uo2N2nKvOQrvgJ41PRPRxMHX+KzgtflsfrjQ=;
+	b=oxObHTc/roQ6h23CTarf94zSYmQZwEQbaH+vHcEP9F6FOTsOWZ8VHg9Vwo7ZSB0LDl4o
+	 q2RUe/uUcVObb2J7E2ireKSk/ziY/sUiniUhhhi8llMa+KMZrs+JCoA6xiRLZjP6PsxX2
+	 8LK2QKSHH9T0XyY1HUS69htxAGMt31I8aoI5DC8oqajyJakudbgQQhgNtLUs3SdDG7wHz
+	 1+2suZvBQoIm7xNJ/Na2MTLdAdn2r8oJSgWkeNRBQaF/BA6QZ9SeIqCSkJcOInd9FaIK9
+	 p83QbuabibGrY3wwhDdAtiwWgDyEbLEkV/EQY4reH5zQ5bF1HO0bgCXiRS2nWzqwmnQ==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789043037;
-	bh=y2nlc3bO4SBvtDu+nJlU3jydQdawmIuPggybW6eILCA=;
+	d=lists.u-boot-project.org; s=default; t=1789043762;
+	bh=rFxi++1uo2N2nKvOQrvgJ41PRPRxMHX+KzgtflsfrjQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bJQDzdbSA8B+CyyLb2/KB2+EyQIE/shxuDjrnzpXfp5/jN0/Iq2gz9UvA1keDwa1+
-	 riUJNxO1N+ghyqY8ygTdaJUHKzpDgUe+p+L7J61+D9orDDeRAG3JRzrQg9KA1Mq8Vz
-	 f7jb2JZKg4VV18a0F6cdDs5OhhLPyw9nvQtWF1BRMceuNwM4oeH7tPnWI7d4VOiCss
-	 Z71w9dnlm+0fkHctO+xSd0ciDyZ7bd3d2ZTaka4xA/AKxK+PsB+dwPwD2szKJfvtvL
-	 6yTZoVwlZmfDdPqQSoo4weq+bPdftmaeJlKifZgTKG1YilUx/99Wr6xB5aahsbwDVD
-	 0z32u2RLaK6Zw==
+	b=AYy3mOlJmMAvL90UoOmpKpDeD9x+66l5HkVsWKY0rHbf+UWqPAFLyIlDKKS21rBW6
+	 FB4pfyNGI/raYfJkkusLElTueJJCopRSxnjW1ls8h2mph18vlUogDpQdnkg5PTtUw5
+	 qgFo8O0jVQxfqPlYQsrZ9bBoY/cO7JV5FI2pHqrTPgKkdHj8tlak5qe5QhMygN7P8P
+	 c8uktOatDnkDhQkocviOUimLzttnet7MPko4x40prHPBJXKiWhZpC90oQPl5RidfU7
+	 roMNNJiqkILiBQ/BM3yBCn3BEj3S4P5rNiYcsGsXsQTynDv4JO8kyXyFWo++17oj7U
+	 3E+fpZ1KJA2VQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7357E608AA;
-	Thu, 10 Sep 2026 12:23:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A89A640A55;
+	Thu, 10 Sep 2026 12:36:02 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 58849769
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 12:23:56 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 9F09349D
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 12:36:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3D44A80F82
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 12:23:56 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8581D80FC1
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 12:36:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oUiTwt19zd6W for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 12:23:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4B2A780F79
+ id 1zQozEHEIiQZ for <u-boot@lists.u-boot-project.org>;
+ Thu, 10 Sep 2026 12:36:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org B9C5F80FAF
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=136.143.188.15
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789043035;
- b=ARl0/92Sh2cRmO9nnGECoccpI1M0kNLO84UAqLtCIy8Q3slDZ6VzATKgsY3RwL/b4ryR
- 1gyWIFJI03mqTrAo0eR7+DtVIQOTSM+Vw1qJeA+Brvj8jRXo49KyYfx9FIOpDOpQD0TBa
- sTICLsguF/SX6hXoQhK5ee7n5l+Hb66raaaplFzPBgQCiRBP+bgCwiOHk6biJ7D0lYVW+
- GzxzUHlLD8yxOmMf54E6+beunHETExseE7jpRhLbN6lfQNxgXrFE7evV8JPVqZc0wNG5Q
- O/nUFccFMI7DwRCAx9DhoGe6BvqCZ/k7cRYGoUO373eiUJYQUDYRg+OAN45gNGDFA1g==
+ smtp.remote-ip=165.173.180.15
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789043761;
+ b=knNB+X9hOO/5Zic1TNLGxU1gRyiVYrgwyePZlpycDLAJHjvFfhcZqMnfV7jCDIT9XmT5
+ eQvR5s9WcXuUenKOW3eYDOg8gpjooTTA6s8Z/oI9v+agj/cRramL0oKDBZeWomEMZMbrb
+ 66u5kjabHdz8xwyzy0FiC61BlL72Vne59EdVe0nUo7sG/WlJXbh7phAVXdN9edFtbp5dn
+ v/6Zu5c9ePumYAhRlDbew5OTxCEFIQQV2W9g+FGYQGJq2urVEB9Uzv54gTPkRjbXvyEvK
+ HDD0hnJBH68/GorNk4csRMxnaHOJJyn0QWjBSh14vsBIFPLNxp8IgMjj9aHh9j/YUzQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789043035;
+ c=relaxed/relaxed; t=1789043761;
  h=Received-SPF:DKIM-Signature:Received:Date:From:To:Cc:Subject:
  Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
- Content-Transfer-Encoding:In-Reply-To:X-Zoho-Virus-Status:
- X-Zoho-AV-Stamp:X-ZohoMailClient;
- bh=y2nlc3bO4SBvtDu+nJlU3jydQdawmIuPggybW6eILCA=;
- b=SsrFmf+dBf90VBNip1x7nkAFzkM6/vcjHRI56dMmvKBKXIikBpkzbJ5nUKWIYxJJ3lbR
- SXV8LqBTb8Xamy9UlV/hzRzd4ydhKqvhR9tnnQsD/DHRouJmmXNl9THFQIzeSVrvE13ZN
- FTTV9zE6Im5R/AB97e9suTJpKd2ZuLI/qV6D78UrRApMQLWp9QOYd+J9qs5RpxN9nIL6N
- ekiSrNkNOYvGu9nJKbycsUW6VR6d/xijePy7KmT2pT0dksfBAc4UdvZJ0pmKDyOm7pXdf
- HhQdHs+wpxZHsIEnYMEMEp/2bJVceTNOl5Ey9knKvVNp7JMNaFi+JZ5HOHTxavb2ROA==
+ In-Reply-To:X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient;
+ bh=rFxi++1uo2N2nKvOQrvgJ41PRPRxMHX+KzgtflsfrjQ=;
+ b=WlF+8o4HFRWmaoaMbHqkSsoi+baAcX9UhvbLouNN7U313upCks0afGEBLYgv8v8rzjtQ
+ 134d7yYuv+qMAGIwJ0BgWilmp/ewhgDNgLDb/umuimRy+kmtnkS9vfq3G+OgXZqpKsgzO
+ 2ovy5qC/sLR0+UMc72S5O7U0fA3+urKB/sZv6ki4JcnUw/+5CErGREFASvdDOyhYmEDBE
+ f/k8HsqjOyeoG6M0A+fS2iNYYmLCwhAWVhNs0D/k7g7YQeofgX/WAUmviX/8EgI4gcZcm
+ YF1tut8VILO4zcfnfOOlQETT8M843J0kRMTOoSuCU4lkL7QNXCfbPos49BVB9EudwYg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org;
  dmarc=pass header.from=ziyao.cc; 
  dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b="Mrmspe/L"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=136.143.188.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
- helo=sender4-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+ header.s=zmail header.b=J0bDtPw1; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
+ helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=Mrmspe/L
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4B2A780F79
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 12:23:54 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1789043026; cv=none; 
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=ziyao.cc header.i=me@ziyao.cc
+ header.a=rsa-sha256 header.s=zmail header.b=J0bDtPw1
+Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
+ [165.173.180.15])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B9C5F80FAF
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 12:35:59 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1789043735; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=Iy67KaLlaaAP3cDMU+6/Be5ECME95piwNrSFUW5eXbh5iJ4xve0c1RaTtmwEL4SaL8sFG/kIA+mOg8SEY+F1hdlU1ltQ2TfmcX2MA1NE3oTHHl1QzYxeZJjTW0CHSEOAbCFkE5dwUhmzvDet2jVfxNI72+3gTxaEF4yM4SUcchc=
+ b=lVTxH/vl79SKRIAOBf1IJSybT/VHQUS5aZpPg6n4j1IT81IIOV52VG9xnR7JzPDQsyh/FLCIKjquSXv6sAK2pok5FlVB8QEcBiw9gL8THGqJr9vQjIjNntHKqsu8Q+cHRZrzG6WTn/j21ciyC90m4OtxtwXIzxW1MbS1WoXxt+8=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1789043026;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=y2nlc3bO4SBvtDu+nJlU3jydQdawmIuPggybW6eILCA=; 
- b=dbs7UQZ3B7ZEKK320zEi/lHabGP9k9v7xmOtT9M0AHcXpgIHSveJq9uREHLJwcc2XPtQxvikFDRZoEgy1RBznJ+oJi/RWbCR0Sn52zX5ERF3RHNh+R7DbuHm7vT3Cp7/IJyawNmYqTrt7rde57NQA8+CjYeS49l7MxRN+GeZB30=
+ s=zohoarc; t=1789043735;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=rFxi++1uo2N2nKvOQrvgJ41PRPRxMHX+KzgtflsfrjQ=; 
+ b=TyhmqXLu59mBCcBsN5vZdnxAOZIGGd077pojXZ4HmUHacvxwF7HEZ9TWHSnLKxhAvQD3IKUITB+jNQVKIXit41GMhZ2jxeGpOvb8MerEiygAj+QXdzPc15/rOLNx+PwFqu9AgooDAr25ZP+aFnseiWyF+xrRTvj9iIjWWlYVRpQ=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1789043026; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1789043735; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
- bh=y2nlc3bO4SBvtDu+nJlU3jydQdawmIuPggybW6eILCA=;
- b=Mrmspe/LNqerPLFvfgXxDTDOihWsCBSXF76mQS8dTwKIUC3Rs+1fosMJYlj+jS0E
- CaN4VMIwJPiqrzbTwHxf70HsJbQTdHxedVVDVNnNrp5815wCwxQk/lluLqHAUlABmka
- K+6ARmjFeyKBe/V3UXG9+XLM4MUfQyfDVQZQVDNA=
-Received: by mx.zohomail.com with SMTPS id 1789043023974119.5905404678715;
- Thu, 10 Sep 2026 05:23:43 -0700 (PDT)
-Date: Thu, 10 Sep 2026 12:23:39 +0000
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=rFxi++1uo2N2nKvOQrvgJ41PRPRxMHX+KzgtflsfrjQ=;
+ b=J0bDtPw1y+wb1k6k2Ns+juSYg+xuWYy0tE5QpPe+EO/26GqmotwF0op8a3+QJ4Vt
+ w6APRK2qSue1W5euWDGmKA6JCd108OYk4B6pZrqHg2WxEomFJT+4Wm8rO6Z3BJDFGAv
+ 6TSY+9TUqBHW7KeGPwFNVgykLtT8Jp/kL3R8zYx0=
+Received: by mx.zohomail.com with SMTPS id 178904373201642.900811622213496;
+ Thu, 10 Sep 2026 05:35:32 -0700 (PDT)
+Date: Thu, 10 Sep 2026 12:35:26 +0000
 From: Yao Zi <me@ziyao.cc>
-To: Nikita Shubin <nikita.shubin@maquefel.me>, u-boot@lists.u-boot-project.org
-Cc: Yao Zi <me@ziyao.cc>, Tom Rini <trini@konsulko.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: Re: [PATCH v2 1/2] riscv: =?utf-8?Q?timer?=
- =?utf-8?Q?=3A_Enable_early_timer_for_M=E2=80=91mode?=
-Message-ID: <aqKhS6_w0Fqt8vsV@pie>
-References: <20260909-riscv_fix_early_timer_mmode-v2-0-563bff2a50c5@maquefel.me>
- <20260909-riscv_fix_early_timer_mmode-v2-1-563bff2a50c5@maquefel.me>
+To: Junhui Liu <junhui.liu@pigmoral.tech>, u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Simon Glass <sjg@chromium.org>,
+ Daniel Golle <daniel@makrotopia.org>, Randolph Sapp <rs@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ E Shattow <e@freeshell.de>, Yixun Lan <dlan@kernel.org>,
+ spacemit@lists.linux.dev, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH v2 1/2] tools: mkimage: add SpacemiT K3 boot image support
+Message-ID: <aqKkDoGgnJkOQ8s-@pie>
+References: <20260909-spacemit-aihd-v2-0-780e98cf2fec@pigmoral.tech>
+ <20260909-spacemit-aihd-v2-1-780e98cf2fec@pigmoral.tech>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260909-riscv_fix_early_timer_mmode-v2-1-563bff2a50c5@maquefel.me>
+In-Reply-To: <20260909-spacemit-aihd-v2-1-780e98cf2fec@pigmoral.tech>
 X-Zoho-Virus-Status: 1
 X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/289.29.40
 X-ZohoMailClient: External
@@ -154,67 +155,70 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Nikita,
-
-Sorry for sending out this review late. My system crashed earlier this
-day and I forgot this mail in the draft folder.
-
-On Wed, Sep 09, 2026 at 09:30:59AM +0300, Nikita Shubin wrote:
-> The generic RISC-V timer driver currently defines
-> timer_early_get_count() only when CONFIG_IS_ENABLED(RISCV_SMODE),
-> even though reading the TIME CSR is not inherently limited
-> to S‑mode; it works in M‑mode as well when the CSR is implemented
-> in hardware (e.g., with the Zicntr extension).
+On Wed, Sep 09, 2026 at 11:51:08PM +0800, Junhui Liu wrote:
+> The SpacemiT BootROM loads the FSBL from a boot image consisting of a
+> fixed 4 KiB header with two metadata headers and authentication
+> information, followed by a 32-byte-aligned SPL payload and a trailing
+> authentication area. K1 and K3 share the same layout, but use different
+> integrity and authentication schemes. K1 requires RSA-signed images,
+> while K3 uses CRC32 to verify images in non-secure boot mode.
 > 
-> Moreover, timer_early_get_rate() is missing entirely for M‑mode,
-> causing early timer functions to be unavailable on such systems.
+> Add mkimage type "smtimage" for the K3 CRC32 path. Populate both
+> metadata headers, fill their CRC32 values and the payload CRC32, and
+> reserve the authentication areas required by the layout.
 > 
-> Fix this by:
-> - Moving timer_early_get_count() out of the RISCV_SMODE guard
->   so it is always available when CONFIG_TIMER_EARLY is set.
-> - Adding M‑mode support to timer_early_get_rate(), returning
->   RISCV_MMODE_TIMER_FREQ when running in M‑mode
->   and RISCV_SMODE_TIMER_FREQ   in S‑mode.
+> The image header has no reliable K1/K3 identifier, so select the SoC
+> with -n. Omit dumpimage support since it cannot take -n to distinguish
+> between the variants.
 > 
-> This is also necessary because several functions
-> (e.g., net_random_ethaddr() via get_ticks()) rely on
-> timer_early_get_count() even if CONFIG_TIMER_EARLY is not
-> enabled.
+> Only "-n k3" in non-secure boot mode is supported. Route SoC differences
+> through a variant table so K1 and RSA authentication support can be
+> added later.
 > 
-> Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
+> Tested-by: E Shattow <e@freeshell.de>
+> Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
 > ---
->  drivers/timer/Kconfig       | 13 +++++++++++--
->  drivers/timer/riscv_timer.c | 12 +++++++++---
->  2 files changed, 20 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
-> index 500a25638a9..12c194ff74a 100644
-> --- a/drivers/timer/Kconfig
-> +++ b/drivers/timer/Kconfig
-> @@ -227,8 +227,17 @@ config RISCV_TIMER
->  	bool "RISC-V timer support"
->  	depends on TIMER && RISCV
->  	help
-> -	  Select this to enable support for a generic RISC-V S-Mode timer
-> -	  driver.
-> +	  Enable support for the generic RISC-V timer driver using the TIME CSR.
+>  boot/image.c     |   1 +
+>  include/image.h  |   1 +
+>  tools/Makefile   |   1 +
+>  tools/smtimage.c | 202 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  4 files changed, 205 insertions(+)
+
+...
+
+> diff --git a/tools/smtimage.c b/tools/smtimage.c
+> new file mode 100644
+> index 000000000000..96e8b5d8d171
+> --- /dev/null
+> +++ b/tools/smtimage.c
+
+...
+
+> +#include <image.h>
+> +#include <u-boot/crc.h>
+> +#include "imagetool.h"
+
+I think you should explicitly include all headers you used explicitly,
+e.g., string.h for strcmp(), stdint.h for uintXX_t...
+
+...
+
+> +static const struct smtimage_variant *smtimage_get_variant(const char *name)
+> +{
+> +	int i;
 > +
-> +	  This driver works in S-mode and also in M-mode if the TIME CSR is
-> +	  implemented in hardware (e.g., when the Zicntr extension is present).
-> +	  In M-mode, the timer frequency must be provided via the macro
-> +	  RISCV_MMODE_TIMER_FREQ; in S-mode, use RISCV_SMODE_TIMER_FREQ.
+> +	if (!name || !*name)
+> +		return NULL;
 
-This doesn't seem correct. These two constants are only used for the
-early timer implementation, and the non-early one looks up the rate from
-FDT blob (/cpus/timebase-frequency).
+Isn't this !*name check unnecessary?
 
-> +	  On platforms that also enable CLINT/ACLINT MTIMER, both drivers
-> +	  may provide early timer functions and cause linking conflicts. Ensure
-> +	  that only one of them is selected, or adjust the configuration to avoid
-> +	  duplicate symbols.
-
-Won't this issue fixed by PATCH 2? And I think this paragraph is too
-detailed to be included in the Kconfig help.
+> +
+> +	for (i = 0; i < ARRAY_SIZE(smtimage_variants); i++)
+> +		if (!strcmp(name, smtimage_variants[i].name))
+> +			return &smtimage_variants[i];
+> +
+> +	return NULL;
+> +}
 
 Regards,
 Yao Zi
