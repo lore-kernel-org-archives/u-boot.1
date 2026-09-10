@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA81C79FB9
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 06:57:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CA21C79FB9
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 06:57:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6A5F040866;
-	Thu, 10 Sep 2026 06:57:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BBFA040A1C;
+	Thu, 10 Sep 2026 06:57:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Z8H8N_1JGKLP; Thu, 10 Sep 2026 06:57:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 94F6940A1C
+ id JP0ujTnhnLk4; Thu, 10 Sep 2026 06:57:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org C12EE408E9
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789023456;
-	b=NH2oAh5+TU+9bIS6mp+JjFXi3qOWEoL1l/6kF4xWNJoIj7AxDQzo3F+HZpxAw0UKivdW
-	 HjkXNB4CTTo47rRxE2f63FRmhmiNO5dbaEU8rqc34v2DiSBaaJZVQHGqYnwGbS8R22VTZ
-	 p1d4T7jDoV01PlWZkjZQIP9UdPo4JlrHEqfcLwTo+sUV4olFp9R64i3XXJPOn5y8k+sDI
-	 8T8MUQpcrP1xrbMncU+gd88sR1gs5LK6LML76B0UQVCtvHtUJGsCFrgmv7+Gxb8HZAt15
-	 UZhrqY8f008ISVQUOv7KC96DzVAMAWo6mlbsIS9YLSX1Etwlxo2Kgd1YYCvDX3d3kEQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789023459;
+	b=Xqe6OhUGzbY7MODJdcqENbs/RmGAWH0bXm6FOLi7wbUleI74vmdXen2nSr70xAyyLVvt
+	 rgPS/NBgwjd/EbMIiQRhi2Hx2fM4ukiSBamGEDcIwmDLmg1+EijFNrxfbdvlN9wLyZcbJ
+	 yL8o6mJtZMbbCjZowvoyRGrO64wPC2Lmro9N3JDiof69pPz15uJFeDhT6Gx4n05NFm8xi
+	 74djr8ppVMgFcP48DoIq7rWPrHdfoJIfhvGhij0VstQWrlfvzehbG6hc6coAtsCSYeTHc
+	 EisoWoCYDP64O5zLtBgx4WSD+0wXbAfAsxWijSn5Z72XYxOIboMN6LMKyFYS14iERiQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789023456;
+	c=relaxed/relaxed; t=1789023459;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
@@ -31,104 +31,104 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Flowmailer-Platform:Feedback-ID:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=dw5ihbCVJe8T8SHdqa2pwo7poZXehSlQRfdxPdTq+qA=;
-	b=Zrx5HhvmJfPj2PS2ZTDwZ2g5dLvGe+d2yS8tcc5Nhk81dnQXL9F4TNDp2MzuDUVF05aZ
-	 S7cJdlkUtZJsncOaw8lYkc2PxmnHY32lox8ZhjordIxiwSAs2MNDlDD7htGc5yzmnVbvj
-	 1l6ePoTuyAofegQEuD9491gdyoDL81DAz6LsxBN2t5o89iwGt9uk9nRc6wgps1OouMXMI
-	 hyfj0+3n54G8HcwvdR+rStwzDrrofTtR7s5ZiaT06yr4j/GjTRYFDQ5RC1eUdhbmDp/W0
-	 TghfWV/YGq1JThy7cgGqQEtG550WWMFFzNW9PEGpwCyz253Ot65jgcTB3Yihsr2V9zQ==
+	bh=A7pULn+N/qSva4Kmn+uWKD/VP5Gn/UpPo/cNN/W5Dd0=;
+	b=NSNP58bLB3rYwwUofRVBaOW8p0+8GlkVm82Z2cFyndEU+eaxsP+lRwdTOzcBINnEeUvm
+	 atPjlc/xSEMaXVk+Pj3Me2S1glraBEyY7HPkzJ9exmvnSXWFahUTSrPD4wdXiEB2bCGgC
+	 bCjDMvQGy2r8fMYiwT9DTBOlFwCu41ETO6NkrgejkoK/Vxef3TzOXVBSY49B/lxUFM24d
+	 SFly72enPdianJxlZQk2HhkRt1t/aQV5skRowhAkbXEs5RaoYvuoyxRfrXTKxdpT0yTHl
+	 9yxH3QjZclcTt12SObQqzcqCdru+KogtZNnJtLlsi17XO8dySzSRzy8v8XAadnwzsWA==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789023456;
-	bh=dw5ihbCVJe8T8SHdqa2pwo7poZXehSlQRfdxPdTq+qA=;
+	d=lists.u-boot-project.org; s=default; t=1789023459;
+	bh=A7pULn+N/qSva4Kmn+uWKD/VP5Gn/UpPo/cNN/W5Dd0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fHp8zqVhuCMr3G1TbClyE+33O+Vu5K26Ujb2DqKBf2nW9shVmzzom5iBVXpMLqdMt
-	 BIQMhoswANnMC+/ULQ3TtSDA7twrQcMpK+fkcEDuk7DEec0W9CSRCyhxnGB8ep9bdo
-	 kj5x1BWI5LtCgfTt6li4HaS3x/gKBx3mO45k179H9a0F77XNjTVkR3KDfCx8SVJHI0
-	 ldBTweK2KA2LIVGej/HcEgFyLlvcaSTsmjZY0K0//5Hrux0/4u6trb+rwNpa6HFSgv
-	 zZerGmF75OatWHl66aUuM8RRAyd1M3IJwinHsj0/PssChMatNytNbMROskJEj6GMe1
-	 IVNGLWXG0rKLw==
+	b=VLk2rG/rRKvCBkQ+g4IOgNe1pXxEBIGKxM+//2FqriXYxBPlCtHb0CiIWob93aNq7
+	 ee7dNwmhlFdOivnTn23VqppkondRgKxI9rnXych7fyUkX9XmGs8IJW12sEIUApeojK
+	 42uN01RR7I3lttIhq1EHKygGvHFuTXsUBTawHQnhc/lSJ8PVV11wpUNHjVR1VsnMMS
+	 +Tn8kEG/9ynwdJLFKPFY01g28Brvg8jvxG5dQLBhM1PXD9YYWL+WWRhDSjxS74G6Ta
+	 TqiU0L4m2yA0QxtYPxWZdxKfiuYdxQopPSBCUHxxB4iGja2nsZqs38jw42chhGAWCn
+	 iMdk3FzU/DZlA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 94F6940A1C;
-	Thu, 10 Sep 2026 06:57:36 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 269461EA5
+	by smtp4.osuosl.org (Postfix) with ESMTP id C12EE408E9;
+	Thu, 10 Sep 2026 06:57:38 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 31EC21F07
  for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 06:57:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2239A80F11
+ by smtp1.osuosl.org (Postfix) with ESMTP id 14FF180F00
  for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 06:57:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6icdbuUlRcqd for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 06:57:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 638B280F0B
+ id UnGKFKSdFAsi for <u-boot@lists.u-boot-project.org>;
+ Thu, 10 Sep 2026 06:57:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 85C5380F11
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=185.136.64.227
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789023450;
- b=MJbIP4XSYMyLMDgi6fkQPWOgQit4pX0rMqcY+opMX0Fg7JmmLbHY1hHpYb0aSVpv7Gz0
- r+9cQVD3vdtX1vRaa8QlKR+OLe6N9IYr5jcbXLyruFFH4RLje8Bn74VEL5bw7ydx2knSv
- r8t1Y5RC17m1ClflNKIIYmvo3Q1jO6690rtzlrPHhVn8FiaSqgXsteQ4dw73hNU8O2HbM
- 3xeLuJyPSYDPBaVA54ECanIvCWyz3rv+AsKjgM9pQgsIVctniYI453F3ApOxWuIPcsAvN
- Yho7vUjBhnzA6IDAcPxlzAbLhlVpuH1I0iiXRoy0mySVwCVz77lGrZUH1rmmiMtGMCQ==
+ arc=none smtp.remote-ip=185.136.65.225
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789023449;
+ b=J7AD1RuQbAzjQ4BBzF4LhpfUl4u5fcfFxhSBTMbiGetp0AaBMhpV4u7Ex8o4isfCSfp0
+ MTRFE/ZSrU6xzfLDKEDWFNRQqrZK0PDcxGRmn4Dse8Z91pVEr13iHAJsX8beQUEmmidAg
+ vvz4FHeemoWoIKKevdcqWTKeBhbyRS9IU8m60ZpNp7cn699VjWXHXoxbHAXqG1c/5qTJU
+ aQGV8Z+1JA7DOvRIgEOAYkinCfzQDBkzDV0+IYBKTP1BaLBtD7K1JoyXe5h7QvU5lihAN
+ rbu088nkOzwokNRV2ZPP22vmqeLVDEm91xDetWEdTa6gG46em2xseUJGwEJOd7RX1fg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789023450;
+ c=relaxed/relaxed; t=1789023449;
  h=X-Greylist:Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-Flowmailer-Platform:Feedback-ID;
- bh=dw5ihbCVJe8T8SHdqa2pwo7poZXehSlQRfdxPdTq+qA=;
- b=l2hVyJ/tAXj1wSCL6ldiQSuLxJ2FPmD3/ExVU3OdrXtMej04LT5fKI6x8MNqWUTk5o/N
- DoiTmHJ/+th0Qr0Gla+Lku4BypBmpyy4PHIC9Ia97HqpcwtEM/vMOH1Oi4zNTliya9Wq8
- GSN2L5YYYWgyx6Ui+Q1Hg2SMdrwOb0VUE3+0tfXwbxiPt4Gz6sufLUZ7WSbwW2oNme8HT
- Wco8DndvKEUzr88udm2Dx1EOzjZKB+oZsvL2G86AjEcJCpQkqitS+BsaRlrX9OxNYGps8
- AR8LY62ccChUHNgCzwQIePFesSDHPWMAxph/Se1peFUsdeB0fwutwxOe31GJxnIo3nQ==
+ bh=A7pULn+N/qSva4Kmn+uWKD/VP5Gn/UpPo/cNN/W5Dd0=;
+ b=jnDtRGpcDkJlIOaHEm0pZye39+IZTr/JaDtkXbTecsTaVaai6zpnQLGuWZPaMTDWHm8o
+ rImqkgJDFNvrEK9ikgcYyYfFwS6U7ToPxe5iEsNoT1NMeoBmn8EmLi04V2H8P1aZMEvjZ
+ B1o4opdAiSR/8eCpQpKEaBgAqVIjNVFxiCc/TdWcszAVkP8YrZek6KcBYC2SgNazJyxrA
+ Ox0HRLOIm6B5/svQtjBBAwebtrpkDx70IOSckC3ZDAuOMIEsr7Qv60R+TvitAD7El4cMu
+ DVQ1QMH+5DCwTRjsWz1K1MDWYFejlw6gZT5ECR36Pp6vzBxdLbSsQHOGm+MWVwzz0/w==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=siemens.com; 
  dkim=pass header.d=siemens.com header.i=jan.kiszka@siemens.com
- header.a=rsa-sha256 header.s=fm1 header.b=X8mwj18Y; 
- arc=none smtp.remote-ip=185.136.64.227
+ header.a=rsa-sha256 header.s=fm1 header.b=tcaslj9N; 
+ arc=none smtp.remote-ip=185.136.65.225
 X-Greylist: delayed 63 seconds by postgrey-1.37 at util1.osuosl.org;
  Thu, 10 Sep 2026 06:57:29 UTC
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=siemens.com header.i=jan.kiszka@siemens.com
- header.a=rsa-sha256 header.s=fm1 header.b=X8mwj18Y
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.64.227;
- helo=mta-64-227.siemens.flowmailer.net;
- envelope-from=fm-294854-2026091006562328f15f7ace00020736-qs537_@rts-flowmailer.siemens.com;
+ header.a=rsa-sha256 header.s=fm1 header.b=tcaslj9N
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.65.225;
+ helo=mta-65-225.siemens.flowmailer.net;
+ envelope-from=fm-294854-202609100656247c8fea99dc00020724-xzco3a@rts-flowmailer.siemens.com;
  receiver=<UNKNOWN> 
-Received: from mta-64-227.siemens.flowmailer.net
- (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 638B280F0B
+Received: from mta-65-225.siemens.flowmailer.net
+ (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 85C5380F11
  for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 06:57:29 +0000 (UTC)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id
- 2026091006562328f15f7ace00020736
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
+ 202609100656247c8fea99dc00020724
  for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 08:56:23 +0200
+ Thu, 10 Sep 2026 08:56:24 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=jan.kiszka@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=dw5ihbCVJe8T8SHdqa2pwo7poZXehSlQRfdxPdTq+qA=;
- b=X8mwj18YUzrtaXas0jKromrDJ50xFztdBWEQm74Hn1ot7MC7MCy5hd/UUsqMYwzfXtj09n
- ThO1gBp4W0KVbl7UExiEYxyH5zmCBt2fLLWq6pBM0l9A9T9VFWyHE/hK/VmAs1E/iGqLRYYB
- 5SMxrKjxvVP4umgX9XyjQzp8eNG7KgvWm24Z6JxfssbICobPJibQ+MRuTUDGaWKYC30QSTLq
- relPqeQrZQLFs1OktJmwHEdhSfoJMM7WwCH6fBQqeNfu1InIoU+aEUAfxXPeJUb0xMJQZuDm
- FCAJEjtoUMyM4SeoLJCzcppsi4iSg7ciRc3iUYfBJlMOHbOGx7MRjcNg==;
+ bh=A7pULn+N/qSva4Kmn+uWKD/VP5Gn/UpPo/cNN/W5Dd0=;
+ b=tcaslj9NiYHyu4CRfbniiatt2HGdDFkoROD2MD2cCSPVjhwpbVbTy9IydZ4ycMEMOYfAN9
+ i/JRhwTYHXthofhBtOHasAHeSNbiimpuLoUNlJ8Kj6HIpkqGkCSQh/VmE8AnPrqU0KkoYcJU
+ 60HDz2g9EDrPeTRoCIrSw1iF0Uhokejg+rcPsJJnBLutgyj3sewXxGPT3orKSV10pXGinGIi
+ xI8+y4xdzz6YE0kyOWog799Xr5Qt8kqax8GYV+e0ZY88YoGXJBG8gQCx5McL9Q5/+iYdJ0ys
+ 2/yQmb742KLZD+d3oheWcP2oko43pB1TREAPYO1jbHs7ho5jKf+koFAQ==;
 From: Jan Kiszka <jan.kiszka@siemens.com>
 To: U-Boot Mailing List <u-boot@lists.u-boot-project.org>
 Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Sai Sree Kartheek Adivi <s-adivi@ti.com>,
  Alexander Heinisch <alexander.heinisch@siemens.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-Subject: [PATCH v4 3/6] tee: optee: Add support for enumerating services that
- only need RPMB
-Date: Thu, 10 Sep 2026 08:56:18 +0200
-Message-ID: <1a6e9dffe86b43d3c62ba185859d30a376fb61cf.1789023381.git.jan.kiszka@siemens.com>
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH v4 6/6] mmc: Make "MMC Device not found" a debug output
+Date: Thu, 10 Sep 2026 08:56:21 +0200
+Message-ID: <cabbf5bb428068d97cbc76c4739dac2392413eca.1789023381.git.jan.kiszka@siemens.com>
 In-Reply-To: <cover.1789023381.git.jan.kiszka@siemens.com>
 References: <cover.1789023381.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
@@ -150,153 +150,50 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Jan Kiszka <jan.kiszka@siemens.com>
 
-Up to OP-TEE 4.4.0, all services that needed a supplicant where returned
-by PTA_CMD_GET_DEVICES_SUPP. Since then, services that only need a
-supplicant for the purpose of accessing the RPMB are only enumerated by
-the new, separate PTA_CMD_GET_DEVICES_RPMB. U-Boot so far lacks support
-for that, thus no longer finds such services, e.g. fTPM.
+Callers of find_mmc_device are generally processing and informing about
+errors already, e.g.
 
-Perform the separate enumeration during probe but, as that may fail if
-the MMC is not probed yet, also provide a callback to trigger a retry
-when another MMC device becomes available.
+=> mmc dev 2
+MMC Device 2 not found
+no mmc device at slot 2
 
 Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
----
- drivers/tee/optee/core.c          | 22 +++++++---------------
- drivers/tee/optee/optee_private.h | 21 +++++++++++++++++++++
- drivers/tee/optee/rpmb.c          | 20 ++++++++++++++++++++
- include/tee/optee.h               |  6 ++++++
- 4 files changed, 54 insertions(+), 15 deletions(-)
+Reviewed-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
 
-diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
-index e8ba8f6cddd..7c481ceb804 100644
---- a/drivers/tee/optee/core.c
-+++ b/drivers/tee/optee/core.c
-@@ -27,19 +27,6 @@
-  */
- #define PTA_DEVICE_ENUM		{ 0x7011a688, 0xddde, 0x4053, \
- 				  { 0xa5, 0xa9, 0x7b, 0x3c, 0x4d, 0xdf, 0x13, 0xb8 } }
--/*
-- * PTA_CMD_GET_DEVICES - List services without supplicant dependencies
-- *
-- * [out]    memref[0]: List of the UUIDs of service enumerated by OP-TEE
-- */
--#define PTA_CMD_GET_DEVICES		0x0
--
--/*
-- * PTA_CMD_GET_DEVICES_SUPP - List services depending on tee supplicant
-- *
-- * [out]    memref[0]: List of the UUIDs of service enumerated by OP-TEE
-- */
--#define PTA_CMD_GET_DEVICES_SUPP	0x1
+---
+CC: Peng Fan <peng.fan@nxp.com>
+CC: Jaehoon Chung <jh80.chung@samsung.com>
+---
+ drivers/mmc/mmc-uclass.c | 2 +-
+ drivers/mmc/mmc_legacy.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
+index 698530088fe..cd930807802 100644
+--- a/drivers/mmc/mmc-uclass.c
++++ b/drivers/mmc/mmc-uclass.c
+@@ -319,7 +319,7 @@ struct mmc *find_mmc_device(int dev_num)
  
- typedef void (optee_invoke_fn)(unsigned long, unsigned long, unsigned long,
- 			       unsigned long, unsigned long, unsigned long,
-@@ -201,8 +188,8 @@ int optee_bind_services(struct udevice *dev, u32 tee_sess,
+ 	if (ret) {
+ #if !defined(CONFIG_XPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
+-		printf("MMC Device %d not found\n", dev_num);
++		debug("MMC Device %d not found\n", dev_num);
+ #endif
+ 		return NULL;
+ 	}
+diff --git a/drivers/mmc/mmc_legacy.c b/drivers/mmc/mmc_legacy.c
+index 8f8ba34be71..2a4a8a83fb3 100644
+--- a/drivers/mmc/mmc_legacy.c
++++ b/drivers/mmc/mmc_legacy.c
+@@ -45,7 +45,7 @@ struct mmc *find_mmc_device(int dev_num)
+ 	}
  
- static int bind_service_drivers(struct udevice *dev)
- {
-+	int ret, ret2, ret3 = 0;
- 	u32 tee_sess;
--	int ret, ret2;
- 
- 	ret = optee_open_enum_session(dev, &tee_sess);
- 	if (ret)
-@@ -210,13 +197,18 @@ static int bind_service_drivers(struct udevice *dev)
- 
- 	ret = optee_bind_services(dev, tee_sess, PTA_CMD_GET_DEVICES);
- 	ret2 = optee_bind_services(dev, tee_sess, PTA_CMD_GET_DEVICES_SUPP);
-+	if (CONFIG_IS_ENABLED(SUPPORT_EMMC_RPMB))
-+		ret3 = optee_bind_services(dev, tee_sess,
-+					   PTA_CMD_GET_DEVICES_RPMB);
- 
- 	tee_close_session(dev, tee_sess);
- 
- 	if (ret)
- 		return ret;
-+	if (ret2)
-+		return ret2;
- 
--	return ret2;
-+	return ret3;
- }
- 
- /**
-diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
-index 25b6b3c3218..daff3e04493 100644
---- a/drivers/tee/optee/optee_private.h
-+++ b/drivers/tee/optee/optee_private.h
-@@ -9,6 +9,27 @@
- #include <tee.h>
- #include <log.h>
- 
-+/*
-+ * PTA_CMD_GET_DEVICES - List services without supplicant dependencies
-+ *
-+ * [out]    memref[0]: List of the UUIDs of service enumerated by OP-TEE
-+ */
-+#define PTA_CMD_GET_DEVICES		0x0
-+
-+/*
-+ * PTA_CMD_GET_DEVICES_SUPP - List services depending on tee supplicant
-+ *
-+ * [out]    memref[0]: List of the UUIDs of service enumerated by OP-TEE
-+ */
-+#define PTA_CMD_GET_DEVICES_SUPP	0x1
-+
-+/*
-+ * PTA_CMD_GET_DEVICES_RPMB - List services only depending on RPMB support
-+ *
-+ * [out]    memref[0]: List of the UUIDs of service enumerated by OP-TEE
-+ */
-+#define PTA_CMD_GET_DEVICES_RPMB	0x2
-+
- /**
-  * struct optee_private - OP-TEE driver private data
-  * @rpmb_mmc:		mmc device for the RPMB partition
-diff --git a/drivers/tee/optee/rpmb.c b/drivers/tee/optee/rpmb.c
-index bacced6af6c..7ae6045511b 100644
---- a/drivers/tee/optee/rpmb.c
-+++ b/drivers/tee/optee/rpmb.c
-@@ -191,3 +191,23 @@ void optee_suppl_rpmb_release(struct udevice *dev)
- {
- 	release_mmc(dev_get_priv(dev));
- }
-+
-+void optee_rpmb_available(void)
-+{
-+	struct udevice *dev;
-+	struct uclass *uc;
-+	u32 tee_sess;
-+
-+	uclass_id_foreach_dev(UCLASS_TEE, dev, uc) {
-+		if (strcmp(dev->driver->name, "optee") != 0 ||
-+		    !device_active(dev))
-+			continue;
-+
-+		if (optee_open_enum_session(dev, &tee_sess) != 0)
-+			continue;
-+
-+		optee_bind_services(dev, tee_sess, PTA_CMD_GET_DEVICES_RPMB);
-+
-+		tee_close_session(dev, tee_sess);
-+	}
-+}
-diff --git a/include/tee/optee.h b/include/tee/optee.h
-index d1194493780..755533b2c0b 100644
---- a/include/tee/optee.h
-+++ b/include/tee/optee.h
-@@ -74,4 +74,10 @@ static inline bool is_optee_smc_api(void)
- }
+ #if !defined(CONFIG_XPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
+-	printf("MMC Device %d not found\n", dev_num);
++	debug("MMC Device %d not found\n", dev_num);
  #endif
  
-+#if defined(CONFIG_OPTEE) && defined(CONFIG_SUPPORT_EMMC_RPMB)
-+void optee_rpmb_available(void);
-+#else
-+static inline void optee_rpmb_available(void) {}
-+#endif
-+
- #endif /* _OPTEE_H */
+ 	return NULL;
 -- 
 2.47.3
 
