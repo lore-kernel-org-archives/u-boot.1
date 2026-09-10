@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E029FC88E45
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 22:08:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A817C88E41
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 22:08:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 93E5F810CF;
-	Thu, 10 Sep 2026 22:08:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BD51260BF1;
+	Thu, 10 Sep 2026 22:08:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 79MwIdjC54Jv; Thu, 10 Sep 2026 22:08:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org A7B0C810F0
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789078110;
-	b=hHonIGBqPMRoj8GbmcBGje4tKgv9qw70ugLvFLqz0PWcNq2r8f2pbgD7witgcIcWTC0F
-	 JaYQoVxOy3d7/mT3Si1FmGSy6zHWFy7BauIvUF++xsQdwo/eA+R0QSSlJ1hIPAZEURW/t
-	 puJIswR3npmKK+5sQh2j38Mqo+d4RIw9leIp9NwqwIrXqF6sTwmgkH2EgA/K50ckUwR4C
-	 0lYTfAtUsK5ltElaWY0ezB6bqnFfQpN0FZIb5VzNdQzOfKNrtcV9mGELh4npgVv7R0Obs
-	 6qxKEqc227QQjbwu/ewBJnBLORMoLN3QcilOIGzmzbtKiZKK4t4wsvDHxtVJ22xXvLw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id i45cwWmhRwDP; Thu, 10 Sep 2026 22:08:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E3D8060BED
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789078113;
+	b=XcgEVf3w03ZA0zM6LHRkMTsiAYU4Dszr/5IsmYLRAp2gWk9+0zobALUiGM+hQw1zeVau
+	 SURTL6iblnt6BRR48yQc5oG9QdaTZjNVyg+vehThlwKV2WLsBlxJKWVEnxMe1BvGilhkP
+	 3+IzKhc4og5h8BqInV6R34q2qNx7whhMUf4Ns21M9GDR+wbuh8bHyzORixzd9RSbiHCCr
+	 ZMnY6k+p8eTOSoiiJa8JBJdOtWapVA9ur8J1pE89VfTOJIAZwNZEZyJYgi65j985WbezZ
+	 f0WqR2qKihMYhcLv/BT1Xrud4n0Ibubtzjknw01F0IgoZMojnyw2oEXrvfScQ/7jPMQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789078110;
+	c=relaxed/relaxed; t=1789078113;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,126 +32,128 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=RD/PHe8+oEZjM2drlqEd8QptR8fPLgO4MN8jeBHck2Q=;
-	b=CmsnRioYKcqA+C3s/vJS0arPdo7IfzStD4F6ykA7AuBwrgA228AW3lIb2GFzOfK7c7k9
-	 a9IbVVyognR6WySTjAmqiUvsvJUj5hH00/+584dTBAJ+NqcizKIS+Gb5d4Y7p4O/Bog09
-	 r7BqAwHceb3alwM8XDMDxJU4PgbvcN+9EsNt6I50/QkOY5Io7j21m79GqXFEp/shB3QY1
-	 STm/+qg+u+skEzgnfVN0D0rrplPDzoJ+R3prT3rGc0iwRIpVOzByXA6bmnmtlM5gz8F7r
-	 Tk58MnQFV/DfTfT9+xcJjSXjSUdTowPglsKqAo4lZx3JgZ5Ai4pjB+7F0O6FjxfyG5Q==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=y3tyXAaVQlHvJl1VdxCRPwWUuFNecZU8JYfJ89Yr8kY=;
+	b=HohwxtjZ1WHmhhNxUTY9THe+xwvJbSqVnX9NUg2O2tIEmsF47q10ekS9qiv/vomuaZJ1
+	 2GFMJQLy9MJVHkCWZYk4/U4pVQoWKsbX5UrwNKlTvKGMhtDiYcupuiahJzuGNJ63LYhB1
+	 kLMS4fL4ypDaFaRK+mqQbSE4OYu3xoCdr+O941N4NRodwze3qbYtEMZJRBiPzdNPqTUVN
+	 l5nqVQXybPXV7yvH2GtZxwzHjxBo1ObZTLPXFda9BX5l0aAjeHUyTnvx7jKCCqK/fKyek
+	 fi+CA9L2sRDrTq+bqN0MLgUmAC11iqsnm+EapNr8xL4u93XX3vloGckVMHlKOOttG/A==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=hWLQSYIg;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789078110;
-	bh=RD/PHe8+oEZjM2drlqEd8QptR8fPLgO4MN8jeBHck2Q=;
+	d=lists.u-boot-project.org; s=default; t=1789078113;
+	bh=y3tyXAaVQlHvJl1VdxCRPwWUuFNecZU8JYfJ89Yr8kY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HraHk95C/+9vs/CM7x/crt+CARGfM/khhTEpVzj304oLBHG3VsuE1sZxCVFpuV/rL
-	 THFtTSeDm+sfUOMWe3L7Of5OZ+SdXvFN2FRsJsWw2ImM1zexN03E4HQK0DjOOorlgq
-	 pjXoILtHTkwf7b+RcbaGHSWQwClGbZ+L7GYg5eVSxTqogias2/fzEOgF2Cty62HpVe
-	 QXvx0pqz537evYB+0Z8dvaSAuyiWkVCkeAsrruP68ZMfzusjn70jUKbtp8u3rGGwiN
-	 8bts5SSdIIIEw3XC2rZDgB8Wameu7RqbjIzypPlqijCSSjDKDk4xqNU+aofBaZ5CLM
-	 cf3ZglcJ/0WxQ==
+	b=tsLwrDfkqgpHEj9FLooBL1RF7ojDDdH3UiF92aAS4vb2vu5KLXG5jjwTaBrWfRliL
+	 ZAdZgUxX85O4fGE+S7LzZhGSVnjRYUligvf6J93rdSLBtbZ670IRWuYaM8D295EMyh
+	 pGdqZPdyu1Tt+/HwiYQXY/RZ8J6EEFtUhbIQbjF6huvKJPhheCTB7SUi4b3AJlb58X
+	 H7Vg0F86B/mHim6RgxRuLzZXSxnz/UEgjKQZNCi43CVt5E+ZaxWv104g2kGKL5zaPK
+	 YR2eSDIlMZQCL3DL0bEHOGWyRV3SgJ1IB2wCP0mhzi+XUDlxToGDe/9sXssNYKS3LR
+	 RFUx7/yRHLJ9Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A7B0C810F0;
-	Thu, 10 Sep 2026 22:08:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E3D8060BED;
+	Thu, 10 Sep 2026 22:08:32 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 3C4F514D
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 22:08:27 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 4357429B
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 22:08:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 172A860B83
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 22:08:27 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 254A960B83
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 22:08:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gkX8U1dR2u9G for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 22:08:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E333460807
+ id bB7NJ653kAyl for <u-boot@lists.u-boot-project.org>;
+ Thu, 10 Sep 2026 22:08:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 22B7360BBB
 Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789078106;
- b=mpD7LGc1OuefNj3q/zq9EAkbCGu44j2xFgvAVWZALEL7o6FtXfi0htdPMf2GRFCuqEEo
- qlPvGF3ic3R6mp+Z8voHdysZTRSWKVKHxqNfLEHOCyoAL12/49V+MHJnLXm1bsG8VYaTf
- w2VztN5di28juqAkN4NekSSGbd5AlZk4Wq7vRu8VOJQHJovD+D2PgFzELgGe4GSV/UqIk
- 3bxwAxCk8Hcn4mXPZ3ubSLwGKkqI11VvYmXp7/vxSusreMgM9HV1kv9w3TrEb6TuKRnrZ
- kcfAqZvY4BMzY1NYWvRQCt5dz12xLRll5smF7lxg7rkNxRguUC/+yPssfsPR5tRksfg==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::332"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789078107;
+ b=BNNKEtFWSq1r/fjRdS+sSb0pog0wy2FulFp6ca9Bpv8qX320/4OVcy8EkLcms9uznplF
+ 4U+ZitYvfL+EwW/QeJsUp8P4mnH14Pft60ZfucHbcQja/dkzAvXtf72w83gk0Nc+aBfFZ
+ zok8GXTQVRWsgAed2QEzD9JaDrVD1mCMyZilSGzuo94BT/hK1dBrGUylVBODwGF9pjbVx
+ 5AfLmzyA5MfTY/nmlkwsSUuN2ST8S/Y5dIqzmCmbU5OkxoGNtLn5bkxX4pk2XqonX6kUd
+ ci3Ui3ovmzwhzoPQBDgouXGUqAALvp6peb+IcPyucY28l6TQcC5BDMogxu2JFgAxzTQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789078106;
+ c=relaxed/relaxed; t=1789078107;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding;
- bh=RD/PHe8+oEZjM2drlqEd8QptR8fPLgO4MN8jeBHck2Q=;
- b=q/p2mJGRl8/2aSobNgYVEgw9xpdJ8zVFGlXXZnZiD70T/rEeNfMhVjQ+KKBN/Zq1MvtA
- ljbA9cWRVRWOCY8kRClkT27EaVGNmdow1YWaWGSg4/aQ5Bp0ei14Lk3qFwzCUd4J9XJ7n
- ij2ziaVBnpiCg+G88DhpNZyA3igCthTB0XUOIF3koZk6/716PpH4Hp7uzEwjJSGV6zNQX
- y7iQ52b+td4K5csYhivRiEqbQQhSEL/IrLJQI3PADkjM2PRJ4avEE/N+KmUJv/90mL5z0
- vtpOWYIEktRueJOjSJgFUjU6jjaUtVaqJtNs8Si31IYTOMcUDp/kolHIhX/yWIpncnw==
+ bh=y3tyXAaVQlHvJl1VdxCRPwWUuFNecZU8JYfJ89Yr8kY=;
+ b=lHqBQWphYKqn8KAkFcJroyr0uJAdpJBsQFX1jnAlJQtK/yERc1QZ8CJ/2F2Ie+8+Tn+S
+ p90DaMcOZVm5nuyjAQOMz9SNKECRbYdHvADVgdzcJRmXlQFjFNBbxNGC/6cWVQLiVunIC
+ qsyF1/ixLk4ZB8OEqom5IkgP6GNwLKjkPpqemf5bsTOexgmul1Wr5gVf+0gg4elkmYS/D
+ Bsd7ZjewLaHqDlGQJEIPY9mBw1biYtQhu1CmUN1WhRk79YsHWf2G2YHeR0AL44Stf2tI+
+ BvghjTgUKgAuSnOc1QMf+9Js3GL7sEBlT90GQ+fJtoA4wHdmdVNfrFw9SfJl8I+hzDA==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=PM+r4697; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
+ header.s=20251104 header.b=hWLQSYIg; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::332"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::10; helo=mail-wm2-x10.google.com;
+ client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
  envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=PM+r4697
-Received: from mail-wm2-x10.google.com (mail-wm2-x10.google.com
- [IPv6:2a00:1450:4864:31::10])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E333460807
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 22:08:25 +0000 (UTC)
-Received: by mail-wm2-x10.google.com with SMTP id
- 5b1f17b1804b1-49cc9f581c4so1078715e9.0
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 15:08:25 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=hWLQSYIg
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 22B7360BBB
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 22:08:26 +0000 (UTC)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4957eefd361so2231615e9.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 15:08:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789078103; x=1789682903;
+ d=gmail.com; s=20251104; t=1789078104; x=1789682904;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=RD/PHe8+oEZjM2drlqEd8QptR8fPLgO4MN8jeBHck2Q=;
- b=PM+r4697RR6QxjJ0FO4reelIK/AtNqiA+0K9+y6EOmQNh7lPhhbjeMsIA//RVWhFOh
- xygpbaJXW6SFZH68FdFW16evAzYuTIVAO6AIXfWBANTEjqeE0TUaUCIIYMjOIiP1mN2U
- wbIoyibjQB+BVPbu/mIRU+3j9DTXoZ75Do0DeZ48aae0UON5yzl7Lmzra/zUsQpHXwOK
- BwsKdfeU6qHC2Qn9YrACvcSF9PNuSt0nd1syTvfBty/0mFgZFCXhphu/bxzGtJ77RcRr
- o8Og59ey7j3WJEOcNCScsarUEzGO3ZSvwqxHTldvY9JIncRAmhFV2zr5ooZ5IQ/Mp8mw
- zyYg==
+ bh=y3tyXAaVQlHvJl1VdxCRPwWUuFNecZU8JYfJ89Yr8kY=;
+ b=hWLQSYIg9RH1eBc3vIbsYRBBbW0emY/uNUkH6N6ioUXdvI7pP7N1n8n/e+6ZHsGv8a
+ VjhXm51w86z/XhhnTMKU+WMKm7oSFM5jUolmRcPKoi4d9V63VpwYHC+UxGTjdD4PA2pg
+ wYc5M0oZ2RJBFoGuA32QpynGMNDA0ehg4+SL8xxaNCnofoVsytuoRbu1gO27GtnpEsRk
+ sycuSFtgsG+7FzoE1YdtMBRuho4kcjkkZ+3Qta47QiPT7sONRz74Ar7erG8eD+PAdtPP
+ U2iT8Q+Xsf7u0DiDdRiSzgPLjdLQVwwWjdNWNAEfqICNdcTa8jVP/lvYP5NdJ389Kp2A
+ h1lA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789078103; x=1789682903;
+ d=1e100.net; s=20251104; t=1789078104; x=1789682904;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=RD/PHe8+oEZjM2drlqEd8QptR8fPLgO4MN8jeBHck2Q=;
- b=NKyTtgInlC8za/kifyqnhkALz+LEnR6dsxM+Sx0Q3yUaBlIKwxaRHOLH1uxry50z4m
- ERoSnk3UHlO2na1F6SrGtdi6/9fVbfYHehAso4VUawO9UBL0keuhuQT1nCaEyH3adFNF
- zW0oZeca86Oc5I0oJzZ/ZB0GFvcxD4yp+0pUyeH5A6iRVU9QyMeNERTpOcX+wD52YF5Z
- UX8hQU9oifKLS6WO8YWuOAmuTnhzgJ84Btpq2NGlasptH8L4fosTRm1UGcnNRktkONXY
- kJCsPgMOF+VrxDLPelPSd5Md+QcwqmK4W5blIIsqgWTlNftH4E2iSdqQpULF7XzB4zQb
- gbWQ==
+ bh=y3tyXAaVQlHvJl1VdxCRPwWUuFNecZU8JYfJ89Yr8kY=;
+ b=Etn8SIb0KzGb7iqbvXcg1ACNTctmFHJCH7gwcS6m+6IdBIG5ftChT9rFgx5KONRZhs
+ A34ineQuWE4fpJfZ448tpTlD+FGvgx2yQJYmLZKd6Nrcj7SZWIRj2Esdsj5Rw/U6YOOy
+ 44sbkMBtB0DRVA8DIPPB5GncfY7dIWRyHUbiCshADxQrKY51eBWyCVasgtdlqHz4yp5N
+ eM+KBSKinKcoup8LxpMcunkhisFbgzTnnBS6ZgqdOnxEK2mA8mldJU9plSqnKsJSQLxr
+ xIwqEiEP8jwL1C8KH3sSMSzfaxd0koF2db9ZmA8yBxV9rqVUAEq8JH+VPYE1OP407KwO
+ FuZQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx5j8vfY7FhMyWA14Sdv47dpKljG6g0acatb4Ol37I0KNMywCnw4vbZzITv7AXN/6GitqddtLQ=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kLEtd8w4OMcb9s+zdgbK7gVp8R45hKdst2Az2fT2cui+7timZh
- dYkMFw6mYYWwdKg0RF7Il8XmYME0rlXydXTZnNFLDMHGT3LAHRGhebQnLTsgmx+u
-X-Gm-Gg: AYBFou0jE7hCq9JsB1uehGD0f1TpkRECpDB/kfCvOHLaetLzZWHHiIF02L0rsBoz5Y+
- eY8q8yTIA31xjKIPC9Z735h1WA0IEJKNnlFrNKOlgySYX8hjFBhOwPznL4N9K1qdd4oCKgm801O
- CZGUGMeNtj0P5N8mqVhkDWxdIsU/1q/IxmaTpMvyENOvmioSFcasjUAOaTl9xOA/YWWO9B7bmJw
- tQxly0gpx4ottP4rmsr6DreEgsRwtPgvPs0dtM2KHDFY2/qgmnj46jg2jaLEayBWVrzEmppHEKU
- L68TDKsdTmt0F0RborGy3nMVsgCC+g8HJ18mhCg/fW/m3G6jZxqJVXf9x3FULy6n2hr7h2/Bxbd
- LlzIk5a+9pQ5CBhWPlTOMhMr58dAn8lFHrGOrGKb/SHIcg48be3kt2wvOiRCqswD/mmS1aYDKQn
- tlysbOL/Bs0wh+4Y0e3201Yw5Zyi2HGWVScKUF19+fj4jVDF6mH9eZ5m98DvWq8L2V6Gv21sFnR
- mWK
-X-Received: by 2002:a05:600c:4584:b0:49b:8f5e:51fb with SMTP id
- 5b1f17b1804b1-49e60f5afbcmr15947915e9.3.1789078103335; 
- Thu, 10 Sep 2026 15:08:23 -0700 (PDT)
+ AKwUvBzi+X4rwhmqN9n8ymM1nnZIa4P2+HtioFvmkdwpCpb1B8++xCYmizV8VKotuZpJqy7yKEN+4Fs=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mw830PDpL7E/B9WZMWo8Sl+GnTXUQoTyUN7U2OiUsDIDT3cLn4
+ scnqxQr3ZeTQfUjaFN4HTb6Sqehp+cbHPNNpArXPx/gshHx30km9LVtf
+X-Gm-Gg: AYBFou1r5MLsGsMdjwhIY7qN7+eX5GRHjGp6xAZPkK5BjGzQj8iUFZJVNs4DvO1Ou2d
+ UMX+CqGzF7bDFeCo3gaQ6YlkzUnwhuRichBi8WFewIiqtrAPRK4IBGJZk+5vG3NfMRw9q7Dy1Dw
+ BpBGoaD+NvGrK3KbDWn9pYBJWK49JfOsQR4QvTzh2dIVy7uics3FWZKmi5TVVCLy1NR7n0XpB1P
+ ZmIgjlK1rjp4rNDgtT/11mDbFb1OrOfB+U6v8WkjwTqXH8Wzxcgzb+JA2w34H7C66DQR9Z5ZcMY
+ H/c8gFUayiFVVcWibiw0VfTwupcP2+30lDrQVPKyu09vuTskwzsWArOZerq7Qo113z4yzz//o3x
+ pUuYHdkcHhZZudTTs00d+t5z0dCukDc5oIcvi/pqP59amBln0+vya9vQ9qULiaaqp0kUiNespwZ
+ qOLecFJ8QyhlzF9lGq/Y+v4Quu8b1P98tvqFi7k+pe3pTZWBDSma4aE43rSaq/9ScC7AWZmxQpy
+ siTZT6GMCInhI0=
+X-Received: by 2002:a05:600c:6296:b0:49d:191b:88be with SMTP id
+ 5b1f17b1804b1-49e6164a26dmr11682925e9.0.1789078104216; 
+ Thu, 10 Sep 2026 15:08:24 -0700 (PDT)
 Received: from deb05.proceq.com ([213.160.61.66])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49e62231360sm4795595e9.4.2026.09.10.15.08.21
+ 5b1f17b1804b1-49e62231360sm4795595e9.4.2026.09.10.15.08.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 15:08:21 -0700 (PDT)
+ Thu, 10 Sep 2026 15:08:23 -0700 (PDT)
 From: Mehmet Fide <mehmet.fide@gmail.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -159,10 +161,10 @@ Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Ye Li <ye.li@nxp.com>, Michal Simek <michal.simek@amd.com>,
  Aristo Chen <aristo.chen@canonical.com>, u-boot@lists.u-boot-project.org,
  Mehmet Fide <mehmet.fide@screeningeagle.com>
-Subject: [PATCH v2 2/4] regulator: claim the enable GPIO at probe time,
- not in of_to_plat()
-Date: Fri, 11 Sep 2026 00:08:16 +0200
-Message-ID: <20260910220818.3093364-3-mehmet.fide@gmail.com>
+Subject: [PATCH v2 3/4] doc: driver-model: state that of_to_plat() must not
+ probe or claim
+Date: Fri, 11 Sep 2026 00:08:17 +0200
+Message-ID: <20260910220818.3093364-4-mehmet.fide@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260910220818.3093364-1-mehmet.fide@gmail.com>
 References: <20260910220818.3093364-1-mehmet.fide@gmail.com>
@@ -183,209 +185,66 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-regulator_common_of_to_plat() requests the enable GPIO, which probes
-the GPIO controller and claims the pin while the consumer's platform
-data is still being read. of_to_plat() must not do either: it runs
-before the device's pinctrl state is applied, so on SoCs where the
-direction lives in the pad register - the output enable on Vybrid is
-one - the pinctrl undoes the direction the early claim just set, and a
-fixed regulator configured as always-on powers nothing.
+The design document says decoding the devicetree belongs in
+of_to_plat(), but not what the method must not do. Spell out the rule
+that has always been implied by the phase separation: no probing of
+other devices and no claiming of resources, and point at the
+parse-now-request-later GPIO helpers as the pattern to follow, the
+same shape clocks, resets and phys will want.
 
-Parse the GPIO into the platform data in of_to_plat() and request it in
-the new regulator_common_probe(), called from the fixed regulator's
-probe method. The gpio regulator's voltage-control GPIO has the same
-problem and moves the same way.
-
-Two things change on the way. The gpio regulator used to log and carry
-on when its voltage GPIO could not be claimed; it now fails to probe for
-anything but a missing property, since it cannot switch anything
-without that pin. The fixed regulator already returned such errors from
-of_to_plat(), so nothing changes there. And the parsed specification
-stays in the platform data after probe: priv is not allocated when
-of_to_plat() runs, so plat is the only place it can live, a few dozen
-bytes per regulator traded for keeping the two phases simple.
-
-The fixed-clock regulator shares the of_to_plat() and used to claim the
-GPIO too, although its set_enable() only drives the clock; no
-devicetree in the tree gives it one, so it no longer requests it.
+The paragraph a few lines further down allowed exactly the opposite,
+probing GPIO, clock and reset providers from of_to_plat() to select a
+resource. That is the pattern the helpers exist to remove, so drop it;
+only its first sentence, that of_to_plat() must not probe the device
+itself, is still true and stays.
 
 Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
 ---
 
 Notes:
     Changes in v2:
-    - rely on the -ENOENT contract instead of checking the present flag in
-      both probe methods (Simon Glass)
-    - drop the request from the fixed-clock regulator, no devicetree uses
-      it (Simon Glass)
-    - reword the stale debug message in gpio-regulator (Simon Glass)
-    - commit message: spell out the gpio-regulator behaviour change and the
-      plat footprint (Simon Glass)
+    - reword the sentence about the GPIO helpers, mention clocks, resets and
+      phys (Simon Glass)
+    - remove the paragraph that allowed probing providers from of_to_plat()
+      (Simon Glass)
 
- drivers/power/regulator/fixed.c            |  6 +++++
- drivers/power/regulator/gpio-regulator.c   | 21 +++++++++++++----
- drivers/power/regulator/regulator_common.c | 26 ++++++++++++++++++----
- drivers/power/regulator/regulator_common.h |  3 +++
- 4 files changed, 48 insertions(+), 8 deletions(-)
+ doc/develop/driver-model/design.rst | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/power/regulator/fixed.c b/drivers/power/regulator/fixed.c
-index 1dd137f493e..ff01812e8d0 100644
---- a/drivers/power/regulator/fixed.c
-+++ b/drivers/power/regulator/fixed.c
-@@ -38,6 +38,11 @@ static int fixed_regulator_of_to_plat(struct udevice *dev)
- 	return regulator_common_of_to_plat(dev, plat, gpios ? "gpios" : "gpio");
- }
+diff --git a/doc/develop/driver-model/design.rst b/doc/develop/driver-model/design.rst
+index 633545944d1..4b1fe0839a7 100644
+--- a/doc/develop/driver-model/design.rst
++++ b/doc/develop/driver-model/design.rst
+@@ -759,6 +759,16 @@ The steps are:
  
-+static int fixed_regulator_probe(struct udevice *dev)
-+{
-+	return regulator_common_probe(dev, dev_get_plat(dev));
-+}
+    6. The device is marked 'plat valid'.
+ 
++The of_to_plat() method must only read the devicetree. It must not probe
++other devices or claim resources such as GPIOs or clocks: ofdata is read
++before the device's pinctrl state is applied, so a pin claimed here can have
++its configuration undone a moment later, and probing another device from this
++method defeats the lazy-probing model. When a resource is named in the
++devicetree, read its description into the platform data here with
++gpio_parse_by_name() and claim it in probe() with gpio_request_parsed(). The
++same 'parse now, request later' shape applies to clocks, resets and phys,
++even though those helpers do not exist yet.
 +
- static int fixed_regulator_get_value(struct udevice *dev)
- {
- 	struct dm_regulator_uclass_plat *uc_pdata;
-@@ -150,6 +155,7 @@ U_BOOT_DRIVER(regulator_fixed) = {
- 	.id = UCLASS_REGULATOR,
- 	.ops = &fixed_regulator_ops,
- 	.of_match = fixed_regulator_ids,
-+	.probe = fixed_regulator_probe,
- 	.of_to_plat = fixed_regulator_of_to_plat,
- 	.plat_auto = sizeof(struct regulator_common_plat),
- };
-diff --git a/drivers/power/regulator/gpio-regulator.c b/drivers/power/regulator/gpio-regulator.c
-index 787f8170234..84a61f1a92c 100644
---- a/drivers/power/regulator/gpio-regulator.c
-+++ b/drivers/power/regulator/gpio-regulator.c
-@@ -19,6 +19,7 @@
+ Note that ofdata reading is always done (for a child and all its parents)
+ before probing starts. Thus devices go through two distinct states when
+ probing: reading platform data and actually touching the hardware to bring
+@@ -778,11 +788,7 @@ present will cause an error on probe, yet we still must tell Linux about
+ the SD card connector in case it is used while Linux is running.
  
- struct gpio_regulator_plat {
- 	struct regulator_common_plat common;
-+	struct gpio_dt_spec gpio_dt; /* parsed voltage GPIO, requested in probe */
- 	struct gpio_desc gpio; /* GPIO for regulator voltage control */
- 	int states[GPIO_REGULATOR_MAX_STATES];
- 	int voltages[GPIO_REGULATOR_MAX_STATES];
-@@ -28,7 +29,6 @@ static int gpio_regulator_of_to_plat(struct udevice *dev)
- {
- 	struct dm_regulator_uclass_plat *uc_pdata;
- 	struct gpio_regulator_plat *plat;
--	struct gpio_desc *gpio;
- 	int ret, count, i, j;
- 	u32 states_array[GPIO_REGULATOR_MAX_STATES * 2];
+ It is important that the of_to_plat() method does not actually probe
+-the device itself. However there are cases where other devices must be probed
+-in the of_to_plat() method. An example is where a device requires a
+-GPIO for it to operate. To select a GPIO obviously requires that the GPIO
+-device is probed. This is OK when used by common, core devices such as GPIO,
+-clock, interrupts, reset and the like.
++the device itself.
  
-@@ -47,10 +47,10 @@ static int gpio_regulator_of_to_plat(struct udevice *dev)
- 	 * per gpio-regulator. As of now no instance with multiple
- 	 * gpios is presnt
- 	 */
--	gpio = &plat->gpio;
--	ret = gpio_request_by_name(dev, "gpios", 0, gpio, GPIOD_IS_OUT);
-+	ret = gpio_parse_by_name(dev, "gpios", 0, GPIOD_IS_OUT,
-+				 &plat->gpio_dt);
- 	if (ret)
--		debug("regulator gpio - not found! Error: %d", ret);
-+		debug("gpio-regulator: cannot parse the voltage GPIO: %d\n", ret);
- 
- 	ret = dev_read_size(dev, "states");
- 	if (ret < 0)
-@@ -76,6 +76,18 @@ static int gpio_regulator_of_to_plat(struct udevice *dev)
- 	return regulator_common_of_to_plat(dev, &plat->common, "enable-gpios");
- }
- 
-+static int gpio_regulator_probe(struct udevice *dev)
-+{
-+	struct gpio_regulator_plat *plat = dev_get_plat(dev);
-+	int ret;
-+
-+	ret = gpio_request_parsed(dev, &plat->gpio_dt, &plat->gpio);
-+	if (ret && ret != -ENOENT)
-+		return ret;
-+
-+	return regulator_common_probe(dev, &plat->common);
-+}
-+
- static int gpio_regulator_get_value(struct udevice *dev)
- {
- 	struct dm_regulator_uclass_plat *uc_pdata;
-@@ -153,6 +165,7 @@ U_BOOT_DRIVER(gpio_regulator) = {
- 	.id = UCLASS_REGULATOR,
- 	.ops = &gpio_regulator_ops,
- 	.of_match = gpio_regulator_ids,
-+	.probe = gpio_regulator_probe,
- 	.of_to_plat = gpio_regulator_of_to_plat,
- 	.plat_auto	= sizeof(struct gpio_regulator_plat),
- };
-diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
-index c0387eff4fc..dfc58cd60bf 100644
---- a/drivers/power/regulator/regulator_common.c
-+++ b/drivers/power/regulator/regulator_common.c
-@@ -16,7 +16,6 @@ int regulator_common_of_to_plat(struct udevice *dev,
- 				struct regulator_common_plat *plat,
- 				const char *enable_gpio_name)
- {
--	struct gpio_desc *gpio;
- 	int flags = GPIOD_IS_OUT;
- 	int ret;
- 
-@@ -25,10 +24,10 @@ int regulator_common_of_to_plat(struct udevice *dev,
- 	if (dev_read_bool(dev, "regulator-boot-on"))
- 		flags |= GPIOD_IS_OUT_ACTIVE;
- 
--	/* Get optional enable GPIO desc */
--	gpio = &plat->gpio;
-+	/* Read the optional enable GPIO; it is requested in probe() */
- 	if (CONFIG_IS_ENABLED(DM_GPIO)) {
--		ret = gpio_request_by_name(dev, enable_gpio_name, 0, gpio, flags);
-+		ret = gpio_parse_by_name(dev, enable_gpio_name, 0, flags,
-+					 &plat->gpio_dt);
- 		if (ret) {
- 			debug("Regulator '%s' optional enable GPIO - not found! Error: %d\n",
- 			      dev->name, ret);
-@@ -49,6 +48,25 @@ int regulator_common_of_to_plat(struct udevice *dev,
- 	return 0;
- }
- 
-+int regulator_common_probe(struct udevice *dev,
-+			   struct regulator_common_plat *plat)
-+{
-+	int ret;
-+
-+	if (!CONFIG_IS_ENABLED(DM_GPIO))
-+		return 0;
-+
-+	/* the enable GPIO is optional: -ENOENT means there is none */
-+	ret = gpio_request_parsed(dev, &plat->gpio_dt, &plat->gpio);
-+	if (ret == -ENOENT)
-+		return 0;
-+	if (ret)
-+		debug("Regulator '%s' enable GPIO request failed: %d\n",
-+		      dev->name, ret);
-+
-+	return ret;
-+}
-+
- int regulator_common_get_enable(const struct udevice *dev,
- 	struct regulator_common_plat *plat)
- {
-diff --git a/drivers/power/regulator/regulator_common.h b/drivers/power/regulator/regulator_common.h
-index d4962899d83..951a02b5416 100644
---- a/drivers/power/regulator/regulator_common.h
-+++ b/drivers/power/regulator/regulator_common.h
-@@ -10,6 +10,7 @@
- #include <asm/gpio.h>
- 
- struct regulator_common_plat {
-+	struct gpio_dt_spec gpio_dt; /* parsed enable GPIO, requested in probe */
- 	struct gpio_desc gpio; /* GPIO for regulator enable control */
- 	unsigned int startup_delay_us;
- 	unsigned int off_on_delay_us;
-@@ -19,6 +20,8 @@ struct regulator_common_plat {
- int regulator_common_of_to_plat(struct udevice *dev,
- 				struct regulator_common_plat *plat, const
- 				char *enable_gpio_name);
-+int regulator_common_probe(struct udevice *dev,
-+			   struct regulator_common_plat *plat);
- int regulator_common_get_enable(const struct udevice *dev,
- 	struct regulator_common_plat *plat);
- /*
+ If your device relies on its parent setting up a suitable address space, so
+ that dev_read_addr() works correctly, then make sure that the parent device
 -- 
 2.55.0
 
