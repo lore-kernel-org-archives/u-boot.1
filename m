@@ -1,166 +1,167 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 562CBC79FBF
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 20:03:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 189DFC79FBB
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 20:03:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0F6C181193;
+	by smtp4.osuosl.org (Postfix) with ESMTP id D5DB040BA4;
 	Thu, 10 Sep 2026 20:03:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id b_ubbJC1u8Rj; Thu, 10 Sep 2026 20:03:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 414A0811E7
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789070605;
-	b=AXMW+SKWklfh1TkDDd+YziR5H9d1aer5k66NpJ+3FzmIvOGl9STkEUQiMn5S7g9B0pkf
-	 pox8+32HxHD6CZibgk+Hwl6fsuyg1hBjn6Cw1ZMEKtQqb51Tn8gOdvNSGaeQw1B/ordw8
-	 rg1tGvGpPrP7MkmFWPtVqahbit8TQjRUJqrqNjXp/ajt0XA7Xm0qw7fLFQL3vcsE7dqOJ
-	 VMV7qFM0zppJsxHjxSGonrJomRgLNFbP/NakbvqY+gLZmfhXq2BT51ZAuT0nt1NKEW0SL
-	 sIxO2FQ06bJ/cztbiuKKw4ogscXYeMUmYjoPocMKqKX1zAdV7fe7iAEaRLTc88tJxAA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ByRgoZl27WBU; Thu, 10 Sep 2026 20:03:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org C39D840BA1
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789070607;
+	b=B5ihTb+leiVwrOp29yB620l4tgqSR96XcHxKb1K2S0PIDQ/uuO+e3EHpWhspNSEnmZCm
+	 2QkaXVJeRgbhwEgr1Y/2uxUN8dbNP7uIkTlscR8N07LEwry19lHk7LhZh+/4DKI3Z3s54
+	 hkjmxgOS9S4EQ9GIJxZUWe/7SZXAaDi7MXyjSmbt8PFACfXpWe4/pKutss27lU+oGbqhH
+	 g7wAOqJgGeGSpL8QHz0DrucBTs8uD4PXZaVrcUm9O95KTalpiN0cw07ZzhZAHGpDpmS1V
+	 kZvo5PbFjbQR89FqAhNBp7DQYU5rO16AAwbLUKY6JlAapkRvt941XcNcSXA24uH8jlg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789070605;
+	c=relaxed/relaxed; t=1789070607;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=VxcZHRhXyZjXWFw5fTwzwYanmFn4gqjohZ8NmcLOfqE=;
-	b=eZKISq3P/WjewFQY17KX+aCUzj41WIwSbPA2A4jtdEc7tkCEiSYmulAzfucNXOcbHCj/
-	 C96wloP2olXMP0NE6odxB94D+lEh5UzQ9i8idL9VmXaoRL4FpLHsnWdSw3ftzSXfLGPVg
-	 rkujTwX/aNme2c6w+57MD9PWbs8dMLccwp6I3vWuWYJmru9w/yPR1ergYMsqraLMmn5iF
-	 Rqo9hw2dEZuqZ6HHaghX6RUz9ezcXiTXqXfLLxT+vrAo9ZCu+Mnvo9aaKYyyJxNzy4c9R
-	 Itd+N3b8yEWIN2cY5Lxk//9S/EoSlumcYNoS2uWwDONLZ4PfH+F9kWcuPLdiwEUlEvw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=konsulko.com;
-	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=RMlh6wVX;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=/SLl/LVJopbcnHSbRwxdudekOSVOVxwcQ8JSQbicUV4=;
+	b=CTHyh1ZGjefhPkqVL891+IJEPm3uF/nbq8B3BIHHBhoJwbZprS9ULp9XQsORPW/8tDj3
+	 na/YMsjaJaZwh2fT4YhusCWkI+rKEfYtAk60Pw0cRYPBQF92nuLw5am97qOpxZnfecKp7
+	 56FSTyf9HZcm4ilzU0r9XnTPCA4VfBo0Ta6WUve38jq8vaasRygIGRv00eoWkZGgJytEj
+	 6XKIT5F5qgsrjK4NyvrcWCWDhVDCZD8IDuCkCcgTAcz81jRuEba4sZRcN5ri2LkTbcdLp
+	 BBp0lsg/kQU3wc/72hHzqBy+QQ0Dz7zfTpxntj8Z5tSGj7CLjmYl8RMMOuApmHa04Yw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789070605;
-	bh=VxcZHRhXyZjXWFw5fTwzwYanmFn4gqjohZ8NmcLOfqE=;
+	d=lists.u-boot-project.org; s=default; t=1789070606;
+	bh=/SLl/LVJopbcnHSbRwxdudekOSVOVxwcQ8JSQbicUV4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ziAH3lMtVrSr93VTMDJ6jNEehQQQMXl6jcyqhTqMKVNEe+WJytJdDxQnBnTEFf21d
-	 U4QpuC9vXoJASHkaFEROAxLXPsrZexssZsrR7gWv6dBDGS1sFbpfxWubBgl3PfRY0V
-	 Kn+4RUbBmgJGc9lohNye1PQCqXc5CA4ChRnG1AnoHrWrwAv84ZuASmmAdppXil2w4G
-	 RBdVwNvrthTrUroK5H8hc91GoPHfouUoTvT3IWyRX1RIIX89s9lKwqMyrOfegAodVp
-	 Z4JHKMUbUbrfrLJ3Tf/6J5Et4YUevsxsM6t89JFrZDjTEZGYvrLsZYcUu70HRUazhQ
-	 WGaUQIsGSWf8Q==
+	b=greXgG2/aWHZ0jTupBIxTc0X7gL/JlXYWHO4INRWIcPw9ijWMi4xb4duS8O8IX4JV
+	 mHXQIEueCnD2B6L5XnIyGGDLe7BGcItgLLXkfjMad2HryNe+RV054jhp4ROFyQ0HGZ
+	 p85bTkdqYSwlpzLnCVqmvDuSiWfk+L8x+M8hECS/jAi6QZkYzXhVRb1mSybBBpCeN6
+	 WA02j1VmviIY0nwS6d+noHc/MoWAs3vlyP+5EZTPLjmjDKHoFzNvPHK8udT3bJ906M
+	 L+y05RG3E/VFNjl6+Nbr5Zrh4krEaiqN42ocnwtAw8RfGPGZnX385AlalNrBFKn4An
+	 UhAULiW6M2cNg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 414A0811E7;
-	Thu, 10 Sep 2026 20:03:25 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id A6D0514D
+	by smtp4.osuosl.org (Postfix) with ESMTP id C39D840BA1;
+	Thu, 10 Sep 2026 20:03:26 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C1BBC14D
  for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 20:03:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 98D06811E0
+ by smtp3.osuosl.org (Postfix) with ESMTP id B3F1560BE0
  for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 20:03:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RXAG00-5EPZU for <u-boot@lists.u-boot-project.org>;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GnRBPBtNCADz for <u-boot@lists.u-boot-project.org>;
  Thu, 10 Sep 2026 20:03:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 997AC81114
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::22c"
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org DE2EE60BD6
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:32::6"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789070599;
- b=CHsha8ujN/mCBEaCdKR+yUm6dFz+NH0y47YIypzYsFKbOJaMrpMOCcI3+Ewhe/F/vL2s
- kdp6DCJuAo6gCiHur1MpRU+l095rOk+Rx3gAzpDSzzi5cgGgho9gTmizyWWLs+eYiKh8F
- r7altwsfIqdn9fGkaZJB3/9OxYJDOarpNVfuIRcY6tjgXj0hN637IlUcqcyEhMGuWKGFQ
- MT/HMSh9V4qpdHCzSZQDUY8v12hGs1VMDtkMCo/TZzyIP/snIE3YEdjVGGqkbN7YBcQeQ
- 8pWCYLs00HX+p0BFa7erzSj27o4ajVibQbpS0RdZjphjuCItsGVJaU5YJBrg8lHbfIg==
+ b=rSBq892Nx5/DVDCgJmTPkneWFvMotMqLYKr93jGFxOgH/ZRsKTg3NjDYz0E+ZS7EACdK
+ gCjnW4v5lJQU0Xu3jXWivYoQW/+Vn2md6fH20BxBFNrlatJoKGybmmvZN2OwY+r3+SErT
+ 1iJRtSLGX/Jc2B6EtPUVVxs7+ksTI/S1JQnoPVV5ZcLo/+7Z2L06GWxAvN2IHmU2nmnoJ
+ npk+J1fPytRpC74PyVVbvB7Yd0oGsU0xA75gOJJLIKf9XMKZjngw47xYIwhs8cUf6Qp6d
+ FhdJWW2TDnzB/2nhA19yClp6Rs4zybhKqC6Itp8YhYB8E0ewGn8AZM9BZJhCnWxcQFA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1789070599;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding;
- bh=VxcZHRhXyZjXWFw5fTwzwYanmFn4gqjohZ8NmcLOfqE=;
- b=OuFM1kYJUKV7C5/xnGQF2zv9HMeqTHNO+gx4jqCTXkxxBoEkf4cnL3YJLkpRunu93OJr
- LK+/N2Z6iisskjhzQIZBUzxZcj2KhYXXrbD4bv+pM9dAMVWtQw9ecv4+ycH3BQMA52SyF
- RcKGDplSOFnaW27CittbsV/MuoxJ7NLWv9EFxrZ3eQpLVPgpKFVlJNcXMdRxSNfWGy+Ht
- 8WFGU2TObERqPFOE1sYXQ4+zAjK2P/BUQc9gYYh8KiQ6PRuom78YwnHGa5mtxOZcSgz4m
- 4L1F6CvXcmpbdH8XAKI0k5yfRBBmZxicg/GBPfPum657sQU2E076dmy4a/KVozx8qPQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ Content-Type:Content-Transfer-Encoding;
+ bh=/SLl/LVJopbcnHSbRwxdudekOSVOVxwcQ8JSQbicUV4=;
+ b=KhEfD8BYCzCCNGmmeibZYSlHG6ZXOdiSCvLafvNbqW8z/N9bdiaBgQdpRJ5AXs0WdRqx
+ 8YVQKaLZz402ICnU/UaFP0Phlgu2R9Z6AkNeiTWGWjTvCXzr39MBipOD2f+x4YR5z+i4S
+ ZYP65ZiEziTXp+XUSii9YwPwBU31O0vcv6k3J5DwQCJ5BcIkWVTxtJ0faOhB7y6JinMNC
+ GjZXcDr18/S0HYdMiye48aHqloVsqTwE6VdZP5d+q8z6PZQqI5zdsObu0O02hAXDsNkd0
+ wYVlw6NHuRtUzbZXknDl5qHdgWFLY3VOhEv4+rKzQ8R/q7TrMIGaDycwXsinGHFlXJA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=konsulko.com; 
  dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=RMlh6wVX; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::22c"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::22c; helo=mail-oi1-x22c.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+ header.s=google header.b=OqnLJfcy; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:32::6"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:32::6;
+ helo=mail-oi2-x06.google.com; envelope-from=trini@konsulko.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
- header.a=rsa-sha256 header.s=google header.b=RMlh6wVX
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 997AC81114
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 20:03:19 +0000 (UTC)
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-4b3a61bdf22so160740b6e.3
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 13:03:19 -0700 (PDT)
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=OqnLJfcy
+Received: from mail-oi2-x06.google.com (mail-oi2-x06.google.com
+ [IPv6:2607:f8b0:4864:32::6])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id DE2EE60BD6
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 20:03:18 +0000 (UTC)
+Received: by mail-oi2-x06.google.com with SMTP id
+ 5614622812f47-4b3759b7ff0so127566b6e.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 13:03:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1789070598; x=1789675398;
+ d=konsulko.com; s=google; t=1789070597; x=1789675397;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=VxcZHRhXyZjXWFw5fTwzwYanmFn4gqjohZ8NmcLOfqE=;
- b=RMlh6wVXVjyfrdR5Xyz7W5jhp/7xsOTwmA1UqG3IU4MX54X4WtbNOs9gPQwNW/dHvq
- ETl5skQeGMFsFEVbp/M3VgwTcCONsLK/Os1c7ulSfSsfhtgqgXZ6HhrkrDPn0fZZlxh3
- jzWQpyEg+J2zTItba29n2eMRR+7WUjeh7CsSs=
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=/SLl/LVJopbcnHSbRwxdudekOSVOVxwcQ8JSQbicUV4=;
+ b=OqnLJfcyuwFrmHxFlvYieUCcIgL34OUgPLW4QlG8Cr9vjnABMNzdCisYJrK7sWHoBh
+ uEs1ftKShAd3Ih8fN3Wm5vxqznW7pUFpUUp2M/vDRayoJllSFfeeaDiKp7sWDhMODKKM
+ vEBKnsl0P5sU3eWcJGBgbOaW1ydXiWyYlYIGk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789070598; x=1789675398;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=VxcZHRhXyZjXWFw5fTwzwYanmFn4gqjohZ8NmcLOfqE=;
- b=LdFVTxgQ70dPfYkhq1gclU4vyVqfHEsBaajB7csaHtuFH6UQVEjOKk4rQKMXEycBsb
- 3JFCXb4tdxOHL477qUvvqEyhEKsTLI/Ng1U7dXMR/zvUZA7QleTwB8eKjVJQguCDKoRB
- W4bjtJDJfnmg5JrrJocDKRxBbAiB6wAuVQjPIS3z8Re8YHpSA9F31bdLEqjLCS4Ph/NS
- c5NShh6Io2AjaoiqKyqK4QAFwSLIGGuT4doOgwlXLVwNFZoN7+UJcSmxYS8tD9zE5MRu
- rIr0Tk25nToLpO+UKSTDIelx7v10CLMVZorcyBCChsEoKPyHF7gEeDpalhUxvks+LQdj
- twIA==
-X-Gm-Message-State: AFuF++k9h1QgDLqu0TQGqBN2jpgZ3JaY1NPW2tnnemNaD3rmFYmGU4LD
- cdtkC2LsXF5C0hewSL2+7veEKZSZRVl9WMJqeolkNYIlj5UG9N3gVXMJqBJ+SNHqYWNXG+ju9Pd
- d+N7xbLvEWYdY
-X-Gm-Gg: AYBFou3NyjTkmiIV7MVArO8fB/loetD0EYIYWHSM1SbRm9Hj8WNPxxJZIuw0eNx1q/L
- jTv9XUHh9MoNKZ3P08iAlboy+ctMyEeoT9eNqANm2vXFr9Le6kLMgNbwpdnZmm6iV+OEcg6qKFv
- XvoKgB+cqeSAGwVKBLg541aFzpRJloze97BJrQWVsWqkUTIqLB7GhEI32P7dVuDX0FV9gZ9DAPy
- l2RHkddNmp8ljoxXaXK+cg0i6bezZHkRSok1GUYERcFJ82xtpHulD0lBY1XJJHm2yEVDMsuuFDx
- 9CZL7VEcH2ig0cm1I+cMBw/tepdsHz8Q51c70z0pK2NsfVnZYMpRjlfGIKtVfM3NOA9b3pCSEgK
- aSdbTn86K1gyNvTQbAdNRjkAbKeSxDl6InfW0wbzqXKAkXokzaHxJ6JwwR1EQiAm171/zb+rIM+
- TUIRh6gCypa8Ga1SR5SSdC4WkMvP8zER8ZaGiEXBwNdK4AD7LJoS3ztsVEFnljASgnMfWIeLCNr
- +B67Ky2+lB/rxOFyym9bJQnJAZmc/W+4gXMo2DKuDw0iGgDIHjjbcTyqHSSkkDxuXTfscpzrxwh
- 2NPX+A0/7kwyFw0w82zDB55AHMHlM9o3DGZsYq+e31weFSyas7BjM0E=
-X-Received: by 2002:a05:6808:5384:b0:4bb:e62e:49c9 with SMTP id
- 5614622812f47-4c31bceef3cmr513142b6e.28.1789070598124; 
- Thu, 10 Sep 2026 13:03:18 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1789070597; x=1789675397;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=/SLl/LVJopbcnHSbRwxdudekOSVOVxwcQ8JSQbicUV4=;
+ b=XXDvixFQ38R+wr4GlnAINSYICFlx2NER06w50Sxe7dj3lStlFWtUukuuPStu820ajU
+ VIwvAWlBU6Lvm++kF4MzR5GbptlYWjjrPasRgMLlUDPM26sJT3ie9TJ0FOUaRGkq8wVG
+ GPk+w6F8sSYwm12D4GaJSwYmQKHwycedjdkLRnHP9iGBb3fgVO1+nVxgn596cIraTVjw
+ mQBCDK97s55PM65jitKL2Jn8h70XiyGRcgpGfyeHszW9JWEiUsioFfZVQvLAPq2j3at0
+ 7leAZYfRCIrbVeeEkB7/u0GdKLHtnFnmTNdgw1zHUZ3qiFsZBd+hje+Yxumk3tBfC42h
+ v6sA==
+X-Gm-Message-State: AFuF++khwy74k1+PgFZcDXndVzU6YilMgCGWUn3KOOoJUXkfxe1hqjjx
+ dVzo4iR5dGQ8lz1Nd99Rc5KXCBYa4NmdGCNWrz/GmMXt6IEDXcSjEi2tHbuRKC//b2i3H6gchnJ
+ MWF6OQhtxeLl0rKk=
+X-Gm-Gg: AYBFou1lvRLYxCnf1baoYO9OGVZ2fhKfYtQM4Oudt3RUPsnW47LkIjsVIH2hp07dxcS
+ y0HayeFux6rZ1H7dnyEtyNlrTy85nKQtJjjnc2HW5YG+QzW7d7MadTWy7Ce7pd+iS7xmBSrzPD4
+ RGAhj+Bz2CnCW+Z6TKZ1XSFdvZ42/Lt8KKAiHhqjgD7gbCvHTcihlHyP/FShAdnl5QuQdhEu9Iz
+ anU4TwfTpp4W5wDHAZKr4yzh8kjquRp+R/QZCsal6wtIZxbXBAu12bdQBBS44EunVbSZNY3N7JE
+ BtJsSium8/5rDgOa0wTPpGqJkg4FjcqPnUFXlOYKtCCuvBqGn4nPGK293qer9u2h2yh7HrD93Kk
+ MHMQsjXCTUJAsvmgmUlqC+0yyZXcvPdaPOlRFluGHp8m7xYDOd2r5vCXkdek70l7CsAx9ezyl8/
+ tf6NILyX6J/NQXtvQv45w+Ve/cXW6MAsFnQKlaZUkdeVhSkGCGXWT89boFxMN/h5hOAX/paq0TS
+ VRddXsp5zcHuR5RsZYcgW68v6t9bX+6bbOFL53tihHVlbebbXGMlpvAnIrRBi+q7M9QMaw+LSAM
+ YYSp/CUD1XRJaz0xMQ/YBP/s/75kfb+rsras6SBVjGZW
+X-Received: by 2002:a05:6808:320a:b0:4b9:a829:f01e with SMTP id
+ 5614622812f47-4c31ca3c690mr483116b6e.42.1789070597275; 
+ Thu, 10 Sep 2026 13:03:17 -0700 (PDT)
 Received: from bill-the-cat.tailc58245.ts.net
  (fixed-189-203-100-56.totalplay.net. [189.203.100.56])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4c331bc937bsm208357b6e.11.2026.09.10.13.03.17
+ 5614622812f47-4c331bc937bsm208357b6e.11.2026.09.10.13.03.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 13:03:17 -0700 (PDT)
+ Thu, 10 Sep 2026 13:03:16 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Michal Simek <michal.simek@amd.com>
-Subject: [PATCH v3 5/7] MAINTAINERS: Correct entries missed during renames
-Date: Thu, 10 Sep 2026 14:03:07 -0600
-Message-ID: <20260910200310.3503830-6-trini@konsulko.com>
+Subject: [PATCH v3 4/7] MAINTAINERS: Fix "typo" and similar incorrect entries
+Date: Thu, 10 Sep 2026 14:03:06 -0600
+Message-ID: <20260910200310.3503830-5-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260910200310.3503830-1-trini@konsulko.com>
 References: <20260910200310.3503830-1-trini@konsulko.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -175,204 +176,501 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-In some cases, files had been renamed or merged and their existing
-MAINTAINERS entry was not updated to match. Correct these places.
+This goes and fixes MAINTAINERS file entries that reference files that
+don't exist in mainline due things like:
+- A typo / missing extension / similar
+- Not updating the entry when the location was changed as part of review
+  feedback
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
+Changes in v3:
+- Drop boards/ti/ changes in favor of Bryan's series.
+
 Cc: Michal Simek <michal.simek@amd.com>
 ---
- board/amlogic/p212/MAINTAINERS             | 2 +-
- board/amlogic/q200/MAINTAINERS             | 2 +-
- board/amlogic/s400/MAINTAINERS             | 2 +-
- board/engicam/imx6ul/MAINTAINERS           | 5 ++---
- board/keymile/km83xx/MAINTAINERS           | 6 ++++--
- board/qualcomm/dragonboard410c/MAINTAINERS | 2 +-
- board/qualcomm/dragonboard820c/MAINTAINERS | 2 +-
- board/qualcomm/dragonboard845c/MAINTAINERS | 2 --
- board/qualcomm/qcs404-evb/MAINTAINERS      | 2 --
- board/renesas/eagle/MAINTAINERS            | 2 +-
- board/renesas/grpeach/MAINTAINERS          | 2 +-
- board/renesas/v3msk/MAINTAINERS            | 2 +-
- board/samsung/starqltechn/MAINTAINERS      | 4 ++--
- board/wandboard/MAINTAINERS                | 2 +-
- 14 files changed, 17 insertions(+), 20 deletions(-)
+ board/CZ.NIC/turris_omnia/MAINTAINERS             |  2 +-
+ board/Marvell/octeontx/MAINTAINERS                |  3 +--
+ board/Marvell/octeontx2/MAINTAINERS               |  3 +--
+ board/advantech/imx8mp_rsb3720a1/MAINTAINERS      |  2 +-
+ board/advantech/imx8qm_dmsse20_a1/MAINTAINERS     |  2 +-
+ board/alliedtelesis/SBx81LIFKW/MAINTAINERS        |  2 +-
+ board/alliedtelesis/SBx81LIFXCAT/MAINTAINERS      |  2 +-
+ board/amd/versal2/MAINTAINERS                     |  2 +-
+ board/andestech/voyager/MAINTAINERS               |  2 +-
+ board/atmel/sama5d29_curiosity/MAINTAINERS        |  2 +-
+ board/atmel/sama7d65_curiosity/MAINTAINERS        |  2 +-
+ board/atmel/sama7g54_curiosity/MAINTAINERS        |  2 +-
+ board/atmel/sama7g5ek/MAINTAINERS                 |  2 +-
+ board/bosch/acc/MAINTAINERS                       |  2 +-
+ board/comtrend/vr3032u/MAINTAINERS                |  2 +-
+ board/comtrend/wap5813n/MAINTAINERS               |  2 +-
+ board/coolpi/genbook_cm5_rk3588/MAINTAINERS       |  2 +-
+ board/davinci/da8xxevm/MAINTAINERS                |  2 +-
+ board/friendlyarm/nanopi2/MAINTAINERS             |  2 +-
+ board/gardena/smart-gateway-at91sam/MAINTAINERS   |  2 +-
+ board/imgtec/xilfpga/MAINTAINERS                  |  2 +-
+ board/intel/agilex7m-socdk/MAINTAINERS            |  2 +-
+ board/libre-computer/aml-a311d-cc/MAINTAINERS     |  2 +-
+ board/libre-computer/aml-s805x-ac/MAINTAINERS     |  2 +-
+ board/libre-computer/aml-s905d3-cc/MAINTAINERS    |  2 +-
+ board/myir/mys_6ulx/MAINTAINERS                   |  3 ++-
+ board/phytec/phycore_am62ax/MAINTAINERS           |  2 +-
+ board/phytec/phycore_imx8mm/MAINTAINERS           |  2 +-
+ board/siemens/iot2050/MAINTAINERS                 |  2 +-
+ board/sifive/unmatched/MAINTAINERS                |  2 +-
+ board/toradex/colibri-imx8x/MAINTAINERS           |  4 ++--
+ board/toradex/colibri_imx7/MAINTAINERS            | 12 ++++++------
+ board/toradex/colibri_vf/MAINTAINERS              |  2 +-
+ board/toradex/smarc-imx8mp/MAINTAINERS            |  2 +-
+ board/xilinx/zynqmp_r5/MAINTAINERS                |  2 +-
+ board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS |  2 +-
+ 36 files changed, 43 insertions(+), 44 deletions(-)
 
-diff --git a/board/amlogic/p212/MAINTAINERS b/board/amlogic/p212/MAINTAINERS
-index e73a4e52c1fd..869264285c37 100644
---- a/board/amlogic/p212/MAINTAINERS
-+++ b/board/amlogic/p212/MAINTAINERS
-@@ -3,7 +3,7 @@ M:	Neil Armstrong <neil.armstrong@linaro.org>
+diff --git a/board/CZ.NIC/turris_omnia/MAINTAINERS b/board/CZ.NIC/turris_omnia/MAINTAINERS
+index effce8a753b4..33ddf51ce42d 100644
+--- a/board/CZ.NIC/turris_omnia/MAINTAINERS
++++ b/board/CZ.NIC/turris_omnia/MAINTAINERS
+@@ -5,5 +5,5 @@ F:	arch/arm/dts/armada-385-turris-omnia*.dts*
+ F:	board/CZ.NIC/turris_atsha_otp.*
+ F:	board/CZ.NIC/turris_omnia/
+ F:	configs/turris_omnia_defconfig
+-F:	drivers/gpio/turris_omnia_mcu.c
++F:	drivers/misc/turris_omnia_mcu.c
+ F:	include/configs/turris_omnia.h
+diff --git a/board/Marvell/octeontx/MAINTAINERS b/board/Marvell/octeontx/MAINTAINERS
+index 1f3b12b1abf2..fd6cabcfad7b 100644
+--- a/board/Marvell/octeontx/MAINTAINERS
++++ b/board/Marvell/octeontx/MAINTAINERS
+@@ -2,7 +2,6 @@ OCTEONTX BOARD
+ M:	Aaron Williams <awilliams@marvell.com>
  S:	Maintained
- L:	u-boot-amlogic@groups.io
- F:	board/amlogic/p212/
--F:	include/configs/p212.h
-+F:	include/configs/meson64.h
- F:	configs/khadas-vim_defconfig
- F:	configs/libretech-cc_defconfig
- F:	configs/libretech-cc_v2_defconfig
-diff --git a/board/amlogic/q200/MAINTAINERS b/board/amlogic/q200/MAINTAINERS
-index aece8d5e05c7..dba49eb33248 100644
---- a/board/amlogic/q200/MAINTAINERS
-+++ b/board/amlogic/q200/MAINTAINERS
-@@ -3,7 +3,7 @@ M:	Neil Armstrong <neil.armstrong@linaro.org>
+ F:	board/Marvell/octeontx/
+-F:	include/configs/octeontx_81xx.h
+-F:	include/configs/octeontx_83xx.h
++F:	include/configs/octeontx_common.h
+ F:	configs/octeontx_81xx_defconfig
+ F:	configs/octeontx_83xx_defconfig
+diff --git a/board/Marvell/octeontx2/MAINTAINERS b/board/Marvell/octeontx2/MAINTAINERS
+index eec1d77dd108..0941a5269b2c 100644
+--- a/board/Marvell/octeontx2/MAINTAINERS
++++ b/board/Marvell/octeontx2/MAINTAINERS
+@@ -2,7 +2,6 @@ OCTEONTX2 BOARD
+ M:	Aaron Williams <awilliams@marvell.com>
  S:	Maintained
- L:	u-boot-amlogic@groups.io
- F:	board/amlogic/q200/
--F:	include/configs/q200.h
-+F:	include/configs/meson64.h
- F:	configs/beelink-gt1-ultimate_defconfig
- F:	configs/khadas-vim2_defconfig
- F:	configs/libretech-s905d-pc_defconfig
-diff --git a/board/amlogic/s400/MAINTAINERS b/board/amlogic/s400/MAINTAINERS
-index ca51bb6b3ba1..2b909f4b276c 100644
---- a/board/amlogic/s400/MAINTAINERS
-+++ b/board/amlogic/s400/MAINTAINERS
-@@ -3,6 +3,6 @@ M:	Neil Armstrong <neil.armstrong@linaro.org>
+ F:	board/Marvell/octeontx2/
+-F:	include/configs/octeontx2_96xx.h
+-F:	include/configs/octeontx2_95xx.h
++F:	include/configs/octeontx2_common.h
+ F:	configs/octeontx2_96xx_defconfig
+ F:	configs/octeontx2_95xx_defconfig
+diff --git a/board/advantech/imx8mp_rsb3720a1/MAINTAINERS b/board/advantech/imx8mp_rsb3720a1/MAINTAINERS
+index bc967af4f509..02ee85fd7b1b 100644
+--- a/board/advantech/imx8mp_rsb3720a1/MAINTAINERS
++++ b/board/advantech/imx8mp_rsb3720a1/MAINTAINERS
+@@ -2,6 +2,6 @@ i.MX8MP RSB3720 BOARD
+ M:	Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
  S:	Maintained
- L:	u-boot-amlogic@groups.io
- F:	board/amlogic/s400/
--F:	include/configs/s400.h
-+F:	include/configs/meson64.h
- F:	configs/s400_defconfig
- F:	doc/board/amlogic/s400.rst
-diff --git a/board/engicam/imx6ul/MAINTAINERS b/board/engicam/imx6ul/MAINTAINERS
-index b9c6af27245c..a1b5b1778421 100644
---- a/board/engicam/imx6ul/MAINTAINERS
-+++ b/board/engicam/imx6ul/MAINTAINERS
-@@ -7,12 +7,11 @@ F:	include/configs/imx6-engicam.h
- F:	configs/imx6ul_geam_mmc_defconfig
- F:	configs/imx6ul_geam_nand_defconfig
- F:	configs/imx6ul_isiot_emmc_defconfig
--F:	configs/imx6ul_isiot_mmc_defconfig
- F:	configs/imx6ul_isiot_nand_defconfig
- F:	arch/arm/dts/imx6ul.dtsi
- F:	arch/arm/dts/imx6ul-u-boot.dtsi
--F:	arch/arm/dts/imx6ul-geam-kit.dts
--F:	arch/arm/dts/imx6ul-geam-kit-u-boot.dtsi
-+F:	arch/arm/dts/imx6ul-geam.dts
-+F:	arch/arm/dts/imx6ul-geam-u-boot.dtsi
- F:	arch/arm/dts/imx6ul-isiot.dtsi
- F:	arch/arm/dts/imx6ul-isiot-u-boot.dtsi
- F:	arch/arm/dts/imx6ul-isiot-emmc.dts
-diff --git a/board/keymile/km83xx/MAINTAINERS b/board/keymile/km83xx/MAINTAINERS
-index af0d6afb2b44..291d4f053355 100644
---- a/board/keymile/km83xx/MAINTAINERS
-+++ b/board/keymile/km83xx/MAINTAINERS
-@@ -5,10 +5,12 @@ S:	Maintained
- F:	board/keymile/km83xx/
- F:	board/keymile/common/
- F:	board/keymile/scripts/
--F:	include/configs/km8360.h
-+F:	include/configs/kmcoge5ne.h
-+F:	include/configs/kmeter1.h
-+F:	include/configs/km/km-mpc83xx.h
- F:	configs/kmcoge5ne_defconfig
- F:	configs/kmeter1_defconfig
--F:	include/configs/tuxx1.h
-+F:	include/configs/km832x.h
- F:	configs/kmopti2_defconfig
- F:	configs/kmsupx5_defconfig
- F:	configs/kmtepr2_defconfig
-diff --git a/board/qualcomm/dragonboard410c/MAINTAINERS b/board/qualcomm/dragonboard410c/MAINTAINERS
-index 9c10fa3053b0..a8eae9a05485 100644
---- a/board/qualcomm/dragonboard410c/MAINTAINERS
-+++ b/board/qualcomm/dragonboard410c/MAINTAINERS
-@@ -4,5 +4,5 @@ R:	Sam Day <me@samcday.com>
+ F:	board/advantech/imx8mp_rsb3720a1/
+-F:	include/configs/imx8mp_rsb3720a1.h
++F:	include/configs/imx8mp_rsb3720.h
+ F:	configs/imx8mp_rsb3720a1_4G_defconfig
+ F:	configs/imx8mp_rsb3720a1_6G_defconfig
+diff --git a/board/advantech/imx8qm_dmsse20_a1/MAINTAINERS b/board/advantech/imx8qm_dmsse20_a1/MAINTAINERS
+index 8292c6ba7122..8b933ad336b5 100644
+--- a/board/advantech/imx8qm_dmsse20_a1/MAINTAINERS
++++ b/board/advantech/imx8qm_dmsse20_a1/MAINTAINERS
+@@ -2,6 +2,6 @@ i.MX8QM ROM DMSSE20 a1 BOARD
+ M:	Oliver Graute <oliver.graute@kococonnector.com>
  S:	Maintained
- F:	board/qualcomm/dragonboard410c/
- F:	include/configs/dragonboard410c.h
--F:	configs/dragonboard410c_defconfig
-+F:	configs/qcom_dragonboard410c_defconfig
- F:	doc/board/qualcomm/dragonboard410c.rst
-diff --git a/board/qualcomm/dragonboard820c/MAINTAINERS b/board/qualcomm/dragonboard820c/MAINTAINERS
-index 7ef905bdf69c..08fdb9903414 100644
---- a/board/qualcomm/dragonboard820c/MAINTAINERS
-+++ b/board/qualcomm/dragonboard820c/MAINTAINERS
-@@ -3,4 +3,4 @@ M:	Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+ F:	board/advantech/imx8qm_dmsse20_a1/
+-F:	arch/arm/dts/imx8qm-dmsse20-a1.dtb
++F:	arch/arm/dts/imx8qm-dmsse20-a1.dts
+ F:	include/configs/imx8qm_dmsse20.h
+ F:	configs/imx8qm_dmsse20a1_defconfig
+diff --git a/board/alliedtelesis/SBx81LIFKW/MAINTAINERS b/board/alliedtelesis/SBx81LIFKW/MAINTAINERS
+index 31ccec0e9b7e..79e23f6724c8 100644
+--- a/board/alliedtelesis/SBx81LIFKW/MAINTAINERS
++++ b/board/alliedtelesis/SBx81LIFKW/MAINTAINERS
+@@ -2,6 +2,6 @@ SBx81LIFKW BOARD
+ M:	Chris Packham <chris.packham@alliedtelesis.co.nz>
  S:	Maintained
- F:	board/qualcomm/dragonboard820c/
- F:	include/configs/dragonboard820c.h
--F:	configs/dragonboard820c_defconfig
-+F:	configs/qcom_dragonboard820c_defconfig
-diff --git a/board/qualcomm/dragonboard845c/MAINTAINERS b/board/qualcomm/dragonboard845c/MAINTAINERS
-index e555953df697..3b5c63459fe0 100644
---- a/board/qualcomm/dragonboard845c/MAINTAINERS
-+++ b/board/qualcomm/dragonboard845c/MAINTAINERS
-@@ -2,5 +2,3 @@ Qualcomm Robotics RB3 Development Platform (dragonboard845c)
- M:	Sumit Garg <sumit.garg@linaro.org>
+ F:	board/alliedtelesis/SBx81LIFKW/
+-F:	include/configs/SBx81LIFKW
++F:	include/configs/SBx81LIFKW.h
+ F:	configs/SBx81LIFKW_defconfig
+ F:	arch/arm/dts/kirkwood-atl-sbx81lifkw.dts
+diff --git a/board/alliedtelesis/SBx81LIFXCAT/MAINTAINERS b/board/alliedtelesis/SBx81LIFXCAT/MAINTAINERS
+index 6b722ded250e..25b94774de25 100644
+--- a/board/alliedtelesis/SBx81LIFXCAT/MAINTAINERS
++++ b/board/alliedtelesis/SBx81LIFXCAT/MAINTAINERS
+@@ -2,6 +2,6 @@ SBx81LIFXCAT BOARD
+ M:	Chris Packham <chris.packham@alliedtelesis.co.nz>
  S:	Maintained
- F:	board/qualcomm/dragonboard845c/
--F:	include/configs/dragonboard845c.h
--F:	configs/dragonboard845c_defconfig
-diff --git a/board/qualcomm/qcs404-evb/MAINTAINERS b/board/qualcomm/qcs404-evb/MAINTAINERS
-index 0a2e194ff608..c6c672d6c3c4 100644
---- a/board/qualcomm/qcs404-evb/MAINTAINERS
-+++ b/board/qualcomm/qcs404-evb/MAINTAINERS
-@@ -2,5 +2,3 @@ Qualcomm Technologies, Inc. QCS404 evaluation board
- M:	Sumit Garg <sumit.garg@linaro.org>
+ F:	board/alliedtelesis/SBx81LIFXCAT/
+-F:	include/configs/SBx81LIFXCAT
++F:	include/configs/SBx81LIFXCAT.h
+ F:	configs/SBx81LIFXCAT_defconfig
+ F:	arch/arm/dts/kirkwood-atl-sbx81lifxcat.dts
+diff --git a/board/amd/versal2/MAINTAINERS b/board/amd/versal2/MAINTAINERS
+index 282eaddd7532..3c35f9c30100 100644
+--- a/board/amd/versal2/MAINTAINERS
++++ b/board/amd/versal2/MAINTAINERS
+@@ -2,6 +2,6 @@ XILINX_VERSAL2 BOARDS
+ M:	Michal Simek <michal.simek@amd.com>
  S:	Maintained
- F:	board/qualcomm/qcs404-evb/
--F:	include/configs/qcs404-evb.h
--F:	configs/qcs404evb_defconfig
-diff --git a/board/renesas/eagle/MAINTAINERS b/board/renesas/eagle/MAINTAINERS
-index c28b6502478c..8b458a3ca4d0 100644
---- a/board/renesas/eagle/MAINTAINERS
-+++ b/board/renesas/eagle/MAINTAINERS
+ T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-amd.git
+-F:	arch/arm/dts/versal2*
++F:	arch/arm/dts/amd-versal2*
+ F:	board/amd/
+ F:	configs/amd*
+diff --git a/board/andestech/voyager/MAINTAINERS b/board/andestech/voyager/MAINTAINERS
+index b87026ee383b..c0eee0f9eb4e 100644
+--- a/board/andestech/voyager/MAINTAINERS
++++ b/board/andestech/voyager/MAINTAINERS
+@@ -4,5 +4,5 @@ S:	Maintained
+ F:	board/andestech/voyager/
+ F:	configs/voyager_spl_defconfig
+ F:	doc/board/andestech/voyager.rst
+-F:	include/configs/qilai.h
++F:	include/configs/voyager.h
+ 
+diff --git a/board/atmel/sama5d29_curiosity/MAINTAINERS b/board/atmel/sama5d29_curiosity/MAINTAINERS
+index 54894d6cbb68..58f918c00c41 100644
+--- a/board/atmel/sama5d29_curiosity/MAINTAINERS
++++ b/board/atmel/sama5d29_curiosity/MAINTAINERS
+@@ -1,7 +1,7 @@
+ SAMA5D29 CURIOSITY BOARD
+ M:     Mihai Sain <mihai.sain@microchip.com>
+ S:     Maintained
+-F:     board/atmel/sama5d29_curiosity.c
++F:     board/atmel/sama5d29_curiosity/
+ F:     include/configs/sama5d29_curiosity.h
+ F:     configs/sama5d29_curiosity_mmc_defconfig
+ F:     configs/sama5d29_curiosity_mmc1_defconfig
+diff --git a/board/atmel/sama7d65_curiosity/MAINTAINERS b/board/atmel/sama7d65_curiosity/MAINTAINERS
+index 054af3c65416..0720ae3c6a03 100644
+--- a/board/atmel/sama7d65_curiosity/MAINTAINERS
++++ b/board/atmel/sama7d65_curiosity/MAINTAINERS
+@@ -1,6 +1,6 @@
+ SAMA7D65 CURIOSITY BOARD
+ M:     Ryan Wanner <ryan.wanner@microchip.com>
+ S:     Maintained
+-F:     board/atmel/sama7d65_curiosity.c
++F:     board/atmel/sama7d65_curiosity/
+ F:     include/configs/sama7d65_curiosity.h
+ F:     configs/sama7d65_curiosity_mmc1_defconfig
+diff --git a/board/atmel/sama7g54_curiosity/MAINTAINERS b/board/atmel/sama7g54_curiosity/MAINTAINERS
+index b9f1a271c09c..3eb2657ca1c8 100644
+--- a/board/atmel/sama7g54_curiosity/MAINTAINERS
++++ b/board/atmel/sama7g54_curiosity/MAINTAINERS
+@@ -1,7 +1,7 @@
+ SAMA7G54 CURIOSITY BOARD
+ M:     Mihai Sain <mihai.sain@microchip.com>
+ S:     Maintained
+-F:     board/atmel/sama7g54_curiosity.c
++F:     board/atmel/sama7g54_curiosity/
+ F:     include/configs/sama7g54_curiosity.h
+ F:     configs/sama7g54_curiosity_mmc_defconfig
+ F:     configs/sama7g54_curiosity_nandflash_defconfig
+diff --git a/board/atmel/sama7g5ek/MAINTAINERS b/board/atmel/sama7g5ek/MAINTAINERS
+index 4d1c6f666c0b..e2dca59f231d 100644
+--- a/board/atmel/sama7g5ek/MAINTAINERS
++++ b/board/atmel/sama7g5ek/MAINTAINERS
+@@ -1,7 +1,7 @@
+ SAMA7G5 EK BOARD
+ M:     Eugen Hristev <ehristev@kernel.org>
+ S:     Maintained
+-F:     board/atmel/sama7g5ek.c
++F:     board/atmel/sama7g5ek/
+ F:     include/configs/sama7g5ek.h
+ F:     configs/sama7g5ek_mmc1_defconfig
+ F:     configs/sama7g5ek_mmc_defconfig
+diff --git a/board/bosch/acc/MAINTAINERS b/board/bosch/acc/MAINTAINERS
+index 1b880037121f..473fc0855dd0 100644
+--- a/board/bosch/acc/MAINTAINERS
++++ b/board/bosch/acc/MAINTAINERS
+@@ -6,4 +6,4 @@ F:	board/bosch/acc
+ F:	include/configs/imx6q-bosch-acc.h
+ F:	configs/imx6q_bosch_acc_defconfig
+ F:	arch/arm/dts/imx6q-bosch-acc.dts
+-F:	arch/arm/dts/imx6q-bosch-acc-u-boot.dts
++F:	arch/arm/dts/imx6q-bosch-acc-u-boot.dtsi
+diff --git a/board/comtrend/vr3032u/MAINTAINERS b/board/comtrend/vr3032u/MAINTAINERS
+index 132101f4cd0c..54c4aa229cec 100644
+--- a/board/comtrend/vr3032u/MAINTAINERS
++++ b/board/comtrend/vr3032u/MAINTAINERS
+@@ -2,5 +2,5 @@ COMTREND VR-3032U BOARD
+ M:	Álvaro Fernández Rojas <noltari@gmail.com>
+ S:	Maintained
+ F:	board/comtrend/vr3032u/
+-F:	include/configs/comtrend_vr-3032u.h
++F:	include/configs/comtrend_vr3032u.h
+ F:	configs/comtrend_vr3032u_ram_defconfig
+diff --git a/board/comtrend/wap5813n/MAINTAINERS b/board/comtrend/wap5813n/MAINTAINERS
+index c6764831b2bc..8c8e0769f51f 100644
+--- a/board/comtrend/wap5813n/MAINTAINERS
++++ b/board/comtrend/wap5813n/MAINTAINERS
+@@ -2,5 +2,5 @@ COMTREND WAP-5813N BOARD
+ M:	Álvaro Fernández Rojas <noltari@gmail.com>
+ S:	Maintained
+ F:	board/comtrend/wap5813n/
+-F:	include/configs/comtrend_wap-5813n.h
++F:	include/configs/comtrend_wap5813n.h
+ F:	configs/comtrend_wap5813n_ram_defconfig
+diff --git a/board/coolpi/genbook_cm5_rk3588/MAINTAINERS b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+index 0496cc93b599..15c2354e8225 100644
+--- a/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
++++ b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+@@ -1,7 +1,7 @@
+ GENBOOK-CM5-RK3588
+ M:	Andy Yan <andyshrk@163.com>
+ S:	Maintained
+-F:	board/coolpi/genbook-cm5-rk3588
++F:	board/coolpi/genbook_cm5_rk3588
+ F:	include/configs/genbook-cm5-rk3588.h
+ F:	configs/coolpi-cm5-genbook-rk3588_defconfig
+ F:	arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+diff --git a/board/davinci/da8xxevm/MAINTAINERS b/board/davinci/da8xxevm/MAINTAINERS
+index 993b22f2f638..c12b864b84b5 100644
+--- a/board/davinci/da8xxevm/MAINTAINERS
++++ b/board/davinci/da8xxevm/MAINTAINERS
+@@ -10,5 +10,5 @@ F:	configs/da850evm_direct_nor_defconfig
+ OMAPL138_LCDK BOARD
+ M:	Tom Rini <trini@konsulko.com>
+ S:	Maintained
+-F:	include/configs/omap1l38_lcdk.h
++F:	include/configs/omapl138_lcdk.h
+ F:	configs/omapl138_lcdk_defconfig
+diff --git a/board/friendlyarm/nanopi2/MAINTAINERS b/board/friendlyarm/nanopi2/MAINTAINERS
+index c8e2ce7b7c0e..781f00dce6d5 100644
+--- a/board/friendlyarm/nanopi2/MAINTAINERS
++++ b/board/friendlyarm/nanopi2/MAINTAINERS
+@@ -2,6 +2,6 @@ NANOPI2 BOARD
+ NANOPC-T2 BOARD
+ M:  Stefan Bosch <stefan_b@posteo.net>
+ S:  Maintained
+-F:  board/s5p4418/nanopi2/
++F:  board/friendlyarm/nanopi2/
+ F:  include/configs/s5p4418_nanopi2.h
+ F:  configs/s5p4418_nanopi2_defconfig
+diff --git a/board/gardena/smart-gateway-at91sam/MAINTAINERS b/board/gardena/smart-gateway-at91sam/MAINTAINERS
+index a5e4c71b824d..b115999fda61 100644
+--- a/board/gardena/smart-gateway-at91sam/MAINTAINERS
++++ b/board/gardena/smart-gateway-at91sam/MAINTAINERS
 @@ -4,4 +4,4 @@ S:	Maintained
- F:	arch/arm/dts/r8a77970-eagle*
- F:	board/renesas/eagle/
- F:	configs/r8a77970_eagle_defconfig
--F:	include/configs/eagle.h
-+F:	include/configs/rcar-gen3-common.h
-diff --git a/board/renesas/grpeach/MAINTAINERS b/board/renesas/grpeach/MAINTAINERS
-index c0f4fbcbae16..37a3df5f2b52 100644
---- a/board/renesas/grpeach/MAINTAINERS
-+++ b/board/renesas/grpeach/MAINTAINERS
-@@ -7,7 +7,7 @@ F:	configs/grpeach_defconfig
- F:	drivers/gpio/gpio-rza1.c
- F:	drivers/mtd/renesas_rpc_hf.c
- F:	drivers/net/sh_eth*
--F:	drivers/pinctrl/renesas/pfc-r7s72100.c
-+F:	drivers/pinctrl/renesas/pinctrl-rza1.c
- F:	drivers/serial/serial_sh*
- F:	drivers/spi/renesas_rpc_spi.c
- F:	drivers/timer/ostm_timer.c
-diff --git a/board/renesas/v3msk/MAINTAINERS b/board/renesas/v3msk/MAINTAINERS
-index c198cf8c9b89..062133b0259e 100644
---- a/board/renesas/v3msk/MAINTAINERS
-+++ b/board/renesas/v3msk/MAINTAINERS
-@@ -5,4 +5,4 @@ S:	Maintained
- F:	arch/arm/dts/r8a77970-v3msk*
- F:	board/renesas/v3msk/
- F:	configs/r8a77970_v3msk_defconfig
--F:	include/configs/v3msk.h
-+F:	include/configs/rcar-gen3-common.h
-diff --git a/board/samsung/starqltechn/MAINTAINERS b/board/samsung/starqltechn/MAINTAINERS
-index 135cafdd69ca..7ca1a9bac896 100644
---- a/board/samsung/starqltechn/MAINTAINERS
-+++ b/board/samsung/starqltechn/MAINTAINERS
-@@ -2,5 +2,5 @@ Samsung S9 (SM-G9600)(starqltechn)  Board
- M:	Dzmitry Sankouski <dsankouski@gmail.com>
+ F:	board/gardena/smart-gateway-at91sam/
+ F:	include/configs/gardena-smart-gateway-at91sam.h
+ F:	configs/gardena-smart-gateway-at91sam_defconfig
+-F:	arch/arm/dts/gardena-smart-gateway-at91sam.dts
++F:	arch/arm/dts/at91sam9g25-gardena-smart-gateway.dts
+diff --git a/board/imgtec/xilfpga/MAINTAINERS b/board/imgtec/xilfpga/MAINTAINERS
+index aa045325eac6..93a67e3af34b 100644
+--- a/board/imgtec/xilfpga/MAINTAINERS
++++ b/board/imgtec/xilfpga/MAINTAINERS
+@@ -2,5 +2,5 @@ XILFPGA BOARD
+ M:	Zubair Lutfullah Kakakhel <Zubair.Kakakhel@imgtec.com>
  S:	Maintained
- F:	board/samsung/starqltechn/
--F:	include/configs/starqltechn.h
--F:	configs/starqltechn_defconfig
-+F:	include/configs/qcom.h
-+F:	configs/qcom_sdm845_spl_defconfig
-diff --git a/board/wandboard/MAINTAINERS b/board/wandboard/MAINTAINERS
-index 3c2a06cf09bc..f5a6db3aa9e7 100644
---- a/board/wandboard/MAINTAINERS
-+++ b/board/wandboard/MAINTAINERS
-@@ -3,7 +3,7 @@ M:	Fabio Estevam <festevam@gmail.com>
+ F:	board/imgtec/xilfpga
+-F:	include/configs/xilfpga.h
++F:	include/configs/imgtec_xilfpga.h
+ F:	configs/imgtec_xilfpga_defconfig
+diff --git a/board/intel/agilex7m-socdk/MAINTAINERS b/board/intel/agilex7m-socdk/MAINTAINERS
+index 9a5b80ae4dfe..eea2810d3287 100644
+--- a/board/intel/agilex7m-socdk/MAINTAINERS
++++ b/board/intel/agilex7m-socdk/MAINTAINERS
+@@ -7,4 +7,4 @@ F:	arch/arm/dts/socfpga_agilex7m*
+ F:	arch/arm/mach-socfpga/spl_agilex7m.c
+ F:	board/intel/agilex7m-socdk/
+ F:	include/configs/socfpga_agilex7m_socdk.h
+-F:	configs/socfpga_agilex7m_sdmmc_defconfig
++F:	configs/socfpga_agilex7m_defconfig
+diff --git a/board/libre-computer/aml-a311d-cc/MAINTAINERS b/board/libre-computer/aml-a311d-cc/MAINTAINERS
+index b4b77acd23b2..a5c4bcdb998c 100644
+--- a/board/libre-computer/aml-a311d-cc/MAINTAINERS
++++ b/board/libre-computer/aml-a311d-cc/MAINTAINERS
+@@ -2,6 +2,6 @@ LIBRE-COMPUTER AML-A311D-CC
+ M:	Neil Armstrong <neil.armstrong@linaro.org>
  S:	Maintained
- F:	arch/arm/dts/imx6qdl-wandboard.dtsi
- F:	arch/arm/dts/imx6qdl-wandboard-revb1.dtsi
--F:	arch/arm/dts/imx6dl-wandboard-revb1.dts
-+F:	arch/arm/dts/imx6dl-wandboard-revd1.dts
- F:	board/wandboard/
- F:	include/configs/wandboard.h
- F:	configs/wandboard_defconfig
+ L:	u-boot-amlogic@groups.io
+-F:	board/amlogic/aml-a311d-cc/
++F:	board/libre-computer/aml-a311d-cc/
+ F:	configs/aml-a311d-cc_defconfig
+ F:	doc/board/amlogic/aml-a311d-cc.rst
+diff --git a/board/libre-computer/aml-s805x-ac/MAINTAINERS b/board/libre-computer/aml-s805x-ac/MAINTAINERS
+index 7cbc08aeb6c8..e434e5ed2289 100644
+--- a/board/libre-computer/aml-s805x-ac/MAINTAINERS
++++ b/board/libre-computer/aml-s805x-ac/MAINTAINERS
+@@ -2,7 +2,7 @@ LIBRE-COMPUTER AML-S805X-AC
+ M:	Neil Armstrong <neil.armstrong@linaro.org>
+ S:	Maintained
+ L:	u-boot-amlogic@groups.io
+-F:	board/amlogic/aml-s805x-ac/
++F:	board/libre-computer/aml-s805x-ac/
+ F:	include/configs/libretech-ac.h
+ F:	configs/libretech-ac_defconfig
+ F:	doc/board/amlogic/libretech-ac.rst
+diff --git a/board/libre-computer/aml-s905d3-cc/MAINTAINERS b/board/libre-computer/aml-s905d3-cc/MAINTAINERS
+index 4b75c815c07c..274518d13a3b 100644
+--- a/board/libre-computer/aml-s905d3-cc/MAINTAINERS
++++ b/board/libre-computer/aml-s905d3-cc/MAINTAINERS
+@@ -2,6 +2,6 @@ LIBRE-COMPUTER AML-S905D3-CC
+ M:	Neil Armstrong <neil.armstrong@linaro.org>
+ S:	Maintained
+ L:	u-boot-amlogic@groups.io
+-F:	board/amlogic/aml-s905d3-cc/
++F:	board/libre-computer/aml-s905d3-cc/
+ F:	configs/aml-s905d3-cc_defconfig
+ F:	doc/board/amlogic/aml-s905d3-cc.rst
+diff --git a/board/myir/mys_6ulx/MAINTAINERS b/board/myir/mys_6ulx/MAINTAINERS
+index d4ee66118269..7f7850a566e7 100644
+--- a/board/myir/mys_6ulx/MAINTAINERS
++++ b/board/myir/mys_6ulx/MAINTAINERS
+@@ -1,8 +1,9 @@
+ MYS_6ULX BOARD
+ M:	Parthiban Nallathambi <parthiban@linumiz.com>
+ S:	Maintained
+-F:	arch/arm/dts/imx6ull-myir-mys-6ulx-nand.dts
+ F:	arch/arm/dts/imx6ull-myir-mys-6ulx.dtsi
++F:	arch/arm/dts/imx6ull-myir-mys-6ulx-eval.dts
++F:	arch/arm/dts/imx6ull-myir-mys-6ulx-eval-u-boot.dts
+ F:	arch/arm/dts/imx6ull-mys-6ulx-u-boot.dtsi
+ F:	board/myir/mys_6ulx/
+ F:	configs/myir_mys_6ulx_defconfig
+diff --git a/board/phytec/phycore_am62ax/MAINTAINERS b/board/phytec/phycore_am62ax/MAINTAINERS
+index ded4a88d1997..1e3d90a01a22 100644
+--- a/board/phytec/phycore_am62ax/MAINTAINERS
++++ b/board/phytec/phycore_am62ax/MAINTAINERS
+@@ -5,7 +5,7 @@ L:	upstream@lists.phytec.de
+ W:	https://www.phytec.com/product/phycore-am62a
+ S:	Maintained
+ F:	arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+-F:	arch/arm/dts/k3-am62a-phycore-som-ddr4-2gb.dtsit.dtsi
++F:	arch/arm/dts/k3-am62a-phycore-som-ddr4-2gb.dtsi
+ F:	arch/arm/dts/k3-am62a7-phyboard-lyra-rdk-u-boot.dtsi
+ F:	arch/arm/dts/k3-am62a7-r5-phycore-som-2gb.dts
+ F:	board/phytec/phycore_am62ax/
+diff --git a/board/phytec/phycore_imx8mm/MAINTAINERS b/board/phytec/phycore_imx8mm/MAINTAINERS
+index 5cada15ac4b3..e60bb94b91fb 100644
+--- a/board/phytec/phycore_imx8mm/MAINTAINERS
++++ b/board/phytec/phycore_imx8mm/MAINTAINERS
+@@ -10,5 +10,5 @@ F:	configs/imx8mm-phygate-tauri-l_defconfig
+ F:      configs/phycore-imx8mm_defconfig
+ F:	doc/board/phytec/imx8mm-phygate-tauri-l.rst
+ F:	doc/board/phytec/index.rst
+-F:	doc/board/phytec/phycore_imx8mm.rst
++F:	doc/board/phytec/phycore-imx8mm.rst
+ F:      include/configs/phycore_imx8mm.h
+diff --git a/board/siemens/iot2050/MAINTAINERS b/board/siemens/iot2050/MAINTAINERS
+index 1b525356c2d6..2964de6a1631 100644
+--- a/board/siemens/iot2050/MAINTAINERS
++++ b/board/siemens/iot2050/MAINTAINERS
+@@ -5,5 +5,5 @@ S:	Maintained
+ F:	board/siemens/iot2050/
+ F:	include/configs/iot2050.h
+ F:	configs/iot2050_defconfig
+-F:	arch/arm/dts/iot2050-*
++F:	arch/arm/dts/*-iot2050-*
+ F:	doc/board/siemens/iot2050.rst
+diff --git a/board/sifive/unmatched/MAINTAINERS b/board/sifive/unmatched/MAINTAINERS
+index e601a0f3288f..022434333ef9 100644
+--- a/board/sifive/unmatched/MAINTAINERS
++++ b/board/sifive/unmatched/MAINTAINERS
+@@ -3,6 +3,6 @@ M:	Paul Walmsley <paul.walmsley@sifive.com>
+ M:	Green Wan <green.wan@sifive.com>
+ S:	Maintained
+ F:	board/sifive/unmatched/
+-F:	doc/board/sifive/hifive-unmatched-fu740.rst
++F:	doc/board/sifive/unmatched.rst
+ F:	include/configs/sifive-unmatched.h
+ F:	configs/sifive_unmatched_defconfig
+diff --git a/board/toradex/colibri-imx8x/MAINTAINERS b/board/toradex/colibri-imx8x/MAINTAINERS
+index 938c2ca0ca01..1aadf5450b3c 100644
+--- a/board/toradex/colibri-imx8x/MAINTAINERS
++++ b/board/toradex/colibri-imx8x/MAINTAINERS
+@@ -2,8 +2,8 @@ Colibri iMX8X
+ M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ W:	http://developer.toradex.com/software/linux/linux-software
+ S:	Maintained
+-F:	arch/arm/dts/fsl-imx8x-colibri.dts
+-F:	arch/arm/dts/fsl-imx8x-colibri-u-boot.dtsi
++F:	arch/arm/dts/fsl-imx8qxp-colibri.dts
++F:	arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi
+ F:	board/toradex/colibri-imx8x/
+ F:	board/toradex/common/
+ F:	configs/colibri-imx8x_defconfig
+diff --git a/board/toradex/colibri_imx7/MAINTAINERS b/board/toradex/colibri_imx7/MAINTAINERS
+index 80770cc71a96..afdbb9b104ad 100644
+--- a/board/toradex/colibri_imx7/MAINTAINERS
++++ b/board/toradex/colibri_imx7/MAINTAINERS
+@@ -3,12 +3,12 @@ M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ W:	http://developer.toradex.com/software/linux/linux-software
+ W:	https://www.toradex.com/community
+ S:	Maintained
+-F:	arch/arm/boot/dts/imx7-colibri.dtsi
+-F:	arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+-F:	arch/arm/boot/dts/imx7d-colibri.dtsi
+-F:	arch/arm/boot/dts/imx7d-colibri-emmc.dtsi
+-F:	arch/arm/boot/dts/imx7d-colibri-emmc-eval-v3.dts
+-F:	arch/arm/boot/dts/imx7d-colibri-eval-v3.dts
++F:	arch/arm/dts/imx7-colibri.dtsi
++F:	arch/arm/dts/imx7-colibri-eval-v3.dtsi
++F:	arch/arm/dts/imx7d-colibri.dtsi
++F:	arch/arm/dts/imx7d-colibri-emmc.dtsi
++F:	arch/arm/dts/imx7d-colibri-emmc-eval-v3.dts
++F:	arch/arm/dts/imx7d-colibri-eval-v3.dts
+ F:	board/toradex/colibri_imx7/
+ F:	board/toradex/common/
+ F:	configs/colibri_imx7_defconfig
+diff --git a/board/toradex/colibri_vf/MAINTAINERS b/board/toradex/colibri_vf/MAINTAINERS
+index a41bd165a7ca..330324ff1d1e 100644
+--- a/board/toradex/colibri_vf/MAINTAINERS
++++ b/board/toradex/colibri_vf/MAINTAINERS
+@@ -6,7 +6,7 @@ S:	Maintained
+ F:	arch/arm/dts/vf-colibri.dtsi
+ F:	arch/arm/dts/vf-colibri-eval-v3.dtsi
+ F:	arch/arm/dts/vf610-colibri-eval-v3-u-boot.dtsi
+-F:	arch/arm/dts/vf610-colibri.dts
++F:	arch/arm/dts/vf610-colibri.dtsi
+ F:	board/toradex/colibri_vf/
+ F:	board/toradex/common/
+ F:	configs/colibri_vf_defconfig
+diff --git a/board/toradex/smarc-imx8mp/MAINTAINERS b/board/toradex/smarc-imx8mp/MAINTAINERS
+index f7fcef1c0921..77255a3e35aa 100644
+--- a/board/toradex/smarc-imx8mp/MAINTAINERS
++++ b/board/toradex/smarc-imx8mp/MAINTAINERS
+@@ -3,7 +3,7 @@ F:	arch/arm/dts/imx8mp-toradex-smarc-dev-u-boot.dtsi
+ F:	board/toradex/smarc-imx8mp/
+ F:	board/toradex/common/
+ F:	configs/toradex-smarc-imx8mp_defconfig
+-F:	doc/board/toradex/toradex-smarc-imx8mp.rst
++F:	doc/board/toradex/smarc-imx8mp.rst
+ F:	include/configs/toradex-smarc-imx8mp.h
+ M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ S:	Maintained
+diff --git a/board/xilinx/zynqmp_r5/MAINTAINERS b/board/xilinx/zynqmp_r5/MAINTAINERS
+index aa50e6dae5f5..0f096d2e71f1 100644
+--- a/board/xilinx/zynqmp_r5/MAINTAINERS
++++ b/board/xilinx/zynqmp_r5/MAINTAINERS
+@@ -3,5 +3,5 @@ M:	Michal Simek <michal.simek@amd.com>
+ S:	Maintained
+ F:	arch/arm/dts/zynqmp-r5*
+ F:	board/xilinx/zynqmp_r5/
+-F:	include/configs/xilinx_zynqmp_r5_*
++F:	include/configs/xilinx_zynqmp_r5*
+ F:	configs/xilinx_zynqmp_r5_*
+diff --git a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
+index 79981aa43f13..7e0842ae675c 100644
+--- a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
++++ b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
+@@ -1,6 +1,6 @@
+ ORANGEPI-5-RK3588-ULTRA
+ M:	Niu Zhihong <zhihong@nzhnb.com>
+ S:	Maintained
+-F:	board/xunlong/orangepi-5-rk3588-ultra
++F:	board/xunlong/orangepi-5-ultra-rk3588
+ F:	configs/orangepi-5-ultra-rk3588_defconfig
+ F:	arch/arm/dts/rk3588-orangepi-5-ultra*
 -- 
 2.43.0
 
