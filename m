@@ -4,132 +4,233 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A05B9C79FB9
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 10:02:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F2CC79FB9
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 10:29:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 43836608C1;
-	Thu, 10 Sep 2026 10:02:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 18E8E60AFC;
+	Thu, 10 Sep 2026 10:29:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dbW32rB8o5CY; Thu, 10 Sep 2026 10:02:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3F52E6089E
+ id C-eDWN2a2c-S; Thu, 10 Sep 2026 10:29:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4C37060809
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789034559;
-	b=HsFz+nNP8rNax7E7YtXUVLpKl4VG/dkcQEoNLxjCs88Nr+Z/LxGEiRHCum8s+uSfPB0M
-	 x4mZz07hOqPGP6SiY6p/UX04YjeSwcxMkW3+FQevlmiuFloKAOAyzG4fowFOZqXn01PXV
-	 5VzM/XuXhxkRqz8SYkgB+mlO+oa5POrC3Shvcenz4ZNxDSGMxKWMdKugBCfC/CNXTu6k3
-	 O6k6oRmR3afd6jptCEBStuQLy9X6U0xhGbpik+mSAfzmViBiKnLp3AYiGT8MAvuDTsad2
-	 3+wwvPJ+t0ir6rnpCepZRv4PJwN9/3stDNskyXEDB1mtshVcvhMkmSBnfoocASpI05g==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789036193;
+	b=bXDLKd0dY+yLtddpada6jmNTwGY+0Ml1xrg9Ux0PbTfHIoHDgyHXJmCakIvQYmYv2JXX
+	 oGA6+VHfojKr7nelVR7/fEtlSl0zWdTffI0yfRoa4G5VxmzqH1LJP/7E3M9FZ8TJeAYNn
+	 j8Cyu2G/3CqRX05XnuZ5NSJJDLiIH/Av57+C1sWsLFWYp5wVemOvhPSKTtIpjeDD2duST
+	 mb/GpAUurTTNcjuo7sEjdAE71w9xRh00kFerECJCKid/ukfX8prczrqyKJueQnf+oUIcB
+	 b5BWOSspVq2VCe8iV6usizQSk/RY3UHkS2/PdgJGpMlPvVydVPjtRdEwoOvwlz1Hgow==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789034559;
+	c=relaxed/relaxed; t=1789036193;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=+ENjMczPuH/fyANI/+/yq26/n7fvzUZFAAXgyCAWW+Q=;
-	b=R8tLcBIBIfVlmqZmUHlvsRCkwB6Sl7kLL7e5yzJkm0f8GjPnqnyHTvL14tetsNYqpcz9
-	 Gsjtt6JliPZby+JKmr1awEmekA6zprpl/9ptMMDWgStDxIIAtaDL4Y8lcXB7gpsoY8vIX
-	 eBnBMe29OcHQ0aiLUSbDQrHhn/wcsRB8yHhPQmNc/ib0H45sI0QYXTaUwKjvny/bu6dUc
-	 vMVI3XbEMyJ1ppVaAH2cqs6TMj8FymX4XlLf9HKbGg1vIMhBLGT5Cj+SbFZsvJ9PkpNE7
-	 g6xiJz/rk6elL/BpPCE0USPKbrld9MEPIp8YBXO9syccvHI8D2MMjwRVmE1SUGibyDQ==
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=xWZZE3xYKe23Z79woKd8BI8HHaFaF83jyHv7BB2u1VY=;
+	b=bRsVIiudJuX/xPRAkS2BEm4TTo6evy9LiaaLKt+N/FWaibZSQbskKGCLxlPFJTcQ9IvV
+	 wM0mPXDQ5x5SdAPeE+EoRInlcry82YdZkkgZiNKS6Vm/GKnED47ib7U6PDhFuuot7+u8/
+	 RkixHQZzr5fXaByFz+nmB1vEpwvfj6Rr4bHLCqqhQ3psIoEG/PoreX83MVKKJ4BSKAJaF
+	 bnFGwmTcOSpm1ndqZaCAD6kLdOl70YQ88/OVXPNFY8qD45XsoO5YolzZ85TXQF+D1ic03
+	 P942L8FZuzfslKNfg8pQdFpfAbji0rAY6Z3RLQWj0CsZ6j7DE0fZ7xQfE7DGvmLvxNQ==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789034559;
-	bh=+ENjMczPuH/fyANI/+/yq26/n7fvzUZFAAXgyCAWW+Q=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=gD+H8QbWzsb1m8cZM3A7kygYRGnZaNTnEbdXa4AzbDnIGz2YKGlQ47lASPDFgU59V
-	 jgk3QkInkYSFEFheTCB3hV0KckSj6z5YxGs3RNPb/y+Irf24fTf3Ls22kqnsUwibHr
-	 1F/My9PE2c4HfMOQSdmnuQJTt35DCGEBjV/XNNVwFhlohgsJvkA8YrM792VHGCWLB9
-	 WdfkVGm6PVIFGU+4LyM4PmKelGF5vidkqkI9VC0H3/pQKHb5FNPCuG/HayQKD4I8CY
-	 n6zI9epmZESXwrWgoqPHByZ/jozZv53fy3AjEWsOdOr9DabcCj1ShQQnxWA1CRrfBi
-	 01ARBnkA5B7ZA==
+	d=lists.u-boot-project.org; s=default; t=1789036193;
+	bh=xWZZE3xYKe23Z79woKd8BI8HHaFaF83jyHv7BB2u1VY=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=FwwO0psSIbrmxu4tp7rRDwhJ07922908Q+KOsYudwl0YRG286ItAlMK89Q8sc5M4p
+	 xlwickk9tc4F+q2KCa+z2bYZepQ1Bc+KQyyOsM16/ZCaGwH1FrEXrn+VZ3H3jScaA2
+	 mAYFOjtOGLiNiETJcxP/uT4ntWnSy6eMFYMaU50AoBqFtNHzMe3Q6Qze5d9ZaYDLEg
+	 KwOAeRhQL6SzKTpz1g223qHwOvvjvTeOiJdrzBIXbnpdaidQBpDo7ZMx8KRjedNEBF
+	 oVdPqb6ysNNmlQQx9i7OktEWN1oy+RHXCfWrJsxJ1IrUyXZhLNBtbxnvTkW6NO/8Ea
+	 cPdUSUvByZ7fQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3F52E6089E;
-	Thu, 10 Sep 2026 10:02:39 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id B00C443F
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 10:02:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4C37060809;
+	Thu, 10 Sep 2026 10:29:53 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5D68243F
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 10:29:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9C230402E2
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 10:02:37 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 47337401DA
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 10:29:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1xuaagxH7ZKH for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 10:02:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 875A6401DA
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789034556;
- b=iE5o+QEHlsXbJaB5UE+lIhEqESoqI1TEWyBXbPcXULxoqgPDD2kFEGpeRnZicEpLhDEa
- n3fHLxBXjHRTkN5uCNDol7oTnTC2pGtFuPg3S4EP5vlsAlj6CTNVfOGNqZtySUxAIAD1J
- o95pA7gKs7ZcVf38bV3lT1TQSrP6enq5Z4y0ogyBgnTgzNTt7E/K8THx6xjf7HMius0KP
- +W05o4oGisx4lU3+3HBcDoYEI/IAWhc4hcz/fJ2yeB2N70ogTQaiOR/L6sSkf0XVGUJl+
- XUaMx2Z4Ya+9MVXVc5SCFDV2SPWMgzAwMBR4XjvYFx+6rAge5//sDhlt5CUzX5EUsrQ==
+ id ZfRhYZXv3csy for <u-boot@lists.u-boot-project.org>;
+ Thu, 10 Sep 2026 10:29:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 5BB654006B
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789036191;
+ b=hemQifAwQrl8/69h2UtpPDiEkj+8ZFZv6qFFY/rtnYO3jlGzE1diK+zu4UgcfD0Cfe5y
+ 1rBh1b7jrl0h4vgAf8mKbxvzURuJLdbDyguiE3uNQ5zErE47//Mw4pNBoLMap6jyZ1ios
+ TH6wVFnmRGxEB2rmDvpXomVn9PypaEkLtCB8cfOtfdjXQdhO026rghhSndboqRXq8OUPZ
+ l8vkIeMbqbul47PQKinw3jg02i96FlqodjQ0j3tQiVNGQGTaRiEEOOwiAY5zDFAgda0w3
+ dsRLeyaaGZrVoeArd5HKDwpFHNlbxyfDKo6W5nzdvTofhlKEvAEODzlRmoGLQd0vCIA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789034556;
- h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
- Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:In-Reply-To;
- bh=+ENjMczPuH/fyANI/+/yq26/n7fvzUZFAAXgyCAWW+Q=;
- b=aLoZ3HZoPussp4eVUxduwOgn/JxOC9LZMN6cZyT0XpC+MkJLc/556shQ0JsOSjAZQ5+y
- +vFCGf7wYwJzxEfZrSkL9tqw/mg8e7MCvbW0pYKu/gx9Z35z0TBIN6QnHVe3Ng4NZozJb
- QES6t3a9HDFjpN+v0CiBbni2TtBcPi6xeXLYB3L1TkOMozJNzTob/O0TyiLjw0JigT+Iu
- ShLaKHMDxgqZSxflZYugiUID4JKuTcfj9kDdP/BjgUUcKf+wnAwiSlWPLg9FTx93zD2Jr
- IRUG601FU8xZe6GtU7V7qcglBJHFDfmUBEF9jicXYkJPzoezm57Clo7a2i/nWTpS/WQ==
+ c=relaxed/relaxed; t=1789036191;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
+ Subject:Date:Message-Id:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+ X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+ X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+ bh=xWZZE3xYKe23Z79woKd8BI8HHaFaF83jyHv7BB2u1VY=;
+ b=HdZUzR4wC2H8NnjJP/+8z7Qx6e0z9IlmrKEuDbP07naYB4bK2rVkw8RXeLCPD1C6TWFd
+ xFzvIM+P4JH4FMMVPihpjcp0a/6TH4HDUVwuKcX9zyctC+t3eJVPK8FKlRrP444JEteHc
+ YlfzMJHExhI5Fzai9WKsFxbtmNllay2sMOHAcobq+M5eml5aXRPlgjnFnD4dWOPuC4SkA
+ Cl1vgFDHCZox56NLOLA2c3/wY0JH/EUuoKzUBDsQP2zzQ5OSowrlmx8hwIN7iG3cyAXt1
+ dgj4rXwoqsbpHb9I9SoxP3in4bvoQqp7K8yyJrAOV0MCgeVL+b1Y3KR2tN1sysnY8yA==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=kernel.org; 
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=Ngoq4AJ3; 
- arc=none smtp.remote-ip=172.105.4.254
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
- helo=tor.source.kernel.org; envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=Ngoq4AJ3
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 875A6401DA
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 10:02:35 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 5D946600C8;
- Thu, 10 Sep 2026 10:02:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 891E01F000FF;
- Thu, 10 Sep 2026 10:02:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1789034554;
- bh=+ENjMczPuH/fyANI/+/yq26/n7fvzUZFAAXgyCAWW+Q=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=Ngoq4AJ3fRog5fjfiGV4mq1x3Dj99JaCs25ndwWB0HIpxjGGVczRdYQsNm9/G4A+7
- SLXts7YUcYo8jWDlCg6k8FWWFyNl7OiMUJyf86F99MG5kx/PfeRJesKYGop0Xstzwo
- fEDw0rAHMZ/g3HnyQoZNVGxc6LShlpxvTjheTwh7Xvfi0nEGKk6efU1MRkmO+9blzH
- M2i2pk6ZxuMY6QNl6IANL5NqqznDH0ri/mSiEzejDLyFvIAbNoh8MDHaleYej64f9w
- 3TKxZZQpMD6EJ1mrzyptzCht2ISMDqXMqs2QULGh6PdlfXLVYGMGprLL5FkwLd0Tto
- l0gq2AT2bkYtw==
-Date: Thu, 10 Sep 2026 10:02:31 +0000
-From: Yixun Lan <dlan@kernel.org>
-To: Junhui Liu <junhui.liu@pigmoral.tech>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Daniel Golle <daniel@makrotopia.org>, Randolph Sapp <rs@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>,
- E Shattow <e@freeshell.de>, spacemit@lists.linux.dev
-Subject: Re: [PATCH v2 1/2] tools: mkimage: add SpacemiT K3 boot image support
-Message-ID: <20260910100231-GKI2330@kernel.org>
-References: <20260909-spacemit-aihd-v2-0-780e98cf2fec@pigmoral.tech>
- <20260909-spacemit-aihd-v2-1-780e98cf2fec@pigmoral.tech>
+ dmarc=pass header.from=oss.qualcomm.com; 
+ dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
+ header.s=qcppdkim1 header.b=U4q5aF+H; 
+ dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=abrbH8Vf; 
+ arc=none smtp.remote-ip=205.220.168.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com;
+ envelope-from=varadarajan.narayanan@oss.qualcomm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=U4q5aF+H; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=abrbH8Vf
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5BB654006B
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 10:29:49 +0000 (UTC)
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68A8pdle3967637
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 10:29:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=xWZZE3xYKe23Z79woKd8BI
+ 8HHaFaF83jyHv7BB2u1VY=; b=U4q5aF+HK5Jayj4JpsnH62wHMxctDc5YPt8a0R
+ DAt1sWH46vJbkKTgqhCW++ad5F9gC7QO0J1nMA+7LF43sHTuf93NL7ISSTnBfRFr
+ 3lOR9hhXDMAIMl3n6WplTY+0qvChDPnvT9/+vPWpYCXQKrJILXccaYGmMr+nw6g0
+ BI8H3L5RSdTmiCEzSqkjtVDyGPEazwsp79I+3kMWTjkOTuqK9cMLdmTjFvVMTje2
+ 3LXasInmDx+ZyZ3kBUvpWbNh+x5Q+tOdLTJ7mbcUDGiN9yFEy4Q63oa4xlharIGh
+ ZptL/mY62NjnM59J0WcKbfXOnwbSyKYcOPhBLRFeiKux8CbQ==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
+ [209.85.215.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkrdn8n41-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 10:29:49 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id
+ 41be03b00d2f7-cc4922b7c31so3348218a12.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 03:29:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1789036188; x=1789640988;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=xWZZE3xYKe23Z79woKd8BI8HHaFaF83jyHv7BB2u1VY=;
+ b=abrbH8VfCEUnqL0oqmMxXOHqF4eWaKLDn+ckTivXj/xrT04XlDKl5uNXKTGu+Y6bNG
+ tzZ+VAhPWXfDV7poabd1Cb0XJFxQvPYQJDRPUo7hbl3HiRkTwPYginbs02uReCna0MT6
+ 8xhNmAD8nh4lRKjPJTpHCQ2cDNJUzrwKoP/wZys/6O+veBBxMA47KoyIHJ4Pop/EBQOv
+ EKC7hIILBh/vuALHxU+yWgm/WSTawNBMXGtuKECtK7wEQjlHPbzJsfQXIP/jMZOnDl1w
+ wvt/qEz8e4XSFATbFUZpCmKD0VtVga4yMeu7QxD1Xaql0wpwHpj5ikD0Fkb+axsBRwt9
+ SDyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1789036188; x=1789640988;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=xWZZE3xYKe23Z79woKd8BI8HHaFaF83jyHv7BB2u1VY=;
+ b=A0au6MioU/d7JKd7aN3RY6CaAms8opPrGfKqiA5sAE8X1vZAJQ/6IPc+u2LcuSfXTC
+ qb0xt6FXmvKwX77NjCTo+n0o5bIp7+QYyMIAxceYba1AxgcwZ4m4tGRx99wxNHc4VP1X
+ D6M8j7k6MnMLQkVzUdisdmQxqUYK6uJGeGn70hKYoYnZYYLH6fNDL1u0GayS/U8Sd7ZM
+ PgcNu58zGuABF3nPWWoSyM8k20vdopRw0wkbLSKRpqnNC2TEmXZcy1ze1ESY3qHsQjAY
+ 85fGVd4dcQm0D4+AEcmBUFO6E4xxus1mgEFRLTr6WxxMLa1pKW6c5MKYJL2AXOLjv+XU
+ lqEA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByUFIf6+StZYR4/uwYvmDjR6p0Jfpy1w5zI30YfRISJ72mOsyLw446suZjg5a2ci+0McggLYJg=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mKfsgulH0ZKbfesl7R1zusgKiMYOEmG7L2gyP/Nbn3aCC5m4VQ
+ uoUVPH3AiTbOZvvkt/dCiif9/0/B7N9rTTZEJ1qv7+WFr4XQVc9YhLHx30T4hHjcfpLyLy6ArsN
+ tMb/GV6jR9xHJQoEtTSjomtnR0a98ZioEwsKJR0pvdK2QL2UCa6XZ6RBn8RK4JTo12L5VWIo=
+X-Gm-Gg: AYBFou1RL84pRkN32otP58ob1JGDuqyjXHa04CWtEB92poIjHO3mlkIT6+0H82f+9oG
+ YVN5UECre/MtFdjEWZY5eGobUX1x4UeRDioLFx+SSZrBR0+wMiZEPhGZeB6HBGchC+5CyJmhnDx
+ 6rDyoMRxK19EW8LLhSwLCNK4VUPWqUd0YAcNU/nqFp4N7gOYqOs65zVHAUaePl8VFei9CsYr67H
+ zNUfQT7u3IZTJ/4TyQ7lsspqpKegLLlYp753l2exOt+AK1DdoH1/1VxaNcJSQXk6bOAT78HklEw
+ gfJ+2HNCnz0srpFklc2v3zObEOmKj8rjHbF4NhRodb2epToBLYesila1g4Ztfl5jn+F+uPYU3K9
+ qPAJzyQe2WHBOD+X2DOVCX7u4jPizuFovuFrzpG7QS/j9VW/moP+tFA5RJDD1nud3dgHyYQsm1l
+ 0e9aDWGH1n83kSzAjTaEk9qfsJKy8cgw==
+X-Received: by 2002:a05:6300:83:b0:3da:bea4:6219 with SMTP id
+ adf61e73a8af0-3dacbf15124mr11594923637.20.1789036188539; 
+ Thu, 10 Sep 2026 03:29:48 -0700 (PDT)
+X-Received: by 2002:a05:6300:83:b0:3da:bea4:6219 with SMTP id
+ adf61e73a8af0-3dacbf15124mr11594826637.20.1789036187976; 
+ Thu, 10 Sep 2026 03:29:47 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-3339a62be87sm42824576eec.6.2026.09.10.03.29.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Sep 2026 03:29:47 -0700 (PDT)
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Subject: [PATCH v2 0/4] tools: qcom: mkmbn: Updates to support ipq5210
+Date: Thu, 10 Sep 2026 15:59:38 +0530
+Message-Id: <20260910-ipq5210-v2-0-d209f7dc0fc5@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260909-spacemit-aihd-v2-1-780e98cf2fec@pigmoral.tech>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJKGomoC/yXMywrCMBCF4VcJszaQGRq1fRXpImYmOoveklaE0
+ nc32OV3OPw7FMkqBTqzQ5aPFp3GCroYiO8wvsQqVwM5urobNlbnxRM660mQgw+pTRHqe86S9Ps
+ vPfrTWZatBtdzhGcoYuM0DLp2psWGmZJnvEN/HD9LzynXiAAAAA==
+X-Change-ID: 20260714-ipq5210-52e1da5af9fc
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEwMDEyMSBTYWx0ZWRfX//LpJLxHfjIn
+ CVzavAO6oQr8f+eOHKTCR0up8AHGg9pufjgA4/mwu1CWBsg7tYn6bp+kZigXI1PZ7uJjZsreBW6
+ HL09jlGgqqK93otAvae94q8UbzhR7+5p/cDsUtnViOkJIM4yHfZF0I86H5itsS8IxeSLM96Da6Z
+ 25OYGM185R5N4tZxSbSn0/lG538tLCdn8RkjIvtc0DBPLnp3U0gI/zXAfgLxRahW+bVQVoyDGIX
+ MoJI3CXhsPRh7wlrSCoPIVf5oIcJlFU+pF364V4yqck+hs3UdL72oUtEnvYthSxAJdx4IonpctA
+ Cn1krXMDZxmaNMP9bmS0Hp4m+wK2WzZdJnn4MwHkbWSH8aJu6ktCbObxd5RZpaJ5JrQAc0XHmr0
+ yJr/HfI12wE4w3wXxVBC5kE1e1ShUXDmUbhT1sNjFMNWTfAFvqIn1251NV34koF+8LnRS4oRgCJ
+ QF2+bJqFIqPFYdOrx0A==
+X-Proofpoint-GUID: -4Q3GTXQlmEbDG_jSYWixg_0G8Ol9zRi
+X-Proofpoint-ORIG-GUID: -4Q3GTXQlmEbDG_jSYWixg_0G8Ol9zRi
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEwMDEyMSBTYWx0ZWRfXyArsdZJbDPZc
+ +CAEUHwIUok7z1+hit3NDmvz3Nh1gNtLFSDEScD26vh8AM0Ji5uEiTygHoy8+4q0DDNqKCNrne6
+ josDAkt/JClA2Kf7bgyR954OO1WI4qU=
+X-Authority-Analysis: v=2.4 cv=eOmGH3p1 c=1 sm=1 tr=0 ts=6aa2869d cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=p580P5g6mWtK41y3Ph8A:9
+ a=QEXdDO2ut3YA:10 a=x9snwWr2DeNwDh03kgHS:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-10_03,2026-09-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 phishscore=0 impostorscore=0 lowpriorityscore=0 adultscore=0
+ suspectscore=0 bulkscore=0 clxscore=1015 spamscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609100121
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,310 +244,42 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Junhui,
+As part of adding Qualcomm ipq5210 SoC U-Boot SPL & U-Boot proper support,
+the mkmbn script has to be upgraded to create images that can be used
+in the ipq5210 SoC.
 
-The patch looks good to me, I only have a few minor comments.
+These changes are to address the feedback in the 'Qualcomm IPQ5210 SoC
+bringup' series [1] to use mkbn.
 
-On 23:51 Wed 09 Sep     , Junhui Liu wrote:
-> The SpacemiT BootROM loads the FSBL from a boot image consisting of a
-> fixed 4 KiB header with two metadata headers and authentication
-> information, followed by a 32-byte-aligned SPL payload and a trailing
-> authentication area. K1 and K3 share the same layout, but use different
-> integrity and authentication schemes. K1 requires RSA-signed images,
-> while K3 uses CRC32 to verify images in non-secure boot mode.
-> 
-> Add mkimage type "smtimage" for the K3 CRC32 path. Populate both
-> metadata headers, fill their CRC32 values and the payload CRC32, and
-> reserve the authentication areas required by the layout.
-> 
-> The image header has no reliable K1/K3 identifier, so select the SoC
-> with -n. Omit dumpimage support since it cannot take -n to distinguish
-s/-n/-n option/
-> between the variants.
-> 
-> Only "-n k3" in non-secure boot mode is supported. Route SoC differences
-> through a variant table so K1 and RSA authentication support can be
-> added later.
-> 
-> Tested-by: E Shattow <e@freeshell.de>
-> Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
-> ---
->  boot/image.c     |   1 +
->  include/image.h  |   1 +
->  tools/Makefile   |   1 +
->  tools/smtimage.c | 202 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
->  4 files changed, 205 insertions(+)
-> 
-> diff --git a/boot/image.c b/boot/image.c
-> index 185d52ba492f..3a31ef663710 100644
-> --- a/boot/image.c
-> +++ b/boot/image.c
-> @@ -179,6 +179,7 @@ static const table_entry_t uimage_type[] = {
->  	{	IH_TYPE_TFA_BL31, "tfa-bl31",  "TFA BL31 Image", },
->  	{	IH_TYPE_STM32IMAGE_V2, "stm32imagev2", "STMicroelectronics STM32 Image V2.0" },
->  	{	IH_TYPE_AMLIMAGE,   "amlimage",   "Amlogic Boot Image" },
-> +	{	IH_TYPE_SMTIMAGE, "smtimage", "SpacemiT Boot Image" },
-I found most entry align with 4 space.. should do same as above line
+1 - https://lore.kernel.org/u-boot/78ff6a8d-5c63-4bc2-bf1e-6b71b8f9c6cf@linaro.org/
 
->  	{	-1,		    "",		  "",			},
->  };
->  
-> diff --git a/include/image.h b/include/image.h
-> index 6edcb1995bfe..53aad2dfde3f 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -235,6 +235,7 @@ enum image_type_t {
->  	IH_TYPE_TFA_BL31,		/* TFA BL31 image */
->  	IH_TYPE_STM32IMAGE_V2,		/* STMicroelectronics STM32 Image V2.0 */
->  	IH_TYPE_AMLIMAGE,		/* Amlogic Boot Image */
-> +	IH_TYPE_SMTIMAGE,		/* SpacemiT Boot Image */
->  
->  	IH_TYPE_COUNT,			/* Number of image types */
->  };
-> diff --git a/tools/Makefile b/tools/Makefile
-> index 535a5d51c89e..fc0aa52455aa 100644
-> --- a/tools/Makefile
-> +++ b/tools/Makefile
-> @@ -138,6 +138,7 @@ dumpimage-mkimage-objs := aisimage.o \
->  			pbl_crc32.o \
->  			renesas_spkgimage.o \
->  			sfspl.o \
-> +			smtimage.o \
->  			vybridimage.o \
->  			stm32image.o \
->  			$(ROCKCHIP_OBS) \
-> diff --git a/tools/smtimage.c b/tools/smtimage.c
-> new file mode 100644
-> index 000000000000..96e8b5d8d171
-> --- /dev/null
-> +++ b/tools/smtimage.c
-> @@ -0,0 +1,202 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Copyright (C) 2026 Junhui Liu <junhui.liu@pigmoral.tech>
-> + *
-> + * The SpacemiT boot image consists of a fixed image header followed by an
-> + * aligned SPL payload and a trailing authentication area. The image header
-> + * contains two metadata headers and areas reserved for authentication data.
-> + *
-> + * The image layout is:
-> + *
-> + *   0x000             root key
-> + *   0x100             header0
-> + *   0x120             key metadata
-> + *   0x300             OEM keys
-> + *   0xb00             signature0
-> + *   0xfe0             header1
-> + *   0x1000            SPL payload, with its end aligned to 32 bytes
-> + *   payload end       signature1 (0x100 bytes)
-> + */
-> +
-> +#include <image.h>
-> +#include <u-boot/crc.h>
-> +#include "imagetool.h"
-> +
-> +#define SMT_MAGIC		"AIHD"
-..
-> +#define SMT_PAYLOAD_ALIGN	32
-it occur to me, it's not necessary to introduce a local macro which only
- used once? while it's quite obvious what ALIGN() means
+While at it, fix the MBN version number for ipq5424.
 
-> +#define SMT_AUTH_SIZE		0x100
-> +
-..
-> +#define SMT_FLAG_CRC32		(1U << 0)
-is this a local flag? how about defining as BIT(0)? which is more readable IMO 
+Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 
-> +
-> +/**
-> + * struct smtimage_header - metadata header within a SpacemiT boot image header
-> + *
-> + * @magic:	Magic (must be SMT_MAGIC)
-> + * @version:	Image version used when anti-rollback is enabled by eFuse
-> + * @secure:	Version slot used when anti-rollback is enabled by eFuse
-> + * @reserved:	Reserved
-> + * @image_size:	Header0 stores the image header size
-> + *		Header1 stores the aligned payload size
-> + * @load_addr:	Unused
-> + * @header_crc:	Header0 and Header1 store the CRC32 of the preceding 24 bytes on K3
-> + * @image_crc:	Header1 stores the CRC32 of the aligned payload on K3
-> + */
-> +struct smtimage_header {
-> +	uint8_t magic[4];
-> +	uint8_t version;
-> +	uint8_t secure;
-> +	uint16_t reserved;
-> +	uint64_t image_size;
-> +	uint64_t load_addr;
-> +	uint32_t header_crc;
-> +	uint32_t image_crc;
-> +} __packed;
-> +
-> +/**
-> + * struct smtimage_image_header - fixed header area of a SpacemiT boot image
-> + *
-> + * @root_key:	Root public key
-> + * @header0:	Image layout and load information
-> + * @key_data:	Key metadata
-> + * @oem_keys:	OEM public-key area
-> + * @signature0:	Signature of the image configuration
-> + * @reserved:	Reserved
-> + * @header1:	SPL payload information
-> + */
-> +struct smtimage_image_header {
-> +	uint8_t root_key[0x100];
-> +	struct smtimage_header header0;
-> +	uint8_t key_data[0x1e0];
-> +	uint8_t oem_keys[0x800];
-> +	uint8_t signature0[SMT_AUTH_SIZE];
-> +	uint8_t reserved[0x3e0];
-> +	struct smtimage_header header1;
-> +} __packed;
-> +
-> +/**
-> + * struct smtimage_variant - SoC-specific image properties
-> + *
-> + * @name:	SoC name passed to mkimage with -n
-> + * @flags:	SoC-specific image flags
-> + */
-> +struct smtimage_variant {
-> +	const char *name;
-> +	unsigned int flags;
-> +};
-> +
-> +static const struct smtimage_variant smtimage_variants[] = {
-> +	{
-> +		.name = "k3",
-> +		.flags = SMT_FLAG_CRC32,
-> +	},
-you may want to define a macro if adding too many more variants which will
- make code more compact..
-#define VARIANT(name, flag) 		\
-     {					\
-             .name = "k3",		\
-             .flags = SMT_FLAG_CRC32,	\
-     }
-but I'm fine with current version if you're relunctant to change
+v2:
+- Remove 'load address' from MbnData and get it from .config
+- Add qcom_sm8550_defconfig
+- Use 4K alignment for padding the MBN images
+- Remove '--melfs' option and make them positional
+Link for v1: https://lore.kernel.org/u-boot/20260714-ipq5210-v1-0-0b98251aabbd@oss.qualcomm.com/
 
-> +};
-> +
-> +static const struct smtimage_variant *smtimage_get_variant(const char *name)
-> +{
-> +	int i;
-> +
-> +	if (!name || !*name)
-> +		return NULL;
-> +
-> +	for (i = 0; i < ARRAY_SIZE(smtimage_variants); i++)
-> +		if (!strcmp(name, smtimage_variants[i].name))
-> +			return &smtimage_variants[i];
-> +
-> +	return NULL;
-> +}
-> +
-> +static void smtimage_init_header(struct smtimage_header *header, uint64_t image_size,
-> +				 const struct smtimage_variant *variant)
-> +{
-> +	uint32_t crc;
-> +
-> +	memcpy(header->magic, SMT_MAGIC, sizeof(header->magic));
-> +
-> +	header->image_size = cpu_to_le64(image_size);
-> +
-> +	if (variant->flags & SMT_FLAG_CRC32) {
-> +		crc = crc32(0, (uint8_t *)header,
-> +			    offsetof(struct smtimage_header, header_crc));
-> +		header->header_crc = cpu_to_le32(crc);
-> +	}
-> +}
-> +
-> +static int smtimage_check_params(struct image_tool_params *params)
-> +{
-> +	if (!smtimage_get_variant(params->imagename)) {
-> +		fprintf(stderr, "%s: SpacemiT SoC must be specified with -n\n",
-> +			params->cmdname);
-> +		return EXIT_FAILURE;
-> +	}
-> +
-> +	if (!params->dflag)
-> +		return EXIT_FAILURE;
-> +
-> +	return EXIT_SUCCESS;
-> +}
-> +
-> +static void smtimage_print_header(const void *buf, struct image_tool_params *params)
-> +{
-> +	const struct smtimage_image_header *image_header = buf;
-> +	const struct smtimage_header *header1 = &image_header->header1;
-> +	uint64_t payload_size = le64_to_cpu(header1->image_size);
-> +
-> +	printf("SpacemiT Boot Image (%s)\n", params->imagename);
-or make it slightly more readable
-        printf("Spacemit Boot Image\n");
-        printf("SoC Variant: %s\n", params->imagename);
+---
+Varadarajan Narayanan (4):
+      tools: qcom: mkmbn: Fix ipq5424 MBN version
+      configs: add qcom_sm8550_defconfig and debug fragment
+      tools: qcom: mkmbn: Add support for ipq5210
+      tools: qcom: mkmbn: Add support to create multi-elf
 
-> +	printf("Total Size: %llu bytes\n",
-> +	       (unsigned long long)(sizeof(*image_header) + payload_size + SMT_AUTH_SIZE));
-> +	printf("Payload Size: %llu bytes\n", (unsigned long long)payload_size);
-> +}
-> +
-> +static void smtimage_set_header(void *buf, struct stat *sbuf, int infd,
-> +				struct image_tool_params *params)
-> +{
-> +	const struct smtimage_variant *variant = smtimage_get_variant(params->imagename);
-> +	struct smtimage_image_header *image_header = buf;
-> +	struct smtimage_header *header0 = &image_header->header0;
-> +	struct smtimage_header *header1 = &image_header->header1;
-> +	size_t payload_size;
-> +	uint32_t crc;
-> +
-> +	payload_size = sbuf->st_size - sizeof(*image_header) - SMT_AUTH_SIZE;
-> +
-> +	smtimage_init_header(header0, sizeof(*image_header), variant);
-> +	smtimage_init_header(header1, payload_size, variant);
-> +
-> +	if (variant->flags & SMT_FLAG_CRC32) {
-> +		crc = crc32(0, (uint8_t *)(image_header + 1), payload_size);
-> +		header1->image_crc = cpu_to_le32(crc);
-> +	}
-> +}
-> +
-> +static int smtimage_check_image_type(uint8_t type)
-> +{
-> +	if (type == IH_TYPE_SMTIMAGE)
-> +		return EXIT_SUCCESS;
-> +
-> +	return EXIT_FAILURE;
-> +}
-> +
-> +static int smtimage_vrec_header(struct image_tool_params *params,
-> +				struct image_type_params *tparams)
-> +{
-> +	size_t payload_size = params->file_size - tparams->header_size;
-> +
-> +	tparams->hdr = calloc(tparams->header_size, 1);
-> +
-> +	return ALIGN(payload_size, SMT_PAYLOAD_ALIGN) - payload_size + SMT_AUTH_SIZE;
-> +}
-> +
-> +U_BOOT_IMAGE_TYPE(
-> +	smtimage,
-> +	"SpacemiT Boot Image support",
-> +	sizeof(struct smtimage_image_header),
-> +	NULL,
-> +	smtimage_check_params,
-> +	NULL,
-> +	smtimage_print_header,
-> +	smtimage_set_header,
-> +	NULL,
-> +	smtimage_check_image_type,
-> +	NULL,
-> +	smtimage_vrec_header
-> +);
-> 
-> -- 
-> 2.55.0
-> 
+ board/qualcomm/config.mk      |  2 +-
+ configs/qcom_sm8550_defconfig | 15 +++++++++++++
+ tools/qcom/mkmbn/mkmbn.py     | 51 +++++++++++++++++++++++++++++++++----------
+ 3 files changed, 56 insertions(+), 12 deletions(-)
+---
+base-commit: 914dd2f5d18a3a89e4ddb6d1d97b2743618ae5ee
+change-id: 20260714-ipq5210-52e1da5af9fc
 
+Best regards,
 -- 
-Yixun Lan (dlan)
+Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+
