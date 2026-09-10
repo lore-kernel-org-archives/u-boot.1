@@ -1,173 +1,139 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4471C79F9F
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 13:15:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B6A3C79F9F
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 13:15:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6B22940A9A;
-	Thu, 10 Sep 2026 13:15:04 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 311CE60B1B;
+	Thu, 10 Sep 2026 13:15:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id v4IbI2AwOq85; Thu, 10 Sep 2026 13:15:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 7B77940722
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789046103;
-	b=h+S5o7afFjkK7XBOlhmgvzjhU9RBwg29UddH1PBntMPL+tu0Kfp7ecbQKG3Z1Swu9azX
-	 zNJbgNEk2D6MBVO5XN+BfU7sVqSVpw5c/oGrIZxUQP+9dNmntpHNZN7deRLbGnJRmlZo8
-	 TEBHrdDpEiBJx3XFRdlpXmFcVsXBm/fMgq3xJTF1zFsxpY+rl2bpLmx/muOzJNbosm0Ch
-	 6r4KSCWFTfBd0RPuzMNHnQjD4cAGFt7oPUL/+BTopf3dvJzVUHx6m6XzeVBrLqio9nGwJ
-	 i+XpkI0wE8fNvCM0dwTqB0DoGX+f6k69a+wRPFpmPTuFb5/V+VrFSd/rSb08jZ9oRiw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lSNx_V2ewg6f; Thu, 10 Sep 2026 13:15:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 29F9360869
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789046129;
+	b=fCqJNEzSRtTQYh2V0n7qhl1+pcyWkw5Ifq9tL78iLV7L7M/ymu2hReQ605CtIQfNibg0
+	 yrKSyQeY8BuWJYRYUFBYJw8ko1hFFafJgEg9mkkBVqi0AEYvr36SQ3WS0zvuyfS8qyQZ+
+	 Gh2FqksVL/tl+Ajk5i6GKja1Gb3vBEM9VyHY2wr+9Pb9AnpSeoPGmu7ij2c2SZcb//Z9c
+	 5xr7PFfP+foVmrMpYDaFpxwSf1+eNs1fF6w5zTpFrMTDElVerCB0EAlOh0HgQwHOjlD6s
+	 Cf8rcNgQK/AM5yg1VgC5pbYK0zz1XOWEwNPIruNupRkS44hFMweYJNeunXnZ1S0ZA0w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789046103;
+	c=relaxed/relaxed; t=1789046129;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=09cSGKnFCYlhpbqcXyRvkYjCUMvVZR3YUHka/xDjWQA=;
-	b=QuRrZ/YxKTKwn3qpnxJnT8BkKChCL+4QXJrepcMeT3zg9bvYkk9sLveAUKiDrlefleCI
-	 jNDGrlcABe/WUVEP9mYtS1kI8OMVf+dZDe8wwhnr3szYeEOYdqoMMuIt4/jSQ1pqGNyJf
-	 0sXKj/fYBZd5W3CAtDbfvTMy7OfX0ErmaPOMjcRc8aS+riVf3kvlS0BD0l/Vnlm5H8fdC
-	 XKd/0BIXi8Ydk0+/l/d/61xICcQKAql260QQ6EZvuYczF2GZB3KIQ84fI9TmZcBWXThOV
-	 EkOlM8OHar7DJXQVIPNgD16sb8usHak5NUM/6RHxnM41MJSapPss4LjUvbTzZVKXz6A==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=g5iZV1Xq;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 Received:X-Yandex-Fwd:DKIM-Signature:Message-ID:Subject:From:To:Cc:
+	 Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:
+	 User-Agent:MIME-Version:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=4Tx+ph1xXMuAbtq+1MnH9VV+m2f7SCdcTFrDpbUwexc=;
+	b=tg7yN/nAMsaG1Py9wJEJaHl20aBfzF6fD6tv7A+qBvCkeSFYD7bGhscMBDHwQfPOQACx
+	 PNV03VQdrDKBBH/Wsv3fyFkHHs6cnqjUZSbgn2E+DHWPZ6m68PHoEd+tNu2DBFLa2mBZN
+	 R/+jlyxCoeVjid5wNWM6fE2CmuAGUyYaui9ONSX0gZPMjbTqsTvUEIW/z/lG2LQxc1H3k
+	 2qfDnckfQ1EcqvN0FTP7YKFyMvNwz7onhhIirg/DANF9yfkhMi6PJQYs7yY1bHzZIAXxv
+	 xd55HmLYiXT8/nbiM/yJPjfq2gDxPSbwaUHJ9WDYAX6PEp+I8rMu+Cf4Dw4x+aPZEqw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789046103;
-	bh=09cSGKnFCYlhpbqcXyRvkYjCUMvVZR3YUHka/xDjWQA=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1789046129;
+	bh=4Tx+ph1xXMuAbtq+1MnH9VV+m2f7SCdcTFrDpbUwexc=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=L/iZPmyfwnW9fEJmxnUouiDw8FeybZRqDcFj656in9A2nZASgT2bYZKh1UCveS2Ro
-	 2d5fxYoHupIK9i25UXlDuEWUQF8bFsZCxSJLWvz+XBDSijOW+4prOHUL0pQr48a8rV
-	 Yq735UxOvTyiOwHnNzcDp3zgws7kBEqArcaO3DMXFfBH4DM2llqq8h00uDpt4PLetz
-	 +VlSrC1U0gFHuS7scQ8klbKRU2M88t4SwgTUg6+tvyX7u7f9Uo2UIpQeNFNwUKIVxt
-	 eOK/4GKwBOl9+2Xth0YvmtEO+cEiOalSVabZUx+6VSk/DkKtgFYvrwnD3ALkvFCLuM
-	 Zef/0h3aTxKVw==
+	b=e2BH6tJOXbceZmqIMNwD0kjM30wUnnbfC9f+S3/uEn+03QbKas+Z6ETU3FmGriolK
+	 8BlF0TZ9FoxPBgf5+FmdMy5jWtW6VjxpnBq6ICf0yue1e5iVWFy1uw6bnBmXAtzCwv
+	 j5qbg/RTgETomQM8reIVdNPzJTceMGf2Kl7ihMy+yKDdB+O4WksYFOyx81JJ9KtMU6
+	 p6R5gdqycUsl2mg8zlgFy0cFEvdN0LqwZTQMFBQQQNm+PBf1NCIXrRCD1PwrtGqRls
+	 BRuwLW6jFhrqlUiX58SL/Qw6XatEzWGsGoPboakAj3ULx9D1ddUnd9gwB+fTD+MCyq
+	 qQ7OR3fWYWOsw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7B77940722;
-	Thu, 10 Sep 2026 13:15:03 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id DBE1D268
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 13:15:01 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 29F9360869;
+	Thu, 10 Sep 2026 13:15:29 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 42CEE49D
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 13:15:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C1FFE40722
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 13:15:01 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 28AC340090
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 13:15:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Cav7-CkmnSG2 for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 13:15:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 73FF840698
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:30::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789046101;
- b=AVN93txcRurPXnfmmibBpWJihmdOgc+5/Ros9d0E0rI14VgbhexNxQQCMeRQBo6vX4xi
- MfshG7C48nzUHui9+41crQCcTMhiM17EdEHONjx3PidckHA+P3hZ/JCzN8evEXrDNRSwN
- +vWCHoMEHkgZaQu7tQI5EiT9pWT6VHo2cAs/vmuhFdqjohjycARapz/6JRFdskMtj5br8
- Z+TcTtcKSGipYTW4yetqtjQ5u5jH0qkNHYq0tPbybFx0zvJPbGU3O+9mXpwSiB4poXUOv
- hv/qzAFCl8OzsEGHR0C7rV+HmkM6+mgOkgZz5gDqwNzsmLNT4YoKQgw0Xm0v+tvv8UQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4_BKrOPOCLmS for <u-boot@lists.u-boot-project.org>;
+ Thu, 10 Sep 2026 13:15:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 0840C40024
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=178.154.239.146
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789046126;
+ b=ewjXN1HmW0g9695Kmg4szYIcLoCCdOGBEOQw41kZBgJU+R0jRGJMjIL9YdndfylLz7tS
+ 048LoPh1U9LFKIysGacvl+TsHYQzh/E7KBTbMg6TFeZj9Tep4pfb7qUKpaNFKTl6Ylkdq
+ 11fbrLQieuyRDXZlps7V/zc1RZtmLzC0qpY5BVsvfkQeCwYnX2WcDHalDJdaVYvV1mewM
+ nkVs2ddhpUTIsPye03GH4KFaHE40zjmTWLoZAHG7kuxNGnEAD8sr1v8LKXMF2fEHq+D3b
+ rAziWOZGmPgwo7Li4nSeQ8MZDBAezZsf5mCcFRGssPRhurdaG64rgrM9Zzr+7H9tAaQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789046101;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:In-Reply-To:
- References:Subject:Message-Id:Date:MIME-Version:Content-Type:
- Content-Transfer-Encoding:X-Mailer;
- bh=09cSGKnFCYlhpbqcXyRvkYjCUMvVZR3YUHka/xDjWQA=;
- b=tDs4f3upFqc6mHlWLjT+Ong2RpQ83vvH1mvmFYeUA1Rv+tGfH4nsShYhWmxm7OBbCE15
- /dvcCMgAs3XrqxW1HVEVx0dGGGDsvACZ/eYoJASJ3dN9HCSFCNHnTfG7f1npAOyjYZhA4
- g3iN1n3kGdmAElFrbokfozbpItlYL6Pz1I51UDKMA+bNHE2PwVC74P70lkBv/z277Snp1
- t8X3/GAhY/V6K4oFQE1bSGaLkHZQHDCWY88VkRl072+sR4qigP3Ip9Z89xMg4Yj4SZQmx
- zIspdy2P5fY//u1thn12CuREfHZcdbrZ93kyvVibLtzZShQ2ht2jkAD88YYOWwlPS7g==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
- dmarc=pass header.from=linaro.org; 
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=g5iZV1Xq; 
- arc=none smtp.remote-ip="2a00:1450:4864:30::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:30::10; helo=mail-wr2-x10.google.com;
- envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=g5iZV1Xq
-Received: from mail-wr2-x10.google.com (mail-wr2-x10.google.com
- [IPv6:2a00:1450:4864:30::10])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 73FF840698
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 13:14:59 +0000 (UTC)
-Received: by mail-wr2-x10.google.com with SMTP id
- ffacd0b85a97d-4834977ae75so1267053f8f.3
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 06:14:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1789046097; x=1789650897;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=09cSGKnFCYlhpbqcXyRvkYjCUMvVZR3YUHka/xDjWQA=;
- b=g5iZV1XqPZicbi9dutPQ2r0NTbnFyd324QKanA1qOw5MWpW1McWfgUtbVq4CEbjdkB
- zLbGnLqJOtzv2v3UhhejJqaaPcStamantqVzHAXorv/JwYp0Gces3eYX7CLF/9yJYdX7
- dROzo1YYgvX0bhZp2XfPWiYibfyWUKdNn1uUGVKgO5QxpWFx+p4rZg6QGwi7Vu9N6cGv
- 2302KJTGzLymRMEuFc2vhjKdWhi31cmaj3PJC05iF0Iw21fYTnWACeEpSOY3kpmKfyEx
- 26p3XB/ZFYH6id/iQQiGoYWctFWeWk1Q42EVi4Ns2zg0alGez93YNewwVpnTSVkgHSc5
- VCQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789046097; x=1789650897;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=09cSGKnFCYlhpbqcXyRvkYjCUMvVZR3YUHka/xDjWQA=;
- b=mA6ANrDIcygbA05W34KN+i4EzvHvhsUdz6Zyor2GfBLg5QER7QUFYSYldZVsequafc
- nPJ0/PhfIQBichCrwJQrWcmAVYp8luUUXTKXINoQvbbvGa84np4Y9zwRYj9S5MkF5thg
- saqPiLJMf9w6JPnhrlYcikT9e4j/GdQAVlBjGCkaRzWmhhbNVRRumBUqpMEx6Tz7MpcF
- 8rFcZmbYVaqYE3TCIWbLpFSz8gL0KbuCaJ2/jmyc5bknvO/E6odd9BebGUNNta3WDpSc
- N0jsl6H41vfZyUCjvQRl03BOI4P0LWTLIUHY3BWM/mr2z3uLw13O8qYDE3IsrsbbBB7A
- SJew==
-X-Gm-Message-State: AFuF++lsPrbOeo5gzKSSRxn5fZpJMVdQileJDZ2WotiY0QnVh40f3sqT
- r0So5xz12aD5aNp+wpkifO/h9AvBTRrK+gQAslrJu0d9SgouvE84cpO8PW/kXf7xNFGr4oiCpxK
- y2xn1
-X-Gm-Gg: AYBFou0PoMAd0beRgJQQ44f1zDtGORYxYRW/vZjikK5jr0dJ8pFt/vvtH7qTUIp1BP8
- WYzC56X4Dq3z7S/WLaLfbPViVPWX16eT7auRmQnigdzQfZSf4hMeCJ7P7fBa24gNSd4mt/WTZsc
- WS9x8gEO6zVWyKMY4sMDwx8k0qReJfmfKpi8FugFok0F5q4Ui6sSHmPu/dLHnyW8rIfsTmPdzn/
- 3DSda5AAdUkqbpk4iTPSFKgkUGpVDvyPSvtAFcKPRz/sc4m/TH3ug5V0iR7yFu971Eal4ViKYuQ
- lpMcCgDNpSMYe9ZbusqNWEQxJdXvBE2Qy9H78qozUxX109B7bwLqMy2JFDNxPFg5OfwO4O3F6Az
- /NwOsbGvwtRNz2FQt7z/09mlNF74FsiJxWMVXZKGzuSDbdrLAal1a8Qc073UzIaZRCtEKhmlIgN
- CETQZiSGWlkNyuXRiu7bBOgPknRXEGkr2MFOb8bd/1wzW0MrvdJKR4T695NApwn5E+SDmDrlFjB
- kuRC5sLetj8NpAdAfw=
-X-Received: by 2002:a05:600c:4f8e:b0:49d:726:cc9f with SMTP id
- 5b1f17b1804b1-49d1f22755amr223208745e9.5.1789046097419; 
- Thu, 10 Sep 2026 06:14:57 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49d20fb40e1sm131152225e9.2.2026.09.10.06.14.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 06:14:56 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: u-boot@lists.u-boot-project.org, Janne Grunau <j@jannau.net>
-Cc: asahi@lists.linux.dev, Mark Kettenis <kettenis@openbsd.org>, 
- Sven Peter <sven@kernel.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Francois Berder <fberder@outlook.fr>
-In-Reply-To: <20260904-apple-nvme-fwabi-v1-0-f7ede661c469@jannau.net>
-References: <20260904-apple-nvme-fwabi-v1-0-f7ede661c469@jannau.net>
-Subject: Re: [PATCH 0/4] Apple NVMe fixes for macOS 15+ firmware / M4 support
-Message-Id: <178904609637.1818032.13027647184967728015.b4-ty@b4>
-Date: Thu, 10 Sep 2026 15:14:56 +0200
+ c=relaxed/relaxed; t=1789046126;
+ h=Received-SPF:Received:Received:X-Yandex-Fwd:DKIM-Signature:
+ Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+ Content-Type:Content-Transfer-Encoding:User-Agent:MIME-Version;
+ bh=4Tx+ph1xXMuAbtq+1MnH9VV+m2f7SCdcTFrDpbUwexc=;
+ b=rml6qRdhtqWteAgrja1Osqyr4XTdmgyAGU/sozol2lAdrwTIPwTGD2GSN059rinedI9/
+ pqo86Y11VIF7c7O/WpN/Udk1wxB0FXwhXWDAkmEIh+GRWKRHMQIfku7CzSa3YQy11culn
+ EH3KmlnTopRYcSzqjNqlGFr8U6wf8EJ8qgYPfpyQG7anPJ86QYloBrOVr5y8Z81FFSILB
+ rpO+1Hi0LJEDs9djdTkc8be0LJ7iEGpn7yJlUH+IikQ8PEG/gHu5tfYRSmXHzSZNhhrWU
+ 4KsDDDkHChNY8wVy+u0bc5a9JVj+EJUShsU/rArYl0HkDboT/PRDq21xJo7iozjvGtA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=none header.from=maquefel.me; 
+ dkim=pass header.d=maquefel.me header.i=@maquefel.me header.a=rsa-sha256
+ header.s=mail header.b=sG6fxKGw; 
+ arc=none smtp.remote-ip=178.154.239.146
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.154.239.146;
+ helo=forward502b.mail.yandex.net; envelope-from=nikita.shubin@maquefel.me;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=maquefel.me
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=maquefel.me header.i=@maquefel.me header.a=rsa-sha256
+ header.s=mail header.b=sG6fxKGw
+Received: from forward502b.mail.yandex.net (forward502b.mail.yandex.net
+ [178.154.239.146])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0840C40024
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 13:15:23 +0000 (UTC)
+Received: from mail-nwsmtp-smtp-production-main-89.sas.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-89.sas.yp-c.yandex.net
+ [IPv6:2a02:6b8:c23:1d28:0:640:bb6:0])
+ by forward502b.mail.yandex.net (postfix) with ESMTPS id AAC3D8115E;
+ Thu, 10 Sep 2026 16:15:17 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-89.sas.yp-c.yandex.net (smtp)
+ with ESMTPSA id AFP643rg4uQ0-CU7gaHWc; 
+ Thu, 10 Sep 2026 16:15:17 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maquefel.me; s=mail;
+ t=1789046117; bh=4Tx+ph1xXMuAbtq+1MnH9VV+m2f7SCdcTFrDpbUwexc=;
+ h=References:Date:In-Reply-To:Cc:To:From:Subject:Message-ID;
+ b=sG6fxKGwianVpU8MLRQGaGbP5N41Rbb55g97wxJ+pRLizgTidko2YYP3ANMYKhFX/
+ GcFZcc1xWQx4y4Vgp1Eei6y+XovMnDf4WOgWAvqeX4KQ+bqHBkPmtPm37XRrIndAsd
+ o4iioadGVqWLJyGo5YdKlVUhTRA/IpX76W/9/0PE=
+Authentication-Results: mail-nwsmtp-smtp-production-main-89.sas.yp-c.yandex.net;
+ dkim=pass header.i=@maquefel.me
+Message-ID: <82d071f376c4ef190e6a3a263054780840faf7ed.camel@maquefel.me>
+Subject: Re: [PATCH v2 1/2] riscv: timer: Enable early timer for
+ =?UTF-8?Q?M=E2=80=91mode?=
+From: Nikita Shubin <nikita.shubin@maquefel.me>
+To: Yao Zi <me@ziyao.cc>, u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>
+Date: Thu, 10 Sep 2026 16:15:10 +0300
+In-Reply-To: <aqKhS6_w0Fqt8vsV@pie>
+References: <20260909-riscv_fix_early_timer_mmode-v2-0-563bff2a50c5@maquefel.me>
+ <20260909-riscv_fix_early_timer_mmode-v2-1-563bff2a50c5@maquefel.me>
+ <aqKhS6_w0Fqt8vsV@pie>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.60.2 
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.15.1
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -181,30 +147,88 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi,
+Hi Yao Zi.
 
-On Fri, 04 Sep 2026 21:22:38 +0200, Janne Grunau wrote:
-> Hej,
-> 
-> this series adapts Sven's Linux nvme-apple series of the same name to
-> u-boot. It fixes bugs which are worked around on M1/M2/M3 based devices
-> with NVMe firmware from macOS 14.x or earlier. Starting with the NVMe
-> controller firmware from macOS 15.x (required for M4 support) the
-> workaround is no longer available.
-> 
-> [...]
+On Thu, 2026-09-10 at 12:23 +0000, Yao Zi wrote:
+> Hi Nikita,
+>=20
+> Sorry for sending out this review late. My system crashed earlier
+> this
+> day and I forgot this mail in the draft folder.
 
-Thanks, Applied to https://git.u-boot-project.org/u-boot/custodians/neil.armstrong/u-boot-nvme (u-boot-nvme-fixes)
+No problem,=C2=A0all comments have been taken into account and will be
+corrected.
 
-[1/4] nvme: apple: Don't set a DMA direction for commands without a data transfer
-      https://git.u-boot-project.org/u-boot/custodians/neil.armstrong/u-boot-nvme/-/commit/f31c5646ccac279d11e128b8c42e968847eb7df2
-[2/4] nvme: apple: Never set the opcode in the NVMMU TCB
-      https://git.u-boot-project.org/u-boot/custodians/neil.armstrong/u-boot-nvme/-/commit/bf7661a63cb9f2804cc8851f60686a490355a193
-[3/4] nvme: apple: Add WARN_ON_ONCE for non page-aligned admin queue buffers
-      https://git.u-boot-project.org/u-boot/custodians/neil.armstrong/u-boot-nvme/-/commit/b63d271ae7c034033a06e771e06d5a72cd41269d
-[4/4] nvme: apple: Drop the PRP null check chicken bit
-      https://git.u-boot-project.org/u-boot/custodians/neil.armstrong/u-boot-nvme/-/commit/b3f756587082dac42a828ed74b58f64ac4f336e5
-
--- 
-Neil
-
+>=20
+> On Wed, Sep 09, 2026 at 09:30:59AM +0300, Nikita Shubin wrote:
+> > The generic RISC-V timer driver currently defines
+> > timer_early_get_count() only when CONFIG_IS_ENABLED(RISCV_SMODE),
+> > even though reading the TIME CSR is not inherently limited
+> > to S=E2=80=91mode; it works in M=E2=80=91mode as well when the CSR is i=
+mplemented
+> > in hardware (e.g., with the Zicntr extension).
+> >=20
+> > Moreover, timer_early_get_rate() is missing entirely for M=E2=80=91mode=
+,
+> > causing early timer functions to be unavailable on such systems.
+> >=20
+> > Fix this by:
+> > - Moving timer_early_get_count() out of the RISCV_SMODE guard
+> > =C2=A0 so it is always available when CONFIG_TIMER_EARLY is set.
+> > - Adding M=E2=80=91mode support to timer_early_get_rate(), returning
+> > =C2=A0 RISCV_MMODE_TIMER_FREQ when running in M=E2=80=91mode
+> > =C2=A0 and RISCV_SMODE_TIMER_FREQ=C2=A0=C2=A0 in S=E2=80=91mode.
+> >=20
+> > This is also necessary because several functions
+> > (e.g., net_random_ethaddr() via get_ticks()) rely on
+> > timer_early_get_count() even if CONFIG_TIMER_EARLY is not
+> > enabled.
+> >=20
+> > Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
+> > ---
+> > =C2=A0drivers/timer/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 13 ++=
++++++++++--
+> > =C2=A0drivers/timer/riscv_timer.c | 12 +++++++++---
+> > =C2=A02 files changed, 20 insertions(+), 5 deletions(-)
+> >=20
+> > diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
+> > index 500a25638a9..12c194ff74a 100644
+> > --- a/drivers/timer/Kconfig
+> > +++ b/drivers/timer/Kconfig
+> > @@ -227,8 +227,17 @@ config RISCV_TIMER
+> > =C2=A0	bool "RISC-V timer support"
+> > =C2=A0	depends on TIMER && RISCV
+> > =C2=A0	help
+> > -	=C2=A0 Select this to enable support for a generic RISC-V S-
+> > Mode timer
+> > -	=C2=A0 driver.
+> > +	=C2=A0 Enable support for the generic RISC-V timer driver using
+> > the TIME CSR.
+> > +
+> > +	=C2=A0 This driver works in S-mode and also in M-mode if the
+> > TIME CSR is
+> > +	=C2=A0 implemented in hardware (e.g., when the Zicntr extension
+> > is present).
+> > +	=C2=A0 In M-mode, the timer frequency must be provided via the
+> > macro
+> > +	=C2=A0 RISCV_MMODE_TIMER_FREQ; in S-mode, use
+> > RISCV_SMODE_TIMER_FREQ.
+>=20
+> This doesn't seem correct. These two constants are only used for the
+> early timer implementation, and the non-early one looks up the rate
+> from
+> FDT blob (/cpus/timebase-frequency).
+>=20
+> > +	=C2=A0 On platforms that also enable CLINT/ACLINT MTIMER, both
+> > drivers
+> > +	=C2=A0 may provide early timer functions and cause linking
+> > conflicts. Ensure
+> > +	=C2=A0 that only one of them is selected, or adjust the
+> > configuration to avoid
+> > +	=C2=A0 duplicate symbols.
+>=20
+> Won't this issue fixed by PATCH 2? And I think this paragraph is too
+> detailed to be included in the Kconfig help.
+>=20
+> Regards,
+> Yao Zi
