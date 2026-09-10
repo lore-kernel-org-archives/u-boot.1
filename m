@@ -1,172 +1,160 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B0DBC79FBF
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 19:25:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A138C79FBF
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 20:03:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2194D4083F;
-	Thu, 10 Sep 2026 19:25:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B7D2E81183;
+	Thu, 10 Sep 2026 20:03:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3_ELuTbu2UYk; Thu, 10 Sep 2026 19:25:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 566C340839
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789068346;
-	b=KiuF4UkSLg7jWCsUTr+b+ln3mryK8K9VqIt6BqUABPwDV1xbm4yN4pGjYFNoohaDhO0m
-	 NWbtYdR2cCWIi92hYEvGUXanCmAYncxOTVUBZYhkWyjnZd22Mp925ac6EGiNTIpDODKeA
-	 BI/hwE1xLWNfPAPN2/LCY3htmOIJ1VRYF+6DUmadXzWlaov8eNyJvobihs3pa1YN3rC4X
-	 WjKrZh2PLItTwoDVZuHizY6NztYjWWGq6ueWt9SqIXg97bx558GpZeIfgy4ZbmacnFlDT
-	 ryNZQirxQe4vGI8RskV6EaPXgGttjDB8JUD9rMgs4ITBRo1n8gGAVezmvQrmEz2SDMA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id H6lNksSjeY_i; Thu, 10 Sep 2026 20:03:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 853F780F78
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789070596;
+	b=PmNuKTT4vuSCp3H8dTRSZQrl+4UcXg/NYzEoikaNib5BTHL4Retg1fJppO72M96IPlNn
+	 l5kzlWbU8ijV6CbpLGZFkm8JjyfEfUPYSHpfYEwjcyeIPBpxfcqxhU8lvgcysy/z0Kup0
+	 HBQkcN6JJpY1VdlVlMQlId8WSxGuBxoHOKR34jvHDK5olYh5wN1kJLjabcADyZQbGf88s
+	 nwsDe0gv/u8fdGEQf3rZ7XzfuSHmOImt+/9qZCWwJAp4kyu4Yn4fAFc+sXLMZjy7kHMIe
+	 0oHkiI8B6I4Ng46sEqd/HA6ouh7TNH3LthMI3KFna0Swv/tA6Rg/FZvqi0EypwOAgYw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789068346;
+	c=relaxed/relaxed; t=1789070596;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=NCZHtSYJHNXXuwIfS6AqR3W8ZOKKm/QIY9zXS4b5AHg=;
-	b=U9f97tWyiLF7odAwPnUozNEpyDS4K5ECm6E7RgdTKdUMlZykbQ/DL8vv1ztErIFc7Moz
-	 +K0gawxPaBy/cV0wV7I+W6u+9DBvYVb2drpmZbm9efipMB0CoC+lblDLuVluVDCE8Jv2r
-	 l7CPGnJa8r9Kjhyq00Pn0I/jXX8moeZQVq+9NwAhEd0ne3Or0J8L9mvrWq2WgiHY5QoR3
-	 /oLoUuZV/tBF/0u05pqGRV+z+eaKARA/74ETfB4eReR/ZpMRdruoadwofeDNqlzZZvfe9
-	 7UZywKhg7QIu160hEs4W2a+PIKXdLsaD9QMeq1Y8GhAQKXLS5uSwXyUVJSe/v6XC/Ug==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Received:Received:From:To:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=U59IswCkFoPGlNWhovB3hT8IG9f66vJ0zphlGyTD5sg=;
+	b=Tk1tgxhCXS9XQRRTLvhT+U76JCTULvARfR8+5y/EzKFp2B5iG1hDTGAkcFsFVO1FkKSp
+	 PfWc7Zupd4pFeKu7e1wrEoFj1LnMqMD/42/ztFAhj3V1XZ6k/4eqwul03QwGEC6Nv9kDz
+	 ER2/s35PK0Ez2qsN0PeOpzg6KEn4csUeCp1B/+rtyTB3YMSuzYgKh63dW+mpZv0DMzKhT
+	 O/cx35ktEK4hgtFTWwu2v2tKljGwuscmnR9rcLhNxTXJ+/6BiCapbjZES/Qyl6gfUfDxm
+	 QhEuNXu8H7i7ZbHJ5qWL6marxQNuOeqcCW5SYfEXzTd0CmN+bK92y0iMITky+U88Y+w==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789068346;
-	bh=NCZHtSYJHNXXuwIfS6AqR3W8ZOKKm/QIY9zXS4b5AHg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=M+jSsbAhMwPV6uMLa+7WafM4TC7a9dvp7YkICJ0oJZyV+IWpMkQ5PeiOIaExVyzz9
-	 DZGE1kHH9IRMEb7r5lqy/2HFh/mMfg16t6bkekQVlSPrzdg7IHQY51cD1Bf+J05jLa
-	 zhUQFeYSm/H9vn9asxo2BhOx8G2C7+j/UH1gFjqR7H7AxKNvuABpKt0gO8Wkp97RIv
-	 NOdTx4DIYe8IYlo1dT3OB3BArQSYHflBVq9ZGPNdiqaTzr0ks+SlvfUN3aIOpBf9sL
-	 IceRc1mWS7xj+yBb0wSmiwFYN2WeCdlZIm1J2klHjd5wCXHVXsidLxbSm52Z+vyuhd
-	 6JtNuf8uhowbg==
+	d=lists.u-boot-project.org; s=default; t=1789070596;
+	bh=U59IswCkFoPGlNWhovB3hT8IG9f66vJ0zphlGyTD5sg=;
+	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=c3LP/EuIClL+7wNo/iMuQvN2hnnUwVse2Abxrw7ExldHrelzbDUVc6sA0hn/bYHfF
+	 ZA9B7ZnH74Q3tmRsgcaYgJ+WXxRornIfdy/LKO9Zg56rPs6H9fkUDtzEJG6mJM00tX
+	 qcqrhY5Dd2niGcZrGs8MrTfQW9mei4S8U2jqlGxMXcRGH1HyJWtVznEOWYUaZSaMoA
+	 zAJJYwaByhPSii4qKPYxPJ7jUwKWx2LY4y2v4GS37Z/KMnOTRyjWpUCVp5bQP0cUMn
+	 spmPvhA912pYCPRQVsBH2wotqiIFiLem7cbRzMCxVVwl6TxMbXcRXc4MHCHoRZaem0
+	 jKOowlUBlNnSw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 566C340839;
-	Thu, 10 Sep 2026 19:25:46 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7628729B
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 19:25:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 853F780F78;
+	Thu, 10 Sep 2026 20:03:16 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id D562914D
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 20:03:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5CCE5400BC
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 19:25:44 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id BB29640B10
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 20:03:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vpQeMdIBxY8I for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 19:25:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 935A140077
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:32::11"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789068343;
- b=KHVWCLDc4KPYJ889xxjjQBsm5Jsz8AnaYxl1HfUE/dsw+GE6GFLsDgXL94jbuoN9Ybg+
- 2n0t+UtcpxOJamWQO/iBim+o+K0ocOO3hwViJ+36hSmuWmygQPlnTMqUdVTCEti28+KW4
- yejKnayiCUErIKECsBBEHeaCx6Gf3dDVkL67+zkxnDmVZg9iF499URgxFa738fwR8x3e3
- ZB+UXDIvhqVF6IZxoCqDHtqQqJWJ4b7Yeh6DAgSwGJUYOSVuVjI1YFig42hvBx5LApI23
- F+R3xIUwUJ1t0ZohtNzvRnpFR+0s3qfY7LMhiRqyoEnRdOeqsbkDqUHgr7BH02F9PkQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uxHjtKaUT1JB for <u-boot@lists.u-boot-project.org>;
+ Thu, 10 Sep 2026 20:03:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 8D49340B36
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:32::4"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789070594;
+ b=b2Q9Lfjf6LAwrVB1POv+s9HgSL7XS99qyEAZo3vHuhJy/RwDVQaivgYOxuWCKDg8IzUU
+ z5q0VgkT3DsVoBs6FgkTx4wlGXTmpKymDp4Df1+WR9Os/wDo88pRWRDeJNnmd9cgdKmVn
+ vnNAy4iLxguNwIrILR87hq+sPmpzyZ1Sp00EWUp+yd3SsHjkQfXoRHTyo8idA5BboATI+
+ H5lGa1nA9sRveWTbaepN+s/lbE8jHVel+YZRAfNgfwJPdr06ZIsv0a5s1pYY1UDJJX1hb
+ A1FqP2xM+luR+WQ/oPBU7ICMrf/NKaflXbSRlMtBCHDM7E+pCJYbMTjo0voRR4wrG6g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789068343;
+ c=relaxed/relaxed; t=1789070594;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
- Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=NCZHtSYJHNXXuwIfS6AqR3W8ZOKKm/QIY9zXS4b5AHg=;
- b=FTyfDObu5JRTW+JkKGUCKE+31EDaYl161sA5qtg49QNZg6ve513MNktwfQaU2Jp+y+/n
- HbPA6qfvmkAWSMsX5Kj0orIpj+no9fuFG5o48RC1T+jhibYW7e+7pWOmQEAIEjI59Qllo
- IeG35BlpN0Oh+/4RgkUQAWI7VB+Ps2kQhjeW8AWglOcYYjDiBuz1iFjf8hpdqUMbiiJ0J
- dnBE+bu1p8DMvtJfrlSVd73QrZ+2AP89tyM+h3tg0rOxYQiIiR7OrHw7s2hMr+F1d+Mdc
- 8pa93HTcL3Kp47r+hAA0sI01Yl1t35o/HC6ZYEn4+PUGlHdhP45HbmpHNe5xonwNLNA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Subject:Date:
+ Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+ bh=U59IswCkFoPGlNWhovB3hT8IG9f66vJ0zphlGyTD5sg=;
+ b=L5qN957dC0URTwzMGKOBBHFizudtjZyq6pMStVLknHF6PeisvCK5fQ3e9MZhLfIURP1m
+ 2EMVEgglAi/XKfWDD1PngkHN8qDgdmdgLLMvyTPLziJ6dlt0Mn+M6muXsAhW6aqYj7tst
+ 86Dr9LhnODOULTjcipYEBb3J5epBEPgvdwu/gNldIO3iYhHOMFrjq6rjdFlklz5io88qk
+ Ie3O5s9W9wfIG+4nQnMDpNU/8AURS5Gfguw97ztIBpVCvSovqrPar5wGE9gH91JXpTuwW
+ MOb1k0zK9CezeibK0PMmX1byBNhpfO1GDzWTYBB60v1C7Kc+G1WAovQzHrWWxUe206Q==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=konsulko.com; 
  dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=GI3a76xP; 
- arc=none smtp.remote-ip="2607:f8b0:4864:32::11"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:32::11; helo=mail-oi2-x11.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+ header.s=google header.b=DAKQeHZO; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:32::4"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:32::4;
+ helo=mail-oi2-x04.google.com; envelope-from=trini@konsulko.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=GI3a76xP
-Received: from mail-oi2-x11.google.com (mail-oi2-x11.google.com
- [IPv6:2607:f8b0:4864:32::11])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 935A140077
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 19:25:42 +0000 (UTC)
-Received: by mail-oi2-x11.google.com with SMTP id
- 5614622812f47-4c2c368cb3bso124536b6e.3
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 12:25:42 -0700 (PDT)
+ header.s=google header.b=DAKQeHZO
+Received: from mail-oi2-x04.google.com (mail-oi2-x04.google.com
+ [IPv6:2607:f8b0:4864:32::4])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8D49340B36
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 20:03:14 +0000 (UTC)
+Received: by mail-oi2-x04.google.com with SMTP id
+ 5614622812f47-4b38a6e8c79so79819b6e.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 13:03:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1789068342; x=1789673142;
+ d=konsulko.com; s=google; t=1789070593; x=1789675393;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=NCZHtSYJHNXXuwIfS6AqR3W8ZOKKm/QIY9zXS4b5AHg=;
- b=GI3a76xPesnzGeC+aRyDK8vmXgtrGe9C1WJLG52L5zu0VPh1qsXvRWSPzv2SP9j6mE
- GsGJfezYGPK8i1G12eCIrgAr7FsvxOchqSZoTCOQAPGKcl4KgQ0WY6tdAwIVFqZUBaNN
- j8nZY8juoc2YYZJoCu9v6DonxH/jf0vHsFmVo=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=U59IswCkFoPGlNWhovB3hT8IG9f66vJ0zphlGyTD5sg=;
+ b=DAKQeHZOXHlyo7bol3Qv4mmpd8W13bzCGln4+IYjizav23RVd/Rg6ywzpu01e+Hkzq
+ /KNl4ZeUtso07XafYoQ+zcNhyk8xrigaxjLzpz+DvrLUN20imLlRue3ceq+Ubm47yqLS
+ agOZSpR2EPlqgp5EUAUDoYRoqLVIghbbJoKPs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789068342; x=1789673142;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=NCZHtSYJHNXXuwIfS6AqR3W8ZOKKm/QIY9zXS4b5AHg=;
- b=UOJjfR0Y4NH2M5Iq1YCoo9Bfa8Ny/PRvgbsrbmsg307M9cSBvFSb8nyn27r1+mI+DI
- TNvidb5rhYA+mNHBckxp4v90yD2pgw0DxcxblsjvqbQM8Mbp74LNjYQLOsXphYzNDcCo
- 39kJR53AG0aO6yv3Bv9zCdLk0+wN2LLrZgvCDzMGh3oriQBM/9gCFAhXhz4bUcnIhCRy
- ooWV2pAbiQOzBeW2fFCgTotLkcLyckh2H0AkNseryoBSigi0IqTbWo95L8Ga4R2LPhVq
- SoQg9odNQymVEwYJf/2+sySBVKU769Wu2WeyCTI7YBO3TFGVjbi5m0mzwKBim4OGnKQ7
- RgQQ==
-X-Gm-Message-State: AFuF++labqm7f6DXX5zgXyeE+94KvsK36oolZZw2IWWn/kJHd6G6UqFN
- JNxWWk1wm4UYSaQMrDY5L9bg7MtCxdBdZrOp6JIDKo3VaMi03gdF8UNvcLZOgibnQMU=
-X-Gm-Gg: AYBFou0q5lAiiMC/k5Br5t/KFR5o1Juh05qUdV4DyvZ1mDrTeNW9vVKnKKgL8djT0uL
- /yB0VywSDqbO6XlZmJFMSXl6MurTMGJgrs5xBNYd+NqcjURU0uj6gPFPZZzy+tMu8QM/VOat5w2
- hH9GPOXKP12dY7vOXD8+6L93CFiMqN3hoim2rp9FC1BLbQQUDMV1/BBHGYTNEOsnLsT5UWrj7T9
- aDwG+Yt5crTlnLLWUdRPhJDITBMZTxmwv/JgSl0rB9/XajzXebFTPiF+fYh/FGUnhROTP+JVJkZ
- brQfnxoWoyvesMo49u9ydP1lYpA+2LtZ5QbRXcSWXgSjq3UtXR2AyveIXFQ1ISQzeaz2MVSb1Af
- Y7+4yV8DLCrYfwbS48n3iXBctHdBWNUcY4uaw0MxDkG66XG+9A93WyqXROg2+qAzkdtmZxUX5FV
- jrGLXgg/3tUapg6LS2fLpbm3gOd320BgMIxn0XXJkQ+slf/wJYREYa8QaycakOOos557laPB3PY
- AoSM+5ZzPgyfWSPbVamrBVs6cNCq5cmiwzLoiAtLQEw74ERRA1APXjUem2p4hp3CMcZGA7HciAR
- SIomhP0OcFqorIt4z7/B
-X-Received: by 2002:a05:6808:1a0a:b0:4a3:f4b7:cbdf with SMTP id
- 5614622812f47-4c31c738620mr645811b6e.15.1789068341917; 
- Thu, 10 Sep 2026 12:25:41 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4c331bc9342sm96804b6e.12.2026.09.10.12.25.39
+ d=1e100.net; s=20251104; t=1789070593; x=1789675393;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=U59IswCkFoPGlNWhovB3hT8IG9f66vJ0zphlGyTD5sg=;
+ b=dQMfphJY0WiMweILUl2U+OdZIk1JhLVqiKGEbMkLLLuVYHAUkShT3T3XcLXP3kO8o1
+ KPZb2STK4T09tk2o8OsmAwU3oPFQSG7UnpQFztFmchJEVNuj8t2erKG1KLYvU5avhAfg
+ ErBhJVF/Q1EPThFLwLcsM9cu3Qelod+GTg6ps7klEn7bbL/WBeRhoy6rtd+ESycgXkY0
+ M/WncQwnZTfQPiq4q+glQwqphA/CeZeiAkR/f1JVj+q56tOAfORpyeniEsVvaxnRFXyl
+ a9Cua2WU4Hyuq7aI8KE8HS6D3g88PrOQYQkn9pO6Sg9mBgOTg1HGphVwvxrgyHRpVaJi
+ EIBg==
+X-Gm-Message-State: AFuF++nZUtkWe3ZDQil0ckfOQWkHpavLRnrDNXTJx90KWAsWmsz0NDUv
+ EAd5mc96w7GInc+i6SYmJ+5VQC4LfXpeFWbP/UCvry8qdS2QKx47DZLP1d7CVudsVeHL/HbQ2Dc
+ YH4zBFlfg6xff0r4=
+X-Gm-Gg: AYBFou1K87Vjrg0/xlr3UK1quoDNEkGqHY92C4TzbDZpF+32YxrsXMpuOlpPVPZcUhx
+ D3GkPphPKHYL4zaGRY++zS/K91jiMGgDXRY9GlySqfomjowZJVYmvFQGnA+MaksT4s//nXl8YQ1
+ YpVZN3m0gs2vwDAlOdE9q2JB80RGaDwN7T3ZR+QqbWZggPXYEVqFF6Wgd0x65Uhx3jMaiJ0ZlAg
+ zUokgZi047mfZrjaSOdrWZgELlgRubCv8GGefYwCkLyxLMfRC6Zljc5Bp17tp062rYP0mGejkCI
+ oaJaZMCY0khCvrg25SYq3y5oF7D4hzekA6yfgwL2+UktYWjJwtqUFp+f1d86gdsgbD6t1rPW8FR
+ YyLd52HIBUwiXEuaH9ufXuMn1jKHR34t+KOLq+/bVJXre6U8g+hqZwSIqJLnU/EujsHx+9F8MJW
+ TqeBscOcfWJVROn5EHSyM94tmhJxAp4znrKiOD150Wm3Kz4TijHm6pWeHgwSIf2iF9sBWK8Eb7t
+ LmwN9Eajw/uHLoyLCWJvT1R2GHkGddndtgHfjE6DYNDvDofY1/H54aLXtjOGs1GXx6fYgGr5KMm
+ 59m5KiLPnWMZa7V27flUxHBbGmsatY+eRaYChUh8308MJ0/urT2OmAw=
+X-Received: by 2002:a05:6808:50a5:b0:4b9:e65b:8c36 with SMTP id
+ 5614622812f47-4c31c72c208mr505498b6e.36.1789070592978; 
+ Thu, 10 Sep 2026 13:03:12 -0700 (PDT)
+Received: from bill-the-cat.tailc58245.ts.net
+ (fixed-189-203-100-56.totalplay.net. [189.203.100.56])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4c331bc937bsm208357b6e.11.2026.09.10.13.03.11
+ for <u-boot@lists.u-boot-project.org>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 12:25:40 -0700 (PDT)
-Date: Thu, 10 Sep 2026 13:25:38 -0600
+ Thu, 10 Sep 2026 13:03:12 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Sriram Sriram <sriramsriram@linux.microsoft.com>
-Cc: u-boot@lists.u-boot-project.org,
- Jerome Forissier <jerome.forissier@arm.com>,
- Simon Glass <sjg@chromium.org>, Drew Kluemke <ankluemk@microsoft.com>,
- Daniel Munic <v-dmunic@microsoft.com>
-Subject: Re: [PATCH 3/4] net: tftp: use bounded string compare for OACK
- option parsing
-Message-ID: <20260910192538.GO1764417@bill-the-cat>
-References: <20260909192016.217183-1-sriramsriram@linux.microsoft.com>
- <20260909192016.217183-4-sriramsriram@linux.microsoft.com>
+To: u-boot@lists.u-boot-project.org
+Subject: [PATCH v3 0/7] Cleanup MAINTAINERS entries
+Date: Thu, 10 Sep 2026 14:03:02 -0600
+Message-ID: <20260910200310.3503830-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="M7NfBAbEnDBr+QZO"
-Content-Disposition: inline
-In-Reply-To: <20260909192016.217183-4-sriramsriram@linux.microsoft.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -180,50 +168,186 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Hey all,
 
---M7NfBAbEnDBr+QZO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is a v3 of the series Michal posted here[1] and v2 is here[2].
 
-On Wed, Sep 09, 2026 at 12:20:15PM -0700, Sriram Sriram wrote:
+As the diffstat and previous versions show, we end up touching a lot of
+files. To avoid having a huge series, and also to avoid unmanagable CC
+lists, I've broken this up in to 5 patches. In the case of updating all
+of the Tegra entries, a little more work was required to ensure
+consitent coverage, so it's a separate patch. Also, as there was a
+question of ensuring that new -u-boot.dtsi files would be caught in one
+case, that is also a separate patch. The final 3 patches try and group
+together the cases of:
+- We know what file or directory should have been used, correct the
+  entry, it was never in-tree to start with
+- The above, but MAINTAINERS was missed in a rename, so fix it now.
+- The files have been removed.
 
-> From: Drew Kluemke <ankluemk@microsoft.com>
->=20
-> The TFTP OACK handler matches option names in the received packet with
-> strcasecmp(), which scans until a NUL byte. A malformed or truncated
-> OACK packet may not contain a NUL within the received length, causing
-> an out-of-bounds read past the packet buffer.
->=20
-> Replace each strcasecmp() with a strncasecmp() bounded to the option
-> name length plus an explicit check that the name is NUL-terminated at
-> the expected position. For the "windowsize" option, whose name and
-> value extend beyond the loop's "i + 8 < len" guard, add an explicit
-> "i + 11 < len" bound before the comparison.
->=20
-> Signed-off-by: Drew Kluemke <ankluemk@microsoft.com>
-> Signed-off-by: Sriram Sriram <sriramsriram@linux.microsoft.com>
-> ---
->  net/tftp.c | 13 +++++++++----
->  1 file changed, 9 insertions(+), 4 deletions(-)
+With all of these applied, we have a bit more coverage than we used to
+thanks to the corrections and now the tool reports everything is clean,
+so we can have CI ensure it stays that way moving forward.
 
-Does the spec/RFC ensure that we're being given a NULL terminated string
-here? It certainly makes sense to be using strncasecmp here, but since
-we're a size constrained bootloader, we do need to find the right
-balance between defense-in-depth and potential exposure.
+Changes in v3:
+- Applied tags, reworked Tegra per maintainers request, and rebased on
+  current next branch, which means dropping the TI portions, and adding
+  some newly removed files to that patch.
 
---=20
+Michal Simek (1):
+  scripts: Check F: entries in all MAINTAINERS files
+
+Tom Rini (6):
+  MAINTAINERS: tegra: Update and correct entries
+  MAINTAINERS: rockchip: Use N for rk3576-nanopi-r76s
+  MAINTAINERS: Fix "typo" and similar incorrect entries
+  MAINTAINERS: Correct entries missed during renames
+  MAINTAINERS: Removed files
+  CI: Run scripts/check_maintainers_files.sh in the existing MAINTAINERS
+    job
+
+ .azure-pipelines.yml                          |  3 +-
+ .gitlab-ci.yml                                |  4 +-
+ MAINTAINERS                                   |  7 +-
+ arch/arm/mach-rockchip/rk3576/MAINTAINERS     |  2 +-
+ board/CZ.NIC/turris_omnia/MAINTAINERS         |  2 +-
+ board/LaCie/net2big_v2/MAINTAINERS            |  4 -
+ board/LaCie/netspace_v2/MAINTAINERS           |  6 --
+ board/Marvell/octeontx/MAINTAINERS            |  3 +-
+ board/Marvell/octeontx2/MAINTAINERS           |  3 +-
+ board/Synology/ds116/MAINTAINERS              |  1 -
+ board/acer/picasso/MAINTAINERS                |  1 -
+ board/advantech/imx8mp_rsb3720a1/MAINTAINERS  |  2 +-
+ board/advantech/imx8qm_dmsse20_a1/MAINTAINERS |  2 +-
+ board/alliedtelesis/SBx81LIFKW/MAINTAINERS    |  2 +-
+ board/alliedtelesis/SBx81LIFXCAT/MAINTAINERS  |  2 +-
+ board/altera/stratix10-socdk/MAINTAINERS      |  1 -
+ board/amd/versal2/MAINTAINERS                 |  2 +-
+ board/amlogic/p212/MAINTAINERS                |  2 +-
+ board/amlogic/q200/MAINTAINERS                |  2 +-
+ board/amlogic/s400/MAINTAINERS                |  2 +-
+ board/andestech/voyager/MAINTAINERS           |  2 +-
+ board/asus/grouper/MAINTAINERS                |  1 -
+ board/asus/transformer-t114/MAINTAINERS       |  1 -
+ board/asus/transformer-t20/MAINTAINERS        |  1 -
+ board/asus/transformer-t30/MAINTAINERS        |  1 -
+ board/atmel/at91sam9260ek/MAINTAINERS         |  1 -
+ board/atmel/sama5d29_curiosity/MAINTAINERS    |  2 +-
+ board/atmel/sama7d65_curiosity/MAINTAINERS    |  2 +-
+ board/atmel/sama7g54_curiosity/MAINTAINERS    |  2 +-
+ board/atmel/sama7g5ek/MAINTAINERS             |  2 +-
+ board/avionic-design/medcom-wide/MAINTAINERS  |  1 -
+ board/avionic-design/plutux/MAINTAINERS       |  1 -
+ board/avionic-design/tec-ng/MAINTAINERS       |  1 -
+ board/avionic-design/tec/MAINTAINERS          |  1 -
+ board/beacon/beacon-rzg2m/MAINTAINERS         |  3 -
+ board/bosch/acc/MAINTAINERS                   |  2 +-
+ board/cei/cei-tk1-som/MAINTAINERS             |  1 -
+ board/compal/paz00/MAINTAINERS                |  1 -
+ board/compulab/trimslice/MAINTAINERS          |  1 -
+ board/comtrend/vr3032u/MAINTAINERS            |  2 +-
+ board/comtrend/wap5813n/MAINTAINERS           |  2 +-
+ board/coolpi/genbook_cm5_rk3588/MAINTAINERS   |  2 +-
+ board/davinci/da8xxevm/MAINTAINERS            |  2 +-
+ board/embest/mx6boards/MAINTAINERS            |  1 -
+ board/engicam/imx6ul/MAINTAINERS              |  5 +-
+ board/friendlyarm/nanopi2/MAINTAINERS         |  2 +-
+ .../gardena/smart-gateway-at91sam/MAINTAINERS |  2 +-
+ .../gardena/smart-gateway-mt7688/MAINTAINERS  |  1 -
+ board/gateworks/gw_ventana/MAINTAINERS        |  6 --
+ board/ge/bx50v3/MAINTAINERS                   |  3 -
+ board/htc/endeavoru/MAINTAINERS               |  1 -
+ board/imgtec/xilfpga/MAINTAINERS              |  2 +-
+ board/intel/agilex-socdk/MAINTAINERS          |  1 -
+ board/intel/agilex7m-socdk/MAINTAINERS        |  3 +-
+ board/intel/n5x-socdk/MAINTAINERS             |  1 -
+ board/keymile/km83xx/MAINTAINERS              |  6 +-
+ board/khadas/khadas-edge2-rk3588s/MAINTAINERS |  1 -
+ board/kontron/sl-mx6ul/MAINTAINERS            |  7 +-
+ board/lenovo/ideapad-yoga-11/MAINTAINERS      |  1 -
+ board/lg/x3-t30/MAINTAINERS                   |  1 -
+ board/libre-computer/aml-a311d-cc/MAINTAINERS |  2 +-
+ board/libre-computer/aml-s805x-ac/MAINTAINERS |  2 +-
+ .../libre-computer/aml-s905d3-cc/MAINTAINERS  |  2 +-
+ board/mediatek/MAINTAINERS                    |  3 -
+ board/mediatek/mt7981/MAINTAINERS             |  2 -
+ board/mediatek/mt7986/MAINTAINERS             |  4 -
+ board/microsoft/surface-rt/MAINTAINERS        |  1 -
+ board/myir/mys_6ulx/MAINTAINERS               |  3 +-
+ board/nvidia/beaver/MAINTAINERS               |  1 -
+ board/nvidia/cardhu/MAINTAINERS               |  1 -
+ board/nvidia/dalmore/MAINTAINERS              |  1 -
+ board/nvidia/harmony/MAINTAINERS              |  1 -
+ board/nvidia/jetson-tk1/MAINTAINERS           |  1 -
+ board/nvidia/nyan-big/MAINTAINERS             |  1 -
+ board/nvidia/p2371-0000/MAINTAINERS           |  1 -
+ board/nvidia/p2371-2180/MAINTAINERS           |  1 -
+ board/nvidia/p2571/MAINTAINERS                |  1 -
+ board/nvidia/p2771-0000/MAINTAINERS           |  1 -
+ board/nvidia/p3450-0000/MAINTAINERS           |  1 -
+ board/nvidia/seaboard/MAINTAINERS             |  1 -
+ board/nvidia/tegratab/MAINTAINERS             |  1 -
+ board/nvidia/venice2/MAINTAINERS              |  1 -
+ board/nvidia/ventana/MAINTAINERS              |  1 -
+ board/nxp/imx93_evk/MAINTAINERS               |  1 -
+ board/nxp/ls1012afrdm/MAINTAINERS             | 12 +--
+ board/nxp/ls1012aqds/MAINTAINERS              |  1 -
+ board/nxp/ls1012ardb/MAINTAINERS              |  3 -
+ board/nxp/ls1043aqds/MAINTAINERS              |  7 --
+ board/nxp/ls1043ardb/MAINTAINERS              |  6 --
+ board/nxp/ls1046aqds/MAINTAINERS              |  7 --
+ board/nxp/ls1046ardb/MAINTAINERS              |  7 --
+ board/nxp/ls1088a/MAINTAINERS                 |  9 ---
+ board/nxp/ls2080aqds/MAINTAINERS              |  4 -
+ board/nxp/ls2080ardb/MAINTAINERS              |  6 --
+ board/nxp/lx2160a/MAINTAINERS                 |  2 -
+ board/nxp/mpc837xerdb/MAINTAINERS             |  1 -
+ board/nxp/mx6slevk/MAINTAINERS                |  2 -
+ board/nxp/p2041rdb/MAINTAINERS                |  3 -
+ board/nxp/t104xrdb/MAINTAINERS                | 13 ---
+ board/nxp/t208xqds/MAINTAINERS                |  5 --
+ board/nxp/t208xrdb/MAINTAINERS                |  1 -
+ board/ouya/ouya/MAINTAINERS                   |  1 -
+ board/phytec/phycore_am62ax/MAINTAINERS       |  2 +-
+ board/phytec/phycore_am68x/MAINTAINERS        |  1 -
+ board/phytec/phycore_imx8mm/MAINTAINERS       |  2 +-
+ .../polyhex/imx8mp_debix_model_a/MAINTAINERS  |  1 -
+ board/qualcomm/dragonboard410c/MAINTAINERS    |  2 +-
+ board/qualcomm/dragonboard820c/MAINTAINERS    |  2 +-
+ board/qualcomm/dragonboard845c/MAINTAINERS    |  2 -
+ board/qualcomm/qcs404-evb/MAINTAINERS         |  2 -
+ board/renesas/blanche/MAINTAINERS             |  1 -
+ board/renesas/eagle/MAINTAINERS               |  2 +-
+ board/renesas/grpeach/MAINTAINERS             |  2 +-
+ board/renesas/v3msk/MAINTAINERS               |  2 +-
+ board/samsung/starqltechn/MAINTAINERS         |  4 +-
+ board/seeed/linkit-smart-7688/MAINTAINERS     |  1 -
+ board/siemens/iot2050/MAINTAINERS             |  2 +-
+ board/sifive/unmatched/MAINTAINERS            |  2 +-
+ board/sunxi/MAINTAINERS                       |  2 -
+ board/toradex/apalis-tk1/MAINTAINERS          |  2 +-
+ board/toradex/apalis_t30/MAINTAINERS          |  3 +-
+ board/toradex/colibri-imx6ull/MAINTAINERS     |  1 -
+ board/toradex/colibri-imx8x/MAINTAINERS       |  4 +-
+ board/toradex/colibri_imx7/MAINTAINERS        | 12 +--
+ board/toradex/colibri_t20/MAINTAINERS         |  3 +-
+ board/toradex/colibri_t30/MAINTAINERS         |  3 +-
+ board/toradex/colibri_vf/MAINTAINERS          |  2 +-
+ board/toradex/smarc-imx8mp/MAINTAINERS        |  2 +-
+ board/traverse/ten64/MAINTAINERS              |  1 -
+ board/wandboard/MAINTAINERS                   |  2 +-
+ board/wexler/qc750/MAINTAINERS                |  1 -
+ board/xiaomi/mocha/MAINTAINERS                |  1 -
+ board/xilinx/zynqmp/MAINTAINERS               |  1 -
+ board/xilinx/zynqmp_r5/MAINTAINERS            |  2 +-
+ .../orangepi-5-ultra-rk3588/MAINTAINERS       |  2 +-
+ board/zyxel/nsa325/MAINTAINERS                |  3 -
+ scripts/check_maintainers_files.sh            | 80 ++++++++++++-------
+ 137 files changed, 130 insertions(+), 284 deletions(-)
+
+[1]: https://lore.kernel.org/r/cover.1787555916.git.michal.simek@amd.com/
+[2]: https://lore.kernel.org/all/20260829015026.473134-1-trini@konsulko.com/
+
+-- 
 Tom
 
---M7NfBAbEnDBr+QZO
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaqMEKwAKCRAr4qD1Cr/k
-CuC7AP9dnV28Q4LFrC8tmfj87ty59S1XDsc3XUJzmAAqsGfxZAEAqkfCsbWfedVZ
-iOoK/FumWYSz/rGuLGYs3DjjQj5mUAU=
-=dcpv
------END PGP SIGNATURE-----
-
---M7NfBAbEnDBr+QZO--
