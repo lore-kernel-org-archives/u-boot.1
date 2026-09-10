@@ -1,158 +1,165 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A138C79FBF
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 20:03:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42D6DC79FBB
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 20:03:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B7D2E81183;
-	Thu, 10 Sep 2026 20:03:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EF41D40B54;
+	Thu, 10 Sep 2026 20:03:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id H6lNksSjeY_i; Thu, 10 Sep 2026 20:03:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 853F780F78
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789070596;
-	b=PmNuKTT4vuSCp3H8dTRSZQrl+4UcXg/NYzEoikaNib5BTHL4Retg1fJppO72M96IPlNn
-	 l5kzlWbU8ijV6CbpLGZFkm8JjyfEfUPYSHpfYEwjcyeIPBpxfcqxhU8lvgcysy/z0Kup0
-	 HBQkcN6JJpY1VdlVlMQlId8WSxGuBxoHOKR34jvHDK5olYh5wN1kJLjabcADyZQbGf88s
-	 nwsDe0gv/u8fdGEQf3rZ7XzfuSHmOImt+/9qZCWwJAp4kyu4Yn4fAFc+sXLMZjy7kHMIe
-	 0oHkiI8B6I4Ng46sEqd/HA6ouh7TNH3LthMI3KFna0Swv/tA6Rg/FZvqi0EypwOAgYw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id A4Kc-19nLKi5; Thu, 10 Sep 2026 20:03:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 1951040B10
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789070598;
+	b=Yyq9xt+aUvVV2u8QHgA7bbqcpAdW2CNhU5Gua4tK0lqGhQ6sJs9/5ZqhgzmpUGUlA2Bn
+	 MuJUofLulZpizZBkkYjeYYBJQBc6d/CiBM05Q825+gwxNHleYIVD7pUvYevhjsgCKMN3K
+	 iyQ85kUHDtSgXsiXbZpA4gXeP8HVTOxAXO3fJRq7PuUpG5BHI5SJQtkuGZbUmMHiVIBlA
+	 vy/4lBPLHupe5jy2lFHrS40Hdm5fH5MGi/zSbFqjJsBi0E9hGPHHrz7kCQJt7erd1dRMu
+	 VcJdWdDdnf9HqQ5McKPfE2KXn4eyiwRf/f4OAySXbN0AG+PlIG2hex3giFJqjnTCw6A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789070596;
+	c=relaxed/relaxed; t=1789070598;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=U59IswCkFoPGlNWhovB3hT8IG9f66vJ0zphlGyTD5sg=;
-	b=Tk1tgxhCXS9XQRRTLvhT+U76JCTULvARfR8+5y/EzKFp2B5iG1hDTGAkcFsFVO1FkKSp
-	 PfWc7Zupd4pFeKu7e1wrEoFj1LnMqMD/42/ztFAhj3V1XZ6k/4eqwul03QwGEC6Nv9kDz
-	 ER2/s35PK0Ez2qsN0PeOpzg6KEn4csUeCp1B/+rtyTB3YMSuzYgKh63dW+mpZv0DMzKhT
-	 O/cx35ktEK4hgtFTWwu2v2tKljGwuscmnR9rcLhNxTXJ+/6BiCapbjZES/Qyl6gfUfDxm
-	 QhEuNXu8H7i7ZbHJ5qWL6marxQNuOeqcCW5SYfEXzTd0CmN+bK92y0iMITky+U88Y+w==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=FfgsVZbw2SI/TOE9AITxaHP5M9L9HjEku2oT8peWZnw=;
+	b=A48zpvsZrLCbQRzk4iKSozyJp2ZIKy8TsZ9YiMxVHvnmexV+bPp9D2EVtKU+DIPD7dD7
+	 qPsiWjpcgQARwHOSPn0SPbOsSCsGyw1Fdb5XY8YPi2iEvkoHyt5SrdI+LgkbeECZg68qA
+	 e/myUzS8ILkYKFg5VQM3pmhE07wlx/DRQFgpf9fdHcV0b5W1WaWVqReonLK53VIPeub8U
+	 P10k6FwMm0hiUayk5srHzLLkHdI+y25NkdlNnLqg7ytQaTGkKBd3hQF49CYYycl4dIKAz
+	 kpkmMnPsRcuDkVlGk9z2FEFVL3iJ3+ce2kygEWD0hybSv9rEc5gWEpiqhKBY2eR2Svg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=konsulko.com;
+	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=WLE3OHV3;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789070596;
-	bh=U59IswCkFoPGlNWhovB3hT8IG9f66vJ0zphlGyTD5sg=;
-	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=c3LP/EuIClL+7wNo/iMuQvN2hnnUwVse2Abxrw7ExldHrelzbDUVc6sA0hn/bYHfF
-	 ZA9B7ZnH74Q3tmRsgcaYgJ+WXxRornIfdy/LKO9Zg56rPs6H9fkUDtzEJG6mJM00tX
-	 qcqrhY5Dd2niGcZrGs8MrTfQW9mei4S8U2jqlGxMXcRGH1HyJWtVznEOWYUaZSaMoA
-	 zAJJYwaByhPSii4qKPYxPJ7jUwKWx2LY4y2v4GS37Z/KMnOTRyjWpUCVp5bQP0cUMn
-	 spmPvhA912pYCPRQVsBH2wotqiIFiLem7cbRzMCxVVwl6TxMbXcRXc4MHCHoRZaem0
-	 jKOowlUBlNnSw==
+	d=lists.u-boot-project.org; s=default; t=1789070598;
+	bh=FfgsVZbw2SI/TOE9AITxaHP5M9L9HjEku2oT8peWZnw=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=MfP56tF90ZzsGyC40amdmNqgA0Irj7HQPW+RiAfbKTsqVqTou9bJaJ0nKpR4qYwqn
+	 tG+yVO46x6+zXyWq2Xx3PU8xlRTIWgD7bjZx7gNjl3OQK1mnYx4djYzvF2Y25RRqZD
+	 awB3ZZFDL+x6bxnNUp6m3AeWl+7aL1GH/gxvFfihcW4ENBCW8nAeoH/lHhZraHNtwF
+	 kCdmKeTsY2ZQ3QD3PwfztABjmlua7tBEHyijVgAJXhmNBCQ3Xx46XnOdP78Y8ONZuK
+	 MlAnzR2Pp4U6fqThjcazd9SfYmfMJkpo45io4InMym9OeD7WD7ptDTKPxaa/N1fUo+
+	 zrj7sMd/11k8A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 853F780F78;
-	Thu, 10 Sep 2026 20:03:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1951040B10;
+	Thu, 10 Sep 2026 20:03:18 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id D562914D
+ by lists1.osuosl.org (Postfix) with ESMTP id E79C1786
  for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 20:03:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BB29640B10
+ by smtp4.osuosl.org (Postfix) with ESMTP id E5B1840B10
  for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 20:03:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uxHjtKaUT1JB for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 20:03:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 8D49340B36
+ id KdmYQCN-S9hK for <u-boot@lists.u-boot-project.org>;
+ Thu, 10 Sep 2026 20:03:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 2B24840AEE
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:32::4"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789070594;
- b=b2Q9Lfjf6LAwrVB1POv+s9HgSL7XS99qyEAZo3vHuhJy/RwDVQaivgYOxuWCKDg8IzUU
- z5q0VgkT3DsVoBs6FgkTx4wlGXTmpKymDp4Df1+WR9Os/wDo88pRWRDeJNnmd9cgdKmVn
- vnNAy4iLxguNwIrILR87hq+sPmpzyZ1Sp00EWUp+yd3SsHjkQfXoRHTyo8idA5BboATI+
- H5lGa1nA9sRveWTbaepN+s/lbE8jHVel+YZRAfNgfwJPdr06ZIsv0a5s1pYY1UDJJX1hb
- A1FqP2xM+luR+WQ/oPBU7ICMrf/NKaflXbSRlMtBCHDM7E+pCJYbMTjo0voRR4wrG6g==
+ arc=none smtp.remote-ip="2607:f8b0:4864:32::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789070595;
+ b=mj8eufQDNqiG/TnHQcHgUXbek1oUJerysU59DJm94CIfF+Gp9eNE3YDNdGa9NO+tXWDI
+ YxRFGWAY9znLlEI78C2nVDheanK2P1ruJqNrDIR4K9HGExVq3Qv4SirPTqqp1xiha1oRH
+ 0Dd55cUdmlyxVJoZ4pFxH7NuDSG8DYW0SPVhVBa4heTXtmaGTePpUhvnKlwMK7jPOQX4I
+ dOCIVEIX5fZXi9tKdCOpwRZXsgqrsBMM4Crx2NYe/Og0j/w9FSixSEVhSyj4rZ6+Dpo/O
+ 3JwqNU2NecX+TCWH+1F3igFQyWP6MWI9CL1v67KJs9VwwuDirS4R6nONgxt87oOBi/g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789070594;
+ c=relaxed/relaxed; t=1789070595;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Subject:Date:
- Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=U59IswCkFoPGlNWhovB3hT8IG9f66vJ0zphlGyTD5sg=;
- b=L5qN957dC0URTwzMGKOBBHFizudtjZyq6pMStVLknHF6PeisvCK5fQ3e9MZhLfIURP1m
- 2EMVEgglAi/XKfWDD1PngkHN8qDgdmdgLLMvyTPLziJ6dlt0Mn+M6muXsAhW6aqYj7tst
- 86Dr9LhnODOULTjcipYEBb3J5epBEPgvdwu/gNldIO3iYhHOMFrjq6rjdFlklz5io88qk
- Ie3O5s9W9wfIG+4nQnMDpNU/8AURS5Gfguw97ztIBpVCvSovqrPar5wGE9gH91JXpTuwW
- MOb1k0zK9CezeibK0PMmX1byBNhpfO1GDzWTYBB60v1C7Kc+G1WAovQzHrWWxUe206Q==
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+ Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding;
+ bh=FfgsVZbw2SI/TOE9AITxaHP5M9L9HjEku2oT8peWZnw=;
+ b=ibhZgnzoR+h09Quqv1RvfO82zerQ2fL3pjdQa9gAU1NmAiBdJ5vhWzVld+bmaVTm3SIk
+ tXEJS2QmVbAuB0+I0O3Q60ODurt61XQSz1kijIk8dJnJuyC+plWbng0uvbPU7mj0Y9qHn
+ Y1N/97CJQtPHfW6lbSyDDkQIBgFLx4ay5h+snLTZtPGfqTuR0kUMa/gObEKl1eqLSWFJ7
+ FpA9pWfI/T+TPQysBic3slyJW2s5rWXLACj7kgUDYXREJ4QNGSP4xR6Rv9xhVm0Y7Ga+j
+ GXvvR96RXMWD/+1R8DhjvvIAb10v3daw1sCuXqOwMTpMW0IcOh7hikp+jOA1Ao+JDtQ==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=konsulko.com; 
  dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=DAKQeHZO; 
- arc=none smtp.remote-ip="2607:f8b0:4864:32::4"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:32::4;
- helo=mail-oi2-x04.google.com; envelope-from=trini@konsulko.com;
- receiver=<UNKNOWN> 
+ header.s=google header.b=WLE3OHV3; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:32::10"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:32::10; helo=mail-oi2-x10.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=DAKQeHZO
-Received: from mail-oi2-x04.google.com (mail-oi2-x04.google.com
- [IPv6:2607:f8b0:4864:32::4])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8D49340B36
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
+ header.a=rsa-sha256 header.s=google header.b=WLE3OHV3
+Received: from mail-oi2-x10.google.com (mail-oi2-x10.google.com
+ [IPv6:2607:f8b0:4864:32::10])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2B24840AEE
  for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 20:03:14 +0000 (UTC)
-Received: by mail-oi2-x04.google.com with SMTP id
- 5614622812f47-4b38a6e8c79so79819b6e.1
+Received: by mail-oi2-x10.google.com with SMTP id
+ 5614622812f47-4b37a39a42dso102214b6e.0
  for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 13:03:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1789070593; x=1789675393;
+ d=konsulko.com; s=google; t=1789070594; x=1789675394;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=U59IswCkFoPGlNWhovB3hT8IG9f66vJ0zphlGyTD5sg=;
- b=DAKQeHZOXHlyo7bol3Qv4mmpd8W13bzCGln4+IYjizav23RVd/Rg6ywzpu01e+Hkzq
- /KNl4ZeUtso07XafYoQ+zcNhyk8xrigaxjLzpz+DvrLUN20imLlRue3ceq+Ubm47yqLS
- agOZSpR2EPlqgp5EUAUDoYRoqLVIghbbJoKPs=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=FfgsVZbw2SI/TOE9AITxaHP5M9L9HjEku2oT8peWZnw=;
+ b=WLE3OHV3zrHi0W8NgOlipffUWioDgdMWn58U3s33j4ZSmmCEvYCJNVkD5l321vE+0B
+ WCEDZiXjTbQl2GyhanKrAfSKN4oqGGoyja04GWqXRFzjQC25I+CcxTwppxaDMvMzJx0U
+ 01vY46mb5Ylew5b3q2DAi6mhGQtxVj+76xHAM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789070593; x=1789675393;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=U59IswCkFoPGlNWhovB3hT8IG9f66vJ0zphlGyTD5sg=;
- b=dQMfphJY0WiMweILUl2U+OdZIk1JhLVqiKGEbMkLLLuVYHAUkShT3T3XcLXP3kO8o1
- KPZb2STK4T09tk2o8OsmAwU3oPFQSG7UnpQFztFmchJEVNuj8t2erKG1KLYvU5avhAfg
- ErBhJVF/Q1EPThFLwLcsM9cu3Qelod+GTg6ps7klEn7bbL/WBeRhoy6rtd+ESycgXkY0
- M/WncQwnZTfQPiq4q+glQwqphA/CeZeiAkR/f1JVj+q56tOAfORpyeniEsVvaxnRFXyl
- a9Cua2WU4Hyuq7aI8KE8HS6D3g88PrOQYQkn9pO6Sg9mBgOTg1HGphVwvxrgyHRpVaJi
- EIBg==
-X-Gm-Message-State: AFuF++nZUtkWe3ZDQil0ckfOQWkHpavLRnrDNXTJx90KWAsWmsz0NDUv
- EAd5mc96w7GInc+i6SYmJ+5VQC4LfXpeFWbP/UCvry8qdS2QKx47DZLP1d7CVudsVeHL/HbQ2Dc
- YH4zBFlfg6xff0r4=
-X-Gm-Gg: AYBFou1K87Vjrg0/xlr3UK1quoDNEkGqHY92C4TzbDZpF+32YxrsXMpuOlpPVPZcUhx
- D3GkPphPKHYL4zaGRY++zS/K91jiMGgDXRY9GlySqfomjowZJVYmvFQGnA+MaksT4s//nXl8YQ1
- YpVZN3m0gs2vwDAlOdE9q2JB80RGaDwN7T3ZR+QqbWZggPXYEVqFF6Wgd0x65Uhx3jMaiJ0ZlAg
- zUokgZi047mfZrjaSOdrWZgELlgRubCv8GGefYwCkLyxLMfRC6Zljc5Bp17tp062rYP0mGejkCI
- oaJaZMCY0khCvrg25SYq3y5oF7D4hzekA6yfgwL2+UktYWjJwtqUFp+f1d86gdsgbD6t1rPW8FR
- YyLd52HIBUwiXEuaH9ufXuMn1jKHR34t+KOLq+/bVJXre6U8g+hqZwSIqJLnU/EujsHx+9F8MJW
- TqeBscOcfWJVROn5EHSyM94tmhJxAp4znrKiOD150Wm3Kz4TijHm6pWeHgwSIf2iF9sBWK8Eb7t
- LmwN9Eajw/uHLoyLCWJvT1R2GHkGddndtgHfjE6DYNDvDofY1/H54aLXtjOGs1GXx6fYgGr5KMm
- 59m5KiLPnWMZa7V27flUxHBbGmsatY+eRaYChUh8308MJ0/urT2OmAw=
-X-Received: by 2002:a05:6808:50a5:b0:4b9:e65b:8c36 with SMTP id
- 5614622812f47-4c31c72c208mr505498b6e.36.1789070592978; 
- Thu, 10 Sep 2026 13:03:12 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1789070594; x=1789675394;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=FfgsVZbw2SI/TOE9AITxaHP5M9L9HjEku2oT8peWZnw=;
+ b=rJUnNdGgD1AHbL4Q5zQta55bkF3XRTpFUEcJjKZtIIXzoTYjEGTXpaKGCpNexfGGzl
+ yoXiNxmDPthYfgbMOTDNWeAAK74wlPGazkbXZJz4Igz7r6K+G3fFdaGHLp4IVpNSdo9U
+ 6hTqL2DUk5e9hLp3yvSzCsnQcc5CmXxkcRLEFjUdDVQ77g3letG1R7vmnK7iJ1XP05V6
+ oLbK6/Y75kCOw6qnAIxH3/pM8UuDsgVpLfq513ohaBVPGIrtntzBbs7txsi8lj+TirIg
+ 1dgXRtmI+BDEU0eF167vHAEwI2zlQymsixL8JFbjs0GQSS1VJdo53/O0WVV1jeAXWYx+
+ PMrw==
+X-Gm-Message-State: AFuF++lYCBkY3Rrl+ErQTOUxRtaQqHblVIUVKoAvoTS052mwXrq2oOpx
+ 41zEoBgmwdlGwroCdQQDtfYGQkPpMRr4vxK1RYp+HnUgc+E/TY6WelqmpPcDkSx3Me37EhnGRkB
+ ZHmbW3Hm3QqoK
+X-Gm-Gg: AYBFou3Qf3WS3XKjLXkU56V+l+ZHwQh5lse3aAuEZXk/e+cterQcg+Co/oboDdcT3HJ
+ JnpypbSnqLons1L1q4emn+0in9JhTwfhveDVo/m8/qUAzWqKn61W4UA44EBqHZX3uFUudrinW1Q
+ NNnseMYP5gFp0KZK4yzoJw/mXzidDzkg8ZSZ0vtKFgaTP12fB9+NskOjGPDuTTaifFLarxPo9IJ
+ 1D8B3Tq2OX4sdtjo0vvEbzZFM/eXna5bk4rOjnoJoS5CZV3jSHCt3MBxmWp7wpwOMK19E/Cwv/v
+ AfoVNVvNwRGWDv5oA4cL1JqABOqQlrc5LKSfnqfq8bSSLMQpLZ4EaQ0RfoUe+Acu1wLuTS7BIi3
+ F8KXRR4VTToK5zJAuAGDq+24kpMulk3AnbxLDS/EHhgR7n3yBreIS5d9mU2pR4aKEYenXHK7y6d
+ Ew8OjM8lR8zs6bWcC88BA+Fizw0suBMP369GWCi7KhpsV3Sy/UdYhgTbzceCjrxoff6/PLvJmdO
+ +ey7sODTPKlRKdSC6hOl0CONsI0rWvNkwMnd14wLLkg3XEpJbT1EUIfAVSTGOqbSIfhV+LTPvSF
+ 94SeYKu3+HFD/296B73YMwhdz8mQOqJ13G2BD8rBX5dm
+X-Received: by 2002:a05:6808:e82:b0:4b8:46e3:e222 with SMTP id
+ 5614622812f47-4c308598b1fmr563819b6e.14.1789070593891; 
+ Thu, 10 Sep 2026 13:03:13 -0700 (PDT)
 Received: from bill-the-cat.tailc58245.ts.net
  (fixed-189-203-100-56.totalplay.net. [189.203.100.56])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4c331bc937bsm208357b6e.11.2026.09.10.13.03.11
- for <u-boot@lists.u-boot-project.org>
+ 5614622812f47-4c331bc937bsm208357b6e.11.2026.09.10.13.03.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 13:03:12 -0700 (PDT)
+ Thu, 10 Sep 2026 13:03:13 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.u-boot-project.org
-Subject: [PATCH v3 0/7] Cleanup MAINTAINERS entries
-Date: Thu, 10 Sep 2026 14:03:02 -0600
-Message-ID: <20260910200310.3503830-1-trini@konsulko.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Subject: [PATCH v3 1/7] scripts: Check F: entries in all MAINTAINERS files
+Date: Thu, 10 Sep 2026 14:03:03 -0600
+Message-ID: <20260910200310.3503830-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260910200310.3503830-1-trini@konsulko.com>
+References: <20260910200310.3503830-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -168,186 +175,128 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hey all,
+From: Michal Simek <michal.simek@amd.com>
 
-This is a v3 of the series Michal posted here[1] and v2 is here[2].
+Extend the checker to walk every MAINTAINERS file in the tree instead of
+only the top-level one, so stale F: references in the per-board and
+per-driver MAINTAINERS files are caught too.
 
-As the diffstat and previous versions show, we end up touching a lot of
-files. To avoid having a huge series, and also to avoid unmanagable CC
-lists, I've broken this up in to 5 patches. In the case of updating all
-of the Tegra entries, a little more work was required to ensure
-consitent coverage, so it's a separate patch. Also, as there was a
-question of ensuring that new -u-boot.dtsi files would be caught in one
-case, that is also a separate patch. The final 3 patches try and group
-together the cases of:
-- We know what file or directory should have been used, correct the
-  entry, it was never in-tree to start with
-- The above, but MAINTAINERS was missed in a rename, so fix it now.
-- The files have been removed.
+Use git ls-files to enumerate the MAINTAINERS files so that only tracked
+files are checked, ignored build artifacts are skipped and paths are
+reported relative to the repository root. Fall back to find when running
+outside a git checkout.
 
-With all of these applied, we have a bit more coverage than we used to
-thanks to the corrections and now the tool reports everything is clean,
-so we can have CI ensure it stays that way moving forward.
+MAINTAINERS files under tools/buildman/ are skipped as they are test
+fixtures whose F: paths are relative to the test setup rather than the
+repository root.
 
-Changes in v3:
-- Applied tags, reworked Tegra per maintainers request, and rebased on
-  current next branch, which means dropping the TI portions, and adding
-  some newly removed files to that patch.
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
+ scripts/check_maintainers_files.sh | 80 ++++++++++++++++++++----------
+ 1 file changed, 53 insertions(+), 27 deletions(-)
 
-Michal Simek (1):
-  scripts: Check F: entries in all MAINTAINERS files
-
-Tom Rini (6):
-  MAINTAINERS: tegra: Update and correct entries
-  MAINTAINERS: rockchip: Use N for rk3576-nanopi-r76s
-  MAINTAINERS: Fix "typo" and similar incorrect entries
-  MAINTAINERS: Correct entries missed during renames
-  MAINTAINERS: Removed files
-  CI: Run scripts/check_maintainers_files.sh in the existing MAINTAINERS
-    job
-
- .azure-pipelines.yml                          |  3 +-
- .gitlab-ci.yml                                |  4 +-
- MAINTAINERS                                   |  7 +-
- arch/arm/mach-rockchip/rk3576/MAINTAINERS     |  2 +-
- board/CZ.NIC/turris_omnia/MAINTAINERS         |  2 +-
- board/LaCie/net2big_v2/MAINTAINERS            |  4 -
- board/LaCie/netspace_v2/MAINTAINERS           |  6 --
- board/Marvell/octeontx/MAINTAINERS            |  3 +-
- board/Marvell/octeontx2/MAINTAINERS           |  3 +-
- board/Synology/ds116/MAINTAINERS              |  1 -
- board/acer/picasso/MAINTAINERS                |  1 -
- board/advantech/imx8mp_rsb3720a1/MAINTAINERS  |  2 +-
- board/advantech/imx8qm_dmsse20_a1/MAINTAINERS |  2 +-
- board/alliedtelesis/SBx81LIFKW/MAINTAINERS    |  2 +-
- board/alliedtelesis/SBx81LIFXCAT/MAINTAINERS  |  2 +-
- board/altera/stratix10-socdk/MAINTAINERS      |  1 -
- board/amd/versal2/MAINTAINERS                 |  2 +-
- board/amlogic/p212/MAINTAINERS                |  2 +-
- board/amlogic/q200/MAINTAINERS                |  2 +-
- board/amlogic/s400/MAINTAINERS                |  2 +-
- board/andestech/voyager/MAINTAINERS           |  2 +-
- board/asus/grouper/MAINTAINERS                |  1 -
- board/asus/transformer-t114/MAINTAINERS       |  1 -
- board/asus/transformer-t20/MAINTAINERS        |  1 -
- board/asus/transformer-t30/MAINTAINERS        |  1 -
- board/atmel/at91sam9260ek/MAINTAINERS         |  1 -
- board/atmel/sama5d29_curiosity/MAINTAINERS    |  2 +-
- board/atmel/sama7d65_curiosity/MAINTAINERS    |  2 +-
- board/atmel/sama7g54_curiosity/MAINTAINERS    |  2 +-
- board/atmel/sama7g5ek/MAINTAINERS             |  2 +-
- board/avionic-design/medcom-wide/MAINTAINERS  |  1 -
- board/avionic-design/plutux/MAINTAINERS       |  1 -
- board/avionic-design/tec-ng/MAINTAINERS       |  1 -
- board/avionic-design/tec/MAINTAINERS          |  1 -
- board/beacon/beacon-rzg2m/MAINTAINERS         |  3 -
- board/bosch/acc/MAINTAINERS                   |  2 +-
- board/cei/cei-tk1-som/MAINTAINERS             |  1 -
- board/compal/paz00/MAINTAINERS                |  1 -
- board/compulab/trimslice/MAINTAINERS          |  1 -
- board/comtrend/vr3032u/MAINTAINERS            |  2 +-
- board/comtrend/wap5813n/MAINTAINERS           |  2 +-
- board/coolpi/genbook_cm5_rk3588/MAINTAINERS   |  2 +-
- board/davinci/da8xxevm/MAINTAINERS            |  2 +-
- board/embest/mx6boards/MAINTAINERS            |  1 -
- board/engicam/imx6ul/MAINTAINERS              |  5 +-
- board/friendlyarm/nanopi2/MAINTAINERS         |  2 +-
- .../gardena/smart-gateway-at91sam/MAINTAINERS |  2 +-
- .../gardena/smart-gateway-mt7688/MAINTAINERS  |  1 -
- board/gateworks/gw_ventana/MAINTAINERS        |  6 --
- board/ge/bx50v3/MAINTAINERS                   |  3 -
- board/htc/endeavoru/MAINTAINERS               |  1 -
- board/imgtec/xilfpga/MAINTAINERS              |  2 +-
- board/intel/agilex-socdk/MAINTAINERS          |  1 -
- board/intel/agilex7m-socdk/MAINTAINERS        |  3 +-
- board/intel/n5x-socdk/MAINTAINERS             |  1 -
- board/keymile/km83xx/MAINTAINERS              |  6 +-
- board/khadas/khadas-edge2-rk3588s/MAINTAINERS |  1 -
- board/kontron/sl-mx6ul/MAINTAINERS            |  7 +-
- board/lenovo/ideapad-yoga-11/MAINTAINERS      |  1 -
- board/lg/x3-t30/MAINTAINERS                   |  1 -
- board/libre-computer/aml-a311d-cc/MAINTAINERS |  2 +-
- board/libre-computer/aml-s805x-ac/MAINTAINERS |  2 +-
- .../libre-computer/aml-s905d3-cc/MAINTAINERS  |  2 +-
- board/mediatek/MAINTAINERS                    |  3 -
- board/mediatek/mt7981/MAINTAINERS             |  2 -
- board/mediatek/mt7986/MAINTAINERS             |  4 -
- board/microsoft/surface-rt/MAINTAINERS        |  1 -
- board/myir/mys_6ulx/MAINTAINERS               |  3 +-
- board/nvidia/beaver/MAINTAINERS               |  1 -
- board/nvidia/cardhu/MAINTAINERS               |  1 -
- board/nvidia/dalmore/MAINTAINERS              |  1 -
- board/nvidia/harmony/MAINTAINERS              |  1 -
- board/nvidia/jetson-tk1/MAINTAINERS           |  1 -
- board/nvidia/nyan-big/MAINTAINERS             |  1 -
- board/nvidia/p2371-0000/MAINTAINERS           |  1 -
- board/nvidia/p2371-2180/MAINTAINERS           |  1 -
- board/nvidia/p2571/MAINTAINERS                |  1 -
- board/nvidia/p2771-0000/MAINTAINERS           |  1 -
- board/nvidia/p3450-0000/MAINTAINERS           |  1 -
- board/nvidia/seaboard/MAINTAINERS             |  1 -
- board/nvidia/tegratab/MAINTAINERS             |  1 -
- board/nvidia/venice2/MAINTAINERS              |  1 -
- board/nvidia/ventana/MAINTAINERS              |  1 -
- board/nxp/imx93_evk/MAINTAINERS               |  1 -
- board/nxp/ls1012afrdm/MAINTAINERS             | 12 +--
- board/nxp/ls1012aqds/MAINTAINERS              |  1 -
- board/nxp/ls1012ardb/MAINTAINERS              |  3 -
- board/nxp/ls1043aqds/MAINTAINERS              |  7 --
- board/nxp/ls1043ardb/MAINTAINERS              |  6 --
- board/nxp/ls1046aqds/MAINTAINERS              |  7 --
- board/nxp/ls1046ardb/MAINTAINERS              |  7 --
- board/nxp/ls1088a/MAINTAINERS                 |  9 ---
- board/nxp/ls2080aqds/MAINTAINERS              |  4 -
- board/nxp/ls2080ardb/MAINTAINERS              |  6 --
- board/nxp/lx2160a/MAINTAINERS                 |  2 -
- board/nxp/mpc837xerdb/MAINTAINERS             |  1 -
- board/nxp/mx6slevk/MAINTAINERS                |  2 -
- board/nxp/p2041rdb/MAINTAINERS                |  3 -
- board/nxp/t104xrdb/MAINTAINERS                | 13 ---
- board/nxp/t208xqds/MAINTAINERS                |  5 --
- board/nxp/t208xrdb/MAINTAINERS                |  1 -
- board/ouya/ouya/MAINTAINERS                   |  1 -
- board/phytec/phycore_am62ax/MAINTAINERS       |  2 +-
- board/phytec/phycore_am68x/MAINTAINERS        |  1 -
- board/phytec/phycore_imx8mm/MAINTAINERS       |  2 +-
- .../polyhex/imx8mp_debix_model_a/MAINTAINERS  |  1 -
- board/qualcomm/dragonboard410c/MAINTAINERS    |  2 +-
- board/qualcomm/dragonboard820c/MAINTAINERS    |  2 +-
- board/qualcomm/dragonboard845c/MAINTAINERS    |  2 -
- board/qualcomm/qcs404-evb/MAINTAINERS         |  2 -
- board/renesas/blanche/MAINTAINERS             |  1 -
- board/renesas/eagle/MAINTAINERS               |  2 +-
- board/renesas/grpeach/MAINTAINERS             |  2 +-
- board/renesas/v3msk/MAINTAINERS               |  2 +-
- board/samsung/starqltechn/MAINTAINERS         |  4 +-
- board/seeed/linkit-smart-7688/MAINTAINERS     |  1 -
- board/siemens/iot2050/MAINTAINERS             |  2 +-
- board/sifive/unmatched/MAINTAINERS            |  2 +-
- board/sunxi/MAINTAINERS                       |  2 -
- board/toradex/apalis-tk1/MAINTAINERS          |  2 +-
- board/toradex/apalis_t30/MAINTAINERS          |  3 +-
- board/toradex/colibri-imx6ull/MAINTAINERS     |  1 -
- board/toradex/colibri-imx8x/MAINTAINERS       |  4 +-
- board/toradex/colibri_imx7/MAINTAINERS        | 12 +--
- board/toradex/colibri_t20/MAINTAINERS         |  3 +-
- board/toradex/colibri_t30/MAINTAINERS         |  3 +-
- board/toradex/colibri_vf/MAINTAINERS          |  2 +-
- board/toradex/smarc-imx8mp/MAINTAINERS        |  2 +-
- board/traverse/ten64/MAINTAINERS              |  1 -
- board/wandboard/MAINTAINERS                   |  2 +-
- board/wexler/qc750/MAINTAINERS                |  1 -
- board/xiaomi/mocha/MAINTAINERS                |  1 -
- board/xilinx/zynqmp/MAINTAINERS               |  1 -
- board/xilinx/zynqmp_r5/MAINTAINERS            |  2 +-
- .../orangepi-5-ultra-rk3588/MAINTAINERS       |  2 +-
- board/zyxel/nsa325/MAINTAINERS                |  3 -
- scripts/check_maintainers_files.sh            | 80 ++++++++++++-------
- 137 files changed, 130 insertions(+), 284 deletions(-)
-
-[1]: https://lore.kernel.org/r/cover.1787555916.git.michal.simek@amd.com/
-[2]: https://lore.kernel.org/all/20260829015026.473134-1-trini@konsulko.com/
-
+diff --git a/scripts/check_maintainers_files.sh b/scripts/check_maintainers_files.sh
+index 4c1279958e98..ccac97a2d93e 100755
+--- a/scripts/check_maintainers_files.sh
++++ b/scripts/check_maintainers_files.sh
+@@ -1,44 +1,70 @@
+ #!/bin/sh
+ # SPDX-License-Identifier: GPL-2.0
+ #
+-# Check that every "F:" file reference in MAINTAINERS exists.
++# Check that every "F:" file reference in the MAINTAINERS files exists.
+ #
+-# Each F: entry is treated as a shell glob (relative to the repo root),
+-# matching the way MAINTAINERS wildcards work. If a pattern matches no
+-# existing file or directory, it is reported and the script exits non-zero.
++# Every MAINTAINERS file in the tree is checked (the top-level one plus the
++# per-board/per-driver MAINTAINERS files). All F: paths are interpreted
++# relative to the repository root and are treated as shell globs, matching the
++# way MAINTAINERS wildcards work. If a pattern matches no existing file or
++# directory it is reported and the script exits non-zero.
+ 
+ set -u
+ 
+-MAINTAINERS="${1:-MAINTAINERS}"
++# Move to the repository root so that F: globs (which are root relative)
++# resolve correctly regardless of where the script is invoked from.
++if root=$(git rev-parse --show-toplevel 2>/dev/null); then
++	cd "$root" || exit 2
++fi
+ 
+-if [ ! -f "$MAINTAINERS" ]; then
+-	echo "error: cannot find $MAINTAINERS" >&2
+-	exit 2
++# Collect the list of MAINTAINERS files to check. Newlines separate entries;
++# MAINTAINERS paths never contain spaces.
++set -f
++IFS='
++'
++if list=$(git ls-files '*MAINTAINERS' 'MAINTAINERS' 2>/dev/null) && [ -n "$list" ]; then
++	set -- $list
++else
++	# Fall back to a filesystem search if git is unavailable.
++	set -- $(find . -name MAINTAINERS -type f | sed 's,^\./,,')
+ fi
++unset IFS
++set +f
+ 
+ rc=0
+ 
+-while IFS= read -r pattern; do
+-	# Strip the "F:" prefix and surrounding whitespace.
+-	pattern=$(printf '%s\n' "$pattern" | sed -e 's/^F:[[:space:]]*//' -e 's/[[:space:]]*$//')
+-	[ -n "$pattern" ] || continue
+-
+-	# Expand the pattern as a glob; if nothing matches the glob stays literal.
+-	matched=0
+-	for path in $pattern; do
+-		if [ -e "$path" ]; then
+-			matched=1
+-			break
++for maint in "$@"; do
++	[ -f "$maint" ] || continue
++
++	# Skip Buildman's test fixtures, whose F: paths are relative to the
++	# test setup rather than the repository root.
++	case "$maint" in
++	tools/buildman/*) continue ;;
++	esac
++
++	while IFS= read -r pattern; do
++		# Strip the "F:" prefix and surrounding whitespace, then drop the
++		# backslashes MAINTAINERS uses to escape regex-special characters
++		# (e.g. "board/k\+p/") so the pattern can be used as a plain glob.
++		pattern=$(printf '%s\n' "$pattern" | sed -e 's/^F:[[:space:]]*//' -e 's/[[:space:]]*$//' -e 's/\\\(.\)/\1/g')
++		[ -n "$pattern" ] || continue
++
++		matched=0
++		for path in $pattern; do
++			if [ -e "$path" ]; then
++				matched=1
++				break
++			fi
++		done
++
++		if [ "$matched" -eq 0 ]; then
++			echo "error: $maint references non-existing file: $pattern" >&2
++			rc=1
+ 		fi
+-	done
+-
+-	if [ "$matched" -eq 0 ]; then
+-		echo "error: MAINTAINERS references non-existing file: $pattern" >&2
+-		rc=1
+-	fi
+-done <<EOF
+-$(grep '^F:' "$MAINTAINERS")
++	done <<EOF
++$(grep '^F:' "$maint")
+ EOF
++done
+ 
+ if [ "$rc" -eq 0 ]; then
+ 	echo "All MAINTAINERS F: entries exist."
 -- 
-Tom
+2.43.0
 
