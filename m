@@ -4,199 +4,184 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A699C79F9F
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 14:06:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 053A2C88E40
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 14:06:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E79CE80E31;
-	Thu, 10 Sep 2026 14:06:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C286A81097;
+	Thu, 10 Sep 2026 14:06:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SSVjpvZGjl7a; Thu, 10 Sep 2026 14:06:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 268DE81007
+ id L6JnIo_jFUqp; Thu, 10 Sep 2026 14:06:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org CED808107D
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789049188;
-	b=msGGsZvzmu8syjT0pcTBfFrbBf4HGkkFpa3ICFuBJd/zh0Ub5xl9TNbYFmUg/vnMBpgf
-	 Ehy94JEXSz4+3/Ijc96pqvMY/tSAZW0Li2QFRt2wQl5q8nM11JD9vyjNa6ODIhDD7oKex
-	 +DgtwSvBHvDYeS2xwJ2V38iGqMOP8xE7beXc0P/s34adTNXYwnktzmDBsonLJTvOygQTQ
-	 7Sz1Ahbv4WWkC6BeIizuh0A3Khq0R5IbtmwSuVajCRlcc/DJ2/9LQvWrz/evjYA8MK4HK
-	 CFU8uPP6cCsBLd8DqhnZS+SWwbJxe2smkWrkwGFnjo0COAlMYYkd8JrAA7Tt+XRKDtQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789049188;
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789049198;
+	b=SUIsvXp8+AesWh2IkORiJKLqpYKf02rmQ6IxOun2+HQgYCR/KWUbxs5P4+f7v14Hhwuq
+	 T6wViHZbBAUKv5is+bQmyX/uC/rQDuiw2UuLxcjPVR31oDum7Le6CnwV0B/FdGFmuMuzu
+	 Su3tKRdFYyWGmriMIqXm8z05ZZFrTWR8k6BuXHcvmi+w9pjzed5P9/YIE9Cc78mCBVQgW
+	 UcYf3bZ1Fg5w5F88E5bQzEkkjPPUxwNJnlm3yuYmUXfcuE8nONOb/qJzcrs7du8K+vg2I
+	 lSBS2ByGnLlxvIod7LuA4ETr4edP9E8FX6f4dhdo8wgvr4eMDlEOdUPiunQhoOfUFEw==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1789049198;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:From:Subject:To:Cc:References:
-	 Content-Language:Autocrypt:Organization:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Reply-To:Errors-To;
-	bh=jGoMU+1qnIVIB1yfUUqQNP6GRKbZsieKJk/qc5M7A+A=;
-	b=pT4MMcgXLsFltTyaXfUXqJodm48UQ1Er4/HCWTlRav+s17V4Apln9yd2wC0lHtf2KtNL
-	 j25ethCvG86a9348y19bv40UBA56eEoGKXJSU6fu2gA5VFuEimAol4FzG+bkGfTbvKgCr
-	 eQwE2w72MZGwpojh+SvK/3VXGgZTScIJhPvnmoCsBfnlaDIyFcipnD5S/PXt9dggsyebp
-	 Cc5oOR7cJ77cyHA8VVh4WvCnt7xCOJFVayt6S9MoRo6ZwPpzfEvPQLqFWdMmV2QM8of0A
-	 XDRHiupdDm9t9aZ/PaN4azvRY5jT7Rl0OxStb3CEgCt86Uk+ffekjy34kS0RYJQDwWw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=dn/NnZ1ZKabcmpn/fdHxeupnn9qsTqpcxwsbxSmeknc=;
+	b=K2d2pAt4RIzQidIqgzjnWGDcgtSfbrmRLrgOX0hmnME7NEG97FitMZX7j3P3H4bIXdso
+	 g/9mZzC9VyvGLofJXTKqOaopoBtm6pilXr6XEC0UtsyD8zCXA1wVeanqhw8lhWXwXZ1yf
+	 OQhCPnwOB8d3m4/iDUUoUvRO3sAcufVQcJJXwBlMACmlgK/L9B1KQhO3fnD+RV1lF8oS1
+	 Q+e94tyuytyPp2AU7GTCLONTbFKhpv8HHNc59daXKpv0iwcUMFWdyLXmfZYtbNPt+C3SE
+	 5dvBNedJWrWoyeoq43SQodj+3sgKXDoiJaJBmOTWLdQU5TvSKaBbf0Gdb7y254zbwpQ==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; dmarc=pass header.from=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b="g6/r2dIG";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789049188;
-	bh=jGoMU+1qnIVIB1yfUUqQNP6GRKbZsieKJk/qc5M7A+A=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1789049197;
+	bh=dn/NnZ1ZKabcmpn/fdHxeupnn9qsTqpcxwsbxSmeknc=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=rMYswVgW9fU7jNluySLyAjhaouqMDZhYwnYlejfnhqOL2etU3kyvmRji0wZQLmBIt
-	 8A8ZhBg8/kEubod7afjie/OR1ydiSZemdtOp1OEc9d/7vMGel8RtS7ZutCimZt5A0K
-	 xJGLvu8cdZFtxB8nlvcrc9PWT6cJnnnjtf3d+CpUjTG/IF0nRno9pdRT5D1W8+9ws8
-	 w74Q5yDp3TJ9P2wKBDB3WXnyMJ0u2dihw9PempAjLGNNax7UYl054ooK2bQO7T8EaJ
-	 x2TM3dlr2PZEe7Kiw0pgolSu11BGxHWNEMxFe77QsPZ9RsbeMigyUsxOTHj8PS+aE4
-	 9QV4ogynMvrow==
+	 From;
+	b=FiZZVbX7p8NPptGgLcEkxmogDfctTduDAZJPenkjgM5HdFeRJgXBehfpifVJZJrma
+	 mN2SVNc/14J3inKgb/JcUT7YRM7Bj9f1dydFX3VFvXnCe5MNdPhsl3MS3G8mByzarT
+	 wqW5jq/NWOeWyClgRmZzpMTneAc1RjkLH8xdQ7OHGKE5FnMVCor3dZsccJlm6co/PH
+	 ItzzZgLbXsCVKZ9Q3Dyw7FKJMOH6k6YOHIKPC0VBlUIR4WW2Lzygnk5tv4gnQ0IGbo
+	 saQyfOPL2fGMpD24n73iM9baA9xikXCeEEwwICBQbDGr3Wi5pa/tO8HXF0W158PpYM
+	 WHyLp0TZfZUiA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 268DE81007;
-	Thu, 10 Sep 2026 14:06:28 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 560F1E11
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:06:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CED808107D;
+	Thu, 10 Sep 2026 14:06:37 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id CD7A143F
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:06:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3C0DC400E9
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:06:26 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id CA6968107D
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:06:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZYmF5Hkrd8gb for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 14:06:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 0D5D940024
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::332"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789049185;
- b=Ylcsq/dONqUICNP7xLHXb4FVgJVlF8mRaeeyLWjdHvZ7bK0HVWYD2BCBCWnsOnzfi/ws
- mdQWkZPFXXUEvLa9av+k7MAjkKa8mr6iUpjBnheD38zx4oc8F58ybQS3QmiP68q5MCsX2
- K+b2Uv20FZHX3Ys1V+3My6u4TDDcnafohBgLSeOh9d8g6ACPS4LgedY0BGWefrLO07hJD
- WIKhdBpuNXQ0MWDO1VDmPitibRvfj7ru9CJ/c5wbiXsJ6fuqdMxu4ougRQ4yh7txUruqW
- ii5O8G8KRGpcyFn43sQqywLHy0P75Vcz9LUjpvrFKvsvH/mWEpshsbDoT68OykOf6KA==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789049185;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BJsp0p4PCJbb for <u-boot@lists.u-boot-project.org>;
+ Thu, 10 Sep 2026 14:06:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 550CC8104B
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::532"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789049195;
+ b=lfAcLOl5zdr/+iLT/zaIw/kU+IPsmdzObg7v8raN6KT0gFkpnQeUsNXLsr3NhnP5Z4yA
+ Jy4RFGRpUh2kBqpA+btOs2ncJMS4mWtZ8Da8ylT/17gd0ZCvoYjkLIrskjMjSbQU2fdyn
+ f19xkxls5TyuWQNe7+lGyVqGeq4ECKbiFfQpsdSrQgX5sX5p0UnAq3TpqNMbQdBf9u5Q3
+ RJYAKeFxgNWUwgWJmJR7rewVX/El8gVkRlZvcVTdnepo7cGBYo9HtTUeotZGIllpMkOZK
+ 0tVcy2Gzz+Mad7IR7XqjzZxmQa3Ga1TK1rwNduh0dpP0rjw0eCmyLYn80Z9u4wwEYDQ==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1789049195;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Message-ID:Date:MIME-Version:User-Agent:From:Reply-To:Subject:To:Cc:
- References:Content-Language:Autocrypt:Organization:In-Reply-To:
- Content-Type:Content-Transfer-Encoding;
- bh=jGoMU+1qnIVIB1yfUUqQNP6GRKbZsieKJk/qc5M7A+A=;
- b=lCbJXHllcdzATHaoFIks30U6XAz6NFhG9GC/4ojh4Ld8Y8zzR64taJjbAsXwVAAKK7no
- JVqiqa/lBsWNTC4DsFXGU+sJezrg1/gdU98gg/Hl1gPw9MV8dzOWU+S93szXTJTbRAGf4
- FJRDOEtxEvwqdHxx/zNMBnynmz33CHTySfJQMNmvuXgk+AxFmwUs83iySSP4fi3mwa7JP
- jDTOWAEbyhVXtsGXTC2LZrCrSZ2J0GUvIk+axCiQlNbRSBTPLKYmW3YzTkWgJOrU6bM/9
- OTs8V4tPRsyShHTJcek9HT2isNiS2GVl5BkDWuc+8jnrfXYc+oH6kSYEXY7YIYBiNXA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=linaro.org; 
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=K8jGkq8N; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::332"
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+ Message-ID:Subject:To:Cc:Content-Type;
+ bh=dn/NnZ1ZKabcmpn/fdHxeupnn9qsTqpcxwsbxSmeknc=;
+ b=pXYzjwpgztsZZPfRJJCXGWiBOjVLJ/UevNhVU8OZs61EK5Xzt2ztd1/D+O0WkhyE4t/P
+ b3dKrju+MlHhnET5Y0BC8kDVMa3XzUoaf6Nu5kYDnK0o4h6x6sEl0OQeQwD4DTDOa6R4U
+ DkIfmy3KdjEzOqmqRMefu01Yy0y5zRcKzCGVt6RGuvJDG1hGTq9t/V+w+Ssq0Zhgs1meX
+ HIdrDjAmOTkuSp4/c6u4uFFHqO91qdl8+2X0vBKEbQWN9Oa0yixXNBsQ9DKziGs35jc6V
+ ypRhGPKV1x522opzgRehhb/RCLihKrxCMkBbkPU1/vfRRIiki3SqJIz95vU7CsZXgWw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org;
+ dmarc=pass header.from=chromium.org; 
+ dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b="g6/r2dIG"; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::532"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
- envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=K8jGkq8N
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0D5D940024
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:06:24 +0000 (UTC)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-49ccfae359fso60320345e9.3
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 07:06:24 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::532; helo=mail-ed1-x532.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=g6/r2dIG
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 550CC8104B
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:06:33 +0000 (UTC)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-6a7f5655823so7711437a12.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 07:06:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789049192; cv=none;
+ d=google.com; s=arc-20260327;
+ b=BHANAiJ3zzqy2CZohmQZK0nldmUfrSCqC+mM8ReJl5w4y7/+1mIj9WF4zKvnE9NSY4
+ vpG+dGGM4PFG1oaDF29OLYbdbDQVl8+hBzN95TEh3JlVOjXcWxpOZ4v2TS/vpA6K+Ppg
+ 9IYtIt6BT5FDApwVoj1sNTLOAptIqqTe3GgyOWLurSn5ZYRKsMwwhSRn+46k6cgbXX4R
+ 3sa3DfuCu/MZdsOZZzJzPzyKPNfDDqHvuzAtHJCGNTh7h74a1wrg9/ErCgpzXPP6GBB9
+ tPFYX4Qwlzv6u5lT+GyXr7ydJMcdpBq7c8YpjioVdKPvtEhlqmvSkb31RZpeOgDb5zZB
+ 9agg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=dn/NnZ1ZKabcmpn/fdHxeupnn9qsTqpcxwsbxSmeknc=;
+ fh=iUW9C0YKtB4Kk5ljufEhz7FDh9wbE43jzsyOO+ARQdg=;
+ b=lqWwe/OYzUihfEBCOoNrfU7jUmQ4/pTrdWo/x/qZoLnGJ511AQ/ebWhVNP5StyqyWN
+ ctGH9rYMi2EfpB8LkdnR2Uns/HlKXkiK+9KhXfYE7kw6gPIMRGCvmvP5xxnFGDMP9qvA
+ c2Y2BlhjRFBPkO7xD3ImRAGgZrYStZk9cFzWAsHo49kenayL76bra8ekzM9I22u+c9eH
+ 3gqaTIx6xHSOq859Q92tMljVBe5l8PlxXkT/HERcDHrjIfsYsU5bzeL92yvY8RS3dyI4
+ YaAqpSvFRPMi3CzP0XzM3dJtvNBX3KD1h9pNtCn1ST7NCKnLwcUdZjMIR7nRxqFNa02B
+ vOiw==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1789049182; x=1789653982;
+ d=chromium.org; s=google; t=1789049192; x=1789653992;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=jGoMU+1qnIVIB1yfUUqQNP6GRKbZsieKJk/qc5M7A+A=;
- b=K8jGkq8N67XjxbndPOXPZgyIp+3hsUvvH1T/3po0ShwteU9Y/dmJl3e4CLVS+WLw6h
- 7TOZ/rbyLw22EZyE6NCpSKgj4AcqiamJaI+8024pbUSzSZzejTQHjoiygxTUOROwLBs3
- 4lgeiySfxcemVaVBsG45k0k6FyGdlCxzbw1fP/IbQw+05KVVHFvvYVnuCPRdbVT4BBsU
- RYqPLdfl6T0LqFg9uzU7KOVWl2pMX3hm8kvaRSBjs8NeKMu1Vew31i5MctVyubWRejAT
- KdqTFIgogtpc55aqfoIynp/EzFCV7RYnHDS1pkOWH9aFi+uQdMfSRUL3ADvHFVN+LLHd
- 1pLA==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=dn/NnZ1ZKabcmpn/fdHxeupnn9qsTqpcxwsbxSmeknc=;
+ b=g6/r2dIGXm458t8j12YFsKcpcb+NrZUNS/AKR7ZznXH+7ECDl3UDOsGbhrJKcWLyPO
+ qp9H7Vs58nnrPKgsyssINNmTHZha+vVGs4csEZVflBlOGW8J5DGeAbKA/KmyhXfK9ppx
+ u/P0f+31K9a9KgPrscZzETh0GTvfBoiRcDeoQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789049182; x=1789653982;
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=jGoMU+1qnIVIB1yfUUqQNP6GRKbZsieKJk/qc5M7A+A=;
- b=SPLQSQr94J7LBGlplL5f1CYp8s/t2D6pt2tN+HOlvDlsZEsLsWlyTBhDkK26ZdQHR+
- ng7/3mqEpTkCy2VcycYkd7cklJmOqPOwZucfHbysGkcnIrIyanBARvndAd5VfmFEoAdq
- +RyH0GWg8Az6u747Z1hxz66Lmee0ORMk6+RLw24W7jmyvE3i/Mkr+8jO+aw4iS+FEUBk
- R2k1KHhvO+QAeLJ9KVHteY8xrgDol1JUV9culsj5fT72PvolNIqogfWh6wxvO/NamO5/
- es06alndwvaqxnyR+0CmNwMOdqu1ppVyz/gE6nYB2KdKqOq6hRRnAcBOCXPvwguDCRPj
- sv+g==
+ d=1e100.net; s=20251104; t=1789049192; x=1789653992;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=dn/NnZ1ZKabcmpn/fdHxeupnn9qsTqpcxwsbxSmeknc=;
+ b=UF/uyWPtf2kPZKg7dEKbHWtD6LGoyhefOJPjZbgWOhvbK7D9MTYwA3uj6eSLHgMk+F
+ MYBj3EF3x8d4iHNo9iydVGELLblMEnA4Zk0dyr6RsxhPPEToEInaoVAakg5qrHuTvdZm
+ 0vyRd8rvp9e+EOw0wDka/wUZV0/yHNbE+Kt++gCGFdABT3qal646sYOvXW79mOpPn0F4
+ nzwhtCL03L+hUjMylgzA2q4TonblLHZLL1RCWr5Wk9Rk1o4XxE+ELtQocKQkh2kYrX3G
+ sdSRezULHKbEfS2vyOKeRQSwYR/9L/6OdJhPxuA+WE4f9u4ZtYVLnrJ08X2DXoOzjY2X
+ HYPQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBw8RPgpgQ79nuCo5TTYfd8xnNg16i1NvRA/7mi/LLxbimn2vf5imxbfPrOSDag3tuirG4Xj5Fg=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kjVnjoYqylnW7V01fzI63O8hCYX5UGbEbckzR5Sh6TDdBkGUj5
- ewVWcR3T0UMlPw5o8jHViVtSEjv4Hx/4XqytP4rR7YHqw2J09Yq7ISOka0HMUycriC0=
-X-Gm-Gg: AYBFou0q4g9hwN9PJN7Ih6PsVffI7m4nLPUXng0SwhoY7sZrFqp/DtmlY3o4thbuGvc
- xILAAalZoSIHdIRujx8D+CiMxQPBApJd57wYM9XWrTowSlNgaNLNb8YZIWFbRvcHXdFjNiVEEvY
- D30cWLEWwzuv3jf3hkr8t726MDUrWetwh3WIAn3CoZRudcKwwpLzBc4evnTKcVunYkE29Od7JS1
- NvuSyESPxg53Be769/hoI2u93WNf2qNsLv8FTCw0Ngl1Y1+o3scwoPKO6ts6DkhsYYSBw8iVWvs
- H9kaheNieXg4EfXZ+uOmcvE3u5jO89C38bS0zl/hSMN3x1EOsw6K23mMB3krhr4F/49uB0ONks1
- U/bjlVmrcZKkbk86CTSyoKaFvxoAdiGC2v07tmZmbiOS/RpGq7hpeD6q18qkgpKmJ+lwMM+5U8d
- TXq/20qqHrK7Ck0kCbVEqQJZ6Q4MT1HKVyV1sgoDxnVddDgDeyv5VlPagueGQHvhvUVFPL+1KFa
- JiM2UtS+LlbFioF5gbKn3TQPhAaB4yD4gnkmT7HfrNDI2xJYL8YHg==
-X-Received: by 2002:a05:600d:849b:20b0:499:900c:9c69 with SMTP id
- 5b1f17b1804b1-49cf825d8c0mr305721045e9.9.1789049182127; 
- Thu, 10 Sep 2026 07:06:22 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:edd1:1b07:ea07:35f2?
- ([2a01:e0a:106d:1080:edd1:1b07:ea07:35f2])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49d26c39086sm68083635e9.10.2026.09.10.07.06.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Sep 2026 07:06:21 -0700 (PDT)
-Message-ID: <56c6372a-667f-481d-b36b-970fc89d600c@linaro.org>
-Date: Thu, 10 Sep 2026 16:06:19 +0200
+ AKwUvBx5gWP7kKOmjf33s7z9BPBZ5/tSsBF7/t1UlXpWFMLfyGPdc6L6QiWQuC1aIqvpr651PRhe1gU=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++k/rgc2Il2SvYc0SO7TXMaMzNeN5Ugo9U+4808241mZ4DN153vI
+ zKooi26TgVp3QT7O1nKnJNgyoRE6U1BhXdNKPHrSZ2XbCqe5/ynK36ykkokIY9To8k3v4TP+3XM
+ IxjDUGNiZReaeY1oxhzKEP5qCa5AOmgoDXkt4s8CL
+X-Gm-Gg: AYBFou0IBSO/g3d1dXhJeEF2OooLMFz7u7VrbLMCJu0EBWSQo36PysbUUo82thM2nqE
+ 05f31xk3mEPcOrkROKdA3m8nCBO1qXWOq1knBuOi95x6lsjPR1TCckemli9LiWFs5tVaETHWFaV
+ iF+JNpwxgDGXCjSp0wQHmBxBGxTdZSWKpeQ+53iA10dMeyvMsEMGWOQIrvDlduqAQzfRYyfm5nF
+ lvzJ7wDpLGSqNJYTLQ9M+L56MKqUSSclhfpDrrNBK16ZoH5ZlN1tUWDgNgtEJsxvqv+enSD5ZUF
+ buwJs7fO14V2tF82V6idr6oW7If6RyowDak48CxjNbJ5fv1dOViHgw==
+X-Received: by 2002:a05:6402:20da:b0:6a9:ab34:cf67 with SMTP id
+ 4fb4d7f45d1cf-6a9ab34d133mr910282a12.36.1789049191902; Thu, 10 Sep 2026
+ 07:06:31 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 0/3] configs: sei510/sei610: drop Android support
-To: Guillaume La Roque <glaroque@baylibre.com>, u-boot-amlogic@groups.io,
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20260910-remove_sei_android-v1-0-b7bcbcef3834@baylibre.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260910-remove_sei_android-v1-0-b7bcbcef3834@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260828105210.32664-1-mehmet.fide@gmail.com>
+ <20260828105210.32664-2-mehmet.fide@gmail.com>
+In-Reply-To: <20260828105210.32664-2-mehmet.fide@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 10 Sep 2026 08:06:18 -0600
+X-Gm-Features: AcwNN1X4QQzY-ZyLoLT78hu5DvBiyWlVvK84ZCRs_0V8OtrDUxQ1mkybL7LcgAw
+Message-ID: <CAFLszTjApvPONDB9bdyuTA8dqbWvgmnavsQD=Xy2nit4FzjNHw@mail.gmail.com>
+Subject: Re: [PATCH 1/4] gpio: add a way to parse a GPIO now and request it
+ later
+To: mehmet.fide@gmail.com
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Vincent Jardin <vjardin@free.fr>, Ye Li <ye.li@nxp.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Aristo Chen <aristo.chen@canonical.com>, u-boot@lists.u-boot-project.org, 
+ Mehmet Fide <mehmet.fide@screeningeagle.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -208,46 +193,112 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 9/10/26 16:04, Guillaume La Roque wrote:
-> Remove Android support from SEI510 and SEI610 while retaining generic
-> board support. Both boards switch to meson64.h, leaving the shared
-> meson64_android.h header unused, so remove it too.
-> 
-> Fastboot remains enabled, but "oem format" is removed along with the
-> Android partition layout.
-> 
-> Build-tested sei510, sei610 and the four Khadas VIM3/VIM3L Android
-> defconfigs. Both SEI defconfigs are unchanged by savedefconfig.
-> 
-> Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
-> ---
-> Guillaume La Roque (3):
->        configs: sei510: drop Android support
->        configs: sei610: drop Android support
->        configs: remove unused meson64_android.h
-> 
->   MAINTAINERS                       |   1 -
->   board/amlogic/sei510/MAINTAINERS  |   1 -
->   board/amlogic/sei610/MAINTAINERS  |   1 -
->   configs/sei510_defconfig          |  10 --
->   configs/sei610_defconfig          |  10 --
->   include/configs/meson64_android.h | 279 --------------------------------------
->   include/configs/sei510.h          |  30 ----
->   include/configs/sei610.h          |  30 ----
->   8 files changed, 362 deletions(-)
-> ---
-> base-commit: d4152edb50356338af994d1c0483f65b717b4c15
-> change-id: 20260909-remove_sei_android-44993a3f3353
-> 
-> Best regards,
-> --
-> Guillaume La Roque <glaroque@baylibre.com>
-> 
+Hi Mehmet,
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+On 2026-08-28T10:52:07, Mehmet Fide <mehmet.fide@gmail.com> wrote:
+> gpio: add a way to parse a GPIO now and request it later
+>
+> A driver's of_to_plat() method must only read the devicetree; probing
+> other devices or claiming resources belongs in probe(). Several drivers
+> nevertheless call gpio_request_by_name() from of_to_plat(), because it
+> is the only way to pick a GPIO out of the devicetree: it resolves and
+> probes the controller and claims the GPIO in one go. On boards where
+> the consumer's pinctrl touches the same pad, the pinctrl state, applied
+> between the two phases, then undoes the direction the early claim set.
 
-Thanks,
-Neil
+I like this approach. BTW clocks and reset lines have the same problem
+so we could deal with those late as needed.
+
+>
+> Split the two halves: gpio_parse_by_name() reads the phandle into a new
+> struct gpio_dt_desc without touching any device, and can be stored in
+> the platform data; gpio_request_parsed() resolves the controller,
+> claims the GPIO and applies the direction flags, for use in probe().
+>
+> Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
+>
+> drivers/gpio/gpio-uclass.c | 33 ++++++++++++++++++++++++++++++
+>  include/asm-generic/gpio.h | 51 ++++++++++++++++++++++++++++++++++++++++++++++
+>  test/dm/gpio.c             | 29 ++++++++++++++++++++++++++
+>  3 files changed, 113 insertions(+)
+
+> diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
+> @@ -1219,6 +1219,39 @@ int gpio_request_by_name_nodev(ofnode node, const char *list_name, int index,
+> +int gpio_request_parsed(struct udevice *dev, const struct gpio_dt_desc *dt,
+> +                     struct gpio_desc *desc)
+> +{
+> +     struct ofnode_phandle_args args;
+> +
+> +     if (!dt->present) {
+> +             gpio_desc_init(desc, NULL, 0);
+> +             return -ENOENT;
+> +     }
+> +
+> +     args = dt->args;
+> +     return gpio_request_tail(0, ofnode_get_name(dev_ofnode(dev)), &args,
+> +                              dt->list_name, 0, desc, dt->flags, false,
+> +                              NULL);
+> +}
+
+The original index is dropped: gpio_request_by_name() passes 'index >
+0' to gpio_request_tail() so the request label gains an index suffix
+when index != 0 - see the '%s.%s%d' branch in gpio_request_tail().
+gpio_request_parsed() hardcodes index 0 and add_index=false, so a
+caller that parsed at index 3 ends up with the label 'nodename.gpios'
+instead of 'nodename.gpios3'. Please store the index in gpio_dt_desc
+and pass it through so the two entry points produce identical labels.
+Your own test uses index 1 for 'test2-gpios' and quietly exercises
+this - worth an ut_asserteq_str on the request label to lock it down.
+
+> diff --git a/include/asm-generic/gpio.h b/include/asm-generic/gpio.h
+> @@ -574,6 +574,57 @@ int gpio_claim_vector(const int *gpio_num_array, const char *fmt);
+> +struct gpio_dt_desc {
+> +     struct ofnode_phandle_args args;
+> +     const char *list_name;
+> +     int flags;
+> +     bool present;
+> +};
+
+Note that list_name is a pointer with an implicit 'must outlive the
+desc' contract - current callers pass string literals. Can you please
+mention this in the kernel-doc so people don't (later) put a
+stack-allocated buffer in that field.
+
+Also gpio_dt_desc reads as a peer of gpio_desc when it is really a
+pending/parsed version of one. gpio_desc_parsed, or gpio_dt_spec,
+would make the two-phase relationship clearer. What do you think?
+
+> diff --git a/include/asm-generic/gpio.h b/include/asm-generic/gpio.h
+> @@ -574,6 +574,57 @@ int gpio_claim_vector(const int *gpio_num_array, const char *fmt);
+> + * @dev:     Device requesting the GPIO (used for the request label)
+> + * @dt:              Description returned by gpio_parse_by_name()
+> + * @desc:    Returns the GPIO description, ready for use
+> + * Return: 0 if OK, -ENOENT if @dt holds no GPIO, other -ve on error
+> + */
+> +int gpio_request_parsed(struct udevice *dev, const struct gpio_dt_desc *dt,
+> +                     struct gpio_desc *desc);
+
+Please note in the kernel-doc that the -ENOENT return for a
+not-present @dt is deliberate, so a caller with an optional GPIO can
+skip the 'if (dt->present)' check and just tolerate -ENOENT - right
+now regulator_common_probe() checks 'present' first and never sees
+that path, which makes the -ENOENT branch look like dead code.
+
+> diff --git a/test/dm/gpio.c b/test/dm/gpio.c
+> @@ -257,6 +257,35 @@ static int dm_test_gpio_opendrain_opensource(struct unit_test_state *uts)
+> +     /* parsing alone must not claim the GPIO */
+> +     ut_assertok(gpio_parse_by_name(dev, "test2-gpios", 1, GPIOD_IS_OUT,
+> +                                    &dt));
+> +     ut_asserteq(true, dt.present);
+
+The comment says 'parsing alone must not claim the GPIO' but the test
+never verifies that - it just checks dt.present and then goes on to
+request. Please add a gpio_get_function() check between the parse and
+the request, mirroring what patch 4 does for the regulator. That is
+the invariant this whole series is defending, and it belongs in the
+gpio-level test too.
+
+Regards,
+Simon
