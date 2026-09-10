@@ -4,170 +4,188 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AAD6C79FBB
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 22:08:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B1C3C88E40
+	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 03:00:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BACE140B91;
-	Thu, 10 Sep 2026 22:08:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2E0E540A61;
+	Fri, 11 Sep 2026 03:00:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8qyPA-XDYE5b; Thu, 10 Sep 2026 22:08:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org CA50340B81
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789078115;
-	b=qtz8GRz8VlXxwM30JBl6pSka4hwebpx21OXfGjakZTayttrdi0KGijdSMEScxJujfipK
-	 xifh7NUPOqh1Su6N317d0cSayrY6rnR3zx9rwqSIQDizXdjDzE1Q877pWCwRwM8j5X9hC
-	 ffOcE1quWDcAOwMSfoVDgRW7DjoXQI1IgG+Ctv58w7yWynRujuBiQnVq1nF++EtyoVgEL
-	 5VlQ1PWFjxtdc6tnvR7sE5cs+LARjYMvZB9DWqoz7UIHwMTdN7PZuv/XPLNQTmYLGh3FC
-	 7W4KHn9GcvuKV4NiUp8aiStK1IZvkk+b28ZpL83gVWU7nvywE88idNUgl7ryHF24PwQ==
+ id atzBcIpD1IG3; Fri, 11 Sep 2026 03:00:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 7DC6B40A67
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789095619;
+	b=ZvJCLSyXRr7F9VBa9RKV8bpfekhH0ZKDLGqGh+RoAxFoNkfR9ZgEXXCj/3Vlnq0gQnQF
+	 Asue/EcQKIHWh2yEfvID9kLcHxj6BXbz4GOHL7/ZJ1rDPM1L2gyt7K2/zjRVbPcPKaTI9
+	 Tw2EgcwGmGgw/iV/NbZIWbt1vZJnfDKpS8ULDoOltitYQLUs1Ji93+o8QMYI1+giBL+6Z
+	 x9KjFLCXU2AIrFjrvn1NG6Ghqnq5gWZ7w6NolcE5KZqZ1sArcvicgxZa7vp4X6recryim
+	 Ovd7VUSnehtTt55d1SBkifjWlduEYOoY8OT+vhbTYQvn3hiKeQa3/s37QYqg0zw0jiA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789078115;
+	c=relaxed/relaxed; t=1789095619;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=DI508Ptwc/eAB9uEmrvbCuYFkMEIrjxgO9wmndM4Dgg=;
-	b=HA5rUz8Nh8ItMcBIJo3UUTIs6Er3yCwXt25d3dfOLiKqsYqT1aLRWkc9eTTJ1FcZLyri
-	 NpiM13SE7SNg6Afcse9xCplrKYA57gmt9geD5rDwiWBQpVIxI1o3dHW6rElVReMIDV9FX
-	 yWaqR5RnGuDDOgRskkSYaPEU8j28hDqhJjOawHUeyNAXLEKBpkQeMHdEg3i0yXf8nltz9
-	 1ink3cmLVRNMW7JoSB6HKSnJEv+1PVGUvaAIzoqONVZVl1MiTjibRdybZIRkpojGNmDGA
-	 94fXILONNnkuEeYEzg2aIaTnwBN4fi1N4hGKFT/G10SRsSaSObs6dlAZVaDDrxJfEXg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:X-Comment:Received:Received:
+	 Received:Received:DKIM-Signature:Message-ID:DKIM-Signature:Date:
+	 MIME-Version:Subject:To:Cc:References:Content-Language:From:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding:X-MBO-RS-META:
+	 X-MBO-RS-ID:X-Rspamd-Queue-Id:X-Virus-Scanned:X-Virus-Status:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=rjgx2XkNogtGtBECWmlgfmP5xadX+LIm+r9XjAmo7us=;
+	b=nKlAFB7pFQajjMAyxyQVbc/qXczKMV2AGAOE7tlethYFNz42MVfJy8qvzIyNJnmaZ2X4
+	 8gKYuI8/VIDa7Um47aDrfjstRA6R43ue4RnU/treyY4oRu2XWMqq7cEh3kanyblz3oQiz
+	 OqnZ4Bt941/3u+zz48POI+MfmFkMv6+/psLXJYB7O3Z24MsAOuwoMQ+T8SitqJeV0A4U5
+	 w24/3msCH/seePRAPHDPpeL7mWlmViGyFFu+F1NAdUp8fWhp8OeZf3H6yb2WVjhakrVWl
+	 iq60CpJLe2UxyMiMGwrtv85si0vyefVo91QBbb7RcpIr3tRWQA+1mirTjb9WEikiJ9A==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789078114;
-	bh=DI508Ptwc/eAB9uEmrvbCuYFkMEIrjxgO9wmndM4Dgg=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1789095619;
+	bh=rjgx2XkNogtGtBECWmlgfmP5xadX+LIm+r9XjAmo7us=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Nf0qh9CGRxSChmosA5YnLoBp2FH4JcUFuHdPvL+SfiIByMslLJNhrfz497+BAu7Bg
-	 x5SbRJHPhzdknKdaGz2Ilg1vefarG4f796pmXJw+YH05WnUexYgLJ38B1nSaIZcNi4
-	 YHmXLSJpd1obJQsZQaQrt+DaNpOzB+qpHXUvz0nnoZoGqvrBHPwxr7+p3kv+AME0GR
-	 icjVOF4y8e0V3XbWGeM8N+cHbp4Vp+mn79eRoP0pv+C5rviMBSHW92uDtIb2cgNq6s
-	 g9X5HczwBG8pxlBXRIpHm+MVmWe/GtXKNETZ4v0xmFUJ3VOoZWqW7SIVNzEUgRO0SR
-	 L3gC1rbBSHk5g==
+	b=lzdm19BZMdxEPyHCH1gp2A4GbmFiyb4sctaAkU9cvyMjxgBG3tdlh5KFFy+iV9VAW
+	 RevdJw9+ewSirPJnh6Y2YMeFTC0D7P2zWOgFztz3/M84bbTM+xftIHdD0v/2o6FW7A
+	 bM0aGnw0dao1FD0PlFVfdewI/JhK8ie0511WzxSyz9HZ4uSYC8PUQlN1r0iWch28Kn
+	 9dDKy8wnEDrwSWZdOA16Pg1s2RzAIaEbClid437nm0CW1I3eoppTnM43Rg56Q7HOy/
+	 OFyNKOm+XkcshwrCkPxToawcEOtgtTjqF7r5orhOSwRtJzG28IwNkgA1cFJyp3/ME+
+	 +YOjlZkhN9VJA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CA50340B81;
-	Thu, 10 Sep 2026 22:08:34 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 051032D0
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 22:08:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7DC6B40A67;
+	Fri, 11 Sep 2026 03:00:19 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id DE26614D
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 03:00:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id EACED810F0
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 22:08:29 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C412C607ED
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 03:00:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZlGrQHndbawG for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 22:08:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org AB145810CF
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789078109;
- b=q+cb0wSE5B+/H3uh7aqwC8RufYRLHr+cxhMot0mPWwQv7jDzeJmySA6iiHg8zQM+X9Ls
- g1P92M8WEPoiHT0hTW/Vskj+EkiGA8cGJ+vRZiUsjL5rB+J7q+rdqUk6Usf/iUBlQCG/2
- BZ0AfiPjvOC7dm1q2/V5AVc4kcS7YfD7bXCLbmt4Nzvc25Q2Ed6yBCld7eSXHm6ejgvUl
- jBMN8tNwsg2Q7kPW67NfM8R5vZ2rSGu6w2snfX0fYx0YXnNATTeoa3pc66IAWTp0HFLZS
- EsHcXXy4dIWUme/W2oyVFhgJ3f2IpUGYwl3JIYIiO0d11iqlFu9FVU3ymjkwBCuttgQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id y-X_gMSqwsvU for <u-boot@lists.u-boot-project.org>;
+ Fri, 11 Sep 2026 03:00:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A7274607C4
+Authentication-Results: smtp3.osuosl.org; arc=none
+ smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789095617;
+ b=ohpNrGHOKNyMhp5qCD3no/Wj6rX3+dUAbja7QhpjbTfAG0PO9pKqCq/Rfc/r6quNwHKq
+ Ai5ERyUCSGyPKhLhSlYSWCXPzZO0tEZ0u4BFU8Vc7zgLgF9YNk5b21J1b653XGNOuRZJf
+ KR3eMBEH1ReMkOahplq1QhNZMWxtVMSjOGBA56ELBr8q+k+2opaXFZIGpPgyyH/e1Uf5t
+ YfJ3TuL0tHE/O9h3qgFpMGzgPGhUrvnG+vJi0Lzwe7+3Vw9+maTro3gOzHXpSWc9+b5dH
+ MiP/bBP883SbKruQBul2hLDFNknAxNvdffQ5YA10Tif5NW5wJRpPWIGBrl6mupOykyA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789078109;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
- MIME-Version:Content-Transfer-Encoding;
- bh=DI508Ptwc/eAB9uEmrvbCuYFkMEIrjxgO9wmndM4Dgg=;
- b=IsDjSBe/3mfFbCDSrAlShWUwMvt0btJegZBYhZvensI0P1HSovwWgHFTTgItw2QjpTsb
- 9ByVn274N3KMZXgsbzZCpSf4MS2XzndVKlb1mMaACJm2vOsnYcGGE6+NzPI9Zupq+syXp
- eqqlg2jYWnFVFzWG2jSuW39syYh2G4wSWGOrzQe/MkLIeBgZqXxEvQBcNRFixgfQO6zk4
- ymlwh6LlVQy94fssU3KAviBg4MdXSvTyGtJFMAPNtyo4opN5+n/OWbAMMkWbDZck6IYIQ
- rJeYytowpVf67CP2N6beaaVlqAVMJLyy3GRsDJ+nlH6bvCKVrGD90cGHCJ41IWQ5f0g==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=gmail.com; 
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=cqSaPPYg; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32b; helo=mail-wm1-x32b.google.com;
- envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=cqSaPPYg
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id AB145810CF
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 22:08:28 +0000 (UTC)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-49b0d78a801so3000315e9.2
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 15:08:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789078106; x=1789682906;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=DI508Ptwc/eAB9uEmrvbCuYFkMEIrjxgO9wmndM4Dgg=;
- b=cqSaPPYgi/wy+sc5nZQYBQY10RaybF0vWYlHQaF2Pd3MbSLO69uUJSmJIwaErDs8tz
- K6a53WLAFBRgHS78VT8JlDt9nsjs6WMPpHEBPEAYvmYygNSNx4BzQ9uSr2zm9e+98Lbx
- 0hDwDrL1akJFsFvj4kasD78BoZD/zL2fY89kueAIKu/ZnsBnjX37r5ORJiJQ0YmV1s7Q
- 4bGiKs8hOMq9wHOFraJsu7OskpCIDIsB/T/SkWyAyy2kEDQC08/NBkkHMW1TmAez+OTT
- QBDSFevJmYglcheT4mnaGvGwmkIYttxYJKw8y6/qNhP/W4ksiH9k0PX/8sOeWcAfvwBw
- dN/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789078106; x=1789682906;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=DI508Ptwc/eAB9uEmrvbCuYFkMEIrjxgO9wmndM4Dgg=;
- b=P71905ixM0OTOoatKlwNBfsp6pedm6ZrcL2C4oliTs2d1gfzLbatYnJ5LAiMrPJDaF
- AZz5sapLyOFjDpOHG5NIl6JL3XzYNUdtRqGIKi7ACwGM5HGDHc44yhY2xH/8hvR+tu85
- NtILMzx7RQl5b7wrNgYilZrqqt+kLHv5oNVZZ+LfYBWp5m+qto+DuZBR0BPbQP0Q9vnZ
- XKJQLVS3swl0FdhlVXxD7lvDJQ9Tr7UlEruqcOXHlf7qhfpaJ7OfYcZo0HAFBg8UkIzk
- ajGNGTYZzkggB3fHAwTAynIfWHsZRXlpzTSuvim+K4OrP2qRO4sKiGtiYv7AOR2Maztk
- eLjw==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzgGQxjCW8uBcnlJRyUfVNm67MxLPfEYYYVIVtwOb0RNuRD7RZcnWnmcwEAdxQHhPlUyYNn5sY=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nskEZH6KomcfM5MBUBvJYgbK4Mpu1PCOyWAdTrfsVHA5laT3jj
- WHo0yHpC8/rM0NU6vOBju1VY9L6Wrvz3KoFKukzbWedpVHFXXQe1ixD0
-X-Gm-Gg: AYBFou3p2wQCwapSTcl7QgX3rIhp2cSUycHhT11mur4kpYST3IxwIUTJ2XwBuUiBPKl
- TabRU9hUzjXXSCBGkXQdekHf0WvB+aJvbbQBxT2NjkwPalkaIn8C04GVOtGPL+uPUIhLOjcCy/r
- pPuLv0IsegLPtvF5yQbHR4LUjXInwz5SlkWdPWsG3migaSH4VsAidmhBbD9nFnMWDqufL9+MwVK
- 2yvpkrUllC22PKy4EUVSau7AL8iI+dhDXJUROaVSFnbSmfWO2AQCHKpc3w4wGGeiO2Pc9cqLz4H
- goMveOhzS47q1N5HWGIrcW46kzrHjMMBdb6r/VHGelIWQdrYBPZ6YgwVM/2dVzfSFAJbctjm6SO
- 2nMa3F55Sw7ZK/x/CgNiiGzuJ7cd7hsK4oFDk++WQL3Ij6jfaBNuUmZmHg4jZR15vU3TeQqNvDA
- bzVhed/HXiXJsEntRjzuZNMF9ACu0vuM40Qi+HQdJgcVQlrpGrLG1Pyi5MxN+s5j+R43o4P0VW4
- mD3
-X-Received: by 2002:a05:600c:6290:b0:49d:2579:1894 with SMTP id
- 5b1f17b1804b1-49e619a047dmr8662795e9.6.1789078105987; 
- Thu, 10 Sep 2026 15:08:25 -0700 (PDT)
-Received: from deb05.proceq.com ([213.160.61.66])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49e62231360sm4795595e9.4.2026.09.10.15.08.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 15:08:25 -0700 (PDT)
-From: Mehmet Fide <mehmet.fide@gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Peng Fan <peng.fan@nxp.com>, Vincent Jardin <vjardin@free.fr>,
- Ye Li <ye.li@nxp.com>, Michal Simek <michal.simek@amd.com>,
- Aristo Chen <aristo.chen@canonical.com>, u-boot@lists.u-boot-project.org,
- Mehmet Fide <mehmet.fide@screeningeagle.com>
-Subject: [PATCH v2 4/4] test: dm: check the regulators claim their GPIOs at
- probe time
-Date: Fri, 11 Sep 2026 00:08:18 +0200
-Message-ID: <20260910220818.3093364-5-mehmet.fide@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260910220818.3093364-1-mehmet.fide@gmail.com>
-References: <20260910220818.3093364-1-mehmet.fide@gmail.com>
+ c=relaxed/relaxed; t=1789095617;
+ h=X-Comment:Received:X-Spam-Checker-Version:X-Spam-Level:X-Spam-Status:
+ Received:Received:DKIM-Signature:Message-ID:DKIM-Signature:Date:
+ MIME-Version:Subject:To:Cc:References:Content-Language:From:
+ In-Reply-To:Content-Type:Content-Transfer-Encoding:X-MBO-RS-META:
+ X-MBO-RS-ID:X-Rspamd-Queue-Id:X-Virus-Scanned:X-Virus-Status;
+ bh=rjgx2XkNogtGtBECWmlgfmP5xadX+LIm+r9XjAmo7us=;
+ b=Vg68rVbC5myYQ2FjOOCUbewvtWudtM0TxVW+RaALFJCfXbB7DKxAZVEK0X1d8AYWzRnw
+ sk4c1zPlXoR7kySrMoJQmqkYwT2THacK4ZnU5yX7x0K0rsFFLiyUI/d90T0+FIZlbkVsP
+ ECPL2W8Mc/MraoMn9tYeL+/bpFVKhfLca/z3wHKippuCF3WgL40V2p+DBhMUlAuK4sqHM
+ M/VTrjY8JVqA9y5L6zbEa38CBxPzr3YFDwXp045hTd3LR17dqg9UkOmmhOkYF7lbGF46L
+ kCL0tk96LXqnJtvGTQkRQ61rc2JhKxSntcn83m5UrQaQlrEpx5Y7KyT0M2LAJxSX7qw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ dmarc=pass header.from=mailbox.org; 
+ spf=fail smtp.mailfrom=mailbox.org;
+ dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=CorbLBoa; 
+ dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b="sJH/A46M"; 
+ arc=none smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=marek.vasut@mailbox.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp3.osuosl.org; spf=fail smtp.mailfrom=mailbox.org
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
+ header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
+ header.b=CorbLBoa; 
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=sJH/A46M
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A7274607C4
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 03:00:16 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B2FF1847D2; Fri, 11 Sep 2026 05:00:14 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BAA4B841F2
+ for <u-boot@lists.denx.de>; Fri, 11 Sep 2026 05:00:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ secure) header.d=mailbox.org header.i=@mailbox.org header.b="CorbLBoa"; 
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.b="sJH/A46M"; dkim-atps=neutral
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4hgzmr2wF1zKw1x;
+ Fri, 11 Sep 2026 05:00:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1789095612;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=rjgx2XkNogtGtBECWmlgfmP5xadX+LIm+r9XjAmo7us=;
+ b=CorbLBoa7DQVgWVoZP/9NUWbALPB+q9AGr3EV723vusfRkCMuZWZfK3mlaTj7fc57pTMX6
+ bsZd5gChR9/oCllgtyYFJFyn1smUM2vCNn5rz/FNB2tz05JjndthmGpWsE+78nAGFnio5y
+ TgQPwXOlyrxM0VbfKhV1DDPKvAK6DqFKwZeVYLsmO2cNPcOoSpYzbP7WfHz7ls1sOr7cMk
+ XUphP0mmjktuu6LXOamqIU7uGTsxzl/61E/OQdjw5vPfdS7OGDN4OhQeXHo+h/WjwhOgil
+ B43DT6809aWEcQjoZzIFMX+GheW3S+WBJiqoMCI3EhhDsVoZGbbOfg+gjYf1OA==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="sJH/A46M";
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <9236964a-d424-46ca-869d-9034d61f08ba@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1789095610;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=rjgx2XkNogtGtBECWmlgfmP5xadX+LIm+r9XjAmo7us=;
+ b=sJH/A46MgMFETcqJKGasHh51umZkoW+cYiCgbFdzPAm9/oZSV2yIf7wA93NBHJOR8WsZHP
+ Lgj5izsQoKxhhjFKePaJmh8Z1rZf+Yy2m8D/l4iTKTKUVPvluX8B1IeZK8oOPOG7XiwerY
+ kCmw1mNVgeAscP73WHBFoW3zMidhBmD+gVmAj8b9UiPO3M7iO1ObbGnaHAZKWc4TVX2j0Q
+ MZ/psjf9+J45ceYaon3cYL0Tu76eqYaemqld/il/AMwlhAlXjJbJ/BG08ptmA4ltRVFGeZ
+ rJk8SsxDrvEqNfophZjsSv7O+1fFtdtIGrvQeZ6+hPC7Q/uA2/fUAKLeudP+YQ==
+Date: Thu, 10 Sep 2026 16:32:49 +0200
 MIME-Version: 1.0
+Subject: Re: [PATCH 2/3] pci: pcie-rcar-gen4: Avoid repeated link attempts
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ u-boot@lists.u-boot-project.org
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20260809013431.444164-1-marek.vasut+renesas@mailbox.org>
+ <20260809013431.444164-2-marek.vasut+renesas@mailbox.org>
+ <ee1107a5-700c-4479-bb4c-0fc0d56b4f3a@linaro.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <ee1107a5-700c-4479-bb4c-0fc0d56b4f3a@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: xxhfcomnzu4muzrae9r4y1qzqdz5tu37
+X-MBO-RS-ID: db14f17e00339173b1e
+X-Rspamd-Queue-Id: 4hgzmr2wF1zKw1x
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -181,219 +199,42 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Mehmet Fide <mehmet.fide@screeningeagle.com>
-
-Give sandbox a fixed regulator with an enable GPIO and a gpio regulator
-with a voltage GPIO and check the two phases explicitly: after
-of_to_plat() the pin is unclaimed in the GPIO name table and its
-simulated direction is still the input default; only probe() requests
-it and turns it into an output; enabling the regulator, or switching
-its voltage, then moves the pin.
-
-The pins come from the pinmux-gpios bank, whose two cells also carry
-the flags the way a real regulator node does; the base-gpios bank has
-no offset left that the other tests or its hogs do not use. The gpio
-regulator driver was not built for sandbox before.
-
-Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
----
-
-Notes:
-    Changes in v2:
-    - move the regulator to c8 in the pinmux-gpios bank, a10 is a hog pin
-      (Simon Glass)
-    - name the node fixed-gpio-reg instead of the compatible (Simon Glass)
-    - add a gpio regulator on c9 and a test for it, enable
-      CONFIG_DM_REGULATOR_GPIO in the sandbox defconfigs (Simon Glass)
-    - check the simulated pad direction, not only the name table (Simon Glass)
-
- arch/sandbox/dts/test.dts          | 18 ++++++++++
- configs/sandbox64_defconfig        |  1 +
- configs/sandbox_defconfig          |  1 +
- configs/sandbox_flattree_defconfig |  1 +
- configs/sandbox_noinst_defconfig   |  1 +
- configs/sandbox_spl_defconfig      |  1 +
- configs/sandbox_vpl_defconfig      |  1 +
- test/dm/regulator.c                | 58 ++++++++++++++++++++++++++++++
- 8 files changed, 82 insertions(+)
-
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index a5d8d3977a0..b05f4c24c3a 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -883,6 +883,24 @@
- 		compatible = "sandbox,fpga";
- 	};
- 
-+	fixed_gpio_reg: fixed-gpio-reg {
-+		compatible = "regulator-fixed";
-+		regulator-name = "fixed-gpio-enabled";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		enable-active-high;
-+		gpio = <&gpio_c 8 GPIO_ACTIVE_HIGH>;
-+	};
-+
-+	gpio_reg: gpio-reg {
-+		compatible = "regulator-gpio";
-+		regulator-name = "gpio-switched";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <3300000>;
-+		gpios = <&gpio_c 9 GPIO_ACTIVE_HIGH>;
-+		states = <1800000 0>, <3300000 1>;
-+	};
-+
- 	pinctrl-gpio {
- 		compatible = "sandbox,pinctrl-gpio";
- 
-diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-index 070ef0b6369..59e08d03f77 100644
---- a/configs/sandbox64_defconfig
-+++ b/configs/sandbox64_defconfig
-@@ -220,6 +220,7 @@ CONFIG_DM_REGULATOR=y
- CONFIG_REGULATOR_ACT8846=y
- CONFIG_DM_REGULATOR_MAX77686=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_REGULATOR_S5M8767=y
- CONFIG_DM_REGULATOR_SANDBOX=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index c6edd9d2423..5ebbe5ca8f6 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -308,6 +308,7 @@ CONFIG_DM_REGULATOR=y
- CONFIG_REGULATOR_ACT8846=y
- CONFIG_DM_REGULATOR_MAX77686=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_REGULATOR_S5M8767=y
- CONFIG_DM_REGULATOR_SANDBOX=y
-diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
-index 9546fbf730f..57f915d4ba9 100644
---- a/configs/sandbox_flattree_defconfig
-+++ b/configs/sandbox_flattree_defconfig
-@@ -175,6 +175,7 @@ CONFIG_DM_REGULATOR=y
- CONFIG_REGULATOR_ACT8846=y
- CONFIG_DM_REGULATOR_MAX77686=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_REGULATOR_S5M8767=y
- CONFIG_DM_REGULATOR_SANDBOX=y
- CONFIG_REGULATOR_TPS65090=y
-diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
-index 0708b65ea80..7a755012795 100644
---- a/configs/sandbox_noinst_defconfig
-+++ b/configs/sandbox_noinst_defconfig
-@@ -219,6 +219,7 @@ CONFIG_DM_REGULATOR=y
- CONFIG_REGULATOR_ACT8846=y
- CONFIG_DM_REGULATOR_MAX77686=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_REGULATOR_S5M8767=y
- CONFIG_DM_REGULATOR_SANDBOX=y
-diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
-index 11f16f5d622..60b497f4888 100644
---- a/configs/sandbox_spl_defconfig
-+++ b/configs/sandbox_spl_defconfig
-@@ -186,6 +186,7 @@ CONFIG_DM_REGULATOR=y
- CONFIG_REGULATOR_ACT8846=y
- CONFIG_DM_REGULATOR_MAX77686=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_REGULATOR_S5M8767=y
- CONFIG_DM_REGULATOR_SANDBOX=y
-diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
-index c7df8571663..c85bfbfb3b1 100644
---- a/configs/sandbox_vpl_defconfig
-+++ b/configs/sandbox_vpl_defconfig
-@@ -193,6 +193,7 @@ CONFIG_DM_REGULATOR=y
- CONFIG_REGULATOR_ACT8846=y
- CONFIG_DM_REGULATOR_MAX77686=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_REGULATOR_S5M8767=y
- CONFIG_DM_REGULATOR_SANDBOX=y
-diff --git a/test/dm/regulator.c b/test/dm/regulator.c
-index 51007d4079d..123cee6f499 100644
---- a/test/dm/regulator.c
-+++ b/test/dm/regulator.c
-@@ -12,6 +12,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <dm/device-internal.h>
-+#include <asm/gpio.h>
- #include <dm/root.h>
- #include <dm/util.h>
- #include <dm/test.h>
-@@ -195,6 +196,63 @@ static int dm_test_power_regulator_set_get_current(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_power_regulator_set_get_current, UTF_SCAN_FDT);
- 
-+/* Reading the platform data must leave the pin untouched, probe claims it */
-+static int check_gpio_claimed_in_probe(struct unit_test_state *uts,
-+				       struct udevice *dev, struct gpio_desc *chk)
-+{
-+	ut_assertok(device_of_to_plat(dev));
-+	ut_asserteq(GPIOF_UNUSED, gpio_get_function(chk->dev, chk->offset,
-+						    NULL));
-+	ut_asserteq(0, sandbox_gpio_get_direction(chk->dev, chk->offset));
-+
-+	ut_assertok(device_probe(dev));
-+	ut_asserteq(GPIOF_OUTPUT, gpio_get_function(chk->dev, chk->offset,
-+						    NULL));
-+	ut_assert(sandbox_gpio_get_direction(chk->dev, chk->offset) > 0);
-+
-+	return 0;
-+}
-+
-+/* The fixed regulator must claim its enable GPIO in probe, not before */
-+static int dm_test_power_regulator_fixed_enable_gpio(struct unit_test_state *uts)
-+{
-+	struct gpio_desc chk;
-+	struct udevice *dev;
-+
-+	ut_assertok(uclass_find_device_by_name(UCLASS_REGULATOR,
-+					       "fixed-gpio-reg", &dev));
-+	ut_assertok(dm_gpio_lookup_name("c8", &chk));
-+	ut_assertok(check_gpio_claimed_in_probe(uts, dev, &chk));
-+
-+	ut_assertok(regulator_set_enable(dev, true));
-+	ut_asserteq(1, sandbox_gpio_get_value(chk.dev, chk.offset));
-+	ut_assertok(regulator_set_enable(dev, false));
-+	ut_asserteq(0, sandbox_gpio_get_value(chk.dev, chk.offset));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_power_regulator_fixed_enable_gpio, UTF_SCAN_FDT);
-+
-+/* The gpio regulator must claim its voltage GPIO in probe, not before */
-+static int dm_test_power_regulator_gpio_value_gpio(struct unit_test_state *uts)
-+{
-+	struct gpio_desc chk;
-+	struct udevice *dev;
-+
-+	ut_assertok(uclass_find_device_by_name(UCLASS_REGULATOR, "gpio-reg",
-+					       &dev));
-+	ut_assertok(dm_gpio_lookup_name("c9", &chk));
-+	ut_assertok(check_gpio_claimed_in_probe(uts, dev, &chk));
-+
-+	ut_assertok(regulator_set_value(dev, 3300000));
-+	ut_asserteq(1, sandbox_gpio_get_value(chk.dev, chk.offset));
-+	ut_assertok(regulator_set_value(dev, 1800000));
-+	ut_asserteq(0, sandbox_gpio_get_value(chk.dev, chk.offset));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_power_regulator_gpio_value_gpio, UTF_SCAN_FDT);
-+
- /* Test regulator set and get Enable method */
- static int dm_test_power_regulator_set_get_enable(struct unit_test_state *uts)
- {
--- 
-2.55.0
-
+On 9/10/26 2:50 PM, neil.armstrong@linaro.org wrote:
+> On 8/9/26 03:32, Marek Vasut via U-Boot wrote:
+>> Avoid repeated link attempts for these controllers. In case the
+>> controller link is up, this is a noop since the probe() already
+>> finished. In case the controller link is down, a repeated link
+>> up attempt seems to require reset of both PCIe controllers, which
+>> is not desired. It is also unlikely that a repeated link attempt
+>> would bring the link up, as U-Boot does not support hotplug anyway.
+>> Therefore, prevent repeated link attempts.
+>>
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> ---
+>> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@lists.denx.de
+>> ---
+>>   drivers/pci/pci-rcar-gen4.c | 15 +++++++++++++++
+>>   1 file changed, 15 insertions(+)
+>>
+>> diff --git a/drivers/pci/pci-rcar-gen4.c b/drivers/pci/pci-rcar-gen4.c
+>> index 34561406641..044bceee6c7 100644
+>> --- a/drivers/pci/pci-rcar-gen4.c
+>> +++ b/drivers/pci/pci-rcar-gen4.c
+>> @@ -112,6 +112,15 @@ struct rcar_gen4_pcie {
+>>       size_t            firmware_size;
+>>   };
+>> +/**
+>> + * struct rcar_gen4_pcie_plat - Renesas R-Car Gen4 DW PCIe controller 
+>> platform data
+>> + *
+>> + * @probed: Controller was started
+> 
+> This commit is not sufficient, please explain that only a single probe off
+> all compatible controllers on the system can only be done once due to 
+> complex
+> reset reasons.
+That is already in the commit message, this here is only an abbreviated 
+description of the field in platdata. Would you like to have lengthy 
+descriptions for structure fields ?
