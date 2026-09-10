@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E34BFC79F9F
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 07:59:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77144C79FB9
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 08:04:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A2B664077E;
-	Thu, 10 Sep 2026 07:59:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 68BED40A67;
+	Thu, 10 Sep 2026 08:04:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6tDEt4L07_0D; Thu, 10 Sep 2026 07:59:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 08E6E40708
+ id UzBxDMp8acjS; Thu, 10 Sep 2026 08:04:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 775E040A47
 Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789027177;
-	b=IvdRnyVdnVV+dYqZedKigwT4pUYM5l2yk4G4MM3t+tSXEiMq4gbeG+JHHLFqpZLFxrf1
-	 9iYykLZrkrSzbvsh0kRr21+WLB8Zj3Y7TToBnaYM4rL1y9MSMz2zb8Jy3Dwj7WwcbbOee
-	 2dMhSUgym+JtcGw3A7vXbaAc2nT/k7ld0RqIv5mSszd0fujYdlRG9NqDz7N6xjl5b5HPB
-	 0TdB2zPt80lslVJPylrubxOgY5/ajMjzMw/Ri5R02R4DJctAfCxhCBde3qh+xOyoe18gl
-	 lvKrSoGXPHCq3SL6V3twd1dTlipwSC3i1j+Kuvye0+egDmlU4tYzRnDOJX+BBnw3wTg==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789027444;
+	b=DCcKUAaqpbSWWFdPNLScKZaDTU3dhhHqIOclHaFlwTW9hxCYGqpkS3A49GqH2ejQDhVg
+	 w73xmsQX9GIvT9e2rJz8NwDE2DmdmejRGtPXXCI7Kp+MCNdDCYTpmv2lstMdBm7x6RIZz
+	 8kgYs+JC89Hc7BIi3GyA+d330mOKfvG7GAI6xGzV5yLk1ZQT1azUxejXd+DaoGnuSMuZ6
+	 jzdwKvBO+mQrVt0nFBiv9IqjnKf+DAxpZYqp2i6bZL1eQ4fMv3OTZcxK/BEvRpK6o6aKH
+	 Lth/pvE5V6ahnllnISfKej4thOxkwYO8n4oFpUbsoP5DucQdbyaSZv95lGO+xfd0/7w==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789027177;
+	c=relaxed/relaxed; t=1789027444;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -45,51 +45,51 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=YR69Q0ylEDZCXKigeeo+tLoo4DfWbYmA+w70lLK8xl8=;
-	b=Ne9ukvzRUg05zfUV4oDsFMph9OlB0W+yHArj1WQdWVbiZ6ZKUuy28FPBGSOP5RKLlTeJ
-	 KVCBJZ/Yf19oXYLu/zxb5p+BSRBvmj+APaZRSS4+z33EVKuqEFMqvmonKR3k7GnDYfU8p
-	 nLBIPMZZEZJz6BqPqiYueACkKWAfLj08NV3xNjF/7oO8bDF/n3ruxIxEjszURPnq8nUCI
-	 gEVPbTWTcCTQXg0HW/oU9m5H/srKKHt+IbNER0ljkSkzqzADZv31isZgSV8cUXCsPJ5GE
-	 yeZWhekvozEi9tubOJ1TTUFgYHZnaCddyJW+MbRk2UIjABSTmVSA4sXZBNBHjC2oyDA==
+	bh=LPjkDVqerL95LDSNhILgodTTwnHbCV3oAx4o1Oi4ebo=;
+	b=AFpVI7Ws7tKcCa2zZQt9vPI1mMs9MReKZLih1h+vTjL/ZuUdTYv6FZ4N48MvkB26uwd4
+	 QAuxbZVZ/UpDrfTvELp5T6FGk53Fo6sKHGwgNo2Y/kwlCFjwqNhbgOK1kCi+DLG9k1ixo
+	 ZU9RsBzFCqlLupysgBZ9I5Cl8jP9u2XEYfJrKcCYeaPtvjO5pt/ew4FyfiyPBKlUNY3gz
+	 TfCyi3WJlfDXGP0LArzHPQtrS7SQp3k08ztmsAN2M0ovhIYAgRS6CTtf3XfxCibjOjESI
+	 pJPJpcK68eIcysC+mkOqUjOspB7HrCtjgNjIoGIVLhNzr7+qVJPbODmAl6to19eip9w==
 ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789027177;
-	bh=YR69Q0ylEDZCXKigeeo+tLoo4DfWbYmA+w70lLK8xl8=;
+	d=lists.u-boot-project.org; s=default; t=1789027444;
+	bh=LPjkDVqerL95LDSNhILgodTTwnHbCV3oAx4o1Oi4ebo=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZfqbN3mF2i1O07vm9aQtWQRLq2quV+5qwShalJxQ/4D6l++OxIbFW/USEY4DuVB01
-	 YV+fmlWxZwhCUaqISUEoEk59NonaCk395wBdrg1JSPFrCiRVGVGKCfeXQBbpoufp1R
-	 8Gyv+K3zzlCaJgLeltlT2f6kWNP8u6XClXust7+zVh322Yoa6lNXdqxbbbgixon10u
-	 ZxQL8xny0DOIK60WsouN9l04GB95rFCxgv+QyheAhOtrulZBOCZddB/K56clb4Avj0
-	 c3k5XQhPf1Omq9oMEWT7Imhn0SSJMHM75FZXZiy7q26Sihg9sxT3d+wSqsCLDSuo8P
-	 95ygriVonxCoA==
+	b=qrK/ijZjfGUx3SavTp4rPgAQm5blN8GS0s+WGX0AXfbnoneD/sf68lyxam8o+6X5O
+	 WuPi/FVk7Xxz/Z4+JV2RhyYFtJ6yOIORFXZLWxIjAZMsmRlVJBsbQCFtb5XvCbn+jX
+	 yxcKwgo+o43EwydFB2rplKDmu0RjzcB0snvQ/Jvd3s3k53x923g3/0wO1ellhl4n3e
+	 U1MGqKQRxIqYDsFDjn9GR+bUS83Aex1MDHP/7M5X4nJJ/q0PeYPLPLHIe17W6mrXxm
+	 IflJQVDT1ukMSnDyIkwYFI97EDCOPbvpah9Xfiu91k1SYJfYKK9i4Aujc/Nq/xEo+Z
+	 IsZPnr5AZiheA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 08E6E40708;
-	Thu, 10 Sep 2026 07:59:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 775E040A47;
+	Thu, 10 Sep 2026 08:04:04 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id E49A414C
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 07:59:35 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 271D414C
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 08:04:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D64A6401CB
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 07:59:35 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0D428401CA
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 08:04:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id t1lk0lnpG3YE for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 07:59:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org D6FBA401B0
+ id ViNGH-dHCt6j for <u-boot@lists.u-boot-project.org>;
+ Thu, 10 Sep 2026 08:04:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 377F7401C1
 Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c105::7"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789027175;
- b=Iggrcqr4aWkKzVH1FVvmsvNANbEMbvG2XDIs63PdeqoZxeC0U6WsTA5zJuodf9q7EzVn
- I7l5KB6J9ogFR1qwCfPpsX7cZAwtXA2eU+n55CONhD+wzewZDu3gJRGyumzM12T0txt4a
- ArHamppkyi9IHrCfXnFgXx6cu3wD2ULgGmNUp1F5jAtSJeQ4j78zcgzMVOfppUHHPo+q0
- rvXikpiePqMi+vTe9Z3/DmQtPMN51xTut925tb8RKv5qGraa8frn2c/YLiS1+j0t7RjZY
- Cd5a0Y9f8HXtL92egls+B9YKPnQy1ahQcXZMx8AIAI0bWB6ygtg6bSAtlLPY2H6yjKA==
+ smtp.remote-ip="2a01:111:f403:c001::2"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789027442;
+ b=j3xz85j+9/CBeYdJp5cILlhCGOpK0NnYKHKeSMJfhc/spRvJ3DR3vBw+Xi5f76wzMVw3
+ HK0qe5FDDkjswBs451rQKnvU9frapJfLBgxcH9Tu4tiIeYZDQzPKqETi7v7nzcJON6czb
+ zUlGofCHo/uFIrd64USencl2Gvg4fpWfgOzt9Zk4q7sZz/wY2wVd+TrrBvmlna/kgd3Vu
+ evr7goGRR6hx19AfnjU3rx0bx297o/Sey5YkkFRcevMA/Fa+mSrH3+sYvtSwOcsdLBS48
+ +m/SfRRyd3vXspHFkdnGK08LVfcHOAXDrB4BfTUsN36DijnJ9tltkWPDlOU1CoL+M2A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789027175;
+ c=relaxed/relaxed; t=1789027442;
  h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
  User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
  In-Reply-To:Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:
@@ -107,67 +107,65 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
  X-MS-Exchange-CrossTenant-UserPrincipalName:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=YR69Q0ylEDZCXKigeeo+tLoo4DfWbYmA+w70lLK8xl8=;
- b=CPCTuUaUb7WVSShQxBdgFC4cW/Mi81p4hoyU96X3pUg+X9YMDL912e0MnQoZPzcwUhV+
- 17zPp8VrXV1Agnk4PdZHaAI3Cg3WjVsERUekCayzQEHiAtrDVCpF35e1IZKaNCJ41nwYr
- V4LVdc25rg5QEOjPWoZWkAJdYvAEcgaQhgc8pH0sdTIQmagJPQ9sw77FwBtPNM+/wyuUJ
- crjkd4DfuQ5PduuKf/fCBf/6+QM6X4kFfxHbM5SbAus8z+hHm6CblHENQQxSN+63hxRAT
- B16gsENqaVll/J89I8VEVwegTgIHURzlotuygvBgkrKLr2nThTshCXrynJC+wMudp6w==
+ bh=LPjkDVqerL95LDSNhILgodTTwnHbCV3oAx4o1Oi4ebo=;
+ b=Bple2o6WJmPSoOSoCZk2ZGX56OkDQCZvHGx4JOTJqVVub+KiGtKSrj9kTc6k0mo+CK+4
+ jhyHvB52yNq9J/TdTfaENCt9fi2ygW0dS889OSg8g1vmABl83NS+4DdeITSaOxwYu6NrS
+ lDjQD2V4BefZt0uySqZQJzKsar8vB0OkPl+lnenqF5MIyYGzNIiwsFioxZTH9n+brxRU6
+ ESQfcLnSV3zBmxCL35+lxC2FGO71qPCT6xXhB0nbf7PMvokFyZejiWe/R47mu9eJJKlFC
+ e93zVXTgb+r2SRE/FXo3l95UFfig0rtn10DURksVxwLFGIV6lDG5KgUUjyk5WRN2R9Q==
 ARC-Authentication-Results: i=2; smtp2.osuosl.org;
  dmarc=pass header.from=amd.com; 
  dkim=pass header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=s5BksXWn; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c105::7"
+ header.s=selector1 header.b=rffINdjw; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c001::2"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c105::7;
- helo=ch4pr04cu002.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c001::2;
+ helo=sj2pr03cu001.outbound.protection.outlook.com;
  envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=s5BksXWn
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D6FBA401B0
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 07:59:32 +0000 (UTC)
+ header.s=selector1 header.b=rffINdjw
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 377F7401C1
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 08:04:01 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AnZCC5gD2ZG4OBoFfnTjbPn/6NDyK7BQPos8ClN2PETji1atX0DsHs1llj0UkhCRcwWK8MyvJGy2u2givVzQTo9hbn4l4p0m5OTD1A9bjlYKRHkf2S/Rkk5efIR/SrdPDA1Vq6jEHXJ204smdadXPG3HS+FoIjtCAs0ykgaH+U9f04+h5RibVps9wg0zDvPh7GJ2pYVpSRSt8dxAzaCTqI4BWxMnuPfav49tC7kOxTvBCQFk/PQIjj+s7PedBUWcuG00gQeJzV8+nEOzpGMadBwDwZlgv5q+7SAbM82eTjIXum+kSTNsf7f6XFthxoIbd4+tH5RLVksMiL/3ZTJMZg==
+ b=NsNnOabiDRNzmMfUBkJlVPknmW2Lpyf2pfrP1hNb9zp1O4G4HvpwtflnqDx/A8a5nDX8YzL9KV7kv5eEZIFFrB+hXbzHYcKMy/EDC8fSub4nNXB3yqkVPkvDviykb4MuIeVYzyhZKbKTIVyvqJ9LfEFmM+w85DbuAeRjUePov5zvZLe/ShkVoBh4WCWYuM+uSvNFrgaT/pdI0SgZ0hHb/VIJUPnV30Q9CMGRbi1kdZLqseq0sW5LMs2W8T2CzFB6SkUfpNZXlM3/S/Qrf84v3C8ACCOE8gsSmd1HrwUTDyS07dETAqMI8jOuVr+N+rFkKSGxvQIhwaiUAIwd0+nHCQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YR69Q0ylEDZCXKigeeo+tLoo4DfWbYmA+w70lLK8xl8=;
- b=UzNPTnNubv8XwmHZ5frZwvcGCeKbs9A0ierSn5/CoCQ8nikJw5M9eiPEGUJvMlBipC7Msy1W07laz1SrWspMeIBSyliMtXKq8LWw5bwi3Xl8Dgp18PtrOA4VY8Btm42NxzmWwhDL3EciqTKKjlaL+0OYwT1gDma9GeUBFP4Snc0PyYZhiZsyX+ySzDGYtQ+2Veon0GuHOzfJoEbzgaeRBuSqJWmJTuzncGG4bbc9SJiZ9GWlOzhvFqXb4CSWU2OmkIeLBZMTu58SKhdydt+0nDK2/U1sIA4PnTK8YqvLrgJmWr2dECusNv3RjLqwzGr5OG3W9e7INSoal+3qoszy2w==
+ bh=LPjkDVqerL95LDSNhILgodTTwnHbCV3oAx4o1Oi4ebo=;
+ b=G6ZXc80kRhnI95+rZn6jrVUwrB61CBNdAXmtoR62YuJeXLw70hP1y5brkhM+PGCib/lqLmyfoXgujQXdYeSJVZoyrUJlmCh7P8Uv2sAzz2JX85H46HshLtZOgX/bqdpYhquNvu7fHShVpjyh26mlVoXv9h7YgBm6BB7DL4Xx8snCxHLLXa1fB1IQoPlG00jmi+9hd8u8OWj/2EmJoPMqdpmENIdpYOitzH+ipEFQCbmsiz7AZP0YUbwVNVVfA60sBAQbAVIL4lN1Q3MK17dD2VP0gnh5w7stY19BOLXbW8jFssq1LtjR27JhXl5vXK8RpbydFUDCU+Ui4lP3koNhUg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YR69Q0ylEDZCXKigeeo+tLoo4DfWbYmA+w70lLK8xl8=;
- b=s5BksXWnVr2zuqGaqscNXbFHsePzNJKJ2leeQJH2Yq2rUofhouJm6ksfWqrT8i5qpRdtuiMWrm6aQsJd4DzklNsAKMPdfIkLYiLuxKZjYEXE3prmr/Nv47C2Tm8bWkEgpsEi+ZTFQRVugC+BkehWv81QIOJIe9Cq5ovft7A6k/U=
+ bh=LPjkDVqerL95LDSNhILgodTTwnHbCV3oAx4o1Oi4ebo=;
+ b=rffINdjwdtJP3seyhM0zTR0PzUAqMuPsdesLLqewrUjPvViAAxRAPd8oBKxycMTNmSyVxg4dK6EYamSohMTO3P7GybTMpiBhC9dQ2khe3fLgcjcQVlzvUSRlRCsQ935bxmpT/kXfyZSLEzzyz6kF96UWsutnfNCVE8snOqdZFlw=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by DM6PR12MB4337.namprd12.prod.outlook.com (2603:10b6:5:2a9::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.10; Thu, 10 Sep
- 2026 07:59:29 +0000
+ by SA1PR12MB7197.namprd12.prod.outlook.com (2603:10b6:806:2bd::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.8; Thu, 10 Sep
+ 2026 08:03:55 +0000
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287%5]) with mapi id 15.21.0406.005; Thu, 10 Sep 2026
- 07:59:29 +0000
-Message-ID: <0dc17a22-7cae-4818-93aa-6a8b32391bde@amd.com>
-Date: Thu, 10 Sep 2026 09:59:20 +0200
+ 08:03:54 +0000
+Message-ID: <2ec7a375-ef8c-4ecb-ad1b-cfbf3ce12b96@amd.com>
+Date: Thu, 10 Sep 2026 10:03:47 +0200
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/2] board: xilinx: Use strlcat() in board_name_decode()
-To: Maarten Brock <Maarten.Brock@sttls.nl>,
- Sriram Sriram <sriramsriram@linux.microsoft.com>,
- "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+To: Sriram Sriram <sriramsriram@linux.microsoft.com>,
+ u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Drew Kluemke <ankluemk@microsoft.com>
 References: <20260909192047.217421-1-sriramsriram@linux.microsoft.com>
  <20260909192047.217421-2-sriramsriram@linux.microsoft.com>
- <GV2PR05MB1194168C12157621CC125568F83BF2@GV2PR05MB11941.eurprd05.prod.outlook.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -214,76 +212,76 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <GV2PR05MB1194168C12157621CC125568F83BF2@GV2PR05MB11941.eurprd05.prod.outlook.com>
+In-Reply-To: <20260909192047.217421-2-sriramsriram@linux.microsoft.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VIXP296CA0030.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:36e::9) To LV5PR12MB9779.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1PR0102CA0095.eurprd01.prod.exchangelabs.com
+ (2603:10a6:803:15::36) To LV5PR12MB9779.namprd12.prod.outlook.com
  (2603:10b6:408:301::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|DM6PR12MB4337:EE_
-X-MS-Office365-Filtering-Correlation-Id: 70f01da9-39c9-41e1-d9ef-08df0f11711b
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|SA1PR12MB7197:EE_
+X-MS-Office365-Filtering-Correlation-Id: b38e8833-d94b-4720-98e5-08df0f120ede
 X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|23010399003|376014|1800799024|56012099006|4143699003|11063799006|10067099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: DKHbF+7UPi5/KcHHFopYPUm2mmOFWbgzNS4/SdRV0wCP9cQdnbBe+ZgFFqzFGF/rpQTWJwgvpsYpfSDhZ81Z8mLGgjNCJHUePD0QIuhvixFa3J/ggQbqP0d+XMCOmriDljbOsvmlVagnfdTAibUqAvnZgt+lNYUXY4AsXwCTUJ8YwmzR4y5bhpN+XXAqomEj+88TFjCxZ172WbIfBytH0Y3ZWh5B8erhE3mo/XlVVZN491sG2cmZARYiiD9MuOGtfkXvhJUsnHfKbV6YGZAZrPBVaHn4exCBsdC74lnbU7PYTIg+YeE0U0lE0kbzMf23Kk2dQzjemYybIfnsTrSvSu4OLJOdtxprVxWOMxNb6lVDN9scmOhiORN4+eA0Zs9+ehnwuyEHbh5MIFvieYMPZLguodEjy2Kj/F9xBCRVbkg2G+uVSJ96NznArPC9xHCoj0Lj6A5TuD4MII+K/rUo53nKYZnOY/NXrInZNMH19AwJQ/A350SqA9QgZtH3Q7LLTAyU2IzRW+0wM1uvfL8BadMfBRFha70BElb90EHYmfdhMVmOcRHafEAPuJ0ezXRShYJfC8kwKhqexuDroIjZkA2dcY9xt8BHCZjLUR3SQCmdxcIXBIPgoRr53nbZzIUYEmd7y7rteocc2UMiWJoXa8Fcvok7vcI83CyPgdzCIx4=
+ ARA:13230040|1800799024|23010399003|376014|366016|56012099006|4143699003|11063799006|22082099003|18002099003|10067099003;
+X-Microsoft-Antispam-Message-Info: sFKukTNsNMkPcVrq23pkvnUML8QWpQNKkWvg0SZc8z+Xsfpzg3ttjBVCRHEU24wZ0P4CUAgDeEmsqPJrzy4B6xXQUC1Kd/aJKNt1paDt5fp0eCyHfWC8AqH/DLwtLkw32NPyPqDuqiXBtVO/lBx/wRC7ax10q7mFGustpidpAasYdD9tad/oxaW6omzPDxTzNY9Dp27uUhOl/CQiV/lWBKR6sa+tzH9f5G3T01QzX+oOszDU9z35fzl4V2iACPgy0Hy5GmAUj/HyGhxcBPyQUR5FVYPrkxJvOmBBayH1b5EwG2kxjKOggamwGc8Panm+DgoNrtFvy93GlY35grh3XuXt5HF7u7ix7jGu495nn8ujS5Can1A/z4aWN8Qe4T0WGamANcbkNkdtx1FQiT5thN+nRusxp7eZ9qarG5TL6a7VMgWjOxh50tTD9oJeu2dMGsrpb3rhptLiMJ65yXBaD1cNz5XjN3PrdzpALC3glkRDyvmJMiZrK/f1H+wZ5RgeHUxaWN5iLyyRueprT4LXrKp1A8wWzv8gdLdoKKMbEPujnKCBRbbZiAQj0mAs/r2aUnOhF7jvFgVruIGL0cCXHLv9sIdHueCn8jL7ICR0yQGtTShqn7f3orFxq78HzpQzKTmhU4XQJujptKFWH8Hx+uMEDd2OoWVnT3m4JSwL2i4=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(56012099006)(4143699003)(11063799006)(10067099003)(22082099003)(18002099003);
+ SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(56012099006)(4143699003)(11063799006)(22082099003)(18002099003)(10067099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?N3ppVkNibWo3Q0g1VHFJamorWkdLelRjYmtTcEpWcUovZU1vaHhjZkxMZXY0?=
- =?utf-8?B?Zy9RYWZCVnNXNVFMT1puVXI1YXFQTzFjYTVHb3E5elpBMWFkTTR0YVQzU1Rl?=
- =?utf-8?B?aTJBRVdEam16Uzg1NndMYkVMbWU4RkNidlJSZmp1eURkZTJycTdYV0FrcG13?=
- =?utf-8?B?QWNVMml6M0dvSlpMa1hwSE0vWmlqQ3RlNWxqR1E5YURxcjI3aTB5Qzl6WjdT?=
- =?utf-8?B?U2xXTFdIejRWUGRKb21OdTEvSFJ1NzV1NW8ySzZHZmQ5eXJvSi94SzdyY3BB?=
- =?utf-8?B?cUVPSC84c2g4MlFMTWFTRytNdUZZNnVBd2VERGVwQXhWV3pjUVZ3MHFLNXhv?=
- =?utf-8?B?SWxXYUM2eHYzU1loc0tja1AzMmVtWDdzTVhhOFBld0Fwb1JPMmFoSkVHcG5N?=
- =?utf-8?B?Znp5N0xwMkhndlphMEFQYmpVWGRFYkgwZjFkcVlWczZwRHpqV0ljcUtLTVFR?=
- =?utf-8?B?bG9VZUVLM2l5cDNtYmxpa1U4d0tnbnJOR0NLOURiZ3o5eVYwUUptRld2YVRk?=
- =?utf-8?B?elRFbWI4MjFpVE9rVHFVUTJoWkJFMGQ4aHF5alpzcXdpQ2FKRXFZanRvVzJy?=
- =?utf-8?B?bUsybGhVZmY1UWxaU0FMUU5FVmVSczcyZmo0eWRubGhzRDViTE9kSFQ5VThT?=
- =?utf-8?B?SjgxdFZ3bkVueUpKRy9vUHRaK1dnL2lTVGJ3MUU1ZXRoSGk4cTlGMTZtYkM0?=
- =?utf-8?B?VHBxTEl6TjhUbEtxbWRyZ1RyMndFblI3MHJIazllcmx4OEhwb1piSnc1OVRr?=
- =?utf-8?B?bkFGbEc5bnlreStaSFNuRHhlV01zejhHeWhNQ0xFSXBkSVFFTUw2cUJFdC9I?=
- =?utf-8?B?WXd2bExHaWwyeFZ2MHBnSkV2YVdLdUR0U3EzVUxvS0ovSzhsZ25LVlNuWkJw?=
- =?utf-8?B?Szk0RnNmaG5za25ISWNhL05xTjZZSjVTT2N1OE1jeVA4N1IzWm9aUXJOWlpk?=
- =?utf-8?B?RzJ4a3hlaVFKa3UxVWd3cVpZbWNTQThrTkVkLzdpNEJrMmxZeFVSTThnWkNR?=
- =?utf-8?B?VzJ0TnZudzJ6WDBGclRjWHp1K2Z0c1oxYXR5L2hjYlU2cTJzaGtITXdKaFQx?=
- =?utf-8?B?dlM1M2ZsYThvanE5VGdPeDd0UkJlQVB6OHV5dERRZE9ObE1rZm5sYjlsRlVI?=
- =?utf-8?B?ZkxoUEQvZTdtL0VLSjRENVlvVUoyaWw5M3c0ZGFucXptc2Z2dmtSZWxtUTJD?=
- =?utf-8?B?QjVpVVFnaG9JaExWck5pd29jc25tLytibGdGSEs1SzVSUDhzQjgxdzRiMmZs?=
- =?utf-8?B?Tk5XdjVNc2wvZm94alMvckZGNXd2UVRPaEF4cUdUdVZuWkJCeGlVYXdMVUla?=
- =?utf-8?B?bTNxMktXelZxY016dllveEZ1dVJEOC84WllkVHBhWS9XVWV4SEFrdE1kY0NK?=
- =?utf-8?B?NDdld0pGSWI5Tnc0V1YvZ3U5VjF0ZFVYN1QrSW00dlVaa2N4RmZHYk9Vby9r?=
- =?utf-8?B?d20waUo3OHYrS04wVEJoMVFLMFYrM1N2ZzJRdEx1M3FRc0dUckhzTHhrUmg0?=
- =?utf-8?B?aFpOL0x3VDE2YXpDRkE5Z05adExEUEdTTEQ1ZGkreTAvbGROYXdpS3cvdzMv?=
- =?utf-8?B?dzEzQ2pTS0RGUVFWa1FXSy9oNUFWb2o0NHRJeHRYYjNML0RpNmRQZGsvSjhq?=
- =?utf-8?B?bTRtRktlUFhOdkw1V0o3T2RzeFB2QjZ6NHFGL081cHNjS1BUZ3VnR1ZNZWZM?=
- =?utf-8?B?bHNzWXpMUTZxYVYwVHk5RXVncVdOcFVzd3pnLzQ1Q2xvWUcvd3Z2NGswRzh6?=
- =?utf-8?B?ZHhVTXBEUUUvRlJxRWFEN1VqMXNQemFSUHY3YkFudG9Sc09TMEd5Z2MxMnNV?=
- =?utf-8?B?KzhhZFhUVVM5N1BCbGZkaFVaWG9vNG1ISzk1OTlsdURkY1JybW4veEFJT0x6?=
- =?utf-8?B?VDZTbWY3dW5DU3lzQWZGNUpYb3ovOEtiYUFUK2krRnFLQnFhZFN2VTNVWGJz?=
- =?utf-8?B?OVhyeWFmZzJXV2JHbkJnd1hxanF0bDhqSW1NOFd5QWlJaTBPUURHMVVRMHJH?=
- =?utf-8?B?R2I1ZjFQR0Z4ZHNTTmNDcFJKUXpUV0E0REZFek54NFJSL3N3UXo0TU1zWE5N?=
- =?utf-8?B?ZWRYNkViWGxuSTNhejd0SGl4ZzdrbVVoSVFreEhSaUpydElxSlBiY0s1YTdU?=
- =?utf-8?B?WWIrd080VTF4QlZjSmVQOFNDUUw5NlpDbitMaktWQ1JGR0ZQTHNoYVZ4d3Ex?=
- =?utf-8?B?ZDBoZlc0bGxNUGlGZnFaek1lOFpZWUwxVzdtZm5ZSHpjZ1hIUWRoNkxaQ2pj?=
- =?utf-8?B?YXpxMnZma1VjZUwxVmR2QW9pd3NIOWFLRldRR0FqZXFOckU2aEZXT25xNFN0?=
- =?utf-8?B?c2RLcjFBeVhtMHlJV01yR2kzMzFhMllmMTgxUlRVWG1nQlNoRXd2UT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?azJwa0NNdEl4Rzh2bG14bW5ROG1DTXloUHpDZXR5M01EQjdBVWtWN2s3NFF3?=
+ =?utf-8?B?M1FqRktUYkdkMVdlY3p4REZVTFlXMzA3b2xDeXBROFJDUzVIRnViZTB5c2R6?=
+ =?utf-8?B?d3JVeUF5eS92RUVseGduMXJjcS83TVpuQ2FVM2RZQTQvU2tzQWFYQUprNXBL?=
+ =?utf-8?B?a3puK3BhNFZoQUJGaUpzQi9yNy9zU1VFNVExOFJ5cUQwYnhiNFJPMDNLSjFN?=
+ =?utf-8?B?ZlRLV0thejE5emdRWkpxK0xJc3hhRURqZm5iaStrcThvYXFKemRhcXdzYUY1?=
+ =?utf-8?B?Q09yaXA4Z2o1S2JuQm1VOEFZYStDdisyRVYvYU9qZkNQLzJ5WlF0cUZZbGpt?=
+ =?utf-8?B?TCtjR2Y0VVArTisrazRJQmlpN3hSSXlkNmZFT2ZMcDJOYVlPTDJlQ3REUzlW?=
+ =?utf-8?B?aG1SRTB2VVhKQmtLWTZTT1ZaWnpCYkdqeWkrUW9GWEF5QTN1S2dSS1djdXRO?=
+ =?utf-8?B?dVNPYllENlFnZ0ZVNFdxWG1wQmtqMkh5SGdycmxDeFR6TTZha1YxWjZoWHZx?=
+ =?utf-8?B?TnRKcUF5b25uTjJCKzZWaFJrT3haUDBzUzRBQmsvOEwzY0EvV2J3K05rSER1?=
+ =?utf-8?B?VzlUVmk1MUFKRURab0QvKysveThPL2MxUXIyR3dYbFl0b3NwdjIzUDY0dnVr?=
+ =?utf-8?B?RVNscm1KU0JMY3hrVXdMdDBUTFpTb2dtQmNwcWp1YlNmM2tYVnVtZVd2Y2di?=
+ =?utf-8?B?dWhhSUFTbVhsSEl5NmRjWkk3VVpHT1FWTVVCTVhlT1NLNjRMTHZEd2tFSzE1?=
+ =?utf-8?B?ZTVla0R3ckZybHdIdEhWM3NaaUIwOXgxYldsRlJLNjBTREFSL0FnMi93T2Zn?=
+ =?utf-8?B?YmR1N3JLc2JNRjdtYjlCNFIxNXRzU0xOKzRMd041WkRrQ0lTR0pOUUt2bFY3?=
+ =?utf-8?B?aTFQMzF2VC8veVY1VHY1UENLYXdyTHFGVmNlanN3RDN4dkxBYTRLZVBjWlVo?=
+ =?utf-8?B?UlVzaGwxZFQzbjhYZVhnNG94UnU5eGR6aEo4K3JlRncxSnk3UmtRTzlwNWF0?=
+ =?utf-8?B?VS81a0NEazd2UmhuN1h0bW9QREplT09SeTBwWjhOcEJVdkJQZFg2clcwcDZN?=
+ =?utf-8?B?eDdVbExDUWpPNHdoMUYzazdjak9LSWVVbkdHRkRxL1k5a1pvWkxXOG9KT1g1?=
+ =?utf-8?B?NjNzY0R0bC8zd21rQ2JrY211cmRXbllNUGNuZG1ZYzMwWEtBeUI5bnM0REhE?=
+ =?utf-8?B?UEZQWDVYWGtycjRsMkIwdjdCWUk2TUw1dkFLa1NyQ1ZmVWg0SThIeUdYM2Iw?=
+ =?utf-8?B?b29WWVgxbU83L215WlBoczlrY1NRVjVBdXo2amdtT1FVejBTWGZtMWRHTzI1?=
+ =?utf-8?B?YUsxSXVaSzdFUWJDQVFGckFBZGI0UFVzVExWQ2hlVUpmNmFoc3BwNis1Qnpu?=
+ =?utf-8?B?L2VvSnRyUDFGNTREVVNsamFxTzNGR2J2K3o2aHJpTjZhUW1wcm5VUFBIZHNK?=
+ =?utf-8?B?WnlxL2FkVHhqYkkxNXExZWpwUGdBTEtTQ0VNbmxtb1pLQXBzbDkwdEpwNS9J?=
+ =?utf-8?B?eHlkbld3aDBtWmg3T1ltN3NXRUhvTm9sYkd5Qll2Q1VDc0FuOWx2bTRvanRo?=
+ =?utf-8?B?eGJya1NoL1EvNXJySHJJc0RRM3BUR1dWVEJDeEQ1MG45T1UwQmZzUWpnTXlk?=
+ =?utf-8?B?SDUwOUNkSjVKcHNKSFhNNEtJUFNkS21SWHV6Snl6aXdzVXc4aFZzUDhkRktn?=
+ =?utf-8?B?TVFhM3lTeXJadkY1bnU0OUJzVDVJQkNDN1lxUHVVZVROU2J6dnhtVlZzdXlq?=
+ =?utf-8?B?YmVvYXUvSlJaSkdVVHZyeGJ3dXp3dlc3dUtHYmxxYzhMUTdvVkVOQ0VFOUFQ?=
+ =?utf-8?B?QXRFNXJtbDZ3cHVnNzB4WlladkcyZUFQcmozWU9QZnB2MkY3NG9VOXNYTXgz?=
+ =?utf-8?B?N2pVdnhva3U3WDIydUhTSmNYSXNlRHlYQTFsRTNaTHRnVlJCc3pEd0hRWlRr?=
+ =?utf-8?B?TjhmRCtSaTJ6aSt3TlA3OGMxUHlLMHVPd1NVYlRINVhNM2lwbDNFZHpTZ0Yx?=
+ =?utf-8?B?SThhNWV6MGI5YklVSEhJaHNQeHFNVWhqWXM5ekljR0s3aDZOb1FabWVEZENk?=
+ =?utf-8?B?citPVnYvaUVlTVg1dlNoeDJ5U1N5cXB2NWVOa0R1V0VuSU5XbjU2Y3FsNkxC?=
+ =?utf-8?B?dFlYQVpreDVrWXJTeGhmWm1ndTh0TnM2UXJnNnplNmdGN2ZyRExMSk55cVFF?=
+ =?utf-8?B?SVJwK1VzN2NWYXlXMmVseThDN1lETWNoMEZhK0g2Y0hvRnhCdno3bWdMay8r?=
+ =?utf-8?B?OXdLTnRaQ0U3TGtob01FWGFiN1RJaUU0SDZRdmV3eUJXTHIra3hmNFdhS0Y0?=
+ =?utf-8?B?SHJVTW5uaXJ6THNkSERJa3JaVk00enh4T2phTUpCVHRDaW1HcERYZz09?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 70f01da9-39c9-41e1-d9ef-08df0f11711b
+X-MS-Exchange-CrossTenant-Network-Message-Id: b38e8833-d94b-4720-98e5-08df0f120ede
 X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2026 07:59:29.8108 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2026 08:03:54.4851 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lacpen7j5EXX94fap5f+QX/OxS+4ryVs/T9ZBQ6ehinPu+dYG7nfsm6oPbNcr5L7
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4337
+X-MS-Exchange-CrossTenant-UserPrincipalName: sxY3QLGttO1F7LDpP//kNG9EWGTRBRYoWM3Dn/eRisWB1Y37L5TaEcw0/mr5LfFD
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7197
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -299,15 +297,139 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
 
-On 9/10/26 09:56, Maarten Brock wrote:
-> Hello Sriram and Drew,
+On 9/9/26 21:20, Sriram Sriram wrote:
+> From: Drew Kluemke <ankluemk@microsoft.com>
 > 
-> It seems to me that the limit of 50 for MAX_NAME_LENGTH is pretty arbitrary.
-> If you expect it to easily overflow, why not make that larger as well?
+> board_name_decode() assembles the board name into a calloc'd buffer of
+> MAX_NAME_LENGTH (50) bytes using strcat(). It appends CONFIG_SYS_BOARD
+> and then, for every detected EEPROM descriptor, "-", desc->name (up to
+> 16 characters), "-rev" and desc->revision (up to 8 characters).
+> 
+> The length check runs only after the loop, so it cannot prevent the
+> overflow it documents. Each descriptor contributes up to 29 characters,
+> so a base board plus a carrier card already exceeds the buffer, and the
+> data being concatenated comes from the EEPROM.
+> 
+> Use strlcat() bounded to MAX_NAME_LENGTH so the writes are truncated
+> rather than overflowing the allocation. Truncation leaves a string of
+> MAX_NAME_LENGTH - 1 characters, so relax the check accordingly;
+> as written it could never fire once strlcat() is used.
+> 
+> Signed-off-by: Drew Kluemke <ankluemk@microsoft.com>
+> Signed-off-by: Sriram Sriram <sriramsriram@linux.microsoft.com>
+> ---
+>   board/xilinx/common/board.c | 20 ++++++++++++--------
+>   1 file changed, 12 insertions(+), 8 deletions(-)
+> 
+> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+> index f45b879736e..690991bb435 100644
+> --- a/board/xilinx/common/board.c
+> +++ b/board/xilinx/common/board.c
+> @@ -590,38 +590,42 @@ char * __maybe_unused __weak board_name_decode(void)
+>   
+>   		/* The first string should be soc name */
+>   		if (!id)
+> -			strcat(board_local_name, CONFIG_SYS_BOARD);
+> +			strlcat(board_local_name, CONFIG_SYS_BOARD,
+> +				MAX_NAME_LENGTH);
 
-do you have a case where your board, carrier cards will require more then 50 
-chars? This has been designed for Kria SOM where you have name in board eeprom 
-and carrier card eeprom and it is never over 50 chars.
+I actually got a path (c&p below) for the same issue some days ago internally 
+and also reviewed it already. But unfortunately it wasn't sent out yet.
+The difference is that it is checking len at the end of every loop to get out of 
+it earlier.
 
 Thanks,
 Michal
+
+
+
+  Author:     Pranav Tilak <pranav.vinaytilak@amd.com>
+  AuthorDate: Wed Sep 9 10:13:09 2026 +0530
+
+      board: xilinx: Fix heap buffer overflow in board_name_decode()
+
+      board_name_decode() builds the board name by repeatedly appending
+      to a fixed MAX_NAME_LENGTH (50-byte) buffer with strcat(), and only
+      checks for overflow once, after the entire loop over all detected
+      nvmemX EEPROM devices has completed. If enough devices are present
+      and their name/revision fields are long enough, strcat() can write
+      past the end of the buffer before the overflow check is reached,
+      resulting in heap memory corruption.
+
+      Fix this by using strlcat() instead, which bounds every write to
+      the destination buffer size and prevents overrunning the allocation.
+      Use its return value to detect truncation during board name
+      construction instead of relying on a single length check after all
+      EEPROM devices have been processed.
+
+      Fixes: 52ff1626cf4c ("xilinx: common: Enabling generic function for DT 
+reselection")
+      Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
+
+  diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+  index bdccf0732d2a..964817d98e65 100644
+  --- a/board/xilinx/common/board.c
+  +++ b/board/xilinx/common/board.c
+  @@ -571,8 +571,9 @@ int __maybe_unused board_fit_config_name_match(const char 
+*name)
+
+   char * __maybe_unused __weak board_name_decode(void)
+   {
+  -	char *board_local_name;
+   	struct xilinx_board_description *desc;
+  +	char *board_local_name;
+  +	size_t len = 0;
+   	int i, id;
+
+   	board_local_name = calloc(1, MAX_NAME_LENGTH);
+  @@ -592,39 +593,36 @@ char * __maybe_unused __weak board_name_decode(void)
+
+   		/* The first string should be soc name */
+   		if (!id)
+  -			strcat(board_local_name, CONFIG_SYS_BOARD);
+  +			len = strlcat(board_local_name, CONFIG_SYS_BOARD, MAX_NAME_LENGTH);
+
+   		/*
+   		 * For two purpose here:
+   		 * soc_name- eg: zynqmp-
+   		 * and between base board and CC eg: ..revA-sck...
+   		 */
+  -		strcat(board_local_name, "-");
+  +		len = strlcat(board_local_name, "-", MAX_NAME_LENGTH);
+
+   		if (desc->name[0]) {
+   			/* For DT composition name needs to be lowercase */
+   			for (i = 0; i < sizeof(desc->name); i++)
+   				desc->name[i] = tolower(desc->name[i]);
+
+  -			strcat(board_local_name, desc->name);
+  +			len = strlcat(board_local_name, desc->name, MAX_NAME_LENGTH);
+   		}
+   		if (desc->revision[0]) {
+  -			strcat(board_local_name, "-rev");
+  +			len = strlcat(board_local_name, "-rev", MAX_NAME_LENGTH);
+
+   			/* And revision needs to be uppercase */
+   			for (i = 0; i < sizeof(desc->revision); i++)
+   				desc->revision[i] = toupper(desc->revision[i]);
+
+  -			strcat(board_local_name, desc->revision);
+  +			len = strlcat(board_local_name, desc->revision, MAX_NAME_LENGTH);
+   		}
+  -	}
+
+  -	/*
+  -	 * Longer strings will end up with buffer overflow and potential
+  -	 * attacks that's why check it
+  -	 */
+  -	if (strlen(board_local_name) >= MAX_NAME_LENGTH)
+  -		panic("Board name can't be determined\n");
+  +		/* Reject truncated board names. */
+  +		if (len >= MAX_NAME_LENGTH)
+  +			panic("Board name can't be determined\n");
+  +	}
+
+   	if (strlen(board_local_name))
+   		return board_local_name;
+
+
