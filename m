@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57212C79FB9
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 12:14:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79254C79FBB
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 12:14:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 290B160B21;
-	Thu, 10 Sep 2026 12:14:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 38E5560B4B;
+	Thu, 10 Sep 2026 12:14:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VwqexMb60K0P; Thu, 10 Sep 2026 12:14:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 348B7608E2
+ id 8kAWLn-YMs6y; Thu, 10 Sep 2026 12:14:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 9412660B5D
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789042453;
-	b=fhAUUlVaFWNcCU+6+lNSIx1LswgFyvMYoOV4NGwS6SrHK6WaKXxzO+2txywfiixG0Az0
-	 JqwJ3wC9eyaAT4/OrQnikdySfpoSKkRMuxHNLJfORof+UMMZtXxlwnFJmb1Jaj+PSrt1c
-	 ttlpp8ghQf/CuBKE38fyj4HA99HXmvXx33he3p8pFyoba2iGDyUInwU7Tmw5ZBcqWqrOx
-	 x5LnwCPytO3rl/DvSyEP/Y6M4xsYqKZZetxlHbuEATE0Z8EG4PXE8Vw6jr1oinlZRZfhd
-	 apJdn5tmX+wTblNM1wrmW04XINrPN+ZAWmF25+0gJllDp/Xb7gxGQ+nrAq1sNVW21sg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789042458;
+	b=YV+OMCDr/HMkJ3EMyJKIcdofMJ15A0nCsLh3bANn6O7pSnCyaeQiTY6GDo9oT8B2pklG
+	 4BycVk840FtX07mToq7alBHyJg+CDTJ+4U7Nezq7r29jaiVd4N5jtZngUG8pGV5YXIZs7
+	 3YQRWDIVDDphyYPPUqhKsA7DSFBgT4JiTcubTQt9Rl2sOM3qwAJuCqE/w7y9OnODsLgcC
+	 GQif9z1r545BXHO6UxBfBMKUD529F5bEer87iZSIOVM4Yh2Ct+HdO1WAUOUMp+Uq+CEcv
+	 3kFCZKYQvjM2jzPcnYcdwFJTA6b5D2N0dFnt5bE0JBjnMlfgXgtb/ZZQCA0SAU1LGbQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789042453;
+	c=relaxed/relaxed; t=1789042458;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,133 +32,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=bgdeg5YOjD/bZF9dwpOUoe/caO94irRiqbsHQaQarws=;
-	b=sNMAWrGx7GQquVDcx0qCoTZEcz4D9KXy+MdMctk3bIhm54QA1Qm+8laxS0LvbzMG79Rm
-	 jE8a3SEjbroySqeQvmDQiXRGuvcE6ZoP3lWCofWhYp7kAZfzvM3nbFvn+N/pw81oVrbGI
-	 JVBlJj7OSK9TKYPWe7/kGVltFHU9T5vS8JPxc6UMYvBhmW565JbrQtrq5WyzOGV2AlgUO
-	 BWMlJwWe2OkaQljlfLbhdm69aD/jFWcasrAj7s1lHwOEMZhq/pUAdsYXJkZjxtiJH4TAG
-	 H+UOj0Y4c0rQXFUdMhCG+404mfab71/KKb5KBpNOJpycs6gCHBx603ACWKsafQhr06w==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=zFgpbnYmSE5ds/Qv6zCkAVp0yJMKFMCl29azivlE3P4=;
+	b=QU9Nd5byzXkJxI0KSKwiRmFFGzEaj3jwCSO44G4zDzfOxZDh20+eX+Tk+R4RdW2TPz/a
+	 F7NDGUOP46Xr1VtFnq1abqevJzXeX11HDn6LJxSJp9UYuxt7cOtvV1hOGtgb55ZUL9MJO
+	 4P7qK3chObMpK7zWDRbCn+EqXwb1O/u6lrFAa0dKhiqp02qLTkfx4cFQ1O3UkisjqBuJA
+	 kGWo+qSI5TVPG+RwnfKB8hffBsxeeRwJT81SNiTkuO2Q2n1pbFWx/j1U/ir5YYR/8rOat
+	 mc3L2bZmvXgRUJ6b4SGedZ+hl93FAV9lfaKLrVu7nd3P8vDRj0WhpUrBGTq2Up/aAZA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="Dw/jhpFz";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789042453;
-	bh=bgdeg5YOjD/bZF9dwpOUoe/caO94irRiqbsHQaQarws=;
+	d=lists.u-boot-project.org; s=default; t=1789042458;
+	bh=zFgpbnYmSE5ds/Qv6zCkAVp0yJMKFMCl29azivlE3P4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=df5wVwZmCd+9tLBsZdfR6PtIX2Pj/mrYakAQqaLFx6VhXMTgHPqC0MMS1DybX/tTE
-	 9Y1HDaOXIDPMQ+YOaGoxnZV/5mH5+JQYZWdNPMBMu6nv/5oSPVpPrZad9Dt+YQt84l
-	 /VGFxtFqp8x26VoY8M7IjAABQaiWqsEeGgCFRT/hYya+JrqZlWtYxXAGOBz+ThVCth
-	 8tivlOtEHKENcuu9LoPvhDR3FeRUK6MKcPr9sm7qkcid+XgmbIyBW+V87PDQxCTjoL
-	 356DzVQ7IqetfyJ/XOFoXWsLuocEvCTtn8RrFFNqF47aNzkLFSjbLQuC420XJKSexK
-	 YTcKhy4kM2haw==
+	b=DS0ajZgsZkbWkX9rpXaaZ7A2aAJJj+jANiuPb/ie8AOH3bIhbrBBdmApW/oKIjr05
+	 eUcOMV+VJG1mCEArTpqLD3CBZAUdE2Uo3GHqn2jUouaDx4Beb9mKrUfx8Zyy6JwkYr
+	 QQvoZ16Pi2/MdrRn0UwpyzSpX4zscjh4f0TF+z+IumpDs+wyES/HJjjqt69Jt2Pcke
+	 l8hHxV1mOBbuMUZ6iO4+4xegK6dE6NaLRxY8/AkXbJDYxrN6A17OxHOq6zZB+SGFTI
+	 DDpXKkZ9G49M8l0CuCGNuDHFqY2qChrm39+W6CUkRWOrGVIadDVnbFi8/6lGj6lDlT
+	 U019SsyjQ/OJg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 348B7608E2;
-	Thu, 10 Sep 2026 12:14:13 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id B955143F
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 09:54:01 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9412660B5D;
+	Thu, 10 Sep 2026 12:14:18 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id B2395E11
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 09:54:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9F49B80FE8
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 09:54:01 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id A416A608A4
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 09:54:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jnxS3eVyqNJh for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 09:54:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 653BC80F7D
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::52a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789034040;
- b=QJQRBWvPwVPFrhKY0x9S7jtIYcf1cOJRoytAw+qcjGI9TB1J9Z7CVvG98VZBXeZvjwrM
- FrpbRFMKh4KVSc77ka6GFvebuUe+lU+ByX45gbyUYdIveDX+i1j0qnrWXpGeaFK7bogEt
- 4vzxB86272AsVXaEGEdRMdSBLH4knKE+kQ1SS9hgxLWEFwEtGk8MPS8xlz//MGhn9NNcS
- RuEBB19O6znEYE9E2P8HmCY+XNevwfa1XP5zvI7K7mDQQ1xjHHufqeQT9W/oyhQLzIuVH
- HO/Ik5s9/RrJVrkM6pmwyLJTkPIk7jKSj8PBJCA5phEa23pYmcshFTbwX73GZJCTHYg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XxXzAiHrSop9 for <u-boot@lists.u-boot-project.org>;
+ Thu, 10 Sep 2026 09:54:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org C13B860869
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::52b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789034048;
+ b=ny7HeT1tnrHkgDDAbaMAUTewxnTH+GD/PoDWa+tNIkkuYPrpKa4fygbLZOrQgsa9kT6R
+ qfkv/uJbOqxzJWX1EP/8KWC+MOvrcqHYnnYD+Q/N4Bcx0shaZxECME0QfRfE/xo6SEhal
+ 6mCCy/WzW4BPcrWAXYvmg93l23TnxRXPzHGTk4qSMMKhoBCe/ZYBq9aiP4Y3tkpo+OekZ
+ +JLQ95PbGVzQ4wR9lMEcAHHGy0sujjgjtnyknCCerS/nsYldFK3KqTxXiQ/llJDnm8YmU
+ PI61CSrS/RrTFBJ+GeH0GNZnfeqF/dJQCPDB58mu+buyZKv2xlt+ACOypVyJ5ZKMNxQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789034040;
+ c=relaxed/relaxed; t=1789034048;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=bgdeg5YOjD/bZF9dwpOUoe/caO94irRiqbsHQaQarws=;
- b=tWgVHB0TelfXxoYAjWAPl7aiRjpyIHToMoU0IEmbM7FzeOQZJN0qACnjW/Q+4Yl4NM9n
- bn4rUCYhUy6NGkev3YbCoyN5QOWjv9ug2ZNGkvYU25RI/8me1jx35l07YSfnWrcrwmjqV
- 3HDlY5+dL4ITyivlVAlGDZRLvLICs/W7HNCe8knji+qwnlXn82UjfJZLMPfzad7JYC8hh
- nKU4z8kZWbLIirDy8FwE9Z1/PJWX0zwBiOYLcKS2wX4rMat+USU/J5Bs0F36ll0MsOzsH
- vpuEoSTN0WSPuk0nZxDRGajwmN7eo4FRjpkpoIPcMfKqgGwUjYoDA0eOm0acxQLU1ig==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=zFgpbnYmSE5ds/Qv6zCkAVp0yJMKFMCl29azivlE3P4=;
+ b=iGODmno0bMdJ12KNArJ9rBRVxw001dTkkKtI7MvBtI9wQKvdp+uHI3ax0G/w4BegGRrn
+ IutM/5AaBb8HFfXu8FNYOTC37Gosv+0VkyX3UTTGAlJnr8U1SJElJ/LT9FjFHdGBylSyr
+ tgNQAVhpBBW+te7iuE8ibshoZJWr3FW1nksdsb0eofaXKYHdOuP7bRyylcKB/DjeOTMBF
+ l+1QqSm79LWCDV1omAoAFCkmlKae2kMsDCNnWoh/aKRLmGtWBdrazVIrDcESObk+GR8sr
+ muLvlT7txOBE73ORqfVimzUHHgxfJqyCiTP/VxQ7fWQcXyc21ADn35zWzb3J0HxJalg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=COAbL+lZ; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::52a"
+ header.s=20251104 header.b="Dw/jhpFz"; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::52b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::52a; helo=mail-pg1-x52a.google.com;
+ client-ip=2607:f8b0:4864:20::52b; helo=mail-pg1-x52b.google.com;
  envelope-from=imkyufie@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=COAbL+lZ
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 653BC80F7D
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 09:53:59 +0000 (UTC)
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-cc4aa0248cfso1231116a12.1
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 02:53:59 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=Dw/jhpFz
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C13B860869
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 09:54:08 +0000 (UTC)
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-cc4aa02a269so959166a12.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 02:54:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789034039; x=1789638839;
+ d=gmail.com; s=20251104; t=1789034047; x=1789638847;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=bgdeg5YOjD/bZF9dwpOUoe/caO94irRiqbsHQaQarws=;
- b=COAbL+lZxgqne1Yj5RN3HHhKyl2Vu98EygvBSgjW3r9psXT66PtMoEVqQ9J85k44gk
- ERMtR96qyk8HM5o2F4dhhVGZzuapn0TThKKFxkqSeDOEfQ8Kn2npE/a0N5ZdZ9/oPfXz
- 1fg1ql2ik5ou3lytEBdU/zCItggJqllXS/L1xXva07prqeX+Lmbc7RyHQHX3INWM5gng
- +efAF6epSmHx7z1c+lDfUUd8iXmBgjvU6X9f4A1z7cZr0elyjw8mhs/rgyxNPQANasNh
- Z/KjKivap2K9y8ta0UWr80wsDvE5ahl6LT6hW2amiOAN1cDYMP40AQYnENKUU4Nziil2
- pLcg==
+ bh=zFgpbnYmSE5ds/Qv6zCkAVp0yJMKFMCl29azivlE3P4=;
+ b=Dw/jhpFzitvxKfVPahPOa70aq/0/HTTXaUxffNWRVkfvyrDiTOiaqalT/xnBrd/hn9
+ h4CJZEWgnEqBZJER2GwnRyaNdpybPfSVhwMv07LXBaTuQVWCkxIt87mkAwvCbNCZVrkL
+ HKZnwjCxKNFLEDrW3FmWQOASpGRU3OI1iOWCNBHfyOHU9vvyZoTI2HaIOeSDqaEipYiS
+ gmZ4IMwOxieW7HBNLzKUzKDnViq0TJxKnYPAlqrgncMVNjKW632PVttB5FbAlfOr2Xel
+ hZRIhTs9OE1rkcJUFqd2AxQ80CpwY2TGo71p6NaS6C4RnpNVhUE43GIbSMB9a6v9r39T
+ q7Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789034039; x=1789638839;
+ d=1e100.net; s=20251104; t=1789034047; x=1789638847;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=bgdeg5YOjD/bZF9dwpOUoe/caO94irRiqbsHQaQarws=;
- b=M7+fPW/1VjmgwYkuRUwKwvrV1Ey9QpHrLGSgZPSA0WzMXu+sgUF96kj0rqbK5dMytB
- gI1+JOsJrJyxS9k9XZIXQqC+h0opecnHg1EK1FtCCuQ3Pb56kb5h9z0rI9elva8Jkohd
- uRt8qZ6B4iGAZv1jLVRqeLM1sNkUJ42/s/ose7ZWkZShWqZk2Qu8KglPoD8OqjA7/eBr
- 12QiPl2MSWX/sDMI9QScCRmA+A+J0S5b2YKEDkeqFDNg5aYFJ5ydhYt6absHvX/imbGF
- A7hTr5lMnHKmqVXkYIhIu2otCV5tc9uoc2oF+y5RhmkcPz4k8Rnf/GowvsNl7GWpCEDv
- YuzQ==
-X-Gm-Message-State: AFuF++lns0QtZUdiWQYhWzwjw0kB6g0kqZL0YlSZRrEWAEzcUCPw4X+Z
- acvMXVDJDab7s1aQkMR5+H1XF148MarySfS0n6BbAEhl0i4qYKbwVyJG0zCFeg==
-X-Gm-Gg: AYBFou10GGdHwXYzYnlW74sj5T0nSePBgm7UdRSjluZ/fYh7JWztf74uIqo6w7WhYqB
- cyQsPYGZTYtDMSkpN+ACW2+BiWBeXVLfazm7362TcQY3NZFQlXIb4Cr+j+1gv2nKu354yOsMZ7d
- 5DblekmIQAcmXY5DhrlqPfbOkn06j6Y8mY98TD8C6emz0aBtUDiW59gq+nTcTfRzgWhlzQh6c0L
- yOOM3INUyLNNM2QUP6nsOGpsgVH2AqC2YfxvKIDXMgkDHDlCyDM6S5w0krQkktW3LH4sMstgnvf
- Qe0UTEZGJVp2YFodCRqwEGmrE1FjTuJDYtvnje3HO9gPebOI9oT7PF9aZkHX/CuYGDs688HBgZZ
- fVxYwjQbdBAddz5tHWrowUzYn0aPr9whQW5bTVyrmCSVbMPdE37te8+jaEsCoy9RWYDGYU2SyGk
- THHgKh3+627WqohPzIxqBKDa2/CaNhaHd3KibaZNiw80GKsmRmeeM9Yx/HRwuZXHiuUPffPWr2
-X-Received: by 2002:a17:90a:d44b:b0:398:bee5:61d6 with SMTP id
- 98e67ed59e1d1-39b26252edamr65482084a91.24.1789034038899; 
- Thu, 10 Sep 2026 02:53:58 -0700 (PDT)
+ bh=zFgpbnYmSE5ds/Qv6zCkAVp0yJMKFMCl29azivlE3P4=;
+ b=W/uaHrxBfM2MFOLLznWzORj9RKTEOt4njaNq/l48zn54UPqooSj6ueVM02B/hTlPdt
+ apj+K3wiOw825Dl8CuwYZ/I9syMws2Aia8HHPVxk41dtJAcLexmdy4Yjh0UsAAXmwTSN
+ JCUoXyeUxGy4zNpsbmOj4pm1jKwTzZimjnWdfSt+zFHkVCAnxjDj+bgTHizLILp+WElT
+ np7qjGaOPl07JcfoctEgKxbqhRkb1bCUfJCok2coVbCMrA/yg6yuwDE/D9pAG0HgGWtk
+ 5CTbtEQciLuW9CrdFlDNTmndkefogeo4WN5B76GE/2kIMY19n75WWop809wXujgE613l
+ Bt9w==
+X-Gm-Message-State: AFuF++nEMPW3+nLJ5EPbQF05kr6LER6RZZNWoUi5Afp0Wdu34+2tzlYv
+ /zlenT6DIRNSbG9VG5joJHOeo/Fjx/KP3BFNkmAU54K289tmmHoSiHr0jrzy8Q==
+X-Gm-Gg: AYBFou1bay0defzAGndiINK9hBNmbn9YMtuChu4EWePxI6PGqdvRUwuBIQu5lirvadV
+ lwb+1KOmoNlusCTs2qVx0e2/0dCi+RjVpwojgjZeM4c7MgRIy6way5vSc07wrRSENpIN/Z8Vmat
+ chCMOwEV+eeYYbm8yFuegc1677GqZox5hiwpuWRfe/EmOxJ9Jv9cPtJY1IGDPrj8BMw0IQi9d+u
+ 7QQ5zUTMCaOT2d6nildDBls/Pxf3t1opIiNUVJiRLOdgHkKq77huYUc+Gb68PZLA6aC2aFG1qWU
+ Bi/9iuwEtRPVG/EtqbgN7DAlIJNsDShfwu3wDUXZsKoOB7qUrGsY4jceFTVo9yMws6WMyfEY840
+ wWwwAT+vlvD15bYNztsnvwg0zC8XhdGBDYMxLXKchTfNyyZ2U3f0B2Igoz8B8lkes/hzkv7Nnru
+ pcugTyOAUzSA4XXFDLxoBd0QfZPFY4PVx6nNwLDNr037N1hkKR/sbPXpYrIgvdQsLOwEHnXNCb
+X-Received: by 2002:a17:90b:1b06:b0:398:9be9:ab8e with SMTP id
+ 98e67ed59e1d1-39b2622ba26mr57753108a91.19.1789034047415; 
+ Thu, 10 Sep 2026 02:54:07 -0700 (PDT)
 Received: from thefoxflat ([2404:c0:7029:b3c6:7b99:50ff:b405:5c31])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39d7e77498csm3849455a91.3.2026.09.10.02.53.55
+ 98e67ed59e1d1-39d7e77498csm3849455a91.3.2026.09.10.02.54.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 02:53:58 -0700 (PDT)
+ Thu, 10 Sep 2026 02:54:06 -0700 (PDT)
 From: Reza Kurniawan <imkyufie@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Reza Kurniawan <imkyufie@gmail.com>,
  Casey Connolly <casey.connolly@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
  u-boot-qcom@groups.io
-Subject: [PATCH 2/4] pinctrl: qcom: Add pinctrl driver for MSM8917
-Date: Thu, 10 Sep 2026 09:41:45 +0000
-Message-ID: <20260910095339.110427-3-imkyufie@gmail.com>
+Subject: [PATCH 4/4] clk: qcom: Add Global Clock Controller (GCC) driver for
+ MSM8917
+Date: Thu, 10 Sep 2026 09:41:47 +0000
+Message-ID: <20260910095339.110427-5-imkyufie@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260910095339.110427-1-imkyufie@gmail.com>
 References: <20260910095339.110427-1-imkyufie@gmail.com>
@@ -178,696 +182,264 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add pinctrl driver to configure pin parameters and managing GPIOs
-necessary for certain peripherals.
+Add Global Clock Controller (GCC) driver for MSM8917 to manage clocks,
+resets, and gdscs. This driver includes the essential clocks and
+resets for U-Boot to function.
 
 Signed-off-by: Reza Kurniawan <imkyufie@gmail.com>
 ---
 
- drivers/pinctrl/qcom/Kconfig           |   8 +
- drivers/pinctrl/qcom/Makefile          |   1 +
- drivers/pinctrl/qcom/pinctrl-msm8917.c | 642 +++++++++++++++++++++++++
- 3 files changed, 651 insertions(+)
- create mode 100644 drivers/pinctrl/qcom/pinctrl-msm8917.c
+ configs/qcom_defconfig           |   1 +
+ drivers/clk/qcom/Kconfig         |   8 ++
+ drivers/clk/qcom/Makefile        |   1 +
+ drivers/clk/qcom/clock-msm8917.c | 196 +++++++++++++++++++++++++++++++
+ 4 files changed, 206 insertions(+)
+ create mode 100644 drivers/clk/qcom/clock-msm8917.c
 
-diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index 7dd3782c1..10737b5e2 100644
---- a/drivers/pinctrl/qcom/Kconfig
-+++ b/drivers/pinctrl/qcom/Kconfig
-@@ -62,6 +62,14 @@ config PINCTRL_QCOM_MILOS
- 	  Say Y here to enable support for pinctrl on the Snapdragon Milos SoC,
- 	  as well as the associated GPIO driver.
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 7d4a2b589..59cad58a9 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -57,6 +57,7 @@ CONFIG_CLK_STUB=y
+ CONFIG_CLK_QCOM_APQ8016=y
+ CONFIG_CLK_QCOM_APQ8096=y
+ CONFIG_CLK_QCOM_MILOS=y
++CONFIG_CLK_QCOM_MSM8917=y
+ CONFIG_CLK_QCOM_QCM2290=y
+ CONFIG_CLK_QCOM_QCS404=y
+ CONFIG_CLK_QCOM_QCS615=y
+diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+index 95b650831..d8469ad5f 100644
+--- a/drivers/clk/qcom/Kconfig
++++ b/drivers/clk/qcom/Kconfig
+@@ -55,6 +55,14 @@ config CLK_QCOM_MILOS
+ 	  on the Snapdragon Milos SoC. This driver supports the clocks
+ 	  and resets exposed by the GCC hardware block.
  
-+config PINCTRL_QCOM_MSM8917
-+	bool "Qualcomm MSM8917 Pinctrl"
-+	default y if PINCTRL_QCOM_GENERIC
-+	select PINCTRL_QCOM
++config CLK_QCOM_MSM8917
++	bool "Qualcomm MSM8917 GCC"
++	select CLK_QCOM
 +	help
-+	  Say Y here to enable support for pinctrl on the Snapdragon MSM8917 SoC,
-+	  as well as the associated GPIO driver.
++	  Say Y here to enable support for the Global Clock Controller
++	  on the Snapdragon MSM8917 SoC. This driver supports the clocks
++	  and resets exposed by the GCC hardware block.
 +
- config PINCTRL_QCOM_QCM2290
- 	bool "Qualcomm QCM2290 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-index a7a9ad035..df445ef09 100644
---- a/drivers/pinctrl/qcom/Makefile
-+++ b/drivers/pinctrl/qcom/Makefile
-@@ -9,6 +9,7 @@ obj-$(CONFIG_PINCTRL_QCOM_IPQ5424) += pinctrl-ipq5424.o
- obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
- obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
- obj-$(CONFIG_PINCTRL_QCOM_MILOS) += pinctrl-milos.o
-+obj-$(CONFIG_PINCTRL_QCOM_MSM8917) += pinctrl-msm8917.o
- obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
- obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
- obj-$(CONFIG_PINCTRL_QCOM_QCS615) += pinctrl-qcs615.o
-diff --git a/drivers/pinctrl/qcom/pinctrl-msm8917.c b/drivers/pinctrl/qcom/pinctrl-msm8917.c
+ config CLK_QCOM_QCM2290
+ 	bool "Qualcomm QCM2290 GCC"
+ 	select CLK_QCOM
+diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+index 1adca029b..6478ec322 100644
+--- a/drivers/clk/qcom/Makefile
++++ b/drivers/clk/qcom/Makefile
+@@ -10,6 +10,7 @@ obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
+ obj-$(CONFIG_CLK_QCOM_IPQ5424) += clock-ipq5424.o
+ obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
+ obj-$(CONFIG_CLK_QCOM_MILOS) += clock-milos.o
++obj-$(CONFIG_CLK_QCOM_MSM8917) += clock-msm8917.o
+ obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
+ obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
+ obj-$(CONFIG_CLK_QCOM_QCS8300) += clock-qcs8300.o
+diff --git a/drivers/clk/qcom/clock-msm8917.c b/drivers/clk/qcom/clock-msm8917.c
 new file mode 100644
-index 000000000..78edd653a
+index 000000000..2cb1fa961
 --- /dev/null
-+++ b/drivers/pinctrl/qcom/pinctrl-msm8917.c
-@@ -0,0 +1,642 @@
++++ b/drivers/clk/qcom/clock-msm8917.c
+@@ -0,0 +1,196 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Qualcomm MSM8917 pinctrl
++ * Clock drivers for Qualcomm MSM8917
 + *
 + * (C) Copyright 2026 Reza Kurniawan <imkyufie@gmail.com>
-+ *
 + */
 +
-+#include <dm.h>
++#include <clk-uclass.h>
++#include <dm/device.h>
++#include <linux/kernel.h>
++#include <dt-bindings/clock/qcom,gcc-msm8917.h>
 +
-+#include "pinctrl-qcom.h"
++#include "clock-qcom.h"
 +
-+#define MAX_PIN_NAME_LEN 32
-+static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
++#define CFG_CLK_SRC_GPLL4_SDCC1 (2 << 8)
 +
-+typedef unsigned int msm_pin_function[10];
++static const struct gate_clk msm8917_clks[] = {
++	GATE_CLK_POLLED(GCC_BLSP1_UART1_APPS_CLK,	0x0203c, BIT(0), 0x0203c),
++	GATE_CLK_POLLED(GCC_BLSP1_UART2_APPS_CLK,	0x0302c, BIT(0), 0x0302c),
++	GATE_CLK_POLLED(GCC_BLSP2_UART1_APPS_CLK,	0x0c03c, BIT(0), 0x0c03c),
++	GATE_CLK_POLLED(GCC_BLSP2_UART2_APPS_CLK,	0x0d02c, BIT(0), 0x0d02c),
++	GATE_CLK_POLLED(GCC_SDCC1_AHB_CLK,		0x4201c, BIT(0), 0x4201c),
++	GATE_CLK_POLLED(GCC_SDCC1_APPS_CLK,		0x42018, BIT(0), 0x42018),
++	GATE_CLK_POLLED(GCC_SDCC2_AHB_CLK,		0x4301c, BIT(0), 0x4301c),
++	GATE_CLK_POLLED(GCC_SDCC2_APPS_CLK,		0x43018, BIT(0), 0x43018),
++	GATE_CLK_POLLED(GCC_USB_HS_PHY_CFG_AHB_CLK,	0x41030, BIT(0), 0x41030),
++	GATE_CLK_POLLED(GCC_USB_HS_AHB_CLK,		0x41008, BIT(0), 0x41008),
++	GATE_CLK_POLLED(GCC_USB_HS_SYSTEM_CLK,		0x41004, BIT(0), 0x41004),
++	GATE_CLK_POLLED(GCC_USB2A_PHY_SLEEP_CLK,	0x4102c, BIT(0), 0x4102c)
++};
 +
-+#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9)\
-+	[id] = {					\
-+		msm_mux_gpio, /* gpio mode */		\
-+		msm_mux_##f1,				\
-+		msm_mux_##f2,				\
-+		msm_mux_##f3,				\
-+		msm_mux_##f4,				\
-+		msm_mux_##f5,				\
-+		msm_mux_##f6,				\
-+		msm_mux_##f7,				\
-+		msm_mux_##f8,				\
-+		msm_mux_##f9				\
++static const struct freq_tbl ftbl_blsp_uart_apps_clk_src[] = {
++	F(3686400, CFG_CLK_SRC_GPLL0, 1, 72, 15625),
++	F(7372800, CFG_CLK_SRC_GPLL0, 1, 144, 15625),
++	F(14745600, CFG_CLK_SRC_GPLL0, 1, 288, 15625),
++	F(16000000, CFG_CLK_SRC_GPLL0, 10, 1, 5),
++	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
++	F(24000000, CFG_CLK_SRC_GPLL0, 1, 3, 100),
++	F(25000000, CFG_CLK_SRC_GPLL0, 16, 1, 2),
++	F(32000000, CFG_CLK_SRC_GPLL0, 1, 1, 25),
++	F(40000000, CFG_CLK_SRC_GPLL0, 1, 1, 20),
++	F(46400000, CFG_CLK_SRC_GPLL0, 1, 29, 500),
++	F(48000000, CFG_CLK_SRC_GPLL0, 1, 3, 50),
++	F(51200000, CFG_CLK_SRC_GPLL0, 1, 8, 125),
++	F(56000000, CFG_CLK_SRC_GPLL0, 1, 7, 100),
++	F(58982400, CFG_CLK_SRC_GPLL0, 1, 1152, 15625),
++	F(60000000, CFG_CLK_SRC_GPLL0, 1, 3, 40),
++	F(64000000, CFG_CLK_SRC_GPLL0, 1, 2, 25),
++	{ }
++};
++
++static const struct freq_tbl ftbl_sdcc1_apps_clk_src[] = {
++	F(144000, CFG_CLK_SRC_CXO, 16, 3, 25),
++	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
++	F(20000000, CFG_CLK_SRC_GPLL0, 10, 1, 4),
++	F(25000000, CFG_CLK_SRC_GPLL0, 16, 1, 2),
++	F(50000000, CFG_CLK_SRC_GPLL0, 16, 0, 0),
++	F(100000000, CFG_CLK_SRC_GPLL0, 8, 0, 0),
++	F(177770000, CFG_CLK_SRC_GPLL0, 4.5, 0, 0),
++	F(192000000, CFG_CLK_SRC_GPLL4_SDCC1, 6, 0, 0),
++	F(200000000, CFG_CLK_SRC_GPLL0, 4, 0, 0),
++	F(384000000, CFG_CLK_SRC_GPLL4_SDCC1, 3, 0, 0),
++	{ }
++};
++
++static const struct freq_tbl ftbl_sdcc2_apps_clk_src[] = {
++	F(144000, CFG_CLK_SRC_CXO, 16, 3, 25),
++	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
++	F(20000000, CFG_CLK_SRC_GPLL0, 10, 1, 4),
++	F(25000000, CFG_CLK_SRC_GPLL0, 16, 1, 2),
++	F(50000000, CFG_CLK_SRC_GPLL0, 16, 0, 0),
++	F(100000000, CFG_CLK_SRC_GPLL0, 8, 0, 0),
++	F(177770000, CFG_CLK_SRC_GPLL0, 4.5, 0, 0),
++	F(200000000, CFG_CLK_SRC_GPLL0, 4, 0, 0),
++	{ }
++};
++
++static const struct freq_tbl ftbl_usb_hs_system_clk_src[] = {
++	F(80000000, CFG_CLK_SRC_GPLL0, 10, 0, 0),
++	F(100000000, CFG_CLK_SRC_GPLL0, 8, 0, 0),
++	F(133330000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
++	F(177780000, CFG_CLK_SRC_GPLL0, 4.5, 0, 0),
++	{ }
++};
++
++static int msm8917_enable(struct clk *clk)
++{
++	struct msm_clk_priv *priv;
++
++	priv = dev_get_priv(clk->dev);
++	return qcom_gate_clk_en(priv, clk->id);
++}
++
++static ulong msm8917_uart_set_rate(struct clk *clk, ulong rate)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++	const struct freq_tbl *freq;
++	u32 cmd_rcgr;
++
++	switch (clk->id) {
++	case GCC_BLSP1_UART1_APPS_CLK:
++		cmd_rcgr = 0x02044;
++		break;
++	case GCC_BLSP1_UART2_APPS_CLK:
++		cmd_rcgr = 0x03034;
++		break;
++	case GCC_BLSP2_UART1_APPS_CLK:
++		cmd_rcgr = 0x0c044;
++		break;
++	case GCC_BLSP2_UART2_APPS_CLK:
++		cmd_rcgr = 0x0d034;
++		break;
++	default:
++		return 0;
 +	}
 +
-+#define SDC_PINGROUP(pg_name, ctl, pull, drv)	\
-+	{						\
-+		.name = pg_name,			\
-+		.ctl_reg = ctl,				\
-+		.io_reg = 0,				\
-+		.pull_bit = pull,			\
-+		.drv_bit = drv,				\
-+		.oe_bit = -1,				\
-+		.in_bit = -1,				\
-+		.out_bit = -1,				\
++	freq = qcom_find_freq(ftbl_blsp_uart_apps_clk_src, rate);
++	clk_rcg_set_rate_mnd(priv->base, cmd_rcgr,
++			     freq->pre_div, freq->m, freq->n, freq->src, 16);
++
++	return freq->freq;
++}
++
++static ulong msm8917_set_rate(struct clk *clk, ulong rate)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++	const struct freq_tbl *freq;
++
++	switch (clk->id) {
++	case GCC_BLSP1_UART1_APPS_CLK:
++	case GCC_BLSP1_UART2_APPS_CLK:
++	case GCC_BLSP2_UART1_APPS_CLK:
++	case GCC_BLSP2_UART2_APPS_CLK:
++		return msm8917_uart_set_rate(clk, rate);
++	case GCC_SDCC1_APPS_CLK:
++		freq = qcom_find_freq(ftbl_sdcc1_apps_clk_src, rate);
++		clk_rcg_set_rate_mnd(priv->base, 0x42004,
++				     freq->pre_div, freq->m, freq->n, freq->src, 8);
++		return freq->freq;
++	case GCC_SDCC2_APPS_CLK:
++		freq = qcom_find_freq(ftbl_sdcc2_apps_clk_src, rate);
++		clk_rcg_set_rate_mnd(priv->base, 0x43004,
++				     freq->pre_div, freq->m, freq->n, freq->src, 8);
++		return freq->freq;
++	case GCC_USB_HS_SYSTEM_CLK:
++		freq = qcom_find_freq(ftbl_usb_hs_system_clk_src, rate);
++		clk_rcg_set_rate_mnd(priv->base, 0x41010,
++				     freq->pre_div, freq->m, freq->n, freq->src, 0);
++		return freq->freq;
++	default:
++		break;
 +	}
 +
-+enum msm8917_functions {
-+	msm_mux_accel_int,
-+	msm_mux_adsp_ext,
-+	msm_mux_alsp_int,
-+	msm_mux_atest_bbrx0,
-+	msm_mux_atest_bbrx1,
-+	msm_mux_atest_char,
-+	msm_mux_atest_char0,
-+	msm_mux_atest_char1,
-+	msm_mux_atest_char2,
-+	msm_mux_atest_char3,
-+	msm_mux_atest_combodac_to_gpio_native,
-+	msm_mux_atest_gpsadc_dtest0_native,
-+	msm_mux_atest_gpsadc_dtest1_native,
-+	msm_mux_atest_tsens,
-+	msm_mux_atest_wlan0,
-+	msm_mux_atest_wlan1,
-+	msm_mux_audio_ref,
-+	msm_mux_audio_reset,
-+	msm_mux_bimc_dte0,
-+	msm_mux_bimc_dte1,
-+	msm_mux_blsp6_spi,
-+	msm_mux_blsp8_spi,
-+	msm_mux_blsp_i2c1,
-+	msm_mux_blsp_i2c2,
-+	msm_mux_blsp_i2c3,
-+	msm_mux_blsp_i2c4,
-+	msm_mux_blsp_i2c5,
-+	msm_mux_blsp_i2c6,
-+	msm_mux_blsp_i2c7,
-+	msm_mux_blsp_i2c8,
-+	msm_mux_blsp_spi1,
-+	msm_mux_blsp_spi2,
-+	msm_mux_blsp_spi3,
-+	msm_mux_blsp_spi4,
-+	msm_mux_blsp_spi5,
-+	msm_mux_blsp_spi6,
-+	msm_mux_blsp_spi7,
-+	msm_mux_blsp_spi8,
-+	msm_mux_blsp_uart1,
-+	msm_mux_blsp_uart2,
-+	msm_mux_blsp_uart3,
-+	msm_mux_blsp_uart4,
-+	msm_mux_blsp_uart5,
-+	msm_mux_blsp_uart6,
-+	msm_mux_blsp_uart7,
-+	msm_mux_blsp_uart8,
-+	msm_mux_cam0_ldo,
-+	msm_mux_cam1_rst,
-+	msm_mux_cam1_standby,
-+	msm_mux_cam2_rst,
-+	msm_mux_cam2_standby,
-+	msm_mux_cam_mclk,
-+	msm_mux_cci_async,
-+	msm_mux_cci_i2c,
-+	msm_mux_cci_timer0,
-+	msm_mux_cci_timer1,
-+	msm_mux_cdc_pdm0,
-+	msm_mux_codec_int1,
-+	msm_mux_codec_int2,
-+	msm_mux_codec_mad,
-+	msm_mux_coex_uart,
-+	msm_mux_cri_trng,
-+	msm_mux_cri_trng0,
-+	msm_mux_cri_trng1,
-+	msm_mux_dbg_out,
-+	msm_mux_dmic0_clk,
-+	msm_mux_dmic0_data,
-+	msm_mux_ebi_cdc,
-+	msm_mux_ebi_ch0,
-+	msm_mux_ext_lpass,
-+	msm_mux_forced_usb,
-+	msm_mux_fp_gpio,
-+	msm_mux_fp_int,
-+	msm_mux_gcc_gp1_clk_a,
-+	msm_mux_gcc_gp1_clk_b,
-+	msm_mux_gcc_gp2_clk_a,
-+	msm_mux_gcc_gp2_clk_b,
-+	msm_mux_gcc_gp3_clk_a,
-+	msm_mux_gcc_gp3_clk_b,
-+	msm_mux_gcc_plltest,
-+	msm_mux_gcc_tlmm,
-+	msm_mux_gpio,
-+	msm_mux_gsm0_tx,
-+	msm_mux_key_focus,
-+	msm_mux_key_snapshot,
-+	msm_mux_key_volp,
-+	msm_mux_ldo_en,
-+	msm_mux_ldo_update,
-+	msm_mux_lpass_slimbus,
-+	msm_mux_lpass_slimbus0,
-+	msm_mux_lpass_slimbus1,
-+	msm_mux_m_voc,
-+	msm_mux_mag_int,
-+	msm_mux_mdp_vsync,
-+	msm_mux_mipi_dsi0,
-+	msm_mux_modem_tsync,
-+	msm_mux_nav_pps,
-+	msm_mux_nav_pps_in_a,
-+	msm_mux_nav_pps_in_b,
-+	msm_mux_nav_tsync,
-+	msm_mux_nfc_pwr,
-+	msm_mux_ov_ldo,
-+	msm_mux_pa_indicator,
-+	msm_mux_pbs0,
-+	msm_mux_pbs1,
-+	msm_mux_pbs2,
-+	msm_mux_pri_mi2s,
-+	msm_mux_pri_mi2s_mclk_a,
-+	msm_mux_pri_mi2s_mclk_b,
-+	msm_mux_pri_mi2s_ws,
-+	msm_mux_prng_rosc,
-+	msm_mux_pwr_crypto_enabled_a,
-+	msm_mux_pwr_crypto_enabled_b,
-+	msm_mux_pwr_modem_enabled_a,
-+	msm_mux_pwr_modem_enabled_b,
-+	msm_mux_pwr_nav_enabled_a,
-+	msm_mux_pwr_nav_enabled_b,
-+	msm_mux_qdss_cti_trig_in_a0,
-+	msm_mux_qdss_cti_trig_in_a1,
-+	msm_mux_qdss_cti_trig_in_b0,
-+	msm_mux_qdss_cti_trig_in_b1,
-+	msm_mux_qdss_cti_trig_out_a0,
-+	msm_mux_qdss_cti_trig_out_a1,
-+	msm_mux_qdss_cti_trig_out_b0,
-+	msm_mux_qdss_cti_trig_out_b1,
-+	msm_mux_qdss_traceclk_a,
-+	msm_mux_qdss_traceclk_b,
-+	msm_mux_qdss_tracectl_a,
-+	msm_mux_qdss_tracectl_b,
-+	msm_mux_qdss_tracedata_a,
-+	msm_mux_qdss_tracedata_b,
-+	msm_mux_sd_write,
-+	msm_mux_sdcard_det,
-+	msm_mux_sec_mi2s,
-+	msm_mux_sec_mi2s_mclk_a,
-+	msm_mux_sec_mi2s_mclk_b,
-+	msm_mux_sensor_rst,
-+	msm_mux_smb_int,
-+	msm_mux_ssbi_wtr1,
-+	msm_mux_ts_resout,
-+	msm_mux_ts_sample,
-+	msm_mux_uim1_clk,
-+	msm_mux_uim1_data,
-+	msm_mux_uim1_present,
-+	msm_mux_uim1_reset,
-+	msm_mux_uim2_clk,
-+	msm_mux_uim2_data,
-+	msm_mux_uim2_present,
-+	msm_mux_uim2_reset,
-+	msm_mux_uim_batt,
-+	msm_mux_us_emitter,
-+	msm_mux_us_euro,
-+	msm_mux_wcss_bt,
-+	msm_mux_wcss_fm,
-+	msm_mux_wcss_wlan,
-+	msm_mux_wcss_wlan0,
-+	msm_mux_wcss_wlan1,
-+	msm_mux_wcss_wlan2,
-+	msm_mux_webcam_rst,
-+	msm_mux_webcam_standby,
-+	msm_mux_wsa_io,
-+	msm_mux_wsa_irq,
-+	msm_mux_wsa_reset,
-+	msm_mux__,
-+};
-+
-+#define MSM_PIN_FUNCTION(fname)                         \
-+	[msm_mux_##fname] = {#fname, msm_mux_##fname}
-+
-+static const struct pinctrl_function msm8917_pinctrl_functions[] = {
-+	MSM_PIN_FUNCTION(accel_int),
-+	MSM_PIN_FUNCTION(adsp_ext),
-+	MSM_PIN_FUNCTION(alsp_int),
-+	MSM_PIN_FUNCTION(atest_bbrx0),
-+	MSM_PIN_FUNCTION(atest_bbrx1),
-+	MSM_PIN_FUNCTION(atest_char),
-+	MSM_PIN_FUNCTION(atest_char0),
-+	MSM_PIN_FUNCTION(atest_char1),
-+	MSM_PIN_FUNCTION(atest_char2),
-+	MSM_PIN_FUNCTION(atest_char3),
-+	MSM_PIN_FUNCTION(atest_combodac_to_gpio_native),
-+	MSM_PIN_FUNCTION(atest_gpsadc_dtest0_native),
-+	MSM_PIN_FUNCTION(atest_gpsadc_dtest1_native),
-+	MSM_PIN_FUNCTION(atest_tsens),
-+	MSM_PIN_FUNCTION(atest_wlan0),
-+	MSM_PIN_FUNCTION(atest_wlan1),
-+	MSM_PIN_FUNCTION(audio_ref),
-+	MSM_PIN_FUNCTION(audio_reset),
-+	MSM_PIN_FUNCTION(bimc_dte0),
-+	MSM_PIN_FUNCTION(bimc_dte1),
-+	MSM_PIN_FUNCTION(blsp6_spi),
-+	MSM_PIN_FUNCTION(blsp8_spi),
-+	MSM_PIN_FUNCTION(blsp_i2c1),
-+	MSM_PIN_FUNCTION(blsp_i2c2),
-+	MSM_PIN_FUNCTION(blsp_i2c3),
-+	MSM_PIN_FUNCTION(blsp_i2c4),
-+	MSM_PIN_FUNCTION(blsp_i2c5),
-+	MSM_PIN_FUNCTION(blsp_i2c6),
-+	MSM_PIN_FUNCTION(blsp_i2c7),
-+	MSM_PIN_FUNCTION(blsp_i2c8),
-+	MSM_PIN_FUNCTION(blsp_spi1),
-+	MSM_PIN_FUNCTION(blsp_spi2),
-+	MSM_PIN_FUNCTION(blsp_spi3),
-+	MSM_PIN_FUNCTION(blsp_spi4),
-+	MSM_PIN_FUNCTION(blsp_spi5),
-+	MSM_PIN_FUNCTION(blsp_spi6),
-+	MSM_PIN_FUNCTION(blsp_spi7),
-+	MSM_PIN_FUNCTION(blsp_spi8),
-+	MSM_PIN_FUNCTION(blsp_uart1),
-+	MSM_PIN_FUNCTION(blsp_uart2),
-+	MSM_PIN_FUNCTION(blsp_uart3),
-+	MSM_PIN_FUNCTION(blsp_uart4),
-+	MSM_PIN_FUNCTION(blsp_uart5),
-+	MSM_PIN_FUNCTION(blsp_uart6),
-+	MSM_PIN_FUNCTION(blsp_uart7),
-+	MSM_PIN_FUNCTION(blsp_uart8),
-+	MSM_PIN_FUNCTION(cam0_ldo),
-+	MSM_PIN_FUNCTION(cam1_rst),
-+	MSM_PIN_FUNCTION(cam1_standby),
-+	MSM_PIN_FUNCTION(cam2_rst),
-+	MSM_PIN_FUNCTION(cam2_standby),
-+	MSM_PIN_FUNCTION(cam_mclk),
-+	MSM_PIN_FUNCTION(cci_async),
-+	MSM_PIN_FUNCTION(cci_i2c),
-+	MSM_PIN_FUNCTION(cci_timer0),
-+	MSM_PIN_FUNCTION(cci_timer1),
-+	MSM_PIN_FUNCTION(cdc_pdm0),
-+	MSM_PIN_FUNCTION(codec_int1),
-+	MSM_PIN_FUNCTION(codec_int2),
-+	MSM_PIN_FUNCTION(codec_mad),
-+	MSM_PIN_FUNCTION(coex_uart),
-+	MSM_PIN_FUNCTION(cri_trng),
-+	MSM_PIN_FUNCTION(cri_trng0),
-+	MSM_PIN_FUNCTION(cri_trng1),
-+	MSM_PIN_FUNCTION(dbg_out),
-+	MSM_PIN_FUNCTION(dmic0_clk),
-+	MSM_PIN_FUNCTION(dmic0_data),
-+	MSM_PIN_FUNCTION(ebi_cdc),
-+	MSM_PIN_FUNCTION(ebi_ch0),
-+	MSM_PIN_FUNCTION(ext_lpass),
-+	MSM_PIN_FUNCTION(forced_usb),
-+	MSM_PIN_FUNCTION(fp_gpio),
-+	MSM_PIN_FUNCTION(fp_int),
-+	MSM_PIN_FUNCTION(gcc_gp1_clk_a),
-+	MSM_PIN_FUNCTION(gcc_gp1_clk_b),
-+	MSM_PIN_FUNCTION(gcc_gp2_clk_a),
-+	MSM_PIN_FUNCTION(gcc_gp2_clk_b),
-+	MSM_PIN_FUNCTION(gcc_gp3_clk_a),
-+	MSM_PIN_FUNCTION(gcc_gp3_clk_b),
-+	MSM_PIN_FUNCTION(gcc_plltest),
-+	MSM_PIN_FUNCTION(gcc_tlmm),
-+	MSM_PIN_FUNCTION(gpio),
-+	MSM_PIN_FUNCTION(gsm0_tx),
-+	MSM_PIN_FUNCTION(key_focus),
-+	MSM_PIN_FUNCTION(key_snapshot),
-+	MSM_PIN_FUNCTION(key_volp),
-+	MSM_PIN_FUNCTION(ldo_en),
-+	MSM_PIN_FUNCTION(ldo_update),
-+	MSM_PIN_FUNCTION(lpass_slimbus),
-+	MSM_PIN_FUNCTION(lpass_slimbus0),
-+	MSM_PIN_FUNCTION(lpass_slimbus1),
-+	MSM_PIN_FUNCTION(m_voc),
-+	MSM_PIN_FUNCTION(mag_int),
-+	MSM_PIN_FUNCTION(mdp_vsync),
-+	MSM_PIN_FUNCTION(mipi_dsi0),
-+	MSM_PIN_FUNCTION(modem_tsync),
-+	MSM_PIN_FUNCTION(nav_pps),
-+	MSM_PIN_FUNCTION(nav_pps_in_a),
-+	MSM_PIN_FUNCTION(nav_pps_in_b),
-+	MSM_PIN_FUNCTION(nav_tsync),
-+	MSM_PIN_FUNCTION(nfc_pwr),
-+	MSM_PIN_FUNCTION(ov_ldo),
-+	MSM_PIN_FUNCTION(pa_indicator),
-+	MSM_PIN_FUNCTION(pbs0),
-+	MSM_PIN_FUNCTION(pbs1),
-+	MSM_PIN_FUNCTION(pbs2),
-+	MSM_PIN_FUNCTION(pri_mi2s),
-+	MSM_PIN_FUNCTION(pri_mi2s_mclk_a),
-+	MSM_PIN_FUNCTION(pri_mi2s_mclk_b),
-+	MSM_PIN_FUNCTION(pri_mi2s_ws),
-+	MSM_PIN_FUNCTION(prng_rosc),
-+	MSM_PIN_FUNCTION(pwr_crypto_enabled_a),
-+	MSM_PIN_FUNCTION(pwr_crypto_enabled_b),
-+	MSM_PIN_FUNCTION(pwr_modem_enabled_a),
-+	MSM_PIN_FUNCTION(pwr_modem_enabled_b),
-+	MSM_PIN_FUNCTION(pwr_nav_enabled_a),
-+	MSM_PIN_FUNCTION(pwr_nav_enabled_b),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_a0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_a1),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_b0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_b1),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_a0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_a1),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_b0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_b1),
-+	MSM_PIN_FUNCTION(qdss_traceclk_a),
-+	MSM_PIN_FUNCTION(qdss_traceclk_b),
-+	MSM_PIN_FUNCTION(qdss_tracectl_a),
-+	MSM_PIN_FUNCTION(qdss_tracectl_b),
-+	MSM_PIN_FUNCTION(qdss_tracedata_a),
-+	MSM_PIN_FUNCTION(qdss_tracedata_b),
-+	MSM_PIN_FUNCTION(sd_write),
-+	MSM_PIN_FUNCTION(sdcard_det),
-+	MSM_PIN_FUNCTION(sec_mi2s),
-+	MSM_PIN_FUNCTION(sec_mi2s_mclk_a),
-+	MSM_PIN_FUNCTION(sec_mi2s_mclk_b),
-+	MSM_PIN_FUNCTION(sensor_rst),
-+	MSM_PIN_FUNCTION(smb_int),
-+	MSM_PIN_FUNCTION(ssbi_wtr1),
-+	MSM_PIN_FUNCTION(ts_resout),
-+	MSM_PIN_FUNCTION(ts_sample),
-+	MSM_PIN_FUNCTION(uim1_clk),
-+	MSM_PIN_FUNCTION(uim1_data),
-+	MSM_PIN_FUNCTION(uim1_present),
-+	MSM_PIN_FUNCTION(uim1_reset),
-+	MSM_PIN_FUNCTION(uim2_clk),
-+	MSM_PIN_FUNCTION(uim2_data),
-+	MSM_PIN_FUNCTION(uim2_present),
-+	MSM_PIN_FUNCTION(uim2_reset),
-+	MSM_PIN_FUNCTION(uim_batt),
-+	MSM_PIN_FUNCTION(us_emitter),
-+	MSM_PIN_FUNCTION(us_euro),
-+	MSM_PIN_FUNCTION(wcss_bt),
-+	MSM_PIN_FUNCTION(wcss_fm),
-+	MSM_PIN_FUNCTION(wcss_wlan),
-+	MSM_PIN_FUNCTION(wcss_wlan0),
-+	MSM_PIN_FUNCTION(wcss_wlan1),
-+	MSM_PIN_FUNCTION(wcss_wlan2),
-+	MSM_PIN_FUNCTION(webcam_rst),
-+	MSM_PIN_FUNCTION(webcam_standby),
-+	MSM_PIN_FUNCTION(wsa_io),
-+	MSM_PIN_FUNCTION(wsa_irq),
-+	MSM_PIN_FUNCTION(wsa_reset),
-+};
-+
-+static const msm_pin_function msm8917_pin_functions[] = {
-+	PINGROUP(0, blsp_spi1, blsp_uart1, qdss_tracedata_b, _, _, _, _,
-+		 _, _),
-+	PINGROUP(1, blsp_spi1, blsp_uart1, adsp_ext, _, _, _, _, _,
-+		 qdss_tracedata_b),
-+	PINGROUP(2, blsp_spi1, blsp_uart1, blsp_i2c1, prng_rosc, _, _, _,
-+		 _, _),
-+	PINGROUP(3, blsp_spi1, blsp_uart1, blsp_i2c1, _, _, _, _, _, _),
-+	PINGROUP(4, blsp_spi2, blsp_uart2, ldo_update, _,
-+		 atest_combodac_to_gpio_native, _, _, _, _),
-+	PINGROUP(5, blsp_spi2, blsp_uart2, ldo_en, _, _, _, _, _, _),
-+	PINGROUP(6, blsp_spi2, blsp_uart2, blsp_i2c2, gcc_gp1_clk_b,
-+		 qdss_tracedata_b, _, _, _, _),
-+	PINGROUP(7, blsp_spi2, blsp_uart2, blsp_i2c2, pbs2, _,
-+		 qdss_tracedata_b, _, atest_gpsadc_dtest0_native, _),
-+	PINGROUP(8, blsp_spi3, blsp_uart3, pbs0, _, _, _, _, _, _),
-+	PINGROUP(9, blsp_spi3, blsp_uart3, pbs1, pwr_modem_enabled_b, _, _,
-+		 _, _, _),
-+	PINGROUP(10, blsp_spi3, blsp_uart3, blsp_i2c3, gcc_gp2_clk_b, _, _,
-+		 _, _, _),
-+	PINGROUP(11, blsp_spi3, blsp_uart3, blsp_i2c3, gcc_gp3_clk_b, _, _,
-+		 _, _, _),
-+	PINGROUP(12, blsp_spi4, blsp_uart4, sec_mi2s, pwr_nav_enabled_b, _,
-+		 _, _, _, _),
-+	PINGROUP(13, blsp_spi4, blsp_uart4, sec_mi2s, pwr_crypto_enabled_b, _,
-+		 _, _, _, _),
-+	PINGROUP(14, blsp_spi4, blsp_uart4, blsp_i2c4, _, _, _, _, _, _),
-+	PINGROUP(15, blsp_spi4, blsp_uart4, blsp_i2c4, _, _, _, _, _, _),
-+	PINGROUP(16, blsp_spi5, blsp_uart5, _, _, _, _, qdss_traceclk_a,
-+		 _, atest_bbrx1),
-+	PINGROUP(17, blsp_spi5, blsp_uart5, m_voc, qdss_cti_trig_in_a0, _,
-+		 atest_bbrx0, _, _, _),
-+	PINGROUP(18, blsp_spi5, blsp_uart5, blsp_i2c5, qdss_tracectl_a, _,
-+		 atest_gpsadc_dtest1_native, _, _, _),
-+	PINGROUP(19, blsp_spi5, blsp_uart5, blsp_i2c5, qdss_tracedata_a, _,
-+		 _, _, _, _),
-+	PINGROUP(20, blsp_spi6, blsp_uart6, _, _, _, _, _, _,
-+		 qdss_tracectl_b),
-+	PINGROUP(21, blsp_spi6, blsp_uart6, m_voc, _, _, _, _, _,
-+		 qdss_cti_trig_in_b0),
-+	PINGROUP(22, blsp_spi6, blsp_uart6, blsp_i2c6, qdss_traceclk_b, _,
-+		 atest_wlan0, _, _, _),
-+	PINGROUP(23, blsp_spi6, blsp_uart6, blsp_i2c6, qdss_tracedata_b, _,
-+		 atest_wlan1, _, _, _),
-+	PINGROUP(24, mdp_vsync, _, _, _, _, _, _, _, _),
-+	PINGROUP(25, mdp_vsync, pri_mi2s_mclk_a, sec_mi2s_mclk_a, _, _, _,
-+		 _, _, _),
-+	PINGROUP(26, cam_mclk, _, _, _, _, _, qdss_tracedata_a, _, _),
-+	PINGROUP(27, cam_mclk, _, _, _, _, _, _, _, qdss_tracedata_a),
-+	PINGROUP(28, cam_mclk, _, _, _, _, _, qdss_tracedata_a, _,
-+		 atest_combodac_to_gpio_native),
-+	PINGROUP(29, cci_i2c, pwr_modem_enabled_a, _, _, _, _, _,
-+		 qdss_tracedata_a, _),
-+	PINGROUP(30, cci_i2c, _, _, _, _, _, _, _, qdss_tracedata_a),
-+	PINGROUP(31, cci_i2c, _, _, _, _, _, _, _, qdss_tracedata_a),
-+	PINGROUP(32, cci_i2c, _, _, _, _, _, _, _, qdss_tracedata_a),
-+	PINGROUP(33, cci_timer0, _, _, _, _, _, _, _, qdss_tracedata_a),
-+	PINGROUP(34, cci_timer1, _, _, _, _, _, _, _, qdss_tracedata_a),
-+	PINGROUP(35, pwr_nav_enabled_a, _, _, _, _, _, _, _,
-+		 qdss_tracedata_a),
-+	PINGROUP(36, pwr_crypto_enabled_a, _, _, _, _, _, _, _,
-+		 qdss_tracedata_a),
-+	PINGROUP(37, _, _, _, _, _, qdss_cti_trig_out_b1, _, _, _),
-+	PINGROUP(38, _, qdss_tracedata_a, _, _, _, _, _, _, _),
-+	PINGROUP(39, cci_async, _, _, _, _, _, qdss_tracedata_a, _,
-+		 atest_combodac_to_gpio_native),
-+	PINGROUP(40, _, _, _, _, qdss_tracedata_a, _,
-+		 atest_combodac_to_gpio_native, _, _),
-+	PINGROUP(41, sd_write, _, _, _, _, _, _, _,
-+		 atest_combodac_to_gpio_native),
-+	PINGROUP(42, gcc_gp1_clk_a, qdss_tracedata_b, _,
-+		 atest_combodac_to_gpio_native, _, _, _, _, _),
-+	PINGROUP(43, gcc_gp2_clk_a, qdss_tracedata_b, _,
-+		 atest_combodac_to_gpio_native, _, _, _, _, _),
-+	PINGROUP(44, gcc_gp3_clk_a, qdss_tracedata_b, _,
-+		 atest_combodac_to_gpio_native, _, _, _, _, _),
-+	PINGROUP(45, _, _, atest_combodac_to_gpio_native, _, _, _, _, _,
-+		 _),
-+	PINGROUP(46, _, _, atest_combodac_to_gpio_native, _, _, _, _, _,
-+		 _),
-+	PINGROUP(47, blsp6_spi, _, qdss_tracedata_b, _,
-+		 atest_combodac_to_gpio_native, _, _, _, _),
-+	PINGROUP(48, _, qdss_cti_trig_in_b1, _,
-+		 atest_combodac_to_gpio_native, _, _, _, _, _),
-+	PINGROUP(49, uim_batt, _, _, _, _, _, _, _, _),
-+	PINGROUP(50, qdss_tracedata_a, _, _, _, _, _, _, _, _),
-+	PINGROUP(51, uim1_data, _, _, _, _, _, _, _, _),
-+	PINGROUP(52, uim1_clk, _, _, _, _, _, _, _, _),
-+	PINGROUP(53, uim1_reset, _, _, _, _, _, _, _, _),
-+	PINGROUP(54, uim1_present, _, _, _, _, _, _, _, _),
-+	PINGROUP(55, uim2_data, _, _, _, _, _, _, _, _),
-+	PINGROUP(56, uim2_clk, _, _, _, _, _, _, _, _),
-+	PINGROUP(57, uim2_reset, _, _, _, _, _, _, _, _),
-+	PINGROUP(58, uim2_present, _, _, _, _, _, _, _, _),
-+	PINGROUP(59, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(60, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(61, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(62, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(63, atest_char3, dbg_out, bimc_dte0, _, _, _, _, _, _),
-+	PINGROUP(64, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(65, bimc_dte0, _, _, _, _, _, _, _, _),
-+	PINGROUP(66, sec_mi2s_mclk_b, pri_mi2s, _, qdss_tracedata_b, _, _,
-+		 _, _, _),
-+	PINGROUP(67, atest_char1, ebi_cdc, _, atest_combodac_to_gpio_native,
-+		 _, _, _, _, _),
-+	PINGROUP(68, atest_char0, _, _, _, _, _, _, _, _),
-+	PINGROUP(69, audio_ref, cdc_pdm0, pri_mi2s_mclk_b, ebi_cdc, _, _, _,
-+		 _, _),
-+	PINGROUP(70, lpass_slimbus, cdc_pdm0, _, _, _, _, _, _, _),
-+	PINGROUP(71, lpass_slimbus0, cdc_pdm0, _, _, _, _, _, _, _),
-+	PINGROUP(72, lpass_slimbus1, cdc_pdm0, _, _, _, _, _, _, _),
-+	PINGROUP(73, cdc_pdm0, _, _, _, _, _, _, _, _),
-+	PINGROUP(74, cdc_pdm0, _, _, _, _, _, _, _, _),
-+	PINGROUP(75, wcss_bt, atest_char2, _, ebi_ch0, _, _, _, _, _),
-+	PINGROUP(76, wcss_wlan2, _, _, _, _, _, _, _, _),
-+	PINGROUP(77, wcss_wlan1, _, _, _, _, _, _, _, _),
-+	PINGROUP(78, wcss_wlan0, _, _, _, _, _, _, _, _),
-+	PINGROUP(79, wcss_wlan, _, _, _, _, _, _, _, _),
-+	PINGROUP(80, wcss_wlan, _, _, _, _, _, _, _, _),
-+	PINGROUP(81, wcss_fm, ext_lpass, _, _, _, _, _, _, _),
-+	PINGROUP(82, wcss_fm, cri_trng, _, _, _, _, _, _, _),
-+	PINGROUP(83, wcss_bt, cri_trng1, _, _, _, _, _, _, _),
-+	PINGROUP(84, wcss_bt, cri_trng0, _, _, _, _, _, _, _),
-+	PINGROUP(85, pri_mi2s, blsp_spi7, blsp_uart7, _, _, _, _, _, _),
-+	PINGROUP(86, pri_mi2s, blsp_spi7, blsp_uart7, qdss_tracedata_b, _, _,
-+		 _, _, _),
-+	PINGROUP(87, pri_mi2s_ws, blsp_spi7, blsp_uart7, blsp_i2c7,
-+		 qdss_tracedata_b, gcc_tlmm, _, _, _),
-+	PINGROUP(88, pri_mi2s, blsp_spi7, blsp_uart7, blsp_i2c7, _, _, _,
-+		 _, _),
-+	PINGROUP(89, dmic0_clk, _, _, _, _, _, _, _, _),
-+	PINGROUP(90, dmic0_data, _, _, _, _, _, _, _, _),
-+	PINGROUP(91, _, _, _, _, _, qdss_cti_trig_in_a1, _, _, _),
-+	PINGROUP(92, _, _, _, _, _, qdss_tracedata_b, _, _, _),
-+	PINGROUP(93, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(94, wsa_io, sec_mi2s, pri_mi2s, _, _, _, _, _, _),
-+	PINGROUP(95, wsa_io, sec_mi2s, pri_mi2s, _, _, _, _, _, _),
-+	PINGROUP(96, blsp_spi8, blsp_uart8, _, _, _, _, _, _, _),
-+	PINGROUP(97, blsp_spi8, blsp_uart8, _, _, _, _, _, _, _),
-+	PINGROUP(98, blsp_spi8, blsp_uart8, blsp_i2c8, gcc_plltest, _, _, _,
-+		 _, _),
-+	PINGROUP(99, blsp_spi8, blsp_uart8, blsp_i2c8, gcc_plltest, _, _, _,
-+		 _, _),
-+	PINGROUP(100, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(101, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(102, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(103, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(104, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(105, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(106, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(107, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(108, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(109, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(110, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(111, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(112, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(113, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(114, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(115, _, _, nav_pps_in_a, _, atest_combodac_to_gpio_native,
-+		 _, _, _, _),
-+	PINGROUP(116, _, pa_indicator, _, _, _, _, _, _, _),
-+	PINGROUP(117, _, modem_tsync, nav_tsync, nav_pps_in_b, nav_pps, _,
-+		 _, _, _),
-+	PINGROUP(118, _, ebi_cdc, _, _, _, _, _, _, _),
-+	PINGROUP(119, gsm0_tx, _, ebi_cdc, _, _, _, _, _, _),
-+	PINGROUP(120, _, atest_char, ebi_cdc, _, atest_tsens, _, _, _, _),
-+	PINGROUP(121, _, _, _, bimc_dte1, _, _, _, _, _),
-+	PINGROUP(122, _, ssbi_wtr1, _, _, bimc_dte1, _, _, _, _),
-+	PINGROUP(123, _, ssbi_wtr1, ebi_cdc, _, _, _, _, _, _),
-+	PINGROUP(124, coex_uart, _, _, _, _, _, _, _, _),
-+	PINGROUP(125, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(126, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(127, coex_uart, _, _, _, _, _, _, _, _),
-+	PINGROUP(128, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(129, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(130, blsp8_spi, _, _, _, _, _, _, _, _),
-+	PINGROUP(131, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(132, qdss_cti_trig_out_a0, _, _, _, _, _, _, _, _),
-+	PINGROUP(133, qdss_cti_trig_out_a1, _, _, _, _, _, _, _, _)
-+};
-+
-+static const struct msm_special_pin_data msm8917_special_pins_data[] = {
-+	SDC_PINGROUP("sdc1_clk", 0x10a000, 13, 6),
-+	SDC_PINGROUP("sdc1_cmd", 0x10a000, 11, 3),
-+	SDC_PINGROUP("sdc1_data", 0x10a000, 9, 0),
-+	SDC_PINGROUP("sdc1_rclk", 0x10a000, 15, 0),
-+	SDC_PINGROUP("sdc2_clk", 0x109000, 14, 6),
-+	SDC_PINGROUP("sdc2_cmd", 0x109000, 11, 3),
-+	SDC_PINGROUP("sdc2_data", 0x109000, 9, 0),
-+	SDC_PINGROUP("qdsd_clk", 0x19c000, 3, 0),
-+	SDC_PINGROUP("qdsd_cmd", 0x19c000, 8, 5),
-+	SDC_PINGROUP("qdsd_data0", 0x19c000, 13, 10),
-+	SDC_PINGROUP("qdsd_data1", 0x19c000, 18, 15),
-+	SDC_PINGROUP("qdsd_data2", 0x19c000, 23, 20),
-+	SDC_PINGROUP("qdsd_data3", 0x19c000, 28, 25),
-+};
-+
-+#define N_GPIO		ARRAY_SIZE(msm8917_pin_functions)
-+#define N_SPECIAL	ARRAY_SIZE(msm8917_special_pins_data)
-+
-+static int msm8917_get_function_mux(unsigned int pin, unsigned int selector)
-+{
-+	unsigned int i;
-+	const msm_pin_function *func;
-+
-+	if (pin >= N_GPIO)
-+		return -EINVAL;
-+
-+	func = msm8917_pin_functions + pin;
-+
-+	for (i = 0; i < 10; i++)
-+		if ((*func)[i] == selector)
-+			return i;
-+
-+	pr_err("Can't find requested function for pin %u\n", pin);
-+
-+	return -EINVAL;
++	return 0;
 +}
 +
-+static const char *msm8917_get_function_name(struct udevice *dev,
-+					     unsigned int selector)
-+{
-+	return msm8917_pinctrl_functions[selector].name;
-+}
-+
-+static const char *msm8917_get_pin_name(struct udevice *dev,
-+					unsigned int selector)
-+{
-+	if (selector >= N_GPIO)
-+		return msm8917_special_pins_data[selector - N_GPIO].name;
-+
-+	snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-+
-+	return pin_name;
-+}
-+
-+static const struct msm_pinctrl_data msm8917_data = {
-+	.pin_data = {
-+		.pin_count = N_GPIO + N_SPECIAL,
-+		.special_pins_start = N_GPIO,
-+		.special_pins_data = msm8917_special_pins_data,
-+	},
-+	.functions_count = ARRAY_SIZE(msm8917_pinctrl_functions),
-+	.get_function_name = msm8917_get_function_name,
-+	.get_function_mux = msm8917_get_function_mux,
-+	.get_pin_name = msm8917_get_pin_name,
++static const struct qcom_reset_map msm8917_resets[] = {
++	[GCC_CAMSS_MICRO_BCR]		= { 0x56008 },
++	[GCC_MSS_BCR]			= { 0x71000 },
++	[GCC_QUSB2_PHY_BCR]		= { 0x4103c },
++	[GCC_USB_HS_BCR]		= { 0x41000 },
++	[GCC_USB2_HS_PHY_ONLY_BCR]	= { 0x41034 },
++	[GCC_MDSS_BCR]			= { 0x4d074 },
 +};
 +
-+static const struct udevice_id msm_pinctrl_ids[] = {
++static const struct qcom_power_map msm8917_gdscs[] = {
++	[MDSS_GDSC] = { 0x4d078, true },
++};
++
++static struct msm_clk_data msm8917_gcc_data = {
++	.resets = msm8917_resets,
++	.num_resets = ARRAY_SIZE(msm8917_resets),
++	.clks = msm8917_clks,
++	.num_clks = ARRAY_SIZE(msm8917_clks),
++	.power_domains = msm8917_gdscs,
++	.num_power_domains = ARRAY_SIZE(msm8917_gdscs),
++
++	.enable = msm8917_enable,
++	.set_rate = msm8917_set_rate,
++};
++
++static const struct udevice_id gcc_msm8917_of_match[] = {
 +	{
-+		.compatible = "qcom,msm8917-pinctrl",
-+		.data = (ulong)&msm8917_data
++		.compatible = "qcom,gcc-msm8917",
++		.data = (ulong)&msm8917_gcc_data,
 +	},
-+	{ /* Sentinel */ }
++	{ }
 +};
 +
-+U_BOOT_DRIVER(pinctrl_msm8917) = {
-+	.name		= "pinctrl_msm8917",
++U_BOOT_DRIVER(gcc_msm8917) = {
++	.name		= "gcc_msm8917",
 +	.id		= UCLASS_NOP,
-+	.of_match	= msm_pinctrl_ids,
-+	.bind		= msm_pinctrl_bind,
-+	.flags		= DM_FLAG_PRE_RELOC,
++	.of_match	= gcc_msm8917_of_match,
++	.bind		= qcom_cc_bind,
++	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
 +};
 -- 
 2.55.0
