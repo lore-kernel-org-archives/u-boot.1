@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4457DC79F9F
-	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 14:04:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F107C88E40
+	for <u-boot@archiver.kernel.org>; Thu, 10 Sep 2026 14:04:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EE8D7810AA;
-	Thu, 10 Sep 2026 14:04:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 18C91810AE;
+	Thu, 10 Sep 2026 14:04:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HGtSjjK0wvxb; Thu, 10 Sep 2026 14:04:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org E66388108D
+ id LvTpIh29Jo6E; Thu, 10 Sep 2026 14:04:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 36531810B5
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789049087;
-	b=amBllEpZw59DzU1Vb3adx4OkuTZee1GUmZsIdE8dFCh2hSC6IZw5QXsVMh2Hoe//qtc9
-	 g0XMHCLZgorzcYPgFo0RcRPQ1T40rKbOoaar7nxfqHvALUquSTX5YeUg4wVE1vILKVWTn
-	 dtlfICQuqGlslNbjTSZ0CwHFMy48YJqamaJ9zuTkZ6kdb36U6FnGNssKo50BnsY8vCCvE
-	 F30atwHKwofFpZ6A8Uw8rlRdcUo3yT2RFuaXtOWdbiJP6GhY2r3Bsxr+LxtbQb8C9Ji4U
-	 NQjHLnqFv6/+Vvrd1xdoCfyHuVMaK1ysXO+1K0H9DMb9fd9Lje2CAtaJI5CjFngj3AA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789049089;
+	b=aY0UZEWRgus4zRvGY0c0XC8QveTnYgKocdK0NNZVAOhia1abVALJ0ZsOpXJVSSXj0jHI
+	 kChG6FsiFAwFJRi3gxAndP7RZW31sMEXQyX1qMXKZ3nrFtKZau2t0gZHxqz/dhV0O5WUb
+	 DJvpE81uwn8IAbO9oVPWxfyq+ecZrYbqrkQxokpgITnbEEgU69TzlworUL1tNc/HAXZ80
+	 kKXkoHZdQO54M8/arJNg/L2J4hhfTTOhuiOtqW1tz1gyHA2Jsc6AMAInThiElezptzJvM
+	 b5sqCOSH3Jx/tsldfIse7ceRsItmJzZSqD4cMA3hC89jSTJP6xdPy8G4dvu/bJ10c3w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789049087;
+	c=relaxed/relaxed; t=1789049089;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,136 +32,134 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=QgqLAMnM0QnMkdx8jYMYTz3x06MbZ4R0X0M4NhMO5Ok=;
-	b=IF2nP1ASJMHvxZaWjv5VV/Pke/UWR5yxPJB5cfAtezQRBmYe9qxzrQ/oGUqxYrGa1Moj
-	 ohbNpa8PyJ7TFOnXtoDa1KpfIPKDX8D8yPx4bCl7x7hjz0rWrmqQ3EfR63tKHyyAOwGEj
-	 B1wL0cEeGEL+SUmqwPchBrBRdFgHLgMFz9EprpZyC7SqteR09ps/CD4CklTTgbhGhHTCu
-	 UFODapoa9ozerVDVyTU8DkxB5rO0FYRMFSSyYVxRCkyiu65DX57cnBOqfKqzxEm2GO4az
-	 jfyzNw6F+WsH+l+h2uIBepSYFSevxKXY2eUwNrkpo/IGXDwoJz7EtgHNOZ5RvBywnIw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Cxshij5D;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=DaLoOW2uu/h4cUSSoUngVkh+ttTGZgP7da2caOc16R8=;
+	b=dIorxeGkAeY3RpzkRQ6iA5U2WISgAhh93cI/pzKQC99YdDVImoRP5ddoUSYupXNbavln
+	 zeukpVHbfDXPZsmRLn35xUVf1EQxP2bEvAUxZhCnAuraFGy7o230swCj8JaUv2mAYTrdm
+	 4jglRNXru9pfRKWJ8OlCr3O4mWcC/N1A0udNrPYDh+sdUdbzabxFeRKqUAoYRqEh9orIE
+	 mYv+JQCNNTeDRxKqLh38GV9/ci4Riy6noRVewC7WYKOgO3GJ/OyrMHbf4+1Mfu6St1NJJ
+	 rjNsUM4sHHFYIy6kZIiMQHOqWCM9u9wivksuyVhR82EIlQABrY73lJ7j03prkFed8Yg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789049087;
-	bh=QgqLAMnM0QnMkdx8jYMYTz3x06MbZ4R0X0M4NhMO5Ok=;
+	d=lists.u-boot-project.org; s=default; t=1789049089;
+	bh=DaLoOW2uu/h4cUSSoUngVkh+ttTGZgP7da2caOc16R8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=X3r9BAq0esNl5+6QbSCxDjeybPiz6hteowlxYvI1EzIuUf6aGbhbI4ZFlJ1h2JBWu
-	 GSSMZIN+kFEMeV3uGdFIi+f8/AzZz40tWZg5EAFjJhEaaRmcySccAEdb0KEqERRkYw
-	 ydSE+3Pq9liZDDCQn9FCRblzD0ylHRM8JwsCoPbeumhO42FBBf2btlF7ZC1bxHCSGp
-	 rjvMshdxagq0OjnlK/OMLslPFKjQ51mWTTg1qJ3W9zAo+kDb9lm67rF6q82olNu423
-	 kPAyK2k9AIyD4KXjwquMsJj4gdMEJ64+xljhkimlCwEYetK2WRrRN9Wt12oV7FpKwh
-	 zU/lf2RpmxLZw==
+	b=SpPfOt2/nDWndiMmv00oBiUnDiphOz+yroGC+Src+Ec2AnakccR8WTCwr/MrPwnw4
+	 mAshZMMM9Kv/pbc+cQ39cRmzxSEl6IoHCSbCNFJw2fy/G6LePYlbMCDi1lYQE2C0pF
+	 raapWvtu+kFjE3G6/RbVYJJtz/xTTrXtkfttHjmxb7nbt4Cy1xAJ9llU6lwLQg3qIp
+	 VP+HO0RZNAJjdU50t3OxW4+YJcVtOyl7YGXkBVdiPdzD8fkttqO419e5bBBuvgVaeD
+	 YGdm2gdQnJFGP1C7mDVZGEUVhE8ccnjIPVW6ANdXr00lksWSPLdP7Ms2uuMGxdBA2L
+	 EiKbFjzOIYH+A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E66388108D;
-	Thu, 10 Sep 2026 14:04:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 4CC4AE11
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:04:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 36531810B5;
+	Thu, 10 Sep 2026 14:04:49 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6BFC429B
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:04:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3E18B81007
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:04:40 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 25DC640680
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:04:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jGVL9hsiF2fw for <u-boot@lists.u-boot-project.org>;
- Thu, 10 Sep 2026 14:04:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org C8D7E81006
-Authentication-Results: smtp1.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AbY5CYua4w0M for <u-boot@lists.u-boot-project.org>;
+ Thu, 10 Sep 2026 14:04:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org DB20440593
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip="2a00:1450:4864:31::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789049079;
- b=WTs0ivEiPj59xKxY0U3dzCxU+fnUoELad64noSjqJQgQzwavYfQmWvzFL73gKVbpOxHY
- OtebkVNusiUpi2ZfP8FQEzJZTElHVd55CPX9DQEUEMFvFZmzog7prsZmWQ2c9juOdA35p
- hlQwHI4VWsqz1XxzHKcVxRQmeKu1EsvnzaPEexvo0Z8nXhN0aVhyhH6PLSJdP0uzjMwRN
- h6tUdJfkmRZe/j3FmZ9pcW7UKSRTJv5zK0cknSVIlh8p3JGjqq8kUeBGVYZMqb+JTjpjE
- 6EP9AvKBu7b3n/8XtNhtXjIoVIYMVeeOg58/DkjkOzMqvyeHmKM23G+rROi+F6p8C+w==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789049080;
+ b=awT4NPPkB2FDGshA6Z/hdZcMx6IuateQ75P4JLQUwvzfWTnQU8Xwl4tt1Xu0fF5xZa+U
+ fsaR6ZPg+0w2tHQZfuIimlQTF3fyuWTHkPLmC0KaZD3MN3d5vr4foAr455MXcUUah/W8T
+ cVCjUF1d6Xw8nP6TLUiOvvWLEHMZWv2Pb8RdwxufbNX53uDezLAKuEfYJ6HYYOdza0zo1
+ Wt8ssda8aa2wBRb2DLxksYDV5lNvZHz6ofTsEhUIgf/BOdXYBdOf67Qpex3JWjg5pmRO6
+ MNufBIqHic//IoM/EagPgbrGFOHUm00wcD2bNKHJksje3SRWJbk0S1N1UrTfOQ1BMdA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789049079;
+ c=relaxed/relaxed; t=1789049080;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=QgqLAMnM0QnMkdx8jYMYTz3x06MbZ4R0X0M4NhMO5Ok=;
- b=jD+2TxklVmuEUFSQIxzLc5NeqbJayAgSTrhERTtfb4iuYiZ8TgSFS7Bc7ABpOdjtncdz
- H86095sm/sgUlhiFgCcV1hKGEmNb5SPZkbGx11S7XfRQKu6wr67eCcfI7p+7Ai16NXbgM
- skfALbHSSrad/pPFRNT1Ta06U6FxuhfvGDZMJORrKxdkhRdDd7ULtFBzBTCk/3884RM2G
- tvLYaTSkvCWQ/6eUaogpEAB33A2/f6PSZY8y2xv7YElXFcwzooO4c9csP5XrRwiK/jAXA
- zYJBSJIGurwa6XTU+4EnrM8TsqDDISKKd06Zouh66pK7ip34+2p49xpra81Zum3/9+Q==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=DaLoOW2uu/h4cUSSoUngVkh+ttTGZgP7da2caOc16R8=;
+ b=BeAoj7IqUHbPo9DgIsnUIk8jLZ7mQm8uvBeuGIOChenjlbjhDE3VtBtHL5swdMXKAY2T
+ x+rNNEPePLP+t4Zq8wauTnhrKZ5QC8TUHJJHixMR0WORyWh0TF5J2wsKEoCW0lut73S/H
+ WmvIdiu6OOP1IP838dAt1YnwcqgLa9xI52l/wBP/jp+23iZ2ZnRNWUylznbXTCafKIvbm
+ rqiOHPc+EySwGxR7qo8qVMWYSQm9co4PEKQGBpAvkGOIS0nniENhFut1FoxqupK/TfLG2
+ axpAAi1z5Gio7kqqpcIWkGCXBFHyS/Pm10mKVvOZEHkKaY9mduveqGVbB3O49DAR6ng==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=Cxshij5D; 
+ header.s=google header.b=ZeCaNJdg; 
  arc=none smtp.remote-ip="2a00:1450:4864:31::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:31::10; helo=mail-wm2-x10.google.com;
  envelope-from=glaroque@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=Cxshij5D
+ header.a=rsa-sha256 header.s=google header.b=ZeCaNJdg
 Received: from mail-wm2-x10.google.com (mail-wm2-x10.google.com
  [IPv6:2a00:1450:4864:31::10])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C8D7E81006
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:04:38 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id DB20440593
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 14:04:39 +0000 (UTC)
 Received: by mail-wm2-x10.google.com with SMTP id
- 5b1f17b1804b1-49b912d37b5so14530405e9.2
- for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 07:04:38 -0700 (PDT)
+ 5b1f17b1804b1-49ce364488dso11619175e9.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 10 Sep 2026 07:04:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1789049076; x=1789653876;
+ d=baylibre.com; s=google; t=1789049077; x=1789653877;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=QgqLAMnM0QnMkdx8jYMYTz3x06MbZ4R0X0M4NhMO5Ok=;
- b=Cxshij5Dfu0gyaAmAn0bLhrpO+0TSXtpuBfvgRdZ8yG4RW92Dk+H8yd9ZN4KgnxQMc
- bdVsHtEOqJEtBxHYrlLTNi9EDGkKnbDeKBhDRJB2kMgbvIXnnbn4dEzqXvlJP167dk0l
- lTJcROXkvf7uC4T9xmS9e0ktAdevxGdIcKM6PCYx3FpH0SNMXAdaNHXbVDP1krjxrMfo
- FjuTCuop+EbEl2P269VzJFxDjJgRFdtbzX0Yw+GV4jO0irW04goPsO9JyvweJR4hm23c
- fe6u27k77mri2DWV3w8CfArsEqvI7wXa0lAK5oIZAJBVkeV36GsIOqDL333YMqDrSpPs
- rhuA==
+ bh=DaLoOW2uu/h4cUSSoUngVkh+ttTGZgP7da2caOc16R8=;
+ b=ZeCaNJdgrEEm4ohunKeyKfBWzTRAmJ3wL8bSXJWT2gBAR+MDY/IaET/6eqleTaeC6o
+ 1ieYsLYqO/oumZySSC7e5dj4hl695n1PEByT5hA1WLnwsTbsPR84YM5j2wuedgNk4VYY
+ mqLR0k6hRWyN7nuPWQwfJl5KaBvEIVDHd64cHbPq3CAWb42ZOAmku6IqtROkKxgQaMdu
+ 27u4l1QBSyN7g0VDSX3Au3QBvtAKscVkALFUFKQMsePFTGAPzVsi7EnbcA9nvLiZwzlT
+ SKh+XzUqcb3EQbnKeLXk1in6OKD0YXmtxicbv3ztAWHc552OKjbd0BVA0XAwlCA+DXnc
+ +y3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789049076; x=1789653876;
+ d=1e100.net; s=20251104; t=1789049077; x=1789653877;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=QgqLAMnM0QnMkdx8jYMYTz3x06MbZ4R0X0M4NhMO5Ok=;
- b=KPYNW2qDH+FCZSwiI9uhs2CkAgqZfbX1cN+ICmIEFO1tRgtHW4bwKWo6OdAK82DOOv
- CT8eDhSwU+LmrPj94XFyNxGEvzTiJM22bqWOCAEchldjlm2t7C6L5loM5xaNJMxI/kXh
- 9yZEDng7xsKMPHsdykjbtc/kxeJKKuNMHhj2gh67n86CUY7PEWG3JiC+aYy3cj1lj5+S
- OTI/sczmVNksYQHyjtPs4yFunxxDqyBeNfs/hgHEFRxwHXt/lbuOZ95hIt35g5DO3jjN
- X6bpRVOBdCbVof0L6vwj7RshSoGY6jHho4U8jDBl6xHpHmo3aTQZhKREXjGyz2jCYyJx
- 6NLw==
+ bh=DaLoOW2uu/h4cUSSoUngVkh+ttTGZgP7da2caOc16R8=;
+ b=FJ6znNSOxF97vu2C6//wmqHeHEwZrWK1SFhWuG/lTR/5CY/EUFbWzpRYTc4YZbvC1v
+ L1NyL75HHh9d6kEGF++yvjecEn9UOXyaYdO4TIhF9PkuoSnZqQPsuPfQ4ldfJr2nqsFI
+ aZ26qSX0C5NgGwNtBWQFowt2DR1TNkwW5YoE8T+sNHJ/ioF6aGR/HXt+tHoP2Psu1Jty
+ kiznmUQMYgVjLNWY+6krBH+MY+NFfU5Fz3gpT0EGhUTUHqQT/xosdl0AKajj5P04Xwq1
+ yt5zl5tJh/K3C6gbx3kAopZ79lxzskJjharjjCIl9t1M9cgiKJSfnZVXybnosSDvp2li
+ 2lsQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxEWxS0kyAAJR3NoVgZy7sUvakhNgK7lVP2nwdrNDjlWYDBWpY0y2VxOcYn3TnoTDIdIxSsauk=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++n9/LvRma4JXEw3j42A0OGXDPXI9zMjtjeYiAXNVKku2v9EW7gS
- +/ZadypFer3/LOzsQhxssCYzablq4lorAyxxvRX0/CbNCdWGRt1llnaMdoxOYjArsrcll3MxKAT
- I3YAez9U=
-X-Gm-Gg: AYBFou0LmthqOUtLwfWPxVwIvM5KLoCH6o8Ow7dFTWbRtkTN+TAq/FLGIWbEr1UgP0l
- +xp/VSZlEySdgsGqsc6eeMksLGRq91K76YPRqIXmxbB4alCtm9T2Z6Ni9HobYtfs7eAukGMEwbI
- GVfLMmaZz5KmFaJErhkxA0Ggj0wg0nuaXE9XvQakZSPrjf38y0t7WQRYTwUpNnYGT83acdXgi9B
- QMEvhCasCk4nrI3U+gZQ5pMgXauG+CRUN6kw1uEwR1jNSw93YQ/UhOaSQUgWLKmlUXBr2mzBiQ1
- S4D0uWLyqoEzwUuQko/b1XEDPOM1Jm522mA/DM4cxaQwzjGN9gbTR+sbjVSgKPNh9Knx/Crxadg
- x6yyFlZeEzs/IptmRgfOXumcycavxEj5KHXhJaWK9myjNs9X5Mgd0jX/LJ8SXIi7cA+jTXN9GaC
- Nn8bKkz2U86TAyJe6bK2OF3vsPynubqVKMdnhcImaMPExfRpkXGnzH/UKkUB1Z1odYBDopjYA=
-X-Received: by 2002:a05:600c:4f4b:b0:49c:ee20:e787 with SMTP id
- 5b1f17b1804b1-49d1f21afcdmr231341375e9.1.1789049075852; 
- Thu, 10 Sep 2026 07:04:35 -0700 (PDT)
+ AKwUvBxsbDafitUIpqRO5jJjFzzsjvkpo43v1cBVMjHaaGEIqGGSpAlEP+dBWJe6eDzmrMUD5u7ylwo=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nUDwwN3pNN6SE+uU+UY23xq78gUK4IVti9hXbK4610MzFVNb4u
+ 8TpRf6KPz76mYmhxkU+CR+3pvtVo9W06DYFr5UOAxCHDFY8tUs3VmOw5qQh84T+Pn+Lr4c8dqct
+ rVX/uH/I=
+X-Gm-Gg: AYBFou1B8VHd2HANYYHHdU4ZA/rwdGvIXVW/oXmuZpbHojWnrvK4z7QA9aqNAm+MPau
+ 2U6lHNg6z6DlJs6okSb3ldG15xElJbsVQBv5wqA00Gq/1o7ckIRNgsmsgt93/rHghbN/SkXYfu5
+ qzPRQVovSSL4GFMj9JFVPxssw7mGoe95K8H0oA80TzNnxsMKGPQzhnkSUNz2DhDLHUP4SvjJ8ML
+ 7GdgXTBPRk606/cVn2AHtUlUuaPLwv3nTj2f4fVAV4nC0kJR6w07r47ES9WM4oXsPrpTd42rKQX
+ s/VG32xX+uXmnwNcxh8huuxQH+vVvRUwgLxM1yC9xzmRTfZP0KWNovD+JWJBsqePsOcRFXquq24
+ 6gyi9HLCo76SCLaAUDW1haEebhiXgdV+hSIvG6nD67zdXEQkrVbAUvaRUzPzYVrsdzfxoL8JT6y
+ DAzy7CTuzQCEhjzgzUMZH4N6MRNSZpPHiNoyWU08aDxXMfjgcxbvMEVdc00Qp8cDzJ4FZt4OM=
+X-Received: by 2002:a05:600c:548f:b0:49d:2936:8ad1 with SMTP id
+ 5b1f17b1804b1-49d29368cc2mr40579975e9.1.1789049077348; 
+ Thu, 10 Sep 2026 07:04:37 -0700 (PDT)
 Received: from [127.0.1.1] ([2a01:e0a:e50:3860::642d:5bda])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49d20db6e76sm147660745e9.3.2026.09.10.07.04.34
+ 5b1f17b1804b1-49d20db6e76sm147660745e9.3.2026.09.10.07.04.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 07:04:35 -0700 (PDT)
+ Thu, 10 Sep 2026 07:04:36 -0700 (PDT)
 From: Guillaume La Roque <glaroque@baylibre.com>
-Date: Thu, 10 Sep 2026 16:04:22 +0200
-Subject: [PATCH 1/3] configs: sei510: drop Android support
+Date: Thu, 10 Sep 2026 16:04:24 +0200
+Subject: [PATCH 3/3] configs: remove unused meson64_android.h
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260910-remove_sei_android-v1-1-b7bcbcef3834@baylibre.com>
+Message-Id: <20260910-remove_sei_android-v1-3-b7bcbcef3834@baylibre.com>
 References: <20260910-remove_sei_android-v1-0-b7bcbcef3834@baylibre.com>
 In-Reply-To: <20260910-remove_sei_android-v1-0-b7bcbcef3834@baylibre.com>
 To: u-boot-amlogic@groups.io, u-boot@lists.u-boot-project.org
@@ -183,116 +181,312 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Android is no longer supported on SEI510. Remove its Android
-configuration and use meson64.h for generic board support.
-
-Drop "fastboot oem format" as well, since it depends on the removed
-Android partition layout.
+SEI510 and SEI610 were the last users of meson64_android.h. Remove
+this unused header now that both boards use meson64.h.
 
 Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
 ---
- board/amlogic/sei510/MAINTAINERS |  1 -
- configs/sei510_defconfig         | 10 ----------
- include/configs/sei510.h         | 30 ------------------------------
- 3 files changed, 41 deletions(-)
+ MAINTAINERS                       |   1 -
+ include/configs/meson64_android.h | 279 --------------------------------------
+ 2 files changed, 280 deletions(-)
 
-diff --git a/board/amlogic/sei510/MAINTAINERS b/board/amlogic/sei510/MAINTAINERS
-index c6039bc82e2..ea27e800983 100644
---- a/board/amlogic/sei510/MAINTAINERS
-+++ b/board/amlogic/sei510/MAINTAINERS
-@@ -4,5 +4,4 @@ S:	Maintained
- L:	u-boot-amlogic@groups.io
- F:	board/amlogic/sei510/
- F:	configs/sei510_defconfig
--F:	include/configs/sei510.h
- F:	doc/board/amlogic/sei510.rst
-diff --git a/configs/sei510_defconfig b/configs/sei510_defconfig
-index 689c12e388f..0ef6343098a 100644
---- a/configs/sei510_defconfig
-+++ b/configs/sei510_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_SYS_BOARD="sei510"
--CONFIG_SYS_CONFIG_NAME="sei510"
- CONFIG_ARCH_MESON=y
- CONFIG_TEXT_BASE=0x01000000
- CONFIG_SYS_MALLOC_LEN=0x8000000
-@@ -25,18 +24,12 @@ CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_OF_BOARD_SETUP=y
--CONFIG_USE_PREBOOT=y
--CONFIG_PREBOOT="run load_logo"
- # CONFIG_CONSOLE_MUX is not set
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_MISC_INIT_R=y
--CONFIG_AVB_VERIFY=y
- CONFIG_SYS_MAXARGS=32
- # CONFIG_CMD_BDI is not set
--CONFIG_CMD_ADTIMG=y
--CONFIG_CMD_ABOOTIMG=y
- # CONFIG_CMD_IMI is not set
--CONFIG_CMD_BCB=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
-@@ -47,7 +40,6 @@ CONFIG_CMD_USB_MASS_STORAGE=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_BMP=y
- CONFIG_CMD_REGULATOR=y
--CONFIG_CMD_AVB=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-@@ -58,7 +50,6 @@ CONFIG_USB_FUNCTION_FASTBOOT=y
- CONFIG_FASTBOOT_BUF_ADDR=0x6000000
- CONFIG_FASTBOOT_FLASH=y
- CONFIG_FASTBOOT_FLASH_MMC_DEV=2
--CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- # CONFIG_INPUT is not set
- CONFIG_MMC_MESON_GX=y
- CONFIG_DM_MDIO=y
-@@ -99,4 +90,3 @@ CONFIG_VIDEO_BMP_RLE8=y
- CONFIG_BMP_16BPP=y
- CONFIG_BMP_24BPP=y
- CONFIG_BMP_32BPP=y
--CONFIG_LIBAVB=y
-diff --git a/include/configs/sei510.h b/include/configs/sei510.h
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 4e9ccca5ca4..e5bf89afdec 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -198,7 +198,6 @@ F:	drivers/power/domain/meson-gx-pwrc-vpu.c
+ F:	drivers/video/meson/
+ F:	drivers/watchdog/meson_gxbb_wdt.c
+ F:	include/configs/meson64.h
+-F:	include/configs/meson64_android.h
+ F:	tools/amlimage*
+ F:	doc/board/amlogic/
+ N:	meson
+diff --git a/include/configs/meson64_android.h b/include/configs/meson64_android.h
 deleted file mode 100644
-index 0f8070b8d31..00000000000
---- a/include/configs/sei510.h
+index d6ef0a83a68..00000000000
+--- a/include/configs/meson64_android.h
 +++ /dev/null
-@@ -1,30 +0,0 @@
+@@ -1,279 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * Configuration for the SEI510
+- * Configuration for Android Amlogic Meson 64bits SoCs
 - *
 - * Copyright (C) 2019 Baylibre, SAS
 - * Author: Jerome Brunet <jbrunet@baylibre.com>
 - */
 -
--#ifndef __CONFIG_H
--#define __CONFIG_H
+-#ifndef __MESON64_ANDROID_CONFIG_H
+-#define __MESON64_ANDROID_CONFIG_H
 -
--#define LOGO_UUID "43a3305d-150f-4cc9-bd3b-38fca8693846;"
--#define ROOT_UUID "ddb8c3f6-d94d-4394-b633-3134139cc2e0;"
+-#include <linux/sizes.h>
 -
--#define PARTS_DEFAULT \
--	"uuid_disk=${uuid_gpt_disk};" \
--	"name=logo,size=2M,uuid=" LOGO_UUID \
--	"name=misc,size=128K,uuid=${uuid_gpt_misc};" \
--	"name=dtbo,size=8M,uuid=${uuid_gpt_dtbo};" \
--	"name=vbmeta,size=64K,uuid=${uuid_gpt_vbmeta};" \
--	"name=boot,size=32M,bootable,uuid=${uuid_gpt_boot};" \
--	"name=recovery,size=32M,uuid=${uuid_gpt_recovery};" \
--	"name=cache,size=256M,uuid=${uuid_gpt_cache};" \
--	"name=super,size=2304M,uuid=${uuid_gpt_super};" \
--	"name=userdata,size=4820M,uuid=${uuid_gpt_userdata};" \
--	"name=rootfs,size=-,uuid=" ROOT_UUID
+-#ifndef BOOT_PARTITION
+-#define BOOT_PARTITION "boot"
+-#endif
 -
--#include <configs/meson64_android.h>
+-#ifndef LOGO_PARTITION
+-#define LOGO_PARTITION "logo"
+-#endif
 -
--#endif /* __CONFIG_H */
+-#ifndef CONTROL_PARTITION
+-#define CONTROL_PARTITION "misc"
+-#endif
+-
+-#ifndef EXTRA_ANDROID_ENV_SETTINGS
+-#define EXTRA_ANDROID_ENV_SETTINGS ""
+-#endif
+-
+-#if defined(CONFIG_CMD_AVB)
+-#define AVB_VERIFY_CHECK \
+-	"if test \"${force_avb}\" -eq 1; then " \
+-		"if run avb_verify; then " \
+-			"echo AVB verification OK.;" \
+-			"setenv bootargs \"$bootargs $avb_bootargs\";" \
+-		"else " \
+-			"echo AVB verification failed.;" \
+-		"exit; fi;" \
+-	"else " \
+-		"setenv bootargs \"$bootargs androidboot.verifiedbootstate=orange\";" \
+-		"echo Running without AVB...; "\
+-	"fi;"
+-
+-#define AVB_VERIFY_CMD "avb_verify=avb init ${mmcdev}; avb verify $slot_suffix;\0"
+-#else
+-#define AVB_VERIFY_CHECK ""
+-#define AVB_VERIFY_CMD ""
+-#endif
+-
+-#if defined(CONFIG_CMD_BCB) && defined(CONFIG_ANDROID_AB)
+-#define ANDROIDBOOT_GET_CURRENT_SLOT_CMD "get_current_slot=" \
+-	"if part number mmc ${mmcdev} " CONTROL_PARTITION " control_part_number; " \
+-	"then " \
+-		"echo " CONTROL_PARTITION \
+-			" partition number:${control_part_number};" \
+-		"bcb ab_select current_slot mmc ${mmcdev}:${control_part_number};" \
+-	"else " \
+-		"echo " CONTROL_PARTITION " partition not found;" \
+-	"fi;\0"
+-
+-#define AB_SELECT_SLOT \
+-	"run get_current_slot; " \
+-	"if test -e \"${current_slot}\"; " \
+-	"then " \
+-		"setenv slot_suffix _${current_slot}; " \
+-	"else " \
+-		"echo current_slot not found;" \
+-		"exit;" \
+-	"fi;"
+-
+-#define AB_SELECT_ARGS \
+-	"setenv bootargs_ab androidboot.slot_suffix=${slot_suffix}; " \
+-	"echo A/B cmdline addition: ${bootargs_ab};" \
+-	"setenv bootargs ${bootargs} ${bootargs_ab};"
+-
+-#define AB_BOOTARGS " androidboot.force_normal_boot=1"
+-#define RECOVERY_PARTITION "boot"
+-#else
+-#define AB_SELECT_SLOT ""
+-#define AB_SELECT_ARGS " "
+-#define ANDROIDBOOT_GET_CURRENT_SLOT_CMD ""
+-#define AB_BOOTARGS " "
+-#define RECOVERY_PARTITION "recovery"
+-#endif
+-
+-#if defined(CONFIG_CMD_ABOOTIMG)
+-/*
+- * Prepares complete device tree blob for current board (for Android boot).
+- *
+- * Boot image or recovery image should be loaded into $loadaddr prior to running
+- * these commands. The logic of these commnads is next:
+- *
+- *   1. Read correct DTB for current SoC/board from boot image in $loadaddr
+- *      to $fdtaddr
+- *   2. Merge all needed DTBO for current board from 'dtbo' partition into read
+- *      DTB
+- *   3. User should provide $fdtaddr as 3rd argument to 'bootm'
+- */
+-#define PREPARE_FDT \
+-	"echo Preparing FDT...; " \
+-	"if test $board_name = sei510; then " \
+-		"echo \"  Reading DTB for sei510...\"; " \
+-		"setenv dtb_index 0;" \
+-	"elif test $board_name = sei610; then " \
+-		"echo \"  Reading DTB for sei610...\"; " \
+-		"setenv dtb_index 1;" \
+-	"else " \
+-		"echo Error: Android boot is not supported for $board_name; " \
+-		"exit; " \
+-	"fi; " \
+-	"abootimg get dtb --index=$dtb_index dtb_start dtb_size; " \
+-	"cp.b $dtb_start $fdt_addr_r $dtb_size; " \
+-	"fdt addr $fdt_addr_r  0x80000; "
+-
+-#define BOOT_CMD "bootm ${loadaddr} ${loadaddr} ${fdt_addr_r};"
+-
+-#else
+-#define PREPARE_FDT " "
+-#define BOOT_CMD "bootm ${loadaddr};"
+-#endif
+-
+-#define BOOTENV_DEV_FASTBOOT(devtypeu, devtypel, instance) \
+-	"bootcmd_fastboot=" \
+-		"setenv run_fastboot 0;" \
+-		"if test \"${boot_source}\" = \"usb\"; then " \
+-			"echo Fastboot forced by usb rom boot;" \
+-			"setenv run_fastboot 1;" \
+-		"fi;" \
+-		"if test \"${run_fastboot}\" -eq 0; then " \
+-			"if gpt verify mmc ${mmcdev} ${partitions}; then; " \
+-			"else " \
+-				"echo Broken MMC partition scheme;" \
+-				"setenv run_fastboot 1;" \
+-			"fi; " \
+-		"fi;" \
+-		"if test \"${run_fastboot}\" -eq 0; then " \
+-			"if bcb load " __stringify(CONFIG_FASTBOOT_FLASH_MMC_DEV) " " \
+-			CONTROL_PARTITION "; then " \
+-				"if bcb test command = bootonce-bootloader; then " \
+-					"echo BCB: Bootloader boot...; " \
+-					"bcb clear command; bcb store; " \
+-					"setenv run_fastboot 1;" \
+-				"elif bcb test command = boot-fastboot; then " \
+-					"echo BCB: fastboot userspace boot...; " \
+-					"setenv force_recovery 1;" \
+-				"fi; " \
+-			"else " \
+-				"echo Warning: BCB is corrupted or does not exist; " \
+-			"fi;" \
+-		"fi;" \
+-		"if test \"${run_fastboot}\" -eq 1; then " \
+-			"echo Running Fastboot...;" \
+-			"fastboot " __stringify(CONFIG_FASTBOOT_USB_DEV) "; " \
+-		"fi\0"
+-
+-#define BOOTENV_DEV_NAME_FASTBOOT(devtypeu, devtypel, instance)	\
+-		"fastboot "
+-
+-#define BOOTENV_DEV_RECOVERY(devtypeu, devtypel, instance) \
+-	"bootcmd_recovery=" \
+-		"pinmux dev pinctrl@14;" \
+-		"pinmux dev pinctrl@40;" \
+-		"setenv run_recovery 0;" \
+-		"if run check_button; then " \
+-			"echo Recovery button is pressed;" \
+-			"setenv run_recovery 1;" \
+-		"fi; " \
+-		"if bcb load " __stringify(CONFIG_FASTBOOT_FLASH_MMC_DEV) " " \
+-		CONTROL_PARTITION "; then " \
+-			"if bcb test command = boot-recovery; then " \
+-				"echo BCB: Recovery boot...; " \
+-				"setenv run_recovery 1;" \
+-			"fi;" \
+-		"else " \
+-			"echo Warning: BCB is corrupted or does not exist; " \
+-		"fi;" \
+-		"if test \"${skip_recovery}\" -eq 1; then " \
+-			"echo Recovery skipped by environment;" \
+-			"setenv run_recovery 0;" \
+-		"fi;" \
+-		"if test \"${force_recovery}\" -eq 1; then " \
+-			"echo Recovery forced by environment;" \
+-			"setenv run_recovery 1;" \
+-		"fi;" \
+-		"if test \"${run_recovery}\" -eq 1; then " \
+-			"echo Running Recovery...;" \
+-			"mmc dev ${mmcdev};" \
+-			"setenv bootargs \"${bootargs} androidboot.serialno=${serial#}\";" \
+-			AB_SELECT_SLOT \
+-			AB_SELECT_ARGS \
+-			AVB_VERIFY_CHECK \
+-			"part start mmc ${mmcdev} " RECOVERY_PARTITION "${slot_suffix} boot_start;" \
+-			"part size mmc ${mmcdev} " RECOVERY_PARTITION "${slot_suffix} boot_size;" \
+-			"if mmc read ${loadaddr} ${boot_start} ${boot_size}; then " \
+-				PREPARE_FDT \
+-				"echo Running Android Recovery...;" \
+-				BOOT_CMD \
+-			"fi;" \
+-			"echo Failed to boot Android...;" \
+-			"reset;" \
+-		"fi\0"
+-
+-#define BOOTENV_DEV_NAME_RECOVERY(devtypeu, devtypel, instance)	\
+-		"recovery "
+-
+-#define BOOTENV_DEV_SYSTEM(devtypeu, devtypel, instance) \
+-	"bootcmd_system=" \
+-		"echo Loading Android " BOOT_PARTITION " partition...;" \
+-		"mmc dev ${mmcdev};" \
+-		"setenv bootargs ${bootargs} androidboot.serialno=${serial#};" \
+-		AB_SELECT_SLOT \
+-		AB_SELECT_ARGS \
+-		AVB_VERIFY_CHECK \
+-		"part start mmc ${mmcdev} " BOOT_PARTITION "${slot_suffix} boot_start;" \
+-		"part size mmc ${mmcdev} " BOOT_PARTITION "${slot_suffix} boot_size;" \
+-		"if mmc read ${loadaddr} ${boot_start} ${boot_size}; then " \
+-			PREPARE_FDT \
+-			"setenv bootargs \"${bootargs} " AB_BOOTARGS "\"  ; " \
+-			"echo Running Android...;" \
+-			BOOT_CMD \
+-		"fi;" \
+-		"echo Failed to boot Android...;\0"
+-
+-#define BOOTENV_DEV_NAME_SYSTEM(devtypeu, devtypel, instance)	\
+-		"system "
+-
+-#define BOOTENV_DEV_PANIC(devtypeu, devtypel, instance) \
+-	"bootcmd_panic=" \
+-		"fastboot " __stringify(CONFIG_FASTBOOT_USB_DEV) "; " \
+-		"reset\0"
+-
+-#define BOOTENV_DEV_NAME_PANIC(devtypeu, devtypel, instance)	\
+-		"panic "
+-
+-#define BOOT_TARGET_DEVICES(func) \
+-	func(FASTBOOT, fastboot, na) \
+-	func(RECOVERY, recovery, na) \
+-	func(SYSTEM, system, na) \
+-	func(PANIC, panic, na) \
+-
+-#define PREBOOT_LOAD_LOGO \
+-	"if test \"${boot_source}\" != \"usb\" && " \
+-		"gpt verify mmc ${mmcdev} ${partitions}; then; " \
+-		"mmc dev ${mmcdev};" \
+-		"part start mmc ${mmcdev} " LOGO_PARTITION " boot_start;" \
+-		"part size mmc ${mmcdev} " LOGO_PARTITION " boot_size;" \
+-		"if mmc read ${loadaddr} ${boot_start} ${boot_size}; then " \
+-			"bmp display ${loadaddr} m m;" \
+-		"fi;" \
+-	"fi;"
+-
+-#define CFG_EXTRA_ENV_SETTINGS                                     \
+-	EXTRA_ANDROID_ENV_SETTINGS                                    \
+-	"partitions=" PARTS_DEFAULT "\0"                              \
+-	"mmcdev=2\0"                                                  \
+-	"fastboot_raw_partition_bootloader=0x1 0xfff mmcpart 1\0"     \
+-	"fastboot_raw_partition_bootenv=0x0 0xfff mmcpart 2\0"        \
+-	ANDROIDBOOT_GET_CURRENT_SLOT_CMD                              \
+-	AVB_VERIFY_CMD                                                \
+-	"force_avb=0\0"                                               \
+-	"gpio_recovery=88\0"                                          \
+-	"check_button=gpio input ${gpio_recovery};test $? -eq 0;\0"   \
+-	"load_logo=" PREBOOT_LOAD_LOGO "\0"			      \
+-	"stdin=" STDIN_CFG "\0"                                       \
+-	"stdout=" STDOUT_CFG "\0"                                     \
+-	"stderr=" STDOUT_CFG "\0"                                     \
+-	"dtboaddr=0x08200000\0"                                       \
+-	"loadaddr=0x01080000\0"                                       \
+-	"fdt_addr_r=0x01000000\0"                                     \
+-	"scriptaddr=0x08000000\0"                                     \
+-	"kernel_addr_r=0x01080000\0"                                  \
+-	"pxefile_addr_r=0x01080000\0"                                 \
+-	"ramdisk_addr_r=0x13000000\0"                                 \
+-	"fdtfile=amlogic/" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0"        \
+-	BOOTENV
+-
+-#include <configs/meson64.h>
+-
+-#endif /* __MESON64_ANDROID_CONFIG_H */
 
 -- 
 2.34.1
