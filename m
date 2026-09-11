@@ -1,149 +1,229 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA0E2C88E50
-	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 12:34:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4491CC88E50
+	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 12:38:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 787616066B;
-	Fri, 11 Sep 2026 12:34:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E170C40804;
+	Fri, 11 Sep 2026 12:38:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ySemO7P6LHf4; Fri, 11 Sep 2026 12:34:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A5E6A605F1
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789130093;
-	b=JKvZaV0n2Ju0Skhm7UpEcdaTzro0G9Kp6z2DdXM1TyCfRufjdmu59XO0lCCdhkaSTEWG
-	 oGF7OdCgjjzrawOhl903MlNDrIUb/u8ZzhL8FA9TxD2GF/+d0T5FrRBITWqX2TydnqiiW
-	 tIBqK6rk3kdaj5ydoeEJ8SqWQFwGgl5Nu6osT14rJ9+CgxN41emScpMFJXUP46acjTlCg
-	 HjY6b1MfRmCOOjOv6hkxTlieh5s132vVB/m294hRwS7ZLvWvMaH03TGWmW7PBSGABUZch
-	 CYSgJTkb+g2dIzNF2Q81rSsSL0RIcHa5sSOuyBpiLtxLgtFI7LqSSIsT7PKazAL7b9w==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789130093;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sz39ZAArgNjU; Fri, 11 Sep 2026 12:38:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 286E8407FC
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789130314;
+	b=UrT58KeNVQsmcbCuGcj+Go+HE9aDg8WktBh4REwxV5mvukgPo6AuqGZ2XEozNR4BXQYz
+	 mi5Upxxctk8OJdFnnjLIEzqQNQDswBZNXJ4qfKXcZNH68JoUWpydaWBuVsVQnqOKE3x/F
+	 3Jwu6rezq3thlg8S6xMAvxJXnjlHigUEg4fMSkb/oFzBXPJBlaDWoRwOP8T+FPRxFZAyk
+	 0lapnpJWOrAN1ItrrDOZSzhtBKtcMuAXfx8AlAq8ZC3JjPALCDfKF90HxgAozD+z05q25
+	 M/4LJhpOjk/UFLw5RawOhWAJNgbzGKUlNcly2/76HpqsWUHL872OYZ0NISWIjsJEitQ==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1789130314;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
-	 Date:Message-ID:MIME-Version:Content-Type:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
+	 Received-SPF:Received:Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:CC:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Originating-IP:
+	 X-ClientProxiedBy:X-EOPAttributedMessage:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-Id:
+	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=4cYkZSWhBvYYjk2sKqgmsYfMjbKCfcHrMbFCI1wo+Sw=;
-	b=sn/pmfoQtLIvGSesX3UscO6b1n8ti494TaEVBtqMpEQS+54zcABzbBBgrz4+B0E8KcDM
-	 7Pt+ieWC7Bgl3oJe52Yew+RflaMfbpziEP9dy38BtTHgT0IojF5JT/rF5VppI/z+twkfn
-	 e1gjSeZC8YuJ4+RefcF/rV8jlrHoFLVPcn1rufq4Q5Ny3C91Tor/vkbKO+FgKqTuMm8rK
-	 KME79ajgi0xaUJNAtAEaYwPjEtyiMjzEMTrlrcJK210DQ61n66WsJLvGZ78hXVSWUYxco
-	 8JMAcpT5S83VX9gLtj4yFrpDqH5A5IdQOgH0zycBTET0zxEIunByATW1x5Stj7AqhZw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PqUPvDXX;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=pek/ibjmNcJVeUhE3h0BEUMdW5UcQF3cOah6tesh6LQ=;
+	b=OJIbFj4pNth0d4n1M6gnV1rM0PIWEi9Z1iYYPuJNzfhz9NLEeBhG+pKAr3a4+NztAq9l
+	 Wb7VieR9Y5FIPNhftWx58B4KG1f1OphEz5ABWQyK/0ncICP2vVb8Ek3aezR+EAlpt8vTH
+	 OxfzCqsTBFQCQeaYdcBHHQgwbgLlagD2g2QvLUy98DLu5tBpUibd6l1nhm+/TLcl2x7Df
+	 Z/4nk7Yw7oPpYTIV6Uv81pReXQnXRfuUcMucWNmCq7Rw1arG88zKHaMLdcdRVfQJnVGN/
+	 86TOTN+6EGFrRF3FZdtBLgr+hDJ4vePeunoqij2v6RevFvsQZ52IDxOvnpQXZdTejkg==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789130093;
-	bh=4cYkZSWhBvYYjk2sKqgmsYfMjbKCfcHrMbFCI1wo+Sw=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1789130314;
+	bh=pek/ibjmNcJVeUhE3h0BEUMdW5UcQF3cOah6tesh6LQ=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=BDn1xCGz4mH7SoFA+DGpe9Bzdxf530mbLkj5b/kj/c7/3vzec+wQvD0x2TsX4d+p4
-	 H2SO40VztU4jAP6g38UqCfg0Khtczjf7uDdLvKF0oAp3+gjq1uvxHKl/sCMLfT67PM
-	 gPs4Bkc1t4CJeUWW926VFEVZVcr3c9/p6jHrCUHMtmYIinUrLrGaqa6zd0LR2Hm7aJ
-	 ZXHEB8tUYdbAdIPi8dDZBqOez/CmX6HDx6CwwTa1g576RURHk31g03g1RYst3HZPLz
-	 stx6DQuGtvcdsH3T7w3ZILl/G8Oc7pT7GkWOrFZ9Bg//O+yUdDHwDEWW1R0BBWEf4V
-	 F4ms3eHfNGZdQ==
+	b=c0dw3xZnFcJJQyiBuQiwsN9Jbb0LXyS/IaruT3ScVTWXsoxBP/DAjuulpTzccT2dn
+	 WSSY1G+QptTIVpiUmRdBbhRUrTYwuEqC0PkfifDpNypEvkB3iGXdiXqmBmV4GS/E39
+	 o8kAW1T2aVXhTAyZrtAwyUhrfwC2OCm+bcA2R/kGmV7SN1ajPbUUR1jMRWp3SlfSQ7
+	 Sv8pHCw1MhjAFtXfdG6LKLSpieCOtbwildHSxNo+GTuPZ4PJ3VEo5A4b3LnnvI3vUd
+	 mGfcx5VUG2ofE8MOZqm8+aPXYNmyD9tG/tzOagSIrvHsoAn7m3/QlwoP7yBg/n6xDS
+	 oRmMrP9b6rU7g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A5E6A605F1;
-	Fri, 11 Sep 2026 12:34:53 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 4D862701
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:34:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 286E8407FC;
+	Fri, 11 Sep 2026 12:38:34 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4F403701
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:38:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3384760607
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:34:52 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2D16C401DA
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:38:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yRA0cAOUbHu3 for <u-boot@lists.u-boot-project.org>;
- Fri, 11 Sep 2026 12:34:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 815BC605E4
-Authentication-Results: smtp3.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789130091;
- b=Mg50W/yFfqsphNRsGKrnmGTb4vWvCZAQL2hnV0rDvY+y0CbYYUFGur95A495X1wLZrTp
- VtJrEqKdDeVedJJuOw3JsI2ev//C4S2UCPAzBhp3zyFWWQ2cC4d9xPNenKwZqMY55wSRf
- UpDd9srONG7tdZAoQBc0fHkr6cYL9lA6i5QrKAGKsPp7T0QeQlQ6Uz8P67vlX/wChOk75
- nnz/XIhSXsscOyw0XWZm5Ynso8Czwk6UGoO3CkisvfVxHfB6O4U7Y/GhkHTb3bX6NeZ4M
- qH3jXfCiWTmVN9cOeg0E0u13fYKtccnoJivufHmI2hZGgNdmOZYpDKSaZElax2oRBdA==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789130091;
- h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
- In-Reply-To:References:Date:Message-ID:MIME-Version:Content-Type;
- bh=4cYkZSWhBvYYjk2sKqgmsYfMjbKCfcHrMbFCI1wo+Sw=;
- b=NkkysOG/TGGSZHozK90gAfPBPdx3ZGHG8ICrkAs6T75umdA35qXyrik0i1su78rRtj9V
- Zhh+QeJrLDpfI7jEPRUSX07ksI8+NltKFQPDQdMhjIFXdc3rtyccp6Nz2LisfulxdQdJ9
- ORZLWxZx4sd8yTSZUrbpUSFNdGXfHIxcy11BKehGr7ALPrlrXrZ03OMKekSS/HL3gXSUq
- EVhSdyFfZAB45uNT9AeVJ5K1ex1jbnoQ/YSHx8647/xk2hNFn3yAbCYqO5BnxGudMqk8n
- jh4H+Z7sTGVZF/QOutjJzjNhE21G2dIdX91yE344KMSi6b2ha5dxx751tMmgZcA1uVQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=kernel.org; 
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=PqUPvDXX; 
- arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IXXW_NxOsN19 for <u-boot@lists.u-boot-project.org>;
+ Fri, 11 Sep 2026 12:38:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 5DF4C4006B
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c20a::7"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789130312;
+ b=bbgEIb+7zSc/Ns1uHTO6Y2SNxipeN1W5pXUUzKZ7CgRWB+g9zZwLZ9JyYgCbo0gqw2kY
+ Qk9ymRPieXxhp6fxyVC2kiQg62xxfu9rrJXQgZ/qijd5/lFKi20i/vjQMq51hjQh6qXgg
+ 5ozpxUHn3OqH28tT70711X01HsAmT6UcsnQkDtAxdlmyuuHRu8xn/Tj5bzEPzat1EPTKa
+ VrjO+aGWI/tnNq3Szw+eibPd+OeRACmOpXdnxy6P58KQnXStA5Xlyasb32W3F+UZGuDvY
+ imRcc/PvuiGY5OFwsRUJwZgETmemeOTgNlNEzO3SbQHBO78T6xuNlkpO7yP3o27lvvQ==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1789130312;
+ h=Received-SPF:DKIM-Signature:Received:Received:
+ X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
+ Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:CC:
+ References:Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy:
+ X-EOPAttributedMessage:X-MS-PublicTrafficType:
+ X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+ X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+ X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+ X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-Id:
+ X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=pek/ibjmNcJVeUhE3h0BEUMdW5UcQF3cOah6tesh6LQ=;
+ b=G+bTnbv8Ny2U8ePXs6nyG1PhTyQoZNvHlFvJT+issapqXUq9jiUbMTUwqnhsYxT2U6Er
+ 3zU5I+AOyVKcqksyyzxPT2I/wY+P2oDeNZuHC+zmCOu/B+1d8wYqufHL2hx19B6MxZwJv
+ buojSYoXyZdBpljfVFcGRtuGanU/0Ua+hkKKLvAoJ3sGCc6AKkPUYbM8SHCiZO3UTeXZk
+ 7xN64F8EkOua6lvFwQUQvvMU5ewFdoKqrfwBOGOy/H3869ijuqLyckWNkLH7ADVmQsZQw
+ fFnlYciSkPcHpR+d7obFviEBxe36kDRVFRLBlRLOMAVpUlcOk2/nIJiOhdHK0E8YHTg==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ dmarc=pass header.from=foss.st.com; 
+ dkim=pass header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256
+ header.s=selector2 header.b=fKNOTHv5; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20a::7"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
- envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=PqUPvDXX
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 815BC605E4
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:34:50 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 60D81411CC;
- Fri, 11 Sep 2026 12:34:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D24F1F00893;
- Fri, 11 Sep 2026 12:34:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1789130090;
- bh=4cYkZSWhBvYYjk2sKqgmsYfMjbKCfcHrMbFCI1wo+Sw=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=PqUPvDXXhIylJw8cijnOlnXMwcxBvIIVYfEr77mgvKqk8UNhuVHKYrFW/nK+xLE0T
- yb8FyilJQOMU3yRPQ7GDhasiya+ZaHaptx5uDHpsD2/+oIfs7KfZukXW+mmvVvbZkO
- JPAXJYAiFZVVSo5a9PBUqO6rLnAp0xOxpEdh0PuKVtICzex6igADbMtIhz0shroCLs
- M/GbyqOQt7F4hpg0iYZ5YX3LKOq4AMA2l/Ww90hbiP+4yGKzU7PBRSDniuPIzVa1ck
- AvACUUqU/1C2xpU7v0L7s/7PFcAQpXurQ++3JdnDlRnydIT2oYMrlDLKqrYS8AQKCi
- MWwcpGZLCgBlw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Carlo Caione <ccaione@baylibre.com>, u-boot@lists.u-boot-project.org,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Suhrid Subramaniam <Suhrid.Subramaniam@mediatek.com>, =?utf-8?B?TWFj?=
- =?utf-8?B?cGF1bCBMaW4gKOael+aZuuaWjCk=?= <Macpaul.Lin@mediatek.com>,
- =?utf-8?B?UGFibG8gU3VuICjlravmr5Pnv5Qp?=
- <pablo.sun@mediatek.com>, Arnaud Ferraris <arnaud.ferraris@collabora.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Sam Day
- <me@samcday.com>, Quentin Schulz <quentin.schulz@cherry.de>, Carlo Caione
- <ccaione@baylibre.com>, David Lechner <dlechner@baylibre.com>, Vitor Sato
- Eschholz <vsatoes@baylibre.com>, Lukasz Majewski <lukma@denx.de>, Marek
- Vasut <marek.vasut+usb@mailbox.org>, Peng Fan <peng.fan@nxp.com>, Jaehoon
- Chung <jh80.chung@samsung.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Julien Masson <jmasson@baylibre.com>, Alexey
- Charkov <alchark@gmail.com>, Adrian Freihofer
- <adrian.freihofer@siemens.com>, Francois Berder <fberder@outlook.fr>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Vincent Jardin <vjardin@free.fr>, Peter
- Robinson <pbrobinson@gmail.com>
-Subject: Re: [PATCH v5 1/5] fastboot: factor out the USB session runner
-In-Reply-To: <20260906-ccaione-upstream-spl-fastboot-v5-1-023516e77321@baylibre.com>
-References: <20260906-ccaione-upstream-spl-fastboot-v5-0-023516e77321@baylibre.com>
- <20260906-ccaione-upstream-spl-fastboot-v5-1-023516e77321@baylibre.com>
-Date: Fri, 11 Sep 2026 14:34:47 +0200
-Message-ID: <xhkdbfqzg3r14.fsf@mkorpers-koolstof.csb>
+ client-ip=2a01:111:f403:c20a::7;
+ helo=pa4pr04cu001.outbound.protection.outlook.com;
+ envelope-from=patrice.chotard@foss.st.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256
+ header.s=selector2 header.b=fKNOTHv5
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5DF4C4006B
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:38:30 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jwSFx9M7Joli/gMjMrpUUZKN4Sk04k3imxkPMiDrBps8jBU1dTTmfriHTYs4renImtHVqAIyFTxbiuyo3x0RVigGPrckfRSFC7yiOPICFd7NoJ7q4OXPJ4tzQpHK317jFs3h+yAlJAsgJ9cY5YRByUG+KC+nB2V9EC9Jg/U5xJh4qPxLHIltXdb7xPz6tRlk3moJ8Wl9B/ZYkIIPqZ6CbnoSXJY89DCFgNBbbIoA5XAdcPNkXsw3ZqlEo0fvsPxnGJ91w48fdHSafZnsI+9rs5CRnk3QaqYM9ijRxIGB2ZCVdYO4UvOYEZ5mVbz4tLIyOEjipCYe1h+Mze78xxSIRQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pek/ibjmNcJVeUhE3h0BEUMdW5UcQF3cOah6tesh6LQ=;
+ b=P/iNoGpMkl4cvZ6rWRfSWNeEfCnAgXnz7TpvIr+1qkeWSgSwmn3sZWExs8EBx+J1i+wTWvqIejpTtjJo9xk6h60iqBnGwWUq6Ja7xMH91q6JNAG/3CZvDEF/rC4+L8Mt7WVCmnBJyNAGxTZAs5PaIAQvZ0UjIEe0pm5Ggfu/wnZhGJrwzzSp06dTvOx5nmBN9FErimJzUi/h9bp45v8gZsjckH/7MpJ+oexI/vcNMZXvpBvGYEcT9V0eWo3+e3DYHvDtu/c6QOr7XBuIWU6tXGSjoppqth1H4zKUNIXEgPZNcMMgzHR32nWCUmbHsqlUPGLR/fcwzXz65ZNdz98Ckg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=kernel.org smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pek/ibjmNcJVeUhE3h0BEUMdW5UcQF3cOah6tesh6LQ=;
+ b=fKNOTHv5dvHg1sM9smgh9tVZSzJvZpGyRx3azoThOwwtcYC/dPSl6ak6IEaJhIogXJDLGb1HWNQpw5iCoyENIHZMJ56CG9xNzOnzP4Vyk7DRFKxi2U6NXcM5IfJakGwzKZT039N5+mRyJDvz54lX6z17QnyCoaSoVnCYni2RTKbMPSud8DTAYu37H3vdbKqbPgyK0Leqb7T3/B63K1PiGJ/l46m/6AZfUiu2bon8FlQC2tqs905JYMrisvbbMBjYif73J6EwWWCHXzUu3njnMxZkocVWi3R5ZV58DfxTVIYIpyOqsPEeVyAmSsHhTNlUeCrD2kV3vYImxf+CLTJcyw==
+Received: from AS4P251CA0018.EURP251.PROD.OUTLOOK.COM (2603:10a6:20b:5d3::10)
+ by VI1PR10MB7783.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:1bf::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.9; Fri, 11 Sep
+ 2026 12:38:22 +0000
+Received: from DB1PEPF000509F8.eurprd02.prod.outlook.com
+ (2603:10a6:20b:5d3:cafe::5f) by AS4P251CA0018.outlook.office365.com
+ (2603:10a6:20b:5d3::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.9 via Frontend Transport; Fri, 11
+ Sep 2026 12:38:22 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ DB1PEPF000509F8.mail.protection.outlook.com (10.167.242.154) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.406.5 via Frontend Transport; Fri, 11 Sep 2026 12:38:22 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 11 Sep
+ 2026 14:44:23 +0200
+Received: from [10.252.12.102] (10.252.12.102) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 11 Sep
+ 2026 14:38:21 +0200
+Message-ID: <9b29dee6-5a40-43aa-bfd8-4590876b3e67@foss.st.com>
+Date: Fri, 11 Sep 2026 14:38:19 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] usb: gadget: f_mass_storage: Optimize schedule() call
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ <u-boot@lists.u-boot-project.org>
+CC: Lukasz Majewski <lukma@denx.de>, Marek Vasut
+ <marek.vasut+usb@mailbox.org>, Tom Rini <trini@konsulko.com>
+References: <20260817-move_schedule_inside_sleep_thread-v1-0-0023194e8c47@foss.st.com>
+ <20260817-move_schedule_inside_sleep_thread-v1-2-0023194e8c47@foss.st.com>
+ <87fqzltop3.fsf@kernel.org>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <87fqzltop3.fsf@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.12.102]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB1PEPF000509F8:EE_|VI1PR10MB7783:EE_
+X-MS-Office365-Filtering-Correlation-Id: 588e7d11-f262-4d10-60da-08df1001911d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|82310400026|36860700016|376014|1800799024|6133799003|3023799007|10067099003|11063799006|4143699003|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: II1zK44TQ7NktHulWS0f1dEPckQM4YjoDnxVt9qfYY6a8Snw8s7qyjMCbs8iB22JPORXELy0GSdwoFa3tk1EUJpsq6r2nuoom+kfyeuxNDMMkmbh6D/8xM1oRT55HVREjUwUZKC1lgFAQl2gnEeNsaj6uTjZbqvlxatv7r1D7BW4CDAT2wFKF0dKslXF0HfD78lx+FKlOig78YZEyylT+dQQxfdOPcgLezflPd36Fa3iSWtRbGB7P6VEW6dWYdKpDzxsY7JO57bf/SHUQEMAJZIxSn+dWCFz+DXeDDGdhsHpzLxw5yWHiiXR/NLJd6QDPbWncp8skCju+hiTP1wpQE+n+JF/ES7iUgC58596zCU98ZH356Bwj94JHd3jja1eNp/W7qG2sIIDWF01yOuicmwX6inrqLf1d0Qtaj4a/Qh02zr/I9xqF6+DOxBqy+Bn0kTdHpWmaxhAccPoSOx4vr/Awb62m9uhvokThSNdbnTkwfbMsswhIupmY+XxkLgo+Eb3IeN4yjeZQZAXmW751ie96pmFgP99GDTgsnbgEOwJ1FGMSeOxs10PZoDlLzt6EIi2fSvNP9UmIGEysvX4XZY+YRP9MmOD8pbY1GtoK4Jqsf4RoY7EDnfOPIszsFOEB/PCc5z1HJhYwoQoGO471MTcj5aBCVCRQNdk2bMhr8+SpiKxJ/InVxfqHyFVWBzFu4PHSbDyWyseU0CuGyTrVQ==
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(23010399003)(82310400026)(36860700016)(376014)(1800799024)(6133799003)(3023799007)(10067099003)(11063799006)(4143699003)(56012099006)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: Mwjw97yd0V3M2YQICCuyfnEc+EAgAP5l1v/LJtw4gtI6aE3BM+gKj1efBAUPC0lmbgoxBLcbzYQk3ThV2842RvZy4bho9DEzjmZouAWWejZKm4WcuQE+/BNFTTAuGSjMp+3Uq2IcXTIcRie50pkhvwrLzYFFP2qHGaZdqw4LAfFxlOMDR9Uk2V2ZXf1lk7cX7c4IVJWUkYhojXbxb6D/Gsvt3RsvWa2YhpR5Frc557nJuI7V2M8OyDQxV40iGi4e/CqYxW+4WOIxYknwS3QOfDNx+MSE9m6WzG58vzOM0HlUTopncR1Fbzd7jIY8ZQ0twOJWascVuiEqvxEZogYvUxKdpdG1nyk8NZMr+0RlsqFFKdycF/Nl5/WW5mZHR5Iiuidr6o/0qcKZDt4sSicQ2oZc03gr5aWZfTufRB7kQ8olq8U46x7RaOk4oeD9g64Z
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 12:38:22.4347 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 588e7d11-f262-4d10-60da-08df1001911d
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509F8.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB7783
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -157,165 +237,85 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Carlo,
 
-Thank you for the patch.
 
-compared with v3, v5 introduced some new changes which I don't
-understand.
+On 9/7/26 11:07, Mattijs Korpershoek wrote:
+> Hi Patrice,
+> 
+> Thank you for the patch and sorry for the review delays.
+> 
+> On Mon, Aug 17, 2026 at 17:41, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
+> 
+>> schedule was added in sleep_thread() by commit 4b6a3e860878
+>> ("usb: gadget: f_mass_storage: Add schedule() in sleep_thread()").
+>> to ensure that watchdog is still reset periodically even on platform
+>> that doesn't implement g_dnl_board_usb_cable_connected() and in case USB
+>> cable is not connected.
+>>
+>> Instead of calling schedule() for each for() loop iteration, call
+>> schedule() only in case g_dnl_board_usb_cable_connected() is not
+>> overloaded, in this particular case, g_dnl_board_usb_cable_connected()'s
+>> return value is -EOPNOTSUPP.
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>>  drivers/usb/gadget/f_mass_storage.c | 7 +++++--
+>>  1 file changed, 5 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+>> index 621852080e2..f467693d2cb 100644
+>> --- a/drivers/usb/gadget/f_mass_storage.c
+>> +++ b/drivers/usb/gadget/f_mass_storage.c
+>> @@ -651,6 +651,7 @@ static void busy_indicator(void)
+>>  static int sleep_thread(struct fsg_common *common)
+>>  {
+>>  	int i = 0, k = 0;
+>> +	int ret;
+>>  
+>>  	/* Wait until a signal arrives or we are woken up */
+>>  	for (;;) {
+>> @@ -673,13 +674,15 @@ static int sleep_thread(struct fsg_common *common)
+>>  				return -EPIPE;
+>>  
+>>  			/* Check cable connection */
+>> -			if (!g_dnl_board_usb_cable_connected())
+>> +			ret = g_dnl_board_usb_cable_connected();
+>> +			if (!ret)
+>>  				return -EIO;
+>> +			if (ret == -EOPNOTSUPP)
+>> +				schedule();
+> 
+> What happens on boards that override g_dnl_board_usb_cable_connected()
+> that return a positive value?
+> 
+> Per my understanding, schedule() will never be called, and the watchdog
+> will be triggered at some point, no?
 
-Please see below.
+Hi Mattijs,
 
-On Sun, Sep 06, 2026 at 22:01, Carlo Caione <ccaione@baylibre.com> wrote:
+In case g_dnl_board_usb_cable_connected() returns 1 (it's currently the case 
+on STM32MP157c-DK2 board), we stay inside sleep_thread() for(;;) loop until 
+common->thread_wakeup_needed is set to 1 by wakeup_thread(). 
 
-> The fastboot command currently owns USB gadget setup, protocol
-> initialization, the service loop and teardown. This prevents callers
-> which do not use the command line from starting USB fastboot without
-> duplicating the same session lifecycle.
->
-> Move that lifecycle into fastboot_usb_run() and leave cmd/fastboot.c
-> responsible only for argument parsing and transport selection.
-> Initialize network sessions in their transport path so their existing
-> behavior is preserved.
->
-> Keep the command-line diagnostics for a missing USB cable. The helper
-> returns -ENODEV in that case, which the command maps to its existing
-> failure result. Unregister the gadget before releasing the UDC so no
-> registered function remains attached to a released controller.
->
-> Signed-off-by: Julien Masson <jmasson@baylibre.com>
-> Signed-off-by: Vitor Sato Eschholz <vsatoes@baylibre.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
-> ---
->  cmd/fastboot.c            | 53 ++++---------------------------------
->  drivers/fastboot/Makefile |  1 +
->  drivers/fastboot/fb_usb.c | 66 +++++++++++++++++++++++++++++++++++++++++++++++
->  include/fastboot.h        | 10 +++++++
->  4 files changed, 82 insertions(+), 48 deletions(-)
->
+wakeup_thread() is called periodically (around every second, it was what i observed 
+during testing) by either bulk_out_complete() or bulk_in_complete().
 
-[...]
+Then we came back in fsg_main_thread() which was sleep_thread() caller, 
+and came back in while(1) loop of do_usb_mass_storage() where schedule() is called.
 
->  		return do_fastboot_udp(argc, argv, buf_addr, buf_size);
-> diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
-> index a341af076d1..32e8e072c88 100644
-> --- a/drivers/fastboot/Makefile
-> +++ b/drivers/fastboot/Makefile
-> @@ -3,6 +3,7 @@
->  obj-y += fb_common.o
->  obj-y += fb_getvar.o
->  obj-y += fb_command.o
-> +obj-$(CONFIG_USB_FUNCTION_FASTBOOT) += fb_usb.o
->  obj-$(CONFIG_FASTBOOT_FLASH_BLOCK) += fb_block.o
->  # MMC reuses block implementation
->  obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_block.o fb_mmc.o
-> diff --git a/drivers/fastboot/fb_usb.c b/drivers/fastboot/fb_usb.c
-> new file mode 100644
-> index 00000000000..5c62bf42e72
-> --- /dev/null
-> +++ b/drivers/fastboot/fb_usb.c
-> @@ -0,0 +1,66 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
+So watchdog is reset periodically.
 
-Why is this GPL-2.0-or-later? In v3 it was GPL-2.0+ which is what's
-present in cmd/fastboot.c
+Patrice
+> 
+>>  
+>>  			k = 0;
+>>  		}
+>>  
+>> -		schedule();
+>>  		dm_usb_gadget_handle_interrupts(udcdev);
+>>  	}
+>>  	common->thread_wakeup_needed = 0;
+>>
+>> -- 
+>> 2.43.0
 
-> +/*
-> + * Copyright 2026 BayLibre SAS
-
-This was also not present in v3 and does not seem an appropriate
-addition to me since we are just copying code around. Why should it have
-a new copyright?
-
-> + *
-> + * Copyright 2008 - 2009 Windriver, <www.windriver.com>
-> + * Author: Tom Rix <Tom.Rix@windriver.com>
-> + *
-> + * (C) Copyright 2014 Linaro, Ltd.
-> + * Rob Herring <robh@kernel.org>
-> + */
-> +
-> +#include <console.h>
-> +#include <fastboot.h>
-> +#include <g_dnl.h>
-> +#include <usb.h>
-> +#include <u-boot/schedule.h>
-> +#include <linux/errno.h>
-> +#include <linux/printk.h>
-> +
-> +int fastboot_usb_run(int controller_index, void *buf_addr, u32 buf_size)
-> +{
-> +	struct udevice *udc;
-> +	int ret;
-> +
-> +	ret = udc_device_get_by_index(controller_index, &udc);
-> +	if (ret) {
-> +		pr_err("USB init failed: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	fastboot_init(buf_addr, buf_size);
-> +	g_dnl_clear_detach();
-> +
-> +	ret = g_dnl_register("usb_dnl_fastboot");
-> +	if (ret)
-> +		goto err_put;
-> +
-> +	if (!g_dnl_board_usb_cable_connected()) {
-> +		puts("\rUSB cable not detected.\n"
-> +		     "Command exit.\n");
-
-This is a function that's not necessarily only called from a command.
-Please drop the Command exit. part (that was also not present in v3).
-
-> +		ret = -ENODEV;
-> +		goto err_unregister;
-> +	}
-> +
-> +	while (!g_dnl_detach()) {
-> +		if (IS_ENABLED(CONFIG_CMD_FASTBOOT_ABORT_KEYED)) {
-> +			if (tstc()) {
-> +				getchar();
-> +				puts("\rOperation aborted.\n");
-> +				break;
-> +			}
-> +		} else if (ctrlc()) {
-> +			break;
-> +		}
-> +		schedule();
-> +		dm_usb_gadget_handle_interrupts(udc);
-> +	}
-> +
-> +err_unregister:
-> +	g_dnl_unregister();
-> +	g_dnl_clear_detach();
-> +err_put:
-> +	udc_device_put(udc);
-> +
-> +	return ret;
-> +}
-> diff --git a/include/fastboot.h b/include/fastboot.h
-> index b106d617749..f02d2559f2b 100644
-> --- a/include/fastboot.h
-> +++ b/include/fastboot.h
-> @@ -125,6 +125,16 @@ void fastboot_set_progress_callback(void (*progress)(const char *msg));
->   */
->  void fastboot_init(void *buf_addr, u32 buf_size);
->  
-> +/**
-> + * fastboot_usb_run() - run a USB fastboot session
-> + *
-> + * @controller_index: USB gadget controller index
-> + * @buf_addr: Pointer to download buffer, or NULL for default
-> + * @buf_size: Size of download buffer, or zero for default
-> + * Return: 0 on success, or a negative error code
-> + */
-> +int fastboot_usb_run(int controller_index, void *buf_addr, u32 buf_size);
-> +
->  /**
->   * fastboot_boot() - Execute fastboot boot command
->   *
->
-> -- 
-> 2.55.0
