@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2706C88E4A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 10:48:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1AA3C88E4D
+	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 10:48:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BCDAC80816;
-	Fri, 11 Sep 2026 10:48:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6CCA140BA2;
+	Fri, 11 Sep 2026 10:48:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IF3Ma2sQgzPN; Fri, 11 Sep 2026 10:48:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org DFBC480CA3
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123693;
-	b=SGlrbKNq/OAii1Q7gf61SbhAEdZONbbn9LgBy7o3rkEyujtBVQCCgv5YBZUFL6iGHFCv
-	 Jgi2DGry7NiwAy5eIaHrC/Iz9oIFtujNbs40o0mn7fcoH+clI5OXzjiuxGNQrbZrRe3qv
-	 gftdhrUDsbrCbxXfux7t8bGoO4seBLOXZyXnInvtl+KfCwTeyoCHVmb22A6LXXxCGUmT6
-	 3QrAuHAsQS+SWA7nDkrIxtrqi+OEnImNtd6a05/UJfNQYu508u7HD9FVuUo7Nmk5lV8Wp
-	 X1xX7pcVuwAujrOL9KQwmo7J92Mz0bSYyycDS2yZdO1GSJnAj30twr9UjHiCkz+CwVQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wWM9QJoZFMui; Fri, 11 Sep 2026 10:48:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 9895340B0B
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123694;
+	b=WBRr4WeImdB6H0HDaU8a3yD3QbmEjI+ByOvevNWN/fjhU5fKcDCJk7bVQ54yxzIjp0rT
+	 jUvfsi/UAw9Pv0D8Yg7LcmRk46WYEQzki3LabfJ978FHOGuV+SbFkIABmts1xGXHqdCwH
+	 Bul+H+ScFiTP/ICoFzQZZZcW7RRc9L5+HC6n7FRGbJ9YeBA4JriQOD+ODecnBn++hjgCm
+	 Q3q/ORGZEtTTXBJR2scATTC/oDDJztP5GfmePOJuh8bcD3X50Av0afpTeO+PJz0oUuuCX
+	 W4/jkuulg7PShhhexFEVKYlSYq90Cp0CgkdwFKt3+0dWIGapcAzysf7+oz3/6jPsaeg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789123693;
+	c=relaxed/relaxed; t=1789123694;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,105 +31,105 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=Cf4Qe7x0db0ymrVySdU+E7Hy0fuQMCUAMBoUVe/pg1I=;
-	b=JYp1KO5cSUBAPBKXO7zNl0NNcdGIz1KCSHPARdtaS/R8F3ky5Vpd8uy11oedg90elT7Z
-	 3sSeh8x5HXv55UhPDPOgUg0rdBi+6bDanlTxubZbbdt2JcU/+aWjtmD4TdxUMQ/G9RC1g
-	 +JsfK2htNe0xh4Kv9pWGfHEqDtzHZ/ihgxWVDHTHtXeVcTG11KwU2LURnO7b9VQo5+hoM
-	 Uo/FrP+uW/Zn9XfbTcbHLmrLtvUhCEkNupw2+xDYYQ/Qn6+ZBeqJqm8QMGK/i4c93uG5s
-	 nOzrHLEBgm6EaLu6/5yGiNzWtTXwNVTEIgUe9VyJkwK4wdIlhd446QnG4sILRJLEPPA==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=M18bajYwiQ233I3VvGFeKCV2ZcE5hUyoapy6q16fP9U=;
+	b=HxNjIoQY7XzRg4opk4DqVx5L31wqcO+h3gQejuqtf6QnNIgzTeIrdLoSyKO7DgLndX7e
+	 OYmYs2tg0sJXRw0KDD5U/Cj0poZ7HEktGFoc0UeAoJo5Gs1XLRubHJme23MF0lVgQj14L
+	 tQVVSlQbMlov+esypUemKAhmG/yQ1q3Kh1HCtAsTw9p6NdSLqpKrdmFCfNHlGLBVwQT9q
+	 ODxWS4aGKy/dZp3z9NV24XhChyhmj/GkiX2Pfd3NZreaFl3wj/eI4bkIUQDuMBjTBMv50
+	 2puVoNQt3+zENZZUIhF0h9PpqbgXJxqidsBtiZNOuGZBlqAHySJyvX0SwtG+4lO3y0w==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789123693;
-	bh=Cf4Qe7x0db0ymrVySdU+E7Hy0fuQMCUAMBoUVe/pg1I=;
+	d=lists.u-boot-project.org; s=default; t=1789123694;
+	bh=M18bajYwiQ233I3VvGFeKCV2ZcE5hUyoapy6q16fP9U=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=h+0IE5MNA6PVYLRn6dgg9BtKAzgSDv99JXW4X+k+CcnQt8+LORbvpmdZCssMUhQkS
-	 2NXm8bKi33COUbj2CQe/HrB2UtV/9L/QQR9vJYHrj/b7vgEEIGLW2tU7Q8z22g+VaC
-	 SAWV+/quF8m6wtxYCL8c3RIkHlMoXb692VfQ9KmAxELKuLj8MnbDJ4RC+jZGsUarMJ
-	 JoBF5PW47gBYtc/coDqbb2DxTGjvrwPNNjmXAWMSPkH9t/gpJkQtnRf+3DllsyrBIu
-	 EMJ6k7B7FGADgnOvBsqOvBQNlAobk/ezfB9DSbZs8+9rsnZb0U1Re1HSbbEadORXAo
-	 Y7MuCm7qIBQxQ==
+	b=OZ7CqnMJPFGnh8W9PWJUZIRbDUTZbO4gyr/Tfw/TGuBH+vf0Rt4W9jXBEDLwmSehY
+	 ar0ywLTh5Dsx220EmjyDJGb77MUB1nKV9nQM5FPdMzlzJdFPqIFCudd04nWLRAdiFd
+	 Rr/waSGTbGBCRRN+a9LbD1HC+tpGGU4/hBDZa7P3SfSWvstxyoq2l/1eKxFkoixnLp
+	 t6NhnZ0pC/M5NkogxJRdE0mUOMfdjB73VzvyhVk/lxWJoe8xQPW+OOtRXRFMTjA+dT
+	 Knk6f0PdyIXA0QK6Yg2QhDkYsA7vuVCEF022NBoZ9GFp1YNu+0D3rmD4WZXejCkWzk
+	 IOm43vi1OAneg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DFBC480CA3;
-	Fri, 11 Sep 2026 10:48:12 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 91C2E49D
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9895340B0B;
+	Fri, 11 Sep 2026 10:48:14 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id A70DB14C
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 77A7640B0B
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:11 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 8CBCA40461
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oHHZweT0c8t8 for <u-boot@lists.u-boot-project.org>;
- Fri, 11 Sep 2026 10:48:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B164440AF6
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id U3blsgLr9C4M for <u-boot@lists.u-boot-project.org>;
+ Fri, 11 Sep 2026 10:48:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org C0F5740460
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=136.143.188.15
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123690;
- b=HMovG6Hcz90HU/XcV82yPRCD6Xrss6NsTq+QNjR549AK4Nq/IASeeRXIs/FT9RDUMojQ
- pOXw7wmPyD8QCE8pRVRpy16fbJtuNafpveoupsiNO7/fkLFdghxxFgNVQzrA2Poj4b9Tg
- JvQqUoqDnB+Y36k4F364NxFfZqjmixa/Y6oCN0pmi0RfNS+9xEVfvsjm7O/kfJ5MSg4k5
- cwVeq7h7TjniUFp/UxIvazdmThiSX1rndowkpkgLmkeQjPslEH7ImB96h/4yqLGYE8fLO
- Vym8DFjidreDHAIX9An8SkM7G9PKlVeWFSlaB3iT3KFU4ZL99qTD1sEeF8lolmTZHgQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123691;
+ b=AnYeNteZ3PtNKKk7+Zs4+cMfJhCwZk/ODKbK3HSgYPqcxTmZ/UkdoxrnKpUjyk+RX0DI
+ cAGOUt1QiIuziLG5quCzHvL/wcFS19ZI5sJKrN6v3ZVf0LQgEFEBsgo5fvSCQJzlolc5i
+ Nzx0Tc1kVKSoU9D7NNgvEleSWx5+5miNdpa94oWNpthMepl1h8ii0BmoKn8wyjIGKb64e
+ uu6S57zmLPBHPT4L5IjH4OE0d1jwrv8oac3ixRTrOfE24Ndr8LpRUcxr5dzrpi63/BalC
+ mbe7LsdPHd1pKXHMqAZYaXHlyg5TGmutWAjLzzA1j1klrccAHSpvhraY2g+2JlTh8Dg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789123690;
+ c=relaxed/relaxed; t=1789123691;
  h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-ZohoMailClient;
- bh=Cf4Qe7x0db0ymrVySdU+E7Hy0fuQMCUAMBoUVe/pg1I=;
- b=nulFdxA1qluQD/glG8/nnUo4zvDKYG0OUukb3DgGmtxh4pbG/sfMbofLvfAW1mUUXTIk
- OCDAlnA02YKgwce5PO9wCHtUKk/4ANp2oH3B+KZ1fUkxtyLABQNo3ahCdlb2KUasPRFOl
- J5utWr1DCkPrcpdne+AvfYcfpIy+kRS1PN02Dlv5z+lMcsm3z48laY9Hi+cJbF8aUplrl
- kztUOMrNNQRGPAfeuCF4Db7kz6Cyg2Csy3Wja0/GpX1OTscL1ChTuJ0vxKxIKQc2qQyma
- Wnaebk/QgrwSrJ6bMz3ackUkIOOTzsCfx9ehznFUsckWe5/ns4DGwSQrC4Cj0pExMDA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ bh=M18bajYwiQ233I3VvGFeKCV2ZcE5hUyoapy6q16fP9U=;
+ b=At/43GIV0SbMq8OnjTdR+c6QpiWgtWOwFejTn1oGrEBCrVq4W7nmXy8724W53xmBcvdQ
+ 7SkAr0zm2T+Ud2JTrW96OfajAoxRqEPgUrrPhoHw985lhYSvvwzNHH9EZ/dPe9CML5sQF
+ pWwOFhsdtpMUUSnlTJ00OiXVSa3Ykwy6S962mJIvDvJgl8jgVEBMGOFDXFF43FuA/i5Qz
+ X+LfjrhdWdb/z3HV7/1ZH00dlWM/tagubvynqNdgmZIF7HrMdpib510UHU+x98wrKgeSI
+ YChUKooXhpQxXPqWL9J3nxeOSeyO0dtfVQnZimPVkDlVS+hmJ3OMJZ1z86+yiRCUwqA==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
  dmarc=pass header.from=ziyao.cc; 
  dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=hXHd6+iH; 
+ header.s=zmail header.b=krXYu+RY; 
  arc=pass header.oldest-pass=0 smtp.remote-ip=136.143.188.15
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
  helo=sender4-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=ziyao.cc header.i=me@ziyao.cc
- header.a=rsa-sha256 header.s=zmail header.b=hXHd6+iH
+ header.a=rsa-sha256 header.s=zmail header.b=krXYu+RY
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B164440AF6
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C0F5740460
  for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:10 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1789123686; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1789123684; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=GxB7f/yx/Us1eWuaMBqNvjL9YRO/O3XprC5OkXf936w5bIvs5OyOEydBCskW4S3CBsJNVOlnd/cZqD/+g/AqMx/PjRhPxLojYYspGgAMLqipsOd5mWIGqjCGd9N2iOINDAkLNEgkndd/ZZ+DKw26enFUm6wa8zkrez2nicgecms=
+ b=W/6NRyR99By/HRhz1myesOgyXCn9wwoHiDrl1DKuCqhNTBkzQKr52e9dW5DW6hpZ55pfVvv51DSBdmhiEO3+6TkcEUZR/GrVnnYYkmelW7XzupJuhmXYtDUz49hh9E67NdNtwsnzbZSbK+HG+lU+n2N4bEA0/IZZVTuOZDq6RCw=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1789123686;
+ s=zohoarc; t=1789123684;
  h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=Cf4Qe7x0db0ymrVySdU+E7Hy0fuQMCUAMBoUVe/pg1I=; 
- b=MWHId1409Cg8SPZaN1TBz4nijzNMJ4PFE7j/u+N1S8DEgjwJPCaC1zccfuLuyxDtwqafuVf06Fn5UaSkFqlFIbm3hP+R/yl9sfDlAIayAhdHt8xZDMx1coqIVpHI6lcr/CgUKsbPW4KefwN7iwqHD9NhP+8Hb853IJLy49W9PWg=
+ bh=M18bajYwiQ233I3VvGFeKCV2ZcE5hUyoapy6q16fP9U=; 
+ b=JJf9r7v900ebSuCunbR6wHY4rtFVIPix0/sV1GT6GVB+hsZUfTcCQnEDIK5BNnpeNevx6Ssh6mmAkoQJtZwJNNXVGk0Mk1nmu1XC21xwvJauikYEIWIhXvEN0AOz+QXcMWIBpKLxBljD7FM9prhWPBsnTlyYK3kU42ZV/xom/yk=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1789123686; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1789123684; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=Cf4Qe7x0db0ymrVySdU+E7Hy0fuQMCUAMBoUVe/pg1I=;
- b=hXHd6+iHlF+A8fD4sZJnrmV7NS/34UXnGJwSJWgt600NU73+5HN/zEVoO8004OSX
- A3aiJpM2VbysaFB62uS80UE2aZWIpNQ3e3eErCfbF54DkhHTNxIVLrWNxllzTzf5FJm
- 5NHxgvwSIB9TZCm9oBDxuFeB/6GNfJQSEIkUz5G4=
-Received: by mx.zohomail.com with SMTPS id 1789123684084284.6325124630429;
- Fri, 11 Sep 2026 03:48:04 -0700 (PDT)
+ bh=M18bajYwiQ233I3VvGFeKCV2ZcE5hUyoapy6q16fP9U=;
+ b=krXYu+RYTMvy91PYKDSa8j1o2kDFCj2V4nz6WQLC8OlZq25acEKqkJui6iyfIx6U
+ dV00cRDnf1FT1bgjVStaBq4KiBqHXgbH/OOrJxMCxTyGYR7FYoQ5l7+AJG1m5OhNjEa
+ y6LVvmNz5DF+BC8CYAfhjhKz+UhWsRz5OWTTiw78=
+Received: by mx.zohomail.com with SMTPS id 1789123682052829.564299512896;
+ Fri, 11 Sep 2026 03:48:02 -0700 (PDT)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org,
 	Yao Zi <me@ziyao.cc>
-Subject: [PATCH v4 12/19] cpu: Add loongarch_cpu driver
-Date: Fri, 11 Sep 2026 10:45:57 +0000
-Message-ID: <20260911104604.2910944-13-me@ziyao.cc>
+Subject: [PATCH v4 11/19] LoongArch: Generic platform type
+Date: Fri, 11 Sep 2026 10:45:56 +0000
+Message-ID: <20260911104604.2910944-12-me@ziyao.cc>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260911104604.2910944-1-me@ziyao.cc>
 References: <20260911104604.2910944-1-me@ziyao.cc>
@@ -151,8 +151,8 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-Implement a driver for LoongArch CPU solely for gathering
-some information bits from FDT and CPU level config registers.
+Provide a generic platform with some common routines expected to be
+implemented at CPU level.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
@@ -161,201 +161,120 @@ Signed-off-by: Yao Zi <me@ziyao.cc>
 No changes since v3
 
 Changed from v2
-- Fall through to devicetree path in loongarch_cpu_get_desc() when
-  probing with CPUCFG gets no meaningful results, instead of handling
-  such cases with goto
-- Replace open-coded copying loop with memcpy() in
-  loongarch_cpu_get_desc()
-- Correctly return -ENOSPC when snprintf() truncates the string in
-  loongarch_cpu_get_desc()
+- Select CPU if DISPLAY_INFO is enabled
+- Reword the commit message, re-titled as "LoongArch: Generic platform
+  type"
+- Fix the comment for cleanup_before_linux() to note that cache isn't
+  disabled, captilize Linux
+- Drop unused DECLARE_GLOBAL_DATA_PTR from cpu/generic/dram.c
 
-Changed from v1
-- Drop unnecessary check against -ENOTSUPP clk_enable()'s return value
-  in loongarch_cpu_probe()
+No changes since v1
 
- drivers/cpu/Kconfig         |   6 ++
- drivers/cpu/Makefile        |   1 +
- drivers/cpu/loongarch_cpu.c | 142 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 149 insertions(+)
- create mode 100644 drivers/cpu/loongarch_cpu.c
+ arch/loongarch/Kconfig              |  1 +
+ arch/loongarch/cpu/generic/Kconfig  | 13 +++++++++++++
+ arch/loongarch/cpu/generic/Makefile |  7 +++++++
+ arch/loongarch/cpu/generic/cpu.c    | 22 ++++++++++++++++++++++
+ arch/loongarch/cpu/generic/dram.c   | 16 ++++++++++++++++
+ 5 files changed, 59 insertions(+)
+ create mode 100644 arch/loongarch/cpu/generic/Kconfig
+ create mode 100644 arch/loongarch/cpu/generic/Makefile
+ create mode 100644 arch/loongarch/cpu/generic/cpu.c
+ create mode 100644 arch/loongarch/cpu/generic/dram.c
 
-diff --git a/drivers/cpu/Kconfig b/drivers/cpu/Kconfig
-index c805c0bbfa19..9fd43ff88fde 100644
---- a/drivers/cpu/Kconfig
-+++ b/drivers/cpu/Kconfig
-@@ -13,6 +13,12 @@ config CPU_IMX
- 	help
- 	  Support CPU cores for SoCs of the i.MX series.
+diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
+index ac4be2c837c0..1f376ca291c1 100644
+--- a/arch/loongarch/Kconfig
++++ b/arch/loongarch/Kconfig
+@@ -12,6 +12,7 @@ endchoice
+ # board-specific options below
  
-+config CPU_LOONGARCH
-+	bool "Enable LoongArch CPU driver"
-+	depends on CPU && LOONGARCH
-+	help
-+	  Support CPU cores for LoongArch processors.
-+
- config CPU_MPC83XX
- 	bool "Enable MPC83xx CPU driver"
- 	depends on CPU && MPC83xx
-diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
-index eaf494706e2c..d9c0db74dd5a 100644
---- a/drivers/cpu/Makefile
-+++ b/drivers/cpu/Makefile
-@@ -13,6 +13,7 @@ obj-$(CONFIG_ARCH_AT91) += at91_cpu.o
- obj-$(CONFIG_ARCH_MEDIATEK) += mtk_cpu.o
- obj-$(CONFIG_CPU_ARMV8) += armv8_cpu.o
- obj-$(CONFIG_CPU_IMX) += imx8_cpu.o
-+obj-$(CONFIG_CPU_LOONGARCH) += loongarch_cpu.o
- obj-$(CONFIG_CPU_MPC83XX) += mpc83xx_cpu.o
- obj-$(CONFIG_CPU_RISCV) += riscv_cpu.o
- obj-$(CONFIG_CPU_MICROBLAZE) += microblaze_cpu.o
-diff --git a/drivers/cpu/loongarch_cpu.c b/drivers/cpu/loongarch_cpu.c
+ # platform-specific options below
++source "arch/loongarch/cpu/generic/Kconfig"
+ 
+ # architecture-specific options below
+ choice
+diff --git a/arch/loongarch/cpu/generic/Kconfig b/arch/loongarch/cpu/generic/Kconfig
 new file mode 100644
-index 000000000000..74a80f9e79a4
+index 000000000000..5fcc2156906d
 --- /dev/null
-+++ b/drivers/cpu/loongarch_cpu.c
-@@ -0,0 +1,142 @@
++++ b/arch/loongarch/cpu/generic/Kconfig
+@@ -0,0 +1,13 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
++#
++
++config GENERIC_LOONGARCH
++	bool
++	select SYS_CACHE_SHIFT_6
++	imply CPU
++	imply CPU_LOONGARCH
++	imply LOONGARCH_TIMER
++	imply CMD_CPU
++	select CPU if DISPLAY_CPUINFO
+diff --git a/arch/loongarch/cpu/generic/Makefile b/arch/loongarch/cpu/generic/Makefile
+new file mode 100644
+index 000000000000..c98d63b4f831
+--- /dev/null
++++ b/arch/loongarch/cpu/generic/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
++#
++
++obj-y += dram.o
++obj-y += cpu.o
+diff --git a/arch/loongarch/cpu/generic/cpu.c b/arch/loongarch/cpu/generic/cpu.c
+new file mode 100644
+index 000000000000..7eae927b0003
+--- /dev/null
++++ b/arch/loongarch/cpu/generic/cpu.c
+@@ -0,0 +1,22 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#include <clk.h>
-+#include <cpu.h>
-+#include <dm.h>
-+#include <errno.h>
-+#include <log.h>
-+#include <asm/loongarch.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
-+#include <linux/bitops.h>
-+#include <linux/err.h>
++#include <irq_func.h>
++#include <asm/cache.h>
 +
-+static int loongarch_cpu_get_desc(const struct udevice *dev, char *buf, int size)
++/*
++ * cleanup_before_linux() is called just before we call Linux, it prepares the
++ * processor for linux
++ *
++ * We disable interrupts and flush caches.
++ */
++int cleanup_before_linux(void)
 +{
-+	const char *cpu;
++	disable_interrupts();
 +
-+	/* We try to get CPU name from IOCSR first */
-+	if ((read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_IOCSR)) {
-+		char vendor_buf[9] = { 0 };
-+		char name_buf[9] = { 0 };
-+		u64 vendor = iocsr_read64(LOONGARCH_IOCSR_VENDOR);
-+		u64 name = iocsr_read64(LOONGARCH_IOCSR_CPUNAME);
-+
-+		if (vendor && name) {
-+			int ret;
-+
-+			memcpy(vendor_buf, &vendor, sizeof(vendor));
-+			memcpy(name_buf, &name, sizeof(name));
-+
-+			ret = snprintf(buf, size, "%s-%s", vendor_buf, name_buf);
-+			return ret >= size ? -ENOSPC : 0;
-+		}
-+	}
-+
-+	cpu = dev_read_string(dev, "compatible");
-+	if (!cpu || size < (strlen(cpu) + 1))
-+		return -ENOSPC;
-+
-+	strcpy(buf, cpu);
++	cache_flush();
 +
 +	return 0;
 +}
+diff --git a/arch/loongarch/cpu/generic/dram.c b/arch/loongarch/cpu/generic/dram.c
+new file mode 100644
+index 000000000000..26cabc4b3ccf
+--- /dev/null
++++ b/arch/loongarch/cpu/generic/dram.c
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
++ */
 +
-+static int loongarch_cpu_get_info(const struct udevice *dev, struct cpu_info *info)
++#include <fdtdec.h>
++
++int dram_init(void)
 +{
-+	int ret;
-+	struct clk clk;
-+
-+	/* First try getting the frequency from the assigned clock */
-+	ret = clk_get_by_index((struct udevice *)dev, 0, &clk);
-+	if (!ret) {
-+		ret = clk_get_rate(&clk);
-+		if (!IS_ERR_VALUE(ret))
-+			info->cpu_freq = ret;
-+	}
-+
-+	if (!info->cpu_freq)
-+		dev_read_u32(dev, "clock-frequency", (u32 *)&info->cpu_freq);
-+
-+	if (read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_PAGING)
-+		info->features |= BIT(CPU_FEAT_MMU);
-+
-+	if (read_cpucfg(LOONGARCH_CPUCFG16) & CPUCFG16_L1_IUPRE)
-+		info->features |= BIT(CPU_FEAT_L1_CACHE);
-+
-+	return 0;
++	return fdtdec_setup_mem_size_base_lowest();
 +}
 +
-+static int loongarch_cpu_get_count(const struct udevice *dev)
++int dram_init_banksize(void)
 +{
-+	ofnode node;
-+	int num = 0;
-+
-+	ofnode_for_each_subnode(node, dev_ofnode(dev->parent)) {
-+		const char *device_type;
-+
-+		/* skip if core is marked as not available in the device tree */
-+		if (!ofnode_is_enabled(node))
-+			continue;
-+
-+		device_type = ofnode_read_string(node, "device_type");
-+		if (!device_type)
-+			continue;
-+		if (strcmp(device_type, "cpu") == 0)
-+			num++;
-+	}
-+
-+	return num;
++	return fdtdec_setup_memory_banksize();
 +}
-+
-+static int loongarch_cpu_bind(struct udevice *dev)
-+{
-+	struct cpu_plat *plat = dev_get_parent_plat(dev);
-+
-+	plat->cpu_id = dev_read_addr(dev);
-+
-+	return 0;
-+}
-+
-+static int loongarch_cpu_probe(struct udevice *dev)
-+{
-+	int ret = 0;
-+	struct clk clk;
-+
-+	/* Get a clock if it exists */
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (ret)
-+		return 0;
-+
-+	ret = clk_enable(&clk);
-+	if (ret == -ENOSYS)
-+		return 0;
-+	else
-+		return ret;
-+}
-+
-+static const struct cpu_ops loongarch_cpu_ops = {
-+	.get_desc	= loongarch_cpu_get_desc,
-+	.get_info	= loongarch_cpu_get_info,
-+	.get_count	= loongarch_cpu_get_count,
-+};
-+
-+static const struct udevice_id loongarch_cpu_ids[] = {
-+	{ .compatible = "loongarch,Loongson-3A5000" }, /* From QEMU, undocumented */
-+	{ .compatible = "loongson,la264" },
-+	{ .compatible = "loongson,la364" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(loongarch_cpu) = {
-+	.name = "loongarch_cpu",
-+	.id = UCLASS_CPU,
-+	.of_match = loongarch_cpu_ids,
-+	.bind = loongarch_cpu_bind,
-+	.probe = loongarch_cpu_probe,
-+	.ops = &loongarch_cpu_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
 -- 
 2.55.0
 
