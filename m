@@ -4,136 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1344EC88E50
-	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 01:07:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C632C88E50
+	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 01:07:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5126B606A7;
-	Sat, 12 Sep 2026 01:07:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 35E6660660;
+	Sat, 12 Sep 2026 01:07:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yeMbAJnFvf-Q; Sat, 12 Sep 2026 01:07:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7A5DD6064F
+ id VSO8K3IsFvKH; Sat, 12 Sep 2026 01:07:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 82F28606DC
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789175251;
-	b=dehFTsnK+ozLHMEExdZGytEMizormLSfItHLdku5F3rv12EC1jdfkYFbkcyfKoSmLZK4
-	 zmY7VSfvbM1QTofb3JFlC1zJloekZa3DxIbdze7KTKQoOVExLQtnagSg6KJfi3LmA7MfB
-	 1OSsgWH9DLWh30cOHCsKBXR1fkw2ZzfLOsZapqAYs5kcp3U+QR+TNBQNWjelpCv5VtSJC
-	 lqjaCdtU+WQFwDxgiYrMmNaWY2Q1u6fPtZzbC+6S+KJMcQaE7ZeIcmxg0CWlWpcsZYLm/
-	 7sspV78wZ1V7/r2SgspJNzp5b13JAi8h7iZgD/OTcA4pN11otMIuU3wMmgyTL266nxA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789175254;
+	b=gRZzuHxupVuHE1uuR5RJiq0GJbXatuP3+scJfvq5HfIndIADfn4RfFAWDFaWd+poTCnx
+	 98MCMueaZeVFJvqU3fjSS5Is3u31aiVi2hA0g6mdZFIN+G2qOEhV6QAV0YoMR6PsRkJSQ
+	 IT4vD2Uyc/SNJPCYYacsuX3i5kH3XHHEoL8zSyOupocN+IjOies9KEO/CjArhwrkQnWEv
+	 BZrit2GKCo0NHNAYpedOerr/bnk+W4o4+IUe+S4nqOtwvttUSmK0sPVDolZ6gHYqO5CZQ
+	 TBGIcujdF3aGoi67ZtDYXnvUBwSLfB1Pg108DKJfWV4YbxscmapF8bzcUBVG6Ki08Xw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789175251;
+	c=relaxed/relaxed; t=1789175254;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=6Z8y7K94t96SW0FFKVUumO/UNUAZfuwWJnP9EhJEW2A=;
-	b=YRL2jHg5Y1Oe/CFvl8zcgLlY7kxT5FDSNEWYvK8WrMRZYibR1FV156JimDhjDEvdpYQA
-	 byrsQZHcwC/Gc2KQcNC7z0edQT5nKqz085iU27vzRPDbF2tK7JNTraivLHLG2PS1GXRG6
-	 zN2KSCIRsQWtNDTEs9xIdWRG9s2ky70B69B781zOBxeE6691qH+cqd0uBLWdJnn0q1tak
-	 5MOtCDMTD/+OCSQ859qwkK+hl4TPN1fSWfudTniK/Wi7WP4/zFLdiGXeWooRcupXNcVzx
-	 88tKG0bRvOSoaYRz2D9RCVCQ0PSx0wbyV9Sz+CouG2aW/UBfzPhZJ9AvutgymIy6sdg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=HdMXT7EV;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=dUCrouaQS2dyNydaS9lFgUSuIUdM/7DT0GmGyVMeNo8=;
+	b=FnsDdrOGTyof0PURkKZSd7CL0dbc9jniv6eCXraMWEaPgQBjyeQJj90RxxmrmjWtJzSw
+	 OUtPZG2jmSJeopGMRwsKHddFg61d8SvmIDt8JndafmVDCFS9SWh39g1tDl/w6/MA0IAXd
+	 Hoe7NtAZxlTpxgg7HfIM14V3k6tx5IFei4XTM/FJhiU3aRqEhrSMm9lN4zY3SKumO2KNt
+	 b89M7Z3HQUVMMzsPH1P65ORZKM6yswZ/I/4Sr9ANW8RexPjj5ck821iOWruBBeatzLO/x
+	 3n0gk+GBrIqAIFMNusenPA7crwB5qyH7UYTDRMjQ8hRqXiil9bDIsMRpXJta6qQ4u4Q==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789175251;
-	bh=6Z8y7K94t96SW0FFKVUumO/UNUAZfuwWJnP9EhJEW2A=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=U1Pj/U7A2KX7fJ33ptwVAh4uANtzGTDWnHo+yVkELCFyyf1XYfjkE3rSiaBqws+MH
-	 fvpd+YeLFnlon9LybJbQY6kN+AENtjcuzHHuEooGOTHiV6VaA8s2abKip/nN/8VOI/
-	 zrRLNNAu4ocjQWK6cLVYzpQiIrPtlH50JClRTJV+IbBQ9bTPNu1OlfHOKUwxQgelYF
-	 ke6WcnMYaFjHuLngnlZa0uc5RkvPuEgSqZm4xpVFkIKu72x7qp4+jApj32IGGGTmSw
-	 Kt68+Wcxywz0NJcbgC+kzEn3anrvJRFeyu1xUbemfHo8IXjptVJuC5vtGTaRMnMobS
-	 2YcrmLw5G2JUQ==
+	d=lists.u-boot-project.org; s=default; t=1789175254;
+	bh=dUCrouaQS2dyNydaS9lFgUSuIUdM/7DT0GmGyVMeNo8=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=SioOpNNsNGeLJwKL3tZIAAIFuZGFloFpGY+0DedP5yvvhRluNxHFf1vL0zUwmG35r
+	 MhjmanYmSXoZGUq0+5PHL9c5UQzgbMOTwRWBfjEK1q1ccKtjL2ACEKd6a49Z3G4t6U
+	 wTjxu2XsRs5lwTyRDNRVOHKJ/WzXbg/XR2l/xNG21Lt2B0r5AgKjJTP+PUIqzZtVb1
+	 R/PcuuXUv/SBUtjpCCVO5kxSmQ4z9hpU9fuIPB2CQY+nDbd5/cdcfqQwBPLHrPjhar
+	 oIqyQWDfWFatlfrpLsqVvGK3g8is5KCkw8MoA7NSOo+HmmF8ZWp+HUTbJscsvBOcmJ
+	 MehWEeI46vwgQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7A5DD6064F;
-	Sat, 12 Sep 2026 01:07:31 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E1A68255
+	by smtp3.osuosl.org (Postfix) with ESMTP id 82F28606DC;
+	Sat, 12 Sep 2026 01:07:33 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E2BE3E45
  for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 18:19:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D37946061C
+ by smtp1.osuosl.org (Postfix) with ESMTP id D4AC080EC0
  for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 18:19:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rr-l1SW-hacK for <u-boot@lists.u-boot-project.org>;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2hQwEO4JFAkn for <u-boot@lists.u-boot-project.org>;
  Fri, 11 Sep 2026 18:19:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0549D60617
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0516780EDC
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789150744;
- b=oYyAdqwXv+QEDJPjMPzl7rEnV/MeQpJanFZMCANZqjXWm4VnUUfzvpD5zh+GbRgUF00f
- O1iV5vviFgM6JeLWLnGuLw9uQSowLkNiVrXDpP3hRK22kyr+HdfPN8P3DOsJtCDmZq+G1
- 0g73qQCUllkq4wv+E8d6InfM1R1KGlqUlbVAx0P/aGDFlZ2NA0pF3feag7aBTEzl0v/6K
- zyOZcXLcwSczBIpdkygx73Hi3gJ+8SSG2x6bmnV/pc8IiaclFNMLivx0f+uUgzERh/Ev2
- ZRm85WsL2jW/S41DSCvfdxdoygzwAOZUfWk+wTHt8iEzSIfwtoa1fQP5MWA1ZO8j5lw==
+ b=gLJCVHlr6h5kr1e2hKFfgm1Tw6aOvG1HZEMlnsBazNHIuBNe135YQgYHnKXxqXY9LoBP
+ G0hpnNQUE9pfp2x7E8BzmiGbvE5jFzyiS5CR/SnbcLxHyvqQzRSRUUYDm/qTbyqGm+zI+
+ Y69mNfrcuRhVAPq2lav9Ouv0dA/BzUggpvsXlFyJq8l+RDyMWmig2TCewxF5tND9EOJjG
+ QoUJTeth7WFSxri6Xw3zqKhkJe7sMXwR7w6WSO47TUbKSbPHODbPAF1nrfPJNPXcntSvV
+ YMgoCL7PWXaWQiKM5FI5H98QGq1Iy3DnmK8nL9jieEUYliRa7RdZZOBPGZEO1blTncg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1789150744;
- h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Subject:
- Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
- X-Developer-Key:X-Endpoint-Received:X-Original-From:Reply-To;
- bh=6Z8y7K94t96SW0FFKVUumO/UNUAZfuwWJnP9EhJEW2A=;
- b=mSANSpBD3yXQk5XOg9eDmEr0z5FIwRXjInd685oy30HEOoyEFPk6AGf0GPfCzyoYxmSa
- XOseBsuyAP2WSS55fx48ZEM3xOFozV9t9paN28fDrIW6XZEAoqPV+wqc89VnygXb0G0fh
- qnExq6SMBloGQaI4M0Qaj+c+fo2YL3FJBe18/gpbC5PVIvnyn3eCWFoE+1kpBlaoqHKIj
- PChUKzPirzkXVtDuJIhaotcKxI0GfriWnthxM07vrzGL+HMki4XfcdBplSf0oatCftzaS
- 0f+28TSkAYmgmfn3Ztf7H5jrmimTaTCCFC5f+X9mr+IWXe4ttI2tuZNFMEz1Ha2gshA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+ X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+ X-Original-From:Reply-To;
+ bh=dUCrouaQS2dyNydaS9lFgUSuIUdM/7DT0GmGyVMeNo8=;
+ b=frU7KD4HNspvBaP3bH8aIyUm1LaT8O8ED7SAqRz4hX8kh+4Aksbc6+952+ffLH+/SEC3
+ GSL+RBIyzDYmVTxDTM7hEcUOo4taKg7rpRreJujhHPoSZQmCr0QwHHi2XJkAFc2EcKlZH
+ h0QglcaUnfDy2hdjujNeDlKKBhFgZDLp65kjLZs6tN369Mq7UhxSBBwwQKXMF5rQuQ2qe
+ dFN/JRbpYJHfmsXJoYkuWuRr67pC+055J73mTnvuybAMeYWhAGJTVcfCxIhf057/B6Om1
+ txP3DMiIcbWkyHxzP62Qqcp9ftQXIjjix1QN6no5IqWZhn1eR58Nl6zDMUCY1jDntFQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=kernel.org; 
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=HdMXT7EV; 
+ header.s=k20201202 header.b=i7J5yoTu; 
  arc=none smtp.remote-ip=172.105.4.254
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
  helo=tor.source.kernel.org;
  envelope-from=devnull+petr.hodina.protonmail.com@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=HdMXT7EV
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20201202 header.b=i7J5yoTu
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0549D60617
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0516780EDC
  for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 18:19:03 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id CDC56600AA;
+ by tor.source.kernel.org (Postfix) with ESMTP id F1F5B60142;
  Fri, 11 Sep 2026 18:19:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 81688C2BCB8;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A72F3C2BCF4;
  Fri, 11 Sep 2026 18:19:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1789150741;
- bh=UasbxUjffhQxY7H0NqWCzpDwwfkLu216GvawNMzwsmg=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=HdMXT7EV/nvltJKu2L+ZZxGr+KeY+SgDe6PMjHykvXdKhiP6d8+pWzE+yMET2VKE+
- kuPEOGdM43DrpLcBwrMf6gEaNgXaFmxHM2EVZiEXLbbU4cSuq7bvqni7p/QcZ4YYh0
- zwE76vZBEyTihElcMvB0txI2rqIn5RfUGMSQ52cdLJvzdP/Meng3pA+Sa+j0C+djB0
- jeYCAgdWnFPGtT9SyHbGBAjL5PQE3APOzlXRAEgdTTu5rIpDHB6wHveZI+mC0gdU9R
- 1VQNdN0Y/FLtJOAsKu9plTnwu7rKo4c7qN4tknXsiM6TbKy9gicpesY68v0UcGx9p8
- p06GSZ+jpBjdA==
+ bh=VETHFUxNsELr+h0xv2QWqd7fmsUY+FZWCdNBNE9xdZU=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=i7J5yoTuiXwv/QX/SIGqW57Owi4kd8VKX481IlVpJlBnEf2q5WeBtBeMxNxscBAlv
+ bap0+zWoZK9JdtKrMoZqnPc26m9rjZtL8nx4x5gon8ldIhZFa8UtBfHTTA4bp+6kk+
+ nx0Js9qMggjPXgzV99tLvgfvHSonQ7qdgqJUc2dOiFwkunl/h2lSV78h8FvYzncXlr
+ miBOVoeUFkFyyM0IY4FsXQKs/t/KE/4XTwqt8gG8LkkUwZuiNU/qywGvvSTIGi2KPR
+ hof9T93bxVDw0+cF2j5Mp0LkRMwCmK9WxeLZrYeGzBvweRdwPYkSlWcTWvdIFUrSKA
+ YrQXGHTGJL4og==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 57A30C88E45;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 8C078C88E59;
  Fri, 11 Sep 2026 18:19:01 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Subject: [PATCH 0/4] arm: carry and filter previous bootloader's bootargs
-Date: Fri, 11 Sep 2026 20:18:46 +0200
-Message-Id: <20260911-b4-android-bootargs-carryover-v1-0-6ebb43da3df0@protonmail.com>
+Date: Fri, 11 Sep 2026 20:18:48 +0200
+Subject: [PATCH 2/4] common: Add command line parameter masking functionality
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMMQ7CMAwAwK9UnrEUCkSUryAGOzHFDAmySwWq+
- ncCjLfcAi6m4nDqFjCZ1bWWhu2mg3SjMgpqboY+9DEMYUDeI5VsVTNyrRPZ6JjI7F1nMdwJc4r
- xeGCK0I6HyVVfv/98+duffJc0fVNY1w+wPiTtgQAAAA==
-X-Change-ID: 20260909-b4-android-bootargs-carryover-3ebbc6685ba6
+Message-Id: <20260911-b4-android-bootargs-carryover-v1-2-6ebb43da3df0@protonmail.com>
+References: <20260911-b4-android-bootargs-carryover-v1-0-6ebb43da3df0@protonmail.com>
+In-Reply-To: <20260911-b4-android-bootargs-carryover-v1-0-6ebb43da3df0@protonmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
@@ -151,11 +149,11 @@ Cc: Tom Rini <trini@konsulko.com>,
  David Heidelberg <david@ixit.cz>, Petr Pavlata <petr@acrux.cz>, 
  Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789150739; l=2075;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789150739; l=4681;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=UasbxUjffhQxY7H0NqWCzpDwwfkLu216GvawNMzwsmg=;
- b=aXSZSd2EaeSWO/DbJ/edvsQsgXiRqKfOhMpD5DDY9Y2YUYERXILoHp65cSY7y2RTZ3V2Xf6jy
- hM7lfQZ+EmcCkysM7oiw8Y4ZgLHo+SDJUxred0kq++ejnOeoA0fLuZw
+ bh=x9zxeiR0oC68kj6krUFAO8+pGh69IAz5yDuBqH8tHJ4=;
+ b=TOYFTGNY/VpAUvfmwFBjv9cm+dtGg6/vQ6Th37r9PDaLYDHJsgjWmUFNmcg3qodEtKf6mBL7D
+ PJgZ6VgxqNcBNF0CsoekWlvvX9OeFGpKwXfzkGmqZdrABUuk4WYgZZ1
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -176,54 +174,194 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Reply-To: petr.hodina@protonmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This series supports chainloaded U-Boot on Android devices where the
-previous stage bootloader (e.g. Android ABL) hands off a kernel
-command line via /chosen/bootargs. Some of those parameters need to
-be carried over into U-Boot's own $bootargs, while others such as
-skip_initramfs need to be explicitly dropped before the command
-line reaches the kernel.
+From: Petr Hodina <petr.hodina@protonmail.com>
 
-Therefore this series adds a small command-line utility library
-and uses it to carry over and filter the inherited bootargs.
-
-Four patches:
-
-  1. common: Add command line parsing utilities
-     Parse key=value parameters out of a command-line string.
-
-  2. common: Add command line parameter masking functionality
-     Mask or drop individual parameters from a command-line string.
-
-  3. common: Add Android bootloader parameter parsing helper
-     Convenience wrapper for the numerous androidboot.* parameters.
-
-  4. arm: carry previous bootloader's bootargs into $bootargs
-     Wire the above utilities into the boot path. Copy the previous
-     bootloader's /chosen/bootargs into $bootargs. Drop parameters
-     that must not survive the handoff (e.g.  skip_initramfs)
-     when CONFIG_SAVE_PREV_BL_BOOTARGS is enabled.
+Extend cmdline_utils to support masking or replacing parameters in
+command line strings. This is useful for filtering sensitive data or
+modifying boot parameters.
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
-Petr Hodina (4):
-      common: Add command line parsing utilities
-      common: Add command line parameter masking functionality
-      common: Add Android bootloader parameter parsing helper
-      arm: carry previous bootloader's bootargs into $bootargs
+ include/cmdline_utils.h |   7 +++
+ lib/cmdline_utils.c     | 150 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 157 insertions(+)
 
- MAINTAINERS                      |   6 +
- arch/arm/lib/save_prev_bl_data.c |  15 +-
- boot/Kconfig                     |   8 +
- include/cmdline_utils.h          |  60 +++++++
- lib/Makefile                     |   1 +
- lib/cmdline_utils.c              | 331 +++++++++++++++++++++++++++++++++++++++
- 6 files changed, 420 insertions(+), 1 deletion(-)
----
-base-commit: ece349ade2973e220f524ce59e59711cc919263f
-change-id: 20260909-b4-android-bootargs-carryover-3ebbc6685ba6
+diff --git a/include/cmdline_utils.h b/include/cmdline_utils.h
+index cf127b64e55..fa6e20b2417 100644
+--- a/include/cmdline_utils.h
++++ b/include/cmdline_utils.h
+@@ -18,4 +18,11 @@ struct cmdline_param {
+ 
+ int parse_cmdline_params(const char *cmdline, struct cmdline_param *params, int count);
+ 
++struct cmdline_mask_param {
++	const char *key;
++	const char *new_value;
++};
++
++char *mask_cmdline_params(const char *cmdline, struct cmdline_mask_param *params, int count);
++
+ #endif /* _CMDLINE_UTILS_H_ */
+diff --git a/lib/cmdline_utils.c b/lib/cmdline_utils.c
+index b4798c439b8..4355bdd45f4 100644
+--- a/lib/cmdline_utils.c
++++ b/lib/cmdline_utils.c
+@@ -94,3 +94,153 @@ cleanup_error:
+ 	}
+ 	return -ENOMEM;
+ }
++
++static int ensure_capacity(char **result, int *result_len, char **dst_pos, int needed)
++{
++	int current_pos = *dst_pos - *result;
++	char *temp;
++
++	if (current_pos + needed < *result_len)
++		return 0;
++
++	while (current_pos + needed >= *result_len)
++		*result_len *= 2;
++
++	temp = realloc(*result, *result_len + 1);
++	if (!temp) {
++		free(*result);
++		return -ENOMEM;
++	}
++
++	*result = temp;
++	*dst_pos = *result + current_pos;
++
++	return 0;
++}
++
++static int write_replacement(char **result, int *result_len, char **dst_pos,
++			     const char *key_with_equals, const char *new_value)
++{
++	int key_len = strlen(key_with_equals);
++	int new_value_len = strlen(new_value);
++
++	if (ensure_capacity(result, result_len, dst_pos, key_len + new_value_len))
++		return -ENOMEM;
++
++	memcpy(*dst_pos, key_with_equals, key_len);
++	*dst_pos += key_len;
++
++	strcpy(*dst_pos, new_value);
++	*dst_pos += new_value_len;
++
++	return 0;
++}
++
++enum match_result {
++	NO_MATCH,
++	MATCHED,
++	MATCH_ERROR,
++};
++
++static enum match_result apply_mask_param(const char *cmdline, const char *src_pos,
++					  struct cmdline_mask_param *param,
++					  char **result, int *result_len, char **dst_pos,
++					  const char **next_src_pos)
++{
++	char *key_with_equals;
++	int key_len;
++	const char *value_start, *value_end, *param_end;
++	enum match_result ret;
++
++	if (!param->key)
++		return NO_MATCH;
++
++	key_len = strlen(param->key);
++	if (param->key[key_len - 1] == '=') {
++		key_with_equals = (char *)param->key;
++	} else {
++		key_with_equals = malloc(key_len + 2);
++		if (!key_with_equals) {
++			free(*result);
++			return MATCH_ERROR;
++		}
++		strcpy(key_with_equals, param->key);
++		strcat(key_with_equals, "=");
++	}
++
++	if (strncmp(src_pos, key_with_equals, strlen(key_with_equals)) != 0 ||
++	    (src_pos != cmdline && *(src_pos - 1) != ' ')) {
++		ret = NO_MATCH;
++		goto out;
++	}
++
++	value_start = src_pos + strlen(key_with_equals);
++	value_end = strstr(value_start, " ");
++	if (!value_end)
++		value_end = value_start + strlen(value_start);
++	param_end = value_end;
++
++	if (!param->new_value) {
++		*next_src_pos = (*param_end == ' ') ? param_end + 1 : param_end;
++	} else if (write_replacement(result, result_len, dst_pos,
++				      key_with_equals, param->new_value)) {
++		ret = MATCH_ERROR;
++		goto out;
++	} else {
++		*next_src_pos = param_end;
++	}
++
++	ret = MATCHED;
++
++out:
++	if (key_with_equals != param->key)
++		free(key_with_equals);
++	return ret;
++}
++
++char *mask_cmdline_params(const char *cmdline, struct cmdline_mask_param *params, int count)
++{
++	char *result;
++	const char *src_pos;
++	char *dst_pos;
++	int i, result_len, cmdline_len;
++	bool found_match;
++
++	if (!cmdline || !params || count <= 0)
++		return NULL;
++
++	cmdline_len = strlen(cmdline);
++	result_len = cmdline_len * 2;
++	result = malloc(result_len + 1);
++	if (!result)
++		return NULL;
++
++	src_pos = cmdline;
++	dst_pos = result;
++
++	while (*src_pos) {
++		found_match = false;
++
++		for (i = 0; i < count; i++) {
++			enum match_result mr;
++
++			mr = apply_mask_param(cmdline, src_pos, &params[i],
++					      &result, &result_len, &dst_pos, &src_pos);
++			if (mr == MATCH_ERROR)
++				return NULL;
++			if (mr == MATCHED) {
++				found_match = true;
++				break;
++			}
++		}
++
++		if (!found_match) {
++			if (ensure_capacity(&result, &result_len, &dst_pos, 1))
++				return NULL;
++			*dst_pos++ = *src_pos++;
++		}
++	}
++
++	*dst_pos = '\0';
++	return result;
++}
 
-Best regards,
---  
-Petr Hodina <petr.hodina@protonmail.com>
+-- 
+2.55.0
 
 
