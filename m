@@ -4,161 +4,179 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DC82C88E53
-	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 16:57:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74BB1C88E53
+	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 17:41:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D99F4606A8;
-	Fri, 11 Sep 2026 16:57:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1F22E60626;
+	Fri, 11 Sep 2026 17:41:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fzrOC93geVY6; Fri, 11 Sep 2026 16:57:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org CA5EE60635
+ id C1PthFjStbhd; Fri, 11 Sep 2026 17:41:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 8E20B6061F
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789145861;
-	b=aCY6HSsAyJEr5QmNqB/o+3WzT6Et5+7IFjQlrQduUyfk23WOzeppl33VtGpqTLKZnEgl
-	 OxtyxdGLpZSC2Cznw2Phw2Sj5+1THlqsugyUTOm43kIORMs3VQMlZCKSa8aao2eEcNpM/
-	 zal7Hh7obJosp/ZX3RbonbTD/4x4utgueK+B9e9nyD1EqU6Qqm3GfXdX8tw9Ib94zGR/B
-	 rhC2Pvyu3sTd1Mi7xvMIo8PnylgYqkOqVA4fMhkisib7ctmwMcBbz+j/F1vsn/CVCQV4x
-	 cXwywgEgc3aStKsEbFQakMp6pYznc9qj71zHRZL5Zp8cBsJ9o+rP88pjGPWk8JzCsTA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789148489;
+	b=oSMqFpj/9YSShlcsVqQDJaYOrax+XaUTKw6jWysgb8w1irVINionU+quNvaxoLdrPddW
+	 RNuDccIXystq/r/cGvBa17rszrPrFaHSF+tXEYp9nvhqRwofFQCBfqVk/YbqFarLTAgsG
+	 DKfT1A2gSpFBu0T4DIE6rBKaWXxavHkaUKu8DE6oYtpw/e6p3rav7TXscOBITYXMlYHOy
+	 TyHkrC/TiiEf2HFH1EMyRPxWdP3IAO9TuKxRcANG/mdrlYvmgGjfv2QjmRlA0xr0FIxXx
+	 6P8jLd/F9I6VXa7utJYBFJWK+Bz5oPvPPll9nLte/asZoKRx/4XTrQtprFM1kt2+wYQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789145861;
+	c=relaxed/relaxed; t=1789148489;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=EVLBm6kXQgRwuNzeRkEObkxd649ARmB2nHMoOqj6EPc=;
-	b=Hnx2aCJXpyQInzBiBTHXcG01EbsryPekAsUU7XUcGJ7gsuG/h8jz1jZQwICnLcdd3OSJ
-	 JrxB7BZ/rBrNMcpDn7XK45w805TaFcmZAjoPz5ocSLvSeBd5ad9eNm/mC4Q+SmKSGB5wE
-	 r8TZHDFA847YN+EKPW+DGphUPXa6TEeS9S3GI6hrbRY1kXUcmJsq3qXoLTJ9lnSCguNzs
-	 fjDW3QyIe2gYliACh/Ys1RBx2HC769caMLKdhTHMTQwJRvcyRyhwiQXY/9wKEzFfgYly/
-	 JfZUJ5V9rS/Q6s0MsElC0hkGlBzUttjc1I0Xf4vA+N9+LTjFypuQHqca7bOhLdqXQVg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=UKleN+kZ;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=tSNwMCjIxDv2Qm/qf4HgP00oimauKSwE/ND/olI/AGo=;
+	b=Ga1gyu55/6EgKCaZiZHBAnFLwPKu359fsvVz7VaEzTuxcywW8XrymQ/upj3L3x/PfW18
+	 GXebyocNsflPs+hXgpuvM5Ntcd8wl5b1uYf5+HrmxP+bPShU5esU44qCxDSEbuxfcU8wO
+	 nnEFvnvZCpebZMIbG+Lw3uXpnx6JeoAC5vzm41cEmCrWc4Y2beiVQCSuqurBio3fhmNo+
+	 +mbt+KpSku28th+QeG4NaakYBpMfp0Nryvugf9kWMMcYDTa6V7UuvgaswrhOWFOb7Mwu5
+	 OqOZpduppNOpU3BNx0VD6CEbEqiF6/XKaTw6vNz5JSX7no9iFYJ9aOx7ev0TT6MxrCA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789145860;
-	bh=EVLBm6kXQgRwuNzeRkEObkxd649ARmB2nHMoOqj6EPc=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=FVO+Rv1q/WSdIyzFbNvjr0ot9o2ewZ9cS9l7M+TojcG/pg/gVorFU1Fi7+xjkDj7/
-	 cxDX9Uj5omWR9aWVyAxxE4zhR010Sh/U/DzgaRlWRPyM0VAJxJxjRd7vurxTbU2DeI
-	 bTbrc0LuP6JldsXPw+zr6Orwu5SSYKVMyylnuRu5zxTjuTtTslpRAz2m9pwSH0+M6l
-	 xqczrlthhHWC745xZJ9k/2KJym1SiZOXWGD5Be6+TbJ6LVqousvIYOF+g4u8uutmMf
-	 P9568+1jXgNu9I2aWurGNSQ/cId6IHrRMINImOwEVXXW0KVXD5PAi/cQ2ZVpqExxBu
-	 ENCQxxVmQ1ZnA==
+	d=lists.u-boot-project.org; s=default; t=1789148489;
+	bh=tSNwMCjIxDv2Qm/qf4HgP00oimauKSwE/ND/olI/AGo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=qeKAPTiwHz/nUR3ZshA/HwY5pSs7k2/IIm+gmYaNQubcNQXDZHrKVnehLcMjdNzOP
+	 QUanKhpuGNFhLht01tLtHNxzK/HU/lRtO8S0DDCtak1dv940IsQXb9byCE6gS4LfbL
+	 cQR2cfTwPQ87wrjpqgX8O72HFYCyCSjm+PXsZp7zo8Aj+ycD22qBtXanpeT10rLuRv
+	 Xp8tJhIrejw0U0Fho31jMnQlV5sbEunm5nWaJOTxvvsf2W1OZTx93f/7YMNEM16MT+
+	 VcPCnTsDWoaM2m4+AbhuNo7XJNIQD8b/TtCWD5/QlUDL/ccO00emqAKoDSv4YEg0mW
+	 Pnajz035h9ZHw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CA5EE60635;
-	Fri, 11 Sep 2026 16:57:40 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 259CF3AF
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 16:57:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8E20B6061F;
+	Fri, 11 Sep 2026 17:41:29 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 320D52E3
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 17:41:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 171B160635
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 16:57:40 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 17EBC4059E
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 17:41:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aewkybMvcOMJ for <u-boot@lists.u-boot-project.org>;
- Fri, 11 Sep 2026 16:57:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 2592B60625
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::62a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789145859;
- b=OWy62t9LhR1T7Xpl/dh8ImcJMIGk3SHax9fChl9IiP1BvKOtviNmujMEpsOl4o62LOGN
- yvQi6P/vyfC9MQcBKHODbziliamf6Id0BkqTbIRWmr5EwznpIgnpkMcvaNQ59JNO4vpH2
- CEze37yOhf2xj0N35zTIqsD5+xpgqtGx2cukj9c8APcol7qMq6xP+saMmk587Oucgd5IR
- YzkeKhTpZ9dN2G1XrRbIeLv+AAwyX8kslTLLKqUunPLPuSTYgZhKh5H8abbqln6Xno9/b
- aLo41CxpUvLT/Y1JKW5utQoU2nWvC8AmZ5vpzn3zNjZct9fzGfYloiSByhmPWGEeKLw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id F76FK9Wr3RDk for <u-boot@lists.u-boot-project.org>;
+ Fri, 11 Sep 2026 17:41:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 2203840542
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c33"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789148487;
+ b=O2QC6Cqwho4PuFNQhoh/04ekdT2xmtz7sHNq+T98I2Pu6/vlMg2ea1vseNC/tszL+YvS
+ uOCUmzXj3t13CJ6dmshry2zDzys63gnnZPbnu8yvf4gsEYQwWaqtbHSoe4PqFVCItw941
+ MDE5d/eqcCUQj8RkGaHr//20Jqz9f7zhuXDGHBDheFjNK2NHg0wpGU6y/AlV4iIeMjvXv
+ MVA1ni4dpRvtyNUo2K1iptAbUonoP2LDvQj+qf0kVlp2GModkg2hYrIG17NBx5hOi7CHL
+ mHQzyZhb+qviiUD13Dfe3uwb3wb7CrXZBHr2jKQa+N4MWfOJofJP8kFPfMfyJDJ7NeQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789145859;
+ c=relaxed/relaxed; t=1789148487;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=EVLBm6kXQgRwuNzeRkEObkxd649ARmB2nHMoOqj6EPc=;
- b=oYKXC3GiKzZ5NnNTsJ2iAR66Iktq0Ir+ofDblw5KStQXyrHKh9jHkCWADwsFk8LvoYR6
- uJoFlhzXzVzLl1HLlRkhxpyxMMZba2ySesPUqgcTLsnb9z03HU94A0WlvxeQ11uA3TFBA
- YGRW36IfP3qATDIxu4JcmzIuPuIy8TNBT4GLCngvQN81+eGBeAw0Tu1PzUpqnqJdr2L8u
- 9qnc++m87y+FL3903Y1mfkjR7BOTfFeU5nuPFStRaaMI1fuxoDUXlT/5VPbZhUpJd9z0B
- 7nmLxcSfiOkcwh3abAytqjEbEqvh0KuvSw2IYdRBrIQNeoBFmRSfPyBmsTM3JA+Q8UQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=gmail.com; 
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=UKleN+kZ; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::62a"
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To:X-Clacks-Overhead;
+ bh=tSNwMCjIxDv2Qm/qf4HgP00oimauKSwE/ND/olI/AGo=;
+ b=mQ3pvwoq6nBEqI2Ko5yqROw3YnpLnZ7iMCR43mNsupvMLKDKOdqLGkKeew8/D8FVk0bj
+ utUrM8JjatXHLrZ5f+eq8gajmoe98WuEYk8D7mZldqpMTDtamlHOdlzoKJjKnCMTlhN1R
+ hrq2hSZd0H5nyQ/u5G64YG5q7I7nV3duuKElX4VAxtcbLv2IVu5jKDS9dVlA416eLTJfc
+ bEyo4pgTRt5glzKaCbqYfPpQQEmWQP5v7NIugLEGbf1MAvDezkaF+GPVh9ibx3UPsSJwJ
+ HXzgiYWMlIJ8U8GBfex288HJiRXJ2C41HBIZbFJl9BIrJhnoyihUfMAgmoXlHtHDkMA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=konsulko.com; 
+ dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=OpGHP9US; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c33"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::62a; helo=mail-pl1-x62a.google.com;
- envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=UKleN+kZ
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2592B60625
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 16:57:38 +0000 (UTC)
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2db858d60e0so11580375ad.0
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 09:57:38 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::c33; helo=mail-oo1-xc33.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=OpGHP9US
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2203840542
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 17:41:26 +0000 (UTC)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-6bd209cf210so581333eaf.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:41:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789145858; x=1789750658;
+ d=konsulko.com; s=google; t=1789148486; x=1789753286;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=EVLBm6kXQgRwuNzeRkEObkxd649ARmB2nHMoOqj6EPc=;
- b=UKleN+kZpDKwLyUTb/gaRww9em1QuOkd8Gqi1hC9R2eDowffqBrQxogc89yIzy/fvZ
- sKT94D3V3Svn94ISZ6vW7yYkeEz2A6Q1tpYSohs4ZPJuX+emlcaqIsimgC25Da+1vY3B
- nMYFFUi9xg/EYWbyQUvGNbYXgESyVUP+nK5gqfuyZwRdgj6DOMpZ2+LQ7Ab1tHVUL5qa
- cT3Wu6CVkP54S/diXkW/TxSMRy4cYRyAwWznx+iTHng0fZ7+IybbKsqhCT+mn5k5QCIs
- x7WMgJxM1HjNvC9KwO3zKQOgBKNlmXR0l2wWdcKWJigD7TleZgMtaDmFLQArLsOPfwCr
- QNdQ==
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=tSNwMCjIxDv2Qm/qf4HgP00oimauKSwE/ND/olI/AGo=;
+ b=OpGHP9USEnC4EJ5qVdXaunGGtSQwRQaOn1qvzRuLisSiqjW39nIfIQX4glOyQpHpv+
+ +Xvih35aCGUaN8srRpChg8BUKjEl4ajUPoMsT3ELxLAA2oTMhd6btFlfV1IQlXZbFF1j
+ 5NWv6DISQ/oVyJ9pTL+tDPCLIi0nAJ3PHiIhA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789145858; x=1789750658;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=EVLBm6kXQgRwuNzeRkEObkxd649ARmB2nHMoOqj6EPc=;
- b=hNyUs/AeoeCskICz03zJJuoygxBGMdyYMLTcWcQ/LYnGzPGLzyzTgMyTnUr1GbozQw
- hY/bTq5anwL1VDWb0j5Qmtfr27qn3zWh85tREMQYlY6lRhudTLTMnfvX/NRPV/WXbfEl
- 7aEvDM+5KphaaoL4azVzu1co1YDlPxZi1t8yUoenVqhzmNKXkgRbaiSdXMZiIsWvcMq9
- fvzlqvjlYr1Sy/yKqx6a+yX0YSkMuMcOV2/UNpDO9NZH20KWUsovt0ErX3axCVEidRqW
- VjL/naI7IOPvYm1fxJ0SEZnPbfUC2aW06/DWEuH4UzQPsHQ8CcGQGOR6IYGgHPdtawrh
- 1VeQ==
-X-Gm-Message-State: AFuF++mOtLyPQNhVBQvKmRAn5hMhsxDFeoHIlplsE7FxO3UVVc/pjsFI
- xK0giZTUc4XLL5OtAm2bJ5ociFY4UVc4xxD5iEpUQiCAG45HKlcl9QPi
-X-Gm-Gg: AYBFou1gPKH2JALBK5AfvyjZYOVW3Ujz+J9LuSdkN5EBR7USI8EB8OGh2UmMuQh7dlO
- jdlj4jL0TdyAxs4QJmSlYbG8EA9s7JFFmLMmn+4jNP6lZxeAFIASqFJ2xN15ZDNQvWQZB5cpDhB
- TJPUSeUto86vZ/qFYdfYb9URBa7dkpH4PCQwr8f1QqnZoUlIlZXJ1XAeIWUg3Ts2nrSL9EW75NF
- rYF6svgv/eeSaEg2ZTM7syqcZT8UiquQVqvBONGbwnjUc3FBN62KZM6om1jsmICCxoUleA9+0IG
- Tcuky6Ab5Ie5B6hUjdLOPQNI2Un7hQ7xsVmTc+qUenV0jNpElY22GXVaoBQlP6Z4sa+R/+2aSU+
- 3k9lRz0xeMDIWl9bSbV0qPP625s1+tD/WMSX2S5mfQuulHC5RT+vJwj5QPyc/eap3kmruA37kCL
- HZheeW4kgSRdk1P3FDXJa1ga58AeJ3+8dvwl+n1OcoGLGkboAVgs3+aTGqMZCIJuXEBskGT4o4x
- Q24/u50y35jYiCi6BPuB63thLcEzpm2eNqQz17ZQj9y+OrNHw==
-X-Received: by 2002:a17:90a:c2cf:b0:398:9bd1:3210 with SMTP id
- 98e67ed59e1d1-39d9c21d78cmr9121679a91.17.1789145858069; 
- Fri, 11 Sep 2026 09:57:38 -0700 (PDT)
-Received: from fabio-X870-EAGLE-WIFI7..
- ([2804:1b3:a803:6c49:9c35:d64e:78e3:c51b])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-33ba4e5193dsm7469763eec.10.2026.09.11.09.57.35
+ d=1e100.net; s=20251104; t=1789148486; x=1789753286;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=tSNwMCjIxDv2Qm/qf4HgP00oimauKSwE/ND/olI/AGo=;
+ b=Yxj4wqmqKL7DpMzyIx+qKXlfVT6QlZstX0nNz+ze9JNc4RISwL3DjNCEEsWQSnPvSD
+ r+afsa1lPMh8PbYGRaGlgN3UTu5rCoMXW+eMiklskEJu+NeJ5buI2LXa+Z9VCS9ZB7pt
+ vOsVZeSgckfK/ZWSYTiHV6MbG3oCfe5QBYJrDnQHT/UV3hSOgg58VMpUwwt1isET4AWn
+ ev24WNNUN5/CqHZbIS1vnMOvEH66XgsudHKYKFJErtHI1jpQXV0Wxx5gNGLk+DMUOFko
+ nq+960gTgjTWdWEydA0do4CIIPxFNBH3BRRLesS2ajpwPfTOW7cFWxoMt7moICsqkP9a
+ TDDQ==
+X-Gm-Message-State: AFuF++kqSCRvjrfhy/qQ6uzLxXQjqd/I7PAeRzCwww4YGc2DYC7l+uQm
+ /YuqpsXUnA59JdHkEHazaWt5p/pKL3TLrQ0HRG0lg0jeJCDJcIEE5h6D7VrjN5SQKqc=
+X-Gm-Gg: AYBFou0AALkgbivOZwxicZT1WYHMOpKvJveEErQRJ3RVWZoDrfhQ+/sgavaNIAt8+d1
+ walvDIUdRshYua/DfchddDhnnHyYbp3qdthKplAya906l83T5LirrPu9KSFuL1YHn84d9IzjYCz
+ waBbMOPL7TtsdL77ZZ7lW0Tnni9j65G4hkdPgnM+JHpJLa1xqJYoF2nLLBBZci2xEH4r1PFdthS
+ seCUjW1Lq0J5FFAIHrv0G/FVcn4HQD9fc8L/NPEVUZsJQEiAH+imEpnlki/wui2FAQ8aqw6r7Yf
+ 34nIkApUfeWgQh6e6EKl/QdYRDXGrBsMZV/eq5NGpkYkhYikEV0CONZVJ8NyhaxLP/5Lzv0FrZy
+ 0ty5BSvqe4jSMxpuNmJpSUn3DvUHp8w2Is+XrGK6w8X9upw05O2shzRtVm7m+QYpCRLWVPttxVS
+ XMcUH4CwmBVZe+Bn9VLMwIN34mzqK8MANG6i55LTOGFpAhPwe1uWrEUwzGoaF9J4JgBygcVbDEL
+ BJGTHJCJ4QBKUOaLsMCcXtCc6k9jhV8d2W+bzc+7fKpXDipNE6Gj7r400NgZdyFy/pCOTtdEXQJ
+ Dt9UYS+Gn7PAMkEeytON
+X-Received: by 2002:a05:6820:1ca3:b0:6bd:c175:521d with SMTP id
+ 006d021491bc7-6c0b9960732mr3600766eaf.11.1789148485759; 
+ Fri, 11 Sep 2026 10:41:25 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6c0990cc7b4sm3262824eaf.5.2026.09.11.10.41.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Sep 2026 09:57:37 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.u-boot-project.org, alexander.feilke@ew.tq-group.com,
- nora.schiffer@ew.tq-group.com, hppiscas@163.com, rafael.beims@toradex.com
-Subject: [GIT PULL] Please pull u-boot-imx-next-20260911
-Date: Fri, 11 Sep 2026 13:57:33 -0300
-Message-ID: <20260911165733.1611766-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ Fri, 11 Sep 2026 10:41:25 -0700 (PDT)
+Date: Fri, 11 Sep 2026 11:41:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Carlo Caione <ccaione@baylibre.com>
+Cc: u-boot@lists.u-boot-project.org, uboot-stm32@st-md-mailman.stormreply.com,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Alexey Charkov <alchark@gmail.com>, Johan Jonker <jbx6244@gmail.com>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ =?iso-8859-1?Q?Jo=E3o?= Marcos Costa <joaomarcos.costa@bootlin.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ David Lechner <dlechner@baylibre.com>,
+ Julien Stephan <jstephan@baylibre.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v2 2/2] spl: mmc: support dynamic selection in raw
+ partition mode
+Message-ID: <20260911174122.GS1764417@bill-the-cat>
+References: <20260911-ccaione-upstream-part-dynamic-v2-0-295fefc9a3c4@baylibre.com>
+ <20260911-ccaione-upstream-part-dynamic-v2-2-295fefc9a3c4@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Hh3PnpUrnG8+Typr"
+Content-Disposition: inline
+In-Reply-To: <20260911-ccaione-upstream-part-dynamic-v2-2-295fefc9a3c4@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -172,71 +190,146 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Tom,
 
-Please pull from u-boot-imx/next, thanks.
+--Hh3PnpUrnG8+Typr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The following changes since commit d4152edb50356338af994d1c0483f65b717b4c15:
+On Fri, Sep 11, 2026 at 02:05:59PM +0200, Carlo Caione wrote:
 
-  Merge tag 'u-boot-imx-next-20260906' of https://git.u-boot-project.org/u-boot/custodians/u-boot-imx into next (2026-09-08 11:48:35 -0600)
+> Boards using boot metadata to select U-Boot should not need to configure
+> an unused fixed partition number. Add an explicit runtime-selection
+> option within the existing partition mode, retaining its loader and
+> platform dependencies.
+>=20
+> A failed dynamic selection must not boot from an unrelated filesystem
+> partition. Reject an invalid selection for this MMC attempt while keeping
+> the existing fallback behavior when dynamic selection is disabled.
+>=20
+> STM32's existing hook implements fixed partition selection and references
+> the static partition settings. Restrict it and its MMC2 setting to fixed
+> mode so dynamic selection can provide its own hook.
+>=20
+> The board hook owns hardware-area selection, including access to metadata
+> and leaving the image area selected.
+>=20
+> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+> ---
+>  arch/arm/mach-stm32mp/Kconfig        |  1 +
+>  arch/arm/mach-stm32mp/stm32mp1/spl.c |  2 +-
+>  common/spl/Kconfig                   |  9 +++++++++
+>  common/spl/spl_mmc.c                 | 19 +++++++++++++------
+>  include/spl.h                        | 14 +++++++++-----
+>  5 files changed, 33 insertions(+), 12 deletions(-)
+>=20
+> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+> index f45010ddbd0..bea4a1b6aaf 100644
+> --- a/arch/arm/mach-stm32mp/Kconfig
+> +++ b/arch/arm/mach-stm32mp/Kconfig
+> @@ -175,6 +175,7 @@ config DDR_CACHEABLE_SIZE
+>  config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION_MMC2
+>  	hex "Partition on MMC2 to use to load U-Boot from"
+>  	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+> +	depends on !SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC
+>  	default 1
+>  	help
+>  	  Partition on the second MMC to load U-Boot from when the MMC is being
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp=
+/stm32mp1/spl.c
+> index 2229ebf5eeb..c1be468cb1d 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+> @@ -61,7 +61,7 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_d=
+evice)
+>  	return MMCSD_MODE_RAW;
+>  }
+> =20
+> -#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+> +#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
+>  int spl_mmc_boot_partition(struct mmc *mmc, const u32 boot_device)
+>  {
+>  	switch (boot_device) {
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 0618f42c941..9e1c23ea0f4 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -576,6 +576,14 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
+> =20
+>  endchoice
+> =20
+> +config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC
+> +	bool "Select the raw partition at runtime"
+> +	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+> +	select SPL_PARTITIONS
+> +	help
+> +	  Select the partition at runtime instead of using a fixed number.
+> +	  The board must implement spl_mmc_boot_partition().
+> +
+>  config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
+>  	hex "Address on the MMC to load U-Boot from"
+>  	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+> @@ -609,6 +617,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
+>  config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
+>  	hex "Partition to use to load U-Boot from"
+>  	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+> +	depends on !SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC
+>  	default 1
+>  	help
+>  	  Partition on the MMC to load U-Boot from when the MMC is being
+> diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+> index 3e637f5adbd..d538fbb9c41 100644
+> --- a/common/spl/spl_mmc.c
+> +++ b/common/spl/spl_mmc.c
+> @@ -303,7 +303,11 @@ u32 __weak spl_mmc_boot_mode(struct mmc *mmc, const =
+u32 boot_device)
+>  #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+>  int __weak spl_mmc_boot_partition(struct mmc *mmc, const u32 boot_device)
+>  {
+> +#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
+>  	return CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION;
+> +#else
+> +	return -ENOSYS;
+> +#endif
+>  }
+>  #endif
+> =20
+> @@ -432,8 +436,15 @@ int spl_mmc_load(struct spl_image_info *spl_image,
+>  #elif defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
+>        defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
+>  		if (IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) &&
+> -		    raw_part =3D=3D -1)
+> +		    raw_part =3D=3D -1) {
+>  			raw_part =3D spl_mmc_boot_partition(mmc, bootdev->boot_device);
+> +			if (IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC=
+) &&
+> +			    raw_part < 1) {
+> +				ret =3D raw_part < 0 ? raw_part : -EINVAL;
+> +				printf("spl: partition selection failed: %d\n", ret);
+> +				return ret;
+> +			}
+> +		}
+>  		ret =3D mmc_load_image_raw_partition(spl_image, bootdev,
+>  						   mmc, raw_part,
+>  						   raw_sect);
 
-are available in the Git repository at:
+This is better than v1. Did you look in to my suggestion about turning
+this in to a choice between hard-coded number, hard-coded type and this
+new dynamic option? I do wonder if that would let us get rid of a lot of
+the if/else nesting we have in these functions. Thanks!
 
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20260911
+--=20
+Tom
 
-for you to fetch changes up to 955b7931cbf6e8cc41e2f12fdd57b5ab906aef34:
+--Hh3PnpUrnG8+Typr
+Content-Type: application/pgp-signature; name="signature.asc"
 
-  arm: dts: imx95-aquila: migrate to OF_UPSTREAM (2026-09-11 10:35:18 -0300)
+-----BEGIN PGP SIGNATURE-----
 
-u-boot-imx-next-20260911
-------------------------
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaqQ9PgAKCRAr4qD1Cr/k
+Cl7zAP45nTQB0jgaBBM++G+H4G+7hfANZOw0AAhKzGZbfYpMVQEA/PTQChBA13Cu
+3Xz5Q7Y8VdpWmnhiNdfW4UEdq2QrcAs=
+=Fh4m
+-----END PGP SIGNATURE-----
 
-CI: https://git.u-boot-project.org/u-boot/custodians/u-boot-imx/-/pipelines/1253
-
-- Migrate imx95-verdin and imx95-aquila to OF_UPSTREAM
-- Rename SPI_UBOOT_SIZE to SPI_UBOOT_MAX_SIZE on TQ Group boards.
-- Change i.MX7 0x911000 IVT/DCD address to address erratum.
-- Fix the DP83867 PHY symbol on tqma7.
-----------------------------------------------------------------
-Alexander Feilke (3):
-      configs: tqma6: rename TQMA6_SPI_UBOOT_SIZE to TQMA6_SPI_UBOOT_MAX_SIZE
-      configs: tqma6ul: rename TQMA6UL_SPI_UBOOT_SIZE to TQMA6UL_SPI_UBOOT_MAX_SIZE
-      configs: tqma7: rename TQMA7_SPI_UBOOT_SIZE to TQMA7_SPI_UBOOT_MAX_SIZE
-
-Nora Schiffer (1):
-      arm: mx7: Change IVT/DCD address to 0x911000
-
-Pengpeng Hou (1):
-      board: tqma7: imply the DP83867 PHY symbol
-
-Rafael Beims (2):
-      arm: dts: imx95-verdin: migrate to OF_UPSTREAM
-      arm: dts: imx95-aquila: migrate to OF_UPSTREAM
-
- arch/arm/dts/imx95-aquila-dev.dts      |  389 -----------
- arch/arm/dts/imx95-aquila.dtsi         | 1160 -------------------------------
- arch/arm/dts/imx95-verdin-dev.dtsi     |  239 -------
- arch/arm/dts/imx95-verdin-wifi-dev.dts |   21 -
- arch/arm/dts/imx95-verdin-wifi.dtsi    |   50 --
- arch/arm/dts/imx95-verdin.dtsi         | 1172 --------------------------------
- arch/arm/mach-imx/Kconfig              |    3 +-
- arch/arm/mach-imx/imx9/Kconfig         |    2 +
- board/toradex/aquila-imx95/MAINTAINERS |    2 -
- board/toradex/verdin-imx95/MAINTAINERS |    4 -
- board/tq/tqma6/tqma6.env               |    2 +-
- board/tq/tqma6ul/tqma6ul.env           |    2 +-
- board/tq/tqma7/Kconfig                 |    2 +-
- board/tq/tqma7/tqma7.env               |    2 +-
- configs/aquila-imx95_defconfig         |    2 +-
- configs/verdin-imx95_defconfig         |    2 +-
- doc/imx/common/imx7.txt                |   40 +-
- include/configs/tqma6.h                |    2 +-
- include/configs/tqma6ul.h              |    2 +-
- include/configs/tqma7.h                |    2 +-
- 20 files changed, 35 insertions(+), 3065 deletions(-)
- delete mode 100644 arch/arm/dts/imx95-aquila-dev.dts
- delete mode 100644 arch/arm/dts/imx95-aquila.dtsi
- delete mode 100644 arch/arm/dts/imx95-verdin-dev.dtsi
- delete mode 100644 arch/arm/dts/imx95-verdin-wifi-dev.dts
- delete mode 100644 arch/arm/dts/imx95-verdin-wifi.dtsi
- delete mode 100644 arch/arm/dts/imx95-verdin.dtsi
+--Hh3PnpUrnG8+Typr--
