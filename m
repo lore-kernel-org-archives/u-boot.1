@@ -4,179 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74BB1C88E53
-	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 17:41:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4212DC88E4D
+	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 18:30:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1F22E60626;
-	Fri, 11 Sep 2026 17:41:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9452060626;
+	Fri, 11 Sep 2026 18:30:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id C1PthFjStbhd; Fri, 11 Sep 2026 17:41:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 8E20B6061F
+ id 2EhNw0LivT2u; Fri, 11 Sep 2026 18:30:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 9B1B060616
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789148489;
-	b=oSMqFpj/9YSShlcsVqQDJaYOrax+XaUTKw6jWysgb8w1irVINionU+quNvaxoLdrPddW
-	 RNuDccIXystq/r/cGvBa17rszrPrFaHSF+tXEYp9nvhqRwofFQCBfqVk/YbqFarLTAgsG
-	 DKfT1A2gSpFBu0T4DIE6rBKaWXxavHkaUKu8DE6oYtpw/e6p3rav7TXscOBITYXMlYHOy
-	 TyHkrC/TiiEf2HFH1EMyRPxWdP3IAO9TuKxRcANG/mdrlYvmgGjfv2QjmRlA0xr0FIxXx
-	 6P8jLd/F9I6VXa7utJYBFJWK+Bz5oPvPPll9nLte/asZoKRx/4XTrQtprFM1kt2+wYQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789151421;
+	b=UPf89BHNhnz/vIq+yE5pEQbEv6jtzRe/fe7j/fuD+WdsErJRtzhpSRR3XuDvN2FF3hi+
+	 kjPY8OE1q9vadukzNiCWrby/B20hXGKL59DBMVSUx4c+L8kdQQHUhZHi1yC1ZWSItllgi
+	 jkdMO1aNktsaeICqUc5AcwODYVkNYqYQo6XQ8pGCev4M4j1wakVlSYGQwZSD7mVlKyz6D
+	 9Nx1Nd6kZVe0+wU+xlRUFw7IrDawuQbEiY3no9Sry51KZirt6Xp2RRfwX09eiE0vGPAet
+	 4pfrYKOkgeraReTm3bej3mtMIw9LekeIdIqHA1LJjdEnBekf1Qt96BlWbvdh6rkYLFA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789148489;
+	c=relaxed/relaxed; t=1789151421;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=tSNwMCjIxDv2Qm/qf4HgP00oimauKSwE/ND/olI/AGo=;
-	b=Ga1gyu55/6EgKCaZiZHBAnFLwPKu359fsvVz7VaEzTuxcywW8XrymQ/upj3L3x/PfW18
-	 GXebyocNsflPs+hXgpuvM5Ntcd8wl5b1uYf5+HrmxP+bPShU5esU44qCxDSEbuxfcU8wO
-	 nnEFvnvZCpebZMIbG+Lw3uXpnx6JeoAC5vzm41cEmCrWc4Y2beiVQCSuqurBio3fhmNo+
-	 +mbt+KpSku28th+QeG4NaakYBpMfp0Nryvugf9kWMMcYDTa6V7UuvgaswrhOWFOb7Mwu5
-	 OqOZpduppNOpU3BNx0VD6CEbEqiF6/XKaTw6vNz5JSX7no9iFYJ9aOx7ev0TT6MxrCA==
+	 DKIM-Signature:Message-ID:DKIM-Signature:Date:MIME-Version:Subject:To:
+	 Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=dOr1eCzeHMvcLEw9JWwfWXIdCG2ZsFX0mAfbROOeW6s=;
+	b=f7vPZOz2CykOeCEoPZ31AWYrGdxhoYszTr6QyfBUbdAYz/CYuyR6n0eWdIV4FQr23JCz
+	 EJYx3qJvzNiYhTfvl36IRizWM7ohy3ZXuwFkoRfvVi7n+LqmvEUssKtzOMYJkDFcBy4Mt
+	 WljpZOROatERoUzBO1dpLC3ynm0TNHsMRlCYBk/bEi46C0T2hEdG89vJDb4ME4hq4vrlL
+	 yxN43m1vdiJJvSAIif50BNiCNtVc5NXn6tOm90iB/bB/SurQbbBr2ELwI3m4hhCdJsnQf
+	 JkueSdUSSR6U6Ku07rrNVixUvIWKzw/XAF3fXTCVIlun0IuoVSNeT3a8kWAMcIPVpwg==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789148489;
-	bh=tSNwMCjIxDv2Qm/qf4HgP00oimauKSwE/ND/olI/AGo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1789151421;
+	bh=dOr1eCzeHMvcLEw9JWwfWXIdCG2ZsFX0mAfbROOeW6s=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qeKAPTiwHz/nUR3ZshA/HwY5pSs7k2/IIm+gmYaNQubcNQXDZHrKVnehLcMjdNzOP
-	 QUanKhpuGNFhLht01tLtHNxzK/HU/lRtO8S0DDCtak1dv940IsQXb9byCE6gS4LfbL
-	 cQR2cfTwPQ87wrjpqgX8O72HFYCyCSjm+PXsZp7zo8Aj+ycD22qBtXanpeT10rLuRv
-	 Xp8tJhIrejw0U0Fho31jMnQlV5sbEunm5nWaJOTxvvsf2W1OZTx93f/7YMNEM16MT+
-	 VcPCnTsDWoaM2m4+AbhuNo7XJNIQD8b/TtCWD5/QlUDL/ccO00emqAKoDSv4YEg0mW
-	 Pnajz035h9ZHw==
+	b=xl68OgoQofHcQPg7I8VQ3dHt75O6kBgX2DorHj30f2W4pL7rRZf3tcZ9fzrO3Xx8Q
+	 EG0S9zhwSVKwnwV7vyHy8UIM8vPUcODReULTLrgrdZuWOhkf8gcXv1loghD2z+58AB
+	 gLj2+Tu7pv2F8bjyJOQVrrLwKHX75MtvHGMz/4JN6Qe+1PL+MNTX42k2PX1xitw21u
+	 NJ3fklvtdHSuGtOALvpisZsL01upW9uD/J+Nu7KzYX+V8dJc9s0R28VoBRxCeFZBaQ
+	 dLX5MDZBVvRLDvT/kvd7KDVZ9pQMrKzR/wHz7lQcq4jLYb6q0W0QGxh0tL+lvY+fE8
+	 PCgIZjKHXpbDg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8E20B6061F;
-	Fri, 11 Sep 2026 17:41:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9B1B060616;
+	Fri, 11 Sep 2026 18:30:21 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 320D52E3
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 17:41:28 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 5DA1D72E
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 18:30:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 17EBC4059E
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 17:41:28 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 4EFD240756
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 18:30:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id F76FK9Wr3RDk for <u-boot@lists.u-boot-project.org>;
- Fri, 11 Sep 2026 17:41:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 2203840542
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c33"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789148487;
- b=O2QC6Cqwho4PuFNQhoh/04ekdT2xmtz7sHNq+T98I2Pu6/vlMg2ea1vseNC/tszL+YvS
- uOCUmzXj3t13CJ6dmshry2zDzys63gnnZPbnu8yvf4gsEYQwWaqtbHSoe4PqFVCItw941
- MDE5d/eqcCUQj8RkGaHr//20Jqz9f7zhuXDGHBDheFjNK2NHg0wpGU6y/AlV4iIeMjvXv
- MVA1ni4dpRvtyNUo2K1iptAbUonoP2LDvQj+qf0kVlp2GModkg2hYrIG17NBx5hOi7CHL
- mHQzyZhb+qviiUD13Dfe3uwb3wb7CrXZBHr2jKQa+N4MWfOJofJP8kFPfMfyJDJ7NeQ==
+ id FJ2EKWGNs_f2 for <u-boot@lists.u-boot-project.org>;
+ Fri, 11 Sep 2026 18:30:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org E494A40752
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.171
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789151419;
+ b=eIbeT5AoIqYUbw6eU0ZlfBbN9TkM27DHk4bd8VREJsdzWShdza2B9CqfJMWEeBmtY8lj
+ buz8/j4fYgUv7HSopbudNAouETrZKEuykHhXDd2CRbR1o8CKveMBCi8xhLWBvOkq9YU5t
+ 4WVW6kpq/9UrX+cndrVWNRdbW7m2+M/jP0zm2B6Z6FdGx+KZF7Pfo4UXapLcmJie4ujSJ
+ SVEOideg6xHll+YyFgxlQwM6cDioa/DumXYuUTLAlfybRjir4wfJGA1ItxX8Q99b5ODKO
+ H+mNVGT6/GyM4ebnUB/PcT/HDA6m74hibc2I4g6JfFYXpNVammL3VJorvDqWPT6nDzw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789148487;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
- Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=tSNwMCjIxDv2Qm/qf4HgP00oimauKSwE/ND/olI/AGo=;
- b=mQ3pvwoq6nBEqI2Ko5yqROw3YnpLnZ7iMCR43mNsupvMLKDKOdqLGkKeew8/D8FVk0bj
- utUrM8JjatXHLrZ5f+eq8gajmoe98WuEYk8D7mZldqpMTDtamlHOdlzoKJjKnCMTlhN1R
- hrq2hSZd0H5nyQ/u5G64YG5q7I7nV3duuKElX4VAxtcbLv2IVu5jKDS9dVlA416eLTJfc
- bEyo4pgTRt5glzKaCbqYfPpQQEmWQP5v7NIugLEGbf1MAvDezkaF+GPVh9ibx3UPsSJwJ
- HXzgiYWMlIJ8U8GBfex288HJiRXJ2C41HBIZbFJl9BIrJhnoyihUfMAgmoXlHtHDkMA==
+ c=relaxed/relaxed; t=1789151419;
+ h=Received-SPF:Received:DKIM-Signature:Message-ID:DKIM-Signature:Date:
+ MIME-Version:Subject:To:Cc:References:Content-Language:From:
+ In-Reply-To:Content-Type:Content-Transfer-Encoding:X-MBO-RS-META:
+ X-MBO-RS-ID;
+ bh=dOr1eCzeHMvcLEw9JWwfWXIdCG2ZsFX0mAfbROOeW6s=;
+ b=mydGB1M91LmQmaFod58PsYfO1F5hjQrpeTnvR4/p0mQGlDjYd1RHo8ugho/RW00gyzek
+ liedvmyNs2ehVepkdzFotVIXMw/+SHXHoMwEeKlgyzKkPg/VXBimcuQ9ad4GhU/mdP/pv
+ gTCk3H3X551XxpiHddLYAo8oTtD18+UM1RvemIwCQyPzCpqlmEuNcYlJ1C92WpLGEqVZH
+ 8gVXQBpfyNAQZLkQX5J+URAAIeiQBXSI7UzJajWLWn4sCltZhxnu0ZDvGwLEcuETBOcdG
+ XcFl9L5fsyqD6zzLH8m39clh8Js5CUw5QR4rCxT8HZhAh53zoZZLEMfa4wOQNgLEGNA==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org;
- dmarc=pass header.from=konsulko.com; 
- dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=OpGHP9US; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c33"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c33; helo=mail-oo1-xc33.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+ dmarc=pass header.from=mailbox.org; 
+ dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=cMOlLCff; 
+ dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=ltcJ8UW9; 
+ arc=none smtp.remote-ip=80.241.56.171
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.171;
+ helo=mout-p-201.mailbox.org; envelope-from=marek.vasut@mailbox.org;
+ receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=OpGHP9US
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2203840542
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 17:41:26 +0000 (UTC)
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-6bd209cf210so581333eaf.3
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:41:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1789148486; x=1789753286;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=tSNwMCjIxDv2Qm/qf4HgP00oimauKSwE/ND/olI/AGo=;
- b=OpGHP9USEnC4EJ5qVdXaunGGtSQwRQaOn1qvzRuLisSiqjW39nIfIQX4glOyQpHpv+
- +Xvih35aCGUaN8srRpChg8BUKjEl4ajUPoMsT3ELxLAA2oTMhd6btFlfV1IQlXZbFF1j
- 5NWv6DISQ/oVyJ9pTL+tDPCLIi0nAJ3PHiIhA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789148486; x=1789753286;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=tSNwMCjIxDv2Qm/qf4HgP00oimauKSwE/ND/olI/AGo=;
- b=Yxj4wqmqKL7DpMzyIx+qKXlfVT6QlZstX0nNz+ze9JNc4RISwL3DjNCEEsWQSnPvSD
- r+afsa1lPMh8PbYGRaGlgN3UTu5rCoMXW+eMiklskEJu+NeJ5buI2LXa+Z9VCS9ZB7pt
- vOsVZeSgckfK/ZWSYTiHV6MbG3oCfe5QBYJrDnQHT/UV3hSOgg58VMpUwwt1isET4AWn
- ev24WNNUN5/CqHZbIS1vnMOvEH66XgsudHKYKFJErtHI1jpQXV0Wxx5gNGLk+DMUOFko
- nq+960gTgjTWdWEydA0do4CIIPxFNBH3BRRLesS2ajpwPfTOW7cFWxoMt7moICsqkP9a
- TDDQ==
-X-Gm-Message-State: AFuF++kqSCRvjrfhy/qQ6uzLxXQjqd/I7PAeRzCwww4YGc2DYC7l+uQm
- /YuqpsXUnA59JdHkEHazaWt5p/pKL3TLrQ0HRG0lg0jeJCDJcIEE5h6D7VrjN5SQKqc=
-X-Gm-Gg: AYBFou0AALkgbivOZwxicZT1WYHMOpKvJveEErQRJ3RVWZoDrfhQ+/sgavaNIAt8+d1
- walvDIUdRshYua/DfchddDhnnHyYbp3qdthKplAya906l83T5LirrPu9KSFuL1YHn84d9IzjYCz
- waBbMOPL7TtsdL77ZZ7lW0Tnni9j65G4hkdPgnM+JHpJLa1xqJYoF2nLLBBZci2xEH4r1PFdthS
- seCUjW1Lq0J5FFAIHrv0G/FVcn4HQD9fc8L/NPEVUZsJQEiAH+imEpnlki/wui2FAQ8aqw6r7Yf
- 34nIkApUfeWgQh6e6EKl/QdYRDXGrBsMZV/eq5NGpkYkhYikEV0CONZVJ8NyhaxLP/5Lzv0FrZy
- 0ty5BSvqe4jSMxpuNmJpSUn3DvUHp8w2Is+XrGK6w8X9upw05O2shzRtVm7m+QYpCRLWVPttxVS
- XMcUH4CwmBVZe+Bn9VLMwIN34mzqK8MANG6i55LTOGFpAhPwe1uWrEUwzGoaF9J4JgBygcVbDEL
- BJGTHJCJ4QBKUOaLsMCcXtCc6k9jhV8d2W+bzc+7fKpXDipNE6Gj7r400NgZdyFy/pCOTtdEXQJ
- Dt9UYS+Gn7PAMkEeytON
-X-Received: by 2002:a05:6820:1ca3:b0:6bd:c175:521d with SMTP id
- 006d021491bc7-6c0b9960732mr3600766eaf.11.1789148485759; 
- Fri, 11 Sep 2026 10:41:25 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6c0990cc7b4sm3262824eaf.5.2026.09.11.10.41.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Sep 2026 10:41:25 -0700 (PDT)
-Date: Fri, 11 Sep 2026 11:41:22 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Carlo Caione <ccaione@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org, uboot-stm32@st-md-mailman.stormreply.com,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Alexey Charkov <alchark@gmail.com>, Johan Jonker <jbx6244@gmail.com>,
- Richard Genoud <richard.genoud@bootlin.com>,
- =?iso-8859-1?Q?Jo=E3o?= Marcos Costa <joaomarcos.costa@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- David Lechner <dlechner@baylibre.com>,
- Julien Stephan <jstephan@baylibre.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v2 2/2] spl: mmc: support dynamic selection in raw
- partition mode
-Message-ID: <20260911174122.GS1764417@bill-the-cat>
-References: <20260911-ccaione-upstream-part-dynamic-v2-0-295fefc9a3c4@baylibre.com>
- <20260911-ccaione-upstream-part-dynamic-v2-2-295fefc9a3c4@baylibre.com>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
+ header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
+ header.b=cMOlLCff; 
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=ltcJ8UW9
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E494A40752
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 18:30:17 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4hhNPz4YsKzMlCB;
+ Fri, 11 Sep 2026 20:30:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1789151415;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=dOr1eCzeHMvcLEw9JWwfWXIdCG2ZsFX0mAfbROOeW6s=;
+ b=cMOlLCffIlOycpWWmbMd7cJro4hxxNFe4piltXvi6qseuJPW14W4gAEbxGHngGpFcW2Lqf
+ RJX4a7539PFQmDOpo/ujE5C8MwnvVx/1ugThUs7P/1sBs2VU9C0Lm0oUDM0vm8vsGjKFJk
+ qNekb2TuwptYF1fubPN09WEgURwRMqwqYVcxIip0Ss2j4tdPcZ6IkzqLXvAMVxtECXyTyu
+ pTSU7iJnrO5l29M6r9KtAAUdX96/PHV26t6vasf3WtONCag5WNq749X/Zjgv+zcaQWWD06
+ DCAtl5KTsPOYmTKb1EyYnp8CQHoUpAipfMsE8iy/28Vh5Tm3iAvt2X2esFkQrg==
+Message-ID: <17753947-74ac-4b42-8d94-436e7984e062@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1789151414;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=dOr1eCzeHMvcLEw9JWwfWXIdCG2ZsFX0mAfbROOeW6s=;
+ b=ltcJ8UW99iLIq+XAWst3fWNnIlOvjp3mikmC3OPcGY+6iM0cTPm3duybsNtpGTt8wCAS+o
+ j1JP2hZJTdJw5rkveAh3336THonkMObGuNYpZwMBP/VGV5+HrzCnnteuYRJ7w51P1F2pwh
+ 4AbZDGLJG5ed3SZyVsMNRcoaEpXb9usP+IQZ4nfEgxyskpfrO5ro1rqkq72PFOf97ariVP
+ D3SSxBX/lTTlPiKjQWV4HDL1FP1tiJf6oF7azgjIkCHx+fsDNppx+xV6JsfxQEBO/iD7hp
+ WYmEL3mFy0ruSsJGv/IWm921c7tBgEbJCOBKhjGbXJ7dZLY6eV0Ff/Lj/A8neg==
+Date: Fri, 11 Sep 2026 20:30:05 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Hh3PnpUrnG8+Typr"
-Content-Disposition: inline
-In-Reply-To: <20260911-ccaione-upstream-part-dynamic-v2-2-295fefc9a3c4@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH 1/4] common: Add command line parsing utilities
+To: petr.hodina@protonmail.com, u-boot@lists.u-boot-project.org,
+ Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Markus Niebel <Markus.Niebel@ew.tq-group.com>,
+ Alexey Charkov <alchark@gmail.com>, Heiko Schocher <hs@nabladev.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Anshul Dalal
+ <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ David Heidelberg <david@ixit.cz>, Petr Pavlata <petr@acrux.cz>
+References: <20260911-b4-android-bootargs-carryover-v1-0-6ebb43da3df0@protonmail.com>
+ <20260911-b4-android-bootargs-carryover-v1-1-6ebb43da3df0@protonmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260911-b4-android-bootargs-carryover-v1-1-6ebb43da3df0@protonmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: oycba5q6pu45btp8pjs53pjf3w463nj9
+X-MBO-RS-ID: 2785f846e864eb11695
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -190,146 +177,9 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-
---Hh3PnpUrnG8+Typr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Sep 11, 2026 at 02:05:59PM +0200, Carlo Caione wrote:
-
-> Boards using boot metadata to select U-Boot should not need to configure
-> an unused fixed partition number. Add an explicit runtime-selection
-> option within the existing partition mode, retaining its loader and
-> platform dependencies.
->=20
-> A failed dynamic selection must not boot from an unrelated filesystem
-> partition. Reject an invalid selection for this MMC attempt while keeping
-> the existing fallback behavior when dynamic selection is disabled.
->=20
-> STM32's existing hook implements fixed partition selection and references
-> the static partition settings. Restrict it and its MMC2 setting to fixed
-> mode so dynamic selection can provide its own hook.
->=20
-> The board hook owns hardware-area selection, including access to metadata
-> and leaving the image area selected.
->=20
-> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
-> ---
->  arch/arm/mach-stm32mp/Kconfig        |  1 +
->  arch/arm/mach-stm32mp/stm32mp1/spl.c |  2 +-
->  common/spl/Kconfig                   |  9 +++++++++
->  common/spl/spl_mmc.c                 | 19 +++++++++++++------
->  include/spl.h                        | 14 +++++++++-----
->  5 files changed, 33 insertions(+), 12 deletions(-)
->=20
-> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index f45010ddbd0..bea4a1b6aaf 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig
-> +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -175,6 +175,7 @@ config DDR_CACHEABLE_SIZE
->  config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION_MMC2
->  	hex "Partition on MMC2 to use to load U-Boot from"
->  	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
-> +	depends on !SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC
->  	default 1
->  	help
->  	  Partition on the second MMC to load U-Boot from when the MMC is being
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp=
-/stm32mp1/spl.c
-> index 2229ebf5eeb..c1be468cb1d 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-> @@ -61,7 +61,7 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_d=
-evice)
->  	return MMCSD_MODE_RAW;
->  }
-> =20
-> -#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
-> +#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
->  int spl_mmc_boot_partition(struct mmc *mmc, const u32 boot_device)
->  {
->  	switch (boot_device) {
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 0618f42c941..9e1c23ea0f4 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -576,6 +576,14 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
-> =20
->  endchoice
-> =20
-> +config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC
-> +	bool "Select the raw partition at runtime"
-> +	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
-> +	select SPL_PARTITIONS
-> +	help
-> +	  Select the partition at runtime instead of using a fixed number.
-> +	  The board must implement spl_mmc_boot_partition().
-> +
->  config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
->  	hex "Address on the MMC to load U-Boot from"
->  	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
-> @@ -609,6 +617,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
->  config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
->  	hex "Partition to use to load U-Boot from"
->  	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
-> +	depends on !SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC
->  	default 1
->  	help
->  	  Partition on the MMC to load U-Boot from when the MMC is being
-> diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-> index 3e637f5adbd..d538fbb9c41 100644
-> --- a/common/spl/spl_mmc.c
-> +++ b/common/spl/spl_mmc.c
-> @@ -303,7 +303,11 @@ u32 __weak spl_mmc_boot_mode(struct mmc *mmc, const =
-u32 boot_device)
->  #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
->  int __weak spl_mmc_boot_partition(struct mmc *mmc, const u32 boot_device)
->  {
-> +#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
->  	return CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION;
-> +#else
-> +	return -ENOSYS;
-> +#endif
->  }
->  #endif
-> =20
-> @@ -432,8 +436,15 @@ int spl_mmc_load(struct spl_image_info *spl_image,
->  #elif defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
->        defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
->  		if (IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) &&
-> -		    raw_part =3D=3D -1)
-> +		    raw_part =3D=3D -1) {
->  			raw_part =3D spl_mmc_boot_partition(mmc, bootdev->boot_device);
-> +			if (IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC=
-) &&
-> +			    raw_part < 1) {
-> +				ret =3D raw_part < 0 ? raw_part : -EINVAL;
-> +				printf("spl: partition selection failed: %d\n", ret);
-> +				return ret;
-> +			}
-> +		}
->  		ret =3D mmc_load_image_raw_partition(spl_image, bootdev,
->  						   mmc, raw_part,
->  						   raw_sect);
-
-This is better than v1. Did you look in to my suggestion about turning
-this in to a choice between hard-coded number, hard-coded type and this
-new dynamic option? I do wonder if that would let us get rid of a lot of
-the if/else nesting we have in these functions. Thanks!
-
---=20
-Tom
-
---Hh3PnpUrnG8+Typr
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaqQ9PgAKCRAr4qD1Cr/k
-Cl7zAP45nTQB0jgaBBM++G+H4G+7hfANZOw0AAhKzGZbfYpMVQEA/PTQChBA13Cu
-3Xz5Q7Y8VdpWmnhiNdfW4UEdq2QrcAs=
-=Fh4m
------END PGP SIGNATURE-----
-
---Hh3PnpUrnG8+Typr--
+On 9/11/26 8:18 PM, Petr Hodina via B4 Relay wrote:
+> From: Petr Hodina <petr.hodina@protonmail.com>
+> 
+> Add a new utility library for parsing command line parameters in
+> key=value format.
+Is this reinventing environment or UPL ?
