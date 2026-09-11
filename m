@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 053E8C88E50
-	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 12:06:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04AD7C88E50
+	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 12:06:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B94D8407CB;
-	Fri, 11 Sep 2026 12:06:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 32E9080EFA;
+	Fri, 11 Sep 2026 12:06:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ij688znGCiYl; Fri, 11 Sep 2026 12:06:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 7939D407CE
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789128376;
-	b=K4nGU9QQs7OnToyA32Eh/5khPVz8aBQnlKv9QfpxKQoDIboxAs6nqxVUF2gqdPu774UZ
-	 vgPoouVfHwfM9UlC2W8slYT9/rjlOpug1ZLrVF3cUsoaA9+5/rqy+Pqzjdgb1sr+i8ZGS
-	 exnbQRxfKkIVzYkTJGp1R7bumL6ICIbx42ATwwZ83VokXIPiI5jqiZb2BiCV5TuoebcVD
-	 5QPh2X2KUnKNMEIsp6fYzbv0cztpoF51+WjZFVjhf9NEN4OYPrUGk+0YQ10WNFtrkc9Ct
-	 n/VY8A01nlPwi4UfRH+LGAlWuHrQXdg0ntwVXiuwI4MxBbdMAkIPQFKxIRpcikq/qag==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UZezGRYK7Klh; Fri, 11 Sep 2026 12:06:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 3210680ED6
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789128379;
+	b=kD78eByxtSJOkBOKcP+7o17tR0qjEe6mGT2dj9NknxovobrB4ZKh+rPI67VTADrMNMj3
+	 8ZK7iF3RqR+XVpCI+yuf45/BRE1/ZhIghUgExlq+SU0QtetgKFMvpiIOBeBFVjZ8J030q
+	 STosyh93VWZkVpEj60qzhm2u9v8V2jLD+y4sFZOSNmvKb6tFiVwIv/DvdbekG9zn+qzFK
+	 WJ0lDKxXjjz4kpF4k/3QPLxq4jdSQglEAnYJMHojRwpWYaDvF626Vtojxls3OTJgP+swF
+	 Tk++9LNEYXGIePkfNVD0D9Go1Yhi/yp+sqFqcxIHcEHWn/qdkAieuKPYE6eo8qsZpow==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789128376;
+	c=relaxed/relaxed; t=1789128379;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,135 +32,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=d5eaHkYIX3NVCsDR8ydkaQHJuSCv0DbjiyseA+kNAGw=;
-	b=FhxHys9JF9FUk/Le4so57OM768eEQ1drh/QXe1syRr9nTBhokSf1QrkRCeTlH1Bp2K3H
-	 ZgeIp4lu/2IdncudqXlB7rQJj8p9FLYgoDCUzQl+nH7xQVp4GHBpk7IIGVS7qMGjs6NuY
-	 HcsV2fIq9OGv2RXF2YKQbKhS4jr4214WwadFzINz9cRkWd6+ZBIQ5DHTRY/F0WMecvoug
-	 Rp71WODG7jMW6vglOcFmleQoahgF5UTEA6g3jNNs532VmvttAjuPN9b0Dbi8Lh71SwPiz
-	 m1xsgaQydh9x1BBAfxKtDbyE9FATbzc1XMu3dMJpbfPcze+0b8k3ibUPoX92DlYLKew==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=eHxBbjT97HcL1TfB0XA5o6c+fqk7+rJUlFW7PGwWfwg=;
+	b=aEQN4OHMmwbab4/ArnXwZeWbNyhHYc19erQ/zaMwcrXRLsY+u5iJoKMiCM3iEtI0vIbp
+	 o1hwSNUcIlzh9EwxrsqOma3pmgoJjB3gUXK4j9U1bhuKQbf6mRv8iMyoTJB2Q4KBvCIpw
+	 A8J+Jjx8cJiG9bZDNYIUrujYTH1vWbEqz86DpP2qsWV4HQh+ycK4ef+4REee5eqmKLC8I
+	 GtQZfpE2wgievHKhP23D+DBxvAMflj43rlUPYuzrQGfvR9I0FhEOHTTP3qEZHJYwQIeEL
+	 0yb2Mfb8NgVksJWcQpKwq65KBgtzXNY5A0PMEt/SVN1mqEj7GBXoe4GOCDmDDrsEBDA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=none header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b="c4F/iGk1";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789128376;
-	bh=d5eaHkYIX3NVCsDR8ydkaQHJuSCv0DbjiyseA+kNAGw=;
+	d=lists.u-boot-project.org; s=default; t=1789128379;
+	bh=eHxBbjT97HcL1TfB0XA5o6c+fqk7+rJUlFW7PGwWfwg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=kfLl1AKbGlTizzIaNES+4P+GcAjHgz4NHAwXpDh7Etky8MhTx7DUaIRe8ibdBmE5t
-	 F+iVMYLHsjQ4HamxEzv87RJLUboas+iC8r5iUnj5eCldoIyV8b0/taPrHg18wo2O4d
-	 b9ouxWHQaMf/lX6bFaGOKVzd2NUiLN3oWnuykiiAZIBwwmP+J8nRd+/IBpBqfhN1ES
-	 KHkK4vLOwnbOiIYErZYbLv13Q5e5gZOgOqGac3n4MV6EJf4RwpBDJFJqYww0YM3pGY
-	 VvJHGjSer09xf1ECP6g0CgeADKx3ASWBpZlqdgz4GSIbQTsdyksTwdevxQQLaWSesl
-	 w3QjCAa+PRlGw==
+	b=kiUYHWQIC7lVhcM5bjTg3aYCWa1XLK73EKkRkuwMfE3JTkgUDdlA5kl9b+XFcq8Nm
+	 tgINdefm/6M4TWr8DfQPknVYURkHKs48O0s0IqWOpZaKaH0J9u692M63lGY0rdZykq
+	 TzpVEMPxRUQUJZd27jMM/bXKr+eSdOyEAEG7QpRb/r7afwf0HEJmUBNxjQcvAJ6Xra
+	 gR/pICTu4mVd8FtvKFaVy2f2ZeB0y923nsItwXkFzC+nlxmxWbKd/VZBbpN1Tq8IY6
+	 V+cdK34tjLl3roZKsgvMeNDEeSrvnJVlKP4qxHuTdUFpKTiHD/KRXil6Cvr4JZ5dVU
+	 NQLOou4CURukA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7939D407CE;
-	Fri, 11 Sep 2026 12:06:16 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 3EE712E3
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:06:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3210680ED6;
+	Fri, 11 Sep 2026 12:06:19 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 272A7786
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:06:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 30F0C80EDD
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:06:14 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1922E80EC2
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:06:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id za_FJMT9p6Jq for <u-boot@lists.u-boot-project.org>;
- Fri, 11 Sep 2026 12:06:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0DAEA80EC2
+ id IOd_BdIeZEYN for <u-boot@lists.u-boot-project.org>;
+ Fri, 11 Sep 2026 12:06:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org F21CB80ED6
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789128373;
- b=RM7z3WQ9aBqhIwQZDxWzBmRW7NkwiZduBaseXGE2wPEuXhGhkEWtCaUy3TOMiawiPDad
- 9kMnDVLZxP+KuUEHa3MfrO+o3G/RZGIG9l+I2PRe+hrSc3id5QQMzhwIe9OrrqN0LiHt6
- SDq+MKasbSoA+N/14YWDQ7GF4fUd9hg+rLRm+D7D5t223o3SXk6yIxHT+Km0bqtTtOlzd
- 1WKPsqpPddVI7IzlBGuJVVgurn1roO8nRTYHUsCsQQSAYWZxTGMkltuRXYSUx1JQekqi7
- f8MHhkDEwKBuUFpPUB0wpoLJLZvJYK1mLLpuLtr2hEsc7zcl8bxEuOpc/6FWJMzrxYA==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::432"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789128374;
+ b=mrUudYxDK+UlTfR+5derW1VIkXI7fk2pVIkOo4ROWgz6Hw+tR7ia4p/62MTtgMyb2c9X
+ hF6DToftdDQ/jzo9ZVJ7wx6LcpMonxXc8YL9XMrHtRfOL3V5MhymAxhPn2IvH/+2+Ncoz
+ 1zpOUMiCLI1+wTKLwccZYxsGnb5lU+1iyv05dqZmaH5QndOzU+T+HGdPtdeSR5ZKYJo5K
+ UL6kbuEnOf0FMxcV+raMHrR/Wi7TQ7aWl+U0wpuN9vUruDjH1XM97BliRe12FEs2dF0jN
+ wBcPudbSdRDDocLXRtcx/hDbpAEw8rrVnOKSiwxWGMDDJ3akirEnctUGxCl9D4nBsTw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789128373;
+ c=relaxed/relaxed; t=1789128374;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=d5eaHkYIX3NVCsDR8ydkaQHJuSCv0DbjiyseA+kNAGw=;
- b=KXxDX7L1W/3w7lexvF4x1f35tN4CdvlR/gx7Ms9A77UPoYYDfXMjHD6Qr/XqN4kAXboT
- 4XVYXGTl4GV1Cm6tscVtXWa5oqZqTh+l7jyTCI05SuXDN+a7z7woirJEJWf3OQuaC2O5X
- PVvd05FZOmYGShmLKFIoTQAY5ImOFR9lVqrldr/hX2mEi0AT3BrS4kMits2OhtV+ICO2b
- Q36tx7sjVMheIVCZ/+sWL8fviVprWiaNMLe0C9HzE2sJW2i6XDzVRLMRYaCCShAnM6cPk
- 6syB9G3cGdyJ60XMr8Pxi7utNspPDSgle1dJpAL9lIDT0kY+gJGpxXrAK0852V99lNA==
+ bh=eHxBbjT97HcL1TfB0XA5o6c+fqk7+rJUlFW7PGwWfwg=;
+ b=a7C9PYQnyvpQf79W615jrS+XIQ08IhmjZd2vIxwGiWE7ZCvn4B+SIlPLADeJri7AtTbg
+ +4fHuyIbnxInkr4BY7T25DsZIy3dlal+VQEv3t/ZlBFFnnliFv70FdS8XCEiaI8JTIaMD
+ +XURjIzLMoXC/kxUHDTW+fD0nT+2ETHi4GyxX06ZcHn1AUEV/811c3cYcp0xbY1UDh4Mo
+ 6sUp4s3gwJ/bY0MOs+SZO3vWnm7qVP575wCQnmBAKvlZuN+2E0KRw9l9bkE8mR2sWOj3x
+ XzRY98lZWotwSGJO8IYT9GQNypLaCQkq1trQxxqqNru1SNcqdobrL/2HHOSkEfjfNng==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=OFDR1Vet; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
+ header.s=google header.b="c4F/iGk1"; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::432"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
+ client-ip=2a00:1450:4864:20::432; helo=mail-wr1-x432.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=OFDR1Vet
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 0DAEA80EC2
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:06:12 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-4843e397f74so497240f8f.1
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 05:06:12 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=c4F/iGk1
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id F21CB80ED6
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 12:06:13 +0000 (UTC)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-482f2ee53e7so561851f8f.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 05:06:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1789128370; x=1789733170;
+ d=baylibre.com; s=google; t=1789128371; x=1789733171;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=d5eaHkYIX3NVCsDR8ydkaQHJuSCv0DbjiyseA+kNAGw=;
- b=OFDR1VetRgNHBwoH3S/IHrHUWcYDa/LJnp4GpXVNqF17L+uvjIfTnC5iE9+36USPrH
- EKpGy6zVTLt712IrPKSVP5iGm5ERG+z5BTBZYYMSYq6HZPbQIyqsOj/Ir/3QR8uNNu3r
- idMjfYw7BeGUUik70L+lEQ9XcRO4fXwpa0U3UlfI8N4cqdrmcEpUX1MIXwOhUyq39Se9
- SvPqgtd+JqoqjpD4nGsaEDz1C1elS5qDzVnALIKnlgrC6ozKeUq3gAagO2LzRi6hWdU4
- GjlzQbpOgZRRJ8SBRut03Q4O4bbifewcvQaiSqiX7H7zgzZsFdM1o11SFLBfct7BtNdw
- CGUg==
+ bh=eHxBbjT97HcL1TfB0XA5o6c+fqk7+rJUlFW7PGwWfwg=;
+ b=c4F/iGk1TS9+Z5HznUIrEoykP9G35GuITR+8TTG/G8H6czvuPyO1/oO3a13M27EVxq
+ Uv+tzMC2R3UYGA03SaeBQBQeiYTcaJOpQDeEG3FUovAU7ICbsdDiF0c/a1LDDlYSV2na
+ qczwuH+EYm+v1mZp8oQlFp4UtKFSFEQTJy1G+uCepc01COh3ZbetmPCHnA8FSyvgskhJ
+ AIUz3VuaeN1QTyth6IGf5hBCBVkFazqWsHlQHhpsOclZlrWFF7+f6/LFFnefWLyHL0dI
+ dz1oB2kSdIRNBLCpweXccLHnDz3k+fEB9YiCv9ebPc49pBenF2/5oA8qHpcX08pcCpyP
+ ubew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789128370; x=1789733170;
+ d=1e100.net; s=20251104; t=1789128371; x=1789733171;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=d5eaHkYIX3NVCsDR8ydkaQHJuSCv0DbjiyseA+kNAGw=;
- b=AW9skGabN08ax8OTLio+Gt16YGtvQeVtzSjZjab+JlYZZ56sGJCqbTK2r44VLEMNik
- cSFy33BWRqB9YGbxfXYZrPXMfT6julCqgTKO+8PNMGtwUMUX1yd/rlaMHYxB6616L+xk
- Dx0laC4/6jyVv1HUnTAjZVhDQPEdFab9qa4RKx+s5O/yiyvNQm8/cjwF4f14QpBE026a
- 6GpQZ96aj83m0Yyda4dG0bimHS90etUrtOUu8SBDTh9WK6l6btn/97WcM9/dPb9lz+ix
- uMTZhOUzV29C2rw4VlsqgSphie4ovBWYwCF24r3BLm4CJIudzqJCxQVJCTv8q0fgUGIu
- EjPQ==
-X-Gm-Message-State: AFuF++lrWzRS2yxz+OUL5YNgJS9TgFX4Asq91usIA7EiKY98lbR1Pwjk
- r3gmd68XDsdBVqWwWVmPNHUFwgLs8RTBVvxShzujz/8CmVMuMWA4Hdv4qm7V2vC9LDg=
-X-Gm-Gg: AYBFou3tP+3n1OjZzhy9naASOqtna8s0s092yMzy3hJdmC6MJItjK2k09GANxt2HZxF
- PbFhfOcuVhQEJUwI+F1YcO0QZH1qw3rme1a9iyunYrGNUkR1OW2CT8NyVNhmC3alDwV2RkyyUWR
- O/AuX7L7IKZs99WHfjW90UO2atXsYo46Q4FyFXNpvuFpAg1VVtk8ZeEj8UsxvcKVdqbekOIxJq9
- t4EyeEXHVf3Ounr2+w9l9pPvL1jRjua/AwteiqmBaBaJpLGZMpygDb0dS3MuGP4Anw447+ShJMv
- 5sYCuUDpu65OI0iG8bWxG/ZvXA5KB+0T0fenz7faXeZHQPhTb/k04N//v5mHn0T4XacOiHSpZ+3
- UrQiRqC9t9Ns/hn83aJO+Cv2G/ymn74rELKxhzkUx2wErwsw3OXsxHR84tEgf/XJ6ibyaWbGnN3
- kR7qtyCIPbHI3k1W6v3iNaY0ifZn6L0kr/eb6dcyG8Vqh51Tb+nQgydjdUhYGSMjC1YDh015Fry
- n4co2qjma9BhEQ8bGP3+ky+lu/bVtYfKsR2A31Fw5wRdQVxrnUMKAUFNkRnA7EzQfwc/tL2XNY3
- Wux28Os+OZyLmXsRbzAShstQJg==
-X-Received: by 2002:a05:6000:2311:b0:485:8d9c:47d2 with SMTP id
- ffacd0b85a97d-486e0f955c8mr11697069f8f.30.1789128369703; 
- Fri, 11 Sep 2026 05:06:09 -0700 (PDT)
+ bh=eHxBbjT97HcL1TfB0XA5o6c+fqk7+rJUlFW7PGwWfwg=;
+ b=hXzjb4nteho3ffSvmqRZWKvmbG1Ev9QY4gsz0kgSKg3NHutUT4W1JDeYFM+SJVKa3c
+ /j18mC2Yz44TzXHqumFDbl9KrJqgUm8u0o+OTi9KpGA5yKunelwLMqd/wDzC48lIMqCL
+ 3oYXOjUBDDShpKpVBrzD2DUei2Qq9qndlrqMZ0IF+ckgbWX4oBb7kRuoGpEpKc7/i16m
+ 2SOl3s4whHlR/ZW+if2ZjrHbdQ7pTgwtQpf/CCI4N0a7exbanficnyWA1t5nr3nCbg9H
+ WF5Gko7CDo0fsieFnaUaKsl+Hf/AyiftuPPIlGrt+utyinJjzyDoRPaVm9i31A12WH1+
+ rvug==
+X-Gm-Message-State: AFuF++lZn5v7aelY7T5JGdRRbwEaxkQT4ZYdLkwZTZgq7fkn7RD3TTyw
+ ojXyQ2gVKrcHvEHlSI0rBJkeiAMhqJdjyFc1gHIw0nkoBXhxmhFTMMWOjd45DUM9KN8=
+X-Gm-Gg: AYBFou21RlvA9oORbUUfwphCOAijGgzQIfXR9NRAHA12cLYtQNWWeOgz4ax1yK/1VRE
+ OW9dzaxj9zDDvxme8O+ch7W/SlEeLTp3gyIrlb9JLA0jHn1JkNkSrFY6WnwbqF1fe6agO47Iz4t
+ tzgPqdlYY7Lcfa7fqt8wZEcS/VmXAhm8Da5c1OC93YYJn9zmay0wxt4KRkF8qAYjDaeSLI2JLl7
+ 0Hg+7rttaCo0bjF8uzArrZKvcuqlz6rofX5uY1VFvOnH20lVljA87BqNxuxKxrVhS+8vRFHnl4e
+ UO4oA8H25teDFC29ECJ7AKT+zNvXSMkRDFF0nIuVWz2KKjUsBoc6cI8SvtD/j7FDdOQPnDOwZNJ
+ xJtOy7S/x1qi8kREGNfA/QUy7vabgAfkZv0el0NZr+GuXYsLV2kWkJyV4DJau4bvi6xczneW+gt
+ NnBczNgATpXSd31P92ICi0ad8YqN1zHsXfZY2oV9nrjH1alklzr/RElbzeKyp0UXYdPWzsJnFUn
+ rCf7IV7A1KlhN4cv5ng5qF33nCMSC6Ob3t/LqWysux/zIxqLmXlRruiMqoEiNoB+ygqbupip31Q
+ lKrACxr45/K8qus=
+X-Received: by 2002:a05:6000:609:b0:485:8c17:9771 with SMTP id
+ ffacd0b85a97d-486eb31e7bcmr5008854f8f.51.1789128371485; 
+ Fri, 11 Sep 2026 05:06:11 -0700 (PDT)
 Received: from macbook.homenet.telecomitalia.it
  (host-95-232-147-181.retail.telecomitalia.it. [95.232.147.181])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-486eb36e4a6sm5824487f8f.37.2026.09.11.05.06.06
+ ffacd0b85a97d-486eb36e4a6sm5824487f8f.37.2026.09.11.05.06.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Sep 2026 05:06:07 -0700 (PDT)
+ Fri, 11 Sep 2026 05:06:10 -0700 (PDT)
 From: Carlo Caione <ccaione@baylibre.com>
-Date: Fri, 11 Sep 2026 14:05:58 +0200
-Subject: [PATCH v2 1/2] spl: mmc: select the boot partition after device
- initialization
+Date: Fri, 11 Sep 2026 14:05:59 +0200
+Subject: [PATCH v2 2/2] spl: mmc: support dynamic selection in raw
+ partition mode
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260911-ccaione-upstream-part-dynamic-v2-1-295fefc9a3c4@baylibre.com>
+Message-Id: <20260911-ccaione-upstream-part-dynamic-v2-2-295fefc9a3c4@baylibre.com>
 References: <20260911-ccaione-upstream-part-dynamic-v2-0-295fefc9a3c4@baylibre.com>
 In-Reply-To: <20260911-ccaione-upstream-part-dynamic-v2-0-295fefc9a3c4@baylibre.com>
 To: u-boot@lists.u-boot-project.org, uboot-stm32@st-md-mailman.stormreply.com
@@ -193,106 +195,156 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Boards may need to read boot metadata before choosing the partition
-containing U-Boot. The partition hook currently runs before the MMC
-device is initialized, so it cannot do this reliably.
+Boards using boot metadata to select U-Boot should not need to configure
+an unused fixed partition number. Add an explicit runtime-selection
+option within the existing partition mode, retaining its loader and
+platform dependencies.
 
-Defer selection until the raw partition load and provide the initialized
-device to the existing hook. Explicit partition loads keep their supplied
-coordinates, and a successful Falcon boot needs no U-Boot selection.
+A failed dynamic selection must not boot from an unrelated filesystem
+partition. Reject an invalid selection for this MMC attempt while keeping
+the existing fallback behavior when dynamic selection is disabled.
+
+STM32's existing hook implements fixed partition selection and references
+the static partition settings. Restrict it and its MMC2 setting to fixed
+mode so dynamic selection can provide its own hook.
+
+The board hook owns hardware-area selection, including access to metadata
+and leaving the image area selected.
 
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
+ arch/arm/mach-stm32mp/Kconfig        |  1 +
  arch/arm/mach-stm32mp/stm32mp1/spl.c |  2 +-
- common/spl/spl_mmc.c                 |  7 +++++--
- include/spl.h                        | 15 +++++++++------
- 3 files changed, 15 insertions(+), 9 deletions(-)
+ common/spl/Kconfig                   |  9 +++++++++
+ common/spl/spl_mmc.c                 | 19 +++++++++++++------
+ include/spl.h                        | 14 +++++++++-----
+ 5 files changed, 33 insertions(+), 12 deletions(-)
 
+diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+index f45010ddbd0..bea4a1b6aaf 100644
+--- a/arch/arm/mach-stm32mp/Kconfig
++++ b/arch/arm/mach-stm32mp/Kconfig
+@@ -175,6 +175,7 @@ config DDR_CACHEABLE_SIZE
+ config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION_MMC2
+ 	hex "Partition on MMC2 to use to load U-Boot from"
+ 	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
++	depends on !SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC
+ 	default 1
+ 	help
+ 	  Partition on the second MMC to load U-Boot from when the MMC is being
 diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-index d2e41b8e65f..2229ebf5eeb 100644
+index 2229ebf5eeb..c1be468cb1d 100644
 --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
 +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-@@ -62,7 +62,7 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+@@ -61,7 +61,7 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+ 	return MMCSD_MODE_RAW;
  }
  
- #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
--int spl_mmc_boot_partition(const u32 boot_device)
-+int spl_mmc_boot_partition(struct mmc *mmc, const u32 boot_device)
+-#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
++#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
+ int spl_mmc_boot_partition(struct mmc *mmc, const u32 boot_device)
  {
  	switch (boot_device) {
- 	case BOOT_DEVICE_MMC1:
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 0618f42c941..9e1c23ea0f4 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -576,6 +576,14 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
+ 
+ endchoice
+ 
++config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC
++	bool "Select the raw partition at runtime"
++	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
++	select SPL_PARTITIONS
++	help
++	  Select the partition at runtime instead of using a fixed number.
++	  The board must implement spl_mmc_boot_partition().
++
+ config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
+ 	hex "Address on the MMC to load U-Boot from"
+ 	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+@@ -609,6 +617,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
+ config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
+ 	hex "Partition to use to load U-Boot from"
+ 	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
++	depends on !SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC
+ 	default 1
+ 	help
+ 	  Partition on the MMC to load U-Boot from when the MMC is being
 diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index cc16709dc9b..3e637f5adbd 100644
+index 3e637f5adbd..d538fbb9c41 100644
 --- a/common/spl/spl_mmc.c
 +++ b/common/spl/spl_mmc.c
-@@ -301,7 +301,7 @@ u32 __weak spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- }
- 
+@@ -303,7 +303,11 @@ u32 __weak spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
  #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
--int __weak spl_mmc_boot_partition(const u32 boot_device)
-+int __weak spl_mmc_boot_partition(struct mmc *mmc, const u32 boot_device)
+ int __weak spl_mmc_boot_partition(struct mmc *mmc, const u32 boot_device)
  {
++#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
  	return CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION;
++#else
++	return -ENOSYS;
++#endif
  }
-@@ -431,6 +431,9 @@ int spl_mmc_load(struct spl_image_info *spl_image,
- 			return 0;
+ #endif
+ 
+@@ -432,8 +436,15 @@ int spl_mmc_load(struct spl_image_info *spl_image,
  #elif defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
        defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
-+		if (IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) &&
-+		    raw_part == -1)
-+			raw_part = spl_mmc_boot_partition(mmc, bootdev->boot_device);
+ 		if (IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) &&
+-		    raw_part == -1)
++		    raw_part == -1) {
+ 			raw_part = spl_mmc_boot_partition(mmc, bootdev->boot_device);
++			if (IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC) &&
++			    raw_part < 1) {
++				ret = raw_part < 0 ? raw_part : -EINVAL;
++				printf("spl: partition selection failed: %d\n", ret);
++				return ret;
++			}
++		}
  		ret = mmc_load_image_raw_partition(spl_image, bootdev,
  						   mmc, raw_part,
  						   raw_sect);
-@@ -466,7 +469,7 @@ int spl_mmc_load_image(struct spl_image_info *spl_image,
+@@ -468,11 +479,7 @@ int spl_mmc_load_image(struct spl_image_info *spl_image,
+ #else
  			    NULL,
  #endif
- #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
--			    spl_mmc_boot_partition(bootdev->boot_device),
-+			    -1,
+-#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
+-			    -1,
+-#else
+-			    0,
+-#endif
++			    IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) ? -1 : 0,
+ #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
+ 			    CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR);
  #else
- 			    0,
- #endif
 diff --git a/include/spl.h b/include/spl.h
-index 5078d7525ab..08a84536f51 100644
+index 08a84536f51..2877d120d27 100644
 --- a/include/spl.h
 +++ b/include/spl.h
-@@ -595,18 +595,20 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device);
- 
- /**
-  * spl_mmc_boot_partition() - MMC partition to load U-Boot from.
-+ * @mmc:		Initialized MMC device
+@@ -599,13 +599,17 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device);
   * @boot_device:	ID of the device which the MMC driver wants to load
   *			U-Boot from.
   *
-- * This function should return the partition number which the SPL
-- * should load U-Boot from (on the given boot_device) when
-- * CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION is set.
-+ * Called before loading U-Boot in raw partition mode, after any Falcon
-+ * attempt. The hook may select the hardware area containing the image;
-+ * it must leave that area selected. It may run for each MMC load attempt.
+- * Called before loading U-Boot in raw partition mode, after any Falcon
+- * attempt. The hook may select the hardware area containing the image;
+- * it must leave that area selected. It may run for each MMC load attempt.
++ * Called in partition-number mode after any Falcon attempt. The incoming
++ * hardware area is not necessarily the user area. The hook must leave the
++ * image area selected for loading and any configured filesystem fallback;
++ * the loader does not restore it. It may run for each MMC load attempt.
   *
-  * If not overridden, it is weakly defined in common/spl/spl_mmc.c.
-+ *
-+ * Return: Partition number to load U-Boot from.
+- * If not overridden, it is weakly defined in common/spl/spl_mmc.c.
++ * The default returns the configured partition, or -ENOSYS with
++ * CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC. In dynamic mode,
++ * zero or a negative error aborts this MMC attempt without filesystem
++ * fallback; SPL may still try other boot devices.
+  *
+- * Return: Partition number to load U-Boot from.
++ * Return: Partition number (positive in dynamic mode), or a negative error.
   */
--int spl_mmc_boot_partition(const u32 boot_device);
-+int spl_mmc_boot_partition(struct mmc *mmc, const u32 boot_device);
+ int spl_mmc_boot_partition(struct mmc *mmc, const u32 boot_device);
  
--struct mmc;
- /**
-  * default_spl_mmc_emmc_boot_partition() - eMMC boot partition to load U-Boot from.
-  * mmc:			Pointer for the mmc device structure
-@@ -972,7 +974,8 @@ int spl_mmc_load_image(struct spl_image_info *spl_image,
-  * @param spl_image	Image data filled in by loading process
-  * @param bootdev	Describes which device to load from
-  * @param filename	Name of file to load (in FS mode)
-- * @param raw_part	Partition to load from (in RAW mode)
-+ * @param raw_part	Partition to load from (in RAW mode), or -1 to call
-+ *			spl_mmc_boot_partition() in partition-number mode
-  * @param raw_sect	Sector to load from (in RAW mode)
-  *
-  * Return: 0 on success, otherwise error code
 
 -- 
 2.55.0
