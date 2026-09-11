@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32F68C88E4A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 10:47:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2706C88E4A
+	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 10:48:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E755E81282;
-	Fri, 11 Sep 2026 10:47:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BCDAC80816;
+	Fri, 11 Sep 2026 10:48:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Fr10ZKLFfd8Q; Fri, 11 Sep 2026 10:47:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 51A178128E
+ id IF3Ma2sQgzPN; Fri, 11 Sep 2026 10:48:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org DFBC480CA3
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123653;
-	b=TJwM1vX77vTf0gF+W9r/R4kg62OKyD2gSzUxO/9hYnKqHpdKKkkZapb3qN4mhAO92P6H
-	 iyNRlOg5NeFOP79XdYEKeZNmkk3lAco5Lln6Hfnh8QVQVDz6z+xW3K38a+WPcSywpmHLE
-	 VnEicI4xqsOe/Bc4c146++AHSF2HaGMqIZV75ae4Rx/2TInSmlDrEBe3Ni/JSBl4QBmhg
-	 HHry/qNKdv2GARhq2JLPGav7D3JLozT3a8u/566ykpRsKTLvygkRy75EckOemFJopzcdi
-	 O9Sfa0sZ0Qt3RUjpmWl3cMze/7n5LsAKtk7JbqPUhU7RnpE/QH02VGTnE0YzSv+fT3Q==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123693;
+	b=SGlrbKNq/OAii1Q7gf61SbhAEdZONbbn9LgBy7o3rkEyujtBVQCCgv5YBZUFL6iGHFCv
+	 Jgi2DGry7NiwAy5eIaHrC/Iz9oIFtujNbs40o0mn7fcoH+clI5OXzjiuxGNQrbZrRe3qv
+	 gftdhrUDsbrCbxXfux7t8bGoO4seBLOXZyXnInvtl+KfCwTeyoCHVmb22A6LXXxCGUmT6
+	 3QrAuHAsQS+SWA7nDkrIxtrqi+OEnImNtd6a05/UJfNQYu508u7HD9FVuUo7Nmk5lV8Wp
+	 X1xX7pcVuwAujrOL9KQwmo7J92Mz0bSYyycDS2yZdO1GSJnAj30twr9UjHiCkz+CwVQ==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789123653;
+	c=relaxed/relaxed; t=1789123693;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,105 +31,105 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=zkOrqUKalfQ45mN+4fBiNmFibeqksc5KB/KXz4yGy8g=;
-	b=OPz3T71k3t1M1OTlyX8G2GYY/y8GFnwMaz7RF+wbzpy4HCwvy5vHaem3XzdTfABOTSFl
-	 Wg6ghkGzbT5Y04DDPPlkeS/hL0f8R8LSRp0yPnJt5KA0nkfXxAeUmP294GBE3W+oc/AlR
-	 CgkV52jeNOvyqrF9q51p50lcCHFefcgqSwIMCZZ4d1ZARCis73K8WAeMH7dHhoijaX44N
-	 C7OP/XMbUxR2rruj0rAbDmiZoZ6J29aKcU/Nsu2kCUfOY7ndTfH6FFB/LW4hK8pHdl+o5
-	 I3choOS5jtUmsfjgA8oWMCMb3M6zEiUx3Qzt7tgFMsGfkBl4/Jt+atoqfLxRdQfbC0g==
+	bh=Cf4Qe7x0db0ymrVySdU+E7Hy0fuQMCUAMBoUVe/pg1I=;
+	b=JYp1KO5cSUBAPBKXO7zNl0NNcdGIz1KCSHPARdtaS/R8F3ky5Vpd8uy11oedg90elT7Z
+	 3sSeh8x5HXv55UhPDPOgUg0rdBi+6bDanlTxubZbbdt2JcU/+aWjtmD4TdxUMQ/G9RC1g
+	 +JsfK2htNe0xh4Kv9pWGfHEqDtzHZ/ihgxWVDHTHtXeVcTG11KwU2LURnO7b9VQo5+hoM
+	 Uo/FrP+uW/Zn9XfbTcbHLmrLtvUhCEkNupw2+xDYYQ/Qn6+ZBeqJqm8QMGK/i4c93uG5s
+	 nOzrHLEBgm6EaLu6/5yGiNzWtTXwNVTEIgUe9VyJkwK4wdIlhd446QnG4sILRJLEPPA==
 ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789123653;
-	bh=zkOrqUKalfQ45mN+4fBiNmFibeqksc5KB/KXz4yGy8g=;
+	d=lists.u-boot-project.org; s=default; t=1789123693;
+	bh=Cf4Qe7x0db0ymrVySdU+E7Hy0fuQMCUAMBoUVe/pg1I=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lamVOFdu4op98vmlyH7JBvPeLUf1K6ms05tE3bxz6MSj+heXYkZuhnuWd+SYNa4hk
-	 Pe5GDT//1EHtIQ2+L7ef045VJWf7aHRCx3ReT58fvShLj/Dj0bKeUoGhnWsnmCy+tq
-	 XxFlj4V1YEFeciX0OTVEQLdUSH9kK3k0qg8g/WPBfqVcfkw/Mz2Z+GmQXrue375bH4
-	 W0ds3TJYDflHkImRGgnxDA3xWq7fN/ubj0AbFJzaS+wNaOIXCfI13+M6BqEjCO6hfv
-	 JY/jLxfjbV8zG28qpCMvf9DzUb3ZmsnpA6MseQtrxqkuNAfgwUQAiD1LFUucAlT8hN
-	 Ht2nUqjr17c/g==
+	b=h+0IE5MNA6PVYLRn6dgg9BtKAzgSDv99JXW4X+k+CcnQt8+LORbvpmdZCssMUhQkS
+	 2NXm8bKi33COUbj2CQe/HrB2UtV/9L/QQR9vJYHrj/b7vgEEIGLW2tU7Q8z22g+VaC
+	 SAWV+/quF8m6wtxYCL8c3RIkHlMoXb692VfQ9KmAxELKuLj8MnbDJ4RC+jZGsUarMJ
+	 JoBF5PW47gBYtc/coDqbb2DxTGjvrwPNNjmXAWMSPkH9t/gpJkQtnRf+3DllsyrBIu
+	 EMJ6k7B7FGADgnOvBsqOvBQNlAobk/ezfB9DSbZs8+9rsnZb0U1Re1HSbbEadORXAo
+	 Y7MuCm7qIBQxQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 51A178128E;
-	Fri, 11 Sep 2026 10:47:33 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 2634D32F
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:47:31 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DFBC480CA3;
+	Fri, 11 Sep 2026 10:48:12 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 91C2E49D
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 157A540461
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:47:31 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 77A7640B0B
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Q7u2fIrA8x9u for <u-boot@lists.u-boot-project.org>;
- Fri, 11 Sep 2026 10:47:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org E7FAE40460
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oHHZweT0c8t8 for <u-boot@lists.u-boot-project.org>;
+ Fri, 11 Sep 2026 10:48:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B164440AF6
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=136.143.188.15
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123650;
- b=A0hpJPdDjv1Dhoyu1D0EAd3aXgr9eYjNbZcliFFEXpm5E1dC2AdpV0d+m8kj+2lWI/sj
- SCCtIDn6e2161RGycPPro7CshegMtf26SkVf3XD7QMNUtiFEuOt4p5l8aSIvYNuIXtO7R
- At+XH4YH/reHR1GhseSDW9NTL4fs6ImlH9CBEqsl3G7G6DU7j3fCl4HbIRv6BfNXIt6Xi
- yNFYec034o+jYyv0NPBDl67Ihmzl2e6TN3rn6zp8ld28fMsNemkgNTVSTepcsT8Q6TUec
- ySdTwiYZuy2PMczqFzf1ld1d3DPCYLnpzTFv6Jzntnfc+xvsQ3oeeHdS85na28NligA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123690;
+ b=HMovG6Hcz90HU/XcV82yPRCD6Xrss6NsTq+QNjR549AK4Nq/IASeeRXIs/FT9RDUMojQ
+ pOXw7wmPyD8QCE8pRVRpy16fbJtuNafpveoupsiNO7/fkLFdghxxFgNVQzrA2Poj4b9Tg
+ JvQqUoqDnB+Y36k4F364NxFfZqjmixa/Y6oCN0pmi0RfNS+9xEVfvsjm7O/kfJ5MSg4k5
+ cwVeq7h7TjniUFp/UxIvazdmThiSX1rndowkpkgLmkeQjPslEH7ImB96h/4yqLGYE8fLO
+ Vym8DFjidreDHAIX9An8SkM7G9PKlVeWFSlaB3iT3KFU4ZL99qTD1sEeF8lolmTZHgQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789123650;
+ c=relaxed/relaxed; t=1789123690;
  h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-ZohoMailClient;
- bh=zkOrqUKalfQ45mN+4fBiNmFibeqksc5KB/KXz4yGy8g=;
- b=J4fswFrDWX4c6aE39CzMmwBH3LlHjAg55RTruhB+Vo3HemOiyeeRqJiCTQ6zJMVqZqTV
- Gm1I9d7F04gMltBh8vBZU2u0FuAHzArlI9RXYYwgff17cw2jIfXdJQ4TUEQ795NHwcTUK
- yt+j6Ydmro9B/mJ4d+Cmtum4F5EYzt0+N70p7UWYkLhairKfz8t/viC7tJUZRmbbMpI2s
- U9VM2cG5abvDys+M0ZlrrxhABvjkEQz4GxGJzrwdpTJ8ufvuFxkwHjI7hLp2UhRmllnzM
- xHPF+1qLNo30m58Yz/R3ADMK5xxjb2i3CFoebOt1rY4jBd1XWjqGwAS2KW4wAfiMtZg==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ bh=Cf4Qe7x0db0ymrVySdU+E7Hy0fuQMCUAMBoUVe/pg1I=;
+ b=nulFdxA1qluQD/glG8/nnUo4zvDKYG0OUukb3DgGmtxh4pbG/sfMbofLvfAW1mUUXTIk
+ OCDAlnA02YKgwce5PO9wCHtUKk/4ANp2oH3B+KZ1fUkxtyLABQNo3ahCdlb2KUasPRFOl
+ J5utWr1DCkPrcpdne+AvfYcfpIy+kRS1PN02Dlv5z+lMcsm3z48laY9Hi+cJbF8aUplrl
+ kztUOMrNNQRGPAfeuCF4Db7kz6Cyg2Csy3Wja0/GpX1OTscL1ChTuJ0vxKxIKQc2qQyma
+ Wnaebk/QgrwSrJ6bMz3ackUkIOOTzsCfx9ehznFUsckWe5/ns4DGwSQrC4Cj0pExMDA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
  dmarc=pass header.from=ziyao.cc; 
  dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=PzBY+Sqm; 
+ header.s=zmail header.b=hXHd6+iH; 
  arc=pass header.oldest-pass=0 smtp.remote-ip=136.143.188.15
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
  helo=sender4-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=ziyao.cc header.i=me@ziyao.cc
- header.a=rsa-sha256 header.s=zmail header.b=PzBY+Sqm
+ header.a=rsa-sha256 header.s=zmail header.b=hXHd6+iH
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E7FAE40460
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:47:29 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1789123644; cv=none; 
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B164440AF6
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:10 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1789123686; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=C2p1wR2FYDGt1pdh0+yjTJ8Br+J2to4Ln4Fcgq6Ff3iJsv78KXCr0N9dX+wcGXlxOT2lE3+u57itwCct4bGF2B2RvwMmqBp+BZuky8TIZzgWLfrrE00sj65vxPPqI7PxuUT2r17uH37hAATiyk2xZB7FqFc6GwxXc3buUsS6KCM=
+ b=GxB7f/yx/Us1eWuaMBqNvjL9YRO/O3XprC5OkXf936w5bIvs5OyOEydBCskW4S3CBsJNVOlnd/cZqD/+g/AqMx/PjRhPxLojYYspGgAMLqipsOd5mWIGqjCGd9N2iOINDAkLNEgkndd/ZZ+DKw26enFUm6wa8zkrez2nicgecms=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1789123644;
+ s=zohoarc; t=1789123686;
  h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=zkOrqUKalfQ45mN+4fBiNmFibeqksc5KB/KXz4yGy8g=; 
- b=hnCXRz106nDh+2fUhp43DDsXvGr8ITjy0tyhH845AAQOuvlX6Coim+hkAq9YifLV9ddpHQVGtkJiTokWtleq3RrQJ3uuUek7ZlSWC3dcV3EJVANHFe+ql7shN/YILmM6QIiePie6fAPld+HXz243z2nNnuQerO//B90lrA3qyxo=
+ bh=Cf4Qe7x0db0ymrVySdU+E7Hy0fuQMCUAMBoUVe/pg1I=; 
+ b=MWHId1409Cg8SPZaN1TBz4nijzNMJ4PFE7j/u+N1S8DEgjwJPCaC1zccfuLuyxDtwqafuVf06Fn5UaSkFqlFIbm3hP+R/yl9sfDlAIayAhdHt8xZDMx1coqIVpHI6lcr/CgUKsbPW4KefwN7iwqHD9NhP+8Hb853IJLy49W9PWg=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1789123644; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1789123686; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=zkOrqUKalfQ45mN+4fBiNmFibeqksc5KB/KXz4yGy8g=;
- b=PzBY+SqmUiymahFiS0Tq0Y0dRU4DyxY7Z/u4xddEWMDKLZaCklXLTf3UP5qvkgwx
- E6jNzQNX8zDQmOy0SF1HhOFRQuGexJP52fbFtNtRsgLmkwSOkephfFa/RUathyZry6s
- Id3jUtLRlyFEPQ3nDOnqkFmV4Ez35OaP8i5RL5vs=
-Received: by mx.zohomail.com with SMTPS id 1789123642254201.40035784943984;
- Fri, 11 Sep 2026 03:47:22 -0700 (PDT)
+ bh=Cf4Qe7x0db0ymrVySdU+E7Hy0fuQMCUAMBoUVe/pg1I=;
+ b=hXHd6+iHlF+A8fD4sZJnrmV7NS/34UXnGJwSJWgt600NU73+5HN/zEVoO8004OSX
+ A3aiJpM2VbysaFB62uS80UE2aZWIpNQ3e3eErCfbF54DkhHTNxIVLrWNxllzTzf5FJm
+ 5NHxgvwSIB9TZCm9oBDxuFeB/6GNfJQSEIkUz5G4=
+Received: by mx.zohomail.com with SMTPS id 1789123684084284.6325124630429;
+ Fri, 11 Sep 2026 03:48:04 -0700 (PDT)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org,
 	Yao Zi <me@ziyao.cc>
-Subject: [PATCH v4 09/19] LoongArch: Exception handling
-Date: Fri, 11 Sep 2026 10:45:54 +0000
-Message-ID: <20260911104604.2910944-10-me@ziyao.cc>
+Subject: [PATCH v4 12/19] cpu: Add loongarch_cpu driver
+Date: Fri, 11 Sep 2026 10:45:57 +0000
+Message-ID: <20260911104604.2910944-13-me@ziyao.cc>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260911104604.2910944-1-me@ziyao.cc>
 References: <20260911104604.2910944-1-me@ziyao.cc>
@@ -151,472 +151,211 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-Add exception entry assembly code, import stackframe.h
-from Linux, provide debug prints when exception happens.
+Implement a driver for LoongArch CPU solely for gathering
+some information bits from FDT and CPU level config registers.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
 ---
 
-Changed from v3
-- Drop unused and unimplemented set_resume()
+No changes since v3
 
 Changed from v2
-- Guard show_regs at the callsite
-- Provide a macro for $fp offset in pt_regs.regs
-- Add help text for SHOW_REGS, make it enabled by default
+- Fall through to devicetree path in loongarch_cpu_get_desc() when
+  probing with CPUCFG gets no meaningful results, instead of handling
+  such cases with goto
+- Replace open-coded copying loop with memcpy() in
+  loongarch_cpu_get_desc()
+- Correctly return -ENOSPC when snprintf() truncates the string in
+  loongarch_cpu_get_desc()
 
-No functional changes since v1
+Changed from v1
+- Drop unnecessary check against -ENOTSUPP clk_enable()'s return value
+  in loongarch_cpu_probe()
 
- arch/loongarch/Kconfig                  |  19 +++
- arch/loongarch/cpu/Makefile             |   2 +-
- arch/loongarch/cpu/genex.S              |  21 +++
- arch/loongarch/include/asm/stackframe.h | 175 ++++++++++++++++++++++
- arch/loongarch/lib/interrupts.c         | 185 ++++++++++++++++++++++++
- 5 files changed, 401 insertions(+), 1 deletion(-)
- create mode 100644 arch/loongarch/cpu/genex.S
- create mode 100644 arch/loongarch/include/asm/stackframe.h
- create mode 100644 arch/loongarch/lib/interrupts.c
+ drivers/cpu/Kconfig         |   6 ++
+ drivers/cpu/Makefile        |   1 +
+ drivers/cpu/loongarch_cpu.c | 142 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 149 insertions(+)
+ create mode 100644 drivers/cpu/loongarch_cpu.c
 
-diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
-index 4e8e9d4ee88b..ac4be2c837c0 100644
---- a/arch/loongarch/Kconfig
-+++ b/arch/loongarch/Kconfig
-@@ -30,6 +30,25 @@ config DMA_ADDR_T_64BIT
- 	bool
- 	default y if 64BIT
+diff --git a/drivers/cpu/Kconfig b/drivers/cpu/Kconfig
+index c805c0bbfa19..9fd43ff88fde 100644
+--- a/drivers/cpu/Kconfig
++++ b/drivers/cpu/Kconfig
+@@ -13,6 +13,12 @@ config CPU_IMX
+ 	help
+ 	  Support CPU cores for SoCs of the i.MX series.
  
-+config SHOW_REGS
-+	bool "Show registers on unhandled exception"
-+	default y
++config CPU_LOONGARCH
++	bool "Enable LoongArch CPU driver"
++	depends on CPU && LOONGARCH
 +	help
-+	  By default only the program counter and the return address register
-+	  are shown in crash dumps. Enable this symbol to show all registers
-+	  in main U-Boot.
++	  Support CPU cores for LoongArch processors.
 +
-+config FRAMEPOINTER
-+	bool "Build with frame pointer for stack unwinding"
-+	default y
-+	help
-+	  Choose this option to use the framepointer so the stack can be
-+	  unwound if needed. This is useful for tracing where faults came
-+	  from as the source may be several functions back.
-+
-+	  If you say Y here, the code size will increase due to having to
-+	  store the fp.
-+
- config STACK_SIZE_SHIFT
- 	int
- 	default 14
-diff --git a/arch/loongarch/cpu/Makefile b/arch/loongarch/cpu/Makefile
-index d3c38a16d057..6b3dd7ad7d69 100644
---- a/arch/loongarch/cpu/Makefile
-+++ b/arch/loongarch/cpu/Makefile
-@@ -6,4 +6,4 @@
- extra-y = start.o
- 
- obj-y += cpu.o
--obj-y += smp_secondary.o
-+obj-y += smp_secondary.o genex.o
-diff --git a/arch/loongarch/cpu/genex.S b/arch/loongarch/cpu/genex.S
+ config CPU_MPC83XX
+ 	bool "Enable MPC83xx CPU driver"
+ 	depends on CPU && MPC83xx
+diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
+index eaf494706e2c..d9c0db74dd5a 100644
+--- a/drivers/cpu/Makefile
++++ b/drivers/cpu/Makefile
+@@ -13,6 +13,7 @@ obj-$(CONFIG_ARCH_AT91) += at91_cpu.o
+ obj-$(CONFIG_ARCH_MEDIATEK) += mtk_cpu.o
+ obj-$(CONFIG_CPU_ARMV8) += armv8_cpu.o
+ obj-$(CONFIG_CPU_IMX) += imx8_cpu.o
++obj-$(CONFIG_CPU_LOONGARCH) += loongarch_cpu.o
+ obj-$(CONFIG_CPU_MPC83XX) += mpc83xx_cpu.o
+ obj-$(CONFIG_CPU_RISCV) += riscv_cpu.o
+ obj-$(CONFIG_CPU_MICROBLAZE) += microblaze_cpu.o
+diff --git a/drivers/cpu/loongarch_cpu.c b/drivers/cpu/loongarch_cpu.c
 new file mode 100644
-index 000000000000..18d183a352b9
+index 000000000000..74a80f9e79a4
 --- /dev/null
-+++ b/arch/loongarch/cpu/genex.S
-@@ -0,0 +1,21 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Exception entry for LoongArch CPU
-+ *
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+
-+#include <linux/linkage.h>
-+#include <asm/asm.h>
-+#include <asm/loongarch.h>
-+#include <asm/stackframe.h>
-+
-+.align 12
-+ENTRY(exception_entry)
-+	BACKUP_T0T1
-+	SAVE_ALL
-+	move		a0, sp
-+	la.pcrel	t0, do_exceptions
-+	jirl		ra, t0, 0
-+	RESTORE_ALL_AND_RET
-+END(exception_entry)
-diff --git a/arch/loongarch/include/asm/stackframe.h b/arch/loongarch/include/asm/stackframe.h
-new file mode 100644
-index 000000000000..932150afdfaf
---- /dev/null
-+++ b/arch/loongarch/include/asm/stackframe.h
-@@ -0,0 +1,175 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2020-2022 Loongson Technology Corporation Limited
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+#ifndef _ASM_STACKFRAME_H
-+#define _ASM_STACKFRAME_H
-+
-+#include <asm/addrspace.h>
-+#include <asm/asm.h>
-+#include <generated/asm-offsets.h>
-+#include <asm/loongarch.h>
-+
-+/* Make the addition of cfi info a little easier. */
-+	.macro cfi_rel_offset reg offset=0 docfi=0
-+	.if \docfi
-+	.cfi_rel_offset \reg, \offset
-+	.endif
-+	.endm
-+
-+	.macro cfi_st reg offset=0 docfi=0
-+	cfi_rel_offset \reg, \offset, \docfi
-+	LONG_S	\reg, sp, \offset
-+	.endm
-+
-+	.macro cfi_restore reg offset=0 docfi=0
-+	.if \docfi
-+	.cfi_restore \reg
-+	.endif
-+	.endm
-+
-+	.macro cfi_ld reg offset=0 docfi=0
-+	LONG_L	\reg, sp, \offset
-+	cfi_restore \reg \offset \docfi
-+	.endm
-+
-+	.macro BACKUP_T0T1
-+	csrwr	t0, EXCEPTION_KS0
-+	csrwr	t1, EXCEPTION_KS1
-+	.endm
-+
-+	.macro RELOAD_T0T1
-+	csrrd   t0, EXCEPTION_KS0
-+	csrrd   t1, EXCEPTION_KS1
-+	.endm
-+
-+	.macro	SAVE_TEMP docfi=0
-+	RELOAD_T0T1
-+	cfi_st	t0, PT_R12, \docfi
-+	cfi_st	t1, PT_R13, \docfi
-+	cfi_st	t2, PT_R14, \docfi
-+	cfi_st	t3, PT_R15, \docfi
-+	cfi_st	t4, PT_R16, \docfi
-+	cfi_st	t5, PT_R17, \docfi
-+	cfi_st	t6, PT_R18, \docfi
-+	cfi_st	t7, PT_R19, \docfi
-+	cfi_st	t8, PT_R20, \docfi
-+	.endm
-+
-+	.macro	SAVE_STATIC docfi=0
-+	cfi_st	s0, PT_R23, \docfi
-+	cfi_st	s1, PT_R24, \docfi
-+	cfi_st	s2, PT_R25, \docfi
-+	cfi_st	s3, PT_R26, \docfi
-+	cfi_st	s4, PT_R27, \docfi
-+	cfi_st	s5, PT_R28, \docfi
-+	cfi_st	s6, PT_R29, \docfi
-+	cfi_st	s7, PT_R30, \docfi
-+	cfi_st	s8, PT_R31, \docfi
-+	.endm
-+
-+	.macro	SAVE_SOME docfi=0
-+	PTR_ADDI sp, sp, -PT_SIZE
-+	.if \docfi
-+	.cfi_def_cfa sp, 0
-+	.endif
-+	cfi_st	t0, PT_R3, \docfi
-+	cfi_rel_offset  sp, PT_R3, \docfi
-+	LONG_S	zero, sp, PT_R0
-+	csrrd	t0, LOONGARCH_CSR_PRMD
-+	LONG_S	t0, sp, PT_PRMD
-+	csrrd	t0, LOONGARCH_CSR_CRMD
-+	LONG_S	t0, sp, PT_CRMD
-+	csrrd	t0, LOONGARCH_CSR_EUEN
-+	LONG_S  t0, sp, PT_EUEN
-+	csrrd	t0, LOONGARCH_CSR_ECFG
-+	LONG_S	t0, sp, PT_ECFG
-+	csrrd	t0, LOONGARCH_CSR_ESTAT
-+	PTR_S	t0, sp, PT_ESTAT
-+	cfi_st	ra, PT_R1, \docfi
-+	cfi_st	a0, PT_R4, \docfi
-+	cfi_st	a1, PT_R5, \docfi
-+	cfi_st	a2, PT_R6, \docfi
-+	cfi_st	a3, PT_R7, \docfi
-+	cfi_st	a4, PT_R8, \docfi
-+	cfi_st	a5, PT_R9, \docfi
-+	cfi_st	a6, PT_R10, \docfi
-+	cfi_st	a7, PT_R11, \docfi
-+	csrrd	ra, LOONGARCH_CSR_ERA
-+	LONG_S	ra, sp, PT_ERA
-+	.if \docfi
-+	.cfi_rel_offset ra, PT_ERA
-+	.endif
-+	cfi_st	tp, PT_R2, \docfi
-+	cfi_st	fp, PT_R22, \docfi
-+	/* Save U0 for sanity */
-+	cfi_st  u0, PT_R21, \docfi
-+	.endm
-+
-+	.macro	SAVE_ALL docfi=0
-+	SAVE_SOME \docfi
-+	SAVE_TEMP \docfi
-+	SAVE_STATIC \docfi
-+	.endm
-+
-+	.macro	RESTORE_TEMP docfi=0
-+	cfi_ld	t0, PT_R12, \docfi
-+	cfi_ld	t1, PT_R13, \docfi
-+	cfi_ld	t2, PT_R14, \docfi
-+	cfi_ld	t3, PT_R15, \docfi
-+	cfi_ld	t4, PT_R16, \docfi
-+	cfi_ld	t5, PT_R17, \docfi
-+	cfi_ld	t6, PT_R18, \docfi
-+	cfi_ld	t7, PT_R19, \docfi
-+	cfi_ld	t8, PT_R20, \docfi
-+	.endm
-+
-+	.macro	RESTORE_STATIC docfi=0
-+	cfi_ld	s0, PT_R23, \docfi
-+	cfi_ld	s1, PT_R24, \docfi
-+	cfi_ld	s2, PT_R25, \docfi
-+	cfi_ld	s3, PT_R26, \docfi
-+	cfi_ld	s4, PT_R27, \docfi
-+	cfi_ld	s5, PT_R28, \docfi
-+	cfi_ld	s6, PT_R29, \docfi
-+	cfi_ld	s7, PT_R30, \docfi
-+	cfi_ld	s8, PT_R31, \docfi
-+	.endm
-+
-+	.macro	RESTORE_SOME docfi=0
-+	LONG_L	a0, sp, PT_PRMD
-+	andi    a0, a0, 0x3	/* extract pplv bit */
-+	beqz    a0, 8f
-+	cfi_ld  u0, PT_R21, \docfi
-+8:
-+	LONG_L	a0, sp, PT_ERA
-+	csrwr	a0, LOONGARCH_CSR_ERA
-+	LONG_L	a0, sp, PT_PRMD
-+	csrwr	a0, LOONGARCH_CSR_PRMD
-+	cfi_ld	ra, PT_R1, \docfi
-+	cfi_ld	a0, PT_R4, \docfi
-+	cfi_ld	a1, PT_R5, \docfi
-+	cfi_ld	a2, PT_R6, \docfi
-+	cfi_ld	a3, PT_R7, \docfi
-+	cfi_ld	a4, PT_R8, \docfi
-+	cfi_ld	a5, PT_R9, \docfi
-+	cfi_ld	a6, PT_R10, \docfi
-+	cfi_ld	a7, PT_R11, \docfi
-+	cfi_ld	tp, PT_R2, \docfi
-+	cfi_ld	fp, PT_R22, \docfi
-+	.endm
-+
-+	.macro	RESTORE_SP_AND_RET docfi=0
-+	cfi_ld	sp, PT_R3, \docfi
-+	ertn
-+	.endm
-+
-+	.macro	RESTORE_ALL_AND_RET docfi=0
-+	RESTORE_STATIC \docfi
-+	RESTORE_TEMP \docfi
-+	RESTORE_SOME \docfi
-+	RESTORE_SP_AND_RET \docfi
-+	.endm
-+
-+#endif /* _ASM_STACKFRAME_H */
-diff --git a/arch/loongarch/lib/interrupts.c b/arch/loongarch/lib/interrupts.c
-new file mode 100644
-index 000000000000..4caf1a1d4dee
---- /dev/null
-+++ b/arch/loongarch/lib/interrupts.c
-@@ -0,0 +1,185 @@
++++ b/drivers/cpu/loongarch_cpu.c
+@@ -0,0 +1,142 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#include <linux/compat.h>
-+#include <linux/bitfield.h>
-+#include <linux/linkage.h>
-+#include <hang.h>
-+#include <interrupt.h>
-+#include <irq_func.h>
-+#include <asm/global_data.h>
-+#include <asm/ptrace.h>
-+#include <asm/system.h>
-+#include <asm/regdef.h>
++#include <clk.h>
++#include <cpu.h>
++#include <dm.h>
++#include <errno.h>
++#include <log.h>
 +#include <asm/loongarch.h>
++#include <dm/device-internal.h>
++#include <dm/lists.h>
++#include <linux/bitops.h>
++#include <linux/err.h>
 +
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+#define REG_FP 22
-+
-+static void __maybe_unused show_regs(struct pt_regs *regs)
++static int loongarch_cpu_get_desc(const struct udevice *dev, char *buf, int size)
 +{
-+	const int field = 2 * sizeof(unsigned long);
++	const char *cpu;
 +
-+#define GPR_FIELD(x) field, regs->regs[x]
-+	printf("pc %0*lx ra %0*lx tp %0*lx sp %0*lx\n",
-+	       field, regs->csr_era, GPR_FIELD(1), GPR_FIELD(2), GPR_FIELD(3));
-+	printf("a0 %0*lx a1 %0*lx a2 %0*lx a3 %0*lx\n",
-+	       GPR_FIELD(4), GPR_FIELD(5), GPR_FIELD(6), GPR_FIELD(7));
-+	printf("a4 %0*lx a5 %0*lx a6 %0*lx a7 %0*lx\n",
-+	       GPR_FIELD(8), GPR_FIELD(9), GPR_FIELD(10), GPR_FIELD(11));
-+	printf("t0 %0*lx t1 %0*lx t2 %0*lx t3 %0*lx\n",
-+	       GPR_FIELD(12), GPR_FIELD(13), GPR_FIELD(14), GPR_FIELD(15));
-+	printf("t4 %0*lx t5 %0*lx t6 %0*lx t7 %0*lx\n",
-+	       GPR_FIELD(16), GPR_FIELD(17), GPR_FIELD(18), GPR_FIELD(19));
-+	printf("t8 %0*lx u0 %0*lx s9 %0*lx s0 %0*lx\n",
-+	       GPR_FIELD(20), GPR_FIELD(21), GPR_FIELD(22), GPR_FIELD(23));
-+	printf("s1 %0*lx s2 %0*lx s3 %0*lx s4 %0*lx\n",
-+	       GPR_FIELD(24), GPR_FIELD(25), GPR_FIELD(26), GPR_FIELD(27));
-+	printf("s5 %0*lx s6 %0*lx s7 %0*lx s8 %0*lx\n",
-+	       GPR_FIELD(28), GPR_FIELD(29), GPR_FIELD(30), GPR_FIELD(31));
-+}
++	/* We try to get CPU name from IOCSR first */
++	if ((read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_IOCSR)) {
++		char vendor_buf[9] = { 0 };
++		char name_buf[9] = { 0 };
++		u64 vendor = iocsr_read64(LOONGARCH_IOCSR_VENDOR);
++		u64 name = iocsr_read64(LOONGARCH_IOCSR_CPUNAME);
 +
-+static void __maybe_unused show_backtrace(struct pt_regs *regs)
-+{
-+	uintptr_t *fp = (uintptr_t *)regs->regs[REG_FP];
-+	unsigned int count = 0;
-+	ulong ra;
++		if (vendor && name) {
++			int ret;
 +
-+	printf("\nbacktrace:\n");
++			memcpy(vendor_buf, &vendor, sizeof(vendor));
++			memcpy(name_buf, &name, sizeof(name));
 +
-+	/*
-+	 * there are a few entry points where the s0 register is
-+	 * set to gd, so to avoid changing those, just abort if
-+	 * the value is the same.
-+	 */
-+	while (fp && fp != (uintptr_t *)gd) {
-+		ra = fp[-1];
-+		printf("%3d: fp: " REG_FMT " ra: " REG_FMT,
-+		       count, (ulong)fp, ra);
-+
-+		if (gd && gd->flags & GD_FLG_RELOC)
-+			printf(" - ra: " REG_FMT " reloc adjusted\n",
-+			       ra - gd->reloc_off);
-+		else
-+			printf("\n");
-+
-+		fp = (uintptr_t *)fp[-2];
-+		count++;
-+	}
-+}
-+
-+static const char *humanize_exc_name(unsigned int ecode, unsigned int esubcode)
-+{
-+	/*
-+	 * LoongArch users and developers are probably more familiar with
-+	 * those names found in the ISA manual, so we are going to print out
-+	 * the latter. This will require some mapping.
-+	 */
-+	switch (ecode) {
-+	case EXCCODE_RSV: return "INT";
-+	case EXCCODE_TLBL: return "PIL";
-+	case EXCCODE_TLBS: return "PIS";
-+	case EXCCODE_TLBI: return "PIF";
-+	case EXCCODE_TLBM: return "PME";
-+	case EXCCODE_TLBNR: return "PNR";
-+	case EXCCODE_TLBNX: return "PNX";
-+	case EXCCODE_TLBPE: return "PPI";
-+	case EXCCODE_ADE:
-+		switch (esubcode) {
-+		case EXSUBCODE_ADEF: return "ADEF";
-+		case EXSUBCODE_ADEM: return "ADEM";
++			ret = snprintf(buf, size, "%s-%s", vendor_buf, name_buf);
++			return ret >= size ? -ENOSPC : 0;
 +		}
-+		break;
-+	case EXCCODE_ALE: return "ALE";
-+	case EXCCODE_BCE: return "BCE";
-+	case EXCCODE_SYS: return "SYS";
-+	case EXCCODE_BP: return "BRK";
-+	case EXCCODE_INE: return "INE";
-+	case EXCCODE_IPE: return "IPE";
-+	case EXCCODE_FPDIS: return "FPD";
-+	case EXCCODE_LSXDIS: return "SXD";
-+	case EXCCODE_LASXDIS: return "ASXD";
-+	case EXCCODE_FPE:
-+		switch (esubcode) {
-+		case EXCSUBCODE_FPE: return "FPE";
-+		case EXCSUBCODE_VFPE: return "VFPE";
-+		}
-+		break;
-+	case EXCCODE_WATCH:
-+		switch (esubcode) {
-+		case EXCSUBCODE_WPEF: return "WPEF";
-+		case EXCSUBCODE_WPEM: return "WPEM";
-+		}
-+		break;
-+	case EXCCODE_BTDIS: return "BTD";
-+	case EXCCODE_BTE: return "BTE";
-+	case EXCCODE_GSPR: return "GSPR";
-+	case EXCCODE_HVC: return "HVC";
-+	case EXCCODE_GCM:
-+		switch (esubcode) {
-+		case EXCSUBCODE_GCSC: return "GCSC";
-+		case EXCSUBCODE_GCHC: return "GCHC";
-+		}
-+		break;
-+	/*
-+	 * The manual did not mention the EXCCODE_SE case, but print out it
-+	 * nevertheless.
-+	 */
-+	case EXCCODE_SE: return "SE";
 +	}
 +
-+	return "???";
-+}
++	cpu = dev_read_string(dev, "compatible");
++	if (!cpu || size < (strlen(cpu) + 1))
++		return -ENOSPC;
 +
-+asmlinkage void do_exceptions(struct pt_regs *regs)
-+{
-+	unsigned int ecode = FIELD_GET(CSR_ESTAT_EXC, regs->csr_estat);
-+	unsigned int esubcode = FIELD_GET(CSR_ESTAT_ESUBCODE, regs->csr_estat);
++	strcpy(buf, cpu);
 +
-+	printf("Unhandled exception: %s\n", humanize_exc_name(ecode, esubcode));
-+
-+	printf("ERA: " REG_FMT " ra: " REG_FMT "\n",
-+	       regs->csr_era, regs->regs[1]);
-+	/* Print relocation adjustments, but only if gd is initialized */
-+	if (gd && gd->flags & GD_FLG_RELOC)
-+		printf("ERA: " REG_FMT " ra: " REG_FMT " reloc adjusted\n",
-+		       regs->csr_era - gd->reloc_off, regs->regs[1] - gd->reloc_off);
-+
-+	printf("CRMD: " REG_FMT "\n", regs->csr_crmd);
-+	if (ecode >= EXCCODE_TLBL && ecode <= EXCCODE_ALE)
-+		printf("BADV: " REG_FMT "\n", regs->csr_badvaddr);
-+
-+	printf("\n");
-+
-+#if IS_ENABLED(CONFIG_SHOW_REGS)
-+	show_regs(regs);
-+#endif
-+
-+	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-+		show_backtrace(regs);
-+
-+	panic("\n");
-+}
-+
-+int interrupt_init(void)
-+{
 +	return 0;
 +}
 +
-+/*
-+ * enable interrupts
-+ */
-+void enable_interrupts(void)
++static int loongarch_cpu_get_info(const struct udevice *dev, struct cpu_info *info)
 +{
-+}
++	int ret;
++	struct clk clk;
 +
-+/*
-+ * disable interrupts
-+ */
-+int disable_interrupts(void)
-+{
++	/* First try getting the frequency from the assigned clock */
++	ret = clk_get_by_index((struct udevice *)dev, 0, &clk);
++	if (!ret) {
++		ret = clk_get_rate(&clk);
++		if (!IS_ERR_VALUE(ret))
++			info->cpu_freq = ret;
++	}
++
++	if (!info->cpu_freq)
++		dev_read_u32(dev, "clock-frequency", (u32 *)&info->cpu_freq);
++
++	if (read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_PAGING)
++		info->features |= BIT(CPU_FEAT_MMU);
++
++	if (read_cpucfg(LOONGARCH_CPUCFG16) & CPUCFG16_L1_IUPRE)
++		info->features |= BIT(CPU_FEAT_L1_CACHE);
++
 +	return 0;
 +}
++
++static int loongarch_cpu_get_count(const struct udevice *dev)
++{
++	ofnode node;
++	int num = 0;
++
++	ofnode_for_each_subnode(node, dev_ofnode(dev->parent)) {
++		const char *device_type;
++
++		/* skip if core is marked as not available in the device tree */
++		if (!ofnode_is_enabled(node))
++			continue;
++
++		device_type = ofnode_read_string(node, "device_type");
++		if (!device_type)
++			continue;
++		if (strcmp(device_type, "cpu") == 0)
++			num++;
++	}
++
++	return num;
++}
++
++static int loongarch_cpu_bind(struct udevice *dev)
++{
++	struct cpu_plat *plat = dev_get_parent_plat(dev);
++
++	plat->cpu_id = dev_read_addr(dev);
++
++	return 0;
++}
++
++static int loongarch_cpu_probe(struct udevice *dev)
++{
++	int ret = 0;
++	struct clk clk;
++
++	/* Get a clock if it exists */
++	ret = clk_get_by_index(dev, 0, &clk);
++	if (ret)
++		return 0;
++
++	ret = clk_enable(&clk);
++	if (ret == -ENOSYS)
++		return 0;
++	else
++		return ret;
++}
++
++static const struct cpu_ops loongarch_cpu_ops = {
++	.get_desc	= loongarch_cpu_get_desc,
++	.get_info	= loongarch_cpu_get_info,
++	.get_count	= loongarch_cpu_get_count,
++};
++
++static const struct udevice_id loongarch_cpu_ids[] = {
++	{ .compatible = "loongarch,Loongson-3A5000" }, /* From QEMU, undocumented */
++	{ .compatible = "loongson,la264" },
++	{ .compatible = "loongson,la364" },
++	{ }
++};
++
++U_BOOT_DRIVER(loongarch_cpu) = {
++	.name = "loongarch_cpu",
++	.id = UCLASS_CPU,
++	.of_match = loongarch_cpu_ids,
++	.bind = loongarch_cpu_bind,
++	.probe = loongarch_cpu_probe,
++	.ops = &loongarch_cpu_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
 -- 
 2.55.0
 
