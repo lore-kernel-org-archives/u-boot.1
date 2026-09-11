@@ -1,95 +1,97 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB944C88E45
-	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 01:07:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D850CC88E50
+	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 01:07:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B56674080A;
-	Sat, 12 Sep 2026 01:07:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 95D976070D;
+	Sat, 12 Sep 2026 01:07:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2LQLgrwB95ec; Sat, 12 Sep 2026 01:07:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org C5CFF407F4
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789175256;
-	b=faa8DUemIVdOUIk3DFwK3eg5A6uEYwpr52+ds3Z9vlfrOKxyQoJjyRP8xg+Ybe8sHe3N
-	 89lqhDZwQs+hgsJfPvT1GH1FqdfluZiySHKwdhB7g5KdS+FMucbqoL5QORn5dxrtSqwyz
-	 Z4H0Bkx8hUNoLHjBXEEIm2o04fRxO6msMkGQb/qRVYVCwGxGKlvC8xg5OZk1Z0RMe7+HE
-	 DFxI3V6GSp6RX0vOJ84/ZARbA+Gn+KWSaXwomrywIi8peU5Lqjc76rj2EWPDJa7lb+4Gv
-	 wVr9hlXS2GH01efbr9/1Rko8TpCJy53E+m0AT65m0+ZauG5seRba0dkvi0cUFNZ8Zmg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Rz72IkRsKKW7; Sat, 12 Sep 2026 01:07:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 70E2360706
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789175258;
+	b=IVAjRaqtcNj9fKQv+Qj/XCzCEZGP/ibwitjQhJpnvfNtE0yiQN1kD1PdNEbA5j1waUVA
+	 ZQpFlt98UtT1NFWuPhsCVmwMbXfy0aucdTfnWJ3NB74rz9TUCnReb127E7Ikb/p8DOqwR
+	 lN7MJQXWq4hzl2qyNLqbME6OSAp9jU01ekr0UCo+TLOe1wWcMUN+Yx3WxtzU1eT206y6a
+	 sG4R+hNqdVucRSeBZPEFwYReJUXF7B/u6SjLlQ4T6xqijSZzDP9Vxk9Q2XovIJWtN7AiJ
+	 w93dysXRUxSH4UkMTI1ARefmsbqt/tT3mOaNICtjj42kI34sfc5bf9Em9UseTtGbHIg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789175256;
+	c=relaxed/relaxed; t=1789175258;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=FO7OGW/+YltbVDqMA8zRlcxsAVGZodgoOGNpNUTVLKQ=;
-	b=I1C6o45o837D1HdVc46AJiZUrMHfRleKh8+4ooJMooV3P7b2l+6GFvlf+ZtQuQE9CsE5
-	 hWWYltAosRyi9E2EwKLgLEVZbr+3O3ZvYDB4tOnCC3dhjNWuzZ8PFxu2b3ARo86nUkWat
-	 QRqmBvjgvFZXBQ0y1JpqwhDp8fyboTQQ0f0h5GBpzjJZ2dkH+n7MkjRaxTnA9LWqdOdCr
-	 Xahvdq4XmvPlBanPE+3Q9DPTRnwejxj4xTO3i+qtFgsp76wAbx+AHi3Zc5HUoLpUMtOIh
-	 68XmzQ8EPAkiX/lxux2xJfsYLyT5NgDqKxdYc7/7Iwkq4SmISbGWEt6d2SjeyAPHlog==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=6ONUAMiiDwgZlzQCsk+LqbFGPjs2fjzY+5uk43Eb4TU=;
+	b=dXcGBxBtoq8V4t99rx0Ces55f2F6mx/8mtIhL0nkFRIsXhZ6nuRO2HI3WrlQknpl9dv0
+	 /0RJ+7JUGgjoQ4VCYU4mZulIM0FzgEzDQEf0gRCMfZRZiy7Sq4yme1ceCb+oXen+yLdsm
+	 6j8ptBsf4ZmNtss5ZttMZQtefINtgMTLFhLu4Rh4Pr14HXj1jCrFhBS/t0OxXwdc7HMxS
+	 nyacn5SexCtLUPDDH2mTuvi6RTkzr3erMfcWGbUnw09tcenCmTh5VeNvkXE607vX8ReSd
+	 24lfyZbFnhwywC3RrMtuCPOANLScrz1tCi+bLn4Oyv6pjQAU/479PMdiQyoH+ExVmCw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789175256;
-	bh=FO7OGW/+YltbVDqMA8zRlcxsAVGZodgoOGNpNUTVLKQ=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=Uj5Oi6drBCRXPjvV/v8fm+sLbxCpqYsDHtJstWRPCFuRS5cyv4JdNggzWVS7lJ7qf
-	 tZnjzkP3PPfeMsgLRRWbs9WpcGrSkzZ9t2VzDrz1N9MnUvO02wIZ+FQOV1BPJeFxLM
-	 z5wJNKxET+1R/yavi5wXFTIDEAgsJcmiY5rlWIpgQX+nXARlDM+tyJ4oWMXeE5TU4L
-	 X1s7CX0KkFqiRgWxTd7ZhFvy/z3gKrbuLk7raTFySwSH0OJcs4OSmTtAZ6VKgOpYiX
-	 qS+g/yQCYdL7XyJLfshqTGtPDw276I2NZe5OvP3DVRidWqr6a6nqx1bQTIFyWQnIDr
-	 AzSuuw15MhNKg==
+	d=lists.u-boot-project.org; s=default; t=1789175258;
+	bh=6ONUAMiiDwgZlzQCsk+LqbFGPjs2fjzY+5uk43Eb4TU=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=q0Q28bf47hqaLnFwd4UoaFmpJrnI04J9/TVMpe3NQAxRAElsUbdxi6/W69CWzhVyd
+	 u5dFk05DBZjufCMf/vo4GqmCCBJtrHuW1GjGziOSDw5DACneNCrsuKMz/Vuj8RPpif
+	 ElGdYPwnH4Ix4nJUvvvksWtmQ1a1q2O5HkUl+iCQNsU4o5FMAboqSubfJsKUw7gAVI
+	 oDkp6QZN8bUuIphW9aDPAyyv7R46tibDDLAyIMEeiDztYYvjc68px+PB64zwXJcyro
+	 Z0LOBj/Yw41NCEM+FNUdtzF31YlWaV5rE8nDG4yXNzR9zydXQQH+0bwR9SJe5X29xs
+	 fExULFLuxbw2g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C5CFF407F4;
-	Sat, 12 Sep 2026 01:07:36 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 70E2360706;
+	Sat, 12 Sep 2026 01:07:38 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 1157F2E3
+ by lists1.osuosl.org (Postfix) with ESMTP id 635A0255
  for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 18:25:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id F321580EF4
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 18:25:20 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 49ABA80EC8
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 18:25:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ll-zMviU0IwU for <u-boot@lists.u-boot-project.org>;
+ id olZHNrcpelwK for <u-boot@lists.u-boot-project.org>;
  Fri, 11 Sep 2026 18:25:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 3F15980EC8
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 3EBF380EC0
 Authentication-Results: smtp1.osuosl.org; arc=none
  smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789151120;
- b=GJ9cor5FM/4fDXgD+0XbyGi7220pXHgFR7m6lTQfBpNSqqAOqjnPRR2meqWq19e0BMX/
- GLC8FP59F2yA+peDyxVN9OJNiC014lUenR66myjWNbOEGNqBDg1MrYeHU4sq7ty6d3rc6
- XFzczXGzHF0eZg+RcMpKLF7pOkql/hgkJgLvhaMrY8ByymldZ6uQ7xFQNHwPDp8Gk4wY0
- 92bYqTkhLsDmUKv+lSknxoPjjGQ3mUiNrOxZcGxivAfaY4Z3N7IpenfvFEZyMcrOzXnS6
- 2SldKQrLzt7QmxF0Vy+OJHOnS406qUrBCS1FnD6H3O7/GSNmGKv/jeGrhX076JL7tFw==
+ b=Cs3oTSImDYrCEGNqDr/NYobWmWeNU4D9ZXz9KVxi4GD+oEu8Iok1ip05U33iLCOwMH0l
+ GveCO2xyxfCTJPH6e/2E5tfq5y+dsDGJH8kUOnV90+5qggA1KwmVl1pGjOJL18W9KAgrF
+ tS9w/IRvcwEfDKJA62vd0vH4cHBQ7xdZZZ8GaGrBtXiXkmmdkWKw/tEgjsmE/6dHqqK6c
+ qcOGNXWVAu3aIWPufRIIsYDe4SGvoTgE4ivxiZVTBnnmmIQb7a1kkRpZjlJOR8UPr4GGV
+ mqzTfpmqEtfEjx8LymTGdxukxaLNXNIShgbxL11vxoQCf+PEijuX4m15pyHkO+pBiow==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1789151120;
- h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Subject:
- Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
- X-Developer-Key:X-Endpoint-Received:X-Original-From:Reply-To;
- bh=FO7OGW/+YltbVDqMA8zRlcxsAVGZodgoOGNpNUTVLKQ=;
- b=MzQ3hSZ7PqaVKoD/8f2z8NCgAJS04p+xQwv9VqhdBfuOlXuuO+MR1FGggvjS2nh06jQS
- Chx+EMAGjzrMeq+DKyoUn7GnycyJFScHqQ8sn/bAz8tMNk8YgqMdrm7W8TCfpwmbBgcFV
- UtuHIObDV54qM0jNV13b9T+x8pn5AnQ+frUgjtt09mFcyL2nGo+hdiCenzpiNaF0QgOeD
- jb40iLF+EQb7PB7oZCqSzM48ypQOsQxUAWLgby+6lRC/+FfUnYYLRJPJIRr7qonANFG22
- lPfX5P3uwmxORfNcGIAdmORfDsIYI/WOvcQjRnzNcdn1JOUzCjRlEuL77uTWGrBYcEw==
+ h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+ X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+ X-Original-From:Reply-To;
+ bh=6ONUAMiiDwgZlzQCsk+LqbFGPjs2fjzY+5uk43Eb4TU=;
+ b=pQCaN8oAAlWXKUHz4XbazbdsjLf0Ejqi4QQ5MvJVqBpCMx7l7JSvsy6K3WxLvKGsGCEW
+ Fo1FNXrHnjpvQV1L94c7lqO1gHeGTZp/2Cn04rnm7ngzXO4VXwQ/Wq84Y+0nPsSG+zlTU
+ m/dlStggzwwd9dJPGGqNLaWbsGUPs0pzIco8KSYg9vWjSeRM7uEB2+k1okQ2VVHfpT+mB
+ UbeA7PVqHDYYlw9idEu7eH117myQ/N02dlXqPiU41tsmH866PtQtR4J9KG5mUQGNxhvNC
+ DYY6u+FHuiSDNkRzOs2ZBWn2RFc3OysqQMnJiCn3ynAN5bpBTUVP2GKD7a5bH5gu6lA==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=kernel.org; 
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b="V9/4t3T3"; 
+ header.s=k20201202 header.b="j8Rxh/Im"; 
  arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
@@ -99,42 +101,40 @@ Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=V9/4t3T3
+ header.a=rsa-sha256 header.s=k20201202 header.b=j8Rxh/Im
 Received: from tor.source.kernel.org (tor.source.kernel.org
  [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3F15980EC8
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3EBF380EC0
  for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 18:25:19 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id CC5F060008;
+ by tor.source.kernel.org (Postfix) with ESMTP id EF2D2600AA;
  Fri, 11 Sep 2026 18:25:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 83029C2BCF4;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A6B56C2BCB8;
  Fri, 11 Sep 2026 18:25:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1789151118;
- bh=yr4RpxFK0MfMd0wrVuxfMWoV2a6Qx0RLtTf3y4cEM0w=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=V9/4t3T3keTFJLx6Co9lXYXYWDw25QMTmSR0Byr5MfmTbGWawzdebNWwWyx6m709s
- UWncXBjJHZbUKZaruNhu9rySo+z/goUPHdhQJuwrkuEe7oTcq089A7gbfDAc9ezHVl
- JHsn1/ich15trUuqCcH/0x6LCEzhpUtY+M6r8J22dyWOEPE3YvJbNe6q2f4HUPc8gl
- EPrDLsyk4/20RnJ1NE+5ribHwZeSGnWeQn322msGzCGjwdtHJwgvuMeMrkW+m12PR2
- u/B/xzsedpgc2eRlQvuvHOrfWbIcMfZKqI61goNUs/TyGD/1CmQTOHwb7qEeGE7RR5
- QgzEox/xcW36g==
+ bh=biy5clAMKB6KVjGAY4OYCpVPehZ4FNgvgkaV+qjHEl8=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=j8Rxh/Imvi7Lkpt01ZbIUbFY7fawWSmBZbeiPwPF/KVIVuoZPLfO3+qHQQZSAkUOK
+ k/Br63lJVFjrPKnBMoTjBr9yKiQ5JJdd7fHjtKickQLIWmyQ61RRe2uFEL/Dxjy18e
+ jKnDVDFVlHtmWDRntzmZPyj0CWf1WswY7/p5Dvq1dHMXJO6XLwzL8yRdFhdGdMRtAb
+ zahmesxTtvVCFxwxfKJlT4e0k5mKPBFdckJmgNEgXjq89Lx5+nR8W17VcT4f0x2CcB
+ JMn6VokJMKQhggurvoqrzorf8DcV++kn7TtupCGNQ9lLTPjc1JXDwRaWRilhJuTYJ1
+ QJvyph7xxV7Vg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 5A2CEC88E45;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 8BE06C88E59;
  Fri, 11 Sep 2026 18:25:18 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Subject: [PATCH u-boot v2 0/3] lib: qrcodegen: import Nayuki QR Code generator
-Date: Fri, 11 Sep 2026 20:25:14 +0200
-Message-Id: <20260911-b4-lib-qrcode-v2-0-c5291fb7c646@protonmail.com>
+Date: Fri, 11 Sep 2026 20:25:16 +0200
+Subject: [PATCH u-boot v2 2/3] lib: qrcodegen: configurable maximum QR code
+ version
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/12NwQ6CMBBEf4Xs2TUt2gY8+R+GA21XqQEWWyAaw
- r8L9ebxTWbmLRApeIpwyRYINPvoud8gP2Rgm7p/EHq3MeQi10JLieaMrTf4CpYdYa0sFSXp4l4
- o2DZDoLt/p78bTGiYR6h+eZzMk+y4n+3NxseRwyeJZ5n6yVFK8eeYJQp0J+2MFkrZUl2HwCP3X
- e3bo+UOqnVdv9YxPDjJAAAA
-X-Change-ID: 20260611-b4-lib-qrcode-a5ce89e68f85
+Message-Id: <20260911-b4-lib-qrcode-v2-2-c5291fb7c646@protonmail.com>
+References: <20260911-b4-lib-qrcode-v2-0-c5291fb7c646@protonmail.com>
+In-Reply-To: <20260911-b4-lib-qrcode-v2-0-c5291fb7c646@protonmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
@@ -149,11 +149,11 @@ Cc: Tom Rini <trini@konsulko.com>,
  David Heidelberg <david@ixit.cz>, Petr Pavlata <petr@acrux.cz>, 
  Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789151116; l=1960;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789151116; l=2578;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=yr4RpxFK0MfMd0wrVuxfMWoV2a6Qx0RLtTf3y4cEM0w=;
- b=3OvYD6ozwpEcp11dvjtWCv+x15YW5hwFtWAfayoy15pbBk8Gntv7RqEIcYf4MjnfEdFtgihMy
- gIVZOb0zPFGDwQObRO5xnc+/CK9n74x/1MXJT9B9PgjBpei6sXhzZ5B
+ bh=KEFc0IGNdnHH/KW2Az/zDEUde8UYpqr6m3aX1epjazY=;
+ b=q1iZiov3pZ3HpjPlrDb+PVoTZ8ipcu7hmGQFjqu2L6p+737beinVvfFl3qAdm5YdV4Dy3vMeT
+ yvZIdbMTgRzBnacrO4GKSZrTSDYs5W6hdTxD2a413oQDLxA3bLZeolf
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -174,54 +174,72 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Reply-To: petr.hodina@protonmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a small QR code generator library so U-Boot boards can encode
-arbitrary text or binary into a QR symbol. Main use cases include
-displaying URLs, pairing tokens, serial numbers or
-self-diagnostic state from the bootloader (e.g. during porting to a
-new mobile device with no serial console or usb peripheral working).
+From: Petr Hodina <petr.hodina@protonmail.com>
 
-Optionally apply gzip compression for the QR code payload.
+Add CONFIG_LIB_QRCODE_MAX_VERSION (int, range 1..40, default 40) so
+callers can cap the QR code "version" the library is built to handle.
 
-Three patches:
+The version determines both the maximum payload capacity and the
+static scratch-buffer size demanded of callers: each buffer is
+qrcodegen_BUFFER_LEN_FOR_VERSION(N) bytes (~370 B at N=20, ~810 B at
+N=30, ~1430 B at N=40), and callers typically need two of them.
 
-1. Verbatim import of Nayuki's public-domain / MIT-licensed C QR Code
-   generator (qrcodegen.{h,c}) under CONFIG_LIB_QRCODE. No code
-   changes and the only adjustments are SPDX header, swapping <assert.h>
-   for U-Boot's <log.h>.
-
-2. CONFIG_LIB_QRCODE_MAX_VERSION (int, 1..40, default 40) so callers
-   can cap the maximum QR version. The version trades payload capacity for
-   smaller static scratch buffers.
-
-3. CONFIG_LIB_QRCODE_GZIP (bool, depends on GZIP_COMPRESSED) and a
-   helper qrcodegen_encodeBinaryCompressed(). Perpends four-byte "QRGZ"
-   magic header so the scanner side can detect and decompress.
+The default of 40 matches upstream Nayuki, so no existing callers
+need to change.
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
-Changes in v2:
-- No code or commit changes; correct the cover letter's To: address.
-  v1 was mistakenly sent to the old lists.denx.de address instead of
-  the current u-boot@lists.u-boot-project.org.
+ include/qrcodegen.h |  4 ++++
+ lib/Kconfig         | 18 ++++++++++++++++++
+ 2 files changed, 22 insertions(+)
 
----
-Petr Hodina (3):
-      lib: qrcodegen: Import Nayuki QR Code generator library
-      lib: qrcodegen: configurable maximum QR code version
-      lib: qrcodegen: optional gzip pre-compression of payloads
+diff --git a/include/qrcodegen.h b/include/qrcodegen.h
+index 6f87b76bb2a..b67b77a30fe 100644
+--- a/include/qrcodegen.h
++++ b/include/qrcodegen.h
+@@ -134,7 +134,11 @@ struct qrcodegen_Segment {
+ /*---- Macro constants and functions ----*/
+ 
+ #define qrcodegen_VERSION_MIN   1  // The minimum version number supported in the QR Code Model 2 standard
++#ifdef CONFIG_LIB_QRCODE_MAX_VERSION
++#define qrcodegen_VERSION_MAX  CONFIG_LIB_QRCODE_MAX_VERSION
++#else
+ #define qrcodegen_VERSION_MAX  40  // The maximum version number supported in the QR Code Model 2 standard
++#endif
+ 
+ // Calculates the number of bytes needed to store any QR Code up to and including the given version number,
+ // as a compile-time constant. For example, 'uint8_t buffer[qrcodegen_BUFFER_LEN_FOR_VERSION(25)];'
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 18311276443..5f37a07e512 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -303,6 +303,24 @@ config LIB_QRCODE
+ 
+ 	  Imported from https://github.com/nayuki/QR-Code-generator
+ 
++config LIB_QRCODE_MAX_VERSION
++	int "Maximum QR code version supported (1..40)"
++	depends on LIB_QRCODE
++	range 1 40
++	default 40
++	help
++	  Maximum QR code "version" the library is built to support, in
++	  the range 1..40. The version determines both the maximum payload
++	  capacity and the static scratch-buffer size demanded of callers:
++
++	    qrcodegen_BUFFER_LEN_FOR_VERSION(N) bytes per buffer,
++	    growing quadratically (N=20 -> ~370 B, N=30 -> ~810 B,
++	    N=40 -> ~1430 B per buffer; callers typically need two).
++
++	  Lower this if you only need to encode short payloads such as
++	  pairing tokens or short URLs and want to reclaim the static
++	  buffer footprint. The default of 40 matches upstream Nayuki.
++
+ choice
+ 	prompt "Pseudo-random library support type"
+ 	depends on NET_RANDOM_ETHADDR || RANDOM_UUID || CMD_UUID || \
 
- include/qrcodegen.h  |  407 ++++++++++++++++++++
- lib/Kconfig          |   44 +++
- lib/Makefile         |    2 +
- lib/qrcodegen.c      | 1034 ++++++++++++++++++++++++++++++++++++++++++++++++++
- lib/qrcodegen_gzip.c |   45 +++
- 5 files changed, 1532 insertions(+)
----
-base-commit: ece349ade2973e220f524ce59e59711cc919263f
-change-id: 20260611-b4-lib-qrcode-a5ce89e68f85
-
-Best regards,
---  
-Petr Hodina <petr.hodina@protonmail.com>
+-- 
+2.55.0
 
 
