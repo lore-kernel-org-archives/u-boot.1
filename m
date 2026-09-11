@@ -1,169 +1,243 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 533EDC88E4A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 10:09:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6229EC88E4C
+	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 10:34:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 123058122F;
-	Fri, 11 Sep 2026 10:09:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 04EE1402A2;
+	Fri, 11 Sep 2026 10:34:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oSHOexHckkkf; Fri, 11 Sep 2026 10:09:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org AE38481224
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789121392;
-	b=cQlDdgKoin20P+0aQra2d791C02pNPwEOE90osAYQwkVlbsp65+2H4L15FxJJALHq0Xv
-	 7KLAzAWjgcq02zi0mDzU17dKZP3d6YeZpYnrAIOZdsMpbsA3o/qdA6fhSAYg3JjFnviW4
-	 L0nSrUHX2uBIYibfhAX7jRVzyO9JBj7m1L6xJj0V7e6ZoG50RmQWvqpUtDYP98t8Tnqjh
-	 EfpS6rr+ZxDqnJ/Goskk4H7g9E+fY4EZQDAsehTfYXjbmyT2G+g9Xu5fHmcwgr5YBRF3x
-	 EA4Mg85T9WgU9qLB3TquPudD2IN2Fg2jh9h7Tywi3a3J0fXu+NyDHDM93q3CSmFN+eg==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789121392;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qcju7YZz8dHg; Fri, 11 Sep 2026 10:34:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org CF6AC40302
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789122878;
+	b=aRKnEvNd8XRlGellpdpsbhpGx0DBlyeiHeok0l9SNBQcWmYtX+pSGNRaV79fkT/S6xDt
+	 3FZ8gFNOtsfmOD+0+2XihP0eiinxZFIj/+gQxDILZjuVsba1nJ8Fha3JJe9FxTdniRRU1
+	 Ax1XakqAFUitNCl3Be/8QFSJd4Btf6Mdk7jkeqClcZjJS70MntJvbffE2c5K4AMuxp2Zw
+	 MXSHLazQKXmNXYxt8M8D2jVHcxoLJ7pdGO5xLH0AFZOyFQeoLAez10J9ZFx4tU5QlR/Xt
+	 2RPbQCxliPLMo4paxvGRkaCCS5RFQ+RoAqawmvj+t1J0ImOOlaErlfu31+TIDFxr4iA==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1789122878;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Content-Language:To:Cc:From:Subject:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=Ft5ECzuUhSkzh7d3FkbvLS3Gp0Rg3vG4PJY5BBoQ7fk=;
-	b=P1fJ/yL1y39Q85p0s4pMvKsjmHPL9mfAHMfJC2M/b84piWI00WTLbZ9eaGhr7wEC0+BM
-	 UPfpKzZ7307WxOA7grJgn3/UqXzcX3OcPEyfLMIZ7p/SKxL7nwKZ2uSonAa/B/7a/LCEK
-	 Y8FFbahLwG5quZ0TxBQ2q7KIbwMoNQZR6xv9Du+0OHPTATqUpjLD/+H1OTs04pbMCd96y
-	 7A+VFZTQ5G2iTQy9IX2keOJCE0nLzV3KiyfSMSDFqcOxSRl9zwQRw8FUfgTn9vl9e75pK
-	 uQADgaf8sXSgGWY9v8+jw6FFLHTY8qOO4sb0VPiabPo2pLwky2fWP9So7d4GHPwNlmA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=jhNa2k2GCMdJ/2K0U+l1Cq86fgljwX3KZDrGtktNAu4=;
+	b=oj9b2Leovfeo5rarsIbFQTUoF9/LJdUg1XlFNpmIx8Fe1xxFt9QSQaSTqloWj1TSt7Ay
+	 ZJ9Z8NSx8u+2iNjBeHDd3OXgHqCzStA67iihvKRCVfq+XapEVi3AMTCiToUoQWKfgd/FT
+	 VL8T/LGs8APSNYklan2MtZX2xjlT+5NBVVXKaBBPoE+XoO6qkMZldHrLyL0Yr7EcP+8+i
+	 JDv6B2LQnEsD6B87WkIoI/OQNXptkIAvkGavMRC55fzVtUDG8a5dBbNlrueMP3Tl0f7qY
+	 im2w6f0FgYyVBucYRpx0s210n8066VFfGw3MnHKunPKcVHZif/BvDxGXrzkqZVD5UPw==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; dmarc=pass header.from=amd.com;
+	dkim=pass header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=QsbPXdPf;
+	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789121392;
-	bh=Ft5ECzuUhSkzh7d3FkbvLS3Gp0Rg3vG4PJY5BBoQ7fk=;
-	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=bDqnrH7xWaHMORq4oRhT5343AfTHI39f0QddloJTx15fazCwkcShCiRlxqaglIdqA
-	 fsI2okv+6+LJfLqnq5hZXzlsj9LbfiNWpnnPTi9xOiChTb2HhgpEZSA4hdjBJlRWGr
-	 hUGluuT0cMszAlhEJk0Fak2BBXsWUJB+UM8MVEEabGmTE7ADkjg4XkDjx/3wAAN70C
-	 9sziJJyIEAfROL8yYRPpYosR/pxNYDBn9x36lcQwK5pvKp27n4Nq7DRHic7ndxabVm
-	 qVvPuOKy9GEdtF+3aicIO4P0vKGzP3yYARDC8uTfPqOKZzf42M5q54wjbDp5PrWYGJ
-	 hqA8TQ7jHZMag==
+	d=lists.u-boot-project.org; s=default; t=1789122877;
+	bh=jhNa2k2GCMdJ/2K0U+l1Cq86fgljwX3KZDrGtktNAu4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=FHeMNNFlkM9NPaVeABGEdlKuAgyMiyBNty+l2ElTmtVv79PmsEvEfVa14sHqoNQuW
+	 ptvhT9XkdJLHL4DzQT23dCvjUQXyyWdNPEem1V0WVNdxrYjO4rASvqfqrNaMPChv2c
+	 rwnsIxjJvSwJPjZUAsILET+HWirAU1t6qTBRg8mSN3h1VhB8tEA0YlsjkrDuHUrOAM
+	 x7SwKZy7EoA4TxpIw706K2aB4Bz5uyQwd7TR8AHrrme43B/tm0Gq80i88J1qJEXbV/
+	 ITM9bca6f2AHrmbe7Dylg0FLMKBOrhAa0pFhfxsFT6bvzXXoSmzBrFYArAECvLyz3n
+	 Xoi1FkWO8oPFg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AE38481224;
-	Fri, 11 Sep 2026 10:09:52 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id B1F3E701
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:09:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CF6AC40302;
+	Fri, 11 Sep 2026 10:34:37 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 254FA32F
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:34:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A2AF160BE0
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:09:51 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 16EA940322
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:34:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TeZX95Lp9a9w for <u-boot@lists.u-boot-project.org>;
- Fri, 11 Sep 2026 10:09:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org D323A605ED
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::62f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789121390;
- b=bhbPF3N4ui/H7oLIoAkZtcHvcqU3EbY/vknJPf4ENjjEhsZbPvGwYsZGZIdP/wHIuCgd
- qEiPnIrWuLbcI7gcsWwmdZD6aEbN1fhUFEidi0K9iz/CWbicrp2FDBr7I2x6qzQg2WTLv
- sW3/Sc7nrx8LIiCXIVji7DDpbz/YyGU0nJBvsRAIgaKQSIVi1pn3WbPIzAIMSQEZ4s36E
- Fpg6DjJ4ZDSlpx/3sQFMK2dJVbb/mNNT/YnQIOjZLPtnxXhMUrWJlJHy9LDu5l5A4BJVe
- JDKi8A2lcPS/+cWuH3VJwnuJvZcB0r9ufQhCDbI9tmOqbnm5mAiW5thYg9a5Icy3+ZQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789121390;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
- MIME-Version:User-Agent:Content-Language:To:Cc:From:Subject:
- Content-Type:Content-Transfer-Encoding;
- bh=Ft5ECzuUhSkzh7d3FkbvLS3Gp0Rg3vG4PJY5BBoQ7fk=;
- b=ZTVlEOHN9Qmuyn+w+wg9zN00VA9/3hpSAxIJWAssfcE43RhJ6fY1metPYLpHJehoGI7W
- fW+jLur/NfkhNgv2qrkh99T60Sm8AO3GRXERlnv14E57hz4GJCVj8oAIVamXlAdXiTF6u
- V2U9rAZjvrJwjEmyOB1TSYPJqSphT3YKFdPgo22sHDfYzFI8NgyqKTXf6soa1tSjk8Vyd
- +tWseikQa5PVpjVauFFWNKZJphVpr10asplSz7o/G12QvVOYZCnoBRkO+ZuI9ZnWisDcr
- P/Gr73V1IT4hpghjwyQHGTCimbFuByDBqCUoyUIJ5+WwsI5wvpa1EtEtc71ohhuHfIQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=none header.from=monstr.eu; 
- dkim=pass header.d=monstr-eu.20251104.gappssmtp.com
- header.i=@monstr-eu.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=iJi5QB0s; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::62f"
-Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
- envelope-from=monstr@monstr.eu; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=monstr-eu.20251104.gappssmtp.com
- header.i=@monstr-eu.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=iJi5QB0s
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D323A605ED
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:09:48 +0000 (UTC)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-c25b661d37dso118703166b.0
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 03:09:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20251104.gappssmtp.com; s=20251104; t=1789121386; x=1789726186;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:subject:from:cc:to
- :content-language:user-agent:mime-version:date:message-id:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=Ft5ECzuUhSkzh7d3FkbvLS3Gp0Rg3vG4PJY5BBoQ7fk=;
- b=iJi5QB0sD8AtNoL1lntkJugY4rD443bL1xnsy9wsFDpE9Qdn2LBGyV865FWnQklloy
- iYClCcnZ4QvHs0lJIp7/dl0mj/wyxMjrqY3i3/ou5vFPuNIeyipOYIQziqkeXPo9xs9H
- AHP4vrGi2XpLPjM87JYcDqCPVYj7ZWvUYbhss6nHSa9D//qH1hlB0FZ//2J7VQcsQTJr
- QlW1ugMU7doQoscc8l5q0KiTHYHIgFQnxkrUV249l2QyCJbPofU8DRW5k5L/Ewd6anEC
- LB421CiH1nP5qsF+RVLocxZ8zEA0nnbieDqES70xo4wxl8zZ0aKZPharupUWFmKEb1Av
- pENw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789121386; x=1789726186;
- h=content-transfer-encoding:content-type:subject:from:cc:to
- :content-language:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Ft5ECzuUhSkzh7d3FkbvLS3Gp0Rg3vG4PJY5BBoQ7fk=;
- b=bIYjInzLEVZgkEw8QVIRyWpupWr1edLIuQDFu/LvtzpwYXKNc7IiIqLwfreJs4ZC6Z
- h5A0OMCShsRDdqdi4OPXmAa4VCUsWBx69bdoptBIwj2e6yJH/EJq0FRZJeeFgUEPh2ub
- S+BxcdBcbirwQ0LFo+hFhVSt0BAeSEbPH3BcfXjNK8g+M6hd8x+z/IlwLhdehamgrpnN
- Vzirn4XxkdUBTi1ZuCpr94m2hiN/7atCaPiME9uW17pM8o8BRCgKqfW4iyTj1s75SSPt
- 9ya8T3AYORcpYcwNsmPe4vHPgJa+G88WHAEg6HcKFwwP8DD875vSJG/WqbdLJn13cLsr
- ndbQ==
-X-Gm-Message-State: AFuF++nhqstRgTU2v9yeNiCLqPVAqjzAu9VcJzMqzNk+/JFXv44gJ48S
- lkw7vPEeHwpw1ZkQh3hI7dzNsc8ZuDkst7tlNaVb/pTJhU5htzt8gXdUzhL+21qcGRl/zkis2o+
- P3hxxxwDs
-X-Gm-Gg: AYBFou3F/Cjrjw5bygL4Q+i8OZiK21KvXIZmALZsRV6YAvmWnNsgefste39XD5U9upl
- nh0LdcrnGxu+2PyrVerhJI06SgYs+de3KI8OEhDTUJKjLamozAXu2p5kxfAZCX7/YyrnccyhRSB
- XE+lbCuvBTuNNGF99NjBprmsvJJju6rqEqjl0BlRXnhDfP2DYiukpeDBaSisXK2Ju/2CM6moStb
- vX2gzX1ATeR4s7eHCAwMB8Xv9hWy4k/IMoT5lWCzUB6jX+xtc4QtE0M3GjC8HKb6x1lNClN5E8i
- sN51qB3T1+eqV8j6meFow+vRchkI3WSFO5W6l7ZIplk+BWewDAf81vpzahZ2hPWueXxXk72sbYm
- z8WwLp0StyQ0P4RNwiQqT4HPCoWOLXdzqmpZjycPbc7LHKfJXa5JA5qwdUO3gk4B/pgqnA7j+vY
- n57F+HNsC9JGjJ35fN6BxHFI+VzNyUwyG9514N+CVVaCrPEf7hFoEHpP0ntqeaS5ak0xeijKMCk
- 7ovq9j1VtrdEqXBkea2PyL9m+Eu8QwpgGivFrSuswPeHSA=
-X-Received: by 2002:a17:906:6a28:b0:c25:91bc:ff55 with SMTP id
- a640c23a62f3a-c29667457bcmr160417366b.23.1789121385856; 
- Fri, 11 Sep 2026 03:09:45 -0700 (PDT)
-Received: from [192.168.0.105] (nat-108f.starnet.cz. [109.164.53.108])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c29660da0a1sm63908166b.47.2026.09.11.03.09.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 11 Sep 2026 03:09:45 -0700 (PDT)
-Message-ID: <a0602787-993c-40e0-aa29-08d36142ea6f@monstr.eu>
-Date: Fri, 11 Sep 2026 12:09:44 +0200
-MIME-Version: 1.0
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KO0McVfnn0U1 for <u-boot@lists.u-boot-project.org>;
+ Fri, 11 Sep 2026 10:34:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 64194402A2
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c007::2"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789122874;
+ b=E8Lc/NIMCxE3n42ovLgp7D1ahIHLgM3NEZcsTvGD8oB2BQGJKWwIZVcqPx6bqVNva2xT
+ Qv85VajbzTys3IknNjTfym9mgm07iIh633ZFob8RNjyCDZc9gaDZmLUt/QRJFEQ8N8Luq
+ GCExNzbr4tYmVbqQfdQyIEtzCpglDMiTWVn1dJMT7DE+0PzIxI1USpXmO0mbq52/JsCPm
+ 7u2i8/vdEVsotImkoe1rUiroRaGta5RG6m0eGxb9z3qToNvaY3vcMfBq04FSz6e0om70K
+ HT5ZGiUXlbqL50xks4V9Ok5xkOuVaT86vUo2e1t48oSs27z1go2EMZ/Y7jqZ0VKrkMg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1789122874;
+ h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
+ User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+ X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+ X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+ X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+ X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+ X-MS-Exchange-CrossTenant-UserPrincipalName:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=jhNa2k2GCMdJ/2K0U+l1Cq86fgljwX3KZDrGtktNAu4=;
+ b=U53ShTW3oqZa/OXRTcA9CrQlg4zcnpFMDRlTYifoOTHq2NzXoINH0GxcHh5NzMUTU2Y3
+ 1YSDjAx73tJK0q0tYCaXGUP6rgVb1jvXQ0ASAyhjEYPQutDQQMieKNFf8WSPgIrtUDJTT
+ 4Je/nN/pPti9uUo6GgUQfxiLpJ7KYiLV2/ql0SFSRv79Cl26bENzlvHgGDVXVBZZYmGEm
+ mcGORH39kTomz8UC7cARjMYwvDWjFOKmcncFSq+uXD5PGf5bvOgmipp638bDEWqGVoJ6i
+ C8GQtyvhIcxUZLMi5h3Vkq5AmXd+bZnNDthvoaExy3at2CCD9CELmEwgzJv3dWgAogA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ dmarc=pass header.from=amd.com; 
+ dkim=pass header.d=amd.com header.i=@amd.com header.a=rsa-sha256
+ header.s=selector1 header.b=QsbPXdPf; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c007::2"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c007::2;
+ helo=mw6pr02cu001.outbound.protection.outlook.com;
+ envelope-from=love.kumar@amd.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
+ header.s=selector1 header.b=QsbPXdPf
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c007::2])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 64194402A2
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:34:29 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=uoh4UUqtD3gQl+TfKv5abwkibBK5/gNWEIj8GBWcqDQeXpJ3sjaUl+Tx7IEQSZqAM/mLc/WC4Li5mdp9XOaWa6QjJboEJ97YOnjRf8kmDEpW/zpEK93bGvVlLtbmv2Ua0bZ9aJskGkt41UwgyxwzlGogp0vZsmvV1QHVNma8ru54hW8kUVWEHDXzTfCbhCrJdz4MGzffUDZGnjeX+pbBMwVcbgIZjpx0ajFsfNBP7oAswHip2E/vC1J3c6QU3tU/OUIig3uz6/QFHmCtMm6828AmhVCXYcXPAf9Agp5fFN0w4cw4XJv89YMZ+Afc7BDon1T8fkBr21BDqunokgEDLg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jhNa2k2GCMdJ/2K0U+l1Cq86fgljwX3KZDrGtktNAu4=;
+ b=yemjxSZJn5ojztHFAhdk8In0C6/1Vrl1lmwpczLZtTIoja2foL/qtDXXW1HpfJtPgYWARq0hYrRUgzNoP2XdpV+Ik7Ekcnga7AEMKCWfRgLcRc8jaWbr47jUnfVpOPWq2Kw6nlJZ0HjnPx6TmFo7IarGtHhDpliLcXwzRlSe7zly4EBpLQ+HkT9L6shBEbZfkBBaOuRf2J9Av5LAvDocTnqzD/F22I/+cqWDXI4cPTdSMYpOEmWvtqtCMC097Oe5+r9IZjgG2fS9kosYlQMkZaSxHhc0La0vZelY5V1ecMSP4n4kofkDA1hoQ9ePKfX0FRB5yKqZQsLPy574pkZSjw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jhNa2k2GCMdJ/2K0U+l1Cq86fgljwX3KZDrGtktNAu4=;
+ b=QsbPXdPfd80Hzuv+JmO+zmTLbTNMWl7/fcgZLy3GhV7oZSga7ySmYk+m7ixG0OC8879punk+AOePfXuJAcIrIiOjLcdJk5KuhOwjb1i7IQPKMaUf0LREhVaUI1jLnAV5WV3w9LL3MROL2PAA3SN+sfNHfocTIXynCZxv7QFfz2U=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN9PR12MB5367.namprd12.prod.outlook.com (2603:10b6:408:104::11)
+ by MN2PR12MB4109.namprd12.prod.outlook.com (2603:10b6:208:1d9::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.9; Fri, 11 Sep
+ 2026 10:34:26 +0000
+Received: from BN9PR12MB5367.namprd12.prod.outlook.com
+ ([fe80::68ac:2185:bb07:ae24]) by BN9PR12MB5367.namprd12.prod.outlook.com
+ ([fe80::68ac:2185:bb07:ae24%3]) with mapi id 15.21.0406.007; Fri, 11 Sep 2026
+ 10:34:26 +0000
+Message-ID: <140c9bb9-756a-4000-acd8-a1893cb98801@amd.com>
+Date: Fri, 11 Sep 2026 16:03:39 +0530
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 00/24] usb: dwc3: part 2, make the resynced code work
+To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.u-boot-project.org
+Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org, 
+ michal.simek@amd.com, lukma@denx.de, alchark@flipper.net,
+ jerome.forissier@arm.com, dlechner@baylibre.com, anshuld@ti.com,
+ sjg@chromium.org
+References: <20260824154133.217744-1-anders.roxell@linaro.org>
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
-From: Michal Simek <monstr@monstr.eu>
-Subject: [GIT PULL] amd/xilinx/fpga patches for v2027.01-rc1
+From: Love Kumar <love.kumar@amd.com>
+In-Reply-To: <20260824154133.217744-1-anders.roxell@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PN3PR01CA0032.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:97::22) To BN9PR12MB5367.namprd12.prod.outlook.com
+ (2603:10b6:408:104::11)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN9PR12MB5367:EE_|MN2PR12MB4109:EE_
+X-MS-Office365-Filtering-Correlation-Id: 51d71f7e-5dc7-4444-056f-08df0ff040a0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|7416014|1800799024|366016|23010399003|6133799003|11063799006|3023799007|10067099003|56012099006|5023799004|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: QjFV4VV6VH+HJk3TS70Y97ot0DXwlKUkTYD09lYyP+VLt/oe6wEMQdq5esRnaU2JhgG1f7WMrk2VCls69qY8/s+s2HsrrX7G6+yIsOiCjvHkZU+2Lpc76Zo8jXaXmF6ACtl+u124zAGwQK52kVjY0NlmxlTXPMi4Ol5h6fl/L1H7HX3oVpd3+OZaFJP2PwsEXCoEPaL5VIdfwsHdDpsCcQk1CoNl0lGwfOMR1CsNA5XXcMofxS2M9dbOGHqvgodRJg+HtuShsXdpgLcOT6gecSUe12kUM4Cuanb0HfBzA0eS4+MZemeuqnzhPl0nTI70Ml8xn8dUOM6NDYpq3ssKYjw+6radRj6DkFQXsChbK0HM21yfHJL/63IaWJxd8IrhpiT4DvPngX6U1EEpWsqGM53Baz+AgC+PaJYh42JHll5qAb0ZuOrIvBHRQZwWzufb8eI04XeQ0iRbeef+TN18VF1KWbOOHLf1BFb1XVPCodPLVWr6AuL7pORqUmLllp3nf3UANifIILHqi3e5761j2tJUV5vPLzheuYGynB8Ces1jD3MqArZOvxa3ln47RlynK93tj+Km9TyOQsUs8xcbGkfXBQRQfcLeUU877RJunmqm57Tn2GK7XAXTjq/o+trWqjU/NLO7It0FimP3BEScg/7vp1Jmke+smaRBOtNH52s=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BN9PR12MB5367.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(1800799024)(366016)(23010399003)(6133799003)(11063799006)(3023799007)(10067099003)(56012099006)(5023799004)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ekNsZGlyT2pBd2dqcHVnSDl5ODFVRmNpandPeENMSjV3SGhzbTJDSGZxVUdI?=
+ =?utf-8?B?YUdaT2RYdU5MUlBMNVQ4clU3dDk2SDRsSFo1NEFkRkE0SGhGMk01bFU3dzNR?=
+ =?utf-8?B?QmNUbnVDSldkZUVEdHNsY2NSYWI2K2FFaWJOREtnaTM3SzlPWjVMZTBMMXVK?=
+ =?utf-8?B?bldjZEtJSFhlMDFVdXdnbm5LYmFOZ1FqelFwblhzamkvaXdhVU5WbWJYVkti?=
+ =?utf-8?B?RnF5RWFWbExFbkU1aXQzQjdYMUFyQU1OajJkRjBIU3F2enhCek9zUW1wb0lH?=
+ =?utf-8?B?VE9pQ3VnZnZUVzJsSGQvSDZEOEVvS2kwOHU1WnQ1dVg5RnQ5eTdURTJBUXo5?=
+ =?utf-8?B?RGtZNTYwem40Z0JzVWN3TUpOVkNWRGlOUVpMa2R2TmNNS3QvdlBKSFJvaHo0?=
+ =?utf-8?B?VCtZSTVRSStMUlM0MDZiSHR4VXQ0NWZnNzk5SGwrRTJ4VDltdmNhMFpyWm0z?=
+ =?utf-8?B?OHRVb1NRTmt4THFXZlN3OXI4TnlwY2h2anY5WnFVNXBwMkl3a1M0M0ZpM0cr?=
+ =?utf-8?B?R3FBV1M5WW5ERzY0eEtGeVhrYnZleXNvVWFOWVRCRFpDUlg0cU1jaGFORjhS?=
+ =?utf-8?B?R0Qxa3VycjVMMzBtZElyNFBuMGEySnZpdFJzQjREdUhlbTNtOVVLbEVHTHZp?=
+ =?utf-8?B?VHVBam50UzFsL1NwK0hSQmNMajYreUlkWnM0aVBRanVzSy9ISC9lQTlqRnM2?=
+ =?utf-8?B?U0RZSlg5OWhCVjJZb2ZkNmV3Vk1veHlISU9WQkdKS2h4L1hkdnoySUtuSS9w?=
+ =?utf-8?B?QUplR3FRTElRcThobXlyekhPNTJ3bDdnT0tLc0lINE9PZStIU2V2eFVQcGcx?=
+ =?utf-8?B?VENFY3lYVGtLanBTZUduYTVNenZ6eGYyMGhWQkpua3diMkZDTFhBd3I2ZStG?=
+ =?utf-8?B?UmJUbFNEVFMzaVpuRWUzRWZYQWtYL1F0NmY0UHhjWFFFZkJzWjhqQXRMcmxn?=
+ =?utf-8?B?Q1MwNDZnYTNWUkJXcXUydEQ3d3hZU2ljOGtKTDJHY2JYV3dFd0V5NnIxeU44?=
+ =?utf-8?B?cU4zeGFXaTJENFZNb1AyZmpGa3dwWmdHZlVaR0dmdFlNSFMxS0t2akpqU3NU?=
+ =?utf-8?B?TWZmak16TTdjQkYrbFRwY2doR0hXdWZTeUY3UmZDQzhOOUQzVmJ0OWNhYTY0?=
+ =?utf-8?B?OTFMTWlCQTlNeTQwa0VpNHhLTHR3Qlk0SFh2eUVibDdkRm5meDFiL3psZFl5?=
+ =?utf-8?B?aFExNUd6N1ZiU2htTCtrL3krVE4zdWZpM0VaUmE0dHN3SVUwRW85WEhHTWZy?=
+ =?utf-8?B?QWJqeThmYWo0aXVhaTNIUHlOUXVVOTRqS0NBV2pKT2phSmlYT1pVRDBUTnl6?=
+ =?utf-8?B?NnBjWEVGcSttOWFvNTRqS1ZraVpoTHIwOUZSTSs2b2hCL2tLRHZHbUw1UDNm?=
+ =?utf-8?B?THFlWURnejIxb3d2QktLNnJ0WG16NHVzbzJqYTBYN3JmV0xGZEduYXNrYzkr?=
+ =?utf-8?B?TUFxUThsdE9SaWR6dlNZMXc0cnRycFVqUTB2TTg4TWJnQitaQWFWeHM4Q2ZE?=
+ =?utf-8?B?Q3R2eG1oNi94SkFQNlZObUsvaG5wMkYybHpQSlJrQmkyelJNQmhQVStYWXV6?=
+ =?utf-8?B?bTlZNFhYRzA0cG5oemRyb1V1NXAwM1M3SmoveWNaZ1JJdUZBWmFER2hkdGI4?=
+ =?utf-8?B?VVFpYjc5SU11K2s0blZIR1g5UithbWM5VFpqeTRIM1l1bng0cGZMdU5vTlB1?=
+ =?utf-8?B?eTVQeDNZRWZvc3lLZE8wN0NHbTNRSFZLcUVKMElVajc4QS9yeGc3bHJSYXpo?=
+ =?utf-8?B?bVdtVlY0cnMzanZmekV2RGxTY042Qm9SRGNieHdtWmx6cWVsYWtTQ2owb1By?=
+ =?utf-8?B?dlh5WDMvcjhoZ2hCKzZkL3Urb0JuSFRqQU9SbUU0aWphbjRROE9qNThORGkv?=
+ =?utf-8?B?YUYyT2o5aS96UDlwNU1KZ2ZwMjZST0poV1VMaTYvVkxiNUdBb24vekJIWUg3?=
+ =?utf-8?B?dE9CU0FteHBQQjVsTXRqblBEaDdUL2lKRE8vYVBPbmxZOWxFSlR1bFZ1WGxN?=
+ =?utf-8?B?aTI4aExlYlMxOXVDS0FacHNmTVAwVERxWVZNcWtNTGRveDRlaE9zbG9aaUd3?=
+ =?utf-8?B?U1lPTjM5MEhkZ2daejRPV2tRbmJvMjBWODdqUXNJd0M0djZrcVRjdWs1WFNC?=
+ =?utf-8?B?Wmc5c0JndlFiSHRwUTY0V1ZmTjBoeEw4enBIcWR6TFZDaXNlUDd4L29ibWZ5?=
+ =?utf-8?B?Uk5xL0FCcUFlRHpnYzlZamZhdk80cU1tUVRkM2xOdEJIbTBVWUFreFkyS2Jk?=
+ =?utf-8?B?d2dSM0FvTmRIYzZmSXJWNTcrWTJiaGM5Q1pFQnpMZDY1TXZkOHppd0hrVkd2?=
+ =?utf-8?Q?vQVs1JubQRqT5EafQt?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 51d71f7e-5dc7-4444-056f-08df0ff040a0
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR12MB5367.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 10:34:26.1807 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FTZR03JH8LXRbLWMtrcuEx2yAtxPGtMCY5bSQqpI91Aw/sJql8m9FXgf7vnXj7Dk
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4109
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -177,130 +251,163 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Tom,
+Hi,
 
-please pull these patches to your next branch.
+On 8/24/26 9:11 PM, Anders Roxell wrote:
+> Hi,
+> 
+> This is part two of two. It applies on top of part one [5], which resets
+> the DWC3 driver and imports it up to Linux v6.16. Part one alone breaks
+> the build for every board that enables DWC3. This part adds back the
+> U-Boot glue, the XHCI and UDC updates and the build fixes, so the tree
+> builds and the gadget works again. It builds on Jerome's work [2].
+> 
+> The two parts have to go in together.
+> 
+> The resynced epautoconf matches endpoints on their caps field instead of
+> on their name. Five UDC drivers never filled that in, so each one gets a
+> patch next to its other fixup: at91_udc, atmel_usba_udc, ci_udc, musb-new
+> and mtu3. With those and dwc2, every UDC driver in the tree sets caps.
+> 
+> Build tested one board per driver: every DWC3 glue layer in the tree,
+> dwc2 with and without DM_USB_GADGET, at91_udc, atmel_usba_udc, ci_udc,
+> musb-new and mtu3. 17 boards in total.
+> 
+> DFU is tested on hardware on BeagleBoard-X15, and on BeaglePlay by
+> Anshul. ci_udc is tested on an i.MX93 board with ums. The rest is build
+> tested only.
+> 
+> The branch has both parts [4].
+> 
+> [1] v5: https://lore.kernel.org/u-boot/20260716134305.614278-1-anders.roxell@linaro.org/
+> [2] Jerome's adaptation work: https://lore.kernel.org/all/20251121153812.2076440-1-jerome.forissier@linaro.org/
+> [3] dwc2 prep: https://lore.kernel.org/all/20260703-usb-prep-dwc3-sync-v1-0-1352bc238c9b@kernel.org/
+> [4] https://github.com/roxell/u-boot/tree/usb_dwc3_sync_v7
+> [5] part one, subject: [PATCH v7 00/63] usb: dwc3: part 1, reset and
+>      import from Linux v6.16
+> 
+> v6 -> v7:
+> - Split the series in two. Tom asked for this, so review and iteration
+>    gets easier. Part one is the reset and the imports, part two makes it
+>    work.
+> - No code changes in these 24 patches.
+> - v6 never reached the list in full. My send died in the middle, so the
+>    cover letter and the last patches went missing.
+> 
+> v5 -> v6:
+> - Split the "add helpers" patch into a dm patch and a usb phy patch.
+>    Mattijs asked for this.
+> - Kept the U-Boot dwc3 Makefile instead of the kernel one. This is what
+>    Marek meant with glue drivers that are never compiled or used.
+> - Brought back samsung_usb_phy.c in an own commit. The restore commit
+>    deleted it and nothing added it back, so odroid-xu3 lost its USB 3.0
+>    phy setup.
+> - Stopped moving functions around in dwc3 gadget.c. Where a function
+>    still had to move, the commit message now says why. Mattijs said the
+>    last patches were hard to review because of this.
+> - Split "fix up musb-new and mtu3" and "fix up xhci and cdns3" into one
+>    patch per controller. David asked for this.
+> - Set endpoint capabilities in at91_udc, atmel_usba_udc, ci_udc, musb-new
+>    and mtu3. Mattijs asked for this on v4, after the VIM3 fastboot
+>    regression. Each patch sits next to the other fixup for that driver.
+> - at91_udc now calls usb_add_gadget_udc(). Without it udc-core never sees
+>    the controller.
+> - Enabled async callbacks on bind, and added a cache flush and invalidate
+>    around ep0 transfers. Without these no dwc3 gadget enumerates. Anshul
+>    found them on BeaglePlay, I hit them on BeagleBoard-X15. DFU works on
+>    both now.
+> - ci_udc got udc_start() and udc_stop(). udc-core calls udc_start() on
+>    bind, ci_udc did not have it, so the board crashed with a synchronous
+>    abort when ums started. Found on i.MX93, ums works there now.
+> - udc-core got two more fixes while I looked at that. It checks
+>    udc_start(), udc_stop() and get_frame() before calling them, they are
+>    mandatory in the kernel but not in u-boot. And it reports what
+>    usb_gadget_udc_bringup() returned, before it only said "No UDC
+>    available".
+> - Rebased on current mainline. The ci_udc patch shrank a lot: mainline
+>    gained three ci_udc fixes and the old patch deleted the functions they
+>    touch.
+> - Mattijs' dwc2 endpoint fixes [3] are in mainline now, so this series
+>    has no dependencies left.
+> 
+> Older changes are listed in v5 [1].
+> 
+> Cheers,
+> Anders
+> Anders Roxell (24):
+>    dm: add helpers needed by the resynced DWC3 code
+>    usb: phy: add the usb_phy helpers needed by the resynced DWC3 code
+>    usb: gadget: adapt the gadget API after the resync
+>    usb: gadget: udc: make udc-core build in u-boot
+>    usb: dwc3: make the core driver build in u-boot
+>    usb: dwc3: bring back the samsung usb phy driver
+>    usb: dwc3: make gadget and ep0 build in u-boot
+>    usb: gadget: udc: enable async callbacks on bind
+>    usb: dwc3: ep0: flush and invalidate cache around ep0 transfers
+>    usb: dwc3: make the am62 glue build in u-boot
+>    usb: gadget: ci_udc: move to the udc-core registration
+>    usb: gadget: ci_udc: set endpoint capabilities
+>    usb: gadget: dwc2_udc_otg: fix up after the resync
+>    usb: gadget: fix up the function drivers after the resync
+>    usb: gadget: fix up the last UDC drivers after the resync
+>    usb: gadget: atmel_usba_udc: set endpoint capabilities
+>    usb: gadget: at91_udc: register with udc-core
+>    usb: gadget: at91_udc: set endpoint capabilities
+>    usb: musb-new: fix up after the resync
+>    usb: musb-new: set endpoint capabilities
+>    usb: mtu3: fix up after the resync
+>    usb: mtu3: set endpoint capabilities
+>    usb: host: xhci: fix up after the resync
+>    usb: cdns3: fix up after the resync
+> 
+>   drivers/usb/cdns3/ep0.c                |    8 +-
+>   drivers/usb/dwc3/Makefile              |   16 +-
+>   drivers/usb/dwc3/core.c                | 1761 ++++++------------------
+>   drivers/usb/dwc3/core.h                |   39 +-
+>   drivers/usb/dwc3/dwc3-am62.c           |  424 +-----
+>   drivers/usb/dwc3/dwc3-omap.c           |    2 -
+>   drivers/usb/dwc3/ep0.c                 |  117 +-
+>   drivers/usb/dwc3/gadget.c              |  719 ++--------
+>   drivers/usb/dwc3/gadget.h              |    4 +-
+>   drivers/usb/dwc3/io.h                  |   36 +-
+>   drivers/usb/dwc3/samsung_usb_phy.c     |   77 ++
+>   drivers/usb/dwc3/ti_usb_phy.c          |    2 -
+>   drivers/usb/gadget/at91_udc.c          |   83 +-
+>   drivers/usb/gadget/atmel_usba_udc.c    |  114 +-
+>   drivers/usb/gadget/ci_udc.c            |   86 +-
+>   drivers/usb/gadget/composite.c         |    2 +-
+>   drivers/usb/gadget/dwc2_udc_otg.c      |   86 +-
+>   drivers/usb/gadget/epautoconf.c        |    2 -
+>   drivers/usb/gadget/ether.c             |   21 +-
+>   drivers/usb/gadget/f_acm.c             |   20 +-
+>   drivers/usb/gadget/f_fastboot.c        |   10 +-
+>   drivers/usb/gadget/f_mass_storage.c    |    5 +-
+>   drivers/usb/gadget/f_rockusb.c         |   11 +-
+>   drivers/usb/gadget/f_sdp.c             |   12 +-
+>   drivers/usb/gadget/f_thor.c            |   19 +-
+>   drivers/usb/gadget/udc/Makefile        |    1 +
+>   drivers/usb/gadget/udc/udc-core.c      |  933 ++-----------
+>   drivers/usb/host/xhci-dwc3.c           |    4 +-
+>   drivers/usb/mtu3/mtu3_gadget.c         |   10 +
+>   drivers/usb/mtu3/mtu3_gadget_ep0.c     |   16 +-
+>   drivers/usb/musb-new/musb_gadget.c     |   21 +-
+>   drivers/usb/musb-new/musb_gadget_ep0.c |   24 +-
+>   drivers/usb/musb-new/musb_uboot.c      |   39 -
+>   include/dm/device_compat.h             |   13 +
+>   include/dm/read.h                      |   51 +
+>   include/linux/compat.h                 |   15 +
+>   include/linux/usb/ch9.h                |   25 +-
+>   include/linux/usb/gadget.h             |  529 ++-----
+>   include/linux/usb/phy.h                |   56 +
+>   39 files changed, 1406 insertions(+), 4007 deletions(-)
+>   create mode 100644 drivers/usb/dwc3/samsung_usb_phy.c
+> 
 
-I extend timeout to 4h in CI and build passed here
-https://git.u-boot-project.org/u-boot/custodians/u-boot-amd/-/pipelines/1218
+I tested this on AMD/Xilinx boards and didn't observe any issues. So:
 
-Thanks,
-Michal
+Tested-by: Love Kumar <love.kumar@amd.com>
+
+Regards,
+Love Kumar
 
 
-The following changes since commit d4152edb50356338af994d1c0483f65b717b4c15:
-
-   Merge tag 'u-boot-imx-next-20260906' of 
-https://git.u-boot-project.org/u-boot/custodians/u-boot-imx into next 
-(2026-09-08 11:48:35 -0600)
-
-are available in the Git repository at:
-
-   https://git.u-boot-project.org/u-boot/custodians/u-boot-amd.git 
-tags/xilinx-for-v2027.01-rc1
-
-for you to fetch changes up to af3599b6007ada93167036f4cd9670232aae997b:
-
-   configs: versal: Enable AMD DW PCIe controller for Versal Premium Gen 2 
-(2026-09-09 07:50:59 +0200)
-
-----------------------------------------------------------------
-AMD/Xilinx changes for v2027.01-rc1
-
-MAINTAINERS:
-- have one fragment for all AMD/XILINX SOCs
-
-firmware:
-- reset driver, chip ID, TAP, PGGS fw cleanup
-
-net/mrmac:
-- Enhance MRMAC driver and fix RX packet loss
-
-pci:
-- Add AMD Versal CPM/QDMA PCIe support
-
-versal:
-- Add support for Versal Premium 2 with DW PCIe
-
-zynqmp:
-- DT updates
-
-----------------------------------------------------------------
-Akshay Belsare (5):
-       reset: zynqmp: move reset assert helper into firmware driver
-       board: xilinx: zynqmp: use reset assert helper in reset_cpu()
-       soc: xilinx: decouple chip ID retrieval from direct firmware calls
-       soc: xilinx: route PMC TAP register access through firmware
-       board: xilinx: decouple PGGS boot index read from firmware
-
-Michal Simek (1):
-       MAINTAINERS: Put together AMD/XILINX platforms to one fragment
-
-Mike Looijmans (1):
-       zynq-topic-miami.dts: Use fixed-partitions binding for QSPI NOR
-
-Padmarao Begari (8):
-       net: mrmac: check memalign() return values
-       net: mrmac: use a driver-owned RX buffer pool
-       net: mrmac: switch to max-speed property
-       net: mrmac: use contiguous BD arrays
-       net: mrmac: initialize the Rx BD ring in a loop
-       net: mrmac: write CURDESC after ring setup
-       net: mrmac: fix Rx packet loss on back-to-back frames
-       net: mrmac: increase the Rx BD ring
-
-Pranav Sanwal (8):
-       configs: versal: Add amd_versal_premium_2 config fragment
-       pci: Add pci_generic_mmap_write_config32() helper
-       pci: Add support for AMD QDMA PL PCIe root port
-       pci: Add support for CPM4 and CPM5 PCIe controllers
-       arm64: versal: Add MMU mappings for CPM5 ECAM config space
-       arm64: versal: Enable PCIe/NVMe support and add NVMe boot target
-       pci: Enable AMD DW PCIe (MDB) controller support on Versal Premium Gen 2
-       configs: versal: Enable AMD DW PCIe controller for Versal Premium Gen 2
-
-  MAINTAINERS                                       |  80 ++---
-  arch/arm/dts/zynq-topic-miami.dts                 |  21 +-
-  arch/arm/mach-versal-net/cpu.c                    |  34 +-
-  arch/arm/mach-versal-net/include/mach/sys_proto.h |   8 +-
-  arch/arm/mach-versal/cpu.c                        |  38 ++
-  arch/arm/mach-versal/include/mach/sys_proto.h     |   4 +
-  arch/arm/mach-versal2/cpu.c                       |  39 ++-
-  arch/arm/mach-versal2/include/mach/sys_proto.h    |   8 +
-  arch/arm/mach-zynqmp/cpu.c                        |   8 +
-  arch/arm/mach-zynqmp/include/mach/sys_proto.h     |   2 +
-  board/xilinx/common/board.c                       |   6 +-
-  board/xilinx/versal/MAINTAINERS                   |   1 +
-  board/xilinx/zynqmp/zynqmp.c                      |   7 +-
-  configs/amd_versal_premium_2.config               |   7 +
-  configs/topic_miami_defconfig                     |   2 -
-  configs/xilinx_versal_virt_defconfig              |   6 +
-  drivers/firmware/firmware-zynqmp.c                |  64 ++++
-  drivers/net/xilinx_axi_mrmac.c                    | 235 ++++++-------
-  drivers/net/xilinx_axi_mrmac.h                    |  20 +-
-  drivers/pci/Kconfig                               |  23 +-
-  drivers/pci/Makefile                              |   2 +
-  drivers/pci/pci-uclass.c                          |  42 +++
-  drivers/pci/pcie_amd_cpm.c                        | 363 ++++++++++++++++++++
-  drivers/pci/pcie_amd_qdma_pl.c                    | 205 +++++++++++
-  drivers/pci/pcie_dw_amd.c                         |   1 +
-  drivers/reset/reset-zynqmp.c                      |   7 -
-  drivers/soc/soc_amd_versal2.c                     |  25 +-
-  drivers/soc/soc_xilinx_versal.c                   |  23 +-
-  drivers/soc/soc_xilinx_versal_net.c               |  25 +-
-  drivers/soc/soc_xilinx_zynqmp.c                   |  21 +-
-  include/configs/xilinx_versal.h                   |   7 +
-  include/pci.h                                     |  26 ++
-  include/zynqmp_firmware.h                         |   7 +-
-  33 files changed, 1098 insertions(+), 269 deletions(-)
-  create mode 100644 configs/amd_versal_premium_2.config
-  create mode 100644 drivers/pci/pcie_amd_cpm.c
-  create mode 100644 drivers/pci/pcie_amd_qdma_pl.c
-
--- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
