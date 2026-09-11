@@ -4,133 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C6A6C88E53
-	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 16:43:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57174C88E53
+	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 16:44:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 54ECC60621;
-	Fri, 11 Sep 2026 16:43:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AE2BF6068C;
+	Fri, 11 Sep 2026 16:43:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yWeDsP5ZdFcp; Fri, 11 Sep 2026 16:43:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 02B2460625
+ id weTXFrZ-v7cT; Fri, 11 Sep 2026 16:43:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 9EF1160625
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789145034;
-	b=mKY8IKUC5xrI/Dppy9AM5qVNwjHtnQ7KZ0kGSFKD/w16a4BPfUvNBRwKFcE7szc3gPiZ
-	 r6zBAMImd5HNC/PiX1HclcNOt7izHV022cS9YJkMZDQHlIsIP0slGWIMwjIPrhSEgyFk4
-	 k6S51BO0ue1VHaifIJs1KKYao11NUIPXwNa9ePyT3oBBoibt+KdIH0wuKbpIdF1eERm+h
-	 DcQdX4PncHTaROokR1l8Pyugd+i4nvgy5kcwpWr+gY3YVQwgFNijFgD/ZFc3HsebZ4fRl
-	 Jk0rewMuVedLCUP70HuFIr+SnqOSfQimwrsCuZkX4/Q/9HzQMUvFxsDkfk+HI3yc2BA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789145036;
+	b=Jcwhv3ycm1pmCF4uWTSaxIhk/V5MnNdIUKFr708eRnv2v+bdPA+sS/ElSJHnPpVUtlEF
+	 NCH7Mpkzq88wUmVnWzj7+q0/31xVAxA2N0VNkn3MzKgSeTfOwei01b/SOCSn9uUoJ6qbR
+	 LZ67smaiAyAQWOqFcnKJ/H5vQ84YxNCIOTDEV3Jlpug3zyApS6pkbDXc6f4ROrDHXsfoW
+	 fFhLJ8HYtvRIbTHsKIkFO+NtgY1tN+kdaEXrkfPCMXN++yM4CYhpD5KQS5Y7u64/KfyPd
+	 hAgbvl8HDNK56G2zmjUcVNFc1UpcEdgOYHDUt2O95tf/h1A07xAF7MfiRI2J4gEGXKg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789145034;
+	c=relaxed/relaxed; t=1789145036;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 Received:Received:Received:DKIM-Signature:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key:X-Last-TLS-Session-Version:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=bcgBAQQ9l2yg4Dv0Bz/e6sHcs+0K+LO2YO+3TspM+GE=;
-	b=Io4FaHPyqyun07ZHo+Vto67J5ag1a831F6c0+KbqeMn2OSm64/OYdxzbTiM4zRuGNSjA
-	 JZ/KlC0hDISobwP7oj/PrqTzIVgUdG4AxYBz3J7Ww2c2WuPJjnaNp4L5+GaI7z1da+mpY
-	 Dc8zKTFSBNsYeCiVaep7npb2GL7ZvjVoPx6J4r/gQq342NDIxWdJSYs422Cgze639eq5i
-	 zIfMdqOzwcKMcLNoachXmmbbXdtEmbIcNZaaX4Pd402/Mh4D/Mdf51yt5vSF07x9oGI/e
-	 wUXtciuovAIvj286BpWtpUtpXkxA5ZMk3WEMmb07Jwxjva1CVy2vJWOmQ5gLj8sUsJw==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:Received:DKIM-Signature:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Last-TLS-Session-Version:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=1RMR0bo+ZNn/lyb6MApZld1Ja7OAS5A+Uz2nXc8AtkY=;
+	b=WLsOVQW7jt9u+0cToZsX0a90935Zlom0kfoqF7Aifc8D/1BhuQ/tqI9g00U9jt5OMoFQ
+	 ErwIqnqu3ZJzX5kBRcLRE4z5aQd8Gz3QF0OSwpqvRIspXFnDzOueRxUPHXrzFnbdW9sBZ
+	 /KXgcU9+IBnfUdY4xfY7VfbzWyj26kcOB5zTU62Dkh1DU0MCWXiv75mcEK9LL/NDHlisW
+	 gRwr4X9ih5PI3pWnMgjI3ebp/29Dfd7EarITGPCh1VTKRyVxLwe+qH7WdV8fRFnltsndD
+	 rLoeG7JxK3+E8VXZUWDSbMdmVP30uWz0gf6feou6SURmSIJVN6QW1adH1aApkGT4ZiA==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789145034;
-	bh=bcgBAQQ9l2yg4Dv0Bz/e6sHcs+0K+LO2YO+3TspM+GE=;
+	d=lists.u-boot-project.org; s=default; t=1789145036;
+	bh=1RMR0bo+ZNn/lyb6MApZld1Ja7OAS5A+Uz2nXc8AtkY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Dm4cav8KnKQmzGhrtLA/kIgYAkUNX54djKlkuL//mAkSrme+euOraXYQ9r0SMjEAa
-	 VAjeobcaMzwLnIASmlnt0mAP0cKJaE2f1YeP+BazTNOgOebmXEO8hYwAXNXvVxgQCQ
-	 8XeDnXbAiSP9RoBRNsHOJ8avq7srLf7lZU5XTGYcgp5fb1VYSMw6nZXXiyQvmJaANl
-	 3oFx+8lHUDstQHx7h1ISbCzY7yUVtZo9LkeDAFKd48lBga0ryPe1FjRKgSpFZPciOm
-	 P1OYSqc418wC4umXcBv70PyVis0bL9n7S0euj++GG1PuGYmEGX1uWdRXkZmYYZgfZW
-	 pW3g37uFLK7ZQ==
+	b=CwBTXw4VzM59DDtQflcF/zap0+rjy68F0mSZXnMgHxYATb93TCdbMTHisptN2jttz
+	 U4MDc83rWiVR+zZ+fb8l5XIqmBQt6b2Iviwj08//j7VbT2f0e25hLRjn2hohl7EybJ
+	 6ThGW3lnIyyUqiICqWiRAL+DCo/Bjai2Zok7zaTkvw/KG6SGBQJ2rIufhaz1MwEdbQ
+	 u+B0Yhr2U4ngxmG0faMF8RtaVvQquxSMt5B/0VHeZGs4Iq6MqIbWRd20KV7hXGL4HY
+	 MipQDFfF3zhU3ddef/xEGwdVic6it5czBKMgH83nm5yOaqiife8fQNgt86IjC2iZB6
+	 OZlZTJ3Ww9TmQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 02B2460625;
-	Fri, 11 Sep 2026 16:43:54 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id E2B7314C
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 16:43:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9EF1160625;
+	Fri, 11 Sep 2026 16:43:55 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4FAC149D
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 16:43:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D43D780E69
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 16:43:52 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 35CBF4006B
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 16:43:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XIz7YqrJK7q4 for <u-boot@lists.u-boot-project.org>;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id O-netfsrYGgk for <u-boot@lists.u-boot-project.org>;
  Fri, 11 Sep 2026 16:43:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 416BD80E5F
-Authentication-Results: smtp1.osuosl.org;
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 41EF1402ED
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip=185.171.202.116
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789145031;
- b=QA1TpGd9/Mo8Dt4uCouzr4ECeeiRc7CrFOwqL7c9VboQNiK+jAVBmHEO/YdLvFYqvVbU
- L7ipbOKEt78fDTCMEaJ9ZnRyjiQ05v/He/dGxjeI3v/geuVbNF4AooPrrnANhttCCSidZ
- KByr0iTuVw+mXFV8hOv022E9QccXm3RE1E1DKvM3O+mTgX9qTICfcYCcgXIzVc6FBoxTS
- GS5JZQuJfqCeSfE2mAGa3LCss6adunlepSidAOeYbn/Yp/Vl4l46e9OWSE6OoaIoWSNnJ
- 7sMfScCyWurDcwoWN4KWEflwfonS2AECQyDKFjw747S47w05bH3VwI1ZJj9ll6Hu1/A==
+ b=lnu7HcoZpgxOC0JS5kFBBtXqHZIDjlQs7x7R8uafYycL1o+AlZUX9ny09FmjVvv35ouc
+ +ENOoQ9xVhcuGL6BUjDs9vpQ7KlzXiLWevA5h8YN/QgqhRFUoASI6N/4I3gh3cdqSkNXb
+ k5bWLRT5FMi0wD0P6o0YhMe/Wvwg5Xg5KzJkJWlGplF/wZn2P7Y+mJnFSxSdRqjSJY41T
+ u3oK9Gkb8Qt0eVZyO8VrH4KXSVBVHMVH9MZBh3PMGHc50j08BSR4UHquZ3WBxn6wvnX2X
+ X9JJinU6T0A/050Nh0Q/oGI0//RIjtxdp5yMEJE8qQ31RCq20sxOKjOV7dXuPNctBWw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1789145031;
- h=X-Greylist:Received-SPF:Received:Received:Received:DKIM-Signature:
- From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ h=Received-SPF:Received:Received:Received:DKIM-Signature:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key:X-Last-TLS-Session-Version;
- bh=bcgBAQQ9l2yg4Dv0Bz/e6sHcs+0K+LO2YO+3TspM+GE=;
- b=jxgzAquSd7hADTKn+uMWx/TDxl3F0No8cN/aN3W5fWpHTOPLaqW1iyFrNrJqTXSFwyEV
- HjMNhaAueYWwW6d3E77sPRzzuiQxDBn9c9+osMPvwrKwp5Gzbc/yfRdRDRVw7u6LHvoZY
- iXZIN80ZVYo+m9I88CgX3cqFe/FUKU9xLtUP9wB4IoRehVrdp5VZtRbXgRH/B4oHPvhrP
- OAK1MhXxr0h4qTsP6pfTTQkGCBQ0bdM/wowBLry6fLDEYXZvWTHL6S+KoNM/Eu4KB7kYu
- igPJZ+kmVmJ8kXUFKMRAmG51+QaRkHne4vurRywJ+qDc+kzyqIREK70UU/D1taFWDyA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=1RMR0bo+ZNn/lyb6MApZld1Ja7OAS5A+Uz2nXc8AtkY=;
+ b=TvoYnRli6+rRBmkYDx+4mNbK7VzXL2L0rCa1M0MGnYYPeKxcLkGjB2gOZli70x5YFWJc
+ r8kFM77JJi8GNiOofpPC8oj31W7zeW2f9/1wkgQ/cjUyW8J2fAg1olZBLIV6SR7Y/jVWf
+ sEKFktzKbR4Msh2VFc/LdjHYsrg8Wv4miSmzppeCoD7pV3ozQrletXI+RAZCFNiA1LdP8
+ WtKF9VGzxKpNjOIoYmmTpw6Y0sVRdF5TpY+i3zycVqyu5N1cex2rsr1S8qB5rKXDgik5u
+ B2TIorpGPmgBW9L1zyDWQ9qNbBAeKtdaoeKqNwS6iUXNqDhfF2mqdOLQaLhV8LZi5HQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=bootlin.com; 
  dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=xD+wqupz; 
+ header.s=dkim header.b=HZgtviqA; 
  arc=none smtp.remote-ip=185.171.202.116
-X-Greylist: delayed 464 seconds by postgrey-1.37 at util1.osuosl.org;
- Fri, 11 Sep 2026 16:43:50 UTC
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
- header.a=rsa-sha256 header.s=dkim header.b=xD+wqupz
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.171.202.116;
  helo=smtpout-04.galae.net; envelope-from=jeremie.dautheribes@bootlin.com;
  receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
+ header.s=dkim header.b=HZgtviqA
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 416BD80E5F
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 41EF1402ED
  for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 16:43:50 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 56AF6C63A0E;
- Fri, 11 Sep 2026 16:36:52 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id DDB87C63A10;
+ Fri, 11 Sep 2026 16:37:24 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 7E3F4601A3;
- Fri, 11 Sep 2026 16:36:10 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 11F29601A3;
+ Fri, 11 Sep 2026 16:36:43 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E43FA11C7AFAD; 
- Fri, 11 Sep 2026 18:36:02 +0200 (CEST)
+ with ESMTPSA id BC45711C7AFAD; 
+ Fri, 11 Sep 2026 18:36:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1789144565; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1789144598; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=bcgBAQQ9l2yg4Dv0Bz/e6sHcs+0K+LO2YO+3TspM+GE=;
- b=xD+wqupzbSxz8dd3+CFxEzVbutJthWxmoyPRfuR/oJdAT3dVL91Rm4P11smP1dlkX+l4CL
- w6Qw0n9aJJqlmGiZG5JmSympLTLtDHhx6FiXSo6bI6J2RWw4w4tUMDjOG7RahJ5e9aiAno
- FsgtrFca183EOAGhx7VLoAy9cZlFni4Zlocbdz7CR9+baqCig6jQRoU1V4WLxBhjtFmT4C
- K/XgxPqieH/61/atXZ3WqgiOWSL+R501hUNGmVHZmyGgGXznQHrvgN8kbbVCiq3fPctP68
- Z39LbRjd+blKo4IqCvE5GAptdBlLTqE20wTBO1D08qAFJQWQPdsK+Y7wN1+6QA==
+ bh=1RMR0bo+ZNn/lyb6MApZld1Ja7OAS5A+Uz2nXc8AtkY=;
+ b=HZgtviqARe5Q/h/1yl247J8/7YrJWOBw9OSJiwRw1SVZx6Rp8kA2tbenBOyFgfzvFXNP4D
+ Xy4ciHtLzkuBKgSiM2VrwEVRWrjr73CMvDvCPisIqZMCHD95i1/rn6xC9ptGsc+K1FWpKm
+ LgTJc95j9bJaOw6hE++Vuo39NLCAnP/zbA0MnTJJ6w+OSUXWS9jWJi0/XpFda6muVD0eJL
+ UgPSfuoXr0APHHG0jUM0z40e7RvBAJzv2fB1DN5ltThicsLJPM1T3v9RhgG+tjylBIWgmw
+ Ha8HywVO6fHxJvnGtipWQ/7q9iEp+H9wbuluj1WZdKprqOM3DsB8/U75YHbxRw==
 From: =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
  <jeremie.dautheribes@bootlin.com>
-Date: Fri, 11 Sep 2026 18:35:04 +0200
-Subject: [PATCH v3 1/7] binman: add nxp_imxcst base etype for i.MX CST signing
+Date: Fri, 11 Sep 2026 18:35:09 +0200
+Subject: [PATCH v3 6/7] doc: imx: ahab: add i.MX93 secure boot guide
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260911-imx93-secureboot-v3-1-542a99793af0@bootlin.com>
+Message-Id: <20260911-imx93-secureboot-v3-6-542a99793af0@bootlin.com>
 References: <20260911-imx93-secureboot-v3-0-542a99793af0@bootlin.com>
 In-Reply-To: <20260911-imx93-secureboot-v3-0-542a99793af0@bootlin.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
@@ -152,21 +150,21 @@ Cc: =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
  Christophe Guerreiro <christophe.guerreiro@non.se.com>, 
  Thomas Bonnefille <thomas.bonnefille@bootlin.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4959;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=13687;
  i=jeremie.dautheribes@bootlin.com; h=from:subject:message-id;
- bh=kAUr5fYXN/6NRqAj3EpxrY/RE5CMTIm6sHATadyaies=;
- b=owEBbQKS/ZANAwAKASsAXqAbWo8DAcsmYgBqpC3o2nE9Sf4TqgF6Smn4ifIaWClYEn6yzbj+K
- e10DAS8SN2JAjMEAAEKAB0WIQT7FK2Qhtu4QpBIBAkrAF6gG1qPAwUCaqQt6AAKCRArAF6gG1qP
- A7hJEAC7STIrHWr8undeYVklq0Vd0J+sBuOzBCaeXdy638AEhCg79hfpbVte/fkpKEu9AkPnJoO
- wZf1fiIYYEnkf277/n5SvVQa7SKFd9cMB+2pJIiL0jpDH3YYTeXn3PoGahpkoJ9tqwFqZOnSNzH
- 24vkn40SGQxXUFNVLgMx/P6+VClsp6Q+NpBdCsBv2yOpR8WH39o0+RHUUvDZgIiEsu5W0++/8+y
- vWQpdHuyp2O6+CDpChUdrU9NQrZlMfhrCqBS49CNQjqhTV1eA3rK0c8aL37Ms2qs2glgO4C5WOR
- V1mCfEEz+i/Es5GWfJc2K6c5CBwo4qLKmlKjwTHNwT3oGq9a72tU3NF8hi17pbAnSsCR9Cvp7fY
- k7Ho+DItJG9HaF6GMj/sePA/oc6zCeqh798BcnlnZvySP2hAmNY9oNU7heoQY0piS8emRDUEXs7
- Y56ntHdzMTrFzvJ3MG83p03oI/xmcdWmAVAnp+AEIs5Hyje1vYjAB7ExWxtK69hRCnLxy3i0Ipo
- lJleQKXuzHzocZeeMvY8aWVNR6zXDdkOiakPCqedcafVdYmy0nV/usCFnMo/p85m+3+NJBhMC3F
- Oc62saTW1tkiz22NtBnVC4xzzPzD1zj9aFxR+2G9PO6ofxZ3Pht7S0YjFf6srxjtr85nbKQGae4
- lLiOW+wObZnkYHQ==
+ bh=VAXzv/6aJcsTuyH9V500nuB0RuGGO/XnJpXTZ+WyyjM=;
+ b=owEBbQKS/ZANAwAKASsAXqAbWo8DAcsmYgBqpC3pVVUwifaXQwJe3UNevzmPJJoKJ3HVCNhoj
+ 5DQHuqPAGyJAjMEAAEKAB0WIQT7FK2Qhtu4QpBIBAkrAF6gG1qPAwUCaqQt6QAKCRArAF6gG1qP
+ A3jFD/9ZWD/IWAxpxTxkzvQuHjkGHJ8T4ii+IfV+9X1afX7Hul7pJHHdspXrQLSiu3D3KK/W4Ir
+ 9P6a7HjnnmheezWWVm1LVkaO5LsfZCOBL4EMG6yugMjoVaN1+oOtYFSDUzPMhFROL3ZP/3rMmsr
+ 8RbZIaIBnBErnF9O5gEndFkvywq+CK/dG4RRFXb0i8DzR9cMIqEKzc8/mHPsz5274Y/5mVLcdC4
+ 0aZHY7wRnMLjfw/16Vl7lJJ+W6fARR9VUrgqVchUZ9elvQrj6eo/SHkCmf3HKe4NjyLsZgA9z5M
+ H07dCjJu/TC1TSBpkJR3C5IN1xcSyMndzcpmRJeG5uCNtV8g4SVWETFg0qNgS6TM1MW1Xv0IgeD
+ H2RPr22fkvsuVVjYo9nPWF3ct8+c3SbkRb/bZzpXqx1MIic+eB2dZ987xeKOxj87fB+CfVSYUYo
+ RPPJtGvBgx64bWrLlXFWsbRu0QSjzzTTM4dr0eu7PqXK6VqRs+WEN+i2UlK1wiOxlDrKcAITvyu
+ m5bydr8e+Ydg352+CJQBsrIm4/hteOhKxCtE6uTLS14CbLI1atO7TGE1arD2gN3AEcmTI3tFkQA
+ coWVE+ebaR7XBCBkvpvRIyZFVTwJFeBuftfFc/vN5W83hxVvnB5PZwyKQYqHJQFwT2FPvcLyYHt
+ yzBJ0Gqkm4nG5Ew==
 X-Developer-Key: i=jeremie.dautheribes@bootlin.com; a=openpgp;
  fpr=FB14AD9086DBB842904804092B005EA01B5A8F03
 X-Last-TLS-Session-Version: TLSv1.3
@@ -183,148 +181,345 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a common etype which provides the shared functionality for signing
-i.MX images with the NXP Code Signing Tool (CST). This includes the SRK
-table property handling, the CST bintool registration, and helpers for
-writing the input data and configuration files and for running cst.
+Add a step-by-step guide describing how to securely boot an i.MX93
+image using AHAB.
 
-The nxp_imx8mcst etype and the upcoming nxp_imx93cst etype will be
-converted to use this common base in the following commits.
-
-No functional changes.
+This guide is largely based on the following documents:
+  - doc/imx/ahab/guides/mx8ulp_9x_secure_boot.txt, from uboot-imx
+  (lf_v2026.04), originally written by Utkarsh Gupta
+  - doc/imx/habv4/guides/mx8m_spl_secure_boot.txt, from this tree,
+  originally written by Marek Vasut
 
 Signed-off-by: Jérémie Dautheribes (Schneider Electric) <jeremie.dautheribes@bootlin.com>
 ---
- tools/binman/etype/nxp_imxcst.py | 121 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 121 insertions(+)
+ doc/imx/ahab/guides/mx93_secure_boot.rst | 294 +++++++++++++++++++++++++++++++
+ doc/imx/ahab/introduction_ahab.rst       |   3 +-
+ doc/imx/index.rst                        |   1 +
+ 3 files changed, 297 insertions(+), 1 deletion(-)
 
-diff --git a/tools/binman/etype/nxp_imxcst.py b/tools/binman/etype/nxp_imxcst.py
+diff --git a/doc/imx/ahab/guides/mx93_secure_boot.rst b/doc/imx/ahab/guides/mx93_secure_boot.rst
 new file mode 100644
-index 00000000000..3f863704b87
+index 00000000000..2a966ffed1b
 --- /dev/null
-+++ b/tools/binman/etype/nxp_imxcst.py
-@@ -0,0 +1,121 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2026 (C) Bootlin
-+# Author: Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>
-+#
-+# Derived from nxp_imx8mcst.py
-+# Copyright 2023-2024 Marek Vasut <marex@denx.de>
++++ b/doc/imx/ahab/guides/mx93_secure_boot.rst
+@@ -0,0 +1,294 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
-+# Entry-type module for NXP i.MX Code Signing Tool (CST) base class
-+#
++i.MX93 Secure boot guide using AHAB
++===================================
 +
-+import configparser
-+import os
++This document provides a step-by-step guide on how to securely boot an
++i.MX93 boot image. It is assumed that the reader is familiar with basic
++AHAB concepts and with the PKI tree generation. Details about AHAB can be
++found in the :doc:`AHAB introduction <../introduction_ahab>` document and
++in the processor Security Reference Manual (SRM). The i.MX93 signing
++procedure is integrated in the U-Boot build thanks to binman.
 +
-+from binman.etype.mkimage import Entry_mkimage
-+from binman.etype.section import Entry_section
-+from dtoc import fdt_util
-+from u_boot_pylib import tools
++1. Preparing the environment to build a secure boot image
++---------------------------------------------------------
++
++Secure boot image preparation requires the U-Boot build system to build
++the image and the Code Signing Tool (CST) to sign it.
++
++The following files are needed to prepare the boot image:
++
++  - EdgeLock secure enclave Firmware (ELE) (Optional).
++  - DDR PHY initialization firmware.
++  - U-Boot proper and SPL.
++  - ARM Trusted Firmware (ATF).
++  - OPTEE (Optional)
++
++The ELE FW is distributed by NXP and is already signed using NXP keys.
++In the following sections, <work> designates the repository where all
++parts have been downloaded and built.
++
++2. Preparing U-Boot to support AHAB secure boot features
++--------------------------------------------------------
++
++The U-Boot/SPL provides extra AHAB supported functionalities that include
++extension of Root of Trust, checking any events(issues) after image
++authentication, chip lifecycle status, securing the target etc.
++
++The support is enabled by adding CONFIG_AHAB_BOOT to the defconfig file
++used by your target:
++
++  - Defconfig:
++    CONFIG_AHAB_BOOT=y
++  - Kconfig:
++    ARM architecture -> Support i.MX9 AHAB features
++
++Enabling this feature allows the SPL and U-Boot images to extend the Root
++of Trust by using the AHAB API call via ELE FW. It also enables binman to
++automatically sign the SPL and U-Boot containers while building
++flash.bin, as described in the next sections.
++
++3. i.MX93 AHAB image layout
++---------------------------
++
++The i.MX93 flash.bin image is built by binman and is composed of up to
++three containers. The ELE FW container is optional and is provided by NXP,
++it is appended at the beginning of the image when the file
++mx93a1-ahab-container.img is present in the build directory. The SPL and
++U-Boot containers are built by the nxp-imx9image etype and signed by the
++nxp-imx93cst etype.
++
++.. code-block:: text
++
++              *start ----> +---------------------------+ ---------
++                           |   1st Container header    |   ^
++                           |       and signature       |   |  Authenticated at
++                           +---------------------------+   |  ELE ROM/FW Level
++                           |          Padding          |   |
++                           +---------------------------+   |
++                           |           ELE FW          |   v
++       *start + 0x400 ---> +---------------------------+ ---------
++                           |   2nd Container header    |   ^
++                           |       and signature       |   |  Authenticated at
++                           +---------------------------+   |  ELE ROM/FW Level
++                           |          Padding          |   |
++                           +---------------------------+   |
++                           |            SPL            |   v
++                           +---------------------------+ ---------
++                           |   3rd Container header    |   ^
++                           |       and signature       |   |  Authenticated at
++                           +---------------------------+   |  SPL Level
++                           |          Padding          |   |
++                           +---------------------------+   |
++                           |    ARM Trusted FW (ATF)   |   |
++                           +---------------------------+   |
++                           |       U-Boot proper       |   |
++                           +---------------------------+   |
++                           |      OPTEE (optional)     |   v
++                           +---------------------------+ ---------
++
++The first container includes the ELE FW which is signed using NXP keys,
++this container is authenticated by ELE ROM.
++
++The second container includes the SPL which is signed using OEM keys,
++this container is authenticated at ELE FW level.
++
++The third container includes the U-Boot proper and the ATF. The SPL is in
++charge to load this container and also to interface with ELE FW to
++authenticate the additional container.
++
++The signing procedure is slightly different when compared with HABv4
++series. On AHAB the signature is directly included in the container, the
++CST is responsible to sign and handle the "Signature Block":
++
++.. code-block:: text
++
++               +----------------------------+ ---------
++               |                            |  ^
++               |                            |  |
++               |      Container header      |  |
++               |                            |  |
++               |                            |  |
++               +---+------------------------+  |
++               | S | Signature block header |  | Signed
++               | i +------------------------+  |
++               | g |                        |  |
++               | n |                        |  |
++               | a |        SRK table       |  |
++               | t |                        |  |
++               | u |                        |  v
++               | r +------------------------+ ---------
++               | e |       Signature        |
++               |   +------------------------+
++               | B |                        |
++               | l |        SGK Key         |
++               | o | Certificate (optional) |
++               | c |                        |
++               | k |                        |
++               +---+------------------------+
++
++The certificate block is divided into:
++
++.. code-block:: text
++
++                      +---------------+ ^
++                      |  Public key   | | Signed
++                      |  Permission   | |
++                      +---------------+ v
++                      |   Signature   |
++                      +---------------+
++
++The first block (public key permission) verifies the Signature block
++preceding (between SRK table and Certificate blocks), while the second
++block (signature) is verified by the SRK table block.
++
++In case not using the subordinate key, the container signature is
++verified against the SRK keys directly.
++
++4. Signing the images
++---------------------
++
++Internally, Command Sequence Files (CSF) are used. The CSF files contain
++all the commands that the AHAB executes during the secure boot. These
++commands instruct the AHAB code on which memory areas of the image to
++authenticate, which keys to install and use, and so on. The CSF is generated
++using the CST Code Signing Tool based on input configuration file. This
++tool input configuration file is generated using binman, and the tool
++is invoked from binman as well.
++
++The existing file structure is automatically collected by the nxp-imx93cst
++etype and submitted as a single signing operation: the container header
++and the signature block offsets are read from the i.MX container header,
++so the offsets in the CST configuration file are always correct, whether
++the ELE FW is bundled in the image or not.
++
++Per default the AHAB keys and certificates need to be located in the
++build directory, this means creating a symbolic link or copying the
++following files from the AHAB PKI tree directory into the u-boot build
++directory for the CST Code Signing Tool to locate them:
++
++- ``crts/SRK_1_2_3_4_table.bin``
++- ``crts/SRK1_sha384_secp384r1_v3_usr_crt.pem``
++- ``keys/SRK1_sha384_secp384r1_v3_usr_key.pem``
++- ``keys/key_pass.txt``
++
++See the :doc:`AHAB introduction <../introduction_ahab>` document for the
++PKI tree generation procedure (ahab_pki_tree tool) and for the SRK Table
++generation (srktool).
++
++The paths to the SRK table and the certificate can be modified via
++changes to the nxp-imx93cst device tree node(s) or via the environment
++variables.
++
++The nxp-imx93cst etype is configurable using either DT properties or
++environment variables. The following DT properties and environment
++variables are supported. Note that environment variables override DT
++properties.
++
++.. list-table::
++   :header-rows: 1
++
++   * - DT property
++     - Variable
++     - Description
++   * - ``nxp,srk-table``
++     - ``SRK_TABLE``
++     - full path to ``SRK_1_2_3_4_table.bin``
++   * - ``nxp,srk-crt``
++     - ``SRK_KEY``
++     - full path to the SRK certificate ``SRK1_sha384_secp384r1_v3_usr_crt.pem``
 +
 +
-+class Entry_nxp_imxcst(Entry_mkimage):
-+    """NXP i.MX CST .cfg file generator and cst invoker base class
++The SRK private key (``SRK1_sha384_secp384r1_v3_usr_key.pem``) must be located
++next to the certificate so that can find it.
 +
-+    Properties / Entry arguments:
-+        - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
-+    """
++Environment variables can be set as follows to point the build process
++to external key material:
 +
-+    def __init__(self, section, etype, node):
-+        super().__init__(section, etype, node)
-+        self.cst = None
-+        self.srk_table = None
++.. code-block:: console
 +
-+    def ReadNode(self):
-+        super().ReadNode()
-+        self.srk_table = os.getenv(
-+            'SRK_TABLE',
-+            fdt_util.GetString(self._node, 'nxp,srk-table', 'SRK_1_2_3_4_table.bin'),
-+        )
++   $ export SRK_TABLE=$CST_DIR/crts/SRK_1_2_3_4_table.bin
++   $ export SRK_KEY=$CST_DIR/crts/SRK1_sha384_secp384r1_v3_usr_crt.pem
++   $ make flash.bin
 +
-+    def SetImagePos(self, image_pos):
-+        # Customized SoC specific SetImagePos which skips the mkimage etype
-+        # implementation and removes the 0x48 offset introduced there. That
-+        # offset is only used for uImage/fitImage, which is not the case in
-+        # here.
-+        upto = 0x00
-+        for entry in super().GetEntries().values():
-+            entry.SetOffsetSize(upto, None)
++5. Programming SRK Hash
++-----------------------
 +
-+            # Give up if any entries lack a size
-+            if entry.size is None:
-+                return
-+            upto += entry.size
++As explained in the :doc:`AHAB introduction <../introduction_ahab>`
++document, the SRK Hash fuse values are generated by the srktool and
++should be programmed in the SoC SRK_HASH[255:0] fuses.
 +
-+        Entry_section.SetImagePos(self, image_pos)
++Be careful when programming these values, as this data is the basis for
++the root of trust. An error in SRK Hash results in a part that does not
++boot.
 +
-+    def AddBintools(self, btools):
-+        super().AddBintools(btools)
-+        self.cst = self.AddBintool(btools, 'cst')
++The U-Boot fuse tool can be used for programming eFuses on i.MX SoCs.
 +
-+    def write_input_data(self, data, uniq):
-+        """Write input data to a temporary file for CST
++- Dump SRK Hash fuses values in host machine:
 +
-+        Args:
-+            data: Data to write
-+            uniq: Unique string for naming output files
++  On i.MX93 family, the SRK Hash uses sha256 and dump 8 words fuses:
 +
-+        Returns:
-+            str: Path to the written file
-+        """
-+        output_dname = tools.get_output_filename(f'nxp.cst-input-data.{uniq}')
-+        tools.write_file(output_dname, data)
-+        return output_dname
++  .. code-block:: console
 +
-+    def get_config(self, template):
-+        """Get a ConfigParser loaded with the given template
++     $ od -t x4 SRK_1_2_3_4_fuse.bin
++     0000000 db2959f2 90dfc39c 53394566 e0b75829
++     0000020 85e6f3b1 af00983d e5e804fe 7a451024
 +
-+        Args:
-+            template: Configuration template string
++- Program SRK_HASH[255:0] fuses:
 +
-+        Returns:
-+            ConfigParser instance
-+        """
-+        config = configparser.ConfigParser()
-+        # Do not make key names lowercase
-+        config.optionxform = str
-+        config.read_string(template)
-+        return config
++On i.MX93:
 +
-+    def write_config(self, config, uniq):
-+        """Write ConfigParser object to a temporary file for CST
++.. code-block:: console
 +
-+        Args:
-+            config: ConfigParser instance
-+            uniq: Unique string for naming output files
++   => fuse prog 16 0 0xdb2959f2
++   => fuse prog 16 1 0x90dfc39c
++   => fuse prog 16 2 0x53394566
++   => fuse prog 16 3 0xe0b75829
++   => fuse prog 16 4 0x85e6f3b1
++   => fuse prog 16 5 0xaf00983d
++   => fuse prog 16 6 0xe5e804fe
++   => fuse prog 16 7 0x7a451024
 +
-+        Returns:
-+            str: Path to the written configuration file
-+        """
-+        cfg_fname = tools.get_output_filename(f'nxp.csf-config-txt.{uniq}')
-+        with open(cfg_fname, 'w') as cfgf:
-+            config.write(cfgf)
-+        return cfg_fname
++6. Verify AHAB events
++---------------------
 +
-+    def run_cst(self, cfg_fname, uniq, backend=None):
-+        """Run CST tool with given configuration file
++If the fuses have been burned properly, there should be no AHAB events
++after boot. To validate this, power on the board, and run ahab_status
++command on U-Boot terminal.
 +
-+        Args:
-+            cfg_fname: Filename of the CST configuration file
-+            uniq: Unique string for naming output files
-+            backend: Optional backend (e.g. 'ssl' or 'pkcs11')
++No events should be returned after this command:
 +
-+        Returns:
-+            bytes: Output data from CST, or None if bintool is missing
-+        """
-+        output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
-+        args = ['-i', cfg_fname, '-o', output_fname]
-+        if backend:
-+            args.extend(['-b', backend])
-+        if self.cst.run_cmd(*args) is not None:
-+            return tools.read_file(output_fname)
-+        self.record_missing_bintool(self.cst)
-+        return None
++.. code-block:: console
++
++   => ahab_status
++   Lifecycle: 0x00000008, OEM Open
++
++           No Events Found!
++
++7. Close the device
++-------------------
++.. warning::
++
++   Before closing the device, please ensure your sample is in OEM Open state,
++   OEM SRK hash has been fused, and you are able to boot a signed image
++   successfully without any AHAB events reported . If not, your sample will be
++   unrecoverable.
++
++After the device successfully boots a signed image without generating any
++AHAB security events, it is safe to close the device. The chip lifecycle
++should be changed from OEM open to OEM closed. Be aware this step can
++damage your board if a previous step failed. It is also irreversible. Run
++on the U-Boot terminal:
++
++.. code-block:: console
++
++   => ahab_close
++
++Now reboot the target, and run:
++
++.. code-block:: console
++
++   => ahab_status
++   Lifecycle: 0x00000020, OEM Closed
++
++           No Events Found!
+diff --git a/doc/imx/ahab/introduction_ahab.rst b/doc/imx/ahab/introduction_ahab.rst
+index f6494e3c121..0da9f49f010 100644
+--- a/doc/imx/ahab/introduction_ahab.rst
++++ b/doc/imx/ahab/introduction_ahab.rst
+@@ -292,7 +292,8 @@ scenario in i.MX 9x:
+               |          │          │          │         │
+ 
+ More details on the boot flow can be found in respective Security Reference
+-Manual (SRM).
++Manual (SRM) and in the :doc:`i.MX93 Secure boot guide
++<guides/mx93_secure_boot>`.
+ 
+ 2. Generating a PKI tree
+ ------------------------
+diff --git a/doc/imx/index.rst b/doc/imx/index.rst
+index cc5f427de92..daf846947cc 100644
+--- a/doc/imx/index.rst
++++ b/doc/imx/index.rst
+@@ -11,3 +11,4 @@ architecture introduction and the i.MX93 secure boot guide.
+    :maxdepth: 2
+ 
+    ahab/introduction_ahab
++   ahab/guides/mx93_secure_boot
 
 -- 
 2.55.0
