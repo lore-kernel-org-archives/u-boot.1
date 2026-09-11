@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F78EC88E4C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C055EC88E4A
 	for <u-boot@archiver.kernel.org>; Fri, 11 Sep 2026 10:48:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D843B812BE;
-	Fri, 11 Sep 2026 10:48:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 817B540BFA;
+	Fri, 11 Sep 2026 10:48:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SYk8s6ASSCYW; Fri, 11 Sep 2026 10:48:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 2FAF38125D
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123698;
-	b=TfHr80h4eG90fEgjsPuYCuD/ZOEHsYENzwxhwotyEtYNW4jMdgKvfDMlPMj3HOKs/f7u
-	 snNZ23kdMPmxRbJeRuHImCqYT502s+9eNAax86piTVf44DxQxfOMbezp1gjgPzDX1evMU
-	 1WcN38iJQPSeWMrjxwi6IM1wUC0vRECnzTaZfhhYYm3GI9oxAI5ffc+/LRUaG/yfjTPgm
-	 WSil4tWIvil89iYJ9g0P6G7Sb/63KyELdX/HJZzKFelut8Gv+ejwfOGtIlF2nW+TN9+V4
-	 woixUjNAzIlWxTRXuJvpt20X9WIHvDqbFm9iTWeRJupjgU8AvUyXemfovm8QzU4B3Og==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yNynWUEu9Id1; Fri, 11 Sep 2026 10:48:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 6B7B040BF8
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123700;
+	b=m+YVaWJ9fqsn9ipbTUOulYakAunGuDmUpBv+vgovyXWGu9ozFwlHyyYnX4jTCDo3F3nE
+	 tBErogtLyLezW2h+myRGVoSCEZlef1utIhbwFD5OSLeCmIbV8rh5wghy+w+BqV3pxBNxZ
+	 qbIlfz0lc/VkZKzKGmc3i6AlazS1VKGqIuOCcO9OisGAFyVx1zhpVmSUeeEcqj578mNRN
+	 aNOLx6wZqcWVJlbV+FCcPOe3ErE3MhVXRJbkpi61NPm4Ent6puo8i16w0B3H5MWHKfdvx
+	 Fauiky1ybsKr/6tdQI3tWInetoVLvQAq7/6/f1bVzhDmzNt48ju5oN/14+B8NSjKk2Q==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789123698;
+	c=relaxed/relaxed; t=1789123700;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,105 +31,107 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=vNfMPUcyun39PabwWZ9YPgLuFFzHS96SYhMVnEtNZPo=;
-	b=CztUUBzacClkJHI5CN3Nr5gdUonJuxJaheuSFnOfGtyeifyJM5EXagg/1V3mD1b/VcwL
-	 wac6CRvUg1/RsT5P5vfCMG9EU4GNYBATeBSZT99WLJF2r/2/vgRT0jdB2V9CsVvV0pvtf
-	 CkfXeQXyYUYsB26TpLJXlwnOvxCHT9AuR5xGQQPSRDN2nwempuqjsTFMvKDeU2iC0q/9h
-	 Pap1l1izhonxy+4hyusnzh2jKf1b3rCDSMIODNQ1uMvyMz7qxVvflMhXKvHQPQhYNuN10
-	 usVWhG+B8xD0Culzq8xMN0L5zTLZIne0+fg1n/aBg6IoOXOrKiYWs6u7wqX9MPDXSAw==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=a56w498iy0ReEtdxY6/sXgKHJGd+X7GoTx0Z7LuFtXk=;
+	b=gNmCTS2fbs9lr3FrNKDqkbm3DCPfhLAnlzQ8hMAEm+3CpNL6r0kzVxXkViSH8hOrnuEm
+	 2HlE+bplIpiVFvuxWnlkPJRSKFEukOw7W2ME9yB0Ht7eNFw5om44g2dBCJNEeges91+B3
+	 qlUDD0pUVdNEhN8JvtnAJEfQhBcQNVV1We6GP3VaNum1t8XPf17XbdnD+rp42IH1m6WZu
+	 6pkHGq8VnLRAjCdPtVy4A/CtCiCzBYTYwZ2QGA4EWKcJJZSIoKEKF/UKO67+WhXAlf17d
+	 MvZQ2xtjUyh5R56v/6td1vQLBiDU4szxXZ/OHqdwrW+jVAKzywV6dLv90434pzsQhgQ==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; dmarc=pass header.from=ziyao.cc;
+	dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=ZFA4AAS1;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789123698;
-	bh=vNfMPUcyun39PabwWZ9YPgLuFFzHS96SYhMVnEtNZPo=;
+	d=lists.u-boot-project.org; s=default; t=1789123700;
+	bh=a56w498iy0ReEtdxY6/sXgKHJGd+X7GoTx0Z7LuFtXk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=KFaERZmIvuXqC0m4ZFYihXUNkoizj2WFR6Tlm2xMGQJ3poSDob7WjBqZOjCIfD4eI
-	 NgEa+606rvNBafF5gbrCLccEx3RKG2vXmHLpxtXabBYTPeOPEL3llVk3gEC/P2xLRe
-	 Km7YYU6LyaqBLyi4O0D8HIHpUQ87UtBVPPiBI5eXYGLkEGwSQTRezfE+dDeE0hRHXZ
-	 vyRqSklY20K4cq1mQGYRDjIxWYhPQW36NaNv5cFSiK+1JdlGIP9Oi0Kh+zoe1ODRvx
-	 fy/evCglw9yE1Y1ZUI3bB265Ak7nnaJx3/dC1LusCA1oYSs83qh1c/ztw8AYmIfcwY
-	 7qNxI8KW0FR9A==
+	b=JqvY0pZfOAiWsZKPgTeBGxS+2hxQOiAHy/RoHYgnCUePXN+U8vrw7CMCjoiLf+Qf7
+	 9Wqn0BKh0tSS/3/sjTsWxToGe/sbnifpuBmY2YcmRfH2VP2kHVsQ8P81uscw+6wKyF
+	 QOm0jecJ97w9B/focq2EMJtcFTzcx3+RSkFPCPbrouTM9/b0/3NSmFHWce0EohwJpz
+	 DxsRed+Irp/sYaJUCD7AkFKLijZ+jhMia/bbJ0C5b/lAD4Ej5WQeg8LEbtW5n9290Q
+	 6PoIYYkpTayE7JwkKgpSS/teCVzTvogUJYsYJtVRZlHLJlarj6Y0PtaxI9dxm/+k3W
+	 yXM0UfcTt4NOw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2FAF38125D;
-	Fri, 11 Sep 2026 10:48:18 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 5DD1149D
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6B7B040BF8;
+	Fri, 11 Sep 2026 10:48:20 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C2BC81EA0
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4386F40461
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:16 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id BFDFB40B0B
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id I7e7t0ox_ZeQ for <u-boot@lists.u-boot-project.org>;
- Fri, 11 Sep 2026 10:48:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 5654040460
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.182.15
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123695;
- b=C9fKNC7jtgiXVLc/l//0XWTIHEdFvqKqiyq97TJikC5GTvagh/UBAuXf80JurBYgDdXm
- tXs1Se0MDBzfkXFzKoTEi16CXCO1kt0IrWlBQ5b+2Pfyvy0FnNoleafU3fU9LljBOOyq5
- wPLNrD1yOelnEpXs57LAyNUFdz7Gppr4ktino5r9alA3dc72ezgB1ctDfPub1ow0RcZ2a
- h2AT7Y6FtwU/xoxA9nmhB+uVzz4m10wcF0ERKaoPtB+ngD7DS42iBKwK3zwqngWn1hS6d
- KhO4n7Y2gsss0DDrgyPO3bKeswNqIrMXvcQCqwybBaiDrQciRjQZAaOjleT+Izt2xBA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ICf1ahM7gf5Q for <u-boot@lists.u-boot-project.org>;
+ Fri, 11 Sep 2026 10:48:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A75E740BEC
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=136.143.188.15
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789123696;
+ b=O+SO10V6BP+iBHtSe2U2ztIU2NoKRrm6pYto1kZRrHvE2JMVHLnd+cuHsV/uQX2LCHcy
+ lgc3AWaXif2W/rSKIox9tUyL/b3YE5pBK9vMXNY/LV3VqSlUGFbbEvrKwRCbfq+E1DXfL
+ Pr7M6xS3KlZeuIeGbHYSesm/8sH7GCl+hoCCWBaEFtUqsP9aVNY3Gw2FEd8AyPtcOvcEf
+ Jba8kI2rDOfY7srfQaZKKnl+mkHLdNjQXjp6ueV1Tiq+jk/PlwsSjhkRXjnYdUBT2UG6S
+ GOrB5r/LeUA/OIQp3YyZj38N9emIqR1hRoUp6jhUMvGFx/+GRjGQaCPrUR8IRuS6VpQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789123695;
+ c=relaxed/relaxed; t=1789123696;
  h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-ZohoMailClient;
- bh=vNfMPUcyun39PabwWZ9YPgLuFFzHS96SYhMVnEtNZPo=;
- b=aikB6tdlt7q6WSsI6tL1zWpx9lfMGaY2yOvhVtMNSIla3OELu7eQG5a2Dtvk3eUpIyjc
- nBsIQRcW66J4+mCq1Xvwz5QdLiAEWcMAfGJQL9+bxUZqdvK2BJCm4Dfs9mJr9mzHoVVZJ
- sdUphTrVZW6pCBKOPMBsrF8YaavTUlIAxKPAMFJtCRXRWnPOe6VrQ9BzAgI7uhq2PgybG
- A3wdviubU4vWSnFddVO2paP/5JHG+8SKQJYGhjTkNg4lOUqk8RlHwLCtPHWqLKBFv5Vsn
- GiIqRMfX1Kg8kbYdv1/yh8j7AaXpkvTY5h2mJGKi0dgKSU4NVsLTosG+g8WEAgPbAYg==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ bh=a56w498iy0ReEtdxY6/sXgKHJGd+X7GoTx0Z7LuFtXk=;
+ b=BGvux7uxPE7MOM3UZr0yQ3cXXFepzNvqn+Q2JwMoJ8Ik+tCSZZzmz7u+XuiOXAZmyajc
+ 7FeoP6UzfvURo8GQyRKYWKHXb0fs+PX6tU55s2cCcKedjQX+V2KuY6xPfsjUqY68Hv3ti
+ dvmEDH0vQ6L4iCDqBI2fBsMlhpPNJEWpP8HpbNMz1iUfH+YMsPRzZi/e00yuRgwJcQFX7
+ O2lkk5oEtnKL/hO2esRsuO44LqPpbLyBBaiFLtEndeOaSTS7GDcf7Z5/Lqlm5hhcniS8n
+ bvQ9PdLxwKomTSAa4dxocavVtqyv5bVv9y5A/uNDRVdzFLT0hN0PVSkXJIAGUT71ZLQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
  dmarc=pass header.from=ziyao.cc; 
  dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=GzfXN8iq; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.182.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
- helo=sender5-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.s=zmail header.b=ZFA4AAS1; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=136.143.188.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
+ helo=sender4-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=ziyao.cc header.i=me@ziyao.cc
- header.a=rsa-sha256 header.s=zmail header.b=GzfXN8iq
-Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
- [165.173.182.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5654040460
- for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:13 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1789123688; cv=none; 
+ header.a=rsa-sha256 header.s=zmail header.b=ZFA4AAS1
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A75E740BEC
+ for <u-boot@lists.u-boot-project.org>; Fri, 11 Sep 2026 10:48:16 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1789123690; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=m0C+fMdxjbFIQ2BrF3h4AbAp0cYUTriKseVzPPIXbFQxTts08ZcSeCeyEZvkiopktEw3fJQk98xxGWjegLBUrHqpoT4Lu5UTJhhhe6OlokRM6bDp3RaXEiOfjIdWNO0u769i0eZsA6zK2uP0nhTkONWx+tBWm2RoPfqwFBEySKE=
+ b=GoR6kvdLGvMKxI7D2HwYN+meXLs5TJPZyNcH8ekghdad4/pPgkcPfqPRC54tLcn/EampvGqjdcxysCZqm5z3ezYm2CemAi1u+ci232qcMcbYewBn3cRfO8HtZBetTy857q/wjnosVV1bQbNqCqw7QZXBVQ3xJfQRsEsnZ4AOUCA=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1789123688;
+ s=zohoarc; t=1789123690;
  h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=vNfMPUcyun39PabwWZ9YPgLuFFzHS96SYhMVnEtNZPo=; 
- b=Kwl95NMBIFv24sBavYos1TwYD8MtPRQFqpDU4gwSti453NH59eIZ7osX/w2+e4oXFXUbDIZNrehotjMoxQJnmHTpr6EIswO8DpDiPXeZGodvtuup7z8ZRqoL2TqTD9tb/mfAvOU6rTEAY0e6kTwh5UHALcG/Kf8k+wXBplFqQY0=
+ bh=a56w498iy0ReEtdxY6/sXgKHJGd+X7GoTx0Z7LuFtXk=; 
+ b=kKEcjzuiRCOqeV0mEfU4gLW5BV/r/3elTozkjeutBNLVa7AB3Re7FtEd79ZgF0AdCtgs5aIVeSI7R2vr6IMEWWb5nfIytdMDE3WHO8TrNInWQdoja69TS8zmh4GSP0VC31pBa/+4aCkqALlWO2NedWjpHS4EkOh3u8g6Y/paA7Y=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1789123688; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1789123690; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=vNfMPUcyun39PabwWZ9YPgLuFFzHS96SYhMVnEtNZPo=;
- b=GzfXN8iqicdkb3PW13iyZawfbfOZdhgIrCDwB6ND/wh1iJH5O0Zj/AJfLH7hpzpz
- IU2kXi4I2Cgga4HP6sEj57ZAoWkxneQNpQwLAT3+a2fIhDTHRhZ63geA9TmVFNRWC+S
- WNN2XXddE86zFuBYI3F6PoBkOeHezwy07PASy+FY=
-Received: by mx.zohomail.com with SMTPS id 1789123686125868.2406804214248;
- Fri, 11 Sep 2026 03:48:06 -0700 (PDT)
+ bh=a56w498iy0ReEtdxY6/sXgKHJGd+X7GoTx0Z7LuFtXk=;
+ b=ZFA4AAS13dsXBb82WqonopYY1ev2DXddWGd7DshQV8wshaYuTsozIUU7ck0PvYF3
+ rfHFibGuRTgg5F6KUhHEtU1R5dRk/GEU7tBCBE68GpC249o/bj12BR3mGMnkdlODThF
+ xESHCnP6a/VYC+5dyKaNUuNLmuaCwdFWkXk5mydQ=
+Received: by mx.zohomail.com with SMTPS id 1789123688150446.04203165666627;
+ Fri, 11 Sep 2026 03:48:08 -0700 (PDT)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org,
 	Yao Zi <me@ziyao.cc>
-Subject: [PATCH v4 13/19] timer: Add loongarch_timer driver
-Date: Fri, 11 Sep 2026 10:45:58 +0000
-Message-ID: <20260911104604.2910944-14-me@ziyao.cc>
+Subject: [PATCH v4 14/19] board: emulation: Add qemu-loongarch
+Date: Fri, 11 Sep 2026 10:45:59 +0000
+Message-ID: <20260911104604.2910944-15-me@ziyao.cc>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260911104604.2910944-1-me@ziyao.cc>
 References: <20260911104604.2910944-1-me@ziyao.cc>
@@ -151,199 +153,383 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-Implement a timer driver for LoongArch architecture timer. It's synced
-in hardware for every core in a system, and frequency information can be
-gathered from CPUCFG instruction.
+Yet another generic QEMU VIRT machine.
 
-It is not described in fdt, thus a DRVINFO is declared for it. During
-probing, stability of the timer frequency is checked through CPUCFG, and
-the probing would fail if it isn't constant.
+LoongArch QEMU splits the main RAM into two parts: the first 512M is
+placed at 0x0, and the rest is placed at 0x8000000. FDT locates at
+0x100000. BIOS is mapped to the first flash mapped to 0x1c000000, where
+U-Boot starts execution.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
 ---
 
-No changes since v3
+Changed from v3
+- Remove the dummy empty devicetree
+- Fix the typo when limiting top usable RAM address top (0x1000_0000 ->
+  0x1_0000_0000)
 
 Changed from v2
-- include div64.h for definition of lldiv()
-- Rename loongarch_timer_bind() to loongarch_timer_probe(), to correctly
-  reflect that it's used in the probe() callback
-- Bail out with -ENODEV when missing LLFTP support, which means there
-  isn't a timer with stable frequency
+- Add board-level documentation for qemu-loongarch
+- Mention the memory layout and booting process in commit message
+- Move TARGET_QEMU_LOONGARCH_VIRT to
+  board/emulation/qemu-loongarch/Kconfig
+- Drop duplicated selection of BOARD_LATE_INIT in
+  TARGET_QEMU_LOONGARCH_VIRT
+- Explain why RAM is limited to the lowest 4GiB
+- Drop unused board_init()
+- Rework comment in board_fdt_blob_setup()
+- Define FDT address, 0x100000, as a meaningful constant
+- Clarify how CFG_SYS_INIT_RAM_[ADDR,SIZE] are chosen
+- Add myself to MAINTAINERS
 
-No changes from v1
+Changed from v1
+- Remove dynamic setup for environment variables
 
- drivers/timer/Kconfig           |   8 ++
- drivers/timer/Makefile          |   1 +
- drivers/timer/loongarch_timer.c | 132 ++++++++++++++++++++++++++++++++
- 3 files changed, 141 insertions(+)
- create mode 100644 drivers/timer/loongarch_timer.c
+ arch/loongarch/Kconfig                        |  4 ++
+ board/emulation/qemu-loongarch/Kconfig        | 68 +++++++++++++++++++
+ board/emulation/qemu-loongarch/MAINTAINERS    |  9 +++
+ board/emulation/qemu-loongarch/Makefile       |  6 ++
+ .../emulation/qemu-loongarch/qemu-loongarch.c | 67 ++++++++++++++++++
+ .../qemu-loongarch/qemu-loongarch.env         |  5 ++
+ configs/qemu-loongarch64_defconfig            | 35 ++++++++++
+ doc/board/emulation/index.rst                 |  1 +
+ doc/board/emulation/qemu-loongarch.rst        | 39 +++++++++++
+ include/configs/qemu-loongarch.h              | 17 +++++
+ 10 files changed, 251 insertions(+)
+ create mode 100644 board/emulation/qemu-loongarch/Kconfig
+ create mode 100644 board/emulation/qemu-loongarch/MAINTAINERS
+ create mode 100644 board/emulation/qemu-loongarch/Makefile
+ create mode 100644 board/emulation/qemu-loongarch/qemu-loongarch.c
+ create mode 100644 board/emulation/qemu-loongarch/qemu-loongarch.env
+ create mode 100644 configs/qemu-loongarch64_defconfig
+ create mode 100644 doc/board/emulation/qemu-loongarch.rst
+ create mode 100644 include/configs/qemu-loongarch.h
 
-diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
-index 500a25638a96..6feb53328147 100644
---- a/drivers/timer/Kconfig
-+++ b/drivers/timer/Kconfig
-@@ -348,4 +348,12 @@ config GOLDFISH_TIMER
- 	  It uses the Goldfish RTC hardware to provide a nanosecond-resolution
- 	  timer, commonly found in QEMU virt machines.
+diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
+index 1f376ca291c1..a53d26a59497 100644
+--- a/arch/loongarch/Kconfig
++++ b/arch/loongarch/Kconfig
+@@ -7,9 +7,13 @@ config SYS_ARCH
+ choice
+ 	prompt "Target select"
  
-+config LOONGARCH_TIMER
-+	bool "LoongArch CPU timer support"
-+	depends on TIMER
-+	depends on LOONGARCH
-+	help
-+	  Select this to enable support for the timer found on
-+	  LoongArch CPUs.
++config TARGET_QEMU_LOONGARCH_VIRT
++	bool "Support QEMU Virt Board"
 +
- endmenu
-diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
-index d8b3f2b65d4c..0b70b915bfeb 100644
---- a/drivers/timer/Makefile
-+++ b/drivers/timer/Makefile
-@@ -37,3 +37,4 @@ obj-$(CONFIG_IMX_GPT_TIMER)	+= imx-gpt-timer.o
- obj-$(CONFIG_XILINX_TIMER)	+= xilinx-timer.o
- obj-$(CONFIG_STARFIVE_TIMER)	+= starfive-timer.o
- obj-$(CONFIG_GOLDFISH_TIMER)	+= goldfish_timer.o
-+obj-$(CONFIG_LOONGARCH_TIMER)	+= loongarch_timer.o
-diff --git a/drivers/timer/loongarch_timer.c b/drivers/timer/loongarch_timer.c
+ endchoice
+ 
+ # board-specific options below
++source "board/emulation/qemu-loongarch/Kconfig"
+ 
+ # platform-specific options below
+ source "arch/loongarch/cpu/generic/Kconfig"
+diff --git a/board/emulation/qemu-loongarch/Kconfig b/board/emulation/qemu-loongarch/Kconfig
 new file mode 100644
-index 000000000000..c294112abe19
+index 000000000000..94f42091e0be
 --- /dev/null
-+++ b/drivers/timer/loongarch_timer.c
-@@ -0,0 +1,132 @@
++++ b/board/emulation/qemu-loongarch/Kconfig
+@@ -0,0 +1,68 @@
++if TARGET_QEMU_LOONGARCH_VIRT
++
++config SYS_BOARD
++	default "qemu-loongarch"
++
++config SYS_VENDOR
++	default "emulation"
++
++config SYS_CPU
++	default "generic"
++
++config SYS_CONFIG_NAME
++	default "qemu-loongarch"
++
++config TEXT_BASE
++	default 0x1c000000
++
++config BOARD_SPECIFIC_OPTIONS # dummy
++	def_bool y
++	select GENERIC_LOONGARCH
++	imply AHCI
++	imply PCI_INIT_R
++	imply CMD_PCI
++	imply CMD_POWEROFF
++	imply CMD_SCSI
++	imply CMD_PING
++	imply CMD_EXT2
++	imply CMD_EXT4
++	imply CMD_FAT
++	imply CMD_FS_GENERIC
++	imply DOS_PARTITION
++	imply ISO_PARTITION
++	imply EFI_PARTITION
++	imply SCSI_AHCI
++	imply AHCI_PCI
++	imply E1000
++	imply PCI
++	imply NVME_PCI
++	imply PCIE_ECAM_GENERIC
++	imply DM_RNG
++	imply DM_RTC
++	imply QFW
++	imply QFW_MMIO
++	imply SCSI
++	imply SYS_NS16550
++	imply SYSRESET
++	imply SYSRESET_CMD_POWEROFF
++	imply SYSRESET_SYSCON
++	imply VIRTIO_MMIO
++	imply VIRTIO_PCI
++	imply VIRTIO_NET
++	imply VIRTIO_BLK
++	imply MTD_NOR_FLASH
++	imply CFI_FLASH
++	imply OF_HAS_PRIOR_STAGE
++	imply VIDEO
++	imply VIDEO_BOCHS
++	imply SYS_WHITE_ON_BLACK
++	imply USB
++	imply USB_XHCI_HCD
++	imply USB_XHCI_PCI
++	imply USB_KEYBOARD
++	imply CMD_USB
++	imply UFS
++	imply UFS_PCI
++	imply BOARD_LATE_INIT
++
++endif
+diff --git a/board/emulation/qemu-loongarch/MAINTAINERS b/board/emulation/qemu-loongarch/MAINTAINERS
+new file mode 100644
+index 000000000000..cd9636d6dc9b
+--- /dev/null
++++ b/board/emulation/qemu-loongarch/MAINTAINERS
+@@ -0,0 +1,9 @@
++QEMU LOONGARCH 'VIRT' BOARD
++M:	Jiaxun Yang <jiaxun.yang@flygoat.com>
++M:	Yao Zi <me@ziyao.cc>
++S:	Maintained
++F:	board/emulation/qemu-loongarch/
++F:	board/emulation/common/
++F:	include/configs/qemu-loongarch.h
++F:	configs/qemu-loongarch64_defconfig
++F:	doc/board/emulation/qemu-loongarch.rst
+diff --git a/board/emulation/qemu-loongarch/Makefile b/board/emulation/qemu-loongarch/Makefile
+new file mode 100644
+index 000000000000..a928b90780e9
+--- /dev/null
++++ b/board/emulation/qemu-loongarch/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
++#
++
++obj-y	+= qemu-loongarch.o
+diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.c b/board/emulation/qemu-loongarch/qemu-loongarch.c
+new file mode 100644
+index 000000000000..9370e81bc276
+--- /dev/null
++++ b/board/emulation/qemu-loongarch/qemu-loongarch.c
+@@ -0,0 +1,67 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#include <asm/loongarch.h>
-+#include <div64.h>
 +#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <errno.h>
-+#include <timer.h>
++#include <dm/ofnode.h>
++#include <env.h>
++#include <fdtdec.h>
++#include <image.h>
++#include <linux/sizes.h>
++#include <lmb.h>
++#include <log.h>
++#include <spl.h>
++#include <init.h>
++#include <usb.h>
++#include <virtio_types.h>
++#include <virtio.h>
 +
-+static u64 notrace loongarch_timer_get_count(struct udevice *dev)
++DECLARE_GLOBAL_DATA_PTR;
++
++#define VIRT_FDT_BASE 0x100000
++
++#if IS_ENABLED(CONFIG_MTD_NOR_FLASH)
++int is_flash_available(void)
 +{
-+	u32 hi, lo;
++	if (!ofnode_equal(ofnode_by_compatible(ofnode_null(), "cfi-flash"),
++			  ofnode_null()))
++		return 1;
 +
-+	if (IS_ENABLED(CONFIG_64BIT))
-+		return drdtime();
++	return 0;
++}
++#endif
 +
-+	do {
-+		hi = rdtimeh();
-+		lo = rdtimel();
-+	} while (hi != rdtimeh());
++phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
++{
++	/*
++	 * Limit RAM used by U-Boot to 4GiB to keep compatible with 32-bit-only
++	 * DMA peripherals, for example, emulated PCI cards.
++	 */
++	if (gd->ram_top > 0x100000000ULL)
++		return 0x100000000ULL;
 +
-+	return ((u64)hi << 32) | lo;
++	return gd->ram_top;
 +}
 +
-+static int loongarch_timer_get_freq_cpucfg(unsigned int *freq)
++int board_late_init(void)
 +{
-+	unsigned int res;
-+	unsigned int base_freq;
-+	unsigned int cfm, cfd;
++	/* start usb so that usb keyboard can be used as input device */
++	if (CONFIG_IS_ENABLED(USB_KEYBOARD))
++		usb_init();
 +
-+	res = read_cpucfg(LOONGARCH_CPUCFG2);
-+	if (!(res & CPUCFG2_LLFTP))
-+		return -ENODEV;
-+
-+	base_freq = read_cpucfg(LOONGARCH_CPUCFG4);
-+	res = read_cpucfg(LOONGARCH_CPUCFG5);
-+	cfm = res & 0xffff;
-+	cfd = (res >> 16) & 0xffff;
-+
-+	if (!base_freq || !cfm || !cfd)
-+		return -EINVAL;
-+
-+	*freq = base_freq * cfm / cfd;
++	/*
++	 * Make sure virtio bus is enumerated so that peripherals
++	 * on the virtio bus can be discovered by their drivers
++	 */
++	virtio_init();
 +
 +	return 0;
 +}
 +
-+#if IS_ENABLED(CONFIG_TIMER_EARLY)
-+/**
-+ * timer_early_get_rate() - Get the timer rate before driver model
-+ */
-+unsigned long notrace timer_early_get_rate(void)
++int board_fdt_blob_setup(void **fdtp)
 +{
-+	unsigned int freq;
-+	int ret = loongarch_timer_get_freq_cpucfg(&freq);
-+
-+	if (ret)
-+		panic("Failed to read timer frequency from cpucfg: %d\n", ret);
-+
-+	return freq;
-+}
-+
-+/**
-+ * timer_early_get_count() - Get the timer count before driver model
-+ *
-+ */
-+u64 notrace timer_early_get_count(void)
-+{
-+	return loongarch_timer_get_count(NULL);
-+}
-+#endif
-+
-+#if CONFIG_IS_ENABLED(BOOTSTAGE)
-+ulong timer_get_boot_us(void)
-+{
-+	int ret;
-+	u64 ticks = 0;
-+	u32 rate;
-+
-+	ret = dm_timer_init();
-+	if (!ret) {
-+		rate = timer_get_rate(gd->timer);
-+		timer_get_count(gd->timer, &ticks);
-+	} else {
-+		ret = loongarch_timer_get_freq_cpucfg(&rate);
-+		if (ret)
-+			panic("failed to read timer frequency from cpucfg: %d\n", ret);
-+
-+		ticks = loongarch_timer_get_count(NULL);
-+	}
-+
-+	/* Below is converted from time(us) = (tick / rate) * 1000000 */
-+	return lldiv(ticks * 1000, (rate / 1000));
-+}
-+#endif
-+
-+static int loongarch_timer_probe(struct udevice *dev)
-+{
-+	struct timer_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-+	unsigned int rate;
-+	int ret;
-+
-+	ret = loongarch_timer_get_freq_cpucfg(&rate);
-+	if (ret < 0) {
-+		dev_err(dev, "failed to read timer frequency from cpucfg: %d\n",
-+			ret);
-+		return ret;
-+	}
-+
-+	uc_priv->clock_rate = rate;
-+
++	/* QEMU stores the DTB to 0x100000 */
++	*fdtp = (void *)VIRT_FDT_BASE;
 +	return 0;
 +}
+diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.env b/board/emulation/qemu-loongarch/qemu-loongarch.env
+new file mode 100644
+index 000000000000..7655f26d8d6b
+--- /dev/null
++++ b/board/emulation/qemu-loongarch/qemu-loongarch.env
+@@ -0,0 +1,5 @@
++stdin=serial,usbkbd
++stdout=serial,vidconsole
++stderr=serial,vidconsole
 +
-+static const struct timer_ops loongarch_timer_ops = {
-+	.get_count = loongarch_timer_get_count,
-+};
++boot_targets=qfw usb scsi virtio nvme dhcp
+diff --git a/configs/qemu-loongarch64_defconfig b/configs/qemu-loongarch64_defconfig
+new file mode 100644
+index 000000000000..5d5ae44f8e56
+--- /dev/null
++++ b/configs/qemu-loongarch64_defconfig
+@@ -0,0 +1,35 @@
++CONFIG_LOONGARCH=y
++CONFIG_SYS_MALLOC_LEN=0x800000
++CONFIG_SYS_MALLOC_F_LEN=0x4000
++CONFIG_NR_DRAM_BANKS=8
++CONFIG_ENV_SIZE=0x20000
++CONFIG_DM_RESET=y
++CONFIG_SYS_LOAD_ADDR=0x02000000
++CONFIG_SHOW_REGS=y
++# CONFIG_OF_BOARD_FIXUP is not set
++CONFIG_SYS_PCI_64BIT=y
++CONFIG_FIT=y
++CONFIG_BOOTSTD_FULL=y
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_USE_BOOTARGS=y
++CONFIG_BOOTARGS_SUBST=y
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO=y
++# CONFIG_CMD_MII is not set
++CONFIG_CMD_2048=y
++CONFIG_CMD_RTC=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_SYSBOOT=y
++CONFIG_CMD_QFW=y
++CONFIG_PARTITION_TYPE_GUID=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_BLKMAP=y
++CONFIG_EFI_MEDIA=y
++CONFIG_DM_MMC=y
++CONFIG_DM_MTD=y
++CONFIG_FLASH_SHOW_PROGRESS=0
++CONFIG_SYS_MAX_FLASH_BANKS=2
++CONFIG_PCI_REGION_MULTI_ENTRY=y
++CONFIG_DM_REBOOT_MODE=y
++CONFIG_RESET_SYSCON=y
++CONFIG_HEXDUMP=y
+diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
+index 5d0dd83d8aca..a142cd3360ac 100644
+--- a/doc/board/emulation/index.rst
++++ b/doc/board/emulation/index.rst
+@@ -11,6 +11,7 @@ Emulation
+    network
+    video
+    qemu-arm
++   qemu-loongarch
+    qemu-mips
+    qemu-ppce500
+    qemu-riscv
+diff --git a/doc/board/emulation/qemu-loongarch.rst b/doc/board/emulation/qemu-loongarch.rst
+new file mode 100644
+index 000000000000..0d97dc7df797
+--- /dev/null
++++ b/doc/board/emulation/qemu-loongarch.rst
+@@ -0,0 +1,39 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
++.. Copyright (C) 2026 Yao Zi <me@ziyao.cc>
 +
-+U_BOOT_DRIVER(loongarch_timer) = {
-+	.name = "loongarch_timer",
-+	.id = UCLASS_TIMER,
-+	.probe = loongarch_timer_probe,
-+	.ops = &loongarch_timer_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
++QEMU LoongArch
++==============
 +
-+U_BOOT_DRVINFO(loongarch_timer) = {
-+	.name = "loongarch_timer",
-+};
++QEMU for LoongArch supports a special 'virt' machine designed for emulation
++and virtualization purpose. This document describes how to run U-Boot under it.
++Only 64-bit LoongArch is supported at this time.
++
++The 'virt' platform provides the following as the basic functionality:
++
++    - A freely configurable amount of CPU cores
++    - U-Boot loaded and executing in the emulated flash, mapped to 0x1c000000.
++    - A generated device tree blob placed at 0x100000.
++    - A freely configurable amount of RAM, described by the DTB, starting at
++      0x0. RAM above 512MiB is placed at 0x80000000.
++    - A NS16550A serial port, discoverable via the DTB.
++    - An in-core constant frequency timer.
++    - syscon-reboot and syscon-poweroff for powering off and rebooting the
++      system.
++    - A generic ECAM-based PCI host controller, discoverable via the DTB.
++
++Additionally, a number of optional peripherals can be added to the PCI bus.
++
++See :doc:`../../develop/devicetree/dt_qemu` for information on how to see the
++devicetree actually generated by QEMU.
++
++Building and Running
++--------------------
++
++Set the CROSS_COMPILE environment variable as usual, and run::
++
++    make qemu-loongarch64_defconfig
++    make
++
++The minimal QEMU command line to get U-Boot up and running is::
++
++    qemu-system-loongarch64 -M virt -nographic -bios u-boot.bin
+diff --git a/include/configs/qemu-loongarch.h b/include/configs/qemu-loongarch.h
+new file mode 100644
+index 000000000000..7103dc1b02ef
+--- /dev/null
++++ b/include/configs/qemu-loongarch.h
+@@ -0,0 +1,17 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
++ */
++
++#ifndef __CONFIG_H
++#define __CONFIG_H
++
++/*
++ * LoongArch QEMU always places a part of the RAM at 0x0. These options are only
++ * intended to specify the initial stack pointer address, and can be replaced
++ * with CUSTOM_SYS_INIT_SP_ADDR when it's supported in the future.
++ */
++#define CFG_SYS_INIT_RAM_ADDR	0x0
++#define CFG_SYS_INIT_RAM_SIZE	0x80000
++
++#endif
 -- 
 2.55.0
 
