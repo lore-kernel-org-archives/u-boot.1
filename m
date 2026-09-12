@@ -4,183 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2403C88E53
-	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 13:26:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AE21C79FB6
+	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 13:27:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D8281407CF;
-	Sat, 12 Sep 2026 13:26:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BBB52406ED;
+	Sat, 12 Sep 2026 13:27:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TycDxTkWr9xI; Sat, 12 Sep 2026 13:26:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 614DF40623
+ id yOep0GVmjuWa; Sat, 12 Sep 2026 13:27:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 66CF540726
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789219610;
-	b=Uzx1jlDmZm1Ku2v7AiE4mwgXXxlz4kEO1mT15XysWlXeuKAEr9fpLMrLLDGm9lrQ69Mr
-	 18iatagaktYYBIj5XhhdoBo34HB2RaMvRiQLmqFQt3wXi6IUQxFzAr6FyoIcM/TkDmSBR
-	 1nVTBkTTlaPaEAs75eH+NOmKPsAm9Hzfy0ueCbTa0cv2CeZWr71L9UzPT5xDXH3sEjjfE
-	 IY64xLyZMHRUr3snub+esLoSyWIPXwes/R+l2Jh2jeBVisTrE25mOzjACiliV59luTjQX
-	 +L/nl1LRtH6Y8SM+YkGlcsx24JKRMD/wc05I5Gt/OhL6trVxiOmwoKeiAPWI9/HQ1jA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789219634;
+	b=T7sOybu2kMZ7s0w8yh0IW8OLZPPwfCgi7xaqgsRl6/R7N5K2KYUwXuZx368dtBvMAS95
+	 3XeWpAN6l7Rrym9NV87c32nF9bg0e+BTZfGroNXtd0Nm+te1ygseq8JbZ6y1VZNA+zGgO
+	 LYNbx96HfwEhxZBdeE32ifUOwe7/6YJ9Hyd3PnZJjrZ8+Fme1av5TeQc51wYjAXWBL6se
+	 BLNs/2jv89yVjwN1FM2AMbJa8sGVBwzdBHA4PBtdhJTzw7vr5d2YHYlqlufBsRcvVLoDP
+	 oC6haglLWM8flfVqamRsEnQGcZHxoQcoOpMQY7JMYT/HWN2topy7PiRDfQWWy+tGd/g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789219610;
+	c=relaxed/relaxed; t=1789219634;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Last-TLS-Session-Version:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=i0RuKv1m9xjoCUCQ866zvYdINqcZYRReMV2qdo13WTY=;
-	b=i8waZlOihciHl+ulYMfA6M1T4qKWLncuIi+IOqEKba8++dj5YwMcGztLaAuFbRCBMa0J
-	 Qn6fbC1cHkihXnmVKrS5CnwrwM0qVxkMQeAWtxCZm2RpbKBzzQpwvqAq347AnHbe90BWC
-	 fpekfpKgdGlvRqYH4UMddlWqmOTJCr6jCNNALMJe3NMUy846gZjf3b+9UwvdtLdXpju2U
-	 6ECKOYtugvSZZ7OlmeaeCYBASfA9R3UDJkr8hUoBu+AxawBzQC8SJD43tX2QOoXcLf7Di
-	 NZDSx8y+JlPjOWaGVys4JF4UAwSrZHW4Db++INF6ALAWC/Y9XN33ZPCjexjgf9EZ06g==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=canonical.com;
-	dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=erhXX8fU;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=sm0IrzqVY+ZIRjYNbbvWV5K+dLMAFv6PLBEzFX4QKUE=;
+	b=ft+0bSnLXUdsAbwB7CihjKLz7CtXoCmD1qPVCnahP+Op5ZO2J1/Tsuh/6U8Ndrjsjm1X
+	 d4IFUXUocKaEP+d0crR9sD58YFl1chfgaYrWmE9o7JYTGErmVgi6UlxHBLxdK4DmRJseC
+	 iUjJq4n8OjdLu2nVoVxzLJgOpy0OXX+M4CGFpC+anw92PhhTaNAEs2DOxw5p5Qs6ge1ns
+	 7aThujZFEmXJsHZ2NT/s2eoF9dqiPXi7WhzKNeHhWPi6/F5R8E8o6FnvMrSreI6xOgQKv
+	 Qkhbc4TwBwGqaZ8fO3LV/vLeAMChI51HpGE1PxH3TE4OsuIHINzVU8dGyUS9UIVE+Ew==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789219610;
-	bh=i0RuKv1m9xjoCUCQ866zvYdINqcZYRReMV2qdo13WTY=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=mMwQjhb+4cWKwo/+ZuHSyoqZlv923wcjUa+jSi3ThvF8OwFl0sQTpkT7sdYK/LGYV
-	 U3zjm81eGm2qfWKar+GDh/IlEjyOwHeVs5SEYxfb/0q2R5jv2SoYe5dBjK96AcGqLC
-	 3Sm5a4dyoVCcGcKVBdMo5QN0KwGg6fmNaGuuOb4KuKOU4MwFW3Hs82gtM1QbDwaVB5
-	 IcbuQnqsVKFxpqppM6McVHioAmsOuZ7zgc+3Qycu4I0j2NsQpmSKt+j/fYoFmzkbyb
-	 Cl65LW6t5lyMVGPZbdxsPZTzt0VDFs9lrGSpLRK9N+dI6kXJojox6tvycFlv/lFRnh
-	 2itE/TX+SxaCw==
+	d=lists.u-boot-project.org; s=default; t=1789219634;
+	bh=sm0IrzqVY+ZIRjYNbbvWV5K+dLMAFv6PLBEzFX4QKUE=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=aC2gO9vIp32KCfpP5n0N2f0POn2S8BPBqZcnIRaxTuqipIWnrCtj3VrfcH2tu/S34
+	 Hh+2f5PXKPmCuB7JH0nXWk7WCAvJ0sRtD2ObkTiQ3hKKOOwxxFuAtl8+UV48Fcukgp
+	 ksbLmBywiGAU2TFhTzfzdwtCtQod4X0yy3czVro/sSmLBp/TAZhvM0YxgMT31OJqkG
+	 jLpN4h2WhMQW3I/6nfREl3ivcavi+Ofi0HiwQPYJVe7Y1IDL7UhroPNPUBcbz9geti
+	 ca+vIJa4LfO41ME/U6ZfFOtovWuEcbLFK9LrH/nWaenO8nCxaPSRsOJlenA1BFHIAm
+	 o6qQMQtcIy42A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 614DF40623;
-	Sat, 12 Sep 2026 13:26:50 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id E3D522E3
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:45:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 66CF540726;
+	Sat, 12 Sep 2026 13:27:14 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3FE42E4E
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 06:35:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CA23540718
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:45:23 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2267240100
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 06:35:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mQd3X6X2OmnR for <u-boot@lists.u-boot-project.org>;
- Sat, 12 Sep 2026 12:45:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 1B0F540702
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=185.125.188.122
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789217122;
- b=nZqZ9B94njXeguaqGK3NzHqdiife+UsMO+n8ZEbr+D2L++5bg9E4gJgwkwvcaaw1SORL
- TD7zcwn8UIkC74appeuPPC/cPuQvp5rr8p34JiJX0eEkoU/LAc+eUiX9I4SaPfJeKeGFM
- /++k5MLsYBTUdbPgWCDa+Q2vOklpIX8juv3rAHlm2gz6xdWQHKSI6Y3GgPRl5/+hKoo+k
- QKnahExejf/eajvQL9s+sfQQuFoVvUP4Rkaq1KSz2IWXPdSwjV9nBXoYeRUHA46BGH1Qe
- hCqiJcLsv3mAhGMEHunPClm97dkpdM83YiOhcVJHbLJmJxisOdfTAX5+wrcwhQgKBjA==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RC1-EtNqu2IC for <u-boot@lists.u-boot-project.org>;
+ Sat, 12 Sep 2026 06:35:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 6BB67400E4
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a01:4f8:1c1a:5a04::1"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789194923;
+ b=oEWA4iGBfAOwjf107fok1eMHUCzPpK8/Yu05f0iGB30Bw7G3An63VAXxacRENTZLjJ8+
+ PyAI+GRn7vkks3V6keNU71q3vfEyQ5e0m5mpO5sDn8pCYiXbiJFHNVyUrUbp9XEpGsJqW
+ ytDpUIG0bGTBuFccNKPYktihyzNoDmZSwf5akqqDUiLP2N4Ovvcj0y0x9QFtopVU1B6nT
+ 6n3FgW+BFtuBLYUu/w+IpfIwAi0XdauZIvOsZjr3mou3x4yOj2nXAPjco+Yu26AhwEGkC
+ JMN93/rYmQeDPU2RFA+KBaKd4vhtbPJt2UtrpPPuUcljaYt1jPX8RoxQnHSIGQ6DMkA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789217122;
- h=Received-SPF:Received:DKIM-Signature:Received:
- X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
- X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
- In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
- bh=i0RuKv1m9xjoCUCQ866zvYdINqcZYRReMV2qdo13WTY=;
- b=Igo3ZOG5RWiu2QlJ0bza7Mq91lz8oPWarcStOtiASaZVYgpc+V8Lm3oTZEE09FY3YZHz
- 0cOn/1sql1ti7iIYlB6u+jAtggsoa0L8UyTRfE7a8/jtZDCAqdZz/mziVWexRQ4YitV5M
- gOgktdXlrRuLQD/xIs8tuHdXQauOqW8l8CVb7FB23UPWNCjWcNY7vonVm8clBxa3CCAIn
- 1T3jPGmAvS/RpkIvYxfMoRR4HjHOGVjRE5LaRhIeu0je+yAqBr5H9Oaj02Q9NZ28AWEOt
- z8o3IXN1ME6oT3msSjqlmAhkMKW04qQk18EXel8wf3SeIfIZeEI7YbY4qOPjo+UPkbA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
- dmarc=pass header.from=canonical.com; 
- dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
- header.s=20251003 header.b=erhXX8fU; 
- arc=none smtp.remote-ip=185.125.188.122
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
- envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=erhXX8fU
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1B0F540702
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:45:21 +0000 (UTC)
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
- [209.85.210.200])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 44E383FE32
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:45:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1789217120;
- bh=i0RuKv1m9xjoCUCQ866zvYdINqcZYRReMV2qdo13WTY=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=erhXX8fUByBTD1wyTFblZgipUTS6TPnlG1Aj2BsJ5CSHcsdgQJe7Fo4ogNx8vxGTK
- r3XtiaUfo2olG/PN0Xwfg/xIG4B2q/igCZ2MzUudUwymixTYLDFVNB+8BQ9I1RX9QU
- I5+oJUOS1O2QO9f1qxzBSoNdHOKUzN4aJ46lNkme3afn6udb4R75XzdshQqoAR9V0x
- CzwvkNChM/TN69wnqkGMMzT0XFUSaPAgymUmAwltwakDd8ikuQIKPzibYJra2HOtBY
- 0kZsj/OW8yYHIR2bJH5WCa/FwvXbCnAryN+/az648BZJpffQGz+bZPDndQekEYW7Di
- fP8wbkr+Y6kwiJUtM/iL+wWu4ZAd/o4+49762mUdq/ESAgdbV/nSIHUgp38lzvNYnp
- r6ZDkjm8cDiOEjkWYf2hnWWx7w18RZzfCTKBFIG++BgPRRu5NdTFSl6vbaVaNXVew8
- x95nKviVheKO5aUkBI+ncjfvEdOnIUrAdfXHYbQ+JlE7go0ChN/iIkuW8bhUZX8SWT
- Nq1Sp3mmCYPgdB2E4f/WdmSMVtT8HI/3UK8RJ4UDNVBTFZB4py+v4DuM9ZFgi7GWI2
- UFhog90QbmkjeTQH4kWL2vbn/xTk2xc1sixU6Lxq6buM7byBPMwklWmZ7CssTsiXQf
- FoYN7ShcEN36zDnXO8Zdykx4=
-Received: by mail-pf1-f200.google.com with SMTP id
- d2e1a72fcca58-86a7bb1dd95so2079200b3a.0
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 05:45:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789217119; x=1789821919;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=i0RuKv1m9xjoCUCQ866zvYdINqcZYRReMV2qdo13WTY=;
- b=gKAJF8jcpY60E0iMeXdqzkh1dyxYlJ3+I2NGt7jodv3qZiiOyals5gFVQxrJQgoh5w
- wsqMZpY3YLOaXqasG7qwGXhmXbInaeARdruCSql9L5Umcf8QO4Si1uhKBzF3r4Dems1z
- hxpUEMbICiUqogxfcUck/qmDDbYyr6djMYe3xXpQjaELxwM62e6zmH6WdvcLR7HwqGag
- RviS3k9C3i/336tLn3YQw8gsrMFo1UBxVwJ0bkKhR6ZjmNLN5/datD9gEPI5l3MhMk4U
- z/2soWEquaR+R+xg58G4AdM23kxFG4cDa6CAdq2+YND2wpVK5exhoLMZL8mQcbYQug0B
- YlCA==
-X-Gm-Message-State: AFuF++mgIp4ksMsxZOSUhP8ioEnujMkrRNStf5tosgkPamt8Anrak7nt
- cqAbMwisFseDillAzRlTdPoMu/fFMQEc++Tj04AXDf9vAYR/hWxpMaTIURy4pUQNibNUEZzHszv
- SEf6TJojK7wFQQ41192NiQKCc2VHxU/HpYSjBq/SnsR338EF3JFAVCDHz8ptI+Mbeqwsh/eFOyf
- O3vw0CWw70Ylunnfh1/Q==
-X-Gm-Gg: AYBFou3tnOeQBDpSQHVv54X8a9i8OSAxPKZunIWPlWodr5jnUZxm6e5C+GQ0sbQG4IM
- DO15FiTVnOd2xUaZeD8JlmDk8lKUfTfz+Sr3mkcdRlDYsHjxZFxC59BfypcV1YfOnBnoVIR5uAE
- ecFz81yzp3GybSGvjhqBuaXRFFp9NoI1Efs/93wTMH29K9glPhqQnY953zerS3ZVXWdogv4lJQC
- 4V7uctr7GdFNoanl+QVhS/LV69vyixMXIZUeOoWcUuSR3FNU/6jyUZpu80pCh9BmVCn/7edQFmy
- HCoivRSDMzESir74maWZL3sCSxyZjLvXRZbM9dqjfIdYkgCxaj3STdZCB/9pCOJmc0mmovBKDYf
- Kwyz/aoyH1Ne+23sLpm6VLrn4QfvyyKZdrFnWI/Npt2ui/Ja4jym7gqDIrRpS1wQDrQ==
-X-Received: by 2002:a05:6a00:278f:b0:861:295:2d78 with SMTP id
- d2e1a72fcca58-869b107a28bmr11934172b3a.3.1789217118435; 
- Sat, 12 Sep 2026 05:45:18 -0700 (PDT)
-X-Received: by 2002:a05:6a00:278f:b0:861:295:2d78 with SMTP id
- d2e1a72fcca58-869b107a28bmr11934138b3a.3.1789217117976; 
- Sat, 12 Sep 2026 05:45:17 -0700 (PDT)
-Received: from noble-uboot.tail872496.ts.net
- (211-75-139-218.hinet-ip.hinet.net. [211.75.139.218])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-86b291c5e8dsm2272101b3a.32.2026.09.12.05.45.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 12 Sep 2026 05:45:17 -0700 (PDT)
-From: Aristo Chen <aristo.chen@canonical.com>
+ c=relaxed/relaxed; t=1789194923;
+ h=X-Greylist:Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:
+ Date:Message-ID:X-Mailer:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:X-Last-TLS-Session-Version;
+ bh=sm0IrzqVY+ZIRjYNbbvWV5K+dLMAFv6PLBEzFX4QKUE=;
+ b=EeURulwZRAS7VSfMT6fPUZnO2nIZfPmggu0o4HGOp8IpA8kTD9lDZp8MfjVwUOjb0lEl
+ 4nmW0nGnvDUMd7FL29SHtbHFprBR43RLt8IjkS1PE3ZfyvZDhL5HFr/spJBQdEl3hwTBD
+ 0ZqmvZlONLbGSiF/Pb+/ZVbPhV1k1Iw3WoveEY0GJ2NNH2JNikQNqS8DA9JDUs3deeFjc
+ B+AVgO68NJJfhAW16Bpq414MuIhNj/OLZzlCO+7MSsDcg8BhFfLk4aNfiDtBeRT2fJRH/
+ UthMQdemu20LIl0maIQb3bzRB8JAdCpJbscxFWUg+jJRNiheTdS5LKMuqb6zddUv0KQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=pass header.from=lucidmail.xyz; 
+ dkim=pass header.d=lucidmail.xyz header.i=@lucidmail.xyz header.a=rsa-sha256
+ header.s=dkim header.b=BPfQwFUk; 
+ arc=none smtp.remote-ip="2a01:4f8:1c1a:5a04::1"
+X-Greylist: delayed 273 seconds by postgrey-1.37 at util1.osuosl.org;
+ Sat, 12 Sep 2026 06:35:23 UTC
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=lucidmail.xyz
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=lucidmail.xyz header.i=@lucidmail.xyz
+ header.a=rsa-sha256 header.s=dkim header.b=BPfQwFUk
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:4f8:1c1a:5a04::1; helo=mail.lucidmail.xyz;
+ envelope-from=leow149@lucidmail.xyz; receiver=<UNKNOWN> 
+Received: from mail.lucidmail.xyz (mail.lucidmail.xyz
+ [IPv6:2a01:4f8:1c1a:5a04::1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6BB67400E4
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 06:35:22 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 3B90E177D5B; Sat, 12 Sep 2026 08:30:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lucidmail.xyz;
+ s=dkim; t=1789194646;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=sm0IrzqVY+ZIRjYNbbvWV5K+dLMAFv6PLBEzFX4QKUE=;
+ b=BPfQwFUkJTyI78sQVCD5N5P/l96zAgIZPC7q3rIGIKkQKt4kINH+WH6rw//QDE3f4VNJjQ
+ YkSEG5V4IWsnAZ3Z0TCVw4C8Qmv+yX2bGw19EYkohubgnUjg5KdOcWjrrYQ7oLNEicheu0
+ JMa357cKZLaqGdWmdvvXF1WvfhPUt8ue+5YkKRUSdcZ2oPOGeqVxB+CpS8RW5bEfqSpcmO
+ VazMHS7ypztqEcvpSurZ3dgmMZlV5LFQC2qWs52dstinSfMMiFWsxqZyjBefP/kO7OISSB
+ bp4nH2oY8DhDkKnKtKX2tBJVVHNr7KCNUEcIo81FYAjXl4ktrbXrvI/pRmME9g==
+From: leow149 <leow149@lucidmail.xyz>
 To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Daniel Golle <daniel@makrotopia.org>,
- James Hilliard <james.hilliard1@gmail.com>,
- Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 5/5] test: py: add tests for the FIT image-data property
-Date: Sat, 12 Sep 2026 12:44:51 +0000
-Message-ID: <20260912124454.13578-6-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260912124454.13578-1-aristo.chen@canonical.com>
-References: <20260912124454.13578-1-aristo.chen@canonical.com>
+Cc: andre.przywara@arm.com, trini@konsulko.com, ilias.apalodimas@linaro.org,
+ sumit.garg@kernel.org, james.hilliard1@gmail.com,
+ leow149 <leow149@lucidmail.xyz>
+Subject: [PATCH] sunxi: add TrimUI Smart Pro (A133) board support
+Date: Sat, 12 Sep 2026 08:30:35 +0200
+Message-ID: <20260912063037.81151-1-leow149@lucidmail.xyz>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 12 Sep 2026 13:26:38 +0000
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Sat, 12 Sep 2026 13:27:13 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -194,409 +141,406 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Cover mkimage's resolution of image-data references between images. The
-positive tests check that an inline FIT carries identical data and hash
-values on the sharer and the target while their own properties remain
-independent, that external data mode points both nodes at a single copy
-of the payload, that a resolved FIT can be re-processed with -F
-including conversion to external data, and that two nodes with
-identical cipher settings share the same ciphertext both inline and
-external, whether the IV comes from an iv-name-hint or from an explicit
-iv that is honored and retained in the FIT.
+Board bring-up for the TrimUI Smart Pro handheld (Allwinner A133 Plus):
 
-The negative tests check that mkimage rejects references to undefined
-images, chained references, data that disagrees with the target,
-image-data combined with external data properties, a configuration
-whose image-data sharers have overlapping load regions, sharing where
-only one node is encrypted, and encrypted sharing where the nodes
-disagree on the IV, through different iv-name-hints, different explicit
-ivs or no shared IV source at all.
+- New board DTS (sun50i-a133-trimui-smartpro.dts) and defconfig.
+- SUNXI_BL31_BASE: A133 selects SUN50I_GEN_H6 (shared H6-family
+  peripheral IP) but its TF-A platform.mk sets SUNXI_BL31_IN_DRAM,
+  unlike other SUN50I_GEN_H6 members which run BL31 from SRAM. Without
+  its own case here, BL31 silently falls through to the wrong load
+  address and crashes on real hardware.
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+Boots mainline U-Boot end to end on real hardware (SPL -> BL31 ->
+U-Boot -> distro-boot).
+
+Signed-off-by: leow149 <leow149@lucidmail.xyz>
 ---
- test/py/tests/test_fit_image_data.py | 373 +++++++++++++++++++++++++++
- 1 file changed, 373 insertions(+)
- create mode 100644 test/py/tests/test_fit_image_data.py
+ arch/arm/mach-sunxi/Kconfig                   |   7 +
+ configs/trimui-smartpro_defconfig             |  64 ++++
+ .../allwinner/sun50i-a133-trimui-smartpro.dts | 285 ++++++++++++++++++
+ 3 files changed, 356 insertions(+)
+ create mode 100644 configs/trimui-smartpro_defconfig
+ create mode 100644 dts/upstream/src/arm64/allwinner/sun50i-a133-trimui-smartpro.dts
 
-diff --git a/test/py/tests/test_fit_image_data.py b/test/py/tests/test_fit_image_data.py
+diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+index b0c5d3cd..c12f9b4c 100644
+--- a/arch/arm/mach-sunxi/Kconfig
++++ b/arch/arm/mach-sunxi/Kconfig
+@@ -268,6 +268,13 @@ config SUNXI_BL31_BASE
+ 	hex
+ 	default 0x00044000 if MACH_SUN50I || MACH_SUN50I_H5
+ 	default 0x40000000 if MACH_SUN50I_H616
++	# A133 selects SUN50I_GEN_H6 (shared H6-family peripheral IP) but its
++	# TF-A platform.mk sets SUNXI_BL31_IN_DRAM := 1, unlike other
++	# SUN50I_GEN_H6 members which run BL31 from SRAM at 0x00104000 -- needs
++	# its own case here or it silently falls through to the wrong address
++	# and BL31 crashes on real hardware, jumping into garbage near its
++	# actual linked base instead.
++	default 0x40000000 if MACH_SUN50I_A133
+ 	default 0x00104000 if SUN50I_GEN_H6
+ 	default 0x00054000 if MACH_SUN55I_A523
+ 	default 0x0
+diff --git a/configs/trimui-smartpro_defconfig b/configs/trimui-smartpro_defconfig
 new file mode 100644
-index 00000000000..b74ba1c3f5a
+index 00000000..64d26459
 --- /dev/null
-+++ b/test/py/tests/test_fit_image_data.py
-@@ -0,0 +1,373 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2026 Canonical Ltd.
++++ b/configs/trimui-smartpro_defconfig
+@@ -0,0 +1,64 @@
++# TrimUI Smart Pro (Allwinner A133 Plus, sun50iw10p1) — out-of-tree hobbyist port
 +#
-+# Test mkimage handling of the 'image-data' FIT property
++# DRAM_* values below are REAL, pulled directly from the live device's own
++# /sys/firmware/fdt (the "/dram" node's dram_para[00..31] array — the actual
++# resolved config the vendor kernel booted with, not a guess). Cross-checked
++# against the boot0 UART console log (CLK=792MHz, para1=0x30fa, para2=0x4000000,
++# tpr13=0x7521 all matched exactly). Several of these differ from the
++# liontron-h-a133l placeholder values previously here (TPR6/TPR11/TPR12 were
++# wrong; TPR10/TPR13/TPR14 happened to already be correct).
++CONFIG_ARM=y
++CONFIG_ARCH_SUNXI=y
++CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-a133-trimui-smartpro"
++CONFIG_DRAM_CLK=792
++CONFIG_SPL=y
++CONFIG_DRAM_SUNXI_DX_ODT=0x7070707
++CONFIG_DRAM_SUNXI_DX_DRI=0xd0d0d0d
++CONFIG_DRAM_SUNXI_CA_DRI=0xe0e
++CONFIG_DRAM_SUNXI_PARA0=0xd0a050c
++CONFIG_DRAM_SUNXI_MR11=0x4
++CONFIG_DRAM_SUNXI_MR12=0x72
++CONFIG_DRAM_SUNXI_MR14=0x7
++CONFIG_DRAM_SUNXI_MR22=0x26
++CONFIG_DRAM_SUNXI_TPR0=0x6060606
++CONFIG_DRAM_SUNXI_TPR1=0x84040404
++CONFIG_DRAM_SUNXI_TPR6=0x48010101
++CONFIG_DRAM_SUNXI_TPR10=0x273333
++CONFIG_DRAM_SUNXI_TPR11=0x211b151e
++CONFIG_DRAM_SUNXI_TPR12=0x14141312
++CONFIG_DRAM_SUNXI_TPR13=0x7521
++CONFIG_DRAM_SUNXI_TPR14=0x2023211f
++CONFIG_MACH_SUN50I_A133=y
++# Real bug found via hardware testing: MACH_SUN50I_A133 `select`s
++# SUN50I_GEN_H6 (shared peripheral IP with the H6 generation, correct), but
++# arch/arm/mach-sunxi/Kconfig's SUNXI_BL31_BASE default table had no case
++# for A133 specifically, so it silently fell through to the H6 default of
++# 0x00104000 (SRAM). TF-A's own plat/allwinner/sun50i_a133/platform.mk sets
++# SUNXI_BL31_IN_DRAM := 1, meaning BL31 for THIS chip is actually linked to
++# run from DRAM (SUNXI_DRAM_BASE = 0x40000000), not SRAM. The address
++# mismatch made BL31 crash instantly on real hardware (jumped to garbage
++# near 0x40000000 within its first few instructions, confirmed via a
++# DEBUG=1 TF-A build's exception dump) — same root cause for both the FEL
++# and SD-card boot paths, since both load BL31 wherever this config says.
++# SUNXI_BL31_BASE has no Kconfig `prompt`, so it can't be overridden here —
++# fixed properly at the source: arch/arm/mach-sunxi/Kconfig now has an
++# explicit `default 0x40000000 if MACH_SUN50I_A133` case added.
++CONFIG_SUNXI_DRAM_A133_LPDDR4=y
++CONFIG_MMC_SUNXI_SLOT_EXTRA=2
++CONFIG_R_I2C_ENABLE=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_SPL_I2C=y
++CONFIG_SPL_SYS_I2C_LEGACY=y
++CONFIG_SYS_I2C_MVTWSI=y
++CONFIG_SYS_I2C_SLAVE=0x7f
++CONFIG_SYS_I2C_SPEED=400000
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_AXP717_POWER=y
++CONFIG_AXP_I2C_ADDRESS=0x34
++# AXP_DCDC2_VOLT has a Kconfig default (1000mV) under AXP717_POWER, but
++# AXP_DCDC3_VOLT does NOT — leaving it unset makes syncconfig block on an
++# interactive prompt forever (found the hard way). 1100mV confirmed REAL:
++# matches the boot0 console log's "DRAM_VCC set to 1100 mv" exactly.
++CONFIG_AXP_DCDC3_VOLT=1100
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_OHCI_HCD=y
+diff --git a/dts/upstream/src/arm64/allwinner/sun50i-a133-trimui-smartpro.dts b/dts/upstream/src/arm64/allwinner/sun50i-a133-trimui-smartpro.dts
+new file mode 100644
+index 00000000..c6369a91
+--- /dev/null
++++ b/dts/upstream/src/arm64/allwinner/sun50i-a133-trimui-smartpro.dts
+@@ -0,0 +1,285 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2026 (out-of-tree hobbyist port, not yet upstream)
++ *
++ * Board: TrimUI Smart Pro (Allwinner A133 Plus / sun50iw10p1)
++ *
++ * Sourced from:
++ *  - vendor DTB extracted from Knulli image (dtb_86065152.dts, offset
++ *    86065152 in knulli-a133-trimui-smart-pro-scarab-20260511.img)
++ *  - sun50i-a133-liontron-h-a133l.dts (mainline reference board, same SoC)
++ *  - sun50i-h700-anbernic-rg35xx-2024.dts (mainline handheld reference for
++ *    AXP717 regulator/battery wiring style)
++ *  - LIVE data pulled directly off the running unit over UART (root shell +
++ *    /sys/firmware/fdt, the kernel's own resolved device tree — not a guess):
++ *    real regulator voltages (confirmed via U-Boot's PMIC init console log),
++ *    real DRAM timing table (see trimui-smartpro_defconfig), real panel
++ *    timings (see the lcd0 comment block below).
++ *
++ * TODO markers below are places nothing above could resolve: buttons/
++ * joystick are NOT GPIO at all (confirmed: read over a UART-attached
++ * co-microcontroller, see BUTTON_PROBING_PLAN.md — needs a from-scratch
++ * serdev driver, not a DT gpio-keys node), and the panel's DSI
++ * init command sequence (register writes for the otm1289a controller) is
++ * not yet captured.
++ */
 +
-+"""Tests for the FIT 'image-data' property.
-+
-+An image node may name another image node under /images in an
-+'image-data' property to share its binary data. mkimage resolves the
-+reference by copying the data when building an inline FIT, and by
-+pointing both nodes at the same region when building with external data
-+(-E). Invalid references (undefined target, chained references,
-+mismatching data or incompatible cipher settings) must be rejected.
-+"""
-+
-+import os
-+import struct
-+import subprocess
-+
-+import pytest
-+
-+import fit_util
-+
-+BASE_ITS = '''
 +/dts-v1/;
 +
++#include "sun50i-a100.dtsi"
++#include "sun50i-a100-cpu-opp.dtsi"
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/input/linux-event-codes.h>
++#include <dt-bindings/leds/common.h>
++
 +/ {
-+    description = "image-data test";
++	model = "TrimUI Smart Pro";
++	chassis-type = "handset";
++	/* "trimui" is not a registered vendor prefix in dt-bindings yet;
++	 * fine for an out-of-tree hobbyist build, would need registering
++	 * (vendor-prefixes.yaml) before any upstream submission. */
++	compatible = "trimui,smart-pro", "allwinner,sun50i-a100";
 +
-+    images {
-+        kernel-1 {
-+            description = "test kernel";
-+            data = /incbin/("%(kernel)s");
-+            type = "kernel";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x40000>;
-+            entry = <0x40000>;
-+            hash-1 {
-+                algo = "sha256";
-+            };
-+        };
-+        kernel-alt {
-+            description = "same kernel at another address";
-+            %(alt_props)s
-+            type = "kernel";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x80000>;
-+            entry = <0x80000>;
-+            hash-1 {
-+                algo = "sha256";
-+            };
-+        };
-+        %(extra_images)s
-+    };
++	aliases {
++		serial0 = &uart0;
++	};
 +
-+    configurations {
-+        default = "conf-1";
-+        conf-1 {
-+            kernel = "kernel-1";
-+        };
-+        conf-2 {
-+            kernel = "kernel-alt";
-+        };
-+    };
++	chosen {
++		/* confirmed from the vendor boot.img kernel cmdline */
++		stdout-path = "serial0:115200n8";
++	};
++
++	battery: battery {
++		compatible = "simple-battery";
++		/* vendor DTB: pmu_battery_rdc = 0x93, pmu_battery_cap = 0x1388 (5000mAh) */
++		voltage-max-design-microvolt = <4200000>;
++	};
++
++	reg_vcc5v: regulator-vcc5v {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc-5v";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		regulator-always-on;
++	};
++
++	/* TODO: face buttons (A/B/X/Y, D-pad, L1/L2/R1/R2, start/select,
++	 * joystick clicks). The vendor DTB has NO gpio-keys node and no
++	 * "trimui_keypad"-style driver string was found in the firmware —
++	 * only a 3-key ADC "allwinner,keyboard_1350mv" node exists (that's
++	 * volume/fastboot-combo, not the face buttons). Real GPIO/ADC
++	 * assignments need to come from live probing on the actual unit
++	 * (pinctrl debugfs, evtest against the stock kernel, or a UART
++	 * dmesg capture during boot) — not guessed from another device.
++	 */
 +};
-+'''
 +
-+CHAIN_IMAGE = '''
-+        kernel-mid {
-+            description = "middle image in a chain";
-+            image-data = "kernel-1";
-+            type = "kernel";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x60000>;
-+            entry = <0x60000>;
-+        };
-+'''
++&cpu0 {
++	/* TODO: verify against A133 PLUS-rated OPP ceiling, not just A100's */
++	cpu-supply = <&reg_dcdc1>;
++};
 +
-+CIPHER = '''
-+            cipher {
-+                algo = "aes256";
-+                key-name-hint = "kern";
-+                iv-name-hint = "kiv";
-+            };
-+'''
++&mmc0 {
++	/* SD card slot. cd-gpios still unconfirmed — no hotplug detection, but
++	 * that's fine for a card already inserted at boot (proven live: this is
++	 * literally how SPL/BROM read this same card to boot in the first
++	 * place). Pin/clock wiring already provided by sun50i-a100.dtsi.
++	 * vmmc-supply guessed as the same general IO rail as mmc2 — unconfirmed,
++	 * first thing to revisit if this doesn't come up cleanly. */
++	bus-width = <4>;
++	vmmc-supply = <&reg_cldo3>;
++	status = "okay";
++};
 +
-+CIPHER_NO_IV = '''
-+            cipher {
-+                algo = "aes256";
-+                key-name-hint = "kern";
-+            };
-+'''
++&mmc2 {
++	/* eMMC — pin group/clocks/etc. already wired by sun50i-a100.dtsi, this
++	 * board file only needs the board-specific bits. bus mode confirmed
++	 * from the live boot log: negotiated DDR52, NOT HS200/HS400 — the
++	 * vendor kernel actively strips those capability flags at runtime
++	 * ("delete mmc-hs200-1_8v from dtb" / "delete mmc-hs400-1_8v from dtb"
++	 * in dmesg), so we don't claim them here either. vmmc-supply is a
++	 * reasonable inference (cldo3/vcc-io, the general 3.3V IO rail) but
++	 * NOT directly confirmed — no capture explicitly tied cldo3 to mmc2.
++	 */
++	bus-width = <8>;
++	non-removable;
++	cap-mmc-hw-reset;
++	mmc-ddr-1_8v;
++	vmmc-supply = <&reg_cldo3>; /* inferred, not directly confirmed */
++	status = "okay";
++};
 +
-+CIPHER_IV = '''
-+            cipher {
-+                algo = "aes256";
-+                key-name-hint = "kern";
-+                iv = [11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff 00];
-+            };
-+'''
++&r_i2c0 {
++	status = "okay";
 +
-+CIPHER_IV_ALT = '''
-+            cipher {
-+                algo = "aes256";
-+                key-name-hint = "kern";
-+                iv = [00 ff ee dd cc bb aa 99 88 77 66 55 44 33 22 11];
-+            };
-+'''
++	axp717: pmic@34 {
++		compatible = "x-powers,axp717";
++		reg = <0x34>;
++		interrupt-controller;
++		#interrupt-cells = <1>;
++		interrupt-parent = <&r_intc>;
++		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
 +
-+OVERLAP_SHARER = '''
-+        filler {
-+            description = "second sharer overlapping kernel-alt";
-+            image-data = "kernel-1";
-+            type = "loadable";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x80400>;
-+        };
-+'''
++		vin1-supply = <&reg_vcc5v>;
++		vin2-supply = <&reg_vcc5v>;
++		vin3-supply = <&reg_vcc5v>;
++		vin4-supply = <&reg_vcc5v>;
 +
++		axp_adc: adc {
++			compatible = "x-powers,axp717-adc";
++			#io-channel-cells = <1>;
++		};
 +
-+def mkimage(ubman, *args):
-+    """Run mkimage with the given arguments, returning the process result"""
-+    tool = os.path.join(ubman.config.build_dir, 'tools/mkimage')
-+    return subprocess.run([tool] + list(args), capture_output=True, text=True)
++		battery_power: battery-power {
++			compatible = "x-powers,axp717-battery-power-supply";
++			monitored-battery = <&battery>;
++			x-powers,no-thermistor;
++		};
 +
++		usb_power: usb-power {
++			compatible = "x-powers,axp717-usb-power-supply";
++		};
 +
-+def fdtget(itb, node, prop, ftype=None):
-+    """Read a property from the FIT, returning None if it is missing"""
-+    cmd = ['fdtget'] + (['-t', ftype] if ftype else []) + [itb, node, prop]
-+    result = subprocess.run(cmd, capture_output=True, text=True)
-+    if result.returncode:
-+        return None
-+    return result.stdout.strip()
++		/*
++		 * Regulator names carried over from the vendor DTB's "axp2202-*"
++		 * node names (AXP2202 == AXP717, confirmed: Allwinner's BSP driver
++		 * for "axp2202" has been shown driving a chip physically marked
++		 * AXP717). Voltages below are REAL, read directly from U-Boot's own
++		 * PMIC-init console log on the live unit (not decoded/guessed) —
++		 * each line printed "<rail>_vol = <mV>, onoff=<0|1>" at boot. dcdc2
++		 * (GPU/sys) wasn't printed at that boot stage (probably brought up
++		 * later by the kernel) — left undocumented rather than guessed.
++		 * dcdc1 (vdd-cpu) was 940mV at that instant but is DVFS-scaled by
++		 * cpufreq, so it's intentionally NOT hardcoded to a fixed value here.
++		 */
++		regulators {
++			reg_dcdc1: dcdc1 {
++				regulator-name = "vdd-cpu";
++				/* boot-time value was 940mV; real range needs the OPP table, not hardcoded here */
++			};
++			reg_dcdc2: dcdc2 {
++				regulator-name = "vdd-gpu-sys";
++			};
++			reg_dcdc3: dcdc3 {
++				/* confirmed real: matches boot0's "DRAM_VCC set to 1100 mv" exactly */
++				regulator-always-on;
++				regulator-min-microvolt = <1100000>;
++				regulator-max-microvolt = <1100000>;
++				regulator-name = "vdd-dram";
++			};
++			reg_aldo1: aldo1 {
++				/* real: 1800mV, onoff=1 at boot, but kernel disables it later (unused) */
++			};
++			reg_aldo2: aldo2 {
++				/* real: 3300mV, onoff=1 */
++			};
++			reg_aldo3: aldo3 {
++				/* confirmed: WiFi/BT IO rail (wlan_io_regulator), real: 3300mV */
++				regulator-always-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-name = "vcc-wifi-io";
++			};
++			reg_aldo4: aldo4 {
++				/* real: 1800mV, onoff=1 */
++			};
++			reg_bldo1: bldo1 {
++				/* confirmed: WiFi/BT power rail (wlan_power1), real: 3300mV.
++				 * NOT always-on: U-Boot log shows onoff=0 at boot — the
++				 * wifi/bt driver switches it on dynamically at runtime. */
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-name = "vcc-wifi";
++			};
++			reg_bldo2: bldo2 {
++				/* real: 1800mV, onoff=1 */
++			};
++			reg_bldo3: bldo3 {
++				/* real: 3300mV, onoff=1 */
++			};
++			reg_bldo4: bldo4 {
++				/* real: 1800mV at boot, kernel disables it later (unused) */
++			};
++			reg_cldo1: cldo1 {
++				/* confirmed: LCD panel power0 (lcd_power0="cldo1"), real: 1800mV */
++				regulator-always-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "vcc-lcd-1";
++			};
++			reg_cldo2: cldo2 { };
++			reg_cldo3: cldo3 {
++				/* real: 3300mV */
++				regulator-always-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-name = "vcc-io";
++			};
++			reg_cldo4: cldo4 {
++				/* confirmed: LCD panel power1 (lcd_power1="cldo4"), real: 3300mV */
++				regulator-always-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-name = "vcc-lcd-2";
++			};
++			reg_cpusldo: cpusldo {
++				/* real: 900mV, onoff=1 */
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <900000>;
++				regulator-max-microvolt = <900000>;
++			};
++		};
++	};
++};
 +
++&uart0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart0_pb_pins>; /* only pin group this SoC's dtsi defines; matches vendor cmdline's ttyS0 */
++	status = "okay";
++};
 +
-+def fdt_bytes(itb, node, prop):
-+    """Read a property from the FIT as bytes, returning None if missing"""
-+    value = fdtget(itb, node, prop, 'bx')
-+    if value is None:
-+        return None
-+    return bytes(int(tok, 16) for tok in value.split())
++/*
++ * TODO: WiFi/BT (XR829 on SDIO bus 1 / &mmc1, confirmed from strings:
++ * boot_xr829.bin, fw_xr829.bin, fw_xr829_bt.bin, sdd_xr829.bin — and
++ * confirmed live via the running kernel's "XRADIO WIFI OPEN" driver log,
++ * MAC dc:44:60:xx:xx:xx (redacted)). Power rails: bldo1 (3300mV, switched on
++ * dynamically, not always-on) + aldo3 (3300mV, always-on) — both wired
++ * above. GPIO wiring is REAL, read directly off the live unit's
++ * /sys/kernel/debug/gpio (not decoded from packed vendor fields):
++ *   bt_rst         = r_pio 0 2  (PL2)  output, active low
++ *   bt_hostwake    = r_pio 0 3  (PL3)  input
++ *   bt_wake        = r_pio 0 4  (PL4)  output
++ *   wlan_regon     = r_pio 0 5  (PL5)  output
++ *   wlan_hostwake  = r_pio 0 6  (PL6)  input
++ * Mainline equivalent is an mmc1 node + mmc-pwrseq-simple (using
++ * wlan_regon as the reset-gpios line) + whatever XR829 driver ends up
++ * used (no mainline driver exists yet — see project notes for the
++ * out-of-tree candidates). Not wired into an actual mmc1 node yet.
++ */
 +
++/*
++ * TODO: display. Panel is a 4-lane MIPI-DSI unit driven by an "otm1289a"
++ * controller IC (confirmed: boot log "OTM1289A:lcd panel init" + vendor
++ * live DTB's lcd_driver_name). Real timings pulled from the live lcd0 node
++ * (vendor's old "disp2"-style "allwinner,sunxi-lcd0" binding, not mainline):
++ *   native panel res: 720x1280 (portrait) — presented as 1280x720 landscape
++ *     via software rotation (boot log: "TRIMUI disp rotate:3" = 270°)
++ *   physical size: 135mm x 216mm
++ *   dot clock: 69 MHz (lcd_dclk_freq=0x45, matches boot log "dclk(69000000)")
++ *   horizontal: total=880 back-porch=88 sync-pulse=4  (lcd_ht/hbp/hspw)
++ *   vertical:   total=1320 back-porch=9 sync-pulse=4  (lcd_vt/vbp/vspw)
++ *   backlight PWM: 50000 Hz (lcd_pwm_freq=0xc350)
++ *   power rails: cldo1 (1800mV) + cldo4 (3300mV) — both wired above
++ * NOT yet captured: the panel's DSI init command sequence (the actual
++ * register writes the vendor driver sends to the otm1289a on power-up) —
++ * that's a separate reverse-engineering step (likely needs a DSI bus
++ * sniffer or kernel driver instrumentation, not just a UART/DTB pull) and
++ * is what a real mainline `panel-otm1289a` driver would still be missing.
++ */
 +
-+def build_fit_text(ubman, its_text, basename, *args, alt_props=None,
-+                   extra_images=''):
-+    """Build a FIT from a full .its template, returning (result, itb, kdata)"""
-+    kernel = fit_util.make_kernel(ubman, f'{basename}-kernel.bin', 'kernel')
-+    params = {
-+        'kernel': kernel,
-+        'alt_props': alt_props or 'image-data = "kernel-1";',
-+        'extra_images': extra_images,
-+    }
-+    its = fit_util.make_its(ubman, its_text, params, f'{basename}.its')
-+    itb = fit_util.make_fname(ubman, f'{basename}.itb')
-+    result = mkimage(ubman, *args, '-f', its, itb)
-+    with open(kernel, 'rb') as inf:
-+        kdata = inf.read()
-+    return result, itb, kdata
-+
-+
-+def build_fit(ubman, alt_props, extra_images='', basename='idata', *args):
-+    """Build a FIT from BASE_ITS, returning (result, itb, kernel_data)"""
-+    return build_fit_text(ubman, BASE_ITS, basename, *args,
-+                          alt_props=alt_props, extra_images=extra_images)
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtget')
-+def test_fit_image_data_inline(ubman):
-+    """Inline FIT: the data is copied and the reference is retained"""
-+    result, itb, kdata = build_fit(ubman, 'image-data = "kernel-1";')
-+    assert result.returncode == 0, result.stderr
-+
-+    assert fdt_bytes(itb, '/images/kernel-1', 'data') == kdata
-+    assert fdt_bytes(itb, '/images/kernel-alt', 'data') == kdata
-+
-+    # The reference and the node's own properties are retained
-+    assert fdtget(itb, '/images/kernel-alt', 'image-data', 's') == 'kernel-1'
-+    assert fdtget(itb, '/images/kernel-alt', 'load', 'x') == '80000'
-+
-+    # Each node hashes the same bytes
-+    hash1 = fdtget(itb, '/images/kernel-1/hash-1', 'value', 'bx')
-+    hash2 = fdtget(itb, '/images/kernel-alt/hash-1', 'value', 'bx')
-+    assert hash1 and hash1 == hash2
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtget')
-+def test_fit_image_data_external(ubman):
-+    """External FIT (-E): both nodes reference a single copy of the data"""
-+    result, itb, kdata = build_fit(ubman, 'image-data = "kernel-1";',
-+                                   '', 'idata-ext', '-E')
-+    assert result.returncode == 0, result.stderr
-+
-+    assert fdtget(itb, '/images/kernel-1', 'data-offset') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-offset')
-+    assert fdtget(itb, '/images/kernel-1', 'data-size') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-size') == str(len(kdata))
-+    assert fdtget(itb, '/images/kernel-alt', 'data') is None
-+
-+    # The payload appears exactly once, at the shared offset
-+    with open(itb, 'rb') as inf:
-+        blob = inf.read()
-+    assert blob.count(kdata) == 1
-+    totalsize = struct.unpack('>I', blob[4:8])[0]
-+    offset = int(fdtget(itb, '/images/kernel-1', 'data-offset'))
-+    assert blob[totalsize + offset:totalsize + offset + len(kdata)] == kdata
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtget')
-+def test_fit_image_data_reprocess(ubman):
-+    """A resolved FIT can be re-processed with -F, including to -E"""
-+    result, itb, kdata = build_fit(ubman, 'image-data = "kernel-1";',
-+                                   '', 'idata-re')
-+    assert result.returncode == 0, result.stderr
-+
-+    result = mkimage(ubman, '-F', itb)
-+    assert result.returncode == 0, result.stderr
-+
-+    result = mkimage(ubman, '-F', '-E', itb)
-+    assert result.returncode == 0, result.stderr
-+    assert fdtget(itb, '/images/kernel-1', 'data-offset') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-offset')
-+    with open(itb, 'rb') as inf:
-+        assert inf.read().count(kdata) == 1
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+def test_fit_image_data_invalid(ubman):
-+    """Invalid image-data references are rejected"""
-+    # Reference to an undefined image
-+    result, itb, kdata = build_fit(ubman, 'image-data = "nope";',
-+                                   '', 'idata-undef')
-+    assert result.returncode != 0
-+    assert "references undefined image 'nope'" in result.stderr
-+
-+    # Chained reference
-+    result, itb, kdata = build_fit(ubman, 'image-data = "kernel-mid";',
-+                                   CHAIN_IMAGE, 'idata-chain')
-+    assert result.returncode != 0
-+    assert 'chained references are not permitted' in result.stderr
-+
-+    # Own data disagreeing with the target's data
-+    other = fit_util.make_kernel(ubman, 'idata-other.bin', 'other')
-+    props = f'image-data = "kernel-1";\ndata = /incbin/("{other}");'
-+    result, itb, kdata = build_fit(ubman, props, '', 'idata-mismatch')
-+    assert result.returncode != 0
-+    assert "data does not match image-data target 'kernel-1'" in result.stderr
-+
-+    # image-data combined with external data properties
-+    result, itb, kdata = build_fit(
-+        ubman, 'image-data = "kernel-1";\ndata-size = <0x10>;',
-+        '', 'idata-extprop')
-+    assert result.returncode != 0
-+    assert 'must not be combined with external data properties' in \
-+        result.stderr
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+def test_fit_image_data_cipher_invalid(ubman):
-+    """Sharing encrypted data without compatible cipher settings fails"""
-+    # Only the sharing node is encrypted
-+    its_text = BASE_ITS.replace('entry = <0x80000>;',
-+                                'entry = <0x80000>;' + CIPHER)
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-oneside')
-+    assert result.returncode != 0
-+    assert 'only one of them is encrypted' in result.stderr
-+
-+    # Both encrypted but without any IV source, so each would get a
-+    # random IV and the ciphertexts would differ
-+    its_text = BASE_ITS.replace('hash-1 {', CIPHER_NO_IV + 'hash-1 {')
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-noiv')
-+    assert result.returncode != 0
-+    assert 'must use the same iv-name-hint or iv' in result.stderr
-+
-+    # Different explicit IVs would produce different ciphertexts
-+    its_text = BASE_ITS.replace('entry = <0x40000>;',
-+                                'entry = <0x40000>;' + CIPHER_IV)
-+    its_text = its_text.replace('entry = <0x80000>;',
-+                                'entry = <0x80000>;' + CIPHER_IV_ALT)
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-diff-iv')
-+    assert result.returncode != 0
-+    assert 'must use the same iv-name-hint or iv' in result.stderr
-+
-+    # Different iv-name-hints as well, since a hint drives the
-+    # encryption whenever it is present
-+    its_text = BASE_ITS.replace('entry = <0x40000>;',
-+                                'entry = <0x40000>;' + CIPHER)
-+    its_text = its_text.replace('entry = <0x80000>;',
-+                                'entry = <0x80000>;' +
-+                                CIPHER.replace('kiv', 'kiv2'))
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-diff-hint')
-+    assert result.returncode != 0
-+    assert 'must use the same iv-name-hint' in result.stderr
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtget')
-+def test_fit_image_data_cipher(ubman):
-+    """Nodes with identical cipher settings share the same ciphertext"""
-+    keydir = fit_util.make_fname(ubman, 'idata-keys')
-+    os.makedirs(keydir, exist_ok=True)
-+    with open(os.path.join(keydir, 'kern.bin'), 'wb') as outf:
-+        outf.write(os.urandom(32))
-+    with open(os.path.join(keydir, 'kiv.bin'), 'wb') as outf:
-+        outf.write(os.urandom(16))
-+
-+    its_text = BASE_ITS.replace('hash-1 {', CIPHER + 'hash-1 {')
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-cipher',
-+                                        '-k', keydir)
-+    assert result.returncode == 0, result.stderr
-+
-+    ciphertext = fdt_bytes(itb, '/images/kernel-1', 'data')
-+    assert ciphertext == fdt_bytes(itb, '/images/kernel-alt', 'data')
-+    assert ciphertext != kdata
-+    assert fdtget(itb, '/images/kernel-1', 'data-size-unciphered') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-size-unciphered') == \
-+        str(len(kdata))
-+
-+    # The shared ciphertext can also be made external
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-cipher-ext',
-+                                        '-k', keydir, '-E')
-+    assert result.returncode == 0, result.stderr
-+    assert fdtget(itb, '/images/kernel-1', 'data-offset') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-offset')
-+
-+    # A shared explicit iv works as well: it is honored by the
-+    # encryption, retained in the FIT and yields identical ciphertext
-+    its_text = BASE_ITS.replace('hash-1 {', CIPHER_IV + 'hash-1 {')
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-cipher-iv',
-+                                        '-k', keydir)
-+    assert result.returncode == 0, result.stderr
-+    ciphertext = fdt_bytes(itb, '/images/kernel-1', 'data')
-+    assert ciphertext == fdt_bytes(itb, '/images/kernel-alt', 'data')
-+    assert ciphertext != kdata
-+    authored_iv = bytes.fromhex('112233445566778899aabbccddeeff00')
-+    assert fdt_bytes(itb, '/images/kernel-1/cipher', 'iv') == authored_iv
-+    assert fdt_bytes(itb, '/images/kernel-alt/cipher', 'iv') == authored_iv
-+
-+    result, itb, kdata = build_fit_text(ubman, its_text,
-+                                        'idata-cipher-iv-ext', '-k', keydir,
-+                                        '-E')
-+    assert result.returncode == 0, result.stderr
-+    assert fdtget(itb, '/images/kernel-1', 'data-offset') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-offset')
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+def test_fit_image_data_overlap(ubman):
-+    """Sharers' load regions are covered by the configuration overlap check"""
-+    its_text = BASE_ITS.replace(
-+        'kernel = "kernel-alt";',
-+        'kernel = "kernel-alt";\n            loadables = "filler";')
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-overlap',
-+                                        extra_images=OVERLAP_SHARER)
-+    assert result.returncode != 0
-+    assert 'overlapping load regions' in result.stderr
++/*
++ * TODO: GPU (img,gpu / PowerVR GE8300) — no mainline binding to reference
++ * yet.
++ */
 -- 
-2.43.0
+2.55.0
 
