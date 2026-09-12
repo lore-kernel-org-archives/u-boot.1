@@ -1,132 +1,172 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AE21C79FB6
-	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 13:27:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 745E0C88E59
+	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 13:27:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BBB52406ED;
-	Sat, 12 Sep 2026 13:27:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 36DAA80E8B;
+	Sat, 12 Sep 2026 13:27:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yOep0GVmjuWa; Sat, 12 Sep 2026 13:27:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 66CF540726
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789219634;
-	b=T7sOybu2kMZ7s0w8yh0IW8OLZPPwfCgi7xaqgsRl6/R7N5K2KYUwXuZx368dtBvMAS95
-	 3XeWpAN6l7Rrym9NV87c32nF9bg0e+BTZfGroNXtd0Nm+te1ygseq8JbZ6y1VZNA+zGgO
-	 LYNbx96HfwEhxZBdeE32ifUOwe7/6YJ9Hyd3PnZJjrZ8+Fme1av5TeQc51wYjAXWBL6se
-	 BLNs/2jv89yVjwN1FM2AMbJa8sGVBwzdBHA4PBtdhJTzw7vr5d2YHYlqlufBsRcvVLoDP
-	 oC6haglLWM8flfVqamRsEnQGcZHxoQcoOpMQY7JMYT/HWN2topy7PiRDfQWWy+tGd/g==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789219634;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ekHHpVBiiE8M; Sat, 12 Sep 2026 13:27:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 493E380E82
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789219636;
+	b=tSxpo/U4ifgXIvwLedJWi0yVSncLLEYjhosTLosmiW53lCXY9NL7p8g2j8ZIzNEOHIQg
+	 BEslaB4G6npHCdBsZxqSuTfsKw6OcVEBpnv/n0L7TNLVOVLLvrTTj3/hPIw8yftdznL+X
+	 UAUZejmEp07r2iviGMiOdrcNKtLc/HcexX+acCrnWjhcCj8lmPZzJvMscGiP9eVANTesA
+	 D1YrR7K3cJActO1cYTYjrm5SBJtZg+JBgW89aVTFhwC/B/YTWQGOTPUzIYg7mD7AjvWsM
+	 k841tQXWJOpQx2L5sJ0Jlr2Ukhs4v6vFSX2jKi66FraQlDa7YZvbZ5Rw8DLFWFRbv6Q==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1789219636;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Last-TLS-Session-Version:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=sm0IrzqVY+ZIRjYNbbvWV5K+dLMAFv6PLBEzFX4QKUE=;
-	b=ft+0bSnLXUdsAbwB7CihjKLz7CtXoCmD1qPVCnahP+Op5ZO2J1/Tsuh/6U8Ndrjsjm1X
-	 d4IFUXUocKaEP+d0crR9sD58YFl1chfgaYrWmE9o7JYTGErmVgi6UlxHBLxdK4DmRJseC
-	 iUjJq4n8OjdLu2nVoVxzLJgOpy0OXX+M4CGFpC+anw92PhhTaNAEs2DOxw5p5Qs6ge1ns
-	 7aThujZFEmXJsHZ2NT/s2eoF9dqiPXi7WhzKNeHhWPi6/F5R8E8o6FnvMrSreI6xOgQKv
-	 Qkhbc4TwBwGqaZ8fO3LV/vLeAMChI51HpGE1PxH3TE4OsuIHINzVU8dGyUS9UIVE+Ew==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:From:Date:X-Gm-Features:Message-ID:Subject:To:
+	 Content-Type:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=VoOfnuVu4wjN+6D1VsqKMqfgu1WpQjlXeHLsIZwJlpI=;
+	b=WQQUKtweAeS2ni4972zFF32QLtyTOpriUvJvmOTq947wwjObICBdsJpnKAkZsG+45CrE
+	 OwV2DR31c5GcpHNWQSfkz85fT9N9H2KsFv1Is6mItonaHjRd2XEwy/Hk4vQs7MqLEHSR2
+	 VxWD3Es+pDhYINCI2jMdDqWw95VsPj4d+69ZSsWqRfYbPUPBJ5rDNaBAHfwNyTJpCkcjE
+	 CQ/nwYFYwU7pBYYpw7h+OEDPdUEKniyWZxxt7sS6MvazemTMWxAtF3LMfzlsaO9TYiXpH
+	 TO6bqWUi8uro5bUz1NufUtmbjX/qDwPmAeS4x7WFOCEk+2haLwBb/SQeF08cNA6aWgQ==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789219634;
-	bh=sm0IrzqVY+ZIRjYNbbvWV5K+dLMAFv6PLBEzFX4QKUE=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org; s=default; t=1789219636;
+	bh=VoOfnuVu4wjN+6D1VsqKMqfgu1WpQjlXeHLsIZwJlpI=;
+	h=From:Date:Subject:To:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=aC2gO9vIp32KCfpP5n0N2f0POn2S8BPBqZcnIRaxTuqipIWnrCtj3VrfcH2tu/S34
-	 Hh+2f5PXKPmCuB7JH0nXWk7WCAvJ0sRtD2ObkTiQ3hKKOOwxxFuAtl8+UV48Fcukgp
-	 ksbLmBywiGAU2TFhTzfzdwtCtQod4X0yy3czVro/sSmLBp/TAZhvM0YxgMT31OJqkG
-	 jLpN4h2WhMQW3I/6nfREl3ivcavi+Ofi0HiwQPYJVe7Y1IDL7UhroPNPUBcbz9geti
-	 ca+vIJa4LfO41ME/U6ZfFOtovWuEcbLFK9LrH/nWaenO8nCxaPSRsOJlenA1BFHIAm
-	 o6qQMQtcIy42A==
+	b=vQS7Yvk/aAkts08vus2PzQp8tbEZuCgIyJ1i3x6OMTIaScCwBIe/xbcwLVpuesVn0
+	 Xs8op5eg+t7Dz4ZtSSXalvz3Pyxj6/UfhZ9tR0q14UTngTWP8fmoBEpLDmj0VfybB3
+	 YCNyYPICkkkW8D+YDuNCXI9yMcJSDvP/kGdIyX+IcRPCj58PtU0deFsqawbSioFiWz
+	 NE7R9NsDaBZ8mkqrn75h1WREX5kGvbEiZnfm3ZDtx2CA7i4LOF/yHwqywDXZhk3EIb
+	 VryX2JGk2hxReBfGiS7aicCb9qNAm4kkJNhec2l7om82j2ek2DZNPb0IHkvtLmOtOi
+	 IVJwk0msRXN6A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 66CF540726;
-	Sat, 12 Sep 2026 13:27:14 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3FE42E4E
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 06:35:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 493E380E82;
+	Sat, 12 Sep 2026 13:27:16 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id EEB0E32F
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 07:16:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2267240100
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 06:35:25 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D513C400E4
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 07:16:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RC1-EtNqu2IC for <u-boot@lists.u-boot-project.org>;
- Sat, 12 Sep 2026 06:35:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 6BB67400E4
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a01:4f8:1c1a:5a04::1"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789194923;
- b=oEWA4iGBfAOwjf107fok1eMHUCzPpK8/Yu05f0iGB30Bw7G3An63VAXxacRENTZLjJ8+
- PyAI+GRn7vkks3V6keNU71q3vfEyQ5e0m5mpO5sDn8pCYiXbiJFHNVyUrUbp9XEpGsJqW
- ytDpUIG0bGTBuFccNKPYktihyzNoDmZSwf5akqqDUiLP2N4Ovvcj0y0x9QFtopVU1B6nT
- 6n3FgW+BFtuBLYUu/w+IpfIwAi0XdauZIvOsZjr3mou3x4yOj2nXAPjco+Yu26AhwEGkC
- JMN93/rYmQeDPU2RFA+KBaKd4vhtbPJt2UtrpPPuUcljaYt1jPX8RoxQnHSIGQ6DMkA==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789194923;
- h=X-Greylist:Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Type:
- Content-Transfer-Encoding:X-Last-TLS-Session-Version;
- bh=sm0IrzqVY+ZIRjYNbbvWV5K+dLMAFv6PLBEzFX4QKUE=;
- b=EeURulwZRAS7VSfMT6fPUZnO2nIZfPmggu0o4HGOp8IpA8kTD9lDZp8MfjVwUOjb0lEl
- 4nmW0nGnvDUMd7FL29SHtbHFprBR43RLt8IjkS1PE3ZfyvZDhL5HFr/spJBQdEl3hwTBD
- 0ZqmvZlONLbGSiF/Pb+/ZVbPhV1k1Iw3WoveEY0GJ2NNH2JNikQNqS8DA9JDUs3deeFjc
- B+AVgO68NJJfhAW16Bpq414MuIhNj/OLZzlCO+7MSsDcg8BhFfLk4aNfiDtBeRT2fJRH/
- UthMQdemu20LIl0maIQb3bzRB8JAdCpJbscxFWUg+jJRNiheTdS5LKMuqb6zddUv0KQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=lucidmail.xyz; 
- dkim=pass header.d=lucidmail.xyz header.i=@lucidmail.xyz header.a=rsa-sha256
- header.s=dkim header.b=BPfQwFUk; 
- arc=none smtp.remote-ip="2a01:4f8:1c1a:5a04::1"
-X-Greylist: delayed 273 seconds by postgrey-1.37 at util1.osuosl.org;
- Sat, 12 Sep 2026 06:35:23 UTC
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=lucidmail.xyz
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=lucidmail.xyz header.i=@lucidmail.xyz
- header.a=rsa-sha256 header.s=dkim header.b=BPfQwFUk
+ id F0PMkOS9-QF0 for <u-boot@lists.u-boot-project.org>;
+ Sat, 12 Sep 2026 07:16:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 88D4940076
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:33::10"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789197406;
+ b=XTZrNrAKC1wCYzZQtnrgFQjfB1SwLZvav7JIDW/lAcTZkeSp+4caaAZ5lzutuYxZ/1In
+ kcnf6H/5SJ1huk8xYs/BTUyG0Njge7EhVnP4Z1DgAXh028FTvm26H7/0Y88BnBRQDNNVo
+ 5iqAVHb7193nlenwXokdWervNXMnByC1kxgX/FZh08wvlz3X0x3BFVqOpSgBKpzCMp5sH
+ h2zKP2i5djTptUsrZfWaGii0d/YDJ+NZ52evOX0COuNMC/RQWDzAHqMM/m09ztQoUn71i
+ YX4WiJElO+ys/DwxhYBeJ1p0RPTF3tCVrSZP0BS50voanDRk1vPuaV9kHf/ec9VPE1A==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1789197406;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:From:Date:
+ X-Gm-Features:Message-ID:Subject:To:Content-Type;
+ bh=VoOfnuVu4wjN+6D1VsqKMqfgu1WpQjlXeHLsIZwJlpI=;
+ b=pgxYeeiVIy70f6IxU+N59PMYBs23iag/RTkNvTOz69vZ2EZ/5yGBxfbIiVXKMe2yCJ5/
+ Mt8hZi6C/o84qGMqU0o3wdAZf9x5F7bq1O0vjuBI+khLPsPg0uaUQ5gmExINchJLLRTAa
+ 4lZ/T7QO7rexkVK7MuPaR/QECbefGOj0w9AnhVR9LA3/lF8OwggTGaYBUQXtZN6G54cDr
+ 9Iuf0dj63nLyyEWmG6KVZ17WDP2o0lMvyJiLECeynacmQOl4pn/1d7D9hsa5ugaEJjNsS
+ M2gnRVCLXfQL9onX02HEFfgPhA3GR86MV8oFHEoaSDniBFN1I6b/q9U/7Jb/JlpBBlg==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ dmarc=pass header.from=gmail.com; 
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=sVTrKXeO; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:4f8:1c1a:5a04::1; helo=mail.lucidmail.xyz;
- envelope-from=leow149@lucidmail.xyz; receiver=<UNKNOWN> 
-Received: from mail.lucidmail.xyz (mail.lucidmail.xyz
- [IPv6:2a01:4f8:1c1a:5a04::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6BB67400E4
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 06:35:22 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3B90E177D5B; Sat, 12 Sep 2026 08:30:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lucidmail.xyz;
- s=dkim; t=1789194646;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding; bh=sm0IrzqVY+ZIRjYNbbvWV5K+dLMAFv6PLBEzFX4QKUE=;
- b=BPfQwFUkJTyI78sQVCD5N5P/l96zAgIZPC7q3rIGIKkQKt4kINH+WH6rw//QDE3f4VNJjQ
- YkSEG5V4IWsnAZ3Z0TCVw4C8Qmv+yX2bGw19EYkohubgnUjg5KdOcWjrrYQ7oLNEicheu0
- JMa357cKZLaqGdWmdvvXF1WvfhPUt8ue+5YkKRUSdcZ2oPOGeqVxB+CpS8RW5bEfqSpcmO
- VazMHS7ypztqEcvpSurZ3dgmMZlV5LFQC2qWs52dstinSfMMiFWsxqZyjBefP/kO7OISSB
- bp4nH2oY8DhDkKnKtKX2tBJVVHNr7KCNUEcIo81FYAjXl4ktrbXrvI/pRmME9g==
-From: leow149 <leow149@lucidmail.xyz>
-To: u-boot@lists.u-boot-project.org
-Cc: andre.przywara@arm.com, trini@konsulko.com, ilias.apalodimas@linaro.org,
- sumit.garg@kernel.org, james.hilliard1@gmail.com,
- leow149 <leow149@lucidmail.xyz>
-Subject: [PATCH] sunxi: add TrimUI Smart Pro (A133) board support
-Date: Sat, 12 Sep 2026 08:30:35 +0200
-Message-ID: <20260912063037.81151-1-leow149@lucidmail.xyz>
-X-Mailer: git-send-email 2.55.0
+ client-ip=2a00:1450:4864:33::10; helo=mail-ed2-x10.google.com;
+ envelope-from=jacco.braat@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=sVTrKXeO
+Received: from mail-ed2-x10.google.com (mail-ed2-x10.google.com
+ [IPv6:2a00:1450:4864:33::10])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 88D4940076
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 07:16:44 +0000 (UTC)
+Received: by mail-ed2-x10.google.com with SMTP id
+ 4fb4d7f45d1cf-6a99c5de614so889678a12.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 00:16:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789197403; cv=none;
+ d=google.com; s=arc-20260327;
+ b=rwJZMSoB1oCdzzYL4bA6qP4jrHQhfJzNcBu5ZwTYlub26kHDTZeKvY3FpsoX0x6YS9
+ u7ssV2yafXk+7bPH+DsoRXumGwaVOsJGsm0hOqH05DYpk/dFJKEvFu7p+4G7kbyD+/dJ
+ 8woi1osxlGnrWAYP15K7Jlll+Aw3nYEhnDLK8n6X29lC3gd8qilQ0+cvJD74BEUKIbwY
+ ASbs6KwBLeSaM2iyq+qOpt7ixq+k7Xr2SjY2yss1oys+xqPd/pyPsg0HCareaRNdojoL
+ 5xNMKur2I07SayRScgm6MBGtLAdH2jMyshQY3ee7A5a8Ai823USm+COe4LmyQiJ6M6yg
+ BFAA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=VoOfnuVu4wjN+6D1VsqKMqfgu1WpQjlXeHLsIZwJlpI=;
+ fh=UPNS4HXYeIypNL+s9tL6UKBnRLDlxVjvSkHwqhb8LsE=;
+ b=ewXoYW6ODWj4uKW36yJxqsz4eJCUXhSEzxrhVa4PjVyqMH7G7a53T8DKPvnrP+83WQ
+ QV6PvfUZBu9YvwZZ+QgMBVqub8dGhQm71UmM/qI8Kv3KPLZ7bqP8DHBu+VtyoqFLDoqL
+ 01mVqCUqC2eqfnSqDdGBuWPF826/GcrXR53L8UFFdQDxcXYnrZQtDuWXW79BhWdhgxFP
+ SR8wuXx+0niY/2RJ6c3/yn52G5oY4XFJtQiNXv36VzKFPlqw3RfDTwcV/XFVemZAcQ+e
+ Nrm3bvtfUU5e3JV+gvbS+64yjUAcfDseApGaI27k/A7eJE2RhnTqN0ykSzXzC5Ncoj5C
+ tEJQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1789197403; x=1789802203;
+ darn=lists.u-boot-project.org; 
+ h=content-type:to:subject:message-id:date:from:mime-version:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=VoOfnuVu4wjN+6D1VsqKMqfgu1WpQjlXeHLsIZwJlpI=;
+ b=sVTrKXeOdPFBEgtqKv3udiomXAnsaPbrQlZl26Swc/Quy8ewRCNWFYJDQbhjIHOcpI
+ scEgiL6EscZ15UFkYQsV5o0y0CerzxaVhC0J9bwpkPIBt5+dwAy5qqRUH0lsXS62YeA6
+ xdlt7svKlaVh3EbeTl4YNXFit+IoSYuSUb98LEl0uYQJHee+7/2ihjs3O7ty3ZAbBxpz
+ LsihoBxy8rRivWavgnTQv/4uQaDOnjY0ob9/Kf3O43nHR+AcZHMsFgFG68Jdz3Cu6igD
+ 7BLWEp/L6RFD4SvKaNpk8WwJapAzWvy4sRkPvvwH07m362htU5zASv5OHjm1FdHk4J3x
+ D+GQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1789197403; x=1789802203;
+ h=content-type:to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=VoOfnuVu4wjN+6D1VsqKMqfgu1WpQjlXeHLsIZwJlpI=;
+ b=lcfMzoIVHQcMZOVGsVBEEmhl4+UXmPMZ9hl+gJjnkEBR5Hr6AG3kylnPbY01eL3l6A
+ SDEamBTXFrLjIajhHL0o3ZyIRfLUdVljJ5oGhD9AFTOFBi54qqBz8g2JyjjULzrqn6H4
+ IzJ0RjZtDEP8+O97D5kLT8+7TMXD3jOfvfrk+sEfAcoGqkbDEw+WRBMkeAJ58fQkbHiG
+ XCVkykXUDI14l+4puj39uMPTj28yjNpkXIDeeybWPVvLJoIWXnwWrHPP9/NEkzBCj5Yz
+ dCNmNE0/Shs82OztBFdbAejN50Ofd/Aci9dGBl12p09ukZ6ECZjW+HFS5Zy4ZUZjQFHW
+ hsqg==
+X-Gm-Message-State: AFuF++kQBQ1X62CtlYQbonu27Din/DVtqYz2oZIFsndR4OeOwR0wnZ0Y
+ f2wyfO99q9JRrI+rEZ34ZMx/fTbQQl4vdadXr/Fr62DHYqoDeuE5tc0PoR7crpZovuNi3YDuvzJ
+ xZrAPzZyXZJag7p0pEycLZWG9nPojwT3NeJNu
+X-Gm-Gg: AYBFou0DkbR7/9XzPKpJO+/TeMgWjL1utlXAIJISrlPNmxD4qX1wuyeX4JyJlWIQuEF
+ vuQYkfEWE5R7tFm+EFr29GrPNJkf/OrGNrQoTamfDAXOeZr5AahVJ+0cMz10l1f3H6Zz+yLbjhe
+ 8US3bLKamvWe0Junn55JD3cY5AAetXjOYqc7JNTCn1nkmdn0trUf7xyT3FVxfE6tnJY9Mnynn7N
+ AG4pFixBMgGgfV+cd6v6Tx6lL/+lH16NVfTJHPKyJNv5zJvehmleVO4CwmHKvcbwR+ftOfkvORk
+ RdOHAuhlPSmmKld17s5eO/nM7gL8nvfStC+58vhd1cb6Aj7XAK4hSneko1o9ygLJHqtj
+X-Received: by 2002:a05:6402:5412:b0:6a3:e813:8457 with SMTP id
+ 4fb4d7f45d1cf-6a9b5695482mr7202430a12.12.1789197402700; Sat, 12 Sep 2026
+ 00:16:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+From: Jacco Braat <jacco.braat@gmail.com>
+Date: Sat, 12 Sep 2026 09:16:31 +0200
+X-Gm-Features: AcwNN1XzYqanRDPLXeanW5PznwNkM4JzhB8mYnBn1_Vf6MWFtz3_I3xEkbHz3jk
+Message-ID: <CAMkwsPYxXK4o7C9Sxj+D8wBPNsdVyqekMPZznha_BtW7ChcvTA@mail.gmail.com>
+Subject: pci-uclass.c not working for second device on 88W9098
+To: u-boot@lists.u-boot-project.org
+Content-Type: multipart/alternative; boundary="0000000000009efeaa065b43fb38"
 X-Mailman-Approved-At: Sat, 12 Sep 2026 13:27:13 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -141,406 +181,156 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Board bring-up for the TrimUI Smart Pro handheld (Allwinner A133 Plus):
+--0000000000009efeaa065b43fb38
+Content-Type: text/plain; charset="UTF-8"
 
-- New board DTS (sun50i-a133-trimui-smartpro.dts) and defconfig.
-- SUNXI_BL31_BASE: A133 selects SUN50I_GEN_H6 (shared H6-family
-  peripheral IP) but its TF-A platform.mk sets SUNXI_BL31_IN_DRAM,
-  unlike other SUN50I_GEN_H6 members which run BL31 from SRAM. Without
-  its own case here, BL31 silently falls through to the wrong load
-  address and crashes on real hardware.
+Hello,
 
-Boots mainline U-Boot end to end on real hardware (SPL -> BL31 ->
-U-Boot -> distro-boot).
+in drivers/pci/pci-uclass.c there is an optimization introduced with
+commit fbde868 that breaks discovery of the second network device on a
+88W9098 Murata 1XL module.
 
-Signed-off-by: leow149 <leow149@lucidmail.xyz>
----
- arch/arm/mach-sunxi/Kconfig                   |   7 +
- configs/trimui-smartpro_defconfig             |  64 ++++
- .../allwinner/sun50i-a133-trimui-smartpro.dts | 285 ++++++++++++++++++
- 3 files changed, 356 insertions(+)
- create mode 100644 configs/trimui-smartpro_defconfig
- create mode 100644 dts/upstream/src/arm64/allwinner/sun50i-a133-trimui-smartpro.dts
+int pci_bind_bus_devices(struct udevice *bus)
+{
+...
+if (only_one_child(bus) && (PCI_DEV(bdf) > 0))
+  continue;
 
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index b0c5d3cd..c12f9b4c 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -268,6 +268,13 @@ config SUNXI_BL31_BASE
- 	hex
- 	default 0x00044000 if MACH_SUN50I || MACH_SUN50I_H5
- 	default 0x40000000 if MACH_SUN50I_H616
-+	# A133 selects SUN50I_GEN_H6 (shared H6-family peripheral IP) but its
-+	# TF-A platform.mk sets SUNXI_BL31_IN_DRAM := 1, unlike other
-+	# SUN50I_GEN_H6 members which run BL31 from SRAM at 0x00104000 -- needs
-+	# its own case here or it silently falls through to the wrong address
-+	# and BL31 crashes on real hardware, jumping into garbage near its
-+	# actual linked base instead.
-+	default 0x40000000 if MACH_SUN50I_A133
- 	default 0x00104000 if SUN50I_GEN_H6
- 	default 0x00054000 if MACH_SUN55I_A523
- 	default 0x0
-diff --git a/configs/trimui-smartpro_defconfig b/configs/trimui-smartpro_defconfig
-new file mode 100644
-index 00000000..64d26459
---- /dev/null
-+++ b/configs/trimui-smartpro_defconfig
-@@ -0,0 +1,64 @@
-+# TrimUI Smart Pro (Allwinner A133 Plus, sun50iw10p1) — out-of-tree hobbyist port
-+#
-+# DRAM_* values below are REAL, pulled directly from the live device's own
-+# /sys/firmware/fdt (the "/dram" node's dram_para[00..31] array — the actual
-+# resolved config the vendor kernel booted with, not a guess). Cross-checked
-+# against the boot0 UART console log (CLK=792MHz, para1=0x30fa, para2=0x4000000,
-+# tpr13=0x7521 all matched exactly). Several of these differ from the
-+# liontron-h-a133l placeholder values previously here (TPR6/TPR11/TPR12 were
-+# wrong; TPR10/TPR13/TPR14 happened to already be correct).
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-a133-trimui-smartpro"
-+CONFIG_DRAM_CLK=792
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUNXI_DX_ODT=0x7070707
-+CONFIG_DRAM_SUNXI_DX_DRI=0xd0d0d0d
-+CONFIG_DRAM_SUNXI_CA_DRI=0xe0e
-+CONFIG_DRAM_SUNXI_PARA0=0xd0a050c
-+CONFIG_DRAM_SUNXI_MR11=0x4
-+CONFIG_DRAM_SUNXI_MR12=0x72
-+CONFIG_DRAM_SUNXI_MR14=0x7
-+CONFIG_DRAM_SUNXI_MR22=0x26
-+CONFIG_DRAM_SUNXI_TPR0=0x6060606
-+CONFIG_DRAM_SUNXI_TPR1=0x84040404
-+CONFIG_DRAM_SUNXI_TPR6=0x48010101
-+CONFIG_DRAM_SUNXI_TPR10=0x273333
-+CONFIG_DRAM_SUNXI_TPR11=0x211b151e
-+CONFIG_DRAM_SUNXI_TPR12=0x14141312
-+CONFIG_DRAM_SUNXI_TPR13=0x7521
-+CONFIG_DRAM_SUNXI_TPR14=0x2023211f
-+CONFIG_MACH_SUN50I_A133=y
-+# Real bug found via hardware testing: MACH_SUN50I_A133 `select`s
-+# SUN50I_GEN_H6 (shared peripheral IP with the H6 generation, correct), but
-+# arch/arm/mach-sunxi/Kconfig's SUNXI_BL31_BASE default table had no case
-+# for A133 specifically, so it silently fell through to the H6 default of
-+# 0x00104000 (SRAM). TF-A's own plat/allwinner/sun50i_a133/platform.mk sets
-+# SUNXI_BL31_IN_DRAM := 1, meaning BL31 for THIS chip is actually linked to
-+# run from DRAM (SUNXI_DRAM_BASE = 0x40000000), not SRAM. The address
-+# mismatch made BL31 crash instantly on real hardware (jumped to garbage
-+# near 0x40000000 within its first few instructions, confirmed via a
-+# DEBUG=1 TF-A build's exception dump) — same root cause for both the FEL
-+# and SD-card boot paths, since both load BL31 wherever this config says.
-+# SUNXI_BL31_BASE has no Kconfig `prompt`, so it can't be overridden here —
-+# fixed properly at the source: arch/arm/mach-sunxi/Kconfig now has an
-+# explicit `default 0x40000000 if MACH_SUN50I_A133` case added.
-+CONFIG_SUNXI_DRAM_A133_LPDDR4=y
-+CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+CONFIG_R_I2C_ENABLE=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_SYS_I2C_SLAVE=0x7f
-+CONFIG_SYS_I2C_SPEED=400000
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_AXP717_POWER=y
-+CONFIG_AXP_I2C_ADDRESS=0x34
-+# AXP_DCDC2_VOLT has a Kconfig default (1000mV) under AXP717_POWER, but
-+# AXP_DCDC3_VOLT does NOT — leaving it unset makes syncconfig block on an
-+# interactive prompt forever (found the hard way). 1100mV confirmed REAL:
-+# matches the boot0 console log's "DRAM_VCC set to 1100 mv" exactly.
-+CONFIG_AXP_DCDC3_VOLT=1100
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-diff --git a/dts/upstream/src/arm64/allwinner/sun50i-a133-trimui-smartpro.dts b/dts/upstream/src/arm64/allwinner/sun50i-a133-trimui-smartpro.dts
-new file mode 100644
-index 00000000..c6369a91
---- /dev/null
-+++ b/dts/upstream/src/arm64/allwinner/sun50i-a133-trimui-smartpro.dts
-@@ -0,0 +1,285 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2026 (out-of-tree hobbyist port, not yet upstream)
-+ *
-+ * Board: TrimUI Smart Pro (Allwinner A133 Plus / sun50iw10p1)
-+ *
-+ * Sourced from:
-+ *  - vendor DTB extracted from Knulli image (dtb_86065152.dts, offset
-+ *    86065152 in knulli-a133-trimui-smart-pro-scarab-20260511.img)
-+ *  - sun50i-a133-liontron-h-a133l.dts (mainline reference board, same SoC)
-+ *  - sun50i-h700-anbernic-rg35xx-2024.dts (mainline handheld reference for
-+ *    AXP717 regulator/battery wiring style)
-+ *  - LIVE data pulled directly off the running unit over UART (root shell +
-+ *    /sys/firmware/fdt, the kernel's own resolved device tree — not a guess):
-+ *    real regulator voltages (confirmed via U-Boot's PMIC init console log),
-+ *    real DRAM timing table (see trimui-smartpro_defconfig), real panel
-+ *    timings (see the lcd0 comment block below).
-+ *
-+ * TODO markers below are places nothing above could resolve: buttons/
-+ * joystick are NOT GPIO at all (confirmed: read over a UART-attached
-+ * co-microcontroller, see BUTTON_PROBING_PLAN.md — needs a from-scratch
-+ * serdev driver, not a DT gpio-keys node), and the panel's DSI
-+ * init command sequence (register writes for the otm1289a controller) is
-+ * not yet captured.
-+ */
-+
-+/dts-v1/;
-+
-+#include "sun50i-a100.dtsi"
-+#include "sun50i-a100-cpu-opp.dtsi"
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/linux-event-codes.h>
-+#include <dt-bindings/leds/common.h>
-+
-+/ {
-+	model = "TrimUI Smart Pro";
-+	chassis-type = "handset";
-+	/* "trimui" is not a registered vendor prefix in dt-bindings yet;
-+	 * fine for an out-of-tree hobbyist build, would need registering
-+	 * (vendor-prefixes.yaml) before any upstream submission. */
-+	compatible = "trimui,smart-pro", "allwinner,sun50i-a100";
-+
-+	aliases {
-+		serial0 = &uart0;
-+	};
-+
-+	chosen {
-+		/* confirmed from the vendor boot.img kernel cmdline */
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	battery: battery {
-+		compatible = "simple-battery";
-+		/* vendor DTB: pmu_battery_rdc = 0x93, pmu_battery_cap = 0x1388 (5000mAh) */
-+		voltage-max-design-microvolt = <4200000>;
-+	};
-+
-+	reg_vcc5v: regulator-vcc5v {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc-5v";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-always-on;
-+	};
-+
-+	/* TODO: face buttons (A/B/X/Y, D-pad, L1/L2/R1/R2, start/select,
-+	 * joystick clicks). The vendor DTB has NO gpio-keys node and no
-+	 * "trimui_keypad"-style driver string was found in the firmware —
-+	 * only a 3-key ADC "allwinner,keyboard_1350mv" node exists (that's
-+	 * volume/fastboot-combo, not the face buttons). Real GPIO/ADC
-+	 * assignments need to come from live probing on the actual unit
-+	 * (pinctrl debugfs, evtest against the stock kernel, or a UART
-+	 * dmesg capture during boot) — not guessed from another device.
-+	 */
-+};
-+
-+&cpu0 {
-+	/* TODO: verify against A133 PLUS-rated OPP ceiling, not just A100's */
-+	cpu-supply = <&reg_dcdc1>;
-+};
-+
-+&mmc0 {
-+	/* SD card slot. cd-gpios still unconfirmed — no hotplug detection, but
-+	 * that's fine for a card already inserted at boot (proven live: this is
-+	 * literally how SPL/BROM read this same card to boot in the first
-+	 * place). Pin/clock wiring already provided by sun50i-a100.dtsi.
-+	 * vmmc-supply guessed as the same general IO rail as mmc2 — unconfirmed,
-+	 * first thing to revisit if this doesn't come up cleanly. */
-+	bus-width = <4>;
-+	vmmc-supply = <&reg_cldo3>;
-+	status = "okay";
-+};
-+
-+&mmc2 {
-+	/* eMMC — pin group/clocks/etc. already wired by sun50i-a100.dtsi, this
-+	 * board file only needs the board-specific bits. bus mode confirmed
-+	 * from the live boot log: negotiated DDR52, NOT HS200/HS400 — the
-+	 * vendor kernel actively strips those capability flags at runtime
-+	 * ("delete mmc-hs200-1_8v from dtb" / "delete mmc-hs400-1_8v from dtb"
-+	 * in dmesg), so we don't claim them here either. vmmc-supply is a
-+	 * reasonable inference (cldo3/vcc-io, the general 3.3V IO rail) but
-+	 * NOT directly confirmed — no capture explicitly tied cldo3 to mmc2.
-+	 */
-+	bus-width = <8>;
-+	non-removable;
-+	cap-mmc-hw-reset;
-+	mmc-ddr-1_8v;
-+	vmmc-supply = <&reg_cldo3>; /* inferred, not directly confirmed */
-+	status = "okay";
-+};
-+
-+&r_i2c0 {
-+	status = "okay";
-+
-+	axp717: pmic@34 {
-+		compatible = "x-powers,axp717";
-+		reg = <0x34>;
-+		interrupt-controller;
-+		#interrupt-cells = <1>;
-+		interrupt-parent = <&r_intc>;
-+		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
-+
-+		vin1-supply = <&reg_vcc5v>;
-+		vin2-supply = <&reg_vcc5v>;
-+		vin3-supply = <&reg_vcc5v>;
-+		vin4-supply = <&reg_vcc5v>;
-+
-+		axp_adc: adc {
-+			compatible = "x-powers,axp717-adc";
-+			#io-channel-cells = <1>;
-+		};
-+
-+		battery_power: battery-power {
-+			compatible = "x-powers,axp717-battery-power-supply";
-+			monitored-battery = <&battery>;
-+			x-powers,no-thermistor;
-+		};
-+
-+		usb_power: usb-power {
-+			compatible = "x-powers,axp717-usb-power-supply";
-+		};
-+
-+		/*
-+		 * Regulator names carried over from the vendor DTB's "axp2202-*"
-+		 * node names (AXP2202 == AXP717, confirmed: Allwinner's BSP driver
-+		 * for "axp2202" has been shown driving a chip physically marked
-+		 * AXP717). Voltages below are REAL, read directly from U-Boot's own
-+		 * PMIC-init console log on the live unit (not decoded/guessed) —
-+		 * each line printed "<rail>_vol = <mV>, onoff=<0|1>" at boot. dcdc2
-+		 * (GPU/sys) wasn't printed at that boot stage (probably brought up
-+		 * later by the kernel) — left undocumented rather than guessed.
-+		 * dcdc1 (vdd-cpu) was 940mV at that instant but is DVFS-scaled by
-+		 * cpufreq, so it's intentionally NOT hardcoded to a fixed value here.
-+		 */
-+		regulators {
-+			reg_dcdc1: dcdc1 {
-+				regulator-name = "vdd-cpu";
-+				/* boot-time value was 940mV; real range needs the OPP table, not hardcoded here */
-+			};
-+			reg_dcdc2: dcdc2 {
-+				regulator-name = "vdd-gpu-sys";
-+			};
-+			reg_dcdc3: dcdc3 {
-+				/* confirmed real: matches boot0's "DRAM_VCC set to 1100 mv" exactly */
-+				regulator-always-on;
-+				regulator-min-microvolt = <1100000>;
-+				regulator-max-microvolt = <1100000>;
-+				regulator-name = "vdd-dram";
-+			};
-+			reg_aldo1: aldo1 {
-+				/* real: 1800mV, onoff=1 at boot, but kernel disables it later (unused) */
-+			};
-+			reg_aldo2: aldo2 {
-+				/* real: 3300mV, onoff=1 */
-+			};
-+			reg_aldo3: aldo3 {
-+				/* confirmed: WiFi/BT IO rail (wlan_io_regulator), real: 3300mV */
-+				regulator-always-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-name = "vcc-wifi-io";
-+			};
-+			reg_aldo4: aldo4 {
-+				/* real: 1800mV, onoff=1 */
-+			};
-+			reg_bldo1: bldo1 {
-+				/* confirmed: WiFi/BT power rail (wlan_power1), real: 3300mV.
-+				 * NOT always-on: U-Boot log shows onoff=0 at boot — the
-+				 * wifi/bt driver switches it on dynamically at runtime. */
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-name = "vcc-wifi";
-+			};
-+			reg_bldo2: bldo2 {
-+				/* real: 1800mV, onoff=1 */
-+			};
-+			reg_bldo3: bldo3 {
-+				/* real: 3300mV, onoff=1 */
-+			};
-+			reg_bldo4: bldo4 {
-+				/* real: 1800mV at boot, kernel disables it later (unused) */
-+			};
-+			reg_cldo1: cldo1 {
-+				/* confirmed: LCD panel power0 (lcd_power0="cldo1"), real: 1800mV */
-+				regulator-always-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+				regulator-name = "vcc-lcd-1";
-+			};
-+			reg_cldo2: cldo2 { };
-+			reg_cldo3: cldo3 {
-+				/* real: 3300mV */
-+				regulator-always-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-name = "vcc-io";
-+			};
-+			reg_cldo4: cldo4 {
-+				/* confirmed: LCD panel power1 (lcd_power1="cldo4"), real: 3300mV */
-+				regulator-always-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-name = "vcc-lcd-2";
-+			};
-+			reg_cpusldo: cpusldo {
-+				/* real: 900mV, onoff=1 */
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <900000>;
-+				regulator-max-microvolt = <900000>;
-+			};
-+		};
-+	};
-+};
-+
-+&uart0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart0_pb_pins>; /* only pin group this SoC's dtsi defines; matches vendor cmdline's ttyS0 */
-+	status = "okay";
-+};
-+
-+/*
-+ * TODO: WiFi/BT (XR829 on SDIO bus 1 / &mmc1, confirmed from strings:
-+ * boot_xr829.bin, fw_xr829.bin, fw_xr829_bt.bin, sdd_xr829.bin — and
-+ * confirmed live via the running kernel's "XRADIO WIFI OPEN" driver log,
-+ * MAC dc:44:60:xx:xx:xx (redacted)). Power rails: bldo1 (3300mV, switched on
-+ * dynamically, not always-on) + aldo3 (3300mV, always-on) — both wired
-+ * above. GPIO wiring is REAL, read directly off the live unit's
-+ * /sys/kernel/debug/gpio (not decoded from packed vendor fields):
-+ *   bt_rst         = r_pio 0 2  (PL2)  output, active low
-+ *   bt_hostwake    = r_pio 0 3  (PL3)  input
-+ *   bt_wake        = r_pio 0 4  (PL4)  output
-+ *   wlan_regon     = r_pio 0 5  (PL5)  output
-+ *   wlan_hostwake  = r_pio 0 6  (PL6)  input
-+ * Mainline equivalent is an mmc1 node + mmc-pwrseq-simple (using
-+ * wlan_regon as the reset-gpios line) + whatever XR829 driver ends up
-+ * used (no mainline driver exists yet — see project notes for the
-+ * out-of-tree candidates). Not wired into an actual mmc1 node yet.
-+ */
-+
-+/*
-+ * TODO: display. Panel is a 4-lane MIPI-DSI unit driven by an "otm1289a"
-+ * controller IC (confirmed: boot log "OTM1289A:lcd panel init" + vendor
-+ * live DTB's lcd_driver_name). Real timings pulled from the live lcd0 node
-+ * (vendor's old "disp2"-style "allwinner,sunxi-lcd0" binding, not mainline):
-+ *   native panel res: 720x1280 (portrait) — presented as 1280x720 landscape
-+ *     via software rotation (boot log: "TRIMUI disp rotate:3" = 270°)
-+ *   physical size: 135mm x 216mm
-+ *   dot clock: 69 MHz (lcd_dclk_freq=0x45, matches boot log "dclk(69000000)")
-+ *   horizontal: total=880 back-porch=88 sync-pulse=4  (lcd_ht/hbp/hspw)
-+ *   vertical:   total=1320 back-porch=9 sync-pulse=4  (lcd_vt/vbp/vspw)
-+ *   backlight PWM: 50000 Hz (lcd_pwm_freq=0xc350)
-+ *   power rails: cldo1 (1800mV) + cldo4 (3300mV) — both wired above
-+ * NOT yet captured: the panel's DSI init command sequence (the actual
-+ * register writes the vendor driver sends to the otm1289a on power-up) —
-+ * that's a separate reverse-engineering step (likely needs a DSI bus
-+ * sniffer or kernel driver instrumentation, not just a UART/DTB pull) and
-+ * is what a real mainline `panel-otm1289a` driver would still be missing.
-+ */
-+
-+/*
-+ * TODO: GPU (img,gpu / PowerVR GE8300) — no mainline binding to reference
-+ * yet.
-+ */
--- 
-2.55.0
+With this check active device 1.0.1 is never reached.
 
+=> pci 1 long
+Scanning PCI devices on bus 1
+
+Found PCI device 01.00.00:
+  vendor ID =                   0x1b4b
+  device ID =                   0x2b43
+  command register ID =         0x0006
+  status register =             0x0010
+  revision ID =                 0x03
+  class code =                  0x02 (Network controller)
+  sub class code =              0x00
+  programming interface =       0x00
+  cache line =                  0x08
+  latency time =                0x00
+  header type =                 0x80
+  BIST =                        0x00
+  base address 0 =              0x4000000c
+  base address 1 =              0x00000000
+  base address 2 =              0x4010000c
+  base address 3 =              0x00000000
+  base address 4 =              0x4012000c
+  base address 5 =              0x00000000
+  cardBus CIS pointer =         0x00000000
+  sub system vendor ID =        0x1b4b
+  sub system ID =               0x2b43
+  expansion ROM base address =  0x00000000
+  interrupt line =              0xff
+  interrupt pin =               0x01
+  min Grant =                   0x00
+  max Latency =                 0x00
+
+Found PCI device 01.00.01:
+  vendor ID =                   0x1b4b
+  device ID =                   0x2b44
+  command register ID =         0x0006
+  status register =             0x0010
+  revision ID =                 0x03
+  class code =                  0x02 (Network controller)
+  sub class code =              0x00
+  programming interface =       0x00
+  cache line =                  0x08
+  latency time =                0x00
+  header type =                 0x80
+  BIST =                        0x00
+  base address 0 =              0x4020000c
+  base address 1 =              0x00000000
+  base address 2 =              0x40300004
+  base address 3 =              0x00000000
+  base address 4 =              0x4032000c
+  base address 5 =              0x00000000
+  cardBus CIS pointer =         0x00000000
+  sub system vendor ID =        0x1b4b
+  sub system ID =               0x2b44
+  expansion ROM base address =  0x00000000
+  interrupt line =              0xff
+  interrupt pin =               0x02
+  min Grant =                   0x00
+  max Latency =                 0x00
+
+Without preparation in u-boot the Linux kernel will detect the device, but
+the driver fails to create the network interfaces.
+
+The wifi card is using a M2 slot on a Layerscape LS1028a based board.
+
+Best regards,
+Jacco Braat
+
+--0000000000009efeaa065b43fb38
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+PGRpdiBkaXI9Imx0ciI+PGRpdj48YnI+PC9kaXY+PGRpdj5IZWxsbyw8L2Rpdj48ZGl2Pjxicj48
+L2Rpdj48ZGl2PmluIGRyaXZlcnMvcGNpL3BjaS11Y2xhc3MuYyB0aGVyZSBpcyBhbiBvcHRpbWl6
+YXRpb24gaW50cm9kdWNlZCB3aXRoIGNvbW1pdMKgZmJkZTg2OCB0aGF0IGJyZWFrcyBkaXNjb3Zl
+cnkgb2YgdGhlIHNlY29uZCBuZXR3b3JrIGRldmljZSBvbiBhIDg4VzkwOTggTXVyYXRhIDFYTCBt
+b2R1bGUuPC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5pbnQgcGNpX2JpbmRfYnVzX2RldmljZXMo
+c3RydWN0IHVkZXZpY2UgKmJ1cyk8YnI+ezxicj4uLi48YnI+aWYgKG9ubHlfb25lX2NoaWxkKGJ1
+cykgJmFtcDsmYW1wOyAoUENJX0RFVihiZGYpICZndDsgMCkpPGJyPsKgIGNvbnRpbnVlOzxicj48
+YnI+PC9kaXY+PGRpdj48L2Rpdj48ZGl2PldpdGggdGhpcyBjaGVjayBhY3RpdmUgZGV2aWNlIDEu
+MC4xIGlzIG5ldmVyIHJlYWNoZWQuwqDCoDwvZGl2PjxkaXY+PGJyPj0mZ3Q7IHBjaSAxIGxvbmc8
+YnI+U2Nhbm5pbmcgUENJIGRldmljZXMgb24gYnVzIDE8YnI+PGJyPkZvdW5kIFBDSSBkZXZpY2Ug
+MDEuMDAuMDA6PGJyPsKgIHZlbmRvciBJRCA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIDB4
+MWI0Yjxicj7CoCBkZXZpY2UgSUQgPSDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAweDJiNDM8
+YnI+wqAgY29tbWFuZCByZWdpc3RlciBJRCA9IMKgIMKgIMKgIMKgIDB4MDAwNjxicj7CoCBzdGF0
+dXMgcmVnaXN0ZXIgPSDCoCDCoCDCoCDCoCDCoCDCoCAweDAwMTA8YnI+wqAgcmV2aXNpb24gSUQg
+PSDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAweDAzPGJyPsKgIGNsYXNzIGNvZGUgPSDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoDB4MDIgKE5ldHdvcmsgY29udHJvbGxlcik8YnI+wqAgc3ViIGNs
+YXNzIGNvZGUgPSDCoCDCoCDCoCDCoCDCoCDCoCDCoDB4MDA8YnI+wqAgcHJvZ3JhbW1pbmcgaW50
+ZXJmYWNlID0gwqAgwqAgwqAgMHgwMDxicj7CoCBjYWNoZSBsaW5lID0gwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAweDA4PGJyPsKgIGxhdGVuY3kgdGltZSA9IMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgMHgwMDxicj7CoCBoZWFkZXIgdHlwZSA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIDB4ODA8
+YnI+wqAgQklTVCA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgMHgwMDxicj7C
+oCBiYXNlIGFkZHJlc3MgMCA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgMHg0MDAwMDAwYzxicj7CoCBi
+YXNlIGFkZHJlc3MgMSA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgMHgwMDAwMDAwMDxicj7CoCBiYXNl
+IGFkZHJlc3MgMiA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgMHg0MDEwMDAwYzxicj7CoCBiYXNlIGFk
+ZHJlc3MgMyA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgMHgwMDAwMDAwMDxicj7CoCBiYXNlIGFkZHJl
+c3MgNCA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgMHg0MDEyMDAwYzxicj7CoCBiYXNlIGFkZHJlc3Mg
+NSA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgMHgwMDAwMDAwMDxicj7CoCBjYXJkQnVzIENJUyBwb2lu
+dGVyID0gwqAgwqAgwqAgwqAgMHgwMDAwMDAwMDxicj7CoCBzdWIgc3lzdGVtIHZlbmRvciBJRCA9
+IMKgIMKgIMKgIMKgMHgxYjRiPGJyPsKgIHN1YiBzeXN0ZW0gSUQgPSDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCAweDJiNDM8YnI+wqAgZXhwYW5zaW9uIFJPTSBiYXNlIGFkZHJlc3MgPSDCoDB4MDAwMDAw
+MDA8YnI+wqAgaW50ZXJydXB0IGxpbmUgPSDCoCDCoCDCoCDCoCDCoCDCoCDCoDB4ZmY8YnI+wqAg
+aW50ZXJydXB0IHBpbiA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgIDB4MDE8YnI+wqAgbWluIEdyYW50
+ID0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgMHgwMDxicj7CoCBtYXggTGF0ZW5jeSA9IMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIDB4MDA8YnI+PGJyPkZvdW5kIFBDSSBkZXZpY2UgMDEuMDAu
+MDE6PGJyPsKgIHZlbmRvciBJRCA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIDB4MWI0Yjxi
+cj7CoCBkZXZpY2UgSUQgPSDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAweDJiNDQ8YnI+wqAg
+Y29tbWFuZCByZWdpc3RlciBJRCA9IMKgIMKgIMKgIMKgIDB4MDAwNjxicj7CoCBzdGF0dXMgcmVn
+aXN0ZXIgPSDCoCDCoCDCoCDCoCDCoCDCoCAweDAwMTA8YnI+wqAgcmV2aXNpb24gSUQgPSDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCAweDAzPGJyPsKgIGNsYXNzIGNvZGUgPSDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoDB4MDIgKE5ldHdvcmsgY29udHJvbGxlcik8YnI+wqAgc3ViIGNsYXNzIGNv
+ZGUgPSDCoCDCoCDCoCDCoCDCoCDCoCDCoDB4MDA8YnI+wqAgcHJvZ3JhbW1pbmcgaW50ZXJmYWNl
+ID0gwqAgwqAgwqAgMHgwMDxicj7CoCBjYWNoZSBsaW5lID0gwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAweDA4PGJyPsKgIGxhdGVuY3kgdGltZSA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgMHgw
+MDxicj7CoCBoZWFkZXIgdHlwZSA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIDB4ODA8YnI+wqAg
+QklTVCA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgMHgwMDxicj7CoCBiYXNl
+IGFkZHJlc3MgMCA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgMHg0MDIwMDAwYzxicj7CoCBiYXNlIGFk
+ZHJlc3MgMSA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgMHgwMDAwMDAwMDxicj7CoCBiYXNlIGFkZHJl
+c3MgMiA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgMHg0MDMwMDAwNDxicj7CoCBiYXNlIGFkZHJlc3Mg
+MyA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgMHgwMDAwMDAwMDxicj7CoCBiYXNlIGFkZHJlc3MgNCA9
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgMHg0MDMyMDAwYzxicj7CoCBiYXNlIGFkZHJlc3MgNSA9IMKg
+IMKgIMKgIMKgIMKgIMKgIMKgMHgwMDAwMDAwMDxicj7CoCBjYXJkQnVzIENJUyBwb2ludGVyID0g
+wqAgwqAgwqAgwqAgMHgwMDAwMDAwMDxicj7CoCBzdWIgc3lzdGVtIHZlbmRvciBJRCA9IMKgIMKg
+IMKgIMKgMHgxYjRiPGJyPsKgIHN1YiBzeXN0ZW0gSUQgPSDCoCDCoCDCoCDCoCDCoCDCoCDCoCAw
+eDJiNDQ8YnI+wqAgZXhwYW5zaW9uIFJPTSBiYXNlIGFkZHJlc3MgPSDCoDB4MDAwMDAwMDA8YnI+
+wqAgaW50ZXJydXB0IGxpbmUgPSDCoCDCoCDCoCDCoCDCoCDCoCDCoDB4ZmY8YnI+wqAgaW50ZXJy
+dXB0IHBpbiA9IMKgIMKgIMKgIMKgIMKgIMKgIMKgIDB4MDI8YnI+wqAgbWluIEdyYW50ID0gwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgMHgwMDxicj7CoCBtYXggTGF0ZW5jeSA9IMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIDB4MDA8YnI+PGJyPjwvZGl2PjxkaXY+V2l0aG91dCBwcmVwYXJhdGlv
+biBpbiB1LWJvb3QgdGhlIExpbnV4IGtlcm5lbCB3aWxsIGRldGVjdCB0aGUgZGV2aWNlLCBidXQg
+dGhlIGRyaXZlciBmYWlscyB0byBjcmVhdGUgdGhlIG5ldHdvcmvCoGludGVyZmFjZXMuPC9kaXY+
+PGRpdj48YnI+PC9kaXY+PGRpdj5UaGUgd2lmaSBjYXJkIGlzIHVzaW5nIGEgTTIgc2xvdCBvbiBh
+IExheWVyc2NhcGUgTFMxMDI4YSBiYXNlZCBib2FyZC48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2
+PkJlc3QgcmVnYXJkcyw8L2Rpdj48ZGl2PkphY2NvIEJyYWF0PC9kaXY+PGRpdj48YnI+PC9kaXY+
+PGRpdj48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PC9kaXY+DQo=
+--0000000000009efeaa065b43fb38--
