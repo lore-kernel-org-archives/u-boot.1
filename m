@@ -1,185 +1,181 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA353C79FB6
-	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 12:37:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E4BC79FB6
+	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 13:26:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6990860669;
-	Sat, 12 Sep 2026 12:37:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C40EE40726;
+	Sat, 12 Sep 2026 13:26:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2pko0eYvlSYL; Sat, 12 Sep 2026 12:37:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 8A3416064F
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789216668;
-	b=Nfidwls7FpQZx83u8cPvs32SA/mxxYUQ5/ziNcNuWAVfMTDTqaCpPJLt/n0xETv4K6A9
-	 z84votDpOcwRWU+7TzjFMbB2ZOFlehPgZbQsbQxG/J7rxvYqaGke+MyuDz6D0eTwQyEUF
-	 GsgGHQsoZPyo9rernVAUnFkBqFcAdjtKd3BAjt0BQZy7OgXr3zvESBB65YusHzhaviz1C
-	 QtgsnUQ4vpDJfZ+FFn9UmFn3rX7W4NlKRTHIEzhb9H1XvZaP3RIJ18Mr4uECzZom9EwPp
-	 nVKfxPhPpW2ruNMPn+PliawwzaVXWr6xaGq/WpJY4rRCMPi1kIBs5GAlddd26EHSkmA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5GERafFTJipN; Sat, 12 Sep 2026 13:26:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 9C26F40624
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789219599;
+	b=O2kRyl0lBBqTjpS0Ugq6ghWxvRUZoKJaMVQljXJiCN46KTSZr4JC2EuM5EPl+qnMmUOw
+	 RsHLQxF4flVyP/zp6Gazfk/DWdkJcyNI++lrmL/JBilxw+vBj93yo97grrbl/Gg4WqAH3
+	 SIDdlGQ4S/oSb9XKYp8RYgCB1Bd97GgzPaxN0VGZrRh8ye0mzJWknHZcP6+bmOHi5U9pY
+	 v62fe6b/yL8JXk4cKC0kTvEZksAhUw4SXrmt22DlatIPR2YOys4JATDr5/g/ZdLeXquk9
+	 4kkveqBSy0P1cmu50l2g9X44s2By6WxzaT9J7YE5p1RxQIf/Z0FPiOJFt3YRDoyyP2Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789216668;
+	c=relaxed/relaxed; t=1789219599;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=PNK+iiuBf7xGlRNVb+ZGF2hjZmMQuJFF+XnAXgDcwWA=;
-	b=XooMF9H2Tm2AyT8cAyyGCT+s0uNp1S+aLknDITy/OxbhOPDESQC/o787TXC2Dq6cod7J
-	 ixqVMo1B4VeiffYkQMdlLEtTNRHzgoMzrXxHtA7EWq1lZIEFbNn6M0jkZOfjRQdzb/AZj
-	 yKyV5oRJ9CWTczvCJOpiJ0Ud4tzwfCgk4uDu9oJFqKTgU981fH5zFS8wGuQM17R83f52+
-	 DW0g28lRbnA2+t4IkxuDkDG+CwA9OoR2EJUSLwyLTpH5ollukrYow2yr5BTpskbPO931R
-	 9FUqkfys8paxobqPKFDzjMGDRggxVLV2ICGaqtO1zKCFBMuvfapR9mB6cMCIhr8eugw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=riscstar.com;
-	dkim=pass header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=BPH6KgNP;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=eoUnqz9k+raSdywN9BM3dW3K+lsDk0raZa8FMfVM6CI=;
+	b=d75MxqbsVKyE5u4PmKP6ltCz8RrcWRS95p9OUY3JKNZda+6rO+ec3gpvbFManFVug3Nk
+	 9yZ18l+bvZ3qYvdMlwbsnrlyBTdXUkGZSlV1UHS1AJQLR1eFVIeZ1uqkrPYefHFXe70uz
+	 6yTyWSht48DstDx84mfg9PP2FGIpGImpu9RLzf+61s0FAVuuiMpK7sxGFEjGr17Ufxlr0
+	 rUh89bD4TzPJaGn0+sGOPZzPdFia23yhLGz9UB6KSKxEV09tyAAWcL8SLvWSbtQgGHG7J
+	 FftK6+YtZSXnKjxMu6qC1eEnwUjR25JL2xIu+ZqG8u74TZBJCsA7D75vlWFvxelsOsw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789216668;
-	bh=PNK+iiuBf7xGlRNVb+ZGF2hjZmMQuJFF+XnAXgDcwWA=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=XgfcDOJDuf8uqgWOLlQ1GcgxioIkb570Cq2cI4HDNdva3JstMBTBdmvMzysscHJ80
-	 vBONfQIQNpm5eLtFqM79TUUgEp1+RbsKiwBsDV+MTw9WMx968F0wEuLZAqZG80e8Yx
-	 EnijitcmEyUi5G1WNe3qAX/nUjP9ZinBoGR3d/HJplua09stgnx026rPuS8x/6sJ/O
-	 ENdHaYxWLv/iJaws7/Y4a+FoduEGzdS55+l12ROi5ytWqwoHV6w7FKs2e6WAutDQXP
-	 eljDtVmFmqz5IUQkbDCQW/rl9bQm2g6EmkN6/+xelaoKr590bCU4J9+qHkWQEe/uy+
-	 V8U2ISfwhbnxQ==
+	d=lists.u-boot-project.org; s=default; t=1789219599;
+	bh=eoUnqz9k+raSdywN9BM3dW3K+lsDk0raZa8FMfVM6CI=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=lcpo60vqJT4nR8PjX1Zf7i2jOmoteY3iN6LJEQwmoNrSO0pgd9MPAVdf+XaT0IZnM
+	 Y8PP9tSQJCRqh4D9/D/GWsezJLPpgo0uZcumdhs2UDCg7O9OP1t6WqshTYtTezaJ4N
+	 gePQdBVSLBII8Gy9uT7xyH3g18IXu75WNB+PSuh6GkZQ5XuWxoQfqgmSRm4fhSj76M
+	 P82GKxISDmvJaeI5GcaJmCzWQMS6aJMA5IYr/VIWTdu+KsLOnbtVNDMkL2pZCtCVYO
+	 yPxaa5SOj6NKZTqkP/fffg9ICOQCxqCFEin0pehM7mleyUlMitasZR2zA0e7AYXoE9
+	 5iy3zKRfidAfg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8A3416064F;
-	Sat, 12 Sep 2026 12:37:48 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 94D752D0
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:37:46 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9C26F40624;
+	Sat, 12 Sep 2026 13:26:39 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5C6F523F
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:45:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8690960678
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:37:46 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4200B80D49
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:45:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PDaXsohLnI4y for <u-boot@lists.u-boot-project.org>;
- Sat, 12 Sep 2026 12:37:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 8153A6066B
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:39::11"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789216665;
- b=VkX/+NWSCrfG+v4GoiFL1VRnpv+qabO1soKrkLvYC1usgmL95e1fdFDg4bodgWiDklXk
- w8Q44tAjFpxMBwrooj3ol4dSCRQZ0LPvs12LADdJ6rVLIXDuVXhqXlEHBBl4LaeKdCg9u
- yzg72gKwLwRB2cv9l1FYlHE0vOJLEKvASlOBtl3l4R3GBK+0Vs/+eZR9NpSIB+dQmYJps
- TStQAsK4KMhiRDtvtCGXPYqKwYWCqSTrHDDf3gOeQy+Isa/iYfc3wcqRa5VbnHAwnHTvF
- WgAKinCSomjjH5AQiXxFn9Yibp6oYBLOJpT3tL70NK7lSJ/AhPNkHegCP2RH03fqRnw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PNbuYOcE057Y for <u-boot@lists.u-boot-project.org>;
+ Sat, 12 Sep 2026 12:45:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 47E7A80D15
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=185.125.188.123
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789217111;
+ b=d885FO4mrcOJ6WWziTmxRPj0tORcqrC5uGGt9UZsvDiY7oqSKjIzOvx4UTa7cGV3j0WV
+ KmEL2+8n7fVvIgOFBpAi3uENCjpqQlafJI8x6hIRGwhUlnjiBPkV4isE8lsAljLd8bYHx
+ GKEgujstk71vpQ1fnHXYv8UaXmzqa4gCQ+8gLCXJLahQ0m+iNJRoSfDYgFhDLsIdN2xOR
+ 6FJUYuc8te+ZRI7uNyr9TsBVQgmVzmIhTZe56pr1Jx/0Uvg6Uuqt5xs6ENqUTEJD3pCqM
+ z2Oj9RkVXpPzeIU6kclKJ0eN0IWQSDxiqLB6kH3kShyqCZFZznnA6FmjcYcIKN8QX4g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789216665;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=PNK+iiuBf7xGlRNVb+ZGF2hjZmMQuJFF+XnAXgDcwWA=;
- b=byeU/34+a80UZO1evbuijaSesSZT39Oi5+kPTqn/YsyzrDGsbo69mykIn1jS00piWDUg
- S3zKgD78LVlcDKt7pHVgCKmZlbwC7LHXloqYrHC7GmtFUEWiI00A+G74DWnuHp8dGGxhP
- kr1lW7NgNhqgq9IXtdnkD03UaC/IBPJX4ZOUDGky6KQNW6JhhjIF6FdlBl+CJ9bJGuJwC
- 5Ax096BCNJ79lLRFb0SGsqzkCe7XQPojzhMKcUluZSVUINPmVKUq3VmHnqfMa86pTP0jC
- EkdHAvznuvbCSbrzc2K/RAQP63pcfu6eWQPBNh4IMtN6ozaQkm6hpJyIT5Oo4ivsAeA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=riscstar.com; 
- dkim=pass header.d=riscstar-com.20251104.gappssmtp.com
- header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=BPH6KgNP; 
- arc=none smtp.remote-ip="2607:f8b0:4864:39::11"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:39::11; helo=mail-pj2-x11.google.com;
- envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
- header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=BPH6KgNP
-Received: from mail-pj2-x11.google.com (mail-pj2-x11.google.com
- [IPv6:2607:f8b0:4864:39::11])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 8153A6066B
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:37:45 +0000 (UTC)
-Received: by mail-pj2-x11.google.com with SMTP id
- 98e67ed59e1d1-396ccda24a3so491140a91.0
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 05:37:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1789216665; x=1789821465;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=PNK+iiuBf7xGlRNVb+ZGF2hjZmMQuJFF+XnAXgDcwWA=;
- b=BPH6KgNPyVqdgMof0fxeOHGgOyMJcn6zglJoLAxQyV+5Yag9k/DFrq91fUAQja+g+9
- wwCNMteAX36X4bt+PW79yz2OyxOVhCgkRVWERndNCaENs5PUpqbvBlVuSidWsUlt7Rlr
- j3IMZ21EVL6l9GxwVBF9X9O1ufClnltQaBsWAoPXMBKdP01dnyCmBLvOrZwXGkoD/uop
- z1GJ60Ssq6hXBSCBcQIuG+9MBmMLKo/bXOJ3N7sJIMW78TRkK1YkkbMyEemqXjTO763T
- L0qXw0bX5ht+jRmf30dJaz8hnkDj50C2L6aAi7V9vTSOewkPqginm43gAzuctjIQteBI
- tWmQ==
+ c=relaxed/relaxed; t=1789217111;
+ h=Received-SPF:Received:DKIM-Signature:Received:
+ X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+ MIME-Version:Content-Transfer-Encoding;
+ bh=eoUnqz9k+raSdywN9BM3dW3K+lsDk0raZa8FMfVM6CI=;
+ b=NXs9MDDR9qIAtUNlxoAPXRBx6t9P67r38v/oTk9PswUGvlg9/vBpaGuPE2W52D4/22l1
+ y/7pk06TcCEC6YAjz09udXEsalXbkJgt0ABfysIC0+if/XzNROqG/n/V1tSewJrfhUjqq
+ 4TeAV0MADCQkp+loD74bUerF+dDT7d9zWKy1W/rYT2fg4Gfuy8PMIEwQQp/6dsCe24cL2
+ r9UTCNa/toivLaY+286DUY6yNORQAPXQcD4uOduEeIIdx2HzDkMnyiEYmvULYbsQqvs/H
+ 3w2hnldva+Xfew+eHZemkwTip8lVPBSl+TKGzRjrbe0Fvnrr2gjhEr2XXIFPwNoU+iQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ dmarc=pass header.from=canonical.com; 
+ dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
+ header.s=20251003 header.b=jgCufTgq; 
+ arc=none smtp.remote-ip=185.125.188.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=jgCufTgq
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 47E7A80D15
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:45:10 +0000 (UTC)
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
+ [209.85.210.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 1E58E3F47C
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:45:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1789217108;
+ bh=eoUnqz9k+raSdywN9BM3dW3K+lsDk0raZa8FMfVM6CI=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=jgCufTgqtAlQUs7VIvtkVeYExRGOGhQs/fMnKs4c8v8rulwnpu/hq/VpZwYVKgk/Q
+ 1yd9B9pOMegcZyxACSWnp3yH2mMCciCKON0szz3VmkqLzCU2tt9hiPFYcqc/PWLIZj
+ I0Qsb7f6H9KdQfCAp/8R+QbuMbUvJR72Yr23HIo1h/+CppQwdAlnjZOl/UBIIK/R1f
+ 9OwoCpSpi9zKf3zS4zBTcBJilrieU0KM0CwkefS4HDWygAvUBAmMnwQgW47ykfhV2M
+ HyRPbvNlXvn8DPwfQN9NAba5f2sSMRb0ErRIPaHlqZkNsFKBLfEIlkgoLO59GCx2bs
+ DGYJ2xZs90HQvBrc1OSPfpFkemjewPmNMpljOi6bnCNvLs/2TZAE1FdkXYVaO6jUXo
+ v+FAfe7hm3wEPMBhjmmRlQ9dTZ5uXc406S6uQCzrQrZCWfI0v9aHoqlPtqeaLOMwJA
+ l65QxCSKr3dSortKTiHpZWifTrrJwgJMAzqdf2F+w0SQVOKEk1Xn00qA00uNzTPxrF
+ x+90vKcArQwUHiRTcwnHf3ODCqhOcc3Mhf28IaTaD2PSf1qWonBGkkqb+Wq1pER6v8
+ 9YglJFSW0Ubld1SvGXTfAFxb7nA/W4LNGViDTG77LVZsl25A47WKzgV8emw+RKtfTG
+ kJepwAA3lMsd/LgpMpyByhz4=
+Received: by mail-pf1-f197.google.com with SMTP id
+ d2e1a72fcca58-8623e5d4279so3494887b3a.1
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 05:45:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789216665; x=1789821465;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=PNK+iiuBf7xGlRNVb+ZGF2hjZmMQuJFF+XnAXgDcwWA=;
- b=Sg8DxkzDFSvLIAg2r+KVXemU1nd/9ubbwVyx9dWtk6w/0aRGJBw8emnBEeCAzSgmyf
- 0glKh0KYKxnnEjva3knuHhXNzoPyiwoEE9KnIIK/21BsNWJhOewPlQMPsco9aK8PlScm
- vcLYhgwtf3o/IOvbxVnsfK7mm5XZBrAVxv6FMTxYf2fSNPbn6rP1Xwa0FnHkbw7PBijg
- kQ3EbmukIbhPwPhQXmAbKKmbpFyw/NBYqdhnimbI+hVQ9WCmnbhL+Cc7Ff7iwyYHADx9
- q5BNo63L/CP0UaxFcp3M5Y3FgCMvzDnFe++3znWHKIsVVmDqZJIBlvnCqSyDnFpFgqe+
- M7CQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzwmJaK1VcpyUZvdjjIkrNxPYG4GJQcXvMOJKoxrilfGWx+UDl124jxnR52W5xZk6ppP3qHMNA=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nDCDnS73UOtCnrKG2xCDg8oDWqCdLW/thtj0FpAh63mQ5mSXg5
- QxuzAh8JJUEBmdSwZDqqJEs87v7ZkE4xqUckZTIf/E3MkY3WmY5kzLzvcUqmH4Oz0SE=
-X-Gm-Gg: AYBFou3kwSLCBvisUoDKYfZ8jaAvDWkJoRE08P+Kr0TlW0DQLm7Q1n49puRaONnk9Qq
- ZCMl12RR84H4iDHDa6rlUY8yNwLysn5K6Ow3Lzknq4NNdaZ+QUN1J8E/vXhV/wkgj7RHw5eubRz
- 0FGEByYBdlgPscdo3vT96k1Gqe2owB9t3nkLcslRe48hiE8wcbiV3OMfY97t44Yjqn+S8AcK7HI
- wf8yuPokhCsLjepaONev5YiA67mssLBRZgo+pMN9mGdrt3GsvyoRsGJ+D5EdoC2S1M8WqE1WyBi
- NIb+09Mgk541+/vwlAVq/nalLWEYjNKADF5RjzBkOmCVV7EvYslqJFc43egvH15oTrlnlDS0cwp
- 0Mr59XNWdnPd1aHk78013h50yUbYER/Gu0jzO/BcWZSgTh0HnOiZZ8aN6awPf3swlak9jzR6DxP
- u4AhXGmVYrlvbNT4Wr+QAu3Ve8V4mUBdJZ2/hhvsezLVHAHMmrP5IpOcUW85ZamEOKrVTBBSDB3
- 8u7yNYN39jmBOzr2PfPIlh3Ixj7fe2jUYXmsu4eGaLvqlK3mwIUuC7YxHSBNqFOk84GdFDIWgSS
- /zxFxF9QKe7dj42OOnD4+UqdehX6AOy87HL8
-X-Received: by 2002:a17:90b:4ad2:b0:398:9be6:f996 with SMTP id
- 98e67ed59e1d1-39d9c34a241mr13975908a91.21.1789216664631; 
- Sat, 12 Sep 2026 05:37:44 -0700 (PDT)
-Received: from [127.0.1.1] ([209.170.101.129])
+ d=1e100.net; s=20251104; t=1789217106; x=1789821906;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=eoUnqz9k+raSdywN9BM3dW3K+lsDk0raZa8FMfVM6CI=;
+ b=n+uLsrEWCPtIAOtueeZ3btLCyPcnYDN+BEF+qfF0F4wVSWgdL6m9Hho8SoDiNVxzEx
+ CE0ELdgZscLy27rsEy/x6zNG+XdtRdASjrl+2L4J2r5yh6kTVv0mc8m7JgFvixY1MiGy
+ i2xpnN7NWchz7qapbeh+CP4tWXmJ8+mcdK25PLDyrsGA9z/UtT0o1HHDwdtjxAltQq0e
+ qvrFr86jFKP4f+UEr1ZamnpxaNkiJvK4AIj1nQObqtFVWgkyfOqdgOik1GK68XIS/83h
+ nzv9UUDd0L+gF6n9tDv32Igt1JUnLu4MLche8/R5h520tof6rECslj1tdNlolI130VSK
+ uDgQ==
+X-Gm-Message-State: AFuF++mOpN++lacOfdfScdISEi14uXzdIaOigxWAf2aV7k4jzgzX+Xdb
+ RDcHiidShQiM+DKtZbTcBnlFx8DEvKBzmvudS03qBrlfSWTmh1gj6K3+XoeI5MWpB8blkBnvW9Q
+ l7tVWNMed4gGO0v6SeDOfh7zQhION/VMd/Tjn9cdKKHDdFDr0xAIOTd8s0sbMkDNIgdii33gL/D
+ 9wCXLyy+YEHnyq+vZHRg==
+X-Gm-Gg: AYBFou0/KSIE3vUPQSb/eXWF3BjB7AqR8JaT33Q+Sm/B6xz2aB2Ee1bE/7KRPizvvw2
+ RYxyIa5l8+n4UEui8VTuMVUEudW6SbkSPkF1iQY4m6dRsq86Swni3G3T/Ys/+Y8ajYCcFN48+dg
+ 0TDHlSrRFy7k2oM8j/qNrsU2wk/7Hb3UGI2sCcffc7fq9S2EeBBZwLAlV3LfY5i4oR0YaS+MAlA
+ DChvv2rQoW79CjNZll/mQ69hyKSQpMggnHn5VNpHvJYoWj7qB4UZDciy85PJobPgg7BEJB3bE/x
+ 52i78b3DiWsjx5Fe+SykWw/QZDDK0rAIuqbC5fCYsDESvUTgCDww2DCT0kzERVEzbYt9dFkxaLM
+ ekHaZBmQKux8tvqGysSbqv7cnYCfu76rFjvIjPGPwgG4asJf7fkEl7sU19UskB1bZPA==
+X-Received: by 2002:a05:6a00:2ea3:b0:845:e9e8:645c with SMTP id
+ d2e1a72fcca58-86cc98620d6mr4176314b3a.6.1789217106573; 
+ Sat, 12 Sep 2026 05:45:06 -0700 (PDT)
+X-Received: by 2002:a05:6a00:2ea3:b0:845:e9e8:645c with SMTP id
+ d2e1a72fcca58-86cc98620d6mr4176261b3a.6.1789217106162; 
+ Sat, 12 Sep 2026 05:45:06 -0700 (PDT)
+Received: from noble-uboot.tail872496.ts.net
+ (211-75-139-218.hinet-ip.hinet.net. [211.75.139.218])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-14365ba71cesm13288737c88.13.2026.09.12.05.37.37
+ d2e1a72fcca58-86b291c5e8dsm2272101b3a.32.2026.09.12.05.45.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 12 Sep 2026 05:37:43 -0700 (PDT)
-From: Eric Chung <eric.chung@riscstar.com>
-Date: Sat, 12 Sep 2026 20:37:00 +0800
-Subject: [PATCH v13 7/7] spacemit: k1: fix product name detection and DTB
- matching in SPL
+ Sat, 12 Sep 2026 05:45:05 -0700 (PDT)
+From: Aristo Chen <aristo.chen@canonical.com>
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Daniel Golle <daniel@makrotopia.org>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Aristo Chen <aristo.chen@canonical.com>
+Subject: [PATCH v1 0/5] tools: mkimage: support shared image data through the
+ image-data property
+Date: Sat, 12 Sep 2026 12:44:46 +0000
+Message-ID: <20260912124454.13578-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260912-m4-v13-7-71043b29630f@riscstar.com>
-References: <20260912-m4-v13-0-71043b29630f@riscstar.com>
-In-Reply-To: <20260912-m4-v13-0-71043b29630f@riscstar.com>
-To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
- Yao Zi <me@ziyao.cc>, u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>, 
- Leo Liang <leo.liang@sifive.com>, Wei Fu <wefu@redhat.com>, 
- Scott Bambrough <scott@riscstar.com>, Huan Zhou <pericycle.cc@gmail.com>, 
- Eric Chung <eric.chung@riscstar.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>, 
- Anshul Dalal <anshuld@ti.com>, Siu Ming Tong <smtong@axiado.com>, 
- Johan Jonker <jbx6244@gmail.com>
-X-Mailer: b4 0.15.2
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 12 Sep 2026 13:26:38 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -193,103 +189,76 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Use a table to handle DTB matching.
+The 'Shared image data' section of the Flat Image Tree specification [1]
+defines an image-data property: an image node names another image node
+under /images whose binary payload it shares, while carrying its own
+load, entry and remaining metadata. A multi-configuration FIT can then
+offer the same binary at different addresses without storing it twice.
+The normative text is in the specification's main branch; a refinement
+of the cipher interaction is under review in [2].
 
-Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+mkimage resolves the references right after external data has been
+imported: the target's data is copied into the referencing node, so the
+later ciphering, hashing, signing and overlap checking steps see normal
+image nodes, and the property is retained in the resolved FIT as a
+record of the sharing relationship. Invalid references are rejected:
+an undefined target, a chained reference, data that disagrees with the
+target, external data properties mixed with image-data, and cipher
+settings that would produce different ciphertexts. Consumers need no
+changes, since bootloaders ignore the property and the data properties
+remain authoritative.
 
----
-v7:
-- Abandon to load product name from ENV.
-v6:
-- Rebased onto latest upstream. Cleaned up board_fit_config_name_match()
-  to maintain consistentcy with v5.
----
- board/spacemit/k1/spl.c | 50 +++++++++++++++++++++++++++++++------------------
- 1 file changed, 32 insertions(+), 18 deletions(-)
+Patch 1 makes fit_image_setup_cipher() use an explicit iv from the
+cipher node when no iv-name-hint is given, checking its length, and
+fall back to a random IV only when neither is present. This matches
+the specification, makes encryption reproducible, and lets encrypted
+data be shared without relying on an IV file in the key directory.
 
-diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-index 374922573c98..ef23db62d6cc 100644
---- a/board/spacemit/k1/spl.c
-+++ b/board/spacemit/k1/spl.c
-@@ -141,6 +141,15 @@ static void i2c_early_init(void)
- 	}
- }
- 
-+static const struct {
-+	const char *eeprom_name;
-+	const char *fit_name;
-+} k1_board_map[] = {
-+	{ "k1-x_MUSE-Pi-Pro",   "spacemit/k1-musepi-pro"    },
-+	{ "k1-x_deb1",          "spacemit/k1-bananapi-f3"   },
-+	{ "k1-x_milkv-jupiter", "spacemit/k1-milkv-jupiter" },
-+};
-+
- int read_product_name(char *name, int size)
- {
- 	u8 eeprom_data[TLV_TOTAL_LEN_MAX], *p;
-@@ -174,6 +183,27 @@ int read_product_name(char *name, int size)
- 	return -ENOENT;
- }
- 
-+static void fixup_product_name(void)
-+{
-+	char fdt_name[I2C_BUF_SIZE];
-+	int i;
-+
-+	for (i = 0; i < ARRAY_SIZE(k1_board_map); i++) {
-+		memset(fdt_name, 0, I2C_BUF_SIZE);
-+		if (!strncmp(product_name, k1_board_map[i].eeprom_name,
-+			     strlen(k1_board_map[i].eeprom_name))) {
-+			snprintf(fdt_name, I2C_BUF_SIZE, "%s",
-+				 k1_board_map[i].fit_name);
-+			break;
-+		}
-+	}
-+	if (fdt_name[0] == '\0') {
-+		/* set default board name */
-+		sprintf(fdt_name, CONFIG_DEFAULT_DEVICE_TREE);
-+	}
-+	memcpy(product_name, fdt_name, I2C_BUF_SIZE);
-+}
-+
- static void clk_early_init(void)
- {
- 	struct udevice *dev;
-@@ -417,6 +447,7 @@ void board_init_f(ulong dummy)
- 		log_info("Fail to detect board:%d\n", ret);
- 	else
- 		log_info("Get board name:%s\n", product_name);
-+	fixup_product_name();
- 	pmic_init();
- 
- 	ddr_early_init();
-@@ -459,24 +490,7 @@ void spl_board_init(void)
- 
- int board_fit_config_name_match(const char *name)
- {
--	char fdt_name[I2C_BUF_SIZE];
--	int i;
--
--	memset(fdt_name, 0, I2C_BUF_SIZE);
--	if (!strncmp(product_name, "k1-x_", 5)) {
--		snprintf(fdt_name, I2C_BUF_SIZE, "%s-%s", "k1",
--			 &product_name[5]);
--	}
--	if (fdt_name[0] == '\0') {
--		/* set default board name */
--		sprintf(fdt_name, "k1-musepi-pro");
--	}
--	for (i = 0; i < I2C_BUF_SIZE; i++) {
--		if (fdt_name[i] == '\0')
--			break;
--		fdt_name[i] = tolower(fdt_name[i]);
--	}
--	if (!strcmp(name, fdt_name))
-+	if (!strcmp(name, product_name))
- 		return 0;
- 	return -ENOENT;
- }
+Patch 2 adds the resolution and validation described above, covering
+inline FITs completely.
+
+Patch 3 makes external data mode (-E and -p) store the shared payload
+only once: sharers skip the extraction and are pointed at the
+referenced image's region through identical data-offset or
+data-position and data-size values.
+
+Patch 4 teaches the configuration load overlap check to size data-less
+sharers from their target. The check runs before the references are
+resolved, so such images previously escaped it and their load regions
+went unvalidated.
+
+Patch 5 adds the sandbox tests: inline and external sharing, mkimage -F
+re-processing including conversion between the two forms, the rejection
+cases, encrypted sharing through a shared iv-name-hint and through a
+shared explicit iv, and the overlap rejection.
+
+Each patch builds and works on its own. On sandbox the new tests pass
+together with the FIT, vboot and mkimage pytest selection (77 passed)
+and the complete binman suite (606 tests). The feature is also verified
+on hardware: an i.MX6ULL EVK boots an Ubuntu Core style multi-board FIT
+whose i.MX6ULL variants share the kernel, ramdisk and FDT payloads
+through image-data, keeping the image at roughly 40 MB instead of the
+78 MB it would take with the payloads duplicated.
+
+[1] https://github.com/open-source-firmware/flat-image-tree
+[2] https://github.com/open-source-firmware/flat-image-tree/pull/58
+
+Aristo Chen (5):
+  tools: mkimage: use an explicit iv from the cipher node when
+    encrypting
+  tools: mkimage: resolve image-data references between FIT images
+  tools: mkimage: share the external-data region between image-data
+    images
+  tools: mkimage: include image-data sharers in the load overlap check
+  test: py: add tests for the FIT image-data property
+
+ include/image.h                      |   1 +
+ test/py/tests/test_fit_image_data.py | 373 +++++++++++++++++++++++++++
+ tools/fit_image.c                    | 370 +++++++++++++++++++++++++-
+ tools/image-host.c                   |  18 +-
+ 4 files changed, 757 insertions(+), 5 deletions(-)
+ create mode 100644 test/py/tests/test_fit_image_data.py
 
 -- 
-2.51.0
+2.43.0
 
