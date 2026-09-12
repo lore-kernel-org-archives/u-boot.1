@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F5A5C88E53
-	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 12:37:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA353C79FB6
+	for <u-boot@archiver.kernel.org>; Sat, 12 Sep 2026 12:37:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0F24A60660;
-	Sat, 12 Sep 2026 12:37:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6990860669;
+	Sat, 12 Sep 2026 12:37:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UjraPo5mblYk; Sat, 12 Sep 2026 12:37:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 1108B6063E
+ id 2pko0eYvlSYL; Sat, 12 Sep 2026 12:37:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 8A3416064F
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789216661;
-	b=L3P5xUL62jsS3q85q6JMh2ifGyvkbdbfO0r1roVTKBw4m9+I+DV7u7/eVUHTjE4bm5xk
-	 s0J9+X2rMNNPwgFW3UXg37h3RoONgUaKUeToYY056j0vnsnsAYixPakpEKGkWx5CjqeMK
-	 Lq8xegXIo4l4yqYoYM6FN1OfvDDR6gHg5jUQxFggs31U/isyicU7cUnyokTZ3ZIfGm0R/
-	 2g+grTtv5iCVMk3nSCyPqzoBzp+4VRsp3D/Gp/2q7F9xcooUKZymhAmdXB6Uu3Urq5c05
-	 t3uheDTjHiFJ3xLc2pJLKTn+AgE64fLmluTWhuzr6vK/cKIA9XMxxqX81BH7/gDSenQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789216668;
+	b=Nfidwls7FpQZx83u8cPvs32SA/mxxYUQ5/ziNcNuWAVfMTDTqaCpPJLt/n0xETv4K6A9
+	 z84votDpOcwRWU+7TzjFMbB2ZOFlehPgZbQsbQxG/J7rxvYqaGke+MyuDz6D0eTwQyEUF
+	 GsgGHQsoZPyo9rernVAUnFkBqFcAdjtKd3BAjt0BQZy7OgXr3zvESBB65YusHzhaviz1C
+	 QtgsnUQ4vpDJfZ+FFn9UmFn3rX7W4NlKRTHIEzhb9H1XvZaP3RIJ18Mr4uECzZom9EwPp
+	 nVKfxPhPpW2ruNMPn+PliawwzaVXWr6xaGq/WpJY4rRCMPi1kIBs5GAlddd26EHSkmA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789216661;
+	c=relaxed/relaxed; t=1789216668;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,137 +32,140 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=cBa7CbNFl9+kIdFyJV6pmxk8FUT6jAfJ+540HZK392M=;
-	b=gA76HgaRRVpro5zpIPiLQkm6lVPfFEcsU8RgINIAmREQGOgmKhfwYMGDmGV71Me4tyei
-	 6kVdpxy8PyFV/g7pUY9kLxEvewWSdVsqmscfI2MHA5MI8CRptEq16jd9wp/VeYnMwWNKI
-	 97dNko92AeMJuBPi2UyUVYbga/IyuUDVxWfdXsdq6/tg0yT2zEtUFBgy2QSRMHjuu2SQM
-	 YcVU2aUEclx7U3HSyyclF0cc3t27SNwdo3RtlJ4AQhvRoP0raCPSz4yUug8okMdkZoXZN
-	 uOZ/E0Fr71ggR5C7KcPRY5/tpQgj7W749pSwfyFsASdktpXqmVIzobS4WDcR3O0QZ1A==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=PNK+iiuBf7xGlRNVb+ZGF2hjZmMQuJFF+XnAXgDcwWA=;
+	b=XooMF9H2Tm2AyT8cAyyGCT+s0uNp1S+aLknDITy/OxbhOPDESQC/o787TXC2Dq6cod7J
+	 ixqVMo1B4VeiffYkQMdlLEtTNRHzgoMzrXxHtA7EWq1lZIEFbNn6M0jkZOfjRQdzb/AZj
+	 yKyV5oRJ9CWTczvCJOpiJ0Ud4tzwfCgk4uDu9oJFqKTgU981fH5zFS8wGuQM17R83f52+
+	 DW0g28lRbnA2+t4IkxuDkDG+CwA9OoR2EJUSLwyLTpH5ollukrYow2yr5BTpskbPO931R
+	 9FUqkfys8paxobqPKFDzjMGDRggxVLV2ICGaqtO1zKCFBMuvfapR9mB6cMCIhr8eugw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=riscstar.com;
+	dkim=pass header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=BPH6KgNP;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789216661;
-	bh=cBa7CbNFl9+kIdFyJV6pmxk8FUT6jAfJ+540HZK392M=;
+	d=lists.u-boot-project.org; s=default; t=1789216668;
+	bh=PNK+iiuBf7xGlRNVb+ZGF2hjZmMQuJFF+XnAXgDcwWA=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=H8cyQ+3HuVg6pAfe/ZE86X0XcCWjgFuzJm60Va2oylvirLgOWUHnuMsDeAXKzBAbP
-	 Sj1TIey/TE5EJzb7SP1jgb0NCJslZa9ihFYsQbQO67XEaVPjCdTkg+Q8QHiSs9EQ3m
-	 +OoUnp/d14psAWFUyEUUN2jfOh8n76ANbxL6F6tdw7QUJVosfxp0RwLex4WMat8Yhs
-	 89iuCW7XM4XE+1WZvbtdwTrWixRySD57Q9CpdttR2di9GUdDz7HUcbWsOxpVx1Xq5U
-	 /8SNosB4jyW8UxGspxSg6/+pf7DOsuHGZvXfKFQk7F3oXCix7hOD3nQbgg2SikEzCM
-	 Gmv9XhDFnm/Dw==
+	b=XgfcDOJDuf8uqgWOLlQ1GcgxioIkb570Cq2cI4HDNdva3JstMBTBdmvMzysscHJ80
+	 vBONfQIQNpm5eLtFqM79TUUgEp1+RbsKiwBsDV+MTw9WMx968F0wEuLZAqZG80e8Yx
+	 EnijitcmEyUi5G1WNe3qAX/nUjP9ZinBoGR3d/HJplua09stgnx026rPuS8x/6sJ/O
+	 ENdHaYxWLv/iJaws7/Y4a+FoduEGzdS55+l12ROi5ytWqwoHV6w7FKs2e6WAutDQXP
+	 eljDtVmFmqz5IUQkbDCQW/rl9bQm2g6EmkN6/+xelaoKr590bCU4J9+qHkWQEe/uy+
+	 V8U2ISfwhbnxQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1108B6063E;
-	Sat, 12 Sep 2026 12:37:41 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 48D93701
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:37:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8A3416064F;
+	Sat, 12 Sep 2026 12:37:48 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 94D752D0
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:37:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2F23B4007D
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:37:40 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8690960678
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:37:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id K8S85sZg2fLU for <u-boot@lists.u-boot-project.org>;
- Sat, 12 Sep 2026 12:37:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 8CE6540068
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::530"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789216658;
- b=GsxEqwrGRlqKHfmKACQrLzacZiEtJaXzkQMBlt0lGHLY8QfuSiuh9WYQzoEtqtN+U8Kr
- 2kTwNIgmXx/U2cQXqK0rK/zyi8OJ2N3YC9v24w5SPBGevykzD3BWakMSIYyjoYqC/PWBl
- AOKH8mGDhnS8Ny9OzKWLWKa7Xv5lan/UKlTPgCLmFYD02SvZsgjTw/tT4Fww8GQJxhqjq
- zMppupzD3yJENgqDCEOOIDcZtogyHj+k7Qdat0FzvkXYxrVgL9f5116izwW8kNltI6xWv
- KZwzlWtetl/RlMfsOF+TKp9Rh+MpBU3GQSEsGbD21n3byAXe4Gi43NFJyJ6tswSwStg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PDaXsohLnI4y for <u-boot@lists.u-boot-project.org>;
+ Sat, 12 Sep 2026 12:37:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 8153A6066B
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:39::11"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789216665;
+ b=VkX/+NWSCrfG+v4GoiFL1VRnpv+qabO1soKrkLvYC1usgmL95e1fdFDg4bodgWiDklXk
+ w8Q44tAjFpxMBwrooj3ol4dSCRQZ0LPvs12LADdJ6rVLIXDuVXhqXlEHBBl4LaeKdCg9u
+ yzg72gKwLwRB2cv9l1FYlHE0vOJLEKvASlOBtl3l4R3GBK+0Vs/+eZR9NpSIB+dQmYJps
+ TStQAsK4KMhiRDtvtCGXPYqKwYWCqSTrHDDf3gOeQy+Isa/iYfc3wcqRa5VbnHAwnHTvF
+ WgAKinCSomjjH5AQiXxFn9Yibp6oYBLOJpT3tL70NK7lSJ/AhPNkHegCP2RH03fqRnw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789216658;
+ c=relaxed/relaxed; t=1789216665;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=cBa7CbNFl9+kIdFyJV6pmxk8FUT6jAfJ+540HZK392M=;
- b=Vu1kIpdoNU8MKEi1t2vF211/NiHprCyADFQK+lRp8xgopedXsAXw7rCarN/V1J/OwDPk
- qZLep42NlXBONl6K3yE5NeiMRAQo8NtK3MWpZSmSBJm9R3VYXHMBqY5DRA6oRt/nw9NvX
- Rrz2fq/9E3J8atPTK4DyrYimUfaNl9PRX2RwOeaGOpHvLauHgtUdMDINzFsynCOW3Z73h
- vumEuomZ6p5OhOzIIxK6jh6uBRqXGXvCV2Qxc2KkwK1ObEU4C2djcmaHdw0FnWCFTbtzu
- FxU6jAa9xGmPADx64uXFvQ/1SOwbFtOhDH/j+L2nnWc2BaGYLqO+9HENfML3j6mZ9hg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=PNK+iiuBf7xGlRNVb+ZGF2hjZmMQuJFF+XnAXgDcwWA=;
+ b=byeU/34+a80UZO1evbuijaSesSZT39Oi5+kPTqn/YsyzrDGsbo69mykIn1jS00piWDUg
+ S3zKgD78LVlcDKt7pHVgCKmZlbwC7LHXloqYrHC7GmtFUEWiI00A+G74DWnuHp8dGGxhP
+ kr1lW7NgNhqgq9IXtdnkD03UaC/IBPJX4ZOUDGky6KQNW6JhhjIF6FdlBl+CJ9bJGuJwC
+ 5Ax096BCNJ79lLRFb0SGsqzkCe7XQPojzhMKcUluZSVUINPmVKUq3VmHnqfMa86pTP0jC
+ EkdHAvznuvbCSbrzc2K/RAQP63pcfu6eWQPBNh4IMtN6ozaQkm6hpJyIT5Oo4ivsAeA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=riscstar.com; 
  dkim=pass header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=VzHTOWED; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::530"
+ header.s=20251104 header.b=BPH6KgNP; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:39::11"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::530; helo=mail-pg1-x530.google.com;
+ client-ip=2607:f8b0:4864:39::11; helo=mail-pj2-x11.google.com;
  envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=VzHTOWED
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 8CE6540068
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:37:38 +0000 (UTC)
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-cbe6295f05bso1812187a12.1
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 05:37:38 -0700 (PDT)
+ header.s=20251104 header.b=BPH6KgNP
+Received: from mail-pj2-x11.google.com (mail-pj2-x11.google.com
+ [IPv6:2607:f8b0:4864:39::11])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8153A6066B
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 12:37:45 +0000 (UTC)
+Received: by mail-pj2-x11.google.com with SMTP id
+ 98e67ed59e1d1-396ccda24a3so491140a91.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 05:37:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1789216657; x=1789821457;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1789216665; x=1789821465;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=cBa7CbNFl9+kIdFyJV6pmxk8FUT6jAfJ+540HZK392M=;
- b=VzHTOWEDSaicVy01wBACpqzcc9F0WLMAnZYPGs2snWJLsGvwgwzRkKsHnK5Eyp+RaL
- XD/dlAGRQOs0GrJh4Xri5uBUVxjYemlkSE6BWcapjHSaReVOWW7AC6GjypFGTAj2VYLC
- yuuOH08wnggYx2aH6dLNnIb3RVRzsP68C8Ft8HhaKFA0bs39C/T0e6nO7jb+BDbq4zoG
- LvvY9eTMAw2b+ir4XSxxxAoTnHpHQQd/bkfiGd+bKk5J3uwRqaKaBJNYunB/zS/nugY3
- XXe9AgmHUEQcaC2aRAx+F9SnQudSTpwmE9H65zXf5Ap5IUJHtpGeIQp4w8UQpMxg3MUc
- /6Gg==
+ bh=PNK+iiuBf7xGlRNVb+ZGF2hjZmMQuJFF+XnAXgDcwWA=;
+ b=BPH6KgNPyVqdgMof0fxeOHGgOyMJcn6zglJoLAxQyV+5Yag9k/DFrq91fUAQja+g+9
+ wwCNMteAX36X4bt+PW79yz2OyxOVhCgkRVWERndNCaENs5PUpqbvBlVuSidWsUlt7Rlr
+ j3IMZ21EVL6l9GxwVBF9X9O1ufClnltQaBsWAoPXMBKdP01dnyCmBLvOrZwXGkoD/uop
+ z1GJ60Ssq6hXBSCBcQIuG+9MBmMLKo/bXOJ3N7sJIMW78TRkK1YkkbMyEemqXjTO763T
+ L0qXw0bX5ht+jRmf30dJaz8hnkDj50C2L6aAi7V9vTSOewkPqginm43gAzuctjIQteBI
+ tWmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789216657; x=1789821457;
+ d=1e100.net; s=20251104; t=1789216665; x=1789821465;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=cBa7CbNFl9+kIdFyJV6pmxk8FUT6jAfJ+540HZK392M=;
- b=abIgtRExNqKCnojlr8+CT4O/K9srtSaIuUPwq4zV7TEbPsvz2evcowO7yS7Yyng21v
- QcpiKr7AYEJHeIvEVeCfWOW/ak7alC2WetbhBy4p8JIQGrFT9d8XzPYYSckWT9m3xB9O
- KuRVkbDlQXs3cwKFtLDm8jSMq8wKyguE9Y3cVkWgVVxZy0jGymnyxq9lj1NhonM1DG3j
- YK53tGuho0UNuv+cirUMG8d40eCxZ9eCT8qcf5ZLlMj1ZyNqVBnj90AVf62DuZeHiYnb
- 5abfHPcVt6NItoA4paqJI6S2fynjr9lWFIi64CwR2p0tAwtJ65hGKCXlsuIX4VELMg8i
- RfbA==
+ bh=PNK+iiuBf7xGlRNVb+ZGF2hjZmMQuJFF+XnAXgDcwWA=;
+ b=Sg8DxkzDFSvLIAg2r+KVXemU1nd/9ubbwVyx9dWtk6w/0aRGJBw8emnBEeCAzSgmyf
+ 0glKh0KYKxnnEjva3knuHhXNzoPyiwoEE9KnIIK/21BsNWJhOewPlQMPsco9aK8PlScm
+ vcLYhgwtf3o/IOvbxVnsfK7mm5XZBrAVxv6FMTxYf2fSNPbn6rP1Xwa0FnHkbw7PBijg
+ kQ3EbmukIbhPwPhQXmAbKKmbpFyw/NBYqdhnimbI+hVQ9WCmnbhL+Cc7Ff7iwyYHADx9
+ q5BNo63L/CP0UaxFcp3M5Y3FgCMvzDnFe++3znWHKIsVVmDqZJIBlvnCqSyDnFpFgqe+
+ M7CQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz71Q0hDxIsBjhq7UoWDamn0q7WFou/LUy+xH0OAUh8Ac6lhY6YXU2TTHwH1ss+ZM2+CDG3gSk=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nhLpfk33fQUaQtv2zTawjRdba87pCMWJknKR/W4eorjKHkuZu9
- sP1j4pdzLgi+vWT25mYs7LWJfXH2nP985uZW/NNfMhhLFIG9VxsUFYkjiQmYqRm+wmo=
-X-Gm-Gg: AYBFou1XBRZC0c7Za2DRcmPs1qgF8Gmutb+f8mZzVbC7/Bo/tOWPUDW75dmflVBX6Zz
- K7aIJ+2av2DxsUD9jMFDCzU2xfIacqqh0+FCdgm858XrRUX4TCS8LNO0OVTI4qqaDNFbDG2/sef
- 1GisNhhbcEjr33JJbMN+IF3+2Dw3RXnkVHPz7lx4tr8aj6gV2n6ytp6Ko9ElythN2NIg3JnqRaF
- +v3vlNt9KsMWUfbP7HaowObB6BVu+NsFOOIS/XLjrnO6tD72WIigi+oy8G98TMSik5RhEf866az
- Wl6EKNOrOsUWXfeF3gSyFJIc99XI6UWHmuH85DHGkWY+Zd5mniGAMNAfbUGme7HN+PWfX3Wm298
- g5nPp93TgDOYdS6q8/qdkfGqgA1gpaSHb29O8iSsEEnxHW/kDqwvKpS5BeqdjYAazDVyyWRK1st
- tQ1MF+yFrVkzquPZiyWcLkb0R4gfIDwxsh9QZ0UTanxjilmB1vAttpy9j6t23AegWUe5/e3Fpew
- b87RvoWFXn+w69IVf1Th3Q54x44Cs/eP3IZrCoP/n6VilGXQwDk6E6imF80RCC4GvUEXWCAruuM
- nzqkVq2aoRYWE5699ZOBMJ2Muw7Q3ok/GXdb
-X-Received: by 2002:a17:90b:2d82:b0:39d:6c95:7e4 with SMTP id
- 98e67ed59e1d1-39d77d205f7mr17188246a91.31.1789216657271; 
- Sat, 12 Sep 2026 05:37:37 -0700 (PDT)
+ AKwUvBzwmJaK1VcpyUZvdjjIkrNxPYG4GJQcXvMOJKoxrilfGWx+UDl124jxnR52W5xZk6ppP3qHMNA=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nDCDnS73UOtCnrKG2xCDg8oDWqCdLW/thtj0FpAh63mQ5mSXg5
+ QxuzAh8JJUEBmdSwZDqqJEs87v7ZkE4xqUckZTIf/E3MkY3WmY5kzLzvcUqmH4Oz0SE=
+X-Gm-Gg: AYBFou3kwSLCBvisUoDKYfZ8jaAvDWkJoRE08P+Kr0TlW0DQLm7Q1n49puRaONnk9Qq
+ ZCMl12RR84H4iDHDa6rlUY8yNwLysn5K6Ow3Lzknq4NNdaZ+QUN1J8E/vXhV/wkgj7RHw5eubRz
+ 0FGEByYBdlgPscdo3vT96k1Gqe2owB9t3nkLcslRe48hiE8wcbiV3OMfY97t44Yjqn+S8AcK7HI
+ wf8yuPokhCsLjepaONev5YiA67mssLBRZgo+pMN9mGdrt3GsvyoRsGJ+D5EdoC2S1M8WqE1WyBi
+ NIb+09Mgk541+/vwlAVq/nalLWEYjNKADF5RjzBkOmCVV7EvYslqJFc43egvH15oTrlnlDS0cwp
+ 0Mr59XNWdnPd1aHk78013h50yUbYER/Gu0jzO/BcWZSgTh0HnOiZZ8aN6awPf3swlak9jzR6DxP
+ u4AhXGmVYrlvbNT4Wr+QAu3Ve8V4mUBdJZ2/hhvsezLVHAHMmrP5IpOcUW85ZamEOKrVTBBSDB3
+ 8u7yNYN39jmBOzr2PfPIlh3Ixj7fe2jUYXmsu4eGaLvqlK3mwIUuC7YxHSBNqFOk84GdFDIWgSS
+ /zxFxF9QKe7dj42OOnD4+UqdehX6AOy87HL8
+X-Received: by 2002:a17:90b:4ad2:b0:398:9be6:f996 with SMTP id
+ 98e67ed59e1d1-39d9c34a241mr13975908a91.21.1789216664631; 
+ Sat, 12 Sep 2026 05:37:44 -0700 (PDT)
 Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-14365ba71cesm13288737c88.13.2026.09.12.05.37.32
+ a92af1059eb24-14365ba71cesm13288737c88.13.2026.09.12.05.37.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 12 Sep 2026 05:37:36 -0700 (PDT)
+ Sat, 12 Sep 2026 05:37:43 -0700 (PDT)
 From: Eric Chung <eric.chung@riscstar.com>
-Date: Sat, 12 Sep 2026 20:36:59 +0800
-Subject: [PATCH v13 6/7] doc: spacemit: flash on K1 SoC based boards
+Date: Sat, 12 Sep 2026 20:37:00 +0800
+Subject: [PATCH v13 7/7] spacemit: k1: fix product name detection and DTB
+ matching in SPL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260912-m4-v13-6-71043b29630f@riscstar.com>
+Message-Id: <20260912-m4-v13-7-71043b29630f@riscstar.com>
 References: <20260912-m4-v13-0-71043b29630f@riscstar.com>
 In-Reply-To: <20260912-m4-v13-0-71043b29630f@riscstar.com>
 To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
@@ -190,321 +193,102 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add document on how to flash images into eMMC of K1 SoC based boards.
+Use a table to handle DTB matching.
 
 Signed-off-by: Eric Chung <eric.chung@riscstar.com>
 
 ---
-v13:
-- Only flash the minimized partitions for SD boot.
-v9:
-- Add to generate the partition table of SD card.
-v3:
-- Add document on how to flash images into SD card.
+v7:
+- Abandon to load product name from ENV.
+v6:
+- Rebased onto latest upstream. Cleaned up board_fit_config_name_match()
+  to maintain consistentcy with v5.
 ---
- board/spacemit/k1/MAINTAINERS |   2 +-
- doc/board/spacemit/index.rst  |   1 +
- doc/board/spacemit/k1-mmc.rst | 268 ++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 270 insertions(+), 1 deletion(-)
+ board/spacemit/k1/spl.c | 50 +++++++++++++++++++++++++++++++------------------
+ 1 file changed, 32 insertions(+), 18 deletions(-)
 
-diff --git a/board/spacemit/k1/MAINTAINERS b/board/spacemit/k1/MAINTAINERS
-index 4b2bc4ecfc10..e12288a206e0 100644
---- a/board/spacemit/k1/MAINTAINERS
-+++ b/board/spacemit/k1/MAINTAINERS
-@@ -6,7 +6,7 @@ S:	Maintained
- F:	arch/riscv/dts/k1-*-u-boot.dtsi
- F:	board/spacemit/k1/
- F:	configs/spacemit_k1_defconfig
--F:	doc/board/spacemit/bananapi-f3.rst
-+F:	doc/board/spacemit/
- F:	drivers/gpio/spacemit_gpio.c
- F:	drivers/i2c/k1_i2c.c
- F:	drivers/mmc/spacemit_sdhci.c
-diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
-index a5e35ee12ab6..71854e5735bd 100644
---- a/doc/board/spacemit/index.rst
-+++ b/doc/board/spacemit/index.rst
-@@ -6,5 +6,6 @@ SpacemiT
-    :maxdepth: 1
+diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
+index 374922573c98..ef23db62d6cc 100644
+--- a/board/spacemit/k1/spl.c
++++ b/board/spacemit/k1/spl.c
+@@ -141,6 +141,15 @@ static void i2c_early_init(void)
+ 	}
+ }
  
-    bananapi-f3
-+   k1-mmc
-    k1-spl
++static const struct {
++	const char *eeprom_name;
++	const char *fit_name;
++} k1_board_map[] = {
++	{ "k1-x_MUSE-Pi-Pro",   "spacemit/k1-musepi-pro"    },
++	{ "k1-x_deb1",          "spacemit/k1-bananapi-f3"   },
++	{ "k1-x_milkv-jupiter", "spacemit/k1-milkv-jupiter" },
++};
++
+ int read_product_name(char *name, int size)
+ {
+ 	u8 eeprom_data[TLV_TOTAL_LEN_MAX], *p;
+@@ -174,6 +183,27 @@ int read_product_name(char *name, int size)
+ 	return -ENOENT;
+ }
  
-diff --git a/doc/board/spacemit/k1-mmc.rst b/doc/board/spacemit/k1-mmc.rst
-new file mode 100644
-index 000000000000..4f35e836fcfd
---- /dev/null
-+++ b/doc/board/spacemit/k1-mmc.rst
-@@ -0,0 +1,268 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+SpacemiT K1 eMMC and SD Card Boot Guide
-+=======================================
-+
-+This guide covers two separate methods for booting and flashing U-Boot on
-+SpacemiT K1 based boards:
-+
-+1. **eMMC Flash**: Flashing U-Boot and SPL images to eMMC via USB fastboot.
-+2. **SD Card Boot**: Creating a bootable Bianbu SD card and optionally
-+   replacing U-Boot on the card.
-+
-+Tested boards: Banana Pi BPI-F3, MusePi Pro.
-+
-+
-+Chapter 1: eMMC Flash (U-Boot via USB Fastboot)
-+===============================================
-+
-+SpacemiT K1 U-Boot Flash Guide
-+==============================
-+
-+This guide explains how to flash U-Boot on SpacemiT K1 based boards. It covers
-+flashing images via USB fastboot.
-+
-+.. note::
-+
-+   This procedure flashes images to eMMC over USB fastboot. The fastboot
-+   function is not enabled in our SPL yet, so the download stage runs the
-+   SpacemiT released SPL; our built FSBL.bin and fit.itb are the images
-+   written to eMMC and used on the next normal boot.
-+
-+Prerequisites to flash
-+~~~~~~~~~~~~~~~~~~~~~~
-+
-+- A SpacemiT K1 board with USB Type-C and UART access
-+- USB-to-UART adapter (3.3V TTL)
-+- ``minicom`` or equivalent serial terminal, configured at 115200 8N1
-+- ``fastboot`` and ``flashserver`` tool on the host
-+
-+Hardware Setup
-+~~~~~~~~~~~~~~
-+
-+Refer to k1-spl.rst.
-+
-+Flash images on eMMC
-+~~~~~~~~~~~~~~~~~~~~
-+
-+**1. Obtain the release images**
-+
-+Get the release package from Spacemit website. It contains SPL image, and so on.
-+
-+https://archive.spacemit.com/image/k1/version/bianbu/v2.3.3/Bianbu-Minimal-K1-V2.3.3-20260128183217.zip
-+
-+Unzip images and store them into a directory.
-+
-+**2. Obtain flashserver tool**
-+
-+Get ``flashserver`` from Spacemit website.
-+
-+.. code-block:: bash
-+
-+    $wget https://cdn-resource.spacemit.com/file/flash/flashserver
-+    $chmod +x flashserver
-+    $mv flashserver {flash image path}/
-+
-+**3. Copy built SPL and U-Boot images**
-+
-+Build U-Boot as mentioned in k1-spl.rst. Create a new directory to save.
-+The official u-boot.itb is used to download images. So the built U-Boot should
-+not replace the official one.
-+
-+.. code-block:: bash
-+
-+    $mkdir {flash image path}/build
-+    $cd {flash image path}
-+    $ln -sf {path to FSBL.bin} ./build/
-+    $ln -sf {path to u-boot.itb} ./build/fit.itb
-+
-+``{path to FSBL.bin}`` is the signed FSBL produced by ``fsbl.sh`` in
-+k1-spl.rst, e.g. ``~/uboot-2022.10/spl_bin/FSBL.bin``.
-+``{path to u-boot.itb}`` is the U-Boot build output, e.g.
-+``~/u-boot/u-boot.itb``.
-+
-+**4. Update configuration files**
-+
-+The ``partition_2M.json`` and ``partition_universal.json`` files come from
-+the release package. Patch the ``fsbl`` and ``uboot`` entries to point at
-+the images staged under ``build/`` (pick the layout that matches your eMMC):
-+
-+.. code-block:: diff
-+
-+   diff -puNr bianbu-25/partition_2M.json clean/partition_2M.json
-+   --- bianbu-25/partition_2M.json	2026-03-02 11:55:58.631116807 +0800
-+   +++ clean/partition_2M.json	2026-05-20 11:25:21.683801401 +0800
-+   @@ -13,7 +13,7 @@
-+          "name": "fsbl",
-+          "offset": "128K",
-+          "size": "256K",
-+   -      "image": "factory/FSBL.bin"
-+   +      "image": "build/FSBL.bin"
-+        },
-+        {
-+          "name": "env",
-+   @@ -31,7 +31,7 @@
-+          "name": "uboot",
-+          "offset": "640K",
-+          "size": "-",
-+   -      "image": "u-boot.itb"
-+   +      "image": "build/fit.itb"
-+        }
-+      ]
-+    }
-+   diff -puNr bianbu-25/partition_universal.json clean/partition_universal.json
-+   --- bianbu-25/partition_universal.json	2026-03-02 11:55:58.642116862 +0800
-+   +++ clean/partition_universal.json	2026-05-20 11:26:23.932581853 +0800
-+   @@ -14,7 +14,7 @@
-+               "name": "fsbl",
-+               "offset": "128K",
-+               "size": "256K",
-+   -            "image": "factory/FSBL.bin"
-+   +            "image": "build/FSBL.bin"
-+           },
-+           {
-+               "name": "env",
-+   @@ -32,7 +32,7 @@
-+               "name": "uboot",
-+               "offset": "2M",
-+               "size": "2M",
-+   -            "image": "u-boot.itb"
-+   +            "image": "build/fit.itb"
-+           },
-+           {
-+               "name": "bootfs",
-+
-+Deploying via USB Fastboot
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+To enter BootROM fastboot mode:
-+
-+1. Power off the board by unplugging its power supply.
-+2. **Press and hold** the FDL button (called "Boot Key" on some boards;
-+   see the board layout above for the BPI-F3).
-+3. While holding the button, use a USB cable to connect the OTG port to
-+   your host. This cable is also used by fastboot to upload the firmware.
-+4. Release the button.
-+
-+On the host, ``fastboot devices`` should list the board::
-+
-+    dfu-device     DFU download
-+
-+The serial console shows the BootROM's USB download handler trace,
-+including a line like::
-+
-+    usb2d_initialize : enter
-+
-+This indicates the board is ready to accept an image via USB.
-+
-+.. tip::
-+
-+   If you are worried about insufficient USB power, you can first plug
-+   in the power, then release the button, and then plug in the USB
-+   cable.
-+
-+On the host:
-+
-+.. code-block:: console
-+
-+    $sudo ./flashserver
-+
-+When ``flashserver`` is running, it lists the detected fastboot devices.
-+Enter the corresponding number to select one.
-+
-+
-+Chapter 2: SD Card Boot
-+=======================
-+
-+
-+SpacemiT K1 Bianbu SD Card Image Flashing and U-Boot Update Guide
-+==================================================================
-+
-+This guide explains how to prepare a bootable SD card with Bianbu OS for
-+SpacemiT K1 based boards and how to replace the U-Boot binary on the SD
-+card with a custom build.
-+
-+Prerequisites to boot
-+~~~~~~~~~~~~~~~~~~~~~
-+
-+- A SpacemiT K1 based development board
-+- A microSD card (at least 4GB capacity recommended)
-+- A card reader for your host computer
-+- A Linux host system (for ``dd``, ``sgdisk``, ``lsblk`` commands)
-+- The Bianbu release package from
-+  <https://archive.spacemit.com/image/k1/version/bianbu/v2.3.3/Bianbu-Minimal-K1-V2.3.3-20260128183217.zip>
-+- A custom ``FSBL.bin`` and ``u-boot.itb`` file to be written to the U-Boot
-+  partition
-+
-+Prepare the SD Card & the image
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+**1. Obtain the release images**
-+
-+Unpack the release package to get the image files. Replace the ``FSBL.bin``
-+and ``u-boot.itb`` with your custom builds.
-+
-+**2. Identify the SD card device**
-+
-+Insert the microSD card into your card reader, then run:
-+
-+.. code-block:: console
-+
-+   $ lsblk
-+
-+Compare the output before and after inserting the card to identify
-+the new device. It will typically appear as ``/dev/sdb``, ``/dev/sdc``,
-+or ``/dev/mmcblk0``.
-+
-+**3. Write the image to the SD card**
-+
-+Run ``sgdisk`` to generate the partition table, then use ``dd`` to write
-+the images to the corresponding partitions.
-+
-+.. code-block:: console
-+
-+    $sudo sgdisk -o /dev/sdb
-+    $sudo sgdisk -a 128 \
-+        -n 1:256:767 -t 1:8300 \
-+        -n 2:768:895 -t 2:8300 \
-+        -n 3:2048:4095 -t 3:8300 \
-+        -n 4:4096:8191 -t 4:8300 \
-+        -n 5:8192:532479 -t 5:8300 \
-+        -n 6:532480:4726783 -t 6:8300 \
-+        /dev/sdb
-+    $sudo dd if=FSBL.bin of=/dev/sdb1 bs=512 seek=0 status=progress
-+    $sudo dd if=fw_dynamic.itb of=/dev/sdb3 bs=512 seek=0 status=progress
-+    $sudo dd if=u-boot.itb of=/dev/sdb4 bs=512 seek=0 status=progress
-+
-+The SD card is now ready as a bootable system disk.
-+
-+Understanding the SD Card Partition Layout
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+The role of each partition:
-+
-++----------+----------+------------------------------------+
-+| Partition| Size     | Purpose                            |
-++==========+==========+====================================+
-+| ``sdb1`` | 256 KB   | FSBL (First Stage Bootloader)      |
-++----------+----------+------------------------------------+
-+| ``sdb2`` | 64 KB    | ENV                                |
-++----------+----------+------------------------------------+
-+| ``sdb3`` | 1 MB     | OpenSBI                            |
-++----------+----------+------------------------------------+
-+| ``sdb4`` | 2 MB     | U-Boot binary (``u-boot.itb``)     |
-++----------+----------+------------------------------------+
-+| ``sdb5`` | 256 MB   | Boot partition (kernel)            |
-++----------+----------+------------------------------------+
-+| ``sdb6`` | 2 GB     | Root filesystem (ext4)             |
-++----------+----------+------------------------------------+
-+
-+
-+Booting and Testing
-+~~~~~~~~~~~~~~~~~~~
-+
-+Insert the SD card into the development board, connect the serial
-+console (115200 8N1), and power on the board.
-+
-+- If the board boots successfully, the new device tree or U-Boot image
-+  is compatible with your hardware.
++static void fixup_product_name(void)
++{
++	char fdt_name[I2C_BUF_SIZE];
++	int i;
++
++	for (i = 0; i < ARRAY_SIZE(k1_board_map); i++) {
++		memset(fdt_name, 0, I2C_BUF_SIZE);
++		if (!strncmp(product_name, k1_board_map[i].eeprom_name,
++			     strlen(k1_board_map[i].eeprom_name))) {
++			snprintf(fdt_name, I2C_BUF_SIZE, "%s",
++				 k1_board_map[i].fit_name);
++			break;
++		}
++	}
++	if (fdt_name[0] == '\0') {
++		/* set default board name */
++		sprintf(fdt_name, CONFIG_DEFAULT_DEVICE_TREE);
++	}
++	memcpy(product_name, fdt_name, I2C_BUF_SIZE);
++}
++
+ static void clk_early_init(void)
+ {
+ 	struct udevice *dev;
+@@ -417,6 +447,7 @@ void board_init_f(ulong dummy)
+ 		log_info("Fail to detect board:%d\n", ret);
+ 	else
+ 		log_info("Get board name:%s\n", product_name);
++	fixup_product_name();
+ 	pmic_init();
+ 
+ 	ddr_early_init();
+@@ -459,24 +490,7 @@ void spl_board_init(void)
+ 
+ int board_fit_config_name_match(const char *name)
+ {
+-	char fdt_name[I2C_BUF_SIZE];
+-	int i;
+-
+-	memset(fdt_name, 0, I2C_BUF_SIZE);
+-	if (!strncmp(product_name, "k1-x_", 5)) {
+-		snprintf(fdt_name, I2C_BUF_SIZE, "%s-%s", "k1",
+-			 &product_name[5]);
+-	}
+-	if (fdt_name[0] == '\0') {
+-		/* set default board name */
+-		sprintf(fdt_name, "k1-musepi-pro");
+-	}
+-	for (i = 0; i < I2C_BUF_SIZE; i++) {
+-		if (fdt_name[i] == '\0')
+-			break;
+-		fdt_name[i] = tolower(fdt_name[i]);
+-	}
+-	if (!strcmp(name, fdt_name))
++	if (!strcmp(name, product_name))
+ 		return 0;
+ 	return -ENOENT;
+ }
 
 -- 
 2.51.0
