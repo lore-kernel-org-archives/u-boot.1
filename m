@@ -4,163 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E95B2C88E5C
-	for <u-boot@archiver.kernel.org>; Sun, 13 Sep 2026 23:20:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3625AC88E5C
+	for <u-boot@archiver.kernel.org>; Sun, 13 Sep 2026 23:20:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A656A80DC4;
-	Sun, 13 Sep 2026 23:20:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E956B80D09;
+	Sun, 13 Sep 2026 23:20:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id v6dX3_IGyvXh; Sun, 13 Sep 2026 23:20:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 3CAF980CFE
+ id 6xO-VrfbhkuL; Sun, 13 Sep 2026 23:20:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org E7DDB80D29
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789341613;
-	b=QgPKlYe0BmmpX4jFvhumBZSALGLPzG8sheAPRxP6AIjwJ6vhmLuQEC9tkj1z18VdHtWT
-	 JckusWNYVlIsQuA896LfMpilHlPtYfiF/jEWYdm3EvUccJgnpxerd5XkUntMpe2L7OCzF
-	 fUe0lH1Wzj4YFQpcbodjlBpJ3UZfmlX/xnhl5R350RwIobnQkjFjl+FtV3uPRPj7eq/Ch
-	 Lt3Apw1ZapaQdVd6+nAStO6P/9dYAZhvkd0nkMyc9rCX62uDw468TB0XZDWgaOKHuISOD
-	 4QTTeV7Zu3kLjg6bwK31QwybLBtfLVe1PeAnHM1sSE2XirJcu6A1wyiieAW8zwJvgkg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789341617;
+	b=tFa15yHLZmIQORKaZs6tbg5CvfxXwb9CL4b2V56AvJS7qECdKu0muAbRBpnlSFLjseRb
+	 FrWESoKZf5Dsc8M+16F+qzSjpV+R1v0rCMJg3ybcb2zFq4wH1TczqQEqK2t81SC/JtO7e
+	 ulVKrPKuXn0AnEutJwRGeSgAzgBis/dWoFvfJMRxfmEAYOgMWyAigCXJUe0GpYwPlMMSs
+	 VUw95ym5cfoPW9EJamkY5izZ3PbaCOWdoQEqvutKvZkxUWzNFwKXQ5Un8HR1uXRgpTI5l
+	 JMxBTy9y5q6HAOwaca1/z7hRDrwRzPmbkedTzKhE3QYbbUwmndnyB9vQ/TxRsgdRgFg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789341613;
+	c=relaxed/relaxed; t=1789341617;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Y22K7DYoV2HJc0DyUWW22dUQ65uAqVlskxyR6HLJcv4=;
-	b=THKfI2YMVu/gE/sUdIcySIJXA+D3QjC2ybcH/lCfX1Qkc7hzCvMkHaycewX+o9HzHGnH
-	 hkYc/WK8QzgDdrVT4+Cy/5q79+jFRwsIj6F8LikidfXzvZ9WubCwADqcje203bwwF2J10
-	 e3SRflLsUBQI+0d3ZlaFq4B87uc9hN8IlKkIB7fmZrRFZWnbYZYAn6+EP2Gtp6OmWUbgL
-	 eDqbW8jAtBtJ9q8B+bLsihIa0Y2mp6jyvDhBzU/WFMqJmm782081JKTWQKCcsf/+SH80S
-	 VqlxsV+g965wmn6pctln6MisEPZJD898Ff5YyHcgnM+pma/AEIYlMBLPHjLNgjeiYPA==
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=8/1B+yn61cWw+xIp52rhz5LDssmTpOOFWUi+xJmywLA=;
+	b=OUitGugvEAcAEn6uB3sxfhIpTPaZN9VSF1xsC+YWyH/4Thx7tY/Ecd40wA3Sln6/mbEh
+	 v76/Xe7rrUa5NrbBwrzUV0NCUIk29wIRzw7Z6Jb+lr4+8sDPr7YjvAyn+lbT8HxYvdExM
+	 x1FKfGnb/mugi3FqDPP5L25nDr/oLXSeYp+Di3wfqkF2rMRgvT0hjtucc22nfDCwXOMv0
+	 Y9M3UhveY66w+z5yIP2tjijHFhnxXbK33ZKOGQBrGIe8Lcm9FZYls+fX2RZGSBAiMOWWH
+	 FDbYLYh3El83oi2iEmU6yBkyjhERQbJcgH6DgZ26oCQpnCmb4dOn+RC5GHZordnsqpQ==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=cOsvioOM;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=snTskYrs;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789341613;
-	bh=Y22K7DYoV2HJc0DyUWW22dUQ65uAqVlskxyR6HLJcv4=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ompRzlxXSZTsT9BkS15lIcAazR7QwPyt6nOTxqRa6zAGKQKrJkx7JShOkE04GSgTJ
-	 eBV7rwNadSEpVWCqC7YfnUEX5pZVkzkt6ux/bv6ISpx05ewRFyGycVqx59tqyS4CzP
-	 TKiFXeChTi1oCnGKd3xx3+1rLgmWdk5KHkKMJDIDAdm3OOcMdL4xSbefYppO3FC7+U
-	 tP29UoXwQEqa+37u+xHlV8TvDXRRj165OnyYhqZh9uuhWsUCUWDMzBc8sgRy9dC+03
-	 nyPGAqaXzJ/Fo76ntJPxPr0/vPiKu8wgLQ6JLkOOjkSVP738YXCHTVV1nD9NWUmNDR
-	 jHK7flB4LTDmg==
+	d=lists.u-boot-project.org; s=default; t=1789341617;
+	bh=8/1B+yn61cWw+xIp52rhz5LDssmTpOOFWUi+xJmywLA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=SRt6iP6SB2UaZCvFFDQA37ivb3i99yWKbGRwBp9K+/dB35TrTPgEe5kxYWbHHxwOt
+	 0LkP7wG6x8osw0FV7tM7Vc+WwVfuwBSyUpttFywTG7b4BX7MtftA7gaLgOSORFuwom
+	 XT1CrV8UZrcZ/DbnCkanKGpJ/671YMxby95119UjiHo0/IYQXnL+7N1GvbH285/161
+	 a1LKuRBNyXvxrrJGEsYAGBPurOpmCVgraVXjcGvEYESuo5dmvp10x5X5w2kEIvWClW
+	 7fW4bNRuwmjg+kak5j6JTsH6aQoI+sBnwpEHlG8gP6qB2/J6teglIhqJOl3qnpC6UF
+	 r2k9bCKDrOq9g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3CAF980CFE;
-	Sun, 13 Sep 2026 23:20:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E7DDB80D29;
+	Sun, 13 Sep 2026 23:20:16 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 764043AF
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:53:03 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 1ED883AF
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:53:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 697F280D50
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:53:03 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 052BA80D50
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:53:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jYXuGxw50pMJ for <u-boot@lists.u-boot-project.org>;
- Sun, 13 Sep 2026 15:53:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 2D07F80D2B
+ id kkfGy0cQg0zl for <u-boot@lists.u-boot-project.org>;
+ Sun, 13 Sep 2026 15:53:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5F0C980D2B
 Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip="2607:f8b0:4864:34::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789314781;
- b=adEXBhvpBbBTKO8OyDNO++DDkz2HG2BocTv8qB78vLiloTIZhwXPVhy5s4JSVCDSzNx3
- fm9FoIcO2Umqxo+lFP5b0h8JGgODA5dP5Qhu5u6rzyKV5QtrDM61QlVZETT03now363Pm
- Z7aCd2+6GqvgUhAB5CBvCrTloQ0CAcDpdll36RGt3wdVC84xBFcTDTstti/iLdsbG1RJM
- U4pTlgtV8yJ7zXNRWWKgnsnnjqSvLjJWCP8Wgkq0Iq5AiL9dmhm7veISooX6PeqnWsOXG
- RUBnAKhlkOj1mkzDowq8U4hHYfxZ4xBayeENf5HLFqNHXwJGsr5EhJTUlcEOyiA/aAQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789314790;
+ b=fvrEJBAvoA1yzvy4ADLt0y+fWAy/DRJjLnvki5aa510t67SQDl+CSVPY7BRvEC3O3t/f
+ jWyYLFAJGc2AVjhSEeBj9rg73cNLUCxbccaTLX1Bc/lgJWEZwXvfri5eyPNlQ/WOdp2RC
+ 5CpMb5Thl0gzmod3Kr0obxbX6vzAleDW8BCtV9OohHx8MMKi1qR5PBmAqSij/24PXc3+k
+ Ci0SGBla56gTKFEkYCNP+Nirkskblturr0XXm3Iug3ejJzRWa8+JrPGLwD6afpSGF1zQb
+ qLztzfBzbPc2UZBGUyDUkyfXr5wdXXEPq0OZAVSQWBulY7SxKUBHq9LJ8AULulL4cEQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789314781;
+ c=relaxed/relaxed; t=1789314790;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=Y22K7DYoV2HJc0DyUWW22dUQ65uAqVlskxyR6HLJcv4=;
- b=hjXLPtiuzWC5rNB4HcUqSbr2VA/Y4kRQxoJL7fH8CM+hS584wuHKURPa45gUvx0I1jOC
- FFQjAV3itgZvcH8/uBQ3rCP7E2PRL+I/SHyWRTm6Py8DGvuI36olLqyL8vqCLwH3rKCgf
- /JYaxZY7y5H/ezUdeR/Dmb+9AZw5H9u/zrsBGfedIT2iMpV10rULIs2ORqwR7mwrMEkgz
- 3pORCFsYTVJS6jihFFXj2JZySf/QGYF0U8zlPoVMporUcqHvkrb8muZMouITM7/sWp1id
- z0vDQx9U3n52zv6vD/mIlGkfHPYyslphdOadm5EvsD5IEFK665sLa6qOwkiuUgrW+Qg==
+ Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding;
+ bh=8/1B+yn61cWw+xIp52rhz5LDssmTpOOFWUi+xJmywLA=;
+ b=PRpseYPkK82IP6b/gsp4eSOmYpeoScVE3YN/7sDhrzhNNJ3cIyue/8X8BeubTgszEWHW
+ ggpaOAMn6X7EeEYbXDpmtSfrg5bg3Y+ve6l4FwjjRkHiHf0yB4dOigx2IZZ0pj8roB7TW
+ OsUv3oLtsC43xfRCtImSzU333C1Sryoq/scoaIqzCgfveaO2X+jnT6kYhf/9Jx9Ard1uL
+ FpLBce/xd5k2ytBMMqeDeSNvw2g8cKF2f0zMw77AEo4XR/TNuYIagkUjkx2deH18efBjE
+ aCdla1AEYRvuqKXvnh5+xqweA9k47ahHltpnYV0EgmYSe9y0UgahmRFVIpRLslA23lg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=cOsvioOM; 
+ header.s=20251104 header.b=snTskYrs; 
  arc=none smtp.remote-ip="2607:f8b0:4864:34::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2607:f8b0:4864:34::10; helo=mail-qk2-x10.google.com;
  envelope-from=aford173@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=cOsvioOM
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=snTskYrs
 Received: from mail-qk2-x10.google.com (mail-qk2-x10.google.com
  [IPv6:2607:f8b0:4864:34::10])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2D07F80D2B
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:53:00 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5F0C980D2B
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:53:09 +0000 (UTC)
 Received: by mail-qk2-x10.google.com with SMTP id
- af79cd13be357-93910cadeb7so183549185a.0
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 08:53:00 -0700 (PDT)
+ d75a77b69052e-52fb76c9deeso22257401cf.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 08:53:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789314779; x=1789919579;
+ d=gmail.com; s=20251104; t=1789314788; x=1789919588;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Y22K7DYoV2HJc0DyUWW22dUQ65uAqVlskxyR6HLJcv4=;
- b=cOsvioOMDKuiAF/XpqUR/cjBGC12GeLtMH240fn2P7bM6xwz/mH35RVPeRFtgG4GHE
- qgP8jj8lT9X/kqMB9PxRZ1p7MShX7eO2o/tDvknfyo8QhDa6HeWK6fq/qyEwZ7QqYjJE
- 97dntYTo5k/8+Q993TBoNtwlQjRGFnRscVvDlOMqqe9AuqVHZBvOovxem5RqH7HvUTZo
- Om3TpdRv5uzwdNS+ovEWOUMKAqPBqkiT9B5/jHvlx/yG3kSeFBXmpPYMZrDR/KC1WNod
- 91QhcSmiT0qzx1LJx/wJWeYbXY8TC2AC683qaSsdtY1OcM0mB4R4SPaHY/bfDOfMOmft
- 88TQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789314779; x=1789919579;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Y22K7DYoV2HJc0DyUWW22dUQ65uAqVlskxyR6HLJcv4=;
- b=QEiYiMwCuv0QvUDv6fRbrEu8lcPFY4MM37j+SeqSuoRCvxTJQ2gRILmSi8iZ9AmQvD
- D5Rxsv9iwbD4HGdQiO5kTZH/W0hjvY6WAMZbw9GAJR/bn7SahtzxJk1NElzEUIdmQZuL
- 891FIKTtsI5o0A3jTKCQGuTV4SexOUsqCBowvonEEJRCd6XKzP+Aj4muBHxQZ652H91f
- 733H+5a90PTEmMaVpZW+pwcWpZzxUNoIvkCCbY52axERBAQ2BvDz8ejgKSMOspF6lXxo
- tJ8g69CIOsGOjkQ3yegOjodkitUI4Jh9lNxMrNw00xYtGWA9M6t+RhIPh2CnbvKRN56m
- ky1Q==
-X-Gm-Message-State: AFuF++kT09+3TLZGInMEpwY/5udwXLekcDF0kIHAQOvu1U+hOhaJoa70
- XoVVt/upj4YSwfbajUnYN+evSH4+qPznD6/Ep3Oj0M75G5lcbRdegYEXRrvHSg==
-X-Gm-Gg: AYBFou10WUgZ1ByJodXofVeje9M1Su5SJreqWQTXAF9TDo8K4DxK4OJCORhxZThllpN
- pyucf/1Oz3mh1e35b51ughqnOrsYx+cSSEP9pI3rEgH9CqNBr4jwfucHBBcaxv8/ElyPUBUPedj
- Be7d+yaJcn6UppKN5vWZcf4oG4MENAVJiG2ZcOsfyh3a2Ze538LKX93lnv9werVujY7T65wOdaI
- LeW3juL2sHtBrbtU7Ao/vduaGEPb0hFnjaiMiMBvtMOdoYEh56BL6qYYEODulDQuOuv9oK4DVPw
- nVPleKp4o3V9m964sU70aSncJF/cxZQLO/lfnLABHMae91/n/wYWvZET/xrfzIKHFBT17zNFRni
- quXSLzqKmUuN9efkIbs5jRxKmTeYIOPTp+grgcYrGsdPS84N5C/2VFDOAPeze5gFxJaCn1OpT1p
- eqGVQ/bqBZSmFRrF76RIpNat6j6bisQ+2po4N2jHUOwb6LUxDvsYHWUbh6INNkNBNjj0761KQ7T
- hxDofyDtk7FYnJIl+HMb+FxWIbI4DNiLYDNob2P3T2v6IRp9H1o
-X-Received: by 2002:a05:620a:439e:b0:937:5ab5:53f7 with SMTP id
- af79cd13be357-939ea1c6460mr1778782185a.43.1789314778920; 
- Sun, 13 Sep 2026 08:52:58 -0700 (PDT)
+ bh=8/1B+yn61cWw+xIp52rhz5LDssmTpOOFWUi+xJmywLA=;
+ b=snTskYrsvopFIfiacZqe3XbPQIZYwq+CkAMLcB3ep3nTSQ7zJl5rckBzC7oTlnaYef
+ I0s7VFCcDz1tq3hZuAJzukONjGRrSwLP0q3HU1+YQxDdoPkrPcM2x465YgAk5YsnAseZ
+ calZcDEB5TQyEKt0JJnEXdl4GJCkMx2Aqbug4Jmk5J2KGeEyV3x6IpzzFPGPH+HZt04w
+ uCcTSVy7lRuiRHzotnJsIvRJ9zHE3Afh4yoCfF3OM34Wyc7QcNUwBKwxBLeLjlCfDN7p
+ TGnR1YKrzAFB7KLlb3hveLt0oY0YThV3tmARUCtHt70eaPZWMYx/uSqOPZ/cQYze8prv
+ H5Yw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1789314788; x=1789919588;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=8/1B+yn61cWw+xIp52rhz5LDssmTpOOFWUi+xJmywLA=;
+ b=EOHsnWVbeJSGIOjaDq4c1T6crDZRC5jo/zfzPN5D100XBm83heHfjgeX7ZIHIObhKZ
+ 6eLBoBRIGmjPYr/PgVZPRoNn85edKnkLrPZS3tmglC91mfaiRd+rhmHxTAiACvo/V567
+ MHN/1e6FG505IPsi4CX9b3FD4W07CwFzgFUkhzztbDBYmSzqNWMCxRVYqn0lVAoJqbiB
+ 7nla2+x9Sj56r+kpRPlw622h7tEdakGFzup+D/zPxUKuBg3wIOr/j+JqwwIFakgkPD1+
+ Z4167GbGn5z5hwZ5rkLl5lmaT1UmOknU/Z2FwBY6BTp2V/NJjFvZEWvIWQ1QyAbm9zZ7
+ pZMA==
+X-Gm-Message-State: AFuF++nqaffpExswvY8KgNhciVyJpP/mduV7paUhkaQ9jOYLFvRITLVr
+ PP1PV/kh5dLmAxkGcybPexdQxKb8n0M1rStGD5PB17cZ+PS5mj57Cua+whqzXg==
+X-Gm-Gg: AYBFou02pUHHS+Rnn8j3BwcdnlivX3NYcda8Eby2evZMT+QyP18rcGdPGKHX3OjDv11
+ FpkdBwM0DrQGHoigcDjt5KjJh+Pms8f2w5/+ah1i30OCgAVBDHLhX4ghfdAzTLgvWiNQ6SbZJr5
+ 8Ed5T3gEMLlDaC3Pxi0itsPndyV/cFJBW4A3/pTYU58jFahBzROxIZPD+GT9He3eAANRuoJvyci
+ 6FMTdmk2ZeqI3EokmDjHFhrhmv2UKVzOqWuyEE5SekA/+DU/VVMfHgM7jcu8k2g58zTLOZDNzVm
+ 9frePWMrSeto6NBvI79rFlCZGi/X5R8szE6XX+DX1MPtAMDLBRrFQ8KTHCW178CoCwbH+BTQt0L
+ DMLghFNmtpTDxswI1vImwcLE3skPmX5+gaV4F9XoVyA/OPm89GsLeGWKFPiO0q+pyV4tr/Wez2q
+ NES+OqlEbXE/tKIyYLQM/cifw6cGzrBGLTvk/y8KQ7kELk30G9ZsPnJKG4f1VYMff0LTpLF26oP
+ W/E4fS909Yaf47uooGDjhoV5aKi6AuUXjeWhUqQmalDxh5sSMYV
+X-Received: by 2002:a05:622a:58c6:b0:530:98bc:3974 with SMTP id
+ d75a77b69052e-530e7ee4bf4mr111080721cf.22.1789314787893; 
+ Sun, 13 Sep 2026 08:53:07 -0700 (PDT)
 Received: from aford-System-Version.lan (c-73-94-212-116.hsd1.mn.comcast.net.
  [73.94.212.116]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-93a1bf286dbsm131321785a.40.2026.09.13.08.52.57
+ 6a1803df08f44-9120f4d3a50sm72993386d6.40.2026.09.13.08.53.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 13 Sep 2026 08:52:58 -0700 (PDT)
+ Sun, 13 Sep 2026 08:53:07 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.u-boot-project.org
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Huy Bui <huy.bui.pz@bp.renesas.com>,
- Nguyen Tran <nguyen.tran.pz@bp.renesas.com>, Tom Rini <trini@konsulko.com>,
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Adam Ford <aford173@gmail.com>
-Subject: [PATCH] board: beacon: Remove Beacon EmbeddedWorks RZ/G2 Dev Kit
+Subject: [PATCH 1/3] board: beacon: Remove i.MX8MM Beacon EmbeddedWorks Devkit
  support
-Date: Sun, 13 Sep 2026 10:52:53 -0500
-Message-ID: <20260913155253.84181-1-aford173@gmail.com>
+Date: Sun, 13 Sep 2026 10:53:01 -0500
+Message-ID: <20260913155303.84201-2-aford173@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260913155303.84201-1-aford173@gmail.com>
+References: <20260913155303.84201-1-aford173@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 13 Sep 2026 23:20:05 +0000
@@ -177,1620 +182,2849 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Remove the Beacon EmbeddedWorks RZ/G2M/N/H SoM and Dev Kit board
-support along with its defconfig, config header, U-Boot device tree
-overlays, the leftover pre-OF_UPSTREAM DTSI files, the Kconfig target
-and the entry in the Renesas board documentation table.
+Remove the i.MX8MM Beacon EmbeddedWorks Devkit board support along
+with its defconfigs, config header, U-Boot device tree overlay,
+documentation and Kconfig target.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 ---
- arch/arm/dts/beacon-renesom-baseboard.dtsi    | 816 ------------------
- arch/arm/dts/beacon-renesom-som.dtsi          | 334 -------
- .../dts/r8a774a1-beacon-rzg2m-kit-u-boot.dtsi |   6 -
- .../dts/r8a774b1-beacon-rzg2n-kit-u-boot.dtsi |   6 -
- .../dts/r8a774e1-beacon-rzg2h-kit-u-boot.dtsi |   6 -
- arch/arm/dts/rz-g2-beacon-u-boot.dtsi         |  82 --
- arch/arm/mach-renesas/Kconfig.rcar3           |  16 -
- board/beacon/beacon-rzg2m/Kconfig             |  15 -
- board/beacon/beacon-rzg2m/MAINTAINERS         |  17 -
- board/beacon/beacon-rzg2m/Makefile            |   9 -
- board/beacon/beacon-rzg2m/beacon-rzg2m.c      |  33 -
- configs/rzg2_beacon_defconfig                 |  46 -
- doc/board/renesas/renesas.rst                 |  12 +-
- include/configs/beacon-rzg2m.h                |  67 --
- 14 files changed, 3 insertions(+), 1462 deletions(-)
- delete mode 100644 arch/arm/dts/beacon-renesom-baseboard.dtsi
- delete mode 100644 arch/arm/dts/beacon-renesom-som.dtsi
- delete mode 100644 arch/arm/dts/r8a774a1-beacon-rzg2m-kit-u-boot.dtsi
- delete mode 100644 arch/arm/dts/r8a774b1-beacon-rzg2n-kit-u-boot.dtsi
- delete mode 100644 arch/arm/dts/r8a774e1-beacon-rzg2h-kit-u-boot.dtsi
- delete mode 100644 arch/arm/dts/rz-g2-beacon-u-boot.dtsi
- delete mode 100644 board/beacon/beacon-rzg2m/Kconfig
- delete mode 100644 board/beacon/beacon-rzg2m/MAINTAINERS
- delete mode 100644 board/beacon/beacon-rzg2m/Makefile
- delete mode 100644 board/beacon/beacon-rzg2m/beacon-rzg2m.c
- delete mode 100644 configs/rzg2_beacon_defconfig
- delete mode 100644 include/configs/beacon-rzg2m.h
+ arch/arm/dts/imx8mm-beacon-kit-u-boot.dtsi  |  130 --
+ arch/arm/mach-imx/imx8m/Kconfig             |   11 -
+ board/beacon/imx8mm/Kconfig                 |   15 -
+ board/beacon/imx8mm/MAINTAINERS             |    9 -
+ board/beacon/imx8mm/Makefile                |   12 -
+ board/beacon/imx8mm/imx8mm_beacon.env       |   19 -
+ board/beacon/imx8mm/imximage-8mm-lpddr4.cfg |    8 -
+ board/beacon/imx8mm/lpddr4_timing.c         | 1979 -------------------
+ board/beacon/imx8mm/spl.c                   |  128 --
+ configs/imx8mm_beacon_defconfig             |  151 --
+ configs/imx8mm_beacon_fspi_defconfig        |  152 --
+ doc/board/beacon/beacon-imx8mm.rst          |   55 -
+ doc/board/beacon/index.rst                  |    1 -
+ include/configs/imx8mm_beacon.h             |   40 -
+ 14 files changed, 2710 deletions(-)
+ delete mode 100644 arch/arm/dts/imx8mm-beacon-kit-u-boot.dtsi
+ delete mode 100644 board/beacon/imx8mm/Kconfig
+ delete mode 100644 board/beacon/imx8mm/MAINTAINERS
+ delete mode 100644 board/beacon/imx8mm/Makefile
+ delete mode 100644 board/beacon/imx8mm/imx8mm_beacon.env
+ delete mode 100644 board/beacon/imx8mm/imximage-8mm-lpddr4.cfg
+ delete mode 100644 board/beacon/imx8mm/lpddr4_timing.c
+ delete mode 100644 board/beacon/imx8mm/spl.c
+ delete mode 100644 configs/imx8mm_beacon_defconfig
+ delete mode 100644 configs/imx8mm_beacon_fspi_defconfig
+ delete mode 100644 doc/board/beacon/beacon-imx8mm.rst
+ delete mode 100644 include/configs/imx8mm_beacon.h
 
-diff --git a/arch/arm/dts/beacon-renesom-baseboard.dtsi b/arch/arm/dts/beacon-renesom-baseboard.dtsi
+diff --git a/arch/arm/dts/imx8mm-beacon-kit-u-boot.dtsi b/arch/arm/dts/imx8mm-beacon-kit-u-boot.dtsi
 deleted file mode 100644
-index 2e9927b9773..00000000000
---- a/arch/arm/dts/beacon-renesom-baseboard.dtsi
+index 00abbeb22fe..00000000000
+--- a/arch/arm/dts/imx8mm-beacon-kit-u-boot.dtsi
 +++ /dev/null
-@@ -1,816 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright 2020, Compass Electronics Group, LLC
-- */
--
--#include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/input/input.h>
--#include <dt-bindings/clock/versaclock.h>
--
--/ {
--	backlight_lvds: backlight-lvds {
--		compatible = "pwm-backlight";
--		power-supply = <&reg_lcd>;
--		enable-gpios = <&gpio_exp1 3 GPIO_ACTIVE_HIGH>;
--		pwms = <&pwm2 0 25000>;
--		brightness-levels = <0 4 8 16 32 64 128 255>;
--		default-brightness-level = <6>;
--	};
--
--	backlight_dpi: backlight-dpi {
--		compatible = "pwm-backlight";
--		power-supply = <&reg_lcd>;
--		enable-gpios = <&gpio_exp1 7 GPIO_ACTIVE_LOW>;
--		pwms = <&pwm0 0 25000>;
--		brightness-levels = <0 25 33 50 63 75 88 100>;
--		default-brightness-level = <6>;
--	};
--
--	hdmi0-out {
--		compatible = "hdmi-connector";
--		type = "a";
--
--		port {
--			hdmi0_con: endpoint {
--				remote-endpoint = <&rcar_dw_hdmi0_out>;
--			};
--		};
--	};
--
--	keys {
--		compatible = "gpio-keys";
--
--		key-1 { /* S19 */
--			gpios = <&gpio4 6 GPIO_ACTIVE_LOW>;
--			linux,code = <KEY_UP>;
--			label = "Up";
--			wakeup-source;
--			debounce-interval = <20>;
--		};
--		key-2 { /*S20 */
--			gpios = <&gpio3 13 GPIO_ACTIVE_LOW>;
--			linux,code = <KEY_LEFT>;
--			label = "Left";
--			wakeup-source;
--			debounce-interval = <20>;
--		};
--		key-3 { /* S21 */
--			gpios = <&gpio5 17 GPIO_ACTIVE_LOW>;
--			linux,code = <KEY_DOWN>;
--			label = "Down";
--			wakeup-source;
--			debounce-interval = <20>;
--		};
--		key-4 { /* S22 */
--			gpios = <&gpio5 20 GPIO_ACTIVE_LOW>;
--			linux,code = <KEY_RIGHT>;
--			label = "Right";
--			wakeup-source;
--			debounce-interval = <20>;
--		};
--		key-5 { /* S23 */
--			gpios = <&gpio5 22 GPIO_ACTIVE_LOW>;
--			linux,code = <KEY_ENTER>;
--			label = "Center";
--			wakeup-source;
--			debounce-interval = <20>;
--		};
--	};
--
--	leds {
--		compatible = "gpio-leds";
--		pinctrl-0 = <&led_pins>;
--		pinctrl-names = "default";
--
--		led0 {
--			gpios = <&gpio0 4 GPIO_ACTIVE_HIGH>;
--			label = "LED0";
--			linux,default-trigger = "heartbeat";
--		};
--		led1 {
--			gpios = <&gpio7 0 GPIO_ACTIVE_HIGH>;
--			label = "LED1";
--		};
--		led2 {
--			gpios = <&gpio7 1 GPIO_ACTIVE_HIGH>;
--			label = "LED2";
--		};
--		led3 {
--			gpios = <&gpio7 3 GPIO_ACTIVE_HIGH>;
--			label = "LED3";
--		};
--	};
--
--	lvds {
--		compatible = "panel-lvds";
--		power-supply = <&reg_lcd_reset>;
--		width-mm = <223>;
--		height-mm = <125>;
--		backlight = <&backlight_lvds>;
--		data-mapping = "vesa-24";
--
--		panel-timing {
--			/* 800x480@60Hz */
--			clock-frequency = <30000000>;
--			hactive = <800>;
--			vactive = <480>;
--			hsync-len = <48>;
--			hfront-porch = <40>;
--			hback-porch = <40>;
--			vfront-porch = <13>;
--			vback-porch = <29>;
--			vsync-len = <1>;
--			hsync-active = <1>;
--			vsync-active = <3>;
--			de-active = <1>;
--			pixelclk-active = <0>;
--		};
--
--		port {
--			panel_in: endpoint {
--				remote-endpoint = <&lvds0_out>;
--			};
--		};
--	};
--
--	rgb {
--		/* Different LCD with compatible timings */
--		compatible = "rocktech,rk070er9427";
--		backlight = <&backlight_dpi>;
--		enable-gpios = <&gpio1 21 GPIO_ACTIVE_HIGH>;
--		power-supply = <&reg_lcd>;
--		port {
--			rgb_panel: endpoint {
--				remote-endpoint = <&du_out_rgb>;
--			};
--		};
--	};
--
--	reg_audio: regulator-audio {
--		compatible = "regulator-fixed";
--		regulator-name = "audio-1.8V";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <1800000>;
--		gpio = <&gpio_exp4 1 GPIO_ACTIVE_HIGH>;
--		enable-active-high;
--	};
--
--	reg_lcd: regulator-lcd {
--		compatible = "regulator-fixed";
--		regulator-name = "lcd_panel_pwr";
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--		gpio = <&gpio_exp1 1 GPIO_ACTIVE_HIGH>;
--		enable-active-high;
--	};
--
--	reg_lcd_reset: regulator-lcd-reset {
--		compatible = "regulator-fixed";
--		regulator-name = "nLCD_RESET";
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--		gpio = <&gpio5 3 GPIO_ACTIVE_HIGH>;
--		enable-active-high;
--		vin-supply = <&reg_lcd>;
--	};
--
--	reg_cam0: regulator-cam0 {
--		compatible = "regulator-fixed";
--		regulator-name = "reg_cam0";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <1800000>;
--		gpio = <&gpio_exp2 2 GPIO_ACTIVE_HIGH>;
--		enable-active-high;
--	};
--
--	reg_cam1: regulator-cam1 {
--		compatible = "regulator-fixed";
--		regulator-name = "reg_cam1";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <1800000>;
--		gpio = <&gpio_exp2 5 GPIO_ACTIVE_HIGH>;
--		enable-active-high;
--		startup-delay-us = <100000>;
--	};
--
--	sound_card {
--		compatible = "audio-graph-card";
--		label = "rcar-sound";
--		dais = <&rsnd_port0>, <&rsnd_port1>;
--		widgets = "Microphone", "Mic Jack",
--			  "Line", "Line In Jack",
--			  "Headphone", "Headphone Jack";
--		mic-det-gpio = <&gpio0 2 GPIO_ACTIVE_LOW>;
--		routing = "Headphone Jack", "HPOUTL",
--			 "Headphone Jack", "HPOUTR",
--			 "IN3R", "MICBIAS",
--			 "Mic Jack", "IN3R";
--	};
--
--	vccq_sdhi0: regulator-vccq-sdhi0 {
--		compatible = "regulator-gpio";
--		regulator-name = "SDHI0 VccQ";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <3300000>;
--		gpios = <&gpio6 30 GPIO_ACTIVE_HIGH>;
--		gpios-states = <1>;
--		states = <3300000 1>, <1800000 0>;
--	};
--
--	/* External DU dot clocks */
--	x302_clk: x302-clock {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		clock-frequency = <33000000>;
--	};
--
--	x304_clk: x304-clock {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		clock-frequency = <25000000>;
--	};
--
--	connector {
--		compatible = "usb-c-connector";
--		label = "USB-C";
--		data-role = "dual";
--
--		ports {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			port@0 {
--				reg = <0>;
--				hs_ep: endpoint {
--					remote-endpoint = <&usb3_hs_ep>;
--				};
--			};
--			port@1 {
--				reg = <1>;
--				ss_ep: endpoint {
--					remote-endpoint = <&hd3ss3220_in_ep>;
--				};
--			};
--		};
--	};
--};
--
--&audio_clk_b {
--	clock-frequency = <22579200>;
--};
--
--&can0 {
--	pinctrl-0 = <&can0_pins>;
--	pinctrl-names = "default";
--	renesas,can-clock-select = <0x0>;
--	status = "okay";
--};
--
--&can1 {
--	pinctrl-0 = <&can1_pins>;
--	pinctrl-names = "default";
--	renesas,can-clock-select = <0x0>;
--	status = "okay";
--};
--
--&du {
--	ports {
--		port@0 {
--			du_out_rgb: endpoint {
--				remote-endpoint = <&rgb_panel>;
--			};
--		};
--	};
--};
--
--&ehci0 {
--	dr_mode = "otg";
--	status = "okay";
--	clocks = <&cpg CPG_MOD 703>, <&cpg CPG_MOD 704>, <&usb2_clksel>, <&versaclock5 3>;
--};
--
--&ehci1 {
--	status = "okay";
--	clocks = <&cpg CPG_MOD 703>, <&cpg CPG_MOD 704>, <&usb2_clksel>, <&versaclock5 3>;
--};
--
--&hdmi0 {
--	status = "okay";
--	ports {
--		#address-cells = <1>;
--		#size-cells = <0>;
--		port@0 {
--			reg = <0>;
--			dw_hdmi0_in: endpoint {
--				remote-endpoint = <&du_out_hdmi0>;
--			};
--		};
--		port@1 {
--			reg = <1>;
--			rcar_dw_hdmi0_out: endpoint {
--				remote-endpoint = <&hdmi0_con>;
--			};
--		};
--		port@2 {
--			reg = <2>;
--			dw_hdmi0_snd_in: endpoint {
--				remote-endpoint = <&rsnd_endpoint1>;
--			};
--		};
--	};
--};
--
--&hscif1 {
--	pinctrl-0 = <&hscif1_pins>;
--	pinctrl-names = "default";
--	uart-has-rtscts;
--	status = "okay";
--};
--
--&hsusb {
--	dr_mode = "otg";
--	status = "okay";
--};
--
--&i2c2 {
--	status = "okay";
--	clock-frequency = <400000>;
--	pinctrl-0 = <&i2c2_pins>;
--	pinctrl-names = "default";
--
--	gpio_exp2: gpio@21 {
--		compatible = "onnn,pca9654";
--		reg = <0x21>;
--		gpio-controller;
--		#gpio-cells = <2>;
--	};
--
--	gpio_exp3: gpio@22 {
--		compatible = "onnn,pca9654";
--		reg = <0x22>;
--		gpio-controller;
--		#gpio-cells = <2>;
--	};
--
--	gpio_exp4: gpio@23 {
--		compatible = "onnn,pca9654";
--		reg = <0x23>;
--		gpio-controller;
--		#gpio-cells = <2>;
--	};
--
--	versaclock6_bb: clock-controller@6a {
--		compatible = "idt,5p49v6965";
--		reg = <0x6a>;
--		#clock-cells = <1>;
--		clocks = <&x304_clk>;
--		clock-names = "xin";
--
--		assigned-clocks = <&versaclock6_bb 1>, <&versaclock6_bb 2>,
--				  <&versaclock6_bb 3>, <&versaclock6_bb 4>;
--		assigned-clock-rates = <24000000>, <24000000>, <24576000>,
--				       <24576000>;
--
--		OUT1 {
--			idt,mode = <VC5_CMOS>;
--			idt,voltage-microvolt = <1800000>;
--			idt,slew-percent = <100>;
--		};
--
--		OUT2 {
--			idt,mode = <VC5_CMOS>;
--			idt,voltage-microvolt = <1800000>;
--			idt,slew-percent = <100>;
--		};
--
--		OUT3 {
--			idt,mode = <VC5_CMOS>;
--			idt,voltage-microvolt = <3300000>;
--			idt,slew-percent = <100>;
--		};
--
--		OUT4 {
--			idt,mode = <VC5_CMOS>;
--			idt,voltage-microvolt = <3300000>;
--			idt,slew-percent = <100>;
--		};
--	};
--};
--
--&i2c0 {
--	status = "okay";
--	clock-frequency = <400000>;
--
--	pinctrl-0 = <&i2c0_pins>;
--	pinctrl-names = "default";
--};
--
--&i2c5 {
--	status = "okay";
--	clock-frequency = <400000>;
--	pinctrl-0 = <&i2c5_pins>;
--	pinctrl-names = "default";
--
--	codec: wm8962@1a {
--		compatible = "wlf,wm8962";
--		reg = <0x1a>;
--		clocks = <&versaclock6_bb 3>;
--		DCVDD-supply = <&reg_audio>;
--		DBVDD-supply = <&reg_audio>;
--		AVDD-supply = <&reg_audio>;
--		CPVDD-supply = <&reg_audio>;
--		MICVDD-supply = <&reg_audio>;
--		PLLVDD-supply = <&reg_audio>;
--		SPKVDD1-supply = <&reg_audio>;
--		SPKVDD2-supply = <&reg_audio>;
--		gpio-cfg = <
--			0x0000 /* 0:Default */
--			0x0000 /* 1:Default */
--			0x0000 /* 2:Default */
--			0x0000 /* 3:Default */
--			0x0000 /* 4:Default */
--			0x0000 /* 5:Default */
--		>;
--		port {
--			wm8962_endpoint: endpoint {
--				remote-endpoint = <&rsnd_endpoint0>;
--			};
--		};
--	};
--
--	touchscreen@26 {
--		compatible = "ilitek,ili2117";
--		reg = <0x26>;
--		interrupt-parent = <&gpio5>;
--		interrupts = <9 IRQ_TYPE_EDGE_RISING>;
--		wakeup-source;
--	};
--
--	hd3ss3220@47 {
--		compatible = "ti,hd3ss3220";
--		reg = <0x47>;
--		interrupt-parent = <&gpio6>;
--		interrupts = <4 IRQ_TYPE_LEVEL_LOW>;
--
--		ports {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			port@0 {
--				reg = <0>;
--				hd3ss3220_in_ep: endpoint {
--					remote-endpoint = <&ss_ep>;
--				};
--			};
--			port@1 {
--				reg = <1>;
--				hd3ss3220_out_ep: endpoint {
--					remote-endpoint = <&usb3_role_switch>;
--				};
--			};
--		};
--	};
--
--	gpio_exp1: gpio@70 {
--		compatible = "nxp,pca9538";
--		reg = <0x70>;
--		gpio-controller;
--		#gpio-cells = <2>;
--		gpio-line-names = "lcd_reset", "lcd_pwr", "lcd_select",
--				  "backlight-enable", "Touch_shdwn",
--				  "LCD_H_pol", "lcd_V_pol";
--	};
--};
--
--&lvds0 {
--	status = "okay";
--
--	ports {
--		port@1 {
--			lvds0_out: endpoint {
--				remote-endpoint = <&panel_in>;
--			};
--		};
--	};
--};
--
--&msiof1 {
--	pinctrl-0 = <&msiof1_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--	cs-gpios = <&gpio3 10 GPIO_ACTIVE_LOW>;
--};
--
--&ohci0 {
--	dr_mode = "otg";
--	status = "okay";
--};
--
--&ohci1 {
--	status = "okay";
--};
--
--&pciec0 {
--	status = "okay";
--};
--
--&pciec1 {
--	status = "okay";
--};
--
--&pcie_bus_clk {
--	clock-frequency = <100000000>;
--};
--
--&pfc {
--	can0_pins: can0 {
--		groups = "can0_data_a";
--		function = "can0";
--	};
--
--	can1_pins: can1 {
--		groups = "can1_data";
--		function = "can1";
--	};
--
--	du_pins: du {
--		groups = "du_rgb888", "du_sync", "du_clk_out_1", "du_disp";
--		function = "du";
--	};
--
--	i2c2_pins: i2c2 {
--		groups = "i2c2_a";
--		function = "i2c2";
--	};
--
--	i2c5_pins: i2c5 {
--		groups = "i2c5";
--		function = "i2c5";
--	};
--
--	led_pins: leds {
--		/* GP_0_4 , AVS1, AVS2, GP_7_3 */
--		pins = "GP_0_4", "GP_7_0", "GP_7_1", "GP_7_3";
--		bias-pull-down;
--	};
--
--	msiof1_pins: msiof1 {
--		groups = "msiof1_clk_g", "msiof1_rxd_g", "msiof1_txd_g";
--		function = "msiof1";
--	};
--
--	pwm0_pins: pwm0 {
--		groups = "pwm0";
--		function = "pwm0";
--	};
--
--	pwm2_pins: pwm2 {
--		groups = "pwm2_a";
--		function = "pwm2";
--	};
--
--	sdhi0_pins: sd0 {
--		groups = "sdhi0_data4", "sdhi0_ctrl";
--		function = "sdhi0";
--		power-source = <3300>;
--	};
--
--	sdhi0_pins_uhs: sd0_uhs {
--		groups = "sdhi0_data4", "sdhi0_ctrl";
--		function = "sdhi0";
--		power-source = <1800>;
--	};
--
--	sound_pins: sound {
--		groups = "ssi01239_ctrl", "ssi0_data", "ssi1_data_a";
--		function = "ssi";
--	};
--
--	sound_clk_pins: sound_clk {
--		groups = "audio_clk_a_a", "audio_clk_b_a";
--		function = "audio_clk";
--	};
--
--	usb0_pins: usb0 {
--		mux {
--			groups = "usb0";
--			function = "usb0";
--		};
--	};
--
--	usb1_pins: usb1 {
--		mux {
--			groups = "usb1";
--			function = "usb1";
--		};
--	};
--
--	usb30_pins: usb30 {
--		mux {
--			groups = "usb30";
--			function = "usb30";
--		};
--	};
--};
--
--&pwm0 {
--	pinctrl-0 = <&pwm0_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--};
--
--&pwm2 {
--	pinctrl-0 = <&pwm2_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--};
--
--&rcar_sound {
--	pinctrl-0 = <&sound_pins>, <&sound_clk_pins>;
--	pinctrl-names = "default";
--
--	/* Single DAI */
--	#sound-dai-cells = <0>;
--
--	/* audio_clkout0/1/2/3 */
--	#clock-cells = <1>;
--	clock-frequency = <11289600>;
--
--	/* Reference versaclock instead of audio_clk_a */
--	clocks = <&cpg CPG_MOD 1005>,
--		 <&cpg CPG_MOD 1006>, <&cpg CPG_MOD 1007>,
--		 <&cpg CPG_MOD 1008>, <&cpg CPG_MOD 1009>,
--		 <&cpg CPG_MOD 1010>, <&cpg CPG_MOD 1011>,
--		 <&cpg CPG_MOD 1012>, <&cpg CPG_MOD 1013>,
--		 <&cpg CPG_MOD 1014>, <&cpg CPG_MOD 1015>,
--		 <&cpg CPG_MOD 1022>, <&cpg CPG_MOD 1023>,
--		 <&cpg CPG_MOD 1024>, <&cpg CPG_MOD 1025>,
--		 <&cpg CPG_MOD 1026>, <&cpg CPG_MOD 1027>,
--		 <&cpg CPG_MOD 1028>, <&cpg CPG_MOD 1029>,
--		 <&cpg CPG_MOD 1030>, <&cpg CPG_MOD 1031>,
--		 <&cpg CPG_MOD 1020>, <&cpg CPG_MOD 1021>,
--		 <&cpg CPG_MOD 1020>, <&cpg CPG_MOD 1021>,
--		 <&cpg CPG_MOD 1019>, <&cpg CPG_MOD 1018>,
--		 <&versaclock6_bb 4>, <&audio_clk_b>,
--		 <&audio_clk_c>,
--		 <&cpg CPG_CORE CPG_AUDIO_CLK_I>;
--
--	status = "okay";
--
--	ports {
--		#address-cells = <1>;
--		#size-cells = <0>;
--		rsnd_port0: port@0 {
--			reg = <0>;
--			rsnd_endpoint0: endpoint {
--				remote-endpoint = <&wm8962_endpoint>;
--
--				dai-format = "i2s";
--				bitclock-master = <&rsnd_endpoint0>;
--				frame-master = <&rsnd_endpoint0>;
--
--				playback = <&ssi1>, <&dvc1>, <&src1>;
--				capture = <&ssi0>;
--			};
--		};
--		rsnd_port1: port@1 {
--		    reg = <0x01>;
--			rsnd_endpoint1: endpoint {
--				remote-endpoint = <&dw_hdmi0_snd_in>;
--
--				dai-format = "i2s";
--				bitclock-master = <&rsnd_endpoint1>;
--				frame-master = <&rsnd_endpoint1>;
--
--				playback = <&ssi2>;
--			};
--		};
--	};
--};
--
--&rwdt {
--	status = "okay";
--	timeout-sec = <60>;
--};
--
--&scif0 {
--	pinctrl-0 = <&scif0_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--};
--
--&scif5 {
--	pinctrl-0 = <&scif5_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--};
--
--&scif_clk {
--	clock-frequency = <14745600>;
--};
--
--&sdhi0 {
--	pinctrl-0 = <&sdhi0_pins>;
--	pinctrl-1 = <&sdhi0_pins_uhs>;
--	pinctrl-names = "default", "state_uhs";
--	vmmc-supply = <&reg_3p3v>;
--	vqmmc-supply = <&vccq_sdhi0>;
--	cd-gpios = <&gpio3 12 GPIO_ACTIVE_LOW>;
--	bus-width = <4>;
--	sd-uhs-sdr50;
--	sd-uhs-sdr104;
--	status = "okay";
--};
--
--&ssi1 {
--	shared-pin;
--};
--
--&tmu0 {
--	status = "okay";
--};
--
--&tmu1 {
--	status = "okay";
--};
--
--&tmu2 {
--	status = "okay";
--};
--
--&tmu3 {
--	status = "okay";
--};
--
--&tmu4 {
--	status = "okay";
--};
--
--&usb2_phy0 {
--	pinctrl-0 = <&usb0_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--};
--
--&usb2_phy1 {
--	pinctrl-0 = <&usb1_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--};
--
--&usb3_peri0 {
--	companion = <&xhci0>;
--	status = "okay";
--	usb-role-switch;
--
--	ports {
--		#address-cells = <1>;
--		#size-cells = <0>;
--		port@0 {
--			reg = <0>;
--			usb3_hs_ep: endpoint {
--				remote-endpoint = <&hs_ep>;
--			};
--		};
--		port@1 {
--			reg = <1>;
--			usb3_role_switch: endpoint {
--				remote-endpoint = <&hd3ss3220_out_ep>;
--			};
--		};
--	};
--};
--
--&usb3_phy0 {
--	status = "okay";
--};
--
--&vin0 {
--	status = "okay";
--};
--&vin1 {
--	status = "okay";
--};
--&vin2 {
--	status = "okay";
--};
--&vin3 {
--	status = "okay";
--};
--&vin4 {
--	status = "okay";
--};
--&vin5 {
--	status = "okay";
--};
--&vin6 {
--	status = "okay";
--};
--&vin7 {
--	status = "okay";
--};
--
--&xhci0
--{
--	pinctrl-0 = <&usb30_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--};
-diff --git a/arch/arm/dts/beacon-renesom-som.dtsi b/arch/arm/dts/beacon-renesom-som.dtsi
-deleted file mode 100644
-index 68b04e56ae5..00000000000
---- a/arch/arm/dts/beacon-renesom-som.dtsi
-+++ /dev/null
-@@ -1,334 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright 2020, Compass Electronics Group, LLC
-- */
--
--#include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/clock/versaclock.h>
--
--/ {
--	memory@48000000 {
--		device_type = "memory";
--		/* first 128MB is reserved for secure area. */
--		reg = <0x0 0x48000000 0x0 0x78000000>;
--	};
--
--	osc_32k: osc_32k {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		clock-frequency = <32768>;
--		clock-output-names = "osc_32k";
--	};
--
--	reg_1p8v: regulator-1p8v {
--		compatible = "regulator-fixed";
--		regulator-name = "fixed-1.8V";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <1800000>;
--		regulator-boot-on;
--		regulator-always-on;
--	};
--
--	reg_3p3v: regulator-3p3v {
--		compatible = "regulator-fixed";
--		regulator-name = "fixed-3.3V";
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--		regulator-boot-on;
--		regulator-always-on;
--	};
--
--	wlan_pwrseq: wlan_pwrseq {
--		compatible = "mmc-pwrseq-simple";
--		reset-gpios = <&pca9654 1 GPIO_ACTIVE_LOW>;
--		clocks = <&osc_32k>;
--		clock-names = "ext_clock";
--		post-power-on-delay-ms = <80>;
--	};
--};
--
--&avb {
--	pinctrl-0 = <&avb_pins>;
--	pinctrl-names = "default";
--	phy-mode = "rgmii-rxid";
--	phy-handle = <&phy0>;
--	rx-internal-delay-ps = <1800>;
--	tx-internal-delay-ps = <2000>;
--	clocks = <&cpg CPG_MOD 812>, <&versaclock5 4>;
--	clock-names = "fck", "refclk";
--	status = "okay";
--
--	phy0: ethernet-phy@0 {
--		compatible = "ethernet-phy-id0022.1640",
--			     "ethernet-phy-ieee802.3-c22";
--		reg = <0>;
--		interrupt-parent = <&gpio2>;
--		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
--		reset-gpios = <&gpio2 10 GPIO_ACTIVE_LOW>;
--	};
--};
--
--&extal_clk {
--	clock-frequency = <16666666>;
--};
--
--&extalr_clk {
--	clock-frequency = <32768>;
--};
--
--&gpio6 {
--	usb-hub-reset-hog {
--		gpio-hog;
--		gpios = <10 GPIO_ACTIVE_HIGH>;
--		output-high;
--		line-name = "usb-hub-reset";
--	};
--};
--
--&hscif0 {
--	pinctrl-0 = <&hscif0_pins>;
--	pinctrl-names = "default";
--	uart-has-rtscts;
--	status = "okay";
--
--	bluetooth {
--		compatible = "brcm,bcm43438-bt";
--		shutdown-gpios = <&pca9654 2 GPIO_ACTIVE_HIGH>;
--		host-wakeup-gpios = <&gpio1 28 GPIO_ACTIVE_HIGH>;
--		device-wakeup-gpios = <&pca9654 5 GPIO_ACTIVE_HIGH>;
--		clocks = <&osc_32k>;
--		clock-names = "extclk";
--		max-speed = <4000000>;
--	};
--};
--
--&hscif2 {
--	status = "okay";
--	pinctrl-0 = <&hscif2_pins>;
--	pinctrl-names = "default";
--};
--
--&i2c4 {
--	status = "okay";
--	clock-frequency = <100000>;
--
--	pca9654: gpio@20 {
--		compatible = "onnn,pca9654";
--		reg = <0x20>;
--		gpio-controller;
--		#gpio-cells = <2>;
--		gpio-line-names =
--			"i2c4_20_0",
--			"wl_reg_on",
--			"bt_reg_on",
--			"i2c4_20_3",
--			"i2c4_20_4",
--			"bt_dev_wake",
--			"i2c4_20_6",
--			"i2c4_20_7";
--	};
--
--	pca9654_lte: gpio@21 {
--		compatible = "onnn,pca9654";
--		reg = <0x21>;
--		interrupt-parent = <&gpio5>;
--		interrupts = <25 IRQ_TYPE_EDGE_FALLING>;
--		interrupt-controller;
--		#interrupt-cells = <2>;
--		gpio-controller;
--		#gpio-cells = <2>;
--		gpio-line-names =
--			"i2c4_21_0",
--			"zoe_pwr_on",
--			"zoe_extint",
--			"zoe_reset_n",
--			"sara_reset",
--			"i2c4_21_5",
--			"sara_pwr_off",
--			"sara_networking_status";
--	};
--
--	eeprom@50 {
--		compatible = "microchip,24c64", "atmel,24c64";
--		pagesize = <32>;
--		read-only;	/* Manufacturing EEPROM programmed at factory */
--		reg = <0x50>;
--	};
--
--	rtc@51 {
--		compatible = "nxp,pcf85263";
--		reg = <0x51>;
--	};
--
--	versaclock5: versaclock_som@6a {
--		compatible = "idt,5p49v6965";
--		reg = <0x6a>;
--		#clock-cells = <1>;
--		clocks = <&x304_clk>;
--		clock-names = "xin";
--		/* du_dotclkin0, du_dotclkin2, usb_extal, avb_txcrefclk */
--		assigned-clocks = <&versaclock5 1>,
--				   <&versaclock5 2>,
--				   <&versaclock5 3>,
--				   <&versaclock5 4>;
--
--		assigned-clock-rates = <33333333>, <33333333>, <50000000>, <125000000>;
--
--		OUT1 {
--			idt,mode = <VC5_CMOS>;
--			idt,voltage-microvolt = <1800000>;
--			idt,slew-percent = <100>;
--		};
--
--		OUT2 {
--			idt,mode = <VC5_CMOS>;
--			idt,voltage-microvolt = <1800000>;
--			idt,slew-percent = <100>;
--		};
--
--		OUT3 {
--			idt,mode = <VC5_CMOS>;
--			idt,voltage-microvolt = <1800000>;
--			idt,slew-percent = <100>;
--		};
--
--		OUT4 {
--			idt,mode = <VC5_CMOS>;
--			idt,voltage-microvolt = <3300000>;
--			idt,slew-percent = <100>;
--		};
--	};
--};
--
--&pfc {
--	pinctrl-0 = <&scif_clk_pins>;
--	pinctrl-names = "default";
--
--	avb_pins: avb {
--		mux {
--			groups = "avb_link", "avb_mdio", "avb_mii";
--			function = "avb";
--		};
--
--		pins_mdio {
--			groups = "avb_mdio";
--			drive-strength = <24>;
--		};
--
--		pins_mii_tx {
--			pins = "PIN_AVB_TX_CTL", "PIN_AVB_TXC", "PIN_AVB_TD0",
--			       "PIN_AVB_TD1", "PIN_AVB_TD2", "PIN_AVB_TD3";
--			drive-strength = <12>;
--		};
--	};
--
--	scif2_pins: scif2 {
--		groups = "scif2_data_a";
--		function = "scif2";
--	};
--
--	hscif0_pins: hscif0 {
--		groups = "hscif0_data", "hscif0_ctrl";
--		function = "hscif0";
--	};
--
--	hscif1_pins: hscif1 {
--		groups = "hscif1_data_a", "hscif1_ctrl_a";
--		function = "hscif1";
--	};
--
--	hscif2_pins: hscif2 {
--		groups = "hscif2_data_a";
--		function = "hscif2";
--	};
--
--	scif0_pins: scif0 {
--		groups = "scif0_data";
--		function = "scif0";
--	};
--
--	scif5_pins: scif5 {
--		groups = "scif5_data_a";
--		function = "scif5";
--	};
--
--	scif_clk_pins: scif_clk {
--		groups = "scif_clk_a";
--		function = "scif_clk";
--	};
--
--	i2c0_pins: i2c0 {
--		groups = "i2c0";
--		function = "i2c0";
--	};
--
--	sdhi2_pins: sd2 {
--		groups = "sdhi2_data4", "sdhi2_ctrl";
--		function = "sdhi2";
--		power-source = <1800>;
--	};
--
--	sdhi3_pins: sd3 {
--		groups = "sdhi3_data8", "sdhi3_ctrl", "sdhi3_ds";
--		function = "sdhi3";
--		power-source = <1800>;
--	};
--};
--
--&scif_clk {
--	clock-frequency = <14745600>;
--};
--
--&scif2 {
--	pinctrl-0 = <&scif2_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--};
--
--&sdhi2 {
--	pinctrl-names = "default";
--	pinctrl-0 = <&sdhi2_pins>;
--	bus-width = <4>;
--	vmmc-supply = <&reg_3p3v>;
--	vqmmc-supply = <&reg_1p8v>;
--	non-removable;
--	cap-power-off-card;
--	keep-power-in-suspend;
--	mmc-pwrseq = <&wlan_pwrseq>;
--	status = "okay";
--	#address-cells = <1>;
--	#size-cells = <0>;
--
--	brcmf: bcrmf@1 {
--		reg = <1>;
--		compatible = "brcm,bcm4329-fmac";
--		interrupt-parent = <&gpio1>;
--		interrupts = <27 IRQ_TYPE_LEVEL_LOW>;
--		interrupt-names = "host-wake";
--	};
--};
--
--&sdhi3 {
--	pinctrl-0 = <&sdhi3_pins>;
--	pinctrl-1 = <&sdhi3_pins>;
--	pinctrl-names = "default", "state_uhs";
--	vmmc-supply = <&reg_3p3v>;
--	vqmmc-supply = <&reg_1p8v>;
--	bus-width = <8>;
--	mmc-hs200-1_8v;
--	no-sd;
--	no-sdio;
--	non-removable;
--	fixed-emmc-driver-type = <1>;
--	status = "okay";
--};
--
--&usb2_clksel {
--	clocks = <&cpg CPG_MOD 703>, <&cpg CPG_MOD 704>,
--		  <&versaclock5 3>, <&usb3s0_clk>;
--	status = "okay";
--};
--
--&usb3s0_clk {
--	clock-frequency = <100000000>;
--};
-diff --git a/arch/arm/dts/r8a774a1-beacon-rzg2m-kit-u-boot.dtsi b/arch/arm/dts/r8a774a1-beacon-rzg2m-kit-u-boot.dtsi
-deleted file mode 100644
-index 85336d5f3ba..00000000000
---- a/arch/arm/dts/r8a774a1-beacon-rzg2m-kit-u-boot.dtsi
-+++ /dev/null
-@@ -1,6 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright 2021 LogicPD dba Beacon EmbeddedWorks
-- */
--
--#include "rz-g2-beacon-u-boot.dtsi"
-diff --git a/arch/arm/dts/r8a774b1-beacon-rzg2n-kit-u-boot.dtsi b/arch/arm/dts/r8a774b1-beacon-rzg2n-kit-u-boot.dtsi
-deleted file mode 100644
-index 85336d5f3ba..00000000000
---- a/arch/arm/dts/r8a774b1-beacon-rzg2n-kit-u-boot.dtsi
-+++ /dev/null
-@@ -1,6 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright 2021 LogicPD dba Beacon EmbeddedWorks
-- */
--
--#include "rz-g2-beacon-u-boot.dtsi"
-diff --git a/arch/arm/dts/r8a774e1-beacon-rzg2h-kit-u-boot.dtsi b/arch/arm/dts/r8a774e1-beacon-rzg2h-kit-u-boot.dtsi
-deleted file mode 100644
-index 85336d5f3ba..00000000000
---- a/arch/arm/dts/r8a774e1-beacon-rzg2h-kit-u-boot.dtsi
-+++ /dev/null
-@@ -1,6 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright 2021 LogicPD dba Beacon EmbeddedWorks
-- */
--
--#include "rz-g2-beacon-u-boot.dtsi"
-diff --git a/arch/arm/dts/rz-g2-beacon-u-boot.dtsi b/arch/arm/dts/rz-g2-beacon-u-boot.dtsi
-deleted file mode 100644
-index 97c4d4d292a..00000000000
---- a/arch/arm/dts/rz-g2-beacon-u-boot.dtsi
-+++ /dev/null
-@@ -1,82 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright 2021 LogicPD dba Beacon EmbeddedWorks
-- */
--
--/ {
--	aliases {
--		spi0 = &rpc;
--	};
--
--	soc {
--		bootph-all;
--	};
--};
--
--&cpg {
--	bootph-all;
--};
--
--&ehci0 {
--	clocks = <&cpg CPG_MOD 703>, <&cpg CPG_MOD 704>, <&versaclock5 3>;
--};
--
--&ehci1 {
--	clocks = <&cpg CPG_MOD 703>, <&cpg CPG_MOD 704>, <&versaclock5 3>;
--};
--
--&extal_clk {
--	bootph-all;
--};
--
--&extalr_clk {
--	bootph-all;
--};
--
--&pfc {
--	qspi_pins: qspi {
--		groups = "qspi_ctrl", "qspi_data4";
--		function = "qspi";
--	};
--};
--
--&prr {
--	bootph-all;
--};
--
--&rpc {
--	pinctrl-0 = <&qspi_pins>;
--	pinctrl-names = "default";
--	spi-max-frequency = <40000000>;
--	#address-cells = <1>;
--	#size-cells = <0>;
--	status = "okay";
--
--	flash0: spi-flash@0 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		reg = <0>;
--		compatible = "spi-flash", "jedec,spi-nor";
--		spi-max-frequency = <40000000>;
--		spi-tx-bus-width = <1>;
--		spi-rx-bus-width = <1>;
--	};
--};
--
--&sdhi0 {
--	/delete-property/ cd-gpios;
--	sd-uhs-sdr12;
--	sd-uhs-sdr25;
--	sd-uhs-sdr104;
--	max-frequency = <208000000>;
--};
--
--&sdhi2 {
--	status = "disabled";
--};
--
--&sdhi3 {
--	mmc-ddr-1_8v;
--	mmc-hs200-1_8v;
--	mmc-hs400-1_8v;
--};
-diff --git a/arch/arm/mach-renesas/Kconfig.rcar3 b/arch/arm/mach-renesas/Kconfig.rcar3
-index 6bed7684fb8..9a8a9a5edca 100644
---- a/arch/arm/mach-renesas/Kconfig.rcar3
-+++ b/arch/arm/mach-renesas/Kconfig.rcar3
-@@ -79,19 +79,6 @@ choice
- 	prompt "Renesas ARM64 SoCs board select"
- 	optional
- 
--config TARGET_BEACON_RZG2M
--	bool "Beacon EmbeddedWorks RZ/G2 Dev Kit"
--	select PINCTRL_PFC_R8A774A1
--	select PINCTRL_PFC_R8A774B1
--	select PINCTRL_PFC_R8A774E1
--	select R8A774A1
--	select R8A774B1
--	select R8A774E1
--	select RZ_G2
--	imply CLK_CCF
--	imply CLK_VERSACLOCK
--	imply MULTI_DTB_FIT
--
- config TARGET_CONDOR
- 	bool "Condor board"
- 	imply R8A77980
-@@ -182,18 +169,15 @@ source "board/renesas/salvator-x/Kconfig"
- source "board/renesas/ulcb/Kconfig"
- source "board/renesas/v3hsk/Kconfig"
- source "board/renesas/v3msk/Kconfig"
--source "board/beacon/beacon-rzg2m/Kconfig"
- source "board/hoperun/hihope-rzg2/Kconfig"
- source "board/silinux/ek874/Kconfig"
- 
- config MULTI_DTB_FIT_UNCOMPRESS_SZ
--	default 0x80000 if TARGET_BEACON_RZG2M
- 	default 0x80000 if TARGET_HIHOPE_RZG2
- 	default 0x80000 if TARGET_SALVATOR_X
- 	default 0x80000 if TARGET_ULCB
- 
- config MULTI_DTB_FIT_USER_DEF_ADDR
--	default 0x49000000 if TARGET_BEACON_RZG2M
- 	default 0x49000000 if TARGET_HIHOPE_RZG2
- 	default 0x49000000 if TARGET_SALVATOR_X
- 	default 0x49000000 if TARGET_ULCB
-diff --git a/board/beacon/beacon-rzg2m/Kconfig b/board/beacon/beacon-rzg2m/Kconfig
-deleted file mode 100644
-index 1eb9e0dda94..00000000000
---- a/board/beacon/beacon-rzg2m/Kconfig
-+++ /dev/null
-@@ -1,15 +0,0 @@
--if TARGET_BEACON_RZG2M
--
--config SYS_SOC
--	default "renesas"
--
--config SYS_BOARD
--	default "beacon-rzg2m"
--
--config SYS_VENDOR
--	default "beacon"
--
--config SYS_CONFIG_NAME
--	default "beacon-rzg2m"
--
--endif
-diff --git a/board/beacon/beacon-rzg2m/MAINTAINERS b/board/beacon/beacon-rzg2m/MAINTAINERS
-deleted file mode 100644
-index a4a920a017b..00000000000
---- a/board/beacon/beacon-rzg2m/MAINTAINERS
-+++ /dev/null
-@@ -1,17 +0,0 @@
--BEACON_RZG2M BOARD
--M:	Adam Ford <aford173@gmail.com>
--M:	Marek Vasut <marek.vasut+renesas@mailbox.org>
--S:	Maintained
--F:	board/beacon/beacon-rzg2m/
--F:	include/configs/beacon-rzg2m.h
--F:	configs/rzg2_beacon_defconfig
--F:	arch/arm/dts/beacon-renesom-baseboard.dtsi
--F:	arch/arm/dts/beacon-renesom-som.dtsi
--F:	arch/arm/dts/r8a774a1-beacon-rzg2m-kit.dts
--F:	arch/arm/dts/r8a774b1-beacon-rzg2n-kit.dts
--F:	arch/arm/dts/r8a774e1-beacon-rzg2h-kit.dts
--F:	arch/arm/dts/r8a774a1-beacon-rzg2m-kit-u-boot.dtsi
--F:	arch/arm/dts/r8a774b1-beacon-rzg2n-kit-u-boot.dtsi
--F:	arch/arm/dts/r8a774e1-beacon-rzg2h-kit-u-boot.dtsi
--F:	arch/arm/dts/rz-g2-beacon-u-boot.dtsi
--
-diff --git a/board/beacon/beacon-rzg2m/Makefile b/board/beacon/beacon-rzg2m/Makefile
-deleted file mode 100644
-index 10b7a7fbfa9..00000000000
---- a/board/beacon/beacon-rzg2m/Makefile
-+++ /dev/null
-@@ -1,9 +0,0 @@
--#
--# board/renesas/hihope-rzg2m/Makefile
--#
--# Copyright (C) 2019 Renesas Electronics Corporation
--#
--# SPDX-License-Identifier: GPL-2.0+
--#
--
--obj-y	:= beacon-rzg2m.o ../../renesas/common/gen3-common.o ../../renesas/common/rcar64-common.o
-diff --git a/board/beacon/beacon-rzg2m/beacon-rzg2m.c b/board/beacon/beacon-rzg2m/beacon-rzg2m.c
-deleted file mode 100644
-index 099053235de..00000000000
---- a/board/beacon/beacon-rzg2m/beacon-rzg2m.c
-+++ /dev/null
-@@ -1,33 +0,0 @@
+@@ -1,130 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
 -/*
 - * Copyright 2020 Compass Electronics Group, LLC
 - */
 -
--#include <asm/global_data.h>
+-#include "imx8mm-u-boot.dtsi"
+-
+-/ {
+-	aliases {
+-		spi0 = &flexspi;
+-	};
+-
+-	wdt-reboot {
+-		compatible = "wdt-reboot";
+-		wdt = <&wdog1>;
+-		bootph-pre-ram;
+-	};
+-};
+-
+-&aips4 {
+-	bootph-pre-ram;
+-};
+-
+-&reg_usdhc2_vmmc {
+-	u-boot,off-on-delay-us = <20000>;
+-};
+-
+-&fec1 {
+-	phy-reset-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
+-};
+-
+-&gpio1 {
+-	bootph-pre-ram;
+-};
+-
+-&gpio2 {
+-	bootph-pre-ram;
+-};
+-
+-&gpio3 {
+-	bootph-pre-ram;
+-};
+-
+-&gpio4 {
+-	bootph-pre-ram;
+-};
+-
+-&gpio5 {
+-	bootph-pre-ram;
+-};
+-
+-&pca6416_0 {
+-	compatible = "ti,tca6416";
+-};
+-
+-&pca6416_1 {
+-	compatible = "ti,tca6416";
+-};
+-
+-&pinctrl_i2c1 {
+-	bootph-pre-ram;
+-};
+-
+-&pinctrl_pmic {
+-	bootph-pre-ram;
+-};
+-
+-&pinctrl_uart2 {
+-	bootph-pre-ram;
+-};
+-
+-&pinctrl_usdhc2_gpio {
+-	bootph-pre-ram;
+-};
+-
+-&pinctrl_usdhc2 {
+-	bootph-pre-ram;
+-};
+-
+-&pinctrl_usdhc3 {
+-	bootph-pre-ram;
+-};
+-
+-&pinctrl_wdog {
+-	bootph-pre-ram;
+-};
+-
+-&reg_usbotg1 {
+-
+-};
+-
+-&uart2 {
+-	bootph-pre-ram;
+-};
+-
+-&usbmisc1 {
+-	bootph-pre-ram;
+-};
+-
+-&usbotg1 {
+-	bootph-pre-ram;
+-};
+-
+-&usbphynop1 {
+-	bootph-pre-ram;
+-};
+-
+-&usdhc2 {
+-	bootph-pre-ram;
+-};
+-
+-&usdhc3 {
+-	bootph-pre-ram;
+-};
+-
+-&i2c1 {
+-	bootph-pre-ram;
+-};
+-
+-&{/soc@0/bus@30800000/i2c@30a20000/pmic@4b} {
+-	bootph-pre-ram;
+-};
+-
+-&{/soc@0/bus@30800000/i2c@30a20000/pmic@4b/regulators} {
+-	bootph-pre-ram;
+-};
+-
+-&wdog1 {
+-	bootph-pre-ram;
+-};
+diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kconfig
+index c03c4e72101..80486553056 100644
+--- a/arch/arm/mach-imx/imx8m/Kconfig
++++ b/arch/arm/mach-imx/imx8m/Kconfig
+@@ -354,16 +354,6 @@ config TARGET_VERDIN_IMX8MP
+ 	select IMX8M_LPDDR4
+ 	imply OF_UPSTREAM
+ 
+-config TARGET_IMX8MM_BEACON
+-	bool "imx8mm Beacon Embedded devkit"
+-	select IMX8MM
+-	select SUPPORT_SPL
+-	select IMX8M_LPDDR4
+-	select FSL_CAAM
+-	select ARCH_MISC_INIT
+-	select SPL_CRYPTO if SPL
+-	imply OF_UPSTREAM
+-
+ config TARGET_IMX8MN_BEACON
+ 	bool "imx8mn Beacon Embedded devkit"
+ 	select IMX8MN
+@@ -446,7 +436,6 @@ config TARGET_LIBREM5_DEVKIT
+ endchoice
+ 
+ source "board/advantech/imx8mp_rsb3720a1/Kconfig"
+-source "board/beacon/imx8mm/Kconfig"
+ source "board/beacon/imx8mn/Kconfig"
+ source "board/beacon/imx8mp/Kconfig"
+ source "board/bsh/imx8mn_smm_s2/Kconfig"
+diff --git a/board/beacon/imx8mm/Kconfig b/board/beacon/imx8mm/Kconfig
+deleted file mode 100644
+index e5d8aa3ec9c..00000000000
+--- a/board/beacon/imx8mm/Kconfig
++++ /dev/null
+@@ -1,15 +0,0 @@
+-if TARGET_IMX8MM_BEACON
+-
+-config SYS_BOARD
+-	default "imx8mm"
+-
+-config SYS_VENDOR
+-	default "beacon"
+-
+-config SYS_CONFIG_NAME
+-	default "imx8mm_beacon"
+-
+-config IMX_CONFIG
+-	default "board/beacon/imx8mm/imximage-8mm-lpddr4.cfg"
+-
+-endif
+diff --git a/board/beacon/imx8mm/MAINTAINERS b/board/beacon/imx8mm/MAINTAINERS
+deleted file mode 100644
+index d8a5d097369..00000000000
+--- a/board/beacon/imx8mm/MAINTAINERS
++++ /dev/null
+@@ -1,9 +0,0 @@
+-i.MX8MM Beacon EmbeddedWorks Devkit
+-
+-M:	Adam Ford <aford173@gmail.com>
+-S:	Maintained
+-F:	board/beacon/imx8mm/
+-F:	include/configs/imx8mm_beacon.h
+-F:	configs/imx8mm_beacon_defconfig
+-F:	configs/imx8mm_beacon_fspi_defconfig
+-F:	doc/board/beacon/
+diff --git a/board/beacon/imx8mm/Makefile b/board/beacon/imx8mm/Makefile
+deleted file mode 100644
+index eb762504266..00000000000
+--- a/board/beacon/imx8mm/Makefile
++++ /dev/null
+@@ -1,12 +0,0 @@
+-#
+-# Copyright 2020 Compass Electronics Group, LLC
+-#
+-# SPDX-License-Identifier:      GPL-2.0+
+-#
+-
+-obj-y += ../../nxp/common/
+-
+-ifdef CONFIG_XPL_BUILD
+-obj-y += spl.o
+-obj-y += lpddr4_timing.o
+-endif
+diff --git a/board/beacon/imx8mm/imx8mm_beacon.env b/board/beacon/imx8mm/imx8mm_beacon.env
+deleted file mode 100644
+index 00bf67edd5b..00000000000
+--- a/board/beacon/imx8mm/imx8mm_beacon.env
++++ /dev/null
+@@ -1,19 +0,0 @@
+-boot_fit=try
+-bootscript=echo Running bootscript from mmc ...; source
+-console=ttymxc1
+-fdt_addr=0x45000000
+-fdt_file=imx8mm-beacon-kit.dtb
+-finduuid=part uuid mmc ${mmcdev}:2 uuid
+-image=Image
+-initrd_addr=0x46000000
+-loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};
+-loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}
+-loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
+-mmcargs=setenv bootargs console=${console},${baudrate} root=PARTUUID=${uuid} rootwait rw ${mtdparts} ${optargs}
+-mmcautodetect=yes
+-mmcboot=echo Booting from mmc ...; run finduuid; run mmcargs; if run loadfdt; then booti ${loadaddr} - ${fdt_addr}; else echo WARN: Cannot load the DT; fi;
+-netargs=setenv bootargs console=${console},${baudrate} root=/dev/nfs ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp
+-mmcdev=1
+-mmcpart=1
+-netboot=echo Booting from net ...; run netargs;  if test ${ip_dyn} = yes; then setenv get_cmd dhcp; else setenv get_cmd tftp; fi; ${get_cmd} ${loadaddr} ${image}; if test ${boot_fit} = yes || test ${boot_fit} = try; then bootm ${loadaddr}; else if ${get_cmd} ${fdt_addr} ${fdt_file}; then booti ${loadaddr} - ${fdt_addr}; else echo WARN: Cannot load the DT; fi; fi;
+-script=boot.scr
+diff --git a/board/beacon/imx8mm/imximage-8mm-lpddr4.cfg b/board/beacon/imx8mm/imximage-8mm-lpddr4.cfg
+deleted file mode 100644
+index 20061521f22..00000000000
+--- a/board/beacon/imx8mm/imximage-8mm-lpddr4.cfg
++++ /dev/null
+@@ -1,8 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright 2021 NXP
+- */
+-
+-
+-BOOT_FROM	sd
+-LOADER		u-boot-spl-ddr.bin	0x7E1000
+diff --git a/board/beacon/imx8mm/lpddr4_timing.c b/board/beacon/imx8mm/lpddr4_timing.c
+deleted file mode 100644
+index c1498dd5eaf..00000000000
+--- a/board/beacon/imx8mm/lpddr4_timing.c
++++ /dev/null
+@@ -1,1979 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2019 NXP
+- */
+-
+-#include <linux/kernel.h>
+-#include <asm/arch/ddr.h>
+-#include <asm/arch/lpddr4_define.h>
+-
+-struct dram_cfg_param lpddr4_ddrc_cfg[] = {
+-	/* Start to config, default 3200mbps */
+-	{ DDRC_DBG1(0),	0x00000001 },
+-	{ DDRC_PWRCTL(0), 0x00000001 },
+-	{ DDRC_MSTR(0),	0xa1080020 },
+-	{ DDRC_RFSHTMG(0), 0x005b00d2 },
+-	{ DDRC_INIT0(0), 0xC003061B },
+-	{ DDRC_INIT1(0), 0x009D0000 },
+-	{ DDRC_INIT3(0), 0x00D4002D },
+-	{ DDRC_INIT4(0), (LPDDR4_MR3 << 16) | 0x0000 },
+-	{ DDRC_INIT6(0), 0x0066004a },
+-	{ DDRC_INIT7(0), 0x0006004a },
+-
+-	{ DDRC_DRAMTMG0(0), 0x1A201B22 },
+-	{ DDRC_DRAMTMG1(0), 0x00060633 },
+-	{ DDRC_DRAMTMG3(0), 0x00C0C000 },
+-	{ DDRC_DRAMTMG4(0), 0x0F04080F },
+-	{ DDRC_DRAMTMG5(0), 0x02040C0C },
+-	{ DDRC_DRAMTMG6(0), 0x01010007 },
+-	{ DDRC_DRAMTMG7(0), 0x00000401 },
+-	{ DDRC_DRAMTMG12(0), 0x00020600 },
+-	{ DDRC_DRAMTMG13(0), 0x0C100002 },
+-	{ DDRC_DRAMTMG14(0), 0x000000E6 },
+-	{ DDRC_DRAMTMG17(0), 0x00A00050 },
+-
+-	{ DDRC_ZQCTL0(0), 0x03200018 },
+-	{ DDRC_ZQCTL1(0), 0x028061A8 },
+-	{ DDRC_ZQCTL2(0), 0x00000000 },
+-
+-	{ DDRC_DFITMG0(0), 0x0497820A },
+-	{ DDRC_DFITMG2(0), 0x0000170A },
+-	{ DDRC_DRAMTMG2(0), 0x070E171a },
+-	{ DDRC_DBICTL(0), 0x00000001 },
+-
+-	{ DDRC_DFITMG1(0), 0x00080303 },
+-	{ DDRC_DFIUPD0(0), 0xE0400018 },
+-	{ DDRC_DFIUPD1(0), 0x00DF00E4 },
+-	{ DDRC_DFIUPD2(0), 0x80000000 },
+-	{ DDRC_DFIMISC(0), 0x00000011 },
+-
+-	{ DDRC_DFIPHYMSTR(0), 0x00000000 },
+-	{ DDRC_RANKCTL(0), 0x00000c99 },
+-
+-	/* address mapping */
+-	{ DDRC_ADDRMAP0(0), 0x0000001f },
+-	{ DDRC_ADDRMAP1(0), 0x00080808 },
+-	{ DDRC_ADDRMAP2(0), 0x00000000 },
+-	{ DDRC_ADDRMAP3(0), 0x00000000 },
+-	{ DDRC_ADDRMAP4(0), 0x00001f1f },
+-	{ DDRC_ADDRMAP5(0), 0x07070707 },
+-	{ DDRC_ADDRMAP6(0), 0x07070707 },
+-	{ DDRC_ADDRMAP7(0), 0x00000f0f },
+-
+-	/* performance setting */
+-	{ DDRC_SCHED(0), 0x29001701 },
+-	{ DDRC_SCHED1(0), 0x0000002c },
+-	{ DDRC_PERFHPR1(0), 0x04000030 },
+-	{ DDRC_PERFLPR1(0), 0x900093e7 },
+-	{ DDRC_PERFWR1(0), 0x20005574 },
+-	{ DDRC_PCCFG(0), 0x00000111 },
+-	{ DDRC_PCFGW_0(0), 0x000072ff },
+-	{ DDRC_PCFGQOS0_0(0), 0x02100e07 },
+-	{ DDRC_PCFGQOS1_0(0), 0x00620096 },
+-	{ DDRC_PCFGWQOS0_0(0), 0x01100e07 },
+-	{ DDRC_PCFGWQOS1_0(0), 0x00c8012c },
+-
+-	/* frequency P1&P2 */
+-	/* Frequency 1: 400mbps */
+-	{ DDRC_FREQ1_DRAMTMG0(0), 0x0d0b010c },
+-	{ DDRC_FREQ1_DRAMTMG1(0), 0x00030410 },
+-	{ DDRC_FREQ1_DRAMTMG2(0), 0x0203090c },
+-	{ DDRC_FREQ1_DRAMTMG3(0), 0x00505006 },
+-	{ DDRC_FREQ1_DRAMTMG4(0), 0x05040305 },
+-	{ DDRC_FREQ1_DRAMTMG5(0), 0x0d0e0504 },
+-	{ DDRC_FREQ1_DRAMTMG6(0), 0x0a060004 },
+-	{ DDRC_FREQ1_DRAMTMG7(0), 0x0000090e },
+-	{ DDRC_FREQ1_DRAMTMG14(0), 0x00000032 },
+-	{ DDRC_FREQ1_DRAMTMG15(0), 0x00000000 },
+-	{ DDRC_FREQ1_DRAMTMG17(0), 0x0036001b },
+-	{ DDRC_FREQ1_DERATEINT(0), 0x7e9fbeb1 },
+-	{ DDRC_FREQ1_DFITMG0(0), 0x03818200 },
+-	{ DDRC_FREQ1_DFITMG2(0), 0x00000000 },
+-	{ DDRC_FREQ1_RFSHTMG(0), 0x000C001c },
+-	{ DDRC_FREQ1_INIT3(0), 0x00840000 },
+-	{ DDRC_FREQ1_INIT4(0), 0x00310000 },
+-	{ DDRC_FREQ1_INIT6(0), 0x0066004a },
+-	{ DDRC_FREQ1_INIT7(0), 0x0006004a },
+-
+-	/* Frequency 2: 100mbps */
+-	{ DDRC_FREQ2_DRAMTMG0(0), 0x0d0b010c },
+-	{ DDRC_FREQ2_DRAMTMG1(0), 0x00030410 },
+-	{ DDRC_FREQ2_DRAMTMG2(0), 0x0203090c },
+-	{ DDRC_FREQ2_DRAMTMG3(0), 0x00505006 },
+-	{ DDRC_FREQ2_DRAMTMG4(0), 0x05040305 },
+-	{ DDRC_FREQ2_DRAMTMG5(0), 0x0d0e0504 },
+-	{ DDRC_FREQ2_DRAMTMG6(0), 0x0a060004 },
+-	{ DDRC_FREQ2_DRAMTMG7(0), 0x0000090e },
+-	{ DDRC_FREQ2_DRAMTMG14(0), 0x00000032 },
+-	{ DDRC_FREQ2_DRAMTMG17(0), 0x0036001b },
+-	{ DDRC_FREQ2_DERATEINT(0), 0x7e9fbeb1 },
+-	{ DDRC_FREQ2_DFITMG0(0), 0x03818200 },
+-	{ DDRC_FREQ2_DFITMG2(0), 0x00000000 },
+-	{ DDRC_FREQ2_RFSHTMG(0), 0x0003800c },
+-	{ DDRC_FREQ2_RFSHTMG(0), 0x00030007 },
+-	{ DDRC_FREQ2_INIT3(0), 0x00840000 },
+-	{ DDRC_FREQ2_INIT4(0), 0x00310008 },
+-	{ DDRC_FREQ2_INIT4(0), (LPDDR4_MR3 << 16) | 0x0000 },
+-	{ DDRC_FREQ2_INIT6(0), 0x0066004a },
+-	{ DDRC_FREQ2_INIT7(0), 0x0006004a },
+-
+-	/* boot start point */
+-	{ DDRC_MSTR2(0), 0x2 }, //DDRC_MSTR2
+-};
+-
+-/* PHY Initialize Configuration */
+-struct dram_cfg_param lpddr4_ddrphy_cfg[] = {
+-	{ 0x1005f, 0x1ff },
+-	{ 0x1015f, 0x1ff },
+-	{ 0x1105f, 0x1ff },
+-	{ 0x1115f, 0x1ff },
+-	{ 0x1205f, 0x1ff },
+-	{ 0x1215f, 0x1ff },
+-	{ 0x1305f, 0x1ff },
+-	{ 0x1315f, 0x1ff },
+-
+-	{ 0x11005f, 0x1ff },
+-	{ 0x11015f, 0x1ff },
+-	{ 0x11105f, 0x1ff },
+-	{ 0x11115f, 0x1ff },
+-	{ 0x11205f, 0x1ff },
+-	{ 0x11215f, 0x1ff },
+-	{ 0x11305f, 0x1ff },
+-	{ 0x11315f, 0x1ff },
+-
+-	{ 0x21005f, 0x1ff },
+-	{ 0x21015f, 0x1ff },
+-	{ 0x21105f, 0x1ff },
+-	{ 0x21115f, 0x1ff },
+-	{ 0x21205f, 0x1ff },
+-	{ 0x21215f, 0x1ff },
+-	{ 0x21305f, 0x1ff },
+-	{ 0x21315f, 0x1ff },
+-
+-	{ 0x55, 0x1ff },
+-	{ 0x1055, 0x1ff },
+-	{ 0x2055, 0x1ff },
+-	{ 0x3055, 0x1ff },
+-	{ 0x4055, 0x1ff },
+-	{ 0x5055, 0x1ff },
+-	{ 0x6055, 0x1ff },
+-	{ 0x7055, 0x1ff },
+-	{ 0x8055, 0x1ff },
+-	{ 0x9055, 0x1ff },
+-
+-	{ 0x200c5, 0x19 },
+-	{ 0x1200c5, 0x7 },
+-	{ 0x2200c5, 0x7 },
+-
+-	{ 0x2002e, 0x2 },
+-	{ 0x12002e, 0x2 },
+-	{ 0x22002e, 0x2 },
+-
+-	{ 0x90204, 0x0 },
+-	{ 0x190204, 0x0 },
+-	{ 0x290204, 0x0 },
+-
+-	{ 0x20024, 0xab },
+-	{ 0x2003a, 0x0 },
+-
+-	{ 0x120024, 0xab },
+-	{ 0x2003a, 0x0 },
+-
+-	{ 0x220024, 0xab },
+-	{ 0x2003a, 0x0 },
+-
+-	{ 0x20056, 0x3 },
+-	{ 0x120056, 0xa },
+-	{ 0x220056, 0xa },
+-
+-	{ 0x1004d, 0xe00 },
+-	{ 0x1014d, 0xe00 },
+-	{ 0x1104d, 0xe00 },
+-	{ 0x1114d, 0xe00 },
+-	{ 0x1204d, 0xe00 },
+-	{ 0x1214d, 0xe00 },
+-	{ 0x1304d, 0xe00 },
+-	{ 0x1314d, 0xe00 },
+-
+-	{ 0x11004d, 0xe00 },
+-	{ 0x11014d, 0xe00 },
+-	{ 0x11104d, 0xe00 },
+-	{ 0x11114d, 0xe00 },
+-	{ 0x11204d, 0xe00 },
+-	{ 0x11214d, 0xe00 },
+-	{ 0x11304d, 0xe00 },
+-	{ 0x11314d, 0xe00 },
+-
+-	{ 0x21004d, 0xe00 },
+-	{ 0x21014d, 0xe00 },
+-	{ 0x21104d, 0xe00 },
+-	{ 0x21114d, 0xe00 },
+-	{ 0x21204d, 0xe00 },
+-	{ 0x21214d, 0xe00 },
+-	{ 0x21304d, 0xe00 },
+-	{ 0x21314d, 0xe00 },
+-
+-	{ 0x10049, 0xfbe },
+-	{ 0x10149, 0xfbe },
+-	{ 0x11049, 0xfbe },
+-	{ 0x11149, 0xfbe },
+-	{ 0x12049, 0xfbe },
+-	{ 0x12149, 0xfbe },
+-	{ 0x13049, 0xfbe },
+-	{ 0x13149, 0xfbe },
+-
+-	{ 0x110049, 0xfbe },
+-	{ 0x110149, 0xfbe },
+-	{ 0x111049, 0xfbe },
+-	{ 0x111149, 0xfbe },
+-	{ 0x112049, 0xfbe },
+-	{ 0x112149, 0xfbe },
+-	{ 0x113049, 0xfbe },
+-	{ 0x113149, 0xfbe },
+-
+-	{ 0x210049, 0xfbe },
+-	{ 0x210149, 0xfbe },
+-	{ 0x211049, 0xfbe },
+-	{ 0x211149, 0xfbe },
+-	{ 0x212049, 0xfbe },
+-	{ 0x212149, 0xfbe },
+-	{ 0x213049, 0xfbe },
+-	{ 0x213149, 0xfbe },
+-
+-	{ 0x43, 0x63 },
+-	{ 0x1043, 0x63 },
+-	{ 0x2043, 0x63 },
+-	{ 0x3043, 0x63 },
+-	{ 0x4043, 0x63 },
+-	{ 0x5043, 0x63 },
+-	{ 0x6043, 0x63 },
+-	{ 0x7043, 0x63 },
+-	{ 0x8043, 0x63 },
+-	{ 0x9043, 0x63 },
+-
+-	{ 0x20018, 0x3 },
+-	{ 0x20075, 0x4 },
+-	{ 0x20050, 0x0 },
+-	{ 0x20008, 0x2ee },
+-	{ 0x120008, 0x64 },
+-	{ 0x220008, 0x19 },
+-	{ 0x20088, 0x9 },
+-
+-	{ 0x200b2, 0x1d4 },
+-	{ 0x10043, 0x5a1 },
+-	{ 0x10143, 0x5a1 },
+-	{ 0x11043, 0x5a1 },
+-	{ 0x11143, 0x5a1 },
+-	{ 0x12043, 0x5a1 },
+-	{ 0x12143, 0x5a1 },
+-	{ 0x13043, 0x5a1 },
+-	{ 0x13143, 0x5a1 },
+-
+-	{ 0x1200b2, 0xdc },
+-	{ 0x110043, 0x5a1 },
+-	{ 0x110143, 0x5a1 },
+-	{ 0x111043, 0x5a1 },
+-	{ 0x111143, 0x5a1 },
+-	{ 0x112043, 0x5a1 },
+-	{ 0x112143, 0x5a1 },
+-	{ 0x113043, 0x5a1 },
+-	{ 0x113143, 0x5a1 },
+-
+-	{ 0x2200b2, 0xdc },
+-	{ 0x210043, 0x5a1 },
+-	{ 0x210143, 0x5a1 },
+-	{ 0x211043, 0x5a1 },
+-	{ 0x211143, 0x5a1 },
+-	{ 0x212043, 0x5a1 },
+-	{ 0x212143, 0x5a1 },
+-	{ 0x213043, 0x5a1 },
+-	{ 0x213143, 0x5a1 },
+-
+-	{ 0x200fa, 0x1 },
+-	{ 0x1200fa, 0x1 },
+-	{ 0x2200fa, 0x1 },
+-
+-	{ 0x20019, 0x1 },
+-	{ 0x120019, 0x1 },
+-	{ 0x220019, 0x1 },
+-
+-	{ 0x200f0, 0x660 },
+-	{ 0x200f1, 0x0 },
+-	{ 0x200f2, 0x4444 },
+-	{ 0x200f3, 0x8888 },
+-	{ 0x200f4, 0x5665 },
+-	{ 0x200f5, 0x0 },
+-	{ 0x200f6, 0x0 },
+-	{ 0x200f7, 0xf000 },
+-
+-	{ 0x20025, 0x0 },
+-	{ 0x2002d, LPDDR4_PHY_DMIPinPresent },
+-	{ 0x12002d, LPDDR4_PHY_DMIPinPresent },
+-	{ 0x22002d, LPDDR4_PHY_DMIPinPresent },
+-	{ 0x200c7, 0x21 },
+-	{ 0x200ca, 0x24 },
+-	{ 0x1200c7, 0x21 },
+-	{ 0x1200ca, 0x24 },
+-	{ 0x2200c7, 0x21 },
+-	{ 0x2200ca, 0x24 },
+-};
+-
+-/* ddr phy trained csr */
+-struct dram_cfg_param lpddr4_ddrphy_trained_csr[] = {
+-	{ 0x200b2, 0x0 },
+-	{ 0x1200b2, 0x0 },
+-	{ 0x2200b2, 0x0 },
+-	{ 0x200cb, 0x0 },
+-	{ 0x10043, 0x0 },
+-	{ 0x110043, 0x0 },
+-	{ 0x210043, 0x0 },
+-	{ 0x10143, 0x0 },
+-	{ 0x110143, 0x0 },
+-	{ 0x210143, 0x0 },
+-	{ 0x11043, 0x0 },
+-	{ 0x111043, 0x0 },
+-	{ 0x211043, 0x0 },
+-	{ 0x11143, 0x0 },
+-	{ 0x111143, 0x0 },
+-	{ 0x211143, 0x0 },
+-	{ 0x12043, 0x0 },
+-	{ 0x112043, 0x0 },
+-	{ 0x212043, 0x0 },
+-	{ 0x12143, 0x0 },
+-	{ 0x112143, 0x0 },
+-	{ 0x212143, 0x0 },
+-	{ 0x13043, 0x0 },
+-	{ 0x113043, 0x0 },
+-	{ 0x213043, 0x0 },
+-	{ 0x13143, 0x0 },
+-	{ 0x113143, 0x0 },
+-	{ 0x213143, 0x0 },
+-	{ 0x80, 0x0 },
+-	{ 0x100080, 0x0 },
+-	{ 0x200080, 0x0 },
+-	{ 0x1080, 0x0 },
+-	{ 0x101080, 0x0 },
+-	{ 0x201080, 0x0 },
+-	{ 0x2080, 0x0 },
+-	{ 0x102080, 0x0 },
+-	{ 0x202080, 0x0 },
+-	{ 0x3080, 0x0 },
+-	{ 0x103080, 0x0 },
+-	{ 0x203080, 0x0 },
+-	{ 0x4080, 0x0 },
+-	{ 0x104080, 0x0 },
+-	{ 0x204080, 0x0 },
+-	{ 0x5080, 0x0 },
+-	{ 0x105080, 0x0 },
+-	{ 0x205080, 0x0 },
+-	{ 0x6080, 0x0 },
+-	{ 0x106080, 0x0 },
+-	{ 0x206080, 0x0 },
+-	{ 0x7080, 0x0 },
+-	{ 0x107080, 0x0 },
+-	{ 0x207080, 0x0 },
+-	{ 0x8080, 0x0 },
+-	{ 0x108080, 0x0 },
+-	{ 0x208080, 0x0 },
+-	{ 0x9080, 0x0 },
+-	{ 0x109080, 0x0 },
+-	{ 0x209080, 0x0 },
+-	{ 0x10080, 0x0 },
+-	{ 0x110080, 0x0 },
+-	{ 0x210080, 0x0 },
+-	{ 0x10180, 0x0 },
+-	{ 0x110180, 0x0 },
+-	{ 0x210180, 0x0 },
+-	{ 0x11080, 0x0 },
+-	{ 0x111080, 0x0 },
+-	{ 0x211080, 0x0 },
+-	{ 0x11180, 0x0 },
+-	{ 0x111180, 0x0 },
+-	{ 0x211180, 0x0 },
+-	{ 0x12080, 0x0 },
+-	{ 0x112080, 0x0 },
+-	{ 0x212080, 0x0 },
+-	{ 0x12180, 0x0 },
+-	{ 0x112180, 0x0 },
+-	{ 0x212180, 0x0 },
+-	{ 0x13080, 0x0 },
+-	{ 0x113080, 0x0 },
+-	{ 0x213080, 0x0 },
+-	{ 0x13180, 0x0 },
+-	{ 0x113180, 0x0 },
+-	{ 0x213180, 0x0 },
+-	{ 0x10081, 0x0 },
+-	{ 0x110081, 0x0 },
+-	{ 0x210081, 0x0 },
+-	{ 0x10181, 0x0 },
+-	{ 0x110181, 0x0 },
+-	{ 0x210181, 0x0 },
+-	{ 0x11081, 0x0 },
+-	{ 0x111081, 0x0 },
+-	{ 0x211081, 0x0 },
+-	{ 0x11181, 0x0 },
+-	{ 0x111181, 0x0 },
+-	{ 0x211181, 0x0 },
+-	{ 0x12081, 0x0 },
+-	{ 0x112081, 0x0 },
+-	{ 0x212081, 0x0 },
+-	{ 0x12181, 0x0 },
+-	{ 0x112181, 0x0 },
+-	{ 0x212181, 0x0 },
+-	{ 0x13081, 0x0 },
+-	{ 0x113081, 0x0 },
+-	{ 0x213081, 0x0 },
+-	{ 0x13181, 0x0 },
+-	{ 0x113181, 0x0 },
+-	{ 0x213181, 0x0 },
+-	{ 0x100d0, 0x0 },
+-	{ 0x1100d0, 0x0 },
+-	{ 0x2100d0, 0x0 },
+-	{ 0x101d0, 0x0 },
+-	{ 0x1101d0, 0x0 },
+-	{ 0x2101d0, 0x0 },
+-	{ 0x110d0, 0x0 },
+-	{ 0x1110d0, 0x0 },
+-	{ 0x2110d0, 0x0 },
+-	{ 0x111d0, 0x0 },
+-	{ 0x1111d0, 0x0 },
+-	{ 0x2111d0, 0x0 },
+-	{ 0x120d0, 0x0 },
+-	{ 0x1120d0, 0x0 },
+-	{ 0x2120d0, 0x0 },
+-	{ 0x121d0, 0x0 },
+-	{ 0x1121d0, 0x0 },
+-	{ 0x2121d0, 0x0 },
+-	{ 0x130d0, 0x0 },
+-	{ 0x1130d0, 0x0 },
+-	{ 0x2130d0, 0x0 },
+-	{ 0x131d0, 0x0 },
+-	{ 0x1131d0, 0x0 },
+-	{ 0x2131d0, 0x0 },
+-	{ 0x100d1, 0x0 },
+-	{ 0x1100d1, 0x0 },
+-	{ 0x2100d1, 0x0 },
+-	{ 0x101d1, 0x0 },
+-	{ 0x1101d1, 0x0 },
+-	{ 0x2101d1, 0x0 },
+-	{ 0x110d1, 0x0 },
+-	{ 0x1110d1, 0x0 },
+-	{ 0x2110d1, 0x0 },
+-	{ 0x111d1, 0x0 },
+-	{ 0x1111d1, 0x0 },
+-	{ 0x2111d1, 0x0 },
+-	{ 0x120d1, 0x0 },
+-	{ 0x1120d1, 0x0 },
+-	{ 0x2120d1, 0x0 },
+-	{ 0x121d1, 0x0 },
+-	{ 0x1121d1, 0x0 },
+-	{ 0x2121d1, 0x0 },
+-	{ 0x130d1, 0x0 },
+-	{ 0x1130d1, 0x0 },
+-	{ 0x2130d1, 0x0 },
+-	{ 0x131d1, 0x0 },
+-	{ 0x1131d1, 0x0 },
+-	{ 0x2131d1, 0x0 },
+-	{ 0x10068, 0x0 },
+-	{ 0x10168, 0x0 },
+-	{ 0x10268, 0x0 },
+-	{ 0x10368, 0x0 },
+-	{ 0x10468, 0x0 },
+-	{ 0x10568, 0x0 },
+-	{ 0x10668, 0x0 },
+-	{ 0x10768, 0x0 },
+-	{ 0x10868, 0x0 },
+-	{ 0x11068, 0x0 },
+-	{ 0x11168, 0x0 },
+-	{ 0x11268, 0x0 },
+-	{ 0x11368, 0x0 },
+-	{ 0x11468, 0x0 },
+-	{ 0x11568, 0x0 },
+-	{ 0x11668, 0x0 },
+-	{ 0x11768, 0x0 },
+-	{ 0x11868, 0x0 },
+-	{ 0x12068, 0x0 },
+-	{ 0x12168, 0x0 },
+-	{ 0x12268, 0x0 },
+-	{ 0x12368, 0x0 },
+-	{ 0x12468, 0x0 },
+-	{ 0x12568, 0x0 },
+-	{ 0x12668, 0x0 },
+-	{ 0x12768, 0x0 },
+-	{ 0x12868, 0x0 },
+-	{ 0x13068, 0x0 },
+-	{ 0x13168, 0x0 },
+-	{ 0x13268, 0x0 },
+-	{ 0x13368, 0x0 },
+-	{ 0x13468, 0x0 },
+-	{ 0x13568, 0x0 },
+-	{ 0x13668, 0x0 },
+-	{ 0x13768, 0x0 },
+-	{ 0x13868, 0x0 },
+-	{ 0x10069, 0x0 },
+-	{ 0x10169, 0x0 },
+-	{ 0x10269, 0x0 },
+-	{ 0x10369, 0x0 },
+-	{ 0x10469, 0x0 },
+-	{ 0x10569, 0x0 },
+-	{ 0x10669, 0x0 },
+-	{ 0x10769, 0x0 },
+-	{ 0x10869, 0x0 },
+-	{ 0x11069, 0x0 },
+-	{ 0x11169, 0x0 },
+-	{ 0x11269, 0x0 },
+-	{ 0x11369, 0x0 },
+-	{ 0x11469, 0x0 },
+-	{ 0x11569, 0x0 },
+-	{ 0x11669, 0x0 },
+-	{ 0x11769, 0x0 },
+-	{ 0x11869, 0x0 },
+-	{ 0x12069, 0x0 },
+-	{ 0x12169, 0x0 },
+-	{ 0x12269, 0x0 },
+-	{ 0x12369, 0x0 },
+-	{ 0x12469, 0x0 },
+-	{ 0x12569, 0x0 },
+-	{ 0x12669, 0x0 },
+-	{ 0x12769, 0x0 },
+-	{ 0x12869, 0x0 },
+-	{ 0x13069, 0x0 },
+-	{ 0x13169, 0x0 },
+-	{ 0x13269, 0x0 },
+-	{ 0x13369, 0x0 },
+-	{ 0x13469, 0x0 },
+-	{ 0x13569, 0x0 },
+-	{ 0x13669, 0x0 },
+-	{ 0x13769, 0x0 },
+-	{ 0x13869, 0x0 },
+-	{ 0x1008c, 0x0 },
+-	{ 0x11008c, 0x0 },
+-	{ 0x21008c, 0x0 },
+-	{ 0x1018c, 0x0 },
+-	{ 0x11018c, 0x0 },
+-	{ 0x21018c, 0x0 },
+-	{ 0x1108c, 0x0 },
+-	{ 0x11108c, 0x0 },
+-	{ 0x21108c, 0x0 },
+-	{ 0x1118c, 0x0 },
+-	{ 0x11118c, 0x0 },
+-	{ 0x21118c, 0x0 },
+-	{ 0x1208c, 0x0 },
+-	{ 0x11208c, 0x0 },
+-	{ 0x21208c, 0x0 },
+-	{ 0x1218c, 0x0 },
+-	{ 0x11218c, 0x0 },
+-	{ 0x21218c, 0x0 },
+-	{ 0x1308c, 0x0 },
+-	{ 0x11308c, 0x0 },
+-	{ 0x21308c, 0x0 },
+-	{ 0x1318c, 0x0 },
+-	{ 0x11318c, 0x0 },
+-	{ 0x21318c, 0x0 },
+-	{ 0x1008d, 0x0 },
+-	{ 0x11008d, 0x0 },
+-	{ 0x21008d, 0x0 },
+-	{ 0x1018d, 0x0 },
+-	{ 0x11018d, 0x0 },
+-	{ 0x21018d, 0x0 },
+-	{ 0x1108d, 0x0 },
+-	{ 0x11108d, 0x0 },
+-	{ 0x21108d, 0x0 },
+-	{ 0x1118d, 0x0 },
+-	{ 0x11118d, 0x0 },
+-	{ 0x21118d, 0x0 },
+-	{ 0x1208d, 0x0 },
+-	{ 0x11208d, 0x0 },
+-	{ 0x21208d, 0x0 },
+-	{ 0x1218d, 0x0 },
+-	{ 0x11218d, 0x0 },
+-	{ 0x21218d, 0x0 },
+-	{ 0x1308d, 0x0 },
+-	{ 0x11308d, 0x0 },
+-	{ 0x21308d, 0x0 },
+-	{ 0x1318d, 0x0 },
+-	{ 0x11318d, 0x0 },
+-	{ 0x21318d, 0x0 },
+-	{ 0x100c0, 0x0 },
+-	{ 0x1100c0, 0x0 },
+-	{ 0x2100c0, 0x0 },
+-	{ 0x101c0, 0x0 },
+-	{ 0x1101c0, 0x0 },
+-	{ 0x2101c0, 0x0 },
+-	{ 0x102c0, 0x0 },
+-	{ 0x1102c0, 0x0 },
+-	{ 0x2102c0, 0x0 },
+-	{ 0x103c0, 0x0 },
+-	{ 0x1103c0, 0x0 },
+-	{ 0x2103c0, 0x0 },
+-	{ 0x104c0, 0x0 },
+-	{ 0x1104c0, 0x0 },
+-	{ 0x2104c0, 0x0 },
+-	{ 0x105c0, 0x0 },
+-	{ 0x1105c0, 0x0 },
+-	{ 0x2105c0, 0x0 },
+-	{ 0x106c0, 0x0 },
+-	{ 0x1106c0, 0x0 },
+-	{ 0x2106c0, 0x0 },
+-	{ 0x107c0, 0x0 },
+-	{ 0x1107c0, 0x0 },
+-	{ 0x2107c0, 0x0 },
+-	{ 0x108c0, 0x0 },
+-	{ 0x1108c0, 0x0 },
+-	{ 0x2108c0, 0x0 },
+-	{ 0x110c0, 0x0 },
+-	{ 0x1110c0, 0x0 },
+-	{ 0x2110c0, 0x0 },
+-	{ 0x111c0, 0x0 },
+-	{ 0x1111c0, 0x0 },
+-	{ 0x2111c0, 0x0 },
+-	{ 0x112c0, 0x0 },
+-	{ 0x1112c0, 0x0 },
+-	{ 0x2112c0, 0x0 },
+-	{ 0x113c0, 0x0 },
+-	{ 0x1113c0, 0x0 },
+-	{ 0x2113c0, 0x0 },
+-	{ 0x114c0, 0x0 },
+-	{ 0x1114c0, 0x0 },
+-	{ 0x2114c0, 0x0 },
+-	{ 0x115c0, 0x0 },
+-	{ 0x1115c0, 0x0 },
+-	{ 0x2115c0, 0x0 },
+-	{ 0x116c0, 0x0 },
+-	{ 0x1116c0, 0x0 },
+-	{ 0x2116c0, 0x0 },
+-	{ 0x117c0, 0x0 },
+-	{ 0x1117c0, 0x0 },
+-	{ 0x2117c0, 0x0 },
+-	{ 0x118c0, 0x0 },
+-	{ 0x1118c0, 0x0 },
+-	{ 0x2118c0, 0x0 },
+-	{ 0x120c0, 0x0 },
+-	{ 0x1120c0, 0x0 },
+-	{ 0x2120c0, 0x0 },
+-	{ 0x121c0, 0x0 },
+-	{ 0x1121c0, 0x0 },
+-	{ 0x2121c0, 0x0 },
+-	{ 0x122c0, 0x0 },
+-	{ 0x1122c0, 0x0 },
+-	{ 0x2122c0, 0x0 },
+-	{ 0x123c0, 0x0 },
+-	{ 0x1123c0, 0x0 },
+-	{ 0x2123c0, 0x0 },
+-	{ 0x124c0, 0x0 },
+-	{ 0x1124c0, 0x0 },
+-	{ 0x2124c0, 0x0 },
+-	{ 0x125c0, 0x0 },
+-	{ 0x1125c0, 0x0 },
+-	{ 0x2125c0, 0x0 },
+-	{ 0x126c0, 0x0 },
+-	{ 0x1126c0, 0x0 },
+-	{ 0x2126c0, 0x0 },
+-	{ 0x127c0, 0x0 },
+-	{ 0x1127c0, 0x0 },
+-	{ 0x2127c0, 0x0 },
+-	{ 0x128c0, 0x0 },
+-	{ 0x1128c0, 0x0 },
+-	{ 0x2128c0, 0x0 },
+-	{ 0x130c0, 0x0 },
+-	{ 0x1130c0, 0x0 },
+-	{ 0x2130c0, 0x0 },
+-	{ 0x131c0, 0x0 },
+-	{ 0x1131c0, 0x0 },
+-	{ 0x2131c0, 0x0 },
+-	{ 0x132c0, 0x0 },
+-	{ 0x1132c0, 0x0 },
+-	{ 0x2132c0, 0x0 },
+-	{ 0x133c0, 0x0 },
+-	{ 0x1133c0, 0x0 },
+-	{ 0x2133c0, 0x0 },
+-	{ 0x134c0, 0x0 },
+-	{ 0x1134c0, 0x0 },
+-	{ 0x2134c0, 0x0 },
+-	{ 0x135c0, 0x0 },
+-	{ 0x1135c0, 0x0 },
+-	{ 0x2135c0, 0x0 },
+-	{ 0x136c0, 0x0 },
+-	{ 0x1136c0, 0x0 },
+-	{ 0x2136c0, 0x0 },
+-	{ 0x137c0, 0x0 },
+-	{ 0x1137c0, 0x0 },
+-	{ 0x2137c0, 0x0 },
+-	{ 0x138c0, 0x0 },
+-	{ 0x1138c0, 0x0 },
+-	{ 0x2138c0, 0x0 },
+-	{ 0x100c1, 0x0 },
+-	{ 0x1100c1, 0x0 },
+-	{ 0x2100c1, 0x0 },
+-	{ 0x101c1, 0x0 },
+-	{ 0x1101c1, 0x0 },
+-	{ 0x2101c1, 0x0 },
+-	{ 0x102c1, 0x0 },
+-	{ 0x1102c1, 0x0 },
+-	{ 0x2102c1, 0x0 },
+-	{ 0x103c1, 0x0 },
+-	{ 0x1103c1, 0x0 },
+-	{ 0x2103c1, 0x0 },
+-	{ 0x104c1, 0x0 },
+-	{ 0x1104c1, 0x0 },
+-	{ 0x2104c1, 0x0 },
+-	{ 0x105c1, 0x0 },
+-	{ 0x1105c1, 0x0 },
+-	{ 0x2105c1, 0x0 },
+-	{ 0x106c1, 0x0 },
+-	{ 0x1106c1, 0x0 },
+-	{ 0x2106c1, 0x0 },
+-	{ 0x107c1, 0x0 },
+-	{ 0x1107c1, 0x0 },
+-	{ 0x2107c1, 0x0 },
+-	{ 0x108c1, 0x0 },
+-	{ 0x1108c1, 0x0 },
+-	{ 0x2108c1, 0x0 },
+-	{ 0x110c1, 0x0 },
+-	{ 0x1110c1, 0x0 },
+-	{ 0x2110c1, 0x0 },
+-	{ 0x111c1, 0x0 },
+-	{ 0x1111c1, 0x0 },
+-	{ 0x2111c1, 0x0 },
+-	{ 0x112c1, 0x0 },
+-	{ 0x1112c1, 0x0 },
+-	{ 0x2112c1, 0x0 },
+-	{ 0x113c1, 0x0 },
+-	{ 0x1113c1, 0x0 },
+-	{ 0x2113c1, 0x0 },
+-	{ 0x114c1, 0x0 },
+-	{ 0x1114c1, 0x0 },
+-	{ 0x2114c1, 0x0 },
+-	{ 0x115c1, 0x0 },
+-	{ 0x1115c1, 0x0 },
+-	{ 0x2115c1, 0x0 },
+-	{ 0x116c1, 0x0 },
+-	{ 0x1116c1, 0x0 },
+-	{ 0x2116c1, 0x0 },
+-	{ 0x117c1, 0x0 },
+-	{ 0x1117c1, 0x0 },
+-	{ 0x2117c1, 0x0 },
+-	{ 0x118c1, 0x0 },
+-	{ 0x1118c1, 0x0 },
+-	{ 0x2118c1, 0x0 },
+-	{ 0x120c1, 0x0 },
+-	{ 0x1120c1, 0x0 },
+-	{ 0x2120c1, 0x0 },
+-	{ 0x121c1, 0x0 },
+-	{ 0x1121c1, 0x0 },
+-	{ 0x2121c1, 0x0 },
+-	{ 0x122c1, 0x0 },
+-	{ 0x1122c1, 0x0 },
+-	{ 0x2122c1, 0x0 },
+-	{ 0x123c1, 0x0 },
+-	{ 0x1123c1, 0x0 },
+-	{ 0x2123c1, 0x0 },
+-	{ 0x124c1, 0x0 },
+-	{ 0x1124c1, 0x0 },
+-	{ 0x2124c1, 0x0 },
+-	{ 0x125c1, 0x0 },
+-	{ 0x1125c1, 0x0 },
+-	{ 0x2125c1, 0x0 },
+-	{ 0x126c1, 0x0 },
+-	{ 0x1126c1, 0x0 },
+-	{ 0x2126c1, 0x0 },
+-	{ 0x127c1, 0x0 },
+-	{ 0x1127c1, 0x0 },
+-	{ 0x2127c1, 0x0 },
+-	{ 0x128c1, 0x0 },
+-	{ 0x1128c1, 0x0 },
+-	{ 0x2128c1, 0x0 },
+-	{ 0x130c1, 0x0 },
+-	{ 0x1130c1, 0x0 },
+-	{ 0x2130c1, 0x0 },
+-	{ 0x131c1, 0x0 },
+-	{ 0x1131c1, 0x0 },
+-	{ 0x2131c1, 0x0 },
+-	{ 0x132c1, 0x0 },
+-	{ 0x1132c1, 0x0 },
+-	{ 0x2132c1, 0x0 },
+-	{ 0x133c1, 0x0 },
+-	{ 0x1133c1, 0x0 },
+-	{ 0x2133c1, 0x0 },
+-	{ 0x134c1, 0x0 },
+-	{ 0x1134c1, 0x0 },
+-	{ 0x2134c1, 0x0 },
+-	{ 0x135c1, 0x0 },
+-	{ 0x1135c1, 0x0 },
+-	{ 0x2135c1, 0x0 },
+-	{ 0x136c1, 0x0 },
+-	{ 0x1136c1, 0x0 },
+-	{ 0x2136c1, 0x0 },
+-	{ 0x137c1, 0x0 },
+-	{ 0x1137c1, 0x0 },
+-	{ 0x2137c1, 0x0 },
+-	{ 0x138c1, 0x0 },
+-	{ 0x1138c1, 0x0 },
+-	{ 0x2138c1, 0x0 },
+-	{ 0x10020, 0x0 },
+-	{ 0x110020, 0x0 },
+-	{ 0x210020, 0x0 },
+-	{ 0x11020, 0x0 },
+-	{ 0x111020, 0x0 },
+-	{ 0x211020, 0x0 },
+-	{ 0x12020, 0x0 },
+-	{ 0x112020, 0x0 },
+-	{ 0x212020, 0x0 },
+-	{ 0x13020, 0x0 },
+-	{ 0x113020, 0x0 },
+-	{ 0x213020, 0x0 },
+-	{ 0x20072, 0x0 },
+-	{ 0x20073, 0x0 },
+-	{ 0x20074, 0x0 },
+-	{ 0x100aa, 0x0 },
+-	{ 0x110aa, 0x0 },
+-	{ 0x120aa, 0x0 },
+-	{ 0x130aa, 0x0 },
+-	{ 0x20010, 0x0 },
+-	{ 0x120010, 0x0 },
+-	{ 0x220010, 0x0 },
+-	{ 0x20011, 0x0 },
+-	{ 0x120011, 0x0 },
+-	{ 0x220011, 0x0 },
+-	{ 0x100ae, 0x0 },
+-	{ 0x1100ae, 0x0 },
+-	{ 0x2100ae, 0x0 },
+-	{ 0x100af, 0x0 },
+-	{ 0x1100af, 0x0 },
+-	{ 0x2100af, 0x0 },
+-	{ 0x110ae, 0x0 },
+-	{ 0x1110ae, 0x0 },
+-	{ 0x2110ae, 0x0 },
+-	{ 0x110af, 0x0 },
+-	{ 0x1110af, 0x0 },
+-	{ 0x2110af, 0x0 },
+-	{ 0x120ae, 0x0 },
+-	{ 0x1120ae, 0x0 },
+-	{ 0x2120ae, 0x0 },
+-	{ 0x120af, 0x0 },
+-	{ 0x1120af, 0x0 },
+-	{ 0x2120af, 0x0 },
+-	{ 0x130ae, 0x0 },
+-	{ 0x1130ae, 0x0 },
+-	{ 0x2130ae, 0x0 },
+-	{ 0x130af, 0x0 },
+-	{ 0x1130af, 0x0 },
+-	{ 0x2130af, 0x0 },
+-	{ 0x20020, 0x0 },
+-	{ 0x120020, 0x0 },
+-	{ 0x220020, 0x0 },
+-	{ 0x100a0, 0x0 },
+-	{ 0x100a1, 0x0 },
+-	{ 0x100a2, 0x0 },
+-	{ 0x100a3, 0x0 },
+-	{ 0x100a4, 0x0 },
+-	{ 0x100a5, 0x0 },
+-	{ 0x100a6, 0x0 },
+-	{ 0x100a7, 0x0 },
+-	{ 0x110a0, 0x0 },
+-	{ 0x110a1, 0x0 },
+-	{ 0x110a2, 0x0 },
+-	{ 0x110a3, 0x0 },
+-	{ 0x110a4, 0x0 },
+-	{ 0x110a5, 0x0 },
+-	{ 0x110a6, 0x0 },
+-	{ 0x110a7, 0x0 },
+-	{ 0x120a0, 0x0 },
+-	{ 0x120a1, 0x0 },
+-	{ 0x120a2, 0x0 },
+-	{ 0x120a3, 0x0 },
+-	{ 0x120a4, 0x0 },
+-	{ 0x120a5, 0x0 },
+-	{ 0x120a6, 0x0 },
+-	{ 0x120a7, 0x0 },
+-	{ 0x130a0, 0x0 },
+-	{ 0x130a1, 0x0 },
+-	{ 0x130a2, 0x0 },
+-	{ 0x130a3, 0x0 },
+-	{ 0x130a4, 0x0 },
+-	{ 0x130a5, 0x0 },
+-	{ 0x130a6, 0x0 },
+-	{ 0x130a7, 0x0 },
+-	{ 0x2007c, 0x0 },
+-	{ 0x12007c, 0x0 },
+-	{ 0x22007c, 0x0 },
+-	{ 0x2007d, 0x0 },
+-	{ 0x12007d, 0x0 },
+-	{ 0x22007d, 0x0 },
+-	{ 0x400fd, 0x0 },
+-	{ 0x400c0, 0x0 },
+-	{ 0x90201, 0x0 },
+-	{ 0x190201, 0x0 },
+-	{ 0x290201, 0x0 },
+-	{ 0x90202, 0x0 },
+-	{ 0x190202, 0x0 },
+-	{ 0x290202, 0x0 },
+-	{ 0x90203, 0x0 },
+-	{ 0x190203, 0x0 },
+-	{ 0x290203, 0x0 },
+-	{ 0x90204, 0x0 },
+-	{ 0x190204, 0x0 },
+-	{ 0x290204, 0x0 },
+-	{ 0x90205, 0x0 },
+-	{ 0x190205, 0x0 },
+-	{ 0x290205, 0x0 },
+-	{ 0x90206, 0x0 },
+-	{ 0x190206, 0x0 },
+-	{ 0x290206, 0x0 },
+-	{ 0x90207, 0x0 },
+-	{ 0x190207, 0x0 },
+-	{ 0x290207, 0x0 },
+-	{ 0x90208, 0x0 },
+-	{ 0x190208, 0x0 },
+-	{ 0x290208, 0x0 },
+-	{ 0x10062, 0x0 },
+-	{ 0x10162, 0x0 },
+-	{ 0x10262, 0x0 },
+-	{ 0x10362, 0x0 },
+-	{ 0x10462, 0x0 },
+-	{ 0x10562, 0x0 },
+-	{ 0x10662, 0x0 },
+-	{ 0x10762, 0x0 },
+-	{ 0x10862, 0x0 },
+-	{ 0x11062, 0x0 },
+-	{ 0x11162, 0x0 },
+-	{ 0x11262, 0x0 },
+-	{ 0x11362, 0x0 },
+-	{ 0x11462, 0x0 },
+-	{ 0x11562, 0x0 },
+-	{ 0x11662, 0x0 },
+-	{ 0x11762, 0x0 },
+-	{ 0x11862, 0x0 },
+-	{ 0x12062, 0x0 },
+-	{ 0x12162, 0x0 },
+-	{ 0x12262, 0x0 },
+-	{ 0x12362, 0x0 },
+-	{ 0x12462, 0x0 },
+-	{ 0x12562, 0x0 },
+-	{ 0x12662, 0x0 },
+-	{ 0x12762, 0x0 },
+-	{ 0x12862, 0x0 },
+-	{ 0x13062, 0x0 },
+-	{ 0x13162, 0x0 },
+-	{ 0x13262, 0x0 },
+-	{ 0x13362, 0x0 },
+-	{ 0x13462, 0x0 },
+-	{ 0x13562, 0x0 },
+-	{ 0x13662, 0x0 },
+-	{ 0x13762, 0x0 },
+-	{ 0x13862, 0x0 },
+-	{ 0x20077, 0x0 },
+-	{ 0x10001, 0x0 },
+-	{ 0x11001, 0x0 },
+-	{ 0x12001, 0x0 },
+-	{ 0x13001, 0x0 },
+-	{ 0x10040, 0x0 },
+-	{ 0x10140, 0x0 },
+-	{ 0x10240, 0x0 },
+-	{ 0x10340, 0x0 },
+-	{ 0x10440, 0x0 },
+-	{ 0x10540, 0x0 },
+-	{ 0x10640, 0x0 },
+-	{ 0x10740, 0x0 },
+-	{ 0x10840, 0x0 },
+-	{ 0x10030, 0x0 },
+-	{ 0x10130, 0x0 },
+-	{ 0x10230, 0x0 },
+-	{ 0x10330, 0x0 },
+-	{ 0x10430, 0x0 },
+-	{ 0x10530, 0x0 },
+-	{ 0x10630, 0x0 },
+-	{ 0x10730, 0x0 },
+-	{ 0x10830, 0x0 },
+-	{ 0x11040, 0x0 },
+-	{ 0x11140, 0x0 },
+-	{ 0x11240, 0x0 },
+-	{ 0x11340, 0x0 },
+-	{ 0x11440, 0x0 },
+-	{ 0x11540, 0x0 },
+-	{ 0x11640, 0x0 },
+-	{ 0x11740, 0x0 },
+-	{ 0x11840, 0x0 },
+-	{ 0x11030, 0x0 },
+-	{ 0x11130, 0x0 },
+-	{ 0x11230, 0x0 },
+-	{ 0x11330, 0x0 },
+-	{ 0x11430, 0x0 },
+-	{ 0x11530, 0x0 },
+-	{ 0x11630, 0x0 },
+-	{ 0x11730, 0x0 },
+-	{ 0x11830, 0x0 },
+-	{ 0x12040, 0x0 },
+-	{ 0x12140, 0x0 },
+-	{ 0x12240, 0x0 },
+-	{ 0x12340, 0x0 },
+-	{ 0x12440, 0x0 },
+-	{ 0x12540, 0x0 },
+-	{ 0x12640, 0x0 },
+-	{ 0x12740, 0x0 },
+-	{ 0x12840, 0x0 },
+-	{ 0x12030, 0x0 },
+-	{ 0x12130, 0x0 },
+-	{ 0x12230, 0x0 },
+-	{ 0x12330, 0x0 },
+-	{ 0x12430, 0x0 },
+-	{ 0x12530, 0x0 },
+-	{ 0x12630, 0x0 },
+-	{ 0x12730, 0x0 },
+-	{ 0x12830, 0x0 },
+-	{ 0x13040, 0x0 },
+-	{ 0x13140, 0x0 },
+-	{ 0x13240, 0x0 },
+-	{ 0x13340, 0x0 },
+-	{ 0x13440, 0x0 },
+-	{ 0x13540, 0x0 },
+-	{ 0x13640, 0x0 },
+-	{ 0x13740, 0x0 },
+-	{ 0x13840, 0x0 },
+-	{ 0x13030, 0x0 },
+-	{ 0x13130, 0x0 },
+-	{ 0x13230, 0x0 },
+-	{ 0x13330, 0x0 },
+-	{ 0x13430, 0x0 },
+-	{ 0x13530, 0x0 },
+-	{ 0x13630, 0x0 },
+-	{ 0x13730, 0x0 },
+-	{ 0x13830, 0x0 },
+-};
+-
+-/* P0 message block paremeter for training firmware */
+-struct dram_cfg_param lpddr4_fsp0_cfg[] = {
+-	{ 0xd0000, 0x0 },
+-	{ 0x54000, 0x0 },
+-	{ 0x54001, 0x0 },
+-	{ 0x54002, 0x0 },
+-	{ 0x54003, 0xbb8 },
+-	{ 0x54004, 0x2 },
+-	{ 0x54005, ((LPDDR4_PHY_RON << 8) | LPDDR4_PHY_RTT) },//PHY Ron/Rtt
+-	{ 0x54006, LPDDR4_PHY_VREF_VALUE },
+-	{ 0x54007, 0x0 },
+-	{ 0x54008, 0x131f },
+-	{ 0x54009, 0xc8 },
+-	{ 0x5400a, 0x0 },
+-	{ 0x5400b, 0x2 },
+-	{ 0x5400c, 0x0 },
+-	{ 0x5400d, 0x0 },
+-	{ 0x5400e, 0x0 },
+-	{ 0x5400f, 0x0 },
+-	{ 0x54010, 0x0 },
+-	{ 0x54011, 0x0 },
+-	{ 0x54012, (LPDDR4_CS << 8) | (0x110 & 0xff) },
+-	{ 0x54013, 0x0 },
+-	{ 0x54014, 0x0 },
+-	{ 0x54015, 0x0 },
+-	{ 0x54016, 0x0 },
+-	{ 0x54017, 0x0 },
+-	{ 0x54018, 0x0 },
+-	{ 0x54019, 0x2dd4 },
+-	{ 0x5401a, (0x31 & 0xff00) | LPDDR4_MR3 },
+-	{ 0x5401b, 0x4d66 },
+-	{ 0x5401c, 0x4d08 },
+-	{ 0x5401d, 0x0 },
+-	{ 0x5401e, LPDDR4_MR22_RANK0/*0x16*/ },
+-	{ 0x5401f, 0x2dd4 },
+-	{ 0x54020, (0x31 & 0xff00) | LPDDR4_MR3 },
+-	{ 0x54021, 0x4d66 },
+-	{ 0x54022, 0x4d08 },
+-	{ 0x54023, 0x0 },
+-	{ 0x54024, LPDDR4_MR22_RANK1/*0x16*/ },
+-	{ 0x54025, 0x0 },
+-	{ 0x54026, 0x0 },
+-	{ 0x54027, 0x0 },
+-	{ 0x54028, 0x0 },
+-	{ 0x54029, 0x0 },
+-	{ 0x5402a, 0x0 },
+-	{ 0x5402b, 0x1000 },
+-	{ 0x5402c, LPDDR4_CS },
+-	{ 0x5402d, 0x0 },
+-	{ 0x5402e, 0x0 },
+-	{ 0x5402f, 0x0 },
+-	{ 0x54030, 0x0 },
+-	{ 0x54031, 0x0 },
+-	{ 0x54032, 0xd400 },
+-	{ 0x54033, (LPDDR4_MR3 << 8) | (0x312d & 0xff) },
+-	{ 0x54034, 0x6600 },
+-	{ 0x54035, 0x84d },
+-	{ 0x54036, 0x4d },
+-	{ 0x54037, (LPDDR4_MR22_RANK0 << 8)/*0x1600*/ },
+-	{ 0x54038, 0xd400 },
+-	{ 0x54039, (LPDDR4_MR3 << 8) | (0x312d & 0xff) },
+-	{ 0x5403a, 0x6600 },
+-	{ 0x5403b, 0x84d },
+-	{ 0x5403c, 0x4d },
+-	{ 0x5403d, (LPDDR4_MR22_RANK1 << 8)/*0x1600*/ },
+-	{ 0x5403e, 0x0 },
+-	{ 0x5403f, 0x0 },
+-	{ 0x54040, 0x0 },
+-	{ 0x54041, 0x0 },
+-	{ 0x54042, 0x0 },
+-	{ 0x54043, 0x0 },
+-	{ 0x54044, 0x0 },
+-	{ 0xd0000, 0x1 },
+-};
+-
+-/* P1 message block paremeter for training firmware */
+-struct dram_cfg_param lpddr4_fsp1_cfg[] = {
+-	{ 0xd0000, 0x0 },
+-	{ 0x54000, 0x0 },
+-	{ 0x54001, 0x0 },
+-	{ 0x54002, 0x101 },
+-	{ 0x54003, 0x190 },
+-	{ 0x54004, 0x2 },
+-	{ 0x54005, ((LPDDR4_PHY_RON << 8) | LPDDR4_PHY_RTT) },/* PHY Ron/Rtt */
+-	{ 0x54006, LPDDR4_PHY_VREF_VALUE },
+-	{ 0x54007, 0x0 },
+-	{ 0x54008, 0x121f },
+-	{ 0x54009, 0xc8 },
+-	{ 0x5400a, 0x0 },
+-	{ 0x5400b, 0x2 },
+-	{ 0x5400c, 0x0 },
+-	{ 0x5400d, 0x0 },
+-	{ 0x5400e, 0x0 },
+-	{ 0x5400f, 0x0 },
+-	{ 0x54010, 0x0 },
+-	{ 0x54011, 0x0 },
+-	{ 0x54012, (LPDDR4_CS << 8) | (0x110 & 0xff) },
+-	{ 0x54013, 0x0 },
+-	{ 0x54014, 0x0 },
+-	{ 0x54015, 0x0 },
+-	{ 0x54016, 0x0 },
+-	{ 0x54017, 0x0 },
+-	{ 0x54018, 0x0 },
+-	{ 0x54019, 0x84 },
+-	{ 0x5401a, (0x31 & 0xff00) | LPDDR4_MR3 },
+-	{ 0x5401b, 0x4d66 },
+-	{ 0x5401c, 0x4d08 },
+-	{ 0x5401d, 0x0 },
+-	{ 0x5401e, LPDDR4_MR22_RANK0/*0x16*/ },
+-	{ 0x5401f, 0x84 },
+-	{ 0x54020, (0x31 & 0xff00) | LPDDR4_MR3 },
+-	{ 0x54021, 0x4d66 },
+-	{ 0x54022, 0x4d08 },
+-	{ 0x54023, 0x0 },
+-	{ 0x54024, LPDDR4_MR22_RANK1/*0x16*/ },
+-	{ 0x54025, 0x0 },
+-	{ 0x54026, 0x0 },
+-	{ 0x54027, 0x0 },
+-	{ 0x54028, 0x0 },
+-	{ 0x54029, 0x0 },
+-	{ 0x5402a, 0x0 },
+-	{ 0x5402b, 0x1000 },
+-	{ 0x5402c, LPDDR4_CS },
+-	{ 0x5402d, 0x0 },
+-	{ 0x5402e, 0x0 },
+-	{ 0x5402f, 0x0 },
+-	{ 0x54030, 0x0 },
+-	{ 0x54031, 0x0 },
+-	{ 0x54032, 0x8400 },
+-	{ 0x54033, (LPDDR4_MR3 << 8) | (0x3100 & 0xff) },
+-	{ 0x54034, 0x6600 },
+-	{ 0x54035, 0x84d },
+-	{ 0x54036, 0x4d },
+-	{ 0x54037, (LPDDR4_MR22_RANK0 << 8)/*0x1600*/ },
+-	{ 0x54038, 0x8400 },
+-	{ 0x54039, (LPDDR4_MR3 << 8) | (0x3100 & 0xff) },
+-	{ 0x5403a, 0x6600 },
+-	{ 0x5403b, 0x84d },
+-	{ 0x5403c, 0x4d },
+-	{ 0x5403d, (LPDDR4_MR22_RANK1 << 8)/*0x1600*/ },
+-	{ 0x5403e, 0x0 },
+-	{ 0x5403f, 0x0 },
+-	{ 0x54040, 0x0 },
+-	{ 0x54041, 0x0 },
+-	{ 0x54042, 0x0 },
+-	{ 0x54043, 0x0 },
+-	{ 0x54044, 0x0 },
+-	{ 0xd0000, 0x1 },
+-};
+-
+-/* P1 message block paremeter for training firmware */
+-struct dram_cfg_param lpddr4_fsp2_cfg[] = {
+-	{ 0xd0000, 0x0 },
+-	{ 0x54000, 0x0 },
+-	{ 0x54001, 0x0 },
+-	{ 0x54002, 0x102 },
+-	{ 0x54003, 0x64 },
+-	{ 0x54004, 0x2 },
+-	{ 0x54005, ((LPDDR4_PHY_RON << 8) | LPDDR4_PHY_RTT) },//PHY Ron/Rtt
+-	{ 0x54006, LPDDR4_PHY_VREF_VALUE },
+-	{ 0x54007, 0x0 },
+-	{ 0x54008, 0x121f },
+-	{ 0x54009, 0xc8 },
+-	{ 0x5400a, 0x0 },
+-	{ 0x5400b, 0x2 },
+-	{ 0x5400c, 0x0 },
+-	{ 0x5400d, 0x0 },
+-	{ 0x5400e, 0x0 },
+-	{ 0x5400f, 0x0 },
+-	{ 0x54010, 0x0 },
+-	{ 0x54011, 0x0 },
+-	{ 0x54012, (LPDDR4_CS << 8) | (0x110 & 0xff) },
+-	{ 0x54013, 0x0 },
+-	{ 0x54014, 0x0 },
+-	{ 0x54015, 0x0 },
+-	{ 0x54016, 0x0 },
+-	{ 0x54017, 0x0 },
+-	{ 0x54018, 0x0 },
+-	{ 0x54019, 0x84 },
+-	{ 0x5401a, (0x31 & 0xff00) | LPDDR4_MR3 },
+-	{ 0x5401b, 0x4d66 },
+-	{ 0x5401c, 0x4d08 },
+-	{ 0x5401d, 0x0 },
+-	{ 0x5401e, LPDDR4_MR22_RANK0/*0x16*/ },
+-	{ 0x5401f, 0x84 },
+-	{ 0x54020, (0x31 & 0xff00) | LPDDR4_MR3 },
+-	{ 0x54021, 0x4d66 },
+-	{ 0x54022, 0x4d08 },
+-	{ 0x54023, 0x0 },
+-	{ 0x54024, LPDDR4_MR22_RANK1/*0x16*/ },
+-	{ 0x54025, 0x0 },
+-	{ 0x54026, 0x0 },
+-	{ 0x54027, 0x0 },
+-	{ 0x54028, 0x0 },
+-	{ 0x54029, 0x0 },
+-	{ 0x5402a, 0x0 },
+-	{ 0x5402b, 0x1000 },
+-	{ 0x5402c, LPDDR4_CS },
+-	{ 0x5402d, 0x0 },
+-	{ 0x5402e, 0x0 },
+-	{ 0x5402f, 0x0 },
+-	{ 0x54030, 0x0 },
+-	{ 0x54031, 0x0 },
+-	{ 0x54032, 0x8400 },
+-	{ 0x54033, (LPDDR4_MR3 << 8) | (0x3100 & 0xff) },
+-	{ 0x54034, 0x6600 },
+-	{ 0x54035, 0x84d },
+-	{ 0x54036, 0x4d },
+-	{ 0x54037, (LPDDR4_MR22_RANK0 << 8)/*0x1600*/ },
+-	{ 0x54038, 0x8400 },
+-	{ 0x54039, (LPDDR4_MR3 << 8) | (0x3100 & 0xff) },
+-	{ 0x5403a, 0x6600 },
+-	{ 0x5403b, 0x84d },
+-	{ 0x5403c, 0x4d },
+-	{ 0x5403d, (LPDDR4_MR22_RANK1 << 8)/*0x1600*/ },
+-	{ 0x5403e, 0x0 },
+-	{ 0x5403f, 0x0 },
+-	{ 0x54040, 0x0 },
+-	{ 0x54041, 0x0 },
+-	{ 0x54042, 0x0 },
+-	{ 0x54043, 0x0 },
+-	{ 0x54044, 0x0 },
+-	{ 0xd0000, 0x1 },
+-};
+-
+-/* P0 2D message block paremeter for training firmware */
+-struct dram_cfg_param lpddr4_fsp0_2d_cfg[] = {
+-	{ 0xd0000, 0x0 },
+-	{ 0x54000, 0x0 },
+-	{ 0x54001, 0x0 },
+-	{ 0x54002, 0x0 },
+-	{ 0x54003, 0xbb8 },
+-	{ 0x54004, 0x2 },
+-	{ 0x54005, ((LPDDR4_PHY_RON << 8) | LPDDR4_PHY_RTT) },//PHY Ron/Rtt
+-	{ 0x54006, LPDDR4_PHY_VREF_VALUE },
+-	{ 0x54007, 0x0 },
+-	{ 0x54008, 0x61 },
+-	{ 0x54009, 0xc8 },
+-	{ 0x5400a, 0x0 },
+-	{ 0x5400b, 0x2 },
+-	{ 0x5400c, 0x0 },
+-	{ 0x5400d, 0x0 },
+-	{ 0x5400e, 0x0 },
+-	{ 0x5400f, 0x100 },
+-	{ 0x54010, 0x1f7f },
+-	{ 0x54011, 0x0 },
+-	{ 0x54012, (LPDDR4_CS << 8) | (0x110 & 0xff) },
+-	{ 0x54013, 0x0 },
+-	{ 0x54014, 0x0 },
+-	{ 0x54015, 0x0 },
+-	{ 0x54016, 0x0 },
+-	{ 0x54017, 0x0 },
+-	{ 0x54018, 0x0 },
+-	{ 0x54019, 0x2dd4 },
+-	{ 0x5401a, (0x31 & 0xff00) | LPDDR4_MR3 },
+-	{ 0x5401b, 0x4d66 },
+-	{ 0x5401c, 0x4d08 },
+-	{ 0x5401d, 0x0 },
+-	{ 0x5401e, LPDDR4_MR22_RANK0/*0x16*/ },
+-	{ 0x5401f, 0x2dd4 },
+-	{ 0x54020, (0x31 & 0xff00) | LPDDR4_MR3 },
+-	{ 0x54021, 0x4d66 },
+-	{ 0x54022, 0x4d08 },
+-	{ 0x54023, 0x0 },
+-	{ 0x54024, LPDDR4_MR22_RANK1/*0x16*/ },
+-	{ 0x54025, 0x0 },
+-	{ 0x54026, 0x0 },
+-	{ 0x54027, 0x0 },
+-	{ 0x54028, 0x0 },
+-	{ 0x54029, 0x0 },
+-	{ 0x5402a, 0x0 },
+-	{ 0x5402b, 0x1000 },
+-	{ 0x5402c, LPDDR4_CS },
+-	{ 0x5402d, 0x0 },
+-	{ 0x5402e, 0x0 },
+-	{ 0x5402f, 0x0 },
+-	{ 0x54030, 0x0 },
+-	{ 0x54031, 0x0 },
+-	{ 0x54032, 0xd400 },
+-	{ 0x54033, (LPDDR4_MR3 << 8) | (0x312d & 0xff) },
+-	{ 0x54034, 0x6600 },
+-	{ 0x54035, 0x84d },
+-	{ 0x54036, 0x4d },
+-	{ 0x54037, (LPDDR4_MR22_RANK0 << 8)/*0x1600*/ },
+-	{ 0x54038, 0xd400 },
+-	{ 0x54039, (LPDDR4_MR3 << 8) | (0x312d & 0xff) },
+-	{ 0x5403a, 0x6600 },
+-	{ 0x5403b, 0x84d },
+-	{ 0x5403c, 0x4d },
+-	{ 0x5403d, (LPDDR4_MR22_RANK1 << 8)/*0x1600*/ },
+-	{ 0x5403e, 0x0 },
+-	{ 0x5403f, 0x0 },
+-	{ 0x54040, 0x0 },
+-	{ 0x54041, 0x0 },
+-	{ 0x54042, 0x0 },
+-	{ 0x54043, 0x0 },
+-	{ 0x54044, 0x0 },
+-	{ 0xd0000, 0x1 },
+-};
+-
+-/* DRAM PHY init engine image */
+-struct dram_cfg_param lpddr4_phy_pie[] = {
+-	{ 0xd0000, 0x0 },
+-	{ 0x90000, 0x10 },
+-	{ 0x90001, 0x400 },
+-	{ 0x90002, 0x10e },
+-	{ 0x90003, 0x0 },
+-	{ 0x90004, 0x0 },
+-	{ 0x90005, 0x8 },
+-	{ 0x90029, 0xb },
+-	{ 0x9002a, 0x480 },
+-	{ 0x9002b, 0x109 },
+-	{ 0x9002c, 0x8 },
+-	{ 0x9002d, 0x448 },
+-	{ 0x9002e, 0x139 },
+-	{ 0x9002f, 0x8 },
+-	{ 0x90030, 0x478 },
+-	{ 0x90031, 0x109 },
+-	{ 0x90032, 0x0 },
+-	{ 0x90033, 0xe8 },
+-	{ 0x90034, 0x109 },
+-	{ 0x90035, 0x2 },
+-	{ 0x90036, 0x10 },
+-	{ 0x90037, 0x139 },
+-	{ 0x90038, 0xf },
+-	{ 0x90039, 0x7c0 },
+-	{ 0x9003a, 0x139 },
+-	{ 0x9003b, 0x44 },
+-	{ 0x9003c, 0x630 },
+-	{ 0x9003d, 0x159 },
+-	{ 0x9003e, 0x14f },
+-	{ 0x9003f, 0x630 },
+-	{ 0x90040, 0x159 },
+-	{ 0x90041, 0x47 },
+-	{ 0x90042, 0x630 },
+-	{ 0x90043, 0x149 },
+-	{ 0x90044, 0x4f },
+-	{ 0x90045, 0x630 },
+-	{ 0x90046, 0x179 },
+-	{ 0x90047, 0x8 },
+-	{ 0x90048, 0xe0 },
+-	{ 0x90049, 0x109 },
+-	{ 0x9004a, 0x0 },
+-	{ 0x9004b, 0x7c8 },
+-	{ 0x9004c, 0x109 },
+-	{ 0x9004d, 0x0 },
+-	{ 0x9004e, 0x1 },
+-	{ 0x9004f, 0x8 },
+-	{ 0x90050, 0x0 },
+-	{ 0x90051, 0x45a },
+-	{ 0x90052, 0x9 },
+-	{ 0x90053, 0x0 },
+-	{ 0x90054, 0x448 },
+-	{ 0x90055, 0x109 },
+-	{ 0x90056, 0x40 },
+-	{ 0x90057, 0x630 },
+-	{ 0x90058, 0x179 },
+-	{ 0x90059, 0x1 },
+-	{ 0x9005a, 0x618 },
+-	{ 0x9005b, 0x109 },
+-	{ 0x9005c, 0x40c0 },
+-	{ 0x9005d, 0x630 },
+-	{ 0x9005e, 0x149 },
+-	{ 0x9005f, 0x8 },
+-	{ 0x90060, 0x4 },
+-	{ 0x90061, 0x48 },
+-	{ 0x90062, 0x4040 },
+-	{ 0x90063, 0x630 },
+-	{ 0x90064, 0x149 },
+-	{ 0x90065, 0x0 },
+-	{ 0x90066, 0x4 },
+-	{ 0x90067, 0x48 },
+-	{ 0x90068, 0x40 },
+-	{ 0x90069, 0x630 },
+-	{ 0x9006a, 0x149 },
+-	{ 0x9006b, 0x10 },
+-	{ 0x9006c, 0x4 },
+-	{ 0x9006d, 0x18 },
+-	{ 0x9006e, 0x0 },
+-	{ 0x9006f, 0x4 },
+-	{ 0x90070, 0x78 },
+-	{ 0x90071, 0x549 },
+-	{ 0x90072, 0x630 },
+-	{ 0x90073, 0x159 },
+-	{ 0x90074, 0xd49 },
+-	{ 0x90075, 0x630 },
+-	{ 0x90076, 0x159 },
+-	{ 0x90077, 0x94a },
+-	{ 0x90078, 0x630 },
+-	{ 0x90079, 0x159 },
+-	{ 0x9007a, 0x441 },
+-	{ 0x9007b, 0x630 },
+-	{ 0x9007c, 0x149 },
+-	{ 0x9007d, 0x42 },
+-	{ 0x9007e, 0x630 },
+-	{ 0x9007f, 0x149 },
+-	{ 0x90080, 0x1 },
+-	{ 0x90081, 0x630 },
+-	{ 0x90082, 0x149 },
+-	{ 0x90083, 0x0 },
+-	{ 0x90084, 0xe0 },
+-	{ 0x90085, 0x109 },
+-	{ 0x90086, 0xa },
+-	{ 0x90087, 0x10 },
+-	{ 0x90088, 0x109 },
+-	{ 0x90089, 0x9 },
+-	{ 0x9008a, 0x3c0 },
+-	{ 0x9008b, 0x149 },
+-	{ 0x9008c, 0x9 },
+-	{ 0x9008d, 0x3c0 },
+-	{ 0x9008e, 0x159 },
+-	{ 0x9008f, 0x18 },
+-	{ 0x90090, 0x10 },
+-	{ 0x90091, 0x109 },
+-	{ 0x90092, 0x0 },
+-	{ 0x90093, 0x3c0 },
+-	{ 0x90094, 0x109 },
+-	{ 0x90095, 0x18 },
+-	{ 0x90096, 0x4 },
+-	{ 0x90097, 0x48 },
+-	{ 0x90098, 0x18 },
+-	{ 0x90099, 0x4 },
+-	{ 0x9009a, 0x58 },
+-	{ 0x9009b, 0xa },
+-	{ 0x9009c, 0x10 },
+-	{ 0x9009d, 0x109 },
+-	{ 0x9009e, 0x2 },
+-	{ 0x9009f, 0x10 },
+-	{ 0x900a0, 0x109 },
+-	{ 0x900a1, 0x5 },
+-	{ 0x900a2, 0x7c0 },
+-	{ 0x900a3, 0x109 },
+-	{ 0x900a4, 0x10 },
+-	{ 0x900a5, 0x10 },
+-	{ 0x900a6, 0x109 },
+-	{ 0x40000, 0x811 },
+-	{ 0x40020, 0x880 },
+-	{ 0x40040, 0x0 },
+-	{ 0x40060, 0x0 },
+-	{ 0x40001, 0x4008 },
+-	{ 0x40021, 0x83 },
+-	{ 0x40041, 0x4f },
+-	{ 0x40061, 0x0 },
+-	{ 0x40002, 0x4040 },
+-	{ 0x40022, 0x83 },
+-	{ 0x40042, 0x51 },
+-	{ 0x40062, 0x0 },
+-	{ 0x40003, 0x811 },
+-	{ 0x40023, 0x880 },
+-	{ 0x40043, 0x0 },
+-	{ 0x40063, 0x0 },
+-	{ 0x40004, 0x720 },
+-	{ 0x40024, 0xf },
+-	{ 0x40044, 0x1740 },
+-	{ 0x40064, 0x0 },
+-	{ 0x40005, 0x16 },
+-	{ 0x40025, 0x83 },
+-	{ 0x40045, 0x4b },
+-	{ 0x40065, 0x0 },
+-	{ 0x40006, 0x716 },
+-	{ 0x40026, 0xf },
+-	{ 0x40046, 0x2001 },
+-	{ 0x40066, 0x0 },
+-	{ 0x40007, 0x716 },
+-	{ 0x40027, 0xf },
+-	{ 0x40047, 0x2800 },
+-	{ 0x40067, 0x0 },
+-	{ 0x40008, 0x716 },
+-	{ 0x40028, 0xf },
+-	{ 0x40048, 0xf00 },
+-	{ 0x40068, 0x0 },
+-	{ 0x40009, 0x720 },
+-	{ 0x40029, 0xf },
+-	{ 0x40049, 0x1400 },
+-	{ 0x40069, 0x0 },
+-	{ 0x4000a, 0xe08 },
+-	{ 0x4002a, 0xc15 },
+-	{ 0x4004a, 0x0 },
+-	{ 0x4006a, 0x0 },
+-	{ 0x4000b, 0x623 },
+-	{ 0x4002b, 0x15 },
+-	{ 0x4004b, 0x0 },
+-	{ 0x4006b, 0x0 },
+-	{ 0x4000c, 0x4028 },
+-	{ 0x4002c, 0x80 },
+-	{ 0x4004c, 0x0 },
+-	{ 0x4006c, 0x0 },
+-	{ 0x4000d, 0xe08 },
+-	{ 0x4002d, 0xc1a },
+-	{ 0x4004d, 0x0 },
+-	{ 0x4006d, 0x0 },
+-	{ 0x4000e, 0x623 },
+-	{ 0x4002e, 0x1a },
+-	{ 0x4004e, 0x0 },
+-	{ 0x4006e, 0x0 },
+-	{ 0x4000f, 0x4040 },
+-	{ 0x4002f, 0x80 },
+-	{ 0x4004f, 0x0 },
+-	{ 0x4006f, 0x0 },
+-	{ 0x40010, 0x2604 },
+-	{ 0x40030, 0x15 },
+-	{ 0x40050, 0x0 },
+-	{ 0x40070, 0x0 },
+-	{ 0x40011, 0x708 },
+-	{ 0x40031, 0x5 },
+-	{ 0x40051, 0x0 },
+-	{ 0x40071, 0x2002 },
+-	{ 0x40012, 0x8 },
+-	{ 0x40032, 0x80 },
+-	{ 0x40052, 0x0 },
+-	{ 0x40072, 0x0 },
+-	{ 0x40013, 0x2604 },
+-	{ 0x40033, 0x1a },
+-	{ 0x40053, 0x0 },
+-	{ 0x40073, 0x0 },
+-	{ 0x40014, 0x708 },
+-	{ 0x40034, 0xa },
+-	{ 0x40054, 0x0 },
+-	{ 0x40074, 0x2002 },
+-	{ 0x40015, 0x4040 },
+-	{ 0x40035, 0x80 },
+-	{ 0x40055, 0x0 },
+-	{ 0x40075, 0x0 },
+-	{ 0x40016, 0x60a },
+-	{ 0x40036, 0x15 },
+-	{ 0x40056, 0x1200 },
+-	{ 0x40076, 0x0 },
+-	{ 0x40017, 0x61a },
+-	{ 0x40037, 0x15 },
+-	{ 0x40057, 0x1300 },
+-	{ 0x40077, 0x0 },
+-	{ 0x40018, 0x60a },
+-	{ 0x40038, 0x1a },
+-	{ 0x40058, 0x1200 },
+-	{ 0x40078, 0x0 },
+-	{ 0x40019, 0x642 },
+-	{ 0x40039, 0x1a },
+-	{ 0x40059, 0x1300 },
+-	{ 0x40079, 0x0 },
+-	{ 0x4001a, 0x4808 },
+-	{ 0x4003a, 0x880 },
+-	{ 0x4005a, 0x0 },
+-	{ 0x4007a, 0x0 },
+-	{ 0x900a7, 0x0 },
+-	{ 0x900a8, 0x790 },
+-	{ 0x900a9, 0x11a },
+-	{ 0x900aa, 0x8 },
+-	{ 0x900ab, 0x7aa },
+-	{ 0x900ac, 0x2a },
+-	{ 0x900ad, 0x10 },
+-	{ 0x900ae, 0x7b2 },
+-	{ 0x900af, 0x2a },
+-	{ 0x900b0, 0x0 },
+-	{ 0x900b1, 0x7c8 },
+-	{ 0x900b2, 0x109 },
+-	{ 0x900b3, 0x10 },
+-	{ 0x900b4, 0x2a8 },
+-	{ 0x900b5, 0x129 },
+-	{ 0x900b6, 0x8 },
+-	{ 0x900b7, 0x370 },
+-	{ 0x900b8, 0x129 },
+-	{ 0x900b9, 0xa },
+-	{ 0x900ba, 0x3c8 },
+-	{ 0x900bb, 0x1a9 },
+-	{ 0x900bc, 0xc },
+-	{ 0x900bd, 0x408 },
+-	{ 0x900be, 0x199 },
+-	{ 0x900bf, 0x14 },
+-	{ 0x900c0, 0x790 },
+-	{ 0x900c1, 0x11a },
+-	{ 0x900c2, 0x8 },
+-	{ 0x900c3, 0x4 },
+-	{ 0x900c4, 0x18 },
+-	{ 0x900c5, 0xe },
+-	{ 0x900c6, 0x408 },
+-	{ 0x900c7, 0x199 },
+-	{ 0x900c8, 0x8 },
+-	{ 0x900c9, 0x8568 },
+-	{ 0x900ca, 0x108 },
+-	{ 0x900cb, 0x18 },
+-	{ 0x900cc, 0x790 },
+-	{ 0x900cd, 0x16a },
+-	{ 0x900ce, 0x8 },
+-	{ 0x900cf, 0x1d8 },
+-	{ 0x900d0, 0x169 },
+-	{ 0x900d1, 0x10 },
+-	{ 0x900d2, 0x8558 },
+-	{ 0x900d3, 0x168 },
+-	{ 0x900d4, 0x70 },
+-	{ 0x900d5, 0x788 },
+-	{ 0x900d6, 0x16a },
+-	{ 0x900d7, 0x1ff8 },
+-	{ 0x900d8, 0x85a8 },
+-	{ 0x900d9, 0x1e8 },
+-	{ 0x900da, 0x50 },
+-	{ 0x900db, 0x798 },
+-	{ 0x900dc, 0x16a },
+-	{ 0x900dd, 0x60 },
+-	{ 0x900de, 0x7a0 },
+-	{ 0x900df, 0x16a },
+-	{ 0x900e0, 0x8 },
+-	{ 0x900e1, 0x8310 },
+-	{ 0x900e2, 0x168 },
+-	{ 0x900e3, 0x8 },
+-	{ 0x900e4, 0xa310 },
+-	{ 0x900e5, 0x168 },
+-	{ 0x900e6, 0xa },
+-	{ 0x900e7, 0x408 },
+-	{ 0x900e8, 0x169 },
+-	{ 0x900e9, 0x6e },
+-	{ 0x900ea, 0x0 },
+-	{ 0x900eb, 0x68 },
+-	{ 0x900ec, 0x0 },
+-	{ 0x900ed, 0x408 },
+-	{ 0x900ee, 0x169 },
+-	{ 0x900ef, 0x0 },
+-	{ 0x900f0, 0x8310 },
+-	{ 0x900f1, 0x168 },
+-	{ 0x900f2, 0x0 },
+-	{ 0x900f3, 0xa310 },
+-	{ 0x900f4, 0x168 },
+-	{ 0x900f5, 0x1ff8 },
+-	{ 0x900f6, 0x85a8 },
+-	{ 0x900f7, 0x1e8 },
+-	{ 0x900f8, 0x68 },
+-	{ 0x900f9, 0x798 },
+-	{ 0x900fa, 0x16a },
+-	{ 0x900fb, 0x78 },
+-	{ 0x900fc, 0x7a0 },
+-	{ 0x900fd, 0x16a },
+-	{ 0x900fe, 0x68 },
+-	{ 0x900ff, 0x790 },
+-	{ 0x90100, 0x16a },
+-	{ 0x90101, 0x8 },
+-	{ 0x90102, 0x8b10 },
+-	{ 0x90103, 0x168 },
+-	{ 0x90104, 0x8 },
+-	{ 0x90105, 0xab10 },
+-	{ 0x90106, 0x168 },
+-	{ 0x90107, 0xa },
+-	{ 0x90108, 0x408 },
+-	{ 0x90109, 0x169 },
+-	{ 0x9010a, 0x58 },
+-	{ 0x9010b, 0x0 },
+-	{ 0x9010c, 0x68 },
+-	{ 0x9010d, 0x0 },
+-	{ 0x9010e, 0x408 },
+-	{ 0x9010f, 0x169 },
+-	{ 0x90110, 0x0 },
+-	{ 0x90111, 0x8b10 },
+-	{ 0x90112, 0x168 },
+-	{ 0x90113, 0x0 },
+-	{ 0x90114, 0xab10 },
+-	{ 0x90115, 0x168 },
+-	{ 0x90116, 0x0 },
+-	{ 0x90117, 0x1d8 },
+-	{ 0x90118, 0x169 },
+-	{ 0x90119, 0x80 },
+-	{ 0x9011a, 0x790 },
+-	{ 0x9011b, 0x16a },
+-	{ 0x9011c, 0x18 },
+-	{ 0x9011d, 0x7aa },
+-	{ 0x9011e, 0x6a },
+-	{ 0x9011f, 0xa },
+-	{ 0x90120, 0x0 },
+-	{ 0x90121, 0x1e9 },
+-	{ 0x90122, 0x8 },
+-	{ 0x90123, 0x8080 },
+-	{ 0x90124, 0x108 },
+-	{ 0x90125, 0xf },
+-	{ 0x90126, 0x408 },
+-	{ 0x90127, 0x169 },
+-	{ 0x90128, 0xc },
+-	{ 0x90129, 0x0 },
+-	{ 0x9012a, 0x68 },
+-	{ 0x9012b, 0x9 },
+-	{ 0x9012c, 0x0 },
+-	{ 0x9012d, 0x1a9 },
+-	{ 0x9012e, 0x0 },
+-	{ 0x9012f, 0x408 },
+-	{ 0x90130, 0x169 },
+-	{ 0x90131, 0x0 },
+-	{ 0x90132, 0x8080 },
+-	{ 0x90133, 0x108 },
+-	{ 0x90134, 0x8 },
+-	{ 0x90135, 0x7aa },
+-	{ 0x90136, 0x6a },
+-	{ 0x90137, 0x0 },
+-	{ 0x90138, 0x8568 },
+-	{ 0x90139, 0x108 },
+-	{ 0x9013a, 0xb7 },
+-	{ 0x9013b, 0x790 },
+-	{ 0x9013c, 0x16a },
+-	{ 0x9013d, 0x1f },
+-	{ 0x9013e, 0x0 },
+-	{ 0x9013f, 0x68 },
+-	{ 0x90140, 0x8 },
+-	{ 0x90141, 0x8558 },
+-	{ 0x90142, 0x168 },
+-	{ 0x90143, 0xf },
+-	{ 0x90144, 0x408 },
+-	{ 0x90145, 0x169 },
+-	{ 0x90146, 0xc },
+-	{ 0x90147, 0x0 },
+-	{ 0x90148, 0x68 },
+-	{ 0x90149, 0x0 },
+-	{ 0x9014a, 0x408 },
+-	{ 0x9014b, 0x169 },
+-	{ 0x9014c, 0x0 },
+-	{ 0x9014d, 0x8558 },
+-	{ 0x9014e, 0x168 },
+-	{ 0x9014f, 0x8 },
+-	{ 0x90150, 0x3c8 },
+-	{ 0x90151, 0x1a9 },
+-	{ 0x90152, 0x3 },
+-	{ 0x90153, 0x370 },
+-	{ 0x90154, 0x129 },
+-	{ 0x90155, 0x20 },
+-	{ 0x90156, 0x2aa },
+-	{ 0x90157, 0x9 },
+-	{ 0x90158, 0x0 },
+-	{ 0x90159, 0x400 },
+-	{ 0x9015a, 0x10e },
+-	{ 0x9015b, 0x8 },
+-	{ 0x9015c, 0xe8 },
+-	{ 0x9015d, 0x109 },
+-	{ 0x9015e, 0x0 },
+-	{ 0x9015f, 0x8140 },
+-	{ 0x90160, 0x10c },
+-	{ 0x90161, 0x10 },
+-	{ 0x90162, 0x8138 },
+-	{ 0x90163, 0x10c },
+-	{ 0x90164, 0x8 },
+-	{ 0x90165, 0x7c8 },
+-	{ 0x90166, 0x101 },
+-	{ 0x90167, 0x8 },
+-	{ 0x90168, 0x0 },
+-	{ 0x90169, 0x8 },
+-	{ 0x9016a, 0x8 },
+-	{ 0x9016b, 0x448 },
+-	{ 0x9016c, 0x109 },
+-	{ 0x9016d, 0xf },
+-	{ 0x9016e, 0x7c0 },
+-	{ 0x9016f, 0x109 },
+-	{ 0x90170, 0x0 },
+-	{ 0x90171, 0xe8 },
+-	{ 0x90172, 0x109 },
+-	{ 0x90173, 0x47 },
+-	{ 0x90174, 0x630 },
+-	{ 0x90175, 0x109 },
+-	{ 0x90176, 0x8 },
+-	{ 0x90177, 0x618 },
+-	{ 0x90178, 0x109 },
+-	{ 0x90179, 0x8 },
+-	{ 0x9017a, 0xe0 },
+-	{ 0x9017b, 0x109 },
+-	{ 0x9017c, 0x0 },
+-	{ 0x9017d, 0x7c8 },
+-	{ 0x9017e, 0x109 },
+-	{ 0x9017f, 0x8 },
+-	{ 0x90180, 0x8140 },
+-	{ 0x90181, 0x10c },
+-	{ 0x90182, 0x0 },
+-	{ 0x90183, 0x1 },
+-	{ 0x90184, 0x8 },
+-	{ 0x90185, 0x8 },
+-	{ 0x90186, 0x4 },
+-	{ 0x90187, 0x8 },
+-	{ 0x90188, 0x8 },
+-	{ 0x90189, 0x7c8 },
+-	{ 0x9018a, 0x101 },
+-	{ 0x90006, 0x0 },
+-	{ 0x90007, 0x0 },
+-	{ 0x90008, 0x8 },
+-	{ 0x90009, 0x0 },
+-	{ 0x9000a, 0x0 },
+-	{ 0x9000b, 0x0 },
+-	{ 0xd00e7, 0x400 },
+-	{ 0x90017, 0x0 },
+-	{ 0x9001f, 0x2a },
+-	{ 0x90026, 0x6a },
+-	{ 0x400d0, 0x0 },
+-	{ 0x400d1, 0x101 },
+-	{ 0x400d2, 0x105 },
+-	{ 0x400d3, 0x107 },
+-	{ 0x400d4, 0x10f },
+-	{ 0x400d5, 0x202 },
+-	{ 0x400d6, 0x20a },
+-	{ 0x400d7, 0x20b },
+-	{ 0x2003a, 0x2 },
+-	{ 0x2000b, 0x5d },
+-	{ 0x2000c, 0xbb },
+-	{ 0x2000d, 0x753 },
+-	{ 0x2000e, 0x2c },
+-	{ 0x12000b, 0xc },
+-	{ 0x12000c, 0x19 },
+-	{ 0x12000d, 0xfa },
+-	{ 0x12000e, 0x10 },
+-	{ 0x22000b, 0x3 },
+-	{ 0x22000c, 0x6 },
+-	{ 0x22000d, 0x3e },
+-	{ 0x22000e, 0x10 },
+-	{ 0x9000c, 0x0 },
+-	{ 0x9000d, 0x173 },
+-	{ 0x9000e, 0x60 },
+-	{ 0x9000f, 0x6110 },
+-	{ 0x90010, 0x2152 },
+-	{ 0x90011, 0xdfbd },
+-	{ 0x90012, 0x60 },
+-	{ 0x90013, 0x6152 },
+-	{ 0x20010, 0x5a },
+-	{ 0x20011, 0x3 },
+-	{ 0x40080, 0xe0 },
+-	{ 0x40081, 0x12 },
+-	{ 0x40082, 0xe0 },
+-	{ 0x40083, 0x12 },
+-	{ 0x40084, 0xe0 },
+-	{ 0x40085, 0x12 },
+-	{ 0x140080, 0xe0 },
+-	{ 0x140081, 0x12 },
+-	{ 0x140082, 0xe0 },
+-	{ 0x140083, 0x12 },
+-	{ 0x140084, 0xe0 },
+-	{ 0x140085, 0x12 },
+-	{ 0x240080, 0xe0 },
+-	{ 0x240081, 0x12 },
+-	{ 0x240082, 0xe0 },
+-	{ 0x240083, 0x12 },
+-	{ 0x240084, 0xe0 },
+-	{ 0x240085, 0x12 },
+-	{ 0x400fd, 0xf },
+-	{ 0x10011, 0x1 },
+-	{ 0x10012, 0x1 },
+-	{ 0x10013, 0x180 },
+-	{ 0x10018, 0x1 },
+-	{ 0x10002, 0x6209 },
+-	{ 0x100b2, 0x1 },
+-	{ 0x101b4, 0x1 },
+-	{ 0x102b4, 0x1 },
+-	{ 0x103b4, 0x1 },
+-	{ 0x104b4, 0x1 },
+-	{ 0x105b4, 0x1 },
+-	{ 0x106b4, 0x1 },
+-	{ 0x107b4, 0x1 },
+-	{ 0x108b4, 0x1 },
+-	{ 0x11011, 0x1 },
+-	{ 0x11012, 0x1 },
+-	{ 0x11013, 0x180 },
+-	{ 0x11018, 0x1 },
+-	{ 0x11002, 0x6209 },
+-	{ 0x110b2, 0x1 },
+-	{ 0x111b4, 0x1 },
+-	{ 0x112b4, 0x1 },
+-	{ 0x113b4, 0x1 },
+-	{ 0x114b4, 0x1 },
+-	{ 0x115b4, 0x1 },
+-	{ 0x116b4, 0x1 },
+-	{ 0x117b4, 0x1 },
+-	{ 0x118b4, 0x1 },
+-	{ 0x12011, 0x1 },
+-	{ 0x12012, 0x1 },
+-	{ 0x12013, 0x180 },
+-	{ 0x12018, 0x1 },
+-	{ 0x12002, 0x6209 },
+-	{ 0x120b2, 0x1 },
+-	{ 0x121b4, 0x1 },
+-	{ 0x122b4, 0x1 },
+-	{ 0x123b4, 0x1 },
+-	{ 0x124b4, 0x1 },
+-	{ 0x125b4, 0x1 },
+-	{ 0x126b4, 0x1 },
+-	{ 0x127b4, 0x1 },
+-	{ 0x128b4, 0x1 },
+-	{ 0x13011, 0x1 },
+-	{ 0x13012, 0x1 },
+-	{ 0x13013, 0x180 },
+-	{ 0x13018, 0x1 },
+-	{ 0x13002, 0x6209 },
+-	{ 0x130b2, 0x1 },
+-	{ 0x131b4, 0x1 },
+-	{ 0x132b4, 0x1 },
+-	{ 0x133b4, 0x1 },
+-	{ 0x134b4, 0x1 },
+-	{ 0x135b4, 0x1 },
+-	{ 0x136b4, 0x1 },
+-	{ 0x137b4, 0x1 },
+-	{ 0x138b4, 0x1 },
+-	{ 0x2003a, 0x2 },
+-	{ 0xc0080, 0x2 },
+-	{ 0xd0000, 0x1 },
+-};
+-
+-struct dram_fsp_msg lpddr4_dram_fsp_msg[] = {
+-	{
+-		/* P0 3000mts 1D */
+-		.drate = 3000,
+-		.fw_type = FW_1D_IMAGE,
+-		.fsp_cfg = lpddr4_fsp0_cfg,
+-		.fsp_cfg_num = ARRAY_SIZE(lpddr4_fsp0_cfg),
+-	},
+-	{
+-		/* P0 3000mts 2D */
+-		.drate = 3000,
+-		.fw_type = FW_2D_IMAGE,
+-		.fsp_cfg = lpddr4_fsp0_2d_cfg,
+-		.fsp_cfg_num = ARRAY_SIZE(lpddr4_fsp0_2d_cfg),
+-	},
+-	{
+-		/* P1 400mts 1D */
+-		.drate = 400,
+-		.fw_type = FW_1D_IMAGE,
+-		.fsp_cfg = lpddr4_fsp1_cfg,
+-		.fsp_cfg_num = ARRAY_SIZE(lpddr4_fsp1_cfg),
+-	},
+-	{
+-		/* P1 100mts 1D */
+-		.drate = 100,
+-		.fw_type = FW_1D_IMAGE,
+-		.fsp_cfg = lpddr4_fsp2_cfg,
+-		.fsp_cfg_num = ARRAY_SIZE(lpddr4_fsp2_cfg),
+-	},
+-};
+-
+-/* lpddr4 timing config params on EVK board */
+-struct dram_timing_info dram_timing = {
+-	.ddrc_cfg = lpddr4_ddrc_cfg,
+-	.ddrc_cfg_num = ARRAY_SIZE(lpddr4_ddrc_cfg),
+-	.ddrphy_cfg = lpddr4_ddrphy_cfg,
+-	.ddrphy_cfg_num = ARRAY_SIZE(lpddr4_ddrphy_cfg),
+-	.fsp_msg = lpddr4_dram_fsp_msg,
+-	.fsp_msg_num = ARRAY_SIZE(lpddr4_dram_fsp_msg),
+-	.ddrphy_trained_csr = lpddr4_ddrphy_trained_csr,
+-	.ddrphy_trained_csr_num = ARRAY_SIZE(lpddr4_ddrphy_trained_csr),
+-	.ddrphy_pie = lpddr4_phy_pie,
+-	.ddrphy_pie_num = ARRAY_SIZE(lpddr4_phy_pie),
+-};
+diff --git a/board/beacon/imx8mm/spl.c b/board/beacon/imx8mm/spl.c
+deleted file mode 100644
+index 1e5935788ff..00000000000
+--- a/board/beacon/imx8mm/spl.c
++++ /dev/null
+@@ -1,128 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-
+-#include <cpu_func.h>
+-#include <hang.h>
+-#include <init.h>
+-#include <log.h>
+-#include <spl.h>
 -#include <asm/io.h>
+-#include <asm/mach-imx/iomux-v3.h>
+-#include <asm/arch/clock.h>
+-#include <asm/arch/imx8mm_pins.h>
+-#include <asm/arch/sys_proto.h>
+-#include <asm/mach-imx/boot_mode.h>
+-#include <asm/arch/ddr.h>
+-#include <asm/sections.h>
 -
--DECLARE_GLOBAL_DATA_PTR;
+-#include <dm/uclass.h>
+-#include <dm/device.h>
+-#include <dm/uclass-internal.h>
+-#include <dm/device-internal.h>
 -
--int board_init(void)
+-#include <power/pmic.h>
+-#include <power/bd71837.h>
+-
+-int spl_board_boot_device(enum boot_device boot_dev_spl)
 -{
--	/* address of boot parameters */
--	gd->bd->bi_boot_params = CONFIG_TEXT_BASE + 0x50000;
+-	switch (boot_dev_spl) {
+-	case SD2_BOOT:
+-	case MMC2_BOOT:
+-		return BOOT_DEVICE_MMC1;
+-	case SD3_BOOT:
+-	case MMC3_BOOT:
+-		return BOOT_DEVICE_MMC2;
+-	case USB_BOOT:
+-		return BOOT_DEVICE_BOARD;
+-	case QSPI_BOOT:
+-		return BOOT_DEVICE_NOR;
+-	default:
+-		return BOOT_DEVICE_NONE;
+-	}
+-}
+-
+-static void spl_dram_init(void)
+-{
+-	ddr_init(&dram_timing);
+-}
+-
+-void spl_board_init(void)
+-{
+-	arch_misc_init();
+-}
+-
+-#ifdef CONFIG_SPL_LOAD_FIT
+-int board_fit_config_name_match(const char *name)
+-{
+-	/* Just empty function now - can't decide what to choose */
+-	debug("%s: %s\n", __func__, name);
+-
+-	return 0;
+-}
+-#endif
+-
+-static int power_init_board(void)
+-{
+-	struct udevice *dev;
+-	int ret;
+-
+-	ret = pmic_get("pmic@4b", &dev);
+-	if (ret == -ENODEV) {
+-		puts("No pmic\n");
+-		return 0;
+-	}
+-	if (ret != 0)
+-		return ret;
+-
+-	/* decrease RESET key long push time from the default 10s to 10ms */
+-	pmic_reg_write(dev, BD718XX_PWRONCONFIG1, 0x0);
+-
+-	/* unlock the PMIC regs */
+-	pmic_reg_write(dev, BD718XX_REGLOCK, 0x1);
+-
+-	/* increase VDD_SOC to typical value 0.85v before first DRAM access */
+-	pmic_reg_write(dev, BD718XX_BUCK1_VOLT_RUN, 0x0f);
+-
+-	/* increase VDD_DRAM to 0.975v for 3Ghz DDR */
+-	pmic_reg_write(dev, BD718XX_1ST_NODVS_BUCK_VOLT, 0x83);
+-
+-	/* lock the PMIC regs */
+-	pmic_reg_write(dev, BD718XX_REGLOCK, 0x11);
 -
 -	return 0;
 -}
 -
--#if IS_ENABLED(CONFIG_MULTI_DTB_FIT)
--int board_fit_config_name_match(const char *name)
+-void board_init_f(ulong dummy)
 -{
--	if (!strcmp(rzg_get_cpu_name(), "R8A774A1") && !strcmp(name, "r8a774a1-beacon-rzg2m-kit"))
--		return 0;
+-	struct udevice *dev;
+-	int ret;
 -
--	if (!strcmp(rzg_get_cpu_name(), "R8A774B1") && !strcmp(name, "r8a774b1-beacon-rzg2n-kit"))
--		return 0;
+-	arch_cpu_init();
+-	timer_init();
 -
--	if (!strcmp(rzg_get_cpu_name(), "R8A774E1") && !strcmp(name, "r8a774e1-beacon-rzg2h-kit"))
--		return 0;
+-	/* Clear the BSS. */
+-	memset(__bss_start, 0, __bss_end - __bss_start);
 -
--	return -1;
+-	ret = spl_early_init();
+-	if (ret) {
+-		debug("spl_early_init() failed: %d\n", ret);
+-		hang();
+-	}
+-
+-	ret = uclass_get_device_by_name(UCLASS_CLK,
+-					"clock-controller@30380000",
+-					&dev);
+-	if (ret < 0) {
+-		printf("Failed to find clock node. Check device tree\n");
+-		hang();
+-	}
+-
+-	preloader_console_init();
+-	enable_tzc380();
+-
+-	power_init_board();
+-
+-	/* DDR initialization */
+-	spl_dram_init();
+-
+-	board_init_r(NULL, 0);
 -}
--#endif
-diff --git a/configs/rzg2_beacon_defconfig b/configs/rzg2_beacon_defconfig
+diff --git a/configs/imx8mm_beacon_defconfig b/configs/imx8mm_beacon_defconfig
 deleted file mode 100644
-index d3f7061f04d..00000000000
---- a/configs/rzg2_beacon_defconfig
+index 32339e7f6e2..00000000000
+--- a/configs/imx8mm_beacon_defconfig
 +++ /dev/null
-@@ -1,46 +0,0 @@
--#include <configs/renesas_rcar3.config>
--
+@@ -1,151 +0,0 @@
 -CONFIG_ARM=y
--CONFIG_ARCH_RENESAS=y
--CONFIG_RCAR_GEN3=y
--CONFIG_SYS_MALLOC_F_LEN=0x2000
+-CONFIG_ARCH_IMX8M=y
+-CONFIG_TEXT_BASE=0x40200000
+-CONFIG_SYS_MALLOC_LEN=0x2000000
+-CONFIG_SPL_GPIO=y
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_ENV_SOURCE_FILE="imx8mm_beacon"
+-CONFIG_SF_DEFAULT_SPEED=10000000
 -CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0xFFFFE000
--CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a774a1-beacon-rzg2m-kit"
--CONFIG_TARGET_BEACON_RZG2M=y
--# CONFIG_SPL is not set
--# CONFIG_ARCH_FIXUP_FDT_MEMORY is not set
+-CONFIG_ENV_OFFSET=0xFFFFDE00
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mm-beacon-kit"
+-CONFIG_TARGET_IMX8MM_BEACON=y
+-CONFIG_SYS_MONITOR_LEN=524288
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_STACK=0x920000
+-CONFIG_SPL_TEXT_BASE=0x7E1000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x910000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+-CONFIG_SYS_BOOTM_LEN=0x800000
+-CONFIG_SYS_LOAD_ADDR=0x40480000
+-CONFIG_SPL=y
+-CONFIG_IMX_BOOTAUX=y
+-CONFIG_FIT=y
+-CONFIG_FIT_EXTERNAL_OFFSET=0x3000
+-CONFIG_SPL_LOAD_FIT=y
+-CONFIG_OF_SYSTEM_SETUP=y
 -CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else booti ${loadaddr} - ${fdt_addr}; fi"
--CONFIG_DEFAULT_FDT_FILE="r8a774a1-beacon-rzg2m-kit.dtb"
--# CONFIG_BOARD_EARLY_INIT_F is not set
+-CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; fi;"
+-CONFIG_DEFAULT_FDT_FILE="imx8mm-beacon-kit.dtb"
+-CONFIG_SYS_CBSIZE=2048
+-CONFIG_SYS_PBSIZE=2074
+-# CONFIG_BOARD_INIT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_HAVE_INIT_STACK=y
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
+-CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_POWER=y
+-CONFIG_SPL_WATCHDOG=y
+-CONFIG_HUSH_PARSER=y
+-CONFIG_SYS_PROMPT="u-boot=> "
+-# CONFIG_CMD_EXPORTENV is not set
+-# CONFIG_CMD_IMPORTENV is not set
+-# CONFIG_CMD_CRC32 is not set
+-CONFIG_CMD_CLK=y
+-CONFIG_CMD_FUSE=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
--CONFIG_CMD_MTD=y
 -CONFIG_CMD_PART=y
+-CONFIG_CMD_SPI=y
 -CONFIG_CMD_USB=y
--CONFIG_OF_LIST="renesas/r8a774a1-beacon-rzg2m-kit renesas/r8a774b1-beacon-rzg2n-kit renesas/r8a774e1-beacon-rzg2h-kit"
--CONFIG_MULTI_DTB_FIT_LZO=y
--CONFIG_MULTI_DTB_FIT_USER_DEFINED_AREA=y
+-CONFIG_CMD_USB_SDP=y
+-CONFIG_CMD_USB_MASS_STORAGE=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_PMIC=y
+-CONFIG_CMD_REGULATOR=y
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_EXT4=y
+-CONFIG_CMD_EXT4_WRITE=y
+-CONFIG_CMD_FAT=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_SPL_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
 -CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_ENV_MMC_DEVICE_INDEX=2
 -CONFIG_ENV_MMC_EMMC_HW_PARTITION=2
+-CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="FEC"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SPL_DM=y
+-CONFIG_SPL_CLK_COMPOSITE_CCF=y
+-CONFIG_CLK_COMPOSITE_CCF=y
+-CONFIG_SPL_CLK_IMX8MM=y
+-CONFIG_CLK_IMX8MM=y
+-CONFIG_USB_FUNCTION_FASTBOOT=y
+-CONFIG_FASTBOOT_BUF_ADDR=0x42800000
+-CONFIG_FASTBOOT_BUF_SIZE=0x20000000
+-CONFIG_FASTBOOT_FLASH=y
+-CONFIG_FASTBOOT_FLASH_MMC_DEV=2
+-CONFIG_MXC_GPIO=y
 -CONFIG_DM_PCA953X=y
--CONFIG_SYS_I2C_RCAR_I2C=y
--CONFIG_SYS_I2C_RCAR_IIC=y
+-CONFIG_DM_I2C=y
+-CONFIG_SUPPORT_EMMC_BOOT=y
 -CONFIG_MMC_IO_VOLTAGE=y
 -CONFIG_MMC_UHS_SUPPORT=y
--CONFIG_MMC_HS200_SUPPORT=y
--CONFIG_RENESAS_SDHI=y
+-CONFIG_MMC_HS400_ES_SUPPORT=y
+-CONFIG_MMC_HS400_SUPPORT=y
+-CONFIG_FSL_USDHC=y
+-CONFIG_MTD=y
 -CONFIG_DM_MTD=y
--CONFIG_SPI_FLASH_WINBOND=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_BAR=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_MTD=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_FEC_MXC=y
+-CONFIG_MII=y
+-CONFIG_PHYLIB=y
 -CONFIG_PHY_ATHEROS=y
--CONFIG_PHY_MICREL=y
--CONFIG_PHY_MICREL_KSZ90X1=y
--CONFIG_RENESAS_RAVB=y
--CONFIG_SPECIFY_CONSOLE_INDEX=y
+-CONFIG_SPL_PHY=y
+-CONFIG_SPL_NOP_PHY=y
+-CONFIG_PINCTRL=y
+-CONFIG_SPL_PINCTRL=y
+-CONFIG_PINCTRL_IMX8M=y
+-CONFIG_POWER_DOMAIN=y
+-CONFIG_IMX8M_POWER_DOMAIN=y
+-CONFIG_DM_PMIC=y
+-# CONFIG_SPL_PMIC_CHILDREN is not set
+-CONFIG_DM_PMIC_BD71837=y
+-CONFIG_SPL_DM_PMIC_BD71837=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_BD71837=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_MXC_UART=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_NXP_FSPI=y
 -CONFIG_SYSRESET=y
+-CONFIG_SPL_SYSRESET=y
 -CONFIG_SYSRESET_PSCI=y
+-CONFIG_SYSRESET_WATCHDOG=y
 -CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
+-CONFIG_SPL_USB_HOST=y
 -CONFIG_USB_EHCI_HCD=y
--CONFIG_USB_EHCI_GENERIC=y
+-CONFIG_MXC_USB_OTG_HACTIVE=y
 -CONFIG_USB_STORAGE=y
-diff --git a/doc/board/renesas/renesas.rst b/doc/board/renesas/renesas.rst
-index c0cefc15dd8..8945e2eab22 100644
---- a/doc/board/renesas/renesas.rst
-+++ b/doc/board/renesas/renesas.rst
-@@ -81,19 +81,13 @@ Renesas is a SoC solutions provider for automotive and industrial applications.
-    +--------+------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
-    | RZ     | A1               | :doc:`arm <build-env-aarch32>`   | R7S72100 (RZ/A1H)  | Cortex A9          | GR-PEACH                                     | grpeach_defconfig                |
-    |        +------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
--   |        |                  |                                  |                    |                    | Beacon EmbeddedWorks RZ/G2M SoM              | rzg2_beacon_defconfig            |
--   |        |                  |                                  | R8A774A1 (RZ/G2M)  | Cortex A53 or A57  +----------------------------------------------+----------------------------------+
--   |        |                  |                                  |                    |                    | HopeRun HiHope RZ/G2M                        | hihope_rzg2_defconfig            |
-+   |        |                  |                                  | R8A774A1 (RZ/G2M)  | Cortex A53 or A57  | HopeRun HiHope RZ/G2M                        | hihope_rzg2_defconfig            |
-    |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
--   |        |                  |                                  |                    |                    | Beacon EmbeddedWorks RZ/G2N SoM              | rzg2_beacon_defconfig            |
--   |        | G2               | :doc:`arm64 <build-env-aarch64>` | R8A774B1 (RZ/G2N)  | Cortex A57         +----------------------------------------------+----------------------------------+
--   |        |                  |                                  |                    |                    | HopeRun HiHope RZ/G2N                        | hihope_rzg2_defconfig            |
-+   |        | G2               | :doc:`arm64 <build-env-aarch64>` | R8A774B1 (RZ/G2N)  | Cortex A57         | HopeRun HiHope RZ/G2N                        | hihope_rzg2_defconfig            |
-    |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
-    |        |                  |                                  | R8A774C0 (RZ/G2E)  | Cortex A53         | Silicon Linux RZ/G2E evaluation kit (EK874)  | silinux_ek874_defconfig          |
-    |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
--   |        |                  |                                  |                    |                    | Beacon EmbeddedWorks RZ/G2H SoM              | rzg2_beacon_defconfig            |
--   |        |                  |                                  | R8A774E1 (RZ/G2H)  | Cortex A53 or A57  +----------------------------------------------+----------------------------------+
--   |        |                  |                                  |                    |                    | HopeRun HiHope RZ/G2H                        | hihope_rzg2_defconfig            |
-+   |        |                  |                                  | R8A774E1 (RZ/G2H)  | Cortex A53 or A57  | HopeRun HiHope RZ/G2H                        | hihope_rzg2_defconfig            |
-    +--------+------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
-    |        |                  |                                  | R9A06G032 (RZ/N1D) |                    | Schneider RZ/N1D board                       | rzn1_snarc_defconfig             |
-    |        | :doc:`N1 <rzn1>` | :doc:`arm <build-env-aarch32>`   +--------------------+ Cortex A7          +----------------------------------------------+----------------------------------+
-diff --git a/include/configs/beacon-rzg2m.h b/include/configs/beacon-rzg2m.h
+-CONFIG_USB_GADGET=y
+-CONFIG_SPL_USB_GADGET=y
+-CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+-CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+-CONFIG_CI_UDC=y
+-CONFIG_SDP_LOADADDR=0x40400000
+-CONFIG_SPL_USB_SDP_SUPPORT=y
+-# CONFIG_WATCHDOG_AUTOSTART is not set
+-CONFIG_IMX_WATCHDOG=y
+diff --git a/configs/imx8mm_beacon_fspi_defconfig b/configs/imx8mm_beacon_fspi_defconfig
 deleted file mode 100644
-index 65c01835cc6..00000000000
---- a/include/configs/beacon-rzg2m.h
+index 8c66fad7390..00000000000
+--- a/configs/imx8mm_beacon_fspi_defconfig
 +++ /dev/null
-@@ -1,67 +0,0 @@
+@@ -1,152 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_ARCH_IMX8M=y
+-CONFIG_TEXT_BASE=0x40200000
+-CONFIG_SYS_MALLOC_LEN=0x2000000
+-CONFIG_SPL_GPIO=y
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=40000000
+-CONFIG_SF_DEFAULT_MODE=0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0xFFFFDE00
+-CONFIG_IMX_CONFIG="board/nxp/imx8mm_evk/imximage-8mm-lpddr4-fspi.cfg"
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mm-beacon-kit"
+-CONFIG_TARGET_IMX8MM_BEACON=y
+-CONFIG_SYS_MONITOR_LEN=524288
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_STACK=0x920000
+-CONFIG_SPL_TEXT_BASE=0x7E2000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x910000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+-CONFIG_SYS_BOOTM_LEN=0x800000
+-CONFIG_SYS_LOAD_ADDR=0x40480000
+-CONFIG_SPL=y
+-CONFIG_FIT=y
+-CONFIG_FIT_EXTERNAL_OFFSET=0x3000
+-CONFIG_SPL_LOAD_FIT=y
+-CONFIG_OF_SYSTEM_SETUP=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; fi;"
+-CONFIG_DEFAULT_FDT_FILE="imx8mm-beacon-kit.dtb"
+-CONFIG_SYS_CBSIZE=2048
+-CONFIG_SYS_PBSIZE=2074
+-# CONFIG_BOARD_INIT is not set
+-CONFIG_SPL_MAX_SIZE=0x25000
+-CONFIG_SPL_PAD_TO=0x0
+-CONFIG_SPL_BOARD_INIT=y
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_HAVE_INIT_STACK=y
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
+-CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_NOR_SUPPORT=y
+-CONFIG_SPL_POWER=y
+-CONFIG_SPL_WATCHDOG=y
+-CONFIG_HUSH_PARSER=y
+-CONFIG_SYS_PROMPT="u-boot=> "
+-# CONFIG_CMD_EXPORTENV is not set
+-# CONFIG_CMD_IMPORTENV is not set
+-# CONFIG_CMD_CRC32 is not set
+-CONFIG_CMD_CLK=y
+-CONFIG_CMD_FUSE=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PART=y
+-CONFIG_CMD_SPI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_USB_SDP=y
+-CONFIG_CMD_USB_MASS_STORAGE=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_PMIC=y
+-CONFIG_CMD_REGULATOR=y
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_EXT4=y
+-CONFIG_CMD_EXT4_WRITE=y
+-CONFIG_CMD_FAT=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_SPL_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_ENV_MMC_DEVICE_INDEX=2
+-CONFIG_ENV_MMC_EMMC_HW_PARTITION=2
+-CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="FEC"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SPL_DM=y
+-CONFIG_SPL_CLK_COMPOSITE_CCF=y
+-CONFIG_CLK_COMPOSITE_CCF=y
+-CONFIG_SPL_CLK_IMX8MM=y
+-CONFIG_CLK_IMX8MM=y
+-CONFIG_MXC_GPIO=y
+-CONFIG_DM_PCA953X=y
+-CONFIG_DM_I2C=y
+-CONFIG_SUPPORT_EMMC_BOOT=y
+-CONFIG_MMC_IO_VOLTAGE=y
+-CONFIG_MMC_UHS_SUPPORT=y
+-CONFIG_MMC_HS400_ES_SUPPORT=y
+-CONFIG_MMC_HS400_SUPPORT=y
+-CONFIG_FSL_USDHC=y
+-CONFIG_MTD=y
+-CONFIG_DM_MTD=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_BAR=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_MTD=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_FEC_MXC=y
+-CONFIG_MII=y
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_SPL_PHY=y
+-CONFIG_SPL_NOP_PHY=y
+-CONFIG_PINCTRL=y
+-CONFIG_SPL_PINCTRL=y
+-CONFIG_PINCTRL_IMX8M=y
+-CONFIG_POWER_DOMAIN=y
+-CONFIG_IMX8M_POWER_DOMAIN=y
+-CONFIG_DM_PMIC=y
+-# CONFIG_SPL_PMIC_CHILDREN is not set
+-CONFIG_DM_PMIC_BD71837=y
+-CONFIG_SPL_DM_PMIC_BD71837=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_BD71837=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_MXC_UART=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_NXP_FSPI=y
+-CONFIG_SYSRESET=y
+-CONFIG_SPL_SYSRESET=y
+-CONFIG_SYSRESET_PSCI=y
+-CONFIG_SYSRESET_WATCHDOG=y
+-CONFIG_USB=y
+-CONFIG_SPL_USB_HOST=y
+-CONFIG_USB_EHCI_HCD=y
+-CONFIG_MXC_USB_OTG_HACTIVE=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_USB_GADGET=y
+-CONFIG_SPL_USB_GADGET=y
+-CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+-CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+-CONFIG_CI_UDC=y
+-CONFIG_SDP_LOADADDR=0x40400000
+-CONFIG_USB_GADGET_DOWNLOAD=y
+-CONFIG_SPL_USB_SDP_SUPPORT=y
+-CONFIG_IMX_WATCHDOG=y
+-CONFIG_SPL_CRC32=y
+-CONFIG_FSPI_CONF_HEADER=y
+-CONFIG_FSPI_CONF_FILE="fspi_header.bin"
+diff --git a/doc/board/beacon/beacon-imx8mm.rst b/doc/board/beacon/beacon-imx8mm.rst
+deleted file mode 100644
+index 8bf983bff77..00000000000
+--- a/doc/board/beacon/beacon-imx8mm.rst
++++ /dev/null
+@@ -1,55 +0,0 @@
+-.. SPDX-License-Identifier: GPL-2.0+
+-
+-U-Boot for the Beacon EmbeddedWorks i.MX8M Mini Devkit
+-======================================================
+-
+-Quick Start
+------------
+-
+-- Build the ARM Trusted firmware binary
+-- Get DDR firmware
+-- Build U-Boot
+-- Burn U-Boot to microSD Card
+-- Boot
+-
+-Get and Build the ARM Trusted firmware
+---------------------------------------
+-
+-.. code-block:: bash
+-
+-    $ git clone https://github.com/nxp-imx/imx-atf.git -b v2.6
+-    $ make PLAT=imx8mm bl31 CROSS_COMPILE=aarch64-linux-gnu-
+-    $ cp build/imx8mm/release/bl31.bin ../
+-
+-Get the DDR firmware
+---------------------
+-
+-.. code-block:: bash
+-
+-    $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.15.bin
+-    $ chmod +x firmware-imx-8.15.bin
+-    $ ./firmware-imx-8.15
+-    $ cp firmware-imx-8.15/firmware/ddr/synopsys/lpddr4*.bin .
+-
+-Build U-Boot
+-------------
+-
+-.. code-block:: bash
+-
+-    $ make imx8mm_beacon_defconfig
+-    $ make CROSS_COMPILE=aarch64-linux-gnu-
+-
+-Burn U-Boot to microSD Card
+----------------------------
+-
+-.. code-block:: bash
+-
+-    $ sudo dd if=flash.bin of=/dev/sd[x] bs=1024 seek=33
+-
+-Boot
+-----
+-
+-Set baseboard DIP switches for micoSD Card:
+-- S11 (1:8) 01101000
+-- S10 (1:8) 11001000
+-- S17 (1:8) 0110xxxx
+diff --git a/doc/board/beacon/index.rst b/doc/board/beacon/index.rst
+index bf62b09fbad..3b99e76f6d5 100644
+--- a/doc/board/beacon/index.rst
++++ b/doc/board/beacon/index.rst
+@@ -7,5 +7,4 @@ Beacon
+    :maxdepth: 2
+ 
+    beacon-imx8mp
+-   beacon-imx8mm
+    beacon-imx8mn
+diff --git a/include/configs/imx8mm_beacon.h b/include/configs/imx8mm_beacon.h
+deleted file mode 100644
+index 2ec7f3d8b6f..00000000000
+--- a/include/configs/imx8mm_beacon.h
++++ /dev/null
+@@ -1,40 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * Copyright (C) 2020 Compass Electronics Group, LLC
+- * Copyright 2020 Compass Electronics Group, LLC
 - */
 -
--#ifndef __BEACON_RZG2M_H
--#define __BEACON_RZG2M_H
+-#ifndef __IMX8MM_BEACON_H
+-#define __IMX8MM_BEACON_H
 -
--#include "rcar-gen3-common.h"
+-#include <linux/sizes.h>
+-#include <asm/arch/imx-regs.h>
 -
--#undef CFG_EXTRA_ENV_SETTINGS
+-#define UBOOT_ITB_OFFSET			0x57C00
+-#define FSPI_CONF_BLOCK_SIZE		0x1000
+-#define UBOOT_ITB_OFFSET_FSPI  \
+-	(UBOOT_ITB_OFFSET + FSPI_CONF_BLOCK_SIZE)
+-#ifdef CONFIG_FSPI_CONF_HEADER
+-#define CFG_SYS_UBOOT_BASE  \
+-	(QSPI0_AMBA_BASE + UBOOT_ITB_OFFSET_FSPI)
+-#else
+-#define CFG_SYS_UBOOT_BASE	\
+-	(QSPI0_AMBA_BASE + CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 512)
+-#endif
 -
--#define CFG_EXTRA_ENV_SETTINGS		\
--	"usb_pgood_delay=2000\0"	\
--	"script=boot.scr\0" \
--	"image=Image\0" \
--	"console=ttySC0,115200\0" \
--	"fdt_addr=0x48000000\0" \
--	"loadaddr=0x48080000\0" \
--	"boot_fdt=try\0" \
--	"fdt_file=" CONFIG_DEFAULT_FDT_FILE "\0" \
--	"initrd_addr=0x43800000\0"		\
--	"mmcdev=1\0" \
--	"mmcpart=1\0" \
--	"mmcrootpart=2\0" \
--	"finduuid=part uuid mmc ${mmcdev}:${mmcrootpart} uuid\0" \
--	"mmcautodetect=yes\0" \
--	"mmcargs=setenv bootargs console=${console} " \
--	" root=PARTUUID=${uuid} rootwait rw ${optargs}\0" \
--	"loadbootscript=load mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};\0" \
--	"bootscript=echo Running bootscript from mmc ...; " \
--		"source\0" \
--	"loadimage=load mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}\0" \
--	"loadfdt=load mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
--	"mmcboot=echo Booting from mmc ...; " \
--		"run finduuid; run mmcargs; " \
--		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
--			"if run loadfdt; then " \
--				"booti ${loadaddr} - ${fdt_addr}; " \
--			"else " \
--				"echo WARN: Cannot load the DT; " \
--			"fi; " \
--		"else " \
--			"echo wait for boot; " \
--		"fi;\0" \
--	"netargs=setenv bootargs ${jh_clk} console=${console} " \
--		"root=/dev/nfs " \
--		"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
--	"netboot=echo Booting from net ...; " \
--		"run netargs;  " \
--		"if test ${ip_dyn} = yes; then " \
--			"setenv get_cmd dhcp; " \
--		"else " \
--			"setenv get_cmd tftp; " \
--		"fi; " \
--		"${get_cmd} ${loadaddr} ${image}; " \
--		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
--			"if ${get_cmd} ${fdt_addr} ${fdt_file}; then " \
--				"booti ${loadaddr} - ${fdt_addr}; " \
--			"else " \
--				"echo WARN: Cannot load the DT; " \
--			"fi; " \
--		"else " \
--			"booti; " \
--		"fi;\0"
+-#ifdef CONFIG_XPL_BUILD
+-/* malloc f used before GD_FLG_FULL_MALLOC_INIT set */
+-#define CFG_MALLOC_F_ADDR		0x930000
+-/* For RAW image gives a error info not panic */
 -
--#endif /* __BEACON_RZG2M_H */
+-#endif
+-
+-/* Link Definitions */
+-
+-#define CFG_SYS_INIT_RAM_ADDR        0x40000000
+-#define CFG_SYS_INIT_RAM_SIZE        0x200000
+-
+-#define CFG_SYS_SDRAM_BASE		0x40000000
+-#define PHYS_SDRAM			0x40000000
+-#define PHYS_SDRAM_SIZE		0x80000000 /* 2GB DDR */
+-
+-#endif
 -- 
 2.53.0
 
