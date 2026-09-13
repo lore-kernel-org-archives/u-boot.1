@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9684C88E5C
-	for <u-boot@archiver.kernel.org>; Sun, 13 Sep 2026 23:20:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB672C88E5C
+	for <u-boot@archiver.kernel.org>; Sun, 13 Sep 2026 23:20:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9480780D64;
-	Sun, 13 Sep 2026 23:20:24 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8140480DC2;
+	Sun, 13 Sep 2026 23:20:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZRCWjNntsgle; Sun, 13 Sep 2026 23:20:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 2045680CDF
+ id oEQfLdoT7VOE; Sun, 13 Sep 2026 23:20:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org B7A1780CEA
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789341609;
-	b=aH5xENFVzOGuxA4RThEl0ABvHvmAtQrOBxbSnVOjVt8sS/Fi6gN7JUroMCp3S2RVGHV9
-	 0gyiB8dMyOxrxfkiaEQg9velwDC3hEx9/+jsEGO65TZHFqYFR156q87wOdvZfDoxWyguM
-	 3o7vqEAu8KcCiEsioBspf5wkPUXfhyjcoHjEzvAAMLER7tkPwkHCbdvv4A1wjrx9XJ7Jc
-	 I3GSmibL6Ws7mloBQscJS3QPJiQ5hoKgVxST8fazRa6hddb9/AbsIkXE2ofKQybX5T7pV
-	 htX5mfBY0TxX3pBUB9zixM6Z59gsBEwViZKV2m588nkSM3cPpM0ytdCcYYsTx1XQdWg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789341611;
+	b=AR55xIbBxB1rTLEi3ubow6vMN1gAYK29IkW91biwtQ9NracsRWowExuugRFniG5hucdR
+	 CuNqy6aRJWdAibVayY8RRCkinC9ogh10nzTj5bqN/J7qi+r/2GNiKPYg5cvq184Pe1mzB
+	 cHnIgSdTZpbrqd16+s/WjbdYGVIQ2ycJ4bXJFS6AZtZVOASni29yq8wGZHaTNHY0qeXzN
+	 qPaSuprnYwJNhQgQw9R589f0QDclkPSo1Jk7exK15GvPpGtImoa5uzztqW0KXjSlSM2ec
+	 D5bHxmV608lg/iveQ/aNoM0vrDoknmoXF51RLNAevsvE3hbAccqA6maLe09EOOiaOsA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789341609;
+	c=relaxed/relaxed; t=1789341611;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,129 +31,131 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=rTmhg8pWFj+Go0c9XA4aD/DQ5nHu1ouSXtS3rJ9Ml/M=;
-	b=k54+wHosCpfj9bIWctqFQ94hp/U9sMd07njT6QvyuXH0TKRp+i1fCaGynfAi1cgqFK4n
-	 xj9C9v+d8TjkXyncGDg6D0ScOr4lsWP8zSSbETG5vbOzYa8IY5q3rXyHYNVXGO3jBHemI
-	 N8EVnclQkMl3yiWJlzI1H0aezaT2ydOwcjuyUJOtGMm6ngVRTzuRnv3t+VCDVGSYmcDTl
-	 3iIzf8S3RYATlZMYRs2w8ZvdXm+GGVFpgaC7QL8fY7Hhvddh/jGN5pd7eO7bApI6I54M6
-	 3/nL/mXOM6bd1+L9g0/g8Ny6Jqpnp0U2zcmiOVE9D38OZk1+ns+ugMb5+QfjPTX+PbQ==
+	bh=IyTaF5Vi0j4XSorhL5BMwuwioiLrEHisUGOyV55m4mo=;
+	b=leVLCOhIT/KpZADki67BWaPPVA/UxSAFi6ryoRjKOMdJvT0Am7Sn81Y9FE0BguLaDKZI
+	 3hX4TJb0eCHX2N61xPqPMUkdtJr0mASCm99XtjWxG4RgcU1ydqjHK9cWeEA6HxQ1oZC/z
+	 /K6PDP7gQ1N3ObkHWg5M7i83Idf2ppir1OKF9qsRlHAfYTAMXBmzM8k5yPzzq127oRA2u
+	 Qm8FevyyqDPs3hTfwm27v92mD769ep5E/uID0K9Ub6SjqVdVcW+zUwjLtLbfIUtF8x8Py
+	 QKpM/ApdyRTLwC55zl/n+r5IJM8Fg3BJAO4pteb7HDMGZuTu4PAzdUJnmX4JL6z1o4w==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789341609;
-	bh=rTmhg8pWFj+Go0c9XA4aD/DQ5nHu1ouSXtS3rJ9Ml/M=;
+	d=lists.u-boot-project.org; s=default; t=1789341611;
+	bh=IyTaF5Vi0j4XSorhL5BMwuwioiLrEHisUGOyV55m4mo=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=R5/bAcRtidJhQS7yeDf2d/pIjos6vHIFelGAgBuIot1V4rS7OlmSyJI365peDa6O/
-	 Tt7dK3ABwswwXagphomo2rMUyBoenMg/C2Al54cpHFocK7izc/lxZ9tixiFoIeL19z
-	 RYu1X5b1nVn/kEXOyNBTneDT89lTfMYv+GXEcFJpL1jXj4SngWnHRXoSYmkm+i072c
-	 pEMTjUDv4r50O7OgJzmOKzXWY/ocTfWEiVfrOOPwqUrh0F+EFHw38CnlCwJdsl22yI
-	 0IZuaEJ33Mlr+klotQkQjouVfeiXM8NQTdxKcOZvMc1c7tZBRLvltgoSNbihDzW1Hi
-	 uqQrWXNLzl3Eg==
+	b=BOEK+8OlBY223nh2M7HDbY/Jc2UHKsDflG0Q4tnVoToiq4P2ZJRbTw8vG4t2Nh5Ol
+	 a+AQjjiCfEEJfIlcUawXd1x56WfhE1Y7dCohhZrlk6FIul1NCIJqcy/+h/AtYeBLsD
+	 1BMhKMhxgdLDoSex9YlqfXrWw5peMk05SuUCp9+ldHrM9MK4wuxniQ/wGMaP13Kzeh
+	 ytX7TSPOjW2voEQtA84G0FSh4DCJpifc/OBTmF6nuzWh1NdKATMwJnJsuT3oI7osWi
+	 M+sbK5FKeeYlfQKuEtB/M2o4Ynx/RHwBunV2qDsRX8DnmhZfM2g26VBoHKSYrr9/5n
+	 AA7Vdl9n/8DOA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2045680CDF;
-	Sun, 13 Sep 2026 23:20:09 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id DAFB9259
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B7A1780CEA;
+	Sun, 13 Sep 2026 23:20:11 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A28D423F
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CD3D540599
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:40 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9444740599
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dukTKA7EmZg8 for <u-boot@lists.u-boot-project.org>;
- Sun, 13 Sep 2026 15:52:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 8E8EF4058C
+ id W-6nQ6HUwNYm for <u-boot@lists.u-boot-project.org>;
+ Sun, 13 Sep 2026 15:52:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 339244058C
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:34::11"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789314758;
- b=CdtjUaASOB8Walh2QmDL9Fiuvh1pasq/qS0r9nLoaorPdMdJ4cWC/bIseAP1vDV2cn0B
- JOHHHkHd3GKFnrhptJukk7TTMTISUJ1cifusQX1EWeFEruC0/2xI/qorDiL+zogojEq2O
- 74OnO0WGAJQ6/VHWfm0zNCRhndHseuxz50xyFqsa3IVBU8R7EKtDm3VDGRVqqXUSVhyZR
- w85nxGRhfiQTxjumljVTbjvaYqTzY2+hkh+I9KZsAEXiUB2d71/R+gGlNPMfYRiOIfcxq
- GhAOAf+qFOGuNbiWMhbKLiHafE0mrG5a5W6H6FP7xUBG4k7Hqj72lavdykJQaadTBXg==
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::f2b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789314769;
+ b=Y6+DiJqQDbBUUz20PHoyb0lNbxgGA+rORQ1kVYDmiOWiEN9Grg7siV2JPROEkEn72xwJ
+ 3N0N08xs1+xVA+uZBgR3tnEiDNtIk1+bMmdT+Il+zza6O9F3jtW9HfWVEQyC/FDt2ER9+
+ sJzd4lu/0/bp7w1C+YaDDqjpeFAxxq/hX/X2uiR5LUM5USlVl6sp1ylfwYnncw64AXY48
+ IkGJuTzmkQt43lrL33shVVN6UtfxDm5xw+KOpoegWnTDiuNmZXH4dsEM0Nk59b5FDvJaW
+ lHaTdZhxNItGU4ZDsz+YYy1XIvmvWQJZqLwPUVIdpEb/hY+bGVaETqfI9wM4L/5OT0g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789314758;
+ c=relaxed/relaxed; t=1789314769;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=rTmhg8pWFj+Go0c9XA4aD/DQ5nHu1ouSXtS3rJ9Ml/M=;
- b=rCP/VB7zHf4KLbu7ZKKxlznAqfiCkqKgGyRW5/9fgCb+wE+K0LZ3vdu66z9Fo0Q7Y6tM
- D4E/wRZdKdBU4HbIDpacQ4CZm9O3yVd7P3GZMzKnPbQwz+VY0g7d6inZO8nDzmzEBuexn
- 1r17681KZaGmYDkhF/FG/X3hMHOULfLtFub1UJ2HlklGXkjUtg6wiEAcrzhcYq/rnRsZi
- ggkusqhxVO5dhrjCYt3Gi2Y9X5m4H60Im11APiLuM3O1mguAEiTZXpt6v/5Y+oS02CJ+y
- +U3DsZm78FHnIBO4mBXZLHnPsflGWZCMae78D5h9mGaX07UUPF7GwyyCLBiyA0LcA0w==
+ bh=IyTaF5Vi0j4XSorhL5BMwuwioiLrEHisUGOyV55m4mo=;
+ b=MzZLXKLg+6ga/AYevm5j+Pr1pVPCY1LsNelAzM27U4MadSH6xEUL7XWSn2T/d/Htn0DX
+ 62Y93GD1zUDvBz1wMEtXxXa0ufGAgpCMQUY4/9hBwLSYZnONpFyjKloeG1NKo2oOXRCCN
+ GQ/1H/4rZUQV9D+gw6kbbRAY+bjpc0Y8klr+943OGVM3e0mM+IqI2d52W3jQdz103XYEp
+ IZIK+RAKK+exBAidumRjUdjzxwPPYMXPQgqoXa37qSe+/05LV3jFTLOts5ba1t2LNZa5i
+ 7UEGzG5TlO96I6eSjPiFF0PQt7zVKUcFzuLToeIEZRn4mtoaKQ3GTWc71G+YnCeyaKw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=d5o6lAat; 
- arc=none smtp.remote-ip="2607:f8b0:4864:34::11"
+ header.s=20251104 header.b="i/ACgDkE"; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::f2b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:34::11; helo=mail-qk2-x11.google.com;
+ client-ip=2607:f8b0:4864:20::f2b; helo=mail-qv1-xf2b.google.com;
  envelope-from=aford173@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=d5o6lAat
-Received: from mail-qk2-x11.google.com (mail-qk2-x11.google.com
- [IPv6:2607:f8b0:4864:34::11])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8E8EF4058C
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:37 +0000 (UTC)
-Received: by mail-qk2-x11.google.com with SMTP id
- d75a77b69052e-530de452c33so20072911cf.1
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 08:52:37 -0700 (PDT)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=i/ACgDkE
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 339244058C
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:48 +0000 (UTC)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-9103f5b813aso18191286d6.3
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 08:52:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789314756; x=1789919556;
+ d=gmail.com; s=20251104; t=1789314767; x=1789919567;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=rTmhg8pWFj+Go0c9XA4aD/DQ5nHu1ouSXtS3rJ9Ml/M=;
- b=d5o6lAatNt8Pd8IiadheGjnfCTJgJAnpOFUk6h0T2WgxSreU8k72pT3hSEcut2sTiL
- J4c6PStw3D2/pN1MFEV8V/MPxLs6f9zpCgHI9ogayffvcqYHyEgJJdLCueowqk/T9owd
- P7eT/eSzF1ubMyxVG88IU01QjB0TrdcpA/W2K1BfNcBv7ZgBFxsyRqkYwVlNk453r5hZ
- kQvmePBILCkClwIdQ3d9WZyqkOP3tWrkqd+WBhsBILzuwdDHPATMddNcJMYA8ZUbXGeg
- WCU7PWgh5O3HPNvbx4u8oOw4ulxxaOrCcYJy2WOxbJ1tGezM/aRqpx9d0q0utH16eZmg
- mYSg==
+ bh=IyTaF5Vi0j4XSorhL5BMwuwioiLrEHisUGOyV55m4mo=;
+ b=i/ACgDkEgnXKt5fAMWZCnky+A2xlbUr/wbnfMkzt3eGZx2qAHgw8KHkz3avrc9AynG
+ 2lI/vdeDB3vSYFeywR4IINaZ57a0435seCk9P2DAx0+TLODHCq7YyzmcL7+0Qw8DYFgO
+ KYvlq9o2cTO4ir3GdhNPRMF7h0h8f6zv0Mvsdk5dCw68E1AHUUlKx7TuUv2UuGSKKrqT
+ kZoT+HlwPybqGAo+6PM0u+41kdfU5qHhAxLGbiL39IC3NDEbpD/ezgCCigAcF2Z5MPbd
+ Cu5KZVW+YOUGmShDRSrBKu2bHVNzYqAeWDEKSap8usqt8Rt/GMskffa6y4sI7rYi9g0u
+ N0BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789314756; x=1789919556;
+ d=1e100.net; s=20251104; t=1789314767; x=1789919567;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=rTmhg8pWFj+Go0c9XA4aD/DQ5nHu1ouSXtS3rJ9Ml/M=;
- b=gjv9NPbsoNywwSp2gZ75/q5ZuQduH3sqp3ORM5+kSRDX0+TxLep7wPBICaMLJKz91Q
- nFxUqDMk8LPh6yzJFwhfO/+cUCngNBDecvcag9hYFfbhzTbjec7G1GnmIVZ+1xfIr2IE
- XKN7nfMFUMU2qj7vOz7hVq055SsF3WX48O/RiSNdXKzEuqFwzAUJBA+WID3xR2Afy1dK
- lukd10hqJ4jpMpa/ANGNbG5UkBedn3ixPQgLBY3DcuXf8u7lzDO7p4KIsmHdyEQot/cy
- WR7Dm9r3INFOl4iyoVVLbYsFeJgh837Yhe4mGTsGS9IkBRknAYB5H09Ilip593YThNuC
- lY4A==
-X-Gm-Message-State: AFuF++mpW1xB0nAafLtFEE27cCBqjri7FN0xKUkiifbORVM2+46enhbe
- j9yczRY3rI2ni2lsPDSmtKFZVRclZtFY9mCsi067jr3JiZmkqUMqzQhHnr2XmQ==
-X-Gm-Gg: AYBFou1wK1yBfgfZF4g9OhvH8EHXLxKmwsYt+tlRbxOovkAKZyJ/qsCxGLXozA/evK4
- FrXaRb4snbwX8McF7zP9nXBwob66FcCpD5Hil1wBDBi5K4bOg+FjCsr5s2t23169RWyAtg9ZZ8h
- hNJlu/3yZ2mhNI5UDpxit/klJPBqHtsbrb435pkx7+okp2VFCxhaQsSuMG1edgu7+G09gknjs0Y
- m9IK0kRELZUcL7T5LsL/lALp5JywTFJBRAaLeXUswuIxpBEa3I0SF6GBJLYnSSE4UWy7/HjdcBl
- hX41gtQAXxaAnrRa/v0psuBbyANQmnm3DwVWpCh0Rvw4YS1nPwz8Wpqhw9lXbcSspAJcb3eGq/t
- TkNzLNi25wTJ4es9UrhTie4bzLlMZIlYs6DZS77Oh1zsw8eYMcuIqcFA3T8CiWkILQK5JRJU1fJ
- ZQV3dx85gkuHhNn+oV2guxibp3FB84VIYzfH9fsA+yCh0bmhcB7XQD7hzrxM8EYuLOApGIemesI
- J11B6kD/Y8HjoyWOou8Z6cCOaTB5pk65ccYZynl4CiLx/eFGuo4
-X-Received: by 2002:ac8:5a10:0:b0:530:e429:ea81 with SMTP id
- d75a77b69052e-530e429f293mr134806181cf.11.1789314755851; 
- Sun, 13 Sep 2026 08:52:35 -0700 (PDT)
+ bh=IyTaF5Vi0j4XSorhL5BMwuwioiLrEHisUGOyV55m4mo=;
+ b=aLCqgYlJd+21ItcqwlSnKew6C+NRVZMiWhdau81GJvdLYtT3inm/CTJoTCJdbqG6LZ
+ 2VcfZqsycOSXV1erEhputfwQEbPM1grr+zNqnEflAgQGJDLVfYxbkFoSih5anyY0IF9n
+ MLSm1y0NcicWWtii+nutac20VDYqkEqjPjB9ldx5aGHYx7A+jMnh0tiy8fEaS0EK6RM7
+ E7qUg4r+38ziJCNxWxw2IduCZDfNjBGEmiOgB8IO0WR9U/QbJpsjVTUCC4tFYLdjmY5a
+ u0VJRQuDVfIQb72Q8alj489IkgpNOON0ZTaryPqyuUzgeKiSoEeD1uYazt4lZhNe6CCj
+ bZHA==
+X-Gm-Message-State: AFuF++k64vCpqKLlHQ9VarlMOUjGLIvs9j0pzvGBhFAmgvM+ZoTfDZ67
+ lWYL4nbOPBuiy/QxOUPZv9TxAasjYaNkaIbwAsWYReC+IUvak0lPZVVb2utawg==
+X-Gm-Gg: AYBFou0kp8jaA5FKDSQnABNBoAqVHwzkBt3rIOXjFAR9l+m97cqY5tIfiVY8Iq7RhKv
+ tERJDbM4ox0o/Xxa23vckKlYAO+Wch84GPIAWL8m1lNGwjA26TOIiKOxWYJA38HixhfHUHwn8pE
+ v2TiwFJJ5fLAAvx+Tn4/LjXQyho7WhapeH9FTnfox31PB2KQ/tWFscubcHH+qCGoxERaFX7cseC
+ KrIVcqEslFqcy3FZCzbP8Klwvjrc1nyk1KfDEoIEIDQjwrtJrbGiqdVY1vu4B4dUFjGMch+/dSy
+ BBSC02uwvhoFuwjjMmqyc80E2HnKV2EcBaa7JROOWb5hqINwj4eWM9QY4sYRPkwaJhbCu1Gdg4N
+ 2Rf5O5gQPI6bB2E7TcgPGKXNSwWSNzQBRWP3uotasZ95KRao0M8j+lZEYsOltRjP3JB2qQ2tTGi
+ eo5qzPPjRPz8Sd27A6kFwrms+toOUdg7Tb86kBmq7vh3XseuRp9uwkD70sUEF3erchjPWSNiAzb
+ 5FGJtc9byCAiW39J7O8/sruV5mDvS0WLsSlOYkCuAm6tdNEFvDa
+X-Received: by 2002:a05:620a:288b:b0:939:8856:d8d9 with SMTP id
+ af79cd13be357-939ea27cc52mr1739814885a.41.1789314767018; 
+ Sun, 13 Sep 2026 08:52:47 -0700 (PDT)
 Received: from aford-System-Version.lan (c-73-94-212-116.hsd1.mn.comcast.net.
  [73.94.212.116]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-9120f4d3a50sm72984396d6.40.2026.09.13.08.52.34
+ af79cd13be357-939e803dc90sm759283185a.17.2026.09.13.08.52.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 13 Sep 2026 08:52:35 -0700 (PDT)
+ Sun, 13 Sep 2026 08:52:46 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
  Adam Ford <aford173@gmail.com>
-Subject: [PATCH] board: logicpd: Remove AM3517 EVM support
-Date: Sun, 13 Sep 2026 10:52:31 -0500
-Message-ID: <20260913155231.84127-1-aford173@gmail.com>
+Subject: [PATCH] board: davinci: Remove DA850 EVM support
+Date: Sun, 13 Sep 2026 10:52:42 -0500
+Message-ID: <20260913155242.84148-1-aford173@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -171,943 +173,1258 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Remove the Logic PD AM3517 EVM board support along with its defconfig,
-config header, U-Boot device tree overlays and Kconfig target. The
-stale copy of am3517-evm-ui.dtsi in arch/arm/dts is dropped too, since
-the board is built from the upstream device tree.
+Remove the TI DA850 EVM board support along with its defconfigs,
+config header, U-Boot device tree overlay and Kconfig target. The
+OMAP-L138 LCDK continues to live in board/davinci/da8xxevm, so only
+the DA850 EVM specific pieces are dropped and the shared README files
+are updated to no longer describe the EVM.
+
+The SPL linker script in the board directory is kept since it is used
+by every DaVinci board.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 ---
- arch/arm/dts/am3517-evm-u-boot.dtsi   |  54 -------
- arch/arm/dts/am3517-evm-ui.dtsi       | 217 --------------------------
- arch/arm/dts/am3517-u-boot.dtsi       |   9 --
- arch/arm/mach-omap2/omap3/Kconfig     |  10 --
- board/logicpd/am3517evm/Kconfig       |  14 --
- board/logicpd/am3517evm/MAINTAINERS   |   6 -
- board/logicpd/am3517evm/Makefile      |   9 --
- board/logicpd/am3517evm/am3517evm.c   | 152 ------------------
- board/logicpd/am3517evm/am3517evm.env |  20 ---
- board/logicpd/am3517evm/am3517evm.h   | 194 -----------------------
- configs/am3517_evm_defconfig          |  96 ------------
- include/configs/am3517_evm.h          |  42 -----
- 12 files changed, 823 deletions(-)
- delete mode 100644 arch/arm/dts/am3517-evm-u-boot.dtsi
- delete mode 100644 arch/arm/dts/am3517-evm-ui.dtsi
- delete mode 100644 arch/arm/dts/am3517-u-boot.dtsi
- delete mode 100644 board/logicpd/am3517evm/Kconfig
- delete mode 100644 board/logicpd/am3517evm/MAINTAINERS
- delete mode 100644 board/logicpd/am3517evm/Makefile
- delete mode 100644 board/logicpd/am3517evm/am3517evm.c
- delete mode 100644 board/logicpd/am3517evm/am3517evm.env
- delete mode 100644 board/logicpd/am3517evm/am3517evm.h
- delete mode 100644 configs/am3517_evm_defconfig
- delete mode 100644 include/configs/am3517_evm.h
+ arch/arm/dts/da850-evm-u-boot.dtsi    |  45 ---
+ arch/arm/mach-davinci/Kconfig         |   7 -
+ board/davinci/da8xxevm/Kconfig        |  28 --
+ board/davinci/da8xxevm/MAINTAINERS    |   9 -
+ board/davinci/da8xxevm/Makefile       |   1 -
+ board/davinci/da8xxevm/README.da850   |  23 +-
+ board/davinci/da8xxevm/da850evm.c     | 433 --------------------------
+ configs/da850evm_defconfig            | 116 -------
+ configs/da850evm_direct_nor_defconfig |  95 ------
+ configs/da850evm_nand_defconfig       | 119 -------
+ doc/README.davinci                    |  29 +-
+ drivers/mtd/nand/raw/Kconfig          |   1 -
+ include/configs/da850evm.h            | 172 ----------
+ 13 files changed, 6 insertions(+), 1072 deletions(-)
+ delete mode 100644 arch/arm/dts/da850-evm-u-boot.dtsi
+ delete mode 100644 board/davinci/da8xxevm/da850evm.c
+ delete mode 100644 configs/da850evm_defconfig
+ delete mode 100644 configs/da850evm_direct_nor_defconfig
+ delete mode 100644 configs/da850evm_nand_defconfig
+ delete mode 100644 include/configs/da850evm.h
 
-diff --git a/arch/arm/dts/am3517-evm-u-boot.dtsi b/arch/arm/dts/am3517-evm-u-boot.dtsi
+diff --git a/arch/arm/dts/da850-evm-u-boot.dtsi b/arch/arm/dts/da850-evm-u-boot.dtsi
 deleted file mode 100644
-index 8d486f0020d..00000000000
---- a/arch/arm/dts/am3517-evm-u-boot.dtsi
+index 309130479a5..00000000000
+--- a/arch/arm/dts/da850-evm-u-boot.dtsi
 +++ /dev/null
-@@ -1,54 +0,0 @@
+@@ -1,45 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
 -/*
-- * Copyright (C) 2017
-- * Logic PD - http://www.logicpd.com
+- * da850-evm U-Boot Additions
+- *
+- * Copyright (C) 2017 Logic PD, Inc.
+- * Copyright (C) Adam Ford
 - */
--
--#include "omap3-u-boot.dtsi"
 -
 -/ {
--	aliases {
--		/delete-property/ serial0;
--		/delete-property/ serial1;
+-	soc@1c00000 {
+-		bootph-pre-ram;
 -	};
 -
--	ocp@68000000 {
--		/delete-node/ bandgap@48002524;
--	};
--};
--
--&gpio1 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&gpio2 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&gpio3 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&gpio5 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&gpio6 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&mmc2 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&mmc3 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&uart1 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&uart2 {
--	/delete-property/ bootph-pre-ram;
--};
-diff --git a/arch/arm/dts/am3517-evm-ui.dtsi b/arch/arm/dts/am3517-evm-ui.dtsi
-deleted file mode 100644
-index 75ad42179ae..00000000000
---- a/arch/arm/dts/am3517-evm-ui.dtsi
-+++ /dev/null
-@@ -1,217 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-only
--/*
-- * Copyright (C) 2018 Logic PD, Inc - https://www.logicpd.com/
-- */
--
--#include <dt-bindings/input/input.h>
--
--/ {
--	codec1 {
--		compatible = "simple-audio-card";
--		simple-audio-card,name = "tlv320aic23-hifi";
--
--		simple-audio-card,widgets =
--			"Microphone", "Mic In",
--			"Line", "Line In",
--			"Line", "Line Out";
--
--		simple-audio-card,routing =
--			"Line Out", "LOUT",
--			"Line Out", "ROUT",
--			"LLINEIN", "Line In",
--			"RLINEIN", "Line In",
--			"MICIN", "Mic In";
--
--		simple-audio-card,format = "i2s";
--		simple-audio-card,bitclock-master = <&sound_master>;
--		simple-audio-card,frame-master = <&sound_master>;
--
--		simple-audio-card,cpu {
--			sound-dai = <&mcbsp1>;
--		};
--
--		sound_master: simple-audio-card,codec {
--			sound-dai = <&tlv320aic23_1>;
--			system-clock-frequency = <12000000>;
--		};
+-	nand {
+-		compatible = "ti,davinci-nand";
 -	};
 -
--	codec2 {
--		compatible = "simple-audio-card";
--		simple-audio-card,name = "tlv320aic23-hifi";
--
--		simple-audio-card,widgets =
--			"Microphone", "Mic In",
--			"Line", "Line In",
--			"Line", "Line Out";
--
--		simple-audio-card,routing =
--			"Line Out", "LOUT",
--			"Line Out", "ROUT",
--			"LLINEIN", "Line In",
--			"RLINEIN", "Line In",
--			"MICIN", "Mic In";
--
--		simple-audio-card,format = "i2s";
--		simple-audio-card,bitclock-master = <&sound_master2>;
--		simple-audio-card,frame-master = <&sound_master2>;
--
--		simple-audio-card,cpu {
--			sound-dai = <&mcbsp2>;
--		};
--
--		sound_master2: simple-audio-card,codec {
--			sound-dai = <&tlv320aic23_2>;
--			system-clock-frequency = <12000000>;
--		};
--	};
--
--	expander-keys {
--		compatible = "gpio-keys-polled";
--		poll-interval = <100>;
--
--		key-record {
--			label = "Record";
--			/* linux,code = <BTN_0>; */
--			gpios = <&tca6416_2 15 GPIO_ACTIVE_LOW>;
--		};
--
--		key-play {
--			label = "Play";
--			linux,code = <KEY_PLAY>;
--			gpios = <&tca6416_2 14 GPIO_ACTIVE_LOW>;
--		};
--
--		key-stop {
--			label = "Stop";
--			linux,code = <KEY_STOP>;
--			gpios = <&tca6416_2 13 GPIO_ACTIVE_LOW>;
--		};
--
--		key-fwd {
--			label = "FWD";
--			linux,code = <KEY_FASTFORWARD>;
--			gpios = <&tca6416_2 12 GPIO_ACTIVE_LOW>;
--		};
--
--		key-rwd {
--			label = "RWD";
--			linux,code = <KEY_REWIND>;
--			gpios = <&tca6416_2 11 GPIO_ACTIVE_LOW>;
--		};
--
--		key-shift {
--			label = "Shift";
--			linux,code = <KEY_LEFTSHIFT>;
--			gpios = <&tca6416_2 10 GPIO_ACTIVE_LOW>;
--		};
--
--		key-mode {
--			label = "Mode";
--			linux,code = <BTN_MODE>;
--			gpios = <&tca6416_2 9 GPIO_ACTIVE_LOW>;
--		};
--
--		key-menu {
--			label = "Menu";
--			linux,code = <KEY_MENU>;
--			gpios = <&tca6416_2 8 GPIO_ACTIVE_LOW>;
--		};
--
--		key-up {
--			label = "Up";
--			linux,code = <KEY_UP>;
--			gpios = <&tca6416_2 7 GPIO_ACTIVE_LOW>;
--		};
--
--		key-down {
--			label = "Down";
--			linux,code = <KEY_DOWN>;
--			gpios = <&tca6416_2 6 GPIO_ACTIVE_LOW>;
--		};
+-	panel {
+-		bootph-all;
 -	};
 -};
 -
--&i2c2 {
--	/* Audio codecs */
--	tlv320aic23_1: codec@1a {
--		compatible = "ti,tlv320aic23";
--		reg = <0x1a>;
--		#sound-dai-cells = <0>;
--		status = "okay";
--	};
--
--	tlv320aic23_2: codec@1b {
--		compatible = "ti,tlv320aic23";
--		reg = <0x1b>;
--		#sound-dai-cells = <0>;
--		status = "okay";
--	};
+-&eth0 {
+-	pinctrl-0 = <&mii_pins>, <&mdio_pins>;
 -};
 -
--&i2c3 {
--	/* Audio codecs */
--	tlv320aic23_3: codec@1a {
--		compatible = "ti,tlv320aic23";
--		reg = <0x1a>;
--		#sound-dai-cells = <0>;
--		status = "okay";
--	};
--
--	/* GPIO Expanders */
--	tca6416_2: gpio@20 {
--		compatible = "ti,tca6416";
--		reg = <0x20>;
--		gpio-controller;
--		#gpio-cells = <2>;
--		vcc-supply = <&vdd_io_reg>;
--	};
--
--	tca6416_3: gpio@21 {
--		compatible = "ti,tca6416";
--		reg = <0x21>;
--		gpio-controller;
--		#gpio-cells = <2>;
--		vcc-supply = <&vdd_io_reg>;
--	};
--
--	/* TVP5146 Analog Video decoder input */
--	tvp5146@5c {
--		compatible = "ti,tvp5146m2";
--		reg = <0x5c>;
--	};
+-&flash {
+-	compatible = "m25p64", "jedec,spi-nor";
 -};
 -
--&mcbsp1 {
--	status = "okay";
--	#sound-dai-cells = <0>;
--	pinctrl-names = "default";
--	pinctrl-0 = <&mcbsp1_pins>;
+-&mmc0 {
+-	bootph-pre-ram;
 -};
 -
--&mcbsp2 {
--	status = "okay";
--	#sound-dai-cells = <0>;
--	pinctrl-names = "default";
--	pinctrl-0 = <&mcbsp2_pins>;
+-&serial2 {
+-	bootph-pre-ram;
 -};
 -
--&omap3_pmx_core {
--	mcbsp1_pins: pinmux_mcbsp1_pins {
--		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x2190, PIN_OUTPUT | MUX_MODE0)	/* mcbsp1_dx.mcbsp1_dx */
--			OMAP3_CORE1_IOPAD(0x2192, PIN_INPUT | MUX_MODE0)	/* mcbsp1_dx.mcbsp1_dr */
--			OMAP3_CORE1_IOPAD(0x2196, PIN_INPUT | MUX_MODE0)	/* mcbsp_clks.mcbsp1_fsx */
--			OMAP3_CORE1_IOPAD(0x2198, PIN_INPUT | MUX_MODE0)	/* mcbsp1_clkx.mcbsp1_clkx */
--		>;
--	};
--
--	mcbsp2_pins: pinmux_mcbsp2_pins {
--		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x213c, PIN_INPUT | MUX_MODE0)	/* mcbsp2_fsx.mcbsp2_fsx */
--			OMAP3_CORE1_IOPAD(0x213e, PIN_INPUT | MUX_MODE0)	/* mcbsp2_clkx.mcbsp2_clkx */
--			OMAP3_CORE1_IOPAD(0x2140, PIN_INPUT | MUX_MODE0)	/* mcbsp2_dr.mcbsp2.dr */
--			OMAP3_CORE1_IOPAD(0x2142, PIN_OUTPUT | MUX_MODE0)	/* mcbsp2_dx.mcbsp2_dx */
--		>;
--	};
+-&spi1 {
+-	bootph-pre-ram;
 -};
-diff --git a/arch/arm/dts/am3517-u-boot.dtsi b/arch/arm/dts/am3517-u-boot.dtsi
-deleted file mode 100644
-index 374499dcb2a..00000000000
---- a/arch/arm/dts/am3517-u-boot.dtsi
-+++ /dev/null
-@@ -1,9 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright (C) 2017
-- * Logic PD - http://www.logicpd.com
-- */
 -
--&uart4 {
--	reg-shift = <2>;
+-&gpio {
+-	bootph-pre-ram;
 -};
-diff --git a/arch/arm/mach-omap2/omap3/Kconfig b/arch/arm/mach-omap2/omap3/Kconfig
-index f6cad7d9d82..79e24acba8d 100644
---- a/arch/arm/mach-omap2/omap3/Kconfig
-+++ b/arch/arm/mach-omap2/omap3/Kconfig
-@@ -25,15 +25,6 @@ choice
- 	prompt "OMAP3 board select"
+diff --git a/arch/arm/mach-davinci/Kconfig b/arch/arm/mach-davinci/Kconfig
+index 8fa2660a0cd..2b84b7c4a7e 100644
+--- a/arch/arm/mach-davinci/Kconfig
++++ b/arch/arm/mach-davinci/Kconfig
+@@ -4,13 +4,6 @@ choice
+ 	prompt "DaVinci board select"
  	optional
  
--config TARGET_AM3517_EVM
--	bool "AM3517 EVM"
--	select DM
--	select DM_GPIO
--	select DM_I2C
--	select DM_SERIAL
--	select MMC
--	imply CMD_DM
+-config TARGET_DA850EVM
+-	bool "DA850 EVM board"
+-	select MACH_DAVINCI_DA850_EVM
+-	select SOC_DA850
+-	select SUPPORT_SPL
+-	imply OF_UPSTREAM
 -
- config TARGET_DEVKIT8000
- 	bool "TimLL OMAP3 Devkit8000"
- 	select DM
-@@ -138,7 +129,6 @@ config SPL_OMAP3_ID_NAND
- config SYS_SOC
- 	default "omap3"
- 
--source "board/logicpd/am3517evm/Kconfig"
- source "board/timll/devkit8000/Kconfig"
- source "board/ti/omap3evm/Kconfig"
- source "board/isee/igep00x0/Kconfig"
-diff --git a/board/logicpd/am3517evm/Kconfig b/board/logicpd/am3517evm/Kconfig
-deleted file mode 100644
-index 743e500a5ca..00000000000
---- a/board/logicpd/am3517evm/Kconfig
-+++ /dev/null
-@@ -1,14 +0,0 @@
--if TARGET_AM3517_EVM
+ config TARGET_OMAPL138_LCDK
+ 	bool "OMAPL138 LCDK"
+ 	select SOC_DA8XX
+diff --git a/board/davinci/da8xxevm/Kconfig b/board/davinci/da8xxevm/Kconfig
+index 34055f69754..633f1c54354 100644
+--- a/board/davinci/da8xxevm/Kconfig
++++ b/board/davinci/da8xxevm/Kconfig
+@@ -1,31 +1,3 @@
+-if TARGET_DA850EVM
 -
 -config SYS_BOARD
--	default "am3517evm"
+-	default "da8xxevm"
 -
 -config SYS_VENDOR
--	default "logicpd"
+-	default "davinci"
 -
 -config SYS_CONFIG_NAME
--	default "am3517_evm"
+-	default "da850evm"
 -
--source "board/ti/common/Kconfig"
+-menuconfig DA850_MAC
+-	bool "Use MAC Address"
+-	default y
+-
+-if DA850_MAC
+-config MAC_ADDR_IN_SPIFLASH
+-	bool "MAC address in SPI Flash"
+-	default y
+-	help
+-	  The OMAP-L138 and AM1808 SoM are programmed with
+-	  their MAC address in SPI Flash from the factory
+-	  Enable this option to read the MAC from SPI Flash
 -
 -endif
-diff --git a/board/logicpd/am3517evm/MAINTAINERS b/board/logicpd/am3517evm/MAINTAINERS
-deleted file mode 100644
-index 198023fb15c..00000000000
---- a/board/logicpd/am3517evm/MAINTAINERS
-+++ /dev/null
-@@ -1,6 +0,0 @@
--AM3517EVM BOARD
+-
+-endif
+-
+ if TARGET_OMAPL138_LCDK
+ 
+ config SYS_BOARD
+diff --git a/board/davinci/da8xxevm/MAINTAINERS b/board/davinci/da8xxevm/MAINTAINERS
+index 993b22f2f63..4ee7df12b72 100644
+--- a/board/davinci/da8xxevm/MAINTAINERS
++++ b/board/davinci/da8xxevm/MAINTAINERS
+@@ -1,12 +1,3 @@
+-DA850_EVM BOARD
 -M:	Adam Ford <aford173@gmail.com>
 -S:	Maintained
--F:	board/logicpd/am3517evm/
--F:	include/configs/am3517_evm.h
--F:	configs/am3517_evm_defconfig
-diff --git a/board/logicpd/am3517evm/Makefile b/board/logicpd/am3517evm/Makefile
-deleted file mode 100644
-index c7da6e3fe0d..00000000000
---- a/board/logicpd/am3517evm/Makefile
-+++ /dev/null
-@@ -1,9 +0,0 @@
--# SPDX-License-Identifier: GPL-2.0+
--#
--# Author: Vaibhav Hiremath <hvaibhav@ti.com>
--#
--# Based on ti/evm/Makefile
--#
--# Copyright (C) 2010 Texas Instruments Incorporated - https://www.ti.com/
+-F:	board/davinci/da8xxevm/
+-F:	include/configs/da850evm.h
+-F:	configs/da850evm_defconfig
+-F:	configs/da850evm_nand_defconfig
+-F:	configs/da850evm_direct_nor_defconfig
 -
--obj-y	:= am3517evm.o
-diff --git a/board/logicpd/am3517evm/am3517evm.c b/board/logicpd/am3517evm/am3517evm.c
+ OMAPL138_LCDK BOARD
+ M:	Tom Rini <trini@konsulko.com>
+ S:	Maintained
+diff --git a/board/davinci/da8xxevm/Makefile b/board/davinci/da8xxevm/Makefile
+index fe043d517f2..974c4a79ef9 100644
+--- a/board/davinci/da8xxevm/Makefile
++++ b/board/davinci/da8xxevm/Makefile
+@@ -5,5 +5,4 @@
+ #
+ # Copyright (C) 2007 Sergey Kubushyn <ksi@koi8.net>
+ 
+-obj-$(CONFIG_MACH_DAVINCI_DA850_EVM)	+= da850evm.o
+ obj-$(CONFIG_TARGET_OMAPL138_LCDK)	+= omapl138_lcdk.o
+diff --git a/board/davinci/da8xxevm/README.da850 b/board/davinci/da8xxevm/README.da850
+index 50ef401b7c9..f9c6b40ea71 100644
+--- a/board/davinci/da8xxevm/README.da850
++++ b/board/davinci/da8xxevm/README.da850
+@@ -27,11 +27,10 @@ loading the next image from a different media, etc).
+ 
+ Compilation
+ ===========
+-The exact build target you need will depend on the board you have.  For
+-Logic PD boards, or other boards which store the ethernet MAC address at
+-the end of SPI flash, run 'make da850evm'.  Once this build completes you will have a
+-u-boot.ais file that needs to be written to the correct persistent
+-storage.
++The exact build target you need will depend on the board you have, for
++example 'make omapl138_lcdk_defconfig'.  Once this build completes you
++will have a u-boot.ais file that needs to be written to the correct
++persistent storage.
+ 
+ 
+ Flashing the images to SPI
+@@ -86,14 +85,6 @@ In this case the commands would be simplified to:
+   U-Boot > nand erase.part bootloader
+   U-Boot > nand write 0xc0700000 bootloader
+ 
+-On the DA850-EVM, NAND can also be written with SW7:7-8 ON and
+-
+-  sudo mono sfh_OMAP-L138.exe -targetType AM1808 -p /dev/ttyUSB0 \
+-	-flash_noubl -flashType NAND ~/src/u-boot/u-boot.ais
+-
+-To boot the DA850-EVM from NAND, SW7:5 should be switched on and all others
+-off.
+-
+ Flashing the images to MMC
+ ==========================
+ If the boot pins are set to boot from mmc, the RBL will try to load the
+@@ -127,16 +118,10 @@ to initialize hardware that's normally done by SPL.
+ For this case, CONFIG_TEXT_BASE=0x60000000 which is the address to
+ which the bootloader jumps when powered on.
+ 
+-Example:
+-For the da850evm, there is a defconfig setup to use the NOR flash on
+-the UI expander board called da850evm_direct_nor_defconfig.
+-
+ Flash to NOR directly using
+ sudo mono ./sfh_OMAP-L138.exe -p /dev/ttyUSB0 -flash_noubl
+   -flashType NOR u-boot.bin
+ 
+-SW7:5 through SW7:7 should be switched on and all others off.
+-
+ Recovery
+ ========
+ 
+diff --git a/board/davinci/da8xxevm/da850evm.c b/board/davinci/da8xxevm/da850evm.c
 deleted file mode 100644
-index e4f619d0942..00000000000
---- a/board/logicpd/am3517evm/am3517evm.c
+index 0011c828523..00000000000
+--- a/board/davinci/da8xxevm/da850evm.c
 +++ /dev/null
-@@ -1,152 +0,0 @@
+@@ -1,433 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
 -/*
-- * am3517evm.c - board file for TI's AM3517 family of devices.
+- * Copyright (C) 2010 Texas Instruments Incorporated - https://www.ti.com/
 - *
-- * Author: Vaibhav Hiremath <hvaibhav@ti.com>
+- * Based on da830evm.c. Original Copyrights follow:
 - *
-- * Based on ti/evm/evm.c
-- *
-- * Copyright (C) 2010
-- * Texas Instruments Incorporated - https://www.ti.com/
+- * Copyright (C) 2009 Nick Thompson, GE Fanuc, Ltd. <nick.thompson@gefanuc.com>
+- * Copyright (C) 2007 Sergey Kubushyn <ksi@koi8.net>
 - */
 -
+-#include <config.h>
 -#include <dm.h>
+-#include <env.h>
+-#include <i2c.h>
 -#include <init.h>
 -#include <net.h>
--#include <ns16550.h>
--#include <serial.h>
+-#include <spi.h>
+-#include <spi_flash.h>
+-#include <asm/arch/hardware.h>
 -#include <asm/global_data.h>
+-#include <asm/ti-common/davinci_nand.h>
+-#include <asm/arch/emac_defs.h>
+-#include <asm/arch/pinmux_defs.h>
 -#include <asm/io.h>
--#include <asm/omap_musb.h>
--#include <asm/arch/am35x_def.h>
--#include <asm/arch/mem.h>
--#include <asm/arch/mux.h>
--#include <asm/arch/sys_proto.h>
--#include <asm/arch/mmc_host_def.h>
--#include <asm/arch/musb.h>
--#include <asm/mach-types.h>
+-#include <asm/arch/davinci_misc.h>
 -#include <linux/errno.h>
+-#include <hwconfig.h>
+-#include <asm/mach-types.h>
 -#include <asm/gpio.h>
--#include <linux/usb/ch9.h>
--#include <linux/usb/gadget.h>
--#include <linux/usb/musb.h>
--#include <i2c.h>
--#include "am3517evm.h"
+-
+-#ifdef CONFIG_MMC_DAVINCI
+-#include <mmc.h>
+-#include <asm/arch/sdmmc_defs.h>
+-#endif
 -
 -DECLARE_GLOBAL_DATA_PTR;
 -
--#define AM3517_IP_SW_RESET	0x48002598
--#define CPGMACSS_SW_RST		(1 << 1)
--#define PHY_GPIO		30
--
--#if defined(CONFIG_XPL_BUILD)
--#if defined(CONFIG_SPL_OS_BOOT)
--int spl_start_uboot(void)
--{
--	/* break into full u-boot on 'c' */
--	return serial_tstc() && serial_getc() == 'c';
--}
--#endif
--#endif
--
--/*
-- * Routine: board_init
-- * Description: Early hardware init.
-- */
--int board_init(void)
--{
--	gpmc_init(); /* in SRAM or SDRAM, finish GPMC */
--	/* board id for Linux */
--	gd->bd->bi_arch_number = MACH_TYPE_OMAP3517EVM;
--	/* boot param addr */
--	gd->bd->bi_boot_params = (OMAP34XX_SDRC_CS0 + 0x100);
--
--	return 0;
--}
--
--#ifdef CONFIG_USB_MUSB_AM35X
--static struct musb_hdrc_config musb_config = {
--	.multipoint     = 1,
--	.dyn_fifo       = 1,
--	.num_eps        = 16,
--	.ram_bits       = 12,
--};
--
--static struct omap_musb_board_data musb_board_data = {
--	.set_phy_power		= am35x_musb_phy_power,
--	.clear_irq		= am35x_musb_clear_irq,
--	.reset			= am35x_musb_reset,
--};
--
--static struct musb_hdrc_platform_data musb_plat = {
--#if defined(CONFIG_USB_MUSB_HOST)
--	.mode           = MUSB_HOST,
--#elif defined(CONFIG_USB_MUSB_GADGET)
--	.mode		= MUSB_PERIPHERAL,
+-#ifdef CONFIG_DRIVER_TI_EMAC
+-#ifdef CONFIG_DRIVER_TI_EMAC_USE_RMII
+-#define HAS_RMII 1
 -#else
--#error "Please define either CONFIG_USB_MUSB_HOST or CONFIG_USB_MUSB_GADGET"
+-#define HAS_RMII 0
 -#endif
--	.config         = &musb_config,
--	.power          = 250,
--	.platform_ops	= &am35x_ops,
--	.board_data	= &musb_board_data,
--};
+-#endif /* CONFIG_DRIVER_TI_EMAC */
 -
--static void am3517_evm_musb_init(void)
+-#define CFG_MAC_ADDR_SPI_BUS	0
+-#define CFG_MAC_ADDR_SPI_CS	0
+-#define CFG_MAC_ADDR_SPI_MAX_HZ	CONFIG_SF_DEFAULT_SPEED
+-#define CFG_MAC_ADDR_SPI_MODE	SPI_MODE_3
+-
+-#define CFG_MAC_ADDR_OFFSET	(flash->size - SZ_64K)
+-
+-#ifdef CONFIG_MAC_ADDR_IN_SPIFLASH
+-static int get_mac_addr(u8 *addr)
 -{
--	/*
--	 * Set up USB clock/mode in the DEVCONF2 register.
--	 * USB2.0 PHY reference clock is 13 MHz
--	 */
--	clrsetbits_le32(&am35x_scm_general_regs->devconf2,
--			CONF2_REFFREQ | CONF2_OTGMODE | CONF2_PHY_GPIOMODE,
--			CONF2_REFFREQ_13MHZ | CONF2_SESENDEN |
--			CONF2_VBDTCTEN | CONF2_DATPOL);
+-	struct spi_flash *flash;
+-	int ret;
 -
--	musb_register(&musb_plat, &musb_board_data,
--			(void *)AM35XX_IPSS_USBOTGSS_BASE);
+-	flash = spi_flash_probe(CFG_MAC_ADDR_SPI_BUS, CFG_MAC_ADDR_SPI_CS,
+-			CFG_MAC_ADDR_SPI_MAX_HZ, CFG_MAC_ADDR_SPI_MODE);
+-	if (!flash) {
+-		printf("Error - unable to probe SPI flash.\n");
+-		return -1;
+-	}
+-
+-	ret = spi_flash_read(flash, (CFG_MAC_ADDR_OFFSET), 6, addr);
+-	if (ret) {
+-		printf("Error - unable to read MAC address from SPI flash.\n");
+-		return -1;
+-	}
+-
+-	return ret;
 -}
--#else
--#define am3517_evm_musb_init() do {} while (0)
 -#endif
 -
--/*
-- * Routine: misc_init_r
-- * Description: Init i2c, ethernet, etc... (done here so udelay works)
-- */
+-void dsp_lpsc_on(unsigned domain, unsigned int id)
+-{
+-	dv_reg_p mdstat, mdctl, ptstat, ptcmd;
+-	struct davinci_psc_regs *psc_regs;
+-
+-	psc_regs = davinci_psc0_regs;
+-	mdstat = &psc_regs->psc0.mdstat[id];
+-	mdctl = &psc_regs->psc0.mdctl[id];
+-	ptstat = &psc_regs->ptstat;
+-	ptcmd = &psc_regs->ptcmd;
+-
+-	while (*ptstat & (0x1 << domain))
+-		;
+-
+-	if ((*mdstat & 0x1f) == 0x03)
+-		return;                 /* Already on and enabled */
+-
+-	*mdctl |= 0x03;
+-
+-	*ptcmd = 0x1 << domain;
+-
+-	while (*ptstat & (0x1 << domain))
+-		;
+-	while ((*mdstat & 0x1f) != 0x03)
+-		;		/* Probably an overkill... */
+-}
+-
+-static void dspwake(void)
+-{
+-	unsigned *resetvect = (unsigned *)DAVINCI_L3CBARAM_BASE;
+-	u32 val;
+-
+-	/* if the device is ARM only, return */
+-	if ((readl(CHIP_REV_ID_REG) & 0x3f) == 0x10)
+-		return;
+-
+-	if (hwconfig_subarg_cmp_f("dsp", "wake", "no", NULL))
+-		return;
+-
+-	*resetvect++ = 0x1E000; /* DSP Idle */
+-	/* clear out the next 10 words as NOP */
+-	memset(resetvect, 0, sizeof(unsigned) *10);
+-
+-	/* setup the DSP reset vector */
+-	writel(DAVINCI_L3CBARAM_BASE, HOST1CFG);
+-
+-	dsp_lpsc_on(1, DAVINCI_LPSC_GEM);
+-	val = readl(PSC0_MDCTL + (15 * 4));
+-	val |= 0x100;
+-	writel(val, (PSC0_MDCTL + (15 * 4)));
+-}
+-
 -int misc_init_r(void)
 -{
--	omap_die_id_display();
+-	dspwake();
 -
--	am3517_evm_musb_init();
+-#if defined(CONFIG_MAC_ADDR_IN_SPIFLASH)
+-	uchar env_enetaddr[6], buff[6];
+-	int enetaddr_found, spi_mac_read;
+-
+-	enetaddr_found = eth_env_get_enetaddr("ethaddr", env_enetaddr);
+-
+-	spi_mac_read = get_mac_addr(buff);
+-	buff[0] = 0;
+-
+-	/*
+-	 * MAC address not present in the environment
+-	 * try and read the MAC address from SPI flash
+-	 * and set it.
+-	 */
+-	if (!enetaddr_found) {
+-		if (!spi_mac_read) {
+-			if (is_valid_ethaddr(buff)) {
+-				if (eth_env_set_enetaddr("ethaddr", buff)) {
+-					printf("Warning: Failed to "
+-					"set MAC address from SPI flash\n");
+-				}
+-			} else {
+-					printf("Warning: Invalid "
+-					"MAC address read from SPI flash\n");
+-			}
+-		}
+-	} else {
+-		/*
+-		 * MAC address present in environment compare it with
+-		 * the MAC address in SPI flash and warn on mismatch
+-		 */
+-		if (!spi_mac_read && is_valid_ethaddr(buff) &&
+-		    memcmp(env_enetaddr, buff, 6))
+-			printf("Warning: MAC address in SPI flash don't match "
+-					"with the MAC address in the environment\n");
+-		printf("Default using MAC address from environment\n");
+-	}
+-#endif
+-	return 0;
+-}
+-
+-static const struct pinmux_config gpio_pins[] = {
+-#ifdef CONFIG_MTD_NOR_FLASH
+-	/* GP0[11] is required for NOR to work on Rev 3 EVMs */
+-	{ pinmux(0), 8, 4 },	/* GP0[11] */
+-#endif
+-#ifdef CONFIG_MMC_DAVINCI
+-	/* GP0[11] is required for SD to work on Rev 3 EVMs */
+-	{ pinmux(0),  8, 4 },	/* GP0[11] */
+-#endif
+-};
+-
+-const struct pinmux_resource pinmuxes[] = {
+-#ifdef CONFIG_DRIVER_TI_EMAC
+-	PINMUX_ITEM(emac_pins_mdio),
+-#ifdef CONFIG_DRIVER_TI_EMAC_USE_RMII
+-	PINMUX_ITEM(emac_pins_rmii),
+-#else
+-	PINMUX_ITEM(emac_pins_mii),
+-#endif
+-#endif
+-#ifdef CONFIG_SPI_FLASH
+-	PINMUX_ITEM(spi1_pins_base),
+-	PINMUX_ITEM(spi1_pins_scs0),
+-#endif
+-	PINMUX_ITEM(uart2_pins_txrx),
+-	PINMUX_ITEM(uart2_pins_rtscts),
+-	PINMUX_ITEM(i2c0_pins),
+-#ifdef CONFIG_NAND_DAVINCI
+-	PINMUX_ITEM(emifa_pins_cs3),
+-	PINMUX_ITEM(emifa_pins_cs4),
+-	PINMUX_ITEM(emifa_pins_nand),
+-#elif defined(CONFIG_MTD_NOR_FLASH)
+-	PINMUX_ITEM(emifa_pins_cs2),
+-	PINMUX_ITEM(emifa_pins_nor),
+-#endif
+-	PINMUX_ITEM(gpio_pins),
+-#ifdef CONFIG_MMC_DAVINCI
+-	PINMUX_ITEM(mmc0_pins),
+-#endif
+-};
+-
+-const int pinmuxes_size = ARRAY_SIZE(pinmuxes);
+-
+-const struct lpsc_resource lpsc[] = {
+-	{ DAVINCI_LPSC_AEMIF },	/* NAND, NOR */
+-	{ DAVINCI_LPSC_SPI1 },	/* Serial Flash */
+-	{ DAVINCI_LPSC_EMAC },	/* image download */
+-	{ DAVINCI_LPSC_UART2 },	/* console */
+-	{ DAVINCI_LPSC_GPIO },
+-#ifdef CONFIG_MMC_DAVINCI
+-	{ DAVINCI_LPSC_MMC_SD },
+-#endif
+-};
+-
+-const int lpsc_size = ARRAY_SIZE(lpsc);
+-
+-#ifndef CFG_DA850_EVM_MAX_CPU_CLK
+-#define CFG_DA850_EVM_MAX_CPU_CLK	300000000
+-#endif
+-
+-#define REV_AM18X_EVM		0x100
+-
+-#ifdef CONFIG_REVISION_TAG
+-/*
+- * get_board_rev() - setup to pass kernel board revision information
+- * Returns:
+- * bit[0-3]	Maximum cpu clock rate supported by onboard SoC
+- *		0000b - 300 MHz
+- *		0001b - 372 MHz
+- *		0010b - 408 MHz
+- *		0011b - 456 MHz
+- */
+-u32 get_board_rev(void)
+-{
+-	char *s;
+-	u32 maxcpuclk = CFG_DA850_EVM_MAX_CPU_CLK;
+-	u32 rev = 0;
+-
+-	s = env_get("maxcpuclk");
+-	if (s)
+-		maxcpuclk = dectoul(s, NULL);
+-
+-	if (maxcpuclk >= 456000000)
+-		rev = 3;
+-	else if (maxcpuclk >= 408000000)
+-		rev = 2;
+-	else if (maxcpuclk >= 372000000)
+-		rev = 1;
+-	return rev;
+-}
+-#endif
+-
+-int board_early_init_f(void)
+-{
+-	/*
+-	 * Power on required peripherals
+-	 * ARM does not have access by default to PSC0 and PSC1
+-	 * assuming here that the DSP bootloader has set the IOPU
+-	 * such that PSC access is available to ARM
+-	 */
+-	if (da8xx_configure_lpsc_items(lpsc, ARRAY_SIZE(lpsc)))
+-		return 1;
 -
 -	return 0;
 -}
 -
--/*
-- * Routine: set_muxconf_regs
-- * Description: Setting up the configuration Mux registers specific to the
-- *		hardware. Many pins need to be moved from protect to primary
-- *		mode.
-- */
--void set_muxconf_regs(void)
+-int board_init(void)
 -{
--	MUX_AM3517EVM();
+-	irq_init();
+-
+-#ifdef CONFIG_NAND_DAVINCI
+-	/*
+-	 * NAND CS setup - cycle counts based on da850evm NAND timings in the
+-	 * Linux kernel @ 25MHz EMIFA
+-	 */
+-	writel((DAVINCI_ABCR_WSETUP(2) |
+-		DAVINCI_ABCR_WSTROBE(2) |
+-		DAVINCI_ABCR_WHOLD(1) |
+-		DAVINCI_ABCR_RSETUP(1) |
+-		DAVINCI_ABCR_RSTROBE(4) |
+-		DAVINCI_ABCR_RHOLD(0) |
+-		DAVINCI_ABCR_TA(1) |
+-		DAVINCI_ABCR_ASIZE_8BIT),
+-	       &davinci_emif_regs->ab2cr); /* CS3 */
+-#endif
+-
+-	/* arch number of the board */
+-	gd->bd->bi_arch_number = MACH_TYPE_DAVINCI_DA850_EVM;
+-
+-	/* address of boot parameters */
+-	gd->bd->bi_boot_params = LINUX_BOOT_PARAM_ADDR;
+-
+-	/* setup the SUSPSRC for ARM to control emulation suspend */
+-	writel(readl(&davinci_syscfg_regs->suspsrc) &
+-	       ~(DAVINCI_SYSCFG_SUSPSRC_EMAC | DAVINCI_SYSCFG_SUSPSRC_I2C |
+-		 DAVINCI_SYSCFG_SUSPSRC_SPI1 | DAVINCI_SYSCFG_SUSPSRC_TIMER0 |
+-		 DAVINCI_SYSCFG_SUSPSRC_UART2),
+-	       &davinci_syscfg_regs->suspsrc);
+-
+-#ifdef CONFIG_MTD_NOR_FLASH
+-	/* Set the GPIO direction as output */
+-	clrbits_le32((u32 *)GPIO_BANK0_REG_DIR_ADDR, (0x01 << 11));
+-
+-	/* Set the output as low */
+-	writel(0x01 << 11, GPIO_BANK0_REG_CLR_ADDR);
+-#endif
+-
+-#ifdef CONFIG_MMC_DAVINCI
+-	/* Set the GPIO direction as output */
+-	clrbits_le32((u32 *)GPIO_BANK0_REG_DIR_ADDR, (0x01 << 11));
+-
+-	/* Set the output as high */
+-	writel(0x01 << 11, GPIO_BANK0_REG_SET_ADDR);
+-#endif
+-
+-#ifdef CONFIG_DRIVER_TI_EMAC
+-	davinci_emac_mii_mode_sel(HAS_RMII);
+-#endif /* CONFIG_DRIVER_TI_EMAC */
+-
+-	return 0;
 -}
 -
--#if defined(CONFIG_USB_ETHER) && defined(CONFIG_USB_MUSB_GADGET)
+-#ifdef CONFIG_DRIVER_TI_EMAC
+-
+-#ifdef CONFIG_DRIVER_TI_EMAC_USE_RMII
+-/**
+- * rmii_hw_init
+- *
+- * DA850/OMAP-L138 EVM can interface to a daughter card for
+- * additional features. This card has an I2C GPIO Expander TCA6416
+- * to select the required functions like camera, RMII Ethernet,
+- * character LCD, video.
+- *
+- * Initialization of the expander involves configuring the
+- * polarity and direction of the ports. P07-P05 are used here.
+- * These ports are connected to a Mux chip which enables only one
+- * functionality at a time.
+- *
+- * For RMII phy to respond, the MII MDIO clock has to be  disabled
+- * since both the PHY devices have address as zero. The MII MDIO
+- * clock is controlled via GPIO2[6].
+- *
+- * This code is valid for Beta version of the hardware
+- */
+-int rmii_hw_init(void)
+-{
+-	const struct pinmux_config gpio_pins[] = {
+-		{ pinmux(6), 8, 1 }
+-	};
+-	u_int8_t buf[2];
+-	unsigned int temp;
+-	int ret;
+-
+-	/* PinMux for GPIO */
+-	if (davinci_configure_pin_mux(gpio_pins, ARRAY_SIZE(gpio_pins)) != 0)
+-		return 1;
+-
+-	/* I2C Exapnder configuration */
+-	/* Set polarity to non-inverted */
+-	buf[0] = 0x0;
+-	buf[1] = 0x0;
+-	ret = i2c_write(CFG_SYS_I2C_EXPANDER_ADDR, 4, 1, buf, 2);
+-	if (ret) {
+-		printf("\nExpander @ 0x%02x write FAILED!!!\n",
+-				CFG_SYS_I2C_EXPANDER_ADDR);
+-		return ret;
+-	}
+-
+-	/* Configure P07-P05 as outputs */
+-	buf[0] = 0x1f;
+-	buf[1] = 0xff;
+-	ret = i2c_write(CFG_SYS_I2C_EXPANDER_ADDR, 6, 1, buf, 2);
+-	if (ret) {
+-		printf("\nExpander @ 0x%02x write FAILED!!!\n",
+-				CFG_SYS_I2C_EXPANDER_ADDR);
+-	}
+-
+-	/* For Ethernet RMII selection
+-	 * P07(SelA)=0
+-	 * P06(SelB)=1
+-	 * P05(SelC)=1
+-	 */
+-	if (i2c_read(CFG_SYS_I2C_EXPANDER_ADDR, 2, 1, buf, 1)) {
+-		printf("\nExpander @ 0x%02x read FAILED!!!\n",
+-				CFG_SYS_I2C_EXPANDER_ADDR);
+-	}
+-
+-	buf[0] &= 0x1f;
+-	buf[0] |= (0 << 7) | (1 << 6) | (1 << 5);
+-	if (i2c_write(CFG_SYS_I2C_EXPANDER_ADDR, 2, 1, buf, 1)) {
+-		printf("\nExpander @ 0x%02x write FAILED!!!\n",
+-				CFG_SYS_I2C_EXPANDER_ADDR);
+-	}
+-
+-	/* Set the output as high */
+-	temp = REG(GPIO_BANK2_REG_SET_ADDR);
+-	temp |= (0x01 << 6);
+-	REG(GPIO_BANK2_REG_SET_ADDR) = temp;
+-
+-	/* Set the GPIO direction as output */
+-	temp = REG(GPIO_BANK2_REG_DIR_ADDR);
+-	temp &= ~(0x01 << 6);
+-	REG(GPIO_BANK2_REG_DIR_ADDR) = temp;
+-
+-	return 0;
+-}
+-#endif /* CONFIG_DRIVER_TI_EMAC_USE_RMII */
+-
+-/*
+- * Initializes on-board ethernet controllers.
+- */
 -int board_eth_init(struct bd_info *bis)
 -{
--	int rv, n = 0;
--
--	rv = cpu_eth_init(bis);
--	if (rv > 0)
--		n += rv;
--
--	rv = usb_eth_initialize(bis);
--	if (rv > 0)
--		n += rv;
--
--	return n;
+-#ifdef CONFIG_DRIVER_TI_EMAC_USE_RMII
+-	/* Select RMII fucntion through the expander */
+-	if (rmii_hw_init())
+-		printf("RMII hardware init failed!!!\n");
+-#endif
+-	return 0;
 -}
--#endif
-diff --git a/board/logicpd/am3517evm/am3517evm.env b/board/logicpd/am3517evm/am3517evm.env
+-#endif /* CONFIG_DRIVER_TI_EMAC */
+diff --git a/configs/da850evm_defconfig b/configs/da850evm_defconfig
 deleted file mode 100644
-index 77bb31c4168..00000000000
---- a/board/logicpd/am3517evm/am3517evm.env
+index c76f6847d85..00000000000
+--- a/configs/da850evm_defconfig
 +++ /dev/null
-@@ -1,20 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--
--console=ttyS2,115200n8
--fdtfile=am3517-evm.dtb
--fdtaddr=0x82C00000
--vram=16M
--bootenv=uEnv.txt
--mmcdev=0
--mmcpart=1
--mmcroot=/dev/mmcblk0p2 rw
--mmcrootfstype=ext4 rootwait fixrtc
--mmcargs=setenv bootargs console=${console} ${mtdparts} ${optargs} root=${mmcroot} rootfstype=${mmcrootfstype} ${cmdline}
--nandargs=setenv bootargs console=${console} ${mtdparts} ${optargs} root=ubi0:rootfs rw ubi.mtd=rootfs rootfstype=ubifs rootwait ${cmdline}
--loadbootenv=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${bootenv}
--importbootenv=echo "Importing environment from mmc ..."; env import -t ${loadaddr} ${filesize}
--bootscript=echo "Running bootscript from mmc ..."; source ${loadaddr}
--loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${bootfile}
--loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdtaddr} ${fdtfile}
--mmcboot=echo "Booting from mmc ..."; run mmcargs; bootz ${loadaddr} - ${fdtaddr}
--nandboot=echo "Booting from nand ..."; run nandargs; nand read ${loadaddr} 2a0000 800000; nand read ${fdtaddr} aa0000 80000; bootm ${loadaddr} - ${fdtaddr}
-diff --git a/board/logicpd/am3517evm/am3517evm.h b/board/logicpd/am3517evm/am3517evm.h
-deleted file mode 100644
-index 283b4535a6b..00000000000
---- a/board/logicpd/am3517evm/am3517evm.h
-+++ /dev/null
-@@ -1,194 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * am3517evm.h - Header file for the AM3517 EVM.
-- *
-- * Author: Vaibhav Hiremath <hvaibhav@ti.com>
-- *
-- * Based on ti/evm/evm.h
-- *
-- * Copyright (C) 2010
-- * Texas Instruments Incorporated - https://www.ti.com/
-- */
--
--#ifndef _AM3517EVM_H_
--#define _AM3517EVM_H_
--
--const omap3_sysinfo sysinfo = {
--	DDR_DISCRETE,
--	"AM3517EVM Board",
--	"NAND",
--};
--
--/*
-- * IEN  - Input Enable
-- * IDIS - Input Disable
-- * PTD  - Pull type Down
-- * PTU  - Pull type Up
-- * DIS  - Pull type selection is inactive
-- * EN   - Pull type selection is active
-- * M0   - Mode 0
-- * The commented string gives the final mux configuration for that pin
-- */
--#define MUX_AM3517EVM() \
--	/* SDRC */\
--	MUX_VAL(CP(SDRC_D0),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D1),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D2),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D3),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D4),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D5),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D6),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D7),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D8),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D9),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D10),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D11),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D12),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D13),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D14),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D15),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D16),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D17),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D18),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D19),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D20),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D21),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D22),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D23),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D24),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D25),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D26),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D27),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D28),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D29),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D30),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_D31),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_CLK),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_DQS0),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_DQS1),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_DQS2),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_DQS3),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SDRC_DQS0N),		(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(SDRC_DQS1N),		(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(SDRC_DQS2N),		(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(SDRC_DQS3N),		(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(SDRC_CKE0),		(M0)) \
--	MUX_VAL(CP(SDRC_CKE1),		(M0)) \
--	/*sdrc_strben_dly0*/\
--	MUX_VAL(CP(STRBEN_DLY0),	(IEN  | PTD | EN  | M0)) \
--	 /*sdrc_strben_dly1*/\
--	MUX_VAL(CP(STRBEN_DLY1),	(IEN  | PTD | EN  | M0)) \
--	/* GPMC */\
--	MUX_VAL(CP(GPMC_A1),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_A2),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_A3),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_A4),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_A5),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_A6),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_A7),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_A8),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_A9),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_A10),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D0),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D1),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D2),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D3),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D4),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D5),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D6),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D7),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D8),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D9),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D10),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D11),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D12),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D13),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D14),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_D15),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_NCS0),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_NCS1),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_NCS2),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_NCS3),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_NCS4),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_NCS5),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_NCS6),		(IDIS | PTD | DIS | M4)) \
--	MUX_VAL(CP(GPMC_NCS7),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_CLK),		(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_NADV_ALE),	(IDIS | PTD | DIS | M0)) \
--	MUX_VAL(CP(GPMC_NOE),		(IDIS | PTD | DIS | M0)) \
--	MUX_VAL(CP(GPMC_NWE),		(IDIS | PTD | DIS | M0)) \
--	MUX_VAL(CP(GPMC_NBE0_CLE),	(IDIS | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_NBE1),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_NWP),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(GPMC_WAIT0),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_WAIT1),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(GPMC_WAIT3),		(IEN  | PTU | EN  | M0)) \
--	/* MMC */\
--	MUX_VAL(CP(MMC1_CLK),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(MMC1_CMD),		(IEN  | PTU | DIS | M0)) \
--	MUX_VAL(CP(MMC1_DAT0),		(IEN  | PTU | DIS | M0)) \
--	MUX_VAL(CP(MMC1_DAT1),		(IEN  | PTU | DIS | M0)) \
--	MUX_VAL(CP(MMC1_DAT2),		(IEN  | PTU | DIS | M0)) \
--	MUX_VAL(CP(MMC1_DAT3),		(IEN  | PTU | DIS | M0)) \
--	/* UART */\
--	MUX_VAL(CP(UART3_CTS_RCTX),	(IEN  | PTU | DIS | M0)) \
--	MUX_VAL(CP(UART3_RTS_SD),	(IDIS | PTD | DIS | M0)) \
--	MUX_VAL(CP(UART3_RX_IRRX),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(UART3_TX_IRTX),	(IDIS | PTD | DIS | M0)) \
--	/* Control and debug */\
--	MUX_VAL(CP(SYS_32K),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SYS_CLKREQ),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SYS_NIRQ),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(SYS_BOOT7),		(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(SYS_BOOT8),		(IEN  | PTD | EN  | M0)) \
--	\
--	MUX_VAL(CP(SYS_OFF_MODE),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SYS_CLKOUT1),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(SYS_CLKOUT2),	(IEN  | PTU | EN  | M0)) \
--	/* JTAG */\
--	MUX_VAL(CP(JTAG_NTRST),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(JTAG_TCK),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(JTAG_TMS),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(JTAG_TDI),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(JTAG_EMU0),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(JTAG_EMU1),		(IEN  | PTD | DIS | M0)) \
--	/* ETK (ES2 onwards) */\
--	MUX_VAL(CP(ETK_D10_ES2),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(ETK_D11_ES2),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(ETK_D12_ES2),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(ETK_D13_ES2),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(ETK_D14_ES2),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(ETK_D15_ES2),	(IEN  | PTD | DIS | M0)) \
--	/* Die to Die */\
--	MUX_VAL(CP(D2D_MCAD34),		(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(D2D_MCAD35),		(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(D2D_MCAD36),		(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(D2D_CLK26MI),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_NRESPWRON),	(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(D2D_NRESWARM),	(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(D2D_ARM9NIRQ),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_UMA2P6FIQ),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_SPINT),		(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(D2D_FRINT),		(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(D2D_DMAREQ0),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_DMAREQ1),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_DMAREQ2),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_DMAREQ3),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_N3GTRST),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_N3GTDI),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_N3GTDO),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_N3GTMS),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_N3GTCK),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_N3GRTCK),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_MSTDBY),		(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(D2D_SWAKEUP),	(IEN  | PTD | EN  | M0)) \
--	MUX_VAL(CP(D2D_IDLEREQ),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_IDLEACK),	(IEN  | PTU | EN  | M0)) \
--	MUX_VAL(CP(D2D_MWRITE),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_SWRITE),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_MREAD),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_SREAD),		(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_MBUSFLAG),	(IEN  | PTD | DIS | M0)) \
--	MUX_VAL(CP(D2D_SBUSFLAG),	(IEN  | PTD | DIS | M0)) \
--
--#endif
-diff --git a/configs/am3517_evm_defconfig b/configs/am3517_evm_defconfig
-deleted file mode 100644
-index 39800366599..00000000000
---- a/configs/am3517_evm_defconfig
-+++ /dev/null
-@@ -1,96 +0,0 @@
+@@ -1,116 +0,0 @@
 -CONFIG_ARM=y
--# CONFIG_SPL_USE_ARCH_MEMCPY is not set
--# CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_OMAP2PLUS=y
--CONFIG_TEXT_BASE=0x80100000
--CONFIG_SYS_MALLOC_F_LEN=0x4000
+-CONFIG_SKIP_LOWLEVEL_INIT_ONLY=y
+-CONFIG_SPL_SKIP_LOWLEVEL_INIT_ONLY=y
+-CONFIG_SYS_THUMB_BUILD=y
+-CONFIG_ARCH_DAVINCI=y
+-CONFIG_TEXT_BASE=0xc1080000
+-CONFIG_SYS_MALLOC_LEN=0x110000
+-CONFIG_SYS_MALLOC_F_LEN=0x800
+-CONFIG_TARGET_DA850EVM=y
 -CONFIG_TI_COMMON_CMD_OPTIONS=y
--CONFIG_ENV_SOURCE_FILE="am3517evm"
--CONFIG_DEFAULT_DEVICE_TREE="ti/omap/am3517-evm"
--CONFIG_TARGET_AM3517_EVM=y
--CONFIG_EMIF4=y
--CONFIG_SPL_SYS_MALLOC_F_LEN=0x2500
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0000f20
+-CONFIG_SF_DEFAULT_SPEED=30000000
+-CONFIG_ENV_SIZE=0x10000
+-CONFIG_ENV_OFFSET=0x80000
+-CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="ti/davinci/da850-evm"
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_STACK=0x8001ff00
+-CONFIG_SPL_TEXT_BASE=0x80000000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0xc0000000
+-CONFIG_SYS_LOAD_ADDR=0xc0700000
 -CONFIG_SPL=y
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
 -CONFIG_LTO=y
--# CONFIG_EFI_LOADER is not set
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_BOOTDELAY=10
--CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then echo SD/MMC found on device $mmcdev; if run loadbootenv; then run importbootenv; fi; echo Checking if uenvcmd is set ...; if test -n $uenvcmd; then echo Running uenvcmd ...; run uenvcmd; fi; echo Running default loadimage ...; setenv bootfile zImage; if run loadimage; then run loadfdt; run mmcboot; fi; else run nandboot; fi"
--CONFIG_SYS_PBSIZE=1054
+-CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+-CONFIG_BOOTDELAY=3
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run envboot; run mmcboot; "
+-CONFIG_DEFAULT_FDT_FILE="da850-evm.dtb"
+-CONFIG_SYS_PBSIZE=1050
+-# CONFIG_DISPLAY_CPUINFO is not set
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_CLOCKS=y
+-CONFIG_HWCONFIG=y
+-CONFIG_MISC_INIT_R=y
+-CONFIG_SPL_PAD_TO=0x8000
+-CONFIG_SPL_FOOTPRINT_LIMIT=y
+-CONFIG_SPL_MAX_FOOTPRINT=0x8000
 -CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_HAVE_INIT_STACK=y
 -CONFIG_SPL_SYS_MALLOC=y
--CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SPL_FS_EXT4 is not set
--# CONFIG_SPL_I2C is not set
--CONFIG_SPL_MTD=y
--CONFIG_SPL_NAND_DRIVERS=y
--CONFIG_SPL_NAND_ECC=y
--CONFIG_SPL_NAND_SIMPLE=y
--CONFIG_SPL_NAND_BASE=y
--CONFIG_SPL_OS_BOOT=y
--CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
--CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x2a0000
--CONFIG_SPL_FALCON_BOOT_MMCSD=y
--CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
--CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x1500
--CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x200
--# CONFIG_SPL_POWER is not set
--CONFIG_SYS_PROMPT="AM3517_EVM # "
--# CONFIG_CMD_IMI is not set
--CONFIG_CMD_SPL_NAND_OFS=0xaa0000
--CONFIG_CMD_SPL_WRITE_SIZE=0x20000
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0f70000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x110000
+-# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
+-CONFIG_SPL_DM_SPI_FLASH=y
+-CONFIG_SPL_SPI_LOAD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x8000
+-CONFIG_HUSH_PARSER=y
+-CONFIG_SYS_PROMPT="U-Boot > "
+-CONFIG_CRC32_VERIFY=y
+-CONFIG_CMD_MX_CYCLIC=y
+-CONFIG_CMD_DM=y
 -# CONFIG_CMD_GPT is not set
--CONFIG_CMD_NAND=y
--# CONFIG_CMD_SPI is not set
+-CONFIG_CMD_MTD=y
+-# CONFIG_CMD_SF is not set
 -# CONFIG_CMD_SETEXPR is not set
 -CONFIG_BOOTP_DNS2=y
 -# CONFIG_CMD_TIME is not set
+-# CONFIG_CMD_EXT4 is not set
+-CONFIG_CMD_FS_UUID=y
 -CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nand0=omap2-nand.0"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:512k(MLO),1920k(u-boot),256k(u-boot-env),8m(kernel),512k(dtb),-(rootfs)"
--CONFIG_CMD_UBI=y
+-CONFIG_MTDIDS_DEFAULT="nor0=spi0.0"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=spi0.0:32k(SPL),480k(u-boot),64k(u-boot-env),7552k(kernel-spare),64k(MAC-Address)"
+-CONFIG_CMD_DIAG=y
 -CONFIG_OF_CONTROL=y
 -CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
--CONFIG_ENV_OVERWRITE=y
--# CONFIG_ENV_IS_IN_FAT is not set
--CONFIG_ENV_IS_IN_NAND=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
 -CONFIG_USE_BOOTFILE=y
 -CONFIG_BOOTFILE="uImage"
 -CONFIG_VERSION_VARIABLE=y
 -CONFIG_NET_RETRY_COUNT=10
 -CONFIG_BOOTP_SEND_HOSTNAME=y
 -CONFIG_SPL_DM=y
--CONFIG_DM_PCA953X=y
--CONFIG_MMC_OMAP_HS=y
+-CONFIG_SPL_DM_SEQ_ALIAS=y
+-CONFIG_SPL_OF_TRANSLATE=y
+-CONFIG_SPL_BLOCK_CACHE=y
+-CONFIG_DA8XX_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_DAVINCI=y
 -CONFIG_MTD=y
+-CONFIG_DM_MTD=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_WINBOND=y
+-CONFIG_SPI_FLASH_MTD=y
+-CONFIG_MII=y
+-CONFIG_DRIVER_TI_EMAC=y
+-CONFIG_PHY=y
+-CONFIG_PHY_DA8XX_USB=y
+-CONFIG_PINCTRL=y
+-CONFIG_PINCTRL_SINGLE=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SYS_NS16550=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_DAVINCI_SPI=y
+-CONFIG_USB=y
+-# CONFIG_SPL_DM_USB is not set
+-CONFIG_USB_OHCI_HCD=y
+-CONFIG_USB_OHCI_DA8XX=y
+-CONFIG_USB_MUSB_HOST=y
+-CONFIG_USB_MUSB_DA8XX=y
+-CONFIG_USB_MUSB_PIO_ONLY=y
+-CONFIG_USB_STORAGE=y
+-# CONFIG_FAT_WRITE is not set
+diff --git a/configs/da850evm_direct_nor_defconfig b/configs/da850evm_direct_nor_defconfig
+deleted file mode 100644
+index 936de610713..00000000000
+--- a/configs/da850evm_direct_nor_defconfig
++++ /dev/null
+@@ -1,95 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_SKIP_LOWLEVEL_INIT_ONLY=y
+-CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_DAVINCI=y
+-CONFIG_TEXT_BASE=0x60000000
+-CONFIG_SYS_MALLOC_LEN=0x110000
+-CONFIG_SYS_MALLOC_F_LEN=0x800
+-CONFIG_TARGET_DA850EVM=y
+-CONFIG_DA850_LOWLEVEL=y
+-CONFIG_TI_COMMON_CMD_OPTIONS=y
+-CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x8001ff00
+-CONFIG_ENV_SIZE=0x2800
+-CONFIG_ENV_SECT_SIZE=0x20000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="ti/davinci/da850-evm"
+-CONFIG_SYS_LOAD_ADDR=0xc0700000
+-CONFIG_ENV_ADDR=0x60100000
+-CONFIG_LTO=y
+-CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+-CONFIG_BOOTDELAY=3
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="mem=32M console=ttyS2,115200n8 root=/dev/mtdblock2 rw noinitrd ip=dhcp"
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run envboot; run mmcboot; "
+-CONFIG_SYS_PBSIZE=1050
+-# CONFIG_DISPLAY_CPUINFO is not set
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_CLOCKS=y
+-CONFIG_HWCONFIG=y
+-CONFIG_MISC_INIT_R=y
+-CONFIG_HUSH_PARSER=y
+-CONFIG_SYS_PROMPT="U-Boot > "
+-# CONFIG_CMD_BOOTZ is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_CRC32_VERIFY=y
+-CONFIG_CMD_MX_CYCLIC=y
+-CONFIG_CMD_DM=y
+-# CONFIG_CMD_GPT is not set
+-CONFIG_CMD_MTD=y
+-# CONFIG_CMD_PART is not set
+-# CONFIG_CMD_SF is not set
+-# CONFIG_CMD_SPI is not set
+-# CONFIG_CMD_SETEXPR is not set
+-CONFIG_BOOTP_DNS2=y
+-# CONFIG_CMD_TIME is not set
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=physmap-flash.2"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=physmap-flash.2:1m(u-boot),128k(u-boot-env),-(spare)"
+-CONFIG_CMD_DIAG=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_IS_IN_FLASH=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_VERSION_VARIABLE=y
+-CONFIG_NET_RETRY_COUNT=10
+-CONFIG_BOOTP_SEND_HOSTNAME=y
+-CONFIG_DA8XX_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_DAVINCI=y
+-# CONFIG_MMC is not set
+-CONFIG_MTD=y
+-CONFIG_DM_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_FLASH_SHOW_PROGRESS=0
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_PROTECTION=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_MAX_FLASH_SECT=67
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_WINBOND=y
+-CONFIG_MII=y
+-CONFIG_DRIVER_TI_EMAC=y
+-CONFIG_PHY=y
+-CONFIG_PHY_DA8XX_USB=y
+-CONFIG_PINCTRL=y
+-CONFIG_PINCTRL_SINGLE=y
+-CONFIG_SPECIFY_CONSOLE_INDEX=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SYS_NS16550=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_DAVINCI_SPI=y
+-CONFIG_USB=y
+-CONFIG_USB_OHCI_HCD=y
+-CONFIG_USB_OHCI_DA8XX=y
+-CONFIG_USB_MUSB_HOST=y
+-CONFIG_USB_MUSB_DA8XX=y
+-CONFIG_USB_MUSB_PIO_ONLY=y
+-CONFIG_USB_STORAGE=y
+diff --git a/configs/da850evm_nand_defconfig b/configs/da850evm_nand_defconfig
+deleted file mode 100644
+index 655cb5d4e9e..00000000000
+--- a/configs/da850evm_nand_defconfig
++++ /dev/null
+@@ -1,119 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_SKIP_LOWLEVEL_INIT_ONLY=y
+-CONFIG_SPL_SKIP_LOWLEVEL_INIT_ONLY=y
+-CONFIG_SYS_THUMB_BUILD=y
+-CONFIG_ARCH_DAVINCI=y
+-CONFIG_TEXT_BASE=0xc1080000
+-CONFIG_SYS_MALLOC_LEN=0x110000
+-CONFIG_SYS_MALLOC_F_LEN=0x800
+-CONFIG_TARGET_DA850EVM=y
+-CONFIG_TI_COMMON_CMD_OPTIONS=y
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0000f20
+-CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_OFFSET=0x0
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="ti/davinci/da850-evm"
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_STACK=0x8001ff00
+-CONFIG_SPL_TEXT_BASE=0x80000000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0xc0000000
+-CONFIG_SYS_LOAD_ADDR=0xc0700000
+-CONFIG_SPL=y
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
+-CONFIG_LTO=y
+-CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+-CONFIG_BOOTDELAY=3
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run envboot; run mmcboot; "
+-CONFIG_DEFAULT_FDT_FILE="da850-evm.dtb"
+-CONFIG_SYS_PBSIZE=1050
+-# CONFIG_DISPLAY_CPUINFO is not set
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_CLOCKS=y
+-CONFIG_HWCONFIG=y
+-CONFIG_SPL_PAD_TO=0x8000
+-CONFIG_SPL_FOOTPRINT_LIMIT=y
+-CONFIG_SPL_MAX_FOOTPRINT=0x8000
+-CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_HAVE_INIT_STACK=y
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0f70000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x110000
+-# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
+-CONFIG_SPL_NAND_SUPPORT=y
+-CONFIG_SPL_NAND_DRIVERS=y
+-CONFIG_SPL_NAND_ECC=y
+-CONFIG_SPL_NAND_SIMPLE=y
+-CONFIG_SPL_NAND_BASE=y
+-CONFIG_HUSH_PARSER=y
+-CONFIG_SYS_PROMPT="U-Boot > "
+-CONFIG_CRC32_VERIFY=y
+-CONFIG_CMD_MX_CYCLIC=y
+-CONFIG_CMD_DM=y
+-# CONFIG_CMD_GPT is not set
+-CONFIG_CMD_NAND=y
+-# CONFIG_CMD_SETEXPR is not set
+-CONFIG_BOOTP_DNS2=y
+-# CONFIG_CMD_TIME is not set
+-# CONFIG_CMD_EXT4 is not set
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nand0=nand512"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=nand512:128k(u-boot env),512k(u-boot),128k(spl-os),8m(kernel),-(rootfs)"
+-CONFIG_CMD_DIAG=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_SPL_OF_CONTROL=y
+-CONFIG_ENV_IS_IN_NAND=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_VERSION_VARIABLE=y
+-CONFIG_NET_RETRY_COUNT=10
+-CONFIG_BOOTP_SEND_HOSTNAME=y
+-CONFIG_SPL_DM=y
+-CONFIG_SPL_DM_SEQ_ALIAS=y
+-CONFIG_SPL_OF_TRANSLATE=y
+-CONFIG_DA8XX_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_MTD=y
+-CONFIG_DM_MTD=y
 -CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=y
+-CONFIG_SYS_NAND_USE_FLASH_BBT=y
+-CONFIG_NAND_DAVINCI=y
 -CONFIG_SYS_NAND_BLOCK_SIZE=0x20000
 -CONFIG_SYS_NAND_PAGE_SIZE=0x800
 -CONFIG_SYS_NAND_OOBSIZE=0x40
--CONFIG_SYS_NAND_BUSWIDTH_16BIT=y
 -CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
--CONFIG_SYS_NAND_U_BOOT_OFFS=0x80000
--CONFIG_SYS_NAND_MAX_OOBFREE=2
--CONFIG_SYS_NAND_MAX_ECCPOS=56
+-CONFIG_SYS_NAND_U_BOOT_OFFS=0x28000
+-CONFIG_SYS_NAND_HW_ECC_OOBFIRST=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_WINBOND=y
+-CONFIG_SPI_FLASH_MTD=y
 -CONFIG_MII=y
 -CONFIG_DRIVER_TI_EMAC=y
--CONFIG_DRIVER_TI_EMAC_USE_RMII=y
+-CONFIG_PHY=y
+-CONFIG_PHY_DA8XX_USB=y
 -CONFIG_PINCTRL=y
 -CONFIG_PINCTRL_SINGLE=y
--CONFIG_DM_PMIC=y
--# CONFIG_SPL_PMIC_CHILDREN is not set
--CONFIG_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_DM_REGULATOR_GPIO=y
--# CONFIG_TWL4030_POWER is not set
+-CONFIG_DM_SERIAL=y
+-CONFIG_SYS_NS16550=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
--CONFIG_OMAP3_SPI=y
+-CONFIG_DAVINCI_SPI=y
 -CONFIG_USB=y
--CONFIG_USB_EHCI_HCD=y
+-# CONFIG_SPL_DM_USB is not set
+-CONFIG_USB_OHCI_HCD=y
+-CONFIG_USB_OHCI_DA8XX=y
 -CONFIG_USB_MUSB_HOST=y
--CONFIG_USB_MUSB_AM35X=y
--CONFIG_BCH=y
--CONFIG_SPL_TINY_MEMSET=y
-diff --git a/include/configs/am3517_evm.h b/include/configs/am3517_evm.h
+-CONFIG_USB_MUSB_DA8XX=y
+-CONFIG_USB_MUSB_PIO_ONLY=y
+-CONFIG_USB_STORAGE=y
+-# CONFIG_FAT_WRITE is not set
+diff --git a/doc/README.davinci b/doc/README.davinci
+index ea81279a0f3..97ca0dc39a6 100644
+--- a/doc/README.davinci
++++ b/doc/README.davinci
+@@ -9,8 +9,6 @@ part number but is very similar to the DaVinci series.
+ 
+ Currently the following boards are supported:
+ 
+-* TI DA850 EVM
+-
+ * TI OMAP-L138 LCDK
+ 
+ * Lego EV3
+@@ -18,11 +16,6 @@ Currently the following boards are supported:
+ Build
+ =====
+ 
+-* TI DA850 EVM:
+-
+-make da850evm_config
+-make
+-
+ * TI OMAP-L138 LCDK
+ 
+ make omapl138_lcdk_defconfig
+@@ -42,33 +35,15 @@ initialization.
+ 
+ The SPL is built as u-boot.ais for all DA850 defconfigs except those booting
+ from NOR flash. The resulting image file can be programmed to the SPI flash
+-of the DA850 EVM/LCDK.
++of the LCDK.
+ 
+ Devices that support booting from NOR utilize execute in place (XIP) and do
+ not require SPL to perform low level initialization.
+ 
+-Environment Variables
+-=====================
+-
+-The DA850 EVM allows the user to specify the maximum cpu clock allowed by the
+-silicon, in Hz, via an environment variable "maxcpuclk".
+-
+-The maximum clock rate allowed depends on the silicon populated on the EVM.
+-Please make sure you understand the restrictions placed on this clock in the
+-device specific datasheet before setting up this variable. This information is
+-passed to the Linux kernel using the ATAG_REVISION atag.
+-
+-If "maxcpuclk" is not defined, the configuration CFG_DA850_EVM_MAX_CPU_CLK
+-is used to obtain this information.
+-
+ Links
+ =====
+ 
+-1) TI DA850 EVM
+-http://focus.ti.com/docs/prod/folders/print/omap-l138.html
+-http://www.logicpd.com/products/development-kits/zoom-omap-l138-evm-development-kit
+-
+-2) TI OMAP-L138 LCDK
++1) TI OMAP-L138 LCDK
+ http://focus.ti.com/docs/prod/folders/print/omap-l138.html
+ https://www.ti.com/tool/TMDXLCDK138
+ 
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index b5dfad7380f..6084b614358 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -155,7 +155,6 @@ config NAND_BRCMNAND_IPROC
+ config NAND_DAVINCI
+ 	bool "Support TI Davinci NAND controller"
+ 	depends on ARCH_DAVINCI || ARCH_KEYSTONE
+-	select SYS_NAND_SELF_INIT if TARGET_DA850EVM
+ 	help
+ 	  Enable this driver for NAND flash controllers available in TI Davinci
+ 	  and Keystone2 platforms
+diff --git a/include/configs/da850evm.h b/include/configs/da850evm.h
 deleted file mode 100644
-index e3432ebeaab..00000000000
---- a/include/configs/am3517_evm.h
+index 8db849c6d09..00000000000
+--- a/include/configs/da850evm.h
 +++ /dev/null
-@@ -1,42 +0,0 @@
+@@ -1,172 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * am3517_evm.h - Default configuration for AM3517 EVM board.
+- * Copyright (C) 2010 Texas Instruments Incorporated - https://www.ti.com/
 - *
-- * Author: Vaibhav Hiremath <hvaibhav@ti.com>
+- * Based on davinci_dvevm.h. Original Copyrights follow:
 - *
-- * Based on omap3_evm_config.h
-- *
-- * Copyright (C) 2010 Texas Instruments Incorporated
+- * Copyright (C) 2007 Sergey Kubushyn <ksi@koi8.net>
 - */
 -
 -#ifndef __CONFIG_H
 -#define __CONFIG_H
 -
--#include <configs/ti_omap3_common.h>
--
--/* Board NAND Info. */
--#if defined(CONFIG_MTD_RAW_NAND)
--#define CFG_SYS_NAND_ECCPOS		{ 2,  3,  4,  5,  6,  7,  8,  9, 10, \
--					 11, 12, 13, 14, 16, 17, 18, 19, 20, \
--					 21, 22, 23, 24, 25, 26, 27, 28, 30, \
--					 31, 32, 33, 34, 35, 36, 37, 38, 39, \
--					 40, 41, 42, 44, 45, 46, 47, 48, 49, \
--					 50, 51, 52, 53, 54, 55, 56 }
--
--#define CFG_SYS_NAND_ECCSIZE		512
--#define CFG_SYS_NAND_ECCBYTES	13
--#define CFG_SYS_NAND_U_BOOT_START	CONFIG_TEXT_BASE
--/* NAND block size is 128 KiB.  Synchronize these values with
-- * corresponding Device Tree entries in Linux:
-- *  MLO(SPL)             4 * NAND_BLOCK_SIZE = 512 KiB  @ 0x000000
-- *  U-Boot              15 * NAND_BLOCK_SIZE = 1920 KiB @ 0x080000
-- *  U-Boot environment   2 * NAND_BLOCK_SIZE = 256 KiB  @ 0x260000
-- *  Kernel              64 * NAND_BLOCK_SIZE = 8 MiB    @ 0x2A0000
-- *  DTB                  4 * NAND_BLOCK_SIZE = 512 KiB  @ 0xAA0000
-- *  RootFS              Remaining Flash Space           @ 0xB20000
+-/*
+- * Board
 - */
 -
--#define CFG_SYS_FLASH_BASE		NAND_BASE
--#endif /* CONFIG_MTD_RAW_NAND */
+-/*
+- * SoC Configuration
+- */
+-#define CFG_SYS_EXCEPTION_VECTORS_HIGH
+-#define CFG_SYS_OSCIN_FREQ		24000000
+-#define CFG_SYS_TIMERBASE		DAVINCI_TIMER0_BASE
+-#define CFG_SYS_HZ_CLOCK		clk_get(DAVINCI_AUXCLK_CLKID)
+-
+-#ifdef CONFIG_MTD_NOR_FLASH
+-#define CFG_SYS_DV_NOR_BOOT_CFG	(0x11)
+-#endif
+-
+-/*
+- * Memory Info
+- */
+-#define PHYS_SDRAM_1		DAVINCI_DDR_EMIF_DATA_BASE /* DDR Start */
+-#define PHYS_SDRAM_1_SIZE	(64 << 20) /* SDRAM size 64MB */
+-#define CFG_MAX_RAM_BANK_SIZE (512 << 20) /* max size from SPRS586*/
+-/* memtest start addr */
+-
+-/* memtest will be run on 16MB */
+-
+-#define CFG_SYS_DA850_SYSCFG_SUSPSRC (	\
+-	DAVINCI_SYSCFG_SUSPSRC_TIMER0 |		\
+-	DAVINCI_SYSCFG_SUSPSRC_SPI1 |		\
+-	DAVINCI_SYSCFG_SUSPSRC_UART2 |		\
+-	DAVINCI_SYSCFG_SUSPSRC_EMAC |		\
+-	DAVINCI_SYSCFG_SUSPSRC_I2C)
+-
+-/*
+- * PLL configuration
+- */
+-
+-#define CFG_SYS_DA850_PLL0_PLLM     24
+-#define CFG_SYS_DA850_PLL1_PLLM     21
+-
+-/*
+- * DDR2 memory configuration
+- */
+-#define CFG_SYS_DA850_DDR2_DDRPHYCR (DV_DDR_PHY_PWRDNEN | \
+-					DV_DDR_PHY_EXT_STRBEN | \
+-					(0x4 << DV_DDR_PHY_RD_LATENCY_SHIFT))
+-
+-#define CFG_SYS_DA850_DDR2_SDBCR (		\
+-	(1 << DV_DDR_SDCR_MSDRAMEN_SHIFT) |	\
+-	(1 << DV_DDR_SDCR_DDREN_SHIFT) |	\
+-	(1 << DV_DDR_SDCR_SDRAMEN_SHIFT) |	\
+-	(1 << DV_DDR_SDCR_BUS_WIDTH_SHIFT) |	\
+-	(0x3 << DV_DDR_SDCR_CL_SHIFT) |		\
+-	(0x2 << DV_DDR_SDCR_IBANK_SHIFT) |	\
+-	(0x2 << DV_DDR_SDCR_PAGESIZE_SHIFT))
+-
+-/* SDBCR2 is only used if IBANK_POS bit in SDBCR is set */
+-#define CFG_SYS_DA850_DDR2_SDBCR2 0
+-
+-#define CFG_SYS_DA850_DDR2_SDTIMR (		\
+-	(14 << DV_DDR_SDTMR1_RFC_SHIFT) |	\
+-	(2 << DV_DDR_SDTMR1_RP_SHIFT) |		\
+-	(2 << DV_DDR_SDTMR1_RCD_SHIFT) |	\
+-	(1 << DV_DDR_SDTMR1_WR_SHIFT) |		\
+-	(5 << DV_DDR_SDTMR1_RAS_SHIFT) |	\
+-	(8 << DV_DDR_SDTMR1_RC_SHIFT) |		\
+-	(1 << DV_DDR_SDTMR1_RRD_SHIFT) |	\
+-	(0 << DV_DDR_SDTMR1_WTR_SHIFT))
+-
+-#define CFG_SYS_DA850_DDR2_SDTIMR2 (		\
+-	(7 << DV_DDR_SDTMR2_RASMAX_SHIFT) |	\
+-	(0 << DV_DDR_SDTMR2_XP_SHIFT) |		\
+-	(0 << DV_DDR_SDTMR2_ODT_SHIFT) |	\
+-	(17 << DV_DDR_SDTMR2_XSNR_SHIFT) |	\
+-	(199 << DV_DDR_SDTMR2_XSRD_SHIFT) |	\
+-	(0 << DV_DDR_SDTMR2_RTP_SHIFT) |	\
+-	(0 << DV_DDR_SDTMR2_CKE_SHIFT))
+-
+-#define CFG_SYS_DA850_DDR2_SDRCR    0x00000494
+-#define CFG_SYS_DA850_DDR2_PBBPR    0x30
+-
+-/*
+- * Serial Driver info
+- */
+-#define CFG_SYS_NS16550_CLK	clk_get(DAVINCI_UART2_CLKID)
+-
+-#define CFG_SYS_SPI_CLK		clk_get(DAVINCI_SPI1_CLKID)
+-
+-/*
+- * I2C Configuration
+- */
+-#define CFG_SYS_I2C_EXPANDER_ADDR   0x20
+-
+-/*
+- * Flash & Environment
+- */
+-#ifdef CONFIG_MTD_RAW_NAND
+-#define CFG_SYS_NAND_CS		3
+-#define CFG_SYS_NAND_BASE		DAVINCI_ASYNC_EMIF_DATA_CE3_BASE
+-#define CFG_SYS_NAND_MASK_CLE		0x10
+-#define CFG_SYS_NAND_MASK_ALE		0x8
+-#define CFG_SYS_NAND_U_BOOT_SIZE	0x40000
+-#define CFG_SYS_NAND_U_BOOT_DST	0xc1080000
+-#define CFG_SYS_NAND_U_BOOT_START	CFG_SYS_NAND_U_BOOT_DST
+-#define CFG_SYS_NAND_ECCPOS		{				\
+-				24, 25, 26, 27, 28, \
+-				29, 30, 31, 32, 33, 34, 35, 36, 37, 38, \
+-				39, 40, 41, 42, 43, 44, 45, 46, 47, 48, \
+-				49, 50, 51, 52, 53, 54, 55, 56, 57, 58, \
+-				59, 60, 61, 62, 63 }
+-#define CFG_SYS_NAND_ECCSIZE		512
+-#define CFG_SYS_NAND_ECCBYTES	10
+-#endif
+-
+-#ifdef CONFIG_MTD_NOR_FLASH
+-#define CFG_SYS_FLASH_BASE		DAVINCI_ASYNC_EMIF_DATA_CE2_BASE
+-#define PHYS_FLASH_SIZE			(8 << 20) /* Flash size 8MB */
+-#endif
+-
+-/*
+- * U-Boot general configuration
+- */
+-
+-/*
+- * Linux Information
+- */
+-#define LINUX_BOOT_PARAM_ADDR	(PHYS_SDRAM_1 + 0x100)
+-
+-#define DEFAULT_LINUX_BOOT_ENV \
+-	"loadaddr=0xc0700000\0" \
+-	"fdtaddr=0xc0600000\0" \
+-	"scriptaddr=0xc0600000\0"
+-
+-#include <env/ti/mmc.h>
+-
+-#define CFG_EXTRA_ENV_SETTINGS \
+-	DEFAULT_LINUX_BOOT_ENV \
+-	DEFAULT_MMC_TI_ARGS \
+-	"bootpart=0:2\0" \
+-	"bootdir=/boot\0" \
+-	"bootfile=zImage\0" \
+-	"fdtfile=da850-evm.dtb\0" \
+-	"boot_fdt=yes\0" \
+-	"boot_fit=0\0" \
+-	"console=ttyS2,115200n8\0" \
+-	"hwconfig=dsp:wake=yes"
+-
+-#ifdef CONFIG_XPL_BUILD
+-/* defines for SPL */
+-
+-#endif
+-
+-/* Load U-Boot Image From MMC */
+-
+-/* additions for new relocation code, must added to all boards */
+-#define CFG_SYS_SDRAM_BASE		0xc0000000
+-
+-#include <asm/arch/hardware.h>
 -
 -#endif /* __CONFIG_H */
 -- 
