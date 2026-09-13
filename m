@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24323C88E5C
-	for <u-boot@archiver.kernel.org>; Sun, 13 Sep 2026 23:20:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 363B4C88E64
+	for <u-boot@archiver.kernel.org>; Sun, 13 Sep 2026 23:20:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A3C9680CEC;
-	Sun, 13 Sep 2026 23:20:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F159080D3F;
+	Sun, 13 Sep 2026 23:20:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BRhr6F1LssoA; Sun, 13 Sep 2026 23:20:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0FF0280CC3
+ id eLh4ptwYHzBQ; Sun, 13 Sep 2026 23:20:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org B906D80CD9
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789341606;
-	b=OgwyUCGFYk40tXHCmyvkDIYJVw03lNS4RBURIeMHHplG6Ryp/o+MfThN2A48IFclasul
-	 vYR5vSTk3Q1X5IiJ1EyNLG+oRJ7Ckv2g4cBMqRbp9wwmB0W40pSEuzV+aZN96SIXK4U+V
-	 NFTrL/XqlEVPImYJMWg2bdzdY1euFEGg7LXHqUYMSCKoLPu/ZOpOF7viVlk/NZyNDGnIV
-	 B86y5KdEXZyoIs1nhgXP4AF74+QvlG/XtvSXpUqk4SVFovd9TNK6Q8SUuGftbjJpIQaaU
-	 TwfnIq0AabDIXLKgBQFTASsM6vyfk43uKoCya0zr+zXG3YZe3mSgMczRhUSt6CYWkBA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789341607;
+	b=BLtqehgrleQwFP3D/RwVklFxoQ/CZ76fOB9aJ3LsexOxBtJUYi/MtQHgXHpJGDIKRrPQ
+	 8NEqhdvQfs7TvJSAZ898cTDKZ+yQsLQFz58OfDUvOLu3Uo5F9RcrScMWmapc8/ilyT+8M
+	 HHdtgbwtwhRHwDU2ZTkkPRweuw3phS8KMp0BMh5MLESwxnVaheDGtWSFai7kEYpjThlgN
+	 FKCeiqPlmmsF+Rcs/4UgsnZj0Y33yDzGY5i14hy7hFBEXHzov8IyJUXvECr5ZWYifNRCQ
+	 AvGLr/spOVz9hsOoKRwkBWu/qwKI6fKL4tdGSpVSv3dgDOiSpc1jKV05p6hZb1b0vKA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789341606;
+	c=relaxed/relaxed; t=1789341607;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,130 +31,131 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=iAy27cAVJbwmBVsGG67PzmxCfkT5Ut2XxJrLPYK48Mo=;
-	b=iQvc/FH/3bq0Ic+mr3xJGKF1QrR1NAHYbAsheV7HTWhQGl2uyk/BQMBWUCwKlOqrNZiM
-	 2+rIuGUreOOjZDmqnOC/oX7vK3cjmhos+BiHmXXvCc4nTxz7PgF4Zx1JM0s4SEcdIgUa4
-	 QSUkbHNx17XA91bz5l69b9smD2zNDuogrSwdnGNvDOTpCVDTdxcvzFyQVWLu+vwa+ieKj
-	 nCKUF5Usj/vgLEM9pLNgk9p8F7p8oo/CyNveXXHRcv4yLTImjK7biuW9nfZp5iiWzPKBj
-	 03uxJQkNyUlI+4Rm81dZ4dlvXcNM6yaaR42rQDZt8LX1T1x4E07j2dvl3S1Zv/IdUrQ==
+	bh=EaiOdRwxZKE8ubvc214/5wzd08jAVX9fev9UNmmYEX4=;
+	b=IoE+7AtOI0ceiztFky/RPVYD4qNsdpZoTe5kPYgbQXEZ7eCE5urW+MKVXPk6DX7VeNrW
+	 iHRE9Arfq27twTBoIiVbKsFqVf3dRIiHO6RIPtEx8VRf96F8Zmd798icG7M46sqDNS00x
+	 1QofjxjtIOV8FT9s0SPLsoLeKrQz3t2A3Q/ZrwkOqn3Fg0rNpt0cfVfA+FxjEmldiTujU
+	 4iLOkxIp8Jl9xtJ7icsvzRrKhzI8AQmJqX0/yEh/huI1ampq/gfG24lAsjGGefK4EihAV
+	 Dd64ADHPo5u9Ij5Q7D0Pvb3l6sJ3AU/VxG2mp1ERX+UwMVMJdobYbzotIP+k3mgKrjA==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789341606;
-	bh=iAy27cAVJbwmBVsGG67PzmxCfkT5Ut2XxJrLPYK48Mo=;
+	d=lists.u-boot-project.org; s=default; t=1789341607;
+	bh=EaiOdRwxZKE8ubvc214/5wzd08jAVX9fev9UNmmYEX4=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=htDY4TzvxmIODjycF8T7z0k7ukZU4zqdbVZ1eWav36VF9GifSqWwJpy+bqvduvLj3
-	 cXml9/o+8KneRvBHYtVojGsS1r8feUxquiSD58DOvCybgEuJGHW/+Yv7PvyvWSPjYn
-	 pnywc9ZW8sMcpCGqHUDXviPdH+si3kYFb9lmP5GX7Zw4xXR88SGYfRg5v+12YenQe9
-	 YJbPtxs/TqVZBuz1dsBCHwyVXSpWjAXD/u9Xi1qImvjlTcZo+0gDQ7K9WzedisuLE3
-	 BhlDEIEYhflO82mRllmYhruNth93GiW04k4oSoJ0q32SXPpJeRJKIB5popVKb5VnqL
-	 z0rK/4Bbg4MGg==
+	b=z9yzcejUqiF/nIAKvV8qmedazaH/8aq63jpZ6pd5alpGMVqWlJGzSvY/zSdQeTwJl
+	 je+nMBuF0Ck6myeoFPHksZd1bfcfA0d5Bxe7X1Rt5208qO0qtqcG0s31sdItePBdDE
+	 lzjZbOsUw6IewvjVAj9DCuM/KprM3ciJwb+bVkAXVBgUc0Cvcoh1h2Ry6d7LMVVsEx
+	 oYJWrIfDKMC220CmTZENElXVEtt/5Z5SGEdhPKZZHU9YeDxCGLUZg8szmIKLIWPSP2
+	 5qLCKge+S9sq1anMvAxnsqrJ5kUWsi5mNaDT0vnVe5gE7P2sTZUpnjOlz6n+GDJKis
+	 /btfg8rJGgCig==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0FF0280CC3;
-	Sun, 13 Sep 2026 23:20:06 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1BFF724D
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B906D80CD9;
+	Sun, 13 Sep 2026 23:20:07 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6172F224
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0D9F940022
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:16 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 52F26605F9
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eKedX7e3a2rp for <u-boot@lists.u-boot-project.org>;
- Sun, 13 Sep 2026 15:52:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org EF0C140076
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:33::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789314733;
- b=dyqdIx+f/izgQNlWo57R5N7fru239l4yWJOxwqqmBn7Tj0faWAp3LFdakU07DX7sSv3F
- 6bzP6B8LuUwNPa3cxtGfks/wpWXQJcJF0EgKhQra0tjS4NY6rtePSAuMszb+kwaeqV+BU
- H50m3ZPXX+ZiweY5FDR0Qz/Xzmdq8ZrptGg6EsUW1A+NnbysV1ld2ab2IT/oeTyYPv/7H
- A/7tmOF0k/6CAxn06LWaCQ6MV+X2YVv8U3jAuXvb/jR/G7rEzyCd4D3KTw6jKIvnCho0J
- 146YDoGEHKeYBPEi2h7swt1zqhzZxPC7BgDEkK36w2MtIy3nfLjAknFgIEvZmOjejlA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Fsoat94F13rQ for <u-boot@lists.u-boot-project.org>;
+ Sun, 13 Sep 2026 15:52:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 50541605CE
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:34::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789314746;
+ b=XmyWAGA0udjke9AINmj2teDOJ5C/iSHMjWoWYB81uWOXf/mxIHivcEae5Ex8sle+6s6H
+ aDPkmoB8Cdnbwq8pyo0xJxA/glWIP9AbLFFJvUbryZ4VnxXFvLB8mQkVcl02qkZx71n4i
+ Dm8TjT35wjzWH0PDJp6se/VwoGxMEzUrpgMYhMUXxb70dbrNCz0PLCVjhvBwMVI+YkPxL
+ KjK11i4q87SANK/AMKF7CDzZfbOkHFwXDdLJKrFUNdWRFxmAOBVgQeZ0ObyzZ0rj8qGTP
+ mMN+4uihPcSxP2BMOy5ZZV/g6iJf7Me3KkewLwObLEzi6c8Sj+ULclHSZTU5dPICS2A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789314733;
+ c=relaxed/relaxed; t=1789314746;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=iAy27cAVJbwmBVsGG67PzmxCfkT5Ut2XxJrLPYK48Mo=;
- b=Ujy39BLHIrYuUwWvaE/xJ8sBfwoNwR2YcYv0/7huJATh4WpP+rItOJnDCutxGaYB+cuM
- nELLOW8c7p4xJxtoJX4lYjWLiViwEzaBNcdVtji7H93z0UCuvHGjrX9lE9z9lCuoCsRxh
- LJABHoSUalgcGwdnYFlLuDOdLmhJWWVOrPkPPpKiN6CdqpElYsVHXVG7yV0g0ldELriMo
- nEQ4RJSq2r3kShmM43YGwIHhgg0Baq8PiRZlcHciNEBDvOFKBUtB8oR3RhIcLDogDHm3h
- Ppbg2JFbE4uT5aKUSQQqnty8+NoRF0y5uJzPyIBucqvSmCUB0tDgmmwEo1mPRfx37tQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=EaiOdRwxZKE8ubvc214/5wzd08jAVX9fev9UNmmYEX4=;
+ b=Dpb9Vx00DCUCqJOnWBxCU/unMhACoML+QF6doutLFTpAUuNOqu1GGdZHlFCmj62gt++D
+ KnH/n//5Fk5wrFiwFAgtOX8bdHnNlx01kRkrTaxXjpQ2Myq6xfLiG24Ikzz+gq4t/blZ0
+ EjFBd6FLrw+u4BWHstoJijHZMvHNkctkPDFQolRSdbJwihxQN0pZ9aBNi7X/xj9B2ab0o
+ M2hA17heElAjk2vfIdtdVpVsOS0q/UkWR59cpbDW/IChJQnTxVV78OwuqDbXTVcX2/voR
+ MDCEUmU4iswH8hwzD0bYP+YeHlcUdLVh1it2vWZxSk1gcPTntCAF2lJtSqwp1UlPSaA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=ahlYBGus; 
- arc=none smtp.remote-ip="2607:f8b0:4864:33::10"
+ header.s=20251104 header.b=US00Ejxv; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:34::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:33::10; helo=mail-qv2-x10.google.com;
+ client-ip=2607:f8b0:4864:34::10; helo=mail-qk2-x10.google.com;
  envelope-from=aford173@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=ahlYBGus
-Received: from mail-qv2-x10.google.com (mail-qv2-x10.google.com
- [IPv6:2607:f8b0:4864:33::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id EF0C140076
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:12 +0000 (UTC)
-Received: by mail-qv2-x10.google.com with SMTP id
- 6a1803df08f44-90cdfc9b6e3so20751686d6.1
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 08:52:12 -0700 (PDT)
+ header.s=20251104 header.b=US00Ejxv
+Received: from mail-qk2-x10.google.com (mail-qk2-x10.google.com
+ [IPv6:2607:f8b0:4864:34::10])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 50541605CE
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 15:52:25 +0000 (UTC)
+Received: by mail-qk2-x10.google.com with SMTP id
+ af79cd13be357-93a0fd41a7bso93260985a.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 08:52:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789314731; x=1789919531;
+ d=gmail.com; s=20251104; t=1789314744; x=1789919544;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=iAy27cAVJbwmBVsGG67PzmxCfkT5Ut2XxJrLPYK48Mo=;
- b=ahlYBGus+3d2rVuePbKXbudU8anOoP9FT8dfPL3tkdM22MpWsTjrgRbdmvnV8pbPnu
- vDEAV+HlHaGWVqPOf7CvMtUI9HkN15cO/GQ+y5V7ZI/xPYh9FpfCo0L7kTqgiVwHAbIh
- opv5i/bsGbI4uKzf91FgweEWhZ8Y0UawcK68/fDDNQdKqeAprLALsXuSHFNBS5UWawjz
- 9OX8erwrz16V9XRfWw+AnIYIriYYxYPA+5v8pvls0kX6BU+gqBbgu3c3xO8LmswAVPj9
- C/vcLmpy/90L58umkPQYvSxZuUiclJm4vPWkgbgq0mT3AVUPEzYdxdY/XWtBnPMmmLaa
- WmVg==
+ bh=EaiOdRwxZKE8ubvc214/5wzd08jAVX9fev9UNmmYEX4=;
+ b=US00EjxvbggxUcJ19t/FBrjF+KJ6jTLiM8rhFDzH4trqtaiqou693zWMS/b2+nBfgu
+ Cex3kGT0ctbaW4O1+uC3fcJmR5YhwoZPWxprNBCAS+3PfvB1k1YasrSS9pvHpWDjPS9z
+ JOgZlcIk7GJs5C4e1b2vBnrqcFsLHioxgbgc913rNsDy7eIjLSHxwkYtM+bJvAaRmqAZ
+ KrCbzIHSjFztRwc6gFi0bY1+m3IcAxaizLYjhP2N5+nqrShiamANxDHrOrLZOokP/7hz
+ KlhnR4+GmA88XalhLh2wk0l+B+AOByOFPfbgF2CDZbK3C5YOUqiKjc3gld+nriJuuaJc
+ k5fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789314731; x=1789919531;
+ d=1e100.net; s=20251104; t=1789314744; x=1789919544;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=iAy27cAVJbwmBVsGG67PzmxCfkT5Ut2XxJrLPYK48Mo=;
- b=JSRkqh5CcHF5sp0LK2JVVKbbphH+0IENIlEeGusfB4416z8CJDlP8v1vuHFIgQpS/+
- xLyLfpqIiiLxNUUPccRmDbeXTjM2pbLryc9FV+mdoQt79sN+AxOfNG0jPRp86fpB3VJA
- a9Yxo+/8mHnPnjHjrBg+uAtbw+OKTxm4l4CP/VocbV3oQ82KRObp1qi0DoGQp8vdqMkU
- aNFmt/CelmPQ6AADRJ0AewP65rg91eQJiJQnmSBt5ij+Gg86nFL5ZEIpMFVGJecApXiO
- 1MasjzHyAJQPpSKCuKXrI6y+zZ48CE/hq5Dao+oS9bn/84FC8OmyOTbZWQBmzMEL4dUf
- 31Hw==
-X-Gm-Message-State: AFuF++lZYEQpN5AfmvaGFJH9onNThfHt4AWzGcC1biE0Br1q4YcjtGSV
- uZ+EDpGC94WRX3Q/to5Sxf2QSv8l++q9Yh2Lt6El4Rq0TKQjQ0d7q0gHgDUt9A==
-X-Gm-Gg: AYBFou1cw2eUjD69ROXT00HP191s1hDjc65xwrB45IFOM8NB3+nRDBfuu8L614sdscI
- vsdlrarNlP6bpB2cvctg46hjshDx/cQprIKydKpoEir5QxqmwyoJlT5F48gLfloblhmjhbI7T7U
- cgNoRXey+fv/tyCdQ3BxzdflSCbBAaJFcP5YGAV63jGkdztxQpFzpF+25jXnz9A2+dtNAJjvJ06
- GP1EYpmbPnd9mc57Ftznne/g06OB/ukl2XOH60EgqWKbtt6rRWiE/mZZnpV0nSixP0Z2Qs5ejHZ
- vroMnUCPE/iMqiUz1+99GaJtSfvX2PAMvcky1q8kcuH7oXVMjgRfxmZN/JieXhQrh8oB1o/sVfy
- 4vNA4tVI5xWq99v1BASfFERLD2UFo+u84OTHC4Gth3iAJ5AKbbLARM4EX74QemicEqxtBcfMYGM
- jpzkyzIiR61YC+vfWq+Bfnszg7HFQNRt0iKeefjbLBN9hiBHbi85p8rhLJV/arOepDYlnK9Y69j
- iXVN8UqrtHvY+GFpB05C696XJ2BjUemBZS+KwwJgvI63Zr+UVK3CVlo/WXD/k4=
-X-Received: by 2002:ad4:5d4d:0:b0:907:64a4:ca00 with SMTP id
- 6a1803df08f44-9121209aabamr230180466d6.10.1789314730589; 
- Sun, 13 Sep 2026 08:52:10 -0700 (PDT)
+ bh=EaiOdRwxZKE8ubvc214/5wzd08jAVX9fev9UNmmYEX4=;
+ b=Kq9m30gd/T6E5yWsAMjJH6ImFmY1sg4iIpK4tJTF3uxhCW+Rl3EdqHTc4Tc2/5rGp/
+ whNsjxO80TuN6Vtqa80cbioG5wSO82sNrk2K1KVrvyo4oZ9grJ+UxOFtgaOazqhSnDr+
+ Xpv/bKBfH1zS1R6Q6agbMk74TUx8tY6JGQDDiTJCzWwmZBenaPx/6PxPhz6YAI0i65tT
+ 3fE+zdgX4BDx/98SnWRU/pqlfqLgBF2vwCZPvlv1yUK+RQlrxyB52WzjKj/WUa5TVBmz
+ oQoSxLRV8h5gIXsRXLNFi30Y3e0JSNbpAy6RTDM78RysJCXEyM7sUcLh62ogSLlTBybi
+ ZnWA==
+X-Gm-Message-State: AFuF++kMmJejWgx6xYFLGPqy5/tpVur4+8l6EkbxN9N7Wt56G56I1+GX
+ 5d+ZD379nwNLDioP6uyp8Ihp009jw768QHVZ1li3siNj4pcJ32sruvVqR4K1wg==
+X-Gm-Gg: AYBFou1kB+5Xc+XUrV+zCRquJToZ4Gz5+LbgPjL5VOKafvZH5DwXcgnK9U/7kGbSMkp
+ G8aQNQGEtfY2KDgSxU4Bhufqg4oQ6ZVHfpSatIGqd3KK2vDsDEhJ08qbMTvaPQCJtX6HWbKeGg4
+ sr5eOA9xPrQKhD4W5RuDquAbIwV+aZNchqUt+a8Mu9ZtkjP44T3WiYM273bSA+4cE/IaNp3x5eC
+ aLXkhdRmXEsWhSYY5D0SWOGkiMtdkE33Xsj80LUQ3G7Tf8RIJpPAgBEWwB/QyppMilMbkggSqcr
+ FBFvZYD286mQTfFlKQNrBXdbuh0e3eORmR1pgt2RFDIq1ByUuPxvE6XknRaQbnOjyGvWrBmqymJ
+ zR4nDZ6WNj7mmUGkymFyCvctdUxvpm2NGmxWdZbNkjp9C68nCpGaYejT3tLROIEmJO/O3UmjSye
+ ALLpE7ToqNnO3DJxRAKVJZOulYa2J2IxVXBuBlomuGLeQ1O4yka1WWnb3zu4M4Z4GQtmrSGmhJd
+ jz3he6HhYS0nNIyTEAIxHN7LW7IwuXNKNwJIHABgUz0t169SkcX
+X-Received: by 2002:a05:620a:618f:b0:939:6dbd:de57 with SMTP id
+ af79cd13be357-93a03842c90mr1072332585a.32.1789314744107; 
+ Sun, 13 Sep 2026 08:52:24 -0700 (PDT)
 Received: from aford-System-Version.lan (c-73-94-212-116.hsd1.mn.comcast.net.
  [73.94.212.116]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-9120f4963fcsm73051386d6.33.2026.09.13.08.52.09
+ af79cd13be357-939eeac7b87sm688215485a.0.2026.09.13.08.52.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 13 Sep 2026 08:52:09 -0700 (PDT)
+ Sun, 13 Sep 2026 08:52:23 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>,
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Adam Ford <aford173@gmail.com>
-Subject: [PATCH] board: logicpd: Remove OMAP3 SOM support
-Date: Sun, 13 Sep 2026 10:52:05 -0500
-Message-ID: <20260913155205.84071-1-aford173@gmail.com>
+Subject: [PATCH] board: logicpd: Remove i.MX6 SOM support
+Date: Sun, 13 Sep 2026 10:52:17 -0500
+Message-ID: <20260913155217.84107-1-aford173@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -172,1573 +173,1913 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Remove the Logic PD OMAP35xx/DM37xx SOM-LV and Torpedo board support
-along with its defconfigs, config header, U-Boot device tree overlays,
-Kconfig target and the board specific MMC PBIAS quirk.
+Remove the Logic PD i.MX6 SOM board support along with its defconfig,
+config header, device tree files and Kconfig target.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 ---
- .../logicpd-som-lv-35xx-devkit-u-boot.dtsi    |  72 ------
- .../logicpd-som-lv-37xx-devkit-u-boot.dtsi    |  72 ------
- .../logicpd-torpedo-35xx-devkit-u-boot.dtsi   |  71 ------
- .../logicpd-torpedo-37xx-devkit-u-boot.dtsi   |  68 -----
- arch/arm/mach-omap2/omap3/Kconfig             |  13 -
- board/logicpd/omap3som/Kconfig                |  14 -
- board/logicpd/omap3som/MAINTAINERS            |   9 -
- board/logicpd/omap3som/Makefile               |   6 -
- board/logicpd/omap3som/README                 |  56 ----
- board/logicpd/omap3som/omap3logic.c           | 240 ------------------
- board/logicpd/omap3som/omap3logic.h           | 237 -----------------
- configs/omap35_logic_defconfig                |  94 -------
- configs/omap35_logic_somlv_defconfig          | 103 --------
- configs/omap3_logic_defconfig                 |  93 -------
- configs/omap3_logic_somlv_defconfig           | 104 --------
- drivers/mmc/omap_hsmmc.c                      |   4 -
- include/configs/omap3_logic.h                 | 152 -----------
- 17 files changed, 1408 deletions(-)
- delete mode 100644 arch/arm/dts/logicpd-som-lv-35xx-devkit-u-boot.dtsi
- delete mode 100644 arch/arm/dts/logicpd-som-lv-37xx-devkit-u-boot.dtsi
- delete mode 100644 arch/arm/dts/logicpd-torpedo-35xx-devkit-u-boot.dtsi
- delete mode 100644 arch/arm/dts/logicpd-torpedo-37xx-devkit-u-boot.dtsi
- delete mode 100644 board/logicpd/omap3som/Kconfig
- delete mode 100644 board/logicpd/omap3som/MAINTAINERS
- delete mode 100644 board/logicpd/omap3som/Makefile
- delete mode 100644 board/logicpd/omap3som/README
- delete mode 100644 board/logicpd/omap3som/omap3logic.c
- delete mode 100644 board/logicpd/omap3som/omap3logic.h
- delete mode 100644 configs/omap35_logic_defconfig
- delete mode 100644 configs/omap35_logic_somlv_defconfig
- delete mode 100644 configs/omap3_logic_defconfig
- delete mode 100644 configs/omap3_logic_somlv_defconfig
- delete mode 100644 include/configs/omap3_logic.h
+ arch/arm/dts/Makefile                    |   1 -
+ arch/arm/dts/imx6-logicpd-baseboard.dtsi | 561 -----------------------
+ arch/arm/dts/imx6-logicpd-som.dtsi       | 369 ---------------
+ arch/arm/dts/imx6q-logicpd-u-boot.dtsi   |  30 --
+ arch/arm/dts/imx6q-logicpd.dts           | 130 ------
+ arch/arm/mach-imx/mx6/Kconfig            |  15 -
+ board/logicpd/imx6/Kconfig               |  12 -
+ board/logicpd/imx6/MAINTAINERS           |  10 -
+ board/logicpd/imx6/Makefile              |   9 -
+ board/logicpd/imx6/README                |  82 ----
+ board/logicpd/imx6/imx6logic.c           | 323 -------------
+ configs/imx6q_logic_defconfig            | 118 -----
+ include/configs/imx6_logic.h             | 121 -----
+ 13 files changed, 1781 deletions(-)
+ delete mode 100644 arch/arm/dts/imx6-logicpd-baseboard.dtsi
+ delete mode 100644 arch/arm/dts/imx6-logicpd-som.dtsi
+ delete mode 100644 arch/arm/dts/imx6q-logicpd-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/imx6q-logicpd.dts
+ delete mode 100644 board/logicpd/imx6/Kconfig
+ delete mode 100644 board/logicpd/imx6/MAINTAINERS
+ delete mode 100644 board/logicpd/imx6/Makefile
+ delete mode 100644 board/logicpd/imx6/README
+ delete mode 100644 board/logicpd/imx6/imx6logic.c
+ delete mode 100644 configs/imx6q_logic_defconfig
+ delete mode 100644 include/configs/imx6_logic.h
 
-diff --git a/arch/arm/dts/logicpd-som-lv-35xx-devkit-u-boot.dtsi b/arch/arm/dts/logicpd-som-lv-35xx-devkit-u-boot.dtsi
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index a02dad22f27..37d3b6fd3cc 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -761,7 +761,6 @@ dtb-y += \
+ 	imx6q-icore-mipi.dtb \
+ 	imx6q-icore-rqs.dtb \
+ 	imx6q-kp.dtb \
+-	imx6q-logicpd.dtb \
+ 	imx6q-marsboard.dtb \
+ 	imx6q-mccmon6.dtb\
+ 	imx6q-nitrogen6x.dtb \
+diff --git a/arch/arm/dts/imx6-logicpd-baseboard.dtsi b/arch/arm/dts/imx6-logicpd-baseboard.dtsi
 deleted file mode 100644
-index d77fa38746f..00000000000
---- a/arch/arm/dts/logicpd-som-lv-35xx-devkit-u-boot.dtsi
+index d9de9b4f0c5..00000000000
+--- a/arch/arm/dts/imx6-logicpd-baseboard.dtsi
 +++ /dev/null
-@@ -1,72 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright (C) 2017
-- * Logic PD - http://www.logicpd.com
-- */
+@@ -1,561 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-//
+-// Copyright (C) 2019 Logic PD, Inc.
 -
--#include "omap3-u-boot.dtsi"
+-/ {
+-	keyboard {
+-		compatible = "gpio-keys";
+-
+-		btn0 {
+-			gpios = <&pcf8575 0 GPIO_ACTIVE_LOW>;
+-			label = "btn0";
+-			linux,code = <KEY_WAKEUP>;
+-			debounce-interval = <10>;
+-			wakeup-source;
+-		};
+-
+-		btn1 {
+-			gpios = <&pcf8575 1 GPIO_ACTIVE_LOW>;
+-			label = "btn1";
+-			linux,code = <KEY_WAKEUP>;
+-			debounce-interval = <10>;
+-			wakeup-source;
+-		};
+-
+-		btn2 {
+-			gpios = <&pcf8575 2 GPIO_ACTIVE_LOW>;
+-			label = "btn2";
+-			linux,code = <KEY_WAKEUP>;
+-			debounce-interval = <10>;
+-			wakeup-source;
+-		};
+-
+-		btn3 {
+-			gpios = <&pcf8575 3 GPIO_ACTIVE_LOW>;
+-			label = "btn3";
+-			linux,code = <KEY_WAKEUP>;
+-			debounce-interval = <10>;
+-			wakeup-source;
+-		};
+-
+-	};
+-
+-	leds {
+-		compatible = "gpio-leds";
+-
+-		gen-led0 {
+-			label = "led0";
+-			pinctrl-names = "default";
+-			pinctrl-0 = <&pinctrl_led0>;
+-			gpios = <&gpio1 30 GPIO_ACTIVE_HIGH>;
+-			linux,default-trigger = "cpu0";
+-		};
+-
+-		gen-led1 {
+-			label = "led1";
+-			gpios = <&pcf8575 8 GPIO_ACTIVE_HIGH>;
+-		};
+-
+-		gen-led2 {
+-			label = "led2";
+-			gpios = <&pcf8575 9 GPIO_ACTIVE_HIGH>;
+-			linux,default-trigger = "heartbeat";
+-		};
+-
+-		gen-led3 {
+-			label = "led3";
+-			gpios = <&pcf8575 10 GPIO_ACTIVE_HIGH>;
+-			linux,default-trigger = "default-on";
+-		};
+-	};
+-
+-	reg_usb_otg_vbus: regulator-otg-vbus {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_usb_otg>;
+-		compatible = "regulator-fixed";
+-		regulator-name = "usb_otg_vbus";
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-		gpio = <&gpio4 15 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-	};
+-
+-	reg_usb_h1_vbus: regulator-usb-h1-vbus {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_usb_h1_vbus>;
+-		compatible = "regulator-fixed";
+-		regulator-name = "usb_h1_vbus";
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-		gpio = <&gpio7 12 GPIO_ACTIVE_HIGH>;
+-		startup-delay-us = <70000>;
+-		enable-active-high;
+-	};
+-
+-	reg_3v3: regulator-3v3 {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_3v3>;
+-		compatible = "regulator-fixed";
+-		regulator-name = "reg_3v3";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio1 26 GPIO_ACTIVE_HIGH>;
+-		startup-delay-us = <70000>;
+-		enable-active-high;
+-		regulator-always-on;
+-	};
+-
+-	reg_enet: regulator-ethernet {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_enet>;
+-		compatible = "regulator-fixed";
+-		regulator-name = "ethernet-supply";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio3 31 GPIO_ACTIVE_HIGH>;
+-		startup-delay-us = <70000>;
+-		enable-active-high;
+-		vin-supply = <&sw4_reg>;
+-	};
+-
+-	reg_audio: regulator-audio {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_audio>;
+-		compatible = "regulator-fixed";
+-		regulator-name = "3v3_aud";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio1 29 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-		vin-supply = <&reg_3v3>;
+-	};
+-
+-	reg_hdmi: regulator-hdmi {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_hdmi>;
+-		compatible = "regulator-fixed";
+-		regulator-name = "hdmi-supply";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio3 20 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-		vin-supply = <&reg_3v3>;
+-	};
+-
+-	reg_uart3: regulator-uart3 {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_uart3>;
+-		compatible = "regulator-fixed";
+-		regulator-name = "uart3-supply";
+-		gpio = <&gpio1 28 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-		regulator-always-on;
+-		vin-supply = <&reg_3v3>;
+-	};
+-
+-	reg_1v8: regulator-1v8 {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_1v8>;
+-		compatible = "regulator-fixed";
+-		regulator-name = "1v8-supply";
+-		gpio = <&gpio3 30 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-		regulator-always-on;
+-		vin-supply = <&reg_3v3>;
+-	};
+-
+-	reg_pcie: regulator-pcie {
+-		compatible = "regulator-fixed";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_pcie>;
+-		regulator-name = "mpcie_3v3";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio1 2 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-	};
+-
+-	reg_mipi: regulator-mipi {
+-		compatible = "regulator-fixed";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_mipi>;
+-		regulator-name = "mipi_pwr_en";
+-		regulator-min-microvolt = <2800000>;
+-		regulator-max-microvolt = <2800000>;
+-		gpio = <&gpio3 19 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-	};
+-
+-	sound {
+-		compatible = "fsl,imx-audio-wm8962";
+-		model = "wm8962-audio";
+-		ssi-controller = <&ssi2>;
+-		audio-codec = <&wm8962>;
+-		audio-routing =
+-			"Headphone Jack", "HPOUTL",
+-			"Headphone Jack", "HPOUTR",
+-			"Ext Spk", "SPKOUTL",
+-			"Ext Spk", "SPKOUTR",
+-			"AMIC", "MICBIAS",
+-			"IN3R", "AMIC";
+-		mux-int-port = <2>;
+-		mux-ext-port = <4>;
+-	};
+-};
+-
+-&audmux {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_audmux>;
+-	status = "okay";
+-};
+-
+-&ecspi1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_ecspi1>;
+-	cs-gpios = <&gpio4 9 GPIO_ACTIVE_LOW>;
+-	status = "disabled";
+-};
+-
+-&fec {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_enet>;
+-	phy-mode = "rgmii-id";
+-	phy-reset-duration = <10>;
+-	phy-reset-gpios = <&gpio1 24 GPIO_ACTIVE_LOW>;
+-	phy-supply = <&reg_enet>;
+-	interrupt-parent = <&gpio1>;
+-	interrupts = <25 IRQ_TYPE_EDGE_FALLING>;
+-	status = "okay";
+-};
+-
+-&i2c1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_i2c1>;
+-	clock-frequency = <400000>;
+-	status = "okay";
+-
+-	wm8962: audio-codec@1a {
+-		compatible = "wlf,wm8962";
+-		reg = <0x1a>;
+-		clocks = <&clks IMX6QDL_CLK_CKO>;
+-		DCVDD-supply = <&reg_audio>;
+-		DBVDD-supply = <&reg_audio>;
+-		AVDD-supply = <&reg_audio>;
+-		CPVDD-supply = <&reg_audio>;
+-		MICVDD-supply = <&reg_audio>;
+-		PLLVDD-supply = <&reg_audio>;
+-		SPKVDD1-supply = <&reg_audio>;
+-		SPKVDD2-supply = <&reg_audio>;
+-		gpio-cfg = <
+-			0x0000 /* 0:Default */
+-			0x0000 /* 1:Default */
+-			0x0000 /* 2:FN_DMICCLK */
+-			0x0000 /* 3:Default */
+-			0x0000 /* 4:FN_DMICCDAT */
+-			0x0000 /* 5:Default */
+-		>;
+-	};
+-};
+-
+-&i2c3 {
+-	ov5640: camera@10 {
+-		compatible = "ovti,ov5640";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_ov5640>;
+-		reg = <0x10>;
+-		clocks = <&clks IMX6QDL_CLK_CKO>;
+-		clock-names = "xclk";
+-		DOVDD-supply = <&reg_mipi>;
+-		AVDD-supply = <&reg_mipi>;
+-		DVDD-supply = <&reg_mipi>;
+-		reset-gpios = <&gpio3 26 GPIO_ACTIVE_LOW>;
+-		powerdown-gpios = <&gpio3 27 GPIO_ACTIVE_HIGH>;
+-
+-		port {
+-			ov5640_to_mipi_csi2: endpoint {
+-				remote-endpoint = <&mipi_csi2_in>;
+-				clock-lanes = <0>;
+-				data-lanes = <1 2>;
+-			};
+-		};
+-	};
+-
+-	pcf8575: gpio@20 {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_pcf8574>;
+-		compatible = "nxp,pcf8575";
+-		reg = <0x20>;
+-		interrupt-parent = <&gpio6>;
+-		interrupts = <31 IRQ_TYPE_EDGE_FALLING>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		lines-initial-states = <0x0710>;
+-		wakeup-source;
+-	};
+-};
+-
+-&ipu1_csi1_from_mipi_vc1 {
+-	clock-lanes = <0>;
+-	data-lanes = <1 2>;
+-};
+-
+-&mipi_csi {
+-	status = "okay";
+-
+-	port@0 {
+-		reg = <0>;
+-
+-		mipi_csi2_in: endpoint {
+-			remote-endpoint = <&ov5640_to_mipi_csi2>;
+-			clock-lanes = <0>;
+-			data-lanes = <1 2>;
+-		};
+-	};
+-};
+-
+-&pcie {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_pcie>;
+-	reset-gpio = <&gpio1 9 GPIO_ACTIVE_LOW>;
+-	vpcie-supply = <&reg_pcie>;
+-	status = "okay";
+-};
+-
+-&pwm3 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_pwm3>;
+-};
+-
+-&snvs_pwrkey {
+-	status = "okay";
+-};
+-
+-&ssi2 {
+-	status = "okay";
+-};
+-
+-&uart3 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_uart3>;
+-	status = "okay";
+-};
+-
+-&usbh1 {
+-	vbus-supply = <&reg_usb_h1_vbus>;
+-	status = "okay";
+-};
+-
+-&usbotg {
+-	vbus-supply = <&reg_usb_otg_vbus>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_usbotg>;
+-	disable-over-current;
+-	dr_mode = "otg";
+-	status = "okay";
+-};
+-
+-&usdhc2 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_usdhc2>;
+-	pinctrl-1 = <&pinctrl_usdhc2_100mhz>;
+-	pinctrl-2 = <&pinctrl_usdhc2_200mhz>;
+-	vmmc-supply = <&reg_3v3>;
+-	no-1-8-v;
+-	keep-power-in-suspend;
+-	cd-gpios = <&gpio1 4 GPIO_ACTIVE_LOW>;
+-	status = "okay";
+-};
+-
+-&iomuxc {
+-	pinctrl_audmux: audmuxgrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_DISP0_DAT20__AUD4_TXC  0x130b0
+-			MX6QDL_PAD_DISP0_DAT21__AUD4_TXD  0x110b0
+-			MX6QDL_PAD_DISP0_DAT22__AUD4_TXFS 0x130b0
+-			MX6QDL_PAD_DISP0_DAT23__AUD4_RXD  0x130b0
+-		>;
+-	};
+-
+-	pinctrl_ecspi1: ecspi1grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_KEY_COL0__ECSPI1_SCLK	0x100b1
+-			MX6QDL_PAD_KEY_ROW0__ECSPI1_MOSI	0x100b1
+-			MX6QDL_PAD_KEY_COL1__ECSPI1_MISO	0x100b1
+-			MX6QDL_PAD_KEY_ROW1__GPIO4_IO09		0x1b0b0
+-		>;
+-	};
+-
+-	pinctrl_enet: enetgrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_ENET_MDIO__ENET_MDIO		0x1b8b0
+-			MX6QDL_PAD_ENET_MDC__ENET_MDC		0x1b0b0
+-			MX6QDL_PAD_RGMII_TXC__RGMII_TXC		0x1b030
+-			MX6QDL_PAD_RGMII_TD0__RGMII_TD0		0x1b030
+-			MX6QDL_PAD_RGMII_TD1__RGMII_TD1		0x1b030
+-			MX6QDL_PAD_RGMII_TD2__RGMII_TD2		0x1b030
+-			MX6QDL_PAD_RGMII_TD3__RGMII_TD3		0x1b030
+-			MX6QDL_PAD_ENET_REF_CLK__ENET_TX_CLK	0x100b0
+-			MX6QDL_PAD_RGMII_TX_CTL__RGMII_TX_CTL	0x1b030
+-			MX6QDL_PAD_GPIO_16__ENET_REF_CLK	0x4001b0a8
+-			MX6QDL_PAD_RGMII_RXC__RGMII_RXC		0x1b030
+-			MX6QDL_PAD_RGMII_RD0__RGMII_RD0		0x13030
+-			MX6QDL_PAD_RGMII_RD1__RGMII_RD1		0x13030
+-			MX6QDL_PAD_RGMII_RD2__RGMII_RD2		0x1b030
+-			MX6QDL_PAD_RGMII_RD3__RGMII_RD3		0x1b030
+-			MX6QDL_PAD_RGMII_RX_CTL__RGMII_RX_CTL	0x13030
+-			MX6QDL_PAD_ENET_CRS_DV__GPIO1_IO25	0x1b0b0	/* ENET_INT */
+-			MX6QDL_PAD_ENET_RX_ER__GPIO1_IO24	0x1b0b0	/* ETHR_nRST */
+-		>;
+-	};
+-
+-	pinctrl_i2c1: i2c1grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_EIM_D21__I2C1_SCL	0x4001b8b1
+-			MX6QDL_PAD_EIM_D28__I2C1_SDA	0x4001b8b1
+-		>;
+-	};
+-
+-	pinctrl_led0: led0grp {
+-	    fsl,pins = <
+-		MX6QDL_PAD_ENET_TXD0__GPIO1_IO30	0x1b0b0
+-	    >;
+-	};
+-
+-	pinctrl_ov5640: ov5640grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_EIM_D26__GPIO3_IO26	0x1b0b1
+-			MX6QDL_PAD_EIM_D27__GPIO3_IO27	0x1b0b1
+-		>;
+-	};
+-
+-	pinctrl_pcf8574: pcf8575grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_EIM_BCLK__GPIO6_IO31 0x1b0b0
+-		>;
+-	};
+-
+-	pinctrl_pcie: pciegrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_GPIO_8__GPIO1_IO08 0x1b0b0
+-			MX6QDL_PAD_GPIO_9__GPIO1_IO09 0x1b0b0
+-		>;
+-	};
+-
+-	pinctrl_pwm3: pwm3grp {
+-	    fsl,pins = <
+-		MX6QDL_PAD_SD4_DAT1__PWM3_OUT		0x1b0b1
+-	    >;
+-	};
+-
+-	pinctrl_reg_1v8: reg1v8grp {
+-	    fsl,pins = <
+-		MX6QDL_PAD_EIM_D30__GPIO3_IO30		0x1b0b0
+-	    >;
+-	};
+-
+-	pinctrl_reg_3v3: reg3v3grp {
+-	    fsl,pins = <
+-		MX6QDL_PAD_ENET_RXD1__GPIO1_IO26	0x1b0b0
+-	    >;
+-	};
+-
+-	pinctrl_reg_audio: reg-audiogrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_ENET_TXD1__GPIO1_IO29 0x1b0b0
+-		>;
+-	};
+-
+-	pinctrl_reg_enet: reg-enetgrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_EIM_D31__GPIO3_IO31	0x1b0b0
+-		>;
+-	};
+-
+-	pinctrl_reg_hdmi: reg-hdmigrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_EIM_D20__GPIO3_IO20	0x1b0b0
+-		>;
+-	};
+-
+-	pinctrl_reg_mipi: reg-mipigrp {
+-		fsl,pins = <MX6QDL_PAD_EIM_D19__GPIO3_IO19 0x1b0b1>;
+-	};
+-
+-	pinctrl_reg_pcie: reg-pciegrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_GPIO_2__GPIO1_IO02	0x1b0b0
+-			>;
+-	};
+-
+-	pinctrl_reg_uart3: reguart3grp {
+-	    fsl,pins = <
+-		MX6QDL_PAD_ENET_TX_EN__GPIO1_IO28	0x1b0b0
+-	    >;
+-	};
+-
+-	pinctrl_reg_usb_h1_vbus: usbh1grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_GPIO_17__GPIO7_IO12		0x1b0b0
+-		>;
+-	};
+-
+-	pinctrl_reg_usb_otg: reg-usb-otggrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_KEY_ROW4__GPIO4_IO15		0x1b0b0
+-		>;
+-	};
+-
+-	pinctrl_uart3: uart3grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_EIM_D23__UART3_CTS_B		0x1b0b1
+-			MX6QDL_PAD_EIM_D24__UART3_TX_DATA	0x1b0b1
+-			MX6QDL_PAD_EIM_D25__UART3_RX_DATA	0x1b0b1
+-			MX6QDL_PAD_EIM_EB3__UART3_RTS_B		0x1b0b1
+-		>;
+-	};
+-
+-	pinctrl_usbotg: usbotggrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_GPIO_1__USB_OTG_ID	0xd17059
+-		>;
+-	};
+-
+-	pinctrl_usdhc2: usdhc2grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_GPIO_4__GPIO1_IO04		0x1b0b0	/* CD */
+-			MX6QDL_PAD_SD2_CMD__SD2_CMD		0x17069
+-			MX6QDL_PAD_SD2_CLK__SD2_CLK		0x10069
+-			MX6QDL_PAD_SD2_DAT0__SD2_DATA0		0x17069
+-			MX6QDL_PAD_SD2_DAT1__SD2_DATA1		0x17069
+-			MX6QDL_PAD_SD2_DAT2__SD2_DATA2		0x17069
+-			MX6QDL_PAD_SD2_DAT3__SD2_DATA3		0x17069
+-		>;
+-	};
+-
+-	pinctrl_usdhc2_100mhz: h100-usdhc2-100mhz {
+-		fsl,pins = <
+-			MX6QDL_PAD_GPIO_4__GPIO1_IO04		0x1b0b0	/* CD */
+-			MX6QDL_PAD_SD2_CMD__SD2_CMD		0x170b9
+-			MX6QDL_PAD_SD2_CLK__SD2_CLK		0x100b9
+-			MX6QDL_PAD_SD2_DAT0__SD2_DATA0		0x170b9
+-			MX6QDL_PAD_SD2_DAT1__SD2_DATA1		0x170b9
+-			MX6QDL_PAD_SD2_DAT2__SD2_DATA2		0x170b9
+-			MX6QDL_PAD_SD2_DAT3__SD2_DATA3		0x170b9
+-		>;
+-	};
+-
+-	pinctrl_usdhc2_200mhz: h100-usdhc2-200mhz {
+-		fsl,pins = <
+-			MX6QDL_PAD_GPIO_4__GPIO1_IO04		0x1b0b0	/* CD */
+-			MX6QDL_PAD_SD2_CMD__SD2_CMD		0x170f9
+-			MX6QDL_PAD_SD2_CLK__SD2_CLK		0x100f9
+-			MX6QDL_PAD_SD2_DAT0__SD2_DATA0		0x170f9
+-			MX6QDL_PAD_SD2_DAT1__SD2_DATA1		0x170f9
+-			MX6QDL_PAD_SD2_DAT2__SD2_DATA2		0x170f9
+-			MX6QDL_PAD_SD2_DAT3__SD2_DATA3		0x170f9
+-		>;
+-	};
+-
+-};
+diff --git a/arch/arm/dts/imx6-logicpd-som.dtsi b/arch/arm/dts/imx6-logicpd-som.dtsi
+deleted file mode 100644
+index 547fb141ec0..00000000000
+--- a/arch/arm/dts/imx6-logicpd-som.dtsi
++++ /dev/null
+@@ -1,369 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-//
+-// Copyright (C) 2019 Logic PD, Inc.
+-
+-#include <dt-bindings/gpio/gpio.h>
+-#include <dt-bindings/input/input.h>
 -
 -/ {
 -	chosen {
 -		stdout-path = &uart1;
 -	};
 -
--	aliases {
--		/delete-property/ serial1;
--		/delete-property/ serial2;
--		/delete-property/ mmc1;
--		/delete-property/ mmc2;
+-	memory@10000000 {
+-		device_type = "memory";
+-		reg = <0x10000000 0x80000000>;
 -	};
 -
--	ethernet@08000000 {
--		compatible = "smsc,lan9221","smsc,lan9115";
--		reg = <0x08000000 0xff>;
--		bank-width = <2>;
--		vddvario-supply = <&vddvario>;
--		vdd33a-supply = <&vdd33a>;
--		reg-io-width = <4>;
--		smsc,save-mac-address;
+-	reg_wl18xx_vmmc: regulator-wl18xx {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vwl1837";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio7 0 GPIO_ACTIVE_HIGH>;
+-		startup-delay-us = <70000>;
+-		enable-active-high;
 -	};
 -};
 -
--&gpio1 {
--	/delete-property/ bootph-pre-ram;
+-&clks {
+-	assigned-clocks = <&clks IMX6QDL_CLK_LDB_DI0_SEL>,
+-			  <&clks IMX6QDL_CLK_LDB_DI1_SEL>;
+-	assigned-clock-parents = <&clks IMX6QDL_CLK_PLL3_USB_OTG>,
+-				 <&clks IMX6QDL_CLK_PLL3_USB_OTG>;
 -};
 -
--&gpio2 {
--	/delete-property/ bootph-pre-ram;
+-&gpmi {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_gpmi_nand>;
+-	nand-on-flash-bbt;
+-	status = "okay";
 -};
 -
--&gpio3 {
--	/delete-property/ bootph-pre-ram;
+-&i2c3 {
+-	clock-frequency = <100000>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_i2c3>;
+-	status = "okay";
+-
+-	pfuze100: pmic@8 {
+-		compatible = "fsl,pfuze100";
+-		reg = <0x08>;
+-
+-		regulators {
+-			sw1a_reg: sw1ab {
+-				regulator-min-microvolt = <725000>;
+-				regulator-max-microvolt = <1450000>;
+-				regulator-name = "vddcore";
+-				regulator-boot-on;
+-				regulator-always-on;
+-				regulator-ramp-delay = <6250>;
+-			};
+-
+-			sw1c_reg: sw1c {
+-				regulator-min-microvolt = <725000>;
+-				regulator-max-microvolt = <1450000>;
+-				regulator-name = "vddsoc";
+-				regulator-boot-on;
+-				regulator-always-on;
+-				regulator-ramp-delay = <6250>;
+-			};
+-
+-			sw2_reg: sw2 {
+-				regulator-min-microvolt = <3300000>;
+-				regulator-max-microvolt = <3300000>;
+-				regulator-name = "gen_3v3";
+-				regulator-boot-on;
+-			};
+-
+-			sw3a_reg: sw3a {
+-				regulator-min-microvolt = <1350000>;
+-				regulator-max-microvolt = <1350000>;
+-				regulator-name = "sw3a_vddr";
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			sw3b_reg: sw3b {
+-				regulator-min-microvolt = <1350000>;
+-				regulator-max-microvolt = <1350000>;
+-				regulator-name = "sw3b_vddr";
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			sw4_reg: sw4 {
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <3300000>;
+-				regulator-name = "gen_rgmii";
+-			};
+-
+-			swbst_reg: swbst {
+-				regulator-min-microvolt = <5000000>;
+-				regulator-max-microvolt = <5150000>;
+-				regulator-name = "gen_5v0";
+-			};
+-
+-			snvs_reg: vsnvs {
+-				regulator-min-microvolt = <1000000>;
+-				regulator-max-microvolt = <3000000>;
+-				regulator-name = "gen_vsns";
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			vref_reg: vrefddr {
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			vgen1_reg: vgen1 {
+-				regulator-min-microvolt = <1500000>;
+-				regulator-max-microvolt = <1500000>;
+-				regulator-name = "gen_1v5";
+-			};
+-
+-			vgen2_reg: vgen2 {
+-				regulator-name = "vgen2";
+-				regulator-min-microvolt = <800000>;
+-				regulator-max-microvolt = <1550000>;
+-			};
+-
+-			vgen3_reg: vgen3 {
+-				regulator-name = "gen_vadj_0";
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <3300000>;
+-			};
+-
+-			vgen4_reg: vgen4 {
+-				regulator-name = "gen_1v8";
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <1800000>;
+-				regulator-always-on;
+-			};
+-
+-			vgen5_reg: vgen5 {
+-				regulator-name = "gen_vadj_1";
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <3300000>;
+-				regulator-always-on;
+-			};
+-
+-			vgen6_reg: vgen6 {
+-				regulator-name = "gen_2v5";
+-				regulator-min-microvolt = <2500000>;
+-				regulator-max-microvolt = <2500000>;
+-				regulator-always-on;
+-			};
+-
+-			coin_reg: coin {
+-				regulator-min-microvolt = <2500000>;
+-				regulator-max-microvolt = <3000000>;
+-				regulator-always-on;
+-			};
+-		};
+-	};
+-
+-	temperature-sensor@49 {
+-		compatible = "ti,tmp102";
+-		reg = <0x49>;
+-		interrupt-parent = <&gpio6>;
+-		interrupts = <15 IRQ_TYPE_LEVEL_LOW>;
+-		#thermal-sensor-cells = <1>;
+-	};
+-
+-	temperature-sensor@4a {
+-		compatible = "ti,tmp102";
+-		reg = <0x4a>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_tempsense>;
+-		interrupt-parent = <&gpio6>;
+-		interrupts = <15 IRQ_TYPE_LEVEL_LOW>;
+-		#thermal-sensor-cells = <1>;
+-	};
+-
+-	eeprom@51 {
+-		compatible = "atmel,24c64";
+-		pagesize = <32>;
+-		read-only;	/* Manufacturing EEPROM programmed at factory */
+-		reg = <0x51>;
+-	};
+-
+-	eeprom@52 {
+-		compatible = "atmel,24c64";
+-		pagesize = <32>;
+-		reg = <0x52>;
+-	};
 -};
 -
--&gpio4 {
--	/delete-property/ bootph-pre-ram;
+-/* Reroute power feeding the CPU to come from the external PMIC */
+-&reg_arm
+-{
+-	vin-supply = <&sw1a_reg>;
 -};
 -
--&gpio5 {
--	/delete-property/ bootph-pre-ram;
+-&reg_soc
+-{
+-	vin-supply = <&sw1c_reg>;
 -};
 -
--&gpio6 {
--	/delete-property/ bootph-pre-ram;
+-&snvs_poweroff {
+-	status = "okay";
 -};
 -
--&i2c1 {
--	clock-frequency = <400000>;
--	/delete-property/ bootph-pre-ram;
+-&iomuxc {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_hog>;
+-
+-	pinctrl_gpmi_nand: gpmi-nandgrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_NANDF_CLE__NAND_CLE		0x0b0b1
+-			MX6QDL_PAD_NANDF_ALE__NAND_ALE		0x0b0b1
+-			MX6QDL_PAD_NANDF_WP_B__NAND_WP_B	0x0b0b1
+-			MX6QDL_PAD_NANDF_RB0__NAND_READY_B	0x0b000
+-			MX6QDL_PAD_NANDF_CS0__NAND_CE0_B	0x0b0b1
+-			MX6QDL_PAD_SD4_CMD__NAND_RE_B		0x0b0b1
+-			MX6QDL_PAD_SD4_CLK__NAND_WE_B		0x0b0b1
+-			MX6QDL_PAD_NANDF_D0__NAND_DATA00	0x0b0b1
+-			MX6QDL_PAD_NANDF_D1__NAND_DATA01	0x0b0b1
+-			MX6QDL_PAD_NANDF_D2__NAND_DATA02	0x0b0b1
+-			MX6QDL_PAD_NANDF_D3__NAND_DATA03	0x0b0b1
+-			MX6QDL_PAD_NANDF_D4__NAND_DATA04	0x0b0b1
+-			MX6QDL_PAD_NANDF_D5__NAND_DATA05	0x0b0b1
+-			MX6QDL_PAD_NANDF_D6__NAND_DATA06	0x0b0b1
+-			MX6QDL_PAD_NANDF_D7__NAND_DATA07	0x0b0b1
+-		>;
+-	};
+-
+-	pinctrl_hog: hoggrp {
+-		fsl,pins = <	/* Enable ARM Debugger */
+-			MX6QDL_PAD_CSI0_MCLK__ARM_TRACE_CTL	0x1b0b0
+-			MX6QDL_PAD_CSI0_PIXCLK__ARM_EVENTO	0x1b0b0
+-			MX6QDL_PAD_CSI0_VSYNC__ARM_TRACE00	0x1b0b0
+-			MX6QDL_PAD_CSI0_DATA_EN__ARM_TRACE_CLK	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT4__ARM_TRACE01	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT5__ARM_TRACE02	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT6__ARM_TRACE03	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT7__ARM_TRACE04	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT8__ARM_TRACE05	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT9__ARM_TRACE06	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT10__ARM_TRACE07	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT11__ARM_TRACE08	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT12__ARM_TRACE09	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT13__ARM_TRACE10	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT14__ARM_TRACE11	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT15__ARM_TRACE12	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT16__ARM_TRACE13	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT17__ARM_TRACE14	0x1b0b0
+-			MX6QDL_PAD_CSI0_DAT18__ARM_TRACE15	0x1b0b0
+-			MX6QDL_PAD_GPIO_0__CCM_CLKO1        0x130b0
+-		>;
+-	};
+-
+-	pinctrl_i2c3: i2c3grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_EIM_D17__I2C3_SCL		0x4001b8b1
+-			MX6QDL_PAD_EIM_D18__I2C3_SDA		0x4001b8b1
+-		>;
+-	};
+-
+-	pinctrl_tempsense: tempsensegrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_NANDF_CS2__GPIO6_IO15 0x1b0b0
+-		>;
+-	};
+-
+-	pinctrl_uart1: uart1grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_SD3_DAT6__UART1_RX_DATA	0x1b0b1
+-			MX6QDL_PAD_SD3_DAT7__UART1_TX_DATA	0x1b0b1
+-		>;
+-	};
+-
+-	pinctrl_uart2: uart2grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_SD3_RST__GPIO7_IO08		0x13059	/* BT_EN */
+-			MX6QDL_PAD_SD4_DAT4__UART2_RX_DATA	0x1b0b1
+-			MX6QDL_PAD_SD4_DAT5__UART2_RTS_B	0x1b0b1
+-			MX6QDL_PAD_SD4_DAT6__UART2_CTS_B	0x1b0b1
+-			MX6QDL_PAD_SD4_DAT7__UART2_TX_DATA	0x1b0b1
+-		>;
+-	};
+-
+-	pinctrl_usdhc1: usdhc1grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_SD1_CMD__SD1_CMD	0x170B9
+-			MX6QDL_PAD_SD1_CLK__SD1_CLK	0x100B9
+-			MX6QDL_PAD_SD1_DAT0__SD1_DATA0	0x170B9
+-			MX6QDL_PAD_SD1_DAT1__SD1_DATA1	0x170B9
+-			MX6QDL_PAD_SD1_DAT2__SD1_DATA2	0x170B9
+-			MX6QDL_PAD_SD1_DAT3__SD1_DATA3	0x170B9
+-		>;
+-	};
+-
+-	pinctrl_usdhc3: usdhc3grp {
+-		fsl,pins = <
+-			MX6QDL_PAD_SD3_CMD__SD3_CMD    0x17049
+-			MX6QDL_PAD_SD3_CLK__SD3_CLK    0x10049
+-			MX6QDL_PAD_SD3_DAT0__SD3_DATA0 0x17049
+-			MX6QDL_PAD_SD3_DAT1__SD3_DATA1 0x17049
+-			MX6QDL_PAD_SD3_DAT2__SD3_DATA2 0x17049
+-			MX6QDL_PAD_SD3_DAT3__SD3_DATA3 0x17049
+-			MX6QDL_PAD_SD3_DAT4__GPIO7_IO01	0x130b0 /* WL_IRQ */
+-			MX6QDL_PAD_SD3_DAT5__GPIO7_IO00	0x17059 /* WLAN_EN */
+-		>;
+-	};
 -};
 -
--&i2c2 {
--	clock-frequency = <400000>;
--	/delete-property/ bootph-pre-ram;
+-&snvs_poweroff {
+-	status = "okay";
 -};
 -
--/delete-node/ &bandgap;
--/delete-node/ &uart2;
--/delete-node/ &uart3;
--/delete-node/ &mmc2;
--/delete-node/ &mmc3;
--/delete-node/ &thermal_zones;
+-&uart1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_uart1>;
+-	status = "okay";
+-};
 -
-diff --git a/arch/arm/dts/logicpd-som-lv-37xx-devkit-u-boot.dtsi b/arch/arm/dts/logicpd-som-lv-37xx-devkit-u-boot.dtsi
+-&uart2 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_uart2>;
+-	uart-has-rtscts;
+-	status = "okay";
+-
+-	bluetooth {
+-		compatible = "ti,wl1837-st";
+-		enable-gpios = <&gpio7 8 GPIO_ACTIVE_HIGH>;
+-	};
+-};
+-
+-&usdhc1 {
+-	pinctrl-names = "default", "state_100mhz", "state_200mhz";
+-	pinctrl-0 = <&pinctrl_usdhc1>;
+-	non-removable;
+-	keep-power-in-suspend;
+-	wakeup-source;
+-	vmmc-supply = <&sw2_reg>;
+-	status = "okay";
+-};
+-
+-&usdhc3 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_usdhc3>;
+-	non-removable;
+-	cap-power-off-card;
+-	keep-power-in-suspend;
+-	wakeup-source;
+-	vmmc-supply = <&reg_wl18xx_vmmc>;
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-	status = "okay";
+-
+-	wlcore: wlcore@2 {
+-		  compatible = "ti,wl1837";
+-		  reg = <2>;
+-		  interrupt-parent = <&gpio7>;
+-		  interrupts = <1 IRQ_TYPE_LEVEL_HIGH>;
+-		  tcxo-clock-frequency = <26000000>;
+-	};
+-};
+diff --git a/arch/arm/dts/imx6q-logicpd-u-boot.dtsi b/arch/arm/dts/imx6q-logicpd-u-boot.dtsi
 deleted file mode 100644
-index d77fa38746f..00000000000
---- a/arch/arm/dts/logicpd-som-lv-37xx-devkit-u-boot.dtsi
+index 2b28d36ef11..00000000000
+--- a/arch/arm/dts/imx6q-logicpd-u-boot.dtsi
 +++ /dev/null
-@@ -1,72 +0,0 @@
+@@ -1,30 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
 -/*
-- * Copyright (C) 2017
-- * Logic PD - http://www.logicpd.com
+- * Copyright (C) 2019 Logic PD <aford173@gmail.com>
 - */
 -
--#include "omap3-u-boot.dtsi"
+-#include "imx6qdl-u-boot.dtsi"
 -
--/ {
--	chosen {
--		stdout-path = &uart1;
--	};
--
--	aliases {
--		/delete-property/ serial1;
--		/delete-property/ serial2;
--		/delete-property/ mmc1;
--		/delete-property/ mmc2;
--	};
--
--	ethernet@08000000 {
--		compatible = "smsc,lan9221","smsc,lan9115";
--		reg = <0x08000000 0xff>;
--		bank-width = <2>;
--		vddvario-supply = <&vddvario>;
--		vdd33a-supply = <&vdd33a>;
--		reg-io-width = <4>;
--		smsc,save-mac-address;
--	};
+-&uart1 {
+-	bootph-pre-ram;
 -};
 -
--&gpio1 {
--	/delete-property/ bootph-pre-ram;
+-&usdhc1 {
+-	bootph-pre-ram;
 -};
 -
--&gpio2 {
--	/delete-property/ bootph-pre-ram;
+-&usdhc2 {
+-	bootph-pre-ram;
 -};
 -
--&gpio3 {
--	/delete-property/ bootph-pre-ram;
+-&pinctrl_uart1 {
+-	bootph-pre-ram;
 -};
 -
--&gpio4 {
--	/delete-property/ bootph-pre-ram;
+-&pinctrl_usdhc1 {
+-	bootph-pre-ram;
 -};
 -
--&gpio5 {
--	/delete-property/ bootph-pre-ram;
+-&pinctrl_usdhc2 {
+-	bootph-pre-ram;
 -};
--
--&gpio6 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&i2c1 {
--	clock-frequency = <400000>;
--	/delete-property/ bootph-pre-ram;
--};
--
--&i2c2 {
--	clock-frequency = <400000>;
--	/delete-property/ bootph-pre-ram;
--};
--
--/delete-node/ &bandgap;
--/delete-node/ &uart2;
--/delete-node/ &uart3;
--/delete-node/ &mmc2;
--/delete-node/ &mmc3;
--/delete-node/ &thermal_zones;
--
-diff --git a/arch/arm/dts/logicpd-torpedo-35xx-devkit-u-boot.dtsi b/arch/arm/dts/logicpd-torpedo-35xx-devkit-u-boot.dtsi
+diff --git a/arch/arm/dts/imx6q-logicpd.dts b/arch/arm/dts/imx6q-logicpd.dts
 deleted file mode 100644
-index d14d68e458a..00000000000
---- a/arch/arm/dts/logicpd-torpedo-35xx-devkit-u-boot.dtsi
+index 46a4ddedb42..00000000000
+--- a/arch/arm/dts/imx6q-logicpd.dts
 +++ /dev/null
-@@ -1,71 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright (C) 2017
-- * Logic PD - http://www.logicpd.com
-- */
+@@ -1,130 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-//
+-// Copyright (C) 2019 Logic PD, Inc.
 -
--#include "omap3-u-boot.dtsi"
+-/dts-v1/;
+-#include "imx6q.dtsi"
+-#include "imx6-logicpd-som.dtsi"
+-#include "imx6-logicpd-baseboard.dtsi"
 -
 -/ {
--	chosen {
--		stdout-path = &uart1;
+-	model = "Logic PD i.MX6QD SOM-M3";
+-	compatible = "logicpd,imx6q-logicpd", "fsl,imx6q";
+-
+-	backlight: backlight-lvds {
+-		compatible = "pwm-backlight";
+-		pwms = <&pwm3 0 20000 0>;
+-		brightness-levels = <0 4 8 16 32 64 128 255>;
+-		default-brightness-level = <6>;
+-		power-supply = <&reg_lcd>;
 -	};
 -
--	aliases {
--		/delete-property/ serial1;
--		/delete-property/ serial2;
--		/delete-property/ mmc1;
--		/delete-property/ mmc2;
+-	panel-lvds0 {
+-		compatible = "okaya,rs800480t-7x0gp";
+-		power-supply = <&reg_lcd_reset>;
+-		backlight = <&backlight>;
+-
+-		port {
+-			panel_in_lvds0: endpoint {
+-				remote-endpoint = <&lvds0_out>;
+-			};
+-		};
 -	};
 -
--	ethernet@08000000 {
--		compatible = "smsc,lan9221","smsc,lan9115";
--		reg = <0x08000000 0xff>;
--		bank-width = <2>;
--		vddvario-supply = <&vddvario>;
--		vdd33a-supply = <&vdd33a>;
--		reg-io-width = <4>;
--		smsc,save-mac-address;
+-	reg_lcd: regulator-lcd {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_lcd_reg>;
+-		compatible = "regulator-fixed";
+-		regulator-name = "lcd_panel_pwr";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio4 17 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-		vin-supply = <&reg_3v3>;
+-		startup-delay-us = <500000>;
+-	};
+-
+-	reg_lcd_reset: regulator-lcd-reset {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_lcd_reset>;
+-		compatible = "regulator-fixed";
+-		regulator-name = "nLCD_RESET";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio5 2 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-		vin-supply = <&reg_lcd>;
 -	};
 -};
 -
--&gpio1 {
--	/delete-property/ bootph-pre-ram;
+-&clks {
+-	assigned-clocks = <&clks IMX6QDL_CLK_LDB_DI0_SEL>,
+-			  <&clks IMX6QDL_CLK_LDB_DI1_SEL>,
+-			  <&clks IMX6QDL_CLK_IPU1_DI0_PRE_SEL>,
+-			  <&clks IMX6QDL_CLK_IPU2_DI0_PRE_SEL>;
+-	assigned-clock-parents = <&clks IMX6QDL_CLK_PLL5_VIDEO_DIV>,
+-				 <&clks IMX6QDL_CLK_PLL5_VIDEO_DIV>,
+-				 <&clks IMX6QDL_CLK_PLL2_PFD2_396M>,
+-				 <&clks IMX6QDL_CLK_PLL2_PFD2_396M>;
 -};
 -
--&gpio2 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&gpio3 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&gpio4 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&gpio5 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&gpio6 {
--	/delete-property/ bootph-pre-ram;
+-&hdmi {
+-	ddc-i2c-bus = <&i2c3>;
+-	status = "okay";
 -};
 -
 -&i2c1 {
--	clock-frequency = <400000>;
--	/delete-property/ bootph-pre-ram;
--};
--
--&i2c2 {
--	clock-frequency = <400000>;
--	/delete-property/ bootph-pre-ram;
--};
--
--/delete-node/ &bandgap;
--/delete-node/ &uart2;
--/delete-node/ &uart3;
--/delete-node/ &mmc2;
--/delete-node/ &mmc3;
--/delete-node/ &thermal_zones;
-diff --git a/arch/arm/dts/logicpd-torpedo-37xx-devkit-u-boot.dtsi b/arch/arm/dts/logicpd-torpedo-37xx-devkit-u-boot.dtsi
-deleted file mode 100644
-index 8e8e2e4096f..00000000000
---- a/arch/arm/dts/logicpd-torpedo-37xx-devkit-u-boot.dtsi
-+++ /dev/null
-@@ -1,68 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright (C) 2017
-- * Logic PD - http://www.logicpd.com
-- */
--
--#include "omap3-u-boot.dtsi"
--
--/ {
--	aliases {
--		/delete-property/ serial1;
--		/delete-property/ serial2;
--		/delete-property/ mmc1;
--		/delete-property/ mmc2;
--	};
--
--	ethernet@08000000 {
--		compatible = "smsc,lan9221","smsc,lan9115";
--		#address-cells = <1>;
--		#size-cells = <0>;
--		reg = <0x08000000 0xff>;
--		bank-width = <2>;
--		vddvario-supply = <&vddvario>;
--		vdd33a-supply = <&vdd33a>;
--		reg-io-width = <4>;
--		smsc,save-mac-address;
+-	touchscreen@26 {
+-		compatible = "ilitek,ili2117";
+-		reg = <0x26>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_touchscreen>;
+-		interrupts-extended = <&gpio1 6 IRQ_TYPE_EDGE_RISING>;
 -	};
 -};
 -
--&i2c1 {
--	clock-frequency = <400000>;
--	/delete-property/ bootph-pre-ram;
+-&ldb {
+-	status = "okay";
+-
+-	lvds-channel@0 {
+-		fsl,data-mapping = "spwg";
+-		fsl,data-width = <24>;
+-		status = "okay";
+-
+-		port@4 {
+-			reg = <4>;
+-			lvds0_out: endpoint {
+-				remote-endpoint = <&panel_in_lvds0>;
+-			};
+-		};
+-	};
+-
 -};
 -
--&i2c2 {
--	clock-frequency = <400000>;
+-&pwm3 {
+-	status = "okay";
 -};
 -
--&gpio1 {
--	/delete-property/ bootph-pre-ram;
+-&reg_hdmi {
+-	regulator-always-on;	/* Without this, the level shifter on HDMI doesn't turn on */
 -};
 -
--&gpio2 {
--	/delete-property/ bootph-pre-ram;
--};
+-&iomuxc {
+-	pinctrl_lcd_reg: lcdreg {
+-		fsl,pins = <
+-			MX6QDL_PAD_DI0_PIN15__GPIO4_IO17	0x100b0	/* R_LCD_PANEL_PWR */
+-		>;
+-	};
 -
--&gpio3 {
--	/delete-property/ bootph-pre-ram;
--};
+-	pinctrl_lcd_reset: lcdreset {
+-		fsl,pins = <
+-			MX6QDL_PAD_EIM_A25__GPIO5_IO02	0x100b0	/* LCD_nRESET */
+-		>;
+-	};
 -
--&gpio4 {
--	/delete-property/ bootph-pre-ram;
+-	pinctrl_touchscreen: touchscreengrp {
+-		fsl,pins = <
+-			MX6QDL_PAD_GPIO_6__GPIO1_IO06	0x1b0b0	/* TOUCH_nPINTDAV */
+-		>;
+-	};
 -};
--
--&gpio5 {
--	/delete-property/ bootph-pre-ram;
--};
--
--&gpio6 {
--	/delete-property/ bootph-pre-ram;
--};
--
--/delete-node/ &bandgap;
--/delete-node/ &uart2;
--/delete-node/ &uart3;
--/delete-node/ &mmc2;
--/delete-node/ &mmc3;
--/delete-node/ &thermal_zones;
-diff --git a/arch/arm/mach-omap2/omap3/Kconfig b/arch/arm/mach-omap2/omap3/Kconfig
-index 79e24acba8d..61e1c1a2854 100644
---- a/arch/arm/mach-omap2/omap3/Kconfig
-+++ b/arch/arm/mach-omap2/omap3/Kconfig
-@@ -70,18 +70,6 @@ config TARGET_OMAP3_PANDORA
- 	select OMAP3_GPIO_4
- 	select OMAP3_GPIO_6
+diff --git a/arch/arm/mach-imx/mx6/Kconfig b/arch/arm/mach-imx/mx6/Kconfig
+index ffcc05e8683..cc6369dbbfb 100644
+--- a/arch/arm/mach-imx/mx6/Kconfig
++++ b/arch/arm/mach-imx/mx6/Kconfig
+@@ -272,20 +272,6 @@ config TARGET_MX6CUBOXI
+ 	select BOARD_LATE_INIT
+ 	select SUPPORT_SPL
  
--config TARGET_OMAP3_LOGIC
--	bool "OMAP3 Logic"
+-config TARGET_MX6LOGICPD
+-	bool "Logic PD i.MX6 SOM"
+-	depends on MX6Q
+-	select SUPPORT_SPL
+-	select BOARD_EARLY_INIT_F
 -	select BOARD_LATE_INIT
 -	select DM
 -	select DM_GPIO
--	select DM_SERIAL
--	select OMAP3_GPIO_3
--	select OMAP3_GPIO_4
--	select OMAP3_GPIO_6
+-	select DM_I2C
+-	select DM_PMIC
+-	select MMC
+-	select OF_CONTROL
 -	imply CMD_DM
--	imply VIDEO_DAMAGE
 -
- config TARGET_TAO3530
- 	bool "TAO3530"
- 	select OMAP3_GPIO_2
-@@ -132,7 +120,6 @@ config SYS_SOC
- source "board/timll/devkit8000/Kconfig"
- source "board/ti/omap3evm/Kconfig"
- source "board/isee/igep00x0/Kconfig"
--source "board/logicpd/omap3som/Kconfig"
- source "board/lg/sniper/Kconfig"
- 
- endif
-diff --git a/board/logicpd/omap3som/Kconfig b/board/logicpd/omap3som/Kconfig
+ config TARGET_MX6MEMCAL
+ 	bool "mx6memcal"
+ 	depends on MX6QDL
+@@ -752,7 +738,6 @@ source "board/kosagi/novena/Kconfig"
+ source "board/softing/vining_2000/Kconfig"
+ source "board/liebherr/display5/Kconfig"
+ source "board/liebherr/mccmon6/Kconfig"
+-source "board/logicpd/imx6/Kconfig"
+ source "board/sielaff/imx6dl-sielaff/Kconfig"
+ source "board/solidrun/mx6cuboxi/Kconfig"
+ source "board/somlabs/visionsom-6ull/Kconfig"
+diff --git a/board/logicpd/imx6/Kconfig b/board/logicpd/imx6/Kconfig
 deleted file mode 100644
-index 68d40dcd62d..00000000000
---- a/board/logicpd/omap3som/Kconfig
+index dfc196124f3..00000000000
+--- a/board/logicpd/imx6/Kconfig
 +++ /dev/null
-@@ -1,14 +0,0 @@
--if TARGET_OMAP3_LOGIC
+@@ -1,12 +0,0 @@
+-if TARGET_MX6LOGICPD
 -
 -config SYS_BOARD
--	default "omap3som"
+-       default "imx6"
 -
 -config SYS_VENDOR
 -	default "logicpd"
 -
 -config SYS_CONFIG_NAME
--	default "omap3_logic"
--
--source "board/ti/common/Kconfig"
+-       default "imx6_logic"
 -
 -endif
-diff --git a/board/logicpd/omap3som/MAINTAINERS b/board/logicpd/omap3som/MAINTAINERS
+diff --git a/board/logicpd/imx6/MAINTAINERS b/board/logicpd/imx6/MAINTAINERS
 deleted file mode 100644
-index 459393cf54c..00000000000
---- a/board/logicpd/omap3som/MAINTAINERS
+index 4280315269d..00000000000
+--- a/board/logicpd/imx6/MAINTAINERS
++++ /dev/null
+@@ -1,10 +0,0 @@
+-MX6LOGICPD BOARD
+-M:     Adam Ford <aford173@gmail.com>
+-S:     Maintained
+-F:     board/logicpd/imx6/
+-F:     include/configs/imx6_logic.h
+-F:     configs/imx6q_logic_defconfig
+-F:     arch/arm/dts/imx6-logicpd-baseboard.dtsi
+-F:     arch/arm/dts/imx6-logicpd-som.dtsi
+-F:     arch/arm/dts/imx6q-logicpd.dts
+-F:     arch/arm/dts/imx6q-logicpd-u-boot.dtsi
+diff --git a/board/logicpd/imx6/Makefile b/board/logicpd/imx6/Makefile
+deleted file mode 100644
+index dbaf18d3e0b..00000000000
+--- a/board/logicpd/imx6/Makefile
 +++ /dev/null
 @@ -1,9 +0,0 @@
--OMAP3SOM BOARD
--M:	Adam Ford <aford173@gmail.com>
--S:	Maintained
--F:	board/logicpd/omap3som/
--F:	include/configs/omap3_logic.h
--F:	configs/omap3_logic_defconfig
--F:	configs/omap35_logic_defconfig
--F:	configs/omap35_logic_somlv_defconfig
--F:	configs/omap3_logic_somlv_defconfig
-diff --git a/board/logicpd/omap3som/Makefile b/board/logicpd/omap3som/Makefile
-deleted file mode 100644
-index 61ef14e87a0..00000000000
---- a/board/logicpd/omap3som/Makefile
-+++ /dev/null
-@@ -1,6 +0,0 @@
--# SPDX-License-Identifier: GPL-2.0+
 -#
--# (C) Copyright 2000, 2001, 2002
--# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+-# Copyright (C) 2007, Guennadi Liakhovetski <lg@denx.de>
+-#
+-# (C) Copyright 2011 Freescale Semiconductor, Inc.
+-#
+-# SPDX-License-Identifier:     GPL-2.0+
+-#
 -
--obj-y	:= omap3logic.o
-diff --git a/board/logicpd/omap3som/README b/board/logicpd/omap3som/README
+-obj-y  := imx6logic.o
+diff --git a/board/logicpd/imx6/README b/board/logicpd/imx6/README
 deleted file mode 100644
-index 5aaf58f0a69..00000000000
---- a/board/logicpd/omap3som/README
+index 9d7b9128c4d..00000000000
+--- a/board/logicpd/imx6/README
 +++ /dev/null
-@@ -1,56 +0,0 @@
--Summary
--=======
+@@ -1,82 +0,0 @@
+-U-Boot for LogicPD i.MX6 Development Kit
+-----------------------------------------
 -
--The source for omap3logic.c encompases the OMAP35 and DM3730 SOM-LV and DM3730 Torpedo platforms, but there are device trees custom taylored to each board.
+-This file contains information for the port of U-Boot to the Logic PD Development kit.
 -
--omap3_logic_defconfig = DM37 Torpedo / Torpedo + Wireless
--omap35_logic_defconfig = OMAP35 Torpedo
--omap3_logic_somlv_defconfig = DM37 SOM-LV
--omap35_logic_somlv_defconfig = OMAP35 SOM-LV
+-Logic PD has an i.MX6 System On Module (SOM) and a correspondong development
+-board.  SOM has a built-in microSD socket, DDR and NAND flash.  The development kit has
+-an SMSC Ethernet PHY, serial debug port and a variety of peripherals.
 -
--The device tree included with each of the defconfig files will also direct the board as to which dtb file to load when loading the kernel, so it is not
--recomended to mix and match the defconfig files.
+-On the intial release, the SOM came with either an i.MX6D or i.MX6Q.
 -
--Falcon Mode: FAT SD cards
--=========================
+-For more details about Logic PD i.MX6 Development kit, visit:
+-https://www.logicpd.com/
 -
--In this case the additional file is written to the filesystem.  In this
--example we assume that the uImage and device tree to be used are already on
--the FAT filesystem (only the uImage MUST be for this to function
--afterwards) along with a Falcon Mode aware MLO and the FAT partition has
--already been created and marked bootable:
+-Building U-Boot for Logic PD Development Kit
+---------------------------------------------
+-To build U-Boot for the Dual and Quad variants:
 -
--U-Boot # mmc rescan
--# Load kernel and device tree into memory, perform export
--U-Boot # fatload mmc 0 ${loadaddr} uImage
--U-Boot # run loadfdt
--U-Boot # setenv optargs quiet
--U-Boot # run mmcargs
--U-Boot # run common_bootargs
--U-Boot # spl export fdt ${loadaddr} - ${fdtaddr}
+- make imx6q_logic_defconfig
+- make u-boot.imx CROSS_COMPILE=arm-linux-
 -
--This will print a number of lines and then end with something like:
--   Loading Device Tree to 8dec9000, end 8dee0295 ... OK
 -
--So then note the starting address and write the args to mmc/sd:
+-Flashing U-Boot into the SD card
+---------------------------------
+-U-Boot is now building with SPL enabled which means there are two files to
+-load into the SD card. Make sure the card is formatted with at least two
+-partitions with the first partition being FAT32. First copy u-boot-dtb.img
+-to the first partition then burn SPL to the SD card with dd.
+-The SPL portion is programmed into a certain location for use by the internal
+-bootROM and it cannot be changed.  The following instructions assume the SD
+-card is located as /dev/sdb.
 -
--U-Boot # fatwrite mmc 0:1 0x8dec9000 args 0x20000
+-  cp u-boot-dtb.img /dev/media/logic/boot
+-  sudo dd if=SPL of=/dev/sdb bs=1k seek=1 oflag=sync status=none && sync
 -
--The size of 0x20000 matches the CMD_SPL_WRITE_SIZE.
 -
--Falcon Mode: NAND
--=================
+-Flashing U-Boot into NAND
+--------------------------
+-Once in Linux with MTD support for the NAND on /dev/mtd0, program U-Boot with the following:
+-with:
 -
--In this case the additional data is written to another partition of the
--NAND.  In this example we assume that the uImage and device tree to be are
--already located on the NAND somewhere (such as filesystem or mtd partition)
--along with a Falcon Mode aware MLO written to the correct locations for
--booting and mtdparts have been configured correctly for the board:
+-  kobs-ng init -v -x u-boot-dtb.imx
 -
--U-Boot # nand read ${loadaddr} kernel
--U-Boot # load nand rootfs ${fdtaddr} /boot/am335x-evm.dtb
--U-Boot # run nandargs
--U-Boot # run common_bootargs
--U-Boot # spl export fdt ${loadaddr} - ${fdtaddr}
--U-Boot # nand erase.part u-boot-spl-os
--U-Boot # nand write ${fdtaddr} u-boot-spl-os
-diff --git a/board/logicpd/omap3som/omap3logic.c b/board/logicpd/omap3som/omap3logic.c
+-
+-Using Falcon Mode
+------------------
+-With Falcon Mode enabled, U-Boot can be bypassed by having SPL directly load
+-the kernel.  The device tree, Kernel and boot args must first be configured,
+-and stored to a file on the micro SD card called 'args'
+-The kernel uImage is built with LOAD_ADDR=0x12000000 and the device tree is
+-assummed to be imx6q-logicpd.dtb.
+-
+-By default the mmcroot is set to the baseboard.
+-
+-  # Establish bootargs
+-  run mmcargs
+-
+-  # Load Linux Kernel uImage
+-  fatload mmc 1 $loadaddr uImage
+-
+-  # Load Device Tree
+-  run loadfdt
+-
+-  # Setup the blob that will get passed to the kernel
+-  spl export fdt ${loadaddr} - ${fdt_addr_r}
+-
+-  # Note the starting and ending address of the updated device tree.
+-  # for this example:
+-  # Loading Device Tree to 1ffdf000, end 1fff038b ... OK
+-  # Notice that 0x1fff038b - 1ffdf000 = 0x1138b
+-  # now Add 1, so the length is 0x1138c.
+-
+-  fatwrite mmc 1 0x1ffdf000 args 0x1138c
+-
+-  # Reset the board and it will bypass U-Boot and SPL will directly boot
+-  # the uImage
+-
+-To interrupt the boot sequence and force U-Boot to load, hold the 'c' button
+-while starting.
+-
+-Additional Support Documentation can be found at:
+-https://support.logicpd.com/
+diff --git a/board/logicpd/imx6/imx6logic.c b/board/logicpd/imx6/imx6logic.c
 deleted file mode 100644
-index 352b519b451..00000000000
---- a/board/logicpd/omap3som/omap3logic.c
+index 652994df616..00000000000
+--- a/board/logicpd/imx6/imx6logic.c
 +++ /dev/null
-@@ -1,240 +0,0 @@
+@@ -1,323 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
 -/*
-- * (C) Copyright 2011
-- * Logic Product Development <www.logicpd.com>
+- * Copyright (C) 2017 Logic PD, Inc.
 - *
-- * Author :
-- *	Peter Barada <peter.barada@logicpd.com>
+- * Author: Adam Ford <aford173@gmail.com>
 - *
-- * Derived from Beagle Board and 3430 SDP code by
-- *	Richard Woodruff <r-woodruff2@ti.com>
-- *	Syed Mohammed Khasim <khasim@ti.com>
+- * Based on SabreSD by Fabio Estevam <fabio.estevam@nxp.com>
+- * and updates by Jagan Teki <jagan@amarulasolutions.com>
 - */
--#include <config.h>
--#include <dm.h>
+-
+-#include <env.h>
 -#include <init.h>
--#include <net.h>
--#include <ns16550.h>
--#include <nand.h>
--#include <i2c.h>
+-#include <miiphy.h>
+-#include <input.h>
+-#include <mmc.h>
+-#include <fsl_esdhc_imx.h>
 -#include <serial.h>
--#include <twl4030.h>
 -#include <asm/global_data.h>
 -#include <asm/io.h>
--#include <asm/arch/mmc_host_def.h>
--#include <asm/arch/mux.h>
--#include <asm/arch/mem.h>
--#include <asm/arch/sys_proto.h>
 -#include <asm/gpio.h>
--#include <asm/omap_mmc.h>
--#include <asm/mach-types.h>
--#include <linux/mtd/rawnand.h>
--#include <asm/omap_musb.h>
--#include <linux/errno.h>
--#include <linux/usb/ch9.h>
--#include <linux/usb/gadget.h>
--#include <linux/usb/musb.h>
--#include "omap3logic.h"
--#ifdef CONFIG_USB_EHCI_HCD
--#include <usb.h>
--#include <asm/ehci-omap.h>
--#endif
+-#include <linux/sizes.h>
+-#include <asm/arch/clock.h>
+-#include <asm/arch/crm_regs.h>
+-#include <asm/arch/iomux.h>
+-#include <asm/arch/mxc_hdmi.h>
+-#include <asm/arch/mx6-pins.h>
+-#include <asm/arch/sys_proto.h>
+-#include <asm/mach-imx/boot_mode.h>
+-#include <asm/mach-imx/iomux-v3.h>
 -
 -DECLARE_GLOBAL_DATA_PTR;
 -
--#define LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG1	0x00011203
--#define LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG2	0x000A1302
--#define LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG3	0x000F1302
--#define LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG4	0x0A021303
--#define LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG5	0x00120F18
--#define LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG6	0x0A030000
--#define LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG7	0x00000C50
+-#define UART_PAD_CTRL  (PAD_CTL_PKE | PAD_CTL_PUE |            \
+-	PAD_CTL_PUS_100K_UP | PAD_CTL_SPEED_MED |               \
+-	PAD_CTL_DSE_40ohm   | PAD_CTL_SRE_FAST  | PAD_CTL_HYS)
 -
--#define LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG1	0x00011203
--#define LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG2	0x00091102
--#define LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG3	0x000D1102
--#define LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG4	0x09021103
--#define LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG5	0x00100D15
--#define LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG6	0x09030000
--#define LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG7	0x00000C50
+-#define NAND_PAD_CTRL  (PAD_CTL_PKE | PAD_CTL_PUE |            \
+-	PAD_CTL_PUS_100K_UP | PAD_CTL_SPEED_MED   |             \
+-	PAD_CTL_DSE_40ohm   | PAD_CTL_HYS)
 -
--#define CFG_SMC911X_BASE 0x08000000
+-int dram_init(void)
+-{
+-	gd->ram_size = imx_ddr_size();
+-	return 0;
+-}
+-
+-static iomux_v3_cfg_t const nand_pads[] = {
+-	MX6_PAD_NANDF_CS0__NAND_CE0_B | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_ALE__NAND_ALE  | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_CLE__NAND_CLE  | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_WP_B__NAND_WP_B  | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_RB0__NAND_READY_B   | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_D0__NAND_DATA00    | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_D1__NAND_DATA01    | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_D2__NAND_DATA02    | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_D3__NAND_DATA03    | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_D4__NAND_DATA04    | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_D5__NAND_DATA05    | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_D6__NAND_DATA06    | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_NANDF_D7__NAND_DATA07    | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_SD4_CLK__NAND_WE_B    | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-	MX6_PAD_SD4_CMD__NAND_RE_B    | MUX_PAD_CTRL(NAND_PAD_CTRL),
+-};
+-
+-static void setup_nand_pins(void)
+-{
+-	imx_iomux_v3_setup_multiple_pads(nand_pads, ARRAY_SIZE(nand_pads));
+-}
+-
+-static int ar8031_phy_fixup(struct phy_device *phydev)
+-{
+-	unsigned short val;
+-
+-	/* To enable AR8031 output a 125MHz clk from CLK_25M */
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x7);
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, 0x8016);
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x4007);
+-
+-	val = phy_read(phydev, MDIO_DEVAD_NONE, 0xe);
+-	val &= 0xffe3;
+-	val |= 0x18;
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, val);
+-
+-	/* introduce tx clock delay */
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x5);
+-	val = phy_read(phydev, MDIO_DEVAD_NONE, 0x1e);
+-	val |= 0x0100;
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, val);
+-
+-	return 0;
+-}
+-
+-int board_phy_config(struct phy_device *phydev)
+-{
+-	ar8031_phy_fixup(phydev);
+-
+-	if (phydev->drv->config)
+-		phydev->drv->config(phydev);
+-
+-	return 0;
+-}
+-
+-/*
+- * Do not overwrite the console
+- * Use always serial for U-Boot console
+- */
+-int overwrite_console(void)
+-{
+-	return 1;
+-}
+-
+-int board_early_init_f(void)
+-{
+-	setup_nand_pins();
+-	return 0;
+-}
+-
+-int board_init(void)
+-{
+-	/* address of boot parameters */
+-	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
+-	return 0;
+-}
+-
+-int board_late_init(void)
+-{
+-	env_set("board_name", "imx6logic");
+-
+-	if (is_mx6dq()) {
+-		env_set("board_rev", "MX6DQ");
+-		if (!env_get("fdt_file"))
+-			env_set("fdt_file", "imx6q-logicpd.dtb");
+-	}
+-
+-	return 0;
+-}
+-
+-#ifdef CONFIG_XPL_BUILD
+-#include <asm/arch/mx6-ddr.h>
+-#include <asm/arch/mx6q-ddr.h>
+-#include <spl.h>
+-#include <linux/libfdt.h>
 -
 -#ifdef CONFIG_SPL_OS_BOOT
 -int spl_start_uboot(void)
 -{
 -	/* break into full u-boot on 'c' */
--	return serial_tstc() && serial_getc() == 'c';
+-	if (serial_tstc() && serial_getc() == 'c')
+-		return 1;
+-
+-	return 0;
 -}
 -#endif
 -
--#if defined(CONFIG_XPL_BUILD)
--/*
-- * Routine: get_board_mem_timings
-- * Description: If we use SPL then there is no x-loader nor config header
-- * so we have to setup the DDR timings ourself on the first bank.  This
-- * provides the timing values back to the function that configures
-- * the memory.
-- */
--void get_board_mem_timings(struct board_sdrc_timings *timings)
+-void board_boot_order(u32 *spl_boot_list)
 -{
--	timings->mr = MICRON_V_MR_165;
+-	struct src *psrc = (struct src *)SRC_BASE_ADDR;
+-	unsigned int reg = readl(&psrc->sbmr1) >> 11;
+-	u32 boot_mode = imx6_src_get_boot_mode() & IMX6_BMODE_MASK;
+-	unsigned int bmode = readl(&src_base->sbmr2);
 -
--	if (get_cpu_family() == CPU_OMAP36XX) {
--		/* 200 MHz works for OMAP36/DM37 */
--		/* 256MB DDR */
--		timings->mcfg = MICRON_V_MCFG_200(256 << 20);
--		timings->ctrla = MICRON_V_ACTIMA_200;
--		timings->ctrlb = MICRON_V_ACTIMB_200;
--		timings->rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_200MHz;
--	} else {
--		/* 165 MHz works for OMAP35 */
--		timings->mcfg = MICRON_V_MCFG_165(256 << 20);
--		timings->ctrla = MICRON_V_ACTIMA_165;
--		timings->ctrlb = MICRON_V_ACTIMB_165;
--		timings->rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
+-	/* If bmode is serial or USB phy is active, return serial */
+-	if (((bmode >> 24) & 0x03) == 0x01 || is_usbotg_phy_active()) {
+-		spl_boot_list[0] = BOOT_DEVICE_BOARD;
+-		return;
 -	}
--}
 -
--#define GPMC_NAND_COMMAND_0 (OMAP34XX_GPMC_BASE + 0x7c)
--#define GPMC_NAND_DATA_0 (OMAP34XX_GPMC_BASE + 0x84)
--#define GPMC_NAND_ADDRESS_0 (OMAP34XX_GPMC_BASE + 0x80)
+-	switch (boot_mode >> IMX6_BMODE_SHIFT) {
+-	case IMX6_BMODE_NAND_MIN ... IMX6_BMODE_NAND_MAX:
+-		spl_boot_list[0] = BOOT_DEVICE_NAND;
+-		break;
+-	case IMX6_BMODE_SD:
+-	case IMX6_BMODE_ESD:
+-	case IMX6_BMODE_MMC:
+-	case IMX6_BMODE_EMMC:
+-		/*
+-		 * Upon reading BOOT_CFG register the following map is done:
+-		 * Bit 11 and 12 of BOOT_CFG register can determine the current
+-		 * mmc port
+-		 * 0x1                  SD1-SOM
+-		 * 0x2                  SD2-Baseboard
+-		 */
 -
--void spl_board_prepare_for_linux(void)
--{
--	/* The Micron NAND starts locked which
--	 * prohibits mounting the NAND as RW
--	 * The following commands are what unlocks
--	 * the NAND to become RW Falcon Mode does not
--	 * have as many smarts as U-Boot, but Logic PD
--	 * only makes NAND with 512MB so these hard coded
--	 * values should work for all current models
--	 */
--
--	writeb(0x70, GPMC_NAND_COMMAND_0);
--	writeb(-1, GPMC_NAND_DATA_0);
--	writeb(0x7a, GPMC_NAND_COMMAND_0);
--	writeb(0x00, GPMC_NAND_ADDRESS_0);
--	writeb(0x00, GPMC_NAND_ADDRESS_0);
--	writeb(0x00, GPMC_NAND_ADDRESS_0);
--	writeb(-1, GPMC_NAND_COMMAND_0);
--
--	/* Begin address 0 */
--	writeb(NAND_CMD_UNLOCK1, 0x6e00007c);
--	writeb(0x00, GPMC_NAND_ADDRESS_0);
--	writeb(0x00, GPMC_NAND_ADDRESS_0);
--	writeb(0x00, GPMC_NAND_ADDRESS_0);
--	writeb(-1, GPMC_NAND_DATA_0);
--
--	/* Ending address at the end of Flash */
--	writeb(NAND_CMD_UNLOCK2, GPMC_NAND_COMMAND_0);
--	writeb(0xc0, GPMC_NAND_ADDRESS_0);
--	writeb(0xff, GPMC_NAND_ADDRESS_0);
--	writeb(0x03, GPMC_NAND_ADDRESS_0);
--	writeb(-1, GPMC_NAND_DATA_0);
--	writeb(0x79, GPMC_NAND_COMMAND_0);
--	writeb(-1, GPMC_NAND_DATA_0);
--	writeb(-1, GPMC_NAND_DATA_0);
--}
--#endif
--
--/*
-- * Routine: misc_init_r
-- * Description: Configure board specific parts
-- */
--int misc_init_r(void)
--{
--	twl4030_power_init();
--	twl4030_power_mmc_init(0);
--	omap_die_id_display();
--	return 0;
--}
--
--#if defined(CONFIG_FLASH_CFI_DRIVER)
--static const u32 gpmc_dm37_c2nor_config[] = {
--	LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG1,
--	LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG2,
--	LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG3,
--	LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG4,
--	LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG5,
--	LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG6,
--	LOGIC_MT28_DM37_ASYNC_GPMC_CONFIG7
--};
--
--static const u32 gpmc_omap35_c2nor_config[] = {
--	LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG1,
--	LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG2,
--	LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG3,
--	LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG4,
--	LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG5,
--	LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG6,
--	LOGIC_MT28_OMAP35_ASYNC_GPMC_CONFIG7
--};
--#endif
--
--/*
-- * Routine: board_init
-- * Description: Early hardware init.
-- */
--int board_init(void)
--{
--	gpmc_init(); /* in SRAM or SDRAM, finish GPMC */
--
--	/* boot param addr */
--	gd->bd->bi_boot_params = (OMAP34XX_SDRC_CS0 + 0x100);
--#if defined(CONFIG_FLASH_CFI_DRIVER)
--	if (get_cpu_family() == CPU_OMAP36XX) {
--		/* Enable CS2 for NOR Flash */
--		enable_gpmc_cs_config(gpmc_dm37_c2nor_config, &gpmc_cfg->cs[2],
--				      0x10000000, GPMC_SIZE_64M);
--	} else {
--		enable_gpmc_cs_config(gpmc_omap35_c2nor_config, &gpmc_cfg->cs[2],
--				      0x10000000, GPMC_SIZE_64M);
+-		reg &= 0x3; /* Only care about bottom 2 bits */
+-		switch (reg) {
+-		case 0:
+-			spl_boot_list[0] = BOOT_DEVICE_MMC1;
+-			break;
+-		case 1:
+-			spl_boot_list[0] = BOOT_DEVICE_MMC2;
+-			break;
+-		}
+-		break;
+-	default:
+-		/* By default use USB downloader */
+-		spl_boot_list[0] = BOOT_DEVICE_BOARD;
+-		break;
 -	}
--#endif
--	return 0;
+-
+-	/* As a last resort, use serial downloader */
+-	spl_boot_list[1] = BOOT_DEVICE_BOARD;
 -}
 -
--#ifdef CONFIG_BOARD_LATE_INIT
--
--static void unlock_nand(void)
+-static void ccgr_init(void)
 -{
--	int dev = nand_curr_device;
--	struct mtd_info *mtd;
+-	struct mxc_ccm_reg *ccm = (struct mxc_ccm_reg *)CCM_BASE_ADDR;
 -
--	mtd = get_nand_dev_by_index(dev);
--	nand_unlock(mtd, 0, mtd->size, 0);
+-	writel(0x00C03F3F, &ccm->CCGR0);
+-	writel(0x0030FC03, &ccm->CCGR1);
+-	writel(0x0FFFC000, &ccm->CCGR2);
+-	writel(0x3FF00000, &ccm->CCGR3);
+-	writel(0xFFFFF300, &ccm->CCGR4);
+-	writel(0x0F0000F3, &ccm->CCGR5);
+-	writel(0x00000FFF, &ccm->CCGR6);
 -}
 -
--#ifdef CONFIG_SMC911X
--/* GPMC CS1 settings for Logic SOM LV/Torpedo LAN92xx Ethernet chip */
--static const u32 gpmc_lan92xx_config[] = {
--	NET_LAN92XX_GPMC_CONFIG1,
--	NET_LAN92XX_GPMC_CONFIG2,
--	NET_LAN92XX_GPMC_CONFIG3,
--	NET_LAN92XX_GPMC_CONFIG4,
--	NET_LAN92XX_GPMC_CONFIG5,
--	NET_LAN92XX_GPMC_CONFIG6,
+-static int mx6q_dcd_table[] = {
+-	MX6_IOM_GRP_DDR_TYPE, 0x000C0000,
+-	MX6_IOM_GRP_DDRPKE, 0x00000000,
+-	MX6_IOM_DRAM_SDCLK_0, 0x00000030,
+-	MX6_IOM_DRAM_SDCLK_1, 0x00000030,
+-	MX6_IOM_DRAM_CAS, 0x00000030,
+-	MX6_IOM_DRAM_RAS, 0x00000030,
+-	MX6_IOM_GRP_ADDDS, 0x00000030,
+-	MX6_IOM_DRAM_RESET, 0x00000030,
+-	MX6_IOM_DRAM_SDBA2, 0x00000000,
+-	MX6_IOM_DRAM_SDODT0, 0x00000030,
+-	MX6_IOM_DRAM_SDODT1, 0x00000030,
+-	MX6_IOM_GRP_CTLDS, 0x00000030,
+-	MX6_IOM_DDRMODE_CTL, 0x00020000,
+-	MX6_IOM_DRAM_SDQS0, 0x00000030,
+-	MX6_IOM_DRAM_SDQS1, 0x00000030,
+-	MX6_IOM_DRAM_SDQS2, 0x00000030,
+-	MX6_IOM_DRAM_SDQS3, 0x00000030,
+-	MX6_IOM_GRP_DDRMODE, 0x00020000,
+-	MX6_IOM_GRP_B0DS, 0x00000030,
+-	MX6_IOM_GRP_B1DS, 0x00000030,
+-	MX6_IOM_GRP_B2DS, 0x00000030,
+-	MX6_IOM_GRP_B3DS, 0x00000030,
+-	MX6_IOM_DRAM_DQM0, 0x00000030,
+-	MX6_IOM_DRAM_DQM1, 0x00000030,
+-	MX6_IOM_DRAM_DQM2, 0x00000030,
+-	MX6_IOM_DRAM_DQM3, 0x00000030,
+-	MX6_MMDC_P0_MDSCR, 0x00008000,
+-	MX6_MMDC_P0_MPZQHWCTRL, 0xA1390003,
+-	MX6_MMDC_P0_MPWLDECTRL0, 0x002D003A,
+-	MX6_MMDC_P0_MPWLDECTRL1, 0x0038002B,
+-	MX6_MMDC_P0_MPDGCTRL0, 0x03340338,
+-	MX6_MMDC_P0_MPDGCTRL1, 0x0334032C,
+-	MX6_MMDC_P0_MPRDDLCTL, 0x4036383C,
+-	MX6_MMDC_P0_MPWRDLCTL, 0x2E384038,
+-	MX6_MMDC_P0_MPRDDQBY0DL, 0x33333333,
+-	MX6_MMDC_P0_MPRDDQBY1DL, 0x33333333,
+-	MX6_MMDC_P0_MPRDDQBY2DL, 0x33333333,
+-	MX6_MMDC_P0_MPRDDQBY3DL, 0x33333333,
+-	MX6_MMDC_P0_MPMUR0, 0x00000800,
+-	MX6_MMDC_P0_MDPDC, 0x00020036,
+-	MX6_MMDC_P0_MDOTC, 0x09444040,
+-	MX6_MMDC_P0_MDCFG0, 0xB8BE7955,
+-	MX6_MMDC_P0_MDCFG1, 0xFF328F64,
+-	MX6_MMDC_P0_MDCFG2, 0x01FF00DB,
+-	MX6_MMDC_P0_MDMISC, 0x00011740,
+-	MX6_MMDC_P0_MDSCR, 0x00008000,
+-	MX6_MMDC_P0_MDRWD, 0x000026D2,
+-	MX6_MMDC_P0_MDOR, 0x00BE1023,
+-	MX6_MMDC_P0_MDASP, 0x00000047,
+-	MX6_MMDC_P0_MDCTL, 0x85190000,
+-	MX6_MMDC_P0_MDSCR, 0x00888032,
+-	MX6_MMDC_P0_MDSCR, 0x00008033,
+-	MX6_MMDC_P0_MDSCR, 0x00008031,
+-	MX6_MMDC_P0_MDSCR, 0x19408030,
+-	MX6_MMDC_P0_MDSCR, 0x04008040,
+-	MX6_MMDC_P0_MDREF, 0x00007800,
+-	MX6_MMDC_P0_MPODTCTRL, 0x00000007,
+-	MX6_MMDC_P0_MDPDC, 0x00025576,
+-	MX6_MMDC_P0_MAPSR, 0x00011006,
+-	MX6_MMDC_P0_MDSCR, 0x00000000,
+-	/* enable AXI cache for VDOA/VPU/IPU */
+-
+-	MX6_IOMUXC_GPR4, 0xF00000CF,
+-	/* set IPU AXI-id0 Qos=0xf(bypass) AXI-id1 Qos=0x7 */
+-	MX6_IOMUXC_GPR6, 0x007F007F,
+-	MX6_IOMUXC_GPR7, 0x007F007F,
 -};
--#endif
 -
--int board_late_init(void)
+-static void ddr_init(int *table, int size)
 -{
--#ifdef CONFIG_CMD_NAND_LOCK_UNLOCK
--	unlock_nand();
--#endif
+-	int i;
 -
--#ifdef CONFIG_SMC911X
--	enable_gpmc_cs_config(gpmc_lan92xx_config, &gpmc_cfg->cs[1],
--			CFG_SMC911X_BASE, GPMC_SIZE_16M);
--#endif
--	return 0;
+-	for (i = 0; i < size / 2 ; i++)
+-		writel(table[2 * i + 1], table[2 * i]);
+-}
+-
+-static void spl_dram_init(void)
+-{
+-	if (is_mx6dq())
+-		ddr_init(mx6q_dcd_table, ARRAY_SIZE(mx6q_dcd_table));
+-}
+-
+-void board_init_f(ulong dummy)
+-{
+-	/* DDR initialization */
+-	spl_dram_init();
+-
+-	/* setup AIPS and disable watchdog */
+-	arch_cpu_init();
+-
+-	ccgr_init();
+-	gpr_init();
+-
+-	/* iomux and setup of uart and NAND pins */
+-	board_early_init_f();
+-
+-	/* setup GP timer */
+-	timer_init();
+-
+-	/* Enable device tree and early DM support*/
+-	spl_early_init();
+-
+-	/* UART clocks enabled and gd valid - init serial console */
+-	preloader_console_init();
 -}
 -#endif
--
--#if defined(CONFIG_MMC)
--void board_mmc_power_init(void)
--{
--	twl4030_power_mmc_init(0);
--}
--#endif
-diff --git a/board/logicpd/omap3som/omap3logic.h b/board/logicpd/omap3som/omap3logic.h
+diff --git a/configs/imx6q_logic_defconfig b/configs/imx6q_logic_defconfig
 deleted file mode 100644
-index 55d8f429513..00000000000
---- a/board/logicpd/omap3som/omap3logic.h
+index 1b09d9a5d27..00000000000
+--- a/configs/imx6q_logic_defconfig
 +++ /dev/null
-@@ -1,237 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * (C) Copyright 2011
-- * Logic Product Development <www.logicpd.com>
-- *
-- * Author:
-- * Peter Barada <peter.barada@logicpd.com>
-- */
--#ifndef _OMAP3LOGIC_H_
--#define _OMAP3LOGIC_H_
--
--/*
-- * OMAP3 GPMC register settings for CS1 LAN922x
-- */
--#define NET_LAN92XX_GPMC_CONFIG1	0x00001000
--#define NET_LAN92XX_GPMC_CONFIG2	0x00080801
--#define NET_LAN92XX_GPMC_CONFIG3	0x00000000
--#define NET_LAN92XX_GPMC_CONFIG4	0x08010801
--#define NET_LAN92XX_GPMC_CONFIG5	0x00080a0a
--#define NET_LAN92XX_GPMC_CONFIG6	0x03000280
--
--const omap3_sysinfo sysinfo = {
--	DDR_DISCRETE,
--	"Logic DM37x/OMAP35x reference board",
--	"NAND",
--};
--
--/*
-- * IEN  - Input Enable
-- * IDIS - Input Disable
-- * PTD  - Pull type Down
-- * PTU  - Pull type Up
-- * DIS  - Pull type selection is inactive
-- * EN   - Pull type selection is active
-- * M0   - Mode 0
-- * The commented string gives the final mux configuration for that pin
-- */
--
--/*
-- * Routine: set_muxconf_regs
-- * Description: Setting up the configuration Mux registers specific to the
-- *		hardware. Many pins need to be moved from protect to primary
-- *		mode.
-- */
--void set_muxconf_regs(void)
--{
--	MUX_VAL(CP(SDRC_D0), (IEN  | PTD | DIS | M0)) /*SDRC_D0*/
--	MUX_VAL(CP(SDRC_D1), (IEN  | PTD | DIS | M0)) /*SDRC_D1*/
--	MUX_VAL(CP(SDRC_D2), (IEN  | PTD | DIS | M0)) /*SDRC_D2*/
--	MUX_VAL(CP(SDRC_D3), (IEN  | PTD | DIS | M0)) /*SDRC_D3*/
--	MUX_VAL(CP(SDRC_D4), (IEN  | PTD | DIS | M0)) /*SDRC_D4*/
--	MUX_VAL(CP(SDRC_D5), (IEN  | PTD | DIS | M0)) /*SDRC_D5*/
--	MUX_VAL(CP(SDRC_D6), (IEN  | PTD | DIS | M0)) /*SDRC_D6*/
--	MUX_VAL(CP(SDRC_D7), (IEN  | PTD | DIS | M0)) /*SDRC_D7*/
--	MUX_VAL(CP(SDRC_D8), (IEN  | PTD | DIS | M0)) /*SDRC_D8*/
--	MUX_VAL(CP(SDRC_D9), (IEN  | PTD | DIS | M0)) /*SDRC_D9*/
--	MUX_VAL(CP(SDRC_D10), (IEN  | PTD | DIS | M0)) /*SDRC_D10*/
--	MUX_VAL(CP(SDRC_D11), (IEN  | PTD | DIS | M0)) /*SDRC_D11*/
--	MUX_VAL(CP(SDRC_D12), (IEN  | PTD | DIS | M0)) /*SDRC_D12*/
--	MUX_VAL(CP(SDRC_D13), (IEN  | PTD | DIS | M0)) /*SDRC_D13*/
--	MUX_VAL(CP(SDRC_D14), (IEN  | PTD | DIS | M0)) /*SDRC_D14*/
--	MUX_VAL(CP(SDRC_D15), (IEN  | PTD | DIS | M0)) /*SDRC_D15*/
--	MUX_VAL(CP(SDRC_D16), (IEN  | PTD | DIS | M0)) /*SDRC_D16*/
--	MUX_VAL(CP(SDRC_D17), (IEN  | PTD | DIS | M0)) /*SDRC_D17*/
--	MUX_VAL(CP(SDRC_D18), (IEN  | PTD | DIS | M0)) /*SDRC_D18*/
--	MUX_VAL(CP(SDRC_D19), (IEN  | PTD | DIS | M0)) /*SDRC_D19*/
--	MUX_VAL(CP(SDRC_D20), (IEN  | PTD | DIS | M0)) /*SDRC_D20*/
--	MUX_VAL(CP(SDRC_D21), (IEN  | PTD | DIS | M0)) /*SDRC_D21*/
--	MUX_VAL(CP(SDRC_D22), (IEN  | PTD | DIS | M0)) /*SDRC_D22*/
--	MUX_VAL(CP(SDRC_D23), (IEN  | PTD | DIS | M0)) /*SDRC_D23*/
--	MUX_VAL(CP(SDRC_D24), (IEN  | PTD | DIS | M0)) /*SDRC_D24*/
--	MUX_VAL(CP(SDRC_D25), (IEN  | PTD | DIS | M0)) /*SDRC_D25*/
--	MUX_VAL(CP(SDRC_D26), (IEN  | PTD | DIS | M0)) /*SDRC_D26*/
--	MUX_VAL(CP(SDRC_D27), (IEN  | PTD | DIS | M0)) /*SDRC_D27*/
--	MUX_VAL(CP(SDRC_D28), (IEN  | PTD | DIS | M0)) /*SDRC_D28*/
--	MUX_VAL(CP(SDRC_D29), (IEN  | PTD | DIS | M0)) /*SDRC_D29*/
--	MUX_VAL(CP(SDRC_D30), (IEN  | PTD | DIS | M0)) /*SDRC_D30*/
--	MUX_VAL(CP(SDRC_D31), (IEN  | PTD | DIS | M0)) /*SDRC_D31*/
--	MUX_VAL(CP(SDRC_CLK), (IEN  | PTD | DIS | M0)) /*SDRC_CLK*/
--	MUX_VAL(CP(SDRC_DQS0), (IEN  | PTD | DIS | M0)) /*SDRC_DQS0*/
--	MUX_VAL(CP(SDRC_DQS1), (IEN  | PTD | DIS | M0)) /*SDRC_DQS1*/
--	MUX_VAL(CP(SDRC_DQS2), (IEN  | PTD | DIS | M0)) /*SDRC_DQS2*/
--	MUX_VAL(CP(SDRC_DQS3), (IEN  | PTD | DIS | M0)) /*SDRC_DQS3*/
--	MUX_VAL(CP(SDRC_CKE0), (IDIS | PTU | EN  | M0)) /*SDRC_CKE0*/
--	MUX_VAL(CP(SDRC_CKE1), (IDIS | PTU | DIS | M0)) /*SDRC_CKE1*/
--
--	MUX_VAL(CP(GPMC_A1), (IDIS | PTU | EN  | M0)) /*GPMC_A1*/
--	MUX_VAL(CP(GPMC_A2), (IDIS | PTU | EN  | M0)) /*GPMC_A2*/
--	MUX_VAL(CP(GPMC_A3), (IDIS | PTU | EN  | M0)) /*GPMC_A3*/
--	MUX_VAL(CP(GPMC_A4), (IDIS | PTU | EN  | M0)) /*GPMC_A4*/
--	MUX_VAL(CP(GPMC_A5), (IDIS | PTU | EN  | M0)) /*GPMC_A5*/
--	MUX_VAL(CP(GPMC_A6), (IDIS | PTU | EN  | M0)) /*GPMC_A6*/
--	MUX_VAL(CP(GPMC_A7), (IDIS | PTU | EN  | M0)) /*GPMC_A7*/
--	MUX_VAL(CP(GPMC_A8), (IDIS | PTU | EN  | M0)) /*GPMC_A8*/
--	MUX_VAL(CP(GPMC_A9), (IDIS | PTU | EN  | M0)) /*GPMC_A9*/
--	MUX_VAL(CP(GPMC_A10), (IDIS | PTU | EN  | M0)) /*GPMC_A10*/
--	MUX_VAL(CP(GPMC_D0), (IEN  | PTU | EN  | M0)) /*GPMC_D0*/
--	MUX_VAL(CP(GPMC_D1), (IEN  | PTU | EN  | M0)) /*GPMC_D1*/
--	MUX_VAL(CP(GPMC_D2), (IEN  | PTU | EN  | M0)) /*GPMC_D2*/
--	MUX_VAL(CP(GPMC_D3), (IEN  | PTU | EN  | M0)) /*GPMC_D3*/
--	MUX_VAL(CP(GPMC_D4), (IEN  | PTU | EN  | M0)) /*GPMC_D4*/
--	MUX_VAL(CP(GPMC_D5), (IEN  | PTU | EN  | M0)) /*GPMC_D5*/
--	MUX_VAL(CP(GPMC_D6), (IEN  | PTU | EN  | M0)) /*GPMC_D6*/
--	MUX_VAL(CP(GPMC_D7), (IEN  | PTU | EN  | M0)) /*GPMC_D7*/
--	MUX_VAL(CP(GPMC_D8), (IEN  | PTU | EN  | M0)) /*GPMC_D8*/
--	MUX_VAL(CP(GPMC_D9), (IEN  | PTU | EN  | M0)) /*GPMC_D9*/
--	MUX_VAL(CP(GPMC_D10), (IEN  | PTU | EN  | M0)) /*GPMC_D10*/
--	MUX_VAL(CP(GPMC_D11), (IEN  | PTU | EN  | M0)) /*GPMC_D11*/
--	MUX_VAL(CP(GPMC_D12), (IEN  | PTU | EN  | M0)) /*GPMC_D12*/
--	MUX_VAL(CP(GPMC_D13), (IEN  | PTU | EN  | M0)) /*GPMC_D13*/
--	MUX_VAL(CP(GPMC_D14), (IEN  | PTU | EN  | M0)) /*GPMC_D14*/
--	MUX_VAL(CP(GPMC_D15), (IEN  | PTU | EN  | M0)) /*GPMC_D15*/
--	MUX_VAL(CP(GPMC_NCS0), (IDIS | PTU | EN  | M0)) /*GPMC_nCS0*/
--	MUX_VAL(CP(GPMC_NCS1), (IDIS | PTU | EN  | M0)) /*GPMC_nCS1*/
--	MUX_VAL(CP(GPMC_NCS2), (IDIS | PTU | EN  | M0)) /*GPMC_nCS2*/
--	MUX_VAL(CP(GPMC_NCS3), (IDIS | PTU | EN  | M0)) /*GPMC_nCS3*/
--	MUX_VAL(CP(GPMC_NCS4), (IEN  | PTU | EN  | M0)) /*GPMC_nCS4*/
--	MUX_VAL(CP(GPMC_NCS5), (IDIS | PTU | EN  | M0)) /*GPMC_nCS5*/
--	MUX_VAL(CP(GPMC_NCS6), (IEN  | PTU | EN | M0)) /*GPMC_nCS6*/
--	MUX_VAL(CP(GPMC_NCS7), (IEN  | PTU | EN  | M0)) /*GPMC_nCS7*/
--	MUX_VAL(CP(GPMC_CLK), (IDIS | PTU | EN  | M0)) /*GPMC_CLK*/
--	MUX_VAL(CP(GPMC_NADV_ALE), (IDIS | PTD | DIS | M0)) /*GPMC_nADV_ALE*/
--	MUX_VAL(CP(GPMC_NOE), (IDIS | PTD | DIS | M0)) /*GPMC_nOE*/
--	MUX_VAL(CP(GPMC_NWE), (IDIS | PTD | DIS | M0)) /*GPMC_nWE*/
--	MUX_VAL(CP(GPMC_NBE0_CLE), (IDIS | PTU | EN  | M0)) /*GPMC_nBE0_CLE*/
--	MUX_VAL(CP(GPMC_NBE1), (IEN  | PTU | EN  | M0)) /*GPMC_nBE1*/
--	MUX_VAL(CP(GPMC_NWP),  (IEN  | PTD | DIS | M0)) /*GPMC_nWP*/
--	MUX_VAL(CP(GPMC_WAIT0), (IEN  | PTU | EN  | M0)) /*GPMC_WAIT0*/
--	MUX_VAL(CP(GPMC_WAIT1), (IEN  | PTU | EN  | M0)) /*GPMC_WAIT1*/
--	MUX_VAL(CP(GPMC_WAIT2), (IEN  | PTU | EN  | M4)) /*GPIO_64*/
--	MUX_VAL(CP(GPMC_WAIT3), (IEN  | PTU | EN  | M0)) /*GPMC_WAIT3*/
--
--	MUX_VAL(CP(MMC1_CLK), (IDIS | PTU | EN  | M0)) /*MMC1_CLK*/
--	MUX_VAL(CP(MMC1_CMD), (IEN  | PTU | EN  | M0)) /*MMC1_CMD*/
--	MUX_VAL(CP(MMC1_DAT0), (IEN  | PTU | EN  | M0)) /*MMC1_DAT0*/
--	MUX_VAL(CP(MMC1_DAT1), (IEN  | PTU | EN  | M0)) /*MMC1_DAT1*/
--	MUX_VAL(CP(MMC1_DAT2), (IEN  | PTU | EN  | M0)) /*MMC1_DAT2*/
--	MUX_VAL(CP(MMC1_DAT3), (IEN  | PTU | EN  | M0)) /*MMC1_DAT3*/
--
--	MUX_VAL(CP(UART1_TX), (IDIS | PTD | DIS | M0)) /*UART1_TX*/
--	MUX_VAL(CP(UART1_RTS), (IDIS | PTD | DIS | M0)) /*UART1_RTS*/
--	MUX_VAL(CP(UART1_CTS), (IEN  | PTU | DIS | M0)) /*UART1_CTS*/
--	MUX_VAL(CP(UART1_RX), (IEN  | PTD | DIS | M0)) /*UART1_RX*/
--
--	MUX_VAL(CP(JTAG_TCK), (IEN  | PTD | DIS | M0)) /*JTAG_TCK*/
--	MUX_VAL(CP(JTAG_TMS), (IEN  | PTD | DIS | M0)) /*JTAG_TMS*/
--	MUX_VAL(CP(JTAG_TDI), (IEN  | PTD | DIS | M0)) /*JTAG_TDI*/
--	MUX_VAL(CP(JTAG_EMU0), (IEN  | PTD | DIS | M0)) /*JTAG_EMU0*/
--	MUX_VAL(CP(JTAG_EMU1), (IEN  | PTD | DIS | M0)) /*JTAG_EMU1*/
--
--	MUX_VAL(CP(ETK_CLK_ES2), (IDIS | PTU | EN  | M0)) /*ETK_CLK*/
--	MUX_VAL(CP(ETK_CTL_ES2), (IDIS | PTD | DIS | M0)) /*ETK_CTL*/
--	MUX_VAL(CP(ETK_D0_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D0*/
--	MUX_VAL(CP(ETK_D1_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D1*/
--	MUX_VAL(CP(ETK_D2_ES2), (IEN  | PTD | EN  | M0)) /*ETK_D2*/
--	MUX_VAL(CP(ETK_D3_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D3*/
--	MUX_VAL(CP(ETK_D4_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D4*/
--	MUX_VAL(CP(ETK_D5_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D5*/
--	MUX_VAL(CP(ETK_D6_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D6*/
--	MUX_VAL(CP(ETK_D7_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D7*/
--	MUX_VAL(CP(ETK_D8_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D8*/
--	MUX_VAL(CP(ETK_D9_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D9*/
--#ifndef CONFIG_USB_EHCI_OMAP /* Torpedo does not use EHCI_OMAP */
--	MUX_VAL(CP(ETK_D10_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D10*/
--	MUX_VAL(CP(ETK_D11_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D11*/
--	MUX_VAL(CP(ETK_D12_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D12*/
--	MUX_VAL(CP(ETK_D13_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D13*/
--	MUX_VAL(CP(ETK_D14_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D14*/
--	MUX_VAL(CP(ETK_D15_ES2), (IEN  | PTD | DIS | M0)) /*ETK_D15*/
--#endif
--
--	MUX_VAL(CP(D2D_MCAD1), (IEN  | PTD | EN  | M0)) /*d2d_mcad1*/
--	MUX_VAL(CP(D2D_MCAD2), (IEN  | PTD | EN  | M0)) /*d2d_mcad2*/
--	MUX_VAL(CP(D2D_MCAD3), (IEN  | PTD | EN  | M0)) /*d2d_mcad3*/
--	MUX_VAL(CP(D2D_MCAD4), (IEN  | PTD | EN  | M0)) /*d2d_mcad4*/
--	MUX_VAL(CP(D2D_MCAD5), (IEN  | PTD | EN  | M0)) /*d2d_mcad5*/
--	MUX_VAL(CP(D2D_MCAD6), (IEN  | PTD | EN  | M0)) /*d2d_mcad6*/
--	MUX_VAL(CP(D2D_MCAD7), (IEN  | PTD | EN  | M0)) /*d2d_mcad7*/
--	MUX_VAL(CP(D2D_MCAD8), (IEN  | PTD | EN  | M0)) /*d2d_mcad8*/
--	MUX_VAL(CP(D2D_MCAD9), (IEN  | PTD | EN  | M0)) /*d2d_mcad9*/
--	MUX_VAL(CP(D2D_MCAD10), (IEN  | PTD | EN  | M0)) /*d2d_mcad10*/
--	MUX_VAL(CP(D2D_MCAD11), (IEN  | PTD | EN  | M0)) /*d2d_mcad11*/
--	MUX_VAL(CP(D2D_MCAD12), (IEN  | PTD | EN  | M0)) /*d2d_mcad12*/
--	MUX_VAL(CP(D2D_MCAD13), (IEN  | PTD | EN  | M0)) /*d2d_mcad13*/
--	MUX_VAL(CP(D2D_MCAD14), (IEN  | PTD | EN  | M0)) /*d2d_mcad14*/
--	MUX_VAL(CP(D2D_MCAD15), (IEN  | PTD | EN  | M0)) /*d2d_mcad15*/
--	MUX_VAL(CP(D2D_MCAD16), (IEN  | PTD | EN  | M0)) /*d2d_mcad16*/
--	MUX_VAL(CP(D2D_MCAD17), (IEN  | PTD | EN  | M0)) /*d2d_mcad17*/
--	MUX_VAL(CP(D2D_MCAD18), (IEN  | PTD | EN  | M0)) /*d2d_mcad18*/
--	MUX_VAL(CP(D2D_MCAD19), (IEN  | PTD | EN  | M0)) /*d2d_mcad19*/
--	MUX_VAL(CP(D2D_MCAD20), (IEN  | PTD | EN  | M0)) /*d2d_mcad20*/
--	MUX_VAL(CP(D2D_MCAD21), (IEN  | PTD | EN  | M0)) /*d2d_mcad21*/
--	MUX_VAL(CP(D2D_MCAD22), (IEN  | PTD | EN  | M0)) /*d2d_mcad22*/
--	MUX_VAL(CP(D2D_MCAD23), (IEN  | PTD | EN  | M0)) /*d2d_mcad23*/
--	MUX_VAL(CP(D2D_MCAD24), (IEN  | PTD | EN  | M0)) /*d2d_mcad24*/
--	MUX_VAL(CP(D2D_MCAD25), (IEN  | PTD | EN  | M0)) /*d2d_mcad25*/
--	MUX_VAL(CP(D2D_MCAD26), (IEN  | PTD | EN  | M0)) /*d2d_mcad26*/
--	MUX_VAL(CP(D2D_MCAD27), (IEN  | PTD | EN  | M0)) /*d2d_mcad27*/
--	MUX_VAL(CP(D2D_MCAD28), (IEN  | PTD | EN  | M0)) /*d2d_mcad28*/
--	MUX_VAL(CP(D2D_MCAD29), (IEN  | PTD | EN  | M0)) /*d2d_mcad29*/
--	MUX_VAL(CP(D2D_MCAD30), (IEN  | PTD | EN  | M0)) /*d2d_mcad30*/
--	MUX_VAL(CP(D2D_MCAD31), (IEN  | PTD | EN  | M0)) /*d2d_mcad31*/
--	MUX_VAL(CP(D2D_MCAD32), (IEN  | PTD | EN  | M0)) /*d2d_mcad32*/
--	MUX_VAL(CP(D2D_MCAD33), (IEN  | PTD | EN  | M0)) /*d2d_mcad33*/
--	MUX_VAL(CP(D2D_MCAD34), (IEN  | PTD | EN  | M0)) /*d2d_mcad34*/
--	MUX_VAL(CP(D2D_MCAD35), (IEN  | PTD | EN  | M0)) /*d2d_mcad35*/
--	MUX_VAL(CP(D2D_MCAD36), (IEN  | PTD | EN  | M0)) /*d2d_mcad36*/
--	MUX_VAL(CP(D2D_CLK26MI), (IEN  | PTD | DIS | M0)) /*d2d_clk26mi*/
--	MUX_VAL(CP(D2D_NRESPWRON), (IEN  | PTD | EN  | M0)) /*d2d_nrespwron*/
--	MUX_VAL(CP(D2D_NRESWARM), (IEN  | PTU | EN  | M0)) /*d2d_nreswarm */
--	MUX_VAL(CP(D2D_ARM9NIRQ), (IEN  | PTD | DIS | M0)) /*d2d_arm9nirq */
--	MUX_VAL(CP(D2D_UMA2P6FIQ), (IEN  | PTD | DIS | M0)) /*d2d_uma2p6fiq*/
--	MUX_VAL(CP(D2D_SPINT), (IEN  | PTD | EN  | M0)) /*d2d_spint*/
--	MUX_VAL(CP(D2D_FRINT), (IEN  | PTD | EN  | M0)) /*d2d_frint*/
--	MUX_VAL(CP(D2D_DMAREQ0), (IEN  | PTD | DIS | M0)) /*d2d_dmareq0*/
--	MUX_VAL(CP(D2D_DMAREQ1), (IEN  | PTD | DIS | M0)) /*d2d_dmareq1*/
--	MUX_VAL(CP(D2D_DMAREQ2), (IEN  | PTD | DIS | M0)) /*d2d_dmareq2*/
--	MUX_VAL(CP(D2D_DMAREQ3), (IEN  | PTD | DIS | M0)) /*d2d_dmareq3*/
--	MUX_VAL(CP(D2D_N3GTRST), (IEN  | PTD | DIS | M0)) /*d2d_n3gtrst*/
--	MUX_VAL(CP(D2D_N3GTDI), (IEN  | PTD | DIS | M0)) /*d2d_n3gtdi*/
--	MUX_VAL(CP(D2D_N3GTDO), (IEN  | PTD | DIS | M0)) /*d2d_n3gtdo*/
--	MUX_VAL(CP(D2D_N3GTMS), (IEN  | PTD | DIS | M0)) /*d2d_n3gtms*/
--	MUX_VAL(CP(D2D_N3GTCK), (IEN  | PTD | DIS | M0)) /*d2d_n3gtck*/
--	MUX_VAL(CP(D2D_N3GRTCK), (IEN  | PTD | DIS | M0)) /*d2d_n3grtck*/
--	MUX_VAL(CP(D2D_MSTDBY),  (IEN  | PTU | EN  | M0)) /*d2d_mstdby*/
--	MUX_VAL(CP(D2D_SWAKEUP), (IEN  | PTD | EN  | M0)) /*d2d_swakeup*/
--	MUX_VAL(CP(D2D_IDLEREQ), (IEN  | PTD | DIS | M0)) /*d2d_idlereq*/
--	MUX_VAL(CP(D2D_IDLEACK), (IEN  | PTU | EN  | M0)) /*d2d_idleack*/
--	MUX_VAL(CP(D2D_MWRITE), (IEN  | PTD | DIS | M0)) /*d2d_mwrite*/
--	MUX_VAL(CP(D2D_SWRITE), (IEN  | PTD | DIS | M0)) /*d2d_swrite*/
--	MUX_VAL(CP(D2D_MREAD), (IEN  | PTD | DIS | M0)) /*d2d_mread*/
--	MUX_VAL(CP(D2D_SREAD), (IEN  | PTD | DIS | M0)) /*d2d_sread*/
--	MUX_VAL(CP(D2D_MBUSFLAG), (IEN  | PTD | DIS | M0)) /*d2d_mbusflag*/
--	MUX_VAL(CP(D2D_SBUSFLAG), (IEN  | PTD | DIS | M0)) /*d2d_sbusflag*/
--}
--
--#endif
-diff --git a/configs/omap35_logic_defconfig b/configs/omap35_logic_defconfig
-deleted file mode 100644
-index 61d8003af66..00000000000
---- a/configs/omap35_logic_defconfig
-+++ /dev/null
-@@ -1,94 +0,0 @@
+@@ -1,118 +0,0 @@
 -CONFIG_ARM=y
--# CONFIG_SPL_USE_ARCH_MEMCPY is not set
--# CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_OMAP2PLUS=y
--CONFIG_TEXT_BASE=0x80100000
--CONFIG_SYS_MALLOC_F_LEN=0x3000
--CONFIG_TI_COMMON_CMD_OPTIONS=y
--# CONFIG_SPL_GPIO is not set
--CONFIG_DEFAULT_DEVICE_TREE="ti/omap/logicpd-torpedo-35xx-devkit"
--CONFIG_TARGET_OMAP3_LOGIC=y
--# CONFIG_SPL_OMAP3_ID_NAND is not set
+-CONFIG_ARCH_MX6=y
+-CONFIG_SYS_MALLOC_LEN=0xa00000
+-CONFIG_SPL_GPIO=y
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=1
+-CONFIG_ENV_SIZE=0x100000
+-CONFIG_ENV_OFFSET=0x400000
+-CONFIG_MX6Q=y
+-CONFIG_MX6_OCRAM_256KB=y
+-CONFIG_TARGET_MX6LOGICPD=y
+-CONFIG_DEFAULT_DEVICE_TREE="imx6q-logicpd"
+-CONFIG_SYS_MONITOR_LEN=409600
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
 -CONFIG_SPL=y
+-CONFIG_SPL_FS_FAT=y
+-CONFIG_SPL_PAYLOAD="u-boot.img"
+-CONFIG_SYS_MEMTEST_START=0x10000000
+-CONFIG_SYS_MEMTEST_END=0x10010000
 -CONFIG_LTO=y
--CONFIG_ANDROID_BOOT_IMAGE=y
 -CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_BOOTDELAY=3
 -CONFIG_BOOTCOMMAND="run autoboot"
--CONFIG_USE_PREBOOT=y
--CONFIG_PREBOOT="setenv preboot;saveenv;"
--CONFIG_DEFAULT_FDT_FILE="logicpd-torpedo-35xx-devkit.dtb"
--CONFIG_SYS_PBSIZE=1054
--CONFIG_SYS_CONSOLE_INFO_QUIET=y
--CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+-CONFIG_SYS_PBSIZE=543
+-CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+-CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
+-CONFIG_SPL_RAW_IMAGE_SUPPORT=y
 -CONFIG_SPL_SYS_MALLOC=y
--CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SPL_FS_EXT4 is not set
--# CONFIG_SPL_I2C is not set
--CONFIG_SPL_MTD=y
--CONFIG_SPL_NAND_DRIVERS=y
--CONFIG_SPL_NAND_ECC=y
--CONFIG_SPL_NAND_SIMPLE=y
--CONFIG_SPL_NAND_BASE=y
+-CONFIG_SPL_DMA=y
+-CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot-dtb.img"
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_NAND_SUPPORT=y
 -CONFIG_SPL_OS_BOOT=y
--CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
--CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+-CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+-CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x500000
 -CONFIG_SPL_FALCON_BOOT_MMCSD=y
--CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
--CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x1500
--CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x200
--CONFIG_SYS_PROMPT="OMAP Logic # "
--# CONFIG_CMD_IMI is not set
--CONFIG_CMD_SPL_NAND_OFS=0x240000
--CONFIG_CMD_SPL_WRITE_SIZE=0x20000
--CONFIG_CMD_NAND=y
--CONFIG_CMD_NAND_LOCK_UNLOCK=y
--CONFIG_SYS_DISABLE_AUTOLOAD=y
+-CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+-CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
+-CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x800
+-CONFIG_SPL_WATCHDOG=y
+-CONFIG_SYS_PROMPT="i.MX6 Logic # "
+-CONFIG_SYS_MAXARGS=32
+-CONFIG_CMD_SPL=y
+-CONFIG_CMD_SPL_NAND_OFS=0x1500000
+-CONFIG_CMD_SPL_WRITE_SIZE=0x00100000
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_MTD=y
+-CONFIG_CMD_NAND_TRIMFFS=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_USB_SDP=y
+-CONFIG_CMD_USB_MASS_STORAGE=y
+-CONFIG_CMD_CACHE=y
+-# CONFIG_CMD_LED is not set
 -CONFIG_CMD_UUID=y
+-CONFIG_CMD_PMIC=y
+-CONFIG_CMD_EXT4_WRITE=y
 -CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nand0=omap2-nand.0"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:512k(MLO),1792k(u-boot),128k(spl-os),128k(u-boot-env),6m(kernel),-(fs)"
+-CONFIG_MTDIDS_DEFAULT="nand0=gpmi-nand"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=gpmi-nand:2m(spl),2m(uboot),1m(env),16m(kernel),1m(dtb),-(fs)"
 -CONFIG_CMD_UBI=y
--CONFIG_OF_CONTROL=y
 -CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
 -CONFIG_ENV_OVERWRITE=y
--# CONFIG_ENV_IS_IN_FAT is not set
+-CONFIG_ENV_IS_IN_FAT=y
 -CONFIG_ENV_IS_IN_NAND=y
--CONFIG_VERSION_VARIABLE=y
+-CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="FEC"
+-CONFIG_ARP_TIMEOUT=200
 -CONFIG_SPL_DM=y
+-CONFIG_SPL_DM_SEQ_ALIAS=y
 -CONFIG_SPL_OF_TRANSLATE=y
--CONFIG_DM_I2C=y
--CONFIG_SYS_I2C_EEPROM_ADDR=0x50
--CONFIG_MMC_OMAP_HS=y
+-CONFIG_BOUNCE_BUFFER=y
+-CONFIG_PCF8575_GPIO=y
+-CONFIG_LED=y
+-CONFIG_LED_GPIO=y
+-CONFIG_MISC=y
+-CONFIG_I2C_EEPROM=y
+-CONFIG_FSL_USDHC=y
 -CONFIG_MTD=y
+-CONFIG_DM_MTD=y
 -CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=y
--CONFIG_SYS_NAND_BLOCK_SIZE=0x20000
--CONFIG_SYS_NAND_PAGE_SIZE=0x800
--CONFIG_SYS_NAND_OOBSIZE=0x40
--CONFIG_SYS_NAND_BUSWIDTH_16BIT=y
+-CONFIG_SYS_NAND_USE_FLASH_BBT=y
+-CONFIG_NAND_MXS=y
+-CONFIG_NAND_MXS_DT=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
 -CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
--CONFIG_SYS_NAND_U_BOOT_OFFS=0x80000
--CONFIG_SYS_NAND_MAX_OOBFREE=2
--CONFIG_SYS_NAND_MAX_ECCPOS=56
--CONFIG_SMC911X=y
--CONFIG_SMC911X_32_BIT=y
+-CONFIG_SYS_NAND_U_BOOT_OFFS=0x200000
+-CONFIG_FEC_MXC=y
+-CONFIG_MII=y
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_ATHEROS=y
 -CONFIG_PINCTRL=y
--CONFIG_PINCTRL_SINGLE=y
--CONFIG_DM_PMIC=y
--# CONFIG_SPL_PMIC_CHILDREN is not set
+-CONFIG_SPL_PINCTRL=y
+-CONFIG_PINCTRL_IMX6=y
+-CONFIG_DM_PMIC_PFUZE100=y
 -CONFIG_DM_REGULATOR=y
 -CONFIG_DM_REGULATOR_FIXED=y
 -CONFIG_DM_REGULATOR_GPIO=y
--CONFIG_SPECIFY_CONSOLE_INDEX=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_OMAP3_SPI=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_MXC_UART=y
 -CONFIG_USB=y
 -# CONFIG_SPL_DM_USB is not set
--CONFIG_USB_EHCI_HCD=y
--# CONFIG_USB_EHCI_OMAP is not set
--CONFIG_USB_MUSB_HOST=y
--CONFIG_USB_MUSB_OMAP2PLUS=y
--CONFIG_TWL4030_USB=y
--CONFIG_BCH=y
-diff --git a/configs/omap35_logic_somlv_defconfig b/configs/omap35_logic_somlv_defconfig
+-CONFIG_SPL_USB_HOST=y
+-CONFIG_USB_GADGET=y
+-CONFIG_SPL_USB_GADGET=y
+-CONFIG_USB_GADGET_MANUFACTURER="FSL"
+-CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+-CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+-CONFIG_CI_UDC=y
+-CONFIG_USB_GADGET_DOWNLOAD=y
+-CONFIG_SPL_USB_SDP_SUPPORT=y
+diff --git a/include/configs/imx6_logic.h b/include/configs/imx6_logic.h
 deleted file mode 100644
-index ac792437a28..00000000000
---- a/configs/omap35_logic_somlv_defconfig
+index 75997469cd9..00000000000
+--- a/include/configs/imx6_logic.h
 +++ /dev/null
-@@ -1,103 +0,0 @@
--CONFIG_ARM=y
--# CONFIG_SPL_USE_ARCH_MEMCPY is not set
--# CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_OMAP2PLUS=y
--CONFIG_TEXT_BASE=0x80100000
--CONFIG_SYS_MALLOC_F_LEN=0x3000
--CONFIG_TI_COMMON_CMD_OPTIONS=y
--# CONFIG_SPL_GPIO is not set
--CONFIG_DEFAULT_DEVICE_TREE="ti/omap/logicpd-som-lv-35xx-devkit"
--CONFIG_TARGET_OMAP3_LOGIC=y
--# CONFIG_SPL_OMAP3_ID_NAND is not set
--CONFIG_SPL=y
--CONFIG_LTO=y
--CONFIG_SYS_MONITOR_BASE=0x10000000
--CONFIG_ANDROID_BOOT_IMAGE=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_BOOTCOMMAND="run autoboot"
--CONFIG_USE_PREBOOT=y
--CONFIG_PREBOOT="setenv preboot;saveenv;"
--CONFIG_DEFAULT_FDT_FILE="logicpd-som-lv-35xx-devkit.dtb"
--CONFIG_SYS_PBSIZE=1054
--CONFIG_SYS_CONSOLE_INFO_QUIET=y
--CONFIG_SPL_SYS_MALLOC_SIMPLE=y
--CONFIG_SPL_SYS_MALLOC=y
--CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SPL_FS_EXT4 is not set
--# CONFIG_SPL_I2C is not set
--CONFIG_SPL_MTD=y
--CONFIG_SPL_NAND_DRIVERS=y
--CONFIG_SPL_NAND_ECC=y
--CONFIG_SPL_NAND_SIMPLE=y
--CONFIG_SPL_NAND_BASE=y
--CONFIG_SPL_OS_BOOT=y
--CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
--CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
--CONFIG_SPL_FALCON_BOOT_MMCSD=y
--CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
--CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x1500
--CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x200
--# CONFIG_SPL_POWER is not set
--CONFIG_SYS_PROMPT="OMAP Logic # "
--# CONFIG_CMD_IMI is not set
--CONFIG_CMD_SPL_NAND_OFS=0x240000
--CONFIG_CMD_SPL_WRITE_SIZE=0x20000
--CONFIG_CMD_NAND=y
--CONFIG_CMD_NAND_LOCK_UNLOCK=y
--CONFIG_SYS_DISABLE_AUTOLOAD=y
--CONFIG_CMD_UUID=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nand0=omap2-nand.0,nor0=physmap-flash.0"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:512k(MLO),1792k(u-boot),128k(spl-os),128k(u-boot-env),6m(kernel),-(fs);physmap-flash.0:-(nor)"
--CONFIG_CMD_UBI=y
--CONFIG_OF_CONTROL=y
--CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
--CONFIG_ENV_OVERWRITE=y
--# CONFIG_ENV_IS_IN_FAT is not set
--CONFIG_ENV_IS_IN_NAND=y
--CONFIG_VERSION_VARIABLE=y
--CONFIG_SPL_DM=y
--CONFIG_DM_I2C=y
--CONFIG_SYS_I2C_EEPROM_ADDR=0x50
--CONFIG_MMC_OMAP_HS=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
--CONFIG_FLASH_SHOW_PROGRESS=0
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_FLASH_CFI_MTD=y
--CONFIG_SYS_FLASH_PROTECTION=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_MAX_FLASH_SECT=256
--CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=y
--CONFIG_SYS_NAND_BLOCK_SIZE=0x20000
--CONFIG_SYS_NAND_PAGE_SIZE=0x800
--CONFIG_SYS_NAND_OOBSIZE=0x40
--CONFIG_SYS_NAND_BUSWIDTH_16BIT=y
--CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
--CONFIG_SYS_NAND_U_BOOT_OFFS=0x80000
--CONFIG_SYS_NAND_MAX_OOBFREE=2
--CONFIG_SYS_NAND_MAX_ECCPOS=56
--CONFIG_SMC911X=y
--CONFIG_SMC911X_32_BIT=y
--CONFIG_PINCTRL=y
--CONFIG_PINCTRL_SINGLE=y
--CONFIG_DM_PMIC=y
--# CONFIG_SPL_PMIC_CHILDREN is not set
--CONFIG_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_DM_REGULATOR_GPIO=y
--CONFIG_SPECIFY_CONSOLE_INDEX=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_OMAP3_SPI=y
--CONFIG_USB=y
--# CONFIG_SPL_DM_USB is not set
--CONFIG_USB_EHCI_HCD=y
--CONFIG_USB_MUSB_HOST=y
--CONFIG_USB_MUSB_OMAP2PLUS=y
--CONFIG_TWL4030_USB=y
--CONFIG_BCH=y
-diff --git a/configs/omap3_logic_defconfig b/configs/omap3_logic_defconfig
-deleted file mode 100644
-index 6eebb9cc4e1..00000000000
---- a/configs/omap3_logic_defconfig
-+++ /dev/null
-@@ -1,93 +0,0 @@
--CONFIG_ARM=y
--# CONFIG_SPL_USE_ARCH_MEMCPY is not set
--# CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_OMAP2PLUS=y
--CONFIG_TEXT_BASE=0x80100000
--CONFIG_SYS_MALLOC_F_LEN=0x3000
--CONFIG_TI_COMMON_CMD_OPTIONS=y
--# CONFIG_SPL_GPIO is not set
--CONFIG_DEFAULT_DEVICE_TREE="ti/omap/logicpd-torpedo-37xx-devkit"
--CONFIG_TARGET_OMAP3_LOGIC=y
--# CONFIG_SPL_OMAP3_ID_NAND is not set
--CONFIG_SPL=y
--CONFIG_LTO=y
--CONFIG_ANDROID_BOOT_IMAGE=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_BOOTCOMMAND="run autoboot"
--CONFIG_USE_PREBOOT=y
--CONFIG_PREBOOT="setenv preboot;saveenv;"
--CONFIG_SYS_PBSIZE=1054
--CONFIG_SYS_CONSOLE_INFO_QUIET=y
--CONFIG_SPL_SYS_MALLOC_SIMPLE=y
--CONFIG_SPL_SYS_MALLOC=y
--CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SPL_FS_EXT4 is not set
--# CONFIG_SPL_I2C is not set
--CONFIG_SPL_MTD=y
--CONFIG_SPL_NAND_DRIVERS=y
--CONFIG_SPL_NAND_ECC=y
--CONFIG_SPL_NAND_SIMPLE=y
--CONFIG_SPL_NAND_BASE=y
--CONFIG_SPL_OS_BOOT=y
--CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
--CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
--CONFIG_SPL_FALCON_BOOT_MMCSD=y
--CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
--CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x1500
--CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x200
--CONFIG_SYS_PROMPT="OMAP Logic # "
--# CONFIG_CMD_IMI is not set
--CONFIG_CMD_SPL_NAND_OFS=0x240000
--CONFIG_CMD_SPL_WRITE_SIZE=0x20000
--CONFIG_CMD_NAND=y
--CONFIG_CMD_NAND_LOCK_UNLOCK=y
--CONFIG_SYS_DISABLE_AUTOLOAD=y
--CONFIG_CMD_UUID=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nand0=omap2-nand.0"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:512k(MLO),1792k(u-boot),128k(spl-os),128k(u-boot-env),6m(kernel),-(fs)"
--CONFIG_CMD_UBI=y
--CONFIG_OF_CONTROL=y
--CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
--CONFIG_ENV_OVERWRITE=y
--# CONFIG_ENV_IS_IN_FAT is not set
--CONFIG_ENV_IS_IN_NAND=y
--CONFIG_VERSION_VARIABLE=y
--CONFIG_SPL_DM=y
--CONFIG_DM_I2C=y
--CONFIG_SYS_I2C_EEPROM_ADDR=0x50
--CONFIG_MMC_OMAP_HS=y
--CONFIG_MMC_OMAP36XX_PINS=y
--CONFIG_MTD=y
--CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=y
--CONFIG_SYS_NAND_BLOCK_SIZE=0x20000
--CONFIG_SYS_NAND_PAGE_SIZE=0x800
--CONFIG_SYS_NAND_OOBSIZE=0x40
--CONFIG_SYS_NAND_BUSWIDTH_16BIT=y
--CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
--CONFIG_SYS_NAND_U_BOOT_OFFS=0x80000
--CONFIG_SYS_NAND_MAX_OOBFREE=2
--CONFIG_SYS_NAND_MAX_ECCPOS=56
--CONFIG_SMC911X=y
--CONFIG_SMC911X_32_BIT=y
--CONFIG_PINCTRL=y
--CONFIG_PINCTRL_SINGLE=y
--CONFIG_DM_PMIC=y
--# CONFIG_SPL_PMIC_CHILDREN is not set
--CONFIG_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_DM_REGULATOR_GPIO=y
--CONFIG_SPECIFY_CONSOLE_INDEX=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_OMAP3_SPI=y
--CONFIG_USB=y
--# CONFIG_SPL_DM_USB is not set
--CONFIG_USB_EHCI_HCD=y
--# CONFIG_USB_EHCI_OMAP is not set
--CONFIG_USB_MUSB_HOST=y
--CONFIG_USB_MUSB_OMAP2PLUS=y
--CONFIG_TWL4030_USB=y
--CONFIG_BCH=y
-diff --git a/configs/omap3_logic_somlv_defconfig b/configs/omap3_logic_somlv_defconfig
-deleted file mode 100644
-index f2b4f83ff19..00000000000
---- a/configs/omap3_logic_somlv_defconfig
-+++ /dev/null
-@@ -1,104 +0,0 @@
--CONFIG_ARM=y
--# CONFIG_SPL_USE_ARCH_MEMCPY is not set
--# CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_OMAP2PLUS=y
--CONFIG_TEXT_BASE=0x80100000
--CONFIG_SYS_MALLOC_F_LEN=0x3000
--CONFIG_TI_COMMON_CMD_OPTIONS=y
--# CONFIG_SPL_GPIO is not set
--CONFIG_DEFAULT_DEVICE_TREE="ti/omap/logicpd-som-lv-37xx-devkit"
--CONFIG_TARGET_OMAP3_LOGIC=y
--# CONFIG_SPL_OMAP3_ID_NAND is not set
--CONFIG_SPL=y
--CONFIG_LTO=y
--CONFIG_SYS_MONITOR_BASE=0x10000000
--CONFIG_ANDROID_BOOT_IMAGE=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_BOOTCOMMAND="run autoboot"
--CONFIG_USE_PREBOOT=y
--CONFIG_PREBOOT="setenv preboot;saveenv;"
--CONFIG_DEFAULT_FDT_FILE="logicpd-som-lv-37xx-devkit.dtb"
--CONFIG_SYS_PBSIZE=1054
--CONFIG_SYS_CONSOLE_INFO_QUIET=y
--CONFIG_SPL_SYS_MALLOC_SIMPLE=y
--CONFIG_SPL_SYS_MALLOC=y
--CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SPL_FS_EXT4 is not set
--# CONFIG_SPL_I2C is not set
--CONFIG_SPL_MTD=y
--CONFIG_SPL_NAND_DRIVERS=y
--CONFIG_SPL_NAND_ECC=y
--CONFIG_SPL_NAND_SIMPLE=y
--CONFIG_SPL_NAND_BASE=y
--CONFIG_SPL_OS_BOOT=y
--CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
--CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
--CONFIG_SPL_FALCON_BOOT_MMCSD=y
--CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
--CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x1500
--CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x200
--# CONFIG_SPL_POWER is not set
--CONFIG_SYS_PROMPT="OMAP Logic # "
--# CONFIG_CMD_IMI is not set
--CONFIG_CMD_SPL_NAND_OFS=0x240000
--CONFIG_CMD_SPL_WRITE_SIZE=0x20000
--CONFIG_CMD_NAND=y
--CONFIG_CMD_NAND_LOCK_UNLOCK=y
--CONFIG_SYS_DISABLE_AUTOLOAD=y
--CONFIG_CMD_UUID=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nand0=omap2-nand.0,nor0=physmap-flash.0"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:512k(MLO),1792k(u-boot),128k(spl-os),128k(u-boot-env),6m(kernel),-(fs);physmap-flash.0:-(nor)"
--CONFIG_CMD_UBI=y
--CONFIG_OF_CONTROL=y
--CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
--CONFIG_ENV_OVERWRITE=y
--# CONFIG_ENV_IS_IN_FAT is not set
--CONFIG_ENV_IS_IN_NAND=y
--CONFIG_VERSION_VARIABLE=y
--CONFIG_SPL_DM=y
--CONFIG_DM_I2C=y
--CONFIG_SYS_I2C_EEPROM_ADDR=0x50
--CONFIG_MMC_OMAP_HS=y
--CONFIG_MMC_OMAP36XX_PINS=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
--CONFIG_FLASH_SHOW_PROGRESS=0
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_FLASH_CFI_MTD=y
--CONFIG_SYS_FLASH_PROTECTION=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_MAX_FLASH_SECT=256
--CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=y
--CONFIG_SYS_NAND_BLOCK_SIZE=0x20000
--CONFIG_SYS_NAND_PAGE_SIZE=0x800
--CONFIG_SYS_NAND_OOBSIZE=0x40
--CONFIG_SYS_NAND_BUSWIDTH_16BIT=y
--CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
--CONFIG_SYS_NAND_U_BOOT_OFFS=0x80000
--CONFIG_SYS_NAND_MAX_OOBFREE=2
--CONFIG_SYS_NAND_MAX_ECCPOS=56
--CONFIG_SMC911X=y
--CONFIG_SMC911X_32_BIT=y
--CONFIG_PINCTRL=y
--CONFIG_PINCTRL_SINGLE=y
--CONFIG_DM_PMIC=y
--# CONFIG_SPL_PMIC_CHILDREN is not set
--CONFIG_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_DM_REGULATOR_GPIO=y
--CONFIG_SPECIFY_CONSOLE_INDEX=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_OMAP3_SPI=y
--CONFIG_USB=y
--# CONFIG_SPL_DM_USB is not set
--CONFIG_USB_EHCI_HCD=y
--CONFIG_USB_MUSB_HOST=y
--CONFIG_USB_MUSB_OMAP2PLUS=y
--CONFIG_TWL4030_USB=y
--CONFIG_BCH=y
-diff --git a/drivers/mmc/omap_hsmmc.c b/drivers/mmc/omap_hsmmc.c
-index ae742080643..2cf3e4e5d34 100644
---- a/drivers/mmc/omap_hsmmc.c
-+++ b/drivers/mmc/omap_hsmmc.c
-@@ -226,10 +226,6 @@ static unsigned char mmc_board_init(struct mmc *mmc)
- 	/* for cairo board, we need to set up 1.8 Volt bias level on MMC1 */
- 	pbias_lite &= ~PBIASLITEVMODE0;
- #endif
--#ifdef CONFIG_TARGET_OMAP3_LOGIC
--	/* For Logic PD board, 1.8V bias to go enable gpio127 for mmc_cd */
--	pbias_lite &= ~PBIASLITEVMODE1;
--#endif
- #ifdef CONFIG_MMC_OMAP36XX_PINS
- 	if (get_cpu_family() == CPU_OMAP36XX) {
- 		/* Disable extended drain IO before changing PBIAS */
-diff --git a/include/configs/omap3_logic.h b/include/configs/omap3_logic.h
-deleted file mode 100644
-index 957f1c369e6..00000000000
---- a/include/configs/omap3_logic.h
-+++ /dev/null
-@@ -1,152 +0,0 @@
+@@ -1,121 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * (C) Copyright 2011 Logic Product Development <www.logicpd.com>
-- *	Peter Barada <peter.barada@logicpd.com>
+- * Copyright (C) 2017 Logic PD, Inc.
 - *
-- * Configuration settings for the Logic OMAP35x/DM37x SOM LV/Torpedo
-- * reference boards.
+- * Configuration settings for the LogicPD i.MX6 SOM.
 - */
 -
--#ifndef __CONFIG_H
--#define __CONFIG_H
+-#ifndef __IMX6LOGIC_CONFIG_H
+-#define __IMX6LOGIC_CONFIG_H
 -
--/* High Level Configuration Options */
+-#define CFG_MXC_UART_BASE   UART1_BASE
+-#define CONSOLE_DEV            "ttymxc0"
 -
--#include <configs/ti_omap3_common.h>
+-#include "mx6_common.h"
 -
--/* Board NAND Info. */
--#ifdef CONFIG_MTD_RAW_NAND
--						  /* NAND devices */
--#define CFG_SYS_NAND_ECCPOS		{2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, \
--					 13, 14, 16, 17, 18, 19, 20, 21, 22, \
--					 23, 24, 25, 26, 27, 28, 30, 31, 32, \
--					 33, 34, 35, 36, 37, 38, 39, 40, 41, \
--					 42, 44, 45, 46, 47, 48, 49, 50, 51, \
--					 52, 53, 54, 55, 56}
+-/* MMC Configs */
+-#define CFG_SYS_FSL_ESDHC_ADDR      0
+-#define CFG_SYS_FSL_USDHC_NUM       2
 -
--#define CFG_SYS_NAND_ECCSIZE		512
--#define CFG_SYS_NAND_ECCBYTES	13
--#endif
--
--/* Environment information */
+-/* Ethernet Configs */
+-#define CFG_FEC_MXC_PHYADDR         0
 -
 -#define CFG_EXTRA_ENV_SETTINGS \
--	DEFAULT_LINUX_BOOT_ENV \
--	"mmcdev=0\0" \
+-	"script=boot.scr\0" \
+-	"image=zImage\0" \
+-	"bootm_size=0x10000000\0" \
+-	"fdt_addr_r=0x14000000\0" \
+-	"ramdisk_addr_r=0x14080000\0" \
+-	"kernel_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
+-	"ramdisk_file=rootfs.cpio.uboot\0" \
+-	"boot_fdt=try\0" \
+-	"ip_dyn=yes\0" \
+-	"console=" CONSOLE_DEV "\0" \
+-	"mmcdev=1\0" \
+-	"mmcpart=1\0" \
 -	"finduuid=part uuid mmc ${mmcdev}:2 uuid\0" \
--	"mmcrootfstype=ext4 rootwait\0" \
--	"nandroot=ubi0:rootfs rw ubi.mtd=fs noinitrd\0" \
--	"nandrootfstype=ubifs rootwait\0" \
--	"autoboot=mmc dev ${mmcdev}; if mmc rescan; then " \
--			"if run loadbootscript; then " \
--				"run bootscript; " \
--			"else " \
--				"run defaultboot;" \
+-	"nandroot=ubi0:rootfs rootfstype=ubifs\0" \
+-	"mmcargs=setenv bootargs console=${console},${baudrate}" \
+-	" root=PARTUUID=${uuid} rootwait rw ${mtdparts} ${optargs}\0" \
+-	"nandargs=setenv bootargs console=${console},${baudrate}" \
+-	" ubi.mtd=fs root=${nandroot} ${mtdparts} ${optargs}\0" \
+-	"ramargs=setenv bootargs console=${console},${baudrate}" \
+-	" root=/dev/ram rw ${mtdparts} ${optargs}\0"                    \
+-	"loadbootscript=" \
+-	"fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};\0" \
+-	"bootscript=echo Running bootscript from mmc ...;" \
+-	" source\0" \
+-	"loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image};" \
+-	" setenv kernelsize ${filesize}\0" \
+-	"loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdt_file}\0" \
+-	"loadramdisk=fatload mmc ${mmcdev}:${mmcpart} ${ramdisk_addr_r}" \
+-	" ${ramdisk_file}; setenv ramdisksize ${filesize}\0" \
+-	"mmcboot=echo Booting from mmc...; run finduuid; run mmcargs;" \
+-	"run loadimage; run loadfdt; bootz ${loadaddr} - ${fdt_addr_r}\0" \
+-	"mmcramboot=run ramargs; run loadimage;" \
+-	" run loadfdt; run loadramdisk;" \
+-	" bootz ${loadaddr} ${ramdisk_addr_r} ${fdt_addr_r}\0" \
+-	"nandboot=echo Booting from nand ...; " \
+-	" run nandargs;" \
+-	" nand read ${loadaddr} kernel ${kernelsize};" \
+-	" nand read ${fdt_addr_r} dtb;" \
+-	" bootz ${loadaddr} - ${fdt_addr_r}\0" \
+-	"nandramboot=echo Booting RAMdisk from nand ...; " \
+-	" nand read ${ramdisk_addr_r} fs ${ramdisksize};" \
+-	" nand read ${loadaddr} kernel ${kernelsize};" \
+-	" nand read ${fdt_addr_r} dtb;" \
+-	" run ramargs;" \
+-	" bootz ${loadaddr} ${ramdisk_addr_r} ${fdt_addr_r}\0" \
+-	"netargs=setenv bootargs console=${console},${baudrate} " \
+-	"root=/dev/nfs" \
+-	" ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
+-	"netboot=echo Booting from net ...; " \
+-	"run netargs; " \
+-	"if test ${ip_dyn} = yes; then " \
+-		"setenv get_cmd dhcp; " \
+-	"else " \
+-		"setenv get_cmd tftp; " \
+-	"fi; " \
+-	"${get_cmd} ${image}; " \
+-	"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
+-		"if ${get_cmd} ${fdt_addr_r} ${fdt_file}; then " \
+-			"bootz ${loadaddr} - ${fdt_addr_r}; " \
+-		"else " \
+-			"if test ${boot_fdt} = try; then " \
+-				"bootz; " \
+-				"else " \
+-				"echo WARN: Cannot load the DT; " \
 -			"fi; " \
--		"else run defaultboot; fi\0" \
--	"defaultboot=run mmcramboot\0" \
--	"consoledevice=ttyS0\0" \
--	"setconsole=setenv console ${consoledevice},${baudrate}n8\0" \
--	"dump_bootargs=echo 'Bootargs: '; echo $bootargs\0" \
--	"rotation=0\0" \
--	"vrfb_arg=if itest ${rotation} -ne 0; then " \
--		"setenv bootargs ${bootargs} omapfb.vrfb=y " \
--		"omapfb.rotate=${rotation}; " \
--		"fi\0" \
--	"optargs=ignore_loglevel early_printk no_console_suspend\0" \
--	"common_bootargs=run setconsole; setenv bootargs " \
--		"${bootargs} "\
--		"console=${console} " \
--		"${mtdparts} "\
--		"${optargs}; " \
--		"run vrfb_arg\0" \
--	"loadbootscript=load mmc ${mmcdev} ${loadaddr} boot.scr\0" \
--	"bootscript=echo 'Running bootscript from mmc ...'; " \
--		"source ${loadaddr}\0" \
--	"loadimage=mmc rescan; " \
--		"load mmc ${mmcdev} ${loadaddr} ${bootfile}\0" \
--	"ramdisksize=64000\0" \
--	"ramdiskimage=rootfs.ext2.gz.uboot\0" \
--	"loadramdisk=mmc rescan; " \
--		"load mmc ${mmcdev} ${rdaddr} ${ramdiskimage}\0" \
--	"ramargs=setenv bootargs "\
--		"root=/dev/ram rw ramdisk_size=${ramdisksize}\0" \
--	"mmcargs=setenv bootargs "\
--		"root=PARTUUID=${uuid} " \
--		"rootfstype=${mmcrootfstype} rw\0" \
--	"nandargs=setenv bootargs "\
--		"root=${nandroot} " \
--		"rootfstype=${nandrootfstype}\0" \
--	"nfsargs=setenv serverip ${tftpserver}; " \
--		"setenv bootargs root=/dev/nfs " \
--		"nfsroot=${nfsrootpath} " \
--		"ip=${ipaddr}:${tftpserver}:${gatewayip}:${netmask}::eth0:off\0" \
--	"nfsrootpath=/opt/nfs-exports/omap\0" \
--	"fdtimage=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
--	"loadfdt=mmc rescan; " \
--		"load mmc ${mmcdev} ${fdtaddr} ${fdtimage}\0" \
--	"mmcbootcommon=echo Booting with DT from mmc${mmcdev} ...; " \
--		"run finduuid; "\
--		"run mmcargs; " \
--		"run common_bootargs; " \
--		"run dump_bootargs; " \
--		"run loadimage; " \
--		"run loadfdt;\0 " \
--	"mmcbootz=setenv bootfile zImage; " \
--		"run mmcbootcommon; "\
--		"bootz ${loadaddr} - ${fdtaddr}\0" \
--	"mmcboot=setenv bootfile uImage; "\
--		"run mmcbootcommon; "\
--		"bootm ${loadaddr} - ${fdtaddr}\0" \
--	"mmcrambootcommon=echo 'Booting kernel from MMC w/ramdisk...'; " \
--		"run ramargs; " \
--		"run common_bootargs; " \
--		"run dump_bootargs; " \
--		"run loadimage; " \
--		"run loadfdt; " \
--		"run loadramdisk\0" \
--	"mmcramboot=setenv bootfile uImage; " \
--		"run mmcrambootcommon; " \
--		"bootm ${loadaddr} ${rdaddr} ${fdtaddr}\0" \
--	"mmcrambootz=setenv bootfile zImage; " \
--		"run mmcrambootcommon; " \
--		"bootz ${loadaddr} ${rdaddr} ${fdtaddr}\0" \
--	"tftpboot=echo 'Booting kernel/ramdisk rootfs from tftp...'; " \
--		"run ramargs; " \
--		"run common_bootargs; " \
--		"run dump_bootargs; " \
--		"tftpboot ${loadaddr} ${zimage}; " \
--		"tftpboot ${rdaddr} ${ramdiskimage}; " \
--		"bootm ${loadaddr} ${rdaddr}\0" \
--	"tftpbootz=echo 'Booting kernel NFS rootfs...'; " \
--		"dhcp;" \
--		"run nfsargs;" \
--		"run common_bootargs;" \
--		"run dump_bootargs;" \
--		"tftpboot $loadaddr zImage;" \
--		"bootz $loadaddr\0" \
--	"nandbootcommon=echo 'Booting kernel from NAND...';" \
--		"run nandargs;" \
--		"run common_bootargs;" \
--		"run dump_bootargs;" \
--		"nand read ${loadaddr} kernel;" \
--		"nand read ${fdtaddr} spl-os;\0" \
--	"nandbootz=run nandbootcommon; "\
--		"bootz ${loadaddr} - ${fdtaddr}\0"\
--	"nandboot=run nandbootcommon; "\
--		"bootm ${loadaddr} - ${fdtaddr}\0"\
+-		"fi; " \
+-	"else " \
+-	       "bootz; " \
+-	"fi;\0" \
+-	"autoboot=mmc dev ${mmcdev};" \
+-	"if mmc rescan; then " \
+-		"if run loadbootscript; then " \
+-			"run bootscript; " \
+-		"else " \
+-		"if run loadimage; then " \
+-			"run mmcboot; " \
+-		"else run netboot; " \
+-		"fi; " \
+-	"fi; " \
+-	"else run netboot; fi"
 -
--/* Miscellaneous configurable options */
+-/* Physical Memory Map */
+-#define PHYS_SDRAM                     MMDC0_ARB_BASE_ADDR
+-#define CFG_SYS_SDRAM_BASE          PHYS_SDRAM
+-#define CFG_SYS_INIT_RAM_ADDR       IRAM_BASE_ADDR
+-#define CFG_SYS_INIT_RAM_SIZE       IRAM_SIZE
 -
--/* memtest works on */
+-/* Environment organization */
 -
--/* FLASH and environment organization */
+-/* NAND stuff */
+-#define CFG_SYS_NAND_BASE           0x40000000
+-#define CFG_SYS_NAND_U_BOOT_START	CONFIG_TEXT_BASE
 -
--/* **** PISMO SUPPORT *** */
--#if defined(CONFIG_CMD_NAND)
--#define CFG_SYS_FLASH_BASE		0x10000000
--#endif
+-/* Falcon Mode */
 -
--#define CFG_SYS_FLASH_SIZE		0x4000000
+-/* Falcon Mode - MMC support: args@1MB kernel@2MB */
 -
--#endif /* __CONFIG_H */
+-#endif                         /* __IMX6LOGIC_CONFIG_H */
 -- 
 2.53.0
 
