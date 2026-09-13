@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A758C88E40
-	for <u-boot@archiver.kernel.org>; Sun, 13 Sep 2026 04:23:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F2BCC88E56
+	for <u-boot@archiver.kernel.org>; Sun, 13 Sep 2026 04:23:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BB3F980EB0;
-	Sun, 13 Sep 2026 04:23:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8D48D6063F;
+	Sun, 13 Sep 2026 04:23:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BGjuiCDopIGa; Sun, 13 Sep 2026 04:23:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 395CD80EA9
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789273411;
-	b=LiPkvRr5RqTsQmEsX2kCjKzSRBibFpExjmvy3RZPnK/zGhXWYABwkNJlUOyw3sCbQK7N
-	 kDK+QX4GSSvOn3h04kN6nu8m6G+bOzNMV8KxToBKWFptz9tt5ph7qWTHSPfaV0vYN1eM7
-	 Q5ADXFUy7fnkC8/JvR+3B41Dt5eYbGYz2pkvJfJ8kT8qGl0uSzeW6kyPeZQ8woVHp8+Xe
-	 T2Y0rj3qJ+BK1/by+r/A/aU24wmLMp2IzaZLutJyKEj6QnU6M7Q2EJzS7by17hNtl2sZk
-	 j0W+mgBssQpLXRh7f0uRu6tmMmiCOJSI9lffR51UoKDXJDoPHehr0fhCZefOdfpp+8g==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tVj4L0F8BBUP; Sun, 13 Sep 2026 04:23:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org DFDDA60621
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789273416;
+	b=TGvWhVpRHO/Ui+4K0DtvdSqSRmz2xgnPQ7d4X8hIiDwE9ToE/BE4txcW07nFtHTHsiCu
+	 D/RldzZA/oKEKNPfw+TuTzetBYucY127484Jcx9jMFB4pxSxlT6bLqt0R7hP+sR1Zxw9W
+	 O4fdiBdnGKGe1P+nWnJk1V4VDC/Al5cvAFFbTAGao2BpniVor2IP6y6OhbvILwty8QaBw
+	 LOsoKyx5sNWFMiCxXUXETVtvaujNsNlJ5bnvotQDr9p31lusoLPhgBlw+nq9o9352zCg2
+	 Wwp+fMcmKD1IT25eDYXhTvuPnhOkREDBLKFenqhSIUDGNzSgAxXN243IPS2oe7YymSw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789273411;
+	c=relaxed/relaxed; t=1789273416;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,139 +32,140 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=iWydIhFOFzXYqCZCesagWwMDIbk7S1/IsFCA0pQwAt0=;
-	b=sxvt66+0ezfATQXdOdit9LHKY8TInlSLm2MmEFX4mAPS9k26cOfoRhLoNS7gP7K7/YfY
-	 ohud41qy1pV1h9tF9oePqWOpHsbJ76b6NK/czZo4JqdiOWqX3cYNpLlmKyhkVASfWgGg+
-	 gI87SMD+9CAA1d4/cRpAeX/Q5bKVeHM680YwSjeYUvreitlltXl8H5bf6EnxmsaiX0o2M
-	 Qegyzs5NtRGqmO6+QckhxO2tADECat0ACzxyPUk4lti3G5UmeQJCldbFOoBbsLmhnBl6D
-	 7plLuij2izZKVdmX1nv9/9Bccs9S+EZtU3kr0uf6JS9IH+d5ANx1wUY+vUAAmYDbFJw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=riscstar.com;
-	dkim=pass header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=C9p3HWOm;
+	bh=v5xy1r3la7UYWmo/S+gBHC6hBQ8pfyOuc+oCCKZCxSg=;
+	b=U0jP747x+xP0UgxkdDF1VE7qRR6S3Oe25kHsOUH88luiB7BB609FrRGdjKRrbcaNfQcK
+	 vWEwP/ZEUjQ/iTLAoDa++saFfxESXsFYWXOtT4SRda1HqZb4Ju51BmtkAWYh1cqBXYcTe
+	 C9VOwydZfbrGrSBmLkSk8NXdCqZ+updBA6WhZOpTMiEP3dQhsNhyL7UpW33Mm5stKsoML
+	 iWD/wun9EZ5nSE0Z+V3jmvdECZ6FTLhC4YzgB/pcGyzaq0W4jUF36MnDdyIYE1Wf3eNL6
+	 1urWNc76rK9RooD5nc3RhlC8GhP5u8DSdmc7N7ZuMkBDZXhejlZ4sDUcjsLY4nViEEA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=riscstar.com;
+	dkim=pass header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=EIiUXrJH;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789273411;
-	bh=iWydIhFOFzXYqCZCesagWwMDIbk7S1/IsFCA0pQwAt0=;
+	d=lists.u-boot-project.org; s=default; t=1789273416;
+	bh=v5xy1r3la7UYWmo/S+gBHC6hBQ8pfyOuc+oCCKZCxSg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=RjLajhKrfRdUTWQw/5umhHPwphbtffpw+ivrHdREkBj71N7zBep54/p8qP7SmyVN2
-	 3FN2DOPp+DZsbGMK5Jv1K067mJ4bg+3akKS4KNG0DOTfIWpRr5gRyd5GqQZJPkjY+Z
-	 VK8t17mCpM5Gh2NdetlaWlK4O2gzT423DShYVJehuU+GOaDBPhtLSwzK/Wphlj4ECj
-	 kWEK4434JjZLE1g0TZ8imp/Ca26xpC44o3Ptmzv839pZl+kYDRyZgug8NJnj75I+6y
-	 /HYnqUC2Po0NIGfnBA/XpSfG0QJnFdPW80l256neQUdSAZJQ77rKJ6UXy3kA3CxhyV
-	 oUBopbui7Y73A==
+	b=ccbEVNnhql029Jz9h/uUwwVoppw9MmuDW2MHShoTP/vSiQWBb+CySKzbmY1d8kSrc
+	 bqsMFiPUIsCo7oHdezBzKCHvjvMQHDqQqBUOS3Ug1E10fShyeWOh0yeAsYsFPoI5KH
+	 BEF0rok6bMa/aKZWpwV+dEz9ijLK83KFWs9BfrpX0j8QAGNSiYPhJoVjsJb5sA/nNM
+	 53JNlL2op7EtRlByFg0rj6Bh69kNezkjMpVxVg0LYAA+/qOkcs1WlYeHiNqQcIz9M5
+	 JpLN/s/M3p5jRoPRPWQh54WSnSN3drYSOeS4dqefRgZaq7vKwsiCOWhX08UEl3FYd8
+	 H8sTnVxkY6Nhw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 395CD80EA9;
-	Sun, 13 Sep 2026 04:23:31 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 51F1C2D0
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 04:23:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DFDDA60621;
+	Sun, 13 Sep 2026 04:23:35 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 06C2C109
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 04:23:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4366A80E85
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 04:23:29 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E0D5B60621
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 04:23:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UR7Lb9cccxXt for <u-boot@lists.u-boot-project.org>;
- Sun, 13 Sep 2026 04:23:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org B795E80E79
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::629"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789273407;
- b=TNioOh4ZU3FqzrAR9km0DPep2YQQQ80XbXhdiSsEaZFPciCTzGSUKu01YKmfZTGhPRKd
- ERNF2FGdi1BukelYaEaACALbqT7gqJ+CW8h7CB7dea7fl2hCB+Ts9bvW79yU2a6HA+yrR
- MJAXaZG/rW1F0uwH3cDO+z0x7vEREA9UCrAg07g+ZSElHYqBqTl2d6S5dp5BM86uwzufb
- YDz2ObPHZuNq/TyaANuGZSTwp/pI9G8neVP2mnovZChgot+EyL22VYkPxofJG8W3EFJYO
- vsv2TseCfIPLFJLArBYASmuAufUH10m4LrF8vlRaURn1ynyf8TQhesxkJx2eiRIiNaQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WBMtKezddBY7 for <u-boot@lists.u-boot-project.org>;
+ Sun, 13 Sep 2026 04:23:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org C2FA560617
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:39::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789273412;
+ b=o7VQ68uqMuuZvGcqcA2wAp9r79MOXpSl7/Dc8vjtl39fIjZU6fR58nulW4OCboqXamhp
+ 0lUZGqWXIw0F2qyuyENVBgTXG8qN6dD9nrrz4LxsZLSzrR+4/z1Z6c5nYEr7DCEVrUa+L
+ B14c5jORVBUhldLIlnYJzHSseBOwq63Dv2Plm0wm1jT35qlyY5RoDPTcPgCKJafgxznN6
+ thNHQxJAs5A8OU/g5AE7HpVVmT1lpNQg4y9qneODoTfoM4Ay8tvusgT5rvIeEPJ4OM+pJ
+ SrE+m1e92W9dqiTiSxGwyawxv9vZIZi/LqW6anBsIKbhnh9rctKzdiTqEFTcDQUC6Mg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789273407;
+ c=relaxed/relaxed; t=1789273412;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=iWydIhFOFzXYqCZCesagWwMDIbk7S1/IsFCA0pQwAt0=;
- b=fmdiYkGuh7PTMvRvP9S2tOMrtMCxGEnQhuAQK5fADbW4HnxrvVXd+zn4HptwgbcXrUN2
- aA+Rsn6xfW3SaQ1YKX+7CEVBJqM91sTmAgBBksVK5AabyMkeeUiQ+icA7PCzCMhlssO+i
- NGYIx42bF8dAynhFQsj2q2rgj2GqGcL0+tItJJwkHU2/k6VcqWKxZAy6/Eew5mO3BxdEM
- Z38iIwlG+9mb2BGp2a2vyS3qNO+pEmFzqSOSC/fsIneIWKG3bzr7VSRF9sY/RXuGKWYIg
- vKqm7NyrqVVqqtW3B2EpXniKhpMjWzhswqYG9F8ZJ/s6OsZdKKekDoRbKb7nBDijAgw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=v5xy1r3la7UYWmo/S+gBHC6hBQ8pfyOuc+oCCKZCxSg=;
+ b=ENOIN72YarNxcBuI67hXanUXNAPySOF30TOMpsOW23QK+8Kqlka0B0OLJ8/MMqyIIIYF
+ 6MsQj43eXkWfkB6Fc2G4yGXZWEbsBXmq64VQPz9MGX87pZj7iwYtcyK17VeFz4c8CRFJ2
+ Fdzngf1gL00s57aPRL3VSKMovt0RjPSbB8on7zIEzkLJxqjtsmrGmrLsPhYMAYCrBsO5R
+ t+6ZvN8OXnJ+V6KcJ3m/QwPklkJ4wHdCP2kNZH+rK+KonMVpxIQbZjmbtcwLAy2JOilIa
+ baxZNEacqUJ4HPfzX4quYFtLiA6I+1yp4lINz3SjQbKxZCUGbOpg6EPruVdBHByYgVA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=riscstar.com; 
  dkim=pass header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=C9p3HWOm; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::629"
+ header.s=20251104 header.b=EIiUXrJH; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:39::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::629; helo=mail-pl1-x629.google.com;
+ client-ip=2607:f8b0:4864:39::10; helo=mail-pj2-x10.google.com;
  envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=riscstar-com.20251104.gappssmtp.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=C9p3HWOm
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B795E80E79
- for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 04:23:27 +0000 (UTC)
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-2dcff8f44f2so33109025ad.1
- for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 21:23:27 -0700 (PDT)
+ header.s=20251104 header.b=EIiUXrJH
+Received: from mail-pj2-x10.google.com (mail-pj2-x10.google.com
+ [IPv6:2607:f8b0:4864:39::10])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C2FA560617
+ for <u-boot@lists.u-boot-project.org>; Sun, 13 Sep 2026 04:23:32 +0000 (UTC)
+Received: by mail-pj2-x10.google.com with SMTP id
+ d9443c01a7336-2dd58e1e2c7so3314025ad.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 12 Sep 2026 21:23:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1789273407; x=1789878207;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1789273412; x=1789878212;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=iWydIhFOFzXYqCZCesagWwMDIbk7S1/IsFCA0pQwAt0=;
- b=C9p3HWOmneqIOzbVppf3GYZyD7yflx7CtFDb4urOEPHIc1moYVnEQe0WqFgDl9uuFa
- TjCEIqVa1znUPrkmSfGCKsVq/tZR4EWecu+qGDnygivYz86SegYh4pTqEdnNWb2cVPsP
- EItGx8F3gKnXnTJBIZMrh3DhMfITwlXb+zNO+K8i6NlWswJAdT756oD3PaDUWTJhn61B
- uFExJXagKgSjc0IroSHQyHRRRnZmh+u22vLo084djYbkRkyQEMoSjXERq7ztiGeRCUrv
- 6EMA1wd///7hZQGUyZNsmxBKfsXzIHbYIwYNnn2QbDpxjWvGnsM0bYBTYVw5Z7gQXvLN
- KEYQ==
+ bh=v5xy1r3la7UYWmo/S+gBHC6hBQ8pfyOuc+oCCKZCxSg=;
+ b=EIiUXrJHJHLa6gmS65wECaA1Hpwyp+/wdnCT7b58RdMlfydyWLrQTOg+CEK9jt57wi
+ QmElM8A2NFqDQIeCRWjHO8rikEBqmRIn5wunIOKfIMXhTcZ0JiGANm/ZpjGRsNVEP47e
+ vu+NFhmL4pO5mrtu1wIZYb5MY8/4vgD0PKsOPoaI99HiDcLZK4saf49hU1UrC37U4ZVp
+ S0+u87uIG+VG6Yr4Ija/oueL5gldnpYUTzQMP8pmSCD2uJezIPYofJYlig+ijStl7Rmr
+ nLu3Y/GpSulIatUwEqkkkjRfysFRvWBSnH297fA30T/DynwNkhPaRg6gl92HPXkoGwj/
+ inkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789273407; x=1789878207;
+ d=1e100.net; s=20251104; t=1789273412; x=1789878212;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=iWydIhFOFzXYqCZCesagWwMDIbk7S1/IsFCA0pQwAt0=;
- b=FFHqiFJ4yquo8gMZjsOnDqvimqIq5SBHhkDLKDviA5Bj0iI3Brbc48HUrtRKtFVEpS
- HuV/KLNOvzj2UmqnRjSyM4Jhhm2YlENyHJjCfuDbb/jXMStnp6bfjd65tewHzZyzplaB
- pCrasYOU7btDCSZ62kulfTMr/n36N4frp1WyuR0vreclfKKr70IKiuV828PO6xaOg2pu
- tkXeFrk9mKI+vPsFq4x3dt1zu/GHTrPPjzh83PCRMLH58fex5rnP1WS1JclAwH/F35AN
- uHzimQFyp1ceR38foFxXzC+i1aFtrmcMbuZ+P540mSwHE/ofcuCGcdxZULYtd25qbPYj
- +xRA==
+ bh=v5xy1r3la7UYWmo/S+gBHC6hBQ8pfyOuc+oCCKZCxSg=;
+ b=tAc4jWnFHUNVwuwwSbTJlQ5t+KX+XSphgE73NujtsmpZ0Li7MwPmUWkNndtDf3fByQ
+ xXJ3d2nHQZXMC0z7caMy78QYNpkGXUTuKckkRp6jiMfGkGwq2sE/rATYLp/itJGflcK8
+ BNi7Pr1EFuAQCMAmXX30gCcHlPZyxNZdF0KmF1/nUVoUcrpXPKoUk/+VFQ3sozAThzb1
+ +jxY5Xq5AvCZEYtgl/wvWPn9FkC/x5YaJOKwdilsI/7mCJzUEZKEb13QR300UKcOoOVA
+ ikDT2eF2MCJvP1wWDNSMixsqJOLo9U++uS0dx8qOnpkjXVFFue6a4lhOyvbwjlGF/i/0
+ bKHA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxPRPP4wzotddry835RoPHtwTQWKsryDCIr8hJDRF5FUqTOP4tDcP0UxoO2erzzc+eG76bnyvk=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lGYqZc1dfwR0FvFiDXbGRbRbn6WGJpWrf8Rl395QiRUDa303DQ
- YQ2l9qIj9vUtOaoHaFVa/1ijcd0WfPMEFf5ugtDyyy4nc1wn7YcoOuxXrDwGbwnlWF8=
-X-Gm-Gg: AYBFou2Te3F0u9D8/85dnXweqhHk1XMyBZVhmkv1utGg4gsF+bjY2VeTgKstAXOPlL8
- 9Wb8bUCAQofOYt2W4g3/iPLfPPYRhEiEG+IxxROgM90ALyWd8D0hFcCzS6t+Dco/TH+N67A1PeG
- VZaZGCGOlKWbCFCABynr0IVvAIQcZkCc3k2AaGJ6MEiMWRXjapcpkpGnPHxhUBq4uF+DYU4g0t1
- x9roBL+9FqUE2Fbk9fLv8wYedoVeUnU4mkb2wy8uTTVxA3R7eSrxoiTK8aXyGDqa8Ihd2Q/IzAY
- X7WcuHE/dTHTwmT3vI24XSXOcpKFSXPegZnHHjrXZVPyn9D6BlS6QY3VOW4v67J4SizmrUFiJ4j
- /1F8czBNARNIXgG2RSJ3ir/eVezYDTpa9rzfB3PP+hU3iTmYz1IZuITLv073EflfSTrenpzDrmi
- g4wR+ZMfkId5hqvxK5AIbY89R7TmbSYshndMP+//YTHsuAcA3P6Rihnf7bzgvJQkUY3xHoTMRsK
- xeiGB0sHcpCkiDlfTHO82QOJcrCkt9yFfdgGrBBLMDWBpzAtpxXEJv405tk9MWERVDnHx7fhud9
- 8N6Aels1ESgN+d63Gtqmgm3sthYtvyoGAri9
-X-Received: by 2002:a17:902:f546:b0:2dd:40cb:a04c with SMTP id
- d9443c01a7336-2dd40cba291mr135588995ad.19.1789273406815; 
- Sat, 12 Sep 2026 21:23:26 -0700 (PDT)
+ AKwUvBxkD4CdZCSU6ln6RYapj2grSKblfvC4PTUc2pzc4cFBXf0n2gLTRSfuiU3PJgD59Ggb2R026S0=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mdZKm3a6wWDibYdCbZAx+0dekMGrJlRA7SF7y1Vugl1E91mdTV
+ VuTTFQAfo3god4urTMCGH0Kl7/mAicWRGZOAYThNYJ2kt+USBhmd0bjIOg8jsaBCpms=
+X-Gm-Gg: AYBFou31EXcIeX30Ms3YGXMJHqJIcuM/QsI1D//SAe3HZcDB8KHsFpckBWwepKF0pBK
+ yRkQosdjBNVUYbHJpBLZ8OCDIpyLL5XtghqFKroy9Yn/WFGL8LCiyTjdTFujBXTbyhSSZlwYG6x
+ ukh4vHlGuM5qcvxqhdVYjWN7L21dmHKwSfIaLLG/h0X/JJERAADpN9KBqVhGbJeVZz1Bw2Tssj5
+ ACs/I3P7HSv1aAK1bBmme2UhcmpiY9fy9pUA977RYjZASD4hrJ2cAfIqtExDlM14o3yMV+PVS+r
+ fawzvQvsxoBZMEUQTPLMrp8lzTsXDAWgy+15THXZ3VUhjIDRERvKn+BZFHg57xWT2lgpw8EIHOK
+ jCPv5oVKnLZAqSnlPZsmE+4RisbjUY1hB2sII08tXmjq00Unv8UPX8/ea8HGm8B3MYI578hTnss
+ nYL0y5KkEm/ajlxsA2f5HVYsTrq58ddqgIdWXd64trSqufWJaoAOkE1ZVymJ6Py0HJis7AQTXXL
+ jqjFQn4STHSQEfH/F/zrIhCfaB3V8oQG/OfhDJEhhUqSmv/PrgnwxxKrwX78wJupmXiBglfqRTK
+ 91HSNXsx4rRS/sI0DbaDI1wheDqxjmqCIWdT
+X-Received: by 2002:a17:902:d486:b0:2d9:68b7:c324 with SMTP id
+ d9443c01a7336-2dd4bc331d4mr88681145ad.3.1789273411952; 
+ Sat, 12 Sep 2026 21:23:31 -0700 (PDT)
 Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-33ba4ed295esm19389409eec.15.2026.09.12.21.23.22
+ 5a478bee46e88-33ba4ed295esm19389409eec.15.2026.09.12.21.23.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 12 Sep 2026 21:23:26 -0700 (PDT)
+ Sat, 12 Sep 2026 21:23:31 -0700 (PDT)
 From: Eric Chung <eric.chung@riscstar.com>
-Date: Sun, 13 Sep 2026 12:23:10 +0800
-Subject: [PATCH v2 1/4] phy: spacemit: add K1 PCIe/USB3 combo PHY driver
+Date: Sun, 13 Sep 2026 12:23:11 +0800
+Subject: [PATCH v2 2/4] pci: spacemit: add DesignWare PCIe host controller
+ driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260913-pci-v2-1-4fa1a8b5de06@riscstar.com>
+Message-Id: <20260913-pci-v2-2-4fa1a8b5de06@riscstar.com>
 References: <20260913-pci-v2-0-4fa1a8b5de06@riscstar.com>
 In-Reply-To: <20260913-pci-v2-0-4fa1a8b5de06@riscstar.com>
 To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
@@ -193,565 +194,528 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add PHY driver for Spacemit K1 SoC supporting:
-- Combo PHY (PCIe/USB3) with auto-calibration of RX/TX termination
-- PCIe-only PHY (2 lanes) using combo PHY calibration values
-
-The combo PHY calibrates at probe time, and the result is shared
-globally so PCIe-only PHYs can apply the same termination settings.
+Add PCIe host controller driver for Spacemit K1 SoC using the
+Synopsys DesignWare PCIe core. Supports up to 3 ports.
 
 Signed-off-by: Eric Chung <eric.chung@riscstar.com>
----
- drivers/phy/Kconfig                |   1 +
- drivers/phy/Makefile               |   1 +
- drivers/phy/spacemit/Kconfig       |  11 +
- drivers/phy/spacemit/Makefile      |   1 +
- drivers/phy/spacemit/phy-k1-pcie.c | 492 +++++++++++++++++++++++++++++++++++++
- 5 files changed, 506 insertions(+)
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
-index 6262380a60a0..6c5816e67a78 100644
---- a/drivers/phy/Kconfig
-+++ b/drivers/phy/Kconfig
-@@ -369,6 +369,7 @@ source "drivers/phy/ti/Kconfig"
- source "drivers/phy/qcom/Kconfig"
- source "drivers/phy/renesas/Kconfig"
- source "drivers/phy/starfive/Kconfig"
-+source "drivers/phy/spacemit/Kconfig"
+---
+v2:
+- Locate the phy by index instead.
+---
+ drivers/pci/Kconfig            |   7 +
+ drivers/pci/Makefile           |   1 +
+ drivers/pci/pcie_dw_spacemit.c | 391 +++++++++++++++++++++++++++++++++++++++++
+ drivers/pci/pcie_dw_spacemit.h |  78 ++++++++
+ 4 files changed, 477 insertions(+)
+
+diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
+index 42edc73bcdaa..86fafc5a3c73 100644
+--- a/drivers/pci/Kconfig
++++ b/drivers/pci/Kconfig
+@@ -498,4 +498,11 @@ config PCIE_DW_IMX
+ 	  Say Y here if you want to enable DW PCIe controller support on
+ 	  iMX SoCs.
  
- config PHY_COMMON_PROPS
- 	bool "Common PHY properties support"
-diff --git a/drivers/phy/Makefile b/drivers/phy/Makefile
-index 19cf95759e57..3256e8bad8d6 100644
---- a/drivers/phy/Makefile
-+++ b/drivers/phy/Makefile
-@@ -51,3 +51,4 @@ obj-y += ti/
- obj-y += qcom/
- obj-y += renesas/
- obj-y += starfive/
-+obj-y += spacemit/
-diff --git a/drivers/phy/spacemit/Kconfig b/drivers/phy/spacemit/Kconfig
-new file mode 100644
-index 000000000000..3c47601c1fd4
---- /dev/null
-+++ b/drivers/phy/spacemit/Kconfig
-@@ -0,0 +1,11 @@
-+config PHY_SPACEMIT_K1_PCIE
-+	bool "Spacemit K1 PCIe PHY driver"
-+	depends on PHY
++config PCIE_DW_SPACEMIT
++	bool "Enable Spacemit K1 PCIe"
++	select PCIE_DW_COMMON
 +	help
-+	  Support for the Spacemit K1 SoC PCIe and Combo (PCIe/USB3) PHYs.
++	  Say Y here if you want to enable PCIe controller support on
++	  K1 SoC.
 +
-+	  This driver handles both the combo PHY used for port A (which
-+	  calibrates RX/TX termination values) and the PCIe-only PHYs for
-+	  ports B and C.  The combo PHY must be enabled even if port A
-+	  is not used for PCIe, because it provides calibration values
-+	  required by the other ports.
-diff --git a/drivers/phy/spacemit/Makefile b/drivers/phy/spacemit/Makefile
+ endif
+diff --git a/drivers/pci/Makefile b/drivers/pci/Makefile
+index 3873f357a45f..f839ea1d396f 100644
+--- a/drivers/pci/Makefile
++++ b/drivers/pci/Makefile
+@@ -60,3 +60,4 @@ obj-$(CONFIG_PCIE_PLDA_COMMON) += pcie_plda_common.o
+ obj-$(CONFIG_PCIE_STARFIVE_JH7110) += pcie_starfive_jh7110.o
+ obj-$(CONFIG_PCIE_DW_AMD) += pcie_dw_amd.o
+ obj-$(CONFIG_PCIE_DW_IMX) += pcie_dw_imx.o
++obj-$(CONFIG_PCIE_DW_SPACEMIT) += pcie_dw_spacemit.o
+diff --git a/drivers/pci/pcie_dw_spacemit.c b/drivers/pci/pcie_dw_spacemit.c
 new file mode 100644
-index 000000000000..3496c099cdf3
+index 000000000000..09c56d8a4c4a
 --- /dev/null
-+++ b/drivers/phy/spacemit/Makefile
-@@ -0,0 +1 @@
-+obj-$(CONFIG_PHY_SPACEMIT_K1_PCIE) += phy-k1-pcie.o
-diff --git a/drivers/phy/spacemit/phy-k1-pcie.c b/drivers/phy/spacemit/phy-k1-pcie.c
-new file mode 100644
-index 000000000000..e54742a2a9c2
---- /dev/null
-+++ b/drivers/phy/spacemit/phy-k1-pcie.c
-@@ -0,0 +1,492 @@
-+// SPDX-License-Identifier: GPL-2.0
++++ b/drivers/pci/pcie_dw_spacemit.c
+@@ -0,0 +1,391 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Spacemit K1 PCIe and PCIe/USB 3 combo PHY driver
++ * Spacemit K1 PCIe host controller driver
 + *
-+ * Copyright (C) 2026 RISCstar Ltd.  All rights reserved.
++ * Copyright (c) 2023, Spacemit Corporation.
++ * Copyright (c) 2026, RISCstar Ltd.
++ *
 + */
-+
++#include <asm/global_data.h>
 +#include <asm/io.h>
++#include <asm-generic/gpio.h>
 +#include <clk.h>
 +#include <dm.h>
 +#include <dm/device_compat.h>
 +#include <dm/ofnode.h>
-+#include <errno.h>
++#include <dm/read.h>
 +#include <generic-phy.h>
-+#include <linux/bitfield.h>
 +#include <linux/bitops.h>
 +#include <linux/delay.h>
-+#include <linux/iopoll.h>
++#include <linux/err.h>
++#include <log.h>
++#include <pci.h>
++#include <power-domain.h>
 +#include <reset.h>
 +
-+#include <dt-bindings/phy/phy.h>
++#include "pcie_dw_common.h"
++#include "pcie_dw_spacemit.h"
 +
-+/*
-+ * Three PCIe ports are supported in the SpacemiT K1 SoC.
-+ *
-+ * Port A (combo PHY): 1 lane, can switch between PCIe and USB 3.
-+ *                     The only PHY that can auto-calibrate RX/TX termination.
-+ * Port B (pcie-phy):  2 lanes, PCIe only.
-+ * Port C (pcie-phy):  2 lanes, PCIe only.
-+ *
-+ * Calibration values from port A are used to configure ports B and C.
-+ * Port B/C must not probe until port A has completed calibration.
-+ */
++DECLARE_GLOBAL_DATA_PTR;
 +
-+/* Offset between lane 0 and lane 1 registers */
-+#define PHY_LANE_OFFSET			0x0400
++struct pcie_dw_spacemit {
++	/* Must be first member of the struct */
++	struct pcie_dw dw;
++	void __iomem		*apmu_base;
++	u32			apmu_offset;
++	void __iomem		*phy_ahb;	/* DT "link" */
++	int			port_id;
 +
-+/* PHY PLL configuration */
-+#define PCIE_PU_ADDR_CLK_CFG		0x0008
-+#define PLL_READY			BIT(0)
-+#define CFG_INTERNAL_TIMER_ADJ		GENMASK(10, 7)
-+#define TIMER_ADJ_PCIE			0x6
-+#define CFG_SW_PHY_INIT_DONE		BIT(11)
-+
-+#define PCIE_RC_DONE_STATUS		0x0018
-+#define CFG_FORCE_RCV_RETRY		BIT(10)
-+
-+/* PCIe PHY lane calibration */
-+#define PCIE_RC_CAL_REG2		0x0020
-+#define RC_CAL_TOGGLE			BIT(22)
-+#define CLKSEL				GENMASK(31, 29)
-+#define CLKSEL_24M			0x3
-+
-+/* Additional PHY PLL configuration */
-+#define PCIE_PU_PLL_1			0x0048
-+#define REF_100_WSSC			BIT(12)
-+#define FREF_SEL			GENMASK(15, 13)
-+#define FREF_24M			0x1
-+#define SSC_DEP_SEL			GENMASK(19, 16)
-+#define SSC_DEP_NONE			0x0
-+
-+/* PCIe PHY configuration */
-+#define PCIE_PU_PLL_2			0x004c
-+#define GEN_REF100			BIT(4)
-+
-+#define PCIE_RX_REG1			0x0050
-+#define EN_RTERM			BIT(3)
-+#define AFE_RTERM_REG			GENMASK(11, 8)
-+
-+#define PCIE_RX_REG2			0x0054
-+#define RX_RTERM_SEL			BIT(5)
-+
-+#define PCIE_LTSSM_DIS_ENTRY		0x005c
-+#define CFG_REFCLK_MODE			GENMASK(9, 8)
-+#define RFCLK_MODE_DRIVER		0x1
-+#define RFCLK_MODE_RECEIVER		0x2
-+#define OVRD_REFCLK_MODE		BIT(10)
-+
-+#define PCIE_TX_REG1			0x0064
-+#define TX_RTERM_REG			GENMASK(15, 12)
-+#define TX_RTERM_SEL			BIT(25)
-+
-+/* PHY calibration values */
-+#define PCIE_RCAL_RESULT		0x0084
-+#define RTERM_VALUE_RX			GENMASK(3, 0)
-+#define RTERM_VALUE_TX			GENMASK(7, 4)
-+#define R_TUNE_DONE			BIT(10)
-+
-+/* PMU register offsets (shared APMU space) */
-+#define PMUA_USB_PHY_CTRL0		0x0110
-+#define COMBO_PHY_SEL			BIT(3)	/* 0: PCIe; 1: USB 3 */
-+#define PCIE_CLK_RES_CTRL		0x03cc
-+#define PCIE_APP_HOLD_PHY_RST		BIT(30)
-+#define DEVICE_TYPE_RC			BIT(31)
-+#define GLOBAL_PHY_RST			BIT(8)
-+
-+#define APMU_CLK_GATE_MASK		0x3f
-+
-+#define CALIBRATION_TIMEOUT_US		500000
-+#define PLL_TIMEOUT_US			500000
-+
-+/* Global calibration value shared across PHY ports */
-+static u32 k1_phy_rterm = ~0;
-+
-+struct k1_pcie_phy {
-+	void __iomem *regs;
-+	void __iomem *apmu_base;	/* only for combo PHY */
-+	u32 pcie_lanes;
-+	bool is_combo;
-+	struct clk_bulk clks;
-+	struct reset_ctl_bulk rst;
++	/* reset, clock resources */
++	struct clk_bulk		clks;
++	struct reset_ctl_bulk	rsts;
++	struct gpio_desc		pwr_on_gpio;
++	int			power_on_status;
 +};
 +
-+static bool k1_phy_rterm_valid(void)
++static inline u32 spacemit_pcie_readl(struct pcie_dw_spacemit *pcie, u32 offset)
 +{
-+	return !(k1_phy_rterm & ~(RTERM_VALUE_RX | RTERM_VALUE_TX));
++	return readl(pcie->apmu_base + pcie->apmu_offset + offset);
 +}
 +
-+u32 k1_phy_rterm_rx(void)
++static inline void spacemit_pcie_writel(struct pcie_dw_spacemit *pcie,
++					u32 offset, u32 value)
 +{
-+	return FIELD_GET(RTERM_VALUE_RX, k1_phy_rterm);
++	writel(value, pcie->apmu_base + pcie->apmu_offset + offset);
 +}
 +
-+u32 k1_phy_rterm_tx(void)
++static inline u32 spacemit_pcie_phy_ahb_readl(struct pcie_dw_spacemit *pcie, u32 offset)
 +{
-+	return FIELD_GET(RTERM_VALUE_TX, k1_phy_rterm);
++	return readl(pcie->phy_ahb + offset);
 +}
 +
-+static void k1_phy_rterm_set(u32 val)
++static void pcie_dw_configure(struct pcie_dw_spacemit *pci, u32 cap_speed)
 +{
-+	k1_phy_rterm = val & (RTERM_VALUE_RX | RTERM_VALUE_TX);
-+}
-+
-+static void k1_combo_phy_sel(struct k1_pcie_phy *k1_phy, bool usb)
-+{
-+	void __iomem *pmu = k1_phy->apmu_base;
 +	u32 val;
 +
-+	val = readl(pmu + PMUA_USB_PHY_CTRL0);
-+	if (usb)
-+		val |= COMBO_PHY_SEL;
-+	else
-+		val &= ~COMBO_PHY_SEL;
-+	writel(val, pmu + PMUA_USB_PHY_CTRL0);
++	dw_pcie_dbi_write_enable(&pci->dw, true);
++
++	val = readl(pci->dw.dbi_base + PCIE_LINK_CAPABILITY);
++	val &= ~TARGET_LINK_SPEED_MASK;
++	val |= cap_speed;
++	writel(val, pci->dw.dbi_base + PCIE_LINK_CAPABILITY);
++
++	val = readl(pci->dw.dbi_base + PCIE_LINK_CTL_2);
++	val &= ~TARGET_LINK_SPEED_MASK;
++	val |= cap_speed;
++	writel(val, pci->dw.dbi_base + PCIE_LINK_CTL_2);
++
++	dw_pcie_dbi_write_enable(&pci->dw, false);
 +}
 +
-+int k1_pcie_combo_phy_calibrate(struct udevice *dev, struct k1_pcie_phy *k1_phy)
++static int is_link_up(struct pcie_dw_spacemit *pci)
 +{
-+	void __iomem *regs = k1_phy->regs;
-+	int ret = 0;
 +	u32 val;
 +
-+	if (k1_phy_rterm_valid())
++	val = readl(pci->dw.dbi_base + PCIE_PORT_DEBUG0);
++	val &= PORT_LOGIC_LTSSM_STATE_MASK;
++
++	return (val == PORT_LOGIC_LTSSM_STATE_L0);
++}
++
++static int wait_link_up(struct pcie_dw_spacemit *pci)
++{
++	unsigned long timeout;
++
++	timeout = get_timer(0) + PCIE_LINK_UP_TIMEOUT_MS;
++	while (!is_link_up(pci)) {
++		if (get_timer(0) > timeout) {
++			dev_dbg(pci->dw.dev, "LTSSM link training timeout\n");
++			return 0;
++		}
++	}
++
++	return 1;
++}
++
++static int pcie_dw_spacemit_pcie_link_up(struct pcie_dw_spacemit *pci, u32 cap_speed)
++{
++	u32 reg;
++
++	if (is_link_up(pci)) {
++		printf("PCI Link already up before configuration!\n");
++		return 1;
++	}
++
++	/* DW pre link configurations */
++	pcie_dw_configure(pci, cap_speed);
++
++	/* Initiate link training */
++	reg = spacemit_pcie_readl(pci, PCIECTRL_K1X_CONF_DEVICE_CMD);
++	reg |= LTSSM_EN;
++	reg &= ~APP_HOLD_PHY_RST;
++	spacemit_pcie_writel(pci, PCIECTRL_K1X_CONF_DEVICE_CMD, reg);
++
++	/* Check that link was established */
++	if (!wait_link_up(pci))
 +		return 0;
 +
 +	/*
-+	 * Initialize the APMU control register: set RC mode, enable
-+	 * clock gates (bits 0-5), deassert PHY global reset, then
-+	 * release the PHY hold.  Without this the PHY registers are
-+	 * not accessible and reads will hang.
++	 * Link can be established in Gen 1, still need to wait
++	 * until MAC negotiation is completed
 +	 */
-+	val = readl(k1_phy->apmu_base + PCIE_CLK_RES_CTRL);
-+	val |= DEVICE_TYPE_RC | PCIE_APP_HOLD_PHY_RST | APMU_CLK_GATE_MASK;
-+	val &= ~GLOBAL_PHY_RST;
-+	writel(val, k1_phy->apmu_base + PCIE_CLK_RES_CTRL);
-+	val &= ~PCIE_APP_HOLD_PHY_RST;
-+	writel(val, k1_phy->apmu_base + PCIE_CLK_RES_CTRL);
++	udelay(100);
 +
-+	/* Put the combo PHY into PCIe mode for calibration */
-+	k1_combo_phy_sel(k1_phy, false);
-+
-+	/* Set refclk override + clear CFG_REFCLK_MODE */
-+	val = readl(regs + PCIE_LTSSM_DIS_ENTRY);
-+	val |= OVRD_REFCLK_MODE;
-+	writel(val, regs + PCIE_LTSSM_DIS_ENTRY);
-+
-+	val = readl(regs + PCIE_LTSSM_DIS_ENTRY);
-+	val &= ~CFG_REFCLK_MODE;
-+	writel(val, regs + PCIE_LTSSM_DIS_ENTRY);
-+
-+	val = readl(regs + PCIE_LTSSM_DIS_ENTRY);
-+	val |= FIELD_PREP(CFG_REFCLK_MODE, RFCLK_MODE_DRIVER);
-+	writel(val, regs + PCIE_LTSSM_DIS_ENTRY);
-+
-+	/* Configure PLL: select 24MHz reference, enable 100MHz output */
-+	val = readl(regs + PCIE_PU_PLL_1);
-+	val &= ~(FREF_SEL | REF_100_WSSC);
-+	writel(val, regs + PCIE_PU_PLL_1);
-+
-+	val = readl(regs + PCIE_PU_PLL_1);
-+	val |= FIELD_PREP(FREF_SEL, FREF_24M);
-+	writel(val, regs + PCIE_PU_PLL_1);
-+
-+	val = readl(regs + PCIE_PU_PLL_2);
-+	val |= GEN_REF100;
-+	writel(val, regs + PCIE_PU_PLL_2);
-+
-+	val = readl(regs + PCIE_PU_PLL_1);
-+	val &= ~SSC_DEP_SEL;
-+	writel(val, regs + PCIE_PU_PLL_1);
-+
-+	/* Start PHY init + force receiver */
-+	writel(0x00000B78, regs + PCIE_PU_ADDR_CLK_CFG);
-+	writel(CFG_FORCE_RCV_RETRY, regs + PCIE_RC_DONE_STATUS);
-+
-+	/* Wait for calibration to complete */
-+	ret = readl_poll_sleep_timeout(regs + PCIE_RCAL_RESULT,
-+				       val, val & R_TUNE_DONE,
-+				       500, CALIBRATION_TIMEOUT_US);
-+	if (ret)
-+		dev_err(dev, "PHY calib timeout, RCAL=0x%08x\n", val);
-+
-+	if (!ret)
-+		k1_phy_rterm_set(val);
-+
-+	return ret;
++	return 1;
 +}
 +
-+static int k1_pcie_phy_init(struct phy *phy)
++static int pcie_set_mode(struct pcie_dw_spacemit *pci,
++			 enum dw_pcie_device_mode mode)
 +{
-+	struct k1_pcie_phy *k1_phy = dev_get_priv(phy->dev);
-+	void __iomem *regs = k1_phy->regs;
++	u32 reg;
++
++	switch (mode) {
++	case DW_PCIE_RC_TYPE:
++		reg = spacemit_pcie_readl(pci, PCIECTRL_K1X_CONF_DEVICE_CMD);
++		reg |= DEVICE_TYPE_RC | PCIE_AUX_PWR_DET;
++		spacemit_pcie_writel(pci, PCIECTRL_K1X_CONF_DEVICE_CMD, reg);
++
++		reg = spacemit_pcie_readl(pci, PCIE_CTRL_LOGIC);
++		reg |= PCIE_IGNORE_PERSTN;
++		spacemit_pcie_writel(pci, PCIE_CTRL_LOGIC, reg);
++		break;
++	case DW_PCIE_EP_TYPE:
++		reg = spacemit_pcie_readl(pci, PCIECTRL_K1X_CONF_DEVICE_CMD);
++		reg &= ~DEVICE_TYPE_RC;
++		spacemit_pcie_writel(pci, PCIECTRL_K1X_CONF_DEVICE_CMD, reg);
++		break;
++	default:
++		dev_err(pci->dw.dev, "INVALID device type %d\n", mode);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++static int spacemit_pcie_host_init(struct pcie_dw_spacemit *pci)
++{
++	u32 reg;
++
++	mdelay(100);
++	/* set Perst# gpio high state*/
++	reg = spacemit_pcie_readl(pci, PCIECTRL_K1X_CONF_DEVICE_CMD);
++	reg &= ~PCIE_RC_PERST;
++	spacemit_pcie_writel(pci, PCIECTRL_K1X_CONF_DEVICE_CMD, reg);
++
++	return 0;
++}
++
++static int pcie_dw_init_id(struct pcie_dw_spacemit *pci)
++{
++	dw_pcie_dbi_write_enable(&pci->dw, true);
++	writew(SPACEMIT_PCIE_VENDOR_ID, pci->dw.dbi_base + PCI_VENDOR_ID);
++	writew(SPACEMIT_PCIE_DEVICE_ID, pci->dw.dbi_base + PCI_DEVICE_ID);
++	dw_pcie_dbi_write_enable(&pci->dw, false);
++
++	return 0;
++}
++
++static int k1x_power_on(struct pcie_dw_spacemit *pci, int on)
++{
++	struct pcie_dw *dwp = &pci->dw;
++	int gpio_val = 0;
++
++	if (on) {
++		if (pci->power_on_status)
++			gpio_val = 1;
++		else
++			gpio_val = 0;
++	} else {
++		if (pci->power_on_status)
++			gpio_val = 0;
++		else
++			gpio_val = 1;
++	}
++
++	if (dm_gpio_is_valid(&pci->pwr_on_gpio)) {
++		dev_info(dwp->dev, "PCIe interface power %s, set gpio %d to %d\n",
++			 on ? "on" : "off", pci->pwr_on_gpio.offset, gpio_val);
++		dm_gpio_set_value(&pci->pwr_on_gpio, gpio_val);
++	}
++
++	return 0;
++}
++
++static int pcie_dw_spacemit_probe(struct udevice *dev)
++{
++	struct pcie_dw_spacemit *pci = dev_get_priv(dev);
++	struct udevice *ctlr = pci_get_controller(dev);
++	struct pci_controller *hose = dev_get_uclass_priv(ctlr);
++	struct phy phy0 = {0};
++	ofnode port;
 +	int ret;
-+	u32 val;
-+	int i, lane;
++	u32 reg;
 +
-+	/* If combo PHY is configured for USB 3 mode */
-+	if (k1_phy->is_combo && phy->id == PHY_TYPE_USB3) {
-+		k1_combo_phy_sel(k1_phy, true);
-+		return 0;
++	/* enable pcie clk and deassert resets */
++	clk_enable_bulk(&pci->clks);
++	reset_deassert_bulk(&pci->rsts);
++
++	reg = spacemit_pcie_readl(pci, PCIECTRL_K1X_CONF_DEVICE_CMD);
++	reg &= ~LTSSM_EN;
++	spacemit_pcie_writel(pci, PCIECTRL_K1X_CONF_DEVICE_CMD, reg);
++
++	/* set Perst# (fundamental reset) gpio low state*/
++	reg = spacemit_pcie_readl(pci, PCIECTRL_K1X_CONF_DEVICE_CMD);
++	reg |= PCIE_RC_PERST;
++	spacemit_pcie_writel(pci, PCIECTRL_K1X_CONF_DEVICE_CMD, reg);
++
++	/* The PHY is described on the root port child node */
++	port = ofnode_first_subnode(dev_ofnode(dev));
++	if (!ofnode_valid(port)) {
++		dev_err(dev, "failed to find PCIe port node\n");
++		return -ENODEV;
 +	}
 +
-+	/* For combo PHY, ensure it's in PCIe mode */
-+	if (k1_phy->is_combo)
-+		k1_combo_phy_sel(k1_phy, false);
++	ret = generic_phy_get_by_index_nodev(port, 0, &phy0);
++	if (!ret) {
++		reg = spacemit_pcie_readl(pci, PCIECTRL_K1X_CONF_DEVICE_CMD);
++		reg |= DEVICE_TYPE_RC | APP_HOLD_PHY_RST | PCIE_PHY_LANE_CTRL_MASK;
++		reg &= ~GLOBAL_PHY_RST;
++		spacemit_pcie_writel(pci, PCIECTRL_K1X_CONF_DEVICE_CMD, reg);
++		reg &= ~(u32)APP_HOLD_PHY_RST;
++		spacemit_pcie_writel(pci, PCIECTRL_K1X_CONF_DEVICE_CMD, reg);
 +
-+	dev_dbg(phy->dev, "init: combo=%d lanes=%u rterm=0x%02x\n",
-+		k1_phy->is_combo, k1_phy->pcie_lanes, k1_phy_rterm);
++		ret = generic_phy_init(&phy0);
++		if (ret) {
++			dev_err(dev, "failed to init PHY: %d\n", ret);
++			return ret;
++		}
 +
-+	lane = (k1_phy->pcie_lanes == 1) ? 1 : 2;
-+
-+	/* Apply rterm calibration value: LSB to RX_REG1 */
-+	for (i = 0; i < lane; i++) {
-+		val = readl(regs + PCIE_RX_REG1 + PHY_LANE_OFFSET * i);
-+		val |= FIELD_PREP(AFE_RTERM_REG, k1_phy_rterm_rx());
-+		writel(val, regs + PCIE_RX_REG1 + PHY_LANE_OFFSET * i);
-+	}
-+
-+	/* Disable RX_RTERM_SEL for all lanes */
-+	for (i = 0; i < lane; i++) {
-+		val = readl(regs + PCIE_RX_REG2 + PHY_LANE_OFFSET * i);
-+		val &= ~RX_RTERM_SEL;
-+		writel(val, regs + PCIE_RX_REG2 + PHY_LANE_OFFSET * i);
-+	}
-+
-+	/* Apply rterm MSB to TX_REG1 */
-+	for (i = 0; i < lane; i++) {
-+		val = readl(regs + PCIE_TX_REG1 + PHY_LANE_OFFSET * i);
-+		val |= FIELD_PREP(TX_RTERM_REG, k1_phy_rterm_tx());
-+		writel(val, regs + PCIE_TX_REG1 + PHY_LANE_OFFSET * i);
-+	}
-+
-+	/* Enable TX_RTERM_SEL for all lanes */
-+	for (i = 0; i < lane; i++) {
-+		val = readl(regs + PCIE_TX_REG1 + PHY_LANE_OFFSET * i);
-+		val |= TX_RTERM_SEL;
-+		writel(val, regs + PCIE_TX_REG1 + PHY_LANE_OFFSET * i);
-+	}
-+
-+	/* Set CLKSEL_24M on lane0 */
-+	val = readl(regs + PCIE_RC_CAL_REG2);
-+	val |= FIELD_PREP(CLKSEL, CLKSEL_24M);
-+	writel(val, regs + PCIE_RC_CAL_REG2);
-+
-+	/* Toggle RC_CAL_TOGGLE for all lanes */
-+	for (i = 0; i < lane; i++) {
-+		val = readl(regs + PCIE_RC_CAL_REG2 + PHY_LANE_OFFSET * i);
-+		val &= ~RC_CAL_TOGGLE;
-+		writel(val, regs + PCIE_RC_CAL_REG2 + PHY_LANE_OFFSET * i);
-+	}
-+	for (i = 0; i < lane; i++) {
-+		val = readl(regs + PCIE_RC_CAL_REG2 + PHY_LANE_OFFSET * i);
-+		val |= RC_CAL_TOGGLE;
-+		writel(val, regs + PCIE_RC_CAL_REG2 + PHY_LANE_OFFSET * i);
-+	}
-+
-+	/* Configure refclk as driver mode, override */
-+	val = readl(regs + PCIE_LTSSM_DIS_ENTRY);
-+	val |= OVRD_REFCLK_MODE;
-+	writel(val, regs + PCIE_LTSSM_DIS_ENTRY);
-+
-+	val = readl(regs + PCIE_LTSSM_DIS_ENTRY);
-+	val &= ~CFG_REFCLK_MODE;
-+	writel(val, regs + PCIE_LTSSM_DIS_ENTRY);
-+
-+	val = readl(regs + PHY_LANE_OFFSET + PCIE_LTSSM_DIS_ENTRY);
-+	val |= OVRD_REFCLK_MODE;
-+	writel(val, regs + PHY_LANE_OFFSET + PCIE_LTSSM_DIS_ENTRY);
-+
-+	val = readl(regs + PHY_LANE_OFFSET + PCIE_LTSSM_DIS_ENTRY);
-+	val &= ~CFG_REFCLK_MODE;
-+	writel(val, regs + PHY_LANE_OFFSET + PCIE_LTSSM_DIS_ENTRY);
-+
-+	/* Set driver mode for both lanes */
-+	val = readl(regs + PCIE_LTSSM_DIS_ENTRY);
-+	val |= FIELD_PREP(CFG_REFCLK_MODE, RFCLK_MODE_DRIVER);
-+	writel(val, regs + PCIE_LTSSM_DIS_ENTRY);
-+
-+	val = readl(regs + PHY_LANE_OFFSET + PCIE_LTSSM_DIS_ENTRY);
-+	val |= FIELD_PREP(CFG_REFCLK_MODE, RFCLK_MODE_DRIVER);
-+	writel(val, regs + PHY_LANE_OFFSET + PCIE_LTSSM_DIS_ENTRY);
-+
-+	/* Configure PLL: select 24MHz reference */
-+	val = readl(regs + PCIE_PU_PLL_1);
-+	val &= ~FREF_SEL;
-+	writel(val, regs + PCIE_PU_PLL_1);
-+
-+	val = readl(regs + PCIE_PU_PLL_1);
-+	val |= FIELD_PREP(FREF_SEL, FREF_24M);
-+	writel(val, regs + PCIE_PU_PLL_1);
-+
-+	/* Enable 100MHz reference output */
-+	val = readl(regs + PCIE_PU_PLL_2);
-+	val |= GEN_REF100;
-+	writel(val, regs + PCIE_PU_PLL_2);
-+
-+	/* Disable SSC */
-+	val = readl(regs + PCIE_PU_PLL_1);
-+	val &= ~SSC_DEP_SEL;
-+	writel(val, regs + PCIE_PU_PLL_1);
-+
-+	/* Set PU_ADDR_CLK_CFG for both lanes */
-+	val = 0x00000B78;
-+	writel(val, regs + PCIE_PU_ADDR_CLK_CFG);
-+	writel(val, regs + PHY_LANE_OFFSET + PCIE_PU_ADDR_CLK_CFG);
-+
-+	/* Force receiver done */
-+	val = CFG_FORCE_RCV_RETRY;
-+	writel(val, regs + PCIE_RC_DONE_STATUS);
-+
-+	/* Wait for PLL lock */
-+	ret = readl_poll_timeout(regs + PCIE_PU_ADDR_CLK_CFG, val,
-+				 val & PLL_READY, PLL_TIMEOUT_US);
-+	if (ret) {
-+		dev_err(phy->dev, "PLL lock timeout! reg[0x08]=0x%08x\n", val);
++		ret = generic_phy_power_on(&phy0);
++		if (ret) {
++			dev_err(dev, "failed to power on PHY: %d\n", ret);
++			return ret;
++		}
++	} else {
++		dev_err(dev, "failed to get pcie-phy: %d\n", ret);
 +		return ret;
 +	}
 +
-+	dev_dbg(phy->dev, "PLL locked (combo=%d, lanes=%d)\n",
-+		k1_phy->is_combo, k1_phy->pcie_lanes);
++	pci->dw.first_busno = dev_seq(dev);
++	pci->dw.dev = dev;
 +
-+	return 0;
-+}
++	pcie_set_mode(pci, DW_PCIE_RC_TYPE);
 +
-+static int k1_pcie_phy_exit(struct phy *phy)
-+{
-+	return 0;
-+}
++	/* power on the interface */
++	k1x_power_on(pci, 1);
 +
-+static int k1_pcie_phy_of_xlate(struct phy *phy,
-+				struct ofnode_phandle_args *args)
-+{
-+	struct k1_pcie_phy *k1_phy = dev_get_priv(phy->dev);
++	spacemit_pcie_host_init(pci);
++	pcie_dw_setup_host(&pci->dw);
++	pcie_dw_init_id(pci);
 +
-+	if (k1_phy->is_combo) {
-+		if (args->args_count != 1)
-+			return -EINVAL;
-+		if (args->args[0] != PHY_TYPE_PCIE &&
-+		    args->args[0] != PHY_TYPE_USB3)
-+			return -EINVAL;
++	if (!pcie_dw_spacemit_pcie_link_up(pci, LINK_SPEED_GEN_1)) {
++		printf("PCIE-%d: Link down\n", dev_seq(dev));
++		return -ENODEV;
 +	}
 +
-+	if (args->args_count > 0)
-+		phy->id = args->args[0];
-+	else
-+		phy->id = 0;
++	printf("PCIE-%d: Link up (Gen%d-x%d, Bus%d)\n", dev_seq(dev),
++	       pcie_dw_get_link_speed(&pci->dw),
++	       pcie_dw_get_link_width(&pci->dw),
++	       hose->first_busno);
++
++	ret = pcie_dw_prog_outbound_atu_unroll(&pci->dw, PCIE_ATU_REGION_INDEX0,
++					       PCIE_ATU_TYPE_MEM,
++					       pci->dw.mem.phys_start,
++					       pci->dw.mem.bus_start,
++					       pci->dw.mem.size);
 +
 +	return 0;
 +}
 +
-+static const struct phy_ops k1_pcie_phy_ops = {
-+	.of_xlate	= k1_pcie_phy_of_xlate,
-+	.init		= k1_pcie_phy_init,
-+	.exit		= k1_pcie_phy_exit,
-+};
-+
-+static int k1_pcie_phy_probe(struct udevice *dev)
++static int pcie_dw_spacemit_of_to_plat(struct udevice *dev)
 +{
-+	struct k1_pcie_phy *k1_phy = dev_get_priv(dev);
-+	struct ofnode_phandle_args apmu_args;
-+	bool is_combo;
-+	int ret;
-+	u32 lanes;
++	int ret = 0;
++	struct pcie_dw_spacemit *pcie = dev_get_priv(dev);
++	struct ofnode_phandle_args args;
++	fdt_addr_t dbi_addr;
 +
-+	is_combo = (bool)dev_get_driver_data(dev);
-+	k1_phy->is_combo = is_combo;
-+
-+	k1_phy->regs = dev_read_addr_ptr(dev);
-+	if (!k1_phy->regs)
++	/* Get the controller base address */
++	pcie->dw.dbi_base = (void *)dev_read_addr_name(dev, "dbi");
++	if ((fdt_addr_t)pcie->dw.dbi_base == FDT_ADDR_T_NONE)
 +		return -EINVAL;
 +
-+	/* Determine number of lanes */
-+	if (is_combo) {
-+		lanes = 1;
-+	} else {
-+		u32 count = 0;
++	dbi_addr = (fdt_addr_t)pcie->dw.dbi_base;
 +
-+		ret = dev_read_u32(dev, "num-lanes", &count);
-+		if (ret == 0 && count == 1)
-+			lanes = 1;
-+		else
-+			lanes = 2;
-+	}
-+	k1_phy->pcie_lanes = lanes;
++	/* Get the config space base address and size */
++	pcie->dw.cfg_base = (void *)dev_read_addr_size_name(dev, "config",
++							 &pcie->dw.cfg_size);
++	if ((fdt_addr_t)pcie->dw.cfg_base == FDT_ADDR_T_NONE)
++		return -EINVAL;
 +
-+	/* Get APMU base for combo PHY (for mode select + calibration) */
-+	if (is_combo) {
-+		ret = dev_read_phandle_with_args(dev, "spacemit,apmu",
-+						 NULL, 0, 0,
-+						 &apmu_args);
-+		if (ret)
-+			return ret;
++	/* Get the iATU base address and size */
++	pcie->dw.atu_base = (void *)dev_read_addr_name(dev, "atu");
++	if ((fdt_addr_t)pcie->dw.atu_base == FDT_ADDR_T_NONE)
++		return -EINVAL;
 +
-+		k1_phy->apmu_base = (void __iomem *)ofnode_get_addr(apmu_args.node);
-+		if (!k1_phy->apmu_base)
++	/* Get the PHY AHB base address (called "link" in Linux DTS) */
++	pcie->phy_ahb = (void *)dev_read_addr_name(dev, "link");
++	if ((fdt_addr_t)pcie->phy_ahb == FDT_ADDR_T_NONE) {
++		pcie->phy_ahb = (void *)dev_read_addr_name(dev, "phy_ahb");
++		if ((fdt_addr_t)pcie->phy_ahb == FDT_ADDR_T_NONE)
 +			return -EINVAL;
-+
-+		ret = clk_get_bulk(dev, &k1_phy->clks);
-+		if (ret)
-+			dev_warn(dev, "failed to get clocks: %d\n", ret);
-+
-+		ret = reset_get_bulk(dev, &k1_phy->rst);
-+		if (ret)
-+			dev_warn(dev, "failed to get resets: %d\n", ret);
-+
-+		ret = k1_pcie_combo_phy_calibrate(dev, k1_phy);
-+		if (ret)
-+			dev_warn(dev, "calibration failed: %d\n", ret);
-+	} else {
-+		/*
-+		 * PCIe-only PHYs need the calibration value from the
-+		 * combo PHY.  In device-tree order the combo PHY probes
-+		 * first, but handle the case where it hasn't yet by
-+		 * explicitly looking it up.
-+		 */
-+		if (!k1_phy_rterm_valid()) {
-+			struct udevice *combo_dev;
-+
-+			ret = uclass_first_device_drvdata(UCLASS_PHY, 1UL,
-+							  &combo_dev);
-+			if (ret)
-+				dev_warn(dev,
-+					 "failed to probe combo PHY: %d\n",
-+					 ret);
-+		}
-+
-+		if (!k1_phy_rterm_valid()) {
-+			dev_err(dev,
-+				"calibration value not available; "
-+				"is the combo PHY enabled?\n");
-+			return -ENOENT;
-+		}
-+
-+		ret = clk_get_bulk(dev, &k1_phy->clks);
-+		if (ret)
-+			dev_warn(dev, "failed to get clocks: %d\n", ret);
-+
-+		ret = reset_get_bulk(dev, &k1_phy->rst);
-+		if (ret)
-+			dev_warn(dev, "failed to get resets: %d\n", ret);
 +	}
 +
-+	dev_dbg(dev, "probed (combo=%d lanes=%u rterm=0x%02x)\n",
-+		is_combo, lanes, k1_phy_rterm);
++	/* Get APMU regmap from spacemit,apmu property */
++	ret = dev_read_phandle_with_args(dev, "spacemit,apmu", NULL, 1, 0,
++					 &args);
++	if (ret)
++		return ret;
++
++	pcie->apmu_base = (void __iomem *)ofnode_get_addr(args.node);
++	if (!pcie->apmu_base)
++		return -EINVAL;
++	pcie->apmu_offset = args.args[0];
++
++	/* Derive port ID from DBI base address */
++	pcie->port_id = (dbi_addr - SPACEMIT_PCIE_DBI_BASE) / SPACEMIT_PCIE_DBI_STRIDE;
++
++	ret = clk_get_bulk(dev, &pcie->clks);
++	if (ret) {
++		dev_warn(dev, "failed to get clocks: %d\n", ret);
++		return ret;
++	}
++
++	ret = reset_get_bulk(dev, &pcie->rsts);
++	if (ret) {
++		dev_warn(dev, "failed to get resets: %d\n", ret);
++		return ret;
++	}
++
++	gpio_request_by_name(dev, "k1x,pwr_on", 0, &pcie->pwr_on_gpio,
++			     GPIOD_IS_OUT);
++	if (!dm_gpio_is_valid(&pcie->pwr_on_gpio))
++		dev_info(dev, "has no power on gpio.\n");
++
++	ret = dev_read_u32(dev, "power-on-status", &pcie->power_on_status);
++	if (ret) {
++		dev_info(dev, "has no power-on-status flag, use default.\n");
++		pcie->power_on_status = 1;
++	}
 +
 +	return 0;
 +}
 +
-+static const struct udevice_id k1_pcie_phy_ids[] = {
-+	{ .compatible = "spacemit,k1-combo-phy", .data = 1UL },
-+	{ .compatible = "spacemit,k1-pcie-phy", .data = 0UL },
++static const struct dm_pci_ops pcie_dw_spacemit_ops = {
++	.read_config	= pcie_dw_read_config,
++	.write_config	= pcie_dw_write_config,
++};
++
++static const struct udevice_id pcie_dw_spacemit_ids[] = {
++	{ .compatible = "spacemit,k1-pcie" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(k1_pcie_phy) = {
-+	.name		= "k1_pcie_phy",
-+	.id		= UCLASS_PHY,
-+	.of_match	= k1_pcie_phy_ids,
-+	.ops		= &k1_pcie_phy_ops,
-+	.probe		= k1_pcie_phy_probe,
-+	.priv_auto	= sizeof(struct k1_pcie_phy),
++U_BOOT_DRIVER(pcie_dw_spacemit) = {
++	.name			= "pcie_dw_spacemit",
++	.id			= UCLASS_PCI,
++	.of_match		= pcie_dw_spacemit_ids,
++	.ops			= &pcie_dw_spacemit_ops,
++	.of_to_plat	= pcie_dw_spacemit_of_to_plat,
++	.probe			= pcie_dw_spacemit_probe,
++	.priv_auto	= sizeof(struct pcie_dw_spacemit),
 +};
+diff --git a/drivers/pci/pcie_dw_spacemit.h b/drivers/pci/pcie_dw_spacemit.h
+new file mode 100644
+index 000000000000..2c17f113b75c
+--- /dev/null
++++ b/drivers/pci/pcie_dw_spacemit.h
+@@ -0,0 +1,78 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Spacemit K1 DesignWare PCIe host controller driver
++ *
++ * Copyright (c) 2023, Spacemit Corporation.
++ * Copyright (c) 2026, RISCstar Ltd.
++ */
++
++#ifndef _PCIE_DW_SPACEMIT_H_
++#define _PCIE_DW_SPACEMIT_H_
++
++#include <linux/bitops.h>
++
++/* PCIe DW common registers */
++#define PCIE_LINK_CAPABILITY		0x7c
++#define PCIE_LINK_CTL_2			0xa0
++#define TARGET_LINK_SPEED_MASK		0xf
++#define LINK_SPEED_GEN_1		0x1
++#define LINK_SPEED_GEN_2		0x2
++#define LINK_SPEED_GEN_3		0x3
++
++#define PCIE_MISC_CONTROL_1_OFF	0x8bc
++#define PCIE_DBI_RO_WR_EN		BIT(0)
++
++#define PLR_OFFSET			0x700
++#define PCIE_PORT_DEBUG0		(PLR_OFFSET + 0x28)
++#define PORT_LOGIC_LTSSM_STATE_MASK	0x1f
++#define PORT_LOGIC_LTSSM_STATE_L0	0x11
++
++#define PCIE_LINK_UP_TIMEOUT_MS		1000
++
++/* Vendor and device IDs */
++#define PCIE_VENDORID_MASK		GENMASK(15, 0)
++#define PCIE_DEVICEID_SHIFT		16
++#define SPACEMIT_PCIE_VENDOR_ID		0x201F
++#define SPACEMIT_PCIE_DEVICE_ID		0x0001
++
++/* Application register offsets */
++#define PCIE_CMD_STATUS			0x04
++#define LTSSM_EN_VAL			BIT(0)
++
++/* K1X_CONF_DEVICE_CMD register */
++#define PCIECTRL_K1X_CONF_DEVICE_CMD	0x0000
++#define LTSSM_EN			BIT(6)
++#define PCIE_PERST_IN			BIT(7)
++#define GLOBAL_PHY_RST			BIT(8)
++#define PCIE_AUX_PWR_DET		BIT(9)
++#define PCIE_CLKREQ_IN			BIT(10)	/* read-only: CLKREQ# IO input value */
++#define PCIE_REFCLK_EN			BIT(11)
++#define PCIE_RC_PERST			BIT(12)
++#define PCIE_EP_WAKE			BIT(13)
++#define APP_HOLD_PHY_RST		BIT(30)
++#define DEVICE_TYPE_RC			BIT(31)
++
++/* PCIE_CTRL_LOGIC register */
++#define PCIE_CTRL_LOGIC			0x0004
++#define PCIE_SOFT_RESET			BIT(0)
++#define PCIE_IGNORE_PERSTN		BIT(2)
++
++/* PHY AHB link status */
++#define K1X_PHY_AHB_LINK_STS		0x0004
++#define SMLH_LINK_UP			BIT(1)
++#define RDLH_LINK_UP			BIT(12)
++
++/* PHY lane control mask (bits 0-5 in DEVICE_CMD) */
++#define PCIE_PHY_LANE_CTRL_MASK		0x3f
++
++/* PCIe DBI address calculation */
++#define SPACEMIT_PCIE_DBI_BASE		0xca000000
++#define SPACEMIT_PCIE_DBI_STRIDE	0x400000
++
++enum dw_pcie_device_mode {
++	DW_PCIE_UNKNOWN_TYPE,
++	DW_PCIE_EP_TYPE,
++	DW_PCIE_RC_TYPE,
++};
++
++#endif /* _PCIE_DW_SPACEMIT_H_ */
 
 -- 
 2.51.0
