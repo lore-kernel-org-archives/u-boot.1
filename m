@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82016C88E6F
-	for <u-boot@archiver.kernel.org>; Mon, 14 Sep 2026 20:32:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93640C88E73
+	for <u-boot@archiver.kernel.org>; Mon, 14 Sep 2026 20:39:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B6BD480BC4;
-	Mon, 14 Sep 2026 20:32:04 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2AAD480AB2;
+	Mon, 14 Sep 2026 20:39:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ttxsMELryqaW; Mon, 14 Sep 2026 20:32:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 8C6FD8097B
+ id ggrfqaw6J2DQ; Mon, 14 Sep 2026 20:39:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 75B9A80AA1
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789417923;
-	b=AEiY/cHaM0LK9ZsGL2QmYnN96lUSTmF1nhH0i4HLOlug+j8Tk8CeFC9/fsto58bIu5Ad
-	 qI1QzTpAyBbc5FNSvkGO0E0Ogb+QEZo/we94cS2XYBOiTfdnJgBEYZ9HHqXa8Xd0QKwrm
-	 Ovff0pqlPRFL05F2BJxjxaqbW+PSFAqkNFgeBUvATlLNduRpDq1cQDPKWIRsJHZ14DVLI
-	 Xs1a4TP1y43b7yA+ONhyld60LUvh+vFO91rSCWs9o12UrUtvXSWfSYTCF09wfT5Q2Mr59
-	 VzRBKNuu0Oj6UCZ/xF5iHauVaw6C61L1t1Vd+4s7IaeKSmIZalK/7vD9Vsc+KGCZZqw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789418378;
+	b=j4q6v9rHkGv8qA4hB1vU4RlIdmylfdy9UPOjK0PlOH3roz6u/y3RxLL2S7rkPFZe01af
+	 RpplE71EdXirnO9D5OP9EC4RaU3s5pSWetPdGacJvTrtx99RAEJW1eqyX678hY4UaAAxM
+	 cnMKasXSXymk1BGM4xq9QAL6XYO2dDKI1NjfJphjjTx6HYCOF8Zk//QpQiKqlCPSRdBrh
+	 VuCagBezWTPOYjql7DR7zdlmViFyeabZsm0YD0q0WXF5pzve3mhJZESWWULSNpjfTJ7sx
+	 PfyX0cUMG6dfDTrScbDUGxPnY7rLTtBxSzczgOtcLhW0EOXYhgvFeMzva1xMoczvMmQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789417923;
+	c=relaxed/relaxed; t=1789418378;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,136 +32,153 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=As7dqSpStPyOul6KvRaTdZ+iQOX1kJmYZJb8FDCSiCg=;
-	b=KDWRSDmOSZ/uu7jIi1hyekSnUQCAeM3vobzmePHVStE/30umKt53OLtA47doQziAcHWE
-	 QGKDcowWNRyXkMCgE4YrQDntPWp1E218I4Y1PP/VS7+R4EiIOK+LLudaaVAVlRQHFqLh0
-	 0mhBl/iLr8mpFgtHlCUVl2trv6kCuBZ1ILspRkcnaywVt7yY9UPww1w1rBMpirMOyiXCs
-	 o7b2USbrXkVF1uDn+bkUjVFWcAcU1rotA8bQJtc3pPGs0fxXLstKM8/Ti5XN8pwE8pyWT
-	 +cucvqPYWnI89IZDrx4D3AEtKs+ae4E1ZOjDU1Fa8RlffdkNUpAAPkUvFPR6X+8e5iA==
+	bh=THWL16fRBeS+PCba0zeYAa5sgNqtj/L0UiNGhzXHERo=;
+	b=r3ibYsJsGJ3YDlYaZSgmpdrtY/ylAOPK1Pont2600ELkFnnPnfM5kmyw7BedePaMd2Gg
+	 i8167fgs4J8LoY44q7B0VTrTrad4UV3xQHoV80pxzWpgsfoN+BRhY9ECnid5Xoog1Df0D
+	 LVabMbdPbs1yuB6xiZLdHC1i6nsIwAcADDsJ7QfgbUojEjdRciFa9cDA/B8LHtkjn1T3W
+	 yIDN1KbQ0OEJk7i5SyvEZZy2vC/vFLGatKhpZXwkBb3qkBI+kcDGdzy0v74nV9pFWgp8Z
+	 gYWbdM8HLBDTGMTbb+Wb9FzVZhfBN0Oj9PV88QMxSaZcriT5pN/0fWHae925KDNIyNQ==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789417923;
-	bh=As7dqSpStPyOul6KvRaTdZ+iQOX1kJmYZJb8FDCSiCg=;
+	d=lists.u-boot-project.org; s=default; t=1789418378;
+	bh=THWL16fRBeS+PCba0zeYAa5sgNqtj/L0UiNGhzXHERo=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=oQ4shoP1Xmb/eVSlYxYDMUWhLT230eiOdVF2f/SalSvjfAcIs4jR2iaK778KyNBbM
-	 ndeceyAIcVivzOlumg/d12OVpBNCIUOlXCObuLjQwLOqrFwKgOWSLDHk6Qj4tkOALC
-	 k3i/00FtzAyAw1rSWjh2TggrRdxrTjO2c7BYLddB1UJkLlVyCyxkz1LwllGefNjcKA
-	 kC8b4hSh6n9DctBRtBbZFBNo+sdsFJkRMrnbv/hN2kpypl2ZecigOOcdiw6UfeAqmv
-	 JIV4c82cvR/fpJBRZQO7we9AtGLi+PVTmn5SVVPnE/NlKLOQjtazTASnROPUzGPN3h
-	 AAIsM6/S/Nrdg==
+	b=s5taLoBwUYpLFPHHinay5176ymS5cVtQyfmrdPYTv4b82JS48Y8vsS5KR4Vtec2Kk
+	 AYhnZIbEUb29Aksyp/Dnl111+cbr8KNxgY9SZ02B0VxC3pPZFvACNs6nfhLXsaQwQB
+	 PBteIhPFcRgmYu/LdEH5WEXwr0yD8RJhW30nQgREDIhA7jUFAVuCLmeqJ5bGP8UgVY
+	 LQQLrT7i2vKk/rdMDAS1pXmrJpkFBK2SqGj9i9HecunqkN+CkOf5OaM+tnrdAU7Wpz
+	 YHE2lJGr+JGtyHrpSRN29ozScY3tqadje09d86BZi7N+TTFEbXXeSZhtFu1GhMwCDV
+	 PZK+3Vm1CIgpQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8C6FD8097B;
-	Mon, 14 Sep 2026 20:32:03 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 0B0812E5
- for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 20:32:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 75B9A80AA1;
+	Mon, 14 Sep 2026 20:39:38 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id A7331EB
+ for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 20:39:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E4E24400A1
- for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 20:32:01 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 87B8740099
+ for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 20:39:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Q9nLLBrd5q9V for <u-boot@lists.u-boot-project.org>;
- Mon, 14 Sep 2026 20:32:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org BA98040082
+ id qyx9uzlNCG-F for <u-boot@lists.u-boot-project.org>;
+ Mon, 14 Sep 2026 20:39:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 6DFFC40076
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:31::b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789417921;
- b=BHyA4EcUkvHFjps7euVJeiAEIt8stExGOBfH8Typ+JQYq+iih/d9eb5JAX1OEuEsf1T/
- bO+ifvR3gIzzMS6DKMa7ZzBm0Mzb/iHOzIPy0L+iIgbJsOiIjrhkcKoNgZLsrmga1Z5aP
- CL9pCzWHivLR/mnndveWQRRFqQY3FiYvazhmFIkeEO7vcNfpobj+3J1k1WRa+eFgbmlsa
- X5Tv5XMNYr+LRhsG4m3qox0CF9tsQd+M1VgDl7yFxHQeZi5xFKaLTeodMdCeQe+cuDDiU
- rCf9oao2/jvytsFBNtEtdQSTurc71yjHhNd0HkOgaVzTXOltIm8Ps3PPhoy7MGW62bw==
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::235"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789418376;
+ b=dFBUXoP0Ze/ESfXPIT+eBfqyOU7S7qGqmERlxgVinO2madhnbxDbev+q9/9dzyG3EjcM
+ GbhKMIu54/OBOeN3vfJ0AOgiypqEWZnxkq1sCwiVSFTRTNeIByTT0fRcll+Z/6EjCf79X
+ nrrpb4NIqKcGQQJkmYX+RQTNIGE8yQx6yX/cRRf6MjzCBVFLQQ+uSOxtiKkjI3blnFG7x
+ LDax5gS29tCHsqTybgVQCx9sPnSVk7LnrZ9m+NcqR4t9LapdnJdGrDuDlo+Cq80JBLHyO
+ fjpSivRIhpFdUIAJqj79wiZueS5Obpf71IoEGbb5hVoXTB5fn68bk3Phhugk3mF4Ffw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789417921;
+ c=relaxed/relaxed; t=1789418376;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
  Subject:Message-ID:References:MIME-Version:Content-Type:
  Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=As7dqSpStPyOul6KvRaTdZ+iQOX1kJmYZJb8FDCSiCg=;
- b=sP92HV5ZIv+oc4npqyehQaWsRiU1heOD6RjMssqJoI2bsNT/tGUCrl4/YZQ8AX5CHFkK
- lvXeX8VMi9VJuBCPeOdqyOzuIgbhe92mN25hXTXlMnQ4iA54ZM61Ekzc7BP/t/bZqnARr
- PC/kGim0Gv/YRIprhocyhOPEcG3Fo4mBEqbRSPJLJ7+kzBSHJVAb/gm0JUEV0SXhuBy9e
- 0W3llA+FDI+ewK8dX6qzKe71cLWr+FuBiB5AZaO/uf6zzGDaLYyZps/mgQ3S9S3zyE4QN
- ClhzsOOKi68+4CHoyRAfgLWuEdYCGB8XiKHoNESJX88r1OykrEsGHRe7C5wMBrKmNcA==
+ bh=THWL16fRBeS+PCba0zeYAa5sgNqtj/L0UiNGhzXHERo=;
+ b=pymZGVj36UiBonU9OTgotwX8Dps0HR4gE6wNdGqjuX7R0BVpiBzA06FHItxZON7eAbk8
+ Zu/o7WQPaI2xUmdDkXlLPbHzs7Erro4M0NhJX+eCywh/AHCy1sPQIeDYpIkCYresj93/Z
+ eJEVnalOVv3jnvcOAYddm1Dyf6jdr4rjjRPBEvRtpBnFF1JSQpZ6CIvkZZLi49ZQuxuh5
+ X1CG4FjnxZAgVG8HJIynU5RQZCSNmhTlyLTQAgyFI6VBUIqauOsQM/dKn9zn+rdyZAOF5
+ sCNYBo+JBsdanzEWk5fQ3QI1wKKk4ilaRA29Zv0WCOiZWV9/PHMTBq6ZJqzLG6c8ypQ==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=konsulko.com; 
  dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=BVMPufJ1; 
- arc=none smtp.remote-ip="2607:f8b0:4864:31::b"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::b;
- helo=mail-oo2-x0b.google.com; envelope-from=trini@konsulko.com;
- receiver=<UNKNOWN> 
+ header.s=google header.b=I0u90QPD; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::235"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::235; helo=mail-oi1-x235.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=BVMPufJ1
-Received: from mail-oo2-x0b.google.com (mail-oo2-x0b.google.com
- [IPv6:2607:f8b0:4864:31::b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BA98040082
- for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 20:32:00 +0000 (UTC)
-Received: by mail-oo2-x0b.google.com with SMTP id
- 46e09a7af769-8048c50724eso957745a34.0
- for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 13:32:00 -0700 (PDT)
+ header.s=google header.b=I0u90QPD
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6DFFC40076
+ for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 20:39:36 +0000 (UTC)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-4b28d7c729fso2842607b6e.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 13:39:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1789417919; x=1790022719;
+ d=konsulko.com; s=google; t=1789418375; x=1790023175;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=As7dqSpStPyOul6KvRaTdZ+iQOX1kJmYZJb8FDCSiCg=;
- b=BVMPufJ1181mX8GR0efV7aY9V8bmtrMLvRsq99NpRIw7F74Pu5JUU5SzEcXHFQM10z
- BSz3BDoJ2Cvwccb8OhZWwDqXAIxSPQZ3qmZgmAjzr6OqwEzw86Dvt8/QkDsukC3ZL9MW
- f31QxRckrbR5pUgOxhNRZZ104HjokrMZM0Za0=
+ bh=THWL16fRBeS+PCba0zeYAa5sgNqtj/L0UiNGhzXHERo=;
+ b=I0u90QPDqKNQw2EhC/E1bK2qmKhf1WKsc4OY1SKAfYLbfKmZnk51muxAiKQojxfmjC
+ vcAUSZwbrEmdF4F5MWpu6m6YFEqth5HRyMoLYknygOcdhJCzJF/FdSFKmoPxHwBXtiDb
+ UL0QYb+Nc/nSu14JZKRYLasr4A4Co6UDFWZh8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789417919; x=1790022719;
+ d=1e100.net; s=20260707; t=1789418375; x=1790023175;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=As7dqSpStPyOul6KvRaTdZ+iQOX1kJmYZJb8FDCSiCg=;
- b=vcTBWdyGDLeMiWtrq9T4N9BEvxvF36/QW9av3qAiEXqJ1lLv59m2VYvVMsZfuZ2FpS
- 0GmBkhIKBTjMsEIvGl6tIKE1/gv9p9Btyk7hBPHAeWrN+IY6RFt7zs0Lg411mkBqo+oh
- RKrqkhzkUlqIehkAkXmgc6I/yiGizoML1R2r9lF/xANxpPvi4M7uQ/2fWFc3K+8jTLtH
- dBLy4eaPXiNAPrSCa8C2ERIWHv3poED6nJvlduczUNMpEnw+CWcC6LymoJhxe0yaG9Mq
- WqnrvLBDD/dEQ+R0i6+xvsvJG0dNMrqGEMkwJ7KF1EH42q5s5aVxhqLzwo5M6GZKhlPy
- +u7Q==
-X-Gm-Message-State: AFuF++kx6p9ODm8NE2X9upSQZeUmf5mNAnIG/Slik7zc83jWSeg68u1L
- okJb/CoiNLyImJEyVNLKKVqJaZK0sC3+xAwn42zDKkZuvbVGcCFLaaTiBnN8v020ZHE=
-X-Gm-Gg: AYBFou15N5K0n5BTcXfhGMczHeeFpGW050I7n6Hut1kPnrHagk4jpeTiqNBXJNqFdPS
- buWJ3YEKGJW9C8AVEAcv3i5Vke5+Q6ZQl2WwpP2z43ihMb8qofC1LvXfERU5h4glZZgV8UzRnnZ
- sS5XpTZEi0+WDDr7Id0VgjqoArxs8b4YWhiByx8X2QILMSlIwNfXZoS9U2Z1rnvi/FxiN7lhnOP
- 7RkOWl6kWSg3ufqMFVL+pyEWdCG49k/aaoz4fdit8wxhr4CbI8bCjBOXfH+LEPTc7fUYOZI9oH0
- utJqnKCK6nn+KxrZXL3LXPvIGyPnmmhRC5jW3bWKLRut8OHR9wd02T6d2Ca3sSnm8P6Chf5n8Uc
- mT1V+3+HHJ9hRzV2fATN6tCTntijvlgVJyoJoODFrX/JVYc16oKSq8f/XQdNjG5vMp24ca/8uhg
- e4lliCEvFjrCrYdWvMiJ+u6PJv6/hD/qC4MuW/uUSkXCBgAC+VKghFI0McfSrRGofB6iQwbdtS2
- zXsGZyYRPQejBDfDZGYrvQDr6BG0ceW0QR3r4wY4J8uIkhiYkhSkYljW1Gdv7lrhoBJ8cr29xTw
- WtWvBQJrP+LrGHQGiw5jFRP3n4PEUeg=
-X-Received: by 2002:a05:6830:2a86:b0:7f8:4ebe:2854 with SMTP id
- 46e09a7af769-8089759c582mr5261423a34.4.1789417918974; 
- Mon, 14 Sep 2026 13:31:58 -0700 (PDT)
+ bh=THWL16fRBeS+PCba0zeYAa5sgNqtj/L0UiNGhzXHERo=;
+ b=caEVraggyiru0WAf9zUHpAzKdl3yzXnu1GM2Vw9am8hbQhBU99c5+cN8eTBW5EsF0i
+ YhJ0KfGhLo7yW8OE891qEBbFwcxE/XEv43+tOKIBRYZlQw2aiXSMHIt+/KwsDrzvt1Sc
+ 8wZkOxpIhlP4QkEAy11l+AW+OiAKOViXBlXQpauZG6liIaHsjo4ISpP2kojH7Zy0SoZ7
+ o4KRacVyj136eT1brHM4RA7aEHp03QLdaiRkH5SFkYLr9puUmcXK6Xo2LNaBs6EUDEsK
+ JQ0/X+9I5+IaCmXmExnfKd62bw5wh8wN0Zi4tehQ7Tfe8LjwfShKotrD6nY3Ad7sg+Yv
+ NiSA==
+X-Gm-Message-State: AFuF++kUIqnT+0V+UqqE5r4/ufspKP1KhTYjJHzJwFOcWialSZY7n7R/
+ hrRvd3xWz62EhS7f3GGS/lwrXscA3S3sdLq+6Kmu7qOLdv7qNcloBGPTUl/0dgDxuT4=
+X-Gm-Gg: AYBFou1PcWngx/wj0dvn7bcAON475rxQ+IIbqCCUqSSeM663KRuZdd8+XT++bxp1lpR
+ Eg4Dz35lLKF5kb0ksDJ1kR2u5Zc50ZVnceOVUxGaVulBE8qCYYQMudMFlhkE+7dI2CXHPU6cSzy
+ S9NCwYGp8ISltrSEQ9wrVetPB69dWNf28joM9py6f/WWyR4nzbE6ApgLmBG9YvO/nWWtX4mFYKw
+ oyDL+Ts6xSUM7ERdcZsFsoVQ2UWqUpPtz7Wrxx4lzeLSxfSy4hzW1I+oqkKIirI0pLCrRmCRi8b
+ G/QAHuTAJU1UEQJzApN3K8YJ8vjDX3P9lzrg7ORFcMSA9AMOjuZN6Tnl4Za4oMRhkRz8DDA5/B+
+ c7T23OAZD4DbNOfZzcATsLmDFoTc8UWcFgtebaZkW1fay8ZhjagdB+aQ+/+S+Nst8WfVj2o51pa
+ S9E9uzTeUKVnf7KzNB7SBcMf2NLzgxPoOtTKZeGmbZLt/Oj8JH+E9fxosVb97brvsRlTKb+86Xf
+ 8UX+nEmUlMXGq6e6pckXkahS0v4cURns9N2+JH/avE9Ri3oYVTH73B0crdPMRnIwepR87+YTUcu
+ t0kuCer7X0NoDELVMy5D
+X-Received: by 2002:a05:6808:1514:b0:4b9:e65b:8c33 with SMTP id
+ 5614622812f47-4c7b4cac43emr2644922b6e.33.1789418375071; 
+ Mon, 14 Sep 2026 13:39:35 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-805cb5ba734sm7945029a34.0.2026.09.14.13.31.57
+ 5614622812f47-4c3322e1baasm11848457b6e.16.2026.09.14.13.39.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Sep 2026 13:31:58 -0700 (PDT)
-Date: Mon, 14 Sep 2026 14:31:56 -0600
+ Mon, 14 Sep 2026 13:39:34 -0700 (PDT)
+Date: Mon, 14 Sep 2026 14:39:31 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Eva Crystal <0xiviel@gmail.com>
-Cc: u-boot@lists.u-boot-project.org, ludwig.nussel@siemens.com,
- jonas@kwiboo.se, sjg@chromium.org, daniel@makrotopia.org, anton@binarly.io
-Subject: Re: [PATCH 0/2] Close the FIT signature fail-open on the image gate
-Message-ID: <20260914203156.GG1764417@bill-the-cat>
-References: <20260914200905.280557-1-0xiviel@gmail.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.u-boot-project.org, git@amd.com,
+ Andre Przywara <andre.przywara@arm.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Aristo Chen <aristo.chen@canonical.com>,
+ Daniel Golle <daniel@makrotopia.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Heiko Schocher <hs@nabladev.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ "moderated list:ARM STM STM32MP" <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [PATCH 2/2] Clean up emails from non-existing domains
+Message-ID: <20260914203931.GA631895@bill-the-cat>
+References: <08f68cd8c514140071090a846839632f8cae071c.1787560364.git.michal.simek@amd.com>
+ <1b9532296bffb1918b90cfe61fb7692ea355d02f.1787560364.git.michal.simek@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0XC41N9O+Knkc3Q6"
+ protocol="application/pgp-signature"; boundary="/Llwd5TOotmkQ+V6"
 Content-Disposition: inline
-In-Reply-To: <20260914200905.280557-1-0xiviel@gmail.com>
+In-Reply-To: <1b9532296bffb1918b90cfe61fb7692ea355d02f.1787560364.git.michal.simek@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -177,205 +194,47 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
---0XC41N9O+Knkc3Q6
+--/Llwd5TOotmkQ+V6
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 15, 2026 at 08:09:03AM +1200, Eva Crystal wrote:
+On Mon, Aug 24, 2026 at 10:32:52AM +0200, Michal Simek wrote:
 
-> This follows up my report of 2026-09-08, "[SECURITY] FIT signature
-> enforcement fails open when the control DTB has no /signature node":
+> There are 5 domains which no longer exist. Remove all email addresses that
+> reference them. Where such an address was the board's only maintainer, ma=
+rk
+> the board as Orphan.
 >=20
->   https://lore.kernel.org/u-boot/CA+pz=3Dk+hAU5dqbO4GOLJ0fRMRdyrq=3DkTSnw=
-Uc0OcR3r9PotUgg@mail.gmail.com/
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
 >=20
-> Tom asked for a fix and a test following the sending_patches process, so
-> here they are. Everything below was measured on sandbox at
-> commit a44f46af0aa1 ("MAINTAINERS: tee: update Jens Wiklander's email
-> address").
+> This was the way how to find if domain doesn't exist.
 >=20
->=20
-> The fail-open
-> -------------
->=20
-> fit_image_verify_required_sigs() at boot/image-fit-sig.c:187 looks up the
-> "/signature" node of the U-Boot control devicetree and returns success
-> when it is absent, at boot/image-fit-sig.c:203-207:
->=20
-> 	/* Work out what we need to verify */
-> 	*no_sigsp =3D 1;
-> 	key_node =3D fdt_subnode_offset(key_blob, 0, FIT_SIG_NODENAME);
-> 	if (key_node < 0) {
-> 		debug("%s: No signature node found: %s\n", __func__,
-> 		      fdt_strerror(key_node));
-> 		return 0;
-> 	}
->=20
-> With no /signature node there are no keys marked 'required', so nothing
-> downstream can fail the image. The only indication is a debug() call,
-> compiled out of a normal build.
->=20
-> 'iminfo' at this HEAD verifies images but not configurations, so it
-> reaches this gate directly. Against a control devicetree with no
-> /signature node at all, and a FIT whose configuration signature carries
-> no 'value':
->=20
->   ## Checking hash(es) for FIT Image at 10400100 ...
->      Hash(es) for Image 0 (kernel): sha256+
->      Hash(es) for Image 1 (fdt-1): sha256+
->=20
-> That '+' is fit_image_verify_with_data() reporting the signature
-> verified, on a board holding no keys whatsoever. The comment beside it in
-> boot/image-fit.c is correct that only 'required' keys can fail an image,
-> and that is precisely what makes a missing /signature node fatal to the
-> security property rather than to the boot.
->=20
-> With CONFIG_FIT_REQUIRE_CONFIG_SIGS=3Dy the same command gives:
->=20
->   ## Checking hash(es) for FIT Image at 10400100 ...
->      Hash(es) for Image 0 (kernel): No signature node in control FDT: FDT=
-_ERR_NOTFOUND
->    error!
->   Unable to verify required signature for '' hash node in 'kernel' image =
-node
->   Bad hash in FIT image!
->=20
->=20
-> Relationship to Ludwig Nussel's series
-> --------------------------------------
->=20
-> The same early return exists in the configuration path, at
-> boot/image-fit-sig.c:686-690, and that half is already being addressed.
-> Ludwig Nussel's "Improve FIT signature handling" series has been fixing
-> it since April and is at v8:
->=20
->   v7 4/8, direct link:
->   https://lore.kernel.org/u-boot/20260618144742.v7.4.6d1d5d14140677a76a7c=
-d7bb99a9088d8c8f480c@changeid/
->=20
->   v8 4/8 review thread:
->   https://lore.kernel.org/u-boot/66a3267d-1980-4b86-be3a-791707373554@kwi=
-boo.se/
->=20
-> That series introduces CONFIG_FIT_REQUIRE_CONFIG_SIGS, closes the
-> configuration gate, and also restructures the closing check at
-> boot/image-fit-sig.c:733 to cover the case where /signature exists but
-> holds no required=3D"conf" keys, where reqd_sigs stays 0 and the check
-> cannot fire. The v7 form was applied to u-boot/next on 2026-06-30 and
-> then dropped after CI failed.
->=20
-> This series is complementary, not competing. v2 through v8 change only
-> fit_config_verify_required_keys(); fit_image_verify_required_sigs() is
-> untouched throughout. That image gate is what these patches close. The
-> Kconfig symbol here is deliberately Ludwig's FIT_REQUIRE_CONFIG_SIGS
-> rather than a new name, so that whichever lands first the other reduces
-> to a smaller change rather than a conflicting one. If 4/8 lands first,
-> all that remains of patch 1/2 is the image-gate hunk.
->=20
->=20
-> Kconfig name and default
-> ------------------------
->=20
-> CONFIG_FIT_REQUIRE_CONFIG_SIGS, depends on FIT_SIGNATURE, default n,
-> plus SPL_FIT_REQUIRE_CONFIG_SIGS which selects it.
->=20
-> Default n is a measured choice, not caution. Full test_vboot suite on
-> sandbox with these patches applied:
->=20
->   option at its default (not set):  32 passed,  0 failed
->   CONFIG_FIT_REQUIRE_CONFIG_SIGS=3Dy: 19 passed, 13 failed
->=20
-> The 13 are not a defect in the patch. test_vboot's first step is
->=20
->   test/py/tests/test_vboot.py:312
->   run_bootm(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-',=
- True)
->=20
-> which boots an unsigned-images FIT against a devicetree that has no keys
-> yet and asserts that it boots. That assertion encodes the old contract,
-> so enforcing correctly breaks it:
->=20
->   E  assert 'dev-' in "... No signature node in control FDT: FDT_ERR_NOTF=
-OUND
->      Bad Data Hash ... ERROR -2: ... can't get kernel image!"
->=20
-> This is the same class of CI breakage that got v7 dropped from next.
-> Making the option default y would require test_vboot to be restructured
-> first, which is what Ludwig's 5/8 does. Until that lands, default n keeps
-> the shipped configuration byte-for-byte unchanged in behaviour.
->=20
->=20
-> The console message is conditional
-> ----------------------------------
->=20
-> The message is printed only when the option is enabled; the debug() call
-> is kept otherwise. Jonas Karlman objected to making it unconditional:
->=20
->   https://lore.kernel.org/u-boot/44dbc75b-13e6-4242-a1a9-43264f379391@kwi=
-boo.se/
->=20
->   "Yes, printing a verbose error message for something that should not
->    always be treated as an error is an issue."
->=20
-> Rockchip enables FIT_SIGNATURE for image hash integrity alone and has no
-> /signature node by design, so an unconditional message is noise on every
-> boot there. Gating it means a board that has not asked for enforcement
-> sees no change at all. Measured with the option off: the string
-> "No signature node in control FDT" appears 0 times in the boot output,
-> and 'iminfo' prints the same 'sha256+' lines as an unpatched build.
->=20
-> printf() is used rather than log_err() so that this applies to main
-> standalone; log_err() in this file requires Ludwig's 3/8. If these are
-> ever squashed together, log_err() is the better choice.
->=20
->=20
-> NOT TESTED
-> ----------
->=20
-> Being explicit, because some of this matters for review:
->=20
-> - SPL: SPL_FIT_REQUIRE_CONFIG_SIGS is added and compiles through
->   CONFIG_IS_ENABLED, but I have not built or run any SPL configuration.
->   Compile coverage only. It needs someone with SPL verified boot.
-> - Host tools: mkimage and fit_check_sign build with the patch, but I have
->   not exercised any fit_check_sign behaviour change. CONFIG_IS_ENABLED
->   is false in the host build since tools/Makefile only defines
->   CONFIG_FIT_SIGNATURE, so host behaviour should be unchanged -- argued,
->   not measured.
-> - Sandbox only. I have no signed-boot hardware. Everything above is
->   sandbox_defconfig on x86-64.
-> - Jonas's Rockchip setup: not reproduced. I reasoned that the off path
->   stays quiet and then measured that it does on sandbox, which is not the
->   same as booting an RK3588.
->=20
->=20
-> No Fixes: tag
-> -------------
->=20
-> The early return is original behaviour rather than a regression. The
-> oldest commit touching it in this path is commit b983cc2da0ba
-> ("lib: rsa: decouple rsa from FIT image verification"), and that one
-> moves the code from common/image-sig.c to common/image-fit-sig.c rather
-> than introducing it. I could not identify an introducing commit with
-> enough confidence to tag one, so I have not.
+> git ls-files '*MAINTAINERS' 'MAINTAINERS' \
+>   | xargs grep -hoE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' \
+>   | sed 's/.*@//' | tr 'A-Z' 'a-z' | sort -u \
+>   | while IFS=3D read -r dom; do
+>       if [ -z "$(dig +short MX "$dom")" ] && [ -z "$(dig +short A "$dom")=
+" ]; then
+>         echo "$dom"
+>       fi
+>     done
 
-This is a very long cover letter. It also doesn't fit our normal style
-(which you can see many examples of with "git log --merges"), can you
-please rewrite it to be more concise and fit the normal style? Thanks.
+With Angelo's email being fixed, can you please v2 this patch? Thanks.
 
 --=20
 Tom
 
---0XC41N9O+Knkc3Q6
+--/Llwd5TOotmkQ+V6
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaqhZuwAKCRAr4qD1Cr/k
-CqFFAQC6C+XedbVNxcO6gkSz4ru5eL/l22B53HNCzYLIwV5bXAD/TniMbiDqtFYo
-zLZwwbRY8rLm+kwrboD6jrUbj8zgdwQ=
-=N8un
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaqhbgwAKCRAr4qD1Cr/k
+CgwdAQChhl18/1whCpfsvhM8TtiAQ+BlTC0liOik9b1MdX6ZdAD/U2gMmPQBN3TC
+IPe9IxFonBABDytlmxke/5xjhilh2gI=
+=YySm
 -----END PGP SIGNATURE-----
 
---0XC41N9O+Knkc3Q6--
+--/Llwd5TOotmkQ+V6--
