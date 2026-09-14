@@ -1,120 +1,120 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8999C88E72
-	for <u-boot@archiver.kernel.org>; Mon, 14 Sep 2026 14:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B65D9C88E75
+	for <u-boot@archiver.kernel.org>; Mon, 14 Sep 2026 14:17:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7666380D4A;
-	Mon, 14 Sep 2026 14:17:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6BAC6606E5;
+	Mon, 14 Sep 2026 14:17:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KYV3mM9ccaZt; Mon, 14 Sep 2026 14:17:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4693D80E07
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789395453;
-	b=A8GBRZeKkmdH1wvDiQBjE0PBWWJsgj50Rx1a1yRT6IYU5pda2PybkAh6uGMh7xGa+nJ7
-	 L6C8D/NvnUKrdmRbZ9qrLrLxRE6VSAVmsE/LBndQ9Pt17mDulWkq34CUP9Y0UhQV1SYac
-	 6JCyspngMzji395oVGzbahfCOgIvLMoSP8S8rDmq7Sw3RbtZvMl51PiUUs2UseHVJHUnd
-	 eFKU+Npczi9whKF+WDJHiFPw5h6jc+PCSDt9DSqyVBgkE3hzk+SpXnQZE1IVNFzI4Lemi
-	 yhO9i03/cWq5znpPNgGHBIAU7bCE+FWM7bqbFZ1pxFqZOVuxJ5Mir71pK1nmw8v/wFg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id a3XsKrEeo8K3; Mon, 14 Sep 2026 14:17:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A9C48606F4
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789395455;
+	b=TeZGIbZvQJX53z3BiKZGYl/eISf8axO1xWllILSijGJ4zo8qZJZUYQFH6T5wXYpBDkt9
+	 K+tv6mdwJFwRaztGkMADCrWNFRgZ6Tlp3YzirbDbvUTAiKKeC3fuQJ9huY8U+kMxE7lxV
+	 ZKJBnzsi3Zp++Z/FoDakv1VyBC71tGDHiYl5RY6x/PyPFQPvTsgrjsbSkzvHNL8gQdgx8
+	 /QnzUJ40aNJhyWwyFxU/2qivj4dEZGE6OYg8Kb9qU5qXdB1XvhpwnsE2UoSaXARZgwnmF
+	 ck8d5GUPm2k8tOYbRamzP/KpIpwgKGB5CfZIx5aYNV3Dt1z60wyBFbvzAZRMhr7iV0w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789395453;
+	c=relaxed/relaxed; t=1789395455;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 Received:Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-Id:
-	 X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=m9/Qogarj1WpvhJJb83vOjxuNQewRWfxGSmwEUofahI=;
-	b=HuU57roiYUW+0G9GIPqR+t3gTwciVX7SoF4cRj4yUG6WIkNc5slqEzEtc325QCrCW+Nj
-	 PkpAxdzDB4V1U+DtKv3E0Z0tSun2/3UF0LcQ1Cqb6fbyMRk2q+UtU8ZYhaAeIH33WLOx/
-	 B1eGUxWcEfNzsDSgMJb9dMtmEGA3/ieTrYLX9xofnEtqfc4vLP5V65jzYBSTvnw4yCu3z
-	 V4dL5I0QIC3WUl6JOHTcvJunnO83u9MIecTqFK8MHLOL7seFZFOe3yxt0h+j4o5cGEd6H
-	 6iWjcFh4QmailSPCkCJ8Xxj1sTQgA/nxd6qyiLv33/gtK1drL61sW+V+9YYLUlztHdg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-Id:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=xVhKKPRdVi5WkQn9qpXHrZdnZfGFjKehlSfgniBx2as=;
+	b=XqerWvuN5QlyrTYB42ATtAgqYbM74CzuB9klPKsHF4mHfrBqor5qjkcxh4OaQG2RLESO
+	 fl4/5Pnhkg3YHHmfYidf0iaIch7AtiMFc8W15qWKK/Zh+JvWCVqAaXbcCiQTE3yUV7jd+
+	 lIG77PWK36xrWSOpC7zoO3qTEx5maSkoZp5hnUs3EOZCgniYeLQIN/LC0kAFKccT/JDsD
+	 NSpab9nODc5oQLvZ01ypB9+LcKsgOnICwamvdyfudNCS8RHaXsaSThumhkXdKKgjrIVFk
+	 W8EbbopvSk3dCnqi74EARCLKL8tOkRLHcaVl+X72dfZWIPUL4RtrXi8EldqKRipfd1A==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=arm.com;
+	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=ErBFTCNX;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789395453;
-	bh=m9/Qogarj1WpvhJJb83vOjxuNQewRWfxGSmwEUofahI=;
+	d=lists.u-boot-project.org; s=default; t=1789395455;
+	bh=xVhKKPRdVi5WkQn9qpXHrZdnZfGFjKehlSfgniBx2as=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vdBmmzmxlcUKF1Oh9rIQe8uALQJAklltNin8m/3Sn7Z6xj2JlcCYgUtX7NlHzXUsa
-	 dyMrUKBf2PzI9tV2l2qtNUs38AXqLH0n6RVAyvDxNQmuq/ElCWoRwfrI6RCBybWO/0
-	 v3HP9WwmuY8/NJn6nAJr7GsJPMD9xilAxejui8hPRzOlKX4v84CvR60GgUys7dyIV2
-	 5DEj6k9a9bHSxPvBV85ZEK5XwAowOuRRBF9HBYpYxrdBUO5pGnFGNmg+BVTAjSkgfu
-	 c+fIqej4VmFMlWVOUsUfDC3dQtvu2v4fmAVpyzAOfma0WsYOUUOPeJnWthnMD3NNzl
-	 UA8vpa0ZgsQwg==
+	b=jLLImac6OijPIfwUgHwAMs6nbEtEpmiVtCQhwKu80yqxFVLPCbaM24fhxwIz8n3GF
+	 ZFbaRyoqOHk591/zDUb1XMi3I1QPYHBIKRzwqnN8dp7iXYxhkyNdb660ZMrQYo4OoH
+	 vlbsxp07Y4r+9cgUypliuNvSdV47tsaLK6JRxvAuCYVQZVVFp3fct1fZ8jLdaUJwXg
+	 S3s+zHsFblayE6W4R1+InmGswPT7z/Nuzcy+Ti+Wc+51zg9LnjNvdnmvu3W6Zm1Aax
+	 Gc2iLxQpk2h50hrlVRTkrEZFU+jC8tvdLpWA1/AlHnvtuuL/5WvfsTKPbkSHSt4D7D
+	 SAFdMm8IVBgqA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4693D80E07;
-	Mon, 14 Sep 2026 14:17:33 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id A1DFC49D
+	by smtp3.osuosl.org (Postfix) with ESMTP id A9C48606F4;
+	Mon, 14 Sep 2026 14:17:35 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C02582D0
  for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9449D40121
+ by smtp3.osuosl.org (Postfix) with ESMTP id B218D606A0
  for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 68uoifBeJssw for <u-boot@lists.u-boot-project.org>;
- Mon, 14 Sep 2026 11:10:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org D8F3640119
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KDKytE9fXvM2 for <u-boot@lists.u-boot-project.org>;
+ Mon, 14 Sep 2026 11:10:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 08C4B605F7
+Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789384216;
- b=oNGAqlTcesois9H6ku/XJkk05xruZUtKOC8CMNQZWTzSq1caJoG1QZfl4jsMjZzlnTKG
- qKcFitiCh/L7cv1KNbVoH/jpK5rbBSHvNTDzCZ2Rru9wgbA5Nolsis+8dB3smC+hVrjHR
- YYF+uDCvlzEiwV9mCCgdKGlGxKtHvK99X706+OQ868c0eBFcMqeZr5n34JScx2kSlOuIZ
- ypQWYdJrqz6P5mEqo66gclP6LPA2/p7E4vBnA1ja1nuJX/lwmRSPUkn7oOR4aCixU+qOx
- eE1wqrkmrRY7ZxAK41Iwp9SCvtyiKKDnln9N3cmlAtUkdSjJ1W7O+lLoL+Cuv9zbshg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789384217;
+ b=au3pGBNPAgqqTliLXb/nlRLYvpq1Z+adzvu6e4ed/+qXWD411dUCH9I3kARhc7t4A/ae
+ 3OypkyPozW8cssd/T2xJRQnmEgKPgqmZtzIWI14OjjA5vAl4qn3HDs6xF1qn/KW/7ART3
+ ECU703AKa5M9AX+rV7xuojgosXlrPeOrc2jnmYWGWa9gYPJLNfw8MofbGlLpic5kxshO7
+ 0xDUxk7ox3aG88XgRghrM5pLLC4733vnFfuaPv8/7ZqPZ1hg2eTdBXlJVt1H6MzdZRy31
+ 78U/7lUTRPUteb108xV/vS3l9FOWnm4a/v6z0SfDfv4ZGJ0s1kEA2tBJuM5/35gDK2A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789384216;
- h=X-Greylist:Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:
- Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
+ c=relaxed/relaxed; t=1789384217;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
+ Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=m9/Qogarj1WpvhJJb83vOjxuNQewRWfxGSmwEUofahI=;
- b=R6JTgNB61nlhi9fG0GIHm/gUqPutgLDXwANUX0X7n88SaPuBmKHc+1ZAJ1QFAl4FWTy7
- 6LxgbWS4Vgb5oL8cNgUFkqYqnrGw8XSZuq8hcfyEfbkn943hjMcrEgDaGAmD1DPtnAE5i
- Q+OVcT9qLeJonWE4wVAxlnC/W89lBwdjaulu1qb4hmElUCXFDA0OW2KZPh4YlRG0fcUxW
- AdWRuNvnbDcUf1/eGeWlK5hpayLB4o3kF5m4LFPh1jG6klxuorkhY6nP8CRA6jfucTicI
- mj6KrHjMzk6rewUOHXfe0FP4I144ebdcFG9mMtVSVvP8N+h+Pz04JLLJ9x9hxeA0FhQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=xVhKKPRdVi5WkQn9qpXHrZdnZfGFjKehlSfgniBx2as=;
+ b=ppfADY0K4wqtQV2xM55ldudvb0B5rMRbJFdVtVXt7+Wgvfls8ZO1oasy2od2IeIzWhjE
+ 1zrX9JgOAcY8eDD9GaJnKGZr2Gz42yWCbuNzETdaSUSzCSiIlxG8V7MFo4322HS2L8WPS
+ 4/EIknPHd65gfJb82M0jfYtvcxuliBs8HQIICg9Pt2BARTyXB+8VjnAQH0ZsRAG93pooM
+ Y17pfKCgYWDAAMNPE7iYttfsZq1G0K2deFAE3pNl1DiiU6Fp9iyN2H4utAmqkr3A6tSdq
+ 5lToRahsbs47zCv8QELqI6U/3P92f+XyRLLI17i5GN0eQwk1Ym4VBea5VpeAWU+PR+Q==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=arm.com; 
  dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=eFbDCU65; 
+ header.b=ErBFTCNX; 
  arc=none smtp.remote-ip=217.140.110.172
-X-Greylist: delayed 528 seconds by postgrey-1.37 at util1.osuosl.org;
- Mon, 14 Sep 2026 11:10:15 UTC
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
- header.s=foss header.b=eFbDCU65
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
  helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
  receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=foss header.b=ErBFTCNX
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp2.osuosl.org (Postfix) with ESMTP id D8F3640119
- for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:15 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 08C4B605F7
+ for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:16 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0F4171F37;
- Mon, 14 Sep 2026 04:01:52 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C67DB202C;
+ Mon, 14 Sep 2026 04:01:55 -0700 (PDT)
 Received: from e132995.arm.com (unknown [10.57.49.141])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 50A413F86F;
- Mon, 14 Sep 2026 04:01:54 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C67923F86F;
+ Mon, 14 Sep 2026 04:01:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1789383715; bh=WHmwoWvtJb88Vt7Yqkf+PFFis77qGIp4Ppgetb5JIYU=;
+ t=1789383719; bh=xllZb7r25rYdP2tV7ZGW3r2Ed8vCwjBEHlfE1YpWp6g=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=eFbDCU65IRxy+6B0UHzCY5mzqm0AkOzOUzqZxN6nFhdFUmxUbBCtIObn402hh0s28
- gUV6DXMg+LPX1rcnszS9qPLZo+tFGQlLqS/BT6hzju9q0F7uxJqC7xAvpr/F6C2zhd
- X4s05uTRhfVG34mh8cv69URqq1+F7cijnqpwaQi0=
+ b=ErBFTCNXQAaM8Oe+ovyA2XaDwBWb+LLf8sYmLWPHgyq9Yt1rqISBT43iXYx6oUFYy
+ 1TT8ZnzWlfWVmud88kI8PNYmj06oQgNDjroRU4mmARH7gZVcF8IXb3k970X6nEIXEl
+ JwyyRWW24wbtyTTOWCKPSaTpyB21BRoi9W5g8uLU=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -123,10 +123,9 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Devaraj Ranganna <Devaraj.Ranganna@arm.com>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v5 16/22] efi_loader: enable TEE runtime QueryVariableInfo()
- over FF-A
-Date: Mon, 14 Sep 2026 12:01:00 +0100
-Message-Id: <20260914110106.1974894-17-harsimransingh.tungal@arm.com>
+Subject: [PATCH v5 18/22] corstone1000: enable bootefi selftest
+Date: Mon, 14 Sep 2026 12:01:02 +0100
+Message-Id: <20260914110106.1974894-19-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
 References: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
@@ -146,110 +145,56 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add the TEE-backed runtime QueryVariableInfo() implementation for the
-FF-A/MM variable backend. The runtime path uses the shared MM
-communication path after ExitBootServices() and returns the variable
-storage limits reported by the MM secure partition.
+Enable `CMD_BOOTEFI_SELFTEST` in `corstone1000_defconfig` so the later
+runtime-variable selftest patch in this series can be exercised on
+Corstone-1000.
+
+Keep `CMD_BOOTEFI_HELLO` and `CMD_POWEROFF` explicitly disabled.
+Enabling `CMD_BOOTEFI_SELFTEST` would otherwise make
+`CMD_BOOTEFI_HELLO` default to `y` and pull in `CMD_POWEROFF` on this
+PSCI-based defconfig. The intent here is to enable the selftest command
+without broadening the rest of the board command set.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 
 ---
 Changelog:
 ===============
 
-v4:
+v2:
 
-Ilias:
+Simon:
 
-- Split the runtime QueryVariableInfo() support out of the combined
-  runtime variable-services patch.
-
-v3:
-
-Ilias:
-
-- Rename TEE/FF-A runtime handlers to private *_int_runtime names
+- Reword the commit message around `CMD_BOOTEFI_SELFTEST` and explain why
+  the selftest enable is needed on Corstone-1000
+- Clarify in commit message that `is not set` lines are intentional
 ---
- lib/efi_loader/efi_variable_tee.c | 44 ++++++++++++++++++++++++-------
- 1 file changed, 35 insertions(+), 9 deletions(-)
+ configs/corstone1000_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-index 0de9949344e..3e4fd33dca6 100644
---- a/lib/efi_loader/efi_variable_tee.c
-+++ b/lib/efi_loader/efi_variable_tee.c
-@@ -1276,7 +1276,7 @@ out:
- }
- 
- /**
-- * efi_query_variable_info() - get information about EFI variables
-+ * efi_query_variable_info_int_runtime() - get information about EFI variables
-  *
-  * This function implements the QueryVariableInfo() runtime service.
-  *
-@@ -1285,20 +1285,46 @@ out:
-  *
-  * @attributes:				bitmask to select variables to be
-  *					queried
-- * @maximum_variable_storage_size:	maximum size of storage area for the
-+ * @max_variable_storage_size:		maximum size of storage area for the
-  *					selected variable types
-- * @remaining_variable_storage_size:	remaining size of storage are for the
-+ * @remain_variable_storage_size:	remaining size of storage are for the
-  *					selected variable types
-- * @maximum_variable_size:		maximum size of a variable of the
-+ * @max_variable_size:			maximum size of a variable of the
-  *					selected type
-  * Return:				status code
-  */
- efi_status_t EFIAPI __efi_runtime
--efi_query_variable_info_runtime(u32 attributes, u64 *max_variable_storage_size,
--				u64 *remain_variable_storage_size,
--				u64 *max_variable_size)
-+efi_query_variable_info_int_runtime(u32 attributes, u64 *max_variable_storage_size,
-+				    u64 *remain_variable_storage_size,
-+				    u64 *max_variable_size)
- {
--	return EFI_UNSUPPORTED;
-+	struct smm_variable_query_info *mm_query_info;
-+	efi_uintn_t payload_size;
-+	efi_status_t ret;
-+	u8 *comm_buf;
-+
-+	if (!max_variable_storage_size ||
-+	    !remain_variable_storage_size ||
-+	    !max_variable_size || !attributes)
-+		return EFI_INVALID_PARAMETER;
-+
-+	payload_size = sizeof(*mm_query_info);
-+	comm_buf = setup_mm_hdr((void **)&mm_query_info, payload_size,
-+				SMM_VARIABLE_FUNCTION_QUERY_VARIABLE_INFO,
-+				&ret);
-+	if (!comm_buf)
-+		return ret;
-+
-+	mm_query_info->attr = attributes;
-+	ret = mm_communicate(comm_buf, payload_size);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+	*max_variable_storage_size = mm_query_info->max_variable_storage;
-+	*remain_variable_storage_size =
-+			mm_query_info->remaining_variable_storage;
-+	*max_variable_size = mm_query_info->max_variable_size;
-+
-+	return ret;
- }
- 
- /**
-@@ -1407,7 +1433,7 @@ void efi_variables_boot_exit_notify(void)
- 
- 	/* Update runtime service table */
- 	efi_runtime_services.query_variable_info =
--			efi_query_variable_info_runtime;
-+			efi_query_variable_info_int_runtime;
- 	efi_runtime_services.get_variable = efi_get_variable_int_runtime;
- 	efi_runtime_services.get_next_variable_name =
- 			efi_get_next_variable_name_int_runtime;
+diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
+index 876b915b6a4..e16b13043ac 100644
+--- a/configs/corstone1000_defconfig
++++ b/configs/corstone1000_defconfig
+@@ -32,6 +32,8 @@ CONFIG_SYS_PROMPT="corstone1000# "
+ # CONFIG_CMD_CONSOLE is not set
+ CONFIG_CMD_FWU_METADATA=y
+ CONFIG_CMD_BOOTZ=y
++# CONFIG_CMD_BOOTEFI_HELLO is not set
++CONFIG_CMD_BOOTEFI_SELFTEST=y
+ # CONFIG_CMD_XIMG is not set
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_LOADM=y
+@@ -62,6 +64,7 @@ CONFIG_SYSRESET=y
+ CONFIG_SYSRESET_PSCI=y
+ CONFIG_TEE=y
+ CONFIG_OPTEE=y
++# CONFIG_CMD_POWEROFF is not set
+ CONFIG_USB=y
+ CONFIG_USB_ISP1760=y
+ # CONFIG_RANDOM_UUID is not set
 -- 
 2.34.1
 
