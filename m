@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6485CC88E75
-	for <u-boot@archiver.kernel.org>; Mon, 14 Sep 2026 14:17:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6645EC88E77
+	for <u-boot@archiver.kernel.org>; Mon, 14 Sep 2026 14:17:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2893280E3B;
-	Mon, 14 Sep 2026 14:17:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 28635606F5;
+	Mon, 14 Sep 2026 14:17:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JN930dfCpfAg; Mon, 14 Sep 2026 14:17:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org EFE6180EA8
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789395459;
-	b=GnDX9TTWb41F3OQglr+kpkgeiGI7jijCCQEzMxq4eqe0ckCSoPx40Iml1eu5tTEtnXLQ
-	 cbjxz69z6m+ftC6y8TfUH5++Vhi13znfCstN1b9lI8B/ZRukLjwAkI3eDjPE5CvshoIvS
-	 wmQt2JiAv64JAX9/cM98FRpg9AUJp72ro7GAvwDpTs7Gd84vahd7N/vsO/l/HX0Tl4rHh
-	 yolYLvi7m0a8pGt5l0XwhbQxbDwvbfh+PQHq5urOCVXx9q7GV1cWgXSKji3D9E9Wxe2C4
-	 qqqIMOXJ3mKf3IaEBeeswUcpuDmlNT1Etq+108wHRGHty9vIpArYnstTUEdy4SyYk6w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LcluC8lZX37a; Mon, 14 Sep 2026 14:17:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 6F75E606FF
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789395461;
+	b=pC9R490UXp8H8xVt8kUpOqrMnQWXgjpL0ShXQxvknaZBTl/pm6+ChSjSph9dtCOPkE88
+	 /DRAxhmQNKmsjoFPmSDVeMFZpaQi+SfXUTe+SrZIIWLSyuhsQ+jJtqAfxoTKNo1GsKXW/
+	 ml9bah91eey0eZTEvfPtnnF9vJWxp8ALoNZPEWTFpv01QUcv9ovqna6xHgNLEBy0u5rW0
+	 PBiP3ThBmmWgsC8/ecd6TGvVKUTTI7B74k9b7zVydG/5P4MSj0zc54UCiweROzmOmK9dN
+	 HgBQkp2CnakZVGzfrAue3h0G5DIeXN6E1mHCZOcO1GEoQvWuRbCEot4ECqhHaIjF4qw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789395459;
+	c=relaxed/relaxed; t=1789395461;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,90 +31,88 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=ms8s8UWkuaeiQ/ay7DrSIL7/tSr6gRLVXKoqmWCXS8M=;
-	b=bDQu17wdDmonQrn353mL0aT7r+imYM47llmkQLL55v7utQqL0r8WD/sn0r7WHnScMg+z
-	 1njnz5ZeyLeDFr7Xej+NXVNJj5SPdorocRK2nfmoTsHk8LW/lgYkCKbRlbNgSAKGcvreo
-	 qmbURynufeSn4qqUm9r/Z7JjP2VZMeQyvgn3j2sBMu8XxyrohLnRjyxKGkcSRLM4VdMoC
-	 O4rJxsW80ajA4Vb0SFxxPdTrmZytoZONtLfKEX3KeYhHNamGcONefIB837yoZChaghp5H
-	 4Yu+nNb+GHOYaCGSYEq5r3VTTjuyYBIC+oa4NfU4WT44fRmbNVlaamR1TnKB4nMt0Lw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=arm.com;
-	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b="m/GHbFnw";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=UZpA+OZSHuMwQN0nTcxvaMn+SvjplDHx4/gQX8SzPTM=;
+	b=WJtPyabdMHFuyRAy6YN921tOMxCLy0WtE+JJ9l5AagqFzrD2cwqI7Pz065NGzlYtmX1V
+	 60H+nPOGswDLImjs5ZYg4bwx3kueaDy8FKDPNdA1XXpNAasebrJxd2DJB6tpmX6dN3CAd
+	 NUanpXTiJkUiH8S0uQGKgB2VB+Dp5bXxhIGGpZI7FHXYKChof7fvZqWlBQAnEfKamOy+t
+	 Q0sY1SpgwW04N7ea9sbj2ziem/X5rdEDmvqVGM5WbLqo7+eHc+FWe0f/RETpYfyiIfs4s
+	 X5R9LaM5/bsthWjWRjiNIc98MMZFK0kbbl1VVu4uSN9mcB1tWytXJBzBGyysfLXY+Qw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789395459;
-	bh=ms8s8UWkuaeiQ/ay7DrSIL7/tSr6gRLVXKoqmWCXS8M=;
+	d=lists.u-boot-project.org; s=default; t=1789395461;
+	bh=UZpA+OZSHuMwQN0nTcxvaMn+SvjplDHx4/gQX8SzPTM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=JnG+87qrqXZKtQqLuhUeavU7NDdk3BhG/ma3DLPdCuyTaWx2jHHULBB99/oqUH5JT
-	 lt1NH8pd5VdWkFNeh+Dov/Cku2I1RlQdF9mS8wqxCk7Jk8d81yiD5EjJOZygomaIlG
-	 wZ46MjZCi16AHvunw0hBy568CB50/vESW4vnG3LY3X/EDlTFsL8X9zVHn9HRpeZBaX
-	 ocImHj4n6PCvrqzqvnoX/uKKEGEQzkBZhPMSBYthl54GtxwubvrddZEA8b/unjplSV
-	 7I4Ruvzn9AIpiAYBZUUFDBHaplsu7kB1cRXmrjtqlag6GfkumshsmsvPlaj9ogIl50
-	 hKhZu6RZnQfvw==
+	b=meFz04hWyCaoqnglPSCibxU5B8AheAiE3oln1TYC2hQk1nf5D4fHtoqjqwc9BcP2g
+	 DG3ndSZereWkoMoOMytIGdBEDFyJxuyVKUOBwwueSAIsngQXOqQ38f3Q56291xdS1w
+	 igFyh2LAzEIBCy3RRll0NN8T5N96+JSB1ZOH0fBKzXUFPZcbZ2LifaRi/IF+guKx4/
+	 CZb80NqBUo1W/kKhYhdljY6vJXM2Lgd+0OHYa8ndDYz9gwpXNsC/vTekNxlOQ1uvhs
+	 P5pMtu9S8Pp+R8cpQUyeSPh+BoV5prG5B3iQUd0EqoOnnd4Dx6wxuvgEQCIAcikoFp
+	 rinvNvO2M0ESw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EFE6180EA8;
-	Mon, 14 Sep 2026 14:17:38 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id DD4862D0
- for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6F75E606FF;
+	Mon, 14 Sep 2026 14:17:41 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 07DC82D0
+ for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id CE95380D8C
+ by smtp4.osuosl.org (Postfix) with ESMTP id E289240631
  for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qj9qPq1cFOAe for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Nx1USFzq8bFf for <u-boot@lists.u-boot-project.org>;
  Mon, 14 Sep 2026 11:10:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org F313D80D93
-Authentication-Results: smtp1.osuosl.org;
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 398F340635
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789384217;
- b=kkziyBPFJjo8dwHeUvd3hhjGI37eLX6mOjPV9IzxbqIn+IPzxJl9iIgGEixIqpk+U4KP
- o6G8yic7afzx/htEn3B883j8CEVxvb+WnIhMzXS5AaNohXe5xmFCd2idTDO6cSz2N8fGc
- sYEgJIILGaOmmdhVSXz7eDeid6YBd35Y5LlBeGuMH6BUo6kG1wfGWSRqUQbiN4cb/LZXv
- tFUdIHHMX2g2UCMgey3e46ftbvJCU8tkZtXZmxbIaV0j/gJm8MKhRBsbaCRXLiLXD1SXh
- ZYDL2AxTpOjg8Lxzl9/WiqjJxc8sm9vbJSIQIo+bCPKVHR0gKgwgOByXOoXtuZLNzOw==
+ b=C9ZMuvSXGsKPZrG9GTWskA2Ehr4sWlWzbvSK1DjA+Ol4f0r5Q5yYnWD5Aer8V+J333/B
+ Ka3YmSBv5poOw5yTPKUvRl5/U9q6YGeA+w8llchih8rROBULaU8leDEAyBeCymz0UYT+G
+ hBzYZYVjHy2DViXn2v2B+6WXRkXMJ5WBVGxUSEMMxrc3GUEo2niUrDiq0IIxrRyA98RdO
+ 126sntCRifShN8qbNsKKZSG902WJdkel5ldF0tBTT5HV7X4DyPRgnCafr5s2k4j42O48D
+ fy1qJ6g3hbld1J6gPrknp2M5+ukIZe0d4fZg1dosfb3UzNRHXOZrjvBq2Zgf7WtqE+g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1789384217;
  h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=ms8s8UWkuaeiQ/ay7DrSIL7/tSr6gRLVXKoqmWCXS8M=;
- b=ARAAZRmvpTHLDusolRUvWa9pmzL6qZz/QQHV4iInoU0V9vJiMGJevPn4eA1qrTM4QFGf
- EMtPE8tsjOesxFHFXNfwBOSHliYiflQQn52N/VZPsvV8YCR3LvmZGv7wCGWhWBQT/QidE
- BWvbIJrKvHUQr9qv9fbfpfzjO2TtEwgDia8Huotr6Aa3wmhh9AVEgUTEMsUNnifYpmiMD
- lbwRp/OKmboAUntHZ8IFirIpqmxPHRJ4yUmUKPd9RTqbpsibrSqm1whYWc2txJlL1jW6H
- QUPrHGqvwLewemEg7+9KSRGoS/dRqUqMrcrXQ3YlnhoP6qV7xnQzTXmzWXXGN7tiTXA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=UZpA+OZSHuMwQN0nTcxvaMn+SvjplDHx4/gQX8SzPTM=;
+ b=LFZMC6JoQ7veQCiWVDGcrE67DO+W2LEIf8MNm9T3Imz+Bg09VEJ2rvMrd5LuUQPuMx4O
+ LcHPiCItD4ti1mZkKY/WOFykrjgs3CYquaSUkX9RKE77JeKX7zwGr/HFGK+ctqLeewFkT
+ 0+DX7jfp7JD0dd1cy0/ETIwlDCThDDOzjzghyLR79gQa1NJP4tK7LqexvG8YNFdD8PNae
+ H5lbqiG8j6GI8wM5SGSo8PaxjNW6R6GF9uMTf7f6qTIyCVDXXLHK7Kf1alP9z2tmi4Rfs
+ qdOXzXSeCpXvpQLb+aFlfilRoVj6p556BGoH+7n4gcc+YYBJGWOIlUvIMGZ5cospHrw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=arm.com; 
  dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b="m/GHbFnw"; 
+ header.b=ZqRmCRC8; 
  arc=none smtp.remote-ip=217.140.110.172
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
  helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=m/GHbFnw
+ header.a=rsa-sha256 header.s=foss header.b=ZqRmCRC8
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp1.osuosl.org (Postfix) with ESMTP id F313D80D93
+ by smtp4.osuosl.org (Postfix) with ESMTP id 398F340635
  for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:16 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 237C31DB5;
- Mon, 14 Sep 2026 04:01:41 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5706F2EDF;
+ Mon, 14 Sep 2026 04:02:04 -0700 (PDT)
 Received: from e132995.arm.com (unknown [10.57.49.141])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 293963F86F;
- Mon, 14 Sep 2026 04:01:42 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 80B963F86F;
+ Mon, 14 Sep 2026 04:02:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1789383704; bh=2irKMRt5yMclFdkzidotQE9AfQwlHVoTmmfVdKjlAZE=;
+ t=1789383728; bh=D5V/iOFLyaptZfV74pMFzj55BwhzEnWW0vfLvpxdvd4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=m/GHbFnwx3fmUUov8/FIugwImuFFiZkUmez6JI40bc6chJbWO7JXD9VJg8If4iGIh
- oO4exjmR9Y1ssN6ygyN3TusOIrdPQOjwZKiBW2VNJ8NbFJrjhcxSnSNyJ7hw0Zqrrh
- cH4DC13UpwEavoNFZarVNNQt37bYqJf2yfT7D7Ho=
+ b=ZqRmCRC8WKUYudCHSgN9egQ3I6oWYS9gDypEuMrKFtjB+au9BXEwxzGai3Bl9OFoT
+ Qbea1/t6UwJlCcmwhoeHJRZV6U+vP4SCakE6hldPh9c5OBQzpR3GFxtbXHpp8LTxU5
+ oKImzqVaIRr/Ee7lXImtJesAHy/OquU0CI1OYZXY=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -123,9 +121,10 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Devaraj Ranganna <Devaraj.Ranganna@arm.com>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v5 10/22] efi_loader: make FF-A MM SP notification runtime-safe
-Date: Mon, 14 Sep 2026 12:00:54 +0100
-Message-Id: <20260914110106.1974894-11-harsimransingh.tungal@arm.com>
+Subject: [PATCH v5 22/22] doc: bootefi: note two-phase runtime variables
+ selftest
+Date: Mon, 14 Sep 2026 12:01:06 +0100
+Message-Id: <20260914110106.1974894-23-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
 References: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
@@ -145,15 +144,16 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Make the FF-A MM SP notification helper usable after ExitBootServices().
-The boot path continues to use the FF-A driver-model operation, while
-the runtime path uses the resident FF-A runtime transport.
+The bootefi documentation did not describe how to run the
+runtime-variable selftest, so users had no guidance on its reboot
+requirements or on which flow applies to their configuration.
 
-This keeps the notification path shared while avoiding driver-model
-access from EFI runtime code.
+Document the runtime-variable selftest flow in bootefi.rst. Describe
+the non-volatile path, note the single-run
+CONFIG_EFI_RT_VOLATILE_STORE=y case, and show how to select the
+runtime-variable selftest with efi_selftest.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 
 ---
@@ -162,109 +162,64 @@ Changelog:
 
 v3:
 
-Ilias:
+Simon:
 
-- Remove log calls from the runtime MM SP notification path
+- Clarify the volatile-store runtime-variable test flow
+- Note that the split-phase tests only run when selected through
+  efi_selftest
 
 v2:
 
-Ilias, Simon:
+Simon:
 
-- Fold runtime MM SP notification into the common path
+- Update the doc to match the v2 new efi selftest flow
+- Document single-run behavior for volatile-store builds
 ---
- lib/efi_loader/efi_variable_tee.c | 53 +++++++++++--------------------
- 1 file changed, 18 insertions(+), 35 deletions(-)
+ doc/usage/cmd/bootefi.rst | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-index 50a98a1dd0a..9cae7b7e5ac 100644
---- a/lib/efi_loader/efi_variable_tee.c
-+++ b/lib/efi_loader/efi_variable_tee.c
-@@ -14,6 +14,7 @@
+diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
+index 7c5448586b7..0a7800b93ce 100644
+--- a/doc/usage/cmd/bootefi.rst
++++ b/doc/usage/cmd/bootefi.rst
+@@ -160,6 +160,37 @@ environment variable to match one of the listed identifiers
+ Some of the tests execute the ExitBootServices() UEFI boot service and will not
+ return to the command line but require a board reset.
  
- #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
- #include <arm_ffa.h>
-+#include <arm_ffa_runtime.h>
- #endif
- #include <cpu_func.h>
- #include <dm.h>
-@@ -51,7 +52,7 @@ static const int __efi_runtime_rodata mm_sp_resp_map[] = {
- };
- 
- static const char *mm_sp_svc_uuid = MM_SP_UUID;
--static u16 mm_sp_id;
-+static u16 __efi_runtime_data mm_sp_id;
- #endif
- 
- extern struct efi_var_file __efi_runtime_data *efi_var_buf;
-@@ -229,52 +230,34 @@ static int __efi_runtime ffa_map_sp_event(int sp_event_ret)
-  * This is a blocking call during which trusted world has exclusive access
-  * to the MM shared buffer.
-  *
-- * Return:
-- *
-- * 0 on success
-+ * Return: 0 on success
-  */
--static int ffa_notify_mm_sp(void)
-+static int __efi_runtime ffa_notify_mm_sp(void)
- {
- 	struct ffa_send_direct_data msg = {0};
- 	int ret;
- 	int sp_event_ret;
--	struct udevice *dev;
-+	bool at_runtime = efi_at_runtime();
- 
--	ret = uclass_first_device_err(UCLASS_FFA, &dev);
--	if (ret) {
--		log_err("EFI: Cannot find FF-A bus device, notify MM SP failure\n");
--		return ret;
--	}
-+	msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET;
- 
--	msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET; /* x3 */
-+	if (at_runtime) {
-+		ret = ffa_sync_send_receive_runtime(mm_sp_id, &msg, 1);
-+	} else {
-+		struct udevice *dev;
- 
--	ret = ffa_sync_send_receive(dev, mm_sp_id, &msg, 1);
-+		ret = uclass_first_device_err(UCLASS_FFA, &dev);
-+		if (ret)
-+			return ret;
++When CONFIG_EFI_RT_VOLATILE_STORE is enabled, the test
++*variables at runtime* completes within one *bootefi selftest* run, so
++it does not depend on preserving state across multiple runs. It still
++executes ExitBootServices(), so a board reset is required afterwards
++before returning to the command line.
 +
-+		ret = ffa_sync_send_receive(dev, mm_sp_id, &msg, 1);
-+	}
- 	if (ret)
- 		return ret;
++::
++
++    => setenv efi_selftest 'variables at runtime'
++    => bootefi selftest
++
++When CONFIG_EFI_RT_VOLATILE_STORE is not enabled, the runtime-variable
++flow is split into *variables at runtime setup* and
++*variables at runtime verify*. Run the setup test once to create the
++runtime-accessible variable in non-volatile storage, reboot, then run
++the verify test to validate, append, and delete that variable.
++Both phases are on-request tests, so they only run when selected by
++``efi_selftest``.
++
++::
++
++    => setenv efi_selftest 'variables at runtime setup'
++    => bootefi selftest
++
++After reboot:
++
++::
++
++    => setenv efi_selftest 'variables at runtime verify'
++    => bootefi selftest
++
+ Configuration
+ -------------
  
--	sp_event_ret = msg.data0; /* x3 */
-+	sp_event_ret = msg.data0;
- 
--	switch (sp_event_ret) {
--	case MM_SUCCESS:
--		ret = 0;
--		break;
--	case MM_NOT_SUPPORTED:
--		ret = -EINVAL;
--		break;
--	case MM_INVALID_PARAMETER:
--		ret = -EPERM;
--		break;
--	case MM_DENIED:
--		ret = -EACCES;
--		break;
--	case MM_NO_MEMORY:
--		ret = -EBUSY;
--		break;
--	default:
--		ret = -EACCES;
--	}
--
--	return ret;
-+	return ffa_map_sp_event(sp_event_ret);
- }
- 
- /**
 -- 
 2.34.1
 
