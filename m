@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6645EC88E77
-	for <u-boot@archiver.kernel.org>; Mon, 14 Sep 2026 14:17:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38C78C88E72
+	for <u-boot@archiver.kernel.org>; Mon, 14 Sep 2026 14:17:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 28635606F5;
-	Mon, 14 Sep 2026 14:17:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F26AD80EC8;
+	Mon, 14 Sep 2026 14:17:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LcluC8lZX37a; Mon, 14 Sep 2026 14:17:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 6F75E606FF
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789395461;
-	b=pC9R490UXp8H8xVt8kUpOqrMnQWXgjpL0ShXQxvknaZBTl/pm6+ChSjSph9dtCOPkE88
-	 /DRAxhmQNKmsjoFPmSDVeMFZpaQi+SfXUTe+SrZIIWLSyuhsQ+jJtqAfxoTKNo1GsKXW/
-	 ml9bah91eey0eZTEvfPtnnF9vJWxp8ALoNZPEWTFpv01QUcv9ovqna6xHgNLEBy0u5rW0
-	 PBiP3ThBmmWgsC8/ecd6TGvVKUTTI7B74k9b7zVydG/5P4MSj0zc54UCiweROzmOmK9dN
-	 HgBQkp2CnakZVGzfrAue3h0G5DIeXN6E1mHCZOcO1GEoQvWuRbCEot4ECqhHaIjF4qw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6MlCrzzT3Uxw; Mon, 14 Sep 2026 14:17:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 1BAD980EA6
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789395463;
+	b=no3WJJeaL8a/3ftNsTPqIw7umyzjf6zF9fhn6O++kinTF44zSjChSURyaMtDruHkMyL1
+	 7g2w+PX7A9SSFzybdV8rj4Gf+5RAtymv7M2X3bUjT5bUCHJ0K37KwCb97FhSPSqsYu5EF
+	 Mh23SUpPbEN2yfJMufee7pfCtOx5FtL6x3QnvHNP7FAII4ZjS6r6ScjjMg6C8TdP8t5qM
+	 pNQhy9ExPhO5nKoCNT8EqEiTvoKVUBjCU1BA+rX2ohVpwu5cNtXHKm2bt6qHRgDGZ6ow8
+	 tJE0woVvMEFogFNERhm2mbaEMb1KcNxwQ5a0bNO9xp47HpPAwC3aISmtAXAY2s4c8ww==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789395461;
+	c=relaxed/relaxed; t=1789395463;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,88 +31,90 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=UZpA+OZSHuMwQN0nTcxvaMn+SvjplDHx4/gQX8SzPTM=;
-	b=WJtPyabdMHFuyRAy6YN921tOMxCLy0WtE+JJ9l5AagqFzrD2cwqI7Pz065NGzlYtmX1V
-	 60H+nPOGswDLImjs5ZYg4bwx3kueaDy8FKDPNdA1XXpNAasebrJxd2DJB6tpmX6dN3CAd
-	 NUanpXTiJkUiH8S0uQGKgB2VB+Dp5bXxhIGGpZI7FHXYKChof7fvZqWlBQAnEfKamOy+t
-	 Q0sY1SpgwW04N7ea9sbj2ziem/X5rdEDmvqVGM5WbLqo7+eHc+FWe0f/RETpYfyiIfs4s
-	 X5R9LaM5/bsthWjWRjiNIc98MMZFK0kbbl1VVu4uSN9mcB1tWytXJBzBGyysfLXY+Qw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=6IdFlk80W68Om9bKdr5/1riIG/Fd3UzNTNeZ9XjovaE=;
+	b=bG6LgR/Wfj+D7nX3wRgcdhwEYNt2iRKDcvo4KyluDxaMYkUxnxTHwkArLPXMkNQAR7LV
+	 UgfVfH54pwpdHkWrBnYSrdF2pk3rXrTn4yt2lhuCLdohrxTCwvm+hKzGDQ4F1Yvfha2Hj
+	 i1ki8VJgYkb3Rw6Ex7mZgk+2E3/cBROTSwcCy1eIsd/cXDuQxbDyOgiL6ElHrtirobcLB
+	 Ut/xHlEYIIyBwIya6w3tGtJNm+nZMbVjLE4l+XqiRewVTBMKbFJYgBg+nbMH3F4rZMIFZ
+	 y5jreB+CLdWAZkf6lk/QvSbQ0OzUwOtu1ZviNkBMH1MPbUB62eH5Sjlufl8dLg68Tpg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=arm.com;
+	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=Maxg7weB;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789395461;
-	bh=UZpA+OZSHuMwQN0nTcxvaMn+SvjplDHx4/gQX8SzPTM=;
+	d=lists.u-boot-project.org; s=default; t=1789395463;
+	bh=6IdFlk80W68Om9bKdr5/1riIG/Fd3UzNTNeZ9XjovaE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=meFz04hWyCaoqnglPSCibxU5B8AheAiE3oln1TYC2hQk1nf5D4fHtoqjqwc9BcP2g
-	 DG3ndSZereWkoMoOMytIGdBEDFyJxuyVKUOBwwueSAIsngQXOqQ38f3Q56291xdS1w
-	 igFyh2LAzEIBCy3RRll0NN8T5N96+JSB1ZOH0fBKzXUFPZcbZ2LifaRi/IF+guKx4/
-	 CZb80NqBUo1W/kKhYhdljY6vJXM2Lgd+0OHYa8ndDYz9gwpXNsC/vTekNxlOQ1uvhs
-	 P5pMtu9S8Pp+R8cpQUyeSPh+BoV5prG5B3iQUd0EqoOnnd4Dx6wxuvgEQCIAcikoFp
-	 rinvNvO2M0ESw==
+	b=YnbnWpWzqozixedS64KBYPiLJIMQegY/2h2bqng8qLD1j7O4+WZeXDnXUUnkjU183
+	 2esunX+zxvqWzjK2bM1otj94VEYFlg/5wjDspAaftC7+xkf+Wj5kFi+9bx3o/zeVMI
+	 adWC+30xIp/W6t62NSl6g2C35NmEV6ElbpfZ1ojsAWqZCaVqg88OPQPp62g/+hC7VF
+	 cn9sp8l93B+PbjWf9DvPwq/9P+HzQ3mgAVd9TRD9T1O/PR8ovWANK8vB9sRa7ll7Xl
+	 61kx+eSyTB8Q9Pi1ofldzLFVhvRnCwcEgu3Fv68lz8PO/pc6Tt5mCl3pe9Yjg5dsNK
+	 COEXZLOq5GDSA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6F75E606FF;
-	Mon, 14 Sep 2026 14:17:41 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 07DC82D0
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1BAD980EA6;
+	Mon, 14 Sep 2026 14:17:43 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 14F53362
  for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E289240631
- for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:17 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 06C8180D93
+ for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Nx1USFzq8bFf for <u-boot@lists.u-boot-project.org>;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id a6ewIIuodfFK for <u-boot@lists.u-boot-project.org>;
  Mon, 14 Sep 2026 11:10:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 398F340635
-Authentication-Results: smtp4.osuosl.org;
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 39FB680DA1
+Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789384217;
- b=C9ZMuvSXGsKPZrG9GTWskA2Ehr4sWlWzbvSK1DjA+Ol4f0r5Q5yYnWD5Aer8V+J333/B
- Ka3YmSBv5poOw5yTPKUvRl5/U9q6YGeA+w8llchih8rROBULaU8leDEAyBeCymz0UYT+G
- hBzYZYVjHy2DViXn2v2B+6WXRkXMJ5WBVGxUSEMMxrc3GUEo2niUrDiq0IIxrRyA98RdO
- 126sntCRifShN8qbNsKKZSG902WJdkel5ldF0tBTT5HV7X4DyPRgnCafr5s2k4j42O48D
- fy1qJ6g3hbld1J6gPrknp2M5+ukIZe0d4fZg1dosfb3UzNRHXOZrjvBq2Zgf7WtqE+g==
+ b=Zpa0ERg5bOsAzU6cuQLltQi4gs+kP7ULCRj1mW2dm695siCK4wo0f7PgO2i9g0QsKiUZ
+ ofqpc87QGuvThp/BOO2dBeR1RgIGKEM5avmVYne9io9n1og9k2GGzGkjC7anN2MYaXA22
+ 3QrcrzT1qkadaGY5HK5A/EfKbZ8qeMyvu1lGvimWp7U79FBl5HZGsMgNklylWaMk3S2wc
+ RGZsI/gKP+sQrobua+pdF5WMXGUXxLQ/msRKMWGZbcFceK4kFw7fhWoe15ASwPIfBLO2h
+ 8+9axs+f4gtg3kVvlIPCVOHjKj5ZI4/QEaKZCR2sbTqTWe9CfDRD11YFBXKjNfs6vkQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1789384217;
  h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=UZpA+OZSHuMwQN0nTcxvaMn+SvjplDHx4/gQX8SzPTM=;
- b=LFZMC6JoQ7veQCiWVDGcrE67DO+W2LEIf8MNm9T3Imz+Bg09VEJ2rvMrd5LuUQPuMx4O
- LcHPiCItD4ti1mZkKY/WOFykrjgs3CYquaSUkX9RKE77JeKX7zwGr/HFGK+ctqLeewFkT
- 0+DX7jfp7JD0dd1cy0/ETIwlDCThDDOzjzghyLR79gQa1NJP4tK7LqexvG8YNFdD8PNae
- H5lbqiG8j6GI8wM5SGSo8PaxjNW6R6GF9uMTf7f6qTIyCVDXXLHK7Kf1alP9z2tmi4Rfs
- qdOXzXSeCpXvpQLb+aFlfilRoVj6p556BGoH+7n4gcc+YYBJGWOIlUvIMGZ5cospHrw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=6IdFlk80W68Om9bKdr5/1riIG/Fd3UzNTNeZ9XjovaE=;
+ b=f0vr/1OtPZ3pRbwYiGQNSQi3QlXHhoY/bXueZveUY9oDUc2GQI/Bu7uPmAKT54zIAYXn
+ OrCuFJfIeLCh5Rm7HITwwsmMVPexE6+o4nE/vPhFuJ3wfnFw2cHWe/kqY1AvWGYSEu/bF
+ csliuEW2JvUyD7coDh8v8pBQwtzw8HpclqclCQ2ICpo0lzfAm3sE/WalDpUQyD1aU0sB8
+ q1HlFvGykIyffozG+fx7Sx4a/ah/c8w1tPX0anOAAhn21GDJKMGZhRMbMe5LSwGBAC1Ll
+ 9ayPOnnActUHn6P+G/afBzsQ8UsYLYQ2EvxBsPPMFlKeC+bhymBSy/kOGP9s5ZJUWEQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=arm.com; 
  dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=ZqRmCRC8; 
+ header.b=Maxg7weB; 
  arc=none smtp.remote-ip=217.140.110.172
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
  helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=ZqRmCRC8
+ header.a=rsa-sha256 header.s=foss header.b=Maxg7weB
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp4.osuosl.org (Postfix) with ESMTP id 398F340635
+ by smtp1.osuosl.org (Postfix) with ESMTP id 39FB680DA1
  for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:16 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5706F2EDF;
- Mon, 14 Sep 2026 04:02:04 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C82341C2B;
+ Mon, 14 Sep 2026 04:01:26 -0700 (PDT)
 Received: from e132995.arm.com (unknown [10.57.49.141])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 80B963F86F;
- Mon, 14 Sep 2026 04:02:06 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1649C3F86F;
+ Mon, 14 Sep 2026 04:01:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1789383728; bh=D5V/iOFLyaptZfV74pMFzj55BwhzEnWW0vfLvpxdvd4=;
+ t=1789383690; bh=PVQhgQNKu3ossKQrQP56LdchsNYBLhZ3hc2TeyRK2Es=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ZqRmCRC8WKUYudCHSgN9egQ3I6oWYS9gDypEuMrKFtjB+au9BXEwxzGai3Bl9OFoT
- Qbea1/t6UwJlCcmwhoeHJRZV6U+vP4SCakE6hldPh9c5OBQzpR3GFxtbXHpp8LTxU5
- oKImzqVaIRr/Ee7lXImtJesAHy/OquU0CI1OYZXY=
+ b=Maxg7weBIdX23SiSdVamN7/brWiQJePPADSQEPU9saVTkTttlp1AEeZ77zWtsHhNq
+ wtoNFNtu/5dN9+ylV+u+4S2dqps6qpz/tsqw4e0H3ojqZdWG+hiWn/AN46QS5tr45S
+ M6EMYY5WFe0pXu+3RwmaoDPWoYfSLFTPaQ/dZjC4=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -121,10 +123,10 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Devaraj Ranganna <Devaraj.Ranganna@arm.com>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v5 22/22] doc: bootefi: note two-phase runtime variables
- selftest
-Date: Mon, 14 Sep 2026 12:01:06 +0100
-Message-Id: <20260914110106.1974894-23-harsimransingh.tungal@arm.com>
+Subject: [PATCH v5 02/22] arm-ffa: store boot-discovered runtime data
+ separately
+Date: Mon, 14 Sep 2026 12:00:46 +0100
+Message-Id: <20260914110106.1974894-3-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
 References: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
@@ -144,82 +146,153 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The bootefi documentation did not describe how to run the
-runtime-variable selftest, so users had no guidance on its reboot
-requirements or on which flow applies to their configuration.
+The FF-A runtime transport needs the framework version and U-Boot
+endpoint ID after ExitBootServices(). Keep these fields in a dedicated
+runtime sub-structure inside struct ffa_priv so they can be copied into
+resident storage later.
 
-Document the runtime-variable selftest flow in bootefi.rst. Describe
-the non-volatile path, note the single-run
-CONFIG_EFI_RT_VOLATILE_STORE=y case, and show how to select the
-runtime-variable selftest with efi_selftest.
+Update existing users to access the values through uc_priv->rt. This
+does not enable runtime behaviour yet.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Acked-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-
 ---
-Changelog:
-===============
+ drivers/firmware/arm-ffa/arm-ffa-uclass.c | 12 ++++++------
+ include/arm_ffa_priv.h                    | 22 +++++++++++++++++-----
+ test/dm/ffa.c                             |  6 +++---
+ 3 files changed, 26 insertions(+), 14 deletions(-)
 
-v3:
-
-Simon:
-
-- Clarify the volatile-store runtime-variable test flow
-- Note that the split-phase tests only run when selected through
-  efi_selftest
-
-v2:
-
-Simon:
-
-- Update the doc to match the v2 new efi selftest flow
-- Document single-run behavior for volatile-store builds
----
- doc/usage/cmd/bootefi.rst | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
-
-diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
-index 7c5448586b7..0a7800b93ce 100644
---- a/doc/usage/cmd/bootefi.rst
-+++ b/doc/usage/cmd/bootefi.rst
-@@ -160,6 +160,37 @@ environment variable to match one of the listed identifiers
- Some of the tests execute the ExitBootServices() UEFI boot service and will not
- return to the command line but require a board reset.
+diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+index 76a8775e911..eb159dbfade 100644
+--- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
++++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
+  *
+  * Authors:
+  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+@@ -204,7 +204,7 @@ int ffa_get_version_hdlr(struct udevice *dev)
+ 		if (dev) {
+ 			uc_priv = dev_get_uclass_priv(dev);
+ 			if (uc_priv)
+-				uc_priv->fwk_version = res.a0;
++				uc_priv->rt.fwk_version = res.a0;
+ 		}
  
-+When CONFIG_EFI_RT_VOLATILE_STORE is enabled, the test
-+*variables at runtime* completes within one *bootefi selftest* run, so
-+it does not depend on preserving state across multiple runs. It still
-+executes ExitBootServices(), so a board reset is required afterwards
-+before returning to the command line.
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime'
-+    => bootefi selftest
-+
-+When CONFIG_EFI_RT_VOLATILE_STORE is not enabled, the runtime-variable
-+flow is split into *variables at runtime setup* and
-+*variables at runtime verify*. Run the setup test once to create the
-+runtime-accessible variable in non-volatile storage, reboot, then run
-+the verify test to validate, append, and delete that variable.
-+Both phases are on-request tests, so they only run when selected by
-+``efi_selftest``.
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime setup'
-+    => bootefi selftest
-+
-+After reboot:
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime verify'
-+    => bootefi selftest
-+
- Configuration
- -------------
+ 		return 0;
+@@ -238,8 +238,8 @@ static int ffa_get_endpoint_id(struct udevice *dev)
+ 			}, &res);
  
+ 	if (res.a0 == FFA_SMC_32(FFA_SUCCESS)) {
+-		uc_priv->id = GET_SELF_ENDPOINT_ID((u32)res.a2);
+-		log_debug("FF-A endpoint ID is %u\n", uc_priv->id);
++		uc_priv->rt.id = GET_SELF_ENDPOINT_ID((u32)res.a2);
++		log_debug("FF-A endpoint ID is %u\n", uc_priv->rt.id);
+ 
+ 		return 0;
+ 	}
+@@ -461,7 +461,7 @@ int ffa_unmap_rxtx_buffers_hdlr(struct udevice *dev)
+ 
+ 	invoke_ffa_fn((ffa_value_t){
+ 			.a0 = FFA_SMC_32(FFA_RXTX_UNMAP),
+-			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->id),
++			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->rt.id),
+ 			}, &res);
+ 
+ 	if (res.a0 == FFA_SMC_32(FFA_SUCCESS)) {
+@@ -890,7 +890,7 @@ int ffa_msg_send_direct_req_hdlr(struct udevice *dev, u16 dst_part_id,
+ 
+ 	invoke_ffa_fn((ffa_value_t){
+ 			.a0 = req_mode,
+-			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->id) |
++			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->rt.id) |
+ 				PREP_PART_ENDPOINT_ID(dst_part_id),
+ 			.a2 = 0,
+ 			.a3 = msg->data0,
+diff --git a/include/arm_ffa_priv.h b/include/arm_ffa_priv.h
+index d564c33c647..3c74c63dfa6 100644
+--- a/include/arm_ffa_priv.h
++++ b/include/arm_ffa_priv.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
+  *
+  * Authors:
+  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+@@ -200,11 +200,24 @@ struct ffa_partitions {
+ };
+ 
+ /**
+- * struct ffa_priv - the driver private data structure
++ * struct ffa_priv_runtime - the driver's private runtime data structure
+  *
+  * @fwk_version:	FF-A framework version
+- * @emul:	FF-A sandbox emulator
+  * @id:	u-boot endpoint ID
++ *
++ * The device private runtime data structure containing all the
++ * data read from secure world.
++ */
++struct ffa_priv_runtime {
++	u32 fwk_version;
++	u16 id;
++};
++
++/**
++ * struct ffa_priv - the driver private data structure
++ *
++ * @rt:		Runtime data captured at boot time
++ * @emul:	FF-A sandbox emulator
+  * @partitions:	The partitions descriptors structure
+  * @pair:	The RX/TX buffers pair
+  *
+@@ -212,9 +225,8 @@ struct ffa_partitions {
+  * data read from secure world.
+  */
+ struct ffa_priv {
+-	u32 fwk_version;
++	struct ffa_priv_runtime rt;
+ 	struct udevice *emul;
+-	u16 id;
+ 	struct ffa_partitions partitions;
+ 	struct ffa_rxtxpair pair;
+ };
+diff --git a/test/dm/ffa.c b/test/dm/ffa.c
+index 593b7177fce..a0c95e62607 100644
+--- a/test/dm/ffa.c
++++ b/test/dm/ffa.c
+@@ -2,7 +2,7 @@
+ /*
+  * Functional tests for UCLASS_FFA  class
+  *
+- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
+  *
+  * Authors:
+  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+@@ -26,14 +26,14 @@ static int check_fwk_version(struct ffa_priv *uc_priv, struct unit_test_state *u
+ 	func_data.data0 = &fwk_version;
+ 	func_data.data0_size = sizeof(fwk_version);
+ 	ut_assertok(sandbox_query_ffa_emul_state(FFA_VERSION, &func_data));
+-	ut_asserteq(uc_priv->fwk_version, fwk_version);
++	ut_asserteq(uc_priv->rt.fwk_version, fwk_version);
+ 
+ 	return 0;
+ }
+ 
+ static int check_endpoint_id(struct ffa_priv *uc_priv, struct unit_test_state *uts)
+ {
+-	ut_asserteq(0, uc_priv->id);
++	ut_asserteq(0, uc_priv->rt.id);
+ 
+ 	return 0;
+ }
 -- 
 2.34.1
 
