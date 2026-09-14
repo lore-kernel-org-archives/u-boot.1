@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06A4EC88E75
-	for <u-boot@archiver.kernel.org>; Mon, 14 Sep 2026 14:18:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC42AC88E78
+	for <u-boot@archiver.kernel.org>; Mon, 14 Sep 2026 14:18:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C1B4E6074F;
-	Mon, 14 Sep 2026 14:18:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 61B478107C;
+	Mon, 14 Sep 2026 14:18:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SPYle2L8J34g; Mon, 14 Sep 2026 14:18:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A35A360702
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789395489;
-	b=Ohrxe4riflAwg7W8nA+DKQtb2ObOfBXF6BRhAla4Kd5hlcCsTsrKqGhsVG6XLdhnouOM
-	 IepaEqs7lrzU7LS/xI03ryw6AWFkElolBwP+ShLtnwi7s6o+s7R0WvT1dCvtDCXxcnCIv
-	 MLW9+aHhfqMO36f6Tf0TCh5NCYVwBWfvP93MYR9rf1IsGA36lDNPKdaQMNpoy5ptx2B2q
-	 z8FMdsCW6pCqqgQoNzR7/VKVRpyNSMqTYgYVT82IwjVa01RcfyPFkZyNXcmYUEjoDC4OC
-	 TIUGBPoXUTa4ykmp+skF1fu7GTDsJ3IzMRt7OJHeUDDrWSVQ/bnEBf3OH/O8HGgDILw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oJE2vWX7KXzG; Mon, 14 Sep 2026 14:18:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org DCB3680E14
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789395488;
+	b=P8EYApgA3wd22LRXT66nc7vLIyKMVg7ZBRKVuv4qNNtxov7xvN1inw6XT5V7TYZKv7UJ
+	 qjsGfZBFsV4VdyNT3eRnctNn7Ni1Ten2/R+nOJxk+q/t38krmeQ+rxyEQcn1IDk4ry5rJ
+	 F73Xsf2DrbzXlv01rH1AMOAsfQ7Kuqj24SMVSOV25thaNe21Hbenc+1RPIhBNcWkPKe6P
+	 N7h4EzxfQ9PeN2bOCwHgQQMeoMKOcLJtAk6JBuq/8nm8i5QarFDc2innIwSrm/3GamEBC
+	 ANW+YhZs+Ky8Qw6HEm2OFzRR6fT012z6c7sq9UYYslZZ1WxgsLBOVnTRbebsqCtho9g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789395489;
+	c=relaxed/relaxed; t=1789395488;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,90 +31,88 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Ul2qNMz3vChvvKo1otzkxwqYsstVw3k+HneFNsy97lk=;
-	b=QxfjZn7yvfQ0zqDaHHZhM7XfUT/0CyX+NNBCiuFr+BjcP/ias/8y3G0eCzmWrerIzh/9
-	 gw9sBRYZAGuedwLr4GsaCXX36pTkGLyMg1uprbVRtZwB7gb1QEx9iEpk8qi5xJpWZluSO
-	 yjZ4Lb1N8uS/I2aG7xkkp2BtDsg9YXhHt6zzXqJK6PeE9zE/2PJXTQlh31itIxsq0f9t+
-	 GtM410tCv0ppnNAXoqTHDomqFM4e0fZOPlZIyP16q0GGgruoBA5rvHWziUXj6Fgzr0rs3
-	 oYCgVMveJ0x5CrtpWe/MLGX9CAsQlCzLzO6WPTz/w1zs9lsvXyY905PT3n+9uhLC8Wg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=arm.com;
-	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=NRGNe7cI;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=BJg/ZSdA1qjFxBAEQTv/TBOQLRwnTdI70KN3EMkfO7Y=;
+	b=cehe/20bf2RPxwmKp35/IBRh2R2wRjwpHDF8zyiEYMkZSpcOWStjdFEL8YWM6NiWhXxi
+	 jEryqjGKmGkXqvBqHfQnZf6FWTpBdexYwe+PZzFj6H8IN5gT+dccKy820GG4Hihyrq1D/
+	 LsB4dlVWiuxxes9G/EzOeR3K7uEcIy7hsiV/lSNfhMnsbz9ZQW6Ec4n3PEMhvbozvMK9r
+	 LaP6PxOKPxyDi5oH11q93Bzp1q7gSmvMDPDBvbOz56jQLX3OyxOOV+pSmPQ4TgqmPij5o
+	 itf8nTuTLuNJkJFg1fDRxP/Sdn/iPbcX1bQcDbMOnWS3azi59Zg9Opsnn79tG+1RBjQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789395489;
-	bh=Ul2qNMz3vChvvKo1otzkxwqYsstVw3k+HneFNsy97lk=;
+	d=lists.u-boot-project.org; s=default; t=1789395488;
+	bh=BJg/ZSdA1qjFxBAEQTv/TBOQLRwnTdI70KN3EMkfO7Y=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HWmPigPvbfC5mHlBWVfRexRxCXcsUiAUV4u5nuBlRt/qmixA97fZGdQ0KuyohVaQq
-	 hJCA814GjxYbUcX1R1s7VBzXI639Q9vypAS7t+gmHPpxLhXG8ZInvnm8SArunPojLG
-	 eLyFMjssM0waRqpJiA1Z9b0RF7/lu+m47bqTbcEB5bojmXPR5K9UXyxDvdU/blkLut
-	 yJRQocP5HTMtPsHbWdElwrxVZOLzmro7uiVuIps1hNZJlH8iPrnkPE2rP81oKDk9M7
-	 JxP7qxWWbp38vg7gHG0l+nUxdCIf6kUsp96u9IBEq7k/AzMPlv+UV2VMoGF6jncjJf
-	 D9y57m7CHK7Vg==
+	b=gjTlLbaM9G3j6zPz/lvK3u4ohNYREpdoQ3z++0Gdc7MpXDz8FWJuLGDCkqRVTLB63
+	 uKyVPiG/UwJaXIabBvcTAIrVmzv5lg6C0a/u08TLKkmoOUj+h01jxtutPCXuuLWESF
+	 FyWR2Z3cJp+XsWzFvXxzT/p7jwOH3P0XBBYVmcTQGHHsLb0ZsWlnPL5Fs073hOBMGs
+	 rIqYkZOIvOa+rPnjUI2uPH186p0J7rOBjN1/LpRKjip5rAPWyjzN9kCqSKm/S6RhwB
+	 7dsdEuQZ1xLzULXI4WJeIky0afxwpNUhkkwuN6gp14rt62WXmuXhymjZ3rMD09o7DC
+	 JbIu7X3UGC+KA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A35A360702;
-	Mon, 14 Sep 2026 14:18:09 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id E92EE49D
+	by smtp1.osuosl.org (Postfix) with ESMTP id DCB3680E14;
+	Mon, 14 Sep 2026 14:18:07 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id B81DB465
  for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CEEF4605EF
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9DF0D4052C
  for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0Sg7vbHAxEz7 for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dVLPL0DgnuJK for <u-boot@lists.u-boot-project.org>;
  Mon, 14 Sep 2026 11:10:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 595056068C
-Authentication-Results: smtp3.osuosl.org;
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org ACF754063E
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789384217;
- b=RgMFBiOi/dnJjExAYhKQWJ3vQwIcN/VjN33TfZEMeJE6D7dioHJ3uneD02bNQylrSNN2
- FQrQjdlPBEx//oyQddqFjqiMiczJeotO41KOwRmPO6CvSDZ/ctonAcGAkX5QBACF91hBD
- +ihAtBuUEJhn0UMpma+NGF0H5xYllvUnHHIGdj8zg/22tJnZDzCcw1uvnAB0WCbCLbdUd
- KeAjzNGSlUIKuMFx6Oj82j0pn9cnLwVpOHjiVoU3vwOqHNyodymjkiFYLaFcyd2AnHbAy
- JBHqa8R0/oW/kGS44kc7I0XKUmJJPBWuXfSB4uZhxj0IjTfexSRzxzB4LyYk0iUO+Qg==
+ b=qoJQ6+/ZjBF6oKnXPD4VS/LAaEA1Rx5IxPndxB2tFJ0QAQBcE8RD+pLvL6ElteDrSywh
+ gjcN0Pol5yqL8OvL4wmH05sy25Y9lSrzsF7jJP3PfRh3cbPAIM6jifcOOlSb6HVpTcnvh
+ EaJGd6yF9s07uiLndBMPR/4Cq+lf7BqoZQos4pQ6KGf8Ix3h3V49p1zcu8gD8Aq/IaaII
+ 9WIoAcVPFidbSZmCabUiwrr9Nh9RKLrkl5RA+X/9UQnUXzBQp2vEZC0k5K7szF2IhnsmE
+ ijBqAlu9P2NOCeRApH2UEbYU2mQDbU6lCdD9LeOjvWH/bXCesHlBVxohzYy+OgfYa/w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1789384217;
  h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=Ul2qNMz3vChvvKo1otzkxwqYsstVw3k+HneFNsy97lk=;
- b=QZxA6DE/nmsPL6PRoPdpW3ZisLEJ4BLimdLW5wywEEMmmZ1eECg2GzwRMQqJrhM0F0k+
- Y6dRUVkRj4vG5b1R2URgs0VMugWTwiU4JuW/ADXqgixbRFoYtiadA0Cgk5vrgbwaP2f0g
- CKGyD7/x3scnfwuoOxeAXALzOK1JxdHnQx8iy27amwitXbuD169/fCV+DzOcZr8/5M0p6
- 99y+vLq5ESuey85Gp9+tF/Vgc2a823Xrihn+B9/kzwToGP0y5e6I0sPZNS2EgmOFEmxyI
- gjRGS9uvIQQNOuxU3u9ZJn+3q8DJoBzn9w3uHvPdri2v/cxQPO7SsCOek8bcIyol93Q==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ bh=BJg/ZSdA1qjFxBAEQTv/TBOQLRwnTdI70KN3EMkfO7Y=;
+ b=cZnTDN7OSZtkw38njv6ONTErKhSeIaLqoTZQoY0LllNzjfRI2qhOGA8zXFt/S5MblWs9
+ a58hVAOMdGnp7++lMxs1IomoGQ7L/LGwfPyaugw2OOgmVmOuM37P6drNtpb9vlvxMsr4S
+ ShjUpe1Dv4/DoItqiAUj+rz4WjYsgojIxk3BG/MFuBLkKROkByIjMENZkCrd/aXcZUgFS
+ K8Oe2TdG+dKsyNoXDjDDZ/raWQwJdMQoMHSssxfQDppKHbh9e134NHUXlLosxFo/IOIwh
+ clFHfb0Nc2lI1JttZaLF0yPVvzXEC8O8l4GYBAH8kB/GS/6zfVmdB7nWPyKKO8FFQdA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=arm.com; 
  dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=NRGNe7cI; 
+ header.b=h1t3w5d1; 
  arc=none smtp.remote-ip=217.140.110.172
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
  helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=NRGNe7cI
+ header.a=rsa-sha256 header.s=foss header.b=h1t3w5d1
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp3.osuosl.org (Postfix) with ESMTP id 595056068C
- for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:16 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id ACF754063E
+ for <u-boot@lists.u-boot-project.org>; Mon, 14 Sep 2026 11:10:17 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6D2362C27;
- Mon, 14 Sep 2026 04:02:00 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7B8121E2F;
+ Mon, 14 Sep 2026 04:01:44 -0700 (PDT)
 Received: from e132995.arm.com (unknown [10.57.49.141])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 66BCD3F86F;
- Mon, 14 Sep 2026 04:02:02 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D1D9A3F9A2;
+ Mon, 14 Sep 2026 04:01:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1789383724; bh=r7zSDZ7Ue7o1LSQq1GwGxqI6eGch3Yt+8RtG0SPrKt0=;
+ t=1789383708; bh=EIQeDuVi+Q2JAr4X7xRTwimVOTGFFazt4GFceBP8JWE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=NRGNe7cI0uMk0A4RbNftsv86xhS92wZMDYrDci4Uo5GEnVRLfs+Y4ZW14DpO1k2CE
- ofoXf2hlfNMWJgbW3R+PQoBm3OdhVyxf7CZ9aW3G8gGz7N8qgnIV32uv+mBRTHsBV/
- 8uIdK0sMo7+pwEHP2hA5s8IKHOP1Gn5bbR9eAQ5w=
+ b=h1t3w5d1Vd2YKEIZCSvBM+7IqDhjviASgLmOwpsX3NnYzUMKfaR9Nkv+KarRkFkWB
+ GLay4HKod1YjIAR5uODstmWU1NxBNxVSmxHSAlh/h322oX4yz4bmrEnZ5xq87momNq
+ 6ah9lVICjxDfYMP0SCxxMJxgjqy6jmNhiXVaX7g0=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -123,9 +121,10 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Devaraj Ranganna <Devaraj.Ranganna@arm.com>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v5 20/22] test: dm: add sandbox FF-A runtime transport tests
-Date: Mon, 14 Sep 2026 12:01:04 +0100
-Message-Id: <20260914110106.1974894-21-harsimransingh.tungal@arm.com>
+Subject: [PATCH v5 12/22] efi_loader: reserve FF-A shared buffer for runtime
+ variables
+Date: Mon, 14 Sep 2026 12:00:56 +0100
+Message-Id: <20260914110106.1974894-13-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
 References: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
@@ -145,324 +144,244 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Exercise FF-A runtime helpers via sandbox DM tests
+Use the statically reserved FF-A shared MM buffer for EFI variable
+runtime communication after ExitBootServices(), since dynamic allocation
+is no longer available.
 
-Test the successful runtime direct-message round trip and the invalid
-destination-partition case, using the shared FF-A prepare step so the
-sandbox emulator has initialized partition state before exercising the
-runtime-only messaging helpers.
-Add a dedicated no-context test that calls
-ffa_sync_send_receive_runtime() before enabling the runtime context and
-checks that it returns -EPERM. Reset the resident FF-A runtime context
-around the transport tests so the runtime flag and private data do not
-leak across test cases.
-Split the ffa_to_std_errno() checks into a separate DM test so
-error-mapping regressions are reported independently from transport
-failures. Cover both the valid mappings and the boundary inputs that
-must return -EINVAL.
-
-Replace the hard-coded synthetic partition execution-context and
-property values in ffa-emul-uclass.c with the shared
-SANDBOX_SP*_EXEC_CTXT and SANDBOX_SP*_PROPERTIES macros. This lets the
-sandbox emulator and tests reuse a single definition of the synthetic
-partition metadata.
+Keep the shared-buffer pointer convertible across
+SetVirtualAddressMap(), add the buffer to the EFI runtime memory map,
+and reject runtime requests that do not fit in the configured shared
+buffer.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 
 ---
 Changelog:
 ===============
 
+v5:
+
+Ilias:
+
+  - Guard FF-A shared-buffer references for OP-TEE-only builds
+
 v3:
 
 Simon:
 
-- Drop (void)uts; from dm_test_ffa_to_std_errno()
-- Refactor the repeated runtime setup/reset flow into shared helpers
-- Use 0xffff in the nack test to hit the intended invalid-SP path
-- Remove the stray blank line in the sandbox partition table
+- Document the get_comm_buf() ownership contract for boot and runtime
+- Zero only the active comm_buf_size in the runtime shared-buffer path
+- Add SetVirtualAddressMap() handling for ffa_shared_buf via
+  efi_convert_pointer()
+- Add a BUILD_BUG_ON() for EFI-page alignment of
+  CONFIG_FFA_SHARED_MM_BUF_ADDR
 
 v2:
 
-Simon:
+Ilias, Simon:
 
-- Drop unused `sp_id` handling from the negative-path test
-- Add no-context `-EPERM` coverage
-- Reset the FF-A runtime context between tests
-- Split errno-mapping checks into a dedicated DM test
-- Add invalid-input boundary coverage
+- Move shared-buffer reservation to the end of init
+- Add a runtime shared-buffer bounds check
+- Document the shared-buffer page-alignment assumption
+- Reword setup_mm_hdr() documentation
+- Narrow mm_var_guid scope
+- Update the copyright header
 ---
- arch/sandbox/include/asm/sandbox_arm_ffa.h |  16 ++-
- drivers/firmware/arm-ffa/ffa-emul-uclass.c |  37 +++++--
- test/dm/Makefile                           |   3 +-
- test/dm/ffa_runtime.c                      | 123 +++++++++++++++++++++
- 4 files changed, 166 insertions(+), 13 deletions(-)
- create mode 100644 test/dm/ffa_runtime.c
+ lib/efi_loader/efi_variable_tee.c | 130 +++++++++++++++++++++++++++---
+ 1 file changed, 119 insertions(+), 11 deletions(-)
 
-diff --git a/arch/sandbox/include/asm/sandbox_arm_ffa.h b/arch/sandbox/include/asm/sandbox_arm_ffa.h
-index be2790f4960..a20eb159b73 100644
---- a/arch/sandbox/include/asm/sandbox_arm_ffa.h
-+++ b/arch/sandbox/include/asm/sandbox_arm_ffa.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -26,6 +26,20 @@
- #define SANDBOX_SP3_ID 0x6452
- #define SANDBOX_SP4_ID 0x7814
+diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
+index 7f35ac7dd22..a03f2091eb4 100644
+--- a/lib/efi_loader/efi_variable_tee.c
++++ b/lib/efi_loader/efi_variable_tee.c
+@@ -56,9 +56,12 @@ static const char *mm_sp_svc_uuid = MM_SP_UUID;
+ static u16 __efi_runtime_data mm_sp_id;
+ #endif
  
-+/*
-+ * The sandbox FF-A emulator uses fixed, synthetic execution-context counts and
-+ * property bitfields for each partition.
-+ */
-+#define SANDBOX_SP1_EXEC_CTXT 0x5687
-+#define SANDBOX_SP2_EXEC_CTXT 0x9587
-+#define SANDBOX_SP3_EXEC_CTXT 0x7687
-+#define SANDBOX_SP4_EXEC_CTXT 0x1487
-+
-+#define SANDBOX_SP1_PROPERTIES 0x89325621
-+#define SANDBOX_SP2_PROPERTIES 0x45325621
-+#define SANDBOX_SP3_PROPERTIES 0x23325621
-+#define SANDBOX_SP4_PROPERTIES 0x70325621
-+
- /* Invalid service UUID (no matching SP) */
- #define SANDBOX_SERVICE3_UUID	"55d532ed-0942-e699-722d-c09ca798d9cd"
++#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
++static void *__efi_runtime_data ffa_shared_buf;
++#endif
+ extern struct efi_var_file __efi_runtime_data *efi_var_buf;
+-static efi_uintn_t max_buffer_size;	/* comm + var + func + data */
+-static efi_uintn_t max_payload_size;	/* func + data */
++static efi_uintn_t __efi_runtime_data max_buffer_size;	/* comm + var + func + data */
++static efi_uintn_t __efi_runtime_data max_payload_size;	/* func + data */
+ static const u16 __efi_runtime_rodata pk[] = u"PK";
+ static bool __efi_runtime_data ebs_called;
  
-diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-index d270f7b614e..3351d2e2edd 100644
---- a/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-+++ b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -19,42 +19,57 @@
- /* The partitions (SPs) table */
- static struct ffa_partition_desc sandbox_partitions[SANDBOX_PARTITIONS_CNT] = {
- 	{
--		.info = { .id = SANDBOX_SP1_ID, .exec_ctxt = 0x5687, .properties = 0x89325621 },
-+		.info = {
-+			.id = SANDBOX_SP1_ID,
-+			.exec_ctxt = SANDBOX_SP1_EXEC_CTXT,
-+			.properties = SANDBOX_SP1_PROPERTIES,
-+		},
- 		.sp_uuid = {
- 			.a1 = SANDBOX_SERVICE1_UUID_A1,
- 			.a2 = SANDBOX_SERVICE1_UUID_A2,
- 			.a3 = SANDBOX_SERVICE1_UUID_A3,
- 			.a4 = SANDBOX_SERVICE1_UUID_A4,
--		}
-+		},
- 	},
- 	{
--		.info = { .id = SANDBOX_SP3_ID, .exec_ctxt = 0x7687, .properties = 0x23325621 },
-+		.info = {
-+			.id = SANDBOX_SP3_ID,
-+			.exec_ctxt = SANDBOX_SP3_EXEC_CTXT,
-+			.properties = SANDBOX_SP3_PROPERTIES,
-+		},
- 		.sp_uuid = {
- 			.a1 = SANDBOX_SERVICE2_UUID_A1,
- 			.a2 = SANDBOX_SERVICE2_UUID_A2,
- 			.a3 = SANDBOX_SERVICE2_UUID_A3,
- 			.a4 = SANDBOX_SERVICE2_UUID_A4,
--		}
-+		},
- 	},
- 	{
--		.info = { .id = SANDBOX_SP2_ID, .exec_ctxt = 0x9587, .properties = 0x45325621 },
-+		.info = {
-+			.id = SANDBOX_SP2_ID,
-+			.exec_ctxt = SANDBOX_SP2_EXEC_CTXT,
-+			.properties = SANDBOX_SP2_PROPERTIES,
-+		},
- 		.sp_uuid = {
- 			.a1 = SANDBOX_SERVICE1_UUID_A1,
- 			.a2 = SANDBOX_SERVICE1_UUID_A2,
- 			.a3 = SANDBOX_SERVICE1_UUID_A3,
- 			.a4 = SANDBOX_SERVICE1_UUID_A4,
--		}
-+		},
- 	},
- 	{
--		.info = { .id = SANDBOX_SP4_ID, .exec_ctxt = 0x1487, .properties = 0x70325621 },
-+		.info = {
-+			.id = SANDBOX_SP4_ID,
-+			.exec_ctxt = SANDBOX_SP4_EXEC_CTXT,
-+			.properties = SANDBOX_SP4_PROPERTIES,
-+		},
- 		.sp_uuid = {
- 			.a1 = SANDBOX_SERVICE2_UUID_A1,
- 			.a2 = SANDBOX_SERVICE2_UUID_A2,
- 			.a3 = SANDBOX_SERVICE2_UUID_A3,
- 			.a4 = SANDBOX_SERVICE2_UUID_A4,
--		}
--	}
--
-+		},
-+	},
- };
+@@ -524,8 +527,64 @@ static efi_status_t __efi_runtime mm_communicate(u8 *comm_buf,
+ }
  
- /* The emulator functions */
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index 76aa1fff9ba..2c213c95a09 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -1,7 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
- # Copyright (c) 2013 Google, Inc
--# Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+# Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
- 
- # Tests for particular subsystems - when enabling driver model for a new
- # subsystem you must add sandbox tests here.
-@@ -99,6 +99,7 @@ obj-$(CONFIG_CMD_PMBUS) += pmbus.o
- obj-$(CONFIG_DM_PMIC) += pmic.o
- obj-$(CONFIG_DM_PWM) += pwm.o
- obj-$(CONFIG_ARM_FFA_TRANSPORT) += ffa.o
-+obj-$(CONFIG_ARM_FFA_TRANSPORT) += ffa_runtime.o
- obj-$(CONFIG_QFW) += qfw.o
- obj-$(CONFIG_RAM) += ram.o
- obj-y += regmap.o
-diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
-new file mode 100644
-index 00000000000..3820628f86b
---- /dev/null
-+++ b/test/dm/ffa_runtime.c
-@@ -0,0 +1,123 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Functional tests for FF-A runtime helpers
+ /**
+- * setup_mm_hdr() -	Allocate a buffer for StandAloneMM and initialize the
+- *			header data.
++ * get_comm_buf() - Obtain a communication buffer for MM/FF-A exchange
++ * @payload_size: size of the payload that will be appended to the
++ *                MM communication header
 + *
-+ * Copyright 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ * This helper returns a buffer suitable for constructing an
++ * EFI_MM_COMMUNICATE message. During the boot phase a new buffer is
++ * dynamically allocated. After ExitBootServices(), dynamic
++ * allocation is no longer permitted, and all runtime communication must
++ * use the statically reserved FF-A shared buffer.
 + *
-+ * Authors:
-+ *      Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
++ * The caller owns the returned buffer only during the boot phase and
++ * must release it with free(). During the runtime phase, the returned
++ * pointer aliases the static FF-A shared buffer and must not be freed.
++ *
++ * Return:
++ *   Pointer to a valid communication buffer on success.
++ *   NULL if no suitable communication buffer is available.
 + */
-+
-+#include <dm.h>
-+#include <dm/test.h>
-+#include <asm/sandbox_arm_ffa.h>
-+#include <asm/sandbox_arm_ffa_priv.h>
-+#include <arm_ffa_runtime.h>
-+#include <test/ut.h>
-+
-+static int ffa_runtime_prepare(struct unit_test_state *uts, u16 *sp_id)
++static __efi_runtime u8 *get_comm_buf(efi_uintn_t payload_size)
 +{
-+	struct ffa_partition_desc *descs;
-+	u32 count;
-+	struct udevice *dev;
-+	const char *svc_uuid = SANDBOX_SERVICE1_UUID;
++	efi_uintn_t comm_buf_size;
++	u8 *comm_buf;
 +
-+	ut_assertok(uclass_first_device_err(UCLASS_FFA, &dev));
-+	ut_assertok(ffa_partition_info_get(dev, svc_uuid, &count, &descs));
-+	ut_assert(count > 0);
++	comm_buf_size = MM_COMMUNICATE_HEADER_SIZE +
++			MM_VARIABLE_COMMUNICATE_SIZE +
++			payload_size;
 +
-+	if (sp_id)
-+		*sp_id = descs[0].info.id;
-+
-+	return 0;
++	/*
++	 * After ExitBootServices(), dynamic allocation is no longer permitted.
++	 * Use the predefined FF-A shared buffer at runtime; otherwise allocate
++	 * a fresh buffer during the boot phase.
++	 */
++	if (efi_at_runtime()) {
++#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
++		if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
++			if (comm_buf_size > CONFIG_FFA_SHARED_MM_BUF_SIZE)
++				return NULL;
++			comm_buf = ffa_shared_buf;
++			if (!comm_buf)
++				return NULL;
++			efi_memset_runtime(comm_buf, 0, comm_buf_size);
++		} else {
++			return NULL;
++		}
++#else
++		return NULL;
++#endif
++	} else {
++		comm_buf = calloc(1, comm_buf_size);
++		if (!comm_buf)
++			return NULL;
++	}
++	return comm_buf;
 +}
 +
-+static void ffa_runtime_teardown(void)
++/**
++ * setup_mm_hdr() -	Obtain a communication buffer for StandAloneMM and
++ *			initialize the MM header
+  *
+  * @dptr:		pointer address of the corresponding StandAloneMM
+  *			function
+@@ -534,10 +593,11 @@ static efi_status_t __efi_runtime mm_communicate(u8 *comm_buf,
+  * @ret:		EFI return code
+  * Return:		buffer or NULL
+  */
+-static u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
+-			efi_uintn_t func, efi_status_t *ret)
++static __efi_runtime u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
++				      efi_uintn_t func, efi_status_t *ret)
+ {
+-	const efi_guid_t mm_var_guid = EFI_MM_VARIABLE_GUID;
++	static const __efi_runtime_rodata efi_guid_t mm_var_guid =
++		EFI_MM_VARIABLE_GUID;
+ 	struct efi_mm_communicate_header *mm_hdr;
+ 	struct smm_variable_communicate_header *var_hdr;
+ 	u8 *comm_buf;
+@@ -555,16 +615,15 @@ static u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
+ 		return NULL;
+ 	}
+ 
+-	comm_buf = calloc(1, MM_COMMUNICATE_HEADER_SIZE +
+-			  MM_VARIABLE_COMMUNICATE_SIZE +
+-			  payload_size);
++	comm_buf = get_comm_buf(payload_size);
+ 	if (!comm_buf) {
+ 		*ret = EFI_OUT_OF_RESOURCES;
+ 		return NULL;
+ 	}
+ 
+ 	mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
+-	guidcpy(&mm_hdr->header_guid, &mm_var_guid);
++	efi_memcpy_runtime(&mm_hdr->header_guid, &mm_var_guid,
++			   sizeof(mm_hdr->header_guid));
+ 	mm_hdr->message_len = MM_VARIABLE_COMMUNICATE_SIZE + payload_size;
+ 
+ 	var_hdr = (struct smm_variable_communicate_header *)mm_hdr->data;
+@@ -1077,6 +1136,20 @@ void efi_variables_boot_exit_notify(void)
+ 	ebs_called = true;
+ }
+ 
++/**
++ * ffa_shared_buf_notify_virtual_address_map() - SetVirtualAddressMap callback
++ *
++ * @event:	callback event
++ * @context:	callback context
++ */
++#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
++static void EFIAPI __efi_runtime
++ffa_shared_buf_notify_virtual_address_map(struct efi_event *event, void *context)
 +{
-+	ffa_runtime_context_reset();
++	efi_convert_pointer(0, (void **)&ffa_shared_buf);
 +}
++#endif
 +
-+static int ffa_runtime_setup(struct unit_test_state *uts, u16 *sp_id)
-+{
-+	ffa_runtime_teardown();
-+	ut_assert(!ffa_runtime_context_ready());
-+	ut_assertok(ffa_runtime_prepare(uts, sp_id));
+ /**
+  * efi_init_variables() - initialize variable services
+  *
+@@ -1085,6 +1158,9 @@ void efi_variables_boot_exit_notify(void)
+ efi_status_t efi_init_variables(void)
+ {
+ 	efi_status_t ret;
++#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
++	struct efi_event *event;
++#endif
+ 
+ 	/* Create a cached copy of the variables that will be enabled on ExitBootServices() */
+ 	ret = efi_var_mem_init();
+@@ -1103,5 +1179,37 @@ efi_status_t efi_init_variables(void)
+ 	if (ret != EFI_SUCCESS)
+ 		return ret;
+ 
++#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
++	if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
++		/*
++		 * The FF-A shared buffer is accessed by EFI runtime services, so
++		 * keep the resident pointer convertible across
++		 * SetVirtualAddressMap() and mark the region as runtime memory.
++		 *
++		 * CONFIG_FFA_SHARED_MM_BUF_ADDR is expected to be EFI-page aligned.
++		 */
++		BUILD_BUG_ON(CONFIG_FFA_SHARED_MM_BUF_ADDR & EFI_PAGE_MASK);
++		ffa_shared_buf = (void *)CONFIG_FFA_SHARED_MM_BUF_ADDR;
++		ret = efi_create_event(EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE,
++				       TPL_CALLBACK,
++				       ffa_shared_buf_notify_virtual_address_map,
++				       NULL, NULL, &event);
++		if (ret != EFI_SUCCESS)
++			return ret;
++		ret = efi_add_memory_map(CONFIG_FFA_SHARED_MM_BUF_ADDR,
++					 CONFIG_FFA_SHARED_MM_BUF_SIZE,
++					 EFI_RUNTIME_SERVICES_DATA);
++		if (ret != EFI_SUCCESS) {
++			efi_close_event(event);
++			log_err("EFI: failed to add FF-A shared buffer to runtime map (%lu)\n",
++				ret);
++			return ret;
++		}
++		log_info("EFI: FF-A shared buffer runtime map: addr=0x%lx size=0x%lx\n",
++			 (ulong)CONFIG_FFA_SHARED_MM_BUF_ADDR,
++			 (ulong)CONFIG_FFA_SHARED_MM_BUF_SIZE);
++	}
++#endif
 +
-+	ffa_copy_runtime_priv(&(struct ffa_priv_runtime){
-+		.id = NS_PHYS_ENDPOINT_ID,
-+	});
-+	ffa_runtime_context_enable();
-+
-+	/* Ensure runtime context is available before attempting runtime-only paths */
-+	ut_assert(ffa_runtime_context_ready());
-+
-+	return 0;
-+}
-+
-+static int dm_test_ffa_runtime_no_context(struct unit_test_state *uts)
-+{
-+	struct ffa_send_direct_data msg = {0};
-+	u16 sp_id;
-+
-+	ffa_runtime_teardown();
-+	ut_assert(!ffa_runtime_context_ready());
-+
-+	ut_assertok(ffa_runtime_prepare(uts, &sp_id));
-+
-+	/* Runtime messaging must fail until the runtime context is enabled */
-+	ut_asserteq(-EPERM, ffa_sync_send_receive_runtime(sp_id, &msg, true));
-+
-+	ffa_runtime_teardown();
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_ffa_runtime_no_context, UTF_SCAN_FDT | UTF_CONSOLE);
-+
-+static int dm_test_ffa_to_std_errno(struct unit_test_state *uts)
-+{
-+	ut_asserteq(-EINVAL, ffa_to_std_errno(0));
-+	ut_asserteq(-EINVAL, ffa_to_std_errno(MAX_NUMBER_FFA_ERR));
-+	ut_asserteq(-EINVAL, ffa_to_std_errno(-MAX_NUMBER_FFA_ERR));
-+	ut_asserteq(-EINVAL, ffa_to_std_errno(-(MAX_NUMBER_FFA_ERR + 1)));
-+
-+	ut_asserteq(-EINVAL, ffa_to_std_errno(-INVALID_PARAMETERS));
-+	ut_asserteq(-EOPNOTSUPP, ffa_to_std_errno(-NOT_SUPPORTED));
-+
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_ffa_to_std_errno, UTF_SCAN_FDT | UTF_CONSOLE);
-+
-+static int dm_test_ffa_runtime_ack(struct unit_test_state *uts)
-+{
-+	struct ffa_send_direct_data msg = {0};
-+	u16 sp_id;
-+	u8 cnt;
-+
-+	ut_assertok(ffa_runtime_setup(uts, &sp_id));
-+
-+	/* Runtime messaging should reuse the sandbox emulator and return 0xff pattern */
-+	ut_assertok(ffa_sync_send_receive_runtime(sp_id, &msg, true));
-+	for (cnt = 0; cnt < sizeof(struct ffa_send_direct_data) / sizeof(u64); cnt++)
-+		ut_asserteq_64(-1UL, ((u64 *)&msg)[cnt]);
-+
-+	ffa_runtime_teardown();
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_ffa_runtime_ack, UTF_SCAN_FDT | UTF_CONSOLE);
-+
-+static int dm_test_ffa_runtime_nack(struct unit_test_state *uts)
-+{
-+	struct ffa_send_direct_data msg = {0};
-+
-+	ut_assertok(ffa_runtime_setup(uts, NULL));
-+
-+	/* Invalid partition IDs must be rejected and mapped to -EINVAL */
-+	ut_asserteq(-EINVAL, ffa_sync_send_receive_runtime(0xffff, &msg, true));
-+
-+	ffa_runtime_teardown();
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_ffa_runtime_nack, UTF_SCAN_FDT | UTF_CONSOLE);
+ 	return EFI_SUCCESS;
+ }
 -- 
 2.34.1
 
