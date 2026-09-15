@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD2D5C88E7D
-	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 20:52:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5076DC88E77
+	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 20:52:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 11C6F4067C;
-	Tue, 15 Sep 2026 20:52:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DD4FB406A1;
+	Tue, 15 Sep 2026 20:52:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HUQ8inrbyD8r; Tue, 15 Sep 2026 20:52:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 636784066D
+ id r9QmH6xP-2-V; Tue, 15 Sep 2026 20:52:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 1E1D64066D
 Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789505537;
-	b=WUa9fYRnF1ouZgUN1gDWqPdp/6tLI3TwemdW/YtrO1O/0SWwywHVY3Tm0drGZclg+l2O
-	 XTKv93cOrqwUJHr+gvSoj5J4FTmKhmdFr8ayL5BOqoPPPvv9uj6Q27QSuL5yAQmSkLlHD
-	 0Wza7QRF+um2p6BXxuECT2HdvD7ayMFuQXxl43eR3ohIdvWz8BupLO5G3g7cd38N/1Abr
-	 /fB964UTAyYa44A4iTJFlnpP/JtRZqT9QLaD1fg9vb3XDCbrMmPHzKzNr3Jlqkes63w8/
-	 P3G4kxm13Mxv5xmHH4rmg8RstM6ySEyiWO57SY7h/a4A3bCTLGuTMxA+5zuO+9vfhWg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789505541;
+	b=YHU79SAgNrb0bEtMD5zt75+6xYF4O8+Jf+1jgYpEyD8+Qt9JoFIrrjXDpxzJNLvEiY5l
+	 iOn4lCKfAjtX5CuUJ3o1TPTHHj6Ik417xiJJ3pz+5mebbKJq3yjNDT//p8a+mPXa+8TSb
+	 84G0VvYTn4jZ1m5yEeTkkkLzguH6I71ODtD+2k/rylvVqbl4XaqaEUM6tdvWfD+f5UMZv
+	 D+kydNr28WfEqUioxR1bJItMDSFMhpDdCc1HGZuoUkpXxIt5ljF8ctU6p70CSdk+iuCRV
+	 sl7Ii6lmEvP46iYyX89E+yA7lIIOJJOH9uMsWGjEUT9ks+jrhCSN2PWBQ2rVAvGto2Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789505537;
+	c=relaxed/relaxed; t=1789505541;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,98 +31,100 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=9NfZpupV+ZzlFVvla8veUvnnClATrjY7VplqXyBRtW8=;
-	b=MVQGEBMkxkyf5VVyBWyceDrtAose+28AhwilC6R/DjPWyiruh6hdlaxa5eePcst3RKL0
-	 +HsCpjeu2UpBgxQdAUqMENTYkAav4r2JyE5oUdtnyQPdAbyn6Km1qCQO3pdaaP9rRi94F
-	 4CBQGL7TXHNR7p51e/fm2n8omtz0wcfjrMj/09CfmlIG8oH34ZnAvOmfc5pf/+tB+mMyD
-	 zDh1skxIBtr742ShTqF6u4oUd2V4zx5OCR2Xv2fvwWzVYjqRaQxMvBmqv5Zl607icS/Vg
-	 o1EiyuetbBPkZzpVMeEuupOvUgfZrMXl2S6w7747F7NtaNztl/NwmIlHvaNxGOn+9bQ==
+	bh=9y2IKlC6E3YJ7jmidfZqD5ez5tal9+JxOXhjLRRs4L8=;
+	b=XOAfshf4vShF5qx0L60c98Fuou3DEweeVJ9qfDR5NuRtMrUYffMnp98qfvFIlKKOwno2
+	 1ZojTf81BJGok4aJ4zc184j9tiZlv5lx+S5f+xoulKa9h3naO7hLp0RbXK8R2tJkC7Sqy
+	 AcgujiYUR/suJkG6j01IG7tG6d9lf4ORVmxHzPnvNhs/4Ry3aiO9Ynb/svjGGELq7QTAL
+	 a7tXb2w06f5HuGfDWVnpz0FrO6adg5cZVmGFGtfHSrjsMqn5+o5ciREOrEupwlnp5Yw1I
+	 B3whR0uJAZ5HN9mBhbncuQNlzaarrKbDtSIQkCe0n8C/BagokVQfM2jWhRhV8gaWpsQ==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789505537;
-	bh=9NfZpupV+ZzlFVvla8veUvnnClATrjY7VplqXyBRtW8=;
+	d=lists.u-boot-project.org; s=default; t=1789505541;
+	bh=9y2IKlC6E3YJ7jmidfZqD5ez5tal9+JxOXhjLRRs4L8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=BiOGFvsidj+y+K67EXTfoViyrMEUEqmeC7Ns08nHZjJ1/mJ/ryO+CFkil0l742mdv
-	 0SE7xzrZnQpVWIN97+5cDADA7qqpJ1LbcXSEbJpOKGeLqHTRbFVSRjyRNvNCHI2iaq
-	 G9/lFE9t2rLr4ReEkWR0xkJ74t9+9lPjMrM1ntJStHyXPUkSvCJ4soLxh1XVVaVM4x
-	 RRAX1qPTbia+/WkHi2MO8ctdm+OnUnw78lKoS7eBb8HV03CzS1IjRuVhPHI6vHOxce
-	 4JlwdFOP8bzupvNgQ685x+fSYGbHPVODaG4tmUPwnrtM21oxfBj4GsWA+66LyYHRF2
-	 6rGfjF0BrPOZQ==
+	b=Sb2xPvIGcWGT8Q1L5JFgdfi1km48Fiamgk/WEpKjEPnLqLCtdFDCoMFZztXXWs9mq
+	 nvKlbXBJA6OfXgZN5dVSwmzw92ahcaEMY77V7H5vBUWDy1fq45UW2z1ereWe7CrsUQ
+	 x60mq6vbwWTsEj+21OYCNwGERQ78zS2tuuCZ7yt7K055pELxtPln99MYRTHSpxzhoF
+	 c4LUJmC3Zkmts0UjhyglftEy2BZJrvPdOaxp0rbrs9CdTwQA7bfNYpGIKsuIrP09zK
+	 Li84ahW4lujX0SDjCI1n4uT2qVdqHct4N7lxika3BiMTuRyHg6CRvhapklsN+ORk9V
+	 lh3CeyxBVCtow==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 636784066D;
-	Tue, 15 Sep 2026 20:52:17 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 25F222D0
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 20:52:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1E1D64066D;
+	Tue, 15 Sep 2026 20:52:21 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 35FD52E3
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 20:52:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 1795B80AC8
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 20:52:16 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2882040231
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 20:52:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mZ-toMjWVkhZ for <u-boot@lists.u-boot-project.org>;
- Tue, 15 Sep 2026 20:52:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 72CB580AAA
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=13.77.154.182
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789505535;
- b=JduV5zrdSxcxJ4uHvYSlRwyE5BpOedlYqfNzcqGaN2G67hj5Us8TtY5fW3Pwvh7SerOB
- z0nvUHTjhHlj+LNSzL7vS9C5qSsU1VCaJIZ5LYRgLrMfJ/7LOqkxODrRDg9qnpxEwNXEB
- TlOCt2Lis7vQvh7/jdrfeVG9kNRvom57ouye/mmJILI+GsBn/9kkRTtXdJCn0uZvUo8y/
- lQu3c8IY7+sCZDulDrJw4mesGbeo4qbexk0z2E4k0vOOm06toyU35Zl365nA5eSTXAL7a
- K0Ha9ci+fXn+ZhZYKdoKJFzwJaKqznU0se6WtXwnohc3oA+PRIPFTUcfJ+YC1TGZPSQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Yz_2v7e-hQ4C for <u-boot@lists.u-boot-project.org>;
+ Tue, 15 Sep 2026 20:52:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 7817A40224
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=13.77.154.182
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789505538;
+ b=RaFyCiqTOVeKWnPO+7SmKWeGkoZvqgsYWz4ftsmWDIrk0MVRN6/yjRV7uFb78Dnvl7gG
+ 6KeIP4iFbyixd5f+gWt5k5DYp+qGkETi4xHekTEiU8tpAOPg0b2iZwyL+VstJajgYOTXV
+ cKBLtmLkVBKsAhoY4aBOTucRYpxm5L4ckEUQlzuB6Ga6AUNMXm9ZHJWmLUVHdeT9O3Na8
+ PXbKVzPeYYJwOcPnhvMkHl8KKnYTo3pEdo/O5tYv7fgpXCmjc0uBG90R/oiWJ+KDOSzjv
+ ZG9pt7hGZx+KPfsGbAa1eeqhyd71V35dKOTMhztMjGjSnPvwe5rr251TvYCgOTeOZ6Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789505535;
+ c=relaxed/relaxed; t=1789505538;
  h=Received-SPF:Received:DKIM-Filter:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-Spam-Status:X-Spam-Checker-Version;
- bh=9NfZpupV+ZzlFVvla8veUvnnClATrjY7VplqXyBRtW8=;
- b=P0CEyVqSlcyQSQQGKotOMClFm4wOU2CYOv7jNKQMODryezyeZjgxcyusZH1VR8rgwUOK
- Iu0l+QiLmuyULLZ8+GFL9wqsHAZp4Wee8+bW7dDZjxRLB+cgZ1x0ZYdEzDEYPu87GeLGK
- MjpTV57q34JBdvOpuxlAJsE2wRSHZhiwR5jarLSiRCj6ltuzEHEp845wJO/RmBwxfIY1U
- 3CbIhZWz4hjVZ9movqo+R94MJivYmAtcp1axqcr9Zl31hufJ88gt4r7iJwtvhBMvvmAOK
- 9mFWEJY6ZEsoyDLt3vRK5FAhNLpRjnqQ2hCUukr57DgypabUsfKWkCGIdet34aprrYw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=9y2IKlC6E3YJ7jmidfZqD5ez5tal9+JxOXhjLRRs4L8=;
+ b=aGzN2pZr1f/MICxZeuBCWN2K3zJlowydeE8vX7+a9z1v9z6RdVe+QuMVl5xwQpxPIL7A
+ Z850SweOyA7wsGgLnmJL183nR9ieyGIgcB4cXkDBDAT4Pc2ilE0VUP97qXkacMsxmeaSl
+ s07gUnFht2NOB0XmtMTz8NRTMk2sDmU0bq1v9J4k6n4a27duktS4T69bDVMSgm3zsJrBb
+ 1mU4ypwhOLm98pwIdkR/s3r65koMsW730T3Xq8rVIJ190Xt8xV0NS/ykgzXr9C+mKf5OC
+ nEr5FXiHdgDmmXeTxuiui+pGNXQNhWGx9r7uZ0P4vodCyUN1fPwLiRTW+lokEmEaymA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=linux.microsoft.com; 
  dkim=pass header.d=linux.microsoft.com header.i=@linux.microsoft.com
- header.a=rsa-sha256 header.s=default header.b=TR1wIq3Y; 
+ header.a=rsa-sha256 header.s=default header.b="qI/vFM9G"; 
  arc=none smtp.remote-ip=13.77.154.182
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=13.77.154.182;
  helo=linux.microsoft.com; envelope-from=sriramsriram@linux.microsoft.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=linux.microsoft.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com
- header.a=rsa-sha256 header.s=default header.b=TR1wIq3Y
+ header.a=rsa-sha256 header.s=default header.b=qI/vFM9G
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by smtp1.osuosl.org (Postfix) with ESMTP id 72CB580AAA
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 20:52:15 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7817A40224
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 20:52:18 +0000 (UTC)
 Received: from srirambuild.corp.microsoft.com (unknown [167.220.26.49])
- by linux.microsoft.com (Postfix) with ESMTPSA id 7613120B7169;
- Tue, 15 Sep 2026 13:51:29 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 7613120B7169
+ by linux.microsoft.com (Postfix) with ESMTPSA id 81E0020B716B;
+ Tue, 15 Sep 2026 13:51:31 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 81E0020B716B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1789505489;
- bh=9NfZpupV+ZzlFVvla8veUvnnClATrjY7VplqXyBRtW8=;
+ s=default; t=1789505491;
+ bh=9y2IKlC6E3YJ7jmidfZqD5ez5tal9+JxOXhjLRRs4L8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=TR1wIq3YKNksHYo3Of8f1Sx69do6br9eYDRMi6AgFBKVdh+13eTIpYicutKpIvCG5
- 5FRXPNiaXrgUOgsEnB5My/e469ztM7RL12gG/Q0u12nY13l3+7Psrh7H77sS1gp5FA
- 9Gbe0mMD0yJpz0IAUudhTwSkKtIqiYHogybTpFpg=
+ b=qI/vFM9GZBXb04DVmlyK4v8HO2ZLS9uo4+yTkgv6oocoARYhmXFn3ivkJ/pdW/lFa
+ uBL69c2DikFcVsEXwcY4FZeTN64fZVCu04x+VxYZ0q6p1Bwkbfd5z6L3OMA6emCPQI
+ I3YrqQ8BipcTRkCrklq6pIjmGYYCERIAKAo1avoE=
 From: Sriram Sriram <sriramsriram@linux.microsoft.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Jerome Forissier <jerome.forissier@arm.com>,
  Drew Kluemke <ankluemk@microsoft.com>,
  Daniel Munic <v-dmunic@microsoft.com>,
  Sriram Sriram <sriramsriram@linux.microsoft.com>
-Subject: [PATCH v2 0/3] Bounds hardening in NFS, TFTP and ext4
-Date: Tue, 15 Sep 2026 13:52:07 -0700
-Message-ID: <20260915205210.260404-1-sriramsriram@linux.microsoft.com>
+Subject: [PATCH v2 1/3] net: nfs: add bounds checks on memcpy into
+ stack-allocated rpc_pkt
+Date: Tue, 15 Sep 2026 13:52:08 -0700
+Message-ID: <20260915205210.260404-2-sriramsriram@linux.microsoft.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20260909192016.217183-1-sriramsriram@linux.microsoft.com>
+In-Reply-To: <20260915205210.260404-1-sriramsriram@linux.microsoft.com>
 References: <20260909192016.217183-1-sriramsriram@linux.microsoft.com>
+ <20260915205210.260404-1-sriramsriram@linux.microsoft.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -138,37 +140,74 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Three independent hardening fixes found by internal static analysis and
-code review. They do not depend on each other.
+From: Drew Kluemke <ankluemk@microsoft.com>
 
+Multiple NFS reply handlers (rpc_lookup_reply, nfs_mount_reply,
+nfs_umountall_reply, nfs_lookup_reply, nfs_readlink_reply) copy network
+data into a stack-allocated struct rpc_t without verifying that the UDP
+payload length fits within the buffer. A malicious or malformed NFS
+server response with len > sizeof(rpc_pkt) overwrites the stack frame.
+
+Add a bounds check before each memcpy to drop oversized packets.
+
+Signed-off-by: Drew Kluemke <ankluemk@microsoft.com>
+Signed-off-by: Sriram Sriram <sriramsriram@linux.microsoft.com>
+---
 Changes in v2:
- - Dropped "boot: image-fit: add overflow guard for FIT decompression
-   buffer" (2/4 in v1). As Tom pointed out, max_decomp_len is used both
-   as the allocation size and as the unc_len bound handed to
-   image_decomp(), so a wrapped multiply cannot leave the bound larger
-   than the buffer, and image_decomp() already fails cleanly on a bound
-   that is too small. The claim in that commit message was wrong, so the
-   patch is withdrawn rather than reworded.
- - net: tftp: replaced the four bounded strncasecmp() comparisons with a
-   single check that the packet ends in a NUL, per Tom's review. It is
-   smaller (+16 bytes of .text on am335x_evm_defconfig instead of +24)
-   and it also covers the dectoul() calls, which v1 left unbounded.
-   Retitled to match.
- - Rebased onto current master (a44f46af0aa).
- - No change to the NFS and ext4 patches.
+ - No change, rebased onto current master.
 
-Daniel Munic (1):
-  fs: ext4: widen ext4fs_update() block-group loop counter
+ net/nfs-common.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-Drew Kluemke (2):
-  net: nfs: add bounds checks on memcpy into stack-allocated rpc_pkt
-  net: tftp: verify the OACK packet is NUL terminated
-
- fs/ext4/ext4_write.c |  2 +-
- net/nfs-common.c     | 10 ++++++++++
- net/tftp.c           |  7 +++++++
- 3 files changed, 18 insertions(+), 1 deletion(-)
-
+diff --git a/net/nfs-common.c b/net/nfs-common.c
+index 637fcfd9bb8..226e3fe5798 100644
+--- a/net/nfs-common.c
++++ b/net/nfs-common.c
+@@ -503,6 +503,8 @@ static int rpc_lookup_reply(int prog, uchar *pkt, unsigned int len)
+ {
+ 	struct rpc_t rpc_pkt;
+ 
++	if (len > sizeof(rpc_pkt.u.data))
++		return -NFS_RPC_DROP;
+ 	memcpy(&rpc_pkt.u.data[0], pkt, len);
+ 
+ 	if (ntohl(rpc_pkt.u.reply.id) > rpc_id)
+@@ -532,6 +534,8 @@ static int nfs_mount_reply(uchar *pkt, unsigned int len)
+ 	struct rpc_t rpc_pkt;
+ 	int ret;
+ 
++	if (len > sizeof(rpc_pkt.u.data))
++		return -NFS_RPC_DROP;
+ 	memcpy(&rpc_pkt.u.data[0], pkt, len);
+ 
+ 	if (ntohl(rpc_pkt.u.reply.id) > rpc_id)
+@@ -561,6 +565,8 @@ static int nfs_umountall_reply(uchar *pkt, unsigned int len)
+ {
+ 	struct rpc_t rpc_pkt;
+ 
++	if (len > sizeof(rpc_pkt.u.data))
++		return -NFS_RPC_DROP;
+ 	memcpy(&rpc_pkt.u.data[0], pkt, len);
+ 
+ 	if (ntohl(rpc_pkt.u.reply.id) > rpc_id)
+@@ -584,6 +590,8 @@ static int nfs_lookup_reply(uchar *pkt, unsigned int len)
+ 	struct rpc_t rpc_pkt;
+ 	int ret;
+ 
++	if (len > sizeof(rpc_pkt.u.data))
++		return -NFS_RPC_DROP;
+ 	memcpy(&rpc_pkt.u.data[0], pkt, len);
+ 
+ 	if (ntohl(rpc_pkt.u.reply.id) > rpc_id)
+@@ -645,6 +653,8 @@ static int nfs_readlink_reply(uchar *pkt, unsigned int len)
+ 	int rlen;
+ 	int nfsv3_data_offset = 0;
+ 
++	if (len > sizeof(rpc_pkt))
++		return -NFS_RPC_DROP;
+ 	memcpy((unsigned char *)&rpc_pkt, pkt, len);
+ 
+ 	if (ntohl(rpc_pkt.u.reply.id) > rpc_id)
 -- 
 2.49.0
 
