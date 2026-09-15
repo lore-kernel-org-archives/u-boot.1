@@ -4,165 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BE73C982C1
-	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 15:00:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75D2BC88E75
+	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 15:00:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 40BD780857;
-	Tue, 15 Sep 2026 15:00:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6ADD080972;
+	Tue, 15 Sep 2026 15:00:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id K9tJV2ca7dYA; Tue, 15 Sep 2026 15:00:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 8729280859
+ id wMyQy5_xqKLU; Tue, 15 Sep 2026 15:00:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4804980A87
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789484408;
-	b=pVerfGUGRojZ9KSYD0dsS2MjaZgoSKJPLBDT7L2TakcvoU6DnkzRKbDvhTFjizq3b006
-	 dbb2LbaXjNpmJkgAiLC2vT+nnQU5AKwGh/Al4yyDDdgaXt4wCNQfQq+GA5xdLPXjqScwv
-	 d6EIP+P2KHxbTrMIJ/i7TAvWJxcOulRKdIwhk4i+Yj1CwOhgsEB3MIGroysbfOsuLjT4u
-	 x7mcTfxkZxk1tcytIqRxAuPq1RmDmLVSppURlWl2bFya13QA5zZt9+Nxd6hAYKCQu6tGA
-	 2H5+BJVJEB7eGeRSF2nTIcZs/AdZUHjgUVvBo+pY6T1x3xQIyeKzwFVh8XpnNcFl3/w==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789484410;
+	b=JWkVg8ya3nGggioPYY5ceR69Tgen6aWaldm+VhQvwX+vMm8oVD5hzey8ZsXgSvwngufE
+	 tr0ftv290ZfnEk1rUyKmmRyMoPFpY/wIYYEkJK0GmNNBvYEj7fwCVF/V1d1lqIdvFH7kr
+	 fuMvbpXGBCndYvz4qjXOiK0UBdWqVVQYCV8cw9Qb4ezA8sip7Lu5HU1Q/EQdwacgEdvO6
+	 1uoqYHSRjT0Way8vZiQz/oK+luAABmkvXkc22A+UCozSgk42FQ/cC+6d81v8mJVBYpHsO
+	 gQZvCqxNbZqQfweSAHGklyDWL14DoZsmPiu783mYO0Cng5iwbHtgMY+Mrgu+AYCGJ0w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789484408;
+	c=relaxed/relaxed; t=1789484410;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=Hm7/fig6UQnYof63Atsztn0VgasbH5ptKerfi88ZT3k=;
-	b=VNNnU1+RCAzliVuwSJmtPe2llstSsRLWM+vJyK7rj+YduutdVQ1dCKsmftDNVvXRt42h
-	 2BCU8CoZq9O/L+ffpvtYLkp5DgEdVjkEzDcJr79J33OEptU8J0Sw61jwlhSQ5uDi8ZfDd
-	 fCxUTRSN21XUxrS0zYkKBlVmCOsbqDVFvzOtzti5Tbzc5vuWLD7y0umEVyB/q/do29oFp
-	 1rkS/3I4hkSOQ1fa+bb9RokQH2rYMIQDnyMM+gAxDAiufllrQNlsMRjMgLnZa/IVFR1Pl
-	 q5BYFIZzy34h6lpZSb35sazuTKpq8r2pZO/m0ZitSAT4mNV5I4T5BhhNLwLAV8OXvdw==
+	bh=CIE7fW/jQ74wTpF14E7UixpKM7NJfasGE06nTq3BiOk=;
+	b=KZQX/bRXNUThXEzM1S4CslVX5PRjWILE2lUuL6mXyFgpirM1Fafb6/4H3/58MgA2z9ds
+	 G72F6N41wCmZ/ZAthK03AVcgGq7D/zZQVU7BGpZmYZdqsEtU3TA15Y5z6h+0f2u4yoP2l
+	 YxMglMFXSZta4hbeAI9206l9Rw3yOUcQ+zMdSHkhrmaqm1/fcMfUdzp1w1dcPL0rLvDmt
+	 XGbQDD6h/DKhJt06bek0bjDK8GCNqp/mQv6Cld3gcwJDVvNzBGPh55TYBmFKzFEhLV0aN
+	 EROaLVNRUtAuobpISPPrwozK7gvKic5jeeJnjo12lzadBcMo/gm+vQw0EfNHLabakkw==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789484408;
-	bh=Hm7/fig6UQnYof63Atsztn0VgasbH5ptKerfi88ZT3k=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=v6hO+nTiJa/h2AjSBIwExzm26M5TPMmrWvxfsPMvJjPG5xWXvkQcfkwaduIJYsik5
-	 K3sMejD+psSauyJiihm9wumSKNuIW0Q0fgjIRrMJUXJ+nKbrIW6O1jxWQNkwvQEEqW
-	 XHtKviuUce9o+LhEyUjVzIQVPGNbXCTFcT7t7wLZIXI8cCeI/mNvCbsQjT8LORyqLb
-	 Wq27h9p5jyNJLHnJNXnVsPTODmIaWoeDotW5TGvv/SiISoDjut/U41nvwPKtBad00I
-	 meN9tEYg9CFc69ap1KUPQ659IcE5IwH6aTWxI6qvqwfuGRK+E4b/8OznM7UrUBoEPK
-	 y7H+mFfBcsuOQ==
+	d=lists.u-boot-project.org; s=default; t=1789484410;
+	bh=CIE7fW/jQ74wTpF14E7UixpKM7NJfasGE06nTq3BiOk=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ZeMzSZbFEnztTKtTOJXefwzlnwiLtPZ25M8Zbq/sB9uY979YofKQJzpXGtK+mudcc
+	 GHOkRdhLmKpKx52NIa7T8kDP2+gEmuamUeKTRh1CActFKfhporu9ckdY+YUvREi7X2
+	 5ipfARVFZwM1S1rt1wT44Zkl8GC4/ZZSZ0zUVD50R6VMjH9eeT5Z8gWfgsMv950HRg
+	 TOjjxqR9006t//+zTVpf5F6cdZ9pZhkmSq7CWZtakjBc1tQVfDrJY/sFdqM1fKsemE
+	 BaOAqJ7HR4u/7lYuZJESOmumV2JcbYvdVx1WjGtYdgUvZph4SZ3o86cQJPvaBg/7Ug
+	 HUyI8SITtku3A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8729280859;
-	Tue, 15 Sep 2026 15:00:08 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id E86A024D
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 15:00:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4804980A87;
+	Tue, 15 Sep 2026 15:00:10 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C0B862E3
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 15:00:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CEB7C400D8
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 15:00:06 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id B2E34606F2
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 15:00:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xX7VPPkuZNZm for <u-boot@lists.u-boot-project.org>;
- Tue, 15 Sep 2026 15:00:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org B2B95400C2
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789484406;
- b=a8pHNl7UFMsu59NWpl4ECn04xDiCHU4cgK0wygIzF/iTlYHzvWlpWqd/eZk6RTsATohp
- amvDUwMLkMud0O84KWeApfdkCA0I1PyYhnNM7qye7/Gk1fPhy/BceTB2BWj4Jh/4SY8F7
- 8+dvuL+5nU0B1SciU6WXom3g9BIpgfYQBDju3hrn9kiksHatAoiR2HiTtyyMLOPflQCyN
- tpPtRvoQ7JmXOSjr/jGP1p30+Qh/sB06nts7VI086QkOFQp/10ADpCdLe3UTaIBYswMJi
- s4q8CAzBWruS/TTu/uFcdL/wnrVYNi5H0XZUa8lCGC97We+bdQ7pxv3G/TkeNbWClUw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id v5FGbY2EpMKy for <u-boot@lists.u-boot-project.org>;
+ Tue, 15 Sep 2026 15:00:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 63E1860689
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:31::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789484408;
+ b=ZW4C4MM5jDISbGO9eCbTApqleqnhNQpJunZYGFaJdP6qcci4eWgCoSTlZtZ20o1A6+uy
+ KxYqy1lt7lO11f4kJFZ1C6lnKqEy7EcqpyMMfssuTfCWxXmg517cW0eI7W8Ii5tmZ2iji
+ Ia7AFtFBAyZXvWRWqTvz3d2eHN305dPEg7pHzm4PF32uJZSvpN1oG9tW7gmIhZoFmX2HQ
+ x9WhzA3ao8jBm7CcijpT0f8wXl1o2zKiGNTJcs5tESpPopo3lpKyAi6QOhPsZlLjo0goh
+ k8qaLJy8tPxI0cH+vhEC1WDHR5Xy5R21CTQ60rkTg5DigJKofVhiwt1lHhS/LPVOjRA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789484406;
+ c=relaxed/relaxed; t=1789484408;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
- Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
- bh=Hm7/fig6UQnYof63Atsztn0VgasbH5ptKerfi88ZT3k=;
- b=WD21sfHlUL98+ev16swJfGEwim8TkJLYo/RkrANq4itiIMq3gl15NQQS07jD2M+kkq7M
- k1TyP8bjqNdqt2pWcNb/h7knEnW3ybvxxOPqpexU6dzkYWLGrGZsfyIwWjBpedX1F7JzB
- QRkNuD1W7iSp5H3vY9enyzXQIAd1ZOV0mIs7koAX5oqPAMjUko1k574OKYmHmXe5hSXP3
- xY24jH2pldzdvHWzDoAcRlUFeI8S6wUN21KYzbktu88IGZXEmtAmL+X2Efe0pRTxZo8/T
- KsNUzrHYz50hO2OJ8qV1M3d0JHNOL2hMv6dUYCTf1E+ZsiMh+WZhsCvaoI2qwKFVfDQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer;
+ bh=CIE7fW/jQ74wTpF14E7UixpKM7NJfasGE06nTq3BiOk=;
+ b=InGFF1WYbPvttWSBHj3FKZ9YjYe+zttY0FUloRlK7QzghI24OJoid+T+3JwAiaOSyZd+
+ BuJx4C7LUgpOro1f4/9tcQty5Ug1ttIWdaFjl3205JZj9cGsifxq9/6k1xzyBsYqDLXn2
+ cM7YkhGJVnLkjh9bRvoMURzjeHa23RuXoF+NyfzQzexM4y6wu6L2LuiheDTMeIkoHicj/
+ XzpGwOFFn1cmBAKq7lUtcAtdAItznbgAo3N0SGfT4OcUwdJCx4t6vQNxkEDzj3GlFjPYv
+ Sz0MSi89mMh3dFeHueHePAw24+KXzXH6s8afC3BnkovrMmCquAg/8x9Hhb8gO6lNC+g==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=RePegQqH; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
+ header.s=google header.b="E360/C3l"; 
+ arc=none smtp.remote-ip="2a00:1450:4864:31::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::11; helo=mail-wm2-x11.google.com;
+ client-ip=2a00:1450:4864:31::10; helo=mail-wm2-x10.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=RePegQqH
-Received: from mail-wm2-x11.google.com (mail-wm2-x11.google.com
- [IPv6:2a00:1450:4864:31::11])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B2B95400C2
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 15:00:03 +0000 (UTC)
-Received: by mail-wm2-x11.google.com with SMTP id
- 5b1f17b1804b1-49e71cdb22bso22431475e9.2
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 08:00:03 -0700 (PDT)
+ header.s=google header.b=E360/C3l
+Received: from mail-wm2-x10.google.com (mail-wm2-x10.google.com
+ [IPv6:2a00:1450:4864:31::10])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 63E1860689
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 15:00:05 +0000 (UTC)
+Received: by mail-wm2-x10.google.com with SMTP id
+ 5b1f17b1804b1-49b912d3931so3336585e9.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 08:00:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1789484401; x=1790089201;
+ d=baylibre.com; s=google; t=1789484404; x=1790089204;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=Hm7/fig6UQnYof63Atsztn0VgasbH5ptKerfi88ZT3k=;
- b=RePegQqHV4Z60nevH17WxvCjDjaKO3wwN8TYkg0e4ulNosWn7eKyjT68wsPqH7u7m3
- Mqj5grTK+KV2OeMgIbINF+6Ab/y0nTZUJTs0q1Gn9qyiOuggmuQpXK2Dr8hgJ6tMUSco
- hfp3ZEsEI6pbkCjPImC/9S/6U9iNIzmPH9H8daK4uRagjhsUldryKstnJAnAFU4w0cYL
- 23bEanFsD+KB6oZbv09ziVSzcSpMA0m4unQ5ZGUm9zW1o59KXqVTx7WyT2eP1Nhm/inr
- ETZ27vA9pJ8krGPngrRwvKJzB9HDFZEMd2n/4wnYmn8GomZmv+OodSyOLITSkpgM5Uhi
- TxzQ==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=CIE7fW/jQ74wTpF14E7UixpKM7NJfasGE06nTq3BiOk=;
+ b=E360/C3lsedT7iG817MdNhCkT514pNyQ9ttHtqO6y24cG6Ylu0RBT/JGnTr7yF/iIG
+ zsfTuahmcTY/D+sRi6f6XPDXSGXgjcVI89GepKM7ai1YXaAIlpQ1Ia6bcElNL9Q+TtWM
+ 5r9QDbRfTc5PlyuhxECNMFcJKsCo54c1zDaqAl5agz9YCimZBZ/Oaza9JlZtZmOu6U3T
+ cibiL8R1egdqwaxN8Hr0Y9DT6fSPda7h6lt0LlecBy6LerW88LmQezS57kHXGj7sm9zF
+ fQt+XGOTfG5I1Mj5VrHEG0rJFXyjWStXt2C7L+Tm/PzIoaXREuWKy/vAVtv173lqCrEX
+ 1WhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789484401; x=1790089201;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=Hm7/fig6UQnYof63Atsztn0VgasbH5ptKerfi88ZT3k=;
- b=JPuotubyW9W2yASCrR1x3Fj8Te7Eolahieb1rVtxLiKQ4gSuvYt0VdGHGvrC+eO5fg
- xr66SR2kUa4NeiWXClFStjAPizOszq9L5aIN5Frv4+E+4BZus85TTThWtPoDxbu75Mkz
- RJ32RXRGUgTvkyShqpMeHLRJaJHXqmXeqAUatPnoE8AC7YPdcSO+fzZRYndtPuB+yLo4
- +Xv0u89CJLA7HL1yJ5VmoH5NJcqzm85uoAG9KvETvKv1Z9JC1fGos0g2x/rcZ4R3xUvJ
- bReecvF3JK1m57cu41e5+3aM7MSKR4l8j0WT2oOs5gD+SHn4RhJz+EXsvfZSuFLK2tWQ
- riVQ==
-X-Gm-Message-State: AFuF++m/AhBi4rSAH2b42TjlzpYnwcjaNiKjc+VCaenEIj86sn5TLi89
- GEoK1ljOIguKjg/fWZPKUUUV3iz2UBpqc8qYqdKGTjSnby51SeGfez8hQO32DI1ItpQ=
-X-Gm-Gg: AYBFou0C9oXsJ38Jd2ciLShoUINV1m3ZwBP2ujR7kDlfitozjejlB7an+ero+94d5CS
- DNUlooY03OrMoibyKwyg0f2tq7D3FlXbWSqhM8SoxPHLoUJWgkOBTGWJn8OAdXshnkr2GSHXPc+
- z2xObe+4ORdhKCXnZthOWIrcqNA8pL+Zh/fasGjOzg+VAxH1tdxV4KgY5NgadzloLBHbmnmY6JB
- DvAqBew+0q0Eug5Phoo48dbNil2uYCIXVlrQOdjdjqGv3IbQ2/zvlSnIz81siOzl+xVb2n29Li1
- AWTyREnX6Cm2+POKx+sst/Z5b/B3GcOSBlHOrwRMgqGQYa/B3z7VKmFzodSE7jSGXdi9bgTEKfm
- zEZc/Cy6aV+9dZRzt5llWwBimudyyUp6/lLuMfC09QVtCVnmMXmiJRI82G+xHzSt8zXJtMqoeNt
- DBvlwLR2ONyDpZ4mmC8U0Rwk3mesOxsEz1fx2hJymjHoEtvMiXjYa6xoTYVfgKOfvB7KGRfiSyE
- 29uOEKhBEjVcyD4oLlJ7+BAVIS5iOhYhg6OH6KGox6EbXSzl/VHtvEw6CCrIj5tZ44dhsOiNFWI
- Q8X4YCsh1G1FbsWx789Y7ArI7A4/D0X4Jv5yvk6gLOa085eS91mSf7Q=
-X-Received: by 2002:a05:600c:4f12:b0:49c:eb04:1c49 with SMTP id
- 5b1f17b1804b1-49e7a64a7b5mr105075895e9.13.1789484401282; 
- Tue, 15 Sep 2026 08:00:01 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1789484404; x=1790089204;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=CIE7fW/jQ74wTpF14E7UixpKM7NJfasGE06nTq3BiOk=;
+ b=PfupSYVTcBWIh7FIamazHa9KxPRYmXdh+SQH/WiDN+oVaxA9TvG88/Ubv7TOAYtzLT
+ k/6XhNi5aTT1hZfBGR3wYvgDG+snqXFCXOGtbrlQN/psiSmKRR4otwAqwNQi/gv8NGom
+ 4uxH26hQE6woWAA5sNH4sqoIqcNG20i7QUzHzuyogTzLfKzcLBzrng2VnVTfvG3JvBTD
+ KgJe91YG4bKzSkEtTUzNDfIupaeotGcAx7dafrP8VV5DVJm+X+No2oSi5N3u3lPaOa2V
+ WQ5t/IYl77Dj5v9fjIse2USKWOp8HAgzHEYv85TqdaWgNxgvWbIOSbroyFa1sAQDgJ5+
+ VKdQ==
+X-Gm-Message-State: AFuF++kleTbGFi15BXPS4HO+/iR/MisV+eOVdWdAl90mPkIQ4LRZqBXV
+ hlmzBtkBwwnyHX6wHoOq0yQpp5yTI3yemzJYsNY3JBh/iNAJTL11EAE24pmHJ4OrK0U=
+X-Gm-Gg: AYBFou2pKCSBXGjP9x9hc+No2//DNpr7CNkZYF+ULH9ZfkbpdQ/3BaalZ0bKNK92vKt
+ RKTmM4pKlcApPcFGhwTVebeFgfJOjpoM3C9PMcVFvX3i6vK3acrKRmsJJQDT140WQVsNwos2337
+ eR4ZuQQdhjAXvfzhl9+bPEhcsg9qs0TglOMj+p8qqyIi90+n5z1OfEq8K8UhaLMdTkfN+VJhs5a
+ 15f38ZQpemCfjzFfASfZ66X60df0aVGcTVBiJco8LagSUQ+C1sStFXPIRUci4E3U/NFlZDr034l
+ 9swZi83+48AmL6QougdvjY78n+mqgr9RtnuyGU4/dJKZ2SKMbg96hEw7fnCNadCB3zOzyI3KJCM
+ V3Awj+pd9L2CugatJ/XUrNz1UMk8FXut+0OTyMnwNkLi+yhl9FCrm3VL9ImKwKDo4UuuTdK+DoN
+ qaiM5/BElfL1X0Dno948vKQyGzhcDX7zgBeF4kJ6gI1eri82OsNXhI/lNjxdzecTBGjGlzhZHi/
+ +cL+LVio1WehY4bLMgGxferZfNGpM1VcRfFRyOQm4XRNNGQLQyvTjLztQ1wZxxoNmPmGUN0i/rT
+ /PfJ3SJ6e2qIOnk2piOOiJ7oblBiH7YiljITMOUL215ofJ20XiWCteWKWV40KmWMqA==
+X-Received: by 2002:a05:600c:4ed0:b0:49e:81db:4926 with SMTP id
+ 5b1f17b1804b1-49e821ffdb3mr19774115e9.5.1789484403486; 
+ Tue, 15 Sep 2026 08:00:03 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49e83aeb654sm1538675e9.8.2026.09.15.07.59.59
+ 5b1f17b1804b1-49e83aeb654sm1538675e9.8.2026.09.15.08.00.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Sep 2026 08:00:00 -0700 (PDT)
+ Tue, 15 Sep 2026 08:00:01 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Subject: [PATCH 0/3] phy: mediatek: add MIPI DSI PHY driver
-Date: Tue, 15 Sep 2026 17:00:29 +0200
-Message-Id: <20260915-mt8365-add-phy-mtk-mipi-dsi-driver-v1-0-83707ed5242a@baylibre.com>
+Date: Tue, 15 Sep 2026 17:00:30 +0200
+Subject: [PATCH 1/3] phy: sort vendor subdirectory lists alphabetically
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXNQQ6CQAyF4auQrm0yMzgEvIphgbRINeCkRaIh3
- N1RF2/xbf63gbEKG5yKDZRXMXnMGf5QQD9285VRKBuCC5VrfMRpqcsqYkeEaXxn3nGSJEiWp7K
- yYgjk6+PgSm4i5FBSHuT1Ozm3f9vzcuN++ZZh3z9aABdwhgAAAA==
-X-Change-ID: 20260915-mt8365-add-phy-mtk-mipi-dsi-driver-22d184f03e95
+Message-Id: <20260915-mt8365-add-phy-mtk-mipi-dsi-driver-v1-1-83707ed5242a@baylibre.com>
+References: <20260915-mt8365-add-phy-mtk-mipi-dsi-driver-v1-0-83707ed5242a@baylibre.com>
+In-Reply-To: <20260915-mt8365-add-phy-mtk-mipi-dsi-driver-v1-0-83707ed5242a@baylibre.com>
 To: u-boot@lists.u-boot-project.org, 
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
 Cc: Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>, 
@@ -188,64 +188,72 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This series adds a mipi-dsi PHY driver MR8183 compatible SoC such as the
-Genio-350 EVK.  The driver is ported from the kernel driver.
+drivers/phy/Makefile has two separate blocks of "obj-y += <vendor>/"
+lines, neither of them sorted, and the list of "source" statements in
+drivers/phy/Kconfig is not sorted either. New vendor directories end up
+appended wherever there is room, which makes the lists harder to read
+and to extend.
 
-Patches 1 and 2 are preparatory patches: drivers/phy/ already carries 4
-MediaTek PHY drivers and this series adds another one, so collect them
-under drivers/phy/mediatek/ like the other vendors do. Kconfig symbol
-names are unchanged, so no defconfig is affected. Also sort entries in
-Makefiles and Kconfig.
+Merge the two Makefile blocks into a single alphabetically sorted list
+and sort the Kconfig source statements the same way, so subsequent
+additions have an obvious place to go.
 
-Patch 3 adds the MIPI DSI PHY driver itself, supporting MT8183-compatible
-SoCs, based on kernel commit 2ec9c210c1f9 ("phy: mediatek: Add support
-for MT8196 MIPI DSI PHY").
-
-Two deliberate deviations from the kernel driver:
-
-- The kernel registers the MIPI TX PLL as a clock provider and hands it
-  to the DSI host as its "hs" clock. U-Boot has no consumer for that
-  clock, so the PLL clk_ops are folded into the PHY ops:
-  determine_rate + set_rate become .configure(), and prepare_enable
-  becomes .power_on().
-
-- The kernel reads per-lane impedance trim codes from the
-  "calibration-data" nvmem cell. MT8365 doe snot have that cell in DT yet,
-  so rt_code[] stays zeroed and the SoC layer falls back to the same
-  0x210 mid-scale default the kernel uses when the cell is absent. This
-  can be wired up later.
-
-Tested on Genio 350 (MT8365). The DSI host side that consumes this PHY
-is sent separately to ease review
+No functional change.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
-Julien Stephan (3):
-      phy: sort vendor subdirectory lists alphabetically
-      phy: mediatek: move MediaTek PHY drivers to their own subdirectory
-      phy: phy-mtk-mipi-dsi: add new driver
+ drivers/phy/Kconfig  |  4 ++--
+ drivers/phy/Makefile | 10 +++++-----
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
- drivers/phy/Kconfig                              |  50 +------
- drivers/phy/Makefile                             |  15 +-
- drivers/phy/mediatek/Kconfig                     |  57 ++++++++
- drivers/phy/mediatek/Makefile                    |   7 +
- drivers/phy/{ => mediatek}/phy-mtk-hdmi-mt8195.c |   0
- drivers/phy/{ => mediatek}/phy-mtk-hdmi-mt8195.h |   0
- drivers/phy/{ => mediatek}/phy-mtk-hdmi.c        |   0
- drivers/phy/{ => mediatek}/phy-mtk-hdmi.h        |   0
- drivers/phy/{ => mediatek}/phy-mtk-io.h          |   0
- drivers/phy/mediatek/phy-mtk-mipi-dsi-mt8183.c   | 175 +++++++++++++++++++++++
- drivers/phy/mediatek/phy-mtk-mipi-dsi.c          | 144 +++++++++++++++++++
- drivers/phy/mediatek/phy-mtk-mipi-dsi.h          |  45 ++++++
- drivers/phy/{ => mediatek}/phy-mtk-tphy.c        |   0
- drivers/phy/{ => mediatek}/phy-mtk-ufs.c         |   0
- drivers/phy/{ => mediatek}/phy-mtk-xsphy.c       |   0
- 15 files changed, 437 insertions(+), 56 deletions(-)
----
-base-commit: 5437f0d7943e352ebe126f66275edf4f8206b545
-change-id: 20260915-mt8365-add-phy-mtk-mipi-dsi-driver-22d184f03e95
+diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
+index 6262380a60a..97133304cb6 100644
+--- a/drivers/phy/Kconfig
++++ b/drivers/phy/Kconfig
+@@ -363,12 +363,12 @@ config PHY_XILINX_ZYNQMP
+ 	  Enable this to support ZynqMP High Speed Gigabit Transceiver
+ 	  that is part of ZynqMP SoC.
+ 
+-source "drivers/phy/rockchip/Kconfig"
+ source "drivers/phy/cadence/Kconfig"
+-source "drivers/phy/ti/Kconfig"
+ source "drivers/phy/qcom/Kconfig"
+ source "drivers/phy/renesas/Kconfig"
++source "drivers/phy/rockchip/Kconfig"
+ source "drivers/phy/starfive/Kconfig"
++source "drivers/phy/ti/Kconfig"
+ 
+ config PHY_COMMON_PROPS
+ 	bool "Common PHY properties support"
+diff --git a/drivers/phy/Makefile b/drivers/phy/Makefile
+index 19cf95759e5..02f8b495ea0 100644
+--- a/drivers/phy/Makefile
++++ b/drivers/phy/Makefile
+@@ -4,9 +4,14 @@
+ # Written by Jean-Jacques Hiblot  <jjhiblot@ti.com>
+ 
+ obj-y += allwinner/
++obj-y += cadence/
+ obj-y += marvell/
++obj-y += qcom/
++obj-y += renesas/
+ obj-y += rockchip/
+ obj-y += socionext/
++obj-y += starfive/
++obj-y += ti/
+ 
+ obj-$(CONFIG_$(PHASE_)PHY) += phy-uclass.o
+ obj-$(CONFIG_$(PHASE_)NOP_PHY) += nop-phy.o
+@@ -46,8 +51,3 @@ obj-$(CONFIG_$(PHASE_)PHY_IMX8MQ_USB) += phy-imx8mq-usb.o
+ obj-$(CONFIG_PHY_IMX8M_PCIE) += phy-imx8m-pcie.o
+ obj-$(CONFIG_PHY_XILINX_ZYNQMP) += phy-zynqmp.o
+ obj-$(CONFIG_PHY_COMMON_PROPS) += phy-common-props.o
+-obj-y += cadence/
+-obj-y += ti/
+-obj-y += qcom/
+-obj-y += renesas/
+-obj-y += starfive/
 
-Best regards,
---  
-Julien Stephan <jstephan@baylibre.com>
+-- 
+2.55.0
 
