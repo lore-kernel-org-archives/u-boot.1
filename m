@@ -1,169 +1,123 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B147AC88E77
-	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 18:50:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 049DFC88E77
+	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 19:11:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6331440363;
-	Tue, 15 Sep 2026 18:50:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9944A8084B;
+	Tue, 15 Sep 2026 19:11:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0oMxQNN0flWl; Tue, 15 Sep 2026 18:49:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org AC73E40352
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789498199;
-	b=Q2x0cVJilBtwivNTsTWuIdzHwQqMImwPbdH4Ed4f300sGxXwlUFDzqqBN7kxtU9tiiqY
-	 oAnGxXh3wl4Ik7teedWMJTd+RPECF7Rz3ujcOy7PIWZQmr5jOG1f8JPgp6kLJFnteLssX
-	 ymqMJbGYhQ0wlWMRZ6Pi1w6h0saa9IqPXb0UtWouR/h7HrBhDfeG0XUnBys6EpYnV8lRq
-	 1KbX6I6jFie7CFkflPU5ZD3U0uuuiwYF1houC94eEbJP9oqTQBkChUArg1bKYuTwwK1sH
-	 Sv0dUgfIbbbZaIqyOVaOLt7TmV9XHHOOo8K3gqgbocnAgTDN5Vj2KBz00BHW1T6HGfg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id P__irKaxTD7r; Tue, 15 Sep 2026 19:11:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org D49A38084D
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789499468;
+	b=LxNLK3Q4F/faiL4W51uVhNimDp3mAAFhE3yS791T7YX2HY9j9wSHqFpLRVrPcefObxve
+	 m/EH482C3lfLH2T/QZBCgMo/v/cB3JRrZOo2acQuYiA8qKMnloK7FgBJ9YlnStd35Ei3q
+	 Z9aMQfORgnhmEN6UKW2LVVZxCGPE9Lnk1D0XECjim3xg3DrD5SlMjN4dxr7vcAdDr4xx9
+	 +DvtrKMQu7dVWyIdaB00/LQstuxaPLLx2c6N73VA11yrvKTpSfXqzwDZU5WiHa03zsr4x
+	 i5R0rb3lWHS2BTsFs1+Pg2ycIZJ3OaaWZXQteGCUs88yCXsaJH/kkYFKYkwQhEU6cLg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789498199;
+	c=relaxed/relaxed; t=1789499468;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
+	 DKIM-Filter:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 MIME-Version:Content-Type:Content-Disposition:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=nZQmuypJ15JcuDzfbTUu9NBbSMvPUdT+SBtJEk2BvPs=;
-	b=nCCnyNTv6tnPPB8WyG9oe2TwpIYoSgTB0ainlk1yfyY98hnkjMO6Ljkdse2QaZ4pjrKw
-	 YLabN4nz+ycU6QcQ7vEHC6XmCx8OlMY1Xceqhq5Wk+fyX4QrZIum+jjrSVYgEnxp3BLCt
-	 jaRUK9DqSGQzjSDwctZtRqfGJjlXseDehP3i3RJEVM5Ga82AiQRcgg3Zn0yxt8QBqIzyw
-	 F0ld2xud1fVHBcg6rMkdWrCuhd4UmlrVG9qRDVlf2MJ9776w+K68OQh0BeE7AyNwxf2HX
-	 QAgyv16J2vNKkDjWe75tVMxq5lSR2VYMlfvZOIbc8d1utwhr3Mpn7m6V7bjADqB7IJA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=m+iaBvCyZDT4yY7gif4zlTFK4Py9FYY7AOa0QMuoyEE=;
+	b=BDm/AWMEaMZrFtHQscFtNIViEibEMI3wMqZA+8Vv2V9CCuRpTHyAQz4SqbF+2Em4x5Qd
+	 avS3pEjy1kOvy2av8yjDaoZhUYWGARvd4kijq5WuXhQ+FlQlVvq+R0VaJNxNMFLFW3AVW
+	 b/hgHAonrDXJVp+xJTva9+d47CVtd3lwHaue3uCmgKqbQTtO8nJbv+c1weTX1sZWEqvTx
+	 hmp9QEqeWYIoO6Afi0TGGRApQPGHfvPbVI/pLjixLy5twA2t6K5QrLHHefCS7E6ScqjAh
+	 HDSjaSODWmZ2hboupvaIM9VFE/D6ONbYZUFugU0OzO8BD/a7jQeUpKRsk9oO7kLagdA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789498199;
-	bh=nZQmuypJ15JcuDzfbTUu9NBbSMvPUdT+SBtJEk2BvPs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=sBK3yp9JUgCUeSQbp4vyE0k7I+VeZ/ruVCgQSBnbzIIHR434CMbAhxcPgVcYzK//1
-	 he3UhRS3rj3KRNlPPZt+xMxMMGfm0HxpPDzB90DwOrQ7uVPdVfMoIQNTgr8PARYTxJ
-	 mTVD5MhPrgRV5Cuq+Ue4RLJmUmPeNH7jeWtqszawRNfaJVw7A+2nZ8KpcyL1omAJK9
-	 ddI6NiQXhUBGYRU60ZtNigUQrDG4Soj49BS7J9nkmIwhY7yn3pAstf8IZogYOyqqx8
-	 VPBfQBSVeDgPfHnqC5SPasghwQZ0X7SEqbG+ZdnTBuhA53HPvtWqk6ZmZXiP3srIjm
-	 6M9uAb+wsR6BA==
+	d=lists.u-boot-project.org; s=default; t=1789499468;
+	bh=m+iaBvCyZDT4yY7gif4zlTFK4Py9FYY7AOa0QMuoyEE=;
+	h=Date:From:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=xoJDMnKEb+ieKH/84Jlb4ZR9jm9pyr42UqSToMbmFhbUWRRmTGIcmRj3VR9imjko8
+	 RbcFSbtLp7OrpUko7m0GJR3ZyRAQ3Mg1Ee9Z72nS42dMFFHR5MxghWaMFmio8YLwRZ
+	 Tu/ihrwjgoNzHnKnjLoea8nUwIsfThtcZ8NTX90a5+2z+JJSNVyyO8wM7np2OVa8NI
+	 Lm7W1cUwK7ve2zVK/X0C4EftcMFa3jj3sgPuQqID6ey99u+otyXJZYROetK3s1RYXP
+	 X4xzcEMqfgJysJG3OmVeovH9tdrBTPm0/EpzeiT261sI23LKpxJQB/zgdIQgwrztcg
+	 wL0AMDdPX5V7g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AC73E40352;
-	Tue, 15 Sep 2026 18:49:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9AAEF2E3
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 18:49:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D49A38084D;
+	Tue, 15 Sep 2026 19:11:07 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id EA9D82D0
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 19:11:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8CBBB400F3
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 18:49:58 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id D0976606E6
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 19:11:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5Fqq5g3MtoS2 for <u-boot@lists.u-boot-project.org>;
- Tue, 15 Sep 2026 18:49:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org E0FED400C5
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:31::e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789498198;
- b=BzwmSrv1JNbt45lS0vItEEKTAlZjaZiNwbFLT6YZyRbim57SZXyDpeLv7W4OPyMZ4Zwn
- RZ+nIhsm8LrJxQp/yyVhSXKg+/OVJsM8elbIiX48BLncP7jspejgwzjVrrO3Ls9O8cz+l
- 2TBECt2Bq8oX56lVOu6HrAznxt1t5Bj8MaU1B2NFlquB5fb3G4J5xxbnWbEQq+Utnd6mV
- LWq3pbvp7ntVhDgoony6K/lftV2CsbFatceNG9qVdqublkWydfQdyV7QiRedukNoNtbD3
- x3RGVZEVu2mgRXPZD7Jab+OV15kE6mXGkz+L2FkKh38ur5emhaROfVlg5LHLTc/uDOQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PlTVvqbgd8yU for <u-boot@lists.u-boot-project.org>;
+ Tue, 15 Sep 2026 19:11:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 1343D60681
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=13.77.154.182
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789499466;
+ b=FMgxfHL0O5FVmG9DdE3l/PRPeYMJjPCHhSlYECyqbUbBtTQxzTJE083lu1SlfOo2AXm6
+ OaTYQoVhAd1pMVbf3xcFQgQZ9XG9u0LwXtdkO9RdM/zo21SovuERw7HKLteA5UA6Kt1j1
+ vFpYOQ5pfZhsTJw7L9VDeZ4s975ql7w9zdG9LXSsACm9SfrdS+plOPIakjTq0qLYP6Tat
+ voY6RdObrIXvKnqOdGG+DzrWCThLs7M9LrE/Yo8KLOnrjQ8KMq81SHTWpzKHeTwbQr2Q8
+ 6raunkaouWGq+LhgGESXKAN0c5LokcH+t5/x7Rq7igw931CjqoQmSxxZwlNUsEeT4Kg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789498198;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
- Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=nZQmuypJ15JcuDzfbTUu9NBbSMvPUdT+SBtJEk2BvPs=;
- b=RtYRT0LCGSYtalSmveOISmQTFeyHrWjMlYY1vZrQA5FYTFNH06c6Xe8lOU6Er9/tBalI
- ENGKyppoCydjHPBmM+AyM6gG4LRVKe4YPjNi0p/PXD2xf1XLvDJdBgBAvMbutL6HNPVL1
- 7PnGveeakDfNd11feiXRXoyIxf4qHsSWZ1brQhLOmoo5rjK+b684/pu7v4jxvUSayfsTX
- DZIAekAyCNrWjWEy2mkGrhbysWB/KUwzkzIhMyMKT1Emnufp7DlSxpUkNMGELh7LS589k
- ZKOUirAcpt6QTAlFwC3IjepmYhGP4FW3UISeWy2SDjdFQzzQ5fIZNdqOwQmhKAlxjnQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=konsulko.com; 
- dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=gq1BODLS; 
- arc=none smtp.remote-ip="2607:f8b0:4864:31::e"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::e;
- helo=mail-oo2-x0e.google.com; envelope-from=trini@konsulko.com;
+ c=relaxed/relaxed; t=1789499466;
+ h=Received-SPF:Received:DKIM-Filter:DKIM-Signature:Date:From:To:Cc:
+ Subject:Message-ID:MIME-Version:Content-Type:Content-Disposition;
+ bh=m+iaBvCyZDT4yY7gif4zlTFK4Py9FYY7AOa0QMuoyEE=;
+ b=OZ+rfisifBnAmaQY7oh3AgfKoQVG+ibVx6hrNEAyCVTpgplh2ypVuKeDkjziKxDH8MvN
+ jzqD7YsKrm7ACN2mPw+Bdf7TK336+uRL/5G2/Ui8JR4sTwcP5IHxpfwqpf8Mwseuh0V71
+ tYUdkmn8m209Fbv8u/nKIZ41gRnZxMuJMgQ0xaaI43QIZnG2sau9K4pT1vxTLjtCNGK/e
+ TRok9gS6R/OG2l0MScuT/b2JCYVpBoUZDQFGRjerayL9NfRsAY3z+LX//7UPgv/8A5N26
+ Vpjeb7p0aJUWnAzwSCMn0Cp4MyWrl/VzCGaCUMPDM1ekYNqtGNdjLxoAepw0xE8WtbA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ dmarc=pass header.from=linux.microsoft.com; 
+ dkim=pass header.d=linux.microsoft.com header.i=@linux.microsoft.com
+ header.a=rsa-sha256 header.s=default header.b=PPBbDMu0; 
+ arc=none smtp.remote-ip=13.77.154.182
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=13.77.154.182;
+ helo=linux.microsoft.com; envelope-from=sriramsriram@linux.microsoft.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=gq1BODLS
-Received: from mail-oo2-x0e.google.com (mail-oo2-x0e.google.com
- [IPv6:2607:f8b0:4864:31::e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E0FED400C5
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 18:49:57 +0000 (UTC)
-Received: by mail-oo2-x0e.google.com with SMTP id
- 006d021491bc7-6b1ae72186eso117177eaf.0
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 11:49:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1789498196; x=1790102996;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=nZQmuypJ15JcuDzfbTUu9NBbSMvPUdT+SBtJEk2BvPs=;
- b=gq1BODLS/6ItiOHRIriMouX2M3XPLymC2L+Ly1Hv2CAwaqsD+rZQxt2Al0D/k4GX15
- uxCwDeDKJUi7ff3gyct/6RbcBZfQFZ9VqjNkKBQTxHVI5fliPWFajJvXKg5vyA5AAjWT
- lCtPX8tz5SNy4mETCdiyj7SNdYY6BJsBdU3sM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789498196; x=1790102996;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=nZQmuypJ15JcuDzfbTUu9NBbSMvPUdT+SBtJEk2BvPs=;
- b=guobSrT8IgoZ7KdL9bvPwcXi8sNkqs/KwXUb/RzX43qBIgvLvRucRy4qXPb3VFjM4m
- 5BUqLDVyTm7wPU3IiNUNISCk8d7kkKio6sdB+8f9+xTuJ2wE8xp7mupoU6QgfpOWiq+e
- eVGqPdU1mZQSg2QRKnvDNo0oJDYbLq12sGFxlAOxSJnTjfLo2USOr6qbEa9RoGS1ctYN
- w73lobgOAx5fLzQ2RULgWYr1+P8ev/SOBNXgX3XJQSUnyyXk97b9pN9K9tEeZtQOBG+5
- SwmhUdS6ph04MCqsBkzU3zzRITNoSN4ctR2EekI3fO/IjxhwiQP/a03vCkNuwFNbWrkw
- rgsw==
-X-Forwarded-Encrypted: i=1;
- AKwUvByTVb/2L8Pw1j6nZF/YcWnWICumZtxyLV3bhmArcMvW3ppMnNpT58BCHIBRCam7/tWREOGzQWA=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lsUE2g6dS1kYCA6964JpaGp+qldpUGt/UjO+dRNF5dnlvOVK2t
- asQpnC8qromN3j1yIIhhqRtePNU4F2Rh2KMzQGqkSyZhQLYhe6XK1i73/Qv2R6dokbM=
-X-Gm-Gg: AYBFou278hWrFkcZXFRZndpUG/D3UFk8IDgK+xhI0MOB6NrcsnCRWf+WMYwmGX7IqP3
- w5MXKcGVLlaOtnf+qZx5IaxPaBlR0XyqyVbprkf0DtdNSJY54W/Nlb5Dr+fo4m+HjQd1OuqHZop
- 4AcDmgopQt+Q7dCb37aMIKE0wSrKcVCqqNhb0yF3/SG8ZyqBuF4I8Ftb4ccbrohJtezZnZi2p0f
- 2hz13tSk4IWiBQgXHV99lEaTNLGNxXqqXeNu8arOclqCZd+auCa61/dEOj2Aga/Ox4axZwA9nX1
- fDIpz6ivKH1dBN3kwaH/prgJB2fvmcoofTGBzN6r35fC2CzTTcSsE4BoBlxJ/jwWcoPcmtz60p+
- oTeaHpz+G82j6jLyYb5IYe18pHaoDiwynkUBURUv57np03rPrgtJwv5CWSycUwuW6aS2bNgI200
- KAWsG2NIgHu9qQFsLqiWe+wePUJoWxLeicLZdid6gVpuF5m7Vt7G5tgQPq0SxSWeJRr4+hLrD2k
- IccE0VwMXQeAob3bnQ9UlVVTs52YTl99ykFGRQAE0P7soWENKhugnnQX/KkxnTV8Yvzg9UlS/ow
- a3bozmnPeKrjd7O+hL6d
-X-Received: by 2002:a05:6820:f04:b0:6b9:447b:8798 with SMTP id
- 006d021491bc7-6c73a15adfamr1824605eaf.63.1789498196110; 
- Tue, 15 Sep 2026 11:49:56 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6c7a677b3bdsm527895eaf.6.2026.09.15.11.49.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Sep 2026 11:49:55 -0700 (PDT)
-Date: Tue, 15 Sep 2026 12:49:53 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
-Cc: sjg@chromium.org, u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH] board_f: fix use of uninitialized variable in initf_upl()
-Message-ID: <20260915184953.GA909517@bill-the-cat>
-References: <mkv6dosnzm64fr7y57lhsynqhtiy5bhp2gawlk7vstfyjm37cm@tntjqgtdok7m>
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
+ header.from=linux.microsoft.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com
+ header.a=rsa-sha256 header.s=default header.b=PPBbDMu0
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1343D60681
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 19:11:05 +0000 (UTC)
+Received: by linux.microsoft.com (Postfix, from userid 1251)
+ id B8E8720B7169; Tue, 15 Sep 2026 12:10:20 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com B8E8720B7169
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+ s=default; t=1789499420;
+ bh=m+iaBvCyZDT4yY7gif4zlTFK4Py9FYY7AOa0QMuoyEE=;
+ h=Date:From:To:Cc:Subject:From;
+ b=PPBbDMu0eiw96Nd4fZnNUTWQ0khd39vVRLBDxx1aqhh94OVIZvDpYcO6w5/ocjrXA
+ 6pr1QT5mg5iGeNHOT+sdNXvgzzoK16IrmKx7BLhzbCniu8C0GkFs4fJVDrR2Sonoa+
+ 8R04ABGryEKMB36C2eg/xKk/iGlgKqirpArpJ7fI=
+Date: Tue, 15 Sep 2026 12:10:20 -0700
+From: Sriram Sriram <sriramsriram@linux.microsoft.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org;, jerome.forissier@arm.com;,
+ ankluemk@microsoft.com
+Subject: Re: [PATCH 2/4] boot: image-fit: add overflow guard for FIT
+ decompression buffer
+Message-ID: <aqmYHG/KDZT6K8AB@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xwBASk/Tmxy6859T"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <mkv6dosnzm64fr7y57lhsynqhtiy5bhp2gawlk7vstfyjm37cm@tntjqgtdok7m>
-X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -177,37 +131,78 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+ankluemk@microsoft.com 
+Bcc: 
+Subject: Re: [PATCH 2/4] boot: image-fit: add overflow guard for FIT
+ decompression buffer
+Reply-To: 
+In-Reply-To: <20260910190944.GN1764417@bill-the-cat>
 
---xwBASk/Tmxy6859T
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Sep 10, 2026 at 01:09:44PM -0600, Tom Rini wrote:
+> On Wed, Sep 09, 2026 at 12:20:14PM -0700, Sriram Sriram wrote:
+> 
+> > From: Drew Kluemke <ankluemk@microsoft.com>
+> > 
+> > Add an overflow check before the 'len * 20' multiplication used to
+> > compute the maximum decompression buffer size. On platforms where len
+> > exceeds ULONG_MAX / 20 the multiplication wraps to a small value,
+> > leading malloc to allocate a tiny buffer while decompression writes the
+> > full stream -- a heap buffer overflow.
 
-On Tue, Sep 01, 2026 at 03:50:35PM +0530, Naveen Kumar Chaudhary wrote:
-> If the malloc() for the UPL handoff structure failed, ret was checked
-> while still uninitialized, leading to undefined behavior: either a bogus
-> error code was returned or, if ret happened to be zero, gd_set_upl() was
-> called with a NULL pointer. Bail out with -ENOMEM on allocation failure
-> and only read ret after upl_read_handoff() has set it.
->=20
-> Fixes: 0fc406ab20e ("upl: Plumb in universal payload to the init process")
-> Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
+> OK, so lets assume an overflow, or just an invalid max_decomp_len,
+> shouldn't image_decomp handle this case and fail and we catch it?
 
-I've seen this a few times, I'm curious why you have 11 chars of the
-sha1 for the Fixes tag, and not 12?
+You are right, and I should not have sent this one as written.
 
---=20
-Tom
+max_decomp_len is used for two things -- the size of the buffer we
+allocate, and the unc_len bound we hand to image_decomp():
 
---xwBASk/Tmxy6859T
-Content-Type: application/pgp-signature; name="signature.asc"
+	if (load == data) {
+		loadbuf = aligned_alloc(8, max_decomp_len);
+		load = map_to_sysmem(loadbuf);
+	} else {
+		loadbuf = map_sysmem(load, max_decomp_len);
+	}
+	if (image_decomp(comp, load, data, image_type,
+			loadbuf, buf, len, max_decomp_len, &load_end)) {
 
------BEGIN PGP SIGNATURE-----
+so if the multiply wraps, the buffer and the bound wrap together.  They
+cannot diverge in the dangerous direction, which is precisely the
+scenario the commit message claims.  And every arm of image_decomp()
+does honour unc_len -- IH_COMP_NONE has an explicit "image_len <=
+unc_len" test that returns -ENOSPC, and gzip, bzip2, lzma, lzo, lz4 and
+zstd all pass it through as the output size limit -- so a too-small
+bound comes back as a failure and fit_image_load() catches it with
+"Error decompressing %s" and returns -ENOEXEC.  That is exactly the
+behaviour you describe, and it is what already happens.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaqmTTQAKCRAr4qD1Cr/k
-CoSbAP9FcFwPI2TFaTQ0Kq3NMI1R2ZkJPEBi6+Hjik8pMjD/ywEAxNEb//sA6RfG
-LIgjaNCesLzSlcDO0/ZDXlEESxpzkAE=
-=za6O
------END PGP SIGNATURE-----
+For the record on reachability: on 64-bit ULONG_MAX / 20 is about
+9.2e17, so len would have to be an exabyte-scale subimage and the
+multiply can never wrap in practice.  On 32-bit the threshold is about
+205 MiB, which is reachable, but per the above it degrades to a failed
+decompression rather than to memory corruption.
 
---xwBASk/Tmxy6859T--
+So please drop 2/4.  I would rather withdraw the claim than try to
+defend it.
+
+While re-reading this, two things nearby do look like real (if smaller)
+problems, if you think either is worth a patch:
+
+1. aligned_alloc() is never checked for NULL.  A len that is merely
+   large, with no wrap involved, makes the allocation fail and we hand
+   the NULL straight to map_to_sysmem() and then into the decompressor.
+   The IH_TYPE_FLATDT branch a few lines below has the same shape and
+   follows it with a memcpy(loadbuf, buf, len).
+
+2. image_decomp() takes "uint unc_len" while max_decomp_len is a ulong,
+   so on 64-bit the bound is silently truncated.  The truncation is in
+   the safe direction -- the bound ends up <= the allocation -- so it is
+   not a bug, just surprising: we can allocate 20x and then refuse to
+   use most of it.
+
+Happy to send (1) as a standalone patch, or to leave both alone.  The
+other three patches in the series do not depend on this one.
+
+Thanks,
+Sriram
+
