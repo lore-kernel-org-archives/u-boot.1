@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BF23C88E53
-	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 12:53:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26A8EC88E75
+	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 12:53:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0E3E76078A;
-	Tue, 15 Sep 2026 12:53:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D346080BCD;
+	Tue, 15 Sep 2026 12:53:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id I4oBTGQ72tv4; Tue, 15 Sep 2026 12:53:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 2205260779
-Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789476818;
-	b=DkByOtllioJaLICSuPNCqYSPgjFK4SLbC9g+E6FCXld+0NDf7iwN6vTmK3hs2swR20j8
-	 JkLm7ntRQ+jA58GGkKuSWz7uMYLsGHTWjjAh7HzsdO9IUScxvJ2wbu2tWCmwR7RIHNOkM
-	 sgWQ9gBVghI8oZ+E+TB17rTSiabHA17oLzw1xgtk6Az/xm+zAVFy7bxIr+kYyVXf6suMs
-	 rFPtBvVci1uDGiOnlZXoxrffIKh+k3QBIQQF0+yg6aafFMZL+Zqw9nrTU7ND3V2aZUaPp
-	 aJJt61gvvr5hvExIzAzYSaHu1izsMEIzC/XY7AbXHpgQQB96AV5F6JfF1KYUdFZ65WA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fSrXrtQYz1lO; Tue, 15 Sep 2026 12:53:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org E9A83809B4
+Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789476820;
+	b=kxvqzSD/oMxoqqrKRHXpdVzy65pZpPx9T6sM5yvswH4sOvaQjBpEOLWi11crXJKYcUqE
+	 45JgMUDLC4VJcyTpC/bCw60RiesPe4ccZLB0II6OjSreOdSRAT9Eo6aA/lbz9eRrrP2k8
+	 L+OH03oYkgMQjJC4+ZvsI037KuNLelktaR2MvqJYVD2M+tYgD62oW6zuNjaqX8X/szLRi
+	 emSkw1W3s5kKsliIEsEd2/nY8SyjEBYU5mKy+pZZOWdWs9QopgBPfpmqAEkd58BWwtdps
+	 QN4V2n81CbVdfO6CxFp61nouortVqMxE4Hj9M7siAKa7PyTMTDC5SG02OP8EnPuSoeQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789476818;
+	c=relaxed/relaxed; t=1789476820;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:X-Comment:Received:Received:
@@ -31,120 +31,117 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Flowmailer-Platform:Feedback-ID:X-Virus-Scanned:X-Virus-Status:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=GJ/HANso560EIa6gZ4Iy0FJj8Dv7L3QwFpCkLp3Wovk=;
-	b=r+ysXv+OMYJxvLwuo4oFqTZ7oZubkla7XBUf+hV5ERFfLy6/IKfgUREd+bOsa59bnnGb
-	 vk/tGLB+QT4iYuuXCePyrzLmkiHkprQQbVxo9adjcTP1OtYs5XdFPR3Iq8aMeb8olp7cL
-	 T7Dg2dTSIHGn7piGRZeiNYDi6YsIS5fkjfPvJt6wi6IG9UoV4idcqJ1UX/FDHDZLqzyPi
-	 Ws5gAQaCv5mTJSphOlaak/asiDQR94tCNPVNATrKhZbGqkY2pYPPiqnHX1cSy3gtjGb9K
-	 LE0Yzl7hV7JppskalkgmDiAKhFjsSbvA4klWeMClfkd75bpKw7/YscVHmlEhT9Ldi1A==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=siemens.com;
-	spf=fail smtp.mailfrom=siemens.com;
-	dkim=pass header.d=siemens.com header.i=ludwig.nussel@siemens.com header.a=rsa-sha256 header.s=fm1 header.b=PaaTvw8x;
-	arc=fail smtp.remote-ip=140.211.166.142
+	bh=a6F9QU3ZATdmZ5cCxmVeIGD2MEVYDA4+OUvVGMY6QCs=;
+	b=bU1u82cQtaYhrV+Rg2GbNGlminFUinSvs29NYfmUSFWBUmrm4i5YtywHkxicIsyWIo4A
+	 M9pSzl7hzw03iuAzdpOJsS3T300XjLE8uyFk00HBQ0mZdGv94v4dus0rQDSkUKfaCaqqU
+	 BT1XGbIXUYXNBrKAmC4y83OMxJ94gGcx/VKYKdLTKhZFveu9jj+/U6xoJwhvFN6RNhlz3
+	 z0GzGFdkd1wL4xCb9saiylwHBdWQYmq5OFZgvfdVc8a2SG2D2CPFR3icK+8Zc7HoqwAQu
+	 Clabfs6WEqKc/0YJ8LcmXCmbj+9YArvx4d/dFZZeb2h0Vx+HuBM6Qr7XRicDnbIBcFw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789476818;
-	bh=GJ/HANso560EIa6gZ4Iy0FJj8Dv7L3QwFpCkLp3Wovk=;
+	d=lists.u-boot-project.org; s=default; t=1789476820;
+	bh=a6F9QU3ZATdmZ5cCxmVeIGD2MEVYDA4+OUvVGMY6QCs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uBBRb1lkseqMyE4pwVl8j3jnf0afmmli0kA2BIfds9rcskzPwOKW0x6i2uTBcOS9b
-	 08ajh7XfvwzscKsNVL1gxX/gxDaiQPa/HaHi/5TIluha7svJ4HE5Un2bfSjYuCmFp+
-	 zRAA0TdP6aVvkWff8FW3TMs2niN7/WDASDKYaEa/wt+5tDNu806dbOj4CxIyj7yhHC
-	 inXt6hyAujuW6uVKLZXdaZEwA9B7tvOaIGKkiWRqTFRap4WA0lWRT9V37StCtjyNSn
-	 rKCzVasbDarCGWi4v9EiNQvb7S/akgymHJh6ejPnFJS6MGlZGsR/nJVSbHeqwaVpzP
-	 VJhEEKTb5ZLsw==
+	b=a6JF13WdGdA7qd24u8kDI9M5e7OHgKU58J0RUNiaTRSW5V9wht0PCxK9QaG81sZgl
+	 BRGq+4fzeSnoqRrLArH7rEzCLtaRjZwtJUKJkoIXTYAyCHHvZo0q1bSJ94xw+Vqbew
+	 YOqtNIU+Ps6S3ltZL1z+U1iIqJq65bL4/zhXxnR/VSE3FqTR+0YubikeKIpqeVjdnc
+	 CJafKto6n6TK+jm4U01qB0I4ZI6VXd/q6KfF9a/nfXUYfIpUbzjOxRSV+2cvjUyOut
+	 kTiMIadXki8s2ta1S49MXAagjyFy6BbCC32eK/KahTR9crIbrlgOh2evbUcdJ93w8e
+	 CCBybl4NNOvDw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2205260779;
-	Tue, 15 Sep 2026 12:53:38 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id CFABA259
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 12:53:31 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E9A83809B4;
+	Tue, 15 Sep 2026 12:53:39 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2BA972E3
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 12:53:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B5A786074D
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 12:53:31 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1165D4050E
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 12:53:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UAUVmqjnakH5 for <u-boot@lists.u-boot-project.org>;
- Tue, 15 Sep 2026 12:53:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 44D9D60760
-Authentication-Results: smtp3.osuosl.org; arc=none
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Yll-UJe3rHRU for <u-boot@lists.u-boot-project.org>;
+ Tue, 15 Sep 2026 12:53:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 5430140509
+Authentication-Results: smtp4.osuosl.org; arc=none
  smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789476811;
- b=cKPjFCUd3TlgAUmLZWkxDT5ADrSW9hAQXSFsXpYgSvyxGMa9ggl/Yhgquw1KmUnTwU8t
- ShCFhJdyY8slFEQiOu/+zruolA4LZlW2QVNraX2U+tpFfm5AlvFisGK6kZc0zOAmR7pmn
- +xNOeCfdbpp7srBOEWduZeXxDSSto7tPX4VNT9o5Nc+q2/RvminbRzLzGd3ru/ApVx0lm
- yiG+3LHalSjvf1IvBE2oDVpFC8vqYpR2IGyWpyo+qy9Vx4EsuMnaefWRgPu3JjHgymycL
- ByR1NlkouBvPMvUj1bVmYqv8yNiv1P1SBYF/NOlfY2j3O6jkZ3JNt1UG3OBhHdlbt2A==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789476810;
+ b=BZZWLQfFPi9n73gk3Qj4ahSmRHPq32DZyMxzkiJ6yjiFRxShhCzYgXjrfzDJYdfMVzax
+ vGe5mKjfFeWPJhzqNPTCnIBV2878jX/ndLjdXA6pANYrH4XW4BwCGci1BcsfTvM7G5sc7
+ ZOgLvlQEPjPOpSfcMhUVR3EYwklA/U9TCThdRQz/jd3PnFwM9jNZ5L1CkyeUSdiiqvyAn
+ WRR8gqlNdR11OHb0ATlC/paP0vfNXMUCrTppe1lUj20OJkAHbw/imAzOApxZxtqpiP+LI
+ uE5Sy3Sy6KPBb4LIQeTAlwC/p06xvCyzAnqKNCzLo+mJhFcsrUzX+N4uH+yjZ1XUCXw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789476811;
+ c=relaxed/relaxed; t=1789476810;
  h=X-Comment:Received:X-Spam-Checker-Version:X-Spam-Level:X-Spam-Status:
  Received:Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
  In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
  X-Flowmailer-Platform:Feedback-ID:X-Virus-Scanned:X-Virus-Status;
- bh=GJ/HANso560EIa6gZ4Iy0FJj8Dv7L3QwFpCkLp3Wovk=;
- b=E1hUbXw7rWwFMru1kC84ttMy0G5O/eN36WtkuiwixpoH+sTMEveb8fMb4vU/4y3tluHr
- u2dRme3l/z0XsVscPrkX52rvgco405TbcRWKZ4VDLQUOn62me3HxThIKe77le+doLFIdH
- f2YvqW87nznarKzTCG6Yy5whfD10PnhMXSMYJgljUMOnO1g10Ww9Pok4fgDBIF8BlfSMr
- kP0F5vZLo26AQFjRTckaADSR6bh7cXyvtnG+hm6nqKzuRFeHdtYliVXHqdpFECcW6tlxu
- /GCiIOsf1eR/1oLOoQOkyKJwNTOFYhQL+qwj3UEyOocQfKSm/2G1w71Zb/D98T2n20A==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ bh=a6F9QU3ZATdmZ5cCxmVeIGD2MEVYDA4+OUvVGMY6QCs=;
+ b=nR2Ym0YILxSZwRpZDff60ZaSAjWxCrl1yp+/1AIi4SYpuOCRXmcAQi1xbC3+a9CXuPwD
+ z6zUY1VEDIgCMGnhRHddYOiG3yE6CeGe1LjmjyPTTUAwXywr4yKtCNf+I9WEhwFJNJHGR
+ dPEmnZs1h2UNk4+8C2aNz2jmShjiCXbR3vflJVthrSf7YgDmnMTk/985bs/lDNgfRKMIU
+ L+HVv4BwDaJjq2CfenkKZ61m/23oVgJhvHqP51ZJqax2UPPrHZg/r0Ff3laiAN1QGTgCT
+ TjcoiC7jt5+iTltfI10rKUUTE83ZtsXUP8Ww2AvW7ZqFLhadpWanqwKfSVDhsKBmg7g==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=siemens.com; 
  spf=fail smtp.mailfrom=siemens.com;
  dkim=pass header.d=siemens.com header.i=ludwig.nussel@siemens.com
- header.a=rsa-sha256 header.s=fm1 header.b=PaaTvw8x; 
+ header.a=rsa-sha256 header.s=fm1 header.b=UeJ+89bD; 
  arc=none smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
 X-Comment: SPF check N/A for local connections -
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=ludwig.nussel@siemens.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: smtp3.osuosl.org; spf=fail smtp.mailfrom=siemens.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; spf=fail smtp.mailfrom=siemens.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=siemens.com header.i=ludwig.nussel@siemens.com
- header.a=rsa-sha256 header.s=fm1 header.b=PaaTvw8x
+ header.a=rsa-sha256 header.s=fm1 header.b=UeJ+89bD
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 44D9D60760
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5430140509
  for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 12:53:28 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56E47847E5; Tue, 15 Sep 2026 14:53:26 +0200 (CEST)
+ id BA0D1847DF; Tue, 15 Sep 2026 14:53:26 +0200 (CEST)
 Received: from mta-64-225.siemens.flowmailer.net
  (mta-64-225.siemens.flowmailer.net [185.136.64.225])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73FA7847DF
- for <u-boot@lists.denx.de>; Tue, 15 Sep 2026 14:53:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD60A80117
+ for <u-boot@lists.denx.de>; Tue, 15 Sep 2026 14:53:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
  secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com
- header.b="PaaTvw8x"; dkim-atps=neutral
+ header.b="UeJ+89bD"; dkim-atps=neutral
 Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id
- 2026091512532219223dcafb00020720 for <u-boot@lists.denx.de>;
- Tue, 15 Sep 2026 14:53:22 +0200
+ 202609151253242405c96e80000207d9 for <u-boot@lists.denx.de>;
+ Tue, 15 Sep 2026 14:53:24 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=ludwig.nussel@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=GJ/HANso560EIa6gZ4Iy0FJj8Dv7L3QwFpCkLp3Wovk=;
- b=PaaTvw8x6n71GBQvgjO+NWC0OeJ3in+oHso7GilVpS2OWF9BKeVjjXUWl2gW2vJRN2hYeu
- MwBVGDvWAklLnrvxV3K5JZoNBCzzuOxBvUM7j+xxXWzZ7Q2KUZeVZGzyrSSQvpAfwQNSVWuR
- atc72PC3NdM0uuHQ1tK82cQ/KJAonI++Q5/zeVwo1EQrSd/PpGKRZd/qrADvq2EA70LnwJAK
- fowpP33t0ZpcD/mt56ITQUH8ka6aeFfcf+UsGv+XLkvpwCV9VQ1Vk9m9AtwUFeLoqY3gGPgr
- XuJmCmQLgM1XvIITc0/Ja6b1jglMzq0ctDHrOtpVsymliqpZqHcetzww==;
+ bh=a6F9QU3ZATdmZ5cCxmVeIGD2MEVYDA4+OUvVGMY6QCs=;
+ b=UeJ+89bDmO9iUFTyOomOvlF+4F9v6zVQnQL89E1V1/iQ/wcdIRPRbvD/hnQ4Tqif7iBlZd
+ dX4Hu3d23/PCMD/36DlRXD8fmeUMR5jeUwR1C0ji5IJJkwJHIPfuYTjRx2DgZDxJbJ5biX5A
+ QNexGKtwbf2GIdFjdEz0YmKxad9Gm+DRkHkAgWZ/KCCRRHeQyjVPi9Pb6tYVAJi3WiWsKtyD
+ xRQr81A2qPe2I/HwC7ctH/68zHn9tcNcxPLHxvDk/InCnpAp8chTxFnthFTWIC9m6mD/UGQc
+ p0Jp1DhUtHtA1D+m0nqCAg1FI8gxQAGfs5k0BflmjsX2q0kSoZZWa8WA==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Raymond Mao <raymondmaoca@gmail.com>, Tom Rini <trini@konsulko.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, u-boot@lists.denx.de
-Subject: [PATCH v9 2/8] qemu-arm64: merge built-in DT
-Date: Tue, 15 Sep 2026 14:52:13 +0200
-Message-ID: <20260915145217.v9.2.5f8ce2dc2b00328d29e64be2684b10d9f52c6a7b@changeid>
+ Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: [PATCH v9 4/8] image-fit-sig: Optionally require signatures
+Date: Tue, 15 Sep 2026 14:52:15 +0200
+Message-ID: <20260915145217.v9.4.6d1d5d14140677a76a7cd7bb99a9088d8c8f480c@changeid>
 In-Reply-To: <20260915125317.180911-1-ludwig.nussel@siemens.com>
 References: <20260915125317.180911-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
@@ -166,139 +163,168 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The keys trusted for FIT signature verification are supposed to be
-embedded in the device tree built into u-boot. When running in Qemu it's
-convenient to use the device tree provided by the VM which doesn't know
-about signatures though. So merge both device trees at startup.
+If U-Boot is built with signature verification but no keys are
+included in the device tree, the boot would still continue.
+Introduce FIT_SIGNATURE_REQUIRED to avoid a fail-open setup.
+Defaults to off so existing setups are not affected; boards wanting
+fail-closed behaviour must enable it explicitly.
 
-Make sure CONFIG_OF_OMIT_DTB is not set in qemu_arm64_defconfig to take
-advantage of the feature by default.
+Consistently use log_err for errors in fit_config_verify_required_keys()
+while at it
 
 Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
 ---
 
-(no changes since v8)
-
-Changes in v8:
-- fix smbios test
+Changes in v9:
+- restore debug message instead of errro
 
 Changes in v7:
-- add guard for OF_LIBFDT_OVERLAY
-
-Changes in v6:
-- fix comment style and typos
-- fix error message
-- return error from board_fdt_blob_setup() if dt couldn't be resized or
-  merged. Unfortunately fdtdec_ret_to_errno() is static elsewere so
-  -EINVAL has to suffice
-- mention CONFIG_OF_OMIT_DTB in commit message
+- mention CONFIG_FIT_REQUIRE_CONFIG_SIGS in documentation
 
 Changes in v4:
-- mention arm in subject
-- correctly change defconfig
+- reword Kconfig help text
+- rename option to FIT_REQUIRE_CONFIG_SIGS
+- introduce SPL_FIT_REQUIRE_CONFIG_SIGS
 
 Changes in v3:
-- enable CONFIG_OF_OMIT_DTB=n in defconfig
-- add error returns
-- document decission about dt merging direction
+- clarify error message when no keys were found
+- change printfs to log_err
+- reword Kconfig
+- keep FIT_SIGNATURE_REQUIRED off by default
 
- board/emulation/qemu-arm/qemu-arm.c | 51 +++++++++++++++++++++++++++--
- configs/qemu_arm64_defconfig        |  1 +
- test/py/tests/test_smbios.py        |  3 +-
- 3 files changed, 52 insertions(+), 3 deletions(-)
+Changes in v2:
+- introduce FIT_SIGNATURE_REQUIRED
 
-diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-index 38f0ec5f2fb..590a336380b 100644
---- a/board/emulation/qemu-arm/qemu-arm.c
-+++ b/board/emulation/qemu-arm/qemu-arm.c
-@@ -144,10 +144,57 @@ int dram_init_banksize(void)
- 	return 0;
- }
+ boot/Kconfig                | 22 ++++++++++++++++++++++
+ boot/image-fit-sig.c        | 19 +++++++++++++------
+ doc/usage/fit/signature.rst | 13 ++++++++++---
+ 3 files changed, 45 insertions(+), 9 deletions(-)
+
+diff --git a/boot/Kconfig b/boot/Kconfig
+index ae6f09a6ede..c36a403063e 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -124,6 +124,23 @@ config FIT_SIGNATURE
+ 	  format support in this case, enable it using
+ 	  CONFIG_LEGACY_IMAGE_FORMAT.
  
-+/*
-+ * QEMU loads a generated DTB for us at the start of RAM.
-+ * When using signatures we may have a built-in FDT that contains
-+ * our known public keys nevertheless. So merge the built-in FDT
-+ * into QEMU's. We cannot merge the other way around (e.g. in
-+ * fdtdec_board_setup()) or board_fix_fdt() at this stage as U-Boot
-+ * might be started from a ROM location. At the same time U-Boot
-+ * needs QEMU's FDT to initialize serial devices even before
-+ * relocation.
-+ */
- int board_fdt_blob_setup(void **fdtp)
- {
--	/* QEMU loads a generated DTB for us at the start of RAM. */
--	*fdtp = (void *)CFG_SYS_SDRAM_BASE;
-+	void *qemu_fdt = (void *)CFG_SYS_SDRAM_BASE;
-+	int ret;
++config FIT_REQUIRE_CONFIG_SIGS
++	bool "Require configuration signature verification of FIT uImages"
++	depends on FIT_SIGNATURE
++	help
++	  This option requires that FIT uImages have configuration
++	  nodes that are signed or boot will fail.
++	  That means the U-Boot device tree must contain a
++	  "/signature" node and at least one public key with
++	  required="conf".
++	  All configuration sections of a FIT file must be signed
++	  using those keys based on "required-mode" policy.
++	  The option is useful to avoid fail-open situations so it
++	  is recommended to enable. The option currently defaults to
++	  off to avoid breaking existing setups. Keep it off if you
++	  need to reuse the same u-boot binary in setups without
++	  keys or rely on image node only signatures.
 +
-+	if (fdt_check_header(qemu_fdt) != 0) {
-+		log_err("Invalid QEMU FDT at %p\n", qemu_fdt);
-+		return -EINVAL;
-+	}
+ config FIT_SIGNATURE_MAX_SIZE
+ 	hex "Max size of signed FIT structures"
+ 	depends on FIT_SIGNATURE
+@@ -224,6 +241,11 @@ config SPL_FIT_SIGNATURE_MAX_SIZE
+ 	  device memory. Assure this size does not extend past expected storage
+ 	  space.
+ 
++config SPL_FIT_REQUIRE_CONFIG_SIGS
++	bool "Require signature verification of FIT firmware within SPL"
++	depends on SPL_FIT_SIGNATURE
++	select FIT_REQUIRE_CONFIG_SIGS
 +
-+	if (!CONFIG_IS_ENABLED(OF_LIBFDT_OVERLAY))
-+		goto out;
-+
-+	if (fdt_check_header(*fdtp) != 0) {
-+		/* this was a perfectly normal condition before
-+		 * (CONFIG_OF_OMIT_DTB was set for qemu). So to avoid
-+		 * breaking existing configs don't error out. This
-+		 * might mean that we don't have keys in case
-+		 * FIT_SIGNATURE is on. We can't know though as
-+		 * existing setups might have injected them into
-+		 * QEMU's FDT already.
-+		 */
-+		goto out;
-+	}
-+
-+	log_debug("Found built-in FDT at %p. Merging into %p...\n", *fdtp, qemu_fdt);
-+
-+	ret = fdt_increase_size(qemu_fdt, 1024 + fdt_totalsize(*fdtp));
-+	if (ret) {
-+		log_err("Failed to grow QEMU FDT: %s\n", fdt_strerror(ret));
-+		return -EINVAL;
-+	}
-+
-+	ret = fdt_overlay_apply_node(qemu_fdt, 0, *fdtp, 0);
-+	if (ret) {
-+		log_err("Failed to apply FDT overlay: %s\n", fdt_strerror(ret));
-+		return -EINVAL;
-+	}
-+
-+out:
-+	*fdtp = qemu_fdt;
+ config SPL_LOAD_FIT
+ 	bool "Enable SPL loading U-Boot as a FIT (basic fitImage features)"
+ 	depends on SPL
+diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+index 433df20281f..0e04089fde0 100644
+--- a/boot/image-fit-sig.c
++++ b/boot/image-fit-sig.c
+@@ -632,7 +632,7 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+ 	 * name root but different @ suffix to be equal
+ 	 */
+ 	if (strchr(name, '@')) {
+-		printf("Configuration node '%s' contains '@'\n", name);
++		log_err("Configuration node '%s' contains '@'\n", name);
+ 		return -EPERM;
+ 	}
+ 
+@@ -641,6 +641,8 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+ 	if (key_node < 0) {
+ 		debug("%s: No signature node found: %s\n", __func__,
+ 		      fdt_strerror(key_node));
++		if (CONFIG_IS_ENABLED(FIT_REQUIRE_CONFIG_SIGS))
++			return -EPERM;
+ 		return 0;
+ 	}
+ 
+@@ -674,8 +676,8 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+ 					    noffset);
+ 		if (ret) {
+ 			if (reqd_policy_all) {
+-				printf("Failed to verify required signature '%s'\n",
+-				       fit_get_name(key_blob, noffset, NULL));
++				log_err("Failed to verify required signature '%s'\n",
++					fit_get_name(key_blob, noffset, NULL));
+ 				return ret;
+ 			}
+ 		} else {
+@@ -685,9 +687,14 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+ 		}
+ 	}
+ 
+-	if (reqd_sigs && !verified) {
+-		printf("Failed to verify 'any' of the required signature(s)\n");
+-		return -EPERM;
++	if (!verified) {
++		if (reqd_sigs) {
++			log_err("Failed to verify 'any' of the required signature(s)\n");
++			return -EPERM;
++		} else if (CONFIG_IS_ENABLED(FIT_REQUIRE_CONFIG_SIGS)) {
++			log_err("No suitable keys found for configuration verification\n");
++			return -EPERM;
++		}
+ 	}
  
  	return 0;
- }
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 5bdbd6fb59a..0fd7016c045 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -38,6 +38,7 @@ CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TPM=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_CMD_SPAWN=y
-+# CONFIG_OF_OMIT_DTB is not set
- CONFIG_ENV_IS_IN_FLASH=y
- CONFIG_AHCI=y
- CONFIG_SCSI_AHCI=y
-diff --git a/test/py/tests/test_smbios.py b/test/py/tests/test_smbios.py
-index 3b85a7cc661..607cd3d8cba 100644
---- a/test/py/tests/test_smbios.py
-+++ b/test/py/tests/test_smbios.py
-@@ -49,7 +49,8 @@ def test_cmd_smbios_sysinfo_verbose(ubman):
-     assert 'DMI type 0,' in output
-     assert 'Vendor: U-Boot' in output
-     assert 'DMI type 1,' in output
--    assert 'Manufacturer: linux' in output
-+    # QEMU fdt shows up as emulation, fallback in u-boot is linux
-+    assert ('Manufacturer: emulation' or 'Manufacturer: linux') in output
-     assert 'DMI type 2,' in output
-     assert 'DMI type 3,' in output
-     assert 'DMI type 7,' in output
+diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
+index da08cc75c3a..73153c97367 100644
+--- a/doc/usage/fit/signature.rst
++++ b/doc/usage/fit/signature.rst
+@@ -420,11 +420,14 @@ below examples::
+ 
+ Enabling FIT Verification
+ -------------------------
+-In addition to the options to enable FIT itself, the following CONFIGs must
+-be enabled:
++In addition to the options to enable FIT itself, the following
++settings configure signature verification support:
+ 
+ CONFIG_FIT_SIGNATURE
+-    enable signing and verification in FITs
++    required to enable signing and verification in FITs
++
++CONFIG_FIT_REQUIRE_CONFIG_SIGS
++    make signature verification mandatory
+ 
+ CONFIG_RSA
+     enable RSA algorithm for signing
+@@ -436,6 +439,10 @@ WARNING: When relying on signed FIT images with required signature check
+ the legacy image format is default disabled by not defining
+ CONFIG_LEGACY_IMAGE_FORMAT
+ 
++WARNING: CONFIG_FIT_REQUIRE_CONFIG_SIGS is not set by default for
++backwards compatibility. It is recommended to be turned on whenever
++configuration signatures are used to avoid fail-open behavior
++
+ 
+ Testing
+ -------
 -- 
 2.43.0
 
