@@ -1,154 +1,146 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65B95C88E75
-	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 14:08:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4202CC88E7F
+	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 14:29:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8E55240586;
-	Tue, 15 Sep 2026 14:08:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C7F8280BCD;
+	Tue, 15 Sep 2026 14:29:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uodkECI0cnYs; Tue, 15 Sep 2026 14:08:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 3F46E40564
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789481334;
-	b=m9Mcdj27EGkpg8q26SJ9+V7p0bM/DtJCSCB74WtSPSP7QhsRNExvdLMgF4GZz/brA2g4
-	 XkmHScPub0uC3sBztx83IsQX23N9orsCh4upOGGkvqBvqvhQ3mWmEVg8OHkZy+4LS7+CZ
-	 jRL2WoAmhmJbdjXLEMo2z8C0cKaQ3z0BoCnzL9pDeR/EfN/WRG9cBN1pJvUgi80uJ4ltc
-	 pZ5NpWs+b9QYMwJXt+Mwr8rK3lpAARcPmY6Jv7bDMfWVJ6OeUHyAK+/26RfHvNxULaBI4
-	 95xAWWIv6ycri67awZPs6N23gNQxUhJ700Ol6jFVvU73tmCFH9qisSjZvsFtonhR92w==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8Izoa91Fjeea; Tue, 15 Sep 2026 14:29:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4734D809C4
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789482588;
+	b=L8g1m7PFHKukQ9+DlGOIiV3ASOO1f5HbyIrHhvKDFG+3XlQHI3Ez+YsR1hAKrDWSfyRh
+	 Bi3eTp8/f4WlVoFsBVanh9TjuIDKyXVjL5Xsl9B2t3RN4iK/ARo3RriPMv2nYf3PbZjB2
+	 Fz+r61pugm6+LLb388M4wRJ3e/3+LMPETb7riQL+OED6Zl839W/JPauuckJ5PRWEcX9Lx
+	 G6oW/CH0tFk5rkKvtsfWRJN+gsAgyYSeHwbkER4RCpID9Ix/oplZAe2doV+ORv0QK/YzK
+	 MgWhTYy32z1JAvyHwNwsojTfJnYX/9mx7JKu6JeM1AaV94RwUXOxm8vR5QUk2pacGUQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789481334;
+	c=relaxed/relaxed; t=1789482588;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 Received:Received:Received:DKIM-Signature:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:Organization:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Last-TLS-Session-Version:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=XJkax6aWETH5ySmsJdj5YTAljjuKRTMkeaDg+ISprUE=;
-	b=G2x+H1lmSyhj8KHQNMEhX6YlqLBZcHFRxUxoS12BPJmKhOD9rUNZ9DNBot3ST+0WtV9H
-	 zEzffeYXk4qvdJz7tVwwIIqU56pBZ6uIVNDYh9OBx1uYj4u2OWh1GMO9NG9qaWV4XWABv
-	 fO8U6xB2PxL5m4oIyz7/VieuhrCM7AUG1w9eFPh3aJWw4PRV5wwY2mZvrEQs/wBYo8pR/
-	 ku8nlWH8TAoWXy1XXWLq5DrybEbX3/q4+YdyE1o/DRChAfBH6TFOR0obGmnvhKvAq43eT
-	 xhDQMJ6Z6JqxN0pnJXvPuL92Px6Dd7VXGOAanHb//NCnnlpCnvBFA4HhiLtygydwPZg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=6KjkbPW/paiGvRtz3gzKUGX6j6BYkIZyQcinNCjIRlE=;
+	b=BpLFpI+8tQd3sEJ+qSysxtKnUgQggO/JErlZ0+PFUJsLLa4EaTH0RMwCE5boLQPs3uvO
+	 ZG5Leg5g8kXu2C+Y2z9+WAxK8vgFBkwgtnoHdgzM/V3D4AZyv+2n2Q8LMVyJk6IbM542I
+	 k+5G0QA/aDc7XEsLxYd9YgcSAA1AAoVep5fSd2PLkjfMWXFOTUF4o0n1l6rqA3R2TUrUM
+	 VZzTmkA7XDDRsq46DZUGm6LpT52pAO4tGL2Ico5CVF2yh9DvI+nCKQrYbF0X+yicfIVgI
+	 fd18G0Tt5mZwwkiVl7+cLZSovi471lZ9ld3IUgFHvWmZbCG0/EtFNp/JkiMuTlLpMPg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789481334;
-	bh=XJkax6aWETH5ySmsJdj5YTAljjuKRTMkeaDg+ISprUE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=f18WwLSDcH8JgQHjOWrSVFUZPpJA7bjMbzugNurOnlJjFqV3ffvBLWVyi7bBuOiIy
-	 a38IMbUKtrYanRfjIfTyoky5gBKm2PXVEpVqa55G+McC5r0zXKm6vzXYrtETeue/lQ
-	 z26VB80NVBPXh1KO1NohG4YSVIfTlU5FjSTJkVIW/xS6DK2tOubw+uHLbBoDZ39Qvo
-	 EqBDgk7Strpqg5w5D4qjmK5Q8OFKTnm0Zw2Fo5CNtyq4XEWlGD0/Pbx3VSNhJ/JhJD
-	 zdorHHNUSzswZwmdCAKH17cRhpnmhjAQVxHbJOOIE3cMsQhV3xsZquibi/3nnZ6XFl
-	 /nnXAEkqQJmJg==
+	d=lists.u-boot-project.org; s=default; t=1789482588;
+	bh=6KjkbPW/paiGvRtz3gzKUGX6j6BYkIZyQcinNCjIRlE=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=1CA9ptgylZuwcr0KgkjeVG/IfnRT9cAlBGRxitU94jmkEPuBrINgb0OpuxxAeo4YP
+	 NdTqnvJBqCWTP6pbl2eZKOCx4DM9GmWCTvYHdTNnbze7UZCb63BWm7KzbbQV9L3QRx
+	 3pYyGJentDPqa7aDR6b0YCW+MXakxKKkSsJJ+Wf+RBSarr3WZm4U2RzDpIQOl2pxWy
+	 JoagXHJEH4rTlv27XSgdBP2mpK9WxU81W+32nb+xa1JdolKMxx2AeoNoIAAcvOFRtf
+	 Gqquu/qzORpEFx1FbvDWHXbmjYmFeRTAQHZN+yxkmi4HeTSzyC2eFHY2GNYz90KI9/
+	 OKasXJJGhFNeQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3F46E40564;
-	Tue, 15 Sep 2026 14:08:54 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id BD41F493
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 14:08:52 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4734D809C4;
+	Tue, 15 Sep 2026 14:29:48 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 81EDC493
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 14:29:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BAAFE40090
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 14:08:52 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7370860689
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 14:29:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DmxFg7vqzWCI for <u-boot@lists.u-boot-project.org>;
- Tue, 15 Sep 2026 14:08:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 0CD794002B
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=185.171.202.116
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789481331;
- b=N4eA9Jrs4i4xoFy1QtU69ltM1soho1aU+LKjOJuFPJKg4w9+6ME4TCI/s6jcYjZ0qxKn
- 1HS1Fjdp+xrdj+R8dfxHAQK04S/k4W1dUqL8558w10DEZ1aCefKNE0GI/37Qf80kdD2uN
- kjqnikklOYSQhM6ycgs4t4IiiYb7KrGKtUTgjDkEOXHUljtJYMPRClCtKRZelQwtd6gWW
- ZHkJM8vwS9XrCv42bDuQIJOvAbxSRF12aoqvRIUktBPF0N23XIuB9H/lmal35p86zbZf/
- dEoowwsHhUFo2YPVYcsvpaEB5ISi6xCJc+JiFuNrMe8l51B0jFABPxCF9McWCr7vTFg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lYRWQqmMNqaW for <u-boot@lists.u-boot-project.org>;
+ Tue, 15 Sep 2026 14:29:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 5AE486066C
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=217.140.110.172
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789482585;
+ b=Wb7Nygb6VJyJJ1knk9lk4Ny38tgUlSidl4ibX4Iu2oHz/G0zFEM6TIV6ysf4YCNoefnW
+ nHDWB9lzJW8+m12SZevkti41qXmvl/OCjaN5MYiBHuMBqCPWegorFktR2u9Cljs9kTpA7
+ dAALlLnzegTFAqTvdA2x4bN63dlyAkCawQYPw4iGwtzgUzKJlSOTNTQKm85logCL1p3ak
+ QS5FFw9BnxGn692plaBc0pVg9ZOtxydZlGJwHV5ogc9rU9LW9MlzAaHYvSsSRy2HXNrEJ
+ ccz4q9n12X7QO9Vnh94po1aP8dRLRtvwxALKp7oM4f+GIqgMZKRlPj02LP/QCJmkOtg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789481331;
- h=X-Greylist:Received-SPF:Received:Received:Received:DKIM-Signature:
- Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
- Content-Language:Organization:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:X-Last-TLS-Session-Version;
- bh=XJkax6aWETH5ySmsJdj5YTAljjuKRTMkeaDg+ISprUE=;
- b=MSKwqHnhZJEHAmfitgx48nqh9PRphQ2/cFDYyjeOWUuxCxRZjgAKb+IsO6tLAIS7SC5b
- cA1MuVPK8ACn/ULX1I1KzBn+T3DnuDPtcsfju+y9IfAHeChSlSn/skh95i2ZVt0LQz1iA
- AQ5t68vuH0GUZGRkVwGzM3WHR7a085kfWzVXHQMxHetAq9T55g2SFcqPCS/ZJt6wcUJsL
- iTjUav9qkL+rV81aeHY/1mvb5cN1CKtbOKcqcSfIe1eVtuFDKH7OXyuNXLi6yfmN23taM
- B9OhqDyv22hm08/mVNllZsp2tGerSpk+iTAeHLf2DhZ46P32o0Z1TQnM9u1UcWRtrww==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=bootlin.com; 
- dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b="Fp5gwd/e"; 
- arc=none smtp.remote-ip=185.171.202.116
-X-Greylist: delayed 529 seconds by postgrey-1.37 at util1.osuosl.org;
- Tue, 15 Sep 2026 14:08:50 UTC
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
- header.a=rsa-sha256 header.s=dkim header.b=Fp5gwd/e
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.171.202.116;
- helo=smtpout-04.galae.net; envelope-from=richard.genoud@bootlin.com;
- receiver=<UNKNOWN> 
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0CD794002B
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 14:08:49 +0000 (UTC)
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 00259C5CD48;
- Tue, 15 Sep 2026 14:00:41 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 6EEFC602B0;
- Tue, 15 Sep 2026 13:59:58 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E49F011C7AFEF; 
- Tue, 15 Sep 2026 15:59:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1789480797; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=XJkax6aWETH5ySmsJdj5YTAljjuKRTMkeaDg+ISprUE=;
- b=Fp5gwd/eZWtrAr7CcHu6Pg9Bh+A3nYeKHbakMcJQtmGgdTJbr5B0gGFhMPHPvpi01s34tR
- XOVyzkHIaXhFG31yEWdoTBIpndrYp77iKbx9SbtcUOLV36BWSIWW56QNR2ZKLdyb6sI1N0
- kjRpYOyUiLbGrVignm+dgLgIjlidojqUkvWNMVarob4bYlpJUvEhVlG5Fxc74SSwqP3N6n
- b4oVerSUpu8Nw1ttFCM3E8exu6X3yc6ZWbwkwAxSUV4r8wohoo9YKji1+kXuDwBBzsSBEm
- DbhoJO3ymCUZEbFGmVif4rUvUD7D4GbHt3UtuQ4NLTweVpBXQLq9IzWUc+TNfQ==
-Message-ID: <b5556ad4-dce0-445d-bbc5-bc6f27a52abb@bootlin.com>
-Date: Tue, 15 Sep 2026 15:59:51 +0200
+ c=relaxed/relaxed; t=1789482585;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Developer-Key;
+ bh=6KjkbPW/paiGvRtz3gzKUGX6j6BYkIZyQcinNCjIRlE=;
+ b=gjQNx7JFrZcZjNYf5hj+1m26R3NS/fKLb2rhNX0Jl+5sfrSwEHt+A4pzW7eLs9rB5tcO
+ i9Ka/yO36qxT7i8j5dsxxQ5fst2yoLPM7UmTdGFBAgRLh6jicuj0x/WrD3CD2qgukEDXv
+ hooJaS/6sPs1/HhjWTzWl1gkbvhmlhqqZUIJEzm32GX5TyWEFdmR2K/hlA+f2Qsz0NEKp
+ 2QRod8Ijr9wblEVH4NyhO2DVLgVfV+JyjII2DK5tU4kiO6u508Eta6qI9ahDHfpoEZfuo
+ BvwiJwzqxuLM4iM0kgFaLzVbP3677ui/NFr0LMVsV2EAjwhsD0c9XM5xccr9B1GQQyQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ dmarc=pass header.from=arm.com; 
+ dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
+ header.b="ilIAg/Ut"; 
+ arc=none smtp.remote-ip=217.140.110.172
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
+ helo=foss.arm.com; envelope-from=vincent.stehle@arm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
+ header.s=foss header.b=ilIAg/Ut
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5AE486066C
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 14:29:43 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 20CDB1516;
+ Tue, 15 Sep 2026 07:29:39 -0700 (PDT)
+Received: from [127.0.1.1] (X72Y076X74-2.nice.arm.com [10.34.129.53])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 892693F7B4;
+ Tue, 15 Sep 2026 07:29:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1789482582; bh=2/mXbcewDErauVGx1qNym3sWzvTKdDcvFxvVMKiCmPM=;
+ h=From:Date:Subject:To:Cc:From;
+ b=ilIAg/UtZrO1LU19ffdmNWmsRumzYGN8tfKROEe0amkehYCQeE+TwIq/LRPs+IgWd
+ sapfukeCloenwU1UQuRzDSH1jwmJsC/0tfLtQdCNU1MBBBC1woU/+69iarF8YeuxD8
+ RMhpg2Q3dkeo8OyjeUooFf2CI9ge3uqayCGedPX0=
+From: =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Date: Tue, 15 Sep 2026 16:29:36 +0200
+Subject: [PATCH] fwu: fix read buffer size
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 15/21] arm: mach-k3: j721e: Enable LPM resume flow for
- J7200/J721e SOC
-To: "Kumar, Udit" <u-kumar1@ti.com>, Tom Rini <trini@konsulko.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, "Andrew F . Davis" <afd@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
- Kendall Willis <k-willis@ti.com>, Abhash Kumar <a-kumar2@ti.com>,
- Thomas Richard <thomas.richard@bootlin.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- u-boot@lists.u-boot-project.org
-References: <20260828135730.1565643-1-richard.genoud@bootlin.com>
- <20260828135730.1565643-16-richard.genoud@bootlin.com>
- <989dd99c-c988-46bc-8833-8a6f3d651684@ti.com>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <989dd99c-c988-46bc-8833-8a6f3d651684@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Message-Id: <20260915-fwu-v1-1-cc1fe9640334@arm.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDS0MT3bTyUl0jEyMz00QzS8M0y0QloMqCotS0zAqwKdGxEH5xaVJWanI
+ JSKtSbS0AhM+PvWcAAAA=
+X-Change-ID: 20260914-fwu-24265a691f9a
+To: Sughosh Ganu <sughosh.ganu@arm.com>, u-boot@lists.u-boot-project.org
+Cc: Etienne Carriere <etienne.carriere@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Kory Maincent <kory.maincent@bootlin.com>, Tom Rini <trini@konsulko.com>, 
+ =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1657;
+ i=vincent.stehle@arm.com; h=from:subject:message-id;
+ bh=2/mXbcewDErauVGx1qNym3sWzvTKdDcvFxvVMKiCmPM=;
+ b=owEBbQGS/pANAwAKActJ+FZ2owaUAcsmYgBqqVZV4NEXGlnEy/XHMMgftHRV8BlZaEezk0p6V
+ sArI7xkdiWJATMEAAEKAB0WIQTXYBSgjlpQEXB4KmzLSfhWdqMGlAUCaqlWVQAKCRDLSfhWdqMG
+ lDQpCAC5lnB4Adl3hPOko718joHwBAjCQ/vkIjhxpAL+jldpn76Qb5vBN6yDaGnB3px4oCQ1buo
+ NKvvtr3CRURBkzUwAukKqGwvN+g7m+QyYFB7N2HjSqC6T+y4+cDbEiDd5DphCv6mMv8w0QDRLar
+ /MMjue0PYc5Iu8SIv1hYC9D6u0Hn07ihlFwycRmKOmLZk1wbcj47JxZA8C4+i4GqSEWW5ygvvud
+ i/3xDYFz7LNFYlG+/bwqSYX8iCnAaR09rJlymTfrr2UHs/SpmG2Hy0o3C8wmNULf60uTzBqe16q
+ z12QSiA8/cpY5V7i6r6TYOuxeRjgX3PBg/4WtCnV/j1wvS7T
+X-Developer-Key: i=vincent.stehle@arm.com; a=openpgp;
+ fpr=D76014A08E5A501170782A6CCB49F85676A30694
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -162,130 +154,52 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Le 07/09/2026 à 10:38, Kumar, Udit a écrit :
-> 
-> 
-> On 8/28/2026 7:27 PM, Richard Genoud (TI) wrote:
->> From: "Thomas Richard (TI)" <thomas.richard@bootlin.com>
->>
->> Add support for resuming from suspend in board_init_f.
->> The resume state of the SOC is identified and lpm resume
->> sequence is followed accordingly.
->>
->> First, add the board specific part of the exit retention sequence for
->> k3-ddrss following the DDR resume sequence:
->>     - exit DDR from retention
->>     - de-assert the DDR_RET pin
->>     - restore DDR max frequency
->>     - exit DDR from low power
->>
->> Then:
->>     - Extract context address from devicetree and send to TIFS.
->>     - Power on the rproc cluster.
->>     - Replay the certificates attached to saved images of ATF and OPTEE.
->>     - Resume sequence for context restore and rproc resume.
->>     - Image entry to DM firmware.
->> (All those steps are done in do_resume())
->>
->> The context address area is firewalled by TIFS to protect it from
->> other hosts.
->>
->> Co-developed-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
->> Signed-off-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
->> Signed-off-by: Thomas Richard (TI) <thomas.richard@bootlin.com>
->> Co-developed-by: Prasanth Babu Mantena <p-mantena@ti.com>
->> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
->> Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
->> Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
->> ---
->>   arch/arm/mach-k3/j721e/j721e_init.c | 24 ++++++++++++++++++++++++
->>   1 file changed, 24 insertions(+)
->>
->> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
->> index f9af0288cf66..fce6702be687 100644
->> --- a/arch/arm/mach-k3/j721e/j721e_init.c
->> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
->> @@ -20,9 +20,12 @@
->>   #include <mmc.h>
->>   #include <remoteproc.h>
->>   #include <k3-avs.h>
->> +#include <power/pmic.h>
->> +#include <mach/k3-ddr.h>
->>   
->>   #include "../sysfw-loader.h"
->>   #include "../common.h"
->> +#include "../lpm-common.h"
->>   
->>   /* NAVSS North Bridge (NB) registers */
->>   #define NAVSS0_NBSS_NB0_CFG_MMRS		0x03802000
->> @@ -46,6 +49,10 @@
->>   #define DEV_A72SS0_CORE0_ID 4
->>   #define DEV_A72SS0_CORE0_MSMC_CLK_ID 1
->>   
->> +/* DDR retention bits */
->> +#define DDR_RET_VAL BIT(1)
->> +#define DDR_RET_CLK BIT(2)
->> +
->>   #ifdef CONFIG_K3_LOAD_SYSFW
->>   struct fwl_data cbass_hc_cfg0_fwls[] = {
->>   #if defined(CONFIG_SOC_K3_J721E)
->> @@ -298,6 +305,7 @@ void board_init_f(ulong dummy)
->>   {
->>   	int ret;
->>   #if defined(CONFIG_K3_J721E_DDRSS) || defined(CONFIG_K3_LOAD_SYSFW)
->> +	struct k3_ddrss_regs regs;
->>   	struct udevice *dev;
->>   #endif
->>   	/*
->> @@ -410,6 +418,22 @@ void board_init_f(ulong dummy)
->>   	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
->>   	if (ret)
->>   		panic("DRAM init failed: %d\n", ret);
->> +
->> +	if (j7xx_board_is_resuming()) {
->> +		/*
->> +		 * The DDR resume sequence is:
->> +		 * - exit DDR from retention
->> +		 * - de-assert the DDR_RET pin
->> +		 * - restore DDR max frequency
->> +		 * - exit DDR from low power
->> +		 */
->> +		k3_ddrss_lpddr4_exit_retention(dev, &regs);
->> +		k3_deassert_ddr_ret("pmic@4c", DDR_RET_VAL, DDR_RET_CLK, true);
->> +		k3_ddrss_lpddr4_change_freq(dev);
->> +		k3_ddrss_lpddr4_exit_low_power(dev, &regs);
->> +
->> +		do_resume();
-> 
-> could you check, if caches can be enabled before do_resume() call
-I've tested that on j7200 and j784s4, and it fails at resume:
-U-Boot SPL 2026.10-rc2-00046-g31003eca655b-dirty (Sep 15 2026 - 15:52:55 +0200)
-SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.12--v11.02.12 (Fancy Rat)')
-Initialized 4 DRAM controllers
-Skipping authentication on GP device
-Starting ATF on ARM64 core...
+When the trial_counter_read() function reads its counter from the
+TrialStateCtr UEFI Variable, it erroneously computes the return buffer
+size to be the size of a pointer instead of a u16.
 
-[   82.967460] Enabling non-boot CPUs ...
-ERROR:   Timeout waiting for thread RX_SECURE_TRANSPORT_CHANNEL_ID to fill
-ERROR:   Thread RX_SECURE_TRANSPORT_CHANNEL_ID verification failed (-60)
-ERROR:   Message receive failed (-60)
-ERROR:   Failed to get response (-60)
-ERROR:   Transfer send failed (-60)
-ERROR:   Request to start core failed: -60
-[   83.998938] psci: failed to boot CPU1 (-22)
-[   84.003168] CPU1: failed to boot: -22
-[   84.006989] Error taking CPU1 up: -22
+As the UEFI Variable is always created by trial_counter_update() with
+the right size before any read attempt, overflow cannot happen in
+practice, but fix the size computation for correctness.
 
+Fixes: 7e9814cc6c1d ("FWU: Add boot time checks as highlighted by the FWU specification")
+Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+Cc: Sughosh Ganu <sughosh.ganu@arm.com>
+Cc: Kory Maincent <kory.maincent@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>
+---
+Hi,
 
+This has been tested on the sandbox, with CONFIG_FWU_MULTI_BANK_UPDATE=y
+& CONFIG_FWU_MDATA_V2=y, and with a modified fwu_boottime_checks()
+function doing essentially the following sequence:
 
-> 
->> +	}
->>   #endif
->>   	spl_enable_cache();
-> 
-> 
-> 
->>   
-> 
+  efi_init_obj_list();
+  trial_counter_update();
+  trial_counter_read();
+---
+ lib/fwu_updates/fwu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+index e9bb1b4fc65..24a8f1ce5b2 100644
+--- a/lib/fwu_updates/fwu.c
++++ b/lib/fwu_updates/fwu.c
+@@ -82,7 +82,7 @@ static int trial_counter_read(u16 *trial_state_ctr)
+ 	efi_status_t status;
+ 	efi_uintn_t var_size;
+ 
+-	var_size = (efi_uintn_t)sizeof(trial_state_ctr);
++	var_size = (efi_uintn_t)sizeof(*trial_state_ctr);
+ 	status = efi_get_variable_int(u"TrialStateCtr",
+ 				      &efi_global_variable_guid,
+ 				      NULL,
+
+---
+base-commit: a44f46af0aa17e48572e0d46c0d082886ee353c3
+change-id: 20260914-fwu-24265a691f9a
+
+Best regards,
+--  
+Vincent.
 
