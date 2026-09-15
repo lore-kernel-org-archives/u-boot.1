@@ -4,119 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3879AC88E77
-	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 18:45:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B147AC88E77
+	for <u-boot@archiver.kernel.org>; Tue, 15 Sep 2026 18:50:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9CD4D40367;
-	Tue, 15 Sep 2026 18:45:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6331440363;
+	Tue, 15 Sep 2026 18:50:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8ProW8-l845V; Tue, 15 Sep 2026 18:45:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org C73A84033B
+ id 0oMxQNN0flWl; Tue, 15 Sep 2026 18:49:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org AC73E40352
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789497928;
-	b=UUTB7xPFYCNwl31UtSgC8kb/Uf6p80tdLtCH2KSGoLsFKgglIReXO3h+JeYniZpZjJh6
-	 zoSTqWj6lGGrXZVXe+loteTlGuvipPVg2rTAkVrttAu/ProIY6kNrZEvdB1WqJfy3CpMX
-	 26PF7x4ht6j/GkaJiJVDvRd7zQiweKAKxI8E5fmt8mrydlGzb3oKMmdTE1oS5Mypi/CJR
-	 6ow3me+0xsWq1kM7FwAyuuBD0wrL6mGY1XFokEHrHNJ4Uh+ucpAUK84AOzTLtPnSCglXU
-	 FTblqzTIyF3rrYnLp1bbSky/ENNFyjJAMv0HGGxFygRdOGcSWip3BpXVAAw/MLwdjmg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789498199;
+	b=Q2x0cVJilBtwivNTsTWuIdzHwQqMImwPbdH4Ed4f300sGxXwlUFDzqqBN7kxtU9tiiqY
+	 oAnGxXh3wl4Ik7teedWMJTd+RPECF7Rz3ujcOy7PIWZQmr5jOG1f8JPgp6kLJFnteLssX
+	 ymqMJbGYhQ0wlWMRZ6Pi1w6h0saa9IqPXb0UtWouR/h7HrBhDfeG0XUnBys6EpYnV8lRq
+	 1KbX6I6jFie7CFkflPU5ZD3U0uuuiwYF1houC94eEbJP9oqTQBkChUArg1bKYuTwwK1sH
+	 Sv0dUgfIbbbZaIqyOVaOLt7TmV9XHHOOo8K3gqgbocnAgTDN5Vj2KBz00BHW1T6HGfg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789497928;
+	c=relaxed/relaxed; t=1789498199;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Filter:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 MIME-Version:Content-Type:Content-Disposition:X-BeenThere:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=C99cZNU2yXVXNp4P5evkvQnMApiZN5Vrl+rHRNFtFTw=;
-	b=KQaqrdgSV32Pvj6jN2YE6Ic8ThDq/5TuOF08UbflavoWStTYkaq6rHNaTHI4Hmi+5G00
-	 S9hEvaJyYstM7uH78RhgSPs6b/dd0k8iTXdCaen166IBRFCPwoOoiA2BnQDalevWVowTm
-	 TwSG2Ka/EtO1PCsDUJcbrwELbtvcK7dO9IGc7n37ZTe/T2AsOC9JqSVYb10SjC0GpEcOC
-	 TnjRcwdNRyCMuFTe+sIAPg8eB0KnuCv48jtUipsdmPTG1NPasq1PH4HjltWy9X3BDbppr
-	 m7uJmHIJjipEGjBbgmuUusUHVnkuYvI5gVY6KtL0PaERrJfnvlq546fjCtwpRQ/fSaA==
+	bh=nZQmuypJ15JcuDzfbTUu9NBbSMvPUdT+SBtJEk2BvPs=;
+	b=nCCnyNTv6tnPPB8WyG9oe2TwpIYoSgTB0ainlk1yfyY98hnkjMO6Ljkdse2QaZ4pjrKw
+	 YLabN4nz+ycU6QcQ7vEHC6XmCx8OlMY1Xceqhq5Wk+fyX4QrZIum+jjrSVYgEnxp3BLCt
+	 jaRUK9DqSGQzjSDwctZtRqfGJjlXseDehP3i3RJEVM5Ga82AiQRcgg3Zn0yxt8QBqIzyw
+	 F0ld2xud1fVHBcg6rMkdWrCuhd4UmlrVG9qRDVlf2MJ9776w+K68OQh0BeE7AyNwxf2HX
+	 QAgyv16J2vNKkDjWe75tVMxq5lSR2VYMlfvZOIbc8d1utwhr3Mpn7m6V7bjADqB7IJA==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789497927;
-	bh=C99cZNU2yXVXNp4P5evkvQnMApiZN5Vrl+rHRNFtFTw=;
-	h=Date:From:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=r53RtKvhHrsAqxaaTkyw/FoJj9pOOebSS2nnOPdRKDqtgOX6EVZFJz1NOhWevrlHq
-	 Huv07jGx4JPQcFTXIwl3PMYmj9RA6ByKpY0Qu54/yO84qYwyrD6O3jvHmtxTMihiyl
-	 Iq0qiSMvEaoY18wF+OTsCHXuP/kZ+ISzfCXMzN+JccZ6J+xyX2x8yQx+UM6iA+OGAf
-	 IegxWzsSW07hdo4AsWLgcB6+9+sJ7zXd80IqczIPzoQqp+QPoO22cEqYRLUdYigt5B
-	 ldApe4tAEqObDJhZCPIU4iI4Q1UKrPMRJQO3kage5hUg1iFnYJyIVquVUoc8/L4d0h
-	 4uZsIOhkC5kzg==
+	d=lists.u-boot-project.org; s=default; t=1789498199;
+	bh=nZQmuypJ15JcuDzfbTUu9NBbSMvPUdT+SBtJEk2BvPs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=sBK3yp9JUgCUeSQbp4vyE0k7I+VeZ/ruVCgQSBnbzIIHR434CMbAhxcPgVcYzK//1
+	 he3UhRS3rj3KRNlPPZt+xMxMMGfm0HxpPDzB90DwOrQ7uVPdVfMoIQNTgr8PARYTxJ
+	 mTVD5MhPrgRV5Cuq+Ue4RLJmUmPeNH7jeWtqszawRNfaJVw7A+2nZ8KpcyL1omAJK9
+	 ddI6NiQXhUBGYRU60ZtNigUQrDG4Soj49BS7J9nkmIwhY7yn3pAstf8IZogYOyqqx8
+	 VPBfQBSVeDgPfHnqC5SPasghwQZ0X7SEqbG+ZdnTBuhA53HPvtWqk6ZmZXiP3srIjm
+	 6M9uAb+wsR6BA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C73A84033B;
-	Tue, 15 Sep 2026 18:45:27 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id B79D9EB
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 18:45:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AC73E40352;
+	Tue, 15 Sep 2026 18:49:59 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9AAEF2E3
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 18:49:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id ACBB78098A
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 18:45:26 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 8CBBB400F3
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 18:49:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id af2IepQdelCs for <u-boot@lists.u-boot-project.org>;
- Tue, 15 Sep 2026 18:45:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org E1F9180A58
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=13.77.154.182
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789497926;
- b=kjbsCBc6ATuPK3P242Qx+2FtxT5yqMEDyh1exOb+bOriIZ6HNitVo2z6QYST9m1yr7NH
- ofEfPHoUrklUvCMDGvIR/V6ZAois9jn4OKVxT4htcWLOvxIndT5flXSmySf0XWWca/vpn
- cGBQpcZseTLScXjy7wCNByCzY3ATwliLB1ri3ipjtKYdNlUJY6m0VbxceCo1Y9OIIYFmf
- ujOAo56wVXtE5NBmjMfvmXgQemNMPvAJJoyBpYe4Nwjjoz1w+8jl2yy+uDfunv+08/9jC
- izJtXrGo+zKPB4LBsbi8zsEdrQlnDReP6+PD0QWl6H0Dei+1wKn28KnU4m9lIWdD+aQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5Fqq5g3MtoS2 for <u-boot@lists.u-boot-project.org>;
+ Tue, 15 Sep 2026 18:49:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org E0FED400C5
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789498198;
+ b=BzwmSrv1JNbt45lS0vItEEKTAlZjaZiNwbFLT6YZyRbim57SZXyDpeLv7W4OPyMZ4Zwn
+ RZ+nIhsm8LrJxQp/yyVhSXKg+/OVJsM8elbIiX48BLncP7jspejgwzjVrrO3Ls9O8cz+l
+ 2TBECt2Bq8oX56lVOu6HrAznxt1t5Bj8MaU1B2NFlquB5fb3G4J5xxbnWbEQq+Utnd6mV
+ LWq3pbvp7ntVhDgoony6K/lftV2CsbFatceNG9qVdqublkWydfQdyV7QiRedukNoNtbD3
+ x3RGVZEVu2mgRXPZD7Jab+OV15kE6mXGkz+L2FkKh38ur5emhaROfVlg5LHLTc/uDOQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789497926;
- h=Received-SPF:Received:DKIM-Filter:DKIM-Signature:Date:From:To:Cc:
- Subject:Message-ID:MIME-Version:Content-Type:Content-Disposition;
- bh=C99cZNU2yXVXNp4P5evkvQnMApiZN5Vrl+rHRNFtFTw=;
- b=OR/bsv12rgNoiniGSDu1UPeGgNvppkxUnGmyKqNT8QrQJQmJJjecc6o4I+ftZgL3WqD0
- zE0D6u0Wm/a5PaT5vYyso4rHaKdw6FQYUqmoSYBGhYmybElyk+e/bjCDTwzGF+uzLlH+C
- uRA2YFPmrdPZAThsYGb+zWwbPxLI0AXzsbEdKkMQvx8rx/NGM6rZPf6vsB4PQ6wwL124E
- 8u6rZ0GdFk3eywpUb/Jx2s/jfdP8kAAMR4w6ttRKt48bP4pHGiAmwIcoeBwg73QLB3lY/
- o+qMFYgAxzUQv8oOAxq/GkkU9AOjsWi1lsyTphxtNoyjZEZtR49F2WT2mNNgdEpZAYw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=linux.microsoft.com; 
- dkim=pass header.d=linux.microsoft.com header.i=@linux.microsoft.com
- header.a=rsa-sha256 header.s=default header.b=r0+aN51c; 
- arc=none smtp.remote-ip=13.77.154.182
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=13.77.154.182;
- helo=linux.microsoft.com; envelope-from=sriramsriram@linux.microsoft.com;
+ c=relaxed/relaxed; t=1789498198;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+ Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
+ bh=nZQmuypJ15JcuDzfbTUu9NBbSMvPUdT+SBtJEk2BvPs=;
+ b=RtYRT0LCGSYtalSmveOISmQTFeyHrWjMlYY1vZrQA5FYTFNH06c6Xe8lOU6Er9/tBalI
+ ENGKyppoCydjHPBmM+AyM6gG4LRVKe4YPjNi0p/PXD2xf1XLvDJdBgBAvMbutL6HNPVL1
+ 7PnGveeakDfNd11feiXRXoyIxf4qHsSWZ1brQhLOmoo5rjK+b684/pu7v4jxvUSayfsTX
+ DZIAekAyCNrWjWEy2mkGrhbysWB/KUwzkzIhMyMKT1Emnufp7DlSxpUkNMGELh7LS589k
+ ZKOUirAcpt6QTAlFwC3IjepmYhGP4FW3UISeWy2SDjdFQzzQ5fIZNdqOwQmhKAlxjnQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=pass header.from=konsulko.com; 
+ dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=gq1BODLS; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::e"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::e;
+ helo=mail-oo2-x0e.google.com; envelope-from=trini@konsulko.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
- header.from=linux.microsoft.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com
- header.a=rsa-sha256 header.s=default header.b=r0+aN51c
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by smtp1.osuosl.org (Postfix) with ESMTP id E1F9180A58
- for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 18:45:24 +0000 (UTC)
-Received: by linux.microsoft.com (Postfix, from userid 1251)
- id 35EE220B7169; Tue, 15 Sep 2026 11:44:40 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 35EE220B7169
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1789497880;
- bh=C99cZNU2yXVXNp4P5evkvQnMApiZN5Vrl+rHRNFtFTw=;
- h=Date:From:To:Cc:Subject:From;
- b=r0+aN51cQtu5NplVhZiSHSm+/v7qtoCSJcW5BIJl2THjhvQfAu9yyztAWenj7F/tY
- fID6PFpuXQPXpzqQMRpzKCTe1NtOOlbKRLJbVrqANvHNtVldfMnkhwaT2klDi2INmm
- 3SkHSjlfIPCbKWrvl8LkOC5yxTGecdkftwBkdl3Y=
-Date: Tue, 15 Sep 2026 11:44:40 -0700
-From: Sriram Sriram <sriramsriram@linux.microsoft.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org;, jerome.forissier@arm.com;,
- ankluemk@microsoft.com
-Subject: Re: [PATCH 3/4] net: tftp: use bounded string compare for OACK
-Message-ID: <aqmSGDU2o0OawMEc@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=gq1BODLS
+Received: from mail-oo2-x0e.google.com (mail-oo2-x0e.google.com
+ [IPv6:2607:f8b0:4864:31::e])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E0FED400C5
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 18:49:57 +0000 (UTC)
+Received: by mail-oo2-x0e.google.com with SMTP id
+ 006d021491bc7-6b1ae72186eso117177eaf.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 15 Sep 2026 11:49:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1789498196; x=1790102996;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=nZQmuypJ15JcuDzfbTUu9NBbSMvPUdT+SBtJEk2BvPs=;
+ b=gq1BODLS/6ItiOHRIriMouX2M3XPLymC2L+Ly1Hv2CAwaqsD+rZQxt2Al0D/k4GX15
+ uxCwDeDKJUi7ff3gyct/6RbcBZfQFZ9VqjNkKBQTxHVI5fliPWFajJvXKg5vyA5AAjWT
+ lCtPX8tz5SNy4mETCdiyj7SNdYY6BJsBdU3sM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1789498196; x=1790102996;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=nZQmuypJ15JcuDzfbTUu9NBbSMvPUdT+SBtJEk2BvPs=;
+ b=guobSrT8IgoZ7KdL9bvPwcXi8sNkqs/KwXUb/RzX43qBIgvLvRucRy4qXPb3VFjM4m
+ 5BUqLDVyTm7wPU3IiNUNISCk8d7kkKio6sdB+8f9+xTuJ2wE8xp7mupoU6QgfpOWiq+e
+ eVGqPdU1mZQSg2QRKnvDNo0oJDYbLq12sGFxlAOxSJnTjfLo2USOr6qbEa9RoGS1ctYN
+ w73lobgOAx5fLzQ2RULgWYr1+P8ev/SOBNXgX3XJQSUnyyXk97b9pN9K9tEeZtQOBG+5
+ SwmhUdS6ph04MCqsBkzU3zzRITNoSN4ctR2EekI3fO/IjxhwiQP/a03vCkNuwFNbWrkw
+ rgsw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByTVb/2L8Pw1j6nZF/YcWnWICumZtxyLV3bhmArcMvW3ppMnNpT58BCHIBRCam7/tWREOGzQWA=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lsUE2g6dS1kYCA6964JpaGp+qldpUGt/UjO+dRNF5dnlvOVK2t
+ asQpnC8qromN3j1yIIhhqRtePNU4F2Rh2KMzQGqkSyZhQLYhe6XK1i73/Qv2R6dokbM=
+X-Gm-Gg: AYBFou278hWrFkcZXFRZndpUG/D3UFk8IDgK+xhI0MOB6NrcsnCRWf+WMYwmGX7IqP3
+ w5MXKcGVLlaOtnf+qZx5IaxPaBlR0XyqyVbprkf0DtdNSJY54W/Nlb5Dr+fo4m+HjQd1OuqHZop
+ 4AcDmgopQt+Q7dCb37aMIKE0wSrKcVCqqNhb0yF3/SG8ZyqBuF4I8Ftb4ccbrohJtezZnZi2p0f
+ 2hz13tSk4IWiBQgXHV99lEaTNLGNxXqqXeNu8arOclqCZd+auCa61/dEOj2Aga/Ox4axZwA9nX1
+ fDIpz6ivKH1dBN3kwaH/prgJB2fvmcoofTGBzN6r35fC2CzTTcSsE4BoBlxJ/jwWcoPcmtz60p+
+ oTeaHpz+G82j6jLyYb5IYe18pHaoDiwynkUBURUv57np03rPrgtJwv5CWSycUwuW6aS2bNgI200
+ KAWsG2NIgHu9qQFsLqiWe+wePUJoWxLeicLZdid6gVpuF5m7Vt7G5tgQPq0SxSWeJRr4+hLrD2k
+ IccE0VwMXQeAob3bnQ9UlVVTs52YTl99ykFGRQAE0P7soWENKhugnnQX/KkxnTV8Yvzg9UlS/ow
+ a3bozmnPeKrjd7O+hL6d
+X-Received: by 2002:a05:6820:f04:b0:6b9:447b:8798 with SMTP id
+ 006d021491bc7-6c73a15adfamr1824605eaf.63.1789498196110; 
+ Tue, 15 Sep 2026 11:49:56 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6c7a677b3bdsm527895eaf.6.2026.09.15.11.49.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Sep 2026 11:49:55 -0700 (PDT)
+Date: Tue, 15 Sep 2026 12:49:53 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
+Cc: sjg@chromium.org, u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH] board_f: fix use of uninitialized variable in initf_upl()
+Message-ID: <20260915184953.GA909517@bill-the-cat>
+References: <mkv6dosnzm64fr7y57lhsynqhtiy5bhp2gawlk7vstfyjm37cm@tntjqgtdok7m>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="xwBASk/Tmxy6859T"
 Content-Disposition: inline
+In-Reply-To: <mkv6dosnzm64fr7y57lhsynqhtiy5bhp2gawlk7vstfyjm37cm@tntjqgtdok7m>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -130,97 +177,37 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-option parsing 
-Reply-To: 
-Bcc: 
-Subject: Re: [PATCH 3/4] net: tftp: use bounded string compare for OACK
- option parsing
-Reply-To: 
-In-Reply-To: <20260910192538.GO1764417@bill-the-cat>
 
-On Thu, Sep 10, 2026 at 01:25:38PM -0600, Tom Rini wrote:
-> On Wed, Sep 09, 2026 at 12:20:15PM -0700, Sriram Sriram wrote:
-> 
-> > From: Drew Kluemke <ankluemk@microsoft.com>
-> > 
-> > The TFTP OACK handler matches option names in the received packet with
-> > strcasecmp(), which scans until a NUL byte. A malformed or truncated
-> > OACK packet may not contain a NUL within the received length, causing
-> > an out-of-bounds read past the packet buffer.
-> > 
-> > Replace each strcasecmp() with a strncasecmp() bounded to the option
-> > name length plus an explicit check that the name is NUL-terminated at
-> > the expected position. For the "windowsize" option, whose name and
-> > value extend beyond the loop's "i + 8 < len" guard, add an explicit
-> > "i + 11 < len" bound before the comparison.
-> > 
-> > Signed-off-by: Drew Kluemke <ankluemk@microsoft.com>
-> > Signed-off-by: Sriram Sriram <sriramsriram@linux.microsoft.com>
-> > ---
-> >  net/tftp.c | 13 +++++++++----
-> >  1 file changed, 9 insertions(+), 4 deletions(-)
+--xwBASk/Tmxy6859T
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Does the spec/RFC ensure that we're being given a NULL terminated
-> string here? It certainly makes sense to be using strncasecmp here,
-> but since we're a size constrained bootloader, we do need to find the
-> right balance between defense-in-depth and potential exposure.
+On Tue, Sep 01, 2026 at 03:50:35PM +0530, Naveen Kumar Chaudhary wrote:
+> If the malloc() for the UPL handoff structure failed, ret was checked
+> while still uninitialized, leading to undefined behavior: either a bogus
+> error code was returned or, if ret happened to be zero, gd_set_upl() was
+> called with a NULL pointer. Bail out with -ENOMEM on allocation failure
+> and only read ret after upl_read_handoff() has set it.
+>=20
+> Fixes: 0fc406ab20e ("upl: Plumb in universal payload to the init process")
+> Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 
-Yes.  RFC 2347 defines the OACK as
+I've seen this a few times, I'm curious why you have 11 chars of the
+sha1 for the Fixes tag, and not 12?
 
-  +-------+---~~---+---+---~~---+---+---~~---+---+---~~---+---+
-  |  opc  |  opt1  | 0 | value1 | 0 |  optN  | 0 | valueN | 0 |
-  +-------+---~~---+---+---~~---+---+---~~---+---+---~~---+---+
+--=20
+Tom
 
-so every option name and value is a NUL terminated netascii string, and
-the last byte of a well-formed OACK is always a NUL.  What we do not
-have is any guarantee that the packet on the wire is well-formed --
-nothing in tftp_handler() checks that before the strcasecmp()s run.
+--xwBASk/Tmxy6859T
+Content-Type: application/pgp-signature; name="signature.asc"
 
-On exposure: it is real but small.  strcasecmp() bails at the first
-mismatching byte, so we only read past the packet when it ends part-way
-through something that matches an option name, and the over-read is
-then at most strlen("windowsize") + 1 == 11 bytes.  Those bytes are
-normally stale data in the same 1536 byte net_rx_packets[] buffer (the
-receive buffers are one contiguous pool, net_rx_packets[i] =
-net_tx_packet + (i + 1) * PKTSIZE_ALIGN), so we only leave the
-allocation for a near-MTU OACK landing in the last rx buffer.
+-----BEGIN PGP SIGNATURE-----
 
-The nastier case is the dectoul() right after a match: if the name and
-its NUL end exactly at the end of the packet, dectoul() starts past the
-end and runs until it hits a non-digit byte.  v1 of this patch does not
-address that at all.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaqmTTQAKCRAr4qD1Cr/k
+CoSbAP9FcFwPI2TFaTQ0Kq3NMI1R2ZkJPEBi6+Hjik8pMjD/ywEAxNEb//sA6RfG
+LIgjaNCesLzSlcDO0/ZDXlEESxpzkAE=
+=za6O
+-----END PGP SIGNATURE-----
 
-So I think the balance you are asking about argues for a smaller patch
-than the one I sent.  Since the RFC guarantees the trailing NUL, we can
-check for it once instead of bounding four comparisons:
-
-	case TFTP_OACK:
-		/*
-		 * RFC 2347 requires every option name and value to be
-		 * NUL terminated, so a well-formed OACK always ends in
-		 * a NUL.  Verifying that once keeps the option parsing
-		 * below in bounds.
-		 */
-		if (!len || pkt[len - 1] != '\0')
-			return;
-
-That leaves the existing strcasecmp()/dectoul() code untouched, covers
-the dectoul() calls as well as the name comparisons, and is cheaper.
-net/tftp.o .text on am335x_evm_defconfig (arm-linux-gnueabi-, with
-CONFIG_TFTP_TSIZE=y and CONFIG_TFTP_WINDOWSIZE=1):
-
-  3222  unpatched
-  3246  v1, strncasecmp       (+24)
-  3238  trailing NUL check    (+16)
-
-The one behaviour change is that a non-conforming OACK is dropped
-rather than half parsed, so we fall back to the retry path instead of
-ACKing with whatever the loop happened to pick up.
-
-I will send that as v2 unless you would rather not spend the 16 bytes
-at all, in which case I will drop this patch -- the other three in the
-series are independent of it.
-
-Thanks,
-Sriram
-
+--xwBASk/Tmxy6859T--
