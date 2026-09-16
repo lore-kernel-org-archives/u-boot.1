@@ -1,139 +1,235 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4038CC982C1
-	for <u-boot@archiver.kernel.org>; Wed, 16 Sep 2026 09:38:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A24ACC88E5C
+	for <u-boot@archiver.kernel.org>; Wed, 16 Sep 2026 09:56:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0332C6080F;
-	Wed, 16 Sep 2026 09:38:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C69F580E2A;
+	Wed, 16 Sep 2026 09:56:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gEQsGuJC_yOB; Wed, 16 Sep 2026 09:37:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 1F023607FF
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789551479;
-	b=UEwwpb3yGFnPzSz18M/4lP4LaI1MKAucFLV80dS1pKB7XiVzYDaO+MVCeyYsqX5DYZyx
-	 /dG1gmy3nq7U4MJE3KBsrV/55bpI2HVz0+AFFzHyj+gbLEf30InW377VIGRZSZmFM5G2H
-	 nC4NlIT2Q4CuNZOn//UtkH4/IHDdi8YSY1+2+qKFIGWg55qCRTrrLI1Ji/U4vxmhleGi8
-	 MH62GNbAyD9AiXm8/YjPJ+fen54grvlMzkX7683JAZ9ogwAEtW7a5o+iPM1jq1uopyGKT
-	 ewu7ikrS6MmPqQ0W6ZVOn4Gv7jMf1tbtvUp1AJX+ptMZirh4JjQTIp64cmfqfkzmGkA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789551479;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id E27RpKUmm4xF; Wed, 16 Sep 2026 09:56:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org BDA0480E1B
+Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789552573;
+	b=kr5fWXiqmrka5kiWrxsnoE+bZgpSSQJ6gXiWnuJs8paz0BOTLgUdeYuz7G5OxM6WQXQ5
+	 xqYnLE4yy2zv2oyXDi/v0O8sux+DW7PHOzXBRPcyOsNZ46NwFmD/sUVXEgCOGOvC4VtYz
+	 /z8Gj9nNVML/ykpbVZIkMK4xa8Kuwn+koX5gpGoA1wpac5AVsXKM18el5EICW4MWecI6F
+	 k4GXeOt1a1dWSuSPD2NHVasg37bHiiEKGuXCl7DLNUChZtyKClIh6A+cbmpO7TRRsgPSf
+	 A3qLIA7tlAuxu4FQSH5Rl361UIowX0et5JbcAGtdGhCRNpU1ZkqdAlEpXPgI6MkTjtw==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1789552573;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=tlbGFxkPqld7C1Ak/1Y3oc0vEAATPLkSSLHs7Dz8WDA=;
-	b=kZ0zcWp6+w/U3mulKM/UGhcBOgHhUyV2YImrmzYfo4icI6tmYeSVLZzZAIa0xtvHTKF8
-	 tO1YdRjxnCdUqv6IrLfdqrlB+Yr2219vEI1wHFJzJUh3vJPvrR2oq1MOMQVnYwjDEc65s
-	 pDnvAkILFYXJEhZa/wyTrTq8RCFgE9xOl6EQqBv2hP8u1FOgoATt8ido7hCEwAeo20MFt
-	 231PljRWD0mk8vfdr4Eurpe+m4v8yLjdBKt4nkPnHfvdLzyM0rfRTNsdKIhfMaHOddeXV
-	 Jw4pBo+Dn3cpKT5c6IeqpXlRMqVhoR3fuPRz9zVKkbFFUhqo7l4UaXIARFKx+vQk+Uw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JkUjgLNF;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:From:To:Cc:Subject:In-Reply-To:
+	 Organization:References:Date:Message-ID:User-Agent:Content-Type:
+	 X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=ILdf/69ofWf52Kr1Tdp7oMoELDAtYrW3JNxZvgvSA4E=;
+	b=ntPW56HcXODkC9ZNEUl/N8GNBavGTaGmdKFdNSkpOf6AouvHqrT9xxkxCGmSkRuoQgwT
+	 1dox1aE0icrpPuYRxM2PS6FbgUe/dgaEqIg6QcWJMSm4C9t8M7WgHzJOJlDr6j/Vbq8Ug
+	 z2uG8rg5kx/gMWJlhB9WQEJL+P6DHBBJKl5+qnUns2EjsqVOxqbl1U+5sFQHr2dGigcGc
+	 V0M3XDM1TUeKOLiJK4X3eTR4BVPrmAptwAVKoqJX1aVnDAyyR71UBSzN5v8an1/3mzpNl
+	 W4d8HNxKhN1pHCwCLX4wqEKlC/OwWOqPPugbh7tefCWRax7Am56ZgCYHTd7IJIu1+7w==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789551479;
-	bh=tlbGFxkPqld7C1Ak/1Y3oc0vEAATPLkSSLHs7Dz8WDA=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1789552573;
+	bh=ILdf/69ofWf52Kr1Tdp7oMoELDAtYrW3JNxZvgvSA4E=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Tj4NfQV55llsZwRRNSKby91e2DZew3Dbgae+aM0fBM0lw9XV89CE6Qqe/Ne+SQlVc
-	 n24GhGBDfQzXoTM5tekw9QpGoRnAgCx6NA0MTxudpVScGM5rtdw4CUFebTDIjaTMZ1
-	 8ant7bTIUDarPQy+by4a0yvTs6EELzNRHUbPlySihaXBwoU97oj88DYdH1rt8RZABP
-	 IuXYlg+HdVfCZ5uoZ39otvcIz0NEodXdkJxUHUHrWDvkASUL96BfM/rc9QWDcEG++6
-	 VUURShwGDW9Dwe79xXbYV12UzLYPr5Ib29uStaaaU81n/tGvPyz3NLPEBLi2KHtmKT
-	 V4fjOXs7QtAtg==
+	b=DVEOSG0Xq7Y1CUeJYAnBLHcmMTDnABFjXwM0f9MtJOaA3c2g5ubTxvBwD0cMiHx92
+	 P0xEDcEvN8rpLSYyY/wNygScGM1bCpQTr8NMpw5bn62ZvBwjtog+JMgAVdHVF8Udb4
+	 wm0uBTXSIYX5vZmtfK9QSX2chziy0UfXxU4eRBZ/A53jvw4gTG8GeJm5I7e7lA5hQ1
+	 Rjwe5BUZrv5Khz0vnNM9IFbThRrVK5aOdbXPpdCPco88n2qdx6L2deGWKm8raYOBTw
+	 OExHjkQHBwFLXuvABAYFO+2gN1G7I68v894iIZt+dUHDjZ4WPYuZS5g8dRDRtfSiaL
+	 kUn/BSTDIAYGw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1F023607FF;
-	Wed, 16 Sep 2026 09:37:59 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 3BC53224
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 09:37:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BDA0480E1B;
+	Wed, 16 Sep 2026 09:56:13 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1CD7423F
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 08:24:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 20FDD60803
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 09:37:56 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 02796404EC
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 08:24:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id stTh4YwYryra for <u-boot@lists.u-boot-project.org>;
- Wed, 16 Sep 2026 09:37:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 50157607FD
-Authentication-Results: smtp3.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789551475;
- b=QqQYn0CQ/F1eKACQE4TyOExKy7rnd/atn45nKwkpwjCvpdgEm22brLMMxQlar7UDImwl
- dlOPCOcpHK+djge/QDL1ZtTqaTsHWOcQX2koQp8YYFnd6owaxGTLdR/qnduXioaEA0wP9
- +rh2zugkVcqolSoJPHTuvoOV65gG61LmgHf5Z+REbMDzKmmV2Cks30x8jG0lSiblyPOyX
- 3kG7tEdoUexxkhg/ayvkXJJfddBkGgylfg703MjQDR1Y0OHOZ7Mw8RLmO5dY/F0+VVw2g
- oLLWsNZ+VRp/7feqnoXIXq8iHUhGT2x4aTAYWe4VeHJVmtZkc/l7wMczyKKygiuxEtg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789551475;
- h=Received-SPF:Received:Received:DKIM-Signature:From:Date:Subject:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
- References:In-Reply-To:To:Cc:X-Mailer;
- bh=tlbGFxkPqld7C1Ak/1Y3oc0vEAATPLkSSLHs7Dz8WDA=;
- b=Y2PaWcGAB5pfVCqQx1xetLRopct/7COi5G4omMtoQTbex5p8FaAXknMP5/sFlVsDJFLG
- NoLafaU9Ga9+vTEPm3ggJrH65Qgbto/YiPMVwh12ZjUqFzWt/tc+S6EF4XEypzlXQyuaC
- YOC3CjN5L/0gueAALVQmky3lNQGLNbTUPdRImDQAZpfq+xdhr8S0kmXU2QsgXDB7Zkkb/
- fyIcUIkc5AeEBNoeKwujgWkOahnsjY6+OTXF2EnLCzEDcYtJhIA4vGkSb+7AZ8MBVI41W
- mtxqheRt6K58Q4rSGvSgmYjUFHp6D9gvobZp0rAmjfOe9bV09bWU3NqLFz2p/v74GNw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=kernel.org; 
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=JkUjgLNF; 
- arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jPv-AZiBP4YI for <u-boot@lists.u-boot-project.org>;
+ Wed, 16 Sep 2026 08:24:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B00374052C
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c201::1"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789547094;
+ b=MEl0UL0DPkZWOGhvv/9oLbctNLNlWpd0zU0VYRRMCQ6k1SedJ3ijsR0NvUkqIUoAbt7o
+ AFotKPjnrPQ2J4+sqoh+lMngl4D8PmQ9lxNPzfrUQsTOb+FKA1O2E2k2iJU3z/wSDkpxg
+ vAqu75YVqU4JlwxPRAL3+N13AVLhGLRghQtNFDcjc3ogXmfa4afy8w8JKV45J/a0PRAxA
+ 5oc1vzEDcD0xs5Llmj0XVvzQ0rod9elDth2kJGqq1DHhospgikg51tN2DnmcRqgIBCNX0
+ 7Zle+K1rtyefIsXkBXxYwnmlYl7EAmMoWg5NYBjYiUQWOdXuZLkrc8DI8rJgTbaFU8Q==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1789547094;
+ h=Received-SPF:DKIM-Signature:Received:Received:From:To:Cc:Subject:
+ In-Reply-To:Organization:References:Date:Message-ID:User-Agent:
+ Content-Type:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+ X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+ X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+ X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+ X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+ X-MS-Exchange-CrossTenant-UserPrincipalName:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=ILdf/69ofWf52Kr1Tdp7oMoELDAtYrW3JNxZvgvSA4E=;
+ b=VkACfUVsnNXemjU+uX5Lynf2NpV+6DaRFaR1LA2f7GD9ssbMYbdt2WtS5tlaUxaGYmPz
+ hJNOjfOXdSCnFCCME7CybmdCkoiVkjDnb1zkomU7IeU1GLAwXrJH/zQEpUe7Mkxhcvtbe
+ HNKsAfzg6EcAk/WyesY1aLvp6fimmr6/Wav1JUHoudlLtPyJRP33zF/LnXNqrExMyWMnt
+ YhpMgRNc0OKp/vfzaLdgyi4ZM25nw0FKtF+5Y5GqNJCCbqEcimb1ONzoOrhXYLka3ZY4S
+ WHz5hVjWPXurc/vb7KljveQF7Ji+NHuJ0+hVJ4i0zkTnUAAkgTWP9MHCHrPEAnMeC1A==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ dmarc=pass header.from=prevas.dk; 
+ dkim=pass header.d=prevas.dk header.i=@prevas.dk header.a=rsa-sha256
+ header.s=selector1 header.b=cCLFuM8h; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c201::1"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
- envelope-from=linusw@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=JkUjgLNF
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 50157607FD
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 09:37:54 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 939F441671;
- Wed, 16 Sep 2026 09:37:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7E5A1F00893;
- Wed, 16 Sep 2026 09:37:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1789551474;
- bh=tlbGFxkPqld7C1Ak/1Y3oc0vEAATPLkSSLHs7Dz8WDA=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=JkUjgLNF7WJnsCZDuhzC3pUOoQ0HiS2vzIl2PxAkrpHlMdUr+skzKjrDVJIMgq4BJ
- Z+Q4Lu09WJQtee/30euTHelrsordmVid2jrNg/F/aZaYWOQELoghpcO6r7uSEnbYlj
- F+Ia/9Ttl31I+kScpv64qRD86JcXvPa4VvnkdhZBYhpnIPTZdJy3bfWI+zIHBnF3JI
- s+K96Gwec6UiJ/jASBhuSNejfsbLmvhmyikFg78wHF2dVsc25S5AkLChRK4Xg6eOKN
- aVVooZdgoYOk3URxopSp3jR2BOZlFpRm4sfBrTBMnfQEkPY6D5ka0yXAXg4+0HJIZY
- QdhmaoKxq55lA==
-From: Linus Walleij <linusw@kernel.org>
-Date: Wed, 16 Sep 2026 11:37:40 +0200
-Subject: [PATCH 8/8] mmc: arm_pl180: Use variant FIFO sizes
+ client-ip=2a01:111:f403:c201::1;
+ helo=am0pr83cu005.outbound.protection.outlook.com;
+ envelope-from=rasmus.villemoes@prevas.dk; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=prevas.dk header.i=@prevas.dk header.a=rsa-sha256
+ header.s=selector1 header.b=cCLFuM8h
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B00374052C
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 08:24:52 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PLzQk4HF0z1//CkXUkXiTu+Q9Zk40O+F/rUPQQvmLk7q+jOL++ZvAhjWSyBUriL7LK8LjQyn2BfP7ZBsBAS4P3bGJ0MVcHmNKH+JG55RvL1k+z3mX6lkF7XMxkJE04dPL/t8jz7uo1upU8IYIUpYWGif6ZrjMKm3JE1tfKUcTdQMggNczumYutI101Nss034+PqCndw8eBv/zvcT0wK0CHwyvaKOCchxtJF+UsSmr8uvZ4cw2y77363/iAUtyKihKqo2eune/b/fihA2ucaumeEE6HbHfAImyEGzMz5Q1V30NMvzwxVdyDUXPkFDWvecBWgghDnnqLoVFx+/b/bx+g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ILdf/69ofWf52Kr1Tdp7oMoELDAtYrW3JNxZvgvSA4E=;
+ b=q2ITcGMNgoKmCGsSwHbtHAMMJPCZHGmwch+fPCfizYt12Zxasl4T7Q2oB2uH2z2M10rd9bq0knz+jtGufWRGCkw1AYGodL1aEzV1l2lcxroCxactzDIPMhMaoZpBhhhMsSYWcGjV+EVxEgbG8WGR+jDfmxXiaFFy2T2ukRn0vf30JlWtFFqtBbNE+qXijIBuyIeQGgK0Sl6fKgMXB8L45C2vnqO5LZCPdn1tWpl+uF8DP1Hsm/rPiEu34qP7SWaiYK9xJ3OqIVH0BOF4eSrqKetxfUngKkITdRH6XVE3PdQZS5/k3zXPIJFzeEYi6Oj4rn+u16p1XImHmAoFIsrlZA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ILdf/69ofWf52Kr1Tdp7oMoELDAtYrW3JNxZvgvSA4E=;
+ b=cCLFuM8hRUl8PrO/ml+dA4kvgDzKBIG52/RfQ8H/lcgbbF8CRL3I4yqd9emldA9HNfB7hLnxGOhjE2bn9pV8XLfA0EIz1rRWGsNB5OqrwBck5ZBh7s5Xvm8ceMe8JzvOm7O1jJECJeDCbDeFtTuy61OMq7wjHt0x2u7J3TjMFDQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by BESPR10MB412733.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:b10:12d::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Wed, 16 Sep
+ 2026 08:24:46 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8%3]) with mapi id 15.21.0406.007; Wed, 16 Sep 2026
+ 08:24:46 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: u-boot@lists.u-boot-project.org,  Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,  Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH v2 2/4] optee_ta_avb.h: add
+ TA_AVB_CMD_READ_PERSIST_VALUE2 define
+In-Reply-To: <87cxup9p0f.fsf@prevas.dk>
+Organization: Prevas
+References: <20260903212215.2331118-1-ravi@prevas.dk>
+ <20260903212215.2331118-3-ravi@prevas.dk> <87a4pttgch.fsf@kernel.org>
+ <87cxup9p0f.fsf@prevas.dk>
+Date: Wed, 16 Sep 2026 10:24:44 +0200
+Message-ID: <871pattxgz.fsf@prevas.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Content-Type: text/plain
+X-ClientProxiedBy: GVZP280CA0088.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:150:275::15) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260916-mmc-pl180-improvements-v1-8-5d7670c3bb32@kernel.org>
-References: <20260916-mmc-pl180-improvements-v1-0-5d7670c3bb32@kernel.org>
-In-Reply-To: <20260916-mmc-pl180-improvements-v1-0-5d7670c3bb32@kernel.org>
-To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Stefan Hansson <newbyte@postmarketos.org>, 
- Stephan Gerhold <stephan.gerhold@linaro.org>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
-Cc: Linus Walleij <linusw@kernel.org>
-X-Mailer: b4 0.16.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|BESPR10MB412733:EE_
+X-MS-Office365-Filtering-Correlation-Id: 95d961fc-8c46-405d-5cd7-08df13cbf76a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|366016|376014|1800799024|56012099006|4143699003|10067099003|11063799006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: R66wwVyomOf09PIUO27Y2KTbyGOTFxB7fKueVSQUBJ7EvAZ6s/GkAqqvW3jmxJIQanLFqcvUCv+lR2eNWoDgm/Lllw9e275jaz5jiu9pnlvf7E8yUivLOOYp5D4sM/hxN9P/tK7hLPHipW5ChiVWqj5HGEEJ2c5IQhk9A7+GipSNN9cGAjuO9jr7jVZM18pdOvHABngmnxkDbdjBBPYkfC2qT6SKdcra1C3VKdMAl4WDJYYleMVNz1RA1a4mYEBBu1GcZYabTqNI6T4rq6+TjS9WZu5KrPb2Lwf0Qhc4gnop4dsay95avJcHyxdE0lLKydoU/4jNEHsku0h0UqdK+h9UieYq6pK/bryttwE1xDTmnsdJAMuUCqYrWSOiUikaRMSp7NNdJ6PQQYZ/ecGLbZGacpglbd08FDOiIrtc6+hE4489rh1n9XzjrpcPM10bxqSJI+iecqw2ZaRILv9JxejdY/DIy/c97wEdgsXHbue8GAgI87yITTwDeqmjAK6Hv66o3Uer/v3+Tp1vxKfC8ithj2C3HxXE4ZQUe7BduqzC1BAy+VGFnOXQpQmRGBjr0WyuDI9E35zROhkJOTBu/nVWCkX+xNzwgwllurfgMQgRMu1at2uFBK12dqgFbrM9qeW/Rmu8DXXrsrrb/7V/EJ5eeuisfbCzTGmbEffUGa4=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(366016)(376014)(1800799024)(56012099006)(4143699003)(10067099003)(11063799006)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?b1Iiwa2splDtKt5UDmwjW7euJvWYAnz/3NXm+5DYKinlA8mtd4xNxqkgSoA5?=
+ =?us-ascii?Q?TBVKqek9IfhpAf/m8PC/eg8s7BMN/1Vf2Z1/Spbil5uj55EVyLLFIEcTZIXI?=
+ =?us-ascii?Q?6kZzUVoyzU8ghTIA5KFmnd3bvbmn1tPiozK43bBGgx8im2vRIIGY02sghhu6?=
+ =?us-ascii?Q?+6axq3hCVyVQ4Cf2+F6BJUxlLZ9lwUb1xn9xOwj+1ZuSGPZaitQPRCum4Qm/?=
+ =?us-ascii?Q?24OCkZeORrZ+9ghB8qSbhsPM4b1xo/oiJrTmVNJJad1ZQURjUDnjd5oieiWf?=
+ =?us-ascii?Q?GMZLCsVx++WqLaMgtk43CPRTKQ/b/OFwgWw1d4t3hNjol3a16hqi1I1PPv2G?=
+ =?us-ascii?Q?Cjv6lOC20NXcS0SE5U+SaqpeFgo2yVAK24yjbsuueeF5XBkKO090LnVaL+pi?=
+ =?us-ascii?Q?6tV/GYBqGkKW4U5Ie566fQfUwWp9y5eK538S7GcNSa1c5myqf40Ou9cnJGlt?=
+ =?us-ascii?Q?H0+DNUMXaol63lUL9a4keFzisrx+q5JoCJiVOiaD2T6Z9ny0rPIdFPz1jcmo?=
+ =?us-ascii?Q?w9ky3PbWilaze3JwnIgHuh/AV/OlElk3/ejqk/J/F8sJx40R1sjy5FPbJWn0?=
+ =?us-ascii?Q?26yKqcp9YMngDcT+S0sj1P7Y2BBXVh0jP8RHd0bD5Kg1EVaiNvkfD0nxbnde?=
+ =?us-ascii?Q?gMbpr7YgOyhedbOlKHaGvlqX1Qdh5JcnVnDJthpX/nxcnix+4SI2OEe+H87s?=
+ =?us-ascii?Q?+79NE5ENkaAcZ++5baK3DokhZvIXHjV19/nGBNfeZtbbzew1uzMss4X0S8ga?=
+ =?us-ascii?Q?MPPNPjYA7n57vG/GW6KcyNDrJA7LpcT65/1VM45lc6n3I0n9zkJBhnwv9meE?=
+ =?us-ascii?Q?dsR3pJ06Oaph+pmjGNbPEPnArtRer1cK2S2VeUIMIb2YONMSWc2BQgzkTdnH?=
+ =?us-ascii?Q?y19SJ+VZUfE0SAVl82Yo+BeHsJX/+qP39xThJyfFDjcSvkFc3QmueutHbgEZ?=
+ =?us-ascii?Q?atvVJ3xvv6iNmgkv4odMmn5BQRAtrruNrKKYdgcdarWs+3qioQr3DLNy4Y6a?=
+ =?us-ascii?Q?1FMrVsf4CwjkA0ki3qGPKdBkSqOubn8WWbf5gywt0lOuFSLxQc7VCqtyC7+7?=
+ =?us-ascii?Q?GElo6+2ZwcDX37FZcN+xj/gsQLa1EnMdR97MGWxBg2E0mRr3/WVteYnXBsSZ?=
+ =?us-ascii?Q?PD6ZS2Fhl+oP0IghK7XNjDa6y50mzW96w8RgjaCFulVMYijFB1lqWgjUIVzX?=
+ =?us-ascii?Q?n78GIcXil8s6T5f+JEyeYvdrspyddNMYU+UBnmzbJl0UQAbKYSYWs+KdX7p5?=
+ =?us-ascii?Q?u4CbaP2jR06WuDlwHmvS2rp5TMRV9eF54fs4AedQVWatOCOqmwgl1N2NNZkk?=
+ =?us-ascii?Q?EH6T5d03HhhqQyGVm8hHaYOqgjYzGlc90vv1uLMso72d2uH1oEC7uhEOOJ3O?=
+ =?us-ascii?Q?YLF/wyj/5w/8mp/WF27rBEsWHVKG2FmgxNH/vXhuHK26O11r+1EeAOQNY0sY?=
+ =?us-ascii?Q?o/mu4P/EItCN2HmY+NHlKcfMEIiuaZtYdx9qBGleTBNkKpW7ZLgwzgAPvVRh?=
+ =?us-ascii?Q?1R1TGb5/sAN13ReCZJM+YCLUV1EoK8wDQIId8+/cZHO8sMMgH9fp9GbS29gK?=
+ =?us-ascii?Q?4gXzX6HX8DJ0ca9AO/l25HwQXhoICLJl9Ae29F9X0YF+vsGzBW3jHidtHbvk?=
+ =?us-ascii?Q?je12ZJwJFdSIFt0C5aVigLXzCxDeCyb2sgynN3w+AcruWArENHaFXI+jDu+n?=
+ =?us-ascii?Q?+cDYUJv6RvEP30Z6vZwD7yx1blBwboPLANdU/bmgPUvemWb0ty1UTpvfRLed?=
+ =?us-ascii?Q?QaoL6LIpmTpY8MgqIOGMZ8m6SzRKfzI=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 95d961fc-8c46-405d-5cd7-08df13cbf76a
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 08:24:46.2234 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: KLeiugz/b6wBhd5mGiAxiyxdWIuY/dD6sGggBXTV4jy1e1CDrx2Bsxd4n1Ur8z4OJxr8uV5tuqjNCd/rsDpQ414wObYvX/eChDVNUe8M2kI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BESPR10MB412733
+X-Mailman-Approved-At: Wed, 16 Sep 2026 09:56:11 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -147,146 +243,32 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The MMCI variants do not all expose the same FIFO capacity. The ARM
-PL180 can transfer 16 words when the FIFO is full or empty, STM32 can
-transfer 32 words, and Ux500 can transfer 30 words. Their half-full and
-half-empty conditions guarantee eight words.
+On Mon, Sep 07 2026, Rasmus Villemoes <ravi@prevas.dk> wrote:
 
-Store the full and half FIFO sizes in the host according to the
-peripheral ID. Use the full size when the corresponding full or empty
-status is asserted and otherwise retain the half-size burst. This
-reduces the number of status polls and bulk I/O operations where the
-larger FIFO capacity is available.
+> On Mon, Sep 07 2026, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
+>
+>> Hi Rasmus,
+>>
+>> Thank you for the patch.
+>>
+>> On Thu, Sep 03, 2026 at 23:22, Rasmus Villemoes <ravi@prevas.dk> wrote:
+>>
+>>> Add the new TA_AVB_CMD_READ_PERSIST_VALUE2 definition, and synchronize
+>>> the comment for the existing TA_AVB_CMD_READ_PERSIST_VALUE with
+>>> optee-os' ta/avb/include/ta_avb.h.
+>>>
+>>> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+>>
+>> I see that this is not yet merged here:
+>> https://github.com/OP-TEE/optee_os/pull/7959
+>>
+>> I hope there won't be any other changes in optee_os, otherwise we will
+>> have to re-update here again.
+>
+> Indeed. I had hoped/assumed that since Jens gave his Reviewed-by it
+> would be merged soonish. I'll give it a few more days, then ping to see
+> if there's more I need to do.
 
-Signed-off-by: Linus Walleij <linusw@kernel.org>
----
- drivers/mmc/arm_pl180_mmci.c | 47 ++++++++++++++++++++++++++------------------
- drivers/mmc/arm_pl180_mmci.h |  7 ++++++-
- 2 files changed, 34 insertions(+), 20 deletions(-)
+The optee_os side of this is now merged.
 
-diff --git a/drivers/mmc/arm_pl180_mmci.c b/drivers/mmc/arm_pl180_mmci.c
-index 7d58c64df11d..31efa7576ff5 100644
---- a/drivers/mmc/arm_pl180_mmci.c
-+++ b/drivers/mmc/arm_pl180_mmci.c
-@@ -143,6 +143,7 @@ static int read_bytes(struct mmc *dev, u32 *dest, u32 blkcount, u32 blksize)
- 	u32 *tempbuff = dest;
- 	u64 xfercount = blkcount * blksize;
- 	struct pl180_mmc_host *host = dev->priv;
-+	unsigned int count;
- 	u32 status, status_err;
- 
- 	debug("read_bytes: blkcount=%u blksize=%u\n", blkcount, blksize);
-@@ -150,13 +151,18 @@ static int read_bytes(struct mmc *dev, u32 *dest, u32 blkcount, u32 blksize)
- 	status = readl(&host->base->status);
- 	status_err = status & (SDI_STA_DCRCFAIL | SDI_STA_DTIMEOUT |
- 			       SDI_STA_RXOVERR);
--	while (!status_err &&
--	       xfercount >= SDI_FIFO_BURST_SIZE * sizeof(u32)) {
--		if (status & SDI_STA_RXFIFOBR) {
-+	while (!status_err && xfercount >= host->fifo_half_size) {
-+		count = 0;
-+		if (status & SDI_STA_RXFIFOF)
-+			count = min_t(u64, xfercount, host->fifo_size);
-+		else if (status & SDI_STA_RXFIFOBR)
-+			count = host->fifo_half_size;
-+
-+		if (count) {
- 			readsl(&host->base->fifo, tempbuff,
--			       SDI_FIFO_BURST_SIZE);
--			tempbuff += SDI_FIFO_BURST_SIZE;
--			xfercount -= SDI_FIFO_BURST_SIZE * sizeof(u32);
-+			       count / sizeof(u32));
-+			tempbuff += count / sizeof(u32);
-+			xfercount -= count;
- 		}
- 		status = readl(&host->base->status);
- 		status_err = status & (SDI_STA_DCRCFAIL | SDI_STA_DTIMEOUT |
-@@ -211,6 +217,7 @@ static int write_bytes(struct mmc *dev, u32 *src, u32 blkcount, u32 blksize)
- 	u32 *tempbuff = src;
- 	u64 xfercount = blkcount * blksize;
- 	struct pl180_mmc_host *host = dev->priv;
-+	unsigned int count;
- 	u32 status, status_err;
- 
- 	debug("write_bytes: blkcount=%u blksize=%u\n", blkcount, blksize);
-@@ -218,19 +225,17 @@ static int write_bytes(struct mmc *dev, u32 *src, u32 blkcount, u32 blksize)
- 	status = readl(&host->base->status);
- 	status_err = status & (SDI_STA_DCRCFAIL | SDI_STA_DTIMEOUT);
- 	while (!status_err && xfercount) {
--		if (status & SDI_STA_TXFIFOBW) {
--			if (xfercount >= SDI_FIFO_BURST_SIZE * sizeof(u32)) {
--				writesl(&host->base->fifo, tempbuff,
--					SDI_FIFO_BURST_SIZE);
--				tempbuff += SDI_FIFO_BURST_SIZE;
--				xfercount -= SDI_FIFO_BURST_SIZE * sizeof(u32);
--			} else {
--				while (xfercount >= sizeof(u32)) {
--					writel(*(tempbuff), &host->base->fifo);
--					tempbuff++;
--					xfercount -= sizeof(u32);
--				}
--			}
-+		count = 0;
-+		if (status & SDI_STA_TXFIFOE)
-+			count = min_t(u64, xfercount, host->fifo_size);
-+		else if (status & SDI_STA_TXFIFOBW)
-+			count = min_t(u64, xfercount, host->fifo_half_size);
-+
-+		if (count) {
-+			writesl(&host->base->fifo, tempbuff,
-+				count / sizeof(u32));
-+			tempbuff += count / sizeof(u32);
-+			xfercount -= count;
- 		}
- 		status = readl(&host->base->status);
- 		status_err = status & (SDI_STA_DCRCFAIL | SDI_STA_DTIMEOUT);
-@@ -451,6 +456,8 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
- 	host->clkdiv_init = SDI_CLKCR_CLKDIV_INIT_V1 | SDI_CLKCR_CLKEN |
- 			    SDI_CLKCR_PWRSAV | SDI_CLKCR_HWFC_EN;
- 	host->clock_in = clk_get_rate(&clk);
-+	host->fifo_size = SDI_FIFO_SIZE_ARM;
-+	host->fifo_half_size = SDI_FIFO_HALF_SIZE;
- 
- 	cfg->name = dev->name;
- 	cfg->voltages = VOLTAGE_WINDOW_SD;
-@@ -462,9 +469,11 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
- 	periphid = dev_read_u32_default(dev, "arm,primecell-periphid", 0);
- 	switch (periphid) {
- 	case STM32_MMCI_ID: /* stm32 variant */
-+		host->fifo_size = SDI_FIFO_SIZE_STM32;
- 		host->version2 = false;
- 		break;
- 	case UX500V2_MMCI_ID:
-+		host->fifo_size = SDI_FIFO_SIZE_UX500;
- 		host->pwr_init = SDI_PWR_OPD | SDI_PWR_PWRCTRL_ON;
- 		host->clkdiv_init = SDI_CLKCR_CLKDIV_INIT_V2 | SDI_CLKCR_CLKEN |
- 				    SDI_CLKCR_PWRSAV | SDI_CLKCR_HWFC_EN;
-diff --git a/drivers/mmc/arm_pl180_mmci.h b/drivers/mmc/arm_pl180_mmci.h
-index fca15910a8db..92057c18f55e 100644
---- a/drivers/mmc/arm_pl180_mmci.h
-+++ b/drivers/mmc/arm_pl180_mmci.h
-@@ -140,7 +140,10 @@
- #define SDI_DCTRL_DBLOCKSIZE_V2_MASK   0x7fff0000
- #define SDI_DCTRL_DBLOCKSIZE_V2_SHIFT  16
- 
--#define SDI_FIFO_BURST_SIZE	8
-+#define SDI_FIFO_SIZE_ARM	(16 * sizeof(u32))
-+#define SDI_FIFO_SIZE_STM32	(32 * sizeof(u32))
-+#define SDI_FIFO_SIZE_UX500	(30 * sizeof(u32))
-+#define SDI_FIFO_HALF_SIZE	(8 * sizeof(u32))
- 
- #define STM32_MMCI_ID		0x00880180
- #define UX500V2_MMCI_ID		0x10480180
-@@ -189,6 +192,8 @@ struct pl180_mmc_host {
- 	unsigned int clock_max;
- 	unsigned int clkdiv_init;
- 	unsigned int pwr_init;
-+	unsigned int fifo_size;
-+	unsigned int fifo_half_size;
- 	int version2;
- 	struct mmc_config cfg;
- #ifdef CONFIG_DM_MMC
-
--- 
-2.55.0
-
+Rasmus
