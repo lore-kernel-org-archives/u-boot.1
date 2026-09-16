@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE2D1C982C9
-	for <u-boot@archiver.kernel.org>; Wed, 16 Sep 2026 21:16:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A120C982C9
+	for <u-boot@archiver.kernel.org>; Wed, 16 Sep 2026 21:17:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7006A40729;
-	Wed, 16 Sep 2026 21:16:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BD2DD40769;
+	Wed, 16 Sep 2026 21:17:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xDaZQ3v-Gv43; Wed, 16 Sep 2026 21:16:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 41BF140723
+ id zrfta_j4VUQh; Wed, 16 Sep 2026 21:17:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org C8FE840723
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789593413;
-	b=C6pTxrtufSeYgShtGw+R7isCYEwqzIkucNwQS3tNeIm1MZwDiXx96V8SfpBuctyPSuLz
-	 c5MLCBvuX2vzOGbykam+XbHiAVRuKd5plrxVzNRkFLfG78SGNSftuke0Lq9I593VKJcjV
-	 eTxrSMWiouticy1kA/uUbLp75gIgJnfq7cW3K8VFP6fO7IdXDiJ2BsfRiwxCdEleKQtNL
-	 Q60fT12Znh1oruOPS8tomMHFaDib/5adFo0uw1bB5LP7+IKnZd6gKUS6PXb70Ef3DO3d1
-	 mlCrX7krLoYJOnVPylODW+litrShHE2DarwizrUOoRSnC+RakXJ2U9jexssJEVO+rrQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789593433;
+	b=qy5PpcBkR4VyBMbwjaYaYgABQPS4B7uQAhZ37bN3Vy178hV1TbFKCHQKfPj+Xub4a27B
+	 zd2+3DPM07fP1ROvFymmpwZPUpVqwwb3zzCCQUbcfurZh6vj+GXgngFCNiPbTM3AZuOO+
+	 BscEGggprIG38zQ8XLaiUBvfmyMSIxahjWhJI1NgGjEaDMeMW1eRL6n3oT0FE6As7uSdD
+	 LFsY+5NCWmk+0mTA9wgdmlTBHBA6RINyrJV3kkRh7JEd7Rk3HA9t7Pc10KI5rGXoAMtLC
+	 M7O1uBEUMN7WYA/Dc2m4aRPElk459XAqg3ct1oUjYzmkDGMJC1qktaDc/f7IziYVZTQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789593413;
+	c=relaxed/relaxed; t=1789593433;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -30,89 +30,88 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=lEbOEEHiievNUW2CJV7O0FLKitBFbDc+BaZ43DzLynM=;
-	b=N8euzNNsAdv4TMK0vpbA7N1vya93yf/M1ATu5gL2S7HNo/IO/azjJXfqNqDxpqRPqJMb
-	 RuSnalPBPpQf/+D4FNYUg2SsKzYK/NYD/KTGnztNqGtJ0K8VVJQOWF7bBqXduVTBV5TYo
-	 THr2Hilw9W3UEi0g5OTfBOvCm4xkDAeKIzxfDKJzdToLANmPgRMGzQBESoctbu7wUQ4um
-	 F8iVa9VT9l5NkQ0ugy/169ZJ/nu/ECCleLDDPa+JXRjncOK26xtcQ7GW/FHfSgOepticC
-	 +rCbVeDKIprP9DEsgG7hP7XCNSsXdUM+IZApufkRivQ7XDab5hIHZhQGWb4RKhpO+yA==
+	bh=fNAkaiX+jgF/nwJbBDGLcbf1BIRsKlJNGSEeFd6vIck=;
+	b=s+Mi9bC7b4RKL/iJkxWoOTgh8rvo+CrbmErqmV4Qgnj5yvZnMv02OE0kQJY2e7iI7Ibx
+	 BfFmuAo7jNEOtvqUVkn5A0DzbStDSzW4WAsvIrSPDJWi7ZD4A1N+SsBiXHTyWAWvTtRLk
+	 /62MU/dy7hXeCcxeAy0UcnlAOIS1IfQJcT/lSUDff+iJHJVZwrG2sZH7mL9GWRoU5voz4
+	 POPgypBmt19RH3YJwsj882/uH/H10WxIbl+oAYmGEi3JVqCQMuCuLvihjQxz/mcRMn8Sb
+	 tZCQwCstEQHxWpTbeU4O+6/HlH4sBXEN6g6sZ7RK2kg2RzqMb6N8HuLu1of4O0Vofaw==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789593413;
-	bh=lEbOEEHiievNUW2CJV7O0FLKitBFbDc+BaZ43DzLynM=;
+	d=lists.u-boot-project.org; s=default; t=1789593432;
+	bh=fNAkaiX+jgF/nwJbBDGLcbf1BIRsKlJNGSEeFd6vIck=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=r+9jS8wGViEx20wITikBxTfT1ctx9vhD0zEXCOc953gC0DadTvoi1XU5UGl4IJb6+
-	 ZMY+uXNC2ktHi7jNPBJaw9WuLOFq8hL95YeyUvFXKbVbbQIFkkh8AG9GnH9HtkmMMq
-	 SCv8jIVyrt3PCJl/Mn6OxArJ96D3wErEZOlFMY5hJJTWPd9ncqT+M4w5mun+Bs9rXx
-	 dp78U3sosS78n/Z/7rln3XQIdeFmnSpj5nsaw8swTex/ZrxS9tbyO+CHYPW7+YiRLY
-	 GOUM6ir4q5LeVt3xsmzedWBd2J879BHW3l4AGYEUHVndqF4sf02VaaE6KvfGdbIQBO
-	 lFB/pMbhTPbLQ==
+	b=ELeWVF3NWIVmzSgce24LrUjA9iCImIuArggCb9zewutaDF1RNmARSHv2N0q3gdVNA
+	 RG7ES+9qSGaHwarjnVfmQvn4TK652FjZdC2gpORSYLJxd2SOu2Y4w/DO7erPmSDUeT
+	 ASqA138YXK+g8u45nQLrAcKLMbkGjPgqAo9y29ebBznvidKMdrVV6qREzlJByqQt5E
+	 p421Hn9/qM6/DtcZOv+GVzsE06totqo3xRNjF3bQlcgQKqdptXofN2KAp59+iTaj5I
+	 1mibQv48Yi1vW1s/Na9ck+WbmeOdngxKyOcnhYAax+LkMB7Kg9Ym01ObRjFBujiLQP
+	 CAgXi7QZgaTOw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 41BF140723;
-	Wed, 16 Sep 2026 21:16:53 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 013392EB
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:16:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C8FE840723;
+	Wed, 16 Sep 2026 21:17:12 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id C25E824D
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:17:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E716E400B0
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:16:50 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8C41380DD6
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:17:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vBT4xt_fqorW for <u-boot@lists.u-boot-project.org>;
- Wed, 16 Sep 2026 21:16:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 201E240081
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a01:e0c:1:1599::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789593409;
- b=UE0YPQymcl2B5XrAQ4BEACe9xNNmrqYMONOCeXMxnkt04WtSk8zh40O2c7ER58h2T2Rb
- +KyRpe5xposa/Ee6UrW+X1mB39F0nPLYRggOUCcCkLfR5xUMi86NA06gmMKsId23NNZaI
- M8bLkiOzM0ryHfalddRt4sOBTCYSWriHFTstVYz/4iEdvM7X9DaKpuvcyNChi9CZkZfnq
- oEJ49fZP8/LRspxs/nPWXHzxedvF6jMgMPCO9KJc4GZUe5eZDEJPd0XnawK1a+vcJMkCk
- fU84TGElO4FlfFFN3tXOAJ5SXlgcf78eE+LoND/E/Bpa7WU0N57HnjS3AprUHoI1hAA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KiQ5M8WFjYLE for <u-boot@lists.u-boot-project.org>;
+ Wed, 16 Sep 2026 21:17:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4803180DD3
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=212.27.42.1
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789593430;
+ b=jBtrqTuAFE6ip9XoZYCVmztzIZi5NR5/LHFOedvxq2SBT9k5kZKALHhhe/RVQ+hzNWuH
+ kSTzIXtQi6xLNUlO2554Mljch7Y8qmvWW+gOSTYmnN2oXPJTo2TDSth0qnhsPCeEkjBhR
+ yDa0wAqvNq3byMqTN1tliGKJN+r0DZylvEQC8Ol60qUyRERUFyFQAsV+XHsXCTr0pH0Vy
+ lLRv8Ir6bnO3Aswv42cgQyFKBsG0U3ujJqFYPNDJHDtqxbWTbwLkPusGIRoXN5H4PPhOw
+ iZXRHtBuYH955oeKZrxFxbdFLNZrojGnhqbVxIPgAlEJtUwq+uAkB6OSCjFhL7QRCfQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789593409;
+ c=relaxed/relaxed; t=1789593430;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=lEbOEEHiievNUW2CJV7O0FLKitBFbDc+BaZ43DzLynM=;
- b=CkzwYmZ6a8pnynNE9zUDFQ+f8zKgzCT7CTmkMJZAl4ZNJ9OZjRpbDHQDdwziSmu/6Qe2
- M9vzgBfauUYwIveaCPkA6ZT17XVZUdPqtihyc/5JXnItb8RcYsPXU2VZ7B2TvsEbSDQJV
- B0Os93scRNGbVt//vtZ5xEfiTVK2d+A7Wk3nviz8DFXV/zphOtBsnA1bkVOSvCLn0Y0O8
- ph2LTqNo7k9u87b1QHRE4fsYcPHs4mDo9kz4i2jcy/CHMneeMocJqk5HjpAuVhW+q3zqp
- Mt1tO49KW+T0QE9uuHk6T412ZdkdzzPcLsQOHtUzs2lN2HWgkvy7kqdWPufpheZLfKg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=fNAkaiX+jgF/nwJbBDGLcbf1BIRsKlJNGSEeFd6vIck=;
+ b=bOqIyl/XUARF3DXtKPu1Kz7QKCf8sLLiJQTXNBWYbf2gUbw8DCduz++5FCAHdbkxShjx
+ ZDNig7KiVhj3pGZrsIAvI7kfbC6P5Hj0XPDLxjj3NdCMGYPKmUhih7nWw6Xvv11w+obZf
+ EIkIUaOTbJXaWB+SVNc77iVBoqTWJ8+klLmKcobgDw9p/ChGPb17NWjwzG40OGCg+R3/E
+ /zqvKKjD+3SQQnf1y+TmXfhvwDoZKyS8csgzP7pO14F+nkrVgBOHiAzYIzW8IunsIZk9G
+ JT/HnjM0uxcEmTOpOKOCkr8DtKaYMYmPBscPZh/OQJzsdxniENccZ4f/x62HxA52l1A==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=free.fr; 
  dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=uHamYQKZ; 
- arc=none smtp.remote-ip="2a01:e0c:1:1599::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:e0c:1:1599::10;
+ header.s=smtp-20201208 header.b="b+m3xAg/"; 
+ arc=none smtp.remote-ip=212.27.42.1
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
  helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=uHamYQKZ
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 201E240081
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:16:48 +0000 (UTC)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
+ header.a=rsa-sha256 header.s=smtp-20201208 header.b=b+m3xAg/
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 4803180DD3
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:17:09 +0000 (UTC)
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 8933AB0053E;
- Wed, 16 Sep 2026 23:16:35 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id E7C6EB0054C;
+ Wed, 16 Sep 2026 23:16:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1789593406;
- bh=wDsce+buGs+WymWuJwyd1is3rhVDLab5z7sbUbbNf4k=;
+ s=smtp-20201208; t=1789593427;
+ bh=YblNKC7FXP7CbHiIwTqa/5jqAtMgYlG38n2wJuBnOks=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=uHamYQKZLMNoSAJtuu5VUyi/hS+3aagiir5LHHFUYqBfW/okctUKyMBktCUkTmjaQ
- PD5iAFVQ4xGM6ydt82VudubKAJLDW8mvkqR43kI8UtmftMErMarCZi59s0BTkOiuz+
- i52HE2UHz1WsWLWqCrqTVAuHS2TZczqvKl2gLvMnQ177brY4/2Pc8fhlB9ufASlD9v
- 6YUuKKyDtzsO/wNQY25DD7DJ9rZbblmlIqBYl0fNYF5SN8HOuSoF7cFkc8UYnFtowK
- 4JQUzFj3/Kmm5fEwajB4+Hxs2TiiQqiWpLANMdtGga14di5bZST0GR5/HsY0qoWJvp
- qWkc565Ms6QFg==
+ b=b+m3xAg/qJT08XbQN/04Wpo4uU6zTv3+G0v0r9jjVrhm80zyuVuo84tS+dc6j1whl
+ B0RAAVo32l5mALiwQNXtz+aL10j08/kx/bb7nezqZwtvSDSVoPMtx2Vt/Y9MS6zfTn
+ jINCZv69WMQ2BYBVeypKYHX4nog2P3BYYCDqvq0+tEEFdf38OKkDeElxSYdG7hlywm
+ bUc+bt+GtripuVmTgFSU4dep5XrIqgHzN0kfxwGwNqiyJZnTb7yvGzCvujeohlfUqd
+ J3ig5fXNZK3z/emmQWINOwZ0UK+E+k+Kpv70bBYLXirhzcwd1u2z6LBc0WXteNxjfa
+ GooXihP2DBLZA==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.u-boot-project.org
 Cc: Peng Fan <peng.fan@nxp.com>, Vladimir Oltean <vladimir.oltean@nxp.com>,
@@ -121,10 +120,10 @@ Cc: Peng Fan <peng.fan@nxp.com>, Vladimir Oltean <vladimir.oltean@nxp.com>,
  Priyanka Jain <priyanka.jain@nxp.com>, Wasim Khan <wasim.khan@nxp.com>,
  Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
  Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v3 2/5] board: lx2160a: convert SD1 2x100GE to 2x40GE at
- runtime
-Date: Wed, 16 Sep 2026 23:15:46 +0200
-Message-ID: <20260916211549.3432913-3-vjardin@free.fr>
+Subject: [PATCH v3 3/5] board: lx2160a: split SD1's second 40GE port into 4x
+ 10G
+Date: Wed, 16 Sep 2026 23:15:47 +0200
+Message-ID: <20260916211549.3432913-4-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260916211549.3432913-1-vjardin@free.fr>
 References: <20260916211549.3432913-1-vjardin@free.fr>
@@ -143,290 +142,237 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-add lx2160_sd1 2x40g, and parsing hwconfig=serdes1:2x40g for
-the boot path, alongside the existing SD1 100G+25G split.
+lx2160_sd1 40g4x10g, hwconfig=serdes1:40g4x10g.
 
-SRDS_PRTCL_S1 is POR-latched read-only, so this changes the hardware
-the protocol number describes, not the number. That much is the same
-trick as the split. What is not the same is the lane rate, and it is
-the whole reason this is more than a converter code:
+  XFI   LNmGCR0 = 0x00000052   LNmTGCR0 = 0x10000000
+  40GE  LNmGCR0 = 0x00010052   LNmTGCR0 = 0x10000000
+                       ^ PORT_LN0_B
 
-LNmTGCR0[BY_N_RATE_SEL] is the bit rate as a fraction of the PLL clock,
-and the RM requires 011b (double) for 25G/100G and 000b (full) for
-40G. The split stays on PLLF because 25G and 100G are the same
-25.78125 Gbaud. 40GE is 10.3125 Gbaud, so it needs the other PLL.
+same PROTO_SEL (0x0a spans XFI and 40GBase-R), same 20-bit width, same
+USE_SLOW_PLL, same BY_N_RATE_SEL.
 
-The protocol 13 "powers down" PLLS only by setting PLLnRSTCTL[DIS],
-software can clear it. Both SD1 refclk inputs are fed with a
-161.1328125 MHz, so PLLS has what it needs.
-
-The trick: the register values were read from the CPU from a
-protocol-13 vs a protocol-20 build and diffed.
-
-100g4x25g and 2x40g are mutually exclusive: 100g4x25g wins.
+It is inspired from the 100G+4x25G split, but using PLLS.
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 ---
 
 (no changes since v1)
 
- board/nxp/lx2160a/serdes_split.c | 221 ++++++++++++++++++++++++++++++-
+ board/nxp/lx2160a/serdes_split.c | 191 ++++++++++++++++++++++++++++++-
  board/nxp/lx2160a/serdes_split.h |  11 ++
- 2 files changed, 228 insertions(+), 4 deletions(-)
+ 2 files changed, 199 insertions(+), 3 deletions(-)
 
 diff --git a/board/nxp/lx2160a/serdes_split.c b/board/nxp/lx2160a/serdes_split.c
-index 04339a71350..0f30019e20a 100644
+index 0f30019e20a..f48c882aa22 100644
 --- a/board/nxp/lx2160a/serdes_split.c
 +++ b/board/nxp/lx2160a/serdes_split.c
-@@ -25,9 +25,17 @@
- #define SRDS_BLOCK_STRIDE	0x10000
- #define SRDS_LANE_STRIDE	0x100
- 
-+#define SRDS_PLL_STRIDE		0x100
- #define SRDS_LNmGCR0(b, m)	((b) + 0x800 + (m) * SRDS_LANE_STRIDE)
- #define SRDS_LNmTRSTCTL(b, m)	((b) + 0x820 + (m) * SRDS_LANE_STRIDE)
-+#define SRDS_LNmTGCR0(b, m)	((b) + 0x824 + (m) * SRDS_LANE_STRIDE)
- #define SRDS_LNmRRSTCTL(b, m)	((b) + 0x840 + (m) * SRDS_LANE_STRIDE)
-+#define SRDS_LNmRGCR0(b, m)	((b) + 0x844 + (m) * SRDS_LANE_STRIDE)
-+/* n = 0 is PLLF (the fast PLL), n = 1 is PLLS (the slow one) */
-+#define SRDS_PLLnRSTCTL(b, n)	((b) + 0x400 + (n) * SRDS_PLL_STRIDE)
-+#define SRDS_PLLnCR0(b, n)	((b) + 0x404 + (n) * SRDS_PLL_STRIDE)
-+#define SRDS_PLLnCR1(b, n)	((b) + 0x408 + (n) * SRDS_PLL_STRIDE)
-+#define SRDS_PLLnCR5(b, n)	((b) + 0x414 + (n) * SRDS_PLL_STRIDE)
- #define SRDS_PCCC(b)		((b) + 0x10B0)
- #define SRDS_PCCD(b)		((b) + 0x10B4)
- #define SRDS_PCCE(b)		((b) + 0x10B8)
-@@ -46,6 +54,14 @@
- #define RSTCTL_STP_REQ		BIT(26)
- #define RSTCTL_DIS		BIT(24)
- 
-+/* PLLnRSTCTL adds two status bits the lane RSTCTLs do not have */
-+#define PLLRSTCTL_RST_ERR	BIT(29)		/* no lock before time-out  */
-+#define PLLRSTCTL_LOCK		BIT(23)		/* PLL calibrated + locked  */
-+
-+/* PCCE: E40Ga at 30-28 (LRV 31), E40Gb at 26-24 (LRV 27) */
-+#define PCCE_E40GA_CFG(v)	(((v) >> 28) & 0x7)
-+#define PCCE_E40GB_CFG(v)	(((v) >> 24) & 0x7)
-+
- /* PCCE: E100Ga at 14-12 (LRV 15), E100Gb at 10-8 (LRV 11) */
- #define PCCE_E100GA_CFG(v)	(((v) >> 12) & 0x7)
- #define PCCE_E100GA_LRV(v)	(((v) >> 15) & 0x1)
-@@ -408,20 +424,196 @@ int lx2160a_serdes1_split(void)
+@@ -585,6 +585,154 @@ int lx2160a_serdes1_to_40g(void)
  	return ret;
  }
  
 +/*
-+ * 2x 100GE -> 2x 40GE, without changing the RCW.
++ * 2x 40GE -> 1x 40GE + 4x XFI (10G), keeping the QSFP group intact.
 + *
-+ * LNmTGCR0[BY_N_RATE_SEL] is the transmitter bit rate as a fraction of
-+ * the PLL clock.
-+ *
-+ * Protocol 13 powers PLLS down, but only by setting
-+ *   PLLnRSTCTL[DIS] ("default value set by RCW configuration"),
-+ * which software can clear.
-+ * Both SD1 reference-clock inputs are fed 161.1328125 MHz.
-+ *
-+ * The register values below were analyzed from the CPU for both cases:
-+ * protocol-13 vs protocol-20 run.
++ *   XFI  lane   LNmGCR0 = 0x00000052   LNmTGCR0 = 0x10000000
++ *   40GE lane   LNmGCR0 = 0x00010052   LNmTGCR0 = 0x10000000
++ *                            ^ PORT_LN0_B
 + */
-+#define F40G_PLLS		1		/* PLLS index in PLLnxxx()  */
-+#define F40G_PLLF		0
-+#define F40G_PLLS_CR0		0x00040000	/* REFCLK_SEL=4, 161.1328125 MHz */
-+#define F40G_PLLS_CR1		0x86100008	/* 10.3125 GHz clock net    */
-+#define F40G_PLLS_CR5		0x00001000
-+/* PROTO_SEL=01010b (XFI/10GBase-R/40GBase-R) + IF_WIDTH=010b (20-bit) */
-+#define F40G_GCR0_MASTER	0x00000052
-+#define F40G_GCR0_SLAVE		0x00010052
-+/* LNmTGCR0/LNmRGCR0: USE_SLOW_PLL=1 (bit 28), BY_N_RATE_SEL=000 full */
-+#define F40G_LANE_GCR		0x10000000
-+#define F40G_PCCE		0x11000000	/* E40Ga+E40Gb on, E100G off */
++#define X10G_FIRST_LANE		4
++#define X10G_LAST_LANE		7
++#define X10G_GCR0		0x00000052	/* as 40GE, but own port master */
++#define X10G_PCCE		0x01000000	/* E40Gb kept (lanes 0-3) */
++#define X10G_PCCC		0x88889999	/* XFI converters for lanes 4-7   */
 +
-+static bool srds1_is_40g(unsigned long base)
++static bool srds1_is_40g_4x10g(unsigned long base)
 +{
++	u32 pccc = in_le32((void __iomem *)SRDS_PCCC(base));
 +	u32 pcce = in_le32((void __iomem *)SRDS_PCCE(base));
 +
-+	return PCCE_E40GA_CFG(pcce) != 0 &&
-+	       PCCE_E40GB_CFG(pcce) != 0 &&
-+	       PCCE_E100GA_CFG(pcce) == 0 &&
-+	       PCCE_E100GB_CFG(pcce) == 0;
++	return PCCE_E40GB_CFG(pcce) != 0 &&
++	       PCCE_E40GA_CFG(pcce) == 0 &&
++	       (pccc & 0xffff) == 0x9999;
 +}
 +
-+bool lx2160a_serdes1_is_40g(void)
++bool lx2160a_serdes1_is_40g_4x10g(void)
 +{
-+	return srds1_is_40g(srds_base(FSL_SRDS_1));
++	return srds1_is_40g_4x10g(srds_base(FSL_SRDS_1));
 +}
 +
-+/*
-+ * Bring PLLS up at the 40GE clock net. Nothing uses it yet, so this
-+ * cannot disturb the running 100GE lanes on PLLF.
-+ */
-+static int srds1_plls_up_40g(unsigned long base)
-+{
-+	unsigned long rstctl = SRDS_PLLnRSTCTL(base, F40G_PLLS);
-+	u32 v;
-+
-+	out_le32((void __iomem *)SRDS_PLLnCR0(base, F40G_PLLS), F40G_PLLS_CR0);
-+	out_le32((void __iomem *)SRDS_PLLnCR1(base, F40G_PLLS), F40G_PLLS_CR1);
-+	out_le32((void __iomem *)SRDS_PLLnCR5(base, F40G_PLLS), F40G_PLLS_CR5);
-+
-+	out_le32((void __iomem *)rstctl, 0);
-+	out_le32((void __iomem *)rstctl, RSTCTL_RST_REQ);
-+
-+	if (poll_clear(rstctl, RSTCTL_RST_REQ)) {
-+		printf("lx2160a serdes: SD1 PLLS reset did not complete within %d us\n",
-+		       SPLIT_POLL_US);
-+		return -ETIMEDOUT;
-+	}
-+
-+	v = in_le32((void __iomem *)rstctl);
-+	if (v & PLLRSTCTL_RST_ERR) {
-+		printf("lx2160a serdes: SD1 PLLS did not lock (PLLSRSTCTL=%08x, RST_ERR)\n", v);
-+		return -EIO;
-+	}
-+	if (!(v & PLLRSTCTL_LOCK) || !(v & RSTCTL_RST_DONE)) {
-+		printf("lx2160a serdes: SD1 PLLS came up without LOCK/RST_DONE (PLLSRSTCTL=%08x)\n",
-+		       v);
-+		return -EIO;
-+	}
-+
-+	return 0;
-+}
-+
-+int lx2160a_serdes1_to_40g(void)
++int lx2160a_serdes1_40g_4x10g(void)
 +{
 +	unsigned long base = srds_base(FSL_SRDS_1);
-+	unsigned long pllf = SRDS_PLLnRSTCTL(base, F40G_PLLF);
-+	bool master[SRDS_LANES];
-+	int m, ret = 0;
++	int m, master = -1, keep_master = -1, ret = 0;
 +
-+	if (srds1_is_40g(base)) {
-+		debug("lx2160a serdes: SD1 already 2x 40GE, nothing to do\n");
++	if (srds1_is_40g_4x10g(base)) {
++		debug("lx2160a serdes: SD1 already 1x 40GE + 4x 10G\n");
 +		return 0;
 +	}
 +
-+	if (!srds1_is_unsplit(base)) {
-+		printf("lx2160a serdes: SD1 is not in the 2x 100GE state (PCCD=%08x PCCE=%08x), refusing\n",
-+		       in_le32((void __iomem *)SRDS_PCCD(base)),
++	if (!srds1_is_40g(base)) {
++		printf("lx2160a serdes: SD1 is not in the 2x 40GE state (PCCC=%08x PCCE=%08x), refusing\n",
++		       in_le32((void __iomem *)SRDS_PCCC(base)),
 +		       in_le32((void __iomem *)SRDS_PCCE(base)));
 +		return -EINVAL;
 +	}
 +
 +	/*
-+	 * Remember the port masters so the 2x4 grouping is preserved
-+	 * rather than assumed to be LND and LNH.
++	 * Halt. As in the 25G split, only the port master's request can
++	 * clear, so issue all four and wait on that one.
 +	 */
-+	for (m = 0; m < SRDS_LANES; m++)
-+		master[m] = !(in_le32((void __iomem *)SRDS_LNmGCR0(base, m)) &
-+			      GCR0_PORT_LN0_B);
++	/* The kept group's master, recorded before anything is halted. */
++	for (m = 0; m < SRDS_LANES; m++) {
++		if (m >= X10G_FIRST_LANE && m <= X10G_LAST_LANE)
++			continue;
++		if (!(in_le32((void __iomem *)SRDS_LNmGCR0(base, m)) &
++		      GCR0_PORT_LN0_B))
++			keep_master = m;
++	}
 +
-+	ret = srds1_plls_up_40g(base);
-+	if (ret)
-+		return ret;
++	for (m = X10G_FIRST_LANE; m <= X10G_LAST_LANE; m++) {
++		if (!(in_le32((void __iomem *)SRDS_LNmGCR0(base, m)) &
++		      GCR0_PORT_LN0_B))
++			master = m;
++		out_le32((void __iomem *)SRDS_LNmTRSTCTL(base, m),
++			 RSTCTL_HLT_REQ);
++		out_le32((void __iomem *)SRDS_LNmRRSTCTL(base, m),
++			 RSTCTL_HLT_REQ);
++	}
 +
-+	/*
-+	 * Halt PLLF, which puts every lane using it into reset "to allow
-+	 * reconfiguration"
-+	 */
-+	out_le32((void __iomem *)pllf, RSTCTL_HLT_REQ);
-+	if (poll_clear(pllf, RSTCTL_HLT_REQ)) {
-+		printf("lx2160a serdes: SD1 PLLF did not halt within %d us, continuing\n",
-+		       SPLIT_POLL_US);
++	if (master < 0) {
++		printf("lx2160a serdes: no master lane in the dpmac.1 group, refusing\n");
++		return -EINVAL;
++	}
++
++	if (poll_clear(SRDS_LNmTRSTCTL(base, master), RSTCTL_HLT_REQ) ||
++	    poll_clear(SRDS_LNmRRSTCTL(base, master), RSTCTL_HLT_REQ)) {
++		printf("lx2160a serdes: lane %d did not halt within %d us, continuing\n",
++		       master, SPLIT_POLL_US);
 +		ret = -ETIMEDOUT;
 +	}
 +
-+	for (m = 0; m < SRDS_LANES; m++) {
-+		out_le32((void __iomem *)SRDS_LNmGCR0(base, m),
-+			 master[m] ? F40G_GCR0_MASTER : F40G_GCR0_SLAVE);
-+		out_le32((void __iomem *)SRDS_LNmTGCR0(base, m), F40G_LANE_GCR);
-+		out_le32((void __iomem *)SRDS_LNmRGCR0(base, m), F40G_LANE_GCR);
-+	}
++	for (m = X10G_FIRST_LANE; m <= X10G_LAST_LANE; m++)
++		out_le32((void __iomem *)SRDS_LNmGCR0(base, m), X10G_GCR0);
 +
-+	out_le32((void __iomem *)SRDS_PCCE(base), F40G_PCCE);
++	out_le32((void __iomem *)SRDS_PCCE(base), X10G_PCCE);
++	out_le32((void __iomem *)SRDS_PCCC(base), X10G_PCCC);
 +
-+	/* Every lane now selects PLLS, so one PLL reset restarts them all. */
-+	out_le32((void __iomem *)SRDS_PLLnRSTCTL(base, F40G_PLLS),
-+		 RSTCTL_RST_REQ);
-+	if (poll_clear(SRDS_PLLnRSTCTL(base, F40G_PLLS), RSTCTL_RST_REQ)) {
-+		printf("lx2160a serdes: SD1 PLLS re-reset did not complete within %d us\n",
-+		       SPLIT_POLL_US);
-+		ret = -ETIMEDOUT;
++	/* Reset BOTH halves, not just the four lanes whose GCR0 changed */
++	for (m = X10G_FIRST_LANE; m <= X10G_LAST_LANE; m++) {
++		out_le32((void __iomem *)SRDS_LNmTRSTCTL(base, m),
++			 RSTCTL_RST_REQ);
++		out_le32((void __iomem *)SRDS_LNmRRSTCTL(base, m),
++			 RSTCTL_RST_REQ);
 +	}
 +
 +	for (m = 0; m < SRDS_LANES; m++) {
-+		u32 t = in_le32((void __iomem *)SRDS_LNmTRSTCTL(base, m));
-+		u32 r = in_le32((void __iomem *)SRDS_LNmRRSTCTL(base, m));
++		if (m >= X10G_FIRST_LANE && m <= X10G_LAST_LANE)
++			continue;
++		if (m == keep_master)
++			continue;
++		out_le32((void __iomem *)SRDS_LNmTRSTCTL(base, m),
++			 RSTCTL_RST_REQ);
++		out_le32((void __iomem *)SRDS_LNmRRSTCTL(base, m),
++			 RSTCTL_RST_REQ);
++	}
 +
++	if (keep_master >= 0) {
++		out_le32((void __iomem *)SRDS_LNmTRSTCTL(base, keep_master),
++			 RSTCTL_RST_REQ);
++		out_le32((void __iomem *)SRDS_LNmRRSTCTL(base, keep_master),
++			 RSTCTL_RST_REQ);
++	} else {
++		printf("lx2160a serdes: no master lane in the kept 40GE group, it was not reset\n");
++		ret = -EINVAL;
++	}
++
++	for (m = 0; m < SRDS_LANES; m++) {
++		u32 t, r;
++
++		if (poll_clear(SRDS_LNmTRSTCTL(base, m), RSTCTL_RST_REQ) ||
++		    poll_clear(SRDS_LNmRRSTCTL(base, m), RSTCTL_RST_REQ)) {
++			printf("lx2160a serdes: lane %d reset did not complete within %d us\n",
++			       m, SPLIT_POLL_US);
++			ret = -ETIMEDOUT;
++			continue;
++		}
++
++		t = in_le32((void __iomem *)SRDS_LNmTRSTCTL(base, m));
++		r = in_le32((void __iomem *)SRDS_LNmRRSTCTL(base, m));
 +		if (!(t & RSTCTL_RST_DONE) || !(r & RSTCTL_RST_DONE)) {
-+			printf("lx2160a serdes: LN%c has no RST_DONE (TRSTCTL=%08x RRSTCTL=%08x)\n",
-+			       'A' + m, t, r);
++			printf("lx2160a serdes: lane %d reset finished without RST_DONE (TRSTCTL=%08x RRSTCTL=%08x)\n",
++			       m, t, r);
 +			ret = -EIO;
 +		}
 +	}
 +
-+	if (!srds1_is_40g(base)) {
-+		printf("lx2160a serdes: 40GE conversion did not take (PCCE=%08x)\n",
++	if (!srds1_is_40g_4x10g(base)) {
++		printf("lx2160a serdes: 4x 10G split did not take (PCCC=%08x PCCE=%08x)\n",
++		       in_le32((void __iomem *)SRDS_PCCC(base)),
 +		       in_le32((void __iomem *)SRDS_PCCE(base)));
 +		return -EIO;
 +	}
 +
-+	printf("lx2160a serdes: SD1 2x 100GE converted to 2x 40GE%s\n",
++	printf("lx2160a serdes: SD1 now 1x 40GE (dpmac.2) + 4x 10G (dpmac.3-6)%s\n",
 +	       ret ? " (with warnings above)" : "");
-+	printf("lx2160a serdes: RCWSR still reads protocol 13 -- the DPC needs follow_hw_pssr\n");
 +
 +	return ret;
 +}
 +
  /*
   *   setenv hwconfig serdes1:100g4x25g
-+ *   setenv hwconfig serdes1:2x40g
-  *
-  * Idempotent: a board whose PBI already split SD1 skip it too.
-+ *
-+ * The two are mutually exclusive -- one re-points lanes 4-7 to 25G on
-+ * PLLF, the other moves all eight to 40GE on PLLS -- so `split` wins
-+ * and `40g` is refused alongside it rather than layered on top.
-  */
+  *   setenv hwconfig serdes1:2x40g
+@@ -598,8 +746,9 @@ int lx2160a_serdes1_to_40g(void)
  void lx2160a_serdes_apply_hwconfig(void)
  {
--	if (!hwconfig_sub("serdes1", "100g4x25g"))
-+	if (hwconfig_sub("serdes1", "100g4x25g")) {
-+		if (hwconfig_sub("serdes1", "2x40g"))
-+			printf("lx2160a serdes: hwconfig asks for both serdes1:100g4x25g and serdes1:2x40g, doing the split only\n");
-+		if (lx2160a_serdes1_is_split())
+ 	if (hwconfig_sub("serdes1", "100g4x25g")) {
+-		if (hwconfig_sub("serdes1", "2x40g"))
+-			printf("lx2160a serdes: hwconfig asks for both serdes1:100g4x25g and serdes1:2x40g, doing the split only\n");
++		if (hwconfig_sub("serdes1", "2x40g") ||
++		    hwconfig_sub("serdes1", "40g4x10g"))
++			printf("lx2160a serdes: hwconfig asks for serdes1:100g4x25g alongside a 40GE mode, doing the split only\n");
+ 		if (lx2160a_serdes1_is_split())
+ 			return;
+ 
+@@ -607,6 +756,23 @@ void lx2160a_serdes_apply_hwconfig(void)
+ 		return;
+ 	}
+ 
++	/*
++	 * serdes1:40g4x10g is a target MODE, not a second step the user has
++	 * to sequence by hand: it implies the 40GE conversion first,
++	 * because 1x 40GE + 4x 10G is reached by splitting one of the two
++	 * 40GE ports.
++	 */
++	if (hwconfig_sub("serdes1", "40g4x10g")) {
++		if (lx2160a_serdes1_is_40g_4x10g())
 +			return;
 +
-+		lx2160a_serdes1_split();
++		if (!lx2160a_serdes1_is_40g() && lx2160a_serdes1_to_40g())
++			return;
++
++		lx2160a_serdes1_40g_4x10g();
 +		return;
 +	}
 +
-+	if (!hwconfig_sub("serdes1", "2x40g"))
+ 	if (!hwconfig_sub("serdes1", "2x40g"))
  		return;
  
--	if (lx2160a_serdes1_is_split())
-+	if (lx2160a_serdes1_is_40g())
- 		return;
- 
--	lx2160a_serdes1_split();
-+	lx2160a_serdes1_to_40g();
- }
- 
- #endif /* CONFIG_ARCH_LX2160A */
-@@ -463,6 +655,22 @@ static int do_lx2160_sd1(struct cmd_tbl *cmdtp, int flag,
+@@ -671,6 +837,22 @@ static int do_lx2160_sd1(struct cmd_tbl *cmdtp, int flag,
  		return CMD_RET_SUCCESS;
  	}
  
-+	if (!strcmp(argv[1], "2x40g")) {
++	if (!strcmp(argv[1], "40g4x10g")) {
 +		if (!IS_ENABLED(CONFIG_ARCH_LX2160A)) {
-+			printf("no 100GE on SerDes 1 to convert on this SoC\n");
++			printf("no 40GE on SerDes 1 to split on this SoC\n");
 +			return CMD_RET_FAILURE;
 +		}
 +		if (argc != 2)
 +			return CMD_RET_USAGE;
-+		if (lx2160a_serdes1_is_40g()) {
-+			printf("SD1 is already 2x 40GE, nothing to do\n");
++		if (lx2160a_serdes1_is_40g_4x10g()) {
++			printf("SD1 is already 1x 40GE + 4x 10G, nothing to do\n");
 +			return CMD_RET_SUCCESS;
 +		}
-+		if (lx2160a_serdes1_to_40g())
++		if (lx2160a_serdes1_40g_4x10g())
 +			return CMD_RET_FAILURE;
 +		return CMD_RET_SUCCESS;
 +	}
@@ -434,38 +380,36 @@ index 04339a71350..0f30019e20a 100644
  	return CMD_RET_USAGE;
  }
  
-@@ -501,7 +709,12 @@ static int do_lx2160_serdes(struct cmd_tbl *cmdtp, int flag,
- 	"100g4x25g\n"							\
- 	"    - split Lynx 28G SD1 100GE.1 (lanes LNE-LNH) into 4x 25G.\n"	\
- 	"      Runs before the MC starts. To make it permanent on a board\n"	\
--	"      that needs it: setenv hwconfig serdes1:100g4x25g && saveenv"
-+	"      that needs it: setenv hwconfig serdes1:100g4x25g && saveenv\n"	\
-+	"lx2160_sd1 2x40g\n"							\
-+	"    - convert SD1 2x 100GE into 2x 40GE without touching the RCW.\n"	\
-+	"      Must run before the MC starts, and the DPC must carry\n"		\
-+	"      board_info/serdes/follow_hw_pssr: RCWSR still reads 13.\n"	\
-+	"      Undo with `reset`. Permanent: setenv hwconfig serdes1:2x40g"
+@@ -714,7 +896,10 @@ static int do_lx2160_serdes(struct cmd_tbl *cmdtp, int flag,
+ 	"    - convert SD1 2x 100GE into 2x 40GE without touching the RCW.\n"	\
+ 	"      Must run before the MC starts, and the DPC must carry\n"		\
+ 	"      board_info/serdes/follow_hw_pssr: RCWSR still reads 13.\n"	\
+-	"      Undo with `reset`. Permanent: setenv hwconfig serdes1:2x40g"
++	"      Undo with `reset`. Permanent: setenv hwconfig serdes1:2x40g\n"	\
++	"lx2160_sd1 40g4x10g\n"							\
++	"    - split SD1's dpmac.1 40GE port into 4x 10G,\n"			\
++	"      Permanent: setenv hwconfig serdes1:40g4x10g (implies 2x40g)"
  #else
  #define SD1_CMD_HELP							\
  	"    - no SerDes 1 Ethernet modes on this SoC"
 diff --git a/board/nxp/lx2160a/serdes_split.h b/board/nxp/lx2160a/serdes_split.h
-index 764eb640029..36d486d7301 100644
+index 36d486d7301..1b65848db2f 100644
 --- a/board/nxp/lx2160a/serdes_split.h
 +++ b/board/nxp/lx2160a/serdes_split.h
-@@ -23,6 +23,17 @@ bool lx2160a_serdes1_is_split(void);
+@@ -34,6 +34,17 @@ bool lx2160a_serdes1_is_40g(void);
   */
- int lx2160a_serdes1_split(void);
+ int lx2160a_serdes1_to_40g(void);
  
-+/* Is SerDes 1 already 2x 40GE? */
-+bool lx2160a_serdes1_is_40g(void);
++/* Is SerDes 1 already 1x 40GE + 4x 10G? */
++bool lx2160a_serdes1_is_40g_4x10g(void);
 +
 +/*
-+ * Convert SerDes 1's 2x 100GE into 2x 40GE, do not touch the RCW.
++ * Split SerDes 1's dpmac.1 40GE port into 4x 10G (dpmac.3-6),
++ * keeping dpmac.2 as one 40GE port.
 + *
-+ * Refuses unless SD1 is in the 2x 100GE state, and must be called
-+ * before the CPU's MC starts.
++ * Refuses unless SD1 is in the 2x 40GE state.
 + */
-+int lx2160a_serdes1_to_40g(void);
++int lx2160a_serdes1_40g_4x10g(void);
 +
  void lx2160a_serdes_apply_hwconfig(void);
  
