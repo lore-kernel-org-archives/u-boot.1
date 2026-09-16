@@ -1,134 +1,135 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3991C982C9
-	for <u-boot@archiver.kernel.org>; Wed, 16 Sep 2026 21:17:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2315EC982C9
+	for <u-boot@archiver.kernel.org>; Wed, 16 Sep 2026 21:41:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AEC0740712;
-	Wed, 16 Sep 2026 21:17:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6E6B880E2A;
+	Wed, 16 Sep 2026 21:41:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HVB3cf1NBoug; Wed, 16 Sep 2026 21:17:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 0473440722
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789593475;
-	b=Qbk6gvKTaOUgCOT0PkuiBkLQMOIq1BD2zDTwDkg1cC4+jBl2HUK4G3Zlf1EJCAcj8M1h
-	 Kgyh6rA2TaeEBQcLfMGMSCBrPjHzMuEoWop28OGgRNCCvFp52Um8EFD2r7bRqU+H4BhWC
-	 KgjqJkcvvCvmmO1ELp8LM4m783nz+KRUV6pXJJVDseCGSMdnMF4B21QN++V8FsplWhsBp
-	 dmA1i5rKyfM1hUP5aMni/ESnYDa5bm29mKLjO4PmJuOBvjW0H7LrHdelbtU0SoFl3rJHO
-	 Cj3W/UN4sbZyFSGvLPNj+ckcWWrcHq4O/s7gguFI+5PqUlAIljncKjVt1suNb5p2jEg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kGWerae_ESlX; Wed, 16 Sep 2026 21:41:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 8AC8B80E13
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789594880;
+	b=q+f1QaTh1fA68sx7nNN+R4YonSdw91HmOCLgiBi//zpgz4aVXplFPnTEicdlteu8sXa/
+	 6lczExBTTbdMc64awIKpG9Br6RB1/6ZNcNh15i+bSqAc2RBz8Ld8lK8LfFh/KOjqqe0KM
+	 3md7qZ/oX0HuCnC1eXey3d2A5MlJ3AKf1q2rHYZda2Fn0AIgl4AjH20rsjq/p5Scsu3hD
+	 POZVYmk1zi4VwB4QMY9dQFXIuUPrKo0bqMRYWtAdomQBAGOxAsaj7+0zFuWdm/6GTVrvY
+	 vn6jUG3voMkCiypJdKmm7qet/ExuR21bYCLB2B1RwDqU7NpkT9s1olHuXykfgosuSng==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789593475;
+	c=relaxed/relaxed; t=1789594880;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=nknx5jloIQLjrY0sbyf/GEJWNKApRV88SxU49ltlMVc=;
-	b=Uy61Yyb8GqxM5gOQ2C0Z2kuJJSQhuoT1gywE/ie4fnlqu3qDdnmSkGgEDMDICMcVOvFi
-	 XvalsB5QhgyIRX4vay1lfu8kPSgUiSmVgI1HSgP7RTqB8CZJiKXICpAcSRDvg+bwN8JYw
-	 srpUfDL8ZrA3FDHKfMAprwHd3IgoEkjILqb0h45vknMIHy1EGgAV5uK1JAZa24ESBmTfu
-	 1HBdRd6iwBxUm/znKd8mdAfP27QulTUpEP+BvixDf8kD/nJXo//pIfWxSyUJoTIjqA+3q
-	 dRMw0UVxA0zIaDai85450TqQYcToPKRZhj5XyvecucpC6uiLzmMvWp1fKr2GwJguivg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=DRBxeXrgJJvkAZxXrpbPo5nTzDDNQzH9+qdFVAJKkAc=;
+	b=nz2gOS9cLLOCbefwF8HAMkQJEwAf8m/ghnkJKZs5D++y/BNBYBA4KfkYDtWNHFuG4zUm
+	 uvVgsjql9UxU9TMZYClyWWnBY+CW+Dkp0bNCTOnKMtC84Pd7eLgfcEDl/2h9mdj0xjptV
+	 N3ekSXYQlmqnV+lBFo+AuID9RNH5wR72srNiLROn9GG0LN0XBYZgQn8oWXu84+Sv81d5l
+	 yrmOacCOJYnyrX2eFnjX5d70/SgORaN24Z9M0jQyEr1QLuytWCBqbvevyRkV2/G4TMIoZ
+	 CtU1+Nn25K79FuoldBFJRisHKLOYUnaSi+99ZN2maek9/m6PPjT6V3OAejn8exSf2iA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789593475;
-	bh=nknx5jloIQLjrY0sbyf/GEJWNKApRV88SxU49ltlMVc=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1789594880;
+	bh=DRBxeXrgJJvkAZxXrpbPo5nTzDDNQzH9+qdFVAJKkAc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fmUYasXUH0Bwhm8K3aDc4BVhZqvHa5/MWIEx5g7wnLKTuPAJqUR7HPcpbFayE96mn
-	 Z4v+IeAuwqxMD2m3C5/4ZM8pqRIeCb+mAZu0dKz0ZeDkAo68/issYEFTnufOHfKB6O
-	 o2EIPVFo2pf0MqRgO+boxUJPyMmr4rZK6ZQFXyMud0Zwh0a61IDE/LkM3aBsqjShFz
-	 zOZdT7lzQTfLO8qv4O7r6HV9p2ziG06RQln2AjJljKJKdxfUeBjW5ykmAIXWBjTqMS
-	 sq9N9RDNbjes9mzHAxR+2Y+BZyeCxzXTUR//9kvI4N/EMrDHzJLBupfBDN2IzqICLL
-	 anjyl23whhalA==
+	b=XYDhWVY2be6hGwBV6Z5n60ZmdZvznGpM8itMPbpZ+q68p3IOFg1l3obKCgAsdhPkW
+	 iurddQHOQhvCQ9/zZ+o7mYOaI73k5O2FmLwoSZe/3nu3P++Zu8neBM+gofBxawlZC6
+	 IxqJeWQC1JeVfBeRA/bBHxgPdB0gEuIRQsRNdRMgu/kxNf/EmDzkyNBcAf7Wqd0IDr
+	 ADZVubcMtmAmJPAoDdpDi/WC08mWQfFtXEhW+mPIqcubf0lanAE57VfNEfXPrMyojp
+	 g6u50ldMg5AYBBHkym4O1kzneT6HLac+GUP+C+xQi8KyrZf1HTMVL03GZ8QFr33Xf7
+	 ge/aG07jIxv/Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0473440722;
-	Wed, 16 Sep 2026 21:17:55 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9C5BF13D
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:17:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8AC8B80E13;
+	Wed, 16 Sep 2026 21:41:20 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id D7EAC2EB
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:41:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8E73E400B0
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:17:53 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id BDEE8403EB
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:41:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AkpQaK75MJ8g for <u-boot@lists.u-boot-project.org>;
- Wed, 16 Sep 2026 21:17:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org D073E40081
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a01:e0c:1:1599::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789593473;
- b=JqQR/ligqHclNXDSOoIzbvz02bjGQENwxqQmSDMKZRK4sFYTJ++3Yay7QWWhJ8PMdDXS
- qPPDY323yjKpPzSbL2nwsCKNavgeQy6pfmrlQ/JODsQxS7Idvw9HwEdt+mZtpOHZx9qG7
- 7PqFnz7rO/QO9vnJfMVWLBZWg//nGS5DYCR5MO7qO7021dVVqMy62U5WBsa5dOC8rf8cS
- rFI9tNpvAFCEdUKCV91NNH/gAlLul2QzUdfzFXrmXYsj2sDw4HRwdgUCwcFRs32pl56Eo
- 4HrjTPNPMpE2q4Hvh4+AfY+xWOD0OGZ5pFx0oelQyG016nm1xc/98l446CHMKS+X+XA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PYn49e4SUJ-N for <u-boot@lists.u-boot-project.org>;
+ Wed, 16 Sep 2026 21:41:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org AE9E9403E8
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=212.27.42.6
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789594878;
+ b=cmNf1hi61HvGOxMOvsShvS4wurwgA2/HLDR170dSUXZiHNx1bYNUeeRJnfDvisyLFEpH
+ ZcZI6lG6oWhTO2z0VYyy3qoZ72DacWqKxGh/BHwUQ5X6OAwGOfsPtEfS1QFHOu1d4k3DR
+ BWEgoT6H666tblyvOEzyNxCSbSHKlBrHTUVaP4Lq2zY21lzdq1nY/6CRhNX7k5O/Ob1rf
+ 8yCaQyHrbZIMPiNfJp1Uc11WLYcnnDhRjxItk1MUsyRF7fQR6IM+S2lWWWIhbXqGtxW7K
+ DYiYISsRnKLt1wszxTtWLkP7DtFrcPwUjC6W3GUxCtXh/RlTf4a4a5xIl/g/2CRl+iA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789593473;
- h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
- Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding;
- bh=nknx5jloIQLjrY0sbyf/GEJWNKApRV88SxU49ltlMVc=;
- b=fQmWQANNXyWOiu+3gDqD1QpmmwSevQGK7rtlkqR80tMan3w6fECyxS3AJiNmWIaIlwC2
- +PHe6xoQy9mV4IVu3jXKzhrcGuhdapZuHKzvNjM74Wu8IW4cJtLN5wRWvD+LRynvN1CTg
- 0gte+rv0IzwmKiTUUza2OSwjpz5Ur+j0GCCSa0/RWqruChzCQHQq4RXEIHfom6+WQGizE
- hL745qCWGKj9NlgKlUUJTqNRGV9SiBqasRs3bpY3lhNLJZFIKyXWVjT5Hz9fsWgz39rfG
- ZH1v+7N8alp6Imr7J89eJuQfLxF/kqvsdhQXL8pcrS36bQeZWOI1Wu7Ds6XBqkSyqxg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ c=relaxed/relaxed; t=1789594878;
+ h=Received-SPF:Received:DKIM-Signature:Date:From:To:Cc:Subject:
+ Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
+ In-Reply-To;
+ bh=DRBxeXrgJJvkAZxXrpbPo5nTzDDNQzH9+qdFVAJKkAc=;
+ b=KAUNvv7nfIV8O9TS07XltVcssveKcmRgt2RSskyqhpfzEJx58N4vK/h61d0WwXEMyGbR
+ Tf2ITJGOmbVyDRZafC0178Bo4on+GQjruIeMJK4dcY3JCUtaAzENZC9OAJbwp6VqmPzMd
+ WkWkKR3IlJEqAP/WoxKg+lXrpDl1IYRHbFBZ6jc6ENNGkH7/mMMSrRjWnTusyKZW75mUm
+ lZfHTgkBxUTY5AQ/+HpC+gTSQoB0KLSDYEDUEfMHb9chwMEDsx24A10JLp4m3YI76lgs6
+ DdQUdDR1XlmTv0M1/RZJrQJvHCjT0OJ5QmfP7T2CaNz6GSFQRmrQ61M2e79a9PYam7Q==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=free.fr; 
  dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=iKuPxXMF; 
- arc=none smtp.remote-ip="2a01:e0c:1:1599::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:e0c:1:1599::10;
- helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+ header.s=smtp-20201208 header.b=bGTwzL4X; 
+ arc=none smtp.remote-ip=212.27.42.6
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.6;
+ helo=smtp6-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
- header.a=rsa-sha256 header.s=smtp-20201208 header.b=iKuPxXMF
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D073E40081
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:17:52 +0000 (UTC)
-Received: from localhost.localdomain (unknown [91.160.0.144])
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
+ header.s=smtp-20201208 header.b=bGTwzL4X
+Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [212.27.42.6])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id AE9E9403E8
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 21:41:16 +0000 (UTC)
+Received: from L30177.local (unknown
+ [IPv6:2a01:e0a:ac2:22b0:7873:8bc6:6408:8ac1])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id E6F33B0053E;
- Wed, 16 Sep 2026 23:17:39 +0200 (CEST)
+ by smtp6-g21.free.fr (Postfix) with ESMTPSA id 61B3878035E;
+ Wed, 16 Sep 2026 23:41:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1789593471;
- bh=upu6xPmZ2bz1fu+00Iz4DQ7djaz92npYw7ZUXMdvYTw=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=iKuPxXMFFgWnNIL6QAVfeerLD3fRzivkiwKxBBLY4DnPUw6dQovYwmoLDA4zuMKp7
- H4kmgrUpvSLRT0i7wBN9DLb3Ju1PSTBJFI/WUv2yJ/8ZM1sTuHN8YjEHyOBgiRO0z8
- R6ajbCH+1Ue+Ac2hLaKLKvHw38702MF/aQpSEIWWrO+ZzmJ4XW7uMDiGAXq8fbYDE8
- n12yjPkmIvVWqOD8GpDW/kjqiQnhH3F80BY8swWGn4eaQvD+NHXIc0coy9DJioGF/I
- go9A7oQ9QMvguErbJocJ8H/7b0c/eNO9M3WyO8fkOgJw53GKt4N++wZBxEICFez1++
- XO0HYDTLxEZyA==
+ s=smtp-20201208; t=1789594875;
+ bh=mM7Tng+F+kMbbWtwR17RrOiASsZVZwcRW6MYobOdtbU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=bGTwzL4XA+B5H/sVGH/Xk9RHbte/gpaEID6W1yW+iK+EyaSf4mhqM1i0s20LqNh4e
+ YB5wOfSz4e1Gm90rT+Dv1yzc4iEz0kgq7S4P3pb1DDPtRVuwL0kCSoAXYUnvSIsMwg
+ whJmtfBNaOYdk0XP8jmSrRcT0prwEK3aTTioEqPMXtwikoAZP84cDYo0UxKz9DmLJH
+ tIfy0Yugx9Jj8ICWdzdFF4cNH3+gECsoXAmb6Dzmbf3rnYKTYIyRqXhiJYJsSUJbVd
+ KT+Ud+BE4qmHzYfODVLuuK9MClSrBVDe+u08ytGMip6AtpDpaeEcsMFl0d84wh5iu6
+ SNbG6y+15V7yA==
+Date: Wed, 16 Sep 2026 23:41:05 +0200
 From: Vincent Jardin <vjardin@free.fr>
-To: u-boot@lists.u-boot-project.org
-Cc: Peng Fan <peng.fan@nxp.com>, Vladimir Oltean <vladimir.oltean@nxp.com>,
+To: Vladimir Oltean <vladimir.oltean@nxp.com>
+Cc: u-boot@lists.u-boot-project.org, Peng Fan <peng.fan@nxp.com>,
  Ioana Ciornei <ioana.ciornei@nxp.com>, Tom Rini <trini@konsulko.com>,
- Hemant Agrawal <hemant.agrawal@nxp.com>,
  Priyanka Jain <priyanka.jain@nxp.com>, Wasim Khan <wasim.khan@nxp.com>,
  Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
- Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v3 5/5] doc: lx2160a: SerDes 1 runtime lane grouping
-Date: Wed, 16 Sep 2026 23:15:49 +0200
-Message-ID: <20260916211549.3432913-6-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260916211549.3432913-1-vjardin@free.fr>
-References: <20260916211549.3432913-1-vjardin@free.fr>
+ Hemant Agrawal <hemant.agrawal@nxp.com>
+Subject: Re: [PATCH v2 0/5] board: lx2160a: runtime SerDes 1 lane grouping
+ for LX2160A boards
+Message-ID: <aqsM8WGzqV3Rzjtt@L30177.local>
+References: <20260914170417.3052423-1-vjardin@free.fr>
+ <20260916171208.iygunxmqpy335wl3@skbuf>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260916171208.iygunxmqpy335wl3@skbuf>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,72 +143,21 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add the 'serdes1' hwconfig option to README.fsl-hwconfig and a short
-note to the Layerscape README.soc.
+Hi Vladimir,
 
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
----
+> I'm confused. Did you send a v2 when v1 was already merged?
+> https://git.u-boot-project.org/u-boot/u-boot/-/commit/035d68fc36b55e3d180d73209beab15a5b988215
+> 
+> If so, I think you should submit incremental updates.
 
-(no changes since v1)
+Yes
 
- .../cpu/armv8/fsl-layerscape/doc/README.soc   | 10 ++++++++
- doc/README.fsl-hwconfig                       | 25 +++++++++++++++++++
- 2 files changed, 35 insertions(+)
+v1 was applied to next the same day I sent the v2
+(fsl-qoriq-next-2026-09-14 was merged few hours before I
+sent it), and I had not noticed it.
 
-diff --git a/arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc b/arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc
-index f2efd4cc1d7..a6f729059a1 100644
---- a/arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc
-+++ b/arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc
-@@ -332,6 +332,16 @@ LX2160A SoC has 2 more similar SoC personalities
-        a) Eight 64-bit ARM v8 Cortex-A72 CPUs
- 
- 
-+SerDes 1 runtime lane grouping
-+  The SerDes 1 protocol selected by the RCW (SRDS_PRTCL_S1) is latched
-+  at reset and cannot be changed afterwards. On the LX2160A boards under
-+  board/nxp/lx2160a/, U-Boot can nevertheless re-group the eight SerDes 1
-+  lanes before the management complex starts: 2x 100GE can become
-+  1x 100GE + 4x 25G, 2x 40GE, 1x 40GE + 4x 10G or 1x 100GE + 4x 10G.
-+  See the 'lx2160_sd1' and 'lx2160_serdes' commands and the 'serdes1'
-+  option in doc/README.fsl-hwconfig.
-+
-+
- LS1028A
- --------
- The QorIQ LS1028A processor integrates two 64-bit Arm Cortex-A72 cores with
-diff --git a/doc/README.fsl-hwconfig b/doc/README.fsl-hwconfig
-index e752505da49..605a5fd0d77 100644
---- a/doc/README.fsl-hwconfig
-+++ b/doc/README.fsl-hwconfig
-@@ -44,3 +44,28 @@ usb
- 		usb1:dr_mode=host;usb2:dr_mode=peripheral'
- 
- 		usb1:dr_mode=host,phy_type=utmi;usb2:dr_mode=host'
-+
-+serdes1
-+	Specific to the LX2160A boards under board/nxp/lx2160a/.
-+
-+	This option re-groups the eight lanes of SerDes 1 at boot, before
-+	the DPAA2 management complex latches the protocol converters. The
-+	RCW-selected SerDes 1 protocol (SRDS_PRTCL_S1) is latched at reset
-+	and cannot be changed; these modes change what the lanes carry
-+	while keeping that protocol number. The same modes are available
-+	at the prompt through the 'lx2160_sd1' command, and 'lx2160_serdes
-+	status' shows the resulting lane grouping.
-+
-+	'serdes1:100g4x25g'
-+		2x 100GE -> 1x 100GE + 4x 25G
-+
-+	'serdes1:2x40g'
-+		2x 100GE -> 2x 40GE
-+
-+	'serdes1:40g4x10g'
-+		1x 40GE + 4x 10G (converts to 2x 40GE first if needed)
-+
-+	'serdes1:100g4x10g'
-+		1x 100GE + 4x 10G
-+
-+	Only one of them applies; '100g4x25g' wins if several are given.
--- 
-2.43.0
+I have just sent a v3: patch 1 is only the delta vs
+the merged v1, then the patches 2-5 add the other SD1 modes.
 
+Best regards,
+  Vincent
