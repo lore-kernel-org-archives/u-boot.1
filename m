@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70CB1C982C5
-	for <u-boot@archiver.kernel.org>; Wed, 16 Sep 2026 13:08:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C766C982C3
+	for <u-boot@archiver.kernel.org>; Wed, 16 Sep 2026 13:08:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3E5B380EA3;
-	Wed, 16 Sep 2026 13:08:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1819580EAE;
+	Wed, 16 Sep 2026 13:08:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hNB1EnSv4pLy; Wed, 16 Sep 2026 13:08:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 7390C80E97
+ id lv2blQMun8GH; Wed, 16 Sep 2026 13:08:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 1AA5C80E59
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789564124;
-	b=bB3XYa0ygG45rOaptjOZvxTGlMqxk36lu//RJz0Dcr0WfLJNqSwOsuNSIlWZVbpyomAO
-	 /kPQIlAnIX2rWqHjlek3l3TzauMtN/dJphzlenkdrza7xJji6v6Wfa4CNDFUv3HYhQWfz
-	 Lo5WKdujAPMFFMcl3K/Hq6RaxMgUNDHkdGXIdIL2pSyX4IXuean8j7JzscWaGpw0z3J8j
-	 uYRgLV6XTT3XZyDic6AIDTY6Z/6WXWwKEt1vyB6KLtaG5Ebdk2ccrcZm851XZsDpd7RO4
-	 f8DciiR/uReru2a23GI7jge61IxdhKOqqdI6QR2tpMytjo6XOnNHpAyrPkStx0cVqfg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789564130;
+	b=A71N5SD996Ej9lx0HlhcRcF0KIzHpZv+HPxB5YHQzZs9HKE1JU1BSUuO+MoC6Z8jWpEf
+	 p+Cz5yreocGbhNC6svGs4FGcdXY8nnRT6Rw448esS+7yZSZQiIPWxB5wemenzrYY7DrVx
+	 EO4EVZyizFN0O0aC2XsKLKOqt4qmiJ8zG9WLuJoJGlQLSMjJ7kYDqtXvYU+89/259gfNz
+	 33MFujdHOo3+3eYZSqbAkJgEbOEh4AqTVdXpqyoZLETffWxgL2WC/eW801iGl+9FGv44p
+	 z3U3KTs2eFRPe7nuxzGeEb0qkSY33Lp+gxkhGJYuy06R2PHrJrF1ddQe4C4KfoKGc+g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789564124;
+	c=relaxed/relaxed; t=1789564130;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,139 +32,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=JXC2HJLMcrbCxtNxp2F48LP49igFm95sfADI4JapZsQ=;
-	b=jVM/wFaCI5hu3X7mm1E0kKiY1pw1RlIgg/AAVV41xei3EF4/H3KAmqvTWWCQVDwWl4nR
-	 GDdHYkunQkv+4+VcEQA9shmyhMf3vQJmqN1GzPeS99SfqgaC9LDUHr7e+K9ipBkpBxb3O
-	 tw/ovEdbIedFNydLCDwOPQmJWtZI3BKoO2dJsssRI8SaAXkjHFF5Q4dlB+yedQFRA7+/l
-	 fARGlw6G9VVE58mEZl/FXpKZI0fEaCftp/7ZZJHRgR3tsOM73G8aRLhgK2Fd8nKOEMvrW
-	 7wx1Rts+kmjKFWyMCp3WAd9dh9e2SN4PpU6omObynZsl5zDxi4o/YZhsjskzQK82hrQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=vFY7kau6;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=fvE3Z5jJo58BdvFrg+hdn5Yq4bPK6YDLXOU1vfcZyTY=;
+	b=geN7r1CGEX6/VtbG+3/mwhCLNCKOWplTD4L8fA3zRHyszRDNwlqiKqBTkUmVg+5rTRMj
+	 igXOJHMNGMACEUzPAVeA/u6w1NmzMS58SHJuL4zPBie9ZRvOtQClpBi8d7HUUDjk++R4x
+	 KuUxGDPf1I0X5mGJ+R+PTlEh2ylJjTqWp5hPtKSebca9ShqqMGAONqtvKPbIFudX+iE30
+	 f6QfWgLvGbzzR+EJQRXisJf2sHYzWCmNMDCEaayT73VlNApW4Vw3ZkZ0rv4aABWmaGlWA
+	 tRFrwySB6WZ0ucZK/ZAUck9ddIy954ZldKAVIAC8ZtP9gOeMeR7MpGvnO/MtRe+J1xQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789564124;
-	bh=JXC2HJLMcrbCxtNxp2F48LP49igFm95sfADI4JapZsQ=;
+	d=lists.u-boot-project.org; s=default; t=1789564130;
+	bh=fvE3Z5jJo58BdvFrg+hdn5Yq4bPK6YDLXOU1vfcZyTY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vbeQSudyWYtfa6v8ODr3mmSIahoUVNUd3lY8hmai9Aw2kOznZ2K1VcnsOjHC2ewxm
-	 qa/mlmKiQOMccYUnAXApt1glu/CjUen8hXYmS9RcCD8EtV9yB3CAa1waoJ+fXenZcz
-	 Qe7a/ijF5ORk7g5Vg4rpv6aBqkI324Q7mQz9CXu8e2no9w9I1kKAXzCe0oBWSOSWx0
-	 ROFiC0seqdmDQeY453OGlaU94raJ2ECkBp6gQ0WZ744/SuL36pPa3AQq91yrNKmEcn
-	 xwEGHu6+kO8SYNWVsXUI2V4IxQrmrlpXau9tmx5BxWfRbwWxMhLyQH4JU7hlltI0hm
-	 9hncJ9wUIgr9w==
+	b=L8sZIGEtyWFQ2ndUNFKEBCFazQ1AoZZ+RvD9MqmtOqJoiEiMSLs21o9EWsD7KBl9g
+	 jTECqAVKUD3dZ4Om8+qPUQLrIbT4CMX5aI2G46nF0ELbCQ2LqQ8g+JW9XdgukNeTBa
+	 97uDDv6bslLvAZhcIePsl/TEI/P32BgBKogkpiJdJwsbDG9ugyq2G2JP6kwiiSRidI
+	 t3py/4x+3NFPoHAuakcK/Il96gcon+e4kcEEQ2eKx/d6W+2KzH3Bv4mu9qFXkv8Lrd
+	 XWydkxaGxhgsmCgUSirYJrzBQQ0/HIDjoXgewAGr1SnVvhajdGwRy+YIm0YyvBzjDl
+	 /V5dBgOQV/Zpw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7390C80E97;
-	Wed, 16 Sep 2026 13:08:44 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id A5D36352
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 12:39:27 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1AA5C80E59;
+	Wed, 16 Sep 2026 13:08:50 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3F79FDD7
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 12:39:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 979C080E47
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 12:39:27 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 31C5B607EB
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 12:39:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Up2xnsZ9WXdf for <u-boot@lists.u-boot-project.org>;
- Wed, 16 Sep 2026 12:39:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 22F9080E3F
-Authentication-Results: smtp1.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5kKgFmHARIKF for <u-boot@lists.u-boot-project.org>;
+ Wed, 16 Sep 2026 12:39:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 40377607D2
+Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip="2a00:1450:4864:34::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789562365;
- b=lKjBytF1R5jnVNnQ7VX/iagkKrJ0UtYTuURI+lv+lmjT0PCVmWY6b+Uk5mHl6HsAmNjF
- iCp9qj8AFvcKe3afExOT3vbDmtALJRXLhGrYWUa1ua7WUORy83TlxYwWzc2qhuChNob4j
- xpqpRzkOE9e2rCw/RG/LC4CiquElD9uTWJaccbgd50EIT3GLZnViHqdCGO4Ahy37N7GmS
- 3QAzsiHeEr7mtbVWhtvn5YPLH1yFHSCQeAI9mwsVc+nhGUuO4ThTOlFDrR2B1427A+MJ6
- WEQflB9Vt5gKEclxXcSFFmMuIutlXWAgt3cLs8xb9vL/AQhGGEu4v9io27Ka5i04Puw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789562371;
+ b=l8Qujm3PXW4bv/tVF2RscXMS6QydwY24BprL7B9z+b81kO21w6EfX4WrI6rjt2KgQTD/
+ dSef9ZI/Ok3vBUBB1cE/V7gisB9I/joFG7P/HqCXhrun9+6+Jbr/6Bk+9BVihx1CbYNIJ
+ TRf8IJB9Lf4lr1f+l8rg8OlnoxY/mNFN8gQkCh/3mxKXRvNk/MMVCmgHN0EJPYxx9DFPl
+ 4qFoZAff5NNcVoNml0hwqL+pml73IMcbQHturE13CIJ0SwDEqavotSXHqwyeeURpheqxY
+ 9gAQ0lpc4VPOA3lRgPsGN1Y9LCJrzDnaIAGGxFAMXgPSQ6x0IIDHT+OXi8uVaZl6b0Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789562365;
+ c=relaxed/relaxed; t=1789562371;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=JXC2HJLMcrbCxtNxp2F48LP49igFm95sfADI4JapZsQ=;
- b=szSerfzrtruvjVe8hl03qQjhSAEoxiHozJ72XFrWNXRWjpaY1KSXTEvsccF8kpZhfPwG
- jhw+BID1CRM/IlM4CVGTRiuz9AUj5fufsV4eg7yG8snWYzZY85y116sc+s978bgYtSc67
- TDCNBtP56suycWv8SDSt8RDtHqRAGTbCdePny7UpgjfZ5rDKZaa36Uu884JPFA0u9UBIe
- yjeUEbMj/ZdRfyIQZitTj/2REzn7iQJMtoMRMMGIQ2HaY//dKyMpRgxSSwpaUfo1eQnnD
- G4DSv/EvToZEPNOIjFSccFdfANWecWsNuzNfgMgThem1/jUo9M6CWIv0x6KHD2AwdQg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=fvE3Z5jJo58BdvFrg+hdn5Yq4bPK6YDLXOU1vfcZyTY=;
+ b=QODg0JZr13x7kmPuHIZtFzjQEGjoDko2bYIwLQzM02q0AVSsuAKyG9rXib0fXR+x95Q2
+ synDJOQp2OawBqXqVz/h4EC7P2/69eamj9QOkMBiUuwRQVuHrYklByP0c7H+lusb6EMtV
+ nP831GVnPQ6IoQwKNkClmQFTWRiHl+wb2E+TaxjxGIkkQeAhgwbiKSb1SWN3PomwyIrA8
+ p4auSI09cuHmH5OiD0K7MyCWaLTtalEpflGGa8/ggoeSevIipoT+8tw14AADC6mAvLK2w
+ ufYdYZLqYJb/6AzltXugJnj2LIJNnPFKHVME2lIAWpc65o8OkeruOafac+DFY86NARQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=linaro.org; 
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=vFY7kau6; 
+ header.s=google header.b=w3YCwMX5; 
  arc=none smtp.remote-ip="2a00:1450:4864:34::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:34::10; helo=mail-ej2-x10.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=vFY7kau6
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
+ header.a=rsa-sha256 header.s=google header.b=w3YCwMX5
 Received: from mail-ej2-x10.google.com (mail-ej2-x10.google.com
  [IPv6:2a00:1450:4864:34::10])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 22F9080E3F
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 12:39:24 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 40377607D2
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 12:39:30 +0000 (UTC)
 Received: by mail-ej2-x10.google.com with SMTP id
- a640c23a62f3a-c254c50ff6fso13555666b.2
- for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 05:39:24 -0700 (PDT)
+ a640c23a62f3a-c254c50ff6fso13557366b.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 16 Sep 2026 05:39:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1789562363; x=1790167163;
+ d=linaro.org; s=google; t=1789562369; x=1790167169;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=JXC2HJLMcrbCxtNxp2F48LP49igFm95sfADI4JapZsQ=;
- b=vFY7kau6QmvlYhHscCwkl56Hld0sBVVdIoheyE/9wcJY0zLzmXzunT4VRsQCXeIBKl
- BJ3Hv47iTaFX6Jl2mB2qUNbP3IJEtM+GWnu1SbqdId9HTdMnX5nHxd4h34jLRcqNKMvR
- piYyjVYWVTuMkgqEEVVvgAJGA9RTdfB0oe+lr0FVJiDu7hb7+5XyXyv+MH+7sbBZ70W4
- nrQqIWLKy188ZZAsJrzd6HePqobIvr1Xczmhc8g+CmX074IDaMPZc9tRrs/v/Gh08R2o
- Vq6v0J7sd4ZyWekx7XYIhO+6C2mmcszM5/jJMU+1fC7LX9f/r8XWSwCxjn9mygbOaE/g
- A/ig==
+ bh=fvE3Z5jJo58BdvFrg+hdn5Yq4bPK6YDLXOU1vfcZyTY=;
+ b=w3YCwMX5yDqt/GhQA2JioroxHKuPpi1oED/6Fi3GJMg0mUuzjGK5jLc9E6/3lBvr6Y
+ IvihGbvWtqDaKQynvrEf7MHOtZOsX3bxcVXhoaycrEAdyfTVRKLlzGF8YxVcjFhVfmTl
+ lyKN/j5025cjBbsJb3gRrOvPn03MkQLQ7Ixr8z816LVb0ObM4EOQEgU6TLpiTzD3G5/N
+ Jz4M3JlWq2fzkmN8IZakKtejvuJEA2J//CX8ZIr2LeKr8p422Yeq4l3n0Kqg3btjeWbB
+ ljoovwH5s2zP2KdLBxmg+JM7NWpm6B34fH1EJYI8kUxRfEtakCWFK54qkvxyaNwlF1UB
+ kTDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789562363; x=1790167163;
+ d=1e100.net; s=20260707; t=1789562369; x=1790167169;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=JXC2HJLMcrbCxtNxp2F48LP49igFm95sfADI4JapZsQ=;
- b=LsLyhfbMH+BywDlrd/r6HT7Caz5O7xOJHl26V72zc5rd9XO81aj8aOfaP58pXSRvpe
- FNbQOe0rX+RgjXMsCEIdazK21HMKweqgSagC2WWx9buupQMWJAYRHGjkuocR3wVv4z3E
- hUc1JWMcvMUFea+KAqTfezt2IaEL3xsA+WSDpGFBSVmAr1FRiD1IT1PcZGjeZE8KBcKD
- bZZm4g3EQxapA0wDN4lqLI7eJ30dPIA4rfc3kcbaOlexh8979yzEkAcAN7ltqh83hDVH
- naHDe/dmD3ZYpLtDTQXwnJv3iu4EbRMpJwoaTqtLX9gEAFDX6ybvfYLfkJt1pmcYz56G
- JtIQ==
-X-Gm-Message-State: AFuF++lWp8geO0SoKuHe6anCBUJ5Gk1kCDw2Nrn9Rj4KrGGptuR2u0Dc
- 9agOPXcg/iEs9agvLNoa+siPxvUAbylzzLZAeXMxMMJ69UmthTY/Z4UA58+Ohfs/UWph4ro2/N9
- 8eJ6b
-X-Gm-Gg: AYBFou2i5XKIvdGjeW2EkfwfXjMSNZ+eHcJvUJ5Bp1D+BFMw76dJsEjc9AReA2Dht8M
- 7M+ADSXTnEfJ3yozK3JJy3jgkV1iKijKgcgKR7K9GoHgRi0MUF2bz7zIXBGsRQdY91fxVYYLcpc
- Otf3eij7fiJ3kdJ8YyS1VfWsVBLPd73X5XvZ45dF6wrf3HVQzWHtqQC0Se+Jog3q2ky0CABPSmf
- yIpz3s0XRd/+Mrq2WcmIZkW04OsQIAmZ7YZzMIV8YBHD443s2+yvQDRAUBpxpwLGwDrdQ6bYSCJ
- R6vJhUhBRWXIcAycikJWVvHVKgCv0mK+vh5zICrDo9Yc+mW/0y5pNhbe6lhq1Dunbe+d0GSjI4E
- li0hCsHAOwHzQtVVCLXtd8LciNiLbQekcYBD0F9i/JzfEFoo2mS2sRvDU9E6YBDewMpq2apSywG
- FsCi9Pgv8UaeRO5r7SlypXApDk/63wudp9hAt/NNySgg+BTDGFBHKJYrOSMABdDVPLrS8vFA9Jz
- xSi//Gd5pme1r56OpSmRriZzL5PtkmvLNNb9ukPTQHN3dBPbCU8tL2J
-X-Received: by 2002:a17:907:271b:b0:c29:ed8e:293e with SMTP id
- a640c23a62f3a-c29ed8e2a8emr70387666b.1.1789562362659; 
- Wed, 16 Sep 2026 05:39:22 -0700 (PDT)
+ bh=fvE3Z5jJo58BdvFrg+hdn5Yq4bPK6YDLXOU1vfcZyTY=;
+ b=JLk9ZmeFbQJ1SSWK9RqGCCgvwXKCn/kEMFlW6QXnh4GgBvpz9zp+NFP0KuxVx75tDw
+ qQIuo9cQZ+iRd2TsvoHGWnWG2VDlG7ZTaMcanWMlfvTHkrAxIGamrXqS40jMbvZt5Yhp
+ yvtuSpgTHYS0U/hQGvem4S3yKXsMPvXE61xBVhdWOIEq7vtVDNE6/GKOOB6ViPm52S29
+ G/ablacKhYsLbqx69pnMm8hQ3W1xhotRGwGFBBCOlB6G0lCDjSmsOTk/xPwpnm+O3Xk3
+ afJG178kpjmL+hHXdMlWR3At8II/6LlWElQuBkW4sStfPa8EHJrDvQy0dHd5KXrKjYB9
+ dv0w==
+X-Gm-Message-State: AFuF++lGiFzsGLFK8zmxW2ueOvxl/tSLOe46PAd659eISJJM+xNJ/Uw/
+ 1z+bw66MyKAcgFEWA2jTDKsi4//PnkaU/lopWFdchFKtRiKDoVRFlxSQ8ynRcBg6aLpfee4cszF
+ 1NCqU
+X-Gm-Gg: AYBFou04ab+fToUP+ot0X2jALN0mOMqgmIn/spUK6xLdiktVFDpFLXe32YqAcoNFe2p
+ dA8fuAqZK7/3/sEvEOrzZtl2MqHEaSJULutdVjHFnorinNL+fdOIPFfaJXY8ngjMQcEaBD7+Bx9
+ XmUXAOb/gxSivl4KL78x0t9f1DfdcP/QY9POA0gvh5s+0gHfnvrUH9b5FJ6E8943EpBCzkeBZyj
+ 4jBbPP4hn5oCLOINzIyzGz0pMwsgeiA/bLLX4slE8xeCixvQKNZwKeKMitwJdGrsYgIPIO+cZ+7
+ ycnGFG+l26eAvwcyjSVN+RVRZgjiqTpQJgKlaFKE6Do+dDqqvNKx0Ysv31s7OOpqAjMYpPb677K
+ TAzP6j6KKITDBu+ka81CumVPLtu+xSO2jYPoTOQvu+CKbKKL+UXYnSGgs2WwJWLbt1O7S9QtWRt
+ 6AsiaUUMMDdJRYz1GUzh/hoOuOfXvt3z6iUfvsZqOcsvWQG9Pevrsg+MLXbLZDVzlstI8V/duH7
+ GAw8BzHR+J+6Tq7z0lMmTsyHlx7fSs53TvVGiKyIIHjR+Tb5DUuT/qm
+X-Received: by 2002:a17:907:3f99:b0:c29:cfce:1933 with SMTP id
+ a640c23a62f3a-c29e530d7c9mr207336066b.2.1789562369114; 
+ Wed, 16 Sep 2026 05:39:29 -0700 (PDT)
 Received: from monster.taild06a60.ts.net (c-85-229-7-191.bbcust.telenor.se.
  [85.229.7.191]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c29de086aa3sm136889166b.6.2026.09.16.05.39.19
+ a640c23a62f3a-c29de086aa3sm136889166b.6.2026.09.16.05.39.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Sep 2026 05:39:20 -0700 (PDT)
+ Wed, 16 Sep 2026 05:39:27 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  michal.simek@amd.com, lukma@denx.de, alchark@flipper.net,
  jerome.forissier@arm.com, dlechner@baylibre.com, anshuld@ti.com,
  sjg@chromium.org, Thinh.Nguyen@synopsys.com, mkorpershoek@kernel.org,
- love.kumar@amd.com, Anders Roxell <anders.roxell@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>
-Subject: [PATCH v9 05/26] usb: gadget: udc: make udc-core build in U-Boot
-Date: Wed, 16 Sep 2026 14:38:05 +0200
-Message-ID: <20260916123826.517181-6-anders.roxell@linaro.org>
+ love.kumar@amd.com, Anders Roxell <anders.roxell@linaro.org>
+Subject: [PATCH v9 09/26] usb: gadget: udc: enable async callbacks on bind
+Date: Wed, 16 Sep 2026 14:38:09 +0200
+Message-ID: <20260916123826.517181-10-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260916123826.517181-1-anders.roxell@linaro.org>
 References: <20260916123826.517181-1-anders.roxell@linaro.org>
@@ -184,1361 +180,52 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Adapt the re-imported udc-core.c to U-Boot and build it for every gadget
-config. The resynced gadget.h makes usb_ep_enable() and friends real
-functions and they live here now.
+The dwc3 driver was synced from Linux v6.16. The new ep0 code only calls
+the gadget driver setup() when dwc->async_callbacks is set. In Linux the
+udc core sets this flag after udc_start. U-Boot never did.
 
-udc-core only sees controllers that called usb_add_gadget_udc(). Driver
-model drivers do that from probe, the others have no probe at all. Add a
-weak usb_gadget_udc_bringup() hook so they can bring themselves up when a
-gadget driver asks for a UDC. Report what the hook returns, otherwise a
-controller that fails to come up only says "No UDC available".
+Without the flag every delegated control request, like GET_DESCRIPTOR,
+returns -EINVAL and ep0 stalls. The device never enumerates, so fastboot,
+DFU and UMS do not work on any dwc3 board.
 
-In the kernel udc_start(), udc_stop() and get_frame() are mandatory. In
-U-Boot they are not, so check them before calling. Without the check a
-driver that does not have them takes the board down instead of failing.
+Enable async callbacks after udc_start, and disable them on unbind, the
+same way Linux does it.
 
-Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
-Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+Reported-by: Anshul Dalal <anshuld@ti.com>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/gadget/udc/Makefile   |   1 +
- drivers/usb/gadget/udc/udc-core.c | 929 +++++-------------------------
- include/linux/usb/gadget.h        |   3 +
- 3 files changed, 153 insertions(+), 780 deletions(-)
+ drivers/usb/gadget/udc/udc-core.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/usb/gadget/udc/Makefile b/drivers/usb/gadget/udc/Makefile
-index 56b9b123fa16..f80ae6e5add5 100644
---- a/drivers/usb/gadget/udc/Makefile
-+++ b/drivers/usb/gadget/udc/Makefile
-@@ -7,4 +7,5 @@ obj-$(CONFIG_USB_DWC3_GADGET)	+= udc-core.o
- endif
- 
- obj-$(CONFIG_$(PHASE_)DM_USB_GADGET)	+= udc-core.o
-+obj-$(CONFIG_$(PHASE_)USB_GADGET)	+= udc-core.o
- obj-y += udc-uclass.o
 diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/udc-core.c
-index 2af62c579cb3..a01a7e6dc21f 100644
+index a01a7e6dc21f..79f249cbb114 100644
 --- a/drivers/usb/gadget/udc/udc-core.c
 +++ b/drivers/usb/gadget/udc/udc-core.c
-@@ -7,27 +7,17 @@
-  * Author: Felipe Balbi <balbi@ti.com>
-  */
- 
--#define pr_fmt(fmt)	"UDC core: " fmt
--
--#include <linux/kernel.h>
--#include <linux/module.h>
--#include <linux/device.h>
--#include <linux/list.h>
--#include <linux/idr.h>
--#include <linux/err.h>
-+#include <dm/device.h>
-+#include <dm/device_compat.h>
-+#include <dm/devres.h>
-+#include <linux/compat.h>
-+#include <malloc.h>
-+#include <asm/cache.h>
-+#include <linux/bug.h>
- #include <linux/dma-mapping.h>
--#include <linux/sched/task_stack.h>
--#include <linux/workqueue.h>
- 
- #include <linux/usb/ch9.h>
- #include <linux/usb/gadget.h>
--#include <linux/usb.h>
--
--#include "trace.h"
--
--static DEFINE_IDA(gadget_id_numbers);
--
--static const struct bus_type gadget_bus_type;
- 
- /**
-  * struct usb_udc - describes one usb device controller
-@@ -41,7 +31,6 @@ static const struct bus_type gadget_bus_type;
-  * @allow_connect: Indicates whether UDC is allowed to be pulled up.
-  * Set/cleared by gadget_(un)bind_driver() after gadget driver is bound or
-  * unbound.
-- * @vbus_work: work routine to handle VBUS status change notifications.
-  * @connect_lock: protects udc->started, gadget->connect,
-  * gadget->allow_connect and gadget->deactivate. The routines
-  * usb_gadget_connect_locked(), usb_gadget_disconnect_locked(),
-@@ -59,15 +48,13 @@ struct usb_udc {
- 	bool				vbus;
- 	bool				started;
- 	bool				allow_connect;
--	struct work_struct		vbus_work;
- 	struct mutex			connect_lock;
- };
- 
--static const struct class udc_class;
- static LIST_HEAD(udc_list);
- 
- /* Protects udc_list, udc->driver, driver->is_bound, and related calls */
--static DEFINE_MUTEX(udc_lock);
-+DEFINE_MUTEX(udc_lock);
- 
- /* ------------------------------------------------------------------------- */
- 
-@@ -84,8 +71,6 @@ void usb_ep_set_maxpacket_limit(struct usb_ep *ep,
- {
- 	ep->maxpacket_limit = maxpacket_limit;
- 	ep->maxpacket = maxpacket_limit;
--
--	trace_usb_ep_set_maxpacket_limit(ep, 0);
- }
- EXPORT_SYMBOL_GPL(usb_ep_set_maxpacket_limit);
- 
-@@ -120,9 +105,10 @@ int usb_ep_enable(struct usb_ep *ep)
- 
- 	/* UDC drivers can't handle endpoints with maxpacket size 0 */
- 	if (!ep->desc || usb_endpoint_maxp(ep->desc) == 0) {
-+#ifndef CONFIG_SPL_BUILD
- 		WARN_ONCE(1, "%s: ep%d (%s) has %s\n", __func__, ep->address, ep->name,
- 			  (!ep->desc) ? "NULL descriptor" : "maxpacket 0");
--
-+#endif
- 		ret = -EINVAL;
- 		goto out;
- 	}
-@@ -134,8 +120,6 @@ int usb_ep_enable(struct usb_ep *ep)
- 	ep->enabled = true;
- 
- out:
--	trace_usb_ep_enable(ep, ret);
--
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(usb_ep_enable);
-@@ -168,8 +152,6 @@ int usb_ep_disable(struct usb_ep *ep)
- 	ep->enabled = false;
- 
- out:
--	trace_usb_ep_disable(ep, ret);
--
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(usb_ep_disable);
-@@ -191,13 +173,7 @@ EXPORT_SYMBOL_GPL(usb_ep_disable);
- struct usb_request *usb_ep_alloc_request(struct usb_ep *ep,
- 						       gfp_t gfp_flags)
- {
--	struct usb_request *req = NULL;
--
--	req = ep->ops->alloc_request(ep, gfp_flags);
--
--	trace_usb_ep_alloc_request(ep, req, req ? 0 : -ENOMEM);
--
--	return req;
-+	return  ep->ops->alloc_request(ep, gfp_flags);
- }
- EXPORT_SYMBOL_GPL(usb_ep_alloc_request);
- 
-@@ -213,7 +189,6 @@ EXPORT_SYMBOL_GPL(usb_ep_alloc_request);
- void usb_ep_free_request(struct usb_ep *ep,
- 				       struct usb_request *req)
- {
--	trace_usb_ep_free_request(ep, req, 0);
- 	ep->ops->free_request(ep, req);
- }
- EXPORT_SYMBOL_GPL(usb_ep_free_request);
-@@ -301,8 +276,6 @@ int usb_ep_queue(struct usb_ep *ep,
- 	ret = ep->ops->queue(ep, req, gfp_flags);
- 
- out:
--	trace_usb_ep_queue(ep, req, ret);
--
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(usb_ep_queue);
-@@ -326,12 +299,7 @@ EXPORT_SYMBOL_GPL(usb_ep_queue);
-  */
- int usb_ep_dequeue(struct usb_ep *ep, struct usb_request *req)
- {
--	int ret;
--
--	ret = ep->ops->dequeue(ep, req);
--	trace_usb_ep_dequeue(ep, req, ret);
--
--	return ret;
-+	return ep->ops->dequeue(ep, req);
- }
- EXPORT_SYMBOL_GPL(usb_ep_dequeue);
- 
-@@ -360,12 +328,7 @@ EXPORT_SYMBOL_GPL(usb_ep_dequeue);
-  */
- int usb_ep_set_halt(struct usb_ep *ep)
- {
--	int ret;
--
--	ret = ep->ops->set_halt(ep, 1);
--	trace_usb_ep_set_halt(ep, ret);
--
--	return ret;
-+	return ep->ops->set_halt(ep, 1);
- }
- EXPORT_SYMBOL_GPL(usb_ep_set_halt);
- 
-@@ -386,12 +349,7 @@ EXPORT_SYMBOL_GPL(usb_ep_set_halt);
-  */
- int usb_ep_clear_halt(struct usb_ep *ep)
- {
--	int ret;
--
--	ret = ep->ops->set_halt(ep, 0);
--	trace_usb_ep_clear_halt(ep, ret);
--
--	return ret;
-+	return ep->ops->set_halt(ep, 0);
- }
- EXPORT_SYMBOL_GPL(usb_ep_clear_halt);
- 
-@@ -416,8 +374,6 @@ int usb_ep_set_wedge(struct usb_ep *ep)
- 	else
- 		ret = ep->ops->set_halt(ep, 1);
- 
--	trace_usb_ep_set_wedge(ep, ret);
--
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(usb_ep_set_wedge);
-@@ -448,8 +404,6 @@ int usb_ep_fifo_status(struct usb_ep *ep)
- 	else
- 		ret = -EOPNOTSUPP;
- 
--	trace_usb_ep_fifo_status(ep, ret);
--
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(usb_ep_fifo_status);
-@@ -469,8 +423,6 @@ void usb_ep_fifo_flush(struct usb_ep *ep)
- {
- 	if (ep->ops->fifo_flush)
- 		ep->ops->fifo_flush(ep);
--
--	trace_usb_ep_fifo_flush(ep, 0);
- }
- EXPORT_SYMBOL_GPL(usb_ep_fifo_flush);
- 
-@@ -485,13 +437,11 @@ EXPORT_SYMBOL_GPL(usb_ep_fifo_flush);
-  */
- int usb_gadget_frame_number(struct usb_gadget *gadget)
- {
--	int ret;
--
--	ret = gadget->ops->get_frame(gadget);
- 
--	trace_usb_gadget_frame_number(gadget, ret);
-+	if (!gadget->ops->get_frame)
-+		return -EOPNOTSUPP;
- 
--	return ret;
-+	return gadget->ops->get_frame(gadget);
- }
- EXPORT_SYMBOL_GPL(usb_gadget_frame_number);
- 
-@@ -520,39 +470,10 @@ int usb_gadget_wakeup(struct usb_gadget *gadget)
- 	ret = gadget->ops->wakeup(gadget);
- 
- out:
--	trace_usb_gadget_wakeup(gadget, ret);
--
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(usb_gadget_wakeup);
- 
--/**
-- * usb_gadget_set_remote_wakeup - configures the device remote wakeup feature.
-- * @gadget:the device being configured for remote wakeup
-- * @set:value to be configured.
-- *
-- * set to one to enable remote wakeup feature and zero to disable it.
-- *
-- * returns zero on success, else negative errno.
-- */
--int usb_gadget_set_remote_wakeup(struct usb_gadget *gadget, int set)
--{
--	int ret = 0;
--
--	if (!gadget->ops->set_remote_wakeup) {
--		ret = -EOPNOTSUPP;
--		goto out;
--	}
--
--	ret = gadget->ops->set_remote_wakeup(gadget, set);
--
--out:
--	trace_usb_gadget_set_remote_wakeup(gadget, ret);
--
--	return ret;
--}
--EXPORT_SYMBOL_GPL(usb_gadget_set_remote_wakeup);
--
- /**
-  * usb_gadget_set_selfpowered - sets the device selfpowered feature.
-  * @gadget:the device being declared as self-powered
-@@ -574,8 +495,6 @@ int usb_gadget_set_selfpowered(struct usb_gadget *gadget)
- 	ret = gadget->ops->set_selfpowered(gadget, 1);
- 
- out:
--	trace_usb_gadget_set_selfpowered(gadget, ret);
--
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(usb_gadget_set_selfpowered);
-@@ -602,43 +521,10 @@ int usb_gadget_clear_selfpowered(struct usb_gadget *gadget)
- 	ret = gadget->ops->set_selfpowered(gadget, 0);
- 
- out:
--	trace_usb_gadget_clear_selfpowered(gadget, ret);
--
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(usb_gadget_clear_selfpowered);
- 
--/**
-- * usb_gadget_vbus_connect - Notify controller that VBUS is powered
-- * @gadget:The device which now has VBUS power.
-- * Context: can sleep
-- *
-- * This call is used by a driver for an external transceiver (or GPIO)
-- * that detects a VBUS power session starting.  Common responses include
-- * resuming the controller, activating the D+ (or D-) pullup to let the
-- * host detect that a USB device is attached, and starting to draw power
-- * (8mA or possibly more, especially after SET_CONFIGURATION).
-- *
-- * Returns zero on success, else negative errno.
-- */
--int usb_gadget_vbus_connect(struct usb_gadget *gadget)
--{
--	int ret = 0;
--
--	if (!gadget->ops->vbus_session) {
--		ret = -EOPNOTSUPP;
--		goto out;
--	}
--
--	ret = gadget->ops->vbus_session(gadget, 1);
--
--out:
--	trace_usb_gadget_vbus_connect(gadget, ret);
--
--	return ret;
--}
--EXPORT_SYMBOL_GPL(usb_gadget_vbus_connect);
--
- /**
-  * usb_gadget_vbus_draw - constrain controller's VBUS power usage
-  * @gadget:The device whose VBUS usage is being described
-@@ -653,21 +539,10 @@ EXPORT_SYMBOL_GPL(usb_gadget_vbus_connect);
-  */
- int usb_gadget_vbus_draw(struct usb_gadget *gadget, unsigned mA)
- {
--	int ret = 0;
--
--	if (!gadget->ops->vbus_draw) {
--		ret = -EOPNOTSUPP;
--		goto out;
--	}
--
--	ret = gadget->ops->vbus_draw(gadget, mA);
--	if (!ret)
--		gadget->mA = mA;
-+	if (!gadget->ops->vbus_draw)
-+		return -EOPNOTSUPP;
- 
--out:
--	trace_usb_gadget_vbus_draw(gadget, ret);
--
--	return ret;
-+	return gadget->ops->vbus_draw(gadget, mA);
- }
- EXPORT_SYMBOL_GPL(usb_gadget_vbus_draw);
- 
-@@ -694,8 +569,6 @@ int usb_gadget_vbus_disconnect(struct usb_gadget *gadget)
- 	ret = gadget->ops->vbus_session(gadget, 0);
- 
- out:
--	trace_usb_gadget_vbus_disconnect(gadget, ret);
--
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(usb_gadget_vbus_disconnect);
-@@ -726,8 +599,6 @@ static int usb_gadget_connect_locked(struct usb_gadget *gadget)
- 		gadget->connected = 1;
- 
- out:
--	trace_usb_gadget_connect(gadget, ret);
--
- 	return ret;
- }
- 
-@@ -785,8 +656,6 @@ static int usb_gadget_disconnect_locked(struct usb_gadget *gadget)
- 	mutex_unlock(&udc_lock);
- 
- out:
--	trace_usb_gadget_disconnect(gadget, ret);
--
- 	return ret;
- }
- 
-@@ -815,170 +684,31 @@ int usb_gadget_disconnect(struct usb_gadget *gadget)
- }
- EXPORT_SYMBOL_GPL(usb_gadget_disconnect);
- 
--/**
-- * usb_gadget_deactivate - deactivate function which is not ready to work
-- * @gadget: the peripheral being deactivated
-- *
-- * This routine may be used during the gadget driver bind() call to prevent
-- * the peripheral from ever being visible to the USB host, unless later
-- * usb_gadget_activate() is called.  For example, user mode components may
-- * need to be activated before the system can talk to hosts.
-- *
-- * This routine may sleep; it must not be called in interrupt context
-- * (such as from within a gadget driver's disconnect() callback).
-- *
-- * Returns zero on success, else negative errno.
-- */
--int usb_gadget_deactivate(struct usb_gadget *gadget)
--{
--	int ret = 0;
--
--	mutex_lock(&gadget->udc->connect_lock);
--	if (gadget->deactivated)
--		goto unlock;
--
--	if (gadget->connected) {
--		ret = usb_gadget_disconnect_locked(gadget);
--		if (ret)
--			goto unlock;
--
--		/*
--		 * If gadget was being connected before deactivation, we want
--		 * to reconnect it in usb_gadget_activate().
--		 */
--		gadget->connected = true;
--	}
--	gadget->deactivated = true;
--
--unlock:
--	mutex_unlock(&gadget->udc->connect_lock);
--	trace_usb_gadget_deactivate(gadget, ret);
--
--	return ret;
--}
--EXPORT_SYMBOL_GPL(usb_gadget_deactivate);
--
--/**
-- * usb_gadget_activate - activate function which is not ready to work
-- * @gadget: the peripheral being activated
-- *
-- * This routine activates gadget which was previously deactivated with
-- * usb_gadget_deactivate() call. It calls usb_gadget_connect() if needed.
-- *
-- * This routine may sleep; it must not be called in interrupt context.
-- *
-- * Returns zero on success, else negative errno.
-- */
--int usb_gadget_activate(struct usb_gadget *gadget)
--{
--	int ret = 0;
--
--	mutex_lock(&gadget->udc->connect_lock);
--	if (!gadget->deactivated)
--		goto unlock;
--
--	gadget->deactivated = false;
--
--	/*
--	 * If gadget has been connected before deactivation, or became connected
--	 * while it was being deactivated, we call usb_gadget_connect().
--	 */
--	if (gadget->connected)
--		ret = usb_gadget_connect_locked(gadget);
--
--unlock:
--	mutex_unlock(&gadget->udc->connect_lock);
--	trace_usb_gadget_activate(gadget, ret);
--
--	return ret;
--}
--EXPORT_SYMBOL_GPL(usb_gadget_activate);
--
- /* ------------------------------------------------------------------------- */
- 
--#ifdef	CONFIG_HAS_DMA
--
--int usb_gadget_map_request_by_dev(struct device *dev,
-+int usb_gadget_map_request(struct usb_gadget *gadget,
- 		struct usb_request *req, int is_in)
- {
- 	if (req->length == 0)
- 		return 0;
- 
--	if (req->sg_was_mapped) {
--		req->num_mapped_sgs = req->num_sgs;
--		return 0;
--	}
--
--	if (req->num_sgs) {
--		int     mapped;
--
--		mapped = dma_map_sg(dev, req->sg, req->num_sgs,
--				is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
--		if (mapped == 0) {
--			dev_err(dev, "failed to map SGs\n");
--			return -EFAULT;
--		}
--
--		req->num_mapped_sgs = mapped;
--	} else {
--		if (is_vmalloc_addr(req->buf)) {
--			dev_err(dev, "buffer is not dma capable\n");
--			return -EFAULT;
--		} else if (object_is_on_stack(req->buf)) {
--			dev_err(dev, "buffer is on stack\n");
--			return -EFAULT;
--		}
--
--		req->dma = dma_map_single(dev, req->buf, req->length,
--				is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
--
--		if (dma_mapping_error(dev, req->dma)) {
--			dev_err(dev, "failed to map buffer\n");
--			return -EFAULT;
--		}
--
--		req->dma_mapped = 1;
--	}
--
-+	req->dma = dma_map_single(req->buf, req->length,
-+				  is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
- 	return 0;
- }
--EXPORT_SYMBOL_GPL(usb_gadget_map_request_by_dev);
--
--int usb_gadget_map_request(struct usb_gadget *gadget,
--		struct usb_request *req, int is_in)
--{
--	return usb_gadget_map_request_by_dev(gadget->dev.parent, req, is_in);
--}
- EXPORT_SYMBOL_GPL(usb_gadget_map_request);
- 
--void usb_gadget_unmap_request_by_dev(struct device *dev,
-+void usb_gadget_unmap_request(struct usb_gadget *gadget,
- 		struct usb_request *req, int is_in)
- {
--	if (req->length == 0 || req->sg_was_mapped)
-+	if (req->length == 0)
- 		return;
- 
--	if (req->num_mapped_sgs) {
--		dma_unmap_sg(dev, req->sg, req->num_sgs,
--				is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
--
--		req->num_mapped_sgs = 0;
--	} else if (req->dma_mapped) {
--		dma_unmap_single(dev, req->dma, req->length,
--				is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
--		req->dma_mapped = 0;
--	}
--}
--EXPORT_SYMBOL_GPL(usb_gadget_unmap_request_by_dev);
--
--void usb_gadget_unmap_request(struct usb_gadget *gadget,
--		struct usb_request *req, int is_in)
--{
--	usb_gadget_unmap_request_by_dev(gadget->dev.parent, req, is_in);
-+	dma_unmap_single(req->dma, req->length,
-+			 is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
- }
- EXPORT_SYMBOL_GPL(usb_gadget_unmap_request);
- 
--#endif	/* CONFIG_HAS_DMA */
--
- /* ------------------------------------------------------------------------- */
- 
- /**
-@@ -992,11 +722,6 @@ EXPORT_SYMBOL_GPL(usb_gadget_unmap_request);
- void usb_gadget_giveback_request(struct usb_ep *ep,
- 		struct usb_request *req)
- {
--	if (likely(req->status == 0))
--		usb_led_activity(USB_LED_EVENT_GADGET);
--
--	trace_usb_gadget_giveback_request(ep, req, 0);
--
- 	req->complete(ep, req);
- }
- EXPORT_SYMBOL_GPL(usb_gadget_giveback_request);
-@@ -1112,71 +837,13 @@ EXPORT_SYMBOL_GPL(usb_gadget_check_config);
- 
- /* ------------------------------------------------------------------------- */
- 
--static void usb_gadget_state_work(struct work_struct *work)
--{
--	struct usb_gadget *gadget = work_to_gadget(work);
--	struct usb_udc *udc = gadget->udc;
--
--	if (udc)
--		sysfs_notify(&udc->dev.kobj, NULL, "state");
--}
--
- void usb_gadget_set_state(struct usb_gadget *gadget,
- 		enum usb_device_state state)
- {
- 	gadget->state = state;
--	schedule_work(&gadget->work);
- }
- EXPORT_SYMBOL_GPL(usb_gadget_set_state);
- 
--/* ------------------------------------------------------------------------- */
--
--/* Acquire connect_lock before calling this function. */
--static int usb_udc_connect_control_locked(struct usb_udc *udc) __must_hold(&udc->connect_lock)
--{
--	if (udc->vbus)
--		return usb_gadget_connect_locked(udc->gadget);
--	else
--		return usb_gadget_disconnect_locked(udc->gadget);
--}
--
--static void vbus_event_work(struct work_struct *work)
--{
--	struct usb_udc *udc = container_of(work, struct usb_udc, vbus_work);
--
--	mutex_lock(&udc->connect_lock);
--	usb_udc_connect_control_locked(udc);
--	mutex_unlock(&udc->connect_lock);
--}
--
--/**
-- * usb_udc_vbus_handler - updates the udc core vbus status, and try to
-- * connect or disconnect gadget
-- * @gadget: The gadget which vbus change occurs
-- * @status: The vbus status
-- *
-- * The udc driver calls it when it wants to connect or disconnect gadget
-- * according to vbus status.
-- *
-- * This function can be invoked from interrupt context by irq handlers of
-- * the gadget drivers, however, usb_udc_connect_control() has to run in
-- * non-atomic context due to the following:
-- * a. Some of the gadget driver implementations expect the ->pullup
-- * callback to be invoked in non-atomic context.
-- * b. usb_gadget_disconnect() acquires udc_lock which is a mutex.
-- * Hence offload invocation of usb_udc_connect_control() to workqueue.
-- */
--void usb_udc_vbus_handler(struct usb_gadget *gadget, bool status)
--{
--	struct usb_udc *udc = gadget->udc;
--
--	if (udc) {
--		udc->vbus = status;
--		schedule_work(&udc->vbus_work);
--	}
--}
--EXPORT_SYMBOL_GPL(usb_udc_vbus_handler);
--
- /**
-  * usb_gadget_udc_reset - notifies the udc core that bus reset occurs
-  * @gadget: The gadget which bus reset occurs
-@@ -1219,6 +886,9 @@ static inline int usb_gadget_udc_start_locked(struct usb_udc *udc)
- 		return -EBUSY;
- 	}
- 
-+	if (!udc->gadget->ops->udc_start)
-+		return -EOPNOTSUPP;
-+
- 	ret = udc->gadget->ops->udc_start(udc->gadget, udc->driver);
- 	if (!ret)
- 		udc->started = true;
-@@ -1247,7 +917,8 @@ static inline void usb_gadget_udc_stop_locked(struct usb_udc *udc)
- 		return;
- 	}
- 
--	udc->gadget->ops->udc_stop(udc->gadget);
-+	if (udc->gadget->ops->udc_stop)
-+		udc->gadget->ops->udc_stop(udc->gadget);
- 	udc->started = false;
- }
- 
-@@ -1278,6 +949,37 @@ static inline void usb_gadget_udc_set_speed(struct usb_udc *udc,
+@@ -949,6 +949,8 @@ static inline void usb_gadget_udc_set_speed(struct usb_udc *udc,
  		gadget->ops->udc_set_speed(gadget, s);
  }
  
-+static int udc_bind_to_driver(struct usb_udc *udc, struct usb_gadget_driver *driver)
-+{
-+	int ret;
++static inline void usb_gadget_enable_async_callbacks(struct usb_udc *udc);
 +
-+	dev_dbg(&udc->dev, "registering UDC driver [%s]\n",
-+			driver->function);
-+
-+	udc->driver = driver;
-+
-+	usb_gadget_udc_set_speed(udc, driver->speed);
-+
-+	ret = driver->bind(udc->gadget);
-+	if (ret)
-+		goto err1;
-+	ret = usb_gadget_udc_start_locked(udc);
-+	if (ret) {
-+		driver->unbind(udc->gadget);
-+		goto err1;
-+	}
-+	udc->allow_connect = true;
-+	usb_gadget_connect(udc->gadget);
-+
-+	return 0;
-+err1:
-+	if (ret != -EISNAM)
-+		dev_err(&udc->dev, "failed to start %s: %d\n",
-+			udc->driver->function, ret);
-+	udc->driver = NULL;
-+	return ret;
-+}
-+
- /**
-  * usb_gadget_enable_async_callbacks - tell usb device controller to enable asynchronous callbacks
-  * @udc: The UDC which should enable async callbacks
-@@ -1337,17 +1039,9 @@ static void usb_udc_release(struct device *dev)
- 	struct usb_udc *udc;
- 
- 	udc = container_of(dev, struct usb_udc, dev);
--	dev_dbg(dev, "releasing '%s'\n", dev_name(dev));
- 	kfree(udc);
- }
- 
--static const struct attribute_group *usb_udc_attr_groups[];
--
--static void usb_udc_nop_release(struct device *dev)
--{
--	dev_vdbg(dev, "%s\n", __func__);
--}
--
- /**
-  * usb_initialize_gadget - initialize a gadget and its embedded struct device
-  * @parent: the parent device to this udc. Usually the controller driver's
-@@ -1358,16 +1052,8 @@ static void usb_udc_nop_release(struct device *dev)
- void usb_initialize_gadget(struct device *parent, struct usb_gadget *gadget,
- 		void (*release)(struct device *dev))
+ static int udc_bind_to_driver(struct usb_udc *udc, struct usb_gadget_driver *driver)
  {
--	INIT_WORK(&gadget->work, usb_gadget_state_work);
- 	gadget->dev.parent = parent;
--
--	if (release)
--		gadget->dev.release = release;
--	else
--		gadget->dev.release = usb_udc_nop_release;
--
--	device_initialize(&gadget->dev);
--	gadget->dev.bus = &gadget_bus_type;
-+	gadget->dev.release = release;
- }
- EXPORT_SYMBOL_GPL(usb_initialize_gadget);
- 
-@@ -1387,15 +1073,9 @@ int usb_add_gadget(struct usb_gadget *gadget)
- 	if (!udc)
- 		goto error;
- 
--	device_initialize(&udc->dev);
- 	udc->dev.release = usb_udc_release;
--	udc->dev.class = &udc_class;
--	udc->dev.groups = usb_udc_attr_groups;
-+	udc->dev.class = NULL;
- 	udc->dev.parent = gadget->dev.parent;
--	ret = dev_set_name(&udc->dev, "%s",
--			kobject_name(&gadget->dev.parent->kobj));
--	if (ret)
--		goto err_put_udc;
- 
- 	udc->gadget = gadget;
- 	gadget->udc = udc;
-@@ -1406,50 +1086,11 @@ int usb_add_gadget(struct usb_gadget *gadget)
- 	mutex_lock(&udc_lock);
- 	list_add_tail(&udc->list, &udc_list);
- 	mutex_unlock(&udc_lock);
--	INIT_WORK(&udc->vbus_work, vbus_event_work);
--
--	ret = device_add(&udc->dev);
--	if (ret)
--		goto err_unlist_udc;
- 
- 	usb_gadget_set_state(gadget, USB_STATE_NOTATTACHED);
--	udc->vbus = true;
--
--	ret = ida_alloc(&gadget_id_numbers, GFP_KERNEL);
--	if (ret < 0)
--		goto err_del_udc;
--	gadget->id_number = ret;
--	dev_set_name(&gadget->dev, "gadget.%d", ret);
--
--	ret = device_add(&gadget->dev);
--	if (ret)
--		goto err_free_id;
--
--	ret = sysfs_create_link(&udc->dev.kobj,
--				&gadget->dev.kobj, "gadget");
--	if (ret)
--		goto err_del_gadget;
- 
- 	return 0;
- 
-- err_del_gadget:
--	device_del(&gadget->dev);
--
-- err_free_id:
--	ida_free(&gadget_id_numbers, gadget->id_number);
--
-- err_del_udc:
--	flush_work(&gadget->work);
--	device_del(&udc->dev);
--
-- err_unlist_udc:
--	mutex_lock(&udc_lock);
--	list_del(&udc->list);
--	mutex_unlock(&udc_lock);
--
-- err_put_udc:
--	put_device(&udc->dev);
--
-  error:
- 	return ret;
- }
-@@ -1468,13 +1109,8 @@ EXPORT_SYMBOL_GPL(usb_add_gadget);
- int usb_add_gadget_udc_release(struct device *parent, struct usb_gadget *gadget,
- 		void (*release)(struct device *dev))
- {
--	int	ret;
--
- 	usb_initialize_gadget(parent, gadget, release);
--	ret = usb_add_gadget(gadget);
--	if (ret)
--		usb_put_gadget(gadget);
--	return ret;
-+	return usb_add_gadget(gadget);
- }
- EXPORT_SYMBOL_GPL(usb_add_gadget_udc_release);
- 
-@@ -1499,7 +1135,7 @@ char *usb_get_gadget_udc_name(void)
- 	mutex_lock(&udc_lock);
- 	list_for_each_entry(udc, &udc_list, list) {
- 		if (!udc->driver) {
--			name = kstrdup(udc->gadget->name, GFP_KERNEL);
-+			name = strdup(udc->gadget->name);
- 			break;
- 		}
+ 	int ret;
+@@ -968,6 +970,7 @@ static int udc_bind_to_driver(struct usb_udc *udc, struct usb_gadget_driver *dri
+ 		driver->unbind(udc->gadget);
+ 		goto err1;
  	}
-@@ -1522,409 +1158,142 @@ int usb_add_gadget_udc(struct device *parent, struct usb_gadget *gadget)
- }
- EXPORT_SYMBOL_GPL(usb_add_gadget_udc);
++	usb_gadget_enable_async_callbacks(udc);
+ 	udc->allow_connect = true;
+ 	usb_gadget_connect(udc->gadget);
  
--/**
-- * usb_del_gadget - deletes a gadget and unregisters its udc
-- * @gadget: the gadget to be deleted.
-- *
-- * This will unbind @gadget, if it is bound.
-- * It will not do a final usb_put_gadget().
-- */
--void usb_del_gadget(struct usb_gadget *gadget)
-+static void usb_gadget_remove_driver(struct usb_udc *udc)
- {
--	struct usb_udc *udc = gadget->udc;
--
--	if (!udc)
--		return;
-+	dev_dbg(&udc->dev, "unregistering UDC driver [%s]\n",
-+			udc->driver->function);
+@@ -1164,6 +1167,7 @@ static void usb_gadget_remove_driver(struct usb_udc *udc)
+ 			udc->driver->function);
  
--	dev_vdbg(gadget->dev.parent, "unregistering gadget\n");
--
--	mutex_lock(&udc_lock);
--	list_del(&udc->list);
--	mutex_unlock(&udc_lock);
-+	udc->allow_connect = false;
-+	usb_gadget_disconnect(udc->gadget);
-+	udc->driver->disconnect(udc->gadget);
-+	udc->driver->unbind(udc->gadget);
-+	usb_gadget_udc_stop_locked(udc);
- 
--	kobject_uevent(&udc->dev.kobj, KOBJ_REMOVE);
--	sysfs_remove_link(&udc->dev.kobj, "gadget");
--	device_del(&gadget->dev);
--	flush_work(&gadget->work);
--	ida_free(&gadget_id_numbers, gadget->id_number);
--	cancel_work_sync(&udc->vbus_work);
--	device_unregister(&udc->dev);
-+	udc->driver = NULL;
- }
--EXPORT_SYMBOL_GPL(usb_del_gadget);
- 
- /**
-- * usb_del_gadget_udc - unregisters a gadget
-- * @gadget: the gadget to be unregistered.
-+ * usb_del_gadget_udc - deletes @udc from udc_list
-+ * @gadget: the gadget to be removed.
-  *
-- * Calls usb_del_gadget() and does a final usb_put_gadget().
-+ * This, will call usb_gadget_unregister_driver() if
-+ * the @udc is still busy.
-  */
- void usb_del_gadget_udc(struct usb_gadget *gadget)
- {
--	usb_del_gadget(gadget);
--	usb_put_gadget(gadget);
--}
--EXPORT_SYMBOL_GPL(usb_del_gadget_udc);
--
--/* ------------------------------------------------------------------------- */
--
--static int gadget_match_driver(struct device *dev, const struct device_driver *drv)
--{
--	struct usb_gadget *gadget = dev_to_usb_gadget(dev);
--	struct usb_udc *udc = gadget->udc;
--	const struct usb_gadget_driver *driver = container_of(drv,
--			struct usb_gadget_driver, driver);
--
--	/* If the driver specifies a udc_name, it must match the UDC's name */
--	if (driver->udc_name &&
--			strcmp(driver->udc_name, dev_name(&udc->dev)) != 0)
--		return 0;
--
--	/* If the driver is already bound to a gadget, it doesn't match */
--	if (driver->is_bound)
--		return 0;
--
--	/* Otherwise any gadget driver matches any UDC */
--	return 1;
--}
--
--static int gadget_bind_driver(struct device *dev)
--{
--	struct usb_gadget *gadget = dev_to_usb_gadget(dev);
--	struct usb_udc *udc = gadget->udc;
--	struct usb_gadget_driver *driver = container_of(dev->driver,
--			struct usb_gadget_driver, driver);
--	int ret = 0;
-+	struct usb_udc		*udc = NULL;
- 
- 	mutex_lock(&udc_lock);
--	if (driver->is_bound) {
--		mutex_unlock(&udc_lock);
--		return -ENXIO;		/* Driver binds to only one gadget */
--	}
--	driver->is_bound = true;
--	udc->driver = driver;
--	mutex_unlock(&udc_lock);
--
--	dev_dbg(&udc->dev, "binding gadget driver [%s]\n", driver->function);
--
--	usb_gadget_udc_set_speed(udc, driver->max_speed);
--
--	ret = driver->bind(udc->gadget, driver);
--	if (ret)
--		goto err_bind;
--
--	mutex_lock(&udc->connect_lock);
--	ret = usb_gadget_udc_start_locked(udc);
--	if (ret) {
--		mutex_unlock(&udc->connect_lock);
--		goto err_start;
--	}
--	usb_gadget_enable_async_callbacks(udc);
--	udc->allow_connect = true;
--	ret = usb_udc_connect_control_locked(udc);
--	if (ret)
--		goto err_connect_control;
--
--	mutex_unlock(&udc->connect_lock);
--
--	kobject_uevent(&udc->dev.kobj, KOBJ_CHANGE);
--	return 0;
--
-- err_connect_control:
--	udc->allow_connect = false;
--	usb_gadget_disable_async_callbacks(udc);
--	if (gadget->irq)
--		synchronize_irq(gadget->irq);
--	usb_gadget_udc_stop_locked(udc);
--	mutex_unlock(&udc->connect_lock);
--
-- err_start:
--	driver->unbind(udc->gadget);
--
-- err_bind:
--	if (ret != -EISNAM)
--		dev_err(&udc->dev, "failed to start %s: %d\n",
--			driver->function, ret);
-+	list_for_each_entry(udc, &udc_list, list)
-+		if (udc->gadget == gadget)
-+			goto found;
- 
--	mutex_lock(&udc_lock);
--	udc->driver = NULL;
--	driver->is_bound = false;
-+	dev_err(gadget->dev.parent, "gadget not registered.\n");
- 	mutex_unlock(&udc_lock);
- 
--	return ret;
--}
--
--static void gadget_unbind_driver(struct device *dev)
--{
--	struct usb_gadget *gadget = dev_to_usb_gadget(dev);
--	struct usb_udc *udc = gadget->udc;
--	struct usb_gadget_driver *driver = udc->driver;
--
--	dev_dbg(&udc->dev, "unbinding gadget driver [%s]\n", driver->function);
--
--	udc->allow_connect = false;
--	cancel_work_sync(&udc->vbus_work);
--	mutex_lock(&udc->connect_lock);
--	usb_gadget_disconnect_locked(gadget);
--	usb_gadget_disable_async_callbacks(udc);
--	if (gadget->irq)
--		synchronize_irq(gadget->irq);
--	mutex_unlock(&udc->connect_lock);
--
--	udc->driver->unbind(gadget);
-+	return;
- 
--	mutex_lock(&udc->connect_lock);
--	usb_gadget_udc_stop_locked(udc);
--	mutex_unlock(&udc->connect_lock);
-+found:
-+	dev_vdbg(gadget->dev.parent, "unregistering gadget\n");
- 
--	mutex_lock(&udc_lock);
--	driver->is_bound = false;
--	udc->driver = NULL;
-+	list_del(&udc->list);
- 	mutex_unlock(&udc_lock);
- 
--	kobject_uevent(&udc->dev.kobj, KOBJ_CHANGE);
-+	if (udc->driver)
-+		usb_gadget_remove_driver(udc);
- }
-+EXPORT_SYMBOL_GPL(usb_del_gadget_udc);
- 
- /* ------------------------------------------------------------------------- */
- 
--int usb_gadget_register_driver_owner(struct usb_gadget_driver *driver,
--		struct module *owner, const char *mod_name)
-+int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
- {
--	int ret;
-+	struct usb_udc		*udc = NULL;
-+	int			ret = -ENODEV;
- 
--	if (!driver || !driver->bind || !driver->setup)
-+	if (!driver || !driver->unbind)
- 		return -EINVAL;
- 
--	driver->driver.bus = &gadget_bus_type;
--	driver->driver.owner = owner;
--	driver->driver.mod_name = mod_name;
--	driver->driver.probe_type = PROBE_FORCE_SYNCHRONOUS;
--	ret = driver_register(&driver->driver);
--	if (ret) {
--		pr_warn("%s: driver registration failed: %d\n",
--				driver->function, ret);
--		return ret;
--	}
--
- 	mutex_lock(&udc_lock);
--	if (!driver->is_bound) {
--		if (driver->match_existing_only) {
--			pr_warn("%s: couldn't find an available UDC or it's busy\n",
--					driver->function);
--			ret = -EBUSY;
--		} else {
--			pr_info("%s: couldn't find an available UDC\n",
--					driver->function);
-+	list_for_each_entry(udc, &udc_list, list)
-+		if (udc->driver == driver) {
-+			usb_gadget_remove_driver(udc);
-+			usb_gadget_set_state(udc->gadget,
-+					USB_STATE_NOTATTACHED);
- 			ret = 0;
-+			break;
- 		}
--	}
--	mutex_unlock(&udc_lock);
- 
--	if (ret)
--		driver_unregister(&driver->driver);
-+	mutex_unlock(&udc_lock);
- 	return ret;
- }
--EXPORT_SYMBOL_GPL(usb_gadget_register_driver_owner);
--
--int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
--{
--	if (!driver || !driver->unbind)
--		return -EINVAL;
--
--	driver_unregister(&driver->driver);
--	return 0;
--}
- EXPORT_SYMBOL_GPL(usb_gadget_unregister_driver);
- 
- /* ------------------------------------------------------------------------- */
- 
--static ssize_t srp_store(struct device *dev,
--		struct device_attribute *attr, const char *buf, size_t n)
-+/*
-+ * u-boot: a controller that is not a driver model device has no probe of its
-+ * own, so it never calls usb_add_gadget_udc(). Such drivers implement this
-+ * hook and bring themselves up the first time a gadget driver asks for a UDC.
-+ */
-+__weak int usb_gadget_udc_bringup(void)
- {
--	struct usb_udc		*udc = container_of(dev, struct usb_udc, dev);
--
--	if (sysfs_streq(buf, "1"))
--		usb_gadget_wakeup(udc->gadget);
--
--	return n;
-+	return 0;
- }
--static DEVICE_ATTR_WO(srp);
- 
--static ssize_t soft_connect_store(struct device *dev,
--		struct device_attribute *attr, const char *buf, size_t n)
-+int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
- {
--	struct usb_udc		*udc = container_of(dev, struct usb_udc, dev);
--	ssize_t			ret;
-+	struct usb_udc		*udc = NULL;
-+	unsigned int		udc_count = 0;
-+	int			ret;
- 
--	device_lock(&udc->gadget->dev);
--	if (!udc->driver) {
--		dev_err(dev, "soft-connect without a gadget driver\n");
--		ret = -EOPNOTSUPP;
--		goto out;
--	}
-+	if (!driver || !driver->bind || !driver->setup)
-+		return -EINVAL;
- 
--	if (sysfs_streq(buf, "connect")) {
--		mutex_lock(&udc->connect_lock);
--		usb_gadget_udc_start_locked(udc);
--		usb_gadget_connect_locked(udc->gadget);
--		mutex_unlock(&udc->connect_lock);
--	} else if (sysfs_streq(buf, "disconnect")) {
--		mutex_lock(&udc->connect_lock);
--		usb_gadget_disconnect_locked(udc->gadget);
--		usb_gadget_udc_stop_locked(udc);
--		mutex_unlock(&udc->connect_lock);
--	} else {
--		dev_err(dev, "unsupported command '%s'\n", buf);
--		ret = -EINVAL;
--		goto out;
-+	if (list_empty(&udc_list)) {
-+		ret = usb_gadget_udc_bringup();
-+		if (ret) {
-+#ifndef CONFIG_SPL_BUILD
-+			printf("UDC bringup failed: %d\n", ret);
-+#endif
-+			return ret;
-+		}
- 	}
- 
--	ret = n;
--out:
--	device_unlock(&udc->gadget->dev);
--	return ret;
--}
--static DEVICE_ATTR_WO(soft_connect);
--
--static ssize_t state_show(struct device *dev, struct device_attribute *attr,
--			  char *buf)
--{
--	struct usb_udc		*udc = container_of(dev, struct usb_udc, dev);
--	struct usb_gadget	*gadget = udc->gadget;
--
--	return sprintf(buf, "%s\n", usb_state_string(gadget->state));
--}
--static DEVICE_ATTR_RO(state);
--
--static ssize_t function_show(struct device *dev, struct device_attribute *attr,
--			     char *buf)
--{
--	struct usb_udc		*udc = container_of(dev, struct usb_udc, dev);
--	struct usb_gadget_driver *drv;
--	int			rc = 0;
--
- 	mutex_lock(&udc_lock);
--	drv = udc->driver;
--	if (drv && drv->function)
--		rc = scnprintf(buf, PAGE_SIZE, "%s\n", drv->function);
--	mutex_unlock(&udc_lock);
--	return rc;
--}
--static DEVICE_ATTR_RO(function);
--
--#define USB_UDC_SPEED_ATTR(name, param)					\
--ssize_t name##_show(struct device *dev,					\
--		struct device_attribute *attr, char *buf)		\
--{									\
--	struct usb_udc *udc = container_of(dev, struct usb_udc, dev);	\
--	return scnprintf(buf, PAGE_SIZE, "%s\n",			\
--			usb_speed_string(udc->gadget->param));		\
--}									\
--static DEVICE_ATTR_RO(name)
--
--static USB_UDC_SPEED_ATTR(current_speed, speed);
--static USB_UDC_SPEED_ATTR(maximum_speed, max_speed);
--
--#define USB_UDC_ATTR(name)					\
--ssize_t name##_show(struct device *dev,				\
--		struct device_attribute *attr, char *buf)	\
--{								\
--	struct usb_udc		*udc = container_of(dev, struct usb_udc, dev); \
--	struct usb_gadget	*gadget = udc->gadget;		\
--								\
--	return scnprintf(buf, PAGE_SIZE, "%d\n", gadget->name);	\
--}								\
--static DEVICE_ATTR_RO(name)
--
--static USB_UDC_ATTR(is_otg);
--static USB_UDC_ATTR(is_a_peripheral);
--static USB_UDC_ATTR(b_hnp_enable);
--static USB_UDC_ATTR(a_hnp_support);
--static USB_UDC_ATTR(a_alt_hnp_support);
--static USB_UDC_ATTR(is_selfpowered);
--
--static struct attribute *usb_udc_attrs[] = {
--	&dev_attr_srp.attr,
--	&dev_attr_soft_connect.attr,
--	&dev_attr_state.attr,
--	&dev_attr_function.attr,
--	&dev_attr_current_speed.attr,
--	&dev_attr_maximum_speed.attr,
--
--	&dev_attr_is_otg.attr,
--	&dev_attr_is_a_peripheral.attr,
--	&dev_attr_b_hnp_enable.attr,
--	&dev_attr_a_hnp_support.attr,
--	&dev_attr_a_alt_hnp_support.attr,
--	&dev_attr_is_selfpowered.attr,
--	NULL,
--};
--
--static const struct attribute_group usb_udc_attr_group = {
--	.attrs = usb_udc_attrs,
--};
--
--static const struct attribute_group *usb_udc_attr_groups[] = {
--	&usb_udc_attr_group,
--	NULL,
--};
--
--static int usb_udc_uevent(const struct device *dev, struct kobj_uevent_env *env)
--{
--	const struct usb_udc	*udc = container_of(dev, struct usb_udc, dev);
--	int			ret;
-+	list_for_each_entry(udc, &udc_list, list) {
-+		udc_count++;
- 
--	ret = add_uevent_var(env, "USB_UDC_NAME=%s", udc->gadget->name);
--	if (ret) {
--		dev_err(dev, "failed to add uevent USB_UDC_NAME\n");
--		return ret;
-+		/* For now we take the first one */
-+		if (!udc->driver)
-+			goto found;
- 	}
- 
--	mutex_lock(&udc_lock);
--	if (udc->driver)
--		ret = add_uevent_var(env, "USB_UDC_DRIVER=%s",
--				udc->driver->function);
-+#ifndef CONFIG_SPL_BUILD
-+	if (!udc_count)
-+		printf("No UDC available in the system\n");
-+	else
-+		/* When this happens, users should 'unbind <class> <index>'
-+		 * using the output of 'dm tree' and looking at the line right
-+		 * after the USB peripheral/device controller.
-+		 */
-+		printf("All UDCs in use (%d available), use the unbind command\n",
-+		       udc_count);
-+#endif
- 	mutex_unlock(&udc_lock);
--	if (ret) {
--		dev_err(dev, "failed to add uevent USB_UDC_DRIVER\n");
--		return ret;
--	}
--
--	return 0;
--}
--
--static const struct class udc_class = {
--	.name		= "udc",
--	.dev_uevent	= usb_udc_uevent,
--};
--
--static const struct bus_type gadget_bus_type = {
--	.name = "gadget",
--	.probe = gadget_bind_driver,
--	.remove = gadget_unbind_driver,
--	.match = gadget_match_driver,
--};
--
--static int __init usb_udc_init(void)
--{
--	int rc;
--
--	rc = class_register(&udc_class);
--	if (rc)
--		return rc;
--
--	rc = bus_register(&gadget_bus_type);
--	if (rc)
--		class_unregister(&udc_class);
--	return rc;
-+	return -ENODEV;
-+found:
-+	ret = udc_bind_to_driver(udc, driver);
-+	mutex_unlock(&udc_lock);
-+	return ret;
- }
--subsys_initcall(usb_udc_init);
-+EXPORT_SYMBOL_GPL(usb_gadget_probe_driver);
- 
--static void __exit usb_udc_exit(void)
-+int usb_gadget_register_driver(struct usb_gadget_driver *driver)
- {
--	bus_unregister(&gadget_bus_type);
--	class_unregister(&udc_class);
-+	return usb_gadget_probe_driver(driver);
- }
--module_exit(usb_udc_exit);
-+EXPORT_SYMBOL_GPL(usb_gadget_register_driver);
- 
- MODULE_DESCRIPTION("UDC Framework");
- MODULE_AUTHOR("Felipe Balbi <balbi@ti.com>");
-diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
-index 7137f0faf3c6..866f6049bb5f 100644
---- a/include/linux/usb/gadget.h
-+++ b/include/linux/usb/gadget.h
-@@ -554,6 +554,9 @@ struct usb_gadget_driver {
-  */
- int usb_gadget_register_driver(struct usb_gadget_driver *driver);
- 
-+/* u-boot: bring up a non driver model UDC on demand, see udc-core.c */
-+int usb_gadget_udc_bringup(void);
-+
- /**
-  * usb_gadget_unregister_driver - unregister a gadget driver
-  * @driver:the driver being unregistered
+ 	udc->allow_connect = false;
++	usb_gadget_disable_async_callbacks(udc);
+ 	usb_gadget_disconnect(udc->gadget);
+ 	udc->driver->disconnect(udc->gadget);
+ 	udc->driver->unbind(udc->gadget);
 -- 
 2.53.0
 
