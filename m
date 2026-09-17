@@ -1,292 +1,182 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AED75C88E72
-	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 11:32:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA665C982CF
+	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 12:29:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F289F808AF;
-	Thu, 17 Sep 2026 11:32:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 63AF6407F3;
+	Thu, 17 Sep 2026 12:29:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4uTulwWehALc; Thu, 17 Sep 2026 11:32:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 2829280839
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789644760;
-	b=VzLFPHx7W2mvL6jpUhQYmSFQZiJ+r89gdjKA4CXJBa2KTJ7JJUjFcoLrIXNcg6UUqWsr
-	 WWL7qP3p5alVNtwTWRY0khvTgNmNYgMHgxGm4UnnzJXmV206aiT3x6S6KkKMMf3wK+kGS
-	 spQyRIRrZtwZw0Qr3fNMOgx8OO73/GKmERfpQm7r3Zd64T4l7qEpSlf9LLMnLbbzAUgxm
-	 qIy7B+pzwXEm1TCBPyX9iSB8azibD1QqybzFZHHgXoeecr3cbfOxhD/fMTKWB6nqs3lS1
-	 ZvK2DAaVyDpFyHdLSVdH1KlNefO7RJSCYRC3PBlmYuU8QkqiDPKtyA68gn8aBQoSIXw==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789644760;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Lk9kLMnqQqrd; Thu, 17 Sep 2026 12:29:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org CE635407C3
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789648154;
+	b=f2pTImt72jAO7dLyL74lTPqSxl3w6zp7RhX42PVW/X4Z7K97CirLm13FZRD0IEHEMn+P
+	 Eq0CIISgs+7ZCXVNk4olwK0u/GilS4XHslB/jlS3ATYmqUvURmmayn+1n7XBNyb+Wuwe5
+	 HMmG6DdJkAYHYOWDL4/FiHnq6Td2mOIDalXbNQEJq2WU0e9ff0UTVr8QCgixpg5ySDG3m
+	 iRLgXABebpjFG30973EZyljwKsyc4bLDK+i2wI+Gqb6gGbG1YADyqa6aqzFkCWeHKS2Js
+	 g9ZYnvmKQJWccXpfXPdhIzTz4WeNw9m8hHkHsrR2iv58CWjR+K+JHg74g9BLKYgj1zw==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1789648154;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-AtpMessageProperties:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=vrQMAHngpTx5OvFTe/aKbYxdizCXz7ZcwwwznyJs4A8=;
-	b=aCU0HzP1mGr76pYxFL55yqeZ3rZOrfGCp9sYzDR+bzIeEE55BYl+tC1cSNckWLWsonOK
-	 mW5CkRj1jmOJQaYNmEIKYoW5kVYhLtkv1JTqrB0gbTNgmbsmbqIk6egLWQm73cfr98XZ7
-	 Jq/mLXhewQTivxuqXIiM2OxP5hcinbjJZi1mvUA1S0h9amjASdAoO+PVWp9F1CZMgvMLc
-	 YwxndHkRch8+oIh6xY9P4efi7m1E55JCURDhLpVFjkR+58Ign8RGp1ruvUGfVMNwfBZ/r
-	 07RJE3PqLDuq3Y1Uj5x/L9cVFULzCzorU5m2ZibVfwgdPVOgEUuS0rikOhOBvpcIvWw==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+	bh=fjxa7oyZiLnLcD7Hdqv5sQC84CXV05hxEu1XtwdJflk=;
+	b=nsFXmV/gFQDRDspvEl8YZYcZ4kMm1gozANNHzWCqASBIa37/wN7PkRJ99YLlHeskXqz8
+	 0fWIe2gAWLlf/8CUnXc0e7fOZ0sygtBaBJFEGMyhP5Avodpa/umwmjF0gQgoiD9aUs/ke
+	 /ANXvj9k8PvC7MukykUEAXryj6D0VnbZQ3ItKXS0lx4fTI+gVzfFdPx7G/CfjQ2zyVgaR
+	 lEtBzKNlzsN5loce0d9VKsrx67FSsERxotSGWKQZVMTptiADQHlFrSr/creDRVqkmvZE3
+	 4ljMOg+9LNNzk78e5qukjD7Omax29kGe5C8BwuZlaTh5CutXdtAD6p5/d3x0xaMbFhA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=none header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b="cJwbTOU/";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789644760;
-	bh=vrQMAHngpTx5OvFTe/aKbYxdizCXz7ZcwwwznyJs4A8=;
+	d=lists.u-boot-project.org; s=default; t=1789648153;
+	bh=fjxa7oyZiLnLcD7Hdqv5sQC84CXV05hxEu1XtwdJflk=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=PQx0aOA3f89N4fNW3UeodV+/fWaLBzmY6sauZLQukhTznwSFJSYzKkO4IQQDMuHgT
-	 1u5rqfMo/bc8v35Q1r+McbzwfFh8mVi20hgEv2oQzbaKAX+9kkoNpIUwsSJqyHctAi
-	 1b6abcshsVHxK8WBMpgoL3/8K3tMHCbH/SEmw16y8hvQu4J2BnsAX2FsFqKQkjRDu3
-	 jyAIth3hTftAZqfvEO9dxl8tmZGwDSvzC1YP1010bAumkg2x5hW1SIBEsLuNv2UdL8
-	 fv2Vk6KwWN8Og7XDQsmnyUyrI45x+5Qw0TWaHzl1W/sJQeTZjGDnnYSK+zoqm1panP
-	 tUVYuyzw6c/kg==
+	b=mNDgpriROGzhvM7axeHL/1r+8ljnQ/w245UoQrK9PR+0kn1LGR15E/uqYlm5VGOiP
+	 CoIcAArteVG9zrmo6NjrNBm3e/UsG8mixMfhbFgxU7HMSZ/xn5wBZcss4mE2ABX6Io
+	 YpopaQOdj0XhZFeZdV5kJWMSZnbXdto/X9BSagBs/a+EFzmhkmECVo7FIJAY8yPwLY
+	 86tCO2XfeJqooVIz7buS2BzIyo5M1j3t7POGS/PMiqKrR4piQR/0LmIAQM9LueGTM8
+	 qsJpvWFekBNWvTirOlLRGVcHdTe+Z6TEFDvRgMDPo5/pZpz/tD9RFVulP21cFnnRB1
+	 QzSR3n3z4HIKg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2829280839;
-	Thu, 17 Sep 2026 11:32:40 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6944F29B
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 11:32:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CE635407C3;
+	Thu, 17 Sep 2026 12:29:13 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 22B6523F
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 12:29:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4EFCA4027C
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 11:32:38 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 05823407E9
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 12:29:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id J4Vr5bltc5_O for <u-boot@lists.u-boot-project.org>;
- Thu, 17 Sep 2026 11:32:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 5B73340050
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c202::7"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789644757;
- b=Vp6oHP5W0k4RKXwGLBO0RSD35h6dPx4Cc7mrrXCiFtUYLn9XbEO25ybsefxndC+jMOkH
- qVC+QX+Ge0v3tyt0fQe7uiI/ltdgv5yxpTY8cQnS9FDGG+M/6PpHakCvH8oBDfEgG425M
- kTTiMHpamfC/vxw/y4/99bmp3mHfChKXYFvlDRtnbZ7TV75elglm/l5V4nMPfKHxi6VOH
- PzaVHYNlGoZyr2kAQu03tbOwdyUP6N5NPQPcC1VckrKXPRQ3xaiS6W+B/XgHo6uEFDMyc
- 62VSyIrwK/PnwpaEnQ94hYaKD2TVynCZf0ZD/NTtRHpDZighV+q9rvezpMrkTdw+Lhw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789644757;
- h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
- User-Agent:Subject:To:Cc:References:From:Content-Language:Autocrypt:
- In-Reply-To:Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:
- MIME-Version:X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
- X-MS-Office365-Filtering-Correlation-Id:
- X-MS-Exchange-AtpMessageProperties:X-MS-Exchange-SenderADCheck:
- X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=vrQMAHngpTx5OvFTe/aKbYxdizCXz7ZcwwwznyJs4A8=;
- b=qTCqpXHrpcR/okYfh/OR5MLSBvsla19XuZxmIU5wujFm6TWcAtlEcx7ot0ihdHidCV+3
- szpbhSk/+hFOZ3qw7oW8OddsSWYg9mpw4YX0W4PsE7SCBMCaSyYbKJCql5VymvXkcFKpN
- GuRqKC1escWALkxcy/kEAyI0oJJH1xSGD4F7z32+7+q2nnA3T/A6+psRvLVH+hjzcCF9V
- wdbFeCoYnkE/Te7T8l3pDg7qzjA6bLHOW6/SH+Dq7OUf+q8pAm6uuR5jfcyu4qIZ0ur1B
- mTWiIyKFUD5ZKBvFmwu0Xo9rAFzJjM+VuIsc7ylKtAPf6mDNtDYq+XSBsaMEnnCvUxw==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
- dmarc=pass header.from=siemens.com; 
- dkim=pass header.d=siemens.com header.i=@siemens.com header.a=rsa-sha256
- header.s=selector2 header.b=RpUcbT8D; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c202::7"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZIjz8wA307MN for <u-boot@lists.u-boot-project.org>;
+ Thu, 17 Sep 2026 12:29:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A4DB9407CC
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:30::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789648150;
+ b=dh4enWWH1VYg9muywyH5lKqoPzQlAMHZvASKL5k56RDlPlu78ZYy4uwINJMTFB/q4BwW
+ 7vYf54DE0zyrN/j/JE9KImCjgCH1I996/hEwsIXyj3xi01Qdue0aqPyL5HHYC2M6j/5/X
+ saMMc4XX+mLu6XSObJ6eKfNWzQ+FqcnQoGybPjcl0GmOllbA8xP4/NNotYrH5+7aPluea
+ 39qZHYdu7HyVuclafwvBT4AXWxV9wYPIVlcGt9VJvc2g7lSDCOZKDIfuKMXm2geX1hC9D
+ fEETGupOrRgDYN9mkNyNX282hnyMZ3uJbD8xyF1tT5Ll6cQ1VpTjAqzk0bMinBChwoQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1789648150;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+ Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=fjxa7oyZiLnLcD7Hdqv5sQC84CXV05hxEu1XtwdJflk=;
+ b=KIMLffk9CEUAfFw8QjwuuocIteS5IsISK5YvMjLC5mNNI7JSLEMyI/mtJHr8Hez5jmn7
+ un9f1iCRa77HgWmwRAekCMCl+aUekI1yewJUtVGhqMbGZ6M0koRvA97EpY/zY2rjiG0cm
+ WzXVno2lFuNHdBYVjIpDMjaKgnk2jbSBzsmHKv0r7XhZLmP6j8Y0A32A6I/fMeoih/PB0
+ CM19ydKfYsBPU8E4/pBxalvrWnjXs/0+9UDdaFLpTBAWn/E2oSqShW3YwhHs5QHG13ma6
+ bZHUyJl8dLzCBEbZ1t+xNaGEsv3sWNNY0DcP/w/dYVTo+pgo4Rf4PezbRVkl4POiAuA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=none header.from=baylibre.com; 
+ dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b="cJwbTOU/"; 
+ arc=none smtp.remote-ip="2a00:1450:4864:30::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c202::7;
- helo=gvxpr05cu001.outbound.protection.outlook.com;
- envelope-from=jan.kiszka@siemens.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=siemens.com header.i=@siemens.com header.a=rsa-sha256
- header.s=selector2 header.b=RpUcbT8D
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5B73340050
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 11:32:35 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ti7t6cwhPxKw9J7uZdl8bWb97b/6JL040m/CN524ynkA+uxQkuYsnG5ECaC3+2ofNc55upAH4h3uj4W7EPK8tXztrz/vvMvEF0rGQ7+wyG1M+tGiyst6ugNrgUCDxasRS2jnkWKmU+C+rPZ/PsetgoMb52doBpta/hJYjG/WsKVhN6JDfF3QBCMVxywtX3T3HDjBFl9sKAC0tE1XrEKeLyOmEb1Qh1CQwaU5lW2TGhObZPtjvnABvQIzffTJUGE27EYN7T5r2MmKpxg3OMP0tfxk+5ELypyVX64PK8z5OUAm9N8IvZThMgNLNmWPolt5SEayABG1CdlEFYVb+aALzA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vrQMAHngpTx5OvFTe/aKbYxdizCXz7ZcwwwznyJs4A8=;
- b=l+5y/kKpRhzE4R3v+F30I+tRYrJJH94SoK3fzLUa+zsbgAAy0hbYHVjy1QUlGauHlY/GUTCp10j/YbDsHj6nEurSWadwwDt/dK57k4ExOlc81ktDwQ4LmlJULKU68KGhirbxk6KCnwODymG808h3uJOH+meeneuma4qQUCM2zw7LQYw65RDc1UStB320JrR74oQo5aihNKu8OWuyK7jmpXP2077mTnKTu7hV5jVnWfm3KcD5eQd9wakQ1VK/upYPAb44+LluqP0bYrpYC1gbpv3fayqdTMSeopYIvBF2Gfh6OFsM58JwW/WuUVMu8Tm885TXOT6CUnkL+vX+sMTWeg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vrQMAHngpTx5OvFTe/aKbYxdizCXz7ZcwwwznyJs4A8=;
- b=RpUcbT8DWqRLrwUadtEf0C1YMe24cyMDwRF8mNATYRrSBj64sY1E3IuXSrlTR3jg90x9s6G2o9UMGKLkVfk86Iw3+JHpYupqcTebT3yA/4lWH9Y7PMKXrRrkCmj/D5ipTytKpWMQ4bFgzIEbJZ5yr+R43mbiQp6/5oeXtA3JQnGAdYZi4bFM50pElGorRSMUfkMojbagWfHF5mU/juY1fYy/lygicErMOJmo7+3A+pcVSiJvGnS96d1hgZo0UU7EzYgdgjPCnbdjOdY1MJbLdUXLgU3t8sb/IBh+nw5TlOcx8sXYG5Mfb0IvDppJQ0gRAAjHNkgme9ImfD/sbDn7DA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
- by DB9PR10MB6548.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3d3::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Thu, 17 Sep
- 2026 11:32:28 +0000
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::be9f:e8ca:ee9:83e1]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::be9f:e8ca:ee9:83e1%2]) with mapi id 15.21.0428.008; Thu, 17 Sep 2026
- 11:32:28 +0000
-Message-ID: <597738c7-4912-4fdf-a86e-956b392059ca@siemens.com>
-Date: Thu, 17 Sep 2026 13:30:12 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 5/6] mmc: Call back to optee after a successful mmc_init
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.u-boot-project.org>,
- Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
- Sai Sree Kartheek Adivi <s-adivi@ti.com>,
- Alexander Heinisch <alexander.heinisch@siemens.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-References: <cover.1789023381.git.jan.kiszka@siemens.com>
- <05f13f7b9b886c7ea0b826fae352a59cf07b63eb.1789023381.git.jan.kiszka@siemens.com>
- <CAC_iWjJEy9mp5OutQdN=A+_ewnLXWzPAYwxN+ipoHPAK_eG8gw@mail.gmail.com>
-From: Jan Kiszka <jan.kiszka@siemens.com>
-Content-Language: en-US
-Autocrypt: addr=jan.kiszka@siemens.com; keydata=
- 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
-In-Reply-To: <CAC_iWjJEy9mp5OutQdN=A+_ewnLXWzPAYwxN+ipoHPAK_eG8gw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0073.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1e::13) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:588::19)
+ client-ip=2a00:1450:4864:30::10; helo=mail-wr2-x10.google.com;
+ envelope-from=glaroque@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=cJwbTOU/
+Received: from mail-wr2-x10.google.com (mail-wr2-x10.google.com
+ [IPv6:2a00:1450:4864:30::10])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A4DB9407CC
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 12:29:07 +0000 (UTC)
+Received: by mail-wr2-x10.google.com with SMTP id
+ ffacd0b85a97d-482f6350faaso477736f8f.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 05:29:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1789648145; x=1790252945;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=fjxa7oyZiLnLcD7Hdqv5sQC84CXV05hxEu1XtwdJflk=;
+ b=cJwbTOU/MqQ/yaNQu4u83Y46QKZaEIrwyJhzFj64o0RIM2VRoHXohUeOiim9oHUsGI
+ z8AASuIfVb96GATgOoIhQqNMcDdyWceyPF9nrpt6YJHSffSRunESYRqULk2AKEpu1SJS
+ yTGO0H8XRD+L59G8axWY+Qpe6Q6PDjrZt+8fQMc5Gu2FovqU2XyxaVRknyZp6CzN0uaL
+ bxmeuO1MsHwZ+zo7F4Jz1mCigN6ojaJtRYn3gHiDcqaXROqnG+DBWbtL8TDbIMyMx03R
+ 05u1xX29NyYzJVkTn9VpM1XSPJRZB54nhewL1g+HxZlSGBkiOn7KSkyd90FLN73OgQxA
+ XGeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1789648145; x=1790252945;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=fjxa7oyZiLnLcD7Hdqv5sQC84CXV05hxEu1XtwdJflk=;
+ b=LfJUHxUq5r8xBnSoF53LA4CfbdG1kg9Wv6dxzDUZBru03p44Lzqed8sOr695lIK4BD
+ HY+BaADh+GPXLnvOFwQ7Jq8sFagMJVSd23ANeWkoAi4DBJqpZBSPhMSeAEHZywDOCpF6
+ mz776dZoMkjjZqWHpo+FMGfl53YEiVUh9ti71okAewG2b+/Iki79FjAfnQtwtnrcvpvg
+ A+tWZZLGcaAEd9mLZtkYNY0me6ABaXVenrcIA9yNHk1zYITlhVMg/AOJFyhw284bj2YY
+ dHHnonKToiw/iu6kyOmQatWJPOO84zgdqOYMK+eXGYnitDNFn1Y1uPVq8IAN5RZQKSpd
+ AAfw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxN4Ux4uFQsTy4OuEsEHBaZnpvWe9K9VNyNWBr+thG0dpIYLc7PUpA+Y5cGeuDw5QVTp6FyzGA=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nkHry8JZpgZ/lZocNiZiA8RhFHXJ7Jtv7O4LpD32RPMsTOt9rs
+ CPcKFqwGK9HJLbYqnvcKsecA2dUD5hO+JZuJT0ORXgRutMLTxcogHTyMlEms6jHm9lw=
+X-Gm-Gg: AYBFou2bFg1DdF8KbVGkDo7vsfOjd9dK/YIzWKik/VrHbfxb0bSLgcAXs0O83y7Iu+A
+ 9kuQ0VRvEYb6qOxseBeR42owbN0W2JFPZ6ByeElFlilO7BKc/NQ/hoapU/iVzKwg4gSj5kuIQ8U
+ bS/ir6VQsYr3wfTBT6/2amz6k21bagBsJgYis1tjc0Ca/AVk+hkg7EqgXZglTZ1DBx/OUd98DHt
+ pDLEtpWa9Bl/lr9XZHsRV/qUh1zHBwZN8Q+jPvvTBJIFSDHkgCQfVeKfkajQsZqJnJBs4+rkNOf
+ +b2HQImX3yeedFGAxg/DIWFwubL6FSkNrQhtiGMatW3IFfu/Xlm4kiTPKpdtLyn4DGB40Z31TBS
+ 2FAcUdVgkNF8OlbJ1Hm/LzmqRUEF3KgpFDkn4rKKtcA1OGgp3ZVRp//9eAZ90zxKRDcMpTYN/Q7
+ JTRme/vTcHDIbP8k0Xb76LUaMaHoG310Oe92CbQR6fkXHaHhe373v2zp5DjRlMHXElcr/fWdjXZ
+ X6z5pSJRD+2nK4TO2So
+X-Received: by 2002:a05:6000:2c05:b0:486:fc08:a3ea with SMTP id
+ ffacd0b85a97d-4870d276589mr8339276f8f.54.1789648145166; 
+ Thu, 17 Sep 2026 05:29:05 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:e50:3860::642d:5bda?
+ ([2a01:e0a:e50:3860::642d:5bda]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4870bf1f6cfsm15468486f8f.13.2026.09.17.05.29.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 17 Sep 2026 05:29:04 -0700 (PDT)
+Message-ID: <487435d1-9d9d-4e18-a2a6-ed631760fc25@baylibre.com>
+Date: Thu, 17 Sep 2026 14:29:02 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|DB9PR10MB6548:EE_
-X-MS-Office365-Filtering-Correlation-Id: f1d35ba9-bf95-43e4-efbb-08df14af5adc
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|23010399003|6133799003|55112099003|18002099003|22082099003|3023799007|4143699003|10067099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: qsGmGeOrfZU8Mi+Oymgh8346inbWp/Mewq4Zrlgp/zdBdenKMZbNNLSPh0GEaLeQiOHpXwDKuyjY0MXXSQviYbfI7qcrlC/Q68P2NTOvC3NyH7BRBEX+GkggzxWkC47pmWoFG9TnjYeSE7WYmSxRfpu/SHvVLusqsKoeWFtGVadpbMs0HWFqA/8QeJ4k2U2YE4gAEMfrVj4qxpVn8eOQewnivs0KlmOOeV+YljEUF2++Qx+Q7tHvRbeNAT5+tV1wUPIIwBOk97rjjH31iNcRC9N1Zb7P6+sEaR6My78XCuyKo18pPKM7QIFOilwK9bH9WcuPgsXCVZkuQbDNxWYP4g62RYUINx8jPIvzs/iWQrsVSNVEWob91al6/x4T75u3THnYUMTvKt0LZw2V+RwirtKEdIBTl1GaaBKQQImUM/Z2SZZwV2cuBRqhnX3LPAWqgoEFwqg/6zc959BjsciJXHc/x/9om+/OE4fpo7VW+CJLjsLDYhTXbaXAu75ifTNrxFJ2VgWSc9UDj7oL1WIo5gh+Vz1ws+rwyL2UCwuoz7id4L5tiRdGy1HRsw8Z+utQJtRxHmTKrXCgfVTMsg+GTsgVINRmCI4eJhfrgYGz1N2bfQ77Rp0aYDCyHqTzB5Zpon4Nis9xD/VZJqSEV9RBxjifrri7uYyPEi1TIA4IUQM=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(23010399003)(6133799003)(55112099003)(18002099003)(22082099003)(3023799007)(4143699003)(10067099003)(11063799006)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dU9PVDFaL3MwZjkxa0lzb05wRThDK0VlTm9MaUVyOVpFemdpYlhPb2duelJJ?=
- =?utf-8?B?WW5QMENyZ0ZlNThBbS9wcHdFLzZ3WTREd0Z1bTJoSy9FT3F4MEpoWFVMWDU1?=
- =?utf-8?B?a0tVdDY4bVl6OTA4Y0FTMU9KalUrL3ExelhEZ2FiSXUvYWtOcWFNdEhpMlJ6?=
- =?utf-8?B?amo0cHJtRGxhNFBpNXQ2Mm5wQThNWlNoZW13V2ZVZHhpdC94SVlwZGZ3ZFVw?=
- =?utf-8?B?dDhkMTRzaEZvUjhtdzNlUjlYN3Q5NzVXQ0luRjZ1TVpoQ1lxR0dvWFZaUFRr?=
- =?utf-8?B?MGxwUnA3NEh0Y1NhMFVTSVJQZHg2LzIreGZHRktEaGZyTXFlaU92b3JlcXR3?=
- =?utf-8?B?ald5d1hsVDZGUmdkK1NLdVRnVzZhVElyYTZhWWk3NFFCZWVtMWw4M2M1TFE5?=
- =?utf-8?B?TFBDdmt2ZVZPZStUc21sMFBscDBzdFNUZ1ozeW41QmhNMXZiS3l0TUp5Q29X?=
- =?utf-8?B?SWtFK1U3bC9KaFcyVGJsMGRibHlqcW43NHlSVU1TdHplMVFBZXlCZnVXcCtS?=
- =?utf-8?B?dzZBd2JZTVZpOGNqbDZURUYrekl1emg3SWo2bmhack5vK3hza0J0ZU5DWUJh?=
- =?utf-8?B?YUVmcEZQcklGQU96OTU4MDJYVUVMTnp4VVdSUkREcXBKM0VzSGF0dEdod3Zq?=
- =?utf-8?B?MFRUNFlpS0dkR2kxdjNTRGoyQldveUF4TXhaa2tUQmJzM0JFMjNTV1FsUkNa?=
- =?utf-8?B?c2x6ckpCRitGUHNGSEVuOUFVTnVucG9IR1pNNVhrVG8yS2l2ekl1bWYyeXln?=
- =?utf-8?B?cEtqZlg5SU9IMytuSU8zK2ZsYi9rZUFQM1MrL2xSRmMyYll2OEhHM0M3bHZ5?=
- =?utf-8?B?MnV0ZUNYS0p4VW9nZnNvNmUyK1h3N0toaEhLTjNaU1hubzJaMnJLQzdJaVZO?=
- =?utf-8?B?aTV3UW96b1NSTFduRU5vU0FxMGYzMGlaWndpWjNIVEphbDdmc2JJNnFMWVhM?=
- =?utf-8?B?d2RqbDlBeGdkZ2dzS0h5dmdNVHFwOXBXREp3V1Nnd2ZTRVJ2MnFiTU1vWTFa?=
- =?utf-8?B?dkp5WXc1U0ZUcnM2cW0vZ1lWeGJzSC8zSmFSV0dPem56YnMvZDErblUwZWFJ?=
- =?utf-8?B?ZW5RWkZxaFNaZlNnNk10NGZMWEt0RmVkZ1hMWXU0QnNKcDNiSE04TE1OK3NI?=
- =?utf-8?B?cmM3T1BQTGRjV2UyWVFjb3RLamVqQ05KaDJubElOdlJHeWl3b0hKNjYvdmNX?=
- =?utf-8?B?eDFoeHVLci85cEdZa0UvdU1YUS9JTllENVdOV2I2dmw5SkJhNEp5OWI4RU45?=
- =?utf-8?B?VHVnMTJ4NnR2T3QvVTZlNEdrbU9Cd1ZMc09CSlZrSzNzVjRPRDYrUWoxSDBT?=
- =?utf-8?B?Q2liYUVWNXlNRENIS3lUY3FpVldvMjlLQlYvYVc5SEsycXVYUVk2d3czQkVR?=
- =?utf-8?B?UDdNUXFYV3hQWGRYT3NHWDZkTjI1UmQ1VnRINGtUYVd6eWxsbW9MbmlJdTRH?=
- =?utf-8?B?cEFRR1lsOXZGdVlWY0N0cnFYVnVFWTJKY29DNElKZzF4aWdqaUtlem5LcWx4?=
- =?utf-8?B?MWk1SVhFMGtWZkhXZ3FGOEdvZFhiVGtDS1dsMkFRRzNuOXRhZUZOK0tIcnJz?=
- =?utf-8?B?d3phWjBxeHpUcFg5Y3paN3hLWWVDSUE3aVJ6cDV6MVZWY21KajNsWkhGa0hl?=
- =?utf-8?B?N3YvNWo2bkNZeWhGb2xlazJyaEdqeE52Q3UxZmJ2d3FUTDJnU0Y5cmIzdjhs?=
- =?utf-8?B?Z1NzWU9NYXd6dzdGTDZmdTIyVHAwUSsyZ01DQ01BRWJQbGhEanlicCthM0NO?=
- =?utf-8?B?MnlKTHlQRWNzeERPVGdtQ3lqNm1nL2NkU3FLbFhyMjd0d2UxSTRMejJkdTdT?=
- =?utf-8?B?Y0doaUZyeVlMVFh6Q2I1VGdIRUhKTGZPeDA0aU91dlhGMlRhNGozMnFnM2ds?=
- =?utf-8?B?VHpGY1h1bTVhZ2JCeCtQVTVzZXNUaUNheWxUbExDZXdjUFkxUVkxa0dpUTlQ?=
- =?utf-8?B?SmpQMk9EbWNqeGExSUxyWTNUWjl4eVpYMUNDNWlCLytSeitZaWx0VGxqK0Va?=
- =?utf-8?B?aTMrLzZlekk3UUtsOVZITUNQRHI5clR5OUM2clN5TEhTaWIvd2lxRHN4RGpi?=
- =?utf-8?B?cEFGQmlwdzBqK05JbDhWUFRGYjlKbU4yYzQvMGkrRTNGYnBWSjJLbE5NK0lr?=
- =?utf-8?B?UXF1THZ2WUI2QURzdlEwajh1QjBiQnFYWS9SdVprb2NkQVZSTVB0NVVFNHlr?=
- =?utf-8?B?dWtNSGZnckNFMkxpcHk1N012THRJSWZpeG53N0FGMTBoU3RIdXpKUnNQaG1W?=
- =?utf-8?B?dHlCWEtiVW92U3E0aWl2TzVxM2ZSM2Fid0FNZ0l4Ulo4TFVVaXlFZmJOT0wx?=
- =?utf-8?B?a2t6SjJYTmtPMUREQ1RtUFJrcEtOSjFRVnRUY2ZtZHVDVGpEV2VtQT09?=
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f1d35ba9-bf95-43e4-efbb-08df14af5adc
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2026 11:32:28.7706 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2aNIwkkZqIXh7hIUC0GSrnbLKbrT9NFl0B1tpeSvsCHlqHZaeYKTZJlI4IBpTgDp5Sbv1Kd6sh7oDwPIJOfl9g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB6548
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] fastboot: block: add 'oem set-block-target' command and
+ runtime override
+To: Vandhiadevan Karunamoorthy <vandhiadevan.karunamoorthy@oss.qualcomm.com>, 
+ u-boot@lists.u-boot-project.org, u-boot@lists.denx.de
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Dmitrii Merkurev <dimorinny@google.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Adrian Freihofer <adrian.freihofer@siemens.com>,
+ Heiko Schocher <hs@nabladev.com>, Neil Armstrong <neil.armstrong@linaro.org>
+References: <20260917-series2-fastboot-block-target-v1-1-fc8328bc2d12@oss.qualcomm.com>
+Content-Language: fr
+From: Guillaume La Roque <glaroque@baylibre.com>
+In-Reply-To: <20260917-series2-fastboot-block-target-v1-1-fc8328bc2d12@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -300,55 +190,323 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 17.09.26 12:24, Ilias Apalodimas wrote:
-> On Thu, 10 Sept 2026 at 08:56, Jan Kiszka <jan.kiszka@siemens.com> wrote:
->>
->> From: Jan Kiszka <jan.kiszka@siemens.com>
->>
->> This is needed to that OP-TEE can re-enumerate services which need RPMB
->> access that may have become available now.
->>
->> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
->> Reviewed-by: Peng Fan <peng.fan@nxp.com>
->> Reviewed-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
->> ---
->> CC: Peng Fan <peng.fan@nxp.com>
->> CC: Jaehoon Chung <jh80.chung@samsung.com>
->> ---
->>  drivers/mmc/mmc.c | 4 ++++
->>  1 file changed, 4 insertions(+)
->>
->> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
->> index 670e92ee12b..2463e50cd3c 100644
->> --- a/drivers/mmc/mmc.c
->> +++ b/drivers/mmc/mmc.c
->> @@ -27,6 +27,7 @@
->>  #include <linux/list.h>
->>  #include <linux/printk.h>
->>  #include <div64.h>
->> +#include <tee/optee.h>
->>  #include "mmc_private.h"
->>
->>  #define DEFAULT_CMD6_TIMEOUT_MS  500
->> @@ -3168,6 +3169,9 @@ int mmc_init(struct mmc *mmc)
->>                                 mmc->cfg->name);
->>         }
->>
->> +       if (CONFIG_IS_ENABLED(OPTEE) && mmc->capacity_rpmb > 0)
-> 
-> This is only used in used in U-Boot proper right? We don't have
-> SPL/TPL symbols for RPMB support, so IS_ENABLED() is better
-> 
+Hi,
 
-Can change that. Can send a v5, unless this is something that could be
-fixed up on merge.
+Probably a stupid question but in your commit message you speak about 
+SPI-NOR  but fastboot support flash spi , why not enable it or update it 
+if it's not exactly work as you want instead of create a new command ?
 
-For my understanding: Would that be for clarity purposes, or is there a
-practical advantage of limiting the check?
+Thanks
+Guillaume
 
-Thanks,
-Jan
+Le 17/09/2026 à 11:01, Vandhiadevan Karunamoorthy a écrit :
+> Add fastboot_block_set_target() so an OEM command can point the
+> generic block fastboot backend at a different interface/device at
+> runtime, without requiring a rebuild. Falls back to the existing
+> build-time CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME/
+> CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID defaults when no override is
+> set.
+>
+> Expose this to fastboot clients via a new "oem set-block-target
+> <interface> [device]" command, gated behind
+> CONFIG_FASTBOOT_CMD_OEM_SET_BLOCK_TARGET (depends on
+> CONFIG_FASTBOOT_FLASH_BLOCK).
+>
+> This is needed to target storage devices, such as SPI-NOR exposed
+> through the MTD block uclass, that aren't known until runtime or
+> that coexist with another default block interface on the same
+> board.
+>
+> To: u-boot@lists.u-boot-project.org
+> To: u-boot@lists.denx.de
+> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Dmitrii Merkurev <dimorinny@google.com>
+> Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> Cc: Adrian Freihofer <adrian.freihofer@siemens.com>
+> Cc: Heiko Schocher <hs@nabladev.com>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+>
+> Signed-off-by: Vandhiadevan Karunamoorthy <vandhiadevan.karunamoorthy@oss.qualcomm.com>
+> ---
+> This series lets a fastboot client redirect the generic block
+> fastboot backend (CONFIG_FASTBOOT_FLASH_BLOCK) to a different
+> interface/device at runtime, instead of being fixed to the
+> build-time CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME /
+> CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID defaults.
+>
+> This is useful for storage devices that aren't known until runtime,
+> or that coexist with another default block interface on the same
+> board -- for example, SPI-NOR exposed through the MTD block uclass
+> (see the companion "mtd: spi: Expose SPI-NOR as a GPT-capable MTD
+> block device" series).
+>
+> The patch adds fastboot_block_set_target() to the generic block
+> backend, plus a new "oem set-block-target <interface> [device]"
+> fastboot command (gated behind
+> CONFIG_FASTBOOT_CMD_OEM_SET_BLOCK_TARGET, which depends on
+> CONFIG_FASTBOOT_FLASH_BLOCK) that lets a client invoke it.
+> ---
+> Depends on: [PATCH v6 0/8] arm: snapdragon: Add snagboot support for Lemans-EVK
+> Link: https://lore.kernel.org/u-boot/20260803-snagboot-v6-0-e8bf7a6fc0a4@oss.qualcomm.com/
+> Depends on: [PATCH v2 0/4] fastboot: block: Add GPT/MBR and device selection
+> Link: https://lore.kernel.org/u-boot/20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com/
+> ---
+>   drivers/fastboot/Kconfig      | 11 +++++++
+>   drivers/fastboot/fb_block.c   | 75 ++++++++++++++++++++++++++++++++++++-------
+>   drivers/fastboot/fb_command.c | 51 +++++++++++++++++++++++++++++
+>   include/fastboot.h            |  1 +
+>   include/fb_block.h            |  9 ++++++
+>   5 files changed, 136 insertions(+), 11 deletions(-)
+>
+> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+> index a4539844d89..c7e0509eaad 100644
+> --- a/drivers/fastboot/Kconfig
+> +++ b/drivers/fastboot/Kconfig
+> @@ -225,6 +225,17 @@ config FASTBOOT_FLASH_BLOCK_DEVICE_ID
+>   	  Device identifiers are numbered starting from 0 and the most
+>   	  common case is to use the first controller on the system.
+>   
+> +config FASTBOOT_CMD_OEM_SET_BLOCK_TARGET
+> +	bool "Enable the 'oem set-block-target' command"
+> +	depends on FASTBOOT_FLASH_BLOCK
+> +	help
+> +	  Add support for the "oem set-block-target" command from a client.
+> +	  This allows switching the block interface (e.g. scsi, mtd) and
+> +	  device number used by the fastboot "flash"/"erase" commands at
+> +	  runtime, instead of relying solely on the
+> +	  CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME /
+> +	  CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID build-time defaults.
+> +
+>   config FASTBOOT_GPT_NAME
+>   	string "Target name for updating GPT"
+>   	depends on (FASTBOOT_FLASH_MMC || FASTBOOT_FLASH_BLOCK) && EFI_PARTITION
+> diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
+> index a8c74e35d0d..d3e5f6ed1f3 100644
+> --- a/drivers/fastboot/fb_block.c
+> +++ b/drivers/fastboot/fb_block.c
+> @@ -125,6 +125,66 @@ static lbaint_t fb_block_sparse_reserve(struct sparse_storage *info,
+>   	return blkcnt;
+>   }
+>   
+> +/**
+> + * block_interface_override - runtime-set block interface name, empty if unset
+> + */
+> +static char block_interface_override[16];
+> +/**
+> + * block_device_override - runtime-set block device number, -1 if unset
+> + */
+> +static int block_device_override = -1;
+> +
+> +/**
+> + * fb_block_interface() - Resolve the block interface name to use
+> + *
+> + * Returns the runtime override set via fastboot_block_set_target() if one
+> + * is active, otherwise falls back to the build-time config default.
+> + */
+> +static const char *fb_block_interface(void)
+> +{
+> +	if (!IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK))
+> +		return NULL;
+> +
+> +	if (block_interface_override[0])
+> +		return block_interface_override;
+> +
+> +	return config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+> +				  CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME, NULL);
+> +}
+> +
+> +/**
+> + * fb_block_device() - Resolve the block device number to use
+> + *
+> + * Returns the runtime override set via fastboot_block_set_target() if one
+> + * is active, otherwise falls back to the build-time config default.
+> + */
+> +static int fb_block_device(void)
+> +{
+> +	if (!IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK))
+> +		return -1;
+> +
+> +	if (block_device_override >= 0)
+> +		return block_device_override;
+> +
+> +	return config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+> +				  CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
+> +}
+> +
+> +int fastboot_block_set_target(const char *interface, int device)
+> +{
+> +	if (interface) {
+> +		if (strlen(interface) >= sizeof(block_interface_override))
+> +			return -EINVAL;
+> +		strlcpy(block_interface_override, interface,
+> +			sizeof(block_interface_override));
+> +	}
+> +
+> +	if (device >= 0)
+> +		block_device_override = device;
+> +
+> +	return 0;
+> +}
+> +
+>   /**
+>    * parse_device_partition() - Parse and validate device:partition format
+>    * @part_name: Input string in format "N:partition" or "partition"
+> @@ -140,8 +200,7 @@ static int parse_device_partition(const char *part_name, int *device,
+>   {
+>   	const char *colon_pos;
+>   
+> -	*device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+> -				     CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
+> +	*device = fb_block_device();
+>   
+>   	/* Check for colon in partition name */
+>   	colon_pos = strchr(part_name, ':');
+> @@ -190,9 +249,7 @@ int fastboot_block_get_part_info(const char *part_name,
+>   				 char *response)
+>   {
+>   	int ret;
+> -	const char *interface = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+> -						   CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME,
+> -						   NULL);
+> +	const char *interface = fb_block_interface();
+>   	int device;
+>   	const char *partition_name;
+>   
+> @@ -385,9 +442,7 @@ void fastboot_block_flash_write(const char *part_name, void *download_buffer,
+>   #if CONFIG_IS_ENABLED(EFI_PARTITION)
+>   	if (is_partition_table_name(part_name, CONFIG_FASTBOOT_GPT_NAME)) {
+>   		int device;
+> -		const char *interface = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+> -							   CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME,
+> -							   NULL);
+> +		const char *interface = fb_block_interface();
+>   
+>   		parse_device_partition(part_name, &device, NULL);
+>   		fastboot_flash_gpt_partition_table(interface, device,
+> @@ -399,9 +454,7 @@ void fastboot_block_flash_write(const char *part_name, void *download_buffer,
+>   #if CONFIG_IS_ENABLED(DOS_PARTITION)
+>   	if (is_partition_table_name(part_name, CONFIG_FASTBOOT_MBR_NAME)) {
+>   		int device;
+> -		const char *interface = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+> -							   CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME,
+> -							   NULL);
+> +		const char *interface = fb_block_interface();
+>   
+>   		parse_device_partition(part_name, &device, NULL);
+>   		fastboot_flash_mbr_partition_table(interface, device,
+> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+> index 18d86988f4c..235fae74fee 100644
+> --- a/drivers/fastboot/fb_command.c
+> +++ b/drivers/fastboot/fb_command.c
+> @@ -45,6 +45,7 @@ static void oem_partconf(char *, char *);
+>   static void oem_bootbus(char *, char *);
+>   static void oem_console(char *, char *);
+>   static void oem_board(char *, char *);
+> +static void oem_set_block_target(char *, char *);
+>   static void run_ucmd(char *, char *);
+>   static void run_acmd(char *, char *);
+>   
+> @@ -120,6 +121,11 @@ static const struct {
+>   		.command = "oem board",
+>   		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_OEM_BOARD, (oem_board), (NULL))
+>   	},
+> +	[FASTBOOT_COMMAND_OEM_SET_BLOCK_TARGET] = {
+> +		.command = "oem set-block-target",
+> +		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_SET_BLOCK_TARGET,
+> +					      (oem_set_block_target), (NULL))
+> +	},
+>   	[FASTBOOT_COMMAND_UCMD] = {
+>   		.command = "UCmd",
+>   		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_ucmd), (NULL))
+> @@ -589,3 +595,48 @@ static void __maybe_unused oem_board(char *cmd_parameter, char *response)
+>   {
+>   	fastboot_oem_board(cmd_parameter, (void *)fastboot_buf_addr, image_size, response);
+>   }
+> +
+> +/**
+> + * oem_set_block_target() - Execute the OEM set-block-target command
+> + *
+> + * @cmd_parameter: Pointer to "<interface> [device]" command parameter
+> + * @response: Pointer to fastboot response buffer
+> + *
+> + * Switches the block interface (e.g. "scsi", "mtd") and, optionally,
+> + * device number used by the fastboot block backend at runtime.
+> + */
+> +static void __maybe_unused oem_set_block_target(char *cmd_parameter, char *response)
+> +{
+> +	char interface[16] = { 0 };
+> +	int device = -1;
+> +	char *space;
+> +
+> +	if (!cmd_parameter) {
+> +		fastboot_fail("Expected command parameter", response);
+> +		return;
+> +	}
+> +
+> +	space = strchr(cmd_parameter, ' ');
+> +	if (space) {
+> +		size_t len = space - cmd_parameter;
+> +
+> +		if (len >= sizeof(interface)) {
+> +			fastboot_fail("interface name too long", response);
+> +			return;
+> +		}
+> +		memcpy(interface, cmd_parameter, len);
+> +		interface[len] = '\0';
+> +		device = simple_strtoul(space + 1, NULL, 10);
+> +	} else {
+> +		if (strlen(cmd_parameter) >= sizeof(interface)) {
+> +			fastboot_fail("interface name too long", response);
+> +			return;
+> +		}
+> +		strlcpy(interface, cmd_parameter, sizeof(interface));
+> +	}
+> +
+> +	if (fastboot_block_set_target(interface, device))
+> +		fastboot_fail("invalid interface name", response);
+> +	else
+> +		fastboot_okay(NULL, response);
+> +}
+> diff --git a/include/fastboot.h b/include/fastboot.h
+> index b106d617749..13dcdf919bc 100644
+> --- a/include/fastboot.h
+> +++ b/include/fastboot.h
+> @@ -51,6 +51,7 @@ enum {
+>   	FASTBOOT_COMMAND_OEM_RUN,
+>   	FASTBOOT_COMMAND_OEM_CONSOLE,
+>   	FASTBOOT_COMMAND_OEM_BOARD,
+> +	FASTBOOT_COMMAND_OEM_SET_BLOCK_TARGET,
+>   	FASTBOOT_COMMAND_ACMD,
+>   	FASTBOOT_COMMAND_UCMD,
+>   	FASTBOOT_COMMAND_COUNT
+> diff --git a/include/fb_block.h b/include/fb_block.h
+> index 189c708e2f0..fd981d95316 100644
+> --- a/include/fb_block.h
+> +++ b/include/fb_block.h
+> @@ -102,4 +102,13 @@ void fastboot_block_write_sparse_image(struct blk_desc *dev_desc, struct disk_pa
+>   void fastboot_block_flash_write(const char *part_name, void *download_buffer,
+>   				u32 download_bytes, char *response);
+>   
+> +/**
+> + * fastboot_block_set_target() - Override block interface/device at runtime
+> + *
+> + * @interface: New interface name (e.g. "scsi", "mtd"), or NULL to leave unchanged
+> + * @device: New device number, or -1 to leave unchanged
+> + * Return: 0 on success, -EINVAL if interface name too long
+> + */
+> +int fastboot_block_set_target(const char *interface, int device);
+> +
+>   #endif // _FB_BLOCK_H_
+>
+> ---
+> base-commit: 4d3823469724bca19ba4ed3a5a38fc8e951775e2
+> change-id: 20260824-series2-fastboot-block-target-c8e9418babdf
+>
+> Best regards,
+> --
+> Vandhiadevan Karunamoorthy <vandhiadevan.karunamoorthy@oss.qualcomm.com>
+>
 
--- 
-Siemens AG, Foundational Technologies
-Linux Expert Center
