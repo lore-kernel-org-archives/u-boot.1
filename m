@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A3A4C982C1
-	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 07:47:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02E79C982C1
+	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 07:47:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 52C3580EFA;
-	Thu, 17 Sep 2026 07:47:50 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C181F807B6;
+	Thu, 17 Sep 2026 07:47:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jJMAr8sRCs94; Thu, 17 Sep 2026 07:47:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0326C80EDD
+ id 5CNggS187_FG; Thu, 17 Sep 2026 07:47:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 9AA9B80E9C
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789631269;
-	b=CyPCL+wvPDRa029/RKdp/s4lpoxhHMmcS27h3qpJ1bsz00Fiq87iWDZ90245ZvMrPjVP
-	 vIiRy1wnJZf67vl6TbFZD7azPPlkwNjMyHeHSHisj1vtSIt5k22g0C4xtnxFjCcYgp5w6
-	 YGKAgd4LVAJZ0EJT1uflzT0SznFbiZjv1zFQVHoZTupuqxZmxC5a9TorQm/f6aegCa35M
-	 sbVGmtXekfN/sV+V4zm4d9/rG8WWRDaGWzhGxYhjs0djTKs++yjPKOfpwoEV2Yjg9LB9/
-	 EYyLnuiaLm3XJQbkapvs9oAXLmcYiZ7ZNgWJjrFuNxOIS7VorPPIRYKrzT4q/zMVfHw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789631278;
+	b=np2y0P/9mY30GT2OX3MkwYSKs+SQlCJ8P5lqMPyK9pFCgCHzmvU0iIRQt3+0xCpHj7j+
+	 k7BXac4vtZDOWOfx87V78UmxhJVl6rUu5zVC2wSuetwNjdu2VeVEIOXUf4NiwNr10GEvW
+	 i1C4pj1KbxS4v3YFuGNfIKACu1M0oexwTQG61qaB1EwdLXi/1TU1YkBFyTcMG8oQny3Hd
+	 R7go/0vDWb8ecHR4CrJkYj27p7p4bWmdzgzB4vz9ywWes4D+fniO55fYasztYBhi2A+2Y
+	 6uEa2xk3+QDZddZW8ae2Vac7XgjxcY5hK/flCHiMfffIkBCNH1m1deBOMUToQtKgdMQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789631269;
+	c=relaxed/relaxed; t=1789631278;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,170 +31,170 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
 	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=;
-	b=kcZTqALRxne5zKZdcbSrw/cTRxaOs/71KRJmST+6DBXqsOitpd2Ffz4UF+8xK4q0QWdq
-	 nCTRYCfbag3JOauOZLVr1gpdEMsD64Zk0Hwc0s82lOog0msVeL3C2DeGth1xlahJE37X9
-	 3tYq/ArDntRCqrjiO6Z7IQGTLL7K18Ev9FUgqBQhcQn79Qr7fd74mag2W1D0GWJQX1ctS
-	 jJLl+p3YbDpfRbEI0b/0LWSfZBjjfEMv+lNcPW5o7eRxsrdUqN5qFdhhIcepXqPutCqGw
-	 6I45+0TQxJCu/ZhStPSVWcnK1nOEXD20NN9LpMP1D73JGBWlc2DaXkxsgnRtCcjHn+g==
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=PsDTcz6+5glb5rywMAXEdZ3tLUxJfOqcDIdJ3hpAV8A=;
+	b=rnMUoIHyDZgIcFtJoCRyPlrI7ec1Hy8Q/s5s7Zy6c41Ch95rUBPBbbE0YJa2zCeo6RmS
+	 DtcUyCXEgF6VIzD0zTszdGjGuZSHDYtLARCf6KrTsUaAAHIxtV0IK16aPEwBZ6ZQxqbqt
+	 8DIk3Y4ZA5AqVQc1ecreiSuELltcToPfJijjKqS70335MUP3QPtLDxcRHFzM0tUtw9aWS
+	 WLMF3pDQYtSo8+NgH9Tsa2FVgn04Pg57qmjzs2Sx4WO0Ke4jyn0MAIDIMxFw7Vmg4JpZO
+	 mzFvYC3gUvFI7MLQki7/MW/ZvPf95jI9I65TSGigMRNKmSjNnMqqy4gO9JJSMqia8vA==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789631269;
-	bh=1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=;
+	d=lists.u-boot-project.org; s=default; t=1789631278;
+	bh=PsDTcz6+5glb5rywMAXEdZ3tLUxJfOqcDIdJ3hpAV8A=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GUcXSRUUaR84/0L6ZvWrwbQW8+xpf6HfBDNSiWmdgMMs6Qb+2brMfj7NqQgljQnWs
-	 tKRpbgQ0lKSuf2ZJ0JHevCsaMgPu5k/JWI9mhOiWI5Jx77s/TgVEoZPWQxiQNRI1HJ
-	 8ICINXHIN/N9UevMuwzD+odYuR8RnSrV/w9P1B0PJv+iwiZyQ0sa6vrtmqt7QCQCwE
-	 QumF8D1hL+X15EZy6KmvFjKqAmtedyIv2bQ34G8+DwZcPiS/Xq/aZL+G/IC8Sm0F5I
-	 SmFfBEoJgrOwnQtyB+j9hLbgrTr/bv+ByVBL5N497TRrL0fBgkbBhSQQS1JTWZpVNr
-	 dv1Rqhe/BOGxw==
+	b=xa+RiJpMcWWqx5p7JztVESSw2qWoa5j30QsL/BuFUciCw2DHcZYpKvXhxlldon6wt
+	 a0h3zjiRB4wDS8l/nBygFJSItR6n9N5ZknGDflZ8kznQAU89hLohhgyuiGppLp/jVi
+	 p1v44/xPT1BDC3MPdZeQ56+m3I7gzhBuh6bt3pn4yHcZgAkFW4YtlxP85kG0yFAlsT
+	 FQ/d12Ma9XnVD5tt9zig/C63Gjs6wUKTQR3oy6BYhVaYyepB9K/gZKNmDrDYqln7/j
+	 yrHpZD7pVRF3SFxnwkOVvwIvXb8K1gCIq7QAbHl0Q+NmAYBytEg45S5g7sFxtmWfLx
+	 bM+GZO6VOY/nw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0326C80EDD;
-	Thu, 17 Sep 2026 07:47:49 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 0275829B
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9AA9B80E9C;
+	Thu, 17 Sep 2026 07:47:58 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 51629422
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E1856406A0
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:47 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 432986075A
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xq80n_U6Z1Tn for <u-boot@lists.u-boot-project.org>;
- Thu, 17 Sep 2026 07:47:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org E7ACD404E9
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vsgAaaqQDM0l for <u-boot@lists.u-boot-project.org>;
+ Thu, 17 Sep 2026 07:47:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 6F0B060659
+Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789631267;
- b=OuTbV0fxXtg36UOhdYHQhsQsctwZ/sUPQnPzYhaNo8addQTosf8Zww1lKl35N/RqjOFm
- 9HxjghzsWzAHAXnZc7wxjmvDn2KbvOtReU9++Zh+rt+APi0WNXLhYb0SAWhwWUkDuVd1x
- xrlxj1/VWWfwClLucMca1WvHc4+DGhSieyNxKiNuj7Dy2xAxPv952GfwkfRTPuAYlk3Px
- sScAhV2zmdpqCVnqnErNOIxsgZqRihZcdJ2q2xCORtrSlfEQ+0oUYjfofe7Gr2EbyIbFz
- EfOa6BI5SUwsaqfiuuonRk5KFEJpdZ8kOcsK6HZS9hLYRQwDG8LNfzI3ImmWAytnc8A==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789631276;
+ b=igv3I5bBit58h5L/JI1uUiWYbHvKwbDtYDP41XePZmq+z426X2cemCYQ36g5B5ngwZrV
+ 3WRD7vyhnq1bgAWT/S/y7MmC53LAy4GUd47avcz5bjdlhn1r40SWaONOQmvIp2FGDRXN7
+ GA0d3Ul8DIGXPnEhV3IAxkQBFvmt9l6DRaq7AqvrIgn+D9hKVDNuECg1ChLQrC58NmM/K
+ Yk9pnRgFLluhZ/7ng0lBc0LMW3Rh/tGWHcBkSPSJrLa3ddoAzqcyRHVYB2UqDCPbJ2PPD
+ qguhogm/x6pwuw0W8FPKZCsby++2DRiiwZ1M5AevuMWnSBcTxKQ7zrgj8svR51ubQrQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789631267;
+ c=relaxed/relaxed; t=1789631276;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
  X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
  Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
- X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
- X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
+ X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+ X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
  X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=;
- b=sDKbLT4DsEtU5M4zoRGHwq6AbAE7XvMRH5sa89EYXU3N2G76OuyF+6nQyUK1+JX9P6gs
- sO+sQs4x5wDtoGsj0cyPikI79epxmouEjMy2U+pHeXvM4Ozv1WQj/70+QKcPq6ifZjAKx
- WKgFDA4ajeAXNzF5eUSABBh9P8jhk/7xUzBKM8v+FonjycefBJUZTR/QoRuSFHDF7DYzl
- vP4R00ozaaMplXr0lUskBhG1PqMR4vuzihzCAk8Q8yrzEZG8cbfkR8mYaGOm5iJrdxFH4
- SSjtv/hfttMfxKtXOBTBwmZh8Pv+IJk8xnV7W3Vr/6RfO7+yK4jnQFQy1XvEVQvXeDQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=PsDTcz6+5glb5rywMAXEdZ3tLUxJfOqcDIdJ3hpAV8A=;
+ b=FpodZ+fJTWy6ZydF+k8kX+r0NjvwglYfwtSKlbNnLaZeENQh3eJYXQgji+XJIPbhhdR0
+ B+ju/tf5xB7/NJYif9SxDCfI5NAoqgm0nEasMWrR+bcmcFMpi9nlm6e9/VzQlEqs4duor
+ kluRfjNpEGyzjVwKlbBy3eJ10fQxdhmTvBvmmO/DnXSlhFJcpO2MpavDKjjNPwsyMy1Ha
+ dqXc4cTe9rObb4xDPoo9W+VcfwUcXHV2bracxs9FrejfrPcIkDT/ysjutWYgT494uR0Px
+ hTr5gl9J4tITXqsLMHnR+/vb5dMn/FE0mjpbw3gO9FPRhaFuGZ/Eaw3ZKedvkbns/MA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=oss.qualcomm.com; 
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=U7GYBBct; 
+ header.s=qcppdkim1 header.b=YEDaq6y0; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=KRB5ztuD; 
+ header.a=rsa-sha256 header.s=google header.b=P6oW7FRi; 
  arc=none smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
  helo=mx0a-0031df01.pphosted.com;
  envelope-from=varadarajan.narayanan@oss.qualcomm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=U7GYBBct; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=YEDaq6y0; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=KRB5ztuD
+ header.a=rsa-sha256 header.s=google header.b=P6oW7FRi
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E7ACD404E9
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:46 +0000 (UTC)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6F0B060659
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:56 +0000 (UTC)
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68H60u3K901908
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:46 GMT
+ 68H6086d091719
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:55 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=; b=U7GYBBctJq4G5aIk
- kccYfacKFu+sWXTEDRIMXxLUXaevmCEUbowPkxZaxjNLfJOM+aGWjQhRijb3fM2w
- LInRZXMYPKop2lp1mfPXH43EO75kvLW+023Lsnyid42bZVrx7i+9pPpV5XHU/XGS
- yPgNGSNsxc9Jp+/DiFKJLtNb+NBaekdjkZYz0aCG7qljdMshgMYeEfb1upYso9E9
- /Usr7sIiC/jErDKu4XFyjGp5AH6zPYU8VdrHBzCzUkNI4mCv6J1qF4e2XeHKrB1+
- EOTKw7lNFJMfWxEkNhlE08YZL8YAawndRiQnDaCb0lfY6E+OJO9YJ7iXJqfsL+58
- YFN5dg==
-Received: from mail-oo1-f70.google.com (mail-oo1-f70.google.com
- [209.85.161.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqy2d37w8-1
+ PsDTcz6+5glb5rywMAXEdZ3tLUxJfOqcDIdJ3hpAV8A=; b=YEDaq6y0jKbsuVfQ
+ hA9R97NqLAF/nZu2Pi9vTtuCDLEyHttC9kGP2ZLWtWkPb4/r80dzWAxqpepy9P9R
+ MqhDvOiLL4ZqGA3d903E9mW+Vkg9ka0qmVnY0e9sSlYewS0dkj5/48Ih9PGFMUZG
+ CGdKPBvUIMJ0G+Fp6NxFtK9Bea81FshDz5R1dJyKvrH2ewhzBAVRcQdX6lCkzZDQ
+ jESZ1Gr8oF8ZOZcPo+t6SY/v8A8OiM4jQiQjCmDNa3Q2mPMwcOYp01wDne1vYIlk
+ dk4mWs3cN85yH6YOFoXn1HSeni2mhoG63hOi5UBRpb42Y/eK1Kk6uUIQSwf9LwYD
+ 6/3y2A==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gr8uw0sqc-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:46 +0000 (GMT)
-Received: by mail-oo1-f70.google.com with SMTP id
- 006d021491bc7-6c1a8f2c565so746784eaf.2
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 00:47:46 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:55 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-385d2703b64so591728a91.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 00:47:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1789631265; x=1790236065;
+ d=oss.qualcomm.com; s=google; t=1789631275; x=1790236075;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=;
- b=KRB5ztuDK5qBT5dSpC3sdoKRWo7UGs3LzgWuvUAy2yO78LrWI4AlATFflShHEAnhxm
- //GPPHOmtqQVxp8k8Frudgb3rzx17lGhtu9luPvhKP0QS/WJ2XGqprx5qYdvGO4mIgxf
- uvHwE79FLAUPWMgnDFF2O3391i0bQ1tBbP3GwqMYlR8JjkWQ8pLpcqccHC0J00q5C5Zr
- 48EnevXRcUf0KAqvcs+Yzyrh5TuKPX5KKtupqlbwj1ug3N5uqawTEaTGoGiThy76PcwV
- r/Vw1gVeHEghwhY16tEF/ClFcJJeW/yi8ApnmGQnhdx4yP4SYoOG2gA7plYBCoNnxNDO
- 7cyg==
+ bh=PsDTcz6+5glb5rywMAXEdZ3tLUxJfOqcDIdJ3hpAV8A=;
+ b=P6oW7FRiPrrAdmoIXAJt7ogXPP7Qy66PAgjigZvKcxSOKieA8lFLalNnrr1GIXtQ0d
+ SI0ZgkHPnTLSmg9ttCCejHIoE8FB4omjD+aPIlWK1XNSd8sgpsc4MA7skZkVZ0cSpMq9
+ Gz30NwlxXNckfVUuiB0yRvH9DdFxPh2v70vbB166KvSuEtCyoio2raDvxCekqTzoJi51
+ o5TVn5C/tiQQaUB8sqrCoOECxAXgtgM5dKDD6NJHXdL5eNMgJtC555rD1s0qXjaaVg01
+ 8as+n91t+Qc2lGPbNtGm+614Dl1EbPZKa7AhpoW5bz0+gYgRK6dZMrfV0Qy8N+1ceAUD
+ rEjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789631265; x=1790236065;
+ d=1e100.net; s=20260707; t=1789631275; x=1790236075;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=;
- b=gQjxvAMPlrnRrzjKsRN2PhaWJqbkPs8GrDh6Noy5hnwbSqws/FvlEGPl8eglbpCZig
- srqehknEtA/G8dh6qQx3NbSUVMZMmI19NBFaQ1J7yo5ZEpg73DPT+LjlQnOZ7PHlyF++
- RQFjZvE4KW/PAtwq0Ub8cZ4gl60mF3Ov74P3rv4+WKMrKgDIRfVRvnEC/VXc36kfxve9
- 5Njc05+LN7P/AoLvwQ9eelMAhFenNR1UwJ35shCQSgrAI9NpB3AnGXVl/VHkCoeBNWwD
- hs0cjDBx183k7tREo1jZEEwJLmhsaM1KGiDGffK6YrbfQLmUAg4MsB0OCaxdW3X+42ke
- P4wA==
+ bh=PsDTcz6+5glb5rywMAXEdZ3tLUxJfOqcDIdJ3hpAV8A=;
+ b=yPsAMdkqhPUXJKcjo42OGQtW3gJdj8aEgJD0D8iIqsSfwngx256CTpPw6EShxKy/Zz
+ /YRT0uPLfXln6j3ZXt3ZA65yTTuI/vOEOA5z2cYScruNlUSaHd0CzftOTVXYOjwQIid+
+ L2hooI0AZY7nfw0qFGg1CpTDqbSTxVfOQK27n2lUEUO2xSdFvvWk7aaBUOPtVWEs8Y/e
+ j9g5DUOPvXPuBKCajBi1BhkDw7qiUrJQIKH0F9gIKL5cuLXgBMZVlrNU2nELvZJpGqNP
+ eRldW/DjyqGy1GACUpMe7e45QwiaKy9cNDQFRhkpal4D9lpUxfbzb77iNCOJCLaAZAHX
+ 8u3A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwL8DFLVmPCSkTxdnkz24J42sU3bYm9tpC9R3WlD6qhtkdApDZoJY69HRP5n0cMUK+iJxoqV/k=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lyUVqTrUsR/4q47tIypGDnmdXS0BRvBpxRsVKYwNHreiXYDrHq
- fBFXcaVlgW5X+019qOR8ljHm0wOU1/kh/iYH+wHkT8T6JjzX0TDGikAmsTbhXL6QJVV0jlgBt7P
- TN+VbLxdyNhNkPEYcc+yXpmNuqlZmFgmTe6Zf9bBYQ7wheTIDMH3j0J9tZVVFYY4u7kadjUA=
-X-Gm-Gg: AYBFou1usbR9oGOFi/DasksSmKLFw0h0HKt4iTL4Pt1fSIWv9EEj/2yQQSQjGJfYTNu
- cPO9H6MocG1fCK7tGn5wboI2zytp1L/25zQuUDvmIXar5T9xdbQlD0EW1jHv+GzZVeasnoJUpmm
- PrSmEgrWFjXEUtqae1vgCTkXgXiiwT4Z0df9TUjVniXwR+tAZtkZGQdNDwBKFd3tOIn1N1Hl1wv
- yTnREZJk4ezn4uAymR1qIBvwJPyn+7J3NAq9IFFtukdO9h1hAPK6XvdB1s0p0xLHDVAmT8Ii9ZU
- IOqFEaHMXZP9nac01mWtvdlQBDn5od9jf1ZQFsITLL+vATXL5in9VRCvbpSGi+TMBZ0TUOYTR2I
- p+aeIDtxiPv+gK2clx4Rm454Ha1Q2iHRDOoqK6Y7z9OtouvBjMT0juDXbITb7vPkR9FigCUsR2y
- VLmTMbRKIjBGeSCkUmHYMpJgvYlyrhVw==
-X-Received: by 2002:a05:6820:c2c8:20b0:6c8:dccc:eb0d with SMTP id
- 006d021491bc7-6c8dcdc3041mr2343502eaf.53.1789631265300; 
- Thu, 17 Sep 2026 00:47:45 -0700 (PDT)
-X-Received: by 2002:a05:6820:c2c8:20b0:6c8:dccc:eb0d with SMTP id
- 006d021491bc7-6c8dcdc3041mr2343480eaf.53.1789631264847; 
- Thu, 17 Sep 2026 00:47:44 -0700 (PDT)
+ AKwUvBwOjA0znaVMvUUxibKAoDEVqcnT+ep3lmJS5AWPjl8Ingmn9+CWsHsk95d5G77bLK7SVp8+XIo=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mVxspu2rqP/7BbeEf+XMjkNcrWifqpDMnHNiuLRkUCwd/Yjcbs
+ awWUz5FU1oNRaXE/0SalVkD7d/dZYS2lX80oe95fMLucAD4IyIK1PWHzJiL//JEz/uQKNleGc1o
+ Xe1HEWucG5wugHNyNkg+SnZe73A9myBLYKp8xBur+8bDgkVfVESzboeaDWLAKyrTZgZFqbms=
+X-Gm-Gg: AYBFou2y4AK/SspRsjya0WBYe2QQJhtNWKj9j5y0Unke+nOvZ0QCtPnfNvIY2WBch/7
+ L5jnFbkFc8idvrwnNtJwa7MldYK9I9MSRNgAUWCmLUd6mqXdMAFCHlAOU0jKS3h7xL4L4K1R1UM
+ /LvFaWG0rASvk+4rsclYqpWoWwL8eH7mXgSLlQv9V/bzyivihQqzg55boIVF9XsBWPWcnDR3gfh
+ z64AcnaMugjg1uQiZD76rpa8nELZUDi9b1fVHFl5+7DqMLb1NXpYD9jus2lpd5+Y8CqblDiel2Y
+ oUgNzJPhkTIwQowmWFqkQ5Hqcq0sNXTVxeDEDz6oxBgTvQQU2xn+w7WYGi5yibIXBYL9XrWiFv4
+ ZL87HWLPq74F8OhhN57Nksw07ZvcbNUXAIs87ISplkUwZu9YlQBJLpE+dtqtGr5ln088CuxDvXz
+ xTy5dcXngx3LZpSnPF8nCEVetdXXvmSw==
+X-Received: by 2002:a17:90b:5806:b0:39d:e78d:32d2 with SMTP id
+ 98e67ed59e1d1-39e35e4bd9bmr3896212a91.13.1789631274732; 
+ Thu, 17 Sep 2026 00:47:54 -0700 (PDT)
+X-Received: by 2002:a17:90b:5806:b0:39d:e78d:32d2 with SMTP id
+ 98e67ed59e1d1-39e35e4bd9bmr3896170a91.13.1789631274254; 
+ Thu, 17 Sep 2026 00:47:54 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-33bf5aa1e38sm14379848eec.16.2026.09.17.00.47.35
+ 5a478bee46e88-33bf5aa1e38sm14379848eec.16.2026.09.17.00.47.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Sep 2026 00:47:44 -0700 (PDT)
+ Thu, 17 Sep 2026 00:47:53 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Date: Thu, 17 Sep 2026 13:15:41 +0530
-Subject: [PATCH v10 12/15] pinctrl: qcom: Add ipq5210 pinctrl driver
+Date: Thu, 17 Sep 2026 13:15:42 +0530
+Subject: [PATCH v10 13/15] mach-snapdragon: spl: ipq5210: Add SPL support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260917-spl-v10-12-3e83dcd239f0@oss.qualcomm.com>
+Message-Id: <20260917-spl-v10-13-3e83dcd239f0@oss.qualcomm.com>
 References: <20260917-spl-v10-0-3e83dcd239f0@oss.qualcomm.com>
 In-Reply-To: <20260917-spl-v10-0-3e83dcd239f0@oss.qualcomm.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.u-boot-project.org,
@@ -221,31 +221,31 @@ Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
  Jens Reidel <adrian@mainlining.org>, Erikas Bitovtas <xerikasxx@gmail.com>,
  Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-ORIG-GUID: sZV_YprKbaRESBdQkXDeyLyJurkAvcZe
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDEwNCBTYWx0ZWRfX5OogXJp1BeS4
- SwPDyRFonpn2egTwD4Sru4f/rXnbIJpYtpkZM/swPN6f8UFCDWQYhZQ0vePEp0H2g160LlO4CGM
- yOSMjf41aM2enZbxnTpH6usiRvuKhFY=
-X-Authority-Analysis: v=2.4 cv=HbeB3SE8 c=1 sm=1 tr=0 ts=6aab9b22 cx=c_pps
- a=lkkFf9KBb43tY3aOjL++dA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-ORIG-GUID: CgIC7Ixt2kNMTZmMSyW8nWirmOYBdWiE
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDEwNCBTYWx0ZWRfXwYklPO+ehaa7
+ zfsyJ5GZh33keCGrk597ggNw5Sn+RuiB/Obyy6o0aYexbWKCOjuksBczffYPrWxbeciTl9M2Itg
+ 7OBRxzqBDaT7NODjbVwFn425xUCInaHMR3d2Q4yPl8al7hCgSl6EIiFOZz5RCVowwe7T5/RZkXb
+ k3qs1/t+nUD+3ZOE5C+g5axA7RLvtGLL/u3nPvxybBAPjYPCFXbfdQKx2D1hMJ6PHT1SUd9XF1h
+ dLhStJ72JXNxWB69t+AdiURfVW9GUu+CLwGrS5ZGTyQLgVuk44xs6uEMEr6mUFWNKvB6rjYZkxZ
+ SsktzXFk1PhmESp40nux+tP/yEFJjS4HvuOd8vcQJJUbOtNfpPnzeeIKQANyxikXqoTdnPzkvB9
+ vT571GKfEYAxNHT+0r7rGqpwXWO/N2w7ZQitMwdWoCeDuQawy3VxybZvMsIZayMeYu3woNP3h57
+ qscMC1B08l/5QZfatgg==
+X-Proofpoint-GUID: CgIC7Ixt2kNMTZmMSyW8nWirmOYBdWiE
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDEwNCBTYWx0ZWRfX3ifb5uL3VH7m
+ tRW2rBcvLkT8mQvKovm3uE+ERj/K9B2X6Rn74WLMuTxIpA8ve/KmBPNzMx8LLcTtSPd1bCtbt/6
+ DJxVjwhSxKmd8fyzL3OrL6q4XbAikcc=
+X-Authority-Analysis: v=2.4 cv=dMUzC+Zb c=1 sm=1 tr=0 ts=6aab9b2b cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=NzvCGKM8m0lGn9t9IsgA:9 a=QEXdDO2ut3YA:10 a=O8hF6Hzn-FEA:10
- a=k4UEASGLJojhI9HsvVT1:22
-X-Proofpoint-GUID: sZV_YprKbaRESBdQkXDeyLyJurkAvcZe
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDEwNCBTYWx0ZWRfX385F+CQIHkKU
- vWbT1qlj36stTl2w1cPG2Qu/W8YJGaGd3KOyTqwplwOueDayBfNCBWepIUHo+0dwTQUE4r+YzA8
- w8/QWauRW+eHWlvmr3uzyRhQMOO4N0urFODo/tnyWpw8Ckb+hVJNv8LyMUzj6XcyWhIaOfhmgQS
- PFuVcu3wKWF8yG95/eI3oZgadhbTA4EL1oQQ84gluWCIdEGyFF/0y+1zbZ49qsNomCt+3bgrIQT
- LGVq/E28o4RAV78bSYA8hOcR9pu4S6pe0jnqJp41Tz5oYy+BjkkPQk751BpHoyCbiwSdoN1+hy/
- uiCXFsJE7W3peXo6jrlsl30zZ+zuEY11M/sfrK4BHaNwlQpGDhCoCrdQwo5nI2CErR+X5hNJmvZ
- L6Rc9ueAzE00MTKs3ShX9UQsyDa94QEUXV/wnzgdNKgDbW/Y6vRKw79stAzvXscqu58Y30l0MK6
- 1NIed8steVCm4sGS8cA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=cm27Pg_UAAAA:8 a=-zc8TOuOcBEM41oa4wwA:9 a=QEXdDO2ut3YA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-17_01,2026-09-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 bulkscore=0 spamscore=0 adultscore=0
- suspectscore=0 malwarescore=0 phishscore=0 clxscore=1015 lowpriorityscore=0
+ priorityscore=1501 malwarescore=0 bulkscore=0 impostorscore=0 suspectscore=0
+ spamscore=0 phishscore=0 adultscore=0 clxscore=1015 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609170104
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -261,402 +261,211 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add pinctrl driver for the TLMM block found in the ipq5210 SoC.
+This patch adds the basic board init routines that invoke the common and
+mach-snapdragon specific SPL frameworks to proceed with the hand over from
+boot rom to the next stage i.e. U-Boot proper. This also provides the
+linker script to generate the SPL image in the format expected by the boot
+rom.
 
 Reviewed-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
- drivers/pinctrl/qcom/Kconfig           |   8 +
- drivers/pinctrl/qcom/Makefile          |   1 +
- drivers/pinctrl/qcom/pinctrl-ipq5210.c | 349 +++++++++++++++++++++++++++++++++
- 3 files changed, 358 insertions(+)
+ arch/arm/mach-snapdragon/board_spl.c            |  2 +
+ arch/arm/mach-snapdragon/include/mach/spl.h     | 13 ++++
+ board/qualcomm/ipq5210/Makefile                 |  3 +
+ board/qualcomm/ipq5210/ipq5210-spl-wrap-elf.lds | 18 +++++
+ board/qualcomm/ipq5210/spl-ipq5210.c            | 99 +++++++++++++++++++++++++
+ include/configs/ipq5210.h                       | 11 +++
+ 6 files changed, 146 insertions(+)
 
-diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index 7dd3782c14b..dbb51cd7fe6 100644
---- a/drivers/pinctrl/qcom/Kconfig
-+++ b/drivers/pinctrl/qcom/Kconfig
-@@ -38,6 +38,14 @@ config PINCTRL_QCOM_IPQ4019
- 	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
- 	  as well as the associated GPIO driver.
+diff --git a/arch/arm/mach-snapdragon/board_spl.c b/arch/arm/mach-snapdragon/board_spl.c
+index 2655803b31e..3293eab8f81 100644
+--- a/arch/arm/mach-snapdragon/board_spl.c
++++ b/arch/arm/mach-snapdragon/board_spl.c
+@@ -12,6 +12,8 @@
+ #include <spl.h>
+ #include <soc/qcom/smem.h>
  
-+config PINCTRL_QCOM_IPQ5210
-+	bool "Qualcomm IPQ5210 Pinctrl"
-+	default y if PINCTRL_QCOM_GENERIC
-+	select PINCTRL_QCOM
-+	help
-+	  Say Y here to enable support for pinctrl on the IPQ5210 SoC,
-+	  as well as the associated GPIO driver.
++DECLARE_GLOBAL_DATA_PTR;
 +
- config PINCTRL_QCOM_IPQ5424
- 	bool "Qualcomm IPQ5424 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-index a7a9ad03569..9fe32fb8fec 100644
---- a/drivers/pinctrl/qcom/Makefile
-+++ b/drivers/pinctrl/qcom/Makefile
-@@ -5,6 +5,7 @@
- obj-$(CONFIG_PINCTRL_QCOM) += pinctrl-qcom.o
- obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
- obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
-+obj-$(CONFIG_PINCTRL_QCOM_IPQ5210) += pinctrl-ipq5210.o
- obj-$(CONFIG_PINCTRL_QCOM_IPQ5424) += pinctrl-ipq5424.o
- obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
- obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
-diff --git a/drivers/pinctrl/qcom/pinctrl-ipq5210.c b/drivers/pinctrl/qcom/pinctrl-ipq5210.c
+ /* in SPL, we always use internal DT */
+ int __weak board_fdt_blob_setup(void **fdtp)
+ {
+diff --git a/arch/arm/mach-snapdragon/include/mach/spl.h b/arch/arm/mach-snapdragon/include/mach/spl.h
 new file mode 100644
-index 00000000000..a9b435ad543
+index 00000000000..50cc8dc4e8f
 --- /dev/null
-+++ b/drivers/pinctrl/qcom/pinctrl-ipq5210.c
-@@ -0,0 +1,349 @@
++++ b/arch/arm/mach-snapdragon/include/mach/spl.h
+@@ -0,0 +1,13 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Qualcomm IPQ5210 pinctrl
 + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 + */
 +
-+#include <dm.h>
++#ifndef __SPL_H__
++#define __SPL_H__
 +
-+#include "pinctrl-qcom.h"
++void qcom_spl_malloc_init_f(void);
++int qcom_spl_loader_pre_ddr(u8 boot_device);
++void qcom_spl_error_handler(void *arg);
 +
-+#define MAX_PIN_NAME_LEN 32
-+static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
++#endif /* __SPL_H__ */
+diff --git a/board/qualcomm/ipq5210/Makefile b/board/qualcomm/ipq5210/Makefile
+new file mode 100644
+index 00000000000..d808c106524
+--- /dev/null
++++ b/board/qualcomm/ipq5210/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0
 +
-+enum ipq5210_functions {
-+	msm_mux_atest_char_start,
-+	msm_mux_atest_char_status0,
-+	msm_mux_atest_char_status1,
-+	msm_mux_atest_char_status2,
-+	msm_mux_atest_char_status3,
-+	msm_mux_atest_tic_en,
-+	msm_mux_audio_pri,
-+	msm_mux_audio_pri_mclk_out0,
-+	msm_mux_audio_pri_mclk_in0,
-+	msm_mux_audio_pri_mclk_out1,
-+	msm_mux_audio_pri_mclk_in1,
-+	msm_mux_audio_pri_mclk_out2,
-+	msm_mux_audio_pri_mclk_in2,
-+	msm_mux_audio_pri_mclk_out3,
-+	msm_mux_audio_pri_mclk_in3,
-+	msm_mux_audio_sec,
-+	msm_mux_audio_sec_mclk_out0,
-+	msm_mux_audio_sec_mclk_in0,
-+	msm_mux_audio_sec_mclk_out1,
-+	msm_mux_audio_sec_mclk_in1,
-+	msm_mux_audio_sec_mclk_out2,
-+	msm_mux_audio_sec_mclk_in2,
-+	msm_mux_audio_sec_mclk_out3,
-+	msm_mux_audio_sec_mclk_in3,
-+	msm_mux_core_voltage_0,
-+	msm_mux_cri_trng0,
-+	msm_mux_cri_trng1,
-+	msm_mux_cri_trng2,
-+	msm_mux_cri_trng3,
-+	msm_mux_dbg_out_clk,
-+	msm_mux_dg_out,
-+	msm_mux_gcc_plltest_bypassnl,
-+	msm_mux_gcc_plltest_resetn,
-+	msm_mux_gcc_tlmm,
-+	msm_mux_gpio,
-+	msm_mux_led0,
-+	msm_mux_led1,
-+	msm_mux_led2,
-+	msm_mux_mdc_mst,
-+	msm_mux_mdc_slv0,
-+	msm_mux_mdc_slv1,
-+	msm_mux_mdc_slv2,
-+	msm_mux_mdio_mst,
-+	msm_mux_mdio_slv0,
-+	msm_mux_mdio_slv1,
-+	msm_mux_mdio_slv2,
-+	msm_mux_mux_tod_out,
-+	msm_mux_pcie0_clk_req_n,
-+	msm_mux_pcie0_wake,
-+	msm_mux_pcie1_clk_req_n,
-+	msm_mux_pcie1_wake,
-+	msm_mux_pll_test,
-+	msm_mux_pon_active_led,
-+	msm_mux_pon_mux_sel,
-+	msm_mux_pon_rx,
-+	msm_mux_pon_rx_los,
-+	msm_mux_pon_tx,
-+	msm_mux_pon_tx_burst,
-+	msm_mux_pon_tx_dis,
-+	msm_mux_pon_tx_fault,
-+	msm_mux_pon_tx_sd,
-+	msm_mux_gpn_rx_los,
-+	msm_mux_gpn_tx_burst,
-+	msm_mux_gpn_tx_dis,
-+	msm_mux_gpn_tx_fault,
-+	msm_mux_gpn_tx_sd,
-+	msm_mux_pps,
-+	msm_mux_pwm0,
-+	msm_mux_pwm1,
-+	msm_mux_pwm2,
-+	msm_mux_pwm3,
-+	msm_mux_qdss_cti_trig_in_a0,
-+	msm_mux_qdss_cti_trig_in_a1,
-+	msm_mux_qdss_cti_trig_in_b0,
-+	msm_mux_qdss_cti_trig_in_b1,
-+	msm_mux_qdss_cti_trig_out_a0,
-+	msm_mux_qdss_cti_trig_out_a1,
-+	msm_mux_qdss_cti_trig_out_b0,
-+	msm_mux_qdss_cti_trig_out_b1,
-+	msm_mux_qdss_traceclk_a,
-+	msm_mux_qdss_tracectl_a,
-+	msm_mux_qdss_tracedata_a,
-+	msm_mux_qrng_rosc0,
-+	msm_mux_qrng_rosc1,
-+	msm_mux_qrng_rosc2,
-+	msm_mux_qspi_data,
-+	msm_mux_qspi_clk,
-+	msm_mux_qspi_cs_n,
-+	msm_mux_qup_se0,
-+	msm_mux_qup_se1,
-+	msm_mux_qup_se2,
-+	msm_mux_qup_se3,
-+	msm_mux_qup_se4,
-+	msm_mux_qup_se5,
-+	msm_mux_qup_se5_l1,
-+	msm_mux_resout,
-+	msm_mux_rx_los0,
-+	msm_mux_rx_los1,
-+	msm_mux_rx_los2,
-+	msm_mux_sdc_clk,
-+	msm_mux_sdc_cmd,
-+	msm_mux_sdc_data,
-+	msm_mux_tsens_max,
-+	msm_mux__,
-+};
++obj-$(CONFIG_SPL) := spl-ipq5210.o
+diff --git a/board/qualcomm/ipq5210/ipq5210-spl-wrap-elf.lds b/board/qualcomm/ipq5210/ipq5210-spl-wrap-elf.lds
+new file mode 100644
+index 00000000000..f0ced6765da
+--- /dev/null
++++ b/board/qualcomm/ipq5210/ipq5210-spl-wrap-elf.lds
+@@ -0,0 +1,18 @@
++/*
++ * SPDX-License-Identifier: GPL-2.0
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++PHDRS {
++	ptype PT_LOAD FLAGS(0x7);
++}
 +
-+#define MSM_PIN_FUNCTION(fname)				\
-+	[msm_mux_##fname] = {#fname, msm_mux_##fname}
++ENTRY(_entry)
 +
-+static const struct pinctrl_function msm_pinctrl_functions[] = {
-+	MSM_PIN_FUNCTION(atest_char_start),
-+	MSM_PIN_FUNCTION(atest_char_status0),
-+	MSM_PIN_FUNCTION(atest_char_status1),
-+	MSM_PIN_FUNCTION(atest_char_status2),
-+	MSM_PIN_FUNCTION(atest_char_status3),
-+	MSM_PIN_FUNCTION(atest_tic_en),
-+	MSM_PIN_FUNCTION(audio_pri),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_out0),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_in0),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_out1),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_in1),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_out2),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_in2),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_out3),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_in3),
-+	MSM_PIN_FUNCTION(audio_sec),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_out0),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_in0),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_out1),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_in1),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_out2),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_in2),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_out3),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_in3),
-+	MSM_PIN_FUNCTION(core_voltage_0),
-+	MSM_PIN_FUNCTION(cri_trng0),
-+	MSM_PIN_FUNCTION(cri_trng1),
-+	MSM_PIN_FUNCTION(cri_trng2),
-+	MSM_PIN_FUNCTION(cri_trng3),
-+	MSM_PIN_FUNCTION(dbg_out_clk),
-+	MSM_PIN_FUNCTION(dg_out),
-+	MSM_PIN_FUNCTION(gcc_plltest_bypassnl),
-+	MSM_PIN_FUNCTION(gcc_plltest_resetn),
-+	MSM_PIN_FUNCTION(gcc_tlmm),
-+	MSM_PIN_FUNCTION(gpio),
-+	MSM_PIN_FUNCTION(led0),
-+	MSM_PIN_FUNCTION(led1),
-+	MSM_PIN_FUNCTION(led2),
-+	MSM_PIN_FUNCTION(mdc_mst),
-+	MSM_PIN_FUNCTION(mdc_slv0),
-+	MSM_PIN_FUNCTION(mdc_slv1),
-+	MSM_PIN_FUNCTION(mdc_slv2),
-+	MSM_PIN_FUNCTION(mdio_mst),
-+	MSM_PIN_FUNCTION(mdio_slv0),
-+	MSM_PIN_FUNCTION(mdio_slv1),
-+	MSM_PIN_FUNCTION(mdio_slv2),
-+	MSM_PIN_FUNCTION(mux_tod_out),
-+	MSM_PIN_FUNCTION(pcie0_clk_req_n),
-+	MSM_PIN_FUNCTION(pcie0_wake),
-+	MSM_PIN_FUNCTION(pcie1_clk_req_n),
-+	MSM_PIN_FUNCTION(pcie1_wake),
-+	MSM_PIN_FUNCTION(pll_test),
-+	MSM_PIN_FUNCTION(pon_active_led),
-+	MSM_PIN_FUNCTION(pon_mux_sel),
-+	MSM_PIN_FUNCTION(pon_rx),
-+	MSM_PIN_FUNCTION(pon_rx_los),
-+	MSM_PIN_FUNCTION(pon_tx),
-+	MSM_PIN_FUNCTION(pon_tx_burst),
-+	MSM_PIN_FUNCTION(pon_tx_dis),
-+	MSM_PIN_FUNCTION(pon_tx_fault),
-+	MSM_PIN_FUNCTION(pon_tx_sd),
-+	MSM_PIN_FUNCTION(gpn_rx_los),
-+	MSM_PIN_FUNCTION(gpn_tx_burst),
-+	MSM_PIN_FUNCTION(gpn_tx_dis),
-+	MSM_PIN_FUNCTION(gpn_tx_fault),
-+	MSM_PIN_FUNCTION(gpn_tx_sd),
-+	MSM_PIN_FUNCTION(pps),
-+	MSM_PIN_FUNCTION(pwm0),
-+	MSM_PIN_FUNCTION(pwm1),
-+	MSM_PIN_FUNCTION(pwm2),
-+	MSM_PIN_FUNCTION(pwm3),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_a0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_a1),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_b0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_b1),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_a0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_a1),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_b0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_b1),
-+	MSM_PIN_FUNCTION(qdss_traceclk_a),
-+	MSM_PIN_FUNCTION(qdss_tracectl_a),
-+	MSM_PIN_FUNCTION(qdss_tracedata_a),
-+	MSM_PIN_FUNCTION(qrng_rosc0),
-+	MSM_PIN_FUNCTION(qrng_rosc1),
-+	MSM_PIN_FUNCTION(qrng_rosc2),
-+	MSM_PIN_FUNCTION(qspi_data),
-+	MSM_PIN_FUNCTION(qspi_clk),
-+	MSM_PIN_FUNCTION(qspi_cs_n),
-+	MSM_PIN_FUNCTION(qup_se0),
-+	MSM_PIN_FUNCTION(qup_se1),
-+	MSM_PIN_FUNCTION(qup_se2),
-+	MSM_PIN_FUNCTION(qup_se3),
-+	MSM_PIN_FUNCTION(qup_se4),
-+	MSM_PIN_FUNCTION(qup_se5),
-+	MSM_PIN_FUNCTION(qup_se5_l1),
-+	MSM_PIN_FUNCTION(resout),
-+	MSM_PIN_FUNCTION(rx_los0),
-+	MSM_PIN_FUNCTION(rx_los1),
-+	MSM_PIN_FUNCTION(rx_los2),
-+	MSM_PIN_FUNCTION(sdc_clk),
-+	MSM_PIN_FUNCTION(sdc_cmd),
-+	MSM_PIN_FUNCTION(sdc_data),
-+	MSM_PIN_FUNCTION(tsens_max),
-+};
++SECTIONS {
++	. = CONFIG_PLATFORM_ELFENTRY;
++	_entry = . ;
++	data : {
++		*(.data)
++		. = ALIGN(4);
++	} :ptype
++}
+diff --git a/board/qualcomm/ipq5210/spl-ipq5210.c b/board/qualcomm/ipq5210/spl-ipq5210.c
+new file mode 100644
+index 00000000000..5fc42e64c11
+--- /dev/null
++++ b/board/qualcomm/ipq5210/spl-ipq5210.c
+@@ -0,0 +1,99 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++#include <hang.h>
++#include <cpu_func.h>
++#include <event.h>
++#include <init.h>
++#include <image.h>
++#include <linux/string.h>
++#include <spl.h>
++#include <spl_load.h>
++#include <asm/io.h>
++#include <asm/system.h>
++#include <asm/sections.h>
++#include <soc/qcom/smem.h>
++#include <atf_common.h>
++#include <linux/err.h>
++#include <dm/device-internal.h>
++#include <part.h>
++#include <blk.h>
++#include <dm/uclass.h>
++#include <mach/qclib.h>
++#include <mach/spl.h>
 +
-+typedef unsigned int msm_pin_function[10];
++DECLARE_GLOBAL_DATA_PTR;
 +
-+#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9) \
-+	[id] = {        msm_mux_gpio, /* gpio mode */	\
-+			msm_mux_##f1,			\
-+			msm_mux_##f2,			\
-+			msm_mux_##f3,			\
-+			msm_mux_##f4,			\
-+			msm_mux_##f5,			\
-+			msm_mux_##f6,			\
-+			msm_mux_##f7,			\
-+			msm_mux_##f8,			\
-+			msm_mux_##f9,			\
++#define QCCONFIG			"qc_config"
++
++/**
++ * qcom_spl_soc_qclib_override() - Populate ipq5210-specific interface table
++ *				    entries.
++ * @table:	Pointer to the QCLIB interface table being built.
++ * @fit:	Pointer to the FIT image blob.
++ * @images_node: FIT "images" node offset.
++ *
++ * Appends the "qc_config" entry and a placeholder "qcsdi" entry, filled in by QCLIB itself.
++ *
++ * Return: 0 on success, or a negative error code on failure.
++ */
++int qcom_spl_soc_qclib_override(struct interface_table *table,
++				const void *fit, int images_node)
++{
++	int ret;
++	int entry_idx;
++	int qcconfig_node;
++
++	qcconfig_node = fdt_subnode_offset(fit, images_node, "qcconfig_1");
++	if (qcconfig_node < 0) {
++		pr_err("Failed to find qcconfig_1 node in FIT\n");
++		return -ENOENT;
 +	}
 +
-+static const msm_pin_function ipq5210_pin_functions[] = {
-+	PINGROUP(0, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
-+	PINGROUP(1, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
-+	PINGROUP(2, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
-+	PINGROUP(3, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
-+	PINGROUP(4, sdc_cmd, qspi_cs_n, _, _, _, _, _, _, _),
-+	PINGROUP(5, sdc_clk, qspi_clk, _, _, _, _, _, _, _),
-+	PINGROUP(6, qup_se0, led0, pwm1, _, cri_trng0, qdss_tracedata_a, _, _, _),
-+	PINGROUP(7, qup_se0, led1, pwm1, _, cri_trng1, qdss_tracedata_a, _, _, _),
-+	PINGROUP(8, qup_se0, pwm1, audio_pri_mclk_out2, audio_pri_mclk_in2, _, cri_trng2, qdss_tracedata_a, _, _),
-+	PINGROUP(9, qup_se0, led2, pwm1, _, cri_trng3, qdss_tracedata_a, _, _, _),
-+	PINGROUP(10, pon_rx_los, qup_se3, pwm0, _, _, qdss_tracedata_a, _, _, _),
-+	PINGROUP(11, pon_active_led, qup_se3, pwm0, _, _, qdss_tracedata_a, _, _, _),
-+	PINGROUP(12, pon_tx_dis, qup_se2, pwm0, audio_pri_mclk_out0, audio_pri_mclk_in0, _, qrng_rosc0, qdss_tracedata_a, _),
-+	PINGROUP(13, gpn_tx_dis, qup_se2, pwm0, audio_pri_mclk_out3, audio_pri_mclk_in3, _, qrng_rosc1, qdss_tracedata_a, _),
-+	PINGROUP(14, pon_tx_burst, qup_se0, _, qrng_rosc2, qdss_tracedata_a, _, _, _, _),
-+	PINGROUP(15, pon_tx, qup_se0, _, qdss_tracedata_a, _, _, _, _, _),
-+	PINGROUP(16, pon_tx_sd, audio_sec_mclk_out1, audio_sec_mclk_in1, qdss_cti_trig_out_b0, _, _, _, _, _),
-+	PINGROUP(17, pon_tx_fault, audio_sec_mclk_out0, audio_sec_mclk_in0, _, _, _, _, _, _),
-+	PINGROUP(18, pps, pll_test, _, _, _, _, _, _, _),
-+	PINGROUP(19, mux_tod_out, audio_pri_mclk_out1, audio_pri_mclk_in1, _, _, _, _, _, _),
-+	PINGROUP(20, qup_se2, mdc_slv1, tsens_max, qdss_tracedata_a, _, _, _, _, _),
-+	PINGROUP(21, qup_se2, mdio_slv1, qdss_tracedata_a, _, _, _, _, _, _),
-+	PINGROUP(22, core_voltage_0, qup_se3, pwm3, _, _, _, _, _, _),
-+	PINGROUP(23, led0, qup_se3, dbg_out_clk, qdss_traceclk_a, _, _, _, _, _),
-+	PINGROUP(24, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(25, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(26, mdc_mst, led2, _, qdss_tracectl_a, _, _, _, _, _),
-+	PINGROUP(27, mdio_mst, led1, _, _, _, _, _, _, _),
-+	PINGROUP(28, pcie1_clk_req_n, qup_se1, _, _, qdss_cti_trig_out_a0, _, _, _, _),
-+	PINGROUP(29, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(30, pcie1_wake, qup_se1, _, _, qdss_cti_trig_in_a0, _, _, _, _),
-+	PINGROUP(31, pcie0_clk_req_n, mdc_slv0, _, qdss_cti_trig_out_a1, _, _, _, _, _),
-+	PINGROUP(32, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(33, pcie0_wake, mdio_slv0, qdss_cti_trig_in_a1, _, _, _, _, _, _),
-+	PINGROUP(34, audio_pri, atest_char_status0, qdss_cti_trig_in_b0, _, _, _, _, _, _),
-+	PINGROUP(35, audio_pri, rx_los2, atest_char_status1, qdss_cti_trig_out_b1, _, _, _, _, _),
-+	PINGROUP(36, audio_pri, _, rx_los1, atest_char_status2, _, _, _, _, _),
-+	PINGROUP(37, audio_pri, rx_los0, atest_char_status3, _, qdss_cti_trig_in_b1, _, _, _, _),
-+	PINGROUP(38, qup_se1, led2, gcc_plltest_bypassnl, qdss_tracedata_a, _, _, _, _, _),
-+	PINGROUP(39, qup_se1, led1, led0, gcc_tlmm, qdss_tracedata_a, _, _, _, _),
-+	PINGROUP(40, qup_se4, rx_los2, audio_sec, gcc_plltest_resetn, qdss_tracedata_a, _, _, _, _),
-+	PINGROUP(41, qup_se4, rx_los1, audio_sec, qdss_tracedata_a, _, _, _, _, _),
-+	PINGROUP(42, qup_se4, rx_los0, audio_sec, atest_tic_en, _, _, _, _, _),
-+	PINGROUP(43, qup_se4, audio_sec, _, _, _, _, _, _, _),
-+	PINGROUP(44, resout, _, _, _, _, _, _, _, _),
-+	PINGROUP(45, pon_mux_sel, _, _, _, _, _, _, _, _),
-+	PINGROUP(46, dg_out, atest_char_start, _, _, _, _, _, _, _),
-+	PINGROUP(47, gpn_rx_los, mdc_slv2, qup_se5, _, _, _, _, _, _),
-+	PINGROUP(48, pon_rx, qup_se5, _, _, _, _, _, _, _),
-+	PINGROUP(49, gpn_tx_fault, mdio_slv2, qup_se5, audio_sec_mclk_out2, audio_sec_mclk_in2, _, _, _, _),
-+	PINGROUP(50, gpn_tx_sd, qup_se5, audio_sec_mclk_out3, audio_sec_mclk_in3, _, _, _, _, _),
-+	PINGROUP(51, gpn_tx_burst, qup_se5, _, _, _, _, _, _, _),
-+	PINGROUP(52, qup_se2, qup_se5, qup_se4, qup_se5_l1, _, _, _, _, _),
-+	PINGROUP(53, qup_se2, qup_se4, qup_se5_l1, _, _, _, _, _, _),
-+};
++	entry_idx = table->num_entries;
++	memcpy(table->if_table_entries[entry_idx].entry_name,
++	       QCCONFIG, strlen(QCCONFIG));
 +
-+static const char *ipq5210_get_function_name(struct udevice *dev, uint selector)
-+{
-+	return msm_pinctrl_functions[selector].name;
++	ret = qcom_spl_get_fit_img_entry_point((void *)fit, qcconfig_node,
++					       &table->if_table_entries[entry_idx].address);
++	if (ret) {
++		pr_err("Failed to get qcconfig_1 entry point (%d)\n", ret);
++		return ret;
++	}
++	table->if_table_entries[entry_idx].attributes = 0;
++	table->num_entries = entry_idx + 1;
++
++	entry_idx++;
++	memcpy(table->if_table_entries[entry_idx].entry_name,
++	       QCSDI, strlen(QCSDI));
++	table->if_table_entries[entry_idx].address = 0;
++	table->if_table_entries[entry_idx].attributes = 0;
++	table->num_entries = entry_idx + 1;
++
++	return 0;
 +}
 +
-+static const char *ipq5210_get_pin_name(struct udevice *dev, uint selector)
++/**
++ * qcom_spl_soc_post_qclib_routine() - Cache the QCSDI address after QCLIB
++ *					returns.
++ * @if_tbl:	Pointer to the QCLIB interface table, populated by QCLIB.
++ *
++ * Return: 0 on success, or a negative error code on failure.
++ */
++int qcom_spl_soc_post_qclib_routine(struct interface_table *if_tbl)
 +{
-+	snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-+	return pin_name;
++	int ret;
++	struct interface_table_entry qcsdi_entry;
++
++	ret = qcom_spl_get_iftbl_entry_by_name(if_tbl, QCSDI, &qcsdi_entry);
++	if (ret) {
++		pr_err("Failed to get QCSDI entry from interface table (%d)\n", ret);
++		return ret;
++	}
++
++	qclib_set_qcsdi_address(qcsdi_entry.address);
++	pr_info("QCSDI address: 0x%llx\n", qcsdi_entry.address);
++
++	return 0;
 +}
+diff --git a/include/configs/ipq5210.h b/include/configs/ipq5210.h
+new file mode 100644
+index 00000000000..5cbf838af82
+--- /dev/null
++++ b/include/configs/ipq5210.h
+@@ -0,0 +1,11 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
 +
-+static int ipq5210_get_function_mux(unsigned int pin, uint selector)
-+{
-+	unsigned int i;
-+	const msm_pin_function *func = ipq5210_pin_functions + pin;
++#ifndef __CONFIGS_IPQ5210_H
++#define __CONFIGS_IPQ5210_H
 +
-+	for (i = 0; i < 10; i++)
-+		if ((*func)[i] == selector)
-+			return i;
++#include <linux/sizes.h>
 +
-+	pr_err("Can't find requested function for pin %u\n", pin);
-+	return -EINVAL;
-+}
-+
-+static const struct msm_pinctrl_data ipq5210_data = {
-+	.pin_data = {
-+		.pin_count = 54,
-+		.special_pins_start = 54, /* There are no special pins */
-+	},
-+	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
-+	.get_function_name = ipq5210_get_function_name,
-+	.get_function_mux = ipq5210_get_function_mux,
-+	.get_pin_name = ipq5210_get_pin_name,
-+};
-+
-+static const struct udevice_id msm_pinctrl_ids[] = {
-+	{ .compatible = "qcom,ipq5210-tlmm", .data = (ulong)&ipq5210_data },
-+	{ /* Sentinal */ }
-+};
-+
-+U_BOOT_DRIVER(pinctrl_ipq5210) = {
-+	.name		= "pinctrl_ipq5210",
-+	.id		= UCLASS_NOP,
-+	.of_match	= msm_pinctrl_ids,
-+	.ops		= &msm_pinctrl_ops,
-+	.bind		= msm_pinctrl_bind,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
++#endif
 
 -- 
 2.34.1
