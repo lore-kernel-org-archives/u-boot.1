@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49B34C982CF
-	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 14:02:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B606C982CF
+	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 14:02:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0627F60B0E;
-	Thu, 17 Sep 2026 14:02:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AFBC8608B3;
+	Thu, 17 Sep 2026 14:02:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X5RCpp1nE2JB; Thu, 17 Sep 2026 14:02:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3B520608B3
+ id tNjxOCqhkCYL; Thu, 17 Sep 2026 14:02:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org C768560B0B
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789653773;
-	b=BXmkCTpt758qRX9yBc7MGOQ9Tsqt1lCT5tByD8c/gzFjc0m1tkvsa8bpzlMmSP9FYfz3
-	 9gI+uxxE6yXCyYkHs3wr5LU+jIZWRxCkRme0k9eY9J0eb6K8wxrLN9PCRT4HwZ6qFq7NM
-	 Q/y/D+uj5ie/kI+iE7i3la2eGzhzkpQ5Ncwrmkro+lhJgH7Tpm+CPSPiVpcmtTmP1bLeA
-	 fy+o2xrLZ1I8kOM/jCk1Wm4xbSjirJvDwwI9mV1/s5Z5SCqn765ajpkalfhyldQeNIJxm
-	 RdfEvxGsxXarNKPbVszT4kpVOG2FcR8hJS0rFc6dLTDInPY58kaWi16WRaYHuyuqRcQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789653777;
+	b=RIL2ZpJK3uvPfvA8mepfAio8jO/uXlSHWmEVG6l1V826qUbdHfU1xJKcufttN2hdVGkL
+	 C3Flq0BR52YEq0x6e/qud6QhUPfDsLm04OJnaeKZHfShMNhERAN/0pAs9QVuN1TojmUIR
+	 A+EpZQCXGK2ctqBoerWPanVvNjnMaGGokHOb3gT6E9JM1EgnAp7eCNmFRKgbRNnlKQPlN
+	 qEODMd/pSB86fmEGic0Q9YImanK9V0Lj5+2uW//zhA/18i10g1yYVGmjHxpW6+ARG1P/y
+	 d+X/gCgnKSw7vaa02CMnK+NMTyHZUJ+DIb8njICJnx0S+ZXQZblvxrcVwQVR5DQtwhA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789653773;
+	c=relaxed/relaxed; t=1789653777;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,133 +32,133 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=hNbp85aXmtGJ8uJLBV41pSUUOpE5+2SG9GFSl6Z8J+k=;
-	b=B8tYU/Rh/pYMaBEssAZ3IdV2rtxsy6Twz2M7SuACqEPmvnOLrdEAO2zMFl8i15w9f9rb
-	 Gbf5lUgYxd1cKc3PbufPMq6kiy3Vp5M9k8rJxQLSUjtORKoxd84/+hNNkKtB5TZOOEs5/
-	 bYGQfrlEa0aOTm0QUmFJOgKHUI88Ci10ijL+48zqcgARlGEGg/bpVqu8O/W9z9R1GmMjA
-	 HENlKNpnQin1IKBmYlcrcy+eq4H00DJrMLRsJKljtJ13zsr4zCEFuRuwGDXg0ViGUWRuf
-	 dr+hk/0UPiQ31rns2ios+qI0lihMuiRVYTujsiAC9i7tTsXQwlYIwPwW9LVWd3aMZaQ==
+	bh=EuzdIQvDBQ3qeTn0hUCjn09KDg2bXvmTIXUcvSr0KMI=;
+	b=htJXHGMJk+rUnlIJp5OZNyzZHp8NCMvo06v9Af8Wj5P4m9qu9n2yX8kCZQfuCRYSyRx9
+	 LXVH0TLRExPA7nrib/iMVdjUUCijHTUulq9w9MdxcssTpgxyRzge1OAM3NSg6le9qTmcf
+	 WfiT/hjNetYBZSOKmusI+fxv8jlngnxdT+mZyAFlbbgV9WJiD3nD3PnBp8JXFcfQo2cJW
+	 ljgQMNRpDeu3nomYhDDR2tAGuPAiXGcNL7n6kV4ks0p6hM4w34rLJVSKvlO570t6kuAkY
+	 bkLJopkmRW6+ORWKAvE3cqJYphxvwLiyL2XQ5crg53rBj6FycCaxarJ3eB4ptjXzHDA==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789653773;
-	bh=hNbp85aXmtGJ8uJLBV41pSUUOpE5+2SG9GFSl6Z8J+k=;
+	d=lists.u-boot-project.org; s=default; t=1789653776;
+	bh=EuzdIQvDBQ3qeTn0hUCjn09KDg2bXvmTIXUcvSr0KMI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vJm73QQhSIHU6AcbSRVlLAi5eVOdTLPApWE6gZawRpVRvII+j+pR84SZQbe9U1EDR
-	 Pq7yRjnWULsVD6kECc1KVj7kxuNYyY9FGip5aOZsh3e4J0JDjT5Pf6Fs87Bxsni962
-	 s1aUTb09I5FKKqSDnfi74dUjeVHPT9jpCdzswnyNcdHiB8Zx0GXHzOPEyyV2fcSfCs
-	 MYpDYqsG1Ng9xItECOnpFHFurBhyMnpZLz7nr9Unc1Gth7NZcA/iz0ZtgjFObvurJ8
-	 eOPYl/U+NqZ/nieRw/eSCVVCXWR6lKDTTVlxqZ+rzPeL6kuC/kxN8zdK3cRbpd5u2j
-	 MeT5vmUVuNXLA==
+	b=Jx+W+c7ufe02peMNXUOztnUrHEDG9FWUE+Px8dWKgWkk+mviVHIblp76ZEagtuQTF
+	 MK+ncc95TbqQHX9skpD6Er5XO0oJaIZGo1T+0Mpl6jR5Ez/cG3aiiHxaBCB+y8Td7j
+	 uaFLHxqUyb5mWX7+2xzQA6jnh99LBuYu5UKc83+Y7QjUJAcrYIQv0o3dF09mJVyYbU
+	 ReBsY5OSZWXcQSFZEKV6U6JrRyZ2bp+NbY2rgwriGNaBo7LpZXedtTJ9xDZ164xJun
+	 vkuXmYAmL3l78ylAOkbfuLPPxcZV/cv8vHnQFIdnY9N7wLiw8dwEmCpE68LGisV7pF
+	 /SSRX18G0VgpQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3B520608B3;
-	Thu, 17 Sep 2026 14:02:53 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C768560B0B;
+	Thu, 17 Sep 2026 14:02:56 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id A258F465
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 14:02:51 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 1BCD5A29
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 14:02:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 885C780A54
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 14:02:51 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 01DA380F6A
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 14:02:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KzLfNiPl0On4 for <u-boot@lists.u-boot-project.org>;
- Thu, 17 Sep 2026 14:02:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 94A5080F3F
+ id eYQThP7FslXe for <u-boot@lists.u-boot-project.org>;
+ Thu, 17 Sep 2026 14:02:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org BF8D580A54
 Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip="2a00:1450:4864:30::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789653771;
- b=RyuTpZ1lI2ZJW8XTcxkw4Hlyf1PgqGx01aM26A+hJA8Y75pbygKrcCRG2EBJgcc/xU7K
- N+WWHzsZSv0qNhXgpAS+aSM3Y2IsG6lp44+RLdkw14UvGA4Ck0MwzpAUAfKhWr7Fucsw2
- +dVWeWnLRbE5Japq570DmpIy9hrHjiy+LUfvnd1TkdWuA3fEMByo71EZnBh4Haha9Lbc+
- A82XaH1+or8bo3G3iODORxi/9v8ylq53vV5bzHlM0uCnuP3tHnZxqMH8RpA/gvaOaPGt2
- 68xFZfwp6DVfLvcz/70HjyFxwG+jiiP8g48d52b03yW/V5elXEfDnTyRwi66Aa9J5nQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789653775;
+ b=ShOI4xfvvPllFN8DgJWmG+mN+L25MPsHCFBFW1uqPvlYjuzNSYPp9uJ/oBBmdtgSe9lh
+ U+VoWXDlzBttpPJjdBbEhtcQ5eSH1G5wujfUAxucQKPLXIE9qyYBIfJrA4YURsHZqLq23
+ 2BPMENIFaitUs5N0YPPVePby197W83lp/r5az7uD4idqG2x/Zy/YDBwBUZ7fjqE/2Acpr
+ 1PeHhh67/VpcueB6DCg+h6OLdYZ/xZ+mj5i8KfR1pFqmJjobkPsjpRuud4OKQ3rNZNdlw
+ D5UkBlURgorh1cw+mNoF9x8QUy1uHxjdpMFMhVCu6vrVgZbKIT5brlT1JYERbTs/Pvw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789653771;
+ c=relaxed/relaxed; t=1789653775;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=hNbp85aXmtGJ8uJLBV41pSUUOpE5+2SG9GFSl6Z8J+k=;
- b=hIb7R/7M5UEta8TPgF/68xMBO+gcOHZT4v4d7/Ar8KtcMtGiYqfv05mJ8ZM8t+iT++st
- 2qb1ZmYpX5ogL/2Q+wgQAETufFx2MR2gvCY8vHXvnACjyKrnqbT+0SwcuwXp37eHMuB1K
- f/JgbGuaPsb6mJifeCs4FNi0w/bJgv8Mj8E/FwVxz9KnUdGKYTAnEQvW6FwtcXOB3FhMs
- 1jcqiIwU6EwLlFjvUnvcEK5NsvyKxJzaGl9fDzRNJjROIp7/Os7Pzw7xODGXlJF9jCYel
- wSJKYImho1Ildb+CT3YHFTlBh93HCFO9sNwfhvohzVC8euET9A0GL+iSeeaKT1XfiRQ==
+ bh=EuzdIQvDBQ3qeTn0hUCjn09KDg2bXvmTIXUcvSr0KMI=;
+ b=A2yLGYd9T/Z7EyCuLxx9DcTjSb3xuTVHqQnnrhy/cA1CDKlGI8cZ9rEOyhnLTUvrM+C5
+ gTo1vzH6KQr8AL+uxf0KoLF7DSx9kkC/nrGu4jU+uIWagI2sU84Ax2kqwFpPFHv4zzkmL
+ bmbIqIAPRzcbCZIkQic+txxR1DPqbFmmTOG2vVckkR1ja60RqJCrThwTCZYE42lJuQgzN
+ HcqziE8QC/GhvtIK+n7U4ChjrtEwyc/ABHnirRE5tIN1nUIxm+WAe5sb140Wz8XaXJAvD
+ jpiEeqRnGFOtFXyU/WlPRfS50yo8juwGWmELTeWSpgbNwraOSsw8Jx3sAyNZm0MJLgA==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=flipper.net; 
  dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=p+cw9Zj2; 
+ header.s=google header.b=T58ygslF; 
  arc=none smtp.remote-ip="2a00:1450:4864:30::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:30::10; helo=mail-wr2-x10.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=p+cw9Zj2
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
+ header.a=rsa-sha256 header.s=google header.b=T58ygslF
 Received: from mail-wr2-x10.google.com (mail-wr2-x10.google.com
  [IPv6:2a00:1450:4864:30::10])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 94A5080F3F
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 14:02:50 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id BF8D580A54
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 14:02:54 +0000 (UTC)
 Received: by mail-wr2-x10.google.com with SMTP id
- ffacd0b85a97d-4834977ae75so527634f8f.3
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:02:50 -0700 (PDT)
+ ffacd0b85a97d-48439feca17so745892f8f.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:02:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1789653768; x=1790258568;
+ d=flipper.net; s=google; t=1789653772; x=1790258572;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=hNbp85aXmtGJ8uJLBV41pSUUOpE5+2SG9GFSl6Z8J+k=;
- b=p+cw9Zj2K0806SdhFEtff8BtTlMpU4CvSOa+o0GI3kPmmdG2ARN836viLQKjafxu8Q
- CvI9kuexM6K89Rv0vZ0JbNwr9kEjWiqOfcczhLR2AFKwQfIIz1JSLIr9nC7r9U2ZShLK
- B5Vw39vNvrduy6ahv0C/B4GMOItQgg7vLz/9PsQJke/JTpqqNpYvIdvG6j0wnNOp75JQ
- g/aWl9KetruN54lFOI85P7rf319mbotlvC9ymcnQhDdgI74DZ8fyyoDi7Ig+EI2m867/
- KWHBZt/fM9ICKwVcBhgwNTIZU5LnHX1mIiucgfrUqF5SV2cEkc8G63uT8MJGszWxX5N+
- 6WqA==
+ bh=EuzdIQvDBQ3qeTn0hUCjn09KDg2bXvmTIXUcvSr0KMI=;
+ b=T58ygslFcxKaKnlTJ3W8hIS7+rs+FlrwR8F28UE/F9gMrgAn4fknPzqPhuDFf1Fu1Q
+ D0OZv5ixg88W8CKtdUow9FFuoeEWfeM8XH9r0OHMW7ZqUNi6F7CDMoKfGC6kE3xhixuQ
+ F0KKgx2c1LHw8O9u3udb7xEZOPRN5RwYCXDhECc7kLfvfosnXp1qvMT5WlVWU0HgTto2
+ L7j8MO5UNryqM/4uTORT0twn0PWcXN1ZLVTbX+tlHzYKXoFQN7/SKgm4/BGCMYS084h1
+ 23FJNh9OsuilMndFGZuxHLj6cFnlRP00035Cm6c0vAYKnPrR6+DTO67QXjgXhiVQYkYr
+ 7olA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789653768; x=1790258568;
+ d=1e100.net; s=20260707; t=1789653772; x=1790258572;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=hNbp85aXmtGJ8uJLBV41pSUUOpE5+2SG9GFSl6Z8J+k=;
- b=cqy/ATC6R/tHIwWZLo8A04oxUV7luk1QUcwmhkf97pl8vHUtnSjudtiSdA9F3itL3P
- bS3UBYq58PyWad9kV29NbItvL1lisLr6VFLFT9CBogjN4RHsaC33nTsbPRcVvMY4kgTs
- XZeCqPHu6zUvHBGHuglAX1u4IaIZj7ZcL7iC/Bi0rYaPU5MSANETGhy/yYqaV8o1du6C
- 8W0MMG3KKb6MEInNf8IeiYJaQZI+Pscr4ou/52WAb+3CqYQDbThcpwE9S1LuWK0O4W72
- UelyaPiGPStxb12QhUy7tJvEiks4UoL6f3MCmzbpdK2W6H89p1PICMa4KRWjZMc0Nrc1
- av+w==
-X-Gm-Message-State: AFuF++nukDUuCc8bSxeF/ysCDxkl/xBDZzCd5f6ZHjs56hDhHDDF9Zwn
- u5i7Yej2wAzDs6ooaHCVWlZPNavbh9472rPvEHQSnm8vdistXDPcPpvOUyYTAuC/7IE=
-X-Gm-Gg: AYBFou0wlcoQSDZWphNw6qOP2Bi6lB+NtPKFQPOt3E3FUHQDiYkQRUVFjQjCN8lZs81
- 4RW247zNxAsiUhIwQNKQqBoKeyTb5+oK3zwdOkxasUS03dvB+MYBSMNQ266ClampavQBZdcTeIs
- ydLHv6kQbHpp/p4LN6cCael0vyU5H6Oa/e6zYnZzoQ40dOVNJMIR7tCpqpR8uAWHMiXYe5BIkFC
- ApspOIRpsLh/e/EXfJ/JGikrNf06ujvZls8nGDMQyx5Le7e1GGghAi2txqY7671BqlO/Bw/p7/f
- iE40cOB6+nNJTWXuVn6IxdrDM+7NxE3EowXaWRRi6G2c9dL/El4ODCK/gsp39EGbbr3Iv15dBIO
- s4YZE7UvDUpEBydKL50MwN0GlaKVcMdQwFDSpkluG+6+kOtZJLJfUWAqyZsisHwn+emNNV1pkqv
- pbMzeHhAxfqLdTezPQNtixSWKeSunIpqQOZk+DVUx+n9AFpcTlCwP+yh0DJ57MuoF5Q2mpf0wtQ
- J9qohjLO+TcFtvUaNq40k+haj3UgMPZAK9GAcuJnNTxMYO8saYM
-X-Received: by 2002:a05:6000:2902:b0:487:1100:48d0 with SMTP id
- ffacd0b85a97d-487110049a3mr12006841f8f.7.1789653768149; 
- Thu, 17 Sep 2026 07:02:48 -0700 (PDT)
+ bh=EuzdIQvDBQ3qeTn0hUCjn09KDg2bXvmTIXUcvSr0KMI=;
+ b=gmHIUgupM725bbtZsptNhrwxg6bFxR5l0ej5qEORbVsc7aM8I7Ui9hsAhtuo0HRcZy
+ MDW2gQJg7sfZL/dwU9ykyd4WKk21B7qmx6VqUE3/0TIKafEc/rY/Z7hVYSoZwKT+2CFk
+ 5cgvs20HjbCo1tzADRxHmm4Encn3uayGPWqmbTjAI/T5+kBJgCRPvN94TkIYzT6HZIvv
+ CiaLxfyeBlf7eOlB6UPYUm3BV4Qbyfs+N8+snvyQhWrtzJVMAtUhqc/JTNXTTGj1qP/0
+ 7vrB2C+Tim+cCEQqwGjFTdiycc1WDPCevaY2c7CDzpsEl82Cnh9ZsmjFAT6j0xK/DZkH
+ 9N2Q==
+X-Gm-Message-State: AFuF++kpCw+AWmp5Hs+KmNpcsNwkQ7F5r2o4L4ilVnib9eOpAVNaW7Qd
+ DLZCMwlHh51+LB5j3r2NojubgodCCeFick4WLlnuVl1yqD/Ms+S2x+sdUgKfikBNXD8=
+X-Gm-Gg: AYBFou0BU+I+/YGmkygsTYxs/QeLYgHhVAuhZ4P+6j3jlvld8p+O3bG/UvD79hCj0fh
+ m5RV1k7+PAdHqeQSP0Sm3hYu8uLjY26doq1EO0j/isA7ttAgtLgO8dDAZ7d2XLcc0pXe9/Gn9WM
+ 1DGUXcNCctTBL3jdqVLLR4hdEIPSorts1oOR7Gmhf9GPHc6AVXdy1Do4hoSp5mryp7f3OraQCSC
+ 1iciZuKIiL1+c7uLWPivrv1PM2I2Xandg6DkMd9DQO+QXt0ZonM62A1bO76/C1yAaltv+D9DJWm
+ vApR+pVQTliAGPdvYUEAdYUIqsKh8aa9K+jMzg2cAQImOX43FX4IneA3yGPg3z/8q1HoPVtrUWv
+ K/P0NRvrIFTzCNBDAQsFCSex/jIivKZLIQXBuo+c4gfeaLvKVphadDZkjC5AmKncRWsJMy0XYBj
+ YfNt+C5L3gx7nCFfR4dyZGbTdHu6LxM+wKq1ew8rxXGwfoyka1wqv+pDkdMEl+R2BBnWMRjW5WY
+ m1zB6PkERNQZyDvsel4tFe+VfBhAb1yXjPFw8rV2Hgq5mMPSq2g
+X-Received: by 2002:a05:6000:41de:b0:487:951:20 with SMTP id
+ ffacd0b85a97d-4870d26b463mr9186252f8f.46.1789653772183; 
+ Thu, 17 Sep 2026 07:02:52 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-2-51-220-108.alshamil.net.ae.
  [2.51.220.108]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4870bf344fcsm16893905f8f.26.2026.09.17.07.02.44
+ ffacd0b85a97d-4870bf344fcsm16893905f8f.26.2026.09.17.07.02.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Sep 2026 07:02:47 -0700 (PDT)
+ Thu, 17 Sep 2026 07:02:51 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Thu, 17 Sep 2026 18:02:23 +0400
-Subject: [PATCH 02/11] lib: Build xxhash in the SPL phase
+Date: Thu, 17 Sep 2026 18:02:24 +0400
+Subject: [PATCH 03/11] lib: Let SPL minify zstd on its own
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260917-spl-fit-compression-v1-2-7985ac56ee9e@flipper.net>
+Message-Id: <20260917-spl-fit-compression-v1-3-7985ac56ee9e@flipper.net>
 References: <20260917-spl-fit-compression-v1-0-7985ac56ee9e@flipper.net>
 In-Reply-To: <20260917-spl-fit-compression-v1-0-7985ac56ee9e@flipper.net>
 To: u-boot@lists.u-boot-project.org
@@ -179,12 +179,12 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Miquel Raynal <miquel.raynal@bootlin.com>, 
  Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2369; i=alchark@flipper.net;
- h=from:subject:message-id; bh=5dMzzH/l/ZYKqIT+rShp/WTriy1BxNWpdLXWm0K5P0A=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWSt/vTrY8HtBOvNsUmcM37yPvjx/HB6aUl0baWYqLrMQ
- UXf2ZcZOyayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
- QyMdYx0jBi5OAZjqpqMMf+Wtssv6A5InKS7b7Wm7Vc1YoMHmpGQQW9/SiWZNVgYLfjH8L/DwlA1
- 8k/06aFpGyLGtW3Xa3kmen/Joq4prbe7v55/UmAE=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1498; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=Cnxw+XZgkX+ZrQvLh7FixX0z3pDw5G5KjdCi4E3RAqg=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWSt/vTrW6/cTt6dx4RK36e9NWC44xqzTfcRe6YP1/HP+
+ fNOZ6qldUxkYRDjYrAUU2SZ+22J7VQjvlm7PDy+wsxhZQIZIi3SwAAELAx8uYl5pUY6Rnqm2oZ6
+ hkY6xjpGDFycAjDVdycxMnzZ+3P5+vbmWSr8QVONzqyI3La04+Oxhx+Lra476xee+/iZ4Z9Vd11
+ wwfGFZ93/at2Y/aPLztBhh6nlJM+250n9jWKJhXwA
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -200,78 +200,54 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-SPL_ZSTD selects XXHASH, but xxhash.o is built from inside the
-ifndef CONFIG_XPL_BUILD block, so it never reaches an SPL link. zstd's
-decompressor calls xxh64_* from code that survives --gc-sections, so
-today the option only builds because nothing in SPL calls
-zstd_decompress() and the whole library is discarded. The first caller
-would fail to link.
+ZSTD_LIB_MINIFY is offered only inside "if ZSTD", so a board which
+enables zstd for SPL alone gets the full-size library in the phase which
+can least afford it.
 
-Give xxhash its own phase symbol and build rule, the way the other
-compression libraries already have, and note in the SPL_ZSTD help how
-much heap the decompressor wants, since that is the other thing which
-may stop it from working.
+Add an SPL-scoped variant of this option and key the build flags off that.
 
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- lib/Kconfig  | 12 +++++++++++-
- lib/Makefile |  3 ++-
- 2 files changed, 13 insertions(+), 2 deletions(-)
+ lib/Kconfig       | 12 ++++++++++++
+ lib/zstd/Makefile |  2 +-
+ 2 files changed, 13 insertions(+), 1 deletion(-)
 
 diff --git a/lib/Kconfig b/lib/Kconfig
-index 6b6b90bc915c..6e6df5b3b191 100644
+index 6e6df5b3b191..87b5f3f4864d 100644
 --- a/lib/Kconfig
 +++ b/lib/Kconfig
-@@ -833,6 +833,9 @@ config CRC32C
- config XXHASH
- 	bool
+@@ -1025,6 +1025,18 @@ config SPL_ZSTD
+ 	  SPL_SYS_MALLOC_SIMPLE that memory is never returned, as free() does
+ 	  nothing there.
  
-+config SPL_XXHASH
-+	bool
++config SPL_ZSTD_LIB_MINIFY
++	bool "Minify Zstandard code in SPL"
++	depends on SPL_ZSTD
++	default y
++	help
++	  This disables various optional components and changes the
++	  compilation flags to prioritize space-saving.
 +
- endmenu
- 
- menu "Compression Support"
-@@ -1011,10 +1014,17 @@ config TPL_ZLIB
- config SPL_ZSTD
- 	bool "Enable Zstandard decompression support in SPL"
- 	depends on SPL
--	select XXHASH
-+	select SPL_XXHASH
- 	help
- 	  This enables Zstandard decompression library in the SPL.
- 
-+	  Decompression allocates a 94KB context, and nothing else: the
-+	  single-shot API it uses decompresses straight into the caller's
-+	  buffer and takes its window from there, so the compression level
-+	  does not change what the SPL heap has to hold. With
-+	  SPL_SYS_MALLOC_SIMPLE that memory is never returned, as free() does
-+	  nothing there.
++	  For detailed info, see zstd's lib/README.md
++
++	  https://github.com/facebook/zstd/blob/dev/lib/README.md
 +
  endmenu
  
  config ERRNO_STR
-diff --git a/lib/Makefile b/lib/Makefile
-index b7272c6f0cba..ca2b4f5530ef 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -45,7 +45,6 @@ endif
- obj-$(CONFIG_SMBIOS_PARSER) += smbios-parser.o
- obj-$(CONFIG_IMAGE_SPARSE) += image-sparse.o
- obj-y += ldiv.o
--obj-$(CONFIG_XXHASH) += xxhash.o
- obj-y += net_utils.o
- obj-$(CONFIG_PHYSMEM) += physmem.o
- obj-y += rc4.o
-@@ -87,6 +86,8 @@ obj-$(CONFIG_$(PHASE_)SM3) += sm3.o
- obj-$(CONFIG_CRYPT_PW) += crypt/
- obj-$(CONFIG_$(PHASE_)ASN1_DECODER_LEGACY) += asn1_decoder.o
+diff --git a/lib/zstd/Makefile b/lib/zstd/Makefile
+index c9a7dfe405b4..9d1b4d4a4f72 100644
+--- a/lib/zstd/Makefile
++++ b/lib/zstd/Makefile
+@@ -11,7 +11,7 @@
+ obj-y += zstd_decompress.o
+ obj-y += zstd_common.o
  
-+obj-$(CONFIG_$(PHASE_)XXHASH) += xxhash.o
-+
- obj-$(CONFIG_$(PHASE_)ZLIB) += zlib/
- obj-$(CONFIG_$(PHASE_)ZSTD) += zstd/
- obj-$(CONFIG_$(PHASE_)GZIP) += gunzip.o
+-ifeq ($(CONFIG_ZSTD_LIB_MINIFY),y)
++ifeq ($(CONFIG_$(PHASE_)ZSTD_LIB_MINIFY),y)
+ ccflags-y += -DHUF_FORCE_DECOMPRESS_X1
+ ccflags-y += -DZSTD_FORCE_DECOMPRESS_SEQUENCES_SHORT
+ ccflags-y += -DZSTD_NO_INLINE
 
 -- 
 2.55.0
