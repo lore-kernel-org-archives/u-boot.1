@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93154C88E72
-	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 17:19:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 142F1C88E72
+	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 17:19:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 469E760BB3;
-	Thu, 17 Sep 2026 17:19:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D6130810E4;
+	Thu, 17 Sep 2026 17:19:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KdE1_2Zu1jb0; Thu, 17 Sep 2026 17:19:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org CF61460B8B
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789665581;
-	b=CkL+Wa0q4PCTAWIzkFmfLtaeFTxr4CSFf9DstJTPtlT6SpUQEctETF4EGUKvwQrKWJhn
-	 zlzBmytX+STCIzxqpaRdbKXbB4jxsXZ6RbuWI5xAuwNKdShjCeBr/NnD5fZun6t2kcvua
-	 m45Xb7VR7mAI5A6B57PsK3oF5T30LsHuAtU5yOoNH0uXZFhVMsXWgZIlG8BCMaHR2a9VY
-	 w5p9dNntT9Pc/6w0/9CmHBL/bXB86iiLbpexAGz+bt6l5l3HdDKUg48xsjmPvnNT3Q7x/
-	 m393FqYT9VD6LXV3130Y6FspZp6CoUKWfgGe4M7NXMFB24iyIExSWX/3m62SC5iJ+iA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1s6MGv0-xbaf; Thu, 17 Sep 2026 17:19:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0C781810EA
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789665584;
+	b=FVJkJmehyNP7w8S+5qTU0HhnSTyXqQeUZeG1T3dLjGv3tZJZtAOpiGGa5smaMPmAfEzJ
+	 hRsSepjw2X5wTXqdLB56mF3wgxHFi0RaU7tdLHlqj/re8uZMcq/yZZ9Sf88BZVFgi5Kpd
+	 vk2H1KefFSXYNZ1/phyEjwgwKeezy3tPBpE6dMIEIO06CqsVIMccq2cfYtUrWw3ai6kIP
+	 zjd5oyEBj08FXDGvKGdba2p/n+01eS0pL1EmIFR5sjFRpeag0a3UI0iRWEhWqLrCMfXC7
+	 uPnMrxj4IZlfODQ88Gf3/btcx4oh198/JXANZY1nXBbEAK+xhDqnxlbpAYG7JRMm3zw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789665581;
+	c=relaxed/relaxed; t=1789665584;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,66 +31,64 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=A4DvBHQk/G+2AcnTPc3j5zki41puqHY4ElZAZWBVXt4=;
-	b=NhYBR4NuhU1JzlfrxvW+Ya2bFVPMFryUuOG0LHdrUruC5NEsXnPt4K3lmu1LnH1Szeyd
-	 d4iHUT4LS7XjZXNYludro6S2AymPiwd32uIQPNNJY084+QvbFz1fu6a6wd3n/CJqTH52z
-	 UmrmGGGxT14/vxOEQc+eRapjwODCN2L7zNFKOYPfJgowgN+tSbmySegU7gYCpCFbM4LcD
-	 gt8v6tYdWd7oOBZLucPc9HygcJVzxoWH18ORZY6FVSJqSgiAMIfoYs+wgAj80si3pZqiV
-	 y5BnTDTnd10T+PXx34moznrCB/VzDQS0QyXdk3suBolcCOMFQ8mutLhLaoLzRR4FBPw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=arm.com;
-	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=qLHoi9xy;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=OhN9U8NKSYzg3xgQKTSqY4zN2BHI9PvvkBovZr5UUMg=;
+	b=L9Mu8Ye5GdMy3PlQ+YYJJgZ4gQW+y6nk4DlSyX2A81dokmtMktWv4iB+HVH4mB3P/7I8
+	 fP3mAgHsn8e256r+k0Um3IBi/RK4sDhBk/9l13zVeV7A/UiiFYQY57vL4EhMa41w1W6ta
+	 KQqvMO/Vt9YwIz5xt2PuGAywThoYFv8iP630voEjsIxLry5vcJ9TtdkoUFeWucOmW+vFx
+	 JxXpnDPuQXVFnhkWhdAPLzJZesDnqMOgWAIwB6JT746jKDStkZAtqmXUKe5W/Fnd4m4Eh
+	 FhB5CJP/Que7I0myzmRl5drTdC0dAZ2I7+M28pdLIjp5ihpNSK+NPGwauiMZQMTasqA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789665581;
-	bh=A4DvBHQk/G+2AcnTPc3j5zki41puqHY4ElZAZWBVXt4=;
+	d=lists.u-boot-project.org; s=default; t=1789665584;
+	bh=OhN9U8NKSYzg3xgQKTSqY4zN2BHI9PvvkBovZr5UUMg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=EQMLCp7GThpoHevQj9eu98C/0bmDsE7JWz4GuuKovU1ZGg/x8twGcJ7TI9qyQp6ya
-	 m5CIj2OKzwQxomiMvlYs+ROcp1+O0CmZ1wSqHNp6ILB6BPESBRAevTXqMXzrRCbYLX
-	 5dRaNFAIX8/WJ9GuRHb9qlAnwgkikFxQMqXJj5RuFazF2Hcz58PzsiKnGQlmLwNdf/
-	 dNXa/XD5yO5qvZjveAq3YWuf9+7EG0xRKVg0qGidXd47mqNiW8bu3q+K8qwek4Xn2e
-	 z8A4g4AMb58WqmHSF6AxyvWjZ1tzYge52z6SHcH/LpmIWk1+z28HaMjCKa4iJ0T/XQ
-	 x6pOKvi+avdUg==
+	b=sy+rYsVWtUQ5UjU1O76mVneoCvsuN5/TNhQNBp646l4dAXuHttCkhvtp/QYWGzVVJ
+	 t+PcKGL3ErKwnMBBEcGQeC/cMR+mG/4oYZp5/L90ybQ5dpAO8E+XM7KtHKTvcWCG1h
+	 j8jWisjBGJ2b62Ouuv+rNMiNdQQx+dAr0jUrIvAoxULROA3GWR1tdDd0r3qUM6nOzx
+	 mcN2KUJ199+uEEup3TFVjweajZMH3RXlPZl/8VMO8Z8wxQh59U4ucOQBWw3kLeuWNC
+	 RlXN4n8gL5OIiTO/syp8TRlcm6KkLHXfZ6WPPv+q3Vvoc/jqK/M+wgs9Y/5x4iUGeX
+	 WE6dnqq/NDwPg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CF61460B8B;
-	Thu, 17 Sep 2026 17:19:40 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 70B31422
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:18:49 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0C781810EA;
+	Thu, 17 Sep 2026 17:19:44 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0AA0713D
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:18:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 56C8F60B2D
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:18:49 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id F038D6084D
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:18:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id L63cXRocn1Qv for <u-boot@lists.u-boot-project.org>;
- Thu, 17 Sep 2026 17:18:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 40D8960B58
+ id KIFkDe1uC-Bz for <u-boot@lists.u-boot-project.org>;
+ Thu, 17 Sep 2026 17:18:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 68A1260B58
 Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789665528;
- b=KY6W4vF1DRdbzdekdp7rSWDV8Fz7K2xAD9kwkHPpgKDPtwXMMX4O6ka94jrVsSigqAe8
- KysyMw0IMdgRt61ImZK4JEXlJX+VYYZ8DcrkakR3mNfS/0dWTEbZ9JDLcV6L6XV5E/viO
- /Y7yR82E3K4ar21fEcMfNsyfadMfhGcovNXu965xsYqjn3bT8E5f3iymQqfWQK4L6SG/1
- THu+c3pGkFYr75OJ84xZZnW3jPWc9d/3R/vTyQbgrtKSYk4em8uTxfogEf2C9hXGxBkWK
- NqdoyeqFuJQyBo1qSyDZe5RysFCIRjXMbKdUYt8JpIPr0VNfeHxKdF/voa9oxhr19Xg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789665529;
+ b=qQC8UoUevuVHlx34WbK4enuksqRJntsko3aSxFOrlMml+Z5nJ8uFh4xcLRSiO/QlVjx2
+ e3J9tIUOpsf71VBuK7vetAMBV7igeNBLk+gfuX31ftc/UZ2lc75ZfimzOm0SsysYXsdtc
+ 5l2FCFAwJxuRMvxF0bgXODZBd8w0C5pEU6FIVRLPqwuMoe1Ks5u1XnNemgn+K8SHeIGy4
+ LTU9FKHWzLII4y4pb7BllH8Vyjar46JcqgrhS1sN9JT1qkce2JaNaUaW428PfDBO7zZV0
+ RkyXHt/40WL+ZbyCTbgtfwXSblRNgEucto7oNf0mLtX8wxx9jCJSboif5VQ+0uPQmQg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789665528;
+ c=relaxed/relaxed; t=1789665529;
  h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=A4DvBHQk/G+2AcnTPc3j5zki41puqHY4ElZAZWBVXt4=;
- b=dHZNGII+HFB5lU8QFD4iq2X3lODFwq+vGsHen+uxqO3LYaT6iKTqdYEUlSfnwxp88Q6f
- cy9jWhHhlhYjDgn9vQRUFxrKXxZ/Je59JLfvj11yrTrBacDMyzZEJeoVC8S5pOMrcgcr3
- 3xTOcgTc8acz/53zjp6kK24SZV3OsddAM/bN5Q8Za+bKwHd+Z+Q0IOm2VimCp46OWDmG1
- cLnaGjowq0/Wec3FfgE8hh5KvUrsofV0c5ys+bzb8Y1gJfCf0yqe6PDXOte/yQsueIQ8y
- qxAGovKzrp1ilaRUa9WAeF/at7RhHyJlU9/kWzt78lUTd1Bw2jCGya6jQWMExXq6fKw==
+ bh=OhN9U8NKSYzg3xgQKTSqY4zN2BHI9PvvkBovZr5UUMg=;
+ b=I29VafmPDYXSskvfwzhfAf3I1pei60Q9tPSIyUR5sIjpu/DtAwq8c4pbl9bovEbP2Qaa
+ d7NT6VEmZFQIFjarLHEdKPh7bnJ808TQ38jbt8gstvjLuziMvQ+Wwgj/9KQisxe2y4/AN
+ nUFDzc737sogLoqQOh2GsayfXfQO4oht4lOTNCkPN9vFGoQCuRDtw52sLfUXMMyq9fAxA
+ MTD8v/LJRIJGj2pv05r7Gto3Es1CyY9eMDAVY8ttTFl4cStmCizfdVghoijq9Pe1pCrEK
+ WnleVJOoXL5Ohih7aV8f0qcaO6jMkQ4ueGMQydlnF4qZ/Z/66TKUmSp7xJrpVDhEJKg==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=arm.com; 
  dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=qLHoi9xy; 
+ header.b=V5gV2AHj; 
  arc=none smtp.remote-ip=217.140.110.172
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
  helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
@@ -99,32 +97,30 @@ Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=qLHoi9xy
+ header.a=rsa-sha256 header.s=foss header.b=V5gV2AHj
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp3.osuosl.org (Postfix) with ESMTP id 40D8960B58
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:18:48 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 68A1260B58
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:18:49 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 09538143D;
- Thu, 17 Sep 2026 10:18:44 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3DF8F1596;
+ Thu, 17 Sep 2026 10:18:45 -0700 (PDT)
 Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 744853F7B4;
- Thu, 17 Sep 2026 10:18:46 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E57603F7B4;
+ Thu, 17 Sep 2026 10:18:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1789665527; bh=PQwX+U+60JKpuEPThmtWpDpIl7Sxike+K9FeHzm31KA=;
+ t=1789665528; bh=BMSY/BXCXueCeGTrj0h80yPdDHoSqv+fJ4bFeHfh3es=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=qLHoi9xyCBt1oY35YQfI0vNgCl3kzJGbUm/U7MkjJhG3QqKDZ915ORvNI6eRnucXO
- JDHgbubW79z8e2zsLFuZPwKpvUkipSLl4wmbtsyFa1mRHOusM/15LyN9wWN3Q24V/N
- OjAOUdXHcvVyMjOkXlzyul81RH0W/KEO/fhvq5QA=
+ b=V5gV2AHjdQI1NYqt9yefdTKaRP9gqLZACgNretnNq363QMPwzbRDcsodVq5SfrEy2
+ OZ/qEIUhg9uZ7umhjDWNX16nvmOaTaoNBOYnse7KrzvHHMILd5hl0npPUBwze9KqH6
+ eP86xW7aIKpxwQ9kcwQNVVZcLzibftfMUZNatzKg=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>
-Subject: [PATCH v6 07/24] arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
-Date: Thu, 17 Sep 2026 18:17:53 +0100
-Message-ID: <20260917171810.4122899-8-harsimransingh.tungal@arm.com>
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: [PATCH v6 08/24] arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
+Date: Thu, 17 Sep 2026 18:17:54 +0100
+Message-ID: <20260917171810.4122899-9-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
 References: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
@@ -146,91 +142,68 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Add FFA_MEM_RECLAIM support to the FF-A emulator
+Add FFA_MEM_RECLAIM positive and negative test cases
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jens Wiklander <jens.wiklander@linaro.org>
-Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
- drivers/firmware/arm-ffa/ffa-emul-uclass.c | 42 ++++++++++++++++++++++
- drivers/firmware/arm-ffa/sandbox_ffa.c     |  1 +
- 2 files changed, 43 insertions(+)
+ test/dm/ffa.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-index fca34ad7a2a..49e66963172 100644
---- a/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-+++ b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-@@ -600,6 +600,45 @@ static int sandbox_ffa_memory_share(struct udevice *emul, ffa_value_t *pargs,
+diff --git a/test/dm/ffa.c b/test/dm/ffa.c
+index e80f9024b8b..fc84667bc96 100644
+--- a/test/dm/ffa.c
++++ b/test/dm/ffa.c
+@@ -179,6 +179,27 @@ static int  test_ffa_memory_share(bool test_ack, struct unit_test_state *uts)
  	return 0;
  }
  
-+/**
-+ * sandbox_ffa_memory_reclaim() - Emulated FFA_MEM_RECLAIM handler
-+ * @emul: The sandbox FF-A emulator device
-+ * @pargs: The SMC call input arguments a0-a7
-+ * @res:  The SMC return data
-+ *
-+ * Emulate FFA_MEM_RECLAIM FF-A function.
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, failure
-+ */
-+static int sandbox_ffa_memory_reclaim(struct udevice *emul, ffa_value_t *pargs,
-+				      ffa_value_t *res)
++static int  test_ffa_memory_reclaim(bool test_ack, struct unit_test_state *uts)
 +{
 +	int ret;
++	u64 g_handle;
++	struct udevice *dev;
 +
-+	res->a1 = 0;
++	ut_assertok(uclass_first_device_err(UCLASS_FFA, &dev));
 +
-+	if (pargs->a1 != SANDBOX_MEM_HANDLE ||
-+	    pargs->a2 != SANDBOX_MEM_HANDLE) {
-+		/* FFA_ERROR encoding */
-+		res->a0 = FFA_SMC_32(FFA_ERROR);
-+		res->a2 = -INVALID_PARAMETERS;
-+		ret = ffa_to_std_errmap[INVALID_PARAMETERS];
-+		/* x3-x7 MBZ */
-+		memset(&res->a3, 0, 5 * FFA_X_REG_SIZE_IN_BYTE);
-+
-+		return ret;
++	if (test_ack) {
++		g_handle = PACK_HANDLE(SANDBOX_MEM_HANDLE, SANDBOX_MEM_HANDLE);
++		ut_assertok(ffa_memory_reclaim(dev, g_handle, 0));
++	} else {
++		/* Provide a wrong handle */
++		g_handle = PACK_HANDLE(SANDBOX_MEM_HANDLE, 0);
++		ret = ffa_memory_reclaim(dev, g_handle, 0);
++		ut_asserteq(-EINVAL, ret);
 +	}
-+
-+	/* FFA_SUCCESS encoding */
-+	res->a0 = FFA_SMC_32(FFA_SUCCESS);
-+	/* x2-x7 MBZ */
-+	memset(&res->a2, 0, 6 * FFA_X_REG_SIZE_IN_BYTE);
 +
 +	return 0;
 +}
 +
- /**
-  * sandbox_query_ffa_emul_state() - Inspect the FF-A ABIs
-  * @queried_func_id:	The FF-A function to be queried
-@@ -693,6 +732,9 @@ void sandbox_arm_ffa_smccc_smc(ffa_value_t *args, ffa_value_t *res)
- 	case FFA_SMC_32(FFA_MEM_SHARE):
- 		ret = sandbox_ffa_memory_share(emul, args, res);
- 		break;
-+	case FFA_SMC_32(FFA_MEM_RECLAIM):
-+		ret = sandbox_ffa_memory_reclaim(emul, args, res);
-+		break;
- 	default:
- 		log_err("Undefined FF-A interface (%lx)\n",
- 			args->a0);
-diff --git a/drivers/firmware/arm-ffa/sandbox_ffa.c b/drivers/firmware/arm-ffa/sandbox_ffa.c
-index 34d332979dd..74087438395 100644
---- a/drivers/firmware/arm-ffa/sandbox_ffa.c
-+++ b/drivers/firmware/arm-ffa/sandbox_ffa.c
-@@ -89,6 +89,7 @@ static const struct ffa_bus_ops sandbox_ffa_ops = {
- 	.sync_send_receive = ffa_msg_send_direct_req_hdlr,
- 	.rxtx_unmap = ffa_unmap_rxtx_buffers_hdlr,
- 	.memory_share = ffa_memory_share_hdlr,
-+	.memory_reclaim = ffa_memory_reclaim_hdlr,
- };
+ static int dm_test_ffa_ack(struct unit_test_state *uts)
+ {
+ 	struct ffa_priv *uc_priv;
+@@ -236,6 +257,9 @@ static int dm_test_ffa_ack(struct unit_test_state *uts)
+ 	/* Test FFA_MEM_SHARE */
+ 	test_ffa_memory_share(true, uts);
  
- static const struct udevice_id sandbox_ffa_id[] = {
++	/* Test FFA_MEM_RECLAIM */
++	test_ffa_memory_reclaim(true, uts);
++
+ 	return 0;
+ }
+ DM_TEST(dm_test_ffa_ack, UTF_SCAN_FDT | UTF_CONSOLE);
+@@ -297,6 +321,9 @@ static int dm_test_ffa_nack(struct unit_test_state *uts)
+ 	/* Test FFA_MEM_SHARE */
+ 	test_ffa_memory_share(false, uts);
+ 
++	/* Test FFA_MEM_RECLAIM */
++	test_ffa_memory_reclaim(false, uts);
++
+ 	return 0;
+ }
+ DM_TEST(dm_test_ffa_nack, UTF_SCAN_FDT | UTF_CONSOLE);
 -- 
 2.43.0
 
