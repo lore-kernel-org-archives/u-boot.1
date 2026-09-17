@@ -4,135 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9D10C88E72
-	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 17:20:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEB04C88E72
+	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 18:30:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8FE6260BD6;
-	Thu, 17 Sep 2026 17:20:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 62D6B60B8E;
+	Thu, 17 Sep 2026 18:30:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id U35c20CRWvhG; Thu, 17 Sep 2026 17:20:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org EDA8760BFF
+ id FYSnH2jW3dnF; Thu, 17 Sep 2026 18:30:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 57C6360B7D
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789665628;
-	b=THit56gd/VeBclxXBFzCoJwpETe/SLDNyeuMdqO5qUSBjdafEAqpDT11zSk8qrIk+mCd
-	 5NWXNIcyUP0/eYrwUvPH8kFkF9boJac+QKupFORRcxn/xtt2G90trX7JpaLtj9NWVf25I
-	 8vq6fJK2KWBkImFwkR7S96B9mSQNYBXE4sWWf2M0O4Pu+jxmBw5EKX59nt+OuZlcbC5M7
-	 +g5H4qjsqF9v0RTNRAQOIs1a7uiL+msmwKMORQTKB6XckNckiEvkmlbVYybDcuyfASdBF
-	 zasCPG9TSgUVYYu6fGhzU3zydnyGhUDPzPxIJxk9fIPP3epEmdLHL7Bdihj4m5akuUw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789669843;
+	b=nazXFwAC574JPrwJdzs4fy+Iunw6SG8m+euZ7ngQvRq+fUc4AYMl3jXZDw1+XwC41kAj
+	 OY0EZ4RQ+mWu65Lrl0l9E+p75APXQAN7Lw1oa5G7eR+9M/NB7ymLLYwsv3FfYS8adHpC7
+	 ysjFRKIB5NymPlWthrKFibMcudPhnVb2480JmIlQZBC/vEQORsYvQkLCFq5FC0KvVnmjf
+	 Ox4i1AQflqS6sRhAbKYAW/HhqjaVuu4LkRhL91ekemfc3IUseoxLh9UQqeasqy6q3BKD/
+	 FCWfMgSMfZ7kYTNpZ2dVzyUhpxjMZsi5BvgpBOi3CYo++kH2/TQuaJRXWhFBVSWBnKw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789665628;
+	c=relaxed/relaxed; t=1789669843;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=yU1FdNJre+pz8x5hKJ2Bk6ZWU1HEyFP8pQww7sOPW3E=;
-	b=AaO5oCevidJPOuNNuHj3hN8ARlbhxu8gXCpfP5NTXiJpULauR3LC3Zyb/EkhvzHh9QDt
-	 Og2tetF/nqivVotKwH/IbKI50U7iQg85yR5V8qj4DagOfUZ0AnpA1YO+pdMpiBFT4X+iL
-	 l2vC0iTB61RPS4xHKmsxR0NJ8OSjhrbBUENMriztSNyqbGyBvq0wHKv+jobY0pz1N8tX8
-	 0RqPO0fgZ/2fzPlqImwdC/noWstQ4gIUb3Wo49XOglGg9ak1dTEq46iJjcD+Xlh3XPUPn
-	 DAlwdd1VAQ7GVQem4nLrjBy1DU9DdDef5/vVo6JsxrP9knHzEk/SLowts+1fPSN4faA==
+	 DKIM-Signature:From:DKIM-Signature:To:Cc:Subject:Date:Message-ID:
+	 MIME-Version:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:
+	 X-Rspamd-Queue-Id:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=Z9g3pN0QP9xW5qNW+kj325pTApAf2aQc5AUlp4LbSKw=;
+	b=NROk1+6O7fZFaSBczC7xh1qbGS6ofvrXc73q+PtEF+UVdBnSvlL5RAAiOZfneqekVFYq
+	 tkSi1UOn5ESFBFQhnxbQuQ05DCtnNzlf+eSM17HwCfhLGEsDcLmTQPTZfSVs5fMb07sVn
+	 SG9XsNZDl7RjtnxW2Awqe8DKyp80hNgqOffivkFa8sO41tcVBlQJXQJy/TPAyTnzYEEVU
+	 9p1620D7zrw9OPoypOcb55umiu0uLCzIAZwsokOfBcscKj54Fpg8tn7Lsozzem/YZ014I
+	 2sIRC573u3dmLa2PYL7bppNpPteKAUqL1JEugotNU9VvkojES5EWs+qfz9+l3rY1O2Q==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789665628;
-	bh=yU1FdNJre+pz8x5hKJ2Bk6ZWU1HEyFP8pQww7sOPW3E=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=mC5pjL9dgEY7sKtH9z8oNPnu8PnCXwmxB2RiR4ENSmhVVp/u6XD9r/XQID0vqMLYv
-	 7JyiyciYOU+6IAD2J1QfcSieUNwX5S/Z+Us+QTVHodeF3Wy+/lX25ZRyoJICig/Gm1
-	 cz+8WRSGVDb5s0cYUHWVUt8rJ11SUubui4UrYFWbU8R4DKpOP26QNR+ItfXtbF7ueg
-	 EBdImNYsamqErrMyZdoqfNsaR8Ul2/zMuyM7JZNpDludi8dhk3MpoWCoULgdVKixo4
-	 biddIU3OfbxSlwsdHpX6pzRr11SWGur2UKkNkG7P1k/eT5BHg/zcLM35riT+lGnRJd
-	 8V7i+HZ/pbaTA==
+	d=lists.u-boot-project.org; s=default; t=1789669843;
+	bh=Z9g3pN0QP9xW5qNW+kj325pTApAf2aQc5AUlp4LbSKw=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=IqKEIGInCZ5xCu8v4pWqLGVGotwOivUt82FL5/NmI79CKP9cuV8OFNP8ZAKUezvIH
+	 fNQkJIuePLYzi8UxFGyuj0vcvYii6SvugTVGWPrxKg2OZtRLb/rnotmZPt82AgLFg5
+	 eyhVR57DLT9qFT4Rakm4ue3qhY1F+xyPuBIHOBL5l6xHbDcObkNX84wv3tqu2DBwJs
+	 qfMwNN1Uix9z89/Yk+JbQrbGRG5iDn1F+mDw8iUgnSK/1PpqeSs1tu/wXCYNXGq2BG
+	 iU/GcERPptiaCNHN34lOVjjsBQjfCekFH9xs4jQ8m5z/Mm+D+DYB5JzvxU66zoTxKt
+	 1nbBqVHCCe9og==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EDA8760BFF;
-	Thu, 17 Sep 2026 17:20:27 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 5FAD4362
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:19:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 57C6360B7D;
+	Thu, 17 Sep 2026 18:30:43 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id A6D1213D
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 18:30:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4342D8109C
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:19:21 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8C5F0810F1
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 18:30:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id i77bqeFLDCEU for <u-boot@lists.u-boot-project.org>;
- Thu, 17 Sep 2026 17:19:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org DC976810D4
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=217.140.110.172
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789665559;
- b=OcHUkZJoK/J76TM/dXngKNueeDQuehxYB1AqE56DGCd8VpoyTER3wSfjx2G17jfcHtu5
- ygZGEpTTwq1GpNStN72CV2H+JB+4yHwErld8S3e6c/OeJhhmpyfaF8dUDjf/3pXRsKgS3
- VzH0g+bzU/X3JBHOZyZAjM23RyPqBMPebHGafyqio0ytShusWnzG3l8dE5bds6l+/zz1j
- T424n06Zg+L35EN/I1482pj1hRKbl5t6RbsNq8Nib7+ndkYy9jWW2bAOsg52I3cPqJN5t
- IjG9gTWtqOLJ6hCfFTMiPfeDqx/Uuu01QYXkUVDVC6f8pd31kAB6kzBG3jzLfdbS+jg==
+ id jvviUJYE6gxI for <u-boot@lists.u-boot-project.org>;
+ Thu, 17 Sep 2026 18:30:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org A578481090
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=80.241.56.151
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789669840;
+ b=IyvIFajE3i0f06T391Cocsu9jA6M8YR+FbSXq42hccnnshNd4s7fiQ71Wcc+9c89V5wR
+ dAXam4PH3bDkZHfdeGKALtZuRLgU3evLdNkQaqLA7Kam0Ua4skJtJDSF0SaKw0YzH/GVg
+ ICnPEJ/GzDNEvz93HiCkcSV0pEsVvc6EofyPfBMBW2UAMC87nmVg7ImWbRndEZo8z7TH4
+ alHOHpJQe6gWtRMJnpDtsoSKqHm1S6J5Y7HouTxYBiKovrC6Pw1WAlb0W9xg2mHKokH0v
+ qBkrCLR9CQWCuHcmFvapwKJBrypHVkB9/l7lknxAeWCagqyvUrcsuKPr6+oMbELwtHw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789665559;
- h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding;
- bh=yU1FdNJre+pz8x5hKJ2Bk6ZWU1HEyFP8pQww7sOPW3E=;
- b=L49ffnd8dJr1y9UOZ6mwaKTLhtsJdjgM2G7/fkQ7beTMeMhMvqgRyL/4n520ILhoys4B
- KgLp2hgGGJwennR2y8otLuWnZmT2PnA96VzrqZ7doOgj0XBQAggKY/tGspGPkE/yxa8od
- 55HLi2otckdIYAqGxseoiTWzLPOtzcZpirmi1oNAQQHfDSqXbz4fITE++t0JInkvny/WQ
- Ztzzi6yv4nBYWkogNjVPqLBPLdMlzC9xe3YEHH+jt+86jRmvpjzcojxrXOr6jvWRwettf
- ajDCxP4w8ueUvV7Gz6Z4l6VD1qTsvYGfnwW99t9S6voVBm6YK9L34kYD0j8nhKXdsgw==
+ c=relaxed/relaxed; t=1789669840;
+ h=Received-SPF:Received:DKIM-Signature:From:DKIM-Signature:To:Cc:
+ Subject:Date:Message-ID:MIME-Version:Content-Transfer-Encoding:
+ X-MBO-RS-ID:X-MBO-RS-META:X-Rspamd-Queue-Id;
+ bh=Z9g3pN0QP9xW5qNW+kj325pTApAf2aQc5AUlp4LbSKw=;
+ b=QKxtLrzHuZqD1tLI66H/KyDfSLWJlfq1esRSjlH78gGGMHbmfpWF07Gd5Rciim18AugH
+ gNOJs3NXl0JSzigya/Jd+89oEWdHDKmDYneU+XL5F0UsFsUH2Acl2JF4+dp8qA3H3qo3r
+ 0gh5R9cayCX0/L7wqY5CRo5HXFgEIYwncyDT08XH8CKUn+yIr4WSeF6Lf3L0MIphxBhT/
+ gfG9JbvZ7E9e+wOCGYU6goHbJhlDkicIxzEhd/dEQrFA/MZu2EtrIJtkoEk63XSFC2lMz
+ giPYe//vkwe+uhh4IlcmlnyoiP0P50+yaX02YAT0U46i39k/GwR/kR3Ar9ngtHxAq1Q==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=arm.com; 
- dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=vQPbbnRn; 
- arc=none smtp.remote-ip=217.140.110.172
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
- helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
+ dmarc=pass header.from=mailbox.org; 
+ dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=IhHivegr; 
+ dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=knjLJbjp; 
+ arc=none smtp.remote-ip=80.241.56.151
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.151;
+ helo=mout-p-101.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=vQPbbnRn
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp1.osuosl.org (Postfix) with ESMTP id DC976810D4
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:19:18 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 753A0143D;
- Thu, 17 Sep 2026 10:19:14 -0700 (PDT)
-Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4207E3F7B4;
- Thu, 17 Sep 2026 10:19:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1789665558; bh=wMHqOxXj7BStoWmSvE04XGWF0A3dG4Qjn6eTJsp6Dgw=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=vQPbbnRnPzGqmzOp2g+GE1HriXOp4XkfiPgfvbq9vboUyEt9eHD9Y829K2/69cSId
- FWvYuVEhwIZMb1ONJja0f5r1aTtoCzUtcl6c6ImdZUpPuW/sM09nDhWWtQ+a7PocEt
- q4TqSSnW6RGGt4ul/ZnXhMz41v2BmZstB+8ClJMg=
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Davidson kumaresan <davidson.kumaresan@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v6 24/24] fwu_arm_psa: Document FWU support for Arm PSA
-Date: Thu, 17 Sep 2026 18:18:10 +0100
-Message-ID: <20260917171810.4122899-25-harsimransingh.tungal@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
-References: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
+ dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
+ header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
+ header.b=IhHivegr; 
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=knjLJbjp
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id A578481090
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 18:30:38 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4hm47b5YsZz8vQG;
+ Thu, 17 Sep 2026 20:30:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1789669835;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Z9g3pN0QP9xW5qNW+kj325pTApAf2aQc5AUlp4LbSKw=;
+ b=IhHivegrI+hb+RKMS5DCsfHBAjZstxchPZ4GirNIhiae5mO0DNIM+odJ0lqHilVXjHHtrY
+ 30twMp/uHJmSEmq/AzOjJp7RLOMa0eiZkQC4QLCPsv2bZm1B3BOYqd5/C832HasusSlVTh
+ XhI1jqsWMK3ao7Z68Coznft0Ap93OqgcL6MCq/KVFX+1UYr2IbWCv7IGJ5lJRmYfhbcd03
+ e/FGMiuoL81BsG8I4iaUMt2v1p4lucIk/gHEY2nwmmERefp3BfXlg3vxgfwNF3iG7JQpWA
+ BK4/GiopnHjpiPMn+Z2mEzq6sYn0SAsLZdll9BT5kb0wC9nexs0Tp2Sz875VMQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=knjLJbjp;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1789669833;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Z9g3pN0QP9xW5qNW+kj325pTApAf2aQc5AUlp4LbSKw=;
+ b=knjLJbjp3x3xjDhiCThUMOtG3gERQ18kBqYUIKme3XZ4fmLCkrYoaQyr+ppJj3YUoSRAuz
+ Iu7wK4Vbxg+XopPmnpqDB+q0M20Hyb737tqi7RcuopFkjhb3UcsFcvL/CtM8Ht5tWmsFcq
+ NTvlhZDtMQHimkcJvqhstvpnq/zz9fHLXM/fiMycIQR8e4cOawr7LtC8mFF+4Snl35Fy3k
+ oOKcAhyyokEjg3O52iRMzj9V9N3mE8UnNaEjjuP08051BfIRy0Y61kX9d/jmGlfayX9nmL
+ C0IQWrKN82umyqV1Uul+9NzGRUOzYqxUvYe4lahB4Tf3chvh9TNnf194EwLWiw==
+To: u-boot@lists.u-boot-project.org,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>
+Subject: [PULL] u-boot-sh/main
+Date: Thu, 17 Sep 2026 20:28:44 +0200
+Message-ID: <20260917183012.552719-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 17 Sep 2026 17:19:43 +0000
+X-MBO-RS-ID: 5badd71444d7b973d0b
+X-MBO-RS-META: kc4gha9wxxz7rd1y45jp563jfj7izt5e
+X-Rspamd-Queue-Id: 4hm47b5YsZz8vQG
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,212 +164,34 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Versaclock5 driver fix, trivial R-Car Gen5 clean ups and FFA command enablement.
 
-Add documentation
+The following changes since commit 444aca6d1439e4c4b9955171a7f45c053b540f69:
 
-Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Signed-off-by: Davidson kumaresan <davidson.kumaresan@arm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Adriano Cordova <adrianox@gmail.com>
----
- MAINTAINERS                      |   1 +
- doc/develop/uefi/fwu_arm_psa.rst | 154 +++++++++++++++++++++++++++++++
- doc/develop/uefi/index.rst       |   1 +
- 3 files changed, 156 insertions(+)
- create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
+  Merge tag 'u-boot-dfu-20260914' of https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu (2026-09-16 08:56:49 -0600)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index bde8158fa73..a896ffd2834 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1197,6 +1197,7 @@ M:	Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
- M:	Davidson kumaresan <davidson.kumaresan@arm.com>
- M:	Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
- S:	Maintained
-+F:	doc/develop/uefi/fwu_arm_psa.rst
- F:	include/fwu_arm_psa.h
- F:	lib/fwu_updates/fwu_arm_psa.c
- 
-diff --git a/doc/develop/uefi/fwu_arm_psa.rst b/doc/develop/uefi/fwu_arm_psa.rst
-new file mode 100644
-index 00000000000..a7bef53c7c7
---- /dev/null
-+++ b/doc/develop/uefi/fwu_arm_psa.rst
-@@ -0,0 +1,154 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. Copyright 2025-2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+
-+Firmware Update (FWU) Support for Arm PSA
-+==========================================
-+
-+U-Boot implements Firmware Update (FWU) support for Arm `PSA Certified`_
-+platforms.
-+
-+The feature aligns with the Platform Security Firmware Update
-+specification for the A-profile Arm Architecture
-+(see `DEN0118 v1.0 A specification`_) and leverages the Trusted Services (TS)
-+framework to interact with Secure world update agent.
-+
-+Overview
-+--------
-+
-+The FWU subsystem enables secure  firmware updates by
-+delegating the update management to a Secure world agent. U-Boot acts as the
-+FWU client, coordinating updates via a well-defined set of ABIs over the FF-A
-+interface (see :doc:`Arm FF-A Support <../../arch/arm64.ffa>`).
-+
-+FWU for Arm PSA supports both on-disk and standard capsule updates.
-+
-+Key Features
-+------------
-+
-+1. PSA Firmware Update Initialization
-+-------------------------------------
-+
-+- Initialization of the update agent using the FF-A transport and discovery of
-+  the Trusted Services FWU SP.
-+
-+- Discovery of the version of the ABIs using FWU_DISCOVER ABI.
-+
-+- Establishment and sharing of communication buffers between U-Boot
-+  (Normal world) and Secure world.
-+
-+2. ESRT Support
-+---------------
-+
-+Retrieval of ESRT (EFI System Resource Table) data from Secure world using
-+FWU_READ_STREAM ABI, enabling compliance with UEFI standards
-+(see `UEFI v2.10 specification`_).
-+
-+3. UEFI Capsule Handling
-+------------------------
-+
-+- Runtime checks for capsule flags as per UEFI 2.10 specification:
-+
-+    - CAPSULE_FLAGS_PERSIST_ACROSS_RESET
-+
-+    - CAPSULE_FLAGS_POPULATE_SYSTEM_TABLE
-+
-+    - CAPSULE_FLAGS_INITIATE_RESET
-+
-+- Support for keeping the FMP payload header in Arm PSA mode to preserve
-+  critical metadata required by Secure world.
-+
-+4. Staging and Update Flow
-+--------------------------
-+
-+- Full support for update staging flow as per PSA spec:
-+
-+    - FWU_BEGIN_STAGING
-+
-+    - FWU_END_STAGING
-+
-+    - FWU_CANCEL_STAGING
-+
-+    - FWU_WRITE_STREAM
-+
-+- Capsules can contain multiple payloads (including start/end markers
-+  and the update content).
-+
-+5. Directory Access
-+-------------------
-+
-+- Reading the FWU directory from Secure world using FWU_READ_STREAM ABI.
-+
-+6. Image Update Lifecycle
-+-------------------------
-+
-+- Implementation of get_image_info() and set_image() using raw EFI firmware
-+  services provided by the FMP driver for raw images.
-+
-+- FWU_ACCEPT_IMAGE ABI issued on ExitBootServices() to commit successfully
-+  booted trial images.
-+
-+- Option to disable automatic acceptance on ExitBootServices() via
-+  CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES.
-+
-+Configuration Options
-+---------------------
-+
-+To enable FWU support for Arm PSA, enable the following options in your board
-+configuration:
-+
-+CONFIG_FWU_ARM_PSA
-+     enables the PSA-compliant firmware update client in U-Boot.
-+
-+CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES
-+     enables auto-acceptance on ExitBootServices(). Disable this setting
-+     if auto-acceptance shall be handled at a later boot stage.
-+
-+Platform Integration: Corstone-1000
-+-----------------------------------
-+
-+`Corstone-1000`_ is the reference implementation for the FWU Arm PSA feature.
-+
-+ABIs Implemented
-+----------------
-+
-+The following ABIs from the PSA FWU specification have been implemented:
-+
-+    - FWU_DISCOVER
-+
-+    - FWU_BEGIN_STAGING
-+
-+    - FWU_END_STAGING
-+
-+    - FWU_CANCEL_STAGING
-+
-+    - FWU_OPEN
-+
-+    - FWU_WRITE_STREAM
-+
-+    - FWU_READ_STREAM
-+
-+    - FWU_COMMIT
-+
-+    - FWU_ACCEPT_IMAGE
-+
-+ExitBootServices() Integration
-+------------------------------
-+
-+- The U-Boot FWU client performs several key actions during ExitBootServices():
-+
-+- Notifies Secure world about successful boot.
-+
-+- Accepts updated images in trial state.
-+
-+- Supports board-level override of fwu_notify_exit_boot_services() for custom
-+  behavior.
-+
-+Contributors
-+------------
-+   * Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-+   * Davidson kumaresan <davidson.kumaresan@arm.com>
-+
-+.. _`DEN0118 v1.0 A specification`: https://developer.arm.com/documentation/den0118/latest/
-+.. _`PSA Certified`: https://www.psacertified.org/
-+.. _`UEFI v2.10 specification`: https://uefi.org/specs/UEFI/2.10/
-+.. _`Corstone-1000`: https://corstone1000.docs.arm.com/en/latest/software-architecture.html
-diff --git a/doc/develop/uefi/index.rst b/doc/develop/uefi/index.rst
-index e26b1fbe05c..573630740a0 100644
---- a/doc/develop/uefi/index.rst
-+++ b/doc/develop/uefi/index.rst
-@@ -10,6 +10,7 @@ can be run an UEFI payload.
- .. toctree::
-    :maxdepth: 2
- 
-+   fwu_arm_psa.rst
-    uefi.rst
-    u-boot_on_efi.rst
-    iscsi.rst
--- 
-2.43.0
+are available in the Git repository at:
 
+  https://git.u-boot-project.org/u-boot/custodians/u-boot-sh.git main
+
+for you to fetch changes up to ad8c22034441ec42913539116d08dcbd1c3f570d:
+
+  clk: versaclock: Fix incorrect error check in versaclock_probe() (2026-09-17 16:22:45 +0200)
+
+----------------------------------------------------------------
+Kuan-Wei Chiu (1):
+      clk: versaclock: Fix incorrect error check in versaclock_probe()
+
+Marek Vasut (4):
+      arm: renesas: Drop SYS_ARCH_TIMER on R-Car R8A78000 X5H Cortex-M33 RSIP
+      arm64: renesas: Drop CNTP from Renesas R-Car Gen5 common code
+      arm64: renesas: Drop empty board_early_init_f() from Renesas R-Car Gen5 common code
+      arm64: renesas: Enable FFA on Renesas R-Car X5H R8A78000
+
+ .../arm/mach-renesas/include/mach/rcar-gen5-base.h |  5 -----
+ board/renesas/common/gen5-common.c                 | 25 ----------------------
+ configs/r8a78000_ironhide_cm33_defconfig           |  1 -
+ configs/r8a78000_ironhide_defconfig                |  2 ++
+ configs/renesas_rcar5.config                       |  1 +
+ drivers/clk/clk_versaclock.c                       |  2 +-
+ 6 files changed, 4 insertions(+), 32 deletions(-)
