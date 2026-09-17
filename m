@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8645CC88E72
-	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 17:19:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C60B8C982D6
+	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 17:19:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5ABDA60B83;
-	Thu, 17 Sep 2026 17:19:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 83E7560B70;
+	Thu, 17 Sep 2026 17:19:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id t3Xgm9yGPyG3; Thu, 17 Sep 2026 17:19:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org D8FC660B94
+ id Nz_33wBDGVKl; Thu, 17 Sep 2026 17:19:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7245660B9C
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789665573;
-	b=ZCEalRhPFp3pVSN/DYesmlk1j67eHvI99k15I7SIC2NT+/SwmsPSqXRZn7LOw7jlCICH
-	 wcx6znIu7SCA6/DpMJqIsEIrSPw/PIsUq3/LmcTpng6AVINidMuBe+8BGCzFG/xqI4ZQt
-	 WdfeTlvq0dvuJb/lY7zFNz5ztyWV/FLVgfMEe4FJgBcrPw2enVO248aKTClUzx5hETf+I
-	 8qwn8Hub6VUW5EvsFJM3KyaVF+iMpBFtaA8EbgDIxB3utSj12o7mbLPeW71N/rnu4hGFh
-	 1yA5NVnb/3KGM6RY4XUJ7GQQjj3nQPAXNcr5awPfAXQaP7VWXc2PWyVlWDAlJXAh0Iw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789665578;
+	b=Wl/2JevEouYH8bOZYO/cn0kaT268BXjDKj0wZS3KNf+TDzycqme857BMRzOwDE/N8dXt
+	 gXq8H8wu5Iyo0t+7lR+853FZBKODjK5322JOqq12+K5QdK8UGw3wM2zK6aS3ITdm0TLPB
+	 wpI7YN+IeJtXYBVCb6tSlk+oUZV7/j9ZAFI3gf/W875svA32lARxDWcZ6noe+NIAFpZUk
+	 KwkNNdJ/GZ6AJt3MkUDJG0OJWPzI2Yv4P8WH9QkSQj0rD1fn/wDNywdW2LiPSXLJdAZWo
+	 7gtm/Tkqf9/ZxXF9bZotD4LSS1odtDmMQdAeDNY77m7WgL408mBp+Y5EVDSJKKB6VJA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789665573;
+	c=relaxed/relaxed; t=1789665578;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,90 +31,90 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=ltdckUTehWUA0t04W8CtsCIGJnjOK9pXqpmMm7DjBLw=;
-	b=WMzuXITNR4tHzdCJsxM5GbznvnTLF5cpTxHd6ixNEiNAqaL0LeTbTVhRxzQSJCG2gJbX
-	 C8APUuP1t4C7xL6ERU9h5VRt3v890FyD7Mb1eUVUoaD5sQT5NRxHLtcLzpP9PJCSpvYes
-	 AgDDreBm8qC8F5yXI43UDTobMCZduc26P8rOn0BEWxdDJTf01WmgaCl5Qq/K+WVOnz2DI
-	 j051vRCgae16A74Z/q+pj/sYTzwoGrqW0CTVj3i5cCWO6JFYR1khiUhEgRJWsNCMMcrJi
-	 Bz9nasiI/W/E6TXMWDLBe9+Sxfsn0W4z+pqAZIL9kNW1NEzZ7EoA6RJfNqK7iN3ACuw==
+	bh=qd71Qhd2IbC5wvfnYe25IBQCsnMc+RhuTTVIY4bTv5c=;
+	b=eB8KRD3Z/7jPvFb0q93/zD+uit1qaLfNqtruRtqDaEx3bqcV+6+fz5+p20dhDXgYqbSi
+	 fIIYq/W3e7Y143ZhoowowoPUykq5JrqmqWmV2086WEF15nQAdWP9sm4AgSdhQE2iukOgd
+	 3txgIfpH06RoB76AkomWX37k1IUBde2WBjeZfOENi5wFFc70oqZ8sTxWUTc/mZKVBWoQv
+	 cAYriQuTatjoyOwgzCRCu2U55+M/LD67mct3ZBz7bxtdoEWIXRuQq8VmkdAYRebiaEMsx
+	 TUTISzg3prn8n1OS4omoItFz4ByzzKMVN0/jioRZt+OsOQjLQIPfnQG/tiJu+L33OUg==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=arm.com;
-	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=XOZIkxAp;
+	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=rKaBhf+z;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789665573;
-	bh=ltdckUTehWUA0t04W8CtsCIGJnjOK9pXqpmMm7DjBLw=;
+	d=lists.u-boot-project.org; s=default; t=1789665578;
+	bh=qd71Qhd2IbC5wvfnYe25IBQCsnMc+RhuTTVIY4bTv5c=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=w3Txy+fJ5S/CYif+Qgm9sVVDaiw1O25ENaWgn1o1H+MwaDB2VWOcAzdJsXDk3N6OV
-	 R+uK0p/0gyKyyieWJY9opBbGt4te9zXbQ9S2PyvK+kcGinwKlrlQdy/evy5vfpT5BD
-	 1K6xV6ZLP65bcuB9H4rEVM2L4SCfj9WnN+jpKD5yhMot8HQfigiQzKtE03riGFcSVk
-	 5po/fMfzr9UBqsgVYx4sAM5JPQZpeGByqP/dQzCuC8w394VLh+R9LilMpLiduyEK0z
-	 EA1I8/saIDynLPe85uzoUM/3DSR1MW2zbJpzt3OL2HYutn7bnTwHUJYixzvEabA2Qm
-	 Qj82aLo2oSrlQ==
+	b=KCNmVG9VVJ7Nyc1G1cO7synmUk1Dn1k+nUnTsN83+HT5Lof6H+3jLD1GHJfYjgroO
+	 Mo8SIGSmchnJPLt3qlFEMuMA6NGvOBbs7ds5TpkChw1NStu5STARyOsJCUJkXEozn3
+	 cpcgWG5+gCCyG2xh1robdMUx4Uf0eIMK/8DaV9hTzw11DLx75X5YEKMXM9iJeW6j2f
+	 LD2NDaLuyJ5ugd26ZJ/QxOiq/sMbTUi/5qjNClwYICwl4JMxsrOxzzpRv7QnEd8TyD
+	 uq9q2H0ViKFtLNlgsI9shX2DaQhCAcVGBJaANxgkqDBBJgE5mP5t8HHced6A7ThuPV
+	 egZ/YL+WeArlg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D8FC660B94;
-	Thu, 17 Sep 2026 17:19:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7245660B9C;
+	Thu, 17 Sep 2026 17:19:38 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 0F4F3422
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:18:47 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 820303AF
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:18:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E956460B6C
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:18:46 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 73D2160B64
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:18:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9GmvOtHiQV4g for <u-boot@lists.u-boot-project.org>;
- Thu, 17 Sep 2026 17:18:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 9B48560B64
+ id GeHIg49Quymf for <u-boot@lists.u-boot-project.org>;
+ Thu, 17 Sep 2026 17:18:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 63FBF60B2D
 Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789665525;
- b=ikfRUWqDYOrLBvtqa1W1Dg4jH/czc9XSxrW1D8ke7c52mMmnxzijr1b1ttrGeX3vbj/1
- jkXN91UARAH55IoUSN5ZR8GctYjBKQQtkXI+f7rg817PxHbtVkehDW02DuSR4sbWHcxDQ
- k7N1i1rBUWxnOr/xhxmN40Lgm7oyuOke87cUE+STTzQt1A19LDnVtfoZuoVPn2qjUll+1
- 8zZYyxla5Gg9Kf/UNp5qVPb4tG92ExBkZf0ztxZmNfW0LfsiVoAzln0MJeubrSJmllWCq
- Uxbg3vhtyTguDB8e4wsq64siURClH3DCyRh1MY5d7Fm5/CNcPdagvQiRdryf2dau4Xg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789665527;
+ b=OH97O4JN7Pg+6Vk49JQcvMw3K03CIpcQf1ZhzOLj5PSqX1OMqybqR4zXxd41tGU9h7NW
+ i8lUnDEd0u+DT2hMmOWhddSqrU+8v3eEgwkI/BCSW8zqNqdaVSdZqsS+Bc+blCagiAq56
+ 9Epqg0spZILW4TIN6bVgjqj5tE3mVWl8p8UbUGvXIeAk2PQW6SPuOAtbevms9fR442sGa
+ FUvgDLfxCQq01YVXvaNv/sOcyqZ2CLs6KHSu976s0VIlWkaACarSqNutOkqOUyCgWYrlA
+ ST6xlqVZk8BZg3Vu/E+uJle7NYnekmQc2if9cOJUY3LaP0P92v6Ux1fUMJPpjgl9uAA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789665525;
+ c=relaxed/relaxed; t=1789665527;
  h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=ltdckUTehWUA0t04W8CtsCIGJnjOK9pXqpmMm7DjBLw=;
- b=edKvATpj/vnWNe0Vex0qYuSOxQVo9Yf0oZX6fbyiD2Qrwyer6NpIMV/CWUlDAAs1/Zm6
- D+onF4xI0eUodR0Q7YS8mwyUDaeKtIm41Bn5iOHSJgo4+qV0vOD4vxBZFgh6EFASvrfOZ
- 6EhM1BMl0P9vpdU0xFePIhNxrUf407nRF0MVF78lY4quVx6hy5Y2DKW+p9nmntSiHbhVo
- 5qdKY8K4Ax7kqdTYSzy4hRmtA/y8ePyiAPkEdqDBnRILzL3rVthk4Kdc4Hx5xpiiNOnOB
- 3b1EqpsWxk3gY47QQUcHbfjJ27bGuAetLGLwnsEfEfha+MRA3y8s6YZxqNVXojgOHNg==
+ bh=qd71Qhd2IbC5wvfnYe25IBQCsnMc+RhuTTVIY4bTv5c=;
+ b=qzLYRQjok29eAEs0FdJS4kS89K8jmYik8PgeHw1sV6yxVuz2LfccsEY3VbMpqjClxVfg
+ 9w2hqjMRZTgFRcPpFMgiipR0ULNpp2v+mpbeuOTyCrR5Icw5dU3BTrpNC+/lQRms5Eywb
+ TDLhyNabLXs4Mzkm6PZTWAcvj+YQ0OiuLXPR4y//5ov4r/vB9uA/pGecPZTz0UF36Jlna
+ d+ZWJ5t3L+p/0JbpgwpGMCRn5rv8RvZO3XbO1SQFG2aTZKAeD3vlA2huVITurfzIkt3DI
+ k2Vn+yzZzpS7TGTopXInIESLTqbfULWqueI9jyuT4Qti9/rKEdkv7FJ/ANEFB5Pyp0Q==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=arm.com; 
  dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=XOZIkxAp; 
+ header.b=rKaBhf+z; 
  arc=none smtp.remote-ip=217.140.110.172
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
  helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=XOZIkxAp
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
+ header.s=foss header.b=rKaBhf+z
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9B48560B64
+ by smtp3.osuosl.org (Postfix) with ESMTP id 63FBF60B2D
  for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:18:45 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5EAD11596;
- Thu, 17 Sep 2026 10:18:41 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DD41F1F02;
+ Thu, 17 Sep 2026 10:18:39 -0700 (PDT)
 Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C5E393F7B4;
- Thu, 17 Sep 2026 10:18:43 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 546D33F7B4;
+ Thu, 17 Sep 2026 10:18:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1789665524; bh=kJJJlfcsdojxGvj4Pam50fV9hglGEUZDYnVDgghg9lc=;
+ t=1789665523; bh=iIo5SF9xr3hnKVe6HMNzJwYpxcdfTj95iwPUWF9N6rk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=XOZIkxAplB6MElpLFWgbxNZvNLgYRDDocnp8uuBGgD11thxs266ri2b0AOtPDGoDX
- 5zkjTgEfZS3ph/f6ay3Lmoe/KZD+mxo615TPjjTphn6TpSghKSJtkLt9jcwADiG0+D
- cFmy1nV0RBXG4VuEnX5jRioyKUwAlSLuVTaQZuhs=
+ b=rKaBhf+zbb3dJMHEbdvnm6sM8+7SbsztySb0/yjDTFC6NTFo77Lj5mOR5rIlhkCXd
+ h5zZ61IaZHPQC/rVX4G5gPBe14BjM6SW8ZsnmW1DSBSGcbNEII1WNJQ+wK+eFEdaSh
+ myMGWJ2Tmi7mxgWM+Re7FfRNjSyWxmKtyq6yHb50=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -122,9 +122,10 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jens Wiklander <jens.wiklander@linaro.org>,
  Casey Connolly <casey.connolly@linaro.org>
-Subject: [PATCH v6 05/24] arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
-Date: Thu, 17 Sep 2026 18:17:51 +0100
-Message-ID: <20260917171810.4122899-6-harsimransingh.tungal@arm.com>
+Subject: [PATCH v6 04/24] arm_ffa: sandbox: Improve the readability of
+ clearing the X registers
+Date: Thu, 17 Sep 2026 18:17:50 +0100
+Message-ID: <20260917171810.4122899-5-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
 References: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
@@ -146,7 +147,7 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Add FFA_MEM_SHARE support to the FF-A emulator
+Make clearing the must be zero registers more readable in the emulator
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Cc: Tom Rini <trini@konsulko.com>
@@ -155,114 +156,128 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Jens Wiklander <jens.wiklander@linaro.org>
 Cc: Casey Connolly <casey.connolly@linaro.org>
 ---
- .../include/asm/sandbox_arm_ffa_priv.h        |  4 ++
- drivers/firmware/arm-ffa/ffa-emul-uclass.c    | 43 +++++++++++++++++++
- drivers/firmware/arm-ffa/sandbox_ffa.c        |  3 +-
- 3 files changed, 49 insertions(+), 1 deletion(-)
+ .../sandbox/include/asm/sandbox_arm_ffa_priv.h | 17 +++--------------
+ drivers/firmware/arm-ffa/ffa-emul-uclass.c     | 18 +++++++++---------
+ 2 files changed, 12 insertions(+), 23 deletions(-)
 
 diff --git a/arch/sandbox/include/asm/sandbox_arm_ffa_priv.h b/arch/sandbox/include/asm/sandbox_arm_ffa_priv.h
-index fdb38bdf46c..d77842d1377 100644
+index b0881822d78..fdb38bdf46c 100644
 --- a/arch/sandbox/include/asm/sandbox_arm_ffa_priv.h
 +++ b/arch/sandbox/include/asm/sandbox_arm_ffa_priv.h
-@@ -38,6 +38,7 @@
- /*  RX/TX buffers minimum size */
- #define RXTX_BUFFERS_MIN_SIZE (RXTX_4K)
- #define RXTX_BUFFERS_MIN_PAGES (1)
-+#define RXTX_BUFFERS_MIN_PAGES_SIZE (RXTX_BUFFERS_MIN_PAGES * SZ_4K)
- 
- /* A helper macro used for clearing registers that Must Be Zero (MBZ) */
- #define FFA_X_REG_SIZE_IN_BYTE sizeof((((ffa_value_t *)0)->a0))
-@@ -59,6 +60,9 @@
- #define SANDBOX_SERVICE2_UUID_A3	0x9cc02d72
- #define SANDBOX_SERVICE2_UUID_A4	0xcdd998a7
- 
-+/* Globally unique Handle to identify the shared memory region */
-+#define SANDBOX_MEM_HANDLE		0xffffffff
-+
- /**
-  * struct ffa_rxtxpair_info - structure hosting the RX/TX buffers flags
-  * @rxbuf_owned:	RX buffer ownership flag (the owner is non secure world)
-diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-index 9ebc53dc1e6..fca34ad7a2a 100644
---- a/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-+++ b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-@@ -560,6 +560,46 @@ static int sandbox_ffa_get_parts(struct udevice *emul, struct ffa_sandbox_data *
- 	return 0;
- }
- 
-+/**
-+ * sandbox_ffa_memory_share() - Emulated FFA_MEM_SHARE handler
-+ * @emul: The sandbox FF-A emulator device
-+ * @pargs: The SMC call input arguments a0-a7
-+ * @res:  The SMC return data
-+ *
-+ * Emulate FFA_MEM_SHARE FF-A function.
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, failure
-+ */
-+static int sandbox_ffa_memory_share(struct udevice *emul, ffa_value_t *pargs,
-+				    ffa_value_t *res)
-+{
-+	int ret;
-+
-+	res->a1 = 0;
-+
-+	if (!pargs->a1 || pargs->a1 > RXTX_BUFFERS_MIN_PAGES_SIZE) {
-+		/* FFA_ERROR encoding */
-+		res->a0 = FFA_SMC_32(FFA_ERROR);
-+		res->a2 = -INVALID_PARAMETERS;
-+		ret = ffa_to_std_errmap[INVALID_PARAMETERS];
-+		/* x3-x7 MBZ */
-+		memset(&res->a3, 0, 5 * FFA_X_REG_SIZE_IN_BYTE);
-+
-+		return ret;
-+	}
-+
-+	/* FFA_SUCCESS encoding */
-+	res->a0 = FFA_SMC_32(FFA_SUCCESS);
-+	res->a2 = SANDBOX_MEM_HANDLE;
-+	res->a3 = SANDBOX_MEM_HANDLE;
-+	/* x4-x7 MBZ */
-+	memset(&res->a4, 0, 4 * FFA_X_REG_SIZE_IN_BYTE);
-+
-+	return 0;
-+}
-+
- /**
-  * sandbox_query_ffa_emul_state() - Inspect the FF-A ABIs
-  * @queried_func_id:	The FF-A function to be queried
-@@ -650,6 +690,9 @@ void sandbox_arm_ffa_smccc_smc(ffa_value_t *args, ffa_value_t *res)
- 	case FFA_SMC_32(FFA_RX_RELEASE):
- 		ret = sandbox_ffa_rx_release(emul, args, res);
- 		break;
-+	case FFA_SMC_32(FFA_MEM_SHARE):
-+		ret = sandbox_ffa_memory_share(emul, args, res);
-+		break;
- 	default:
- 		log_err("Undefined FF-A interface (%lx)\n",
- 			args->a0);
-diff --git a/drivers/firmware/arm-ffa/sandbox_ffa.c b/drivers/firmware/arm-ffa/sandbox_ffa.c
-index f1e8de4bf0d..34d332979dd 100644
---- a/drivers/firmware/arm-ffa/sandbox_ffa.c
-+++ b/drivers/firmware/arm-ffa/sandbox_ffa.c
 @@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
+ /* SPDX-License-Identifier: GPL-2.0+ */
  /*
 - * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
 + * Copyright 2022-2023, 2025-2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
   *
   * Authors:
   *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -88,6 +88,7 @@ static const struct ffa_bus_ops sandbox_ffa_ops = {
- 	.partition_info_get = ffa_get_partitions_info_hdlr,
- 	.sync_send_receive = ffa_msg_send_direct_req_hdlr,
- 	.rxtx_unmap = ffa_unmap_rxtx_buffers_hdlr,
-+	.memory_share = ffa_memory_share_hdlr,
- };
+@@ -39,19 +39,8 @@
+ #define RXTX_BUFFERS_MIN_SIZE (RXTX_4K)
+ #define RXTX_BUFFERS_MIN_PAGES (1)
  
- static const struct udevice_id sandbox_ffa_id[] = {
+-/* MBZ registers info */
+-
+-/* x1-x7 MBZ */
+-#define FFA_X1X7_MBZ_CNT (7)
+-#define FFA_X1X7_MBZ_REG_START (&res->a1)
+-
+-/* x4-x7 MBZ */
+-#define FFA_X4X7_MBZ_CNT (4)
+-#define FFA_X4X7_MBZ_REG_START (&res->a4)
+-
+-/* x3-x7 MBZ */
+-#define FFA_X3X7_MBZ_CNT (5)
+-#define FFA_X3_MBZ_REG_START (&res->a3)
++/* A helper macro used for clearing registers that Must Be Zero (MBZ) */
++#define FFA_X_REG_SIZE_IN_BYTE sizeof((((ffa_value_t *)0)->a0))
+ 
+ /* number of emulated FF-A secure partitions (SPs) */
+ #define SANDBOX_PARTITIONS_CNT (4)
+diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+index 1cdd188b6fb..9ebc53dc1e6 100644
+--- a/drivers/firmware/arm-ffa/ffa-emul-uclass.c
++++ b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+@@ -80,7 +80,7 @@ static int sandbox_ffa_version(struct udevice *emul, ffa_value_t *pargs, ffa_val
+ 	res->a0 = priv->fwk_version;
+ 
+ 	/* x1-x7 MBZ */
+-	memset(FFA_X1X7_MBZ_REG_START, 0, FFA_X1X7_MBZ_CNT * sizeof(ulong));
++	memset(&res->a1, 0, 7 * FFA_X_REG_SIZE_IN_BYTE);
+ 
+ 	return 0;
+ }
+@@ -108,7 +108,7 @@ static int sandbox_ffa_id_get(struct udevice *emul, ffa_value_t *pargs, ffa_valu
+ 	res->a2 = priv->id;
+ 
+ 	/* x3-x7 MBZ */
+-	memset(FFA_X3_MBZ_REG_START, 0, FFA_X3X7_MBZ_CNT * sizeof(ulong));
++	memset(&res->a3, 0, 5 * FFA_X_REG_SIZE_IN_BYTE);
+ 
+ 	return 0;
+ }
+@@ -133,14 +133,14 @@ static int sandbox_ffa_features(ffa_value_t *pargs, ffa_value_t *res)
+ 		res->a2 = RXTX_BUFFERS_MIN_SIZE;
+ 		res->a3 = 0;
+ 		/* x4-x7 MBZ */
+-		memset(FFA_X4X7_MBZ_REG_START, 0, FFA_X4X7_MBZ_CNT * sizeof(ulong));
++		memset(&res->a4, 0, 4 * FFA_X_REG_SIZE_IN_BYTE);
+ 		return 0;
+ 	}
+ 
+ 	res->a0 = FFA_SMC_32(FFA_ERROR);
+ 	res->a2 = -NOT_SUPPORTED;
+ 	/* x3-x7 MBZ */
+-	memset(FFA_X3_MBZ_REG_START, 0, FFA_X3X7_MBZ_CNT * sizeof(ulong));
++	memset(&res->a3, 0, 5 * FFA_X_REG_SIZE_IN_BYTE);
+ 	log_err("FF-A interface %lx not implemented\n", pargs->a1);
+ 
+ 	return ffa_to_std_errmap[NOT_SUPPORTED];
+@@ -245,7 +245,7 @@ cleanup:
+ 	res->a1 = 0;
+ 
+ 	/* x3-x7 MBZ */
+-	memset(FFA_X3_MBZ_REG_START, 0, FFA_X3X7_MBZ_CNT * sizeof(ulong));
++	memset(&res->a3, 0, 5 * FFA_X_REG_SIZE_IN_BYTE);
+ 
+ 	return ret;
+ }
+@@ -302,7 +302,7 @@ feedback:
+ 	res->a1 = 0;
+ 
+ 	/* x3-x7 MBZ */
+-	memset(FFA_X3_MBZ_REG_START, 0, FFA_X3X7_MBZ_CNT * sizeof(ulong));
++	memset(&res->a3, 0, 5 * FFA_X_REG_SIZE_IN_BYTE);
+ 
+ 	return ret;
+ }
+@@ -349,7 +349,7 @@ feedback:
+ 	res->a1 = 0;
+ 
+ 	/* x3-x7 MBZ */
+-	memset(FFA_X3_MBZ_REG_START, 0, FFA_X3X7_MBZ_CNT * sizeof(ulong));
++	memset(&res->a3, 0, 5 * FFA_X_REG_SIZE_IN_BYTE);
+ 
+ 	return ret;
+ }
+@@ -385,7 +385,7 @@ static int sandbox_ffa_rx_release(struct udevice *emul, ffa_value_t *pargs, ffa_
+ 	res->a1 = 0;
+ 
+ 	/* x3-x7 MBZ */
+-	memset(FFA_X3_MBZ_REG_START, 0, FFA_X3X7_MBZ_CNT * sizeof(ulong));
++	memset(&res->a3, 0, 5 * FFA_X_REG_SIZE_IN_BYTE);
+ 
+ 	return ret;
+ }
+@@ -445,7 +445,7 @@ static int sandbox_ffa_msg_send_direct_req(struct udevice *emul,
+ 		res->a2 = -INVALID_PARAMETERS;
+ 
+ 		/* x3-x7 MBZ */
+-		memset(FFA_X3_MBZ_REG_START, 0, FFA_X3X7_MBZ_CNT * sizeof(ulong));
++		memset(&res->a3, 0, 5 * FFA_X_REG_SIZE_IN_BYTE);
+ 
+ 		return ffa_to_std_errmap[INVALID_PARAMETERS];
+ 	}
 -- 
 2.43.0
 
