@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C4DCC88E72
-	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 07:47:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A3A4C982C1
+	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 07:47:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 564B860837;
-	Thu, 17 Sep 2026 07:47:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 52C3580EFA;
+	Thu, 17 Sep 2026 07:47:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id shJdGLQhTIhs; Thu, 17 Sep 2026 07:47:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 780946075A
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789631259;
-	b=HQ5VMvgBs+TEUlh7J8scUv3TeN32NiQjq+M/ddHm8dAwXFsBkA/BEFpuBDytHW2ctA7D
-	 aNiaqDS4j+K1WiINFA+IllCcQiAhXb/glLdF6L6BKxRBJtOj7U0l3sZJdJmz+LvMc45Mi
-	 OaQACgHGyxoTb5x1idR2WyKaHR1GkPcBSgb7fvmnZJHxFVCeXJ/dn5Ie41C5Wp1fXKwLh
-	 XznBSKqqcvYY/c/DEgCzWQ9BptSdl/Hfm3ClBpXns7Rv0r9MXy7OjuYkt4ownE71GuxkI
-	 aCnEL0bg5lZKZNFG+r4R6qNLo2ftya+rqaN+R02NyWUH9D3iyQZAw0jhNNaaZ2lDbHA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jJMAr8sRCs94; Thu, 17 Sep 2026 07:47:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0326C80EDD
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789631269;
+	b=CyPCL+wvPDRa029/RKdp/s4lpoxhHMmcS27h3qpJ1bsz00Fiq87iWDZ90245ZvMrPjVP
+	 vIiRy1wnJZf67vl6TbFZD7azPPlkwNjMyHeHSHisj1vtSIt5k22g0C4xtnxFjCcYgp5w6
+	 YGKAgd4LVAJZ0EJT1uflzT0SznFbiZjv1zFQVHoZTupuqxZmxC5a9TorQm/f6aegCa35M
+	 sbVGmtXekfN/sV+V4zm4d9/rG8WWRDaGWzhGxYhjs0djTKs++yjPKOfpwoEV2Yjg9LB9/
+	 EYyLnuiaLm3XJQbkapvs9oAXLmcYiZ7ZNgWJjrFuNxOIS7VorPPIRYKrzT4q/zMVfHw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789631259;
+	c=relaxed/relaxed; t=1789631269;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,76 +31,76 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
 	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=P04PlNazN62bSWH36OmY4Rz38s1ANgkW4tRxn1kgL3Y=;
-	b=GY20HPBwcoQCCS98F8uiBGgNPOPeAxy4NrLrw4y2MNx4fOF+zGdqkl2pSdd4DZD3R3S8
-	 Ybx0B996obOw21SVAoyxj/tsERD7Zz6SHC7NTvo/tIJbBzdXVELdA6nMzCCLMWAtPsEGT
-	 c9r6A2x99+AG0Vi/ElLgnUgC6RhBc0PsiMuq/qok68pp7gDqkjiiElATDxi7gy1iDVHk+
-	 uhvr4jsZ9a5eCg0yV/p9ByZNwskxCUERTjb+igdZwtG/wWejcdHWIJL6mLq4X4i/7BwsT
-	 qEdmx0guchpoQ7FFsj5r6Y5ZNz9E2nGh8aNxr9yU+2c+GFBVrwvf+q7DeKb9s5E+Ylg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=;
+	b=kcZTqALRxne5zKZdcbSrw/cTRxaOs/71KRJmST+6DBXqsOitpd2Ffz4UF+8xK4q0QWdq
+	 nCTRYCfbag3JOauOZLVr1gpdEMsD64Zk0Hwc0s82lOog0msVeL3C2DeGth1xlahJE37X9
+	 3tYq/ArDntRCqrjiO6Z7IQGTLL7K18Ev9FUgqBQhcQn79Qr7fd74mag2W1D0GWJQX1ctS
+	 jJLl+p3YbDpfRbEI0b/0LWSfZBjjfEMv+lNcPW5o7eRxsrdUqN5qFdhhIcepXqPutCqGw
+	 6I45+0TQxJCu/ZhStPSVWcnK1nOEXD20NN9LpMP1D73JGBWlc2DaXkxsgnRtCcjHn+g==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789631259;
-	bh=P04PlNazN62bSWH36OmY4Rz38s1ANgkW4tRxn1kgL3Y=;
+	d=lists.u-boot-project.org; s=default; t=1789631269;
+	bh=1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=AwdX/5RG9afhXo1QyPHUQeDApDNbWmewWblc3/34/E6fUSinvjtfeUkYY3cJwqt4V
-	 eCewa6Ht6/+cxd5vD7uKgUdRU452lJnz422J5AG4RnxwrZvrEWnYMmAyrwlZO9wgjO
-	 lqyvbDrRxC0zeF2RlExSJMtx/cfmXzjnfoAUSnUVhljcrGAkRsZsoBA4YP0hWk4z7j
-	 /uja5uYSNuyZ2lVfxBHt65cmsqkmcJQr5DVGB+HgFVogTOvEyhNFr/GU7+d03Ys0O0
-	 A1HSJScWXS7ZYcasPxw3rV6E+9IQJwb2+FDs94Hw/WgwltijRKsC7xKwr2Ix3BSc3g
-	 Lmm5mf9uvTzrA==
+	b=GUcXSRUUaR84/0L6ZvWrwbQW8+xpf6HfBDNSiWmdgMMs6Qb+2brMfj7NqQgljQnWs
+	 tKRpbgQ0lKSuf2ZJ0JHevCsaMgPu5k/JWI9mhOiWI5Jx77s/TgVEoZPWQxiQNRI1HJ
+	 8ICINXHIN/N9UevMuwzD+odYuR8RnSrV/w9P1B0PJv+iwiZyQ0sa6vrtmqt7QCQCwE
+	 QumF8D1hL+X15EZy6KmvFjKqAmtedyIv2bQ34G8+DwZcPiS/Xq/aZL+G/IC8Sm0F5I
+	 SmFfBEoJgrOwnQtyB+j9hLbgrTr/bv+ByVBL5N497TRrL0fBgkbBhSQQS1JTWZpVNr
+	 dv1Rqhe/BOGxw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 780946075A;
-	Thu, 17 Sep 2026 07:47:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0326C80EDD;
+	Thu, 17 Sep 2026 07:47:49 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 152B624D
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:38 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 0275829B
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 07600404E9
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:38 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E1856406A0
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Mw5bhWyJC7Hk for <u-boot@lists.u-boot-project.org>;
- Thu, 17 Sep 2026 07:47:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 48C86406A0
+ id xq80n_U6Z1Tn for <u-boot@lists.u-boot-project.org>;
+ Thu, 17 Sep 2026 07:47:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org E7ACD404E9
 Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789631257;
- b=NdALxhuDOsL0mIrqV5RyuDBjj6tpUXr7knfT2BlT074qbWb3xbqNbZVW24VDjh3imsbm
- yhtv+0Gnv5iC+TyRFr+XvKIRirE5Y4FWRSjNtEv+4IVcAPbmn/j3f6kKenx8woEruwFQJ
- a6PerwQZvc2PJUOWOPEM3avgYZgfwdmPXSfxhwHpdPk7IsLv2V2plLaCMygDLmn9ImZnW
- fxDbm5ylvftzqdi8PG7S57OQVDfheKoG2lXv9+cmbevdsHDxeaG3unDKyJFqXQRZIac+s
- 4La8VIn5waCBeA709kLmMdGVOyypm+beZjuJoh/gBBz5bJkMnmDwHeiuLQgzQYcDEzA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789631267;
+ b=OuTbV0fxXtg36UOhdYHQhsQsctwZ/sUPQnPzYhaNo8addQTosf8Zww1lKl35N/RqjOFm
+ 9HxjghzsWzAHAXnZc7wxjmvDn2KbvOtReU9++Zh+rt+APi0WNXLhYb0SAWhwWUkDuVd1x
+ xrlxj1/VWWfwClLucMca1WvHc4+DGhSieyNxKiNuj7Dy2xAxPv952GfwkfRTPuAYlk3Px
+ sScAhV2zmdpqCVnqnErNOIxsgZqRihZcdJ2q2xCORtrSlfEQ+0oUYjfofe7Gr2EbyIbFz
+ EfOa6BI5SUwsaqfiuuonRk5KFEJpdZ8kOcsK6HZS9hLYRQwDG8LNfzI3ImmWAytnc8A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789631257;
+ c=relaxed/relaxed; t=1789631267;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
  X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
  Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
- X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
- X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+ X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+ X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
  X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=P04PlNazN62bSWH36OmY4Rz38s1ANgkW4tRxn1kgL3Y=;
- b=CviAPVeUZg+agIUl1FoU7rIJWEsasRsil6uUj1fKZ7HdU6duujOpLWtRWEJFVlkl7E2y
- JGteCNkD/7gnJPyLlGk5sOyG/P0y4phoV3JvEL7N6BLk23uBzKUvVoRljpW4aGfgjD/3r
- kZCoOYANWjeliMoVSmVaOgq+c3jtnmCVPjPAxVHSTA3yUoLIcDmlIXUXl3Ep1E9dssBSP
- zQBBIV7x188dbvdp/RQAlYUtHc0rZQ6dMnPqOzTUuppvRirLoSI8ch1hiPxBx62GxxVjN
- a5g9nI3h1/UEY2OGQ+ij9vrX3yexWTNCVc+Q7xYy51xg7ic66hi155TVqz6VADFIGow==
+ bh=1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=;
+ b=sDKbLT4DsEtU5M4zoRGHwq6AbAE7XvMRH5sa89EYXU3N2G76OuyF+6nQyUK1+JX9P6gs
+ sO+sQs4x5wDtoGsj0cyPikI79epxmouEjMy2U+pHeXvM4Ozv1WQj/70+QKcPq6ifZjAKx
+ WKgFDA4ajeAXNzF5eUSABBh9P8jhk/7xUzBKM8v+FonjycefBJUZTR/QoRuSFHDF7DYzl
+ vP4R00ozaaMplXr0lUskBhG1PqMR4vuzihzCAk8Q8yrzEZG8cbfkR8mYaGOm5iJrdxFH4
+ SSjtv/hfttMfxKtXOBTBwmZh8Pv+IJk8xnV7W3Vr/6RfO7+yK4jnQFQy1XvEVQvXeDQ==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=oss.qualcomm.com; 
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b="Q+Pby3/t"; 
+ header.s=qcppdkim1 header.b=U7GYBBct; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=d09ectXJ; 
+ header.a=rsa-sha256 header.s=google header.b=KRB5ztuD; 
  arc=none smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
  helo=mx0a-0031df01.pphosted.com;
@@ -109,92 +109,92 @@ Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=Q+Pby3/t; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=U7GYBBct; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=d09ectXJ
+ header.a=rsa-sha256 header.s=google header.b=KRB5ztuD
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 48C86406A0
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:37 +0000 (UTC)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E7ACD404E9
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:46 +0000 (UTC)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68H60Bwq091826
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:36 GMT
+ 68H60u3K901908
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:46 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- P04PlNazN62bSWH36OmY4Rz38s1ANgkW4tRxn1kgL3Y=; b=Q+Pby3/t2GK39nKG
- PI1vVOvvOZUjE7/SPLI/YnBAm3l1OOTEhxShkfIsgF1YtQmyR6ZDM4TixKGBahDX
- 0FQThT+zo1NcVOZn8UBuKiDfnjA0zRsYHbjbeQkHz2SDCLGn6ER5JpuZXX1wpt+s
- F4H8wtGOoP6X1G3PtcmIV1AxFAQl4SueUOUfIeZWjAeIeEV+S1VSPfbeDlcyfzFM
- zIT0hD5cjpRTjJWWG5aODbl0RrrTOmMYNR+2CSiCugaMkLK4li1kG1O+01/nYl8I
- nWePZ22QiLKuF1xrt3xiBWJaJ/valhBiB0oXrHoNQqtF4xrIkb9yhizeXVorG+tJ
- 3qJ6Hg==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gr8uw0spg-1
+ 1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=; b=U7GYBBctJq4G5aIk
+ kccYfacKFu+sWXTEDRIMXxLUXaevmCEUbowPkxZaxjNLfJOM+aGWjQhRijb3fM2w
+ LInRZXMYPKop2lp1mfPXH43EO75kvLW+023Lsnyid42bZVrx7i+9pPpV5XHU/XGS
+ yPgNGSNsxc9Jp+/DiFKJLtNb+NBaekdjkZYz0aCG7qljdMshgMYeEfb1upYso9E9
+ /Usr7sIiC/jErDKu4XFyjGp5AH6zPYU8VdrHBzCzUkNI4mCv6J1qF4e2XeHKrB1+
+ EOTKw7lNFJMfWxEkNhlE08YZL8YAawndRiQnDaCb0lfY6E+OJO9YJ7iXJqfsL+58
+ YFN5dg==
+Received: from mail-oo1-f70.google.com (mail-oo1-f70.google.com
+ [209.85.161.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqy2d37w8-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:36 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2d6fed0652bso8332775ad.2
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 00:47:36 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 07:47:46 +0000 (GMT)
+Received: by mail-oo1-f70.google.com with SMTP id
+ 006d021491bc7-6c1a8f2c565so746784eaf.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 00:47:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1789631256; x=1790236056;
+ d=oss.qualcomm.com; s=google; t=1789631265; x=1790236065;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=P04PlNazN62bSWH36OmY4Rz38s1ANgkW4tRxn1kgL3Y=;
- b=d09ectXJCKvAKZ6FT9aAt4QC13PVmZmo9wliGipmDvKWUBXONI9FODOjxcQZWCFkp9
- 8f/XjiQ2DVmKrer3w7P/TANbasXGqjDnSvUqheicWRZY/v+WsrITJ5FCvKV2pJEhLqaQ
- OnbWrK1c3rjAG9/lRYG6RN81rKxHPtn5A8cXVa8IygWZjIh+Y8KuuIXcXq7+4tI8yiLB
- LKdHZB+rfpM9ZtQSafIhKJT+5BL3Ytnew4bHLx6QH/btlFqwislgo4z7TpKg8fxgMUsp
- uqhCKh+hFGw+DQe3Lgaq3iOFF56CUzVs1LYvchjWsmGNz81/G6rYRU0YPw7fcJ6sMH9i
- 1ucg==
+ bh=1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=;
+ b=KRB5ztuDK5qBT5dSpC3sdoKRWo7UGs3LzgWuvUAy2yO78LrWI4AlATFflShHEAnhxm
+ //GPPHOmtqQVxp8k8Frudgb3rzx17lGhtu9luPvhKP0QS/WJ2XGqprx5qYdvGO4mIgxf
+ uvHwE79FLAUPWMgnDFF2O3391i0bQ1tBbP3GwqMYlR8JjkWQ8pLpcqccHC0J00q5C5Zr
+ 48EnevXRcUf0KAqvcs+Yzyrh5TuKPX5KKtupqlbwj1ug3N5uqawTEaTGoGiThy76PcwV
+ r/Vw1gVeHEghwhY16tEF/ClFcJJeW/yi8ApnmGQnhdx4yP4SYoOG2gA7plYBCoNnxNDO
+ 7cyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789631256; x=1790236056;
+ d=1e100.net; s=20260707; t=1789631265; x=1790236065;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=P04PlNazN62bSWH36OmY4Rz38s1ANgkW4tRxn1kgL3Y=;
- b=prLc+qzr4Kmfz0ri+kUHoxqKSRkNOje/iF486lxY12fdwZw40ncGSYHG3rZKAhkm1e
- 3GWmZ4Cx2dtl3GpdJUqtHzrX2zBQ+dktA4IZWNXGmuddIqKbjjpDXS5IUPSemx5Dnhaj
- 6fG1mHZut6pEqoFdKmpxRL7cxnK/vIyCECHo1ONFnfvUGEy+OfzMOQJl3weM0GrkeKe1
- YQdhGiE5bx4vEMImfR68U0yGsVdmPwKfkRrhtVljYVRj9la1a44oLf33HvGAmQzQzpVA
- t7Vz8fOSNrVUP+bIThOjMxgdb1WXoSY/rAkNVYEhfp2dLDGhK+kCMgSTQC7zTTQ91DUa
- 7rvQ==
+ bh=1xdnFGo6mdaM9tOhJk5PkOVt+bWAEsSgFA5K7bZOUkc=;
+ b=gQjxvAMPlrnRrzjKsRN2PhaWJqbkPs8GrDh6Noy5hnwbSqws/FvlEGPl8eglbpCZig
+ srqehknEtA/G8dh6qQx3NbSUVMZMmI19NBFaQ1J7yo5ZEpg73DPT+LjlQnOZ7PHlyF++
+ RQFjZvE4KW/PAtwq0Ub8cZ4gl60mF3Ov74P3rv4+WKMrKgDIRfVRvnEC/VXc36kfxve9
+ 5Njc05+LN7P/AoLvwQ9eelMAhFenNR1UwJ35shCQSgrAI9NpB3AnGXVl/VHkCoeBNWwD
+ hs0cjDBx183k7tREo1jZEEwJLmhsaM1KGiDGffK6YrbfQLmUAg4MsB0OCaxdW3X+42ke
+ P4wA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwatP968gj02gbZDp7HNvchANpHEQiqatwClCzcc4ehklWciRTgy+FT8ZgUC2d2mw9kuBN+8K0=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lg9uplc7LdQYfISbTO39zYVscC+A4x5gcCUnENLq3BbWQ59/5W
- MCVJwJeJJWSNd5znVxklbu3Zqj/RNEm9U/zsX8FttIqTqfZij19S4VAh3X3aBD4My4c2S3THCOO
- Dt5QFtMoHp13wexLeWOmFlVX45iECCq+uUkIDuWnfVwNlp3OrCkndD6Bzw9/8SNiIjQ2XBxo=
-X-Gm-Gg: AYBFou3+QSsBN4uIwjo3XzINMPT42JxnMi+cVDtyg5XXBcjhiJD5GLEKZxx/CohEhny
- EtWuXKWOpA+4MX63W1wl1PWBICGE2RAefPrbBoKFMWStJdzcSEVUoeuHITNqCGiynmc8oNcxkGk
- 3ABBZB2o/bh/pX1TY4/uPMYi61uqvH06uJ9xqo5o8weNj40odOO8x0QUqSEbdcCEMs1P9K59iXl
- m03nKdOvfdZIhLqzguTXsS3fFEj0t7txopBlrbdjn9deWLb9/AWJuBOsgzwIMWs71J3dskS/1Ty
- 5qLYf6z1kMz9Ec1OKmC6imf9RjaTKssERtIXy6mOVg8CldKuFnqcJ2HGnXPVfY5LhxWlJ/hV98C
- G/n1LtrTLuB2aaZPQMfmkA3Be5LeSeMouzmhohgoopexzsFbchEyjKvBvhnPyevyygf+zYhW/HF
- XHl3/6r7MItKDGywW97tOyVGyr6cxIKw==
-X-Received: by 2002:a17:902:f64b:b0:2c8:f34c:82c0 with SMTP id
- d9443c01a7336-2dd8dd0b0b9mr129382675ad.2.1789631255889; 
- Thu, 17 Sep 2026 00:47:35 -0700 (PDT)
-X-Received: by 2002:a17:902:f64b:b0:2c8:f34c:82c0 with SMTP id
- d9443c01a7336-2dd8dd0b0b9mr129381725ad.2.1789631255253; 
- Thu, 17 Sep 2026 00:47:35 -0700 (PDT)
+ AKwUvBwL8DFLVmPCSkTxdnkz24J42sU3bYm9tpC9R3WlD6qhtkdApDZoJY69HRP5n0cMUK+iJxoqV/k=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lyUVqTrUsR/4q47tIypGDnmdXS0BRvBpxRsVKYwNHreiXYDrHq
+ fBFXcaVlgW5X+019qOR8ljHm0wOU1/kh/iYH+wHkT8T6JjzX0TDGikAmsTbhXL6QJVV0jlgBt7P
+ TN+VbLxdyNhNkPEYcc+yXpmNuqlZmFgmTe6Zf9bBYQ7wheTIDMH3j0J9tZVVFYY4u7kadjUA=
+X-Gm-Gg: AYBFou1usbR9oGOFi/DasksSmKLFw0h0HKt4iTL4Pt1fSIWv9EEj/2yQQSQjGJfYTNu
+ cPO9H6MocG1fCK7tGn5wboI2zytp1L/25zQuUDvmIXar5T9xdbQlD0EW1jHv+GzZVeasnoJUpmm
+ PrSmEgrWFjXEUtqae1vgCTkXgXiiwT4Z0df9TUjVniXwR+tAZtkZGQdNDwBKFd3tOIn1N1Hl1wv
+ yTnREZJk4ezn4uAymR1qIBvwJPyn+7J3NAq9IFFtukdO9h1hAPK6XvdB1s0p0xLHDVAmT8Ii9ZU
+ IOqFEaHMXZP9nac01mWtvdlQBDn5od9jf1ZQFsITLL+vATXL5in9VRCvbpSGi+TMBZ0TUOYTR2I
+ p+aeIDtxiPv+gK2clx4Rm454Ha1Q2iHRDOoqK6Y7z9OtouvBjMT0juDXbITb7vPkR9FigCUsR2y
+ VLmTMbRKIjBGeSCkUmHYMpJgvYlyrhVw==
+X-Received: by 2002:a05:6820:c2c8:20b0:6c8:dccc:eb0d with SMTP id
+ 006d021491bc7-6c8dcdc3041mr2343502eaf.53.1789631265300; 
+ Thu, 17 Sep 2026 00:47:45 -0700 (PDT)
+X-Received: by 2002:a05:6820:c2c8:20b0:6c8:dccc:eb0d with SMTP id
+ 006d021491bc7-6c8dcdc3041mr2343480eaf.53.1789631264847; 
+ Thu, 17 Sep 2026 00:47:44 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-33bf5aa1e38sm14379848eec.16.2026.09.17.00.47.25
+ 5a478bee46e88-33bf5aa1e38sm14379848eec.16.2026.09.17.00.47.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Sep 2026 00:47:34 -0700 (PDT)
+ Thu, 17 Sep 2026 00:47:44 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Date: Thu, 17 Sep 2026 13:15:40 +0530
-Subject: [PATCH v10 11/15] clk/qcom: add clock driver for ipq5210
+Date: Thu, 17 Sep 2026 13:15:41 +0530
+Subject: [PATCH v10 12/15] pinctrl: qcom: Add ipq5210 pinctrl driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260917-spl-v10-11-3e83dcd239f0@oss.qualcomm.com>
+Message-Id: <20260917-spl-v10-12-3e83dcd239f0@oss.qualcomm.com>
 References: <20260917-spl-v10-0-3e83dcd239f0@oss.qualcomm.com>
 In-Reply-To: <20260917-spl-v10-0-3e83dcd239f0@oss.qualcomm.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.u-boot-project.org,
@@ -221,31 +221,31 @@ Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
  Jens Reidel <adrian@mainlining.org>, Erikas Bitovtas <xerikasxx@gmail.com>,
  Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-ORIG-GUID: mcUIpTQ8rG21Y2qvlbrnubTfETpGFEG3
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDEwNCBTYWx0ZWRfX9RhsVYjKahl5
- mpX0MPCsPz00Fei2P1MGGDvaqEkOXLjk72sUlOoeEcOii/jcE8sl3soBFZGG/h3Eknsj8PyziwD
- UNOZkq6C3lbpMRrhmoa+hu49mReZfAXoZtB4nf8sIZSd8Vp7pb6b7/8oRFX4BJljphqR4/+lO2/
- fEXDzIMQqVx5SPZZuuxnAl1+sNfE7S4se1M3nAbsoSdPBSReLJaY2Jl3e+hd/rlPlq3Hrbv+N+p
- kWOgOjZRMoRKBKuBl/DjGzlOrRNIB8W65bwLYNtU4JqDYH93tdTooPJcYj8zriIsCWmb4tjs1wk
- AJuVx7xCpoyWFw4CgURrtBX/tKUgnAQn8uC4x62JgSV5NcnD6ulCaD4Bo4QGxnhcSfq8GSQU0qi
- cSmm20rI2qVrCRkapzdssD6T8wkZiR+tazrcTiWkqI3PdXv05qBTmY5OhdqrMyPuIaLpl2U+gAP
- hr8aFtHnQk5wHS25K4A==
-X-Proofpoint-GUID: mcUIpTQ8rG21Y2qvlbrnubTfETpGFEG3
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDEwNCBTYWx0ZWRfX6kZ0ZBWIDWCX
- cBEE2RxAySU1EmhQrIsCOinODV9dAzSvMieFOXwryPLL1/9FsH+6T5J2vkbGAjL9iqstTkaSdtw
- zTF7trLFJmQmNxqvoJ5hUqNLoD1irs0=
-X-Authority-Analysis: v=2.4 cv=dMUzC+Zb c=1 sm=1 tr=0 ts=6aab9b18 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-ORIG-GUID: sZV_YprKbaRESBdQkXDeyLyJurkAvcZe
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDEwNCBTYWx0ZWRfX5OogXJp1BeS4
+ SwPDyRFonpn2egTwD4Sru4f/rXnbIJpYtpkZM/swPN6f8UFCDWQYhZQ0vePEp0H2g160LlO4CGM
+ yOSMjf41aM2enZbxnTpH6usiRvuKhFY=
+X-Authority-Analysis: v=2.4 cv=HbeB3SE8 c=1 sm=1 tr=0 ts=6aab9b22 cx=c_pps
+ a=lkkFf9KBb43tY3aOjL++dA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=cm27Pg_UAAAA:8 a=EUspDBNiAAAA:8 a=ttnG5VEth79ohM5wMFYA:9
- a=kETcTEvuJSViBEbj:21 a=QEXdDO2ut3YA:10 a=GvdueXVYPmCkWapjIL-Q:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=NzvCGKM8m0lGn9t9IsgA:9 a=QEXdDO2ut3YA:10 a=O8hF6Hzn-FEA:10
+ a=k4UEASGLJojhI9HsvVT1:22
+X-Proofpoint-GUID: sZV_YprKbaRESBdQkXDeyLyJurkAvcZe
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDEwNCBTYWx0ZWRfX385F+CQIHkKU
+ vWbT1qlj36stTl2w1cPG2Qu/W8YJGaGd3KOyTqwplwOueDayBfNCBWepIUHo+0dwTQUE4r+YzA8
+ w8/QWauRW+eHWlvmr3uzyRhQMOO4N0urFODo/tnyWpw8Ckb+hVJNv8LyMUzj6XcyWhIaOfhmgQS
+ PFuVcu3wKWF8yG95/eI3oZgadhbTA4EL1oQQ84gluWCIdEGyFF/0y+1zbZ49qsNomCt+3bgrIQT
+ LGVq/E28o4RAV78bSYA8hOcR9pu4S6pe0jnqJp41Tz5oYy+BjkkPQk751BpHoyCbiwSdoN1+hy/
+ uiCXFsJE7W3peXo6jrlsl30zZ+zuEY11M/sfrK4BHaNwlQpGDhCoCrdQwo5nI2CErR+X5hNJmvZ
+ L6Rc9ueAzE00MTKs3ShX9UQsyDa94QEUXV/wnzgdNKgDbW/Y6vRKw79stAzvXscqu58Y30l0MK6
+ 1NIed8steVCm4sGS8cA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-17_01,2026-09-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 bulkscore=0 impostorscore=0 suspectscore=0
- spamscore=0 phishscore=0 adultscore=0 clxscore=1015 lowpriorityscore=0
+ impostorscore=0 priorityscore=1501 bulkscore=0 spamscore=0 adultscore=0
+ suspectscore=0 malwarescore=0 phishscore=0 clxscore=1015 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609170104
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -261,145 +261,401 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add clocks and resets for enabling U-Boot on ipq5210 based RDP platforms.
+Add pinctrl driver for the TLMM block found in the ipq5210 SoC.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
- drivers/clk/qcom/Kconfig         |  8 ++++
- drivers/clk/qcom/Makefile        |  1 +
- drivers/clk/qcom/clock-ipq5210.c | 93 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 102 insertions(+)
+ drivers/pinctrl/qcom/Kconfig           |   8 +
+ drivers/pinctrl/qcom/Makefile          |   1 +
+ drivers/pinctrl/qcom/pinctrl-ipq5210.c | 349 +++++++++++++++++++++++++++++++++
+ 3 files changed, 358 insertions(+)
 
-diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-index 95b650831a3..a142890acdd 100644
---- a/drivers/clk/qcom/Kconfig
-+++ b/drivers/clk/qcom/Kconfig
-@@ -31,6 +31,14 @@ config CLK_QCOM_IPQ4019
- 	  on the Snapdragon IPQ4019 SoC. This driver supports the clocks
- 	  and resets exposed by the GCC hardware block.
+diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+index 7dd3782c14b..dbb51cd7fe6 100644
+--- a/drivers/pinctrl/qcom/Kconfig
++++ b/drivers/pinctrl/qcom/Kconfig
+@@ -38,6 +38,14 @@ config PINCTRL_QCOM_IPQ4019
+ 	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
+ 	  as well as the associated GPIO driver.
  
-+config CLK_QCOM_IPQ5210
-+	bool "Qualcomm IPQ5210 GCC"
-+	select CLK_QCOM
++config PINCTRL_QCOM_IPQ5210
++	bool "Qualcomm IPQ5210 Pinctrl"
++	default y if PINCTRL_QCOM_GENERIC
++	select PINCTRL_QCOM
 +	help
-+	  Say Y here to enable support for the Global Clock Controller
-+	  on the Qualcomm IPQ5210 SoC. This driver supports the clocks
-+	  and resets exposed by the GCC hardware block.
++	  Say Y here to enable support for pinctrl on the IPQ5210 SoC,
++	  as well as the associated GPIO driver.
 +
- config CLK_QCOM_IPQ5424
- 	bool "Qualcomm IPQ5424 GCC"
- 	select CLK_QCOM
-diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-index 1adca029b11..8934635fb48 100644
---- a/drivers/clk/qcom/Makefile
-+++ b/drivers/clk/qcom/Makefile
-@@ -7,6 +7,7 @@ obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
- obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
- obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
- obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
-+obj-$(CONFIG_CLK_QCOM_IPQ5210) += clock-ipq5210.o
- obj-$(CONFIG_CLK_QCOM_IPQ5424) += clock-ipq5424.o
- obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
- obj-$(CONFIG_CLK_QCOM_MILOS) += clock-milos.o
-diff --git a/drivers/clk/qcom/clock-ipq5210.c b/drivers/clk/qcom/clock-ipq5210.c
+ config PINCTRL_QCOM_IPQ5424
+ 	bool "Qualcomm IPQ5424 Pinctrl"
+ 	default y if PINCTRL_QCOM_GENERIC
+diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+index a7a9ad03569..9fe32fb8fec 100644
+--- a/drivers/pinctrl/qcom/Makefile
++++ b/drivers/pinctrl/qcom/Makefile
+@@ -5,6 +5,7 @@
+ obj-$(CONFIG_PINCTRL_QCOM) += pinctrl-qcom.o
+ obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
+ obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
++obj-$(CONFIG_PINCTRL_QCOM_IPQ5210) += pinctrl-ipq5210.o
+ obj-$(CONFIG_PINCTRL_QCOM_IPQ5424) += pinctrl-ipq5424.o
+ obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
+ obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
+diff --git a/drivers/pinctrl/qcom/pinctrl-ipq5210.c b/drivers/pinctrl/qcom/pinctrl-ipq5210.c
 new file mode 100644
-index 00000000000..cd82b238bea
+index 00000000000..a9b435ad543
 --- /dev/null
-+++ b/drivers/clk/qcom/clock-ipq5210.c
-@@ -0,0 +1,93 @@
++++ b/drivers/pinctrl/qcom/pinctrl-ipq5210.c
+@@ -0,0 +1,349 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Clock drivers for Qualcomm IPQ5210
-+ *
-+ * (C) Copyright 2024 Linaro Ltd.
++ * Qualcomm IPQ5210 pinctrl
 + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 + */
 +
-+#include <linux/types.h>
-+#include <clk-uclass.h>
 +#include <dm.h>
-+#include <linux/delay.h>
-+#include <asm/io.h>
-+#include <linux/bug.h>
-+#include <linux/bitops.h>
-+#include <dt-bindings/clock/qcom,ipq5210-gcc.h>
-+#include <dt-bindings/reset/qcom,ipq5210-gcc.h>
-+#include "clock-qcom.h"
 +
-+static ulong ipq5210_set_rate(struct clk *clk, ulong rate)
-+{
-+	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++#include "pinctrl-qcom.h"
 +
-+	switch (clk->id) {
-+	case GCC_QUPV3_WRAP_SE1_CLK:
-+		clk_rcg_set_rate_mnd(priv->base, priv->data->clks[clk->id].cbcr_reg,
-+				     0, 2, 217, CFG_CLK_SRC_GPLL0, 16);
-+		break;
-+	case GCC_SDCC1_AHB_CLK:
-+		break;
-+	case GCC_SDCC1_APPS_CLK:
-+		clk_rcg_set_rate_mnd(priv->base, priv->data->clks[clk->id].cbcr_reg,
-+				     0, 6, 25, CFG_CLK_SRC_GPLL0, 16);
-+		break;
-+	default:
-+		return -EINVAL;
++#define MAX_PIN_NAME_LEN 32
++static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
++
++enum ipq5210_functions {
++	msm_mux_atest_char_start,
++	msm_mux_atest_char_status0,
++	msm_mux_atest_char_status1,
++	msm_mux_atest_char_status2,
++	msm_mux_atest_char_status3,
++	msm_mux_atest_tic_en,
++	msm_mux_audio_pri,
++	msm_mux_audio_pri_mclk_out0,
++	msm_mux_audio_pri_mclk_in0,
++	msm_mux_audio_pri_mclk_out1,
++	msm_mux_audio_pri_mclk_in1,
++	msm_mux_audio_pri_mclk_out2,
++	msm_mux_audio_pri_mclk_in2,
++	msm_mux_audio_pri_mclk_out3,
++	msm_mux_audio_pri_mclk_in3,
++	msm_mux_audio_sec,
++	msm_mux_audio_sec_mclk_out0,
++	msm_mux_audio_sec_mclk_in0,
++	msm_mux_audio_sec_mclk_out1,
++	msm_mux_audio_sec_mclk_in1,
++	msm_mux_audio_sec_mclk_out2,
++	msm_mux_audio_sec_mclk_in2,
++	msm_mux_audio_sec_mclk_out3,
++	msm_mux_audio_sec_mclk_in3,
++	msm_mux_core_voltage_0,
++	msm_mux_cri_trng0,
++	msm_mux_cri_trng1,
++	msm_mux_cri_trng2,
++	msm_mux_cri_trng3,
++	msm_mux_dbg_out_clk,
++	msm_mux_dg_out,
++	msm_mux_gcc_plltest_bypassnl,
++	msm_mux_gcc_plltest_resetn,
++	msm_mux_gcc_tlmm,
++	msm_mux_gpio,
++	msm_mux_led0,
++	msm_mux_led1,
++	msm_mux_led2,
++	msm_mux_mdc_mst,
++	msm_mux_mdc_slv0,
++	msm_mux_mdc_slv1,
++	msm_mux_mdc_slv2,
++	msm_mux_mdio_mst,
++	msm_mux_mdio_slv0,
++	msm_mux_mdio_slv1,
++	msm_mux_mdio_slv2,
++	msm_mux_mux_tod_out,
++	msm_mux_pcie0_clk_req_n,
++	msm_mux_pcie0_wake,
++	msm_mux_pcie1_clk_req_n,
++	msm_mux_pcie1_wake,
++	msm_mux_pll_test,
++	msm_mux_pon_active_led,
++	msm_mux_pon_mux_sel,
++	msm_mux_pon_rx,
++	msm_mux_pon_rx_los,
++	msm_mux_pon_tx,
++	msm_mux_pon_tx_burst,
++	msm_mux_pon_tx_dis,
++	msm_mux_pon_tx_fault,
++	msm_mux_pon_tx_sd,
++	msm_mux_gpn_rx_los,
++	msm_mux_gpn_tx_burst,
++	msm_mux_gpn_tx_dis,
++	msm_mux_gpn_tx_fault,
++	msm_mux_gpn_tx_sd,
++	msm_mux_pps,
++	msm_mux_pwm0,
++	msm_mux_pwm1,
++	msm_mux_pwm2,
++	msm_mux_pwm3,
++	msm_mux_qdss_cti_trig_in_a0,
++	msm_mux_qdss_cti_trig_in_a1,
++	msm_mux_qdss_cti_trig_in_b0,
++	msm_mux_qdss_cti_trig_in_b1,
++	msm_mux_qdss_cti_trig_out_a0,
++	msm_mux_qdss_cti_trig_out_a1,
++	msm_mux_qdss_cti_trig_out_b0,
++	msm_mux_qdss_cti_trig_out_b1,
++	msm_mux_qdss_traceclk_a,
++	msm_mux_qdss_tracectl_a,
++	msm_mux_qdss_tracedata_a,
++	msm_mux_qrng_rosc0,
++	msm_mux_qrng_rosc1,
++	msm_mux_qrng_rosc2,
++	msm_mux_qspi_data,
++	msm_mux_qspi_clk,
++	msm_mux_qspi_cs_n,
++	msm_mux_qup_se0,
++	msm_mux_qup_se1,
++	msm_mux_qup_se2,
++	msm_mux_qup_se3,
++	msm_mux_qup_se4,
++	msm_mux_qup_se5,
++	msm_mux_qup_se5_l1,
++	msm_mux_resout,
++	msm_mux_rx_los0,
++	msm_mux_rx_los1,
++	msm_mux_rx_los2,
++	msm_mux_sdc_clk,
++	msm_mux_sdc_cmd,
++	msm_mux_sdc_data,
++	msm_mux_tsens_max,
++	msm_mux__,
++};
++
++#define MSM_PIN_FUNCTION(fname)				\
++	[msm_mux_##fname] = {#fname, msm_mux_##fname}
++
++static const struct pinctrl_function msm_pinctrl_functions[] = {
++	MSM_PIN_FUNCTION(atest_char_start),
++	MSM_PIN_FUNCTION(atest_char_status0),
++	MSM_PIN_FUNCTION(atest_char_status1),
++	MSM_PIN_FUNCTION(atest_char_status2),
++	MSM_PIN_FUNCTION(atest_char_status3),
++	MSM_PIN_FUNCTION(atest_tic_en),
++	MSM_PIN_FUNCTION(audio_pri),
++	MSM_PIN_FUNCTION(audio_pri_mclk_out0),
++	MSM_PIN_FUNCTION(audio_pri_mclk_in0),
++	MSM_PIN_FUNCTION(audio_pri_mclk_out1),
++	MSM_PIN_FUNCTION(audio_pri_mclk_in1),
++	MSM_PIN_FUNCTION(audio_pri_mclk_out2),
++	MSM_PIN_FUNCTION(audio_pri_mclk_in2),
++	MSM_PIN_FUNCTION(audio_pri_mclk_out3),
++	MSM_PIN_FUNCTION(audio_pri_mclk_in3),
++	MSM_PIN_FUNCTION(audio_sec),
++	MSM_PIN_FUNCTION(audio_sec_mclk_out0),
++	MSM_PIN_FUNCTION(audio_sec_mclk_in0),
++	MSM_PIN_FUNCTION(audio_sec_mclk_out1),
++	MSM_PIN_FUNCTION(audio_sec_mclk_in1),
++	MSM_PIN_FUNCTION(audio_sec_mclk_out2),
++	MSM_PIN_FUNCTION(audio_sec_mclk_in2),
++	MSM_PIN_FUNCTION(audio_sec_mclk_out3),
++	MSM_PIN_FUNCTION(audio_sec_mclk_in3),
++	MSM_PIN_FUNCTION(core_voltage_0),
++	MSM_PIN_FUNCTION(cri_trng0),
++	MSM_PIN_FUNCTION(cri_trng1),
++	MSM_PIN_FUNCTION(cri_trng2),
++	MSM_PIN_FUNCTION(cri_trng3),
++	MSM_PIN_FUNCTION(dbg_out_clk),
++	MSM_PIN_FUNCTION(dg_out),
++	MSM_PIN_FUNCTION(gcc_plltest_bypassnl),
++	MSM_PIN_FUNCTION(gcc_plltest_resetn),
++	MSM_PIN_FUNCTION(gcc_tlmm),
++	MSM_PIN_FUNCTION(gpio),
++	MSM_PIN_FUNCTION(led0),
++	MSM_PIN_FUNCTION(led1),
++	MSM_PIN_FUNCTION(led2),
++	MSM_PIN_FUNCTION(mdc_mst),
++	MSM_PIN_FUNCTION(mdc_slv0),
++	MSM_PIN_FUNCTION(mdc_slv1),
++	MSM_PIN_FUNCTION(mdc_slv2),
++	MSM_PIN_FUNCTION(mdio_mst),
++	MSM_PIN_FUNCTION(mdio_slv0),
++	MSM_PIN_FUNCTION(mdio_slv1),
++	MSM_PIN_FUNCTION(mdio_slv2),
++	MSM_PIN_FUNCTION(mux_tod_out),
++	MSM_PIN_FUNCTION(pcie0_clk_req_n),
++	MSM_PIN_FUNCTION(pcie0_wake),
++	MSM_PIN_FUNCTION(pcie1_clk_req_n),
++	MSM_PIN_FUNCTION(pcie1_wake),
++	MSM_PIN_FUNCTION(pll_test),
++	MSM_PIN_FUNCTION(pon_active_led),
++	MSM_PIN_FUNCTION(pon_mux_sel),
++	MSM_PIN_FUNCTION(pon_rx),
++	MSM_PIN_FUNCTION(pon_rx_los),
++	MSM_PIN_FUNCTION(pon_tx),
++	MSM_PIN_FUNCTION(pon_tx_burst),
++	MSM_PIN_FUNCTION(pon_tx_dis),
++	MSM_PIN_FUNCTION(pon_tx_fault),
++	MSM_PIN_FUNCTION(pon_tx_sd),
++	MSM_PIN_FUNCTION(gpn_rx_los),
++	MSM_PIN_FUNCTION(gpn_tx_burst),
++	MSM_PIN_FUNCTION(gpn_tx_dis),
++	MSM_PIN_FUNCTION(gpn_tx_fault),
++	MSM_PIN_FUNCTION(gpn_tx_sd),
++	MSM_PIN_FUNCTION(pps),
++	MSM_PIN_FUNCTION(pwm0),
++	MSM_PIN_FUNCTION(pwm1),
++	MSM_PIN_FUNCTION(pwm2),
++	MSM_PIN_FUNCTION(pwm3),
++	MSM_PIN_FUNCTION(qdss_cti_trig_in_a0),
++	MSM_PIN_FUNCTION(qdss_cti_trig_in_a1),
++	MSM_PIN_FUNCTION(qdss_cti_trig_in_b0),
++	MSM_PIN_FUNCTION(qdss_cti_trig_in_b1),
++	MSM_PIN_FUNCTION(qdss_cti_trig_out_a0),
++	MSM_PIN_FUNCTION(qdss_cti_trig_out_a1),
++	MSM_PIN_FUNCTION(qdss_cti_trig_out_b0),
++	MSM_PIN_FUNCTION(qdss_cti_trig_out_b1),
++	MSM_PIN_FUNCTION(qdss_traceclk_a),
++	MSM_PIN_FUNCTION(qdss_tracectl_a),
++	MSM_PIN_FUNCTION(qdss_tracedata_a),
++	MSM_PIN_FUNCTION(qrng_rosc0),
++	MSM_PIN_FUNCTION(qrng_rosc1),
++	MSM_PIN_FUNCTION(qrng_rosc2),
++	MSM_PIN_FUNCTION(qspi_data),
++	MSM_PIN_FUNCTION(qspi_clk),
++	MSM_PIN_FUNCTION(qspi_cs_n),
++	MSM_PIN_FUNCTION(qup_se0),
++	MSM_PIN_FUNCTION(qup_se1),
++	MSM_PIN_FUNCTION(qup_se2),
++	MSM_PIN_FUNCTION(qup_se3),
++	MSM_PIN_FUNCTION(qup_se4),
++	MSM_PIN_FUNCTION(qup_se5),
++	MSM_PIN_FUNCTION(qup_se5_l1),
++	MSM_PIN_FUNCTION(resout),
++	MSM_PIN_FUNCTION(rx_los0),
++	MSM_PIN_FUNCTION(rx_los1),
++	MSM_PIN_FUNCTION(rx_los2),
++	MSM_PIN_FUNCTION(sdc_clk),
++	MSM_PIN_FUNCTION(sdc_cmd),
++	MSM_PIN_FUNCTION(sdc_data),
++	MSM_PIN_FUNCTION(tsens_max),
++};
++
++typedef unsigned int msm_pin_function[10];
++
++#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9) \
++	[id] = {        msm_mux_gpio, /* gpio mode */	\
++			msm_mux_##f1,			\
++			msm_mux_##f2,			\
++			msm_mux_##f3,			\
++			msm_mux_##f4,			\
++			msm_mux_##f5,			\
++			msm_mux_##f6,			\
++			msm_mux_##f7,			\
++			msm_mux_##f8,			\
++			msm_mux_##f9,			\
 +	}
 +
-+	return rate;
-+}
-+
-+static const struct gate_clk ipq5210_clks[] = {
-+	GATE_CLK_POLLED(GCC_QUPV3_WRAP_SE1_CLK,	0x05020, BIT(0),	0x05004),
-+	GATE_CLK_POLLED(GCC_SDCC1_AHB_CLK,	0x3303c, BIT(0),	0x3303c),
-+	GATE_CLK_POLLED(GCC_SDCC1_APPS_CLK,	0x3302c, BIT(0),	0x33004),
++static const msm_pin_function ipq5210_pin_functions[] = {
++	PINGROUP(0, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
++	PINGROUP(1, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
++	PINGROUP(2, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
++	PINGROUP(3, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
++	PINGROUP(4, sdc_cmd, qspi_cs_n, _, _, _, _, _, _, _),
++	PINGROUP(5, sdc_clk, qspi_clk, _, _, _, _, _, _, _),
++	PINGROUP(6, qup_se0, led0, pwm1, _, cri_trng0, qdss_tracedata_a, _, _, _),
++	PINGROUP(7, qup_se0, led1, pwm1, _, cri_trng1, qdss_tracedata_a, _, _, _),
++	PINGROUP(8, qup_se0, pwm1, audio_pri_mclk_out2, audio_pri_mclk_in2, _, cri_trng2, qdss_tracedata_a, _, _),
++	PINGROUP(9, qup_se0, led2, pwm1, _, cri_trng3, qdss_tracedata_a, _, _, _),
++	PINGROUP(10, pon_rx_los, qup_se3, pwm0, _, _, qdss_tracedata_a, _, _, _),
++	PINGROUP(11, pon_active_led, qup_se3, pwm0, _, _, qdss_tracedata_a, _, _, _),
++	PINGROUP(12, pon_tx_dis, qup_se2, pwm0, audio_pri_mclk_out0, audio_pri_mclk_in0, _, qrng_rosc0, qdss_tracedata_a, _),
++	PINGROUP(13, gpn_tx_dis, qup_se2, pwm0, audio_pri_mclk_out3, audio_pri_mclk_in3, _, qrng_rosc1, qdss_tracedata_a, _),
++	PINGROUP(14, pon_tx_burst, qup_se0, _, qrng_rosc2, qdss_tracedata_a, _, _, _, _),
++	PINGROUP(15, pon_tx, qup_se0, _, qdss_tracedata_a, _, _, _, _, _),
++	PINGROUP(16, pon_tx_sd, audio_sec_mclk_out1, audio_sec_mclk_in1, qdss_cti_trig_out_b0, _, _, _, _, _),
++	PINGROUP(17, pon_tx_fault, audio_sec_mclk_out0, audio_sec_mclk_in0, _, _, _, _, _, _),
++	PINGROUP(18, pps, pll_test, _, _, _, _, _, _, _),
++	PINGROUP(19, mux_tod_out, audio_pri_mclk_out1, audio_pri_mclk_in1, _, _, _, _, _, _),
++	PINGROUP(20, qup_se2, mdc_slv1, tsens_max, qdss_tracedata_a, _, _, _, _, _),
++	PINGROUP(21, qup_se2, mdio_slv1, qdss_tracedata_a, _, _, _, _, _, _),
++	PINGROUP(22, core_voltage_0, qup_se3, pwm3, _, _, _, _, _, _),
++	PINGROUP(23, led0, qup_se3, dbg_out_clk, qdss_traceclk_a, _, _, _, _, _),
++	PINGROUP(24, _, _, _, _, _, _, _, _, _),
++	PINGROUP(25, _, _, _, _, _, _, _, _, _),
++	PINGROUP(26, mdc_mst, led2, _, qdss_tracectl_a, _, _, _, _, _),
++	PINGROUP(27, mdio_mst, led1, _, _, _, _, _, _, _),
++	PINGROUP(28, pcie1_clk_req_n, qup_se1, _, _, qdss_cti_trig_out_a0, _, _, _, _),
++	PINGROUP(29, _, _, _, _, _, _, _, _, _),
++	PINGROUP(30, pcie1_wake, qup_se1, _, _, qdss_cti_trig_in_a0, _, _, _, _),
++	PINGROUP(31, pcie0_clk_req_n, mdc_slv0, _, qdss_cti_trig_out_a1, _, _, _, _, _),
++	PINGROUP(32, _, _, _, _, _, _, _, _, _),
++	PINGROUP(33, pcie0_wake, mdio_slv0, qdss_cti_trig_in_a1, _, _, _, _, _, _),
++	PINGROUP(34, audio_pri, atest_char_status0, qdss_cti_trig_in_b0, _, _, _, _, _, _),
++	PINGROUP(35, audio_pri, rx_los2, atest_char_status1, qdss_cti_trig_out_b1, _, _, _, _, _),
++	PINGROUP(36, audio_pri, _, rx_los1, atest_char_status2, _, _, _, _, _),
++	PINGROUP(37, audio_pri, rx_los0, atest_char_status3, _, qdss_cti_trig_in_b1, _, _, _, _),
++	PINGROUP(38, qup_se1, led2, gcc_plltest_bypassnl, qdss_tracedata_a, _, _, _, _, _),
++	PINGROUP(39, qup_se1, led1, led0, gcc_tlmm, qdss_tracedata_a, _, _, _, _),
++	PINGROUP(40, qup_se4, rx_los2, audio_sec, gcc_plltest_resetn, qdss_tracedata_a, _, _, _, _),
++	PINGROUP(41, qup_se4, rx_los1, audio_sec, qdss_tracedata_a, _, _, _, _, _),
++	PINGROUP(42, qup_se4, rx_los0, audio_sec, atest_tic_en, _, _, _, _, _),
++	PINGROUP(43, qup_se4, audio_sec, _, _, _, _, _, _, _),
++	PINGROUP(44, resout, _, _, _, _, _, _, _, _),
++	PINGROUP(45, pon_mux_sel, _, _, _, _, _, _, _, _),
++	PINGROUP(46, dg_out, atest_char_start, _, _, _, _, _, _, _),
++	PINGROUP(47, gpn_rx_los, mdc_slv2, qup_se5, _, _, _, _, _, _),
++	PINGROUP(48, pon_rx, qup_se5, _, _, _, _, _, _, _),
++	PINGROUP(49, gpn_tx_fault, mdio_slv2, qup_se5, audio_sec_mclk_out2, audio_sec_mclk_in2, _, _, _, _),
++	PINGROUP(50, gpn_tx_sd, qup_se5, audio_sec_mclk_out3, audio_sec_mclk_in3, _, _, _, _, _),
++	PINGROUP(51, gpn_tx_burst, qup_se5, _, _, _, _, _, _, _),
++	PINGROUP(52, qup_se2, qup_se5, qup_se4, qup_se5_l1, _, _, _, _, _),
++	PINGROUP(53, qup_se2, qup_se4, qup_se5_l1, _, _, _, _, _, _),
 +};
 +
-+static int ipq5210_enable(struct clk *clk)
++static const char *ipq5210_get_function_name(struct udevice *dev, uint selector)
 +{
-+	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-+
-+	if (priv->data->num_clks <= clk->id) {
-+		debug("%s: unknown clk id %lu\n", __func__, clk->id);
-+		return -ENOENT;
-+	}
-+
-+	debug("%s: clk %s\n", __func__, ipq5210_clks[clk->id].name);
-+
-+	return qcom_gate_clk_en(priv, clk->id);
++	return msm_pinctrl_functions[selector].name;
 +}
 +
-+static const struct qcom_reset_map ipq5210_gcc_resets[] = {
-+	[GCC_SDCC_BCR]			= {0x33000, 0},
-+	[GCC_USB0_PHY_BCR]		= {0x2c06c, 0},
-+	[GCC_USB3PHY_0_PHY_BCR]		= {0x2c070, 0},
-+	[GCC_QUSB2_0_PHY_BCR]		= {0x2c068, 0},
-+	[GCC_USB_BCR]			= {0x2c000, 0},
-+};
++static const char *ipq5210_get_pin_name(struct udevice *dev, uint selector)
++{
++	snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
++	return pin_name;
++}
 +
-+static struct msm_clk_data ipq5210_gcc_data = {
-+	.resets = ipq5210_gcc_resets,
-+	.num_resets = ARRAY_SIZE(ipq5210_gcc_resets),
-+	.clks = ipq5210_clks,
-+	.num_clks = ARRAY_SIZE(ipq5210_clks),
-+	.enable = ipq5210_enable,
-+	.set_rate = ipq5210_set_rate,
-+};
++static int ipq5210_get_function_mux(unsigned int pin, uint selector)
++{
++	unsigned int i;
++	const msm_pin_function *func = ipq5210_pin_functions + pin;
 +
-+static const struct udevice_id gcc_ipq5210_of_match[] = {
-+	{
-+		.compatible = "qcom,ipq5210-gcc",
-+		.data = (ulong)&ipq5210_gcc_data,
++	for (i = 0; i < 10; i++)
++		if ((*func)[i] == selector)
++			return i;
++
++	pr_err("Can't find requested function for pin %u\n", pin);
++	return -EINVAL;
++}
++
++static const struct msm_pinctrl_data ipq5210_data = {
++	.pin_data = {
++		.pin_count = 54,
++		.special_pins_start = 54, /* There are no special pins */
 +	},
-+	{ }
++	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
++	.get_function_name = ipq5210_get_function_name,
++	.get_function_mux = ipq5210_get_function_mux,
++	.get_pin_name = ipq5210_get_pin_name,
 +};
 +
-+U_BOOT_DRIVER(gcc_ipq5210) = {
-+	.name		= "gcc_ipq5210",
++static const struct udevice_id msm_pinctrl_ids[] = {
++	{ .compatible = "qcom,ipq5210-tlmm", .data = (ulong)&ipq5210_data },
++	{ /* Sentinal */ }
++};
++
++U_BOOT_DRIVER(pinctrl_ipq5210) = {
++	.name		= "pinctrl_ipq5210",
 +	.id		= UCLASS_NOP,
-+	.of_match	= gcc_ipq5210_of_match,
-+	.bind		= qcom_cc_bind,
-+	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
++	.of_match	= msm_pinctrl_ids,
++	.ops		= &msm_pinctrl_ops,
++	.bind		= msm_pinctrl_bind,
++	.flags = DM_FLAG_PRE_RELOC,
 +};
 
 -- 
