@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 182CAC982D2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C21A9C982D6
 	for <u-boot@archiver.kernel.org>; Thu, 17 Sep 2026 17:20:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D127460BDC;
-	Thu, 17 Sep 2026 17:20:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 888B681140;
+	Thu, 17 Sep 2026 17:20:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vaho13Y688DB; Thu, 17 Sep 2026 17:20:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org C0C6F60BD9
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789665607;
-	b=B2EIqUsQ6ohF0Qdjy3idj01WAbfi25ZNv8APYaLeYGFaEhB/x/AKvdpFePOWIj4p7fnd
-	 RGxLoRmQthhIjf/UMaurGq43Cw/VmSEOwC8fp489LM5/VQIF1rOt0CjAprE4pdlU+pFxz
-	 GbT5PC/FudNbWjW8Hx2AdbgjdZ7sQHSXLn/23da8/zUbaGLfuBfOs7my5DXZGDBBWmER7
-	 lIAbiy1MmIitoGWzuRbxpaF1AmW6ijNdaSkQYxYAR5isOSsZKaGmxa20q/tH9qjie04an
-	 BsDQNazwBlz4coBKBG+NHbagjFzz7S5PiJC2L0rcccbhJ73HwnouoteEt1i6RzS2oZw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id R0oBoOgNcEzM; Thu, 17 Sep 2026 17:20:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 7BA6C81136
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789665617;
+	b=bghMgLNJcQs0ELO/CxruKnfoqFuhoxhe7RobWsN5nw/4OgZuv4N0M6nVSyM/XkgIck1j
+	 0dqq08VTLnJq6pYWWSC6ZKq2rmKzEKvfCxnbZkCPH5fgYBNIPj25nKyY6je1lSfwvpqZg
+	 i+Njjua76OWchC8mXqeYn3S+GzaZXJXfv53SUDfI6x9toO/8y90V/NWBfyAIYhVWgpiG0
+	 hVFgUczf7cFckWofkZ5bBExcT7kyICcmbsq5QmItKs2PhO1M3cYugkLS28SO5Zeb2/HBR
+	 8eAw1PRu+7YFYHx7T04qPn08olHIQx9XH4/DG+QmtHHKFClf+fvsILyRMUC1jTbDcDg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789665607;
+	c=relaxed/relaxed; t=1789665617;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,108 +31,103 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=56/fmZmyIUmW2PoB+WBpWMcbmYr/jGBKwFlAhvvBI6Y=;
-	b=ejSLEdA4+ziOn9GBkaq7C/6NkFttDyn+TZc8nTCf7G5bcect/qN9ftSDjm9kYaoFAPb/
-	 +BF1P6ANFd4+3E3a+G32TwMRN6IY9uepeDWzfCLbpI3QNbBKbHqVquUO96fqiLvirVptY
-	 YOjy2JsuxYdDERA3A1aHFXHPjlqnc5G7wjJHuUp9jX/P6cxNXxf6vm23lwlM3z0tiqk8a
-	 ZBog/rtVatF/nYcpTtI74Ww0HjqieG7+KR7QPgZ5FCM28rbfj2NQ/10lmbbnzMzbN0sM6
-	 ctyo4obpaaeVwUfClIdJcaGVJnFXY78v/cqk9KjNCI32+417PGqd1KoHGqn4KPwUSyg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=arm.com;
-	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=oAhtknt0;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=f6xq3Rf6LWiX8vmYKcGs0ejNuFrvtiWY9u/cO3Dd/Mo=;
+	b=PaUwopYpwRJqLVRMAAr1uYdw7yP9qQkJ0uleP2fvuVqpZNUmtoLA2g2n2jpQnQjyJCwP
+	 2nfZJtxxudS60oa2oQ0i1MBwkFWhgivITr/Mzq3dRz4FHPbZ5cppsjQDC/MvdUkoirQfd
+	 LsIwuXtXl8D6E+Hp31AjRV+BxXwjponmt3jLEEBqWOOkQrbp49vhWoWHpCZTt/O79hrvf
+	 erL7E+E8ycf9214Qky6cSeNMH/CcbazQYiEuAIrR4R8YlsaCCYS9M89vis1/Y69t9tgM7
+	 xd/83ymskiPY5zU+/8tA4tplrZdp3iBQrC6VIuk8LltQY/reQr8AYJX0rn9PYM9khhQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789665607;
-	bh=56/fmZmyIUmW2PoB+WBpWMcbmYr/jGBKwFlAhvvBI6Y=;
+	d=lists.u-boot-project.org; s=default; t=1789665617;
+	bh=f6xq3Rf6LWiX8vmYKcGs0ejNuFrvtiWY9u/cO3Dd/Mo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=doNT0wQfI9MeM1soDQFeGjb3GFqMemet9hmXw3iB3gcQKoiBTPNkL7fnwjlKrPfLI
-	 3cF005biiI5ueW0XFabP25CZqrC0YkG61nIORPs0TtQ6qj3UFf1IU+Epja9iYKwkDe
-	 kTJJEibUzrJ5IjVque2p4desj363lpFyWf8/VqdNX+dggk1XW/Fmex6ZxAMtgdZBax
-	 1ltswiRW3Kyv+weXfNML4QI9eFbN3GrFoHD5D3yH3J1TYPNyC7Nz0LyAp113fGKvdo
-	 hrbogH5eAnuuvayfCgT/hURbUeg0z+alea6qDLrCfX20mtiqyTa9S5Udk7prh9b6qt
-	 qLl/5lBckNyLg==
+	b=gCKUTxDOkGhPEZjwN2EXf5TjZsFtcvV3GKXi8Bl+nGSoBeGsoKubPSEmWJR/sTFCL
+	 nBrquYwbwAweGzt1de13i7b79bg6lsidETnofF6aEJh2EX+3yjYDSscgZuPHU0gr7x
+	 QbfpKNAkRnIFIxPmYouSUuAiHeVjvyC4SnxxyjQz5kgxc7U6lt1e7t+sp987yXWwlU
+	 xksONZmFKSitLuX7Tkb8lF6x6gj3vab+OcufZQOvDE017Pgg6wOMCpwUZ7kLGMB1A4
+	 m7kA3m6RlxQIpikeRjO4PedKAr4Z/AE3kW3faknCQ85/eTovswxentM3Ysxi/j9Yvw
+	 OGygX4AsKUl+Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C0C6F60BD9;
-	Thu, 17 Sep 2026 17:20:06 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id E5DA2362
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:19:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7BA6C81136;
+	Thu, 17 Sep 2026 17:20:17 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id A1A2413D
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:19:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D7F8360B64
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:19:09 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 93B6D40378
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:19:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QnmIAyd8ja9V for <u-boot@lists.u-boot-project.org>;
- Thu, 17 Sep 2026 17:19:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org C9F8B60B2D
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id H5ga0TIhTLIk for <u-boot@lists.u-boot-project.org>;
+ Thu, 17 Sep 2026 17:19:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 93B0C40427
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789665549;
- b=Fb3jBO8S8USwTheQhxKZld/0PMvuLOdbLE1iiM7Yf8B8kEzQ0kOIG9ENWfXng05VD1An
- /YN4bKjt+ro+7MFu232lD2srjcFst3eePGX3Ia+IzOgrRL/pMiZCW4E7NvFERdOo48vIU
- 8B5AMJ0SWVJNsC+XyZVKby/VSVzjXVArh4uVdSLc9aQpWRAvFXlqagVde4IjXl5MwmlNT
- dGNfaO5A5klDkUe7QQ5jyKpxoUf90axwFW2E/aKo3lTF7D2q0GkZkPZSpCEu00I8dya5o
- x9Uca2Meg+xdPo4PY+1m4S8EYy5STaEV2km8yDlCdbqRt1+AHZL8M+UWmJ+Bzi+OVxw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789665554;
+ b=bIuOeLxtXiu3edheV68eWFopWrJd/scdEPO2BsVZ9QRu/Y8xasAFzDmXQaPgsHzxD+58
+ dUkEKCd46oAzAuY6nfriLYip0e1Xb71pcwDpGtan8Du3Ba29uhoSBrk3koIWSsG+2Jo2t
+ QXlk1n6lP0H1GDLBFWR8AUr11F/4nMB0May7S2dnj64vfQeRSQIynFW/4vvNknypRmK4P
+ kIZQogMyj7ayYrolCnDjqCVPY/0he23stFl35CK7aa1E6Jg3+pZPyejT4Bw4jJvra0h6a
+ 9Pa4bbOVfDEuM6ebkwKOoUmdydvFmuXeCDCggw96CC2ksBA346vqtwoIpijvZWhRjDg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789665549;
+ c=relaxed/relaxed; t=1789665554;
  h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=56/fmZmyIUmW2PoB+WBpWMcbmYr/jGBKwFlAhvvBI6Y=;
- b=d9OxRfhxyn7qkcQa58DB98PffeLhGo8KOwRdKsWIvqp3tAoKZTaudVn/jlyczGmaT9Gd
- Whw0CvPytCOgJFhVZ5gRfUdwY0U5SaaBxES6bgmH3BgcTMAMffRthCWMprfdOb1yhczoQ
- HXxI0De7GzaXN1MxpFh2cKZmxQRMNYuWg3VMuPWhbWqogBrFmWsJmffFYVHyVns3ANuBT
- QH6qNQfsEJ6rLXeBcV27QXbZVlk8FC5bKRjBVgJYpwwy9TsueLsrAJnf2PFWktQkxVVgu
- pTyb0y1oAuzwQfZMWjFbploKgwMuiuSbqniBXvJ7ycoveGuRkyg72frtMAj5DmWjJvQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ bh=f6xq3Rf6LWiX8vmYKcGs0ejNuFrvtiWY9u/cO3Dd/Mo=;
+ b=Tn6/DzkDsy71QlLyqvA4gnCVnik/DDdHrkx/aUldWnI/jrRPe0XzKPQ/IaoiJdqmGIOZ
+ +Ym9gGKjGBms1+llZ75LsGHU5mXipzpuokDV92ImPKGo3ZoWLa2Hvj0vd0JoFbdlCvgCC
+ mUiz9gUDq/OeAzWCI2Sn2dMK8Su0wgxILbT8egSy9Tae9k786AeNigA3JVUElNPrs4cs0
+ fBEXntQCdH74+NR/+BBObCUSjdZw0HYBvuyCCJvPSttbjtp4z5zAT2G5q5PBkSFdWDqwd
+ IsuQYgXkn0jxcw2eT1oS+2m5bucE8E7QmfuLO/UO0rpOWQfY/PGLpuxE06hVdoAxVfQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=arm.com; 
  dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=oAhtknt0; 
+ header.b=oR5Fd5Jb; 
  arc=none smtp.remote-ip=217.140.110.172
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
  helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=oAhtknt0
+ header.a=rsa-sha256 header.s=foss header.b=oR5Fd5Jb
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp3.osuosl.org (Postfix) with ESMTP id C9F8B60B2D
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:19:08 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 93B0C40427
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 17:19:14 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5910B143D;
- Thu, 17 Sep 2026 10:19:04 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 35B3D1596;
+ Thu, 17 Sep 2026 10:19:10 -0700 (PDT)
 Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 450C13F7B4;
- Thu, 17 Sep 2026 10:19:06 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DDE423F7B4;
+ Thu, 17 Sep 2026 10:19:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1789665547; bh=Y1RUkpKCWykWhkUPiUnIveBByhH/75o0YnE8TKp7prA=;
+ t=1789665553; bh=P6zUb/B4SMH5E2jHjhPHlV0tEKsi8AaRLu1Qdj85C5U=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=oAhtknt0y9XCHn+MTgP5i1Br/D7hiO6H9DjTmdFv34ZNaOMwMma7TFxl7WtnLuewU
- 39yrtqEdCMzPEpB+cu/WkOZhcCkWnv4wZrCiinAl5LYvbWcsSFuD0e+iqcf6FV+g0g
- ayjtGpCFb7oDC+FnP+nPr+f0Qv15dMGZI+te6ah0=
+ b=oR5Fd5JbjKhiynIJ5kKKgo4iIGYZtV/+mhjn/VT2Kb/lrV9/nXtX1hXLnj0bupmjH
+ NVdOvolcqXNjzAju+XEhJVSA1tZKBdA6LBJbUTEZq843darFTPMxFQU9eP8a82Z3HE
+ yoduLNAgtXZl2DU13vr3BS4MIiHKl4GhvDPqn5As=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alex Chapman <alex.chapman@arm.com>, David Hu <david.hu2@arm.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Casey Connolly <casey.connolly@linaro.org>
-Subject: [PATCH v6 17/24] fwu_arm_psa: Add ESRT support
-Date: Thu, 17 Sep 2026 18:18:03 +0100
-Message-ID: <20260917171810.4122899-18-harsimransingh.tungal@arm.com>
+ Alex Chapman <alex.chapman@arm.com>, Tom Rini <trini@konsulko.com>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
+Subject: [PATCH v6 21/24] fwu_arm_psa: corstone1000: Read active index for
+ kernel setup
+Date: Thu, 17 Sep 2026 18:18:07 +0100
+Message-ID: <20260917171810.4122899-22-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
 References: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 17 Sep 2026 17:19:36 +0000
+X-Mailman-Approved-At: Thu, 17 Sep 2026 17:19:43 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,227 +143,340 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Read ESRT data from Secure world in GetImageInfo()
+Read the active bank index directly from FWU metadata when setting the
+kernel address and size during board_late_init().
 
-Use FWU_READ_STREAM ABI to read ESRT data from Secure world.
+Arm PSA FWU does not enable the multi-bank FWU implementation, so its
+cached metadata and fwu_plat_get_bootidx() hook are unavailable. Read
+and validate the metadata header and CRC through the FWU metadata uclass,
+falling back from the primary copy to the secondary, then use the active
+index to select the kernel partition.
+
+This keeps Corstone-1000 kernel selection working with the Arm PSA FWU
+configuration.
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Alex Chapman <alex.chapman@arm.com>
-Signed-off-by: David Hu <david.hu2@arm.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
 ---
- include/fwu_arm_psa.h        |  13 ++++
- lib/efi_loader/fwu_arm_psa.c | 118 +++++++++++++++++++++++++++++++----
- 2 files changed, 119 insertions(+), 12 deletions(-)
+ board/armltd/corstone1000/corstone1000.c | 209 +++++++++++++++++++----
+ include/fwu_arm_psa.h                    |  12 ++
+ lib/efi_loader/Kconfig                   |   2 +
+ 3 files changed, 189 insertions(+), 34 deletions(-)
 
-diff --git a/include/fwu_arm_psa.h b/include/fwu_arm_psa.h
-index 1177ccea0db..9fb5f87ac6c 100644
---- a/include/fwu_arm_psa.h
-+++ b/include/fwu_arm_psa.h
-@@ -18,6 +18,9 @@
+diff --git a/board/armltd/corstone1000/corstone1000.c b/board/armltd/corstone1000/corstone1000.c
+index b255a0d78ad..084c9bfff63 100644
+--- a/board/armltd/corstone1000/corstone1000.c
++++ b/board/armltd/corstone1000/corstone1000.c
+@@ -11,14 +11,16 @@
+ #include <generated/dt.h>
+ #include <env.h>
+ #include <efi_loader.h>
+-#include <fwu.h>
+ #include <fwu_arm_psa.h>
++#include <fwu_mdata.h>
++#include <u-boot/crc.h>
+ #include <netdev.h>
+ #include <nvmxip.h>
+ #include <part.h>
+ #include <dm/platform_data/serial_pl01x.h>
+ #include <asm/armv8/mmu.h>
+ #include <asm/global_data.h>
++#include <stdlib.h>
  
- #define DEFAULT_HW_INSTANCE		(1)
+ #define CORSTONE1000_KERNEL_PARTS 2
+ #define CORSTONE1000_KERNEL_PRIMARY "kernel_primary"
+@@ -29,6 +31,9 @@
+ /* The total number of upgradable images including the start and end dummy payloads */
+ #define CAPSULE_PAYLOADS_MAX_COUNT (CONFIG_FWU_NUM_IMAGES_PER_BANK + 2)
  
-+/* The minimum supported ESRT version */
-+#define EFI_SYSTEM_RESOURCE_TABLE_FIRMWARE_RESOURCE_VERSION		(1)
++#define FWU_MDATA_VERSION	0x2U
++#define FWU_MDATA_MAX_SIZE	720
 +
- /* Default values of the ESRT fields which are not supported at this stage */
- #define PACKAGE_VERSION_NOT_SUP		(0xffffffff)
- #define LAST_ATTEMPT_NOT_SUP		(0)
-@@ -361,6 +364,16 @@ struct __packed fwu_image_directory {
- 	struct fwu_image_info_entry entries[];
- };
+ /*
+  * GUIDs for capsule updatable firmware images
+  *
+@@ -151,8 +156,6 @@ struct efi_capsule_update_info update_info = {
  
-+/**
-+ * struct fwu_esrt_data_wrapper - Wrapper for the ESRT data
-+ * @data: The ESRT data read from secure world
-+ * @entries: The ESRT entries
-+ */
-+struct fwu_esrt_data_wrapper {
-+	struct efi_system_resource_table data;
-+	struct efi_system_resource_entry entries[CONFIG_FWU_NUM_IMAGES_PER_BANK];
-+} __packed;
-+
- /**
-  * fwu_agent_init() - Setup the FWU agent
-  * Perform the initializations required to communicate
-diff --git a/lib/efi_loader/fwu_arm_psa.c b/lib/efi_loader/fwu_arm_psa.c
-index c467922a6d8..20e4fdf9b90 100644
---- a/lib/efi_loader/fwu_arm_psa.c
-+++ b/lib/efi_loader/fwu_arm_psa.c
-@@ -28,6 +28,7 @@ static bool g_fwu_initialized;
- static bool g_in_trial;
- static struct fwu_image_directory *g_fwu_cached_directory;
- efi_guid_t g_update_guid[CONFIG_FWU_NUM_IMAGES_PER_BANK];
-+struct fwu_esrt_data_wrapper g_esrt_data;
+ #endif /* EFI_HAVE_CAPSULE_SUPPORT */
  
- /* Error mapping declarations */
- 
-@@ -930,6 +931,98 @@ close_handle:
- 	return ret;
+-static int corstone1000_boot_idx;
+-
+ static struct mm_region corstone1000_mem_map[] = {
+ 	{
+ 		/* CVM */
+@@ -232,46 +235,38 @@ int dram_init_banksize(void)
+ 	return 0;
  }
  
-+/**
-+ * fwu_esrt_sanity_check() - Verify ESRT data
-+ *
-+ * Description: Make sure the ESRT data matches the directory data.
-+ *
-+ * Return: 0 on success. Otherwise, failure.
-+ */
-+static int fwu_esrt_sanity_check(void)
-+{
-+	int i;
+-void fwu_plat_get_bootidx(uint *boot_idx)
+-{
+-	int ret;
+-
+-	/*
+-	 * in our platform, the Secure Enclave is the one who controls
+-	 * all the boot tries and status, so, every time we get here
+-	 * we know that the we are booting from the active index
+-	 */
+-	ret = fwu_get_active_index(boot_idx);
+-	if (ret < 0) {
+-		*boot_idx = CONFIG_FWU_NUM_BANKS;
+-		log_err("corstone1000: failed to read active index\n");
+-	}
+-}
+-
+-int board_late_init(void)
++static void corstone1000_setup_kernel_env(void)
+ {
+ 	struct disk_partition part_info;
+ 	struct udevice *dev, *bdev;
+ 	struct nvmxip_plat *plat;
+ 	struct blk_desc *desc;
++	u32 active_idx;
+ 	int ret;
++	bool kernel_addr_set, kernel_size_set;
+ 
+ 	ret = uclass_first_device_err(UCLASS_NVMXIP, &dev);
+ 	if (ret < 0) {
+-		log_err("Cannot find kernel device\n");
+-		return ret;
++		log_err("Cannot find kernel device, err (%d)\n", ret);
++		return;
+ 	}
+ 
+ 	plat = dev_get_plat(dev);
+ 	device_find_first_child(dev, &bdev);
+ 	desc = dev_get_uclass_plat(bdev);
+-	ret = fwu_get_active_index(&corstone1000_boot_idx);
++	ret = fwu_plat_get_active_index(&active_idx);
+ 	if (ret < 0) {
+-		log_err("corstone1000: failed to read boot index\n");
+-		return ret;
++		log_err("corstone1000: failed to read boot index, err (%d)\n", ret);
++		return;
+ 	}
+ 
+-	if (!corstone1000_boot_idx)
++	kernel_addr_set = env_get_hex("kernel_addr", 0) ? true : false;
++	kernel_size_set = env_get_hex("kernel_size", 0) ? true : false;
 +
-+	log_debug("FWU: ESRT data check ...\n");
++	if (kernel_addr_set && kernel_size_set)
++		return;
 +
-+	if (g_esrt_data.data.fw_resource_count !=
-+	    CONFIG_FWU_NUM_IMAGES_PER_BANK) {
-+		log_err("FWU: Unexpected ESRT entries count (%d , %d)\n",
-+			g_esrt_data.data.fw_resource_count,
-+			CONFIG_FWU_NUM_IMAGES_PER_BANK);
-+		return -EINVAL;
++	if (!active_idx)
+ 		ret = part_get_info_by_name(desc, CORSTONE1000_KERNEL_PRIMARY,
+ 					    &part_info);
+ 	else
+@@ -280,18 +275,164 @@ int board_late_init(void)
+ 
+ 	if (ret < 0) {
+ 		log_err("failed to fetch kernel partition index: %d\n",
+-			corstone1000_boot_idx);
+-		return ret;
++			active_idx);
++		return;
 +	}
 +
-+	if (g_esrt_data.data.fw_resource_version <
-+		EFI_SYSTEM_RESOURCE_TABLE_FIRMWARE_RESOURCE_VERSION) {
-+		log_err("FWU: Secure world ESRT version %llu not supported\n",
-+			g_esrt_data.data.fw_resource_version);
-+		return -EINVAL;
++	if (!kernel_addr_set) {
++		ret = env_set_hex("kernel_addr", plat->phys_base +
++				(part_info.start * part_info.blksz));
++		if (ret)
++			log_err("cannot set kernel_addr variable, err (%d)\n",
++				ret);
 +	}
 +
-+	for (i = 0; i < g_fwu_cached_directory->num_images; i++) {
-+		if (guidcmp(&g_fwu_cached_directory->entries[i].img_type_guid,
-+			    &g_esrt_data.data.entries[i].fw_class)) {
-+			log_err("FWU: GUID mismatch for image %d\n", i + 1);
-+			return -EINVAL;
-+		}
++	if (!kernel_size_set) {
++		ret = env_set_hex("kernel_size",
++				  part_info.size * part_info.blksz);
++		if (ret)
++			log_err("cannot set kernel_size variable, err (%d)\n",
++				ret);
 +	}
-+
-+	log_debug("FWU: ESRT data check passed\n");
-+
-+	return 0;
 +}
 +
 +/**
-+ * fwu_read_esrt() - Read the ESRT data
++ * fwu_read_mdata() - Wrapper around fwu_mdata_ops.read_mdata()
 + *
-+ * Description: Read the ESRT data from the Secure world.
++ * @dev: FWU metadata device
++ * @mdata: Output FWU mdata read
++ * @primary: If primary or secondary copy of metadata is to be read
++ * @size: Size in bytes of the metadata to be read
 + *
-+ * Return: 0 on success. Otherwise, failure.
++ * Return: 0 if OK, -ve on error
 + */
-+static int fwu_read_esrt(void)
++int fwu_read_mdata(struct udevice *dev, struct fwu_mdata *mdata,
++		   bool primary, uint32_t size);
++
++/**
++ * corstone1000_mdata_crc_check() - Verify CRC32 of FWU metadata
++ *
++ * @mdata: FWU metadata information
++ *
++ * Calculate the crc32 of the metadata and compare it to the FWU
++ * metadata crc32 field.
++ *
++ * Return: EFI_SUCCESS on success. Otherwise, failure.
++ */
++static int corstone1000_mdata_crc_check(struct fwu_mdata *mdata)
 +{
-+	int ret, close_ret;
-+	u32 handle = 0;
-+	efi_guid_t esrt_guid = EFI_SYSTEM_RESOURCE_TABLE_GUID;
-+	u32 esrt_data_size;
-+	void *g_esrt_data_buf;
++	u32 calc_crc32;
++	void *buf = &mdata->version;
++	u32 mdata_size = mdata->metadata_size;
 +
-+	ret = fwu_open(&esrt_guid, FWU_OP_TYPE_READ, &handle);
-+	if (ret) {
-+		log_err("FWU: Open ESRT image failed (err: %d)\n",
-+			ret);
-+		return ret;
-+	}
++	calc_crc32 = crc32(0, buf, mdata_size - sizeof(u32));
 +
-+	log_debug("FWU: ESRT image handle (0x%x)\n", handle);
++	return calc_crc32 == mdata->crc32 ? EFI_SUCCESS : -EINVAL;
++}
 +
-+	esrt_data_size = sizeof(g_esrt_data);
-+	g_esrt_data_buf = &g_esrt_data;
++/**
++ * corstone1000_read_active_index() - Read active index from metadata storage media
++ *
++ * @primary:	Primary or secondary metadata partition
++ * @active_idx:	Active index value
++ *
++ * Read the selected metadata partition, perform basic verification, and return
++ * the active index.
++ *
++ * Return: EFI_SUCCESS on success. Otherwise, failure.
++ */
++static int corstone1000_read_active_index(bool primary,
++						   uint *active_idx)
++{
++	struct fwu_mdata *mdata_full = NULL;
++	struct fwu_mdata mdata;
++	struct udevice *dev;
++	int ret;
 +
-+	ret = fwu_read_stream(handle, (void **)&g_esrt_data_buf, &esrt_data_size);
-+	if (ret) {
-+		log_err("FWU: Read ESRT image failed (err: %d)\n",
-+			ret);
-+		goto close_handle;
-+	}
-+
-+	ret = fwu_esrt_sanity_check();
++	ret = uclass_first_device_err(UCLASS_FWU_MDATA, &dev);
 +	if (ret)
-+		goto close_handle;
++		goto fail;
 +
-+	log_debug("FWU: ESRT version supported by Secure world (%llu)\n",
-+		  g_esrt_data.data.fw_resource_version);
++	// Read metadata header, get length
++	ret = fwu_read_mdata(dev, &mdata, primary, sizeof(struct fwu_mdata));
++	if (ret)
++		goto fail;
 +
-+close_handle:
-+	/* The Update Agent can execute for an unbounded time */
-+	close_ret = fwu_commit(handle, FWU_IMG_NOT_ACCEPTED, 0);
-+	if (close_ret)
-+		log_err("FWU: Close ESRT image handle failed (err: %d)\n",
-+			close_ret);
++	if (mdata.version != FWU_MDATA_VERSION) {
++		log_err("FWU partition %s has metadata version %u. Expected value of %u\n",
++			primary ? "Primary" : "Secondary", mdata.version, FWU_MDATA_VERSION);
++		ret = -EINVAL;
++		goto fail;
+ 	}
+ 
+-	ret = 0;
++	if (mdata.metadata_size > FWU_MDATA_MAX_SIZE) {
++		log_err("FWU partition %s has metadata size too large %u. Max size %u\n",
++			primary ? "Primary" : "Secondary", mdata.metadata_size, FWU_MDATA_MAX_SIZE);
++		ret = -EINVAL;
++		goto fail;
++	}
+ 
+-	ret |= env_set_hex("kernel_addr", plat->phys_base +
+-			   (part_info.start * part_info.blksz));
+-	ret |= env_set_hex("kernel_size", part_info.size * part_info.blksz);
++	// Read full metadata
++	mdata_full = calloc(1, mdata.metadata_size);
++	if (!mdata_full) {
++		ret = -ENOMEM;
++		goto fail;
++	}
++
++	ret = fwu_read_mdata(dev, mdata_full, primary, mdata.metadata_size);
++	if (ret)
++		goto fail;
++
++	ret = corstone1000_mdata_crc_check(mdata_full);
++	if (ret)
++		goto fail;
++
++	if (mdata_full->active_index >= CONFIG_FWU_NUM_BANKS) {
++		log_err("Active Index(%u) in the FWU partition %s is larger than the number of configured banks\n",
++			mdata_full->active_index,
++			primary ? "Primary" : "Secondary");
++		ret = -EINVAL;
++		goto fail;
++	}
++
++	*active_idx = mdata_full->active_index;
++	ret = EFI_SUCCESS;
+ 
+-	if (ret < 0)
+-		log_err("failed to setup kernel addr and size\n");
++fail:
++	if (mdata_full)
++		free(mdata_full);
+ 
+ 	return ret;
+ }
++
++/**
++ * fwu_plat_get_active_index() - Get the value of the active index
++ *
++ * @active_idx:	Active index value
++ *
++ * Read the active index from the primary metadata copy, falling back to the
++ * secondary on read failure.
++ *
++ * Return: EFI_SUCCESS on success. Otherwise, failure.
++ */
++int fwu_plat_get_active_index(uint *active_idx)
++{
++	int ret;
++
++	if (!active_idx) {
++		log_err("!active_idx\n");
++		return -EINVAL;
++	}
++
++	ret = corstone1000_read_active_index(true, active_idx);
++	if (ret != EFI_SUCCESS)
++		ret = corstone1000_read_active_index(false, active_idx);
 +
 +	return ret;
 +}
 +
- /**
-  * fwu_discover_ts_sp_id() - Query the FWU partition ID
-  *
-@@ -1193,7 +1286,6 @@ static void EFIAPI fwu_accept_notify_exit_boot_services(struct efi_event *event,
- 			efi_ret = EFI_ACCESS_DENIED;
- 			goto out;
- 		}
--
- 	} else {
- 		log_info("FWU: ExitBootServices: Booting in regular state\n");
- 	}
-@@ -1336,8 +1428,12 @@ efi_status_t efi_fill_image_desc_array(efi_uintn_t *image_info_size,
- 		}
- 	}
++int board_late_init(void)
++{
++	corstone1000_setup_kernel_env();
++	return 0;
++}
+diff --git a/include/fwu_arm_psa.h b/include/fwu_arm_psa.h
+index 9fb5f87ac6c..2b0501f39fe 100644
+--- a/include/fwu_arm_psa.h
++++ b/include/fwu_arm_psa.h
+@@ -397,6 +397,18 @@ int fwu_agent_init(void);
+  */
+ int fwu_update_image(const void *image, u8 image_index, u32 image_size);
  
--	required_image_info_size = g_fwu_cached_directory->num_images *
--		image_info_desc_size;
-+	ret = fwu_read_esrt();
-+	if (ret)
-+		return EFI_NOT_READY;
++/**
++ * fwu_plat_get_active_index() - Get the value of the active index
++ *
++ * @active_idx:	Active index value
++ *
++ * Read the active index from the primary metadata copy, falling back to the
++ * secondary on read failure.
++ *
++ * Return: EFI_SUCCESS on success. Otherwise, failure.
++ */
++int fwu_plat_get_active_index(u32 *active_idx);
 +
-+	required_image_info_size =
-+		g_fwu_cached_directory->num_images * image_info_desc_size;
- 
- 	if (*image_info_size < required_image_info_size) {
- 		*image_info_size = required_image_info_size;
-@@ -1355,15 +1451,13 @@ efi_status_t efi_fill_image_desc_array(efi_uintn_t *image_info_size,
- 		image_info[i].image_index = i + 1;
- 
- 		/* Corresponding ESRT field: FwClass */
--		guidcpy(&image_info[i].image_type_id,
--			&g_fwu_cached_directory->entries[i].img_type_guid);
-+		guidcpy(&image_info[i].image_type_id, &g_esrt_data.entries[i].fw_class);
- 
- 		image_info[i].image_id = image_info[i].image_index;
- 		image_info[i].image_id_name = NULL; /* Not supported */
- 
- 		/* Corresponding ESRT field: FwVersion */
--		image_info[i].version =
--			g_fwu_cached_directory->entries[i].img_version;
-+		image_info[i].version = g_esrt_data.entries[i].fw_version;
- 
- 		image_info[i].version_name = NULL; /* Not supported */
- 		image_info[i].size =
-@@ -1382,13 +1476,13 @@ efi_status_t efi_fill_image_desc_array(efi_uintn_t *image_info_size,
- 
- 		/* Corresponding ESRT field: LowestSupportedFwVersion */
- 		image_info[i].lowest_supported_image_version =
--			g_fwu_cached_directory->entries[i].lowest_acceptable_version;
-+			g_esrt_data.entries[i].lowest_supported_fw_version;
- 
--		/* Corresponding ESRT field: LastAttemptVersion (not supported) */
--		image_info[i].last_attempt_version = LAST_ATTEMPT_NOT_SUP;
-+		/* Corresponding ESRT field: LastAttemptVersion */
-+		image_info[i].last_attempt_version = g_esrt_data.entries[i].last_attempt_version;
- 
--		/* Corresponding ESRT field: LastAttemptStatus (not supported) */
--		image_info[i].last_attempt_status = LAST_ATTEMPT_NOT_SUP;
-+		/* Corresponding ESRT field: LastAttemptStatus */
-+		image_info[i].last_attempt_status = g_esrt_data.entries[i].last_attempt_status;
- 
- 		image_info[i].hardware_instance = DEFAULT_HW_INSTANCE;
- 		image_info[i].dependencies = NULL; /* Not supported */
+ /**
+  * fwu_get_payload_type() - Identifies the payload type
+  * @image_index:	The payload index
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index f01889fd6d3..273b135553e 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -376,6 +376,8 @@ config FWU_ARM_PSA
+ 		!FWU_MULTI_BANK_UPDATE
+ 	select EFI_CAPSULE_FIRMWARE
+ 	select EFI_PARTITION
++	select FWU_MDATA
++	select PARTITION_TYPE_GUID
+ 	imply EFI_CAPSULE_ON_DISK_EARLY
+ 	help
+ 	  Select this option if you want to enable firmware management protocol
 -- 
 2.43.0
 
