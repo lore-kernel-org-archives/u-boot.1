@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C88B2C982D8
-	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 17:45:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 458B4C982D7
+	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 17:45:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6EF0C60DB2;
-	Fri, 18 Sep 2026 17:45:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1017E8134B;
+	Fri, 18 Sep 2026 17:45:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0bXwvHKtx0MF; Fri, 18 Sep 2026 17:45:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 6C33D60D56
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789753541;
-	b=b8ZNFjMbPX8jKawWMil4jKAK67AHISb84ZKAW4YoFqL/9VXuhZq08q4Z99Vwb4rqJf0X
-	 OKOJ7sV21/ilAW985ep8QtyGcY8Uiz6nTCu6APZXMdnaJEL4vBsLqRZPQXPh909c68YLz
-	 NDoQ7TVQuR5EAUY4ybOL+gtc9PjkDBKeo2sGb2clQ/PM0JwbHc+UHLrtEX/qjNeOJhlix
-	 MI4A16BFaqVdj1sLk3M0ybFHm+WMe8iuAsrKNkpDAe9oWCqASXPsGpc71zSVtls0x+Z+A
-	 aP+dkjRcl7Xqxf+4KiNxNMYjDtVKxKOBWTJNk1oRmGKWozRBK05f+mNAY1tL+0GW93Q==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jL17zVc5BVeL; Fri, 18 Sep 2026 17:45:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org C81D381332
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789753543;
+	b=WwUQA+Hy2l5PlWeCY09RtNUsvR70Kg2JBaV0y1y+epryQ6ZmANhOcqZayCtFfTxpvwI3
+	 XaMtwuMTBKpVrBErmEgr9u1gGmDFXVkF6oAsV6Ps96GAJDgouMM0nHUmn3ByHuVfCgYcZ
+	 ZZjQwHHfESHMHHwKXKAVtYN0BjB7uaq+tuyM9dA8g+7imRnRsHoXKsL6WPJYbSUkq71QP
+	 SgG+yTvy/3xZrwfud0bk1No0ho70nDe4lT3AJ3AuSdAZod3dWEwMEda1+g3/GzuMi/tv5
+	 kXusiSdmf5yrX4vzKNdRZ6NqzcVSCDk4pIeIbHwSbQtilTBJaNtln2HMsr/AGmtYnNA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789753541;
+	c=relaxed/relaxed; t=1789753543;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,104 +31,104 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=LfnVBxV5suBLyaHEIU0q6eSUdOZ6oSGnUL9yyQLSBf0=;
-	b=kVT6ZPx+MCYj9fkWO/tuUCq8x+LySUqE9kER8/0MMgDQcSNNVx2pwqD4ofslDP8cUsWQ
-	 k11OBrrzW9LZzU+tX+vGSKUoiDxx9R6GNuhruZNbzQuTIBcJhCOLHZpAiTYiFIkOjRxz/
-	 Pnvh008nBNNU+ZJfJYctnkFhn2kdyy8VyMvPh1q9JY9ZNnwK0AHNkKfzgLJ9GeS2RWZ7O
-	 n9bGCYjCJf/NrZfAgBe98xtznIEcO9J/aXU9FXLTzAg1Lv1Ud6mLiy5lZdiw6138QK4yj
-	 nAxvUh9qwV1Xk+UIrnKbO3wpjSW0fNs2K85gYOtjv3hFDLFHhzQwl+gynuDS9UPZSaQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=WiALIA1mmNlZjWSyFsXpCbJViutoXfdkL18ry35PbBY=;
+	b=Gqj8uCn8/8DpTGmhx05vnzIzxWZ9WQ1YsByNrwxzoQ2zZSaQZVl3UybKuf0yWWzsP86u
+	 B5RqFTjvemF+PyKfuP2nMdKRwmJX5bC3RZFn0y4d15GHqHVBkW4c5/bWfMFPDMBrQuulD
+	 MiDiefWgPuXlMazQbhIUVD6cJ4VB3pNSbtrRJm29csi3VL4diVellZzvrAdZTxgR/cIzw
+	 7G73jD/KjAoDXpiNn/evboqADDmpML04OIQSDRQhjxJBfV/LUeBLgiWl3blGee6FeW3HW
+	 PTmGzrcqxNCulgHEVHYoCUsGoq+gjPgoZnHKbRt3Mxuckr1TR0O5BoW9QjG2KoSiswQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789753541;
-	bh=LfnVBxV5suBLyaHEIU0q6eSUdOZ6oSGnUL9yyQLSBf0=;
+	d=lists.u-boot-project.org; s=default; t=1789753542;
+	bh=WiALIA1mmNlZjWSyFsXpCbJViutoXfdkL18ry35PbBY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fNtpJGykA1Ilc2SaXjQUirFptIENIXjc2IU1cz1FXJoQ7WTJhEeJxNyMc2FcyBrWw
-	 ex1B3ck2j222/6aZrRwxYSk7GYYGEzRyHYde4NA9YqcJM7Yy0YyV6d3ggIPsKHAXmo
-	 DObRjVuQb09vUqXrBLd0B0EW3/jDfr7Tn4v9LdTIdsaWVmI7iVWlybRXh8wcuXNLk6
-	 L0+rzzZrntefS9HOBY7AcmmGPliYjsgd6SeDxPoTZjp8BCVe9rr54ew1Zvg3nlLI1p
-	 FJlDYRgNAgylmMwJSim/1yV3l7dF2eF+QA7uOYe1wb4AaDydewJfYhRuNt4uzRC8JX
-	 J/1mw/ey2gulw==
+	b=sA84q3FhQKPkxaS0gC2fMIOC8tYXBKc28cPi+ZvJ5pC+KABllbucZBSij139XZ69/
+	 UnvUG8Qcu/as0kKAqy0i4ystpj22atN09Fv3cJi0l7eY9uJaJJXhu1hnoQh7GEvLaU
+	 LN159newgQKrK3TMKWDcQyph8AbKLOCu0Go+iQCXAcxf08MaLhAmUjRNimzF8kYPuv
+	 Opu5IYMuV4rb7xeoJaNWemZpHQ9YJKxG/6dtjFGCUlm7CmqMjaa3xFF1td9a+x8tUW
+	 61yo++O0mqEL7aHB1kOH3/8qHrQaf3XxtRR85qZmzvSM4shLZZbUUiRMU86WrBU1fT
+	 aAwKz3aaBULWg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6C33D60D56;
-	Fri, 18 Sep 2026 17:45:41 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 33895237
+	by smtp1.osuosl.org (Postfix) with ESMTP id C81D381332;
+	Fri, 18 Sep 2026 17:45:42 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7DFAF29B
  for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 17:22:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 30E984054B
+ by smtp3.osuosl.org (Postfix) with ESMTP id 642E060659
  for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 17:22:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UhKia8AROAdY for <u-boot@lists.u-boot-project.org>;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ar5EnFMs1wPl for <u-boot@lists.u-boot-project.org>;
  Fri, 18 Sep 2026 17:22:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org ADEC1400F5
-Authentication-Results: smtp2.osuosl.org;
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 45CD160622
+Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip="2a02:2350:5:505::1"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789752163;
- b=oivufQqLHwQE3DmRxoFjcmc88BgsAEC9//n7cQWyjNa+INGF1dSUcXfFqWVDh6GiM8qc
- ObmimG2fFOOG9uLUtz8BJS52MfLN8XMbKBg6QCYx6BPwGWBwIFAFYqLX51mDHRrMhmtnn
- LYDj2lAX3uYcyhZc6S8QXVUh0F0DlaG9isZii2NUU0x/iMjDCsOfmL+2D/l9XXILxUYlH
- 265yS/+83cKQFTA8KXW5Ye+5rUA5IWyBdhH/Ei1k3bK6JMLNn1DpMxRv0vl+z0+pZwNow
- utMqi2yrzZ8kgJfobDag/92el+n9O4XLMVBilTjeE0VAI9sL7voO4B2KcjK80Usg7mQ==
+ b=XxyAQgm+GhAAYbqugnlg5QNnm8EtapmVgyS+RzAWcFR6dfzxrJF9jSVN4cFp56N4jZjl
+ g/Chkocv1oY/fHL+1dZTPsMIGWRI0YF6Blk1nqofhozU273tFD4CqjcZHXKv05Li5Cd3N
+ /Ei9ayrnDjTK26wZmUSCzHA/hDr8H5dBJl4sNBnNb66lDuOQioNfpPdxBSLp71bIkXQGo
+ E/zX7PZwxruDwUT3y0PjoyxfygqUTh0bBFUwHhxok2CUt8OGhXUEl7x9m6bmJbGYV5rdD
+ H6swMMlk3R9zq2mfmDnlHrLus3ikQZsUgrgvJoB6aNavkE4KuVI9tKLkKiId8d+Yp8Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1789752163;
  h=Received-SPF:DKIM-Signature:DKIM-Signature:X-HalOne-ID:Received:From:
  To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding;
- bh=LfnVBxV5suBLyaHEIU0q6eSUdOZ6oSGnUL9yyQLSBf0=;
- b=hNgmwz79lLl38iMg876rsVdovMyvVr6f/eijcGjqNFYQhv3I3qkiYsLJQlM9goYVpX1k
- nrPQdsNcFAZkkHA8hrIhXdDbkpY85Ooli+0rWiuxBhdWVBSB8KB8B1cqe7J4sVgs0HuyJ
- Dklr8pAVrHoO6Y1TA4/vvN5JOt3YgLjhVJF239wHGyAYmkeLw9PVNTqom7wOx2aPIKxC6
- sW6AQ1NTBF36vxYnCKH9HSmCWfFIbABmQybop3os7iH6SWl85SoixXgTDUDSciHgEVTbH
- 4kW2vmmOOOGCBd3J+8GfkT7OCxGzXjH9MmYqj0E34bkG9lgLwfYGcLyUodFzoTMrAPw==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=WiALIA1mmNlZjWSyFsXpCbJViutoXfdkL18ry35PbBY=;
+ b=Psgtt5cvG26HwAxjUxm8Uw0gI5WPrCvYBhk4Z40ue76iFKx7l0rVNZ6pvMxm0YX0lfSB
+ QEpgPnM0+jJIieHbAoXhywbYEEF9ArsxkraIE//H/b+P+JUexwkqI+YmcA5Q5aUDzEzfZ
+ 6AxMJUnB3mTwR32s3DPak4Em9Jz+UWibqyUaqbzJ58VqejiEUZXXYAleckm1n8/7GzYs/
+ azezswTOWHjFp3s3F5t7iiAwp44eWfzoYJwpyQXwnssQu+Gb/8w3NqypJVmRMvhwZ2499
+ K/C0jcdfE2/ZJaKqzCDlB+AJW4h8S5qGFPI89cC7BKow6p7+3MR5M6rtRhANadJvZCQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=none header.from=embetrix.com; 
  dkim=pass header.d=embetrix.com header.i=@embetrix.com header.a=rsa-sha256
- header.s=rsa1 header.b=qHhJn6PI; 
+ header.s=rsa1 header.b=di9dJ6rv; 
  dkim=pass header.d=embetrix.com header.i=@embetrix.com header.a=ed25519-sha256
- header.s=ed1 header.b=BJFdTsag; 
+ header.s=ed1 header.b=cK8T13dv; 
  arc=none smtp.remote-ip="2a02:2350:5:505::1"
 Received-SPF: Pass (sender SPF authorized) identity=helo;
  client-ip=2a02:2350:5:505::1;
  helo=mailrelay-egress18.pub.mailoutpod2-cph3.one.com;
  envelope-from=ayoub.zaki@embetrix.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=embetrix.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key, unprotected) header.d=embetrix.com
- header.i=@embetrix.com header.a=rsa-sha256 header.s=rsa1 header.b=qHhJn6PI; 
+ header.i=@embetrix.com header.a=rsa-sha256 header.s=rsa1 header.b=di9dJ6rv; 
  dkim=pass header.d=embetrix.com header.i=@embetrix.com header.a=ed25519-sha256
- header.s=ed1 header.b=BJFdTsag
+ header.s=ed1 header.b=cK8T13dv
 Received: from mailrelay-egress18.pub.mailoutpod2-cph3.one.com
  (mailrelay-egress18.pub.mailoutpod2-cph3.one.com [IPv6:2a02:2350:5:505::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id ADEC1400F5
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 17:22:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1789752094;
- x=1790356894; d=embetrix.com; s=rsa1;
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 45CD160622
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 17:22:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1789752097;
+ x=1790356897; d=embetrix.com; s=rsa1;
  h=content-transfer-encoding:mime-version:references:in-reply-to:message-id:date:
  subject:cc:to:from:from;
- bh=LfnVBxV5suBLyaHEIU0q6eSUdOZ6oSGnUL9yyQLSBf0=;
- b=qHhJn6PIq8R3/3pwPNXETIU0Mc3e6lgdN5DgV38v1V5jqvpdCkNza7PrBILmOAXzYMcatRxHb9hBk
- zI0ihoK2lUYKS+10qO+O32767jrJTunu/3You1YUnzdQXmsWMgvUNwJFQrvZkedNYbOTJA6AnmU325
- NkalaZjgstDNtHy8Bn8Hgn2VXrO1g52VdJgz9SWM+KVvCN+E4h7zxrKhAtXLtiKbFK2+rKXyacF+V9
- EREH6NMt+UCvz52G+3VxIzEr1b8Jx6z+88WoTJ0kUE5aDF/Tlmavxn2X4wPc2UShpWPL2n6JteQV6M
- FJX13iILmXI9xCjeIt5E8fNhVZwMJhQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1789752094;
- x=1790356894; d=embetrix.com; s=ed1;
+ bh=WiALIA1mmNlZjWSyFsXpCbJViutoXfdkL18ry35PbBY=;
+ b=di9dJ6rvmdw/G+9HWSkaqY7MDC+/U0ASR8X/hLBFoFogDcAaay35jRoqUTsDw8mNROyJP+pDILQAS
+ tQHMwW/JDAs4vSYCX0Tc75gNT3Vb43aQ6BhQuAE7ezR4D3XlFafuG9A59jzjEoye+f0Cn3hjnk3Wab
+ uFR0LNazHK/xoZ+8Eh23OF+X6OOy0y9GldYM+HgcqWygAKgO7614ozJUDHf7T6uaYQMNOf5sMsgPgE
+ vd6sDNXsnP4VN+p4p0vDq2Jx3yGlplNjffsjDitQGEllhcojuvvbLTnhf7U2o7S8E7c90Iy0Aa6e5L
+ sPsKiWCrpMi/KSG/ThjDE7oZ/QjDPZw==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1789752097;
+ x=1790356897; d=embetrix.com; s=ed1;
  h=content-transfer-encoding:mime-version:references:in-reply-to:message-id:date:
  subject:cc:to:from:from;
- bh=LfnVBxV5suBLyaHEIU0q6eSUdOZ6oSGnUL9yyQLSBf0=;
- b=BJFdTsagf3eHE9Dsgn1hx5VZr0e/XloJfOH29za5GBlbNhlwfWuiykNFYCWgRLOdS9PSxAOa1v1k0
- x3jlJG4AA==
-X-HalOne-ID: 6375f5bd-b385-11f1-aa3a-6d49bcc6f3f8
+ bh=WiALIA1mmNlZjWSyFsXpCbJViutoXfdkL18ry35PbBY=;
+ b=cK8T13dvGJXXYEX/MFfIRTTgL6pvMp7lDJOii1zB7imVuTb9piURvQ18UGHS/dTGLlnRc6TptX6rP
+ rrGrVhkAQ==
+X-HalOne-ID: 65a98f16-b385-11f1-aa45-6d49bcc6f3f8
 Received: from xps-13.www.tendawifi.com (unknown [41.251.77.168])
  by mailrelay6.pub.mailoutpod2-cph3.one.com (Halon) with ESMTPSA
- id 6375f5bd-b385-11f1-aa3a-6d49bcc6f3f8;
- Fri, 18 Sep 2026 17:21:32 +0000 (UTC)
+ id 65a98f16-b385-11f1-aa45-6d49bcc6f3f8;
+ Fri, 18 Sep 2026 17:21:35 +0000 (UTC)
 From: Ayoub Zaki <ayoub.zaki@embetrix.com>
 To: u-boot@lists.u-boot-project.org
 Cc: trini@konsulko.com, mkorpershoek@kernel.org, sjg@chromium.org,
@@ -136,9 +136,9 @@ Cc: trini@konsulko.com, mkorpershoek@kernel.org, sjg@chromium.org,
  pbrobinson@gmail.com, dlechner@baylibre.com, hs@nabladev.com,
  xypron.glpk@gmx.de, heiko@sntech.de, raymondmaoca@gmail.com,
  Ayoub Zaki <ayoub.zaki@embetrix.com>
-Subject: [PATCH 1/4] crypto: add SHAKE128 and SHAKE256 support
-Date: Fri, 18 Sep 2026 18:21:24 +0100
-Message-ID: <20260918172127.66014-2-ayoub.zaki@embetrix.com>
+Subject: [PATCH 2/4] crypto: add FIPS 204 ML-DSA verification
+Date: Fri, 18 Sep 2026 18:21:25 +0100
+Message-ID: <20260918172127.66014-3-ayoub.zaki@embetrix.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260918172127.66014-1-ayoub.zaki@embetrix.com>
 References: <20260918172127.66014-1-ayoub.zaki@embetrix.com>
@@ -158,767 +158,834 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add generic incremental and one-shot SHAKE interfaces backed by
-Keccak-f[1600].
+Port the Linux verify-only ML-DSA implementation introduced by commit
+64edccea594cf7cb1e2975fdf44531e3377b32db. Include the API
+documentation update from commit
+ffd42b6d0420c4be97cc28fd1bb5f4c29e286e98.
 
-Adapt the implementation from the Linux SHA-3 library introduced by
-commit 0593447248044ab609b43b947d0e198c887ac281. Retain its
-provenance and licensing.
+Support all three FIPS 204 parameter sets with raw keys and raw
+signatures. Do not add signing, private-key handling, FIT integration
+or an external library dependency.
+
+Keep the initial public API aligned with Linux. It accepts one
+contiguous message. Defer FIT integration to a separate series.
+
+Add U-Boot argument validation for invalid parameter-set values.
+Reject a NULL message when its length is nonzero.
 
 Signed-off-by: Ayoub Zaki <ayoub.zaki@embetrix.com>
 ---
- include/crypto/sha3.h | 353 ++++++++++++++++++++++++++++++++++++++
- lib/crypto/sha3.c     | 382 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 735 insertions(+)
- create mode 100644 include/crypto/sha3.h
- create mode 100644 lib/crypto/sha3.c
+ include/crypto/mldsa.h |  67 ++++
+ lib/Kconfig            |  14 +
+ lib/crypto/Makefile    |   3 +
+ lib/crypto/mldsa.c     | 679 +++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 763 insertions(+)
+ create mode 100644 include/crypto/mldsa.h
+ create mode 100644 lib/crypto/mldsa.c
 
-diff --git a/include/crypto/sha3.h b/include/crypto/sha3.h
+diff --git a/include/crypto/mldsa.h b/include/crypto/mldsa.h
 new file mode 100644
-index 00000000000..70d6474e098
+index 00000000000..80acfb2dae2
 --- /dev/null
-+++ b/include/crypto/sha3.h
-@@ -0,0 +1,353 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
++++ b/include/crypto/mldsa.h
+@@ -0,0 +1,67 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
 +/*
-+ * Common values for SHA-3 algorithms
++ * Support for verifying ML-DSA signatures
 + *
-+ * Based on Linux include/crypto/sha3.h
++ * Copyright 2025 Google LLC
++ *
++ * Based on Linux include/crypto/mldsa.h
 + * at commit:
-+ * https://git.kernel.org/linus/f1799d17285ca99243328cd92133a9f84ee3a593
++ * https://git.kernel.org/linus/ffd42b6d0420c4be97cc28fd1bb5f4c29e286e98
 + *
-+ * Ported to U-Boot by Ayoub Zaki <ayoub.zaki@embetrix.com>
++ * Ported to U-Boot by:
++ * Ayoub Zaki <ayoub.zaki@embetrix.com>
 + */
-+#ifndef __CRYPTO_SHA3_H__
-+#define __CRYPTO_SHA3_H__
++#ifndef _CRYPTO_MLDSA_H
++#define _CRYPTO_MLDSA_H
 +
-+#include <compiler.h>
 +#include <linux/types.h>
-+#include <linux/string.h>
 +
-+#define SHA3_224_DIGEST_SIZE	(224 / 8)
-+#define SHA3_224_BLOCK_SIZE	(200 - 2 * SHA3_224_DIGEST_SIZE)
-+#define SHA3_224_EXPORT_SIZE	SHA3_STATE_SIZE + SHA3_224_BLOCK_SIZE + 1
-+
-+#define SHA3_256_DIGEST_SIZE	(256 / 8)
-+#define SHA3_256_BLOCK_SIZE	(200 - 2 * SHA3_256_DIGEST_SIZE)
-+#define SHA3_256_EXPORT_SIZE	SHA3_STATE_SIZE + SHA3_256_BLOCK_SIZE + 1
-+
-+#define SHA3_384_DIGEST_SIZE	(384 / 8)
-+#define SHA3_384_BLOCK_SIZE	(200 - 2 * SHA3_384_DIGEST_SIZE)
-+#define SHA3_384_EXPORT_SIZE	SHA3_STATE_SIZE + SHA3_384_BLOCK_SIZE + 1
-+
-+#define SHA3_512_DIGEST_SIZE	(512 / 8)
-+#define SHA3_512_BLOCK_SIZE	(200 - 2 * SHA3_512_DIGEST_SIZE)
-+#define SHA3_512_EXPORT_SIZE	SHA3_STATE_SIZE + SHA3_512_BLOCK_SIZE + 1
-+
-+/*
-+ * SHAKE128 and SHAKE256 actually have variable output size, but this is used to
-+ * calculate the block size (rate) analogously to the above.
-+ */
-+#define SHAKE128_DEFAULT_SIZE	(128 / 8)
-+#define SHAKE128_BLOCK_SIZE	(200 - 2 * SHAKE128_DEFAULT_SIZE)
-+#define SHAKE256_DEFAULT_SIZE	(256 / 8)
-+#define SHAKE256_BLOCK_SIZE	(200 - 2 * SHAKE256_DEFAULT_SIZE)
-+
-+#define SHA3_STATE_SIZE		200
-+
-+/*
-+ * State for the Keccak-f[1600] permutation: 25 64-bit words.
-+ *
-+ * We usually keep the state words as little-endian, to make absorbing and
-+ * squeezing easier.  (It means that absorbing and squeezing can just treat the
-+ * state as a byte array.)  The state words are converted to native-endian only
-+ * temporarily by implementations of the permutation that need native-endian
-+ * words.  Of course, that conversion is a no-op on little-endian machines.
-+ */
-+struct sha3_state {
-+	union {
-+		__le64 words[SHA3_STATE_SIZE / 8];
-+		u8 bytes[SHA3_STATE_SIZE];
-+
-+		u64 native_words[SHA3_STATE_SIZE / 8]; /* see comment above */
-+	};
++/* Identifier for an ML-DSA parameter set */
++enum mldsa_alg {
++	MLDSA44, /* ML-DSA-44 */
++	MLDSA65, /* ML-DSA-65 */
++	MLDSA87, /* ML-DSA-87 */
 +};
 +
-+/* Internal context, shared by the digests (SHA3-*) and the XOFs (SHAKE*) */
-+struct __sha3_ctx {
-+	struct sha3_state state;
-+	u8 digest_size;		/* Digests only: the digest size in bytes */
-+	u8 block_size;		/* Block size in bytes */
-+	u8 absorb_offset;	/* Index of next state byte to absorb into */
-+	u8 squeeze_offset;	/* XOFs only: index of next state byte to extract */
-+};
-+
-+void __sha3_update(struct __sha3_ctx *ctx, const u8 *in, size_t in_len);
++/* Lengths of ML-DSA public keys and signatures in bytes */
++#define MLDSA44_PUBLIC_KEY_SIZE 1312
++#define MLDSA65_PUBLIC_KEY_SIZE 1952
++#define MLDSA87_PUBLIC_KEY_SIZE 2592
++#define MLDSA44_SIGNATURE_SIZE 2420
++#define MLDSA65_SIGNATURE_SIZE 3309
++#define MLDSA87_SIGNATURE_SIZE 4627
 +
 +/**
-+ * struct sha3_ctx - Context for SHA3-224, SHA3-256, SHA3-384, or SHA3-512
-+ * @ctx: private
++ * mldsa_verify() - Verify an ML-DSA signature
++ * @alg: The ML-DSA parameter set to use
++ * @sig: The signature
++ * @sig_len: Length of the signature in bytes.  Should match the
++ *	     MLDSA*_SIGNATURE_SIZE constant associated with @alg,
++ *	     otherwise -EBADMSG will be returned.
++ * @msg: The message
++ * @msg_len: Length of the message in bytes
++ * @pk: The public key
++ * @pk_len: Length of the public key in bytes.  Should match the
++ *	    MLDSA*_PUBLIC_KEY_SIZE constant associated with @alg,
++ *	    otherwise -EBADMSG will be returned.
++ *
++ * This verifies a signature using pure ML-DSA with the specified parameter set.
++ * The context string is assumed to be empty.  This corresponds to FIPS 204
++ * Algorithm 3 "ML-DSA.Verify" with the ctx parameter set to the empty string
++ * and the lengths of the signature and key given explicitly by the caller.
++ *
++ * Return:
++ * * 0 if the signature is valid
++ * * -EBADMSG if the signature and/or public key is malformed
++ * * -EKEYREJECTED if the signature is invalid but otherwise well-formed
++ * * -ENOMEM if out of memory so the validity of the signature is unknown
 + */
-+struct sha3_ctx {
-+	struct __sha3_ctx ctx;
-+};
++int mldsa_verify(enum mldsa_alg alg, const u8 *sig, size_t sig_len,
++		 const u8 *msg, size_t msg_len, const u8 *pk, size_t pk_len);
 +
-+/**
-+ * sha3_zeroize_ctx() - Zeroize a SHA-3 context
-+ * @ctx: The context to zeroize
-+ *
-+ * This is already called by sha3_final().  Call this explicitly when abandoning
-+ * a context without calling sha3_final().
-+ */
-+static inline void sha3_zeroize_ctx(struct sha3_ctx *ctx)
-+{
-+	memset(ctx, 0, sizeof(*ctx));
-+	barrier_data(ctx);
-+}
++#if IS_ENABLED(CONFIG_UT_LIB_MLDSA)
++/* Internal function exposed only for unit testing */
++s32 mldsa_use_hint(u8 h, s32 r, s32 gamma2);
++#endif
 +
-+/**
-+ * struct shake_ctx - Context for SHAKE128 or SHAKE256
-+ * @ctx: private
-+ */
-+struct shake_ctx {
-+	struct __sha3_ctx ctx;
-+};
++#endif /* _CRYPTO_MLDSA_H */
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 9e0f0ad7d06..0a41632a12a 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -568,6 +568,12 @@ endmenu
+ 
+ menu "Hashing Support"
+ 
++config SHAKE
++	bool "Enable SHAKE128/SHAKE256 support"
++	help
++	  Enable the FIPS 202 SHAKE128 and SHAKE256 extendable-output
++	  functions. Both one-shot and incremental interfaces are provided.
 +
-+/**
-+ * shake_zeroize_ctx() - Zeroize a SHAKE context
-+ * @ctx: The context to zeroize
-+ *
-+ * Call this after the last squeeze.
-+ */
-+static inline void shake_zeroize_ctx(struct shake_ctx *ctx)
-+{
-+	memset(ctx, 0, sizeof(*ctx));
-+	barrier_data(ctx);
-+}
+ config BLAKE2
+ 	bool "Enable BLAKE2 support"
+ 	help
+@@ -618,6 +624,14 @@ config SM3
+ 	  SM3 (ShangMi 3) secure hash function (OSCCA GM/T 0004-2012, ISO/IEC 10118-3)
+ 	  The hash is calculated in software.
+ 
++config MLDSA_VERIFY
++	bool "Enable ML-DSA signature verification"
++	select SHAKE
++	help
++	  Enable verification of pure FIPS 204 ML-DSA-44, ML-DSA-65 and
++	  ML-DSA-87 signatures using raw public keys and signatures. This
++	  option does not include signing, private-key handling or FIT support.
 +
-+/**
-+ * sha3_224_init() - Initialize a context for SHA3-224
-+ * @ctx: The context to initialize
-+ *
-+ * This begins a new SHA3-224 message digest computation.
-+ *
-+ * Context: Any context.
-+ */
-+static inline void sha3_224_init(struct sha3_ctx *ctx)
-+{
-+	*ctx = (struct sha3_ctx){
-+		.ctx.digest_size = SHA3_224_DIGEST_SIZE,
-+		.ctx.block_size = SHA3_224_BLOCK_SIZE,
-+	};
-+}
+ config SHA_HW_ACCEL
+ 	bool "Enable hardware acceleration for SHA hash functions"
+ 	help
+diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
+index ac2b9a7d72f..2cc8a3a04ae 100644
+--- a/lib/crypto/Makefile
++++ b/lib/crypto/Makefile
+@@ -60,6 +60,9 @@ $(obj)/pkcs7.asn1.o: $(obj)/pkcs7.asn1.c $(obj)/pkcs7.asn1.h
+ 
+ obj-$(CONFIG_$(PHASE_)PKCS7_VERIFY) += pkcs7_verify.o
+ 
++obj-$(CONFIG_$(PHASE_)SHAKE) += sha3.o
++obj-$(CONFIG_$(PHASE_)MLDSA_VERIFY) += mldsa.o
 +
-+/**
-+ * sha3_256_init() - Initialize a context for SHA3-256
-+ * @ctx: The context to initialize
-+ *
-+ * This begins a new SHA3-256 message digest computation.
-+ *
-+ * Context: Any context.
-+ */
-+static inline void sha3_256_init(struct sha3_ctx *ctx)
-+{
-+	*ctx = (struct sha3_ctx){
-+		.ctx.digest_size = SHA3_256_DIGEST_SIZE,
-+		.ctx.block_size = SHA3_256_BLOCK_SIZE,
-+	};
-+}
-+
-+/**
-+ * sha3_384_init() - Initialize a context for SHA3-384
-+ * @ctx: The context to initialize
-+ *
-+ * This begins a new SHA3-384 message digest computation.
-+ *
-+ * Context: Any context.
-+ */
-+static inline void sha3_384_init(struct sha3_ctx *ctx)
-+{
-+	*ctx = (struct sha3_ctx){
-+		.ctx.digest_size = SHA3_384_DIGEST_SIZE,
-+		.ctx.block_size = SHA3_384_BLOCK_SIZE,
-+	};
-+}
-+
-+/**
-+ * sha3_512_init() - Initialize a context for SHA3-512
-+ * @ctx: The context to initialize
-+ *
-+ * This begins a new SHA3-512 message digest computation.
-+ *
-+ * Context: Any context.
-+ */
-+static inline void sha3_512_init(struct sha3_ctx *ctx)
-+{
-+	*ctx = (struct sha3_ctx){
-+		.ctx.digest_size = SHA3_512_DIGEST_SIZE,
-+		.ctx.block_size = SHA3_512_BLOCK_SIZE,
-+	};
-+}
-+
-+/**
-+ * sha3_update() - Update a SHA-3 digest context with input data
-+ * @ctx: The context to update; must have been initialized
-+ * @in: The input data
-+ * @in_len: Length of the input data in bytes
-+ *
-+ * This can be called any number of times to add data to a SHA3-224, SHA3-256,
-+ * SHA3-384, or SHA3-512 digest (depending on which init function was called).
-+ *
-+ * Context: Any context.
-+ */
-+static inline void sha3_update(struct sha3_ctx *ctx,
-+			       const u8 *in, size_t in_len)
-+{
-+	__sha3_update(&ctx->ctx, in, in_len);
-+}
-+
-+/**
-+ * sha3_final() - Finish computing a SHA-3 message digest
-+ * @ctx: The context to finalize; must have been initialized
-+ * @out: (output) The resulting SHA3-224, SHA3-256, SHA3-384, or SHA3-512
-+ *	 message digest, matching the init function that was called.  Note that
-+ *	 the size differs for each one; see SHA3_*_DIGEST_SIZE.
-+ *
-+ * After finishing, this zeroizes @ctx.  So the caller does not need to do it.
-+ *
-+ * Context: Any context.
-+ */
-+void sha3_final(struct sha3_ctx *ctx, u8 *out);
-+
-+/**
-+ * shake128_init() - Initialize a context for SHAKE128
-+ * @ctx: The context to initialize
-+ *
-+ * This begins a new SHAKE128 extendable-output function (XOF) computation.
-+ *
-+ * Context: Any context.
-+ */
-+static inline void shake128_init(struct shake_ctx *ctx)
-+{
-+	*ctx = (struct shake_ctx){
-+		.ctx.block_size = SHAKE128_BLOCK_SIZE,
-+	};
-+}
-+
-+/**
-+ * shake256_init() - Initialize a context for SHAKE256
-+ * @ctx: The context to initialize
-+ *
-+ * This begins a new SHAKE256 extendable-output function (XOF) computation.
-+ *
-+ * Context: Any context.
-+ */
-+static inline void shake256_init(struct shake_ctx *ctx)
-+{
-+	*ctx = (struct shake_ctx){
-+		.ctx.block_size = SHAKE256_BLOCK_SIZE,
-+	};
-+}
-+
-+/**
-+ * shake_update() - Update a SHAKE context with input data
-+ * @ctx: The context to update; must have been initialized
-+ * @in: The input data
-+ * @in_len: Length of the input data in bytes
-+ *
-+ * This can be called any number of times to add more input data to SHAKE128 or
-+ * SHAKE256.  This cannot be called after squeezing has begun.
-+ *
-+ * Context: Any context.
-+ */
-+static inline void shake_update(struct shake_ctx *ctx,
-+				const u8 *in, size_t in_len)
-+{
-+	__sha3_update(&ctx->ctx, in, in_len);
-+}
-+
-+/**
-+ * shake_squeeze() - Generate output from SHAKE128 or SHAKE256
-+ * @ctx: The context to squeeze; must have been initialized
-+ * @out: Where to write the resulting output data
-+ * @out_len: The amount of data to extract to @out in bytes
-+ *
-+ * This may be called multiple times.  A number of consecutive squeezes laid
-+ * end-to-end will yield the same output as one big squeeze generating the same
-+ * total amount of output.  More input cannot be provided after squeezing has
-+ * begun.  After the last squeeze, call shake_zeroize_ctx().
-+ *
-+ * Context: Any context.
-+ */
-+void shake_squeeze(struct shake_ctx *ctx, u8 *out, size_t out_len);
-+
-+/**
-+ * sha3_224() - Compute SHA3-224 digest in one shot
-+ * @in: The input data to be digested
-+ * @in_len: Length of the input data in bytes
-+ * @out: The buffer into which the digest will be stored
-+ *
-+ * Convenience function that computes a SHA3-224 digest.  Use this instead of
-+ * the incremental API if you're able to provide all the input at once.
-+ *
-+ * Context: Any context.
-+ */
-+void sha3_224(const u8 *in, size_t in_len, u8 out[SHA3_224_DIGEST_SIZE]);
-+
-+/**
-+ * sha3_256() - Compute SHA3-256 digest in one shot
-+ * @in: The input data to be digested
-+ * @in_len: Length of the input data in bytes
-+ * @out: The buffer into which the digest will be stored
-+ *
-+ * Convenience function that computes a SHA3-256 digest.  Use this instead of
-+ * the incremental API if you're able to provide all the input at once.
-+ *
-+ * Context: Any context.
-+ */
-+void sha3_256(const u8 *in, size_t in_len, u8 out[SHA3_256_DIGEST_SIZE]);
-+
-+/**
-+ * sha3_384() - Compute SHA3-384 digest in one shot
-+ * @in: The input data to be digested
-+ * @in_len: Length of the input data in bytes
-+ * @out: The buffer into which the digest will be stored
-+ *
-+ * Convenience function that computes a SHA3-384 digest.  Use this instead of
-+ * the incremental API if you're able to provide all the input at once.
-+ *
-+ * Context: Any context.
-+ */
-+void sha3_384(const u8 *in, size_t in_len, u8 out[SHA3_384_DIGEST_SIZE]);
-+
-+/**
-+ * sha3_512() - Compute SHA3-512 digest in one shot
-+ * @in: The input data to be digested
-+ * @in_len: Length of the input data in bytes
-+ * @out: The buffer into which the digest will be stored
-+ *
-+ * Convenience function that computes a SHA3-512 digest.  Use this instead of
-+ * the incremental API if you're able to provide all the input at once.
-+ *
-+ * Context: Any context.
-+ */
-+void sha3_512(const u8 *in, size_t in_len, u8 out[SHA3_512_DIGEST_SIZE]);
-+
-+/**
-+ * shake128() - Compute SHAKE128 in one shot
-+ * @in: The input data to be used
-+ * @in_len: Length of the input data in bytes
-+ * @out: The buffer into which the output will be stored
-+ * @out_len: Length of the output to produce in bytes
-+ *
-+ * Convenience function that computes SHAKE128 in one shot.  Use this instead of
-+ * the incremental API if you're able to provide all the input at once as well
-+ * as receive all the output at once.  All output lengths are supported.
-+ *
-+ * Context: Any context.
-+ */
-+void shake128(const u8 *in, size_t in_len, u8 *out, size_t out_len);
-+
-+/**
-+ * shake256() - Compute SHAKE256 in one shot
-+ * @in: The input data to be used
-+ * @in_len: Length of the input data in bytes
-+ * @out: The buffer into which the output will be stored
-+ * @out_len: Length of the output to produce in bytes
-+ *
-+ * Convenience function that computes SHAKE256 in one shot.  Use this instead of
-+ * the incremental API if you're able to provide all the input at once as well
-+ * as receive all the output at once.  All output lengths are supported.
-+ *
-+ * Context: Any context.
-+ */
-+void shake256(const u8 *in, size_t in_len, u8 *out, size_t out_len);
-+
-+#endif /* __CRYPTO_SHA3_H__ */
-diff --git a/lib/crypto/sha3.c b/lib/crypto/sha3.c
+ #
+ # Signed PE binary-wrapped key handling
+ #
+diff --git a/lib/crypto/mldsa.c b/lib/crypto/mldsa.c
 new file mode 100644
-index 00000000000..5bd6732dcd5
+index 00000000000..2c30d71cbaa
 --- /dev/null
-+++ b/lib/crypto/sha3.c
-@@ -0,0 +1,382 @@
++++ b/lib/crypto/mldsa.c
+@@ -0,0 +1,679 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
-+ * SHA-3, as specified in
-+ * https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf
++ * Support for verifying ML-DSA signatures
 + *
-+ * SHA-3 code by Jeff Garzik <jeff@garzik.org>
-+ *               Ard Biesheuvel <ard.biesheuvel@linaro.org>
-+ *               David Howells <dhowells@redhat.com>
++ * Copyright 2025 Google LLC
 + *
-+ * Based on Linux lib/crypto/sha3.c
++ * Based on Linux lib/crypto/mldsa.c
 + * at commit:
-+ * https://git.kernel.org/linus/0354d3c1f1b8628e60eceb304b6d2ef75eea6f41
++ * https://git.kernel.org/linus/ffd42b6d0420c4be97cc28fd1bb5f4c29e286e98
 + *
-+ * Ported to U-Boot by Ayoub Zaki <ayoub.zaki@embetrix.com>
++ * Ported to U-Boot by:
++ * Ayoub Zaki <ayoub.zaki@embetrix.com>
 + */
 +
-+#include <asm/unaligned.h>
 +#include <compiler.h>
++#include <asm/unaligned.h>
++#include <crypto/mldsa.h>
 +#include <crypto/sha3.h>
-+#include <linux/bitops.h>
-+#include <linux/kernel.h>
++#include <malloc.h>
++#include <linux/errno.h>
++#include <linux/string.h>
 +
-+static void sha3_xor(u8 *dst, const u8 *src, size_t len)
-+{
-+	while (len--)
-+		*dst++ ^= *src++;
-+}
-+
-+static inline u64 sha3_rol64(u64 value, unsigned int shift)
-+{
-+	return (value << shift) | (value >> (64 - shift));
-+}
-+
-+#define rol64(value, shift) sha3_rol64((value), (shift))
++#define Q 8380417 /* The prime q = 2^23 - 2^13 + 1 */
++#define QINV_MOD_2_32 58728449 /* Multiplicative inverse of q mod 2^32 */
++#define N 256 /* Number of components per ring element */
++#define D 13 /* Number of bits dropped from the public key vector t */
++#define RHO_LEN 32 /* Length of the public random seed in bytes */
++#define MAX_W1_ENCODED_LEN 192 /* Max encoded length of one element of w'_1 */
 +
 +/*
-+ * On some 32-bit architectures, such as h8300, GCC ends up using over 1 KB of
-+ * stack if the round calculation gets inlined into the loop in
-+ * sha3_keccakf_generic().  On the other hand, on 64-bit architectures with
-+ * plenty of [64-bit wide] general purpose registers, not inlining it severely
-+ * hurts performance.  So let's use 64-bitness as a heuristic to decide whether
-+ * to inline or not.
++ * The zetas array in Montgomery form, i.e. with extra factor of 2^32.
++ * Reference: FIPS 204 Section 7.5 "NTT and NTT^-1"
++ * Generated by the following Python code:
++ * q=8380417; [a%q - q*(a%q > q//2) for a in [1753**(int(f'{i:08b}'[::-1], 2)) << 32 for i in range(256)]]
 + */
-+#ifdef CONFIG_64BIT
-+#define SHA3_INLINE inline
-+#else
-+#define SHA3_INLINE noinline
-+#endif
++static const s32 zetas_times_2_32[N] = {
++	-4186625, 25847,    -2608894, -518909,	237124,	  -777960,  -876248,
++	466468,	  1826347,  2353451,  -359251,	-2091905, 3119733,  -2884855,
++	3111497,  2680103,  2725464,  1024112,	-1079900, 3585928,  -549488,
++	-1119584, 2619752,  -2108549, -2118186, -3859737, -1399561, -3277672,
++	1757237,  -19422,   4010497,  280005,	2706023,  95776,    3077325,
++	3530437,  -1661693, -3592148, -2537516, 3915439,  -3861115, -3043716,
++	3574422,  -2867647, 3539968,  -300467,	2348700,  -539299,  -1699267,
++	-1643818, 3505694,  -3821735, 3507263,	-2140649, -1600420, 3699596,
++	811944,	  531354,   954230,   3881043,	3900724,  -2556880, 2071892,
++	-2797779, -3930395, -1528703, -3677745, -3041255, -1452451, 3475950,
++	2176455,  -1585221, -1257611, 1939314,	-4083598, -1000202, -3190144,
++	-3157330, -3632928, 126922,   3412210,	-983419,  2147896,  2715295,
++	-2967645, -3693493, -411027,  -2477047, -671102,  -1228525, -22981,
++	-1308169, -381987,  1349076,  1852771,	-1430430, -3343383, 264944,
++	508951,	  3097992,  44288,    -1100098, 904516,	  3958618,  -3724342,
++	-8578,	  1653064,  -3249728, 2389356,	-210977,  759969,   -1316856,
++	189548,	  -3553272, 3159746,  -1851402, -2409325, -177440,  1315589,
++	1341330,  1285669,  -1584928, -812732,	-1439742, -3019102, -3881060,
++	-3628969, 3839961,  2091667,  3407706,	2316500,  3817976,  -3342478,
++	2244091,  -2446433, -3562462, 266997,	2434439,  -1235728, 3513181,
++	-3520352, -3759364, -1197226, -3193378, 900702,	  1859098,  909542,
++	819034,	  495491,   -1613174, -43260,	-522500,  -655327,  -3122442,
++	2031748,  3207046,  -3556995, -525098,	-768622,  -3595838, 342297,
++	286988,	  -2437823, 4108315,  3437287,	-3342277, 1735879,  203044,
++	2842341,  2691481,  -2590150, 1265009,	4055324,  1247620,  2486353,
++	1595974,  -3767016, 1250494,  2635921,	-3548272, -2994039, 1869119,
++	1903435,  -1050970, -1333058, 1237275,	-3318210, -1430225, -451100,
++	1312455,  3306115,  -1962642, -1279661, 1917081,  -2546312, -1374803,
++	1500165,  777191,   2235880,  3406031,	-542412,  -2831860, -1671176,
++	-1846953, -2584293, -3724270, 594136,	-3776993, -2013608, 2432395,
++	2454455,  -164721,  1957272,  3369112,	185531,	  -1207385, -3183426,
++	162844,	  1616392,  3014001,  810149,	1652634,  -3694233, -1799107,
++	-3038916, 3523897,  3866901,  269760,	2213111,  -975884,  1717735,
++	472078,	  -426683,  1723600,  -1803090, 1910376,  -1667432, -1104333,
++	-260646,  -3833893, -2939036, -2235985, -420899,  -2286327, 183443,
++	-976891,  1612842,  -3545687, -554416,	3919660,  -48306,   -1362209,
++	3937738,  1400424,  -846154,  1976782
++};
 +
-+#define SHA3_KECCAK_ROUNDS 24
++/* Reference: FIPS 204 Section 4 "Parameter Sets" */
++static const struct mldsa_parameter_set {
++	u8 k; /* num rows in the matrix A */
++	u8 l; /* num columns in the matrix A */
++	u8 ctilde_len; /* length of commitment hash ctilde in bytes; lambda/4 */
++	u8 omega; /* max num of 1's in the hint vector h */
++	u8 tau; /* num of +-1's in challenge c */
++	u8 beta; /* tau times eta */
++	u16 pk_len; /* length of public keys in bytes */
++	u16 sig_len; /* length of signatures in bytes */
++	s32 gamma1; /* coefficient range of y */
++} mldsa_parameter_sets[] = {
++	[MLDSA44] = {
++		.k = 4,
++		.l = 4,
++		.ctilde_len = 32,
++		.omega = 80,
++		.tau = 39,
++		.beta = 78,
++		.pk_len = MLDSA44_PUBLIC_KEY_SIZE,
++		.sig_len = MLDSA44_SIGNATURE_SIZE,
++		.gamma1 = 1 << 17,
++	},
++	[MLDSA65] = {
++		.k = 6,
++		.l = 5,
++		.ctilde_len = 48,
++		.omega = 55,
++		.tau = 49,
++		.beta = 196,
++		.pk_len = MLDSA65_PUBLIC_KEY_SIZE,
++		.sig_len = MLDSA65_SIGNATURE_SIZE,
++		.gamma1 = 1 << 19,
++	},
++	[MLDSA87] = {
++		.k = 8,
++		.l = 7,
++		.ctilde_len = 64,
++		.omega = 75,
++		.tau = 60,
++		.beta = 120,
++		.pk_len = MLDSA87_PUBLIC_KEY_SIZE,
++		.sig_len = MLDSA87_SIGNATURE_SIZE,
++		.gamma1 = 1 << 19,
++	},
++};
 +
-+static const u64 sha3_keccakf_rndc[SHA3_KECCAK_ROUNDS] = {
-+	0x0000000000000001ULL, 0x0000000000008082ULL, 0x800000000000808aULL,
-+	0x8000000080008000ULL, 0x000000000000808bULL, 0x0000000080000001ULL,
-+	0x8000000080008081ULL, 0x8000000000008009ULL, 0x000000000000008aULL,
-+	0x0000000000000088ULL, 0x0000000080008009ULL, 0x000000008000000aULL,
-+	0x000000008000808bULL, 0x800000000000008bULL, 0x8000000000008089ULL,
-+	0x8000000000008003ULL, 0x8000000000008002ULL, 0x8000000000000080ULL,
-+	0x000000000000800aULL, 0x800000008000000aULL, 0x8000000080008081ULL,
-+	0x8000000000008080ULL, 0x0000000080000001ULL, 0x8000000080008008ULL
++static bool mldsa_mem_is_zero(const u8 *p, size_t len)
++{
++	u8 acc = 0;
++
++	while (len--)
++		acc |= *p++;
++	return !acc;
++}
++
++/*
++ * An element of the ring R_q (normal form) or the ring T_q (NTT form).  It
++ * consists of N integers mod q: either the polynomial coefficients of the R_q
++ * element or the components of the T_q element.  In either case, whether they
++ * are fully reduced to [0, q - 1] varies in the different parts of the code.
++ */
++struct mldsa_ring_elem {
++	s32 x[N];
++};
++
++struct mldsa_verification_workspace {
++	/* SHAKE context for computing c, mu, and ctildeprime */
++	struct shake_ctx shake;
++	/* The fields in this union are used in their order of declaration. */
++	union {
++		/* The hash of the public key */
++		u8 tr[64];
++		/* The message representative mu */
++		u8 mu[64];
++		/* Temporary space for rej_ntt_poly() */
++		u8 block[SHAKE128_BLOCK_SIZE + 1];
++		/* Encoded element of w'_1 */
++		u8 w1_encoded[MAX_W1_ENCODED_LEN];
++		/* The commitment hash.  Real length is params->ctilde_len */
++		u8 ctildeprime[64];
++	};
++	/* SHAKE context for generating elements of the matrix A */
++	struct shake_ctx a_shake;
++	/*
++	 * An element of the matrix A generated from the public seed, or an
++	 * element of the vector t_1 decoded from the public key and pre-scaled
++	 * by 2^d.  Both are in NTT form.  To reduce memory usage, we generate
++	 * or decode these elements only as needed.
++	 */
++	union {
++		struct mldsa_ring_elem a;
++		struct mldsa_ring_elem t1_scaled;
++	};
++	/* The challenge c, generated from ctilde */
++	struct mldsa_ring_elem c;
++	/* A temporary element used during calculations */
++	struct mldsa_ring_elem tmp;
++
++	/* The following fields are variable-length: */
++
++	/* The signer's response vector */
++	struct mldsa_ring_elem z[/* l */];
++
++	/* The signer's hint vector */
++	/* u8 h[k * N]; */
 +};
 +
 +/*
-+ * Perform a single round of Keccak mixing.
++ * Compute a * b * 2^-32 mod q.  a * b must be in the range [-2^31 * q, 2^31 * q
++ * - 1] before reduction.  The return value is in the range [-q + 1, q - 1].
++ *
++ * To reduce mod q efficiently, this uses Montgomery reduction with R=2^32.
++ * That's where the factor of 2^-32 comes from.  The caller must include a
++ * factor of 2^32 at some point to compensate for that.
++ *
++ * To keep the input and output ranges very close to symmetric, this
++ * specifically does a "signed" Montgomery reduction.  That is, when computing
++ * d = c * q^-1 mod 2^32, this chooses a representative in [S32_MIN, S32_MAX]
++ * rather than [0, U32_MAX], i.e. s32 rather than u32.  This matters in the
++ * wider multiplication d * Q when d keeps its value via sign extension.
++ *
++ * Reference: FIPS 204 Appendix A "Montgomery Multiplication".  But, it doesn't
++ * explain it properly: it has an off-by-one error in the upper end of the input
++ * range, it doesn't clarify that the signed version should be used, and it
++ * gives an unnecessarily large output range.  A better citation is perhaps the
++ * Dilithium reference code, which functionally matches the below code and
++ * merely has the (benign) off-by-one error in its documentation.
 + */
-+static SHA3_INLINE void sha3_keccakf_one_round_generic(u64 st[25], int round)
++static inline s32 Zq_mult(s32 a, s32 b)
 +{
-+	u64 t[5], tt, bc[5];
++	/* Compute the unreduced product c. */
++	s64 c = (s64)a * b;
 +
-+	/* Theta */
-+	bc[0] = st[0] ^ st[5] ^ st[10] ^ st[15] ^ st[20];
-+	bc[1] = st[1] ^ st[6] ^ st[11] ^ st[16] ^ st[21];
-+	bc[2] = st[2] ^ st[7] ^ st[12] ^ st[17] ^ st[22];
-+	bc[3] = st[3] ^ st[8] ^ st[13] ^ st[18] ^ st[23];
-+	bc[4] = st[4] ^ st[9] ^ st[14] ^ st[19] ^ st[24];
-+
-+	t[0] = bc[4] ^ rol64(bc[1], 1);
-+	t[1] = bc[0] ^ rol64(bc[2], 1);
-+	t[2] = bc[1] ^ rol64(bc[3], 1);
-+	t[3] = bc[2] ^ rol64(bc[4], 1);
-+	t[4] = bc[3] ^ rol64(bc[0], 1);
-+
-+	st[0] ^= t[0];
-+
-+	/* Rho Pi */
-+	tt = st[1];
-+	st[1] = rol64(st[6] ^ t[1], 44);
-+	st[6] = rol64(st[9] ^ t[4], 20);
-+	st[9] = rol64(st[22] ^ t[2], 61);
-+	st[22] = rol64(st[14] ^ t[4], 39);
-+	st[14] = rol64(st[20] ^ t[0], 18);
-+	st[20] = rol64(st[2] ^ t[2], 62);
-+	st[2] = rol64(st[12] ^ t[2], 43);
-+	st[12] = rol64(st[13] ^ t[3], 25);
-+	st[13] = rol64(st[19] ^ t[4], 8);
-+	st[19] = rol64(st[23] ^ t[3], 56);
-+	st[23] = rol64(st[15] ^ t[0], 41);
-+	st[15] = rol64(st[4] ^ t[4], 27);
-+	st[4] = rol64(st[24] ^ t[4], 14);
-+	st[24] = rol64(st[21] ^ t[1], 2);
-+	st[21] = rol64(st[8] ^ t[3], 55);
-+	st[8] = rol64(st[16] ^ t[1], 45);
-+	st[16] = rol64(st[5] ^ t[0], 36);
-+	st[5] = rol64(st[3] ^ t[3], 28);
-+	st[3] = rol64(st[18] ^ t[3], 21);
-+	st[18] = rol64(st[17] ^ t[2], 15);
-+	st[17] = rol64(st[11] ^ t[1], 10);
-+	st[11] = rol64(st[7] ^ t[2], 6);
-+	st[7] = rol64(st[10] ^ t[0], 3);
-+	st[10] = rol64(tt ^ t[1], 1);
-+
-+	/* Chi */
-+	bc[0] = ~st[1] & st[2];
-+	bc[1] = ~st[2] & st[3];
-+	bc[2] = ~st[3] & st[4];
-+	bc[3] = ~st[4] & st[0];
-+	bc[4] = ~st[0] & st[1];
-+	st[0] ^= bc[0];
-+	st[1] ^= bc[1];
-+	st[2] ^= bc[2];
-+	st[3] ^= bc[3];
-+	st[4] ^= bc[4];
-+
-+	bc[0] = ~st[6] & st[7];
-+	bc[1] = ~st[7] & st[8];
-+	bc[2] = ~st[8] & st[9];
-+	bc[3] = ~st[9] & st[5];
-+	bc[4] = ~st[5] & st[6];
-+	st[5] ^= bc[0];
-+	st[6] ^= bc[1];
-+	st[7] ^= bc[2];
-+	st[8] ^= bc[3];
-+	st[9] ^= bc[4];
-+
-+	bc[0] = ~st[11] & st[12];
-+	bc[1] = ~st[12] & st[13];
-+	bc[2] = ~st[13] & st[14];
-+	bc[3] = ~st[14] & st[10];
-+	bc[4] = ~st[10] & st[11];
-+	st[10] ^= bc[0];
-+	st[11] ^= bc[1];
-+	st[12] ^= bc[2];
-+	st[13] ^= bc[3];
-+	st[14] ^= bc[4];
-+
-+	bc[0] = ~st[16] & st[17];
-+	bc[1] = ~st[17] & st[18];
-+	bc[2] = ~st[18] & st[19];
-+	bc[3] = ~st[19] & st[15];
-+	bc[4] = ~st[15] & st[16];
-+	st[15] ^= bc[0];
-+	st[16] ^= bc[1];
-+	st[17] ^= bc[2];
-+	st[18] ^= bc[3];
-+	st[19] ^= bc[4];
-+
-+	bc[0] = ~st[21] & st[22];
-+	bc[1] = ~st[22] & st[23];
-+	bc[2] = ~st[23] & st[24];
-+	bc[3] = ~st[24] & st[20];
-+	bc[4] = ~st[20] & st[21];
-+	st[20] ^= bc[0];
-+	st[21] ^= bc[1];
-+	st[22] ^= bc[2];
-+	st[23] ^= bc[3];
-+	st[24] ^= bc[4];
-+
-+	/* Iota */
-+	st[0] ^= sha3_keccakf_rndc[round];
-+}
-+
-+/* Generic implementation of the Keccak-f[1600] permutation */
-+static void sha3_keccakf_generic(struct sha3_state *state)
-+{
 +	/*
-+	 * Temporarily convert the state words from little-endian to native-
-+	 * endian so that they can be operated on.  Note that on little-endian
-+	 * machines this conversion is a no-op and is optimized out.
++	 * Compute d = c * q^-1 mod 2^32.  Generate a signed result, as
++	 * explained above, but do the actual multiplication using an unsigned
++	 * type to avoid signed integer overflow which is undefined behavior.
 +	 */
++	s32 d = (u32)c * QINV_MOD_2_32;
 +
-+	for (int i = 0; i < ARRAY_SIZE(state->words); i++)
-+		state->native_words[i] = le64_to_cpu(state->words[i]);
++	/*
++	 * Compute e = c - d * q.  This makes the low 32 bits zero, since
++	 *   c - (c * q^-1) * q mod 2^32
++	 * = c - c * (q^-1 * q) mod 2^32
++	 * = c - c * 1 mod 2^32
++	 * = c - c mod 2^32
++	 * = 0 mod 2^32
++	 */
++	s64 e = c - (s64)d * Q;
 +
-+	for (int round = 0; round < SHA3_KECCAK_ROUNDS; round++)
-+		sha3_keccakf_one_round_generic(state->native_words, round);
-+
-+	for (int i = 0; i < ARRAY_SIZE(state->words); i++)
-+		state->words[i] = cpu_to_le64(state->native_words[i]);
++	/* Finally, return e * 2^-32. */
++	return e >> 32;
 +}
 +
 +/*
-+ * Generic implementation of absorbing the given nonzero number of full blocks
-+ * into the sponge function Keccak[r=8*block_size, c=1600-8*block_size].
++ * Convert @w to its number-theoretically-transformed representation in-place.
++ * Reference: FIPS 204 Algorithm 41, NTT
++ *
++ * To prevent intermediate overflows, all input coefficients must have absolute
++ * value < q.  All output components have absolute value < 9*q.
 + */
-+static void __maybe_unused
-+sha3_absorb_blocks_generic(struct sha3_state *state, const u8 *data,
-+			   size_t nblocks, size_t block_size)
++static void ntt(struct mldsa_ring_elem *w)
 +{
-+	do {
-+		for (size_t i = 0; i < block_size; i += 8)
-+			state->words[i / 8] ^= get_unaligned((__le64 *)&data[i]);
-+		sha3_keccakf_generic(state);
-+		data += block_size;
-+	} while (--nblocks);
++	int m = 0; /* index in zetas_times_2_32 */
++
++	for (int len = 128; len >= 1; len /= 2) {
++		for (int start = 0; start < 256; start += 2 * len) {
++			const s32 z = zetas_times_2_32[++m];
++
++			for (int j = start; j < start + len; j++) {
++				s32 t = Zq_mult(z, w->x[j + len]);
++
++				w->x[j + len] = w->x[j] - t;
++				w->x[j] += t;
++			}
++		}
++	}
 +}
 +
-+#define sha3_keccakf		sha3_keccakf_generic
-+#define sha3_absorb_blocks	sha3_absorb_blocks_generic
-+
-+void __sha3_update(struct __sha3_ctx *ctx, const u8 *in, size_t in_len)
++/*
++ * Convert @w from its number-theoretically-transformed representation in-place.
++ * Reference: FIPS 204 Algorithm 42, NTT^-1
++ *
++ * This also multiplies the coefficients by 2^32, undoing an extra factor of
++ * 2^-32 introduced earlier, and reduces the coefficients to [0, q - 1].
++ */
++static void invntt_and_mul_2_32(struct mldsa_ring_elem *w)
 +{
-+	const size_t block_size = ctx->block_size;
-+	size_t absorb_offset = ctx->absorb_offset;
++	int m = 256; /* index in zetas_times_2_32 */
 +
-+	/* Warn if squeezing has already begun. */
-+	if (absorb_offset >= block_size)
-+		return;
++	/* Prevent intermediate overflows. */
++	for (int j = 0; j < 256; j++)
++		w->x[j] %= Q;
 +
-+	if (absorb_offset && absorb_offset + in_len >= block_size) {
-+		sha3_xor(&ctx->state.bytes[absorb_offset], in,
-+			 block_size - absorb_offset);
-+		in += block_size - absorb_offset;
-+		in_len -= block_size - absorb_offset;
-+		sha3_keccakf(&ctx->state);
-+		absorb_offset = 0;
++	for (int len = 1; len < 256; len *= 2) {
++		for (int start = 0; start < 256; start += 2 * len) {
++			const s32 z = -zetas_times_2_32[--m];
++
++			for (int j = start; j < start + len; j++) {
++				s32 t = w->x[j];
++
++				w->x[j] = t + w->x[j + len];
++				w->x[j + len] = Zq_mult(z, t - w->x[j + len]);
++			}
++		}
 +	}
-+
-+	if (in_len >= block_size) {
-+		size_t nblocks = in_len / block_size;
-+
-+		sha3_absorb_blocks(&ctx->state, in, nblocks, block_size);
-+		in += nblocks * block_size;
-+		in_len -= nblocks * block_size;
++	/*
++	 * Multiply by 2^32 * 256^-1.  2^32 cancels the factor of 2^-32 from
++	 * earlier Montgomery multiplications.  256^-1 is for NTT^-1.  This
++	 * itself uses Montgomery multiplication, so *another* 2^32 is needed.
++	 * Thus the actual multiplicand is 2^32 * 2^32 * 256^-1 mod q = 41978.
++	 *
++	 * Finally, also reduce from [-q + 1, q - 1] to [0, q - 1].
++	 */
++	for (int j = 0; j < 256; j++) {
++		w->x[j] = Zq_mult(w->x[j], 41978);
++		w->x[j] += (w->x[j] >> 31) & Q;
 +	}
-+
-+	if (in_len) {
-+		sha3_xor(&ctx->state.bytes[absorb_offset], in, in_len);
-+		absorb_offset += in_len;
-+	}
-+	ctx->absorb_offset = absorb_offset;
 +}
 +
-+void sha3_final(struct sha3_ctx *sha3_ctx, u8 *out)
++/*
++ * Decode an element of t_1, i.e. the high d bits of t = A*s_1 + s_2.
++ * Reference: FIPS 204 Algorithm 23, pkDecode.
++ * Also multiply it by 2^d and convert it to NTT form.
++ */
++static const u8 *decode_t1_elem(struct mldsa_ring_elem *out,
++				const u8 *t1_encoded)
 +{
-+	struct __sha3_ctx *ctx = &sha3_ctx->ctx;
++	for (int j = 0; j < N; j += 4, t1_encoded += 5) {
++		u32 v = get_unaligned_le32(t1_encoded);
 +
-+	ctx->state.bytes[ctx->absorb_offset] ^= 0x06;
-+	ctx->state.bytes[ctx->block_size - 1] ^= 0x80;
-+	sha3_keccakf(&ctx->state);
-+	memcpy(out, ctx->state.bytes, ctx->digest_size);
-+	sha3_zeroize_ctx(sha3_ctx);
++		out->x[j + 0] = ((v >> 0) & 0x3ff) << D;
++		out->x[j + 1] = ((v >> 10) & 0x3ff) << D;
++		out->x[j + 2] = ((v >> 20) & 0x3ff) << D;
++		out->x[j + 3] = ((v >> 30) | (t1_encoded[4] << 2)) << D;
++		_Static_assert(0x3ff << D < Q, "decoded t1 coefficient exceeds q");
++	}
++	ntt(out);
++	return t1_encoded; /* Return updated pointer. */
 +}
 +
-+void shake_squeeze(struct shake_ctx *shake_ctx, u8 *out, size_t out_len)
++/*
++ * Decode the signer's response vector 'z' from the signature.
++ * Reference: FIPS 204 Algorithm 27, sigDecode.
++ *
++ * This also validates that the coefficients of z are in range, corresponding
++ * the infinity norm check at the end of Algorithm 8, ML-DSA.Verify_internal.
++ *
++ * Finally, this also converts z to NTT form.
++ */
++static bool decode_z(struct mldsa_ring_elem z[/* l */], int l, s32 gamma1,
++		     int beta, const u8 **sig_ptr)
 +{
-+	struct __sha3_ctx *ctx = &shake_ctx->ctx;
-+	const size_t block_size = ctx->block_size;
-+	size_t squeeze_offset = ctx->squeeze_offset;
++	const u8 *sig = *sig_ptr;
 +
-+	if (ctx->absorb_offset < block_size) {
-+		/* First squeeze: */
++	for (int i = 0; i < l; i++) {
++		if (l == 4) { /* ML-DSA-44? */
++			/* 18-bit coefficients: decode 4 from 9 bytes. */
++			for (int j = 0; j < N; j += 4, sig += 9) {
++				u64 v = get_unaligned_le64(sig);
 +
-+		/* Add the domain separation suffix and padding. */
-+		ctx->state.bytes[ctx->absorb_offset] ^= 0x1f;
-+		ctx->state.bytes[block_size - 1] ^= 0x80;
++				z[i].x[j + 0] = (v >> 0) & 0x3ffff;
++				z[i].x[j + 1] = (v >> 18) & 0x3ffff;
++				z[i].x[j + 2] = (v >> 36) & 0x3ffff;
++				z[i].x[j + 3] = (v >> 54) | (sig[8] << 10);
++			}
++		} else {
++			/* 20-bit coefficients: decode 4 from 10 bytes. */
++			for (int j = 0; j < N; j += 4, sig += 10) {
++				u64 v = get_unaligned_le64(sig);
 +
-+		/* Indicate that squeezing has begun. */
-+		ctx->absorb_offset = block_size;
++				z[i].x[j + 0] = (v >> 0) & 0xfffff;
++				z[i].x[j + 1] = (v >> 20) & 0xfffff;
++				z[i].x[j + 2] = (v >> 40) & 0xfffff;
++				z[i].x[j + 3] =
++					(v >> 60) |
++					(get_unaligned_le16(&sig[8]) << 4);
++			}
++		}
++		for (int j = 0; j < N; j++) {
++			z[i].x[j] = gamma1 - z[i].x[j];
++			if (z[i].x[j] <= -(gamma1 - beta) ||
++			    z[i].x[j] >= gamma1 - beta)
++				return false;
++		}
++		ntt(&z[i]);
++	}
++	*sig_ptr = sig; /* Return updated pointer. */
++	return true;
++}
++
++/*
++ * Decode the signer's hint vector 'h' from the signature.
++ * Reference: FIPS 204 Algorithm 21, HintBitUnpack
++ *
++ * Note that there are several ways in which the hint vector can be malformed.
++ */
++static bool decode_hint_vector(u8 h[/* k * N */], int k, int omega, const u8 *y)
++{
++	int index = 0;
++
++	memset(h, 0, k * N);
++	for (int i = 0; i < k; i++) {
++		int count = y[omega + i]; /* num 1's in elems 0 through i */
++		int prev = -1;
++
++		/* Cumulative count mustn't decrease or exceed omega. */
++		if (count < index || count > omega)
++			return false;
++		for (; index < count; index++) {
++			if (prev >= y[index]) /* Coefficients out of order? */
++				return false;
++			prev = y[index];
++			h[i * N + y[index]] = 1;
++		}
++	}
++	return mldsa_mem_is_zero(&y[index], omega - index);
++}
++
++/*
++ * Expand @seed into an element of R_q @c with coefficients in {-1, 0, 1},
++ * exactly @tau of them nonzero.  Reference: FIPS 204 Algorithm 29, SampleInBall
++ */
++static void sample_in_ball(struct mldsa_ring_elem *c, const u8 *seed,
++			   size_t seed_len, int tau, struct shake_ctx *shake)
++{
++	u64 signs;
++	u8 j;
++
++	shake256_init(shake);
++	shake_update(shake, seed, seed_len);
++	shake_squeeze(shake, (u8 *)&signs, sizeof(signs));
++	le64_to_cpus(&signs);
++	*c = (struct mldsa_ring_elem){};
++	for (int i = N - tau; i < N; i++, signs >>= 1) {
++		do {
++			shake_squeeze(shake, &j, 1);
++		} while (j > i);
++		c->x[i] = c->x[j];
++		c->x[j] = 1 - 2 * (s32)(signs & 1);
++	}
++}
++
++/*
++ * Expand the public seed @rho and @row_and_column into an element of T_q @out.
++ * Reference: FIPS 204 Algorithm 30, RejNTTPoly
++ *
++ * @shake and @block are temporary space used by the expansion.  @block has
++ * space for one SHAKE128 block, plus an extra byte to allow reading a u32 from
++ * the final 3-byte group without reading out-of-bounds.
++ */
++static void rej_ntt_poly(struct mldsa_ring_elem *out, const u8 rho[RHO_LEN],
++			 __le16 row_and_column, struct shake_ctx *shake,
++			 u8 block[SHAKE128_BLOCK_SIZE + 1])
++{
++	shake128_init(shake);
++	shake_update(shake, rho, RHO_LEN);
++	shake_update(shake, (u8 *)&row_and_column, sizeof(row_and_column));
++	for (int i = 0; i < N;) {
++		shake_squeeze(shake, block, SHAKE128_BLOCK_SIZE);
++		block[SHAKE128_BLOCK_SIZE] = 0; /* for KMSAN */
++		_Static_assert(SHAKE128_BLOCK_SIZE % 3 == 0,
++			       "SHAKE128 rate must be divisible by three");
++		for (int j = 0; j < SHAKE128_BLOCK_SIZE && i < N; j += 3) {
++			u32 x = get_unaligned_le32(&block[j]) & 0x7fffff;
++
++			if (x < Q) /* Ignore values >= q. */
++				out->x[i++] = x;
++		}
++	}
++}
++
++/*
++ * Return the HighBits of r adjusted according to hint h
++ * Reference: FIPS 204 Algorithm 40, UseHint
++ *
++ * This is needed because of the public key compression in ML-DSA.
++ *
++ * h is either 0 or 1, r is in [0, q - 1], and gamma2 is either (q - 1) / 88 or
++ * (q - 1) / 32.  Except when invoked via the unit test interface, gamma2 is a
++ * compile-time constant, so compilers will optimize the code accordingly.
++ */
++static __always_inline s32 use_hint(u8 h, s32 r, const s32 gamma2)
++{
++	const s32 m = (Q - 1) / (2 * gamma2); /* 44 or 16, compile-time const */
++	s32 r1;
++
++	/*
++	 * Handle the special case where r - (r mod+- (2 * gamma2)) == q - 1,
++	 * i.e. r >= q - gamma2.  This is also exactly where the computation of
++	 * r1 below would produce 'm' and would need a correction.
++	 */
++	if (r >= Q - gamma2)
++		return h == 0 ? 0 : m - 1;
++
++	/*
++	 * Compute the (non-hint-adjusted) HighBits r1 as:
++	 *
++	 *  r1 = (r - (r mod+- (2 * gamma2))) / (2 * gamma2)
++	 *     = floor((r + gamma2 - 1) / (2 * gamma2))
++	 *
++	 * Note that when '2 * gamma2' is a compile-time constant, compilers
++	 * optimize the division to a reciprocal multiplication and shift.
++	 */
++	r1 = (u32)(r + gamma2 - 1) / (2 * gamma2);
++
++	/*
++	 * Return the HighBits r1:
++	 *	+ 0 if the hint is 0;
++	 *	+ 1 (mod m) if the hint is 1 and the LowBits are positive;
++	 *	- 1 (mod m) if the hint is 1 and the LowBits are negative or 0.
++	 *
++	 * r1 is in (and remains in) [0, m - 1].  Note that when 'm' is a
++	 * compile-time constant, compilers optimize the '% m' accordingly.
++	 */
++	if (h == 0)
++		return r1;
++	if (r > r1 * (2 * gamma2))
++		return (u32)(r1 + 1) % m;
++	return (u32)(r1 + m - 1) % m;
++}
++
++static __always_inline void use_hint_elem(struct mldsa_ring_elem *w,
++					  const u8 h[N], const s32 gamma2)
++{
++	for (int j = 0; j < N; j++)
++		w->x[j] = use_hint(h[j], w->x[j], gamma2);
++}
++
++#if IS_ENABLED(CONFIG_UT_LIB_MLDSA)
++/* Allow the __always_inline function use_hint() to be unit-tested. */
++s32 mldsa_use_hint(u8 h, s32 r, s32 gamma2)
++{
++	return use_hint(h, r, gamma2);
++}
++#endif
++
++/*
++ * Encode one element of the commitment vector w'_1 into a byte string.
++ * Reference: FIPS 204 Algorithm 28, w1Encode.
++ * Return the number of bytes used: 192 for ML-DSA-44 and 128 for the others.
++ */
++static size_t encode_w1(u8 out[MAX_W1_ENCODED_LEN],
++			const struct mldsa_ring_elem *w1, int k)
++{
++	size_t pos = 0;
++
++	_Static_assert(N * 6 / 8 == MAX_W1_ENCODED_LEN,
++		       "w1 buffer has wrong size");
++	if (k == 4) { /* ML-DSA-44? */
++		/* 6 bits per coefficient.  Pack 4 at a time. */
++		for (int j = 0; j < N; j += 4) {
++			u32 v = (w1->x[j + 0] << 0) | (w1->x[j + 1] << 6) |
++				(w1->x[j + 2] << 12) | (w1->x[j + 3] << 18);
++			out[pos++] = v >> 0;
++			out[pos++] = v >> 8;
++			out[pos++] = v >> 16;
++		}
++	} else {
++		/* 4 bits per coefficient.  Pack 2 at a time. */
++		for (int j = 0; j < N; j += 2)
++			out[pos++] = w1->x[j] | (w1->x[j + 1] << 4);
++	}
++	return pos;
++}
++
++int mldsa_verify(enum mldsa_alg alg, const u8 *sig, size_t sig_len,
++		 const u8 *msg, size_t msg_len, const u8 *pk, size_t pk_len)
++{
++	const struct mldsa_parameter_set *params;
++	struct mldsa_verification_workspace *ws;
++	size_t workspace_len;
++	int ret = 0;
++
++	if (alg < MLDSA44 || alg > MLDSA87)
++		return -EINVAL;
++	if (msg_len && !msg)
++		return -EINVAL;
++	params = &mldsa_parameter_sets[alg];
++	const int k = params->k, l = params->l;
++	/* For now this just does pure ML-DSA with an empty context string. */
++	static const u8 msg_prefix[2] = { /* dom_sep= */ 0, /* ctx_len= */ 0 };
++	const u8 *ctilde; /* The signer's commitment hash */
++	const u8 *t1_encoded = &pk[RHO_LEN]; /* Next encoded element of t_1 */
++	u8 *h; /* The signer's hint vector, length k * N */
++	size_t w1_enc_len;
++
++	/* Validate the public key and signature lengths. */
++	if (pk_len != params->pk_len || sig_len != params->sig_len)
++		return -EBADMSG;
++
++	/*
++	 * Allocate the workspace, including variable-length fields.  Its size
++	 * depends only on the ML-DSA parameter set, not the other inputs.
++	 *
++	 * For freeing it, use kfree_sensitive() rather than kfree().  This is
++	 * mainly to comply with FIPS 204 Section 3.6.3 "Intermediate Values".
++	 * In reality it's a bit gratuitous, as this is a public key operation.
++	 */
++	workspace_len = sizeof(*ws) + l * sizeof(ws->z[0]) + k * N;
++	ws = malloc(workspace_len);
++	if (!ws)
++		return -ENOMEM;
++	h = (u8 *)&ws->z[l];
++
++	/* Decode the signature.  Reference: FIPS 204 Algorithm 27, sigDecode */
++	ctilde = sig;
++	sig += params->ctilde_len;
++	if (!decode_z(ws->z, l, params->gamma1, params->beta, &sig))
++		goto bad_message;
++	if (!decode_hint_vector(h, k, params->omega, sig))
++		goto bad_message;
++
++	/* Recreate the challenge c from the signer's commitment hash. */
++	sample_in_ball(&ws->c, ctilde, params->ctilde_len, params->tau,
++		       &ws->shake);
++	ntt(&ws->c);
++
++	/* Compute the message representative mu. */
++	shake256(pk, pk_len, ws->tr, sizeof(ws->tr));
++	shake256_init(&ws->shake);
++	shake_update(&ws->shake, ws->tr, sizeof(ws->tr));
++	shake_update(&ws->shake, msg_prefix, sizeof(msg_prefix));
++	shake_update(&ws->shake, msg, msg_len);
++	shake_squeeze(&ws->shake, ws->mu, sizeof(ws->mu));
++
++	/* Start computing ctildeprime = H(mu || w1Encode(w'_1)). */
++	shake256_init(&ws->shake);
++	shake_update(&ws->shake, ws->mu, sizeof(ws->mu));
++
++	/*
++	 * Compute the commitment w'_1 from A, z, c, t_1, and h.
++	 *
++	 * The computation is the same for each of the k rows.  Just do each row
++	 * before moving on to the next, resulting in only one loop over k.
++	 */
++	for (int i = 0; i < k; i++) {
++		/*
++		 * tmp = NTT(A) * NTT(z) * 2^-32
++		 * To reduce memory use, generate each element of NTT(A)
++		 * on-demand.  Note that each element is used only once.
++		 */
++		ws->tmp = (struct mldsa_ring_elem){};
++		for (int j = 0; j < l; j++) {
++			rej_ntt_poly(&ws->a, pk /* rho is first field of pk */,
++				     cpu_to_le16((i << 8) | j), &ws->a_shake,
++				     ws->block);
++			for (int n = 0; n < N; n++)
++				ws->tmp.x[n] +=
++					Zq_mult(ws->a.x[n], ws->z[j].x[n]);
++		}
++		/* All components of tmp now have abs value < l*q. */
++
++		/* Decode the next element of t_1. */
++		t1_encoded = decode_t1_elem(&ws->t1_scaled, t1_encoded);
 +
 +		/*
-+		 * Indicate that no output is pending yet, i.e. sha3_keccakf()
-+		 * will need to be called before the first copy.
++		 * tmp -= NTT(c) * NTT(t_1 * 2^d) * 2^-32
++		 *
++		 * Taking a conservative bound for the output of ntt(), the
++		 * multiplicands can have absolute value up to 9*q.  That
++		 * corresponds to a product with absolute value 81*q^2.  That is
++		 * within the limits of Zq_mult() which needs < ~256*q^2.
 +		 */
-+		squeeze_offset = block_size;
++		for (int j = 0; j < N; j++)
++			ws->tmp.x[j] -= Zq_mult(ws->c.x[j], ws->t1_scaled.x[j]);
++		/* All components of tmp now have abs value < (l+1)*q. */
++
++		/* tmp = w'_Approx = NTT^-1(tmp) * 2^32 */
++		invntt_and_mul_2_32(&ws->tmp);
++		/* All coefficients of tmp are now in [0, q - 1]. */
++
++		/*
++		 * tmp = w'_1 = UseHint(h, w'_Approx)
++		 * For efficiency, set gamma2 to a compile-time constant.
++		 */
++		if (k == 4)
++			use_hint_elem(&ws->tmp, &h[i * N], (Q - 1) / 88);
++		else
++			use_hint_elem(&ws->tmp, &h[i * N], (Q - 1) / 32);
++
++		/* Encode and hash the next element of w'_1. */
++		w1_enc_len = encode_w1(ws->w1_encoded, &ws->tmp, k);
++		shake_update(&ws->shake, ws->w1_encoded, w1_enc_len);
 +	}
-+	while (out_len) {
-+		if (squeeze_offset == block_size) {
-+			sha3_keccakf(&ctx->state);
-+			squeeze_offset = 0;
-+		}
-+		size_t copy = min(out_len, block_size - squeeze_offset);
 +
-+		memcpy(out, &ctx->state.bytes[squeeze_offset], copy);
-+		out += copy;
-+		out_len -= copy;
-+		squeeze_offset += copy;
-+	}
-+	ctx->squeeze_offset = squeeze_offset;
-+}
++	/* Finish computing ctildeprime. */
++	shake_squeeze(&ws->shake, ws->ctildeprime, params->ctilde_len);
 +
-+#ifndef sha3_224_arch
-+static inline bool sha3_224_arch(const u8 *in, size_t in_len,
-+				 u8 out[SHA3_224_DIGEST_SIZE])
-+{
-+	return false;
-+}
-+#endif
-+#ifndef sha3_256_arch
-+static inline bool sha3_256_arch(const u8 *in, size_t in_len,
-+				 u8 out[SHA3_256_DIGEST_SIZE])
-+{
-+	return false;
-+}
-+#endif
-+#ifndef sha3_384_arch
-+static inline bool sha3_384_arch(const u8 *in, size_t in_len,
-+				 u8 out[SHA3_384_DIGEST_SIZE])
-+{
-+	return false;
-+}
-+#endif
-+#ifndef sha3_512_arch
-+static inline bool sha3_512_arch(const u8 *in, size_t in_len,
-+				 u8 out[SHA3_512_DIGEST_SIZE])
-+{
-+	return false;
-+}
-+#endif
++	/* Verify that ctilde == ctildeprime. */
++	if (memcmp(ws->ctildeprime, ctilde, params->ctilde_len) != 0)
++		ret = -EKEYREJECTED;
++	/* ||z||_infinity < gamma1 - beta was already checked in decode_z(). */
++	goto out;
 +
-+void sha3_224(const u8 *in, size_t in_len, u8 out[SHA3_224_DIGEST_SIZE])
-+{
-+	struct sha3_ctx ctx;
-+
-+	if (sha3_224_arch(in, in_len, out))
-+		return;
-+	sha3_224_init(&ctx);
-+	sha3_update(&ctx, in, in_len);
-+	sha3_final(&ctx, out);
-+}
-+
-+void sha3_256(const u8 *in, size_t in_len, u8 out[SHA3_256_DIGEST_SIZE])
-+{
-+	struct sha3_ctx ctx;
-+
-+	if (sha3_256_arch(in, in_len, out))
-+		return;
-+	sha3_256_init(&ctx);
-+	sha3_update(&ctx, in, in_len);
-+	sha3_final(&ctx, out);
-+}
-+
-+void sha3_384(const u8 *in, size_t in_len, u8 out[SHA3_384_DIGEST_SIZE])
-+{
-+	struct sha3_ctx ctx;
-+
-+	if (sha3_384_arch(in, in_len, out))
-+		return;
-+	sha3_384_init(&ctx);
-+	sha3_update(&ctx, in, in_len);
-+	sha3_final(&ctx, out);
-+}
-+
-+void sha3_512(const u8 *in, size_t in_len, u8 out[SHA3_512_DIGEST_SIZE])
-+{
-+	struct sha3_ctx ctx;
-+
-+	if (sha3_512_arch(in, in_len, out))
-+		return;
-+	sha3_512_init(&ctx);
-+	sha3_update(&ctx, in, in_len);
-+	sha3_final(&ctx, out);
-+}
-+
-+void shake128(const u8 *in, size_t in_len, u8 *out, size_t out_len)
-+{
-+	struct shake_ctx ctx;
-+
-+	shake128_init(&ctx);
-+	shake_update(&ctx, in, in_len);
-+	shake_squeeze(&ctx, out, out_len);
-+	shake_zeroize_ctx(&ctx);
-+}
-+
-+void shake256(const u8 *in, size_t in_len, u8 *out, size_t out_len)
-+{
-+	struct shake_ctx ctx;
-+
-+	shake256_init(&ctx);
-+	shake_update(&ctx, in, in_len);
-+	shake_squeeze(&ctx, out, out_len);
-+	shake_zeroize_ctx(&ctx);
++bad_message:
++	ret = -EBADMSG;
++out:
++	memset(ws, 0, workspace_len);
++	barrier_data(ws);
++	free(ws);
++	return ret;
 +}
 -- 
 2.43.0
