@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A82AAC982DD
-	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 20:37:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BF23C982DD
+	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 20:40:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2D2B7812CA;
-	Fri, 18 Sep 2026 20:37:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0B568812F2;
+	Fri, 18 Sep 2026 20:40:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7t6nozyLDH8y; Fri, 18 Sep 2026 20:37:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 6281F8121E
+ id L1DWajjILKvV; Fri, 18 Sep 2026 20:40:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 21736812E5
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789763873;
-	b=qD7/r1o25ZB0MklodgDGDROaCf/cVyD9UFfSG0zksNxj5H+2n7B53/yjzoluqC08brmW
-	 W1s3I9IYCy6knndfe1jzNPYsTZ4RCeyGccjPzg/DdrUBl21Z0ISqsaJJJ+ybEoPuAzb1P
-	 rLbDNvefxS9ptuIXZXDmOjxsY0IcDPpo7D2jgiljeG+Pv/owgMOxjLMk3HTnd/yDE/moy
-	 nfJCKwdPXpqTcAvOPxB2HwQ7Y5k7UB7nfM9sr/SU5we3DDEbHaUcqeuGlQfBKeXEgsigf
-	 Dm3jbuA5aPi904IzD/Evr2Mq4862FantEhtQjMUU0KQbWGfYoyYu8MoP3Y8lf5XdSgQ==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789764030;
+	b=LX/4Vra+owAR333njjDx0maX9suv7ZIK377KqyrE0brTXykhJtuiDrA/MEJ8FSNl4OQ2
+	 mFp/b1o58XsXpCvfeS3QRIHI681Dyj0iE7DJ+GuhyUFjkUulc8Vxc8Sho36GQyU7ttDgc
+	 NAwCAJXdcj+nJfycU1xdlAHdEkYAGNTVXeG5qYaGA4LTP6XNGWF/HkJB3ACFoE0eJ/mx0
+	 3Az/NaxLjxnNgGUK+UK09QskCsIPfJKzDl6zV5hrEFWMkUIlnDRxfnHL0QrH3qb30qVgA
+	 xhcQ+HrRmfPZGSFVjoUjCTBL41uFE5TSbUzNPrC3gd0vemtlA6aOExzUG50O2vnel+A==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789763873;
+	c=relaxed/relaxed; t=1789764030;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,144 +31,144 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=eRlKo+pFzYzCrSowZlb1ydFydpg87ju6j0wXqhv8uVo=;
-	b=PQm4yINGV7ea4eiV/pVAgFk8Oc9c/btfFg9vgPW07c/q2EAGYGjZKmePFSrvVHX6TNdT
-	 Y+SsPaNOAY0+Rw9lfHZc1pzrBmAbNwXIf3+O3St6vfIfId4ykWFWUe7NwGPygX3fw/lBA
-	 hwP6ml0RoNEIZso/dc8gpRgNhJs1g1/d0vUDDy3tslIV+DuWzbTfR/TlVGiMFZCEwJqGK
-	 HuymTgReBesBRFT7SMGLyvQu5DyXDYJUQBPYWiFGYboTnWm9Lvx09+p24hLqSdrgegGeI
-	 X/Uhjq272ZZ+QSm3foqXTQZtgmm8V7o+Z0tmYO5F+GamZLbRlY1hQPY8VwC+SVkg1Bw==
+	bh=Mx4HMjhCo3nAwWfK10lYZAf2ij0NSjpkvj6yQpFOqC4=;
+	b=lICq7g6q8QCqPIqisJ4RhEnxUuEKVB44V5Aq5jB3HFL2ApBHGINBJ2FoTTZp0O2UdI+/
+	 iBvuSrIeyUOOlOeBQSjaAGz4N64N19OE33pUfxfz9cRshyqyqGVJMtXzVUQLmacGZ25VM
+	 mETzAfpVipfsR0oLqSZVAhoSrREslX/y/LsNXRzs8JUgFmg+0O25Hi483KryLt5l1XlIV
+	 bjH90vmoHeAe0/sE6UXiC170JmoF63ujCjfhutSq0mt6C5FMkq2P/Y3zew60/AKFME5gD
+	 Exk0v6n9Ct8g3d2M/gJ0tqpSa4kAZZIKcHA4MNCS+2gVYgrJ8a+UxcL632jvPLN9CLg==
 ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789763873;
-	bh=eRlKo+pFzYzCrSowZlb1ydFydpg87ju6j0wXqhv8uVo=;
+	d=lists.u-boot-project.org; s=default; t=1789764030;
+	bh=Mx4HMjhCo3nAwWfK10lYZAf2ij0NSjpkvj6yQpFOqC4=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bNC+dBfmN0Pq/1wHzAbSBfoWHKJIcoKE8bRaWaYfwacTnDS8uuD7ijHEav6PJVYEr
-	 ptWsE99OalXDaq73RCBO3qFRW3L23OBwSpCiXSb55iTbByaxdIN4kdQunqfS+OQ2Ei
-	 zO12Yt7fvk2XPeZ+UsCXrtwjeM4YYbRYhp1fYT5XsfR5ueDVEZLXnkdEHKFYp24HZv
-	 i7ma0Uw7zy7I/SiaGJy+VIosOyMUmRreuHCxaVgJ/h8VegbLAARwPmAKHX/kdCkmBp
-	 6gxGt6karAUADvlceG28W269UtR4VSruIivCbrhEtJrHwtJ0H4OVonyuvogQtcsrQE
-	 guENDi67Vz2ig==
+	b=0dMC6mCuRR096//yGaDXHJwqpff0SjihLPX5VwR0dH4oKCTl/ELwbi1iYiYMsUXrs
+	 qNEHOGNV0lFNMS0xwMGiVEv82Qm20oaD4Gn0RCBGOikvYuGxjoqgrvkxTBAUpS5zb+
+	 eDNI20Q1FPIs1a1qqkIEUTGr9JaK205wNrub39D6sRQbsWYYf+w36OBpurkus4niL4
+	 sFlq5fIC9zYTpCoGSO0L0NCOetICGrUlIw5dUozjr42doL7hvIkN7sIK0yMh5wXBaA
+	 X4jHq+scXREPsO6njncMAg3AGVnvfap1v0t41vtTh5gwI+nbwmZ/ErCXl6q3ud6/qo
+	 BQB08PA9Xjvmw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6281F8121E;
-	Fri, 18 Sep 2026 20:37:53 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id BE36A3B9
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:37:52 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 21736812E5;
+	Fri, 18 Sep 2026 20:40:30 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6BAD1362
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:40:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A40F14006F
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:37:52 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5E1F34006F
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:40:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 13VILxRF1b-m for <u-boot@lists.u-boot-project.org>;
- Fri, 18 Sep 2026 20:37:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 88DBD40022
+ id i1IkHhvgOgcc for <u-boot@lists.u-boot-project.org>;
+ Fri, 18 Sep 2026 20:40:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 5406F40022
 Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2a00:1450:4864:33::f"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789763872;
- b=H4xmqbpJubtLIeiIYmtaaI9nbRBI3Fou4O0ISERscdCJdxIcdsuUFIvONnSeoBUufHFy
- z6yx+89HVmcCuE3a1bFYzu5wxkIlEz461vlDPk3SIJtdsfrs3al5WiihVXtd6qdhp0gSA
- 6Wieyzrx4ZtO9QdZXvo21uoDvSh4gJuy6hvVmRJM7wDl7/bBNnOBAfybiZzJx336Cz14l
- i5uHTHWdZROqR4ktXLIlNN8Ap0OXYMQu1FuhOvEGhDrCNfcVIKCVlu6KcwiBOkDQPd6NZ
- JsqjTlHVqM6hx0hZpdDwlvs0Ly+vWw2Bn2qHmcYOB10xPDPAoNk9caGUCxgp6P/a0fw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789764028;
+ b=rIO80N/0cdtr5X5kBgWaVyIT2qqnq2eDRn1krjnl5Jg0WZQR17xq5F0Hv1oUp97omRL/
+ SNibBixS4rteeLWYYYU0VU7PhxsU361X6wY/v2l4ubm8jYSZRJ1RWUJrnyYpjqiVbNgBc
+ bvut+sQW/C3XLxb/DwVpcU+djaF6kK8TAdHsYU35PEWs5L2uWzBYINGZYBoMyuusXeBe5
+ 046+Xg95LnaJGW3DRPXorfkTXa2ZgIihe/1803HHFS7ny2vlM73UzAiTzeQ43gcqOT7Hr
+ iQNvkM/y021CBcV2FKuj4hA7lxRpB3oxR9i9MvCc2nNnkqpnJrqlnpbROIFdyJ/Fx/A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789763872;
+ c=relaxed/relaxed; t=1789764028;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
  In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
  Content-Type;
- bh=eRlKo+pFzYzCrSowZlb1ydFydpg87ju6j0wXqhv8uVo=;
- b=Vv1XQ5lgj0Ne56Tu01QTM2FET9kcCVC+3J5lSvceFvIl9ukrJmVKIROQNTGWVxC61j8e
- yrmjxtHgD03QgdytmACGa007YTBFl1kgIkH7c+OEHM/pNgXrSSNrsR3vYNieNTDGi+BWg
- stTx4uRyvAIUN84Fs5P5/H6WHZczEEAcGSKISzBFUddXHlqCO0iT8bVSUCPYTbqLhiZgk
- pbhY5DhGu7yj7F/O2GkBNNYzrmCFTiDHbAOIWfJenKZGdsk4UHwCAAl90Pi+GJjyCdZJr
- prnbzPN8NIJAq4Kyv5ab84PnTXVpqM49lYJDDRyMpCbXb25/IqJ9h7HAUg3ygn6kw0A==
+ bh=Mx4HMjhCo3nAwWfK10lYZAf2ij0NSjpkvj6yQpFOqC4=;
+ b=e9RBqOPisBEYWbGHCEUQrtF0ku0Pmf/ahWQ6tsd5onucolOOgovm58i/rVfj4Qo6YAe4
+ XG9za8AGMLG8tBjGA84/g/glSc4DIswcUbRnFPt2VQI3Fsr25VoUnM3oqCIJIqppMyb/i
+ D4Mi934NSFQwI6jHQ2+RY+e5mlDdKe8EQCk1thz5oqqzXY8Ae0Zzf4SL62rPCgMJjRaDa
+ lv4kphKCyTiHdUdHgJ7bZhS56BE5vTQ9jXImNGifyVqUUv2o0Kh7hXCFMURGDutcFg8Iq
+ QM0xO/1YWWyPhtOebhWCcchdgVld8FXTgMpbILrMw/w0jkcitEYv89NnkQWoKvpVA/g==
 ARC-Authentication-Results: i=2; smtp2.osuosl.org;
  dmarc=pass header.from=chromium.org; 
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=Eu2+Yw3T; 
+ header.s=google header.b=ZnIrsBO3; 
  arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::f"
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:33::f;
  helo=mail-ed2-x0f.google.com; envelope-from=sjg@chromium.org;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=Eu2+Yw3T
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=ZnIrsBO3
 Received: from mail-ed2-x0f.google.com (mail-ed2-x0f.google.com
  [IPv6:2a00:1450:4864:33::f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 88DBD40022
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:37:51 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5406F40022
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:40:27 +0000 (UTC)
 Received: by mail-ed2-x0f.google.com with SMTP id
- 4fb4d7f45d1cf-6a996c8adf3so1804564a12.1
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 13:37:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1789763869; cv=none;
+ 4fb4d7f45d1cf-6a9a2b95b72so1869442a12.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 13:40:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789764026; cv=none;
  d=google.com; s=arc-20260327;
- b=DXmXCB61ntPU9sDkbzsJCi7+CCE2qYuWLglb0G4beLXlhPBpRvpqkhGQQXPRfzPirv
- 2YyJV8J+sLLSbxsT7Kz8lxKR2nzg2q9Z+3cAD2YCuODsWZRx4nPy/4+vrMBUiji+ORy4
- 3Vt5x0FKHocmiJUFtkO8dXcQVLMxwaouUEOn9cXdE7TVhLZ5jbnHAOvU9wcymAWCCpWH
- oKX2nJYTqpfxWRJGQ3Kpq7qGTVnOzxP99kQwy6035zEKCzqYXuEeU4Rk6OCbSGscsoPE
- jbehAIilqAIIdytvupBbLUIF7gck6jFQtmD+N9cYGgZER+tZr2IcLntrXD1L+rZ4VbxG
- 8D8Q==
+ b=WRQKaW8FvUhpNmiL9yV01B1hUvJ0tyuVIrda366Fcf+EWoBDCPpZ5TsoTr2JIZ29DD
+ WcdLDHwAUVN1KCnnVeNccLyMb98ETSdajSrGsSCbOSBStVI9xsz4HsEeVtmkB4Fs+IrE
+ jH7NoVKfZciUdXQPlVfkaN/EkLYCuol/b/QNkqSHYDKEsKl5tiuMZMR8x4DNJHA7TBgj
+ sztDmeSEP4IZiqmbvk+/Bf2d9D3tYFKAgE+Gth+7Q6z8UR55qMk1PAACGm6+EPpqrruk
+ C7OegJOqa4biB4tB2LET8iI+o2trNR5yhYhzO3xlxe/poDTysDKdqUBEpqJGwQRgJ9h6
+ DcpA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=eRlKo+pFzYzCrSowZlb1ydFydpg87ju6j0wXqhv8uVo=;
+ bh=Mx4HMjhCo3nAwWfK10lYZAf2ij0NSjpkvj6yQpFOqC4=;
  fh=hMnzCCESv5iutVaH6AX1PrbYoVsPb+wpOEI00M227js=;
- b=g1emVrapkoZ2XOe6LthcCcX3cMcU6USqsRR/be1HhRPVBc7ydXTWRBRA7ij+piCjra
- qe07g453O58InY9QBDQXUi4J7Xp6N62hLn+GVmzxX8AmYftoDqFr2M1VT4FMudYHbQZi
- 81E4KoqulkSGi/gDZhKGfFeGK8ouhSteH++jx1TmSRkEakO/s30P9kLfVHA8Y4NbqJx8
- IbjUo54Re/JP0amL5j5hAul13llyGa0So7bCmJa3YGcmFPNhRbEJG9jtXuxf6O9vLoXM
- 2FhukAaHqEvNEb6Q+ORsYztXVizOLTJJy6HdhiwIVPhqKDuVXPoQqsdtHbQw9WfgLxRt
- KXqA==; darn=lists.u-boot-project.org
+ b=jcv9N6L7+AP6CVKmI6PzDL5IR2CXRnxC4ljHlEg8ZZwFU91SmJfTtilIHI6/sh4s96
+ 73183bJ8WRFwcBkodYA1E+d6L9yp33uqseeH5nD6jU4syvWAO73zZq+Fe36xuZVQiHJX
+ bFSZ7YFUqpYDWY2ZU+aHrUZZ23H1SRvb6IOelbzlhVE4WJqLgaXqjP3br0Kp4wvkJqC+
+ 8wmo0VxJEd5W8W7NEGVF2wY2l3AhpuBF7MFzmJzFJSy5rcu7xHxi1CrxfURIJwxP2Wkd
+ 1593OxvObZSOA96nSDP2jQm9Kcl7xmQ18yj+SdeBIIukazo/WmBAZbQ4a4bgbBGSjbJ4
+ NqhQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1789763869; x=1790368669;
+ d=chromium.org; s=google; t=1789764026; x=1790368826;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=eRlKo+pFzYzCrSowZlb1ydFydpg87ju6j0wXqhv8uVo=;
- b=Eu2+Yw3TBFsSnmfnLhgKNDDSdPXTon4chZQUQS4VOBGB+wfs61Pp0kQ4APf2e98K+k
- mkGdyoiBFYYxr3E8aEdjrFi8AAYGkUzP0UH45/UakIn0HwjZt2E8KpnonDlu3Rp3Q7jl
- aZPowb1ABLu7KRtUxed33xSYdfMli8TJa9D90=
+ :content-type; bh=Mx4HMjhCo3nAwWfK10lYZAf2ij0NSjpkvj6yQpFOqC4=;
+ b=ZnIrsBO3oeqS4zKki7tuTltz3/mbAJZhtfDQZf4z16OObUlRX0OpnSm9bkhSJ12IRX
+ SXNuuwfvecp6B59wfiDcikS4kGszpmDaUT14DzCrGYhKCvld5gFkzhGHEBmgYs+5FqGp
+ h/3R8i5FcYfxJ62OFZ07KhNK+KeG/YFHP2Ysc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789763869; x=1790368669;
+ d=1e100.net; s=20260707; t=1789764026; x=1790368826;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=eRlKo+pFzYzCrSowZlb1ydFydpg87ju6j0wXqhv8uVo=;
- b=gJk72KPruK8mJ8h0ifJWEIGtYriOvgwxoyUSXIOW6eEgMnRAh+osBIiEr26mBkHIcv
- M7ow5wDdY/hIHi+5QNdA3F0t8KCxismAyoTsiRrglHSiDm/J8DlOrYHckT/FFfCtVdzm
- k1z2HTQuA/LW/6CTOzB90XeCbVlpn8QGNenbMHQgcYinMdGQMjmdvK3twdZgVlJGLqn3
- I+BfAcN2AehrV6oGsXhVqssWGK5/7idVpqHT5wlbxlq/KFOBRtTjLM0NdQ7iavKkbH+O
- RSMKVCTFU9R2+U8l63/cKS1AeX+nwewF64jDNTsKFpFODzADV0NjZ6tm21beJDz9YM9S
- cTcQ==
-X-Gm-Message-State: AFuF++mWDp4ymBocIob2aaOq0NU1dLXweq8VkAlP6sl4G+i1iKS9kIGB
- 7S3cr7l1ESrDBvlEvRTeQr2AvGcxG38ZZaCMoFvP9Vc9nkjV60YnJZxosnZ0f6QdDfgbzclaR1e
- BvgbdqI4v+DtuNcdHP2ZlPUrgYdbj5UckjwZrRHqC
-X-Gm-Gg: AYBFou2e56bNTt14flUJCadFLnmF/1bHGpTVocjkPZ1jS0UzlJLWSTYvZrnJLv1sWTJ
- O8ja1GvoD9NpEuu4p8KBVGfjV8w6D2zeuzNNSRri/hbgDzTnGCu+KjRbsNLTc/d5ESnO03oj5jh
- J1bclVTKQtRAdKOYpj+Bs27TzNKm3260HOWsDywgA4O97EOMaS4CPyl0/QLJkDqRtXMiX2FBWj7
- 5/Ewb4MrsI/ONFvzSxdTBJaiWZxVGxnyeWkVNGTwmffsQFOvusq9RfmjRcQxZTEU6XQVNxhyuTF
- Q8RzoQ0aAGagEfQjun1SaBLn++4VGx+R0x3I8EhVPBuUxbiHL4A6NlA2xipIj/kSsY8=
-X-Received: by 2002:a05:6402:320b:b0:6a9:ce42:e684 with SMTP id
- 4fb4d7f45d1cf-6aa52650e3cmr2347289a12.4.1789763869156; Fri, 18 Sep 2026
- 13:37:49 -0700 (PDT)
+ bh=Mx4HMjhCo3nAwWfK10lYZAf2ij0NSjpkvj6yQpFOqC4=;
+ b=q9OwknqU+DS0nTUqUHewU8BriL5eAIkGhFN5eE6bK/c55IeZvenvht0K5aA/qComa4
+ 11HF9KcBKYU/D2bm0esT07g8K0HtNcePGMHPtKioOfnC0DHR/YqIBpYXYAjRo3Val7jh
+ b/CrYmUYQWNNejETkRiI/YAJfrEkWCrRDCNExhH2rR3C08F+4Yv1Eg3/V7rgRKKJfYgw
+ dxdht9uK+UOy50vcUZyUg55l1nEsrGLdWEXsieDCXKkUMo8yUVB8/mxENOnHnuVkYStS
+ cwxZVWJj6QcCPP4QJxcg8f6VRJNPWPVyoWkGAyWgmYLCYFhelp+XOiNpbEjMo3Miqqkr
+ fxyg==
+X-Gm-Message-State: AFuF++kuDYr9wHNKLXZSB5P24Bafz77hPsJxFARzblRdFhixBXd9CzAX
+ Ts45wN4VkqpBlReDg0FLv/bHU1cUvRX+IlsC2tP2IRWQQIaqJ2LzU9o4k4CcgIhRY5lNuMpAzPf
+ gXXrK447J7295hpty7B4/DhneGijybPwbAOlb+hyb
+X-Gm-Gg: AYBFou2g1ZLbBrdQADHXTUK5q7313dkgpfkblTKHCp3XbeWH9tdSLPmHZMOnqjbxdOr
+ Mg9WqPJ0zBUZ3yyHwWFhsVRP+jI93Q8g0C0yHVw/6ByhMI+IfkOqaF5RB1D4TjsN2Wr+589ZPtL
+ EKOJmrCB1T43rE9twlX5r+jmQi4w5+MzMeiIAS+mNlT8mEaxSgKeiDGrCofvRpgDq29iAx/ShN/
+ c3E6Pmz4KLkPjm8c4kLKDHm7clKMu/Y2KH/f9Gh2S0kAWtPnd5A+MfLC/ensR0va2ZTGm9fnoJb
+ i6gg9SYGUmcKi7ivef5f1QjaF5dUTYQYUHXnO0yVeTLtPOQM7056IZ/5
+X-Received: by 2002:a05:6402:208e:20b0:6aa:1112:62fc with SMTP id
+ 4fb4d7f45d1cf-6aa57818ee8mr1964405a12.15.1789764025854; Fri, 18 Sep 2026
+ 13:40:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260912124454.13578-1-aristo.chen@canonical.com>
- <20260912124454.13578-2-aristo.chen@canonical.com>
-In-Reply-To: <20260912124454.13578-2-aristo.chen@canonical.com>
+ <20260912124454.13578-3-aristo.chen@canonical.com>
+In-Reply-To: <20260912124454.13578-3-aristo.chen@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 18 Sep 2026 15:37:35 -0500
-X-Gm-Features: AcwNN1UXx_L95r1uG2lz-gSxAftqu9T2rkygfZksVcY3KMSgpBiYCqGGw9r5pzM
-Message-ID: <CAFLszTiDPdvo0vZpJatLCGPA6Z+5XWcWyqN15tOy-_h4TC-zoQ@mail.gmail.com>
-Subject: Re: [PATCH v1 1/5] tools: mkimage: use an explicit iv from the cipher
- node when encrypting
+Date: Fri, 18 Sep 2026 15:40:12 -0500
+X-Gm-Features: AcwNN1V7zWcLEPjJiHVH0E1dAGHANwBbxfL3MSdYLX-hN5e3hYunkqYvLDV5mns
+Message-ID: <CAFLszTiVxud4Hvsz6B=GGuQKHnjxtXXXqbPRbQPaEhpXjrCUjA@mail.gmail.com>
+Subject: Re: [PATCH v1 2/5] tools: mkimage: resolve image-data references
+ between FIT images
 To: aristo.chen@canonical.com
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Daniel Golle <daniel@makrotopia.org>, 
@@ -187,29 +187,110 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 2026-09-12T12:44:46, Aristo Chen <aristo.chen@canonical.com> wrote:
-> tools: mkimage: use an explicit iv from the cipher node when encrypting
->
-> fit_image_setup_cipher() only consumes iv-name-hint: without the hint a
-> fresh random IV is generated for every image, and any iv property the
-> cipher node already carries is ignored and later overwritten. The FIT
-> specification defines iv as the raw initialisation vector carried in
-> the FIT and requires at least one of iv-name-hint or iv to be present,
-> so an .its author who supplies an explicit iv reasonably expects it to
-> be used.
->
-> Use the iv property when no iv-name-hint is given, after checking that
-> its length matches the cipher's IV length, and only fall back to a
-> random IV when the node provides neither. Besides matching the
-> specification this makes encryption reproducible, since the same
-> source, key and IV now produce the same ciphertext on every run. It
-> also allows images that share data through the image-data property,
-> added later in this series, to be encrypted consistently without
-> relying on an IV file in the key directory.
->
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
->
-> tools/image-host.c | 18 ++++++++++++++++--
->  1 file changed, 16 insertions(+), 2 deletions(-)
+Hi Aristo,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-09-12T12:44:46, Aristo Chen <aristo.chen@canonical.com> wrote:
+> tools: mkimage: resolve image-data references between FIT images
+>
+> An image node may carry an 'image-data' property naming another image
+> node under /images whose binary data it shares. This lets several
+> configurations load the same payload at different addresses without
+> storing it twice, as described in the 'Shared image data' section of
+> the Flat Image Tree specification [1].
+>
+> Resolve the references in mkimage after any external data has been
+> imported: the target's data is copied into the referencing node, so the
+> later ciphering, hashing and signing steps see a normal image node. The
+> property itself is retained in the resolved FIT as a record of the
+> sharing relationship. When mkimage re-processes a FIT that already
+> contains resolved references, the node's data must match the target's
+> data exactly.
+>
+> A reference is rejected when the target does not exist, when the target
+> itself carries an image-data property (chained references), when the
+> node's existing data disagrees with the target, or when the node mixes
+> image-data with external data properties. Since encryption happens per
+> [...]
+>
+> include/image.h   |   1 +
+>  tools/fit_image.c | 286 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 287 insertions(+)
+
+> diff --git a/tools/fit_image.c b/tools/fit_image.c
+> @@ -1169,6 +1169,287 @@ err:
+> +     ret = fdt_open_into(old_fdt, fdt, size);
+> +     if (ret) {
+> +             debug("%s: Failed to expand FIT: %s\n", __func__,
+> +                   fdt_strerror(ret));
+> +             ret = -EINVAL;
+> +             goto err_munmap;
+> +     }
+
+In practice this function should not fail if the DT is corrupt, so
+debug() seems good here.
+
+> diff --git a/tools/fit_image.c b/tools/fit_image.c
+> @@ -1169,6 +1169,287 @@ err:
+> +     extra = 0;
+> +     fdt_for_each_subnode(node, old_fdt, images) {
+> +             const char *ref;
+> +             int target, len;
+> +
+> +             ref = fdt_getprop(old_fdt, node, FIT_IMAGE_DATA_PROP, NULL);
+> +             if (!ref)
+> +                     continue;
+> +             found = true;
+
+When mkimage -F re-processes an already-resolved FIT, every reference
+hits the 'Already resolved' branch and no data is copied, yet the
+function still allocates a full copy, runs fdt_open_into(), fdt_pack()
+and rewrites the file. Please track whether anything was actually
+copied and skip the rewrite when nothing changed.
+
+> diff --git a/tools/fit_image.c b/tools/fit_image.c
+> @@ -1169,6 +1169,287 @@ err:
+> +/**
+> + * fit_check_shared_cipher() - Check cipher settings of images sharing data
+> + *
+> + * Two image nodes can only share binary data if their cipher settings
+
+The kernel-doc blocks on fit_props_equal(), fit_check_shared_cipher()
+and fit_resolve_image_data() are missing @param descriptions and a
+Return line. Please spell out the parameters and the return value,
+particularly for the cipher one which conflates the source-.its and
+re-processed-FIT cases.
+
+> diff --git a/tools/fit_image.c b/tools/fit_image.c
+> @@ -1169,6 +1169,287 @@ err:
+> +             if (fdt_getprop(fdt, node, FIT_DATA_OFFSET_PROP, NULL) ||
+> +                 fdt_getprop(fdt, node, FIT_DATA_POSITION_PROP, NULL) ||
+> +                 fdt_getprop(fdt, node, FIT_DATA_SIZE_PROP, NULL)) {
+> +                     fprintf(stderr,
+> +                             "Error: image '%s': image-data must not be combined with external data properties\n",
+> +                             name);
+
+Just to check: fit_import_data() runs before this and, on success,
+deletes data-offset/data-position/data-size after importing. So this
+check only fires when the source .its declared those properties in a
+form fit_import_data() refused to import (e.g. offset without size).
+Is that the intent? If you meant to also catch a well-formed
+'image-data plus external data' combination in the source, this needs
+to happen either before fit_import_data() or by updating
+fit_import_data() to skip nodes that carry image-data ... otherwise
+the external payload is silently absorbed and the mixing goes
+unreported.
+
+> diff --git a/tools/fit_image.c b/tools/fit_image.c
+> @@ -1169,6 +1169,287 @@ err:
+> +     if (fdt_getprop(fdt, ncipher, "iv-name-hint", NULL) ||
+> +         fdt_getprop(fdt, tcipher, "iv-name-hint", NULL)) {
+> +             if (!fit_props_equal(fdt, ncipher, tcipher, "iv-name-hint")) {
+
+Since you are adding a new feature that leans heavily on iv-name-hint,
+iv and data-size-unciphered, please add FIT_IV_HINT / FIT_IV_PROP /
+FIT_DATA_SIZE_UNCIPHERED_PROP alongside FIT_KEY_HINT in
+include/image.h and use those here. It keeps the cipher-related
+property names in one place and makes future renames tractable.
+
+Regards,
+Simon
