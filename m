@@ -4,175 +4,183 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00B53C982DD
-	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 20:45:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAA6BC982D7
+	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 20:50:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BF36760BB7;
-	Fri, 18 Sep 2026 20:45:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 94C3060C31;
+	Fri, 18 Sep 2026 20:50:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Q9h4pInc9fI2; Fri, 18 Sep 2026 20:45:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org F2E7960C0E
+ id 98Od9TLwqpkw; Fri, 18 Sep 2026 20:50:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org C5B4A60D6A
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789764345;
-	b=Wgleb2ksfhZ7x4yrRl6uEzLwnTYMUC4I0JlZylfX9cR3sl6ur8D6snPq0YFiZO0SDvva
-	 mw0iJFBUS29fBEqdtWYm8oUPLgHZxTQOHmcfOf+BmUVZhmroeiL61rzntcUb9X6f7n4Sa
-	 pgaJKTBcFbAvpwZ2cjppOVgE+5arhARMY+w7NtWnWR6+t30XTcuPODZBHplchsJM2piVz
-	 G5cbN/huYF4eUqq1XanJWfOYTD9ockwC8WNTSNeIltfdvaJrK3MU2rUCvZ+jcaou/Ia9X
-	 m+IUyjSP94bz1d+zM9viBIz6jpUo049ShJJ210G7p/byulOsxWYp1nddHZZn8uPInOg==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789764601;
+	b=pZeIhkFKEwoYtalTZR6Lo5FIYdYUjDhV/7feGSJR1ryx9nlGO0pYPYmLtCLmmyRFnicx
+	 NfROD2z70pmV/cp3zj0JWnOPBKaT6J7TyxCyM3a8r/BTRvUajd3YG9amb7UDjiJyTrGnW
+	 X/rWR8xP+rHq+rPEA52u5IfyNejMuHRaer5cnUoiNrH1N3g+uZGG5vaBVmVtVS1rf8+IL
+	 ev3GyeETN4HISmZGeWM5dbcYq5XJwOn8tubSQzrf020AHuq+A9N4oEkElDM8gGGYUNdgD
+	 B5Gm9/Va/Rqclun/oPbwIRsCD2nL+jrsjqRLb78/8vCdGzExLJ29h0LDUTfYktO5LLQ==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789764345;
+	c=relaxed/relaxed; t=1789764601;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=dF1zYMeDNPsIkv3BsYlmi+JSWYAqdmT8eWjtQ7RhbKw=;
-	b=otWpvW8AcXiMstWUutzPrw9NHNWNFa+wRRCnBBlYnNl/4LY8OgeAk1uI8IkLsWoB+RBo
-	 LtfNBKblnPlpfn9SDoe6bqjxAFaWCR/z6IBBx5FfBd40cH60YQ5YaXMzOIQXaSiHdW9JG
-	 58BuLd2qJ5x9QkgEP5uNw360Gqw55oLewVsDyE0vfZ6hPdGTGTOxERUaQJAvhW96rbUkK
-	 oSymPnXqqhmE+a4ugik74mdUBoZPDkAE+5JXoSdI/AMGtaQerI4VmoP1/Gfu+SlY9eLXv
-	 42eqAUE87QSqGP8BbL946dccxIWinisgKlompAEpm1GmNHOei8o/UnW/mmh6/TB50sQ==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=XKk3b3fw3RCVH3Smz+DkPIs5dOpmJ+mU+vLAAGHGHa4=;
+	b=ibNAWYsVPbAkixw8gK3ZBsG/l3+bKkbQdLg6fa5S+wej5FStFhWESCo9tNANnrYGaUj7
+	 mL0kDMjr3xUD05nEBVZ/UA0sThiccoqVvpixoWNycD3Q9ErsgNFN8tE59HzLqkPPKdzNO
+	 4eAkHUru+CoIig3sfMia+7fi23qpFYUm3xdFnVMVTEkmtWtepdccBn4NBX6tjH5AcMf7j
+	 shq5C7Lgo9W/psBAHWlJWDG4IkC9tlUiUiKAEdBPDH4TdVYqKELY1W2F/fMKMM892v7G3
+	 i0eG1YD4COXJSF7RhJAmdyoXFeSC8YeoOWSeEgYwQQjXFKthY6+t/+kRH6jzgdSy53A==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=pass header.from=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=JGUHzYHL;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789764345;
-	bh=dF1zYMeDNPsIkv3BsYlmi+JSWYAqdmT8eWjtQ7RhbKw=;
+	d=lists.u-boot-project.org; s=default; t=1789764601;
+	bh=XKk3b3fw3RCVH3Smz+DkPIs5dOpmJ+mU+vLAAGHGHa4=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Lkj3W8HMweD8B3gOGW2/PTHa8K9EHGs2lEeBe4nHi+rs1Q1M4U37kSrKqm5ARlDV8
-	 KVd2IrIAlB1GNc79XhfNej4GGf5rWWgyyoCqKq5Gmhi0grJC4Y0vfS/dTtveTVYHr5
-	 9P0IR+x4esovDu7bF3NCX4jHvZQTjJYpqR5F2YtcO8jPTFj4aW1lleTdhSqICK9wtR
-	 5XmD+zRyE1dtXmKCeWfuznTlrME7GgZSSUfcid8UUiJ/J+2uyYpg8DN8JE+voFAHBF
-	 bs8K1PGmbTBMfP16znc0xTHBSMNOABXgaCz2xb/EovrAIcuyD3eZfQWdmfIcOeyFS+
-	 SKmVUvAouTiNg==
+	b=0RyMMGKK3WlizvoTorVR6XKTwFeL6uakEk0nqDQfQ3MRYaRl3fgeaOhj2pN2ZgEiA
+	 vKIVs5r093LlUpUNZ05+WFOyNu5kNl6Zjir3+JgYQ0gkUWNmlKB/SVMcFiyzEEOSXD
+	 XBE7eCBdB628XmXygcO8fdnMn7aetCaWz4meRwuX7OWB7ls/7ceiHxAVnZAfqHRYdj
+	 iEc7Cqm077609vz5Zq6LNqCKDO3zcnuhXDZQG9IQhNcN+nJFG64XLe76ewslc/IczR
+	 CD3w2N4SOuLn6I8Wss4aI2E3cEEM1Tw2IVzSlMZ/evJQvlSOnFtpIJwaULi38CiXGY
+	 fRFxdjFB4U4wQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F2E7960C0E;
-	Fri, 18 Sep 2026 20:45:44 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 69AEC25B
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:45:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C5B4A60D6A;
+	Fri, 18 Sep 2026 20:50:01 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2CD6D13D
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:50:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5B2FF4006F
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:45:43 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1EE0260C31
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:50:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4Si-KV3yFbh3 for <u-boot@lists.u-boot-project.org>;
- Fri, 18 Sep 2026 20:45:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 614F640022
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id J6B0VTIC85DI for <u-boot@lists.u-boot-project.org>;
+ Fri, 18 Sep 2026 20:49:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 21C5260D6A
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2a00:1450:4864:33::10"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789764342;
- b=rXDFN1cEq5woIVvaAgFURGmzMYLUu9IRLLj7RrKx5Ddsj22+W+wPaf246w/SEqGAEG2c
- Hck3SeYJH8BCVKZKefXEBTywAKi+oBiYG3Z/n4h8Ffl8wSXICIMnECo0eyOIiMCyDOSVV
- FsruMf6EwRP3IfV69bnpixkdRtVcfm35Mf0wBP70YWX32Jlq8GeejZxC3tOhJNyJE0+b3
- qiaYocqu8jIpa8BK57Z0HnXDPEADbI8B7cR0iktl6r3TFgFRULx8lYETNDKW5p/5wHOfQ
- UCF3TIEmGlS9R5Uhlib6gDYDfEfbXXUaVeCFvoTOGq3dnD3hWIY09671cpSjGXIeymA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789764599;
+ b=et9MhbQhMLq+7gMhl2x1x61ijMixTmzfqlzKg4JB5JS/Q7p1a5lnOiKN5CVc484MbFYd
+ WlzIXt54pRWi98BDvCs14Yuq95+IOnOmkmBsSxczFwsFwUqRtt0hBAH/bU7xaDnoqwrYS
+ ZBtz2WRqo5shzB7S9Hc0GJYJE3MjPqP1NQ915d0qMzJ4X9X4E6XcXjW2OeAm3Bedmn3x8
+ WNsC8I7iTuPNAZ5NHT2hfKNa95MC6bHZ2KafV6XOtNzfJIBwYiIObDuqg77gmENAdvve9
+ YJf6exmF/kgwT3Xnw2Fxesy5ceTwKHIOl/86wvPW2CuRbjk0/tHV8Y7SULuXIUaW/cw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789764342;
+ c=relaxed/relaxed; t=1789764599;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type;
- bh=dF1zYMeDNPsIkv3BsYlmi+JSWYAqdmT8eWjtQ7RhbKw=;
- b=GTCKf5rjNS2laLwyAGXZPH4DC2ss6rGmIaO7WImcDtyvTI2/rf8KoXzPaxoPL87Xrsa+
- Hx4D3nL///m3d/BQgKzYffIPDs2kNCJpYjJ2YOHKPTHlRi8q1Z+oH/kYzaRQ5V98O5FD7
- GBHMuZHqlPLeQjDi3fyN8AHV+otsZ6QGHqbKnLWQ009hMW3EedqCNJHv/oDIUhcwpng3i
- iYUSdA3vXZLo/denecnDzMSpgjesQxe413EC5irmkb3w8Ls4vRYTOgc+swhMwQdmX3jUC
- t3rzO3prWMnsH8Ybl6dqB+zaDgZAp4DgO/vnY3+XsMia8vdQTmiA+SjPTV54cwcKKyw==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+ Message-ID:Subject:To:Cc:Content-Type;
+ bh=XKk3b3fw3RCVH3Smz+DkPIs5dOpmJ+mU+vLAAGHGHa4=;
+ b=tQC2X/zFFEH/VaHu8c6OwvZnMIBFHpBf75ELDj7wz4kZ+qx1/Lnhj7W88fbuq539g82N
+ ZkGXnTOGFy2KcpaiNOtFQDGfa07BaD1Kn+8oVBVbYLH+tWAty/LRkQzA9SwvsehQQnUTJ
+ v7q6My8UliHaOMdlhneiX6Jf4bYoEcrXFExd/J1+Fi/+CmMLoGA5G6cq6S2ILUYugf7MA
+ La+T1oiMPqTQP6rK50ZSzoX9bHMeDKQYRC9L5e02v6Xb0Y/S3TWVc7oktDjKmK1aDEWOy
+ p4X5tlAUu6Z6JU+ksP+wZH7VAaNPTSFiJEPdlyg8lLFEUEtKTDyYxlAlLz7MQ/l25XQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
  dmarc=pass header.from=chromium.org; 
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=cAmz0zP+; 
+ header.s=google header.b=JGUHzYHL; 
  arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:33::10; helo=mail-ed2-x10.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=cAmz0zP+
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=JGUHzYHL
 Received: from mail-ed2-x10.google.com (mail-ed2-x10.google.com
  [IPv6:2a00:1450:4864:33::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 614F640022
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:45:40 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 21C5260D6A
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:49:58 +0000 (UTC)
 Received: by mail-ed2-x10.google.com with SMTP id
- 4fb4d7f45d1cf-6a98dfb8002so1736365a12.2
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 13:45:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1789764339; cv=none;
+ 4fb4d7f45d1cf-6a99c5de614so1578474a12.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 13:49:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789764596; cv=none;
  d=google.com; s=arc-20260327;
- b=jQfgLp6iofTvDhEyM3l5+QPYvH/TeiwAXD9JYBoig826x3IqQ16vzwrzuOpkIRJaNT
- u9vxiBD9FubS1GB/KG/XSp+XZGTHUKiTIhZf6PjCyX75QS75jKF1lQNloorBaLv5Z7XP
- t9kWkSMGGSVh4mhhJwFlWVfobvFM2MYxpKNKgCKczui6NXTiA+5YUZuMZX1/awltZphQ
- 3uGDIgTIF3qxCIdP9lF3D5HB85s58Dv7IU56e5XnYx/ms5FW6ew1l7hnltf92vWl/Gby
- PiYyokKUdSyj46wUm1q5NA66YKZFIF4K0Fnvq+K+344CeyZChKhxPJwHBS7Qx+tlxByp
- w5Sw==
+ b=pgTRZVP4/vmF7beJ/X8oRtjXo40pEQCrCTHWGmJwdtM2EpPzFOOy3S71NM0wQkDFAE
+ m2j4wGDqX1AEb7e6c4JbHF2LwdqWlJeyZcqU/QJGIocOpBtsa5J50VYILFUktHDnUVlm
+ STOQJP21GapDXPXE7jf1yYHtVfirCipmN/Qf4Pmk6U1zyySeWJz5XB1a0/AT+H9t/hc8
+ ngxxp7/XfTg8xHQpJNEQJfzNj6AjPLqosq+1uBA5akh3Z9zhueASE7zlnuKUx6Li5VbZ
+ NCfLB2HN+GyL0saPuE+3Jy8DDor8CmCS60PUr9tI0fuoeQw7kMZar/hPvosJkHZbJir4
+ wpKw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=dF1zYMeDNPsIkv3BsYlmi+JSWYAqdmT8eWjtQ7RhbKw=;
- fh=PijMMigzg6lqgX8gnr59GS8viHousaoER8Lg/oDDlYk=;
- b=cdzv/c+VMu/urRp8rxoQ67AHSL6uvNMtxHp93vHC94OBVvC9OOA9ez8mOfjvD6KDdh
- ZAC8ztTwsDnk4h+ze1oqzCGLNiQEV5YlVendTTze9XFFSxnW2xcylkFIidiEqYaUInHE
- AZKqWxtjU5xDgAo1UbL6bEV/HgHXN3mhkytK7iAqe/yLgmvlM/Pa/DROY8v+CH+Vhe2N
- 6LVN+SQbr0rFWCZi1V8n/s1WjfjpOI00Va6QeF6G4EOIyLPY5XqDx0BwlLxszSAMIpj0
- rlenenjdZWPj2vxE1ATmcoiEhXUmC270WPjoRbYOtPVBL4qkvR7yGjtQuc3VPKbFP/jZ
- tDaA==; darn=lists.u-boot-project.org
+ bh=XKk3b3fw3RCVH3Smz+DkPIs5dOpmJ+mU+vLAAGHGHa4=;
+ fh=56bkf3zsfilkp7HgK+DO/exurgMfRQLdEk4inLt7+o4=;
+ b=nJHqGT1m0OJjejsFSQMxaOjkGkA2KxYadgELk2ZLRer9R6QXGEmmwid+tRecTSfxfw
+ c+CTcJt9kolCDh0umpRU48BcXTgmE9U/8LTl8LJIncmRAd8yqYUHxqeYnA4HS2qX6Cos
+ z0SncNUTd6sDUuRZH6HvKaxFUxcE3m/EJKL9u32UpHru4XZafAwCi/8/+wOlIbSGEiOp
+ GDXSdzNTN+URKuIf3WAob8MyYjRtyMdadOqjQOSvlcyG8BO2HodSqJWiSubxFDKVJ+p1
+ QuBwnK2TD8GDa6yNHdnXtwGYGpQEFbU3KfEtD5PBNzBrtR7vWU71VWVIbjV03D5KTu0t
+ F3zw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1789764339; x=1790369139;
+ d=chromium.org; s=google; t=1789764596; x=1790369396;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=dF1zYMeDNPsIkv3BsYlmi+JSWYAqdmT8eWjtQ7RhbKw=;
- b=cAmz0zP+jj1RH8oV+ge8+08Y7HGzG3Zd1JpeuNhXSCHFhBcrACl1d17OOajDKd7OLg
- UvtOUbatjxG62KkrjFg5TPvXPrpbqXLHQqkHf+RpLMvLxnyAFaTqq7jkyxPzPuEQey3M
- 2dYTb8xcgN4PxhST0tlt1dKEydQhidGhvFwzI=
+ :content-type; bh=XKk3b3fw3RCVH3Smz+DkPIs5dOpmJ+mU+vLAAGHGHa4=;
+ b=JGUHzYHLngJzVPl6nAMHWzlInpkuz6b2truHKzwRvbp/QChJ6s6hyLIafOmCHKorW0
+ FvIoFDvh5WBQqIEZFMd2mHFHiyDFGnE4/f2qKkOsW6UMhVslWmoYqPoTVOeyG55lzw+e
+ TKv7HmjwqWm5bMM494TAoRHnN9X/KPtjlPFqQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789764339; x=1790369139;
+ d=1e100.net; s=20260707; t=1789764596; x=1790369396;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=dF1zYMeDNPsIkv3BsYlmi+JSWYAqdmT8eWjtQ7RhbKw=;
- b=AXV+jocxNEha60uz9t3Hmhnj5jXsm7FzYcX4fCKKqKBaGpRTLzHttgkrxea0UFIsQM
- TBALMrlsgBcoxUWmxcwTjE6wnqHrLw4uPSaKLR+7D7Ze/3ow0O0Pw5UBYuNuEGNmiXil
- MJQHCyYFvLLalPmKtzIOvdhmsRI4v7f3Xf5bVxI+VTIxDeHjJrNDptwSxdOP3RpHkBAJ
- r1MzMW8lXusGUBtxwYJGtBZ/1Bg1lvkOGT3r6dYO8z5Bpwr1SX4nckUd5+HKyW10saK0
- eAitQjKxiBQlCtXWbM3FnwrJil1XGv3o5gf4ODXWTl0/Xq0AhmeIgP/teYKrIB5uIQur
- uKVA==
-X-Gm-Message-State: AFuF++l5yBkjjRCd7YUuo+pFYQYSvYC++2TU5i/ur2iO0LKmVXRTr/iu
- lCc1bXHA+MZ4c4KFRbamY5jdSGTluBRyR34rJYAayv/e3mR9Hun2YJNd+XEUMvP3O8d1en5Cmcb
- chy5g3h0HdYPIpxrwJPiWubwTLsnmGikXaYqwvBf2vWwvXH+aD35tgSTG6Vc=
-X-Gm-Gg: AYBFou2PU5E4ygeO9viOab6tvwQwLIjfcf/oXz1750pwRg8b5HZBya82r3x1hdIkeVz
- DRKTJaZS3avDrc0yAY7HBQDpDRiW8uofe/GJnaP22QlfG0SozAM/AOi9duPTgiVC9Kvx7RGj/Kx
- Bdt0XikDnnZe0VHP/lsxV+KL387gMYtWhwMW2VFtcirVpLrVNULHPpFJe69pIy1sU7PcxkgkNBg
- vHa5l0TdikbTBxF3ywpOJFaa7g+4cprJ8x/wRl39RpLlXczD3j0ZfqCpzkEnRbIJgHJ7iV8/EiG
- bHErW+xP2HveYqOMeu1pX0sRCsJAy9Lm51N++rg6OObyQ8lf2AaY06U5wc8znRDzXhqs
-X-Received: by 2002:a05:6402:380b:b0:6a9:aabb:5364 with SMTP id
- 4fb4d7f45d1cf-6aa54601be1mr2338904a12.11.1789764339039; Fri, 18 Sep 2026
- 13:45:39 -0700 (PDT)
+ bh=XKk3b3fw3RCVH3Smz+DkPIs5dOpmJ+mU+vLAAGHGHa4=;
+ b=qUUUQw751MmDBymh4YaRWs4W921OPiSZRIEA4EPdGfWqmjavFmwdHCLJMTTyfpZFHO
+ nlpbzQmsjvIamLtOR2MUZLbjkRO0zgWK5gzhgME3QSZWcERc4mMWWR9Zp9vq4b57oaEw
+ rLHE0AJzauUb0+BB/2ZEJS08nvJk/XiRv90ssAPgWmC80BYjKexPOhKYyLidjX/7qJMe
+ O61kAUgTzdOsfaN3jgtRCH0o5VO4oFNQmPL1uwUPb8E9RpB41PryL2jSBDlC30AIhRAm
+ qgpNxZHPQfQwn5QH7f0NqvlbUBb2tQAtLBQW79H1YzNglM+LoKTsTko+66Dw8XgwKlIc
+ WwsA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwTS4bwvTv91WOfm8ntIQ9JPIrEDAsXsaLTrToYpsuytTMjV4Qp2xhuRRUX91hv6vHZC1IgATI=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lElGBQ/QS+F9td6AjiyNo26IQWVjJRTh0/lwjq8pHLHZO8h8A9
+ JT7nY/8lBfG3Q3x3c9JGXCmpBmrC+jx/W3H12IZRLjYvCaWzFIW61dWFnowMjbX37oXURPoxDic
+ XO/BcaNee8Vh7BrjUcJNe6VOJspHXwTIAFrG8iJKk
+X-Gm-Gg: AYBFou3IZa1LwXxW/qFbxBgKo20cAv7j+bYNkk4U4Cr9AgpZlTy4lvbCveQe93Jef+n
+ pPbSlB+RbBhsA6i0oatJ2APJHCxDB3bh6yMZr6E71RfMUy1CdrHcVmxgXzEnr8Se2XIerelMN7M
+ ztyj+2s+AJTJyaq9daJsT/6dsFgtIrVi3GHCt/5hePPTeG6rPn4vbkPJnqhKQLrGjCNBDuRM4Ji
+ /gHpfZs5sHHHBgo+/o4YKyqXxgltll4s+7HtzV/uZ4ZxyiVX/YWL81YELM7WAIbuuXe6cGeyquB
+ gxLPOTtYIKWeCfvUtxMJd+83S8xxFVWmtSBQcVxK3mERwiYWpcksdTri
+X-Received: by 2002:a05:6402:2381:b0:6aa:485d:56d4 with SMTP id
+ 4fb4d7f45d1cf-6aa577f54b9mr5169701a12.5.1789764596517; Fri, 18 Sep 2026
+ 13:49:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260831142800.25966-1-aristo.chen@canonical.com>
- <20260831142800.25966-3-aristo.chen@canonical.com>
-In-Reply-To: <20260831142800.25966-3-aristo.chen@canonical.com>
+References: <20260901-fix-build-with-config-video-but-config-video-logo-disabled-v1-0-9dc80d307790@baylibre.com>
+ <20260901-fix-build-with-config-video-but-config-video-logo-disabled-v1-2-9dc80d307790@baylibre.com>
+In-Reply-To: <20260901-fix-build-with-config-video-but-config-video-logo-disabled-v1-2-9dc80d307790@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 18 Sep 2026 15:45:26 -0500
-X-Gm-Features: AcwNN1UoVHX6spZLitqN5biHsbF49sQP2_RJU3ui2wrY4x5I1qbGysv2NFy3WwA
-Message-ID: <CAFLszTj0H71E8K8mJS_Oc6dtvPTeQT9m_7A++91XL_H=SkV3hQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] test: boot: Check that rauc rejects over-long slot
- names
-To: aristo.chen@canonical.com
-Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Martin Schwan <m.schwan@phytec.de>,
- Denis Mukhin <dmukhin@ford.com>
+Date: Fri, 18 Sep 2026 15:49:44 -0500
+X-Gm-Features: AcwNN1VTCqAs0PIDtPOk99lmFIJx9ookN1c9JHdz8d6gAow_JMTFM_qaFEBYJOg
+Message-ID: <CAFLszTgGNjf2TLT3joC2P2b3c-iA-affy5SrbjXyM-FA_c89UA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] video: fix build with CONFIG_VIDEO &&
+ !CONFIG_VIDEO_LOGO
+To: jstephan@baylibre.com
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>, dlechner@baylibre.com, 
+ u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -187,72 +195,77 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Aristo,
+Hi Julien,
 
-On 2026-08-31T14:25:38, Aristo Chen <aristo.chen@canonical.com> wrote:
-> test: boot: Check that rauc rejects over-long slot names
+On 2026-09-01T08:52:42, Julien Stephan <jstephan@baylibre.com> wrote:
+> video: fix build with CONFIG_VIDEO && !CONFIG_VIDEO_LOGO
 >
-> Boot the RAUC bootflow after setting BOOT_ORDER to a 33-character slot
-> name, one more than fits the "BOOT_<slot>_LEFT" env-var name buffer. The
-> boot must now fail with -ENAMETOOLONG.
+> Building with CONFIG_VIDEO enabled but CONFIG_VIDEO_LOGO disabled fails
+> at link time:
 >
-> Before the previous commit the name overflowed the stack buffer; as no
-> such variable exists the boot then failed with -ENOENT, hiding the
-> overflow.
+>   video-uclass.o: in function `video_get_u_boot_logo':
+>   video-uclass.c:593: undefined reference to `__splash_u_boot_logo_begin'
 >
-> Also check the accepted side of the boundary: a 32-character name, the
-> longest that fits, must pass the length check and fail only with -ENOENT
-> because its BOOT_<slot>_LEFT variable does not exist.
+> The __splash_u_boot_logo_begin/_end symbols are provided by
+> u_boot_logo.bmp.o, which is only built when CONFIG_VIDEO_LOGO is set:
 >
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+>   obj-$(CONFIG_VIDEO_LOGO) += u_boot_logo.bmp.o
 >
-> test/boot/bootflow.c | 23 +++++++++++++++++++++++
->  1 file changed, 23 insertions(+)
+> video_get_u_boot_logo() and show_splash() reference those symbols
+> unconditionally, so with the logo disabled the reference is left
+> dangling. show_splash() alone would be dead-code eliminated (it is
+> static and only reached under a CONFIG_IS_ENABLED(VIDEO_LOGO) guard),
+> but video_get_u_boot_logo() is an exported function and is always
+> emitted.
+>
+> Guard the splash helpers and their symbol references with
+> CONFIG_IS_ENABLED(VIDEO_LOGO), and provide a static inline
+> video_get_u_boot_logo() stub returning NULL for the disabled case in
+> video.h. Callers already handle a NULL logo pointer (e.g.
+> bootflow_menu.c), so no caller changes are needed.
+>
+> Reproduce with any board that enables VIDEO without VIDEO_LOGO or
+> enabling SPLASH_SCREEN (it disables automatically VIDEO_LOGO).
 
-Since the boundary is boot_left_name(), please exercise the scan path
-too - distro_rauc_read_bootflow() calls it against
-CONFIG_BOOTMETH_RAUC_BOOT_ORDER, which is what a user is most likely
-to hit. The current test only reaches find_active_slot() via
-BOOT_ORDER at boot time.
+I won't comment on the word order / mixed tenses.
 
-> +     /*
-> +      * A 32-char slot name is the longest that fits. It must pass the
-> +      * length check and fail only because BOOT_<slot>_LEFT does not exist.
-> +      */
-> +     ut_assertok(env_set("BOOT_ORDER", "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"));
-> +     ut_asserteq(1, run_command("bootflow boot", 0));
-> +     ut_assert_nextline("** Booting bootflow 'mmc10.bootdev.whole' with rauc");
-> +     ut_assert_nextline("Boot failed (err=%d)", -ENOENT);
-> +     ut_assert_console_end();
-
-> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-> @@ -1520,6 +1520,29 @@ static int bootstd_images(struct unit_test_state *uts)
->       ptr = map_sysmem(img->addr, 0);
->       ut_asserteq_strn("BOOT_IMAGE=/vmlinuz-5.15.0-121-generic root=", ptr);
+> [...]
 >
-> +     /*
-> +      * Boot with a BOOT_ORDER slot name (33 chars) that is too long for the
-> +      * "BOOT_<slot>_LEFT" env-var name buffer. It must be rejected rather
-> +      * than overflow the stack.
-> +      */
-> +     ut_assertok(run_command("bootflow select 0", 0));
-> +     ut_assert_console_end();
-> +     ut_assertok(env_set("BOOT_ORDER", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA B"));
-> +     ut_asserteq(1, run_command("bootflow boot", 0));
-> +     ut_assert_nextline("** Booting bootflow 'mmc10.bootdev.whole' with rauc");
-> +     ut_assert_nextline("Boot failed (err=%d)", -ENAMETOOLONG);
-> +     ut_assert_console_end();
+> drivers/video/video-uclass.c | 7 +++++--
+>  include/video.h              | 9 ++++++++-
+>  2 files changed, 13 insertions(+), 3 deletions(-)
 
-This is in the wrong function. bootstd_images() scans
-mmc2/mmc1/mmc4/mmc5 and produces the four extlinux/script/cros
-bootflows listed just above; it never binds bootmeth_rauc or enables
-mmc10, so 'bootflow select 0' picks mmc1.bootdev.part_1 (extlinux_cfg)
-and the expected "** Booting bootflow 'mmc10.bootdev.whole' with rauc"
-line never appears. Please extend bootflow_rauc() (or add a sibling
-test that reuses its setup) so mmc10 is bound and rauc is in the
-bootmeth order before 'bootflow boot' runs. Also restore BOOT_ORDER
-(and the bootmeth/bootdev order) at the end so it does not leak into
-the next test.
+> diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+> @@ -579,6 +579,7 @@ int video_get_ysize(struct udevice *dev)
+>       return priv->ysize;
+>  }
+>
+> +#if CONFIG_IS_ENABLED(VIDEO_LOGO)
+>  #define SPLASH_DECL(_name) \
+>       extern u8 __splash_ ## _name ## _begin[]; \
+>       extern u8 __splash_ ## _name ## _end[]
+
+We try to avoid #ifdef in .c files and prefer if
+(CONFIG_IS_ENABLED(...)) so both branches are compile-checked. The
+SPLASH_DECL externs do need the preprocessor guard since the linker
+symbols don't exist, but the guard around show_splash() and its call
+site in video_post_probe() could be avoided by keeping show_splash()
+defined and providing an #else stub that returns 0. The existing if
+(CONFIG_IS_ENABLED(VIDEO_LOGO) && ...) at the caller can then stay.
+
+> diff --git a/include/video.h b/include/video.h
+> @@ -418,9 +418,16 @@ bool video_is_active(void);
+>  /**
+>   * video_get_u_boot_logo() - Get a pointer to the U-Boot logo
+>   *
+> - * Returns: Pointer to logo
+> + * Returns: Pointer to logo, or NULL if CONFIG_VIDEO_LOGO is disabled
+>   */
+
+The stub is guarded with CONFIG_IS_ENABLED(VIDEO_LOGO), so the doc
+should refer to VIDEO_LOGO in general terms - SPL may have it disabled
+while proper enables it. Something like 'Returns: Pointer to logo, or
+NULL if VIDEO_LOGO is not enabled in this phase'.
 
 Regards,
 Simon
