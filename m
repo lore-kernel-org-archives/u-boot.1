@@ -1,168 +1,166 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCDF2C982D2
-	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 06:36:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD799C88E75
+	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 06:36:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5BE19811D8;
-	Fri, 18 Sep 2026 06:36:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 938E960BE9;
+	Fri, 18 Sep 2026 06:36:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X8O0M8hFmFDA; Fri, 18 Sep 2026 06:36:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 3CFD4811D1
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789713368;
-	b=rZN6jjSFgdz9T5Y+9gRZYCTGb7Hr7u7MM6+cqH3A92opId4WFxBp+ijOk0XSLnf37C8m
-	 lD3stjart06ZR7lfLl1liPzIm3z/8hCXNHjgL1h8VG4uVXAmdmscSniIs9xt747jCgpD9
-	 dOxWv1Rqtu27Q2IlWz3To1REUNAVSC/NNsKhfjOfYs7oe0gzgcSOvzc8V6ySS28spR1Rt
-	 C6GoUk1TGb9xciWgqemP6N7fUHgP5jKGCo03UJJ/CMssRRi2RvgTdmnxAtj3xViSGWISk
-	 sJ+N7/+ngStavgIRq+qmr9EV1bDmwj/SOPn4MQ52UJeFAn52HgER7BLEva6A4TMNqqg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ybOJAE3rcQz9; Fri, 18 Sep 2026 06:36:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org BD0A660BC6
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789713371;
+	b=DZjXux/kT+MEv/l/pca0UwdSo8jw6Nc9B8wO8GyPtZ6Ni9FxB70LDr7cEabaKkWPZOlq
+	 JZ57yqqTRVqEmnU0wSKHa3kCf6NQ4pLuu9xZw+F6rTSsRkNktoW/nFcYIItAmgtCyVscP
+	 pdWt9TT/xR8T6dyhp8Q4JzV8/4kGimbXxODV5Ym9Ll1uySa1NJdtxOU1MOCyGnmM+ItAC
+	 CbU9LgzQ4cgQZbWjmrT8ErY+iNU55DDiyyBtMbzXSiiSn/F7Tl9RANI5qAy0uyEd6kLxv
+	 FPqs+GoLyfGNTHDxVZ1ZFDxuSkl2Ep/Rer5YGhWm0SJjtKEZAT2Wa5mgO3qgFRNVf8Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789713368;
+	c=relaxed/relaxed; t=1789713371;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=wurQhUTWX4hHZHKBwcnxDJOJxY8cfBOaNhgw897oQ8c=;
-	b=ChaYykbVdw0Hb07Qi0RecX3g2ekzCpGKRNjFDGT9CKMPJCLWDSCZrc+5wZvz/v1KKebp
-	 ACpqa19HbNYIGvDXWzhdhxKTbPTHHE6+BIv64uzDHejETu+f4VFv7GbfSa3NRDfErHhvl
-	 1S1bSjvGBoEIILPYwQxdt782J8wLh9nAer79u1Zbqea+ehA581DEkUPHd87NAaDL1hoT8
-	 +AMMDwu+Gg45Cj1YpHxvHiXOmDeW9CJK46BfT6r5Pk5C/UsnudofvWO+r8j9T0MM9EQzn
-	 ZRnsm0mKrjaF7zmMB4ZhVwmRLZ16I+6g7NDWlPEEd4OnmqtvNRY6YFlmJXamgVz+trg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=pE8hXRh2wvbG1MUnsusD5HWUtXmxkTBobh2yVF8VmPQ=;
+	b=KVqUq1Blnu14wH0WB47C6+OkdV9dBgIIuw8GDNpbrkKU+0qi4tOkabiXwKp9OSBntGKO
+	 gRhrvCj18VVrjNtRgF2/txZlA44XJqtovo1/NqxEsJBV30OWWCvPVpvlt9d5Fz2osPkIe
+	 BhMoJIbKEbCfG3y8QOyAS8pypl0g49nf+fRXg0rYMDbmLhE3dSeDqZlaPmUamz47VSYfd
+	 O+10vIRkUNfd+z84u4juNKiuspobN7b+/loX26Ky9Alfos3EWDmra/M5IMpB/9BpwbbLY
+	 ElZb7ehtlzaZ8zW+Ch/3l2uGfk0xCQbgk5CrpefxvIv8o0OB9JkHV/q7TqQJRCsWZ6g==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789713368;
-	bh=wurQhUTWX4hHZHKBwcnxDJOJxY8cfBOaNhgw897oQ8c=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=kpgw6JTwyoou+UjM0wWqKTg0dgRFAHIYsJhpJSp5LhQHx/vDRHtz1o1q8N9v3ElSO
-	 RQJcIzoKMgiKld8ptY6bz+oHU1GUSh2yepJHOU6hM4Vc7SLypnLZcBuEQ7ozykDQFn
-	 O+yHbLo5mAYH1onCuAA8Y58GOhEXYkwvfAK/EEOr4jp8vIv35toqdtDYNaMzJ0UT9d
-	 rCoH6KCz57inmZacLTAF1ZWTbd5+4ZsU4HIyQkwZ6q6OAXe0nezUvsl6wCIwbxlCOJ
-	 s3VYq03e8JD6Jj3i5h3i1mV5Pyr/UcETTorrV4aq93iYAW25jebRzU7ey1rJXhsU6B
-	 0bDlYlyfT1qOQ==
+	d=lists.u-boot-project.org; s=default; t=1789713371;
+	bh=pE8hXRh2wvbG1MUnsusD5HWUtXmxkTBobh2yVF8VmPQ=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=u0uK+Gp4SGoJ9eIw1vLyZftpgNeuuj4fpWgIEsWbWfdsdZb08IkVXbP83VzFvEdEk
+	 GH6rXm445EmooVVL30lZtR2GiuQChbnlDbOwu5JtQPsRJFYOH2cCKiXOkbnlzaywCH
+	 TbnQrYxn4Jhoff6vTElLhqA3ltlvpzg22uzVBsi745lLSUfRpPnellfx5HS/g+yF3k
+	 a8vB+aTfF79EGDroSl2TzsZx37p90lYsvxc3n036JceklC6JV5pTnya4hz7poe5jBj
+	 47C6d1jHipD72I9XLyjfgDV52ds4yzXweFujA4XtWMcsv4K1HT1ekhskgO2flu1laN
+	 GoSxfgIFGG95g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3CFD4811D1;
-	Fri, 18 Sep 2026 06:36:08 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BD0A660BC6;
+	Fri, 18 Sep 2026 06:36:11 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 0106D13D
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 06:36:07 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id C63B6352
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 06:36:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id DA2FC404CA
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 06:36:06 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B8375404CA
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 06:36:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Mq812ELIPo0X for <u-boot@lists.u-boot-project.org>;
- Fri, 18 Sep 2026 06:36:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 88471400CC
+ id 4Z3wx9PgBCaz for <u-boot@lists.u-boot-project.org>;
+ Fri, 18 Sep 2026 06:36:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org C46FC400CC
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789713366;
- b=Q+a8rEfKmmmB2sFNIZ5JwkhZfdsFYVLlkkHBKpNx+mgSIatbjlkNYeHmi5Zs+NbRWmSj
- vVXjgwFRwNK7r7/CuKqIn1KFls71NkDTI83Psp4WjuJrbOXgfF8GIFtj+aRqbMkhhi1MA
- 2Rl5ApK2Em0nmpoEaO/EgUlk3Lrwq24Et+AoWozU6Dy2rxZIqKk+VzUwE4H1Y8sUaY7bx
- 7FWMt6IEqFl6nt08c4nDrLu81ImNJfTDrG1nuZNOkmvHebuHs7dW7qtMG9Y3CEyq2pvTs
- OnoB3NGCQc5GpU7/4X8rYbSmcvvNmd/NDu5OzosuIw0DHNarfbj+Ge+2/LPrfGU8fXA==
+ arc=none smtp.remote-ip="2a00:1450:4864:30::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789713369;
+ b=GMPQ9AAxvs5Wd7qjW7il+3g8dyqUWIGXJA3WylSx8xWO+F6vebpUDBlFU2hO/hL33PWu
+ dsAW8IupQKcWwq6HkWoz/rr2jLG+9raFwLhb/hYvL7lSBlXr3ZHPw5CAtbn+SgjvXwxl7
+ 7ztTCzt7rlr4qwzVf+jPjI6GoqiZgyAeYdkjsZaSp7+eY+6Xpp6vRSk5OTtQW/vRVD7kE
+ imYzjuMA8sYez1lckhcOVtyvLSI3hBGm2ys+83S2KScROl+Xfd4AxJUy0JZbxcKM6+vgP
+ 97labrput2my7N6VzG990hWJRgjbemya1pirrP2Fs13TCwBZYHtzhizEBP7fzq7IWZw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789713366;
+ c=relaxed/relaxed; t=1789713369;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
- Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=wurQhUTWX4hHZHKBwcnxDJOJxY8cfBOaNhgw897oQ8c=;
- b=cVvnQUixAIUTtf07yGLkIiG2nwr7LMSmjSJ6eym7HO8r39xo7iiMth17BHPxmYwuyyNg
- 3ArLRR/7Jnm0Z8uU37cM0f/klFQR6zu+ZGfbPGIwXvLN/ih0hEGKB8i/Md/okvtVIqaUZ
- c9r0aq9T5yQBhxHaKazumuqHgEsIstrJtBdjK2ie2xX9HWP5P5MjBkE1FVrFc9gfF8Xp8
- LZVXPl2ydjdoQmVezb8BJBgBvkrIneF5LWBN0dF6Yx/olcdwVCv9onJeQZyTUH8cqDwNt
- a5yjUy+tRQ0Y4CF/BPjQDASG0dYvsds5b6XhABexP3S5qH6N+qWAVnwt2GAGWYQJA7A==
+ bh=pE8hXRh2wvbG1MUnsusD5HWUtXmxkTBobh2yVF8VmPQ=;
+ b=lZkFKwzl3onzFroBQvsoEDrr1QwONYqZeufsiZYLOXqhJuzA/KHzrQn53pHx7+wbW1gc
+ UcVyozbGEkCgB7xp3pxD28GroOP71LH/7pbjZ9+QttAK/RtEVsO575PTjyVBlQjYHw1hI
+ jKaiFMTKBlJ82b7LuN8TWF3vJFLEPKKm/HFoLq+yrOo86zNhBQRDXh84UjvwpA1Y+Yx0i
+ 1uDcC3Jwe/L6RBYQPkbDZlgTFbk+AB/e5qhQbFS/kIvzMqHObAOSSPXhHPVgna2emmncj
+ wC/3XHL93RhDJPtr+hbhFNBOR9m2uRbTaGPxYAcyMlz53Xv7LI86UUvFWkKJ6e3g3Sw==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=flipper.net; 
  dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=aWz8KNZn; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
+ header.s=google header.b=KTf5lIpD; 
+ arc=none smtp.remote-ip="2a00:1450:4864:30::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::11; helo=mail-wm2-x11.google.com;
+ client-ip=2a00:1450:4864:30::10; helo=mail-wr2-x10.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=aWz8KNZn
-Received: from mail-wm2-x11.google.com (mail-wm2-x11.google.com
- [IPv6:2a00:1450:4864:31::11])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 88471400CC
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 06:36:05 +0000 (UTC)
-Received: by mail-wm2-x11.google.com with SMTP id
- 5b1f17b1804b1-49ccff31419so3043555e9.3
- for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 23:36:04 -0700 (PDT)
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
+ header.a=rsa-sha256 header.s=google header.b=KTf5lIpD
+Received: from mail-wr2-x10.google.com (mail-wr2-x10.google.com
+ [IPv6:2a00:1450:4864:30::10])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C46FC400CC
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 06:36:08 +0000 (UTC)
+Received: by mail-wr2-x10.google.com with SMTP id
+ ffacd0b85a97d-485b1d2874fso99722f8f.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 17 Sep 2026 23:36:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1789713363; x=1790318163;
+ d=flipper.net; s=google; t=1789713366; x=1790318166;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=wurQhUTWX4hHZHKBwcnxDJOJxY8cfBOaNhgw897oQ8c=;
- b=aWz8KNZnWUf8hHMkdBHl1sCEbE5QICNYqTiNW/f3aHzb3wmggdLHsp48XBuXbJQHSx
- 5TnFSjPhbKjk+aWqOTbD8p3t8iVWN0J36CV/5zOef1BjPT1004YoNuZOb63fbgYgXpzC
- f/B2j/pBhqIgTBACyT/XH6TYBdIHJuJEOYc7u5Hmxh46Wc+UyK8Ip+MJeaH8pD/cWjny
- 2HAgmsUi1mqBGuYRdOZhZUGpwNmbGh/MnhG1ZB7KyTvNJkAp1k6s/zkyXMrZvYPUfT5A
- zynzuYrr4E9dc4hgCUwNmhTUrk+97iXlD+qK36gHbvr/jmxabTLlYG66yR3/P33BuO2P
- o4Bg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=pE8hXRh2wvbG1MUnsusD5HWUtXmxkTBobh2yVF8VmPQ=;
+ b=KTf5lIpD3z18FDz7T0vt7BZLDCmlMI63ILhZR678JfrYlBaGXP8Xz3hE3t2qnfI0NX
+ id1qDMbSp8JTzHJlMgNTrHA7QX/vjIMuyR/mz0cNaCuf2Wjvs5NoEHf5F+xHrg4TkRnp
+ 0sbAVBnWv9yXHLa8G0JDd/0MaXmHhZpxEsnz0rJ6fwIrcPgyUC/zfLOE26B4QlmGHjRZ
+ Ce7Ii/tTmZhmx6jTq6HVdfLtd734oL63Z6l1rVm/QPNOvXURbIPpH9GB4xqYSyEGJYH4
+ +KNIH9Yapka/SyBAduEkjekPAE/VuV6h66zLdnGygicND1mULOjRdDv3EUQx6k7HF9cm
+ s84Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789713363; x=1790318163;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=wurQhUTWX4hHZHKBwcnxDJOJxY8cfBOaNhgw897oQ8c=;
- b=gm/vvl6abOleZKN4QEUi2D4m1mfJ9i2nQxzWkmuWPe+JfvQNSwBCrBt/QDP3YeNixW
- zrXnUwXt9YyZ8Z0+Pfmpr6ChCZpX7MepYEcd1o1DO5JI3/EJvEhdToJZjCbLiFRFcUJI
- Xp2BE1ADiA69GAAebqoVYWYPpZKdd2eaV4KT35PWotJReaGCJnuhdFZ0YjWzDkur56pn
- zeeUpya6OIFnVoe8XujuA04Pg5JL8K333ScGVQ+qR5C+z1yvlWCuqRxAOXj+KBqrUour
- 0cO+3c/P4/44a/zoUq3mynZ+JRuhYw+pPd7/wLMlltGZgx1NXwZ3cdaZ0p3PU+SnYoX9
- GKEQ==
-X-Gm-Message-State: AFuF++mFb4bOsCWW2TrmxwXrJep9n9YHyWCbkM80NN8VMQKAMAwJfMBw
- uvlHlqVJGJy5NNjxYTsMAEaO+JVwKdtKK/YQ2p9yuI3DQXGgOpmrbfbuCZezt4Fp2ME=
-X-Gm-Gg: AYBFou31/Dj/N+6R+DluIUbu8HR2YQB6tS/rZK2ng6ZLIODW5Yq05jasI3BSyBrMBNc
- 4GYN4KRfzCaoAzR6qfKeUSIdwOScLyMcXycaU+J6L/JslPtqOq/kS30UJUS25B4YEvIoCYzpgOy
- Ou+kR06f1WMT1I0RTXrERp800Au+4ZTwMuajyOIg29M61F+73BjUXTNh+cXV7RdFnWhoEOn9mTK
- MeVwRQJJVHcp/EYqB3tui768N9Tqv342gEvIfM1zAXJl0DmDl8VOxfLhpSUKzI9VC/a5J2+GP/B
- RG1wCs+qkUw5mcF5rJHuuOOIZze9VMDjCclHSj29UwJ9S2KdJbpju8yHcMgsvbsPQh1GawFRRQ5
- /p0FjkaAWE3Gf2+dZKuglO8oqgy0cPbP/6AXKHx+vl3+hz8MSjzbNi3aqoRk/UaN+aS6kXqohj9
- lAp01K7Jm/CSshpZyUt1wtfzDiRFCCMGWhJQM3PfQ7xXmVwh8b33beTjOvMcd0SDoCaR6kASWiW
- pJKf5+rosMYJqqjZzZ4t1rnw07qKAlpMv3B8so++EFMmvpev0eXEjUBzmLcrA==
-X-Received: by 2002:a05:600c:c8f:b0:49e:6c9b:4e94 with SMTP id
- 5b1f17b1804b1-49fc5743124mr14868915e9.28.1789713362849; 
- Thu, 17 Sep 2026 23:36:02 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1789713366; x=1790318166;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=pE8hXRh2wvbG1MUnsusD5HWUtXmxkTBobh2yVF8VmPQ=;
+ b=CyPT6AYekvbLaq08qSDlDMqnj+OaoCYHucCcinrLxB7Np2rqUszGPRgM0mMGo/S6KN
+ jqXHsL12TVjCWqinopOC0/6KBUtALeXBDLpT1/nR20hNhecwCqTdXQAgkMfuz/JYWWXj
+ /1YdpOza/861G/0Fk+H1dcgFMUCaSnxEogX4a9HI6Zwo1cbtNwGInhwUBGL4C5ldHYdL
+ wXJDxW6Ck4N/DGuMkDYUhNm1bz9b6GOvc5TX232XijLvJW3c02owEfnsVems5F7rktql
+ m1rge9X9mJRbx/auHC6sPxa52VfP9vhHnPOXbXnCJd4N3NmLwyr88enE6lQOhyoHEmm0
+ EjHw==
+X-Gm-Message-State: AFuF++kpJhnN6uklCunsXiEmBTKlXaECtTIZ33RmUOA29w2FMOVCoBvp
+ at4iIAe4g3+Lw1r7pk4KFZm9JDfIHNoegQ+s3/0T2clVPHMzwCRAUxW1D9D7YaTbuNY=
+X-Gm-Gg: AYBFou2bRkxTXQSpuZzdwE8A7KBhVGuV7FTAUR5GGOybmHGgKjj7e8W5/sa4wW3y7Cn
+ 2Fq/04GT5wM1lhBQhBTtthVK/CIbhxwRP6+xGEKohwwZ6b55WVb1FDrYX8widTdeAaZEKWmsNhw
+ BbAE6LlzwNe2X1ApJ/T55sMweUdEE/WCHFoo+A4ccblvwDCzGUJq6lZuh3EVQDp4dPhj0XGG4P4
+ 69vg1rn/UUKb4bNUS0mDgUp6JemJZ7oXnFq0uuWbVs17HcGa+dr/heQ3PEMpZyFhoABfy1R9KIS
+ F9NijbbuY9/tWphtUIqkqDrs4hTb3KxDff/IZjOGrHZPg+pQZyS/8T0ld+P2c2gQ1L3IoZgCLBV
+ VoLyFwiVLHOHaN4Azllo+R+v1SfJMai/cGjIE0ETHdwcq9SE0luCeYM82K00P6fBGVpEYdsGE8u
+ zfKiq5LtMF52k4Ixii+bGbdQj+4QTZhJcbbus1MvKRQiP2KaGAjulVeEHlyzIq31nb0q4zPHZ2I
+ x8vAaEf+7e9BsNmMXrPE/QsuVTn0ojkvkTzOzN6atxjP4BNbdCu
+X-Received: by 2002:a05:600c:1389:b0:49d:2936:8ad1 with SMTP id
+ 5b1f17b1804b1-49fc4f71c7dmr19051935e9.1.1789713366032; 
+ Thu, 17 Sep 2026 23:36:06 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-2-51-220-108.alshamil.net.ae.
  [2.51.220.108]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49fc7cba562sm17725845e9.2.2026.09.17.23.35.59
+ 5b1f17b1804b1-49fc7cba562sm17725845e9.2.2026.09.17.23.36.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Sep 2026 23:36:02 -0700 (PDT)
+ Thu, 17 Sep 2026 23:36:05 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Subject: [PATCH v2 00/10] spl: ufs: Add support for loading U-Boot from
- boot W-LU
-Date: Fri, 18 Sep 2026 10:35:41 +0400
-Message-Id: <20260918-ufs-spl-boot-wlu-v2-0-8a63e372bb6e@flipper.net>
+Date: Fri, 18 Sep 2026 10:35:42 +0400
+Subject: [PATCH v2 01/10] ufs: hand sense data to the SCSI layer
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/2WNQQ6CMBBFr0Jm7Zi2ggmuvIdhAWUqYwhtOgU1h
- LsLGFcuX/L++zMIRSaBSzZDpImF/bCCOWRgu3q4E3K7MhhlzqpUJxydoIQeG+8TPvsRtbJkSOe
- N0wWssxDJ8WtP3qovy9g8yKatsxkdS/LxvX9OevN++fw/P2lUWJQ1Ua3PNm/p6noOgeJxoATVs
- iwfDQG+IMQAAAA=
-X-Change-ID: 20260903-ufs-spl-boot-wlu-10ce2e14bf15
+Message-Id: <20260918-ufs-spl-boot-wlu-v2-1-8a63e372bb6e@flipper.net>
+References: <20260918-ufs-spl-boot-wlu-v2-0-8a63e372bb6e@flipper.net>
+In-Reply-To: <20260918-ufs-spl-boot-wlu-v2-0-8a63e372bb6e@flipper.net>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -180,12 +178,12 @@ Cc: Tom Rini <trini@konsulko.com>,
  Denis Mukhin <dmukhin@ford.com>, 
  Bastien Curutchet <bastien.curutchet@bootlin.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4336; i=alchark@flipper.net;
- h=from:subject:message-id; bh=y9r5CMG8mutT8OW9EiN1ApDeulQN1Y5G95X9xWyRoTE=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWStuX2Ib7Ll5WCPXQv3mLjv7FS7wRHFankoUD9psaHt0
- d9pIQ+qOiayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
- QyMdYx0jBi5OAZjqB48Y/lnb80yfo6Ecvm6Gt5XcW2aFI7W90rZ1H35ba/EVvH31zp6R4ZDkwv0
- RM34cTXOdvnvPnTuqpYrmBY0rzRxXLQlMX7b/AisA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2519; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=nKFc6oHpbxD5OxyNDzZKbTzZaCgVBAxovpk2bbbPHMA=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWStuX1RcsJs5eTrs5wrT/ElaydxGv7VYE2aLKwZ2vnvZ
+ KG3qy97x0QWBjEuBksxRZa535bYTjXim7XLw+MrzBxWJpAh0iINDEDAwsCXm5hXaqRjpGeqbahn
+ aKRjrGPEwMUpAFMdVcLwT3eNi+xWzc4Hxxo9n/ay7+JlPLboW8uTww1MFy22nS0P6WNk2Gs2c+n
+ +bZHTrhy4U3DhY7qsvoL+/AuFC/tFvhoL891zYgUA
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -201,95 +199,75 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-UFS devices have a built-in A/B boot mechanism implemented via the "boot
-well known logical unit" (boot W-LU). This works by marking two of the
-provisioned LUs with a flag in their unit configuration descriptor, and
-setting the active boot LU in the whole device's attributes. The device
-then exposes a special logical unit 0xb0 (the boot W-LU) which is
-internally aliased to the currently active boot LU (if one is set). It
-allows reading and writing directly through the 0xb0 LU, but doesn't
-expose the LU geometry, so it is not quite a full-fledged block device.
-
-Given that the normal use of this mechanism is for symmetric A/B boot,
-real world scenarios will usually have both W-LU-A and W-LU-B provisioned
-with identical geometry, so the geometry for the boot W-LU can be inferred
-from the active boot LU, while its special 0xb0 LUN can still be used for
-reads and writes to have the device itself abstract away the actual
-request routing, even when the active boot LU is changed.
-
-This series adds support for loading the U-Boot proper from the boot W-LU,
-allowing to use the native A/B boot mechanism without the need to hardcode
-the "real" LUN in the SPL configuration.
-
-Two classes of prerequisites are handled by the first half of this series
-before the enablement itself:
-1. The SCSI core needs to learn to repeat inquiry requests when they
-   return with a transitive non-zero status, such as the UNIT ATTENTION
-   condition, which the W-LU returns when it's first talked to and which
-   is not an error (patches 1-2)
-2. The scan itself needs to learn to look beyond the normal LUN range when
-   the implementation supports W-LUs, as they are numbered above 0x80, and
-   "borrow" the geometry from the physical LU the W-LU is aliased to
-   (patches 3-5)
-
-Patches 6-10 are the enablement itself, split by logical parts.
-
-CI passes all green:
-https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/pipelines/1307
+A logical unit exposes a CHECK CONDITION through its sense data, and
+without it a caller cannot tell a transient condition from a permanent
+one. struct scsi_cmd has carried a sense buffer all along that no driver
+ever filled, so fill it, and clear the length in scsi_exec() so that one
+command cannot be read as another's sense.
 
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
-Changes in v2:
-- Add a check for null wluns pointer (thanks Neil)
-- Slightly reword the commit message on patch 1 (thanks Neil)
-- Link to v1: https://patch.msgid.link/20260904-ufs-spl-boot-wlu-v1-0-59aeea16c4de@flipper.net
+ drivers/scsi/scsi-uclass.c |  3 +++
+ drivers/ufs/ufs-uclass.c   | 23 ++++++++++++++++++++++-
+ 2 files changed, 25 insertions(+), 1 deletion(-)
 
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>
-Cc: Alexey Charkov <alchark@flipper.net>
-Cc: David Lechner <dlechner@baylibre.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Denis Mukhin <dmukhin@ford.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Bastien Curutchet <bastien.curutchet@bootlin.com>
-Cc: Johan Jonker <jbx6244@gmail.com>
+diff --git a/drivers/scsi/scsi-uclass.c b/drivers/scsi/scsi-uclass.c
+index 39b4c7476d45..54afac6eaf51 100644
+--- a/drivers/scsi/scsi-uclass.c
++++ b/drivers/scsi/scsi-uclass.c
+@@ -22,6 +22,9 @@ int scsi_exec(struct udevice *dev, struct scsi_cmd *pccb)
+ 	if (!ops->exec)
+ 		return -ENOSYS;
+ 
++	/* Whatever a previous command left behind is not this command's sense */
++	pccb->sensedatalen = 0;
++
+ 	return ops->exec(dev, pccb);
+ }
+ 
+diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+index 6ef01f8e4aa7..acaecfa1e341 100644
+--- a/drivers/ufs/ufs-uclass.c
++++ b/drivers/ufs/ufs-uclass.c
+@@ -1657,6 +1657,24 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
+ 	ufshcd_cache_flush(req_desc, sizeof(*req_desc));
+ }
+ 
++/**
++ * ufshcd_copy_sense_data - hand the response sense data to the SCSI layer
++ *
++ * A logical unit explains a CHECK CONDITION through its sense data, which the
++ * caller needs to tell a transient condition from a permanent one.
++ */
++static void ufshcd_copy_sense_data(struct ufs_hba *hba, struct scsi_cmd *pccb)
++{
++	struct utp_upiu_rsp *rsp = hba->ucd_rsp_ptr;
++	u16 len = be16_to_cpu(rsp->sr.sense_data_len);
++
++	len = min_t(u16, len, RESPONSE_UPIU_SENSE_DATA_LENGTH);
++	len = min_t(u16, len, sizeof(pccb->sense_buf));
++
++	memcpy(pccb->sense_buf, rsp->sr.sense_data, len);
++	pccb->sensedatalen = len;
++}
++
+ static int ufs_scsi_exec(struct udevice *scsi_dev, struct scsi_cmd *pccb)
+ {
+ 	struct ufs_hba *hba = dev_get_uclass_priv(scsi_dev->parent);
+@@ -1683,8 +1701,11 @@ static int ufs_scsi_exec(struct udevice *scsi_dev, struct scsi_cmd *pccb)
+ 			result = ufshcd_get_rsp_upiu_result(hba->ucd_rsp_ptr);
+ 
+ 			scsi_status = result & MASK_SCSI_STATUS;
+-			if (scsi_status)
++			if (scsi_status) {
++				ufshcd_copy_sense_data(hba, pccb);
++				pccb->status = scsi_status;
+ 				return -EINVAL;
++			}
+ 
+ 			break;
+ 		case UPIU_TRANSACTION_REJECT_UPIU:
 
----
-Alexey Charkov (10):
-      ufs: hand sense data to the SCSI layer
-      scsi: repeat an INQUIRY that a unit attention interrupted
-      scsi: size a well known unit from the unit it stands in for
-      scsi: allow a controller to declare well known logical units
-      scsi: add a lookup by target and LUN
-      part: name the well known logical unit device type
-      ufs: define the well known logical unit ids
-      ufs: report the logical unit the boot W-LU presents
-      ufs: expose the boot logical unit as a block device
-      spl: ufs: allow loading U-Boot from the boot logical unit
-
- common/spl/Kconfig         |  30 +++++++++++++-
- common/spl/spl_ufs.c       |  18 ++++++--
- disk/part.c                |   3 ++
- drivers/scsi/scsi-uclass.c |  32 ++++++++++++++
- drivers/scsi/scsi.c        | 101 +++++++++++++++++++++++++++++++++++++++------
- drivers/ufs/ufs-uclass.c   |  76 +++++++++++++++++++++++++++++++++-
- drivers/ufs/ufs.h          |  28 +++++++++++++
- include/part.h             |   1 +
- include/scsi.h             |  45 ++++++++++++++++++++
- include/ufs.h              |   8 ++++
- 10 files changed, 324 insertions(+), 18 deletions(-)
----
-base-commit: 37bbe6e3ed205037fbca390f239eff9899639e39
-change-id: 20260903-ufs-spl-boot-wlu-10ce2e14bf15
-
-Best regards,
---  
-Alexey Charkov <alchark@flipper.net>
+-- 
+2.55.0
 
