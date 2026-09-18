@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23F21C982D7
-	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 18:20:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14269C982D7
+	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 18:31:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 379C460DBC;
-	Fri, 18 Sep 2026 18:20:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B275A60BE6;
+	Fri, 18 Sep 2026 18:31:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Vsoy8Ql82RYT; Fri, 18 Sep 2026 18:20:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3086860DAA
+ id vLKKVW0RQZEY; Fri, 18 Sep 2026 18:31:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org D884360DB7
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789755645;
-	b=RB3lFOsVS4TKj/J8eX2LTaxKRXKVGwr4DG+VeQ44bCLGCNGFcljmUjEl0nFkU7BgLCpR
-	 Accq/hdpfemDW+qppQplcAhvwyWM9xww0RaH4P923HAhJTGSrR0DKkMBWRs+iPcK/FO2Q
-	 uHF38NcDItZqDrl4mq+FBAE4/ntKRV3OQsGV0pao7r3lP10ysu4ZZIybwU3epgSUgaBe3
-	 V3Mcy5Idpe4UvqZ1yF8CwH4tmvWVsMu6I4FId/e3ThCYVoLWGBYUSXh41AvCcA92/wIC1
-	 Yh+JTmfIzuz3WsXtkTJVCyfwhOiNSNAYj5+M3rFIssu3zOtcVJFfkj5hffGnBuqrVAg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789756264;
+	b=PKb+Owz8tplzt3Ir8dKgJDH1HzYyXFK0QLwvk/ZZFLqfgIfvin9ouyS2V8Ympa2fxqil
+	 OyPzDdpawaFU0yzRTBMuGT3/xxw1aPHQtBj6E/DHfT+mgZMk5uCWnYRkWsT6I5GQWasnw
+	 h0p1MJxYuyn95ummMnmfE5U6ZIHEktfNb9zI025067THxvgXyRxNrLlrmEhJaOGXwD38k
+	 wqiRATrvkMCyTcuBhl8rI3nSb1tuFZQhkvikvxZm5Us11M13diexQViSdgG5GyI7SlEw4
+	 tUCAoaehTFVy7SCzP+uTf/jkeY6CCknQPT8wQmJgQ/beAbJn7S/iMkGRuHyZ+hzbcyw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789755645;
+	c=relaxed/relaxed; t=1789756264;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,148 +32,148 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 From:To:X-Mailer:References:In-Reply-To:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=4/LZ0o0NCAjCc6C098f8/BmgNchDh7PXYJYBxr1AXEo=;
-	b=UyKQ4Xyg+RlT6QbxnDoaHvnCs+xFyKEK+LU/ToMkaR1dnCS8Yrm1GCEjreAU1zha5izG
-	 gwMehpZKTNYcNlLiUdyb2f3dUqUkNZ85BN0vsAS7rYvmF1gPGCquAqRH5U6stGRvl0B5j
-	 FOP8M7mfgwV17/LqZ1Tcyt3ee1WFWT+4Y/I1YIdlLoa6/GN7g3d3IsgOqNIMAr7vBjJ3Y
-	 66VzyT82CS5/TRjVu4ywQVJmToYyk6dlknqXJYvkMMIOqYit1bcOfbsOMCDpxJFyWw/8a
-	 sDBFDPhdIcuYTsl2IhcMiOfsgLMv4JODZleaSkgRTzPK79BDsXqwEyiTGt+oTBL6cIg==
+	bh=z5nx7+duNrNl1iM8JjiFsBpSfT+8Nf3t/nDI1RpXAw0=;
+	b=g5ASHj4iN4u73UBndztCJnCMSMgNFXVMnAm1HTreqOxPMO9mA2FxJfyjXT6Zx/uCEPeD
+	 CIF2E/p5Y5tz4/iXXujCDe5t9/FwUGtESCRzMLABcZDWtvlghaNmLhxPo9xer0NOAV1GF
+	 92lMy4HomIPXsNgiWjmXhyIdqcksnBZVdjzlgWyMHxH+YBgNv9Zw1uCHGk7PZ1vAtNlwj
+	 2AI/ZdeHR6Mw1MugtWoeHLIFDMMd0VdTnInW2yrHENbkXO5zJvwRg/WRneXAZnSJ765EK
+	 wQgkUqw8n+VUeHYVIo7cX3JIrW7BXxDnU/d4NYA1nYwAHrcI8mmj6hmU7pPZhH0B21w==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789755645;
-	bh=4/LZ0o0NCAjCc6C098f8/BmgNchDh7PXYJYBxr1AXEo=;
+	d=lists.u-boot-project.org; s=default; t=1789756264;
+	bh=z5nx7+duNrNl1iM8JjiFsBpSfT+8Nf3t/nDI1RpXAw0=;
 	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DiLPBXEOJ7hK1qokjMJ6IazXo0an8EenZA1ogeb5TJXmaUwT8dSKmorXDoN42/qzb
-	 rEEUfjF2ASWaiufsG5PRJiqcdPveMDc+3tbOHLuPBEv+7KGk06n/np8ov7ggAo+zkl
-	 c9fqfyd6uS1jd2mSsllKdL5RYGUYJroqQnT5UEL+7sMCgQcnE0S14W5APRg9i+qHgv
-	 YoqMd0u38DZBnLuf/ICJreE6v2TsgfosKXiLxdfAMau5ldDkQ60ZVQJqMnvZHBf4I7
-	 ilORVLa/yq66/w4VGRgvGESYVU6j62lYPWCq4ULMoSIvTIlZoM/dw12hUdL6oeBbqw
-	 iemzhNvewqbEQ==
+	b=eqm2hqLMgHr/zMXHmIboyoHgsmKtuqfgg4kVVaGgkxQPIWyAwtKZg0JtUMWmILV+5
+	 V28ENoZSdFkPZBVYzaad3c3dTnAqYL5Vxu5uFQiySsPuNXzBLhrD1iERRg6ooEiFOU
+	 T3rif3M7+hbFgYk7O58WbT6J19ZI+xBXO0Ex+7d0em43IA9WKE8IaYb3nqvpUDjkbW
+	 KkwWqTUKjEFN2Hmit1h0LocxMUS9hyD+yI+EaRrWy4p8YxvnANVhoNsbUKOoHXhnee
+	 np92o7k0AHUjoVtmM0DmyocYamAAOmIDLbXP6SHMDnKWbr2kMDcDmnFAvD0AIjQUKV
+	 hCPSA8I7f4WSg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3086860DAA;
-	Fri, 18 Sep 2026 18:20:45 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 77D80237
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 18:20:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D884360DB7;
+	Fri, 18 Sep 2026 18:31:03 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id AB7A6237
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 18:31:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5D62740BE6
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 18:20:43 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 90C9881346
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 18:31:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4ZRBIRi4RSNg for <u-boot@lists.u-boot-project.org>;
- Fri, 18 Sep 2026 18:20:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org F25B040BE2
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8gdUBOYU2PJJ for <u-boot@lists.u-boot-project.org>;
+ Fri, 18 Sep 2026 18:31:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org F2BD581339
+Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip="2a00:1450:4864:31::11"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789755642;
- b=K97BZ1iVnZrBjanuJeSHgJf3GF3h3b/DQaIxIi+sd4253gpozLO0hVuUWr21kooVVXmB
- VVVMIa/l457Pr8Zus7FOadxXw3YHPJJuOKap4ejbBOaey+4CrvTPjZiluiNnromHJcOFO
- ggoKrUB1zpBnNMUcKv8Vkwww4T1ORgHvfVd1l9U6PqMMLQyRB5BdXfhqVC3lwloqyZWkK
- 2GG6UFPmVii6pfw/m/Lo+XeU5jgU5pzwQCZifEwRt6qToVWsvGqBi0MIHqA0p4r+z/7lO
- uPg2ACGRtxsIraoKpHeeRj5b6S9hzyU9lfw7kN1oYmgljKWmrXffy3J2ZhYMdK1kdBg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789756261;
+ b=ki23ig4IDoofu3TZJZZUjmVjkvEonaQHLS42BgWMTueZQGovrNpGCsZyP5kBx/EqYWLA
+ uYAXAl7Pou5PotbXuo/rKSOCaKydNJXXx7pdY7HjOPHXv7w2iZMT1hGtiVD1ygdGVn66z
+ kleGT80chWlqJR76Z4u8NSZB2/stYGH7D0vi1uQ8TumySwr2yT0t3r3Y/PWZEJW7SsNoT
+ DmTbKYngYvd42bOinjgSAb1upGR+xoNsv8byVtrQ6JE9dcy7oOBTV//L46OsKGgwg2B8b
+ GpYVK/LpeFn61+K8AGcYE2GRireXVqeqYQ5Muh/i1u/FNOmkB4tfv1OpmAfZdvRYqwQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789755642;
+ c=relaxed/relaxed; t=1789756261;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Message-Id:
  Cc:Subject:From:To:X-Mailer:References:In-Reply-To;
- bh=4/LZ0o0NCAjCc6C098f8/BmgNchDh7PXYJYBxr1AXEo=;
- b=SW5qW6vRUFDMobJ6np91FrSuTaWoYYpYnCd/NjjCq4bmp3NfACf91vkoEyBK45a2Fifo
- 1GAlegXPGBdtFGm8OJnMYjeqYPsNWmnrhJ/CeJ1PlB05XZpyi6d460XHz9850xCvuVzlG
- QvAu9KKifnVU7bKfPpFchCA8ce5KGoAhvcAztxrtkC7hqZX98vss6eBnK5SaGxAsQjCuA
- kPLocCBdZscwseXCueL6JaRz2iOI/RBN9JuqZ0URoGpTmvSusCYhseOEZCR5EXbM3Wvr/
- Le1HTAyHVfDIwUh9d9A7XNSepennQouMTx6draSEYmhDkK0XBbuYCRQUMlXUdkw5xDw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=z5nx7+duNrNl1iM8JjiFsBpSfT+8Nf3t/nDI1RpXAw0=;
+ b=ra/nY4SCP3coNdoAgxWbovsvagLlEfwSD4klsgW0U8sNIVsTmTXgiJrmWp/mi/Azny9x
+ J6mYxwFwUoW55LbmH8a8M5J+OaQppFgmn7tjsSnsOu54XCUFhjB4B3dQMMuklmMLGlgVJ
+ nUR1CNp/V71s6NtXbQ7VU3Sc1aZRaZKwBwM0jVjSVXakXF2ihUpEEM/jQIgGU3geZUjBy
+ bHIGpihWWSqY/QmZU1rrhRx/f28o6awZDw6+l1G8PSooKlh0OGbBCELTl0ntGeg16xWqo
+ kIO29/GlwjanSCUPuWN+Kyf+qcfersFmbpPjsN20MCIKz5gb8DcesRCni2/X09lZ9Gg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=linaro.org; 
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=P+BlIFn8; 
+ header.s=google header.b="gsz/1BxU"; 
  arc=none smtp.remote-ip="2a00:1450:4864:31::11"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:31::11; helo=mail-wm2-x11.google.com;
  envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=P+BlIFn8
+ header.s=google header.b=gsz/1BxU
 Received: from mail-wm2-x11.google.com (mail-wm2-x11.google.com
  [IPv6:2a00:1450:4864:31::11])
- by smtp4.osuosl.org (Postfix) with ESMTPS id F25B040BE2
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 18:20:40 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id F2BD581339
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 18:31:00 +0000 (UTC)
 Received: by mail-wm2-x11.google.com with SMTP id
- 5b1f17b1804b1-49e83a388f8so6975085e9.1
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 11:20:40 -0700 (PDT)
+ 5b1f17b1804b1-49cd4ba9f68so14479325e9.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 11:31:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1789755639; x=1790360439;
+ d=linaro.org; s=google; t=1789756258; x=1790361058;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:references:to:from:subject:cc:message-id:date
  :content-type:content-transfer-encoding:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=4/LZ0o0NCAjCc6C098f8/BmgNchDh7PXYJYBxr1AXEo=;
- b=P+BlIFn8ONsOD2bn22dIRnqT3nog9SfWGXcEKKU0U9akVtuyC8gjzBzAYMn6dytA6h
- RCfEad6DRXVkaSsYnEpBU5ik47WoQHxds7VKZ49MCr0YsUwZUqjR7wVbS0f8hI97RpkW
- 6qsRBZYu1ijc5NBAJF9caF8E+Zff5WeXs23CMpHRoKlSVUns3w3XTDa0dv1j0P/3YsDG
- I6h3ujjcBQzCReBTr1U3KMkBdYYB356HQDbZ/SCo4rUVdwx7MLmnX02/Xx/U+fHvqnVp
- YeAhxAM5k7JhHyVwMkFENYORfvNUS7UOerMdTwLibuPSuiVgHh7eDMmkD3wN7XusXafL
- 5Upw==
+ bh=z5nx7+duNrNl1iM8JjiFsBpSfT+8Nf3t/nDI1RpXAw0=;
+ b=gsz/1BxUloWgIRUSkX8CpkqNj/WHA/LTWN73SI/OQ6gTv670MV+aCJLtSmm2jcyqxo
+ NB2fUcZbhOV//qW/wvLitq0lacTUIFX94LCjx2BDj+9lv+SltU6t4msOH0Dfh8TsMuar
+ 7/bkp/VvZt1HXppMm6wWGuUvDDF69Caee7uf26ePbDPkFUmXIkXkPLiRJmw/a1VpYlpP
+ +z1h6w3LbancSEs2mIZFCV+xuN0ZBjQh0CTlaTq5g8w3w6AYpy3RyP95k350fnVfV71Z
+ vhJPR/lWgzA3bhIzekG0Z2YMkUtt6iWrwnlc+nU0TRXnBom0l1aIN/4bcMtV9sdebDZV
+ PfDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789755639; x=1790360439;
+ d=1e100.net; s=20260707; t=1789756258; x=1790361058;
  h=in-reply-to:references:to:from:subject:cc:message-id:date
  :content-type:content-transfer-encoding:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=4/LZ0o0NCAjCc6C098f8/BmgNchDh7PXYJYBxr1AXEo=;
- b=BIT3LY6sx7wVQrsFlZkadwnJO2F7ABAOSJwJW9MyZly2zudR5YZ/YeBjD4XPldWPec
- fdzdmdaFJx/XK7Zpp1DCk3kD7WHan9kfmG/2V8+NbNnBC9EiT3MJPuKCgtN/kNvx8gq1
- zPCXeaPQkU5OExzw7I8jVNXe4qnapGBFv7uAPNEBjdF4hNgnYyBMZsgoSAZD0dZ1ozg+
- egA0pYuU7v75Of5ZTGG6hfM6s+9RTd2UBikxAzaUTcdPGgCvtGHdnaD/vt8CGCM9VdWg
- t/3CKz3GcRCJNqKBKhMkc4C9DTZKj/BJxjJNroN6AMuQLz964uRTfvy+gNxyb2vxPyIH
- BP4Q==
+ bh=z5nx7+duNrNl1iM8JjiFsBpSfT+8Nf3t/nDI1RpXAw0=;
+ b=fpVKKaSMctR2cxUPxRqmIFz0xyrN3TBX81NP5v5mPHI78mhVEmACKMUmzsXXTdQqHJ
+ TQ8v6kWU/djq5LXW7fVpb6K3HYNRmBUHw85mcHEWpltXjhiJt2iTPxBUYrgr/vsZ11eB
+ DO/fqWGzvPqMotfy7TZldxSohjsykJLgkLCjpaFDU4320mGqCLHjc8JL0b4Aq1TVJJFr
+ iybjtv0a7KjiKGbwViylTG/aB1oN3awwq4muWbUry93MujuqYsFBd8DNyLTBInM/XgHg
+ JQ6eJaUDXuYa066co+cgQHQMJIniSLNcyRNqWgils7Djct0Dd9erd3krwPKJ+GEaCX9Q
+ QD5w==
 X-Forwarded-Encrypted: i=1;
- AKwUvByTeD6dAsiBDLiGIwfbRgGR5w4C7kA0DvZwilYS3pldishdcQmyghR2+OXu2n9v4CQI6c+Gj+s=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mG9vhIx6fNHXF2KfhLJs5az27CoMAGOXzXMdHw7pGnpLIHFg6h
- LHjPZQWT5Ssiobqmz8XoEbqCe05a45QqsPhmYVc5HUynC72ZmaqIAwd8Yhk7yHP6vpg=
-X-Gm-Gg: AYBFou2oP4VeUZwjbS9lieUMaS0okq4/gm4/K1sQl41WMzY4+Z5v1K6QK7WuSzpczGz
- kEKDRPrsH/koje1WFFUkotlJfqWE4JcMvwtJMVHwlqIVNc8DMjPxSAm8NtVOvDbes8mPex7Sw5L
- VSQqm1FXKTnABn4SrGApFUcLRBckoQtAK1ICdYAdR5WySRodsSWMY2KoLKCZ5ztmvCjT3l+nrY5
- bavQ0xm5kTKOA6Nsr/B4tvYZXznD3Cu6Uk1APbDI1Dp63S6EraIgGCAaKUvVEb1Phq1GrpILi8e
- ZK5chfUjEit+kQU3oWJim1FJrEIT/kK27af9H50OsRuihi+Ya2bkLfkgT5ulAwcDjXguJE3LOqD
- tLKypSeEhsfgek8oH1V6fY0Uy7qfvebzKQkrXE0lFxZRlW1nBjvpBjqtiLy+0wvbuJM1xAP16lI
- samxda7CoBW8SJYDqqo7YzwH0lOPKIq2yFD9vxTNkkDny5qGNv9yUPFZ+ST1H3oygfJwJ6cKILM
- YYnNs+7nPopwOQjf4RB2WtVUiX/Gdg3BfBJ1RKR8f+9wCRq2YdCIdrHhQ+5D8eewhvJgDO/8aGt
- zQnYo/Nbk0bMWeagYNm4YdvdoRR/nQSgspO5iA23BWg79qahSb03tddCvUy7NQhii/Gqi/X08C/
- Ow5toiKon/iH+eRQYuUuWCpo2ykUhvpDqJ6mAnXfHAnhzQ4VBGF8lnSzXlkXfs772QvswXL3GQ5
- 1q1/CT+9wvPNBITRkH9CZbJvcWma/wL8uhKtYLBxu1DBfY2CPSgouqQfT3znt7qoS6x8eug0Eql
- TT7P++1JYRsWasDuHRJS2cL1wdblqa8iaOe1HtR3Ohvl2qUDM/dxUCSeZg2mPGqh35VeOgHAcvr
- DTs=
-X-Received: by 2002:a05:600c:a085:b0:49f:bd3c:bc23 with SMTP id
- 5b1f17b1804b1-49fc5747887mr46065515e9.30.1789755638787; 
- Fri, 18 Sep 2026 11:20:38 -0700 (PDT)
+ AKwUvBzUfdNLzooXTpDfXEgOmNCwcxKx8JRcYXTp1tX6MnBXA0MlRIxd4FhL7fHuQO5TjenGdoSbNiU=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++kh6bLvG2FsR7p8cmdEkdU2UeD0pE44q7BwrWmBMdvIyFfOm5ef
+ 5FZypeemoaif/V269GTNt0LC2FSnF81Xz+BOFEZBFM3kkQjDBBWllA+Dh8EukwaX7Vo=
+X-Gm-Gg: AYBFou1n+0fiP2jE90jYVMZOH797FJF+mptVoX40um1UzpCJKLs6FBavrNvbTrsCzr7
+ jxJ7PWCxvZcwqSgqxzXNrPmCvw5T1huzpDSfZiXry5nkp3T8HiZiqZT4BXh5+hlyCXxujgy64D2
+ gakTqxfhi7MblWi7/qlS2JdM+xof/s1LVB4S3rctM/0I7SPwQPUTGQuBltglf8niBE9jkGoHRlC
+ VhOQR48besHmdyJaOqvRuL1Lo3suuqSPQ+m4GeCATX8RNE60ouijgKXllXyQKx0ukhS9sCQVBr0
+ xDEXC0bFfO4tn4M/uDRtUmOneVcFA5G2ZXjShZpdx+QM+kkol/1TY9IUxLMbW+0/KYJ/sjxe9ZK
+ anMdYU1kZy9op8Big/KlW9jvaKPUor/jHMuDVqAmytQsnAS9Y8YDDQpAI7NCNgXrxQj99h/3w/S
+ 81Fa54L+AqqZabjF/1H2O79GIgbH1mnoNTQ40zU4xo1YppdN55nY0/gQrqFRejhJc+j8WVuyffP
+ Y6LiOSpDAfMSHcLwKE5WJynHAq1hrPtcrN4pHcCOhVAf0zKwglkMPPb9NGMhyv8LfY/+BlqyR7r
+ ZsK1nrnpGXvXUTLMD0vooOCz7a4N4cIJHx6M5cLizu59Pvu3+8MsaFOaifwKUPNOCcUMbamfufY
+ cHT9OVSaEo8nevO/7GSzN0OdNXGEqtWRjZon8wBihQ4uVRY/ewEOJFQ7bgLXBozHcu2oIByk5/e
+ gfmg/sWNvPlvu85ZDStLi/mtDXtuHaGZbPLDOiSLc2aDLrGWLslikYU5zXnHXagfQ1ui/FXKghQ
+ Rx774gA0TG2sjyW4sny2muYvkwwTwJcFDKBfShmpbt23yKm1de0fSpZjhWru7jBhPU3iiHfBdMq
+ BkDi
+X-Received: by 2002:a05:600d:4453:10b0:49f:cbf1:e77b with SMTP id
+ 5b1f17b1804b1-49fcbf1e9eamr18827995e9.10.1789756258214; 
+ Fri, 18 Sep 2026 11:30:58 -0700 (PDT)
 Received: from localhost ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48724564565sm439905f8f.19.2026.09.18.11.20.37
+ 5b1f17b1804b1-49fcd068124sm12202825e9.3.2026.09.18.11.30.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Sep 2026 11:20:38 -0700 (PDT)
+ Fri, 18 Sep 2026 11:30:57 -0700 (PDT)
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 18 Sep 2026 21:20:36 +0300
-Message-Id: <DLINF8X5LGMM.22DVNGKNPMAM8@linaro.org>
+Date: Fri, 18 Sep 2026 21:30:56 +0300
+Message-Id: <DLINN5K2BHFZ.19HZZJ3K3T9VR@linaro.org>
 Cc: "Abdellatif El Khlifi" <abdellatif.elkhlifi@arm.com>, "Tom Rini"
  <trini@konsulko.com>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>, "Simon
  Glass" <sjg@chromium.org>, "Devaraj Ranganna" <Devaraj.Ranganna@arm.com>
-Subject: Re: [PATCH v5 13/22] efi_loader: enable TEE runtime SetVariable()
- over FF-A
+Subject: Re: [PATCH v5 12/22] efi_loader: reserve FF-A shared buffer for
+ runtime variables
 From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
 To: "Harsimran Singh Tungal" <harsimransingh.tungal@arm.com>,
  <u-boot@lists.u-boot-project.org>
 X-Mailer: aerc 0.17.0
 References: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
- <20260914110106.1974894-14-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260914110106.1974894-14-harsimransingh.tungal@arm.com>
+ <20260914110106.1974894-13-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260914110106.1974894-13-harsimransingh.tungal@arm.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -189,232 +189,186 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 Hi Harsimran
 
-
-[...]
-
-> +							   efi_uintn_t name_size,
-> +							   const efi_guid_t *vendor,
-> +							   struct var_check_property *var_property)
-> +{
-> +	struct smm_variable_var_check_property *smm_property;
-> +	efi_uintn_t payload_size;
-> +	u8 *comm_buf =3D NULL;
-> +	efi_status_t ret;
-> +
-> +	payload_size =3D sizeof(*smm_property) + name_size;
-> +	if (payload_size > max_payload_size) {
-> +		ret =3D EFI_INVALID_PARAMETER;
-> +		return ret;
-> +	}
-> +	comm_buf =3D setup_mm_hdr((void **)&smm_property, payload_size,
-> +				SMM_VARIABLE_FUNCTION_VAR_CHECK_VARIABLE_PROPERTY_SET,
-> +				&ret);
-> +	if (!comm_buf)
-> +		return ret;
-> +
-> +	efi_memcpy_runtime(&smm_property->guid, vendor, sizeof(*vendor));
-> +	smm_property->name_size =3D name_size;
-> +	efi_memcpy_runtime(&smm_property->property, var_property,
-> +			   sizeof(smm_property->property));
-> +	efi_memcpy_runtime(smm_property->name, variable_name, name_size);
-> +
-> +	ret =3D mm_communicate(comm_buf, payload_size);
-> +
-> +	return ret;
-> +}
-> +
->  static efi_status_t get_property_int(const u16 *variable_name,
->  				     efi_uintn_t name_size,
->  				     const efi_guid_t *vendor,
-> @@ -768,6 +800,49 @@ out:
->  	return ret;
->  }
 >
-> +static efi_status_t __efi_runtime get_property_int_runtime(const u16 *va=
-riable_name,
-> +							   efi_uintn_t name_size,
-> +							   const efi_guid_t *vendor,
-> +							   struct var_check_property *var_property)
+>  /**
+> - * setup_mm_hdr() -	Allocate a buffer for StandAloneMM and initialize th=
+e
+> - *			header data.
+> + * get_comm_buf() - Obtain a communication buffer for MM/FF-A exchange
+> + * @payload_size: size of the payload that will be appended to the
+> + *                MM communication header
+> + *
+> + * This helper returns a buffer suitable for constructing an
+> + * EFI_MM_COMMUNICATE message. During the boot phase a new buffer is
+> + * dynamically allocated. After ExitBootServices(), dynamic
+> + * allocation is no longer permitted, and all runtime communication must
+> + * use the statically reserved FF-A shared buffer.
+> + *
+> + * The caller owns the returned buffer only during the boot phase and
+> + * must release it with free(). During the runtime phase, the returned
+> + * pointer aliases the static FF-A shared buffer and must not be freed.
+> + *
+> + * Return:
+> + *   Pointer to a valid communication buffer on success.
+> + *   NULL if no suitable communication buffer is available.
+> + */
+> +static __efi_runtime u8 *get_comm_buf(efi_uintn_t payload_size)
 > +{
-
-The changes between this and the non-runtime version are limited to a few m=
-emcpy/memset calls.
-It's pretty easy to only keep the runtime version and get rid of all the du=
-plication. Same
-goes for the set_property_int()
-
-> +	struct smm_variable_var_check_property *smm_property;
-> +	efi_uintn_t payload_size;
-> +	u8 *comm_buf =3D NULL;
-> +	efi_status_t ret;
+> +	efi_uintn_t comm_buf_size;
+> +	u8 *comm_buf;
 > +
-> +	efi_memset_runtime(var_property, 0, sizeof(*var_property));
-> +	payload_size =3D sizeof(*smm_property) + name_size;
-> +	if (payload_size > max_payload_size) {
-> +		ret =3D EFI_INVALID_PARAMETER;
-> +		return ret;
-> +	}
-> +	comm_buf =3D setup_mm_hdr((void **)&smm_property, payload_size,
-> +				SMM_VARIABLE_FUNCTION_VAR_CHECK_VARIABLE_PROPERTY_GET,
-> +				&ret);
-> +	if (!comm_buf)
-> +		return ret;
+> +	comm_buf_size =3D MM_COMMUNICATE_HEADER_SIZE +
+> +			MM_VARIABLE_COMMUNICATE_SIZE +
+> +			payload_size;
 > +
-> +	efi_memcpy_runtime(&smm_property->guid, vendor, sizeof(smm_property->gu=
-id));
-> +	smm_property->name_size =3D name_size;
-> +	efi_memcpy_runtime(smm_property->name, variable_name, name_size);
-> +
-> +	ret =3D mm_communicate(comm_buf, payload_size);
 > +	/*
-> +	 * Currently only R/O property is supported in StMM.
-> +	 * Variables that are not set to R/O will not set the property in StMM
-> +	 * and the call will return EFI_NOT_FOUND. We are setting the
-> +	 * properties to 0x0 so checking against that is enough for the
-> +	 * EFI_NOT_FOUND case.
+> +	 * After ExitBootServices(), dynamic allocation is no longer permitted.
+> +	 * Use the predefined FF-A shared buffer at runtime; otherwise allocate
+> +	 * a fresh buffer during the boot phase.
 > +	 */
-> +	if (ret =3D=3D EFI_NOT_FOUND)
-> +		return EFI_SUCCESS;
-> +	if (ret !=3D EFI_SUCCESS)
-> +		return ret;
-> +	efi_memcpy_runtime(var_property, &smm_property->property, sizeof(*var_p=
-roperty));
-> +
-> +	return EFI_SUCCESS;
+> +	if (efi_at_runtime()) {
+> +#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
+> +		if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
+> +			if (comm_buf_size > CONFIG_FFA_SHARED_MM_BUF_SIZE)
+> +				return NULL;
+> +			comm_buf =3D ffa_shared_buf;
+> +			if (!comm_buf)
+> +				return NULL;
+> +			efi_memset_runtime(comm_buf, 0, comm_buf_size);
+> +		} else {
+> +			return NULL;
+
+This is problematic for the existing use case. With  the changes in the lat=
+er patches
+that swap all runtime call unconditionally every call to setup_mm_hdr() wil=
+l return
+EFI_OUT_OF_RESOURCES and none of the runtime services will work without FF-=
+A.
+There's nothing elegant we can do about this .We either Let the fucntions f=
+rom efi_var_common.c
+deal with the runtime part (which I think I prefer), or we define a similar=
+ runtime
+available buffer for comm_buf.
+
+> +		}
+> +#else
+> +		return NULL;
+> +#endif
+> +	} else {
+> +		comm_buf =3D calloc(1, comm_buf_size);
+> +		if (!comm_buf)
+> +			return NULL;
+> +	}
+> +	return comm_buf;
 > +}
 > +
->  efi_status_t efi_get_variable_int(const u16 *variable_name,
->  				  const efi_guid_t *vendor,
->  				  u32 *attributes, efi_uintn_t *data_size,
-> @@ -1001,7 +1076,7 @@ efi_status_t efi_set_variable_int(const u16 *variab=
-le_name,
->  		var_property.property |=3D VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY;
->  		var_property.attributes =3D attributes;
->  		var_property.minsize =3D 1;
-> -		var_property.maxsize =3D var_acc->data_size;
-> +		var_property.maxsize =3D data_size;
->  		ret =3D set_property_int(variable_name, name_size, vendor, &var_proper=
-ty);
+> +/**
+> +static __efi_runtime u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_s=
+ize,
+> +				      efi_uintn_t func, efi_status_t *ret)
+>  {
+> -	const efi_guid_t mm_var_guid =3D EFI_MM_VARIABLE_GUID;
+> +	static const __efi_runtime_rodata efi_guid_t mm_var_guid =3D
+> +		EFI_MM_VARIABLE_GUID;
+>  	struct efi_mm_communicate_header *mm_hdr;
+>  	struct smm_variable_communicate_header *var_hdr;
+>  	u8 *comm_buf;
+> @@ -555,16 +615,15 @@ static u8 *setup_mm_hdr(void **dptr, efi_uintn_t pa=
+yload_size,
+>  		return NULL;
 >  	}
 >
-> @@ -1078,7 +1153,7 @@ efi_query_variable_info_runtime(u32 attributes, u64=
- *max_variable_storage_size,
+> -	comm_buf =3D calloc(1, MM_COMMUNICATE_HEADER_SIZE +
+> -			  MM_VARIABLE_COMMUNICATE_SIZE +
+> -			  payload_size);
+> +	comm_buf =3D get_comm_buf(payload_size);
+>  	if (!comm_buf) {
+>  		*ret =3D EFI_OUT_OF_RESOURCES;
+>  		return NULL;
+>  	}
+>
+>  	mm_hdr =3D (struct efi_mm_communicate_header *)comm_buf;
+> -	guidcpy(&mm_hdr->header_guid, &mm_var_guid);
+> +	efi_memcpy_runtime(&mm_hdr->header_guid, &mm_var_guid,
+> +			   sizeof(mm_hdr->header_guid));
+>  	mm_hdr->message_len =3D MM_VARIABLE_COMMUNICATE_SIZE + payload_size;
+>
+>  	var_hdr =3D (struct smm_variable_communicate_header *)mm_hdr->data;
+> @@ -1077,6 +1136,20 @@ void efi_variables_boot_exit_notify(void)
+>  	ebs_called =3D true;
 >  }
 >
+> +/**
+> + * ffa_shared_buf_notify_virtual_address_map() - SetVirtualAddressMap ca=
+llback
+> + *
+> + * @event:	callback event
+> + * @context:	callback context
+> + */
+> +#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_RT=
+_MODE)
+> +static void EFIAPI __efi_runtime
+> +ffa_shared_buf_notify_virtual_address_map(struct efi_event *event, void =
+*context)
+> +{
+> +	efi_convert_pointer(0, (void **)&ffa_shared_buf);
+> +}
+> +#endif
+> +
 >  /**
-> - * efi_set_variable_runtime() - runtime implementation of SetVariable()
-> + * efi_set_variable_int_runtime() - runtime implementation of SetVariabl=
-e()
+>   * efi_init_variables() - initialize variable services
 >   *
->   * @variable_name:	name of the variable
->   * @guid:		vendor GUID
-> @@ -1088,11 +1163,69 @@ efi_query_variable_info_runtime(u32 attributes, u=
-64 *max_variable_storage_size,
->   * Return:		status code
->   */
->  static efi_status_t __efi_runtime EFIAPI
-> -efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
-> -			 u32 attributes, efi_uintn_t data_size,
-> -			 const void *data)
-> +efi_set_variable_int_runtime(u16 *variable_name, const efi_guid_t *guid,
-> +			     u32 attributes, efi_uintn_t data_size,
-> +			     const void *data)
+> @@ -1085,6 +1158,9 @@ void efi_variables_boot_exit_notify(void)
+>  efi_status_t efi_init_variables(void)
 >  {
-> -	return EFI_UNSUPPORTED;
-> +	efi_status_t ret, mm_communicate_ret =3D EFI_SUCCESS;
-> +	struct var_check_property var_property;
-> +	struct smm_variable_access *var_acc;
-> +	efi_uintn_t payload_size;
-> +	efi_uintn_t name_size;
-> +	u8 *comm_buf =3D NULL;
-> +	bool ro;
-> +
-> +	if (!variable_name || variable_name[0] =3D=3D 0 || !guid)
-> +		return EFI_INVALID_PARAMETER;
-> +
-> +	if (data_size > 0 && !data)
-> +		return EFI_INVALID_PARAMETER;
-> +
-> +	/* Check payload size */
-> +	name_size =3D u16_strsize(variable_name);
-> +	payload_size =3D MM_VARIABLE_ACCESS_HEADER_SIZE + name_size + data_size=
-;
-> +	if (payload_size > max_payload_size)
-> +		return EFI_INVALID_PARAMETER;
-> +
-> +	ro =3D !!(attributes & EFI_VARIABLE_READ_ONLY);
-> +	attributes &=3D EFI_VARIABLE_MASK;
-> +
-> +	ret =3D get_property_int_runtime(variable_name, name_size, guid,
-> +				       &var_property);
-> +	if (ret !=3D EFI_SUCCESS)
-> +		return ret;
-> +
-> +	if (var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY)
-> +		return EFI_WRITE_PROTECTED;
-> +
-> +	comm_buf =3D setup_mm_hdr((void **)&var_acc, payload_size,
-> +				SMM_VARIABLE_FUNCTION_SET_VARIABLE, &ret);
-> +	if (!comm_buf)
-> +		return ret;
-> +
-> +	/* Fill in contents */
-> +	efi_memcpy_runtime(&var_acc->guid, guid, sizeof(*guid));
-> +	var_acc->data_size =3D data_size;
-> +	var_acc->name_size =3D name_size;
-> +	var_acc->attr =3D attributes;
-> +	efi_memcpy_runtime(var_acc->name, variable_name, name_size);
-> +	efi_memcpy_runtime((u8 *)var_acc->name + name_size, data, data_size);
-> +
-> +	/* Communicate */
-> +	ret =3D mm_communicate(comm_buf, payload_size);
-> +	if (ret !=3D EFI_SUCCESS)
-> +		mm_communicate_ret =3D ret;
-> +
-> +	if (ro && !(var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ON=
-LY)) {
-> +		var_property.revision =3D VAR_CHECK_VARIABLE_PROPERTY_REVISION;
-> +		var_property.property |=3D VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY;
-> +		var_property.attributes =3D attributes;
-> +		var_property.minsize =3D 1;
-> +		var_property.maxsize =3D data_size;
-> +		ret =3D set_property_int_runtime(variable_name, name_size, guid, &var_=
-property);
+>  	efi_status_t ret;
+> +#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_RT=
+_MODE)
+> +	struct efi_event *event;
+> +#endif
+>
+>  	/* Create a cached copy of the variables that will be enabled on ExitBo=
+otServices() */
+>  	ret =3D efi_var_mem_init();
+> @@ -1103,5 +1179,37 @@ efi_status_t efi_init_variables(void)
+>  	if (ret !=3D EFI_SUCCESS)
+>  		return ret;
+>
+> +#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_RT=
+_MODE)
+> +	if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
+> +		/*
+> +		 * The FF-A shared buffer is accessed by EFI runtime services, so
+> +		 * keep the resident pointer convertible across
+> +		 * SetVirtualAddressMap() and mark the region as runtime memory.
+> +		 *
+> +		 * CONFIG_FFA_SHARED_MM_BUF_ADDR is expected to be EFI-page aligned.
+> +		 */
+> +		BUILD_BUG_ON(CONFIG_FFA_SHARED_MM_BUF_ADDR & EFI_PAGE_MASK);
+> +		ffa_shared_buf =3D (void *)CONFIG_FFA_SHARED_MM_BUF_ADDR;
+> +		ret =3D efi_create_event(EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE,
+> +				       TPL_CALLBACK,
+> +				       ffa_shared_buf_notify_virtual_address_map,
+> +				       NULL, NULL, &event);
+> +		if (ret !=3D EFI_SUCCESS)
+> +			return ret;
+> +		ret =3D efi_add_memory_map(CONFIG_FFA_SHARED_MM_BUF_ADDR,
+> +					 CONFIG_FFA_SHARED_MM_BUF_SIZE,
+> +					 EFI_RUNTIME_SERVICES_DATA);
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			efi_close_event(event);
+> +			log_err("EFI: failed to add FF-A shared buffer to runtime map (%lu)\n=
+",
+> +				ret);
+> +			return ret;
+> +		}
+> +		log_info("EFI: FF-A shared buffer runtime map: addr=3D0x%lx size=3D0x%=
+lx\n",
+> +			 (ulong)CONFIG_FFA_SHARED_MM_BUF_ADDR,
+> +			 (ulong)CONFIG_FFA_SHARED_MM_BUF_SIZE);
 > +	}
+> +#endif
 > +
-> +	return (mm_communicate_ret =3D=3D EFI_SUCCESS) ? ret : mm_communicate_r=
-et;
+>  	return EFI_SUCCESS;
 >  }
->
->  /**
-> @@ -1129,7 +1262,7 @@ void efi_variables_boot_exit_notify(void)
->  	efi_runtime_services.get_variable =3D efi_get_variable_runtime;
->  	efi_runtime_services.get_next_variable_name =3D
->  			efi_get_next_variable_name_runtime;
-
-
-All the get_variable*() calls used to point to the function from efi_var_co=
-mmon.c.
-By changing this you are breaking the runtime case for OP-TEE since now we =
-will get
-EFI_OUT_OF_RESOURCES.
-There's no easy way to fix this at runtime. For OP-TEE the kernel might rep=
-lace this call
-with an internal OP-TEE call if it's part of the firmware and announces it =
-can provide
-EFI runtime services. However, the default uuse case, which we don't suppor=
-t SetVariable
-at runtime only needs to keep working.
-
-I'll post a script next week so you can replicate and test this in QEMU wit=
-h OP-TEE etc.
-
-Cheers
-/Ilias
-
-> -	efi_runtime_services.set_variable =3D efi_set_variable_runtime;
-> +	efi_runtime_services.set_variable =3D efi_set_variable_int_runtime;
->  	efi_update_table_header_crc32(&efi_runtime_services.hdr);
->
->  	/* Record that ExitBootServices() has been called */
 
