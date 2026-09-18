@@ -1,228 +1,125 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC596C982D7
-	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 09:50:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB80DC982DA
+	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 09:50:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 677B981244;
-	Fri, 18 Sep 2026 09:50:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8919660BF7;
+	Fri, 18 Sep 2026 09:50:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WGjs58pDK6vj; Fri, 18 Sep 2026 09:50:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org B1C03811CE
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789725004;
-	b=av16xKtCTyB/AmuLmf+cSaGv6esXSzyCCgFnrO3TrRSIDYxpfzIXNurwZ2Pn8IORWV9Y
-	 MVDNCmP/MFb7s7Nnoj+h6obgegiVknbaPVUCa6v77ub1NbRwHmUXSmXH3/egJ10spEdL3
-	 RNj12wx4qcK6TO6txBU7Ym9elQq+CdY+SwOfNcxwUw8IWwLF+q6We4tCJ/xlgkjLoa/aX
-	 lo0oktOGklXMOTe/TnAy2n0sOZQS3hQDaOJQkJCCWT/P4z0a5F1l0pdJVLywjkJwYRG/M
-	 nWB4oISEG+ScHqCRCl+ZtN0QUIJWAgaEUE/NCKgOLeDEm3gweYtUGnnWX5p7peS+wQw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id T0Vl22LcpTfQ; Fri, 18 Sep 2026 09:50:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 519ED60C1D
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789725043;
+	b=LRVVCnV3nrisVeEbiwi1FdPfbqgYdOex47An64JF1VHhf/g9frjV15iBgB+AqzJ5I1Fh
+	 Mu/Y8JCaOLcDvELwJR7DXC7p+h0EemlwhO7aoDqg4XKkCnVZLcOdCymJujgjooUUmbgkj
+	 pNTZOFCJ3go0m9DzVLvCk8M/lnoagdE2pIbJ/yBdOA0/BOQy263Yze2NYusYCQ9LHckEV
+	 ifQwxQFoFjMkLopcG6kC6l6ZSufnCNjXwAvaHlqic1bxMlfiMM+kXB9cotA4C851jKzD/
+	 ga2bU3N3MOpAn30VyiCn13K/bwUZ+0JO8tHlfHTJGMkjwvCw/AsNBY+fZXFmM7iVxBQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789725004;
+	c=relaxed/relaxed; t=1789725043;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
-	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=o/wjzuhbOHDNiyhHd67KYRXNghjoGOh0D+nEyFs1Nuw=;
-	b=FZqLVQcKfd5z+nzQshRFq6PXNg2A2cLKYCRQEKpvdxgqeEIvca0YoNI+/2lOlZ5NHRsh
-	 ImI73nxpdbztxjgXu60EuK84kHox9Y78qygdrmENvFYgEgwNbyQKuUWOloL/Kuug5O3+4
-	 rhFwcPfZhSzL5VUukY9PeBq4p9zPRYHiKJ1MBrmyg7mC9SzRrJFoLC98cGqTZI868dbIu
-	 mDrK1ko7+B6dV7lYSWYa1fRsMaqeP+ddRLmT7x7jq7xp1sH6k7h3eMQag7jaiWf1CbO+e
-	 HZsb4A7m/P1ekj2rddC7iisAH6h6SUMUfiFZSJdHJ/nhdbR9j9IadXZALQI7sGqBMHA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=cu3GYuLp0MWaMkANVl5A8PCBcQgWtgPv4qho4OalPRU=;
+	b=mNRgojrCGO0OBibDLHR5kepNN3ZRinD37xVRK0Homiy3wcLzsfVixynUjX3EIFVIuknW
+	 6Lx15/MqOVefSsMhRuX1vabUH/uALLrkpqTqh0a0MXM+HqcoiA3oEAwchVIq8oCGLodVo
+	 yq4M10cVNdStzxnWoab7kzUorwm/xneYfofR26EFqK7iqna6Bn7Hjm3Yq8fKW/+PzEVtE
+	 0zkB0fJ+HUcvW0E8B1cx65hY5kIOsRc71sey7OfKG6/SHhWqQ8LTGJXPOV2JKj3DPg4IY
+	 qa42Rz4+sfAh0gBDBqqiW8KbBPJnEQHT8r31i7SvgI7phKrC7f6PyjNOv9jZqGIcrSw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789725004;
-	bh=o/wjzuhbOHDNiyhHd67KYRXNghjoGOh0D+nEyFs1Nuw=;
-	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org; s=default; t=1789725043;
+	bh=cu3GYuLp0MWaMkANVl5A8PCBcQgWtgPv4qho4OalPRU=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=SZO8un5CafQYEK+6KhhEPLUaBXvbSINtya2QKiwemadf9bALmTr1ZltYt6WOO1Yjb
-	 2nkghEIy5kz8HppEG7V2IBwHG7Zujg4ZTFy31dU96EyB1OYspCX6TCo7RrH1PGsjfM
-	 e21xKbdaR+B4NoJRqkGDCr5qp/4Ot41fiuJ36lyLIN9BrEzVFuW55r6rKSHolcYliG
-	 fOFuRwvIFoB+qPIl72V00k/okQnpEy29IdEDPXUCcaCEF4Sz050tP15exXfteXwWpS
-	 3EbxnxclEpnTchlR+dYe6eJeHIVOnxwpbDJRi31PUuXRql1qmG2cDjv5+uZW08/QTL
-	 4AwlYr5SDhyzQ==
+	b=s/F9lYMyizMWpsFa7uD7MW/HplU5Gd4N8/0V7jaRu1kO6DIPzjuZy3LZhjVzBZGue
+	 gXBv02EaeNG1xsO11RkGopdC1okuIsR2b4gTuwLli68B1yKyY7Me3iLk+Le5Xz+Q4S
+	 c3p+GhKQVNA/fGfL5Lh0g37oG07rJoO9+MdjxCO4f7noI4kUDN5jHf9l3HIrP5LDtL
+	 mE9N0KgbHNbvOT+H7//Nh1foY6SxV+NdtdW1p+PlB88GbKFX3Yy41wtU1O1xQfM3xZ
+	 bRUmQ+DS3RDSD/nLaFrjarBtQiEQ1OsnF7ZCEN9lisT2JgUIzMi3MZ0sTdd3eK6qM5
+	 4Fx4DpqIbwqbA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B1C03811CE;
-	Fri, 18 Sep 2026 09:50:04 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 48001422
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 09:50:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 519ED60C1D;
+	Fri, 18 Sep 2026 09:50:43 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 59CA23B6
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 09:50:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 45BDC40506
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 09:50:03 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 4BAA5404F1
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 09:50:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oFwkXBQOEu2f for <u-boot@lists.u-boot-project.org>;
- Fri, 18 Sep 2026 09:50:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 31206404E6
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789725002;
- b=q1LWNzPBdbnBGxS+VzmX6ZOm5Yht/P3Sq6f3k924iopvLZW9hul9lbJQuUBs0gwctIDm
- Fcx6f7fl2UdBRJW1v8N3x7cWvCX4RO/GJ4fOdC9pB1sJK6Nx9O3v3DWY0ay6KorYiZZFe
- YmZLgDoJQUW/Ek8DTkIY46vBMAkFcbce19B/qR422M01fUxhoAkdm/n8DG76n9WhY5B/6
- bqbeD5yBNrtFVEFj7pxT7Tev29/Finqs5FRwSxi0pAbtbwlL+DlvZ0eLYqBEM8wwh9Yyq
- vvIuPaqSzV6qOvj6TInst23gXuSpc+nHvyb+qsysh1fjVUmUhSxotzA5kSxpyV4Wweg==
+ id 6doZhedTNRkc for <u-boot@lists.u-boot-project.org>;
+ Fri, 18 Sep 2026 09:50:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 4A03F404E6
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=212.27.42.1
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789725040;
+ b=qwcti1mMu1szBuN3m6cH2M513mfd8jYITNVDFonlyg5UrQg2LU/IbSK5BrhHUiikXKX9
+ x7c2nt19um0lyI2Eu+yf+mK0P64QN2hhXFX6sdk8UsAM2ok41eON3Oc6NnxkHIG+zJSio
+ BMaekkbLG+oqit8FqB8v0FRrVZK+V/dZYwfCaLLC23+/EXsWNBZseZCW0G3kuU7LbuB5B
+ oXbOrhgYrPGFfm7gkg7OhZ+QhdT+ReL9WC9V66MMHPC5K+CnJVPCth07/UNjb0ecMhG4B
+ JvATYEQeC50LKaa/dMFRVr0C8vybZ5BhsWnbZzJF+3Bhs53+ZxS73xztIMQQZAqZlvg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789725002;
- h=Received-SPF:Received:DKIM-Signature:Received:Received:
- DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
- X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:
- Subject:Date:Message-Id:X-Mailer:MIME-Version:
- Content-Transfer-Encoding:X-Proofpoint-GUID:X-Authority-Analysis:
- X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
- X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
- X-Proofpoint-Spam-Details;
- bh=o/wjzuhbOHDNiyhHd67KYRXNghjoGOh0D+nEyFs1Nuw=;
- b=tb3xn8GQ1JnfBpIucvNevXHXz2mBCwXaUm3+oBFbPF7MaVn2jEDwS6Xg7/MI4FI4GLOt
- 4g1zq3TKI4bvTemi8CLejaNjL54J7gb4nSyt8R5YtJrCV3i/95Vw62nLZAdvHi9RQCiu4
- uLapFXF75jjT48yALGcTZRMfjPixpz0BpXmikvxmxNBqTr9q3bAsf712sH+J82mFJObj1
- P5C1GqGgq0IdNb/1WvGcf+OrRB4pW2php7O4bxAq7Kvezqnv5TUzFJbtMIXfhoM4S+pWd
- oYXOmh9ozkSHoVVwbUPfA45fnPAefUMzS77gtFIWiRxeX/iyQg8fpUN6coAgrnxW0hw==
+ c=relaxed/relaxed; t=1789725040;
+ h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
+ Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+ bh=cu3GYuLp0MWaMkANVl5A8PCBcQgWtgPv4qho4OalPRU=;
+ b=TY1f8Z5Nq6SsPSX3Lh+ktbVh9HLlH3DvyxmCCWd1jZKk1xQf83vV5ec4AOnq918xS3Ia
+ rnFKJJBfo4zsmJ//rm4jkquoqDG9i9b5PvIJkPIPaCX19sXKLveJPj9H3AudNzxWyp5dD
+ iReRfdscbky7lHqFscFMXEKDWXjSouQqN94Q838mXXevJ0k7QB86g9IC4tHpqBAQtjHVB
+ E8V1XCg9Axrqbl5seSyyw1Go9AbgNT65UaMktrZfPIY1UPwTj7xPTieHbJN9VEbixOCHH
+ teHLJGK+26BW0euI4W8wYYpvLeubJSLP8lVqz5OLeDJCITg5cB1cjvzp+tNDPrEL2WA==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=oss.qualcomm.com; 
- dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=Uz6hSv1Y; 
- dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=FPih8e9H; 
- arc=none smtp.remote-ip=205.220.168.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=oss.qualcomm.com
+ dmarc=pass header.from=free.fr; 
+ dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256
+ header.s=smtp-20201208 header.b=mnUXeVl8; 
+ arc=none smtp.remote-ip=212.27.42.1
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
+ helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=Uz6hSv1Y; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=FPih8e9H
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 31206404E6
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 09:50:01 +0000 (UTC)
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68I9dhbl1213782
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 09:50:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=o/wjzuhbOHDNiyhHd67KYRXNghjoGOh0D+n
- EyFs1Nuw=; b=Uz6hSv1YotOkqwioL6dVUOyaTSrbxcVw1+pYNeqDjeKZAdHKJTi
- inqzWp8NuGq5tkn87dcxJBeV2h+MrnUoRMWud8Bj9rS42Nt8OuNVS6zE+mp/w6bA
- tVPJ5CsHoPBs6PHndeTykQtniT8/uG0QQTXrzeWN6BgUco2GIFzLH4TthlPzCLFD
- q9amE4+5/XMAaf1GcsUi0ezNdDS6eJBpyYkZnkvDSWLa06FFZ1GD3PxV3plgGght
- jBc82//K8IuTsIZactFfd7m0nlxL6GSZT+PHj73Mg1wOgSptr99vO0nKfUu7pj5Y
- 8ffakFj06NC6oLpEOVqy6KhIMukBORrWyXQ==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grrg42j0r-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 09:50:01 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-39de4e72b33so1071919a91.2
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 02:50:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1789725000; x=1790329800;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=o/wjzuhbOHDNiyhHd67KYRXNghjoGOh0D+nEyFs1Nuw=;
- b=FPih8e9H/e5kPu6Wf8ohcSfigrgeFYDDMJ0NE1KXsuRr/9TnfKojtVvgKgH+yxdxXI
- aLyoeDY8FdQ5C+0pcbqpUifMR+8P5XmMvJvAtyZR94MeyqEboWpKnyBbpR92uVFKTi5S
- +8MKDxAy62h4h7eDng2q48Hc3Di9BzK97/ZhoXGOt01UdYEE3IK5XHBV6Qi5sMYuzSID
- pcv/jsPPnj07sYEbSrWhmspURoC4Rlh/qtPKU4zaqzOHLuYFBI1V+4Dlwxj9tjTwrrDz
- ZzBd1SGNCv657g5xUc4ekb31yFZwUfo2uWcdqsfbq//SsHFgWrKeFTFupjUZFfRZ47Zu
- 779g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789725000; x=1790329800;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=o/wjzuhbOHDNiyhHd67KYRXNghjoGOh0D+nEyFs1Nuw=;
- b=ehUWBaPmfOrjL6qlNnTiaLwqKn0W5s1vVJcPT90I7cDZVHdTB3bn+TOrqsJg+krlGV
- tEHg4y1OpP54QK8LysG1HUAmnZ0KjTi2AtBeREec+ZfVuaTgKbW1jWDZeuJIydKHZwU1
- I17zuTYrKtfvrNW3p1GgeL9sTk9OSvuza/Sht8dA+oLObi+EgqSwNqmF630yK/mIpgi/
- V6dqbLIc+wvCQicNwV+oz3UhTfTpIzntyioGd0uMIVgM1ka/rc/J3hPDzW+w7bOpArt6
- jXaH5jZxKHs6k/yPMWsNHsevkHPII1VhT9iPPQnY8qhNT+U3k58VrwEJ60KZsWvgu0uS
- j/YA==
-X-Forwarded-Encrypted: i=1;
- AKwUvByL6B83zu/iRyUrCnUkRS05B0vuCvXiBOfShOT+Zcyl7AVDw4rbwpNK/hAz6Xi555S4TC/PUrs=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++l998dQ0dlFX31v5e5UB2DwUcuAJ0kQ5e9mLuAliiaS2W3/iVLA
- tqcUGTqrM0NzhdKGTO8cAjAQ6g/T/SkUCIxpHEYH6Spza0QhqWnQFZ0xvx6a2Dj6oti/2z6g0Zr
- 98RLbxqI0592OpSqOQRTfAlzYyEEipqvHUyDpF7yhPQ+oONEoac1bUbweYiy5QMSY0ius3V4=
-X-Gm-Gg: AYBFou3dxe69mEhwYIksLNsxxfFgXSZApbm6iFvTFBKH6Xl0YR1GiV7yvXNRaS9NhNz
- xY/CA8S1uNd1dhLJ+V6HXkAI7M7Hq2Mki2OmRYM6+OQYDC1MRj8hUrcPFC1wNb/nc+RYcY6KbU1
- 7aArZEzc41+XiEMgxuqv0wvcnHdKj2O8C1aVncuwP/X6tXEk0ptRs4Clmfmxxe9btupRTPJokBk
- Y71dCQerwi94gtyEVv4JNBiwVU513qEIxsYlCgUhN+YMXMXU6Ttek3qY1IgCIoQpIIOfK7f8+SY
- xWRjEHKOZWqvZa1JIciXX4M4e2P5N3GvHkPgnRJTQwRI+PvxF2CHE95dRmjs3GToZuFReFCmYm5
- zFx30jQkgyI6iBOecl3/2+CrwF9NvnlxPzRUbv7088iGmPajaqcJcHPu2G8JZP+OU2It+E06kyv
- PiJr8Gf1RaPqv58RybXP4=
-X-Received: by 2002:a17:90b:2f8f:b0:39e:d2a:e272 with SMTP id
- 98e67ed59e1d1-39e54b63752mr5104287a91.5.1789725000333; 
- Fri, 18 Sep 2026 02:50:00 -0700 (PDT)
-X-Received: by 2002:a17:90b:2f8f:b0:39e:d2a:e272 with SMTP id
- 98e67ed59e1d1-39e54b63752mr5104241a91.5.1789724999888; 
- Fri, 18 Sep 2026 02:49:59 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-33c28723bafsm4087405eec.15.2026.09.18.02.49.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Sep 2026 02:49:59 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, trini@konsulko.com,
- aswin.murugan@oss.qualcomm.com, nathbappai@gmail.com,
- quentin.schulz@cherry.de, jbx6244@gmail.com, anshuld@ti.com,
- u-boot-qcom@groups.io, u-boot@lists.u-boot-project.org
-Subject: [PATCH v1] misc: qcom_geni: gate late firmware loading behind Kconfig
- option
-Date: Fri, 18 Sep 2026 15:19:50 +0530
-Message-Id: <20260918094950.1186434-1-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
+ header.s=smtp-20201208 header.b=mnUXeVl8
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 4A03F404E6
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 09:50:38 +0000 (UTC)
+Received: from localhost.localdomain (unknown [91.160.0.144])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id F2F9FB0054E;
+ Fri, 18 Sep 2026 11:50:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1789725036;
+ bh=TaTNv6nPuVeZRhDkU2Y0XyCz5gt47/IwtkYzG9T1+w4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=mnUXeVl8tbQDdt8J2dAas0aZIbwxmIDOwRYr7XG0J1l8gg7Yyyz9pLHZUoCcAJoS3
+ 6zj4y9aEeohI+Z6sd9vUpd3aXluHGO4at5nRG7ygdMHcOdN4oYI2AhxKUucKqbD1wp
+ 3RIdWVezjjfKVfTUPjhUsW7cvYrrVvHi6f5c6Lr/hCFkHlUPIs12L0jj/K5eUAvz1y
+ Fd6SF3d7ApEZClcEmPhW8InxSmsDfJudP8XA9aNbpWK7KqMO4kU5giGmNavCA3DyBC
+ aT3hGgltTDxOqfi68b6Z+nUCecxL2TK67BAsvS/4z/MB+j4mPVVV+nqA2hvL8ST8au
+ FwcVfz25ZY6hA==
+From: Vincent Jardin <vjardin@free.fr>
+To: u-boot@lists.u-boot-project.org
+Cc: Peng Fan <peng.fan@nxp.com>,
+	Vincent Jardin <vjardin@free.fr>
+Subject: [PATCH v1 1/2] power: regulator: mpq8785: avoid scan, use DTS address
+Date: Fri, 18 Sep 2026 11:50:25 +0200
+Message-ID: <20260918095026.3635222-1-vjardin@free.fr>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: VzSVDWnK4FvRdDJJgKorFnALbG1tLBHs
-X-Authority-Analysis: v=2.4 cv=ZO9CCn7b c=1 sm=1 tr=0 ts=6aad0949 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
- a=jnpNO12NntmmbGWXndkA:9 a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-ORIG-GUID: VzSVDWnK4FvRdDJJgKorFnALbG1tLBHs
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDEzNiBTYWx0ZWRfX7pVsgE20LX0j
- AVOyqCLpvNgEr8U3N5hySISKn6k1cXvvhk0LeEWSa9Culh/v1bQwT+yI+ZWVDIz6GQNMNPWoFbW
- bxOmwPuod5IEPLyrci0ZAxIOK3Tvj9RT39mnYGSEB4mz2/Tpr+f84z8zsP+h7ghglm/sqJVCztd
- OUgMPussemoC4pjy/KRBAGrJEMrLvPYVdjrj6ruaS8TX0SsrW5iFkh6Z9uANJGwTWIH384Ryo9F
- Y7NITRcRF77MrgN8Kf4t+12wJImZd+XnESwUVEVI4KELsdnouqSLtO06bROBDbIiQFtU3Z5xqKO
- qH5FeDzop6VivYHeGAyQsPT8qCIVfZ/PiJO0xH2sJb7fK/W6ASEl0wApT7UFtDk8hp4+WfUxS6p
- 337G1MlxCtM9dgXMsSqAButVgYfn0yStcD4HGvpCONmjqTYUwJUTWHOvSatedG7Xy8KzGk14qrm
- 9aelGkIDCbD18pElk3w==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDEzNiBTYWx0ZWRfXy3l6Oe8CWCS9
- KDjO+3Chqj0yxyBzZmYFuPoq9PIUwVaQxonUaDC70zJ4Y+BsZuS69hMdAWxYSNXY5FXmY5g+m5D
- iDkNlAmwOFZwe/MTjEHdgb1foJUtXI4=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-18_03,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 priorityscore=1501 suspectscore=0 adultscore=0
- spamscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180136
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -236,67 +133,200 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-GENI QUP firmware loading is normally expected to be completed by a
-previous boot stage and is not required in production U-Boot builds.
-Add CONFIG_QCOM_GENI_FW_LOAD to make the late firmware loading path
-optional and disable it by default.
+In case we have the "reg" provided by the DTS, let's avoid probing
+to avoid "noises" on the i2c bus. Let's run a scan only on purpose
+when "mps,auto-probe" is requested.
 
-The option can be enabled for engineering and bring-up builds where
-loading GENI firmware from U-Boot is required.
+The scan notes on the mpq tests for the pmbus are irrelevant and they
+were using only for the mpq bringup.
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Signed-off-by: Vincent Jardin <vjardin@free.fr>
+
 ---
- configs/qcom_defconfig   | 1 +
- drivers/misc/Kconfig     | 9 +++++++++
- drivers/misc/qcom_geni.c | 2 ++
- 3 files changed, 12 insertions(+)
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index c52f619850d..9498583b97c 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -99,6 +99,7 @@ CONFIG_QCOM_HYP_SMMU=y
- CONFIG_MISC=y
- CONFIG_NVMEM=y
- CONFIG_QCOM_GENI=y
-+# CONFIG_QCOM_GENI_FW_LOAD is not set
- CONFIG_I2C_EEPROM=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index 44415f24ae1..8320fbe28e0 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -93,6 +93,15 @@ config QCOM_GENI
- 	  for providing a common interface for various peripherals like UART, I2C, SPI,
- 	  etc.
+ doc/develop/pmbus.rst             |   2 +
+ drivers/power/regulator/mpq8785.c | 113 ++++++++++++++++--------------
+ 2 files changed, 61 insertions(+), 54 deletions(-)
+
+diff --git a/doc/develop/pmbus.rst b/doc/develop/pmbus.rst
+index f5550541e83..efc9f9a95e5 100644
+--- a/doc/develop/pmbus.rst
++++ b/doc/develop/pmbus.rst
+@@ -532,6 +532,8 @@ The per chip quirks that carry over:
+   flag for this case.
+ * ``mps,vout-fb-divider-ratio-permille`` DT property maps to
+   ``VOUT_SCALE_LOOP`` write at probe time.
++* ``mps,auto-probe`` the chip decodes its PMBus address using a scan
++  to find ``MFR_ID = "MPS"``. Ignore ``reg``.
  
-+config QCOM_GENI_FW_LOAD
-+	bool "Load Qualcomm GENI peripheral firmware at late init"
-+	depends on QCOM_GENI
-+	default y
-+	help
-+	  Load firmware for GENI peripherals from the firmware partition
-+	  at late init. Disable if no GENI peripheral needs firmware
-+	  loading.
+ The quirks that do not carry over:
+ 
+diff --git a/drivers/power/regulator/mpq8785.c b/drivers/power/regulator/mpq8785.c
+index 72bfaa5bf8c..e8896d7ebad 100644
+--- a/drivers/power/regulator/mpq8785.c
++++ b/drivers/power/regulator/mpq8785.c
+@@ -11,8 +11,8 @@
+  * Hooks the shared pmbus_helper UCLASS_REGULATOR ops + adds the MPS
+  * specific identify (VOUT_MODE switch between LINEAR16 and DIRECT
+  * m=64 R=1 for the chip's "VID" mode), the MPS vendor extension
+- * (pmbus mps last|clear last|clear force), and ADDR_VBOOT auto
+- * promotion when the DT declared address fails the MFR_ID probe.
++ * (pmbus mps last|clear last|clear force), and an address scan
++ * ("mps,auto-probe") for the eight MFR_ADDR_PMBUS.
+  */
+ 
+ #include <command.h>
+@@ -320,39 +320,44 @@ static const struct pmbus_vendor_op mps_vendor_op = {
+ 		   "pmbus mps clear force  : force clear via MFR_CFG_EXT bit[6] (DESTRUCTIVE)\n",
+ };
+ 
+-static void mpq8785_identify_vout(struct udevice *i2c_dev)
++static int mpq8785_identify(struct udevice *i2c_dev)
+ {
+-	enum pmbus_data_format fmt;
++	u8 vout_mode = 0;
++	int ret;
+ 
+-	/*
+-	 * Let the shared helper read VOUT_MODE and pick the base format
+-	 * (the single source of truth for the bit layout). The MPS quirk:
+-	 * this family encodes VOUT in DIRECT with m=64 R=1 whenever
+-	 * VOUT_MODE reports VID *or* DIRECT -- override the helper's
+-	 * generic DIRECT m=1 / VID-unwired result in those two modes.
+-	 * LINEAR and IEEE754 keep the helper's selection unchanged.
+-	 */
+-	fmt = pmbus_regulator_identify_vout(i2c_dev, &mpq8785_info);
+-	if (fmt == pmbus_fmt_vid || fmt == pmbus_fmt_direct) {
++	ret = pmbus_read_byte(i2c_dev, PMBUS_VOUT_MODE, &vout_mode);
++	if (ret < 0)
++		return ret;
++	if (vout_mode == 0xff)
++		return -ENODEV;
 +
- config ROCKCHIP_EFUSE
- 	bool "Rockchip e-fuse support"
- 	depends on MISC
-diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
-index a62ae6a2478..b5c2a511ae7 100644
---- a/drivers/misc/qcom_geni.c
-+++ b/drivers/misc/qcom_geni.c
-@@ -563,7 +563,9 @@ static int qcom_geni_fw_initialise(void)
- 	return 0;
++	switch (vout_mode >> 5) {
++	case 0:
++		mpq8785_info.format[PSC_VOLTAGE_OUT] = pmbus_fmt_linear;
++		break;
++	case 1:
++	case 2:
+ 		mpq8785_info.format[PSC_VOLTAGE_OUT] = pmbus_fmt_direct;
+ 		mpq8785_info.m[PSC_VOLTAGE_OUT] = 64;
+ 		mpq8785_info.b[PSC_VOLTAGE_OUT] = 0;
+ 		mpq8785_info.R[PSC_VOLTAGE_OUT] = 1;
++		break;
++	default:
++		return -ENODEV;
+ 	}
++	return 0;
  }
  
-+#if IS_ENABLED(CONFIG_QCOM_GENI_FW_LOAD)
- EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, qcom_geni_fw_initialise);
-+#endif
+ /*
+- * The MPQ8785 datasheet revision letter changes which window the
+- * analog ADDR_VBOOT level resolves to. Boards have been observed at
+- * 0x10 (later die rev) versus the 0x20 the original driver assumed.
+- * If the DT declared address fails the MFR_ID probe at probe time,
+- * walk the three documented windows looking for an MPS responder.
++ * Address selection has two modes, chosen by the DT:
+  *
+- * Each window covers 16 consecutive 7 bit I2C addresses; the low
+- * nibble selects the chip's MFR_ADDR_PMBUS slot within the window.
++ *   default            "reg" is the address. follow the Linux driver.
++ *
++ *   mps,auto-probe     boolean. If set, "reg" is ignored, then
++ *                      scan for MFR_ID="MPS"
+  */
+-#define MPS_ADDR_VBOOT_WINDOW_SIZE	16
+-static const u8 mps_addr_window_starts[] = { 0x10, 0x20, 0x60 };
++#define MPS_ADDR_WINDOWS		8
++#define MPS_ADDR_WINDOW_SIZE		16
  
- static const struct udevice_id geni_ids[] = {
- 	{ .compatible = "qcom,geni-se-qup" },
+ static int mpq8785_probe_addr(struct udevice *bus, u8 addr,
+ 			      struct udevice **chip_out)
+@@ -376,12 +381,15 @@ static int mpq8785_probe_addr(struct udevice *bus, u8 addr,
+ static int mpq8785_scan_windows(struct udevice *bus, u8 *found_addr,
+ 				struct udevice **chip_out)
+ {
+-	unsigned int i, j;
++	unsigned int x, slot;
+ 
+-	for (i = 0; i < ARRAY_SIZE(mps_addr_window_starts); i++) {
+-		for (j = 0; j < MPS_ADDR_VBOOT_WINDOW_SIZE; j++) {
+-			u8 addr = mps_addr_window_starts[i] + j;
++	for (x = 0; x < MPS_ADDR_WINDOWS; x++) {
++		for (slot = 0; slot < MPS_ADDR_WINDOW_SIZE; slot++) {
++			u8 addr = (x << 4) | slot;
+ 
++			/* 0x00 is the PMBus all-call address, never a chip. */
++			if (!addr)
++				continue;
+ 			if (mpq8785_probe_addr(bus, addr, chip_out) == 0) {
+ 				*found_addr = addr;
+ 				return 0;
+@@ -419,36 +427,33 @@ static int mpq8785_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
+-	/*
+-	 * Verify the chip answers MFR_ID="MPS" at the DT declared
+-	 * address. If it doesn't, walk the documented ADDR_VBOOT windows
+-	 * looking for it (a die rev address shift). On a hit, replace
+-	 * priv->i2c_dev with the discovered chip handle and continue.
+-	 */
+-	{
+-		char id[PMBUS_MFR_STRING_MAX] = "";
+-
+-		ret = pmbus_read_string(priv->i2c_dev, PMBUS_MFR_ID, id,
+-					sizeof(id), true);
+-		if (ret < 0 || strncmp(id, "MPS", 3) != 0) {
+-			struct udevice *bus = dev_get_parent(dev);
+-			struct udevice *promoted;
+-			u8 found = 0;
+-
+-			if (mpq8785_scan_windows(bus, &found, &promoted) == 0) {
+-				printf("MPQ8785: DT addr 0x%02x silent, auto promoted to 0x%02x\n",
+-				       (unsigned int)dev_read_addr(dev), found);
+-				priv->i2c_dev = promoted;
+-			} else {
+-				printf("MPQ8785: no MPS responder found in 0x10..0x1f / 0x20..0x2f / 0x60..0x6f\n");
+-				return -ENODEV;
+-			}
++	/* mps,auto-probe: ignore the DTS "reg" address, scan */
++	if (dev_read_bool(dev, "mps,auto-probe")) {
++		struct udevice *bus = dev_get_parent(dev);
++		struct udevice *found_dev;
++		u8 found = 0;
++
++		if (mpq8785_scan_windows(bus, &found, &found_dev)) {
++			printf("MPQ8785: auto-probe: no MPS responder in 0x01..0x7f\n");
++			return -ENODEV;
+ 		}
++		if (found != (u8)dev_read_addr(dev))
++			printf("MPQ8785: auto-probe: MPS chip at 0x%02x, DT reg 0x%02x ignored\n",
++			       found, (unsigned int)dev_read_addr(dev));
++		priv->i2c_dev = found_dev;
+ 	}
+ 
+-	/* MPQ8785/MPQ8646 specific: refine VOUT format from VOUT_MODE. */
+-	if (chip_id == MPQ_MPQ8785 || chip_id == MPQ_MPQ8646)
+-		mpq8785_identify_vout(priv->i2c_dev);
++	/* VOUT_MODE sets the VOUT format, use it for the presence check. */
++	if (chip_id == MPQ_MPQ8785 || chip_id == MPQ_MPQ8646) {
++		ret = mpq8785_identify(priv->i2c_dev);
++		if (ret) {
++			struct dm_i2c_chip *chip = dev_get_parent_plat(priv->i2c_dev);
++
++			printf("MPQ8785: no usable chip at 0x%02x (VOUT_MODE: %d)\n",
++			       chip->chip_addr, ret);
++			return ret;
++		}
++	}
+ 
+ 	/* Apply mps,vout-fb-divider-ratio-permille if present in DT. */
+ 	fb_div = dev_read_u32_default(dev, "mps,vout-fb-divider-ratio-permille", 0);
+---
+base-commit: b8e0086b585791a771416ce51b58ce0097bc0b28
+branch: for-upstream/power-mpq8785-auto-probe-v1
+
 -- 
-2.34.1
+2.43.0
 
