@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADFF3C982DF
-	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 20:07:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FD75C982DD
+	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 20:07:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 363EF60F01;
-	Fri, 18 Sep 2026 20:07:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 188F360EE4;
+	Fri, 18 Sep 2026 20:07:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AZXCez4F0xsv; Fri, 18 Sep 2026 20:07:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org D5B4C60EF9
+ id AFse9phxVZpq; Fri, 18 Sep 2026 20:07:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 5E96D60EDF
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789762028;
-	b=gs3OfwqwAnPNO8D1IFSSthwbvIIlCCos3S1PJhGOaPbHO/grwhFpjM41wdv/0L6YLcET
-	 YcgHibPpd+bq4K9UlVXdI7/mN/P52FE1HFmPA0AO0Y6iw1foNdd2w0Iv8x9b+ehDa2FAB
-	 iQZoEy7IjqO8VIBQNoRvlugkBP4+GzuQsWnfyNAe2P1cqixGTBDBqJJZYPDtJRU1nOBUD
-	 sfodt4+ptpJC//sOoq1+C29Yv2P1saoySMcvkkdMJutotiFrun+8JXW2uuoTEUjGY7csH
-	 HiqSCOk67rTA+sHJdZcjVeeKbhq8GNAhuMfQO3UZMLCPdmebv8CJPll5RUvFkPlVGkQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789762031;
+	b=ZFjR2wVdGpumOMR+Sl2YAqr5Rs9MlwPJHxZyeNp6MAmJfLRRzHVsAJrcfN5nFfw7z9h9
+	 qcJr59XZ47jyMxjWuR8fwAITK+/2M4hoF1ySeDP73ZXRSpQZ7fYzL/D8YDPVYeWOfGm8J
+	 vO0Nb9GDfgSo1OgNMnP+07D70tWsS6YmKOQ+NcWtOYt3nx8SpVZbOXurh9yhx5eg2Qkiw
+	 caVU8BcPAWlSKst4m6aI6EORlopDqgtf1oxfQQCQs4m4J9psEPFubfVKIEUtD/f+bZM+A
+	 MTPLUbzBPvTSjMk6ugKwKblDFVC2+RrhIJ8iI4IazmzrPbJPgD8iPnBdR0kSYEITROg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789762028;
+	c=relaxed/relaxed; t=1789762031;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -30,158 +30,157 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
 	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=zR3I14j71t6x1teHeFxamvOtSjnGPn/TVQO4oH0ku5w=;
-	b=pOZcVFbrz53wcOrVXdfgTcRxemoodKH1Jp0Y552LMqz4iu6wp9xtM35J6jDnHt0PY2rN
-	 MHmL+bqQDQTJ1IQP5xe0ZyZt8E9t07jPVg+P87PuyG2sOhFQq/poofJJRIMKoTJJKfno4
-	 aKYSD5YHxyL6WyVvPUF41Bxc9W6R0AFKIDkXtea6swCi9X5kuOAuzrZWYGg5NBIKFoAC/
-	 z/zLidXZ8aSNYUs9ViDzNY0H4slnIRNDVpPB5Hxf3qWpOGQm+RlD7xUv9L+BE79AYWBiO
-	 zqk2+NcxN5cE8nkrv/jOHSTl01vOQu6LFbI6SidIGxaLs53dDeaxIdHmuWFo+pJNrxw==
+	bh=IKdL+LxXETN7ELPYBLVSvJn4gcjoU8QCWLHv7a/84dE=;
+	b=lS3rNYOATh4xJ2rUwTKCrqrEG9YAj1t18Y2IV0kXcN5GsKZf7H4npd4bN3qY2R0Kv4fX
+	 WsVg/Hc7+2GE0/UJNWxxtW5eXTCwhcTCjsPJaxK85FIHX7eZ8hY7lEyIMDzAWmOQS7CnA
+	 h5C6dafuZdQApUsYlhQVady5o7FCPzBFKFiNl3bsOOrvm6nyozJQbcNODH6sVNTiMdkIz
+	 fWHpmdhcBHA8N/pMRlxYYj1UYZJOsSyYmVZUrXv9YkuSCMiRkS6bLSDEq2BbmNnktqvJe
+	 TJuA5ro6KkQKeu4MpqVxw1SN/QVkKuzyU5gOsMAY1NYW3Mht/vJhTcBvZE+yXuBeePg==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789762028;
-	bh=zR3I14j71t6x1teHeFxamvOtSjnGPn/TVQO4oH0ku5w=;
+	d=lists.u-boot-project.org; s=default; t=1789762031;
+	bh=IKdL+LxXETN7ELPYBLVSvJn4gcjoU8QCWLHv7a/84dE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=umYvUOpYA6ie+h2KLXfnBeyTu/2CNIkwxKTR70eflMOK/Mx8lHMFnNDctbXIZVkqD
-	 CAOfeTiKlRzZPDDPA+WZcfb475/z4sJfoorWEObyDhpMqua53VTCCgExYq5ve5lH7N
-	 c+7L5HX3uBUWBvUiVN96f4cUqOO5XyIFOrI0xLO+6iwin5yE3ZUKobdhL9VNkyG6km
-	 eUYro0Ogo9GbjARihFPIhVkvgYrGBb81rBf877gLIXffO9u05K8lqPn7lCL7uQcvh+
-	 Zouc3D4VJuv+N/C57SEddj2uoitq0sbmjqe47Hm5BJddvv+d7vdzaaDKyPfvRX4B4K
-	 FmH836W073wBw==
+	b=hnRlLMzfNlxbWzT9eJsviDYNGq/X1vFuc/N9HlO4nlOFru5xg/cvG47vAGGLuAkXZ
+	 9H4QXC83JZbjgmKOQWMZZQ4W9o6i7LLV7ZA1BjVeCZBt7r6tCVfPmC2LkqSgVTaQ8C
+	 /jRwaZzZIboD8XZRz5W7/lJdhAbs4DgBGxpyP/WUtIbfv3eMAuHfbrmXRcGt40hrss
+	 FV2/1hunw407D5g9QMow3KoI/E82QkBcpgHtE2AmmPUUkKm2q8Tt1ofk/maZudABmm
+	 S8T0oc5E4pkwwG4WX5vNxX2Cn05UgsVpNKf8s3sTlwOYlKuiWFfjVUvB01qy/kvit5
+	 oMYBTW8uAchtw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D5B4C60EF9;
-	Fri, 18 Sep 2026 20:07:07 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id CC0DC13D
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:07:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5E96D60EDF;
+	Fri, 18 Sep 2026 20:07:11 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4BD46224
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:07:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AD77081344
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:07:00 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 32B8940446
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:07:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Y2CN8JmlFQsm for <u-boot@lists.u-boot-project.org>;
- Fri, 18 Sep 2026 20:06:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 3B7A781301
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789762017;
- b=X7UCbJljW3BRnonYe2CxVQ6JqsJtGfDYFEWUG+lJLtYN1lMDOmX4fYLx2Ch8vnSPc381
- 4hAHqPFMT6ShC3H1GIbue+S5fGvW9rp8ZBZBxc/svM3cxxqooeWPwxb/q/VsPzDGVTs2c
- 5/v2PgfjQg3XVsD3y8RLugjCHMLcDlg+3UsRFOOndgCYY1ht9JQXR6IhRMhlJyVPhk+A6
- NPAsLF8NOPBBZF3EWz99Yx91TA/YjbmLViqZHKIEa7Jm0k1uMYsBIldaEchlX5nxRt3D6
- ZBz4ydLIfke2bZF9CaxWCauD+A/Q+NnM2sF28mm7HyN/rQkiuxAkje3nAjspAmV6KOQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xwuyYGRIsMej for <u-boot@lists.u-boot-project.org>;
+ Fri, 18 Sep 2026 20:07:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 38D6E400F8
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789762023;
+ b=ryYTZaNGtugjkfBRmIAeB3ADq/LavACfBIxP+1NUNYUvTcYxgh3S7uwtD9zKYkOVuZf7
+ 6eC/avO+soEtGkmjFgBCUdkq18hdJRfBDh1VBZizpN9Wj41X53OVNeJYmxPLcHk0mceeZ
+ ZMB5sG3Bl5uSISqsG/33lxFfHBsKb9mHx6vAogKv9+pULsY/ZZQ9YiH0xKk3yzKGSl4/V
+ xVqKcAncj477zYVw58PJ5vtMAWb0y5QJrQi8tbo9ycNhc8fmJwn2vU3GHjhtl+YCQZKVP
+ 3WHTHrbvr/BTiEujG/ZkRTFdA4OQ9jvzgMICKSBPHLfM436TXqnyxz8oFIlLhovsU9w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789762017;
+ c=relaxed/relaxed; t=1789762023;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
  X-Received:X-Received:Received:From:To:Cc:Subject:Date:Message-ID:
  X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
- X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
- X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=zR3I14j71t6x1teHeFxamvOtSjnGPn/TVQO4oH0ku5w=;
- b=aQCjz/u2qgAPVCLMlGupqymy/V9HnXEdAgSkGjCqkpobeqDooUD6OFCF2Zbz61FK8itr
- Abjt9+lVPfFTcUyp7e+SuChT73t7bvfFsJ0q1rRZeenEk1w9FzLzt1hqiwmiZOC0fH96S
- dtfNktebuzeEhTjTVUgdTmWtksTA47Nq/BXe+uBdsFqEorDIdQFPaMEJ8AjB3LjxoxdfD
- smg0OSJwNumOqfukAqHEjZbHaocV183/vKzbqMcJt+Aheh5GV8/+2MiFVeKHsYnS7OAvd
- FhrOQMhmkca5NnXEJX5QIWhVK46kGpcMKY28XGfRAbxLS+yEoHBTBxE92AqbOzUnLvg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+ X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
+ X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=IKdL+LxXETN7ELPYBLVSvJn4gcjoU8QCWLHv7a/84dE=;
+ b=sve58DVjKrCeZFC8TSQeuewUvnM5FbDprGgNQYXFD+mrq4maWeNeE7ryfmppjQ7xA9io
+ P2emIYaRGwK+E6hDAa+jxQ8LGQf5js/s9y6h+OFk4Y4m50edevxI9XfT/CvUjyFfRRwMd
+ Exv1n5LDyyoAYJee7Ue77W23duzahXWXhgI2e66r4XfeAiR23lrvDyFrlxKDOeb6JisRJ
+ 8O2sJjj710PfKsJIiL7jIFbreqYvwDSGlg3zWULfqNC8GIKQqGYIZjbqKmJHt6ijlMCcQ
+ 8g/bCJsmQjD6zgfG0fk05fEG9SxejPq6k8PfB6Erf6Gm78xEHeLK4ihVdwDmHDPAYhQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=oss.qualcomm.com; 
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=VjoFZT5F; 
+ header.s=qcppdkim1 header.b=d5rVXfhn; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=PHwY7hPy; 
- arc=none smtp.remote-ip=205.220.168.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com; envelope-from=jorge.ramirez@oss.qualcomm.com;
+ header.a=rsa-sha256 header.s=google header.b=gx4zIse0; 
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=jorge.ramirez@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=VjoFZT5F; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=PHwY7hPy
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3B7A781301
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:06:55 +0000 (UTC)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=d5rVXfhn; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=gx4zIse0
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 38D6E400F8
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:07:02 +0000 (UTC)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68IGoFMZ4103586
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:06:55 GMT
+ 68IGo2Ov1483067
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:07:01 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=zR3I14j71t6
- x1teHeFxamvOtSjnGPn/TVQO4oH0ku5w=; b=VjoFZT5FtzqO48QyrENf8c3V414
- bvl5f+mbyf/zck+JYdvJX7/YMgG3+O3OvSi8cSYRwSMoq5/vaYIFJSV/qv4NlKqJ
- lgjRkqL5V8ZAZkWdRD1owRzDx/zX7Moj4Otc0BAQptXUr1+swSBDzpo/viuwt+af
- tZa/UZ7OdTymu5ikq1pqMC7pgQ/bT0xwR2H8Nf87kRFgcStI/2RZtG0te/QszO/b
- JBH+lqMA8t2T7zlttuoRFytqh4lxxZkJPLMw7lh3KJLaCHQFxJQlprj8Kfydw+t2
- nhSfgCSJBrrDuc9api1DIrFVlCxK182yT1QB2pnZJOF5MGB1WaMKjMBmXUA==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gs37djdm9-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=IKdL+LxXETN
+ 7ELPYBLVSvJn4gcjoU8QCWLHv7a/84dE=; b=d5rVXfhn0Th0sLtGipaFr8YQPzJ
+ +o6+z5ooucUCtUsK6h35AHQ2xF8ZLJVyDMQUNgWsJiRUxJSeS0eqKOIhbtRfVRe0
+ 4idL+eX5x5k3MCBYt4qOkNSKnXfvgiMtSFsheGoLieLkyH/3kAgX2c2+gRwyx/8z
+ bPRPdJ/cUsyeEX60LNahrNQqnmufW6Q2djgjsnhCAqGRK2/K9W2ymR2fjDrgf/Pp
+ eFv2Mp6qXXIGFPtIxLZcFLu4hl0+5shfckg7dKRAKxv8HYZ1mgpFxYGiW2X4Vr8q
+ NJYmyjzlbm7YGzyUSpjbNMtXCd+6jkUjVMKJq3aCtp+WiB+n6lE6qQ1pElQ==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gs7jk9bfc-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:06:55 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-93a01d1d1b6so172837085a.1
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 13:06:55 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 20:07:01 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-9393ac4961fso171850985a.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 13:07:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1789762014; x=1790366814;
+ d=oss.qualcomm.com; s=google; t=1789762021; x=1790366821;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=zR3I14j71t6x1teHeFxamvOtSjnGPn/TVQO4oH0ku5w=;
- b=PHwY7hPyduGZ10h1puRCi8SFdLAb8Mv1u8dczSi0RARgyA2FWXtpqOWpjwge1iDVDV
- ACSrEcZfwPlR57Za33Tn2t6DtPMjUTMy3yxzNfID6jmJ3mGc5JDt4uWGORuG+B4U2xL/
- TbtHh4KfG5CO35eSANao8po93OJgaM8KeVdlebzdPSEsNVFi+PnA1TDSj8vXODUiMfav
- 5QMA2mhWRbaCRb77ktmyL55lCp2oF/X9CWF5EaMdtd/jVaMRXw01T/fCjcq0V4WIKNCw
- 5PJuiOCu2YOViG70s0J6+e2TBv5LNqKfuOSHrKN0SmYiktZozITgfUCY1c0IlKLRN5oW
- Kgzw==
+ bh=IKdL+LxXETN7ELPYBLVSvJn4gcjoU8QCWLHv7a/84dE=;
+ b=gx4zIse0Y+nKaeJl0ZLCDRDCwoWWZiIUHquw1+9fxrTm+e6fsmErPiBvnlaienIyk6
+ j3VdZmSkf25NqpUYFDJzGQYL4FJU9dhXC/+eoxbi4NfpqOMv8+DExwN1UuEkihp/uOcM
+ 7X8uHLipROkedm/f9noIiP6DqjyuOGQUwcpZfZMz+idcv46vmlqiN72EkfnjldEAR6FE
+ AGffthmsEzyWrg9JwmMKz/4wZZwotWzk09Kh/hVuDf6zz2Y6g3Gt0oa8tEHl4cQWiJVY
+ f+cTZN5FD8b/R/pFH073LV6wAboFK1P84kg7oZolDLeDMA7DSVXVNQMu345Bivh8Kjma
+ wW+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789762014; x=1790366814;
+ d=1e100.net; s=20260707; t=1789762021; x=1790366821;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=zR3I14j71t6x1teHeFxamvOtSjnGPn/TVQO4oH0ku5w=;
- b=oI1HMh1u06gsbiRnZOGbzxLbHIRhVL1RExIl0GmiiLrNDwUlUVhoWUiyWijYzhOUOY
- 3QB/G/lNZBezOACc2sBQT7jT+cDglHAIymNcIT7ZHuuVn19pj331dLG60QE8P09szbC8
- n+Qjjy7pGVtRyyp5P3XeQl62+rNfIQ6busnCWT3psvYbhVX1s21WV033dd603dfGli14
- u3dgu4Jf5KJIaGGw92o/XWRtcfwb71KR1sn2NLOIROihvI0Us9Fza2VMvwPDhzyzYxxD
- fpMEEYC+crIWCgFkNMy5hfE8VDcAgTHhkiTVegIzTm1CEXS4yxPKPrB1Lw3DZXxgYviN
- YioA==
-X-Gm-Message-State: AFuF++ljPqd2GOH3l9AQD1NAnDofvmhLbF4NN/MiQe0js4H3dWR6wZ1o
- lz7JTZ3tVqbusPRJD33cyuPb/o4TtjpObMHYZE9IC2ngicTFBvH0vTFnNUrKqGHa3vr9kiKnyyr
- dwC+AplHKV+0FcbbCGnpyqn9UAhPPeiogsaEeIySreiTVKqvaoDvv+WKb0X2udmlTvD60lvo=
-X-Gm-Gg: AYBFou3WCh+cR206QsLgKnfGBw8fT6LPN8wT3ahhQYif3QY0+/bk9EaswPKUGbiNZfS
- ila3FTAGGOcvKUx9gHc+9vgXxjDDb0r1VgHsYEDxSAaG9mbyb/aKcUjNKgqdjmrMo6FKK/1/m5R
- A3hYC6mH+kSfttJQoMsLuUdz4Gm5taDgXIkdXvQwfxkefGzmZvKOxPoc2ARteu50cmRiJwUBqal
- 74OHtUQNpDx6DBdML2eieiPc1heyYi3gSidTRK+RH92k07AXzUfwCN7dpNKPByGlZtRKC319Rit
- r6bwfiYvIQU8/13idFzwZHUTeOwqOcg2IASjcqizEukP/MIECoUT8NHHm/b0hiBxGkGvRntGwJU
- Uq9kvmeVRbywIcuuSZCthZceDrnsNZMvLVijcuzqQ5KB6x0w=
-X-Received: by 2002:a05:620a:bcb:b0:936:69dc:aedf with SMTP id
- af79cd13be357-93bdc698d7cmr594002585a.16.1789762014132; 
- Fri, 18 Sep 2026 13:06:54 -0700 (PDT)
-X-Received: by 2002:a05:620a:bcb:b0:936:69dc:aedf with SMTP id
- af79cd13be357-93bdc698d7cmr593997385a.16.1789762013615; 
- Fri, 18 Sep 2026 13:06:53 -0700 (PDT)
+ bh=IKdL+LxXETN7ELPYBLVSvJn4gcjoU8QCWLHv7a/84dE=;
+ b=sg2tq7HCjOvhPSD5abfJwyLJA6nDIHaTbDeZ2ye8uiWicgK8rrmNOha0TnFKIMBX8N
+ dm8ikFZ1EfgFGbGM+qJGEXfOs/RNQBSQzItsXQHLBm1n0vld9AliC+7z8OGzBWA5EP2U
+ SC+EWZug69TyQwP6WvRWB11yHteGV1A1uQ1p7wYhQytEJQLhSzLkta3yrWLedE0eb2Pf
+ kkjN5a2hMXcOdb3ltjd55uVnClCrsiUP7x+rn2F3p1sSf4KbujesTxT5YXZVlKTMWHGv
+ wDaAV/1O1A6JZSPa/kLUbQzqkZ251v6YwJTk+qXvhtx/dm/VgoUHSW37GEu770JIm87v
+ Di7g==
+X-Gm-Message-State: AFuF++mSz/8kScXxXeV79PYkC+Z+p7hu5k13m9HcAM892oReQDZxU42J
+ wUs24rfbNMJhhw21xSQ6OLswkPTdsTL3twAlYr45t7Yln50Er1lgtOLZODplwB7A7UkIdoe4q14
+ xqy/C98XPsH25nlt7O11B36eax/RG6Dpg3383t1TmTVnuNZyBNTeSzUNAHPhd+nLans+umFE=
+X-Gm-Gg: AYBFou2tlP0wP5i+YWuGidNFrq2K6X9Nuaeb6hnVYTyIQnFCL7rPfBhMJnmPZB34mjD
+ TZzuOfPBzAGsYhkXOj8/xIpyqSqp4FQC+rybchvEkmNSmplScPxrEPLZL27rbMTkIzB5TjzEpPr
+ qZ3AYE/KWrSX9fy37yD1IkmBdqEfOSVV/CE5aosG8TYqSnzjIEQpJL+F3rPvUpLT431xHuX+qdb
+ F5+ujNfVzlAsJFXFbDZL+/FMjYE/A1F6xCgjVg9UG2mIyL0vRDhwhOTQFd+ogRGM8wKikK8SSy5
+ p3LYx65c1hG4nf4k4gjdVW1UkkuaTB+QfF+3oZ6Bt/dlq16yvi19xk4tMhp45HmmA0xsK6XWnYR
+ 8b2eSNe0o5ladk0yWW4JF90pI8pUum7AiMXDIZ78yEeB3hVA=
+X-Received: by 2002:a05:620a:470e:b0:93b:c6ec:7825 with SMTP id
+ af79cd13be357-93bdc9d55e3mr531986385a.47.1789762020713; 
+ Fri, 18 Sep 2026 13:07:00 -0700 (PDT)
+X-Received: by 2002:a05:620a:470e:b0:93b:c6ec:7825 with SMTP id
+ af79cd13be357-93bdc9d55e3mr531980085a.47.1789762020191; 
+ Fri, 18 Sep 2026 13:07:00 -0700 (PDT)
 Received: from trex (250.red-81-38-139.dynamicip.rima-tde.net. [81.38.139.250])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48724596604sm1136798f8f.30.2026.09.18.13.06.51
+ ffacd0b85a97d-48724596604sm1136798f8f.30.2026.09.18.13.06.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Sep 2026 13:06:52 -0700 (PDT)
+ Fri, 18 Sep 2026 13:06:59 -0700 (PDT)
 From: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
 To: jorge.ramirez@oss.qualcomm.com, dlechner@baylibre.com, trini@konsulko.com, 
  jens.wiklander@linaro.org, ilias.apalodimas@linaro.org,
@@ -191,40 +190,41 @@ To: jorge.ramirez@oss.qualcomm.com, dlechner@baylibre.com, trini@konsulko.com,
  jbx6244@gmail.com, marek.vasut+renesas@mailbox.org,
  sumit.garg@oss.qualcomm.com, jens.wiklander@oss.qualcomm.com
 Cc: u-boot@lists.u-boot-project.org
-Subject: [PATCH v5 3/6] ufs: add RPMB transport over SCSI SECURITY PROTOCOL
-Date: Fri, 18 Sep 2026 22:06:35 +0200
-Message-ID: <20260918200641.2286077-4-jorge.ramirez@oss.qualcomm.com>
+Subject: [PATCH v5 6/6] optee: implement the RPMB subsystem interface for UFS
+Date: Fri, 18 Sep 2026 22:06:38 +0200
+Message-ID: <20260918200641.2286077-7-jorge.ramirez@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260918200641.2286077-1-jorge.ramirez@oss.qualcomm.com>
 References: <20260918200641.2286077-1-jorge.ramirez@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDI5MCBTYWx0ZWRfX4Q28FS2TIo1c
- cNHp0IjqG2pihMKR8gAMhH/gGVx5d2b0RYjioNShDD6SY6W2RqChUOjPRURnCPPAsu+uxmfbt6v
- qAkWBcqNUhXbGp+ArdSy/kP4YUGB0n0=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDI5MCBTYWx0ZWRfXySZBFzrYyr3z
- yhqtUR/HbxjAauFe68rave+5D+k2ClDm6man6jENweqAQt3tjiiPErEGRwlqLXorb7xGXIpbf+E
- b2eS4FnijKnR7Q7UeGJM9XZBLQOr9RTm7XN9vddKfTJV0dcqOF/XdVEOITJD8adqAtyJmf0gA+h
- HoyZPP5fYzLlFeDX2Ljg62gRYVKMmI/1ZBgN+b4Eiwlj7sMrdzWnxSzMvypZcbackN9YPnaCL0P
- HI1wcEOodaNHKTaVZ5WssiqwV+Nn4Zxt/BeG8mBfF5sU+CcUvbOEeHaOLIpfORGh4XLLDx2HO6/
- 2ZFKR/+ewy+8kD9moq9AGXRshmG9XChETEeA3v5sdhNUGlW8yTtgCMous3pSxvWdnWloAnjF5T4
- svocI+AtGQfTRB+0PisDKw8Gyfc8Q36KPQ9TxH6ex4c9vrTyDW2iDt1aHree8GDGd7dPsavWSrz
- rTf4nvNEQ6d3btzMrZA==
-X-Proofpoint-GUID: WCdDxlxNXl-Hwbdr-Kj4cQFQHl6fALlt
-X-Proofpoint-ORIG-GUID: WCdDxlxNXl-Hwbdr-Kj4cQFQHl6fALlt
-X-Authority-Analysis: v=2.4 cv=R+mWitRX c=1 sm=1 tr=0 ts=6aad99df cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=N2KLPU99T7rsMuN2xAoQUA==:17
+X-Proofpoint-ORIG-GUID: zotK4sawD797qS-GeoxuRIYhThQPXKRA
+X-Proofpoint-GUID: zotK4sawD797qS-GeoxuRIYhThQPXKRA
+X-Authority-Analysis: v=2.4 cv=FeSiV5+6 c=1 sm=1 tr=0 ts=6aad99e5 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=N2KLPU99T7rsMuN2xAoQUA==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=opyxpeFzTCIEhlyN3soA:9 a=O8hF6Hzn-FEA:10 a=NFOGd7dJGGMPyQGDc5-O:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
+ a=4OB2SniIEselFtn8B8AA:9 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDI5MCBTYWx0ZWRfX11jfjk0pjZLD
+ tMKQLTScTfqJBlvcyyi6DlUG/YuAZRw6PmHG3WbudOmNb5ZsBwxhV4A2zS926jeptOT0YOAbpwh
+ 6viV61EsUUjdop64mXF/dGL9rjBAYo4rjPrw7IFX9SJV4/d5Ly8r/s49yAwag5wr38OvuoI1iM8
+ 4nIzIUq5XkbkWO4TNqo2AXxfkS/2RKri3kBnZkux/MpRMLNx83A50BBGjVhHInW6AuVIznFp+7k
+ eSg22ufxkwKy3dR5YNkAkFiKOGG7ybYq6HRECDITbmpXkd4t2MiRD+/6Bm2LpKjq+wzNU2agWsQ
+ 2gVtKlvccuno7zjjQfN3lQphTJVIfHQODdexXYnC+iiR1hNg83Y1kfwybkZ0T3ZDZuDhcIKFqJ7
+ 6HWTb6ds/NGoxn+HX0z48T9fJgnpILklXXY1DWxlekWsCNHcZyJrl+VM784Qys2+aA2PJJv5tPL
+ BZk8yzYoWui9N372Xwg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDI5MCBTYWx0ZWRfX24B4TeynHd2c
+ /3pP/mGL2gPH1LI4d4rznGXOUh/xwG5V1WqbmGIUnUKDp3pieflQz/n3Ite5FmPAlQWS1Rtwm/S
+ zDJIsW6TF9bHQAodL6vGX9DrNAb1M1A=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-18_05,2026-09-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 bulkscore=0 impostorscore=0 clxscore=1015
- spamscore=0 suspectscore=0 malwarescore=0 priorityscore=1501 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180290
+ priorityscore=1501 lowpriorityscore=0 bulkscore=0 impostorscore=0
+ suspectscore=0 clxscore=1015 spamscore=0 malwarescore=0 adultscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609180290
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -238,291 +238,304 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-OP-TEE secure storage (CFG_RPMB_FS) needs RPMB, but on UFS-only platforms
-with no eMMC the OP-TEE RPMB supplicant cannot reach the device's RPMB
-Well-Known LUN: UFS exposes RPMB through SCSI SECURITY PROTOCOL IN/OUT
-rather than an eMMC-style partition. Add that transport so RPMB-backed
-secure storage works on UFS platforms.
+The legacy RPMB supplicant assumes an eMMC device and derives the key
+from an eMMC-shaped device ID, so it can never reproduce the key Linux
+derives for a UFS device. Secure storage on UFS-only platforms instead
+needs the transport-agnostic RPMB subsystem interface, through which the
+normal world describes the real RPMB device to OP-TEE.
+
+Add a UFS backend for it so OP-TEE derives a key matching Linux and can
+use RPMB secure storage on UFS. eMMC keeps using the legacy interface.
 
 Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
 ---
- drivers/ufs/Kconfig      |  10 +++
- drivers/ufs/Makefile     |   1 +
- drivers/ufs/ufs-rpmb.c   | 167 +++++++++++++++++++++++++++++++++++++++
- drivers/ufs/ufs-uclass.c |   6 +-
- drivers/ufs/ufs.h        |   7 ++
- include/scsi.h           |   2 +
- include/ufs.h            |   4 +
- 7 files changed, 194 insertions(+), 3 deletions(-)
- create mode 100644 drivers/ufs/ufs-rpmb.c
+ drivers/tee/optee/Makefile               |   1 +
+ drivers/tee/optee/optee_msg_supplicant.h |   8 ++
+ drivers/tee/optee/optee_private.h        |  41 +++++++
+ drivers/tee/optee/rpmb_ufs.c             | 141 +++++++++++++++++++++++
+ drivers/tee/optee/supplicant.c           |   9 ++
+ drivers/ufs/Kconfig                      |   8 ++
+ 6 files changed, 208 insertions(+)
+ create mode 100644 drivers/tee/optee/rpmb_ufs.c
 
-diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-index 6dffdc00b32..a0067b1f203 100644
---- a/drivers/ufs/Kconfig
-+++ b/drivers/ufs/Kconfig
-@@ -92,4 +92,14 @@ config UFS_TI_J721E
- 	  This selects the glue layer driver for Cadence controller
- 	  present on TI's J721E devices.
+diff --git a/drivers/tee/optee/Makefile b/drivers/tee/optee/Makefile
+index d0c7f8dfb12..f2af10999a9 100644
+--- a/drivers/tee/optee/Makefile
++++ b/drivers/tee/optee/Makefile
+@@ -4,3 +4,4 @@ obj-$(CONFIG_OPTEE) += core.o
+ obj-y += supplicant.o
+ obj-$(CONFIG_DM_I2C) += i2c.o
+ obj-$(CONFIG_SUPPORT_EMMC_RPMB) += rpmb_emmc.o
++obj-$(CONFIG_SUPPORT_UFS_RPMB) += rpmb_ufs.o
+diff --git a/drivers/tee/optee/optee_msg_supplicant.h b/drivers/tee/optee/optee_msg_supplicant.h
+index 963cfd47824..b720d5d7b3f 100644
+--- a/drivers/tee/optee/optee_msg_supplicant.h
++++ b/drivers/tee/optee/optee_msg_supplicant.h
+@@ -152,6 +152,14 @@
+  */
+ #define OPTEE_MSG_RPC_CMD_I2C_TRANSFER 21
  
-+config SUPPORT_UFS_RPMB
-+	bool "Enable UFS RPMB (Replay Protected Memory Block) support"
-+	depends on UFS && OPTEE && !SUPPORT_EMMC_RPMB
-+	help
-+	  Route OP-TEE RPMB requests to the UFS RPMB Well-Known LUN using
-+	  SCSI SECURITY PROTOCOL IN/OUT commands. Required for OP-TEE secure
-+	  storage (CFG_RPMB_FS) on UFS-based platforms that have no eMMC.
-+	  The OP-TEE supplicant handles a single RPMB transport, so this is
-+	  mutually exclusive with the eMMC RPMB supplicant (SUPPORT_EMMC_RPMB).
++#define OPTEE_MSG_RPC_CMD_RPMB_PROBE_RESET	22
++#define OPTEE_MSG_RPC_CMD_RPMB_PROBE_NEXT	23
++#define OPTEE_MSG_RPC_CMD_RPMB_FRAMES		24
 +
- endmenu
-diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
-index e7f3c1d30c4..d60440ca119 100644
---- a/drivers/ufs/Makefile
-+++ b/drivers/ufs/Makefile
-@@ -13,3 +13,4 @@ obj-$(CONFIG_UFS_RENESAS) += ufs-renesas.o
- obj-$(CONFIG_UFS_RENESAS_GEN5) += ufs-renesas-rcar-gen5.o
- obj-$(CONFIG_UFS_ROCKCHIP) += ufs-rockchip.o
- obj-$(CONFIG_UFS_TI_J721E) += ti-j721e-ufs.o
-+obj-$(CONFIG_SUPPORT_UFS_RPMB) += ufs-rpmb.o
-diff --git a/drivers/ufs/ufs-rpmb.c b/drivers/ufs/ufs-rpmb.c
++#define OPTEE_RPC_SHM_TYPE_APPL		0
++
++#define OPTEE_RPC_RPMB_UFS		1
++
+ /*
+  * Was OPTEE_MSG_RPC_CMD_SQL_FS, which isn't supported any longer
+  */
+diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
+index 1f07a27ee4b..2888257aefe 100644
+--- a/drivers/tee/optee/optee_private.h
++++ b/drivers/tee/optee/optee_private.h
+@@ -9,6 +9,17 @@
+ #include <tee.h>
+ #include <log.h>
+ 
++#ifdef CONFIG_SUPPORT_UFS_RPMB
++/**
++ * struct optee_private - OP-TEE driver private data
++ * @rpmb_next_region:	next UFS RPMB region to report on PROBE_NEXT
++ * @rpmb_cur_region:	UFS RPMB region selected by the last PROBE_NEXT
++ */
++struct optee_private {
++	unsigned int rpmb_next_region;
++	unsigned int rpmb_cur_region;
++};
++#else
+ /**
+  * struct optee_private - OP-TEE driver private data
+  * @rpmb_mmc:		mmc device for the RPMB partition
+@@ -22,6 +33,7 @@ struct optee_private {
+ 	int rpmb_dev_id;
+ 	int rpmb_original_part;
+ };
++#endif
+ 
+ struct optee_msg_arg;
+ 
+@@ -60,6 +72,35 @@ static inline void optee_suppl_rpmb_release(struct udevice *dev)
+ }
+ #endif
+ 
++#ifdef CONFIG_SUPPORT_UFS_RPMB
++void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
++				      struct optee_msg_arg *arg);
++
++void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
++				     struct optee_msg_arg *arg);
++
++void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
++				 struct optee_msg_arg *arg);
++#else
++static inline void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
++						    struct optee_msg_arg *arg)
++{
++	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
++}
++
++static inline void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
++						   struct optee_msg_arg *arg)
++{
++	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
++}
++
++static inline void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
++					       struct optee_msg_arg *arg)
++{
++	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
++}
++#endif
++
+ #ifdef CONFIG_DM_I2C
+ /**
+  * optee_suppl_cmd_i2c_transfer() - route I2C requests to an I2C chip
+diff --git a/drivers/tee/optee/rpmb_ufs.c b/drivers/tee/optee/rpmb_ufs.c
 new file mode 100644
-index 00000000000..e6e0b2aec33
+index 00000000000..3e54a1a37d7
 --- /dev/null
-+++ b/drivers/ufs/ufs-rpmb.c
-@@ -0,0 +1,167 @@
++++ b/drivers/tee/optee/rpmb_ufs.c
+@@ -0,0 +1,141 @@
 +// SPDX-License-Identifier: GPL-2.0+
++
 +#include <dm.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <scsi.h>
++#include <tee.h>
 +#include <ufs.h>
-+#include <asm/cache.h>
-+#include <asm/unaligned.h>
-+#include <linux/errno.h>
-+#include <linux/string.h>
-+#include "ufs.h"
 +
-+#define RPMB_REQ_KEY		1
-+#define RPMB_REQ_WCOUNTER	2
-+#define RPMB_REQ_WRITE_DATA	3
-+#define RPMB_REQ_READ_DATA	4
-+#define RPMB_REQ_STATUS		5
++#include "optee_msg.h"
++#include "optee_msg_supplicant.h"
++#include "optee_private.h"
 +
-+#define RPMB_FRAME_SIZE		512
-+#define RPMB_FRAME_REQ_OFFSET	510
-+
-+#define UFS_RPMB_UA_RETRIES	3
-+
-+#define SEC_PROTOCOL_UFS		0xEC
-+#define UFS_RPMB_SEC_PROTOCOL_ID	0x01
-+
-+static u8 ufs_rpmb_sense_key(const struct scsi_cmd *pccb)
++static int optee_rpmb_get_dev(struct udevice **scsi_devp)
 +{
-+	const u8 *sense = pccb->sense_buf;
-+
-+	if (!pccb->sensedatalen)
-+		return SENSE_NO_SENSE;
-+
-+	/* fixed (0x70/0x71) vs descriptor (0x72/0x73) sense format */
-+	if ((sense[0] & 0x7f) == 0x72 || (sense[0] & 0x7f) == 0x73)
-+		return sense[1] & 0xf;
-+
-+	return sense[2] & 0xf;
-+}
-+
-+static int ufs_rpmb_secprot(struct udevice *scsi_dev, unsigned int region,
-+			    u8 opcode, void *buf, unsigned int nframes,
-+			    enum dma_data_direction dir)
-+{
-+	u16 spsp = (region << 8) | UFS_RPMB_SEC_PROTOCOL_ID;
-+	u32 len = nframes * RPMB_FRAME_SIZE;
-+	struct scsi_cmd pccb;
-+	void *dma_buf = buf;
-+	void *bounce = NULL;
-+	int retries;
-+	int ret = 0;
-+
-+	if (!IS_ALIGNED((uintptr_t)buf, ARCH_DMA_MINALIGN)) {
-+		bounce = memalign(ARCH_DMA_MINALIGN,
-+				  ALIGN(len, ARCH_DMA_MINALIGN));
-+		if (!bounce)
-+			return -ENOMEM;
-+		dma_buf = bounce;
-+		if (dir == DMA_TO_DEVICE)
-+			memcpy(bounce, buf, len);
-+	}
-+
-+	memset(&pccb, 0, sizeof(pccb));
-+	pccb.lun = UFS_UPIU_RPMB_WLUN;
-+	pccb.cmd[0] = opcode;
-+	pccb.cmd[1] = SEC_PROTOCOL_UFS;
-+	put_unaligned_be16(spsp, &pccb.cmd[2]);
-+	pccb.cmd[4] = 0;
-+	pccb.cmd[5] = 0;
-+	put_unaligned_be32(len, &pccb.cmd[6]);
-+	pccb.cmd[10] = 0;
-+	pccb.cmd[11] = 0;
-+	pccb.cmdlen = 12;
-+	pccb.pdata = dma_buf;
-+	pccb.datalen = len;
-+	pccb.dma_dir = dir;
-+
-+	for (retries = UFS_RPMB_UA_RETRIES; retries > 0; retries--) {
-+		ret = scsi_exec(scsi_dev, &pccb);
-+		if (!ret)
-+			break;
-+
-+		/*
-+		 * A power-on or reset UNIT ATTENTION is a transient
-+		 * condition the device clears once it has been reported,
-+		 * so retry it. Any other failure is final: stop and
-+		 * report it.
-+		 */
-+		if (ufs_rpmb_sense_key(&pccb) != SENSE_UNIT_ATTENTION)
-+			break;
-+	}
-+
-+	if (bounce) {
-+		if (!ret && dir == DMA_FROM_DEVICE)
-+			memcpy(buf, bounce, len);
-+
-+		free(bounce);
-+	}
-+
-+	return ret;
-+}
-+
-+static int ufs_rpmb_send(struct udevice *scsi_dev, unsigned int region,
-+			 void *frames, unsigned int nframes)
-+{
-+	return ufs_rpmb_secprot(scsi_dev, region, SCSI_SECURITY_PROTOCOL_OUT,
-+				frames, nframes, DMA_TO_DEVICE);
-+}
-+
-+static int ufs_rpmb_recv(struct udevice *scsi_dev, unsigned int region,
-+			 void *frames, unsigned int nframes)
-+{
-+	return ufs_rpmb_secprot(scsi_dev, region, SCSI_SECURITY_PROTOCOL_IN,
-+				frames, nframes, DMA_FROM_DEVICE);
-+}
-+
-+int ufs_rpmb_route_frames(struct udevice *scsi_dev, unsigned int region,
-+			  void *req, unsigned long reqlen, void *rsp,
-+			  unsigned long rsplen)
-+{
-+	unsigned int n_req = reqlen / RPMB_FRAME_SIZE;
-+	unsigned int n_rsp = rsplen / RPMB_FRAME_SIZE;
-+	u16 request;
++	struct udevice *ufs_dev, *scsi_dev;
 +	int ret;
 +
-+	if (!scsi_dev || reqlen % RPMB_FRAME_SIZE ||
-+	    rsplen % RPMB_FRAME_SIZE || !n_req)
-+		return -EINVAL;
++	ret = uclass_get_device(UCLASS_UFS, CONFIG_UFS_RPMB_CONTROLLER,
++				&ufs_dev);
++	if (ret)
++		return ret;
 +
-+	request = get_unaligned_be16((u8 *)req + RPMB_FRAME_REQ_OFFSET);
++	ret = device_get_child(ufs_dev, 0, &scsi_dev);
++	if (ret)
++		return ret;
 +
-+	switch (request) {
-+	case RPMB_REQ_KEY:
-+	case RPMB_REQ_WRITE_DATA: {
-+		u8 status_frame[RPMB_FRAME_SIZE];
++	*scsi_devp = scsi_dev;
 +
-+		ret = ufs_rpmb_send(scsi_dev, region, req, n_req);
-+		if (ret)
-+			return ret;
-+
-+		memset(status_frame, 0, sizeof(status_frame));
-+		put_unaligned_be16(RPMB_REQ_STATUS,
-+				   &status_frame[RPMB_FRAME_REQ_OFFSET]);
-+		ret = ufs_rpmb_send(scsi_dev, region, status_frame, 1);
-+		if (ret)
-+			return ret;
-+
-+		if (n_rsp < 1)
-+			return -EINVAL;
-+
-+		return ufs_rpmb_recv(scsi_dev, region, rsp, 1);
-+	}
-+	case RPMB_REQ_WCOUNTER:
-+	case RPMB_REQ_READ_DATA:
-+		ret = ufs_rpmb_send(scsi_dev, region, req, 1);
-+		if (ret)
-+			return ret;
-+
-+		if (n_rsp < 1)
-+			return -EINVAL;
-+
-+		return ufs_rpmb_recv(scsi_dev, region, rsp, n_rsp);
-+	default:
-+		debug("ufs-rpmb: unsupported request 0x%x\n", request);
-+		return -EINVAL;
-+	}
++	return 0;
 +}
-diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
-index 3d96a05281c..2ca4fb2a020 100644
---- a/drivers/ufs/ufs-uclass.c
-+++ b/drivers/ufs/ufs-uclass.c
-@@ -1458,9 +1458,9 @@ static int ufshcd_map_desc_id_to_length(struct ufs_hba *hba, enum desc_idn desc_
-  * ufshcd_read_desc_param - read the specified descriptor parameter
-  *
-  */
--static int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
--				  int desc_index, u8 param_offset,
--				  u8 *param_read_buf, u8 param_size)
-+int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
-+			   int desc_index, u8 param_offset,
-+			   u8 *param_read_buf, u8 param_size)
- {
- 	int ret;
- 	u8 *desc_buf;
-diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
-index 0f6c93fbce7..9f55735602b 100644
---- a/drivers/ufs/ufs.h
-+++ b/drivers/ufs/ufs.h
-@@ -10,6 +10,9 @@
- struct udevice;
- 
- #define UFS_CDB_SIZE	16
 +
-+#define UFS_UPIU_RPMB_WLUN		0xC4
++void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
++				      struct optee_msg_arg *arg)
++{
++	struct optee_private *priv = dev_get_priv(dev);
 +
- #define UPIU_TRANSACTION_UIC_CMD 0x1F
- #define UIC_CMD_SIZE (sizeof(u32) * 4)
- #define RESPONSE_UPIU_SENSE_DATA_LENGTH	18
-@@ -809,4 +812,8 @@ static inline void ufshcd_rmwl(struct ufs_hba *hba, u32 mask, u32 val, u32 reg)
- 
- int ufshcd_probe(struct udevice *dev, struct ufs_hba_ops *hba_ops);
- 
-+int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
-+			   int desc_index, u8 param_offset, u8 *param_read_buf,
-+			   u8 param_size);
++	if (arg->num_params != 1 ||
++	    arg->params[0].attr != OPTEE_MSG_ATTR_TYPE_VALUE_OUTPUT) {
++		arg->ret = TEE_ERROR_BAD_PARAMETERS;
++		return;
++	}
 +
- #endif
-diff --git a/include/scsi.h b/include/scsi.h
-index 2520a8b8fe6..cc79b6dd4c4 100644
---- a/include/scsi.h
-+++ b/include/scsi.h
-@@ -183,6 +183,8 @@ struct scsi_cmd {
- #define SCSI_WRITE_LONG	0x3F		/* Write Long (O) */
- #define SCSI_WRITE_SAME	0x41		/* Write Same (O) */
- #define SCSI_UNMAP	0x42		/* Write 10-Byte (MANDATORY) */
-+#define SCSI_SECURITY_PROTOCOL_IN	0xA2	/* Security Protocol In (O) */
-+#define SCSI_SECURITY_PROTOCOL_OUT	0xB5	/* Security Protocol Out (O) */
- 
- /**
-  * enum scsi_cmd_phase - current phase of the SCSI protocol
-diff --git a/include/ufs.h b/include/ufs.h
-index f6e27d90e43..1bec3ce73a4 100644
---- a/include/ufs.h
-+++ b/include/ufs.h
-@@ -20,4 +20,8 @@ int ufs_probe(void);
-  */
- int ufs_probe_dev(int index);
- 
-+int ufs_rpmb_route_frames(struct udevice *scsi_dev, unsigned int region,
-+			  void *req, unsigned long reqlen, void *rsp,
-+			  unsigned long rsplen);
++	priv->rpmb_next_region = 0;
++	priv->rpmb_cur_region = 0;
 +
- #endif
++	arg->params[0].u.value.a = OPTEE_RPC_SHM_TYPE_APPL;
++	arg->ret = TEE_SUCCESS;
++}
++
++void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
++				     struct optee_msg_arg *arg)
++{
++	struct optee_private *priv = dev_get_priv(dev);
++	struct udevice *scsi_dev;
++	struct tee_shm *cid_shm;
++	u8 size_mult = 0;
++	u8 rel_wr = 0;
++	void *cid_buf;
++	ulong cid_size;
++	int ret;
++
++	if (arg->num_params != 2 ||
++	    arg->params[0].attr != OPTEE_MSG_ATTR_TYPE_VALUE_OUTPUT ||
++	    arg->params[1].attr != OPTEE_MSG_ATTR_TYPE_RMEM_OUTPUT) {
++		arg->ret = TEE_ERROR_BAD_PARAMETERS;
++		return;
++	}
++
++	cid_shm = (struct tee_shm *)(ulong)arg->params[1].u.rmem.shm_ref;
++	cid_buf = (u8 *)cid_shm->addr + arg->params[1].u.rmem.offs;
++	cid_size = arg->params[1].u.rmem.size;
++	if (cid_size < UFS_RPMB_CID_SIZE) {
++		arg->ret = TEE_ERROR_SHORT_BUFFER;
++		return;
++	}
++
++	if (optee_rpmb_get_dev(&scsi_dev)) {
++		arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
++		return;
++	}
++
++	while (priv->rpmb_next_region < UFS_RPMB_NUM_REGIONS) {
++		unsigned int region = priv->rpmb_next_region++;
++
++		ret = ufs_rpmb_get_region_info(scsi_dev, region, &size_mult,
++					       &rel_wr, cid_buf);
++		if (ret < 0) {
++			arg->ret = TEE_ERROR_GENERIC;
++			return;
++		}
++		if (!ret)
++			continue;
++
++		priv->rpmb_cur_region = region;
++		arg->params[0].u.value.a = OPTEE_RPC_RPMB_UFS;
++		arg->params[0].u.value.b = size_mult;
++		arg->params[0].u.value.c = rel_wr;
++		arg->params[1].u.rmem.size = UFS_RPMB_CID_SIZE;
++		arg->ret = TEE_SUCCESS;
++		return;
++	}
++
++	arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
++}
++
++void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
++				 struct optee_msg_arg *arg)
++{
++	struct optee_private *priv = dev_get_priv(dev);
++	struct tee_shm *req_shm;
++	struct tee_shm *rsp_shm;
++	struct udevice *scsi_dev;
++	void *req_buf;
++	void *rsp_buf;
++	ulong req_size;
++	ulong rsp_size;
++
++	if (arg->num_params != 2 ||
++	    arg->params[0].attr != OPTEE_MSG_ATTR_TYPE_RMEM_INPUT ||
++	    arg->params[1].attr != OPTEE_MSG_ATTR_TYPE_RMEM_OUTPUT) {
++		arg->ret = TEE_ERROR_BAD_PARAMETERS;
++		return;
++	}
++
++	if (optee_rpmb_get_dev(&scsi_dev)) {
++		arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
++		return;
++	}
++
++	req_shm = (struct tee_shm *)(ulong)arg->params[0].u.rmem.shm_ref;
++	req_buf = (u8 *)req_shm->addr + arg->params[0].u.rmem.offs;
++	req_size = arg->params[0].u.rmem.size;
++
++	rsp_shm = (struct tee_shm *)(ulong)arg->params[1].u.rmem.shm_ref;
++	rsp_buf = (u8 *)rsp_shm->addr + arg->params[1].u.rmem.offs;
++	rsp_size = arg->params[1].u.rmem.size;
++
++	if (ufs_rpmb_route_frames(scsi_dev, priv->rpmb_cur_region, req_buf,
++				  req_size, rsp_buf, rsp_size))
++		arg->ret = TEE_ERROR_BAD_PARAMETERS;
++	else
++		arg->ret = TEE_SUCCESS;
++}
+diff --git a/drivers/tee/optee/supplicant.c b/drivers/tee/optee/supplicant.c
+index 8a426f53ba8..50b780037fb 100644
+--- a/drivers/tee/optee/supplicant.c
++++ b/drivers/tee/optee/supplicant.c
+@@ -89,6 +89,15 @@ void optee_suppl_cmd(struct udevice *dev, struct tee_shm *shm_arg,
+ 	case OPTEE_MSG_RPC_CMD_RPMB:
+ 		optee_suppl_cmd_rpmb(dev, arg);
+ 		break;
++	case OPTEE_MSG_RPC_CMD_RPMB_PROBE_RESET:
++		optee_suppl_cmd_rpmb_probe_reset(dev, arg);
++		break;
++	case OPTEE_MSG_RPC_CMD_RPMB_PROBE_NEXT:
++		optee_suppl_cmd_rpmb_probe_next(dev, arg);
++		break;
++	case OPTEE_MSG_RPC_CMD_RPMB_FRAMES:
++		optee_suppl_cmd_rpmb_frames(dev, arg);
++		break;
+ 	case OPTEE_MSG_RPC_CMD_I2C_TRANSFER:
+ 		optee_suppl_cmd_i2c_transfer(arg);
+ 		break;
+diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+index 648b58b46e4..f174ca0841d 100644
+--- a/drivers/ufs/Kconfig
++++ b/drivers/ufs/Kconfig
+@@ -105,4 +105,12 @@ config SUPPORT_UFS_RPMB
+ 	  single RPMB transport, so this is mutually exclusive with the eMMC
+ 	  RPMB supplicant (SUPPORT_EMMC_RPMB).
+ 
++config UFS_RPMB_CONTROLLER
++	int "UFS controller index used for RPMB"
++	depends on SUPPORT_UFS_RPMB
++	default 0
++	help
++	  Index of the RPMB-owning UFS controller in the UCLASS_UFS device
++	  list. Leave at 0 unless the board has more than one UFS controller.
++
+ endmenu
 -- 
 2.54.0
 
