@@ -1,255 +1,179 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42FF7C982DE
-	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 17:57:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23F21C982D7
+	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 18:20:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A5E4D80EE1;
-	Fri, 18 Sep 2026 17:57:52 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lPdg1BsBej3G; Fri, 18 Sep 2026 17:57:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 212CE80EBF
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789754271;
-	b=bizz4UMdQXoMOsyriQ7h0bT0bXeUV2irXjXCA/sg8qb5lg0uXGcC7FO+cw2qjR9FpF4f
-	 bLNVbi9oZU0shuWc5dUjhdyHvDTVaArWEblnqbiYHP4wuFUAvdz32643maP7ZMo6iCnai
-	 SzEtNcESQ3A1VHL19fAJwq1dwWlWtkZQCfnk4CRUC8xwlGPeddgsjGCf/urzzt+YIS/3E
-	 V2W01PueDGzXykUQQTfdzLswo8bze+JP3SiGz/c+Nhs4v26+WcEm20vd0K5gW1qSii0c8
-	 7fxUqiG3vP1HR4Rpql/QQ9YBI6os3jumU/CHgmvFMh7qE1j9lQ1e2ArPkcZ20shC9Pw==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789754271;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=ik14wBie/cbyr9HJ6TfnApmyP8Jspn38Er1zW/vPUv8=;
-	b=ZPlhwml8paMowlPXr6zdY2dayU/vrnFCQ/anhZ9j29ImyAYQr642r2YS08ltmbRfAU9J
-	 VLfdXPJkTJwaAiyUmyV0C5rYpmxWqFlX1Xz8zsWwzItX8ZQXuqf1VvhZRj2p1Fm2lJGks
-	 BSyU8ckmtYbUkcAdy7RWjkQO32+9Hy05mO45sOOKsK2xIrw6N0OIRUaEs6crO6KyQ+noU
-	 JVwktxPlifGpfTw7BfBaz0dh2QMtnMU8AbAcMvlDlXgOcXaRw+RnLvybqA5Ok6ZExXnRB
-	 0uarZe/beCWV+enniuAI5x9UdQmoPiz4JTlWi9T6Eg//+F4poxyXi37G2juilEOE5xA==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789754271;
-	bh=ik14wBie/cbyr9HJ6TfnApmyP8Jspn38Er1zW/vPUv8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=iZAB7XEyRKVLnbTS9MWDxMeXjnxcAnZu5tt3FGeViDlRwgI7xGhjFnUQzY+etELXt
-	 9rhklJBAsts3HyfbErFvgTxJ1y7Gc6yZ03u+kolizF1ejFaagOVBUxPd0ePOOhVpBG
-	 Xwq9S6zwvZvz3WKJ6eFM0L0mNmDPQqTe8lguQfGT7uJqGbyI5J5C240S6D0x4gJfGq
-	 wjArIVN4X1+up1Tu41eNllVgdb4J4R/ea9dY8LPp1u7AapXjOWAICs1FjmUgN1Zj0p
-	 svfo/pwJ16/dQMS/IGL2MUCSoQDFvdZj5BB0XyXj5lbCmArdUSxps8K0QaI746ktSw
-	 zuMtPNy/ICU7w==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 212CE80EBF;
-	Fri, 18 Sep 2026 17:57:51 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 91CA1237
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 17:57:49 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8F2E460D86
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 17:57:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 379C460DBC;
+	Fri, 18 Sep 2026 18:20:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HcP8RE1Pf2qb for <u-boot@lists.u-boot-project.org>;
- Fri, 18 Sep 2026 17:57:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 1389C6060E
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c207::3"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789754268;
- b=CmEZaNnphraA/TAE6Z2SpsY9UXJ/GjzAXwMurxIqyP9xsXKppm/OxqlnDEmwDufdTJv2
- zocM6oQR0JlbWlWKSW+snZ8ycNFnPEJJnc251ZdF+8pdzUp8PRTAtTHFCWZ0SwBlS9jVp
- hJrQxWfmsP1dHeq8wdF8d/kuqtO/3c4blRXU1uXiOU1jw5YjzYXkjLpIJ7HK+hcfzRspu
- xiuxNlGiISLVZVsYXJpx30i4ay7DBvX58SsIug3crm0TSpp3j0CY3HGKz9/DiHxRLmQBB
- hVwz/KRB8F/2PddY8/YJs0RjyEh5yqLZXzZAQ4yfYr4+DIvmOmKfxWwE7SLpEwwYpkA==
+ id Vsoy8Ql82RYT; Fri, 18 Sep 2026 18:20:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3086860DAA
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789755645;
+	b=RB3lFOsVS4TKj/J8eX2LTaxKRXKVGwr4DG+VeQ44bCLGCNGFcljmUjEl0nFkU7BgLCpR
+	 Accq/hdpfemDW+qppQplcAhvwyWM9xww0RaH4P923HAhJTGSrR0DKkMBWRs+iPcK/FO2Q
+	 uHF38NcDItZqDrl4mq+FBAE4/ntKRV3OQsGV0pao7r3lP10ysu4ZZIybwU3epgSUgaBe3
+	 V3Mcy5Idpe4UvqZ1yF8CwH4tmvWVsMu6I4FId/e3ThCYVoLWGBYUSXh41AvCcA92/wIC1
+	 Yh+JTmfIzuz3WsXtkTJVCyfwhOiNSNAYj5+M3rFIssu3zOtcVJFfkj5hffGnBuqrVAg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789754268;
- h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
- User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
- X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
- X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
- X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=ik14wBie/cbyr9HJ6TfnApmyP8Jspn38Er1zW/vPUv8=;
- b=AL6A3kd2Cf3/HBDeUzOM56fEdp2qihtX8F6XRjitACwc74Qz8eh8xSS+nht3GTa9Npaa
- jcyszk7M2GadwN9qVJ9nSdInBiPqtDUTSa04++AgzoJ1EXyhMnfoPkC7ytxiLOeScZrhk
- a3GzjJanig2Vq/vq+rOU7FecVeYLL808R7+LuEeoE4eAKhzC/nNaJKLHaRnOi79LQVUnA
- FpT+xU68lYwsDOkDs1zUYnkNl21LAANMtJlXra63hVGuB59rrgY/wNYqtgz5Nm2kFtlnp
- 4os8GLJfNlClHa1KQj03ZcgxE61FAVO/I4SETtoLxzphtWGe3UPsinJ7s/Sn4VHHWcg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org;
- dmarc=pass header.from=cherry.de; 
- dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b="Xn4GIY/I"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c207::3"
+	c=relaxed/relaxed; t=1789755645;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Mime-Version:
+	 Content-Transfer-Encoding:Content-Type:Date:Message-Id:Cc:Subject:
+	 From:To:X-Mailer:References:In-Reply-To:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=4/LZ0o0NCAjCc6C098f8/BmgNchDh7PXYJYBxr1AXEo=;
+	b=UyKQ4Xyg+RlT6QbxnDoaHvnCs+xFyKEK+LU/ToMkaR1dnCS8Yrm1GCEjreAU1zha5izG
+	 gwMehpZKTNYcNlLiUdyb2f3dUqUkNZ85BN0vsAS7rYvmF1gPGCquAqRH5U6stGRvl0B5j
+	 FOP8M7mfgwV17/LqZ1Tcyt3ee1WFWT+4Y/I1YIdlLoa6/GN7g3d3IsgOqNIMAr7vBjJ3Y
+	 66VzyT82CS5/TRjVu4ywQVJmToYyk6dlknqXJYvkMMIOqYit1bcOfbsOMCDpxJFyWw/8a
+	 sDBFDPhdIcuYTsl2IhcMiOfsgLMv4JODZleaSkgRTzPK79BDsXqwEyiTGt+oTBL6cIg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1789755645;
+	bh=4/LZ0o0NCAjCc6C098f8/BmgNchDh7PXYJYBxr1AXEo=;
+	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=DiLPBXEOJ7hK1qokjMJ6IazXo0an8EenZA1ogeb5TJXmaUwT8dSKmorXDoN42/qzb
+	 rEEUfjF2ASWaiufsG5PRJiqcdPveMDc+3tbOHLuPBEv+7KGk06n/np8ov7ggAo+zkl
+	 c9fqfyd6uS1jd2mSsllKdL5RYGUYJroqQnT5UEL+7sMCgQcnE0S14W5APRg9i+qHgv
+	 YoqMd0u38DZBnLuf/ICJreE6v2TsgfosKXiLxdfAMau5ldDkQ60ZVQJqMnvZHBf4I7
+	 ilORVLa/yq66/w4VGRgvGESYVU6j62lYPWCq4ULMoSIvTIlZoM/dw12hUdL6oeBbqw
+	 iemzhNvewqbEQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3086860DAA;
+	Fri, 18 Sep 2026 18:20:45 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 77D80237
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 18:20:43 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5D62740BE6
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 18:20:43 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4ZRBIRi4RSNg for <u-boot@lists.u-boot-project.org>;
+ Fri, 18 Sep 2026 18:20:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org F25B040BE2
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:31::11"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789755642;
+ b=K97BZ1iVnZrBjanuJeSHgJf3GF3h3b/DQaIxIi+sd4253gpozLO0hVuUWr21kooVVXmB
+ VVVMIa/l457Pr8Zus7FOadxXw3YHPJJuOKap4ejbBOaey+4CrvTPjZiluiNnromHJcOFO
+ ggoKrUB1zpBnNMUcKv8Vkwww4T1ORgHvfVd1l9U6PqMMLQyRB5BdXfhqVC3lwloqyZWkK
+ 2GG6UFPmVii6pfw/m/Lo+XeU5jgU5pzwQCZifEwRt6qToVWsvGqBi0MIHqA0p4r+z/7lO
+ uPg2ACGRtxsIraoKpHeeRj5b6S9hzyU9lfw7kN1oYmgljKWmrXffy3J2ZhYMdK1kdBg==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1789755642;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Message-Id:
+ Cc:Subject:From:To:X-Mailer:References:In-Reply-To;
+ bh=4/LZ0o0NCAjCc6C098f8/BmgNchDh7PXYJYBxr1AXEo=;
+ b=SW5qW6vRUFDMobJ6np91FrSuTaWoYYpYnCd/NjjCq4bmp3NfACf91vkoEyBK45a2Fifo
+ 1GAlegXPGBdtFGm8OJnMYjeqYPsNWmnrhJ/CeJ1PlB05XZpyi6d460XHz9850xCvuVzlG
+ QvAu9KKifnVU7bKfPpFchCA8ce5KGoAhvcAztxrtkC7hqZX98vss6eBnK5SaGxAsQjCuA
+ kPLocCBdZscwseXCueL6JaRz2iOI/RBN9JuqZ0URoGpTmvSusCYhseOEZCR5EXbM3Wvr/
+ Le1HTAyHVfDIwUh9d9A7XNSepennQouMTx6draSEYmhDkK0XBbuYCRQUMlXUdkw5xDw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=linaro.org; 
+ dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=P+BlIFn8; 
+ arc=none smtp.remote-ip="2a00:1450:4864:31::11"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c207::3;
- helo=mrwpr03cu001.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=Xn4GIY/I
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1389C6060E
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 17:57:47 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NmyQrLrcsE8OzkFVosWZCLQjUGrg3VyxjCDL21fWeja94ckyYKrmtmQ07sUurhfK2kR2+0E1I7CYjgeBcbsIlIhu39w6Y8TmtuXDo+8Z3mLeJkdcpkCnjqHzwpJTQLwP/5PhgHmndN6CU9Dl8pXUr2+Lk2C5eFDMQAHrGlDx2XUEGHgknQv/wQU86Hfb2R01tZFDTk6qGAMynmc6m4cudpkN2kUkcjVqcgxUonfL1kBHvM5h/ncyxPXuAnxNbwhRPvnRsMNcewQJV6KKKO70U1oxNY/LkF/iawm94yo0dRC0KwWCVtiLPEp0NxExFQP/3B1ASf9tFuex7X2ViQa4uw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ik14wBie/cbyr9HJ6TfnApmyP8Jspn38Er1zW/vPUv8=;
- b=tXBUmP+tQ29ojBIkiuvzYwSeJqVjfiUgnNRVvUfm+HzJAqIWBSL15Jl+VxBxUfxwrAmgNWEW0kV+37ddjQPeus0ZH7T20z0/NzrtMVTfjBcjd9XilYGva9F8D+SiREPktcYV76EmZqAV5uyXTOW1W/tUrI3Z9lxGiIUiQSCIkHXpURpdTWu8G81lq+m6T0ptUaPvMk66SW1YYtj8jnCUT592bzfwvqzyZyAXcLH5qZlFQGf/99YictzEfFDPVcbQB24UIREEHgtCG4tdb4Dm8IkfmHfjZCA5gJLWiDv9gM4i+WXCj/4Wey3+utN1NKdIZU8N+8TNIopMPPLycxB7ng==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ik14wBie/cbyr9HJ6TfnApmyP8Jspn38Er1zW/vPUv8=;
- b=Xn4GIY/IyMWXQNVrqosj3VTPm+VkqOHfHAiVcG9zgMCxUrSRsuV/xadTSsdeDdQ6LDRpopdav4uPUyhL6Qu/LRC/q2IGV5kLeGO187ebmoqzXqtIwP/ByovsmiqidHANxhIU6HdtSQA22JHH567MkhJGtSMCSFBdT2/69de4CYw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by AM9PR04MB8292.eurprd04.prod.outlook.com (2603:10a6:20b:3ef::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.14; Fri, 18 Sep
- 2026 17:57:42 +0000
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0428.011; Fri, 18 Sep 2026
- 17:57:41 +0000
-Message-ID: <77f7c2c3-f038-4558-a1d9-8a69529c372e@cherry.de>
-Date: Fri, 18 Sep 2026 19:57:40 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 11/11] rockchip: Choose FIT payload compression via
- Kconfig
-To: Alexey Charkov <alchark@flipper.net>, u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Vincent Jardin <vjardin@free.fr>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Michael Srba <Michael.Srba@seznam.cz>, Cole Munz <Munzzyy1@proton.me>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Daniel Golle <daniel@makrotopia.org>, Simon Glass <sjg@chromium.org>,
- Francesco Valla <francesco@valla.it>, Anton Ivanov <anton@binarly.io>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- James Hilliard <james.hilliard1@gmail.com>, Quentin Schulz
- <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
- Johan Jonker <jbx6244@gmail.com>, Aristo Chen <aristo.chen@canonical.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>
-References: <20260918-spl-fit-compression-v2-0-28e946f57357@flipper.net>
- <20260918-spl-fit-compression-v2-11-28e946f57357@flipper.net>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260918-spl-fit-compression-v2-11-28e946f57357@flipper.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VIUP296CA0029.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:34d::19) To PA3PR04MB11153.eurprd04.prod.outlook.com
- (2603:10a6:102:4ab::7)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AM9PR04MB8292:EE_
-X-MS-Office365-Filtering-Correlation-Id: 69434377-cd79-47ab-1739-08df15ae55c7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|7416014|366016|23010399003|10067099003|4143699003|56012099006|11063799006|18002099003|22082099003|41080700001;
-X-Microsoft-Antispam-Message-Info: 9/iZj4gCLWqASocQVWNqalX6Z+BqF4NtLMls46vkzjxRwE5RMJjT67lFmhfz2s6zY7LbaFvUlUtXeys6/3P/AOvul5QCU65nkfnv52H6sL6cF7cbjzw+S0BtQQOi6jHHNBGH7kENVhdG56WsiXheLK+r8FTdTBP3lteS5L3+10M2wavik/TNbw0UpmY0lZFwGF3He/VEdjW+FlTisVkh4cvk84YyGZHt2yvNW+rfsF+pL+ZWEtb0WAszpdeW/DULHfTIDLLSZH6a1gGhdD8LJeYD2CWghqr7CD765T0HrvoBOFePjL8dwupU1XgK4EXu/Mxj6wqLY9GQUw77btuhZ9A2ae8/vmKykaDVygvH+faU7Khf8PKyYmEjnR4uQUkW/1gckx/RIQAg2jkmRLvcx3lil1VV9RThB/cIOPl7aeEqOcvA4YmxYlereyAPqGKttvbS44I7flzCPVDaHOe/D/783Xk+zeU5SCK7TcyyV0XVa0JtTov5y1Tu76ruQ9zeWNy/o3hCcXJ+NnXDDJEFkAXwe2aYYpvcHozlQCcQ1PrTR0PgQBMMevIHIbW0LZFWp7dBN7jdLGnZkB0QrtQH6dauCU8HMzfI9LxGscsgoP9OZNDLACCvh4JGvi1ZYAIRG5qO7WO0T41jT29+SRJaTfX9imB5hvC68xfeeixDFv4X6kJqBbj94l7j+g2MiP1hnfHzQqptKp5VWuat4mm6VsVn51hi4HhiIj1lOJGhi3w=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(7416014)(366016)(23010399003)(10067099003)(4143699003)(56012099006)(11063799006)(18002099003)(22082099003)(41080700001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z05BUEMrTFQwSy9rUWdKN2d3YlI0a0JvQXFoQlBuWklnOHI4T2xDalE2Y1lH?=
- =?utf-8?B?QndiaWJNSmREWmdTdTBUZVJ2T3UvOFBBeU1ncXNZZDdVdHlkOTZLNk42RUYr?=
- =?utf-8?B?cVRLRllMd0REY1h1ME0zR2Zlc1JhKzFsSTMwWHQxd0liYlp5bXcxRXc0cUQ3?=
- =?utf-8?B?cXV5VEcydFRTeERFWmJEeGhNaWp5VHc4WVF3LytZVXpEa1hSeGd5RUZqN3k2?=
- =?utf-8?B?aGppQUFyQzMyQ0tvUjRmcC83dnpma2NtUk9rTGNKbWN2MkxKVzB3Yi9xU0RW?=
- =?utf-8?B?ZHJCUllDVkY3N1czd1ZzdjJxNVZZa0doQzh6Wm42enBTWnVBTUs5OTFmU2VD?=
- =?utf-8?B?WldSenlZVDRjMlVKSG1nY2UwYmlSa3dpWDl6bUxoYjdneitwNGFqZ0M1UWpE?=
- =?utf-8?B?SHpSSXd5cTF3Ny9XdWM2dE5yLzE0QmhxTDFJZ3RtcmVQa0w1YlM2VlJ6WDBi?=
- =?utf-8?B?a25SejVPaWZPUzBiOUNhN213RFBqbk12RGgxandGcm5lNk02NkVjMDc2Mk5p?=
- =?utf-8?B?M01vNEZMemRiNzhGU1Y2Zm1Md3VmYXk0RTFPRjhJVy9taHp4RjJXa3VINXBI?=
- =?utf-8?B?aTV3cVk0YkFMaVFDQStxV3ZIQmhXZG5sYUJPbGdIVHF1dFZ2ME9WYlRHdFZm?=
- =?utf-8?B?S2d0WmV0a1lHa1B6aEV6Q1ZKendPbnBpTUs5eC9HNXl4WFZtanlGeHdIWU1O?=
- =?utf-8?B?aFdPWUlQaHdlT0hvUEFnM1pOcjg1Um52MDBtTm1wQk9oTHRYeFZMc1BoNndL?=
- =?utf-8?B?cm9wamZuamNGaEZBQ1ZYem9OazliR2F5b0diMElrWFBqalFPZzRMKzZwWURG?=
- =?utf-8?B?VmhoWm9IYUZMRk5HWVhkaDVSaGIrVEkxb2U1TmdmcHdhOUN4bU1GTWZLMVpP?=
- =?utf-8?B?ZElibmIzZ0dxV2ZhVDF0OWdlTFNmOWQ1WHF4TXBkbkVwWmoxU1oxVzgxYlhM?=
- =?utf-8?B?dS9EK2Y0eCtRSnIwVWk5RUxzMHJpWElwSWg2bWpyRzJSN2VrcWpTNVBWaC82?=
- =?utf-8?B?b2RCcmsrQkxKbU4wZENYbGlxZUROQ1BYU2lndURJV3B4WEExRmF6eC92WmN2?=
- =?utf-8?B?NHlXUUlDODFTRHY5bzJvTFJUOW52MnorRmZhUU0rNzJVOUh4bWVEU1E3eXQv?=
- =?utf-8?B?V294Z1ZISk42eTQxQU43TzRGRVdGZ2c0QjNDOTB5K3lHS3hwL3BvWmJmdi9X?=
- =?utf-8?B?VHh5QUJzRG90U0JqT3p0T2NvMU9IRFRiRjE4Z2IrcWcybEZIZWdaL2xkOFJq?=
- =?utf-8?B?MU85S2xZTmdjbks1V0lLNkpaNk9PNk9laWszUmJzL2ViRlZUa3dTUWUxOEda?=
- =?utf-8?B?a3B2ampLV2xFZGZRei9UVXU4WHRQRFFVNlRmbEFOQkprWG5YbVNwYzA5cC9M?=
- =?utf-8?B?UnQvOElwd3JvRmdMWTQyRERweEpDcVBxMkxkWTQzWUdzWndOT0JHWEo4L2R2?=
- =?utf-8?B?aUFPVnNaeWFtdUN1bEtnSk82dGFnellibnVXVTRUdk5xVnVleTVsbkExK3Ra?=
- =?utf-8?B?L28zbWNzSDVpUXBBSjg1VUdyd25MQW94bE4zWXExdVp4OFRiM3M0Mnd4V1JK?=
- =?utf-8?B?MkdURENDTlFLZXVNQ1EzMGt4K3ZtSzdROVlwclJYSHZ4OXpSd2FJall0Ry9P?=
- =?utf-8?B?WGlCWUx2eGk5bEpqa1V0SDJ4cnovWUZYVnphS2Z1NDQ5TVEySE9DenJwVThB?=
- =?utf-8?B?eUFBc3FGTlBPVmhnd3l2Tk5CSE11Z3A2UHdSSUt2RmJqTDlEaGJocGlsVTln?=
- =?utf-8?B?Ny9oOVZhRmkrZ3RZQTk5aUFhSEYwUW1CZ1FWaXovM2Z2dld0UGZTRTEvQTE2?=
- =?utf-8?B?bTRKSW5lK05RdHl2RG13R000OHdvdWoxV2ZPTjNUeVpsdmU5Tk9lV3BYMDdZ?=
- =?utf-8?B?TmdYNWdVNVE5dlRNakdpdnNoZzVxbWIwTWVqUDlvZXdhNmhWSWx3WWJZcGMw?=
- =?utf-8?B?RE4rbklzbjdkWk1tMko0bFNCWlZHRXM2ZjgveUpHbWJHd0Eyc1JTZHBmdng0?=
- =?utf-8?B?dXEveFJzSzZzUDZydDdHQmx0cFI3UGxDTVMvSDljbTZpazJRNXNGNXVIbVFM?=
- =?utf-8?B?amY1aE40M0I4UCtjVDdTdlc4YWVMbXNaOW0yKzQwL3VLeGZveHNoNHdPMTV3?=
- =?utf-8?B?U3p5SVp4MGFsaURaQzcybG9hTVZPaUlQM2YwMEhNZGxpWnl1Q3htNDFsNERm?=
- =?utf-8?B?OVBoWlVaWDNqVEtYVk5VUTVQcEhjenIzZWYrWFRGc3BBUHZBdzFmcGJNSXNy?=
- =?utf-8?B?M3ZNbUNzMnhRbDg2K1RmWVpmR3F3bm5tc0U2UEdlZ0U0UnozNmliS0M4UmRK?=
- =?utf-8?B?ZTI1cVI0bzNrNlNoOTY1b1lMRmlEb2JQQ1Jmc1FXbUdSNExHNkpQUT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 69434377-cd79-47ab-1739-08df15ae55c7
-X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Sep 2026 17:57:41.8627 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EmShPVH5UuduaCzEii7t8dXHB2PBUXFJcBiUZKBpH2qBMuLlwgpaTZefX1k8FmlOtizA7Xn0A6vtAP4IaX+glTlxfSch/Sa/NRs19NtMiTQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8292
+ client-ip=2a00:1450:4864:31::11; helo=mail-wm2-x11.google.com;
+ envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=P+BlIFn8
+Received: from mail-wm2-x11.google.com (mail-wm2-x11.google.com
+ [IPv6:2a00:1450:4864:31::11])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id F25B040BE2
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 18:20:40 +0000 (UTC)
+Received: by mail-wm2-x11.google.com with SMTP id
+ 5b1f17b1804b1-49e83a388f8so6975085e9.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 11:20:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1789755639; x=1790360439;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :content-type:content-transfer-encoding:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=4/LZ0o0NCAjCc6C098f8/BmgNchDh7PXYJYBxr1AXEo=;
+ b=P+BlIFn8ONsOD2bn22dIRnqT3nog9SfWGXcEKKU0U9akVtuyC8gjzBzAYMn6dytA6h
+ RCfEad6DRXVkaSsYnEpBU5ik47WoQHxds7VKZ49MCr0YsUwZUqjR7wVbS0f8hI97RpkW
+ 6qsRBZYu1ijc5NBAJF9caF8E+Zff5WeXs23CMpHRoKlSVUns3w3XTDa0dv1j0P/3YsDG
+ I6h3ujjcBQzCReBTr1U3KMkBdYYB356HQDbZ/SCo4rUVdwx7MLmnX02/Xx/U+fHvqnVp
+ YeAhxAM5k7JhHyVwMkFENYORfvNUS7UOerMdTwLibuPSuiVgHh7eDMmkD3wN7XusXafL
+ 5Upw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1789755639; x=1790360439;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=4/LZ0o0NCAjCc6C098f8/BmgNchDh7PXYJYBxr1AXEo=;
+ b=BIT3LY6sx7wVQrsFlZkadwnJO2F7ABAOSJwJW9MyZly2zudR5YZ/YeBjD4XPldWPec
+ fdzdmdaFJx/XK7Zpp1DCk3kD7WHan9kfmG/2V8+NbNnBC9EiT3MJPuKCgtN/kNvx8gq1
+ zPCXeaPQkU5OExzw7I8jVNXe4qnapGBFv7uAPNEBjdF4hNgnYyBMZsgoSAZD0dZ1ozg+
+ egA0pYuU7v75Of5ZTGG6hfM6s+9RTd2UBikxAzaUTcdPGgCvtGHdnaD/vt8CGCM9VdWg
+ t/3CKz3GcRCJNqKBKhMkc4C9DTZKj/BJxjJNroN6AMuQLz964uRTfvy+gNxyb2vxPyIH
+ BP4Q==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByTeD6dAsiBDLiGIwfbRgGR5w4C7kA0DvZwilYS3pldishdcQmyghR2+OXu2n9v4CQI6c+Gj+s=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mG9vhIx6fNHXF2KfhLJs5az27CoMAGOXzXMdHw7pGnpLIHFg6h
+ LHjPZQWT5Ssiobqmz8XoEbqCe05a45QqsPhmYVc5HUynC72ZmaqIAwd8Yhk7yHP6vpg=
+X-Gm-Gg: AYBFou2oP4VeUZwjbS9lieUMaS0okq4/gm4/K1sQl41WMzY4+Z5v1K6QK7WuSzpczGz
+ kEKDRPrsH/koje1WFFUkotlJfqWE4JcMvwtJMVHwlqIVNc8DMjPxSAm8NtVOvDbes8mPex7Sw5L
+ VSQqm1FXKTnABn4SrGApFUcLRBckoQtAK1ICdYAdR5WySRodsSWMY2KoLKCZ5ztmvCjT3l+nrY5
+ bavQ0xm5kTKOA6Nsr/B4tvYZXznD3Cu6Uk1APbDI1Dp63S6EraIgGCAaKUvVEb1Phq1GrpILi8e
+ ZK5chfUjEit+kQU3oWJim1FJrEIT/kK27af9H50OsRuihi+Ya2bkLfkgT5ulAwcDjXguJE3LOqD
+ tLKypSeEhsfgek8oH1V6fY0Uy7qfvebzKQkrXE0lFxZRlW1nBjvpBjqtiLy+0wvbuJM1xAP16lI
+ samxda7CoBW8SJYDqqo7YzwH0lOPKIq2yFD9vxTNkkDny5qGNv9yUPFZ+ST1H3oygfJwJ6cKILM
+ YYnNs+7nPopwOQjf4RB2WtVUiX/Gdg3BfBJ1RKR8f+9wCRq2YdCIdrHhQ+5D8eewhvJgDO/8aGt
+ zQnYo/Nbk0bMWeagYNm4YdvdoRR/nQSgspO5iA23BWg79qahSb03tddCvUy7NQhii/Gqi/X08C/
+ Ow5toiKon/iH+eRQYuUuWCpo2ykUhvpDqJ6mAnXfHAnhzQ4VBGF8lnSzXlkXfs772QvswXL3GQ5
+ 1q1/CT+9wvPNBITRkH9CZbJvcWma/wL8uhKtYLBxu1DBfY2CPSgouqQfT3znt7qoS6x8eug0Eql
+ TT7P++1JYRsWasDuHRJS2cL1wdblqa8iaOe1HtR3Ohvl2qUDM/dxUCSeZg2mPGqh35VeOgHAcvr
+ DTs=
+X-Received: by 2002:a05:600c:a085:b0:49f:bd3c:bc23 with SMTP id
+ 5b1f17b1804b1-49fc5747887mr46065515e9.30.1789755638787; 
+ Fri, 18 Sep 2026 11:20:38 -0700 (PDT)
+Received: from localhost ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48724564565sm439905f8f.19.2026.09.18.11.20.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 18 Sep 2026 11:20:38 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 18 Sep 2026 21:20:36 +0300
+Message-Id: <DLINF8X5LGMM.22DVNGKNPMAM8@linaro.org>
+Cc: "Abdellatif El Khlifi" <abdellatif.elkhlifi@arm.com>, "Tom Rini"
+ <trini@konsulko.com>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>, "Simon
+ Glass" <sjg@chromium.org>, "Devaraj Ranganna" <Devaraj.Ranganna@arm.com>
+Subject: Re: [PATCH v5 13/22] efi_loader: enable TEE runtime SetVariable()
+ over FF-A
+From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+To: "Harsimran Singh Tungal" <harsimransingh.tungal@arm.com>,
+ <u-boot@lists.u-boot-project.org>
+X-Mailer: aerc 0.17.0
+References: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
+ <20260914110106.1974894-14-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260914110106.1974894-14-harsimransingh.tungal@arm.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -263,243 +187,234 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Alexey,
+Hi Harsimran
 
-On 9/18/26 12:52 PM, Alexey Charkov wrote:
-> The dtsi infers how to compress from whichever SPL decompressor happens
-> to be enabled, so there is no way to ask for one in particular, turning
-> a decompressor on for something else silently changes the image, and the
-> conditional has to be updated with every new algorithm.
-> 
 
-Thanks, this was something of an eye-sore to me for a while already :)
+[...]
 
-> Move the selection to Kconfig instead, with proper help texts and support
-> for all available compression algorithms. Each choice enables the
-> decompressor that provides it, and carries the compression level.
-> 
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> ---
->   arch/arm/dts/rockchip-u-boot.dtsi | 16 +++-----
->   arch/arm/mach-rockchip/Kconfig    | 78 +++++++++++++++++++++++++++++++++++++++
->   2 files changed, 84 insertions(+), 10 deletions(-)
-> 
-> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-> index 4ba6a87e78ab..a72b55cec05a 100644
-> --- a/arch/arm/dts/rockchip-u-boot.dtsi
-> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-> @@ -11,14 +11,6 @@
->   #define FIT_ARCH		"arm"
->   #endif
->   
-> -#if defined(CONFIG_SPL_GZIP)
-> -#define FIT_UBOOT_COMP		"gzip"
-> -#elif defined(CONFIG_SPL_LZMA)
-> -#define FIT_UBOOT_COMP		"lzma"
-> -#else
-> -#define FIT_UBOOT_COMP		"none"
-> -#endif
-> -
->   /*
->    * SHA256 should be enabled in SPL when signature validation is involved,
->    * CRC32 should only be used for basic checksum validation of FIT images.
-> @@ -61,11 +53,15 @@
->   				type = "standalone";
->   				os = "u-boot";
->   				arch = FIT_ARCH;
-> -				compression = FIT_UBOOT_COMP;
-> +				compression = CONFIG_ROCKCHIP_UBOOT_COMP;
->   				load = <CONFIG_TEXT_BASE>;
->   				entry = <CONFIG_TEXT_BASE>;
->   				u-boot-nodtb {
-> -					compress = FIT_UBOOT_COMP;
-> +					compress = CONFIG_ROCKCHIP_UBOOT_COMP;
-> +#if CONFIG_ROCKCHIP_UBOOT_COMP_LEVEL != 0
-> +					compress-level =
-> +						<CONFIG_ROCKCHIP_UBOOT_COMP_LEVEL>;
-> +#endif
-
-OK so the obvious question here is "why Rockchip-specific?". I 
-appreciate you're mostly working with the RK3576 but I don't see why 
-this (the kconfig symbol definition that happens later in this patch in 
-arch/arm/mach-rockchip/Kconfig) needs to be Rockchip-specific, we have 
-other architectures that are also building a FIT image with U-Boot 
-proper in it, so I think it'd be nice to have this setting apply to all 
-of them so that it's a more generic approach. I'm wondering whether a 
-direct argument to binman would be more appropriate here instead of 
-requiring all binman nodes to not forget to add these compression 
-properties for the setting to actually apply. Of course this would still 
-need some logic handling a binman argument and the compression 
-properties both being set, and likely remove the properties from 
-existing DTS.
-
->   				};
->   #ifdef FIT_HASH_ALGO
->   				hash {
-> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> index 1a2e7847c9e7..6e98534f28d7 100644
-> --- a/arch/arm/mach-rockchip/Kconfig
-> +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -758,6 +758,84 @@ config ROCKCHIP_MASKROM_IMAGE
->   	  Rockchip SoCs support maskrom mode boot over USB. Enable this
->   	  option to produce maskrom mode boot images containing U-Boot.
->   
-> +choice
-> +	prompt "Compression for U-Boot proper in the SPL FIT"
-
-It's not the SPL FIT.
-
-> +	depends on SPL_FIT
-
-This only applies when we build a FIT image with binman for Rockchip, 
-which happens only if HAS_FIT is defined, which is:
-
-defined(CONFIG_SPL_FIT) && (defined(CONFIG_ARM64) || 
-defined(CONFIG_SPL_OPTEE_IMAGE))
-
-so you are missing:
-depends on ARM64 || SPL_OPTEE_IMAGE
-here.
-
-> +	default ROCKCHIP_UBOOT_COMP_NONE
-
-This diverges from the current state, instead do:
-
-default ROCKCHIP_UBOOT_COMP_GZIP if SPL_GZIP
-default ROCKCHIP_UBOOT_COMP_LZMA if SPL_LZMA
-default ROCKCHIP_UBOOT_COMP_NONE
-
-to keep the same behavior (not tested but I believe this should work).
-
-> +	help
-> +	  Pick how U-Boot proper is stored in the FIT which SPL loads it from.
-
-Don't like "how [it] is stored in the fit", I would prefer to make it 
-explicit we're talking about compression here.
-
-Maybe:
-Compression algorithm for U-Boot proper as stored in the FIT loaded by SPL.
-?
-
+> +							   efi_uintn_t name_size,
+> +							   const efi_guid_t *vendor,
+> +							   struct var_check_property *var_property)
+> +{
+> +	struct smm_variable_var_check_property *smm_property;
+> +	efi_uintn_t payload_size;
+> +	u8 *comm_buf =3D NULL;
+> +	efi_status_t ret;
 > +
-> +	  It is around a megabyte, so what SPL spends unpacking it is close to
-
-Size depends on what you enable so I don't think it's relevant to put 
-this in a help text.
-
-> +	  what it saves reading a smaller image, and leaving it alone is a
-> +	  reasonable answer. Compress it where the room it takes up matters
-> +	  more than the time.
+> +	payload_size =3D sizeof(*smm_property) + name_size;
+> +	if (payload_size > max_payload_size) {
+> +		ret =3D EFI_INVALID_PARAMETER;
+> +		return ret;
+> +	}
+> +	comm_buf =3D setup_mm_hdr((void **)&smm_property, payload_size,
+> +				SMM_VARIABLE_FUNCTION_VAR_CHECK_VARIABLE_PROPERTY_SET,
+> +				&ret);
+> +	if (!comm_buf)
+> +		return ret;
 > +
-
-I think what matters is the following:
-- on space-constrained systems, enabling compression may help making 
-sure the bootloader fits in the storage medium,
-- compression could help with boot time if the storage medium is slow 
-enough that reading a compressed image from it and uncompressing it is 
-faster than reading the uncompressed image directly. Whether it's 
-beneficial needs to be experimentally checked on each device as it 
-depends on the SoC and selected storage medium.
-
-> +config ROCKCHIP_UBOOT_COMP_NONE
-> +	bool "none"
-> +	help
-> +	  Store it as it is. SPL copies it into place rather than unpacking
-> +	  it, and the build needs no host tool.
+> +	efi_memcpy_runtime(&smm_property->guid, vendor, sizeof(*vendor));
+> +	smm_property->name_size =3D name_size;
+> +	efi_memcpy_runtime(&smm_property->property, var_property,
+> +			   sizeof(smm_property->property));
+> +	efi_memcpy_runtime(smm_property->name, variable_name, name_size);
 > +
-
-Please add a proper help text that is understandable on its own. It is 
-not uncommon (I do it more often than not) that people will look up a 
-symbol with the search function in menuconfig and will only get this 
-information, it's therefore important to know what we're talking about 
-here without having to look up the choice help text. Ditto for other 
-help texts below.
-
-> +config ROCKCHIP_UBOOT_COMP_GZIP
-> +	bool "gzip"
-> +	select SPL_GZIP
-> +	help
-> +	  Compress with gzip, run from the host 'gzip' binary. A middling
-> +	  ratio, quick to unpack, and it needs no SPL heap.
+> +	ret =3D mm_communicate(comm_buf, payload_size);
 > +
-> +config ROCKCHIP_UBOOT_COMP_LZMA
-> +	bool "lzma"
-> +	select SPL_LZMA
-> +	help
-> +	  Compress with LZMA, run from the host 'lzma_alone' binary. The best
-
-I'm not sure we need to specify the implementation detail of the tool 
-used to generate the compressed binary? lzma_alone is also only 
-available on Debian-based systems (e.g. Fedora doesn't have it), so I'm 
-not entirely sure whether it'll stay this way forever (maybe we should 
-switch to another implementation that is available on more/most 
-distros?). I understand you probably did this because it's somewhat an 
-important piece of information to then decide which level to use.
-
-> +	  ratio on offer, and by far the slowest to unpack.
+> +	return ret;
+> +}
 > +
-> +config ROCKCHIP_UBOOT_COMP_LZO
-> +	bool "lzo"
-> +	select SPL_LZO
-> +	help
-> +	  Compress with LZO, run from the host 'lzop' binary. A poor ratio in
-> +	  exchange for fast decompression.
-> +
-> +config ROCKCHIP_UBOOT_COMP_LZ4
-> +	bool "lz4"
-> +	select SPL_LZ4
-> +	help
-> +	  Compress with LZ4, run from the host 'lz4' binary. The fastest to
-> +	  unpack and the worst ratio, so it suits a fast boot medium.
-> +
-> +config ROCKCHIP_UBOOT_COMP_ZSTD
-> +	bool "zstd"
-> +	select SPL_ZSTD
-> +	help
-> +	  Compress with Zstandard, run from the host 'zstd' binary. Close to
-> +	  the LZMA ratio for a fraction of the time, but its decompressor
-> +	  wants around 94KB of SPL heap - see SPL_ZSTD.
+>  static efi_status_t get_property_int(const u16 *variable_name,
+>  				     efi_uintn_t name_size,
+>  				     const efi_guid_t *vendor,
+> @@ -768,6 +800,49 @@ out:
+>  	return ret;
+>  }
+>
+> +static efi_status_t __efi_runtime get_property_int_runtime(const u16 *va=
+riable_name,
+> +							   efi_uintn_t name_size,
+> +							   const efi_guid_t *vendor,
+> +							   struct var_check_property *var_property)
+> +{
 
-I don't like specifying numbers that aren't guaranteed to stay at that 
-value. I understand the appeal to provide some number to give a rough 
-idea of the size impact, so I don't think it needs to be a blocker, 
-maybe Tom would have some opinion there, otherwise ignore this :)
+The changes between this and the non-runtime version are limited to a few m=
+emcpy/memset calls.
+It's pretty easy to only keep the runtime version and get rid of all the du=
+plication. Same
+goes for the set_property_int()
 
+> +	struct smm_variable_var_check_property *smm_property;
+> +	efi_uintn_t payload_size;
+> +	u8 *comm_buf =3D NULL;
+> +	efi_status_t ret;
 > +
-> +endchoice
+> +	efi_memset_runtime(var_property, 0, sizeof(*var_property));
+> +	payload_size =3D sizeof(*smm_property) + name_size;
+> +	if (payload_size > max_payload_size) {
+> +		ret =3D EFI_INVALID_PARAMETER;
+> +		return ret;
+> +	}
+> +	comm_buf =3D setup_mm_hdr((void **)&smm_property, payload_size,
+> +				SMM_VARIABLE_FUNCTION_VAR_CHECK_VARIABLE_PROPERTY_GET,
+> +				&ret);
+> +	if (!comm_buf)
+> +		return ret;
 > +
-> +config ROCKCHIP_UBOOT_COMP
-> +	string
-> +	default "gzip" if ROCKCHIP_UBOOT_COMP_GZIP
-> +	default "lzma" if ROCKCHIP_UBOOT_COMP_LZMA
-> +	default "lzo" if ROCKCHIP_UBOOT_COMP_LZO
-> +	default "lz4" if ROCKCHIP_UBOOT_COMP_LZ4
-> +	default "zstd" if ROCKCHIP_UBOOT_COMP_ZSTD
-> +	default "none"
+> +	efi_memcpy_runtime(&smm_property->guid, vendor, sizeof(smm_property->gu=
+id));
+> +	smm_property->name_size =3D name_size;
+> +	efi_memcpy_runtime(smm_property->name, variable_name, name_size);
 > +
-
-I'm tempted to say this is not the place for this and rather should be 
-in rockchip-u-boot.dtsi for example as a series of #ifdef (but if we go 
-for a generic implementation that applies to other architectures, then 
-maybe it's fine like this).
-
-> +config ROCKCHIP_UBOOT_COMP_LEVEL
-> +	int "Compression level for U-Boot proper"
-> +	depends on !ROCKCHIP_UBOOT_COMP_NONE && !ROCKCHIP_UBOOT_COMP_LZMA
-> +	range 0 9 if ROCKCHIP_UBOOT_COMP_GZIP || ROCKCHIP_UBOOT_COMP_LZO
-> +	range 0 12 if ROCKCHIP_UBOOT_COMP_LZ4
-> +	range 0 19 if ROCKCHIP_UBOOT_COMP_ZSTD
-> +	default 0
-> +	help
-> +	  How hard to compress, numbered the way the algorithm's own tool
-> +	  numbers it. Leave it at 0 to take the tool's default.
+> +	ret =3D mm_communicate(comm_buf, payload_size);
+> +	/*
+> +	 * Currently only R/O property is supported in StMM.
+> +	 * Variables that are not set to R/O will not set the property in StMM
+> +	 * and the call will return EFI_NOT_FOUND. We are setting the
+> +	 * properties to 0x0 so checking against that is enough for the
+> +	 * EFI_NOT_FOUND case.
+> +	 */
+> +	if (ret =3D=3D EFI_NOT_FOUND)
+> +		return EFI_SUCCESS;
+> +	if (ret !=3D EFI_SUCCESS)
+> +		return ret;
+> +	efi_memcpy_runtime(var_property, &smm_property->property, sizeof(*var_p=
+roperty));
 > +
-> +	  lzma has no such knob, so it is not offered there.
+> +	return EFI_SUCCESS;
+> +}
+> +
+>  efi_status_t efi_get_variable_int(const u16 *variable_name,
+>  				  const efi_guid_t *vendor,
+>  				  u32 *attributes, efi_uintn_t *data_size,
+> @@ -1001,7 +1076,7 @@ efi_status_t efi_set_variable_int(const u16 *variab=
+le_name,
+>  		var_property.property |=3D VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY;
+>  		var_property.attributes =3D attributes;
+>  		var_property.minsize =3D 1;
+> -		var_property.maxsize =3D var_acc->data_size;
+> +		var_property.maxsize =3D data_size;
+>  		ret =3D set_property_int(variable_name, name_size, vendor, &var_proper=
+ty);
+>  	}
+>
+> @@ -1078,7 +1153,7 @@ efi_query_variable_info_runtime(u32 attributes, u64=
+ *max_variable_storage_size,
+>  }
+>
+>  /**
+> - * efi_set_variable_runtime() - runtime implementation of SetVariable()
+> + * efi_set_variable_int_runtime() - runtime implementation of SetVariabl=
+e()
+>   *
+>   * @variable_name:	name of the variable
+>   * @guid:		vendor GUID
+> @@ -1088,11 +1163,69 @@ efi_query_variable_info_runtime(u32 attributes, u=
+64 *max_variable_storage_size,
+>   * Return:		status code
+>   */
+>  static efi_status_t __efi_runtime EFIAPI
+> -efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
+> -			 u32 attributes, efi_uintn_t data_size,
+> -			 const void *data)
+> +efi_set_variable_int_runtime(u16 *variable_name, const efi_guid_t *guid,
+> +			     u32 attributes, efi_uintn_t data_size,
+> +			     const void *data)
+>  {
+> -	return EFI_UNSUPPORTED;
+> +	efi_status_t ret, mm_communicate_ret =3D EFI_SUCCESS;
+> +	struct var_check_property var_property;
+> +	struct smm_variable_access *var_acc;
+> +	efi_uintn_t payload_size;
+> +	efi_uintn_t name_size;
+> +	u8 *comm_buf =3D NULL;
+> +	bool ro;
+> +
+> +	if (!variable_name || variable_name[0] =3D=3D 0 || !guid)
+> +		return EFI_INVALID_PARAMETER;
+> +
+> +	if (data_size > 0 && !data)
+> +		return EFI_INVALID_PARAMETER;
+> +
+> +	/* Check payload size */
+> +	name_size =3D u16_strsize(variable_name);
+> +	payload_size =3D MM_VARIABLE_ACCESS_HEADER_SIZE + name_size + data_size=
+;
+> +	if (payload_size > max_payload_size)
+> +		return EFI_INVALID_PARAMETER;
+> +
+> +	ro =3D !!(attributes & EFI_VARIABLE_READ_ONLY);
+> +	attributes &=3D EFI_VARIABLE_MASK;
+> +
+> +	ret =3D get_property_int_runtime(variable_name, name_size, guid,
+> +				       &var_property);
+> +	if (ret !=3D EFI_SUCCESS)
+> +		return ret;
+> +
+> +	if (var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY)
+> +		return EFI_WRITE_PROTECTED;
+> +
+> +	comm_buf =3D setup_mm_hdr((void **)&var_acc, payload_size,
+> +				SMM_VARIABLE_FUNCTION_SET_VARIABLE, &ret);
+> +	if (!comm_buf)
+> +		return ret;
+> +
+> +	/* Fill in contents */
+> +	efi_memcpy_runtime(&var_acc->guid, guid, sizeof(*guid));
+> +	var_acc->data_size =3D data_size;
+> +	var_acc->name_size =3D name_size;
+> +	var_acc->attr =3D attributes;
+> +	efi_memcpy_runtime(var_acc->name, variable_name, name_size);
+> +	efi_memcpy_runtime((u8 *)var_acc->name + name_size, data, data_size);
+> +
+> +	/* Communicate */
+> +	ret =3D mm_communicate(comm_buf, payload_size);
+> +	if (ret !=3D EFI_SUCCESS)
+> +		mm_communicate_ret =3D ret;
+> +
+> +	if (ro && !(var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ON=
+LY)) {
+> +		var_property.revision =3D VAR_CHECK_VARIABLE_PROPERTY_REVISION;
+> +		var_property.property |=3D VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY;
+> +		var_property.attributes =3D attributes;
+> +		var_property.minsize =3D 1;
+> +		var_property.maxsize =3D data_size;
+> +		ret =3D set_property_int_runtime(variable_name, name_size, guid, &var_=
+property);
+> +	}
+> +
+> +	return (mm_communicate_ret =3D=3D EFI_SUCCESS) ? ret : mm_communicate_r=
+et;
+>  }
+>
+>  /**
+> @@ -1129,7 +1262,7 @@ void efi_variables_boot_exit_notify(void)
+>  	efi_runtime_services.get_variable =3D efi_get_variable_runtime;
+>  	efi_runtime_services.get_next_variable_name =3D
+>  			efi_get_next_variable_name_runtime;
 
-The option won't be shown anyway and it's clear from the dependencies 
-that it's not supported so I don't think it makes sense to have it in 
-the help text, however the commit log would be a very good place to have 
-this piece of information.
 
-Cheers,
-Quentin
+All the get_variable*() calls used to point to the function from efi_var_co=
+mmon.c.
+By changing this you are breaking the runtime case for OP-TEE since now we =
+will get
+EFI_OUT_OF_RESOURCES.
+There's no easy way to fix this at runtime. For OP-TEE the kernel might rep=
+lace this call
+with an internal OP-TEE call if it's part of the firmware and announces it =
+can provide
+EFI runtime services. However, the default uuse case, which we don't suppor=
+t SetVariable
+at runtime only needs to keep working.
+
+I'll post a script next week so you can replicate and test this in QEMU wit=
+h OP-TEE etc.
+
+Cheers
+/Ilias
+
+> -	efi_runtime_services.set_variable =3D efi_set_variable_runtime;
+> +	efi_runtime_services.set_variable =3D efi_set_variable_int_runtime;
+>  	efi_update_table_header_crc32(&efi_runtime_services.hdr);
+>
+>  	/* Record that ExitBootServices() has been called */
+
