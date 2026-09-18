@@ -4,123 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C29C4C982D8
-	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 13:28:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC660C982DA
+	for <u-boot@archiver.kernel.org>; Fri, 18 Sep 2026 13:45:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BF32460E98;
-	Fri, 18 Sep 2026 13:28:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A460960DA8;
+	Fri, 18 Sep 2026 13:45:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id R1_PtJcu3pxm; Fri, 18 Sep 2026 13:28:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3A2DD60E65
+ id 2mZNkjY-JjEM; Fri, 18 Sep 2026 13:45:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A41FE60D74
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789738118;
-	b=QiuOWWwnZsLUS1gBGEtUQxAFqYjb17PYqYDoPbLQ7tVTp7rgVnAk36IPeWP0YyiREwMI
-	 RVEgivvGXegS/g2QSmE4QUthXH7tZHNmh7BUh+n4v/J+PP55bYtXxleTg6bop8G6cUXFZ
-	 zykshPD+fP84tMb70Mt3OgU4xpIWW0mw4zSnZEMajFQRNyuiLr/Xz20unDLAikX1xB9PX
-	 hw3ybwFvLyhKgp8vnEbYDz8REfDnlUZMR+mWE+skoPOjNPfuqxSm1KxTlIK/zOccw4lwF
-	 APOEm3Jb2WcO6sm4YNlYgQfIBvklDYi3J9CaJaWG69h00ggSc2kN9DTAPqV2RQUp/Rw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789739117;
+	b=S1TYgG6jKiuoWaWT1C6FEEqHreVJErKdQtpQzGR6Fgl8LeoQgRBRdnAPiPEGfm+FqE1e
+	 YvkkJw5areHBLzBv8rWrYafQJN9fHhFhVzea+nxfxh7PdfP+JFmQHr/yvF0Y+7qmthTey
+	 Lm37AO8OHQVxNAs7DyONUfKJeNeFOZKq9aKHkY6a7qXEH+ot1LC2mgRGLsYFH1fpzoyKm
+	 +PpWxtdeA4Sv1W2zVb35GE4aD/phSOuIsiSrOBkR7iM/5+fs0n3R0rTGj43xeT7IbRy8y
+	 1ksn+bDEK6vhy+UdhGLZ/gOv2g2V5EJybkmsTXiFCVvzISPSDri9FU31hdAIPMseMWQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789738118;
+	c=relaxed/relaxed; t=1789739117;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-HM-Tid:X-HM-MType:X-HM-Spam-Status:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=nF3zccExM4xftUHpiCTHoshZ7C2Iza5xgd4jXyWIavQ=;
-	b=Jha8HzrB1aja9HOkwWR2MQAnU/GMPYIaN468rCCnHxh+cL6r6guQYGykCczro1cv1WXG
-	 70CwvQQOykLmbEZLyUjxSaVFQfsxv7fiXCJkoD57YHpQcV1m7Ln/tAVYLI6cqXIrRuzvI
-	 MpIlgI0pyPhymbYuiPkBe5Tk4Y0TM2LfW8hKvXiIxJXRf8Tq3pUkC79Uyab2SMK1hE2uk
-	 qUBue4gRio+/UtZOJnhf23cos01CSrRX1S0j9+RHM5BsWHl/b6MpI7QW6pprV/FtWANvG
-	 SGWfHlcTyM5Dpb1Kpk11WfFTJf10QWKyu1GXay2OtMOWvfim7s1gPc49vuuc6A7cTqQ==
+	bh=ksrS7Oefslt3xXzyCARhXzGWZ59YHvK5cmSrbdK9Nc4=;
+	b=KP59n0x7mUBrjur5dvwQNQ0PgGYdOaVc4GUexKOM3N/DnZx5DRV8+RG4ol0ZWqPJnoI7
+	 BBJQL+VB7rGyJ9nk8/EFbxEu5vgnBw7KZzucRRDZXXXnr9mw3wis9HbLSVJRLS3JJjaG9
+	 Zm8j6UIUr3+V5YRo+WoxyZOkiyapjP3ZGcvin7Md/cZEm28YTOX7RtJWmXtBUxpR2WtNS
+	 xeJTCTQHyqnTTCAYPGYR8exeYOj+O7s2UqA236pIay8+VWIqsI9Q8/x1szlAV6+HKjmRD
+	 rEFxna7G27zJh8QU8IwLZNJMrQ6DwalsamrBgh+ldKxZKV8YID6BNy73pFoRMiweDUw==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789738118;
-	bh=nF3zccExM4xftUHpiCTHoshZ7C2Iza5xgd4jXyWIavQ=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=JEHYXtgn7D6qiiKAIpg1EQPfGTtO3mFQ+Lf9zja48GADO1H1prCT7py7ul1IsZT3c
-	 Lir8otgsYTAgWp1VtTtOtNymHBRzh/g+bo4aC5XsFvopOnQlRVM9jdw4C8IVs0Juqs
-	 iX0YUy1PLa+5pemuE6gml6+bWydKKNog+98RCxOyE6N12YOOnvw7fGXSc5viqemCzM
-	 pZ7bL767rJCtYAygQ0/TAqxBJm5sZP442O1VCqcscVZ4jt4kfMkKcN/PP22d4eod5B
-	 vZfLHuQRamvSkAOWErup//fk0vq790s9b9lgiOZUFcvoxS+e/tVSr43EEFlwBVE3I+
-	 7b21OG1It4OEQ==
+	d=lists.u-boot-project.org; s=default; t=1789739117;
+	bh=ksrS7Oefslt3xXzyCARhXzGWZ59YHvK5cmSrbdK9Nc4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=CrUnvpXPE8dSIxSmgPYjjH08LPbO0vsjQ7VCDxuyZozAmcDd39ROCaX7r+WlFDZpq
+	 LWy8fERuJEAMnqIMv1oveQoR/DGswo55Uj4x+scQpOnadmgxFjJbItBm0kcbaENMmI
+	 YLgkkRF5QbO/86GTBiNnvCPoPx7yxSXNF7cXo4hxLgf947cqvzTCfHFqiVOvCxvBY6
+	 17DJTseVls4lvq4ANbIEViwOpNugELWQJny3O6FkQxJFplBBwPz9RQponx7Etn83lo
+	 v8d0GVepTpcIBS+61c/A78Vhabw7llo83RQk3h61bp5xHoDICvdgf23jcqKpzGRjqe
+	 U6c7Q5Ap0MvVw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3A2DD60E65;
-	Fri, 18 Sep 2026 13:28:38 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 2AC0423F
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 12:05:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A41FE60D74;
+	Fri, 18 Sep 2026 13:45:17 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2FB84362
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 13:45:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1CB2440049
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 12:05:19 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 21BD740B91
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 13:45:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id F75Tf_aqBn0Z for <u-boot@lists.u-boot-project.org>;
- Fri, 18 Sep 2026 12:05:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org EF58040048
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=101.71.155.101
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789733117;
- b=q9z6+QWJLinoENu/u8JbBEM0FrWIfrWy+DmkBAx8/VCuiTKFwFb9+aDYEmcQJDBjgsI4
- PWq6v7AcDDlpI00b2+xtS1Nj/tli1yhHyGKO4jVUXGEbDu4xYNxwO+FbJR7RocDDu8xDG
- fErwDD6zKHaiR84rETboY8Ppun/c9P/xrhQ1pssHjwBdPaJ36UpRXKlIk7ZCcFT/RETyt
- umnrr+oqe3JUIsJIJ4hLaAoVLqQo67UYeKulkdZogHedC1Qul7mgGitFKKkt5ZTWMeCIW
- 0q9R40B6P/ACRVvQwXbNyBhhx2KQ+1rdfqF0Oo/+3W8BHrIVSYCdaAbY6J+cQ8pa59w==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9hUy8x6dm-fo for <u-boot@lists.u-boot-project.org>;
+ Fri, 18 Sep 2026 13:45:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 69E1440B70
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=217.140.110.172
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789739116;
+ b=AW4EaNq1YOsDxUOIosAx6xOXGfYj23ftkfY3l0ju9mwU0Q/dWZd76M0vMInFPsjIbdBU
+ tGZRg4K9sxZiqKe65GwvdCIet7aVB9shQzil+BvF+ZY3pM+PP2Mh8sR1fBDEoM/jn3WUA
+ 3outS3pHtEhLPbMChtnqqJLKTxK+Q1SAtJfGCeWI/lwgWu66CeCp7FpY5A7g9hZ9EaRhi
+ WO88vuk4hdy8hSQWwQmVhBNWbjtfwZ9xethTIj60N2BGbkopjCZ3sq6M9FxOHRo31SbdB
+ hKk0Y+gyyo/GNcrlv72aIbL1VfP10j8mhNXruaQXxtOM+rYTuOowr106ZalH01eSJow==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789733117;
- h=X-Greylist:Received-SPF:Received:From:To:Cc:Subject:Date:Message-Id:
- X-Mailer:MIME-Version:Content-Transfer-Encoding:X-HM-Tid:X-HM-MType:
- X-HM-Spam-Status;
- bh=nF3zccExM4xftUHpiCTHoshZ7C2Iza5xgd4jXyWIavQ=;
- b=Qovbe2OVCS2dZBMUhLTkceQAUIQmDdljpYVUpohns5HMkI5ImTEjs0DchIRSzuf7syPH
- Nq+X3cq+EjWAa8lQNDrScJsQNfodpJuuZDKO5Rt42qA1jt8jp6KPDQf3GIlfz+ksmZIWA
- 3zdZUFeEW6b8jg9bbR5iNQCgF47h75l3947xTT4eYZ4vp2dQSJNRxW3dsK158n2F3bTIY
- fT8jkC+51dWDVM20+ngQgGpNwkkXkNZQ0434fliOiyRoI2PYV0+MpfBY8dqtR4GHg2ABu
- y1MqcJpb64vydNVFmPPX3jT2SPxJpIyOHFpxeIqKNx7hcjae1P1pDl3ek8eCbjENJTA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=jmu.edu.cn; 
- arc=none smtp.remote-ip=101.71.155.101
-X-Greylist: delayed 304 seconds by postgrey-1.37 at util1.osuosl.org;
- Fri, 18 Sep 2026 12:05:16 UTC
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=jmu.edu.cn
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=101.71.155.101;
- helo=mail-m155101.qiye.163.com; envelope-from=amadeus@jmu.edu.cn;
- receiver=<UNKNOWN> 
-Received: from mail-m155101.qiye.163.com (mail-m155101.qiye.163.com
- [101.71.155.101])
- by smtp2.osuosl.org (Postfix) with ESMTPS id EF58040048
- for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 12:05:16 +0000 (UTC)
-Received: from Vostro-3710.. (unknown [14.220.232.127])
- by smtp.qiye.163.com (Hmail) with ESMTP id 4e4b3dc01;
- Fri, 18 Sep 2026 20:00:06 +0800 (GMT+08:00)
-From: Chukun Pan <amadeus@jmu.edu.cn>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
- Chukun Pan <amadeus@jmu.edu.cn>, Quentin Schulz <u-boot@0leil.net>,
- Kever Yang <kever.yang@rock-chips.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.u-boot-project.org, Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH v2 1/2] arm64: dts: rockchip: Add HINLINK H28K
-Date: Fri, 18 Sep 2026 20:00:00 +0800
-Message-Id: <20260918120001.2256317-1-amadeus@jmu.edu.cn>
-X-Mailer: git-send-email 2.34.1
+ c=relaxed/relaxed; t=1789739116;
+ h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:Content-Transfer-Encoding:In-Reply-To;
+ bh=ksrS7Oefslt3xXzyCARhXzGWZ59YHvK5cmSrbdK9Nc4=;
+ b=BljfRREP4npMuP6WFeIj/SyqIZ5cTSJ7IwuyzmlxGRQWy1salf4Q5qcQvlNTNckYC5IK
+ RuW2N3subos0SqQdstUKa2hzFNe4NqB/dqKbtQxczmvts7rn7zHxlZhGTKsOnIK8ArJev
+ EcUseMRWyFADMPVKAULRn2WuuVYt3UkZ+ToeErcUV0y3+Xpp83C63rw9eOJ0f+tDmu+pG
+ VyhLvm/X/gWiBPQX39faH0SA4MGrj1/A70pXLR3JkrYIDfkhz5KGmiE1Y268uPpRMHvVu
+ kiRqoXP82M2QV1vF9V9s0ISIs+5pcgwmLJ9ysci3XOcR08GLpsMm1YXF/U9WZNjs5RQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=arm.com; 
+ dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
+ header.b=cJllbW1H; 
+ arc=none smtp.remote-ip=217.140.110.172
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
+ helo=foss.arm.com; envelope-from=vincent.stehle@arm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
+ header.s=foss header.b=cJllbW1H
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 69E1440B70
+ for <u-boot@lists.u-boot-project.org>; Fri, 18 Sep 2026 13:45:14 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0B743168F;
+ Fri, 18 Sep 2026 06:45:10 -0700 (PDT)
+Received: from debian (X72Y076X74-2.nice.arm.com [10.34.129.25])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 67C063F7B4;
+ Fri, 18 Sep 2026 06:45:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1789739113; bh=lya+cBv5Dk4s9cYQ1mq6P+P4Ps+UvroZNNX9F/RSEBQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=cJllbW1HaGCdUKZuoGqpFOJUrsvjqECbgmepoNMDa5XUCzL6JMIrhrbFEo1Q8ZtoU
+ 1sgQKHcIVKL0iKT7go3MIoe2D4LK6wSe2eKB1aHh7gP/74K91D/Kc6IHusnZ30N/99
+ YB6lIddS5dl8N/835L38DvMtFlvJtlswxORRdQgY=
+Date: Fri, 18 Sep 2026 15:45:09 +0200
+From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Sughosh Ganu <sughosh.ganu@arm.com>, u-boot@lists.u-boot-project.org,
+ Etienne Carriere <etienne.carriere@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] fwu: fix read buffer size
+Message-ID: <aq1AZXpdeEHLmPYw@debian>
+References: <20260915-fwu-v1-1-cc1fe9640334@arm.com>
+ <DLHP3HJCA217.1Z4YOZ4KVQZNO@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0aa0b4635de803a2kunm0bbbbba53cc9fc
-X-HM-MType: 10
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlDT0saVk4ZSxhIQxoZGh0fT1YeHw
- 5VEwETFhoSFyQUDg9ZV1kYEgtZQVlKT1VJSUtVSUhJVUpJTFlXWRYaDxIVHRRZQVlPS0hVSktJT0
- 9PS1VKS0tVS1kG
-X-Mailman-Approved-At: Fri, 18 Sep 2026 13:28:29 +0000
+In-Reply-To: <DLHP3HJCA217.1Z4YOZ4KVQZNO@linaro.org>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -134,352 +140,91 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The HINLINK H28K (LinkStar H28K) is a SBC with the
-Rockchip RK3528 SoC. It has the following features:
+On Thu, Sep 17, 2026 at 06:26:37PM +0300, Ilias Apalodimas wrote:
+> Hi Vincent,
+> 
+> On Tue Sep 15, 2026 at 5:29 PM EEST, Vincent Stehlé wrote:
+> > When the trial_counter_read() function reads its counter from the
+> > TrialStateCtr UEFI Variable, it erroneously computes the return buffer
+> > size to be the size of a pointer instead of a u16.
+> >
+> > As the UEFI Variable is always created by trial_counter_update() with
+> > the right size before any read attempt, overflow cannot happen in
+> > practice, but fix the size computation for correctness.
+> 
+> The fix is correct, but the commit message if a bit off. The creation
+> is not the reason the read works. It works because the current sizeof is
+> always > of the new updated sizeof so the GetVariable calls has enough size
+> to fix the output.
 
-- 1x USB 2.0
-- 8/32GB eMMC
-- 1/2/4GB LPDDR4
-- MicroSD card slot
-- 1x 1GbE RTL8111H Ethernet
-- 1x 1GbE RTL8211F Ethernet
+Hi Ilias,
 
-Signed-off-by: Chukun Pan <amadeus@jmu.edu.cn>
-Link: https://patch.msgid.link/20260610100006.366963-3-amadeus@jmu.edu.cn
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+Thank you for reviewing.
 
-[ upstream commit: 5fd91b4f3ef20ecdc6db7a9e5c831209c7042c08 ]
+Is that not the other way around?
+In the patch the call to GetVariable() was truncated but here are the
+details:
 
-(cherry picked from commit 056a3d3a36a2f0bbcfc9019b57dbbbf9ee33929e)
----
- .../arm64/rockchip/rk3528-hinlink-h28k.dts    | 318 ++++++++++++++++++
- 1 file changed, 318 insertions(+)
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3528-hinlink-h28k.dts
+  status = efi_get_variable_int(
+               u"TrialStateCtr",
+               &efi_global_variable_guid,
+               NULL,
+               &var_size,                  // data_size
+               trial_state_ctr,            // data
+               NULL);
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3528-hinlink-h28k.dts b/dts/upstream/src/arm64/rockchip/rk3528-hinlink-h28k.dts
-new file mode 100644
-index 000000000000..0ec50e9156eb
---- /dev/null
-+++ b/dts/upstream/src/arm64/rockchip/rk3528-hinlink-h28k.dts
-@@ -0,0 +1,318 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/input/input.h>
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/pwm/pwm.h>
-+#include "rk3528.dtsi"
-+
-+/ {
-+	model = "HINLINK H28K";
-+	compatible = "hinlink,h28k", "rockchip,rk3528";
-+
-+	aliases {
-+		ethernet0 = &gmac1;
-+		mmc0 = &sdhci;
-+		mmc1 = &sdmmc;
-+		serial0 = &uart0;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:1500000n8";
-+	};
-+
-+	keys {
-+		compatible = "adc-keys";
-+		io-channels = <&saradc 0>;
-+		io-channel-names = "buttons";
-+		keyup-threshold-microvolt = <1800000>;
-+		poll-interval = <100>;
-+
-+		button-boot {
-+			label = "BOOT";
-+			linux,code = <KEY_SETUP>;
-+			press-threshold-microvolt = <0>;
-+		};
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&lan_led>, <&wan_led>, <&work_led>;
-+
-+		led-0 {
-+			color = <LED_COLOR_ID_AMBER>;
-+			function = LED_FUNCTION_LAN;
-+			gpios = <&gpio4 RK_PC1 GPIO_ACTIVE_LOW>;
-+			linux,default-trigger = "netdev";
-+		};
-+
-+		led-1 {
-+			color = <LED_COLOR_ID_BLUE>;
-+			function = LED_FUNCTION_WAN;
-+			gpios = <&gpio4 RK_PC0 GPIO_ACTIVE_LOW>;
-+			linux,default-trigger = "netdev";
-+		};
-+
-+		led-2 {
-+			color = <LED_COLOR_ID_GREEN>;
-+			function = LED_FUNCTION_STATUS;
-+			gpios = <&gpio4 RK_PB7 GPIO_ACTIVE_LOW>;
-+			linux,default-trigger = "default-on";
-+		};
-+	};
-+
-+	vdd_0v9: regulator-0v9-vdd {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_0v9";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <900000>;
-+		regulator-max-microvolt = <900000>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc_ddr: regulator-1v1-vcc-ddr {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_ddr";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <1100000>;
-+		regulator-max-microvolt = <1100000>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc_1v8: regulator-1v8-vcc {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_1v8";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+		vin-supply = <&vcc_3v3>;
-+	};
-+
-+	vcc_3v3: regulator-3v3-vcc {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_3v3";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc3v3_sd: regulator-3v3-vcc-sd {
-+		compatible = "regulator-fixed";
-+		gpios = <&gpio4 RK_PA1 GPIO_ACTIVE_LOW>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&sdmmc_pwren_l>;
-+		regulator-name = "vcc3v3_sd";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		vin-supply = <&vcc_3v3>;
-+	};
-+
-+	vcc5v0_sys: regulator-5v0-vcc-sys {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc5v0_sys";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+	};
-+
-+	vccio_sd: regulator-vccio-sd {
-+		compatible = "regulator-gpio";
-+		gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&sdmmc_vol_ctrl_h>;
-+		regulator-name = "vccio_sd";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <3300000>;
-+		states = <1800000 0x0>, <3300000 0x1>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vdd_arm: regulator-vdd-arm {
-+		compatible = "pwm-regulator";
-+		pwms = <&pwm1 0 5000 PWM_POLARITY_INVERTED>;
-+		pwm-supply = <&vcc5v0_sys>;
-+		regulator-name = "vdd_arm";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <746000>;
-+		regulator-max-microvolt = <1201000>;
-+		regulator-settling-time-up-us = <250>;
-+	};
-+
-+	vdd_logic: regulator-vdd-logic {
-+		compatible = "pwm-regulator";
-+		pwms = <&pwm2 0 5000 PWM_POLARITY_INVERTED>;
-+		pwm-supply = <&vcc5v0_sys>;
-+		regulator-name = "vdd_logic";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <705000>;
-+		regulator-max-microvolt = <1006000>;
-+		regulator-settling-time-up-us = <250>;
-+	};
-+};
-+
-+&combphy {
-+	status = "okay";
-+};
-+
-+&cpu0 {
-+	cpu-supply = <&vdd_arm>;
-+};
-+
-+&cpu1 {
-+	cpu-supply = <&vdd_arm>;
-+};
-+
-+&cpu2 {
-+	cpu-supply = <&vdd_arm>;
-+};
-+
-+&cpu3 {
-+	cpu-supply = <&vdd_arm>;
-+};
-+
-+&gmac1 {
-+	clock_in_out = "output";
-+	phy-handle = <&rgmii_phy>;
-+	phy-mode = "rgmii-id";
-+	phy-supply = <&vcc_3v3>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&rgmii_miim>,
-+		    <&rgmii_tx_bus2>,
-+		    <&rgmii_rx_bus2>,
-+		    <&rgmii_rgmii_clk>,
-+		    <&rgmii_rgmii_bus>;
-+	status = "okay";
-+};
-+
-+&gpu {
-+	mali-supply = <&vdd_logic>;
-+	status = "okay";
-+};
-+
-+&mdio1 {
-+	rgmii_phy: ethernet-phy@1 {
-+		compatible = "ethernet-phy-ieee802.3-c22";
-+		reg = <0x1>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&gmac1_rstn_l>;
-+		reset-assert-us = <20000>;
-+		reset-deassert-us = <100000>;
-+		reset-gpios = <&gpio4 RK_PC2 GPIO_ACTIVE_LOW>;
-+	};
-+};
-+
-+&pcie {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&rtl8111hs_isolateb_l>;
-+	reset-gpios = <&gpio4 RK_PA3 GPIO_ACTIVE_HIGH>;
-+	vpcie3v3-supply = <&vcc_3v3>;
-+	status = "okay";
-+};
-+
-+&pinctrl {
-+	gmac {
-+		gmac1_rstn_l: gmac1-rstn-l {
-+			rockchip,pins = <4 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	leds {
-+		lan_led: lan-led {
-+			rockchip,pins = <4 RK_PC1 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		wan_led: wan-led {
-+			rockchip,pins = <4 RK_PC0 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		work_led: work-led {
-+			rockchip,pins = <4 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pcie {
-+		rtl8111hs_isolateb_l: rtl8111hs-isolateb-l {
-+			rockchip,pins = <4 RK_PA6 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
-+	};
-+
-+	sdmmc {
-+		sdmmc_pwren_l: sdmmc-pwren-l {
-+			rockchip,pins = <4 RK_PA1 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		sdmmc_vol_ctrl_h: sdmmc-vol-ctrl-h {
-+			rockchip,pins = <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+};
-+
-+&pwm1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pwm1m0_pins>;
-+	status = "okay";
-+};
-+
-+&pwm2 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pwm2m0_pins>;
-+	status = "okay";
-+};
-+
-+&saradc {
-+	vref-supply = <&vcc_1v8>;
-+	status = "okay";
-+};
-+
-+&sdhci {
-+	bus-width = <8>;
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+	non-removable;
-+	vmmc-supply = <&vcc_3v3>;
-+	vqmmc-supply = <&vcc_1v8>;
-+	status = "okay";
-+};
-+
-+&sdmmc {
-+	bus-width = <4>;
-+	cap-sd-highspeed;
-+	disable-wp;
-+	sd-uhs-sdr104;
-+	vmmc-supply = <&vcc3v3_sd>;
-+	vqmmc-supply = <&vccio_sd>;
-+	status = "okay";
-+};
-+
-+&uart0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart0m0_xfer>;
-+	status = "okay";
-+};
-+
-+&usb2phy {
-+	status = "okay";
-+};
-+
-+&usb2phy_host {
-+	phy-supply = <&vcc5v0_sys>;
-+	status = "okay";
-+};
-+
-+&usb_host0_ehci {
-+	status = "okay";
-+};
-+
-+&usb_host0_ohci {
-+	status = "okay";
-+};
--- 
-2.34.1
+We are telling GetVariable() to read as much as 4 to 8 bytes
+(sizeof(trial_state_ctr), the size of a pointer, in var_size), into a 2
+bytes buffer (the u16 pointed to by trial_state_ctr).
+I think what saves us here is that we are sure the variable contains
+only 2 bytes, which will never overflow.
 
+Best regards,
+Vincent.
+
+> 
+> 
+> Cheers
+> /Ilias
+> >
+> > Fixes: 7e9814cc6c1d ("FWU: Add boot time checks as highlighted by the FWU specification")
+> > Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+> > Cc: Sughosh Ganu <sughosh.ganu@arm.com>
+> > Cc: Kory Maincent <kory.maincent@bootlin.com>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > ---
+> > Hi,
+> >
+> > This has been tested on the sandbox, with CONFIG_FWU_MULTI_BANK_UPDATE=y
+> > & CONFIG_FWU_MDATA_V2=y, and with a modified fwu_boottime_checks()
+> > function doing essentially the following sequence:
+> >
+> >   efi_init_obj_list();
+> >   trial_counter_update();
+> >   trial_counter_read();
+> > ---
+> >  lib/fwu_updates/fwu.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+> > index e9bb1b4fc65..24a8f1ce5b2 100644
+> > --- a/lib/fwu_updates/fwu.c
+> > +++ b/lib/fwu_updates/fwu.c
+> > @@ -82,7 +82,7 @@ static int trial_counter_read(u16 *trial_state_ctr)
+> >  	efi_status_t status;
+> >  	efi_uintn_t var_size;
+> >
+> > -	var_size = (efi_uintn_t)sizeof(trial_state_ctr);
+> > +	var_size = (efi_uintn_t)sizeof(*trial_state_ctr);
+> >  	status = efi_get_variable_int(u"TrialStateCtr",
+> >  				      &efi_global_variable_guid,
+> >  				      NULL,
+> >
+> > ---
+> > base-commit: a44f46af0aa17e48572e0d46c0d082886ee353c3
+> > change-id: 20260914-fwu-24265a691f9a
+> >
+> > Best regards,
+> > --
+> > Vincent.
+> 
