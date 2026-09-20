@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8478C982DA
-	for <u-boot@archiver.kernel.org>; Sun, 20 Sep 2026 15:49:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BD16C982E1
+	for <u-boot@archiver.kernel.org>; Sun, 20 Sep 2026 15:49:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 32FD340F00;
-	Sun, 20 Sep 2026 15:49:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BFCD940EF4;
+	Sun, 20 Sep 2026 15:49:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id d4qIsIQepEsI; Sun, 20 Sep 2026 15:49:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 0373240DB3
+ id xXH-sh1W1USW; Sun, 20 Sep 2026 15:49:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 8797240E41
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789919369;
-	b=aR4ZaQTjXAAA4DXPSe0nshEm5uu2RqecTT+3f0K0TTC5g6M0EYHhClvmuHnzc8vmkfpI
-	 zwhGeUAemSZmHLf2aJjl1uR3HgJ2Qo0aOhpivWB1B7Mgh1tpQukyDPyEqJTlA3x0icqoo
-	 1EY2X7Oohn2eyXuBRrafByNrRjFssHBz/pPaeHbTTRVg9vp58y3996yM/NDpmEHp7poat
-	 QPBHHqDOtmA3JxP/vJI4bVHUWSS4YnUA0lnG4AGu/S2tFIzdkjWRRw76ewzbeABjU8E8q
-	 kmD9A4baEnTs6ZDhNdV7uzMOkDqyp/TDSgztBNX+xXI8L+4ZN6qt9AigFv6YwdikaHQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789919365;
+	b=N2ac7XqkBzlSa8j75PsASvO3/55dQZpbtXoherxuwmIO4qJPlu6lpn035wBaDGKVy/fe
+	 HqiURkWsRAmFfKO7tKm1lE86KwMCaS/fR8uIJvskeefGkQp9VmlxHL+VJzb85fb6fdQd+
+	 Cs2wTIqeZ+7gJkFPYnqJoYTmOEhvo7pDL1Lh6G4IuubImsm9dKEUc2lvJlwAW90G0yfxk
+	 ERmE2wjO3QmZg8bGuLSXeUVF46+8zxvxPQCynqHiF1IAdU/+xinE5gL8ZikPHqgQMFctf
+	 6BVzuDyaJ7SpgsLEjcnVEeLP+pq8J74C3g/GneVemC9yr10AT60JKsgi9r9r1+Qay8g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789919369;
+	c=relaxed/relaxed; t=1789919365;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,137 +33,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=PsaDEPLJ39ZzGx0zeB9lMjtCBvIcz+satBbiJ+n9iOI=;
-	b=NktcOiMmRba2wt0Oog16mxzse1bO/N36S7/7571xbaSSTt0kjXBesj6ribcU0vQw8Jrx
-	 z/UOnLPsGcmaHvaxq+nUHT7kE4rqhHzdGYmFwmKmumOPYpRyqJncmXTEetz8E8O+NdgbQ
-	 jABHBf+okylRYvwgiJO9rOKrn3ei9jqelecNfEK5pgK/ZumzyN8vmyZy1fC2CFY2RkwCh
-	 J61WxlJnYZrWmPDRiiG8qKqSBz8VDHawRSxgyqyNIVSg2MFGxAJvOea9i98xCZGLDDU2r
-	 V3q7RC7FcTtk8QCHTy4dHkina218PwdwO7mmpDzPNnp5RhWWCEY67SnTKEIEj0ME4oA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=m1TOtNgA;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=Cm5Ts9kxkXPkIkxU/OYttUFeluIQCfBdtBsJ1c0kYVA=;
+	b=gOH2BIol/qoVMBkCcd6peRpEl18vrEJUGdMLHfa3nR5o3UGVLb8LN0n2DiDQP1NadGLa
+	 sS90WJCTED/dVqN83lfp9+qzRGEh3NSWKe5Drzvj2sWRQPn3f4duFmn8lRQNf0y16m/y6
+	 Pbcfxgg3dSn2aTH3zC8VcL1owDP/Fqh266sorxLosFpFuTAuFucTlZHixQWgUFaIlMNyL
+	 JdvI9wCJw+LHgMjDf0H3aw7tDs7XXTKSiv0EvpC+TuMeX10YG7YPJfzRM3rqPt0mpmi/A
+	 buxBUCjRSVgWVJdi0EqcXq8pX2dpMSCc6gXRy4+ealoRj1M3yYlzh4RgETbEaUaAONw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789919369;
-	bh=PsaDEPLJ39ZzGx0zeB9lMjtCBvIcz+satBbiJ+n9iOI=;
+	d=lists.u-boot-project.org; s=default; t=1789919365;
+	bh=Cm5Ts9kxkXPkIkxU/OYttUFeluIQCfBdtBsJ1c0kYVA=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jXa+6XbwfncMY9E5tt5LDp3u+eFU62vpisVvO2CdMHR+hyHnb51ZgHrgpgatOv7nh
-	 SG0+O1XR91AgjaaFnb/38XNcGcBIqGyD7huwqkL1HDaFDSYl/Ws2hHbwNzfFyZ2cKL
-	 00sP8aUYAXm3eLpiM6aIIMlVOODnx5Frx5rdeFrhAMjFbItS5wTlaclJ1svHzHj/it
-	 S+8U+XmPgCNP4Z7g2nIdbSC2+j6qOYfxnsDHOzrWePQ0tqOrg97Q4TAwFppOwkmpve
-	 TSCWgYFLQJcEoTfSxeA94OQ/XIVffFtRRpon+7PQAiITbrjbN0K9AKb2T5Xau0IDYA
-	 XikauLBUaKpqg==
+	b=jzay/iQBZWeMfayczJ6k9RegGFEc6wD4sQ3zaHP09XL+o5mEfhL61zgKFSAffvpFG
+	 3Jf6/zr1444AZ9qBq2Em0nI9jAqUvEEABJFlhXTtkphuFF7vlyQJg6u/l5nYsvMydT
+	 AoZfw3HanBxilb/8+Lm9Q0fJc379vhhahcn/zTxXfsG0gBCH7W9kOzrwcbtoyR96NR
+	 eMRXck9wKt2tDMTOF9zf1EAY6LllkuH889GGlhTP97j24Eb921NKKsWyx/AHgQ7F6h
+	 U/eyPgfd1Jv+xW70qUxEFGUoisxXmFYwGgPaCvBFUmQZiB1c+MTvHUXyLXXPVcwW2A
+	 UIVm3Tam3HY9g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0373240DB3;
-	Sun, 20 Sep 2026 15:49:29 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id A3E3F224
- for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 14:16:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8797240E41;
+	Sun, 20 Sep 2026 15:49:25 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id EB28A24D
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 14:16:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8A40840E22
- for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 14:16:23 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D0DF7400D1
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 14:16:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id m3WbyfyOlJBX for <u-boot@lists.u-boot-project.org>;
- Sun, 20 Sep 2026 14:16:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 8F6DC40E1B
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789913783;
- b=p06chAkiFVVp+QsFnJTpemdJ0vOp6fxKHjLJXIT6xLPX7ZVMWSdzMFOWYO2tT5+hOfJ0
- y6+BE63Ww8iLcSCBecS7exmK2te1CvhsVbHx7nCK+ildNgqzwOZZv0iNJsVIoD/S1ba3y
- nuuHmDDJkZUw6qdnjPYRwXIDVc5tKnei5cJ4tiTSLfs5IoQr4CeXajS0wNd1j6LYxyPjv
- LVG8U0Kq7Qjc0ilz3k4qfI3puoMAr1bGBMjnXWmQup8zaMlWzTSzWn6eRtGMmHWtXiL98
- r1h3pvUrecaoOF/JTKW75+c5Mgd82t4X/hyBe5OaGw4EZ2UCEbfYsP3EQqqt+aT+KVw==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vnXPl9XAaR0q for <u-boot@lists.u-boot-project.org>;
+ Sun, 20 Sep 2026 14:16:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 8DC1540022
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:31::11"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789913777;
+ b=nnSX8GCzwWHeHbQW6gpk3+eK6rJLeJtFY30wE0/GvWLi4lq+Lev37x+jhqvge+feAhTW
+ aWYnpqC+WXcwbu9Hlp1ruqLoDuYoPcBXYUqbF7ttBIOZWbkmwp0/0FT0PLWTsffF49bYj
+ 3qK8pGc5oVMRGjR+RDtDLaP8qYKVfag/Eoo5hsSY+K42+DGRET2+aSHlwf2stGIjiHE8x
+ NW3Mxg0uRnfdmtthiKOUhyYwa4OTUCjSNBiwoB0tUfA0q3oDIz/aWDgSpydRVbiOP6ony
+ Zbe8ESLPSZ3a8O97E0CMFFTZP13DYR633g+f8GLbzEYMS25PUyGSWSOOhez16hnc91g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789913783;
+ c=relaxed/relaxed; t=1789913777;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Sender:From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
  X-Mailer;
- bh=PsaDEPLJ39ZzGx0zeB9lMjtCBvIcz+satBbiJ+n9iOI=;
- b=Gs02PnN+05qZPH7K/f3613CdBr6F8RFDynHrvVo05LoP6/Wfknux/TuutW8FFXCsqbkn
- /N2gSQFhoGKUQP2FU5xG8jekBOb8iK4SQolG3zYrpOOKzFVQlmij5lMrWuyrLft6JkanT
- Vys5p5EJcFU6WlQaqgUP6Wur+J4JUPbxyYL3drq48ynHobJFUwpqHWyuuT700k6RVKRbi
- 7X56YAoqQCXQSSJnKZsM5tVIYkXjYP4CG6qE4Yo+Y2YMOHZaG14yB9zHpT+XDWL5X7otR
- kRWmvvpIUA0jNmbDwcX1WolY+gg068oV1B5VxSHhie84/qCr4fjmY1vdOS9qjSKE1mA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=Cm5Ts9kxkXPkIkxU/OYttUFeluIQCfBdtBsJ1c0kYVA=;
+ b=PNyn7IqwxzzZnmtP4piLP+vHHMKPg8/jUM3fV1kwh8lG/vkiTt8k6vo6gT7gGc7+/5Gb
+ UKmXCaRN30x9ZN18qcZBVo/etdoTNCWcStJwfgJrmz/P5/M7LWTbJJbNeXTMKnBpmt/0M
+ 2iNZs3IKBHLEbp24byOvalwqjlyylK7fBjQC8I0PIMKJLob9HW/S4UxKpipx6tmTnoKNT
+ CjXHEJlBuzKZqs8BDicSuyIrYEaaKioJzDmCDhXcNp8B426d39P1NeAMEYvk64hhNkPN6
+ IslEefzFUSu63bp3NGVmZ3pSbd0J/0L3tO6/IFjHAaj8mCxiXgE0ZO8qvjJRUGvF+2g==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=m1TOtNgA; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
+ header.s=20251104 header.b=q7K23Ayx; 
+ arc=none smtp.remote-ip="2a00:1450:4864:31::11"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::10; helo=mail-wm2-x10.google.com;
+ client-ip=2a00:1450:4864:31::11; helo=mail-wm2-x11.google.com;
  envelope-from=massimo.pegorer+oss@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=m1TOtNgA
-Received: from mail-wm2-x10.google.com (mail-wm2-x10.google.com
- [IPv6:2a00:1450:4864:31::10])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8F6DC40E1B
- for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 14:16:21 +0000 (UTC)
-Received: by mail-wm2-x10.google.com with SMTP id
- 5b1f17b1804b1-49b912d37b5so12253825e9.2
- for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 07:16:21 -0700 (PDT)
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=q7K23Ayx
+Received: from mail-wm2-x11.google.com (mail-wm2-x11.google.com
+ [IPv6:2a00:1450:4864:31::11])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8DC1540022
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 14:16:15 +0000 (UTC)
+Received: by mail-wm2-x11.google.com with SMTP id
+ 5b1f17b1804b1-49d1fb0cf5eso15617375e9.3
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 07:16:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789913779; x=1790518579;
+ d=gmail.com; s=20251104; t=1789913774; x=1790518574;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:sender:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=PsaDEPLJ39ZzGx0zeB9lMjtCBvIcz+satBbiJ+n9iOI=;
- b=m1TOtNgAFIrarpqweszrOjZMvmA+MB18o+hesqshIfZ/UFuGj8evUrPEz/TI0qob4Y
- JyAOp7oevtTbeCdr4dXV7PF4QCZDIjNcrGhwNFb8iGxREMG8zZIICFFI/fhZCLUCGS/6
- +zZwQR15hkNazCbCa1L1GcNZOUoGydy0hTMigJblHSlniwDon7TJ2VsyW56GfVw31ss9
- WoyYt0mVqz9hrOWFkKo1nQSReaIW3LxmhDIKk0nMAz8pZHGBUdG27oKpt6suPFMCs9jj
- FpMahE/vE98b5ursHTd2QPZ/Q5C9NTP3Y7ymfwp/GrVzNu7k6KpNVRvn25UaH2jypLus
- 0B9Q==
+ bh=Cm5Ts9kxkXPkIkxU/OYttUFeluIQCfBdtBsJ1c0kYVA=;
+ b=q7K23Ayx0m3ROOeOnunhHLoxVZmpyJWJ5oa46Wb+nPPR79iDY7L3/bWQIZWU4JnT63
+ UxdbimkD/oA+uGrHKgnE5fDWCGc2ZoKjbJF9SZUZFebSUjrbBFLp1Qtv7u9c6lsP7EkJ
+ oYFxKzjv+gnufdptaoX2v0wX6nBS5HHo/qzVtnSpUA+8TJrbPtfRbHdg7jTdstKU84Bp
+ CHxGVfhUQ4AwC4YHjwsBS3r5MEYCFIMPDFm44eW9/+p44oPf4ucVEBYe6cA5eMBGomzi
+ iW/csetlyZom1biuLJai2zOpjmViCk6LYpCeiD31tFtJ+u1dwPzb4a5zNyp2nFZAUIfF
+ +giw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789913779; x=1790518579;
+ d=1e100.net; s=20260707; t=1789913774; x=1790518574;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=PsaDEPLJ39ZzGx0zeB9lMjtCBvIcz+satBbiJ+n9iOI=;
- b=RUfpprAxJ0988K3Rlilrmj3fhOCNEu0XFIuQ0ohuKBa743Ql+q365i+MEKHkdJNeWX
- deloW8ARljc2q/0M2VfgG4lpwYFcNb5y7RHUpb2JDYoBjjZHBqvtZ+lk2hThTb0afMTm
- fo0+miVicH66Cnib8NjFM0CqzNhBd1HA8dlpZj+C7hKFrc1B8YFioizKFuRQjEPx139E
- 2uHf4rp0l8mPovFx+9jqnyFSvQlBt0IfXlEneK9d1dKcJmem6DyblF7cik+g0jnA3e5q
- XZ+2+9DsYwEVDKMWj09qvapgZdqd5KFl4a1YzhjR5j98VR6zqw760lsCyG4qEvzjxoxB
- RCyw==
+ bh=Cm5Ts9kxkXPkIkxU/OYttUFeluIQCfBdtBsJ1c0kYVA=;
+ b=RpJj/RnPwC/IKpqA2+eDJUy+59bQv7DuQRcBNiobyzJgGaat7Z61hLdL6rJ4MOG5Xy
+ NY3zWVmTSpETogSn/VrBrePzQrPo7GJtA0kJ0AukySk09aPj/bcir2gBeKwNsXbrCag0
+ MtABjAQSCwZttlFUs4E7SfPUvYpn8VfAQU4fs1wDpyoAumcUx1E3YHV29fUSgEci83SG
+ Ip6IkNf/g9qTYYkJSpX7ys7Gav5PhCMutXhP3zfUeeFvNGEToKC686XZOqqQnjcrB3u8
+ Zpe5TH14oCVlFjo9FwKGnNXigqIOiwdWjnj289xQ91M45cdrc21G4j22kXqupe6oMxY2
+ 4cAw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwozz3hzyJaYj31i4Ths/psD86e+gM+qV+/IZxw3hhxsgOcYumBuiV5JdbdqGzgRlCAhXRvEGU=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++knEavNRNKk19CdrMTFcwXvurvsnJzWujzVfU4iJ4+WovbeWUQu
- BzcMBw/ZZlybpbV3za4ciY7CKZ7BfsvKMVwOlTWJ3dve7eLouAqCsm6Y
-X-Gm-Gg: AYBFou09NeogdojERZhapcF7ZGtVXQjkgblWQcykcAR9Cq3w3OaWinki3RVWjgjZYRH
- 2U8Bxj/L949dTHWJapJwc8dZhqe1xSatj3Gcd3numqnync5U2JT/INREaH3rliW7+wu8jR/KDjr
- +DGo68ptmVYfoiiHqtXlkHBDHBrclq4moWQyAVPCPIwZYFrBpcwpxRxMhQHCbHLypZPhIpjynQE
- 3JW+OCrJfW1okKgR41HsUNP0aMYV4KpMiuuxUxfSPlpR7hkjtrmu7eRH3mywQoC4EhWn01UAyRV
- 0db3TcrieJhS7JPMTkJCEE+nX2yRX0U5MAJPEFjCy2+frrwwmLRxInpzsdMDXjvea7QoEuy8tPS
- 28HPjFrLoVvHkv/Xjh1YxAt88u0UZuiRfOjs/ZqTrMQWqGLcMszFm/Fhx54sechgkyizOT9+tgF
- 4h+58VHjNAJQOJVfBi9R3Ys7O5G4lF+MZg/qNPnr5WMNIrXGZJ9QGpZ8eVPslzL5EylTqzK5z1G
- k4c+Lmuqg==
-X-Received: by 2002:a05:600c:5020:b0:49d:726:cc9f with SMTP id
- 5b1f17b1804b1-49fc56716f3mr105112745e9.5.1789913779004; 
- Sun, 20 Sep 2026 07:16:19 -0700 (PDT)
+ AKwUvBzISd6ly6MkoNH82xYKTTH4GcJBumrKnZ9zsC3CKddk31JcgNRMVdyD227OV+8AslRNtwIOAt0=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++kLJj+Jl7z1Af9q5baQA6iHTjSDREGyL1HKW165hLRsQTfk53na
+ zb1ROcwkRRbXseJaOzkm6bXQlRSpKz40pSiEdwdKSv19P3tq4e5dspFA
+X-Gm-Gg: AYBFou1DvUeCBB+Cm1saHE2da4E/TsQG97p50fLsZyEL2T/BUlmQoQke+CNINHiokLs
+ jO+0g9igwEdMAvGmpTmbsPxzqQMjeE1W3/r+cA7LE+r3fbrrnXDvVFAddPJkefYIJMPtKTp1gWC
+ Wcbv5Px/QyWbVAVB3GaJOSiwYzUnqEzrB8L3zh7j8E8FZLeTJMF2g2640w3XBH0yhspFWGsUQyc
+ utt2Ceht0gVL7PDazCtHaU6luekwRLUP3pYtaCyKLfxnPqV5fiPhl7vdzkAMLFEGJyvV/H2KWhE
+ E1v4G4vm7ep/cURSDZNgPpHK56gINJr0IW+t8e+b0NNrXwaSfwMhXSY1ENpVyDAgoL96wnOCPj+
+ 2tT4J0QiNbNkEBBg5DCelWNgUPJmfRAABwKBObd+yLUBrrUbfypujlEwG2Xg3G2nfoRU1Sjr642
+ +naQY1J9w+L0N9kWyR2/8mfA6C+wj3d0H8FhPkV5FSP4/ER/ShbPx/SNOv/SeZ0LTlq7GRs3qDh
+ dc4jSjf
+X-Received: by 2002:a05:600c:4f86:b0:49f:bd3c:bc25 with SMTP id
+ 5b1f17b1804b1-49fc574e7d3mr110771155e9.32.1789913773844; 
+ Sun, 20 Sep 2026 07:16:13 -0700 (PDT)
 Received: from [127.0.1.1] ([151.51.151.34]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49fc57547easm184107005e9.3.2026.09.20.07.16.16
+ 5b1f17b1804b1-49fc57547easm184107005e9.3.2026.09.20.07.16.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 20 Sep 2026 07:16:18 -0700 (PDT)
+ Sun, 20 Sep 2026 07:16:13 -0700 (PDT)
 Sender: Massimo Pegorer <massimo.pegorer@gmail.com>
 From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Sun, 20 Sep 2026 16:15:47 +0200
-Subject: [PATCH RFC 03/11] rockchip: cru: remove unnecessary common cru.h file
+Date: Sun, 20 Sep 2026 16:15:45 +0200
+Subject: [PATCH RFC 01/11] arm: rockchip: include SoC-specific CRU header file
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260920-reset-v1-3-42820216369f@gmail.com>
+Message-Id: <20260920-reset-v1-1-42820216369f@gmail.com>
 References: <20260920-reset-v1-0-42820216369f@gmail.com>
 In-Reply-To: <20260920-reset-v1-0-42820216369f@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Quentin Schulz <u-boot@0leil.net>, 
@@ -211,73 +209,182 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Move the only remaining function get_reset_cause() from cru.h header
-file to clock.h which already provides the whole common interface to
-Rockchip SoC CRU (Clock and Reset Unit). And remove cru.h file.
+Modified ones are SoC-specific source files that do not need to include
+Rockchip mach common cru.h header file: indeed, SoC-specific CRU header
+files are enough, and tighten to the effective needs, thus preferable.
+
+Partly reverts 'commit b52a199e323e ("arm: rockchip: Add common cru.h")'
 
 Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
 ---
- arch/arm/include/asm/arch-rockchip/clock.h  |  2 ++
- arch/arm/include/asm/arch-rockchip/cru.h    | 12 ------------
- arch/arm/mach-rockchip/cpu-info.c           |  1 -
- board/firefly/roc-pc-rk3399/roc-pc-rk3399.c |  2 +-
- 4 files changed, 3 insertions(+), 14 deletions(-)
+ arch/arm/include/asm/arch-rockchip/cru_rk3399.h | 1 +
+ arch/arm/mach-rockchip/rk3288/clk_rk3288.c      | 2 +-
+ arch/arm/mach-rockchip/rk3288/rk3288.c          | 2 +-
+ arch/arm/mach-rockchip/rk3399/clk_rk3399.c      | 2 +-
+ arch/arm/mach-rockchip/rk3399/rk3399.c          | 2 +-
+ drivers/clk/rockchip/clk_rk3288.c               | 2 +-
+ drivers/clk/rockchip/clk_rk3399.c               | 2 +-
+ drivers/ram/rockchip/sdram_rk3288.c             | 2 +-
+ drivers/ram/rockchip/sdram_rk3399.c             | 2 +-
+ drivers/video/rockchip/rk3288_mipi.c            | 2 +-
+ drivers/video/rockchip/rk3399_mipi.c            | 2 +-
+ drivers/video/rockchip/rk_mipi.c                | 2 +-
+ 12 files changed, 12 insertions(+), 11 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/clock.h b/arch/arm/include/asm/arch-rockchip/clock.h
-index 8d3819778eb..4bedf1a0294 100644
---- a/arch/arm/include/asm/arch-rockchip/clock.h
-+++ b/arch/arm/include/asm/arch-rockchip/clock.h
-@@ -194,6 +194,8 @@ void rk3288_clk_configure_cpu(struct rockchip_cru *cru, struct rk3288_grf *grf);
- 
- int rockchip_get_clk(struct udevice **devp);
- 
-+char *get_reset_cause(void);
-+
- /*
-  * rockchip_reset_bind() - Bind soft reset device as child of clock device
-  *
-diff --git a/arch/arm/include/asm/arch-rockchip/cru.h b/arch/arm/include/asm/arch-rockchip/cru.h
-deleted file mode 100644
-index cffbc18691e..00000000000
---- a/arch/arm/include/asm/arch-rockchip/cru.h
-+++ /dev/null
-@@ -1,12 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
--/*
-- * (C) Copyright 2019 Amarula Solutions.
-- * Author: Jagan Teki <jagan@amarulasolutions.com>
-- */
--
--#ifndef _ROCKCHIP_CLOCK_H
--#define _ROCKCHIP_CLOCK_H
--
--char *get_reset_cause(void);
--
--#endif /* _ROCKCHIP_CLOCK_H */
-diff --git a/arch/arm/mach-rockchip/cpu-info.c b/arch/arm/mach-rockchip/cpu-info.c
-index 4a23fdd70ba..7f20f7aa667 100644
---- a/arch/arm/mach-rockchip/cpu-info.c
-+++ b/arch/arm/mach-rockchip/cpu-info.c
-@@ -7,7 +7,6 @@
- #include <env.h>
- #include <init.h>
+diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3399.h b/arch/arm/include/asm/arch-rockchip/cru_rk3399.h
+index d941a129f3e..8d0a15efd50 100644
+--- a/arch/arm/include/asm/arch-rockchip/cru_rk3399.h
++++ b/arch/arm/include/asm/arch-rockchip/cru_rk3399.h
+@@ -64,6 +64,7 @@ struct rockchip_cru {
+ 	u32 sdio1_con[2];
+ };
+ check_member(rockchip_cru, sdio1_con[1], 0x594);
++#define MHz		1000000
+ #define KHz		1000
+ #define OSC_HZ		(24*MHz)
+ #define LPLL_HZ		(600*MHz)
+diff --git a/arch/arm/mach-rockchip/rk3288/clk_rk3288.c b/arch/arm/mach-rockchip/rk3288/clk_rk3288.c
+index af6c5d1f59b..d725730f5bd 100644
+--- a/arch/arm/mach-rockchip/rk3288/clk_rk3288.c
++++ b/arch/arm/mach-rockchip/rk3288/clk_rk3288.c
+@@ -7,7 +7,7 @@
+ #include <dm.h>
+ #include <syscon.h>
  #include <asm/arch-rockchip/clock.h>
 -#include <asm/arch-rockchip/cru.h>
- #include <asm/arch-rockchip/hardware.h>
++#include <asm/arch-rockchip/cru_rk3288.h>
  #include <linux/err.h>
  
-diff --git a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
-index 5a71e94ae1e..713d3eb2eb9 100644
---- a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
-+++ b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
+ int rockchip_get_clk(struct udevice **devp)
+diff --git a/arch/arm/mach-rockchip/rk3288/rk3288.c b/arch/arm/mach-rockchip/rk3288/rk3288.c
+index 62dd9da6578..81f9c95bc09 100644
+--- a/arch/arm/mach-rockchip/rk3288/rk3288.c
++++ b/arch/arm/mach-rockchip/rk3288/rk3288.c
 @@ -13,7 +13,7 @@
- #include <asm/global_data.h>
- #include <asm/io.h>
- 
+ #include <asm/arch-rockchip/bootrom.h>
+ #include <asm/arch-rockchip/clock.h>
+ #include <asm/arch-rockchip/cpu_rk3288.h>
 -#include <asm/arch-rockchip/cru.h>
-+#include <asm/arch-rockchip/clock.h>
++#include <asm/arch-rockchip/cru_rk3288.h>
+ #include <asm/arch-rockchip/hardware.h>
+ #include <asm/arch-rockchip/grf_rk3288.h>
+ #include <asm/arch-rockchip/pmu_rk3288.h>
+diff --git a/arch/arm/mach-rockchip/rk3399/clk_rk3399.c b/arch/arm/mach-rockchip/rk3399/clk_rk3399.c
+index de552b5903b..170071d243d 100644
+--- a/arch/arm/mach-rockchip/rk3399/clk_rk3399.c
++++ b/arch/arm/mach-rockchip/rk3399/clk_rk3399.c
+@@ -7,7 +7,7 @@
+ #include <dm.h>
+ #include <syscon.h>
+ #include <asm/arch-rockchip/clock.h>
+-#include <asm/arch-rockchip/cru.h>
++#include <asm/arch-rockchip/cru_rk3399.h>
+ #include <linux/err.h>
+ 
+ static int rockchip_get_cruclk(struct udevice **devp)
+diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
+index 8687a9347ec..85c95172699 100644
+--- a/arch/arm/mach-rockchip/rk3399/rk3399.c
++++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
+@@ -12,7 +12,7 @@
+ #include <asm/armv8/mmu.h>
+ #include <asm/arch-rockchip/bootrom.h>
+ #include <asm/arch-rockchip/clock.h>
+-#include <asm/arch-rockchip/cru.h>
++#include <asm/arch-rockchip/cru_rk3399.h>
  #include <asm/arch-rockchip/gpio.h>
  #include <asm/arch-rockchip/grf_rk3399.h>
+ #include <asm/arch-rockchip/hardware.h>
+diff --git a/drivers/clk/rockchip/clk_rk3288.c b/drivers/clk/rockchip/clk_rk3288.c
+index a4ff1c41abb..794cad3ea22 100644
+--- a/drivers/clk/rockchip/clk_rk3288.c
++++ b/drivers/clk/rockchip/clk_rk3288.c
+@@ -15,7 +15,7 @@
+ #include <syscon.h>
+ #include <asm/global_data.h>
+ #include <asm/arch-rockchip/clock.h>
+-#include <asm/arch-rockchip/cru.h>
++#include <asm/arch-rockchip/cru_rk3288.h>
+ #include <asm/arch-rockchip/grf_rk3288.h>
+ #include <asm/arch-rockchip/hardware.h>
+ #include <dt-bindings/clock/rk3288-cru.h>
+diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
+index 6e87db18be0..3df942edd34 100644
+--- a/drivers/clk/rockchip/clk_rk3399.c
++++ b/drivers/clk/rockchip/clk_rk3399.c
+@@ -14,7 +14,7 @@
+ #include <syscon.h>
+ #include <bitfield.h>
+ #include <asm/arch-rockchip/clock.h>
+-#include <asm/arch-rockchip/cru.h>
++#include <asm/arch-rockchip/cru_rk3399.h>
+ #include <asm/arch-rockchip/hardware.h>
+ #include <asm/global_data.h>
+ #include <dm/device-internal.h>
+diff --git a/drivers/ram/rockchip/sdram_rk3288.c b/drivers/ram/rockchip/sdram_rk3288.c
+index 25ceab98ee9..8136ad070a6 100644
+--- a/drivers/ram/rockchip/sdram_rk3288.c
++++ b/drivers/ram/rockchip/sdram_rk3288.c
+@@ -18,7 +18,7 @@
+ #include <regmap.h>
+ #include <syscon.h>
+ #include <asm/arch-rockchip/clock.h>
+-#include <asm/arch-rockchip/cru.h>
++#include <asm/arch-rockchip/cru_rk3288.h>
+ #include <asm/arch-rockchip/ddr_rk3288.h>
+ #include <asm/arch-rockchip/grf_rk3288.h>
+ #include <asm/arch-rockchip/hardware.h>
+diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+index 6fa8f268770..b792caba203 100644
+--- a/drivers/ram/rockchip/sdram_rk3399.c
++++ b/drivers/ram/rockchip/sdram_rk3399.c
+@@ -16,7 +16,7 @@
+ #include <spl.h>
+ #include <syscon.h>
+ #include <asm/arch-rockchip/clock.h>
+-#include <asm/arch-rockchip/cru.h>
++#include <asm/arch-rockchip/cru_rk3399.h>
+ #include <asm/arch-rockchip/grf_rk3399.h>
+ #include <asm/arch-rockchip/pmu_rk3399.h>
+ #include <asm/arch-rockchip/hardware.h>
+diff --git a/drivers/video/rockchip/rk3288_mipi.c b/drivers/video/rockchip/rk3288_mipi.c
+index 574ba8c6957..dcda469cffd 100644
+--- a/drivers/video/rockchip/rk3288_mipi.c
++++ b/drivers/video/rockchip/rk3288_mipi.c
+@@ -17,7 +17,7 @@
+ #include <linux/err.h>
+ #include <linux/kernel.h>
+ #include <asm/arch-rockchip/clock.h>
+-#include <asm/arch-rockchip/cru.h>
++#include <asm/arch-rockchip/cru_rk3288.h>
+ #include <asm/arch-rockchip/grf_rk3288.h>
+ #include <asm/arch-rockchip/hardware.h>
+ #include <asm/arch-rockchip/rockchip_mipi_dsi.h>
+diff --git a/drivers/video/rockchip/rk3399_mipi.c b/drivers/video/rockchip/rk3399_mipi.c
+index 68316df871c..2f4e99f714e 100644
+--- a/drivers/video/rockchip/rk3399_mipi.c
++++ b/drivers/video/rockchip/rk3399_mipi.c
+@@ -17,7 +17,7 @@
+ #include <linux/err.h>
+ #include <linux/kernel.h>
+ #include <asm/arch-rockchip/clock.h>
+-#include <asm/arch-rockchip/cru.h>
++#include <asm/arch-rockchip/cru_rk3399.h>
+ #include <asm/arch-rockchip/grf_rk3399.h>
+ #include <asm/arch-rockchip/hardware.h>
+ #include <asm/arch-rockchip/rockchip_mipi_dsi.h>
+diff --git a/drivers/video/rockchip/rk_mipi.c b/drivers/video/rockchip/rk_mipi.c
+index e7b5973ca58..c3768ce0b0e 100644
+--- a/drivers/video/rockchip/rk_mipi.c
++++ b/drivers/video/rockchip/rk_mipi.c
+@@ -17,7 +17,7 @@
+ #include <dm/uclass-internal.h>
+ #include <linux/kernel.h>
+ #include <asm/arch-rockchip/clock.h>
+-#include <asm/arch-rockchip/cru.h>
++#include <asm/arch-rockchip/cru_rk3399.h>
+ #include <asm/arch-rockchip/grf_rk3399.h>
+ #include <asm/arch-rockchip/rockchip_mipi_dsi.h>
  
 
 -- 
