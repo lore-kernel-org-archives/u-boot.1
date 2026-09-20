@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29076C982D0
-	for <u-boot@archiver.kernel.org>; Sun, 20 Sep 2026 10:22:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF1E4C982DA
+	for <u-boot@archiver.kernel.org>; Sun, 20 Sep 2026 10:39:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 93D6060658;
-	Sun, 20 Sep 2026 10:22:50 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EF51E80F8C;
+	Sun, 20 Sep 2026 10:39:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dYRV-Uc7Ppic; Sun, 20 Sep 2026 10:22:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A172360623
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789899769;
-	b=FMenO9obmVUjVhwMdTi4DMx7oOM2tcHpQNa8o0GNCUhkhsoji/E0tS5E7wKyxnmmsn3L
-	 OTPk7FhShBlKxSnFmNBhH9tiFwmuGNXxyXrYMO7TKzHFR6PwSYk9qfjJMiTDrKv4xfy1W
-	 ZmCy4GUoYpX/DkySmhPFss35n1EQ3faU8gFydbVuvs9f/R7ZAe6auXfHfQdCiKeZ/+7BQ
-	 xAkTtHd5MaygQlm/LkMloJA61/hYBIlOL4UJnXQNWhmSZa1C8rbe8+vI3hvDXyuAUiJmI
-	 htPCR1rr3RNS2/7fjyqCLiT0qVvjhznvXESvrD4KGPLDbDV7/fLrXWt4XDSs5g6o+KA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UB6JFf31327l; Sun, 20 Sep 2026 10:39:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0EE8080F86
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789900746;
+	b=lgUvaWjBQvV0RCw9hGVZIAlpXW7uc7sTmA2jkFC0T2i1YzqMAgSZ150zhBWp4/iyVCqH
+	 hVG3sYNYF6//iyob1UNvXJhDe198CLmGfxfwdS7SzjTBkMXikBnSbE4E8/hDZLPH8nUZF
+	 1m3rx1kyEKJGDuEPMvUuF0qF3pHPfe73HIQ7f28Ik3vbQUlZTwbit8PRIYC3RORy8b0Oo
+	 hGuRVANjIAU9EPd4FtrbN0ZiwyCZRp21y6vqoOBe28en+ke9DQxBe2xNcb/DJn+9/BG5i
+	 2LV90mUKdRtKXvSji+Yrq1gMq8vgkgvabmHc4AoBDIiNZhyCnF+FvH//9BkHxwogLvA==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789899769;
+	c=relaxed/relaxed; t=1789900746;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,109 +31,112 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=PbA/txLvGolDIIK0CeqcLK9MAg6ozzJ5ub0VRZmWRgw=;
-	b=DpGH8RzHcdK/5uBNeWjhLRH1fKOGSt1OL9lhEZA3K0oPe9kj3TWotS1r0ky/PqLZxk2m
-	 asQGR67yh9oE5JHMaFkYTCBrX4gS9PXcOPLafV203oMyZuU65+1VZpVfgOsYUCi5q3dBB
-	 +syUUat0eEshS0ygs+Nv4ZCMhhQ3kr2GwTlDJFsET07sKkRiu01BKKMjS4ondDhvE9/vF
-	 zDR3+826FIS0+CITNj2ksM0YAxBmYHkL+VtV2G18yy48cCLUBHUEkKfSnC7JAJ1rU93Wz
-	 bjNEgTqrInWReJF7I73hcURgN4Bs19w7Y5znNzz/KHJ2G9bGIzxHGNBvMy7Lu7antKw==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=H7hSiFCK2QQU0TPsAau6qxvNMULXTymT3supVnEBTJo=;
+	b=OnusOLjK6gjCpXgcsqAVDX+2ONl81+RTw2ry6LWSujcR1keCL9tDq9W7csH30l1de/cr
+	 I5xUO1yZyLS9LjeHIe2OepVRRxM0ZiiUuKehRIYzojZrvoZgXKdtQJlpzCGbOsarVutQX
+	 krQq6joxksNWB17RiEtu5k4k07f13BBykWqOcxyI7cxNbxqp6Q9r75Jg+XJ6O02m4Knhd
+	 IfoQeOoHOKNyj1S0bx7tvaBIrFB5MCO24A+1OcEUwcfGCCBm+85AAI9x3HW88YOiFjnGJ
+	 wc8ggpMh91fTf3c4HyqGv0DHSwN4pS9595ONcTzVg7RK68BfOOocba0hkdkrMQEHDCQ==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; dmarc=pass header.from=ziyao.cc;
+	dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=E97lMpqC;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789899769;
-	bh=PbA/txLvGolDIIK0CeqcLK9MAg6ozzJ5ub0VRZmWRgw=;
+	d=lists.u-boot-project.org; s=default; t=1789900746;
+	bh=H7hSiFCK2QQU0TPsAau6qxvNMULXTymT3supVnEBTJo=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=XnTykQfH8fpOnixoZ3GK+qcmXRCfw5qQpppQqJP12d/NrxMETE3GUNxYnvbqwwYAC
-	 EDz1lq8ZZ3MWOP+IuMLW4Py336g+gEwg+sgtqcXhUPgLQxpf6n1CopxvlUImVBh5wh
-	 zZp9pam/9QrXCFyKRO3MkFoHXsnlZYvXJuyOpq7tIPY7t64ZAn2wvy2zbjctvjcQtu
-	 +RmYyXCvriV7F979+9dTRqofAD6e8sxr8D5rVRzHd7oZL2LyWYwi5IZHckQs63PODO
-	 fl9qo+Zo5sqm/+XincAGwBwRNnPK4uwoT71jLg1bqFtbC/6jVG0y4PelnU0ZBm7srk
-	 8VYmsrT2VmILw==
+	b=opeDebViObuMx6mK0L8xR2u0e+MsfTa7VGyiJaJbdbKNN+9Wv7x968HUbymZI5klH
+	 84fM4JEaGQBOKb9W2yeci1O2fOUjeIKDxYu5H/ryPXIS8rf5JJIcRH7VBEtm8uzyBm
+	 w3youUWIWKsfCD9hE+5QEzBHtFFD4oNZYeDR+WDl1EMNX2H4SVItYo0TLrLBJWgn0U
+	 477VZ9uMChwkEGR0FaCERx/zYiJaEm8EI5AEX5yHo+RqX90dPBRrjl5JdDKrqIHRnU
+	 xijTO4nh0EVliaz5u2LGRl9Dti1Znh3Uum0noFQOeCit8IzTjeIlXOtcw5IodpAQlu
+	 5h8VXcKyLfMDw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A172360623;
-	Sun, 20 Sep 2026 10:22:49 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id AD52E371
- for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 10:22:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0EE8080F86;
+	Sun, 20 Sep 2026 10:39:06 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8402924D
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 10:39:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9F32B40099
- for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 10:22:48 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6965B80F76
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 10:39:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M6HFIilh70_d for <u-boot@lists.u-boot-project.org>;
- Sun, 20 Sep 2026 10:22:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org A87014005A
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.180.15
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789899768;
- b=lZ/louj5by58BDPZ0V43eHEleG9hmKY/PLkYP3GBMzi1p2cQeghAKdxLUQohWtsqiuSa
- r6VCVYoSidwks+C56C9zpEGq11xqmeyc8RplR9nwErtFXqhaNrBwQsMpuG5RdZ+whJO4u
- T5HT/OwrN0DapWDZwgsHM7xgXrrQvRNdtSwYnff7bejd/dzO0peMYC/hXoZn6CF2jac2X
- 76C1BDp3vpaEFM3bgi0LpvPBEdzttLcuJuv6XlOadWQMi/Ts4Agstcfc3e400gX+48c+p
- rvkraSpoBncWKNDW1TK08DaxZi5A0yb+KKjhOZbwHvRZvkOAGilDdrL/CQ3EyjNgymw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hFQDxs__cmBL for <u-boot@lists.u-boot-project.org>;
+ Sun, 20 Sep 2026 10:39:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 8C9F680F78
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=165.173.182.15
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789900743;
+ b=Uk7Gjw3edi17EBPbR1Bi6eqZIJMMCAdrwkXE+YVhMWVnCpL1BD8r3ZUcEqEeo3MVpVSz
+ eiQsvzLLlHAUtoD9ev0FS3zYR6N1eS4zn/ibwfk9tfmIl1yyB17C8VR5TqlrC6Icj81SW
+ gtwKc8bJYCvS4f2UmcJO+zuTmUivPmfwBpnoG3UOgz7yW1iCKsL1bW1QVxCgONxgbL0uP
+ w2jTIA+WzWChC+A8Im9bQm3SGMsBECXPOKYCaphytT11S87dlNvw+iiUrnQCHj72d40fH
+ FH9oZPbI1Fy42eEpAUDDrT/YRlQEfQEtu97BzF7L/LA+GyVPY87HUjHiK3kV+YIezzw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789899768;
+ c=relaxed/relaxed; t=1789900743;
  h=Received-SPF:DKIM-Signature:Received:Date:From:To:Cc:Subject:
  Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
  In-Reply-To:X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient;
- bh=PbA/txLvGolDIIK0CeqcLK9MAg6ozzJ5ub0VRZmWRgw=;
- b=TRHpWTzASwuR9y80gNGgO7EMZE2nDLlzsRvQ0yUc3Hs+zVA4kZ9eGxUTzncCRAxfweKp
- LfEL0pkV/yndRUK90shvTqcPeNN92DoCoIeha4sQfN7FcFyBEJZb4mx30E1u0w36mYOA+
- AI4sRa/6VoYk202BtWvaDfRfArJ8AvSfDrCu/LNX7sAOo5L2t1f4lA2RUzmBy2gHWD5z5
- 6GsPy8AZD002SD6c4YzJXY+sCpPi1dyJh3T5sBTFJexT7CjhEP+3sqwmpGDXI0dJOI8T3
- koRTwnUY9pbcNgwSgytSpXyk+6LF3At9jO+6VgQl/5Au3JYni2FiKHGZQw9I3ICU/AA==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ bh=H7hSiFCK2QQU0TPsAau6qxvNMULXTymT3supVnEBTJo=;
+ b=EQCyUYuICZizCAe9TFZf6B2lvzDPgQw+fygYBZlWW1AJIJNk0J/Tl+gTkxi6+cV8ToLy
+ gtpS/XZTzt2FQS4CMRsiXR40nMEKQD2xiFbIpjK5nVrI9WjVJrMDVnBjShMQPJiLy01gs
+ kEOsQzinLSVNViZvyxQGV5pmJtYo3iFbak6dO3GIuDI6vHKI/alfqEL4opVef+b16nt30
+ 4TG62zA1rr5dpTHWZawgaJwyAFNlj9duwc+CcfYk8qRjFIk7PeeL0jdd4ThmRH2LZw9Oo
+ 8IAxmHcSQR4Z6RIgdP/LGYQKHCfkUrKe4svyGmdJ/mlTsQOMKXL2SKphgBJZAvoucTA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org;
  dmarc=pass header.from=ziyao.cc; 
  dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=jsU7nixV; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
- helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.s=zmail header.b=E97lMpqC; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.182.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
+ helo=sender5-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=jsU7nixV
-Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
- [165.173.180.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A87014005A
- for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 10:22:46 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1789899747; cv=none; 
+ header.s=zmail header.b=E97lMpqC
+Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
+ [165.173.182.15])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8C9F680F78
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 10:39:03 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1789900719; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=SEs0rMMHmmB12TDlAdd9GjNY1JpV+SrPPL/NhxLXxLIM/paCGXp5YlDP9FFJ8QvBjX/cQoWT7PsU+EFQDL2K1wou+kr66lYnI9w8kwByZFUlJg/dsKzlS+nT+QEuP9BLrPX56gKMmCirmYwppZeS10g/+034bxtepqpuewbzcyM=
+ b=T45EMLRpapgsy7y6+Ug+zv3C5fimGyGfPZFUhapiJtxdjWNEUxTwIlNW3GTsnekDdYcs4bcCc4AbKRWR+iAmgY+5MkJmxcgZnKjVyn0iZBzXXX2V+XzTgNwhVWtlxVuFEgIatuIo+vgQZe3L4z5n6mP4c5yUa63IqG8RGB8Kx1o=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1789899747;
+ s=zohoarc; t=1789900719;
  h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=PbA/txLvGolDIIK0CeqcLK9MAg6ozzJ5ub0VRZmWRgw=; 
- b=ZLJ6seeKIhawKGv9XHNDR11IQzOzaO4kltW0yaxCyu3maMdRdAo+MgpQyu4d6E4Ma+DKUX0ZKjYpl/uVsUx5Rr4pXoMKXMpLyQ2slboUD16uzv1zciaDCnobCjtDI3q06v+elHEPNA5StwrDWdsQDR4gBat8pREiPCV0cxUtE6w=
+ bh=H7hSiFCK2QQU0TPsAau6qxvNMULXTymT3supVnEBTJo=; 
+ b=gNZvJbzIkpyicgmULEYjVF4YuvFcMilq8moHhFkb7eupbC2VfDaj4SHLa51jIKs9Zh0bGhXLc0RgSVVHx0JxFzzvKTTmkk3ryX8IOIpDASZgqbtO1YwgY7EMRsOAJqvVCMVI79FLvG/6HqCJY/xlpNKta9HHVYF2mw4RQHUWfAk=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1789899747; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1789900719; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=PbA/txLvGolDIIK0CeqcLK9MAg6ozzJ5ub0VRZmWRgw=;
- b=jsU7nixVf5WVxvA4mzzxRMArsHXbqtxQ9D53MGvrL5ZKGuJixwpfQL0iAozRhdNn
- 7Eh+Pnt+J+neNXx9Rqwdun5CD0pSgzfrkwaB5R9VjsbIAeG2d6dJXjchRbdACB4NB1J
- RYcKJCnVCqDMEiPcDqYFqr5GQ8wifbq8boV+M0EY=
-Received: by smtp.zohomail.com with SMTPS id 1789899745529833.2384331814807;
- Sun, 20 Sep 2026 03:22:25 -0700 (PDT)
-Date: Sun, 20 Sep 2026 10:21:59 +0000
+ bh=H7hSiFCK2QQU0TPsAau6qxvNMULXTymT3supVnEBTJo=;
+ b=E97lMpqC5yUm6lkYUWB3Y3BY8ZVnozr5XlIFku+FLCm3R0hU+eB20PRmHQQ2jIMC
+ jerUmEnWaU2+3TnFCz7IUuT6Gi0J0qtcT69o05N03VoozgcVGDWi6HApsOizzAhx9Cv
+ Ob5rk7WLeF8zyyEbuD0gKZTg7fqxU54V8r+36NIY=
+Received: by smtp.zohomail.com with SMTPS id 1789900717970970.4208406928216;
+ Sun, 20 Sep 2026 03:38:37 -0700 (PDT)
+Date: Sun, 20 Sep 2026 10:38:33 +0000
 From: Yao Zi <me@ziyao.cc>
-To: Han Gao <gaohan@iscas.ac.cn>, Yao Zi <me@ziyao.cc>,
- u-boot@lists.u-boot-project.org
-Cc: Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
+To: Yixun Lan <dlan@gentoo.org>, Han Gao <gaohan@iscas.ac.cn>
+Cc: Yao Zi <me@ziyao.cc>, u-boot@lists.u-boot-project.org,
+ Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
  Tom Rini <trini@konsulko.com>, Han Gao <rabenda.cn@gmail.com>
 Subject: Re: [PATCH] riscv: thead: fix D-cache flushing
-Message-ID: <aq-zx89k_eDPm1X3@pie>
+Message-ID: <aq-3qRad3KYZgH_x@pie>
 References: <20260919-fixcmo-v1-1-0a9db1d0fa61@iscas.ac.cn>
+ <20260920005609-GYA322162@gentoo.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260919-fixcmo-v1-1-0a9db1d0fa61@iscas.ac.cn>
+In-Reply-To: <20260920005609-GYA322162@gentoo.org>
 X-Zoho-Virus-Status: 1
 X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/289.848.60
 X-ZohoMailClient: External
@@ -150,59 +153,29 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sat, Sep 19, 2026 at 04:29:41AM +0800, Han Gao wrote:
-> Use CIPA instead of CPA to clean and invalidate cache lines. This
-> fixes stale DMA descriptors breaking USB enumeration on TH1520.
-
-I guess this issue isn't present in mainline U-Boot yet, since we don't
-have USB support for TH1520 currently? If so, please omit this part in
-commit message, you could mention this below the --- line.
-
-And it would be good to mention the meaning and full form
-("th.dcache.*") of CPA/CIPA here, and attach a link to the documentation
-of T-Head's extensions. As a fix, this also deserves a Fixes tag.
-
-For the fix itself, it sounds correct. I had a brief look over several
-architectures' flush_dcache_range(),
-
-- The zicbom path on RISC-V makes use of cbo.flush, per the RISC-V
-  specification (Volume I, 19.6.1 Cache-Block Management Instructions),
-  a flush operation atomically performs a clean operation followed by an
-  invalidate operation.
-- MIPS uses HIT_WRITEBACK_INV_D & HIT_WRITEBACK_INV_SD
-- PowerPC implements flush_dcache_range() with dcbf, which is described
-  as "those locations are written to main storage and additional
-  locations in the block may be written to main storage. The block is
-  invalidated in the data caches of all/this (depending on memory
-  coherence) processors", matching the behavior of flush
-  (clean/writeback & invalidate).
-  - flush_dcache_range() is no-op on platforms other than
-    MPC85xx/MPC86xx, I guess coherency is guaranteed otherwise?
-- ARMv8's flush_dcache_range() is also commented as "INvalidates range
-  in all levels of D-cache/unified cache"
-
-So this fix aligns thead_cmo.c's behavior with other implementations.
-With the commit message improved,
-
-Reviewed-by: Yao Zi <me@ziyao.cc>
-
-> Signed-off-by: Han Gao <gaohan@iscas.ac.cn>
-> ---
->  arch/riscv/lib/thead_cmo.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+On Sun, Sep 20, 2026 at 12:56:09AM +0000, Yixun Lan wrote:
+> Hi Han,
 > 
-> diff --git a/arch/riscv/lib/thead_cmo.c b/arch/riscv/lib/thead_cmo.c
-> index b8051e29e02b..763ff799eddd 100644
-> --- a/arch/riscv/lib/thead_cmo.c
-> +++ b/arch/riscv/lib/thead_cmo.c
-> @@ -40,6 +40,6 @@ void flush_dcache_range(unsigned long start, unsigned long end)
->  {
->  	register unsigned long i asm("a0") = start & ~(CONFIG_SYS_CACHELINE_SIZE - 1);
->  	for (; i < end; i += CONFIG_SYS_CACHELINE_SIZE)
-> -		__asm__ __volatile__(DCACHE_CPA_A0);
-> +		__asm__ __volatile__(DCACHE_CIPA_A0);
->  	__asm__ __volatile__(SYNC_S);
->  }
+> 
+> On 04:29 Sat 19 Sep     , Han Gao wrote:
+> > Use CIPA instead of CPA to clean and invalidate cache lines. This
+> > fixes stale DMA descriptors breaking USB enumeration on TH1520.
+> > 
+> I suspect this isn't a correct fix, there are separate functions for dcache
+> flush and invalidate - flush_dcache_range() vs invalidate_dcache_range()
+> 
+> Better to check the USB driver, where it actually need to flush or invalidate?
+
+Whether the USB driver needs a flush or only invalidation or not, the
+current thead_cmo.c only cleans the cacheline in flush_dcache_range(),
+which is wrong.
+
+But out of curiosity, I have a look at DWC3, and found at least the call
+in dwc3_ep0_start_trans() requires dwc3_flush_dcache(), which is a
+wrapper over flush_dcache_range(), to really clean the cache, otherwise
+the DMA data and TRB might not be visible to an incoherent DWC3.
+
+> > Signed-off-by: Han Gao <gaohan@iscas.ac.cn>
 
 Regards,
 Yao Zi
