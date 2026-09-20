@@ -1,158 +1,195 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08DEBC982DA
-	for <u-boot@archiver.kernel.org>; Sun, 20 Sep 2026 15:49:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38D5AC982DA
+	for <u-boot@archiver.kernel.org>; Sun, 20 Sep 2026 15:49:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C51E640AC7;
-	Sun, 20 Sep 2026 15:49:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 033E080D8F;
+	Sun, 20 Sep 2026 15:49:23 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SAnIkiCzR1WF; Sun, 20 Sep 2026 15:49:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 3FD5B80DC5
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789919362;
+	b=ibSkjzFxEr72uyUNjsbFrRToJrdDx4+DB2I7rnGAdU9kTGcLEVtX0NYqeUoTmBh6uf1W
+	 6KcOf/CHtw8lUErb8nvwFAHUL8WBLyw5ax4f7nlB+zOx+jCmw1blqaZno+p1VCsgjDwFe
+	 U9kFapaXsJ8TJKIH03Ns+6myTxBJwhsyiQwsA5A7CfaWWZE9A5idLbhwbac9FAQe2ZH1a
+	 /cJxc3JkwfKK2xTmK131BlTYYtTJuzCkjiZjSEXmAo0UTkdHZ9jm/+dJCBnkU9sza/ast
+	 4IoPYOMJFSz9HhvdJ5PCo39Hli7aOaZAvgv7Wgw1eX3eHo02uTvbbk2boZ0v+KC1ypg==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1789919362;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=QfDJvcBbuTQ/WtKjqLQmrt6OZxP2oXQHW9VfwmwqJUU=;
+	b=kmX13hhXYXu6M/rW7482Ywyc/YINb5VTuSrj0In1oxK58NqpV8nY8dbWCQ5C/dJwNfzZ
+	 hn/SVNz9WT5zj4UY4TLI4BqQ5OrTzR+GmFwHRL4BKbFVNNhNBIIz47YXQ847PjY5tVvHb
+	 nHYHVU0Q/KNq1zFSTRuRtv8BMWodXKblQDCbeQGUrLNK78PS44OOJN6TZHzOB18JH9jTI
+	 GFGWskmNjRhpxLqAl46LuCLtsvK1ovh55fMzT/aDpjuMV6ZzYF8iROQ2p/jtHaAkLq+dU
+	 CbXmywX4XaYP384xwGuGQ8v9e9NzwUGaZsXf447W4vYdwusRxQy/yN7kOAVAr7OFhZw==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1789919362;
+	bh=QfDJvcBbuTQ/WtKjqLQmrt6OZxP2oXQHW9VfwmwqJUU=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Sw/96RVAwxdwM69l9WKR0H7U+X7S1Z76QLMFW9KrMpXnYOr+hmy1WValBfKBx5YrX
+	 m7397Qv0SkbEgUw5Y6rKE4nGPFrn6Tqs98u8Ucg9uQKJMy2toiEohXDJcrBVmV04I2
+	 nhIPx+T5jdEOSrljCATrkhDRbTF8/CP5SpXh5CcL9Xblb0zgDMyhJYnC60KdSY9QiP
+	 EcohqZPbHDAe9hAMG6m2DjgWd7FtmiVgxiKSxY3+gRQ93DoueNOJ/ya5HI/M6angQb
+	 S25ULquYTUu2PzxIlKRMWyCq6ocV6V8TuCBgsT3/Exy7kKGI8NiI4HPc8nYdbf7tM9
+	 Ycfhsavm6a98g==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3FD5B80DC5;
+	Sun, 20 Sep 2026 15:49:22 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8162724D
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 09:30:57 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 614DE408B7
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 09:30:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id abXN5qIfI5mh; Sun, 20 Sep 2026 15:49:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 1881540DA1
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789919358;
-	b=bRc4OxdJ4XeR3Z+za9tAuBRRlvv93KE865zvlsFJaGm2nT8oBZX2xOEwYeOaf1g0ryBk
-	 KiAxz6ezf2HjrIhNyqerN1MRCb27vv63BgbC32bZ9tSm8Vg6A/IO50m2XT8dlK+SjZcuX
-	 XyJd8lz8OU5sj6Vy2InfZwPH6XOQ24s+Ksn2668gP00dGtj/5Ix1JlPQC3bkXeoCFvTgn
-	 2jv4fLTIksqUP18nbHNhGMrlLP/FGAj4aKTGnTbRwpNahFqk+Ufc+Fu5Hliu/IJ2dEL3t
-	 DeU5ZPybvuwsKPA4fwn4Pbao8WSrAmxxhbHHmuZDrFGBZ2lNJDrsFTaet5n6OtfaOJQ==
+ id 61iWtFYUUCEZ for <u-boot@lists.u-boot-project.org>;
+ Sun, 20 Sep 2026 09:30:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org EA3C840852
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=185.125.188.123
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789896656;
+ b=A3ROdBgc1gTj0FUQ2M15Y2Ioh5AIiCyqE16dDGGtLXKNqXd4jDKrWg/S5inezuQO5ggt
+ hO6F5u9mOQERbAV0yhN+6oFLBY6mCa92MC8HMatorfW16LXPqUySCzLYYcFFVqZ8m4uJa
+ qDBdV+1WV4OCMr1G+R67Z6HPNSkd26srnZbjODVQ0qAJW8b3h0/67ydzXOKpNFpCf7Nnq
+ SisoBZ1OVPw7Mx1il8G2sbEc8J1Z3ASR7nSNM9Kze647ttRC0h6yYa04ie/89vf+oZrwo
+ nW6BIacjI9/o1/XTjNKmncx9G8s6PvKktaZPTLRzyS7bqAW4+Gc932I+jwcrbzLaCcA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789919358;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:X-IronPort-AV:
-	 X-IronPort-AV:X-Amp-Result:Received:Received:Received:From:To:CC:
-	 Subject:Thread-Topic:Thread-Index:Date:Message-ID:References:
-	 In-Reply-To:Accept-Language:Content-Language:X-MS-Has-Attach:
-	 X-MS-TNEF-Correlator:x-originating-ip:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=E/i7ThiA2y6dJMnYXL7t3S6A+WdROOSHA7Avvaywg9E=;
-	b=Vm+xljEL6+cb/eAABUQG7apkJxQRkm9IRbE5tsbPfkSrb0m4AO8euNfJ4X1FZQfEsppO
-	 I9PZho81KeO8qfOFPy58xcyZbDAv0ayEZL85IQhJ02YmSIvChSRIX4DV1twaI1VbdCzwh
-	 +ilZTH6RYsoLalFMExO1Jpmq1LF6FhFbHfnDQB9hpLH+yjOAT05rdXu07StznLuEVftPU
-	 9bD164WObFdZt0yIuo2yKR8mGdsLVMUU2T6s12V+BQfxiFbYG2jGgUEt2Ux+B5r+hX1TJ
-	 t5ktvZ7dZcErKLB5aIn4eRZQmjKP+bpkeZAM86LUQNNyfHvjHAzYgyemeqUmKCDccDg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789919358;
-	bh=E/i7ThiA2y6dJMnYXL7t3S6A+WdROOSHA7Avvaywg9E=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=T2lbxkosyaXtKCMJwKRF4nT/r6RHW130VwP92OVtGVU/4I5q7RLnleVsmmSzGyJlc
-	 7IsnvuXqMe/zCUmdy6sw8GMvuGmGx1dkVg+GSXXNHEvYxjEvqM5FK7xhMMVOc9dLfl
-	 /hSOctEgQEZcZK12BZ3Y51C+i+ErhHIUEkTs+TbbwHCenoaK6PMNtPZqHlYesyj7Jr
-	 FlU8Gry4yfswil+pCVDMbvQ5cTCL5oMn/8pBnxDCkPGuyLtQzJJ31A2pJERW8u1DUp
-	 msTJJBtDlZnJZjWjUWD7vQwmTjukfuTetU0YxdzViiFpbhgwNBuRiE5EVuKFAV1wJz
-	 tZPEF5NQoZ7NA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1881540DA1;
-	Sun, 20 Sep 2026 15:49:18 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id A4CC03DD
- for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 01:17:31 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8A6CC6065C
- for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 01:17:31 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DlCDQdDnhgRU for <u-boot@lists.u-boot-project.org>;
- Sun, 20 Sep 2026 01:17:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org ACEEE6063A
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:18f0:1e00:4::4"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1789867051;
- b=a8Lmg8ABTmL0j0ZlOnvpjsTxPUAbLiiJQGahkJI6aiKXeuLzZnqmZe5uu+LnEtWXtcTh
- wdE/MoniPpbUfYE9EX4yFXuQfohFMTLXn8z8JoZRNE3tP30hIr+O9d65Z5ikfza58pMko
- arCzFM5N+wFv+zEvL0f1Yu/iDH4IHZ0atAklSvLhAgLnqSIKvysILwqw/HNKIxOMJ84Nz
- VS9iappI9eHDXsXi/mD2h4feuQkYwqO0Q50ZFzhakWYo9RsQwVW1sbDg3DScHKNlZIby1
- FpkknIg9Fes2SrBCt/BCTUqyrywfKobi/iQpPW5SA41sOhK69foiPD87FvzgbTChhKg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789867051;
- h=Received-SPF:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
- X-IronPort-AV:X-IronPort-AV:X-Amp-Result:Received:Received:Received:
- From:To:CC:Subject:Thread-Topic:Thread-Index:Date:Message-ID:
- References:In-Reply-To:Accept-Language:Content-Language:
- X-MS-Has-Attach:X-MS-TNEF-Correlator:x-originating-ip:Content-Type:
- Content-Transfer-Encoding:MIME-Version;
- bh=E/i7ThiA2y6dJMnYXL7t3S6A+WdROOSHA7Avvaywg9E=;
- b=kaLoPFj5nIKJTOPkoZ0eMns0RLJLE0wL4AjCor5lut9Vi9Rzz0LoGtfFL1ac+oYJbbA0
- 8rDbfeno1TKL2eOkIWGekRe2rFYvWIqx/veqTE/vml7PAG7WfjG2sWlEzd5ctdGL6OTLD
- R80/bnQCMxbqyrydJTz2vvmNKYcN0l0zq0UXlwjPejylpH8WeVsxUcG3cY9duGXwo2C3+
- Rv/ij9qus9g7LlNSEKFYBpHUv7Zq/RM/VRQtzADogwCQYbwDPvw36osdV0n8+IkOCFybZ
- QNRXf5OnFHXYI0lBGzqrTIjXJd+ICRO24/MLagm0vnALrF8KV2Rj32GBFiTBbZbgrbg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=infineon.com; 
- dkim=pass header.d=infineon.com header.i=@infineon.com header.a=rsa-sha256
- header.s=IFXMAIL header.b=RLFhwDkf; 
- arc=none smtp.remote-ip="2a00:18f0:1e00:4::4"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:18f0:1e00:4::4;
- helo=smtp2.infineon.com; envelope-from=takahiro.kuwano@infineon.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=infineon.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=infineon.com header.i=@infineon.com header.a=rsa-sha256
- header.s=IFXMAIL header.b=RLFhwDkf
-Received: from smtp2.infineon.com (smtp2.infineon.com
- [IPv6:2a00:18f0:1e00:4::4])
- by smtp3.osuosl.org (Postfix) with ESMTPS id ACEEE6063A
- for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 01:17:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
- t=1789867051; x=1821403051;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=E/i7ThiA2y6dJMnYXL7t3S6A+WdROOSHA7Avvaywg9E=;
- b=RLFhwDkfGHyrrIFNwThruxH8obukNfZAGRPcsdQ7o4CXF2HeJK7BgTlS
- z9+NKHnRpsCEfH+18maHqATzEBRDYX2cWQtys4fEwqjzL02rkiiS4DaUM
- gLEWFCkFpN4DYMt/pxZvt7rLNmD5PiLmtAQvEBYUajjQjMX/o1BocmWic M=;
-X-CSE-ConnectionGUID: H4uvWVpaSM+y8te+bE/Xlg==
-X-CSE-MsgGUID: F4o6Lx7xSJqgZx8/7PmS9A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11910"; a="179701060"
-X-IronPort-AV: E=Sophos;i="6.27,111,1787004000"; d="scan'208";a="179701060"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO MUCSE819.infineon.com) ([172.23.29.45])
- by smtp2.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Sep 2026 03:17:27 +0200
-Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE819.infineon.com
- (172.23.29.45) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Sun, 20 Sep
- 2026 03:17:25 +0200
-Received: from MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14]) by
- MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14%12]) with mapi id
- 15.02.2562.049; Sun, 20 Sep 2026 03:17:25 +0200
-From: <Takahiro.Kuwano@infineon.com>
-To: <trini@konsulko.com>
-CC: <u-boot@lists.u-boot-project.org>, <vigneshr@ti.com>,
- <tudor.ambarus@linaro.org>, <mwalle@kernel.org>, <pratyush@kernel.org>,
- <miquel.raynal@bootlin.com>, <marex@nabladev.com>, <weijie.gao@mediatek.com>
-Subject: RE: [PATCH 0/4] mtd: spi-nor: split SFDP, ID database, and fixups
-Thread-Topic: [PATCH 0/4] mtd: spi-nor: split SFDP, ID database, and fixups
-Thread-Index: AQHc+i4ckY2dYg4zk0686DcglVkgyrbVcAUAgAHWMiA=
-Date: Sun, 20 Sep 2026 01:17:25 +0000
-Message-ID: <3f73f1ee1ad84367a2b1927134d2dcda@infineon.com>
-References: <20260612-split-id-table-into-vendor-files-v1-0-dfaaa82cc6f0@infineon.com>
- <20260918231054.GX858934@bill-the-cat>
-In-Reply-To: <20260918231054.GX858934@bill-the-cat>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.161.6.196]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ c=relaxed/relaxed; t=1789896656;
+ h=Received-SPF:Received:DKIM-Signature:Received:
+ X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ X-Received:MIME-Version:References:In-Reply-To:From:Date:
+ X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type;
+ bh=QfDJvcBbuTQ/WtKjqLQmrt6OZxP2oXQHW9VfwmwqJUU=;
+ b=j1iQZyCoFp6SE7nnRs+oRqemqMz87vytiC+nsyMicRNUKFCcAL/DX7pNZ4HQ4N4m682R
+ ApC2UR5AczgDbqsZTZr+6QgR24OMDtrVmE9pt71BkFCTj4yJjpBHrx3PFkqMM2skdL+Wk
+ /gd0ZGtrK2iLbvmOjz7sOnfSjpmFwrIOnH5x+t/bheJP17TIAi5p44a38VhITmJOmRMgS
+ 940+M0+rwyzbkNzx/nNgSc+e2J3okvWC8W75HIGjnibN0JhH4raE80AxEFtNROo734Oea
+ io09xsKCYxBnPzmRDi4K5mFdow1v4cbHRgbb52PMuPG5waESZffZzV0a4lJ3zkTQAWg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ dmarc=pass header.from=canonical.com; 
+ dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
+ header.s=20251003 header.b=fiuXwz1n; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=185.125.188.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=valentin.haudiquet@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=fiuXwz1n
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id EA3C840852
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 09:30:55 +0000 (UTC)
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 640223F2CE
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 09:30:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1789896652;
+ bh=QfDJvcBbuTQ/WtKjqLQmrt6OZxP2oXQHW9VfwmwqJUU=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=fiuXwz1noDgtepvcntvmZ5+HpYVJ993TYC4N29Z2IeCpf4hZLq6ifbiLFuEtmg3+E
+ otDUypDMlXEqULmgS7J9kE+fiqXMCETJKNCbuFkb9Iz0HY58a01VTmA28jZa6NHP0s
+ vStzf/YRN2LQivg0ocHLBsE8FLhHfYIBJCUBaznOsJZirIaRSBg2zG9SqQcFLLRIjf
+ f3bVcaxkfQwLeCFZwU/JnFchZ4eGdPVtaRoimGtaxYB0QV320NAFSIP6PZJU6ZLECQ
+ LAawifQr/nn0kds9bGIm9ujrfnFGCqeEc3gZXqYf+DaJDYB75vM2PYnfqndA89IHsR
+ EGfaI/aYQDb1HEHuhWg2ux8wjMmVnRII0LkHI//KXDAcIsphrbR9APcSlPzl4+OyeF
+ 5BRiOLO4tRbRq8OgYIHRGbxpHpr1hyGad0PQXe4q74kmSfF9/Qq+IQsyE6Jf7orSzk
+ Gtvh63YAq8gBh0LP3CwyoZZszws7cLya+mcGT6ZKRgJZgl0SuCnhJhr5v/e7Va+Omm
+ Ll2gXDBl0+dOfJ+bZcqLs8d1acypuuD15esZlM4L08sYYFGHg/861hJRzc0J+etyhc
+ BqxmcH8TaxbmEsKQnzdK8Wu8x/hU0WShDZAMZ1Ofz4t5+iH2rUuUd5QamKV/bxCEMi
+ TDG0EUvN17Zqhq5CNUYoG6Xw=
+Received: by mail-ej1-f72.google.com with SMTP id
+ a640c23a62f3a-c29476212f1so167992766b.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 20 Sep 2026 02:30:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789896652; cv=none;
+ d=google.com; s=arc-20260327;
+ b=C3av5VRz3DXpFwlgCXuCd5lNTAF5trT4cZLpePU0Q1SKpKXfJmrKw4mYgcpVx1wk1/
+ puXNZlZkF/qKDOH5q/4CUK/2boTbyrWvWWck/EJQaB8+x+JVZdWlSPVk5jCv+IW+Pa9U
+ qmTfRyFUX/0dpfqJqG61VnPq6hurXtNrW7A3CPPUNZV2nRYt98Sk23+mSEufq9faOBa+
+ qRpWA0l8jJf/qs5v9WZCMiUNN5bAyPF+AnogptpXckeUycHyZwKZm7JGNs+zllSM9WZl
+ LFToWzhT8WIYlKF5qM6rAodgrtJUD1w4fzZe6WFJB5/dyWzjl3bvaf1Fz67gn4EAD/W4
+ SpXA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version;
+ bh=QfDJvcBbuTQ/WtKjqLQmrt6OZxP2oXQHW9VfwmwqJUU=;
+ fh=6FhNX4EifmO17+HlZAt4SczR68t//h0kvRlBfULoxBY=;
+ b=Htrw0ZE2wv4wn42ORsrZ/KUQaW/yC+nnmQWTht+JdSRvpuyvsXKcR6Q3Wkpe4hqzOI
+ 6LWj00eW3rF5TVz0ST9ilHoRDDd52DCamg6HxavQNs2uuyiZldJyeahRWYMbLGYBParg
+ fMYhjWB1d8HC7Hqw8rvVQ9LKQnsQWx4xztSBrflOnNOxUCmqo0N2ty/2uXohXW07cOBV
+ OXzCgd12JVP3543r/ynoUdnQR+72b1/5ppEwDpQhjDpiebrYm0pdvLs06pLSRoVFHjS1
+ etqCygTxwlMC3kFFQFjn8wymOqI2X+bh1R4FfQ00ae+gXFUVaof1w521rbtFc9vntIAe
+ Xo4w==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1789896652; x=1790501452;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=QfDJvcBbuTQ/WtKjqLQmrt6OZxP2oXQHW9VfwmwqJUU=;
+ b=MGC0JepJ4kzOY+Sn3UkLUe981GFKZUA2J5bCJ2dnAaWGd8MvAHJdPWQfmGYVnSD9E1
+ H0RU9kT0c9GsMj2rTM7XEPFNa46olT1CKjVYS/i2AY63cyh2G8B1mLfNWMIPfa2uEr91
+ 9woy998VBIT+w88L+d0NvHVi7kPDxCqmNCgZOh+5iTApC7ugBfbL8Ztjd11UZ0gQYRdj
+ Oe/fYloZNBw7oOWg7iMqccfo4rYL6Z6cTHSM0y86sTb/ZOkqdkvjUtrmKpQcO4G359q+
+ ByMWN/RZk7OZzpSoJotMgXSzktSpWV6HzbmBiEo+wyspRnNgh8px1b3IWLeqTvT5fXNX
+ Kq8g==
+X-Gm-Message-State: AFuF++nxYauG9tPqQS5iKJi87TnIMLBLv/ihHmnLNxOB0Fh9mVUv7PaE
+ stZjX6gHbaARYH2BUOLtdol555PF2y06zvv0/V0O0FFl0Rji2ODxaCWATdoVwnjsEQ/9jcmuW1s
+ 0rPuqwueoYuVc++PHCdes9k9UIO5Eh66KC7Aa58z8EqMLz6BHTEQi3nUgUv388z7pR529PIhNqF
+ fOsicQ1tf5CqrN3vdb38AzalidEfJc4t1sgwQGWtmyau4oIz76zNfy+4fOf2n3
+X-Gm-Gg: AYBFou0BrL1etSpy1H+2QsFD+0EUcJ6AoY0bLy6S90oPF9XEoFg/QZAimpPDwhWiP+U
+ nEpVPij8x3qGN94Gxgc3B405p93B6kr9IsrZH9tSxdjzQRfyw3wcGZqtMJ9uP2KtJiLt94FD8V8
+ uJ6L0zO1Kxndh08iCf6ZBqwckLARmyDIdkjP6LvqvzKuuI4Asl6WFPY4w/
+X-Received: by 2002:a17:907:c5ce:b0:c25:cb7e:1cc9 with SMTP id
+ a640c23a62f3a-c2a1569a4c3mr597994466b.7.1789896651966; 
+ Sun, 20 Sep 2026 02:30:51 -0700 (PDT)
+X-Received: by 2002:a17:907:c5ce:b0:c25:cb7e:1cc9 with SMTP id
+ a640c23a62f3a-c2a1569a4c3mr597993866b.7.1789896651699; Sun, 20 Sep 2026
+ 02:30:51 -0700 (PDT)
 MIME-Version: 1.0
+References: <20260919215207.3832887-1-valentin.haudiquet@canonical.com>
+ <DC5DDDDE-98F7-426F-8461-028C7403C479@gmx.de>
+In-Reply-To: <DC5DDDDE-98F7-426F-8461-028C7403C479@gmx.de>
+From: Valentin Haudiquet <valentin.haudiquet@canonical.com>
+Date: Sun, 20 Sep 2026 11:30:40 +0200
+X-Gm-Features: AcwNN1W2koiGG_XLmShxTGK9OHMG8QbpuSfd2N8EkxEWXlu1tnZUp876Dxk9Ubo
+Message-ID: <CAPEPrSM8fLkC0xHxrbxeob76jJrpjzebmstYBoV9nHv7KT81Sw@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: efi_console: find vidconsole when stdout is a
+ list
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.u-boot-project.org, ilias.apalodimas@linaro.org, 
+ trini@konsulko.com
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Sun, 20 Sep 2026 15:49:13 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -167,28 +204,74 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-> On Fri, Jun 12, 2026 at 02:40:48PM +0900, Takahiro Kuwano wrote:
->=20
-> > The spi-nor-core.c contains optional logics like SFDP and manufcaturer
-> > specific fixups. The spi-nor-ids.c has single large ID database. There
-> > are many #ifdef directives in those files and that negatively affects
-> > readability and maintainability.
+Hello Heinrich,
+
+It seems that most default configurations for boards in the tree are
+using "serial,vidconsole" in that order. I did not find in
+documentation that the order of the values was meaningful and that I
+should put "vidconsole" first. From what I can tell, this is the only
+part of the code where order is used to define one console as
+'primary'?
+
+For my case I had that same default config and thus the serial 80x25
+default size was used, leaving the EFI output confined to a small
+region of the panel. A vidconsole always reports its exact size and I
+thought this would always be used to determine default size when
+present, but I see now that this was not the decision you made.
+
+Perhaps documenting that the order of values is important would make
+sense then? Or thinking about making vidconsole always default when it
+is enabled?
+
+I personally believe that if a vidconsole is enabled, it should be
+used by default to determine size (which is what my patch implements)
+as it is guaranteed to not fail (vidconsole always has a size) and
+when enabled it feels like the thing most users will care about; but I
+guess that is up for discussion.
+
+For now, I will change the order in my personal configuration then, thank you.
+
+Best regards,
+
+--
+Valentin
+
+On Sun, 20 Sept 2026 at 06:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> Am 19. September 2026 23:52:07 MESZ schrieb Valentin Haudiquet <valentin.haudiquet@canonical.com>:
+> >query_vidconsole() matched the stdout environment value with a strncmp
+> >against "vidconsole", but stdout may be a comma-separated list (e.g.
+> >"serial,vidconsole"); match the substring instead.
+>
+> Hello Valentin,
+>
+> The string match here is used here to decide which output device defines the screen size. If video is your primary output, you would place it first in the comma separated list.
+>
+> Could you, please, explain why this does not match your needs.
+>
+> Best regards
+>
+> Heinrich
+>
+>
 > >
-> > This series, as the first step of cleanup, move SFDP logic, IDs, and
-> > fixups to newly source files. Reworking, renaming, and reformating
-> > existing code is not a scope of this series and further cleanup will be
-> > taken place in follow-up patches.
+> >Signed-off-by: Valentin Haudiquet <valentin.haudiquet@canonical.com>
+> >---
+> > lib/efi_loader/efi_console.c | 3 ++-
+> > 1 file changed, 2 insertions(+), 1 deletion(-)
 > >
-> > Here is the code size impact when applying this series.
-> > Measured by my AMD Zynq-7000 (ARM32) environment with SFDP and all
-> > manufcaturers are enabled.
->=20
-> So this is a good idea, I took too long on picking up, sorry. Can you
-> please rebase on top of current next? I did the merge fixups easily
-> enough but drivers/mtd/spi/sandbox.c needs updating now.
-
-No problem. Thank you for looking into this.
-Yes, I will rebase.
-
-Takahiro
-
+> >diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
+> >index 8d076058280..85f1a9312d9 100644
+> >--- a/lib/efi_loader/efi_console.c
+> >+++ b/lib/efi_loader/efi_console.c
+> >@@ -344,7 +344,8 @@ static int __maybe_unused query_vidconsole(int *rows, int *cols)
+> >       struct udevice *dev;
+> >       struct vidconsole_priv *priv;
+> >
+> >-      if (!stdout_name || strncmp(stdout_name, "vidconsole", 10))
+> >+      /* stdout may be a comma-separated list, e.g. "serial,vidconsole" */
+> >+      if (!stdout_name || !strstr(stdout_name, "vidconsole"))
+> >               return -ENODEV;
+> >       stdout_dev = stdio_get_by_name("vidconsole");
+> >       if (!stdout_dev)
+>
