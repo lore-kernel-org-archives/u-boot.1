@@ -1,192 +1,136 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0902C982FA
-	for <u-boot@archiver.kernel.org>; Mon, 21 Sep 2026 22:51:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB7AFC982FA
+	for <u-boot@archiver.kernel.org>; Mon, 21 Sep 2026 23:08:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 302D860714;
-	Mon, 21 Sep 2026 22:51:50 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 76BA580AEF;
+	Mon, 21 Sep 2026 23:08:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id keJmxOwbLAba; Mon, 21 Sep 2026 22:51:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4B86E6068B
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790031109;
-	b=n109Lzfw5AlXBV4ZsMdAsnqvN7xLWbDyuveIZue7o6TtKYi5Vx5aR6OQgU6oFjwGRaDP
-	 uagUoFtgCom2e6X9433ftejvaYikP7yJpstq2i48tkK37Ao1pUhOfh6pGA1pa3jbOJmW8
-	 p9kCfp9vG0ZxCWWZUR38ApAL3n2zdgz+SOSSGuRJ1K5arnqFl5V8jV938blnxIVTcDEvO
-	 VzCo9rmm69rxk1EweDdi3i2vZJFdEdZE7u/TTFYW9L+wUryOcQkhe9fx+g5hmCOhD9aAU
-	 e4OYu87g+ngEuvJdggKGj6pJAsxdVCFSPeDmlmqbqHEpAunzu7xA1CNkFS7YRYs29EQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sL9gBguS-ugm; Mon, 21 Sep 2026 23:08:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 76FC080A54
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790032084;
+	b=FQBW9DW2cUnxsVVY5yvZoskpS1HwYMaLTR5bqDR4qY3tdQjpKGKiQlkhqYoTSp2Hb9wR
+	 gI3u2D0nAns69f/Njhyv/nF8oI6fU2E3DQsDUc4Q+3yc76Retwrn0DcZ4yTeSyG89d1Uh
+	 HdddUbH4N1cJBRYOiiQgzzaZ5wleLPaG843LDc5EUMH6BaQlne0fwngAnNc2Qwhqfdig6
+	 93Qm8BP59y44mtNCrM8vaqPKlThd8Rz4c+oz43dmwxv7adUfUCSb7jChmznGlNcpiyinq
+	 c/U4hRcHKmXoYuQTdvbmMJ5WWedlivRy6HtDEDAXUmm7d2AdD0nC3SISxoMefE8XViw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790031109;
+	c=relaxed/relaxed; t=1790032084;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=eGIMBlu+Nj7+5AdtbA+o57WNU0UutNxy5SUOUMc5Hks=;
-	b=fhpMz4s81l4CD2XDu1YwiAEMUCDlikxGAUJOUs1V9teZY/1w3ZDJhdvbLAvlI0h1U1aq
-	 rvVkXmxnVB0YJOQTQkY54cHSV7IQF9JIm14NNX9gGrcrfS4L7B8bHu7gU0XvpsuT2xyyi
-	 nm3IMSi+PmITKOd4Wk7i/izN1wbE4fSTpY7IzXmH+0T4UdLUJeUch6C1Qo/wArIS+1MuW
-	 g0/89uxuMLDcZvEALam11fJAuKhl6wEGlt4JxYwxHfnRPi59Ir4u/+rQJtfbQQNah650L
-	 b/3arBWzCgq9ZQKjUKtzgpB7FpeTsPH7xiZfWdkmOiMkvVzNW60iPXlToo8vQSF+hxA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=YncDQ22z606eS9biT9XUVkxquoPa7g66Kns049lsLVI=;
+	b=VWq4Cd6lv6SLrIcMrmvj7I4D7vFqwvTGwQJI+zvkzvdsk7WohJhCLVPgsA+c4vYuvRBr
+	 7WlHdkHyMBBLoj73BDr3RpLR6t1/SQHBGireVsBHF4cDRVrs+wYu+9Xk9oQqIV480DtSb
+	 copw/KhS/5lujs8RXEfmpSjHTcZUaWqqUHVoPaYuKeQ03DcMkk9fT6fB7uv6VxYIxJi++
+	 Nq9X+wsWUYUJfjCTtcVCYHTf7Sf8rtTs/pafsYclunKYezZciqu0OrRfiT7GqK6QMfM5q
+	 Cv2KkBQI0QNwhVujf6eDXngYxh/eOW4AMqnKcrFMIElPtaKHed+8TOzTHgZH/141A/A==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790031109;
-	bh=eGIMBlu+Nj7+5AdtbA+o57WNU0UutNxy5SUOUMc5Hks=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790032084;
+	bh=YncDQ22z606eS9biT9XUVkxquoPa7g66Kns049lsLVI=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Eazkzxuj9Mjh2gqEo7McPlrbOTon+zwkbcDUdf1mV+4BMJN45kmWv9yzpKtVBhNXx
-	 eUzQSSMQmJ4RNL20uxyV7nHGuFW7ljqTjtDZed4/990OlIOP8/wjPIak/hXOHkdugy
-	 HoZ5hNG8zgOcxTPYardP5b6FMWxzwRp8R+IKfAJExxq3aWHedOpdIY1+h7eBM7Tcd1
-	 qH8uYO+o/b5UuVJfgIEX4Dlyy+tazuMhQyxvzzuG5JJ9LKE3NyNJBtriovsinsr06L
-	 3UKuuNk1ecYyHtM1CAB7VA/JL7LVBApq3IF2BX7n76hdPGmuuR59OgA19bx1KvFe66
-	 uuoX+uny9ZF1Q==
+	b=TXm5TVQ3A3V7Fstmri74AiyBIZcSEDykYc/FV0muPUKcGm4SWg2Dnb3S0u5XL2GTf
+	 HTvmi06vBbbHDJfoHpF/BE4PKT8HX4Euck5kfbZUiuDS63Vj860ZUfoMwDz7iMzCxR
+	 BDwf7MTU5ESJ0dfcY/8OZXr+B4TfPd8FGuaOiiApizSLkFKR+bzstaJdmN7ISqW+Sn
+	 MI0YV/QKO9vtkjzEr3IlfXhEMSWPzMxYdtr/t1m6Vb3dJS3wjiU2zN1U2nfWOxhlUL
+	 YL4GTQ35Mlszm/H7csZS6/33rgL4GvmkTkzU3Gq+6RE83JH9VtUp3ooTvzqd9K82RX
+	 86O71Gzn64xYg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4B86E6068B;
-	Mon, 21 Sep 2026 22:51:49 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 76FC080A54;
+	Mon, 21 Sep 2026 23:08:04 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 48D1D380
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 22:51:46 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 8DEB63A5
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 15:13:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 46A30401F0
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 22:51:46 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 8B533401B1
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 15:13:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id F2vNhjaCDfiI for <u-boot@lists.u-boot-project.org>;
- Mon, 21 Sep 2026 22:51:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 65BDB40112
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:30::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790031105;
- b=aO1apJdx+oU6rKJUyRfKDNqTn43ZpfHk+araDzU4V9BLBxozcKkI5zQCxZFJampKeiYe
- 94GjotjCSNnAz+rFHgNEipscImI91Qt/bvsv/bXfW9GK1347pHcKvyHdVGY5bOEUOBL9N
- r5Lx/HdYN+30utSxJnDkIw6nMp/tCh2xC6LCjYasH7/FjPFaGFV+cCPT1DpQMlHzQ4HQ+
- 1mvUQk6MY7bESNCFIDIBMgacUXNgZLUTdoDxX2fPeaf+B1SY7iAiL2GHPZm0Hq7h3Btok
- 83nlvPcx0dP84s8TjnIdyQLpBPduzwj7WcjLZFXn+Yj3IGCO2j7KYmk//XKaIU5n4FQ==
+ id At20sQ-V6RUF for <u-boot@lists.u-boot-project.org>;
+ Mon, 21 Sep 2026 15:13:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 985FC401B0
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=117.135.210.2
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790003618;
+ b=WFzrGxLTu2nlRVKbgbsyeP9I/7IA6zTixUQia3mWJnNsIsOtiMu4SZ+wjKBWCxeNPEnE
+ /469u1mJOItxavKiL1UqouedMhbKn6cyIcgjdL39BD02wfIGQ4DTd58702+VgUhMu83PN
+ JBf6farruQpNwzaBkeLSYndxi8TK68lUpmi+E3/0rF5e59iNfa6mXINXyx2WSO5nzBpk4
+ i5r2lLMswfitwwUFEBZtbJTRN5nW6tXh1yCt7inKbdGvmTjDaKQ1Q8PD/sEd8nY7hg917
+ qlY/MCpCZlFzwUbjKlErwja1eRYbqwRskoez213xKM0wATyrvMa/KQamSBCX+19l6PQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790031105;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
- X-Developer-Signature:X-Developer-Key;
- bh=eGIMBlu+Nj7+5AdtbA+o57WNU0UutNxy5SUOUMc5Hks=;
- b=B8D2AY8XLjxg+jer0NTGB6OR0OqyfwC2CUtIkLZ9Iqa58uk36+lBfWYpXWT3o3Vcg9KH
- 2qQ0IEK9++M5WKwx4xZxVHQtW3S2YJewZEDFI1T7XhTIsXGghRIETPwkNKq3xWyk39su0
- HpjmzFDv7F87nNOl8H8cSjZkXHKskro3uZmoVpxkQvDxOocpkNmNMRhoCAFSsuL6s96t2
- dyQTrqwMSTdvrQ8cJGrO9Lz7PIdheao0K1WDMTwr5ojDtCDKwgeNcHHqBbKMgTdqJ5Dkp
- vZIWSxKtm1fEFs91+mljnukOFy5ruyWXDKehJEKzp9b+G7zBxFVd9XpDLKH7O78iKVw==
+ c=relaxed/relaxed; t=1790003618;
+ h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+ Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
+ X-CM-SenderInfo;
+ bh=YncDQ22z606eS9biT9XUVkxquoPa7g66Kns049lsLVI=;
+ b=AHRE5ThyMZxSvTTKM4CXiYDg1fhJJ3trC41B7r3i3aYYHMmKCYQoyObTlIwS4hvSVtvd
+ i9RKLT5Nq2GFUfEosFmpX55GnvjYrBu8tN+bJ1pqaRhTGW3iEhMqfv/lTlSnz/qbk7iR4
+ tk4O2x2WASlNnew60YaAX5TL11jPuhxCSEBVmGrsxWA988wJMTa3cmJsKbleuDAgJYH1H
+ p+Pc7PeSDjUrPWkCocvlC7YpTnXR/to+VfqnyqEBpoSEsbC2VAxoO7HiE38h4rVmQuVon
+ gxUyf4+yP1IAP3snAPg2LUwQZ85ClgcHX3JfAVAac2zQHp6yV1p4fP6jaMccao0MWDA==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=none header.from=baylibre.com; 
- dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=oyGIkw4U; 
- arc=none smtp.remote-ip="2607:f8b0:4864:30::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:30::10; helo=mail-oa2-x10.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+ dmarc=pass header.from=163.com; 
+ dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256
+ header.s=s110527 header.b=Hq4exVys; 
+ arc=none smtp.remote-ip=117.135.210.2
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=117.135.210.2;
+ helo=m16.mail.163.com; envelope-from=18102059357@163.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=oyGIkw4U
-Received: from mail-oa2-x10.google.com (mail-oa2-x10.google.com
- [IPv6:2607:f8b0:4864:30::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 65BDB40112
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 22:51:45 +0000 (UTC)
-Received: by mail-oa2-x10.google.com with SMTP id
- 586e51a60fabf-482620dc91bso2542625fac.2
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 15:51:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790031104; x=1790635904;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=eGIMBlu+Nj7+5AdtbA+o57WNU0UutNxy5SUOUMc5Hks=;
- b=oyGIkw4UspCxBTiMs5kwZYZkOHBlU+5ZFOGzkxV1gsD1u9M3/EGCB8lyECZnLAo2D5
- wIpNdffJv5IjcpZVj9BhYH7U4baj1HFkIlvomANBP5bR6mWslT1RIXh8qbHbE1KLEK0i
- hjuxUcEFzEsRReKG9nKWIrrreTv2kjMTRZ9xOT+cWNYeUN01XNgGN0r6x1QWR2C3yV7f
- XuyuFQtPKJ4pam3AHdrq7yrUeJPtFbRIo7naueporgzYc8gyGizdDzi+GkbQFkbqOhIv
- gdZN8REXd1b8/VCHtFL7GpRB2TYrBLIo5kjxsET+jYyWJuT/ZgwjXtZySCuRz60nybN3
- mktw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790031104; x=1790635904;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=eGIMBlu+Nj7+5AdtbA+o57WNU0UutNxy5SUOUMc5Hks=;
- b=LM43vA677mjCSbK6I1RoP96oV+c9ZhPICz/0O78u6mCSeZa2zQCmesTtn+K0kCthxm
- soiJcbYEWrkQzqzjFXQleTY89YBvIDC0Z3Pkn3BZ1iMI/tX9vW3istS8rikSKsxn81Mj
- eKyxIMuRWAkzdKK3b0qcRIK2IUZ+KpV6+C5r/Mr3/se2QzR2LdY4YyngimDQbZwcVUV3
- CIO3+epWtTVibkEbwVfpR5looUppf782bbZYhSpCRAvZm8iK40BiUzBCy+fGOt5uL5e0
- Jd5yODvQj3WyoVMjYcXxh3f951afE49Fybb1UcF/A89Li64uDaPFz0AWv/MzktmNcOIx
- Nv3A==
-X-Forwarded-Encrypted: i=1;
- AKwUvBz6jANrK7dtP2xs4mo/T/5agA9DaU6poInICL2VNFmahZY64CEuJwlB70jX8fjSYxx3Qoc3G48=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nmZpNX4Ntb23w1KqGh8qkkfKlQmgAVHy6T8Tq/thsUsqYBBq97
- JwAIMEGmqfJDJPCb+0NyEaF1N/1Ip/dinBoe9YEHiT4rSjUB0y5J8TIf4xKXaubyclo=
-X-Gm-Gg: AYBFou1G1dUKgfJpfREKlheB6TXCzT9Ln7qNoyOcnLc+tKK20bMIKOIuHTkWHFYeBQo
- KJ+Gadb++2ogF1q7szlo7fIafZeIm2LlXbo+y6OS8eydyLspD5Ixgun8ZsqAm0j1ju+t0LSVzNL
- MvXv6RD4IPoX1BvLZL7tNAM4QNhSucfiI0vSx9LTw7AKYD8tLRowu3giEAsyDp5nTWqzuqJtKYH
- fz5A1s0ZVDPOpZOi24e48UCMIKI08/paCLIgR4cPfs49+J4EL0UFdUyJxUZnnXfg3X/CXF/AyQU
- K1ZF+cvsadwfI0D3I8CW+6ZWR5Kkw+mzoRgRgCIyZD5K7B5pC1J+9QF17ofZAKaCfWMeDJxq/PI
- uSuVuCQwQ7oc/4/VO+eU5YVUJwxw4W/LHZqqgaGpP8hzcsbDGh2eXR2HwYl3JwCsMxeeHj2QcK4
- QpuUN9rrtcZscMzfOERmxIv6rR9mqzeeHWpAQ5xgwwgumkpsu6DQMUeQ1ePjZwBFLityytrFymP
- rw=
-X-Received: by 2002:a05:6820:16a8:b0:6c9:80d8:a1f6 with SMTP id
- 006d021491bc7-6ca9cb53ddcmr11557641eaf.51.1790031104268; 
- Mon, 21 Sep 2026 15:51:44 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:bbcf:6512:c1f9:5b9e])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-48f71e90570sm481468fac.4.2026.09.21.15.51.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Sep 2026 15:51:42 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 21 Sep 2026 17:51:04 -0500
-Subject: [PATCH 2/2] power: domain: mt8189: model the SRAM handling of two
- domains
+ dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256
+ header.s=s110527 header.b=Hq4exVys
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 985FC401B0
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 15:13:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=Yn
+ cDQ22z606eS9biT9XUVkxquoPa7g66Kns049lsLVI=; b=Hq4exVysYM3He2/WSN
+ 6HR3CGmFFefXAnWWY04RPycr7FcGLJa1WnA7E8anf6dUquUBHjFyCCCptibz7CXU
+ 7HNoQMFGVF86rEO8utlVNBoB/yECwfBIqXDnAYXFqyZnm5ghYsYmWOE/89JS5zQ1
+ NkusykJxqFe8Y/pq+RL4pBiXQ=
+Received: from localhost.localdomain (unknown [])
+ by gzga-smtp-mtada-g1-2 (Coremail) with SMTP id
+ _____wBXPaWPSbFq0xQ+CA--.40149S3; 
+ Mon, 21 Sep 2026 23:13:20 +0800 (CST)
+From: Xiaoyi Suo <18102059357@163.com>
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>,
+	Xiaoyi Suo <18102059357@163.com>
+Subject: [PATCH 1/2] lib: add memzero_explicit() and use it for the HMAC key
+ schedules
+Date: Mon, 21 Sep 2026 23:13:14 +0800
+Message-ID: <20260921151315.1167-2-18102059357@163.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260921151315.1167-1-18102059357@163.com>
+References: <20260921151315.1167-1-18102059357@163.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260921-mtk-power-domain-sram-iso-v1-2-52e9b365d2d1@baylibre.com>
-References: <20260921-mtk-power-domain-sram-iso-v1-0-52e9b365d2d1@baylibre.com>
-In-Reply-To: <20260921-mtk-power-domain-sram-iso-v1-0-52e9b365d2d1@baylibre.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: David Lechner <dlechner@baylibre.com>, u-boot@lists.u-boot-project.org
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3041; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=fzQ0pPR83Il0toqKxlgA2ut7WkIZ8XR4js08lY/DEcI=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqsbTybvnYg9lPPa4ua1cXoXSILN4Tqv7eCCWGw
- Y9lU0K6ZiuJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCarG08hYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ah/sH/1bwxOS7YcslU8zTafV+h29YDwUKh6mPn7JcHzm
- s5ln0FgM1O/u0OMZEPbZPl2gYdG/9t273/iWL/VPdQ1J+kT3wU//1dbAHU96emHZQtMLlcrJS2l
- ueAnh8/7xablyPd0se3zV+wY3PbF0prJH0TG/jWzb3hqSWHexhzpoNRlN2AjL8m/PZa014M/Qc+
- +P7SLKw1+N5QTOBNjkLXcKPpBt9boriIV5ItJQBsCGW0DWTiTngEOl+y5EOwZ+bsuYW4/1ZBifp
- a6lcObXSw4VDlFKuARiZV7bPZ2i2OzRxU8XqgCNYjSSCQ2F/Ykli63L+3/ISCfzMqL/Q8GDX+V7
- Wokw=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: _____wBXPaWPSbFq0xQ+CA--.40149S3
+X-Coremail-Antispam: 1Uf129KBjvJXoW3Xr15tF4DZF1ruw47Cr43Awb_yoW7ZFWfpF
+ ZxKFn8GF4DXr97WFyku3WxJ34Utan3GF17KF43uw1UZFW7Xr9aqFyUKFWYgr9xZr4vvryI
+ ya1rGFy29r9rX3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0zETa0gUUUUU=
+X-CM-SenderInfo: jpryiiysqvmjivx6il2tof0z/xtbC7RF9GGqxSZFLCwAA3a
+X-Mailman-Approved-At: Mon, 21 Sep 2026 23:08:02 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -200,70 +144,153 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The ADSP_TOP_DORMANT and EDP_TX_DORMANT domains both need SRAM isolation
-and have an inverted SRAM power-down bit, which the core driver can now
-describe. Set the caps on both so they can actually be powered up, and
-drop the part of the comment that said this was not modelled.
+memset() is enough for correctness but not for security. When the buffer
+being cleared dies right after the clear - a local that goes out of
+scope, or a block that is freed - the store is dead as far as the
+compiler is concerned, and dead store elimination removes it. The buffer
+then keeps whatever it held, and the clear only looks like it happened.
 
-Until now both domains carried the plain power-down values, which would
-have powered their SRAM down rather than up and left the isolation
-asserted. Nothing in the device tree referenced either domain, so that was
-never reached.
+sha1_hmac(), sha256_hmac() and the mbedTLS sha1 shim all build the HMAC key
+schedule in local arrays and clear them with memset() before returning:
 
-Linux marks ADSP_TOP_DORMANT with MTK_SCPD_ACTIVE_WAKEUP and
-MTK_SCPD_KEEP_DEFAULT_OFF as well. Leave both out, since U-Boot has no
-runtime power management and does not power domains on at probe.
+	lib/sha1.c:376-379	  k_ipad, k_opad, tmpbuf, ctx
+	lib/sha256.c:310-314	  k_ipad, k_opad, tmpbuf, keybuf, ctx
+	lib/mbedtls/sha1.c:95-98  k_ipad, k_opad, tmpbuf, ctx
 
-EDP_TX_DORMANT has no SRAM power-down ack bits, so state that explicitly
-rather than leaving the field implicitly zero, matching Linux. This leaves
-nothing to wait for, as both branches of the acknowledgment poll are
-satisfied by the first read.
+Those buffers hold the caller's key: it is XORed into the two 64-byte
+pads, so once the clear is gone the key can be read back out of the stack
+frame with the padding constants (key[i] = k_ipad[i] ^ 0x36). In U-Boot
+the caller is the TPMv1 code, where the key is the usage auth of a TPM
+key, but the functions themselves are generic. That the intent is real is
+not in doubt: the same tree already zeroizes a hash context with a
+comment saying "In case it's sensitive" (lib/md5.c) and clears the SM3
+schedule under "Zeroize sensitive information." (lib/sm3.c).
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
+GCC deletes the four stores in lib/sha1.c and the five in lib/sha256.c from
+-O1 up; -fdump-tree-dse-details names them:
+
+	Deleted dead call: memset (&k_ipad, 0, 64);
+	Deleted dead call: memset (&k_opad, 0, 64);
+
+Add memzero_explicit(), which is a memset() the compiler may not remove,
+and use it for those buffers. Plain memset() stays where a buffer is only
+being initialised. This changes no behaviour: it is a clear that now
+actually happens.
+
+Cc: Tom Rini <trini@konsulko.com>
+Signed-off-by: Xiaoyi Suo <18102059357@163.com>
 ---
- drivers/power/domain/mt8189-power-domain.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ include/linux/string.h |  7 +++++++
+ lib/mbedtls/sha1.c     |  8 ++++----
+ lib/sha1.c             |  8 ++++----
+ lib/sha256.c           | 10 +++++-----
+ lib/string.c           | 21 +++++++++++++++++++++
+ 5 files changed, 41 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/power/domain/mt8189-power-domain.c b/drivers/power/domain/mt8189-power-domain.c
-index 503919b7045..6ad2dd4874d 100644
---- a/drivers/power/domain/mt8189-power-domain.c
-+++ b/drivers/power/domain/mt8189-power-domain.c
-@@ -71,12 +71,11 @@
- #define MT8189_PROT_EN_PERISYS_STA_0_SSUSB	BIT(7)
+diff --git a/include/linux/string.h b/include/linux/string.h
+index 986499dfc..f902b2b5a 100644
+--- a/include/linux/string.h
++++ b/include/linux/string.h
+@@ -126,6 +126,13 @@ extern void * memchr(const void *,int,__kernel_size_t);
+ void *memchr_inv(const void *, int, size_t);
+ #endif
  
- /*
-- * Three things the Linux driver does for these domains are not modelled
-- * here, because this driver only ever powers up the domains that the U-Boot
-- * device tree references: the EMICFG GALS sleep protection step that MFG1
-- * needs, the domain supply regulator that MFG0 and MFG1 need
-- * (MTK_SCPD_DOMAIN_SUPPLY in Linux), and the SRAM isolation with an inverted
-- * SRAM power-down bit that ADSP_TOP_DORMANT and EDP_TX_DORMANT need.
-+ * Two things the Linux driver does for these domains are not modelled here,
-+ * because this driver only ever powers up the domains that the U-Boot device
-+ * tree references: the EMICFG GALS sleep protection step that MFG1 needs, and
-+ * the domain supply regulator that MFG0 and MFG1 need (MTK_SCPD_DOMAIN_SUPPLY
-+ * in Linux).
-  */
++/*
++ * memset() that the compiler may not remove. Use it for buffers that must
++ * not be left behind, where the buffer dies right after the clear: a local
++ * that goes out of scope, or a block that is freed.
++ */
++void memzero_explicit(void *s, size_t count);
++
+ /**
+  * memdup() - allocate a buffer and copy in the contents
+  *
+diff --git a/lib/mbedtls/sha1.c b/lib/mbedtls/sha1.c
+index 2aee50377..c6b92fbe7 100644
+--- a/lib/mbedtls/sha1.c
++++ b/lib/mbedtls/sha1.c
+@@ -92,8 +92,8 @@ void sha1_hmac(const unsigned char *key, int keylen,
+ 	sha1_update(&ctx, tmpbuf, sizeof(tmpbuf));
+ 	sha1_finish(&ctx, output);
  
- static const struct mtk_scp_domain_data mt8189_scp_domain[] = {
-@@ -125,6 +124,7 @@ static const struct mtk_scp_domain_data mt8189_scp_domain[] = {
- 		.pwr_sta2nd_offs = MT8189_SPM_PWR_STATUS_2ND,
- 		.sram_pdn_bits = BIT(9),
- 		.sram_pdn_ack_bits = BIT(13),
-+		.caps = MTK_SCPD_SRAM_ISO | MTK_SCPD_SRAM_PDN_INVERTED,
- 	},
- 	[MT8189_POWER_DOMAIN_ADSP_INFRA] = {
- 		.sta_mask = BIT(8),
-@@ -384,6 +384,8 @@ static const struct mtk_scp_domain_data mt8189_scp_domain[] = {
- 		.pwr_sta_offs = MT8189_SPM_PWR_STATUS_MSB,
- 		.pwr_sta2nd_offs = MT8189_SPM_PWR_STATUS_MSB_2ND,
- 		.sram_pdn_bits = BIT(9),
-+		.sram_pdn_ack_bits = 0,
-+		.caps = MTK_SCPD_SRAM_ISO | MTK_SCPD_SRAM_PDN_INVERTED,
- 	},
- 	[MT8189_POWER_DOMAIN_PCIE] = {
- 		.sta_mask = BIT(13),
-
+-	memset(k_ipad, 0, sizeof(k_ipad));
+-	memset(k_opad, 0, sizeof(k_opad));
+-	memset(tmpbuf, 0, sizeof(tmpbuf));
+-	memset(&ctx, 0, sizeof(sha1_context));
++	memzero_explicit(k_ipad, sizeof(k_ipad));
++	memzero_explicit(k_opad, sizeof(k_opad));
++	memzero_explicit(tmpbuf, sizeof(tmpbuf));
++	memzero_explicit(&ctx, sizeof(sha1_context));
+ }
+diff --git a/lib/sha1.c b/lib/sha1.c
+index be502c612..94f20fb40 100644
+--- a/lib/sha1.c
++++ b/lib/sha1.c
+@@ -373,10 +373,10 @@ void sha1_hmac(const unsigned char *key, int keylen,
+ 	sha1_update (&ctx, tmpbuf, 20);
+ 	sha1_finish (&ctx, output);
+ 
+-	memset (k_ipad, 0, 64);
+-	memset (k_opad, 0, 64);
+-	memset (tmpbuf, 0, 20);
+-	memset (&ctx, 0, sizeof (sha1_context));
++	memzero_explicit(k_ipad, 64);
++	memzero_explicit(k_opad, 64);
++	memzero_explicit(tmpbuf, 20);
++	memzero_explicit(&ctx, sizeof(sha1_context));
+ }
+ 
+ #ifdef SELF_TEST
+diff --git a/lib/sha256.c b/lib/sha256.c
+index c2e77c854..226af9b2d 100644
+--- a/lib/sha256.c
++++ b/lib/sha256.c
+@@ -307,11 +307,11 @@ int sha256_hmac(const unsigned char *key, int keylen,
+ 	sha256_update(&ctx, tmpbuf, sizeof(tmpbuf));
+ 	sha256_finish(&ctx, output);
+ 
+-	memset(k_ipad, 0, sizeof(k_ipad));
+-	memset(k_opad, 0, sizeof(k_opad));
+-	memset(tmpbuf, 0, sizeof(tmpbuf));
+-	memset(keybuf, 0, sizeof(keybuf));
+-	memset(&ctx, 0, sizeof(sha256_context));
++	memzero_explicit(k_ipad, sizeof(k_ipad));
++	memzero_explicit(k_opad, sizeof(k_opad));
++	memzero_explicit(tmpbuf, sizeof(tmpbuf));
++	memzero_explicit(keybuf, sizeof(keybuf));
++	memzero_explicit(&ctx, sizeof(sha256_context));
+ 
+ 	return 0;
+ }
+diff --git a/lib/string.c b/lib/string.c
+index dbf2ce340..8ccb7c17e 100644
+--- a/lib/string.c
++++ b/lib/string.c
+@@ -808,3 +808,24 @@ void *memchr_inv(const void *start, int c, size_t bytes)
+ 	return check_bytes8(start, value, bytes % 8);
+ }
+ #endif
++
++/**
++ * memzero_explicit - clear a buffer that the compiler may not remove
++ * @s: the buffer to clear
++ * @count: the number of bytes to write
++ *
++ * memset() is enough for correctness but not for security. When the buffer
++ * being cleared dies right after the clear - a local that goes out of scope,
++ * or a block that is freed - the store is dead as far as the compiler is
++ * concerned and dead store elimination removes it, so the buffer keeps
++ * whatever it held. The barrier below tells the compiler that the memory may
++ * be read, which stops that.
++ *
++ * Use it for key material and for any other data that must not outlive its
++ * use; keep plain memset() for buffers that are only being initialised.
++ */
++void memzero_explicit(void *s, size_t count)
++{
++	memset(s, 0, count);
++	barrier_data(s);
++}
 -- 
 2.43.0
 
