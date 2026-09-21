@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CD5BC982ED
-	for <u-boot@archiver.kernel.org>; Mon, 21 Sep 2026 12:22:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1B18C982ED
+	for <u-boot@archiver.kernel.org>; Mon, 21 Sep 2026 12:54:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8CA04809C4;
-	Mon, 21 Sep 2026 12:22:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5A45D40782;
+	Mon, 21 Sep 2026 12:54:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dIZx5sgNAq4i; Mon, 21 Sep 2026 12:22:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 83C748098B
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789993343;
-	b=FoITdScvPNcD8oNxz5c5mHQMwAYLNL6+zNDT9hy5C571yb/PimXr/OxEgE4kvYMy21oe
-	 uuScZ/MlPsCcSssAw1bZbfD8APexJBXxMGg3h/Uo/HfdwPhr7l/RWPrSOGYWU2hjwVX9/
-	 dKxBGwhM/Xk4Or1JJkowreXjawOTmf+zcCZPgXOfzJPMemFiD0JEF9gH1jTl++RIP4R4W
-	 Uwr86DyaqBkFFPtd/8UINH9rXRTYDOpgSxrfSlH4NgKYXmXplK9xsOCkLhWQ0yITXX4wF
-	 +ujEoYKknd+g6hVUbH8M3uf2Hi5//3bkp6t/rJY516IqX2nRC6bWxQRd6+79tRyUF6w==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XhfOTBWl_TQe; Mon, 21 Sep 2026 12:54:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B3A4D407C0
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1789995255;
+	b=a3KWGK4a7a9DV/xdY2bGyGIz/FQ0hoS3+hRef9F+aApGaqz07wtte9qO+HlWBjt+IOvy
+	 UKBWSF1+dbvs+B975tuhHiktpkgwlXc4Dq+qPuCPZfGVjmjdYywe6JhWnxPyukUWYPraN
+	 P+xKuCFGtQArLJ/hPYIIlgY5i54L3bqE2kgECtEt9BcYf4PwELRpx+r9Yj4GQxuDG+aHT
+	 5X2yswsGmmSP36Y6mA+4AfMweAscFfBRLvOgVrz1oR/+VvrDK3eJIkh3cbmls8Ig38F83
+	 jEiwFtbgdO5RUWOywMinWXcJCShD8xzBYR+IGIpj6gHxvGexEDvSLIkSxDSys/nc+Yg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789993343;
+	c=relaxed/relaxed; t=1789995255;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -30,7 +30,8 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
 	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
 	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-AtpMessageProperties:X-MS-Exchange-SenderADCheck:
 	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
 	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
 	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
@@ -41,59 +42,61 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-CrossTenant-FromEntityHeader:
 	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
 	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=MPiivB6n3zlQ2mw5aNbhvh/zCpxbp+YSULi1m0mq+YI=;
-	b=WJefX26vMIKq3+BScYXTpCTrjyCIjd5mUN8ERbEtoDlJHBuNs5BXUT/lOuxNQkLdtpUq
-	 rGS9D/zZhTjqcRii1LhrdlsGQUVo4lMXnOVb9Y/0qVztwVDc7p8VNYJklAeDtHkusK45w
-	 JeIFCJ7qWxlW9S4b7eZXXIJrEvsMkpgg9N5VXxAg3CNIoQnQXj2uIl9vvoQfm4OP4yvWY
-	 Ub5u+as1XFLdis8ILeS0OeSaG80wlqhXeg/FxVjneZp0xG12n9txZGhbO4QrMH2DqW+D7
-	 twLok9ZJV47nN5MD69FYixsywP7qUY5QI3B0byY7r2YhHjA7cOJ2jfi9aqOzDGQoo5A==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=Wk0NBCEx7ZjuzwOyOvDZvBX9f7sIjzQ4VJnhykM4StE=;
+	b=lQeJNcp5SDHpxN/NzPIkHEh+sMjPgmpGiSx7iEoJOWe1Vv7KOBgP3p1sRAopeTdMTQbI
+	 qv30IBYniTF7HAK6I2OtmCp+sE6+8WUXRSoH307UZLueniH1Oy9HBd+VaBONa2gyVTz4i
+	 liryOL7WAN78ZgSRf3qFn5pSTL/fJSWiWGVRMzXO7rJvAO+y6uuK0Fu1hMh2h9rfhWbwO
+	 HGNax8isTzqJ4GJ43WwXUqm9KK0ZcuTmtJm6+5PUMZfVqqqOOy5B4A1C66D6nL83HSC3i
+	 7ULvYzYgnJUdLGiIPKz7hey9ukOMhx0DnQ6HtONHOJx1Xg2FsVxRuIreLp6Gq0BKsAw==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1789993343;
-	bh=MPiivB6n3zlQ2mw5aNbhvh/zCpxbp+YSULi1m0mq+YI=;
+	d=lists.u-boot-project.org; s=default; t=1789995255;
+	bh=Wk0NBCEx7ZjuzwOyOvDZvBX9f7sIjzQ4VJnhykM4StE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=TdpKKVywEI2CnHEEfHEaRzhZvnyesGEpJLh4AjxOt38MAz4gu3aCsV9H7d5HQOv5K
-	 lxsrItOezwV3XmQU+rDWT/2YBAmNnNu+NRiwIAtL3OvXV7njW7OPVDBejfVTjrexa5
-	 GfdBMqPJ5j2bIpAieDg4Qc1qVxghlXVMTvTo3JFiPAEGR2BCVReHKwQJY6qx2DANvI
-	 Cbi5SRm/6zSzNCKYGcYW48FxDgwxDSmacKArf1NqXiHCWjKzgcp1WR+ohAkPXAR9A/
-	 880se8KkWEiNScF2N69YMATnVb5xr7AZ7idYxYZc57fszvYHiQymvOaA24WlRtlp1p
-	 05gsVFBXyfyng==
+	b=bdEutFuZ9nEf3gUc1JBSCWZsOh4QIh/zuo8UM+t9HMEO+cTAd+b6rYuvNUStAoLX1
+	 cmbVI7KRjgZvnzU78+ey83DtWYgj3sPkAyV1SIg3ybEGpkaNNdBsAbklYSYFBr0kl3
+	 S4DsCPH6T3ViQBLi3wd3l8g8egy0wnqACuOjqgH9xEeDQTu0eeGeF/1stoj0IBnln1
+	 MMaGdQ/3HleHhjU5wVNRS1mUj1vynTTqncQQL8HhMKjqZtMzO6oHEWMHTDBM5+2gKm
+	 duo3lcHUDVCoqOzDpo2wvUQGkx21y8LEEUKncrP+jYgacqRkacCQAvZPShlHf1hNJm
+	 L0nm3NzCrjQQg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 83C748098B;
-	Mon, 21 Sep 2026 12:22:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B3A4D407C0;
+	Mon, 21 Sep 2026 12:54:15 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 15F4913D
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 12:22:22 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id C6429380
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 03:39:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 06E2940111
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 12:22:22 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B877740099
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 03:39:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6Pd97HsRmZQN for <u-boot@lists.u-boot-project.org>;
- Mon, 21 Sep 2026 12:22:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org A6C7240059
+ id v-_eZvfABa-5 for <u-boot@lists.u-boot-project.org>;
+ Mon, 21 Sep 2026 03:39:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 1926040080
 Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20f::7"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789993340;
- b=fnFUv/NZJ8iQjBife+4ZciXvsJW0kqIBLnPCdaxvNYT5q6U7k69UuE1cc29J1pI54T2A
- FaYxiiEX576rdwPb/epVxbDuvxFHKXI6jwCtK1mdyGqPw8QyxiVvcIl3mz0kHHD43DnMu
- r4c4GzH7H+5BTal5fom/xa63YwPeJ4oSZtXCxMZFbUwSiTln3+KpM6SjdA0cM28sA37qX
- wP2N3URLKTkiaYZNh8fBSxmA0Wtgq3k9duvae9p4q/zGhC+G8m2UMUxFRpdHyLE1K+pq2
- N4tNdodr4dDI0ey2JpX0P7c/1/dJRXBSRYmobAjMgDWiOujlJvdt+PUQSQfsnxszSxw==
+ smtp.remote-ip="2a01:111:f403:c001::2"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1789961970;
+ b=Okx8HEx9ERQvIvMsGqBzqRhjwwk6Zbq2A3tUjD2nDoFV/3rJ2pM7i6qiLk20NO8QnXTz
+ s8O5D8AUoJF0OjfaKKs/HgNWpNUPNlxwAJkGJujZf/ZX5OfCS71BAt5i0X9MpHyQAlCIg
+ kmNllDYeYIEz9JQnfmSKQv9tKDFtRX+HjaAoqlNBA7F4tZcrteyUmE7jueJHrJJSKx4WO
+ /mPQUpU/zZUwpLxkUbk8prC+P20x/vSDyeN63I/N6ApP5lnUGWzb5fJLgLLXP/EZ9BI3F
+ RsPnsEZ/F6RtKIu/HHaon5FfxTnGzXtne6k0Vnf7fnWkQ4Gm5/hAmOAVBN+HYpp1ZAA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1789993340;
+ c=relaxed/relaxed; t=1789961970;
  h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
  User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
  Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
  X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
- X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+ X-MS-Office365-Filtering-Correlation-Id:
+ X-MS-Exchange-AtpMessageProperties:X-MS-Exchange-SenderADCheck:
  X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
  X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
  X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
@@ -105,153 +108,150 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
  X-MS-Exchange-CrossTenant-UserPrincipalName:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=MPiivB6n3zlQ2mw5aNbhvh/zCpxbp+YSULi1m0mq+YI=;
- b=WIx1gALOgf8ZFiyBLU1pUwvhEjErnvgyqSNOCireVL+P4PxApyUctR8VnTdjSlDAmEmb
- /l0Mf4FoDXUqjyOjP3xXaTeFNTpXMSQErrc24hO0U4EeA5ranibV5S38ZDT03KmmhZNZ2
- v/LY98xMK6p17yd3KOUGxrIu9dkZvYZ+LZK6z6EQ6vq12Z7vc59bLgkxyQufG+1i5jqz2
- +1W/ZojfX1EQNrSAMrWlwWCn4lIzeK6FLUj877Ow+y3y6qr9dAVSTlyjFJC5YTXUzjOKy
- bGRRbxLzDZ9KlHtLvk0dJsZhbHhJWnCa2aXp3isvHQAb4Gcqx+fw8Y5n5PuR2FI+gfw==
+ bh=Wk0NBCEx7ZjuzwOyOvDZvBX9f7sIjzQ4VJnhykM4StE=;
+ b=mrBc3/sJmQt7f/if1hX5AynT5Elmslj25Kgo6zDqMtS0iAN1q6FaGqGCyezm6XF63LWh
+ bZTO9h+1ePLlRh1NPc8IATSRIflAWZfZee3vicUeZEujjyiwP/J46nAe/IIhycACow6Qk
+ Klfo5rVIZw7PC4J8nArRihgz1Vg84DwGwxM2K1x7KGqIU+HA2bL/MhOZIsPx1XERsmf0K
+ CDEeWcusrW3UcMNcDUrFqGh6vyNBHop/vZto6uCxv2/2+uF9WCyYWlaxR1+PaYiDBJ4Sf
+ QbEpmI4V9Oy+K7PCytWFt0xapHpP0/T00fQvjImYfF6p5mgPclShVqcSpL8OmpXldEA==
 ARC-Authentication-Results: i=2; smtp2.osuosl.org;
- dmarc=pass header.from=cherry.de; 
- dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b="eh/PcgXx"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20f::7"
+ dmarc=pass header.from=altera.com; 
+ dkim=pass header.d=altera.com header.i=@altera.com header.a=rsa-sha256
+ header.s=selector2 header.b=uZbhDyJt; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c001::2"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20f::7;
- helo=osppr02cu001.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=eh/PcgXx
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A6C7240059
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 12:22:18 +0000 (UTC)
+ client-ip=2a01:111:f403:c001::2;
+ helo=sj2pr03cu001.outbound.protection.outlook.com;
+ envelope-from=tze.yee.ng@altera.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
+ header.s=selector2 header.b=uZbhDyJt
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1926040080
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 03:39:29 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OP98tz3OBniHKCoYqIs+NaiwOGdzPn+xc8hNejughEmT2M7pVYgWsWqh5Mi8yfLAqw4jEhQ30IMoX7Kb7YVlLwPXi9OIfAmo8zau86BEc28vJisn1pkdDDKsZdN5b6fmJCOlEhyE0h4ywEMtRf21SnUs+4gTGoABN4FGTd2M1Nugr4j6fqkPFgDP1YE3LvA0VOCt2paO/cLjgPJPqAuuh727Qx6W9FqukLluqqQOyeWqP/+L/unjJ04xW7UcH3M0HYP1XFVd5oDgviZduIiVQIEMEDXupvgk7kdfjL/Wh6PcvRd/lwUpsvDqKUR+T88eFp5nyuwWPcyfcy/8P3x+zw==
+ b=FAerw7MgSET67biQ7fyLJIGojM3C+bIv+aoX5GpGmZWelqKZoaZfuSFhNSwBe+JqN0V4WfCy2Uv+g3Ly3hBGvpknG64aWg+yXCNvlvGMgvCERPKUMz6qJE0KSEl9ZYb54uUnamHS6R0iKnSX6I8uFd5Jxst8crUaOdY8sPRDRjc+FYzfaB7Dr0iK9y07P4h+Us3KHtY0A5iuAcTwsOiyX/RS10YdwTnUlfJXVTL+Hbdch+51SD9sNUj5s+L9rOpONW2NIidjFSFmKP/0XnxKcJbH91JLz9y08lqrjHDL5Bjz+f9dwlnEFtcM6VLA4plXmKwP5+gNd8n/tIixKli4pA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MPiivB6n3zlQ2mw5aNbhvh/zCpxbp+YSULi1m0mq+YI=;
- b=mC3UKo+E8tjTWR0eA45twi6qxau05LdDESnxGAU5zEEt2GcrUryt7CK9BkHueZQ7chXwC8zzLlLOk6l/WcRn7Norybs2Y8d4AzJNQTMIGWeuMMJkCfgLDL8J0mmnZP38J/l8DvJrIv6noKkjpGxOwjS9boQTzd0sb0TwQJDVoN/z4j5Xx2fqEr5N5BEMePpZG2Rqul6lerCJBYG9B4w6BBFmx8SM3UkuQmeC98c3vhp4sqKnNd5GWP8bTEadzeeUw3aN1vemdH188wbLq/yQYniyHVnZLvDlZErJdtMik0lDD0V0ay9ieqb8cARGRpaVzCI1y71871vXpJKqjnYcSA==
+ bh=Wk0NBCEx7ZjuzwOyOvDZvBX9f7sIjzQ4VJnhykM4StE=;
+ b=jc1pOuigmLjUxcp/zU5JOwozj8KHWyd1Jy8Ou+adrEuNKQyJVnSX1BhmPOdcOop2wdxK/WMBGbWJF4KcIX3hUVkVd2mIV7Qk8JPubmYWFqTKKQ7nY1LDcrywyVwmRTeuqS+dHLxTavlpvfNQtCiHGLl8qi2e61H4mQef2mFJREVB8OdX4ySLqbWgqrR41G2til3QWxiTe4ILIRZTDfAaqjboBJUjhliQeCnjxBUS+XngLQCsrpw1bXJM71YYiE3D8DV6wiwPGElU0BXgBc/j7PBQzJ7V3wJTZsR2U51U3gDK38Axg1+Jo2NOYDMUYXD5ca0/VjdlkVZoyEoNlmar8A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MPiivB6n3zlQ2mw5aNbhvh/zCpxbp+YSULi1m0mq+YI=;
- b=eh/PcgXxSc+QElH88RKAIwF6WLLIt66QESstJ/cuOsMVdsU0/LFXYK4gTW8wnFGLsktNxBdstrJUTEa6PFSWxVVvEKZByMrv1ur4ICtEkrx2RL7WnAWS2CZCRgOpswMyBNHc9yICDjlsourPmi1OSL8yZd4f0qgT2ta2I//9IXo=
+ bh=Wk0NBCEx7ZjuzwOyOvDZvBX9f7sIjzQ4VJnhykM4StE=;
+ b=uZbhDyJtAyaNuiE6Wq337xcizu6bEtkc1R8nqu6ipUCgFhnpMitoqQA4W/fD7URg/h2vMHCW9wihQNwaG6cN5WaYFEAzE4XXTZoWdVlPfyq1fdAxbLuWp6W4CDzaiL0xcdGmqz11RJOuM+giowxX1QAabspLuws/pBg9tMICkT0+Ux69xaAc4pe1ibHAQUWBl2v8Um9hu9lamwvUCDkM0B+s5+HDAAdGK3EVZ6HxnDkyecYZBnYnw7653zMtCkP/VOvPClVtDKZRvt5rE7ZC6KPnysgT+NHZInEaDFkdkpZD+T5EDeUqHFAR1W0VgsBi+4KVPZzW5/sYXv/K9FyIxQ==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by VI2PR04MB10954.eurprd04.prod.outlook.com (2603:10a6:800:278::14)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from SJ0PR03MB5950.namprd03.prod.outlook.com (2603:10b6:a03:2d3::20)
+ by LV4PR03MB8260.namprd03.prod.outlook.com (2603:10b6:408:2da::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.16; Mon, 21 Sep
- 2026 12:22:08 +0000
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0428.015; Mon, 21 Sep 2026
- 12:22:08 +0000
-Message-ID: <1be36c15-8987-4857-b5cd-dcfeb495d440@cherry.de>
-Date: Mon, 21 Sep 2026 14:22:06 +0200
+ 2026 03:39:26 +0000
+Received: from SJ0PR03MB5950.namprd03.prod.outlook.com
+ ([fe80::53a0:bf93:6b6b:de01]) by SJ0PR03MB5950.namprd03.prod.outlook.com
+ ([fe80::53a0:bf93:6b6b:de01%5]) with mapi id 15.21.0428.015; Mon, 21 Sep 2026
+ 03:39:26 +0000
+Message-ID: <00b30cf7-0d27-47e1-a8ef-3414ada0aee4@altera.com>
+Date: Mon, 21 Sep 2026 11:39:17 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 11/11] rockchip: Choose FIT payload compression via
- Kconfig
-To: Alexey Charkov <alchark@flipper.net>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
+Subject: Re: [PATCH 1/4] mmc: sdhci-cadence6: use const PHY config tables with
+ per-call overrides
+To: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>, u-boot@lists.denx.de
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>, Marek Vasut
+ <marek.vasut+socfpga@mailbox.org>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Vincent Jardin <vjardin@free.fr>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Michael Srba <Michael.Srba@seznam.cz>, Cole Munz <Munzzyy1@proton.me>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Daniel Golle <daniel@makrotopia.org>, Simon Glass <sjg@chromium.org>,
- Francesco Valla <francesco@valla.it>, Anton Ivanov <anton@binarly.io>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- James Hilliard <james.hilliard1@gmail.com>, Quentin Schulz
- <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
- Johan Jonker <jbx6244@gmail.com>, Aristo Chen <aristo.chen@canonical.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>
-References: <20260918-spl-fit-compression-v2-0-28e946f57357@flipper.net>
- <20260918-spl-fit-compression-v2-11-28e946f57357@flipper.net>
- <77f7c2c3-f038-4558-a1d9-8a69529c372e@cherry.de>
- <CAKTNdwGRuKgrt3pcYWcAuy-OB0GqOkqVFC1i0HF_+e5Zmi+Bhg@mail.gmail.com>
+ u-boot@lists.u-boot-project.org, Chen Huei Lok <chen.huei.lok@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+References: <cover.1787710268.git.tze.yee.ng@altera.com>
+ <7431866da9cda49057125df1b28986f04d63e168.1787710268.git.tze.yee.ng@altera.com>
+ <36b56284-0b29-4830-9eaf-9b594cedf8d8@altera.com>
 Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CAKTNdwGRuKgrt3pcYWcAuy-OB0GqOkqVFC1i0HF_+e5Zmi+Bhg@mail.gmail.com>
+From: "NG, TZE YEE" <tze.yee.ng@altera.com>
+In-Reply-To: <36b56284-0b29-4830-9eaf-9b594cedf8d8@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1PR09CA0102.eurprd09.prod.outlook.com
- (2603:10a6:803:78::25) To PA3PR04MB11153.eurprd04.prod.outlook.com
- (2603:10a6:102:4ab::7)
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SI3PR03CA0010.apcprd03.prod.outlook.com
+ (2603:1096:4:297::7) To SJ0PR03MB5950.namprd03.prod.outlook.com
+ (2603:10b6:a03:2d3::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|VI2PR04MB10954:EE_
-X-MS-Office365-Filtering-Correlation-Id: b24093e2-0fc3-4b1d-8726-08df17daf44b
+X-MS-TrafficTypeDiagnostic: SJ0PR03MB5950:EE_|LV4PR03MB8260:EE_
+X-MS-Office365-Filtering-Correlation-Id: abf75dad-744f-4e9a-acaf-08df1791ee76
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|376014|366016|7416014|10067099003|3023799007|6133799003|11063799006|22082099003|18002099003|56012099006|4143699003|41080700001;
-X-Microsoft-Antispam-Message-Info: Fu3aM9txjK60usnFOtVatrqNcHJ+UY71f9gDbnt0M4tpA8wKo3MdlGTMTS/87VJPyjZhI8zB5IB8d+2p4i3+TKLOWpciGSdczQbUKoKxka7qxuTmrUYxxijwmueMQWG6Roo+ukMHpNpQGjZbuZ1Dx2IuvmD9F7BD97wduI33w3/wNwYLLCXDot+JhMIN6ORjq0XJzTh7PH1rVEdwTfhooh3BYSbnemOO5CDZfAdXKS2PMoXKX2p1ZP8VuVv1BYPfQ/Av6bD3bTS6yie+QLr41clsLYycHbirA9glEM5EnEFJuDVX2OlQ+msOQhWyIh3G1QqlhhECjVBmRpIlnGZBb8iKzhqn3xJkNL2A++BWbhfTwtuXfQxz/U+KOYul+27slhaTiHVBFi8PF0jlSLL6m95uT3u4PtifGraovOgHi3bx/MZPDekR4CWyFM7yHcE1Yd7FurOpnwzH0+Q6c0PDVq65TFQKGo5kFJVeN3ajSajkn7yJVwmt8ghloLco6IdalZixUdP54fQQG5ZZtnHOy7f6Qez027yb9tNu1zaj/mw+4Z6dcao5blCgQ11WWDjD7Dd04kIoPtN7p1IdxUm12DfYfvIJRPeBkPbU4y+lpzTRFIJFz3wem8W5GgKT7YKjJYQue0mkCA67M99wf6E27tDcsfBI/BKGjlE4uwl/Mh7xNNiIRgrAVxy82vAI/LVy33CIVUPACzSkmifl8Zt15w9EoxlJAJcQU0RPeTdiLC4=
+ ARA:13230040|23010399003|376014|1800799024|366016|10067099003|56012099006|3023799007|6133799003|55112099003|22082099003|18002099003|4143699003|11063799006;
+X-Microsoft-Antispam-Message-Info: osYLtiw6vZ2llw/tJ/ISYYQAfG1pJpe87gpLQrC8MnV9TrnA7IggdixrcahQf16eDABCdgtmDunl+GUtr3jzKBTsGMm1tZKxu3Tp3Zcio23T+ESG8UGsMSAnGaBhZFBKNMPU57Rz6M6wW3qp0o88pW8wJYWK2CNwQImhB+1X9gemcJobJ69rA4nqlu3ek/ICSLNMJHNXp6Esd6+27ziR9v9JCPzkjGbkV9tmqd7bN9KuIloWTq9zYPV9XSvZzx8E6SegGQGklt7FDXUZjBP05R5uH0zOrNeAPV+eq4SouYsdcsi+s8nZCwH9MPyK4oyEVM/tOTxU3C0Cpy6nWS8n0xgBT6xhyUIovAZLuhHlrLBkfWrZrFrDtiz3yFn0OOB1jz9JvQx1TvoI82RYvGZcNN6w9CSeMLxVxghnnOvxMvBzwDK9yJG4fzTY5loIJVbVApafHSh3ND9fKHfgIvBwUhZ1/UBNBbC199lUqV+m8QHcIeXGnNoXxtaVIuyImdt9meWrorROatbF/6RAwqktVZa6HOLgaz2rB4zKTcZ4Nr2A5CWqRm/Jtmq91IE+AA2MJHm4sfhdRSBJPw9H7iv/M8UxOQuXmdW76UlEHpbrIRg617zEYyMAoFtXjn+pzFNQ/REHs5aMIaeySwJ2I34R8g==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(7416014)(10067099003)(3023799007)(6133799003)(11063799006)(22082099003)(18002099003)(56012099006)(4143699003)(41080700001);
+ IPV:NLI; SFV:NSPM; H:SJ0PR03MB5950.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(10067099003)(56012099006)(3023799007)(6133799003)(55112099003)(22082099003)(18002099003)(4143699003)(11063799006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?REh5MDVubVBldmxlNlFYZTNLcFZoNXpBS0F3Ty9CSnVuTEZPVUJ3NmJWWHNv?=
- =?utf-8?B?UjFnMk1nZXcxUUVhM2ZIeHRwdmFHSE9Uc0N5N2xjTHZ1RVZOQ3J5NzZ5UXBU?=
- =?utf-8?B?NlhzbXgySmlja3ZqQ1p3UjFhOGw4dmMvWFVVYkhoUmJJeVRPSDBrREh6RUZx?=
- =?utf-8?B?R1dDZVFrajlQV2VOaE96YzVGOXk2VXhVZkYwT1JzWGRKV0pET2tOWjltRHh6?=
- =?utf-8?B?ZGJWaVR4OXVYU0RZdHExVERuR21vd1Z6emZkUTV1QUNhWVdNaURnUmt5NGhS?=
- =?utf-8?B?WTBiSGVxUTluc0JLTFNMY2FINTR1OFkwWVJRdndMQ2JuOVMrY1Nhc05WRnZS?=
- =?utf-8?B?U1MyVFhlK2tpeW1tTEJiSkdnYVMyR2ZqNldnT1dwcW1HYlUxdUc2dko0eWx4?=
- =?utf-8?B?aEMvdi9xV2Nra3NwY3VmSVZaSnpWY0EwdDJBb3piZUdFRGpZM3BoMjZlMkRv?=
- =?utf-8?B?Vmw5SzdlUU9HSmJLMEVjNzNKbUQvYi9tQSsyRitUYk5ndG54ZXFjTkR5VjQ4?=
- =?utf-8?B?ZkVqQzZIaXV6c1hqRXVVRzNDa0t5S1Q3RWlpYS9FdU93SUphTzV6RjZxWDJk?=
- =?utf-8?B?RjF0cExRZXlBdjdHZ3FIREJyR1NBdVd0TWRSSFdGc2FJSDRURjc3SzlIM3pp?=
- =?utf-8?B?UUl6QjMxVFVVTXY3Qk9VeDVkbUNWZmUwY3FKVHhDYTVpbjdNVXJUTnN1cktv?=
- =?utf-8?B?Mm94cEF5NlUvNCtsc3VKWXlNaWRaTEFQc3lsUUgrdXAyaHhJcjBHUG5ZN3pj?=
- =?utf-8?B?OWJiMytZQVR1ZmdDUjVGRS8wVUxHNG9hVnlKV0RjdXlKWVVUemtHMmRFUllG?=
- =?utf-8?B?b2R1L2hLNHovY3FPL2N1dm5GWXVSdXZST0lwRk1ydzlLMC9yZVppMmdFOUhw?=
- =?utf-8?B?RTI5QTAxd2pEZDhTWHlwdzBzTCtLeDZvRkNKc3Bkc2NmL2xWeDBtcTVZNElD?=
- =?utf-8?B?Y1ZKcGcxbHRmcUFTNUhLdlJNMXNKTDd5UEhyV05LdnpZUlkwNkJLbFIyLzFu?=
- =?utf-8?B?eDYyVmpGL1R5bWtoRUtwV0pvNjE3QkEvaEd3Mk85M01nQkh2VW8rcnIrNDJm?=
- =?utf-8?B?OXVTZ256bE1LeFBrUHBLL0N4ekEwTTdiNjIzd1ZXd2VKc2k0KzJibGIxSjNC?=
- =?utf-8?B?YXpUNjhWdUxLSWhVc3JLa3YrZ1ROYlhKTlNNNjNnUDQvZWlsZHQ3bm1hK2py?=
- =?utf-8?B?enJLSU5HY0lFb1FIdVZXQzFkMnBPdHNMSGpNVUtzQVBvVDF4b1BzQ09hcGZT?=
- =?utf-8?B?T25Vem9oNDdBdW82M1JMK0plSVpsdlZBNi8rSzVraHRUVmZYVS9YSVA0TUo0?=
- =?utf-8?B?VlRlOURZb2NRbkw3dDVhbGRhdUIrQ2N5V2FFam9zWFVGMUNuN2RTQ1lPN2Nz?=
- =?utf-8?B?WlZHdnRtWG1aSkhNanZha1RjYlhvRDdBNldTS2dDNVJIMmg4U2h0a1BhQXBQ?=
- =?utf-8?B?aVBrbldBM1hSQU5wWTNBR29VRDNYc0pZT3JGWUJ1LzYwTDFrSzVyNWQyZmNW?=
- =?utf-8?B?ZlVnUFNaUndmUm1nbU9Kbk1ZeG02RUYxSmNsZUF6R3FEUTdqZVpvODJPZFVJ?=
- =?utf-8?B?dTFrMjFKUTBSbkRqOGN0SWhHTmFTelNud3RRNDB4dklYbjI4WnNQTEhzMmdt?=
- =?utf-8?B?aXBjaS8wRVM4dXJEdVlTbk1SYUVacURJVXM0bUR6Nm12cnd0UUtUc0hpV0lP?=
- =?utf-8?B?UEVqeDBYOWw1VHZUTFpnT3dBRFdHd0FjQ1crdm9BWGVmOGV3U2N4SDJGNERl?=
- =?utf-8?B?cFZDMHlsYmkyQVg5S1VBRUFOVURIVGczZmlIWDJuOUd6TzdyY1llcW9iMnE3?=
- =?utf-8?B?ZHBqcHFaM2FkV2lDbkduaHNsVnc4ZTVacTBLRjZkTy91MTdHQ1c2MCt4eDlm?=
- =?utf-8?B?QXErNFNMS25nNThvMk11VHlsbFJGeDduQ2JCckM2ZTBjUGEvTURaTkhKVkxt?=
- =?utf-8?B?Zy9tUy9nckdtdjVKU2prWDZ3NFNBRkcwTmZqVnJZYTMvdjBhRmIxUFRVRVFk?=
- =?utf-8?B?bzhLeHdGSWRaRFFMNWN6TldHcTZqa3Nza3NaSVdURmluL3l4d1dvdE8vVEVV?=
- =?utf-8?B?dVhMbGY1Y3dhSTM1Y3RtVlJkWE1Rdno0N0ZJZXBXYWN3bS9Qb3V5MTVQa2FT?=
- =?utf-8?B?dkNnaFhYSjBYVUNNRXJLVGZ1QWxPMDcyWlp2ci8vZXEwd1drM3dJZXdkQWxp?=
- =?utf-8?B?V2ZwTnBkL1hVcElMM25JUUoxRjdZb0o2T0Rkd3pZUVovZzFGMnRjWVRCRHN0?=
- =?utf-8?B?aGl5YUx0R2FLbXdhMGNQbnpIWDdTNW1CbnNBaFRTbUs3cWhTVE1OQUhENlVJ?=
- =?utf-8?B?d0lLenFRbUZmSEpIcWc2YnJxYTl0REZhNnhkbmx6UmpPSStUaDNGdz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b24093e2-0fc3-4b1d-8726-08df17daf44b
-X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a2V0NmNNejl4TTdyZzBvSXgrS0hkdGZKZDhMUWxTOUFVOTRyT0ZzUFNSS1lW?=
+ =?utf-8?B?Z1ZGZi9BNGRXUS9Ma1dBa1hialRBSDg0N3FWM1dYdHpzdWhkZGcvenh3VnhM?=
+ =?utf-8?B?cEptMVA5ZE9wN1p3SDQ4MHU5dU9MYnh4QnBQSVhiT2lTY0VPVTRPMDAzWlBI?=
+ =?utf-8?B?eWpvdkw0azRKK2FNdG4xQ2xnRlQ5Z0RmN3hzM3hZRWJOdVpDMk1ucGRpS21o?=
+ =?utf-8?B?b3NhWkpvMUpRMHZCMkd3SFNrdUtTQVdMbk1HR1gxRmlkNkdXeG9NZ0tGTDBo?=
+ =?utf-8?B?UTRBdEpqQ2U0amFSenNqWmZjVGhMRjZ6Q3NiaTk3SElUTTloenV2QjM2Q3da?=
+ =?utf-8?B?Rzl0ZkpydnJjaGd6dkhVOTQyQUoyTHFYeWIyUmFmQ2VXcFIrREtTRDNwUlg3?=
+ =?utf-8?B?bDFpZmZKZEU2ejlGeUppeUM1V1VUVlV2Y0UzVWkyVUZyWVFKL1k2Mnkzd3Ro?=
+ =?utf-8?B?ekdaTGppVnhSL0MyQlp6NFJBL3JPK0VlSjBJamduM056N1NHMnJHWDZKOWs4?=
+ =?utf-8?B?MW9GU3UxSStHZ0Y2VTl0RDBlVXFtSGdBRlNiSWxMdlRsK3lFTmtKVnFITHNj?=
+ =?utf-8?B?dnF4SjFsTzdMT3dyMXM5Y2EyTDVib0F3Y1RyTVI0Lzh3Tmw0NTBXMEhMUzc5?=
+ =?utf-8?B?RHhBdGZycnpZa3hpN0xxTHhvY3M3M1BuSFZzSkRCNmt0Wkx5enRvRnJNWVJF?=
+ =?utf-8?B?aEpnLzAvWVRBZkVYeDZZNWlSYy9Mc3dWWkF6QnhDVVZGK3QwZ01IMWpDQmRk?=
+ =?utf-8?B?MSt6Y1NwTlpuQkVxRU9XSWhEeXR2eGlEalI0S29nWnZjeXZoaFphazM2Z2ZQ?=
+ =?utf-8?B?VGlScVVjTkEwQlVOazFQOVhFOVhJR0RGdkdjTzE4UW1kMEF3NkhzaFhMRGVv?=
+ =?utf-8?B?SytNdHpZenRObk1zSU5nRU5MT1g2eVNpSllNWDFiWE92YmpOYjZaNUFNWW5O?=
+ =?utf-8?B?T0hBY2hWdnNwNFN1S3RYRlBvNUJEc3MrckdUb2JFdnlPcHJ3amJHczlRTDJj?=
+ =?utf-8?B?d1NNNGw0czJ2Y3N6UnhENVpOMnU5Vk5LSE1nblpONngwaFRWS2xmMVRUckpR?=
+ =?utf-8?B?elp5VEtVdlhaSVlKQXoySkxxSERzcXFuZW9FUDJkV3RPUlFFMTRua0NMUk9s?=
+ =?utf-8?B?SHV3NlZHMllmUytnRnRCMHI2Y1psWVc5S2wrNDhtNEZkUWpmVWNQeGdObnpm?=
+ =?utf-8?B?TndFREI4OWgzRm15TzJwYzlyN2hjeC9QUFpIL1VoM3RYYWNMSExaSVVva2d1?=
+ =?utf-8?B?YVZQMnJjVEhiaWRCSFl2MHJSbXBJamFCQXlBdEpPV3A3TFNRK2g0cy9NSXY0?=
+ =?utf-8?B?SDkrOENtaUFMVTAvZDRnb1gwdFBWZWF0bWZnUW1wb2Fnd3g5Z1c4bkN1ZFRk?=
+ =?utf-8?B?THBnSGdPU0RaazVtcEpRWkRkajNUTWs2WUJZL3BkOEl0Rk1neHN1OGVJQ0ho?=
+ =?utf-8?B?d3VHVkszV25WelZ2TDV2RVBTTWMxWkpQaFlma2JDTXR3dU5OK3VMclRqSmNk?=
+ =?utf-8?B?OWVreHFBeVl1R1dKVG5NcmMwOFN2RWVJV2IvdnB1VzcvK1dTOUppdi9CRVFp?=
+ =?utf-8?B?eDJaQ09ISjFBWjRraWZBL0hsYlRyL1YzRVVuUHdqQVo4OVp3M0RzTEJNVEkw?=
+ =?utf-8?B?aDhLWGxhc1ZPL254VVZqWXNOWjZ2WWVEVWs2K1VnRWFhTkljYUlqd0ErTTV4?=
+ =?utf-8?B?bkhIUVE0QzdIQ3h5bjJURlRTbXJWOVdVanhVQUFqVXFZZ09wVHdGbG5WbjRz?=
+ =?utf-8?B?Njl4NjVwdHkzMlExWU9YbkExcjhncGJDR1V6Z0VybmUvazA3TXFsSys5U0ND?=
+ =?utf-8?B?N01RZEw0UlVDRnRUWGxGb214bXFDeHQ2RFlYRG9uYnE5QjF2eEtJUmEwYzZi?=
+ =?utf-8?B?UHdoc0RzK1dudzFVOWJTeVVTMkNxZVpOOTJiMFRNWi9nR1FlaUtMclQxdnNx?=
+ =?utf-8?B?aVAyeUFPQitudzcyV3pGdkYvR0E2YXNsMVdPRUNVUHoranJLMXhpZWpXaisr?=
+ =?utf-8?B?UHNDR0ttQ2M0OTRka3AxZk13L25GT3hVeHNpOHY2V2xzYUZUMmxtMXU2QlZt?=
+ =?utf-8?B?SUVNSldFWm9Id04yRUZaczZEMXZFcmJJL2dNN1p5eFJ2K1NEQ3RaT0VkTkM4?=
+ =?utf-8?B?N3BNY2F6RjdvNnU4bGxsVDFRUWM1UDI2ajhTaFg0NHY4YkVzT2tRU2dXNHFU?=
+ =?utf-8?B?QXZWWUVML0l1bDRZM0hxMXdHTVlQbFl3d1pBMndTdFdIaU14SHZCcmRXRDli?=
+ =?utf-8?B?eHUrSzEzd3RJaDUrVi84dXJxUkY2OGpPR1BWbWQyRUxjZU9qTHMxcmJpeGZE?=
+ =?utf-8?B?WDVIamZPVFMzNUpGMEtSMk41WFVJQ1NLTlRjZHBHd1lnZ05HOWJuUT09?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: abf75dad-744f-4e9a-acaf-08df1791ee76
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR03MB5950.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2026 12:22:08.1000 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2026 03:39:25.9771 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WlG7rx+VSJ1jYsPSweqcrTIzORhxIBN7D905D11xwUP6PYaAIIhYeUUL9E/mH2TXqy5S4yy82UHfnU1sN1Kj/ALQnpYYM0R3uVV1tWyvz5I=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB10954
+X-MS-Exchange-CrossTenant-UserPrincipalName: oDvwK4aRAlusse/mYCbVpn4cReMieQE1ZZGxjvvXJvAh+6BHxzyS0SvmLsf5TGBaszh0aZHujzrMDXltN9GaNQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV4PR03MB8260
+X-Mailman-Approved-At: Mon, 21 Sep 2026 12:54:14 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -265,222 +265,26 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Alexey,
 
-On 9/18/26 9:12 PM, Alexey Charkov wrote:
-> Hi Quentin,
+
+On 13/9/2026 4:26 am, Kathpalia, Tanmay wrote:
 > 
-> On Fri, Sep 18, 2026 at 9:57 PM Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> On 26-08-2026 08:23, tze.yee.ng@altera.com wrote:
+>> From: Tze Yee Ng <tze.yee.ng@altera.com>
 >>
->> Hi Alexey,
+>> The per-mode PHY and controller configuration arrays are static globals
+>> shared across all SD6HC instances. sdhci_cdns6_phy_adj() read device
+>> tree overrides directly into these tables, so DT-derived values could
+>> leak between controllers, and a missing DT property on one controller
+>> would silently reuse a value programmed for another.
 >>
->> On 9/18/26 12:52 PM, Alexey Charkov wrote:
->>> The dtsi infers how to compress from whichever SPL decompressor happens
->>> to be enabled, so there is no way to ask for one in particular, turning
->>> a decompressor on for something else silently changes the image, and the
->>> conditional has to be updated with every new algorithm.
->>>
+>> Mark the configuration tables const and copy the selected defaults into
+>> per-call local storage before applying any device tree overrides, so the
+>> shared defaults are never mutated
 >>
->> Thanks, this was something of an eye-sore to me for a while already :)
->>
->>> Move the selection to Kconfig instead, with proper help texts and support
->>> for all available compression algorithms. Each choice enables the
->>> decompressor that provides it, and carries the compression level.
->>>
->>> Signed-off-by: Alexey Charkov <alchark@flipper.net>
->>> ---
->>>    arch/arm/dts/rockchip-u-boot.dtsi | 16 +++-----
->>>    arch/arm/mach-rockchip/Kconfig    | 78 +++++++++++++++++++++++++++++++++++++++
->>>    2 files changed, 84 insertions(+), 10 deletions(-)
->>>
->>> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
->>> index 4ba6a87e78ab..a72b55cec05a 100644
->>> --- a/arch/arm/dts/rockchip-u-boot.dtsi
->>> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
->>> @@ -11,14 +11,6 @@
->>>    #define FIT_ARCH            "arm"
->>>    #endif
->>>
->>> -#if defined(CONFIG_SPL_GZIP)
->>> -#define FIT_UBOOT_COMP               "gzip"
->>> -#elif defined(CONFIG_SPL_LZMA)
->>> -#define FIT_UBOOT_COMP               "lzma"
->>> -#else
->>> -#define FIT_UBOOT_COMP               "none"
->>> -#endif
->>> -
->>>    /*
->>>     * SHA256 should be enabled in SPL when signature validation is involved,
->>>     * CRC32 should only be used for basic checksum validation of FIT images.
->>> @@ -61,11 +53,15 @@
->>>                                type = "standalone";
->>>                                os = "u-boot";
->>>                                arch = FIT_ARCH;
->>> -                             compression = FIT_UBOOT_COMP;
->>> +                             compression = CONFIG_ROCKCHIP_UBOOT_COMP;
->>>                                load = <CONFIG_TEXT_BASE>;
->>>                                entry = <CONFIG_TEXT_BASE>;
->>>                                u-boot-nodtb {
->>> -                                     compress = FIT_UBOOT_COMP;
->>> +                                     compress = CONFIG_ROCKCHIP_UBOOT_COMP;
->>> +#if CONFIG_ROCKCHIP_UBOOT_COMP_LEVEL != 0
->>> +                                     compress-level =
->>> +                                             <CONFIG_ROCKCHIP_UBOOT_COMP_LEVEL>;
->>> +#endif
->>
->> OK so the obvious question here is "why Rockchip-specific?". I
->> appreciate you're mostly working with the RK3576 but I don't see why
->> this (the kconfig symbol definition that happens later in this patch in
->> arch/arm/mach-rockchip/Kconfig) needs to be Rockchip-specific, we have
->> other architectures that are also building a FIT image with U-Boot
->> proper in it, so I think it'd be nice to have this setting apply to all
->> of them so that it's a more generic approach.
-> 
-> The Kconfig selection itself is surely arch-agnostic, but I have no
-> idea if the handling of the resulting images will work out fine on
-> other architectures or what their constraints are, beyond what the
-> build system can tell me. Rockchip is the only one I can test, so I'd
-> rather start here :)
-> 
+>> Signed-off-by: Tze Yee Ng <tze.yee.ng@altera.com>
+> This patch does not apply on current main. Please rebase and resend.
 
-If it's the same architecture(s) as Rockchip, I would assume that if the 
-SPL loads a FIT image, it can load compressed images too and uncompress 
-them on the fly as I don't see why anything would be different here (but 
-maybe I'm wrong :) ).
+Hi Tanmay,
 
-I understand getting cold feet on enabling this U-Boot-wide but it would 
-be nice to notify other architectures that this is now (well, will be) 
-available and they can add support for it/test it. I'm thinking we (you) 
-could do an RFC series that depend on this series here, that enables 
-compression = CONFIG_FIT_UBOOT_COMP and compress-level = 
-CONFIG_FIT_UBOOT_COMP_LEVEL for other architectures that use binman and 
-generate a U-Boot FIT. Then you let the maintainers figure out the rest 
-whether they want to take it or not (after testing themselves). This RFC 
-series wouldn't be a blocker for this series, but I really think we 
-should implement this in a generic way at least on the Kconfig-side so 
-that other vendors can implement it similarly.
-
->> I'm wondering whether a
->> direct argument to binman would be more appropriate here instead of
->> requiring all binman nodes to not forget to add these compression
->> properties for the setting to actually apply. Of course this would still
->> need some logic handling a binman argument and the compression
->> properties both being set, and likely remove the properties from
->> existing DTS.
-> 
-> Not sure that's a universally good idea: the FIT needs the compression
-> attribute anyway, and it comes via the DTS. Passing the compression
-> argument to binman via the same DTS reduces the chance of the two
-> going out of sync. The alternative is passing the compression to
-> binman via a separate back-channel and having it insert the FIT
-> attributes based on that. To me, that sounds strictly worse than the
-> current arrangement because it turns explicit settings visible in a
-> textual config into automagic.
-> 
-
-Yes, but at the same time, you get a truly generic solution without 
-requiring architecture/vendor/board maintainers to implement the same 
-details in their DTS (reducing boilerplate in essence). I'm not sold on 
-my own idea anyway so not a blocker for me (and we can anyway decide to 
-go this route later on).
-
-[...]
-
->>> +     default ROCKCHIP_UBOOT_COMP_NONE
->>
->> This diverges from the current state, instead do:
->>
->> default ROCKCHIP_UBOOT_COMP_GZIP if SPL_GZIP
->> default ROCKCHIP_UBOOT_COMP_LZMA if SPL_LZMA
->> default ROCKCHIP_UBOOT_COMP_NONE
->>
->> to keep the same behavior (not tested but I believe this should work).
-> 
-> That was my first attempt, but it introduced a circular dependency.
-
-Do you still have the dependency loop by any chance? I'm assuming this 
-is something maybe some architecture/board maintainers will hit when 
-wanting to default to something else than COMP_NONE?
-
-> I've checked the current defconfigs, and none of them enable
-> compression. Worse, LZMA had been broken and couldn't link for some
-
-confirmed with:
-
-./tools/qconfig.py -b
-./tools/qconfig.py -f ARCH_ROCKCHIP SPL_GZIP
-./tools/qconfig.py -f ARCH_ROCKCHIP SPL_LZMA
-
-> time until I fixed it separately (it's merged now), so I'm reasonably
-> sure there have been no active users of these settings lately.
-> 
-
-We would "break" (change behavior for) existing users which use a 
-non-upstreamed defconfig, but we generally don't care too much about 
-those usecases.
-Fine with me, but this needs to be documented in the commit log as from 
-the diff itself one could think this was not done on purpose (and we're 
-technically changing the behavior even if it doesn't apply to any of the 
-upstreamed defconfigs).
-
-[...]
-
->>> +config ROCKCHIP_UBOOT_COMP_LZMA
->>> +     bool "lzma"
->>> +     select SPL_LZMA
->>> +     help
->>> +       Compress with LZMA, run from the host 'lzma_alone' binary. The best
->>
->> I'm not sure we need to specify the implementation detail of the tool
->> used to generate the compressed binary? lzma_alone is also only
->> available on Debian-based systems (e.g. Fedora doesn't have it), so I'm
->> not entirely sure whether it'll stay this way forever (maybe we should
->> switch to another implementation that is available on more/most
->> distros?). I understand you probably did this because it's somewhat an
->> important piece of information to then decide which level to use.
-> 
-> The peculiar host binary which nobody ships these days is precisely
-> why I decided to mention it by the name. On my main Gentoo system the
-> legacy lzma container is only provided by the
-> not-so-easy-to-figure-out lzmacon package, which then requires
-> symlinking under a different name for the U-Boot build system to pick
-> it up. With this help text, a user at least knows what weird binary to
-> google for, or what substitutes might be available on their distro.
-> 
-
-Can always be improved later on, so fine with me.
-
-[...]
-
->>> +
->>> +endchoice
->>> +
->>> +config ROCKCHIP_UBOOT_COMP
->>> +     string
->>> +     default "gzip" if ROCKCHIP_UBOOT_COMP_GZIP
->>> +     default "lzma" if ROCKCHIP_UBOOT_COMP_LZMA
->>> +     default "lzo" if ROCKCHIP_UBOOT_COMP_LZO
->>> +     default "lz4" if ROCKCHIP_UBOOT_COMP_LZ4
->>> +     default "zstd" if ROCKCHIP_UBOOT_COMP_ZSTD
->>> +     default "none"
->>> +
->>
->> I'm tempted to say this is not the place for this and rather should be
->> in rockchip-u-boot.dtsi for example as a series of #ifdef (but if we go
->> for a generic implementation that applies to other architectures, then
->> maybe it's fine like this).
-> 
-> Noooo - do you really like #ifdefs? :) Having this here means one file
-> to update when another algorithm gets added, as opposed to multiple,
-> which I believe is a worthy quality in itself.
-> 
-
-People have various different opinions on what can be part of Kconfig 
-and the above will likely not make some happy. I don't like it, but I 
-also don't have a strong opinion. Also, if we're going for a more 
-generic approach, then this might become an issue rather quickly as all 
-base DTS defining a U-Boot FIT to generate with binman would have to 
-declare those strings again. Can always be changed later on in any case.
-
-Cheers,
-Quentin
+Thanks for review. I will rebase on current main and submit as v2.
