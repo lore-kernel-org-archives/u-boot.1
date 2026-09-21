@@ -1,143 +1,143 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA9D9C982F1
-	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 02:44:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2CABC982FD
+	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 02:44:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5522260668;
-	Tue, 22 Sep 2026 02:44:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9253F80D92;
+	Tue, 22 Sep 2026 02:44:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KBkXQnxlUR2J; Tue, 22 Sep 2026 02:44:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 32DC56066A
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790045083;
-	b=TH/5zloWNR3oGQOQ2xC2Y86fBRnVKat6esQq4nBrkfFy6vqTfQC5LDGNV9nQk9l6IDH2
-	 Eup2VZiFDVx4MZ94Q7vTeOBEFt/rd7umxpQHl1RfdqWAHpp65FXQj2WpLnr6i+hhP30to
-	 FqCNMLJYzbXFCUkM3i15oY9w1YzhBbCXj7X9a/ZMzb/j6sVdlGeER7xqb9c8UBRMcv0n0
-	 gPHCTAl//IjQEevZP9j3CCQZB77M5bJEAyCr1G6KAW2z5fSw3w4PJmdweDaG8uaYAjafS
-	 QS2JXKXkvDLHOluLULPVoyucOP6213cH9w9uvWCCt0o1ILL/7r+KeU8JGxSk9BqnUTA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KF5nX8S4ETQ1; Tue, 22 Sep 2026 02:44:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org C8E6280DCC
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790045091;
+	b=slzRh4v6PRPSXN0ePZJ+O2AnOT3Flo3RUU016LBHpqspFOrLx+aTZuMdAwIgRHY/r4MM
+	 TcMwmtHvxDWrJMcG99PvdwPWU8SbGOaEzKYyeCAAvXwbMC3uiDdCmR3wP/2T3PLnOZCjq
+	 9kOLSuqV2PSBKKcJmpCliihTnvFAuY6BegfQavTXf8IVV7MOD+03iNHsPyROmSWUFsIbs
+	 KhXcgpSYtEr296JX/M3JgrbLaDdy1wCb9qnHQWu3c7VeWL0gcdbSIbYzkCwmDOihDIHia
+	 pZkLtahmnsLwSJt7ebWuTrHH25y1jW+bWpej1tnd4BAMSI/yxk2e1iNKXpt38fhmnQA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790045083;
+	c=relaxed/relaxed; t=1790045091;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
 	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:
+	 Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=WCEs0fCCjU6RmWOr4DyqD+h+5au4LZVPan7QxV/HKC0=;
-	b=taAQuiuFD0CdSL0I+7QAtQBRewN0OGtxKXuhhPghotlSACKaC1S1zCKAGCutWd0YUul+
-	 1sxyjvAss+YV15I//n0KhSH/4LQcFCfHilf+DpIlXkKKCNP5uoGCbRocsN1p37dc6/W2d
-	 sJH0kkt0IIJpDd5k7gHW1Rz/CgkxHN/0myUzsc2LoLYpUPmtVMPMs17lkMmrsf+c4+tcW
-	 cRu9tVr8Ymme7zQHEt2bZ3MQIszbjg3KMYRsRBF2gJkH+k/n7HdE2OtkuMRL8lcnyOn5P
-	 yvH5WGXQOmlGGsPU4czT+4m9CxjGD54ZS+lEiSjqm5EJ2DoOre0S6+/vnCcgs2x64yA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=Xzlsvds/4dK8lcZbr4uT8nlx9aucdTIAJOyVf0awE8w=;
+	b=U2TF0jFD5oA7PXzJAsIjne/0u0tVmuvu5fJo205H2uvFLNjIXDUz0uVPdgaKvcI5Oq0m
+	 0kgXXAKxar7ldYl91nsYV9ViFtWmqtwpBmuWkG3sUSgaOzMosodz5aOfqRGoBYZgQkBt2
+	 hORFFniYYnq2xXC/c957J4xHbzxz2qux0g+XyrwJ7TCceL9z3x2cDEW+7X59sTPIUvP7O
+	 A25UwOdruUwP/zKgGNaFnQVpFCeQh4fUP/iZof+DLFYQzfZjXBqCX05i5B8UceldXSAB9
+	 7kh9/GKbdTfaT7D1V3hO9rEHHsMe92Y7BqFNoSSYZiCBopqV/UWmGTz8qbsBxCGYUDw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790045083;
-	bh=WCEs0fCCjU6RmWOr4DyqD+h+5au4LZVPan7QxV/HKC0=;
+	d=lists.u-boot-project.org; s=default; t=1790045090;
+	bh=Xzlsvds/4dK8lcZbr4uT8nlx9aucdTIAJOyVf0awE8w=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=UMfGqBHHZQ2gidHrK9JFiQ9Nvfy6YzEu+cB0sy2JuTM17ddxusHCXMi4qb/tixuhQ
-	 cOP/exN2uG6Bftx1+68hRpjNob6NuhDcZWLC6t28cI8nXhASB7tKzEjNtt6LLkCfdf
-	 wgXE9BNy9Vc4lk6WXNORwRGxbvOoVuPhq/gyvZ96MtmabxqsR2gg6iAvmOkqIKoKSu
-	 FstfaE0W4ex6j8js9JPHcaSfEod9qJ6F8vhkhxd9xde5QMFpCNJ6Jtvqc5S3B79uJt
-	 /ceCpJKeplCqDGatx/OWfRNHci3HSEl2D6VAMqs69D5U2i15SMHmQ4jQVNxmAkp6Xx
-	 eEaFYbcEIy6AA==
+	b=mEKUPbBgFXluvZwUINIeC/hr7RkaqlO13rngY6IbUs6qDcErbmo3F1KwoByQRmyLk
+	 8aVTys9eUpiVKwhvMEIc/C04aX1FOthBR3VQE38a1T0sD2wZ9I+lFaL6+xQqEa1T9c
+	 MmeT+wfc+u4TldawhaQ/LwrI8cxa4Ptwd2ixdF9Wb5Nb3O1CSbdgY5lYDFfD+m1qo1
+	 h5pPQpfigzm0ksdnQjwaOhCIeF0PeaL+h/bAECkzbC5HbwJCrc2U5QO8/sYtpjNf9z
+	 v3ITd4VOf/UwU+/MfUlCozP+js/XbcuC/4DlnUz0v7vmP63azn7Idm13k7KF3bgEYk
+	 dm2g60hczElHg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 32DC56066A;
-	Tue, 22 Sep 2026 02:44:43 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8648CA20
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:44:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C8E6280DCC;
+	Tue, 22 Sep 2026 02:44:50 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 362709D1
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:44:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6C44B40780
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:44:41 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2840160685
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:44:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YuCZZ9N4EezQ for <u-boot@lists.u-boot-project.org>;
- Tue, 22 Sep 2026 02:44:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 885E04077F
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.171
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790045080;
- b=V/+X4UVcG7OWKBvqZR/1Wql67LIuxLL/EZqoRF9FHj3N6ArjRVf2jprob4aKYUWk+rV5
- Qme60a6C8RFHW7m8PHqWVh9zqfgK91UcEG7l3cqhWVSOwWMtzG+PWabUpWxr4cdITbd5G
- O3ZQkBVf7RUmvuPOsRlXA3aDi6jEPrEEOQjU268t8dMRszUl7VFMaGlhcYg87c/ryavPc
- 9aHd1sEuRkMLUU2p6W54s4lLyUyHprgOSXTpOCij0oNRj82c4oKqil83QqKWCsfi8HTx2
- wrRGaqwP111ZfMhEODNDjGM7DV33/45k+8IQfr1C5YILAOuNj4/pWe1FIK3KK9+BXRA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MmrUh_A406Oo for <u-boot@lists.u-boot-project.org>;
+ Tue, 22 Sep 2026 02:44:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3CAEB60677
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=80.241.56.151
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790045088;
+ b=EeYnQB0q2yVvusn6HVWLmfQ9F1aTIzHtXPa4W3paCq7SXzkHo+/Wq8kC8PviBDcGuf/e
+ LjclLk+W+5nvYkIci7c9YePXl6nIYMIeUqF0OdS1l7pmmNYwoCcywVJDYfr67ylj8lxW5
+ CBSisMC3s/s68PNUbfzTsygWYaI68mpeHaWN9oLEA4ymwW9HhnmqWDa9Y/wB6kzxQJFrU
+ zLjQGJ2LPotwo6p/0TKgAy9NnfMS81t744/iw53p5X7mUtUeqTDnyE8rJflRGMTO8NnzU
+ AtqcrmTJ5PBm1nroLswnzC8ntLAQS4haD4S0W26dN9cDqr4ySQij2xTpkmFm5bM4gVA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790045080;
+ c=relaxed/relaxed; t=1790045088;
  h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
  Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META;
- bh=WCEs0fCCjU6RmWOr4DyqD+h+5au4LZVPan7QxV/HKC0=;
- b=aPmzzCyjbZpUvqI6l6eLJNocSNq4q4+lGgCz2/buh1Gh2VViqI6WsxNFVYmhP8JR9Ef5
- 5nXpFjpKxoUx9JPwTZo2e+IwgkDzCY3nAQ42yFPGN2n/Mzamj8DUgg2u9Uh/bR8GC5KhI
- fsiFtxtpjJxvECvcIFEYfN2hz/K1d1O9EfCTtw1DSNPk3QV9qgeUHmYyq+03BPx4xLh8S
- uhoxMim/66gmP5B39/x+X1KwOXuwOq6ZdTHvKAIXugruIHrPJVJhNiKdbDQz4vD/zqctg
- YiB4tTcO5eunZ0nW+qA68630pC+XYgrti9FwZFSDcyRWFd/bT2AkSf+QMaZsvDwjmKQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ Content-Type:Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID;
+ bh=Xzlsvds/4dK8lcZbr4uT8nlx9aucdTIAJOyVf0awE8w=;
+ b=YqA+mX33EUcJnT1e8pmjBR75sD7RpkSa4ARokQUe5IrSYREW3RSim8um2pd0OfEZY8lh
+ zAB8HbZ4hyaiW63tPi6BhLTgU81N+XzglrYo1VGGRjZ2OMd2pNV3VHGRGe0tNIQfS+gP2
+ oCuVRbypKmi23WxEhsssaqXnw1yUQpx6BuqeQU/7jszKih663onaNzM2kZhe10nXnKCiZ
+ pIRbMF4TKcq4sQd5V2LBwAqlMpUUX+QFKMFSfmV3ToTwc4/6nOg+BDfbm0hgFwRBOwei2
+ QP6biFLv+1HWU/pWyK93Ser8dSybscufe29/UxlUkbZRIdyWApGfqbRoXSwEb0d7jjA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=mailbox.org; 
  dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=psBTLY59; 
- arc=none smtp.remote-ip=80.241.56.171
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.171;
- helo=mout-p-201.mailbox.org; envelope-from=marek.vasut@mailbox.org;
+ header.s=mail20150812 header.b="omEye/cB"; 
+ arc=none smtp.remote-ip=80.241.56.151
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.151;
+ helo=mout-p-101.mailbox.org; envelope-from=marek.vasut@mailbox.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=psBTLY59
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 885E04077F
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:44:38 +0000 (UTC)
+ header.s=mail20150812 header.b=omEye/cB
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3CAEB60677
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:44:47 +0000 (UTC)
 Received: from smtp202.mailbox.org (smtp202.mailbox.org
  [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4hpkvl3SG9zMlGB;
- Tue, 22 Sep 2026 04:44:35 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4hpkvw0gXjz8v1l;
+ Tue, 22 Sep 2026 04:44:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1790045075;
+ s=mail20150812; t=1790045084;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=WCEs0fCCjU6RmWOr4DyqD+h+5au4LZVPan7QxV/HKC0=;
- b=psBTLY59w+okZiMDW6knyNjSy4/sLyPcTeMdOKx9uQ6ItQBvW5g6wwdOEg5qx2pZQNC+wF
- TeOMsG+KEfHUMc/U2T6/eExEMT+4LcmZBvIV1uJwGJo5nNT2QZW7uQ32Pm/HkJsrdcyrcy
- oPU8KbeZQrdGq1me1c0Uj0PP7A6QIoXCjuL4XGPFW4LAe3f9bUZbV0DkPuELTc2XQdxUrx
- /9vzveCPD0iH/IcdtMAyRqzbKg0Yi+MeLbp0Rpvgw8rV7kgvcWOEp1NTavTH9lP17nDwqo
- 8YtloCIVWW4++RD4ujYlkLPshzrw4Rt1INsu3t+X+dSjwkvFFE57y36w9BHYOQ==
-Message-ID: <898ceb98-5e56-40be-a916-77a4133d838d@mailbox.org>
-Date: Mon, 21 Sep 2026 11:40:15 +0200
+ bh=Xzlsvds/4dK8lcZbr4uT8nlx9aucdTIAJOyVf0awE8w=;
+ b=omEye/cBgyyGxnkVCugUZG+SO778FP36PbYsBQenFNh97fwmwBhH6ywGiTn75fABFwyi1H
+ 63ZQH2qWGLp8ma7zE+AwZ2o0BQ79wpvKn1ISRe97PbGQrfZTEl0rffuACtuj0Kp8v82UgU
+ Emw3TcByB1dv5EglG93abOLzuEHJ3nEGtdC2Ln3NKU2LXErZof+3A3G4Tya6YBxnxdxiE+
+ Yp26J9Ckl9REKCz0X9rm01wPoxqkCvhMIf8+gN2O6lcLKWqjMdeYQgRHJRIZ75+bDJu6Jl
+ CfGC/zf2kO1Uy/H5e273F8rG9xkjGAEHcOgESAWNnj+/U6Q4KcPQR79ZLzJh1Q==
+Message-ID: <238ceafc-beef-4594-b626-99bb37a13692@mailbox.org>
+Date: Tue, 22 Sep 2026 00:01:22 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v1] usb: dwc3-generic: fix ref clock lookup indexing wrong
- clk_bulk array
-To: Stefan Eichenberger <eichest@gmail.com>, Tom Hsieh <hungen3108@gmail.com>
-Cc: marek.vasut+usb@mailbox.org, stefan.eichenberger@toradex.com,
- trini@konsulko.com, hayashi.kunihiko@socionext.com,
- u-boot@lists.u-boot-project.org
-References: <eab9d4af-6f01-4963-8fea-49a53abea2e9@mailbox.org>
- <20260921054432.2978558-1-hungen3108@gmail.com>
- <arD0gD8AMpO_B6kT@eichest-laptop>
+Subject: Re: [PATCH] usb: gadget: rockusb: terminate full-speed descriptors
+To: Quentin Schulz <quentin.schulz@cherry.de>, stevenjoezhang@gmail.com,
+ Simon Glass <sjg@chromium.org>, Eddie Cai <eddie.cai.linux@gmail.com>,
+ u-boot@lists.u-boot-project.org, =?UTF-8?Q?=C5=81ukasz_Majewski?=
+ <lukma@nabladev.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+References: <20260918-rockusb-fs-descriptor-terminator-v1-1-144ffc0f3d33@gmail.com>
+ <180d8edd-2743-47ad-9904-866d76bdceef@cherry.de>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <arD0gD8AMpO_B6kT@eichest-laptop>
+In-Reply-To: <180d8edd-2743-47ad-9904-866d76bdceef@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 925e28754d25d0667ce
-X-MBO-RS-META: 7xsg9qbag39kx58m7we5pkbz75wtscgm
+X-MBO-RS-META: h3qh8aix1yqpw1fim9iad4kjjgjw7z7i
+X-MBO-RS-ID: c11aee0f994b908299c
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,29 +151,37 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 9/21/26 11:10 AM, Stefan Eichenberger wrote:
-
-Hello everyone,
-
-> However, if we have to handle this corner case, wouldn't it be better
-> that probe fails entirely when dwc3_generic_probe is not called by a
-> dwc3 wrapper driver? Or asking differently, is it supposed to work that
-> the "snps,dwc3" node can be used without a wrapper driver?
-
-arch/arm/boot/dts/nxp/ls/ls1021a.dtsi
-
-792                 usb3: usb@3100000 {
-793                         compatible = "snps,dwc3";
-
-It seems snps,dwc3 can be used without a wrapper ?
-
-> If that's not supposed to work, I would propose something like this at
-> the top of dwc3_generic_probe:
-> if (!strstr(dev->parent->driver->name, "dwc3"))
-> 	return -EINVAL;
-
-The parent driver name check sounds good !
-
--- 
-Best regards,
-Marek Vasut
+On 9/18/26 3:50 PM, Quentin Schulz wrote:
+> Hi Shuqiao Zhang,
+> 
+> On 9/18/26 12:11 PM, Shuqiao Zhang via B4 Relay wrote:
+>> From: Shuqiao Zhang <stevenjoezhang@gmail.com>
+>>
+>> usb_descriptor_fillbuf() expects descriptor arrays to end with NULL.
+>> The high-speed RockUSB array does, but the full-speed array does not.
+>> Full-speed enumeration therefore reads beyond the array and treats
+>> adjacent data as another descriptor pointer.
+>>
+>> On a Luckfox Lyra Ultra (RK3506B), the adjacent interface descriptor
+>> started with bytes 09 04 00 00. They were interpreted as pointer
+>> 0x00000409, causing a data abort in usb_descriptor_fillbuf().
+>>
+>> Add the missing NULL terminator, matching the high-speed descriptor
+>> array. After this change, RockUSB enumerates at full speed and
+>> upgrade_tool can successfully read the eMMC.
+>>
+> 
+> usb_descriptor_fillbuf() iterates over the array, but so does 
+> set_config() in drivers/usb/gadget/composite.c.
+> 
+> I've quickly checked other drivers and it seems they all NULL-terminate 
+> also (either explicitly, or in the case of drivers/usb/gadget/ether.c by 
+> having an array of static size with fewer elements than the array can 
+> contain (and thus they are NULL)), so they should be fine hopefully.
+> 
+> Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
+> 
+> At the organizational level, who's willing to take it through their tree 
+> once reviewed? I don't mind but I'll be waiting review from Lukasz, 
+> Mattijs and/or Marek before doing that.
+Wait for Mattijs please .
