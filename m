@@ -1,166 +1,184 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C233C982ED
-	for <u-boot@archiver.kernel.org>; Mon, 21 Sep 2026 15:42:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97FBEC982ED
+	for <u-boot@archiver.kernel.org>; Mon, 21 Sep 2026 15:45:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D889F80C86;
-	Mon, 21 Sep 2026 15:42:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4927440820;
+	Mon, 21 Sep 2026 15:45:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XIrsWBeZ5zRz; Mon, 21 Sep 2026 15:42:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 9A74B80C87
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1790005377;
-	b=IporL/1XxssJ9+DIAUEpKL1Rd1xK/rEbDiIkOE1XIyOPOyWoqYuoQczrap6KwatAonzM
-	 sydgTOm91GUL31A926bH9eulJRdpuyvQkJHN1bu7i7vHIknb8paIhlwbq3E6VncxcuJsT
-	 nXqbRwAp2mEZtG5Y5kMdm+1Ryjpu+IxzFClT8GKy9un/rFdHydAD/hWmKiBWykytkZ3js
-	 1AFMk2Y+fO28yssfBTlYba94yh4MtOj7O29lnUr5zJ/TBInSxKNGfftpn/4YhF6d42qjG
-	 5DapzlIUgc6FnQBQErXwqczL/RXRk22o2H/dDUlJ44TOFpLxaUp6azWQ8P8X7og8jSg==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790005377;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sscaya5WbEIq; Mon, 21 Sep 2026 15:45:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 925564081E
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790005549;
+	b=OQ62T22dCKDHZSAml5QxxdTSXdrh1A2sG0MrKUwoQc7zdkaNGEVgzWiFzYN7y/xDr2lf
+	 dvYigo6wKgo//4N7uykPs0TFA3Pk2iFigRGFrSqqPxOJcv2mv2vy1OnHiRU1lX3BTx65V
+	 69F4uiikmpQxy7RP2p2kOpbryzbXEl/8YK0Aa4kBsGPy1Ncj3hQ8lZazZqFq/kBxPArSn
+	 8q/4Gw00vmJAfQTRMI7463negk/2aoq5neXxu2hXR0719p7p9O+SPvM2p4zrpCvRx9Osa
+	 6MK1Dxt3lMp9vWeP2h0BvvwEGg5uMhZeB9s2vCtf9saqE9asq7xIlJtHrj+23McooXQ==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790005549;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=2fj5K8qhlMys7EfJLxbzhhlIqrNgjb1CqMadX+DrSYA=;
-	b=ILN7pSVhCU3/etQepGLmOimW/5LaSTlnEzg5553AKfpWc7zt/tGmFJPJSv65p9s5KMnB
-	 N8VnqMb7EehDOk2ukkZwZXpYvfKjtJveIMNANKUxxnbSG5htIaqjlmh6h4FcTngbYwAQO
-	 sQOBpxFDdazFQyKT7nYYae9qoQQMW5DJz9EOee0eHw2jp6PGyJJJ2rZZA7tF73d+nEkww
-	 7IGQDFXnylQ9r4SE3daNXvUyvpqK5qe4EOUSClWdUaTquU3hURmCcqzLlXVc1LpYj9Gta
-	 KiK6PETI4CFbdG4ztpkqGWTm+3ULUM7AxBnfDNRFPA15w/BaqNDCiXZykiiVpzVBBEw==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
+	 X-Google-Original-From:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=p8ATsPg1OfuCAiGE/QAin1W2EW1QaXalaUsjHn0hL/0=;
+	b=Eti02cVRyOUB0wNUrvlodMSnIQrVNlZW6f2M7YP9JW0tdBGUYPHRFjvg2LsoGOJFw6n3
+	 /Tobd3MFm5SgtjtZi++D7K9YxeS2xC+SSBMqEAyiUgon9enotN2Abl7+NIjnw+gMYl8Wu
+	 PPaqkfK5JXAXv2J47XE4AjHVCMqZU62kkKHsQK52B5bQsBQU8TXIjeATnJm4Te0Z3+UDI
+	 J/FxtBG39avL2Z/vd7x/XHBZ2al3mGrwEpMcb8GBUU2mu6vx7Sdj2i5k6v+n6yAEc1ZSL
+	 S7iTA5IUZ/uOZLMonF/tIYcN239UXKLnsJLXOQJuuZjIuIDwSgWxu9cy7/2J3FTU9wg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790005377;
-	bh=2fj5K8qhlMys7EfJLxbzhhlIqrNgjb1CqMadX+DrSYA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790005549;
+	bh=p8ATsPg1OfuCAiGE/QAin1W2EW1QaXalaUsjHn0hL/0=;
+	h=From:Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=iCvilk6u7es1z4D5e3wwDlnd9ryjJsK57hw65dE/kFGflzhlweqM8q+4kfdfbu4om
-	 LLog5bD5R/dETe7IJDpkHtbQ7HswUhy8Wv5i2HGqBpvCPMsJSzjKOoKlYrqRK5yn7f
-	 A22QBmKGER294QpEaV5MtB8KTVdnyRHDjxt4tCqxyX5zVl27XgtCG5aRjZ6GJc4pXM
-	 WFsaDAh65AGWt+MGqvLZJtLfH3e6ZKmdoZwAIc5yLAGBEsMrCJtpOSMn9Hm7T1vdRh
-	 QJRw0yNjJRbilQpGohqR911bwsb+I11RtpLMKAu1h49Yc4mcJYpc4Qzt1mJsVJkmx5
-	 z0PyQkZvXOX+Q==
+	b=wQV/yXpkkIMIy3EAG7y2h/H+U/CiKcuTtHnoRQavatx8LhKx+AXGzuh4g0EHs1OVM
+	 95BBy35JMLEqeRaK6etvFUg7MtW8KMXcbFLSdUVDCAT8bIHmWPP+GRroi915ccdA1K
+	 yujMTCiMVMQQHiWApj6SM3iSmRZFmJVZMmWdchzLEoO6ttrqH1s7N5z3xcRmSSKd0i
+	 q0ecdNQqsfG3m9CnuK1ME02D4T8b8SKUHRWqLnRJA6Dp9N+hneCDkz7QOxf7jjmPka
+	 S6Tu9opaUPqCpCIWq8CA8UmZ/dtU+pnARDmKn/VOdgDcw4r4tIlV7T+1/picSflnM/
+	 wjYYDgclF4tkw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9A74B80C87;
-	Mon, 21 Sep 2026 15:42:57 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 984A213D
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 15:42:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 925564081E;
+	Mon, 21 Sep 2026 15:45:49 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 04C56334
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 15:45:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8A3AB60680
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 15:42:56 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id DE5B0401B9
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 15:45:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jCNygcX9Nrx5 for <u-boot@lists.u-boot-project.org>;
- Mon, 21 Sep 2026 15:42:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A7AA86066C
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20a::7"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790005375;
- b=K4rtuKokY1Q4mZnXrdOMqsFUo9l0jwJDsJf+4gV544dk7BHs8L9eCFQr9zvXwZ8m9o0x
- 8fRomg/+84kX8pF2Ac4giAhA10FaJM3GYJxtI/Ptigp5DuekYuQiSOTJsMzoBEwxLd0cF
- UmJg5ThsuowXnHXdGdyG60qRubl7VlWVXfCBE8S4Rz++IbuXrE9hglOpDKVq9+g0HK8QF
- Nf66ALCAHsbO7o9A4OqWL3+2Oh3uFHxWLf+P8Zv7zCGOhJJuf+DWk/NfVrqnKNaHLF5+B
- N46mB001skuLriND+DMMRn5EqFnkWLpkYZlZZYLxDBIhxutaiRFZWvV5ZqAxpiMRz7A==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790005375;
- h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
- User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
- X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
- X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
- X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=2fj5K8qhlMys7EfJLxbzhhlIqrNgjb1CqMadX+DrSYA=;
- b=JI1+SDXnM3iYQwq2SAdAAqKF2VE7f4tK18U/pDuijNIjs+NtF/W9sRBFlOXOswQ+/mCU
- N2TjDQDq8YoZw4Mrwk3K1mJofeZ7+QH3nrzzuZMB5V2Kot7Fo4qlRczJkeUnLUNZdaWnk
- 3DnEQs+O1F5z8dar/d1J1gd12kM8LRvmxsoDoSg6BHHl3aJ8mAunWIn6wefmk8MAW4RJ/
- lbuyQj2XCCuAdCytuKVkrblilKHlCiITEBEpJWQnwZYe3gKKTyInKrla3Ri5sU0Rnsf+D
- oby2tARjt9WtGFncR8elxlDZTiph/GnTgWB4JuAfecHJ6e9m2OQn8X09fCJuY5XHfdg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org;
- dmarc=pass header.from=cherry.de; 
- dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=esmsAVNG; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20a::7"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20a::7;
- helo=pa4pr04cu001.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=esmsAVNG
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A7AA86066C
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 15:42:54 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZZ5T+6yObHxxtPFKdW9XjvjolZ9AWZtJriSA9CSp1Ry3YDglWBj7PGJpnY67nOi15F86KDe9GjciGVUHh0DagIhdF8cKhNzh/lFUosohR3zJgChRE1CQQw5CLS7ufGncYqqL9LWFhxkDyfGA/9q2WkP0XUXFFnCnf4rd2bb3aTX/pipfMq1u8L6hUzoxi+ad6ZNx2Kut8akUznc3EMe0v7ALdqXFb6qwFlfDPoFM8iy84WGash1GouIw0dH/nGdWEt+NGpWtWy4qg+brr7mkGBuSVU23ffdcg/FCLukhspvT1riRlcaya7g1Io4jE5lFYHSWQbD/tK/Re1Eot94RQQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2fj5K8qhlMys7EfJLxbzhhlIqrNgjb1CqMadX+DrSYA=;
- b=VnQCxBF4KSTGCzv6K9poHORO0Njk/0cs2LRg0rwTztUrzZj/pmbYEuQUyV/NM7E6q+S87p1T//IgUNRoC3w60lf6nrAATQZjLi3EgZUPbfIoyOndxhxTM9UBzVjQ66V9bOS9+NA9Ao7D+4yN9bDsGa0sq6eqjcmjBsT+jGguxrpivUDm4LYepWxF7oVvZBwmWB7X9ac+fSgVp+vndK9JwgzA/LIg7ZgwqClfKpUEN/XtxqmrqRdg4TsFW8Jg6WVG5R4MgSEyGmUY7/BrzAXxXGaERTm0+r7U+5vYvicdYT6HGOq2XVgh53vVFkQzJPxUfjLgxzyMv4tcm1E0qjHCMQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2fj5K8qhlMys7EfJLxbzhhlIqrNgjb1CqMadX+DrSYA=;
- b=esmsAVNGHBsqBh3NUV/blwfpRU/0dqrxCQS7erekweiFUlu3UhoNues3IU0xAk4TnaMqy0Z1eKGonXeVmwGSjChIVn5mrG1yRdQkWhuRzGTwOI2SLWLYDq0Hc9Ot3W2QjGtpER8DnCyAHzuvOKwmpBfjgp3n2UE7wXPTN1xHoXU=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by VI0PR04MB10212.eurprd04.prod.outlook.com (2603:10a6:800:243::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 21 Sep
- 2026 15:42:43 +0000
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0428.015; Mon, 21 Sep 2026
- 15:42:43 +0000
-Message-ID: <31ec2b30-32cf-44bb-991c-476e78e52947@cherry.de>
-Date: Mon, 21 Sep 2026 17:42:41 +0200
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 04XAMiKsJdje for <u-boot@lists.u-boot-project.org>;
+ Mon, 21 Sep 2026 15:45:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 8DCD7401B1
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=185.125.188.123
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790005547;
+ b=r3/wGolD2Vq7q4bhr1LmA6b92RXnaWn3Pzo8p4SIevjfu4gy3doHEWwFvRYGZWaLMuPa
+ m3OgWnH9X8g5dEQWSjGOUg0fkFsdtVx8hF8fj3sWi1ol97X5gakZHaK4ZLj+/j9xebIgZ
+ WuySr6Q+hHJ693vspyyTWs3PIeMttEPn7xgmFalZh3SneTawyc6gymLsFP34CRoKnQJpn
+ 4fhqAV2yNgE/KX5ZzhFrHY98XBfFnYLjFBXnICmyvI4XGU9uLXV8bru+1Zdi6LB+RRrKu
+ kQxrPl4HJGG0YT2nO6lukecsUcMBvEHIPndnyToSgO/PrHxs8kBqGPRyAfV9PpfhCaA==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790005547;
+ h=Received-SPF:Received:DKIM-Signature:Received:
+ X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+ X-Gm-Gg:X-Received:X-Received:Received:From:X-Google-Original-From:
+ Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+ Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ bh=p8ATsPg1OfuCAiGE/QAin1W2EW1QaXalaUsjHn0hL/0=;
+ b=MX+FmqTbbEpBpZ4MJevVk9tVyD95IPFIPx0qrs0F0DqKAXA+hRMs6fkYOnw6Kb5I4P2x
+ v8GFoYADmrD96I+T/HLjSks1WtebAN3+I64pseH4RX8jQVBNhd/+37WGkQAbgPketnpLI
+ K7mkTUaRd55PFJt/U0JTqEuCK+m7aPCnV+xMSkt1+RD31ZpB40DN3SieBVQlKR8uQ/pP+
+ O5AX5Daua8OK/fSawcwONnT5jBi+H23BXewBP07Q1pRwtB5H5i9SO/UMMHpfgtEeT5EZB
+ qZ4QISI5upF4H8mHAd74wsppOUHA8KvwrxqHPW/k+jmFFkQyIIhOWDkeNWYye1bDw4g==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=pass header.from=canonical.com; 
+ dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
+ header.s=20251003 header.b=lpgMErh9; 
+ arc=none smtp.remote-ip=185.125.188.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=lpgMErh9
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8DCD7401B1
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 15:45:44 +0000 (UTC)
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id DD5B03F830
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 15:45:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1790005543;
+ bh=p8ATsPg1OfuCAiGE/QAin1W2EW1QaXalaUsjHn0hL/0=;
+ h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+ In-Reply-To:Content-Type;
+ b=lpgMErh9HA0KmixqFjcnMmFHw4HGRZ3GMSV5tNP5APMw0Ff7cii+twxcd/89pxk3d
+ cgurJ3B8nL8hOj603qP3xohp6NxgStitmmnlqKZMmk28Rw6ZBQuMAC6xGtwo0mpo4A
+ 2OHo6n9yOtlYXd9JIVLc/nsc8y6BpMHs3G4FFAYi5WD8bayKVcrKAysygipUWoD7n9
+ GcMraAyfnAsa1KWc7Or+wxQgweGacKeeXdt4jx638+M3qve1PvfrW7JtsE/CIn6njy
+ 8j5EonQKtWxGO1Bl7n9Ygzs1ZzxK4VrgfBZ6CKLblUdiYlmv/T5Dr5DaI7b/IDbEtf
+ Rk6MZ2CSYGnStWyTU1XE90pZccrZn/2XMzi0M9TjnDIg6OwHq7BPGqs+eUA4yjFMVj
+ Vc0ryA8W+ZDXatbeKX60+/ahlgWUyllfwuTQzpa8rNMDQHitmDsG2h4G5h6SbI6GiL
+ hUcqkPDKh4xdn6VYsKPBmlIrlMblJRksY/0xcoRx1pweTnVgqyS93i0MHG9ewCj0qM
+ C7iKklL/VmLMGo6BTQfmeVx9wH+yXj6AGS5pXVQxfhzznwxQl7jkTPmJz1p2w9j/nd
+ WfaTEeYx87yQijQxMwo+AfctQxsprHRhNOC7Q34vT+sEjDvQIbCofJvlCYUCLSOu1G
+ IOujlla4JvYqEo3ZxNR4+wjs=
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-49e6b5c5f44so34737865e9.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 08:45:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790005542; x=1790610342;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=p8ATsPg1OfuCAiGE/QAin1W2EW1QaXalaUsjHn0hL/0=;
+ b=1l3NncC46TOslhBz+BEzgWuKfOl8R7L9kUZzQ58HkL0TDWKGZdqgLqYOTyb/YCmDgy
+ G478p7im6n0yqjVIb8+QhqTzwbDBu8rLQapnF25iIg2ghS+RSxp5caOtuC8Tsd/+OyMM
+ HE6afsFXT5W38OL0dG9/pG8ew+/281uaLi1IW1di2j8u6rMlUhF1JIdLA47lZxett2t1
+ bussGtlfaU0VqPKF7nAvMrC07XRAkr4ZboKSJvaeoiBtA59RxOWNau1ilcW6LIZCwR/3
+ sG7bcflE7nRf4/+yHRnTB63QfVjgmb5M9kwbwFdGV1qZrm+1QJRU90SDUCXD1MzDm3wB
+ 5NIw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxvHFLcUpuynUT/SMt5CljzV8PO4KJnytHEtFklEzS90B+qd8chLhN9VlUrD/hUuTflrmbGy40=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lzH+b0RokHShKqhjJ4r9GiLLllkZDq5PqtZclD+PQJCkueP5Km
+ rBMTO5VZbi369dq3riQ0Lm7TUwXhxb32FmxeZU8UVy++by1u40+hHOaYG51W9MqFNHuwVJiJbkU
+ q0B1LfhrdXvOFRDkDy1e5sqTHk8C5pgeAvPK6R/pwkJLt3uoJDOZq0ccf6AwrF0rzCZfkE4zQAa
+ wLNL3OEPsVpg==
+X-Gm-Gg: AYBFou3vcqOFz/qgeBBMt0bGD23fc52BVuxrli2UOnkRAHPQDa0ocLLUXPcz8n0QM08
+ Y1zcTor4Ba15bi2inNlvkB2XsiFFiuSuXfPB/BrfEmNRBObBhBgIV45fjazGUykLTKHDktSBUcT
+ voNAUbS6KXPXmpJcE61ZVsxSErULFz+rw0U3fGy6JpHtP7tCg9Zlxp7wvVoP3UTfL/V9lfTgxQD
+ vGggyZ9LEvEElBWlTXTa/bn9Ze1O7YJT170cYtcgNcGIWbrlUQ7eI4S2XlgPKjqleDgceuIX6FK
+ Imfx1PwzeD06rsIrQ9P5a7xdKkno1c6fUV+Dfzmwj/yY3/fN0JrxFumZiLTF5iqn30B1KyHGRBG
+ ntJx62WPpJuKMYX3o2msG5GrZpad1YADYTmEtclUjpVrDdxbKhoXkwDxbe0xm+CweUaMu5MLGKV
+ Caik3wCX8=
+X-Received: by 2002:a05:600c:83c8:b0:49c:ff3c:973f with SMTP id
+ 5b1f17b1804b1-49fc573f531mr151822965e9.24.1790005542326; 
+ Mon, 21 Sep 2026 08:45:42 -0700 (PDT)
+X-Received: by 2002:a05:600c:83c8:b0:49c:ff3c:973f with SMTP id
+ 5b1f17b1804b1-49fc573f531mr151822495e9.24.1790005541953; 
+ Mon, 21 Sep 2026 08:45:41 -0700 (PDT)
+Received: from ?IPV6:2a02:908:1242:30e0:aec3:c221:8373:654c?
+ ([2a02:908:1242:30e0:aec3:c221:8373:654c])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49fc55cd8a8sm294994665e9.0.2026.09.21.08.45.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Sep 2026 08:45:41 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
+Message-ID: <69076012-7d9c-4603-be4b-f39beebaf9f3@gmx.de>
+Date: Mon, 21 Sep 2026 17:45:38 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/11] spl: fit: Generalize compression support
+Subject: Re: [PATCH v2 01/11] boot: image: Keep the image-type table out of xPL
 To: Alexey Charkov <alchark@flipper.net>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Vincent Jardin <vjardin@free.fr>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -175,81 +193,14 @@ Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
  <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
  Johan Jonker <jbx6244@gmail.com>, Aristo Chen <aristo.chen@canonical.com>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
- =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>
+ =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>,
+ u-boot@lists.u-boot-project.org
 References: <20260918-spl-fit-compression-v2-0-28e946f57357@flipper.net>
- <30490adf-01dc-492f-aaf8-e280bc526a24@cherry.de>
- <CAKTNdwFVtH0-p9LmeXzFkUXi_uQ6f64om3rKCguMK5M_GHg=dA@mail.gmail.com>
+ <20260918-spl-fit-compression-v2-1-28e946f57357@flipper.net>
 Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CAKTNdwFVtH0-p9LmeXzFkUXi_uQ6f64om3rKCguMK5M_GHg=dA@mail.gmail.com>
+In-Reply-To: <20260918-spl-fit-compression-v2-1-28e946f57357@flipper.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AS4P195CA0012.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:20b:5e2::18) To PA3PR04MB11153.eurprd04.prod.outlook.com
- (2603:10a6:102:4ab::7)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|VI0PR04MB10212:EE_
-X-MS-Office365-Filtering-Correlation-Id: 006188bd-4411-465c-46f5-08df17f6f9ee
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|23010399003|1800799024|366016|4133799003|4143699003|10067099003|11063799006|56012099006|22082099003|18002099003|6133799003|41080700001;
-X-Microsoft-Antispam-Message-Info: oSg9icokMRISUcESwYiTXD+PGKjUM6arqiEFzmQpTZj08vJ8tyn6giJrs4mOPMVLKc4KRL8CcLGFrjfjcEmfIYQ2ks/v/sCYf3Jhc0huH/ge1HjId7L35jb87FM8KUnJCyO5g42KW7m8xcRalDubfIUuWWRQXgf3g+oqw6ZK/rhNL6gzK1ii8SakUaLBxwyEXiD14b/aUhWkhpPWcQNEoeNz2ffFyyqhV16gV5hVF1t4LCH2bQV+fOI2xo5crACuiimP+3OO5YMaBN+TftkNaoMXbaGGCwVBHtO6fT4SCk1AItjEDxJOLcF0SeNc/LC7L5SCjLoEtZJDqXXGfSjQ2K3MEne7F+Plcznr64Sw0AAKQ1iwhTPOHpjzdLuH9JB44BKrvSMxdT7oRSLdCt/xE0/Ps5yUAIkmbgXcUZBSNGvRa/hEoHQfHGl3pKTJdKyVCcBKx7kvDyRkLO+x7IWoOjmw5m/y+vz3AdYez2SVpzdOjuO6JyrPcROBQim7UDxDyOekzf9fyMQdZFV3kzVY/2wzeA9GD9urDPeJggy0DhIdZfGqTlRvjEvHrsp0BmIDRAWBnd+nlrT2eDacybhISKNxXeHsMtT8AoA33ZxdPyG7Tt33O+SS7romULQ8kMOvpVwx8iznSs2e9Ku6kSYQjOwvtf+ezucOUeYMA1UKL5U=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(23010399003)(1800799024)(366016)(4133799003)(4143699003)(10067099003)(11063799006)(56012099006)(22082099003)(18002099003)(6133799003)(41080700001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dno5cktoNFZSQXZFcnFJckxyeGdYQjRjMzJ3VmpoRDZXUXE5K09pNVRvajJR?=
- =?utf-8?B?bkxWMjZLWFZRV2x3Z3BRMGdzVGJrMVl5Zm9LTS9yL1Z6UFd0d3RyUGNhRlJk?=
- =?utf-8?B?WDg0TEJZMDYzeTBmTkdJUXBHc2l6VXZaUzdFbWk0emx1cTlwRUVSeUVVYk1B?=
- =?utf-8?B?Tlo3N2RKQlBrME4wODcrWXZMRDkrZ0tMRjk2VTRDNGI5MHdkcFlPRlBJK2x4?=
- =?utf-8?B?VEdPaHRnUVFlQ3BwMmUyamxjN1hvQ01yWXJSRnJNUkRBVjM0aktOc1dXUVpq?=
- =?utf-8?B?NVB2R2ZjckM5WGxuQys5M0dTdzVrd21sekt0YmNQZjd0WHNERU9IMWlBaHli?=
- =?utf-8?B?RVZ5WlVIZkMybEM4d2JuUkZXQlVnQkg3ZExvdzlrTFVOV1hGWmtHLzRDS2I5?=
- =?utf-8?B?QVhsU1VkYzFzK1NDSk56K01wbVN2WW9UR2pwc0tPSnp0SGFaRVU4eVFJcGdD?=
- =?utf-8?B?Y2RLajh0cDF4UGVLWXdTTXJ5U3NLWDMreGJFRFBONGdyY2E1VFFGekJXTXpp?=
- =?utf-8?B?MnRSeEVvV1h3SXllTlNvYXp2TUlqak1oS2tLQ2NiQ0wxUGVkTG9keXlQWE1z?=
- =?utf-8?B?NGVqSUczV3hkTHJvTlVyOU1PM2NVZXliQThKN3drQXQvd1NFOWRNTHZCNG5O?=
- =?utf-8?B?cmtMNHo0Y0o0UmNXaXlLTjQybWN3WUdZSTZMWm01TjlNSlNWVU5meWdjL0pR?=
- =?utf-8?B?NnJLaGpXbUNoaGkrSkpxZFk1dmFGWXFFRnk5WkNJUHdBbzBBM2pVRFBYYW5W?=
- =?utf-8?B?VXovcGlyN0lvUzlIOVFSU2tINFRvNDljck8vVFMxdXhubWxkQ2tFb0dLd3hr?=
- =?utf-8?B?WllJTXhOT28yT3N3bEJyQTBEL0N2Zm4rVHFoaVNqL2dSMlRxZjZEcmxyYnFo?=
- =?utf-8?B?bHAyL0FxdnQ2dW92NVptd2JsSnMxekNNdDAvMmowL3JxaXlyd05pNnFDdEJU?=
- =?utf-8?B?R2hkSE1TSFZvRVdxakFQeFZNQ2F6TWw5OU5NZmo3TkQzSitIeWE3U0ZwSHVq?=
- =?utf-8?B?d3FHN2V3RlRuZkptaGJGeVk3b3BoRm56Smpac3RFWUNOd2d4SDF4S0VuWXB2?=
- =?utf-8?B?Z0o4QzhrS01abWxUQ29Wc0doeWZ2ZVk5K2k0T3hJV3ZxbndOMThpOGVnSHNl?=
- =?utf-8?B?MmEvNHpBUHlxdWUyWnJpd3EvSmwzejl4Wk4yNWhQUkI5U3JCWnMxMnNwaXdh?=
- =?utf-8?B?NFQ5QlFaQitRcmpHc2IrMVQ4bXUxUDQ5TUxadHBFQWFxVSswWEcwTFVqYmFS?=
- =?utf-8?B?RlFOdHhnelhVVDNtU0o2N29TaEtUNnNkWmxEcm9xR3p1SWlwZkZ0R3JCRXk5?=
- =?utf-8?B?bldCWUJkblVGRmpVMUw3Q3FtMkNuWEQ0UUZBMFpCU3k0aHp0SmwxdFZxNGpP?=
- =?utf-8?B?UmtkRStsS0M4bk9CR0hoWHo0SnBmUnZwWTVoUUppRGg1V25IRWpacGQ4bEFD?=
- =?utf-8?B?Wk81U2hieHBlcUZaN0tSdzVmM2h4UjVKelozMm9CUk9QbHNvYWdWbE9oYjYz?=
- =?utf-8?B?L0taaVpHenMvNFYyVStvTlNLcGZZdkR5NEpDNXllZldVSWwvNzQ0OTROR25J?=
- =?utf-8?B?dFF0Q3hKNktCTEgyWjl0N2VNSDcwM2RKTzhjbVVBSG5ncDczZXh3RDZsTTMz?=
- =?utf-8?B?Z0JLdjdmWUZ6U1dYMzhkWU1aUXNLRnB2UEw5UHN6K25Iam44SG00bERDRXFu?=
- =?utf-8?B?MG1aa2w2aTRSdTkyRy9uakxOS0xFb2hJRVkxek9pZkhYLzJiUmo2RHJ2aU1T?=
- =?utf-8?B?NTJpOVlzTHdDUTIwMHJyRlQxQjkrQTlYNGk2ZFJVeldOdDI4VzB4bFk2Tms0?=
- =?utf-8?B?WDdzelF1dmh1RDU0ZWRvbVdNdExyRmEvZVN4eWtyVjl1cU5mSHpSTFZlQ1Nq?=
- =?utf-8?B?M3VURmtYa3pzMmNyeW5IUk93N3hpRko3S0twT1NoTnZBajdsTHZEQ1RnS1N0?=
- =?utf-8?B?OHV3M1JJcFlsYjVoRnFBK1d2b2UzWEtIbjB4Z291aDhhenNneEJNa3ZXYmJG?=
- =?utf-8?B?b3RPYTVPb0JUcVl6RWE2eW9zOTNBZU14allMWStuM3R1SWtXdnZaL1VqQnVr?=
- =?utf-8?B?bEVSaUR4SnptRlNrcSttNndwRjVpeEd1MmtNMFBLWmNoN1M0b0R0cjNQaHNw?=
- =?utf-8?B?d3ZkU0JSS0tRak9mR3hXNTRZcUtHalJKY21KSTE2TUM0a0s4eFZrVnlIWjhv?=
- =?utf-8?B?Z0IxLzF6eEdhdHAxWmVNdndtdUxjc2Y0c2tQdUU2OGppcVJLdytWS3doSERE?=
- =?utf-8?B?NjJ5RExWQ09RZ0VzMHI3ck1EQ2k2d0xKT1gydzdzN3QvUWROUGpaTnc4MURz?=
- =?utf-8?B?TGZUS3M0aXVpTm9CNDBLNDdhdExpUTZwMWVUelF4SFlSM1FzaVJrdz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 006188bd-4411-465c-46f5-08df17f6f9ee
-X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2026 15:42:43.3611 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bbc56yrJL8uC/K7D410AImFnbaKEPCwtQbg6gatQH2WKXBDkzZNWCZ8s5X16Cz6qDGk8Tesi795vDAy0I3f5q0aYWKn3tNzEjvCpgOJ5nxM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10212
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -263,282 +214,46 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Alexey,
-
-On 9/21/26 4:27 PM, Alexey Charkov wrote:
-> Hi Quentin,
+On 9/18/26 12:52, Alexey Charkov wrote:
+> print_decomp_msg() names the image it is about to unpack, which drags
+> uimage_type[] and its strings into any phase that links image_decomp().
+> That is about 2.5KB, measured on a Rockchip RK3576 SPL, spent on one line
+> of progress output in a phase built for size.
 > 
-> On Mon, Sep 21, 2026 at 5:14 PM Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>
->> Hi Alexey,
->>
->> On 9/18/26 12:52 PM, Alexey Charkov wrote:
->>> SPL knows about multiple compression algorithms, but only two are
->>> hand-rolled into the simple FIT loading code, in spite of a nice ready
->>> made helper already being available right there.
->>>
->>> Generalize the compressed FIT handling code to accept any compression
->>> algorithm compiled into the SPL, and fix up the SPL_ZSTD linkage which
->>> requires xxhash in the SPL but which was absent to date.
->>>
->>> While here, also extend binman to support passing a compression level via
->>> its image templates, which helps squeeze additional ~15% size savings in
->>> my testing with Zstd level 19 without impacting decompression speed.
->>>
->>> This is done with Rockchip RK3576 in mind, so a small Rockchip image
->>> template refactor is included.
->>>
->>> CI passes all green: https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/pipelines/1319
->>>
->>
->> Doesn't work on my PX30 Ringneck for any of the supported compression
->> algorithms (didn't check lzma as I'm daily driving Fedora and it doesn't
->> have lzma_alone binary).
->>
->> Doesn't work on my RK3399 Puma as well (couldn't check zstd, SPL was too
->> big and overlapped with U-Boot FIT, note that Puma is special in that it
->> only allows (256-32)KiB for SPL, due to backward compatibility with
->> older versions of U-Boot that had U-Boot FIT located at offset 256KiB).
+> Name it "image" there instead. U-Boot proper is unchanged.
 > 
-> That's interesting. Does it work without my series though? With Gzip.
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> ---
+>   boot/image.c | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/boot/image.c b/boot/image.c
+> index 185d52ba492f..a7dc69e858ad 100644
+> --- a/boot/image.c
+> +++ b/boot/image.c
+> @@ -416,7 +416,12 @@ void image_print_contents(const void *ptr)
+>   static void print_decomp_msg(int comp_type, int type, bool is_xip,
+>   			     ulong load)
+>   {
+> -	const char *name = genimg_get_type_name(type);
+> +	/*
+> +	 * The image-type table and its strings cost about 2.5KB, which is a
+> +	 * lot to spend on a progress message in a phase built for size.
+> +	 */
+> +	const char *name = IS_ENABLED(CONFIG_XPL_BUILD) ? "image" :
+> +			   genimg_get_type_name(type);
+>   
+>   	/* Shows "Loading Kernel Image" for example */
+>   	if (comp_type == IH_COMP_NONE)
 > 
 
-It also doesn't work without your series.
+The print_decomp_msg() output is irrelevant to end users.
 
-> If it doesn't, the first thing I'd check is overlapping memory regions
-> for the compressed data and the ultimate load address of any of the
-> binaries involved.
-> 
-> Would you mind sharing your resulting FIT structure that binman
-> produced for the failing boards, including all the ATF segments?
-> 
+Do we need print_decomp_msg() at all in XPL?
+Even for main U-Boot this should only be a debug message.
 
-BL31 for both come from upstream TF-A, seemingly from v2.13.0 (according 
-to strings build/rk3399/release/bl31/bl31.elf | grep -E '^v').
+Best regards
 
-ringneck-px30_defconfig + CONFIG_ROCKCHIP_UBOOT_COMP_GZIP=y
+Heinrich
 
-$ mkimage -l build/ringneck/u-boot.itb
-Truncated file
-FIT description: FIT image for U-Boot with bl31 (TF-A)
-Created:         Mon Sep 21 17:29:13 2026
-  Image 0 (u-boot)
-   Description:  U-Boot
-   Created:      Mon Sep 21 17:29:13 2026
-   Type:         Standalone Program
-   Compression:  gzip compressed
-   Data Size:    315656 Bytes = 308.26 KiB = 0.30 MiB
-   Architecture: AArch64
-   Load Address: 0x00800000
-   Entry Point:  0x00800000
-   Hash algo:    sha256
-   Hash value: 
-1ab3cad555db60bcb81aa670798449758553a93100dccf0c08a4f9e426bb704c
-  Image 1 (atf-1)
-   Description:  ARM Trusted Firmware
-   Created:      Mon Sep 21 17:29:13 2026
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    106496 Bytes = 104.00 KiB = 0.10 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0x00040000
-   Hash algo:    sha256
-   Hash value: 
-8ffbc6cfd2fe46ea218e5afaf76c3a4b57d80adacedd3e6d793e67f8433c5936
-  Image 2 (atf-2)
-   Description:  ARM Trusted Firmware
-   Created:      Mon Sep 21 17:29:13 2026
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    126 Bytes = 0.12 KiB = 0.00 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0x0005a000
-   Hash algo:    sha256
-   Hash value: 
-b108492f1fc2fb0046ace3f683cdfb5f4dae3df7cc3b4ec9ba2a06ad3b194f4e
-  Image 3 (atf-3)
-   Description:  ARM Trusted Firmware
-   Created:      Mon Sep 21 17:29:13 2026
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    112 Bytes = 0.11 KiB = 0.00 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0xff020000
-   Hash algo:    sha256
-   Hash value: 
-324fe45d21d49d4eef66d2edc3f69d15f3285c790e470db953976abc46ba6f94
-  Image 4 (fdt-1)
-   Description:  fdt-rockchip/px30-ringneck-haikou
-   Created:      Mon Sep 21 17:29:13 2026
-   Type:         Flat Device Tree
-   Compression:  uncompressed
-   Data Size:    73216 Bytes = 71.50 KiB = 0.07 MiB
-   Architecture: Unknown Architecture
-   Hash algo:    sha256
-   Hash value: 
-5a17c482bc2f993bc8f971086cd4a173006236be79424dcec390a743580bcfdd
-  Default Configuration: 'config-1'
-  Configuration 0 (config-1)
-   Description:  rockchip/px30-ringneck-haikou.dtb
-   Kernel:       unavailable
-   Firmware:     atf-1
-   FDT:          fdt-1
-   Compatible:   tsd,px30-ringneck-haikou
-                 rockchip,px30
-   Loadables:    u-boot
-                 atf-2
-                 atf-3
-
-Boot log:
-
-U-Boot TPL board init
-DDR4, 333MHz
-BW=32 Col=10 Bk=4 BG=2 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
-out
-
-U-Boot SPL 2026.10-rc4-00496-gf94e3597ec41 (Sep 21 2026 - 17:29:10 +0200)
-Trying to boot from MMC1
-## Checking hash(es) for config config-1 ... OK
-## Checking hash(es) for Image atf-1 ... sha256+ OK
-## Checking hash(es) for Image u-boot ... sha256+ OK
-    Uncompressing Invalid Image to 800000
-Error: inflate() returned -3
-Uncompressing error
-spl_load_simple_fit: can't load image loadables index 0 (ret = -5)
-mmc_load_image_raw_sector: mmc block read error
-Error: -38
-SPL: Unsupported Boot Device!
-
-puma-rk3399_defconfig + CONFIG_ROCKCHIP_UBOOT_COMP_GZIP=y
-
-$ mkimage -l build/puma/u-boot.itb
-Truncated file
-FIT description: FIT image for U-Boot with bl31 (TF-A)
-Created:         Mon Sep 21 17:36:47 2026
-  Image 0 (u-boot)
-   Description:  U-Boot
-   Created:      Mon Sep 21 17:36:47 2026
-   Type:         Standalone Program
-   Compression:  gzip compressed
-   Data Size:    433877 Bytes = 423.71 KiB = 0.41 MiB
-   Architecture: AArch64
-   Load Address: 0x00800000
-   Entry Point:  0x00800000
-   Hash algo:    sha256
-   Hash value: 
-2c24443bce4cffa899eb4e45e9903433f2cbc59b96d4b3dc98bf827544f2b252
-  Image 1 (atf-1)
-   Description:  ARM Trusted Firmware
-   Created:      Mon Sep 21 17:36:47 2026
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    147456 Bytes = 144.00 KiB = 0.14 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0x00040000
-   Hash algo:    sha256
-   Hash value: 
-d737d2efb49d780d6cd72eb7e6c34c0cc5294753e6ac45f4495bab12f44b5a93
-  Image 2 (atf-2)
-   Description:  ARM Trusted Firmware
-   Created:      Mon Sep 21 17:36:47 2026
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    78 Bytes = 0.08 KiB = 0.00 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0x00064000
-   Hash algo:    sha256
-   Hash value: 
-f59dc67a835f14d92d5bfee57920f5a8a68d06609481b5ede9492f4e2d379a21
-  Image 3 (atf-3)
-   Description:  ARM Trusted Firmware
-   Created:      Mon Sep 21 17:36:47 2026
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    8024 Bytes = 7.84 KiB = 0.01 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0xff3b0000
-   Hash algo:    sha256
-   Hash value: 
-256c48c2a37faf72304b91d09daeee8442e70f06b2aae7c693e85f3d87662855
-  Image 4 (atf-4)
-   Description:  ARM Trusted Firmware
-   Created:      Mon Sep 21 17:36:47 2026
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    8192 Bytes = 8.00 KiB = 0.01 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0xff8c0000
-   Hash algo:    sha256
-   Hash value: 
-c70fdb94f7bf6d48fb04ebd4f04b386323c41a6a796e0756beca23345ad3537f
-  Image 5 (atf-5)
-   Description:  ARM Trusted Firmware
-   Created:      Mon Sep 21 17:36:47 2026
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    0 Bytes = 0.00 KiB = 0.00 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0xff8c2000
-   Hash algo:    sha256
-   Hash value: 
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-  Image 6 (fdt-1)
-   Description:  fdt-rockchip/rk3399-puma-haikou
-   Created:      Mon Sep 21 17:36:47 2026
-   Type:         Flat Device Tree
-   Compression:  uncompressed
-   Data Size:    97768 Bytes = 95.48 KiB = 0.09 MiB
-   Architecture: Unknown Architecture
-   Hash algo:    sha256
-   Hash value: 
-70793f8f952644970f5e6b08f18a710276781023228ba9014b9a138ea8ceef18
-  Default Configuration: 'config-1'
-  Configuration 0 (config-1)
-   Description:  rockchip/rk3399-puma-haikou.dtb
-   Kernel:       unavailable
-   Firmware:     atf-1
-   FDT:          fdt-1
-   Compatible:   tsd,rk3399-puma-haikou
-                 rockchip,rk3399
-   Loadables:    u-boot
-                 atf-2
-                 atf-3
-                 atf-4
-                 atf-5
-
-Boot log:
-
-U-Boot TPL 2026.10-rc4-00496-gf94e3597ec41 (Sep 21 2026 - 17:36:45)
-
-U-Boot TPL 2026.10-rc4-00496-gf94e3597ec41 (Sep 21 2026 - 17:36:45)
-Channel 0: DDR3, 666MHz
-BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
-Channel 1: DDR3, 666MHz
-BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
-256B stride
-Trying to boot from BOOTROM
-Returning to boot ROM...
-
-U-Boot SPL 2026.10-rc4-00496-gf94e3597ec41 (Sep 21 2026 - 17:36:45 +0200)
-Trying to boot from MMC1
-## Checking hash(es) for config config-1 ... OK
-## Checking hash(es) for Image atf-1 ... sha256+ OK
-## Checking hash(es) for Image u-boot ... sha256+ OK
-    Uncompressing Invalid Image to 800000
-Error: inflate() returned -3
-Uncompressing error
-spl_load_simple_fit: can't load image loadables index 0 (ret = -5)
-mmc_load_image_raw_sector: mmc block read error
-Error: -38
-SPL: Unsupported Boot Device!
-
-Cheers,
-Quentin
