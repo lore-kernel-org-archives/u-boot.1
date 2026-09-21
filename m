@@ -1,34 +1,34 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB34BC982ED
-	for <u-boot@archiver.kernel.org>; Mon, 21 Sep 2026 18:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 808A2C982EE
+	for <u-boot@archiver.kernel.org>; Mon, 21 Sep 2026 18:56:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 54AD280DBD;
-	Mon, 21 Sep 2026 18:56:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4793660738;
+	Mon, 21 Sep 2026 18:56:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id auxFc9HdOBMN; Mon, 21 Sep 2026 18:56:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 6976580DB4
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1790016976;
-	b=h/kKCFmgPQ01U5JQ2Pn+211+oJ8rw/CJcXz6XIzPK+Jt0f/EcfNAU6/tRShYVX6zZbrI
-	 z+AePhtDe16b4LOhBUO734posWsefKAJVZUEr+DQqUmC6TiUH9x0/07FWnKwEJOxy4hXP
-	 8WsmQ98x19FR68RavC/6YT/06FIL0ZShGYqwUS3VqHxdBWayk/b+EFKYxUAkkSTtKN5Ya
-	 zB/woVSKK2nLmobl3yM+ZpTZk2jsH/p6xyzetOy1utYyyIXoUs193snDu0qETwNYCPXub
-	 lxK0cqvdULoOSpS95rGPS1cODdM/SXy9UcyP21crXyjQhT9J0rjepYSz11uwhpa4zZw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KSUVWEKP7PW9; Mon, 21 Sep 2026 18:56:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 2C74160736
+Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1790016992;
+	b=a/tqJw50oiW5UGfhclbU3Qr8rLZ8xUQ+JbvXAXpFkJVjSt2TAx6fN/Kbj3BpXihr+VEe
+	 qui3YAs0lhDHCWZA6IxbBnfzS8R52/59NeZ/7jOxCnWj0LMt3ySLG22Z5apbzDEwjvqLh
+	 JmALeqtjUNWIvX6W3XlRBCKj7/CUn+in7RfUblxuF4mwO1ons0zixFgGlA4LE1niZO8aJ
+	 qFNPtMY8qhmHwICQKxPmobInoo07nM7JEDONeWKNYZEyv8l/BbwyT27mQ2khhejsyyC0c
+	 Mr0EZsAaj/6z6Fh+XZFmVb18SmzOEf1jcWolIVCkUlPWibBOYOHNU8Mic2pQcGecofw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790016976;
+	c=relaxed/relaxed; t=1790016992;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
 	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
-	 Received-SPF:Received:Received:Received:Received:From:To:CC:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Received-SPF:Received:Received:Received:From:To:CC:Subject:Date:
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding:Content-Type:X-EOPAttributedMessage:
 	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
 	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
@@ -45,56 +45,56 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=o3W5L8az1v0b1TKOLftXdF+bSiQ7lswlBgSyp4eYZgg=;
-	b=QeOJtm4qSsX9nXSLTsFvx+k++jalkpjt97KCxsuI9i0KFyOvQHTXlMMA86zDnTIlnbW8
-	 nRPi3qkdbwTlGdU9rt+YObZQbXC6YT/ivEj3GNXrLFzkPZAS6VxH16KLOKPPbRpzK7wHB
-	 xxBaRjGL9cQn8RhlA9Vcjei5lnugBJuO8t0egWS/W3+/wluDFwLvJHn2Sjg2uIyARFuC1
-	 TV4kyoHERnoXtTfZI8s2c8GQiuc2DAJRl04GQE855Btn8wA4sl3JJD+DTYeWD3PG9I2XE
-	 A+jWEisIp7pPgTVpinXdrTXbW8+Fcdxtk3rhzYiSG0swZ5jLpILobcsZFQ0yEu9Fjvw==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+	bh=UEYMz1kRVD9pIt2VlFEvW1aoc/E1V/7rnduA3tLLsuQ=;
+	b=QF8rCu9GKwwJNK9RpWaRwYKoQuDhi7HdLt/VqTJy6e/EFSx4ov7wfmCmPFVJBSlmBED4
+	 v3fIe3jqfCoVsd4wstgxplBkuD9PM5SdCDVNeX1l5Jdsi20VZqhJosPNfyUUmm5iUDJBt
+	 sal/WFG7YQaC6ZN6Zr3NJjK3PnbXW0UKA8nBYNKbxJMb4LJvmePtG7jn7mdBQFyWMGk+/
+	 es9abG8OGT72D51Tgj92cNhN9SBcyp0+2O4QscGol+Avz1VV/juuaF7lszuuxIkSdevvK
+	 nOyA0mR6B8oTHI05y+kyTuh63NL+G5/Btbc4OgvXjnS8MsTT+efoNsRMfYKra2mxDag==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790016976;
-	bh=o3W5L8az1v0b1TKOLftXdF+bSiQ7lswlBgSyp4eYZgg=;
+	d=lists.u-boot-project.org; s=default; t=1790016992;
+	bh=UEYMz1kRVD9pIt2VlFEvW1aoc/E1V/7rnduA3tLLsuQ=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=cF8qGSNYIZswbMdrNHhoR4xwG9yZyTCjF3DOyrh05aivvnKGMUG9Ld+E58MDql8ib
-	 HXgB4Fiv5gHZXp8NBW1XR1DIajg3T8SvIxricRo+T3g7ZPV5q0/AphWNM/rXivUafK
-	 VDYBTUcRBhLZiKEoyN8XuAAfgyaQS/qCalltgBeB5aA19LQRkiYpl3JTjRAjby6AM9
-	 1I/aEizEjOEiAg9BRcsbRZLXP7viVEZ+ZUXTg1pNIVigNzTfZTnfzJ5ED3CZ41A0Pt
-	 5+0VOekmrnpGdFlDB0dWLM8cym7U9M4V0FI84UfD+THB13VwOuP7IOW2mlB05HV+WP
-	 /Cx/3ktqXXF3Q==
+	b=LcV+ktQic6zq4TQeNUHYJdfN5VLf+EBZ3mF7w0BzBfuSiu/lNKs41ULHwb2FfTjlH
+	 c8cQDiSM7/ZJx7jc66oBu0ahcwv4rCQRbHCFvcXABCpYcMd3Lumcvg3Xzsals72gkB
+	 KhUEz8H3/c+Mxmac6eABYSpwl2JZOsDRKEoKWwFmDLtm4aMcxYwVtQ0MlkpwXu2CYI
+	 HnKfPDOL2oNb0CqgQ1aFkxCVt5WdFh0q7xmY7VoYd8FH1BRW23VSjHd/iCyQWeFib7
+	 jW0NDLUHd0CRWwQeGHIQMxjRTZKf7ShKdVF1Xn4y+cF+Q42OXltP9CfDOViJGdOm1O
+	 yljTceCmure/A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6976580DB4;
-	Mon, 21 Sep 2026 18:56:16 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 5B4E134F
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 18:56:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2C74160736;
+	Mon, 21 Sep 2026 18:56:32 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9B0E734F
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 18:56:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 417DC400D2
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 18:56:14 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 8144B401DF
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 18:56:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4pWUUR2IvIP7 for <u-boot@lists.u-boot-project.org>;
- Mon, 21 Sep 2026 18:56:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org EBE11401DF
+ id Yp3cq4Yujyzc for <u-boot@lists.u-boot-project.org>;
+ Mon, 21 Sep 2026 18:56:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 5F0A9400D2
 Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c107::3"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790016973;
- b=bV9NLYvwQCS7GZdcBbgCgmqBvUdw2a2IIVEqDkXuHZp5ffFwFZ3nnN7IWcl1oaX4SksT
- XQb/UYO/XManXAxA/k3vkCasfRhwz82jcL4pTZAxKy1UTqa6M+hodgU+zHjH/Y30YFUxP
- 3HRjIaCIxSNZt++G722ll8PNNpodoT1qSc6gXh8hMqQSyr56qNVgmgbVnPgbpubcdMQnO
- pDUT+7cH3btPebC5qnj+3HIH9bfmi6bAQD9gOBqmEhP//I3+a72PXN/FkzclU2XI71M6X
- vpw/wJqxIHDAwTvi/yoTm+DCAxkgSPKnWBHQj2ZEBycM5X0IUImIQBHMf3qi+AEGAiQ==
+ smtp.remote-ip="2a01:111:f403:c10d::1"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790016989;
+ b=WEDSNuyBM7paYaUziq5TX1RaTsndmFQdgMnwqISclaEtXP7iJCQi6OaOzHADUsyx7AaG
+ ogSAmPvL2JrZVs5z0U0pr9F4iyAv/Skz5wlg3mk7Qzm0z78s+3Tiv1qkSOuLtMRdROgCH
+ o4KSkprAKzeHVm3ABuBkl5gLk2lAn1owwGg2zDECnQg184KJ8ljNTxjpNdMk10z5A9Fu5
+ OVzKtHEQ8nt5RjgeCTxK84AG1dICQ1+a9Eg231WKkv3kC3eTD+qFge1t846hjPkqwxcoF
+ +1dVKXYaXbh27+ZsiK3mT7Qcfl/I7YPzzzTJUGxTCaM6Y/l6mcgmyFQZRk1Ojt65gVw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790016973;
+ c=relaxed/relaxed; t=1790016989;
  h=Received-SPF:DKIM-Signature:Received:Received:
  X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
- Received:Received:From:To:CC:Subject:Date:Message-ID:X-Mailer:
- In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
- Content-Type:X-EOPAttributedMessage:X-MS-PublicTrafficType:
+ Received:From:To:CC:Subject:Date:Message-ID:X-Mailer:In-Reply-To:
+ References:MIME-Version:Content-Transfer-Encoding:Content-Type:
+ X-EOPAttributedMessage:X-MS-PublicTrafficType:
  X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
  X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
  X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
@@ -108,86 +108,82 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
  X-MS-Exchange-CrossTenant-FromEntityHeader:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=o3W5L8az1v0b1TKOLftXdF+bSiQ7lswlBgSyp4eYZgg=;
- b=EVlBqO4MmgKUBEQLT2Q4LD9xoUkeXUK3pWBoE8c3yS0ZftB9iKDuqCvalFjZoOdRBuLq
- z+DY5EzYoYWGeiJsBMhVq+F/NrYTiuXvk7o2JK2MKlHDhwYwyfMzn8IC/h36+6XFMdd+f
- V7DTwkb15bhY+RbZtCwMXvgUg3r7X/ALaEGu5+SasZ7GlbLQ9xYCXWJG4Ud5ZJ0NOEjP4
- gOvOQX8FvDoNdbHpWcHaAJERZ9D/9wP6UO9JRbC8l7mbEjP+KYJiiLa23T9Imix0NW5hr
- 4GKChoW66g5Ib76xewEaPK/nRUB/mDDGFapUp5h/wyDJpozu/lzJ/C5mLdlHp/JomCw==
+ bh=UEYMz1kRVD9pIt2VlFEvW1aoc/E1V/7rnduA3tLLsuQ=;
+ b=aCwPqSf/Gpb6VJpInXZlJDFbLLxG3ztw4tNr0FOuPoPBYfWHsxXJEtTN4C0ZCL18iY1i
+ 7atmmkYOz7CPgEW9S9SqhMb7FBnzs4IHIvClMTR83C18WXhgoUgNSpeFs7dXeTmjbZhT2
+ +7uKOTpCDLdmimTKs8VxuSho/pGpp6sFNCT0ULlPpNvX8VQnSaYeBs+uWFapnmhcy7rrH
+ Q4+uAcs8vJV5HX2O2hsqQAKT3r7aHB525d5mX/s5jO5WtTH3OoABc9umj5o56YgTxwEDU
+ vU6W+JPs5j5AmdVgQvp0ugBDPrJgonpYxLwcytXZB3bIkfmAyL+CspvjVQHjRUSwzxg==
 ARC-Authentication-Results: i=2; smtp2.osuosl.org;
  dmarc=pass header.from=amd.com; 
  dkim=pass header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=OZZUzgpC; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c107::3"
+ header.s=selector1 header.b=L1FL1YFX; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c10d::1"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c107::3;
- helo=ph0pr06cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c10d::1;
+ helo=sn4pr2101cu001.outbound.protection.outlook.com;
  envelope-from=akshay.belsare@amd.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=OZZUzgpC
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
- by smtp2.osuosl.org (Postfix) with ESMTPS id EBE11401DF
- for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 18:56:12 +0000 (UTC)
+ header.s=selector1 header.b=L1FL1YFX
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5F0A9400D2
+ for <u-boot@lists.u-boot-project.org>; Mon, 21 Sep 2026 18:56:28 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wBaXVWlOdwyV5eAOVIYDRQ/QASgdxfqkEkS6MpCEtwCw2aqIuPiNrCU8TTPzbLjI9mvF8gEXGX+CQkyccdhN4ipKMlNbYkhMlO0xTlGnuBuuYwSlrKzoNBssJGM/VzfmyBmENRTztnG9+vICl82CfgqKIWv1TYQSO/09pOs7gcA+7IRB0a0rC+5kPmj+rbp74XdcxnQjsrIpKGIO7kpn1HTI/WmT7dMv5T04L8gpZqqf5fVzhM0KgUtBJCrZSpqCPvfp0ilD6CR0YeX/g7Cxu1QsF0krHwPr2sOy5FPLCBeEHESCZsJGRLuQuyu7417Qov/Z4zh2Ywu2TybYN2Crdw==
+ b=tjxRqsgPYTD4MWD5P/ola1460WWYmruXM1LhkCG7qnQqVs+MWB6yTSPiBFwtA3hEU9ZkUeMf+e734RlVt80CglpgUfMfPaT0PYrUIn8gANm1y9gDgtidr+wZ6SciUs9/KAqdgwN25tn6lXWaDm2+b3LuDtTRpwJhlPQTBNY37B1fE8E9ruXI9R5uj5piXXati3biWafPZR83KJlGP1/UwR3AM+qojZON2mTOBj6Lk874gdRs+5N0PSE70Gq1ccQUjR8PUNIFy2jd1AmqpkK7FKRaDmoIoFbBTFtrsUlHsjtihJBMaFM5TH5XVv8h7jdpLdYX1USTMrwA35BfO3oEdg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=o3W5L8az1v0b1TKOLftXdF+bSiQ7lswlBgSyp4eYZgg=;
- b=TzRPl0lUh4Seu3KM4l/vd+rMVKnag+f7UGITe/d1bqvIB2Oxf44ftQHou9QXdjpfsUxBDhnIVUXJe93cTg4scPPgqjGhoqhvmatqYGncyj/bScMARNQnK1GMMRdByH5ih5J97NUTbhe/WAOXBkAFlF6JVM+ZB+j7fPdGUHaDegnXeJz7SJP4aCydVilIKfO592tNdin/uhSbs/6BTXCT23DnOKZh1w+U46xpuc7SHN9Ko4oabW9mVYAKFNlMTxyD/I7xX/vW3f3yQPG5vzwFmaw94MJFaoJDrGRmYP79oxGjNFVQBpZZOaFEgMXhjKU6w7uB2mBxuUVt0kxQnS/LSQ==
+ bh=UEYMz1kRVD9pIt2VlFEvW1aoc/E1V/7rnduA3tLLsuQ=;
+ b=okTGyXSqKGxk0rlJpXFXeTnJCvl3pfMTbk7fDwgYgB2MZRHoCY1hLOlr/j39Z62OQhalBYq8ZE3UXhmGMq+IuOFcJ3YlCu5YJ7I/8Rt6JL3oIH8gcYE5Uaz1xLSpXEcR8IUil8M1tELpAbhfCgSQ2NcOmn/RfytryKTm19Do/4CdEjo9+ebKNKBbDp/JX5RcE53RM9tsXHR9sJQ1jNeGJibjd00hHLNDuHiFOU4LrABfmz/rKYqTJbdyWYGsI43mfEglh/gOEjTTA9Q8d5ZA+s+peNL9EMGZvgcPf4mVTMbtT4cdnEYUUFzUhkDSSK5q6pj6CzLMfXdxW9gB7Y4Hvw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
  action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o3W5L8az1v0b1TKOLftXdF+bSiQ7lswlBgSyp4eYZgg=;
- b=OZZUzgpCUJPHa1qsWZLktCmCxslmJizJmnVb/Mit8TYWNJWlKfuWA1n0zKr/KpruT1kMYbgyfxVRyDGs/ipylzgdbLszZDYtgHZ71mhKwYyEVPJ599Q/FDEqiQXzWETRhMu5hy/L+bb3VArwwOUODzVGR56DtMnxy4C1a5WLOKw=
-Received: from SJ0PR13CA0090.namprd13.prod.outlook.com (2603:10b6:a03:2c4::35)
- by SJ1PR12MB6241.namprd12.prod.outlook.com (2603:10b6:a03:458::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.13; Mon, 21 Sep
- 2026 18:56:05 +0000
-Received: from SJ1PEPF000037A4.namprd04.prod.outlook.com
- (2603:10b6:a03:2c4:cafe::99) by SJ0PR13CA0090.outlook.office365.com
- (2603:10b6:a03:2c4::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.13 via Frontend Transport; Mon,
- 21 Sep 2026 18:56:05 +0000
+ bh=UEYMz1kRVD9pIt2VlFEvW1aoc/E1V/7rnduA3tLLsuQ=;
+ b=L1FL1YFX34hphAP3QU0pmbzGq28iveubvewhFtsqGta0hDoUFco8spx5ZPrIDXxO8c4Mb/cVmD+TnxXggYdy5r3/qN3oTKN9SuLMGMgQE080I0JJV21xvRfMLRhSQwq8kjlz8oxw3G19IswGbEC8U8kmUgvOiK6ucqaMEDzfRVE=
+Received: from CH3P221CA0023.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:1e7::23)
+ by DM6PR12MB4330.namprd12.prod.outlook.com (2603:10b6:5:21d::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.16; Mon, 21 Sep
+ 2026 18:56:20 +0000
+Received: from DS2PEPF000061C6.namprd02.prod.outlook.com
+ (2603:10b6:610:1e7:cafe::59) by CH3P221CA0023.outlook.office365.com
+ (2603:10b6:610:1e7::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.16 via Frontend Transport; Mon,
+ 21 Sep 2026 18:56:20 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ1PEPF000037A4.mail.protection.outlook.com (10.167.244.136) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ DS2PEPF000061C6.mail.protection.outlook.com (10.167.23.73) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.451.8 via Frontend Transport; Mon, 21 Sep 2026 18:56:04 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.451.8 via Frontend Transport; Mon, 21 Sep 2026 18:56:20 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Mon, 21 Sep
- 2026 13:56:04 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Mon, 21 Sep
- 2026 13:56:03 -0500
+ 2026 13:56:14 -0500
 Received: from xhdamitn40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49 via Frontend
- Transport; Mon, 21 Sep 2026 13:56:01 -0500
+ Transport; Mon, 21 Sep 2026 13:56:07 -0500
 From: Akshay Belsare <akshay.belsare@amd.com>
 To: <u-boot@lists.u-boot-project.org>, <michal.simek@amd.com>
 CC: <git@amd.com>, <Padmarao.Begari@amd.com>, Akshay Belsare
- <akshay.belsare@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/6] spi: cadence_qspi: propagate mux-select failure instead
- of only logging it
-Date: Tue, 22 Sep 2026 00:24:13 +0530
-Message-ID: <20260921185430.3491195-5-akshay.belsare@amd.com>
+ <akshay.belsare@amd.com>, Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Padmarao Begari <padmarao.begari@amd.com>
+Subject: [PATCH 5/6] firmware: zynqmp: add OSPI flash reset IOCTL wrapper
+Date: Tue, 22 Sep 2026 00:24:14 +0530
+Message-ID: <20260921185430.3491195-6-akshay.belsare@amd.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260921185430.3491195-1-akshay.belsare@amd.com>
 References: <20260921185430.3491195-1-akshay.belsare@amd.com>
@@ -196,29 +192,29 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000037A4:EE_|SJ1PR12MB6241:EE_
-X-MS-Office365-Filtering-Correlation-Id: e56e9f9d-ea8a-4099-9eb6-08df1811fd2b
+X-MS-TrafficTypeDiagnostic: DS2PEPF000061C6:EE_|DM6PR12MB4330:EE_
+X-MS-Office365-Filtering-Correlation-Id: 659f59d9-b682-4687-ed14-08df1812067a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|1800799024|23010399003|36860700016|11063799006|56012099006|6133799003|10067099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: yXJgWlsVewSLz/H3IEMoRIZ6+BTBKJ//078OZ1SlR3+6/f1KJ9TD5467uqDi/CotXN/ZeoBsni3kxORYneR645dFgExsT+/Cu9t33DdeOcGeB6EBOxHhQrUfBMFwF6lRG6j6lFgWo+NoYl7U+/Ir8Xwy1GbXCwxNiR2xTZyQbhM6MW7Y+z5r7EoiDax8jr22VJtl02f3KBCQIq6fwgFAufA7h2KDsWzYHpwaEKI7Gb+VfrEPfiKnDoDk0XrvkjbXvcusFcdWhZ/zlCAWNBQPUbJLe5Z5hFBvn4Cf5PihtXNF6CHxAlRn6QWORfWLQujCL80WMid+ORWAiZnuym2KnrrxNCEcq2l/NY+oN/bJMNbSq/3YKKnLi2LD7e3QwdlpTdddkqqp0kTkdUOcjnHYqD3nm9ujMmwmPw/+ufUhXyrDwtCyznvieOscC4DKLc7aJzfXr631O1avmQs/8JbmsI1RgoJv4I7eu9OcGXuOJci0WROMnP3lroNW1fT/dsNn/G0skUHq8qKijCJAZaH8q0XivzjiY1M5UvTE1pv2Y3OllcB1tgP5aPyk6GdjmZHK37acS4+1PgrVctbLRNBYqyuf58OlUfqFPnhdDI/l3gxzib/MDXGuZOzojUbfCctjW0Blm+xJ8R32FJgJzNouD6tnt9kR6ii9M0VCt1dVqCXrdX3M9v0mwbKogANB6EuUSaJ4CO/YanlP7kCVFNCAzg==
+ ARA:13230040|82310400026|1800799024|376014|36860700016|23010399003|11063799006|56012099006|3023799007|10067099003|6133799003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: pW6j+dFJdvGseJ+PCjIuc5jNWpaSWll+ahU3eq76ys4R5MFBe++Z5eJPgIhamjsytkpryAgF0ZqVUFCV6vVp9yEhRfAmDNiq6XH7F60IxcE4oyNRYoG/xSwMhBMTbHIScubBAdaJAydPoB/iE2bMvUT7O1n6RBZZQTwO+4TudjNMmZYWfVOYd12hTH8DgAc9MTHZarzifQ3rdDxJaNAmJJuclYCKE2R0grIi6lix629BvURB00IqnhwuQX5yUHZTwZ6EV/4Z/PmXlGngOrU5wqx4UX+3k3T1XKUypQo8R2kwp0t8O/z4GCm1HK6yDHyWq6Evx9v3yFTR+hCJSzquvvcJEuans8u5+A2uGKFGsC1+ZuO61zMpMCbJO+/yuGsdbEEnmuGiXFHMc4f6Z4QRIwKLnHJHR33+EGgm+f5F9Kd1F0uDMB/4qTdXrXZbF0dYC4SCKjviKHH7ju7aDjT9aV3hsohliGNldJ6Otp5Hnjcn9bCb+o8lmPpqdOEtENcCCfTpAjOmOwR7btO+TcVmkkSw759ZhaZ+LcGCuCtecNAjQVWUJrGlUwXcJpbhmICi4yNjUKMnP0ABtMBjZz9EA+74fDnwJXi+vTl/cYPsb3Go4o7JzyczVqaVWxrUmdDc3QiOzJViKaCmTVemB5i+nSO/jkOC4SDAX8dR7bXC9HY889Xqy/34+G0Xj25uERGPLUT4hLcfxU9af5XGdLoNDQ==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(1800799024)(23010399003)(36860700016)(11063799006)(56012099006)(6133799003)(10067099003)(22082099003)(18002099003);
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(36860700016)(23010399003)(11063799006)(56012099006)(3023799007)(10067099003)(6133799003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: MjP8GLPLN6O/JMLA/hiKKKyEWbMAhDoXb5YMaa4JqVaIM07fJEN7exymRQW5VLPk7/sHtuqLsnFLMy5mSucmhG1MjUJQgkR9YPH3m428AHKSHal3fp7XDvzcvIZEB+iydZ6dAk8Tn2HGWp5oFQSfLkbJRmkIlhKWNS/LuFeyTsVpmuFqZy4hoqkAP4s7XQrSXuiBQFWMmOuMSUmeu1HYXpcUR4ho/gNxSJ08KtIN0qg70ZwEM3BUeYpJ0QlY3gV7IfP2Nl++E82SK+F2Msf1kkdLzEzqroOqBj6pzshVdpvOfZxd1MIhGARne6RS4sWXf5Ne4aTol+1+AkuinXqfCEQgNhsH3ADsaBHBWvLtiaOSz9tek0qUegguvaBIuCTtAV9DhLHv0kHymnLFMSexI98SiVUKa4lgOE0FGivHwUBcx8iU4FhcDLZ34f81N7kr
+X-MS-Exchange-AntiSpam-MessageData-0: gT7U2tMIvw3VjuhKxDsqniQ2J4dyc7hgA2j0iZ5edQX94z6peNWNImmCmgDLZBenwfGEpM8ln4Ei+6DnPWZb7lsMCiG6SJr51TCRDhrpgPnLJbWXQTKhls1bboKDaommFlNLUGvjLQr9tRHPN4Zd1+G1es7+wGBDYmKbs13a/sawBcuMnEKoHPnRWXzAZ3gEc2bRv+i8DadQbdbIyuGE8affwjWhJzBCnuSggeSVa7cAjDJSxzrqDp8BcUcmXqsI5EEGab7ux7dTvVUP4b/4wtZ2ZYc/dSGp8/56S2wyTgbRtwKPcy/XPxR+KpRr/UxYguEbz+Gwmg1Cc8nsMKsA7A3WFzVYMZ6dESiCj08ndqCFL94jPy2ekyTjmp6MGbUVg2aEJKXSbXthS7GUAMPE57uSrYszCLj0gag85XWvR5gmLY2iPyO/XKw2O8/Ov9Qh
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2026 18:56:04.9610 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e56e9f9d-ea8a-4099-9eb6-08df1811fd2b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2026 18:56:20.6353 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 659f59d9-b682-4687-ed14-08df1812067a
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000037A4.namprd04.prod.outlook.com
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF000061C6.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6241
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4330
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -232,118 +228,332 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Change cadence_qspi_apb_enable_linear_mode() to return int and
-propagate the mux-select failure instead of only logging it, since
-continuing in the wrong AHB read/DMA mode should not be a silent
-fallback. This also updates the weak default and its two generic call
-sites in cadence_qspi_apb.c - every reference to this function is
-confined to cadence_qspi.h, cadence_qspi_apb.c, and
-cadence_ospi_versal.c, so the signature change stays within the
-Cadence QSPI driver and touches no other vendor's code.
+cadence_qspi_flash_reset() currently performs the OSPI flash GPIO
+reset sequence by directly accessing PLM/PSM-protected registers,
+bypassing the firmware interface.
+
+Add zynqmp_pm_ospi_flash_reset() as a firmware abstraction, backed by
+zynqmp_pm_ospi_flash_reset_raw() (the same register sequence, added
+here as a weak default for Versal, Versal Net and Versal Gen 2) which
+the next patch switches cadence_qspi_flash_reset() to use. The
+firmware-backed override falls back to the raw sequence at EL3/SPL,
+where SMC is unavailable, matching zynqmp_mmio_read()/write().
+
+CONFIG_CADENCE_OSPI_VERSAL covers Versal, Versal Net and Versal Gen 2
+alike, so the wrapper needs a Gen 2 weak default too for
+amd_versal2_mini_ospi_defconfig to link. Versal Gen 2's actual flash
+reset still goes through cadence_device_reset() (see cadence_qspi.c's
+dispatcher) and never calls this wrapper at runtime - this addition
+resolves the build symbol only, with no functional Gen 2 coverage.
+
+zynqmp_pm_ospi_flash_reset() only calls zynqmp_pm_ospi_flash_reset_raw()
+or xilinx_pm_request(), neither needing CONFIG_ZYNQMP_IPI, so it lives
+outside that guard, like the other wrapper functions above it.
 
 Signed-off-by: Akshay Belsare <akshay.belsare@amd.com>
 ---
- drivers/spi/cadence_ospi_versal.c |  9 +++++++--
- drivers/spi/cadence_qspi.h        |  2 +-
- drivers/spi/cadence_qspi_apb.c    | 15 +++++++++++----
- 3 files changed, 19 insertions(+), 7 deletions(-)
+ arch/arm/mach-versal-net/cpu.c                | 51 +++++++++++++++++++
+ .../mach-versal-net/include/mach/sys_proto.h  |  6 +++
+ arch/arm/mach-versal/cpu.c                    | 51 +++++++++++++++++++
+ arch/arm/mach-versal/include/mach/sys_proto.h |  6 +++
+ arch/arm/mach-versal2/cpu.c                   | 51 +++++++++++++++++++
+ .../arm/mach-versal2/include/mach/sys_proto.h |  6 +++
+ drivers/firmware/firmware-zynqmp.c            | 14 +++++
+ include/zynqmp_firmware.h                     |  2 +
+ 8 files changed, 187 insertions(+)
 
-diff --git a/drivers/spi/cadence_ospi_versal.c b/drivers/spi/cadence_ospi_versal.c
-index 602a7f4884c..6c388ab8208 100644
---- a/drivers/spi/cadence_ospi_versal.c
-+++ b/drivers/spi/cadence_ospi_versal.c
-@@ -39,7 +39,10 @@ int cadence_qspi_apb_dma_read(struct cadence_spi_priv *priv,
- 			clrbits_le32(priv->regbase + CQSPI_REG_CONFIG,
- 				     CQSPI_REG_CONFIG_DIRECT);
+diff --git a/arch/arm/mach-versal-net/cpu.c b/arch/arm/mach-versal-net/cpu.c
+index f5c8e684dda..20a41d9ed97 100644
+--- a/arch/arm/mach-versal-net/cpu.c
++++ b/arch/arm/mach-versal-net/cpu.c
+@@ -20,6 +20,7 @@
+ #include <asm/cache.h>
+ #include <dm/platdata.h>
+ #include <linux/bitfield.h>
++#include <linux/delay.h>
+ #include <linux/string.h>
+ #include "../../../board/xilinx/common/board.h"
  
--		cadence_qspi_apb_enable_linear_mode(false);
-+		ret = cadence_qspi_apb_enable_linear_mode(false);
-+		if (ret)
-+			return ret;
+@@ -250,6 +251,56 @@ __weak int zynqmp_pm_ospi_enable_linear_mode(bool enable)
+ 	return 0;
+ }
+ 
++#if !CONFIG_IS_ENABLED(DM_GPIO)
++int zynqmp_pm_ospi_flash_reset_raw(void)
++{
++	/* CRP WPROT */
++	writel(0, WPROT_CRP);
++	/* GPIO Reset */
++	writel(0, RST_GPIO);
 +
- 		reg = readl(priv->regbase + CQSPI_REG_CONFIG);
- 		reg |= CQSPI_REG_CONFIG_ENBL_DMA;
- 		writel(reg, priv->regbase + CQSPI_REG_CONFIG);
-@@ -198,7 +201,7 @@ int cadence_qspi_flash_reset(struct udevice *dev)
++	/* disable IOU write protection */
++	writel(0, WPROT_LPD_MIO);
++
++	/* set direction as output */
++	writel((readl(BOOT_MODE_DIR) | BIT(FLASH_RESET_GPIO)),
++	       BOOT_MODE_DIR);
++
++	/* Data output enable */
++	writel((readl(BOOT_MODE_OUT) | BIT(FLASH_RESET_GPIO)),
++	       BOOT_MODE_OUT);
++
++	/* IOU SLCR write enable */
++	writel(0, WPROT_PMC_MIO);
++
++	/* set MIO as GPIO */
++	writel(0x60, MIO_PIN_12);
++
++	/* Set value 1 to pin */
++	writel((readl(BANK0_OUTPUT) | BIT(FLASH_RESET_GPIO)), BANK0_OUTPUT);
++	udelay(10);
++
++	/* Disable Tri-state */
++	writel((readl(BANK0_TRI) & ~BIT(FLASH_RESET_GPIO)), BANK0_TRI);
++	udelay(5);
++
++	/* Set value 0 to pin */
++	writel((readl(BANK0_OUTPUT) & ~BIT(FLASH_RESET_GPIO)), BANK0_OUTPUT);
++	udelay(150);
++
++	/* Set value 1 to pin */
++	writel((readl(BANK0_OUTPUT) | BIT(FLASH_RESET_GPIO)), BANK0_OUTPUT);
++	udelay(1200);
++
++	return 0;
++}
++
++__weak int zynqmp_pm_ospi_flash_reset(void)
++{
++	return zynqmp_pm_ospi_flash_reset_raw();
++}
++#endif
++
+ U_BOOT_DRVINFO(soc_xilinx_versal_net) = {
+ 	.name = "soc_xilinx_versal_net",
+ };
+diff --git a/arch/arm/mach-versal-net/include/mach/sys_proto.h b/arch/arm/mach-versal-net/include/mach/sys_proto.h
+index 2682b0faeea..aa680baba89 100644
+--- a/arch/arm/mach-versal-net/include/mach/sys_proto.h
++++ b/arch/arm/mach-versal-net/include/mach/sys_proto.h
+@@ -15,3 +15,9 @@ u8 versal_net_get_bootmode(void);
+ u32 versal_net_bootmode_reg(void);
+ /* Overridable OSPI AXI-mux select: weak MMIO default, firmware override */
+ int zynqmp_pm_ospi_enable_linear_mode(bool enable);
++#if !CONFIG_IS_ENABLED(DM_GPIO)
++/* Overridable OSPI flash GPIO reset sequence: weak MMIO default, firmware override */
++int zynqmp_pm_ospi_flash_reset(void);
++/* Direct GPIO reset sequence (EL3 / no-firmware path) */
++int zynqmp_pm_ospi_flash_reset_raw(void);
++#endif
+diff --git a/arch/arm/mach-versal/cpu.c b/arch/arm/mach-versal/cpu.c
+index 3ec51bf560e..d0f23767662 100644
+--- a/arch/arm/mach-versal/cpu.c
++++ b/arch/arm/mach-versal/cpu.c
+@@ -17,6 +17,7 @@
+ #include <asm/arch/sys_proto.h>
+ #include <asm/cache.h>
+ #include <dm/platdata.h>
++#include <linux/delay.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -190,6 +191,56 @@ __weak int zynqmp_pm_ospi_enable_linear_mode(bool enable)
+ 	return 0;
+ }
+ 
++#if !CONFIG_IS_ENABLED(DM_GPIO)
++int zynqmp_pm_ospi_flash_reset_raw(void)
++{
++	/* CRP WPROT */
++	writel(0, WPROT_CRP);
++	/* GPIO Reset */
++	writel(0, RST_GPIO);
++
++	/* disable IOU write protection */
++	writel(0, WPROT_LPD_MIO);
++
++	/* set direction as output */
++	writel((readl(BOOT_MODE_DIR) | BIT(FLASH_RESET_GPIO)),
++	       BOOT_MODE_DIR);
++
++	/* Data output enable */
++	writel((readl(BOOT_MODE_OUT) | BIT(FLASH_RESET_GPIO)),
++	       BOOT_MODE_OUT);
++
++	/* IOU SLCR write enable */
++	writel(0, WPROT_PMC_MIO);
++
++	/* set MIO as GPIO */
++	writel(0x60, MIO_PIN_12);
++
++	/* Set value 1 to pin */
++	writel((readl(BANK0_OUTPUT) | BIT(FLASH_RESET_GPIO)), BANK0_OUTPUT);
++	udelay(10);
++
++	/* Disable Tri-state */
++	writel((readl(BANK0_TRI) & ~BIT(FLASH_RESET_GPIO)), BANK0_TRI);
++	udelay(5);
++
++	/* Set value 0 to pin */
++	writel((readl(BANK0_OUTPUT) & ~BIT(FLASH_RESET_GPIO)), BANK0_OUTPUT);
++	udelay(150);
++
++	/* Set value 1 to pin */
++	writel((readl(BANK0_OUTPUT) | BIT(FLASH_RESET_GPIO)), BANK0_OUTPUT);
++	udelay(1200);
++
++	return 0;
++}
++
++__weak int zynqmp_pm_ospi_flash_reset(void)
++{
++	return zynqmp_pm_ospi_flash_reset_raw();
++}
++#endif
++
+ U_BOOT_DRVINFO(soc_xilinx_versal) = {
+ 	.name = "soc_xilinx_versal",
+ };
+diff --git a/arch/arm/mach-versal/include/mach/sys_proto.h b/arch/arm/mach-versal/include/mach/sys_proto.h
+index da357abaaee..83fc9b73b03 100644
+--- a/arch/arm/mach-versal/include/mach/sys_proto.h
++++ b/arch/arm/mach-versal/include/mach/sys_proto.h
+@@ -29,5 +29,11 @@ u32 versal_bootmode_reg(void);
+ void versal_timer_setup(void);
+ /* Overridable OSPI AXI-mux select: weak MMIO default, firmware override */
+ int zynqmp_pm_ospi_enable_linear_mode(bool enable);
++#if !CONFIG_IS_ENABLED(DM_GPIO)
++/* Overridable OSPI flash GPIO reset sequence: weak MMIO default, firmware override */
++int zynqmp_pm_ospi_flash_reset(void);
++/* Direct GPIO reset sequence (EL3 / no-firmware path) */
++int zynqmp_pm_ospi_flash_reset_raw(void);
++#endif
+ 
+ #endif /* _ASM_ARCH_SYS_PROTO_H */
+diff --git a/arch/arm/mach-versal2/cpu.c b/arch/arm/mach-versal2/cpu.c
+index c2173161fd7..c1cd4aef508 100644
+--- a/arch/arm/mach-versal2/cpu.c
++++ b/arch/arm/mach-versal2/cpu.c
+@@ -22,6 +22,7 @@
+ #include <asm/cache.h>
+ #include <dm/platdata.h>
+ #include <linux/bitfield.h>
++#include <linux/delay.h>
+ #include <linux/string.h>
+ #include "../../../board/xilinx/common/board.h"
+ 
+@@ -323,6 +324,56 @@ __weak int zynqmp_pm_ospi_enable_linear_mode(bool enable)
+ 	return 0;
+ }
+ 
++#if !CONFIG_IS_ENABLED(DM_GPIO)
++int zynqmp_pm_ospi_flash_reset_raw(void)
++{
++	/* CRP WPROT */
++	writel(0, WPROT_CRP);
++	/* GPIO Reset */
++	writel(0, RST_GPIO);
++
++	/* disable IOU write protection */
++	writel(0, WPROT_LPD_MIO);
++
++	/* set direction as output */
++	writel((readl(BOOT_MODE_DIR) | BIT(FLASH_RESET_GPIO)),
++	       BOOT_MODE_DIR);
++
++	/* Data output enable */
++	writel((readl(BOOT_MODE_OUT) | BIT(FLASH_RESET_GPIO)),
++	       BOOT_MODE_OUT);
++
++	/* IOU SLCR write enable */
++	writel(0, WPROT_PMC_MIO);
++
++	/* set MIO as GPIO */
++	writel(0x60, MIO_PIN_12);
++
++	/* Set value 1 to pin */
++	writel((readl(BANK0_OUTPUT) | BIT(FLASH_RESET_GPIO)), BANK0_OUTPUT);
++	udelay(10);
++
++	/* Disable Tri-state */
++	writel((readl(BANK0_TRI) & ~BIT(FLASH_RESET_GPIO)), BANK0_TRI);
++	udelay(5);
++
++	/* Set value 0 to pin */
++	writel((readl(BANK0_OUTPUT) & ~BIT(FLASH_RESET_GPIO)), BANK0_OUTPUT);
++	udelay(150);
++
++	/* Set value 1 to pin */
++	writel((readl(BANK0_OUTPUT) | BIT(FLASH_RESET_GPIO)), BANK0_OUTPUT);
++	udelay(1200);
++
++	return 0;
++}
++
++__weak int zynqmp_pm_ospi_flash_reset(void)
++{
++	return zynqmp_pm_ospi_flash_reset_raw();
++}
++#endif
++
+ U_BOOT_DRVINFO(soc_amd_versal2) = {
+ 	.name = "soc_amd_versal2",
+ };
+diff --git a/arch/arm/mach-versal2/include/mach/sys_proto.h b/arch/arm/mach-versal2/include/mach/sys_proto.h
+index 30db724bc2c..5a903a0881a 100644
+--- a/arch/arm/mach-versal2/include/mach/sys_proto.h
++++ b/arch/arm/mach-versal2/include/mach/sys_proto.h
+@@ -23,6 +23,12 @@ u8 versal2_get_bootmode(void);
+ void versal2_timer_setup(void);
+ /* Overridable OSPI AXI-mux select: weak MMIO default, firmware override */
+ int zynqmp_pm_ospi_enable_linear_mode(bool enable);
++#if !CONFIG_IS_ENABLED(DM_GPIO)
++/* Overridable OSPI flash GPIO reset sequence: weak MMIO default, firmware override */
++int zynqmp_pm_ospi_flash_reset(void);
++/* Direct GPIO reset sequence (EL3 / no-firmware path) */
++int zynqmp_pm_ospi_flash_reset_raw(void);
++#endif
+ 
+ int zynqmp_pm_wait_mphy_tx_rx_config_ready(u32 timeout_us);
+ int zynqmp_pm_wait_sram_init_done(u32 timeout_us);
+diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
+index d09e92de1b0..6e6724653b7 100644
+--- a/drivers/firmware/firmware-zynqmp.c
++++ b/drivers/firmware/firmware-zynqmp.c
+@@ -869,6 +869,20 @@ int zynqmp_pm_ospi_enable_linear_mode(bool enable)
  }
  #endif
  
--void cadence_qspi_apb_enable_linear_mode(bool enable)
-+int cadence_qspi_apb_enable_linear_mode(bool enable)
- {
- 	int ret;
- 
-@@ -206,6 +209,8 @@ void cadence_qspi_apb_enable_linear_mode(bool enable)
- 	ret = zynqmp_pm_ospi_enable_linear_mode(enable);
- 	if (ret)
- 		printf("%s: failed to select OSPI mux mode: %d\n", __func__, ret);
++#if !CONFIG_IS_ENABLED(DM_GPIO) && \
++	(defined(CONFIG_ARCH_VERSAL) || defined(CONFIG_ARCH_VERSAL_NET) || \
++	 defined(CONFIG_ARCH_VERSAL2))
++int zynqmp_pm_ospi_flash_reset(void)
++{
++	/* At EL3 or in SPL the firmware (SMC) path is unavailable */
++	if (IS_ENABLED(CONFIG_XPL_BUILD) || current_el() == 3)
++		return zynqmp_pm_ospi_flash_reset_raw();
 +
-+	return ret;
- }
- 
- int cadence_device_reset(struct udevice *bus)
-diff --git a/drivers/spi/cadence_qspi.h b/drivers/spi/cadence_qspi.h
-index f8716aa8c7d..6a8f9c58e4e 100644
---- a/drivers/spi/cadence_qspi.h
-+++ b/drivers/spi/cadence_qspi.h
-@@ -316,7 +316,7 @@ int cadence_qspi_apb_wait_for_dma_cmplt(struct cadence_spi_priv *priv);
- int cadence_qspi_apb_exec_flash_cmd(void *reg_base, unsigned int reg);
- int cadence_qspi_flash_reset(struct udevice *dev);
- ofnode cadence_qspi_get_subnode(struct udevice *dev);
--void cadence_qspi_apb_enable_linear_mode(bool enable);
-+int cadence_qspi_apb_enable_linear_mode(bool enable);
- int zynqmp_pm_ospi_init(void);
- int cadence_device_reset(struct udevice *dev);
- int cadence_qspi_setup_opcode_ext(struct cadence_spi_priv *priv,
-diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb.c
-index 0d4bc685f5d..dbfb7c1f592 100644
---- a/drivers/spi/cadence_qspi_apb.c
-+++ b/drivers/spi/cadence_qspi_apb.c
-@@ -37,9 +37,9 @@
- #include <malloc.h>
- #include "cadence_qspi.h"
- 
--__weak void cadence_qspi_apb_enable_linear_mode(bool enable)
-+__weak int cadence_qspi_apb_enable_linear_mode(bool enable)
- {
--	return;
-+	return 0;
- }
- 
- void cadence_qspi_apb_controller_enable(void *reg_base)
-@@ -770,8 +770,11 @@ int cadence_qspi_apb_read_execute(struct cadence_spi_priv *priv,
- 	u64 from = op->addr.val;
- 	void *buf = op->data.buf.in;
- 	size_t len = op->data.nbytes;
-+	int ret;
- 
--	cadence_qspi_apb_enable_linear_mode(true);
-+	ret = cadence_qspi_apb_enable_linear_mode(true);
-+	if (ret)
-+		return ret;
- 
- 	if (priv->use_dac_mode && (from + len < priv->ahbsize)) {
- 		if (len < 256 ||
-@@ -944,6 +947,7 @@ int cadence_qspi_apb_write_execute(struct cadence_spi_priv *priv,
- 	u32 to = op->addr.val;
- 	const void *buf = op->data.buf.out;
- 	size_t len = op->data.nbytes;
-+	int ret;
- 
- 	/*
- 	 * Some flashes like the Cypress Semper flash expect a dummy 4-byte
-@@ -953,7 +957,10 @@ int cadence_qspi_apb_write_execute(struct cadence_spi_priv *priv,
- 	 * mode. So, we can not use direct mode when in DTR mode for writing
- 	 * data.
- 	 */
--	cadence_qspi_apb_enable_linear_mode(true);
-+	ret = cadence_qspi_apb_enable_linear_mode(true);
-+	if (ret)
-+		return ret;
++	return xilinx_pm_request(PM_IOCTL, PM_DEV_OSPI, IOCTL_OSPI_FLASH_RESET,
++				 0, 0, 0, 0, NULL);
++}
++#endif
 +
- 	if (!priv->dtr && priv->use_dac_mode && (to + len < priv->ahbsize)) {
- 		memcpy_toio(priv->ahbbase + to, buf, len);
- 		if (!cadence_qspi_wait_idle(priv->regbase))
+ static const struct udevice_id zynqmp_firmware_ids[] = {
+ 	{ .compatible = "xlnx,zynqmp-firmware", .data = (ulong)smc_call_legacy },
+ 	{ .compatible = "xlnx,versal-firmware", .data = (ulong)smc_call_legacy},
+diff --git a/include/zynqmp_firmware.h b/include/zynqmp_firmware.h
+index 949ef5ec121..1270e061364 100644
+--- a/include/zynqmp_firmware.h
++++ b/include/zynqmp_firmware.h
+@@ -412,6 +412,8 @@ enum pm_ioctl_id {
+ 	IOCTL_AIE_OPS = 33,
+ 	/* IOCTL to get default/current QoS */
+ 	IOCTL_GET_QOS = 34,
++	/* IOCTL for OSPI flash GPIO reset sequence */
++	IOCTL_OSPI_FLASH_RESET = 35,
+ };
+ 
+ enum pm_sd_config_type {
 -- 
 2.25.1
 
