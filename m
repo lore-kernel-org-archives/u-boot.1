@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28543C982FA
-	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 12:47:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B7FDC982FF
+	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 12:47:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D9863607AA;
-	Tue, 22 Sep 2026 12:47:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D38C140CB9;
+	Tue, 22 Sep 2026 12:47:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qm5EXC0BwfSK; Tue, 22 Sep 2026 12:47:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E3DBA607AE
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790081264;
-	b=mZBhvSDUVIVDsh9XeuopINq7HuPLeV8kKC4ehUKgk13cXSF/C/+6Y7Ku9AcywZlXnjSd
-	 5smuRvPCCAZIJV5UGPKMnDUOdsj+xmFgNKA1Eq792y1vckAcL0Lqz2pM9CS3XVb0dDhUS
-	 By81sVP1H/1+rbkcRVFxlnEGF1PWmqUkX6gD9uStk94DPoshylYtx1rb0vNk4V6lPuSKX
-	 zh1jEZrZwDKf46c7CUupY2Ce33hBieKyKwaf+lxm+qlM4/ESx2Ijq5oi7lpgYydFxisg1
-	 JhTIOEAwNvMiV9aaPMB8WCyB1fbzGOLKPoCzPYvtXArZumZKI9UILdNTAOZFeWtKpqQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id A8Dy21xXTB_m; Tue, 22 Sep 2026 12:47:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 9E41740C03
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790081265;
+	b=osDzRDcS9ZutDd5x/iF9Q5WM3eEl6iyGIs6vTUgN0DYgO8dRm//PeOnm0qqhw7Dt7WLI
+	 2x5r3tOmq8PYDOOTE/VuF1H/h+5F235aUdXNUHNJZ9DO2Rtc7BoX51Z22nb9QNDBesvcj
+	 HJfwlymscMixFZXK/vMmP7F8PucpY0dC7gvRiBj+0OSlje5w01eXvrQ0w/0Thrxm+JnO+
+	 biUc9of99gAxApcePvpp0OPUXAZeRTIFlLQMvneFY/HaMbh9ZoDavaj0muIZiP/NhqcwC
+	 7vXN5ZF7ZbpxB1geO7VoutFwDoarYEdjdV4sxo2jR8IU/0V8TRFd77d+74t5sgk69rA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790081264;
+	c=relaxed/relaxed; t=1790081265;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,149 +32,147 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=xJ+qqdjFHMLtgyVXDrg11QLOqsVeSSKipj5lSr7rQbM=;
-	b=UujLP1tE6P7M2f5X22VBI5do8aW6HP6KdflwZixrtQ8k1Qb3xMwfVCCMuCHA0SZ01XbI
-	 Xl7X51YQJ0jcHe95ErOo7SD/QnBHBP+zOURmbb2FjYWgwzKyfckIC59LrDNgNjWGky2hg
-	 gjn/Pm5pPCvipHkF1s8Weo65Hxo0mM3a87U8RUuEckXafcTYRt/qYejn5eP0KSjbeHhUg
-	 EwDMXyWvqo88QCrFKY+qUWj/K/ajXc+HG9WSqbzGJ1jYYaKl5hv6pLp3K/7NcciM7caP9
-	 ZMbNMCqVNcjBfuftC+RHBLEHupxYsIkCOV6jH0WS77fP5CJY8HG4C6uj9xooprige7A==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=canonical.com;
-	dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=OvQpqkWQ;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=fjUrT4QL5gYpsbhd/fYkJwe8r4xtkrb2SHi6UmJIbKs=;
+	b=tIpjy1x8GTW0mYFsP1EBGqQ5ZeijZnq3Pl2neyzyGJq+ntOm9JelBY7vHmjg+gEpjuKl
+	 mzYyeNrzfW5WM4l8U/mM24sR2Qi9f/YauVJwbK3wbO+Pgm44IwHgrIzvW3rDcEFKtkX0H
+	 ss5GacY8fnVeQ0u1m3vgtSAXy2P4mDCC3knk6ln2F9SAFXx+Ef+QCq4lSn47LXqjFhAaq
+	 zhTHnzxWfqf92p9ZUhDasPj9sHILjES/6I0Nq6i/pH/2dX2eClF0S0XU86SaVrNFwRnPS
+	 EaTxHXTO4XtlnEAkCm+wus6V8QAhtpsmV6Mp0TcNah/tLkUfXp3qiFO91JV1DFNQ9hQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790081264;
-	bh=xJ+qqdjFHMLtgyVXDrg11QLOqsVeSSKipj5lSr7rQbM=;
+	d=lists.u-boot-project.org; s=default; t=1790081265;
+	bh=fjUrT4QL5gYpsbhd/fYkJwe8r4xtkrb2SHi6UmJIbKs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uYIqj97Zr30RgnBTGwOFLncQ+v3dQMp9GEZwKFH7vR/NGMlkMXwUhC2uag05lJHgP
-	 G2RA1ZWHoBuMSOboGoRPv1dP5Y/8CYJNoeW7ht26tU3MFMlm0WLhsaVG1eiHyn3MQ7
-	 /5EzQ0aXwnRUF1YZmEoJkrq1Sh+TiK7RPKBzhqjg2b+V4scHtKVgqW54XQ0ZQNdtQY
-	 ulmWD5NNn2H0MCX0KyS/POjCY7OjeFe+XHI0zC0WCoovpbyIUgRVtxznNR6dmYB6HX
-	 QEbHZXnPsqbAbCy2UefCJX8OGdfRqnVoPmBSnwl8UjTU+aVjUzOgPoamKGpqXBX7+F
-	 ein3PX6RJjOIQ==
+	b=CFbEXmFf3WXT5RnPiOqO5nRB0GSrjpt7fIx6HKSY0ZSyPErfB1ATuDcO5SHNcSAvC
+	 xASMTdVEYfoMFnD4m+MPXp8CNDQqTZZpoHPTmxqIbVrX1IwF+6LsxScniMhSW80ojd
+	 hrs+DhSnwC+9w4r+UfXcM/Y2GnpVFw11LnT1X6U3yXt8SP04CsGfgiqcdn1F6S3AKw
+	 lKFXk/yR0B8a/aNVKhKTGFXjBiiZ5UUEGToC3m46iRmV9j5HF8oN0XLd8sWLbDYSeZ
+	 aqMLd4ve3zRKAB/nZr/BfhC6jXjuhmC3Th89KFYvLuM2RnyEQ1a3aj9O0VUgYBPcPa
+	 7qbkICK8A2tZA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E3DBA607AE;
-	Tue, 22 Sep 2026 12:47:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9E41740C03;
+	Tue, 22 Sep 2026 12:47:45 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5F10213B
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:10 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 38F0E3A9
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 512C060737
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:10 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1F08C6077D
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yr0jx748r5wa for <u-boot@lists.u-boot-project.org>;
- Tue, 22 Sep 2026 12:37:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 6ADE36061D
+ id 77HW7tSeyc9G for <u-boot@lists.u-boot-project.org>;
+ Tue, 22 Sep 2026 12:37:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0BCB660737
 Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=185.125.188.122
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790080629;
- b=JtIKMZESHZ9D56c8XZa1gVJI3IwB3Gcwf05gRktUbV/d5/DVr/nq7ZKeotqpICW1VVT5
- YeOofKmZ0Ka+6rG3BWn9uF0Xh6QebICZczlOIyYMu9aMmrlRpRJtaQ00FpMQ6NWjjZ/cV
- aL+Gf0KeTjPQMzh2tQ3kIT/TgxuG1gRoiLXbZBjajBb/GXqkohJqpQEvevuthSk8/2hIe
- 4sFscndgl0/IDfeBdgBM3/ukORuATgA5NOMd6gx+nBUZuWGuPQF36THacfh4XoIO3D/rs
- zFM619fgfxJx/d5m7k8zkd5PBCgjyYIP83BtUN8V47wGCeyHVE1bgqSif274eqW/6vg==
+ arc=none smtp.remote-ip=185.125.188.123
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790080632;
+ b=dVsQZvc3k18Njw0rI1tNVXDoqbCY1r6uKeBYfGui2VspAxe2mFP3/ZGpYYg2aNaZVKl/
+ DZHNXmpj7AC8B7baYxXEPKS/LUUfjij3oU/v+SuE3P13YJskrqjVc2s4RDUDqX+aJz36Q
+ mRyc89q71bQ+iageGghA6CCkHHzZCOj6CMXn7h923j9r5VJuffqBQLbjC4Pwf0btmfarr
+ syuv5Wd+ceZA62itrXPbTy5/ix4zNCyr8wtrTduZ8/yUlD55xlbcFVL5kYlGB7tD+H1bI
+ f+maVKECHzgzyUJVF836kYo1Jl8yRZCZKt9T+C5zQM0Hub+Grel9LomAY8JJ+LzhZKw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790080629;
+ c=relaxed/relaxed; t=1790080632;
  h=Received-SPF:Received:DKIM-Signature:Received:
  X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
  X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
  In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
- bh=xJ+qqdjFHMLtgyVXDrg11QLOqsVeSSKipj5lSr7rQbM=;
- b=gmo6CMtR7m7d3kCOUj1VG6VbTATYreoFJemXXdOmy24xbOFQKidlAhpfBh/jYSXGjiEH
- KsNbfV/ADPEd4NGKSmnrylygqECamD5M3f0iciFqQRWTyI6EgiU14rdY3lzFMKDxvzxnv
- 57sBQqa+f841JglKa9ijTr7o4x+eINNCmbCDCBXEbWqKb6wY0xFPsHwsQ6OZoxj+Rt2ks
- sA1AUNS+XpwvUqor/fWfOffn9bQl5Cpy7fUNk/mzzmYRheMImvaercqwX7ld+KU2Ioa1Z
- DrObhtnhB8yiLK5+z6qkwWq60JOgU4qCdf9PozNy/0Emz4RdowTLoo3HeY4eslA4tbQ==
+ bh=fjUrT4QL5gYpsbhd/fYkJwe8r4xtkrb2SHi6UmJIbKs=;
+ b=RLNEWK9RtF4Mjkv01r3+6J3I/NB4C45MZ9YD0u8RjcJC7ZPWiVvmtJgNTFs5cb/oW6Fz
+ inEScVNJxjbToM5q3HGpAN6dTvsJuN9iG050UWkFv5g8B+wG85FbQ/r415BEvlwkpY4HV
+ o+Dz84ZebnWJ1tbRpiJ4Y9mDa079HBzO7CQp2V9mn0uFAoC78plxl0ylEBt3HG3XeLHvL
+ Qxl4qKnACkn8hPhUXylBnNsnsZ9nTgvV1mOPjwDeJvGPPd5h1rCRY+WaUG6I/945VXYlZ
+ Qy8KI9LH0ABSFBOEWqgt8BYsmjKKO3kM3yS3zww1YHxcNV/StSBtlIaWmmMQfZGtcIg==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=canonical.com; 
  dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
- header.s=20251003 header.b=OvQpqkWQ; 
- arc=none smtp.remote-ip=185.125.188.122
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
+ header.s=20251003 header.b=ozI5+BQj; 
+ arc=none smtp.remote-ip=185.125.188.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
  envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=OvQpqkWQ
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6ADE36061D
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:08 +0000 (UTC)
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200])
+ header.a=rsa-sha256 header.s=20251003 header.b=ozI5+BQj
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0BCB660737
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:11 +0000 (UTC)
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 679803F5B7
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:07 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id D47833F2BE
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1790080627;
- bh=xJ+qqdjFHMLtgyVXDrg11QLOqsVeSSKipj5lSr7rQbM=;
+ s=20251003; t=1790080629;
+ bh=fjUrT4QL5gYpsbhd/fYkJwe8r4xtkrb2SHi6UmJIbKs=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=OvQpqkWQlPpMX9R80ZajhsZP/MoLhw9njDYqByvXu3nl/KNj2pTFvLPNqEe88Njtw
- lBvvcm65OTSg7lP9QuDgyi29kk8bxe+3yFtnQkNV7le4+Q4z0uCIwHqMD05cjBhjqS
- 5GE+UgQ2RpfdP149iKUO9AZSkrjF8Umrhn4k5t8ZmwQBN+A9Hv6P2diTsLIMfhabiq
- +lK8PYwjIRuz95lGCSgYXQD6sSeEsUtfAUQmQyCiS9KAAXo0cpButw0A4KKGCthN41
- 3EqR0+Hhy3zzESjHEACgQ6Ue531VMFlChp9+f8tnddsRy8MpIrriDJIUKrCUT3mQyd
- 80PgKIiqtar5lzWPXXGTclEm+yXCCIVKBVzAhTPQz0ftrCNix+swgn8mSLPrvpWM/S
- jtHvSHy8wnUlSxd5ro3l1fYav0yrUSV4cmXeCEkDN2DrvX56NkgD3HAfh8GqcENQws
- XsJxDsz8eQocGErQ1tFG9ew8mXJSOp8rwdihIIa+AvcduHdn9/f8Dw1oaS6yVQ8ufl
- JO3umkYoKUt8XuXgTjPdqiXtixtycz+4pbzA1dO0pzdczL/x3ioMlNOMOd1W1giYXO
- tg2SMwRksrcy3ab5BdJ1DfYATl1X8JzBedNE/37Gl/Pz5T+ixzNLyOqQ6Xog+7dTVj
- 2LrHGZa6eS5bxfzGmXLZPwdE=
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2ce7dff6253so9017195ad.1
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 05:37:07 -0700 (PDT)
+ b=ozI5+BQj1yZ8/ICGuRIrKFh3RYkZuHEbfE+3BxuTCGctBJQf9hHVjjvHmwr7oqPBf
+ OA2rs/7utyZEf8N6Xq2QjgMxMRibxFkPU/hZebKFHNtawGFxIeIrnGGqsEoJc8TB5a
+ 9faj8+nC0liBoj+9Wj+bQcrPnwV18ZafYYXORj5Iw0bLo9ezmz1NQFwsjcTtuwgom+
+ BHD4No9uhy+ZmyYQBEaAxADw4v1mr3A/plAwFyv8IEogV4a3fnihxNRebjV8JZECFS
+ fm90M7+y0z8sgK2AVqXp0zN3AgAHKqfCJR+73nCnHifa4+3V5dK+hG7j1WMlMK5vII
+ CzBWDVDFFnWD4pi9goqWx4+c0YXCNVDT2U8I7uyxceY2zKwn9x21Azpy+sDRb8n22Y
+ 48RVbwvnk6LuQV0C6PYEZOnLjOnmOnBXf+hmLrPr1QCAPkriD4Dzw0flw5NFrt/P8U
+ 2ZYeapD2qkCxPy2+JkfA1ib8j7Jimqb6U8ZGSK5xHjos3hG+5YTHOvhj3T6vWcM/wK
+ Y7TLbkzeUuA6iXIlQdA5GIqAPqW3oO4UGv+8tyA7CS4c35OHPfsW5SUKY4d6rV/M86
+ 2aMbZQbl3qKsycz+0sDnI7sZ773xcPb3XZJVr1GpFP1O18EOw/gkqlOYa9BtrLdSo2
+ NP523zJe7CYD37VOguS/PYEg=
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-2d9336581a2so70190045ad.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 05:37:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790080626; x=1790685426;
+ d=1e100.net; s=20260707; t=1790080628; x=1790685428;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=xJ+qqdjFHMLtgyVXDrg11QLOqsVeSSKipj5lSr7rQbM=;
- b=pz6YazgLAu3g901pwbc1egUTD1/OXWEi3iOgOngb4Dv+Ii7CweICcl/Gph8oFyCAEY
- lvPF8SHGeYa+nnSvkQy/PPYVwhMfDEWUgeOxb21eXx4j9uqk/SUxnvRHD4h80t72K7qe
- YAZzGB6ZqljtB/jELZqzcFNrBDjA6NPhOZAEcM5uvt7DJDDgHufCRl06x5KEz6SjP6Od
- C4w/8wQyTh4F6dyiFSR04G80BwNZil3eRukGw2fiqHDjn6wQRKnl1lM0kVrdW5f3bUay
- g23rCJfAGYignGT/tlMhCQj6v1r5g8t/jwiCiAXyQoao+hFNCopFXEWYfeZRfa3x/Ifp
- X2Lw==
-X-Gm-Message-State: AFuF++kBDfFWjYg6FD5ygNFGo8Mff+iDoKZpEXa/LRLKTiqDzg4hxQ3Q
- 7W3DhwDm6l/P3ktfip8xY2E5vK8MkbfxDblA1+3MlG8nj1sCXhU6PVsHG6Vg69O30O2QHwpAd3c
- ZguOx0v4XFfDYDRiW3dTpJrbMQOC/E0AjEkgTuDPA1NW/5C6yYE/uQ7KzAu7l/qvu0Zcc+3md+A
- S0BoivOMMpBx+Neal2/A==
-X-Gm-Gg: AYBFou1kmmYQQo/yjVsix+0HF6fkokUPZdUkH+bPJV4AfUTgnRFTjv/7R5s48ePA73E
- qZZIR0wCWfuHvvyCV5BMmFc7GWPJnF1aJWqYyXqR0TgkEAgZQ0z80wvCF+YL7M4WmDcehTMTK20
- dFhn7+wyTcMyLpfzcN+9b0RZDlarETeHC5wrWnpxZbJTP6mnJGXZfJURo6oBbceLVi3kccqD3zH
- 6Z8HNQ31VLRfWt11U2Qw/ln5QxQ5xOe9imnFtAQzUJlsjBgGNHMiIuJ+ZRD0nvJRi/wPEcJ8BKs
- xG1Z0hbQlYkfOv26jHmguWwc0KSrnpg6ImpTDMt2CsXawlMpC06GT9Vp+1GWIFBBFthIjmBeLIa
- PeGiHzlQuofeU9iebupb/DEXihx48VIBKYVTPVg6e53xOT4LhldQ=
-X-Received: by 2002:a17:903:2443:b0:2dd:c053:b9c5 with SMTP id
- d9443c01a7336-2df60ee16ebmr8761115ad.22.1790080625762; 
- Tue, 22 Sep 2026 05:37:05 -0700 (PDT)
-X-Received: by 2002:a17:903:2443:b0:2dd:c053:b9c5 with SMTP id
- d9443c01a7336-2df60ee16ebmr8760875ad.22.1790080625400; 
- Tue, 22 Sep 2026 05:37:05 -0700 (PDT)
+ bh=fjUrT4QL5gYpsbhd/fYkJwe8r4xtkrb2SHi6UmJIbKs=;
+ b=P/GAUT+TxyoBLJ/lEqEAwAjWgtHcBSIzMp5gn3UM46YUzod0LwIg40shd1ZJWIj3hx
+ siVhzkCaOrHATMnSagNIEj31x1ujrkvsTbCNvxLB8anxvN59hilW6XWsHdvY6m5tpKcf
+ qeH6R43pRhG6JSFqCPX/HcPSpuLKfTJTSWg77DxL4e2ubAcKKsDIXehpUCXxgHOIAjdU
+ iyuGBYUkTwrNrX5ZSUUHCeBtk0W3oUYybb8DBkz/oPoO7IWQ3gIyfDARPd7QwdKarNe3
+ iFiqQC6dIgF5T2egfqH2EAPWESgC5je2ADFUqdKqxUJ+cy2bGTGVig5YqzJKGqW4i5Cs
+ 7xaQ==
+X-Gm-Message-State: AFuF++k9vJWC/pjjR3h+sMorUdLI2fP4HAu4182zM1Xa4YtfxRXNVsu7
+ SuHz0+NVQDytV2FCbxDYfCOtkOx6A9qiV9LmdMLLSNYKKaZ5lW2LvWn3DTunPikxbvGG90ROq9u
+ 9HCBmg9kD9bIT4/VDQ+Qtyc8LZNQFNeAspltEh0erqUeQhQ3+Xl5o5TWTZ67i8agHhg3M2os8Ru
+ oLThZbkwlh0Sx5YkrxaQ==
+X-Gm-Gg: AYBFou0NzVwZdiJL3xPQxjeDPKs6TMkZ268jMWSyEVk5+4hqnHed3LUmCU7lKZ+sJzf
+ ZY3TLpPpz3t2nw3x5gqQg5ZfYRwYn4IJNndHGq42/2UB6Im+RJdQVoD1R+VMJUnE9zV7/3I+8s7
+ yje9e71MFVC2qX0yK00SlF9D7b8Cinc5i9QuzQy3MzcdI8O5lFm1MPr50ulKaX21L+C41F3gf7i
+ 7T9MmeSCPZbWOyoFvvi/qw1oO4Ym5evI08H3pAMNwkNoIJjC+1ZWfZAzlAl3Aeps9INFQOA2R4D
+ nNpdNhOaALzeGPzrWb8OFeTOv+djG3X8EhfScDy2HDiXn9jELOSctQ7fKWYVkWvmlRAIuc9vzL1
+ 3f/MczTiC0fehZD3tCdoDZI1BcpascFXnDQ5z4/aOKyS4fm0mFJmERH2CHP/4vg==
+X-Received: by 2002:a17:903:94e:b0:2db:2413:87d2 with SMTP id
+ d9443c01a7336-2df609ac3b4mr12477455ad.4.1790080628025; 
+ Tue, 22 Sep 2026 05:37:08 -0700 (PDT)
+X-Received: by 2002:a17:903:94e:b0:2db:2413:87d2 with SMTP id
+ d9443c01a7336-2df609ac3b4mr12477145ad.4.1790080627594; 
+ Tue, 22 Sep 2026 05:37:07 -0700 (PDT)
 Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
  [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2df5d058116sm9054105ad.77.2026.09.22.05.37.03
+ d9443c01a7336-2df5d058116sm9054105ad.77.2026.09.22.05.37.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Sep 2026 05:37:04 -0700 (PDT)
+ Tue, 22 Sep 2026 05:37:07 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Daniel Golle <daniel@makrotopia.org>,
  James Hilliard <james.hilliard1@gmail.com>,
  Anton Ivanov <anton@binarly.io>, Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v2 5/7] tools: mkimage: include image-data sharers in the load
- overlap check
-Date: Tue, 22 Sep 2026 12:36:25 +0000
-Message-ID: <20260922123630.608961-6-aristo.chen@canonical.com>
+Subject: [PATCH v2 6/7] doc: fit: document shared image data through the
+ image-data property
+Date: Tue, 22 Sep 2026 12:36:26 +0000
+Message-ID: <20260922123630.608961-7-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260922123630.608961-1-aristo.chen@canonical.com>
 References: <20260912124454.13578-1-aristo.chen@canonical.com>
@@ -195,99 +193,159 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The overlap check at the end of fit_import_data() sizes each referenced
-image from its data property and skips images without data, since such
-images are never copied anywhere. The previous patch introduces the
-first images for which that assumption does not hold: an image sharing
-another image's data has no data of its own until the reference is
-resolved after the import, so it escaped the check and its load region
-went unvalidated even though the resolved image is loaded like any
-other. This completes the validation for the new property rather than
-fixing a pre-existing problem, since a configuration could not
-reference a data-less image in a meaningful way before.
+Someone trying to shrink a multi-board FIT has no way to discover the
+image-data property from the U-Boot documentation, since the format
+reference lives in the external specification. Add a worked example in
+the style of the other FIT example pages: a kernel offered at two load
+addresses by two configurations while the payload is stored once,
+together with the rules the producer enforces, the resolved form,
+the interaction with hashing, signing and encryption, and a pointer to
+the specification.
 
-Size such images from their target's data instead. References that do
-not resolve are left alone here; fit_resolve_image_data() rejects them
-right after the import.
-
+Suggested-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v2:
-    v2: commit message states that this completes the validation for the
-    new property; complete the kernel-doc of fit_image_effective_data();
-    comment-only change, Reviewed-by kept
+    v2: new patch
 
- tools/fit_image.c | 45 ++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 42 insertions(+), 3 deletions(-)
+ doc/usage/fit/index.rst                  |   1 +
+ doc/usage/fit/multi-with-shared-data.rst | 114 +++++++++++++++++++++++
+ 2 files changed, 115 insertions(+)
+ create mode 100644 doc/usage/fit/multi-with-shared-data.rst
 
-diff --git a/tools/fit_image.c b/tools/fit_image.c
-index 64e607ea55f..b4a97656ea4 100644
---- a/tools/fit_image.c
-+++ b/tools/fit_image.c
-@@ -951,6 +951,41 @@ err:
- 	return ret;
- }
- 
-+/**
-+ * fit_image_effective_data() - Get the data an image will carry once resolved
-+ *
-+ * Returns the image's own data or, for an image that shares another
-+ * image's data through a not yet resolved image-data reference, the
-+ * target's data. References that do not resolve are left alone here,
-+ * since fit_resolve_image_data() rejects them right after the import.
-+ *
-+ * @fdt: FIT blob containing the image nodes
-+ * @images: offset of the /images node
-+ * @img: offset of the image node to look at
-+ * @sizep: returns the length of the data on success
-+ * Return: pointer to the data, or NULL if neither the image nor its
-+ * image-data target carries any
-+ */
-+static const char *fit_image_effective_data(const void *fdt, int images,
-+					    int img, int *sizep)
-+{
-+	const char *data, *ref;
-+	int target;
+diff --git a/doc/usage/fit/index.rst b/doc/usage/fit/index.rst
+index d17582b1d64..ada69d3adb7 100644
+--- a/doc/usage/fit/index.rst
++++ b/doc/usage/fit/index.rst
+@@ -21,6 +21,7 @@ images that it reads and boots. Documentation about FIT is available in
+     multi_spl
+     multi-with-fpga
+     multi-with-loadables
++    multi-with-shared-data
+     overlay-fdt-boot
+     sec_firmware_ppa
+     signature
+diff --git a/doc/usage/fit/multi-with-shared-data.rst b/doc/usage/fit/multi-with-shared-data.rst
+new file mode 100644
+index 00000000000..f7413dd98f6
+--- /dev/null
++++ b/doc/usage/fit/multi-with-shared-data.rst
+@@ -0,0 +1,114 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
-+	data = fdt_getprop(fdt, img, FIT_DATA_PROP, sizep);
-+	if (data)
-+		return data;
++Multiple configurations sharing one payload (image-data)
++========================================================
 +
-+	ref = fdt_getprop(fdt, img, FIT_IMAGE_DATA_PROP, NULL);
-+	if (!ref)
-+		return NULL;
-+	target = fdt_subnode_offset(fdt, images, ref);
-+	if (target < 0)
-+		return NULL;
++A FIT that supports several boards often needs to offer the same binary
++at different load addresses, for example one kernel that board A loads
++at one address and board B at another. Each load address needs its own
++image node, and without further help each node carries its own copy of
++the binary, doubling the size of the FIT.
 +
-+	return fdt_getprop(fdt, target, FIT_DATA_PROP, sizep);
-+}
++The 'image-data' property avoids the duplication. An image node names
++another image node under /images whose binary data it shares, while
++keeping its own load, entry and remaining metadata::
 +
- static int fit_import_data(struct image_tool_params *params, const char *fname)
- {
- 	void *fdt, *old_fdt;
-@@ -1118,12 +1153,16 @@ static int fit_import_data(struct image_tool_params *params, const char *fname)
- 				 * Collect the memory region the image is
- 				 * loaded to. Images without a load address or
- 				 * without data are never copied anywhere, so
--				 * they cannot conflict.
-+				 * they cannot conflict. An image-data
-+				 * reference is resolved only after the
-+				 * import, but the image ends up with the
-+				 * target's data, so size its region from the
-+				 * target.
- 				 */
- 				if (fit_image_get_load(fdt, img, &img_load))
- 					continue;
--				img_data = fdt_getprop(fdt, img, FIT_DATA_PROP,
--						       &img_size);
-+				img_data = fit_image_effective_data(fdt,
-+						images, img, &img_size);
- 				if (!img_data || img_size <= 0)
- 					continue;
- 
++    /dts-v1/;
++
++    / {
++        description = "Kernel shared between two boards";
++        #address-cells = <1>;
++
++        images {
++            kernel-1 {
++                description = "Linux kernel";
++                data = /incbin/("./Image");
++                type = "kernel";
++                arch = "arm64";
++                os = "linux";
++                compression = "none";
++                load = <0x40200000>;
++                entry = <0x40200000>;
++                hash-1 {
++                    algo = "sha256";
++                };
++            };
++
++            kernel-board-b {
++                description = "Linux kernel at the board B address";
++                image-data = "kernel-1";
++                type = "kernel";
++                arch = "arm64";
++                os = "linux";
++                compression = "none";
++                load = <0x80200000>;
++                entry = <0x80200000>;
++                hash-1 {
++                    algo = "sha256";
++                };
++            };
++
++            fdt-board-a {
++                description = "Board A device tree";
++                data = /incbin/("./board-a.dtb");
++                type = "flat_dt";
++                arch = "arm64";
++                compression = "none";
++                hash-1 {
++                    algo = "sha256";
++                };
++            };
++
++            fdt-board-b {
++                description = "Board B device tree";
++                data = /incbin/("./board-b.dtb");
++                type = "flat_dt";
++                arch = "arm64";
++                compression = "none";
++                hash-1 {
++                    algo = "sha256";
++                };
++            };
++        };
++
++        configurations {
++            default = "conf-board-a";
++
++            conf-board-a {
++                kernel = "kernel-1";
++                fdt = "fdt-board-a";
++            };
++
++            conf-board-b {
++                kernel = "kernel-board-b";
++                fdt = "fdt-board-b";
++            };
++        };
++    };
++
++The sharing node does not include a 'data' property; only the binary
++payload is shared and no other property is inherited, so type, arch and
++the other fields must be spelled out. The target of the reference must
++not itself carry 'image-data'; chains of references are not permitted.
++
++mkimage resolves the reference while building the FIT. With embedded
++data the payload is copied into both nodes, so sharing pays off
++together with external data (-E or -p), where both nodes point at a
++single copy of the payload through identical data-offset or
++data-position and data-size values. The 'image-data' property is
++retained in the resolved FIT as a record of the relationship, and
++re-processing such a FIT with 'mkimage -F' keeps it intact. Each node
++carries its own hash and takes part in configuration signing like any
++other image, so verified boot needs no special handling.
++
++Encrypted images can be shared as well, with one restriction: both
++nodes must describe the same ciphertext, meaning the same algorithm,
++the same key-name-hint and an explicitly shared IV, either the same
++iv-name-hint or, when no hint is used, the same iv value in both cipher
++nodes. mkimage rejects a combination that would produce different
++ciphertexts, such as leaving both nodes without an IV so that each
++would receive an independent random one.
++
++The full description of the property lives in the 'Shared image data'
++section of the Flat Image Tree specification,
++https://github.com/open-source-firmware/flat-image-tree.
 -- 
 2.43.0
 
