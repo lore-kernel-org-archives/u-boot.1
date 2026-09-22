@@ -1,186 +1,147 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06730C98302
-	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 12:47:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D15B5C982FA
+	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 13:28:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C26F580A50;
-	Tue, 22 Sep 2026 12:47:48 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 82727607A5;
+	Tue, 22 Sep 2026 13:28:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5pW6SRVV8DWf; Tue, 22 Sep 2026 12:47:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 53CAE80DCC
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790081267;
-	b=TYLigKR7d7ZUWZBRr571kVhosOO9H2WuhhWTayaeCac7NXGwyx7YO04nVsA1zFscyVcz
-	 t78fCnbhe7kGiZzkfTGlKd4JW0mno2+icxemAhClVx+Gkhi7AjEvzcgrBW6T4U8HTNvQM
-	 Fk0ZidsBzgLxxkhGrZUfcdrdSDvLco/6oLSumGV7nccIKEiwrT61HtKn/4lSZ8emaY9G5
-	 9dg2oV9KvFTFo9FyG78Gkw1PCUtQZ2/rkPMc5s88M0U9v1cENmyzkXt1BrfpZNTuTpjBv
-	 n+XHLEl5VVdw3274e8qOF3MfhFOhvgiw/OiAvks5R8hzvHWyiOCB7Y5xSWU2LGwx4Sg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WRDwF-4K87cb; Tue, 22 Sep 2026 13:28:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 5368D6069E
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790083689;
+	b=STVz8SPcxjuhXh81XNcRy/S1w7ZgbqCRvEUnBL85o/buD+8DwwXim+rDycSEnFlwV5yK
+	 +41139EBGx79x589yPlFFb6hY7KGghb991jUfJ6D18myy4Cgs+NMC8ue4LRJoUPfukhMg
+	 ONNTXYCIpkVi0ucStYrxYZPm2B6MGQ1pz9jxnOIu3Z6OdXmZYJCmtQo2E4Gki1phrC41F
+	 Sj++qIjzkFQWVX1GU9PlYptBQmztakVLfJkphF3w4z09yPgm1gn/eWy5k99cb257OOsML
+	 bDfjrmyS1rmRhmo9k/qRWncXKW0X6zrG5m0sU8nru4G2z1Vx1vYJr6I0sYUFKNLzt2w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790081267;
+	c=relaxed/relaxed; t=1790083689;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=4qSnykv2b3ZISEsDthEhxVBXeNVA5HZBn7/7WJpcx8o=;
-	b=PWn6DajWu0K3HzFcQyLBRzszA2fS2PrhHgjlekmgQn5INuZjWHU/gPDHA3tlGtS/FaF+
-	 +FFRnevxffSHXSQ1MLMI8XM5JL5cYAyXriPy7q624ZTp8DY0PkZPkh+yV6x7e1mkuK51K
-	 aAdxYUX55X1F/vu6Q2mHb6KUEZhXRWEOVgJJuXAolNXmyOd7XurwGkLz3H7lexvcoXmoS
-	 4rC6LifUC8D4Xf47P6EP2cAm+LO4wTlKUf03OYTGTNmUrS+bkeEnGlGQU9lACh6axJgaF
-	 UD4w2T6goFV50uGnRvo+iXouUcssclHPpVL7EuJNmD397jnLjvX4dl4mozu0KV2+mHA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=canonical.com;
-	dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=N+FWL+3i;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
+	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
+	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=OewELTLOwe/eB7ppawSLVQJuT7b3zDqpARACfmgqRuI=;
+	b=N3BYV73OleTDKgBxWYJpf9wgKdeVjRa/vsvu2wL0dKUfXAEWMhdXUY5ENcg/ixLp0+8v
+	 pLbcTgbfsSbfBhfm5Dg1PfIlnQBs1bcgCgq3n7kN+EfwCLAt1+GB3qWX5BxvVAdiGt/cO
+	 D0nwTTyIzWRBu1iLt2h/41lhk+L2uB/MFcb7e8j9k/FnCsggGdzfPczqNWMSlQ0NMaCt6
+	 i8MCVsu83G0lOuwmd/znT7jI6tdOwdUANZqjWmvUxQ92Bom/dEIXyLT2T7ZzMmNViBNzm
+	 Ejc5WXqfd7L1yXe0jY/OWfcy+Bm8EWQ9XW0FL8fLCk+bEfpAzUAcMRV/jmr9vJLSfkg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790081267;
-	bh=4qSnykv2b3ZISEsDthEhxVBXeNVA5HZBn7/7WJpcx8o=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790083689;
+	bh=OewELTLOwe/eB7ppawSLVQJuT7b3zDqpARACfmgqRuI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=s8woygeHFeBL5dD6YWHSA28IrK0GA1OtKrmklZLsu0Q5La2STHBXbFhWO2ObE9eaC
-	 6C5WkK2Ehw0EbGJFJSk7xHbc95W0+dDdVY0aNxSlz3z3fzVV6CXcV45vcEG9GTKz0y
-	 8dmbLGC/y37ab1jsT9C7kRPjC3LCaPu4HK0bhTKkD6SJoXVb/E+23m6YxQfnzD42oy
-	 6BOt87BC9LPiq6nojGYTDuycNN6ZKOhveC4VNiexeLp+QgR6JagonNboww3xr007WH
-	 /4ZcBdxsyHXFwsFlg5EN93Dl09oAsaIAhw3HeLVfCrhhqtyFFur2fwj9UN79aPv6c5
-	 7FbdzmXvyIhyA==
+	b=D1BPI4id9kdjuSV8iNOr81KdrQZpRpM5tyObBxJaTz6KjyIEsEmhJrsuUOXSNHDYm
+	 HD0fu5EIMGCjDqykpDRY4aV3UzboW7I0PQAXntZsprdssbwKc//bnsD0Fjp64LDj4T
+	 lKxPZV3wB+IN3+zW8X9cntAAyI1bt37GvQLrmHaxbDuV7GB/1qkkdwoJe2f4ai+M4L
+	 aydknZYVcxVoirg48r5FJFXoul6QAdlyCwI9AzJr6RMFlg6+t00gjBfViIuAzLtAi1
+	 njfHjhQ2UNbs4GeSgLqQ84YT46SIW5s4WZWS8N+M9S1fcjtqiNT3w+R8eeMFqKDd+C
+	 hd+MMMUhhuH7w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 53CAE80DCC;
-	Tue, 22 Sep 2026 12:47:47 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id D7FDA13B
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5368D6069E;
+	Tue, 22 Sep 2026 13:28:09 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C963712C
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 13:28:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id CA0B9807AA
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:15 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id AF2E7406F2
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 13:28:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nu1SaLjXSrXB for <u-boot@lists.u-boot-project.org>;
- Tue, 22 Sep 2026 12:37:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 400358028D
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=185.125.188.122
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790080634;
- b=GDpZWGrtQRqdo3uYA2fUN1RRnYTH63VDZ0y5X9YjNIlXx7J3UOi2zoMano3VkoXW3tdz
- 2JpVzP5Fej/hJxTyLriLsx7wWkEg56LCpZ/ovAqGXcanTy6VE5One6QOxYKUJfn0SIlKr
- RZ6V7ND4tDGcfYLx/7OXGC1tNiw2cbXbOg2YqJkXoqITErDGzcg5VkGZ4UptiPznYLgh3
- FRme/qdW3a3HjVSjT3K54Tr+Ro61LM+HifpnEtj0jD32+2GOkHO+Q60YEPBmAjIVBO9tm
- 8k4DollHI6C/SMGQV3NQdmRNSnDzUNQcBbRTU1SUizhldS3bFRDSnpw0XLaQjytJbbA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tjQtT2UeDmRR for <u-boot@lists.u-boot-project.org>;
+ Tue, 22 Sep 2026 13:28:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 4C18F406EF
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=121.127.44.73
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790083686;
+ b=PAnPUhSrXkFxscTqf8TKqCz/ND014hZ0lkiWRcoc5WnCYkdIQ94lVEwfYnSlffN527eR
+ J1aomiYetyiEudNjuruZyA/Jr8eU4dWE7TdoTOShKWvvvemMtwWvrZuMsjNYTqldTZSne
+ KWABw1w6fZEIIzvxsGeiRNcadtFNzNqUF4M1JAaMkvVK02dAPaJcFGLJHGIgcgBC2cNFj
+ Sx3EV3Hbv8yynCqfx7jUOzy5D/C4CeuoLh1ZLVsCZ82VRSmixk2DkWHF03q5G2rMgkSr3
+ Qga3LZCa41BoIHWQ/1pd1v7DZC5TpHUoMuhgCMBE0++05hOejLBAg4+qtJx+Y/+ghlQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790080634;
- h=Received-SPF:Received:DKIM-Signature:Received:
- X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
- X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
- In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
- bh=4qSnykv2b3ZISEsDthEhxVBXeNVA5HZBn7/7WJpcx8o=;
- b=DFU9ODQeTPu+GkqOdCnwjAril7pvm+InP5q6RVcbp/O8TH4hJ9UKxhYGMD7WOtp7IqmP
- IEH9S8urxQYQPgueR1GuVBN0LciRowoHY/N6XGVIwfzL2W85fhalUQV66M8E00THlwZMU
- f/gxvUwUqilc/PPkKcNjnE0IOyMT8uzlIISE4zW15RdJYJPNh9/6shUWCX9YaFC39PR25
- PgL0HsOR4KF0YZGCoe8Q/HvJX3xyvL7ar4Ju2lph5U5x6Jqk9sEqlLE/YfnlwqMRGYvjn
- aIxfOZKrAqU9mAOZroXmD1NaJ5WrG/RkxAPVVNjSl15snHuNr2YfSMbAT9+08DwJimQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=canonical.com; 
- dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
- header.s=20251003 header.b=N+FWL+3i; 
- arc=none smtp.remote-ip=185.125.188.122
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
- envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=N+FWL+3i
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 400358028D
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:13 +0000 (UTC)
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 5AFE03F781
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 12:37:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1790080632;
- bh=4qSnykv2b3ZISEsDthEhxVBXeNVA5HZBn7/7WJpcx8o=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=N+FWL+3idY9uFrZIuNUNO7RjapJhWUhKzW1KIAueJw3c+/jprzK1EW6ESxMFZybLU
- sPp7saa1KmZ1XhFCx847ymFmD1vx//HPvR0448jkWUpsg8hmF+Xx8cWCDyU43HbcxM
- C4hu53h4NQhMyqM7M8Pe0roH9m+/1bonmBsEFcdOAulI7fcwQfDTpc/LAa/Tpk4HVg
- CVh+TB2BvPkwd0rqPa8ZELEbqElfAAI6z0nehSGAID7dYEBdaMwznmiz012Q0vk2eq
- XbXTK1CLIwlUXACYT0oejzaLkuRNwYCP0BfQ+eMm+XI2tHJWSqBkKW93qt+ghywMos
- jxhLlShlecvIfSWmGISvClncM9UPFj+4H1m/2bnVXwrbwty1akgFA7BkRSPCk/KZ2u
- pkiLX+6qOWfhoHx5gesZAF4F6RzmCemsFqGvfSSIi36hIiZ9fXQIrwGvlaoy6T0DS6
- Bl7/OF14dnmbNu9+B5woAB0Ia2D9+7PnoWERZVeJIpMJZnHxYuUnxnCr5Th27Um1wa
- NRt8rBK+M5fa2QNg6hM8WqAyiwsqt4fFr5ss/w+DbVjB99GaaDepvc4AerI2ztwqJD
- xLgzCIsu59evcciwgmTGUOZALROIDhCk7VzBI3M1CDKKFw0P+f58C5WlQLEKWg6n3u
- uESg0GODEwkszpNnI0ADH8cY=
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2cee1ec30f2so57964455ad.3
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 05:37:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790080631; x=1790685431;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=4qSnykv2b3ZISEsDthEhxVBXeNVA5HZBn7/7WJpcx8o=;
- b=zaGGveE/KKvPhMnZzD1GKcK/00F4xticQovlgZl/QnHY+rDxrBgskCVOVoVdkJUS16
- 3+7EoaGvzEDWpT61QDDaVQS9u7vKqJaUpo+w9t4cszZGnO8N0Nbxp4twKNxIq7hqpJE7
- mWAFTWxb4/wjAVR0b2o3YJMoUDAuHBeCugfh0vRoTqriTbL7RQ8G76850yUWyhommE+3
- AGi6iqAcgLHc1EuCC/7+wptZaOWX3c/yh4/Zx4myj7gQ80d5lM6Fdi95O9rDiWRHFe73
- MIGZMRT/yIRvLMzHPyVG7ptz8XbYa2NocoUvV9kmcl+iK1BGS/XXJfpVBbZCfy+RTUJx
- /A1w==
-X-Gm-Message-State: AFuF++kj+ZADh4MsoS+5a3jPrl8figps/WhnabYuitDMR9s6cWF4Rfou
- CXJRMpkm5cbcTWRrGiu5iJqNr8/JMI6aQ63sO3ow3y25c/w7ZEbxN7OoF69/NsZv8z5dmDsQO6y
- PdoQW0DhwfZ1x1ZK8C+jAAcU9+a48qROo6I3xF6x6NkENJq34hsassAC19lILsVjmvOX2bAkCEf
- /DmXgcgS165ir2C+CjqA==
-X-Gm-Gg: AYBFou1gfPvTJNO7J92yFxZRSvW85xu7/lt85oeDVnOhSEUraO2OA/UDEh0BR2715G8
- VSuWDF2NgZm6lfWbkiDVq5UxqvPLyC230OKRu4OohfJ2uT4bxqfvub1a/EXDnZRKlIq9SCqXnGv
- Lt9c87oL/Oj9KmGvQlQ0h2m5y0XktwaG2QitmB9EF39uCOXjcsAPhnvu6K++bWoyMnhXb8gNNeU
- paVm4PzINdzY+pSCIqAm9JQc1d1g2WdnDHUwvuM0Vk3mbcAkdguLHK+T9jpbwjt5BZxpF3aZOFV
- r4HznwijbFutKiejPgmtGlTHGy0D/Xr8f97I1wtkO8NE0bxe0qtga5EkYX+loy987eOWBz2RsED
- IcJVQbC0gGaYxoe18xcJwKbTr3reV5g/98zqE/wmKGkMramUoGbI=
-X-Received: by 2002:a17:903:3c2d:b0:2dd:c100:425a with SMTP id
- d9443c01a7336-2df60b7c908mr12598105ad.62.1790080630415; 
- Tue, 22 Sep 2026 05:37:10 -0700 (PDT)
-X-Received: by 2002:a17:903:3c2d:b0:2dd:c100:425a with SMTP id
- d9443c01a7336-2df60b7c908mr12597755ad.62.1790080629894; 
- Tue, 22 Sep 2026 05:37:09 -0700 (PDT)
-Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
- [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2df5d058116sm9054105ad.77.2026.09.22.05.37.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Sep 2026 05:37:09 -0700 (PDT)
-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Daniel Golle <daniel@makrotopia.org>,
- James Hilliard <james.hilliard1@gmail.com>,
- Anton Ivanov <anton@binarly.io>, Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v2 7/7] test: py: add tests for the FIT image-data property
-Date: Tue, 22 Sep 2026 12:36:27 +0000
-Message-ID: <20260922123630.608961-8-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260922123630.608961-1-aristo.chen@canonical.com>
-References: <20260912124454.13578-1-aristo.chen@canonical.com>
- <20260922123630.608961-1-aristo.chen@canonical.com>
+ c=relaxed/relaxed; t=1790083686;
+ h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
+ X-Forward-Email-Sender:X-Forward-Email-Version:
+ X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+ X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
+ Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=OewELTLOwe/eB7ppawSLVQJuT7b3zDqpARACfmgqRuI=;
+ b=U0QgupyPaMZAWBFt/IHrxXzutPpr11LXgltuLBmbKsbrT7xpzsJvXfeOE6DSWa/msfmV
+ RGIdfU2JSbXRzkM7NNYCAbomvH1nu7IPP75ej+XGqR4O5Srn3p+C9glqot6NSQ5ZggaA4
+ dm1AdfgSOqI7afmlCs7EflZtF9h8SoVKRDfLDZjeIZ43gwMI+u+uFNBZ3E6ycZJ0MtSJO
+ kNAVc8uk4o5yb0rW7GS0zVCHqdkSSL/WJX+eYZ9utShTr9CjrHyf7G6Dh1REHCi2rRjKz
+ roPcsj1j1rMjQrWF5/TBXGYeW2JhhJ6xNBGswy+1yxKPzTLswaeu/WKQtQr3nwst3jA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=kwiboo.se; 
+ dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=YoR6Ucdn; 
+ arc=none smtp.remote-ip=121.127.44.73
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=0f3a=hp=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=YoR6Ucdn
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4C18F406EF
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 13:28:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1790083683;
+ bh=OewELTLOwe/eB7ppawSLVQJuT7b3zDqpARACfmgqRuI=;
+ b=YoR6UcdnDS1qco//sKALnmSOX8uD/CHA3KiWapG3WrJh9hBM3YKUfNTuEaYqqzZ0qQi7Ysjdz
+ R6Jb5utZPUg55F0FJk7mRERhuLD9FF3GRYlXfPurNL/cEgNc/lzkRDKw25jM2vRVRrRWORmqr18
+ wY9IVWDKk5lUvTK2R3D4+jy0vrxd406I/AcQ6TAJj9lW4cY3qeOSveBPlPiSyJjjEoByIkO8cGe
+ +bStlP3sl0QzYCnm2A43xm3oJ0ULcql2YmhENq5HRPATKmJ0fLu9w7flHQjBbSAZeo3kEHl7+ac
+ x+IiSdqsmKJVQ7yPxkyb4KCVnD8UPw+z5QBYLDEGQ2GA==
+X-Forward-Email-ID: 6ab2825f51a0861ba43c136d
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.15.1
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <ca280adf-19dd-437b-946e-8e5e7f700464@kwiboo.se>
+Date: Tue, 22 Sep 2026 15:27:56 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 22 Sep 2026 12:47:32 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] rockchip: px30: Fix TPL_STACK overflow into BootROM
+ reserved region
+To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+References: <20260920161930.1880133-1-jonas@kwiboo.se>
+ <CAC928Hb3HdGURxLFhxocpQAWGVB2morvpLP=GEsRs_w1iE0oig@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAC928Hb3HdGURxLFhxocpQAWGVB2morvpLP=GEsRs_w1iE0oig@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -194,432 +155,158 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Cover mkimage's resolution of image-data references between images. The
-positive tests check that an inline FIT carries identical data and hash
-values on the sharer and the target while their own properties remain
-independent, that external data mode points both nodes at a single copy
-of the payload, that a resolved FIT can be re-processed with -F
-including conversion to external data, and that two nodes with
-identical cipher settings share the same ciphertext both inline and
-external, whether the IV comes from an iv-name-hint or from an explicit
-iv that is honored and retained in the FIT.
+Hi Massimo,
 
-The negative tests check that mkimage rejects references to undefined
-images, chained references, data that disagrees with the target,
-image-data combined with external data properties in partial and in
-complete form, a configuration whose image-data sharers have
-overlapping load regions, sharing where only one node is encrypted, and
-encrypted sharing where the nodes disagree on the IV, through different
-iv-name-hints, different explicit ivs or no shared IV source at all.
+On 9/22/2026 1:35 PM, Massimo Pegorer wrote:
+> Hi Jonas,
+> 
+> Il giorno dom 20 set 2026 alle ore 18:19 Jonas Karlman
+> <jonas@kwiboo.se> ha scritto:
+>>
+>> The PX30/RK3326 has 16 KiB SRAM at [0xff0e0000, 0xff0e4000), with the
+>> initial 4 KiB at [0xff0e0000, 0xff0e1000) reserved for BootROM at boot.
+>>
+>> SRAM addressing only seems to use 14 bits, meaning that reading from
+>> 0xff0e4000+ wraps around and instead reads back data at 0xff0e0000+.
+>>
+>> Using a TPL_STACK at 0xff0e4ff0 (16-bytes aligned) means TPL use BootROM
+>> reserved region for its global data, malloc area and runtime stack.
+>>
+>> TPL on PX30/RK3326 does not have any use for the malloc area, the
+>> generated GD_SIZE is typically around 304 bytes and BSS around 72 bytes.
+>>
+>> Current memory layout possibly looks something like:
+>>
+>>   [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
+>>     [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
+>>       [..., 0xff0e08c0)                       stack area
+>>         [0xff0e08c0]                           stack pointer
+>>       [0xff0e08c0, 0xff0e09f0)     304 bytes  global data (zeroed)
+>>       [0xff0e09f0, 0xff0e0ff0)    1536 bytes  malloc area (untouched)
+>>     [0xff0e1000, 0xff0e4000)        12 KiB   TPL area
+>>       [0xff0e1000, 0xff0e3800)      10 KiB    code
+>>       [0xff0e3800, 0xff0e3848)      72 bytes  BSS
+>>
+>> TPL currently does not touch the malloc area, instead the reserved
+>> TPL_SYS_MALLOC_F_LEN bytes help push the zeroed global data struct and
+>> the TPL stack addresses deeper into the BootROM reserved area.
+>>
+>> Using current offsets for global data and stack does not seem to cause
+>> any known issue for BootROM after TPL returns to BootROM to load SPL
+>> into DRAM, however any change to TPL_STACK, TPL_SYS_MALLOC_F_LEN or code
+>> could theoretically change this and cause issues for BootROM.
+> 
+> Here with "any change to [...] code" I suppose you mean any change of global
+> data and/or BSS sizes, correct?
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
----
+Not only, the change to TPL_STACK, TPL_SYS_MALLOC_F_LEN or 'struct
+global_data' would affect where the TPL stack ends up. However, and any
+change to the code may change how the stack is used and thus possible
+write to more/less/other data inside the BootROM area.
 
-Changes in v2:
-    v2: add cases for the complete offset and position forms of the
-    mixing check; Reviewed-by dropped because of the added cases
+> As code size itself is checked against
+> TPL_MAX_SIZE at build time. Regarding build time checks, I have a couple
+> of doubts about [1]:
+> - shouldn't we check for less than or equal against TPL_MAX_SIZE, instead of
+>   strictly less than?
+> - shouldn't be more correct to check the TPL "footprint" size against the 10
+>   (or 11 or 12) KiB limit, instead only the code size?
 
- test/py/tests/test_fit_image_data.py | 391 +++++++++++++++++++++++++++
- 1 file changed, 391 insertions(+)
- create mode 100644 test/py/tests/test_fit_image_data.py
+Correct, this was also briefly discussed/mentioned in the v2 thread. However,
+this patch only tries to address the issue with TPL stack being placed inside
+BootROM reserved area.
 
-diff --git a/test/py/tests/test_fit_image_data.py b/test/py/tests/test_fit_image_data.py
-new file mode 100644
-index 00000000000..934d9a482e7
---- /dev/null
-+++ b/test/py/tests/test_fit_image_data.py
-@@ -0,0 +1,391 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2026 Canonical Ltd.
-+#
-+# Test mkimage handling of the 'image-data' FIT property
-+
-+"""Tests for the FIT 'image-data' property.
-+
-+An image node may name another image node under /images in an
-+'image-data' property to share its binary data. mkimage resolves the
-+reference by copying the data when building an inline FIT, and by
-+pointing both nodes at the same region when building with external data
-+(-E). Invalid references (undefined target, chained references,
-+mismatching data or incompatible cipher settings) must be rejected.
-+"""
-+
-+import os
-+import struct
-+import subprocess
-+
-+import pytest
-+
-+import fit_util
-+
-+BASE_ITS = '''
-+/dts-v1/;
-+
-+/ {
-+    description = "image-data test";
-+
-+    images {
-+        kernel-1 {
-+            description = "test kernel";
-+            data = /incbin/("%(kernel)s");
-+            type = "kernel";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x40000>;
-+            entry = <0x40000>;
-+            hash-1 {
-+                algo = "sha256";
-+            };
-+        };
-+        kernel-alt {
-+            description = "same kernel at another address";
-+            %(alt_props)s
-+            type = "kernel";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x80000>;
-+            entry = <0x80000>;
-+            hash-1 {
-+                algo = "sha256";
-+            };
-+        };
-+        %(extra_images)s
-+    };
-+
-+    configurations {
-+        default = "conf-1";
-+        conf-1 {
-+            kernel = "kernel-1";
-+        };
-+        conf-2 {
-+            kernel = "kernel-alt";
-+        };
-+    };
-+};
-+'''
-+
-+CHAIN_IMAGE = '''
-+        kernel-mid {
-+            description = "middle image in a chain";
-+            image-data = "kernel-1";
-+            type = "kernel";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x60000>;
-+            entry = <0x60000>;
-+        };
-+'''
-+
-+CIPHER = '''
-+            cipher {
-+                algo = "aes256";
-+                key-name-hint = "kern";
-+                iv-name-hint = "kiv";
-+            };
-+'''
-+
-+CIPHER_NO_IV = '''
-+            cipher {
-+                algo = "aes256";
-+                key-name-hint = "kern";
-+            };
-+'''
-+
-+CIPHER_IV = '''
-+            cipher {
-+                algo = "aes256";
-+                key-name-hint = "kern";
-+                iv = [11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff 00];
-+            };
-+'''
-+
-+CIPHER_IV_ALT = '''
-+            cipher {
-+                algo = "aes256";
-+                key-name-hint = "kern";
-+                iv = [00 ff ee dd cc bb aa 99 88 77 66 55 44 33 22 11];
-+            };
-+'''
-+
-+OVERLAP_SHARER = '''
-+        filler {
-+            description = "second sharer overlapping kernel-alt";
-+            image-data = "kernel-1";
-+            type = "loadable";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x80400>;
-+        };
-+'''
-+
-+
-+def mkimage(ubman, *args):
-+    """Run mkimage with the given arguments, returning the process result"""
-+    tool = os.path.join(ubman.config.build_dir, 'tools/mkimage')
-+    return subprocess.run([tool] + list(args), capture_output=True, text=True)
-+
-+
-+def fdtget(itb, node, prop, ftype=None):
-+    """Read a property from the FIT, returning None if it is missing"""
-+    cmd = ['fdtget'] + (['-t', ftype] if ftype else []) + [itb, node, prop]
-+    result = subprocess.run(cmd, capture_output=True, text=True)
-+    if result.returncode:
-+        return None
-+    return result.stdout.strip()
-+
-+
-+def fdt_bytes(itb, node, prop):
-+    """Read a property from the FIT as bytes, returning None if missing"""
-+    value = fdtget(itb, node, prop, 'bx')
-+    if value is None:
-+        return None
-+    return bytes(int(tok, 16) for tok in value.split())
-+
-+
-+def build_fit_text(ubman, its_text, basename, *args, alt_props=None,
-+                   extra_images=''):
-+    """Build a FIT from a full .its template, returning (result, itb, kdata)"""
-+    kernel = fit_util.make_kernel(ubman, f'{basename}-kernel.bin', 'kernel')
-+    params = {
-+        'kernel': kernel,
-+        'alt_props': alt_props or 'image-data = "kernel-1";',
-+        'extra_images': extra_images,
-+    }
-+    its = fit_util.make_its(ubman, its_text, params, f'{basename}.its')
-+    itb = fit_util.make_fname(ubman, f'{basename}.itb')
-+    result = mkimage(ubman, *args, '-f', its, itb)
-+    with open(kernel, 'rb') as inf:
-+        kdata = inf.read()
-+    return result, itb, kdata
-+
-+
-+def build_fit(ubman, alt_props, extra_images='', basename='idata', *args):
-+    """Build a FIT from BASE_ITS, returning (result, itb, kernel_data)"""
-+    return build_fit_text(ubman, BASE_ITS, basename, *args,
-+                          alt_props=alt_props, extra_images=extra_images)
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtget')
-+def test_fit_image_data_inline(ubman):
-+    """Inline FIT: the data is copied and the reference is retained"""
-+    result, itb, kdata = build_fit(ubman, 'image-data = "kernel-1";')
-+    assert result.returncode == 0, result.stderr
-+
-+    assert fdt_bytes(itb, '/images/kernel-1', 'data') == kdata
-+    assert fdt_bytes(itb, '/images/kernel-alt', 'data') == kdata
-+
-+    # The reference and the node's own properties are retained
-+    assert fdtget(itb, '/images/kernel-alt', 'image-data', 's') == 'kernel-1'
-+    assert fdtget(itb, '/images/kernel-alt', 'load', 'x') == '80000'
-+
-+    # Each node hashes the same bytes
-+    hash1 = fdtget(itb, '/images/kernel-1/hash-1', 'value', 'bx')
-+    hash2 = fdtget(itb, '/images/kernel-alt/hash-1', 'value', 'bx')
-+    assert hash1 and hash1 == hash2
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtget')
-+def test_fit_image_data_external(ubman):
-+    """External FIT (-E): both nodes reference a single copy of the data"""
-+    result, itb, kdata = build_fit(ubman, 'image-data = "kernel-1";',
-+                                   '', 'idata-ext', '-E')
-+    assert result.returncode == 0, result.stderr
-+
-+    assert fdtget(itb, '/images/kernel-1', 'data-offset') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-offset')
-+    assert fdtget(itb, '/images/kernel-1', 'data-size') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-size') == str(len(kdata))
-+    assert fdtget(itb, '/images/kernel-alt', 'data') is None
-+
-+    # The payload appears exactly once, at the shared offset
-+    with open(itb, 'rb') as inf:
-+        blob = inf.read()
-+    assert blob.count(kdata) == 1
-+    totalsize = struct.unpack('>I', blob[4:8])[0]
-+    offset = int(fdtget(itb, '/images/kernel-1', 'data-offset'))
-+    assert blob[totalsize + offset:totalsize + offset + len(kdata)] == kdata
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtget')
-+def test_fit_image_data_reprocess(ubman):
-+    """A resolved FIT can be re-processed with -F, including to -E"""
-+    result, itb, kdata = build_fit(ubman, 'image-data = "kernel-1";',
-+                                   '', 'idata-re')
-+    assert result.returncode == 0, result.stderr
-+
-+    result = mkimage(ubman, '-F', itb)
-+    assert result.returncode == 0, result.stderr
-+
-+    result = mkimage(ubman, '-F', '-E', itb)
-+    assert result.returncode == 0, result.stderr
-+    assert fdtget(itb, '/images/kernel-1', 'data-offset') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-offset')
-+    with open(itb, 'rb') as inf:
-+        assert inf.read().count(kdata) == 1
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+def test_fit_image_data_invalid(ubman):
-+    """Invalid image-data references are rejected"""
-+    # Reference to an undefined image
-+    result, itb, kdata = build_fit(ubman, 'image-data = "nope";',
-+                                   '', 'idata-undef')
-+    assert result.returncode != 0
-+    assert "references undefined image 'nope'" in result.stderr
-+
-+    # Chained reference
-+    result, itb, kdata = build_fit(ubman, 'image-data = "kernel-mid";',
-+                                   CHAIN_IMAGE, 'idata-chain')
-+    assert result.returncode != 0
-+    assert 'chained references are not permitted' in result.stderr
-+
-+    # Own data disagreeing with the target's data
-+    other = fit_util.make_kernel(ubman, 'idata-other.bin', 'other')
-+    props = f'image-data = "kernel-1";\ndata = /incbin/("{other}");'
-+    result, itb, kdata = build_fit(ubman, props, '', 'idata-mismatch')
-+    assert result.returncode != 0
-+    assert "data does not match image-data target 'kernel-1'" in result.stderr
-+
-+    # image-data combined with a partial external data reference
-+    result, itb, kdata = build_fit(
-+        ubman, 'image-data = "kernel-1";\ndata-size = <0x10>;',
-+        '', 'idata-extprop')
-+    assert result.returncode != 0
-+    assert 'must not be combined with external data properties' in \
-+        result.stderr
-+
-+    # A complete reference is rejected before the import when compiling
-+    # a source file, whether it uses an offset or a position
-+    result, itb, kdata = build_fit(
-+        ubman,
-+        'image-data = "kernel-1";\ndata-offset = <0>;\ndata-size = <0x10>;',
-+        '', 'idata-extpair')
-+    assert result.returncode != 0
-+    assert 'must not be combined with external data properties' in \
-+        result.stderr
-+    result, itb, kdata = build_fit(
-+        ubman,
-+        'image-data = "kernel-1";\ndata-position = <0x1000>;\n'
-+        'data-size = <0x10>;',
-+        '', 'idata-extpos')
-+    assert result.returncode != 0
-+    assert 'must not be combined with external data properties' in \
-+        result.stderr
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+def test_fit_image_data_cipher_invalid(ubman):
-+    """Sharing encrypted data without compatible cipher settings fails"""
-+    # Only the sharing node is encrypted
-+    its_text = BASE_ITS.replace('entry = <0x80000>;',
-+                                'entry = <0x80000>;' + CIPHER)
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-oneside')
-+    assert result.returncode != 0
-+    assert 'only one of them is encrypted' in result.stderr
-+
-+    # Both encrypted but without any IV source, so each would get a
-+    # random IV and the ciphertexts would differ
-+    its_text = BASE_ITS.replace('hash-1 {', CIPHER_NO_IV + 'hash-1 {')
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-noiv')
-+    assert result.returncode != 0
-+    assert 'must use the same iv-name-hint or iv' in result.stderr
-+
-+    # Different explicit IVs would produce different ciphertexts
-+    its_text = BASE_ITS.replace('entry = <0x40000>;',
-+                                'entry = <0x40000>;' + CIPHER_IV)
-+    its_text = its_text.replace('entry = <0x80000>;',
-+                                'entry = <0x80000>;' + CIPHER_IV_ALT)
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-diff-iv')
-+    assert result.returncode != 0
-+    assert 'must use the same iv-name-hint or iv' in result.stderr
-+
-+    # Different iv-name-hints as well, since a hint drives the
-+    # encryption whenever it is present
-+    its_text = BASE_ITS.replace('entry = <0x40000>;',
-+                                'entry = <0x40000>;' + CIPHER)
-+    its_text = its_text.replace('entry = <0x80000>;',
-+                                'entry = <0x80000>;' +
-+                                CIPHER.replace('kiv', 'kiv2'))
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-diff-hint')
-+    assert result.returncode != 0
-+    assert 'must use the same iv-name-hint' in result.stderr
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtget')
-+def test_fit_image_data_cipher(ubman):
-+    """Nodes with identical cipher settings share the same ciphertext"""
-+    keydir = fit_util.make_fname(ubman, 'idata-keys')
-+    os.makedirs(keydir, exist_ok=True)
-+    with open(os.path.join(keydir, 'kern.bin'), 'wb') as outf:
-+        outf.write(os.urandom(32))
-+    with open(os.path.join(keydir, 'kiv.bin'), 'wb') as outf:
-+        outf.write(os.urandom(16))
-+
-+    its_text = BASE_ITS.replace('hash-1 {', CIPHER + 'hash-1 {')
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-cipher',
-+                                        '-k', keydir)
-+    assert result.returncode == 0, result.stderr
-+
-+    ciphertext = fdt_bytes(itb, '/images/kernel-1', 'data')
-+    assert ciphertext == fdt_bytes(itb, '/images/kernel-alt', 'data')
-+    assert ciphertext != kdata
-+    assert fdtget(itb, '/images/kernel-1', 'data-size-unciphered') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-size-unciphered') == \
-+        str(len(kdata))
-+
-+    # The shared ciphertext can also be made external
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-cipher-ext',
-+                                        '-k', keydir, '-E')
-+    assert result.returncode == 0, result.stderr
-+    assert fdtget(itb, '/images/kernel-1', 'data-offset') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-offset')
-+
-+    # A shared explicit iv works as well: it is honored by the
-+    # encryption, retained in the FIT and yields identical ciphertext
-+    its_text = BASE_ITS.replace('hash-1 {', CIPHER_IV + 'hash-1 {')
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-cipher-iv',
-+                                        '-k', keydir)
-+    assert result.returncode == 0, result.stderr
-+    ciphertext = fdt_bytes(itb, '/images/kernel-1', 'data')
-+    assert ciphertext == fdt_bytes(itb, '/images/kernel-alt', 'data')
-+    assert ciphertext != kdata
-+    authored_iv = bytes.fromhex('112233445566778899aabbccddeeff00')
-+    assert fdt_bytes(itb, '/images/kernel-1/cipher', 'iv') == authored_iv
-+    assert fdt_bytes(itb, '/images/kernel-alt/cipher', 'iv') == authored_iv
-+
-+    result, itb, kdata = build_fit_text(ubman, its_text,
-+                                        'idata-cipher-iv-ext', '-k', keydir,
-+                                        '-E')
-+    assert result.returncode == 0, result.stderr
-+    assert fdtget(itb, '/images/kernel-1', 'data-offset') == \
-+        fdtget(itb, '/images/kernel-alt', 'data-offset')
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+def test_fit_image_data_overlap(ubman):
-+    """Sharers' load regions are covered by the configuration overlap check"""
-+    its_text = BASE_ITS.replace(
-+        'kernel = "kernel-alt";',
-+        'kernel = "kernel-alt";\n            loadables = "filler";')
-+    result, itb, kdata = build_fit_text(ubman, its_text, 'idata-overlap',
-+                                        extra_images=OVERLAP_SHARER)
-+    assert result.returncode != 0
-+    assert 'overlapping load regions' in result.stderr
--- 
-2.43.0
+> 
+> With the new layout the check should be:
+> code size + BSS + GD_SIZE + TPL_SYS_MALLOC_F_LEN + <min_stack> <= 12 KiB
+> 
+> [1] https://github.com/u-boot/u-boot/blob/main/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+> 
+>>
+>> Update TPL_STACK to use the top of SRAM address and reduce MALLOC_F_LEN
+>> to 0x200 to avoid overflowing global data, malloc area and stack into
+>> the BootROM reserved region.
+> 
+> The new layout is certainly safer, but I wonder if we are losing the
+> opportunity for TPL to have approximately 2 extra KiB as they are not used by
+> BootROM once TPL returns to it. I mean, it would be useful to know where
+> initial values of TPL_STACK and TPL_SYS_MALLOC_F_LEN came from, and the
+> rationales behind them. If Rockchip were to assure that preserving only the
+> first 2 KiB of SRAM is enough for SPL loading, keeping these 2 extra KiB on
+> the radar could be useful for future TPL development and/or maintenance.
+
+Please look at v1/v2, they safely allowed for up to 11 KiB TPL. However,
+that change should be handled in a separate patch/series.
+
+Some of vendor ddr blobs continue to use the BootROM stack, and others
+setup a dedicated stack at end of SRAM. Mainline U-Boot use a dedicated
+stack, and it is placed at end of SRAM for all other Rockchip SoCs.
+
+This patch tries to align PX30/RK3326 to use TPL stack at end of SRAM,
+ahead of a future pending TPL consolidation/refactor series, see [2] or
+deep in my work-in-progress branch at [3].
+
+[2] https://git.u-boot-project.org/u-boot/contributors/kwiboo/u-boot/-/commits/tpl
+[3] https://git.u-boot-project.org/u-boot/contributors/kwiboo/u-boot/-/commits/rk3562
+
+Regards,
+Jonas
+
+> 
+> Regards,
+> Massimo
+> 
+>>
+>> With these changes the memory layout looks something like:
+>>
+>>   [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
+>>     [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
+>>     [0xff0e1000, 0xff0e4000)        12 KiB   TPL area
+>>       [0xff0e1000, 0xff0e3800)      10 KiB    code
+>>       [0xff0e3800, 0xff0e3848)      72 bytes  BSS
+>>       [0xff0e3848, 0xff0e3cd0)    1160 bytes  stack area
+>>         [0xff0e3cd0]                           stack pointer
+>>       [0xff0e3cd0, 0xff0e3e00)     304 bytes  global data
+>>       [0xff0e3e00, 0xff0e4000)     512 bytes  malloc area (unused)
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>> ---
+>> The overflow/wrapping was runtime validated on a RK3326 ODROID-GO Super
+>> by printing out content of [0xff0e0000, 0xff0e5000] and comparing the
+>> initial 4 KiB with the 16-20 KiB and the data matched 1:1.
+>>
+>> Changes in v3:
+>> - Drop TPL_MAX_SIZE change
+>> - Keep a small 512 byte malloc area
+>> - Update commit message to reflect changes
+>>
+>> Changes in v2:
+>> - Mention BSS in commit message
+>> - Update spelling in commit message
+>> - Collect r-b tag
+>> ---
+>>  arch/arm/mach-rockchip/px30/Kconfig | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/arch/arm/mach-rockchip/px30/Kconfig b/arch/arm/mach-rockchip/px30/Kconfig
+>> index adba1b49a52b..0088d436d36f 100644
+>> --- a/arch/arm/mach-rockchip/px30/Kconfig
+>> +++ b/arch/arm/mach-rockchip/px30/Kconfig
+>> @@ -81,10 +81,10 @@ config TPL_TEXT_BASE
+>>         default 0xff0e1000
+>>
+>>  config TPL_STACK
+>> -       default 0xff0e4fff
+>> +       default 0xff0e4000
+>>
+>>  config TPL_SYS_MALLOC_F_LEN
+>> -       default 0x600
+>> +       default 0x200
+>>
+>>  config DEBUG_UART_CHANNEL
+>>         int "Mux channel to use for debug UART2/UART3"
+>> --
+>> 2.55.0
+>>
 
