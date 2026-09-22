@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D175AC982FD
-	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 02:20:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 482D8C982F1
+	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 02:20:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 93C4660714;
-	Tue, 22 Sep 2026 02:20:11 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0638D60787;
+	Tue, 22 Sep 2026 02:20:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nkTm20YlOhPv; Tue, 22 Sep 2026 02:20:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 88E1860703
+ id l8dmXSSMN8ia; Tue, 22 Sep 2026 02:20:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0FED860778
 Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1790043610;
-	b=bOeZmqCWFMnMjHAZrd0yPj9IVmRXZ8fNIFp615igtEIF6nycjki8ULUVGsIkT0eGq4Jq
-	 1Geov1827RquQ7SQmx4z7uJsr/uUm81oTBussfhTtmXG+NqW/sSGq6wBzVM09fnMtEPLY
-	 LU1CMqNg4VmtV9fC+L6bWDD/dnRzZYmayaV63sf2CaUXGL0D0W9RTpZmICCDnGJPdVAPz
-	 /QmfLGtfNK+8+mRtyhPl4CbfE4myJbe7gLIyGTxoGw8ozGyzXKlI6moWba2jQCnDLWJcX
-	 rhK2lM9/KE2F2/fVx5StPjf0j+ZIJ7lK9mWvsBBlKp2zvu6f/tKIQ9vwHHDsfe/nrJA==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1790043615;
+	b=EZ9MwX6TwPPo9W1XSXO7TMPp6FHaYZZTB6uJxguKlvEci/mrhfVjD8FyoXDexA5+/8sZ
+	 5Z7tzO7EiGWrGJ3tQUJWtzQjgR9JoSxg+q0PHy5fEQqEWHCUIJTWOMFPQhphR4N8R09bm
+	 6bCmcw7C5O5ECo1G+tcbkzA53YTYbgM+5ho45anwVI2WeDnkbBi2lz06Am+XuCZLPydO+
+	 Bxw5m7nhQ3h5XdEhErpmnMUIEco8MpZHyninuqSrTCeSFiKM589JnuSkZ4aXF+0zUfuBc
+	 2aTNGNQ04YfQ1z4E1TfFBbkhOL0+UAFRUZjQsEuo+nDvGb3ZNEtyEbn7CGyKhf877tQ==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790043610;
+	c=relaxed/relaxed; t=1790043615;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -44,51 +44,51 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=FaPyP7G8F51QWEiPKJxJQkkpY+E0KFf7GH8UveeUmz8=;
-	b=jI9uB6h4/1Z72iu0FQFGVrIDRhxyDbsY2YWNIIKlBWZOeTZVTRKx5HxmmG0XkXBTsiGd
-	 KsPdbtQq2fMPZqKfM0bcmKRY6zm7bMrkGHNOjz+JAHRL3pHzR7i3JN3mxmvshKwnliVn3
-	 kLy4XHZ/lMClW8Uchu++c0VCVYRhnSNnermaLqKDWs7nhokmDojjPYBFkyWXmUxRa1kEm
-	 hM5VF/FNkNyONvywyBFCtLLdmowRtTsCFf78zKeUlQHCqWiM7+RFvJVvc+CcKzqPLXnUg
-	 BOuHriCS8qN9Bf8COp9ny3cstoCAV+lm4KtZcQa3GWdcy040hxcKCIfJ/IrxpHo/Aww==
+	bh=T0Ih9hDPUeJ60tHaOE9DHw6747hkAVBG2Ow2hVAoeeU=;
+	b=XNfZ1F2F1lbZgt34fwXK6R/O0TsNQ7Dc8ac2yhzmS6S+KBgfDOM5oXRmM6KB/jfLy7FT
+	 MvehdybBEbornODPyr8x2hwGBCdI0TD0YB4nC3TqaW0FLeHzECe4O48jlXCm21dFlFz+7
+	 b7g2VlhYkWT0jYHvKLSE50hvlnhyoIAzM/yrsHGRw5GWdiqs3WKRXZ968fH2ZNYm7NPUy
+	 2I6/4nA0pF1+igDo4/IQCa3kaxz5FKYXyP0rouJYqYgT6x1UU9ye7s6CrDZmqEkMcCTQm
+	 Vlz3trLkc1T8L1+g4TwvQ3RkRQmnmxmzFuBt1A70hPFOaMBnYzr6wKjWgZ23/dBCSnw==
 ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790043610;
-	bh=FaPyP7G8F51QWEiPKJxJQkkpY+E0KFf7GH8UveeUmz8=;
+	d=lists.u-boot-project.org; s=default; t=1790043615;
+	bh=T0Ih9hDPUeJ60tHaOE9DHw6747hkAVBG2Ow2hVAoeeU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NKHo6jmOn1D2iJFProjvLmZwIu4y4p+tGMEcCDwjyXTg7kRVHv7PnyYsVAC8y4JCa
-	 jONnpL0abJaSghVgveHzDjACiSX0FNvGks2lXm2iW+ePuzLET95otDMUH4ryD1wz3m
-	 SHQC5GDIYKucfmH8dxeEK9qCQcf51hO4kKZPORFbbBLYPmUdjVYQOjW9KSzl4fER0I
-	 jByPFRh60hgzx0o3Yat6kohyX4j581Wkcc0ulpEn1dx3Yzc1WzDxx0tD2fs1dpXlMn
-	 5Gg1XGJjU85ZQXPsxtzlqVMRye61qhJr9BHxQe527G2MrZSyExvJ1E6GC5a7Bx7chk
-	 X9c3nuYNj+gvA==
+	b=the1zbZfQEkxfEXdGXz2voDAqYByakphFl1LqsBmZ0mxIeZy/eM+6E5GSkig3ujUM
+	 zylrr+UZwk158GC0hDkA8T2Lca6bXoo+c+qglh6T4rB3Quo7V3jRYBHUi4cGi/K2n2
+	 PNeGWc1gxmVpmer10DqoVoMHXZrLdoZ+ntNMrmXnmXQw9xBtzyYsOFYxTNntcBWPn5
+	 fcKcV0qAXgQBOULDA3HSBot269UzmVoa25MLB8VK3p+XYOcRUmfBhNWVlRQ9OdtMty
+	 vkkmJgCoiAiVBS9hgi7X3aP4wU93xHxN9JGX8vMXzpx6KgTiKQPGquIbqXcRusgrNO
+	 zz7x7Pds9hUGA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 88E1860703;
-	Tue, 22 Sep 2026 02:20:10 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 965959D1
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:20:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0FED860778;
+	Tue, 22 Sep 2026 02:20:15 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 76414B02
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:20:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 7C44E80DD3
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:20:09 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 67585400BC
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:20:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1K_hzTzz0WpD for <u-boot@lists.u-boot-project.org>;
- Tue, 22 Sep 2026 02:20:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org F285E80DCC
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c201::3"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790043608;
- b=FY6ikZY/YWdRt44P3cdgmSfuCuffTcUZJZreuMoSY9hcwlo9wM5bkkwgWn+mH+0r9Ihn
- 1cMy9jiUHP1LxOBbc1MSj8L/OnvpWCXdWqQYdPlBtYDjiR6UoEQEJ4mWAsQnv/Xv+TBy0
- BMJM+RC/V2zQ+Qx3SQBL30SIYudQsMHdCNTUt1yTsHa1DJydWzn8O0UYpVYBdnp1YDby2
- m/Wzd6ZnJY6WCF1LCoQJYGTODQbY+ppk6IBO+IiBCrZDxvT/O9FWnHcRaVXIv9MaAexab
- l9eMtLJACYqymECMJxF1qKD2AZr5x7//ctF/3PM+xJsp+7rthjklllyZNb1v7QmLIbw==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pLrr9ngrxNvf for <u-boot@lists.u-boot-project.org>;
+ Tue, 22 Sep 2026 02:20:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 055AF40081
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c207::3"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790043612;
+ b=fCYVdMzPi2gy/R3bzS3br+ky0DtUCXA/ILDW/W9oLCgm/Fp0fVucQ+iP2MH6KFgxjQvO
+ sViKLTft+Zxb7LqbgngLqEjir0gEyYegw6EFY+WZwBbSaK0pIAAtkkazkeYhVjyvfbqcW
+ cYDF5xDUBQHQ3vESBtxDT4jVezPU7XWXPVCH2IqwAR4knnSZPqmUJ/DtnpC/Ok9O5nAcY
+ 0LoIn/QesNlAiihiM7IPMJH8VIIiSzdJmD6amDOwCArAqWja3jPhQR02gVaowMYIcYhbz
+ 9A9irfyZaVNgfhYbt79UeyybDSGa3Asm51XiPDo8P4k9VU3i/tus0ibBhf/wNsFJ/tw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790043608;
+ c=relaxed/relaxed; t=1790043612;
  h=Received-SPF:DKIM-Signature:Received:Received:From:To:Cc:Subject:
  Date:Message-Id:X-Mailer:In-Reply-To:References:
  Content-Transfer-Encoding:Content-Type:X-ClientProxiedBy:MIME-Version:
@@ -106,128 +106,129 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
  X-MS-Exchange-CrossTenant-UserPrincipalName:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=FaPyP7G8F51QWEiPKJxJQkkpY+E0KFf7GH8UveeUmz8=;
- b=ZCidK5LpsO28v8i/bryS3C16eqMaXvd3G4F65ogL141ut36MWmUl1vLJUnTsFwcEqquO
- XEnoyhCt4+y7M6CDEGUYBD78IANyDvTnD/RFwSIYorpn+9wSnhNzlJm085xELDQKzHn3y
- +5I7mAYKr7DGElN0Flq71R6r9qJZNdXwL0I/Qt5lqwc8K59h+LMGnuQmZIykXSZTLMdA8
- Az1klU2zWVzFV/lZl/OKTA6X/eTorGjbJYe7sce0nMAVL0DNHFL/QpAZJ7jUYa8JqW9Mb
- /raEU1AJTtOMZ43A8Xzv+47A0xZzo+E+NmJzApUGS4ZEXkFIU8D7k9bpm4E8EwMpdWg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org;
+ bh=T0Ih9hDPUeJ60tHaOE9DHw6747hkAVBG2Ow2hVAoeeU=;
+ b=RDYW7gGxmP+NzWRSVSkCxmYp1mD/wjYK11I+TkeMZorGm3MgVxIZmxcO3XEmVJyj5mcq
+ qLvHTxjVVgLNxjEh+iIfOtsCTXlzoT4Vti7zXXaBQq73WwZqsPWFYb83VrTOAYUEOrN+C
+ +xq7qGkP7aeZq611efK90BZi2a72ZoErXzXpmDIyvkEDcigehwtlz+EoNsi/6auRtYdyX
+ FYBa/NoOM+6NKMpWrcUdNn25vJG3buHPzvLrNzunT3jJROpzJu6g51leihms/nIO1MF0I
+ DppWqHjIUoRQNtF21bRvSDm18bOSWSnjNojg6aR7beAJMc1yaquV4W8zisTytI7tmrg==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
  dmarc=fail header.from=oss.nxp.com; 
  dkim=pass header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com
- header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=XeleE8M0;
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c201::3"
+ header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=DQjPTa0D;
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c207::3"
 Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c201::3;
- helo=as8pr04cu009.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c207::3;
+ helo=mrwpr03cu001.outbound.protection.outlook.com;
  envelope-from=ye.li@oss.nxp.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=fail (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com
- header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=XeleE8M0
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- by smtp1.osuosl.org (Postfix) with ESMTPS id F285E80DCC
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:20:07 +0000 (UTC)
+ header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=DQjPTa0D
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 055AF40081
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 02:20:11 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WNchPY/ZYm2+/kbRwcgsstvulI0T4Bo2uYg/VPkH9oWX8Q12LZCIZQ33D3OIWh1cQHh5xVJ9ihhZLGaZOOsbEGXcalrnj+6Unl5xjeYUYqsnX+Nv3BcMAfUJNSVKl0c8MO2eBWJ9J8HSMOA/2R5ujGRRslShrpuv0PIeZYcOznlUkjbUBgVIOiyT4qqS1PmJAaaPUGKiVZNPaiVBjf1ejd2X1NwZJmusAbyeE8yJ/BKxNi4z8GjZnjmM9ajf+SP9y5thLHGU5L4EwA6okpCLlb5ddl2FWGP9nKSiryzRYQdoIoABPFZAv5XNZG0rUg3G9cqbIxgqvNXKMnDA/dFBfA==
+ b=cBttJQ4jGJgycSIDS/BYh8h0ielNXIHzGz2ilh2iFHaIgNDU4M6IL9LuzksBZrVS2PqxAMiljjNM5Hmjy81FWYivsMBqX6/hzhdEen9LPu17WIZgtXw2ZlGucyjovwFS3lGBdOxws+uWnuL48G7M0bJg5WeFxbw+i58RKhutLdfMK12yIuY3Qh5J/UbFZuxRVOZ9Uc9OjJIkA+BNqALJ6Zz8PvFtPtLshdvgzpo1sB7ge2XBxVY3Cr+ewgAQtyq9S1KWIay2tZ7ZkXN62SFkUrzk32muW1hzKocpZNaDerP9NUfJDTRPAROlQlgXxzWyNGwumIGLUmEuU12QyuMTwg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FaPyP7G8F51QWEiPKJxJQkkpY+E0KFf7GH8UveeUmz8=;
- b=agrS8pB7x4sUuOVCMjwnqls7U7xFKRfX03INtTFCeqNdVwPFUxpfvdUirMhbK5kiMtSOYRuVoJBSt9xhj+pxsVgk4k/IS+0oK1xhvjY5+FGktXAwcl9th0plVbSrG9O58AIUyPS0G6koQkEV9cPzub0HQyQr0TnDQRcu+pVkg94rnzx1ocVADH0NUpWSZ+FmLUMLktHvagEVtErM/ghI9KaJNxiOtY4o9Y5YoFv6Gk3dCBf/FKCx1K+PxML1i8HWmgEeU2tbMTkXRZnMl6WkPoq4cr/rq4Sro6ZEdsvWkntIkAyz9YFNA0sY7gGsmwrXc11pBt+DP/ZdVsPJM5xflA==
+ bh=T0Ih9hDPUeJ60tHaOE9DHw6747hkAVBG2Ow2hVAoeeU=;
+ b=u3JesPzVubXj1EefPEGUUL/qMbTLBmtTcjvOLuY77SHgj1UafVLDRv9zCjnvYl1NVfKGz5mRf/DQw+8v6t/OqyXwe+OfOUJ3M6uzyuqYppyL+6tBXy77LwF/Wd2NVPH+z+8F0vcQZ1Kd6rB4XMH+WC7DJY5WGYRzaUMx3eH3cm5yPtpFlJa62DLT57XrQwwzuRnXg5DV5oLxIEwwHUa+mssSGAaDb8G12zO+v2tfZ5nKOfXelju8VYhWUgUgikE/lKr2cT/pWw6ckPkfaIzosr+xAJASK0peSPGFywkWfIodIjnuEeads5p4eXLJKUFBp84T8kD+BWBZop8Ml9InoQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FaPyP7G8F51QWEiPKJxJQkkpY+E0KFf7GH8UveeUmz8=;
- b=XeleE8M0SmffXK5uy12EdOiJVRhXzarfcOWw/q3lFI5aOKXb4mfyOdvBKc2D3qEXQKfTg6fYEkagke/ee1uvREHuPeWwCQH8+5KMr50Nkf8BNdeDGtN8Prj3R8Vh+rrbXrTbU/fWUsbCXhDIgrrIJynwCDLVuKZYcoMigqXuJrykWiLVufMfmd8AOlq9L4beD/JWADHDu8iRpx7PYQc/RgZhY7/G/FFDlDnd6zlkhtFn9AlD121oNsdyDWwyBA4LfBhDNzTiB8mUl7pzyuyOTfWwbQsjSi0tb02c8p3Yi5FPgLd/yOK7wdwgd13mEcYF3SldPjIm7KKO+HEkEOFQMA==
+ bh=T0Ih9hDPUeJ60tHaOE9DHw6747hkAVBG2Ow2hVAoeeU=;
+ b=DQjPTa0DXZRH+66RXDuoYhnU/usH2l7orxTel8VT0SS568NR/KJ8uJ2jRshIycHpOFZ9pa0YBmT5UNw5zF2svdnkmxX7DIqipBwKUB6gcUaTZisstqAqkvx6k/WbDSZKe6d3XtKiy0tv4iJOEQG9rwJfbLkDR9pUu5ScH9WoOenCTEMaBiPkC9G4P/OBLgPI90aWbzjg0GdEC5FakF890D5apd7LMt+DrlqAxNI3VHWrakATZ4m8/HLibFfOnxmn/LOc0YbbXscVNKcXHSYoyRf4y4svePldJyjbspzw4WzOsI6Q1VhFnAIiYEonCXyse9Kdtl9SaIfJen4Wsz6jIg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from DB7PR04MB5130.eurprd04.prod.outlook.com (2603:10a6:10:14::32)
  by AM0PR04MB6803.eurprd04.prod.outlook.com (2603:10a6:208:187::7) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.16; Tue, 22 Sep
- 2026 02:20:02 +0000
+ 2026 02:20:09 +0000
 Received: from DB7PR04MB5130.eurprd04.prod.outlook.com
  ([fe80::299:61d2:8995:f85b]) by DB7PR04MB5130.eurprd04.prod.outlook.com
  ([fe80::299:61d2:8995:f85b%6]) with mapi id 15.21.0428.011; Tue, 22 Sep 2026
- 02:20:02 +0000
+ 02:20:09 +0000
 From: ye.li@oss.nxp.com
 To: festevam@gmail.com,
 	u-boot@lists.u-boot-project.org,
 	peng.fan@nxp.com
 Cc: uboot-imx@nxp.com, alice.guo@nxp.com, ye.li@nxp.com, qijian.guo@nxp.com,
  francesco.dolcini@toradex.com, emanuele.ghidoli@toradex.com
-Subject: [PATCH 2/4] imx9: scmi: Support early caches enable in SPL and u-boot
-Date: Tue, 22 Sep 2026 10:24:04 +0800
-Message-Id: <20260922022406.1838737-3-ye.li@oss.nxp.com>
+Subject: [PATCH 3/4] spl_imx_container: Fix verify image after SPL dcache
+ enabled
+Date: Tue, 22 Sep 2026 10:24:05 +0800
+Message-Id: <20260922022406.1838737-4-ye.li@oss.nxp.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260922022406.1838737-1-ye.li@oss.nxp.com>
 References: <20260922022406.1838737-1-ye.li@oss.nxp.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SG2PR02CA0135.apcprd02.prod.outlook.com
- (2603:1096:4:188::23) To DB7PR04MB5130.eurprd04.prod.outlook.com
+X-ClientProxiedBy: SG2PR01CA0190.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:189::11) To DB7PR04MB5130.eurprd04.prod.outlook.com
  (2603:10a6:10:14::32)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB7PR04MB5130:EE_|AM0PR04MB6803:EE_
-X-MS-Office365-Filtering-Correlation-Id: 18de207c-e752-4f5f-80b8-08df18500241
+X-MS-Office365-Filtering-Correlation-Id: 88288dd8-e5e2-47c1-5beb-08df1850063a
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|23010399003|376014|19092799006|3023799007|6133799003|11063799006|10067099003|56012099006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: /Ib+5lIoUtm9udO4YUecW+IzokLZlmmxNv4LuwTnclKLzL5bRVVNGdImSJwLwGcjCN55NK7llwwjEDvfhlWSbi2FzCyDrjVSFjOgNl4jp0bGMQeEcnzs5jrXS1ACuA6dhy/V96gMFXjyHzRstMjkvTFvRabwyZWIyY85rrJSPAU1kQzFuFgt3s1uTmH6iDk2AWj716qjQMQn/51HozNUkVingl1EnsbFpzPOiB+2nk7R+9ZzALe1nLtschLgCktTwzCl/+aTU6XnbSc+3yLWW6Atc7eMCAzuTdKyneFYuLMr/McRyyGIVfKaG01OgEGrXpa1PI0VQihyuBv0FaH9hWttzOtFkEnX3KUb+6Cb5WxRz9rSGrbUAmxe1EBd++Y9l902M1WxSCTyYM8NEcn+C/u6WDDHquuVQlxRf33vErs1CDVOb2GM36x5/hVM4se6eMoKarmVsSq2Z0duShp9HJ6nKQ53HHPFp7jd/8J/dtY/4unfqa3ESiX1GjYapvLNAVwboSEOuIdTEHE2g2vs3QCoKsr0IDWTvNWzhcnHgi4KCpW4bsri/zsn91ZM3eKAJ070wvJYfnxhYu5yuKu4EVfNcc82iSwTV/wN/75x4FhfQs8LKP4tGDbsLT8NdZd1Llyd7hiHsAtsLe/atk8dvPEBlIK7Q+dqynxf7UKWJLA=
+ ARA:13230040|366016|1800799024|23010399003|376014|19092799006|6133799003|11063799006|10067099003|56012099006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: hRxOe9ihlMmGf5UASmDJLNtD1LMB2/YlCxv5uhQr6LgD8tZ1D6TUNuPOK/f3aXxCHXacJVGS7QdGz73+njENPxNv5JCQpmdBl6R3V12Bxzs1k+boHZQMsv1CIAwRyadFSvJdXSySYhga8LIe64C54iNKQF13B3mIlWL18JLjJj/W72dMr8JuB9X4gN5WNWTo2dWLQs/pufXyD9MuKZoLO0ej0mVaJ6PHHclv7xoBgexHv0J9zhT4HoKmzvyOehHwjK6IMKcsMHi5w8hQNpCGA6CSx+oUF2i0ojlZGqa2APWwG/vmZJ0IyZ9JtsNEt4dXsG12xQCPYQjyRu0ciGy+ZM95S5Xr2V/M50SRK6D1B4Fcq6QipRkxUoXKJXiU3KrbqrHkgQfjR87prbAzgZZ3R3isD5yDVRLJfeauFgQq0VNCQhcOaSOYaTJQSs+NLrcTJr3V+sLhmevk/j+p9CGNu5C8jfLV2e/U0aybwHP02+5OBtg8ov4j7FoNSjQi3Ig4DkqnhMeKCVuyar20z3JvhKjhDewscRt73rAxcLqQrh69eAOm2GBvi5RF2ZQSX1dB2c3yg3AupW7zaPIlD99ifavDpjTV8AvFZgo034gIVT5+Ds8aPvMJ5gmeSzBUqUa9Z9cXC+Z88jnd+1TquNfKTzfd6Vr7IUDv0zWebbKhx/0=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB7PR04MB5130.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(19092799006)(3023799007)(6133799003)(11063799006)(10067099003)(56012099006)(22082099003)(18002099003);
+ SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(19092799006)(6133799003)(11063799006)(10067099003)(56012099006)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?/cro/Z9F5K28m5bxNKtwasVIi/l65X7vfYzo/n7DBJHX/HGQ/XFLu6m11wF3?=
- =?us-ascii?Q?GU6GVmVilrZsCZJt1OoqnEngh59yi7ibr9lTaZoWF7Sk9KhELevUwib/fqZr?=
- =?us-ascii?Q?U7edx2PdQBjibjFL9zGyTrhwKXkTbOPyx7gvD+FoROTv13ECvNBm2qsOxfkE?=
- =?us-ascii?Q?DNTQ9bvza+pgt6i8Bhe2kwZT8OaRytfgp/qES3ExdffGrWBt+gzEVOM/8+Wh?=
- =?us-ascii?Q?ivwK5FLgbI6evhuDvUJXabwiBCFbU1e1t1TBXLneCYL3V5NuaBBRiNbGTVDf?=
- =?us-ascii?Q?BTKOZpWI8kZ4FLEgAWP3WZqAOXyzQm7ELoUvKpv7FQkinLz/r/ThJm2AA54l?=
- =?us-ascii?Q?IWfVeKmJxh+9blU8BSR3lWM1e1YnckeAdXPY8BmFV0WnS1ABd1bkFDbjqkBy?=
- =?us-ascii?Q?c8STNJVKqOaaX95e8cC8oi4PRdvZU9mq18TVsIUOmPNYs4iXrLdJpixlrX21?=
- =?us-ascii?Q?0iz7JlQvM0Hd7fO1SSHiN+IPu+bG4UEI1aQbsc86Vb/oBq5ulQTf4LlMP6Hy?=
- =?us-ascii?Q?b21w1rk9FpEwQQ1/8Y2zCADCVQCE4kfyct8UrHcsJONdr6pk4MRYVuNeMCP8?=
- =?us-ascii?Q?QiO7EbAlb9SiLzzxl6ZcTlVdbc0/T4Cuk8nP5hHBH4hwBVS11kFPNCVrVSw0?=
- =?us-ascii?Q?6ZEO2VDuoZ8JDAUFrxxzLqQInk0O6cXvOtMHXsJfmrTtfgu0MAMBGBcV5mM5?=
- =?us-ascii?Q?qyWZJwvV4uM8k6LnK/Ye5GW/5i2elhdRV1fYeDTJQ1/ZJkZi8n77Tuhs9tb7?=
- =?us-ascii?Q?NkDpnJ4A+OJJXAUuzV0YpLt7epKB1M15h9nsMa51jqaYp6MdXEop5YD/yTgX?=
- =?us-ascii?Q?nfNSEThoVwaTNPAn/9h4Z2VUfx/IKJUZX+ELuXR6W+me7e+1QPCM2ElwIE2E?=
- =?us-ascii?Q?7d6lFHkwogmfEQCM2LP3dyh7hlGOUwgYLhI6iU0bK+xUTzGioXU7VXTWKc/D?=
- =?us-ascii?Q?Ivl7UKRf0a870KRva3Gv+VeOCUERn3YnLtQpLKA3/pQPLyVfX5wjO/jLPEKu?=
- =?us-ascii?Q?TeUu5ws+vupln3edSnyTdMuwKU85SmAf+af4d3RMKpeF9E/grgtlXNRenc0f?=
- =?us-ascii?Q?22d7+YQmdIOWuOnrkEYBo3LaujMOV1C5rCvchvcFj3n1f7LFixiy0r//uJoJ?=
- =?us-ascii?Q?c1kpTzMnQJzThNJzKGeEFDUoafXLVGX7zbO7jAx7/9tP7hzCtz1vKVvZfIFv?=
- =?us-ascii?Q?KbtZgRfuDegODG7/qX6wG7WHLWgZO8s8kkm2q2uR0d4OHuRoI3uBIjnfBwPR?=
- =?us-ascii?Q?iaN9r4bqq48ctTqLosTVjPhiWD5GEnlIS09USkJnhuCerRKAbKS+DIznXFJp?=
- =?us-ascii?Q?PTf0vwfkg788pVSJ38/PzUwAoDP88OlcVtPDGZlMGbsJWhrs1XS4zrg/CxB4?=
- =?us-ascii?Q?y1O1bHGrgMFi3WJoHimccE8af/M/4HfbpU3646iY35ZcU9STqkYvKGhPEwSS?=
- =?us-ascii?Q?67Fs7erCIKRLLN1iK8NmnWA5cf6gsm5ij7JMatEUMqczA/ei7kiRB+L/ZwcH?=
- =?us-ascii?Q?vT1gWuJM2UDHb7vtl8F7YPBIrxNNFETOo1fWtoenSmQGsgh8v1r4q55WxoXr?=
- =?us-ascii?Q?D+nXbVBtKiY3joweOt8jFTDHiXLBGO5ohZU0Ac05zZj/99dbNUtKGKnSp/ex?=
- =?us-ascii?Q?DVhgQEOFZnb4UXevMO9pUUPKd0KtbJO1C45dzqAZbgp5xMEtpUqPlim0Sfo7?=
- =?us-ascii?Q?Sqoa9Wt1BN5BzjwOV5Oj0/Vjl/dHzQDVwj6nQTeq8VJtJSyiPFUJkAwjY16W?=
- =?us-ascii?Q?U1kE6+s+K5EZWJIAg2jDU451DpVMNqs=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ZPBZa/Ruka/MYWMOpoMjLIMxXciHp7JZNdL0fYjW5cKyzBYcN/HLg8Qec873?=
+ =?us-ascii?Q?eI703YfRX1XHqiTapWrNA/ju42rZDqJOFyXz/pKjgEM7Ubaoe9cSdlJVYLls?=
+ =?us-ascii?Q?KhVCQs3rym6AkVkOSc0OvDPVC/GksioAUVlMlcXeaP6uolL6pMRZe3mePZPs?=
+ =?us-ascii?Q?jkI7cTylD/E86JrTZNrmefhGbydv6Bw0ZjX3G3KWzPYsM8O6oa1b4Dzjik17?=
+ =?us-ascii?Q?1gm78Cml9JAN5eRN3y67Km5Ycpenk+Jpzj75O9qq8FAbs0ox2vX5DUj25ZRQ?=
+ =?us-ascii?Q?wBunp7GOhpjwBIMKiwZ/Tl2YDiOMwT0jgadR4BpnSYLzIRf+Y4FqAEBbSe+P?=
+ =?us-ascii?Q?AlLpWglmY2V5w5SN5TzvOmYgFWaNa0UQD+H2Y0/fPxg0cV6qH3HlP5JndhKo?=
+ =?us-ascii?Q?8VJ4hk/iww+c6Q5JX0Z0ARbB09Sp6fpT4rATTCrvaxCIAgBQ8RtEHAAGYmh4?=
+ =?us-ascii?Q?DYCjOOx2XrU4guXkuOPQCYPFBIJHCxklFaKX8LPxFNPFzfLQJXN5lIhjHCnr?=
+ =?us-ascii?Q?s9TPGvHKKfUPNHh345ZgmUvciQabekSenDhMIzFkHk1ABomEnS7Ay/Bq7qcE?=
+ =?us-ascii?Q?VEmeOmMuBgbehXHlyqJ0D7ZKErtJNdJjMzJZxIK3mATc4dAqsIflaEmEcZ1l?=
+ =?us-ascii?Q?6fmmlUL0SYRPfgo1/JKK8j6TqZbZjrnDYLbt6+m62qjKPrheTAYJsPLKDEaO?=
+ =?us-ascii?Q?IwPqkyV/b/kyYvqIld7iVSMhMRyC76sxQJZhYLqKvDLO2iKHWXgHjtvTTNuR?=
+ =?us-ascii?Q?yB3dBl/c4rZojXT+q1sR1ilU4mdcqc8fFNc4I13UlyFQzQfn2vSShJToRuyI?=
+ =?us-ascii?Q?HtWGu6omVy1/GVMHxhPVOIjUE2mW7er9006TgwmUxfeYbZSIEhOYlvbz9NcY?=
+ =?us-ascii?Q?Ap8s2BrS3o50f5Ll6vlOH0ah+GGvX05toTteDNchxu6vlNYIS51qr7kx+BiB?=
+ =?us-ascii?Q?fK5rgvQZ1vqWTSwEfnZbFOwP/0m5L6jxuOFbABg7AyBHZLCTlZ8iX2dI5sjU?=
+ =?us-ascii?Q?NZEg6GWGEpIT6+822MZ/H9c00HWaiGiMj9U45/kcYiw94YvGp6zOqGbf4oO0?=
+ =?us-ascii?Q?4Pmm/xC2EBx4c6/cKlNsxUhSJ94BgWZ/ceaEtpgQfMHip4T5hFw6JKVDHzNS?=
+ =?us-ascii?Q?PJeQiwVwGV+xHOi1BF9Ssf7pVmFArBzb7eCHHRNlX4czF2lUdqoSfzWLy6mC?=
+ =?us-ascii?Q?RHOgN2A08P8bfBkGAdAI0IeVM8bOWpinOk3Y+4L6Uyr1cSN9x0o6HNXGLP3a?=
+ =?us-ascii?Q?pjla03mpr4BvqajhoMDsP9EphKMvujrKUq4nvXkxREiP95OcUuYtj6/4yQpm?=
+ =?us-ascii?Q?l7n0nd+MOKteRLWv6Kr8d7zfCRh5ouksMntGANysIe8rxDcx3FloA42BLtPZ?=
+ =?us-ascii?Q?io7rg0c650Mw5ozEV0cRZlCcqmzJGlMNBbmy0kodpVUTcgJ/OA3ZzF753r9p?=
+ =?us-ascii?Q?8aOL7H/gXMTM2JglViR1iI8O1qVzir6dC61QsLCiHfmTUe3nxYSmZIqBr/I9?=
+ =?us-ascii?Q?HtBTcbgwAOvlvLAbqRyCYPyBdD+8P8sX/dZYrRusMfbm+zWrBbbPE5u77x1H?=
+ =?us-ascii?Q?QIiuG92qxjrgvqzjesibe2hry9jhW6kh/Uf7upSt00A/8AFiAUPxg3OCmQMw?=
+ =?us-ascii?Q?xU6XnMXdC8U/bQv+5+ycyLYyM9Gsq2W+hFgfGEzxI5tlF8H9SfyDEd2uiiNg?=
+ =?us-ascii?Q?MFgHff22R9k95lA1JGLMeMEHiifQKQtVwyiz7Xh9ClzPM32GpgxiFDuVeTU8?=
+ =?us-ascii?Q?yuImWbgwA1yksfiyNhroEoWLSYQMq4s=3D?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 18de207c-e752-4f5f-80b8-08df18500241
+X-MS-Exchange-CrossTenant-Network-Message-Id: 88288dd8-e5e2-47c1-5beb-08df1850063a
 X-MS-Exchange-CrossTenant-AuthSource: DB7PR04MB5130.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2026 02:20:02.8326 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2026 02:20:09.3579 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5fElK7UW2y1DMtqJ+MprsNEKZDHx9dIms13wnUzWleDtqjtivweBZMb0mqv34ORbUkAHS7x54gP3gcWH4iCpkDMfWq2vq4QZGD6lU/9naYw=
+X-MS-Exchange-CrossTenant-UserPrincipalName: FmqI+jfF7iwebEXh/eHoFk6mLtoD9M+3wAgJVUt/I/NLv1bazyWkAJv/1Fv5ONztoc6V4kUd9aKb0XatchGHZpzIDhkbdNHhOZF3DNf89pA=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB6803
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -244,257 +245,40 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Ye Li <ye.li@nxp.com>
 
-Enable the icache and dcache in SPL and u-boot early phase before
-DM init to save boot time consumed in DTB parsing.
-Since the DDR size is got from SM via SCMI, it is not unknown at
-this early phase, to avoid speculative access and prefetch, only map
-low address 64MB DDR as normal memory and map other DDR address to
-device memory. After DM init completion, update the MMU table with
-effective ddr size.
+After SPL dcache is enabled on iMX95/94/952, verify image in
+authentication meets failure. There are two root causes:
+1. Driver read APIs won't flush the image data from dcache to memory,
+   such like: USB SDP, ROM API, SPL NOR, etc.
+2. iMX95/94/952 uses trampoline buffer to destination address in
+   secure memory. This buffer is not flushed.
 
-This early MMU page table addresses is provided by two APIs. Users
-could override their default implementations to provide different
-address:
-board_spl_mmu_tlb_base   - SPL phase MMU table address
-board_early_mmu_tlb_base - u-boot board_f phase MMU table address
-
-u-boot early caches are default enabled in this patch. To enable
-SPL early caches:
-
-1. Define secure DDR regions available for A55 (CFG_SYS_SECURE_SDRAM_BASE
-   and CFG_SYS_SECURE_SDRAM_SIZE). It should include the secure DDR
-   address of the images loaded by SPL. Default board_spl_mmu_tlb_base
-   uses low 2MB space at CFG_SYS_SECURE_SDRAM_BASE.
-
-2. Calling arch_cpu_init before spl_early_init.
+Flush the image address before verify image to fix the issue
 
 Signed-off-by: Ye Li <ye.li@nxp.com>
 ---
- arch/arm/mach-imx/imx9/scmi/soc.c | 148 +++++++++++++++++++++++++++++-
- 1 file changed, 146 insertions(+), 2 deletions(-)
+ common/spl/spl_imx_container.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
-index 00fb13ad65d..22f9c9d045b 100644
---- a/arch/arm/mach-imx/imx9/scmi/soc.c
-+++ b/arch/arm/mach-imx/imx9/scmi/soc.c
-@@ -12,6 +12,7 @@
- #include <asm/mach-imx/boot_mode.h>
- #include <asm/mach-imx/ele_api.h>
- #include <asm/setup.h>
-+#include <asm/system.h>
- #include <dm/uclass.h>
- #include <dm/device.h>
- #include <dm/ofnode.h>
-@@ -317,6 +318,8 @@ static struct mm_region imx9_mem_map[] = {
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
- 	},
+diff --git a/common/spl/spl_imx_container.c b/common/spl/spl_imx_container.c
+index 57cd75b9b5e..dee0c9006d6 100644
+--- a/common/spl/spl_imx_container.c
++++ b/common/spl/spl_imx_container.c
+@@ -10,6 +10,7 @@
+ #include <log.h>
+ #include <mapmem.h>
+ #include <spl.h>
++#include <cpu_func.h>
+ #ifdef CONFIG_AHAB_BOOT
+ #include <asm/mach-imx/ahab.h>
  #endif
-+#if IS_ENABLED(CONFIG_XPL_BUILD)
-+	/* Avoid speculative access to OCRAM in u-boot */
- 	{
- 		/* OCRAM */
- 		.virt = 0x20480000UL,
-@@ -324,7 +327,9 @@ static struct mm_region imx9_mem_map[] = {
- 		.size = 0xA0000UL,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
- 			 PTE_BLOCK_OUTER_SHARE
--	}, {
-+	},
-+#endif
-+	{
- 		/* AIPS */
- 		.virt = 0x40000000UL,
- 		.phys = 0x40000000UL,
-@@ -356,6 +361,15 @@ static struct mm_region imx9_mem_map[] = {
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
- 			 PTE_BLOCK_OUTER_SHARE
- 	}, {
-+#endif
-+#if defined(CFG_SYS_SECURE_SDRAM_SIZE) && IS_ENABLED(CONFIG_XPL_BUILD)
-+		/* Secure DRAM */
-+		.virt = CFG_SYS_SECURE_SDRAM_BASE,
-+		.phys = CFG_SYS_SECURE_SDRAM_BASE,
-+		.size = CFG_SYS_SECURE_SDRAM_SIZE,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+			 PTE_BLOCK_OUTER_SHARE
-+	}, {
- #endif
- 		/* PCIE2 ECAM */
- 		.virt = 0x880000000UL,
-@@ -388,7 +402,9 @@ static struct mm_region imx9_mem_map[] = {
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
- 			 PTE_BLOCK_OUTER_SHARE
- 	}, {
--		/* empty entry to split table entry 5 if needed when TEEs are used */
-+		/* empty entry to split table entry of DRAM1 if needed when TEEs are used,
-+		 * or use by early MMU in SPL or board_f phase
-+		 */
- 		0,
- 	}, {
- 		/* List terminator */
-@@ -423,6 +439,9 @@ void enable_caches(void)
- 	int entry = imx9_find_dram_entry_in_mem_map();
- 	u64 attrs = imx9_mem_map[entry].attrs;
- 
-+	dcache_disable();
-+	gd->arch.tlb_fillptr = 0;
-+
- 	while (i < CONFIG_NR_DRAM_BANKS &&
- 	       entry < ARRAY_SIZE(imx9_mem_map)) {
- 		if (gd->dram[i].start == 0)
-@@ -584,6 +603,124 @@ phys_size_t get_effective_memsize(void)
+@@ -77,6 +78,7 @@ static struct boot_img_t *read_auth_image(struct spl_image_info *spl_image,
  	}
- }
  
-+/* Allow board to override for specific address */
-+__weak unsigned long board_spl_mmu_tlb_base(void)
-+{
-+#if defined(CFG_SYS_SECURE_SDRAM_BASE)
-+	return CFG_SYS_SECURE_SDRAM_BASE;
-+#else
-+	return 0;
-+#endif
-+}
-+
-+__weak unsigned long board_early_mmu_tlb_base(void)
-+{
-+	return CFG_SYS_SDRAM_BASE;
-+}
-+
-+/*
-+ * Initialize the MMU and activate dcache in early stage of u-boot or SPL
-+ */
-+static void early_enable_dcache(void)
-+{
-+	u64 pgtable_size;
-+	unsigned long tlb_addr;
-+	int i, e = -1;
-+
-+	if (CONFIG_IS_ENABLED(SYS_ICACHE_OFF) || CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+		return;
-+
-+	/* Skip enable dcache if SPL early init is called.
-+	 * User should move arch_cpu_init before spl_early_init
-+	 */
-+	if (gd->flags & GD_FLG_SPL_EARLY_INIT)
-+		return;
-+
-+	pgtable_size = PGTABLE_SIZE;
-+	if (pgtable_size > SZ_2M) /* Must fit within the 2MB */
-+		return;
-+
-+	if (IS_ENABLED(CONFIG_XPL_BUILD))
-+		tlb_addr = board_spl_mmu_tlb_base();
-+	else
-+		tlb_addr = board_early_mmu_tlb_base();
-+
-+	if (!tlb_addr)
-+		return;
-+
-+	/* Because DDR size is unknown at this phase, to avoid speculative access and prefetch,
-+	 * set early MMU table to have DDR mapped as device memory, but with low 64MB set to normal
-+	 * memory to cover u-boot, early malloc and stack (CFG_SYS_INIT_RAM_ADDR).
-+	 */
-+	for (i = 0; i < ARRAY_SIZE(imx9_mem_map) - 1; i++) {
-+		if (imx9_mem_map[i].phys == CFG_SYS_SDRAM_BASE ||
-+		    imx9_mem_map[i].phys == 0x100000000UL)
-+			imx9_mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE);
-+		else if (imx9_mem_map[i].phys == 0 && imx9_mem_map[i].size == 0) {
-+			/* Use the empty slot reserved in imx9_mem_map */
-+			imx9_mem_map[i].phys = PHYS_SDRAM;
-+			imx9_mem_map[i].virt = PHYS_SDRAM;
-+			imx9_mem_map[i].size = SZ_64M;
-+			imx9_mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+						PTE_BLOCK_OUTER_SHARE;
-+			e = i;
-+		}
-+	}
-+
-+	if (e == -1)
-+		return;
-+
-+	gd->arch.tlb_size = pgtable_size;
-+	gd->arch.tlb_addr = tlb_addr;
-+
-+	dcache_enable();
-+
-+	/* Recovery the imx9_mem_map which will be used by u-boot board_r phase */
-+	imx9_mem_map[e].phys = 0;
-+	imx9_mem_map[e].virt = 0;
-+	imx9_mem_map[e].size = 0;
-+	imx9_mem_map[e].attrs = 0;
-+
-+	for (i = 0; i < ARRAY_SIZE(imx9_mem_map) - 1; i++) {
-+		if (imx9_mem_map[i].phys == CFG_SYS_SDRAM_BASE ||
-+		    imx9_mem_map[i].phys == 0x100000000UL)
-+			imx9_mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+						PTE_BLOCK_OUTER_SHARE;
-+	}
-+}
-+
-+/* Update early MMU table with actual DDR got from SM via SCMI */
-+static void update_early_mmu_table(void)
-+{
-+	phys_size_t effective_sz;
-+
-+	if (CONFIG_IS_ENABLED(SYS_ICACHE_OFF) || CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+		return;
-+
-+	if (!gd->arch.tlb_addr)
-+		return;
-+
-+	/* Remap u-boot effective size to normal memory */
-+	effective_sz = get_effective_memsize();
-+	if (effective_sz <= SZ_64M)
-+		return;
-+
-+	mmu_change_region_attr(PHYS_SDRAM + SZ_64M, effective_sz - SZ_64M,
-+			       PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
-+			       PTE_BLOCK_OUTER_SHARE		|
-+			       PTE_TYPE_VALID);
-+}
-+
-+void spl_board_prepare_for_boot(void)
-+{
-+#if !CONFIG_IS_ENABLED(SYS_ICACHE_OFF)
-+	icache_disable();
-+	invalidate_icache_all();
-+
-+	dcache_disable();
-+#endif
-+}
-+
- static inline u64 ether_addr_to_u64(const u8 *addr)
- {
- 	u64 u = 0;
-@@ -1078,6 +1215,10 @@ static int gpio_available(const char *nodes_path)
- 
- int arch_cpu_init(void)
- {
-+#if !CONFIG_IS_ENABLED(SYS_ICACHE_OFF)
-+	icache_enable();
-+	early_enable_dcache();
-+#endif
- 	return 0;
- }
- 
-@@ -1108,6 +1249,8 @@ static void arch_init_post_dm_f(void)
- 		gpio_reset(GPIO7_BASE_ADDR);
+ #ifdef CONFIG_AHAB_BOOT
++	flush_dcache_range((ulong)buf, (ulong)(buf + images[image_index].size - 1));
+ 	if (ahab_verify_cntr_image(&images[image_index], image_index))
+ 		return NULL;
  #endif
- 	}
-+
-+	update_early_mmu_table();
- }
- 
- int imx9_probe_mu(void)
-@@ -1144,6 +1287,7 @@ int imx9_probe_mu(void)
- 	if (gd->flags & GD_FLG_RELOC)
- 		return 0;
- 
-+	flush_dcache_range((ulong)&info, (ulong)&info + sizeof(struct ele_get_info_data));
- 	ret = ele_get_info(&info, &res);
- 	if (ret)
- 		return ret;
 -- 
 2.50.1
 
