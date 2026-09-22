@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FDEDC982FE
-	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 05:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48568C982FE
+	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 05:27:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C84A680C10;
-	Tue, 22 Sep 2026 05:27:27 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 06B9340641;
+	Tue, 22 Sep 2026 05:27:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IddmGc_Sg6k4; Tue, 22 Sep 2026 05:27:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 8486180C7A
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790054846;
-	b=QlOvtn0egcV1mS1V6bNg2Pqt0SiOGzrBsSemD4E9dOeTdeHfxTV9xAOE8kjcz717hEMX
-	 u3/c+8BnWyR91OcsvsgZGjm2j4+B4UTCfVGi+vgXLSp5oPffpzp6y0EhjFyrtR2XE/d1f
-	 FkrtX2yarlXvUD/KrLXsh3/6PwjGUwK2ircgr3/xdi7guhdx467uMLhZVwRmvD/v5kKUn
-	 hu12VL+kPXyqUtqIxzeo0PavNKLlqf2ziisvkmK/1u3qGCZdvqjcqCdhoHyJqv22+0Elk
-	 w7SMHAdWct1vylKRmlxNj7iZTzjnUHcUlc/BUTxL4APZXlxRT7fNUWbDp/uPhGPZCVA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TX8JxmPe7CtZ; Tue, 22 Sep 2026 05:27:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 3F78640655
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790054852;
+	b=IIUDp9ZRtm8G444ttq7qU/OXfwuqvWBKzzSVMaAOZW4Iyp+zHMw12MfMHbACrQvGAB2E
+	 v2kbfdSPth4HblJxMOaG1hiDnnIW+bIK584gWny5C/H2TR1KwKs9E3fDu9sWQQeiXFlzk
+	 C+LLYhvsCzeJ+kcE1Til6VL+D9zFYmssvpnYyPNz71nw+mz9oKyl7YzfBtwLBjIQKd//H
+	 ftt9vFGBwiLm0uD8vsBIBlAsf4X5YKKy5ggtt/SXpL52ZaOXZBWBavJ9XQpUbSABocRQc
+	 wzPhtcCfYN9X1DrTkZnsNLNcCN/7rJ9Cee65vD5lKlRnPrjAT5weJmdMPv6osgSk2KQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790054846;
+	c=relaxed/relaxed; t=1790054852;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,66 +31,64 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Last-TLS-Session-Version:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Y1v3poFtx04Lx2oQudN5Z//Vtwf49q7o/t4tfu3rgp0=;
-	b=ZVfB+S8ks1bpaL/Cd8PzKLU1HUMONBmwI+ZZKpDDw3HEE5ZSqs0spKVMkYh6ZWJxsqKc
-	 WSbxZpR52DngRBIW4MPFUbLcqRiGSId+2mHNFOhAhsK+v6RRcdCpQMUa8J4hg84j4HKcR
-	 11JCuxyQPobaL5K4ZR5XWbsUrbdXT3Yww1GNFyWoV5NQue/YUly6klY5hPZaGisxQlExr
-	 6Uh8pNH3f8EAMiXPFheN3AKX9xp9kGIQq5SLaEdn5Yr9Tzau9KD2LRLaaE03Ek/1cDWRZ
-	 eKxue6GfQnL3hqjfHHaFaJhvBgWU9/lADKUnvIniUQyRLOupRkJYFltqPPy9BiBPuOg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=nabladev.com;
-	dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=IT6Xu070;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=BFZ9XdLZT1zCrCiH7w8zytggcOinR1TJYdAKUhaVX+0=;
+	b=Poii6Ni3FdPQ0hmHgE06HgyagbV/ln807rvQtQiX5qiBjYWuduEVyOVpYeSLsCJ9O0VD
+	 G7G1IkaMC16BMhRHSuRBphcvJ5moEKLA/uLO3Cnym5LIlXO6SNm7eUwJXF5w21Knl+afY
+	 58Hu/XE/KmJVe4b377KGKdccelkHoC0bNydgHgoLFFERaDkXu/yEJbkhKQnjIVecqjOwJ
+	 ZA5lFq3CHgpeTAbjoJU3g3l2GaVpHb3fejdTNs2UO9vudUyAdz7WMx+uzpjY57v+QALNb
+	 jgmHmmusxNt66qStpwLhgIW/TmCQvNRuFPSLaHt6IGn6S4FCSmAU4BfzZcSzYWwgARg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790054846;
-	bh=Y1v3poFtx04Lx2oQudN5Z//Vtwf49q7o/t4tfu3rgp0=;
+	d=lists.u-boot-project.org; s=default; t=1790054852;
+	bh=BFZ9XdLZT1zCrCiH7w8zytggcOinR1TJYdAKUhaVX+0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wAe0PeA+LMe6JkZvaAV1N3UumeZF1I3AEZ08uelV9jZ3eoszo+w7536Um0eNq05zM
-	 ORPC1Z2kFTdDtq+QVLoXDNEps+hRbsSqCECZ1ec1qWWuO5sW0FvN6YGf2wZohp2W8o
-	 LIFIKaZdL5XBtNWRLsbtlfNaP2PJR38jSwnvJm0vj25THAxLzuYPQ2BWGmRZcuFuym
-	 BIPiDZqgHaXPK+QtPCDppgxuciJXmeEw7pQ4EiNoaQePrUiAeUJlV+qSFow95IgVy3
-	 04TWY/GK2kAHZjCficdPKHji1RCks8IcdFE9eHfNWSCGd/mpgYWWI+KaMDc8huceE3
-	 H9IEM9GZu1zaw==
+	b=W8FjbtLZVfx9Tjdn/tOE8uXliKo05LSPrSsHISz4B4GU4n+vMPWLe6hnrOKISccxz
+	 SmDUb3lrZI6VaEpksGovNhsCjaysYas/GX6v3ygBwI4R2FDUrzWjjouIPIMa8SCqNc
+	 vumrsNJNSw9EKjt5fO859/KraCLxt9Rw62Fio/TC9yjfEOCZeG9SeaavaeHK/mo5qO
+	 Zabwv1qF7b4HT0M3MR6kgdRUb407dJxVQ/T5AxpBcBbV3VNtzDghL+v5PMdMgbq0fx
+	 g381u38QKiRlI0woUj1e9AWl5YEET/g1uBLkczIegSNXfgcGYqZtYsXYtV73c98yrY
+	 aMynguI7VlqyQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8486180C7A;
-	Tue, 22 Sep 2026 05:27:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3F78640655;
+	Tue, 22 Sep 2026 05:27:32 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id AE353A20
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 05:27:25 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id EEFEB13B
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 05:27:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9F5A180C10
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 05:27:25 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id D534C80D4B
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 05:27:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lwQFxTP5oGDp for <u-boot@lists.u-boot-project.org>;
- Tue, 22 Sep 2026 05:27:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 3DC2580C7A
+ id HtdCJRfIHOTD for <u-boot@lists.u-boot-project.org>;
+ Tue, 22 Sep 2026 05:27:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5BD3D80C7A
 Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip=178.251.229.89
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790054844;
- b=XusQ9Tqoj/Z+v9N2vOpgyuNnBmsiaFtwmuObOW3kNGWS1lGMzmO27R7EUgisvwS/up4p
- 16JQSu1I+P6YjBOOmYUDwxPPyL9ulDsrXGb6+RzWdpPoyProZGJvTc4QdJFSjyhnXwZHI
- 1EH28KFmC8XGYIhCBpOPKo/UTN4+DsE9agXGpygFzcXUk07LQHI+YIA54TvE6/wy0DrHX
- 6Gk3rG3I0rZiIDninOGiK6t0NN9StIIo4pO5K2lo7XbRjt2UziGfG2rTrGo+g6dQ42rQ5
- 96jnqyN7KkJE01k5juHBDK6kW6h8AV8W8Wj84MKd9+Qty4UW9FfO5bwB3xvjEbp/3jQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790054848;
+ b=Em3SSSykgUTWZzf2IebMjHxL3o3CfuAmU69YZ5uHx94DkW6Ho1bJrRNsa4PIB0PSwo//
+ w/UWKzDNh0K0O/8e3k0ZlOp0/adaB+lCdm31LKKpkv45JRYuv8teh8RlPg+Ys5EJmEw+M
+ hBZg2JallOlp9qJXY/RZJWWYPWUhX9UC843w67vttGGui47STQf4Ria1ABk0ipZlruCR2
+ EY3ASkeNQ/er20SZcaI/iUFRBP6E8Y2Tk76sdcLO6bFq8wbA48snjEOhEVdIMeFR40DXy
+ kXeU4WhifGMohw0h3/VNrG+jmJ2erFB65yFlgezxATkPk4YFQaf7422bQog+yVZZpYw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790054844;
+ c=relaxed/relaxed; t=1790054848;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-Last-TLS-Session-Version;
- bh=Y1v3poFtx04Lx2oQudN5Z//Vtwf49q7o/t4tfu3rgp0=;
- b=fMwXYPRBiqE+b5c2Bdrlqc46Spyh945qBvvN8mxKMrLjBdWBhD2svV7w8/LSaiYAwYgw
- 0PsiuCfRDZLnG8HKfOVa21oeL8OrrWqf+rOEk4YbzFqqKgvxF6zOK36Il9gj1qx3rvC3Q
- JyR9T1QDaYKVbGCrs4xKVtSpNKVefPQiAvkZqxLF2A6CVelGC4u+o+IXMJIppyhAkiJta
- 5Pdd4fqhB+vId+zUAmuVmTkrt5tDDDNbww/ryuj0Ye8j92xFnj3GMMsXSOFQtUKXl8DEP
- wEABFXOaEGId8TGeOHLiXeyqmDGCGQ65Abo+abuQoF7tSg88YTkbsPmcBONeLT2/f8A==
+ bh=BFZ9XdLZT1zCrCiH7w8zytggcOinR1TJYdAKUhaVX+0=;
+ b=pB9S90fPKWaz8rYnMstcmYt1uB1zTZVYFi76v7uHwZ3tOKjOvq4KWRHA0mbFgKJEckoZ
+ O9l1uNYcwKHbtqrNhqeChiWBvbVIQcvGmvOpmyijPiuA/sht44frlsB+UAjjcWJHOs8ai
+ n4jnmCRuj1CKUk94PNLszl99TeluMhnNTILqXBMMujzoavQr/XtNJWAhMpntFkQhGamJS
+ jPnxrQNR74JZE5g0bI7KSPsgcNdmo9X5MnUdQN4UxPsXmzACatr69ONWEsmH6V8TLLS6W
+ IyxhtSk2pMQxIglwXJzanVVD3ho8g4vBSQudQLmACasGM/SsjyF21nfVuJEXShR/9FA==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=nabladev.com; 
  dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=IT6Xu070; 
+ header.s=dkim header.b=VtRaj0UT; 
  arc=none smtp.remote-ip=178.251.229.89
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.251.229.89;
  helo=mx.nabladev.com; envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
@@ -98,36 +96,35 @@ Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=nabladev.com header.i=@nabladev.com
- header.a=rsa-sha256 header.s=dkim header.b=IT6Xu070
+ header.a=rsa-sha256 header.s=dkim header.b=VtRaj0UT
 Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3DC2580C7A
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 05:27:23 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5BD3D80C7A
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 05:27:28 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 2B381105660; Tue, 22 Sep 2026 07:27:17 +0200 (CEST)
+ with ESMTPSA id 23D79105678; Tue, 22 Sep 2026 07:27:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1790054837; h=from:subject:date:message-id:to:cc:mime-version:
+ s=dkim; t=1790054842; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=Y1v3poFtx04Lx2oQudN5Z//Vtwf49q7o/t4tfu3rgp0=;
- b=IT6Xu070HK6DF/sDQ6W5wiEzV1/Gz6AeAr/xNhkg8g3efUQG2eRDkduYJvmT1YktOVlz8R
- q8cVsw3m0MbTli3/BvQfFgLUzTJqj/noUipd/EkSPzSJBSCgcx8QZkq3IgrZ6xTsfFm1ck
- r3hCm5Ngk2nQTLnn3BPBAQATSe7P2vL1wsSLYhzYWgQfNkIxMnlKJ47DJe8HaKRBkA9fPY
- 2Vf7zLeURbK+1of401uJ9/MOfu9Al7Pu9ndBgBAOv6nJ9gBUyAKMB+mLRXnJ8UR7hmWoAe
- R7HuFvLOgxb0qyZAg6KJXFZ8Z4BcQmqNOOJcNrCkjjA1lgZIBfRk76xkEqzhew==
+ bh=BFZ9XdLZT1zCrCiH7w8zytggcOinR1TJYdAKUhaVX+0=;
+ b=VtRaj0UTWLwIRiTiVVL/bICmGfRCWFOM0toC2CxbE8sgoDWtVn+MtNjUHuZRe3SrvSCLGl
+ Kqf3u++wOLAMb95+pubtiG5bqmEhv8WDxs+Fp+kuBm6Km5ExcdT2h+yW6cnU7JT21ILyjv
+ ObeSckGZWgfJLrQ3Pr+SRjWs5ARyQCEVeq1VixRD3XyQ/KRrWB82jhgCGSn2CTO8yRzg/h
+ /eDse1ulP7yboGg47hJMFBhAfSGJMznlUSNI3BOVshIgiAIXJ7eWRcbKa8v74Mf/uh+Bib
+ rMMSJxPZcBncxi8kkYJfcPCE0Mcn0G2xg6b4zrGbNWny3Nj3SQp32a5I6RMJyA==
 From: Heiko Schocher <hs@nabladev.com>
 To: U-Boot Mailing List <u-boot@lists.u-boot-project.org>
 Cc: Gaurav Jain <gaurav.jain@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
  Fabio Estevam <festevam@gmail.com>,
  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Heiko Schocher <hs@nabladev.com>, Utkarsh Gupta <utkarsh.gupta@nxp.com>,
+ Heiko Schocher <hs@nabladev.com>,
  Stefan Bigler <stefan.bigler@securiton.ch>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Johan Jonker <jbx6244@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH v1 1/2] crypto: fsl: run the CAAM RNG self test on affected
- i.MX6 chips
-Date: Tue, 22 Sep 2026 07:26:47 +0200
-Message-ID: <20260922052700.528451-2-hs@nabladev.com>
+ Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 2/2] imx: hab: name the event left behind by the boot ROM
+ RNG self test
+Date: Tue, 22 Sep 2026 07:26:48 +0200
+Message-ID: <20260922052700.528451-3-hs@nabladev.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260922052700.528451-1-hs@nabladev.com>
 References: <20260922052700.528451-1-hs@nabladev.com>
@@ -147,288 +144,54 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The boot ROM of a few i.MX6 revisions runs the RNG self test incorrectly.
-It leaves a HAB event behind on every boot:
+The boot ROM of a few i.MX6 revisions runs its RNG self test
+incorrectly and logs an event for it on every boot. An event that reads
+HAB_ENG_FAIL on the CAAM and nothing further sends the reader looking
+for a fault in their own image, which is not where it is.
 
-    STS = HAB_WARNING (0x69)   RSN = HAB_ENG_FAIL (0x30)
-    CTX = HAB_CTX_ENTRY (0xE1) ENG = HAB_ENG_CAAM (0x1D)
+Print from where that event comes.
 
-NXP recommends to run a rng self test before any RNG related
-crypto implementations are done.
-
-Affected are i.MX6Solo, i.MX6DL and i.MX6SX revision 1.4, i.MX6Q
-revision 1.6 and i.MX6QP revision 1.1, and no other revision of those
-chips. Both chip and revision are read at runtime and have to match.
-
-Run this test on affected chips and stop if test fails.
-
-Part of the code is taken from u-boot-imx NXP tree, from the commit
-linked below, and adapted to mainline.
-
-Link: https://github.com/nxp-imx/uboot-imx/commit/541284a3c55f90446ca179b26500f93ed201eb96
-Signed-off-by: Utkarsh Gupta <utkarsh.gupta@nxp.com>
-Signed-off-by: Gaurav Jain <gaurav.jain@nxp.com>
 Signed-off-by: Stefan Bigler <stefan.bigler@securiton.ch>
 Signed-off-by: Heiko Schocher <hs@nabladev.com>
 ---
-Rework against NXP base:
-- adapt the chip detection
-- checkpatch cleanup
-- Kconfig symbol renamed and set a default
 
-It may be worth discussing whether triggering a panic() and bringing the entire
-system to a halt is appropriate in this case.
+ arch/arm/mach-imx/hab.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
- arch/arm/include/asm/arch-imx/cpu.h |   2 +
- drivers/crypto/fsl/Kconfig          |  22 ++++
- drivers/crypto/fsl/Makefile         |   1 +
- drivers/crypto/fsl/jr.c             |   3 +
- drivers/crypto/fsl/jr.h             |   1 +
- drivers/crypto/fsl/rng_self_test.c  | 157 ++++++++++++++++++++++++++++
- 6 files changed, 186 insertions(+)
- create mode 100644 drivers/crypto/fsl/rng_self_test.c
-
-diff --git a/arch/arm/include/asm/arch-imx/cpu.h b/arch/arm/include/asm/arch-imx/cpu.h
-index bbc4b421a02..f2225df9519 100644
---- a/arch/arm/include/asm/arch-imx/cpu.h
-+++ b/arch/arm/include/asm/arch-imx/cpu.h
-@@ -95,7 +95,9 @@
- #define CHIP_REV_1_1            0x11
- #define CHIP_REV_1_2            0x12
- #define CHIP_REV_1_3            0x13
-+#define CHIP_REV_1_4            0x14
- #define CHIP_REV_1_5            0x15
-+#define CHIP_REV_1_6            0x16
- #define CHIP_REV_2_0            0x20
- #define CHIP_REV_2_1            0x21
- #define CHIP_REV_2_2            0x22
-diff --git a/drivers/crypto/fsl/Kconfig b/drivers/crypto/fsl/Kconfig
-index 244a9bd905d..41de402c530 100644
---- a/drivers/crypto/fsl/Kconfig
-+++ b/drivers/crypto/fsl/Kconfig
-@@ -100,4 +100,26 @@ config FSL_DCP_RNG
- 	  and a Pseudo-Random Number Generator (PRNG) to achieve a true
- 	  randomness and cryptographic strength.
+diff --git a/arch/arm/mach-imx/hab.c b/arch/arm/mach-imx/hab.c
+index f92f77670a8..35c497619d6 100644
+--- a/arch/arm/mach-imx/hab.c
++++ b/arch/arm/mach-imx/hab.c
+@@ -421,6 +421,19 @@ static inline u32 get_idx(u8 *list, u8 tgt, u32 size)
+ 	return idx;
+ }
  
-+config FSL_CAAM_RNG_SELF_TEST
-+	bool "Run the CAAM RNG self test on affected i.MX6 chips"
-+	depends on FSL_CAAM
-+	default y if MX6S || MX6DL || MX6Q || MX6QDL || MX6SX
-+	help
-+	  The boot ROM of a few i.MX6 revisions runs the RNG self test
-+	  incorrectly and leaves a HAB warning behind, which reads
-+
-+	    STS = HAB_WARNING (0x69)   RSN = HAB_ENG_FAIL (0x30)
-+	    CTX = HAB_CTX_ENTRY (0xE1) ENG = HAB_ENG_CAAM (0x1D)
-+
-+	  The warning itself is harmless and this option does not make it
-+	  go away. What it does is run the self test correctly, before
-+	  anything else uses the RNG, so that a genuinely broken RNG is
-+	  found rather than assumed to be the known warning. The board is
-+	  stopped if the test fails.
-+
-+	  Affected are i.MX6Solo, i.MX6DL and i.MX6SX revision 1.4, i.MX6Q
-+	  revision 1.6 and i.MX6QP revision 1.1, and no other revision of
-+	  those chips. Chip and revision are read at runtime, so a build
-+	  covering several of them behaves correctly on each.
-+
- endif
-diff --git a/drivers/crypto/fsl/Makefile b/drivers/crypto/fsl/Makefile
-index 965c4938c8c..14b53db7844 100644
---- a/drivers/crypto/fsl/Makefile
-+++ b/drivers/crypto/fsl/Makefile
-@@ -9,3 +9,4 @@ obj-$(CONFIG_RSA_FREESCALE_EXP) += fsl_rsa.o
- obj-$(CONFIG_$(PHASE_)FSL_CAAM_RNG) += rng.o
- obj-$(CONFIG_FSL_DCP_RNG) += dcp_rng.o
- obj-$(CONFIG_FSL_MFGPROT) += fsl_mfgprot.o
-+obj-$(CONFIG_FSL_CAAM_RNG_SELF_TEST) += rng_self_test.o
-diff --git a/drivers/crypto/fsl/jr.c b/drivers/crypto/fsl/jr.c
-index 07d336c074a..3a5032bcaf6 100644
---- a/drivers/crypto/fsl/jr.c
-+++ b/drivers/crypto/fsl/jr.c
-@@ -804,6 +804,9 @@ init:
- 	pamu_enable();
- #endif
- 
-+	if (IS_ENABLED(CONFIG_FSL_CAAM_RNG_SELF_TEST))
-+		rng_self_test();
-+
- 	if (get_rng_vid(caam->sec) >= 4) {
- 		if (rng_init(sec_idx, caam->sec) < 0) {
- 			printf("SEC%u:  RNG instantiation failed\n", sec_idx);
-diff --git a/drivers/crypto/fsl/jr.h b/drivers/crypto/fsl/jr.h
-index b136cd8d05a..d8bd0797331 100644
---- a/drivers/crypto/fsl/jr.h
-+++ b/drivers/crypto/fsl/jr.h
-@@ -132,4 +132,5 @@ struct caam_regs {
- void caam_jr_strstatus(u32 status);
- int run_descriptor_jr(uint32_t *desc);
- 
-+void rng_self_test(void);
- #endif
-diff --git a/drivers/crypto/fsl/rng_self_test.c b/drivers/crypto/fsl/rng_self_test.c
-new file mode 100644
-index 00000000000..7dabdc26551
---- /dev/null
-+++ b/drivers/crypto/fsl/rng_self_test.c
-@@ -0,0 +1,157 @@
-+// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * CAAM RNG self test for the i.MX6 chips whose boot ROM gets it wrong
-+ *
-+ * Copyright 2018, 2021 NXP
-+ * Copyright (C) 2026 Stefan Bigler, Securiton AG
-+ * Copyright (C) 2026 Heiko Schocher, Nabla Software Engineering <hs@nabladev.com>
++ * The boot ROM of a few i.MX6 revisions runs the RNG self test
++ * incorrectly and leaves this event behind on every boot. Say so, so
++ * that the reader does not go looking for a fault that is not there.
 + */
-+
-+#include <cpu_func.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <memalign.h>
-+#include <vsprintf.h>
-+#include <asm/arch/sys_proto.h>
-+#include <linux/kernel.h>
-+#include "jr.h"
-+
-+/* Number of words in the descriptor below */
-+#define RNG_DSC_SIZE		0x36
-+
-+/* Size of the known answer the descriptor produces */
-+#define RNG_KAT_SIZE		32
-+
-+/*
-+ * Descriptor of the self test, taken from the NXP tree. The word five
-+ * from the end holds the address the result is written to and is filled
-+ * in before the descriptor is submitted.
-+ */
-+#define RNG_DSC_RESULT_IDX	(RNG_DSC_SIZE - 5)
-+
-+static const u32 rng_dsc[RNG_DSC_SIZE] = {
-+	0xb0800036, 0x04800010, 0x3c85a15b, 0x50a9d0b1,
-+	0x71a09fee, 0x2eecf20b, 0x02800020, 0xb267292e,
-+	0x85bf712d, 0xe85ff43a, 0xa716b7fb, 0xc40bb528,
-+	0x27b6f564, 0x8821cb5d, 0x9b5f6c26, 0x12a00020,
-+	0x0a20de17, 0x6529357e, 0x316277ab, 0x2846254e,
-+	0x34d23ba5, 0x6f5e9c32, 0x7abdc1bb, 0x0197a385,
-+	0x82500405, 0xa2000001, 0x10880004, 0x00000005,
-+	0x12820004, 0x00000020, 0x82500001, 0xa2000001,
-+	0x10880004, 0x40000045, 0x02800020, 0x8f389cc7,
-+	0xe7f7cbb0, 0x6bf2073d, 0xfc380b6d, 0xb22e9d1a,
-+	0xee64fcb7, 0xa2b48d49, 0xdf9bc3a4, 0x82500009,
-+	0xa2000001, 0x10880004, 0x00000005, 0x82500001,
-+	0x60340020, 0xFFFFFFFF, 0xa2000001, 0x10880004,
-+	0x00000005, 0x8250000d
-+};
-+
-+static const u8 rng_result[RNG_KAT_SIZE] = {
-+	0x3a, 0xfe, 0x2c, 0x87, 0xcc, 0xb6, 0x44, 0x49,
-+	0x19, 0x16, 0x9a, 0x74, 0xa1, 0x31, 0x8b, 0xef,
-+	0xf4, 0x86, 0x0b, 0xb9, 0x5e, 0xee, 0xae, 0x91,
-+	0x92, 0xf4, 0xa9, 0x8f, 0xb0, 0x37, 0x18, 0xa4
-+};
-+
-+/**
-+ * rng_self_test_jobdesc() - build the self test descriptor
-+ *
-+ * @desc:	descriptor to fill in, RNG_DSC_SIZE words
-+ * @result:	where the CAAM is to deposit the generated data
-+ */
-+static void rng_self_test_jobdesc(u32 *desc, u8 *result)
++static bool is_rng_self_test_event(struct record *rec)
 +{
-+	uint i;
-+
-+	for (i = 0; i < RNG_DSC_SIZE; i++)
-+		desc[i] = rng_dsc[i];
-+
-+	desc[RNG_DSC_RESULT_IDX] = (uintptr_t)result;
++	return rec->contents[0] == HAB_WARNING &&
++	       rec->contents[1] == HAB_ENG_FAIL &&
++	       rec->contents[2] == HAB_CTX_ENTRY &&
++	       rec->contents[3] == HAB_ENG_CAAM;
 +}
 +
-+/**
-+ * rng_test() - run the self test once and compare against the known answer
-+ *
-+ * A failure means the RNG cannot be trusted, so the board is stopped
-+ * rather than left to carry on with keys derived from it.
-+ */
-+static void rng_test(void)
-+{
-+	u8 *result;
-+	u32 *desc;
-+	uint size;
-+	int ret, i;
+ static void process_event_record(uint8_t *event_data, size_t bytes)
+ {
+ 	struct record *rec = (struct record *)event_data;
+@@ -433,6 +446,9 @@ static void process_event_record(uint8_t *event_data, size_t bytes)
+ 	       ARRAY_SIZE(hab_contexts))]);
+ 	printf("%s", eng_str[get_idx(hab_engines, rec->contents[3],
+ 	       ARRAY_SIZE(hab_engines))]);
 +
-+	result = memalign(ARCH_DMA_MINALIGN, RNG_KAT_SIZE);
-+	if (!result) {
-+		puts("RNG:   not enough memory for the result\n");
-+		return;
-+	}
-+
-+	desc = memalign(ARCH_DMA_MINALIGN, sizeof(u32) * RNG_DSC_SIZE);
-+	if (!desc) {
-+		puts("RNG:   not enough memory for the descriptor\n");
-+		free(result);
-+		return;
-+	}
-+
-+	rng_self_test_jobdesc(desc, result);
-+
-+	size = roundup(sizeof(u32) * RNG_DSC_SIZE, ARCH_DMA_MINALIGN);
-+	flush_dcache_range((ulong)desc, (ulong)desc + size);
-+	size = roundup(RNG_KAT_SIZE, ARCH_DMA_MINALIGN);
-+	flush_dcache_range((ulong)result, (ulong)result + size);
-+
-+	ret = run_descriptor_jr(desc);
-+	if (ret) {
-+		printf("RNG:   self test descriptor failed: %d\n", ret);
-+		goto err;
-+	}
-+
-+	invalidate_dcache_range((ulong)result, (ulong)result + size);
-+
-+	for (i = 0; i < RNG_KAT_SIZE; i++)
-+		debug("%02x", result[i]);
-+	debug("\n");
-+
-+	if (memcmp(result, rng_result, RNG_KAT_SIZE))
-+		goto err;
-+
-+	free(desc);
-+	free(result);
-+	puts("RNG:   self test passed\n");
-+
-+	return;
-+
-+err:
-+	free(desc);
-+	free(result);
-+	panic("RNG:   self test failed\n");
-+}
-+
-+/**
-+ * rng_self_test_needed() - is this chip one of the affected ones?
-+ *
-+ * Chip and revision both have to match one of the pairs that NXP names
-+ * as impacted, and no other revision of those chips is on that list.
-+ */
-+static bool rng_self_test_needed(void)
-+{
-+	if (is_cpu_type(MXC_CPU_MX6QP))
-+		return soc_rev() == CHIP_REV_1_1;
-+
-+	if (is_cpu_type(MXC_CPU_MX6Q))
-+		return soc_rev() == CHIP_REV_1_6;
-+
-+	if (is_cpu_type(MXC_CPU_MX6SOLO) || is_cpu_type(MXC_CPU_MX6DL) ||
-+	    is_cpu_type(MXC_CPU_MX6SX))
-+		return soc_rev() == CHIP_REV_1_4;
-+
-+	return false;
-+}
-+
-+void rng_self_test(void)
-+{
-+	if (rng_self_test_needed())
-+		rng_test();
-+}
++	if (is_rng_self_test_event(rec))
++		puts("\nknown to come from the RNG self test of the boot ROM, harmless\n");
+ }
+ 
+ static void display_event(uint8_t *event_data, size_t bytes)
 -- 
 2.55.0
 
