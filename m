@@ -4,143 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 838B3C982FE
-	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 14:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A02F1C982FA
+	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 15:03:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 40C9540DA1;
-	Tue, 22 Sep 2026 14:59:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6E6ED4074C;
+	Tue, 22 Sep 2026 15:03:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZVOkFtuRnCb4; Tue, 22 Sep 2026 14:59:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 730A140DC3
+ id 0CO2sX66zXMU; Tue, 22 Sep 2026 15:03:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org AD3A440740
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790089134;
-	b=DqYXH934fbXdsszXmR3ac2tbBc/5+QUduGpcgH/DDOmDrI5dRtMtr3tOfBcQ70Ky10Yf
-	 5PH0Hz51CU4hPYlfSoJ7DpTvv1ERCrSLM7iiuKSbEfTFDYZcH2J/xgwBt6W+VV/RpuXSK
-	 fYCszpRJa7WMlrjt1THYdzVNGWdfZqjCUHGzrV1F+I1zgMenxPijNWxWQNkR6lgsKU8+U
-	 BLYKaOSO61fdbUXIur0sgaMJKWPMa4r3DmF3+QQ8JOAJYisnTukv1IUutWQFX+MippCnw
-	 mHGoE0IbO3oWf8NcIJDNgF2S1u2xR8rjyPCJrLzGp8RxM5sg0+qf/BUQX2AdkRAfStA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790089134;
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790089393;
+	b=TYcogzKmxKHrQmEo02xQSWpHVh3SA3CGWR5BBUadSylDgLT98qjdE4Ja1Q1xsHMX1EZY
+	 Sq+4TQykN9oaLxub4ypTeiedPxNWo6A1EPZNN3TK3jnaoksjb/IrPT0UcT6eTjnhQgcyV
+	 THCs+oaGLV+SM8jofk7DmlEKPYlmmx2k+wBvvHwWdwO3sUdV2xKnTdxk+hr9gNtkezFlK
+	 tyjXq766JVzPOiZtWHSN4zouilWj4yKVgGcJeqM/9NPoF9lI/AURmcHN9Pdrt99Tzw5Qk
+	 uUnVkoPtYYPm5RMJl9qxZM3MLEh36OUZD/fX3YW+cZATOJySZ6BXSH8sDP5iTZcBfDw==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790089393;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=4k5cUyOfjEL+HB0YEfe7wV42mHfaDRgzHZf65TXNtdk=;
-	b=Yy4EV8EQWu4jAmmQtj/b3BSMvWnYeGZl4Qx8xrOhrBUPMMHLXb6VGbC+TXuEfxXHXR66
-	 4y89ANWUQXW3kx11XML/Pc3Pfvq2hWmDoNYUySjCKcaoOaUk5Jaw66AtzwBHnALH5T1Bi
-	 yp7YMvbv21vk9WROVhT9bFxSvWDwnuwGmd4C/0oJLDfzT2baIs6KHnXqRvjUdpM2G0Ch4
-	 xVioRVc3jPuTqfsioQbRmpXJCR4If0NXQcJcJt8QoLExVogG7QwVw3RsGt0P8q4pc9Lx+
-	 fFOFeRQnSXhWrBV/QHLBQiWTK/+Jm0BWTub7VtSdBt6Z9CJWifEpzjvFSIWfJSikByw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Mailer:Feedback-ID:X-Zoho-CM-AccountID:X-ZohoMailClient:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=Ucz+tGyex1V95dwXw9xH2Nr3mTdb9dXQCR6eNtR4PPg=;
+	b=fSfC/lMYh4BF515bI5fr01FUu8jhtxLJ+awdCfsV83pGCPxThnSWNcY1+qDPKWu1a7he
+	 sPwCb/UFiXKckJA6SYqLJ52RMXRkIuK9OFcvDgTzsqVkV0t9cSgNnTJn6HWhsoHXh2ymo
+	 iE++iOxqV0XwKRNDW3OFZzZ7t1plpMgv/Ft/LUrllalVgtjBooSNSieZZfrPyqQoRPsoY
+	 92v+XzR/4rND6oMSZpJAdtpwDVzCBqRrjOGtQv2bCRJaxqUk3dpiRrYw2ttt37APyh25c
+	 B1WCE3bf/KmFVktJ/T01GRY8NywQ5J2Mxf8GBZnUJjePLhbdMcrzTDq6Zp6i/RqH0cQ==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790089134;
-	bh=4k5cUyOfjEL+HB0YEfe7wV42mHfaDRgzHZf65TXNtdk=;
+	d=lists.u-boot-project.org; s=default; t=1790089393;
+	bh=Ucz+tGyex1V95dwXw9xH2Nr3mTdb9dXQCR6eNtR4PPg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=RCC7K7opsuyVc1AI3ngLcSVMK5TtwrAP1JKhvIv06kY5EofaycboQzBGRFLEtVgm7
-	 Ygx9Zgzo9Xpl2ZFwuRhdtADUKXxc94sOsAoQLsVtNy5beUFcFmUMFXzrjjLFMp7+u9
-	 LEWQWpZf9sZe3jlv4eZVwhSNSzik+u06xQFkXG5BspM5qDtphuRRI3J5TxNXvCP6zJ
-	 yrJuXxBwB/bLOg6RatTa0ax/b4GdGo9OziNBCU3Ghz1UCEy9E3CTSEK1nj/6k/M9qe
-	 28zucRnqlMoGP64MXN68Jz2rqut6BBaMinDrOJOdWRYsQFwsaXG4x/gFp3GOCd2nDx
-	 luT5jcQmKH59w==
+	b=oxXFvbjTdDBYUnevlT+55gVG/f5HSroc6lZ2XwMHQl3WxXLcWuUL5pyFX8Oq05IGj
+	 f9OZtHR9nH1+3U7nn0y/sQCiRFQMUHbayiJnZrGJHh+64YcUGtNnKUuSzsxDi2/ZnV
+	 SvavDQBA3TPBas+vZRD4j3t+4e94Rj5x7LJ566+F6+XT39IEGkWsdau5PEeRa6NHnR
+	 YiL2VZ+4bVobPhjFDV+xcwQk44eYS9ux+8Rp/xTGqE9Tg9sp59UFGvsWhoABzMNxc8
+	 QKvRqLtk6ZbMB6tzgyCI5pJ79V0X3sE6BiZF9ZbP+4c1VSWb2v3vTJfOiGAJuZO5d/
+	 5fT38W1188rBw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 730A140DC3;
-	Tue, 22 Sep 2026 14:58:54 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id DFF9935A
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 14:58:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AD3A440740;
+	Tue, 22 Sep 2026 15:03:13 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 959EE35A
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 15:02:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C54A9402CA
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 14:58:51 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 92F296061C
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 15:02:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dEaG1Pkhqbkf for <u-boot@lists.u-boot-project.org>;
- Tue, 22 Sep 2026 14:58:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org BD2BF402DD
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=217.140.110.172
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790089129;
- b=Orf/RAagET9RiaLeDK8YI0VaVs3zV9bmbZWGz56VfKyLdRlNDu1fUFyY8azqjFERynTV
- nnJlL2tPxOzk6BfMoEuSlRGdBe2/O6FbATVl7BbgphMEicwYI51fIfA2I/LfEYfy3DdVu
- ab0xUDrWbwDil/LMFVa/BX4i6/QADTWs22CFCkM/3SMx/fhxihSix6aQ7JXfwZAvcXgYZ
- 5xYgjwT2nNIRwKCDJxUJ2fl5f6xuyG4VsZy9seSEAufoIfpYemplz154+2OAqO13qRWpW
- 1Q4+BN9uRIz8buK1D336j3ZMrTmBAGOfA2Z7aZQokcDIGZ/SYXTMptdU0V8sp61JzXw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790089129;
- h=Received-SPF:Received:Received:DKIM-Signature:From:Date:Subject:
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Lp99v7OVlLUC for <u-boot@lists.u-boot-project.org>;
+ Tue, 22 Sep 2026 15:02:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 791BB60613
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=165.173.182.92
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790089342;
+ b=D1Bb9DuF2Rd0PCkJybU3fmcfl3yEQd1z71O9xStzpQs0Kfi3Ao3Q7HicA7pJfmAfuzkV
+ GoDssAyMCA4lkvgSqonPmyISxpPskITy4RJtfTqSCpVCFwoX2lVuVSsme9JlhmgL/tijT
+ jjmL+KuuAecHmE2PjAJjMdhBGePslk30v6p9KY5YTZApus0PS++qZ4YFC8iGttjRCeqQr
+ rCbjRXn0Qgvlw/PZvoZPY/EdzrfFXyyugcsHAQv/aKnzudlHRkOzNBqaRUGGJprUCbyHz
+ g6X1WlxFf//OAPf9zfwROWV+J7IvEbodXc/B3W4iUP250I1CCaXvLGT1ftdHFNtmqWA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790089342;
+ h=X-Greylist:Received-SPF:DKIM-Signature:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
- References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
- X-Developer-Key;
- bh=4k5cUyOfjEL+HB0YEfe7wV42mHfaDRgzHZf65TXNtdk=;
- b=DhyHFrcT//yeiilp9qBkLIlbwpvXEQrlSiXpHvJCDAglybhK2kv16EDosjXHdagAOUvc
- q9vIRBBAGsQKb5YneBuuQQMy7e4yqpFKLdqiQgUBEZ0GL2HonWGLwxxPP8PV7ho50asln
- Yb/i6jvrm+vSAS+zLARCYQn0vfPFbCCt76Xa8IH/6e/4iJVPY75V3Tkv5WREwTdg2VRvE
- lBhqwXwjvscEQNcJRkhirildEIWrP8uY9DTdMykTGvBVDa7uCQcpykWYmG8fV3R6Mc17t
- 5/leYkYdhwAtDGZGrKUc7pojYEd6dMgiukvXXufamRZx5lFkau0T9rvJMfnnv/a0eiA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=arm.com; 
- dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=lQfHzHps; 
- arc=none smtp.remote-ip=217.140.110.172
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
- helo=foss.arm.com; envelope-from=vincent.stehle@arm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=lQfHzHps
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp2.osuosl.org (Postfix) with ESMTP id BD2BF402DD
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 14:58:47 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BF3051BC0;
- Tue, 22 Sep 2026 07:58:42 -0700 (PDT)
-Received: from [127.0.1.1] (X72Y076X74-2.nice.Arm.com [10.34.111.145])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 06D1A3F632;
- Tue, 22 Sep 2026 07:58:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1790089126; bh=hx7LkZB8d/wd8o7R5H1ELb60Z/0yN48ZkScLeO7YV2A=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=lQfHzHps+O5jQx6d9Rb/4aVYTp+cie2WBfC5VT/zFwIDVvFWVgJ0ocMxddILqe0Br
- RXQf3UYMl3IZUHEnNbdlOvh/8RI/WmdYoBuvc8ZtWgjqP7pepR/0pP9uY3R1yDgPBV
- 324N9y4dhWlZMKrKpyqgp4t81f4bWgHgW3/oJNmM=
-From: =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Date: Tue, 22 Sep 2026 16:58:41 +0200
-Subject: [PATCH 2/2] efi_selftest: add minimal fmp test
+ References:In-Reply-To:To:Cc:X-Mailer:Feedback-ID:X-Zoho-CM-AccountID:
+ X-ZohoMailClient;
+ bh=Ucz+tGyex1V95dwXw9xH2Nr3mTdb9dXQCR6eNtR4PPg=;
+ b=oUxsax4WerwN0qsLM6+jr5dlPNv82TwBAifxwDYF12KWIrc2tjDRfdArQIF7CR/We1HO
+ /w+qrVXd6UMBGmWd6riBgLmS1LTV1MMoe7WKKNJzaU4VvMpW6nio9g8i8h099/Z1gYU2C
+ nTgyELKTaIqGKrEN4T8ri4P+XMSfUCVcZrF3ZL8AlWP0ta684cyBLKiLW5WJPMoWMsl+P
+ qjMR4DQbJLHD2YhLci5anp/Srp0ssNBOKVi3B1/LOWNYxBoPtgDC+tWWJ8izJ5mibVopE
+ 5Aa9x1iXBB0PrfLn6eOvprRo9eEw1sN58iy4SCMbNelMuFp14qjMMN118zoq0p7272w==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
+ dmarc=pass header.from=zohomail.com; 
+ dkim=pass header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
+ header.a=rsa-sha256 header.s=zm2022 header.b="D0/22Qo8"; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.182.92
+X-Greylist: delayed 115 seconds by postgrey-1.37 at util1.osuosl.org;
+ Tue, 22 Sep 2026 15:02:22 UTC
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=zohomail.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
+ header.a=rsa-sha256 header.s=zm2022 header.b=D0/22Qo8
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.92;
+ helo=sender5-pp-o92.zoho.com; envelope-from=zhuxu_ran@zohomail.com;
+ receiver=<UNKNOWN> 
+Received: from sender5-pp-o92.zoho.com (sender5-pp-o92.zoho.com
+ [165.173.182.92])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 791BB60613
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 15:02:21 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1790089175; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=XnTHiyNa0a9aa/6VCYG+zyf/NeDWIZa2ZIkY0uE4aqAHDHJ4usW5fyX7Z12xSUyjVWhQdVlg935toX/MnR9HjS6I4Wd12zFRJ5w/K3slkhBRYi6nALnwuoNH0mLAb8lg21htlnpRcgXBnCu3U+6CZe8ZE2qUwBuAU45H/IBiVtM=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1790089175;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=Ucz+tGyex1V95dwXw9xH2Nr3mTdb9dXQCR6eNtR4PPg=; 
+ b=Umw8FWyVqOZ6bmBFcORZ7On1qoakfvVYhPDYWfS2Gop8eD7U9kj/uA0bJZkpnzsddjEgjPIP8s/lQ8LT5tXUbun1F7NYhYs5IsL4UQKvNn84w8Kb/z6aU3Y8eCEyoCccAWXLYophGmYb3AE+C0/R3hwC4VhamUqlFWKJJ4yEEUs=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=zohomail.com;
+ spf=pass  smtp.mailfrom=zhuxu_ran@zohomail.com;
+ dmarc=pass header.from=<zhuxu_ran@zohomail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1790089175; 
+ s=zm2022; d=zohomail.com; i=zhuxu_ran@zohomail.com;
+ h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:In-Reply-To:To:To:Cc:Cc:Feedback-ID:Reply-To;
+ bh=Ucz+tGyex1V95dwXw9xH2Nr3mTdb9dXQCR6eNtR4PPg=;
+ b=D0/22Qo8FFDieUGRzIdGn3DkrK8dBfbyVeySyHT5olJa0D2t1k+bFjHD/BpKBBee
+ GS6kC3nsx4nWK3Y/fWg1q0L4/8OxKoPm9tdi+Evfk6GJnH7+OvnuW/yoSA2/JWq6WPt
+ iWS/vl2KlRVIpE8ttORSgA/f0PDAu+swQFe3SDdY=
+Received: by smtp.zohomail.com with SMTPS id 179008917410637.7988238085328;
+ Tue, 22 Sep 2026 07:59:34 -0700 (PDT)
+From: Zhuxu Ran <zhuxu_ran@zohomail.com>
+Date: Tue, 22 Sep 2026 22:59:08 +0800
+Subject: [PATCH v4 01/11] clk: sophgo: cv1800b: Add SoC-specific compatible
+ strings
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260922-authi-v1-2-e943530349bb@arm.com>
-References: <20260922-authi-v1-0-e943530349bb@arm.com>
-In-Reply-To: <20260922-authi-v1-0-e943530349bb@arm.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@arm.com>, 
- Udit Kumar <u-kumar1@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5326;
- i=vincent.stehle@arm.com; h=from:subject:message-id;
- bh=hx7LkZB8d/wd8o7R5H1ELb60Z/0yN48ZkScLeO7YV2A=;
- b=owGbwMvMwMV42vNHWNlitimMp9WSGLI2TV/4690MmQ1TDaVd1wc8+KMVwlIgIlp7fcMh/bpS/
- 7aZHE1BnYzGLAyMXAyyYoos1xNEFvRFBQgWVGjlwAxiZQKZwsDFKQATSZrGwbDA9Ywgj8mFB9LN
- nPEGHab7f5ZbnDj8/lmwZqd+eTfT/v6PkzSfTV5cfzhGcGpPcsrFU8df2jsdnat82F7EtPS8M4/
- VYx2VKgcOhci6Qq2QpC/xK4TeV7zrWLiUky3+tXVNymV1vs63HLyRq6qnGYT2uGxrZuyOLK0+96
- GOL8k4/O/MfesK/j+R9n6X9/rmgqQ1UarZe/ti77zWEpLxze/7HxPh6//8h9yXQ/dEf06TDPOcl
- VtjHcp1bhIT1+knXTN/T8wRmF1wPfBqZa7Bz3IPPe81bUw6Urd2PVMz7p6q84KfySSxQFyhuNBX
- +MLZg9/sPX5/8RaLZLjGX8SU8/n4/U2BaakzGdKq998EAA==
-X-Developer-Key: i=vincent.stehle@arm.com; a=openpgp;
- fpr=D76014A08E5A501170782A6CCB49F85676A30694
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260922-milkv-duo-upstream-dts-v4-1-d45b74dfad36@zohomail.com>
+References: <20260922-milkv-duo-upstream-dts-v4-0-d45b74dfad36@zohomail.com>
+In-Reply-To: <20260922-milkv-duo-upstream-dts-v4-0-d45b74dfad36@zohomail.com>
+To: u-boot@lists.u-boot-project.org, Chao Wei <chao.wei@sophgo.com>, 
+ Chen Wang <unicorn_wang@outlook.com>, Yao Zi <me@ziyao.cc>
+Cc: Zhuxu Ran <zhuxu_ran@zohomail.com>, Lukasz Majewski <lukma@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Hiago De Franco <hfranco@baylibre.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Inochi Amaoto <inochiama@gmail.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, 
+ Chen-Yu Yeh <chenyou910331@gmail.com>, Chen Wang <chen.wang@linux.dev>, 
+ Kongyang Liu <seashell11234455@gmail.com>, 
+ Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>, 
+ Thomas Bonnefille <thomas.bonnefille@bootlin.com>, 
+ Guodong Xu <guodong@riscstar.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Johan Jonker <jbx6244@gmail.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Alexander Koch <akoch@initse.com>, Andreas Schwab <schwab@suse.de>, 
+ Junhui Liu <junhui.liu@pigmoral.tech>, Marek Vasut <marex@nabladev.com>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+X-Mailer: b4 0.15.2
+Feedback-ID: zu080112279b88063b547ab2c95c94d3e700009cfe023e9e98ac19f7e152e440a4ff7d1bd97c87ae785acbfa:ZohoMail
+X-Zoho-CM-AccountID: 475a6e82b6074d1cdb8624e432e1257a5f0812bb6089f487c4846d9f660201e2
+X-ZohoMailClient: External
+X-Mailman-Approved-At: Tue, 22 Sep 2026 15:03:12 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -154,181 +177,31 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a minimal test for the UEFI Firmware Management Protocol.
-At this point the test only does the following:
+The upstream CV1800B and SG2002 devicetrees use
+"sophgo,cv1800b-clk" and "sophgo,sg2002-clk" respectively.
 
-- Get current firmware images info.
-- For each image, verify consistency of the authentication flags.
+Add both compatible strings to the existing CV1800B clock driver.
 
-This can be tested on the sandbox with the following command:
-
-  ./u-boot -T -c "setenv efi_selftest firmware management protocol; \
-                  bootefi selftest"
-
-Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Leo Yu-Chi Liang <leo.liang@sifive.com>
+Signed-off-by: Zhuxu Ran <zhuxu_ran@zohomail.com>
 ---
- lib/efi_selftest/Makefile           |   2 +
- lib/efi_selftest/efi_selftest_fmp.c | 135 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 137 insertions(+)
+ drivers/clk/sophgo/clk-cv1800b.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
-index 67102648703..9882d9f2748 100644
---- a/lib/efi_selftest/Makefile
-+++ b/lib/efi_selftest/Makefile
-@@ -80,6 +80,8 @@ obj-$(CONFIG_EFI_ESRT) += efi_selftest_esrt.o
+diff --git a/drivers/clk/sophgo/clk-cv1800b.c b/drivers/clk/sophgo/clk-cv1800b.c
+index 248a69321fc..57051c1ec0a 100644
+--- a/drivers/clk/sophgo/clk-cv1800b.c
++++ b/drivers/clk/sophgo/clk-cv1800b.c
+@@ -744,6 +744,8 @@ const struct clk_ops cv1800b_clk_ops = {
  
- obj-$(CONFIG_EFI_DEBUG_SUPPORT) += efi_selftest_debug_support.o
+ static const struct udevice_id cv1800b_clk_of_match[] = {
+ 	{ .compatible = "sophgo,cv1800-clk" },
++	{ .compatible = "sophgo,cv1800b-clk" },
++	{ .compatible = "sophgo,sg2002-clk" },
+ 	{ },
+ };
  
-+obj-$(CONFIG_EFI_CAPSULE_FIRMWARE) += efi_selftest_fmp.o
-+
- targets += \
- efi_miniapp_file_image_exception.h \
- efi_miniapp_file_image_exit.h \
-diff --git a/lib/efi_selftest/efi_selftest_fmp.c b/lib/efi_selftest/efi_selftest_fmp.c
-new file mode 100644
-index 00000000000..c17cf59a237
---- /dev/null
-+++ b/lib/efi_selftest/efi_selftest_fmp.c
-@@ -0,0 +1,135 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Test Firmware Management Protocol support.
-+ *
-+ * Copyright (C) 2026 Arm Ltd.
-+ */
-+#include <efi_selftest.h>
-+
-+static const efi_guid_t firmware_management_protocol_guid =
-+	EFI_FIRMWARE_MANAGEMENT_PROTOCOL_GUID;
-+
-+static struct efi_boot_services *boottime;
-+static struct efi_firmware_management_protocol *fmp;
-+
-+/**
-+ * setup() - Setup unit test.
-+ * @handle:	handle of the loaded image
-+ * @systable:	system table
-+ *
-+ * Keep Boot Services and locate firmware management protocol.
-+ *
-+ * Return:	EFI_ST_SUCCESS for success, EFI_ST_FAILURE in case of error.
-+ */
-+static int setup(const efi_handle_t handle,
-+		 const struct efi_system_table *systable)
-+{
-+	efi_status_t ret;
-+
-+	boottime = systable->boottime;
-+
-+	ret = boottime->locate_protocol(&firmware_management_protocol_guid,
-+					NULL, (void **)&fmp);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Firmware management protocol not available.\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	return EFI_ST_SUCCESS;
-+}
-+
-+/**
-+ * execute() - Perform the test.
-+ *
-+ * Call GetImageInfo() to retrieve current firmware images descriptors.
-+ * For each descriptor, verify image authentication consistency.
-+ *
-+ * Return:	EFI_ST_SUCCESS for success, EFI_ST_FAILURE in case of error.
-+ */
-+static int execute(void)
-+{
-+	efi_status_t ret;
-+	efi_uintn_t img_info_size, desc_size;
-+	struct efi_firmware_image_descriptor *img_info = NULL;
-+	u32 desc_ver, pkg_ver;
-+	u8 desc_cnt;
-+	u16 *pkg_ver_name;
-+	int i, result = EFI_ST_FAILURE;
-+
-+	/* Determine buffer size */
-+	img_info_size = 0;
-+	ret = fmp->get_image_info(fmp, &img_info_size, NULL, NULL, NULL, NULL,
-+				  NULL, NULL);
-+	if (ret != EFI_BUFFER_TOO_SMALL) {
-+		efi_st_error("GetImageInfo returned %u\n", (unsigned int)ret);
-+		goto out;
-+	}
-+
-+	/* Allocate enough memory for image info */
-+	ret = boottime->allocate_pool(EFI_LOADER_DATA, img_info_size,
-+				      (void **)&img_info);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("AllocatePool returned %u\n", (unsigned int)ret);
-+		goto out;
-+	}
-+
-+	ret = fmp->get_image_info(fmp, &img_info_size, img_info, &desc_ver,
-+				  &desc_cnt, &desc_size, &pkg_ver,
-+				  &pkg_ver_name);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("GetImageInfo returned %u\n", (unsigned int)ret);
-+		goto out;
-+	}
-+
-+	if (desc_ver != EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION) {
-+		efi_st_error("Bad DescriptorVersion %u\n", desc_ver);
-+		goto out;
-+	}
-+
-+	/* Verify each image info */
-+	for (i = 0; i < desc_cnt; i++) {
-+		const struct efi_firmware_image_descriptor *inf = &img_info[i];
-+		u64 attr_supp = inf->attributes_supported,
-+		    attr_set = inf->attributes_setting;
-+
-+		efi_st_printf("  image %u: %ps\n", inf->image_index, inf->image_id_name);
-+
-+		/* Verify authentication */
-+		if (CONFIG_IS_ENABLED(EFI_CAPSULE_AUTHENTICATE) &&
-+		    (attr_supp & IMAGE_ATTRIBUTE_IMAGE_UPDATABLE) &&
-+		    !(attr_supp & IMAGE_ATTRIBUTE_AUTHENTICATION_REQUIRED)) {
-+			efi_st_error("Bad AttributesSupported %u\n",
-+				     (unsigned int)attr_supp);
-+			goto out;
-+		}
-+
-+		if (CONFIG_IS_ENABLED(EFI_CAPSULE_AUTHENTICATE) &&
-+		    (attr_set & IMAGE_ATTRIBUTE_IMAGE_UPDATABLE) &&
-+		    !(attr_set & IMAGE_ATTRIBUTE_AUTHENTICATION_REQUIRED)) {
-+			efi_st_error("Bad AttributesSetting %u\n",
-+				     (unsigned int)attr_set);
-+			goto out;
-+		}
-+	}
-+
-+	result = EFI_ST_SUCCESS;
-+
-+out:
-+	if (img_info) {
-+		ret = boottime->free_pool(img_info);
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("FreePool returned %u\n",
-+				     (unsigned int)ret);
-+			result = EFI_ST_FAILURE;
-+		}
-+	}
-+
-+	return result;
-+}
-+
-+EFI_UNIT_TEST(fmp) = {
-+	.name = "firmware management protocol",
-+	.phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
-+	.setup = setup,
-+	.execute = execute,
-+};
 
 -- 
-2.53.0
+2.55.0
 
