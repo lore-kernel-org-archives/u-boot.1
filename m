@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C851C982F1
-	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 08:46:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF31C982FF
+	for <u-boot@archiver.kernel.org>; Tue, 22 Sep 2026 08:46:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1FE0480E02;
-	Tue, 22 Sep 2026 08:46:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2E18D40791;
+	Tue, 22 Sep 2026 08:46:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Tx6kp7ly0lEn; Tue, 22 Sep 2026 08:46:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 97E7C80DE6
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1790066798;
-	b=lGOfAW+QJIL0G3GthUejtc6+p6oITn1ismf2CVkRRE5q67hXpF4MMnHr8Slrluj/62tu
-	 Mjn3R0q5+YNHa5ez44+dQnxhQlPS0qBKdfvnmQcG7NuSWrh7itNGH92uFRQd7PiDVU0M5
-	 X6zmsTqCKVJoRMpCxVww0Tqvl5xaERq7YUbsEN26C2/s22usFCNWodKe5zbFM3yF7PTTG
-	 s0jTq9eugesY8A/eaI/w40oQetG2sUUY577NCkdBo5u8xRUcIbbwERs2XFtmWVADLhehL
-	 x0R5EV1kspUJVR/7dRKBo47UjYKZetu+hB5vAjXzD7SKIN3JrJ2knCd1QW7Mg6DxS1A==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WXW1cyerOj-v; Tue, 22 Sep 2026 08:46:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A602B40778
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1790066806;
+	b=ZT64OHoyt4yBIW5McDv9Ggl4f7BK6zXFV8DEgObbuXa0lv51o5fpLFQNKMX6m8Apgkvf
+	 2C0uYDCVBkFlLw8dKoLYAL7EhGSebQHTIBS5seMrisgNUe823DHMON1YoXdq+FML1CeUK
+	 S/Dy9j7ljRl36coOKVqyRvLfXfW6EieCx2o2wY1dZEfxp2B5KyMPEY0t3NrJX7A7ZQvbl
+	 0PRwoP3zD73V2LazQ4J4KHE24wu8C1tWxlDsHSeN8XeSNUAJHscfbIw5DYTXJ7dvqs/KT
+	 LiZ1EvPjSaKIwu1BskAFvdtGOAFVZ9UfkGIGMgFf2vtPoTjd4TB0ubJksFT3NvYT//A==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790066798;
+	c=relaxed/relaxed; t=1790066806;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -44,57 +44,56 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
 	 X-MS-Exchange-CrossTenant-FromEntityHeader:
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=c6Jo7FHEju9LMt7kITBtL5DQZHbhF5Rv7dugEZoeqM8=;
-	b=Ku6YOwwBNHjdwF0GxfNXyfNf7pSHb3T/FtHLKn/XxWpTY8iS6U4Xj9Uk/pcrqA9ZHebu
-	 QdIviyAExcf6jMfLMnxBAnnoend6e2kDF2rFKOcXIiGTIYF5QD5lR9aQ0//O8K/Zz6KVg
-	 rv1bQ6s1JTqR/g5/eZRjsa4tD+9MVL8PzJO7cXH3edJWXVxpVq/aFsJjq0bTPbkqrIZ+6
-	 O50T5zxFWIkXMLTN25HWA/o/CeWaHDB9wQ+06UB++SVTypccLGZ3Uby8RvzcXzpux7yZD
-	 xhXecr6ii1bU01wAnsXrsbgVAfNSIIf0awpPEh6A2CW5D886lw5k/4OTrE8FM0JslZQ==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=PVIynApzWeSJMZ6xF2tQP83+R+aQGwUR/RPBOGiCqBM=;
+	b=igGkIPiqhxJ6feZSjqI4DqKyJD3wqUQLdtKfEBYvhE5RReFz6vD+PoG0Bvt+v3Pmst6r
+	 HDGl4b9kKWVOLKHeJB21h8BeqjPZP6SYEYwxsqvl/Qu68N/0h1YXqcu4hw7RniSN+pUyf
+	 buGCCIr7tkuYbhOGGzI5f6YQy0mK8dCJlmTM6ZclclVc3urdTHfwJSKCcRQQvCANr+uFg
+	 QXxSv/0mBOJmAIQ5ywkYeoqe42agJXvH3ujj+uS4i5Hkle+vG0LXlQ3mSJYuFbSoaH+nW
+	 PQYdh2t6ESVdKr0cU25ylIBEXaWKX1vG5y/ERVn/hB8GGTC+PJMVtjYVgfds8A+jKqA==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790066798;
-	bh=c6Jo7FHEju9LMt7kITBtL5DQZHbhF5Rv7dugEZoeqM8=;
+	d=lists.u-boot-project.org; s=default; t=1790066806;
+	bh=PVIynApzWeSJMZ6xF2tQP83+R+aQGwUR/RPBOGiCqBM=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=cVZ5NYrB35ghsQgAmjRPpS8jkafgycME15IQ65CycupjL8/+jM8IHLkgEayqKNv9i
-	 6lwZ0iIo/5d8S+euQAgkUNMVZdHnlpU8KhG28xwSfy0A+PpLNMlvfTzd+ngkzRxzvB
-	 mlXjCjxQozPFfWMXR5Tv7G8ZKArBav0gwsnXT/hyXRlLa2ASk9y9dIqXEIDyeZq0Gq
-	 UfZmc8UCWG+JvHNRMIfI36eyxn4ggGeoDsk5QBuqnN08rCN2EYl5MBte3tNNHNTqqn
-	 /VruGeD8ERrdK4rF1+YDVxaDEiooZtgVq+gsj0hCNe3O8lU3sxLn1XQFwnSvsgQLRd
-	 jz9OV9E1FmNAw==
+	b=CPGXOxcdQV7Fya8YOHJz1PShcXEmreZnsGyVeejaJvob8vQsJtMECPigS4jkfw1nj
+	 sRbD7Rw/jsfXs1q36Ffz8PFkBEkLSH7Akz2E4mA6T2Yuns4eJNKEMKYjWMzvvXk7dH
+	 LXsEoR2p8n9C09zQQk65po0rUrn07x99e7yTO4KMO9Uj57zEqXh1VmYlpoNBrzvwmT
+	 fCrY9pH80GkTbi7qI8NFibzdWgMEP2Mp1i0RDzJ9uwJlktk+fQw9mV3mMErBgDBA3q
+	 YaNaFYdtbR/7n8hFJFYANQKiCm+N+Kiv/NNImQMN8lJ2Ioq0eXa0ZzgsW+v7bw/uNK
+	 un6hC/HeQnQ4A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 97E7C80DE6;
-	Tue, 22 Sep 2026 08:46:38 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id C4B12472
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 08:46:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A602B40778;
+	Tue, 22 Sep 2026 08:46:46 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id DAAF0194
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 08:46:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A973840194
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 08:46:35 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C0B85606CF
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 08:46:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yFy_M6vsZgYU for <u-boot@lists.u-boot-project.org>;
- Tue, 22 Sep 2026 08:46:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org C383140061
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=148.163.154.28
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790066794;
- b=AL2AM3pQJ7a1ndOjGV3FYOFuE24he+dGarsFJXpW1Qv5JoWh/nli7lnoHfdU1gsqep76
- JgD+mx4nZRgYtz1iL/IXuHy9/fs725NXX5K7ciZQ46kVLFyXAlnSjuC1iBy0nl40qpaRJ
- VGWpmdbJOG1UvZIFazjKoRhW3O5O5kR9tdsJw34e9hChvxGMqkdSLO4SA6u+SKrd07cVn
- fitvIpnU1zeqQLVcZwlbUyC+QxXoLCEs2qPTF9gvX+n+S+BrYcraEKZWkpSQTC8B4K/Co
- BYHWJnp2p1LVXfyTleokj9LPijpuHKARlsXOPZ6w8KAZjpSgR7DeecCywQpU/4zNxoA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ArZLnKBM-Cqb for <u-boot@lists.u-boot-project.org>;
+ Tue, 22 Sep 2026 08:46:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7832360657
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=148.163.150.75
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790066803;
+ b=VwmQSJkVKbTn5WQrgmWSj/bl6Dfg0kXkA8B5fA9MdrA0ZFuLz4uDaPAjIK4qX8Ce+jxQ
+ E4IG/2QpPKGjEsiNA2etEEFdmfsr8eZsoIdD0Jh5V36PHv/daCs24NrTqu0rz/cJtsXh8
+ A466rVXTJV5xyNSGJ6nR9ZEs0V26TgGIbmuDCs1EY4wNl7or0xgAukMaII1cVjAR9O1nw
+ fobv2/7dOmFahUWCc3snm48nPza7fOd4RraTahlKXtrHXItjENnv1lLfg5Jfnn0CUr8Rw
+ HkY6oEGPpRWEOijJK3BPVRvfuP8e5kGhmb6PklpIM0Yo/UQUed0OK4N823zfR9nPDPA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790066794;
+ c=relaxed/relaxed; t=1790066803;
  h=Received-SPF:Received:DKIM-Signature:Received:DKIM-Signature:
  Received:Received:X-MS-Exchange-Authentication-Results:Received-SPF:
  Received:Received:Received:Received:Received:From:To:CC:Subject:Date:
@@ -113,117 +112,115 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
  X-MS-Exchange-CrossTenant-FromEntityHeader:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped:
- X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
- X-Authority-Analysis:X-Proofpoint-Virus-Version:
- X-Proofpoint-Spam-Details;
- bh=c6Jo7FHEju9LMt7kITBtL5DQZHbhF5Rv7dugEZoeqM8=;
- b=LLDalSmSjJfbXt1oV8spJQdUGVHrlgv7e2UvHZoXK+6m6HdACtPQ323ZCfxjyZF1yiNh
- o+2lFz5JqsUU4Sn9/VGqyhQfKVXXj5bH3Dss/7VJe1BxmGX7MLGd+gLqCCVCOfH97Kuzw
- 0PQ2A4Goi8/JqWBtFrsfplwALgSZ8AxVeJ8t9a0WkR6pXQoJ/TdKRSNJr/swvR4yp0AVi
- +RuLkNZ2Sv5nYVWftdxow/VH20CPJutEiConi1my0f5X2Uyd++3AsibMsqLuMHYcigP+l
- /GP10TJekWBDQ0TYb/k1Zc512ebDBQ89t+ewSTzEDb8cIcfFpHkc4AA/JQElEn+dPbw==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+ X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+ bh=PVIynApzWeSJMZ6xF2tQP83+R+aQGwUR/RPBOGiCqBM=;
+ b=bC8BUntob6sxje7Y0bQU8JR+jZ9R0vmy8Ygxr5cB7FvPGCshCxTHWaHvM7NhLX3e73aw
+ Bwe3GlAOMkCpAeTtBASuUuoSTrTHvrCQxMt1ahB0TBQIPMs5mdldF4VcYi5uzPs31Zfp0
+ WbKCHKsNKYSJQBNQ0obx9go573a4Zte5aSn3rUM2ld52lfTWDNJVjSk/3weGDrnK9MPjV
+ rVo9mcoYC6QLFKKO9pZHDoUUuUDhq+6kYF1hgmZ251nOaeGYhhiYkLJFl6iOenGRPks5N
+ w2a/srk/t09V8PMd+4DxYxw2yfy5E4DRdl+iXOm4iNXvcx/qF6kwpFkyQfz/aYvXLJQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
  dmarc=pass header.from=ti.com; 
  dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=proofpoint-05-2026 header.b=GnXOAFn0; 
+ header.s=proofpoint-05-2026 header.b=cbOIKQuf; 
  dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=dpAHgmLI; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=148.163.154.28
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.154.28;
- helo=mx0b-0002e601.pphosted.com; envelope-from=b-padhi@ti.com;
+ header.s=selector1 header.b="m/+q3DUK"; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=148.163.150.75
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
+ helo=mx0a-0002e601.pphosted.com; envelope-from=b-padhi@ti.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
- header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=GnXOAFn0; 
+ header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=cbOIKQuf; 
  dkim=pass (1024-bit key,
  unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=dpAHgmLI
-Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
- [148.163.154.28])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C383140061
- for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 08:46:33 +0000 (UTC)
-Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
- by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68M7rVjH1034836; Tue, 22 Sep 2026 03:46:31 -0500
+ header.s=selector1 header.b=m/+q3DUK
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
+ [148.163.150.75])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7832360657
+ for <u-boot@lists.u-boot-project.org>; Tue, 22 Sep 2026 08:46:43 +0000 (UTC)
+Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
+ by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 68M8irPs3143633;
+ Tue, 22 Sep 2026 03:46:41 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=c6Jo7FHEju9LMt7kITBtL5DQZHbhF5Rv7dugEZoeq
- M8=; b=GnXOAFn0BJ7Jjh0vltgi6OopIyj+Zr6G4g3Ha3b1KA43lqE5yHdAMrT6g
- UDMgaML0BM5bWSwoD4VYgxP/9d3dnrtJhYwolEzlpGnukJdDBVoMIebQlKKU/Rq+
- tazzx/1HrYL0zBJdDFxIQNUkrwwg6pS/ARr4Kkt5E0ncumq5PSq8FOCeF55THOak
- WylXFOAAiLudOfcF8ZqTJtIa7HNhZptrW6xi733nkZbzVVbx9EZWURUdc+r2G4Kk
- 3yitYNssusP1psmXq+m6TYnXuO6xcs6Tv4e7NTHlKKDAzArUxPR63Fb83BO1D99l
- iq+gJ02Chym2p6eVdFvsis2E7+FEA==
-Received: from sa9pr02cu001.outbound.protection.outlook.com
- (mail-southcentralusazon11013065.outbound.protection.outlook.com
- [40.93.196.65])
- by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4gugxm1rky-1
+ proofpoint-05-2026; bh=PVIynApzWeSJMZ6xF2tQP83+R+aQGwUR/RPBOGiCq
+ BM=; b=cbOIKQufPkCU1V598K86ozMTUYVLdmM6GyCNaWSBsESxLOA9DVhbmHur/
+ KR97HAxrRR8beErP313LtNs3cB4uXE4oOVmsMWjrO7Miwgft38X1l31FPOtJVz6h
+ KnvxadDV6vAuxJjUtf6QcGPP5uVe+nlY8p3+9Nb06nxk3u7H52rorFvOtuQcmEee
+ /ELFTrcZPes4Pkhj/alKIub1lIz0XNZ+brfPxyE7zqwjoEXjF9LLzOC96OYqL3Tv
+ GnsCSDsk4SIDGeT/SL4VWBKmvSy3I9vSCorj2IDs/XZpbc4t3t84uXG+2b28x9s6
+ W+RzMDyyb4I9t5pNTC7d0xaRNGszA==
+Received: from cy7pr03cu001.outbound.protection.outlook.com
+ (mail-westcentralusazon11010071.outbound.protection.outlook.com
+ [40.93.198.71])
+ by m0384305.ppops.net (PPS) with ESMTPS id 4gupea00a7-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Tue, 22 Sep 2026 03:46:30 -0500 (CDT)
+ Tue, 22 Sep 2026 03:46:40 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AebcQuSZ7w7jF1w999rdkmNHDkfUS6/ER/d8p6p+GRVfEioowrAfvP2pt4mrf6QTQDoWBY/LjdcjIcMz5ebMecY5jFcNNRYkJD33NgnxeCedmQQpSqDEPHUZv4WAXiP0TbUDDEAxBrorWHzf3CGRzBuSlN+xSzha/X21q0Ani36bTU3Tpd+bvbnduPr2unc5D7xIwf3snWFzmHVaWrcQfe4FhfUeTEWLt4vAoD7W9ifEUKYV1ziLpv8rwKBqKO1V5hMR9GbctR/JIRFWhIG3FoQOgNS/qrCZlEHeFRs2rnHq25g2lqjMDXFeoMX6KAwkZT3kPsAMcC14FyBBSSFBug==
+ b=eGYRY57YBYyMVADcPEFI2yMhaOidQ7eBY1dM1ZHKsG9BrNdexIoNVeTFzi0f8kLRx9jYGNopSkkAgMYbcRH/RZ0Dbk+IrJdvAhVgVP5ymjTOXYRDT6XD8gvLxh4Q9XdRQQxZvOl2UVlpYC51OQFkFrI1VKQ0NYYqkQh3oBuZeKnP5a0pzJ4fjTHnaPaFZJjAspEcnFShYAHNJu+cOEZdIIA1BpuQLj0ycnnPY1j9H1BWsQjnfU/9jc+Ch0zyXVHMoDo3yH/SDq/Qcfwti8SsmbVu3jKiOVpvuszNX+7GMkckjcA2IEjtJOSOQg12LMBnW7ioxEo2w9snJwuPK+S+CQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=c6Jo7FHEju9LMt7kITBtL5DQZHbhF5Rv7dugEZoeqM8=;
- b=GjT+IOZBjUizIdazowvBEHUEqhEpd+IbEJ7Z8Fi10Bn3uPUeCy01WynOjTuYjfJ6ZHmenQU0wD7tRV9aonjYd//sD1pQSp2fl1t1994TUQU6JVqQQFV/FBr3CpXYn9a2zhq5opV3LBSesXKDTtCmp+iK5WdXGcWQRyZSHjn0b9ja0/IDj1Fmcn3sBPODz5ubXe0bwT4ch9P5z74/X15yOEdAljiDG6lS/w6hIURZ/W9znJjVRp+c6Hm7YobG5htaBChTm9+FJh3OfngwQZnJLE8puGSUpA0FTh7AW9TqJPaQox/X4gUIGw3s9vyaYLAmbeEKWeaBY8f9josDPdIUtA==
+ bh=PVIynApzWeSJMZ6xF2tQP83+R+aQGwUR/RPBOGiCqBM=;
+ b=GIQLkZnXmrNGjDHoJFW6u6W40FPhkdtmYIGiqm0V8MVkFjcJqCBSQBfozmJH5XPVKlizmkKGxGO1Z5LzrSJKDYKpqCZ0v0geogEWxRu+ZnKfmJ1QubfpZ8JGLAXWIiUEzCkBhdk8MrDAcgapTZTsNM7NfwOuS0d59Zc8MWs2fdq6DixUTo4UC8WsmdXZKboGYUFuZ6ApkF4o6advzjfm3seLAyh3RUNLSf2yPeV3f3Es2JGFMEg9vq8y1ulljsdz2r6ek1cmTUcKxVYqrFyFujirmgm6yfCdRtDLNmxRjzB3A24b5ZK3H2pz2Hexf/HgMtXvS53NnZc/xtrPyDfLVA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.u-boot-project.org
+ 198.47.21.195) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=ti.com; dmarc=pass (p=quarantine sp=none pct=100) action=none
  header.from=ti.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=c6Jo7FHEju9LMt7kITBtL5DQZHbhF5Rv7dugEZoeqM8=;
- b=dpAHgmLIFGFHlOF/Abe5pObstKnbVItEVztYiUJaMqrdh+TE6Kzu36QEl7QyGkAHsuySCI+po+4T+/o6L+4S5KA7AJHD1f7JogP3V9kYgUIhKbAUYsI3+JIW0Wrz45arEyZOQgdAtKZ5P/y5+SIYam+/Jo2UVpnzKmbrvcF5BkU=
-Received: from CH2PR04CA0012.namprd04.prod.outlook.com (2603:10b6:610:52::22)
- by LVTPR10MB997866.namprd10.prod.outlook.com (2603:10b6:408:3c6::7)
+ bh=PVIynApzWeSJMZ6xF2tQP83+R+aQGwUR/RPBOGiCqBM=;
+ b=m/+q3DUKiFioHcNZK2H24+5C2ymP9Hy9qguBxBNSy5Xw+0GSOTMLuL5gzXUDcmLuIDPdusoKYJncdC2X+fPL5/8oy2JwH+ZdJdw85hDGjyIPYg2LiJ7/+xnTRU60oG2E8VKBIdKHByvjOiOQPo9puY3x/W2FEWIjN2B+9M0U6Ak=
+Received: from BN9PR03CA0858.namprd03.prod.outlook.com (2603:10b6:408:13d::23)
+ by PH7PR10MB7035.namprd10.prod.outlook.com (2603:10b6:510:275::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.9; Tue, 22 Sep
- 2026 08:46:26 +0000
-Received: from CH3PEPF00000015.namprd21.prod.outlook.com
- (2603:10b6:610:52:cafe::45) by CH2PR04CA0012.outlook.office365.com
- (2603:10b6:610:52::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.13; Tue, 22 Sep
+ 2026 08:46:36 +0000
+Received: from BL02EPF00029927.namprd02.prod.outlook.com
+ (2603:10b6:408:13d:cafe::9) by BN9PR03CA0858.outlook.office365.com
+ (2603:10b6:408:13d::23) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.16 via Frontend Transport; Tue,
- 22 Sep 2026 08:46:26 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 198.47.21.194) smtp.mailfrom=ti.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=ti.com;
+ 22 Sep 2026 08:46:36 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- CH3PEPF00000015.mail.protection.outlook.com (10.167.244.120) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BL02EPF00029927.mail.protection.outlook.com (10.167.249.52) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.451.0 via Frontend Transport; Tue, 22 Sep 2026 08:46:25 +0000
-Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.451.8 via Frontend Transport; Tue, 22 Sep 2026 08:46:35 +0000
+Received: from DFLE207.ent.ti.com (10.64.6.65) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 22 Sep
- 2026 03:45:52 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 22 Sep
- 2026 03:45:52 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
+ 2026 03:45:59 -0500
+Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE207.ent.ti.com
  (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 22 Sep
+ 2026 03:45:59 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Tue, 22 Sep 2026 03:45:52 -0500
+ Transport; Tue, 22 Sep 2026 03:45:59 -0500
 Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [10.24.50.162])
  by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 68M8jaFM3813357; Tue, 22 Sep 2026 03:45:48 -0500
+ 68M8jaFO3813357; Tue, 22 Sep 2026 03:45:56 -0500
 From: Beleswar Padhi <b-padhi@ti.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>
 CC: <afd@ti.com>, <bb@ti.com>, <anshuld@ti.com>, <hnagalla@ti.com>,
  <jm@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
  <b-padhi@ti.com>, <u-boot@lists.u-boot-project.org>
-Subject: [PATCH v7 3/7] binman: openssl: Add boot and load extensions to x509
- cert
-Date: Tue, 22 Sep 2026 14:15:32 +0530
-Message-ID: <20260922084536.2477291-4-b-padhi@ti.com>
+Subject: [PATCH v7 5/7] remoteproc: k3-hsm: Introduce a remoteproc driver for
+ K3 HSM core
+Date: Tue, 22 Sep 2026 14:15:34 +0530
+Message-ID: <20260922084536.2477291-6-b-padhi@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260922084536.2477291-1-b-padhi@ti.com>
 References: <20260922084536.2477291-1-b-padhi@ti.com>
@@ -232,57 +229,58 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF00000015:EE_|LVTPR10MB997866:EE_
-X-MS-Office365-Filtering-Correlation-Id: 46c87a61-6a83-4628-08ab-08df1885fc90
+X-MS-TrafficTypeDiagnostic: BL02EPF00029927:EE_|PH7PR10MB7035:EE_
+X-MS-Office365-Filtering-Correlation-Id: c9d3d609-a567-4960-f163-08df1886024b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700016|23010399003|13003099007|56012099006|6133799003|3023799007|10067099003|18002099003|17002099007|22082099003;
-X-Microsoft-Antispam-Message-Info: lXbLk28wFVxFwSonScAH8lzDRKkzYabQiuTjlv4DGFOjsqEBmOOiDPO0Wf8ebdObZSjHi5NpraowCBqBtn42gu8xmttZKO/UAUtH4eEaeUQTK9xerTsjF600mGZk0IOq2kNdkwrSqzwr2nRFmDydduOgHoM3kZfR4IqfPirM31BGMfzG4RwrLeaY/54p4O18DOm4MsE5xZMr9ePALJCh6MMWwaIiAzZBOXZOCRMznh7gb2axeQ4uUHWEsB0IlDsW5DWocLawj+Gdwy/3A5BgLsTIr8mhatvvhEqnQqgAd7mE3dAxXS7g1txGSV1UgzCWVyWXCW6c3RtehzZjx64Ypj8PGg24ltEKbh0ojP2IYFvvfEyVnB4va/DAQpILOrqZmwJX7OK8Mb3YkLKAGxZ8EpI4By3uDV9bTH3qVWzXQorhsI2JfBWj6OJQaZ143yD/AJJHXTepdJahktVvLnlpKVfJEmCt6O5Qn0lzPt3vw79TZqRQ5NafUjkv5qwuUPycI7XvQk/wT2Js0WkF5VNoqHtnugLSIdo/umzCu650oNGsgXUYmDnq42gffj6P1sWJyPV1tjxU9TdlJPc8ptomdqi19gj2YzVk5yvFPXRuW70zmoaP9YVEgN1qCcs67ijmeocZC/17ixn9Of1MOQCpQg==
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(23010399003)(13003099007)(56012099006)(6133799003)(3023799007)(10067099003)(18002099003)(17002099007)(22082099003);
+ ARA:13230040|1800799024|376014|23010399003|36860700016|82310400026|13003099007|3023799007|10067099003|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: XjRabFeEv+zXD3vFyKe20tf5FEw9SGG8F43EuNKC4kYc5JnrXEODJZvkbRbrVTNVZolwvGrsO8codWCI5h03Pb5nH6dAo4sE73ND5pi6VbaD0qyCVjjL4g2ThPCSDPhYk1d5gr0t0xe8qb0WRceqZu07Hfkwfu0kb9s5a1jR9wDJPT6w0ZafLaDJrNlFb72BTDzrRSKbbg8yBDPlZNyrUYfY4Xxv9BU0ajN7WhGBj9pNi5kjdMITiSsus1YltygANE0d3dQ6CjTTZdBWPjmgzGd/Bo+d8E0IOB/skNOJe3NMkv2NHjP2Ji74O0ia6lp6Z1nbYmdRjHOXa2W+eWpwpa3YAdOUhUkiG12QWGTxykDndoydjRVumHq3tFIxVhZsBXtOFAXI0Ojj/1zvLK5LpRNQitnMZ/OrhkeE4PPQAmGs0qTc+8UmF+o5uCOpkLK5EtGO+db2JNfHSg9trMO0azQOuOQV2JLrdmAIEKGfNXmtr2gVdFo2d6jK30ErLKy5nvxIvuhvfHxgGoU/4SGzrdyVWhlTbyaH15SlpXYa5yuvYc2qXjL19kKr1QgVKxhTFW4wlKtV2y00UtjPZCRjAuY+IaNtvVtljGa7DVn6JbENj2A48P2r+ZoP9E0Kl0iFH9iCRv4G/IeIwLMN5QpSVA==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(23010399003)(36860700016)(82310400026)(13003099007)(3023799007)(10067099003)(56012099006)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: C6L7PTbMLG+Trt3rjOa781zbgPHwWLIyDuixoYLi3c95/R1rIv/MChK5U6OXX1EBsaDy/RhEbbmvaIwssOGPU42QOPn72T0hzNtEUWmEKAArqyEwYrorY8WQq4rgjSNZp/hnK6ZH3EnRE01egrzbweuFmDzeLfYPiRaK459hScScw6cjVwwFMWzqheYcGedKqXIVx/AY+tXBg8h7hsikJiyVHprg/Og2C1zNsJYLdJ6kOkSoyFHT4n37UtTZgwAOpI4bPrqg1e0WNdWpvsqAkIQUZv9foUe+xjMUmH36YwFlqQF62+UqK81P2V1JfZNcZatxOwaS2LgKHCJzCtEmMSL4rJR3W49WFN+bce0AobF4MWNnoA2JiJCoNDgH3sG6uvxYpJXYPRu/3c6XAMbyiQfoBR5X8H3hcuEDoqE9+NQCb5Iamg7TqDVFWJP7Jj6a
-X-Exchange-RoutingPolicyChecked: lg0heVOBCCIbTtTZDSco8dqdAH/U+R3tmwJ48+NyjmU85fD56CS1vCukKhUmp7zmru9DKOl7O+hxBRUTAmKGifozgtJpae5ECRPuE/u2RLlKpXZD79XnFcdhu7G80WXRwqqmSCMcqH5X/6nnsD/VXV0nU5GCPrfuUG0hKlHL3ZQgeCbx1Mn5hs0GULFDp6dESd1Y33qtOJtjPNtH7fTgV+/67sZMO/KRlUB+GyXjxwImjXIoOylxtBoZo/PIKovspXJ0cBwTz6b8JaToJXH1tPSuMxq6nWtySCswZ8nqgQARIXQzGGXmCDwaX1wk60vUbQcNdCYGmaOMMk/JPLXKiw==
+X-MS-Exchange-AntiSpam-MessageData-0: WbI/51roS1/WK0jaOGJvg/BrkwR5ZXx6uYDIZLs7dmSKCvAonohuUJiB1avhFtKeNQ4304GjEz1F91uFHCC1dcWXARJbf9iONTJNQNfyF1N2D0uNDQN5BPgbRy/vRk9FpUrW5DxsY/7nnwEd2Cyx3nlvMItI1zm/QD9EfLRy2Q2cECE0560BnsJBSszEEI4wjpeLCVRlZ4umfnwOuafK9Kb+2e1HXbZeXtl3KuVCJPAI3+OINkNxfxFdKM6oqGaiSPl2zKLkR/gmnCrpY6LtOr1a4XFP9wfqWcnoDoPDI83PfGFqNgtMgwGSujiiNJQ/1gn2wQVsySh0ViZ8EG+ey5WaRR/wcx1VVFS58+0WECNaL1QXdM/uJNTsH0lOthwXSYQk+Qr+MHVZpVRCbt9+llIo14sggMAp9pkwYX9yFBEvH7S1bjk/j5DUI5nbgpba
+X-Exchange-RoutingPolicyChecked: o2e6lSqyYF9OIku0k3jj2gN6qNEHPUB9WqnOAS1bAXshs54HZt6DsE0p0s/YXU0hz4ndSGhbbKg/p7BlX6G7Lc3pXrl/OvQRApHrBjzzU4FsnTXss5eYteFZcxeoQAgJaWMn/Mz7wMxC2RATS9qsbPGMCmllsCVUwgHbYN9QEELWkLnva1yZ1adxbM61hmDYn3ov4ZZDR4EFo5gvR+eF0W9OMbzFTMjfv+tVrbtX3pYc8VWae3Npjlgt2U5308dKDagq5qu6c1FRdhhXPD0GRZ7xhxDV8X4i+MtR0JuIdiWkxC3av36KzQtU43bvrn+g1gWVm5aLwJ+87jpZfIW00A==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2026 08:46:25.5982 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 46c87a61-6a83-4628-08ab-08df1885fc90
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2026 08:46:35.1839 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c9d3d609-a567-4960-f163-08df1886024b
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF00000015.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00029927.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LVTPR10MB997866
-X-Proofpoint-ORIG-GUID: N695pwhrcVl9CS5SmnCToVc4XGkFup23
-X-Proofpoint-GUID: N695pwhrcVl9CS5SmnCToVc4XGkFup23
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDEyNSBTYWx0ZWRfX+uSc68gTJ7mT
- 0aqJMxoGsNQdEcpZv3U8Tlxaq3AsLBrNVMUwPSEV5KDrUCoN20RIrOTaUVfRgLBELXBPKC5pN/B
- mEaOL1s+Kg9+Ixr/FjF3+aK11kEQ7lMcwLWK91CJjNRewmhuvtTdLkb5oASZp3JLLzcfw9u2nFn
- yqDxLX5jPvm9Gncq0q3gmwttKVDVQKoIu9XW5DmSN/9YnII+FUh5jvgp7ZP0mbTLH9RIx1JRinW
- 2e7PR4sZRThNVP2mKO31nZtMrafBzaV033y7Uh1zqtaXnf0+s/MZ34464I5HYrtBOwejhFo7ggc
- Y7VOtQBiNQZTAyQ1q6CDkoOjCKQ1HIWrGNDX4Jq1jB57gmUrdv/DB2oRW/Ts/tddNfCIWkIuVbx
- H8IpdMMhQMB9S0lvM13jJ1hBkOw4ez0L9sHzUJ2NGUBY+HW+51LHLtprVS/4l9o1j4expbF3Go2
- u6kisCG7Jn75ImIwe4Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDEyNSBTYWx0ZWRfX2yF0ApqWe7LD
- ia/iTi4n/Ek2vpzefiUooxNU2Igs3TDgH+t27wHXn926XByitU+9Q+BVKN4gX/An80KTrGO+eZ2
- nukLD6ysyz3GcenslmkCkbHZPRWvZUE=
-X-Authority-Analysis: v=2.4 cv=INeXmQvG c=1 sm=1 tr=0 ts=6ab24066 cx=c_pps
- a=fgNoY2FrYBgJmLE9YDNrYg==:117 a=iwqwCZQqcuTv3JOpYdM7/Q==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB7035
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDEyNCBTYWx0ZWRfX7WZqzDNYWvXj
+ ZWP25KM0sz0kKW7FtelsptYJMgVvKzf1OsoJ5zIAbvEbSR/n5q0C0/sApHbmTt3dFye3xbbozd6
+ y37ZeAsf6OyWw//5iHM7CtnMZsxmznC3qS22MiK5Kt70NNL05y/K1nM427OMnJi8VyUl5QBEbxJ
+ ARE3a7NaKqjHiKC6BzJBI1D84kpt299ZOQGfZIzDMJj8AkB8Q77JrCYo38XizkBN93FYh7YJ8Al
+ AsrXgbvJDD09mKfalzrnYETn4TbWHJ/kwwZBkHTbYIhaLMVHBij4mS12FYjTOlAH4fIRHCJOf52
+ 7rhuR6RG5GesVJW6xMCj9Gr6fbPRGrcW4OPH5msR2SM5mP+XGYlDvGhzMeLhwEPEbDz0Ab5vJc3
+ ysYwAlbScloNJOtkZsj+K7s2vyjQwwJyGTJbvc/V7sKF7q7VztmIxVVFw0uDQlymmnbG+1lWN1X
+ 15JkLcu3oKTghr3XN0A==
+X-Proofpoint-ORIG-GUID: 9sxAySup9yYZeSVsRi_TqNHpkx_SIpGt
+X-Proofpoint-GUID: 9sxAySup9yYZeSVsRi_TqNHpkx_SIpGt
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDEyNCBTYWx0ZWRfX4zBaEpsXRBmm
+ vs+0b5/if98j/ThqmtSAQo1bTaMCw7Jwety/0FOd5t6Idfhb11ylOe52oEVzJxXK/HBSqP6WdKe
+ bDlMnzOk8lEri52iYChKFZEEPmfDNMU=
+X-Authority-Analysis: v=2.4 cv=Mdz5KJ/f c=1 sm=1 tr=0 ts=6ab24070 cx=c_pps
+ a=4uekZJdLSFpbpqOwIdQ1dA==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=VdqzKS8jKosA:10 a=V5UXEbMT0ywA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=jwouBfj2j3NM8CExmVVE:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=taLDd7a_hP9WKsMzeGRc:22
  a=voM4FWlXAAAA:8 a=sozttTNsAAAA:8 a=VwQbUJbxAAAA:8 a=cm27Pg_UAAAA:8
- a=vBQL81K45hsBuQYaBbAA:9 a=IC2XNlieTeVoXbcui8wp:22
+ a=7Uu7czuuXSSy5kTXNsoA:9 a=IC2XNlieTeVoXbcui8wp:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-21_07,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 lowpriorityscore=0 adultscore=0 suspectscore=0
- malwarescore=0 phishscore=0 spamscore=0 clxscore=1015 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220125
+ spamscore=0 impostorscore=0 adultscore=0 bulkscore=0 clxscore=1015
+ priorityscore=1501 phishscore=0 suspectscore=0 malwarescore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609220124
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -296,21 +294,20 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The boot and load extensions in the x509 certificate are required for
-requesting the secure entity (TIFS) to boot a core. These fields are
-defined in the binman node for each core that must be booted by TIFS
-and must be included when generating the signed certificate.
+Some K3 SoCs like J721S2, J784S4, J722S, AM62X and AM62PX have a HSM
+(High Security Module) M4F core in the Wakeup Voltage Domain which could
+be used to run secure services like Authentication. Boot flow for HSM M4
+core is different than the general purpose M4F cores, and is as below:
 
-Add support to parse the boot and load extension properties from the
-binman node and populate them into the certificate. If any of the
-mandatory properties for an extension are missing, that respective
-extension section is NOT added to the certificate.
+1. Request control of HSM M4F remote processor.
+2. Assert Reset on the HSM M4F remote processor.
+3. For HS devices, Request Secure Entity to Authenticate and Load HSM
+   firmware into core's internal SRAM memory region. For GP devices,
+   load the unsigned firmware manually.
+4. Deassert Reset on the HSM M4F remote processor.
+5. Release control of HSM M4F remote processor.
 
-Add test coverage for the boot and load extension functionality in
-ti-secure certificates. The test reads the generated config file and
-verifies the sysfw_boot_seq and sysfw_image_load sections contain the
-expected values from the DTS. The negative test verifies that partially
-specified boot/load extension properties trigger an error.
+Add a new remoteproc driver to support this boot flow for HSM M4F core.
 
 Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -320,341 +317,358 @@ v7: Changelog:
 1. Carried R/B tag from Udit.
 
 Link to v6:
-https://patchwork.ozlabs.org/project/uboot/patch/20260831083347.1168880-4-b-padhi@ti.com/
+https://patchwork.ozlabs.org/project/uboot/patch/20260831083347.1168880-6-b-padhi@ti.com/
 
 v6: Changelog:
-1. None
+1. Add a call to ti_secure_image_check_binary() to strip off the
+   certificate for GP firmware. (needed after rebasing to main)
 
 Link to v5:
-https://lore.kernel.org/all/20260720080114.775206-5-b-padhi@ti.com/
+https://lore.kernel.org/all/20260720080114.775206-7-b-padhi@ti.com/
 
 v5: Changelog:
-1. Log missing properties and raise exception rather than returning
-silently.
-2. Squash [PATCH v4 07/11] and [PATCH v4 08/11] into [PATCH v5 4/7]
-3. Document properties in function docstring.
-4. Update tests to check the load and boot sections contain the expected
-values from test DTS. Add negative tests to check it raises an error
-when some of the properties are missing.
-5. Add R/B tags.
+1. Use get_device_type() to detect device type (GP, HS-FS, HS-SE).
+2. Avoid typecasting at certain places.
+3. Check buffer size before doing memcpy() for overruns.
+4. Add R/B tag.
 
 Link to v4:
-https://lore.kernel.org/all/20260425033742.1519298-8-b-padhi@ti.com/
+https://lore.kernel.org/all/20260425033742.1519298-11-b-padhi@ti.com/
 
 v4: Changelog:
 1. None
 
 Link to v3:
-https://lore.kernel.org/all/20251231173621.1069988-8-b-padhi@ti.com/
+https://lore.kernel.org/all/20251231173621.1069988-10-b-padhi@ti.com/
 
 v3: Changelog:
-1. New patch. Add support to sign HSM firmware here in U-Boot.
+1. New patch. Add a dedicated remoteproc driver to boot HSM core.
 
- tools/binman/btool/openssl.py                 | 49 ++++++++++++--
- tools/binman/etype/ti_secure.py               | 65 +++++++++++++++++++
- tools/binman/etype/x509_cert.py               |  4 +-
- tools/binman/ftest.py                         | 45 +++++++++++++
- .../test/vendor/ti_secure_boot_load_ext.dts   | 23 +++++++
- .../ti_secure_boot_load_ext_partial.dts       | 20 ++++++
- 6 files changed, 201 insertions(+), 5 deletions(-)
- create mode 100644 tools/binman/test/vendor/ti_secure_boot_load_ext.dts
- create mode 100644 tools/binman/test/vendor/ti_secure_boot_load_ext_partial.dts
+ MAINTAINERS                          |   1 +
+ drivers/remoteproc/Kconfig           |  10 +
+ drivers/remoteproc/Makefile          |   1 +
+ drivers/remoteproc/ti_k3_hsm_rproc.c | 268 +++++++++++++++++++++++++++
+ 4 files changed, 280 insertions(+)
+ create mode 100644 drivers/remoteproc/ti_k3_hsm_rproc.c
 
-diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
-index b26f087c447..39ea4a51356 100644
---- a/tools/binman/btool/openssl.py
-+++ b/tools/binman/btool/openssl.py
-@@ -82,7 +82,8 @@ imageSize              = INTEGER:{len(indata)}
-         return self.run_cmd(*args)
+diff --git a/MAINTAINERS b/MAINTAINERS
+index eb4209bdea6..ee28d9f3418 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -755,6 +755,7 @@ F:	drivers/phy/ti-pipe3-phy.c
+ F:	drivers/ram/k3*
+ F:	drivers/ram/k3*/
+ F:	drivers/remoteproc/ipu_rproc.c
++F:	drivers/remoteproc/ti_k3_hsm_rproc.c
+ F:	drivers/remoteproc/k3_system_controller.c
+ F:	drivers/remoteproc/pruc_rpoc.c
+ F:	drivers/remoteproc/ti*
+diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+index 7f9e35283f9..f1e586584f3 100644
+--- a/drivers/remoteproc/Kconfig
++++ b/drivers/remoteproc/Kconfig
+@@ -108,6 +108,16 @@ config REMOTEPROC_TI_K3_M4F
+ 	  on various TI K3 family of SoCs through the remote processor
+ 	  framework.
  
-     def x509_cert_sysfw(self, cert_fname, input_fname, key_fname, sw_rev,
--                  config_fname, req_dist_name_dict, firewall_cert_data):
-+                  config_fname, req_dist_name_dict, firewall_cert_data,
-+                  boot_ext_data, load_ext_data):
-         """Create a certificate to be booted by system firmware
- 
-         Args:
-@@ -101,12 +102,52 @@ imageSize              = INTEGER:{len(indata)}
-                 extended certificate
-               - certificate (str): Extended firewall certificate with
-                 the information for the firewall configurations.
-+            boot_ext_data (dict):
-+              - proc_id (int): The processor ID of core being booted
-+              - flags_set (int): The config flags to set for core being booted
-+              - flags_clr (int): The config flags to clear for core being booted
-+              - reset_vector (int): The location of reset vector for core being
-+                booted
-+            load_ext_data (dict):
-+              - dest_addr (int): The address to which image has to be copied
-+              - auth_type (int): Contains the host ID for core being booted and
-+                how the image is to be copied
- 
-         Returns:
-             str: Tool output
-         """
-         indata = tools.read_file(input_fname)
-         hashval = hashlib.sha512(indata).hexdigest()
++config REMOTEPROC_TI_K3_HSM_M4F
++	bool "TI K3 HSM M4F remoteproc support"
++	select REMOTEPROC
++	depends on ARCH_K3
++	depends on TI_SCI_PROTOCOL
++	help
++	  Say y here to support TI's HSM M4F remote processor subsystems
++	  on various TI K3 family of SoCs through the remote processor
++	  framework.
 +
-+        if boot_ext_data is not None:
-+            boot_ext = f'''
-+[ sysfw_boot_seq ]
-+bootCore = INTEGER:{boot_ext_data['proc_id']}
-+bootCoreOpts_set = INTEGER:{boot_ext_data['flags_set']}
-+bootCoreOpts_clr = INTEGER:{boot_ext_data['flags_clr']}
-+resetVec = FORMAT:HEX,OCT:{boot_ext_data['reset_vector']:08x}
-+# Reserved for future use
-+flagsValid = FORMAT:HEX,OCT:00000000
-+rsvd1 = INTEGER:0x00
-+rsvd2 = INTEGER:0x00
-+rsvd3 = INTEGER:0x00
-+'''
-+        else:
-+            boot_ext = ""
-+
-+        if load_ext_data is not None:
-+            load_ext = f'''
-+[ sysfw_image_load ]
-+destAddr = FORMAT:HEX,OCT:{load_ext_data['dest_addr']:08x}
-+authInPlace = INTEGER:{load_ext_data['auth_type']}
-+'''
-+        else:
-+            load_ext = f'''
-+[ sysfw_image_load ]
-+destAddr = FORMAT:HEX,OCT:00000000
-+authInPlace = INTEGER:{hex(firewall_cert_data['auth_in_place'])}
-+'''
-+
-         with open(config_fname, 'w', encoding='utf-8') as outf:
-             print(f'''[ req ]
- distinguished_name     = req_distinguished_name
-@@ -138,9 +179,9 @@ shaType                = OID:2.16.840.1.101.3.4.2.3
- shaValue               = FORMAT:HEX,OCT:{hashval}
- imageSize              = INTEGER:{len(indata)}
- 
--[ sysfw_image_load ]
--destAddr = FORMAT:HEX,OCT:00000000
--authInPlace = INTEGER:{hex(firewall_cert_data['auth_in_place'])}
-+{boot_ext}
-+
-+{load_ext}
- 
- [ firewall ]
- numFirewallRegions = INTEGER:{firewall_cert_data['num_firewalls']}
-diff --git a/tools/binman/etype/ti_secure.py b/tools/binman/etype/ti_secure.py
-index f6caa0286d9..9573fab088f 100644
---- a/tools/binman/etype/ti_secure.py
-+++ b/tools/binman/etype/ti_secure.py
-@@ -59,6 +59,33 @@ class Entry_ti_secure(Entry_x509_cert):
-               ( 0x02: Move the authenticated binary back to the header )
-             - Upper Byte - The Host ID of the core owning the firewall
- 
-+        - proc-id: (optional) The processor ID of the core being booted.
-+          Used in TIFS Boot Extension to identify the target core.
-+
-+        - flags-set: (optional) Configuration flags to set for the core being
-+          booted. Used in TIFS Boot Extension.
-+
-+        - flags-clr: (optional) Configuration flags to clear for the core being
-+          booted. Used in TIFS Boot Extension.
-+
-+        - reset-vector: (optional) The memory address where the core should
-+          start execution after being released from reset. Used in TIFS Boot
-+          Extension.
-+
-+        - dest-addr: (optional) The destination address to which the image
-+          should be copied. Used in TIFS Load Extension.
-+
-+        - auth-type: (optional) This is an integer field that contains two pieces
-+          of information used in TIFS Load Extension:
-+
-+            - Upper Byte - The Host ID of the core being booted
-+            - Lower Byte - Load type (e.g., 0x00: Copy to dest-addr,
-+              0x02: Authentication in place)
-+
-+        Note: The proc-id, flags-set, flags-clr, reset-vector, dest-addr, and
-+        auth-type properties form a group. If any are present, all must be
-+        specified together to configure loadable core boot parameters.
-+
-     Output files:
-         - input.<unique_name> - input file passed to openssl
-         - config.<unique_name> - input file generated for openssl (which is
-@@ -116,6 +143,7 @@ class Entry_ti_secure(Entry_x509_cert):
-         if auth_in_place:
-             self.firewall_cert_data['auth_in_place'] = auth_in_place
-             self.ReadFirewallNode()
-+        self.ReadLoadableCoreNode()
-         self.sha = fdt_util.GetInt(self._node, 'sha', 512)
-         self.req_dist_name = {'C': 'US',
-                 'ST': 'TX',
-@@ -126,6 +154,43 @@ class Entry_ti_secure(Entry_x509_cert):
-                 'emailAddress': 'support@ti.com'}
-         self.debug = fdt_util.GetBool(self._node, 'debug', False)
- 
-+    def ReadLoadableCoreNode(self):
-+        # Map DTS property names (with dashes) to Python dict keys (with underscores)
-+        boot_ext_props = {
-+            'proc-id': 'proc_id',
-+            'flags-set': 'flags_set',
-+            'flags-clr': 'flags_clr',
-+            'reset-vector': 'reset_vector'
-+        }
-+        load_ext_props = {
-+            'dest-addr': 'dest_addr',
-+            'auth-type': 'auth_type'
-+        }
-+
-+        self.boot_ext = self.ReadIntProps(boot_ext_props)
-+        self.load_ext = self.ReadIntProps(load_ext_props)
-+
-+    def ReadIntProps(self, props_map):
-+        props_dict = {}
-+        missing_props = []
-+
-+        for dts_prop, dict_key in props_map.items():
-+            val = fdt_util.GetInt(self._node, dts_prop)
-+            if val is None:
-+                missing_props.append(dts_prop)
-+            else:
-+                props_dict[dict_key] = val
-+
-+        # If all properties are missing, return None
-+        if len(missing_props) == len(props_map):
-+            return None
-+
-+        # If some but not all properties are present, raise an error
-+        if len(missing_props) > 0:
-+            self.Raise(f"Loadable core configuration incomplete. Missing properties: {','.join(missing_props)}")
-+
-+        return props_dict
-+
-     def ReadFirewallNode(self):
-         self.firewall_cert_data['certificate'] = ""
-         self.firewall_cert_data['num_firewalls'] = 0
-diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
-index b6e8b0b4fb0..b6028f6be84 100644
---- a/tools/binman/etype/x509_cert.py
-+++ b/tools/binman/etype/x509_cert.py
-@@ -102,7 +102,9 @@ class Entry_x509_cert(Entry_collection):
-                 config_fname=config_fname,
-                 sw_rev=self.sw_rev,
-                 req_dist_name_dict=self.req_dist_name,
--                firewall_cert_data=self.firewall_cert_data)
-+                firewall_cert_data=self.firewall_cert_data,
-+                boot_ext_data=self.boot_ext,
-+                load_ext_data=self.load_ext)
-         elif type == 'rom':
-             stdout = self.openssl.x509_cert_rom(
-                 cert_fname=output_fname,
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index a0e8bde7901..f7c5abdabb0 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -7296,6 +7296,51 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-                                 entry_args=entry_args)[0]
-         self.assertGreater(len(data), len(TI_UNSECURE_DATA))
- 
-+    def testPackTiSecureBootLoadExt(self):
-+        """Test that an image with TI secured binary having boot & load extensions can be created"""
-+        keyfile = self.TestFile('security/key.key')
-+        entry_args = {
-+            'keyfile': keyfile,
-+        }
-+        data = self._DoReadFileDtb('vendor/ti_secure_boot_load_ext.dts',
-+                                   entry_args=entry_args)[0]
-+        self.assertGreater(len(data), len(TI_UNSECURE_DATA))
-+
-+        # Verify that boot and load extensions are correctly written to config file
-+        image = control.images['image']
-+        entries = image.GetEntries()
-+        ti_secure_entry = entries['ti-secure']
-+        uniq = ti_secure_entry.GetUniqueName()
-+        config_fname = tools.get_output_filename('config.%s' % uniq)
-+
-+        # Read the generated config file
-+        with open(config_fname, 'r') as f:
-+            config_data = f.read()
-+
-+        # Verify boot extension values from the DTS
-+        self.assertIn('[ sysfw_boot_seq ]', config_data)
-+        self.assertIn('bootCore = INTEGER:32', config_data)  # 0x20 = 32
-+        self.assertIn('bootCoreOpts_set = INTEGER:1', config_data)  # 0x00000001 = 1
-+        self.assertIn('bootCoreOpts_clr = INTEGER:2', config_data)  # 0x00000002 = 2
-+        self.assertIn('resetVec = FORMAT:HEX,OCT:70000000', config_data)  # 0x70000000
-+
-+        # Verify load extension values from the DTS
-+        self.assertIn('[ sysfw_image_load ]', config_data)
-+        self.assertIn('destAddr = FORMAT:HEX,OCT:80000000', config_data)  # 0x80000000
-+        self.assertIn('authInPlace = INTEGER:2', config_data)  # 0x02
-+
-+    def testPackTiSecureBootLoadExtPartial(self):
-+        """Test that partially specified boot/load extension properties raise an error"""
-+        keyfile = self.TestFile('security/key.key')
-+        entry_args = {
-+            'keyfile': keyfile,
-+        }
-+        with self.assertRaises(ValueError) as e:
-+            self._DoReadFileDtb('vendor/ti_secure_boot_load_ext_partial.dts',
-+                               entry_args=entry_args)
-+        self.assertIn('Loadable core configuration incomplete', str(e.exception))
-+        self.assertIn('Missing properties:', str(e.exception))
-+
-     def testEncryptedNoAlgo(self):
-         """Test encrypted node with missing required properties"""
-         with self.assertRaises(ValueError) as e:
-diff --git a/tools/binman/test/vendor/ti_secure_boot_load_ext.dts b/tools/binman/test/vendor/ti_secure_boot_load_ext.dts
+ config REMOTEPROC_TI_K3_R5F
+ 	bool "TI K3 R5F remoteproc support"
+ 	select REMOTEPROC
+diff --git a/drivers/remoteproc/Makefile b/drivers/remoteproc/Makefile
+index 250915d0de4..5f2127fcb05 100644
+--- a/drivers/remoteproc/Makefile
++++ b/drivers/remoteproc/Makefile
+@@ -17,6 +17,7 @@ obj-$(CONFIG_REMOTEPROC_STM32_COPRO) += stm32_copro.o
+ obj-$(CONFIG_REMOTEPROC_TI_K3_ARM64) += ti_k3_arm64_rproc.o
+ obj-$(CONFIG_REMOTEPROC_TI_K3_DSP) += ti_k3_dsp_rproc.o
+ obj-$(CONFIG_REMOTEPROC_TI_K3_M4F) += ti_k3_m4_rproc.o
++obj-$(CONFIG_REMOTEPROC_TI_K3_HSM_M4F) += ti_k3_hsm_rproc.o
+ obj-$(CONFIG_REMOTEPROC_TI_K3_R5F) += ti_k3_r5f_rproc.o
+ obj-$(CONFIG_REMOTEPROC_TI_POWER) += ti_power_proc.o
+ obj-$(CONFIG_REMOTEPROC_TI_PRU) += pru_rproc.o
+diff --git a/drivers/remoteproc/ti_k3_hsm_rproc.c b/drivers/remoteproc/ti_k3_hsm_rproc.c
 new file mode 100644
-index 00000000000..226415f39ea
+index 00000000000..70240ab4aaf
 --- /dev/null
-+++ b/tools/binman/test/vendor/ti_secure_boot_load_ext.dts
-@@ -0,0 +1,23 @@
++++ b/drivers/remoteproc/ti_k3_hsm_rproc.c
+@@ -0,0 +1,268 @@
 +// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Texas Instruments' K3 HSM M4 Remoteproc driver
++ *
++ * Copyright (C) 2026 Texas Instruments Incorporated - http://www.ti.com/
++ *	Beleswar Padhi <b-padhi@ti.com>
++ */
 +
-+/dts-v1/;
++#include <cpu_func.h>
++#include <dm.h>
++#include <log.h>
++#include <malloc.h>
++#include <remoteproc.h>
++#include <errno.h>
++#include <asm/io.h>
++#include <dm/device_compat.h>
++#include <linux/err.h>
++#include <linux/sizes.h>
++#include <linux/soc/ti/ti_sci_protocol.h>
++#include "ti_sci_proc.h"
++#include <mach/security.h>
++#include "../../arch/arm/mach-k3/common.h"
 +
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
++#define PROC_BOOT_CTRL_RESET_FLAG_HSM_M4 0x00000001
 +
-+	binman {
-+		ti-secure {
-+			content = <&unsecure_binary>;
-+			proc-id = <0x20>;
-+			flags-set = <0x00000001>;
-+			flags-clr = <0x00000002>;
-+			reset-vector = <0x70000000>;
-+			dest-addr = <0x80000000>;
-+			auth-type = <0x02>;
-+		};
-+		unsecure_binary: blob-ext {
-+			filename = "ti_unsecure.bin";
-+		};
-+	};
++/**
++ * struct k3_hsm_mem - internal memory structure
++ * @cpu_addr: MPU virtual address of the memory region
++ * @bus_addr: Bus address used to access the memory region
++ * @dev_addr: Device address from remoteproc view
++ * @size: Size of the memory region
++ */
++struct k3_hsm_mem {
++	void __iomem *cpu_addr;
++	phys_addr_t bus_addr;
++	phys_addr_t dev_addr;
++	size_t size;
 +};
-diff --git a/tools/binman/test/vendor/ti_secure_boot_load_ext_partial.dts b/tools/binman/test/vendor/ti_secure_boot_load_ext_partial.dts
-new file mode 100644
-index 00000000000..e90d27cb087
---- /dev/null
-+++ b/tools/binman/test/vendor/ti_secure_boot_load_ext_partial.dts
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: GPL-2.0+
 +
-+/dts-v1/;
++/**
++ * struct k3_hsm_mem_data - memory definitions for hsm remote core
++ * @name: name for this memory entry
++ * @dev_addr: device address for the memory entry
++ */
++struct k3_hsm_mem_data {
++	const char *name;
++	const u32 dev_addr;
++};
 +
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
++/**
++ * struct k3_hsm_privdata - Structure representing Remote processor data.
++ * @tsp:		Pointer to TISCI proc control handle
++ * @mem:		Array of available memories
++ * @num_mems:		Number of available memories
++ * @total_sram_size:	Total size of available memories
++ */
++struct k3_hsm_privdata {
++	struct ti_sci_proc tsp;
++	struct k3_hsm_mem *mem;
++	int num_mems;
++	size_t total_sram_size;
++};
 +
-+	binman {
-+		ti-secure {
-+			content = <&unsecure_binary>;
-+			proc-id = <0x20>;
-+			flags-set = <0x00000001>;
-+			// Missing: flags-clr, reset-vector, dest-addr, auth-type
-+		};
-+		unsecure_binary: blob-ext {
-+			filename = "ti_unsecure.bin";
-+		};
-+	};
++/**
++ * k3_hsm_load() - Load up the Remote processor image
++ * @dev:	rproc device pointer
++ * @addr:	Address at which image is available
++ * @size:	size of the image
++ *
++ * Return: 0 if all goes good, else appropriate error message.
++ */
++static int k3_hsm_load(struct udevice *dev, ulong addr, ulong size)
++{
++	struct k3_hsm_privdata *hsm = dev_get_priv(dev);
++	void *image_addr = (void *)addr;
++	size_t image_size = size;
++	int ret;
++
++	ret = ti_sci_proc_request(&hsm->tsp);
++	if (ret)
++		return ret;
++
++	ret = ti_sci_proc_set_control(&hsm->tsp,
++				      PROC_BOOT_CTRL_RESET_FLAG_HSM_M4, 0);
++	if (ret)
++		goto proc_release;
++
++	ti_secure_image_check_binary(&image_addr, &image_size);
++	ti_secure_image_post_process(&image_addr, &image_size);
++
++	if (get_device_type() == K3_DEVICE_TYPE_GP) {
++		/* Ensure firmware fits within total HSM SRAM bounds */
++		if (size > hsm->total_sram_size) {
++			dev_err(dev, "Firmware size (%lu) exceeds total SRAM size (%zu)\n",
++				size, hsm->total_sram_size);
++			ret = -EINVAL;
++			goto proc_release;
++		}
++
++		debug("Loading HSM GP binary into SRAM0_0\n");
++		memcpy((void *)hsm->mem[0].cpu_addr, image_addr, size);
++		flush_dcache_range((unsigned long)hsm->mem[0].cpu_addr,
++				   (unsigned long)(hsm->mem[0].cpu_addr + size));
++	}
++
++proc_release:
++	ti_sci_proc_release(&hsm->tsp);
++	return ret;
++}
++
++/**
++ * k3_hsm_start() - Start the remote processor
++ * @dev:	rproc device pointer
++ *
++ * Return: 0 if all went ok, else return appropriate error
++ */
++static int k3_hsm_start(struct udevice *dev)
++{
++	struct k3_hsm_privdata *hsm = dev_get_priv(dev);
++	int ret;
++
++	ret = ti_sci_proc_request(&hsm->tsp);
++	if (ret)
++		return ret;
++
++	ret = ti_sci_proc_set_control(&hsm->tsp, 0,
++				      PROC_BOOT_CTRL_RESET_FLAG_HSM_M4);
++
++	ti_sci_proc_release(&hsm->tsp);
++
++	return ret;
++}
++
++static int k3_hsm_stop(struct udevice *dev)
++{
++	struct k3_hsm_privdata *hsm = dev_get_priv(dev);
++	int ret;
++
++	ret = ti_sci_proc_request(&hsm->tsp);
++	if (ret)
++		return ret;
++
++	ret = ti_sci_proc_set_control(&hsm->tsp,
++				      PROC_BOOT_CTRL_RESET_FLAG_HSM_M4, 0);
++
++	ti_sci_proc_release(&hsm->tsp);
++
++	return ret;
++}
++
++static const struct dm_rproc_ops k3_hsm_ops = {
++	.load = k3_hsm_load,
++	.start = k3_hsm_start,
++	.stop = k3_hsm_stop,
++};
++
++static int ti_sci_proc_of_to_priv(struct udevice *dev, struct ti_sci_proc *tsp)
++{
++	u32 ids[2];
++	int ret;
++
++	tsp->sci = ti_sci_get_by_phandle(dev, "ti,sci");
++	if (IS_ERR(tsp->sci)) {
++		dev_err(dev, "ti_sci get failed: %ld\n", PTR_ERR(tsp->sci));
++		return PTR_ERR(tsp->sci);
++	}
++
++	ret = dev_read_u32_array(dev, "ti,sci-proc-ids", ids, 2);
++	if (ret) {
++		dev_err(dev, "Proc IDs not populated %d\n", ret);
++		return ret;
++	}
++
++	tsp->ops = &tsp->sci->ops.proc_ops;
++	tsp->proc_id = ids[0];
++	tsp->host_id = ids[1];
++	tsp->dev_id = dev_read_u32_default(dev, "ti,sci-dev-id",
++					   TI_SCI_RESOURCE_NULL);
++	if (tsp->dev_id == TI_SCI_RESOURCE_NULL) {
++		dev_err(dev, "Device ID not populated\n");
++		return -ENODEV;
++	}
++
++	return 0;
++}
++
++static const struct k3_hsm_mem_data hsm_mems[] = {
++	{ .name = "sram0_0", .dev_addr = 0x0 },
++	{ .name = "sram0_1", .dev_addr = 0x20000 },
++	{ .name = "sram1",   .dev_addr = 0x30000 },
++};
++
++static int k3_hsm_of_get_memories(struct udevice *dev)
++{
++	struct k3_hsm_privdata *hsm = dev_get_priv(dev);
++	int i;
++
++	hsm->num_mems = ARRAY_SIZE(hsm_mems);
++	hsm->mem = calloc(hsm->num_mems, sizeof(*hsm->mem));
++	if (!hsm->mem)
++		return -ENOMEM;
++
++	for (i = 0; i < hsm->num_mems; i++) {
++		hsm->mem[i].bus_addr = dev_read_addr_size_name(dev,
++							       hsm_mems[i].name,
++							       (fdt_addr_t *)&hsm->mem[i].size);
++		if (hsm->mem[i].bus_addr == FDT_ADDR_T_NONE) {
++			dev_err(dev, "%s bus address not found\n",
++				hsm_mems[i].name);
++			return -EINVAL;
++		}
++		hsm->mem[i].cpu_addr = map_physmem(hsm->mem[i].bus_addr,
++						   hsm->mem[i].size,
++						   MAP_NOCACHE);
++		hsm->mem[i].dev_addr = hsm_mems[i].dev_addr;
++		hsm->total_sram_size += hsm->mem[i].size;
++	}
++
++	return 0;
++}
++
++/**
++ * k3_hsm_probe() - Basic probe
++ * @dev:	corresponding k3 remote processor device
++ *
++ * Return: 0 if all goes good, else appropriate error message.
++ */
++static int k3_hsm_probe(struct udevice *dev)
++{
++	struct k3_hsm_privdata *hsm;
++	int ret;
++
++	hsm = dev_get_priv(dev);
++
++	ret = ti_sci_proc_of_to_priv(dev, &hsm->tsp);
++	if (ret)
++		return ret;
++
++	ret = k3_hsm_of_get_memories(dev);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static int k3_hsm_remove(struct udevice *dev)
++{
++	struct k3_hsm_privdata *hsm = dev_get_priv(dev);
++
++	free(hsm->mem);
++
++	return 0;
++}
++
++static const struct udevice_id k3_hsm_ids[] = {
++	{ .compatible = "ti,hsm-m4fss" },
++	{}
++};
++
++U_BOOT_DRIVER(k3_hsm) = {
++	.name = "k3_hsm",
++	.of_match = k3_hsm_ids,
++	.id = UCLASS_REMOTEPROC,
++	.ops = &k3_hsm_ops,
++	.probe = k3_hsm_probe,
++	.remove = k3_hsm_remove,
++	.priv_auto = sizeof(struct k3_hsm_privdata),
 +};
 -- 
 2.34.1
