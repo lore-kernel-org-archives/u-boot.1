@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72606C98307
-	for <u-boot@archiver.kernel.org>; Wed, 23 Sep 2026 11:51:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 604C6C982FA
+	for <u-boot@archiver.kernel.org>; Wed, 23 Sep 2026 11:51:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 00F9B80F14;
-	Wed, 23 Sep 2026 11:51:18 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2CA5A607DD;
+	Wed, 23 Sep 2026 11:51:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UjoySfDbTtzr; Wed, 23 Sep 2026 11:51:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5852780F24
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790164277;
-	b=WFMAXFPhdsiNmkyqkWmjA6Fja5UWcxeTKc/4d+YZuSjLIl0o3z0rY0wEcQY4+xD1HonY
-	 wrx6qMICaFD3zRRtuOSgeo/x0wIM90an8DD6fg26x5JdluTnIukEBfyOmV/9mIO2T/Sxo
-	 zTy7bM8cFE1rIlxVlXmPT8OPvDx3KZ+s1A3O8BJNJY31tRh4ugj1lLxWw5wbRfc7TVjGa
-	 qizD5YS/pTqOwxz+AunWZ2cZilyWu4dwlWL3B08nbchn+Vbtl6Rq6A2ffWjrG0gKkvB7q
-	 tjckK02ENvCkdxrjAyngZHmG0LjVoJssrsoWc441HYvWYDSTzlO/Euf3AoRpAmbK7xg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6CF3Yy9DidcA; Wed, 23 Sep 2026 11:51:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4D8B3607FC
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790164279;
+	b=peUMpuYZjNJTFcattpvQTr16m8eifN7N5/iU3f3oXEzDXd6GuUg356yYUUQbxFGohaJw
+	 xkfEhkGqDV2CXShzDuZ06/P1oqQhl2Kn6SbQA8XVwVJS+NhA5ISNfbWG6sBKbpBLBNotd
+	 vZvsAfWEByaaojpa5W4xUQNB+Hsz1V5fmma0Fj1dizv/KG3cCBbUKRohyk+cElt4Klfn8
+	 B9x8hwYi1QitVHvg3d4E2tiPZHyI9tr8mjYvTrIdYw4UGYT7DTJRkBG5TikZx6KhxTYlR
+	 gfbX4vp8jiPdKwfQjHGM7Y1mw9cl+fYRaFPhZ0rGairTFn31BH1hWIx9XdcdbfL7hLQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790164277;
+	c=relaxed/relaxed; t=1790164279;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
@@ -31,100 +31,103 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Flowmailer-Platform:Feedback-ID:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=ylMFrknlpgjUahODTyrN+BGplp8Ytzo9pjXGjONolB0=;
-	b=LsmmuzWEVvajaH/szjwn9KyIpdN0XRWaMwDrGwzuw0aE+2QARdjlDzoWjl3Ymn9qRZ0Z
-	 MZTG+vMFJWBNeqNrkwhUjuJxSS/xrmSzbrZ0CX0oIDUgFFG0xl88KitHLGsDZREXjeqsj
-	 6NhEhwptqPIb77GB4W/op9DFYpn9CCSyPcTrWrKqZZUzXeLwa9R7NBXfKcKDggN/9bTsh
-	 T1ApxqY9f5urpOHbwG4xV7FTJpIXxMXEWqse5Hz9V7IhA0wDpdyswJpvXR+yTk/Dvsy+G
-	 iKfYa6AsPbm/FUjXA7qqF+W+94DAdRqqy+yZ5uOA/Zp95qSR+dvzH465CqQ36vJLJWw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=XB64Y61ZhHb9bx7a2FRnf2GmDyfJVC9ea8TE/R8f5/I=;
+	b=VcnfS34k+WlpDntXKV3vBBTM8SUbkRJw0TjUjRTEFctNR323wsqKlSkkumm7dA+63RgT
+	 anuJg6oe5Q7rZNrjFZ7ZveeHyVUjA1aGcpZAfRtMfJQPKt7Jh8TmFAinM1Hhky9bHBzJ8
+	 Kf6zFNYMSrozNKQpCwvbc1MnRkJIImLzhMgP54iy/+A7HHwmPftQG6jm/syVcV4lNggTD
+	 CT0j8xSKuIwzuSE3R3lPzLuYoycHE0YNSFOoLc6CAbie5G/3QYOf7DYEkX+qb+CSOXRo3
+	 OPtqEKnf8R4qxr5+awu8TLaDWu8N2fs2iO4zohSDjEkZUvfYhauA7BGojSO+bOU5Aww==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790164277;
-	bh=ylMFrknlpgjUahODTyrN+BGplp8Ytzo9pjXGjONolB0=;
+	d=lists.u-boot-project.org; s=default; t=1790164279;
+	bh=XB64Y61ZhHb9bx7a2FRnf2GmDyfJVC9ea8TE/R8f5/I=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bgu1HLCXZuQ9P+hod0LhynG/YxYG0pk6vmxjWVLBlddv6JT5QFayLXo3BPh3m4ITA
-	 hz32Tm+kl+2poK+wmeBgbwUPuHQhgrjZyF6YgFUGMMqSs+ZFjQkmbUkDMmPgtyXqdx
-	 5om+urb/rUEdn1JZDo5RT9nsAEJJwiSpgWfvwB/IGE6XUhJ2xm1vW1WqquzdRhfuAt
-	 eA7L1haHTSAwK4pbaMD5wTV78CEnH799/vDs10HzcHu5tCyw8D33bZXwGEuqo0dk94
-	 Q/f8fEt2Ae9xPaZySYaGWk4CjS5GT8598gA4NmEIM86BFWSHwnBSADApreSRnF7zKu
-	 BtlZJsMAZICew==
+	b=Rgy+rqNDQbbj+oYJva1bHbwqlfXORS9HBn1RRZ3WaU2FATgCp/N2eGmYPf+r+Tl0r
+	 nZnrNmzbdtxdvGflF1n6mUla/S0FQMEMOO6eW/rZErWJf8t/RRjSfEcgibleS8YHR0
+	 fI5zEyrv5BAfwTk42bcuY+LeSv79s4GattNM8i5vLKVpJMY9XkI2r2jEMaQ6OZFLGf
+	 jo30As+RnjggvXJdvcIu1bTYR/B4KWt54oS9Z/Syj115b1jU8aSu5bysmrWSoa3eJc
+	 nFIfFw6+9WlEDO+04S+Owd4zwV4ocXfIJRgavDC/6xXelxnfjM62d9kLNRr6f9tgBW
+	 X1Xo/TAYtCArw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5852780F24;
-	Wed, 23 Sep 2026 11:51:16 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4D8B3607FC;
+	Wed, 23 Sep 2026 11:51:19 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id B0CB535A
+ by lists1.osuosl.org (Postfix) with ESMTP id C7C12A29
  for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 11:51:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A312D406D7
+ by smtp4.osuosl.org (Postfix) with ESMTP id AE245406B2
  for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 11:51:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zj_d_LhYWqud for <u-boot@lists.u-boot-project.org>;
+ id Sd6To_qD6ukE for <u-boot@lists.u-boot-project.org>;
  Wed, 23 Sep 2026 11:51:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B1315406B2
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org AF738406AE
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=185.136.64.228
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790164264;
- b=Ur/NTafKvO7lWBgUdD+eYMxZv9nf2SoMKhJpvy3fqvYmNykrHR/FXOvd7cOUF1ca4sBc
- sNnTPAMY66iAp2maDbNeqpIAH61iAMuICODHg6ytYhuwoq/Kf0PwUfKuIYIl3w2L0Aybf
- hXGyveq0kGsfjeac0II63GYnrGXnz8j3163q2VthjCbKxvWJaEI7XT7Ldmo056978qn4g
- Xlzm1zN4mtqx+a3Hanu+d+PhNcJ/RsxHU8VolhcR8uVfnCVi4rTUT0yxvACaojvvgpB6b
- eDXAIGxz8dUfbjyRRJCjdCaw78V7q2GSdJUVH2AV9cu1tvxa8mMQjG6pVdD1S5PHdGg==
+ arc=none smtp.remote-ip=185.136.65.226
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790164263;
+ b=fHJoVfu2D7RsOQRCyaJS7Ktuea7xLA2iAeOrlLejlNOWIbrKeshrvbIntLsXBlt+XVh+
+ v6//N4MTOZrVG4gI/lEHg01cpGmWqMcORzRrK/T6tu2wNFDYXYAMqMbz4OrRHt5LWVWpc
+ 0lrMRTOve0tXv7yiV1cwmxCJuIsWGDxqsTKbc+2+xNWN6l4l5jiiigf3Wf+tdobK4mvKr
+ 10X2oCsoHlTvRzvk4jmrCDWr1sJsxlDJ+qg2WSU1hekzd7KHilb91Fq+eM1DGxB0IklWX
+ tSteHL/Azn2AXr1UOZS1iS3seU60kKr3FmmwgWCHmcXNY4GLLfM5Fofia875aPl9zeg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790164264;
+ c=relaxed/relaxed; t=1790164263;
  h=X-Greylist:Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-Flowmailer-Platform:Feedback-ID;
- bh=ylMFrknlpgjUahODTyrN+BGplp8Ytzo9pjXGjONolB0=;
- b=bLCHmqf4F6N4Y2Fr3a6SeaL87BynMuTdLoud3IsyibbsnI7gAZLJ7SoTbF3FL+RfWmEB
- VR2/1i6s35mrIPLWj+hE2+5ouHwXLYYAeAjwKQxhN0IUSIjHhZjVw4Hbyw6rtSorAaR6t
- EgGofwYjJtc+Lz85RNfVsX59ZyPCc1T5nBtizmQd1hAp3tJtcVvtjDaTom9fM/FhzW58k
- UxORWnwNot4ZwwR/29XCGLB73+yND1Yxt3uQQcbpyqmWY8EUA1oe/PkAzY8YBuRnouUww
- I+OAXdpzwT85xUIHFTgvaiLfYIjMjshu/zh0NfO4JOc1/NE9VAkBmjCG2w300gDagdg==
+ bh=XB64Y61ZhHb9bx7a2FRnf2GmDyfJVC9ea8TE/R8f5/I=;
+ b=r4CXlOyYUhOv07Qn4+CyPoSminGBeCu0gTOeVuJgqXiJ9Qv5opVCdIUSDff2OwSHiaOp
+ u5D251zmMjK1r4ibjxx7LiwChq6In8x7cz5Ecjb3FmJqikGy7mBHT0/pYAiQ8van3h/5J
+ Qu0+muEIMDaEQy3DnCvew1MbCtXiiV/PNEYHB/l/A9AObyMYBCvMU58Bc9/dkrQaCt2UB
+ B4+X8VObJ9CoN1MLAmoGyOdVEwuOgTAQ44ZNnI2Cj01Z8U3CM9ZTA4Vg/iP5m7dpK9fS1
+ 21WL+n2itWzPFWvn+uUrwx3kzLcXlPJhuEbDHCUwuxKdHu1BoOiG3sOMpQ92juW3Nxw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=siemens.com; 
  dkim=pass header.d=siemens.com header.i=ludwig.nussel@siemens.com
- header.a=rsa-sha256 header.s=fm1 header.b=O4qO4z8X; 
- arc=none smtp.remote-ip=185.136.64.228
+ header.a=rsa-sha256 header.s=fm1 header.b=dj+bm3qC; 
+ arc=none smtp.remote-ip=185.136.65.226
 X-Greylist: delayed 66 seconds by postgrey-1.37 at util1.osuosl.org;
  Wed, 23 Sep 2026 11:51:03 UTC
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=siemens.com header.i=ludwig.nussel@siemens.com
- header.a=rsa-sha256 header.s=fm1 header.b=O4qO4z8X
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.64.228;
- helo=mta-64-228.siemens.flowmailer.net;
- envelope-from=fm-1328817-20260923114955f05957b674000207e3-hqqql_@rts-flowmailer.siemens.com;
+ header.a=rsa-sha256 header.s=fm1 header.b=dj+bm3qC
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.65.226;
+ helo=mta-65-226.siemens.flowmailer.net;
+ envelope-from=fm-1328817-20260923114954f2229cb28c00020763-_ky_w4@rts-flowmailer.siemens.com;
  receiver=<UNKNOWN> 
-Received: from mta-64-228.siemens.flowmailer.net
- (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B1315406B2
+Received: from mta-65-226.siemens.flowmailer.net
+ (mta-65-226.siemens.flowmailer.net [185.136.65.226])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id AF738406AE
  for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 11:51:03 +0000 (UTC)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
- 20260923114955f05957b674000207e3
+Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
+ 20260923114954f2229cb28c00020763
  for <u-boot@lists.u-boot-project.org>;
- Wed, 23 Sep 2026 13:49:55 +0200
+ Wed, 23 Sep 2026 13:49:54 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=ludwig.nussel@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=ylMFrknlpgjUahODTyrN+BGplp8Ytzo9pjXGjONolB0=;
- b=O4qO4z8XZ0w5kRjSWvP/F20RtdelNmJYjdcZeJOBM1u1kqxvlhdSD6V92e/nU8SymSu4C2
- Hxd1Fn5jqRk3yUIyHS1wFcypWtApxiCXXMuAwxbN5zzrmso5cOQyMMfzhrfC5pYqEStnLUIw
- rR6QNSgEQnzbEGK4JgVWcIKA3eUTE3wkciSWBzKBGOVIHlj4m5FqJkBEOzo454ql6yqxD7AJ
- SgilcNR7ThURwPSfZWM6yx2hhk6oS25dTj02wNfHAYy4zn9C3cv/vxIJoxo4rhEejIZrEwyQ
- AYhxF4kybV+P6TGF/iktdX9RAGziZftK1t9mkJJmIHCOtBFwjAZM3KRg==;
+ bh=XB64Y61ZhHb9bx7a2FRnf2GmDyfJVC9ea8TE/R8f5/I=;
+ b=dj+bm3qC2yl46vxJbPPpFnUtSRIcIW1/uLCFqt3n3XwFl8skkHB9nfZx+B0Lan+53cjZlD
+ Wj2PzFlOwNoQA2KLoSRbVqSz9ujc7vRw26D5EcD8u/gFBxPPP0XxTQUVKKjxyBlDk7mpmSfs
+ VbFYCC1FQ3Cx/mQXbrCSjmYADtOJ4apt7FtuidD1WWgFjgCtVJy9DcBBKnNtc7BpGveJTMAE
+ LUKX4GnTnpIjcRcdSMWxbPdwe2tW3p5VjmnBEGZDMSetzYfFwX1am0IjE0Cm+5HELciQwxVJ
+ KBMz2wptFhY0XdQXzpebEb6Z6JaRtek1h+RJOIW3Bju36fe9mLhRznnA==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
- Anton Ivanov <anton@binarly.io>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v10 6/7] test: vboot: refactor run_bootm
-Date: Wed, 23 Sep 2026 13:49:33 +0200
-Message-ID: <20260923114940.349985-3-ludwig.nussel@siemens.com>
+ Anton Ivanov <anton@binarly.io>, Aristo Chen <aristo.chen@canonical.com>,
+ Daniel Golle <daniel@makrotopia.org>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Mehmet Fide <mehmet.fide@screeningeagle.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v10 5/7] iminfo: also verify signatures
+Date: Wed, 23 Sep 2026 13:49:32 +0200
+Message-ID: <20260923134933.v10.5.eb9898db9115ab0e26701a962ff8b41b199e78b2@changeid>
 In-Reply-To: <20260923114940.349985-1-ludwig.nussel@siemens.com>
 References: <20260923114940.349985-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
@@ -144,103 +147,166 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-- split off a generic part of run_bootm. The helper function is for
-  future use in similar commands
-- moves u-boot restart below section opening for better log structuring
-- only look for expected string in last command. This way a failed
-  assert() doesn't dump unrelated output.
-- use f-strings in the refactored code while at it
+The iminfo command already verifies hashes of images. This change
+also verifies signatures of configurations if enabled.
+If FIT_REQUIRE_CONFIG_SIGS is enabled, iminfo also fails if
+signatures are missing.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+While at it print "OK\n" in success case of fit_all_image_verify()
+too so iminfo output matches bootm. This will simplify the tests.
+
+Adjusts error output slightly to be on stderr
+
 Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
 ---
 
 (no changes since v6)
 
 Changes in v6:
-- Add missing return value documentation to run_fit_commands()
-- use f-strings for the refactored code
-- drop not needed length check for command list
+- move 'ret' declaration to top of block
 
 Changes in v5:
-- new patch
+- rely on inline dummy for fit_all_configurations_verify
+- use CONFIG_IS_ENABLED(FIT_SIGNATURE) to guard fit_all_configurations_verify
+- print warning if /configurations node is missing
+- print "OK\n" in fit_all_image_verify()
 
- test/py/tests/test_vboot.py | 55 +++++++++++++++++++++++++++----------
- 1 file changed, 41 insertions(+), 14 deletions(-)
+Changes in v4:
+- fix documentation to use kdoc style
 
-diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index a39cf698b54..0ecb804832a 100644
---- a/test/py/tests/test_vboot.py
-+++ b/test/py/tests/test_vboot.py
-@@ -151,6 +151,39 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-                                  tmpdir, '-I', tmpdir])
-         os.environ['PYTHONPATH'] = pythonpath
+Changes in v3:
+- use log_err instead of printf in fit_config_verify_required_keys()
+- don't make iminfo fail unless FIT_SIGNATURE_REQUIRED is set
+- update fit_all_configurations_verify documentation
+- stub fit_all_configurations_verify unless FIT_SIGNATURES
+
+Changes in v2:
+- document fit_all_configurations_verify()
+
+ boot/image-fit.c | 55 +++++++++++++++++++++++++++++++++++++++++++++++-
+ cmd/bootm.c      | 10 +++++++++
+ include/image.h  |  8 +++++++
+ 3 files changed, 72 insertions(+), 1 deletion(-)
+
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 60e47db5fb0..ade8d706d55 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -1558,11 +1558,64 @@ int fit_all_image_verify(const void *fit)
  
-+
-+    def run_fit_commands(commands, expect_string, fit=None):
-+        """Load fit image and run commands in U-Boot.
-+
-+        Asserts that 'expect_string' is contained in the output of the last command
-+
-+        This always starts a fresh U-Boot instance since the device tree may
-+        contain a new public key.
-+
-+        Args:
-+            commands: list of commands to run
-+            expect_string: A string which is expected in the output
-+            fit: FIT filename to load and verify
-+
-+        Returns:
-+            The joined output of the last command run.
-+        """
-+
-+        ubman.restart_uboot()
-+
-+        if not fit:
-+            fit = f'{tmpdir}test.fit'
-+        # run commands that just prepare for the actually relevant one
-+        ubman.run_command(f'host load hostfs - 100 {fit}')
-+        for cmd in commands[:-1]:
-+            ubman.run_command(cmd)
-+
-+        output = ''.join(ubman.run_command(commands[-1]))
-+
-+        assert expect_string in output
-+
-+        return output
-+
-     def run_bootm(sha_algo, test_type, expect_string, boots, fit=None):
-         """Run a 'bootm' command U-Boot.
+ 		if (!fit_image_verify(fit, noffset))
+ 			return 0;
+-		printf("\n");
++		printf("OK\n");
+ 	}
+ 	return 1;
+ }
  
-@@ -166,20 +199,14 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-                     we are expected to not boot
-             fit: FIT filename to load and verify
-         """
--        if not fit:
--            fit = '%stest.fit' % tmpdir
--        ubman.restart_uboot()
--        with ubman.log.section('Verified boot %s %s' % (sha_algo, test_type)):
--            output = ubman.run_command_list(
--                ['host load hostfs - 100 %s' % fit,
--                 'fdt addr 100',
--                 'bootm 100'])
--        assert expect_string in ''.join(output)
--        if boots:
--            assert 'sandbox: continuing, as we cannot run' in ''.join(output)
--        else:
--            assert('sandbox: continuing, as we cannot run'
--                   not in ''.join(output))
++/**
++ * fit_all_configurations_verify() - verify signatures of all configurations
++ * @fit: pointer to the FIT format image header
++ *
++ * fit_all_configurations_verify() iterates over all configurations
++ * in the FIT and checks the signatures. Returns success if all
++ * configurations have valid signatures. See documentation at
++ * fit_config_verify_required_keys() or fit_config_verify_key().
++ *
++ * Return:
++ * * 0, all configurations have valid signatures
++ * * -ENOENT, no configurations found
++ * * < 0, -errno
++ */
++#if CONFIG_IS_ENABLED(FIT_SIGNATURE)
++int fit_all_configurations_verify(const void *fit)
++{
++	int confs_noffset;
++	int noffset;
++	int r = -ENOENT;
 +
-+        with ubman.log.section(f'Verified boot {sha_algo} {test_type}: looking for "{expect_string}"'):
-+            output = run_fit_commands(['fdt addr 100', 'bootm 100'], expect_string, fit)
++	/* Find configurations parent node offset */
++	confs_noffset = fdt_path_offset(fit, FIT_CONFS_PATH);
++	if (confs_noffset < 0) {
++		log_info("Missing '%s' node: %s\n",
++			 FIT_CONFS_PATH, fdt_strerror(confs_noffset));
++		return r;
++	}
 +
-+            if boots:
-+                assert 'sandbox: continuing, as we cannot run' in output
-+            else:
-+                assert 'sandbox: continuing, as we cannot run' not in output
++	/* Process all config subnodes, check signature for each */
++	log_info("## Checking configuration signatures ...\n");
++
++	fdt_for_each_subnode(noffset, fit, confs_noffset) {
++		int ret;
++
++		log_info("   %s ... ", fit_get_name(fit, noffset, NULL));
++		ret = fit_config_verify(fit, noffset);
++		if (ret) {
++			r = ret;
++			log_err("FAIL\n");
++			continue;
++		}
++		/* valid config found */
++		if (r == -ENOENT)
++			r = 0;
++
++		log_info("OK\n");
++	}
++
++	return r;
++}
++#endif
++
+ static int fit_image_uncipher(const void *fit, int image_noffset,
+ 			      void **data, size_t *size)
+ {
+diff --git a/cmd/bootm.c b/cmd/bootm.c
+index 07fd995ebed..eb4c7c89d65 100644
+--- a/cmd/bootm.c
++++ b/cmd/bootm.c
+@@ -255,6 +255,9 @@ static int do_iminfo(struct cmd_tbl *cmdtp, int flag, int argc,
+ static int image_info(ulong addr)
+ {
+ 	void *hdr = (void *)map_sysmem(addr, 0);
++#if defined(CONFIG_FIT)
++	int ret;
++#endif
  
-     def sign_fit(sha_algo, options):
-         """Sign the FIT
+ 	printf("\n## Checking Image at %08lx ...\n", addr);
+ 
+@@ -305,6 +308,13 @@ static int image_info(ulong addr)
+ 
+ 		fit_print_contents(hdr);
+ 
++		ret = fit_all_configurations_verify(hdr);
++		if (ret != 0 && (ret != -ENOENT ||
++				 CONFIG_IS_ENABLED(FIT_REQUIRE_CONFIG_SIGS))) {
++			unmap_sysmem(hdr);
++			return 1;
++		}
++
+ 		if (!fit_all_image_verify(hdr)) {
+ 			puts("Bad hash in FIT image!\n");
+ 			unmap_sysmem(hdr);
+diff --git a/include/image.h b/include/image.h
+index d991b4c2bc3..96b341a48e6 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1488,6 +1488,14 @@ static inline int fit_config_verify_with_key_blob(const void *fit,
+ }
+ #endif
+ int fit_all_image_verify(const void *fit);
++#if CONFIG_IS_ENABLED(FIT_SIGNATURE)
++int fit_all_configurations_verify(const void *fit);
++#else
++static inline int fit_all_configurations_verify(const void *fit)
++{
++	return 0;
++}
++#endif
+ int fit_config_decrypt(const void *fit, int conf_noffset);
+ int fit_image_check_os(const void *fit, int noffset, uint8_t os);
+ int fit_image_check_arch(const void *fit, int noffset, uint8_t arch);
 -- 
 2.43.0
 
