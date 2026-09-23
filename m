@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12C80C982FA
-	for <u-boot@archiver.kernel.org>; Wed, 23 Sep 2026 09:35:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0BFEC982FA
+	for <u-boot@archiver.kernel.org>; Wed, 23 Sep 2026 09:35:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 99CBC6082E;
-	Wed, 23 Sep 2026 09:35:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8060860846;
+	Wed, 23 Sep 2026 09:35:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id P1LxRAlQKzEy; Wed, 23 Sep 2026 09:35:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3AE2860830
+ id stJ4R3qBottL; Wed, 23 Sep 2026 09:35:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 541F960823
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790156116;
-	b=cZ6iD94YI0a+/tytvFYbTECqrujfmalZKkc98AMl4r2HaYKs1hWH3w+bJW3W5xdSBJKg
-	 8d0WGG3bB2vjsil0zynsdPXOZiFpfVw965Ayebx2AgVJvrwv8sIoumSlhxa9i/HeB+1AC
-	 mW4ktb7PJUgjulAaYSH0wpHQs3bj+u5w6Z7z89QjkP25GcAqPv50QgRqFVbuUDZoLaxJU
-	 7+LQn2jYXTymq+F1/jtQ9Kw6BM9POBFrOsiJ3MlKw4bJaLgmECoOY5I2scmeiaKqLM1Dw
-	 jqlXjPNKQGWWaCu2UpueriTI17CUxNq0lqD0JDFwtHe68Hlt+r0lMpVE5pO3CNgHaWw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790156121;
+	b=ofiVp7dYAvKMkHuF+doFQhHXULoxKcMHuOGzy6S9Od72InSH3RVR47gJHOM5pqK033XS
+	 EKLSnWebDnX2x2csOSWy0SK6TI9AgYODYjK7pA2tPND3UDik2Oyc1q63dQEONqDncbRbR
+	 eKfAOYE9pR8fW1gdXg28B/mG3Cjqm9P8adhDcH3rNbgsiiDRiJm/wBXFL98kSf7a5LFSL
+	 PU4ih8AllFxWcdjQo+fEoN6pS0QwsDKeUUefqMKVXpCWJr6XYQfZ7HdoaX183W5jMIjn0
+	 aChvYghOOgTHzvYIiIQVpyC5jTLWL0kFYL0dIS2z/eGVvCg90nKrV42cl6N2iOf2tbg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790156116;
+	c=relaxed/relaxed; t=1790156121;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,102 +31,100 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=GYc2tWt+Ov8mAiyy7FbG3tIyLMQ1tRP+0GPBkARMSRI=;
-	b=J4navCPzLHFBfrtmsvskNb/UDp8P63EHfoj5CbRUvc/bhBNY2AcA/AAS5v8D51SfU596
-	 ysm+ANTzgxqDhFxS3hQxBT18c5Vk8ELscc+diT+TDpCCjnLVTYlSz6W3ku23x7BA6NhNp
-	 nOYYvBwG1civpRXBITxZu6OWmK3VqKUaAp+Ro97NAPyi+vRSoGDC6aX4k43TzPtbzIbvw
-	 F2d6+OUEGdX4QIFA8X0EKWjDKxX3lJ8KhG1YzOc6bEhj8oxKS+3sOMXfM2zii7+Xu5Clz
-	 3Yzuj+QmhNBZbMtVkuXj3Bu2ReGX+4TTBHDEwwlN2rQ3fukXMIvQ4i67Zd2/jwsdKTw==
+	bh=tvDdxkQqQFu9ikiIVUPhKlhxINLnODiVwSWiJxP0CtU=;
+	b=EYLbwYZKnz7WgMnSxY58JzH8WDt/Nu/FDMxaKImaI047OGvuHx7HdN3hnKvMsAhDXxxa
+	 w89dsW5qesC0BLqaTUhB01XZC+6KUW7qVjMRgyt4JnxaD0lCYNRBmdkUp3/XWkg36WQi9
+	 HzTw7Hk2BR/Z4VAOb6evZ3RNWNTAphDIoImTnAFWVSvqj9ybEs9zgbk9WiG0kljq95ZDy
+	 B4rDHVSXWqsTEBSSu+oJZv+nmbFn+Ihy4SuBi7SLvcBUZHnqX+KkNl35GU3CMJhv+QMo4
+	 VxFBM7tXpsczdA5PCVfT5zwwWRtBYYYksylzp52FEciIRI5C+Z0mJ7vUxnIBfwEy+4Q==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZGUXbaHO;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Z4DJFAJq;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790156116;
-	bh=GYc2tWt+Ov8mAiyy7FbG3tIyLMQ1tRP+0GPBkARMSRI=;
+	d=lists.u-boot-project.org; s=default; t=1790156121;
+	bh=tvDdxkQqQFu9ikiIVUPhKlhxINLnODiVwSWiJxP0CtU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GP3Q2vxj6yg08yBY2owITrAATCHHYxgRGbYq7e8BSSewOTomJ6ddFTOMhm1PUZG79
-	 O187Qs+mJTINz/iyOwpsyYbvHGRjeedSVbES+1RNvfgR9s7+HyDQD3LUVbyPi3JjKr
-	 LLUCUsV4UoA3qPHsUOv3GrPxwfVNQUMG2pn2u5HqQuuEjcwWgL4yrqRwMPEC4ikGYp
-	 Y2CZD8vIRan5IWhOeq4l7iG7SpJ1iqoBkOrkhD6fylDQAYVDXmDgcd+pOBkWR59urq
-	 3/ZQh3CjitiPDkYiSIFZyFiv09itG7BBoZyyvt0jXtAm3xm/SYOGDncc24Y9yLVygP
-	 o8tW7sQ93HY0w==
+	b=tJNZ1Gczs36bSGZH+wCpPR7rK8xBl1r57krMlWV9gAsSI76To9wYFrf//KBAR1HMH
+	 4Oo5rmH/dEv1fBtDRmvxGSIOZ60dpnPDx1PvKEYmkjVXvbSDt98y3EkorBB1Hf7YQf
+	 gV0AQ3KparVi11LXPFnzUKR9Ca3lmZxA/kV7fIELacVSaXLaGtJlDJMXs0PADHxv07
+	 ID1UTo/7zBCC7Gtx4gotrhtSY9Bqvv4SiUb4UP4lJVPnLuzMJ8C1QUtT/YI8eha3pD
+	 lNgJuYyhY0EUvukmp9N1SJIDw52x1G8eNlu2eCpmi2E0HnnHrzIGVMkmGf1pYi4Fmw
+	 ThAcCZXhCvU3A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3AE2860830;
-	Wed, 23 Sep 2026 09:35:16 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 8F3BE194
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 09:35:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 541F960823;
+	Wed, 23 Sep 2026 09:35:21 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0B741D1
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 09:35:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7594160752
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 09:35:14 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E4A0160807
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 09:35:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1H6U3Wt8YbxQ for <u-boot@lists.u-boot-project.org>;
- Wed, 23 Sep 2026 09:35:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 71928606B6
-Authentication-Results: smtp3.osuosl.org; arc=none
- smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790156113;
- b=BF7FScbv1lpxV0S8HyR/BYiMEf1ktxs70YhlBsPMGbxg7ZlrBoCL+FP4q+znrdPbul4i
- 4qmv6itXlaowoUmGz8V+XWIs7EnJTGYKwdzJAAqZcpfIfdlroEmy5H9FEUSon2oHInNyt
- BwmPr2GGAaq4u0InzWgKdBWTgDPA411grHA5CWo7GOYVPStdsSHWAdKLxFRJGWeU0bbId
- NXI/4gQIvCJOyHJOCd9hHr3YtO0vGDphXydsucBc4AFzKJFwVn5t4+Gd6MzmKrxuVQHNf
- CLrJz9ure65WI1ocq40gl49gBj4Tin54AxGJxBmene7WaQmXtWzLZY9YMrQLWLmq0eQ==
+ id c6beM0qytan5 for <u-boot@lists.u-boot-project.org>;
+ Wed, 23 Sep 2026 09:35:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org C700F60837
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=172.234.252.31
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790156118;
+ b=Ui2lHcwUd6R7Do35dfA7ahkOjraOvC2fEQ0Q/O0NWvQawV7SKUXVKteMbG4YrfNX8aYF
+ PsOVhqHCUl+yjvStebQjja1cTHtJojhBWaCDzC59vdT5+z0GX8InriNm3BwaizupDZVLd
+ 0AKw54rSCpdPUu//nW/1Of7BE4PQqQxmNnS7syiR6GMsR+ohYv3cHZtxaCYepKGQ4N8kX
+ 9EndE9qvkyiXXQbb8E3oWqKknsDJa2/fNeHd/6pyQqjVsbXJM+mj3slPuAmMPjtVkNWp4
+ iMFyeM4h2m1fcvLKNur44Wg7jWZKnuBp0Nh8D2JgelKr7VoaDftW4nRgDxnWxbN6Wgg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790156113;
+ c=relaxed/relaxed; t=1790156118;
  h=Received-SPF:Received:Received:DKIM-Signature:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=GYc2tWt+Ov8mAiyy7FbG3tIyLMQ1tRP+0GPBkARMSRI=;
- b=hZ1pDLYfxzb6cm9PghgytM26RL5n37eO86OAyUW6bLfaBqdqmFMDJh2ZXfPbOF3fCaHG
- 9D4jNwgfrhMCnET2A6b+R0qUQpbxS+bqHLjDRGUVdtOxvMqodnHpBzpZysglE2FvHdqUO
- u/Te4m8Ak0VYS4fGxedRrIW9KxYwIu9m4hPFBEHcPWkPHPoITc1Ccb5ZRyNByuaZULvkX
- UfmvH9tC9FX/sALabGqc7WSZZUqLPzYR2thwBzKRXkliL7bGrRFiEiTYDsK0FB2icOgR0
- QwWHIYo6k+KwQ7VRj8diG1cuZBlVLwvd6NSJ6nzq+2NZUGkz3NAzvC9yrPRae94nMaA==
+ bh=tvDdxkQqQFu9ikiIVUPhKlhxINLnODiVwSWiJxP0CtU=;
+ b=A5X4i0XqWA+xNyCiquiY/f72zqu8pAwVUl3y0DwgMHB4HsjKQZNwXGS00M1Vax72PjEN
+ gRZ8ySFMcUOMC+Qk+B98ygISIOhZaOfd3e4ZrwBZdDzekgNcvWkLeXinu1wwi5Bsa0vqz
+ jg6+ytNYaMwZZeTZVxF3bVDwn0/6Y35elwY1lzTXFScCZauURIBUUSfGkBmoL2ORfHOdT
+ DryD/aqPIYupvi9xlW5vdXuI4J26g3hm1wMt+9v9U3QCP50SQLb6Wdref4BBsVKwcLBUE
+ gyEUxLHnc7tS65MWYk/m+HVmkTdc3gbB3yAyY1HiPxrs2NWCkWDz5TOjnhmZFuD2kwg==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=kernel.org; 
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=ZGUXbaHO; 
- arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
- envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+ header.s=k20260515 header.b=Z4DJFAJq; 
+ arc=none smtp.remote-ip=172.234.252.31
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org; envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=ZGUXbaHO
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 71928606B6
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 09:35:12 +0000 (UTC)
+ header.a=rsa-sha256 header.s=k20260515 header.b=Z4DJFAJq
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C700F60837
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 09:35:18 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id C466F6020F;
- Wed, 23 Sep 2026 09:35:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD6D81F000FF;
- Wed, 23 Sep 2026 09:35:08 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 166A440B70;
+ Wed, 23 Sep 2026 09:35:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 56A951F00899;
+ Wed, 23 Sep 2026 09:35:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1790156111;
- bh=GYc2tWt+Ov8mAiyy7FbG3tIyLMQ1tRP+0GPBkARMSRI=;
+ s=k20260515; t=1790156118;
+ bh=tvDdxkQqQFu9ikiIVUPhKlhxINLnODiVwSWiJxP0CtU=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=ZGUXbaHOQzM5xtrnmmPSITGsypHNdTK8Jn6HIXs3x3IKf0f4LU4lDsBva1sMOVlno
- +5B/6Xl2XkkcLBerbIchvP16pkvfPu/0MhCORsId241IPulY89fRBjKYyt4MIMsrM7
- QJbKz7jmq/kcYD3Vr0SMKKSAaMPpO0mBFyipmJAvjq2dAaNcw5cKfcSNImOcMJDvES
- MrvRntpKX+K+hSsom5KgONN/AO1uKoPlIQv32nEWatOaZcao0MbFFcLbAHz6jmtzb5
- 2MKE8WABbVT7oRcrGl92des7HoCnoMa8H7IZrVEf/jVrq6+irC+tAKjK+d8fDsJkCF
- BhbtQHScDmTQw==
+ b=Z4DJFAJqpTBTQunxgqnZWEf/nKzc3R02W6gdSiXv6tTASpLbH6ekc1aNPau/UDR+i
+ 9O5+7LCSlmZkthoXW92qcBxYdRsYEYDzs5VY4VAZBvY7/yhRdx99Ys32WG5XFct65z
+ ZHf6P4uc59La5Y1VRcxgosdDNqng+z8I6X2EyXaUGVIa3Z1wFVUH8MmN7ZYtklVZYs
+ iLmQgirGgthpP+QAk6FbvyYusy/2AFKGDb0GiQNW7uBot2CIAElgk5imnaxGUsvkaJ
+ gIbZNkcqz88nY+BVF/TfjqlDOZaRI7BQS3jLz/HqC7LizHh+hRzlDuR7yc9a+L4FNN
+ fseh/k9KOUFug==
 From: Yixun Lan <dlan@kernel.org>
-Date: Wed, 23 Sep 2026 09:34:27 +0000
-Subject: [PATCH v2 4/8] clk: spacemit: k3: extract common header
+Date: Wed, 23 Sep 2026 09:34:29 +0000
+Subject: [PATCH v2 6/8] clk: spacemit: k3: add CPU PLL rate tables
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260923-01-k3-clock-reset-support-v2-4-6ec0abb1c7b5@kernel.org>
+Message-Id: <20260923-01-k3-clock-reset-support-v2-6-6ec0abb1c7b5@kernel.org>
 References: <20260923-01-k3-clock-reset-support-v2-0-6ec0abb1c7b5@kernel.org>
 In-Reply-To: <20260923-01-k3-clock-reset-support-v2-0-6ec0abb1c7b5@kernel.org>
 To: u-boot@lists.u-boot-project.org
@@ -139,22 +137,22 @@ Cc: spacemit@lists.linux.dev, u-boot-spacemit@groups.io,
  Jonas Karlman <jonas@kwiboo.se>, Alexey Charkov <alchark@flipper.net>, 
  Yixun Lan <dlan@kernel.org>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9806; i=dlan@kernel.org;
- h=from:subject:message-id; bh=MbTFETMRuSzTIbnTNmxY0A7N/QzVfpbxfSKmVMX8634=;
- b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBqs50wyl/GIzEG/FkErpbgf1uikUqNxP4JqavtC
- bbdsPVxyvuJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCarOdMBsUgAAAAAAEAA5t
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8345; i=dlan@kernel.org;
+ h=from:subject:message-id; bh=Tp6ghLSZW6DxaDVewRYtNBOtIgfIO3pF2UzP0xX8XtQ=;
+ b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBqs502/YYr8Wnp6MuyD3r9LFiETPLYtsrwe/tCH
+ IaMqYMRVwiJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCarOdNhsUgAAAAAAEAA5t
  YW51MiwyLjUrMS4xMiwyLDJfFIAAAAAALgAoaXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5
  maWZ0aGhvcnNlbWFuLm5ldEI1QkFCOEM5QzMxQjcxMTU2NzAyMjNEQzMxQUFFQTQ3NTk0REJCRU
- QACgkQMarqR1lNu+0OLQ/7BXdpcDxS21KkBvuAcFPpJIrBpLCKLJ3BujoIiLVuOfOcCsKb8GkL5
- lPezWScAIzz/s8Ptl268Ed71e7i7W+ZNhkxKEvS2e5d2rARWd3NZKLfL0pD3Fb5PWPnb20pfpuu
- R+X75+4fZSI9FgNAwM06zwLBCBk/ja07Qi7s59dkQdTBgosK6B7WCn4omtnwwk9B7hOJL1ayrTX
- gb5vLgueROOpYTTQfYdDd0Os4L/rKayVl9LkrZkBvkWZqlJcpRTTjBMaoN4dW9wY3sUJXN8A+ga
- x0pnSqpp3+c7UfbQm5bh0+cQ/KWY4XHVzE/zYYgHn2woiyy4pKdPCO/3KYMTbLU2hEfqCyhdLVG
- ajylh7fz+N+++d30U81Soe032F8+7B5pUku/2XIy4Y7wixDOUIxWteZaS3qBKPhrDjlYzjx0NVy
- ST4oYdXqhshZFINP+l2/GpWMOkpMCxCE23KnR79SXWCkECHu+N+9DMs/vVHfdYMq4ADLGeUWKWR
- yCdOAL2NkXqiInLebmU+KpZbaJzrqXDOZtUIXkUZtb7XXJxeAZOQT5U9aD8npHBN8uZixzlGbFm
- GUkWwcwXn2xMEIHkCUV023af78r9H2aYLGcHjI8xXWs0tEUykcmkkNYJLGcKOoCKoUhMkdMctaX
- wtAHqSIqeSgOMuV+SS4u4xgA99JQi8=
+ QACgkQMarqR1lNu+3Hmw//fB0FPgLNJ4b+oBrm2y81PYXXysQD+OO8LXuiW40l3bqOeydYanrOO
+ 7Hn1fAL9TPeKs7ZlyMfSOdgBAJ6R+eL7vS5LBJkgHxdGKEg+63KdS0CIePUXHCjKYGNsCxw5PHk
+ +RDgNfqVAw2QstHb3649Awsd9NjacNEwIIWXtGlFH2kqxB2J266WzOhIx1UMx5JxJN0SaAymxbE
+ r28Xq2JmLtufMTOGPN1OKH5IL8f1SjVkQDTTfjxk78r5BLXDY2W32RTIla66QTUgG3o4Akbf+eY
+ EgaSsB0YqzWEcCQY1AtC0SEKD7iIwub4kDqA+8x8TqNLter2RO+YLgfvCz1kdnyhxKKwC6Jf9il
+ JhRmPa/wojyB8LAmB0AM+7KSgVQw4f24Bv2Cquyr43Yq8uPedMaKzxO1X5wk+GCL6OnBtEKT+bT
+ a1Ku/aPAG22I4a6HCyImccZ+tSCk83Aakkmu+NWwv98RUmaJJroPVv/obIu0expc0Bgsf1N9QoT
+ 7ZAzRGcE0Zdml169So04jVbccw35iaxU3DYFJovKmv/i5Kngwdg4WnxXvpHJmd2KjEbQFK6Ek/K
+ Z55eXeaBEEZPJPcC1vIkeUrLmQI51tapUCGKujtKXeeanwF/ozlxdb/jGGdqh45DhZwI8tdz/W7
+ 4QMKEZK0kC0ptRqXtGxFjzVyee0OGI=
 X-Developer-Key: i=dlan@kernel.org; a=openpgp;
  fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -170,294 +168,150 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Based on upstream linux:
-  091d19cc2401 ("clk: spacemit: k3: extract common header")
+Based on upstream Linux:
+  d558af8ee0bb ("clk: spacemit: k3: add CPU PLL rate tables")
 
-Extracting common header file, which will be shared by clock and reset
-drivers. So will make it easy to add reset driver for K3 SoC later.
+The K3 CPU PLL rate tables currently describe only one rate per PLL,
+although the hardware supports a wider range.
 
+PLL3 and PLL4 support rates from 1.05 to 2.4 GHz, while PLL5 and PLL8
+support rates from 1.05 to 2 GHz. Populate the tables with every
+supported rate in 50 MHz steps.
+
+Recent newer vendor FSBL release switch PLL3 and PLL4 to 2 GHz from
+2.2 GHz. Since the clock driver does not recognize this setting,
+during the probe stage, the PLL clock will treat it as an unknown
+configuration and attempts to disable and reconfigure. PLL3 is critical
+clock that drives the boot CPU at this point, so disabling it causes
+U-Boot to hang while probing the serial console clock.
+
+Add the complete clock tables so that the clock driver recognizes and
+preserves the settings established by the FSBL.
+
+Link: https://patch.msgid.link/20260907-k3-pll5-pll8-1800mhz-v5-1-5cc96d716b0a@linux.spacemit.com
 Signed-off-by: Yixun Lan <dlan@kernel.org>
 ---
- include/soc/spacemit/k3-syscon.h | 271 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 271 insertions(+)
+ drivers/clk/spacemit/clk-k3.c | 92 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 92 insertions(+)
 
-diff --git a/include/soc/spacemit/k3-syscon.h b/include/soc/spacemit/k3-syscon.h
-new file mode 100644
-index 00000000000..0b91ccf6ec5
---- /dev/null
-+++ b/include/soc/spacemit/k3-syscon.h
-@@ -0,0 +1,271 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+/* SpacemiT clock and reset driver definitions for the K3 SoC */
-+
-+#ifndef __SOC_K3_SYSCON_H__
-+#define __SOC_K3_SYSCON_H__
-+
-+/* APBS register offset */
-+#define APBS_PLL1_SWCR1			0x100
-+#define APBS_PLL1_SWCR2			0x104
-+#define APBS_PLL1_SWCR3			0x108
-+#define APBS_PLL2_SWCR1			0x118
-+#define APBS_PLL2_SWCR2			0x11c
-+#define APBS_PLL2_SWCR3			0x120
-+#define APBS_PLL3_SWCR1			0x124
-+#define APBS_PLL3_SWCR2			0x128
-+#define APBS_PLL3_SWCR3			0x12c
-+#define APBS_PLL4_SWCR1			0x130
-+#define APBS_PLL4_SWCR2			0x134
-+#define APBS_PLL4_SWCR3			0x138
-+#define APBS_PLL5_SWCR1			0x13c
-+#define APBS_PLL5_SWCR2			0x140
-+#define APBS_PLL5_SWCR3			0x144
-+#define APBS_PLL6_SWCR1			0x148
-+#define APBS_PLL6_SWCR2			0x14c
-+#define APBS_PLL6_SWCR3			0x150
-+#define APBS_PLL7_SWCR1			0x158
-+#define APBS_PLL7_SWCR2			0x15c
-+#define APBS_PLL7_SWCR3			0x160
-+#define APBS_PLL8_SWCR1			0x180
-+#define APBS_PLL8_SWCR2			0x184
-+#define APBS_PLL8_SWCR3			0x188
-+
-+/* MPMU register offset */
-+#define MPMU_FCCR			0x0008
-+#define MPMU_POSR			0x0010
-+#define POSR_PLL1_LOCK			BIT(24)
-+#define POSR_PLL2_LOCK			BIT(25)
-+#define POSR_PLL3_LOCK			BIT(26)
-+#define POSR_PLL4_LOCK			BIT(27)
-+#define POSR_PLL5_LOCK			BIT(28)
-+#define POSR_PLL6_LOCK			BIT(29)
-+#define POSR_PLL7_LOCK			BIT(30)
-+#define POSR_PLL8_LOCK			BIT(31)
-+#define MPMU_SUCCR			0x0014
-+#define MPMU_ISCCR			0x0044
-+#define MPMU_WDTPCR			0x0200
-+#define MPMU_RIPCCR			0x0210
-+#define MPMU_ACGR			0x1024
-+#define MPMU_APBCSCR			0x1050
-+#define MPMU_SUCCR_1			0x10b0
-+
-+#define MPMU_I2S0_SYSCLK		0x1100
-+#define MPMU_I2S2_SYSCLK		0x1104
-+#define MPMU_I2S3_SYSCLK		0x1108
-+#define MPMU_I2S4_SYSCLK		0x110c
-+#define MPMU_I2S5_SYSCLK		0x1110
-+#define MPMU_I2S_SYSCLK_CTRL		0x1114
-+
-+/* APBC register offset */
-+#define APBC_UART0_CLK_RST		0x00
-+#define APBC_UART2_CLK_RST		0x04
-+#define APBC_GPIO_CLK_RST		0x08
-+#define APBC_PWM0_CLK_RST		0x0c
-+#define APBC_PWM1_CLK_RST		0x10
-+#define APBC_PWM2_CLK_RST		0x14
-+#define APBC_PWM3_CLK_RST		0x18
-+#define APBC_TWSI8_CLK_RST		0x20
-+#define APBC_UART3_CLK_RST		0x24
-+#define APBC_RTC_CLK_RST		0x28
-+#define APBC_TWSI0_CLK_RST		0x2c
-+#define APBC_TWSI1_CLK_RST		0x30
-+#define APBC_TIMERS0_CLK_RST		0x34
-+#define APBC_TWSI2_CLK_RST		0x38
-+#define APBC_AIB_CLK_RST		0x3c
-+#define APBC_TWSI4_CLK_RST		0x40
-+#define APBC_TIMERS1_CLK_RST		0x44
-+#define APBC_ONEWIRE_CLK_RST		0x48
-+#define APBC_TWSI5_CLK_RST		0x4c
-+#define APBC_DRO_CLK_RST		0x58
-+#define APBC_IR0_CLK_RST		0x5c
-+#define APBC_IR1_CLK_RST		0x1c
-+#define APBC_TWSI6_CLK_RST		0x60
-+#define APBC_COUNTER_CLK_SEL		0x64
-+#define APBC_TSEN_CLK_RST		0x6c
-+#define APBC_UART4_CLK_RST		0x70
-+#define APBC_UART5_CLK_RST		0x74
-+#define APBC_UART6_CLK_RST		0x78
-+#define APBC_SSP3_CLK_RST		0x7c
-+#define APBC_SSPA0_CLK_RST		0x80
-+#define APBC_SSPA1_CLK_RST		0x84
-+#define APBC_SSPA2_CLK_RST		0x88
-+#define APBC_SSPA3_CLK_RST		0x8c
-+#define APBC_IPC_AP2AUD_CLK_RST		0x90
-+#define APBC_UART7_CLK_RST		0x94
-+#define APBC_UART8_CLK_RST		0x98
-+#define APBC_UART9_CLK_RST		0x9c
-+#define APBC_CAN0_CLK_RST		0xa0
-+#define APBC_CAN1_CLK_RST		0xa4
-+#define APBC_PWM4_CLK_RST		0xa8
-+#define APBC_PWM5_CLK_RST		0xac
-+#define APBC_PWM6_CLK_RST		0xb0
-+#define APBC_PWM7_CLK_RST		0xb4
-+#define APBC_PWM8_CLK_RST		0xb8
-+#define APBC_PWM9_CLK_RST		0xbc
-+#define APBC_PWM10_CLK_RST		0xc0
-+#define APBC_PWM11_CLK_RST		0xc4
-+#define APBC_PWM12_CLK_RST		0xc8
-+#define APBC_PWM13_CLK_RST		0xcc
-+#define APBC_PWM14_CLK_RST		0xd0
-+#define APBC_PWM15_CLK_RST		0xd4
-+#define APBC_PWM16_CLK_RST		0xd8
-+#define APBC_PWM17_CLK_RST		0xdc
-+#define APBC_PWM18_CLK_RST		0xe0
-+#define APBC_PWM19_CLK_RST		0xe4
-+#define APBC_TIMERS2_CLK_RST		0x11c
-+#define APBC_TIMERS3_CLK_RST		0x120
-+#define APBC_TIMERS4_CLK_RST		0x124
-+#define APBC_TIMERS5_CLK_RST		0x128
-+#define APBC_TIMERS6_CLK_RST		0x12c
-+#define APBC_TIMERS7_CLK_RST		0x130
-+
-+#define APBC_CAN2_CLK_RST		0x148
-+#define APBC_CAN3_CLK_RST		0x14c
-+#define APBC_CAN4_CLK_RST		0x150
-+#define APBC_UART10_CLK_RST		0x154
-+#define APBC_SSP0_CLK_RST		0x158
-+#define APBC_SSP1_CLK_RST		0x15c
-+#define APBC_SSPA4_CLK_RST		0x160
-+#define APBC_SSPA5_CLK_RST		0x164
-+
-+/* APMU register offset */
-+#define APMU_CSI_CCIC2_CLK_RES_CTRL	0x024
-+#define APMU_ISP_CLK_RES_CTRL		0x038
-+#define APMU_PMU_CLK_GATE_CTRL		0x040
-+#define APMU_LCD_CLK_RES_CTRL1		0x044
-+#define APMU_LCD_SPI_CLK_RES_CTRL	0x048
-+#define APMU_LCD_CLK_RES_CTRL2		0x04c
-+#define APMU_CCIC_CLK_RES_CTRL		0x050
-+#define APMU_SDH0_CLK_RES_CTRL		0x054
-+#define APMU_SDH1_CLK_RES_CTRL		0x058
-+#define APMU_USB_CLK_RES_CTRL		0x05c
-+#define APMU_QSPI_CLK_RES_CTRL		0x060
-+#define APMU_DMA_CLK_RES_CTRL		0x064
-+#define APMU_AES_CLK_RES_CTRL		0x068
-+#define APMU_MCB_CLK_RES_CTRL		0x06c
-+#define APMU_VPU_CLK_RES_CTRL		0x0a4
-+#define APMU_DTC_CLK_RES_CTRL		0x0ac
-+#define APMU_GPU_CLK_RES_CTRL		0x0cc
-+#define APMU_SDH2_CLK_RES_CTRL		0x0e0
-+#define APMU_PMUA_MC_CTRL		0x0e8
-+#define APMU_PMU_CC2_AP			0x100
-+#define APMU_PMUA_EM_CLK_RES_CTRL	0x104
-+#define APMU_UCIE_CTRL			0x11c
-+#define APMU_RCPU_CLK_RES_CTRL		0x14c
-+#define APMU_TOP_DCLK_CTRL		0x158
-+#define APMU_LCD_EDP_CTRL		0x23c
-+#define APMU_UFS_CLK_RES_CTRL		0x268
-+#define APMU_LCD_CLK_RES_CTRL3		0x26c
-+#define APMU_LCD_CLK_RES_CTRL4		0x270
-+#define APMU_LCD_CLK_RES_CTRL5		0x274
-+#define APMU_CCI550_CLK_CTRL		0x300
-+#define APMU_ACLK_CLK_CTRL		0x388
-+#define APMU_CPU_C0_CLK_CTRL		0x38C
-+#define APMU_CPU_C1_CLK_CTRL		0x390
-+#define APMU_CPU_C2_CLK_CTRL		0x394
-+#define APMU_CPU_C3_CLK_CTRL		0x208
-+#define APMU_PCIE_CLK_RES_CTRL_A	0x1f0
-+#define APMU_PCIE_CLK_RES_CTRL_B	0x1d0
-+#define APMU_PCIE_CLK_RES_CTRL_C	0x1c8
-+#define APMU_PCIE_CLK_RES_CTRL_D	0x1e0
-+#define APMU_PCIE_CLK_RES_CTRL_E	0x1e8
-+#define APMU_EMAC0_CLK_RES_CTRL		0x3e4
-+#define APMU_EMAC1_CLK_RES_CTRL		0x3ec
-+#define APMU_EMAC2_CLK_RES_CTRL		0x248
-+#define APMU_ESPI_CLK_RES_CTRL		0x240
-+#define APMU_SNR_ISIM_VCLK_CTRL		0x3f8
-+
-+/* DCIU register offsets */
-+#define DCIU_DMASYS_CLK_EN		0x234
-+#define DCIU_DMASYS_SDMA_CLK_EN		0x238
-+#define DCIU_C2_TCM_PIPE_CLK		0x244
-+#define DCIU_C3_TCM_PIPE_CLK		0x248
-+
-+#define DCIU_DMASYS_S0_RSTN		0x204
-+#define DCIU_DMASYS_S1_RSTN		0x208
-+#define DCIU_DMASYS_A0_RSTN		0x20C
-+#define DCIU_DMASYS_A1_RSTN		0x210
-+#define DCIU_DMASYS_A2_RSTN		0x214
-+#define DCIU_DMASYS_A3_RSTN		0x218
-+#define DCIU_DMASYS_A4_RSTN		0x21C
-+#define DCIU_DMASYS_A5_RSTN		0x220
-+#define DCIU_DMASYS_A6_RSTN		0x224
-+#define DCIU_DMASYS_A7_RSTN		0x228
-+#define DCIU_DMASYS_RSTN		0x22C
-+#define DCIU_DMASYS_SDMA_RSTN		0x230
-+
-+/* RCPU SYSCTRL register offsets */
-+#define RCPU_CAN_CLK_RST		0x4c
-+#define RCPU_CAN1_CLK_RST		0xF0
-+#define RCPU_CAN2_CLK_RST		0xF4
-+#define RCPU_CAN3_CLK_RST		0xF8
-+#define RCPU_CAN4_CLK_RST		0xFC
-+#define RCPU_IRC_CLK_RST		0x48
-+#define RCPU_IRC1_CLK_RST		0xEC
-+#define RCPU_GMAC_CLK_RST		0xE4
-+#define RCPU_ESPI_CLK_RST		0xDC
-+#define RCPU_AUDIO_I2S0_SYS_CLK_CTRL	0x70
-+#define RCPU_AUDIO_I2S1_SYS_CLK_CTRL	0x44
-+
-+/* RCPU UARTCTRL register offsets */
-+#define RCPU1_UART0_CLK_RST		0x00
-+#define RCPU1_UART1_CLK_RST		0x04
-+#define RCPU1_UART2_CLK_RST		0x08
-+#define RCPU1_UART3_CLK_RST		0x0c
-+#define RCPU1_UART4_CLK_RST		0x10
-+#define RCPU1_UART5_CLK_RST		0x14
-+
-+/* RCPU I2SCTRL register offsets */
-+#define RCPU2_AUDIO_I2S0_TX_RX_CLK_CTRL	0x60
-+#define RCPU2_AUDIO_I2S1_TX_RX_CLK_CTRL	0x64
-+#define RCPU2_AUDIO_I2S2_TX_RX_CLK_CTRL	0x68
-+#define RCPU2_AUDIO_I2S3_TX_RX_CLK_CTRL	0x6C
-+
-+#define RCPU2_AUDIO_I2S2_SYS_CLK_CTRL	0x44
-+#define RCPU2_AUDIO_I2S3_SYS_CLK_CTRL	0x54
-+
-+/* RCPU SPICTRL register offsets */
-+#define RCPU3_SSP0_CLK_RST		0x00
-+#define RCPU3_SSP1_CLK_RST		0x04
-+#define RCPU3_PWR_SSP_CLK_RST		0x08
-+
-+/* RCPU I2CCTRL register offsets */
-+#define RCPU4_I2C0_CLK_RST		0x00
-+#define RCPU4_I2C1_CLK_RST		0x04
-+#define RCPU4_PWR_I2C_CLK_RST		0x08
-+
-+/* RPMU register offsets */
-+#define RCPU5_AON_PER_CLK_RST_CTRL	0x2C
-+#define RCPU5_TIMER1_CLK_RST		0x4C
-+#define RCPU5_TIMER2_CLK_RST		0x70
-+#define RCPU5_TIMER3_CLK_RST		0x78
-+#define RCPU5_TIMER4_CLK_RST		0x7C
-+#define RCPU5_GPIO_AND_EDGE_CLK_RST	0x74
-+#define RCPU5_RCPU_BUS_CLK_CTRL		0xC0
-+#define RCPU5_RT24_CORE0_CLK_CTRL	0xC4
-+#define RCPU5_RT24_CORE1_CLK_CTRL	0xC8
-+#define RCPU5_RT24_CORE0_SW_RESET	0xCC
-+#define RCPU5_RT24_CORE1_SW_RESET	0xD0
-+
-+/* RCPU PWMCTRL register offsets */
-+#define RCPU6_PWM0_CLK_RST		0x00
-+#define RCPU6_PWM1_CLK_RST		0x04
-+#define RCPU6_PWM2_CLK_RST		0x08
-+#define RCPU6_PWM3_CLK_RST		0x0c
-+#define RCPU6_PWM4_CLK_RST		0x10
-+#define RCPU6_PWM5_CLK_RST		0x14
-+#define RCPU6_PWM6_CLK_RST		0x18
-+#define RCPU6_PWM7_CLK_RST		0x1c
-+#define RCPU6_PWM8_CLK_RST		0x20
-+#define RCPU6_PWM9_CLK_RST		0x24
-+
-+/* APBC2 SEC register offsets */
-+#define APBC2_UART1_CLK_RST		0x00
-+#define APBC2_SSP2_CLK_RST		0x04
-+#define APBC2_TWSI3_CLK_RST		0x08
-+#define APBC2_RTC_CLK_RST		0x0c
-+#define APBC2_TIMERS_CLK_RST		0x10
-+#define APBC2_GPIO_CLK_RST		0x1c
-+
-+#endif /* __SOC_K3_SYSCON_H__ */
+diff --git a/drivers/clk/spacemit/clk-k3.c b/drivers/clk/spacemit/clk-k3.c
+index 1ac64aec6ba..3191654ea72 100644
+--- a/drivers/clk/spacemit/clk-k3.c
++++ b/drivers/clk/spacemit/clk-k3.c
+@@ -46,14 +46,87 @@ static const struct ccu_pll_rate_tbl pll2_rate_tbl[] = {
+ };
+ 
+ static const struct ccu_pll_rate_tbl pll3_rate_tbl[] = {
++	CCU_PLLA_RATE(1050000000UL, 0x0b2b3000, 0x00000000, 0xa0458080),
++	CCU_PLLA_RATE(1100000000UL, 0x0b2d3555, 0x00005500, 0xa0458181),
++	CCU_PLLA_RATE(1150000000UL, 0x0b2f3aaa, 0x0000ab00, 0xa0458181),
++	CCU_PLLA_RATE(1200000000UL, 0x0b320000, 0x00000000, 0xa0458181),
++	CCU_PLLA_RATE(1250000000UL, 0x0b340555, 0x00005500, 0xa0458181),
++	CCU_PLLA_RATE(1300000000UL, 0x0b360aaa, 0x0000ab00, 0xa0458282),
++	CCU_PLLA_RATE(1350000000UL, 0x0b381000, 0x00000000, 0xa0458282),
++	CCU_PLLA_RATE(1400000000UL, 0x0b3a1555, 0x00005500, 0xa0458282),
++	CCU_PLLA_RATE(1450000000UL, 0x0b3c1aaa, 0x0000ab00, 0xa0458383),
++	CCU_PLLA_RATE(1500000000UL, 0x0b3e2000, 0x00000000, 0xa0458383),
++	CCU_PLLA_RATE(1550000000UL, 0x0b402555, 0x00005500, 0xa0458383),
++	CCU_PLLA_RATE(1600000000UL, 0x0b422aaa, 0x0000ab00, 0xa0458484),
++	CCU_PLLA_RATE(1650000000UL, 0x0b443000, 0x00000000, 0xa0458484),
++	CCU_PLLA_RATE(1700000000UL, 0x0b463555, 0x00005500, 0xa0458484),
++	CCU_PLLA_RATE(1750000000UL, 0x0b483aaa, 0x0000ab00, 0xa0458585),
++	CCU_PLLA_RATE(1800000000UL, 0x0b4b0000, 0x00000000, 0xa0458585),
++	CCU_PLLA_RATE(1850000000UL, 0x0b4d0555, 0x00005500, 0xa0458585),
++	CCU_PLLA_RATE(1900000000UL, 0x0b4f0aaa, 0x0000ab00, 0xa0458686),
++	CCU_PLLA_RATE(1950000000UL, 0x0b511000, 0x00000000, 0xa0458686),
++	CCU_PLLA_RATE(2000000000UL, 0x0b292aaa, 0x0000ab00, 0xa0558686),
++	CCU_PLLA_RATE(2050000000UL, 0x0b2a2d55, 0x00005500, 0xa0558686),
++	CCU_PLLA_RATE(2100000000UL, 0x0b2b3000, 0x00000000, 0xa0558787),
++	CCU_PLLA_RATE(2150000000UL, 0x0b2c32aa, 0x0000ab00, 0xa0558787),
+ 	CCU_PLLA_RATE(2200000000UL, 0x0b2d3555, 0x00005500, 0xa0558787),
++	CCU_PLLA_RATE(2250000000UL, 0x0b2e3800, 0x00000000, 0xa0558888),
++	CCU_PLLA_RATE(2300000000UL, 0x0b2f3aaa, 0x0000ab00, 0xa0558888),
++	CCU_PLLA_RATE(2350000000UL, 0x0b303d55, 0x00005500, 0xa0558888),
++	CCU_PLLA_RATE(2400000000UL, 0x0b320000, 0x00000000, 0xa0558989),
+ };
+ 
+ static const struct ccu_pll_rate_tbl pll4_rate_tbl[] = {
++	CCU_PLLA_RATE(1050000000UL, 0x0b2b3000, 0x00000000, 0xa0458080),
++	CCU_PLLA_RATE(1100000000UL, 0x0b2d3555, 0x00005500, 0xa0458181),
++	CCU_PLLA_RATE(1150000000UL, 0x0b2f3aaa, 0x0000ab00, 0xa0458181),
++	CCU_PLLA_RATE(1200000000UL, 0x0b320000, 0x00000000, 0xa0458181),
++	CCU_PLLA_RATE(1250000000UL, 0x0b340555, 0x00005500, 0xa0458181),
++	CCU_PLLA_RATE(1300000000UL, 0x0b360aaa, 0x0000ab00, 0xa0458282),
++	CCU_PLLA_RATE(1350000000UL, 0x0b381000, 0x00000000, 0xa0458282),
++	CCU_PLLA_RATE(1400000000UL, 0x0b3a1555, 0x00005500, 0xa0458282),
++	CCU_PLLA_RATE(1450000000UL, 0x0b3c1aaa, 0x0000ab00, 0xa0458383),
++	CCU_PLLA_RATE(1500000000UL, 0x0b3e2000, 0x00000000, 0xa0458383),
++	CCU_PLLA_RATE(1550000000UL, 0x0b402555, 0x00005500, 0xa0458383),
++	CCU_PLLA_RATE(1600000000UL, 0x0b422aaa, 0x0000ab00, 0xa0458484),
++	CCU_PLLA_RATE(1650000000UL, 0x0b443000, 0x00000000, 0xa0458484),
++	CCU_PLLA_RATE(1700000000UL, 0x0b463555, 0x00005500, 0xa0458484),
++	CCU_PLLA_RATE(1750000000UL, 0x0b483aaa, 0x0000ab00, 0xa0458585),
++	CCU_PLLA_RATE(1800000000UL, 0x0b4b0000, 0x00000000, 0xa0458585),
++	CCU_PLLA_RATE(1850000000UL, 0x0b4d0555, 0x00005500, 0xa0458585),
++	CCU_PLLA_RATE(1900000000UL, 0x0b4f0aaa, 0x0000ab00, 0xa0458686),
++	CCU_PLLA_RATE(1950000000UL, 0x0b511000, 0x00000000, 0xa0458686),
++	CCU_PLLA_RATE(2000000000UL, 0x0b292aaa, 0x0000ab00, 0xa0558686),
++	CCU_PLLA_RATE(2050000000UL, 0x0b2a2d55, 0x00005500, 0xa0558686),
++	CCU_PLLA_RATE(2100000000UL, 0x0b2b3000, 0x00000000, 0xa0558787),
++	CCU_PLLA_RATE(2150000000UL, 0x0b2c32aa, 0x0000ab00, 0xa0558787),
+ 	CCU_PLLA_RATE(2200000000UL, 0x0b2d3555, 0x00005500, 0xa0558787),
++	CCU_PLLA_RATE(2250000000UL, 0x0b2e3800, 0x00000000, 0xa0558888),
++	CCU_PLLA_RATE(2300000000UL, 0x0b2f3aaa, 0x0000ab00, 0xa0558888),
++	CCU_PLLA_RATE(2350000000UL, 0x0b303d55, 0x00005500, 0xa0558888),
++	CCU_PLLA_RATE(2400000000UL, 0x0b320000, 0x00000000, 0xa0558989),
+ };
+ 
+ static const struct ccu_pll_rate_tbl pll5_rate_tbl[] = {
++	CCU_PLLA_RATE(1050000000UL, 0x0b2b3000, 0x00000000, 0xa0458080),
++	CCU_PLLA_RATE(1100000000UL, 0x0b2d3555, 0x00005500, 0xa0458181),
++	CCU_PLLA_RATE(1150000000UL, 0x0b2f3aaa, 0x0000ab00, 0xa0458181),
++	CCU_PLLA_RATE(1200000000UL, 0x0b320000, 0x00000000, 0xa0458181),
++	CCU_PLLA_RATE(1250000000UL, 0x0b340555, 0x00005500, 0xa0458181),
++	CCU_PLLA_RATE(1300000000UL, 0x0b360aaa, 0x0000ab00, 0xa0458282),
++	CCU_PLLA_RATE(1350000000UL, 0x0b381000, 0x00000000, 0xa0458282),
++	CCU_PLLA_RATE(1400000000UL, 0x0b3a1555, 0x00005500, 0xa0458282),
++	CCU_PLLA_RATE(1450000000UL, 0x0b3c1aaa, 0x0000ab00, 0xa0458383),
++	CCU_PLLA_RATE(1500000000UL, 0x0b3e2000, 0x00000000, 0xa0458383),
++	CCU_PLLA_RATE(1550000000UL, 0x0b402555, 0x00005500, 0xa0458383),
++	CCU_PLLA_RATE(1600000000UL, 0x0b422aaa, 0x0000ab00, 0xa0458484),
++	CCU_PLLA_RATE(1650000000UL, 0x0b443000, 0x00000000, 0xa0458484),
++	CCU_PLLA_RATE(1700000000UL, 0x0b463555, 0x00005500, 0xa0458484),
++	CCU_PLLA_RATE(1750000000UL, 0x0b483aaa, 0x0000ab00, 0xa0458585),
++	CCU_PLLA_RATE(1800000000UL, 0x0b4b0000, 0x00000000, 0xa0458585),
++	CCU_PLLA_RATE(1850000000UL, 0x0b4d0555, 0x00005500, 0xa0458585),
++	CCU_PLLA_RATE(1900000000UL, 0x0b4f0aaa, 0x0000ab00, 0xa0458686),
++	CCU_PLLA_RATE(1950000000UL, 0x0b511000, 0x00000000, 0xa0458686),
+ 	CCU_PLLA_RATE(2000000000UL, 0x0b292aaa, 0x0000ab00, 0xa0558686),
+ };
+ 
+@@ -66,6 +139,25 @@ static const struct ccu_pll_rate_tbl pll7_rate_tbl[] = {
+ };
+ 
+ static const struct ccu_pll_rate_tbl pll8_rate_tbl[] = {
++	CCU_PLLA_RATE(1050000000UL, 0x0b2b3000, 0x00000000, 0xa0458080),
++	CCU_PLLA_RATE(1100000000UL, 0x0b2d3555, 0x00005500, 0xa0458181),
++	CCU_PLLA_RATE(1150000000UL, 0x0b2f3aaa, 0x0000ab00, 0xa0458181),
++	CCU_PLLA_RATE(1200000000UL, 0x0b320000, 0x00000000, 0xa0458181),
++	CCU_PLLA_RATE(1250000000UL, 0x0b340555, 0x00005500, 0xa0458181),
++	CCU_PLLA_RATE(1300000000UL, 0x0b360aaa, 0x0000ab00, 0xa0458282),
++	CCU_PLLA_RATE(1350000000UL, 0x0b381000, 0x00000000, 0xa0458282),
++	CCU_PLLA_RATE(1400000000UL, 0x0b3a1555, 0x00005500, 0xa0458282),
++	CCU_PLLA_RATE(1450000000UL, 0x0b3c1aaa, 0x0000ab00, 0xa0458383),
++	CCU_PLLA_RATE(1500000000UL, 0x0b3e2000, 0x00000000, 0xa0458383),
++	CCU_PLLA_RATE(1550000000UL, 0x0b402555, 0x00005500, 0xa0458383),
++	CCU_PLLA_RATE(1600000000UL, 0x0b422aaa, 0x0000ab00, 0xa0458484),
++	CCU_PLLA_RATE(1650000000UL, 0x0b443000, 0x00000000, 0xa0458484),
++	CCU_PLLA_RATE(1700000000UL, 0x0b463555, 0x00005500, 0xa0458484),
++	CCU_PLLA_RATE(1750000000UL, 0x0b483aaa, 0x0000ab00, 0xa0458585),
++	CCU_PLLA_RATE(1800000000UL, 0x0b4b0000, 0x00000000, 0xa0458585),
++	CCU_PLLA_RATE(1850000000UL, 0x0b4d0555, 0x00005500, 0xa0458585),
++	CCU_PLLA_RATE(1900000000UL, 0x0b4f0aaa, 0x0000ab00, 0xa0458686),
++	CCU_PLLA_RATE(1950000000UL, 0x0b511000, 0x00000000, 0xa0458686),
+ 	CCU_PLLA_RATE(2000000000UL, 0x0b292aaa, 0x0000ab00, 0xa0558686),
+ };
+ 
 
 -- 
 2.55.0
