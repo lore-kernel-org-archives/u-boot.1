@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F045C982FA
-	for <u-boot@archiver.kernel.org>; Wed, 23 Sep 2026 11:51:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89040C982EA
+	for <u-boot@archiver.kernel.org>; Wed, 23 Sep 2026 11:51:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8A93980EC6;
-	Wed, 23 Sep 2026 11:51:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4B6E580F19;
+	Wed, 23 Sep 2026 11:51:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id doadUektrIPH; Wed, 23 Sep 2026 11:51:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 74F6980EC8
+ id NxIhGyDegORp; Wed, 23 Sep 2026 11:51:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 2BC5780F14
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790164270;
-	b=Tq1/mOyw82GHVXMwlNQR44Sxh9iuuaFntdSMZd2nUGI3Oa+c16zt5aqROfUHP681xato
-	 dem+wTljphsP++nfkegGl/uFfxgDs6HDIwL0pfGSUQoSW+/ICh5dqVwfiW3bOb/mvGnRy
-	 UhiBP2VsMkDsLLAG4s5WIDyPigI1xavkwwLGzpXCl+Txq90CvuGejqvl1BzaYI+ydfqiB
-	 Pd/Hg+cazo/sbPBPbyp2SFOFI7itmK7hyo3FxO1CAtAsRG6KoYNmgtHE4cjnRNCN9sMS1
-	 gm1jDEXpeZj6wrXr+YoOdwWc5058OkFPKS9XOAFhy+9Tbx+If6k2y23TeXdIVzIVAGw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790164274;
+	b=iv6qOmLF0+hK/kkqI+rg+2PfiawjLjLSLquczNE9RqJ9j/dB+DQ0XK1ftnduDqNjnqgj
+	 YKL+JrrpiP0x61+DqNStH+qrdyjws47pBTXmCG01BARU6dl1+pewH1iGIUMyEW58FO9y1
+	 mC1yjC0bpZaZikWW1aoSftyvo+R4GC+ZmgBgTG0bpM+4px/as9YZ9fwRIkhW9fOvuRa4T
+	 KoOp8BFwXY5DZScJYe05Q7YGhDHBn7yQi5EohChnxbMB1orAPZku0tKNOd/9eCmB/g84o
+	 uN5GqLhYx+izMkjgLl5ygCk9TIIlUnh+qlQl1NCkIxoAp1hRCMq84aMY6zmpIRisg8w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790164270;
+	c=relaxed/relaxed; t=1790164274;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
@@ -31,100 +31,102 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Flowmailer-Platform:Feedback-ID:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=LJxMopRXh7ul5IEs4ibCq0H0Vj3a0rjIIZ6gI+0qngA=;
-	b=cBvLjFKSvRn/pI799iq6pyBCUe2Bz9woT+xXL4iqPW9++DR1cMUI+HmuACZ04h7Z4tyg
-	 ua5MMuBqapzhnxc2izJCSPXHjLBF3DKTZwJmFI22oMUmatVLb5t47i8+3COknODLDgGJD
-	 UeE3Q185GyuB8zpgr15g3sWcVW6UY5RZ+LAsqk3s2jfkOwAkIKxgs3ysefbTHNBibj2PV
-	 5OsXCpjb5/3ylqUtIi7aqP//evnNJ0S8npFofX9Ei+8vpXFyOEW3sKyIRSqfDJsVVdadk
-	 yEvwNBRKtUW53QiMgYkTp5aaABBsThkMK7mFXmPnZpgxqc8gm+krkKtQ3cmw5WjfhdA==
+	bh=mIY+ZoKpLI4s8191eMFYZ06+f5bjGNlVPd1JwT+lRmE=;
+	b=nYdyeSd4zapudlVb8hRgtXqhw+ofLA1LkTilt+m6xmoNvvbtqkVTG6iD+DTP1JlmYynX
+	 W6WcoClSLB9Y8PhRFkQgrjqK8LBlpk/5SmUUmMeD7umm2Y7m9H/6kVA4hTh4sgLqE+cYE
+	 9586mg0N5np9dtODCclLE0GsSYp6QfiC0fA+JY59x0XVlML2AFKC3LUEFYr/1GM+ZCK06
+	 db2yw30kIrlpkweawYe9ZcfmdlBPCNIZshIOrFNNqUtwbOPp2NX0wwKNlgCNdfSiF/DV6
+	 gqkJj64Za5PHEHq+o/a7hAhQlu7QZ0b6LiCUe0CKvp3QAPB/nyLAbrBKHScNrZghHZg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790164270;
-	bh=LJxMopRXh7ul5IEs4ibCq0H0Vj3a0rjIIZ6gI+0qngA=;
+	d=lists.u-boot-project.org; s=default; t=1790164274;
+	bh=mIY+ZoKpLI4s8191eMFYZ06+f5bjGNlVPd1JwT+lRmE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CcypLoE02fCG4VAHZ3hJ+QLk74Ua8Llzf1H91v69AaB12537NkwMAn7x5ODsvm3uu
-	 0CaCkTb5QcyGcrqsheFxenuWSkZXL5r/ZjRtc1p6iwE6C9VXZvqOiQ2zl2ilKB4Egr
-	 BxqXRXX3hTQVkAJZkhRCd9CXgOwMCp1wGWBcdnTvjmOP3tVUxLePDpyL9p9CdZKeCL
-	 dK0RJGL9kX/JIiE8d7wQOmFIpgvr/ROFBQshO+eM9kx4T2dHTmSN9ddu3PkzghyJ2c
-	 Lu9wPLciZJ5RZ8HypEb20/icWEDy88aClozgec8F4khM7I2OwlQiWrdCSeS0kpaGPz
-	 Z8BaF7fpHXEcA==
+	b=ThI7DCk4244rpyPxGR3V5qpuJDoa6P5/k3QN2MN6F/OKNSuPDqDuRLDXeMb+MKP3z
+	 TQHabL3pEcQZgc4QJISQBqlGpkFB3zIzb8bleA1oT7VGdaFtu2cP6g3yT5RryY5rgB
+	 9kVWtMIb6FW29Ip9u3Xo1o/eK4Pp+JnaEd2e+xL0T7mmVru/mJVXypYmtacebp6Yd8
+	 tB65m8DHcaShZzce0Qd+5i265cGxTnOV999Sihhri7dMOJT/rusGecKinXlD048/9x
+	 c5XlO6Nm3ncUEgOdsl1pna6xxyLL2dhvmci+NV8jHUF1UgeV3aO48QSOTWuj9ENpa+
+	 UEMirC1xvHJNg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 74F6980EC8;
-	Wed, 23 Sep 2026 11:51:09 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id ECB9635A
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 11:51:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2BC5780F14;
+	Wed, 23 Sep 2026 11:51:14 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 588C8194
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 11:51:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DDC9D406AE
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 11:51:02 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 49C30406AE
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 11:51:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fGE83vSSOVki for <u-boot@lists.u-boot-project.org>;
+ id Cf1NBSl99HND for <u-boot@lists.u-boot-project.org>;
  Wed, 23 Sep 2026 11:51:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org CB796406B2
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 001B8406EC
 Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=185.136.65.227
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790164262;
- b=UdFW1/iRXuDggEtrOEZy3uTWdqYRE8feexTyCebEsc+VlFMppPeroPYxNRDJDUTcMT/7
- YhCflUc6c7wEJcokEx9/YfXJi6d/7zlpe7pVW4ygWDzuhg1FLOEL0a17PGFzhkJmlOoTO
- yKdlcTr911Sh1VjwRA5xb4Wr1ZuN+6rqqZzSP2hvfNDoOUdzK3NI2cyi0ZV6FgCv+Rwe0
- i1P7xDV4ABxpP5ycxVpXU5OXPf63kQE0pSaeY8zmC6uNlJ77ThGXaEAHvPrS3n7OAppfK
- 5D5be2VJ9/gSWc05rkvVYrmLOjdnCMDv1LQTjxoiJbiK6UhF+jFGKeF1zYbd3z2pfeg==
+ b=YMD78csjdFx8bI5pQyoHBDd0A9fzcUJ6hbgqL97Ds1/48WUGZz9gXoYeto8jwckgPYNi
+ HcLtOo3MPmNYS5lYe+2iRuX2fdocGgofSaDAeWRWIIhl+PAGqgH5mrX3NUlMwU2ivr1bF
+ r5xHtOym0iW2GH8K2zMYuCcDsdIlhmj9wT+kkQwhAt3HqYf7sqUbK+d/zAn9z3v6qDzbD
+ aiff1+QzKg4DvX91QQWUZUmlQksGGjsqPSTHlQu2w+sCFISN5oyZ9IjHAvkUQB7/cwuwO
+ zlQKhMO/qg+v71vTE42G0MrGILn5q/J6zPKokt1f2Pg0qhA+WrmGkL/twv+ypINhFCg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1790164262;
  h=X-Greylist:Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-Flowmailer-Platform:Feedback-ID;
- bh=LJxMopRXh7ul5IEs4ibCq0H0Vj3a0rjIIZ6gI+0qngA=;
- b=MOCylx9TIdMU7J25asX3knmktm2aAr+WI0/hVzZyvnla/ohKZNhPVzy9qKX7OT7/YNuW
- uSefV5FzB2X8o68s2M9+IBw0x0GUDDgT2kT1O2xmBJoLY8nSqWd7irjtFq0bRRnamHZHB
- agIWUzuFhBSeoWvH68ToAD1SJVHwMPmxcvYCMxuH5LvvBBGgQZpFArL45gmrNJwstO+DK
- KSB9DuG4A/d53kqPfFrDpit0IbiBzOFrrMAEQ2Ay38CspqCU0sUJiyFwySdCWXPNit67z
- BQBE/2kPo+7z9xji52etgZtdGTNTxQRY+u6LWng6/+4NMWTW1P0iVbOGuwEAQD9bMVg==
+ bh=mIY+ZoKpLI4s8191eMFYZ06+f5bjGNlVPd1JwT+lRmE=;
+ b=iJDEo9U6TkgE4BIyjCGCyCiD7gTPGNklXzMqMek1Rcx2r3xwSQ9mPg93xW7xhiE2FFK6
+ Ma9Ovalim9/Te/r46/18W9adVD2Lh076jhDCjCN+XqNSTAYTC/E/z5Ph0W74mURfvzxTM
+ h6fSEUSft0cJnGBScRcVcGC1kPxRavKUZ0IG1ImfWVTH5traxbgjISHodKurQYG8O2Fm+
+ 478G5v+V9B0S8zTDw4LvaAbS/54iy95k7A6VVp0ogjbCny9cUWvYdrk4zCkXpEJ7L9f+i
+ rw7B+zt6ATDZnFk/W1pLma93s672K6ap9fs2MkcYJOHtjGHJd+0+LgrZ3D9jKBggkJA==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=siemens.com; 
  dkim=pass header.d=siemens.com header.i=ludwig.nussel@siemens.com
- header.a=rsa-sha256 header.s=fm1 header.b=BE9S4nXw; 
+ header.a=rsa-sha256 header.s=fm1 header.b=Ohi1KveV; 
  arc=none smtp.remote-ip=185.136.65.227
-X-Greylist: delayed 62 seconds by postgrey-1.37 at util1.osuosl.org;
+X-Greylist: delayed 64 seconds by postgrey-1.37 at util1.osuosl.org;
  Wed, 23 Sep 2026 11:51:00 UTC
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=siemens.com header.i=ludwig.nussel@siemens.com
- header.a=rsa-sha256 header.s=fm1 header.b=BE9S4nXw
+ header.a=rsa-sha256 header.s=fm1 header.b=Ohi1KveV
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.65.227;
  helo=mta-65-227.siemens.flowmailer.net;
- envelope-from=fm-1328817-20260923114955822df96b48000207e0-irofmy@rts-flowmailer.siemens.com;
+ envelope-from=fm-1328817-202609231149528cef46a8cd0002074d-zywxat@rts-flowmailer.siemens.com;
  receiver=<UNKNOWN> 
 Received: from mta-65-227.siemens.flowmailer.net
  (mta-65-227.siemens.flowmailer.net [185.136.65.227])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CB796406B2
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 11:51:00 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 001B8406EC
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 11:50:59 +0000 (UTC)
 Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
- 20260923114955822df96b48000207e0
+ 202609231149528cef46a8cd0002074d
  for <u-boot@lists.u-boot-project.org>;
- Wed, 23 Sep 2026 13:49:55 +0200
+ Wed, 23 Sep 2026 13:49:53 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=ludwig.nussel@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=LJxMopRXh7ul5IEs4ibCq0H0Vj3a0rjIIZ6gI+0qngA=;
- b=BE9S4nXwEyHZQoDgou/iHMtHpccRRYSjoJ1YPWZtmzVa2T0EFta0iRQK8wfGgQtgQ6M0zw
- YirVUWpGs05WmRPoKyc7b4adlRF31sOqGxegwgBdWuHyyk8oQxikQUo6iBrzElYhTkQICrFB
- fnHzhZ6DT5pN8Nzw9ArtMPj+q1VlT+n/pA8/KZqyRRD/cZ6z44MDVXZUwyIeCL/lqS9bJlmY
- zlgsJ7n4b7L4F6a3fzLB+oSxyZ+CxJl9mRwu2uDLPI9jXfcBAcK0PKkM/fyrkpFuf2gbZarG
- LXkLCrQp1g6QwKGqZVlWyOGPjWk6iAOWO7sPBu4DjEk3LGjjaotZsEOA==;
+ bh=mIY+ZoKpLI4s8191eMFYZ06+f5bjGNlVPd1JwT+lRmE=;
+ b=Ohi1KveVtW46bim/Sszl+ot2EfMX1STChXechLw9GPDSk/qdkNq6W0+nwp5BR7teVJaxvE
+ 77VdVYgLZaXUNFWgwYNrqe5o3CdOjOpNRyiQ3jRYGQ9jyHFMJm/jBD48MLHzqVgJiKV/BVt+
+ SzsshZkrNo1IjOe7iY1FBerW49li/0A+OwWUh8Brwmq+J8JlejFB5QqNSYwH+BqHz0h4r5In
+ IX6jvaa0aGSuyNJs0TmGfziOZJj6172D0+WeFTwMuNKxrf3ZMJ1SWS+/d4ADSUy0LjG4SKW/
+ bWwHXdY0AiSzOK/j3nwhIXuqGFl0QEK3998LvG3qZY5/8Kw9VRaWMQxw==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
- Anton Ivanov <anton@binarly.io>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v10 7/7] test: vboot: add iminfo checks
-Date: Wed, 23 Sep 2026 13:49:34 +0200
-Message-ID: <20260923114940.349985-4-ludwig.nussel@siemens.com>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Raymond Mao <raymondmaoca@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: [PATCH v10 1/7] qemu-arm64: merge built-in DT
+Date: Wed, 23 Sep 2026 13:49:28 +0200
+Message-ID: <20260923134933.v10.1.5f8ce2dc2b00328d29e64be2684b10d9f52c6a7b@changeid>
 In-Reply-To: <20260923114940.349985-1-ludwig.nussel@siemens.com>
 References: <20260923114940.349985-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
@@ -144,212 +146,139 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-When testing bootm also test iminfo at the same time
-Introduces a new assert_fit() function that runs bootm and iminfo tests.
-In some cases bootm and iminfo behave slightly differnt so call iminfo
-separatey in those cases.
+The keys trusted for FIT signature verification are supposed to be
+embedded in the device tree built into u-boot. When running in Qemu it's
+convenient to use the device tree provided by the VM which doesn't know
+about signatures though. So merge both device trees at startup.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Make sure CONFIG_OF_OMIT_DTB is not set in qemu_arm64_defconfig to take
+advantage of the feature by default.
+
 Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
 ---
 
-(no changes since v6)
+(no changes since v8)
+
+Changes in v8:
+- fix smbios test
+
+Changes in v7:
+- add guard for OF_LIBFDT_OVERLAY
 
 Changes in v6:
-- remove superfluous blank line
-
-Changes in v5:
-- use helper function shared with bootm
-- introduce assert_fit()
+- fix comment style and typos
+- fix error message
+- return error from board_fdt_blob_setup() if dt couldn't be resized or
+  merged. Unfortunately fdtdec_ret_to_errno() is static elsewere so
+  -EINVAL has to suffice
+- mention CONFIG_OF_OMIT_DTB in commit message
 
 Changes in v4:
-- test iminfo in test_vboot
+- mention arm in subject
+- correctly change defconfig
 
- test/py/tests/test_vboot.py | 66 ++++++++++++++++++++++++++++---------
- 1 file changed, 50 insertions(+), 16 deletions(-)
+Changes in v3:
+- enable CONFIG_OF_OMIT_DTB=n in defconfig
+- add error returns
+- document decission about dt merging direction
 
-diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index 0ecb804832a..fd63d8b4e08 100644
---- a/test/py/tests/test_vboot.py
-+++ b/test/py/tests/test_vboot.py
-@@ -208,6 +208,34 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             else:
-                 assert 'sandbox: continuing, as we cannot run' not in output
+ board/emulation/qemu-arm/qemu-arm.c | 51 +++++++++++++++++++++++++++--
+ configs/qemu_arm64_defconfig        |  1 +
+ test/py/tests/test_smbios.py        |  3 +-
+ 3 files changed, 52 insertions(+), 3 deletions(-)
+
+diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+index 38f0ec5f2fb..590a336380b 100644
+--- a/board/emulation/qemu-arm/qemu-arm.c
++++ b/board/emulation/qemu-arm/qemu-arm.c
+@@ -144,10 +144,57 @@ int dram_init_banksize(void)
+ 	return 0;
+ }
  
-+    def run_iminfo(sha_algo, test_type, expect_string, succeeds, fit=None):
-+        """Run 'iminfo' in U-Boot.
++/*
++ * QEMU loads a generated DTB for us at the start of RAM.
++ * When using signatures we may have a built-in FDT that contains
++ * our known public keys nevertheless. So merge the built-in FDT
++ * into QEMU's. We cannot merge the other way around (e.g. in
++ * fdtdec_board_setup()) or board_fix_fdt() at this stage as U-Boot
++ * might be started from a ROM location. At the same time U-Boot
++ * needs QEMU's FDT to initialize serial devices even before
++ * relocation.
++ */
+ int board_fdt_blob_setup(void **fdtp)
+ {
+-	/* QEMU loads a generated DTB for us at the start of RAM. */
+-	*fdtp = (void *)CFG_SYS_SDRAM_BASE;
++	void *qemu_fdt = (void *)CFG_SYS_SDRAM_BASE;
++	int ret;
 +
-+        This always starts a fresh U-Boot instance since the device tree may
-+        contain a new public key.
++	if (fdt_check_header(qemu_fdt) != 0) {
++		log_err("Invalid QEMU FDT at %p\n", qemu_fdt);
++		return -EINVAL;
++	}
 +
-+        Args:
-+            test_type: A string identifying the test type.
-+            expect_string: A string which is expected in the output.
-+            sha_algo: Either 'sha1' or 'sha256', to select the algorithm to
-+                    use.
-+            succeeds: A boolean that is True if iminfo should succeed and
-+                    False if failure is expected.
-+            fit: FIT filename to load and verify
-+        """
++	if (!CONFIG_IS_ENABLED(OF_LIBFDT_OVERLAY))
++		goto out;
 +
-+        with ubman.log.section(f'iminfo {sha_algo} {test_type}: looking for "{expect_string}"'):
-+            output = run_fit_commands(['iminfo 100'], expect_string, fit)
++	if (fdt_check_header(*fdtp) != 0) {
++		/* this was a perfectly normal condition before
++		 * (CONFIG_OF_OMIT_DTB was set for qemu). So to avoid
++		 * breaking existing configs don't error out. This
++		 * might mean that we don't have keys in case
++		 * FIT_SIGNATURE is on. We can't know though as
++		 * existing setups might have injected them into
++		 * QEMU's FDT already.
++		 */
++		goto out;
++	}
 +
-+            if succeeds:
-+                assert 'FAIL' not in output
-+            else:
-+                assert 'FAIL' in output
++	log_debug("Found built-in FDT at %p. Merging into %p...\n", *fdtp, qemu_fdt);
 +
-+    def assert_fit(sha_algo, test_type, expect_string, boots, fit=None):
-+        run_bootm(sha_algo, test_type, expect_string, boots, fit)
-+        run_iminfo(sha_algo, test_type, expect_string, boots, fit)
++	ret = fdt_increase_size(qemu_fdt, 1024 + fdt_totalsize(*fdtp));
++	if (ret) {
++		log_err("Failed to grow QEMU FDT: %s\n", fdt_strerror(ret));
++		return -EINVAL;
++	}
 +
-     def sign_fit(sha_algo, options):
-         """Sign the FIT
++	ret = fdt_overlay_apply_node(qemu_fdt, 0, *fdtp, 0);
++	if (ret) {
++		log_err("Failed to apply FDT overlay: %s\n", fdt_strerror(ret));
++		return -EINVAL;
++	}
++
++out:
++	*fdtp = qemu_fdt;
  
-@@ -338,11 +366,11 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             # Build the FIT, but don't sign anything yet
-             ubman.log.action('%s: Test FIT with signed images' % sha_algo)
-             make_fit('sign-images-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
--            run_bootm(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-', True)
-+            assert_fit(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-', True)
- 
-             # Sign images with our dev keys
-             sign_fit(sha_algo, sign_options)
--            run_bootm(sha_algo, 'signed images', 'dev+', True)
-+            assert_fit(sha_algo, 'signed images', 'dev+', True)
- 
-             # Create a fresh .dtb without the public keys
-             dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-@@ -352,11 +380,11 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         if require_config_sigs:
-             # DTB has no /signature node; FIT_REQUIRE_CONFIG_SIGS makes this
-             # fail-closed, so U-Boot must reject the unsigned config FIT.
--            run_bootm(sha_algo, 'unsigned config',
-+            assert_fit(sha_algo, 'unsigned config',
-                       'No signature node found', False)
-         else:
-             # No required keys in the DTB, so an unsigned config FIT is fine.
--            run_bootm(sha_algo, 'unsigned config',
-+            assert_fit(sha_algo, 'unsigned config',
-                       '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
- 
-         ubman.log.action('%s: Test FIT with signed configuration' % sha_algo)
-@@ -368,7 +396,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-                         'hashed-nodes']).split()
-             assert '/images/firmware' in hashed_nodes
-             assert '/images/firmware/hash-1' in hashed_nodes
--        run_bootm(sha_algo, 'signed config', 'dev+', True)
-+        assert_fit(sha_algo, 'signed config', 'dev+', True)
- 
-         # Test a signed FIT config when the DTB has no keys at all.
-         # Without FIT_REQUIRE_CONFIG_SIGS the absence of keys in the DTB means
-@@ -378,10 +406,10 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         ubman.log.action('%s: Test signed FIT with no keys in DTB' % sha_algo)
-         dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-         if require_config_sigs:
--            run_bootm(sha_algo, 'signed config, no DTB keys',
-+            assert_fit(sha_algo, 'signed config, no DTB keys',
-                       'No signature node found', False)
-         else:
--            run_bootm(sha_algo, 'signed config, no DTB keys',
-+            assert_fit(sha_algo, 'signed config, no DTB keys',
-                       '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
-         # Restore keys in the DTB for the checks that follow.
-         sign_fit(sha_algo, sign_options)
-@@ -404,7 +432,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-                 ubman, [fit_check_sign, '-f', ffit, '-k', dtb],
-                 1, 'Failed to verify required signature')
- 
--            run_bootm(sha_algo, 'forged config', 'Bad Data Hash', False, ffit)
-+            assert_fit(sha_algo, 'forged config', 'Failed to verify required signature', False, ffit)
- 
-             # Try adding an evil root node. This should be detected.
-             efit = '%stest.evilf.fit' % tmpdir
-@@ -414,8 +442,11 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             utils.run_and_log_expect_exception(
-                 ubman, [fit_check_sign, '-f', efit, '-k', dtb],
-                 1, 'Failed to verify required signature')
-+            # Different code path between iminfo and bootm here
-             run_bootm(sha_algo, 'evil fakeroot', 'Bad FIT kernel image format',
-                       False, efit)
-+            run_iminfo(sha_algo, 'evil fakeroot', 'Bad FIT image format',
-+                      True, efit)
- 
-             # Try adding an @ to the kernel node name. This should be detected.
-             efit = '%stest.evilk.fit' % tmpdir
-@@ -431,6 +462,9 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             # bootm catches it earlier, at fit_check_format() time
-             msg = 'Signature checking prevents use of unit addresses (@) in nodes'
-             run_bootm(sha_algo, 'evil kernel@', msg, False, efit)
-+            # iminfo has no special error message
-+            run_iminfo(sha_algo, 'evil kernel@',
-+                       "Bad FIT image format", True, efit)
- 
-             # Try doing a clone of the images
-             efit = '%stest.evilclone.fit' % tmpdir
-@@ -440,20 +474,20 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             utils.run_and_log_expect_exception(
-                 ubman, [fit_check_sign, '-f', efit, '-k', dtb],
-                 1, 'Failed to verify required signature')
--            run_bootm(sha_algo, 'evil clone', 'Bad Data Hash', False, efit)
-+            assert_fit(sha_algo, 'evil clone', 'Failed to verify required signature', False, efit)
- 
-         # Create a new properly signed fit and replace header bytes
-         make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit(sha_algo, sign_options)
-         max_size = int(bcfg.get('config_fit_signature_max_size', 0x10000000), 0)
-         existing_size = replace_fit_totalsize(max_size + 1)
--        run_bootm(sha_algo, 'Signed config with bad hash', 'Bad Data Hash',
-+        assert_fit(sha_algo, 'Signed config with bad hash', "Total size too large for 'conf-1' config node",
-                   False)
-         ubman.log.action('%s: Check overflowed FIT header totalsize' % sha_algo)
- 
-         # Replace with existing header bytes
-         replace_fit_totalsize(existing_size)
--        run_bootm(sha_algo, 'signed config', 'dev+', True)
-+        assert_fit(sha_algo, 'signed config', 'dev+', True)
-         ubman.log.action('%s: Check default FIT header totalsize' % sha_algo)
- 
-         # Increment the first byte of the signature, which should cause failure
-@@ -466,8 +500,8 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         utils.run_and_log(ubman, 'fdtput -t bx %s %s value %s' %
-                           (fit, sig_node, sig))
- 
--        run_bootm(sha_algo, 'Signed config with bad hash', 'Bad Data Hash',
--                  False)
-+        assert_fit(sha_algo, 'corrupted signature',
-+                   'Failed to verify required signature', False)
- 
-         ubman.log.action('%s: Check bad config on the host' % sha_algo)
-         utils.run_and_log_expect_exception(
-@@ -535,7 +569,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         # a dev signature only (sign_fit_norequire() overwrites the FIT).
-         # Try to boot the FIT with dev key. This FIT should not be accepted by
-         # U-Boot because the prod key is required.
--        run_bootm(sha_algo, 'required key', '', False)
-+        assert_fit(sha_algo, 'required key', '', False)
- 
-         # Build the FIT with dev key (keys required) and sign it. This puts the
-         # signature into sandbox-u-boot.dtb, marked 'required'.
-@@ -550,7 +584,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         # U-Boot because the dev key is required and policy is "any" required key.
-         utils.run_and_log(ubman, 'fdtput -t s %s /signature required-mode any' %
-                           dtb)
--        run_bootm(sha_algo, 'multi required key', 'dev+', True)
-+        assert_fit(sha_algo, 'multi required key', 'dev+', True)
- 
-         # Set the required-mode policy to "all".
-         # So now sandbox-u-boot.dtb two signatures, for the prod and dev keys.
-@@ -560,7 +594,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         # U-Boot because the prod key is required and policy is "all" required key
-         utils.run_and_log(ubman, 'fdtput -t s %s /signature required-mode all' %
-                           dtb)
--        run_bootm(sha_algo, 'multi required key', '', False)
-+        assert_fit(sha_algo, 'multi required key', '', False)
- 
-     def test_global_sign(sha_algo, padding, sign_options):
-         """Test global image signature with the given hash algorithm and padding.
+ 	return 0;
+ }
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+index ae6dd770f3e..e5969e4f747 100644
+--- a/configs/qemu_arm64_defconfig
++++ b/configs/qemu_arm64_defconfig
+@@ -39,6 +39,7 @@ CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_TPM=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_CMD_SPAWN=y
++# CONFIG_OF_OMIT_DTB is not set
+ CONFIG_ENV_IS_IN_FLASH=y
+ CONFIG_AHCI=y
+ CONFIG_SCSI_AHCI=y
+diff --git a/test/py/tests/test_smbios.py b/test/py/tests/test_smbios.py
+index 3b85a7cc661..607cd3d8cba 100644
+--- a/test/py/tests/test_smbios.py
++++ b/test/py/tests/test_smbios.py
+@@ -49,7 +49,8 @@ def test_cmd_smbios_sysinfo_verbose(ubman):
+     assert 'DMI type 0,' in output
+     assert 'Vendor: U-Boot' in output
+     assert 'DMI type 1,' in output
+-    assert 'Manufacturer: linux' in output
++    # QEMU fdt shows up as emulation, fallback in u-boot is linux
++    assert ('Manufacturer: emulation' or 'Manufacturer: linux') in output
+     assert 'DMI type 2,' in output
+     assert 'DMI type 3,' in output
+     assert 'DMI type 7,' in output
 -- 
 2.43.0
 
