@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 842FAC9830D
-	for <u-boot@archiver.kernel.org>; Wed, 23 Sep 2026 21:18:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E167EC98311
+	for <u-boot@archiver.kernel.org>; Wed, 23 Sep 2026 21:18:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3192040F58;
-	Wed, 23 Sep 2026 21:18:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A06CC40ED8;
+	Wed, 23 Sep 2026 21:18:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yvBRfnwo93OU; Wed, 23 Sep 2026 21:18:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 158DC40EF8
+ id bJBr44FyGfvy; Wed, 23 Sep 2026 21:18:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 685A340F50
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790198302;
-	b=EjG4Pak8aJZW2S6F0wySQWMp0ZAAheEUo7r2shdI2EEKsxChOX7aMgaXdYRkmhEkIaR7
-	 mjFGElCmMhQTph6TVySTQwUJTHdCZymh+XQXCp1zTknrcI1WanuLNp4N/ocuZDNqsvcPD
-	 6/CtchuJb0UMPv+kO/L/Zp6SZblCHs9m19v87RI0/jLV+U0lse/gcmgiVH+ywyX7iiLLG
-	 1mtGSt3M2xyU3YOdDS+Q3LMuCKtyTK9uC7vdh22G3bQm9FQho2fD0j9lvMBycQzwwImpp
-	 604tGE7Rc91RcX06j3oX3aUMLC50vHnBTCap3Z0g49+DpSJ1LB2AkdzzyCzPTBhIYLA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790198305;
+	b=MLv0RhS7KzOtk7r62lcLbHScDW/7GirS5cidqKSCS63XzKepJJMQBynsYft6kWV8TUmV
+	 bvP1AUWRoVRg+3ySberEzOWL8+ae7CRZVfrX8Qb8DdDSkTK8/tM0IDx3GL3inE1dWEbRU
+	 Dgk70TyCyVZhVxNAaFN6HGpFU8SSFV5b2hP6jdKcEotAEqGVBtbd+JeRPq5kEWsYKM40V
+	 sWH1Es8m2WnIH1eOd8WldQAPN8uPozXUjtXn0d0Nj+42wR+V9cPF7tdBjk+t9Q/iixuCp
+	 22FoVSUQ2uxwVculqaRH8kNfPapqs8KGW2AbOIwJvzwTo6hul2D9GozxP1BZkSOrGOg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790198302;
+	c=relaxed/relaxed; t=1790198305;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,137 +32,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=mSz8qWsChTBNjc0v0CCXnBN6C5Qfjb7ISGfJ6I9SCxc=;
-	b=Pbr29GJ+J+U6kiLHWdqWuipvSnmbOVMcprswYS5ZfGAIHOUjFv8zDwpWN9/ytBCI9Y8I
-	 lOkUss3IDGlMXza+YfYeqFtS8ReTwCHRQSnScofsbKwgo1VXvJCAbimDKbTmAtMZuBEhf
-	 Icl54IqPB0mDk6+PTs1TyFjKmdr5s5eor0ZimkhZDUf2nWZ0ByHMva0mn6wCGmTNEkxDv
-	 AD7xAVcWKSNLMCe9/M6KK4YyUU5paVApWx4Ay5yJbGyhf+bLJN+nLSzii6d5JnR+Y8+1f
-	 yEmKbGXFWpiGZz+LCns/FaSnC0RlgfkH7QresKqk6Oc41ismZMVVXfbi11676o7cjVQ==
+	bh=4zTr2gJk0BfP1/JmtMEqM0mgvcvPn3wp1XjZkXD7gJ0=;
+	b=Q4602AxBj3F+FgmYidEG+JTnuN71fU4dnC4XBIemnQgsVCMCgbkm4/P+WWPBYvC+jTCD
+	 IfswNs7Rw/mmTz7A3BVWz0w6f2Xgf+kBJ44OBi5jYjtLLIwoUHKlQS6c0nKkLHtBD8xeP
+	 BS+rs2kqk1ZCvPmJT0gMizBEQgZfByMaYNwyRt6GZsUeyll6PaqDPKx41k5Y4FAhodiR0
+	 IDHDmeDCRnWQ36aG3J+AYxmJM9e1H23EilQW1u8XVrBfHpKLVtORfsVUBfpFuyhgxIBN4
+	 hQ1mKWjGSZEkrmZLtG7MRwAtxzviNAmw+oR6vX64Ngvz+Xhuoe0M70r2OTssGLsJaLQ==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b="au/SgaLd";
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=FcueNGHG;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790198302;
-	bh=mSz8qWsChTBNjc0v0CCXnBN6C5Qfjb7ISGfJ6I9SCxc=;
+	d=lists.u-boot-project.org; s=default; t=1790198305;
+	bh=4zTr2gJk0BfP1/JmtMEqM0mgvcvPn3wp1XjZkXD7gJ0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=weC7bDeVSRvTkHHlobKWzv1Pc5CsPk3JKHgVe98rpwrzCAwP+8j+tjlLzTu/faH1u
-	 9K3Djaci/BfdD3IgujDLnjiG44sK5uNP7BmeiVRzsj3WcwcEV7Vyca4k9SAtGYlEaJ
-	 UGN4PJ8LBcAVYX4xaab/fuHXNF6XP6XInoLIM0ecomvbZxwmdJH6oMMCoCuobIaHgG
-	 Z1IC2+1kxCtiLxWZizPENaUThlvhl0K4AhCBj+mC6QOtlaLzF8nDfdqSwLn9fGs9Ob
-	 5FfkLl2XLr0k9Imx0hclP20XSCQcvSU9LFpzd2muAOFZumbjWxwoaJfdnBCuOCYmz/
-	 mhk+iDHXKBfQw==
+	b=0Pmgh3TcGUbsPrG0MFYhVfamEF0bkYDzxp4+hHXB3Fk3KBflGDnP0meZoy5j5rXWh
+	 iRAuXgRruDjK/I+PkFshOCK+dqO4VNCO87v82Ol0oxLx47L6ENxR0z4bZW4JW+ujWX
+	 TQ9Nq6Fk9ebr1ltb7NPXjRpkwF31+tbl7KMihHWKhpIc6MJns9SbLgKy69DVLApPOt
+	 +hgt31T/qZmdTpWgwu00yexk/fDk35BCfhOFHpRHn9BhKdRSgIWJ3JVzd2ZTOX9Z+l
+	 lE6pY90APhhmD5+PECxqONnjwEJfUE/hsIPJ1N7P48h3fcyEz8Fq/UYh6Oxz4G0DWi
+	 vp7AO4+T/OR4g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 158DC40EF8;
-	Wed, 23 Sep 2026 21:18:22 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 91C4428C
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 21:18:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 685A340F50;
+	Wed, 23 Sep 2026 21:18:25 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9694828C
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 21:18:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8F22740ED9
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 21:18:18 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id BB09F40EED
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 21:18:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Cr_dwNrHKNji for <u-boot@lists.u-boot-project.org>;
- Wed, 23 Sep 2026 21:18:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 401E240ED1
+ id mmyqh-msI7Pu for <u-boot@lists.u-boot-project.org>;
+ Wed, 23 Sep 2026 21:18:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 8224740ED8
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790198297;
- b=jJczVYGQsnOmhP9hvqrOqIUWqiS6eEig4mKgGjn8F14tEw9MQ2iAy9jyG5qXvKXBdi1g
- CCBVjmEu4wcenI3XC/SyRuWFZyi9tA/NfmginVYu/NTeprQN8dc3ENU8kxNE7FJ/2VZZG
- SveX6ah0DNPdzRpSkEFZ1Pyk3XL7WN57yvuTR39Wz3GvaaOBxSmuVmXSXGBO11JKn4rMV
- 5/3yKKDVcl0+bGaF0v/QPOc8y5pKJwEyh5xwXh9wpgWrp0tNN0UzvPgdiM2FAoNyncP1v
- qFIWgHfTthBCpw4Q5o/iLOgb4+XIIXX0EeJV9dF6pQ9SwaUhbwZ5rOEm0Z/52jx0jLA==
+ arc=none smtp.remote-ip="2a00:1450:4864:30::12"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790198299;
+ b=Y6PrN69KDrJSrsbWjZpiANwi3uzAezq+uT//ikK9vNXdRVa3kHUmSw3e+v3lOttBhRE+
+ tJT6KA5nYyl2WNJ1Ze4d7RTUSBm8kME9TBUTNrM9HnUkbHr/BgW/kL7QzwwfdJdoSrUKn
+ Fq0Uguy78pmBVYrnAll8wbExuuMc8GUunEtCNSaRI0fHzuL5vvglADNXZYGe1fplxtphc
+ if3eM9fcar+xmB5Su6kljMzUz6Ssy4gdSQo9mJlMvS3xCsAIptple+j4IPkxqB0dPPoMi
+ xjtCH5xLKoRmov0fb34g1qyPsROhydFA2e+nBFm5pQ70sTT0wYZqQeQER21oFE1iW/g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790198297;
+ c=relaxed/relaxed; t=1790198299;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=mSz8qWsChTBNjc0v0CCXnBN6C5Qfjb7ISGfJ6I9SCxc=;
- b=RKqqNBzPars/8mkKcqbTgMdY7CbrgMiZre0md5xkWmN4p1jurZAxo/eeQBKjrzm3jJvU
- m19raDao4XaOWukCmOEMhzrm2+D0nowvxq8MDZaGfbtELeAvJAWvjV1LiD3TsVp9rD50h
- jpWCYTv4XVdalK6y9fAdH4+PXZoHNWwK1EQO/LvLNa0nR19l2P9eIPRxU41kE9nWWE1lj
- SuhghJHZ81VvfU4ZhxsWZoU1T8XV0bCtuoj3AwYco8bveGoJeHGPDFDT5Vz5zI9GXP7fF
- ffalISDxLkmWNHtMEKTJd8G6OC9qxNz12voKIz9AyO+czt74TfZLczxEU7BdI5SMICQ==
+ bh=4zTr2gJk0BfP1/JmtMEqM0mgvcvPn3wp1XjZkXD7gJ0=;
+ b=as93jojYGN3CJ7YhRXht2k6drYe0hV9qKMXYOq4LeQXjGo1p5QN3o8Y/ad6FkgdVNSdl
+ BMJGZN0okmJooR7ZLKlEn52CiQ+HuqEbxlrUn9S9bC2tsvQaK3wKRxjMXluAF/M3V70ic
+ 1DR0zJB5wXB+J1aFjwOJxwNb7YB9cIc996+7nlRfOOjEBh8skVf6ArTtWmqLTCMARWPuW
+ gOWAoSKGO6eRkC/yfbnotiKKNXRKrCW4aeMjvZqW2q47Dtq/ubJ0o5x5u58WeiIQT+K0v
+ i427zZno51bVoscrOH6AmHX3O4yVqLMEy/LU2D/C9rRRaBxjMvG4XhGyR0xXt8CFrdA==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b="au/SgaLd"; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
+ header.s=google header.b=FcueNGHG; 
+ arc=none smtp.remote-ip="2a00:1450:4864:30::12"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::11; helo=mail-wm2-x11.google.com;
+ client-ip=2a00:1450:4864:30::12; helo=mail-wr2-x12.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=au/SgaLd
-Received: from mail-wm2-x11.google.com (mail-wm2-x11.google.com
- [IPv6:2a00:1450:4864:31::11])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 401E240ED1
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 21:18:16 +0000 (UTC)
-Received: by mail-wm2-x11.google.com with SMTP id
- 5b1f17b1804b1-49e66390995so8835245e9.2
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 14:18:16 -0700 (PDT)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=FcueNGHG
+Received: from mail-wr2-x12.google.com (mail-wr2-x12.google.com
+ [IPv6:2a00:1450:4864:30::12])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8224740ED8
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 21:18:18 +0000 (UTC)
+Received: by mail-wr2-x12.google.com with SMTP id
+ ffacd0b85a97d-482f6356f6bso1133602f8f.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 14:18:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790198295; x=1790803095;
+ d=baylibre.com; s=google; t=1790198296; x=1790803096;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=mSz8qWsChTBNjc0v0CCXnBN6C5Qfjb7ISGfJ6I9SCxc=;
- b=au/SgaLdbQK+YGgVXu+QZWK4LXtQ7uvMmICvzWkG5TZVezVTpo/71WzbuPEN6iwXyR
- AgNrVlLBg0wubbJPAuTEYdpMXDZZsiJO00kJppgY8RP3UrFReJoe3uQlKLAJ1JpF/Y1b
- PdQI6q49VnrH8dzW/1gV1GBqynpJwGJQmHWRkASbgYQtIjkehpzWUAx29KE8oPAk48uV
- LRKLE3QZBOan12024k5EEBH66WirY5+lXRMyY9GRYPW+GXmuMyTG2w3nKpr7O8yvBq4D
- +rSnMUDisJjcd+9eTfR4IQYpZIG/qr9cbj4w8GTQhQy+Kb/zGY5eVikv73Y/OCbXMkiC
- xVaQ==
+ bh=4zTr2gJk0BfP1/JmtMEqM0mgvcvPn3wp1XjZkXD7gJ0=;
+ b=FcueNGHG3WyuefXGDDQg/qGXzgfzpgwuohkF2Av7FEFYibHy6lqXzIMP7bkm+tBSlg
+ AFdfILApMiTpz0EC615duolvrrT6+8MlQlUaooiePqdFxCQnZTXm6vfMSHgLNmUoo0iJ
+ o2N4fPr5sKk7XakEd+KPR6EuKb5hVHYishNIWTFSm5ur7Vg8i5cR20G/7iiNtDYtIUNN
+ yGBxDsAExB8TljLLDnIPSN2zYJmbvvu7Vj643froT/3hvS5uVLq/0XbjoVZgfh7v3dW0
+ FpxhBcsdWpVlATvCV8hHGOKeR90aT8QZ5JHlFc5N4WWwGfgjVhgbmOvULKjQSEdKOw/2
+ dY9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790198295; x=1790803095;
+ d=1e100.net; s=20260707; t=1790198296; x=1790803096;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=mSz8qWsChTBNjc0v0CCXnBN6C5Qfjb7ISGfJ6I9SCxc=;
- b=Sm4CbAcpcmsVp73yJVUCjQKnt8qFuT7JSeA2209ViZA0BVu8DrW3oUoldxsw2PjbkX
- aQVzrReiccANlkkWWXgR2lL1rESsXttX/RthQ5CwAGS9xGb+6otNw4XcyahgJlAT7lgs
- 3vfTZyHftMrFYGP9KbBGoTYUfcrxgYQVbe6liCZf2g4odnlkVPZJbRt/zSyFo4TcqfBK
- BUR3IK2O0lbJZ3cXRNdwtY0NYswEcraoKnAOMPf19S8Jowy8nCMCIiZNuzwLCvwlCeOq
- k94Ndbt117AaN9gzroOMhvkCu3YDpLjiv9/o0anMqISTcl1azE+BEKofFtB/by3mfc9e
- iPeQ==
+ bh=4zTr2gJk0BfP1/JmtMEqM0mgvcvPn3wp1XjZkXD7gJ0=;
+ b=CyWMe8he6BEE1DFG6E6kFsideOrjPqjzrmYQl6CCsK3Aka23cWWq7r3NHS6D7C/+Py
+ zjKODUUp/a8B2f5O8FGCKR5SPQfD0UWeDZAaGqcC8HqSnTpXYvZ+JqmeUjsyYHDck7Lz
+ hshN7BQjrUeilkZ9VOYVFxC2HygT5Db0GZorMXuYbP0ijLhvxftc+Zt5Z4P8OeguF8j1
+ j3YDm1/IARqPB2LIl8OVd3ANsqG3Bhi05XvV29RVQQov+yKMjHSpuIC5ORic2XLhXcrC
+ 655b7+hnG9mwYaN6QQFj5LUW8FbPRHQnsr8B1iXyofJICGZMA6FMfJAYhRltBGDgYBNZ
+ TVow==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxbU0Sw/V7nO1cMUhrqnQyWw0rovKDlVe4X563LaSgUR9bpHxbcDQJTRSCVE8m3bUdBBsSGelM=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nZZr06+aVRNKBrMjICOeN+zSjaBx9RIJgzx0PUgIScJw95LIUW
- Nyrys1+5x1ZUnwFB574UpCwjDkwUgIURGpeYtPtYrAJ3cMLhsDC9o+rPnOBBl2Ze/to=
-X-Gm-Gg: AYBFou00iicvh8zsCrz6J19GSjjeQcb04jkf52kb2z/Mo1sSRzlyUcziTA9RuEIPiHp
- Bf7RHeyKHkYlfFCeresRV/TiasEgZX7Zjjvz7H6UIU5SwcP5bX1uDuyi7LqG5mTkcRyqrXC7IDC
- 5oa8aETlmWOMvbynFFgN0IcQ0r7PLxYYnhPnSZmUe1Do+vK9fO3aaeP3Wh3q/x7lkOMp2kO5mUR
- EfseG7M063/kbUYYLftbdOqTlf5cTAz7oqaNLKiANDZEvrPJwLSFPAkqfjttHoeOpYqnC5PBPMB
- bx36cLFIR/jxujYBhhd1TcZTj5jFkbfLeqgFpVz8OUJOpigtPLpbyk9Yx/ujUkqvF1umA2PC9ko
- bM52kPBKp6rfXmNx2Tqehvhm5H1hnnmdtzF5tlrySp1rGs6zy/2TJQhuL2xO7BGbIZjZeLjzNE8
- TJNQywRD4DYDSQCXB41jeuAkxsfH9m9obMBfVtS+QLkPuA4RXrBx34xBxwfOgW2/QzTAUKu3bFl
- fd6m2ZKpjt5iUYDn13lp2WMu3h2aSAcqSfUYqQiDbJDC633KCHaS0ppmVSWO5c=
-X-Received: by 2002:a05:600c:8b22:b0:49c:e42b:a4ac with SMTP id
- 5b1f17b1804b1-49fe66d3392mr7369485e9.11.1790198294902; 
- Wed, 23 Sep 2026 14:18:14 -0700 (PDT)
+ AKwUvBxCQkmITxUrCoD9eC6lGVgwB+S7UzqBXN8SRPGavmi7hanp7HAh/w63Zv9bkVcbculhSVM+/O0=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mRKfyJVYmnGHnDxTmOwMdS21H7Z+Euz9O9j9SJxLMd6pvdNNxQ
+ EMjZQ/WHTJxZ2yzPoIFgjcwXat4l6nDPZbOgzwC8vo+tWet6G0GMMmVg0/eVrICVGZs=
+X-Gm-Gg: AYBFou0sORW3/G5feVxFqAnECTjh6Kh+qZVW8QNw4NF/IcBMke/1zxldlO5wF7hCSW3
+ ARJ90+k0T0rcfsq7RJjOLHf6ut9EgUu13atQv8OSCM1FpLIrpMO8kTN4rkz3XylwRbMMhJ951uR
+ bZnTsVKN4D/sKxnr4rnwTwp4xMQxtjOMB6fBFmytqNFnHElELyV26maVp+Le7tfNcsKfpSAvF0T
+ 0q+4ugjA8FVzLz1qHBzS8IFhZrW2iUPcvB4g167jW1oGlzU2UHfFMeUJ2GAsgzJO8V9vNc7QU6s
+ C/TjwKHlqgNh6FHaDY7PF/SAvFN1O9Xvf6InJrzhgOcdHqpBGUYETziguIFcdb8jZb8hhWLgX20
+ FMTex78FkjK9rW2mG3ghwMmQgcJRbPS9zSGnenTW0eVrnq8eV/hYu/l+VPGkdTm//iZHZq216Oz
+ 7SeepKjsxJGhdmKQZSYNBU6AG9EWH650KtMuUwFPoYCi3tytYksgZ4p6mMN2E6pzbfLL7bgFObm
+ qs0BtKIE74CQZDmRAGdpdCzf8fHynUTA0xP59xBBOJ0ZazDz8ccZz1EtOnveU8=
+X-Received: by 2002:a05:6000:2003:b0:487:27f9:833 with SMTP id
+ ffacd0b85a97d-488717080a5mr701925f8f.40.1790198296293; 
+ Wed, 23 Sep 2026 14:18:16 -0700 (PDT)
 Received: from [127.0.0.1] (host-95-232-147-181.retail.telecomitalia.it.
  [95.232.147.181]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-488687791cdsm8684345f8f.22.2026.09.23.14.18.13
+ ffacd0b85a97d-488687791cdsm8684345f8f.22.2026.09.23.14.18.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 14:18:14 -0700 (PDT)
+ Wed, 23 Sep 2026 14:18:15 -0700 (PDT)
 From: Carlo Caione <ccaione@baylibre.com>
-Date: Wed, 23 Sep 2026 23:17:43 +0200
-Subject: [PATCH v2 2/3] arm: mediatek: enable U-Boot fastboot DAs on Genio
- 510 and 700
+Date: Wed, 23 Sep 2026 23:17:44 +0200
+Subject: [PATCH v2 3/3] doc: board: mediatek: document Genio download
+ agents
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260923-ccaione-upstream-mt8390-da-v2-2-8f264678ac29@baylibre.com>
+Message-Id: <20260923-ccaione-upstream-mt8390-da-v2-3-8f264678ac29@baylibre.com>
 References: <20260923-ccaione-upstream-mt8390-da-v2-0-8f264678ac29@baylibre.com>
 In-Reply-To: <20260923-ccaione-upstream-mt8390-da-v2-0-8f264678ac29@baylibre.com>
 To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
@@ -202,281 +202,159 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Prefer fastboot in U-Boot proper when the complete download agent fits
-the BootROM SRAM limit. Its shell and boot commands support provisioning
-and recovery beyond the SPL agent's flashing operations, without relying
-on the installed firmware.
-
-This variant requires BL31 and an external DDR loader.
+Download agents have different firmware and eMMC provisioning
+requirements from normal storage boot. Document them so users can build
+compatible images and understand which persistent eMMC settings each
+agent changes.
 
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
- arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi    |  4 ++
- arch/arm/dts/mt8370-genio-da-u-boot.dtsi         |  3 ++
- arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi    |  4 ++
- arch/arm/dts/mtk-genio-da-fit-binman-u-boot.dtsi | 62 ++++++++++++++++++++++++
- arch/arm/mach-mediatek/Kconfig                   | 30 ++++++++++++
- arch/arm/mach-mediatek/spl.c                     | 22 +++++----
- board/mediatek/MAINTAINERS                       |  3 ++
- configs/mt8370-genio-da-uboot-fastboot.config    | 28 +++++++++++
- configs/mt8370_genio_510_evk_da_uboot_defconfig  |  2 +
- configs/mt8390_genio_700_evk_da_uboot_defconfig  |  2 +
- 10 files changed, 150 insertions(+), 10 deletions(-)
+ doc/board/mediatek/mt8188-genio-evk.rst | 135 ++++++++++++++++++++++++++++++++
+ 1 file changed, 135 insertions(+)
 
-diff --git a/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi b/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
-index 2ee7fb1f40c..86b38b0e484 100644
---- a/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
-+++ b/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
-@@ -16,5 +16,9 @@
- #endif
- 
- #ifdef CONFIG_MTK_BROM_DOWNLOAD_AGENT
-+#define MTK_DA_DESCRIPTION "MediaTek Genio 510 download agent"
-+#define MTK_DA_FIT_DESCRIPTION "MediaTek Genio 510 DA bootloaders"
- #include "mt8370-genio-da-u-boot.dtsi"
-+#undef MTK_DA_FIT_DESCRIPTION
-+#undef MTK_DA_DESCRIPTION
- #endif
-diff --git a/arch/arm/dts/mt8370-genio-da-u-boot.dtsi b/arch/arm/dts/mt8370-genio-da-u-boot.dtsi
-index 9d0d057cfc9..4ca46bbe2e2 100644
---- a/arch/arm/dts/mt8370-genio-da-u-boot.dtsi
-+++ b/arch/arm/dts/mt8370-genio-da-u-boot.dtsi
-@@ -12,6 +12,9 @@
- 
- #include "mtk-genio-binman-u-boot.dtsi"
- #include "mtk-genio-da-binman-u-boot.dtsi"
-+#ifdef CONFIG_MTK_BROM_DOWNLOAD_AGENT_UBOOT_FASTBOOT
-+#include "mtk-genio-da-fit-binman-u-boot.dtsi"
-+#endif
- 
- &ssusb0 {
- 	dr_mode = "peripheral";
-diff --git a/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
-index 4fedbda9b3f..648cd0703f5 100644
---- a/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
-+++ b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
-@@ -16,5 +16,9 @@
- #endif
- 
- #ifdef CONFIG_MTK_BROM_DOWNLOAD_AGENT
-+#define MTK_DA_DESCRIPTION "MediaTek Genio 700 download agent"
-+#define MTK_DA_FIT_DESCRIPTION "MediaTek Genio 700 DA bootloaders"
- #include "mt8370-genio-da-u-boot.dtsi"
-+#undef MTK_DA_FIT_DESCRIPTION
-+#undef MTK_DA_DESCRIPTION
- #endif
-diff --git a/arch/arm/dts/mtk-genio-da-fit-binman-u-boot.dtsi b/arch/arm/dts/mtk-genio-da-fit-binman-u-boot.dtsi
-new file mode 100644
-index 00000000000..a605ad2504a
---- /dev/null
-+++ b/arch/arm/dts/mtk-genio-da-fit-binman-u-boot.dtsi
-@@ -0,0 +1,62 @@
-+// SPDX-License-Identifier: (GPL-2.0-only OR MIT)
-+/*
-+ * Copyright (c) 2026 BayLibre, SAS.
-+ * Author: Carlo Caione <ccaione@baylibre.com>
-+ */
+diff --git a/doc/board/mediatek/mt8188-genio-evk.rst b/doc/board/mediatek/mt8188-genio-evk.rst
+index e36e8faeb48..70d9b8b84b3 100644
+--- a/doc/board/mediatek/mt8188-genio-evk.rst
++++ b/doc/board/mediatek/mt8188-genio-evk.rst
+@@ -279,3 +279,138 @@ Genio Tools uses the default bootstrap from the image directory. Keep
+ ``bootloaders_b`` unchanged until the new images have been tested. Add
+ ``--dry-run`` to check the selected files and partitions without accessing the
+ board.
 +
-+&da {
-+	fit {
-+		description = MTK_DA_FIT_DESCRIPTION;
-+		offset = <CONFIG_MTK_GENIO_DA_FIT_OFFSET>;
-+		size = <CONFIG_MTK_GENIO_DA_FIT_MAX_SIZE>;
-+		#address-cells = <1>;
++BootROM download agents
++-----------------------
 +
-+		images {
-+			uboot {
-+				description = "U-Boot fastboot download agent";
-+				type = "firmware";
-+				os = "u-boot";
-+				arch = "arm64";
-+				compression = "gzip";
-+				compress = "gzip";
-+				load = <CONFIG_TEXT_BASE>;
-+				entry = <CONFIG_TEXT_BASE>;
++A download agent (DA) runs from RAM and exposes eMMC through USB fastboot for
++provisioning or recovery. The BootROM downloads ``da.bin`` into SRAM; the
++external DDR loader initializes DRAM and enters SPL using the same execution
++contract as normal boot. The DA itself is not installed in an eMMC partition.
 +
-+				u-boot {
-+				};
++Prefer fastboot in U-Boot proper when the complete DA fits the platform's
++BootROM download limit. It provides U-Boot's shell and boot facilities in
++addition to flashing. The complete image must fit in the SRAM download area
++before the DDR loader can initialize DRAM. Fastboot in SPL offers a smaller
++executable payload for configurations where including BL31 and U-Boot proper
++would exceed that limit. Both variants run fastboot from DRAM.
 +
-+				hash {
-+					algo = "sha256";
-+				};
-+			};
++Two mutually exclusive modes are available:
 +
-+			atf {
-+				description = "ARM Trusted Firmware BL31";
-+				type = "firmware";
-+				os = "arm-trusted-firmware";
-+				arch = "arm64";
-+				compression = "gzip";
-+				compress = "gzip";
-+				load = <CONFIG_MTK_GENIO_BL31_LOAD_ADDR>;
-+				entry = <CONFIG_MTK_GENIO_BL31_LOAD_ADDR>;
++* ``CONFIG_MTK_BROM_DOWNLOAD_AGENT_SPL_FASTBOOT`` runs fastboot directly in
++  SPL. This keeps the provisioning agent small and independent of BL31,
++  OP-TEE and U-Boot proper. It needs the matching external DDR loader.
++* ``CONFIG_MTK_BROM_DOWNLOAD_AGENT_UBOOT_FASTBOOT`` uses SPL to load BL31 and
++  U-Boot from a FIT in RAM. U-Boot then runs ``fastboot usb 0``. This mode needs
++  a matching BL31 built without an OP-TEE dependency, and a DDR loader which
++  implements the additional FIT copy described below. It provides
++  U-Boot's shell and boot facilities for provisioning flows which need
++  more than the SPL agent's flash and erase commands.
 +
-+				atf-bl31 {
-+				};
++The two paths start USB fastboot at different stages::
 +
-+				hash {
-+					algo = "sha256";
-+				};
-+			};
-+		};
++   Fastboot in SPL                   Fastboot in U-Boot proper
++   ---------------                  -------------------------
++   BootROM USB download             BootROM USB download
++   (host -> SRAM)                   (host -> SRAM)
++     |                                |
++     v                                v
++   DDR loader                       DDR loader
++     | Initialize DRAM                | Initialize DRAM
++     | Copy SPL to DRAM               | Copy SPL + FIT to DRAM
++     v                                v
++   SPL                              SPL
++     | USB fastboot <-> host           | Load BL31 + U-Boot from RAM
++     v                                v
++   eMMC provisioning                BL31
++                                      |
++                                      v
++                                    U-Boot proper
++                                      | USB fastboot <-> host
++                                      v
++                                    eMMC provisioning
 +
-+		configurations {
-+			default = "conf";
++Build download agents separately from normal boot images; do not enable
++``CONFIG_MTK_GENIO_BOOT_IMAGES`` in a DA configuration.
 +
-+			conf {
-+				description = MTK_DA_DESCRIPTION;
-+				firmware = "atf";
-+				loadables = "uboot";
-+			};
-+		};
-+	};
-+};
-diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
-index eece6456e43..c24b1935e2e 100644
---- a/arch/arm/mach-mediatek/Kconfig
-+++ b/arch/arm/mach-mediatek/Kconfig
-@@ -275,8 +275,38 @@ config MTK_BROM_DOWNLOAD_AGENT_SPL_FASTBOOT
- 	  downloads it into RAM. The download agent also configures the eMMC
- 	  boot partition so that a newly flashed board can boot normally.
- 
-+config MTK_BROM_DOWNLOAD_AGENT_UBOOT_FASTBOOT
-+	bool "Run download-agent fastboot from U-Boot"
-+	depends on SPL_RAM_DEVICE
-+	depends on USB_FUNCTION_FASTBOOT
-+	depends on FASTBOOT_FLASH_MMC
-+	select MTK_BROM_DOWNLOAD_AGENT
-+	help
-+	  Build a small SPL which loads BL31 and U-Boot from a FIT already
-+	  copied to DRAM by the external DDR loader. U-Boot proper then
-+	  provides the USB fastboot download agent.
++For Genio 700, build the SPL fastboot mode with::
 +
- endchoice
- 
-+if MTK_BROM_DOWNLOAD_AGENT_UBOOT_FASTBOOT
++   $ export CROSS_COMPILE=aarch64-linux-gnu-
++   $ make O=build-da-spl mt8390_genio_700_evk_da_spl_defconfig
++   $ make O=build-da-spl BINMAN_INDIRS=/path/to/firmware
 +
-+config MTK_GENIO_DA_FIT_OFFSET
-+	hex "Download-agent FIT offset"
-+	default 0x70000 if TARGET_MT8188
-+	help
-+	  Offset of the directly parseable FIT in the BootROM-loaded download
-+	  agent. This must match the external loader's DA_FIT_OFFSET value.
++For fastboot in U-Boot proper::
 +
-+config MTK_GENIO_DA_FIT_MAX_SIZE
-+	hex "Maximum download-agent FIT size"
-+	default 0x8f000 if TARGET_MT8188
-+	help
-+	  Fixed region reserved for the download-agent FIT and the maximum FIT
-+	  size accepted by this image layout. This must match the external
-+	  loader's DA_FIT_SIZE value while the loader copies the complete region.
++   $ make O=build-da-uboot mt8390_genio_700_evk_da_uboot_defconfig
++   $ make O=build-da-uboot BL31=/path/to/da-bl31.bin \
++         BINMAN_INDIRS=/path/to/firmware
 +
-+endif
++Use the corresponding ``mt8370_genio_510_evk_da_spl_defconfig`` or
++``mt8370_genio_510_evk_da_uboot_defconfig`` for Genio 510. Each build produces
++``da.bin`` and ``da.map`` in its output directory. Use board- and mode-matched
++firmware inputs; do not set ``TEE`` for these builds.
 +
- config MTK_TZ_MOVABLE
- 	select ARCH_MISC_INIT
- 	select OF_SYSTEM_SETUP
-diff --git a/arch/arm/mach-mediatek/spl.c b/arch/arm/mach-mediatek/spl.c
-index 6f1ec052b95..120a94c6598 100644
---- a/arch/arm/mach-mediatek/spl.c
-+++ b/arch/arm/mach-mediatek/spl.c
-@@ -33,15 +33,17 @@ void board_init_f(ulong dummy)
- 
- u32 spl_boot_device(void)
- {
--#if defined(CONFIG_SPL_SPI)
--	return BOOT_DEVICE_SPI;
--#elif defined(CONFIG_SPL_MMC)
--	return BOOT_DEVICE_MMC1;
--#elif defined(CONFIG_SPL_NAND_SUPPORT)
--	return BOOT_DEVICE_NAND;
--#elif defined(CONFIG_SPL_NOR_SUPPORT)
--	return BOOT_DEVICE_NOR;
--#else
-+	if (IS_ENABLED(CONFIG_MTK_BROM_DOWNLOAD_AGENT_UBOOT_FASTBOOT))
-+		return BOOT_DEVICE_RAM;
++Image and loader contract
++~~~~~~~~~~~~~~~~~~~~~~~~~
 +
-+	if (CONFIG_IS_ENABLED(SPI))
-+		return BOOT_DEVICE_SPI;
-+	if (CONFIG_IS_ENABLED(MMC))
-+		return BOOT_DEVICE_MMC1;
-+	if (CONFIG_IS_ENABLED(NAND_SUPPORT))
-+		return BOOT_DEVICE_NAND;
-+	if (CONFIG_IS_ENABLED(NOR_SUPPORT))
-+		return BOOT_DEVICE_NOR;
++The default ``da.bin`` layouts are shown below. Offsets are relative to the
++start of the image, and region sizes include padding::
 +
- 	return BOOT_DEVICE_NONE;
--#endif
- }
-diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-index 61fefcf9a34..29b59852e45 100644
---- a/board/mediatek/MAINTAINERS
-+++ b/board/mediatek/MAINTAINERS
-@@ -25,11 +25,14 @@ F:	arch/arm/dts/mt8390-genio-common-u-boot.dtsi
- F:	arch/arm/dts/mtk-genio-*-binman-u-boot.dtsi
- F:	arch/arm/dts/mtk-genio-binman-u-boot.dtsi
- F:	configs/mt8370-genio-da-spl-fastboot.config
-+F:	configs/mt8370-genio-da-uboot-fastboot.config
- F:	configs/mt8370-genio-da.config
- F:	configs/mt8188.config
- F:	configs/mt8370_genio_510_evk_da_spl_defconfig
-+F:	configs/mt8370_genio_510_evk_da_uboot_defconfig
- F:	configs/mt8370_genio_510_evk_defconfig
- F:	configs/mt8390_genio_700_evk_da_spl_defconfig
-+F:	configs/mt8390_genio_700_evk_da_uboot_defconfig
- F:	configs/mt8390_genio_700_evk_defconfig
- F:	doc/board/mediatek/mt8188-genio-evk.rst
- 
-diff --git a/configs/mt8370-genio-da-uboot-fastboot.config b/configs/mt8370-genio-da-uboot-fastboot.config
-new file mode 100644
-index 00000000000..5a85b26df0d
---- /dev/null
-+++ b/configs/mt8370-genio-da-uboot-fastboot.config
-@@ -0,0 +1,28 @@
-+#include <configs/mt8370-genio-da.config>
++   Fastboot in SPL                     Fastboot in U-Boot proper
 +
-+CONFIG_MTK_BROM_DOWNLOAD_AGENT_UBOOT_FASTBOOT=y
-+CONFIG_SYS_MALLOC_LEN=0x9000000
-+CONFIG_CMD_FASTBOOT=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_FLASH_MMC=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-+CONFIG_FASTBOOT_MMC_BOOT_SUPPORT=y
-+CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
-+CONFIG_SPL_RAM_DEVICE=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x41000000
-+CONFIG_SPL_MAX_SIZE=0x25000
-+CONFIG_SPL_CRC32=y
-+CONFIG_SPL_GZIP=y
-+# CONFIG_SPL_MMC is not set
-+# CONFIG_SPL_LIBDISK_SUPPORT is not set
-+# CONFIG_SPL_EFI_PARTITION is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
-+CONFIG_BOOTDELAY=0
-+CONFIG_USE_BOOTCOMMAND=y
-+CONFIG_BOOTCOMMAND="fastboot usb 0"
-+CONFIG_ENV_IS_NOWHERE=y
-+# CONFIG_ENV_IS_IN_MMC is not set
-+# CONFIG_BOOTSTD_FULL is not set
-+# CONFIG_CMD_BOOTFLOW is not set
-+# CONFIG_EFI_LOADER is not set
-diff --git a/configs/mt8370_genio_510_evk_da_uboot_defconfig b/configs/mt8370_genio_510_evk_da_uboot_defconfig
-new file mode 100644
-index 00000000000..c696e89c892
---- /dev/null
-+++ b/configs/mt8370_genio_510_evk_da_uboot_defconfig
-@@ -0,0 +1,2 @@
-+#include <configs/mt8370_genio_510_evk_defconfig>
-+#include <configs/mt8370-genio-da-uboot-fastboot.config>
-diff --git a/configs/mt8390_genio_700_evk_da_uboot_defconfig b/configs/mt8390_genio_700_evk_da_uboot_defconfig
-new file mode 100644
-index 00000000000..102f61a3afc
---- /dev/null
-+++ b/configs/mt8390_genio_700_evk_da_uboot_defconfig
-@@ -0,0 +1,2 @@
-+#include <configs/mt8390_genio_700_evk_defconfig>
-+#include <configs/mt8370-genio-da-uboot-fastboot.config>
++   0x00000 +----------------------+   0x00000 +----------------------+
++           | DDR loader           |           | DDR loader           |
++           | 300 KiB              |           | 300 KiB              |
++   0x4b000 +----------------------+   0x4b000 +----------------------+
++           | SPL + USB fastboot   |           | SPL                  |
++           | 700 KiB              |           | 148 KiB              |
++           |                      |   0x70000 +----------------------+
++           |                      |           | FIT: BL31 + U-Boot   |
++           |                      |           | 572 KiB              |
++   0xfa000 +----------------------+   0xff000 +----------------------+
++
++Both DA modes use the shared ``mtk-genio-*-binman-u-boot.dtsi`` templates and
++``CONFIG_MTK_GENIO_IMAGE_CONTRACT`` settings. The image starts with the DDR
++loader padded to ``CONFIG_MTK_GENIO_DDR_LOADER_SIZE``, followed by SPL padded
++to ``CONFIG_SPL_MAX_SIZE``. The loader copies that SPL region to
++``CONFIG_SPL_TEXT_BASE`` before entering it. SPL fastboot reserves a 16 MiB
++heap, including space for the sparse writer's 8 MiB buffer.
++
++The full-U-Boot DA appends a FIT at ``CONFIG_MTK_GENIO_DA_FIT_OFFSET``, in a
++fixed region of ``CONFIG_MTK_GENIO_DA_FIT_MAX_SIZE`` bytes. The external
++loader must copy this complete region to ``CONFIG_SPL_LOAD_FIT_ADDRESS``
++before entering SPL. Its ``DA_FIT_OFFSET`` and ``DA_FIT_SIZE`` must match the
++U-Boot settings. The FIT container is directly parseable; only its BL31 and
++U-Boot payloads are gzip-compressed. SPL decompresses them to
++``CONFIG_MTK_GENIO_BL31_LOAD_ADDR`` and ``CONFIG_TEXT_BASE`` respectively,
++then enters BL31, which starts U-Boot.
++
++The default padded images are 1000 KiB for the SPL DA and 1020 KiB for the
++U-Boot DA. The latter fits the Genio 700 BootROM download area. Selecting SPL
++alone does not remove the fixed padding; a tighter download budget also
++requires smaller reserved regions, with matching changes to the DDR loader.
++
++These fixed regions are part of the external loader ABI. Changing the image
++sizes or addresses requires corresponding loader changes. Binman rejects
++payloads which exceed their reserved regions. The generated DA is a raw
++payload for the platform download tooling; it has no eMMC BootROM wrapper.
++Its FIT hashes do not authenticate it. Platforms requiring authenticated
++DAs must use their external signing and BootROM download tooling.
++
++Using the download agent
++~~~~~~~~~~~~~~~~~~~~~~~~
++
++Select the generated agent with ``genio-flash --bootstrap /path/to/da.bin``.
++``genio-flash`` reboots the board after flashing.
++
++For manual fastboot sessions, use ``fastboot reboot`` to start the installed
++boot chain. ``fastboot continue`` boots firmware from eMMC with the SPL DA,
++or returns to the command prompt with the U-Boot DA, without resetting.
++
++Use raw images for ``mmc0boot0`` and ``mmc0boot1``. Android sparse images are
++supported for GPT partitions and the eMMC user-area alias.
++
++The SPL DA prepares eMMC boot settings and permanently enables the hardware
++reset pin if its policy is still unconfigured. The U-Boot DA does not perform
++this preparation; provisioning a blank eMMC with it requires configuring
++the boot settings separately.
 
 -- 
 2.55.0
