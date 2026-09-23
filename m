@@ -4,157 +4,199 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA6BFC982EA
-	for <u-boot@archiver.kernel.org>; Wed, 23 Sep 2026 09:35:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D9FCC982EA
+	for <u-boot@archiver.kernel.org>; Wed, 23 Sep 2026 11:21:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9626080D18;
-	Wed, 23 Sep 2026 09:35:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C0E8780E16;
+	Wed, 23 Sep 2026 11:21:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9cUVudVWjZAY; Wed, 23 Sep 2026 09:35:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org D8AB480D21
+ id Ll7koF_6O0LK; Wed, 23 Sep 2026 11:21:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org D8CB480C7B
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790156129;
-	b=QftS+l31iXWjbSDTV8KKne0LRZzAfeuEnl+AfEjX13b1/cLfooc8eFbqcV00lTWgNsMm
-	 loXi3fVLn/4lCRVOQg+tp1bTlqMkHlDMR/jA3DKxh9lH04BtuGc6SyG1BQGcdoxQ+Jvk4
-	 9RrNMWBEMUSGC+t199J+Q3HL+MQcOeG4lM+Qf+ydJ/+ac8txdBje1K7p337t3BRYRSrP6
-	 +flW30aptC2vxopv3YvV2n/gpullz2ru4LRyalq5SWFPIMFAZrBU6Rl5KCsTSTj2edIQa
-	 JGnmKpX5Jyj6SiUmGKnLjDxFqMZ0j6ikG7rgEvtV7q4dCdckqwJJEvIFh4pfP0B53Xw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790156129;
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790162504;
+	b=AU++ne6hYMX0Dj8HdAvh8vzXre/MmnQHTFq2MDTIZUQmBU4fDoCYP9Asc7at4uUACI5Z
+	 YI3hLglTRCc0RX7IhNINPGYLs3fozGgShUZ6RGpjTihnrxndscYi41+Alo129o+iiDI/6
+	 QWc4g9I0+c+9ZLa1hGji+H2VvkZ0/17e683/PN2qOMlvB+aycKmhOakheXFyIrdjqcUrk
+	 0gZuTZMv3BTg30YZrs3TP+t5sMp3tq1ANN1OTtgWWKHM3JN/yV943HQzgA/htOdWTi1T1
+	 jIxZTTwF4fNW3jHq6XpXz/SWthes35fuXqX1d8INHmGCyEhtf18G/CuFyuiFv2xJnQw==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790162504;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=fKNxdGVp/JtARvET/viUItl85kjHRJLumpt1ENUBwdM=;
-	b=oAOYf9mOiWnuxL/aNDL6mCNlIAVOphjSwbQC+Q+w/8iMjWD6qUsZidlTOtVnnU5SuQsA
-	 5PXmuVnkiRiAKq1yQILuuzg5J+C2IMIYNmZkYjhYOP/rpmnT7/1XSJ6I1qCPOuwHI8u1K
-	 RgkNNn030F7dXmudc9RB/Xi7RKiL9b6+44hLIZMcDl0E/yh9V47pDNNWPWu1kFcviZ/Y6
-	 Xcirsse36t8XDeQM8nboAF8LsJ7lxT4qUlNAEAeSdyOSEM+zvDS1/9sb27wl8lSAO90wX
-	 XXVF7jHKElqDooV1ouRL0uprx1jbUnVdjBOq+Dco+QoNwQxP2HYuCyLK6tAYjZHGAbw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=fLrjgz/BiKrlh9pcsdlW5CIgcnstULmXNdZRixMB/Zw=;
+	b=B2Cv5b3Gl5pfj773nMNXhl/QIbLcKhy1cUgqmQ4G8rrDMmZY6OAXDwOpbC/dPak4GSP2
+	 8QXmfzbBb/rmyM6EHxrKNSfkSDrkPB+VrleLducikYqUWvrUZyy2rZK5+WtBypgOVIbQA
+	 QtX3eWtjw3fYNnOyleea25NYmrNzOkCwBpabdpYTXX2FwWmnLfDmdDezV4asm+bStExU9
+	 B4qks008woejXG7+uvu6CbVKivIHvzbb0PZvRCP7NztWx2Lu4881JAtqeMWbPjfmrdrph
+	 iTrTHFsyrSduC3tezUzdCrnEMsND+nOdpNJflrZXnP1Up935lxCKnBueQWNIJKlrXNQ==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; dmarc=pass header.from=canonical.com;
+	dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=TVMex1h5;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790156129;
-	bh=fKNxdGVp/JtARvET/viUItl85kjHRJLumpt1ENUBwdM=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790162504;
+	bh=fLrjgz/BiKrlh9pcsdlW5CIgcnstULmXNdZRixMB/Zw=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MJdqnwDIdac6+Y/BCRAShw9jnmtc/CWZA2wmnuJ2KwAXJ+1ZcYt7/ZE97AS3KakG1
-	 Ymqe65nOSxQlhblG+aGG6LhscGHu1+UvuyTOmCfJtDn7Ql+gJ/KwZSBgvjXM0deuyg
-	 Gzi4bLF+Tml5+qt9fZ6fOjOaW+OEzIUrFj43oDx0aJ++e0Oe8kwbHy4+dVkSgiWl4R
-	 OSMq8/wU2LeTRvKybR+TS1mZWQoCeulGyDlnVhhXuH0O6mBfWHV3oDQetqzp793E90
-	 +LYea/4g71zjnUD6/4OXQ6ZqZ6L71RdeqaEZd5ik9NpBDRt+TmyK4r++9Fh3WJORYT
-	 JtXtLQqxw7KKg==
+	b=q6Jga3teHKkf77eogposYQ2qhI7gaDFT5WjBhM1q+R4+wD6Fu0WWHyNkmZ1zPiKIX
+	 XtYJjOjBqBg3Xx0m3xUAe+sPp/MawH+f64pXwoGcW57a2gmJPW1PfUtRyqWOCLuB4t
+	 5FwMG1gszcyZpoEbeVtDrWusNzUhCX8Pa7fCawqnyb8DjPN0AebUPvTC+7xU+rXY4+
+	 LKmQesQjSKJHgXCazqSSMklICvvsG+c+FPbu3oVkxid27CysIIXzGpr0tR86h4/Mze
+	 3crXXrFCGSOcaAFxpW7zBo0V1uuoRW0l5x5UZAJ0TmnE3aefw5oJjVN68ayjw38Ye0
+	 trumgdw4yXlzg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D8AB480D21;
-	Wed, 23 Sep 2026 09:35:28 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id D3CC912C
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 09:35:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D8CB480C7B;
+	Wed, 23 Sep 2026 11:21:43 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6BD9B35A
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 07:00:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C59F8404C9
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 09:35:26 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 51CC780D96
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 07:00:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bB9zD5WZRr87 for <u-boot@lists.u-boot-project.org>;
- Wed, 23 Sep 2026 09:35:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A20ED405E7
-Authentication-Results: smtp4.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790156125;
- b=a/yhVTGneGlA/r+4rNFDbZk45KcC12zjeCHM52+4wFc6HJgTNgf7Ymgek1GkWMuhURAV
- kpJO3wrCOV0x7hr7lR0zbBZV5NYCdgF8+xYAk7Y1Kij2smQFdQdD4R5+5pW6zKiV5utnn
- yvY0eKpzaewQP7BoI/4qPLr35fTSi1vDkw4EvR89IE8HTtLpxY7U5LPyyN+DchQ2o7Ecr
- Ka+48KI7BRB9vAsz1zNo/1cpJtsS7paqZSRBb/I9sY3s596PwfADeutq3RXrEES7lD4bh
- w2NYzvvaEWoQY2ZtblV1VEXYxBTD4jbNrip4NjAwBrKJuodrwizlslDcXjSZyq+LAOg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790156125;
- h=Received-SPF:Received:Received:DKIM-Signature:From:Date:Subject:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
- References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
- X-Developer-Key;
- bh=fKNxdGVp/JtARvET/viUItl85kjHRJLumpt1ENUBwdM=;
- b=nbHAt4c0grnd5DGQHMYXdeopdiKrS1gM2jPzbxCLEfLbzhYrWgADXE2+uBnfx/QWPvC8
- 00unhD2+hPWyDgw6ejWn8dn5JIR1X+GFfbn9LeN7PWdPZi9WXcIve9oKr4m+Apobn3WJ8
- fKYPKwGGEUdInds5u27uYYXzx/Jq8APQQi9DN9Cgpran0ofr7ifK+LdFcR4GI3xe9w02m
- fk2kMIeO9vAcdeS3vYMxBUTh+QFA+fvute971dq7uU5vJUDkwumXWYBWHVlb5jvzWa9QB
- N+Df4kFq+/iEwpBbIjXgqqQLV/iRkv+W7mLfj4b6Ls89nMyiA83u3nUtwd7qlAEcDTw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
- dmarc=pass header.from=kernel.org; 
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=cCCARouM; 
- arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
- envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=cCCARouM
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A20ED405E7
- for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 09:35:25 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 00F1841379;
- Wed, 23 Sep 2026 09:35:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4A981F00893;
- Wed, 23 Sep 2026 09:35:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1790156124;
- bh=fKNxdGVp/JtARvET/viUItl85kjHRJLumpt1ENUBwdM=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=cCCARouM+tzC1U/ROJiKMa/dfnc7Qs4SzksL0+I8sVF4aMnUXw+VdWB/1KH4PkJvl
- i1dJGDXCJC4IGAoqVGy7kn4HmikWgCxRftlfTMmC5DgHYWXaowbB4CuUsvNZOqNd3h
- bVHy70O/5j1Ch//roqgrZW/zLDeHtsfUz8syb9x0nCfTWOH2auWgET/VXseQrZBAwF
- ZMUtDPZIBQCjX7VFJXYLXGiZOnEMBnmziQdU5dsfrnGBp4kZgxRk+d1sk65ihKMgrI
- 71MxxIRaNeBps+uJI1Zi8Q0IJkPa2KnufMc5uC3YCNyity0Ndko8b8d0o1Z5zdWcjM
- o73zX4QupcBZA==
-From: Yixun Lan <dlan@kernel.org>
-Date: Wed, 23 Sep 2026 09:34:31 +0000
-Subject: [PATCH v2 8/8] reset: spacemit: Add SpacemiT K3 reset driver
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aIgRz-FvKtnI for <u-boot@lists.u-boot-project.org>;
+ Wed, 23 Sep 2026 07:00:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org B4B0980D89
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=185.125.188.123
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790146836;
+ b=UDL5dJm/GrrfmXfNFUA5OHSOYsJtuh+05D4jMXUPVlrMGErsUowV7lL7SPOIE4OSj4f2
+ JqyCpk9vteZFeAWuOBlmDTTou7VGdYYxeJNDfZKoB7NY5PP7BSPcLYSQVwKfQdkaVIsAA
+ xrRA5CGCuCJjiuXkx05dY/2/97WD9TTjFajf26pXK7uM1PKeZQAZgomsrnZ2/RfA19kc7
+ NirZVTspM6RklGcOHRAVu1RK3yus0iNLPiZ4QQlIPEzT9qQSqSq8y6OKNVnJbogh3janX
+ NfTF+ChG8eTmqjGJ3hwrzmmPf+EV6w9sF5/hKCNWjrUoZpgZRobMr20HorbzMK/OEZA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790146836;
+ h=Received-SPF:Received:DKIM-Signature:Received:
+ X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ X-Received:MIME-Version:References:In-Reply-To:From:Date:
+ X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+ Content-Transfer-Encoding;
+ bh=fLrjgz/BiKrlh9pcsdlW5CIgcnstULmXNdZRixMB/Zw=;
+ b=DhAy8CSoVmO2mr1e9TWIV5WmZflB7V6ussCTjQOUGfn0Q9HbaEWDCn3p6iIXI59jUFY+
+ AaZNq4dZwKtC016T3SlA3MUUVJCiknAAsQizPADaK7NpjN/0Q2NzHtetuI6xG544qG78+
+ 403do67cpbqntbR4cvJHp5mrIgzD/iGq4/Y5ITk4Nid+XcQUJa6cNDHXH+cvCiCTDNMzM
+ lptxKWRYfHZ/OvOfK2NuYXwaeKd3RaEOwvKvNXaD6au71Z7NFKLWiAoYSm3wwInE8pEQH
+ VPvHcLQtIDZtYWRrV6lAoGrdCntiskSXivmfiHkGNo+pKMz8vsiNYqVeRRKIGPKmDog==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org;
+ dmarc=pass header.from=canonical.com; 
+ dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
+ header.s=20251003 header.b=TVMex1h5; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=185.125.188.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=TVMex1h5
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B4B0980D89
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 07:00:31 +0000 (UTC)
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 0CB503F323
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 07:00:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1790146829;
+ bh=fLrjgz/BiKrlh9pcsdlW5CIgcnstULmXNdZRixMB/Zw=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=TVMex1h5L7HbgTDt6MHnV/CN6z3TMY8tIePzubI8uuLtxD9b7gfM77UB8SPDHrF+h
+ 4fXn0sQpgFhpkzS5OXecZyNdR0xw5FADLI83c6t6objaSEKpflVw9XHOiKcZzkPaFJ
+ aslKAeE5pdeG9rqlOIVqiiW6gc8+xtLpaAE9IIn3r48aL7Z4+2TtVrjnvCHZ/2YXYK
+ XtLq/gIAIfyZJvBCBai/A423tafs3bpN0/OmLdgKSOjyeSHEF2LcVlZnFiYOY7Fcwa
+ h/hHMLBmgb1PnLuukiVSeXFCQASDFQMYg26u0DXARybzpnbGyUCeG6B1t+e5F7Vumb
+ E4SJDoMp/ElrVfmhQnAVZIJxrmK6cJQZjfT3X8P1W5Ajvra70K0/f2Wylq2Bjx/frq
+ ys/NyW1fqZ1OhtYk+EPuHdDQBu3VNga5oHXRpDhYHx7qlNPEwoK5pgoRq18huzx8Al
+ 5rrhZ/rcBb6C84+vTKplbOu15vBh5c/uze9kp06sdMozS8q/iVtbkT7/Xj1UIFttDi
+ v9EcS6qcAo/tgmxmdbVAIdHWPi+IYCYz8neXC03b74CHUS9VpdxJeoC3fwZNHOjRUY
+ 9g0KCaUNcfEoZYJ4Yf4ULrd/hK69M/wFYQE0q04DI8kccXMx5MdPPPZRLVlXT2M5i7
+ KJJpjKhB20xaBA3lbG/g/Vwg=
+Received: by mail-ed1-f71.google.com with SMTP id
+ 4fb4d7f45d1cf-6a64cb77b0aso695927a12.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 23 Sep 2026 00:00:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790146828; cv=none;
+ d=google.com; s=arc-20260327;
+ b=K1e0ikKtkyb4OdY+UpkxphEs0dm2wCY1jiU3k+zt+XN1lhVU08q47vEF5Fz4kpXH6l
+ z3iMwTsWlsOor735bxglUbNS46BL/ahC7BNM7Ot8UrmN35JUCJZYgTvPwvA3WZ3YkhwL
+ SzuRLH+r3QWd5soQ74Hwg1xVfpMc4ePW3eSsYItTwDJaQax6cl696x8cLy4jMO+rPrrs
+ 3PQ9n3UcLAiza3q7d7giC1Rdn/PnR+DDzKsJaArQx4Jtc+AP6wzYyJIurmz1YQQ57bS5
+ VOwK7WcgeTP/DuafA2jMIJTSa20rT05QeGA+00wqqgU9JnKKOT3bDapgUBYNG9tMlPHO
+ 4+MA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version;
+ bh=fLrjgz/BiKrlh9pcsdlW5CIgcnstULmXNdZRixMB/Zw=;
+ fh=Gi4D60aOXzJZYHBigtrUTRbCehIM3Nt2iHcqzCyb+SU=;
+ b=W24Ytal68eonBfJiThfCOnNipFuImETuNU5W4bW2jb+y3CeKx+Ii342TOUMfrJ/ssc
+ uQK7gqBwh6bxZVkSdutXf4/CPYN7RzTfDR0BQe6yKXQudqxN8W8emMJldrPk5An+0tcE
+ 8rDS0/9kHBxR82Mi/EzOgyfJFG9iikzmd1Yf9IKpBU3ZlYjfOwy+0uBMeXKe8Y0YDFWI
+ PYfmh+4T3Efux0XcfkicNqzYslT26smg/si7b6V+iBhgNK4sx58twDOWpWhV3g5YU5xu
+ 7sQKowLqsS7FsuMk3zi5Vy/5hRIpMe0ygQ5RD/2+K28H4NwOt3JKKDkUkRMHzNa6J9bT
+ zLgA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790146828; x=1790751628;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=fLrjgz/BiKrlh9pcsdlW5CIgcnstULmXNdZRixMB/Zw=;
+ b=Yoy6h+7Hq5LPTAKZ9mE2EbG+4n8cpelxYwxZTsOCawikEBt6AnoB1qfiLanxYLWWWg
+ GSSOwQVlPGBimG/FxOx3AKU6v5xlh6EjsydW9+88cQkvlBzAbK+0QonOFiF1JW90dwtn
+ kvFoO+qDguBJ2XFuICGrfTiUYfutqaqrEbtPYseDoBQR0MDwYlgVQdaxqzLlYE1cSCzt
+ URdcrtP/FhlT6MFhoN3gcz32TKhlOTuHGE7KyvIXUViWhWm+R9GABb6XmRlhLqw0RzIn
+ BXp/vl88iEr9WOLZqSME3l/R+58W0F7CUpJ7QpMPwa5TT7jQNJGvozYVHmqPAUr71Mpm
+ joXw==
+X-Gm-Message-State: AFuF++lhoetO4PrgN7hZlzBhukeZDe64Ay3pGnl5cPbKi3WCXx5dxmIh
+ YiyTh7Jh/U3CuRQcpucn7p0r+n1PEbUqDq4Dv0EQak2i8k2X2uQJ5lDSzRc5E026ym0wE3bi+sH
+ 3jlU+azy4WreXHuE3bFr3RjVv59zIhqmBRBfI+HAwQHPtqodIWiu5n+BjOCmY7ztyoomqh/hXhm
+ s2qT6KbZ7Ds80CFpsZJuT1SmHqwSjvA+t9okplVLvSRPOyQ7oWgypz3QbX9ty1
+X-Gm-Gg: AYBFou24FOiKU5qAd7WmwbnNGf5QdRM+WzySl6yQp6qqi9KMXjIpCTQS8KP0t08pfoL
+ q9XNH4bTpCu4UAcq1X9woHVrRKxvjKQtLXS5IU33gNjlH7NOtUzF/WMpXgMnKM25aN6hLmsVvGM
+ R9C/MLoNKMzmNvQDTeoao1ZXQzOu6jlPDJ6c8YrgAs/8UZcXcG/QK4SPdlyw==
+X-Received: by 2002:a05:6402:2747:b0:6aa:b382:8475 with SMTP id
+ 4fb4d7f45d1cf-6aab3b1008dmr1360065a12.16.1790146828085; 
+ Wed, 23 Sep 2026 00:00:28 -0700 (PDT)
+X-Received: by 2002:a05:6402:2747:b0:6aa:b382:8475 with SMTP id
+ 4fb4d7f45d1cf-6aab3b1008dmr1359979a12.16.1790146825940; Wed, 23 Sep 2026
+ 00:00:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260923-01-k3-clock-reset-support-v2-8-6ec0abb1c7b5@kernel.org>
-References: <20260923-01-k3-clock-reset-support-v2-0-6ec0abb1c7b5@kernel.org>
-In-Reply-To: <20260923-01-k3-clock-reset-support-v2-0-6ec0abb1c7b5@kernel.org>
-To: u-boot@lists.u-boot-project.org
-Cc: spacemit@lists.linux.dev, u-boot-spacemit@groups.io, 
- Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
- Junhui Liu <junhui.liu@pigmoral.tech>, 
- Raymond Mao <raymond.mao@riscstar.com>, 
- Guodong Xu <guodong.xu@oss.qualcomm.com>, Peng Fan <peng.fan@nxp.com>, 
- Torsten Duwe <duwe@suse.de>, Ryan Chen <ryan_chen@aspeedtech.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Alexey Charkov <alchark@flipper.net>, 
- Yixun Lan <dlan@kernel.org>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=21565; i=dlan@kernel.org;
- h=from:subject:message-id; bh=T4PQI5q3JsW4IXc+SsVW/BS8l523vDjhK2/bl2oWteE=;
- b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBqs509btljFEEKDuBUfGDHdc+c1n7yKTn4DCKKU
- AomQ1rUpFqJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCarOdPRsUgAAAAAAEAA5t
- YW51MiwyLjUrMS4xMiwyLDJfFIAAAAAALgAoaXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5
- maWZ0aGhvcnNlbWFuLm5ldEI1QkFCOEM5QzMxQjcxMTU2NzAyMjNEQzMxQUFFQTQ3NTk0REJCRU
- QACgkQMarqR1lNu+2sAg//cEuMu1VyvSgHxExs1yNuHbd6MneuhkB26e6SOx1jUapdWgDPTinLv
- 2y/tLdfDsPr1zIIosw1559BtKSrbwka8fp2Hc+gqFs4SPVHATAuFJI2qz+wbCbLZkKTUTrTlzyw
- 6jNJsEcYFqyki++ISIhI/VaFP5xzW6Q0ZVs2znLAO/KFp4NO7JJnPgFkM/LsjtNV2VmaAPG8hEH
- v7wqXgLFiGgMjFT3kuvahfHrB1+UiwF3au4uBkD9D8lRwboxVC1jdKOSq7jWTI0aqsUnKJFSaqB
- h48hk7inhzyEoAN+RMnNRUAlBGCCwtA5T7jznSVKTksrau3CBSFdNrkVj44GjMQ7tsvSyx9pStG
- t2FYMMOsNvu0Aa3+e/R82HhCQL/ncG9MH3q+9Pw8GCr2sNv5tjR8hq3bTOsOsANOxajS5/hbCBd
- f62SWeXySYu2eX80Lb/+0Oeqs/oJtWJTkNIotKdmuhCAzOfGIPT4rYfZGcKS9rmOXUOzGDEz9Fn
- kY6Zoyl1E29BAyoOZlFcayLoOOFDsLjh9mL8U+sT7MBS3w86c1MUObyVWnzhmdIS/wjx6u/iI/w
- uksEx3t0LLmLIfBx4KZNRunQ6eJICLrd1IiGIcyghXCUBA2P2ILsGm90TTOaNdJFUL9DkMx13sI
- nBkxnkzad3o6BoT2f6SkIs4wL9BCwk=
-X-Developer-Key: i=dlan@kernel.org; a=openpgp;
- fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
+References: <20260831142800.25966-1-aristo.chen@canonical.com>
+ <20260831142800.25966-3-aristo.chen@canonical.com>
+ <CAFLszTj0H71E8K8mJS_Oc6dtvPTeQT9m_7A++91XL_H=SkV3hQ@mail.gmail.com>
+In-Reply-To: <CAFLszTj0H71E8K8mJS_Oc6dtvPTeQT9m_7A++91XL_H=SkV3hQ@mail.gmail.com>
+From: Aristo Chen <aristo.chen@canonical.com>
+Date: Wed, 23 Sep 2026 15:00:14 +0800
+X-Gm-Features: AclHuK-etAzqr1e-FmnIk0SklQUmwBT62KDodGJPPL05JANSMLklwyOsTsvTYx4
+Message-ID: <CAA=k7=mn25hODFV2OPu0t7=dArdXDv0FYUug5-RoEr6_zBLw5A@mail.gmail.com>
+Subject: Re: [PATCH 2/2] test: boot: Check that rauc rejects over-long slot
+ names
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Martin Schwan <m.schwan@phytec.de>, Denis Mukhin <dmukhin@ford.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 23 Sep 2026 11:21:43 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -168,411 +210,141 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Based on upstream Linux:
-  938ce3b16582 ("reset: spacemit: Add SpacemiT K3 reset driver")
+Hi Simon,
 
-Add support for the SpacemiT K3 SoC reset controller. The K3 reset
-driver reuses the common reset controller code and provides K3-specific
-reset data for devices managed by the following units:
+On Sat, Sep 19, 2026 at 4:45=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Aristo,
+>
+> On 2026-08-31T14:25:38, Aristo Chen <aristo.chen@canonical.com> wrote:
+> > test: boot: Check that rauc rejects over-long slot names
+> >
+> > Boot the RAUC bootflow after setting BOOT_ORDER to a 33-character slot
+> > name, one more than fits the "BOOT_<slot>_LEFT" env-var name buffer. Th=
+e
+> > boot must now fail with -ENAMETOOLONG.
+> >
+> > Before the previous commit the name overflowed the stack buffer; as no
+> > such variable exists the boot then failed with -ENOENT, hiding the
+> > overflow.
+> >
+> > Also check the accepted side of the boundary: a 32-character name, the
+> > longest that fits, must pass the length check and fail only with -ENOEN=
+T
+> > because its BOOT_<slot>_LEFT variable does not exist.
+> >
+> > Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> >
+> > test/boot/bootflow.c | 23 +++++++++++++++++++++++
+> >  1 file changed, 23 insertions(+)
+>
+> Since the boundary is boot_left_name(), please exercise the scan path
+> too - distro_rauc_read_bootflow() calls it against
+> CONFIG_BOOTMETH_RAUC_BOOT_ORDER, which is what a user is most likely
+> to hit. The current test only reaches find_active_slot() via
+> BOOT_ORDER at boot time.
 
-- MPMU (Main Power Management Unit)
-- APBC (APB clock unit)
-- APMU (Application Subsystem Power Management Unit)
-- DCIU (DMA Control and Interface Unit)
+During a scan the only names that reach boot_left_name() are the entries
+of CONFIG_BOOTMETH_RAUC_BOOT_ORDER, a compile-time string ("A B" on
+sandbox). The BOOT_ORDER entries seen at scan time go through get_slot()
+in distro_rauc_scan_parts() instead, which marks the bootflow invalid
+when a name does not match a configured slot, so no env-var name is
+built from them. The test cannot change the Kconfig value at run time,
+so covering the rejecting side of the scan path would need either a
+dedicated sandbox configuration (which would require adapting or
+excluding the existing rauc test, since the bootflow becomes invalid)
+or a test hook that lets the scan path take an alternate default
+order. The scan path's normal accepted-input case is exercised by every
+scan in bootflow_rauc(), and it goes through the same helper the
+boot-time test drives across the 32/33-char boundary. If you still
+want the rejecting Kconfig scan path covered, I can add a dedicated
+test configuration, although that seems disproportionate for this fix.
 
-Signed-off-by: Yixun Lan <dlan@kernel.org>
----
- drivers/clk/spacemit/Kconfig               |   1 +
- drivers/clk/spacemit/clk-k3.c              |  25 +++
- drivers/reset/spacemit/Kconfig             |   7 +
- drivers/reset/spacemit/Makefile            |   1 +
- drivers/reset/spacemit/reset-spacemit-k3.c | 242 +++++++++++++++++++++++++++++
- include/soc/spacemit/k3-reset.h            |  21 +++
- 6 files changed, 297 insertions(+)
+>
+> > +     /*
+> > +      * A 32-char slot name is the longest that fits. It must pass the
+> > +      * length check and fail only because BOOT_<slot>_LEFT does not e=
+xist.
+> > +      */
+> > +     ut_assertok(env_set("BOOT_ORDER", "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=
+BB"));
+> > +     ut_asserteq(1, run_command("bootflow boot", 0));
+> > +     ut_assert_nextline("** Booting bootflow 'mmc10.bootdev.whole' wit=
+h rauc");
+> > +     ut_assert_nextline("Boot failed (err=3D%d)", -ENOENT);
+> > +     ut_assert_console_end();
+>
+> > diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> > @@ -1520,6 +1520,29 @@ static int bootstd_images(struct unit_test_state=
+ *uts)
+> >       ptr =3D map_sysmem(img->addr, 0);
+> >       ut_asserteq_strn("BOOT_IMAGE=3D/vmlinuz-5.15.0-121-generic root=
+=3D", ptr);
+> >
+> > +     /*
+> > +      * Boot with a BOOT_ORDER slot name (33 chars) that is too long f=
+or the
+> > +      * "BOOT_<slot>_LEFT" env-var name buffer. It must be rejected ra=
+ther
+> > +      * than overflow the stack.
+> > +      */
+> > +     ut_assertok(run_command("bootflow select 0", 0));
+> > +     ut_assert_console_end();
+> > +     ut_assertok(env_set("BOOT_ORDER", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+AAA B"));
+> > +     ut_asserteq(1, run_command("bootflow boot", 0));
+> > +     ut_assert_nextline("** Booting bootflow 'mmc10.bootdev.whole' wit=
+h rauc");
+> > +     ut_assert_nextline("Boot failed (err=3D%d)", -ENAMETOOLONG);
+> > +     ut_assert_console_end();
+>
+> This is in the wrong function. bootstd_images() scans
+> mmc2/mmc1/mmc4/mmc5 and produces the four extlinux/script/cros
+> bootflows listed just above; it never binds bootmeth_rauc or enables
+> mmc10, so 'bootflow select 0' picks mmc1.bootdev.part_1 (extlinux_cfg)
+> and the expected "** Booting bootflow 'mmc10.bootdev.whole' with rauc"
+> line never appears. Please extend bootflow_rauc() (or add a sibling
+> test that reuses its setup) so mmc10 is bound and rauc is in the
+> bootmeth order before 'bootflow boot' runs. Also restore BOOT_ORDER
+> (and the bootmeth/bootdev order) at the end so it does not leak into
+> the next test.
 
-diff --git a/drivers/clk/spacemit/Kconfig b/drivers/clk/spacemit/Kconfig
-index c305f433871..a782426fe0f 100644
---- a/drivers/clk/spacemit/Kconfig
-+++ b/drivers/clk/spacemit/Kconfig
-@@ -24,6 +24,7 @@ config CLK_SPACEMIT_K1
- config CLK_SPACEMIT_K3
- 	bool "SpacemiT K3 clock support"
- 	select CLK_CCF
-+	select RESET_SPACEMIT_K3
- 	help
- 	  This enables support clock driver for Spacemit K3 SoC.
- 	  It's based on Common Clock Framework.
-diff --git a/drivers/clk/spacemit/clk-k3.c b/drivers/clk/spacemit/clk-k3.c
-index 3191654ea72..f4f1bb7bf04 100644
---- a/drivers/clk/spacemit/clk-k3.c
-+++ b/drivers/clk/spacemit/clk-k3.c
-@@ -9,6 +9,7 @@
- #include <dm/device_compat.h>
- #include <regmap.h>
- #include <linux/clk-provider.h>
-+#include <soc/spacemit/k3-reset.h>
- #include <soc/spacemit/k3-syscon.h>
- 
- #include "clk_common.h"
-@@ -1955,6 +1956,26 @@ U_BOOT_DRIVER(k3_pll_clk) = {
- 	.flags		= DM_FLAG_PRE_RELOC,
- };
- 
-+static int k3_mpmu_clk_bind(struct udevice *dev)
-+{
-+	return spacemit_k3_reset_bind(dev, SPACEMIT_K3_RESET_MPMU);
-+}
-+
-+static int k3_apbc_clk_bind(struct udevice *dev)
-+{
-+	return spacemit_k3_reset_bind(dev, SPACEMIT_K3_RESET_APBC);
-+}
-+
-+static int k3_apmu_clk_bind(struct udevice *dev)
-+{
-+	return spacemit_k3_reset_bind(dev, SPACEMIT_K3_RESET_APMU);
-+}
-+
-+static int k3_dciu_clk_bind(struct udevice *dev)
-+{
-+	return spacemit_k3_reset_bind(dev, SPACEMIT_K3_RESET_DCIU);
-+}
-+
- static const struct udevice_id k3_mpmu_clk_match[] = {
- 	{ .compatible = "spacemit,k3-syscon-mpmu",
- 	  .data = (ulong)&k3_ccu_mpmu_data },
-@@ -1967,6 +1988,7 @@ U_BOOT_DRIVER(k3_mpmu_clk) = {
- 	.name		= "k3_mpmu_clk",
- 	.id		= UCLASS_CLK,
- 	.of_match	= k3_mpmu_clk_match,
-+	.bind		= k3_mpmu_clk_bind,
- 	.probe		= k3_mpmu_clk_probe,
- 	.ops		= &k3_mpmu_clk_ops,
- 	.flags		= DM_FLAG_PRE_RELOC,
-@@ -1984,6 +2006,7 @@ U_BOOT_DRIVER(k3_apbc_clk) = {
- 	.name		= "k3_apbc_clk",
- 	.id		= UCLASS_CLK,
- 	.of_match	= k3_apbc_clk_match,
-+	.bind		= k3_apbc_clk_bind,
- 	.probe		= k3_apbc_clk_probe,
- 	.ops		= &k3_apbc_clk_ops,
- 	.flags		= DM_FLAG_PRE_RELOC,
-@@ -2001,6 +2024,7 @@ U_BOOT_DRIVER(k3_apmu_clk) = {
- 	.name		= "k3_apmu_clk",
- 	.id		= UCLASS_CLK,
- 	.of_match	= k3_apmu_clk_match,
-+	.bind		= k3_apmu_clk_bind,
- 	.probe		= k3_apmu_clk_probe,
- 	.ops		= &k3_apmu_clk_ops,
- 	.flags		= DM_FLAG_PRE_RELOC,
-@@ -2018,6 +2042,7 @@ U_BOOT_DRIVER(k3_dciu_clk) = {
- 	.name		= "k3_dciu_clk",
- 	.id		= UCLASS_CLK,
- 	.of_match	= k3_dciu_clk_match,
-+	.bind		= k3_dciu_clk_bind,
- 	.probe		= k3_dciu_clk_probe,
- 	.ops		= &k3_dciu_clk_ops,
- 	.flags		= DM_FLAG_PRE_RELOC,
-diff --git a/drivers/reset/spacemit/Kconfig b/drivers/reset/spacemit/Kconfig
-index 20e4cc6e4d8..66ab5f85333 100644
---- a/drivers/reset/spacemit/Kconfig
-+++ b/drivers/reset/spacemit/Kconfig
-@@ -13,3 +13,10 @@ config RESET_SPACEMIT_K1
- 	help
- 	  Reset controller for SpacemiT K1 (MPMU/APBC/APMU/APBC2).
- 	  Bound from the K1 CCU/syscon devices.
-+
-+config RESET_SPACEMIT_K3
-+	bool "SpacemiT K3 reset support"
-+	select RESET_SPACEMIT_COMMON
-+	help
-+	  Reset controller for SpacemiT K3 (MPMU/APBC/APMU/DCIU).
-+	  Bound from the K3 CCU/syscon devices.
-diff --git a/drivers/reset/spacemit/Makefile b/drivers/reset/spacemit/Makefile
-index 56f9fd1ab20..f89d068e1ca 100644
---- a/drivers/reset/spacemit/Makefile
-+++ b/drivers/reset/spacemit/Makefile
-@@ -4,3 +4,4 @@
- 
- obj-$(CONFIG_RESET_SPACEMIT_COMMON)	+= reset-spacemit-common.o
- obj-$(CONFIG_RESET_SPACEMIT_K1)		+= reset-spacemit-k1.o
-+obj-$(CONFIG_RESET_SPACEMIT_K3)		+= reset-spacemit-k3.o
-diff --git a/drivers/reset/spacemit/reset-spacemit-k3.c b/drivers/reset/spacemit/reset-spacemit-k3.c
-new file mode 100644
-index 00000000000..358211a2f88
---- /dev/null
-+++ b/drivers/reset/spacemit/reset-spacemit-k3.c
-@@ -0,0 +1,242 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * SpacemiT K3 reset driver (syscon-bound).
-+ *
-+ * Copyright (C) 2025-2026 SpacemiT Technology Co. Ltd
-+ */
-+
-+#include <dm.h>
-+#include <dt-bindings/reset/spacemit,k3-resets.h>
-+#include <linux/bitops.h>
-+#include <soc/spacemit/k3-reset.h>
-+#include <soc/spacemit/k3-syscon.h>
-+
-+#include "reset-spacemit-common.h"
-+
-+static const struct spacemit_reset_data k3_mpmu_resets[] = {
-+	[RESET_MPMU_WDT]	= RESET_DATA(MPMU_WDTPCR,	BIT(2), 0),
-+	[RESET_MPMU_RIPC]	= RESET_DATA(MPMU_RIPCCR,	BIT(2), 0),
-+};
-+
-+static const struct spacemit_reset_data k3_apbc_resets[] = {
-+	[RESET_APBC_UART0]	= RESET_DATA(APBC_UART0_CLK_RST,	BIT(2),	0),
-+	[RESET_APBC_UART2]	= RESET_DATA(APBC_UART2_CLK_RST,	BIT(2),	0),
-+	[RESET_APBC_UART3]	= RESET_DATA(APBC_UART3_CLK_RST,	BIT(2),	0),
-+	[RESET_APBC_UART4]	= RESET_DATA(APBC_UART4_CLK_RST,	BIT(2),	0),
-+	[RESET_APBC_UART5]	= RESET_DATA(APBC_UART5_CLK_RST,	BIT(2),	0),
-+	[RESET_APBC_UART6]	= RESET_DATA(APBC_UART6_CLK_RST,	BIT(2),	0),
-+	[RESET_APBC_UART7]	= RESET_DATA(APBC_UART7_CLK_RST,	BIT(2),	0),
-+	[RESET_APBC_UART8]	= RESET_DATA(APBC_UART8_CLK_RST,	BIT(2),	0),
-+	[RESET_APBC_UART9]	= RESET_DATA(APBC_UART9_CLK_RST,	BIT(2),	0),
-+	[RESET_APBC_UART10]	= RESET_DATA(APBC_UART10_CLK_RST,	BIT(2),	0),
-+	[RESET_APBC_GPIO]	= RESET_DATA(APBC_GPIO_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_PWM0]	= RESET_DATA(APBC_PWM0_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_PWM1]	= RESET_DATA(APBC_PWM1_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_PWM2]	= RESET_DATA(APBC_PWM2_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_PWM3]	= RESET_DATA(APBC_PWM3_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_PWM4]	= RESET_DATA(APBC_PWM4_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_PWM5]	= RESET_DATA(APBC_PWM5_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_PWM6]	= RESET_DATA(APBC_PWM6_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_PWM7]	= RESET_DATA(APBC_PWM7_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_PWM8]	= RESET_DATA(APBC_PWM8_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_PWM9]	= RESET_DATA(APBC_PWM9_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_PWM10]	= RESET_DATA(APBC_PWM10_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_PWM11]	= RESET_DATA(APBC_PWM11_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_PWM12]	= RESET_DATA(APBC_PWM12_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_PWM13]	= RESET_DATA(APBC_PWM13_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_PWM14]	= RESET_DATA(APBC_PWM14_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_PWM15]	= RESET_DATA(APBC_PWM15_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_PWM16]	= RESET_DATA(APBC_PWM16_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_PWM17]	= RESET_DATA(APBC_PWM17_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_PWM18]	= RESET_DATA(APBC_PWM18_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_PWM19]	= RESET_DATA(APBC_PWM19_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_SPI0]	= RESET_DATA(APBC_SSP0_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_SPI1]	= RESET_DATA(APBC_SSP1_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_SPI3]	= RESET_DATA(APBC_SSP3_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_RTC]	= RESET_DATA(APBC_RTC_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_TWSI0]	= RESET_DATA(APBC_TWSI0_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TWSI1]	= RESET_DATA(APBC_TWSI1_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TWSI2]	= RESET_DATA(APBC_TWSI2_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TWSI4]	= RESET_DATA(APBC_TWSI4_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TWSI5]	= RESET_DATA(APBC_TWSI5_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TWSI6]	= RESET_DATA(APBC_TWSI6_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TWSI8]	= RESET_DATA(APBC_TWSI8_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TIMERS0]	= RESET_DATA(APBC_TIMERS0_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TIMERS1]	= RESET_DATA(APBC_TIMERS1_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TIMERS2]	= RESET_DATA(APBC_TIMERS2_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TIMERS3]	= RESET_DATA(APBC_TIMERS3_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TIMERS4]	= RESET_DATA(APBC_TIMERS4_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TIMERS5]	= RESET_DATA(APBC_TIMERS5_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TIMERS6]	= RESET_DATA(APBC_TIMERS6_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_TIMERS7]	= RESET_DATA(APBC_TIMERS7_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_AIB]	= RESET_DATA(APBC_AIB_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_ONEWIRE]	= RESET_DATA(APBC_ONEWIRE_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_I2S0]	= RESET_DATA(APBC_SSPA0_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_I2S1]	= RESET_DATA(APBC_SSPA1_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_I2S2]	= RESET_DATA(APBC_SSPA2_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_I2S3]	= RESET_DATA(APBC_SSPA3_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_I2S4]	= RESET_DATA(APBC_SSPA4_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_I2S5]	= RESET_DATA(APBC_SSPA5_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_DRO]	= RESET_DATA(APBC_DRO_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_IR0]	= RESET_DATA(APBC_IR0_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_IR1]	= RESET_DATA(APBC_IR1_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_TSEN]	= RESET_DATA(APBC_TSEN_CLK_RST,		BIT(2), 0),
-+	[RESET_IPC_AP2AUD]	= RESET_DATA(APBC_IPC_AP2AUD_CLK_RST,	BIT(2), 0),
-+	[RESET_APBC_CAN0]	= RESET_DATA(APBC_CAN0_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_CAN1]	= RESET_DATA(APBC_CAN1_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_CAN2]	= RESET_DATA(APBC_CAN2_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_CAN3]	= RESET_DATA(APBC_CAN3_CLK_RST,		BIT(2), 0),
-+	[RESET_APBC_CAN4]	= RESET_DATA(APBC_CAN4_CLK_RST,		BIT(2), 0),
-+};
-+
-+static const struct spacemit_reset_data k3_apmu_resets[] = {
-+	[RESET_APMU_CSI]                = RESET_DATA(APMU_CSI_CCIC2_CLK_RES_CTRL, 0,       BIT(1)),
-+	[RESET_APMU_CCIC2PHY]           = RESET_DATA(APMU_CSI_CCIC2_CLK_RES_CTRL, 0,       BIT(2)),
-+	[RESET_APMU_CCIC3PHY]           = RESET_DATA(APMU_CSI_CCIC2_CLK_RES_CTRL, 0,       BIT(29)),
-+	[RESET_APMU_ISP_CIBUS]          = RESET_DATA(APMU_ISP_CLK_RES_CTRL,       0,       BIT(16)),
-+	[RESET_APMU_DSI_ESC]            = RESET_DATA(APMU_LCD_CLK_RES_CTRL1,      0,       BIT(3)),
-+	[RESET_APMU_LCD]                = RESET_DATA(APMU_LCD_CLK_RES_CTRL1,      0,       BIT(4)),
-+	[RESET_APMU_V2D]                = RESET_DATA(APMU_LCD_CLK_RES_CTRL1,      0,       BIT(27)),
-+	[RESET_APMU_LCD_MCLK]           = RESET_DATA(APMU_LCD_CLK_RES_CTRL2,      0,       BIT(9)),
-+	[RESET_APMU_LCD_DSCCLK]         = RESET_DATA(APMU_LCD_CLK_RES_CTRL2,      0,       BIT(15)),
-+	[RESET_APMU_SC2_HCLK]           = RESET_DATA(APMU_CCIC_CLK_RES_CTRL,      0,       BIT(0)),
-+	[RESET_APMU_CCIC_4X]            = RESET_DATA(APMU_CCIC_CLK_RES_CTRL,      0,       BIT(1)),
-+	[RESET_APMU_CCIC1_PHY]          = RESET_DATA(APMU_CCIC_CLK_RES_CTRL,      0,       BIT(2)),
-+	[RESET_APMU_SDH_AXI]            = RESET_DATA(APMU_SDH0_CLK_RES_CTRL,      0,       BIT(0)),
-+	[RESET_APMU_SDH0]               = RESET_DATA(APMU_SDH0_CLK_RES_CTRL,      0,       BIT(1)),
-+	[RESET_APMU_SDH1]               = RESET_DATA(APMU_SDH1_CLK_RES_CTRL,      0,       BIT(1)),
-+	[RESET_APMU_SDH2]               = RESET_DATA(APMU_SDH2_CLK_RES_CTRL,      0,       BIT(1)),
-+	[RESET_APMU_USB2_AHB]           = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(0)),
-+	[RESET_APMU_USB2_VCC]           = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(2)),
-+	[RESET_APMU_USB2_PHY]           = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(3)),
-+	[RESET_APMU_USB3_A_AHB]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(5)),
-+	[RESET_APMU_USB3_A_VCC]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(6)),
-+	[RESET_APMU_USB3_A_PHY]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(7)),
-+	[RESET_APMU_USB3_B_AHB]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(9)),
-+	[RESET_APMU_USB3_B_VCC]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(10)),
-+	[RESET_APMU_USB3_B_PHY]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(11)),
-+	[RESET_APMU_USB3_C_AHB]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(13)),
-+	[RESET_APMU_USB3_C_VCC]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(14)),
-+	[RESET_APMU_USB3_C_PHY]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(15)),
-+	[RESET_APMU_USB3_D_AHB]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(17)),
-+	[RESET_APMU_USB3_D_VCC]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(18)),
-+	[RESET_APMU_USB3_D_PHY]         = RESET_DATA(APMU_USB_CLK_RES_CTRL,       0,       BIT(19)),
-+	[RESET_APMU_QSPI]               = RESET_DATA(APMU_QSPI_CLK_RES_CTRL,      0,       BIT(1)),
-+	[RESET_APMU_QSPI_BUS]           = RESET_DATA(APMU_QSPI_CLK_RES_CTRL,      0,       BIT(0)),
-+	[RESET_APMU_DMA]                = RESET_DATA(APMU_DMA_CLK_RES_CTRL,       0,       BIT(0)),
-+	[RESET_APMU_AES_WTM]            = RESET_DATA(APMU_AES_CLK_RES_CTRL,       0,       BIT(4)),
-+	[RESET_APMU_MCB_DCLK]           = RESET_DATA(APMU_MCB_CLK_RES_CTRL,       0,       BIT(0)),
-+	[RESET_APMU_MCB_ACLK]           = RESET_DATA(APMU_MCB_CLK_RES_CTRL,       0,       BIT(1)),
-+	[RESET_APMU_VPU]                = RESET_DATA(APMU_VPU_CLK_RES_CTRL,       0,       BIT(0)),
-+	[RESET_APMU_DTC]                = RESET_DATA(APMU_DTC_CLK_RES_CTRL,       0,       BIT(0)),
-+	[RESET_APMU_GPU]                = RESET_DATA(APMU_GPU_CLK_RES_CTRL,       0,       BIT(1)),
-+	[RESET_APMU_MC]                 = RESET_DATA(APMU_PMUA_MC_CTRL,           0,       BIT(0)),
-+	[RESET_APMU_CPU0_POP]           = RESET_DATA(APMU_PMU_CC2_AP,             BIT(0),  0),
-+	[RESET_APMU_CPU0_SW]            = RESET_DATA(APMU_PMU_CC2_AP,             BIT(1),  0),
-+	[RESET_APMU_CPU1_POP]           = RESET_DATA(APMU_PMU_CC2_AP,             BIT(3),  0),
-+	[RESET_APMU_CPU1_SW]            = RESET_DATA(APMU_PMU_CC2_AP,             BIT(4),  0),
-+	[RESET_APMU_CPU2_POP]           = RESET_DATA(APMU_PMU_CC2_AP,             BIT(6),  0),
-+	[RESET_APMU_CPU2_SW]            = RESET_DATA(APMU_PMU_CC2_AP,             BIT(7),  0),
-+	[RESET_APMU_CPU3_POP]           = RESET_DATA(APMU_PMU_CC2_AP,             BIT(9),  0),
-+	[RESET_APMU_CPU3_SW]            = RESET_DATA(APMU_PMU_CC2_AP,             BIT(10), 0),
-+	[RESET_APMU_C0_MPSUB_SW]        = RESET_DATA(APMU_PMU_CC2_AP,             BIT(12), 0),
-+	[RESET_APMU_CPU4_POP]           = RESET_DATA(APMU_PMU_CC2_AP,             BIT(16), 0),
-+	[RESET_APMU_CPU4_SW]            = RESET_DATA(APMU_PMU_CC2_AP,             BIT(17), 0),
-+	[RESET_APMU_CPU5_POP]           = RESET_DATA(APMU_PMU_CC2_AP,             BIT(19), 0),
-+	[RESET_APMU_CPU5_SW]            = RESET_DATA(APMU_PMU_CC2_AP,             BIT(20), 0),
-+	[RESET_APMU_CPU6_POP]           = RESET_DATA(APMU_PMU_CC2_AP,             BIT(22), 0),
-+	[RESET_APMU_CPU6_SW]            = RESET_DATA(APMU_PMU_CC2_AP,             BIT(23), 0),
-+	[RESET_APMU_CPU7_POP]           = RESET_DATA(APMU_PMU_CC2_AP,             BIT(25), 0),
-+	[RESET_APMU_CPU7_SW]            = RESET_DATA(APMU_PMU_CC2_AP,             BIT(26), 0),
-+	[RESET_APMU_C1_MPSUB_SW]        = RESET_DATA(APMU_PMU_CC2_AP,             BIT(28), 0),
-+	[RESET_APMU_MPSUB_DBG]          = RESET_DATA(APMU_PMU_CC2_AP,             BIT(29), 0),
-+	[RESET_APMU_UCIE_IP]            = RESET_DATA(APMU_UCIE_CTRL,              BIT(1),  0),
-+	[RESET_APMU_UCIE_HOT]           = RESET_DATA(APMU_UCIE_CTRL,              BIT(2),  0),
-+	[RESET_APMU_UCIE_MON]           = RESET_DATA(APMU_UCIE_CTRL,              BIT(3),  0),
-+	[RESET_APMU_RCPU_AUDIO_SYS]     = RESET_DATA(APMU_RCPU_CLK_RES_CTRL,      0,       BIT(0)),
-+	[RESET_APMU_RCPU_MCU_CORE]      = RESET_DATA(APMU_RCPU_CLK_RES_CTRL,      0,       BIT(2)),
-+	[RESET_APMU_RCPU_AUDIO_APMU]    = RESET_DATA(APMU_RCPU_CLK_RES_CTRL,      0,       BIT(3)),
-+	[RESET_APMU_DSI4LN2_ESCCLK]     = RESET_DATA(APMU_LCD_CLK_RES_CTRL3,      0,       BIT(3)),
-+	[RESET_APMU_DSI4LN2_LCD_SW]     = RESET_DATA(APMU_LCD_CLK_RES_CTRL3,      0,       BIT(4)),
-+	[RESET_APMU_DSI4LN2_LCD_MCLK]   = RESET_DATA(APMU_LCD_CLK_RES_CTRL4,      0,       BIT(9)),
-+	[RESET_APMU_DSI4LN2_LCD_DSCCLK] = RESET_DATA(APMU_LCD_CLK_RES_CTRL4,      0,       BIT(15)),
-+	[RESET_APMU_DSI4LN2_DPU_ACLK]   = RESET_DATA(APMU_LCD_CLK_RES_CTRL5,      0,       BIT(0)),
-+	[RESET_APMU_DPU_ACLK]           = RESET_DATA(APMU_LCD_CLK_RES_CTRL5,      0,       BIT(15)),
-+	[RESET_APMU_UFS_ACLK]           = RESET_DATA(APMU_UFS_CLK_RES_CTRL,       0,       BIT(0)),
-+	[RESET_APMU_EDP0]               = RESET_DATA(APMU_LCD_EDP_CTRL,           0,       BIT(0)),
-+	[RESET_APMU_EDP1]               = RESET_DATA(APMU_LCD_EDP_CTRL,           0,       BIT(16)),
-+	[RESET_APMU_PCIE_A_DBI]         = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_A,    0,       BIT(3)),
-+	[RESET_APMU_PCIE_A_SLAVE]       = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_A,    0,       BIT(4)),
-+	[RESET_APMU_PCIE_A_MASTER]      = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_A,    0,       BIT(5)),
-+	[RESET_APMU_PCIE_B_DBI]         = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_B,    0,       BIT(3)),
-+	[RESET_APMU_PCIE_B_SLAVE]       = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_B,    0,       BIT(4)),
-+	[RESET_APMU_PCIE_B_MASTER]      = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_B,    0,       BIT(5)),
-+	[RESET_APMU_PCIE_C_DBI]         = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_C,    0,       BIT(3)),
-+	[RESET_APMU_PCIE_C_SLAVE]       = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_C,    0,       BIT(4)),
-+	[RESET_APMU_PCIE_C_MASTER]      = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_C,    0,       BIT(5)),
-+	[RESET_APMU_PCIE_D_DBI]         = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_D,    0,       BIT(3)),
-+	[RESET_APMU_PCIE_D_SLAVE]       = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_D,    0,       BIT(4)),
-+	[RESET_APMU_PCIE_D_MASTER]      = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_D,    0,       BIT(5)),
-+	[RESET_APMU_PCIE_E_DBI]         = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_E,    0,       BIT(3)),
-+	[RESET_APMU_PCIE_E_SLAVE]       = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_E,    0,       BIT(4)),
-+	[RESET_APMU_PCIE_E_MASTER]      = RESET_DATA(APMU_PCIE_CLK_RES_CTRL_E,    0,       BIT(5)),
-+	[RESET_APMU_EMAC0]              = RESET_DATA(APMU_EMAC0_CLK_RES_CTRL,     0,       BIT(1)),
-+	[RESET_APMU_EMAC1]              = RESET_DATA(APMU_EMAC1_CLK_RES_CTRL,     0,       BIT(1)),
-+	[RESET_APMU_EMAC2]              = RESET_DATA(APMU_EMAC2_CLK_RES_CTRL,     0,       BIT(1)),
-+	[RESET_APMU_ESPI_MCLK]          = RESET_DATA(APMU_ESPI_CLK_RES_CTRL,      0,       BIT(0)),
-+	[RESET_APMU_ESPI_SCLK]          = RESET_DATA(APMU_ESPI_CLK_RES_CTRL,      0,       BIT(2)),
-+};
-+
-+static const struct spacemit_reset_data k3_dciu_resets[] = {
-+	[RESET_DCIU_HDMA]	= RESET_DATA(DCIU_DMASYS_RSTN,		0, BIT(0)),
-+	[RESET_DCIU_DMA350]	= RESET_DATA(DCIU_DMASYS_SDMA_RSTN,	0, BIT(0)),
-+	[RESET_DCIU_DMA350_0]	= RESET_DATA(DCIU_DMASYS_S0_RSTN,	0, BIT(0)),
-+	[RESET_DCIU_DMA350_1]	= RESET_DATA(DCIU_DMASYS_S1_RSTN,	0, BIT(0)),
-+	[RESET_DCIU_AXIDMA0]	= RESET_DATA(DCIU_DMASYS_A0_RSTN,	0, BIT(0)),
-+	[RESET_DCIU_AXIDMA1]	= RESET_DATA(DCIU_DMASYS_A1_RSTN,	0, BIT(0)),
-+	[RESET_DCIU_AXIDMA2]	= RESET_DATA(DCIU_DMASYS_A2_RSTN,	0, BIT(0)),
-+	[RESET_DCIU_AXIDMA3]	= RESET_DATA(DCIU_DMASYS_A3_RSTN,	0, BIT(0)),
-+	[RESET_DCIU_AXIDMA4]	= RESET_DATA(DCIU_DMASYS_A4_RSTN,	0, BIT(0)),
-+	[RESET_DCIU_AXIDMA5]	= RESET_DATA(DCIU_DMASYS_A5_RSTN,	0, BIT(0)),
-+	[RESET_DCIU_AXIDMA6]	= RESET_DATA(DCIU_DMASYS_A6_RSTN,	0, BIT(0)),
-+	[RESET_DCIU_AXIDMA7]	= RESET_DATA(DCIU_DMASYS_A7_RSTN,	0, BIT(0)),
-+};
-+
-+U_BOOT_DRIVER(spacemit_k3_reset) = {
-+	.name		= "spacemit_k3_reset",
-+	.id		= UCLASS_RESET,
-+	.ops		= &spacemit_reset_ops,
-+	.probe		= spacemit_reset_probe,
-+	.priv_auto	= sizeof(struct spacemit_reset_priv),
-+	.flags		= DM_FLAG_PRE_RELOC,
-+};
-+
-+int spacemit_k3_reset_bind(struct udevice *parent,
-+			   enum spacemit_k3_reset_syscon syscon)
-+{
-+	const struct spacemit_reset_data *table;
-+	size_t table_size;
-+
-+	switch (syscon) {
-+	case SPACEMIT_K3_RESET_MPMU:
-+		table = k3_mpmu_resets;
-+		table_size = ARRAY_SIZE(k3_mpmu_resets);
-+		break;
-+	case SPACEMIT_K3_RESET_APBC:
-+		table = k3_apbc_resets;
-+		table_size = ARRAY_SIZE(k3_apbc_resets);
-+		break;
-+	case SPACEMIT_K3_RESET_APMU:
-+		table = k3_apmu_resets;
-+		table_size = ARRAY_SIZE(k3_apmu_resets);
-+		break;
-+	case SPACEMIT_K3_RESET_DCIU:
-+		table = k3_dciu_resets;
-+		table_size = ARRAY_SIZE(k3_dciu_resets);
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	return spacemit_reset_bind(parent, "spacemit_k3_reset", table, table_size);
-+}
-diff --git a/include/soc/spacemit/k3-reset.h b/include/soc/spacemit/k3-reset.h
-new file mode 100644
-index 00000000000..e2ae12e2edc
---- /dev/null
-+++ b/include/soc/spacemit/k3-reset.h
-@@ -0,0 +1,21 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * SpacemiT K3 reset driver — header interface.
-+ */
-+
-+#ifndef _SOC_SPACEMIT_K3_RESET_H
-+#define _SOC_SPACEMIT_K3_RESET_H
-+
-+struct udevice;
-+
-+enum spacemit_k3_reset_syscon {
-+	SPACEMIT_K3_RESET_MPMU,
-+	SPACEMIT_K3_RESET_APBC,
-+	SPACEMIT_K3_RESET_APMU,
-+	SPACEMIT_K3_RESET_DCIU,
-+};
-+
-+int spacemit_k3_reset_bind(struct udevice *parent,
-+			   enum spacemit_k3_reset_syscon syscon);
-+
-+#endif /* _SOC_SPACEMIT_K3_RESET_H */
+The hunk you quote is not the one in the patch. As sent it is
 
--- 
-2.55.0
+  @@ -1445,6 +1445,29 @@ static int bootflow_rauc(struct unit_test_state *u=
+ts)
 
+so it does extend bootflow_rauc(), right after the scan and list that
+leave the single rauc bootflow on mmc10 as index 0. The series is based
+on next (base-commit 856a00aeb61 in the cover letter) because it builds
+on the bootflow_rauc() additions from the "Fix crashes and memory leaks
+on scan/boot error paths" series, which is only in next. I think the
+hunk you saw comes from applying the patch to master: patch(1) accepts
+it there with fuzz 2, landing inside bootstd_images(), which matches
+your quote, while git am refuses it.
+
+On the restore: bootflow_rauc() already sets BOOT_ORDER back to "A B"
+(the value distro_rauc_read_bootflow() seeds from
+CONFIG_BOOTMETH_RAUC_BOOT_ORDER) and restores the bootdev order before
+returning, and UTF_DM gives every test a fresh driver-model root, so the
+bootmeth order does not carry over either.
+
+Looking into that last point did turn up a small pre-existing leak: the
+array allocated by bootmeth_set_order() is never freed when the bootstd
+device goes away, since bootstd_remove() frees bootdev_order but not
+bootmeth_order. It affects every test that sets a bootmeth order (three
+in bootflow.c alone) and real teardown too, so it seems better handled
+as a separate one-line fix to bootstd_remove() than folded into this
+series; I can send that patch.
+
+I re-checked both patches on top of current next (951132236b9): they
+apply cleanly and bootflow_rauc passes, so I will hold off on a resend
+unless you or Tom prefer one.
+
+>
+> Regards,
+> Simon
+
+Best regards,
+Aristo
