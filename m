@@ -4,119 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21595C98317
-	for <u-boot@archiver.kernel.org>; Thu, 24 Sep 2026 12:35:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F73FC98317
+	for <u-boot@archiver.kernel.org>; Thu, 24 Sep 2026 12:36:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B008081025;
-	Thu, 24 Sep 2026 12:35:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5CA848193E;
+	Thu, 24 Sep 2026 12:35:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mMmP1FnkKwmX; Thu, 24 Sep 2026 12:35:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org E30AC810D8
+ id nJ5Z2UgJvJ49; Thu, 24 Sep 2026 12:35:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 874A7813AB
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790253354;
-	b=Ox8Nf8a6tGk0k08D8MxGfcQYNcbpXPjnoHwVwfb4TR/80heWwT2gyCHxq9+1LMVOUUPC
-	 MUeznfzs4F6CGbd3X5W/Yl6ONro9k9Of9PBXxEashO9XMoqYh6x8fybZbo1M3fdpV0lZd
-	 ynr4vbfUam+VWTyeJQxCuSxnl7Pg8x8Qirgz8hyrKM6SOv3zGW52yO2uVMHdtKAznVhzi
-	 shbJPNw6pqhEgYJXFVAARP5Cwmclbd21TDqReczqH81wl0oYYxaXKp3RTxTeeisKoIbnw
-	 mS0Ozmf6ex/gxVz44L3ZihJd6ZqFDkTBaF0VR/J9sJgRQn96ELJeLLTP3U4r1AQDoqA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790253357;
+	b=C54Jl7aqQlKSS6YiaoKUzaetxazDEnzq+CAt+Y6VvechQRp5JZ/F0Tpweqx3a/7ugsvf
+	 EHJraUHNqhNCWCiGGHPBraj4evJLZLnN3DWVpAlTa2cbL/LMGz1MWFVoxFdZsl9t3F1K9
+	 9YnqCFv0b6KvpUsuNjsx23/4RTR/KwY+eIwNovJ3WPhuo5cW41N6APkyRFBdS179cq2pL
+	 xhuafQXPMhCdV4ni+GOSDcvCCoGVR8451XsxnfUBph690CaZgC2jhYuZWQPqRoYdea+B5
+	 lkXcFubtL6bilW1+dPt01H5JPDh5l7yqARM3ygtF5VhKAcT2jdNs7bEJUA+nf2rQCsw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790253354;
+	c=relaxed/relaxed; t=1790253357;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 Received:Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-Last-TLS-Session-Version:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=IT7YTFdTspSYEBmsLQj8Q09jCBJ4n+HDKYZE3cUmbmg=;
-	b=YTxuIqj834cCAlDoOSf0uRtoPTFzb5HsA5nu79zLJKjhTW5qbIYi+OAJMvONFYIs/nzu
-	 +01pgBuvd7L7LZhVpsj0CM4uMZEI/UAIuGzTUw3oB2i/zt+UJJ6atXjt6fAe6/r0gG6Qy
-	 JydHKud7mPG1FP1CPomcgDxH+7c0XyDNZcdYdu6Q0Ot6scRMnKgk5Kq0TgAWWu85IziEa
-	 cpllxZnJxNNWMdf6+rJbZKNa9lE7q8N8V4LrYHqjPaaY4t3GIGQLdC69JtUP/XpppvG5Q
-	 zh4Dj0Z+eNKMyi/jv/QIkPUNRn+I8PVPrURccEbL3rUL05U2RZyT1M7vc1mK3I+UoZg==
+	 X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-Last-TLS-Session-Version:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=DPGZBSGlHEEAenBlOv2mF30YbR6il89TJ9Gnaqr9jP8=;
+	b=RrEy4ukaMvziYKBOm0F/GBn+qgXnb7lWoqIVQREbmYAIqroAJElaWU2wZC9gZtGPw8hL
+	 3oXHtU6I52rffwihtOt4sP6Impn1spDQynjcrB3w2Z9HzJ31S+zamKVfuU5dBBa9sRiqy
+	 PH6H3p+7bIwnr0wTuzPNU41m/9Eeb71lUvqoRNM/F4Fpo7GkwuZV7XUE0bDwGaqvUdpa4
+	 tMmAKCY+AcURPvHj3jZtTImm4+JTbRoiD5aoglEcNV7Kesuo18feovGBHp0s9h0NrOCTk
+	 IEABiSYVndnxgwZKXZaekZWRoqH+zp7PnKzxVsFlOvMoExQF42wi/O2KwJ2S6ct6HKQ==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790253354;
-	bh=IT7YTFdTspSYEBmsLQj8Q09jCBJ4n+HDKYZE3cUmbmg=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=mngRLc66xrLDq3r0dpkIsgHDpxL/YrFTkLWMCap9bCttYMHqBvKg6lyS4m8yNl1TY
-	 6cLMInVuIGCC2T+gEugEwWVZXiR+Z0N9V+60IGvZrMNJ3JsCjZ6XLIhiQ9wDaD0ER2
-	 /BsiRVLC22Kpd2O9c3+hEpUKsdVfKWribY1VIxChUl9IImTBu//XNujp2YJJLaV8U5
-	 /jVyy6J7x+uGtgqOebbWnyWg6N9WRiRrSevgPTY05KWjOrcETkmnx24fExW+SyyHSF
-	 cBdNTy93mL517Wf3u9BpPF5DLpTiIAuB65DgWIRC9+A+T2mEvqunIrTISgMO0YVqz+
-	 vvcLf+TfIqRcA==
+	d=lists.u-boot-project.org; s=default; t=1790253357;
+	bh=DPGZBSGlHEEAenBlOv2mF30YbR6il89TJ9Gnaqr9jP8=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=RPwn8irc1OjctB9dKnpa4z+JDckO5N57R726/dhb5dFQoQWbBS9rUMzIWsaPiBueD
+	 oAfDJPd60zL5UYoRicpt+ggVQZR8+JRsaKy4R/UwD1cQA5SfEBIik4f5euP7AXqdWa
+	 OKBDLDiuLslohz2PfwqlLIHRmqUWBaoFobgHsfgLW7zlx/LrFVPVKqajWVvYA/6MLt
+	 9y1cqk5WnWnkbFGUgpUDtwUM6sTyDt7ByXPMYv/xHsJ4zaQpsPmyKjfb2uWfrGVUvJ
+	 lLddXwFq0KcH8IBQYUqYA5eZLO9N3swkKqdU81f5KsnEyS0N/NHhzgLajISOkXMSgv
+	 z3r6Pf9Cc5AuQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E30AC810D8;
-	Thu, 24 Sep 2026 12:35:53 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 7A305392
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:35:52 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 874A7813AB;
+	Thu, 24 Sep 2026 12:35:57 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9B01335A
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:35:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 59F876081B
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:35:52 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8BFFE4074E
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:35:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0dN-9cTB86eZ for <u-boot@lists.u-boot-project.org>;
- Thu, 24 Sep 2026 12:35:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0C38A607E4
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pA4q1vzAtd6y for <u-boot@lists.u-boot-project.org>;
+ Thu, 24 Sep 2026 12:35:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 3F57B406F1
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=185.171.202.116
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790253350;
- b=nUz+N0txyQPE4Qb87PYTsy/1bWLqAreFozSa65xf9Xu0vSMPi7lNfaRtdsCRzKwaBhLq
- bGbkiWZ/LjeO4BsnUV3km4QJjPTFNbLY9mDquf+ySS1WCLIjowwWDZ/aEfU8t3KjUO+TH
- oLLGuxJAmuN6N0YLQg/J2b+eK5nQq72e4ZC2/YCAgsXtU5DJ+j2dgzMDbwg2Q1BJ1MSML
- u+V4whsvJjkndN40BeCl17QbUV8AXFmiQTu2RxJuUvsg8xnwcWZuKyTYuDJfuOwjUr1K0
- i+AvRNL8/Z7H3BUkK6sSrET6F/6FdS2F0byXXtKQlkkMf8nnOd/k8laUeo836SP46Fw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790253354;
+ b=Qq/NlMAwAWlf8fYqszAiai3w8zTBnSDvIVDxbZPva68RAtyRvn2UfxcRtBWjH4dFleym
+ 72yVlp276sPVCw8E5m6JpnpMmhjDtZ1igNsJhttI3aowLtBHBhJ+bhSabd9rUsuKehPp0
+ 5RKwgbDwK6P2lgx7+E7+nbJQtpJrkSS9RfP5EZut71RcUZqD4QpQq8D0g5iJsmavhbhC5
+ 1Z2L9WbnPcTIGSb9cItcasgWdR/aE9elZqkwbF8vZzPW4phJCJ93W5h6rdyW90Rlcv/B8
+ vmbuzJNSrBGbegMLMEMMqlDTvMgEXA32wE17Xb9C1PnDGb03CqY/JIy4/10PzuEYWtg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790253350;
+ c=relaxed/relaxed; t=1790253354;
  h=Received-SPF:Received:Received:Received:DKIM-Signature:From:To:Cc:
- Subject:Date:Message-ID:X-Mailer:MIME-Version:
+ Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-Last-TLS-Session-Version;
- bh=IT7YTFdTspSYEBmsLQj8Q09jCBJ4n+HDKYZE3cUmbmg=;
- b=W4bRwrwEqqY+jPxm04SKJw8Uj4WzRB1X6Ow1r+A6H2n4GC18S2FeOvlBBBCEQVVjUh5/
- RIYsg/sqbId9eAwPO/29AjHrYvx7hcdiXIriCj/XvADf06pAvvlTLQEo+k9qaxg6cJGuy
- o8yFVZSAMz7609R0WEXFXW4BZXVlmzLplN6tYiUSyuCMzbLJ6K15sT6dYwZJSzLJVzyZZ
- kvxa0lwr3fBg3BU3VsQRZawMTx8t5zTB08N7LBgAOrfkQ9BGC5A1LR4jjxBWZgHB4bPcs
- 9NyWWT+5xqAjZfY/T3IX/GBUZzgc/N6AaqqlRxL253r5ffUd8DYnqOS46vGy5RUvzFg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ bh=DPGZBSGlHEEAenBlOv2mF30YbR6il89TJ9Gnaqr9jP8=;
+ b=oZQJpga0l9TbSdzj53+vhbsYH/v8UcIWEVIYGMUwn9rsebOjYcc0xNrxnAx54ZQ7tY5Y
+ SnBeEGm2bnXmgabJ8sgADnvRVm9P32fI87dwL9UWkpXR3F42VaA1nZOqzyFqnY3DFHgQ+
+ iHLTk4raW84BUIrHckl0O823pjNicX2hoW1BgYZ2O5QC6yLe67Wxnf7XttUqsdgeGjWcg
+ ZdLCRycd0PlojLtS57C9YJ9W5iP/0ehwrGWBqSwbAY+Z9ERu4jPysaqijJqw8myzXNr0h
+ 4jRkpcOlojNwPSgw1/GvWBAhjkQVH68a9QWgAjzo/K9kMSdrRDhKEofFsHeoW4Ckycw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=bootlin.com; 
  dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=JqP6xpF4; 
+ header.s=dkim header.b=fbdkB1B0; 
  arc=none smtp.remote-ip=185.171.202.116
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.171.202.116;
  helo=smtpout-04.galae.net; envelope-from=richard.genoud@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=JqP6xpF4
+ header.s=dkim header.b=fbdkB1B0
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0C38A607E4
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:35:48 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3F57B406F1
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:35:53 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id E77A0C211C1;
- Thu, 24 Sep 2026 12:36:32 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 222F9C211C1;
+ Thu, 24 Sep 2026 12:36:39 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 7EFD560341;
- Thu, 24 Sep 2026 12:35:45 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id AC37460341;
+ Thu, 24 Sep 2026 12:35:51 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 02E6210329409; 
- Thu, 24 Sep 2026 14:35:33 +0200 (CEST)
+ with ESMTPSA id C5AB6103284AD; 
+ Thu, 24 Sep 2026 14:35:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1790253339; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=IT7YTFdTspSYEBmsLQj8Q09jCBJ4n+HDKYZE3cUmbmg=;
- b=JqP6xpF42mEuJBwv0YPR6FopzNEg6uNTDqS7HrIWiqhXBHkYtQjM/UCORy4MhVBsDbQguy
- qLFK6gAop6k/KL795zYGmo0XxraflZ7N9JTmAlsZBQXjAHhhjxeOa+9mTZzRZ0dEQSTJ4u
- oiUOEKFmY3C/7jsWw8o7wr/gIpeEkyrpYX2s8xzVveY4lBF+enikEHv1duz0zcsR4e6cUj
- 0Glm6E4QTTqL/uf3AAydk2L37SNWZMVV57SGOt3D2rM0fYSBNhraOrbPfD7Pp2SiVt4Afd
- Y9mk1SmbREO13blod6oIR1BZTFt+vmJpWSIxmm0o7013HTCipk3FIKnhl+WY0A==
+ t=1790253346; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding:in-reply-to:references;
+ bh=DPGZBSGlHEEAenBlOv2mF30YbR6il89TJ9Gnaqr9jP8=;
+ b=fbdkB1B00TwmKuwWyJkqftXoao/biKcbK2nOFNd4bEC/Kf0I1GNJhWB9+aeslqs3vgvPvy
+ gVEqhUD0iDgGMVU3j1qrMZBSq/DiNBjXnGPuG86v8WdV/BWqUEjjb8WotXxcXJuY0ip0Wk
+ LdQh/KmOu1s3fXgG0uWVXUKTN/ssQ0YaAtNB+HQVJcjsf72Pld9G3EWos5nJxpoY8XHtb/
+ yWpM457SwIto4/ng39L8ccRPDPQE7vKoS0gqbjb111bhaXk6qLRDSeaNhTtJVqaWeoEl3U
+ qU0rgjlgpCp40DPFS6RvZ6Pn/GxovHOCocxwbGVAqAy3Kt17OinDg+gEqDVu3g==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  "Andrew F . Davis" <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
@@ -130,10 +132,12 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>,
  u-boot@lists.u-boot-project.org
-Subject: [PATCH v6 00/22] Introduce resume for J7xx SoCs
-Date: Thu, 24 Sep 2026 14:35:11 +0200
-Message-ID: <20260924123533.2599438-1-richard.genoud@bootlin.com>
+Subject: [PATCH v6 01/22] ram: k3-ddrss: Add support for DDR in self-refresh
+Date: Thu, 24 Sep 2026 14:35:12 +0200
+Message-ID: <20260924123533.2599438-2-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260924123533.2599438-1-richard.genoud@bootlin.com>
+References: <20260924123533.2599438-1-richard.genoud@bootlin.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -150,220 +154,337 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This series allows J7200/J721s2/J784s4/J722s to resume from suspend.
+From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
 
-On those SoCs, a magic value is set in a PMIC register by the DM
-firmware just before suspend, then everything but the PMIC and DDR is
-powered off.
-At resume/boot time, the magic value has to be read back by U-Boot SPL in
-order to know if we are indeed in a resume situation.
-That's the purpose of j7xx_board_is_resuming() introduced here.
+In IO+DDR the DDR is kept in self-refresh while the SoC cores are
+powered off completely. During boot the normal initialization routine of
+DDR is slightly different to exit self-refresh and keep the DDR contents.
 
-Then, if the SoC is resuming, the DDR has to be brought out of
-retention, at full speed and get out of low power mode.
-Between those steps, the DDR_RET pin has to be de-asserted. But the
-DDR_RET pins of all DDR chips are tied together on a single GPIO, so
-it's impossible to resume one DDR chip after the other, they must be all
-resumed at once.
-That's why it's orchestrated from board_init_f() and not in the k3ddrss
-driver.
-
-Once the DDR is fully functional, the next steps are:
-- retrieve the LPM memory region from DTS
-- authenticate certificates from LPM memory region and apply firewalls
-- ask TIFS to restore TFA and its own minimal context
-- start TFA on remote proc
-- load and jump to DM
-
-Disclaimer:
----------
-There's a potential attack vector in this sequence, because OPTEE could
-be modified before being reloaded.
-Also, if the certificate replay is skipped, then TFA can be read from
-MSMC.
-
-Patch 1 and 2 are from AM62 LPM series:
-https://lore.kernel.org/u-boot/20260105-topic-am62-ioddr-v2025-04-rc1-v9-0-7e33f2c77dbf@baylibre.com/
-Patch 1 adds support for DDR in self-refresh for am62/j722s
-Patch 2 adds capability to call TI_SCI_MSG_MIN_CONTEXT_RESTORE
-Patches 3-5 add LPM helpers for all SoCs
-Patch 6 adds the resume detection for all SoCs
-Patch 7 adds common code for DDR retention pin
-Patch 8 enables GTC at resume
-Patch 9 detects IO+DDR resume state for j7200/j784s4
-Patch 10 stores the wakeup reason in MCU_PSRAM0_RAM for j7200/j784s4
-Patch 11 sets the PMIC NSLEEP triggers
-Patches 12-14 add the DDR resume sequence for all SoCs
-Patches 15-18 add the resume flow for all SoCs
-Patch 19 updates the pm-cfg and schema to a new version
-Patch 20 removes now unneeded background firewall on DDR for j7200/j784s4
-Patch 21 extends the firewall for ATF region to TIFS
-Patch 22 add the resume flow documentation
-
-Tested on J722s HS-FS, J7200 GP, J784s4 GP, J721s2 GP
-
-https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/pm/lpm.html#tisci-msg-min-context-restore
-
-It needs lpm_memory_regions described in DTS [updated to v4]:
-https://lore.kernel.org/lkml/20260921145325.300025-1-richard.genoud@bootlin.com/T/#t
-
-It also needs a bootph-pre-ram property in PMIC-B for j721s2:
-https://lore.kernel.org/linux-arm-kernel/20260429-k3-j721s2-som-bootph-pre-ram-pmic-4c-v2-1-31a0e7677216@bootlin.com/
-
-Changes from v5:
-- gather {Acked,Reviewed}-bys
-- remove j721e support
-- Check lpm image size retrieved from DTS
-- Fix size when loading optee+certificate
-- Update U-Boot documentation TODO
-- drop resume state from global data since EARLY_BSS is set, using
-  static variable is ok
-- make CONFIG_K3_LPM default n to prevent from breaking configs with older
-  TIFS
-- check lpm_reg_size in extract_lpm_region
-- replay DM certificate with ti_secure_image_auth_apply_fwls()
-- drop special hanling for j722s in j7xx_board_is_resuming by adding
-  another call to ctrl_mmr_unlock()
-- add missing calls to k3_set_lpm_core_* for each soc
-- panic if clearing isolation fails
-- add resume boot flow and disclaimer in uboot docs
-
-Changes from v4:
-- rebase onto v2026.10-rc2
-- add disclaimer in do_resume() for 2 potential attack vectors
-- include needed patches from AM62 LPM series
-- fix minor checkpatch warning (!xxx instead of == NULL)
-
-Changes from v3:
-- rebase on 8d5f30b52f7c ("Merge patch series "env: migrate static flags list to Kconfig"") + AM62 LPM series
-
-Changes from v2:
-- enable GTC counter at resume
-- factorise __weak j7xx_board_is_resuming()
-- reset PMIC NSLEEP triggers register in one place
-- gather Reviewed-by
-- fix comment style in k3-ddrss.c
-- clean and Factorize k3_deassert_ddr_ret()
-- change printf in dev_err in ti_sci_cmd_proc_auth_apply_fwls()
-
-Changes from v1:
-- drop unneeded patch: configs: j784s4_evm_r5: enable TI_SCI_POWER_DOMAIN
-- factorize j7xx_board_is_resuming (that lead to patch renumbering)
-- drop From: field duplication from patch 1
-- use SYS_K3_SCRATCH_LPM_ADDR config option instead of hardcoded value
-- add missing board/ti/j722s/pm-cfg.yaml
-- migrate missing K3 platforms to new pm-boardcfg
-- remove struct lpm_addr_info mem_addr_lpm; (globals are forbidden at this stage)
-- rework ti_secure_image_auth_apply_fwls()
-- Fix pointer arithmetic: mem_addr_lpm->context_save_addr + FW_IMAGE_SIZE
-- Fix K3_LPM_WAKE_SOURCE_PMIC_GPIO value
-- Fix spellings/comments
-
-Abhash Kumar Jha (4):
-  board: mach-k3: r5: common: enable GTC after core_resume
-  board: evm: Enable de-isolation of IOs at resume for j7200 and j784s4
-  board: mach-k3: r5: common: Store wakeup reason on scratchpad memory
-  arm: mach-k3: Update pm-boardcfg for all k3 platforms
-
-Markus Schneider-Pargmann (TI) (2):
-  ram: k3-ddrss: Add support for DDR in self-refresh
-  firmware: ti_sci: Add TI_SCI_MSG_MIN_CONTEXT_RESTORE
-
-Prasanth Babu Mantena (4):
-  firmware: ti_sci: add low power mode operations
-  mach-k3: r5: common: add helper functions needed in LPM resume
-    sequence
-  arm: dts: k3-j7200: Remove background firewall on DDR
-  arm: dts: k3-j7200: Extend firewall for ATF region to TIFS
-
-Richard Genoud (TI) (9):
-  arm: mach-k3: security: introduce ti_secure_skip_cert()
-  mach-k3: r5: common: introduce j7xx_board_is_resuming()
-  mach-k3: r5: common: introduce k3_deassert_ddr_ret()
-  board: mach-k3: r5: common: Set PMIC NSLEEP triggers bits at resume
-  ram: k3-ddrss: Add j722s DDR resume sequence
-  ram: k3-ddrss: support j784s4/j721s2 DDR resume
-  arm: mach-k3: j784s4: Enable LPM resume flow for J784s4/J742s2 SOCs
-  arm: mach-k3: j722s: Enable LPM resume flow
-  doc: board: ti: Add Jacinto resume flow
-
-Thomas Richard (TI) (3):
-  ram: k3-ddrss: Add exit retention support
-  arm: mach-k3: j721e: Enable LPM resume flow for J7200 SOC
-  arm: mach-k3: j721s2: Enable LPM resume flow
-
- arch/arm/dts/k3-binman.dtsi                   |    7 +-
- arch/arm/dts/k3-j7200-binman.dtsi             |    4 +
- arch/arm/dts/k3-j722s-r5-evm.dts              |    4 +
- arch/arm/dts/k3-security.h                    |    1 +
- arch/arm/mach-k3/Kconfig                      |   10 +
- arch/arm/mach-k3/common.c                     |    6 +
- arch/arm/mach-k3/common.h                     |   16 +
- arch/arm/mach-k3/include/mach/hardware.h      |    1 +
- .../arm/mach-k3/include/mach/j721e_hardware.h |   11 +
- .../mach-k3/include/mach/j784s4_hardware.h    |   10 +
- arch/arm/mach-k3/include/mach/k3-ddr.h        |   16 +
- arch/arm/mach-k3/include/mach/security.h      |    2 +
- arch/arm/mach-k3/j721e/j721e_init.c           |   32 +
- arch/arm/mach-k3/j721s2/j721s2_init.c         |   57 +-
- arch/arm/mach-k3/j722s/j722s_init.c           |    8 +
- arch/arm/mach-k3/j784s4/j784s4_init.c         |   52 +-
- arch/arm/mach-k3/lpm-common.h                 |   33 +
- arch/arm/mach-k3/r5/Kconfig                   |    8 +
- arch/arm/mach-k3/r5/Makefile                  |    1 +
- arch/arm/mach-k3/r5/common.c                  |   20 +-
- arch/arm/mach-k3/r5/lpm-common.c              |  444 +++++
- arch/arm/mach-k3/schema.yaml                  |  146 +-
- arch/arm/mach-k3/security.c                   |  108 +-
- board/beagle/beagleboneai64/pm-cfg.yaml       |    5 +-
- board/beagle/beagleplay/pm-cfg.yaml           |    7 +-
- board/beagle/beagley-ai/pm-cfg.yaml           |    7 +-
- board/phytec/phycore_am62ax/pm-cfg.yaml       |    7 +-
- board/phytec/phycore_am62x/pm-cfg.yaml        |    7 +-
- board/phytec/phycore_am64x/pm-cfg.yaml        |    5 +-
- board/phytec/phycore_am68x/pm-cfg.yaml        |    7 +-
- board/ti/am62ax/pm-cfg.yaml                   |    7 +-
- board/ti/am62px/pm-cfg.yaml                   |    7 +-
- board/ti/am62x/pm-cfg.yaml                    |    7 +-
- board/ti/am64x/pm-cfg.yaml                    |    5 +-
- board/ti/am65x/pm-cfg.yaml                    |    7 +-
- board/ti/j7200/pm-cfg.yaml                    |   92 +-
- board/ti/j721e/evm.c                          |   25 +
- board/ti/j721e/pm-cfg.yaml                    |   92 +-
- board/ti/j721s2/pm-cfg.yaml                   |   94 +-
- board/ti/j722s/pm-cfg.yaml                    |   94 +-
- board/ti/j784s4/evm.c                         |   25 +
- board/ti/j784s4/pm-cfg.yaml                   |   94 +-
- board/toradex/aquila-am69/pm-cfg.yaml         |    7 +-
- board/toradex/verdin-am62/pm-cfg.yaml         |    7 +-
- board/toradex/verdin-am62p/pm-cfg.yaml        |    7 +-
- doc/board/ti/img/boot_diagram_k3_current.svg  |  444 ++++-
- doc/board/ti/img/resume_diagram_k3.svg        | 1638 +++++++++++++++++
- doc/board/ti/j7200_evm.rst                    |   14 +
- doc/board/ti/j721s2_evm.rst                   |   14 +
- doc/board/ti/j722s_evm.rst                    |   14 +
- doc/board/ti/j784s4_evm.rst                   |   14 +
- drivers/firmware/ti_sci.c                     |  219 +++
- drivers/firmware/ti_sci.h                     |  108 ++
- drivers/ram/k3-ddrss/Makefile                 |    1 +
- drivers/ram/k3-ddrss/k3-ddrss-lpm.c           |  181 ++
- drivers/ram/k3-ddrss/k3-ddrss-lpm.h           |   20 +
- drivers/ram/k3-ddrss/k3-ddrss.c               |  295 ++-
- drivers/ram/k3-ddrss/lpddr4_k3_reg.h          |   94 +
- drivers/remoteproc/ti_k3_arm64_rproc.c        |   10 +-
- include/linux/soc/ti/ti_sci_protocol.h        |   17 +
- tools/binman/etype/ti_board_config.py         |    4 +-
- 61 files changed, 4501 insertions(+), 198 deletions(-)
- create mode 100644 arch/arm/mach-k3/lpm-common.h
- create mode 100644 arch/arm/mach-k3/r5/lpm-common.c
- create mode 100644 doc/board/ti/img/resume_diagram_k3.svg
+Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
+---
+ drivers/ram/k3-ddrss/Makefile       |   1 +
+ drivers/ram/k3-ddrss/k3-ddrss-lpm.c | 181 ++++++++++++++++++++++++++++
+ drivers/ram/k3-ddrss/k3-ddrss-lpm.h |  20 +++
+ drivers/ram/k3-ddrss/k3-ddrss.c     |  26 +++-
+ 4 files changed, 227 insertions(+), 1 deletion(-)
  create mode 100644 drivers/ram/k3-ddrss/k3-ddrss-lpm.c
  create mode 100644 drivers/ram/k3-ddrss/k3-ddrss-lpm.h
- create mode 100644 drivers/ram/k3-ddrss/lpddr4_k3_reg.h
 
-
-base-commit: 36c377b9859ffb53eb1e39ea31e8d96d1e0fe1e5
-prerequisite-patch-id: 0000000000000000000000000000000000000000
+diff --git a/drivers/ram/k3-ddrss/Makefile b/drivers/ram/k3-ddrss/Makefile
+index bb7dc05e3d99..a125675a2931 100644
+--- a/drivers/ram/k3-ddrss/Makefile
++++ b/drivers/ram/k3-ddrss/Makefile
+@@ -4,6 +4,7 @@
+ #
+ 
+ obj-$(CONFIG_K3_DDRSS) += k3-ddrss.o
++obj-$(CONFIG_K3_DDRSS) += k3-ddrss-lpm.o
+ obj-$(CONFIG_K3_DDRSS) += lpddr4_obj_if.o
+ obj-$(CONFIG_K3_DDRSS) += lpddr4.o
+ ccflags-$(CONFIG_K3_DDRSS) += -I$(srctree)/drivers/ram/k3-ddrss/
+diff --git a/drivers/ram/k3-ddrss/k3-ddrss-lpm.c b/drivers/ram/k3-ddrss/k3-ddrss-lpm.c
+new file mode 100644
+index 000000000000..20181d0a876d
+--- /dev/null
++++ b/drivers/ram/k3-ddrss/k3-ddrss-lpm.c
+@@ -0,0 +1,181 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * K3 DDRSS LPM specific functions
++ *
++ * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2025 BayLibre, SAS
++ */
++
++#include <asm/io.h>
++#include <linux/compiler_types.h>
++#include <linux/types.h>
++#include <time.h>
++#include <vsprintf.h>
++#include <wait_bit.h>
++
++#include "k3-ddrss-lpm.h"
++
++#define AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL				0x430080d0
++#define AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD		BIT(31)
++#define AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RETENTION_MASK	GENMASK(3, 0)
++
++#define AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_STAT1				0x4301830c
++#define AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE		BIT(0)
++
++#define AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT			0x43018318
++#define AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW		0x555555
++
++#define K3_DDRSS_CFG_DENALI_CTL_20				0x0050
++#define K3_DDRSS_CFG_DENALI_CTL_20_PHY_INDEP_TRAIN_MODE		BIT(24)
++#define K3_DDRSS_CFG_DENALI_CTL_21				0x0054
++#define K3_DDRSS_CFG_DENALI_CTL_21_PHY_INDEP_INIT_MODE		BIT(8)
++#define K3_DDRSS_CFG_DENALI_CTL_106				0x01a8
++#define K3_DDRSS_CFG_DENALI_CTL_106_PWRUP_SREFRESH_EXIT		BIT(16)
++#define K3_DDRSS_CFG_DENALI_CTL_160				0x0280
++#define K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_MASK			GENMASK(14, 8)
++#define K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_ENTRY		BIT(9)
++#define K3_DDRSS_CFG_DENALI_CTL_169				0x02a4
++#define K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_EXIT_EN_MASK	GENMASK(27, 24)
++#define K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_ENTRY_EN_MASK	GENMASK(19, 16)
++#define K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK		GENMASK(14, 8)
++#define K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_SHIFT		8
++#define K3_DDRSS_CFG_DENALI_CTL_345				0x0564
++#define K3_DDRSS_CFG_DENALI_CTL_345_INT_STATUS_LOWPOWER_SHIFT	16
++#define K3_DDRSS_CFG_DENALI_CTL_353				0x0584
++#define K3_DDRSS_CFG_DENALI_CTL_353_INT_ACK_LOWPOWER_SHIFT	16
++#define K3_DDRSS_CFG_DENALI_PI_6				0x2018
++#define K3_DDRSS_CFG_DENALI_PI_6_PI_DFI_PHYMSTR_STATE_SEL_R	BIT(8)
++#define K3_DDRSS_CFG_DENALI_PI_146				0x2248
++#define K3_DDRSS_CFG_DENALI_PI_150				0x2258
++#define K3_DDRSS_CFG_DENALI_PI_150_PI_DRAM_INIT_EN		BIT(8)
++#define K3_DDRSS_CFG_DENALI_PHY_1820				0x5C70
++#define K3_DDRSS_CFG_DENALI_PHY_1820_SET_DFI_INPUT_2_SHIFT	16
++
++#define AM62XX_WKUP_CTRL_DDRSS_RETENTION_TIMEOUT_MS	5000
++#define K3_DDRSS_LPM_TIMEOUT_MS				5000
++
++static void k3_ddrss_reg_update_bits(void __iomem *addr, u32 offset, u32 mask, u32 set)
++{
++	u32 val = readl(addr + offset);
++
++	val &= ~mask;
++	val |= set;
++	writel(val, addr + offset);
++}
++
++void k3_ddrss_self_refresh_exit(void __iomem *ddrss_ctl_cfg)
++{
++	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
++				 K3_DDRSS_CFG_DENALI_CTL_169,
++				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_EXIT_EN_MASK |
++				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_ENTRY_EN_MASK,
++				 0x0);
++	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
++				 K3_DDRSS_CFG_DENALI_PHY_1820,
++				 0,
++				 BIT(2) << K3_DDRSS_CFG_DENALI_PHY_1820_SET_DFI_INPUT_2_SHIFT);
++	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
++				 K3_DDRSS_CFG_DENALI_CTL_106,
++				 0,
++				 K3_DDRSS_CFG_DENALI_CTL_106_PWRUP_SREFRESH_EXIT);
++	writel(0, ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_PI_146);
++	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
++				 K3_DDRSS_CFG_DENALI_PI_150,
++				 K3_DDRSS_CFG_DENALI_PI_150_PI_DRAM_INIT_EN,
++				 0x0);
++	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
++				 K3_DDRSS_CFG_DENALI_PI_6,
++				 0,
++				 K3_DDRSS_CFG_DENALI_PI_6_PI_DFI_PHYMSTR_STATE_SEL_R);
++	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
++				 K3_DDRSS_CFG_DENALI_CTL_21,
++				 K3_DDRSS_CFG_DENALI_CTL_21_PHY_INDEP_INIT_MODE,
++				 0);
++	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
++				 K3_DDRSS_CFG_DENALI_CTL_20,
++				 0,
++				 K3_DDRSS_CFG_DENALI_CTL_20_PHY_INDEP_TRAIN_MODE);
++}
++
++void k3_ddrss_lpm_resume(void __iomem *ddrss_ctl_cfg)
++{
++	int ret;
++	unsigned long timeout_start;
++
++	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
++				 K3_DDRSS_CFG_DENALI_CTL_160,
++				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_MASK,
++				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_ENTRY);
++	ret = wait_for_bit_32(ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_345,
++			      (1 << K3_DDRSS_CFG_DENALI_CTL_345_INT_STATUS_LOWPOWER_SHIFT),
++			      true, 5000, false);
++	if (ret)
++		panic("Failed waiting for low power command %d\n", ret);
++
++	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
++				 K3_DDRSS_CFG_DENALI_CTL_353,
++				 0,
++				 1 << K3_DDRSS_CFG_DENALI_CTL_353_INT_ACK_LOWPOWER_SHIFT);
++
++	timeout_start = get_timer(0);
++	while (1) {
++		if (get_timer(timeout_start) > K3_DDRSS_LPM_TIMEOUT_MS)
++			panic("Failed waiting for low power state\n");
++
++		if ((readl(ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_169) &
++		     K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK) ==
++		    0x40 << K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_SHIFT)
++			break;
++	}
++}
++
++void am62xx_ddrss_deassert_retention(void)
++{
++	int ret;
++
++	k3_ddrss_reg_update_bits((void *)AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
++				 0x0,
++				 AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD |
++				 AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RETENTION_MASK,
++				 0);
++	k3_ddrss_reg_update_bits((void *)AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
++				 0x0,
++				 AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
++				 AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD);
++
++	ret = wait_for_bit_32((void *)AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
++			      AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
++			      true, AM62XX_WKUP_CTRL_DDRSS_RETENTION_TIMEOUT_MS, false);
++	if (ret)
++		panic("Failed waiting for latching of retention %d\n", ret);
++
++	k3_ddrss_reg_update_bits((void *)AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
++				 0x0,
++				 AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
++				 0);
++}
++
++static bool am62xx_wkup_conf_canuart_wakeup_active(void)
++{
++	u32 active;
++
++	active = readl((void *)AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_STAT1);
++
++	return !!(active & AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE);
++}
++
++static bool am62xx_wkup_conf_canuart_magic_word_set(void)
++{
++	u32 magic_word;
++
++	magic_word = readl((void *)AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT);
++
++	return magic_word == AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW;
++}
++
++bool am62xx_wkup_conf_boot_is_resume(void)
++{
++	return IS_ENABLED(CONFIG_K3_IODDR) &&
++		am62xx_wkup_conf_canuart_wakeup_active() &&
++		am62xx_wkup_conf_canuart_magic_word_set();
++}
+diff --git a/drivers/ram/k3-ddrss/k3-ddrss-lpm.h b/drivers/ram/k3-ddrss/k3-ddrss-lpm.h
+new file mode 100644
+index 000000000000..742d224327e4
+--- /dev/null
++++ b/drivers/ram/k3-ddrss/k3-ddrss-lpm.h
+@@ -0,0 +1,20 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * K3 DDRSS LPM specific functions
++ *
++ * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2025 BayLibre, SAS
++ */
++
++#ifndef _K3_DDRSS_LPM_H_
++#define _K3_DDRSS_LPM_H_
++
++#include <linux/compiler_types.h>
++#include <linux/types.h>
++
++void k3_ddrss_self_refresh_exit(void __iomem *ddrss_ctl_cfg);
++void k3_ddrss_lpm_resume(void __iomem *ddrss_ctl_cfg);
++void am62xx_ddrss_deassert_retention(void);
++bool am62xx_wkup_conf_boot_is_resume(void);
++
++#endif  /* _K3_DDRSS_LPM_H_ */
+diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
+index c406998b20aa..54e191df8de9 100644
+--- a/drivers/ram/k3-ddrss/k3-ddrss.c
++++ b/drivers/ram/k3-ddrss/k3-ddrss.c
+@@ -20,6 +20,7 @@
+ #include <wait_bit.h>
+ #include <power/regulator.h>
+ 
++#include "k3-ddrss-lpm.h"
+ #include "lpddr4_obj_if.h"
+ #include "lpddr4_if.h"
+ #include "lpddr4_structs_if.h"
+@@ -119,6 +120,8 @@ enum intrlv_size {
+ 
+ struct k3_ddrss_data {
+ 	u32 flags;
++	bool (*is_lpm_resume)(void);
++	void (*ddrss_deassert_retention)(void);
+ };
+ 
+ enum ecc_enable {
+@@ -866,6 +869,7 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
+ 
+ static int k3_ddrss_probe(struct udevice *dev)
+ {
++	struct k3_ddrss_data *ddrss_data = (struct k3_ddrss_data *)dev_get_driver_data(dev);
+ 	u64 end, bank0, bank1, bank0_size;
+ 	int ret;
+ 	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
+@@ -873,6 +877,7 @@ static int k3_ddrss_probe(struct udevice *dev)
+ 	__maybe_unused u32 inst;
+ 	__maybe_unused struct k3_ddrss_ecc_region *range = ddrss->ecc_ranges;
+ 	__maybe_unused struct k3_msmc *msmc_parent = NULL;
++	bool is_lpm_resume;
+ 
+ 	debug("%s(dev=%p)\n", __func__, dev);
+ 
+@@ -880,6 +885,10 @@ static int k3_ddrss_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
++	is_lpm_resume = ddrss_data->is_lpm_resume && ddrss_data->is_lpm_resume();
++	if (is_lpm_resume)
++		dev_info(dev, "Detected IO+DDR resume\n");
++
+ 	ddrss->dev = dev;
+ 	ret = k3_ddrss_power_on(ddrss);
+ 	if (ret)
+@@ -895,12 +904,21 @@ static int k3_ddrss_probe(struct udevice *dev)
+ 	k3_lpddr4_init(ddrss);
+ 	k3_lpddr4_hardware_reg_init(ddrss);
+ 
++	if (is_lpm_resume)
++		k3_ddrss_self_refresh_exit(ddrss->ddrss_ctl_cfg);
++
+ 	ret = k3_ddrss_init_freq(ddrss);
+ 	if (ret)
+ 		return ret;
+ 
++	if (is_lpm_resume && ddrss_data->ddrss_deassert_retention)
++		ddrss_data->ddrss_deassert_retention();
++
+ 	k3_lpddr4_start(ddrss);
+ 
++	if (is_lpm_resume)
++		k3_ddrss_lpm_resume(ddrss->ddrss_ctl_cfg);
++
+ 	if (IS_ENABLED(CONFIG_K3_INLINE_ECC)) {
+ 		if (!ddrss->ddrss_ss_cfg) {
+ 			printf("%s: ss_cfg is required if ecc is enabled but not provided.",
+@@ -1019,12 +1037,18 @@ static const struct k3_ddrss_data k3_data = {
+ 	.flags = SINGLE_DDR_SUBSYSTEM,
+ };
+ 
++static const struct k3_ddrss_data am62xx_data = {
++	.flags = SINGLE_DDR_SUBSYSTEM,
++	.is_lpm_resume = am62xx_wkup_conf_boot_is_resume,
++	.ddrss_deassert_retention = am62xx_ddrss_deassert_retention,
++};
++
+ static const struct k3_ddrss_data j721s2_data = {
+ 	.flags = MULTI_DDR_SUBSYSTEM,
+ };
+ 
+ static const struct udevice_id k3_ddrss_ids[] = {
+-	{.compatible = "ti,am62a-ddrss", .data = (ulong)&k3_data, },
++	{.compatible = "ti,am62a-ddrss", .data = (ulong)&am62xx_data, },
+ 	{.compatible = "ti,am64-ddrss", .data = (ulong)&k3_data, },
+ 	{.compatible = "ti,j721e-ddrss", .data = (ulong)&k3_data, },
+ 	{.compatible = "ti,j721s2-ddrss", .data = (ulong)&j721s2_data, },
 -- 
 2.55.0
 
