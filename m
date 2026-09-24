@@ -1,173 +1,181 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 960DAC98317
-	for <u-boot@archiver.kernel.org>; Thu, 24 Sep 2026 11:48:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F71C9830E
+	for <u-boot@archiver.kernel.org>; Thu, 24 Sep 2026 12:02:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 484CE60BAB;
-	Thu, 24 Sep 2026 11:48:23 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3655481BA8;
+	Thu, 24 Sep 2026 12:02:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UW9ZkfNrtaul; Thu, 24 Sep 2026 11:48:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 6521D60B73
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790250502;
-	b=E68/YpjQsvCWPUCvagXOOYFk0Ine4gxJaL6uDdDBWNMfMi3z9QK8YG1n7msYvYVUSHfT
-	 fBOMdq9Mg+gV1C7NjR3Ov1HRfZoRXWHv7fm12Q1ln1HjInZdoDvx4SkCRmSmDz1M63Ns1
-	 zJyA1lbuIE0r19dUHEjXaNKB8PVzOVwVgK+sEo6UHcQfraVB9ZuQQrIBG0W7DYjKFzCF/
-	 e6QiXm4mWtDegO3Sn0MHibGx2710xuWzEGGQUWK7dJ0Ao4eZb6jNxZP/yd4BX4ECU4pEB
-	 2PJeN0t6UUcZMfqvEjm+4Ul9/JO3a/R9G5l9QD+hHeAvgD9hWRj8zVazx+uJCeCPzcw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wJBMeWc7X6jq; Thu, 24 Sep 2026 12:02:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 2880481916
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790251374;
+	b=aoyl/Irt+yKNcTgWpZk38kIlyYQndjNU4MNyl4Vao+P2IpF45laAGCJwS8UtcaU4wUJi
+	 G5V6hh+8YmL2Fijuwy7569cinWf47DH2K/4T7AqpHIKq3Xi3a8HUc4xsbBWg3nLQ2BjzU
+	 cGnd181Wum0iq9yAltLe/Cb7i7JT1WD5dbiAx++elTuMh/OaCPY+elXy6yopegcu/hiPd
+	 g2SBPK2oBJwg/MTKS7ayaZemmXTN6d/50acW2MGnN94zFxxRIrqOoJcGbMwu+CkenEio+
+	 QE1t0Ulg9XlitNh8+8AeVX/s3rOc8VM2aO9HjW0bUmA+yJ+PmcbHDA6C4WNeN1kPF9Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790250502;
+	c=relaxed/relaxed; t=1790251374;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:References:Content-Language:From:
-	 In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=h/I5KlOTnG4QXX5YzH77COh4IFWM9lzgAXuiz3+mZbw=;
-	b=g/QcsklsjuTiclni+NstqjTPq8r3taa1bc73H3AXjg61BVGrO8X3Y2sTiGnq1QOiSuww
-	 stQ76aBv9+8EDiJAda6EeAVcRF4XN8zxQGa++FVMrCyiaKOZIxU91LTBXLTB6B3RZEHW7
-	 nA0QRU/TyeRFwcrXWqW0DBPRLqQ2hHYygzs+q81TlCF+Lp8PgVtUiyBd7rSYPa9BjOakr
-	 +rC8G4KAU7/hzUMGXVzevtl9LvIAPifPL9mlWeQdYMZNqDHAYQaaP3eJnpnWecJs8FwZr
-	 AeW4SX1OokN8GeY8kO/bLwnqMUvdU/sE3SA57Jc1iu4e/y2G7gxL/4EPkJgakuadgCw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=IGkO8y97O98E1WAmhwm4a3OabdiVbk9I7mymNOwDC2Q=;
+	b=Fl0Lks0vpTBV8zkaf9tmvHFFA4895yiyDeHPekgvgLdO5lrhYIiAXfgroABtpTiExvyt
+	 JPR+JlerOKWk6DNHFX6YOhc8Ppqr4yzRGbruwF+X6YbzEwJCyo4me1MhDhwP4+eenjPkQ
+	 VutEwJmrneHtcMrsYxjGZBiBX831jihSzCKNnrEc22PkCX+UlV9wd7pPZKAbx5+93Vkai
+	 9SeSevZuHZ/+d68lnoXe1U5qJ4vlbwF9fTzQRWnRGi7QbApY0q4XEoHV+hR4wA2gfoA3c
+	 owhtBiQ6qGzoPxGkaC7q2/0+i+MgsR0vb/OItJrQwixvDaSYkjMRCu3y5MeOWQsWfcg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790250502;
-	bh=h/I5KlOTnG4QXX5YzH77COh4IFWM9lzgAXuiz3+mZbw=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790251374;
+	bh=IGkO8y97O98E1WAmhwm4a3OabdiVbk9I7mymNOwDC2Q=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mbFnOo0B/jzSXdXQKrzEQO/kzNOM7GpJZGJRec3Bw9KnwGDdJ437tFnxqOAXaqyKF
-	 Da9KVgwyriLw5M+4VXyhm7kfwHDSk9hkgVU8hWwd7rA4hSYkhMOGTzSxeQF0LaaxxD
-	 We9oShfeAJuXnWELMAF10apnZWn9rjnJiBo9ygOzw/LkrhLolBSHWtUuorNGpw0hx5
-	 ijjz+zg52ZWrreg8r5qEKTPaJtBO7njC3QgWOGqDU0fiIb3CkQUQ1EYrcBnRLIzxjr
-	 qB8BoihqfIM1rZWJy84fwfGfANoWGX2q/m2gtIG1i/sqOBcWLN9Z43mimbe+ufHhWg
-	 5sh0CW6rRvL5w==
+	b=HY+//wwotIs7LRwPsYCfTZLEnIF3D/eamJA4YwK/T+ac1bre4SojTpYpesB6jm2cy
+	 a7Hin3+ga/agUgW7eV8KRBZvAkjupy2dkw2TwPod6GjTSfTDB19133S8fUIneJJjQm
+	 hMDiqiXiIicTk/t32vFw6YmTy6IdbDB7NIcN8fFf4IiX9hp598lz8tIx4yHunOJmT0
+	 fFgWdWIMbAPuaIIXjVtrppp0D0i9hxNDul06XEIoEGj/1/bokYQlNYO5sHx0+f29Cv
+	 McUt6MnvTV+PoEyQ1/P+fj3PFjaXieX7qO2cmB8Mm6zHb6fvIJ1O2uwLQU4gJ3pk23
+	 frNduGUM2A7sQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6521D60B73;
-	Thu, 24 Sep 2026 11:48:22 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0B3B735A
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 11:48:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2880481916;
+	Thu, 24 Sep 2026 12:02:54 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6E85B2F5
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:02:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id EDA62818A1
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 11:48:20 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 57FA440456
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:02:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sDUw7kGEJ3Mn for <u-boot@lists.u-boot-project.org>;
- Thu, 24 Sep 2026 11:48:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org CDC11818C9
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790250500;
- b=IFar2x8POn5Uzm2IFtupVT8N+kvyS18laqXAywLolKeJwD8Xx1fr4yAQnxgU49QOg/Y7
- s/VBC9UfDYpEUpAdE2rm1DoTq3QKPuRpdJ9SvPJp9q8qiH96Gca5BlQWgJvT5Gv1j8+HM
- lS/Kr9NFMye8sMU5OFDWfPLL6EJOplmEgaeq9UNSrmzlCQaFlPJUnQi1R0bCyZbCxeHwT
- /Il+uFuWFxyHWCITrHS6G9VvIpidLDsy6k3EpHxufnEbnG2xlLr/RYkPnoWIeEbpeOKCe
- 4KcU6Kpq3zGOP4n7kV7kfu2NJRA4n4nLQwAhiozyoKYUOeuOrHncui81KNqYIs68bug==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ORhUWa5fGjsb for <u-boot@lists.u-boot-project.org>;
+ Thu, 24 Sep 2026 12:02:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 1F0FD40390
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:30::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790251371;
+ b=a7i9eQkcUwGve/1da3qPYzYkcyL9Shs0cwU4/f/w5+GCWLubW8RNX/qsStd6cnSetKG4
+ 71yEmjgtJ0fBIsLbbhBvJ/0WuGTQmGeM2am4qIBKYWDoi7dqQqIlXHHYOtQdbnqeKupAK
+ f3pF3bzkWJzUXInrTIgirbtIY3bW2Cde+3WxY1r0oePuAoT1VClLBUoeRBZ7VmuqveBGW
+ R13J4lJlnvcvbiHYNtcTD54U6o+zz2pvuWa8THShyqM3U4K+JAq8QZFgP7v1s/6Xt4YIA
+ iNSYoCdiM41mvuudKLuO2zVbBlNe3B8+LCUC8oMYRgTT11uyUHsVluQHHjMzfoA5Ysg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790250500;
+ c=relaxed/relaxed; t=1790251371;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Message-ID:Date:MIME-Version:User-Agent:Subject:To:References:
+ Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
  Content-Language:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding;
- bh=h/I5KlOTnG4QXX5YzH77COh4IFWM9lzgAXuiz3+mZbw=;
- b=GDVP0ab2Cm4YCsdOtiFtTuh+rUNz8xGh4+oDxzDcfVVRUSa7Y/SrXU07NJPOLzf2J2QN
- i4lknwEOFgxHZDrGCmIaZ+k0oUdLGuxc+Dh39w8bCe339b5bAeqK+ENz8OAJIjvoWHBMG
- CkHMm+5QRohy5Zq2sn/wKr3+O49xpNvb2CbZtIFiOuLqTmISaVfxWC3/53/iCGO2djS0i
- 4dipx3fVquxkR7Fb9o1cEpGEeE7aYVPjnC2TISyFBa8SX017OSjmVanUJ9DNC/NR+5+5V
- aSIuWPPuaZ1hNIPG9jJYdKrrAR1oyVvFZ9GIAnCpJ1UTkpSn86Y++N3MSv2CzXhstsw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=IGkO8y97O98E1WAmhwm4a3OabdiVbk9I7mymNOwDC2Q=;
+ b=N8uGM9lmiCxML+MLYDiDrBbpXvLui5AKqYeuGjFbVBy1nkdTB4mqTirEP1mdL8ApT7Qh
+ I5VIE0TOBHX7/lhOOZk1nlgfFuoL1pvFi7dAIZXmVtsxbhD3eXd0mJoa42qPhxHMLBATR
+ uHxfO8zeCZOspwpx4wVFg95z9pfiBqVwFG/4Q5V6d/T1l5y60l/bj11L5uJ48W4+ayc+u
+ a25JUbVckoGQI6dGAwfC9Bz5KExi3yPO8Z8rG7UbevbBUxKV19y7LPDJHmpycAZSIPDoi
+ 3/srF4n0pTfI0xbU3zUjArbKdRXe5u+FnX+0+QXQk0lGIAJw1XRNi6id14NlIWkmwxQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=linaro.org; 
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=WOM7eopW; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
+ header.s=google header.b=FSsKZ0Mq; 
+ arc=none smtp.remote-ip="2a00:1450:4864:30::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::11; helo=mail-wm2-x11.google.com;
+ client-ip=2a00:1450:4864:30::10; helo=mail-wr2-x10.google.com;
  envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=WOM7eopW
-Received: from mail-wm2-x11.google.com (mail-wm2-x11.google.com
- [IPv6:2a00:1450:4864:31::11])
- by smtp1.osuosl.org (Postfix) with ESMTPS id CDC11818C9
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 11:48:19 +0000 (UTC)
-Received: by mail-wm2-x11.google.com with SMTP id
- 5b1f17b1804b1-49e7bcb94d3so13720015e9.2
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 04:48:19 -0700 (PDT)
+ header.s=google header.b=FSsKZ0Mq
+Received: from mail-wr2-x10.google.com (mail-wr2-x10.google.com
+ [IPv6:2a00:1450:4864:30::10])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1F0FD40390
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:02:50 +0000 (UTC)
+Received: by mail-wr2-x10.google.com with SMTP id
+ ffacd0b85a97d-485b1d2874fso773984f8f.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 05:02:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1790250497; x=1790855297;
+ d=linaro.org; s=google; t=1790251368; x=1790856168;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=h/I5KlOTnG4QXX5YzH77COh4IFWM9lzgAXuiz3+mZbw=;
- b=WOM7eopW1UvCL65kLHyQqALL9MsiZLXph+SAMzX/o3zQI0LT64pxHVC255cV9a9qMd
- 7TwOSCzPxHEhCzgTbwx6F2ZDb+qBQQXjO2b/tS7lRmnhK2ShUOw6GIg5py7ZszjXjZON
- mQ5Y28chVNc2n+jtz60nupwBe2SqcjhZ2jmrDvY7awJORkl+m+mBpJcT8sJDfm1UdBmn
- PPEnwVogz6w+19J87A+AbqpON1GrSHhFv1Xs4zbTi56vOoWRDRUdtRs8sYYC9np1BwCJ
- EcelcdCd/VetTEb9AiO44BVkAnU/NzVRbxxabLTWDoIqjnZXwTSboQK2BB60WsfDDNFE
- w9KA==
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=IGkO8y97O98E1WAmhwm4a3OabdiVbk9I7mymNOwDC2Q=;
+ b=FSsKZ0MqckLwyo9UNalOCOPZ6rvhSxeL3E+qpeewqj3fnoibDtVLxtp1WC4jZy5JXc
+ fYag+SA+A7myfSfVWIamMmodlx/nIItGjcxpaxoIZSyIs0hjCjukG1kA1wEOBTNd34KY
+ 8sho0v+InyJ5xBYzxdc19nyHZ6sTDk5C/Z2Q9R0D7gKwWpL5LgMy9MiQict5Qlz2f+QP
+ S1UrbjqJ6pbUo6Pc61R3fwBraG0ctSHTCi6uR/nOJqUM3zFMWOaIXkuRgSqo6eeIKr7V
+ m757ENMPJthwQRn8U/8TLgcI2roSH3BkwtpU68jc0FlhVdOh5gM25t8tou8gg4snBAq2
+ q29w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790250497; x=1790855297;
+ d=1e100.net; s=20260707; t=1790251368; x=1790856168;
  h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=h/I5KlOTnG4QXX5YzH77COh4IFWM9lzgAXuiz3+mZbw=;
- b=z5u8enx3/ihE4bqHTvYdP5j+qQ8bbgeMjUl3W1wT80Myj1oF3BWg3lueXsy7rW+aSW
- D8XrDimbSaLODFxTruIFloCqFz1JtAaFDiKytj1YJ2VBi+HaP+/rNgfr/hfuqi7wm4g5
- ivxU0LMZzkmFBl9PMYMzwRt+9YiEPxKHOt9BNZXQGOgzdVN9+3h30eP+vW+ZsuoJDBNq
- aKPJJHYrzHQjpM7ibqclvtN51qXaWS4j412GX051uHkeWJfVeYhvtwtbh/9W+1aM8xPP
- J7Onfw24J2Dp+zY6jWC8tLq4DbI2wGn12lCtwcFytUSgGS2LzSE+WtYF6WRX2e9AbwBC
- njpA==
+ bh=IGkO8y97O98E1WAmhwm4a3OabdiVbk9I7mymNOwDC2Q=;
+ b=a7/rm5hfZ4B32ghgW6YSeY8SvO0m6WicWylubB9ZXslp43RjWb3pxqUtxxu+sIZyqy
+ Wf6upgmQeacmR1BnAe66svKH3yJpfqCnc+KGDQPkX0ibGhvzkSlXG2r//joHoy4Bri2P
+ wBS2jVIxHK3FEOFKivW5zKaUG+mx5pvAtt/Npp2Htd4RJLilIVghUr7witBEPAS13XUd
+ 8HEsJd46B/kd0JimbCkXfAverGSBQG9mJksG8dOk8a5jVTmL7PblF8ROfkSO3316Dize
+ nM4rlmiTx7r+yA6QlpRddaJtl40d6UBqtP2vj1GNhyRwPhIpt3atSVNZKkoz+MkD2ZEo
+ Opmw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy0C9QaUJ74Nuo6sB5jTspRo/QtBBEncPhM77CMBbIjQ1mibd3cp/dASTvfMnrC1YRx73oYvvc=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kzq/cbVqDuVfIxhhBj+5+0sfU3e3CcNMCypf9U0CqtYI0LHJ7X
- bpkJi+0Pc6PweF64AVFWaRHsbXZ3eyK0hAQKbTMt199SY4D7qJkobBDeMBqrL6Fk6YU=
-X-Gm-Gg: AYBFou0pG/hLNBs8ry9v5LFhW4e6XQKrogTeIjF2v4QopXln9uI77N6jvfYHaujyCHN
- enf6TVklzlFNU2/wGM5KqxsnIZBeHRfKYlEEoyu/7925ydjL7wWuvuz5721fpD+ZfnwyNgpsCXR
- SmbLvDMwDrzPwmJkIwpvcJtvMkTKSEJsw74pDL5IvBEXm7Ytd6Lg0pVKj3+uu/pruaJTpBqFR77
- 4/pBH7QWtWAegR3Lx2aPqmVkWhQqRFFizOKsfsuhcnteaApTCunGaYSNwZSTOZyy7a/DijHPV2O
- 3BBjGs7dIpz3TD/cBVo1SH6LpOcPv48C8guKLK+8/L/5k4IuIHB5vHB8Q/TRCpJr2Pho0VHEXen
- ewLoXfNsYY1JbSWMK7hXSIFbD5dekobokNPHgqwyajZA6xdXWwGs4GOK3eoZPwuhITgDfwBGiRu
- H+yMO+D3/qJZA9WXx38QUYk2i9tuS56alB3Y0kLX0K0xxZ/Yo+I+XlqKxZSVx3qTfhSRswpCw5o
- dT+k+R3siM=
-X-Received: by 2002:a05:600c:1c0b:b0:49c:fc6e:8cb4 with SMTP id
- 5b1f17b1804b1-49fe66dfe1amr47005855e9.24.1790250497243; 
- Thu, 24 Sep 2026 04:48:17 -0700 (PDT)
+ AKwUvBzSmp2veTWkGq4XdUFep4dAqvxeQ0LWpWqPTCwPy+RSb+jcgcjeiGp9Z8FSc18iNvPOXTAwwKQ=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lfEbiFEmoCr/7W8GV5HxqQH/Yz1qsCe+6ow09kx1MVR6YEfLUX
+ S6+KeSRyOr1H441HVA2goVYqygChYh3ZUmy8+LzXHnEcguyoaOfsOX/rddCtT1ZwkLY=
+X-Gm-Gg: AYBFou19bAqsfY8hwpTEKf8J8Qek9/Sy+73GWDy1d+fNLaftsHcawSWjvuof2pOK6C2
+ Mz+sLppw/mKg24hFNEpPjVuvgaMIu/OgDb94BZ95H6dhho4OmT6ZXunIkQ/H+UwRwJL9cLWYOHN
+ Wm0DghVzWfOAApslPcafk8AI2VVDwmfK4YoII9M45P/cKcFTpGfG9gUDA/U5wxnVqtVtPeoHzmb
+ MlNPmwLjqXQz9509iillKtG2t1iOV5HoM/PoOJH1uufNU16Fi5yQ6e+JTlExC7aMLcY5AmCKzUE
+ shEMIWEzTQ20ZKjZ7Ilp48pvCCg3TYLW3xlbMWYlx3ZHqxOBcjHo7B5tNFY3LEo9hiLVJ1GCKiA
+ 3pg0BX9ZxH+2YohvD4bQK0qlgKyLar7G91Qy1+hEu3GCqxJ+Jywo4DEWSpe65+Xgu+x4/3viEN8
+ jvDycHK3PS7xxgz4T32nETPvSEMNaqzZMti7PeJmoXe+RpkN7xhyLdOx8rnx/GYkm1Z53C7hGJ3
+ eMTR/16I0M=
+X-Received: by 2002:a05:600c:609b:b0:49f:ddbd:1f51 with SMTP id
+ 5b1f17b1804b1-49fe66fa2c9mr38555855e9.15.1790251366922; 
+ Thu, 24 Sep 2026 05:02:46 -0700 (PDT)
 Received: from [172.18.183.38] ([185.104.138.114])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49fe5cbd134sm63495555e9.9.2026.09.24.04.48.14
+ 5b1f17b1804b1-49fe0c77b8csm85011225e9.3.2026.09.24.05.02.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Sep 2026 04:48:16 -0700 (PDT)
-Message-ID: <7f76aaae-5c18-44db-9252-7fe29e4aa42c@linaro.org>
-Date: Thu, 24 Sep 2026 13:48:09 +0200
+ Thu, 24 Sep 2026 05:02:46 -0700 (PDT)
+Message-ID: <00b6f81d-9dd0-43ca-861f-37981098b4f0@linaro.org>
+Date: Thu, 24 Sep 2026 14:02:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] mach-snapdragon: map DRAM bank gaps to avoid
- reserved-memory MMU failures
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
- ilias.apalodimas@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, anshuld@ti.com, linux@smankusors.com,
- u-boot-qcom@groups.io, u-boot@lists.u-boot-project.org
-References: <20260917091932.4150797-1-aswin.murugan@oss.qualcomm.com>
+Subject: Re: [PATCH v2 2/2] cmd: qcom_geni: add idempotent qcom_geni fw init
+ command
+To: test <vandhiadevan.karunamoorthy@oss.qualcomm.com>,
+ u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Dmitrii Merkurev <dimorinny@google.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Adrian Freihofer <adrian.freihofer@siemens.com>,
+ Heiko Schocher <hs@nabladev.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Peter Robinson <pbrobinson@gmail.com>
+References: <20260924-series3-oem-spi-nor-init-v2-0-fd8ac27e7057@test.com>
+ <20260924-series3-oem-spi-nor-init-v2-2-fd8ac27e7057@test.com>
 Content-Language: en-US, en-GB
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260917091932.4150797-1-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20260924-series3-oem-spi-nor-init-v2-2-fd8ac27e7057@test.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -185,83 +193,213 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
 
-On 9/17/26 11:19, Aswin Murugan wrote:
-> build_mem_map() leaves gaps between DRAM banks unmapped, causing
-> configure_reserved_memory() to fail when a reserved-memory node
-> falls within such a gap. Map inter-bank gaps as MT_DEVICE_NGNRNE
-> regions and reserve space for the additional MMU entries.
+On 9/24/26 12:24, test wrote:
 
-This is the issue that prints a bunch of errors right? This is a bug in 
-the logic in fdtdec.c, it is CORRECT for us to not map addresses that 
-don't exist and if accessed will hang the bus. Please address the broken 
-logic instead.
+i think your gitconfig might be missing something heh
 
-NAK
+> From: Vandhiadevan Karunamoorthy <vandhiadevan.karunamoorthy@oss.qualcomm.com>
+> 
+> geni_se_of_to_plat() caches need_firmware_load once at bind time by
+> scanning each child's FW_REVISION_RO register. qcom_geni_fw_initialise()
+> only ever consults that cached flag, so it cannot detect firmware that
+> was loaded after bind time, and a second call cannot pick up a wrapper
+> that still needs firmware if storage became available later in boot
+> (e.g. after a fastboot-triggered re-probe).
+
+your llm context is leaking
+
+this is barely comprehensible and I can only even guess based on your 
+other series, which takes a specific approach to solve the specific 
+problem where this is just a recipe for a huge mess of horrible 
+intertwined dependencies.
+
 
 > 
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> Extract the scan into geni_se_needs_firmware() and re-run it inside
+> qcom_geni_fw_initialise() against live hardware state instead of only
+> trusting the cached flag, so repeated calls are safe: a call with
+
+"live hardware state" who is this email for??
+
+> nothing left to load is a no-op that returns success.
+
+so many wasted words
+
+> 
+> Expose qcom_geni_fw_initialise() and add the 'qcom_geni fw init'
+> command so a retry can be triggered manually or from other subsystems
+> without hardcoding SoC-specific calls into generic code.
+
+why would we ever want this? no, if you have a specific workflow for 
+factory flashing or something that you want to support here, then we can 
+look at how to do that in a non-invasive way
+
+there absolutely are issues with how this all works today, these should 
+be fixed in DM ideally, but before that we need to drill down what the 
+issues actually are.
+
+NAK>
+> Signed-off-by: Vandhiadevan Karunamoorthy <vandhiadevan.karunamoorthy@oss.qualcomm.com>
 > ---
->   arch/arm/mach-snapdragon/board.c | 30 ++++++++++++++++++++++++++++--
->   1 file changed, 28 insertions(+), 2 deletions(-)
+>   cmd/Kconfig                    |  9 +++++++++
+>   cmd/Makefile                   |  1 +
+>   cmd/qcom_geni.c                | 26 ++++++++++++++++++++++++++
+>   drivers/misc/qcom_geni.c       | 24 ++++++++++++++++--------
+>   include/soc/qcom/qup-fw-load.h |  7 +++++++
+>   5 files changed, 59 insertions(+), 8 deletions(-)
 > 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 35735f1551c..6d25d8ea599 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -39,7 +39,11 @@ DECLARE_GLOBAL_DATA_PTR;
->   
->   enum qcom_boot_source qcom_boot_source __section(".data") = 0;
->   
-> -static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
-> +/*
-> + * Space for one entry per DRAM bank, one entry per inter-bank gap,
-> + * plus the peripheral block entry and the terminator.
-> + */
-> +static struct mm_region rbx_mem_map[2 * CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
->   
->   struct mm_region *mem_map = rbx_mem_map;
->   
-> @@ -584,6 +588,7 @@ int board_late_init(void)
->   static void build_mem_map(void)
->   {
->   	int i, j;
-> +	phys_addr_t prev_end;
->   
->   	/*
->   	 * Ensure the peripheral block is sized to correctly cover the address range
-> @@ -599,12 +604,33 @@ static void build_mem_map(void)
->   			 PTE_BLOCK_NON_SHARE |
->   			 PTE_BLOCK_PXN | PTE_BLOCK_UXN;
->   
-> -	for (i = 1, j = 0; i < ARRAY_SIZE(rbx_mem_map) - 1 && gd->dram[j].size; i++, j++) {
-> +	/*
-> +	 * Map gaps between DRAM banks as device memory. These regions
-> +	 * are not usable RAM but must remain mapped for attribute updates.
-> +	 */
-> +	i = 1;
-> +	prev_end = gd->dram[0].start;
-> +	for (j = 0; i < ARRAY_SIZE(rbx_mem_map) - 1 && gd->dram[j].size; j++) {
-> +		if (gd->dram[j].start > prev_end) {
-> +			mem_map[i].phys = prev_end;
-> +			mem_map[i].virt = mem_map[i].phys;
-> +			mem_map[i].size = gd->dram[j].start - prev_end;
-> +			mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +					   PTE_BLOCK_NON_SHARE |
-> +					   PTE_BLOCK_PXN | PTE_BLOCK_UXN |
-> +					   PTE_BLOCK_RO;
-> +			i++;
-> +			if (i >= ARRAY_SIZE(rbx_mem_map) - 1)
-> +				break;
-> +		}
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index c71c6824a19..453ee94f6f5 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2884,6 +2884,15 @@ config CMD_SCMI
+>   	  This command provides user interfaces to several SCMI (System
+>   	  Control and Management Interface) protocols available on Arm
+>   	  platforms to manage system resources.
 > +
->   		mem_map[i].phys = gd->dram[j].start;
->   		mem_map[i].virt = mem_map[i].phys;
->   		mem_map[i].size = gd->dram[j].size;
->   		mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | \
->   				   PTE_BLOCK_INNER_SHARE;
-> +		prev_end = gd->dram[j].start + gd->dram[j].size;
-> +		i++;
+> +config CMD_QCOM_GENI
+> +	bool "qcom_geni - Qualcomm GENI SE firmware control"
+> +	depends on QCOM_GENI
+> +	help
+> +	  Provides the 'qcom_geni fw init' command, which (re)loads firmware
+> +	  for Qualcomm GENI SE wrappers that still need it and probes their
+> +	  dependent children (SPI/I2C/UART). Useful to retry firmware loading
+> +	  once it was previously skipped.
+>   endmenu
+>   
+>   menu "Filesystem commands"
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index bbbdfcc4ded..1db96718938 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -164,6 +164,7 @@ obj-$(CONFIG_CMD_KASLRSEED) += kaslrseed.o
+>   obj-$(CONFIG_CMD_RKMTD) += rkmtd.o
+>   obj-$(CONFIG_CMD_ROCKUSB) += rockusb.o
+>   obj-$(CONFIG_CMD_RTC) += rtc.o
+> +obj-$(CONFIG_CMD_QCOM_GENI) += qcom_geni.o
+>   obj-$(CONFIG_SANDBOX) += host.o
+>   obj-$(CONFIG_CMD_SATA) += sata.o
+>   obj-$(CONFIG_CMD_NVME) += nvme.o
+> diff --git a/cmd/qcom_geni.c b/cmd/qcom_geni.c
+> new file mode 100644
+> index 00000000000..31cb3f454d4
+> --- /dev/null
+> +++ b/cmd/qcom_geni.c
+> @@ -0,0 +1,26 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) 2026 Qualcomm Innovation Center, Inc. All rights reserved.
+> + */
+> +
+> +#include <command.h>
+> +#include <linux/string.h>
+> +#include <soc/qcom/qup-fw-load.h>
+> +
+> +static int do_qcom_geni(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> +{
+> +	if (argc != 3 || strcmp(argv[1], "fw") || strcmp(argv[2], "init"))
+> +		return CMD_RET_USAGE;
+> +
+> +	if (qcom_geni_fw_initialise())
+> +		return CMD_RET_FAILURE;
+> +
+> +	return CMD_RET_SUCCESS;
+> +}
+> +
+> +U_BOOT_CMD(qcom_geni, 3, 1, do_qcom_geni,
+> +	   "Qualcomm GENI SE firmware control",
+> +	   "fw init\tLoad QUP firmware for GENI SE wrappers that still need it and\n"
+> +	   "\t\tprobe their dependent children (SPI/I2C/UART). Safe to run again\n"
+> +	   "\t\tonce firmware is already loaded.\n"
+> +);
+> diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
+> index 2e8f72d5c8e..41a6fd153a3 100644
+> --- a/drivers/misc/qcom_geni.c
+> +++ b/drivers/misc/qcom_geni.c
+> @@ -396,14 +396,11 @@ int qcom_geni_load_firmware(phys_addr_t qup_base,
+>    * We need to determine if firmware loading is necessary. Best way to do that is to check the FW
+>    * revision of each QUP and see if it has already been loaded.
+>    */
+> -static int geni_se_of_to_plat(struct udevice *dev)
+> +static bool geni_se_needs_firmware(struct udevice *dev)
+>   {
+>   	ofnode child;
+>   	struct resource res;
+>   	u32 proto;
+> -	struct geni_se_plat *plat = dev_get_plat(dev);
+> -
+> -	plat->need_firmware_load = false;
+>   
+>   	dev_for_each_subnode(child, dev) {
+>   		if (!ofnode_is_enabled(child))
+> @@ -417,9 +414,18 @@ static int geni_se_of_to_plat(struct udevice *dev)
+>   		proto >>= FW_REV_PROTOCOL_SHFT;
+>   
+>   		if (proto == GENI_SE_INVALID_PROTO)
+> -			plat->need_firmware_load = true;
+> +			return true;
 >   	}
 >   
->   	mem_map[i].phys = UINT64_MAX;
+> +	return false;
+> +}
+> +
+> +static int geni_se_of_to_plat(struct udevice *dev)
+> +{
+> +	struct geni_se_plat *plat = dev_get_plat(dev);
+> +
+> +	plat->need_firmware_load = geni_se_needs_firmware(dev);
+> +
+>   	return 0;
+>   }
+>   
+> @@ -496,7 +502,7 @@ static int probe_children_load_firmware(struct udevice *dev)
+>    * Load firmware for QCOM GENI peripherals from the dedicated partition on storage and bind/probe
+>    * all the peripheral devices that need firmware to be loaded.
+>    */
+> -static int qcom_geni_fw_initialise(void)
+> +int qcom_geni_fw_initialise(void)
+>   {
+>   	debug("Loading firmware for QCOM GENI SE\n");
+>   	struct udevice *geni_wrapper, *blk_dev;
+> @@ -506,19 +512,21 @@ static int qcom_geni_fw_initialise(void)
+>   	size_t fw_size = MAX_FW_BUF_SIZE;
+>   	struct geni_se_plat *plat;
+>   
+> -	/* Find the first GENI SE wrapper that needs fw loading */
+> +	/* Find the first GENI SE wrapper that still needs fw loading */
+>   	for (uclass_first_device(UCLASS_MISC, &geni_wrapper);
+>   	     geni_wrapper;
+>   	     uclass_next_device(&geni_wrapper)) {
+>   		if (device_get_uclass_id(geni_wrapper) == UCLASS_MISC &&
+>   		    !strcmp(geni_wrapper->driver->name, "geni-se-qup")) {
+>   			plat = dev_get_plat(geni_wrapper);
+> +			/* Refresh against live hardware state for repeated calls. */
+> +			plat->need_firmware_load = geni_se_needs_firmware(geni_wrapper);
+>   			if (plat->need_firmware_load)
+>   				break;
+>   		}
+>   	}
+>   	if (!geni_wrapper) {
+> -		pr_err("GENI SE wrapper not found\n");
+> +		debug("GENI firmware is already initialized\n");
+>   		return 0;
+>   	}
+>   
+> diff --git a/include/soc/qcom/qup-fw-load.h b/include/soc/qcom/qup-fw-load.h
+> index a67a93c72a4..f4417fc1baf 100644
+> --- a/include/soc/qcom/qup-fw-load.h
+> +++ b/include/soc/qcom/qup-fw-load.h
+> @@ -175,4 +175,11 @@ struct udevice;
+>   
+>   int qcom_geni_load_firmware(phys_addr_t qup_base, struct udevice *dev);
+>   
+> +/*
+> + * Load firmware for QCOM GENI SE wrappers that still need it and probe
+> + * their dependent children. Idempotent: a call with nothing left to load
+> + * is a no-op that returns success.
+> + */
+> +int qcom_geni_fw_initialise(void);
+> +
+>   #endif /* _LINUX_QCOM_QUP_FW_LOAD */
+> 
 
