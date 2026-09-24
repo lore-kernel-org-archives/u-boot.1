@@ -4,180 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F71C9830E
-	for <u-boot@archiver.kernel.org>; Thu, 24 Sep 2026 12:02:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21595C98317
+	for <u-boot@archiver.kernel.org>; Thu, 24 Sep 2026 12:35:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3655481BA8;
-	Thu, 24 Sep 2026 12:02:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B008081025;
+	Thu, 24 Sep 2026 12:35:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wJBMeWc7X6jq; Thu, 24 Sep 2026 12:02:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 2880481916
+ id mMmP1FnkKwmX; Thu, 24 Sep 2026 12:35:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org E30AC810D8
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790251374;
-	b=aoyl/Irt+yKNcTgWpZk38kIlyYQndjNU4MNyl4Vao+P2IpF45laAGCJwS8UtcaU4wUJi
-	 G5V6hh+8YmL2Fijuwy7569cinWf47DH2K/4T7AqpHIKq3Xi3a8HUc4xsbBWg3nLQ2BjzU
-	 cGnd181Wum0iq9yAltLe/Cb7i7JT1WD5dbiAx++elTuMh/OaCPY+elXy6yopegcu/hiPd
-	 g2SBPK2oBJwg/MTKS7ayaZemmXTN6d/50acW2MGnN94zFxxRIrqOoJcGbMwu+CkenEio+
-	 QE1t0Ulg9XlitNh8+8AeVX/s3rOc8VM2aO9HjW0bUmA+yJ+PmcbHDA6C4WNeN1kPF9Q==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790253354;
+	b=Ox8Nf8a6tGk0k08D8MxGfcQYNcbpXPjnoHwVwfb4TR/80heWwT2gyCHxq9+1LMVOUUPC
+	 MUeznfzs4F6CGbd3X5W/Yl6ONro9k9Of9PBXxEashO9XMoqYh6x8fybZbo1M3fdpV0lZd
+	 ynr4vbfUam+VWTyeJQxCuSxnl7Pg8x8Qirgz8hyrKM6SOv3zGW52yO2uVMHdtKAznVhzi
+	 shbJPNw6pqhEgYJXFVAARP5Cwmclbd21TDqReczqH81wl0oYYxaXKp3RTxTeeisKoIbnw
+	 mS0Ozmf6ex/gxVz44L3ZihJd6ZqFDkTBaF0VR/J9sJgRQn96ELJeLLTP3U4r1AQDoqA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790251374;
+	c=relaxed/relaxed; t=1790253354;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
-	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=IGkO8y97O98E1WAmhwm4a3OabdiVbk9I7mymNOwDC2Q=;
-	b=Fl0Lks0vpTBV8zkaf9tmvHFFA4895yiyDeHPekgvgLdO5lrhYIiAXfgroABtpTiExvyt
-	 JPR+JlerOKWk6DNHFX6YOhc8Ppqr4yzRGbruwF+X6YbzEwJCyo4me1MhDhwP4+eenjPkQ
-	 VutEwJmrneHtcMrsYxjGZBiBX831jihSzCKNnrEc22PkCX+UlV9wd7pPZKAbx5+93Vkai
-	 9SeSevZuHZ/+d68lnoXe1U5qJ4vlbwF9fTzQRWnRGi7QbApY0q4XEoHV+hR4wA2gfoA3c
-	 owhtBiQ6qGzoPxGkaC7q2/0+i+MgsR0vb/OItJrQwixvDaSYkjMRCu3y5MeOWQsWfcg==
+	 Received:Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Last-TLS-Session-Version:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=IT7YTFdTspSYEBmsLQj8Q09jCBJ4n+HDKYZE3cUmbmg=;
+	b=YTxuIqj834cCAlDoOSf0uRtoPTFzb5HsA5nu79zLJKjhTW5qbIYi+OAJMvONFYIs/nzu
+	 +01pgBuvd7L7LZhVpsj0CM4uMZEI/UAIuGzTUw3oB2i/zt+UJJ6atXjt6fAe6/r0gG6Qy
+	 JydHKud7mPG1FP1CPomcgDxH+7c0XyDNZcdYdu6Q0Ot6scRMnKgk5Kq0TgAWWu85IziEa
+	 cpllxZnJxNNWMdf6+rJbZKNa9lE7q8N8V4LrYHqjPaaY4t3GIGQLdC69JtUP/XpppvG5Q
+	 zh4Dj0Z+eNKMyi/jv/QIkPUNRn+I8PVPrURccEbL3rUL05U2RZyT1M7vc1mK3I+UoZg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790251374;
-	bh=IGkO8y97O98E1WAmhwm4a3OabdiVbk9I7mymNOwDC2Q=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=HY+//wwotIs7LRwPsYCfTZLEnIF3D/eamJA4YwK/T+ac1bre4SojTpYpesB6jm2cy
-	 a7Hin3+ga/agUgW7eV8KRBZvAkjupy2dkw2TwPod6GjTSfTDB19133S8fUIneJJjQm
-	 hMDiqiXiIicTk/t32vFw6YmTy6IdbDB7NIcN8fFf4IiX9hp598lz8tIx4yHunOJmT0
-	 fFgWdWIMbAPuaIIXjVtrppp0D0i9hxNDul06XEIoEGj/1/bokYQlNYO5sHx0+f29Cv
-	 McUt6MnvTV+PoEyQ1/P+fj3PFjaXieX7qO2cmB8Mm6zHb6fvIJ1O2uwLQU4gJ3pk23
-	 frNduGUM2A7sQ==
+	d=lists.u-boot-project.org; s=default; t=1790253354;
+	bh=IT7YTFdTspSYEBmsLQj8Q09jCBJ4n+HDKYZE3cUmbmg=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=mngRLc66xrLDq3r0dpkIsgHDpxL/YrFTkLWMCap9bCttYMHqBvKg6lyS4m8yNl1TY
+	 6cLMInVuIGCC2T+gEugEwWVZXiR+Z0N9V+60IGvZrMNJ3JsCjZ6XLIhiQ9wDaD0ER2
+	 /BsiRVLC22Kpd2O9c3+hEpUKsdVfKWribY1VIxChUl9IImTBu//XNujp2YJJLaV8U5
+	 /jVyy6J7x+uGtgqOebbWnyWg6N9WRiRrSevgPTY05KWjOrcETkmnx24fExW+SyyHSF
+	 cBdNTy93mL517Wf3u9BpPF5DLpTiIAuB65DgWIRC9+A+T2mEvqunIrTISgMO0YVqz+
+	 vvcLf+TfIqRcA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2880481916;
-	Thu, 24 Sep 2026 12:02:54 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6E85B2F5
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:02:52 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E30AC810D8;
+	Thu, 24 Sep 2026 12:35:53 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7A305392
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:35:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 57FA440456
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:02:52 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 59F876081B
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:35:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ORhUWa5fGjsb for <u-boot@lists.u-boot-project.org>;
- Thu, 24 Sep 2026 12:02:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 1F0FD40390
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:30::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790251371;
- b=a7i9eQkcUwGve/1da3qPYzYkcyL9Shs0cwU4/f/w5+GCWLubW8RNX/qsStd6cnSetKG4
- 71yEmjgtJ0fBIsLbbhBvJ/0WuGTQmGeM2am4qIBKYWDoi7dqQqIlXHHYOtQdbnqeKupAK
- f3pF3bzkWJzUXInrTIgirbtIY3bW2Cde+3WxY1r0oePuAoT1VClLBUoeRBZ7VmuqveBGW
- R13J4lJlnvcvbiHYNtcTD54U6o+zz2pvuWa8THShyqM3U4K+JAq8QZFgP7v1s/6Xt4YIA
- iNSYoCdiM41mvuudKLuO2zVbBlNe3B8+LCUC8oMYRgTT11uyUHsVluQHHjMzfoA5Ysg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0dN-9cTB86eZ for <u-boot@lists.u-boot-project.org>;
+ Thu, 24 Sep 2026 12:35:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0C38A607E4
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=185.171.202.116
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790253350;
+ b=nUz+N0txyQPE4Qb87PYTsy/1bWLqAreFozSa65xf9Xu0vSMPi7lNfaRtdsCRzKwaBhLq
+ bGbkiWZ/LjeO4BsnUV3km4QJjPTFNbLY9mDquf+ySS1WCLIjowwWDZ/aEfU8t3KjUO+TH
+ oLLGuxJAmuN6N0YLQg/J2b+eK5nQq72e4ZC2/YCAgsXtU5DJ+j2dgzMDbwg2Q1BJ1MSML
+ u+V4whsvJjkndN40BeCl17QbUV8AXFmiQTu2RxJuUvsg8xnwcWZuKyTYuDJfuOwjUr1K0
+ i+AvRNL8/Z7H3BUkK6sSrET6F/6FdS2F0byXXtKQlkkMf8nnOd/k8laUeo836SP46Fw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790251371;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
- Content-Language:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding;
- bh=IGkO8y97O98E1WAmhwm4a3OabdiVbk9I7mymNOwDC2Q=;
- b=N8uGM9lmiCxML+MLYDiDrBbpXvLui5AKqYeuGjFbVBy1nkdTB4mqTirEP1mdL8ApT7Qh
- I5VIE0TOBHX7/lhOOZk1nlgfFuoL1pvFi7dAIZXmVtsxbhD3eXd0mJoa42qPhxHMLBATR
- uHxfO8zeCZOspwpx4wVFg95z9pfiBqVwFG/4Q5V6d/T1l5y60l/bj11L5uJ48W4+ayc+u
- a25JUbVckoGQI6dGAwfC9Bz5KExi3yPO8Z8rG7UbevbBUxKV19y7LPDJHmpycAZSIPDoi
- 3/srF4n0pTfI0xbU3zUjArbKdRXe5u+FnX+0+QXQk0lGIAJw1XRNi6id14NlIWkmwxQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=linaro.org; 
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=FSsKZ0Mq; 
- arc=none smtp.remote-ip="2a00:1450:4864:30::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:30::10; helo=mail-wr2-x10.google.com;
- envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=FSsKZ0Mq
-Received: from mail-wr2-x10.google.com (mail-wr2-x10.google.com
- [IPv6:2a00:1450:4864:30::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1F0FD40390
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:02:50 +0000 (UTC)
-Received: by mail-wr2-x10.google.com with SMTP id
- ffacd0b85a97d-485b1d2874fso773984f8f.0
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 05:02:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1790251368; x=1790856168;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=IGkO8y97O98E1WAmhwm4a3OabdiVbk9I7mymNOwDC2Q=;
- b=FSsKZ0MqckLwyo9UNalOCOPZ6rvhSxeL3E+qpeewqj3fnoibDtVLxtp1WC4jZy5JXc
- fYag+SA+A7myfSfVWIamMmodlx/nIItGjcxpaxoIZSyIs0hjCjukG1kA1wEOBTNd34KY
- 8sho0v+InyJ5xBYzxdc19nyHZ6sTDk5C/Z2Q9R0D7gKwWpL5LgMy9MiQict5Qlz2f+QP
- S1UrbjqJ6pbUo6Pc61R3fwBraG0ctSHTCi6uR/nOJqUM3zFMWOaIXkuRgSqo6eeIKr7V
- m757ENMPJthwQRn8U/8TLgcI2roSH3BkwtpU68jc0FlhVdOh5gM25t8tou8gg4snBAq2
- q29w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790251368; x=1790856168;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=IGkO8y97O98E1WAmhwm4a3OabdiVbk9I7mymNOwDC2Q=;
- b=a7/rm5hfZ4B32ghgW6YSeY8SvO0m6WicWylubB9ZXslp43RjWb3pxqUtxxu+sIZyqy
- Wf6upgmQeacmR1BnAe66svKH3yJpfqCnc+KGDQPkX0ibGhvzkSlXG2r//joHoy4Bri2P
- wBS2jVIxHK3FEOFKivW5zKaUG+mx5pvAtt/Npp2Htd4RJLilIVghUr7witBEPAS13XUd
- 8HEsJd46B/kd0JimbCkXfAverGSBQG9mJksG8dOk8a5jVTmL7PblF8ROfkSO3316Dize
- nM4rlmiTx7r+yA6QlpRddaJtl40d6UBqtP2vj1GNhyRwPhIpt3atSVNZKkoz+MkD2ZEo
- Opmw==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzSmp2veTWkGq4XdUFep4dAqvxeQ0LWpWqPTCwPy+RSb+jcgcjeiGp9Z8FSc18iNvPOXTAwwKQ=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lfEbiFEmoCr/7W8GV5HxqQH/Yz1qsCe+6ow09kx1MVR6YEfLUX
- S6+KeSRyOr1H441HVA2goVYqygChYh3ZUmy8+LzXHnEcguyoaOfsOX/rddCtT1ZwkLY=
-X-Gm-Gg: AYBFou19bAqsfY8hwpTEKf8J8Qek9/Sy+73GWDy1d+fNLaftsHcawSWjvuof2pOK6C2
- Mz+sLppw/mKg24hFNEpPjVuvgaMIu/OgDb94BZ95H6dhho4OmT6ZXunIkQ/H+UwRwJL9cLWYOHN
- Wm0DghVzWfOAApslPcafk8AI2VVDwmfK4YoII9M45P/cKcFTpGfG9gUDA/U5wxnVqtVtPeoHzmb
- MlNPmwLjqXQz9509iillKtG2t1iOV5HoM/PoOJH1uufNU16Fi5yQ6e+JTlExC7aMLcY5AmCKzUE
- shEMIWEzTQ20ZKjZ7Ilp48pvCCg3TYLW3xlbMWYlx3ZHqxOBcjHo7B5tNFY3LEo9hiLVJ1GCKiA
- 3pg0BX9ZxH+2YohvD4bQK0qlgKyLar7G91Qy1+hEu3GCqxJ+Jywo4DEWSpe65+Xgu+x4/3viEN8
- jvDycHK3PS7xxgz4T32nETPvSEMNaqzZMti7PeJmoXe+RpkN7xhyLdOx8rnx/GYkm1Z53C7hGJ3
- eMTR/16I0M=
-X-Received: by 2002:a05:600c:609b:b0:49f:ddbd:1f51 with SMTP id
- 5b1f17b1804b1-49fe66fa2c9mr38555855e9.15.1790251366922; 
- Thu, 24 Sep 2026 05:02:46 -0700 (PDT)
-Received: from [172.18.183.38] ([185.104.138.114])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49fe0c77b8csm85011225e9.3.2026.09.24.05.02.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Sep 2026 05:02:46 -0700 (PDT)
-Message-ID: <00b6f81d-9dd0-43ca-861f-37981098b4f0@linaro.org>
-Date: Thu, 24 Sep 2026 14:02:18 +0200
+ c=relaxed/relaxed; t=1790253350;
+ h=Received-SPF:Received:Received:Received:DKIM-Signature:From:To:Cc:
+ Subject:Date:Message-ID:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding:X-Last-TLS-Session-Version;
+ bh=IT7YTFdTspSYEBmsLQj8Q09jCBJ4n+HDKYZE3cUmbmg=;
+ b=W4bRwrwEqqY+jPxm04SKJw8Uj4WzRB1X6Ow1r+A6H2n4GC18S2FeOvlBBBCEQVVjUh5/
+ RIYsg/sqbId9eAwPO/29AjHrYvx7hcdiXIriCj/XvADf06pAvvlTLQEo+k9qaxg6cJGuy
+ o8yFVZSAMz7609R0WEXFXW4BZXVlmzLplN6tYiUSyuCMzbLJ6K15sT6dYwZJSzLJVzyZZ
+ kvxa0lwr3fBg3BU3VsQRZawMTx8t5zTB08N7LBgAOrfkQ9BGC5A1LR4jjxBWZgHB4bPcs
+ 9NyWWT+5xqAjZfY/T3IX/GBUZzgc/N6AaqqlRxL253r5ffUd8DYnqOS46vGy5RUvzFg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ dmarc=pass header.from=bootlin.com; 
+ dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
+ header.s=dkim header.b=JqP6xpF4; 
+ arc=none smtp.remote-ip=185.171.202.116
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.171.202.116;
+ helo=smtpout-04.galae.net; envelope-from=richard.genoud@bootlin.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
+ header.s=dkim header.b=JqP6xpF4
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0C38A607E4
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:35:48 +0000 (UTC)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id E77A0C211C1;
+ Thu, 24 Sep 2026 12:36:32 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 7EFD560341;
+ Thu, 24 Sep 2026 12:35:45 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 02E6210329409; 
+ Thu, 24 Sep 2026 14:35:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1790253339; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=IT7YTFdTspSYEBmsLQj8Q09jCBJ4n+HDKYZE3cUmbmg=;
+ b=JqP6xpF42mEuJBwv0YPR6FopzNEg6uNTDqS7HrIWiqhXBHkYtQjM/UCORy4MhVBsDbQguy
+ qLFK6gAop6k/KL795zYGmo0XxraflZ7N9JTmAlsZBQXjAHhhjxeOa+9mTZzRZ0dEQSTJ4u
+ oiUOEKFmY3C/7jsWw8o7wr/gIpeEkyrpYX2s8xzVveY4lBF+enikEHv1duz0zcsR4e6cUj
+ 0Glm6E4QTTqL/uf3AAydk2L37SNWZMVV57SGOt3D2rM0fYSBNhraOrbPfD7Pp2SiVt4Afd
+ Y9mk1SmbREO13blod6oIR1BZTFt+vmJpWSIxmm0o7013HTCipk3FIKnhl+WY0A==
+From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
+To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ "Andrew F . Davis" <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
+ Kendall Willis <k-willis@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Abhash Kumar <a-kumar2@ti.com>,
+ Thomas Richard <thomas.richard@bootlin.com>,
+ Gregory CLEMENT <gregory.clement@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH v6 00/22] Introduce resume for J7xx SoCs
+Date: Thu, 24 Sep 2026 14:35:11 +0200
+Message-ID: <20260924123533.2599438-1-richard.genoud@bootlin.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] cmd: qcom_geni: add idempotent qcom_geni fw init
- command
-To: test <vandhiadevan.karunamoorthy@oss.qualcomm.com>,
- u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Dmitrii Merkurev <dimorinny@google.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Adrian Freihofer <adrian.freihofer@siemens.com>,
- Heiko Schocher <hs@nabladev.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Peter Robinson <pbrobinson@gmail.com>
-References: <20260924-series3-oem-spi-nor-init-v2-0-fd8ac27e7057@test.com>
- <20260924-series3-oem-spi-nor-init-v2-2-fd8ac27e7057@test.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260924-series3-oem-spi-nor-init-v2-2-fd8ac27e7057@test.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -191,215 +150,220 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+This series allows J7200/J721s2/J784s4/J722s to resume from suspend.
+
+On those SoCs, a magic value is set in a PMIC register by the DM
+firmware just before suspend, then everything but the PMIC and DDR is
+powered off.
+At resume/boot time, the magic value has to be read back by U-Boot SPL in
+order to know if we are indeed in a resume situation.
+That's the purpose of j7xx_board_is_resuming() introduced here.
+
+Then, if the SoC is resuming, the DDR has to be brought out of
+retention, at full speed and get out of low power mode.
+Between those steps, the DDR_RET pin has to be de-asserted. But the
+DDR_RET pins of all DDR chips are tied together on a single GPIO, so
+it's impossible to resume one DDR chip after the other, they must be all
+resumed at once.
+That's why it's orchestrated from board_init_f() and not in the k3ddrss
+driver.
+
+Once the DDR is fully functional, the next steps are:
+- retrieve the LPM memory region from DTS
+- authenticate certificates from LPM memory region and apply firewalls
+- ask TIFS to restore TFA and its own minimal context
+- start TFA on remote proc
+- load and jump to DM
+
+Disclaimer:
+---------
+There's a potential attack vector in this sequence, because OPTEE could
+be modified before being reloaded.
+Also, if the certificate replay is skipped, then TFA can be read from
+MSMC.
+
+Patch 1 and 2 are from AM62 LPM series:
+https://lore.kernel.org/u-boot/20260105-topic-am62-ioddr-v2025-04-rc1-v9-0-7e33f2c77dbf@baylibre.com/
+Patch 1 adds support for DDR in self-refresh for am62/j722s
+Patch 2 adds capability to call TI_SCI_MSG_MIN_CONTEXT_RESTORE
+Patches 3-5 add LPM helpers for all SoCs
+Patch 6 adds the resume detection for all SoCs
+Patch 7 adds common code for DDR retention pin
+Patch 8 enables GTC at resume
+Patch 9 detects IO+DDR resume state for j7200/j784s4
+Patch 10 stores the wakeup reason in MCU_PSRAM0_RAM for j7200/j784s4
+Patch 11 sets the PMIC NSLEEP triggers
+Patches 12-14 add the DDR resume sequence for all SoCs
+Patches 15-18 add the resume flow for all SoCs
+Patch 19 updates the pm-cfg and schema to a new version
+Patch 20 removes now unneeded background firewall on DDR for j7200/j784s4
+Patch 21 extends the firewall for ATF region to TIFS
+Patch 22 add the resume flow documentation
+
+Tested on J722s HS-FS, J7200 GP, J784s4 GP, J721s2 GP
+
+https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/pm/lpm.html#tisci-msg-min-context-restore
+
+It needs lpm_memory_regions described in DTS [updated to v4]:
+https://lore.kernel.org/lkml/20260921145325.300025-1-richard.genoud@bootlin.com/T/#t
+
+It also needs a bootph-pre-ram property in PMIC-B for j721s2:
+https://lore.kernel.org/linux-arm-kernel/20260429-k3-j721s2-som-bootph-pre-ram-pmic-4c-v2-1-31a0e7677216@bootlin.com/
+
+Changes from v5:
+- gather {Acked,Reviewed}-bys
+- remove j721e support
+- Check lpm image size retrieved from DTS
+- Fix size when loading optee+certificate
+- Update U-Boot documentation TODO
+- drop resume state from global data since EARLY_BSS is set, using
+  static variable is ok
+- make CONFIG_K3_LPM default n to prevent from breaking configs with older
+  TIFS
+- check lpm_reg_size in extract_lpm_region
+- replay DM certificate with ti_secure_image_auth_apply_fwls()
+- drop special hanling for j722s in j7xx_board_is_resuming by adding
+  another call to ctrl_mmr_unlock()
+- add missing calls to k3_set_lpm_core_* for each soc
+- panic if clearing isolation fails
+- add resume boot flow and disclaimer in uboot docs
+
+Changes from v4:
+- rebase onto v2026.10-rc2
+- add disclaimer in do_resume() for 2 potential attack vectors
+- include needed patches from AM62 LPM series
+- fix minor checkpatch warning (!xxx instead of == NULL)
+
+Changes from v3:
+- rebase on 8d5f30b52f7c ("Merge patch series "env: migrate static flags list to Kconfig"") + AM62 LPM series
+
+Changes from v2:
+- enable GTC counter at resume
+- factorise __weak j7xx_board_is_resuming()
+- reset PMIC NSLEEP triggers register in one place
+- gather Reviewed-by
+- fix comment style in k3-ddrss.c
+- clean and Factorize k3_deassert_ddr_ret()
+- change printf in dev_err in ti_sci_cmd_proc_auth_apply_fwls()
+
+Changes from v1:
+- drop unneeded patch: configs: j784s4_evm_r5: enable TI_SCI_POWER_DOMAIN
+- factorize j7xx_board_is_resuming (that lead to patch renumbering)
+- drop From: field duplication from patch 1
+- use SYS_K3_SCRATCH_LPM_ADDR config option instead of hardcoded value
+- add missing board/ti/j722s/pm-cfg.yaml
+- migrate missing K3 platforms to new pm-boardcfg
+- remove struct lpm_addr_info mem_addr_lpm; (globals are forbidden at this stage)
+- rework ti_secure_image_auth_apply_fwls()
+- Fix pointer arithmetic: mem_addr_lpm->context_save_addr + FW_IMAGE_SIZE
+- Fix K3_LPM_WAKE_SOURCE_PMIC_GPIO value
+- Fix spellings/comments
+
+Abhash Kumar Jha (4):
+  board: mach-k3: r5: common: enable GTC after core_resume
+  board: evm: Enable de-isolation of IOs at resume for j7200 and j784s4
+  board: mach-k3: r5: common: Store wakeup reason on scratchpad memory
+  arm: mach-k3: Update pm-boardcfg for all k3 platforms
+
+Markus Schneider-Pargmann (TI) (2):
+  ram: k3-ddrss: Add support for DDR in self-refresh
+  firmware: ti_sci: Add TI_SCI_MSG_MIN_CONTEXT_RESTORE
+
+Prasanth Babu Mantena (4):
+  firmware: ti_sci: add low power mode operations
+  mach-k3: r5: common: add helper functions needed in LPM resume
+    sequence
+  arm: dts: k3-j7200: Remove background firewall on DDR
+  arm: dts: k3-j7200: Extend firewall for ATF region to TIFS
+
+Richard Genoud (TI) (9):
+  arm: mach-k3: security: introduce ti_secure_skip_cert()
+  mach-k3: r5: common: introduce j7xx_board_is_resuming()
+  mach-k3: r5: common: introduce k3_deassert_ddr_ret()
+  board: mach-k3: r5: common: Set PMIC NSLEEP triggers bits at resume
+  ram: k3-ddrss: Add j722s DDR resume sequence
+  ram: k3-ddrss: support j784s4/j721s2 DDR resume
+  arm: mach-k3: j784s4: Enable LPM resume flow for J784s4/J742s2 SOCs
+  arm: mach-k3: j722s: Enable LPM resume flow
+  doc: board: ti: Add Jacinto resume flow
+
+Thomas Richard (TI) (3):
+  ram: k3-ddrss: Add exit retention support
+  arm: mach-k3: j721e: Enable LPM resume flow for J7200 SOC
+  arm: mach-k3: j721s2: Enable LPM resume flow
+
+ arch/arm/dts/k3-binman.dtsi                   |    7 +-
+ arch/arm/dts/k3-j7200-binman.dtsi             |    4 +
+ arch/arm/dts/k3-j722s-r5-evm.dts              |    4 +
+ arch/arm/dts/k3-security.h                    |    1 +
+ arch/arm/mach-k3/Kconfig                      |   10 +
+ arch/arm/mach-k3/common.c                     |    6 +
+ arch/arm/mach-k3/common.h                     |   16 +
+ arch/arm/mach-k3/include/mach/hardware.h      |    1 +
+ .../arm/mach-k3/include/mach/j721e_hardware.h |   11 +
+ .../mach-k3/include/mach/j784s4_hardware.h    |   10 +
+ arch/arm/mach-k3/include/mach/k3-ddr.h        |   16 +
+ arch/arm/mach-k3/include/mach/security.h      |    2 +
+ arch/arm/mach-k3/j721e/j721e_init.c           |   32 +
+ arch/arm/mach-k3/j721s2/j721s2_init.c         |   57 +-
+ arch/arm/mach-k3/j722s/j722s_init.c           |    8 +
+ arch/arm/mach-k3/j784s4/j784s4_init.c         |   52 +-
+ arch/arm/mach-k3/lpm-common.h                 |   33 +
+ arch/arm/mach-k3/r5/Kconfig                   |    8 +
+ arch/arm/mach-k3/r5/Makefile                  |    1 +
+ arch/arm/mach-k3/r5/common.c                  |   20 +-
+ arch/arm/mach-k3/r5/lpm-common.c              |  444 +++++
+ arch/arm/mach-k3/schema.yaml                  |  146 +-
+ arch/arm/mach-k3/security.c                   |  108 +-
+ board/beagle/beagleboneai64/pm-cfg.yaml       |    5 +-
+ board/beagle/beagleplay/pm-cfg.yaml           |    7 +-
+ board/beagle/beagley-ai/pm-cfg.yaml           |    7 +-
+ board/phytec/phycore_am62ax/pm-cfg.yaml       |    7 +-
+ board/phytec/phycore_am62x/pm-cfg.yaml        |    7 +-
+ board/phytec/phycore_am64x/pm-cfg.yaml        |    5 +-
+ board/phytec/phycore_am68x/pm-cfg.yaml        |    7 +-
+ board/ti/am62ax/pm-cfg.yaml                   |    7 +-
+ board/ti/am62px/pm-cfg.yaml                   |    7 +-
+ board/ti/am62x/pm-cfg.yaml                    |    7 +-
+ board/ti/am64x/pm-cfg.yaml                    |    5 +-
+ board/ti/am65x/pm-cfg.yaml                    |    7 +-
+ board/ti/j7200/pm-cfg.yaml                    |   92 +-
+ board/ti/j721e/evm.c                          |   25 +
+ board/ti/j721e/pm-cfg.yaml                    |   92 +-
+ board/ti/j721s2/pm-cfg.yaml                   |   94 +-
+ board/ti/j722s/pm-cfg.yaml                    |   94 +-
+ board/ti/j784s4/evm.c                         |   25 +
+ board/ti/j784s4/pm-cfg.yaml                   |   94 +-
+ board/toradex/aquila-am69/pm-cfg.yaml         |    7 +-
+ board/toradex/verdin-am62/pm-cfg.yaml         |    7 +-
+ board/toradex/verdin-am62p/pm-cfg.yaml        |    7 +-
+ doc/board/ti/img/boot_diagram_k3_current.svg  |  444 ++++-
+ doc/board/ti/img/resume_diagram_k3.svg        | 1638 +++++++++++++++++
+ doc/board/ti/j7200_evm.rst                    |   14 +
+ doc/board/ti/j721s2_evm.rst                   |   14 +
+ doc/board/ti/j722s_evm.rst                    |   14 +
+ doc/board/ti/j784s4_evm.rst                   |   14 +
+ drivers/firmware/ti_sci.c                     |  219 +++
+ drivers/firmware/ti_sci.h                     |  108 ++
+ drivers/ram/k3-ddrss/Makefile                 |    1 +
+ drivers/ram/k3-ddrss/k3-ddrss-lpm.c           |  181 ++
+ drivers/ram/k3-ddrss/k3-ddrss-lpm.h           |   20 +
+ drivers/ram/k3-ddrss/k3-ddrss.c               |  295 ++-
+ drivers/ram/k3-ddrss/lpddr4_k3_reg.h          |   94 +
+ drivers/remoteproc/ti_k3_arm64_rproc.c        |   10 +-
+ include/linux/soc/ti/ti_sci_protocol.h        |   17 +
+ tools/binman/etype/ti_board_config.py         |    4 +-
+ 61 files changed, 4501 insertions(+), 198 deletions(-)
+ create mode 100644 arch/arm/mach-k3/lpm-common.h
+ create mode 100644 arch/arm/mach-k3/r5/lpm-common.c
+ create mode 100644 doc/board/ti/img/resume_diagram_k3.svg
+ create mode 100644 drivers/ram/k3-ddrss/k3-ddrss-lpm.c
+ create mode 100644 drivers/ram/k3-ddrss/k3-ddrss-lpm.h
+ create mode 100644 drivers/ram/k3-ddrss/lpddr4_k3_reg.h
 
 
-On 9/24/26 12:24, test wrote:
-
-i think your gitconfig might be missing something heh
-
-> From: Vandhiadevan Karunamoorthy <vandhiadevan.karunamoorthy@oss.qualcomm.com>
-> 
-> geni_se_of_to_plat() caches need_firmware_load once at bind time by
-> scanning each child's FW_REVISION_RO register. qcom_geni_fw_initialise()
-> only ever consults that cached flag, so it cannot detect firmware that
-> was loaded after bind time, and a second call cannot pick up a wrapper
-> that still needs firmware if storage became available later in boot
-> (e.g. after a fastboot-triggered re-probe).
-
-your llm context is leaking
-
-this is barely comprehensible and I can only even guess based on your 
-other series, which takes a specific approach to solve the specific 
-problem where this is just a recipe for a huge mess of horrible 
-intertwined dependencies.
-
-
-> 
-> Extract the scan into geni_se_needs_firmware() and re-run it inside
-> qcom_geni_fw_initialise() against live hardware state instead of only
-> trusting the cached flag, so repeated calls are safe: a call with
-
-"live hardware state" who is this email for??
-
-> nothing left to load is a no-op that returns success.
-
-so many wasted words
-
-> 
-> Expose qcom_geni_fw_initialise() and add the 'qcom_geni fw init'
-> command so a retry can be triggered manually or from other subsystems
-> without hardcoding SoC-specific calls into generic code.
-
-why would we ever want this? no, if you have a specific workflow for 
-factory flashing or something that you want to support here, then we can 
-look at how to do that in a non-invasive way
-
-there absolutely are issues with how this all works today, these should 
-be fixed in DM ideally, but before that we need to drill down what the 
-issues actually are.
-
-NAK>
-> Signed-off-by: Vandhiadevan Karunamoorthy <vandhiadevan.karunamoorthy@oss.qualcomm.com>
-> ---
->   cmd/Kconfig                    |  9 +++++++++
->   cmd/Makefile                   |  1 +
->   cmd/qcom_geni.c                | 26 ++++++++++++++++++++++++++
->   drivers/misc/qcom_geni.c       | 24 ++++++++++++++++--------
->   include/soc/qcom/qup-fw-load.h |  7 +++++++
->   5 files changed, 59 insertions(+), 8 deletions(-)
-> 
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index c71c6824a19..453ee94f6f5 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -2884,6 +2884,15 @@ config CMD_SCMI
->   	  This command provides user interfaces to several SCMI (System
->   	  Control and Management Interface) protocols available on Arm
->   	  platforms to manage system resources.
-> +
-> +config CMD_QCOM_GENI
-> +	bool "qcom_geni - Qualcomm GENI SE firmware control"
-> +	depends on QCOM_GENI
-> +	help
-> +	  Provides the 'qcom_geni fw init' command, which (re)loads firmware
-> +	  for Qualcomm GENI SE wrappers that still need it and probes their
-> +	  dependent children (SPI/I2C/UART). Useful to retry firmware loading
-> +	  once it was previously skipped.
->   endmenu
->   
->   menu "Filesystem commands"
-> diff --git a/cmd/Makefile b/cmd/Makefile
-> index bbbdfcc4ded..1db96718938 100644
-> --- a/cmd/Makefile
-> +++ b/cmd/Makefile
-> @@ -164,6 +164,7 @@ obj-$(CONFIG_CMD_KASLRSEED) += kaslrseed.o
->   obj-$(CONFIG_CMD_RKMTD) += rkmtd.o
->   obj-$(CONFIG_CMD_ROCKUSB) += rockusb.o
->   obj-$(CONFIG_CMD_RTC) += rtc.o
-> +obj-$(CONFIG_CMD_QCOM_GENI) += qcom_geni.o
->   obj-$(CONFIG_SANDBOX) += host.o
->   obj-$(CONFIG_CMD_SATA) += sata.o
->   obj-$(CONFIG_CMD_NVME) += nvme.o
-> diff --git a/cmd/qcom_geni.c b/cmd/qcom_geni.c
-> new file mode 100644
-> index 00000000000..31cb3f454d4
-> --- /dev/null
-> +++ b/cmd/qcom_geni.c
-> @@ -0,0 +1,26 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2026 Qualcomm Innovation Center, Inc. All rights reserved.
-> + */
-> +
-> +#include <command.h>
-> +#include <linux/string.h>
-> +#include <soc/qcom/qup-fw-load.h>
-> +
-> +static int do_qcom_geni(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> +{
-> +	if (argc != 3 || strcmp(argv[1], "fw") || strcmp(argv[2], "init"))
-> +		return CMD_RET_USAGE;
-> +
-> +	if (qcom_geni_fw_initialise())
-> +		return CMD_RET_FAILURE;
-> +
-> +	return CMD_RET_SUCCESS;
-> +}
-> +
-> +U_BOOT_CMD(qcom_geni, 3, 1, do_qcom_geni,
-> +	   "Qualcomm GENI SE firmware control",
-> +	   "fw init\tLoad QUP firmware for GENI SE wrappers that still need it and\n"
-> +	   "\t\tprobe their dependent children (SPI/I2C/UART). Safe to run again\n"
-> +	   "\t\tonce firmware is already loaded.\n"
-> +);
-> diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
-> index 2e8f72d5c8e..41a6fd153a3 100644
-> --- a/drivers/misc/qcom_geni.c
-> +++ b/drivers/misc/qcom_geni.c
-> @@ -396,14 +396,11 @@ int qcom_geni_load_firmware(phys_addr_t qup_base,
->    * We need to determine if firmware loading is necessary. Best way to do that is to check the FW
->    * revision of each QUP and see if it has already been loaded.
->    */
-> -static int geni_se_of_to_plat(struct udevice *dev)
-> +static bool geni_se_needs_firmware(struct udevice *dev)
->   {
->   	ofnode child;
->   	struct resource res;
->   	u32 proto;
-> -	struct geni_se_plat *plat = dev_get_plat(dev);
-> -
-> -	plat->need_firmware_load = false;
->   
->   	dev_for_each_subnode(child, dev) {
->   		if (!ofnode_is_enabled(child))
-> @@ -417,9 +414,18 @@ static int geni_se_of_to_plat(struct udevice *dev)
->   		proto >>= FW_REV_PROTOCOL_SHFT;
->   
->   		if (proto == GENI_SE_INVALID_PROTO)
-> -			plat->need_firmware_load = true;
-> +			return true;
->   	}
->   
-> +	return false;
-> +}
-> +
-> +static int geni_se_of_to_plat(struct udevice *dev)
-> +{
-> +	struct geni_se_plat *plat = dev_get_plat(dev);
-> +
-> +	plat->need_firmware_load = geni_se_needs_firmware(dev);
-> +
->   	return 0;
->   }
->   
-> @@ -496,7 +502,7 @@ static int probe_children_load_firmware(struct udevice *dev)
->    * Load firmware for QCOM GENI peripherals from the dedicated partition on storage and bind/probe
->    * all the peripheral devices that need firmware to be loaded.
->    */
-> -static int qcom_geni_fw_initialise(void)
-> +int qcom_geni_fw_initialise(void)
->   {
->   	debug("Loading firmware for QCOM GENI SE\n");
->   	struct udevice *geni_wrapper, *blk_dev;
-> @@ -506,19 +512,21 @@ static int qcom_geni_fw_initialise(void)
->   	size_t fw_size = MAX_FW_BUF_SIZE;
->   	struct geni_se_plat *plat;
->   
-> -	/* Find the first GENI SE wrapper that needs fw loading */
-> +	/* Find the first GENI SE wrapper that still needs fw loading */
->   	for (uclass_first_device(UCLASS_MISC, &geni_wrapper);
->   	     geni_wrapper;
->   	     uclass_next_device(&geni_wrapper)) {
->   		if (device_get_uclass_id(geni_wrapper) == UCLASS_MISC &&
->   		    !strcmp(geni_wrapper->driver->name, "geni-se-qup")) {
->   			plat = dev_get_plat(geni_wrapper);
-> +			/* Refresh against live hardware state for repeated calls. */
-> +			plat->need_firmware_load = geni_se_needs_firmware(geni_wrapper);
->   			if (plat->need_firmware_load)
->   				break;
->   		}
->   	}
->   	if (!geni_wrapper) {
-> -		pr_err("GENI SE wrapper not found\n");
-> +		debug("GENI firmware is already initialized\n");
->   		return 0;
->   	}
->   
-> diff --git a/include/soc/qcom/qup-fw-load.h b/include/soc/qcom/qup-fw-load.h
-> index a67a93c72a4..f4417fc1baf 100644
-> --- a/include/soc/qcom/qup-fw-load.h
-> +++ b/include/soc/qcom/qup-fw-load.h
-> @@ -175,4 +175,11 @@ struct udevice;
->   
->   int qcom_geni_load_firmware(phys_addr_t qup_base, struct udevice *dev);
->   
-> +/*
-> + * Load firmware for QCOM GENI SE wrappers that still need it and probe
-> + * their dependent children. Idempotent: a call with nothing left to load
-> + * is a no-op that returns success.
-> + */
-> +int qcom_geni_fw_initialise(void);
-> +
->   #endif /* _LINUX_QCOM_QUP_FW_LOAD */
-> 
+base-commit: 36c377b9859ffb53eb1e39ea31e8d96d1e0fe1e5
+prerequisite-patch-id: 0000000000000000000000000000000000000000
+-- 
+2.55.0
 
