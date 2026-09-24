@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 555D3C98314
-	for <u-boot@archiver.kernel.org>; Thu, 24 Sep 2026 12:37:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0B71C98317
+	for <u-boot@archiver.kernel.org>; Thu, 24 Sep 2026 12:37:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1DB7180EEC;
-	Thu, 24 Sep 2026 12:37:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9EC2D81DF9;
+	Thu, 24 Sep 2026 12:37:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pY1jPS4MZSp2; Thu, 24 Sep 2026 12:37:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 436DF80EEF
+ id iTD69JoMToyU; Thu, 24 Sep 2026 12:37:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 1A43281DFA
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790253438;
-	b=QksA/BpO9V5SS/dnFRmA8uvsIojAKuqILcKeJ9/tAv1r7T33yLRsHn5CyxuekL00Nwu1
-	 y3bESmPtjBHVi+svkmA8Q4QU0AgPaMS3FTezArTqTBuehKaEU7yOzERHVGBoN6QlfV4Bt
-	 HToLHz2j9s5+iQmbFaXjN2qhr26DCzPefrrzKSqpzUYzNaDzbDU2QS60U/KUe/ZniUivm
-	 PUbRvAOFmhHRab/PbKk4Q/xFm03EKqiTsOC2xC3gWFynW2ZhiXLhxW4GlkBextcoSgW+u
-	 mXJXjx7/KSQkvizrDcUs/aohkJfovzWbmrBfio48gxfyymRgD6q4n4A/zJU+3g9hvJQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790253443;
+	b=FcB7g16/vf/KMNKQ7t6t7A+jd4E91g6g/Y7vQMmTE96WcXsEftceVXQJ0hYaME5L6XP+
+	 s+fnmYISjX4KFHek0ub4DIW2aKKInUemOPD0p842gDIHTDuZEDAQPzG6SeqtElT4IG9if
+	 t+DQrXNaOmvo40QB1oO6jTZExzsDsNMm+eCzS3qaYBto55JjpwlEi/1U3+ABTWbv//9AI
+	 9bQkWhphBtPRfybsJaszsxHfSVHqZXI6GVb5jIdaZ4FJDr4+vholXPofC7w5C/XEU3lxn
+	 3kO042VkhUL0PVNgn5oM9Ci9/MVrtLwGs06/a/Xk+RrlHAxUWcEcuDCaOvUq61c0DdA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790253438;
+	c=relaxed/relaxed; t=1790253443;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,94 +31,93 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Last-TLS-Session-Version:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=8iZQkYV/T7wb2p68UI7XGCTpp/V2HE/4gzLzwu9RLJQ=;
-	b=KKge76KBXkGquHBl5Na/9aMwaLNAki2nVvabP9zXxkbJDPwIsvQ7wzL72eXOdFLcldJi
-	 NpKs/c4/hYrBXXuTaaHuE5+UEJqgxB5jPcND4P6xNtazLMgcLsaz/pZBcCAUOOCkXRA1v
-	 T619hCwhFKY2uBEmjNK9Su3/b3q6yTqjvz7N5qhRDXIEaZ4EjrYjsLXYnRQKFd6LdU8Pp
-	 Ka9d0TWvHtRkMWVe8X6ybvVZcoV0F3Os1h835VY2vrzjxx/nVmQ+VtI26DuIMBKTL9db3
-	 2t5dRefZXUeYYJOrvDIgWzqVem27UPPm8tuuZxDHPshsmU6y0AlqvTvVJBT1BfeYO3A==
+	bh=iAV/uTUz3p+vjuwf/7OLd6CNd9UOA1eZHfTxtzxcyWw=;
+	b=VvdlI72DpD+4c+JbvNboDCUu2VRnDnfTXmyk6sXhFTzEuVL4HDUOsBOghWKk5DwDqvNL
+	 ZjR5Bf7qVqYHG1RNbf1CSMnSoIJO5JpaiF92dw5RNN28aq36/wg2MIn+PArvWsOHsMdtd
+	 OX3aFUblR49TainP0EgoKi1isQlhPhu0vAGI8oAGF09Tk1Trtiw6AW8Yv9Ou8GteTJ2WP
+	 Ek+TUzf95bu/04NHT6mBmAQa75gj3ogi+FF964uyTDz0YbU54gj/Rjm4GG6kAm/qQe4+u
+	 1eUdg6cbxIcifXdHj1Xu04iRpQkVv3B3EtiSyNBthom6QvgQhC88WycpTBJYMU8XlBg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790253438;
-	bh=8iZQkYV/T7wb2p68UI7XGCTpp/V2HE/4gzLzwu9RLJQ=;
+	d=lists.u-boot-project.org; s=default; t=1790253443;
+	bh=iAV/uTUz3p+vjuwf/7OLd6CNd9UOA1eZHfTxtzxcyWw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=oCyejhYvEXdFq0NTC7fz1Q0WWOyvDlAJYSbhLTWf5B8eTnQLDYfvR/jD2iks2wadW
-	 O0w/ULjTjVQFM0+GCT1iA0uG2Hm/klL6BXOe3Ge3orK4dAfeuh7pHe++qfXD5TNEcZ
-	 iH9nOX73I2H6YDJleM0Tt2EHfIyme2KHP7Gy8Gx7sO3HKa+igN3IXvpUi/+WA0ddK9
-	 DM4XgLlZ64SLQOCFUWqbhx3g7NvMdHeueZkn7Vx0eQqqP4Ej4lINWC1LH6H1dJhMMN
-	 PVC1bhRv6FbnwQhYCw39RfEVTlj0xrcTptExbpONiwN7Jy/jG3Sn/QzdlHR79RktCL
-	 AVnfDFQDk31Cw==
+	b=glhHtogzBN1jpQcWPkljtLTTO9/OrP6ZQXM/w/MaBVAgY9rHSafSjSkvJLM/lPeSa
+	 aD7oeKQs3oElAl8nEs8pUbXf4bBrZ2NLqBl32ITvj9aYpKOOXXKkw7Gd7NkFbnpiOy
+	 XiHhsmpUoLyzzimsCYKjrfPOrLyhIXhtkxa5E+ufHlL+q1F7QZgY+g83+lrB7uEeBF
+	 DBcSbVNSTxf9jpGSKNaVVZ3krbRCheiDJHwx+XzQ5xLiRbZfw1YIVfph2ZQqbiWgje
+	 eW4f87jjdaniwywW2WvPudbPNVaxGS6DucQX/TaucpTMwkQ42SgBq9dmBiY51nKEXA
+	 WRWWAmGfKqnrg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 436DF80EEF;
-	Thu, 24 Sep 2026 12:37:18 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 3498A35A
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:37:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1A43281DFA;
+	Thu, 24 Sep 2026 12:37:23 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1B021392
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:37:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 25A4440D1E
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:37:17 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0CDD2407CD
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:37:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WZ-3wkW3hwFU for <u-boot@lists.u-boot-project.org>;
- Thu, 24 Sep 2026 12:37:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org EA9C840D72
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=185.171.202.116
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790253436;
- b=FwbnsumUMw1PXFFNY4EBtAybhPcJ+ofCHJG0YDAW3PwiTLFtNvyGDBtJ1/HKxAlM+nnd
- SYKZ5jDH553kJQ+1VpXod7RUdTvCBvpORBJl0nmWX4ycaWuCtx7RiomqMbknqPXd94uvi
- svurcHTOuJN4YqrZCcS15UbI40DxmIvNPD1DBswYVwzLBNYSLYUEPiB/Xy7v9zFkQbQNd
- 0AJLOly9zPieQqs00ZEIhJDySCd7fUlH3m4pA8PfzUY5cxJv8GpD0w2NXA8JjUm/cfdgZ
- zuttxuYUnowo/7yNRzoeK9Tvu3Iqq3dQRG4XukkeMZJmNvY1lF45g8yWXOjMStZEFmA==
+ id dGZe5ggd0yFc for <u-boot@lists.u-boot-project.org>;
+ Thu, 24 Sep 2026 12:37:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 6001440632
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790253439;
+ b=tGKX0z88JVC5d5tR3FgDB1uKKrpFTp74JcxW6MbSKCb7bquB3oOi26ERQy5dR1pi7ytj
+ xH6nNv1oYZxr8zl12pzZexpbGHVBClOPPLnQ8ic7//T6/CbgVLSexqWqtO+0swFEfynz+
+ vWssCN1ge72RTgcL8CqTC1S3GL9KOK7/qrmwqHsEwz72sri+mRGypYzFYsKUcgkZ3EQzo
+ GGRT9K6y49I/Vzj3PXckhhQrqGShUgUCoF8ikX864FZTWRd+6pSHdxK585ZSPldvaOjCu
+ VNPSlLJhFeGnhcxUJKVx5cqiaoiAvgR8uhMSCzE4JO6WtiiV0xyJJ97TShUd4TmgLQg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790253436;
+ c=relaxed/relaxed; t=1790253439;
  h=Received-SPF:Received:Received:Received:DKIM-Signature:From:To:Cc:
  Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-Last-TLS-Session-Version;
- bh=8iZQkYV/T7wb2p68UI7XGCTpp/V2HE/4gzLzwu9RLJQ=;
- b=e+TIOurDhSDwB5rRgmFPHveuwKA9x4Rf7fxH0TUUsAXC1kNLZZ37xe4O8sQqwGim15iV
- qg1gswztVSobUCDPG0toDefwcVoVjPnVS3uWxRO0eb8PHl8mE/Qu9zQ7980EKbgzf5aFE
- 4TPvCxzXQbTLEHQ+eyA9StTeEEY2hcWMEGJr3b89I519bMDzTeTzrDB37s93nMgwELdrD
- +d0PPiONYgVrJzm+6nsbM09F2Yqf3iDE2ri7fKewgM8EehI3EXV8kRF6qkC7dzjJo0RzH
- 6PcQ11g2shhU+PAYZWhUOVPvQdUHAU+tovw38Ac0D9AV5IQvL4qum71+01gEB4T6hDQ==
+ bh=iAV/uTUz3p+vjuwf/7OLd6CNd9UOA1eZHfTxtzxcyWw=;
+ b=qjBzMeER4VPo7TzQYFIVsKFx3uvx/bI6Oi08Tm34GOY/Qvt0HbmMHnuL2YtAX7VN/iNF
+ dNUR0fiD16vNTQOiM892Sg3N3XT97KNy4VdyevwZ6l7FdF1U8HP8LR0o82X1eA3NzO/iH
+ JpDePCWuaB7iJp7svdBNXTR/LWml8OIJ+EHLCJOMrgr23mg2+Yy8MGmJK6nqXfVN63/EF
+ 5oCsK7gYfNACgY1dCBRoT2CaFB6KTzh3ZJHPHNfaDtvYLt7aB6mD6AtvOC0n3zXcDe3Fd
+ NwjzK4HXx4Dk8dOUuN5qbJa+arSK42vD+juodS2fXEEFYATIeLdPZZhVWV15BPWlyqg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=bootlin.com; 
  dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b="ioo/X6D9"; 
- arc=none smtp.remote-ip=185.171.202.116
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.171.202.116;
- helo=smtpout-04.galae.net; envelope-from=richard.genoud@bootlin.com;
+ header.s=dkim header.b=ntfWjUGD; 
+ arc=none smtp.remote-ip=185.246.84.56
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
+ helo=smtpout-02.galae.net; envelope-from=richard.genoud@bootlin.com;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
- header.a=rsa-sha256 header.s=dkim header.b=ioo/X6D9
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- by smtp4.osuosl.org (Postfix) with ESMTPS id EA9C840D72
- for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:37:15 +0000 (UTC)
+ header.a=rsa-sha256 header.s=dkim header.b=ntfWjUGD
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6001440632
+ for <u-boot@lists.u-boot-project.org>; Thu, 24 Sep 2026 12:37:18 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id CD9A1C211C1;
- Thu, 24 Sep 2026 12:38:00 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id A5C2A1A1000;
+ Thu, 24 Sep 2026 12:37:16 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 6207160341;
- Thu, 24 Sep 2026 12:37:13 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 7789560341;
+ Thu, 24 Sep 2026 12:37:16 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 93B7310329456; 
- Thu, 24 Sep 2026 14:37:08 +0200 (CEST)
+ with ESMTPSA id F0E0D10329463; 
+ Thu, 24 Sep 2026 14:37:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1790253430; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1790253434; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=8iZQkYV/T7wb2p68UI7XGCTpp/V2HE/4gzLzwu9RLJQ=;
- b=ioo/X6D9cnbNWRekkXnpcmuXQ1XupLUA2lgHkXmiAKowuUnIoLv0B1cMbP8rhd39aTtmqo
- XNqtSekc0UuTcTASN2bNmE8yWO+jAfWyV0p/HZd1Me5WDu6cdyDK6LREvb28YG4RO0HsmN
- 2FdtWPuhzCKylXNyZzEoQPG6JAmeWUTaJE/fy6aMSlOqb2Fta397+v4eDSvy0CB4EZSNfv
- 0+IzM3uOfqy1B7jEU24zG9LabcRiryArZDZiq0o5jmbF6dPhbutJ9JLQm7RQqZpYIBu78D
- fKgWHAbegpLXvYtLmEiicI/p3+VUiZs1Zcbih7YhVTEq8iZi5o7kz3FB54XNJw==
+ bh=iAV/uTUz3p+vjuwf/7OLd6CNd9UOA1eZHfTxtzxcyWw=;
+ b=ntfWjUGDFxF9rvOkQpeir5ah67baYw4gsuE9e9ZdOqOPoEgNyN/qY0h+C9iUj0A120pOAI
+ /As3k905vqmaHT8ux4AnGl5LE4OXruZiy9GqgwxX7Yay67LnrWS8n5lUYtldqs3cl9il9U
+ +S9PeSk8iQroO7iqMRbMOLMysdDbMekM6bYNOT/ciJGwglBKrQT701c1qBtM8jbOgvOLVz
+ WDK9PitSFOqQjOADVcV2/lh4f38QuwkniRp7pah+O4+QLWY0mTNT79CRZmlpMMtdQgAewh
+ 6B/KMmb/xJ7T8hW3DuJqWrj1WgtMF0FrYtY3Q6UDHKoHI/rQiJIWihmM4FEt+w==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  "Andrew F . Davis" <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
@@ -132,9 +131,9 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>,
  u-boot@lists.u-boot-project.org
-Subject: [PATCH v6 18/22] arm: mach-k3: j721s2: Enable LPM resume flow
-Date: Thu, 24 Sep 2026 14:35:29 +0200
-Message-ID: <20260924123533.2599438-19-richard.genoud@bootlin.com>
+Subject: [PATCH v6 19/22] arm: mach-k3: Update pm-boardcfg for all k3 platforms
+Date: Thu, 24 Sep 2026 14:35:30 +0200
+Message-ID: <20260924123533.2599438-20-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260924123533.2599438-1-richard.genoud@bootlin.com>
 References: <20260924123533.2599438-1-richard.genoud@bootlin.com>
@@ -154,117 +153,974 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: "Thomas Richard (TI)" <thomas.richard@bootlin.com>
+From: Abhash Kumar Jha <a-kumar2@ti.com>
 
-First, set LPM core bus path and compatible needed by extract_lpm_region
-to find lpm-metadata memory region (at boot and at resume time)
+Update the pm-cfg and schema to a new version. The new pm-boardcfg has the
+following substructures
 
-Then, add the board specific part of the exit retention sequence for
-k3-ddrss:
-- exit DDR from retention
-- de-assert the DDR_RET pin
-- restore DDR max frequency
-- exit DDR from low power
-After that, the generic resume path is run.
+- lpm_cfg : Low Power Mode configuration
+- pll_cfg : PLL configuration
+- dev_cfg : Device Power configuration
+- rsvd_pmic_cfg : Reserved PMIC configuration
+- rsvd_cfg : Reserved configuration containing the size for the flexible
+    array appended at the end of pm-boardcfg
 
+The ABI revision for pm-cfg is also changed from 0:1 to 1:1
+
+Modify the pm-cfg for am62ax, am62dx, am62px, am62x, am64x, am65x,
+j721s2, j722s to change the hierarchy from "pm-cfg -> rev" to
+"pm-cfg -> pm-boardcfg -> rev".
+
+This change only adds a new 'pm-boardcfg' property as a parent of the
+'rev' property, this does not affect the generated pm-cfg binary.
+
+Add u64 type in schema and update the boardcfg script to deal with u64
+types.
+
+Acked-by: Udit Kumar <u-kumar1@ti.com>
+Signed-off-by: Abhash Kumar Jha <a-kumar2@ti.com>
 Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
-Signed-off-by: Thomas Richard (TI) <thomas.richard@bootlin.com>
 ---
- arch/arm/mach-k3/j721s2/j721s2_init.c | 57 +++++++++++++++++++++++++--
- 1 file changed, 53 insertions(+), 4 deletions(-)
+ arch/arm/mach-k3/schema.yaml            | 146 ++++++++++++++++++++++--
+ board/beagle/beagleboneai64/pm-cfg.yaml |   5 +-
+ board/beagle/beagleplay/pm-cfg.yaml     |   7 +-
+ board/beagle/beagley-ai/pm-cfg.yaml     |   7 +-
+ board/phytec/phycore_am62ax/pm-cfg.yaml |   7 +-
+ board/phytec/phycore_am62x/pm-cfg.yaml  |   7 +-
+ board/phytec/phycore_am64x/pm-cfg.yaml  |   5 +-
+ board/phytec/phycore_am68x/pm-cfg.yaml  |   7 +-
+ board/ti/am62ax/pm-cfg.yaml             |   7 +-
+ board/ti/am62px/pm-cfg.yaml             |   7 +-
+ board/ti/am62x/pm-cfg.yaml              |   7 +-
+ board/ti/am64x/pm-cfg.yaml              |   5 +-
+ board/ti/am65x/pm-cfg.yaml              |   7 +-
+ board/ti/j7200/pm-cfg.yaml              |  92 ++++++++++++++-
+ board/ti/j721e/pm-cfg.yaml              |  92 ++++++++++++++-
+ board/ti/j721s2/pm-cfg.yaml             |  94 ++++++++++++++-
+ board/ti/j722s/pm-cfg.yaml              |  94 ++++++++++++++-
+ board/ti/j784s4/pm-cfg.yaml             |  94 ++++++++++++++-
+ board/toradex/aquila-am69/pm-cfg.yaml   |   7 +-
+ board/toradex/verdin-am62/pm-cfg.yaml   |   7 +-
+ board/toradex/verdin-am62p/pm-cfg.yaml  |   7 +-
+ tools/binman/etype/ti_board_config.py   |   4 +-
+ 22 files changed, 649 insertions(+), 66 deletions(-)
 
-diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
-index 780d853423f8..d301525d2455 100644
---- a/arch/arm/mach-k3/j721s2/j721s2_init.c
-+++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
-@@ -16,12 +16,20 @@
- #include <dm/uclass-internal.h>
- #include <dm/pinctrl.h>
- #include <dm/root.h>
-+#include <mach/k3-ddr.h>
- #include <mmc.h>
-+#include <power/pmic.h>
- #include <remoteproc.h>
+diff --git a/arch/arm/mach-k3/schema.yaml b/arch/arm/mach-k3/schema.yaml
+index 8c4691f24ed6..f9d169526061 100644
+--- a/arch/arm/mach-k3/schema.yaml
++++ b/arch/arm/mach-k3/schema.yaml
+@@ -19,21 +19,15 @@ definitions:
+         type: integer
+         minimum: 0
+         maximum: 0xffffffff
++    u64:
++        type: integer
++        minimum: 0
++        maximum: 0xffffffffffffffff
  
- #include "../sysfw-loader.h"
-+#include "../lpm-common.h"
- #include "../common.h"
  
-+#define MAX_DDR_CONTROLLERS	2
-+
-+/* DDR retention bits */
-+#define DDR_RET_VAL BIT(3)
-+
- /* NAVSS North Bridge (NB) */
- #define NAVSS0_NBSS_NB0_CFG_MMRS		0x03702000
- #define NAVSS0_NBSS_NB1_CFG_MMRS		0x03703000
-@@ -262,9 +270,12 @@ bool check_rom_loaded_sysfw(void)
- void k3_mem_init(void)
- {
- 	struct udevice *dev;
--	int ret;
-+	int ret, ctrl = 0;
  
- 	if (IS_ENABLED(CONFIG_K3_J721E_DDRSS)) {
-+		struct udevice *devs[MAX_DDR_CONTROLLERS];
-+		struct k3_ddrss_regs regs[MAX_DDR_CONTROLLERS];
-+
- 		ret = uclass_get_device_by_name(UCLASS_MISC, "msmc", &dev);
- 		if (ret)
- 			panic("Probe of msmc failed: %d\n", ret);
-@@ -272,10 +283,48 @@ void k3_mem_init(void)
- 		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
- 		if (ret)
- 			panic("DRAM 0 init failed: %d\n", ret);
-+		devs[0] = dev;
-+		ctrl++;
+ type: object
+ properties:
+-    pm-cfg:
+-        type: object
+-        properties:
+-            rev:
+-                type: object
+-                properties:
+-                    boardcfg_abi_maj:
+-                        $ref: "#/definitions/u8"
+-                    boardcfg_abi_min:
+-                        $ref: "#/definitions/u8"
+     board-cfg:
+         type: object
+         properties:
+@@ -283,6 +277,138 @@ properties:
+                         items:
+                             $ref: "#/definitions/u8"
  
--		ret = uclass_next_device_err(&dev);
--		if (ret && ret != -ENODEV)
--			panic("DRAM 1 init failed: %d\n", ret);
-+		while (ctrl < MAX_DDR_CONTROLLERS) {
-+			ret = uclass_next_device_err(&dev);
-+			if (ret == -ENODEV)
-+				break;
++    pm-cfg:
++        type: object
++        properties:
++            pm_boardcfg:
++                type: object
++                properties:
++                    rev:
++                        type: object
++                        properties:
++                            boardcfg_abi_maj:
++                                $ref: "#/definitions/u8"
++                            boardcfg_abi_min:
++                                $ref: "#/definitions/u8"
 +
-+			if (ret)
-+				panic("DRAM %d init failed: %d\n", ctrl, ret);
-+			devs[ctrl] = dev;
-+			ctrl++;
-+		}
++                    lpm_cfg:
++                        type: object
++                        properties:
++                            subhdr:
++                                type: object
++                                properties:
++                                    magic:
++                                        $ref: "#/definitions/u16"
++                                    size:
++                                        $ref: "#/definitions/u16"
++                            suspend_initiator:
++                                $ref: "#/definitions/u8"
++                            lpm_mode:
++                                $ref: "#/definitions/u8"
++                            lpm_rsvd1:
++                                $ref: "#/definitions/u16"
++                            lpm_rsvd2:
++                                $ref: "#/definitions/u32"
 +
-+		k3_set_lpm_core_bus_node_path("/bus@100000/bus@28380000");
-+		k3_set_lpm_core_compatible("ti,j721s2-r5f");
++                    pll_cfg:
++                        type: object
++                        properties:
++                            subhdr:
++                                type: object
++                                properties:
++                                    magic:
++                                        $ref: "#/definitions/u16"
++                                    size:
++                                        $ref: "#/definitions/u16"
++                            pll_cfg_entries:
++                                        type: array
++                                        minItems: 0
++                                        maxItems: 5
++                                        items:
++                                            type: object
++                                            properties:
++                                                dev_id:
++                                                    $ref: "#/definitions/u32"
++                                                clk_id:
++                                                    $ref: "#/definitions/u32"
++                                                pll_freq:
++                                                    $ref: "#/definitions/u64"
++                    dev_cfg:
++                        type: object
++                        properties:
++                            subhdr:
++                                type: object
++                                properties:
++                                    magic:
++                                        $ref: "#/definitions/u16"
++                                    size:
++                                        $ref: "#/definitions/u16"
++                            dev_cfg_entries:
++                                        type: array
++                                        minItems: 0
++                                        maxItems: 5
++                                        items:
++                                            type: object
++                                            properties:
++                                                dev_id:
++                                                    $ref: "#/definitions/u32"
++                                                state:
++                                                    $ref: "#/definitions/u32"
++                                                flag:
++                                                    $ref: "#/definitions/u32"
++                    rsvd_pmic_cfg:
++                        type: object
++                        properties:
++                            subhdr:
++                                type: object
++                                properties:
++                                    magic:
++                                        $ref: "#/definitions/u16"
++                                    size:
++                                        $ref: "#/definitions/u16"
++                            pmic_rsvd1:
++                                $ref: "#/definitions/u32"
++                            pmic_rsvd2:
++                                $ref: "#/definitions/u32"
++                            pmic_rsvd3:
++                                $ref: "#/definitions/u32"
++                    rsvd_cfg:
++                        type: object
++                        properties:
++                            subhdr:
++                                type: object
++                                properties:
++                                    magic:
++                                        $ref: "#/definitions/u16"
++                                    size:
++                                        $ref: "#/definitions/u16"
++                            rsvd1:
++                                $ref: "#/definitions/u32"
++                            rsvd2:
++                                $ref: "#/definitions/u32"
++                            rsvd3:
++                                $ref: "#/definitions/u32"
++                            reserved_entry_size:
++                                $ref: "#/definitions/u16"
 +
-+		if (j7xx_board_is_resuming()) {
-+			/* exit DDRs from retention */
-+			for (ctrl = 0; ctrl < MAX_DDR_CONTROLLERS; ctrl++)
-+				k3_ddrss_lpddr4_exit_retention(devs[ctrl],
-+							       &regs[ctrl]);
++            reserved_entries:
++                type: array
++                minItems: 0
++                maxItems: 2
++                items:
++                    type: object
++                    properties:
++                        reserved1:
++                            $ref: "#/definitions/u16"
++                        reserved2:
++                            $ref: "#/definitions/u16"
++                        reserved3:
++                            $ref: "#/definitions/u16"
++                        reserved4:
++                            $ref: "#/definitions/u8"
++                        reserved5:
++                            $ref: "#/definitions/u8"
 +
-+			/* de-assert DDR_RET pin */
-+			k3_deassert_ddr_ret("pmic@4c", DDR_RET_VAL, 0, false);
+     rm-cfg:
+         type: object
+         properties:
+diff --git a/board/beagle/beagleboneai64/pm-cfg.yaml b/board/beagle/beagleboneai64/pm-cfg.yaml
+index 7ae52b3358e2..5533a609ba4b 100644
+--- a/board/beagle/beagleboneai64/pm-cfg.yaml
++++ b/board/beagle/beagleboneai64/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
++    pm_boardcfg:
+         rev:
+-                boardcfg_abi_maj: 0x0
+-                boardcfg_abi_min: 0x1
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/beagle/beagleplay/pm-cfg.yaml b/board/beagle/beagleplay/pm-cfg.yaml
+index 9853a25eb85c..75cdeb8098fc 100644
+--- a/board/beagle/beagleplay/pm-cfg.yaml
++++ b/board/beagle/beagleplay/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/beagle/beagley-ai/pm-cfg.yaml b/board/beagle/beagley-ai/pm-cfg.yaml
+index 46b3ad201091..ab1c8e06f10e 100644
+--- a/board/beagle/beagley-ai/pm-cfg.yaml
++++ b/board/beagle/beagley-ai/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/phytec/phycore_am62ax/pm-cfg.yaml b/board/phytec/phycore_am62ax/pm-cfg.yaml
+index 4031af2f4d3a..2eebba0d986f 100644
+--- a/board/phytec/phycore_am62ax/pm-cfg.yaml
++++ b/board/phytec/phycore_am62ax/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/phytec/phycore_am62x/pm-cfg.yaml b/board/phytec/phycore_am62x/pm-cfg.yaml
+index 9853a25eb85c..75cdeb8098fc 100644
+--- a/board/phytec/phycore_am62x/pm-cfg.yaml
++++ b/board/phytec/phycore_am62x/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/phytec/phycore_am64x/pm-cfg.yaml b/board/phytec/phycore_am64x/pm-cfg.yaml
+index 7afb29621088..e9866d0ea24d 100644
+--- a/board/phytec/phycore_am64x/pm-cfg.yaml
++++ b/board/phytec/phycore_am64x/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
++    pm_boardcfg:
+         rev:
+-                boardcfg_abi_maj: 0x0
+-                boardcfg_abi_min: 0x1
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/phytec/phycore_am68x/pm-cfg.yaml b/board/phytec/phycore_am68x/pm-cfg.yaml
+index e6496512b6b7..5d8071a2d5cb 100644
+--- a/board/phytec/phycore_am68x/pm-cfg.yaml
++++ b/board/phytec/phycore_am68x/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/ti/am62ax/pm-cfg.yaml b/board/ti/am62ax/pm-cfg.yaml
+index 4031af2f4d3a..2eebba0d986f 100644
+--- a/board/ti/am62ax/pm-cfg.yaml
++++ b/board/ti/am62ax/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/ti/am62px/pm-cfg.yaml b/board/ti/am62px/pm-cfg.yaml
+index 3ff27ce702c2..15a0cc6e8588 100644
+--- a/board/ti/am62px/pm-cfg.yaml
++++ b/board/ti/am62px/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ #
+ ---
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/ti/am62x/pm-cfg.yaml b/board/ti/am62x/pm-cfg.yaml
+index 9853a25eb85c..75cdeb8098fc 100644
+--- a/board/ti/am62x/pm-cfg.yaml
++++ b/board/ti/am62x/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/ti/am64x/pm-cfg.yaml b/board/ti/am64x/pm-cfg.yaml
+index 7afb29621088..e9866d0ea24d 100644
+--- a/board/ti/am64x/pm-cfg.yaml
++++ b/board/ti/am64x/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
++    pm_boardcfg:
+         rev:
+-                boardcfg_abi_maj: 0x0
+-                boardcfg_abi_min: 0x1
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/ti/am65x/pm-cfg.yaml b/board/ti/am65x/pm-cfg.yaml
+index ee0d1c67a718..50df1310a38d 100644
+--- a/board/ti/am65x/pm-cfg.yaml
++++ b/board/ti/am65x/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/ti/j7200/pm-cfg.yaml b/board/ti/j7200/pm-cfg.yaml
+index 85cd2c9dbcaf..b38958bea888 100644
+--- a/board/ti/j7200/pm-cfg.yaml
++++ b/board/ti/j7200/pm-cfg.yaml
+@@ -7,6 +7,94 @@
+ ---
+ 
+ pm-cfg:
++    pm_boardcfg:
+         rev:
+-                boardcfg_abi_maj: 0x0
+-                boardcfg_abi_min: 0x1
++            boardcfg_abi_maj: 0x1
++            boardcfg_abi_min: 0x1
++        lpm_cfg:
++            subhdr:
++                magic: 0x4C41
++                size: 0x0C
++            suspend_initiator: 0xA
++            lpm_mode: 0x5
++            lpm_rsvd1: 0x0
++            lpm_rsvd2: 0x0
++        pll_cfg:
++            subhdr:
++                magic: 0xC31E
++                size: 0x54
++            pll_cfg_entries:
++                -  # 1
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 2
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 3
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 4
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 5
++                    dev_id: 0x6
++                    clk_id: 0x7
++                    pll_freq: 0x8
++        dev_cfg:
++            subhdr:
++                magic: 0x74B1
++                size: 0x40
++            dev_cfg_entries:
++                -  # 1
++                    dev_id: 0xB
++                    state: 0xD
++                    flag: 0xE
++                -  # 2
++                    dev_id: 0xCC
++                    state: 0xA
++                    flag: 0xA
++                -  # 3
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xA
++                -  # 4
++                    dev_id: 0xCC
++                    state: 0xA
++                    flag: 0xA
++                -  # 5
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xCC
++        rsvd_pmic_cfg:
++            subhdr:
++                magic: 0x8A1D
++                size: 0x10
++            pmic_rsvd1: 0xA
++            pmic_rsvd2: 0xA
++            pmic_rsvd3: 0xDD
++        rsvd_cfg:
++            subhdr:
++                magic: 0x3CFA
++                size: 0x12
++            rsvd1: 0x0
++            rsvd2: 0x0
++            rsvd3: 0x0
++            reserved_entry_size: 0x10
 +
-+			/* restore DDR max frequency */
-+			for (ctrl = 0; ctrl < MAX_DDR_CONTROLLERS; ctrl++)
-+				k3_ddrss_lpddr4_change_freq(devs[ctrl]);
++    reserved_entries:
++        -
++            reserved1: 4
++            reserved2: 93
++            reserved3: 77
++            reserved4: 26
++            reserved5: 0
++        -
++            reserved1: 4
++            reserved2: 93
++            reserved3: 77
++            reserved4: 26
++            reserved5: 0
+diff --git a/board/ti/j721e/pm-cfg.yaml b/board/ti/j721e/pm-cfg.yaml
+index 7ae52b3358e2..0d6b14de817a 100644
+--- a/board/ti/j721e/pm-cfg.yaml
++++ b/board/ti/j721e/pm-cfg.yaml
+@@ -7,6 +7,94 @@
+ ---
+ 
+ pm-cfg:
++    pm_boardcfg:
+         rev:
+-                boardcfg_abi_maj: 0x0
+-                boardcfg_abi_min: 0x1
++            boardcfg_abi_maj: 0x1
++            boardcfg_abi_min: 0x1
++        lpm_cfg:
++            subhdr:
++                magic: 0x4C41
++                size: 0x0C
++            suspend_initiator: 0xA
++            lpm_mode: 0x5
++            lpm_rsvd1: 0x0
++            lpm_rsvd2: 0x0
++        pll_cfg:
++            subhdr:
++                magic: 0xC31E
++                size: 0x54
++            pll_cfg_entries:
++                -  # 1
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 2
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 3
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 4
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 5
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++        dev_cfg:
++            subhdr:
++                magic: 0x74B1
++                size: 0x40
++            dev_cfg_entries:
++                -  # 1
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xA
++                -  # 2
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xA
++                -  # 3
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xA
++                -  # 4
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xA
++                -  # 5
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xA
++        rsvd_pmic_cfg:
++            subhdr:
++                magic: 0x8A1D
++                size: 0x10
++            pmic_rsvd1: 0xA
++            pmic_rsvd2: 0xA
++            pmic_rsvd3: 0xA
++        rsvd_cfg:
++            subhdr:
++                magic: 0x3CFA
++                size: 0x12
++            rsvd1: 0x0
++            rsvd2: 0x0
++            rsvd3: 0x0
++            reserved_entry_size: 0x10
 +
-+			/* exit DDR from low power */
-+			for (ctrl = 0; ctrl < MAX_DDR_CONTROLLERS; ctrl++)
-+				k3_ddrss_lpddr4_exit_low_power(devs[ctrl],
-+							       &regs[ctrl]);
++    reserved_entries:
++        -
++            reserved1: 4
++            reserved2: 93
++            reserved3: 7744
++            reserved4: 26
++            reserved5: 0
++        -
++            reserved1: 4
++            reserved2: 93
++            reserved3: 7744
++            reserved4: 26
++            reserved5: 0
+diff --git a/board/ti/j721s2/pm-cfg.yaml b/board/ti/j721s2/pm-cfg.yaml
+index e6496512b6b7..ce0435165c9e 100644
+--- a/board/ti/j721s2/pm-cfg.yaml
++++ b/board/ti/j721s2/pm-cfg.yaml
+@@ -7,6 +7,94 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x1
++            boardcfg_abi_min: 0x1
++        lpm_cfg:
++            subhdr:
++                magic: 0x4C41
++                size: 0x0C
++            suspend_initiator: 0xA
++            lpm_mode: 0x5
++            lpm_rsvd1: 0x0
++            lpm_rsvd2: 0x0
++        pll_cfg:
++            subhdr:
++                magic: 0xC31E
++                size: 0x54
++            pll_cfg_entries:
++                -  # 1
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 2
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 3
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 4
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 5
++                    dev_id: 0x6
++                    clk_id: 0x7
++                    pll_freq: 0x8
++        dev_cfg:
++            subhdr:
++                magic: 0x74B1
++                size: 0x40
++            dev_cfg_entries:
++                -  # 1
++                    dev_id: 0xB
++                    state: 0xD
++                    flag: 0xE
++                -  # 2
++                    dev_id: 0xCC
++                    state: 0xA
++                    flag: 0xA
++                -  # 3
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xA
++                -  # 4
++                    dev_id: 0xCC
++                    state: 0xA
++                    flag: 0xA
++                -  # 5
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xCC
++        rsvd_pmic_cfg:
++            subhdr:
++                magic: 0x8A1D
++                size: 0x10
++            pmic_rsvd1: 0xA
++            pmic_rsvd2: 0xA
++            pmic_rsvd3: 0xDD
++        rsvd_cfg:
++            subhdr:
++                magic: 0x3CFA
++                size: 0x12
++            rsvd1: 0x0
++            rsvd2: 0x0
++            rsvd3: 0x0
++            reserved_entry_size: 0x10
 +
-+			/*
-+			 * The DM (PDK) doesn't support being started with
-+			 * caches enabled, and there no gain enabling them here
-+			 * and disabling them just before jumping to DM
-+			 */
-+			do_resume();
-+		}
- 	}
- 	spl_enable_cache();
- }
++    reserved_entries:
++        -
++            reserved1: 4
++            reserved2: 93
++            reserved3: 77
++            reserved4: 26
++            reserved5: 0
++        -
++            reserved1: 4
++            reserved2: 93
++            reserved3: 77
++            reserved4: 26
++            reserved5: 0
+diff --git a/board/ti/j722s/pm-cfg.yaml b/board/ti/j722s/pm-cfg.yaml
+index 46b3ad201091..1ffe2f475c9e 100644
+--- a/board/ti/j722s/pm-cfg.yaml
++++ b/board/ti/j722s/pm-cfg.yaml
+@@ -7,6 +7,94 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x1
++            boardcfg_abi_min: 0x1
++        lpm_cfg:
++            subhdr:
++                magic: 0x4C41
++                size: 0x0C
++            suspend_initiator: 0xA
++            lpm_mode: 0x5
++            lpm_rsvd1: 0x0
++            lpm_rsvd2: 0x0
++        pll_cfg:
++            subhdr:
++                magic: 0xC31E
++                size: 0x54
++            pll_cfg_entries:
++                -  # 1
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 2
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 3
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 4
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 5
++                    dev_id: 0x6
++                    clk_id: 0x7
++                    pll_freq: 0x8
++        dev_cfg:
++            subhdr:
++                magic: 0x74B1
++                size: 0x40
++            dev_cfg_entries:
++                -  # 1
++                    dev_id: 0xB
++                    state: 0xD
++                    flag: 0xE
++                -  # 2
++                    dev_id: 0xCC
++                    state: 0xA
++                    flag: 0xA
++                -  # 3
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xA
++                -  # 4
++                    dev_id: 0xCC
++                    state: 0xA
++                    flag: 0xA
++                -  # 5
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xCC
++        rsvd_pmic_cfg:
++            subhdr:
++                magic: 0x8A1D
++                size: 0x10
++            pmic_rsvd1: 0xA
++            pmic_rsvd2: 0xA
++            pmic_rsvd3: 0xDD
++        rsvd_cfg:
++            subhdr:
++                magic: 0x3CFA
++                size: 0x12
++            rsvd1: 0x0
++            rsvd2: 0x0
++            rsvd3: 0x0
++            reserved_entry_size: 0x10
++
++    reserved_entries:
++        -
++            reserved1: 4
++            reserved2: 93
++            reserved3: 77
++            reserved4: 26
++            reserved5: 0
++        -
++            reserved1: 4
++            reserved2: 93
++            reserved3: 77
++            reserved4: 26
++            reserved5: 0
+diff --git a/board/ti/j784s4/pm-cfg.yaml b/board/ti/j784s4/pm-cfg.yaml
+index a36b86098998..cbe166808df9 100644
+--- a/board/ti/j784s4/pm-cfg.yaml
++++ b/board/ti/j784s4/pm-cfg.yaml
+@@ -8,6 +8,94 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x1
++            boardcfg_abi_min: 0x1
++        lpm_cfg:
++            subhdr:
++                magic: 0x4C41
++                size: 0x0C
++            suspend_initiator: 0xA
++            lpm_mode: 0x5
++            lpm_rsvd1: 0x0
++            lpm_rsvd2: 0x0
++        pll_cfg:
++            subhdr:
++                magic: 0xC31E
++                size: 0x54
++            pll_cfg_entries:
++                -  # 1
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 2
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 3
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 4
++                    dev_id: 0xA
++                    clk_id: 0xA
++                    pll_freq: 0xA
++                -  # 5
++                    dev_id: 0x6
++                    clk_id: 0x7
++                    pll_freq: 0x8
++        dev_cfg:
++            subhdr:
++                magic: 0x74B1
++                size: 0x40
++            dev_cfg_entries:
++                -  # 1
++                    dev_id: 0xB
++                    state: 0xD
++                    flag: 0xE
++                -  # 2
++                    dev_id: 0xCC
++                    state: 0xA
++                    flag: 0xA
++                -  # 3
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xA
++                -  # 4
++                    dev_id: 0xCC
++                    state: 0xA
++                    flag: 0xA
++                -  # 5
++                    dev_id: 0xA
++                    state: 0xA
++                    flag: 0xCC
++        rsvd_pmic_cfg:
++            subhdr:
++                magic: 0x8A1D
++                size: 0x10
++            pmic_rsvd1: 0xA
++            pmic_rsvd2: 0xA
++            pmic_rsvd3: 0xDD
++        rsvd_cfg:
++            subhdr:
++                magic: 0x3CFA
++                size: 0x12
++            rsvd1: 0x0
++            rsvd2: 0x0
++            rsvd3: 0x0
++            reserved_entry_size: 0x10
++
++    reserved_entries:
++        -
++            reserved1: 4
++            reserved2: 93
++            reserved3: 77
++            reserved4: 26
++            reserved5: 0
++        -
++            reserved1: 4
++            reserved2: 93
++            reserved3: 77
++            reserved4: 26
++            reserved5: 0
+diff --git a/board/toradex/aquila-am69/pm-cfg.yaml b/board/toradex/aquila-am69/pm-cfg.yaml
+index 8583da3d55ad..1da3197c1f6a 100644
+--- a/board/toradex/aquila-am69/pm-cfg.yaml
++++ b/board/toradex/aquila-am69/pm-cfg.yaml
+@@ -8,6 +8,7 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/toradex/verdin-am62/pm-cfg.yaml b/board/toradex/verdin-am62/pm-cfg.yaml
+index 9853a25eb85c..75cdeb8098fc 100644
+--- a/board/toradex/verdin-am62/pm-cfg.yaml
++++ b/board/toradex/verdin-am62/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ ---
+ 
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/board/toradex/verdin-am62p/pm-cfg.yaml b/board/toradex/verdin-am62p/pm-cfg.yaml
+index 3ff27ce702c2..15a0cc6e8588 100644
+--- a/board/toradex/verdin-am62p/pm-cfg.yaml
++++ b/board/toradex/verdin-am62p/pm-cfg.yaml
+@@ -7,6 +7,7 @@
+ #
+ ---
+ pm-cfg:
+-    rev:
+-        boardcfg_abi_maj: 0x0
+-        boardcfg_abi_min: 0x1
++    pm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+diff --git a/tools/binman/etype/ti_board_config.py b/tools/binman/etype/ti_board_config.py
+index 3f2135f8f33b..7d1330ef3aab 100644
+--- a/tools/binman/etype/ti_board_config.py
++++ b/tools/binman/etype/ti_board_config.py
+@@ -126,8 +126,10 @@ class Entry_ti_board_config(Entry_section):
+             size = 1
+         elif (data_type == '#/definitions/u16'):
+             size = 2
+-        else:
++        elif (data_type == '#/definitions/u32'):
+             size = 4
++        else:
++            size = 8
+         br = None
+         if type(val) == int:
+             br = val.to_bytes(size, byteorder='little')
 -- 
 2.55.0
 
