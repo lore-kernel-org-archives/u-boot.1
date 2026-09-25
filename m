@@ -1,186 +1,161 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6899DC98318
-	for <u-boot@archiver.kernel.org>; Sat, 26 Sep 2026 08:44:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5B91C98328
+	for <u-boot@archiver.kernel.org>; Sat, 26 Sep 2026 08:44:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D6F01607A2;
-	Sat, 26 Sep 2026 08:44:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DF54140AF9;
+	Sat, 26 Sep 2026 08:44:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PPaLGDHcu5KK; Sat, 26 Sep 2026 08:44:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org B676260720
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790412271;
-	b=FJyDEqvPa+2V6h5fzDy+DStrhd0NSqnGYfbAtNU98o9BPgmARH8sYOvqwEuU6Rng/Kzj
-	 moebg/NG+UWOHV6ll/ZqOgb3SG6HcM48rdDA9lKwfadNsE/Sd1bkNmDYG9ayqHt7Pj/yB
-	 okBca/NUEtvg2/PNxjcNclU7m0XiS8RTOYnA2KFj0SBCCLlKL1gXKwfM7sV9kPkrGbvmE
-	 Edjf5ixyvxQ/5xEmhqxnIRoGnr2ZWorx0ucqn1i8CtdWfAnkMNEO5VrrKpvLXJ9GIjdsj
-	 NAAh/NRR4vmBJkVFFnbKQxh0lQuY9BEUDpsYStpWDe0GgWnvZARV12RJ5nopW01uKew==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790412271;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id m1Xb_tvHemwg; Sat, 26 Sep 2026 08:44:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 07B2340AF6
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790412276;
+	b=tZdse+ZeQkWJYHh/rTMiv0smtMTr3ruGjbsSrUilCHkztrXfL6JCX7hFROrza1dFLH/O
+	 kD+8Cod/b347qoh8772YD7GlfOjMF2NPXvIM0XlLLa3nOcv+hZig/HD91T/ocrREgBpCd
+	 +qP0VKE8W/B6vRDBW1MH6f1YaBSWi4aLI8WjNzpo/boJSdAZu0u9Wl+340rYPmN4Ha87R
+	 0pw0/xuuG4bYEXkrjVgjIEL6nCqgf4Oh16Eo9QkKgFLIBP7O5Q1x8+/MPq0WUrvB5WwGs
+	 p7UwidSy6i1/gPHHb19/qFLb6cAPgQKZ/tQXOpIdUkZKjsk522gRVz3KfFFmNUuwoUw==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790412276;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-Gm-Message-State:X-Received:Date:In-Reply-To:Mime-Version:
+	 References:X-Mailer:Message-ID:Subject:From:To:Cc:Content-Type:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=zPI1KD+Ue68UyzUSBjZJ/jw62NIDdOWYIfj7B/1WI9M=;
-	b=ArlX/MhjdCYdIvurWBlc+j0D2vWE+RToDutWJM9UjlDXOoYqNOcqgI8TncV/Ds0U0Afg
-	 l+DoGrcCi/WbQNiel1SxDktyLJX/M6vBAnrgGeVCnxRz4xWYt3H2vEi+3v34HHogV0y81
-	 +eaT7UCnWBAMxRyPqBDBeSE0o2spqBRrbpTumzOhruCKwAsjH66jYdIIw8zLIkoMPQ/+8
-	 bFLj3/fzoqk/EvN0o2yhj7T4hdtDOFZy7nbf/7eySc2dRy7P2QTLf81dQ6CADLhbd9P5v
-	 4rcPTf5vDr2vhmxPcD8cLeZQfUH73jXsX7+MVqZVjTuSXrD+XO7vwpxVQ0IOuuIXPag==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=pass header.from=google.com;
-	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20251104 header.b=PbwC8EvT;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=XUfSFJ5/5mUSJfbHAkl/ESSkO38/Xs6A0uClhXsHyl4=;
+	b=R6QsMgdxIxk4Q+TVluTLgWgtOq3FrS4IM97bCIWE/7xWgqKANvl+6mbKP1wB1+2iJY1t
+	 jcoDHl71cAsENAx9CNl43L14mBQ+GzuqclLrPzKJ2uZ8M/r3d1zhTAzcUAc+3H2XCzgGv
+	 NG1+3TuneeyMAt+VIFmiDNzXEY1k0j7Wqi/+iPl49pc3HHuQw3wWOJ/YKJ9oUI8BB6sdF
+	 rDUY5OUT+85rOh3QeworYHliQwT/l38olCZ8MaWsVJC6YlVTMh9X0P0p9KSloo6T8mFVo
+	 hqBbR0WS7kb2A3kRJ/Z0sPlZxie6TlYLeCmDTkvYMZsFu41CVtJ9ABUeVzGgj2CR3gw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790412271;
-	bh=zPI1KD+Ue68UyzUSBjZJ/jw62NIDdOWYIfj7B/1WI9M=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790412276;
+	bh=XUfSFJ5/5mUSJfbHAkl/ESSkO38/Xs6A0uClhXsHyl4=;
+	h=Date:In-Reply-To:References:Subject:From:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uuP6QRQKHaSg9e3LBf4LTu1P1hIgfWER/oODAsc6Wbw8ECplEHIq4i2ADHh54lH14
-	 3queYDye9WmCzUSLwL1FpJFnC8t6BgtX38tGluLSXy9lb5lfDCmv8FEQGdpuHZJSP0
-	 Bbp5Vw+yV3VuzL1qR/uhQyrwQiA1sr7Lnpqm78vNa1uOxv+wVIG2Z5HyxaNWze5TGR
-	 HsGwuPOzjJ7fY4O8P9kR49xDqcpr4Xuhip4+IflBZ142PTAWtqQ5WW5WEl7XBRWxc4
-	 p1gb13IloeA8nzCshU9vS5RD1dR7WjCNdOoXo3qUQJtLlpkDQ31Cpg9zmUBLPt1sAF
-	 Z6L5H6pF5VW7g==
+	b=BKCGwClic9tRzFSPMqpoDE+VSVULy7FyMG6iJVVfJIbGXcWhpT7fkXPpRMB3Jn563
+	 ig85kdmjC2MQqxnM5d5dbvEBJnclomKhL3ghrlXSVFBCA4+QWhRYqYT+TqZaRDmR3L
+	 1vmNCEh94NMzc7qn2N74PtZ/2vd6y4UFbfHGnjj/3PeU0MBPtDU6t2LaC24DobGzJh
+	 P6W2pqkNpnJC5vtAAl0aXca4R77i0bkPMxx1i/nzf2YrDvpo1P6nIowrbG/lqzpAYn
+	 S1OB6p0J+IX+DfJeIvDLiy/V73EagelX2khrulkB0MNFDdqsOLwXsArLkraW5wOIUe
+	 BV5HdP1kS9RVw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B676260720;
-	Sat, 26 Sep 2026 08:44:31 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E02AA353
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 22:08:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 07B2340AF6;
+	Sat, 26 Sep 2026 08:44:36 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5FE5F32F
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 22:10:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D1C6D60BE4
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 22:08:21 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4559E81304
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 22:10:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hB0wEBjep-sD for <u-boot@lists.u-boot-project.org>;
- Fri, 25 Sep 2026 22:08:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7135B60626
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:38::e"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790374100;
- b=Kx0bAu/XXP2qH1kDvNUaXA6HnBkU1Y9uergyArfWMMMg7jBqvKVaaB4X970JGFJ0uzMy
- ZFR//L+LPkvNAo+XRe8v1B5ovHUzjeYW8VLnXWUIsVCchvvuPnk3WELIHJVKrkx+cRaZY
- LA5D227N4qHEjFW3NjwZRg8jdzwHT0f45BmOUIxSdkHioxloq87z7UG9rpO2EGe38W9Sb
- Egcw/BF/hrjnjkMmgSvYGP4GFDQYHNJ2HRr0xBPYaASTPQNMyaoWzAa6CM8f7E36MwL2f
- hA/mFp0F6JVCq83BPVY3GNwmXA+hQCUgAoeT4Ysv/8nSYI8KKh4lqsLwvnBYF2opCWg==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790374100;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZdW9IZiAuvBN for <u-boot@lists.u-boot-project.org>;
+ Fri, 25 Sep 2026 22:10:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 6A6088124F
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::1247"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790374216;
+ b=AeH5q8DOP5UyWwofBCQDFFtC6r7cXcm+dMj4UCyylEXz3NBQFwohdRwa1qzeOcUrgCwX
+ xniH9YfU/EITcJjgeUO+55WjaaeekNJ61cRruLboUAH5eMNJhbDBdFJLoIHd1nMYX/nBO
+ l4AVIyAcISlEfEu48cBMoD2YclRuPlrxSQpRNmk5YumnnaPAPs7kVej1h4QbtlWogYUP4
+ D/qVjYPvrLcGF5cBQO/DAkOJrrxLrOIeAZ/5I0uaigLu62JD0zU4eQUn7xSUdNGBW1LU+
+ b7D2dJsx0t9CX5FYKOAm1Tgm8m+1TbJmLv4zLFrq1aBwoNw++H/roVMfurp63QYWCCA==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790374216;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
- MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
- Message-ID:Subject:To:Cc:Content-Type;
- bh=zPI1KD+Ue68UyzUSBjZJ/jw62NIDdOWYIfj7B/1WI9M=;
- b=pQXjwbkoFs1lSTqzmHEt9lBi8HjAoibMt0zLMdwftPbAkfDIjFJOacTsbkpWdjjquQkH
- HLdjg3qs4nwgKJF8+zRXQVaaXgIuRZ4j6rbSey6APRiGcGgb1ioPREbZ/KvbR9BJ5MsFm
- rV8qGknPj2Sp10YlpxuHxoze2OA/ReT8XTDLniLW8pmxCtNmnCJTDZmapWDBRyZNsl9gx
- 09zrsWLERjVp/KwNjUOYupuohwthU49XDsncLOV4hsg2C/EQB0R4mIpwgxQpQDgPy4OYs
- 2uyzx1WqpHla/WxR9a00y2+TWJwmTgmo4Ki46T3jbI9VqxDE1Kb7G3kNHkWRUg5RwOw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org;
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Received:Date:In-Reply-To:
+ Mime-Version:References:X-Mailer:Message-ID:Subject:From:To:Cc:
+ Content-Type;
+ bh=XUfSFJ5/5mUSJfbHAkl/ESSkO38/Xs6A0uClhXsHyl4=;
+ b=Ga3O6vq6fLYzsSOv42NHxxU7OfJB+sVuKS6dEdWR2NPaOy2HNtZRTcDcar3iaPumzmif
+ bdjA2CF3HZpqb+iOXh+8swaL3xpyoJd+ITxvd9vrW8IBzRf3OFajjcDHUbkwHBvNnzWIA
+ 0TKzi5EpGt9nWN1m1l0MgeVM5y7BPMOwc4lnVHNsqln5iDDytP2baM05GBX80qADbC9Cs
+ 1t0VlRsxShESfmAcSEet/79x9sVmcoshR+MqjlRtlc58xwvZG7rGNveVSi73vLVO0RMaL
+ Ob09y1qIDoy4QJU9YvfYM6O/Yb9tCIXqsEHCDa+4uVu6BeYaxOOPv9SgLAjr5zdtz9A==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=google.com; 
  dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256
- header.s=20251104 header.b=PbwC8EvT; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:38::e"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:38::e;
- helo=mail-dl2-x0e.google.com; envelope-from=yuxiaozhang@google.com;
+ header.s=20251104 header.b=bOisIKIY; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::1247"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::1247; helo=mail-dl1-x1247.google.com;
+ envelope-from=3rvg2agskbmextwh9nyg9mffnnfkd.bnlt-annskhrsr.t-anns-oqnidbs.nqf@flex--yuxiaozhang.bounces.google.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256
- header.s=20251104 header.b=PbwC8EvT
-Received: from mail-dl2-x0e.google.com (mail-dl2-x0e.google.com
- [IPv6:2607:f8b0:4864:38::e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7135B60626
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 22:08:19 +0000 (UTC)
-Received: by mail-dl2-x0e.google.com with SMTP id
- a92af1059eb24-144d60be6b0so797229c88.0
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 15:08:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790374099; cv=none;
- d=google.com; s=arc-20260327;
- b=JRYnJdFly4DfdQBQmPELTbxnFL+1+wdc6rRVD1MUjehxKHsc+o1lBgFPgHMhemJcIc
- 1h/CbBGU7RwPKmeD0aLQXokHGZswGS/XEw/2vVlYtRxCtcJgA2gwx1+xOjx6bmnSQVF8
- 82+P9eAd30kEqgti7yajc68KEZMXg1cWs437Ag8UyeAMZUeWYo4XC1VzeOz6Yi1vdV/8
- BjZJnVkwnCSfv+bEXy3jkCA1gy54gXW6tY+5n4eZDbvSraA2dQOcrhLMJo/+niMzcrSF
- pT3VjCCYDN59+oCsJ1V5fYGza7YAdGKoNdnOOeo+sEsBz3f9QVAnIbSteQHeh7yfxKTy
- WWVg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=zPI1KD+Ue68UyzUSBjZJ/jw62NIDdOWYIfj7B/1WI9M=;
- fh=716AGB+te7fmiv94E6M5Qo3NoHxfXdj5YzS2gM6z6U8=;
- b=eMrl7R5zXXz830Ze0/Q4LE0vjO7LDKvaiTEQc7c37wXTMxS5CegngpAHcprU9gJSbD
- bYG8heRIGcRXPIcepnMomJQCiNNl+Pndnhzo5Ear7RmN9nvC1D9FUrV/FqGuLhdQBP8t
- 2mTecCPOobGxRsz8/Tua7SVZBUEfC+ux+TRU1UbBPm6gzGd42OrND9lIMcnskyXee+In
- Kv16L0OWS6ToKD37u1nZjDJIT5Iaw1qxlDzs2ytCb5sAUbX9ZY4ylszOhrv6/Wehfu+J
- jX02KlOFX472p/RGigfkSU4qEzD11+6kRQ/ej8LJ98IwJw4ib2g9NbDEFnzP/W1Q5QC2
- fIgg==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=google.com header.i=@google.com
+ header.a=rsa-sha256 header.s=20251104 header.b=bOisIKIY
+Received: from mail-dl1-x1247.google.com (mail-dl1-x1247.google.com
+ [IPv6:2607:f8b0:4864:20::1247])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6A6088124F
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 22:10:15 +0000 (UTC)
+Received: by mail-dl1-x1247.google.com with SMTP id
+ a92af1059eb24-1438492fb40so2022925c88.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 15:10:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20251104; t=1790374099; x=1790978899;
+ d=google.com; s=20251104; t=1790374215; x=1790979015;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=zPI1KD+Ue68UyzUSBjZJ/jw62NIDdOWYIfj7B/1WI9M=;
- b=PbwC8EvTAfvcOb5u0wgHRV5bYIQ84EHesT+03ebYMKCQzLJjWkttMVPw+E82Ald/b+
- RFwd/PCZTHFxUd6+6Ol5Ami8wVtRjp/wuUpc1xqX9oPwADvh/h6aODC5BWQ483JoyW2p
- bWsSCKsrV1ZSzz+tRi9lOANJzOJ5JNiNkleciiZnzMLJAtl/2v+6zpcdu+KUFx4vypKy
- jx6udrGzaR1lblIvbcp0OzGnD8EfoufXX8ZdilS3G3UglYcUcIzS41yD3yVQ/mLxMI2D
- qkno5kAO+13dWfmAOSgWpl993KAfWu88jkKF2BKj8blNQIVLHB7IBKgPihVkEiomLyx/
- BF0w==
+ h=content-type:cc:to:from:subject:message-id:references:mime-version
+ :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=XUfSFJ5/5mUSJfbHAkl/ESSkO38/Xs6A0uClhXsHyl4=;
+ b=bOisIKIY5oStD+JP1R/Y/Mwkg8VULPaETiuWKvItqY0so02EtNE6Plcah4WUTKcy1C
+ 9WcuDZ0uxR7qU9Q7TbANP3zP8b1Lt937ZpTEajSh1O0l6gEwUYAxSSrHiCjZyKCk4QXy
+ vOwfKff69R95/NTEJsmg4JQ9F+R1h34/gbaxbqdONNM/1vhgDpMCsI/nNf7VZOMRvqCf
+ 7xwTNDc5QY4jKqSfGico0ERykVXyhW0Og/rLGn0ipF9Ew8yv9Sv/+gj5a74hZgVKH883
+ Xz2PAlU57wfghtRQbDzNwwBJMpebcfAyaDksbfEulTkqfsDdOqSjmT4Sg+ihx8iyV6Y+
+ 1nyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790374099; x=1790978899;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=zPI1KD+Ue68UyzUSBjZJ/jw62NIDdOWYIfj7B/1WI9M=;
- b=RmoPvLy2dw4LxnJGL1Qvy1XDbkmA+jwZKV1dXtl+It0z2Zo3Rd+bc//lZGKw2Bh/Dm
- uTGnskRmy+LNBV8TWhFArSNe2kWtZhDptSCFx/g9xpwHtyU0COB2Nl9axGpk7kMfXsqP
- hZlE+rJ3NdeOchuVNp2aoRcKDg6HR1A33+QFkHQG9QwgypC7H57X6eUK216wH4TKPMxD
- 202PK2ayBUxI7FUi8GG3qJsnaKFNuQQDCb3jOXmXzy5LyVx0vLRphBc0HiIgj7Yk/7tq
- uQj3lLHlDar5JPCdALxbvjl9LwSgqzhQHfoX7dbUleqkYk7GodeL4gls19Cf+Idz69/g
- L96A==
+ d=1e100.net; s=20260707; t=1790374215; x=1790979015;
+ h=content-type:cc:to:from:subject:message-id:references:mime-version
+ :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=XUfSFJ5/5mUSJfbHAkl/ESSkO38/Xs6A0uClhXsHyl4=;
+ b=sXO8RiVjsroSmmBv55k47TsBaWz/acEB5tKgmHDP5TANOCWa6dr1jALWRDVdK5Esrq
+ GU/X/c8c/mAeWCm33ndPkbXebEVcIeIjPCOlfSt4qPgFqEITBgtp8DZldb2dK5nQfrg0
+ 1v95ksHDTavGgfvL/JOcSuX68d/WfG91coswCTl06Xs/kfHssdbBgRyMNf6vhB3XozF2
+ zetwBclPoUTmaiTRKrWyJzjZxBvzKWrWwbFasWYYWZMTyti+EU/u8NJwcWaKQU1xR1Lc
+ CNxcmdCf+gQRoPvI8vBMEsfZvpWbPtKQ4sSvT8X3hTIHMsPpZHyD9x81bUZ6gnythA1W
+ 562g==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxUf7r5/oQ+HQ4GJS3GG3QY+6D3O1Dn9GfgXj9b1o+P3hQV3wZAwNTsGr+XM5xwo2Uyjd/vmjk=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lq/b43eg4vDArIAM0F8T5SYtIbXHaqOjVg3NGSuGQPG9pOBQYO
- 6n5lVkFTrxsvmB83vEQ9YDbitBv0hbtWw/0XfqY79JIikejGjZlvZx6gJPaAiBsi6Rs6QIIUNQ7
- BGRQoFIhcdEwSpN2TsihxzTP4APo/UDnhphfl0jPJ
-X-Gm-Gg: AYBFou3tqskc4Wida8Orr4X2h9fNMWMUzJ9Nhp4OVYJFuXOHOQ0+hiPltY27Tc5YpsO
- N4HXfKJNTSKN0OZnyWL2HzM2CylPSKuhxY9FJb92rLOzGdS2m4UAlMWLjXJJr9x5TUbfoSDgDC5
- lf/taIW+XAOawt4BsClHGNGMOv79e1GIoZnFZZy3nq6zOVOvTX9lun0uD1ZRX4q50b2tFsUVyyy
- rQZn7yE5XZTb0PtO10MyEPNROMOCsAXfsromxcO940r6b4CHyCPiHYgkgkLafmt8E0seUyLnUj3
- FL9Qwtg0SbB3EgwGISdUQhl0zud1SGVD7qBdve28f+IzJQulXcUyHldz8mjGCASfE9Y6e1U2D9X
- pliqmnnmTVFh3T6ybEO+cOg==
-X-Received: by 2002:a05:7022:4581:b0:143:26ed:2dd5 with SMTP id
- a92af1059eb24-146cfcd7046mr1785240c88.31.1790374097580; Fri, 25 Sep 2026
- 15:08:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260910153255.1.I1473cc3e9adc7793245927386e6fb0278d9ae4af@changeid>
- <7d673713-eddc-4807-90e5-873b572a9497@arm.com>
-In-Reply-To: <7d673713-eddc-4807-90e5-873b572a9497@arm.com>
+ AKwUvBwTtMfbh3+0HRKr+LEIrVnAwGo5MA4baHZpagXY6S2lwzW2F+wrvu7AqbleNdCO+6fXGXaJkSs=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lb92C0Q4WyN7hOKps50fo5qiXzB+qY3qxK0FHS5XMTySfHzVDT
+ JnmboktgHANGAd6J78LwbBxNEiWQbMtSXIDVGWgNM2TQXBlZTDqHPD709q3XwdnxEMR/qvfcllZ
+ T9oealUBV2x3pd/BhXStxOs+RfA==
+X-Received: from dlbpv14.prod.google.com ([2002:a05:7023:90e:b0:144:ce1e:6f56])
+ (user=yuxiaozhang job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:701b:4305:b0:144:eab0:9cbf with SMTP id
+ a92af1059eb24-146ce492da8mr1454493c88.19.1790374214663; 
+ Fri, 25 Sep 2026 15:10:14 -0700 (PDT)
+Date: Fri, 25 Sep 2026 15:09:29 -0700
+In-Reply-To: <"<CAOOoKeTiVDjEwx2T3w3ij74EOR_15LBNOuFB7ANV5vd2PdgEYg@mail.gmail.com>">
+Mime-Version: 1.0
+References: <"<CAOOoKeTiVDjEwx2T3w3ij74EOR_15LBNOuFB7ANV5vd2PdgEYg@mail.gmail.com>">
+X-Mailer: git-send-email 2.56.0.rc1.315.gc6ed9934b7-goog
+Message-ID: <20260925150928.v2.1.I1473cc3e9adc7793245927386e6fb0278d9ae4af@changeid>
+Subject: [PATCH v2] net: dhcp6 use link local address
 From: Yuxiao Zhang <yuxiaozhang@google.com>
-Date: Fri, 25 Sep 2026 15:08:05 -0700
-X-Gm-Features: AclHuK8P5c65zatgcn9CmqOrQ9S9qF506DA_nt3ME8uNm94NnaNiB_GM9zud96g
-Message-ID: <CAOOoKeTiVDjEwx2T3w3ij74EOR_15LBNOuFB7ANV5vd2PdgEYg@mail.gmail.com>
-Subject: Re: [PATCH] net: dhcp6 use link local address
-To: Jerome Forissier <jerome.forissier@arm.com>
-Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org, nd <nd@arm.com>
-Content-Type: multipart/alternative; boundary="0000000000001b1373065c55f48a"
+To: u-boot@lists.denx.de
+Cc: Yuxiao Zhang <yuxiaozhang@google.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>, 
+ u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Sat, 26 Sep 2026 08:44:30 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -195,258 +170,93 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
---0000000000001b1373065c55f48a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+DHCPv6 messages are sent to the link-local scope multicast address
+ff02::1:2, but net_send_udp_packet6() always uses net_ip6 as the
+source address. Once net_ip6 holds a global address (e.g. a static
+ip6addr or a previous DHCPv6 lease), DHCPv6 messages go out with a
+global source address.
 
-On Thu, Sep 17, 2026 at 6:28=E2=80=AFAM Jerome Forissier <jerome.forissier@=
-arm.com>
-wrote:
+Follow RFC 6724 source address selection and use the link-local
+address when the destination is a link-local scope multicast address,
+or when net_ip6 is not set.
 
-> Hi Yuxiao,
->
-> On 11/09/2026 00:32, Yuxiao Zhang wrote:
-> > dhcpv6 is a special UDP traffic and should always use link local
-> > addresses. Only pick net_ip6 if it is not empty and if it is not dhcp6.
-> >
-> > Signed-off-by: Yuxiao Zhang <yuxiaozhang@google.com>
-> > ---
-> >
-> >  net/net6.c | 13 ++++++++-----
-> >  1 file changed, 8 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/net/net6.c b/net/net6.c
-> > index 4cff98df15c..18072bd9f49 100644
-> > --- a/net/net6.c
-> > +++ b/net/net6.c
-> > @@ -330,6 +330,10 @@ int net_send_udp_packet6(uchar *ether, struct
-> in6_addr *dest, int dport,
-> >       uchar *pkt;
-> >       struct udp_hdr *udp;
-> >       u16 csum_p;
-> > +     struct in6_addr *src =3D
-> > +             (dport =3D=3D 547 || ip6_is_unspecified_addr(&net_ip6)) ?
-> > +                     &net_link_local_ip6 :
-> > +                     &net_ip6;
->
-> Rather than special-casing DHCPv6 based on dport =3D=3D 547, I think this
-> should be based on the destination address scope.
->
-> For a link-local multicast destination, RFC 6724 source-address selection
-> prefers a link-local source address, so something like:
->
-> struct in6_addr *src =3D
->         (ip6_is_unspecified_addr(&net_ip6) ||
->          ip6_is_link_local_multicast(dest)) ?
->         &net_link_local_ip6 : &net_ip6;
->
-> with:
->
-> static bool ip6_is_link_local_multicast(const struct in6_addr *addr)
-> {
->         return addr->s6_addr[0] =3D=3D 0xff &&
->                (addr->s6_addr[1] & 0xf) =3D=3D 0x2;
-> }
->
-> This should fix DHCPv6 while keeping the source-address selection in the
-> IPv6 layer rather than making generic UDP code aware of DHCP port numbers=
-.
->
-> What do you think?
->
-> >       udp =3D (struct udp_hdr *)((uchar *)net_tx_packet +
-> net_eth_hdr_size() +
-> >                       IP6_HDR_SIZE);
-> > @@ -341,7 +345,7 @@ int net_send_udp_packet6(uchar *ether, struct
-> in6_addr *dest, int dport,
-> >       /* checksum */
-> >       udp->udp_xsum =3D 0;
-> >       csum_p =3D csum_partial((u8 *)udp, len + UDP_HDR_SIZE, 0);
-> > -     udp->udp_xsum =3D csum_ipv6_magic(&net_ip6, dest, len + UDP_HDR_S=
-IZE,
-> > +     udp->udp_xsum =3D csum_ipv6_magic(src, dest, len + UDP_HDR_SIZE,
-> >                                       IPPROTO_UDP, csum_p);
-> >
-> >       /* if MAC address was not discovered yet, save the packet and do
-> > @@ -353,8 +357,8 @@ int net_send_udp_packet6(uchar *ether, struct
-> in6_addr *dest, int dport,
-> >
-> >               pkt =3D net_nd_tx_packet;
-> >               pkt +=3D net_set_ether(pkt, net_nd_packet_mac, PROT_IP6);
-> > -             pkt +=3D ip6_add_hdr(pkt, &net_ip6, dest, IPPROTO_UDP, 64=
-,
-> > -                             len + UDP_HDR_SIZE);
-> > +             pkt +=3D ip6_add_hdr(pkt, src, dest, IPPROTO_UDP, 64,
-> > +                                len + UDP_HDR_SIZE);
-> >               memcpy(pkt, (uchar *)udp, len + UDP_HDR_SIZE);
-> >
-> >               /* size of the waiting packet */
-> > @@ -370,8 +374,7 @@ int net_send_udp_packet6(uchar *ether, struct
-> in6_addr *dest, int dport,
-> >
-> >       pkt =3D (uchar *)net_tx_packet;
-> >       pkt +=3D net_set_ether(pkt, ether, PROT_IP6);
-> > -     pkt +=3D ip6_add_hdr(pkt, &net_ip6, dest, IPPROTO_UDP, 64,
-> > -                     len + UDP_HDR_SIZE);
-> > +     pkt +=3D ip6_add_hdr(pkt, src, dest, IPPROTO_UDP, 64, len +
-> UDP_HDR_SIZE);
-> >       (void)eth_send(net_tx_packet, pkt - net_tx_packet + UDP_HDR_SIZE =
+Signed-off-by: Yuxiao Zhang <yuxiaozhang@google.com>
+---
+
+Changes in v2:
+- Select source address by destination scope instead of DHCPv6 port
+
+ net/net6.c | 25 ++++++++++++++++++++-----
+ 1 file changed, 20 insertions(+), 5 deletions(-)
+
+diff --git a/net/net6.c b/net/net6.c
+index 4cff98df15c..c556ed7e4c5 100644
+--- a/net/net6.c
++++ b/net/net6.c
+@@ -94,6 +94,13 @@ int ip6_is_our_addr(struct in6_addr *addr)
+ 	       !memcmp(addr, &net_ip6, sizeof(struct in6_addr));
+ }
+ 
++/* Check if addr is a multicast address with link-local scope */
++static bool ip6_is_link_local_multicast(const struct in6_addr *addr)
++{
++	return addr->s6_addr[0] == 0xff &&
++	       (addr->s6_addr[1] & 0xf) == IPV6_ADDRSCOPE_LINK;
++}
 +
-> len);
-> >
-> >       return 0;       /* transmitted */
-> > ---
-> > base-commit: b4ac71db13a33c4e6532c60a781ddf34b7f4375a
-> > branch: main
-> >
->
-> Thanks,
-> --
-> Jerome
->
+ void ip6_make_eui(unsigned char eui[8], unsigned char const enetaddr[6])
+ {
+ 	memcpy(eui, enetaddr, 3);
+@@ -330,6 +337,15 @@ int net_send_udp_packet6(uchar *ether, struct in6_addr *dest, int dport,
+ 	uchar *pkt;
+ 	struct udp_hdr *udp;
+ 	u16 csum_p;
++	struct in6_addr *src;
++
++	/*
++	 * Per RFC 6724 source address selection, prefer the link-local
++	 * address for link-local multicast destinations (e.g. DHCPv6).
++	 */
++	src = (ip6_is_unspecified_addr(&net_ip6) ||
++	       ip6_is_link_local_multicast(dest)) ?
++	      &net_link_local_ip6 : &net_ip6;
+ 
+ 	udp = (struct udp_hdr *)((uchar *)net_tx_packet + net_eth_hdr_size() +
+ 			IP6_HDR_SIZE);
+@@ -341,7 +357,7 @@ int net_send_udp_packet6(uchar *ether, struct in6_addr *dest, int dport,
+ 	/* checksum */
+ 	udp->udp_xsum = 0;
+ 	csum_p = csum_partial((u8 *)udp, len + UDP_HDR_SIZE, 0);
+-	udp->udp_xsum = csum_ipv6_magic(&net_ip6, dest, len + UDP_HDR_SIZE,
++	udp->udp_xsum = csum_ipv6_magic(src, dest, len + UDP_HDR_SIZE,
+ 					IPPROTO_UDP, csum_p);
+ 
+ 	/* if MAC address was not discovered yet, save the packet and do
+@@ -353,8 +369,8 @@ int net_send_udp_packet6(uchar *ether, struct in6_addr *dest, int dport,
+ 
+ 		pkt = net_nd_tx_packet;
+ 		pkt += net_set_ether(pkt, net_nd_packet_mac, PROT_IP6);
+-		pkt += ip6_add_hdr(pkt, &net_ip6, dest, IPPROTO_UDP, 64,
+-				len + UDP_HDR_SIZE);
++		pkt += ip6_add_hdr(pkt, src, dest, IPPROTO_UDP, 64,
++				   len + UDP_HDR_SIZE);
+ 		memcpy(pkt, (uchar *)udp, len + UDP_HDR_SIZE);
+ 
+ 		/* size of the waiting packet */
+@@ -370,8 +386,7 @@ int net_send_udp_packet6(uchar *ether, struct in6_addr *dest, int dport,
+ 
+ 	pkt = (uchar *)net_tx_packet;
+ 	pkt += net_set_ether(pkt, ether, PROT_IP6);
+-	pkt += ip6_add_hdr(pkt, &net_ip6, dest, IPPROTO_UDP, 64,
+-			len + UDP_HDR_SIZE);
++	pkt += ip6_add_hdr(pkt, src, dest, IPPROTO_UDP, 64, len + UDP_HDR_SIZE);
+ 	(void)eth_send(net_tx_packet, pkt - net_tx_packet + UDP_HDR_SIZE + len);
+ 
+ 	return 0;	/* transmitted */
+---
+base-commit: b4ac71db13a33c4e6532c60a781ddf34b7f4375a
+branch: main
 
-Yes this makes sense and it is a more generic fix. I will send another
-version.
+-- 
+2.56.0.rc1.315.gc6ed9934b7-goog
 
-Thanks,
-Yuxiao
-
---0000000000001b1373065c55f48a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><span style=3D"background-color:transpare=
-nt">On Thu, Sep 17, 2026 at 6:28=E2=80=AFAM Jerome Forissier &lt;<a href=3D=
-"mailto:jerome.forissier@arm.com">jerome.forissier@arm.com</a>&gt; wrote:</=
-span></div><div class=3D"gmail_quote gmail_quote_container"><blockquote cla=
-ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
-rgb(204,204,204);padding-left:1ex">Hi Yuxiao,<br>
-<br>
-On 11/09/2026 00:32, Yuxiao Zhang wrote:<br>
-&gt; dhcpv6 is a special UDP traffic and should always use link local<br>
-&gt; addresses. Only pick net_ip6 if it is not empty and if it is not dhcp6=
-.<br>
-&gt; <br>
-&gt; Signed-off-by: Yuxiao Zhang &lt;<a href=3D"mailto:yuxiaozhang@google.c=
-om" target=3D"_blank">yuxiaozhang@google.com</a>&gt;<br>
-&gt; ---<br>
-&gt; <br>
-&gt;=C2=A0 net/net6.c | 13 ++++++++-----<br>
-&gt;=C2=A0 1 file changed, 8 insertions(+), 5 deletions(-)<br>
-&gt; <br>
-&gt; diff --git a/net/net6.c b/net/net6.c<br>
-&gt; index 4cff98df15c..18072bd9f49 100644<br>
-&gt; --- a/net/net6.c<br>
-&gt; +++ b/net/net6.c<br>
-&gt; @@ -330,6 +330,10 @@ int net_send_udp_packet6(uchar *ether, struct in6=
-_addr *dest, int dport,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0uchar *pkt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0struct udp_hdr *udp;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0u16 csum_p;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0struct in6_addr *src =3D<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(dport =3D=3D 547 || =
-ip6_is_unspecified_addr(&amp;net_ip6)) ?<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0&amp;net_link_local_ip6 :<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0&amp;net_ip6;<br>
-<br>
-Rather than special-casing DHCPv6 based on dport =3D=3D 547, I think this<b=
-r>
-should be based on the destination address scope.<br>
-<br>
-For a link-local multicast destination, RFC 6724 source-address selection<b=
-r>
-prefers a link-local source address, so something like:<br>
-<br>
-struct in6_addr *src =3D<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 (ip6_is_unspecified_addr(&amp;net_ip6) ||<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ip6_is_link_local_multicast(dest)) ?<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;net_link_local_ip6 : &amp;net_ip6;<br>
-<br>
-with:<br>
-<br>
-static bool ip6_is_link_local_multicast(const struct in6_addr *addr)<br>
-{<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 return addr-&gt;s6_addr[0] =3D=3D 0xff &amp;&am=
-p;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(addr-&gt;s6_addr[1]=
- &amp; 0xf) =3D=3D 0x2;<br>
-}<br>
-<br>
-This should fix DHCPv6 while keeping the source-address selection in the<br=
->
-IPv6 layer rather than making generic UDP code aware of DHCP port numbers.<=
-br>
-<br>
-What do you think?<br>
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0udp =3D (struct udp_hdr *)((uchar *)net_tx_p=
-acket + net_eth_hdr_size() +<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0IP6_HDR_SIZE);<br>
-&gt; @@ -341,7 +345,7 @@ int net_send_udp_packet6(uchar *ether, struct in6_=
-addr *dest, int dport,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* checksum */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0udp-&gt;udp_xsum =3D 0;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0csum_p =3D csum_partial((u8 *)udp, len + UDP=
-_HDR_SIZE, 0);<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0udp-&gt;udp_xsum =3D csum_ipv6_magic(&amp;net_ip6=
-, dest, len + UDP_HDR_SIZE,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0udp-&gt;udp_xsum =3D csum_ipv6_magic(src, dest, l=
-en + UDP_HDR_SIZE,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0IPPROT=
-O_UDP, csum_p);<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* if MAC address was not discovered yet, sa=
-ve the packet and do<br>
-&gt; @@ -353,8 +357,8 @@ int net_send_udp_packet6(uchar *ether, struct in6_=
-addr *dest, int dport,<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0pkt =3D net_nd_t=
-x_packet;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0pkt +=3D net_set=
-_ether(pkt, net_nd_packet_mac, PROT_IP6);<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0pkt +=3D ip6_add_hdr(=
-pkt, &amp;net_ip6, dest, IPPROTO_UDP, 64,<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0len + UDP_HDR_SIZE);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0pkt +=3D ip6_add_hdr(=
-pkt, src, dest, IPPROTO_UDP, 64,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 len + UDP_HDR_SIZE);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0memcpy(pkt, (uch=
-ar *)udp, len + UDP_HDR_SIZE);<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* size of the w=
-aiting packet */<br>
-&gt; @@ -370,8 +374,7 @@ int net_send_udp_packet6(uchar *ether, struct in6_=
-addr *dest, int dport,<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0pkt =3D (uchar *)net_tx_packet;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0pkt +=3D net_set_ether(pkt, ether, PROT_IP6)=
-;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0pkt +=3D ip6_add_hdr(pkt, &amp;net_ip6, dest, IPP=
-ROTO_UDP, 64,<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0len + UDP_HDR_SIZE);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0pkt +=3D ip6_add_hdr(pkt, src, dest, IPPROTO_UDP,=
- 64, len + UDP_HDR_SIZE);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0(void)eth_send(net_tx_packet, pkt - net_tx_p=
-acket + UDP_HDR_SIZE + len);<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return 0;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* trans=
-mitted */<br>
-&gt; ---<br>
-&gt; base-commit: b4ac71db13a33c4e6532c60a781ddf34b7f4375a<br>
-&gt; branch: main<br>
-&gt; <br>
-<br>
-Thanks,<br>
--- <br>
-Jerome<br></blockquote><div><br></div><div>Yes this makes sense and it is a=
- more generic fix. I will send another version.</div><div><br></div><div>Th=
-anks,</div><div>Yuxiao=C2=A0</div></div></div>
-
---0000000000001b1373065c55f48a--
