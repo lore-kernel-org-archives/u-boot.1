@@ -1,254 +1,236 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327CBC9830D
-	for <u-boot@archiver.kernel.org>; Fri, 25 Sep 2026 14:05:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA62C9830D
+	for <u-boot@archiver.kernel.org>; Fri, 25 Sep 2026 14:06:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E8E2D40B3B;
-	Fri, 25 Sep 2026 14:05:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 09B4760D7A;
+	Fri, 25 Sep 2026 14:06:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iBe_fLeU--II; Fri, 25 Sep 2026 14:05:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 25E6D40AB1
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790345124;
-	b=UkM86tNa6VJqA4fJ8gma/kfpMI8SAyVSSEhuXrB4q+Rv9mVNwTLVrMqQ4D9viSh8XjDa
-	 rf4cxeYv+4INx/bkQNmkgE4dkk7ZMsS+I6IcgowRd2ki+8SDAFOWFfJVwQSBkwny2+ukG
-	 aPtlEm/gw4NvP13+8u5oojRRt31XHF7778/LHTJA77AGw2dqPwG88Wv7BxcrFMCgfuTGN
-	 uHj9kOUDdt+OJYSRSzVxQDLY6/IFYalarnfsVENeUsiNm3Mx9oDzDEfC8gMQvOrqKj47k
-	 29fif+D8AoIlt1GiWv9N7GxWD1OBQZy+sVcOpeDxHJBriwpy1qYxoATzOXlNeYoOVBA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Exprjtd4pYX2; Fri, 25 Sep 2026 14:06:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E398760D6D
+Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1790345205;
+	b=eAL1Ga44qzpEqvl2j7PXTi/7MX5lnmyiQEx/7v/m35Db1cB13uI6A6sKqADvFA2M9QLV
+	 n/jMcSkbs5iP27wYBZBkypK/vhyf0hmnzGOg9clJ4lkSY0FoX6NDfa3vfaxMDuZk+Lo1Z
+	 Kl6JldD6cTha4xjZq0MifWVboYoZa0wJ1CoVdf8fnHj9G9qlQrB1QxzJxeInOLHGom54m
+	 p2oPKHLUzRV+8asUe5t09hkWZrBgDqZfzdM/jMDtbgOaIEKjaY5uoVfLe6JCPIhQ3sehb
+	 UM/REzgsLpXBpzYWsPTzIiSYgolsRoG9oLBN/uPlBodShtGDzz8GMdn4alOOjh17AUg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790345124;
+	c=relaxed/relaxed; t=1790345205;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=mHfEZ3Ak4JGSn0uNhbnUD1+ymESUV03Lm6dHezPhfHQ=;
-	b=P6ltikC8gMA/qqQb/mbTfwNXCbrvi2HV3skWjgvCJbBnAK80UygMWBQO7GrgbQ9iQTWb
-	 wSW9s5jXIPzWCJjqHp318oHS64mGwWgcHvrCpz8popaoaVcDwsElAIeualbs2oJjZOSPe
-	 +jUG1ntxNq/nBtxWRp4fU81IVpnzIOksl6efV0FfN2MJiaqflvzMw5EBLVGPawquw+GZv
-	 4Qw8SkXcWYATiHB7AVYKRaENwkQYsPPtTY1a+hPN5by45iUO3M26F3C+EtdvcGhlZNgjq
-	 7+JXZUt1dSESJPWPq+gr2P2QChQkjU7yMBie81kNYxbACO+47BnCQaNCniZ++VGidQg==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; dmarc=pass header.from=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="H/tZLJET";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TgbAyufI;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Date:From:To:Cc:Subject:Message-ID:
+	 References:Content-Type:Content-Disposition:In-Reply-To:
+	 X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:
+	 X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=IBWkxZw21HkVMkaiBbII6GoGMog34QgMJwCAqJFGdgk=;
+	b=DZi3b6MrToVgOOLuo0HshPwCGIHyCc5adke9CzrUlEvpkzkWEVuqfCUd/MTUMAi8A/ff
+	 zvJjIV/4viY0huzxNen3+UZnDbtnR9KHPAFYhJeE0K1ssiJxemWSvCM3QTCisdT0HomEC
+	 m230Xf1c94LcWjryEhL2Y60q0c6WtzKndat1Mj6cLpUq3ssQ0s4NfyXZnYnZHmgFkUgR5
+	 Hb1Lyjj4IEfB/jlKZd+klsEQEl7mqb9VPvByRak01qSztyubVsMTsgBFtBM/xKOqbjwlK
+	 BjdRrOjFxBTMfIEnou/JrUxVKVAa43U7V69T8svnFl8WC5M/znNzjypEUbRvyMaPjww==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790345124;
-	bh=mHfEZ3Ak4JGSn0uNhbnUD1+ymESUV03Lm6dHezPhfHQ=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790345205;
+	bh=IBWkxZw21HkVMkaiBbII6GoGMog34QgMJwCAqJFGdgk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rieKGXMvdhXmoB7ZOHbcb7RangpirN06fA+L5cobhBWiMMdFVFH7nkq4E7AAe7eGU
-	 5KwkW+SxdPwKt+KwGVzDwm62P5rfocA3U9AWnRkzUoBXR3bHdHIrmlZtCrOhvlNVhp
-	 OTOj0opgH+48PGQefJia0xmfm0LZz/oOOBKmkSv7/gieSPN44xB6qi4ulbIu0S2t/M
-	 H+qMxWmmzu/ncPWXtpI/xyCQkAp1R7bJpPAAFE7dtHb32LDyZQT03fz/dGgROfsH8y
-	 X+CN8OJv5JSPY1Cw+aapeENGhDS6hDl0gLk2rM4u6AbcoJyEuGtg3WOi/ejFLrYOfI
-	 /RmUU0S3x8Lyw==
+	b=zNMTSeucg5nH0o0xlrutI4ZXQOIYIBAIx8sSbZRFSvHck50Hq5zttihWo8cy32Trx
+	 xIkwBRNTup+8qNdVCDg0pHHOJ0GFxhxQGgle/YuHjHCGF+Hb8ZvsEBKcuf3XYhhLQM
+	 TcCgxCFbz7/UqYEh8HF/oZw6Cik5s6PWpwBwV6Ah46huiVrr3E0zUbi/b2S6yFVQ+h
+	 EwhO3LhtxotpeX/+3mm/Z1cXobJl7XPb143cSPnabzxXm+DhQunA0MFvRhu0g7Aajr
+	 10CC8p6Eq7LUqbDwjQRDY7UxdTTUYpvTmG6MGjIzH/rtn/iWuXcNmwr0ocoiRzKQgh
+	 08jHHtymR0iVQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 25E6D40AB1;
-	Fri, 25 Sep 2026 14:05:24 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 104AE332
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 14:05:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E398760D6D;
+	Fri, 25 Sep 2026 14:06:44 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 708E735A
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 14:06:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id EA4C340A7B
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 14:05:21 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5672240475
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 14:06:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id G9qvr2_QD6Lr for <u-boot@lists.u-boot-project.org>;
- Fri, 25 Sep 2026 14:05:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 3B65E40AB1
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=205.220.168.131
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790345121;
- b=lTGrgRb1Va26ETHkVPblECU2VbkPVVuXRfLN6pGGeNpsDk/3CLXorNTgxufl1vSMp7MW
- 1Qn/Si+Td+cp+YwEHkAh5L6rI7H/8gApAYCv+6cyTb8M+orl0QUTlCFKjtWuoVAjvm3rw
- UI0ayvVDRTVfhJvJR1Z9oHG7VPpMqJddFnbo7U+EYgSJtO6I/WF03YHG4V8mQ3SwaLm7t
- /Kau0zHgO4BO+vEGR5OM9w1WJN9GdRoihHjIsMxPrx7RcPh7T3e/U6lWM/Jgg+o37AxxD
- CKHRV3F3b4SB39x9UaD1KfY0jMw38bTJ2OsX3ltzdKZTvG5KYQoao3tkwWA+uPG9ZwQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id S6JRTxRoyj-t for <u-boot@lists.u-boot-project.org>;
+ Fri, 25 Sep 2026 14:06:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org CDA134005E
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c200::3"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790345202;
+ b=CufShYUHJH+yNzSt+3+IAQEwJkmeR6OeBShgBHYBCsbBEgsdEg19X0QytGZFIsWCjAd2
+ eKs4ubLcNgY7bmyOirid1G3AqwihKSooj93KkjjA8GcVY+lpS4wqZygsJc2B0i7FATwyH
+ t+kMWFvuWRi6vZu/B0+qJQwP0jWOS0PcTCGIrGPW43wkjh6tH1beTFgSo8Civ7R17yYxB
+ g1HSUbU98l+Q7gUmX1Vnsz6DmXUIaoYKqAGU8YhuO0RW99jjfw2VJRLHacN68JgJhu1BT
+ wyqzhTb9VSiyGpqsUaShnU3LnNLqFtrTbz1hco2tPpfHJZYYfjJHdZpv6JwSzP5H6Tg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790345121;
- h=Received-SPF:Received:DKIM-Signature:Received:Received:
- DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
- X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
- References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
- Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
- X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
- X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
- X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=mHfEZ3Ak4JGSn0uNhbnUD1+ymESUV03Lm6dHezPhfHQ=;
- b=Gz4XEA7Ua7Qpy7aONFXK7obLy+899sxwKXXKNPhSFwsy8QzfTbUe6OS0rWxDnFW1U4kU
- nQj0Dy8hP3x0aTIr+Bqt2xD7gKFyjWF8IuBo4SlwUNuAGB0s7sxv3m/2LeMLAqw55Wf9T
- OZx2xQBLw7Tq4WBo8pajhf299pgxuK3KhPo3qNYBhzjto7qVp0q7Kj1HINTVZNK3NywjG
- LzraL24QqbFj0INTYXMqTdgwYO0FtayxbWakPh9BWXbPRCzRNH49w56A631xHJefC6lQj
- 9rVOGxaCeeE4WMWbHJruassivssIiWZS0lZwIFq8wdzyKZylkrypX2wyB1IdSHa6+8w==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org;
- dmarc=pass header.from=oss.qualcomm.com; 
- dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b="H/tZLJET"; 
- dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=TgbAyufI; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com; envelope-from=tyler.baker@oss.qualcomm.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=H/tZLJET; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=TgbAyufI
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3B65E40AB1
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 14:05:20 +0000 (UTC)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68PD0JPo2911319
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 14:05:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- mHfEZ3Ak4JGSn0uNhbnUD1+ymESUV03Lm6dHezPhfHQ=; b=H/tZLJETj2vnwCP8
- 4BBG3x8DRQyhcUh5tD/n1n6yfe76BZU787U8KqEqExRDCqMc3380SDEg0oSe/pvW
- HKGfggw2Ak2X+IPdlvXqRZi9sSOejQNQIxhgfgAHvKHFcxZWK1IB4zDcIHVbw8tP
- o9fuGqN8xOpphL4aC07SegTu5x515ESECdr6lTJI9SeiW+JWzoV7KFATqqYMvdQB
- FhnlkHGX/Xhb7xfy4UPWFI1wQtiJVIW9fSqYLsz0cp4pBMFt/nyJi/UI2NYnsN3V
- fJLkvzxJt7uSdbZ5lRwQeDMqXb8cx41LI4PMGn72JCBrm304ZCYLyg6sm6Hpqa0G
- bJo5kA==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
- [209.85.215.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwhm51the-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 14:05:20 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id
- 41be03b00d2f7-cc21bc2923fso609141a12.2
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 07:05:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790345119; cv=none;
- d=google.com; s=arc-20260327;
- b=o+Onu/Nua+mlofuAjhCgTpYUQ3cu2SHDkSuWpRO832CfVAoUFcYsprdpN8RjPycdHB
- xyG+xTiqrnVeKsQ7tJftpiyp7Eb56MJdQZyXzOFh4C4EXKly/lbV87i2ymOeyXdnJw/f
- TpHl/Q86BmuRpBarHNTOgcZHaHH4OfRRrvig8mAsbUoHWKfLTZPjJZLTCEDatJmSWrkE
- TIORQ+a8TDp5tR9xXkKz1zSTIKr4NCHGRHK1sC3voR+w8mpJqrj8gLvE9JMb0AXsiDcS
- CDldXXgzFB7blj1zBL6D3yO7/CQ5RcerTfA1LmUufEikGmMhx03vScXOSQtHdz+Gde5l
- ITEg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=mHfEZ3Ak4JGSn0uNhbnUD1+ymESUV03Lm6dHezPhfHQ=;
- fh=RtNoFA4mp9Kr/NfWwt7eif/mhIQuJxKuqtQBBruqSzc=;
- b=sb2UprlA/Q2EBzdn6JAs7x28jaR2wBVxr68FOTEmqwIKm6sgMlPUDELStIhAPbqTbi
- WtRntDqNS8d89DknNspleGXQU4oTDLcNgB6q5cXjtuR/kGrSCkGyptZ/6yGcyntmNh4f
- /rucP2n2i3GtBzjK4dKuruLpM7EXglmF9wugOgbB+Hw8cycLXqT+0NM0VMvtbe2neL5P
- Hf7vPexebIWzdYyb1dxPhSd8qd+Kq9xDuokQH6Dt7mfVzrdD7v/k/7G6ndz5LSgtKZZz
- ycQup4kFvLfvnIwoF02OclU9HStRfBR4/OboNsL5TxHTFt4rpwLtAhi367E0TqcuKkIu
- zMPQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790345119; x=1790949919;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=mHfEZ3Ak4JGSn0uNhbnUD1+ymESUV03Lm6dHezPhfHQ=;
- b=TgbAyufIt0nSjgHrm4IA+3EPUk0U2Zybyg/sZvudZbxwZNVXILqiBThdCpSSMg8ZuQ
- n9QIfOiuYn6zcv/LDFNWbo1PCRpwl/OVi23mMb6WaXh08znAe0Je61G2pfWcbQ2hQe2/
- bduvB85chEJep6yPaJ+JEHHfRYzPkRGqPgPklQc8E7Y+yyHk8zqReP5l8a7WTkBVYsM0
- mS3NzlHdhFy+80VYkyyfgS1EmdEb9y1OK56L0VYVK34e6EZrEMoXI0/cSuMaVzM+B3Z+
- FsskLkEmr0NjQw5ar7gvrTN8kE3Mg90/58Vh1fQjlp6Za0QrGG5iNC4vBNIRaKBTdYGC
- 19Ng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790345119; x=1790949919;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=mHfEZ3Ak4JGSn0uNhbnUD1+ymESUV03Lm6dHezPhfHQ=;
- b=MQQ8u1zextLdVQ6gIrm1KFRUm+xdGWt0V05FDLQvZCKAbbvt6WuM02rV1zwLILD7/W
- FKvj1wo9aZFb2HnAPe6RLFwPXsfp/y4euQQGWwt0RHUyAl7olXzjF+EFDbQDUNByK6cD
- Ej8vvNTY41jmFw6xyKGw/8iYTXV5GDLN9FTtXMalBvk9N9OK/zcFGRU926cpiRH3Ojec
- SRmu2ItzeidT9nLWkjFrW2W+f4zTA0kE78rXh8HJoNzo5ZCJNrdLpjY7XBFwXJ4LTcjm
- WqwhaMAM40Dorf6SFeN9wgaa4xAiiY1/pQt71FlDkEI92BgmSrPtHMNmancfJSdKgd+D
- OAAA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxkCN6P1WLIsrrDjVhFusDn2P0QtjjtE/n4FV3KIza2YQjNMPLmZCp2pD4XMojDMXarhWleLVk=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++k1a09bDye272yLwqnrcOBUmNq6tFotxf8ZVBBMPmy53DA3mB6x
- pDq+4+Yt67+xm7QkDzf7UnvQmW8ZNfaAjd//ezziGBH66qAF8So8pvx3V19eHGWfjMf3qdiZSQz
- pD53wEo8Un1Dn+NlNBtbYhZ5anQD8LPxVccGsnPnbz9qiM2TjDn+oh2hf15DpHYSvMqSSKwk5Pv
- 3rT+2qSq1DSKIrQXdLa8qmcjeCGGxN7iX9oA/NcHXPk+k0nw==
-X-Gm-Gg: AYBFou24OOMC5hispZtBYbZZ/oI9+2R5l9fwdBDL0j/L6xhf9MLjoydjgw6F0lqfjgs
- RJLQ1bW5fYUaYT1a31uu0PeEvo+dxdEV83PpIvOh25EbsrNyZvHc/qoiuzlzoPFkYWt3w5v7ziZ
- 3C7VyGXL1jhSiSqQ3A3v7Y/BoZcMcTCL1lnk12m0wHh3TwW0WyyF21r6g6ug==
-X-Received: by 2002:a17:90b:5108:b0:3a0:ca3d:c32f with SMTP id
- 98e67ed59e1d1-3a0ca3dc5b6mr657990a91.19.1790345119221; 
- Fri, 25 Sep 2026 07:05:19 -0700 (PDT)
-X-Received: by 2002:a17:90b:5108:b0:3a0:ca3d:c32f with SMTP id
- 98e67ed59e1d1-3a0ca3dc5b6mr657958a91.19.1790345118675; Fri, 25 Sep 2026
- 07:05:18 -0700 (PDT)
+ c=relaxed/relaxed; t=1790345202;
+ h=Received-SPF:DKIM-Signature:Received:Received:Date:From:To:Cc:
+ Subject:Message-ID:References:Content-Type:Content-Disposition:
+ In-Reply-To:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+ X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+ X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+ X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+ X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:
+ X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+ X-MS-Exchange-CrossTenant-UserPrincipalName:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=IBWkxZw21HkVMkaiBbII6GoGMog34QgMJwCAqJFGdgk=;
+ b=KJrw791gFFwAcbKUsJKBb+ZkNBQ1RkXHwOiAoQNlwryLLUoi0NrrmT55RpLwHF7vc1Ox
+ uAqTu7Uur6OZ98wzzeVsn/FummIyi6xBF3aH54dD7S9trNroze3nlqp+uS3sA2ZAWfHdN
+ fZvDD4HhsKSQC/odx8QfwNhWIUCWKsJ8ktZwTkwQQzII7Ea5DehjDPwSGoH1O9lWHluSi
+ X45D082w8HlHSBFgBLBy9WkmCPbWCsTrudf8B0v1PFNRJ7kY2F2IzM5tc3n4kKroH7HSo
+ yK9/K3DM9HPZGuPXUsFYwltxfvOZnI2KzPPcQITkk/eE8/IYuGFmiUqDntwnB+lBceA==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ dmarc=pass header.from=nxp.com; 
+ dkim=pass header.d=nxp.com header.i=@nxp.com header.a=rsa-sha256
+ header.s=selector1 header.b=k5Kl6HI5; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c200::3"
+Received-SPF: Permerror (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c200::3;
+ helo=du2pr03cu002.outbound.protection.outlook.com;
+ envelope-from=vladimir.oltean@nxp.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=nxp.com header.i=@nxp.com header.a=rsa-sha256
+ header.s=selector1 header.b=k5Kl6HI5
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id CDA134005E
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 14:06:41 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pdlou7mBTjK/JCLEqdewtPBsEAd9eXkvY3pkutA9wgv6ZyjAWneuYLKO4+cpSZXp5WfLVM5GXfaWA/G8Eh01INc9ejRTDfEqQ1M0Yrzb5KwZVVy47WHjEo08WGU51R03mh92v17I2t/IOiaOLGa59vyJ/O8Hs4+PzfBGY3k/qizAxynqPpF8sTbbD9GHlsRUg9FPmwzKt1L/Jha/FHLGFT9vhxL2w+URrN+EtwR4g14KO2iLwHeloeyt70LameqXqSgbxNSlxsVevcbHwp0xC+HZGBekEKoat/P5OHMZPdVVVH/XOGc0AtMLEU1podSxOc5Uhjd3Esw0Unh4SdNuGA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IBWkxZw21HkVMkaiBbII6GoGMog34QgMJwCAqJFGdgk=;
+ b=X0ufxmoDwqtFUUIP4V8N/euJNrseZqbNplFo+LcG0GXd1iVZKUWGBA1w5cIYbfc9ARAh38bLiLgrx27Bc0Sr5+QlG8NA7pxBOzSFUgE8DTMhRlV2LcRcr8CHwb2aAjSNoJ6TrhOnQTOE5++9c9UlwJN3uQWCEOym+lwkGVKp6hoI6QAbfoAC4MxZNufCAhvffBGw6c1dWi8JHDVAKdFF/2pESk2hAoX/X3TB6Rm3Ym/J0cg+/UYLzBPZzR1I5N5V9EtapexSbCqQ/fMuZLDmOqDLxseu+x4uyUmT8/0q5kIC7jPnpJ8t1Xu9ili6/a7gRTuMT2JGlJ/oIr+yq52MpQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IBWkxZw21HkVMkaiBbII6GoGMog34QgMJwCAqJFGdgk=;
+ b=k5Kl6HI5yk47BC9WbQvF8K/Io14T97BNmOTkYoQGktNiYGoirASv4viQwecDqXUk1IcL+2LfM+/Snk/xDk5hWkpEtC6yAj70aRaSfvrxtkXikGytlltB0EvSNeVX6L23bSs+dEFGDf3qqAQ6s1mtiSGx6ptzGacQLxZW6Oac5Cy4wTnFJfk/NMXeDMJvDNyj5GB+m1xbIdi5EzRhRn7Bdh/R9hvaCCz4cjGfeiZMNMKt5AKMM5JjJdbIrlFcsSdROmLUgh56391eoHi/pHZoB/F9Ne/sFjJxEMiUoX/KaXR9PYYRuO/H5SL2JsiDTyZlRxS5TwNejJ129SZZtLNxHA==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+Received: from AM0PR04MB6900.eurprd04.prod.outlook.com (2603:10a6:208:17d::10)
+ by GV2PR04MB11565.eurprd04.prod.outlook.com (2603:10a6:150:2a7::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Fri, 25 Sep
+ 2026 14:06:36 +0000
+Received: from AM0PR04MB6900.eurprd04.prod.outlook.com
+ ([fe80::7fda:8431:ca1b:b023]) by AM0PR04MB6900.eurprd04.prod.outlook.com
+ ([fe80::7fda:8431:ca1b:b023%4]) with mapi id 15.21.0451.014; Fri, 25 Sep 2026
+ 14:06:36 +0000
+Date: Fri, 25 Sep 2026 17:06:33 +0300
+From: Vladimir Oltean <vladimir.oltean@nxp.com>
+To: Vincent Jardin <vjardin@free.fr>
+Cc: u-boot@lists.u-boot-project.org, Peng Fan <peng.fan@nxp.com>,
+ Ioana Ciornei <ioana.ciornei@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Hemant Agrawal <hemant.agrawal@nxp.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Wasim Khan <wasim.khan@nxp.com>,
+ Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>
+Subject: Re: [PATCH v3 3/5] board: lx2160a: split SD1's second 40GE port into
+ 4x 10G
+Message-ID: <20260925140633.ucykvjztmrerumhl@skbuf>
+References: <20260916211549.3432913-1-vjardin@free.fr>
+ <20260916211549.3432913-4-vjardin@free.fr>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260916211549.3432913-4-vjardin@free.fr>
+X-ClientProxiedBy: VI1PR06CA0136.eurprd06.prod.outlook.com
+ (2603:10a6:803:a0::29) To AM0PR04MB6900.eurprd04.prod.outlook.com
+ (2603:10a6:208:17d::10)
 MIME-Version: 1.0
-References: <20260924-monaco-ventuno-q-v1-0-290b6a4d10c0@oss.qualcomm.com>
- <20260924-monaco-ventuno-q-v1-2-290b6a4d10c0@oss.qualcomm.com>
- <ad33fdf2-6db3-4368-920f-751a7489ae92@linaro.org>
-In-Reply-To: <ad33fdf2-6db3-4368-920f-751a7489ae92@linaro.org>
-From: Tyler Baker <tyler.baker@oss.qualcomm.com>
-Date: Fri, 25 Sep 2026 10:05:06 -0400
-X-Gm-Features: AclHuK-wEUvP9_v0FT0b_19vcgBaXg4eka3-6T1-z-whdvqKsImLFw2P4zQTZPY
-Message-ID: <CACckqB0RXn219TE2SzzQbi-HYhYc10Xi1xtek82Laf6u+Am0NQ@mail.gmail.com>
-Subject: Re: [PATCH 2/7] clk: qcom: qcs8300: add QUPv3 clocks
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Lukasz Majewski <lukma@denx.de>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: EnAQ3-7EyZf3C6U_Unp65E-RvwMYBvjK
-X-Authority-Analysis: v=2.4 cv=QYnzLcbv c=1 sm=1 tr=0 ts=6ab67fa0 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=DJpcGTmdVt4CTyJn9g5Z:22 a=KKAkSRfTAAAA:8 a=_tmDWiHaD96Q7rQ5_8YA:9
- a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA1NiBTYWx0ZWRfXzedwjUtVroMn
- bDvWlW/MfRnfQxurfIwkF7AFC+6Hqv5xNItTymM6VTh22b1S4uFH+zuQ68QnY2LCVU8NDJ0vpi0
- Gd/SahloeUpgrfR9NUmrwM8p3j+fzMEA4jB+bvryBxNHtrdWtSed1GUNqAFQdE4ZqcEYEjdB6Rg
- 0wG+4dvhy9eBtcrG7XGJrKlKvyQf84f0T4oNrP1N3TIenhVyUDBLqBXUYB/dDWIPO9jxKSyeTRa
- Mkjb7QXt0I97g/taDMbLmWwNgCBK05p6nJHvvl/gNreqpTdqgIRV5MxmVaig9FY3XreEP1xowtb
- M47BzwzI8m4Ia4nhVrQL1hMh0oXloJ6YK1CmbhpFdrRbSDywrrpYpQW4ykpW6CyX2q6yoOzzIf9
- NeYfeuzvi1RvTlRbLUlp2P7emhM8jFyQ9LUzWpobIBERxQ3OxAmxpf9RllJYJbQgOIinlUzD+R7
- IhCnW8xHSeRKUIU0nTg==
-X-Proofpoint-ORIG-GUID: EnAQ3-7EyZf3C6U_Unp65E-RvwMYBvjK
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA1NiBTYWx0ZWRfXwUPZqlitUvrX
- valj8qKkO9558mrnPc9WDWbWwVWPj3Sz9YAApAzYFk2zTk/qzocfM8Ei7fVTNeSYIvHfls8kLcV
- 02ad20FyFuHLnIlsho7uJNXKadyKDkk=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-25_02,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 bulkscore=0 priorityscore=1501 malwarescore=0
- phishscore=0 suspectscore=0 lowpriorityscore=0 spamscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609250056
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM0PR04MB6900:EE_|GV2PR04MB11565:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2e053173-81ea-44fe-d420-08df1b0e35e4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|19092799006|10070799003|1800799024|376014|366016|23010399003|4143699003|6133799003|10067099003|56012099006|11063799006|5023799004|22082099003|18002099003|15866825006|41080700001;
+X-Microsoft-Antispam-Message-Info: KOto4O2cf6LJSfqNiJxL2yCpZOXUM8Edgb4FSwS+wrbikda4Hie4QLBp/NadvrcCbqOiyz9n5sqT80uRMNW72grbZhNx+MHKYwqsJRamwt6u5SJFpTJkyaE3KGVf1sGcfP/g55vGWO55lD8Vd215DTVxPW5XrmFYUbpmpYjwVQrgutyNfCmUc7YEE+kH2m6xikJgHpP/bvAXXNhYaGPT2nDAcFi7sa1haQhXSJGegwTKvIjzeTT7e5ZLKRdrC65ei60YBmmZCSG/TUmAAc39q21w28Hry/ZU28Cey8jYPaQ5BJdPYGYwQJPBdkxlqr3UsJT1TlTnDZkax7CqOBGG1gEm7g0//U1rMWffw74ayOTqI0m0m0fwNybvQX9va5l/zx8XdxZn9awNAoBgEDyKOyYFyTtbl5aNEk5Ie2R9uQ8mpuZONu91YeITnhYYEDW7zf1dnpANtdD8sqcc01cKjx15ieNAtcD9ls3mPY/3oO9CEIu7AY85+x6e9+sYjHoWrXKOpC9F+puzmc0ewM1S4zUoZySQIydS+INETJuKS34WcVCgKwbPOgmT9+K0cCA+qX71rHKRGDwZQwnOjmGDpkQC0L6fO1BG+0Mvfqh7q1SblGw8In3A+fo5rzoEiD5UCCJyUuulQbc9nsUBX8VXJfPP2hhVjwduI2yvaNDP0D/+wG5fniGN7g4B0+t3dFZKuiTIGt/QcKyCEvCt4Z3yeyuCfGQNPuKBUfVwskv5f25Ve/udCyhGQVJYFUx299tq
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM0PR04MB6900.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(10070799003)(1800799024)(376014)(366016)(23010399003)(4143699003)(6133799003)(10067099003)(56012099006)(11063799006)(5023799004)(22082099003)(18002099003)(15866825006)(41080700001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?S0THRrnYu54fmjHO9dZioDT+3Ex39ALSibC/E8miHXUswXss2qbXbbPa1ywt?=
+ =?us-ascii?Q?C5+yzKvlNMYd9Zmsc/lZHfHeytHuM1N1wTW8J6CcwXArubXetndy+shY71id?=
+ =?us-ascii?Q?OMNq+v7dgcn1z1C0GcaWZgI576vl8Nq0AQesqTV0ZjOEAK1aRjlCB30hIQCd?=
+ =?us-ascii?Q?+jh6TXd/h0QXBksItcHjIkG4xmAZ2zrZ/GPJOWi+tKlvLrpTOSjijBAGeufd?=
+ =?us-ascii?Q?EIq4RRMC76LEBisai3XhR68fzHvbFU9A7UQmbwECr+SPXcc8U5qFTZMBggO8?=
+ =?us-ascii?Q?Gw6vHdMDa9LWaVHu9e6Kr8wiKLDLx+JwjcnqCrn5z/OaVdbPX6Q61FYI+WQ1?=
+ =?us-ascii?Q?FQRymVZM07+3363oYgnim1Cnubjeb2l7emg7AjBC0foFwZbEifhbbHb6Jq3g?=
+ =?us-ascii?Q?tgoeim3+/oVSPk6cJdopaacdQlc2MLIi6OQvj2xqVxEFyCZBdO1pFPzAoUxd?=
+ =?us-ascii?Q?3rqHyoGHW8tVVsLGvam8jpSV0Tz2/EvlX7MifNsCr51gQG+xPSBPngv/a4s1?=
+ =?us-ascii?Q?b4FkTDw5U+JKG+G2TYXKsGEgdZhv/sr0EhrcJuTmRlFoeQI6O9zJTalrNfSA?=
+ =?us-ascii?Q?0SIpG+oVG7IzUr3JOYUzPJMLry80bJ52g2QEkeqp4VlutaCcSx1mFfxMUBpq?=
+ =?us-ascii?Q?YiJNqmjStWh5Q+Sj/Aj+4ZsdGX5ILz+FnPBjGoMnUc7mPwoZfXeBp3Xvc9nd?=
+ =?us-ascii?Q?hncOA5CUNK4NwbSH+lCesInqt+0Gm2p7SMmh2NQqJCBBzj1jlVSRHTUVieY9?=
+ =?us-ascii?Q?Uu5puVm/sz1piqzpteB5MhNe8oaLeO/i1krZr6bojoN1/ZBY0+FlK2ctHiwi?=
+ =?us-ascii?Q?4J8x9IqJCFZIu9qxegLa1vWfOe8LtqHhJLR8fIqzTZkPjz76DfghohxMYgrx?=
+ =?us-ascii?Q?7c6hOmMMk12TICz6ewwfVJNK2J79JJ5VcwJaEr2MtVRRZkqSZwQ3q4rd+zXL?=
+ =?us-ascii?Q?amRjHPPV7X43F9X8w9GwIUyfyoyw20Tka6vFtOWcoYhMOu/oACjNb54DhdyK?=
+ =?us-ascii?Q?THPY+l65NbX141DRVGY8by+DxvjHTIlbAowdEM5Wn9NMBKbLBdATZU2rG4rF?=
+ =?us-ascii?Q?xofCeADikI3aG+IkR30XVy3m9HmkxWb255ULfFh1kDvZMROEPMLe3Zj9wFNN?=
+ =?us-ascii?Q?rrSvtg6mea9xUZzCio+FDjjhxgmSA1Zjj4lbA9DuQxrLHjVpUO3bvCE6j6+m?=
+ =?us-ascii?Q?nkmnKZSvZ3kbtLYuieJauknOYFgp47hUjuP/TRnhMbBrAI4tMPyeucR/7Le6?=
+ =?us-ascii?Q?seweI1d3vO6Q0Dz4MXVUXt9yPdrTng33VTR8JgJj9gGBvemUaLapGWXMQ2H/?=
+ =?us-ascii?Q?n0NAc9Q4aT5BElORSSmGN9eNo30X19xxUOf1GRy1xx/XqCdhhkPKHnZ8RyDu?=
+ =?us-ascii?Q?3TEbNVNDYUOrkmcEmcLH8WDhT7NN1K3Q4PkkOLOaBJz2FFOnipfdsdnWDBA0?=
+ =?us-ascii?Q?86RcClhP2/Q3UP87IPyKUyichEj9DHSE4nHA2SJW5VtM062Wb1DgcNc2vdlj?=
+ =?us-ascii?Q?RFfFG+t9fhosUTx6yPzseTGgBRemUHLGGFkiH9aImf0Plx50Wl6uwYm7KmFU?=
+ =?us-ascii?Q?e4lHQnkZa0p//gk7GDQUAc3oUEtNOQsg4t+8cLMaCn8VAGpQGtQzAD+2G/Lj?=
+ =?us-ascii?Q?LKX0J4NSm2z+xOzHTTbHplNRUGF2T2+uzrUp9jb88waiarmcGCm6aX3RTByV?=
+ =?us-ascii?Q?VQ9NXDNFEPvMuZsiJALP1qn75h5gcdR4nx7eytPnWxQAFgbTWDxY+5XrAhk1?=
+ =?us-ascii?Q?6e3QX6u353WDgOeNLxT4FOHK0TSyM3DF2D3MAlhQhVVCcMRrrjVV574Nc19H?=
+X-MS-Exchange-AntiSpam-MessageData-1: H++pZa+JamsFxg==
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2e053173-81ea-44fe-d420-08df1b0e35e4
+X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB6900.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2026 14:06:35.9764 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: OVbNzvSHp1YqosUyaIMcD6yAyxvJjkClGE9oJ36mtk8IquRTStAIfKSOKdAqKuVigj9F/I6wiiJm8ugVOqvwew==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB11565
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -262,34 +244,313 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Fri, Sep 25, 2026 at 8:38=E2=80=AFAM Casey Connolly
-<casey.connolly@linaro.org> wrote:
->
-> Hi Tyler/Claude,
->
-> On 9/25/26 01:38, Tyler Baker wrote:
-> > The QCS8300 clock driver has no QUPv3 clocks, so every QUP serial
-> > engine in the device tree asks for a clock the driver does not know:
-> >
-> >    gcc@0x100000: unknown clock ID 109!
-> >    gcc@0x100000: unknown clock ID 117!
-> >    gcc@0x100000: unknown clock ID 121!
->
-> useless context
->
-> >
-> > Add the QUPv3 wrapper 0, 1 and 3 serial engine, core and AHB clocks.
-> > They are branch vote clocks: each is enabled through its bit in the
-> > APCS clock branch vote registers and polled on its branch status
-> > register, as the Linux QCS8300 GCC driver describes them. Rates are
-> > left as the boot firmware set them, as for SA8775P.
->
-> more useless context which doesn't belong here, this is not what a good
-> commit message looks like.
->
-> I'll let you respin this series before i take a look at the other
-> patches, using LLM slop commit messages like this is frankly just
-> disrespectful, nevermind confusing and polluting to the quality of the
-> codebase. NAK
+On Wed, Sep 16, 2026 at 11:15:47PM +0200, Vincent Jardin wrote:
+> lx2160_sd1 40g4x10g, hwconfig=serdes1:40g4x10g.
+> 
+>   XFI   LNmGCR0 = 0x00000052   LNmTGCR0 = 0x10000000
+>   40GE  LNmGCR0 = 0x00010052   LNmTGCR0 = 0x10000000
+>                        ^ PORT_LN0_B
+> 
+> same PROTO_SEL (0x0a spans XFI and 40GBase-R), same 20-bit width, same
+> USE_SLOW_PLL, same BY_N_RATE_SEL.
+> 
+> It is inspired from the 100G+4x25G split, but using PLLS.
+> 
+> Signed-off-by: Vincent Jardin <vjardin@free.fr>
+> ---
+> 
+> (no changes since v1)
+> 
+>  board/nxp/lx2160a/serdes_split.c | 191 ++++++++++++++++++++++++++++++-
+>  board/nxp/lx2160a/serdes_split.h |  11 ++
+>  2 files changed, 199 insertions(+), 3 deletions(-)
+> 
+> diff --git a/board/nxp/lx2160a/serdes_split.c b/board/nxp/lx2160a/serdes_split.c
+> index 0f30019e20a..f48c882aa22 100644
+> --- a/board/nxp/lx2160a/serdes_split.c
+> +++ b/board/nxp/lx2160a/serdes_split.c
+> @@ -585,6 +585,154 @@ int lx2160a_serdes1_to_40g(void)
+>  	return ret;
+>  }
+>  
+> +/*
+> + * 2x 40GE -> 1x 40GE + 4x XFI (10G), keeping the QSFP group intact.
+> + *
+> + *   XFI  lane   LNmGCR0 = 0x00000052   LNmTGCR0 = 0x10000000
+> + *   40GE lane   LNmGCR0 = 0x00010052   LNmTGCR0 = 0x10000000
+> + *                            ^ PORT_LN0_B
+> + */
+> +#define X10G_FIRST_LANE		4
+> +#define X10G_LAST_LANE		7
+> +#define X10G_GCR0		0x00000052	/* as 40GE, but own port master */
+> +#define X10G_PCCE		0x01000000	/* E40Gb kept (lanes 0-3) */
+> +#define X10G_PCCC		0x88889999	/* XFI converters for lanes 4-7   */
+> +
+> +static bool srds1_is_40g_4x10g(unsigned long base)
+> +{
+> +	u32 pccc = in_le32((void __iomem *)SRDS_PCCC(base));
+> +	u32 pcce = in_le32((void __iomem *)SRDS_PCCE(base));
+> +
+> +	return PCCE_E40GB_CFG(pcce) != 0 &&
+> +	       PCCE_E40GA_CFG(pcce) == 0 &&
+> +	       (pccc & 0xffff) == 0x9999;
+> +}
+> +
+> +bool lx2160a_serdes1_is_40g_4x10g(void)
+> +{
+> +	return srds1_is_40g_4x10g(srds_base(FSL_SRDS_1));
+> +}
+> +
+> +int lx2160a_serdes1_40g_4x10g(void)
+> +{
+> +	unsigned long base = srds_base(FSL_SRDS_1);
+> +	int m, master = -1, keep_master = -1, ret = 0;
+> +
+> +	if (srds1_is_40g_4x10g(base)) {
+> +		debug("lx2160a serdes: SD1 already 1x 40GE + 4x 10G\n");
+> +		return 0;
+> +	}
+> +
+> +	if (!srds1_is_40g(base)) {
+> +		printf("lx2160a serdes: SD1 is not in the 2x 40GE state (PCCC=%08x PCCE=%08x), refusing\n",
+> +		       in_le32((void __iomem *)SRDS_PCCC(base)),
+> +		       in_le32((void __iomem *)SRDS_PCCE(base)));
+> +		return -EINVAL;
+> +	}
+> +
+> +	/*
+> +	 * Halt. As in the 25G split, only the port master's request can
+> +	 * clear, so issue all four and wait on that one.
+> +	 */
+> +	/* The kept group's master, recorded before anything is halted. */
+> +	for (m = 0; m < SRDS_LANES; m++) {
+> +		if (m >= X10G_FIRST_LANE && m <= X10G_LAST_LANE)
+> +			continue;
+> +		if (!(in_le32((void __iomem *)SRDS_LNmGCR0(base, m)) &
+> +		      GCR0_PORT_LN0_B))
+> +			keep_master = m;
+> +	}
+> +
+> +	for (m = X10G_FIRST_LANE; m <= X10G_LAST_LANE; m++) {
+> +		if (!(in_le32((void __iomem *)SRDS_LNmGCR0(base, m)) &
+> +		      GCR0_PORT_LN0_B))
+> +			master = m;
+> +		out_le32((void __iomem *)SRDS_LNmTRSTCTL(base, m),
+> +			 RSTCTL_HLT_REQ);
+> +		out_le32((void __iomem *)SRDS_LNmRRSTCTL(base, m),
+> +			 RSTCTL_HLT_REQ);
+> +	}
+> +
+> +	if (master < 0) {
+> +		printf("lx2160a serdes: no master lane in the dpmac.1 group, refusing\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	if (poll_clear(SRDS_LNmTRSTCTL(base, master), RSTCTL_HLT_REQ) ||
+> +	    poll_clear(SRDS_LNmRRSTCTL(base, master), RSTCTL_HLT_REQ)) {
+> +		printf("lx2160a serdes: lane %d did not halt within %d us, continuing\n",
+> +		       master, SPLIT_POLL_US);
+> +		ret = -ETIMEDOUT;
+> +	}
+> +
+> +	for (m = X10G_FIRST_LANE; m <= X10G_LAST_LANE; m++)
+> +		out_le32((void __iomem *)SRDS_LNmGCR0(base, m), X10G_GCR0);
+> +
+> +	out_le32((void __iomem *)SRDS_PCCE(base), X10G_PCCE);
+> +	out_le32((void __iomem *)SRDS_PCCC(base), X10G_PCCC);
+> +
+> +	/* Reset BOTH halves, not just the four lanes whose GCR0 changed */
+> +	for (m = X10G_FIRST_LANE; m <= X10G_LAST_LANE; m++) {
+> +		out_le32((void __iomem *)SRDS_LNmTRSTCTL(base, m),
+> +			 RSTCTL_RST_REQ);
+> +		out_le32((void __iomem *)SRDS_LNmRRSTCTL(base, m),
+> +			 RSTCTL_RST_REQ);
+> +	}
+> +
+> +	for (m = 0; m < SRDS_LANES; m++) {
+> +		if (m >= X10G_FIRST_LANE && m <= X10G_LAST_LANE)
+> +			continue;
+> +		if (m == keep_master)
+> +			continue;
+> +		out_le32((void __iomem *)SRDS_LNmTRSTCTL(base, m),
+> +			 RSTCTL_RST_REQ);
+> +		out_le32((void __iomem *)SRDS_LNmRRSTCTL(base, m),
+> +			 RSTCTL_RST_REQ);
+> +	}
+> +
+> +	if (keep_master >= 0) {
+> +		out_le32((void __iomem *)SRDS_LNmTRSTCTL(base, keep_master),
+> +			 RSTCTL_RST_REQ);
+> +		out_le32((void __iomem *)SRDS_LNmRRSTCTL(base, keep_master),
+> +			 RSTCTL_RST_REQ);
+> +	} else {
+> +		printf("lx2160a serdes: no master lane in the kept 40GE group, it was not reset\n");
+> +		ret = -EINVAL;
+> +	}
+> +
+> +	for (m = 0; m < SRDS_LANES; m++) {
+> +		u32 t, r;
+> +
+> +		if (poll_clear(SRDS_LNmTRSTCTL(base, m), RSTCTL_RST_REQ) ||
+> +		    poll_clear(SRDS_LNmRRSTCTL(base, m), RSTCTL_RST_REQ)) {
+> +			printf("lx2160a serdes: lane %d reset did not complete within %d us\n",
+> +			       m, SPLIT_POLL_US);
+> +			ret = -ETIMEDOUT;
+> +			continue;
+> +		}
+> +
+> +		t = in_le32((void __iomem *)SRDS_LNmTRSTCTL(base, m));
+> +		r = in_le32((void __iomem *)SRDS_LNmRRSTCTL(base, m));
+> +		if (!(t & RSTCTL_RST_DONE) || !(r & RSTCTL_RST_DONE)) {
+> +			printf("lx2160a serdes: lane %d reset finished without RST_DONE (TRSTCTL=%08x RRSTCTL=%08x)\n",
+> +			       m, t, r);
+> +			ret = -EIO;
+> +		}
+> +	}
+> +
+> +	if (!srds1_is_40g_4x10g(base)) {
+> +		printf("lx2160a serdes: 4x 10G split did not take (PCCC=%08x PCCE=%08x)\n",
+> +		       in_le32((void __iomem *)SRDS_PCCC(base)),
+> +		       in_le32((void __iomem *)SRDS_PCCE(base)));
+> +		return -EIO;
+> +	}
+> +
+> +	printf("lx2160a serdes: SD1 now 1x 40GE (dpmac.2) + 4x 10G (dpmac.3-6)%s\n",
+> +	       ret ? " (with warnings above)" : "");
+> +
+> +	return ret;
+> +}
+> +
+>  /*
+>   *   setenv hwconfig serdes1:100g4x25g
+>   *   setenv hwconfig serdes1:2x40g
+> @@ -598,8 +746,9 @@ int lx2160a_serdes1_to_40g(void)
+>  void lx2160a_serdes_apply_hwconfig(void)
+>  {
+>  	if (hwconfig_sub("serdes1", "100g4x25g")) {
+> -		if (hwconfig_sub("serdes1", "2x40g"))
+> -			printf("lx2160a serdes: hwconfig asks for both serdes1:100g4x25g and serdes1:2x40g, doing the split only\n");
+> +		if (hwconfig_sub("serdes1", "2x40g") ||
+> +		    hwconfig_sub("serdes1", "40g4x10g"))
+> +			printf("lx2160a serdes: hwconfig asks for serdes1:100g4x25g alongside a 40GE mode, doing the split only\n");
+>  		if (lx2160a_serdes1_is_split())
+>  			return;
+>  
+> @@ -607,6 +756,23 @@ void lx2160a_serdes_apply_hwconfig(void)
+>  		return;
+>  	}
+>  
+> +	/*
+> +	 * serdes1:40g4x10g is a target MODE, not a second step the user has
+> +	 * to sequence by hand: it implies the 40GE conversion first,
+> +	 * because 1x 40GE + 4x 10G is reached by splitting one of the two
+> +	 * 40GE ports.
+> +	 */
+> +	if (hwconfig_sub("serdes1", "40g4x10g")) {
+> +		if (lx2160a_serdes1_is_40g_4x10g())
+> +			return;
+> +
+> +		if (!lx2160a_serdes1_is_40g() && lx2160a_serdes1_to_40g())
+> +			return;
+> +
+> +		lx2160a_serdes1_40g_4x10g();
+> +		return;
+> +	}
+> +
+>  	if (!hwconfig_sub("serdes1", "2x40g"))
+>  		return;
+>  
+> @@ -671,6 +837,22 @@ static int do_lx2160_sd1(struct cmd_tbl *cmdtp, int flag,
+>  		return CMD_RET_SUCCESS;
+>  	}
+>  
+> +	if (!strcmp(argv[1], "40g4x10g")) {
+> +		if (!IS_ENABLED(CONFIG_ARCH_LX2160A)) {
+> +			printf("no 40GE on SerDes 1 to split on this SoC\n");
+> +			return CMD_RET_FAILURE;
+> +		}
+> +		if (argc != 2)
+> +			return CMD_RET_USAGE;
+> +		if (lx2160a_serdes1_is_40g_4x10g()) {
+> +			printf("SD1 is already 1x 40GE + 4x 10G, nothing to do\n");
+> +			return CMD_RET_SUCCESS;
+> +		}
+> +		if (lx2160a_serdes1_40g_4x10g())
+> +			return CMD_RET_FAILURE;
+> +		return CMD_RET_SUCCESS;
+> +	}
+> +
+>  	return CMD_RET_USAGE;
+>  }
+>  
+> @@ -714,7 +896,10 @@ static int do_lx2160_serdes(struct cmd_tbl *cmdtp, int flag,
+>  	"    - convert SD1 2x 100GE into 2x 40GE without touching the RCW.\n"	\
+>  	"      Must run before the MC starts, and the DPC must carry\n"		\
+>  	"      board_info/serdes/follow_hw_pssr: RCWSR still reads 13.\n"	\
+> -	"      Undo with `reset`. Permanent: setenv hwconfig serdes1:2x40g"
+> +	"      Undo with `reset`. Permanent: setenv hwconfig serdes1:2x40g\n"	\
+> +	"lx2160_sd1 40g4x10g\n"							\
+> +	"    - split SD1's dpmac.1 40GE port into 4x 10G,\n"			\
+> +	"      Permanent: setenv hwconfig serdes1:40g4x10g (implies 2x40g)"
 
-Ack, apologies, I'll fix this up in the next series.
+I'll add here a comment that applies to the entire lx2160_sd1 command,
+not specific to this hunk.
+
+I see it as a huge foot gun. If the MC firmware has already booted, you
+don't want to allow any further SerDes lane splitting/unsplitting,
+because as you say, the follow_hw_pssr logic in the MC has already run.
+
+Combined with the fact that the mcinitcmd env variable is executed by
+mc_env_boot() before the shell even loads, and by default it boots the
+MC firmware already, I think this is just asking for problems. You never
+warn the user that the MC firmware was already loaded.
+
+I don't really see a practical use case for the lx2160_sd1 command.
+Would it work for your board to just reset the system after you
+setenv hwconfig && saveenv?
+
+>  #else
+>  #define SD1_CMD_HELP							\
+>  	"    - no SerDes 1 Ethernet modes on this SoC"
+> diff --git a/board/nxp/lx2160a/serdes_split.h b/board/nxp/lx2160a/serdes_split.h
+> index 36d486d7301..1b65848db2f 100644
+> --- a/board/nxp/lx2160a/serdes_split.h
+> +++ b/board/nxp/lx2160a/serdes_split.h
+> @@ -34,6 +34,17 @@ bool lx2160a_serdes1_is_40g(void);
+>   */
+>  int lx2160a_serdes1_to_40g(void);
+>  
+> +/* Is SerDes 1 already 1x 40GE + 4x 10G? */
+> +bool lx2160a_serdes1_is_40g_4x10g(void);
+> +
+> +/*
+> + * Split SerDes 1's dpmac.1 40GE port into 4x 10G (dpmac.3-6),
+> + * keeping dpmac.2 as one 40GE port.
+> + *
+> + * Refuses unless SD1 is in the 2x 40GE state.
+> + */
+> +int lx2160a_serdes1_40g_4x10g(void);
+> +
+
+You don't need to export to serdes_split.h functions which are called
+exclusively from serdes_split.c. This applies to the vast majority of
+the functions which are already present here.
+
+Also, a general comment regarding code organization: have you
+considered a structured approach with SerDes configurations
+(aka array of structures with function pointers), carrying their
+- name
+- detection method
+- method to verify whether the initial conditions are fulfilled
+- method to switch to it
+?
+
+As an alternative to this ad-hoc lx2160a_serdes1_is_CONFIG_X() and
+lx2160a_serdes1_CONFIG_X() organization scheme.
+
+>  void lx2160a_serdes_apply_hwconfig(void);
+>  
+>  #endif /* __LX2160A_SERDES_SPLIT_H */
+> -- 
+> 2.43.0
+>
