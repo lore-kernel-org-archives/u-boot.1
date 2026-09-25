@@ -4,139 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27D49C98324
-	for <u-boot@archiver.kernel.org>; Fri, 25 Sep 2026 14:27:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED412C98321
+	for <u-boot@archiver.kernel.org>; Fri, 25 Sep 2026 14:27:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DFCA16081B;
-	Fri, 25 Sep 2026 14:27:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6A37660DE1;
+	Fri, 25 Sep 2026 14:27:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wTtkZaN3Wv3X; Fri, 25 Sep 2026 14:27:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org F055560E10
+ id v0lVDL9IgU5k; Fri, 25 Sep 2026 14:27:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E833E60E15
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790346434;
-	b=r1cY++B7uCjhjyAwRB3yHm6jIVJiweJ13//NPhwgJ1qlbpjNoqa1jRX7XGXPWI29/mEj
-	 B9gbFd/PGfXpoq8NiYW5qoROmLd6CKMqYzUZ1avSt4kan/l3VrsmKBJWRVajCJmiUcrK6
-	 odzk5QDkILlH0eUSH/AD2xvQn3Ejv0//6M67/QdXi3Um0UIUDrGNMI+BbLQo44GPOwyPc
-	 /zsG/hQkxGwx1GUlJX8CJv8yy0gRWLCv8lxut3cJE+VsvdAGUYy4dOwoCyY+P165akHwV
-	 scdDVye9RCnMZSBrY3yLlflHg0zXrsUnDfTBMIkz1JSs+kpq0rePEO0xPJrNTuxP1uw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790346436;
+	b=j25bFzehnJdBw08UQuENiENGioyXZnQCs3YLMgyiUyJjFTwgYW99dUfONQlushMCoKDz
+	 oydZdaQGY9gFiZMUB7o6WLnje5veiElx/awEOFsIpWD9bZYXe7ihDzvOXtSFb2X+H5qJO
+	 yXNxn/RbRi41I5gwKfGjmfJReKbr5uLwR692CmlB0Vl0eUL3e5bNFaOC5H8Im9EgsS1K8
+	 4CbK8+CxGjEJad0Guugjxlml+6mD4kai4TquUg0SoeUUOSucjtB1FWCjc27dfXwiHRNxU
+	 Twtx4GSAK5OhowtTsHZ+ijNuY0zl5ik+DN1lERuON+hhwvIQbPWaaMMzBIQHayaDlVw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790346434;
+	c=relaxed/relaxed; t=1790346436;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:Received:Received:From:To:Subject:
-	 Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Reinject:X-QCInternal:
-	 X-QCInternal:X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 DKIM-Signature:Received:Received:Received:Received:From:To:Cc:Subject:
+	 Date:Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Proofpoint-Reinject:X-QCInternal:X-QCInternal:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
 	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=yVDC8HdfU1Jn1mhmUEz4u5GibkcisVpNwKkMNH1B9Ko=;
-	b=ftjJTRNGqSkoJG38ELR8S9J6QQkWjijXzelOw3YABV4Dx9b8h0XtruzzZs82MeFjWqnI
-	 wIwU0eZNP1GigEEfrUicp5W+f7kSIUl1wA6lAGTzeOvs/wH56a14lhMfYsPEQzp0RClC5
-	 /a+YmrKNWFa71KO9R1IlpFf74Qk5OHwOE22eIt3HryxyDHpaPAeiSA1/RognIqhfJTzUP
-	 uJR2vcvWuxmJXSSug87HYOWorzX9IN9Mwj/fXnQrhgdmfCBlJCJXI85tjBBWddI30Lr1b
-	 oqaMue01IQZsXFbu9IBlOBaKDkpfKS/pW8vspPK3++Hje8uHVCR9ZWskc81LXSflzJQ==
+	bh=7kF7NYTBzORd6Hpdea1qGjel+05lpOBDJtnxZUFig3Q=;
+	b=fHGhIDHI5/fkKB0pycKLwB6bwKqKYYKMfhKNMew1HK5xQcmyFbRa1Mv3aQIefq7UCCa+
+	 VYlRLhqRzXaZHHn9QGD9wLylr1SH0f9do+1jWjR17XeupAQFs9j4QKpMq+RhI3mo+HLcL
+	 W99krExqUR6lfEDNf+1V2C75jpcghutHqIw6b2FbtOWKk2m0kkYZ5YNZDdn7P/yhyJttL
+	 JQCC6YgkasKu4kqSRWwlgJRJ01wOl65ClruGUR9h2/p0WAixukfIc/Qbxh23eSLr+Kj0g
+	 ntbjdGkssMbLX2/YHg4CflfKq1ahaEE0cw4bOoZs+T8xMvpa1dBguJOj2LmF2f3bEzg==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790346434;
-	bh=yVDC8HdfU1Jn1mhmUEz4u5GibkcisVpNwKkMNH1B9Ko=;
-	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=M2qYefbGjnzZcYgebtz90YZB1bsChwrkTVxNu66hqRZRx0zFk+mGpD3F9HSMzASI1
-	 vE/rnoAdD9RqyoiYsksa82pz4t/UfcDAHmvdu8K9T6a9nbGaAz8zrircbART+I1ae5
-	 JbCmanz0sFtgvPlnLVf4o8pC73WJIfkOySi1vVkUXLTCnjuwQ+PSXQpbj+M2pqcPnu
-	 DD7pzyrCCDYr2ssICVokpEZOvo7iyCRD8hSF2v8W9AQpdQfTJ9t8w8u1J0qCENBmqJ
-	 6i4bJNbhcDkLjlzfRQbEiPJonCMGLORce+l/l8qStI7rY8FYToZ/5SFVjN0equTfFw
-	 qelJbfpt2m+CQ==
+	d=lists.u-boot-project.org; s=default; t=1790346436;
+	bh=7kF7NYTBzORd6Hpdea1qGjel+05lpOBDJtnxZUFig3Q=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=FtL3YryNFumw/9oq/oLDP220jJs3EmRXXXVLq3Egzxp10n2s5FjVyuiz3O8F7ZezD
+	 eWwX4F+st4m/0i8OSWQkEFNWb/HR8+jIe6ODpLw0oOgjUQXHQkgrBJg0QwTHkWeHr1
+	 2fucUbTgQnNmaqiXzTiktr5GSHbwlDc63bwAUrWlxUBxCefVabyrqR0SffhMEF6P7F
+	 hQjQghL+oFwYhWM2KaWuPBqX1FPjqpBYOrviodZPU3AI+Lk3kyf4EZw6p92+fmDICd
+	 j+aKXplck9tAiv3iO/pzp0PWpZEmidMLD9i8ffQ/k6dAgDhYbeRPZ0DsyJ2Lre/KKJ
+	 sQSNtCZIOvuDQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F055560E10;
-	Fri, 25 Sep 2026 14:27:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E833E60E15;
+	Fri, 25 Sep 2026 14:27:15 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id DD3C6B00
+ by lists1.osuosl.org (Postfix) with ESMTP id DE830E13
  for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 12:58:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C2CE1812C9
+ by smtp1.osuosl.org (Postfix) with ESMTP id D054C811AE
  for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 12:58:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id a7_LiAUPeq9H for <u-boot@lists.u-boot-project.org>;
+ id yBoks7W0Iqby for <u-boot@lists.u-boot-project.org>;
  Fri, 25 Sep 2026 12:58:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 9E71E811AE
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0F85A81208
 Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790341108;
- b=DSO9G99wxnVIsdjdlMpvq/BFnJUkJMNMnvVQOUc3IgK17kFo2BnZVbiqz2qNVjh6loAH
- gw0a3UbTpv39FXwXx6Yty5+grtKvIbaduH2xpeDEJPilVbjQguO+nfwbm3bUfdKb/2zbm
- jmt3xv0l4+pY2I7crTqgtJAT1ZpkvAHtI2aDYwEorni07yf4C1pzcAByA793uVkSUVRwF
- cDEqLVqDGZ4b98kJlfUnqnuoWlMlpvcjfj0kd0V9Qfrr3syYcPp7SwchZJxiHzFiv6ces
- Ym2pMtoRdPWQ1tUXSQYKXdpaR8ZUvTvohy//dLSSizAT9NZowgeIOiDvBXraVe03UAg==
+ b=SwKtdKbL6MhWXGA0NBY0MqlkiMQhbVJ9MY5uTUu7FXDDuKgLEmwyrbucLEhVPrgwuyks
+ u9r9BO+IGhoj2XKTUq/z0iDHZMaG35TKci7L9AyqZcE2utNW0QGMU9iD2oyQAtnERv0jK
+ h2bSJ3au6OLoxDU9ZJyCMnv8z/Ay4nHUGXiWiYGsBrkgaNu0y/R6gSmYYIWnJDWoMs5vt
+ pReShHN9fq9YN+ba338nOAl4tuxGrsb0N04wz9FsmJtr9kNUMHbWXaM6v8i0c17U6tObI
+ N4fG/dYaj9SIjs/TOQXsIE9zYedR8LInoRQ2nXBpIHbj0bDuFwJSBK6pcI4L7oSd4FA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1790341108;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:Received:
- Received:From:To:Subject:Date:Message-Id:X-Mailer:In-Reply-To:
- References:MIME-Version:Content-Transfer-Encoding:
- X-Proofpoint-Reinject:X-QCInternal:X-QCInternal:
- X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+ Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding:X-Proofpoint-Reinject:X-QCInternal:
+ X-QCInternal:X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
  X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
  X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=yVDC8HdfU1Jn1mhmUEz4u5GibkcisVpNwKkMNH1B9Ko=;
- b=JS5FD4iFpSypDmmbcyDJFAlrT3qXxjKxg/54GZQcG8KHARTZp8tZvEgQoH/yw0SbV69g
- sIhIEK89b5JJPDqviCbLZOl8EwgFAav4HbYvD3IE62+q79iKASmWSSLsRx3ts1ex2Poav
- h+Tlu9C89Us6j0fYnCh5Iv7FRklE5sMmMJMJuekw3tBCwflKGNvhNVqgmBqt/r+cZO4zc
- LKTn6NHZkkA/mEuNLdMO4o9+amJl0vvg01mOre7s6N02+xqLrU5INOb7v/A5JId8Vx47j
- B1PTZkn4NCOg7iomBX8dGUEBUeZTV9cVa+utmrVntAS47kYa71kmfRZXFc8gD163YPg==
+ bh=7kF7NYTBzORd6Hpdea1qGjel+05lpOBDJtnxZUFig3Q=;
+ b=anA1ZEg3rYZpxhMwEdBrkQxARmKRSD51cQT0BRHXueRJDq7RGtikq/A3jRFmMPbu3qSV
+ AFeN1jtdrqIA/q+iuwNCUQhd+jMsg7vf70EZhz3nVDhJh8tZdKv/NPt0usE0n6yEs4igj
+ 1mzhHyvFAmV6sOtiTYFb8HZQxyOWnlC2vDpW6T799XbEBFtLL3AmpeXjAA04cPcfEwMid
+ k8DzkylXr8qoUmdxiCrFtUXQDacZuEAW9C5rLNGSDehRULIPlccZbo+I+h4Hs2pmdXgwK
+ hlMccujtHlRHuJV8elRvQC+kUhF7f0yd7LZTTI1p7hmeFIdhwk6hBYIoWqeiLPSf6fQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=qti.qualcomm.com; 
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=ookxTJDB; 
+ header.s=qcppdkim1 header.b=EPVLPDdo; 
  arc=none smtp.remote-ip=205.220.180.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
  helo=mx0b-0031df01.pphosted.com; envelope-from=abhiv@qualcomm.com;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=qti.qualcomm.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=ookxTJDB
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=EPVLPDdo
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9E71E811AE
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0F85A81208
  for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 12:58:27 +0000 (UTC)
 Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68PBLdI3900282; Fri, 25 Sep 2026 12:58:15 GMT
+ 68PBLhBH900428; Fri, 25 Sep 2026 12:58:15 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=yVDC8HdfU1J
- n1mhmUEz4u5GibkcisVpNwKkMNH1B9Ko=; b=ookxTJDBMF6nkHiheSOO1h8Fui8
- LRmLdtuMhVXNLeyxwKDicoYeWzC74GTQFr67vIeMd8ki2UDU9lu6knGckmEGqWLE
- 7k5AjBc/Vz9iKgIDpDvPHhsyxAAt7auzF3lgyHtoPjc8x5A+YtXp6nmMdq9sDqp4
- 8fo4NcpuY4XdFD6bZ+Z3HjugvrAASduP5FTkoT+uL6UzqMobbp3Xsa0PQjEpzOB5
- vlz/ir9JaLQXGgCmQZbmpQIM2TNpmU11W9uVqz6ubU2lYSCk8RqUeb20LwAIuHjJ
- PMAqVa3q5VFa6C829j2VWcymV5HXBWNq2ldTKMnmre+syyfPCRL/DrSzucg==
-Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=7kF7NYTBzORd6Hpdea1qGjel+05lpOBDJtn
+ xZUFig3Q=; b=EPVLPDdo2UHrkm+S3+5yA6coJThLQwmQN6tEUf/6v5bvfDxwVkm
+ 5k4SCXvfCN//Uqhl+67vSVXjcUI7mfpTG/muuLRziALq4EFfn+xISYvnnw7ehd8P
+ l2ieBIaB8RB1IVni4RiBjEx9TFhHayl5BSW3LfbquO+sRr/4Z7L7xrswLX3DBT+L
+ Ryzxfx3tsRm54tiWNRsE8xR5oZzaOhFrFFYOh+96fYQlcy9bB/xKvOnRc9VnPgxy
+ F12aAVMwmFm9jH7L4//IP9GRNOmeMnIIP9/+7rXKHu2cM/K+YFPpLtiZNMfqIg1o
+ N82xWClCiROz/Mz/mNjq1gmkQ6lnkNzSPsA==
+Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com
  [129.46.96.20])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwr1008db-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Fri, 25 Sep 2026 12:58:15 +0000 (GMT)
-Received: from pps.filterd (nalasppmta01.qualcomm.com [127.0.0.1])
- by NALASPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68PCwE5W518064; Fri, 25 Sep 2026 12:58:14 GMT
-Received: from hu-devc-lv-u22-a.qualcomm.com (hu-abhiv-lv.qualcomm.com
- [10.81.94.242])
- by NALASPPMTA01.qualcomm.com (PPS) with ESMTPS id 68PCwDoY518060
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwr1008d8-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
  Fri, 25 Sep 2026 12:58:14 +0000 (GMT)
+Received: from pps.filterd (nalasppmta04.qualcomm.com [127.0.0.1])
+ by NALASPPMTA04.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68PCwDaN518185; Fri, 25 Sep 2026 12:58:13 GMT
+Received: from hu-devc-lv-u22-a.qualcomm.com (hu-abhiv-lv.qualcomm.com
+ [10.81.94.242])
+ by NALASPPMTA04.qualcomm.com (PPS) with ESMTPS id 68PCwDMI518169
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Fri, 25 Sep 2026 12:58:13 +0000 (GMT)
 Received: by hu-devc-lv-u22-a.qualcomm.com (Postfix, from userid 4779521)
- id D4C83620; Fri, 25 Sep 2026 05:58:13 -0700 (PDT)
+ id 86935605; Fri, 25 Sep 2026 05:58:13 -0700 (PDT)
 From: abhiv <abhiv@qti.qualcomm.com>
 To: trini@konsulko.com, ilias.apalodimas@linaro.org,
  aswin.murugan@oss.qualcomm.com, casey.connolly@linaro.org,
@@ -145,39 +143,38 @@ To: trini@konsulko.com, ilias.apalodimas@linaro.org,
  balaji.selvanathan@oss.qualcomm.com, Michael.Srba@seznam.cz,
  sjg@chromium.org, varadarajan.narayanan@oss.qualcomm.com,
  u-boot@lists.u-boot-project.org, u-boot-qcom@groups.io
-Subject: [PATCH v1 11/12] configs: qcom: add Shikra SPL defconfig
-Date: Fri, 25 Sep 2026 05:58:08 -0700
-Message-Id: <20260925125809.1360030-12-abhiv@qti.qualcomm.com>
+Cc: abhiv <abhiv@qti.qualcomm.com>
+Subject: [PATCH v1 00/12] qcom: shikra: add eMMC SPL boot support
+Date: Fri, 25 Sep 2026 05:57:57 -0700
+Message-Id: <20260925125809.1360030-1-abhiv@qti.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260925125809.1360030-1-abhiv@qti.qualcomm.com>
-References: <20260925125809.1360030-1-abhiv@qti.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Proofpoint-Reinject: loops=2 maxloops=12
 X-QCInternal: smtphost
 X-QCInternal: smtphost
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA1MSBTYWx0ZWRfX1WA/rSQj9aFt
- Gv55VGcRbJQIMGRJyepQNut80ADj+rmCy6zBbq/9bVaG+g6d5LelMkLwE88G6XtkGnS9XqYSHku
- mhTjV50o5z5YC7iRoR+PqKFW5B39kZlCXaD4irVi2l62OxJCwjEyM+ODvg/l7rBpfnyY9cviCGy
- iK71cUrS5j9DNyQ3luJHAbJ1vut+8rSj+CjfhShQSBj+xFHk8/VnonKu2aVyaKo7RC9tsrXwIG4
- pcX1AlkkE5S+40jw+eLKyLkzJRzi/cph+H2473tRH2Nh4Bx1soAzZL5/LKYtZ6PYuNjpR6neBwA
- EAHZdGtr8XZf9x+Gv7HrvAh3rGhLfPxH8OXRh60lUNosOmO0NPQCwhvvaC5wPrVk+TiQcFiBzG2
- kuRV2TffqIF55qtJ7OLDroIDcllNhaWDCB3L8JN1u1oFTd/UE0cIGUKbiwohHTOPLo2kXlbXi7U
- r0G0jBGirwDOmX1Y4RA==
-X-Authority-Analysis: v=2.4 cv=ZfKIpcVA c=1 sm=1 tr=0 ts=6ab66fe7 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA1MSBTYWx0ZWRfX7sFcA7A3ZRlS
+ Y8KO4kX3Jyt9Cd8XoZI7Iggjl4+s410wF+y0OZV9OODkQv0SwlAJxerTbteCr2EGpCHeK0w+xVF
+ NzpR4k1HN3Ca0V9OVRaQH9B9oZwHweEc1gpFzcf4cKiu3Lrjk70UttLnQGTuD3XElyazq88WLA9
+ 7lrpoYmKSxjQHnyZ4BTHB5pTW409HjkTmegRbRRm2QEn3PLDR4n/8Q/Ydj2W1BT08agRJ4deHQT
+ 1Cr3shW2g9qzYsTs6adW5sghFjf6dTxPpy57kriwFcZIgMd79Pf7Vp+iKsdmURiHpk7pr9i4VP2
+ wfkps0wTnqGr+UsFZpGA3IkEuoBCyWKyxSHewvzAH5yW+/FthoEhO+U7my5FMa7KD6Z6GPZBC93
+ JUKlkZG5Ks58rkM7MCQw6IY0J0KtXVyDHMmGYTMMbI65qF0vHxjwg3ap0jGjlMX1G04xwrTOQi1
+ +qquWIiU9ez6leZlIQg==
+X-Authority-Analysis: v=2.4 cv=ZfKIpcVA c=1 sm=1 tr=0 ts=6ab66fe6 cx=c_pps
  a=ouPCqIW2jiPt+lZRy3xVPw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8 a=GOj2LzLryEk95jnXa_cA:9
-X-Proofpoint-ORIG-GUID: sYOiTFoI-sX2C8c37rloe8G3RA8N9yeO
-X-Proofpoint-GUID: sYOiTFoI-sX2C8c37rloe8G3RA8N9yeO
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA1MSBTYWx0ZWRfX8/igCZMVTcMl
- kG/1WKM5Bozan1abtI4FSHosr5hf2Y4A+YvSUBJpP/xTW4ThOzdXJUEut/WkFXP50b/0fD7ABw1
- Eaoha2tYcX6PiEWUpHMEw7J8ehsLZlY=
+ a=rJkE3RaqiGZ5pbrm-msn:22 a=8ghmld7vRPOvBHcmCosA:9
+X-Proofpoint-ORIG-GUID: qyF2ijpUlb2VgmmbIp6xDUdV7uB1KsGM
+X-Proofpoint-GUID: qyF2ijpUlb2VgmmbIp6xDUdV7uB1KsGM
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA1MSBTYWx0ZWRfXxrbt3T0rsH+F
+ MqNepWNf3N8gCKPdBIFDSrboCCxL2GrANGxmdlmEkLKjwGs0CdZYC1L70aUuFZntfPaoVbj8zSg
+ ZNVK7kfxw0SR0mEyvTDZJofsbtZrGkk=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-25_02,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 spamscore=0 impostorscore=0 clxscore=1015 malwarescore=0
+ suspectscore=0 spamscore=0 impostorscore=0 clxscore=1011 malwarescore=0
  priorityscore=1501 adultscore=0 bulkscore=0 lowpriorityscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609250051
@@ -195,133 +192,55 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Abhilash V <abhilash.v@oss.qualcomm.com>
+This series adds U-Boot SPL support for the Qualcomm Shikra platform.
 
-Add the Shikra SPL defconfig with the early serial, eMMC,
-pinctrl, SMEM, QCLIB, FIT-loading, and memory-layout options
-required for the SPL boot flow.
+The SPL runs from BOOT_IMEM and performs the early initialization
+needed to boot U-Boot from eMMC. It configures the required pinctrl
+and clock state, loads QUP firmware from its GPT partition, invokes
+QCLIB to initialize DDR, and loads the U-Boot FIT from the eMMC
+boot partition.
 
-Signed-off-by: Abhilash V <abhilash.v@oss.qualcomm.com>
----
- configs/qcom_shikra_spl_defconfig | 109 ++++++++++++++++++++++++++++++
- 1 file changed, 109 insertions(+)
+Abhilash V (12):
+  arm: qcom: add common QCLIB SPL extension helpers
+  pinctrl: qcom: add Shikra SPL pinctrl option
+  board: qualcomm: shikra: add SPL board support
+  clk: qcom: add configurable FSM-voted PLL helper
+  arm: dts: shikra: retain QUP firmware dependencies
+  clk: qcom: configure Shikra GPLL6 for SDCC1
+  clk: qcom: enable Shikra QUP wrapper clocks
+  misc: qcom_geni: load firmware from declared storage
+  mmc: msm_sdhci: make tuning callbacks optional
+  arm: qcom: enable MMU and cache setup for Shikra SPL
+  configs: qcom: add Shikra SPL defconfig
+  board: qualcomm: shikra: embed XBL-sec in SPL ELF
+
+ arch/arm/dts/shikra-cqs-evk-u-boot.dtsi       |  43 +++
+ arch/arm/mach-snapdragon/Kconfig              |  10 +
+ arch/arm/mach-snapdragon/board_spl.c          |   8 +
+ arch/arm/mach-snapdragon/include/mach/qclib.h |  16 +-
+ arch/arm/mach-snapdragon/mem_map.c            |  24 +-
+ arch/arm/mach-snapdragon/qclib.c              |  77 +++-
+ arch/arm/mach-snapdragon/qcom-priv.h          |   4 +
+ board/qualcomm/shikra/Makefile                |   3 +
+ board/qualcomm/shikra/config.mk               |  24 ++
+ board/qualcomm/shikra/shikra-spl-wrap-elf.lds |  40 ++
+ board/qualcomm/shikra/spl-shikra.c            | 342 ++++++++++++++++++
+ configs/qcom_shikra_spl_defconfig             | 110 ++++++
+ drivers/clk/qcom/clock-qcom.c                 |  48 +++
+ drivers/clk/qcom/clock-qcom.h                 |  24 ++
+ drivers/clk/qcom/clock-shikra.c               |  73 +++-
+ drivers/misc/qcom_geni.c                      |  98 ++++-
+ drivers/mmc/msm_sdhci.c                       |   4 +
+ drivers/pinctrl/qcom/Kconfig                  |   9 +-
+ include/configs/shikra.h                      |  11 +
+ 19 files changed, 922 insertions(+), 46 deletions(-)
+ create mode 100644 board/qualcomm/shikra/Makefile
+ create mode 100644 board/qualcomm/shikra/config.mk
+ create mode 100644 board/qualcomm/shikra/shikra-spl-wrap-elf.lds
+ create mode 100644 board/qualcomm/shikra/spl-shikra.c
  create mode 100644 configs/qcom_shikra_spl_defconfig
+ create mode 100644 include/configs/shikra.h
 
-diff --git a/configs/qcom_shikra_spl_defconfig b/configs/qcom_shikra_spl_defconfig
-new file mode 100644
-index 00000000000..7bcb3e21a15
---- /dev/null
-+++ b/configs/qcom_shikra_spl_defconfig
-@@ -0,0 +1,109 @@
-+# SPDX-License-Identifier: GPL-2.0-only
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
-+CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_TEXT_BASE=0x87980000
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_ENV_OFFSET=0
-+# CONFIG_OF_UPSTREAM is not set
-+CONFIG_DEFAULT_DEVICE_TREE="shikra-cqs-evk"
-+CONFIG_SYS_LOAD_ADDR=0x90000000
-+CONFIG_REMAKE_ELF=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+# CONFIG_BOOTSTD is not set
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_SYS_PBSIZE=1024
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
-+CONFIG_EFI_PARTITION=y
-+CONFIG_OF_LIVE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_CLK=y
-+CONFIG_CLK_QCOM_SHIKRA=y
-+CONFIG_MSM_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_QCOM_GENI=y
-+CONFIG_MMC_HS200_SUPPORT=y
-+CONFIG_MMC_SDHCI=y
-+# CONFIG_MMC_SDHCI_ADMA_HELPERS is not set
-+# CONFIG_MMC_SDHCI_ADMA is not set
-+# CONFIG_MMC_SDHCI_ADMA_FORCE_32BIT is not set
-+# CONFIG_MMC_SDHCI_ADMA_64BIT is not set
-+CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_QCOM=y
-+CONFIG_PINCTRL_QCOM_SHIKRA=y
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_BASE=0x4a80000
-+CONFIG_DEBUG_UART_CLOCK=14745600
-+CONFIG_MSM_SERIAL=y
-+CONFIG_MSM_GENI_SERIAL=y
-+CONFIG_SOC_QCOM=y
-+CONFIG_SPL=y
-+CONFIG_SPL_FRAMEWORK=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_OF_LIBFDT=y
-+CONFIG_SPL_DM=y
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_DM_GPIO=y
-+CONFIG_SPL_DM_RESET=y
-+CONFIG_SPL_POWER_DOMAIN=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_SPL_PINCTRL_GENERIC=y
-+CONFIG_SPL_PINCTRL_QCOM=y
-+CONFIG_SPL_PINCTRL_QCOM_SHIKRA=y
-+CONFIG_SPL_CLK=y
-+CONFIG_SPL_CLK_STUB=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-+CONFIG_SPL_QCOM_GENI=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_MSM_GENI_SERIAL=y
-+CONFIG_SPL_SMEM=y
-+CONFIG_DM_STATS=y
-+CONFIG_SPL_SYS_MALLOC_F=y
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x48000
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SYS_MALLOC_DEFAULT_TO_INIT=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80008000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x20000
-+# CONFIG_SPL_SEPARATE_BSS is not set
-+# CONFIG_SPL_USE_TINY_PRINTF is not set
-+CONFIG_SPL_BSS_MAX_SIZE=0x4000
-+CONFIG_SPL_TEXT_BASE=0x0C219000
-+CONFIG_SPL_MAX_SIZE=0x7B800
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_MMC_SDHCI_ADMA=y
-+CONFIG_SPL_MMC_WRITE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x00
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_SPL_STACKPROTECTOR=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_ATF=y
-+CONFIG_SPL_ATF_LOAD_IMAGE_V2=y
-+CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-+CONFIG_SPL_HAS_LOAD_FIT_ADDRESS=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x0C2C1800
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_STACK=0x0C294800
-+# CONFIG_SAVE_PREV_BL_FDT_ADDR is not set
-+CONFIG_SPL_REMAKE_ELF=y
-+CONFIG_SPL_REMAKE_ELF_LDSCRIPT="board/qualcomm/shikra/shikra-spl-wrap-elf.lds"
-+CONFIG_QCOM_SPL_BOOTIMEM_FLUSH_BASE=0x0C219000
-+CONFIG_QCOM_SPL_BOOTIMEM_FLUSH_SIZE=0x134000
-+CONFIG_SYS_BOARD="shikra"
 -- 
 2.34.1
 
