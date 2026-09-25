@@ -1,162 +1,173 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50943C98321
-	for <u-boot@archiver.kernel.org>; Fri, 25 Sep 2026 12:11:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00B2FC9830E
+	for <u-boot@archiver.kernel.org>; Fri, 25 Sep 2026 12:12:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 42E3860D4D;
-	Fri, 25 Sep 2026 12:11:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 95AC6812BA;
+	Fri, 25 Sep 2026 12:12:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Y3kketoLBv_1; Fri, 25 Sep 2026 12:11:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4F5A360C09
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790338317;
-	b=Fd+Ce8X+I+8aFDfj8U+S8CbhwU7BVLBc7f7PYnrZ3WcwdxkTyb9HVScCia5o7vPZSkRa
-	 E4xlz9JQUWFlee587Mo2W6MAhJYhRJGh9o9W8WoK0cQTr7BN4/NwRlyeFQuOs+RF6A591
-	 asnQt0dmvQQRyOntwd3402qVBCPzcf28NVdDubO9yfgNgPLlOI/DM5NFDdTxzMXFyj6Wq
-	 jpb2wjLfpSCLjpC52AclIfANb05zN/GpEMpzNrHqJmYoQCYGrazMtUKYQwWEqddtYfnIr
-	 /SCQu1ZtgJre+sEFMj4OKQ3Gl2CZoBQfgPjwe1iA4HRpKrPlZFHudpOfBPNPOETxzgA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tqfjeW6o01H5; Fri, 25 Sep 2026 12:11:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 9C524812A7
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790338319;
+	b=krg/daJ4k8phdDNGGp4e/wV9vzoBhzEcZ9Hz9zvvtMU1wyo4ESqm3hu5pzO5BJn+CzmY
+	 CNGjUmGaHVifitvwPrR1YOKYseRyZBOhMmme5vRBy93wXDNOO0rN80M1eBTHvTIHFd8ow
+	 /DenrLwvXYbHdbRi0M7SJhIYHLA2Y/8ffCcBTAzvVL1B6pGXnav4En2WLdXh5SRNSb8s+
+	 r4AP0pa+WM6/CC6J6tRWBZ3i1nyaUfTAqk+R7CabWbosC2Wg/u93egwBDIp4xeFiEOmpB
+	 cLGZhlb7eKD+ujzh+jSUS9TcxR7Lf8mWgDx7RiTTuOx1ueldOiyxcrKJTGHp8CWAbGA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790338317;
+	c=relaxed/relaxed; t=1790338319;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=SaTQv4KqpunHhVNgEV22qG3hP4Kmn+PgKhmesfQ4e2Y=;
-	b=AGQEkaZPQ9r5sQ23Nm2rqdmUj0taiACoX15bNPHgKA1H2RLIileV7xXpkgjyJzEQx4B+
-	 fE8W9SfByyaJH3jSmvvfs/a0Pahsh8XnWBIWNJlIGxGyOLYo+1garFHKW1GHkUsw3M5V6
-	 CBLbNj+zBCVzsZrNIUTek8USr4+DrQSWI4nXV6xR7+YJjzmSS7kgCMVVWPrVbOnVZLHqi
-	 Ev9p7CFY/XAXULh2O3HKyt6A5ibAu585MaWaG6h1RVJlk/Ygr3TQD3ju+fFk8KaXeihlO
-	 XXyJYCISvjs2ZVEal+NKVIuSmKy7iN4LF+NMQ+F0AUqRnJ4B7T36P0K+UlzhMYU2DpA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=UTR3UNHYiuSdQX8tB/pzkx7+px48dp4+j6qhlvYGftQ=;
+	b=FkXQI5YwmI+GK2cYzkLIg7NRCZFDxUUkeEfecmb3MnzoJK0hFfFAHxhAKx1CAB5vClLM
+	 JpTPbauvj4ulLZyhm+/mq8omIX2jR8bp2Tncdjo8ZlmcABCbQcOnBMeNg383BjwKeG9AC
+	 OUbm+4W75k0G0kBwr4R2Njz8DKXH2ybZ1b9w4TCZumFfliQcX0XFEGvao2KlLDYNoaYxf
+	 xR6tREUXuQBg+hdarX35KsQRzWU90AJb54hJQ+BnwCnHBQV3Sv3M6VUveMG56v+AF99Nr
+	 +l3ELEUQlKe5FNehNq7nNgf3OlQ9Vb5/Pps40RNXY8h16iYnK/0sACzUPWkM4ta0/3A==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790338317;
-	bh=SaTQv4KqpunHhVNgEV22qG3hP4Kmn+PgKhmesfQ4e2Y=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ptvKhpJLsZsjURBRtC98IHfSTV+qhZ+UB4wQ1T80rRfIsyn/Drxp9MIGHmO4ERxqX
-	 UWjDfzi0h4OkgHY166BOAvlMlRO6t3PI6H6yHTVV/Swurxt2PghugQDGTaezH7BoN+
-	 KxztBEUVYSJlS7qnJxyMKKA+3Y+J3MVBeIu6AnZGVNi3Zdj4OHt1NzRfhVjIB/YUE0
-	 llv0bwVTiOKGJwmS5d62W6txzC9zubdx1d14NPeVE8EGViVYD/tVLt2TRqxpzMwZkn
-	 IFX6I0yA7avVptH3uQgXzUeDF+Kn+7fkl04xhZUVbJjRc0lBoIj2oHTK7qra3WMfdd
-	 H8p/TNEMwn3jA==
+	d=lists.u-boot-project.org; s=default; t=1790338319;
+	bh=UTR3UNHYiuSdQX8tB/pzkx7+px48dp4+j6qhlvYGftQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=E8NAHHkOtTsib++tPSN3eR12r03imBDTyY/IXmQGPx/sF1KjpQi35mV/BDCLidtyb
+	 B0bzBAAxJ0T6jpN/4iG4Y2tThp3YhMTNhgBFvScVCrGw4cUwgMRwVbyfVmhkj0mVx/
+	 nDotU0uUYxsz6uIVDY1uSQbRB+EXRD+Uj4EO4f84VXxAPWdL7OanDoSwk/S58Kxhmh
+	 zyb+gHbC2xh6Nv8r4cDCMun4MMjd5t8zQjaG6W+4OC6tLYvdKZf4pVJfFGh9OecJ84
+	 h9tvvBoFv7fpQON9U3VezFPUwwJQcZTF2Yaj+pY+ENaZtImb00M1y35ivqKkHG3iYy
+	 eOFsPrySnwXQA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4F5A360C09;
-	Fri, 25 Sep 2026 12:11:57 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 89E2F32F
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 09:12:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9C524812A7;
+	Fri, 25 Sep 2026 12:11:59 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 079B52F5
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 09:59:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6F53340B20
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 09:12:12 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id ED96C60BB2
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 09:59:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4eKSlXOZg2jQ for <u-boot@lists.u-boot-project.org>;
- Fri, 25 Sep 2026 09:12:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 311E640B16
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790327531;
- b=tTaFfWysagIXG2f6BbpxL2owsXJNomsOYceQWnswS5seuKD+dBrgFZZ/vB5TKT8QQMDa
- 9OjMwJ0V6hhbuWfsKvsa+iJZsUzX3jFAmyb5gGfB5sNWlHlSYQ4cAXdfGuwadR7o7wngi
- S3jbqDMZEr4lt1GitXS5fPk9j2WhofZo7TsSE/Wq+xCCoMJsc1oVxWzZRdRdnO15TxXeS
- tzTzYg6mfpM8AOEt54teq9dw0dJtcR6KD9pJVjSkd7SkMVhVKV+03dUIYIEys5ho3ssge
- s1Zui8QADX9QE5x/SUa0HkJchM6uGlKXc6FqOvENTVbO2LGblneWU5bKrHQuauhyNIQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HH1fB0U2nDR7 for <u-boot@lists.u-boot-project.org>;
+ Fri, 25 Sep 2026 09:59:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7738660BA7
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:33::e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790330354;
+ b=A5NiyKtk71HGhEEgSQJxKuu6o52cPbLbI6LnOCQ1u3N1r2KdF8JLAwvNkGM2n5b/Ugzg
+ EFHOBDIftBlfF7zbChGsxeKsALRKPGVis7jXoLfDb7FJd7dw054lFxVEzv1nsUnB337Wb
+ qOO7XrfHD4hw+PI17WyghdFMOOr3IMzQP7EAlMDIGoZ7k9K49qmq/a2rT++WrqWATxjZm
+ dys+KHgFwNdKBCC232pl0rexZaYYxrr9M+fafhL37VIg/Ob2BsrMM1dLjGd/4u7BnhNHQ
+ cU18S/1BfateVavKqHcOizHIwF7WjqB5bWKom5kzRDEx8fM2vCq36RS2SPytMN6XXMg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790327531;
+ c=relaxed/relaxed; t=1790330354;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=SaTQv4KqpunHhVNgEV22qG3hP4Kmn+PgKhmesfQ4e2Y=;
- b=d72ttNEyc/X3CF3XETk9v6SLpWThV+GZeCu8sWN6aVdOm1+T0bnh3HU7vladvBOXLhlw
- cMV4TYQCpw+cAdVcVK/WGGp8ZUtQNT8mVCsry1G5rNc/sZGKa/ofV+XI7ZFb9Fi3LuJNJ
- RUCNFnZzC+cGRUa+q+Tc4IzeFnlA1JwUNXICNXmAVI9uNX7HCaAO4blnWLrdZRYO+eHM0
- JHQkSCNxqVutaNMXsKYZqr4d7srPTDdmMw6NqYhHW4UxA5EntzwRlgQhHI7gSN7h1cR+x
- bba5R7tT6sYr0u2bVdZVDB1tetlGvZoXHomY6s3LEHfVUcnOeShHlfAihTo2DSXkhwQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
- dmarc=pass header.from=gmail.com; 
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=Fkqxg8ei; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::10; helo=mail-wm2-x10.google.com;
- envelope-from=eichest@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=Fkqxg8ei
-Received: from mail-wm2-x10.google.com (mail-wm2-x10.google.com
- [IPv6:2a00:1450:4864:31::10])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 311E640B16
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 09:12:10 +0000 (UTC)
-Received: by mail-wm2-x10.google.com with SMTP id
- 5b1f17b1804b1-49cd5462b69so3801125e9.1
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 02:12:10 -0700 (PDT)
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To;
+ bh=UTR3UNHYiuSdQX8tB/pzkx7+px48dp4+j6qhlvYGftQ=;
+ b=NijbvioIj0LkuHSHlfxBK7jG6xjSqN7EUULkiAD6Sh4Z3kfFUXHGtLr2xsTmsHpqfFRL
+ w0SUNTSkbmeBgksXci9OlP34hJUu3WiIiKktpMqbycERx9dOGFMJVX4tcvodMlWCQ+nZC
+ pEn17fWWkdlu3ZfKOfp3H32Wd6Y/EGE5BDqJpb0VdHsIo9y2U8AhDkHVeXJdgJo9due0q
+ I3qaaWUd3CTpjzN79SnYobJdhN1Deh9MP5NP0cNmC1mwt6U/bvEG77lBKBKxP14nCzTQ0
+ DXwmyoGDorRR462mhcfHFy7BdZtoQicY3FFMJPqk3411IYv/bEMolBkUzl9Am3TAsWg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ dmarc=pass header.from=linaro.org; 
+ dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=OaMn4JMa; 
+ arc=none smtp.remote-ip="2a00:1450:4864:33::e"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:33::e;
+ helo=mail-ed2-x0e.google.com; envelope-from=anders.roxell@linaro.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=OaMn4JMa
+Received: from mail-ed2-x0e.google.com (mail-ed2-x0e.google.com
+ [IPv6:2a00:1450:4864:33::e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7738660BA7
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 09:59:12 +0000 (UTC)
+Received: by mail-ed2-x0e.google.com with SMTP id
+ 4fb4d7f45d1cf-6aaf2dd01d2so25884a12.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 02:59:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790327528; x=1790932328;
+ d=linaro.org; s=google; t=1790330351; x=1790935151;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=SaTQv4KqpunHhVNgEV22qG3hP4Kmn+PgKhmesfQ4e2Y=;
- b=Fkqxg8eidjX0p7JI1Rq+N5nAh8ddNLlrVR58u67cLSjazvh8Ehw1Tryny54fiJygNX
- gPRUi1mIPkF848ODOZjUUeYcNdpxbXtoS3CG/ysbGKsiDTVRyWwDO6ma+YBMYd8bPjjq
- DFPLdQbjBHRNaeVlojvuBPR/seoARM4XqE1qwx7G3aQ7qaPtwsTevDzSP35kwowUL3g7
- 8NkjoOsP8X8V6eU1uUNJiNJKHJohLucN4xoMVZEnA3Q7gGOlRQtMxsrFK84gktY+W1GI
- 7RjdiW8ZR5j4Z5PUvQFNYaLxo7TMvBDTexUM/awoGFAVZ5oLDaEi5nM6ZWGwI3rUO5ok
- 88/A==
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=UTR3UNHYiuSdQX8tB/pzkx7+px48dp4+j6qhlvYGftQ=;
+ b=OaMn4JMapTZ38jqUvGaEUZI3p+6hFiKpf58TK7cyFu3zwe8S2dPQf0g9ddNgrVi1un
+ xU18KyflPsYldLL3snEybU6vpplngZjukvmUNUKSyG5ZW3vZyspLlcji4DKiqTCYasu2
+ TWKYiuaS6MhtyNiuAl+RCs1vZwV8UO6O0HMp+JdkfVymCUHXwgfyWRVIHbR0kOp/WXDe
+ kl1xdPTdFQVmJ9asuiBMvpn3hqHERRaJKVnSMdki66lorm0nGmM17H7ELna4hH6AIakF
+ uEPxgE4Ob4mAZdHtkSqSu82AqZEJNHTJYjpro7OaMX2g3VIX/f8dGGvhA1doIsInRZ7V
+ 4EFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790327528; x=1790932328;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=SaTQv4KqpunHhVNgEV22qG3hP4Kmn+PgKhmesfQ4e2Y=;
- b=jwSUNdDffl/c1S8odkoATDiFEE50jFMC4EUuHUb8L59DRJzp7o3sVH6pr+ls9cdRAT
- eXF3XHHDrMJc2zXRcuWd/XiU7gfDMvEm0w3HCkcVA3BPLKoBAX/ymk5HfgdosKCNCJCR
- 71q7mkrz4GdGAmdBkjEmHrkIGdrHBOx8uFjrTwM24D9wHOeEh91zN3pzeu5wdjnU5kEj
- LwZMHmko1FS+j3ZUr0wABnmEVuEN/YVmANi9EAS/F42mImUSbbMMFkeMRZ3GCdx+ydRV
- FZQRdf6OSAtuTMoRT1mtqtLcFU76Y238xN60rokWrbrs/J5q2s4SX0Lck6YgPIV/0mX5
- j4AA==
-X-Gm-Message-State: AFuF++nU5RYRIOWaJMKfBNPKvX0/OcQifIBwfUoqrVxn74akJlJ/BgLt
- N9k0IbjuLj43iQy2VK3sTBZUHvbv8e7drQW3gZ5592mU5UCraOypT6B7
-X-Gm-Gg: AYBFou3xgFBM3kEruRF0IWsj4trbCEoPGmNPe+bwPhyKlcAvqxkHfV7YH6oRjX/k8O9
- 5H1aVhFlQ3/zT5UHbvM/vVdPl6WOveUxH2XoUDn9/WpSMkcr01znE1P1EIePE0C6nHcH1gKsaXy
- DUDeAqEIoZzAWUotAB9SkPt6l8VR61P/W8jp2UZinww7zAZTSn/OzDcvFXqdtVMUPw+FCM8DPlO
- gfuSCZg8bVdklGtF+kRI0di0UPYZi96jCxfyF8izVUkv5EeWhiluxpuvzNkSKHNQEuaJQ0HNklt
- oWgZ2A8CmCPKTRX1HiXbMmb9k9DoPYXTjbquRuQCohqepW489InEPrQvQkSBUZPO1v4cYHXFI1s
- csUH7wEijrWJ4KtRiH8azLjpSf/b1+czDIGKdyUBUMNdSdE4Xbp+9g2zJg38OCdC9XZNTGaJUQy
- IvN44ieAI+9ZJVeq9nuLHIs3jIxrdpgQvO3Z73EeW4Yy7ttTbO9o+5eA==
-X-Received: by 2002:a05:600d:8642:20b0:49f:e8bf:c38 with SMTP id
- 5b1f17b1804b1-49fe8bf0d97mr53493965e9.34.1790327528277; 
- Fri, 25 Sep 2026 02:12:08 -0700 (PDT)
-Received: from eichest-laptop.lan ([2a02:168:af72::cb4])
+ d=1e100.net; s=20260707; t=1790330351; x=1790935151;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=UTR3UNHYiuSdQX8tB/pzkx7+px48dp4+j6qhlvYGftQ=;
+ b=V5ka2n4p4DACEKeqH4358M4lh+TAPKKGnUNI/hwi7n8slDgfWd9BE8AW58mEkaAt8L
+ YZq4kVt5htU+RU+NqfiihhkZMpOEGELD80uUOVNXEZPKmSaTlr7LIOhCNoWAwcAJ6Iws
+ cbZeoV+VY3iBr5er56hLXkwvMUoYPf/B8RNpdEpsV7KsaYbAb0BGnZWTGi1ztRrDIfre
+ TcV0PRhOBTSNSPX67zB5HGwlEf257Mg4c4q4H7fQSlnM0337DMqGpL1m4HeWkgUTfcgF
+ Nl2zZNFFxRVU/1jtNERJ7cxrSsXuS5BUML65c8ozIDxDdcgYKi8XchvhbyfgoEX6GIrM
+ gatQ==
+X-Gm-Message-State: AFuF++kpCT2lDJhgKMisjcMcJ4jsCh4CUc9laTGfRhVgSnbA4UoHA44A
+ aNryAWgjQU4ETFQX5NrzQtKcMhlmnlWuosx8WqTpGZTyI1RrxBhuQQF2NxiuLL8IyR4=
+X-Gm-Gg: AYBFou0njE8gp1Y3MEqTLdmuysUylqWiUybOyX/Xdo2NWuUL9Xs8m8W1omADVMiiS9I
+ wc/mCGF361uSOzaCHZqIulygALaFGz6yljfuEDJvjlBnKMdyuWPbsvDsKQOqsH/tmSnC6vMajLh
+ sbA9PmPvEoZwkSRSq/lA3Iu3XwmUOUvqV3qmk12a05Tq4ORwKYvT07Yc1syl5Omlb9aOd8vS26M
+ 2d4E9T6XYgof5lTq9cx5AsX5QGHF2yqge6ET9MdB7EaVaWc9V5StWnczTyCIZCjnn4Ityo6oBpm
+ nzyVLkonJijkERh2PX7KCO+luAxyZ8n/tS1rzFuTJjLjP7bFuQAwNRVjC+PCiZIZ2YQtj5jJjln
+ sLdQhh4+M1oZjSgEJtZp1L3LHJc6mdmaHUNteera3eQVRrwKOSZr1pz74AJhvzCHOvxFrHirZFB
+ 5T+SEaIan+qElHSKazRE5duB0+7BPOwmaR9HCtQnPMTdC5fAPViaBYYY7664/MykbRr/+gXmLqb
+ +hWRN1hn2gTh+0tgaS+fO5/t/Dgy5I=
+X-Received: by 2002:a17:907:3f17:b0:c16:604a:b2bd with SMTP id
+ a640c23a62f3a-c2ac234ac2cmr496270066b.3.1790330350562; 
+ Fri, 25 Sep 2026 02:59:10 -0700 (PDT)
+Received: from monster (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49fe667ae2fsm131426595e9.13.2026.09.25.02.12.07
+ 4fb4d7f45d1cf-6aae5dd78e1sm798862a12.18.2026.09.25.02.59.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Sep 2026 02:12:07 -0700 (PDT)
-From: Stefan Eichenberger <eichest@gmail.com>
-To: marek.vasut+usb@mailbox.org, trini@konsulko.com, mkorpershoek@kernel.org,
- stefan.eichenberger@toradex.com, hayashi.kunihiko@socionext.com,
- Tom.Hsieh@advantech.com
-Cc: u-boot@lists.u-boot-project.org
-Subject: [PATCH v3] usb: dwc3-generic: fix ref clock lookup indexing wrong
- clk_bulk array
-Date: Fri, 25 Sep 2026 11:11:44 +0200
-Message-ID: <20260925091203.44385-1-eichest@gmail.com>
-X-Mailer: git-send-email 2.55.0
+ Fri, 25 Sep 2026 02:59:09 -0700 (PDT)
+Date: Fri, 25 Sep 2026 11:59:07 +0200
+From: Anders Roxell <anders.roxell@linaro.org>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.u-boot-project.org, marek.vasut@mailbox.org,
+ trini@konsulko.com, ilias.apalodimas@linaro.org,
+ michal.simek@amd.com, lukma@denx.de, alchark@flipper.net,
+ jerome.forissier@arm.com, dlechner@baylibre.com, sjg@chromium.org,
+ Thinh.Nguyen@synopsys.com, mkorpershoek@kernel.org,
+ love.kumar@amd.com, c-vankar@ti.com, s-vadapalli@ti.com
+Subject: Re: [PATCH v9 00/26] usb: dwc3: part 2, make the resynced code work
+Message-ID: <arZF61eAp54rQyrT@monster>
+References: <20260916123826.517181-1-anders.roxell@linaro.org>
+ <178964898806.1279633.17593305863869822172.b4-review@b4>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <178964898806.1279633.17593305863869822172.b4-review@b4>
 X-Mailman-Approved-At: Fri, 25 Sep 2026 12:11:56 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -171,206 +182,52 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+On 2026-09-17 18:13, Anshul Dalal wrote:
+> On Wed, 16 Sep 2026 14:38:00 +0200, Anders Roxell <anders.roxell@linaro.org> wrote:
+> > [...]
+> > ums. Love tested v7 on AMD/Xilinx boards. The rest is build tested only.
+> > 
+> > One thing is still open. Anshul sees a single "unknown endpoint event 0"
+> > line on AM62p during enumeration. It is there with and without the cache
+> > patch, and the transfers work anyway. I do not see it on X15, and we do
+> > not know yet if it is older than this series.
+> 
+> The transfers work regardless, if it helps the issue seems to be in the ep0.c
+> file.
+> 
+> CC + Chintan, Siddharth
 
-On Verdin iMX95, with a USB hub permanently attached to the DWC3 host
-port the hub itself enumerates fine but a USB stick plugged into it
-fails intermittently:
+Hi Anshul,
 
-  Verdin iMX95 # usb start
-  starting USB...
-  USB XHCI 1.10
-  Device not responding to set address.
+Thanks. That is what I would expect. If the whole event word is 0 it
+decodes as endpoint 0 with event 0, and then it ends up in the default
+case in dwc3_ep0_interrupt(). So it does not tell us where the 0 comes
+from yet.
 
-        USB device not accepting new address (error=80000000)
-  Bus usb@4c100000: 2 USB Device(s) found
-         scanning usb for storage devices... 0 Storage Device(s) found
-  Verdin iMX95 # usb reset
-  resetting USB...
-  USB XHCI 1.10
-  WARN endpoint is halted
-  WARN endpoint is halted
-  unable to get device descriptor (error=-22)
+I think my two questions from the earlier mail [1] got lost:
 
-Commit c6583354b7c1 ("usb: dwc3: Look up reference clock DT phandle in
-both controller DT nodes") added a fallback that searches the DWC3 child
-node's "clock-names" for "ref"/"ref_clk" when it isn't found on the
-parent glue node, but always resolves the found index against
-glue->clks, a clk_bulk populated only from the parent glue node's own
-clock-names list. This is wrong since the child node's clock-names list
-is not guaranteed to be in the same order as the parent's, and indeed on
-Verdin iMX95 the child node has a different order than the parent node.
+1. Do you see it on plain mainline, without my patches? If it is there
+   too then the resync did not cause it, and it can be fixed on its own.
+   If mainline is clean then I broke it, and then it has to be fixed in
+   this series.
 
-Fix it by looking the reference clock up by name with clk_get_by_name(),
-trying the dwc3 device and then its parent glue device, so the clock is
-always resolved through the device that owns the node its name was found
-in. Also enable the clock before use and fail the probe if that does
-not work, and disable it again on the probe error paths and in
-dwc3_generic_remove() to keep the enable balanced.
+2. Can you print the raw word and send me what it says? If it is
+   00000000 we read an empty slot. If other bits are set it is a real
+   event, and we decode it wrong.
 
-Because of moving to clk_get_by_name() for receiving the reference
-clock, also ensure that the parent driver is a DWC3 glue driver before
-looking up the reference clock, since the parent could be a bus or root
-device with unrelated clocks.
+  --- a/drivers/usb/dwc3/gadget.c
+  +++ b/drivers/usb/dwc3/gadget.c
+  @@ static void dwc3_process_event_entry(struct dwc3 *dwc,
+   		const union dwc3_event *event)
+   {
+  +	printf("evt raw %08x\n", event->raw);
+  +
+   	if (!event->type.is_devspec)
 
-Fixes: c6583354b7c1 ("usb: dwc3: Look up reference clock DT phandle in both controller DT nodes")
-Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
-Tested-by: Tom Hsieh <Tom.Hsieh@advantech.com>
+Chintan, Siddharth, if one of you has an AM62p or a BeaglePlay, the
+answer to 1. is the one I need most.
 
----
-Changes in v3:
-- Ensure that dev->parent->driver is not NULL (Marek)
-- Return with an error if clk_enable fails. (Marek)
-- Balance the clk_enable() with a clk_disable() on the probe error
-  paths.
-Changes in v2:
-- Check if the parent driver is a DWC3 glue driver before looking up the
-  reference clock. I use driver->name as this should work with all
-  implementations used today and I hope this is more generic. (Marek)
-- Add Tested-by from Tom
----
- drivers/usb/dwc3/dwc3-generic.c | 69 +++++++++++++++++++++++----------
- 1 file changed, 49 insertions(+), 20 deletions(-)
 
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-index 2356b3bc0aa..93912d9c7f6 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -13,6 +13,7 @@
- #include <dm/device_compat.h>
- #include <dm/lists.h>
- #include <linux/delay.h>
-+#include <linux/string.h>
- #include <linux/usb/gadget.h>
- #include <power/regulator.h>
- #include <usb/xhci.h>
-@@ -31,6 +32,7 @@ struct dwc3_generic_priv {
- 	struct dwc3 dwc3;
- 	struct phy_bulk phys;
- 	struct gpio_desc *ulpi_reset;
-+	struct clk ref_clk;
- };
- 
- struct dwc3_generic_host_priv {
-@@ -47,8 +49,7 @@ static int dwc3_generic_probe(struct udevice *dev,
- 	struct dwc3_generic_plat *plat = dev_get_plat(dev);
- 	struct dwc3 *dwc3 = &priv->dwc3;
- 	struct dwc3_glue_data *glue = dev_get_plat(dev->parent);
--	int __maybe_unused index;
--	ofnode __maybe_unused node;
-+	struct clk __maybe_unused clk;
- 
- 	dwc3->dev = dev;
- 	dwc3->maximum_speed = plat->maximum_speed;
-@@ -63,22 +64,39 @@ static int dwc3_generic_probe(struct udevice *dev,
- 	 * - in top level generic node, with no subnode (i.MX8MQ)
- 	 * - in generic subnode, with other clock in top level node (i.MX8MP)
- 	 * - in both top level node and generic subnode (Rockchip)
--	 * Cover all the possibilities here by looking into both nodes, start
--	 * with the top level node as that seems to be used in majority of DTs
--	 * to reference the clock.
-+	 * Cover all the possibilities here by looking into both nodes, the
-+	 * generic node first and the top level glue node second. The clock
-+	 * must be looked up on the device that owns the node it is described
-+	 * in, the clock-names lists of the two nodes are unrelated (e.g. on
-+	 * i.MX95 the glue node has "hsio", "suspend" while the generic
-+	 * subnode has "bus_early", "ref", "suspend").
- 	 */
--	node = dev_ofnode(dev->parent);
--	index = ofnode_stringlist_search(node, "clock-names", "ref");
--	if (index < 0)
--		index = ofnode_stringlist_search(node, "clock-names", "ref_clk");
--	if (index < 0) {
--		node = dev_ofnode(dev);
--		index = ofnode_stringlist_search(node, "clock-names", "ref");
--		if (index < 0)
--			index = ofnode_stringlist_search(node, "clock-names", "ref_clk");
-+	rc = clk_get_by_name(dev, "ref", &clk);
-+	if (rc)
-+		rc = clk_get_by_name(dev, "ref_clk", &clk);
-+	/*
-+	 * Only fall back to the parent node's clocks if the parent is a
-+	 * dwc3 glue wrapper. When the generic node is a top level node,
-+	 * the parent is not the glue device but a bus or the root device,
-+	 * and its clocks are unrelated to the controller.
-+	 */
-+	if (rc && dev->parent && dev->parent->driver &&
-+	    strstr(dev->parent->driver->name, "dwc3")) {
-+		rc = clk_get_by_name(dev->parent, "ref", &clk);
-+		if (rc)
-+			rc = clk_get_by_name(dev->parent, "ref_clk", &clk);
-+	}
-+	if (!rc) {
-+		priv->ref_clk = clk;
-+
-+		rc = clk_enable(&priv->ref_clk);
-+		if (rc) {
-+			dev_err(dev, "failed to enable ref clock: %d\n", rc);
-+			return rc;
-+		}
-+
-+		dwc3->ref_clk = &priv->ref_clk;
- 	}
--	if (index >= 0)
--		dwc3->ref_clk = &glue->clks.clks[index];
- #endif
- 
- 	/*
-@@ -92,7 +110,7 @@ static int dwc3_generic_probe(struct udevice *dev,
- 
- 	rc = dwc3_setup_phy(dev, &priv->phys);
- 	if (rc && rc != -ENOTSUPP)
--		return rc;
-+		goto err_clk;
- 
- 	if (CONFIG_IS_ENABLED(DM_GPIO) &&
- 	    device_is_compatible(dev->parent, "xlnx,zynqmp-dwc3")) {
-@@ -103,13 +121,13 @@ static int dwc3_generic_probe(struct udevice *dev,
- 			/* Toggle ulpi to reset the phy. */
- 			rc = dm_gpio_set_value(priv->ulpi_reset, 1);
- 			if (rc)
--				return rc;
-+				goto err_clk;
- 
- 			mdelay(5);
- 
- 			rc = dm_gpio_set_value(priv->ulpi_reset, 0);
- 			if (rc)
--				return rc;
-+				goto err_clk;
- 
- 			mdelay(5);
- 		}
-@@ -124,10 +142,16 @@ static int dwc3_generic_probe(struct udevice *dev,
- 	rc =  dwc3_init(dwc3);
- 	if (rc) {
- 		unmap_physmem(priv->base, MAP_NOCACHE);
--		return rc;
-+		goto err_clk;
- 	}
- 
- 	return 0;
-+
-+err_clk:
-+	if (dwc3->ref_clk)
-+		clk_disable(dwc3->ref_clk);
-+
-+	return rc;
- }
- 
- static int dwc3_generic_remove(struct udevice *dev,
-@@ -145,6 +169,11 @@ static int dwc3_generic_remove(struct udevice *dev,
- 
- 	dwc3_remove(dwc3);
- 	dwc3_shutdown_phy(dev, &priv->phys);
-+
-+	/* Balance the clk_enable() from dwc3_generic_probe() */
-+	if (dwc3->ref_clk)
-+		clk_disable(dwc3->ref_clk);
-+
- 	unmap_physmem(dwc3->regs, MAP_NOCACHE);
- 
- 	return 0;
--- 
-2.55.0
-
+Cheers,
+Anders
+[1] https://lore.kernel.org/u-boot/apF-Y29Nk1g0WkUI@monster/
