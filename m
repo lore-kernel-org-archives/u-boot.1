@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D71C98328
-	for <u-boot@archiver.kernel.org>; Fri, 25 Sep 2026 13:40:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 203D9C9830E
+	for <u-boot@archiver.kernel.org>; Fri, 25 Sep 2026 13:40:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D75C88130C;
-	Fri, 25 Sep 2026 13:40:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CBAED40CC3;
+	Fri, 25 Sep 2026 13:40:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Z2tL458zOcxN; Fri, 25 Sep 2026 13:40:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 8F53181339
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790343651;
-	b=o7Knn7ALHC3f0Xe3UTutAyWiXH2nZaZPeWyakKFRj5tw2HJ0ltTpHGd6s/COrhP1supv
-	 cbMYrVCES4cZl7rMJhZNGOhJYA+uvqSVBuysU4Z5oDVQeT0Wb0izO1e7XBYW2kxPAfbsL
-	 KWcwV9r+b1MwBsSKSPOavbt0bVjGmkhHsdTtU8vqAbfhllQbt0IE5IpbgtUMuSTUcofAB
-	 hoHUeOXpf1OIhRZineAgsT8XxtIFu9VptTm8L/yTyExAJd23yDf/9wzlFdFt9AZqV3h+W
-	 i1XzajUZ6Ea8k3tP0XnCwPYSgm1Z8Ikh76Tb+AVZ8fDuMQTU2K6oUo94IoOIuRdQ9NQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HyFICvB9gGzU; Fri, 25 Sep 2026 13:40:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B65FC40CBF
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790343652;
+	b=M9/Mgl2ArxEWvGlfNXmuPlPP8iJUehR9yrq6qslAzIPt6CV+Oq1DazGLUilN+6M2w/1T
+	 4MX9Aeddgox1FfxYkib6pN3av2PXD5z00vAz23MMcZ4X9+89fPbC4TEpjtnPv1LwoKqH8
+	 fSQo3R2c73ithYZjeuY+wJ5AS8QNu/FOe1Tau/uMsym0bwPxcsEy9KLOLnR4zZemy60UF
+	 KOOILsWv9XSRhT508JKZm7QcPHdsIY06VhnU+/W86t27BjUSWJW/4U9/m+xvZGAGpogoR
+	 SziV33c3V+WlqVTOFNFfeyQY/9brx+vj89bhifCEcHnJRLXUgV1mjSQJgT34v6+GPHA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790343651;
+	c=relaxed/relaxed; t=1790343652;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,135 +32,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=WySkgNOyhXUCX12PQY2jCJO8T58c8yyYdPtG3TzkXw0=;
-	b=oLTQox/E8kLB4LoR1E0o6FSTTLAtJvusiYEZzd1utQkJKIylTh0w9wquqKWjQ+sfOvxc
-	 xKXLl0cqFWlUx9KkRzYG0IjgholaYfPBPdU5tbXFdshgQMDzmhhFd6ZsPFlgBQOa66Jb6
-	 kZ/h1gjHPhhRvLcrlHAWXYsp8gqRzlNxUAlzpEH0Z6yJPkrskAlvIi2D28R3MDR/d4ViB
-	 Kh9VwnHIbVxfGQ+iI8nj3NdlKHSWKfcoFIsXgIhz7bMaWPhVycc45vZDoQta9omcRwqYR
-	 JnH1M8UowFFqBX0EQAdmfHjh2WO61aEqUBPU/nFHTVnCetLSXALaw3E0rVNZdSaVJJQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=oocQgrfQ01yOIc1PajZKx98kEZr3RiFUEGvHe1NoyrY=;
+	b=OngLEs+ygqkH4GrxgV8vqoMbkueWJzGuc6FVwEMJleugJwj0H1J8xHxRTJg6uGltbxVc
+	 2ZWsK5sUX+xeBQV7mTwNK9OPP4HrD+UN1Pb/+g0B0TyGAtZVoLgOy17kFwZ2E4ScZwRWa
+	 C6AR30zAiayVKYKyfubdsGmrM4nTOHD94X70w9CB84jpT+0s5gq4DJXvmyZ+HDsOCifJX
+	 QB1+ES3RHLHeMT1Zme6a3wY4QdC9UQmXCk5hxoD0GA8ZsMWdyhY1oWFXupeFWUfuTFWIe
+	 Cx9eNJUWwNRpHR4wa46KYKqM6ngGEC6uFBxlpi1+vb98VlfdLMIKGKvn2xymXVx8BAw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790343650;
-	bh=WySkgNOyhXUCX12PQY2jCJO8T58c8yyYdPtG3TzkXw0=;
+	d=lists.u-boot-project.org; s=default; t=1790343652;
+	bh=oocQgrfQ01yOIc1PajZKx98kEZr3RiFUEGvHe1NoyrY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ES83DWcCjuR1g49z8OwzyK2t0CGswgRe90Kn7As0qkQsOHvKKjCDmDoP+gx9WiETx
-	 mBlRfdqnhUwenXBMcuWZDJ+xpf0yOVT2AOF+Pjz3ECxwBa3EyHU0SkdFnnPVtIfMTx
-	 9NZG4OL0dtJq0BNFW9Y4olTTTyzGyTPbi06fRdNqGkeHnr0ac2W3UMFBCOn/mfXXz6
-	 4g+co7yL3B4qlyX2/8aP287tLJDwhjNyH3uaoFolnH3mA6zFjMLOe/Xreu74H7+Ibz
-	 cVhELVmqHx+ARYRLRGhMG6JTc3YJ5ONYtZDRNSsKKUb+Zmj4TvOF/zD8ctMeqrdxLA
-	 1pW7KO2C6tbhQ==
+	b=DZnvcPBIkslSqmPLjuM8u3N6Bo0WZOkmzKS1XuhhzhJQYgIPEhIdFb3prFu0hS+iI
+	 ZhjkqQWk/09NQcfiOvHEcRfncA7Rtok6Gk2mw4M/DnrV9iFQfsS0bw/JT6uDsg6c7M
+	 8+u7k1Xs1brZvafJF4+KmOutdbULlww2wSJgp5WXx7K0h/YyupfVHHYJbqKHO0Q4fh
+	 Z5jsgPrbSkJdC55uZJROpHWiZ+GkHQJtN1Ie1L1Oe9+eaKCXzaMJrIAJCFvs6h81fy
+	 80f8yCqksqAapcpxHmvLcPug9KWD8Hm9Vw90JJIwl7ZQMGdasX05q1yatzEcppQmJ/
+	 k+qCvl79demLQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8F53181339;
-	Fri, 25 Sep 2026 13:40:50 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 1348332F
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 13:40:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B65FC40CBF;
+	Fri, 25 Sep 2026 13:40:52 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3184535A
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 13:40:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id ED69E60D5E
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 13:40:38 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2367E40185
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 13:40:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EReqKzn5p4Gr for <u-boot@lists.u-boot-project.org>;
- Fri, 25 Sep 2026 13:40:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org D79FB60B65
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:30::f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790343638;
- b=S3G9zryUFQwyB39yRRdRqedoZBLW6gCQtBs7F53zpTtSyNLvHvdYVsNPRtjwDVoor9vd
- P4zen6XfCaWTyUopqZRdp/tUZGcsTXkXXFiuuTZE9vFptwV4nGm63ExylNYbuKk47Uhut
- ytnlEhZcZpA0/GMM75D+lwxqpnG4UbdeiC5RI1w1TML3uHUDAHqVL9oqF7uHSpRLrjndv
- yDLhnumHwiDQcaN1Elx7KEIcU0DKQ7F6CNbffIacCZbpAhYjkJTHCi9Lvrso+y4wZZl3Q
- I2M+N8cvmnVM0Z9QTf9fXPy4fJOU/teL5FS1ibG0z+58vZcBv2lCD/ahw2+nKNhEFNw==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ILugvKfL96uQ for <u-boot@lists.u-boot-project.org>;
+ Fri, 25 Sep 2026 13:40:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org F09A940180
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:30::24"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790343639;
+ b=YoeJqWmNxvDaGcMLOS2gw7VrH/zNhadG165/Hr/DceiJLooJZzKtyBhNo6CqpKaqqCzu
+ oQB7CVALIEwe7jDjWTUBmDp+xSekjJkzWyraHuBFyYCu3ZSxoydupCRj4U2riS2B5m74b
+ KSfobbqWf+y7gdnTB1yXnn2jvZYvsQysLTtcyHR6IVsV4uJhWjSakVC/0JOODhy2hp1Vm
+ tScXFvGdPxwGVuczo7p9atEf90KGDyRgQgRx9kIG2qYOEUPivfPuXcfm65ObxtPwlpnwQ
+ sY38u9T1EBSB+4OJVhkvJun5VJ2/7LyZJ7uQazUPZCzd/YGWekx6/9D/Rh9cFceaqKQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790343638;
+ c=relaxed/relaxed; t=1790343639;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=WySkgNOyhXUCX12PQY2jCJO8T58c8yyYdPtG3TzkXw0=;
- b=COtKZzDuaS01F87Ss/3DGNGwKLegvgNnYU4NdwBEPW5fBLypiYS8fh/4RZILVbOpvnSL
- EDAxdNxnz8CgshaiYVqeypdml5MyaPHgfgAIAY6ffjcbLV6YupvjvIUbL7+erljf1OEla
- Ws2iJBEv+O0tMETvOBwhM8fgdV1KeB+UeHC9BT92/bNSV/Cy+b7cPCDeGK87Cal8DabGh
- 6frhKQjj+oexQNNnO1DQOA0rz1/v4fXyhBr1RPmN9BKnMgdK8uNAnpCydpf7GuO+e7HC1
- 9O5qpnhP/ozNPCYVSI6zF8Blx4/mOo6NOYU5e5e71ypIOmwEB7f32TFxedu92psh5/g==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ bh=oocQgrfQ01yOIc1PajZKx98kEZr3RiFUEGvHe1NoyrY=;
+ b=O6pzLu+FnuwvNpCEpPS7MoSB93aC02jgSigmeW6852iqN0KT3LfU8d50d29bQG/jU9Hf
+ JAvdVRNEQrw5ss0kyUDNmT4mzZOulm0KWYTsQOesLWFMIo9dT95Xh2fXfzs052d77iVMv
+ qgsO43vFvMb51jDwudMyYPrRDO9RyWZ4bt93Zyngp5U9psWbWMNHG4RsCbEtphg8W0i36
+ 6PXrpFU3X+RpNGnVMzEXFPkB7bJiG0Fn80rVNwozvC2m1Gq4B126b3HAYk5q4jkvckaRQ
+ /X+dYnVYz+BxE5aUaUp/FpJjTZHuXKiFcXk1FEqzcYS2Q/qPbtTfHMtW+cqcmqQtUEQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=VslHwcvd; 
- arc=none smtp.remote-ip="2a00:1450:4864:30::f"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:30::f;
- helo=mail-wr2-x0f.google.com; envelope-from=jstephan@baylibre.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+ header.s=google header.b=T+dbUIag; 
+ arc=none smtp.remote-ip="2a00:1450:4864:30::24"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:30::24; helo=mail-wr2-x24.google.com;
+ envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=VslHwcvd
-Received: from mail-wr2-x0f.google.com (mail-wr2-x0f.google.com
- [IPv6:2a00:1450:4864:30::f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D79FB60B65
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 13:40:37 +0000 (UTC)
-Received: by mail-wr2-x0f.google.com with SMTP id
- ffacd0b85a97d-4887f690df6so486862f8f.1
- for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 06:40:37 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=T+dbUIag
+Received: from mail-wr2-x24.google.com (mail-wr2-x24.google.com
+ [IPv6:2a00:1450:4864:30::24])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id F09A940180
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 13:40:38 +0000 (UTC)
+Received: by mail-wr2-x24.google.com with SMTP id
+ ffacd0b85a97d-482f63546c3so716660f8f.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 25 Sep 2026 06:40:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790343635; x=1790948435;
+ d=baylibre.com; s=google; t=1790343637; x=1790948437;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=WySkgNOyhXUCX12PQY2jCJO8T58c8yyYdPtG3TzkXw0=;
- b=VslHwcvdpjNBm+FSyWmPrQVa8SV4/JUCfF6W2JAeSPszFgt1OvZQwFJHkFEJ0fve+m
- QKUhv5IuRYWxKnsja5TDYXX+1Pzpj2EyHYGQnwUVwft3OpsJoJpQZfd61p1F/fyZaV6H
- t7J+GJQEgrZUURpB3CVqqkgL+gI+N5KsfYh8sm5DBfgF/USLeKzO2Qj47/DZJPQyXQ9w
- 3MHluMIOqPb1U94eGTFU2cEMA6dAtAdLNXkzLStglVlUID6SMIWEFfCHmSAoqrl5gZhF
- FeGJ8Gh9pL36eu1571JnNbEyT8KCmwxrGl+b0FuR5Snn7wkUAtq1c63EA4IJ7+74ugHD
- e1MA==
+ bh=oocQgrfQ01yOIc1PajZKx98kEZr3RiFUEGvHe1NoyrY=;
+ b=T+dbUIagBhpBRDAZPalimhbRdKf28Z0iya31pqe74wBdikc+4QSO+qapnv/gdzMe0d
+ 1Jf/ngQPvGbXT6/Ws1hCwO4PkOKweA+zwVJrI+9Q4EeBp94uSjaxsONvxR6xHI76Z9qp
+ 0rKsmnJAOUnvmhMUSZINIlkBknO9KN/CocG+wVeMTnlLqicVGJ0Ny3mPCEj0KEg1Csvd
+ 7eCwfr/lc2rPIrNFrDDsluI0IwGXcHj0pXeCyE2/2z1s1CknhFN0+XDVNQ7pszmu1qIV
+ icU4hVwfrNTRWU6oWd4lOVPXtuUFZ8q1mf0BNq5rJ9JiqLdRAtDnJdE4HY/SGUKCqwgq
+ mjeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790343635; x=1790948435;
+ d=1e100.net; s=20260707; t=1790343637; x=1790948437;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=WySkgNOyhXUCX12PQY2jCJO8T58c8yyYdPtG3TzkXw0=;
- b=iiOYxyYLu+e8Grk0yHkfZOd3t29KJxB9QlXxRY7ZydgtUn5BL5YNWbpEwp7YOa1GYj
- 4y9lZf6A+Qgz2HDaVHssjOD/ZBIzT9sW1qIjZh5EVAJbiilaNY/q7nH0zg6ANEfZn+m4
- 3gMuyiqJiRicW/g0OT19TMhaxLzX4tCtYEBh19FWKNjhJ+S3jHY2ZdWUd9/Z1QgFuh28
- yeeksSqGZH8ZlxLa01N4DFC8dx4TchxrhMwfPJJyJKCRcervycJZH6IV9ATXNW6O0I0I
- ctHQdSxulOiQ7KmAGwxWhOCkqQSVCNtUQzsWq+nzp/B3q2OShvb//NcKR+v/oy60vnI3
- Bkhg==
-X-Gm-Message-State: AFuF++mtX/hE+TNLNd6Z48xcElRsdF7XdR0Ty4I99N7OwB5emoTPzldQ
- idbjTCrf8iFd4I232y4cQO2hR4CVQ4h8Mlak/HIwlNm9Zk6kCAdcanL20gCJO18Vxa0=
-X-Gm-Gg: AYBFou2OohPkE9PyQd+Ou7lBXlYZX2fGDnf6sa6JgvQEP3jtGPNnp/OatDcsUtEJ5Hj
- phWvqqVEC/co/F/ZEl2f97UQnr7391Ej2PvdLtP3FsYA1t/mkqxGMWKnYlgCj/k5VfmmfzpmzhL
- cLD8M/YMxNxgPsJsH+d27zO1gMDPeo2HHBeJql3OKfccQJKE7HCvv8NjZcag9vxUumVyqtQH1KR
- gFrHnWIqMwLvAnyUQNPug47XI6KA49lXs4I0cIctJe4r/ddZto+cJmuvyeAKqBx/UF2bMszmXTO
- x1h2uhQjs9V7AT57S2rm0CFPLr1r6C/kF41uVUAvVrEB9CbDAZ5F6ZHwpViXzZA3a3IUTaw395G
- P9XfHuipLXX6Bn6Ep07t7L2TgeVd0aM2TMecJ+cNcz3A/Vj20mBaK1oN40lQAsJqlFAg/JT06Ry
- Zkd7Q3Ci5Ph9lOIwg2E0xQ+Wm2+avU1H5fxysxlwDI45DyDoiz1gFycsi5y8L55MF6PKXBWm8TB
- ngSBEy35jZA0o9PQaa8dnfW80YbWmjUe83s8DR/azkJEZB8DPcphTRNItB8lkRvGo0NOykPKAqP
- 9F+SKzkP0udY3Y2KDPxxxret+QrHGYPWXr8wOIN4bZePFyVEuefhbU/6ELASbullsA==
-X-Received: by 2002:a5d:5d10:0:b0:486:f301:11df with SMTP id
- ffacd0b85a97d-4887166d9cfmr12138470f8f.6.1790343635307; 
- Fri, 25 Sep 2026 06:40:35 -0700 (PDT)
+ bh=oocQgrfQ01yOIc1PajZKx98kEZr3RiFUEGvHe1NoyrY=;
+ b=FlXEdwfc+yySChVFXnj1LSioVBeMu9ZFSUMdKEnaA5XViUcomFix/CHVsQHCh3Exaq
+ bKgmrHZ1n83ERYUl33U4UgDrHhYHr4RtKp7kfFrdrQErys6Maq8THqlZorP4TvOQVCrG
+ YEx1oslFkEHrOZMNgGxoiMGGkSGTh8eDJzMwU5q3fZItQ7Wwq1fR674FHDSdjOyqaG1I
+ d8xLe6fTyXblwfSsCTBwIcIxIRjFQDaCkKaOwTWbwuqVDeMlODzE79ELUkWl4a1CJDW+
+ OP9uTFR2Osv3NKgQXKk4z7i/2Hj6b21StZTaEMOVyYeXKKJUzaUe929bqCECqfKFPZa5
+ rtug==
+X-Gm-Message-State: AFuF++loMUgZQ3cl2NoPgosDUbij33mYiQQdgzuIgiTXDQknlYquZqLL
+ a6TpyEJYAyLVHSVqajIZswlqdL+D7Bino+5Ie1T/rC3R2fw2QsLibuB3HtD899wBfvI=
+X-Gm-Gg: AYBFou0ZdSy31kHMw6hOM1zJFOu/OaqEzag+6FlChJSRjf+Df19MPrNzIasuYspslaR
+ 6hJplydlOHX2YJs2VKNkFrKR6FGa9o42IuyqvdsqaGDjnhiWNJxXmOjnPC4DMRdxjfX69u6MvVn
+ ch/PtvA3BjzvYatXhmAb2Ny6/tzQWHGcrMdezlxT5BLkY1SPBJk7c3ls1O0BklrlzV1E98Mmvuo
+ Lm+MkOe/HBCZb8dBDr4lwJw1+kWDHzhK8xxkjfoFDQluRrbK+a+NfoRm4p5ehfu6Rg6I0UJ3fXS
+ yxQToW/zed5vbvYeUbHgMYwL+R8431K0bLjo3432/9QjkFgsE9JyAnPGRc4qQ4hDrreLPGcfLmQ
+ a4ioR46I2UR7/90MRz4zWsQnjg1j9H0lSmbtOykCkuhQSbn6//zUT7PCShjaWjVdh572y6yx3sV
+ VUw/HAdmEz2hmwdR+Y2sdkvgzBb6JwuVFnuellBaIoVRDC2xHEAg9LsZAYnCUiddLVBSdZ6C+mM
+ m9yJ2WQt72ekwA6PCwOVxy/eIkk9OSF8u8gYKN6t5lH915/jThDustV2aZUOOcc7Umxd79VFPEe
+ 1Fy2966YDF8lYIGza9srr0Gag8/CHRBVOmDHPxkc1sC+7pea1T1qdJE=
+X-Received: by 2002:a5d:5e84:0:b0:487:12cf:e65d with SMTP id
+ ffacd0b85a97d-4887176eb38mr10535655f8f.38.1790343636492; 
+ Fri, 25 Sep 2026 06:40:36 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4887a30b9aesm6599776f8f.5.2026.09.25.06.40.34
+ ffacd0b85a97d-4887a30b9aesm6599776f8f.5.2026.09.25.06.40.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Sep 2026 06:40:35 -0700 (PDT)
+ Fri, 25 Sep 2026 06:40:36 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 25 Sep 2026 15:42:05 +0200
-Subject: [PATCH v6 07/12] video: mediatek: add padding component
+Date: Fri, 25 Sep 2026 15:42:06 +0200
+Subject: [PATCH v6 08/12] video: mediatek: add mdp rdma component
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260925-add-genio-510-and-genio-700-hdmi-v6-7-29e626b213e9@baylibre.com>
+Message-Id: <20260925-add-genio-510-and-genio-700-hdmi-v6-8-29e626b213e9@baylibre.com>
 References: <20260925-add-genio-510-and-genio-700-hdmi-v6-0-29e626b213e9@baylibre.com>
 In-Reply-To: <20260925-add-genio-510-and-genio-700-hdmi-v6-0-29e626b213e9@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -195,97 +195,248 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The padding block is one of the components of the video pipeline on
-some MediaTek SoCs, such as the MT8188. It is configured in bypass
-mode.
+The MDP RDMA is the DMA engine reading the framebuffer on some
+MediaTek SoCs, such as the MT8188. Two instances are used, each
+reading one half of the frame; the second one starts at the middle of
+the line (apply_offset).
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/video/mediatek/mtk_disp_padding.c | 49 +++++++++++++++++++++++++++++++
- drivers/video/mediatek/mtk_disp_padding.h | 20 +++++++++++++
- 2 files changed, 69 insertions(+)
+ drivers/video/mediatek/mtk_mdp_rdma.c | 185 ++++++++++++++++++++++++++++++++++
+ drivers/video/mediatek/mtk_mdp_rdma.h |  34 +++++++
+ 2 files changed, 219 insertions(+)
 
-diff --git a/drivers/video/mediatek/mtk_disp_padding.c b/drivers/video/mediatek/mtk_disp_padding.c
+diff --git a/drivers/video/mediatek/mtk_mdp_rdma.c b/drivers/video/mediatek/mtk_mdp_rdma.c
 new file mode 100644
-index 00000000000..621dab2d245
+index 00000000000..4664663b586
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_disp_padding.c
-@@ -0,0 +1,49 @@
++++ b/drivers/video/mediatek/mtk_mdp_rdma.c
+@@ -0,0 +1,185 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * MediaTek Video Disp Padding Support
++ * MediaTek Video MDP RDMA Support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
 +#include <dm.h>
++#include <dm/device_compat.h>
++#include <errno.h>
++#include <fdtdec.h>
++#include <linux/bitfield.h>
 +#include <linux/bitops.h>
++#include <video.h>
 +
 +#include "mtk_disp_comp.h"
-+#include "mtk_disp_padding.h"
++#include "mtk_mdp_rdma.h"
 +
-+#define PADDING_CONTROL_REG	0x00
-+#define PADDING_BYPASS			BIT(0)
-+#define PADDING_ENABLE			BIT(1)
-+#define PADDING_PIC_SIZE_REG	0x04
-+#define PADDING_H_REG		0x08 /* horizontal */
-+#define PADDING_V_REG		0x0c /* vertical */
-+#define PADDING_COLOR_REG	0x10
++/* MDP RDMA registers (see Linux drivers/gpu/drm/mediatek/mtk_mdp_rdma.c) */
++#define MDP_RDMA_EN			0x000
++#define FLD_ROT_ENABLE				BIT(0)
++#define MDP_RDMA_CON			0x020
++#define FLD_SIMPLE_MODE				BIT(4)
++#define MDP_RDMA_GMCIF_CON		0x028
++#define FLD_COMMAND_DIV				BIT(0)
++#define FLD_EXT_PREULTRA_EN			BIT(3)
++#define FLD_RD_REQ_TYPE				GENMASK(7, 4)
++#define VAL_RD_REQ_TYPE_BURST_8_ACCESS		7
++#define FLD_ULTRA_EN				GENMASK(13, 12)
++#define VAL_ULTRA_EN_ENABLE			1
++#define FLD_PRE_ULTRA_EN			GENMASK(17, 16)
++#define VAL_PRE_ULTRA_EN_ENABLE			1
++#define FLD_EXT_ULTRA_EN			BIT(18)
++#define MDP_RDMA_SRC_CON		0x030
++#define FLD_UNIFORM_CONFIG			BIT(17)
++#define FLD_SRC_FORMAT				GENMASK(3, 0)
++#define MDP_RDMA_COMP_CON		0x038
++#define MDP_RDMA_MF_BKGD_SIZE_IN_BYTE	0x060
++#define FLD_MF_BKGD_WB				GENMASK(22, 0)
++#define MDP_RDMA_MF_SRC_SIZE		0x070
++#define FLD_MF_SRC_H				GENMASK(30, 16)
++#define FLD_MF_SRC_W				GENMASK(14, 0)
++#define MDP_RDMA_MF_CLIP_SIZE		0x078
++#define FLD_MF_CLIP_H				GENMASK(30, 16)
++#define FLD_MF_CLIP_W				GENMASK(14, 0)
++#define MDP_RDMA_SRC_OFFSET_0		0x118
++#define MDP_RDMA_TRANSFORM_0		0x200
++#define MDP_RDMA_SRC_BASE_0		0xf00
 +
-+void mtk_disp_padding_config(struct udevice *dev)
++/*
++ * Source format 2 is named after its byte order in memory, B, G, R, A, as
++ * the datasheet does. That is the same encoding as DRM_FORMAT_XRGB8888,
++ * which Linux' rdma_fmt_convert() maps to RDMA_INPUT_FORMAT_RGBA8888: its
++ * name only records that the alpha byte comes last, the R/B order being
++ * selected separately by FLD_SWAP (left clear here).
++ */
++#define MDP_RDMA_SRC_FORMAT_BGRA8888		2
++
++/*
++ * Fields used by this driver but not present in the upstream driver, named
++ * after the datasheet:
++ * - MDP_RDMA_EN[23:4] INTERNAL_DCM_EN: dynamic clock gating of the RDMA
++ *   internal blocks, all enabled out of reset (0x00fffff0)
++ * - MDP_RDMA_TRANSFORM_0[15] BITEXTEND_WITH_ZERO: extend the LSBs with zeros
++ *   when converting 8-bit data to 10-bit
++ */
++#define FLD_INTERNAL_DCM_EN			GENMASK(23, 4)
++#define FLD_BITEXTEND_WITH_ZERO			BIT(15)
++#define FB_BYTES_PER_PIXEL			4
++
++/*
++ * DRAM request settings, as programmed by Linux'
++ * mtk_mdp_rdma_fifo_config(): 8-beat burst reads plus the ultra/pre-ultra
++ * high priority requests that keep the RDMA from underrunning at high pixel
++ * clocks.
++ */
++#define MDP_RDMA_GMCIF_CON_QOS \
++	(FLD_COMMAND_DIV | FLD_EXT_PREULTRA_EN | FLD_EXT_ULTRA_EN | \
++	 FIELD_PREP(FLD_RD_REQ_TYPE, VAL_RD_REQ_TYPE_BURST_8_ACCESS) | \
++	 FIELD_PREP(FLD_ULTRA_EN, VAL_ULTRA_EN_ENABLE) | \
++	 FIELD_PREP(FLD_PRE_ULTRA_EN, VAL_PRE_ULTRA_EN_ENABLE))
++
++int mtk_mdp_rdma_config(struct udevice *dev, struct video_uc_plat *plat,
++			const struct display_timing *timing,
++			unsigned int pitch, bool apply_offset)
 +{
-+	mtk_disp_comp_write(dev, PADDING_CONTROL_REG,
-+			    PADDING_ENABLE | PADDING_BYPASS);
++	u32 width = timing->hactive.typ;
++	u32 height = timing->vactive.typ;
++	int offset = apply_offset ? ((width / 2) * FB_BYTES_PER_PIXEL) : 0;
++	u32 fb;
++
++	/* the RDMA source address register is 32-bit only */
++	if (plat->base != (u32)plat->base) {
++		dev_err(dev, "framebuffer base %#lx is above 4GB\n", plat->base);
++		return -EINVAL;
++	}
++	fb = plat->base;
++
++	/* the stride register only holds FLD_MF_BKGD_WB bits */
++	if (pitch > FLD_MF_BKGD_WB) {
++		dev_err(dev, "framebuffer pitch %u is too large\n", pitch);
++		return -EINVAL;
++	}
++
++	mtk_disp_comp_write(dev, MDP_RDMA_EN, FLD_INTERNAL_DCM_EN);
++
++	/* DRAM request type and ultra thresholds */
++	mtk_disp_comp_write(dev, MDP_RDMA_GMCIF_CON, MDP_RDMA_GMCIF_CON_QOS);
 +
 +	/*
-+	 * Even in bypass mode all the settings must be cleared to 0 or
-+	 * undefined behaviours could happen.
++	 * Set the source format. U-Boot's 32bpp framebuffer has no alpha
++	 * channel and the mixer blends this layer with alpha disabled, so
++	 * FLD_OUTPUT_ARGB is left clear as Linux does for such a source.
 +	 */
-+	mtk_disp_comp_write(dev, PADDING_PIC_SIZE_REG, 0x0);
-+	mtk_disp_comp_write(dev, PADDING_H_REG, 0x0);
-+	mtk_disp_comp_write(dev, PADDING_V_REG, 0x0);
-+	mtk_disp_comp_write(dev, PADDING_COLOR_REG, 0x0);
++	mtk_disp_comp_write(dev, MDP_RDMA_SRC_CON,
++			    FIELD_PREP(FLD_SRC_FORMAT,
++				       MDP_RDMA_SRC_FORMAT_BGRA8888) |
++			    FLD_UNIFORM_CONFIG);
++
++	/* no framebuffer compression */
++	mtk_disp_comp_write(dev, MDP_RDMA_COMP_CON, 0x0);
++
++	/* set base address */
++	mtk_disp_comp_write(dev, MDP_RDMA_SRC_BASE_0, fb);
++
++	/* stride comes from the framebuffer line length */
++	mtk_disp_comp_write(dev, MDP_RDMA_MF_BKGD_SIZE_IN_BYTE,
++			    FIELD_PREP(FLD_MF_BKGD_WB, pitch));
++
++	/*
++	 * each of the two RDMAs reads one half of the frame: size and
++	 * clip cover half the width, and the second RDMA (apply_offset)
++	 * starts at the middle of the line
++	 */
++	mtk_disp_comp_write(dev, MDP_RDMA_MF_SRC_SIZE,
++			    FIELD_PREP(FLD_MF_SRC_H, height) |
++			    FIELD_PREP(FLD_MF_SRC_W, width / 2));
++	mtk_disp_comp_write(dev, MDP_RDMA_MF_CLIP_SIZE,
++			    FIELD_PREP(FLD_MF_CLIP_H, height) |
++			    FIELD_PREP(FLD_MF_CLIP_W, width / 2));
++	mtk_disp_comp_write(dev, MDP_RDMA_SRC_OFFSET_0, offset);
++
++	/*
++	 * Simple mode, plus the downstream way of feeding the 10-bit
++	 * pipeline from 8-bit data: BITEXTEND_WITH_ZERO zero-extends each
++	 * component, instead of MDP_RDMA_CON's FLD_OUTPUT_10B used by Linux.
++	 * Only one of the two is needed; do not switch to FLD_OUTPUT_10B
++	 * when re-syncing with Linux.
++	 */
++	mtk_disp_comp_write(dev, MDP_RDMA_CON, FLD_SIMPLE_MODE);
++	mtk_disp_comp_write(dev, MDP_RDMA_TRANSFORM_0,
++			    FLD_BITEXTEND_WITH_ZERO);
++
++	/* enable engine */
++	mtk_disp_comp_write(dev, MDP_RDMA_EN,
++			    FLD_INTERNAL_DCM_EN | FLD_ROT_ENABLE);
++
++	return 0;
 +}
 +
-+static const struct udevice_id mtk_disp_padding_ids[] = {
-+	{ .compatible = "mediatek,mt8188-disp-padding" },
++static int mtk_mdp_rdma_probe(struct udevice *dev)
++{
++	int ret;
++
++	ret = mtk_disp_comp_probe(dev);
++	if (ret)
++		return ret;
++
++	/* the RDMA is a DMA master: it feeds from an SMI larb */
++	return mtk_disp_comp_get_larb(dev);
++}
++
++static const struct udevice_id mtk_mdp_rdma_ids[] = {
++	{ .compatible = "mediatek,mt8195-vdo1-rdma" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(mtk_disp_padding) = {
-+	.name	   = "mtk_disp_padding",
++U_BOOT_DRIVER(mtk_mdp_rdma) = {
++	.name	   = "mtk_mdp_rdma",
 +	.id	   = UCLASS_MISC,
-+	.of_match  = mtk_disp_padding_ids,
-+	.probe	   = mtk_disp_comp_probe,
++	.of_match  = mtk_mdp_rdma_ids,
++	.probe	   = mtk_mdp_rdma_probe,
 +	.priv_auto = sizeof(struct mtk_disp_comp_priv),
 +};
-diff --git a/drivers/video/mediatek/mtk_disp_padding.h b/drivers/video/mediatek/mtk_disp_padding.h
+diff --git a/drivers/video/mediatek/mtk_mdp_rdma.h b/drivers/video/mediatek/mtk_mdp_rdma.h
 new file mode 100644
-index 00000000000..ea97918a570
+index 00000000000..832cf8133c5
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_disp_padding.h
-@@ -0,0 +1,20 @@
++++ b/drivers/video/mediatek/mtk_mdp_rdma.h
+@@ -0,0 +1,34 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * MediaTek Video Disp Padding Support
++ * MediaTek Video MDP RDMA Support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
-+#ifndef _MTK_DISP_PADDING_H
-+#define _MTK_DISP_PADDING_H
++#ifndef _MTK_MDP_RDMA_H
++#define _MTK_MDP_RDMA_H
 +
 +struct udevice;
++struct video_uc_plat;
++struct display_timing;
 +
 +/**
-+ * mtk_disp_padding_config() - put a padding component in bypass
-+ * @dev: padding device
++ * mtk_mdp_rdma_config() - configure an RDMA to read one half of the frame
++ * @dev: RDMA device
++ * @plat: video uclass platform data, holding the framebuffer base address
++ * @timing: display timing, giving the frame size
++ * @pitch: framebuffer line length, in bytes
++ * @apply_offset: read the right half of the frame instead of the left one
++ *
++ * Each of the two RDMAs of the pipeline reads one half of the XRGB8888
++ * framebuffer and feeds it to the mixer.
++ *
++ * Return: 0 on success, -EINVAL if the framebuffer is above 4 GiB or its
++ * pitch is too large
 + */
-+void mtk_disp_padding_config(struct udevice *dev);
++int mtk_mdp_rdma_config(struct udevice *dev, struct video_uc_plat *plat,
++			const struct display_timing *timing,
++			unsigned int pitch, bool apply_offset);
 +
-+#endif /* _MTK_DISP_PADDING_H */
++#endif /* _MTK_MDP_RDMA_H */
 
 -- 
 2.55.0
