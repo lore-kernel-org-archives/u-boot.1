@@ -1,192 +1,185 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45295C98332
-	for <u-boot@archiver.kernel.org>; Sat, 26 Sep 2026 14:39:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D83FBC9832F
+	for <u-boot@archiver.kernel.org>; Sat, 26 Sep 2026 18:18:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D569A8119E;
-	Sat, 26 Sep 2026 14:39:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 599F2409F9;
+	Sat, 26 Sep 2026 18:18:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IKOAiQnrZ62i; Sat, 26 Sep 2026 14:39:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 070AC811A5
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790433564;
-	b=eifT2kCUhHWqfc04+OR65VZmcVKS7KgBeX0UUtEW4AqNRcC7ctPzhIhUk7nY4kkNWcUp
-	 6JHPJgibI48/0CC4RuijAscWZtNWaei9xAAHAnKeTtm4TrZao12EK6PsQOEa0R8BhrahR
-	 KsVecM8WjHFBQ2X3J3aHZ/a2syOYw43WU+oR7Wzm+iBVyZdgu5VyvgkHTTZSpot4UYg4X
-	 iaFST3exdpXC0MnTyMtuQUvxKOgnVAJ+ut5WLLmA94N9yEY1AXQYod/t0B2pEKZx+VxqX
-	 xdx8B0yF/GxCE/K9Obsf+HH+tAY8B/QT1Doz+9p6s2FMukwU0LiPAoIJgqXs+i9XGHQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id q9B0jinMynQd; Sat, 26 Sep 2026 18:17:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 326F640842
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790446679;
+	b=B3zaIcacwOuF7kAZvRmjgfayWb8K+duIMxqANOdFmUfJ9ZP3h7SrInl1IpXDXoK+iQko
+	 +ShrF+Teyx9CHawwNfwW4x+S8beSj/oHlTRcikE9sbripEb6TAQMCgfLZe4Mti6mA6dBg
+	 0NRaBkRlWgQZGlI+qY6LX7wyeYddIpJ9lnr33rvTRW4Mg3NE92GUSqIq4d0SGCrclX71o
+	 Z2XSUyz3CqTZ1DuFPsD/KrlGfUYgfwwemQ7WG/h9E9+yQTtpCcBt3n6LL2C7oJC8dVGBm
+	 jxkZ65JbwkpaF54ZSbejC9yip3hbVCOiuS0tzx35FrhAnlpzlKDBZVe4/Bn338c911g==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790433564;
+	c=relaxed/relaxed; t=1790446679;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
 	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=LbK36p937ukLf3+AokU+/vSoAOXD0f+mOZU6EnH+fhY=;
-	b=czP62CUDiYghX5o7ftq67L9NzMTJqxtUwFgeYLvNJe4qxGhNY6QkAmyPGwrUSv0E1p/s
-	 aU18SevvOs8nkK9+E9dgzpCKxaRkaPnkyVB15rmmjfsJs/uxVBXioJeQpepK4qyb88UuL
-	 1MolZm4Qr2mHsHL+3mZ6HnXGiGmG+p1R1xvdDivxa4Q/9OzGboHsTzTZj+2UlI+VWZbUL
-	 9e2qLuKnLCi+Pl9orR6A349dmAeVi5A8oApxqf4ig66Cs55f7kUD+EiVdr9erxSIxvFGg
-	 nyyZ2g+NVq+oQSyC6VoMTPD2S+MXq8hgZcidGwne0w7QOkx6Ph4YIveaSJ5+t4FhZQg==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=g0+YzcGwMNMkII5uvuldW3X1ft/CA4xtq39cMyTrzRQ=;
+	b=qPf1cQhhykeebNpi+qLPmzFalOUSTKSgWtkMmyaYZX4GBAck7CM8X2YK+YmzD1aDZb7M
+	 Aqb+393GH3qdYDaMjYmwkFFOPozMALWlZO1qzPhv08JuBCDwbfBVMl38lGox2+boKAdm+
+	 oluOUH1ixil0Hy1rU/5XdzXPWQe8JiuAdZqi4E8LN6zI46zQm3WTGO1DACcISI/24d86w
+	 GDVRv+PUwzl4Zfz3fiENNY+03pOCmqMXb6BdCx9y+PXwCVnofIEPrvRMCh/V3tdljI9l6
+	 PjoAzVD+jXz+17AOytT5RQHr0DZlE3LMJDFgf64DKiYfwl4s8NUqgcK3offLS1QWQfg==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790433564;
-	bh=LbK36p937ukLf3+AokU+/vSoAOXD0f+mOZU6EnH+fhY=;
+	d=lists.u-boot-project.org; s=default; t=1790446679;
+	bh=g0+YzcGwMNMkII5uvuldW3X1ft/CA4xtq39cMyTrzRQ=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=j9VbIZI/Rl73Ir9Gju3TKnYRwFrRXbn+BZ5TmtR6xG6Fyf0wuQ00X6TPuCjKq8Vdh
-	 7wlA2xfiPO6RsqIpwJo3+keb+oTorkURlsn2QnM97w7qd8C9mhB6TNT1a0btDfgkDH
-	 ALJJCDVhrq/LWsFE3rijokb9PIDs5QjfsOyGbnoe3NOpKfU/h1/5wyMfSH1IvZ34qY
-	 PCgFT+Ue4YIQd8vNFlEex4ZPC4Fh1m4DLMlC/Dq3myyXpgiabspMHRdVMsdJWAnY5p
-	 /JtS1S/PNI37j6x7k+z9cJlh9agpvkD8a+3wVlfsvHdym28jKTxQI5+imIL8AxYQ5n
-	 NNKFbEJIHCdWA==
+	b=zrjXQ3EvG465MRzsLGgt6vH3k7qNasjHkgrrEiFowajlRqq0Jlxx/v6yvOSNy+dGd
+	 vIXoqDSWxS69p5tuA9DLr9ma/BVAtU3OzZ0Cd5zpMdGt4L165JRSmjHjwJFy0N5mo6
+	 2Z5rP1k1jAqmeMkNd9TEaEsokmQ8/EeJojhy1KX7VnfDed7EuYtFzIVcWZVuwmq9uw
+	 HsdkehPO7IljmTnGgFzicaqTucNFXBFmrvjLhI4sn8w/hjcieQwwRAlaSGXgmSqBfu
+	 5Ovq9dvViTAj7nv9EAdxFmdVn65WZa3biaJMpWQGUFzXqssg2TRisLIfe4oN+Gki4U
+	 JQO/TYb172QOw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 070AC811A5;
-	Sat, 26 Sep 2026 14:39:24 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 168A7335
- for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 14:39:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 326F640842;
+	Sat, 26 Sep 2026 18:17:59 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id CC091D1
+ for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 18:17:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id F0B896067F
- for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 14:39:21 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id BDD2B4007E
+ for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 18:17:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id etMMfeQ1KKI3 for <u-boot@lists.u-boot-project.org>;
- Sat, 26 Sep 2026 14:39:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org EABD66065A
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:33::10"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790433561;
- b=eM3fxSHM0mzmaACvnMAgkcwrc82YrniWFAJYs4lk6VUZO9HXj1PtuGDmMzzoY02RLfvl
- wBZndshUKvEC4XmQVeRrgP3Lm2vkvENOZSZl1ZH2CaAYTd9t2zHMLtOOsroe0RIwtcoHI
- lHbEG2A1mrtgsDp1NMnNRAH1UlMxGq++NmgeIhYAe2nf7T1i1n2OhXRj8TD1L1v2hvPJ2
- p6pnFbTgUxpF/7m3es1KQMR7Rjw8sKrYmiWP9j5nonakFCIG5Xv+XRk2zAAfqP/tK/1Ly
- 20ApDlm77JjYt/AaNhbf3t2Kye+KZReJzLFLc2wS31N2fA6c2ucDj7gDWhItXx6V9Xg==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vnXh5uUoqRdW for <u-boot@lists.u-boot-project.org>;
+ Sat, 26 Sep 2026 18:17:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 5499040022
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:34::e"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790446676;
+ b=ft46sO/E458E4KD4jTM4xn4/cz62W82oTd6NERkOnNAgPzhVzv4fmOadJpEmOMufnD0x
+ 5lFkuWvicNpwbW8bHVeMyelzg+8KgLCR1hFhcKCdW6BihxH9tD82KNiJ6vagrHUw6UNlS
+ 4qfNe9JImcLf2hwXn92T0rGT1+BGY1JawkrKxXrOVoVnHwpOGjSGP/N2ZSMTg9XQUwvg9
+ bOGYEFGpFACQsKP7iTqCpQKn579562qCq464qXD2Jr79cVlRCdp4cmTUaCX+TcnEPizNa
+ iy/hq7VOZh045N3WeIORjTDk2AA/AhPYuzFQi4v1aaNxW6DTky8VfobV0u31sC2S7Zw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790433561;
+ c=relaxed/relaxed; t=1790446676;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
  MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
- Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
- bh=LbK36p937ukLf3+AokU+/vSoAOXD0f+mOZU6EnH+fhY=;
- b=VWsUim2tWQM7L0TfEFRzM5zVlrq6PuomXZKdRy0ejx8WDWJHmASvyyB3SIE+TCmJ4EeB
- RPKFfv1tTMJf2+OJrnapaldIFnIT9qbfj9kZn9QvkqyAvaxP3kbVqLjArYJu7z0aOKQUs
- bS+FxqllQtOqsbkbZOcWwVr29vMRGXwoTn1OJ77Z394ONzYCCLHzgiaDq+Y5nLm59frxX
- VaTLjSHktfiaLr8nQ/2do/8ymipS0zxUpfrSdOgHpqfiHBozav7n+Q3ILmRkL+53R0Od5
- kVx+PQuYkfq6GCmZ4J9CxcDMwI1+3d2Tuu0WGXybD2bSzSw2aiu/QqPYzVPy+z1lI5g==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org;
+ Message-ID:Subject:To:Cc:Content-Type;
+ bh=g0+YzcGwMNMkII5uvuldW3X1ft/CA4xtq39cMyTrzRQ=;
+ b=Z6rh6hkN7UWsc++6L8ySC/RnLXH9b5Xt9gHssm/pxp7ERAnqPTayPhtJn5R9/D9NXkD/
+ h0A8JIAf8W9WmDVzUASv9tL66587LYUyf3bpBxcY0tOzfN83m2cY6F8eyUrwv8c3t54e+
+ ev0GkYrH/3X9qof0OaHPNnGtJHg1MiG/D8d2G7WDOWADs4N9kw00VVGAn/jRgWobn2X0x
+ rcDtNxkhujm8Sd9/ZWdYySgrUDYXQD29tmtASyXzEFlwMisGNZe/rVR44Qm/yoU1SVB4c
+ OV/y7Ng4aiQTpwTS6Cr8LCRnn4YRMSruBkmocJrFFyeCMviPpmyuuJDQBZ3HULBdL0w==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=OC87TmhJ; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:33::10; helo=mail-ed2-x10.google.com;
- envelope-from=romain.beauxis@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+ header.s=20251104 header.b=GatkagEB; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:34::e"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:34::e;
+ helo=mail-ej2-x0e.google.com; envelope-from=massimo.pegorer@gmail.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=OC87TmhJ
-Received: from mail-ed2-x10.google.com (mail-ed2-x10.google.com
- [IPv6:2a00:1450:4864:33::10])
- by smtp3.osuosl.org (Postfix) with ESMTPS id EABD66065A
- for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 14:39:20 +0000 (UTC)
-Received: by mail-ed2-x10.google.com with SMTP id
- 4fb4d7f45d1cf-6a605c198fdso2737255a12.2
- for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 07:39:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790433558; cv=none;
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=GatkagEB
+Received: from mail-ej2-x0e.google.com (mail-ej2-x0e.google.com
+ [IPv6:2a00:1450:4864:34::e])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5499040022
+ for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 18:17:55 +0000 (UTC)
+Received: by mail-ej2-x0e.google.com with SMTP id
+ a640c23a62f3a-c2db9cc3b45so59878966b.1
+ for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 11:17:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790446674; cv=none;
  d=google.com; s=arc-20260327;
- b=be7Jg69FDVLJ8woOdRhvSnFw4cm2Ol/RKXVI0UYGK8L4smUUO0AUqph+OCW+NikF3X
- o6Zk6+BSRg+tWeHRVpStjCxXvVdDhOAN0KdrN5pPkoKKMSqnyS5FlbVBusmiGboZZMcx
- YjXvV25a3XTH2bJIcEk9zdAptxU51NbuTNMNwajmBxJGUIxrXaRFZvjbJLgaS5QdbuTK
- 9QzwTLogFdxhkXzRAT3IUT0KRmft42OP2bLVotXfdRMDTUPgIyTr6xTCEu/Jb9VGnMln
- wlYcwQmB4y5nzq06sMQCGLT7tP8xC8rH7KmaRMvNzTGfjMa/FSsjdVtN+RavvHogF/Wf
- 72jw==
+ b=EFNB0Sggz6M4xfY8WwGE2Kk8N7lNjVm7eyxxT4ugw9tQHuZphNFzbwronHx+wgXsUA
+ LJOlhGEKKbLYYlBewfMjuEi2pPp+QxKVmcFODwGIOBiBb225bGCFeSh1Kn1/X7z2KiSc
+ Xz1EWzg6ynrQGOBrz7uEzahbP5Hvktvm0QC+Zkth8eD6DKnBcsA1BL0ZEKe7uMf0tPPQ
+ vReZ8FukUWecV7uWJAkPSbpAv7b0CGEZSmoPY7Xo5jr7bUdAIyO/sD4dnC7maAaaUWW3
+ sqo3otzQpEGYtr2SU+AQByIe3MWTQqAd/IEFWWmiIyELtDgslGTikzZ+RVYfHOmMCEWi
+ z5rA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=LbK36p937ukLf3+AokU+/vSoAOXD0f+mOZU6EnH+fhY=;
- fh=qzY9BPtJQ8ezqvmTyfCyVGT7Henx501M4PKyjOGCbao=;
- b=JX39wwrxVeCz3Ap26vghH83eBbyb9xk7QpLF3ZHyr9a+f5UZrNUXejN+mtx86b0ECu
- RSUnrrIaPv8jAJFOcjJkiYHIZR5vBqqTr4ThC3SFma9+j44Ju2F1kjFIz9ywlVQfR1HN
- 9UTUwMQA/4sLcUiX/avRHh69xEe2PRxSosFGaLipv71Rra7nVyZ4yhRtI1fkaWd3k0Te
- WXrY5RmteHjTBIFuB84qgjpRhAdJ5ezGAYjA2XLjwCLIduLyK5xY26o0yo1A9BWHAN45
- rR0ykf7vaGiYPftzk2t5xJXJZQlAe7cN2VFiXS8hLFjsqIKYhGvs++ns2WjHMjc2Me0/
- 2wnA==; darn=lists.u-boot-project.org
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=g0+YzcGwMNMkII5uvuldW3X1ft/CA4xtq39cMyTrzRQ=;
+ fh=7EQRVNxuUCqdvvTTCE8tuVjO3dhitH3cJKatX73z3fc=;
+ b=bg6UZF0Dd/cQeH3HuQk0ccmOWNW+Ea/1LPtMZPfVo9QmsWTANwi197hsGzETW8L9aY
+ kPJebu3GJFcrRt81BqamE9WZmGriWzUFUCgsoFR1N3ZHEaeeoGIxBoRtWPhEP3YLJqzb
+ yx0H+Vydj7VKksMsts2WhMQ71wNVLWP28inoWp4hHN5KYJjcj2/s7VJl5IULCXqFDBxy
+ 63eWX+mJ2nXg9d8t6dntl/gjknE48S8C4KUfSKod8BE3RyU3vCLpzul1OEAA0BSYAay5
+ i36neLZgvMBSHg/VTObT1tNqgLX4fUczkmJl2MgnfxgK2CeXaMzjfd8sOVZLpPnlK4x3
+ QDbQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790433558; x=1791038358;
+ d=gmail.com; s=20251104; t=1790446674; x=1791051474;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=LbK36p937ukLf3+AokU+/vSoAOXD0f+mOZU6EnH+fhY=;
- b=OC87TmhJKDoQ/pB0kj+r0CCCtmKfS1cR9JFqhkRsWGErAmwMgSfMxSu5Bfu7Rw6S83
- gMhQtIWNei6kzVqYPAIPLPP4vuPdRzKsH+8xKo0I9SqL2MPj9ukHHVtTa60Jew/TyCG7
- 1uLsuyPl1EgJFF5MU/HmdwUxbDIdGQJ8R2neKs+63k0Stan4u+7J2LcSXYxfph4ltotl
- sLfQlO4LgL64nZnKZ+TTtD7qko0fdBAg2hbxt9pPOF2DZXP/VwkgWqa2K5HZbhkC+QGo
- HEeRnxpt6PMs4ydabgxrlJZiQZPwh3eowtS9TGgUrpbVh5J2JxN3AicKYVVaoOOoLV3U
- aSAQ==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=g0+YzcGwMNMkII5uvuldW3X1ft/CA4xtq39cMyTrzRQ=;
+ b=GatkagEB1BjXbfPxhvnW0goqNQUByUdx98Oq6gpnxthAAVHwhypXY9MGD4PO28lDwa
+ VKDvsrlq1oRtBFHYn1vyhtq6ZE97ZjApTYaYw4YZmIs/jj3nb4Uz8q4VY5PFm9fAcQn1
+ TN1Pq4SV0JVzlz2yrjEXfoyv2nN5k8i/S0PqDtl0Nxx9D1bUSJ1Rzcutfb8jk5Le+7Oa
+ 0gDxJjS4bEbH4HUMOp0i1ShXCxCFHyH+xhQj2zvBh5VQ1SQf9wcDCaKJVVEMwa2YM8Dm
+ 5sTuUCNquHa/FVXmk3vPP6+LDaaPs2S2ONBHYJnAjHTYxtobyrAeK1CkIR3PEe5gmdzc
+ zveA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790433558; x=1791038358;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=LbK36p937ukLf3+AokU+/vSoAOXD0f+mOZU6EnH+fhY=;
- b=w+7MlWnybhHdkHQlWlDOFJetyla3Ph3GFaXOwpUfYi0qFMrVSs//5zeDFkm7GDXmUz
- 9yguE+cKwTmQfHZx9+EaPKUcR9KOe5+2gFIfCde6p95mPCZdmz9BItbtqPnaNSWkn7YP
- 4y0PZRuy5VOJivp8f9PKKjcOY90htqEwz4Fo7BdCgeGHrGVa1YkbH7uymyY24pqviw8Z
- 17nTP8m/jzxc4zXGcKIp23HU6a3ROjbqEQPr70fOKu6Grxm2qoPfsxcFFNMjQs6Nat7/
- Ma8LjOUvYPfwD18cHdpxmaY9W8MGCyG9qKN9eqqtzTUUAsCDC3NjTh/++vadMwSkWEwv
- fNhw==
+ d=1e100.net; s=20260707; t=1790446674; x=1791051474;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=g0+YzcGwMNMkII5uvuldW3X1ft/CA4xtq39cMyTrzRQ=;
+ b=qU5G/FRFZsKOHLAtYDpPij3PxTsf8p9kxjaZ+KIfxZ+NyID5B3rApeeUA62qAskGBi
+ Wzigq0DKMPJm0eJVr7Wjn/gYaAFuu+APKA4yHOFcFpPg01GM5+/oXooi9A0SEmdRXDzL
+ zNKLwHUfiesZz5g2xma/Bd4+D5Qtlw1IYI9GV1CEsL7sei5dGLT2XiBZL5VbstEAbQkP
+ b1BgwRuRXNc2KZgCFNOd1rmLyh1zzgrnJdPduU8TCmb2A3U3wlS561KivHU5snswUUDF
+ FGUAWFFOOXcbqTLOgfLR90jiaLljG592wxk8WWdzmb5yivLyi/kBoHrT0iM7Nw/eaCqA
+ ZH1Q==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzs0ZOXbMZ5YPfS91iUpnboplNmX37PXQGumy8DbLSl8/++S926/LR3gtj07Ku/a/mdF9pcMv4=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lGK0RjZ5B7YWgv/ewZwFvvYOoCBNWZD6QoxvuQmE7Qkp2qcEsT
- pLpLLBtXgC04m9Dl721R0upi5HXQQulzx6oqFc/6zKBTYzVfKmH4HeYpJl8+1ZlLCXVTDSxLW+W
- 1UNsJ3umKyK2XlTIWWSQSs67L5hXSROg=
-X-Gm-Gg: AYBFou2jezsCXEcEA4wu72FSXAfjqZQRGs9Uiphd5CUy4gkjM6hE935zZ7EscjPrKv5
- xOWOwbpH8cgbuoQf9r1d37nUSdJ7Y529K5umi+IS6aKMLxYCGZoBELpYnLLvFSWgoe1Yu7y5d43
- 5pXfYDjNarkRB9daUHax+Au8Z+smHPiCc/ok6QLjfOfMlnpFwmUF105ZwJ8Ar2RqGCTRz7JON3l
- qFcTuGPCUo3JcBuLnjlQobfbR9z9jECzsv3lrFrOclXxOmfQYlpj6fM2pKBwzjn+mw08hp1ZLbZ
- 7T+6npVB4TKxDf4Mw9qoMbHvczft00ysUW/GS/E3ClCqaBGxy+EUjiduCyo6NgnDmRES79hPgWa
- FBmagXTNl56YTL4znkxWejvXFFosKNeK0WUD0K2goGa5buO5ny5YmCLD0Ii0EEfgnEqM=
-X-Received: by 2002:a05:6402:1f44:b0:6aa:c3d8:da1 with SMTP id
- 4fb4d7f45d1cf-6aac8ecf448mr6712397a12.9.1790433558195; Sat, 26 Sep 2026
- 07:39:18 -0700 (PDT)
+ AKwUvBzife0NO8OHp/DpIWnPvVdeaj/Z7BK6yQXyQ0lHMWVY9tOnqRF2SyHe0DTr3b9vgomg8NUoRoI=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nTNp0zQGMBSlZSNVxP4W3+VC7nfkpQo1xwTKly1qCg8mSP/w2m
+ zakbaJ/Vr1p0YKL5Zx/mhETIUE0zsPuReTOTyyVUqD+FUrjuqSFOlgfhcQwmoASAUjrhZFOUZlR
+ sH8THi3CpNeZfX4rX9+2c9UnUwTmX/ZM=
+X-Gm-Gg: AYBFou0fON9ft1axGz9SWBg1/be7yCmUJCZZwVG7tAFSy1Qg6s+WidIrrsXF+EgrjFX
+ Goil/7yU84cFctYpyUhPdguHLTwXdNMAuiAkljLUL0nN31LZTTrFZdKO5ZxdfzVDpDU8MLkC1/o
+ lzFBHx8FSrPt7ip1t/POsSKm3cEC4l93nZwX7bRSHsufUJOtoiaWH9/s0cJ6ISGs76Ja4ZdmHqu
+ v8VJ+S9Dt8uyfWNh7hbsZSP6BIzLK3282EfVKjSd5OOepB5CWqTTi8+Rmn2GkYtwsy8WThdDTz+
+ g071/nfAjYFxYjTDNUxsXLBPiQgCk9Ze4u6JGvRzen1KLPgAMls5Uns9
+X-Received: by 2002:a17:907:d409:b0:c26:306f:289b with SMTP id
+ a640c23a62f3a-c2ac2474565mr776365666b.13.1790446673766; Sat, 26 Sep 2026
+ 11:17:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260911203229.25414-1-romain.beauxis@gmail.com>
- <2b012875-7ac6-4c74-841e-b5da14391e3d@mailbox.org>
- <CABWZ6OQ8xqFUQDt8FyODZPzDC=SFOcxr7bDe0eAF5K0OpwTy4g@mail.gmail.com>
- <6c15d243-812c-4674-bee2-7d3fb5671beb@mailbox.org>
- <CABWZ6OSpK+KA8VoQ_Y7nywXjeUzRLEnfTXa=RWdgKZ8RHwRw-g@mail.gmail.com>
- <a614b702-9d8a-4e7e-8a7f-ab50b5fceb22@mailbox.org>
-In-Reply-To: <a614b702-9d8a-4e7e-8a7f-ab50b5fceb22@mailbox.org>
-From: Romain Beauxis <romain.beauxis@gmail.com>
-Date: Sat, 26 Sep 2026 09:39:03 -0500
-X-Gm-Features: AclHuK-6-p7rwr0UbFIj2PRMkI9_lXeB23fShi9CrCzegMV1oQx1lpATpdKyOkI
-Message-ID: <CABWZ6OQ2shtc95y-3Obe2sfhUkWVUTQnEC86w5HVWsDG8hF-uw@mail.gmail.com>
-Subject: Re: [PATCH] usb: xhci-dwc3: Add DM_FLAG_OS_PREPARE flag
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.u-boot-project.org, 
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Tom Rini <trini@konsulko.com>
+References: <20260804105721.2402406-1-jonas@kwiboo.se>
+ <CAFLszTjBiTtKmjgknvXGFBrphh6kpBzRg8iroWjFQ0EDvuXTyQ@mail.gmail.com>
+ <c00fd65c-338a-428f-bf4e-eb28e463d914@kwiboo.se>
+In-Reply-To: <c00fd65c-338a-428f-bf4e-eb28e463d914@kwiboo.se>
+From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Date: Sat, 26 Sep 2026 20:17:42 +0200
+X-Gm-Features: AclHuK8YOKXIiV-fLdUGGpLa8r1tX2i303p9qtg4CR2hBq5ZjjvVrQQ8oQPBZvI
+Message-ID: <CAC928Ha1qR66Cryg9VXwuTTBSgmPPDnbpiahUB8toRt=scfd=g@mail.gmail.com>
+Subject: Re: [PATCH 0/9] rockchip: Remove unneeded syscon driver for RK35xx
+To: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.u-boot-project.org
+Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <u-boot@0leil.net>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -200,87 +193,134 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Le sam. 26 sept. 2026 =C3=A0 00:20, Marek Vasut <marek.vasut@mailbox.org> a=
- =C3=A9crit :
+Hi Jonas,
+
+On 8/4/2026 9:57 PM, Jonas Karlman wrote:
+> Hi Simon,
 >
-> On 9/26/26 5:35 AM, Romain Beauxis wrote:
-> > Le mer. 16 sept. 2026 =C3=A0 23:47, Marek Vasut <marek.vasut@mailbox.or=
-g> a
-> > =C3=A9crit :
-> >>
-> >> On 9/16/26 9:24 PM, Romain Beauxis wrote:
-> >>> Le sam. 12 sept. 2026 =C3=A0 22:04, Marek Vasut <marek.vasut@mailbox.=
-org> a
-> >>> =C3=A9crit :
-> >>>>
-> >>>> On 9/11/26 10:32 PM, Romain Beauxis wrote:
-> >>>>> Neither bootm nor EFI ExitBootServices() stops USB controllers
-> >>>>> explicitly. Both only remove devices whose driver sets
-> >>>>> DM_FLAG_ACTIVE_DMA or DM_FLAG_OS_PREPARE. xhci-dwc3 sets neither, s=
-o a
-> >>>>> controller brought up by "usb start", e.g. from preboot for a USB
-> >>>>> keyboard, is handed to the OS still running.
-> >>>>>
-> >>>>> Set DM_FLAG_OS_PREPARE so that xhci_dwc3_remove() runs at handoff.
-> > This
-> >>>>> is the path "usb stop" already takes: the xHCI is reset, its PHYs a=
-re
-> >>>>> shut down and its clocks and resets are released. Child devices suc=
-h
-> > as
-> >>>>> hubs, storage and keyboards are removed first, and a controller
-> > already
-> >>>>> stopped by "usb stop" is skipped. xhci-pci has done the same since
-> >>>>> commit e3bbc1f74e05 ("usb: xhci-pci: Add DM_FLAG_OS_PREPARE flag"),=
- as
-> >>>>> have ohci-da8xx and the cdns3 wrappers.
-> >>>>>
-> >>>>> On Apple silicon machines the running controller is user visible:
-> > Linux
-> >>>>> does not enumerate a USB device attached to a Type-C port at boot
-> > until
-> >>>>> it is unplugged and plugged back in.
-> >>>>
-> >>>> boot/bootm.c bootm_final() does call dm_remove_devices_active() , is
-> >>>> that not sufficient to tear the controllers down before booting Linu=
-x ?
-> >>>
-> >>> Any idea how to test this?
-> >>
-> >> Add a printf() into the controller and uclass .remove/.unbind callback=
-s ?
-> > :)
+> On 8/4/2026 9:19 PM, Simon Glass wrote:
+> > Hi Jonas,
 > >
-> > Ok I can try that but I'm not sure if your question covers a part that'=
-s
-> > been untested. What I did confirm:
-> > * Stock u-boot: kernel does not pick up the USB device on boot
-> > * With explicit usb stop: kernel does pick up the USB device on boot
-> > * With proposed patch: kernel does pick up the USB device on boot
+> > On Tue, 4 Aug 2026 at 04:57, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >>
+> >> This series takes the initial steps required to try and remove use of
+> >> syscon_get_first_range() or syscon_get_regmap_by_driver_data() to get
+> >> GRF base addresses at runtime for the Rockchip platform.
+> >>
+> >> The GRF base addresses are fixed and known at compile time, yet drivers
+> >> keep trying to resolve them at runtime delaying some operations by
+> >> several ms.
 > >
-> > Is your question related to a different scenario that has not been cove=
-red
-> > yet?
-> boot/bootm.c bootm_final() does call dm_remove_devices_active() , that
-> should be enough to shut the controller down. Why is it not enough ?
+> > I suppose all addresses are known at compile-time, if you have a
+> > single device tree. I have always hoped that we might end up with a
+> > generic U-Boot for rockchip.
+>
+> I do not understand how removing these unneeded syscon drivers and
+> helpers would stop such goals or make that any harder. From my point of
+> view, they are currently making such things harder and only adds extra
+> code, runtime and energy waste. E.g. around 227 ms was wasted resolving
+> fixed known base addresses for RK3399 last time I measured it, see [1].
+>
+> Most drivers or any SoC specific code is already identified using a
+> compatible that is SoC specific, i.e. the RAM or CLK drivers are matched
+> using a SoC specific compatible and seeing how all GRF variants are
+> unique there will always need to be SoC specific code to handle the GRFs
+> base address and reg offsets.
+>
+> And for drivers that are more dynamic in nature the DT typically have a
+> phandle to the GRF syscon node anyway, so getting it from the phandle
+> will be a better option and closer matches how Linux handles similar
+> references.
+>
+> The biggest current blocker for a more generic U-Boot proper on Rockchip
+> platform is rockchip_get_cru() and how it currently makes it impossible
+> to support multiple SoCs in one build due to how it is used in the
+> sysreset driver. Fortunately, I have a pending series that also cleans
+> up the unneeded rockchip_get_cru/clk() related helpers.
+>
+> >
+> > I wonder if there is another way to do this, perhaps reading the
+> > address once and caching it?
+>
+> I really do not see the need for that; it would only make things more
+> complex than it really needs to be. We should use constants where
+> appropriate, e.g. soc specific drivers/code and use generic phandle
+> lookups elsewhere.
 
-No idea. I'm barely above user level here. Trying to help with
-reporting and proposing a patch based on what other drivers seems to
-be doing.
+I agree on using SoC-specific constants in SoC-specific drivers and in SoC
+specific code in general. I also agree on removing unused or unneeded drivers:
+if anything requires them in the future, they will be added as needed.
 
-> What does "the USB device" and "pick up" mean here, does the controller
-> fail to enumerate devices attached to it when Linux boots ? Could the
-> problem be related to some clock or some such instead ?
+Anyway, I would prefer constants not to be spread around in the source files
+that need them, but a single definition in a SoC-specific header. Therefore,
+no PMUGRF_BASE define in sdram_rk35xx.c; instead, a definition in grf_rk35xx.h
+that is more SoC-specific, something like RK35XX_PMUGRF_BASE.
 
-Sorry for the confusion here. I have a hard drive connected to the USB
-hub that I want to mount at startup. It fails to enumerate when
-booting using the stock u-boot but enumerates with the two solutions
-posted above. Also enumerates when unplugged/plugged back.
+From a theoretical standpoint I would prefer a single source for each piece of
+information, therefore having registers addresses in the Device Tree or in the
+sources, and not the same information repeated in both. However, this is not
+always possible (code not relying on DT such as TPL one) or convenient (for
+complexity and/or performance trade-offs).
 
-I'm happy to help test to find the right root cause for this issue but
-I'm relying on the machine for my daily use so I would appreciate as
-much details as possible to the part of the code that should be
-debugged so I can give you/y'all as much details in one shot.
+Regards,
+Massimo
 
-Thanks!
--- Romain
+>
+> At least that is my end goal with this and pending follow-up series.
+>
+> [1] https://git.u-boot-project.org/u-boot/contributors/kwiboo/u-boot/-/commit/cfb736dea37f834e849e54d39fb086c91697fc24
+>
+> Regards,
+> Jonas
+>
+> >
+> >>
+> >> In this initial part the three current uses of ROCKCHIP_SYSCON_x lookup
+> >> used on RK35xx SoCs is converted to use a constant value or using
+> >> phandle lookup, followed by removing the SoC specific syscon driver and
+> >> finally removing the RK35xx special ROCKCHIP_SYSCON_x enum values.
+> >>
+> >> The changes included in this series have no intended behavior change for
+> >> the affected RK35xx SoCs.
+> >>
+> >> Future series will continue to convert uses of ROCKCHIP_SYSCON_x for
+> >> remaining older RK SoCs if this initial part is accepted.
+> >>
+> >> Jonas Karlman (9):
+> >>   ram: rockchip: rk3568: Simplify get_info() ops
+> >>   ram: rockchip: rk3588: Simplify get_info() ops
+> >>   video: rockchip: dw_mipi_dsi: Get GRF base address from phandle
+> >>   rockchip: rk3568: Remove unneeded syscon driver
+> >>   rockchip: rk3588: Remove unneeded syscon driver
+> >>   rockchip: rk3576: Remove unneeded syscon driver
+> >>   rockchip: rk3528: Remove unneeded syscon driver
+> >>   rockchip: rk3506: Remove unneeded syscon driver
+> >>   rockchip: include: Remove unused ROCKCHIP_SYSCON_x enum values
+> >>
+> >>  arch/arm/include/asm/arch-rockchip/clock.h    |  8 -----
+> >>  arch/arm/mach-rockchip/rk3506/Makefile        |  1 -
+> >>  arch/arm/mach-rockchip/rk3506/syscon_rk3506.c | 19 ------------
+> >>  arch/arm/mach-rockchip/rk3528/Makefile        |  1 -
+> >>  arch/arm/mach-rockchip/rk3528/syscon_rk3528.c | 19 ------------
+> >>  arch/arm/mach-rockchip/rk3568/Makefile        |  1 -
+> >>  arch/arm/mach-rockchip/rk3568/syscon_rk3568.c | 23 --------------
+> >>  arch/arm/mach-rockchip/rk3576/Makefile        |  1 -
+> >>  arch/arm/mach-rockchip/rk3576/syscon_rk3576.c | 22 -------------
+> >>  arch/arm/mach-rockchip/rk3588/Makefile        |  1 -
+> >>  arch/arm/mach-rockchip/rk3588/syscon_rk3588.c | 31 -------------------
+> >>  drivers/ram/rockchip/sdram_rk3568.c           | 29 +++--------------
+> >>  drivers/ram/rockchip/sdram_rk3588.c           | 31 ++++---------------
+> >>  drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 16 ++++++----
+> >>  14 files changed, 21 insertions(+), 182 deletions(-)
+> >>  delete mode 100644 arch/arm/mach-rockchip/rk3506/syscon_rk3506.c
+> >>  delete mode 100644 arch/arm/mach-rockchip/rk3528/syscon_rk3528.c
+> >>  delete mode 100644 arch/arm/mach-rockchip/rk3568/syscon_rk3568.c
+> >>  delete mode 100644 arch/arm/mach-rockchip/rk3576/syscon_rk3576.c
+> >>  delete mode 100644 arch/arm/mach-rockchip/rk3588/syscon_rk3588.c
+> >>
+> >> --
+> >> 2.54.0
+> >>
+> >
+> > Regards,
+> > Simon
