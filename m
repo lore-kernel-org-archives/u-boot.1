@@ -1,224 +1,185 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0727C98318
-	for <u-boot@archiver.kernel.org>; Sat, 26 Sep 2026 09:26:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B737CC98328
+	for <u-boot@archiver.kernel.org>; Sat, 26 Sep 2026 10:19:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C9D04607A2;
-	Sat, 26 Sep 2026 09:26:49 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2E6epwbSCqxu; Sat, 26 Sep 2026 09:26:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E73A860629
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790414809;
-	b=EK8QKxLtXVWLWlPbRbJFSSHYeXYu9Kcnfun/riXq3wHEg1v3bogRVNrtGVJdHiSs2XX/
-	 Ab012D600Ji/QM3qQDgs4bSBU6dHjALuTYxa24klcUlyKe3HmGp0iQwf6f6ytyL0rcMBt
-	 fPSXiabwfxDQcgvthK4dYYiP4YdnuNRaBNVc7UDoZmVzA4fWZ9InBJLYIAGSUTChHaLkX
-	 lbYry8N3Tz3aVpGR1pDZi3lzijJnjjmztso33vOHnxFD3kCKuFkk2HW1Ti+uDqd1TKppd
-	 5Md5B6k8fYP7zM/Ar6rcKQc0eWCl4o4C+UP0Z2XGu4aPKqEusOhx2orDKlq4AsFPwUQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790414809;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
-	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=93z66KyBM1g0EeIYBg6ZZY3Gq4pKdRGr4Un07m22kaM=;
-	b=V9rkrD18QVe5RXBaN0y0Mqn83Mu7q616f0Yy+opC9WV50rn7lOpjJxmF+tYUNK6fclBX
-	 9tW6u1yZagbMtt7XCItcgXIzkai/OBiTG9WLoVO+VnNkgssr4EttNUztIwjYa/U7AeoEG
-	 DNo6DkClQE29MPqlunDxnmvwrvn+hTLlm1gOgWjaWLMWt20ZHDP+Nf/MTSsSgZdTs0cIU
-	 RzuOuyVyoT82gvyzTzrZUDB9j2bMv2QhLgSQ+6BSAMw8nJOS/y96T8Va3an0rW9QXZvQI
-	 WPRzcLUt/JoGNV0UOMRLYtLKAfZUTYyCWBMY/EOsX9n4+Bzgqpz7vxon8ohxqiDXz7Q==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790414809;
-	bh=93z66KyBM1g0EeIYBg6ZZY3Gq4pKdRGr4Un07m22kaM=;
-	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=uOUeUtK1Q2yF+Bned6+8yPHxkyywx7rR/oAFtp40Sac+JD3y4Rm9YJIV/QOCy7G2y
-	 M2hQb+CWfBhOfLNm7mP87pMjZNy5P/jn6ZZt0PSntqjLpOfNXlph9/DQyMvWqAfYUL
-	 Ul+KNXk6kGfsmhxDOUOuEg2zfjO6fjYOpca1hfncAlFHfGVLA3p5UH6DjgJ1yk9NJz
-	 7qap4xZw+KkpMEDcS28PDkKvXSzO1xq8dLCrciUfjMcy6FMI40tF0rA5vyAT4KIxq/
-	 EDuCnc8d/nD8WXQVA/oL9RVWKN2D3o4EYvZFrml+FwKx4tRH1O/qP6UaEJT28wwJNW
-	 3YXWNdvU+4mJQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E73A860629;
-	Sat, 26 Sep 2026 09:26:48 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id A32F0329
- for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 09:26:47 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 94ABC812E7
- for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 09:26:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 309FA812FB;
+	Sat, 26 Sep 2026 10:19:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FLC6OB8Jjbce for <u-boot@lists.u-boot-project.org>;
- Sat, 26 Sep 2026 09:26:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 9667781235
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790414806;
- b=NwCrxSBhMgG9NS9v1nz0VWM4SXObSsUrxoYX5cH/FqqEnMgl2ljfLjq12N1wQ6IPDzh2
- Qxi1RscIn4pSo16z+crwHEyDxX3UTt66id7XlXiTYD8k+5/m9xp162QnOBuHspZELSyGL
- Wr+QzWt8zGxbtF4lkPkiVmKKlBuCewxrbKAVAOxdp06jJiOKXWIkhpM8X50p1dgqRbdWf
- t21Mb2MBV5iMLydxwSU+CiuYJy9SeJnam5jCAxJEiHr7BjY8wXna6Moi0ICwDb4PXBjEm
- KgyoYXNjtrHqPMOry5Wd8sq0Q3yzoHkvqkEr/r5x/7P3sYTxUxLRAUAYQT19mMBJ+Rw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790414806;
- h=Received-SPF:Received:DKIM-Signature:Received:Received:
- DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
- X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:
- Subject:Date:Message-Id:X-Mailer:MIME-Version:
- Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
- X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
- X-Proofpoint-Spam-Details;
- bh=93z66KyBM1g0EeIYBg6ZZY3Gq4pKdRGr4Un07m22kaM=;
- b=O4ogpvtNRJ4LvHdTcR4M/FspQ3j45MZcv3UmTtBvt/XhLAii225bRrhDRl0DW9EIIpQG
- 7/g2nOditOFp+AKIJAhMpFgvSCbt+VlPZi3vFYrFpe/iW2KuUhtX8dOFuYu3T8V5BtnkV
- KR3o9GQPB4krDsZpgce5itC8b+NYKKncPdE43r12Olb9GY8AVKb2N+DqIL/MwSyudZlmT
- DYfyo1ONL7cpxGR7yd+Qe/borv5NYAv+BPC3OrMNvkEp5E0/InrORoH+2+HT9lCDL4W4f
- B5Nkv68LsuTUPlSlkSreJfUUg20rbnnJ4QlelF+PqiCa4BuXe7yOYfFxJuv6k9H4x1w==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=oss.qualcomm.com; 
- dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=D3047y9E; 
- dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=QtzpdNzj; 
- arc=none smtp.remote-ip=205.220.180.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=D3047y9E; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=QtzpdNzj
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9667781235
- for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 09:26:45 +0000 (UTC)
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68Q6OlH13527087
- for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 09:26:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=93z66KyBM1g0EeIYBg6ZZY3Gq4pKdRGr4Un
- 07m22kaM=; b=D3047y9EtUq+KQwaNL9WTp4YJY+u+lvZ0aeG3jkNy4FH3LhdcgI
- i0BpGdIzPITtWJsdEVK01Ewlu7489B9lKiwC/VbCwatr2EPCRMz1qpbPMuU6PRFD
- Ed3KshEhtbczFY0cCX7gHMgSEzr8EHB+AyGIRC7W5TpAazdOWhK6QX30DYXM05j1
- pn3MIr8L5KYEwCNkWPL3Z7CQzwZkiOOe1inHbsIp3+sZXwX2FXbHvAU1jFEs5RTR
- pCXRuWfyo9DnwUz5rBHAu7aq9CnYk+GxpsxShmtjQjVlkTmW/2S/AJ05iY/eob3o
- tD8wnWWRqGXPSLIuD+zCAQkwOjDxM4X0kMw==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
- [74.125.82.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx64urkpb-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 09:26:44 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id
- 5a478bee46e88-30bcb065bfdso2773212eec.0
- for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 02:26:44 -0700 (PDT)
+ id v4J7zfJ2PA0C; Sat, 26 Sep 2026 10:19:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org ED369811CD
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790417978;
+	b=Qy2yIEHvmSRJTYncF0x4W3yHoN1Itdh/Tl+bba1gtHi3TvYsYV0VITGp/sQf+4Y2ohPT
+	 hT2Xt9+7zhFBX2TGgHFHjHFY6x27877YRz+Wvjh3cyl+/KwfJtVFiSItYveisLr9fjNrF
+	 +4W/BVC3nG15ltAkQI9EIIm43QTcbjd7jWSHdpEAD6ec8SU6kWLjoHFrwchQmi3tsiJfp
+	 Zo7WUIDTmshzE8HcIIyO6qbOQOcXB/Attko9jlzWk/MoIKRaGNlu/qYYWtMxPPV2+EQyP
+	 ZqiiUjdsmzIAfhv/XdvZZ79FcrYc5zDstJGlYBP5pzeqm3aJeeXIV8FAXAz81XBrMrw==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790417978;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=bgadCXe+CrS5oEjX1d0nQgCynHT79aIlFxBqATFxjlY=;
+	b=nbZNyAZlnQba33oxKxqcw5rsuCusNLDkRhf7mBK4RxOyJ2gHKG+bj08zsW6ib/oJGECR
+	 t+FmR81WqHY86V1WgaOLFv5pRhBg3t9p6uc5Hhsv4VFbua1xgUO7naCG7bYtdw6e2wwfl
+	 QTB0XmgCGYZqgzUre/wiTCI3gKCBxMwrCAeebEuT22pJm2ASEVnkV0B9ILndztU6CLTNV
+	 KPre3owlh/5ZrqT6OEijfEo+Pwp8Tc0cu/aNtJmYeZbKFDao309S9ISbOgodKXEfRJni3
+	 nWoV0AvB4dGbK6svKnHhs5Qlmbz59JuWz8W+mOYgL14ryMZtClvKPI2Pz36x06WK92w==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790414804; x=1791019604;
+	d=lists.u-boot-project.org; s=default; t=1790417978;
+	bh=bgadCXe+CrS5oEjX1d0nQgCynHT79aIlFxBqATFxjlY=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=dC1rlAooaivcoRrsSMOsErsVy3bJbhKsLvKlbew5P69+/a4ex7A8dtDSPlCbBMATJ
+	 Wj8EvEbKqUEaf6/I5Xri4hx1M/HxCes+2XLDr5FGnC9x4FZ1Nr4shoQbOGRLXuCHWr
+	 VJMtikMlulqq6BhtqFkrFXsCnHB9xFIK51aqYslN4VsO5IUM15oiHdtop/gtc8JwBH
+	 QQt+eExRUfRnWr3tcavHxuzuxsM+grvYdIcLL2rjzxxNGF5cYC/eMQzoL8p9Sm0EnN
+	 5N5EYoAKL+qqnPFlrTZnaLauNYTv0tNPwfK6DhNmbR5qS0oCEH6FvDssX57sSmmqaE
+	 2FR1g3kLea5PA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id ED369811CD;
+	Sat, 26 Sep 2026 10:19:37 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 19E14335
+ for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 10:19:36 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0B8B340AC2
+ for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 10:19:36 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zzlxtJ2-ZxxF for <u-boot@lists.u-boot-project.org>;
+ Sat, 26 Sep 2026 10:19:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B3C4240ABE
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:34::f"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790417975;
+ b=k29CHOiJkgcrGE87NLZIE0GBlpHR1zwSIaugBZ1Tmen6dO6BRQumL2Va8CW9wbebHkZr
+ bAqCuLL47U8IUctRR89Z5qUvJBQXMjkipBDX2lENi4RwUHPKrXfd9eyUFIn6N9IcIu6th
+ mRUlouWsrbDwfaIqbmrJOwkNC9ub7lJ53fKg3VBNlq1+jGZu5KB7CNjIt/L+H4tTrHh6J
+ oJjFN526cQmkB/8Vr1LP48JjlUSrooc6maK8qmvEh2+Na4XeqZNtWjNVVvVI9aksELG7j
+ JsCmgomTNdn3H6yYY4TfaKmlHbi10n2r6d599uCqXHmjVNOYAMl+NQyUaeEuhfr5FNg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790417975;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+ In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+ Content-Type;
+ bh=bgadCXe+CrS5oEjX1d0nQgCynHT79aIlFxBqATFxjlY=;
+ b=NARVqu0Ij0K6lMtn5AdY3d2qCzhq9etdQZwkgd4VfTtDj1CdfmHZoTme15V9VVWViZX+
+ RtLzigw918yXGmYs/oi2pBxiS55b3FGbMI3/fl3nfTvgeslBZqF8qRWNsS4Sg6/nJBI0N
+ VwZT/PL9482Md9R/Jt/ecAHISe7L50LjhVUnVlAmLapU1Hzy4qqWZpbC6rfSYUMx8hFal
+ 0VHBeIvXAi13sDSqZHvFUz6UtGpg+xznefm0Y+Bc7DvFMdpbx/2571cgq8hq4nAAWlNKS
+ fnUsDi54zYru3R/hulrwhH6nnoqTLNFkVoC//Ear05PEHxSos5PWPDdSd6ohJdoNP5g==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ dmarc=pass header.from=gmail.com; 
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=CEwW7HBo; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:34::f"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:34::f;
+ helo=mail-ej2-x0f.google.com; envelope-from=massimo.pegorer@gmail.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=CEwW7HBo
+Received: from mail-ej2-x0f.google.com (mail-ej2-x0f.google.com
+ [IPv6:2a00:1450:4864:34::f])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B3C4240ABE
+ for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 10:19:34 +0000 (UTC)
+Received: by mail-ej2-x0f.google.com with SMTP id
+ a640c23a62f3a-c2a4fbc5586so245878266b.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 26 Sep 2026 03:19:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790417972; cv=none;
+ d=google.com; s=arc-20260327;
+ b=k4DTom6WCnt6syzo5Bi+GltoeoYtNUhztrFw3rTwBSPIEKhK2vyv4Gs9gqEldWLVtb
+ VDBvFVE9Jj/1UAjwyK6ugK4TdQa+aIT7GZRnSZBYAp7BlgJczMyyROaCL3paVazurgZR
+ AsFPKxKZs8cp61+eWfr7kYgsgwtMXpyuQg9uDRl0SlZEj7BylTfGfLjvPQduoWVNCUi6
+ j2MHtO49wXGHpl4+W9JvKSTwAXp5XUFL5KxeoaZsH0QEorFvqkjBdtE02etUdwmZNFCT
+ kPZZmKgAlQkZtGuBSKhtHaqDIfvAi+juoqdR0um/HwrBppkGOvlPL2j0KJnEApPueZzq
+ NUtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=bgadCXe+CrS5oEjX1d0nQgCynHT79aIlFxBqATFxjlY=;
+ fh=6+YGwzFFpdXiGrqdl1KRU9olLY1iK7n2nwHCPpwBWoA=;
+ b=Pkr0mNjCLk45GNzjuzkhm4oiA/IObgHi6KHFyw1EXz2D//W1czGGwAWc4vMSTEy05Y
+ oodlrA2/3RSiooIrJUutcaH5YLOB6PGKVWwqAs6jt3rHQNzuuC2QiOK6pTJN+foVi2bR
+ coU5uomkv7Jn6SUCco9j+1Y5GbnUqNeLgnIoePOCnyDF1cEvwdIz1aF+UdIIXU4c4MNB
+ YlA2WBDRGgwRDdk6TKbCGarRq5rTQmVgzEDF2QDeRMt5mwrnDIjTqjJ89FYHQan8/254
+ 7jgw13h9sDcv3C7Jpar1A8hiMthZTmBZ6AwZX8B7CRwB8n14sfvRtv3Go8dplhzumXSh
+ fqlQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1790417972; x=1791022772;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=93z66KyBM1g0EeIYBg6ZZY3Gq4pKdRGr4Un07m22kaM=;
- b=QtzpdNzjQSgBZ7vSFkTRbOIad/BH7TkeHsii/n7bRw7mHPcHubdvJojSwMAZuGrAsa
- Gu39GTFydSHehKxWQ1GQoohPxeBYOJFNkpv0j6garFdAfRWvk+oui6tlR9Dyj5VJOH+E
- Xobr1BwLTBtd5YHnzAUzh6Lm3OYX86AxYKXtFISDAVtLo6XU+fc58PtNqiapikb1+1ki
- kyzmAOAzHPhuXHnvM1oEYiROtiD80X7JCf5pKjhe++2eV9hVz2eTz4B3bA1oAlqfB3zQ
- MRxH4/z8f83zgYjSgxEgNRyZXcE9ZvDGgI7j+/HyZhqBXhau+Q6bEnwYFVb9FbMfbGCB
- ePBg==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=bgadCXe+CrS5oEjX1d0nQgCynHT79aIlFxBqATFxjlY=;
+ b=CEwW7HBoWFa1glr3xgm82aBFDC0F7MJfOGTJuM8HCggH9JhrlzUWG4wdS55ptt3AVZ
+ TH2NBw1a2Qs7etJdUQwN9jBW0MuhVPs+gJ5m5rYpX/Z4HmnchnDqYpo31zGZ40PbiZlQ
+ ULCqoSUNB3hNBiuhHVP1+6+/J4IceI0MsHhjb3tLxwL97aEGYrReE+GHd5n8gaRskSkr
+ 6F7GpNJ5SsprQSRsmVwKcjHCyaDCTM6Kp2Ed76ZXqWDJSuBMtg1W8f7kYSgxD704P2xz
+ wRpRPKPpa1gg9SKiI/rg63v2mY51JEHn97T7pkBsgantztVuRIiNkBv7Noi0D8TdYNnX
+ rfKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790414804; x=1791019604;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=93z66KyBM1g0EeIYBg6ZZY3Gq4pKdRGr4Un07m22kaM=;
- b=bE5ePjzuNc3FbFO9HHy03dMBwDJMj0FKExXvhMOgeXW6BWHvKColGYMLqUnUptPslB
- sos+5MFLDK8HL+eSDA4nmSdKU6pU40ODxciCc1DZasjmi7WS/vtsWRMfUsp8GCf3PUxA
- TNjdCx53rAwT/kfI87QOnlJVlTFEWKpWrtiLg4nRNMssa17py5GvbI4GJ8kOAoSIWYMD
- QRyX80UYfw/hmQ9L5t2AXh/nRg42MF2VfmccesoMrC0zE6sgoziPE+h110N/Q+KYuZjv
- 86ERSsEB4lu7xYu5sc/LQCWIFQ8oGz38lBDoQXEQF3zfSzBoYnfR8g0Eyrg0gJ+7APXE
- vpPQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBx0FrGw27lqBT7dXOzuwUUHlUn4NfvgOnIoHCwBR7MnbTWhf4203+SdE8UwDRRZouqr6WaqufU=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYK5CR1Kh/e4H/1ddsICg+TJGHstrygHWe66bmwwmQzal7hafExx
- 3SJp4zcaivJpuWPYbwZSSa7hTlWn/M8CFZPmAiyxt5Pq7AQG5xWowjUr91QM9G+EwNdM9ef5vMA
- jfXjTbn+/5CU5bWCquTsj+bT0BFGoE4p2JaJd7K7ajOFBsC+9AtVr+7R6TO7HlWtwT5MzQcE=
-X-Gm-Gg: AYBFou29G4fWzqf8t1zTCZM3zNySoEbhC7pF0POvqcs6/3SYtfM6B8WDeqC9+7z9/tX
- 14N/9uZ1FlwrfagLWYT9eDjcNJvKNhgqLQyUFkvGDTmu8s7HlPyvtnGN8brKnPsX/81Vi3Lv0bH
- osHOVeGEp7Yb3yq+tReF+RGnx15NGrSszIzY8mJ0NecU+NshuEAP1MF2Peiz7XrpF4NnDbyU82H
- vEAzYl2Qh9uc509y6k1wVfGVr4GN4f0Y2QyM0fAYhPdUxQQsTWEiwwO9b6KuVIoIBRE2SvAnPVt
- v8jYYXR8C6K/1KqIQYl8ztX3GEOvFVrr41b7nRSQ1lQTLeBlpvzWSIOUeKrNwQl8TXe0pxt4JkZ
- b0sZhwWnIuC9CIwLXNffSM8cupjRDCjkVrjSBsZvDQXwSkBzBMEYnf5OgIKJP2z/vc+uNilKR6M
- xgRRBRoXTUZxzfC4aNd8s=
-X-Received: by 2002:a05:7300:23cf:b0:33b:e75b:cc42 with SMTP id
- 5a478bee46e88-34271d8db46mr3557979eec.19.1790414803013; 
- Sat, 26 Sep 2026 02:26:43 -0700 (PDT)
-X-Received: by 2002:a05:7300:23cf:b0:33b:e75b:cc42 with SMTP id
- 5a478bee46e88-34271d8db46mr3557899eec.19.1790414801701; 
- Sat, 26 Sep 2026 02:26:41 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-34145c17074sm11804608eec.26.2026.09.26.02.26.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 26 Sep 2026 02:26:41 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: trini@konsulko.com, ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
- aswin.murugan@oss.qualcomm.com, u-boot@lists.u-boot-project.org
-Subject: [PATCH v1] armv8: mmu: sync emergency page table attribute updates
-Date: Sat, 26 Sep 2026 14:56:35 +0530
-Message-Id: <20260926092635.2712021-1-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20260707; t=1790417972; x=1791022772;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=bgadCXe+CrS5oEjX1d0nQgCynHT79aIlFxBqATFxjlY=;
+ b=mzVM22TJYqTUk5xNh7/vNpUtmc75vTUSNsCLUZZu7pvPh22gqEZTB1MUiV1tHJvBVS
+ E2ELGZy1bm51AWDinxKWIY+3oNkJKeq8XeEuWomgXv4aaFVhlgRmCc6ABdDDqMIIIWfR
+ g530JAbtRv8XPmG6HkjlAffpci2oywFZCZL9WK951DpYwNIZR2j9z4Ted+kwVMsZ6+fJ
+ 7lmbbPO9kLegMIAgNaUFManwiy6w/5GX78Gs0zsE/me1b51SWHSFNyGiJI3c9r0nNMkO
+ Cxrrj5c+BdbLbw6uory4bLBvGuy1yZlsGKgGYq/Y+PNglkiXaQbT7cxhwbUDGQ7RN2tB
+ /vFQ==
+X-Gm-Message-State: AFuF++kKqfJHlkrZCRRSswRegIZzpdutrJkBhztFhndf+fGXaI/+zodD
+ lImEAMXASU7ojCT2VMTnFPmXZ++pp8BaS3XVQJ3OFPBV4nYH9BiPgWGSALOVcPm3rmOtLUKcbUd
+ 5zJ94fC0S1m/tRGio6wyWa+1xuTwEYCHaxjAc
+X-Gm-Gg: AYBFou1qZnJIrk3O7I/0tdAg+yvz0OdaZI+WujqoyN4vW8M6L0mO60uJKo46mzNOwHZ
+ 26+G3wsORivCobaMemf2x5maoiYirsiYPE/+aiAWVcAs3526ybBMZ3zBbvGP2Si+tECGSN7Fy2/
+ fECB0c25IQxQRmOhfpiBIOvoUwcabwlm+6J8NFmolBS9AQm4gnVt1P9uOGka2crYnpeBfosRv/M
+ MirVvk7OF1tT6zrJI2PNfdHF/ZuT7eCFul+lQ7hfd7OqikDPAsr6xdywxhZ8N8hYzo/CvjpDORY
+ NNT0GDYSIX1RKFAJ0I/jmxe0Ywiexl9j4xMLw2ZVVyIqFalP+kmsYmGA
+X-Received: by 2002:a17:906:2082:b0:c29:f5d8:9c6a with SMTP id
+ a640c23a62f3a-c2ac223aa48mr549784166b.25.1790417972107; Sat, 26 Sep 2026
+ 03:19:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI2MDAzNyBTYWx0ZWRfX116MW0Y49Pq2
- LOjh8SxL10wqRR8HXU9Uo2+xg3mnNZhEpplU0C626DxJs71ioZisKKbhjp6ZTFjcC5u7OtHg8Z5
- VX/qAtw3oKSwfyrZ3cJ87t+tmDFquGY=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI2MDAzNyBTYWx0ZWRfXxy16f3FvbbMz
- EKF8oshcj+nnP/44fYxNf6ftr0+4l+151cIkLJZK7E7cElf7m4Qncrf1+yBcrgXKkSYyzq8zisQ
- 4Nt3qGjg4Ab7Ffh+n7N/WThPnhCCY9GG7L0Xy96ABdsMLlCEQ1q4burKk14jRQBswtxrBoJw/qh
- IA6c4fVjoaGHv2OzF+bwif7MNCrI3BpX6RFfj5JWE3Ddhyd7JQJXRQoelLomzTygLWugL2gYeVa
- F4vZMnaa88hRjC6hZ7yqSS+bkrixGtWYTGvBKjP8QpPq/ctMxX2csJbnVcBvpcJEJxEpHRxjm5i
- BDIPUmpBfiUbgvMuba8t26QthfZbKCIW2XIPTCJMJMVjxRgYAJHD2NRtwSrXU5iaaOXfSVDGa+Q
- jien/I7TL1/uk1H5AqQePybfjPvGk+WyxCfIu1Z4QmI1ffks17hovEUEqCCQOct4QZ+iHu5G4TG
- IbLJr/a4Ox3pm3sx+Jw==
-X-Proofpoint-ORIG-GUID: So3ooKPt4rINACl-zAs1emj-0sE8BuJD
-X-Authority-Analysis: v=2.4 cv=E6xYNqdl c=1 sm=1 tr=0 ts=6ab78fd4 cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
- a=mJ9KI-YFyavrVCWcsTMA:9 a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-GUID: So3ooKPt4rINACl-zAs1emj-0sE8BuJD
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-26_02,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 clxscore=1015 priorityscore=1501 suspectscore=0 impostorscore=0
- malwarescore=0 adultscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609260037
+References: <20260730141308.1218014-1-jonas@kwiboo.se>
+ <20260730141308.1218014-2-jonas@kwiboo.se>
+ <cdb6ebf1-6d92-45ce-ac93-18135c23d3ca@0leil.net>
+ <811ccc5b-d7bf-4c4d-930d-d66bd388919e@kwiboo.se>
+ <0881ae1c-1d92-4c3f-abc1-77608abd9850@0leil.net>
+In-Reply-To: <0881ae1c-1d92-4c3f-abc1-77608abd9850@0leil.net>
+From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Date: Sat, 26 Sep 2026 12:19:20 +0200
+X-Gm-Features: AclHuK-810pk8nIMBq65n6HLDOidomjf2erP_Fbo9kk0w4ZTd--V_G--UjgidgY
+Message-ID: <CAC928HbAxyTFh4mu3bAyzN73G8PTUsZMWqB08sMPHB3m2Zoy-A@mail.gmail.com>
+Subject: Re: [PATCH 01/15] clk: rockchip: pll: Fix double use of postdiv1
+To: u-boot@lists.u-boot-project.org, Quentin Schulz <u-boot@0leil.net>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -232,116 +193,138 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-mmu_change_region_attr_nobreak() updates only the primary page
-table, leaving the emergency page table with stale attributes.
-The emergency table is used temporarily while the primary page
-table is being updated.
+Hi Quentin,
 
-As a result, speculative accesses can reach regions that were
-intended to be blocked in the primary table, leading to XPU
-violations.
+On 8/7/2026 6:36 AM, Quentin Schulz wrote:
+> Hi Jonas,
+>
+> On 8/7/26 12:38 PM, Jonas Karlman wrote:
+> > Hi Quentin,
+> >
+> > On 8/7/2026 11:36 AM, Quentin Schulz wrote:
+> >> Hi Jonas,
+> >>
+> >> On 7/30/26 4:12 PM, Jonas Karlman wrote:
+> >>> The possible frac_rate part of rk3036_pll plls is divided two times by
+> >>> postdiv1 instead of both postdiv1 and postdiv2 as the integer part. Fix
+> >>> this by using postdiv2 in the second do_div() call.
+> >>>
+> >>
+> >> I... cannot find which SoC(s) actually makes use of that function. It's
+> >> only called when pll->type = rk3036 (which is 0, so anything that
+> >> doesn't explicitly set ->type will have its type be rk3036), but all the
+> >> drivers declaring a rockchip_pll_clock array specify something that
+> >> isn't rk3036. So... is this dead code or what did I miss :)?
+> >
+> > It is also called for the pll_rk3328 type, i.e. rk3308, rk3506, rk3528,
+> > rk3588 and rv1126, strangely not for rk3328 (in U-Boot).
+> >
+>
+> s/rk3588/rk3568/ above.
+>
+> Thanks for the pointer, I missed the second call to
+> rk3036_pll_[gs]et_rate() when pll->type = pll_rk3328.
+>
+> As for rk3328, it isn't using the common PLL core from
+> drivers/clk/rockchip/clk-pll.c but it is indeed weird to have it named
+> following the name of an SoC that doesn't actually make use of it.
 
-Update both primary and emergency page tables when modifying
-region attributes to keep mappings consistent regardless of the
-active translation table.
+IMO it's not just weird, it's bad coding. What's the meaning of writing
+cross-SOCs functions and then naming them with a specific SoC name? The enum
+rockchip_pll_type is another case; moreover, of the 6 items in the enum just
+two are used in the code: pll_rk3328 and pll_rk3588. On the other hand, the
+only difference in the code between pll_rk3036 and pll_rk3328 handling is the
+mode_mask, which however is a constant bijective function of pll_type, and used
+only in function scope by rk3xxx_pll_[g|s]et_rate() functions. Thus, why not to
+define a single pll_type and init the mode_mask within the PLL() initialization
+macro? Or, as alternative, keep the two types and remove mode_mask from struct
+rockchip_pll_clock and add it as an argument of rk3xxx_pll_[g|s]et_rate()?
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
- arch/arm/cpu/armv8/cache_v8.c | 29 +++++++++++++++++++++++------
- 1 file changed, 23 insertions(+), 6 deletions(-)
+Would patches addressing these aspects of the code be welcome and taken into
+account in U-Boot, or is there any diktat by Rockchip on changing this code?
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index ad232435eb2..f351f11007d 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -173,7 +173,7 @@ static int level2shift(int level)
- 	return (12 + 9 * (3 - level));
- }
- 
--static u64 *find_pte(u64 addr, int level)
-+static u64 *find_pte_tbl(u64 *root, u64 addr, int level)
- {
- 	int start_level = 0;
- 	u64 *pte;
-@@ -191,7 +191,7 @@ static u64 *find_pte(u64 addr, int level)
- 		return NULL;
- 
- 	/* Walk through all page table levels to find our PTE */
--	pte = (u64*)gd->arch.tlb_addr;
-+	pte = root;
- 	for (i = start_level; i < 4; i++) {
- 		idx = (addr >> level2shift(i)) & 0x1FF;
- 		pte += idx;
-@@ -211,6 +211,11 @@ static u64 *find_pte(u64 addr, int level)
- 	return NULL;
- }
- 
-+static u64 *find_pte(u64 addr, int level)
-+{
-+	return find_pte_tbl((u64 *)gd->arch.tlb_addr, addr, level);
-+}
-+
- #ifdef CONFIG_CMO_BY_VA_ONLY
- static void __cmo_on_leaves(void (*cmo_fn)(unsigned long, unsigned long),
- 			    u64 pte, int level, u64 base)
-@@ -998,11 +1003,11 @@ static bool is_aligned(u64 addr, u64 size, u64 align)
- }
- 
- /* Use flag to indicate if attrs has more than d-cache attributes */
--static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
-+static u64 set_one_region_tbl(u64 *root, u64 start, u64 size, u64 attrs, bool flag, int level)
- {
- 	int levelshift = level2shift(level);
- 	u64 levelsize = 1ULL << levelshift;
--	u64 *pte = find_pte(start, level);
-+	u64 *pte = find_pte_tbl(root, start, level);
- 
- 	/* Can we can just modify the current level block/page? */
- 	if (is_aligned(start, size, levelsize)) {
-@@ -1039,7 +1044,7 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
- 	return 0;
- }
- 
--static void set_regions(u64 start, u64 size, u64 attrs, bool flag)
-+static void set_regions_tbl(u64 *root, u64 start, u64 size, u64 attrs, bool flag)
- {
- 	int level;
- 	u64 r;
-@@ -1050,7 +1055,7 @@ static void set_regions(u64 start, u64 size, u64 attrs, bool flag)
- 	 */
- 	while (size > 0) {
- 		for (level = 1; level < 4; level++) {
--			r = set_one_region(start, size, attrs, flag, level);
-+			r = set_one_region_tbl(root, start, size, attrs, flag, level);
- 			if (r) {
- 				/* PTE successfully replaced */
- 				size -= r;
-@@ -1061,6 +1066,11 @@ static void set_regions(u64 start, u64 size, u64 attrs, bool flag)
- 	}
- }
- 
-+static void set_regions(u64 start, u64 size, u64 attrs, bool flag)
-+{
-+	set_regions_tbl((u64 *)gd->arch.tlb_addr, start, size, attrs, flag);
-+}
-+
- void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
- 				     enum dcache_option option)
- {
-@@ -1095,6 +1105,13 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
- void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t size, u64 attrs)
- {
- 	set_regions(addr, size, attrs, true);
-+
-+	/* Apply the same change to the emergency table, keeping it in sync
-+	 * with the primary table.
-+	 */
-+	if (gd->arch.tlb_emerg)
-+		set_regions_tbl((u64 *)gd->arch.tlb_emerg, addr, size, attrs, true);
-+
- 	flush_dcache_range(gd->arch.tlb_addr,
- 			   gd->arch.tlb_addr + gd->arch.tlb_size);
- 	__asm_invalidate_tlb_all();
--- 
-2.34.1
-
+>
+> > I do think there is a very low chance we actually use the fractal pll
+> > rates in U-Boot but the double use of postdiv1 seems (and should be)
+> > wrong.
+> >
+>
+> Alexey started to look into supporting them for RK3576 and found a few
+> issues, so I'm guessing we are going to start seeing more users.
+>
+> >>
+> >> Where did you get the formula also, I couldn't quickly find a publicly
+> >> leaked TRM for RK3036 (and since I couldn't figure out which SoC(s) use
+> >> the same formula...).
+> >
+> > I think they are very similar as most fractional plls used by RK.
+> >
+> > Following is a snippet from Rockchip RK3036 TRM V1.0 20150907-Part1
+> > (that used to exist in a GitHub repo at Poco-Ye/rk-datasheet)
+> >
+> >    The Fractional PLL output frequency can be calculated using some
+> >    simple formulas.
+> >
+> >    If DSMPD = 1 (DSM is disabled, "integer mode")
+> >     FOUTVCO = FREF / REFDIV * FBDIV
+> >     FOUTPOSTDIV = FOUTVCO / POSTDIV1 / POSTDIV2
+> >
+> >    If DSMPD = 0 (DSM is enabled, "fractional mode")
+> >     FOUTVCO = FREF / REFDIV * (FBDIV + FRAC / 224)
+>
+> This one's funny because I think it's supposed to be 2^24 and not 224.
+> They made the same mistake in the RK3308 TRM. It's fine in other TRMs.
+>
+> >     FOUTPOSTDIV = FOUTVCO / POSTDIV1 / POSTDIV2
+> >
+> >    Where:
+> >     FOUTVCO = Fractional PLL non-divided output frequency
+> >     FOUTPOSTDIV = Fractional PLL divided output frequency (output of
+> >                   second post divider)
+> >     FREF = Fractional PLL input reference frequency
+> >     REFDIV = Fractional PLL input reference clock divider
+> >     FVCO = Frequency of internal VCO
+> >     FBDIV = Integer value programmed into feedback divide
+> >     FRAC = Fractional value programmed into DSM
+> >
+> > And Linux use following in rockchip_rk3036_pll_recalc_rate():
+> >
+> >       rate64 *= cur.fbdiv;
+> >       do_div(rate64, cur.refdiv);
+> >
+> >       if (cur.dsmpd == 0) {
+> >               /* fractional mode */
+> >               u64 frac_rate64 = prate * cur.frac;
+> >
+> >               do_div(frac_rate64, cur.refdiv);
+> >               rate64 += frac_rate64 >> 24;
+> >       }
+> >
+> >       do_div(rate64, cur.postdiv1);
+> >       do_div(rate64, cur.postdiv2);
+> >
+> > In U-Boot the postdiv part seem to be handled for the integer and
+> > fractal parts separately. Maybe we should just try to adopt something
+> > similar/closer to Linux?
+> >
+>
+> Casey has posted a series[1] porting some parts of the Linux's CCF to
+> U-Boot which should allow us to import the Linux kernel driver(s) with
+> minimal adaptation[2]. We would still need a minimal clock driver for
+> xPL (and currently also proper pre-relocation) if I understood
+> correctly, but we hopefully would need so little that it wouldn't cost
+> us much to effectively have two separate clock drivers depending on the
+> boot stage. I believe she's looking into making it work in proper pre-reloc.
+>
+> I'm honestly not sure if I'll have the time to give this a try any time
+> soon but maybe someone else would like to see if this can work out for
+> us. I would also feel much better if we had CI with Rockchip boards so
+> it feels less like a coin toss to do such big changes.
+>
+> [1]
+> https://lore.kernel.org/u-boot/20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org/
+> [2]
+> https://lore.kernel.org/u-boot/20260720-casey-ccf-upstream-july-v1-33-8fece1b0333d@linaro.org/
+>
+> Cheers,
+> Quentin
