@@ -1,199 +1,167 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4959CC98332
-	for <u-boot@archiver.kernel.org>; Sun, 27 Sep 2026 15:05:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AF52C98332
+	for <u-boot@archiver.kernel.org>; Sun, 27 Sep 2026 15:05:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0D62460680;
-	Sun, 27 Sep 2026 15:05:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C2AE581028;
+	Sun, 27 Sep 2026 15:05:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cO3tNBcQl4mk; Sun, 27 Sep 2026 15:05:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 2D7D460657
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790521525;
-	b=qrGJuZKC4Z9D9K2O0tkAd2EMz0Q9mTbTVpLsYlEIO5+vDIq2e127gAtmYUIVdt4BVRT7
-	 mKbesbb3APOE+s9xLI9FE8QQfuVl/M+Dudk1NlNjKbn5TsbwUl0bE9CmaWnYZjAK6wFhR
-	 dsZD69v21lIBgpdTP+J5xK7740rp60ni8KQjzigWYilx1s5y5pBVqFk/BtskZ99Jocw1i
-	 BkqPD7qJsDzrLso4ZsSaFWG1vFJ3wsdu9mU0E2tU/HiOFQEeE7jMoGv7dfAyJbchP1nBM
-	 5sgtxnbSYOdvTQAVdUvO20GJjCVXCK9SEpX3PsulLYKmSiMWXRRwBZ6Q1LNgsGD8Vxw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Zn93ut8YbnGw; Sun, 27 Sep 2026 15:05:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org DD05481016
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790521557;
+	b=keeDGZHmDP3R5viHOAl1RGR1WUyGKKYYkqlCYGAkkCVg4gX33k+0YAeDiGnNyo8t+S0C
+	 3rxC7ReTo3iNKh77TXtESatER4VN8nFN0M047X4c4Ryi6Tzumz4mgUpjAFElevsfgHyPZ
+	 V20GHJB4zcapBck12kJwDaee3WmRfyNmeucSaKTFVDF9AnjGIS6/BsbX2ih6+MIAuMqTf
+	 RdMuuMjNjJq9u4SwJ+iAuNT67W4LzKfu3hLlYnhQj/dgupaWRhZ5Z76VmBq3utDknhEUc
+	 wnMMvNadRtA0hHZXV2r4AxbC9hdefqzYmT9AbLpTohy29qkeyYG/M0y1yqu7tc9MHcw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790521525;
+	c=relaxed/relaxed; t=1790521557;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=jMgxNQfIWRvhe6JfcvIL7hqqrFZ07GEVu2Hl4BhD4QE=;
-	b=LW+t/fpt2/AW1pdqOmgpsjk799pGfyqd6XoJRUihItPYWaYIa2KipXS4RpdUpqHS9L4f
-	 tBEItp5bumNA5ldw77nY8SQLPcrzvRdOvZxphDor74r+GBJanaRxPGdhPl2Q5rFu5VbxN
-	 uJ096mpEWqAt1GSc2Y3UP2/ZX2+ZPgo54OgD0pqjbavS3DtX5FYxxwr+xusvGpglzCo2W
-	 o8vx+AyVJwC/w+kKC99CxUYEBrOapGBSJfi/z5P28L/aIxbHEgjih0JWmDRU2NedeuLHi
-	 TJgy9GmiZ+fgfpCU34FRRxJxeJEMB+/rgGdgTvppLJA2VcaVFbuxOUfqpYyhPhOC7Qg==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=pass header.from=chromium.org;
-	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=oXgjxmv4;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:Feedback-ID:X-Zoho-CM-AccountID:X-ZohoMailClient:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=Jj8GPcgKGbo+/u95NAkT3CSduXi4fXZLPntwcCxcppc=;
+	b=BFqo+iMjxPaagjnDwcH1AvBbexF4fi7Xjo1tO1PBj+XvYSGTHNtKCba8FnHf57pjtoZY
+	 NIzfYX0tf10x5TMA45hzeUXQdx38+x9/L07VcXh1XWbuaj2Y8POm0580383YkjrUl/exB
+	 bpz5CmMG5/i2gqkDlSThRAH0wri6asSt4b6idOi8oG/1uq+7CireMvKKxFttOKm74XQVd
+	 yXAmTuaStiMA2dnkunZzg2226UAxpbETbETirbVRiHt+ZmSGTg7+ieQ5O39XCUvZ9Ukee
+	 zqwFE9pSVONJlHwPS4V1lUncUqfKOEv0Y5s0sbFO8krEnZpMLv69WVBjjbUL4P0ThdA==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790521525;
-	bh=jMgxNQfIWRvhe6JfcvIL7hqqrFZ07GEVu2Hl4BhD4QE=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790521557;
+	bh=Jj8GPcgKGbo+/u95NAkT3CSduXi4fXZLPntwcCxcppc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=q98KFRTSwt3fkutk8rqg00fEsrT5sr6MIHqp2HTjGgxKHPduS4lkC5Bjp/t/wMhz0
-	 TGncGafmsl2bqOoRGbBD+4sofS4oWRUU96sQ/GzFthJQNgd6pK647o2zYeTVT1rYML
-	 N9lkLexC5BKf1uJslsLeyYh9b6a3cPdUuYVyALWN3KIJJ8jeiOH8MryzZNBaGmKQqH
-	 jCowaHSCU5V4vtCY0oYisytTvD43hi9fZegDss9xkZeKvI2jd4HfjTIv1J3YF6q3wV
-	 oftyY0EQYB5RFtQA2lovQqWBHC+hKda5K87L31aTJ/pPedOsSudXAiEddDYp5/FHDj
-	 95GTgKqxFhtIw==
+	b=AfuxTqGbI/XE/u2NFx70yiRPq6p6rC1fEUosReuJJwBu6Sg+0eFliCsxqNvTX4cCR
+	 0P6G4lzOZwj4OykwwEU6YSP7y5o6fQ8N/r6kWzIfml/Il5dGitx9Ar1cqCU5m5UMA5
+	 O7vmxqliWZ5QHYQKGaZREqO56ICkSIz/kCyuYX0MAZpSF9FilHGNMfhBDNH0WLOiOo
+	 P06TmzSl5MFyVfDLJlHZXIou/X4IQ5jVwK4y4Ezgh/0bShd6rK/irVCTGjNQhvqR9q
+	 TWfGRIMUqphg99jcb7nrQ4RSMb6nRuYAuuAnD0toUhGp4FvmCRDBwSOdQocmCh8Bgn
+	 uIyBgfVt8/dow==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2D7D460657;
-	Sun, 27 Sep 2026 15:05:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DD05481016;
+	Sun, 27 Sep 2026 15:05:56 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 1C54672
- for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 15:05:23 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 912514B8
+ for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 13:36:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 022C660657
- for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 15:05:23 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 757C760624
+ for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 13:36:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1fdsddAVlb4x for <u-boot@lists.u-boot-project.org>;
- Sun, 27 Sep 2026 15:05:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E55CD60619
+ id pyZ2wXLBqibC for <u-boot@lists.u-boot-project.org>;
+ Sun, 27 Sep 2026 13:36:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org B4C106061D
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:33::18"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790521522;
- b=p9uYZR0mCVM+r/YNI0Iz9v/R4Kf58paoRXEcd55VboPSLoAFyjU0qVVxRJkOeLca5rVI
- vXUfMQp3AmDXnQnxQR8n6uRomIzXRUq763xLGepCcFWVXTPqEutIw+KPz1S9okpo7AOBX
- gUOvQ/gnxRd9MTyDOqZ6rTi71OIDV6Z2u8iKmsLaYyS136hFxfTrBhKP6Tm612FaJiDPl
- kM243xmiYECSYaivCwY0Fzj5jAyblHQqpP6G8Pi/nBP1vM1f0O34VObpQ1L3mV4KxAENt
- jPTCK4oOJkyRVUGGMKoP7Gr1lAHp78Xs1wBt93ss/M/k2OLBzjvMIDu2wjF9k5V6pHA==
+ smtp.remote-ip=165.173.180.95
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790516206;
+ b=KGKCi2qlideEvuYyzh+iL3axu8t6xeZ109IOqmWFwxdQfvFKqQPJ213flmDO59N5H+Fw
+ fxNA9zNB/kuOHdqtaMjBj1V1PG0qQ4LAvqQ3VeKY4ILItiDC6fEzgj0Q4bLr+d/4GGBf5
+ waINsxjLEEIcpNgO/7HfkJmSF2T29r/DZ0XgH7JcGknlols8KN8H1h4oKw5SPFGQgouG8
+ DOGLmtFEuhxMZBRvxuoiNTj5tl23Bn0bCnsVnJ09idSCK+GMXCrOq52xHpd4XVEabGVxJ
+ N7WYJYWM8Qfu/QKZUQ5nube3+jFfmvYeGNLza54HAlp4sPJNd75UWzsdqHqPD7jzqCg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790521522;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
- MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
- Message-ID:Subject:To:Cc:Content-Type;
- bh=jMgxNQfIWRvhe6JfcvIL7hqqrFZ07GEVu2Hl4BhD4QE=;
- b=f/ZlZ8ZtW7JVK7nx8ukTWXdmvkpzDQancu+5uBoqF2lcb5onotzJhYLto0MZf69o3wc2
- JE9DMmyspgXhdD/6ncybZNU/CUB8LNQcsVYCboNGvawj15ykpHoQ8tUDcSMXOAU5Q7uGY
- TqRRBV927ljWPBvqAQNlQfKPcgEIskgraXOsfuAfs/2zcFU2GgZB3+8J3gP/VJz51FELO
- I2f/7QqRseK6L8SWC+u9mUpY4zZoYxErwuKDVtQy+9jWXu2eW3B8VOm8sdEXFvE07jVO/
- DJFCyv0qjBRzAqJJcu1+3ZTTzviJgk5yIZi1Pm898CVFGeWuLykGiqU3qCNI0Fd+xKA==
+ c=relaxed/relaxed; t=1790516206;
+ h=Received-SPF:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Message-Id:References:
+ In-Reply-To:To:Cc:X-Mailer:Feedback-ID:X-Zoho-CM-AccountID:
+ X-ZohoMailClient;
+ bh=Jj8GPcgKGbo+/u95NAkT3CSduXi4fXZLPntwcCxcppc=;
+ b=Muee9F4kPQTo6GAoDuvcRTBGNTzIoFe26UwGX8UkHo5A+Jyp2Hmw6pGD/dttjO0dvIjN
+ PmKu6jdi7LR4zZNf3wyrz7v7yliKUopNOjZcNfixW3U+dPDuzkvLJvR9LKZ4+aJvPLstq
+ X9WOTlaLUtrcZ37FF7QucwcBRvsQh7pGg8X6S46GWGs6oNnzw+7Weg6LUEYeW0+J2CLB0
+ 1NzlTe1cdjtqct64PZMC/PKQjlmzhWvsH3kU1zjxrSDE9PEvtCUxv3TNLZq01rIO5sJQB
+ kfwUEQWlR3+N8NPy+y/5V4bje619kSew8tXpCDbHGzeg+fWEhYt2Ox5p3581a1Locqw==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org;
- dmarc=pass header.from=chromium.org; 
- dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=oXgjxmv4; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::18"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:33::18; helo=mail-ed2-x18.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=oXgjxmv4
-Received: from mail-ed2-x18.google.com (mail-ed2-x18.google.com
- [IPv6:2a00:1450:4864:33::18])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E55CD60619
- for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 15:05:21 +0000 (UTC)
-Received: by mail-ed2-x18.google.com with SMTP id
- 4fb4d7f45d1cf-6aafe2a64efso1772761a12.2
- for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 08:05:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790521519; cv=none;
- d=google.com; s=arc-20260327;
- b=UFtP/y0Jefn05ahmAQlhl9uNGI73Dbq1DmNWbBm0BDn2ZXCifL27zRBouN/XXoy/Tx
- 8P1DIV14NjWmcSaHKVLKz+4RMUj6oK7mvir3+JFPRjo00STnbWfX3YdWHcECbuH3DSQt
- 7QBns3qtuE9/TNQ9mSzDRTb3g/jhCMz/mo19Sbu7NO5LjdfrmH6RjGYWp/+DZNP19jir
- ObOMP7JK8RmhOxdJP2VJ8EAsBt4FM0YZ7oMLFg47AmQTADPQ3looZDj2mbxL92OHkD4p
- wjBBOqX6zpV1s3UAipp27So3WwJ0DeBWILQXA4ni0W8Xhf8mLHpzIaNgKE7tMixZB3xL
- TAzg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=jMgxNQfIWRvhe6JfcvIL7hqqrFZ07GEVu2Hl4BhD4QE=;
- fh=+2nv7UYwcy2tPqAlgqUhut+0T5msRumaKRll3Py55Dg=;
- b=CGit2dw3/xLt7H8D74LRoWz1PILMuf/fI3ipi4rLOsiZAtiEGoxThDslsM5c0IMjSi
- iMSriYPg5G1m8ZMqz35AfvfX5kbRN2JI3zJVJKHTobDoX5rCCKBQOsQo1ynlYkqT3AXU
- NVjInTvO6OTUAQ2oLE+FCjfP8KVT22Uv1he6DlkdjkutYKP/Z73sl1W6xmSMh1bFfquk
- rDscSOTm7/UCHaxtkF+LGg+ysLiB6ltqmyP0s3Bo2pEpwIgZCXiy5baTGiX2AVqTzEi8
- IqqDdeggW1ODqfsyZHlF/4hn1i0RTQ+/XB1EPEZs0dLSAl4NOpU45/US4Jf6D33upjPg
- wp6w==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1790521519; x=1791126319;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=jMgxNQfIWRvhe6JfcvIL7hqqrFZ07GEVu2Hl4BhD4QE=;
- b=oXgjxmv4Z6bvXYaie8sqk3t3Jn5v7oJHVcBqZrVS1VGhFoLYFHpisXkSOK0s4AsKXs
- OlPtMT7HOQpv3tQSYc81+4jzOj+nNSDe3IKmlQHT9W3O90lrg8JgVN10R+4cCIPc+oTx
- 8VFFDy99lQdb23lMamOmo4XD14ad1XFdGGeTc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790521519; x=1791126319;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=jMgxNQfIWRvhe6JfcvIL7hqqrFZ07GEVu2Hl4BhD4QE=;
- b=L0Wf/JFsEw5ZaF7sdrwPdYAZSYRfatXQFqzzpuqzsgpmfWAMkpwhPMPuDNaVenZZQl
- IXOE+mIt3KhjenGUhSCE5a7qIXGQtSQ180QmnpPZN9+mmV1S8klGyKvm4tkCTLlm7yD4
- hJcG+LCHI282/g3jiJ1j+lMvRx494owR0niQvm8H6OhiAc5YKZvWHKsGoAMox1OFFiyv
- 8lovklIImYye7NBm4Bm2LqPZ7DIMyI+4UDtWBwwh24yqNakRbqMYE3UWvmUp+Aj8eFVL
- kfI/KZhkbl5qcj3PWSJOrOWVX8+0axZ50NXww0SsDYNgkqmbf02RfYnHIq/IZkTLHOIW
- LjKA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwMe2fKi51Wgdf/JJ4jxWNxUYIYmEXIOoHVKg5ZXHUcAesHhuSI4/YdGX+6VKvFRXB7TzTf+HM=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYK85tUPyat6yM6uGVTk39uBoI/BpdmD7gTI3chzFe6P1JrpAv/v
- pFgsEMzwiMdtFKVmWyr0qEaKPA2Dg6ADbmQct/6N25bQq4i71UCyJV4gc79hNkGVikxKBZfknSo
- EuYB5f5O2QNY2EUeRzxgrb19It60F1UzFNLaddIY+
-X-Gm-Gg: AYBFou24ou1fd9VeZIbgZnstJnGnIxfYDOD6cJBsTnBA5r1sFlBz/Azzx79WocX0Nv7
- ArGJMA4kvM7PfsmahQrETv5QO/CFRDQt7WxVzYwCUFZZvSNy0GmEFA1AZ5KpsAVkMNurjVZBNp4
- r5BLKfT0eZBajFrnbEVgIR4yzMgrDAZyxD4a83SA55tfI3x829HEtfSGFL1DELOwhC8pgC6IVee
- KSQajUbQWnXZ5DhdgRdu/O5mep2Ckqvt4cauXVGJdgIsMXMXdQQTxmPlRHyglgIT3sPX7ygrdiC
- GM+xmRDv8yc/dbuwA71UIXxRuF9VVKwh1y4EWFy5869acz7v/5gR4pAIX9HPko4U
-X-Received: by 2002:a05:6402:13ca:b0:6ab:eb3e:ef50 with SMTP id
- 4fb4d7f45d1cf-6abeb3ef714mr2089558a12.36.1790521519365; Sun, 27 Sep 2026
- 08:05:19 -0700 (PDT)
+ dmarc=pass header.from=zohomail.com; 
+ dkim=pass header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
+ header.a=rsa-sha256 header.s=zm2022 header.b=CVF+m3ba; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.95
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.95;
+ helo=sender6-pp-o95.zoho.com; envelope-from=zhuxu_ran@zohomail.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=zohomail.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
+ header.a=rsa-sha256 header.s=zm2022 header.b=CVF+m3ba
+Received: from sender6-pp-o95.zoho.com (sender6-pp-o95.zoho.com
+ [165.173.180.95])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B4C106061D
+ for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 13:36:46 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1790516154; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=UPSqOvRIhf/kzuCXISv0HxbGqRqu6uWUO66R3dylFLebdgbefVGiCYJJlLgyYiKEnw1eH/BMNuq8t3AaZlDjjHnFQvd3k9DLQXLGVJeqqQqwZBhsPBJ74pX3nJPWfrF6CoiN5eETODBLgarlWsWfeqDGIB0hAzDLX7wUnN3KnhU=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1790516154;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=Jj8GPcgKGbo+/u95NAkT3CSduXi4fXZLPntwcCxcppc=; 
+ b=RoV7FDnOlnZhQ6jliNBm42p90CpYt2Rw28+J0x3OfH72R81eGvw5CYsm+XDostIWa53LihKVSNzoOw4QMNlnglviSvFG7kq3euGrrFxLK+ucJFiY5Bls1+3vX2KwXb8kXhD13fLxEMl/aG3BGV9pRZlIznT9A9ve5blIQwJEke0=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=zohomail.com;
+ spf=pass  smtp.mailfrom=zhuxu_ran@zohomail.com;
+ dmarc=pass header.from=<zhuxu_ran@zohomail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1790516154; 
+ s=zm2022; d=zohomail.com; i=zhuxu_ran@zohomail.com;
+ h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:In-Reply-To:To:To:Cc:Cc:Feedback-ID:Reply-To;
+ bh=Jj8GPcgKGbo+/u95NAkT3CSduXi4fXZLPntwcCxcppc=;
+ b=CVF+m3ba4io8QVZ4h/TY7X6gFwW7p0vRQj1qcxgxec83ivrzvESWq2BGPADpl3Ze
+ tBkdCeI+zGyrzwAWED52CcNyla1TcMruRxp4iu9ukE92rdi7/m5mtayFwEGQznaNYwO
+ /f76z35qgIT4YNF3TAC/h7xQ8NTGYdduzhzBIdiY=
+Received: by smtp.zohomail.com with SMTPS id 1790516153171391.58695496573876; 
+ Sun, 27 Sep 2026 06:35:53 -0700 (PDT)
+From: Zhuxu Ran <zhuxu_ran@zohomail.com>
+Date: Sun, 27 Sep 2026 19:45:57 +0800
+Subject: [PATCH v5 07/10] riscv: licheerv_nano: Use upstream devicetree
 MIME-Version: 1.0
-References: <20260925105432.0F27E68C4E@verein.lst.de>
- <20260925105624.AADAE68D09@verein.lst.de>
-In-Reply-To: <20260925105624.AADAE68D09@verein.lst.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 27 Sep 2026 09:05:06 -0600
-X-Gm-Features: AclHuK9SKY1vfn5WIGJE86ikNfglsJo00zCFz2_xEPjy-0ecykWwC6Pyce079fA
-Message-ID: <CAFLszTj=sHviidk6vVvbi_vSofzKpQJAhP2GjsxLyvO7UDvtaw@mail.gmail.com>
-Subject: Re: [PATCH 5/8] gpio: add support for RPi5 RP1 chip GPIO
-To: duwe@lst.de
-Cc: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Heiko Schocher <hs@nabladev.com>, "Lucien.Jheng" <lucienzx159@gmail.com>, 
- Martin Schwan <m.schwan@phytec.de>, Rasmus Villemoes <ravi@prevas.dk>, 
- =?UTF-8?Q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>, 
- Anders Roxell <anders.roxell@linaro.org>, Michal Simek <michal.simek@amd.com>, 
- Peter Korsgaard <peter@korsgaard.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>, Peng Fan <peng.fan@nxp.com>, 
- Yegor Yefremov <yegorslists@googlemail.com>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>, 
- Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, u-boot@lists.denx.de, 
- u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260927-milkv-duo-upstream-dts-v5-7-f95d9173b7e3@zohomail.com>
+References: <20260927-milkv-duo-upstream-dts-v5-0-7f64983e59e1@zohomail.com>
+In-Reply-To: <20260927-milkv-duo-upstream-dts-v5-0-7f64983e59e1@zohomail.com>
+To: u-boot@lists.u-boot-project.org, Chao Wei <chao.wei@sophgo.com>, 
+ Chen Wang <unicorn_wang@outlook.com>, Yao Zi <me@ziyao.cc>
+Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Zhuxu Ran <zhuxu_ran@zohomail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Hiago De Franco <hfranco@baylibre.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Inochi Amaoto <inochiama@gmail.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, 
+ Chen-Yu Yeh <chenyou910331@gmail.com>, Chen Wang <chen.wang@linux.dev>, 
+ Kongyang Liu <seashell11234455@gmail.com>, 
+ Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>, 
+ Thomas Bonnefille <thomas.bonnefille@bootlin.com>, 
+ Guodong Xu <guodong@riscstar.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Johan Jonker <jbx6244@gmail.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Alexander Koch <akoch@initse.com>, Andreas Schwab <schwab@suse.de>, 
+ Junhui Liu <junhui.liu@pigmoral.tech>, Marek Vasut <marex@nabladev.com>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Andrei Lalaev <andrey.lalaev@gmail.com>
+X-Mailer: b4 0.15.2
+Feedback-ID: zu080112273e1a6bc23bc77684d1fddfcb00009359b88abf67c97de6508f0a246c478cf164167779e3d74777:ZohoMail
+X-Zoho-CM-AccountID: 475a6e82b6074d1cdb8624e432e1257a5f0812bb6089f487c4846d9f660201e2
+X-ZohoMailClient: External
+X-Mailman-Approved-At: Sun, 27 Sep 2026 15:05:55 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -207,109 +175,31 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Torsten,
+Switch LicheeRV Nano to the upstream SG2002 devicetree by enabling
+CONFIG_OF_UPSTREAM and selecting sophgo/sg2002-licheerv-nano-b.
 
-On 2026-09-25T10:54:32, Torsten Duwe <duwe@lst.de> wrote:
-> gpio: add support for RPi5 RP1 chip GPIO
->
-> RP1 GPIO driver, derived from Linux drivers/pinctrl/pinctrl-rp1.c;
-> mainly stripped the pins' alternate function handling and fine-grained
-> driving current controls.
->
-> Signed-off-by: Torsten Duwe <duwe@suse.de>
-> Co-authored-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
->
-> configs/rpi_arm64_defconfig |   1 +
->  drivers/gpio/Kconfig        |   7 +
->  drivers/gpio/Makefile       |   1 +
->  drivers/gpio/rp1_gpio.c     | 374 ++++++++++++++++++++++++++++++++++++++++++
->  4 files changed, 383 insertions(+)
+The SG2002 clock and MMC compatible strings used by the upstream
+devicetree are now supported by the existing U-Boot drivers.
 
-> diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-> @@ -413,6 +413,13 @@ config RCAR_GPIO
-> +config RP1_GPIO
-> +     bool "Raspberry PR1 GPIO driver"
-> +     help
-> +       This driver supports the GPIO banks on Raspberry RP1 chip.
-> +       Raspberry PI5 has an external chip RP1 installed, which
-> +       provides it's own GPIO controller.
-> +
+Signed-off-by: Zhuxu Ran <zhuxu_ran@zohomail.com>
+---
+ configs/sipeed_licheerv_nano_defconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Two typos in the help text: 'Raspberry PR1' should be 'Raspberry RP1',
-and 'it's own' should be 'its own'. Please also add 'depends on
-DM_GPIO' as the neighbouring GPIO entries do - the driver will not
-build without it.
+diff --git a/configs/sipeed_licheerv_nano_defconfig b/configs/sipeed_licheerv_nano_defconfig
+index 9aa3ede10c5..21b8fece201 100644
+--- a/configs/sipeed_licheerv_nano_defconfig
++++ b/configs/sipeed_licheerv_nano_defconfig
+@@ -4,7 +4,8 @@ CONFIG_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x82300000
+-CONFIG_DEFAULT_DEVICE_TREE="sg2002-licheerv-nano-b"
++CONFIG_DEFAULT_DEVICE_TREE="sophgo/sg2002-licheerv-nano-b"
++CONFIG_OF_UPSTREAM=y
+ CONFIG_SYS_LOAD_ADDR=0x80080000
+ CONFIG_IDENT_STRING="licheerv_nano"
+ CONFIG_TARGET_LICHEERV_NANO=y
 
-> diff --git a/drivers/gpio/rp1_gpio.c b/drivers/gpio/rp1_gpio.c
-> @@ -0,0 +1,374 @@
-> +const struct rp1_iobank_desc rp1_iobanks[RP1_NUM_BANKS] = {
-> +     /*         gpio   inte    ints     rio    pads */
-> +     {  0, 28, 0x0000, 0x011c, 0x0124, 0x0000, 0x0004 },
-> +     { 28,  6, 0x4000, 0x411c, 0x4124, 0x4000, 0x4004 },
-> +     { 34, 20, 0x8000, 0x811c, 0x8124, 0x8000, 0x8004 },
-> +};
-
-Please make this 'static const' - it is only used within this translation unit.
-
-> diff --git a/drivers/gpio/rp1_gpio.c b/drivers/gpio/rp1_gpio.c
-> @@ -0,0 +1,374 @@
-> +static int rp1_gpio_set(struct udevice *dev, unsigned int offset, int value)
-> +{
-> +     struct rp1_pin_info *pin = rp1_get_pin(dev, offset);
-> +
-> +     if (pin)
-> +             rp1_set_value(pin, value);
-> +
-> +     return 0;
-> +}
-
-Silently returning 0 on a bad offset is inconsistent with the
-direction_input/direction_output ops, which return -EINVAL. Please
-return -EINVAL here too.
-
-> diff --git a/drivers/gpio/rp1_gpio.c b/drivers/gpio/rp1_gpio.c
-> @@ -0,0 +1,374 @@
-> +static int rp1_gpio_get_direction(struct udevice *dev, unsigned int offset)
-> +{
-> +     struct rp1_pin_info *pin = rp1_get_pin(dev, offset);
-> +     u32 fsel;
-> +
-> +     if (!pin)
-> +             return -EINVAL;
-> +
-> +     fsel = rp1_get_fsel(pin);
-> +     if (fsel != RP1_FSEL_GPIO)
-> +             return -EINVAL;
-> +
-> +     return (rp1_get_dir(pin) == RP1_DIR_OUTPUT) ?
-> +                     GPIOF_OUTPUT :
-> +                     GPIOF_INPUT;
-> +}
-
-This is wired up as .get_function, so it must return one of the
-GPIOF_* values, not an errno. When fsel != RP1_FSEL_GPIO the pin is in
-an alternate function - please return GPIOF_FUNC to match
-intel_gpio/at91_gpio/stm32_gpio. Otherwise 'gpio status' will report a
-stray error for every non-GPIO pin.
-
-> diff --git a/drivers/gpio/rp1_gpio.c b/drivers/gpio/rp1_gpio.c
-> @@ -0,0 +1,374 @@
-> +struct rp1_pin_info {
-> +     u8 num;
-> +     u8 bank;
-> +     u8 offset;
-> +     u8 fsel;
-> +
-> +     void __iomem *gpio;
-> +     void __iomem *rio;
-> +     void __iomem *inte;
-> +     void __iomem *ints;
-> +     void __iomem *pad;
-> +};
-
-num, fsel, inte and ints are populated in probe but never read - the
-IRQ paths from the Linux driver were dropped. How about dropping the
-dead fields?
-
-Regards,
-Simon
+-- 
+2.55.0
