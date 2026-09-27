@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 433C8C9830E
-	for <u-boot@archiver.kernel.org>; Sun, 27 Sep 2026 13:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99BBBC98324
+	for <u-boot@archiver.kernel.org>; Sun, 27 Sep 2026 13:17:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 783616062D;
-	Sun, 27 Sep 2026 13:17:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 45ABD4056E;
+	Sun, 27 Sep 2026 13:17:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XKyLfo9l5Vnr; Sun, 27 Sep 2026 13:17:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org B0F1E60621
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790515039;
-	b=eQVNRF1U/zJSOjB7ogIW/8fephIRIgNFHciFeb/YVjrf6D2cvkIRF89t78WSCmEfnnpD
-	 oTgALcBd9h9BJj+5OJNujBhuTb/h/HhO/hAlvpzXVIFaokzk2G/Th7y6zynsK6drqALE9
-	 4YPE7k9kgrrgGUC8cWK7hM6uMlcRZj4ozgzcJ6/4aF3tyQVnmHk/IyHhWSs707zRI1Gf4
-	 4dvvk46d7FPjhHcSbtlmMV0gDybO1Q8DTKmjvIjhcBj4kAcAi3z/xUJFpXVUQ5gmlYl9d
-	 iJv6McraJp/2kop8pZTAEAyHLoLZ0HUKPLIyUaCxd64wsPAeXNzVsveVLmk0l7DEozw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ghrYN03FIMip; Sun, 27 Sep 2026 13:17:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 889E340509
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790515041;
+	b=RmGuk7txi4cr1uwTe24dPfnP2U7OoBC2PcN/hBRF6FTTii1P1lO9Cx9sALTMNdWiAzUP
+	 i6bjG5PU+wJsAmbI7/rGT6F0BVtflpoO2dSWZvvqzqyI/Geds3uyjZqrt9b9vmKyxq/eE
+	 3IcyiN9gJIepV/UgCUpsgBV45vsH6dtejvaAIa8QoJ7wTzCq4UWfi1AWIxqu9A/QvtjLY
+	 CyWzmc8DTqwVO2/M5ILjHhCGII71Jq05Y0g7trpCW1DoXqHj33y74niIcytpEG174qb/u
+	 DWlOywxgEx9jPiX3ADQ7sPFyvktq4wKcKYPRjq1KyaUwqHlrjNMhfjSFNgq2JfhRF+w==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790515039;
+	c=relaxed/relaxed; t=1790515041;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -32,107 +32,106 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Ucz+tGyex1V95dwXw9xH2Nr3mTdb9dXQCR6eNtR4PPg=;
-	b=FfzN17x96TwRjaqhp2CLU4ohrnOM9U+NRwR0zNjQejtpe1eAuJPRe7ReeIqkC6CKEC08
-	 KVDiTT6ryWy+ktchlCpfJkLvLzM2agTD4xrcvJCp3zkSyxiuNpqvv+kb0mLKyy1qLvrUV
-	 zaSUJOR+qJdi67UCsMfKdF6VeUy/3qOBuEN8H0xjVpbk4lRQEkJELsp/mdpRjbsnq6/VO
-	 GXJYiVEbLk+d+V+QPMnpwso1+RX+Jj+W2njML2dK//ScWrG5hnI+mXz8zesYUrXEdzdKe
-	 Ay9gu2dfeHmI8Ol7NJfFyKLZU7jiTNWcyjr2qXO9oCnMZfe97gayS2rswfN+zpZKgEQ==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=D7y9K9nsKl/qbMyMRX7J16nMx7oB0CNqcR/A6XEWjio=;
+	b=pLd9w6VPKhiTh9ZPIVYGPxwx/XTghKPPlcMPNdecphaiUUqiGq0n6zlfUJimvzUTFEgG
+	 uLPmO3oUWyzA/70+gtuxqw6DId8wp8n6IOYDgDCxPoWxQebgta+bH0C+DEiPJNLPTmsxT
+	 DMnh6A7GapzbhPiUuCNwxFS6eEO78ll/aCq2NApD2TBdU1IQtVqMlJuKUjx/g5zePnx1p
+	 F+hXqLcfzM65lXsl6KZBMBIxSp7rYrY8J4CyYt/eKoJcywMBghR+C9lXdJfk+zeRVLrzm
+	 EhN/fgkR33dH5FXEzl5DAFxqkec9xSojYJj8fNLuERNQhkYTfuwRY9jekLij4Vqpzdw==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790515039;
-	bh=Ucz+tGyex1V95dwXw9xH2Nr3mTdb9dXQCR6eNtR4PPg=;
+	d=lists.u-boot-project.org; s=default; t=1790515041;
+	bh=D7y9K9nsKl/qbMyMRX7J16nMx7oB0CNqcR/A6XEWjio=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=SAzG8jjNU+NOtjgqX8qnh3VWSDJpyFpG2oSiAPs/OO48QmFARJ/bS1rSRDljYTdss
-	 JVUPR0JWNJaBduuT2R01ZPCIFp5S+B82FoOOOFoLUyyv7rfKXJ/s4qwlYQiw0wA5Tp
-	 Oqh2o87Onp4hOp6meOuRhwEwH3nHhjiDtKRYaeGieGay4Qyy0vbg4h7x2p9VCXzNrl
-	 YnZUslhIpAuewSTLiYKG7Vu0cgUDVz4znZuKpWLc//cioCPP1Ajoxqgs+yH1ZR9ETg
-	 yA76BVvAAinQAaaXe/yeDbH8i/nuks/OkYlL/+UMuLxppDUJB3UDerAmGusFr+3pDI
-	 gjVSLFwih3lNg==
+	b=tUNKh88oEcN0QWu848ZqOGtlK0/+aL8oJ8+NrB8jcd2KIBmCnc1Z/BiChRh5x4a4/
+	 yX/qg6pCyE2HbDf57HqCpKK/i/ZWA/h4Vq7XyNkNjuLfxCNSvuUWFYABBQQ5VudzsK
+	 //jW58LVwMxaSIHoz2NnaU0WmUXNLNtn5wS/Qqh+F9T3XXBhmunrtZ4UbAPKQ2aI5z
+	 QorLbXanB8cFzS9L+PaTj4K5mWY29vmIDZRhUAueC9wZCoBD2Ny8wAmIOPIuKYVD5f
+	 VDEiW5b08bWbaCrP6WhXmtjKHgOnJ9IRobaWezxKGRP9nVmNziPgZX1ZtGaO3hyLT8
+	 CBUBVIjraX1pA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B0F1E60621;
-	Sun, 27 Sep 2026 13:17:19 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1A11172
- for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 12:11:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 889E340509;
+	Sun, 27 Sep 2026 13:17:21 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 23263329
+ for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 12:12:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0B3C4400AD
- for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 12:11:37 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 08F0F400AD
+ for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 12:12:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2R13HawVIrZl for <u-boot@lists.u-boot-project.org>;
- Sun, 27 Sep 2026 12:11:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 4300C40099
+ id H8rZb7cH8zGD for <u-boot@lists.u-boot-project.org>;
+ Sun, 27 Sep 2026 12:12:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 274CE40099
 Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=165.173.180.95
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790511096;
- b=bdodC0oUi/mrZF1KxEnWN6NkH8f4yI1jqRkWNwH6L9IA91JqZaDIVX0PcuHzH7LVlR5J
- k1TpA2uRvar6LGq/5ZLpUpn/vMbNld8KmoV8aKqzYR1e5CqEVV2s5BoQMar9B4Hc+ml5X
- vcmoCum4R07az9x7vAkfa6ZU9vQlacPd7Yc8Bjjc2r8eGiAIHq3n4IS+7s4ZI6WExt+Ef
- PV/OkTAbfnYDTAe2KArSS3ajQUmia93aSdmVuYL5G3dWtPvm8uldaozq+F1+4IrXpFMGz
- BefRC4n1CT9dhHTqFw63qRrWmbIXCzPiCWV3YfWX0TdwiP43aX70FrPLHEqnFJr7dWQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790511166;
+ b=fPaWzj0d9CuPmn/C3x9BJau/PzYxr5XDEdB5KLLgrlYe4pdnKINXQ4JCl/kGlFT+npLO
+ ZW/twhmRnnHDNlTWd29aNPFkdyvDBmnWg0sv6kr3RbA4pX3WuzIXF39wL9xzDlh5vLeyU
+ Ox+XNE03x6MHFyp9jcp9EsvSHnrLzN6p9xyHJdu7Tkyl737iTyjmHRuLSwxspIYtR43R8
+ zNZahLDHMft3S1tsv/KdJYADrLu3A81ypE6q0dv8NHpWcRe3upj+bOPMPy0SYrkr25Meo
+ F8zE0lneq9ssuBO4DD7G3o6sGGZmtLs4Bvof7OlgozDcCEbuP1kZbLzWLdmYxaFQZlA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790511096;
+ c=relaxed/relaxed; t=1790511166;
  h=Received-SPF:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
  Content-Type:Content-Transfer-Encoding:Message-Id:References:
  In-Reply-To:To:Cc:X-Mailer:Feedback-ID:X-Zoho-CM-AccountID:
  X-ZohoMailClient;
- bh=Ucz+tGyex1V95dwXw9xH2Nr3mTdb9dXQCR6eNtR4PPg=;
- b=nAWFoJxjoyyp2NgcYoICjb5+s775AZ6eI6LYaw64i+BsNzwgShvJB1t73ZTYv4A6Etix
- mhS8+Eq1VSgLnoMQV1VzYJ3r3WP9xC6zrIqGxy0yNme3BraJpC20k5DPiUgQXUQNWpGNc
- aVApmjWQLrNh2WBIE+t3uw9b1pRjtcE1HAV+h96Egkgh5I2bheLhzd+QD31bljwRVZfTi
- 97gNEX/MD0eTzinKegURFI1Wm7mR5pP3GnmLJW+m3xwUVOU+EyzDgfjYUfemxkEjiFELq
- WQnegsNMzgYp1Km94KfYyFDt2x7o5ufFHiuZWeekcF5cWxT/z741yIFxCOz8I+cSc9w==
+ bh=D7y9K9nsKl/qbMyMRX7J16nMx7oB0CNqcR/A6XEWjio=;
+ b=tO+gj8T4Ir1+3L7VIF9p5Z+sEDltyyUeBjCBzyVlshmXc5UpAqaCqVOCEA53Fa2tqg1C
+ f2CS8B/UvShJqTj8SRtO/qOS5XLDEVFb6tmF/sYMrGXoiRt2mA3nLd7H9hMnUVem4omwt
+ 3YyiX0eE47MRAc+9Fzl/ekqjFdxRQ4v/kW2Kja5/P722ZJM0hKwS7BHzUjJF9krCxRYmS
+ neqiMLQ84wMbgWNU0b4dIrAIKwJKwlqeDtMBjj4GPGTYr84LpM+GKtvYT07pEuGnRHizT
+ mULa0yW7wNek5hOkmZyUxkS5wQaHcHjKeUXniZh84WUazzd8iv7yT7l5Ql3bKQrGG6Q==
 ARC-Authentication-Results: i=2; smtp2.osuosl.org;
  dmarc=pass header.from=zohomail.com; 
  dkim=pass header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
- header.a=rsa-sha256 header.s=zm2022 header.b="PQ/l5etR"; 
+ header.a=rsa-sha256 header.s=zm2022 header.b=Sm54zADk; 
  arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.95
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.95;
  helo=sender6-pp-o95.zoho.com; envelope-from=zhuxu_ran@zohomail.com;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=zohomail.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
- header.a=rsa-sha256 header.s=zm2022 header.b=PQ/l5etR
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
+ header.a=rsa-sha256 header.s=zm2022 header.b=Sm54zADk
 Received: from sender6-pp-o95.zoho.com (sender6-pp-o95.zoho.com
  [165.173.180.95])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4300C40099
- for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 12:11:35 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1790510971; cv=none; 
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 274CE40099
+ for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 12:12:46 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1790510983; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=FVc+U/ML9QXPWdxgNUP/B+YhJDPX6V7phkN3zW7WooMcu35y8dOKCK14eC0DPJGRw0VlMWFGGaMsucfdF4Jy/ZHAgsrpjHKEQYuT7zD4duSAzQnA1WXgdqgLohFqVvfiTj8SbgKb+kdbcgri4Twv3AkP5VOJDKrpIvuwc1P/tQM=
+ b=fwWurCmjlDaRWp8bxVEnOfUNvI/+emRh4896xB5r4VzRTvfxYmbyaWSXPdsOUZFOjkIvBzaJ74WfzwgnG0f23+AW2wuHgBNXhczw6wfym2iZfW6qPI55RHKorHbPHBdtSVfOaJ9E/nziwuof5F5jLQZqh5FMyKhwcRAmKhny+HI=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1790510971;
+ s=zohoarc; t=1790510983;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=Ucz+tGyex1V95dwXw9xH2Nr3mTdb9dXQCR6eNtR4PPg=; 
- b=WGXDgLjBv+wN8+UeEHumxkWKELgcI0gjIhBecK24I6UfRmgUEpu9SP0mr6/1r0BNEs39W2dYBTqxKvVlSX2LBs3B/iq/r9+P4R+BT71c06Bvt2JclbKe0Ukja2naaQqVXHyXmj7zlUBy1bmW8BpmHDYbU6bZVKqrRE6bxqNp8kI=
+ bh=D7y9K9nsKl/qbMyMRX7J16nMx7oB0CNqcR/A6XEWjio=; 
+ b=n0dtQAIauYoqJ6JRDPKItSl0QShPhjyb72YbfF4wH7RqkwGKOSBUAiw8UroxnqZwe2D08wUujkQgTbEzuV3deJzSB1AcJLjZQj5fwGfMX/22wBDbFoUMjiIGce2ZRp9hpv70cos6nkrc6oMmi3RymBEvIt5UgAa/l9Z+E7fePPg=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=zohomail.com;
  spf=pass  smtp.mailfrom=zhuxu_ran@zohomail.com;
  dmarc=pass header.from=<zhuxu_ran@zohomail.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1790510971; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1790510983; 
  s=zm2022; d=zohomail.com; i=zhuxu_ran@zohomail.com;
  h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:In-Reply-To:To:To:Cc:Cc:Feedback-ID:Reply-To;
- bh=Ucz+tGyex1V95dwXw9xH2Nr3mTdb9dXQCR6eNtR4PPg=;
- b=PQ/l5etRoQq5hkc9Tv6B1IAHwL2DDxFiYMBIztZ8Ioo2F+/nWuFQJpajUYZapGmg
- j8mAWnYXh/43nv1cb897njSZna7ZV2v3cbgp9op5PygBvWUOSMEUpatvxBzsvn/AjUY
- cS3Mnjp1wUu0WGa3FFw3LJSirsXoOQVRlbO9hn0Y=
-Received: by smtp.zohomail.com with SMTPS id 179051097116987.65292598545079;
- Sun, 27 Sep 2026 05:09:31 -0700 (PDT)
+ bh=D7y9K9nsKl/qbMyMRX7J16nMx7oB0CNqcR/A6XEWjio=;
+ b=Sm54zADkOoITUeAWmplO770cj7JDhwgz+5zZsIkUsPmHr3zW5qVVrZ5TRHUQWnlK
+ GHFSR8/TZyS1PnHHLU4TQWWDUYYKUspgWWSuTXb69GMZd8I1CeT450xJSjhc67J2ATU
+ NvQ+JR+1usSCZrExtyFYTIcymA5lTUuimbZlJDJc=
+Received: by smtp.zohomail.com with SMTPS id 1790510982140979.0999558039225;
+ Sun, 27 Sep 2026 05:09:42 -0700 (PDT)
 From: Zhuxu Ran <zhuxu_ran@zohomail.com>
-Date: Sun, 27 Sep 2026 20:08:56 +0800
-Subject: [PATCH v5 01/10] clk: sophgo: cv1800b: Add SoC-specific compatible
- strings
+Date: Sun, 27 Sep 2026 20:08:57 +0800
+Subject: [PATCH v5 02/10] mmc: cv1800b: Add SG2002 compatible string
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260927-milkv-duo-upstream-dts-v5-1-7f64983e59e1@zohomail.com>
+Message-Id: <20260927-milkv-duo-upstream-dts-v5-2-7f64983e59e1@zohomail.com>
 References: <20260927-milkv-duo-upstream-dts-v5-0-7f64983e59e1@zohomail.com>
 In-Reply-To: <20260927-milkv-duo-upstream-dts-v5-0-7f64983e59e1@zohomail.com>
 To: u-boot@lists.u-boot-project.org, Chao Wei <chao.wei@sophgo.com>, 
@@ -159,7 +158,7 @@ Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Andrei Lalaev <andrey.lalaev@gmail.com>
 X-Mailer: b4 0.15.2
-Feedback-ID: zu080112273d34d03ca1211d0952c7466a000039353e6716e2c2e070ffecdbc88353833343c21145c40a828a:ZohoMail
+Feedback-ID: zu080112278f7dcca89cebd716f279df53000099266903d226153d6fad23e64e356a08773eba87692581d345:ZohoMail
 X-Zoho-CM-AccountID: 475a6e82b6074d1cdb8624e432e1257a5f0812bb6089f487c4846d9f660201e2
 X-ZohoMailClient: External
 X-Mailman-Approved-At: Sun, 27 Sep 2026 13:17:14 +0000
@@ -176,28 +175,26 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The upstream CV1800B and SG2002 devicetrees use
-"sophgo,cv1800b-clk" and "sophgo,sg2002-clk" respectively.
+The upstream SG2002 devicetree uses "sophgo,sg2002-dwcmshc"
+for the SDHCI controller.
 
-Add both compatible strings to the existing CV1800B clock driver.
+Add the compatible string to the existing CV1800B SDHCI driver.
 
-Reviewed-by: Leo Yu-Chi Liang <leo.liang@sifive.com>
 Signed-off-by: Zhuxu Ran <zhuxu_ran@zohomail.com>
 ---
- drivers/clk/sophgo/clk-cv1800b.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/mmc/cv1800b_sdhci.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/clk/sophgo/clk-cv1800b.c b/drivers/clk/sophgo/clk-cv1800b.c
-index 248a69321fc..57051c1ec0a 100644
---- a/drivers/clk/sophgo/clk-cv1800b.c
-+++ b/drivers/clk/sophgo/clk-cv1800b.c
-@@ -744,6 +744,8 @@ const struct clk_ops cv1800b_clk_ops = {
+diff --git a/drivers/mmc/cv1800b_sdhci.c b/drivers/mmc/cv1800b_sdhci.c
+index b756649f90f..f8d94232170 100644
+--- a/drivers/mmc/cv1800b_sdhci.c
++++ b/drivers/mmc/cv1800b_sdhci.c
+@@ -110,6 +110,7 @@ static int cv1800b_sdhci_probe(struct udevice *dev)
  
- static const struct udevice_id cv1800b_clk_of_match[] = {
- 	{ .compatible = "sophgo,cv1800-clk" },
-+	{ .compatible = "sophgo,cv1800b-clk" },
-+	{ .compatible = "sophgo,sg2002-clk" },
- 	{ },
+ static const struct udevice_id cv1800b_sdhci_match[] = {
+ 	{ .compatible = "sophgo,cv1800b-dwcmshc" },
++	{ .compatible = "sophgo,sg2002-dwcmshc" },
+ 	{ }
  };
  
 
