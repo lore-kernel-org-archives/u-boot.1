@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32EE4C98332
-	for <u-boot@archiver.kernel.org>; Sun, 27 Sep 2026 15:01:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B487C98332
+	for <u-boot@archiver.kernel.org>; Sun, 27 Sep 2026 15:02:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D171680E45;
-	Sun, 27 Sep 2026 15:01:51 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7337D60673;
+	Sun, 27 Sep 2026 15:02:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5P79TRCuJ8Vh; Sun, 27 Sep 2026 15:01:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0ED0080FDE
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790521311;
-	b=WJ0huigBWLX8yL+eXiwFMWN6dB1Sx9J1IAW8j7+X1wxktsBBC+Yc61kr5dNBqWYs/trK
-	 S2ve8fujt+XOTJfpskOQIBuCKt5IUB/4ACBqdhckZjd65Blprm1cQjJUu1NeFulH6ZdWD
-	 9ya6sh3kjR6KMPDBKlXfat6ntYNFV4b6M2LhSRj9NVceokcrgdqZtcYAQveYYi04G8qZo
-	 JjIy8rstHLgJat5QfTHmRH5kacfNr263hGgiJGSq60FlJXpBPUoQnqW3LBrHygP3uFD5I
-	 jFsxhsvWmS4/lI6tZVH3/OpQdP3v1dMv8TCK//p3HwmX3+LRnzfVc6eayr8jztbJNPQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jLwai41fWIPK; Sun, 27 Sep 2026 15:02:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 97AA960633
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790521347;
+	b=NsVaYMCbsugN3NdqPqMO/f0jNAR4ehhN/oIQfrXcfSzLAyQlfACRF5whhMMnc+1cDSak
+	 Sc3wjOyi/7BSPQcD17WnKfIhoprD9EGndjFbGJ7YBrtAn/irTaGdGGIQ2N8yMoO7YyPH2
+	 fPasfbzfn9Kodp4MMShD4jYfk5lTsm+yuNs2fMxQk5WkpmTRJqXU0ur5tPVWZTnPnQmrD
+	 7uSfl2yNfzUWK/FMmwLYjqyyj6GQOzkbfgRh5UJGSN5FsuFwFkppNs/lTrHkRYmyqfyEU
+	 v+fyVIWKQqY99tkzX9JP+Hfsr3/TkQ+W2r14lnZCncL/fZFPg9kJfqvzIR9z28WaYNg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790521311;
+	c=relaxed/relaxed; t=1790521347;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,146 +32,147 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=G/Uz6b3caMZgbWDrSwgmR/aikf/Rz7fFAhnr+NvFAV4=;
-	b=HjticpyIcKAg2iAIa7/idU9qsM9UDkwB8KHfre+k37r0W4b0AW+Pn4U+sRUX5vExRiew
-	 hrfq2TPaFT1tmHkWJacYShX001uVSEDsucj6cLikOuRcZfbudyQAZGpgWlq3EW+O6a4YY
-	 ZlcM3fxR3FEtKwd78hZ4reSFvnjyYkPtmTs8Z8tc8w9lscKENL1x1ZUUmX/Q4pgCyL+et
-	 SWnFjGfk21z2Ok1SNe1hRWji1lu0obTRZdjloPaOtDqiWvfYlqoip3EAQGYoHEQfTxhkP
-	 pRB35HKdN/u6oYTRHoO/hlPGNVRq65RTtEdL9+qPCSJFzijhX8Eimr3ItUgqKJ0Xulg==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=IDybEWpfYkwmsyUhJUTx5pCtZuOZj7UTkjzX8yUrrWg=;
+	b=oUhUQAsIHgQbRd+hpnLewsShydFD/Eea6osFaHeIZjvZzHM/3SxG2Lt20gu9vL2kgbUF
+	 onkWysG/rJnEnJyl7H8HXLVV6lYNV4vhRl2op5QEP4WIlkNT1kA2VSJrXrXSRV+R/T8Vb
+	 2gLK+NczaffApTN2uoLgmxhYXzWvKQMcNONV3V/TZ0xBBdGpe6rKEQDy/5F764xwkkPBp
+	 u0Ggp9WqoiRwS8RZxX3CNhS/waz/duY/Tc1U5otOVPZBYhMT/cSB7zteLbBDzeJnfGpSP
+	 khpLJ0ER4oWV4F22Vr9vuUELPLWUUi2l6tNZSAB+joCKK4S9d5qoPUrIssN3GrNP9Ow==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=pass header.from=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=BZLDXugY;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790521311;
-	bh=G/Uz6b3caMZgbWDrSwgmR/aikf/Rz7fFAhnr+NvFAV4=;
+	d=lists.u-boot-project.org; s=default; t=1790521347;
+	bh=IDybEWpfYkwmsyUhJUTx5pCtZuOZj7UTkjzX8yUrrWg=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HDQmcY/k1JGCBhmGSyye6mQrMSRSt5k1XqJTbzRwEzvn//VLtJ1etD2hgKtn5w2ip
-	 Gfiys5bK1AeTz7RIyLg5+PuBNQvgZ4MWFy/vK0vkD5at90M+Nv9/y+pgBP9vN0mWe1
-	 5XfNOpfwBvcvt3jIL049mEpoYJkMDYcIuQ1oh31s4fz19DaprCOHq6PsNiGSit6LAb
-	 VWGl/9LiNrIxRvGutMRXWYKeipslP3OuW+37794GnnA1uf1itAnrgaYtz97eWk/Voc
-	 Fd/knB/Pu9ooag6g7fCtFXYoY5bDWvstGbM/saEYzaWoiDCvIZyorMM0bwH+vxON57
-	 yLGyrRPoMY4FQ==
+	b=yEEhqHIjj9ZYa+5CtvgH5Aa2Gi1/ZZCSpcSWkrmUHzw1N4Z5y/Ahzm0W5Su1+RlyW
+	 +63jYmkeIDqcukwi2KerGntwKG1S8C5LZLWsjZctlymwTtbdG6BKH9nRfXHatjxTLT
+	 VG4WzOcduZb1tm/4gdz+w5mPqdgdlwUdgl75DflRGYHm0zIsBtCr5RWehq1DbUqOsH
+	 QZtspXQlY4+069OWTMaY2hTivXgT87s2XyhYuGh6FjmDW0bNLFAYvIhGYl699KhFDD
+	 xvVsz6iL6ix/+yG1n8+zAugGlH3stZGxx8VHQRT+tN90ZOTzDG0uLl/R4JdKcxxcuo
+	 sI2tr0j40f/Iw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0ED0080FDE;
-	Sun, 27 Sep 2026 15:01:51 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id A2EE972
- for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 15:01:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 97AA960633;
+	Sun, 27 Sep 2026 15:02:27 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id DF56A72
+ for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 15:02:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 88DCB400BE
- for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 15:01:49 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C565160633
+ for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 15:02:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Lv97fBKQ_822 for <u-boot@lists.u-boot-project.org>;
- Sun, 27 Sep 2026 15:01:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 80EAF40068
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:33::e"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790521309;
- b=PS/y6CRpgIsgcn/rA0uvxTUP901x2CxH/hm2FZD0CpvPf1+vnG6kcCzYlcDNVt3au6s4
- a1Tfcf+9yg2Kd7+xiUAA7SiNFSq4FVgkmWqnAeGf9qwHhM9RAKn90PP+3zt3HQMPBnAxo
- ga5lTOm9UGB2c5dQ+yipkUtVgblszKYjg/OrjJHIS6LOtD3LT0KU5IAA3LZ6KvcTYQFHy
- cA/KwTFxMzyp11kPPWDxThZxTVvzDHNCBQyFxp13yhKfJz+aRK8XbqV0aZ6PPw40TjLoV
- wFgHwzprP0ZfYFpa8IeduEh5ukSc2+iFW+m3nGygVmwLTzlsx3E0W1hCY7bOMjpWNvA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id spNjJ5axnCQa for <u-boot@lists.u-boot-project.org>;
+ Sun, 27 Sep 2026 15:02:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org AB66360619
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:33::d"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790521345;
+ b=ESlNfUIBBC/jNpcFXx9BrlQIRwMpsNVuHPPTRJO7MZeFH/TxdCKc7H9Z2XzmUxkeW1EB
+ +tJ0zDw0ZyreTZa7oF6aXT0Ii91xg54QlDYLbp3w5YloCqFbb3qlle+n+ZXVzdXYA81v3
+ T6g9QvF4gkCOCdA/wgn69HWuxbZubvcFAuNIUiGmC9Uv65qXvvYmMe/fC0tmZfiZaJ56Y
+ dXYAyCamu86MIJCQntQHHNi6gI7DJSTUwMN4A315hm2Touf2OxovJxDXbctTDqr6pdzSC
+ 8c36t2f8K1+cz42Gmff2TZuDLg/SvYZ/HwMXC6yuykY/t9ptc8x3Eiq9ozn9DL/bFQA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790521309;
+ c=relaxed/relaxed; t=1790521345;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
  MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type;
- bh=G/Uz6b3caMZgbWDrSwgmR/aikf/Rz7fFAhnr+NvFAV4=;
- b=I8vqPO3utA8X0v6OBGCIpw8H8aFuOZC7mGOPS63EAib5gxlAIFzY1emI1CpQu4krrUO1
- 5wp2TaebzP25IhABXgNOcz7Ow+h53F731KyyswHZHzoqd6bL3OA0Jkn7RZz6Tei+EpB7D
- YedeSk3mEXGhGzchCrWxKvitIllMTf8ctgUFZrDSbvIJ5QFgdZbqFY9S4ma2QL1iTBZTc
- Y0QD1pnGSsPXzGHrvOpYFsqKj3geCMFpWbWsEfLbTO8xq3tncDxRHqzrVyvyrW2JrXjl5
- /oPegSPZwF38sB6kMkMdLrlDheaxXAfv6K+LZV41U48WjcoRImlUbYlLM9SXz2GBU4g==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ bh=IDybEWpfYkwmsyUhJUTx5pCtZuOZj7UTkjzX8yUrrWg=;
+ b=a6twV/+qut7Bwf6NVU/b1hCAx5tbArnVzMP8biAS7ShcuxkJnHYNScY+H4PvPpaNgKeP
+ i2lvoryzdWKuzfqDnuANKelBXWBgw40WlMiVnEgJYN2OsSPN7kOIMXX2dOAAmycxvj8Yh
+ yG38xRpnUohm/BmyVY4LdOAqAuwsthRp9qkEQnDvMoGsgDeX9018XF8dlZd6smJfAgmTM
+ pskrA0+s7yOVVehAn6Y0REgr/1/Tuy/U/uuXqGGDse8GXUOLakzQQaO+r4iYYC7CJykGS
+ FFIcuzpHGSGghSd7HWstodzE8Z0p82DukQVu6lHXYsNTPCvEp1vHvQ1aB5tBXPm40QQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
  dmarc=pass header.from=chromium.org; 
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=VO29Hv5+; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::e"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:33::e;
- helo=mail-ed2-x0e.google.com; envelope-from=sjg@chromium.org;
+ header.s=google header.b=BZLDXugY; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::d"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:33::d;
+ helo=mail-ed2-x0d.google.com; envelope-from=sjg@chromium.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=VO29Hv5+
-Received: from mail-ed2-x0e.google.com (mail-ed2-x0e.google.com
- [IPv6:2a00:1450:4864:33::e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 80EAF40068
- for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 15:01:48 +0000 (UTC)
-Received: by mail-ed2-x0e.google.com with SMTP id
- 4fb4d7f45d1cf-6aae7b7fe22so3719504a12.2
- for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 08:01:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790521306; cv=none;
+ header.s=google header.b=BZLDXugY
+Received: from mail-ed2-x0d.google.com (mail-ed2-x0d.google.com
+ [IPv6:2a00:1450:4864:33::d])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id AB66360619
+ for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 15:02:24 +0000 (UTC)
+Received: by mail-ed2-x0d.google.com with SMTP id
+ 4fb4d7f45d1cf-6abe19c4262so936080a12.3
+ for <u-boot@lists.u-boot-project.org>; Sun, 27 Sep 2026 08:02:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790521342; cv=none;
  d=google.com; s=arc-20260327;
- b=dj+wrng8EzPXBs/NaoGinrkeFFY9/z5fhNXbv1iJ+/eHDrMCKTnzI+m+oDSj3Ey8lL
- vSOTF3xVcAf4KjbAi2DlJkVKS5du7i1MSWLFKPHspa9KuiYznU5cyImCjvxxgLiXSPVv
- 7sir6P520ercRsJe6/Sm+IgYR+eR860bJCcWWs/INa7sRWVOBKEUjusq0LrVzGLRNK86
- Unh5vYxNY383NgtQSdJcdfdEXeKCWUQ7T3sVL5OxWY7iUm6V1U7/eCVY5HhUPRfmX/Ai
- UbztkPSsh7ZCLliw05fr7Q3RRSJ1Q/Fke3lykxx3oJAgNfcmCiOApH/FH+sSWixqGlPy
- IZZA==
+ b=ky7WHjQCH7dzpTi7722AXkNVFrji9gGs+IBA7qk9I95/2rU11wAALBj8i1OYuzAKCz
+ b3eMBDENGnzW5sCRWrU2H0p3pGHjJIe/aQcYcMcV5ygVmDvzKi3xbkbTdweYZLMpmISJ
+ lMeBpHuRMxTFZ/Os2U+UgPt+b0g8Vq2F9yfNMMu+aL7j/fIFCaRpGVQ0phdHhZs6Pfbz
+ j6ttn0GgeNnlb7O0ziTVWGljaHF9GjNRQ02GpYlZELBGTzlweXT2iLLAtuqP5omjxlPg
+ Wm3STOgx7JkZEQ3gZG2xcze41OEgU9Hywdm8aVdN6bNbbSv1s9kpY/dxYSFYjk6IH/64
+ mskg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=G/Uz6b3caMZgbWDrSwgmR/aikf/Rz7fFAhnr+NvFAV4=;
- fh=wePAGD22evOQNKuFPz7Xm/oPatvMYU6uavxvnKpwhJw=;
- b=syKhBUDGHSO9UJQt/fgnK77Bo3aYH/KffGxKB7xz3a9ESIi4EysIMNg2sAW29NfMBe
- K3C1hCHUT+4CizqwEHvg74p2FWZQO+mVBjfo/590bdAUwpkfCSbr4tpsSxSqxEnznO7Q
- wXgQzoQnjHcsdLqPkc1IX9mGA23QDTIWdrQ4No3MPjhQvsTjYtsGgBpJhWn2bu7vLWWV
- REx7THNjblSgH24mx2wi8lHxlBWfvnay5fW0tFgbIR4mTrtPt93Sr+wlgk8cuZFx3cip
- LOtIiQzWje6YBinioHWfysUsqK7Xjro9JO0ZSBGrse8zzIJeBEsHxITlmG37RExxJ8Hm
- +/6g==; darn=lists.u-boot-project.org
+ bh=IDybEWpfYkwmsyUhJUTx5pCtZuOZj7UTkjzX8yUrrWg=;
+ fh=gM6xwFYHAHEYhwfnwb5GA6JCXhQT8YDCp6c+ILn1MfY=;
+ b=FeY+jkPJp0UscE4E7mFY+UqG0GPAnCZw6/gwcfSstIcAE0AmCVW1XyzrdLQuqu/a6X
+ IkeAqCgXmQOkgf3gCpfrcpPVv4TrRhpqc4x8hSBVagFo4nwqeJYM/+82OpguI9Wy/u27
+ EhLqWj/LSTsxIZSTM3eT8WNjzKDU7HvtGDxQd5q57dfNvrxxXkp3JZa9fy5k5l+8BkMN
+ 6rsBwdYHYF5B38vavPsgw6Vu0wTdy1++hVEB1xDHvbY56WsvrCZJ5oGyZe9g0j5dDRLJ
+ rSCJUm8e/zX6P7cOmzp1VGqJt/vKhH6m5n6jMd/fZGLOPq6KuVeSjiWp0V4/f7NTva5J
+ rPAg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1790521306; x=1791126106;
+ d=chromium.org; s=google; t=1790521342; x=1791126142;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=G/Uz6b3caMZgbWDrSwgmR/aikf/Rz7fFAhnr+NvFAV4=;
- b=VO29Hv5+D0IgxStuudKDBjhAJnlIcpydY9iGgJg7llkZi64W/zRxgxEr8OG9+8tWDp
- bjRGnrB2sL03nYTeAWYazWwhGmP3m7/sPZj7PHfpneSkPoYU+FUDVffGUq+/mo2+MqgY
- S/NxpAlMH6ToQ8i+BcvtQyQV1OTHV33Yz4tz0=
+ :content-type; bh=IDybEWpfYkwmsyUhJUTx5pCtZuOZj7UTkjzX8yUrrWg=;
+ b=BZLDXugYjNl4MPqUYY1WbTRkbLiuTtr5i2mKSr64NSY2jwNRkQApfFcQwNnk8wYaMT
+ 0oKLGvYRARPZrVJ7OIWYm4Z+7wN61SVAbXeqxBbd5pVtXXYgvXkQ1q50mSHDMbk5Jrxk
+ 8LVs8/SMBktduzWIxo/+TgU3I/UuOwXBeotuw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790521306; x=1791126106;
+ d=1e100.net; s=20260707; t=1790521342; x=1791126142;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=G/Uz6b3caMZgbWDrSwgmR/aikf/Rz7fFAhnr+NvFAV4=;
- b=jbVl0QYi9P2cIkpCxzD59SjdWkmkOtAll/O8k/zDguF2XlIjPuCAOS2i0p98FBuMGe
- YdyQNanhDbVol5vF5UUvQW9dAu2dO7L9Osjuo60DL/rC2MP0m4ajrFXrO+A3P9cciK7o
- oeAgb+QVMv042VfiJ60Khy3HgxZm3lZw6Yj4Tw+u5Q/gMNXFOhlT4DtjK4YkX6rnRFqk
- 0vIsk9FtzFTwPQebXDhAz5aS2Qqd5oZhcD9J0pmItrVQt7Ka4aK2ZQ1jLc4tq/gztE8I
- 9FGM8e7nm6aDClCibAG6DGZCjzBRBFhtrMpvLeIJ4yCX+gjzCq6OheuGT8tDfEe62ACh
- f2Rg==
+ bh=IDybEWpfYkwmsyUhJUTx5pCtZuOZj7UTkjzX8yUrrWg=;
+ b=kPXuyz+eCzhWC2kDuIVQgBgbLKHupEdsTy9fax+CWGPyujz5Z0Sc4MnbySqQV8FlEj
+ HgBG3t7SVwZeJabzw78GYepd4z4TWp5o0dl7kSzXtezouaXb7QBD3/i5ZdTas0MOXzXj
+ iAfEUwZxd8f216FlyLLcYLdR3u/TSA9lQjZAX7CtxRALepWNvTHyCzoI38N0FwnIWZRu
+ p5YqxmcAba/33lL6pLuteZ0N9nruL0gWBy1Qb2CfPdwgRgmAmn9exDzvmh6B8oLxfZLu
+ XrgDWoT5Lvivizg/wN/+kCmgoLmGYtwZgA6inBC7UB5WcurMbQvB5y+eUG8ZPPBN5Dse
+ mS4Q==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzlIVSz3OsP5Yf2BzcGYDZ93CClX7uxPElK7UeCHEhzs+3SU65x/j2VGRP/IpnJW2gh4XpCEAc=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJT3mju1xOXQgUmmI6Eu/60FMDe7p+3AYtit2TSMpUh8cQjMEW+
- ByTkGuY/eRvV3UOMZHIbeYbv1X4QL4Y/Usqhb1LHo5z95Y34O4WQb00ILQaTZTW1s53fnPVDghl
- FFZ9zhNgXFVljHilAPux1WSzpxHCDsETvI7jwxbMa
-X-Gm-Gg: AYBFou3SXnv8Bubu9cPu1TEP7m3f+xYAxHgmEkprhdR4zOA9wYdsqRDxCkew6Zek7EC
- vpcRKY8JbNq3U7n68MWYQMVp/vBPRO9CW1JbebxpMc3/xm63UWhmtPv5vqdqHoJ0+pFrLxxFgoM
- UCQgqu92wcI4D++9VQAVjiOovwQeHb3PeUDsksuSKecjAykTDITybCSDSMXjpit7wQJ0wyQWjf+
- TLtrw93m+yw5hyFI56NVSk6eK8TCdMYGkfq4ESVkF7LkXVGGkDOdrShVuJ208RoZjF1z5ctRbMQ
- Il/8FvmAUddIM1l+6kNKgzZ9LKOTsFZmI3kbpvPQb9nk7L+VqisKOg==
-X-Received: by 2002:a05:6402:4044:20b0:6aa:ee54:970c with SMTP id
- 4fb4d7f45d1cf-6aaee549b5bmr4237338a12.23.1790521306112; Sun, 27 Sep 2026
- 08:01:46 -0700 (PDT)
+ AKwUvBx92rrsdHJJbcUt1rSpLL/0dTXL8vYo+j1h3tKEp8fIUXzfDVNI4m6n85jJkoo1p8KwVatAYkM=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYIdmDPmw1GHG8ITlYDY8VMXYpY1ycqGlaZITH67ClVRFUWf34hp
+ MLFWxLVJ59Iv26BK8kj3g/U+OSpSdJ4qoenMigfjKkmqJfhVRloqdLWSiaqFMI0yFpBF0S0esB3
+ bIYf4eskdtAiqXQmczV6u8MKlLIPau4m4wXJWKvvh
+X-Gm-Gg: AYBFou0lV9sDo/uod3B2/T39OhklF8Qql/3Vav/XNoPmky9X+VU+IJXnIWTDwp1LR5X
+ TxwobvDJC1165eLaIF75GDOHXRCfBAzIdZqY9Fz7IDksmaVPYIKHU/C3K9CfJiIxUtkIXqeOdH+
+ iFV0HMqFXOLYXQ4rDmBd4tRGRXKWpivcBscd4jRpOP5HEvSunTRH3LXZlgy+sG/G0v4aRBW3Gg7
+ JUfDACPcW0vWSJMGDFv+erCBWePw7lcAI0OBLtHSY9m+7WS1NVdx2022BHof8C3c7n9LzBAFK5i
+ HCqNdE5LSaiXtNFKMcaeXz0QpuJ8iQcTn24cJU8SdgGHpvLaBxFKPg==
+X-Received: by 2002:a05:6402:52c5:b0:6ac:6c00:bd27 with SMTP id
+ 4fb4d7f45d1cf-6ac6c00c1a0mr1059973a12.2.1790521342180; Sun, 27 Sep 2026
+ 08:02:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260925105432.0F27E68C4E@verein.lst.de>
- <20260925105615.1E6E668C4E@verein.lst.de>
-In-Reply-To: <20260925105615.1E6E668C4E@verein.lst.de>
+ <20260925105617.71F7668C7B@verein.lst.de>
+In-Reply-To: <20260925105617.71F7668C7B@verein.lst.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 27 Sep 2026 09:01:34 -0600
-X-Gm-Features: AclHuK-aQWKnlKnDNokHwFmXWr4lpwi_Fex-xjI91CLtI-4qmKUc57dfSCX405M
-Message-ID: <CAFLszTgE5S_b+F+qLQkTm1jbSt-JVHvncq8m147qwpbp1B-EsA@mail.gmail.com>
-Subject: Re: [PATCH 1/8] core: skip parent device nodes without a DT reference
- when looking for dma-ranges
+Date: Sun, 27 Sep 2026 09:02:07 -0600
+X-Gm-Features: AclHuK85uUv1iMvVqB6awZ3Al3y03hgcxw_FPa2Butj0MmetSyH2ui1ivRBdsbo
+Message-ID: <CAFLszTiMXxraXAiB8vRGYTtrkExMhPo-d-PKHdSGhwozURC8gw@mail.gmail.com>
+Subject: Re: [PATCH 2/8] test: add dma-ranges UT for dynamically created nodes
 To: duwe@lst.de
 Cc: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>,
  Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
@@ -209,59 +210,74 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Hi Torsten,
 
 On 2026-09-25T10:54:32, Torsten Duwe <duwe@lst.de> wrote:
-> core: skip parent device nodes without a DT reference when looking for dma-ranges
-
-How about 'dm: core: walk up to the first DT-associated parent for dma-ranges' ?
-
+> test: add dma-ranges UT for dynamically created nodes
 >
-> If a device node got created dynamically, there is no guarantee that the
-> parent node has an associated device tree node which could specify dma
-> constraints. Especially PCI(e) enumeration adds intermediate "bus nodes",
-> also dynamically.
+> When devices were found using PCI(e) autoprobing, there is usually a
+> connecting bus node as parent, and the device node itself, both
+> created dynamically without a corresponding device tree node. If the
+> device needs to do inbound PCI transfers, DM looks up the DMA mapping
+> ("dma-ranges") in the parent's DT node; but in this case there is
+> none. Test whether DM is able to find the property on the grandparent
+> node.
 >
-> Try harder to find the correct configuration by walking up the tree until
-> a DT association is found.
->
-> Suggested-by: Neil Armstrong <neil.armstrong@linaro.org>
 > Signed-off-by: Torsten Duwe <duwe@suse.de>
-> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-> Tested-by: Peter Robinson <pbrobinson@gmail.com>
 >
-> drivers/core/device.c | 14 +++++++++++++-
->  1 file changed, 13 insertions(+), 1 deletion(-)
+> arch/sandbox/dts/test.dts |  9 +++++++++
+>  test/dm/ofnode.c          |  4 ++--
+>  test/dm/phys2bus.c        | 32 ++++++++++++++++++++++++++++++++
+>  3 files changed, 43 insertions(+), 2 deletions(-)
 
-> diff --git a/drivers/core/device.c b/drivers/core/device.c
-> @@ -459,7 +459,19 @@ static int device_get_dma_constraints(struct udevice *dev)
-> -     if (!CONFIG_IS_ENABLED(DM_DMA) || !parent || !dev_has_ofnode(parent))
-> +     if (!CONFIG_IS_ENABLED(DM_DMA) || !parent)
-> +             return 0;
-> +
-> +     /* Look for the first node in the parent chain */
-> +     while (parent) {
-> +             if (dev_has_ofnode(parent))
-> +                     break;
-> +
-> +             parent = dev_get_parent(parent);
-> +     }
-> +
-> +     /* No parents have a node, bail out */
-> +     if (!parent)
->               return 0;
+> When devices were found using PCI(e) autoprobing, there is usually a
+> connecting bus node as parent, and the device node itself, both
+> created dynamically without a corresponding device tree node.
 
-The comment 'Look for the first node in the parent chain' reads as if
-the loop finds any node - please make it explicit, e.g. 'Walk up until
-we find a parent that has a DT node'. The loop itself can drop the
-break:
+I read this as your discovering something in previous testing, but I
+think you mean 'When devices are found'
 
-    while (parent && !dev_has_ofnode(parent))
-        parent = dev_get_parent(parent);
+> diff --git a/test/dm/phys2bus.c b/test/dm/phys2bus.c
+> @@ -31,6 +31,38 @@ static int dm_test_phys_to_bus(struct unit_test_state *uts)
+> +#if CONFIG_IS_ENABLED(OF_REAL)
+> +     if (uts->of_live) {
+> +             /* DMA-ranges are to be found on the grandparent bus node,
+> +              * DT nodes neither here nor at parent.
+> +              */
+> +             struct udevice *pdev;
+> +             ofnode psave, nsave;
 
-The existing comment immediately below says 'We start parsing for
-dma-ranges from the device's bus node. This is specially important on
-nested buses.' When we skip past dynamically-created intermediate
-buses we are no longer starting at the immediate bus node. I think
-that is fine because those nodes cannot carry a dma-ranges property
-anyway, but please spell that out in the commit message.
+Thanks for the test. I'd rather see this as a separate DM_TEST (e.g.
+dm_test_phys_to_bus_dyn) - the test name then describes what it does,
+and the of_live guard becomes a single ut_skip_on() at the top instead
+of wrapping the whole body. It also avoids the #if in the middle of a
+function.
+
+> diff --git a/test/dm/phys2bus.c b/test/dm/phys2bus.c
+> @@ -31,6 +31,38 @@ static int dm_test_phys_to_bus(struct unit_test_state *uts)
+> +             /* pretend the devices were discovered dynamically and have no DT node */
+> +             psave = pdev->node_;
+> +             pdev->node_.np = NULL;
+
+Please don't reach into dev->node_ directly - the struct comment says
+'do not access outside driver model'. Use dev_ofnode() to save and
+dev_set_ofnode(dev, ofnode_null()) to clear; that also stops the test
+from silently assuming the live-tree representation of ofnode.
+
+> diff --git a/test/dm/phys2bus.c b/test/dm/phys2bus.c
+> @@ -31,6 +31,38 @@ static int dm_test_phys_to_bus(struct unit_test_state *uts)
+> +             /* DMA-ranges are to be found on the grandparent bus node,
+> +              * DT nodes neither here nor at parent.
+> +              */
+
+Multi-line block comment should use kernel style with the opening /*
+on its own line.
+
+> diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+> @@ -664,6 +664,15 @@
+> +                     subnode@8 {
+> +                               compatible = "denx,u-boot-fdt-test";
+> +                     };
+
+Stray extra spaces before 'compatible' - the rest of the file uses a
+single tab of extra indent.
 
 Regards,
 Simon
