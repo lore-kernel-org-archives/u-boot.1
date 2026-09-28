@@ -1,240 +1,150 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DEAFC9832F
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 09:30:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6593C9832F
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 09:45:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B1E9580A50;
-	Mon, 28 Sep 2026 09:30:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6A4CB6067D;
+	Mon, 28 Sep 2026 09:45:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IojL9civ0B7c; Mon, 28 Sep 2026 09:30:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org D7D3480CC5
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1790587849;
-	b=I+4XaPHsN+z4rdw+4dm9RWZs3fbOsBZrgqzHdp3NnwCu4NGWdX4r1ls9oFKhMCIJG0Fd
-	 +w+Pgz03a6subLaiysyDaqXOAgE7xHY3DBd35saqcdoN5glJjjfNRSuUQeSSnyJsBnEfr
-	 e3ZFwxtctiMBRVhYkgFdINP0GWieiNDMrpIdTFk5L8Zz+ylMJKvSRYvRs5K7TS4KZWmKJ
-	 xsdHEeaJOri0eSByMuR0UJx0ZZyYwBUOWFU7PdtTSA59sD8FvmDRcSsQ/jlWCpEGcOUE3
-	 gsTMEHN9A2drfyAP4Eij7xklLYSBtrnN8QYG8RJfff2kti5aAvRDa1gyq2QQ0eBTDzw==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790587849;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YKklm0yUwi28; Mon, 28 Sep 2026 09:45:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3D02C60684
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790588756;
+	b=jIMgTWpEbVYTL4rJ2rfME7psZh2V3lu0hRZ4Qy5Y3g7E2sXpfPlnQ7fPRiaS/fljeP02
+	 4g2vJcjfxUJM2piZfP4ODW+Y4vkJpi2E1wHJm0RsXsV5+UdCL952AxuVTDIzt+if+Hk6z
+	 QaWNMMq/txC72hcnzU2G4gwJFq7FxDpW+dDBG0CNYIIBvORJ4O0wQDvVKcuV21D9tPKE2
+	 o84avjrDeZAcioCTnp24cZgWCqMls7qW9HH+QkOQTINCH7Y1G2fDcubF1MaT3tFwN9QWV
+	 ADnI8a1qKZcThDhVRApUFXbICTzTDVGiVgzyTOBOYrbH3LdAZX0GK3zWQKeaLZPGVrw==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790588756;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Date:From:To:Cc:Subject:Message-ID:
-	 References:Content-Type:Content-Disposition:In-Reply-To:
-	 X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:
-	 X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=VjBSpP6fDGxlhhH7agTNPuUowewkxBnXiJmUVp9UdZs=;
-	b=gi5l06mTnZ7kLuBHx2LoSiIDK3he+z6fa+wNaoyUw8A+Eo6moCAiXkkU4hIYf1NfKip5
-	 3zSPFrX/P/16q15633HrIVqyM9ISF5rDkNdobVJ8d/szsoKqXQZoyzYbVrZoqZeHt535c
-	 GrbPC8S2Qmu3nGEbRafphoNMk2cnCz+KPEkZFCo3XRbsfWFM0iZKwrxwmFiALzi0YtWOF
-	 J81Iw26Ygr0xj48GTVj0EiLWrmGrZKh1xomqtf5f3Sp8c9aTXoT/RPT/2zTD/3A0Ozexs
-	 RhKqXrBuna8blKSA+mSb658e16Sww9PCRZTv7E5PViQyBOa4kNh1yFwe12Ka1egDlCg==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; dmarc=pass header.from=nxp.com;
-	dkim=pass header.d=nxp.com header.i=@nxp.com header.a=rsa-sha256 header.s=selector1 header.b=DIVfKyk5;
-	arc=fail smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
+	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
+	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=K93sondT4Tc5Y5JmK4NTf1+glz/v7M/RdYQdwnXkLQ0=;
+	b=D51h6S3/fK2g/qH/PbGPhPvoNrcc5cuXKwQx4nWJMDsvcupTSCLAv/RWYtD5fTtIwumu
+	 9T/8Um19ft0Giryk8aQD2vCj5lU2FPXiDsqXHoOOePM7iG0jpg2IBTCOAcZS4fFP31y1o
+	 F3wpWSc6LMNPcqXNf3wbuY9WKsgQeJ508USnJYzlzfM+3LckoIOY25POY6RxeYQl2xHLB
+	 cJJ2cu6sqNkzTxomfQ2CU6Y04NEjcOT48M+fVbHI1LoGrklgR+SijCnoHWFd7ClnH3gR/
+	 zpwrkug/all62NujXh2u+Vm6pNQX5UlLx8nZHBeP/MA0B3daFuY6VDMmmL4KJI8W8Mw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=kwiboo.se;
+	dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=K4+iCTOm;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790587849;
-	bh=VjBSpP6fDGxlhhH7agTNPuUowewkxBnXiJmUVp9UdZs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790588756;
+	bh=K93sondT4Tc5Y5JmK4NTf1+glz/v7M/RdYQdwnXkLQ0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=WOEMDkqXPODdgbn6it8u/jtmqf/HTtvwc/u+EOhubgIVsa5tpl1WsPUxBHYoR84XS
-	 01qVcabVV8eKpkflu2FwSC8+BcTpU1YUk56EM0tmkevwIwvic6fvU3j5jzyJgnOqy1
-	 mvNpHc090UmrbVQf+fB8gld+DFqQtDaipXyZVQu3XUE23zoA7hPKV3nIlJZSlbU6Om
-	 rirZFsH8umdUulxEasohBkKbPO5ELK2WEEbFw6zjW577khwj7dIi91dbg1SrYaLoz7
-	 U+Ec1a8W13XEU62cpuTPw9B74GlSBvWJWTqD0G3+0J6U91PNskkM1jjBzKfCJQS9Wx
-	 COBuzIYouZb5A==
+	b=GvLzo5hyB0bjvRe4QGA/RxoTDPJSFVjImbWekzFE7DDPAy9xQJFV5WIe9+TysgW1U
+	 EJZdx+8yxFA5UYT9PgkVZ5igcEfqXpqUvO3ul1Q2Gzzzu2X/cIknnFtZvJJRc11tam
+	 cSEx+1hZXNgwp1bP5zEjBdRCBhwvd11ZTZdJwmwRnMLtJk+J0u+D/xdHH277Pzy6cs
+	 aZpudmREwgNkdxhx8Jh/aSlnRS6VBkm4/OeJflN/HXN1zrTR1oPGQtf8oYVo0P4I9a
+	 ZMr6L9mbihOiaSR0fP1Egqxw7xk27FYKdpJeFHZZnFTaN4fg5/Sl4wF2nvThuIQg7T
+	 59uKkVkvbSy8g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D7D3480CC5;
-	Mon, 28 Sep 2026 09:30:48 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 58B6B3D8
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:30:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3D02C60684;
+	Mon, 28 Sep 2026 09:45:56 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8A5592B6
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:45:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4C44880C94
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:30:47 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 730D060684
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:45:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gKWfg7Kf8mYQ for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 09:30:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 2869480C87
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c201::3"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790587846;
- b=kcTyztiSIwSAvA1wFrshLM8xxJVbjXZVbGHd/QsQjftsewXLfI4zR1Uj/j8DqDI2TNS/
- mcwFUvteJoZKZaKiG6YxzTOVc+39Wk7DewLY4fu53TvBluo+bLTbvMgiTz23K8kCPJ9+R
- WYg2nU66POAiSVmAbEXs7FK1Vra1RAhoi8nD3r003rMqBjsBNWhUxrU5+v2d9prepWgBu
- qHM1q24UGbMBc9s56ZpLaR0UJ7qkDd4SzoNJQ6tXI4HhU6eWtm9mlXLxEU26piwcri4W2
- 2BEx3dXyoJcOCuKcJ0pf3P50omfwdySXT/MvTy+WVZ+0SaM78HKNdg559lADlXhOijQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790587846;
- h=Received-SPF:DKIM-Signature:Received:Received:Date:From:To:Cc:
- Subject:Message-ID:References:Content-Type:Content-Disposition:
- In-Reply-To:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
- X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
- X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
- X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
- X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:
- X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=VjBSpP6fDGxlhhH7agTNPuUowewkxBnXiJmUVp9UdZs=;
- b=dR7e/Zr/X6EzeDyEpJ+lkL4I6+Jkw3fLtjuDcp5EblMaovpm9zQjSWQKI7O2rV8OLct6
- LoEAfHhODaKp0Ei92W2c+jalQcrlXi1iIR/fQxfcNwom05+D2/n2kXDyxSE0DkDZkPdVq
- w91AKeL28GMqbIOMWlfZ7AsbRDMLle5dhrnowcxMIpvYyrqgMRgVwfddnBd0QdJYIZ045
- aH+xVaUU+j3ULcmyo9hz71By+EvRZ70GYeC/QFiKbIybeJP3WUfD9rk/clJG04Dm+huA8
- y/g16LULLL42l3gVmsSTEX9KV4MyyJpeXaEIo6p+6rudUtQM6WMbFIl/N0rW47ZlCAA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org;
- dmarc=pass header.from=nxp.com; 
- dkim=pass header.d=nxp.com header.i=@nxp.com header.a=rsa-sha256
- header.s=selector1 header.b=DIVfKyk5; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c201::3"
-Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c201::3;
- helo=as8pr04cu009.outbound.protection.outlook.com;
- envelope-from=vladimir.oltean@nxp.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=nxp.com header.i=@nxp.com header.a=rsa-sha256
- header.s=selector1 header.b=DIVfKyk5
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2869480C87
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:30:45 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iZ+Si4zxvQjOpd9sIQog7Sz9UNFSeePDlc+AfaMaoEU6dkhMMLKItlbovgFOaFwe8TGwRjZ34V0xS+yTXETH9AOhVfn49i4AeK7OQvOd7lVlbd6B5OcBONpkk+10cwQ394JO1FqYJy71f2crK1PZ/G8sCQwBIN1hjHuW5VmDuXV9emZvkl8RVrzNchsLbgdpakaqqvMsv7yACK/3On0pd2aZ9G3mPUmtiAqWZ640npg5SajHJ+z2UgpQiMgaXCPz/AA7jciGWr7IxeYv2kU4/UrENVYSB2VjIY55W+uF5+hittRT3o8VZbjLys7D9f0aNHvob2lHyB6s58GOJZ6few==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VjBSpP6fDGxlhhH7agTNPuUowewkxBnXiJmUVp9UdZs=;
- b=ZAaEMaC+wiq9eYvJUYBPW2u9/BtdYIdeK1xjMsV4YKw7uMjcalO0t/lfKFr2AAbcgOLwcXBgYn0MczbUCwIs9M72ycNoBJvHQfb7FCFlforBCNe0es9q93+gb4LIm5EBqwKFbWF0wjm5DQ2A7HvFGtRjEyPix5tfutvR5usOBdRkzHGL6gmy0QE6pVHRsur4phdt64waymkjIUbBcjxusO+AZy3WUpK0gXaYUxGn6VViv0mPiUZfJ8KS63KqxD8oQjBpmeYbsUZ+5Q9/l5mTPCcPaGeLlfO45YxKyVemXYSXL+qH3k2BvSItf1mpg10Ap/9YT1rujca7fyLXu59ZSw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VjBSpP6fDGxlhhH7agTNPuUowewkxBnXiJmUVp9UdZs=;
- b=DIVfKyk5Xq1Cl45+DkPEbns9sXHrNBBoI9agOpSZR0ds3M7BVlzzqU1KcjySblbV0/7VvX1UrKVj+zW9Ur91nR8lPoP2CHr5aoNy2iYl6lZ95xF0Ut1LYJZrma53copZsZvYn0deNLSW9dpVoA1vp666dinvNs7z3F/J2XK0t/qZlIvrlcIFQtEw+DAoGOaHA+TTF+HExTpYgZRP+ROXuNidid68hsE17XEvdanskqRVnx60PF3zGNAAtlsDxDm/wLhDkKJUlEvdJvFsWeVF69jio7nz437wFZ2u64edOvoCukZNxmDYp+Mh3RVvVNEfpEUYqKZ54gvqrL8MLRfoXA==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-Received: from AM0PR04MB6900.eurprd04.prod.outlook.com (2603:10a6:208:17d::10)
- by MIWPR04MB710340.eurprd04.prod.outlook.com (2603:10a6:290:ed::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.23; Mon, 28 Sep
- 2026 09:30:41 +0000
-Received: from AM0PR04MB6900.eurprd04.prod.outlook.com
- ([fe80::7fda:8431:ca1b:b023]) by AM0PR04MB6900.eurprd04.prod.outlook.com
- ([fe80::7fda:8431:ca1b:b023%4]) with mapi id 15.21.0451.022; Mon, 28 Sep 2026
- 09:30:41 +0000
-Date: Mon, 28 Sep 2026 12:30:38 +0300
-From: Vladimir Oltean <vladimir.oltean@nxp.com>
-To: Vincent Jardin <vjardin@free.fr>
-Cc: u-boot@lists.u-boot-project.org, Peng Fan <peng.fan@nxp.com>,
- Ioana Ciornei <ioana.ciornei@nxp.com>, Tom Rini <trini@konsulko.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Wasim Khan <wasim.khan@nxp.com>,
- Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
- Hemant Agrawal <hemant.agrawal@nxp.com>
-Subject: Re: [PATCH v2 1/5] lx2160: add lx2160_sd1 100g4x25g and
- lx2160_serdes status
-Message-ID: <20260928093038.utkw3zpq5sikbxkx@skbuf>
-References: <20260914170417.3052423-1-vjardin@free.fr>
- <20260914170417.3052423-2-vjardin@free.fr>
- <20260925134846.4tazuavdyax5zdze@skbuf>
- <arem7uLl5jR5QydT@L30177.local>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <arem7uLl5jR5QydT@L30177.local>
-X-ClientProxiedBy: WA1PEPF00005B8C.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d8::625) To AM0PR04MB6900.eurprd04.prod.outlook.com
- (2603:10a6:208:17d::10)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7KQ-9QJhQ1mk for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 09:45:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 47CCA6067D
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=121.127.44.66
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790588753;
+ b=NLTh3gvF1WHGIVKD8EyH7K4OeVBQF3LnC7M36NvVSoq7GX+4CkQ1jjnUFOo8OCYagWGj
+ Zh6SSof+w7j7t0Kqj9a7l5/fY09KMoWp3Hme0cxKFjg07sV6yr5n203KPIsEECp7yuVnM
+ srjuaTc2nYfD0BysghWg0jAWchfdiDvE+MYSvfsliQQ5bmRgP25LZc+EPUTQPjzTejNOl
+ PZTMDzxjfL+x4VEK/J8eDeLl4UMWw3Fmqw0L67sxVB5RWDd7kf0lSa9tLTL+2aqswgR64
+ xcdUSng1HfYkjpY5vYpe4TbGfODJLoBcsCf9O5YxHWxzwE+bQ77AcnzbGvFdDGDPSBw==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790588753;
+ h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
+ X-Forward-Email-Sender:X-Forward-Email-Version:
+ X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+ X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
+ Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=K93sondT4Tc5Y5JmK4NTf1+glz/v7M/RdYQdwnXkLQ0=;
+ b=iG/+wXLr6IWwaCL00R7REclmsEaXUrzdiSBZXOy7tsufKTodrTonF2ftLl6Q9jk9JVEN
+ bGO6GHaapOAM5JLJDQzmLmsMWSl25NeUxNQ7Yunp/7YaLaeHx93PRxGcL83lKQ0Zp1vtm
+ Mu1/WW0Kc0yMDlobo31t7lR+OXjsLCdJe9NY6ddWrofUXeCve5B9GOH0IdcpAsCcbjBga
+ KYL3xYOfW3Bd0x8ObP/YiQTaUfSHoJVYH6r30PjDKaPFEjmnE/JTbkhIp5tHtp+IlWt5m
+ +Y5EA+tdv6KVCMTOW/ZdkteiPGTr7Z8VD6ZgPXAqrwimD34XWwcZVjArk5/guDna7rA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ dmarc=pass header.from=kwiboo.se; 
+ dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=K4+iCTOm; 
+ arc=none smtp.remote-ip=121.127.44.66
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=c238=hu=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=K4+iCTOm
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 47CCA6067D
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:45:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1790588750;
+ bh=K93sondT4Tc5Y5JmK4NTf1+glz/v7M/RdYQdwnXkLQ0=;
+ b=K4+iCTOmeXmFNYDmBQdcJXivHRGbc96EC36LQsur15zbsqfA9GxtGkWAQucZvlhK+a0Fyx4P6
+ FDJucgN6DUG91RGzu93NxeWysjE91IEMeuvvndDWRLlL0F1hWmmc0VOnL+0S2qniD9TDYxZ1CTT
+ uh1mDxUMd8GgD5iVeKNgqCIf2ZwkPpa5nkYrn4uyM3vzWBS3x6pi5d7HTI6LuKvyP8ehfNiT3oO
+ 2pIMEMS6Wt+E4wNvb3iIUR7oW1HSnwYam+2G3ELj3ZHauBsLCdve4aQ9N20b4KhesSfTPtBgvdz
+ VeQbdCid2I8Ag9gPVMbUNUxLob2TJ0rhV8wDGAegw6yw==
+X-Forward-Email-ID: 6aba374c7c3fbae63f6c714b
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.16.3
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <8cedbdae-157c-47ec-b890-821d14c25c5d@kwiboo.se>
+Date: Mon, 28 Sep 2026 11:45:43 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM0PR04MB6900:EE_|MIWPR04MB710340:EE_
-X-MS-Office365-Filtering-Correlation-Id: b63461dc-2910-4bac-4c9e-08df1d4329c7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|19092799006|366016|23010399003|10070799003|3023799007|10067099003|11063799006|56012099006|4143699003|18002099003|22082099003|41080700001;
-X-Microsoft-Antispam-Message-Info: Rxuv1QlgbPtud9Aj2JCEnolvXsR6QfgTYuPiUKnNBWjTbE2iZP8uaHUWMDGXLAtw1meIawFQ2WdTvFagdE4hiTqxP5AfzTOADV4N210dttc2Ai1W1U/oCarpOQGkIgORewsKprh4KIBxDoeg99P/Smvyf/7/nyfwqwvqRCS1HP0n1EfT4e5Enzs0LzXrvAagrtpSRAA3wsqASwhhtXnVMLhe2uJhOy7izWHtGw1HEcyq2o48TLRYBLfiQHhKPa9vVp56HcuQ45LtqFTW4ucV3iMbUxcq2id0NLXNYGn43WHvaw/U3lSNBDC5hWlgXla4pEeW8CsP6c5H8SR75VxpxE0OytzWevgzSrYa4oj5WjIItsbhVWVrh+9tm156izMYziASC8Yqk2w1Q3D+ul0aXEtsxpE8IqrDzVd29zq1OHJK/VJWH7s28HV825qO6U67678OzGVozMvrRiGhumPoYjXRK+6KuoV201wiMI3odovpJGEsKR2B04rbnzOSSevRp9I5KXC71HBIGK+6osQrN2ovQrZjII4qCazieqR5Ak4BjvuNPddce0GaTaZ11jdCy+1airK+xx3reDp7XDSf5lT8Fxikp4zuBdqxca5HY2HIQEb0QUg8hps6S6uYwb334q5cfuzxrKFByN/MIOVrXWm4jaj72EYmfRUXKDYhHRnPi+KeYhQNH7S2G8K02PnnHAohwwV85QOmtXbpJtYvcxatl1NCymyCBePTudu05PQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0PR04MB6900.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(19092799006)(366016)(23010399003)(10070799003)(3023799007)(10067099003)(11063799006)(56012099006)(4143699003)(18002099003)(22082099003)(41080700001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?G+spcCi252QdYiMc5pBm4WVotshBvbEfHv8iABxV3SZZYlTu1YTJDIdWgXUj?=
- =?us-ascii?Q?iRuhXmEIt21hpNslN5eyWW2TQIPbYr3XAQGEdnHuaRqCzDEBcp/y8kEdAv+/?=
- =?us-ascii?Q?1Yv0FLum1DoEXhmUJTV32+zaw5ehwNHcJsf91omgXHU/2GTFaybcuJjfdNsM?=
- =?us-ascii?Q?s1ZtZ6UJ0qk17My0AoQKpOARiS9KueTtHb7dad3Zdc6jMb8jQxkG2/2tw0zB?=
- =?us-ascii?Q?n/N+wyKCpsV8OfGs4ORZCjKqfYAuwseWBZWC0HlutnyQrAzgzvyGpDZt0BPf?=
- =?us-ascii?Q?z06C+5him7lvx/8FzR5qxyUqI3kDzIquIGtBDDFI/sodIPu9eKVhvoIj3dCY?=
- =?us-ascii?Q?dlkT+bgv5L1aXqc9KYkUqB8leRoPvIAl5ZikiFJNqP+l3Rjf9UG2ewdlQehX?=
- =?us-ascii?Q?tILNVk0zhikJDGedlbKCssj7SKC9rPgyJkZqQKCAxJSjj8mUHUY3R8tekk1g?=
- =?us-ascii?Q?TQkoAEntMXkklDEoABggm8V6pcsH1FD+eq6Rj0GIS4rLiPO1eLThuKNahJ5G?=
- =?us-ascii?Q?3kYIVCuhzIX56VqNgei67iEUN4xPoIthGKnFPxAI7vEPC1ZF+lOi+8kty2zO?=
- =?us-ascii?Q?CJsBswBFS/qrZBiMRaMDmNNwvHLEKcTPODAt9nd2ypd8xmIUxfi0zCAY+NQu?=
- =?us-ascii?Q?6rFNKqlAbD9AoRH+kuG8RRaJJESjOty4Ei5rT+NM+lOvhYcM5d+eUVTqt7A/?=
- =?us-ascii?Q?CIC8gaBTBpNhN1AH9gPVkwS4M8JLIE4WGYqnMym5Wv57dJJQAauNXwR3WAtr?=
- =?us-ascii?Q?AdHrZxAevG/vBCLK/RdO6I4H6TeCGJ+X5CAhlQyGQzXpkKT134FB20a0QE33?=
- =?us-ascii?Q?NDY3Sj9orpfjv+8Abwk4GFOfAKLKdBvIQd63QIxIp0sH1DFCF3/Aod8ZfCwL?=
- =?us-ascii?Q?5winlQMgml368GZ5YHXJEMgBPwbdH1ZNnw6xlFx5xokdmPywCB+WI2nbl5Hf?=
- =?us-ascii?Q?VrdFChXrDDN4YMAmvZ5kc48k4omKrBw9MtqRAqzvqvZpUhLKlUHNRiWgqIR5?=
- =?us-ascii?Q?wAeW8f7GH8SFDM/8lUclUMj8DNuG2rN59nVjebNVqO6x6AEsRw5BbBC6hepa?=
- =?us-ascii?Q?kNtdM98pBwNu9oyHoGFglBWgmMFd5xGLEnGv8EUZRADnCvpU/3CWpfNJG3iG?=
- =?us-ascii?Q?9RpiGO0wIVn/VLjTdeqACoXMA5AUxj8yEaSohJjrBODUSEAN4sDB6klgd2VF?=
- =?us-ascii?Q?1rI78bEzGJ2dNRTUOTmyjKoD8IHdWLiqqARu/ySXyUX4yN79ObILvxzbLaRV?=
- =?us-ascii?Q?yxM4geAoo6/kpPBrNhYuFv2yA7VSPjVSgla4WqnksQbX5kWBzqdNOOjwS+sd?=
- =?us-ascii?Q?GusEoiEYrkllSSr5JPVKfa7PgSC/Tv1uTslNwkQv4YyJ1zCUdCdgFcExRKGG?=
- =?us-ascii?Q?EzJU25YBgWTBdyoE1chvujcEAml7Nks9reyENMcDVLBQrVNo7mVpXz3+XajM?=
- =?us-ascii?Q?r18IQ8l2Rx3fyiwuUc6e+U9XBzD5jtQ4cE1Esc4zCeGCn5GoP39lHYe27nhb?=
- =?us-ascii?Q?HOmNKTOEK2HJI6DjP3SDFnJ2qFag6EJ25ZDtBbutpYV46+7de9oiXTD2d5hU?=
- =?us-ascii?Q?SozuvKQ3a366P23WsPsvf7KSu9VtmvI1xfNWRxROsnFqRNn5+bOt0FsqDcS9?=
- =?us-ascii?Q?7yXTLOIq3chwhH1CeZ73I+MbS56ep7R3kKCAE0mS0CVG31/gvUeJVmN6OjyG?=
- =?us-ascii?Q?B+NSSolG9lgFHOtKTDXerMVMgBT3aHksAqF8tU5vVJYX4BAz3xBE2X87PocQ?=
- =?us-ascii?Q?PWJHtl7Ayvee3avrTkP16LHGVHvZ04YJc7DrNeEgFW/EEfEKUGw8QbwqRtx3?=
-X-MS-Exchange-AntiSpam-MessageData-1: suq7qGWVAS9JhrWgP+Im947o9LFGdaY53JQ=
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b63461dc-2910-4bac-4c9e-08df1d4329c7
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB6900.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2026 09:30:41.2379 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vAORGn205rgXXoA41vqjB4Z+EDeFvBHpAmUpXiJuGsd2YKG2WkVEqJcL4lHu5V8tiSpaLOZMk8DIdC6eAOcpYA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MIWPR04MB710340
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/9] rockchip: Remove unneeded syscon driver for RK35xx
+To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <u-boot@0leil.net>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org
+References: <20260804105721.2402406-1-jonas@kwiboo.se>
+ <CAFLszTjBiTtKmjgknvXGFBrphh6kpBzRg8iroWjFQ0EDvuXTyQ@mail.gmail.com>
+ <c00fd65c-338a-428f-bf4e-eb28e463d914@kwiboo.se>
+ <CAC928Ha1qR66Cryg9VXwuTTBSgmPPDnbpiahUB8toRt=scfd=g@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAC928Ha1qR66Cryg9VXwuTTBSgmPPDnbpiahUB8toRt=scfd=g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -248,53 +158,162 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sat, Sep 26, 2026 at 01:05:18PM +0200, Vincent Jardin wrote:
-> Hi Vladimir,
-> 
-> First, thanks for your reviews despite some structure issues of those
-> series.
-> 
-> > Why specifically for QDS? QDS has the board_fit_config_name_match()
-> > implementation which picks a device tree with mezzanine cards based on
-> > RCWSR28. If the SerDes protocol has been modified by splitting/unsplitting,
-> > all assumptions in that device tree selection process are wrong.
-> > At least, I'm not sure how both mechanisms could coexist in a sane way.
-> >
-> > Why not for the nbxv3 board only?
-> 
-> The QDS was the board I looked initially for such support before the
-> nbxv3 board and I was trying to highlight that it is a generic capability
-> of the lx2160 CPU's serdes that I was able to field confirm, it is not just
-> specific to the nbxv3 board.
-> I no longer have access to a QDS, so I can focus on nbxv3
-> but I believe it is worth keepting it on QDS too.
-> 
-> I did miss that point: you are right board_fit_config_name_match() selects
-> the QDS' DTS from the SerDes protocol number that had been set into the RCW.
-> The case 13 is missing (2x100G for SD1).
-> 
-> So for the next updates I will focus on nbxv3, and I'll check to reconsider
-> lx2160a_serdes_apply_hwconfig() that I did use to make it "hw independent"
-> following some other "freescale/nxp" cases.
-> 
-> I would still like to keep a way to use it on QDS along with nbxv3,
-> so the generic code remains in board/nxp/lx2160a/
-> 
-> Would that be acceptable to you, or would you rather drop it from
-> QDS entirely, but then how to highlight it can work for lx2160a ?
+Hi Massimo,
 
-I just pointed out that the two mechanisms do not combine well at all.
+On 9/26/2026 8:17 PM, Massimo Pegorer wrote:
+> Hi Jonas,
+> 
+> On 8/4/2026 9:57 PM, Jonas Karlman wrote:
+>> Hi Simon,
+>>
+>> On 8/4/2026 9:19 PM, Simon Glass wrote:
+>>> Hi Jonas,
+>>>
+>>> On Tue, 4 Aug 2026 at 04:57, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>>
+>>>> This series takes the initial steps required to try and remove use of
+>>>> syscon_get_first_range() or syscon_get_regmap_by_driver_data() to get
+>>>> GRF base addresses at runtime for the Rockchip platform.
+>>>>
+>>>> The GRF base addresses are fixed and known at compile time, yet drivers
+>>>> keep trying to resolve them at runtime delaying some operations by
+>>>> several ms.
+>>>
+>>> I suppose all addresses are known at compile-time, if you have a
+>>> single device tree. I have always hoped that we might end up with a
+>>> generic U-Boot for rockchip.
+>>
+>> I do not understand how removing these unneeded syscon drivers and
+>> helpers would stop such goals or make that any harder. From my point of
+>> view, they are currently making such things harder and only adds extra
+>> code, runtime and energy waste. E.g. around 227 ms was wasted resolving
+>> fixed known base addresses for RK3399 last time I measured it, see [1].
+>>
+>> Most drivers or any SoC specific code is already identified using a
+>> compatible that is SoC specific, i.e. the RAM or CLK drivers are matched
+>> using a SoC specific compatible and seeing how all GRF variants are
+>> unique there will always need to be SoC specific code to handle the GRFs
+>> base address and reg offsets.
+>>
+>> And for drivers that are more dynamic in nature the DT typically have a
+>> phandle to the GRF syscon node anyway, so getting it from the phandle
+>> will be a better option and closer matches how Linux handles similar
+>> references.
+>>
+>> The biggest current blocker for a more generic U-Boot proper on Rockchip
+>> platform is rockchip_get_cru() and how it currently makes it impossible
+>> to support multiple SoCs in one build due to how it is used in the
+>> sysreset driver. Fortunately, I have a pending series that also cleans
+>> up the unneeded rockchip_get_cru/clk() related helpers.
+>>
+>>>
+>>> I wonder if there is another way to do this, perhaps reading the
+>>> address once and caching it?
+>>
+>> I really do not see the need for that; it would only make things more
+>> complex than it really needs to be. We should use constants where
+>> appropriate, e.g. soc specific drivers/code and use generic phandle
+>> lookups elsewhere.
+> 
+> I agree on using SoC-specific constants in SoC-specific drivers and in SoC
+> specific code in general. I also agree on removing unused or unneeded drivers:
+> if anything requires them in the future, they will be added as needed.
+> 
+> Anyway, I would prefer constants not to be spread around in the source files
+> that need them, but a single definition in a SoC-specific header. Therefore,
+> no PMUGRF_BASE define in sdram_rk35xx.c; instead, a definition in grf_rk35xx.h
+> that is more SoC-specific, something like RK35XX_PMUGRF_BASE.
 
-I do not really have the bandwidth to make any changes and subsequently
-retest the mezzanine card setups, but I suppose a more flexible
-board_fit_config_name_match() implementation could be found, where it
-does not assume certain mezzanine cards are present in certain IO slots
-just based on the SerDes protocol. Extend hwconfig to store what is
-inserted in each IO slot? I'm really not sure.
+I partially agree, however I also want to avoid easy use of these
+constants, also the grf_<soc>.h files is no more for newer RK SoCs.
 
-In any case, the current QDS board setup has U-Boot networking working
-on those ports, and I'm not entirely sure the same thing can be said in
-your design, at least as long as you permit this lx2160_sd1 to change
-the DPMAC assignments at any time. For the QDS it is a clear functional
-regression and I don't want it to be permitted without serious sanity
-checks. On the Nodebox I'm not sure, you set the expectations.
+Current practice for RK is to define _BASE constants along CON/REG being
+used, and are/should typically only be used/allowed in core SoC specific
+parts, e.g. <soc>.c and sdram_<soc>.c.
+
+These constants are used once, possible twice for a SoC, and current
+practice for other rk35xx SoCs is to have the constant here, so I do not
+see any reason to change this.
+
+Main purpose of this series is to start the removal of the unneeded
+syscon driver abstraction. To achieve this sdram_<soc>.c for rk3568 and
+rk3588 is aligned to be consistent with RK SoCs more recently added,
+i.e., rk3576, rk3528 and rk3506.
+
+I do not interpret any of current made comments as a request for changes
+or objection to the direction these changes are taking. Please be
+explicit if there is any objection or a change that would warrant a v2.
+
+Regards,
+Jonas
+
+> 
+> From a theoretical standpoint I would prefer a single source for each piece of
+> information, therefore having registers addresses in the Device Tree or in the
+> sources, and not the same information repeated in both. However, this is not
+> always possible (code not relying on DT such as TPL one) or convenient (for
+> complexity and/or performance trade-offs).
+> 
+> Regards,
+> Massimo
+> 
+>>
+>> At least that is my end goal with this and pending follow-up series.
+>>
+>> [1] https://git.u-boot-project.org/u-boot/contributors/kwiboo/u-boot/-/commit/cfb736dea37f834e849e54d39fb086c91697fc24
+>>
+>> Regards,
+>> Jonas
+>>
+>>>
+>>>>
+>>>> In this initial part the three current uses of ROCKCHIP_SYSCON_x lookup
+>>>> used on RK35xx SoCs is converted to use a constant value or using
+>>>> phandle lookup, followed by removing the SoC specific syscon driver and
+>>>> finally removing the RK35xx special ROCKCHIP_SYSCON_x enum values.
+>>>>
+>>>> The changes included in this series have no intended behavior change for
+>>>> the affected RK35xx SoCs.
+>>>>
+>>>> Future series will continue to convert uses of ROCKCHIP_SYSCON_x for
+>>>> remaining older RK SoCs if this initial part is accepted.
+>>>>
+>>>> Jonas Karlman (9):
+>>>>   ram: rockchip: rk3568: Simplify get_info() ops
+>>>>   ram: rockchip: rk3588: Simplify get_info() ops
+>>>>   video: rockchip: dw_mipi_dsi: Get GRF base address from phandle
+>>>>   rockchip: rk3568: Remove unneeded syscon driver
+>>>>   rockchip: rk3588: Remove unneeded syscon driver
+>>>>   rockchip: rk3576: Remove unneeded syscon driver
+>>>>   rockchip: rk3528: Remove unneeded syscon driver
+>>>>   rockchip: rk3506: Remove unneeded syscon driver
+>>>>   rockchip: include: Remove unused ROCKCHIP_SYSCON_x enum values
+>>>>
+>>>>  arch/arm/include/asm/arch-rockchip/clock.h    |  8 -----
+>>>>  arch/arm/mach-rockchip/rk3506/Makefile        |  1 -
+>>>>  arch/arm/mach-rockchip/rk3506/syscon_rk3506.c | 19 ------------
+>>>>  arch/arm/mach-rockchip/rk3528/Makefile        |  1 -
+>>>>  arch/arm/mach-rockchip/rk3528/syscon_rk3528.c | 19 ------------
+>>>>  arch/arm/mach-rockchip/rk3568/Makefile        |  1 -
+>>>>  arch/arm/mach-rockchip/rk3568/syscon_rk3568.c | 23 --------------
+>>>>  arch/arm/mach-rockchip/rk3576/Makefile        |  1 -
+>>>>  arch/arm/mach-rockchip/rk3576/syscon_rk3576.c | 22 -------------
+>>>>  arch/arm/mach-rockchip/rk3588/Makefile        |  1 -
+>>>>  arch/arm/mach-rockchip/rk3588/syscon_rk3588.c | 31 -------------------
+>>>>  drivers/ram/rockchip/sdram_rk3568.c           | 29 +++--------------
+>>>>  drivers/ram/rockchip/sdram_rk3588.c           | 31 ++++---------------
+>>>>  drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 16 ++++++----
+>>>>  14 files changed, 21 insertions(+), 182 deletions(-)
+>>>>  delete mode 100644 arch/arm/mach-rockchip/rk3506/syscon_rk3506.c
+>>>>  delete mode 100644 arch/arm/mach-rockchip/rk3528/syscon_rk3528.c
+>>>>  delete mode 100644 arch/arm/mach-rockchip/rk3568/syscon_rk3568.c
+>>>>  delete mode 100644 arch/arm/mach-rockchip/rk3576/syscon_rk3576.c
+>>>>  delete mode 100644 arch/arm/mach-rockchip/rk3588/syscon_rk3588.c
+>>>>
+>>>> --
+>>>> 2.54.0
+>>>>
+>>>
+>>> Regards,
+>>> Simon
+
