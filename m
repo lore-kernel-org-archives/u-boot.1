@@ -1,214 +1,184 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE87BCA5FA1
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 17:05:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C57DCA5FA1
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 17:08:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 783B1606EC;
-	Mon, 28 Sep 2026 17:05:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 030C980E84;
+	Mon, 28 Sep 2026 17:08:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LvCOhjv-8mVg; Mon, 28 Sep 2026 17:05:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4B356606F8
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790615110;
-	b=oT0Maw2w8Oec4s0sTwC6ktsv5hZv8iQDee/r9ggC9e1eWQHGIXDP6nr5zsX8Cp7gSIoq
-	 KDaztTqWETwqfGtrCf2RbKgJ3VseUTEAC19hFXPrBAzlrp12ERaVlGNJ/oKR0lQCbspHK
-	 IFWQEN1pqBolea9IPTnFC/cLcRkcx2C6I3saV+KVDfMF4hx7aRzPaGOL0ozowLTWRObxk
-	 kKb6d2jcfReERfn6B8FsHkNbHccP4E8Sg+cokWIrmfcYZzQkZ98manlohyi0S+Noai8Oq
-	 hfXGC8YLvb14eRtCyn+yopBOfL/6vU/7lthNLdm51pXBXBcWAStJjjia05xiOJknoqw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4oCOgE7YyFyh; Mon, 28 Sep 2026 17:08:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 3ECEE80E31
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790615325;
+	b=E1KtxzrxWcQ1QJvuHZtfY6idtne/IeiFHRwYuz8AXC+f8KwHu53AF1zgBKCV0hLp+EOr
+	 KyzswH714xE0pOsJZzxrYyhEpm1QdDEi349zpWwsOAtuNyxdhFR5l9gO2XHPc0ZnfBctV
+	 5NZi/INXWF+4c07qI3aHlOSd6k9Klay5t03vAaejLBsRF6yVUApeMsB0+nZW8+Oxz5gQs
+	 p6tzl5wGPGBxgEABxZr0XCGvdYtxy7UXwZRryiNjueN0/8jEgT2yFDCqfPWRy+8odq96h
+	 gBavGEKQjUiCSQxaZ7qR3NTvSrDSWtWywV4JHEc5uz+VNxWFiVtX+hlROUZLixG88Gw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790615110;
+	c=relaxed/relaxed; t=1790615325;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
-	b=c4AxI2OXg+yM7upkpPKU+22Rth2ABVSHk3r9SUnEai+Rsp68wJ89iC0Og5iftadzkH6V
-	 S3VaGY8M2NgZGeB1jNIPxVEw2CANjOCE+2qL3KUUdVSvR19lQVBPmpzaLVGQlH+/LKN0m
-	 Kk9SiPpcIDhvElAa+VqyTofFhN0p/n4Fz+s7WGXGHiRw51QHlXBSvkj6X1rOyjqYBTq9h
-	 vI6MCV6VzkdcFNArcnnU7ISJomQGPeh5VUV7SkSlDrJQX8dHIDq91BIEpSJafC78F41DQ
-	 +esS2mq4gxkfGgW8sTxgt6NBqXfs3ApH1pTiZS076Kb2ylPnkoD5CJeixNxMmr7kdgw==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=pass header.from=flipper.net;
-	dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=IdxLR2io;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=E+sjBg4eOcTJYmBEEPNllYUckh1ov5pmCGKbRUeX48E=;
+	b=YS0ebwKA4EQ3bmeR0qRhqkdwGxAAlneCVvTNvSuaIN7vfOLElo7XBdY1hh9LXpB6xH29
+	 qUpUPjNDZFPaP/Ihk0Vp0R/dzjJBfJFBJBY1X20AixBI1KZ5EY6onyeuTj7XSVrFnhvKH
+	 55ftGA/vh8qcaWkLAIOxQq9BKI+/8aCOmJip9Iu0ZUIFthMJHX7vvNOhw2cHfZYkVT0aZ
+	 6P1KYB2XKSpD1ou2drs6Oqg1HPEQuu+MuDJVygkdx7CGA/YoqJsavgj38mgcehR0e56Va
+	 h5BJTF8WbyT9PguNhFggblJQyx8bPxLCGfoFIlDZISwwICvghNS1v3tjkexdxCMi8rA==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790615110;
-	bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
+	d=lists.u-boot-project.org; s=default; t=1790615325;
+	bh=E+sjBg4eOcTJYmBEEPNllYUckh1ov5pmCGKbRUeX48E=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=S9c0ZvA/S9zOzhVaM5fhfy6TMtNWU4GsxIMyJE959bC5P0hJMSbEZFk8D9n3Yz8VD
-	 oiIxwLEB+tt0zCtJ4w+R5MooydSC2SHz3ueqQ3fDBKtjxWavz8SKxk7rXjkEzMdAEz
-	 IWveZXi5HUCqKTWsgL+uURyXuRTcRiz1rfkkHdWev3ihy1JgLOglgfLGJM4D7PG0Y/
-	 nRt4P419hX1eF/cQptV+O80gtF1WM0y/GNZdy9X1ZCbTYr8MC3ihTvnQlrYh/dwBEZ
-	 VTPEZT/XefeeW1pcgIucWM+qAChuGxg0ZWhtpIqw1fvs96IHuNhBZFpvQ+phjVzEL9
-	 hAzD/B8Uhwx6w==
+	b=cBM3gzAtizpA/IZDtQWolKJXmzYhyT04CtNvcd3bfvjK781BqL6SjOHoFn9w3InBp
+	 KpLzqLNCgwQNCAJ4jbgcE/PgKog9/bQ+hgGpWFQ4pkEjGqF8SPg82VUhP/8EI7e8E7
+	 A7Ygj0LHXt8uwIkUWphYuW1zJ3FjsYMcom7AinTaPcqmRm4FQ/lsQcgD9NyVOB99VW
+	 CoJkleAJxN1A2D1IQpp+PaC2peA5sKWgbiW3zBIeNzYvMteqqG+2se1ajtCq4MbqGZ
+	 1tSM9pce8c+j1vjLVm3qmWNFCrgIJBgUN2dzHbuh7YnRZpWZqqMEzX9A56cIEeUBQz
+	 YnIaqTJZPIs6A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4B356606F8;
-	Mon, 28 Sep 2026 17:05:10 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 683793A0
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:44:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3ECEE80E31;
+	Mon, 28 Sep 2026 17:08:45 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id CF77672
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 17:08:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 58EF960615
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:44:51 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id B42134054F
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 17:08:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9pj5-ooYomrE for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 16:44:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org F1855605FC
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:34::f"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790613890;
- b=bQS67WVhHrmEiKkN2D8ITdlE1P5gDmYVcUD/okKqz23Bvi9eo1E0R1DE6Jz9S7JsuHvV
- fWwLdXvx6VD16Opi6tip1BlrngkHKwENhZKL6dCE57LiadFpYOv9Vk4EOPaF2YoS0AUoi
- oDEIHFzHLXQcnUcF0rzpQ7HDzNC7nkEQH0mJhwxf2hakrq2znBDMgc/3ZwdVpoVb90+ar
- 7VVFiD21GyLPz2ZPPQAmPIF63jMCVb10KgmviqEXqkBSbU6LNTqe674peFi6H3Odilzgi
- Pl4KiL5tzXrQynQP8nS5Q/0op7aCmvE4kjWozhkF+Ol4h89WCWgcxVvijTFDiYLjxYA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id O-TLgZntowqc for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 17:08:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 97E4B4052B
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:33::27"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790615323;
+ b=BLEZ2FxhZvprhhoZYGS72tQRqTz/dmI9d3e7h+xeGDnmMl/3nwJuPqk79Lm3VtIeGsIq
+ EF1Rw+rKb84FrOraQuCzFE42p7XqY/2rQJhwEHIAf/vrP+73Q10rAXLxO4fDteRklcmyW
+ cLBrBj6tuYCiUmhEZEMewvqM1hoK8SRXeH86YtLDCnYtbOGnNQ1QXK2Pz+eXfmQeMMMd8
+ oIEa4MXMolRGWAmcJj8CIf2nAZ/qr9nApwNp82wF9CiZBrThzTmR+N7wGZgKiSR/QtEkb
+ i1MSakLnRcM9er4eW6pcMnjHJKsL5NcCAt4sB8sJwFj0cyieqahSZX1qL0179c9Rrlw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790613890;
+ c=relaxed/relaxed; t=1790615323;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
  In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type:Content-Transfer-Encoding;
- bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
- b=MwsOeIqm+ddVdKTRZ/PUTDKVLP1HfQidyQmRVkpuD5tEQB20241vVQ7S4l05uWuncLvJ
- zHn6SwukW8tZkuv9t7ygmA2KQ0iwmJb+1uC3+gWsRMZcFuNz6vPXecF94MT6btKHFTr9f
- H8FKA4bAfiedBaw7RLjAydm1V3sYPJdk2fzzPKIDl+RAaXwTP4gzEirfXIDysftS8D7XM
- oXUYR9wBEkLxOIoKLkGtj9eF0qkKXewIdi6Bk/CZM24emaYuCHCqEZD8hnm2MHFDcnWSW
- jcZQFi8E1H7S8l00eAjUNntKM+hjYBzzodkPj822dkOXPN4mMPRZf7/lWWWQZchZm7w==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org;
- dmarc=pass header.from=flipper.net; 
- dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=IdxLR2io; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:34::f"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:34::f;
- helo=mail-ej2-x0f.google.com; envelope-from=alchark@flipper.net;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=IdxLR2io
-Received: from mail-ej2-x0f.google.com (mail-ej2-x0f.google.com
- [IPv6:2a00:1450:4864:34::f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id F1855605FC
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:44:49 +0000 (UTC)
-Received: by mail-ej2-x0f.google.com with SMTP id
- a640c23a62f3a-c2a9edfc851so407243266b.0
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:44:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790613887; cv=none;
+ Content-Type;
+ bh=E+sjBg4eOcTJYmBEEPNllYUckh1ov5pmCGKbRUeX48E=;
+ b=dJJQO+OA86XoGMJusk/fM6xq7jPh4IjdGljqCPKNESnAGkS/xjuTvcwnkrfdr7E+0UtF
+ Dd1Fctt3ZKMA9T0S+NJR5aotawH/i4CBscbhOVGpZgSbWxWl4CPX2uP4BInPNa4PFXPSl
+ 24qrvzfwgOvU4s38Or9dLZv0ZOnnU02964v35DoDBqNkzeeDEqkv6z7vyFZQF4FHwB3Jw
+ I7VCBofxAM+d0TvQHvkDhxrlGWIcwzQFB4U6X1RGuZ6/XQXIEqGJ0ymUV0Zg/bOXyNj27
+ Je1Z89jT8HoPZOXSmJ3ePhCLkFB1W2B2FLcJ0qo5w/1YhxAEpyu99sOZv9wsR5FLaIQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ dmarc=pass header.from=chromium.org; 
+ dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=nrGq61BZ; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::27"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:33::27; helo=mail-ed2-x27.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=nrGq61BZ
+Received: from mail-ed2-x27.google.com (mail-ed2-x27.google.com
+ [IPv6:2a00:1450:4864:33::27])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 97E4B4052B
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 17:08:42 +0000 (UTC)
+Received: by mail-ed2-x27.google.com with SMTP id
+ 4fb4d7f45d1cf-6aa135d6e97so5168256a12.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 10:08:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790615320; cv=none;
  d=google.com; s=arc-20260327;
- b=TowxF72cz6wBvemQ98i2OWNMUCGyQ+mh1VXUxNaNjpCmnJv7WHnr5hhpAJXlWdJP1L
- udCbNOq7X+s/khAPqXs2M1Q0MMix+sfEjDrH8wceV2P90VI8g9sSapfUGwIopIr6srzO
- JNLUYh9hed2Aym2ZxH9f1g9PQkurcV3wp53fBdkMm7EBjJXw2iH89Ori+5SlysbGGxn1
- O9pUTdQ7wGaFSrMPK+v8n0kszn1M6mfkOG48OUnzM/RS/62q9TICqK8g4QVJmznynSbk
- QH3+5NofW20M7MXiWnFYC4N08zAdrJuexTo5NTgWzNzlTg68/RbY9j113w+aeqsvgIBG
- bxiw==
+ b=loZFgL2iAqpesIEzxqqy9oxgrfY/BpfXsHG01UgfghRQZ+9JYZS61pjGp0EhFgmJw4
+ n69T8tuHMGDi1PofdIdH3YJLt7BKTsq5B8xeXQ+7E8KuCIruVw3fAGug4tC/Fxg2fdHI
+ LthKfEw3bd/XMOa69Dz0XrBYamNZ7a4a65twuJKiDs44hNouX9Dp0JyRAB9FrlJYkjK4
+ kIRj7QKuOKi6sGPS8bLLNJOZV5OlsudSCVKZ7cdw6PjncEjoaZRE67kzrk0hTL63k86z
+ GQwES5S6AEmAdoVZTbbCXkkL6RiemyN/WR3+Po8wytpl4neIExZUcUTKXRCJXZvRlGum
+ xWsw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
- fh=X0PN9lBUC28xruMLlb/E9GWPFyBweSpvg8ZgHdQS2Mc=;
- b=ARk0L0htqH3VR5lCDrqYY+yQFhhlWe1P0f/LYHXt65wo6w1ewhw82w4S0xzEQpybeP
- ncse35rwLQBapUO08LpuALOVVAGlQwu3g6LPnz4bJdZLIeWMKxPXvzAHQCTyjQlFOh9l
- YMdqcxX9pbEcOERY1zVZ8QYtft333hkUKOoMxJpr2SUiQAts4ZfFK1HNOc6zbmmjY/N7
- RqSdV2vVWUenhLDNAkcUytzXkYXHzCpL4nwaanf9qYXZF91tyvO8UX+iPm+Kv/Ad4RDX
- ZtUUfJiEvhzNUVfHfz/rX6oYynTH65XiTgFgVOYKw74h+3M5OnQ1vjV7cWS+jY82Hl9W
- IEgw==; darn=lists.u-boot-project.org
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=E+sjBg4eOcTJYmBEEPNllYUckh1ov5pmCGKbRUeX48E=;
+ fh=IAgKudDbKG9+2gjeBrcrgcf6XlrOZMsCHYryACa8tNY=;
+ b=HMWlRLjjHLC1dKkPFrmhOwaFHd620oY7yjAIVwUIBVxSYz8UCZlTHG6xIrMAW790uL
+ zFRW+UH24rjuB3Uqknagec8qsD66wPbr53ybSbQrmpVOU4NVMfD+vXfO9ww0XiaiCMB/
+ gcUwOXcAwekPt8o3lIBQXkhA/YnQcTcmQ+rqLCNDv+I79zlTi3n6fYG+sBoIlB2K3ZZu
+ mIpUfPaO10mPVu3xm8Ty5ilj1lDrMlL9s1PAReywPHEyz5mncQKN5GoeFwonnJp+NOyo
+ VS//CS01xe8kdiE3oAXfZroNLP5kjHhjD8XOOQN9Y2qb02L8cwrd0Pxf3Q0nSX+AZrZT
+ 1xGg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1790613887; x=1791218687;
+ d=chromium.org; s=google; t=1790615320; x=1791220120;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
- b=IdxLR2io2ujKxzpsyQ2d9A0IhtKL6hCaXw6T9sJJOm8A9GL9EVKOzmIhFvq3XK2OQf
- LbwsqN2ydl/Q3JxEEPqzisgql7YBoLyIT82ZsVPK4LezX7vqWGaB8g4BEl1qOlytHTxK
- VUDB5NvDRVUp3JzWhEviwJBXkHaf9RZLZCDEzUlmdnq89CaVGG0bBjEWgu+OJULyhy0e
- tj3mxagrDOY89XnLVGIrlcKQtDiin9bIoT+iHbZwj2z+0IexWmX1ihUJ3fG0eoqflAJ/
- ff5Fe14sbmbMNnd+3R2n6+4+gkWjTv3KgjOu3sMgc9YhvDdDw5dkLm9nk6GN7CVK0GZH
- vC+Q==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=E+sjBg4eOcTJYmBEEPNllYUckh1ov5pmCGKbRUeX48E=;
+ b=nrGq61BZ+a2rrcmgnR2gvsnIXayIGUAnISUjMJHS8oBJutuIOdbJJ9o7FjliJC0+zI
+ YTadob+x+F6MRY5tsNMt1rW5v7Ym8AEZbb4GREOgyFDHHsWClYYTaWTYldIPLIaKhtvu
+ Vjaz0+Vky6zti5eYUdku/FY8lQy4xBmAMTUlY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790613887; x=1791218687;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
- b=Vmo3OGhOwq+A5VArCVlTuakuGSWLdYu0z7qwngbrZs3TVfOCc+AlPEkewmKeYNh1F0
- 4aVemRDmkO7nV6m+ejEfKBDiLH0CLqgnJAbAQWv868sTUwYQQGfS+n3Mg2bbbE39ZeWe
- tzGR7FMeRaoBRLR0rJEHMnneCdrXq0/KF7M6sbB4Ne1ZkNShzP0ELs3iu68fuD9ivV7v
- MyWFDhoBT5HUnUfi406MewSQgm8brk27F5TRveURCLWb9jca5dp2JP35/Pl8jHQBJR8p
- WtXTOeLFJTmYcnBIXUOCienpisNW6vGdetZiTSlYAmlHME/EqetllwFoDDAxHS7DLo2Y
- qB7g==
-X-Gm-Message-State: AFuF++mPM8onjCU5XQAFbS0i9RkiJptJghYFFIlDNRhpXxU9Z+mKYd09
- qsymVgs39yAOKvjZ6YSrylu6sugmtxgjaLeWzNTTe2FWzzEBQBxY1dfqMFVmzut0+KOnt6+HQ5/
- l3yZfLCpCJj0Tdfop7LiLxHMWRuUNN9VD0qMpNyfOKw==
-X-Gm-Gg: AYBFou0RXScU6Qpt10RvLhmZOEDOyh2mdzwvVxFVXNILYC3q6r+Hxj1rDOdYrDDq8fx
- hgUzwMczeJ5vlJwnPoVih3f7V1ajz0uAhRvMZRI4qPkb/tYil8uIQXW4QJNfe7QCrpxlKjh1OwD
- FucWW7l0zAQ1I789R5JEypDBI93z0ylE+hawRBdtJf7kaTKDPVzXD+JvQwUTwRmfNAXn7JVuvl5
- KWtTMXPCVRs20mI8mjv0oOWJ8prAm3gj/Xr7UcVX3N3RSVbwCK2N1nojkTszAKGga/HZrwWp9kr
- Gpbgn4+o6z2YNzHnMyfu6J43B/ZLrYmulGfR2NH3K8AcBDjP63SM6l1S0rNPUdongrcLDE+u4YY
- 7YEVpuAN2h+Y0
-X-Received: by 2002:a17:907:9342:b0:c26:19de:9ad5 with SMTP id
- a640c23a62f3a-c2aea09c1ebmr867857666b.45.1790613887076; Mon, 28 Sep 2026
- 09:44:47 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1790615320; x=1791220120;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=E+sjBg4eOcTJYmBEEPNllYUckh1ov5pmCGKbRUeX48E=;
+ b=c7/vEhDCeCYWT6EkVsjSqa8+MBgrbibcd8Mrzg/a5ZIYqU08ytbmuSDMOnhemn0I96
+ RboGdSlv69Q2XbZUJOHgyhoj+E5UI1x8wmJupicQ50XmXSoe7pWKNlwxxu6f68/7wDrl
+ q6Sicrc79HMJxSRvQD8FSE1M0vFCC3LQ1xqpj5mvtngLcgLUnhlwUPv6CjIfd5+weSik
+ 1ATAmg/34NC41Rr+j+MXiiRHydrPPPjHhf4YJSaYDLQcKMGMjA92EyV9/nje/PKdFRTs
+ PmIMEYWS5+bHsgprwirWfaeS3atu6H9lgoQxbdmbAL7xu8wQTJReZJ8HFpKCa/DekYv3
+ aCkQ==
+X-Gm-Message-State: AFq9FYLxuIqRlBZjXBkABwgXTzzgta0YzJwBWn5N/uDujXLpLhzviAWZ
+ 9kmbwXzSIMrjrRMvmFSu37QXsSNuGSi5N60H8Zr2LRm9F39ZZp6o7voiQzdlAhht2Aibji8eU2c
+ DaHsmUyOShHbc91+Z7j0QkKX8P00c9z4qkiKz7YNTbEth/y9br74=
+X-Gm-Gg: AYBFou1JNI02fruEOeXcvP99nWyeSYFVoBlMsGsyvdVfIlVvKjr9N9D9UAjmTGtFrvT
+ uiWr8xc/p6jHmODnYaUDBgEXdX2OFEpjw/2Nus9M6fgcJm1UR2ecI1UiRkPnylT9KjVctI/C5Jm
+ j+ZbjHY09i6GNv9pwTerIbYZKRtf8xVzvA0kirwZ//nYWrQ4TlULixLJ9isEPgwqVlG91/Cc1jR
+ o1CoLkcJ+oRZp26gIGSqbwKyW1fdmROt6KB3nTn+XXMiBUoievzGiIm8+chQYOOLB2bsuxwxoeX
+ pPGnOz2IEC12qZv79uQMa7H0VNT1IFLtiJaLTJAxE+cXoF3UNxWnnw==
+X-Received: by 2002:a05:6402:20cd:b0:6ac:8dba:e358 with SMTP id
+ 4fb4d7f45d1cf-6ac8dbaea9bmr1616558a12.5.1790615320245; Mon, 28 Sep 2026
+ 10:08:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260731-atf-falcon-v2-0-acb97c172993@flipper.net>
- <20260731-atf-falcon-v2-6-acb97c172993@flipper.net>
- <00e2291d-7fc5-4ea1-abb2-9b9100a2b680@cherry.de>
- <CAKTNdwFMCK2frVyrmYWe67k6WgjA7pmJn-SbU+_9NtceHqHERw@mail.gmail.com>
- <6ea99943-eb9d-43a8-a238-edbc1b9c767d@cherry.de>
-In-Reply-To: <6ea99943-eb9d-43a8-a238-edbc1b9c767d@cherry.de>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Mon, 28 Sep 2026 20:44:34 +0400
-X-Gm-Features: AclHuK8mtXZ36IawKZnYphSkFPwqtefcQcREeenJwCLKxLbaTvZIzyekYbwjVic
-Message-ID: <CAKTNdwELO46dZ1Cy+-wpBbQNsP9XJyTgCjBYLQpE39YJ3XP0wg@mail.gmail.com>
-Subject: Re: [PATCH v2 06/10] binman: Add support for pre-patching FDTs in a
- FIT with a /chosen node
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Andrew Davis <afd@ti.com>, Hrushikesh Salunke <h-salunke@ti.com>,
- Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Ronald Wahl <ronald.wahl@legrand.com>,
- Richard Genoud <richard.genoud@bootlin.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Johan Jonker <jbx6244@gmail.com>, Daniel Golle <daniel@makrotopia.org>,
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Tony Dinh <mibodhi@gmail.com>, 
- James Hilliard <james.hilliard1@gmail.com>, Quentin Schulz <u-boot@0leil.net>, 
- =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>
+References: <20260922051838.526368-1-hs@nabladev.com>
+In-Reply-To: <20260922051838.526368-1-hs@nabladev.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 28 Sep 2026 11:08:28 -0600
+X-Gm-Features: AclHuK8IPdXKpHMxjPCW4LfTBDQMNcDnAViJZ3DKeDaU-AaOwCr6iTgu-J1AG24
+Message-ID: <CAFLszTgXp8JWtSmR1h3FQzZdcxjJBBA3P8r1wB-bW5mMox64fA@mail.gmail.com>
+Subject: Re: [PATCH v1] binman: nxp_imx8mcst: allow selecting the SRK table
+ index
+To: hs@nabladev.com
+Cc: U-Boot Mailing List <u-boot@lists.u-boot-project.org>,
+ Marek Vasut <marex@nabladev.com>, 
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@nabladev.com>, 
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Stefan Bigler <stefan.bigler@securiton.ch>, 
+ Aristo Chen <aristo.chen@canonical.com>,
+ James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Mon, 28 Sep 2026 17:04:44 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -222,188 +192,28 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Mon, Sep 28, 2026 at 7:53=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
-ry.de> wrote:
+On 2026-09-22T05:18:35, Heiko Schocher <hs@nabladev.com> wrote:
+> binman: nxp_imx8mcst: allow selecting the SRK table index
 >
+> The SRK table installed by HAB holds up to four keys, and the CSF
+> "Install SRK" section picks one of them via "Source index".
 >
+> The configuration template hard codes index 0, so an image that has to be
+> verified against any other key of the table cannot be generated. That is
+> the normal situation once a key has been revoked and the next one of the
+> table is put to use.
 >
-> On 9/28/26 4:03 PM, Alexey Charkov wrote:
-> > Hi Quentin,
-> >
-> > On Mon, Sep 28, 2026 at 5:26=E2=80=AFPM Quentin Schulz <quentin.schulz@=
-cherry.de> wrote:
-> >>
-> >> Hi Alexey,
-> >>
-> >> On 7/31/26 7:10 PM, Alexey Charkov wrote:
-> >>> When a generated FIT is used to boot Linux directly, bypassing U-Boot
-> >>> proper (Falcon mode), there is no runtime code to discover the kernel
-> >>> command line and (optional) initrd location and include them in a FDT=
-.
-> >>>
-> >>> To facilitate easier preparation of a ready-to-boot FIT, add support =
-for
-> >>> pre-patching the FDTs in a FIT with a preconfigured /chosen node incl=
-uding
-> >>> the bootargs and initrd location.
-> >>>
-> >>
-> >> This sounds wrong to me. Why should we hardcode those at build time? W=
-e
-> >> already do DT fixups in U-Boot proper *at runtime*, so we should
-> >> probably do the same in xPL when booting in Falcon mode instead of
-> >> hardcoding stuff. Since you're aware of this, I'm guessing you decided
-> >> against, but you don't tell us why. I'm a bit worried going with the
-> >> suggested implementation means we'll eventually have a binman node
-> >> property for each DT node/property we want to write/override.
-> >
-> > The "regular" Falcon way of doing things (i.e. the one not involving
-> > TF-A) has so far been: "capture what U-Boot patches into the args to
-> > be passed to the kernel, package it into a fixed binary, and boot only
-> > that". No runtime fixups. So I more or less followed that pattern, but
-> > tried to make it a bit more accessible by eliminating the "capture
-> > something at runtime and save it somehow somewhere" step, which I find
-> > unnecessarily painful.
-> >
-> > Maybe runtime fixups could be brought into xPL, but they are
-> > excruciatingly slow, whereas speed is the main reason for wanting
-> > Falcon mode boot in the first place. Right now with Falcon mode on
-> > RK3576 I'm getting 2.5 seconds from applying power to _userspace_
-> > (i.e. full graphical UI drawn on the screen), whereas the best I could
-> > get with U-Boot is just over 3s to its boot menu, much of that time
-> > spent going over the flat devicetree before relocation in O(n^2)
-> > passes. And those 3s are after stripping the massive pinctrl node with
-> > hundreds of its always-present children from the pre-relocation DT,
-> > which alone saves ~0.4s.
-> >
+> So make the index configurable the same way as the other properties of
+> this etype. Add an "nxp,srk-index" device tree property, overridable by
+> the SRK_INDEX environment variable, defaulting to the previous value 0.
 >
-> Are they always present, even with /omit-if-no-ref/ instruction? Or
-> maybe you're building the device trees with -@? Trying to figure out if
-> somehow we have a bug in dtc (or in our scripts making use of it).
+> Signed-off-by: Stefan Bigler <stefan.bigler@securiton.ch>
+> Signed-off-by: Heiko Schocher <hs@nabladev.com>
+>
+> doc/imx/habv4/guides/mx8m_spl_secure_boot.txt      |  2 ++
+>  tools/binman/etype/nxp_imx8mcst.py                 |  4 ++++
+>  tools/binman/ftest.py                              | 20 ++++++++++++++++
+>  .../binman/test/vendor/nxp_imx8_csf_srk_index.dts  | 27 ++++++++++++++++++++++
+>  4 files changed, 53 insertions(+)
 
-The problem is that there are a lot of `status =3D "disabled";` device
-nodes referencing pinctrl nodes, which keep dtc from dropping them
-altogether, so a lot of unused pin configs end up in the binary -
-enough to be noticeable in boot time.
-
-> Don't we have FDT and DM in SPL anyway as that's how we probe drivers in
-> that stage (not counting the few SPL-only boards we have)?
-
-SPL's DTB is tiny due to bootph-* markup (it was just 27 nodes last
-time I counted for my RK3576 use case). Making SPL parse the whole
-OS-oriented device tree, along with all the relocations required to
-insert stuff at runtime, will hurt.
-
-> I don't have anything better to suggest, I'm just really worried about
-> the potential ballooning of properties we need to mirror in binman.
->
-> >>> Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> >>> ---
-> >>>    tools/binman/entry.py     |   8 ++++
-> >>>    tools/binman/etype/fit.py | 103 ++++++++++++++++++++++++++++++++++=
-++++++++++++
-> >>>    2 files changed, 111 insertions(+)
-> >>>
-> >>> diff --git a/tools/binman/entry.py b/tools/binman/entry.py
-> >>> index ce7ef28e94b1..e0dea8bf3a49 100644
-> >>> --- a/tools/binman/entry.py
-> >>> +++ b/tools/binman/entry.py
-> >>> @@ -636,6 +636,14 @@ class Entry(object):
-> >>>            self.Detail('GetData: size %s' % to_hex_size(self.data))
-> >>>            return self.data
-> >>>
-> >>> +    def GetNode(self):
-> >>> +        """Get the devicetree node which describes this entry
-> >>> +
-> >>> +        Returns:
-> >>> +            Node: Node for this entry
-> >>> +        """
-> >>> +        return self._node
-> >>> +
-> >>>        def GetPaddedData(self, data=3DNone):
-> >>>            """Get the data for an entry including any padding
-> >>>
-> >>> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-> >>> index 32caa03a7e16..750ff5b47ed5 100644
-> >>> --- a/tools/binman/etype/fit.py
-> >>> +++ b/tools/binman/etype/fit.py
-> >>> @@ -304,6 +304,40 @@ class Entry_fit(Entry_section):
-> >>>
-> >>>        See :ref:`fdtgrep_filter` for more information.
-> >>>
-> >>> +    Patching /chosen into the generated device trees
-> >>> +    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> >>> +
-> >>> +    When the OS is booted directly from this FIT (e.g. Falcon mode) =
-U-Boot
-> >>> +    proper never runs, so its usual runtime /chosen fixups do not ha=
-ppen. Two
-> >>> +    optional properties on the `@fdt-SEQ` node make binman patch eac=
-h generated
-> >>> +    device tree at build time:
-> >>> +
-> >>> +    fit,bootargs
-> >>> +        A string written to /chosen/bootargs of every generated devi=
-ce tree
-> >>> +        (any existing value is overwritten). Typically set to `CONFI=
-G_BOOTARGS`
-> >>> +        via the preprocessed devicetree source.
-> >>> +
-> >>> +    fit,initrd
-> >>> +        The image name of a loadable (e.g. "ramdisk") to use as the =
-initramfs.
-> >>> +        Its `load` address and packed size are written to
-> >>> +        /chosen/linux,initrd-start and /chosen/linux,initrd-end (at =
-the width of
-> >>> +        the device tree's root #address-cells) and reserved in the F=
-DT
-> >>> +        memory-reservation map, mirroring fdt_initrd(). If the refer=
-enced image
-> >>> +        is absent or empty (e.g. an optional initramfs that was not =
-supplied)
-> >>> +        the initrd properties are omitted.
-> >>> +
-> >>
-> >> This sounds wrong, why would the FDT image node need to know about whi=
-ch
-> >> ramdisk may be used? Shouldn't we rather have a ramdisk property in a
-> >> configuration node, and then patch the FDT based on that information?
-> >
-> > Falcon mode boot where these are useful is for a fixed-configuration
-> > boot flow anyway, where one wouldn't have a way to select among
->
-> How do you plan on doing A/B with Falcon boot? How do you know from
-> which partition the kernel you booted originated so you don't upgrade on
-> the currently booted partition? There must be some way for U-Boot SPL to
-> tell the kernel at runtime where it came from?
-
-I don't currently do A/B with Falcon; instead, I rely on the fallback
-to U-Boot, and U-Boot in turn loads from a UFS boot W-LU (which is A/B
-native). Making A/B work with Falcon would be a nice follow-up, but I
-believe it will require some external metadata to choose the active
-boot source anyway - and then the same external metadata can be used
-for the upgrade. Such as the UFS device attributes, or whatever people
-use for RAUC and such.
-
-> > several ramdisks to go with the kernel image. So putting this
-> > information directly where the user (i.e. the kernel) will find it
-> > cuts out intermediate steps, which in turn improves speed and reduces
-> > complexity.
->
-> You already have:
->
-> fit,firmware =3D "atf-1", "kernel", "ramdisk";
-> fdt =3D "fdt-SEQ";
->
-> in the configuration node. So simply have binman derive from
-> fit,firmware which node is included of type "ramdisk" and fixup the
-> device trees in fdt-SEQ based on that info? Less user-prone IMO.
-
-Ah, I thought you were referring to runtime FDT fixups based on the
-selected configuration. Patching it in using binman based on the
-configuration node contents should work, too, but what's the practical
-benefit? It would still use the same ramdisk node, just written in a
-different place - or am I missing something?
-
-Best regards,
-Alexey
+Reviewed-by: Simon Glass <sjg@chromium.org>
