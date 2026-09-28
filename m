@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 387BFCA5FA1
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 09:17:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3002BC9833E
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 09:17:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 084804058E;
-	Mon, 28 Sep 2026 09:17:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E0AF3606C8;
+	Mon, 28 Sep 2026 09:17:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9b6d30EPGQqk; Mon, 28 Sep 2026 09:17:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 8330740765
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790587075;
-	b=b3t9Qavrzfd1nxGgGOU6wM52efaszgTlMNKnm07LHCFoT22a9Knwv4jgVWBMXXpZvz0R
-	 xJVikUtU0OJoDtjdUCQ6ly4QURsa7aSYi8i5EkKEpXRS72rJncT+jsx5G807bvYE1++T+
-	 aTVpufZzXcmbQZrOO7xzQGgXSOFfrqLCiXPFfqFfdY1OtLTuuKAcKLCxY1L9WW3Tu6TMb
-	 mpQVCqeRaI3RmCcCPdo6vL2TBarZkLBehoCjb1tWr87oZzAi3YWoHled7W6X6DiR6MsPy
-	 X0mnOvyOqguAgJiSmDf41FWD6NUeKSI6oGP3jxBDxHgXnLzQr36uS2cblSdqrftPG5A==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wWfQn_Svyhjv; Mon, 28 Sep 2026 09:17:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 23C75606A7
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790587077;
+	b=Su0b2FcNyJeIw9EaJR4k0kr6IOj5PAwAQrlAiFL0YNx2uN/lw479GHoCUmkxDGXXsp1X
+	 0aipSpdCuTeLIrABBMxxYR19nOsZFUqXFVHg6ryaE0dwfaQwCIDMikLZR8ZXeZ9RjdGUM
+	 N4stGvyMROpgfEYorswm0UFnXh3hwNSsBJUus+DiQjt2RStPMjIC4teH9l376fivATkJi
+	 VNJHK8U/yOnsWcyivEEdsEEQjfnCHTQ76rZBg1H4tPp2E8imDpkyVNscjTVArMSQe5Fc6
+	 zSIXFq+UXqLyhJzuXDsogSyhIvovJFxQyIgsYMH9YUbKJ3Y1sUUMIqUpGdfa8lU9wZw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790587075;
+	c=relaxed/relaxed; t=1790587077;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,137 +32,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=oocQgrfQ01yOIc1PajZKx98kEZr3RiFUEGvHe1NoyrY=;
-	b=GzIKODKY3+YgYhiGeto5r7VDqXj2EHz8MKYJ5kpiYnOn1UEz8Q7TvybMDTLKzgJ3nNuJ
-	 VuOxhnNKk+sngf6f5uotbAe96QJCUzOcqjE9M+py8D9Q23xpxbD3TyT/RoSBgkJXV4h/G
-	 IcAjKJuBIo7svHLM8cfSI0cbDVQt2XUs9OqeBxe4789K5gMp/p5ai7BG+n96KtzyZR4WL
-	 dX+zkrg2uOkIOUS6q/cFET1VITPr4vL88C7USnGcfL0abjhsRtU5MMD7oOCp3DZsTLR6X
-	 8+m+MXf1LomYE6DeDJwB0bLTSybBDbLr/KnRFsqtofebPukqxuUgLz9odHBQFUnSnyw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b="g1TwBht/";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=XyD2FunruOnomFPev1nwBcWZ4UNYrLyNa1IGPysT8rU=;
+	b=FU2gWeORFHUAv3Odvyw811CUkIpmXWmtwOOQkPn1mXt6UDPGZf7oevmP+4142yKSDfhD
+	 PyHLvC11VOEjqHVxcWcSYTgdYPlpPeLhHCubahHDDEUw4aECLegV0hm3NThseEkiW7nNo
+	 NS1X7WhM2bx6YofVKDbG2dQc+ueuUNiPouafgVLqWX9tCydB7LEHLxgl/SI9qUwvK8gyT
+	 Ri1MoJYglp6sQWts17YZsATUpaiKsLT6RajLUB6bo2FkNCUn8jTPqrvRsdMmdxysxqLxD
+	 jkKVuv00Agc9o/Z9aE07ElIFDyX8/PWo0UwMDB/YSj7DyigtlxXlETExqkVpUCHQ28A==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790587075;
-	bh=oocQgrfQ01yOIc1PajZKx98kEZr3RiFUEGvHe1NoyrY=;
+	d=lists.u-boot-project.org; s=default; t=1790587077;
+	bh=XyD2FunruOnomFPev1nwBcWZ4UNYrLyNa1IGPysT8rU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=S9Qs5TC2r4OSRIonaoDxe05UuAHF70ttjpns+BQaXZwZ4BcoHyoYB4oZC9TRtSBdG
-	 roXQIkiRTIaMTp6EC+vIEoKbi236FoyNH5e+NF4/krrjQby0hw24VJ8tgizxS4ga35
-	 xAUqKADLhvJnaLFO6n8SU0H56t6Zw/QoWa72ugzobtdRfBY0k6ZUq9IQ4d663JiTGK
-	 obhPD8mAw5d98QdwavSwNpPOkaBwe5Te1S5wx2K6Sx54pJDlhC0rxmPxl0qQE2OAsB
-	 aqY4nILuer7z+cpqZ4lPBUN+mFM7EKQa2+smal++IKiBCHsfygzaYQe1tD6+XTpI8O
-	 hBg6Kt92LutQQ==
+	b=Vcx5Rv0NMbH+k306kZr3JGlBIrW2IWawovALBAX3gH4Lcgh57h+mjHE4kKtCvnSFg
+	 gCIXcceS0DLfc3vPHfYWOiyUCXTo1DcGWBXXm+lWSNnLMTm7DtNCy6y0xaTR9HNJNA
+	 wei8OAJipB5QZ76gNFmbubjbz0PYC+ORjD8ojS8LEqY8pUFPwkDtLsk3vP/iolu9/U
+	 /NnrKi5Q8YjMDEUmI7fUsGpIJxVzEHDtNY48u2v3uQ1FI08qMZhMonm8I3UJkMdd9y
+	 cFE3mEiwb9WVr5ce/7AIO0Fzb0lmWWo/dRjV4DZRcAWXuAJN6zhaxCNW03X6kkMUxH
+	 aCkEeQpEV3qGQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8330740765;
-	Mon, 28 Sep 2026 09:17:55 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1B85D2B6
+	by smtp3.osuosl.org (Postfix) with ESMTP id 23C75606A7;
+	Mon, 28 Sep 2026 09:17:57 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 331D5422
  for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:17:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 095D4406F9
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1972A40194
  for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:17:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Eqe4OpLvQgUk for <u-boot@lists.u-boot-project.org>;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hA8_2y9Y1i8S for <u-boot@lists.u-boot-project.org>;
  Mon, 28 Sep 2026 09:17:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 070CD4059A
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::433"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790587065;
- b=RVo76TUSZHFVDF76j9xnsgg4cuk7g092Jc7IYBABw8i5ucIRVx904D3p1ts9xj1bmHJa
- tGi5yYVH4kFeGNK6pMVbIzAgwoepoah9JwISZmRufI37mJCX4dV/aLjy7MSvClyrVPUT3
- uHx7WD9kza4fiFX9aTmS3lKxNYXezfCjDnKENESlzdueA4g/O7FySqHAPgLEJ+FVErA/W
- ZnqE+NFqpAlN7Q3qh+U+wKbMrbaE2WmBS5ssVRgSXauwoPTIdwm8swauRJJ1Kg0PN8rOC
- WjINxLVRJGXY/VKMwiIhBxwDzUyERoO1og8homEopnbpsEkT7kg5vQT6aU/NqOqbz3g==
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 483A14019A
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:30::21"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790587066;
+ b=i/FAstWw4kBdSeYrTr+qdREw60QKuekJTGS9nrv2cvLdTTSL3zetkypwDuxDOBuYeAr+
+ DX/1KWf4GMepRMUzW2xwn8XecouazQwaGZEjwGOcFBLw2kHe0ushsHPrFbVGu0/JKcClE
+ BWn0ZqzlNAHWcoUfPBYSJTuH+OwXLEdU/TFEsws4tiKQV5yehAW234+nj2b/QlNSLzjP5
+ wPlRR+fFHSaHQbu7tKlXMS2FvRkrxSgegHzIUiq/xzuLHSTnlDO9l3/EtCQx7QqKbWdkn
+ T7xAgXaSxWwC/euqX8qG2ObJ8DITzwyawiOdnJp6ITY1J6B965j169dOG/KKZN32USA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790587065;
+ c=relaxed/relaxed; t=1790587066;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=oocQgrfQ01yOIc1PajZKx98kEZr3RiFUEGvHe1NoyrY=;
- b=hbpDQbID1qgnqitk64IWCiCb60snC+/QZzMvI5yg8U7HEdjvSISiEbpXCVaQjtPM8Eab
- KFtQANJDxFZp2daoal3/xXBmywIuzIDQ/QYkSo4pNkqXDUd6jBtVEI8eu2xP8DeXxArCK
- F7mwKqQ6nic+BBE4b2B9ZPYo+1a1WZhFjwTmzEMfQI56PGHzRsDMIRx8l2ZfRsourDJIy
- zmszWHSMnv6SIBIHZBC0Dt/jXnNGWM5T5+6pbDCnnhyLOI+BLwh7zbRHKA6ibzG0gKY1n
- q1c8+rnETYS3czAGD8hJR7xoyM59exBtCujhZBjlU00TDmtGDNdFRzR9HrpyoUABx7g==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=XyD2FunruOnomFPev1nwBcWZ4UNYrLyNa1IGPysT8rU=;
+ b=mEBKc3hM8j/170byOGzVrrfxUZF2GX/8ArUhgxBo1y7eP3isxZ7dPI8zeJu0M0eAGITd
+ uhUozogyrYybunDuHZf7HrIr7MG93JWewzVeBtm3LV6i+u3vYiwFVW75abejyN8N/MgUj
+ RfShjuQJgZCdb6REaU4crRnHAkRkz4+Xio6i1vGT22naEOB8c6ePs4GU7ZwTUyUu16vXj
+ yZw4HW4a2cjp/uZu1cSiLNqLeaUs7R1vRvTFwLloW+uTVy/XHFeJV38a10frPU4T/qGmW
+ hdd1lHjEsari+oJiWhv4yzdN3b8YVJY9Lq9/xLNHABn94G45Tabm6i58nshoUKaNieg==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b="g1TwBht/"; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::433"
+ header.s=google header.b="gRwwTwb/"; 
+ arc=none smtp.remote-ip="2a00:1450:4864:30::21"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
+ client-ip=2a00:1450:4864:30::21; helo=mail-wr2-x21.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=g1TwBht/
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 070CD4059A
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:17:44 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-488885c3844so1087911f8f.0
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 02:17:44 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=gRwwTwb/
+Received: from mail-wr2-x21.google.com (mail-wr2-x21.google.com
+ [IPv6:2a00:1450:4864:30::21])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 483A14019A
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:17:45 +0000 (UTC)
+Received: by mail-wr2-x21.google.com with SMTP id
+ ffacd0b85a97d-48881a62e09so1534849f8f.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 02:17:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790587062; x=1791191862;
+ d=baylibre.com; s=google; t=1790587064; x=1791191864;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=oocQgrfQ01yOIc1PajZKx98kEZr3RiFUEGvHe1NoyrY=;
- b=g1TwBht/nApruYENQe/N4oRmMMRN4a/qrRMtAKqJY4I3nLxmD07T5ryTKnfdPc5sdC
- QluzpcRuu3YTy0KT8GOsWijMmtPC5E8lfcaq83LrlZmJWDvrmSNfJ+kistVsygDkPuec
- SN8p7PTRe+Ptee9x58mCmafbVtdosysOBL4g9eBVEw2JU4bHF8uiIyo4r1ujEo8s1q3B
- uqOUkCxeXzRU4qAhmDYRtwkJG5IT2AxcrfrLAkPfE3g11N2ojTIJUu1DtnXBj2vs+UAv
- ZWGEIbNZOuG4VS65zFQdV1Egm/BKvqHQE/1R9KAfdf9hsGIyyQ2NFPMMmUICh/dnd5lG
- M12w==
+ bh=XyD2FunruOnomFPev1nwBcWZ4UNYrLyNa1IGPysT8rU=;
+ b=gRwwTwb/p0sMbqPie9Im3kWoF5Ur+qv3uUjSAyAXv6bH3WVKrclnFs8g7//RKFbKTh
+ V2KqZxHS24uTZXzcmYmjAycByYxHZtRRSpxdmvgDhQq4nsoy5liHaIFXR/gzKxbAn8ts
+ T7I8eC0u3y6l1ovSw+fB0txjd7/mlDsz53AFxawmJ23igXZhhneyK7Bm81BNOWXpTx7f
+ Kcs2+stnKFaeM5XmcInJ9M5Bc92Y0T5bIFNQ14eBUyO2UWvRwqiF6Dnrgu709pa4oXYC
+ 6PvnKp7AzZpsmNpbDl7tltkSD6rT9Scfnod2FlsvE8K6PKOsESKGAvzv4mjYmjSl7Zh2
+ LRIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790587062; x=1791191862;
+ d=1e100.net; s=20260707; t=1790587064; x=1791191864;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=oocQgrfQ01yOIc1PajZKx98kEZr3RiFUEGvHe1NoyrY=;
- b=si2fJ492m26U02xMzVfSt/p93wNTZejfD4ZfsTR45H56XsdkYLdBugYIOZszjcAUzd
- KzFJVq+0V41CBtXzJzCjqOgWtcdeGNGjDYp03GG0RDwVhV4vQ3Nzxxio0jl6Nq77basL
- idBDO/d8yF9IZ3W6pMcoGDqmSUrkht+8OeM/yRvdAjCxObmkaOnTyeNL8zJmmBYThYWP
- 1fZlz6lsOhvddnX01cAOWFnod4McOFZLUIGtwJzo1DSYPxDLFu+Z01KPTJ8Ke0uG4yVB
- /CkcgZ5rIZxhumcm7h+R8c/Pu23dC8t3TaDa4cmtN4cfyAD+7mqmaXSBUfeMdg7EyAd0
- Fa2g==
-X-Gm-Message-State: AFq9FYI/wMpbeYr2kRdozPNN0UzCSQNIz2xNKTB4qEK0lkWD2/mjtH5X
- CwqUxgq8Kg4bK8BOAaD1wxFoQwty5ANgCY+gAe3NSHKtuSTzJe+a3n1Rzit6ke3SeX0=
-X-Gm-Gg: AYBFou2KOCgpqsr68yB3rMuySqqq9QvRTWvCVDoSgKBbboRSnHr6X3Jlbdf5U+7pQen
- ZbU5NuLid9l7q/XsLne9KwXTG63+RHHlUjSLDyLceGsbG91pu+O6eXR7MORrBI+yBhKFpoAMu4y
- O9+H7q/YzAaqDkuPUf1JxaUUN1yWVdnJ2u1RIRNleM2GvEBCX/4yVRZ0Cj3C3SA/ZJx99XwdWjx
- GEb8/ZGk662We2nKk9Hh+G7P8C2HlJ14B/mPW37vAgXkldrwPsXO/Od0EmeYz9WFSqsJZZLOmrP
- ssWvYxlZsPtjvCgOUyP03Yh5NJQO8G1m1G6d8kuog9lZaRbZ2+ZyENaKmJleKVaRVgt+iklCg7Y
- 9qyHgxUXF8w/n9ymbshEoxifVDs7ZCwJo03/2zRaEDAXnSES5UTZNd4k1GpT7g1BgnJEVUrQoKn
- KNVo4SubX1GE1SdUSH6/Nm7e5Ypf+RWuqmCaPfppCmux3PNp9U1MZdEYQOZjtyB+8Sa0Bilnnvn
- iaJHx5cboBzYb1wtGeNpHEEgFWYkWM1TGBEXjkdTJApcvwMCokRIug7wNNYyojeGbiD4+Hpmzal
- ul0losGgYXSQPc+EqoUxHafWxCKQE7yGkcQaXQpqK/ZQqwjR89EHbQU=
-X-Received: by 2002:a5d:6f17:0:b0:488:8733:21d0 with SMTP id
- ffacd0b85a97d-4888733220dmr11987013f8f.17.1790587062537; 
- Mon, 28 Sep 2026 02:17:42 -0700 (PDT)
+ bh=XyD2FunruOnomFPev1nwBcWZ4UNYrLyNa1IGPysT8rU=;
+ b=GgQz74WYfpIU/U/2wAS0F61CY/c4PlLkUsqgE9GpQaiiZfTnflJXGGR3Y6S2iE3+su
+ 7gcXPK+EWoCX25ABV7EX/XG7pGB4jnebHY6Z77p5UrUbSejptBNDZ7AR1jpuZqnorVm8
+ xEFfCNMC6WgSMJz5wyajSJv1/y58bfODXd892V/HHQ3ivSFtz17xN1Bjm39DsKNMJkmS
+ J9xUVk7ikwDw0wr82z8i7ksAqrfpu5fkcpIs/ab6cwdFP42maqrfG0Os6xWZDvzi2cpU
+ m6t1MEOkqr46V+7GKvKcVTxRD9lxHFAbMGu+W3Ucaw3WYmYn9fvBvVpsnUxAykcywRcA
+ sRKg==
+X-Gm-Message-State: AFq9FYI67X2DBYcgKo2LhzKADrhMskTOwER/xM6voaBrhV9WIaXHwTf6
+ QhcrDlsC0NmQY0JZtASGsajRJCj/rI3vFJrz2YCfWsM6y4sg9QkPb8prFpDSk2dSPVw=
+X-Gm-Gg: AYBFou1h6/neNnditPR9VoKDFiL2IQP3uDG09Ft4vyKL1I6X+Vt1dDDoahyNYX63HsK
+ U4a51Q0Hiuqazj96dhAhKIWrMF8t5pwSeuZqZidDz30uZn1OQ398NjnxfJ+G3r6YjYyHUa12OJs
+ aaICf7X46r5ZkPMeNTylckqxFGxTYH+agJozWvpOAUeV43frKqJ63dE4cgJobL/7GkRaL2/JJ+7
+ qiCmuJyX2B6GaEQBvhswc41zkyXdnjp19yEpZ3kXSyfhy6lqPW+SfaOlfe2dppI4vKyITeJMLx7
+ awC0fNgm/axdDrVHQa6p/pnDNrwFfetR5ALrQe8lHgw9ctYuqgCmbxUJ+hxKNJiFWYoHzdv42Ps
+ e4XUS4onBiRAIykoNHWkFiE7aqxYspSJ7Tb0Cx2VUlHv8sMvmyqGqMB8Z77qx3ECeBZDcc0r9gg
+ fK1rWOrjMklxRVTuW4wRKN562xUyfV4vZMCaSJrVJYLUeyoJLk+YqxTBNGBggIQ8GNyR0MZJycv
+ I2NDhR4o1gWHAEfvHV5KAWSXmLcvmmmApAbjlbz+EnwDmtJMgFi8YEUjDDnkUxWXP8F6oXdOkSl
+ Vo0f0nPXmVX/pCSVfgbd2ZEsndO/vAHTc2PewS3LYMdEgbEg0Ank0F0=
+X-Received: by 2002:a5d:5e0d:0:b0:488:7b66:1413 with SMTP id
+ ffacd0b85a97d-4887b66155fmr12423376f8f.39.1790587063749; 
+ Mon, 28 Sep 2026 02:17:43 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4887a64ef3asm26404622f8f.30.2026.09.28.02.17.41
+ ffacd0b85a97d-4887a64ef3asm26404622f8f.30.2026.09.28.02.17.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Sep 2026 02:17:42 -0700 (PDT)
+ Mon, 28 Sep 2026 02:17:43 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Mon, 28 Sep 2026 11:19:43 +0200
-Subject: [PATCH v7 08/12] video: mediatek: add mdp rdma component
+Date: Mon, 28 Sep 2026 11:19:44 +0200
+Subject: [PATCH v7 09/12] video: mediatek: add dpi1 component
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260928-add-genio-510-and-genio-700-hdmi-v7-8-ee4a61a8ac1d@baylibre.com>
+Message-Id: <20260928-add-genio-510-and-genio-700-hdmi-v7-9-ee4a61a8ac1d@baylibre.com>
 References: <20260928-add-genio-510-and-genio-700-hdmi-v7-0-ee4a61a8ac1d@baylibre.com>
 In-Reply-To: <20260928-add-genio-510-and-genio-700-hdmi-v7-0-ee4a61a8ac1d@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -197,248 +195,693 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The MDP RDMA is the DMA engine reading the framebuffer on some
-MediaTek SoCs, such as the MT8188. Two instances are used, each
-reading one half of the frame; the second one starts at the middle of
-the line (apply_offset).
+DPI is one of the components of the video pipeline on some MediaTek
+SoCs, such as the MT8188: it is the timing generator interface
+feeding the HDMI TX. Sync polarities, porches and the interlace mode
+are taken from the struct display_timing selected from the EDID.
+
+mtk_dpi_regs.h is a verbatim copy of Linux'
+drivers/gpu/drm/mediatek/mtk_dpi_regs.h, kept as its own header so that
+it can be re-synced with a plain diff.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/video/mediatek/mtk_mdp_rdma.c | 185 ++++++++++++++++++++++++++++++++++
- drivers/video/mediatek/mtk_mdp_rdma.h |  34 +++++++
- 2 files changed, 219 insertions(+)
+ drivers/video/mediatek/mtk_dpi.c      | 372 ++++++++++++++++++++++++++++++++++
+ drivers/video/mediatek/mtk_dpi.h      |  34 ++++
+ drivers/video/mediatek/mtk_dpi_regs.h | 247 ++++++++++++++++++++++
+ 3 files changed, 653 insertions(+)
 
-diff --git a/drivers/video/mediatek/mtk_mdp_rdma.c b/drivers/video/mediatek/mtk_mdp_rdma.c
+diff --git a/drivers/video/mediatek/mtk_dpi.c b/drivers/video/mediatek/mtk_dpi.c
 new file mode 100644
-index 00000000000..4664663b586
+index 00000000000..40890572ae6
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_mdp_rdma.c
-@@ -0,0 +1,185 @@
++++ b/drivers/video/mediatek/mtk_dpi.c
+@@ -0,0 +1,372 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * MediaTek Video MDP RDMA Support
++ * MediaTek DPI support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
 +#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <errno.h>
 +#include <fdtdec.h>
-+#include <linux/bitfield.h>
 +#include <linux/bitops.h>
-+#include <video.h>
 +
 +#include "mtk_disp_comp.h"
-+#include "mtk_mdp_rdma.h"
++#include "mtk_dpi.h"
++#include "mtk_dpi_regs.h"
 +
-+/* MDP RDMA registers (see Linux drivers/gpu/drm/mediatek/mtk_mdp_rdma.c) */
-+#define MDP_RDMA_EN			0x000
-+#define FLD_ROT_ENABLE				BIT(0)
-+#define MDP_RDMA_CON			0x020
-+#define FLD_SIMPLE_MODE				BIT(4)
-+#define MDP_RDMA_GMCIF_CON		0x028
-+#define FLD_COMMAND_DIV				BIT(0)
-+#define FLD_EXT_PREULTRA_EN			BIT(3)
-+#define FLD_RD_REQ_TYPE				GENMASK(7, 4)
-+#define VAL_RD_REQ_TYPE_BURST_8_ACCESS		7
-+#define FLD_ULTRA_EN				GENMASK(13, 12)
-+#define VAL_ULTRA_EN_ENABLE			1
-+#define FLD_PRE_ULTRA_EN			GENMASK(17, 16)
-+#define VAL_PRE_ULTRA_EN_ENABLE			1
-+#define FLD_EXT_ULTRA_EN			BIT(18)
-+#define MDP_RDMA_SRC_CON		0x030
-+#define FLD_UNIFORM_CONFIG			BIT(17)
-+#define FLD_SRC_FORMAT				GENMASK(3, 0)
-+#define MDP_RDMA_COMP_CON		0x038
-+#define MDP_RDMA_MF_BKGD_SIZE_IN_BYTE	0x060
-+#define FLD_MF_BKGD_WB				GENMASK(22, 0)
-+#define MDP_RDMA_MF_SRC_SIZE		0x070
-+#define FLD_MF_SRC_H				GENMASK(30, 16)
-+#define FLD_MF_SRC_W				GENMASK(14, 0)
-+#define MDP_RDMA_MF_CLIP_SIZE		0x078
-+#define FLD_MF_CLIP_H				GENMASK(30, 16)
-+#define FLD_MF_CLIP_W				GENMASK(14, 0)
-+#define MDP_RDMA_SRC_OFFSET_0		0x118
-+#define MDP_RDMA_TRANSFORM_0		0x200
-+#define MDP_RDMA_SRC_BASE_0		0xf00
++enum mtk_dpi_out_bit_num {
++	MTK_DPI_OUT_BIT_NUM_8BITS,
++	MTK_DPI_OUT_BIT_NUM_10BITS,
++	MTK_DPI_OUT_BIT_NUM_12BITS,
++	MTK_DPI_OUT_BIT_NUM_16BITS
++};
 +
-+/*
-+ * Source format 2 is named after its byte order in memory, B, G, R, A, as
-+ * the datasheet does. That is the same encoding as DRM_FORMAT_XRGB8888,
-+ * which Linux' rdma_fmt_convert() maps to RDMA_INPUT_FORMAT_RGBA8888: its
-+ * name only records that the alpha byte comes last, the R/B order being
-+ * selected separately by FLD_SWAP (left clear here).
-+ */
-+#define MDP_RDMA_SRC_FORMAT_BGRA8888		2
++enum mtk_dpi_out_yc_map {
++	MTK_DPI_OUT_YC_MAP_RGB,
++	MTK_DPI_OUT_YC_MAP_CYCY,
++	MTK_DPI_OUT_YC_MAP_YCYC,
++	MTK_DPI_OUT_YC_MAP_CY,
++	MTK_DPI_OUT_YC_MAP_YC
++};
 +
-+/*
-+ * Fields used by this driver but not present in the upstream driver, named
-+ * after the datasheet:
-+ * - MDP_RDMA_EN[23:4] INTERNAL_DCM_EN: dynamic clock gating of the RDMA
-+ *   internal blocks, all enabled out of reset (0x00fffff0)
-+ * - MDP_RDMA_TRANSFORM_0[15] BITEXTEND_WITH_ZERO: extend the LSBs with zeros
-+ *   when converting 8-bit data to 10-bit
-+ */
-+#define FLD_INTERNAL_DCM_EN			GENMASK(23, 4)
-+#define FLD_BITEXTEND_WITH_ZERO			BIT(15)
-+#define FB_BYTES_PER_PIXEL			4
++enum mtk_dpi_out_channel_swap {
++	MTK_DPI_OUT_CHANNEL_SWAP_RGB,
++	MTK_DPI_OUT_CHANNEL_SWAP_GBR,
++	MTK_DPI_OUT_CHANNEL_SWAP_BRG,
++	MTK_DPI_OUT_CHANNEL_SWAP_RBG,
++	MTK_DPI_OUT_CHANNEL_SWAP_GRB,
++	MTK_DPI_OUT_CHANNEL_SWAP_BGR
++};
 +
-+/*
-+ * DRAM request settings, as programmed by Linux'
-+ * mtk_mdp_rdma_fifo_config(): 8-beat burst reads plus the ultra/pre-ultra
-+ * high priority requests that keep the RDMA from underrunning at high pixel
-+ * clocks.
-+ */
-+#define MDP_RDMA_GMCIF_CON_QOS \
-+	(FLD_COMMAND_DIV | FLD_EXT_PREULTRA_EN | FLD_EXT_ULTRA_EN | \
-+	 FIELD_PREP(FLD_RD_REQ_TYPE, VAL_RD_REQ_TYPE_BURST_8_ACCESS) | \
-+	 FIELD_PREP(FLD_ULTRA_EN, VAL_ULTRA_EN_ENABLE) | \
-+	 FIELD_PREP(FLD_PRE_ULTRA_EN, VAL_PRE_ULTRA_EN_ENABLE))
++enum mtk_dpi_polarity {
++	MTK_DPI_POLARITY_RISING,
++	MTK_DPI_POLARITY_FALLING,
++};
 +
-+int mtk_mdp_rdma_config(struct udevice *dev, struct video_uc_plat *plat,
-+			const struct display_timing *timing,
-+			unsigned int pitch, bool apply_offset)
++struct mtk_dpi_polarities {
++	enum mtk_dpi_polarity de_pol;
++	enum mtk_dpi_polarity ck_pol;
++	enum mtk_dpi_polarity hsync_pol;
++	enum mtk_dpi_polarity vsync_pol;
++};
++
++struct mtk_dpi_sync_param {
++	u32 sync_width;
++	u32 front_porch;
++	u32 back_porch;
++	bool shift_half_line;
++};
++
++struct mtk_dpi_yc_limit {
++	u16 y_top;
++	u16 y_bottom;
++	u16 c_top;
++	u16 c_bottom;
++};
++
++static void mtk_dpi_sw_reset(struct udevice *dev, bool reset)
 +{
-+	u32 width = timing->hactive.typ;
-+	u32 height = timing->vactive.typ;
-+	int offset = apply_offset ? ((width / 2) * FB_BYTES_PER_PIXEL) : 0;
-+	u32 fb;
-+
-+	/* the RDMA source address register is 32-bit only */
-+	if (plat->base != (u32)plat->base) {
-+		dev_err(dev, "framebuffer base %#lx is above 4GB\n", plat->base);
-+		return -EINVAL;
-+	}
-+	fb = plat->base;
-+
-+	/* the stride register only holds FLD_MF_BKGD_WB bits */
-+	if (pitch > FLD_MF_BKGD_WB) {
-+		dev_err(dev, "framebuffer pitch %u is too large\n", pitch);
-+		return -EINVAL;
-+	}
-+
-+	mtk_disp_comp_write(dev, MDP_RDMA_EN, FLD_INTERNAL_DCM_EN);
-+
-+	/* DRAM request type and ultra thresholds */
-+	mtk_disp_comp_write(dev, MDP_RDMA_GMCIF_CON, MDP_RDMA_GMCIF_CON_QOS);
-+
-+	/*
-+	 * Set the source format. U-Boot's 32bpp framebuffer has no alpha
-+	 * channel and the mixer blends this layer with alpha disabled, so
-+	 * FLD_OUTPUT_ARGB is left clear as Linux does for such a source.
-+	 */
-+	mtk_disp_comp_write(dev, MDP_RDMA_SRC_CON,
-+			    FIELD_PREP(FLD_SRC_FORMAT,
-+				       MDP_RDMA_SRC_FORMAT_BGRA8888) |
-+			    FLD_UNIFORM_CONFIG);
-+
-+	/* no framebuffer compression */
-+	mtk_disp_comp_write(dev, MDP_RDMA_COMP_CON, 0x0);
-+
-+	/* set base address */
-+	mtk_disp_comp_write(dev, MDP_RDMA_SRC_BASE_0, fb);
-+
-+	/* stride comes from the framebuffer line length */
-+	mtk_disp_comp_write(dev, MDP_RDMA_MF_BKGD_SIZE_IN_BYTE,
-+			    FIELD_PREP(FLD_MF_BKGD_WB, pitch));
-+
-+	/*
-+	 * each of the two RDMAs reads one half of the frame: size and
-+	 * clip cover half the width, and the second RDMA (apply_offset)
-+	 * starts at the middle of the line
-+	 */
-+	mtk_disp_comp_write(dev, MDP_RDMA_MF_SRC_SIZE,
-+			    FIELD_PREP(FLD_MF_SRC_H, height) |
-+			    FIELD_PREP(FLD_MF_SRC_W, width / 2));
-+	mtk_disp_comp_write(dev, MDP_RDMA_MF_CLIP_SIZE,
-+			    FIELD_PREP(FLD_MF_CLIP_H, height) |
-+			    FIELD_PREP(FLD_MF_CLIP_W, width / 2));
-+	mtk_disp_comp_write(dev, MDP_RDMA_SRC_OFFSET_0, offset);
-+
-+	/*
-+	 * Simple mode, plus the downstream way of feeding the 10-bit
-+	 * pipeline from 8-bit data: BITEXTEND_WITH_ZERO zero-extends each
-+	 * component, instead of MDP_RDMA_CON's FLD_OUTPUT_10B used by Linux.
-+	 * Only one of the two is needed; do not switch to FLD_OUTPUT_10B
-+	 * when re-syncing with Linux.
-+	 */
-+	mtk_disp_comp_write(dev, MDP_RDMA_CON, FLD_SIMPLE_MODE);
-+	mtk_disp_comp_write(dev, MDP_RDMA_TRANSFORM_0,
-+			    FLD_BITEXTEND_WITH_ZERO);
-+
-+	/* enable engine */
-+	mtk_disp_comp_write(dev, MDP_RDMA_EN,
-+			    FLD_INTERNAL_DCM_EN | FLD_ROT_ENABLE);
-+
-+	return 0;
++	mtk_disp_comp_update(dev, DPI_RET, reset ? RST : 0, RST);
 +}
 +
-+static int mtk_mdp_rdma_probe(struct udevice *dev)
++static void mtk_dpi_config_hsync(struct udevice *dev,
++				 const struct mtk_dpi_sync_param *sync)
 +{
-+	int ret;
-+
-+	ret = mtk_disp_comp_probe(dev);
-+	if (ret)
-+		return ret;
-+
-+	/* the RDMA is a DMA master: it feeds from an SMI larb */
-+	return mtk_disp_comp_get_larb(dev);
++	mtk_disp_comp_update(dev, DPI_TGEN_HWIDTH, sync->sync_width << HPW,
++			     HPW_MASK);
++	mtk_disp_comp_update(dev, DPI_TGEN_HPORCH, sync->back_porch << HBP,
++			     HBP_MASK);
++	mtk_disp_comp_update(dev, DPI_TGEN_HPORCH, sync->front_porch << HFP,
++			     HFP_MASK);
 +}
 +
-+static const struct udevice_id mtk_mdp_rdma_ids[] = {
-+	{ .compatible = "mediatek,mt8195-vdo1-rdma" },
++static void mtk_dpi_config_vsync(struct udevice *dev,
++				 const struct mtk_dpi_sync_param *sync,
++				 u32 width_addr, u32 porch_addr)
++{
++	mtk_disp_comp_update(dev, width_addr,
++			     sync->sync_width << VSYNC_WIDTH_SHIFT,
++			     VSYNC_WIDTH_MASK);
++	mtk_disp_comp_update(dev, width_addr,
++			     sync->shift_half_line << VSYNC_HALF_LINE_SHIFT,
++			     VSYNC_HALF_LINE_MASK);
++	mtk_disp_comp_update(dev, porch_addr,
++			     sync->back_porch << VSYNC_BACK_PORCH_SHIFT,
++			     VSYNC_BACK_PORCH_MASK);
++	mtk_disp_comp_update(dev, porch_addr,
++			     sync->front_porch << VSYNC_FRONT_PORCH_SHIFT,
++			     VSYNC_FRONT_PORCH_MASK);
++}
++
++static void mtk_dpi_config_vsync_lodd(struct udevice *dev,
++				      const struct mtk_dpi_sync_param *sync)
++{
++	mtk_dpi_config_vsync(dev, sync, DPI_TGEN_VWIDTH, DPI_TGEN_VPORCH);
++}
++
++static void mtk_dpi_config_vsync_leven(struct udevice *dev,
++				       const struct mtk_dpi_sync_param *sync)
++{
++	mtk_dpi_config_vsync(dev, sync, DPI_TGEN_VWIDTH_LEVEN,
++			     DPI_TGEN_VPORCH_LEVEN);
++}
++
++static void mtk_dpi_config_vsync_rodd(struct udevice *dev,
++				      const struct mtk_dpi_sync_param *sync)
++{
++	mtk_dpi_config_vsync(dev, sync, DPI_TGEN_VWIDTH_RODD,
++			     DPI_TGEN_VPORCH_RODD);
++}
++
++static void mtk_dpi_config_vsync_reven(struct udevice *dev,
++				       const struct mtk_dpi_sync_param *sync)
++{
++	mtk_dpi_config_vsync(dev, sync, DPI_TGEN_VWIDTH_REVEN,
++			     DPI_TGEN_VPORCH_REVEN);
++}
++
++static void mtk_dpi_config_pol(struct udevice *dev,
++			       const struct mtk_dpi_polarities *dpi_pol)
++{
++	unsigned int pol;
++
++	pol = (dpi_pol->ck_pol == MTK_DPI_POLARITY_RISING ? 0 : CK_POL) |
++	      (dpi_pol->de_pol == MTK_DPI_POLARITY_RISING ? 0 : DE_POL) |
++	      (dpi_pol->hsync_pol == MTK_DPI_POLARITY_RISING ? 0 : HSYNC_POL) |
++	      (dpi_pol->vsync_pol == MTK_DPI_POLARITY_RISING ? 0 : VSYNC_POL);
++	mtk_disp_comp_update(dev, DPI_OUTPUT_SETTING, pol,
++			     CK_POL | DE_POL | HSYNC_POL | VSYNC_POL);
++}
++
++static void mtk_dpi_config_interface(struct udevice *dev, bool inter)
++{
++	mtk_disp_comp_update(dev, DPI_CON, inter ? INTL_EN : 0, INTL_EN);
++}
++
++static void mtk_dpi_config_input_2p(struct udevice *dev, bool input_2p)
++{
++	mtk_disp_comp_update(dev, DPI_CON, input_2p ? DPI_INPUT_2P_EN : 0,
++			     DPI_INPUT_2P_EN);
++}
++
++static void mtk_dpi_config_output_1t1p(struct udevice *dev, bool output_1t1p)
++{
++	mtk_disp_comp_update(dev, DPI_CON, output_1t1p ? DPI_OUTPUT_1T1P_EN : 0,
++			     DPI_OUTPUT_1T1P_EN);
++}
++
++static void mtk_dpi_config_fb_size(struct udevice *dev, u32 width, u32 height)
++{
++	mtk_disp_comp_update(dev, DPI_SIZE, width << HSIZE, HSIZE_MASK);
++	mtk_disp_comp_update(dev, DPI_SIZE, height << VSIZE, VSIZE_MASK);
++}
++
++static void mtk_dpi_config_channel_limit(struct udevice *dev,
++					 const struct mtk_dpi_yc_limit *limit)
++{
++	mtk_disp_comp_update(dev, DPI_Y_LIMIT, limit->y_bottom << Y_LIMINT_BOT,
++			     Y_LIMINT_BOT_MASK);
++	mtk_disp_comp_update(dev, DPI_Y_LIMIT, limit->y_top << Y_LIMINT_TOP,
++			     Y_LIMINT_TOP_MASK);
++	mtk_disp_comp_update(dev, DPI_C_LIMIT, limit->c_bottom << C_LIMIT_BOT,
++			     C_LIMIT_BOT_MASK);
++	mtk_disp_comp_update(dev, DPI_C_LIMIT, limit->c_top << C_LIMIT_TOP,
++			     C_LIMIT_TOP_MASK);
++}
++
++static void mtk_dpi_config_bit_num(struct udevice *dev,
++				   enum mtk_dpi_out_bit_num num)
++{
++	u32 val;
++
++	switch (num) {
++	case MTK_DPI_OUT_BIT_NUM_8BITS:
++		val = OUT_BIT_8;
++		break;
++	case MTK_DPI_OUT_BIT_NUM_10BITS:
++		val = OUT_BIT_10;
++		break;
++	case MTK_DPI_OUT_BIT_NUM_12BITS:
++		val = OUT_BIT_12;
++		break;
++	case MTK_DPI_OUT_BIT_NUM_16BITS:
++		val = OUT_BIT_16;
++		break;
++	default:
++		val = OUT_BIT_8;
++		break;
++	}
++
++	mtk_disp_comp_update(dev, DPI_OUTPUT_SETTING, val << OUT_BIT,
++			     OUT_BIT_MASK);
++}
++
++static void mtk_dpi_config_yc_map(struct udevice *dev,
++				  enum mtk_dpi_out_yc_map map)
++{
++	u32 val;
++
++	switch (map) {
++	case MTK_DPI_OUT_YC_MAP_RGB:
++		val = YC_MAP_RGB;
++		break;
++	case MTK_DPI_OUT_YC_MAP_CYCY:
++		val = YC_MAP_CYCY;
++		break;
++	case MTK_DPI_OUT_YC_MAP_YCYC:
++		val = YC_MAP_YCYC;
++		break;
++	case MTK_DPI_OUT_YC_MAP_CY:
++		val = YC_MAP_CY;
++		break;
++	case MTK_DPI_OUT_YC_MAP_YC:
++		val = YC_MAP_YC;
++		break;
++	default:
++		val = YC_MAP_RGB;
++		break;
++	}
++
++	mtk_disp_comp_update(dev, DPI_OUTPUT_SETTING, val << YC_MAP,
++			     YC_MAP_MASK);
++}
++
++static void mtk_dpi_config_channel_swap(struct udevice *dev,
++					enum mtk_dpi_out_channel_swap swap)
++{
++	u32 val;
++
++	switch (swap) {
++	case MTK_DPI_OUT_CHANNEL_SWAP_RGB:
++		val = SWAP_RGB;
++		break;
++	case MTK_DPI_OUT_CHANNEL_SWAP_GBR:
++		val = SWAP_GBR;
++		break;
++	case MTK_DPI_OUT_CHANNEL_SWAP_BRG:
++		val = SWAP_BRG;
++		break;
++	case MTK_DPI_OUT_CHANNEL_SWAP_RBG:
++		val = SWAP_RBG;
++		break;
++	case MTK_DPI_OUT_CHANNEL_SWAP_GRB:
++		val = SWAP_GRB;
++		break;
++	case MTK_DPI_OUT_CHANNEL_SWAP_BGR:
++		val = SWAP_BGR;
++		break;
++	default:
++		val = SWAP_RGB;
++		break;
++	}
++
++	mtk_disp_comp_update(dev, DPI_OUTPUT_SETTING, val << CH_SWAP,
++			     CH_SWAP_MASK);
++}
++
++static void mtk_dpi_config_swap_input(struct udevice *dev, bool enable)
++{
++	mtk_disp_comp_update(dev, DPI_CON, enable ? IN_RB_SWAP : 0, IN_RB_SWAP);
++}
++
++static void mtk_dpi_config_yuv422_enable(struct udevice *dev, bool enable)
++{
++	mtk_disp_comp_update(dev, DPI_CON, enable ? YUV422_EN : 0, YUV422_EN);
++}
++
++static void mtk_dpi_config_csc_enable(struct udevice *dev, bool enable)
++{
++	mtk_disp_comp_update(dev, DPI_CON, enable ? CSC_ENABLE : 0, CSC_ENABLE);
++}
++
++void mtk_dpi_hw_enable(struct udevice *dev)
++{
++	mtk_disp_comp_update(dev, DPI_EN, EN, EN);
++}
++
++void mtk_dpi_hw_disable(struct udevice *dev)
++{
++	mtk_disp_comp_update(dev, DPI_EN, 0, EN);
++}
++
++void mtk_dpi_config(struct udevice *dev, const struct display_timing *timing)
++{
++	struct mtk_dpi_yc_limit limit;
++	struct mtk_dpi_polarities dpi_pol;
++	struct mtk_dpi_sync_param hsync;
++	struct mtk_dpi_sync_param vsync_lodd = { };
++	struct mtk_dpi_sync_param vsync_leven = { };
++	struct mtk_dpi_sync_param vsync_rodd = { };
++	struct mtk_dpi_sync_param vsync_reven = { };
++	bool interlaced = timing->flags & DISPLAY_FLAGS_INTERLACED;
++
++	limit.c_bottom = 0x0010;
++	limit.c_top = 0x0FE0;
++	limit.y_bottom = 0x0010;
++	limit.y_top = 0x0FE0;
++
++	dpi_pol.ck_pol = MTK_DPI_POLARITY_FALLING;
++	dpi_pol.de_pol = MTK_DPI_POLARITY_RISING;
++	dpi_pol.hsync_pol = timing->flags & DISPLAY_FLAGS_HSYNC_HIGH ?
++			    MTK_DPI_POLARITY_FALLING :
++			    MTK_DPI_POLARITY_RISING;
++	dpi_pol.vsync_pol = timing->flags & DISPLAY_FLAGS_VSYNC_HIGH ?
++			    MTK_DPI_POLARITY_FALLING :
++			    MTK_DPI_POLARITY_RISING;
++
++	hsync.sync_width = timing->hsync_len.typ;
++	hsync.back_porch = timing->hback_porch.typ;
++	hsync.front_porch = timing->hfront_porch.typ;
++	hsync.shift_half_line = false;
++
++	vsync_lodd.sync_width = timing->vsync_len.typ;
++	vsync_lodd.back_porch = timing->vback_porch.typ;
++	vsync_lodd.front_porch = timing->vfront_porch.typ;
++	vsync_lodd.shift_half_line = false;
++
++	if (interlaced) {
++		vsync_leven = vsync_lodd;
++		vsync_leven.shift_half_line = true;
++	}
++
++	mtk_dpi_sw_reset(dev, true);
++	mtk_dpi_config_pol(dev, &dpi_pol);
++
++	mtk_dpi_config_hsync(dev, &hsync);
++	mtk_dpi_config_vsync_lodd(dev, &vsync_lodd);
++	mtk_dpi_config_vsync_rodd(dev, &vsync_rodd);
++	mtk_dpi_config_vsync_leven(dev, &vsync_leven);
++	mtk_dpi_config_vsync_reven(dev, &vsync_reven);
++
++	mtk_dpi_config_interface(dev, interlaced);
++	if (interlaced)
++		mtk_dpi_config_fb_size(dev, timing->hactive.typ,
++				       timing->vactive.typ / 2);
++	else
++		mtk_dpi_config_fb_size(dev, timing->hactive.typ,
++				       timing->vactive.typ);
++
++	mtk_dpi_config_input_2p(dev, true);
++	mtk_dpi_config_output_1t1p(dev, true);
++	mtk_dpi_config_channel_limit(dev, &limit);
++	mtk_dpi_config_bit_num(dev, MTK_DPI_OUT_BIT_NUM_8BITS);
++	mtk_dpi_config_channel_swap(dev, MTK_DPI_OUT_CHANNEL_SWAP_RGB);
++	mtk_dpi_config_yc_map(dev, MTK_DPI_OUT_YC_MAP_RGB);
++	mtk_dpi_config_yuv422_enable(dev, false);
++	mtk_dpi_config_csc_enable(dev, false);
++	mtk_dpi_config_swap_input(dev, false);
++	mtk_dpi_sw_reset(dev, false);
++}
++
++static const struct udevice_id mtk_dpi_ids[] = {
++	{ .compatible = "mediatek,mt8195-dpi" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(mtk_mdp_rdma) = {
-+	.name	   = "mtk_mdp_rdma",
++U_BOOT_DRIVER(mtk_dpi) = {
++	.name	   = "mtk_dpi",
 +	.id	   = UCLASS_MISC,
-+	.of_match  = mtk_mdp_rdma_ids,
-+	.probe	   = mtk_mdp_rdma_probe,
++	.of_match  = mtk_dpi_ids,
++	.probe	   = mtk_disp_comp_probe,
 +	.priv_auto = sizeof(struct mtk_disp_comp_priv),
 +};
-diff --git a/drivers/video/mediatek/mtk_mdp_rdma.h b/drivers/video/mediatek/mtk_mdp_rdma.h
+diff --git a/drivers/video/mediatek/mtk_dpi.h b/drivers/video/mediatek/mtk_dpi.h
 new file mode 100644
-index 00000000000..832cf8133c5
+index 00000000000..13ba252cd81
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_mdp_rdma.h
++++ b/drivers/video/mediatek/mtk_dpi.h
 @@ -0,0 +1,34 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * MediaTek Video MDP RDMA Support
++ * MediaTek MT8188 DPI Support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
-+#ifndef _MTK_MDP_RDMA_H
-+#define _MTK_MDP_RDMA_H
++#ifndef _MTK_DPI_H
++#define _MTK_DPI_H
 +
-+struct udevice;
-+struct video_uc_plat;
 +struct display_timing;
++struct udevice;
 +
 +/**
-+ * mtk_mdp_rdma_config() - configure an RDMA to read one half of the frame
-+ * @dev: RDMA device
-+ * @plat: video uclass platform data, holding the framebuffer base address
-+ * @timing: display timing, giving the frame size
-+ * @pitch: framebuffer line length, in bytes
-+ * @apply_offset: read the right half of the frame instead of the left one
-+ *
-+ * Each of the two RDMAs of the pipeline reads one half of the XRGB8888
-+ * framebuffer and feeds it to the mixer.
-+ *
-+ * Return: 0 on success, -EINVAL if the framebuffer is above 4 GiB or its
-+ * pitch is too large
++ * mtk_dpi_hw_enable() - start the DPI output
++ * @dev: DPI device
 + */
-+int mtk_mdp_rdma_config(struct udevice *dev, struct video_uc_plat *plat,
-+			const struct display_timing *timing,
-+			unsigned int pitch, bool apply_offset);
++void mtk_dpi_hw_enable(struct udevice *dev);
 +
-+#endif /* _MTK_MDP_RDMA_H */
++/**
++ * mtk_dpi_hw_disable() - stop the DPI output
++ * @dev: DPI device
++ */
++void mtk_dpi_hw_disable(struct udevice *dev);
++
++/**
++ * mtk_dpi_config() - configure the DPI for a display timing
++ * @dev: DPI device
++ * @timing: display timing to output, as 8-bit RGB
++ */
++void mtk_dpi_config(struct udevice *dev, const struct display_timing *timing);
++
++#endif /* _MTK_DPI_H */
+diff --git a/drivers/video/mediatek/mtk_dpi_regs.h b/drivers/video/mediatek/mtk_dpi_regs.h
+new file mode 100644
+index 00000000000..23eeefce8fd
+--- /dev/null
++++ b/drivers/video/mediatek/mtk_dpi_regs.h
+@@ -0,0 +1,247 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (c) 2014 MediaTek Inc.
++ * Author: Jie Qiu <jie.qiu@mediatek.com>
++ */
++#ifndef __MTK_DPI_REGS_H
++#define __MTK_DPI_REGS_H
++
++#define DPI_EN			0x00
++#define EN				BIT(0)
++
++#define DPI_RET			0x04
++#define RST				BIT(0)
++
++#define DPI_INTEN		0x08
++#define INT_VSYNC_EN			BIT(0)
++#define INT_VDE_EN			BIT(1)
++#define INT_UNDERFLOW_EN		BIT(2)
++
++#define DPI_INTSTA		0x0C
++#define INT_VSYNC_STA			BIT(0)
++#define INT_VDE_STA			BIT(1)
++#define INT_UNDERFLOW_STA		BIT(2)
++
++#define DPI_CON			0x10
++#define BG_ENABLE			BIT(0)
++#define IN_RB_SWAP			BIT(1)
++#define INTL_EN				BIT(2)
++#define TDFP_EN				BIT(3)
++#define CLPF_EN				BIT(4)
++#define YUV422_EN			BIT(5)
++#define CSC_ENABLE			BIT(6)
++#define R601_SEL			BIT(7)
++#define EMBSYNC_EN			BIT(8)
++#define VS_LODD_EN			BIT(16)
++#define VS_LEVEN_EN			BIT(17)
++#define VS_RODD_EN			BIT(18)
++#define VS_REVEN			BIT(19)
++#define FAKE_DE_LODD			BIT(20)
++#define FAKE_DE_LEVEN			BIT(21)
++#define FAKE_DE_RODD			BIT(22)
++#define FAKE_DE_REVEN			BIT(23)
++
++/* DPI_CON: DPI instances */
++#define DPI_OUTPUT_1T1P_EN		BIT(24)
++#define DPI_INPUT_2P_EN			BIT(25)
++/* DPI_CON: DPINTF instances */
++#define DPINTF_YUV422_EN		BIT(24)
++#define DPINTF_CSC_ENABLE		BIT(26)
++#define DPINTF_INPUT_2P_EN		BIT(29)
++
++#define DPI_OUTPUT_SETTING	0x14
++#define CH_SWAP				0
++#define DPINTF_CH_SWAP			1
++#define CH_SWAP_MASK			(0x7 << 0)
++#define SWAP_RGB			0x00
++#define SWAP_GBR			0x01
++#define SWAP_BRG			0x02
++#define SWAP_RBG			0x03
++#define SWAP_GRB			0x04
++#define SWAP_BGR			0x05
++#define BIT_SWAP			BIT(3)
++#define B_MASK				BIT(4)
++#define G_MASK				BIT(5)
++#define R_MASK				BIT(6)
++#define DE_MASK				BIT(8)
++#define HS_MASK				BIT(9)
++#define VS_MASK				BIT(10)
++#define DE_POL				BIT(12)
++#define HSYNC_POL			BIT(13)
++#define VSYNC_POL			BIT(14)
++#define CK_POL				BIT(15)
++#define OEN_OFF				BIT(16)
++#define EDGE_SEL			BIT(17)
++#define OUT_BIT				18
++#define OUT_BIT_MASK			(0x3 << 18)
++#define OUT_BIT_8			0x00
++#define OUT_BIT_10			0x01
++#define OUT_BIT_12			0x02
++#define OUT_BIT_16			0x03
++#define YC_MAP				20
++#define YC_MAP_MASK			(0x7 << 20)
++#define YC_MAP_RGB			0x00
++#define YC_MAP_CYCY			0x04
++#define YC_MAP_YCYC			0x05
++#define YC_MAP_CY			0x06
++#define YC_MAP_YC			0x07
++
++#define DPI_SIZE		0x18
++#define HSIZE				0
++#define HSIZE_MASK			(0x1FFF << 0)
++#define DPINTF_HSIZE_MASK		(0xFFFF << 0)
++#define VSIZE				16
++#define VSIZE_MASK			(0x1FFF << 16)
++#define DPINTF_VSIZE_MASK		(0xFFFF << 16)
++
++#define DPI_DDR_SETTING		0x1C
++#define DDR_EN				BIT(0)
++#define DDDR_SEL			BIT(1)
++#define DDR_4PHASE			BIT(2)
++#define DDR_WIDTH			(0x3 << 4)
++#define DDR_PAD_MODE			(0x1 << 8)
++
++#define DPI_TGEN_HWIDTH		0x20
++#define HPW				0
++#define HPW_MASK			(0xFFF << 0)
++#define DPINTF_HPW_MASK			(0xFFFF << 0)
++
++#define DPI_TGEN_HPORCH		0x24
++#define HBP				0
++#define HBP_MASK			(0xFFF << 0)
++#define DPINTF_HBP_MASK			(0xFFFF << 0)
++#define HFP				16
++#define HFP_MASK			(0xFFF << 16)
++#define DPINTF_HFP_MASK			(0xFFFF << 16)
++
++#define DPI_TGEN_VWIDTH		0x28
++#define DPI_TGEN_VPORCH		0x2C
++
++#define VSYNC_WIDTH_SHIFT		0
++#define VSYNC_WIDTH_MASK		(0xFFF << 0)
++#define DPINTF_VSYNC_WIDTH_MASK		(0xFFFF << 0)
++#define VSYNC_HALF_LINE_SHIFT		16
++#define VSYNC_HALF_LINE_MASK		BIT(16)
++#define VSYNC_BACK_PORCH_SHIFT		0
++#define VSYNC_BACK_PORCH_MASK		(0xFFF << 0)
++#define DPINTF_VSYNC_BACK_PORCH_MASK	(0xFFFF << 0)
++#define VSYNC_FRONT_PORCH_SHIFT		16
++#define VSYNC_FRONT_PORCH_MASK		(0xFFF << 16)
++#define DPINTF_VSYNC_FRONT_PORCH_MASK	(0xFFFF << 16)
++
++#define DPI_BG_HCNTL		0x30
++#define BG_RIGHT			(0x1FFF << 0)
++#define BG_LEFT				(0x1FFF << 16)
++
++#define DPI_BG_VCNTL		0x34
++#define BG_BOT				(0x1FFF << 0)
++#define BG_TOP				(0x1FFF << 16)
++
++#define DPI_BG_COLOR		0x38
++#define BG_B				(0xF << 0)
++#define BG_G				(0xF << 8)
++#define BG_R				(0xF << 16)
++
++#define DPI_FIFO_CTL		0x3C
++#define FIFO_VALID_SET			(0x1F << 0)
++#define FIFO_RST_SEL			(0x1 << 8)
++
++#define DPI_STATUS		0x40
++#define VCOUNTER			(0x1FFF << 0)
++#define DPI_BUSY			BIT(16)
++#define OUTEN				BIT(17)
++#define FIELD				BIT(20)
++#define TDLR				BIT(21)
++
++#define DPI_TMODE		0x44
++#define DPI_OEN_ON			BIT(0)
++
++#define DPI_CHECKSUM		0x48
++#define DPI_CHECKSUM_MASK		(0xFFFFFF << 0)
++#define DPI_CHECKSUM_READY		BIT(30)
++#define DPI_CHECKSUM_EN			BIT(31)
++
++#define DPI_DUMMY		0x50
++#define DPI_DUMMY_MASK			(0xFFFFFFFF << 0)
++
++#define DPI_TGEN_VWIDTH_LEVEN	0x68
++#define DPI_TGEN_VPORCH_LEVEN	0x6C
++#define DPI_TGEN_VWIDTH_RODD	0x70
++#define DPI_TGEN_VPORCH_RODD	0x74
++#define DPI_TGEN_VWIDTH_REVEN	0x78
++#define DPI_TGEN_VPORCH_REVEN	0x7C
++
++#define DPI_ESAV_VTIMING_LODD	0x80
++#define ESAV_VOFST_LODD			(0xFFF << 0)
++#define ESAV_VWID_LODD			(0xFFF << 16)
++
++#define DPI_ESAV_VTIMING_LEVEN	0x84
++#define ESAV_VOFST_LEVEN		(0xFFF << 0)
++#define ESAV_VWID_LEVEN			(0xFFF << 16)
++
++#define DPI_ESAV_VTIMING_RODD	0x88
++#define ESAV_VOFST_RODD			(0xFFF << 0)
++#define ESAV_VWID_RODD			(0xFFF << 16)
++
++#define DPI_ESAV_VTIMING_REVEN	0x8C
++#define ESAV_VOFST_REVEN		(0xFFF << 0)
++#define ESAV_VWID_REVEN			(0xFFF << 16)
++
++#define DPI_ESAV_FTIMING	0x90
++#define ESAV_FOFST_ODD			(0xFFF << 0)
++#define ESAV_FOFST_EVEN			(0xFFF << 16)
++
++#define DPI_CLPF_SETTING	0x94
++#define CLPF_TYPE			(0x3 << 0)
++#define ROUND_EN			BIT(4)
++
++#define DPI_Y_LIMIT		0x98
++#define Y_LIMINT_BOT			0
++#define Y_LIMINT_BOT_MASK		(0xFFF << 0)
++#define Y_LIMINT_TOP			16
++#define Y_LIMINT_TOP_MASK		(0xFFF << 16)
++
++#define DPI_C_LIMIT		0x9C
++#define C_LIMIT_BOT			0
++#define C_LIMIT_BOT_MASK		(0xFFF << 0)
++#define C_LIMIT_TOP			16
++#define C_LIMIT_TOP_MASK		(0xFFF << 16)
++
++#define DPI_YUV422_SETTING	0xA0
++#define UV_SWAP				BIT(0)
++#define CR_DELSEL			BIT(4)
++#define CB_DELSEL			BIT(5)
++#define Y_DELSEL			BIT(6)
++#define DE_DELSEL			BIT(7)
++
++#define DPI_EMBSYNC_SETTING	0xA4
++#define EMBSYNC_R_CR_EN			BIT(0)
++#define EMPSYNC_G_Y_EN			BIT(1)
++#define EMPSYNC_B_CB_EN			BIT(2)
++#define ESAV_F_INV			BIT(4)
++#define ESAV_V_INV			BIT(5)
++#define ESAV_H_INV			BIT(6)
++#define ESAV_CODE_MAN			BIT(8)
++#define VS_OUT_SEL			(0x7 << 12)
++
++#define DPI_ESAV_CODE_SET0	0xA8
++#define ESAV_CODE0			(0xFFF << 0)
++#define ESAV_CODE1			(0xFFF << 16)
++
++#define DPI_ESAV_CODE_SET1	0xAC
++#define ESAV_CODE2			(0xFFF << 0)
++#define ESAV_CODE3_MSB			BIT(16)
++
++#define EDGE_SEL_EN			BIT(5)
++#define H_FRE_2N			BIT(25)
++
++#define DPI_MATRIX_SET		0xB4
++#define INT_MATRIX_SEL_MASK		GENMASK(4, 0)
++#define MATRIX_SEL_RGB_TO_JPEG		0
++#define MATRIX_SEL_RGB_TO_BT601		2
++
++#define DPI_PATTERN0		0xf00
++#define DPI_PAT_EN			BIT(0)
++#define DPI_PAT_SEL			GENMASK(6, 4)
++
++#endif /* __MTK_DPI_REGS_H */
 
 -- 
 2.55.0
