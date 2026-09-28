@@ -1,178 +1,163 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A52E2CA5FA9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 21:29:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12C0FCA5FA1
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 21:30:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6D5214052A;
-	Mon, 28 Sep 2026 21:29:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C0B0A80BC0;
+	Mon, 28 Sep 2026 21:30:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ORX5AEwsWuzn; Mon, 28 Sep 2026 21:29:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org AEDCF40523
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790630986;
-	b=styy6QJHvH1C4ugXlrvpfKfNXoAwPJJa7zKNXKzVOYlJ3z9H3HVIMqpWHR47zWu9eU5Q
-	 8lQQNvsGsMQe6EH13JjQRqAwcx/kQAbmz+a1zm9vdRDbc/YpVDZaEqgGAzfht4nmzhOMs
-	 sfcGDv0q3mPk4DD1hG4M27p9geRixP/ebPyqGjtUkApqpMz8ZsBCDKddSXuU3FNAjTmUi
-	 q7KGMTlGXg7RPTB6uWBGjthy8L0lTXY8ZCJUNIB07mXc2HNP326zSz9Dlznmv/5ErsF86
-	 mpw5Vi8YZnnXFSm6znNaGddD6iqkOgKlKFxTqp0MM08jeQIUNrqygspk7C9nXkgsIZQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hnqB-7XJle3l; Mon, 28 Sep 2026 21:30:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 9F49B80B33
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790631024;
+	b=diwU1xe6SSv4JlEx0tR9JY7rz6o1EbSFORWQ1GKuRUbylc6aakR6TjGIg7k3mVhY229m
+	 Mj0vlQO+nypzlqPWyY/Ab6HfeGB0BCYNtCxb4ZpBKmNCoru13T6A6b6WFfAfayUFerbWI
+	 b1xqMmvr1O+L7rF8DTH+M1pORc21CwWRLkfBQ5uoaUlJEa5poHl+m9TKfVtsbI4KZAdWy
+	 MXe19GQafoZ/qVK9iqqeLvc82yqAxhoAkEAbpLS48+ex58r13ho+Yar27Os8tWO2jP6T5
+	 6orySoehT0tXsI4a+7E7mbpQu79vZ9b5jctE16oGyz3SLH7r9+OgdOJ2SMNkyT4ON+w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790630986;
+	c=relaxed/relaxed; t=1790631024;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=gCQwoaqhtlR0JnE2yD00Ha5uxzHwsRhFkQzUkJJIbzQ=;
-	b=A2XmcuxBzZDWBvu2mLbR54c95L2AN2ZxQ71hFz9zSKzQxX94sK/Vtz7OrlpKRhWSw8pa
-	 PjO2G48wUKgGO6hRWN1rvQwhH7sIXGkUdPUmuvIdXk36pU605qNufHYGs/X7vuwQM8z0i
-	 3LFNuPYgNx1XTKgftPgIyoYVLAjOLbmCoWSCU+H+CzGVwo9dEs78lLI1aoyO98KNxvhPt
-	 4HumCMiOfPTFjxYvS6Rfx4NTLyFtsoxwhG/fXwu6pgM1dyUZ4xwXvwHBrdGnCZG8wm70E
-	 W5gQhsM561qnz5T6V6b/Qw3FLb9Yz6z/0b8EG0SJdTUsvbwCNga12adSRTt02OFS/lQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=BKgZiabKD/09bdgVc0gYhUMnR9fs2RAlIt9DS4JCyhY=;
+	b=oeBeuTTmQuoZul19ZQr4siBwK7vxeNXwBANc8cXlbNYoFRIX4/rzPG7jIJwinTzjmXHL
+	 /Fp2ZzU5PYTzkYlWqUJlsx/SN89fqHTw69L6ovu+tUBSVFbpdXv4mU6lmQQCB8shQYqyR
+	 t84RVGty3qLYauHQBsA+S3Y2vXc3omOZIWCdpYSmAOQSFXiXWubnll1qQCHNPgSyclLLN
+	 h9OgrIcfw3SoHkZlZLkAth0pu8a9ZHwt0piZFN8kA1XyoetpxyGmZSVTkqh2fKetBCBSp
+	 W17xPa8bbmjJEdlfQNAwwQxLyyTXNtp0K0bv9iopibf3YeA5C3naFllvej/4fza6kEg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790630986;
-	bh=gCQwoaqhtlR0JnE2yD00Ha5uxzHwsRhFkQzUkJJIbzQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=iGW8ah/Fno1Z0U9b2I9bSjnETpaQGw/bF6WTtR7oAyja6l4nFtKcZAQUA1qw3LlTl
-	 5jv9sXX3y4NzUFYsPCMQ/ZXROMgCMD5Q6BTRBZWj3DqCNo37BEcgBA0XZ8vfhFc8b+
-	 Cs0Vd/2E65UihGniP3IpOkuUlqsTRp3v8u5X2iBDEhH/VYgfeUmPCy4/M83YLoj3a/
-	 94Whfzhzt9ksSQLAaD2vTG1k2+PlWOB1T2Y+6AVd92C0CSwOkwfxGyx3JUHKt1Q1Qx
-	 +1PKst4Vcr8rKgAugScHJcKjHpoidYyQQOtdpeXGMM70chQfS27cL163kS8LBUqGE8
-	 Lej8R8nrfVVjA==
+	d=lists.u-boot-project.org; s=default; t=1790631024;
+	bh=BKgZiabKD/09bdgVc0gYhUMnR9fs2RAlIt9DS4JCyhY=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=v8l8/eAF+PirO65HkrYzJjUfF6kOTltUypvVWCvtjNLlpbpgfJvU3NzlsZXGohrm0
+	 oIyFe2VnB28nGwaDpp3sz9cg0nSHg9G8araV+fIz7HW6RtcbQh1OsyU7ieY1+0K5QE
+	 WfCpJWgWeGO0pFR1ahHXJnuSee4gfSJL0UjdrgFT8xfTUGU36SX2lv3CHXUCNgKpDP
+	 fonpmCV2Y4yINBTOtGyzpUXoup1iCamOTJHrGbwebTN3f64DFFJKm/po/y/+OyapYx
+	 8guNVH2WaSHblZZ46YoRNcgyHL1Tyz/7ZA02YoKaBXqZRWoPxx78ynaCw0/NvGdvuh
+	 z5kXnxIj2AG0g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AEDCF40523;
-	Mon, 28 Sep 2026 21:29:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id A1C78335
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 21:29:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9F49B80B33;
+	Mon, 28 Sep 2026 21:30:24 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E248A61
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 21:30:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 934BF80B33
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 21:29:44 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id D3B0040528
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 21:30:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id B7liQ1PZoq0W for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 21:29:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org CCF2680A58
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:30::23"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790630984;
- b=B+8JmvMki/iYQm0v631K+6QHGR+h/ve9LvldH17w5ZPUeU/zkBqe+tk4Oq8cGCZCWamm
- ND2MCqk397CblkG22tpqzrrZ9ZNQ4cHBfWpGeJTPKJRSzSWdAVQ8197x6hCkJe4o5IZBE
- 8Sa/jCoLv3z8JKQNCMhm5w3s5BbKByvgRFBYx3alr4YsSvn4nGLUb+g/o5ZUL6NQu9o9F
- q05EgX/dvHdVB1bP4GvclRvpAG7AxhUw3KvaCMjoWlUegUQXi/ZO09gfxySQ71ClwaI0w
- z5B3DQSqsYcoNS3aWTKtXxlOb2NAHajbNBWBqE/T5xk9F69TY7Pwnm5Jrw5l4KZGraA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sRBzs4xjhXHY for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 21:30:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 8274E40523
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:36::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790631022;
+ b=V8oNmQszPCULDlysIWAI2n0Mk39YSHsw/gQ+P7rRpQzkZCpDoMGdx83pnr71K1gwuGaa
+ 3dyTIPU8QpPsAhyPdL8Q0UIyUNYQK/RGxaUP6/57MydPv7Cw3sUiOBUTUwWDgm+KcVawN
+ gxFqF+coveQGTK0fDonIe5+OgzBOA9yc1RuEdILHAwSALg58NOXXJaDD22NVV34SI2/QS
+ CWHPi+8qIfJrE8ankAUByiGxEFJmj6Ok1HnZ5PhWSlfwlCVT50bpfX0nbApVnRJVbFsbD
+ c2UqwwXLD/MGRiwOQVqjGrH3E9TFoT81mZqAoIv0pA/sXQ/egptYFQHD91zJ+UrEFbQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790630984;
+ c=relaxed/relaxed; t=1790631022;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
- Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=gCQwoaqhtlR0JnE2yD00Ha5uxzHwsRhFkQzUkJJIbzQ=;
- b=CvCR96ERG4bKv+j5JcNBg2kS6664P1Pfqfw4JYXeXIrYVZhGmdNk42KaGcnGFQCSi7QI
- UCcYQ/SK18XNzotc27aF97/BYZmK34ZRS32LuXNhek5K+gOCjK9nK8l6cMT3y8Rx467DM
- zKPz9Af2NqPyV6I+FJvx6DvNMUCzBRpUHNGSneVExZyq5eIsd3FH2PtrO+eiTshsp9pBa
- fUIGnYNRxS2b7wcV/UG/iLUGyJ7UgEBMjG9yiXUUevPU8GStFQC3qovbn6d5+KCwZO8Od
- 2QIaWM/ka8NAKCO+JqBy20dKq9mHOXC+Zv/JeraNUAedoINRqhY7sBYEcJGOpAwgvJg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=konsulko.com; 
- dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=sgNH8CYC; 
- arc=none smtp.remote-ip="2607:f8b0:4864:30::23"
+ From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding;
+ bh=BKgZiabKD/09bdgVc0gYhUMnR9fs2RAlIt9DS4JCyhY=;
+ b=X4V0yxXyxaG0iieZxWB7lbE6BFrTAGhxBGQPaplo+bhN2U3GxslA/8JgYh2bSAsYnwxu
+ bEgu3nD/JFSnha+fsWiZljIJ1zx45NzcU6sfmfKO4xgqbCFApSCu9TmnWNj6xeeIXNJji
+ PPJN7jT59pakr/3/6L1X0S0BM74FLH3V9bMb73ZReTJjhOt9c7Hu7pFd1PCeAWY6nC50O
+ iXYvFTXm7WWHuGHSMx2cQ9/YfkiwULD78zMV6zgDHs7S/8NRpxZGaxP3GUKzFheri4ThV
+ mR1LuM6uObHCGw6OIPXf8NLNVUq+rSksCmYCtemC731Jl4Ni+wtOT/rGsFxThhggYjA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=gmail.com; 
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=lbWNRbNF; 
+ arc=none smtp.remote-ip="2a00:1450:4864:36::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:30::23; helo=mail-oa2-x23.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
- header.a=rsa-sha256 header.s=google header.b=sgNH8CYC
-Received: from mail-oa2-x23.google.com (mail-oa2-x23.google.com
- [IPv6:2607:f8b0:4864:30::23])
- by smtp1.osuosl.org (Postfix) with ESMTPS id CCF2680A58
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 21:29:41 +0000 (UTC)
-Received: by mail-oa2-x23.google.com with SMTP id
- 586e51a60fabf-47b8afe046dso1916333fac.2
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 14:29:41 -0700 (PDT)
+ client-ip=2a00:1450:4864:36::10; helo=mail-lf2-x10.google.com;
+ envelope-from=sochnev.v.74@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=lbWNRbNF
+Received: from mail-lf2-x10.google.com (mail-lf2-x10.google.com
+ [IPv6:2a00:1450:4864:36::10])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8274E40523
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 21:30:20 +0000 (UTC)
+Received: by mail-lf2-x10.google.com with SMTP id
+ 2adb3069b0e04-5b8e6ec4e1dso2644151e87.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 14:30:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1790630980; x=1791235780;
+ d=gmail.com; s=20251104; t=1790631019; x=1791235819;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=gCQwoaqhtlR0JnE2yD00Ha5uxzHwsRhFkQzUkJJIbzQ=;
- b=sgNH8CYCtfFrMGPoLX9X0xdNR4B7lnPCWPmPTIH2ji+8Zcifbr+cDUp7JTzbfNJfAV
- HH4MVvnlqVaWzo2T55RhOxKo1VajsQFUmC6ch3rvPMS6LaWsSJ9tXms4Y7n7gQvpFHwX
- wjIDt9FVORaWNfzFHGgQymlXwTO3hiEi09XTc=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=BKgZiabKD/09bdgVc0gYhUMnR9fs2RAlIt9DS4JCyhY=;
+ b=lbWNRbNF5/GjvLhbnzExTXltXrt0jLtvlqdFPzkE3izSDJi68tiSMnSQtgBFrZTmvN
+ oXlm+9oqif2mkgNP+otIdXO/S+nPvGd/xkRu0SotqkuTqLXJG6PT1/2qIVMKX+A2rKey
+ y6AXowpmB64Xzkx+j9M7zA20O7dRggIKoW3oF40zD5I+pQpXiCr+jjSCsZl2KarZpxoY
+ 8pCirj9la4qOKyE5X/lKm65Uw8yOJ4mIUkk8ScF05wH4gEp7e8q0HKZgiVT0a+Ppkiqy
+ Hn9Qdec/Ma6Npspa59pm9YQN207Vhw09/yKvRNJv5maaqWZZD3UuPR2DcHkXGsVhIWWz
+ 8yuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790630980; x=1791235780;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=gCQwoaqhtlR0JnE2yD00Ha5uxzHwsRhFkQzUkJJIbzQ=;
- b=HZOiJkrXjrWKz/WzQztOzq0AoDSm28qDqI6TRJkGhsQ9n/+UbW02dBW04GKK79fEZm
- IPJk3SiUITdiKPBP9M/UVE/AGH1md18XQXgLeM+htmnJs4yJHZj5c33mtD3eeFmF0vUn
- vdVuoA8peeYiNrVxVbYguzbZwI8RRZir9nnj0vECFDyQxALg1pkJCDG3lD3wCWkNwGUJ
- W2xraWbzYPfuAYxN9L1YpoLll6Sa/sadVntC4aiyXL7/CaE//tRGQ4dHxt2coT2pfvCy
- ebEQNlIN/RIpd86bb+eoFZzntpufJbmkbJdP9pCsfivkemX2dVNy1yemB6eGcQ/7ONmQ
- i7eA==
+ d=1e100.net; s=20260707; t=1790631019; x=1791235819;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=BKgZiabKD/09bdgVc0gYhUMnR9fs2RAlIt9DS4JCyhY=;
+ b=KWIR3Z63vs1339Et0RkPF9svun7Wrwj7z5CzBvz31WmZtwvmC2r04nyk7G9SaL8c4N
+ b/al3wVDLkyMbVseBGSl6le8m/rafHQEFEN/2bUfpxweXOyPqo7jzho9zby0rC7RANS8
+ ueiC1fFyLCO/iub91u4P9ogca4DyGDvaLl2nSszil2jze3HAGCljkZGDrx7ZPZhV3rNf
+ Lz8Xd81aivilgvCUGXz4ExmrurY5nPPI6FYee+tFZoJ0yhpt2bAq305LpKMbgrQ3poMd
+ kttScSo/d3E32S+v8I40Kjn2IMvym7VKrSYIiz+O3vsv6m4j2jyTb13eWXOfVdYK61/N
+ gi7Q==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxZYDaNzfveIkls5hKAlqW/BaaeKof901uz8NzVaS+XoBnxX1P0ujHYiTM+Qpflrqq18KzOL1E=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mocqILbDnXD+9ZM6/MdOy/m9mtT6BLoyxpFzzAnQgcJBfhjLNj
- IJ57uukddaiPpI/2WhzKTXxmY8U6BnD1lDG8wZbeBkdFM5G8GQwd/LsEbaXvOdddJFM=
-X-Gm-Gg: AYBFou2YcCw/dBMxE3M/IFc4twqwpHG5Gn/Elw7Zg1Eg3Wp0oWo9jRvRVYOn52uS1ah
- 9ZG1KaBdO5iT37/a0k1RehAD3rSvVYoIn4Gaj85icSkpy983ADFJzU7POuV94LUp+zNpEbOMVsa
- eInfRcajPo7+V6YDl7LKHWfCEKZdUzSebDHeqVjzvfR6m4DuZf0S9x63sYftWkGFzAANHi/5XcQ
- Ifv8Z6aIsHb7gzKtsuCTp/71ooQ6FI283a6nn30KXn14Vgkw5O4j4JoJh/wjD2Uz+Uk3X4Q30wZ
- AtqZyem/2r0aYH6c/7wRuG7FKSACHc2qCR5n7IbjZ8gEkzGkwVyibgp2EC2BFNkKECQQSYYnVbE
- IaQfovpBuLc9ySPcjvI84N7B6xxbL/ElXj6diopexurvwaKt/KjCq5hiiLkvA3MnNVubPyc6xpW
- dfFcCnOm7Xmy7HDR/s/LJAK4a6K4sJSsQj4+5JTvdw/665oSgVfnlBeSQk7DQ3V/NSgQ+flDiHB
- Bi7G5Z+WRX/Fk64pWqjpwTvam6qQouB15EMWhrb/H6qP+GOhD3BZ30bsCYmd1kOOwMTgo60JCqK
- 3TUtlidpdZ/BFKvOBTh4CoPYGY9VCw==
-X-Received: by 2002:a05:6820:1ca3:b0:6d8:5491:3753 with SMTP id
- 006d021491bc7-6d854913fb0mr4090433eaf.45.1790630980640; 
- Mon, 28 Sep 2026 14:29:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-81d5932b91fsm2515338a34.27.2026.09.28.14.29.39
+ AKwUvBxnzsv/0tFRqfSAf6Opwf6s5BhAly/i3PWp1qwsmOrYmagIGEX799TjqmfoXfl8YSrRjkgyDZ0=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYKr8iFY71y2/AWNzaTFHTOL0eJopf7hp082KfzfOiV26lBAcb9S
+ iz+NNzixGBZlImAatqMAMmOApIhINkFhp2K7ruhmjreWLzw6NaEf1Vg=
+X-Gm-Gg: AYBFou0ZgU8GAV4FRato5q0U/N/oEnvzub09g5sU1o/yWIzRLXUJlzxICcrw4DrZpn6
+ xEBc1qjcJwfQVrFltIr+tfX1cGMSqNdVJfTl+Jsh6Gm/yqchPeh9itS70rd9aaBoQMd29uG9dzb
+ 5RZFPZDgQ2MRh66k+2aryiaLVcjVJbCXnZDH0KaXK11ln9Zm/WpVhqjdwrvTCMJKA1R4UC4QC32
+ J0w3/nO2QQ0gx4SmwUF3LSbvEH2E4Nx3oYwUoKOR1jYIpZ3HIiq9wMhChsuVBkU6wLomE5ToQ7g
+ W76oT4bb3/0WV0YeHocWESuCAIVcfNeRi/xp8wltlDNLXoo6uFKFso7n/HhxWyr0Qv/RWX69LRw
+ IOApoA2Kcb7GTiwewfcWoYUNSJa7R7nbhuOsF6TQfUM8iSJql4b3Tu8z4ZXv8Im2N21zcxxrxGs
+ t7YaEkjcIm2LfeoCRqnrqQPSwLcf3a0IO8F8L7JvJYlDL4K1bAjqQYbT80XX83OgqwphEUqjA=
+X-Received: by 2002:a05:6512:3186:b0:5b8:c159:a4f6 with SMTP id
+ 2adb3069b0e04-5b8e09c1137mr5294445e87.16.1790631018387; 
+ Mon, 28 Sep 2026 14:30:18 -0700 (PDT)
+Received: from fedora ([46.8.219.5]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5b9debc2f3asm831309e87.69.2026.09.28.14.30.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Sep 2026 14:29:40 -0700 (PDT)
-Date: Mon, 28 Sep 2026 15:29:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, mkorpershoek@kernel.org, lukma@denx.de,
- marex@denx.de, balaji.selvanathan@oss.qualcomm.com,
- jbx6244@gmail.com, vandhiadevan.karunamoorthy@oss.qualcomm.com,
- dario.binacchi@amarulasolutions.com, sjg@chromium.org,
- pbrobinson@gmail.com, quentin.schulz@cherry.de,
- varadarajan.narayanan@oss.qualcomm.com,
- u-boot@lists.u-boot-project.org, u-boot-qcom@groups.io
-Subject: Re: [PATCH v1 7/8] usb: gadget: fastboot: allow configuring the
- endpoint buffer size
-Message-ID: <20260928212937.GV858934@bill-the-cat>
-References: <20260928064041.1432227-1-sumit.dhami@oss.qualcomm.com>
- <20260928064041.1432227-8-sumit.dhami@oss.qualcomm.com>
+ Mon, 28 Sep 2026 14:30:17 -0700 (PDT)
+From: Vitaliy Sochnev <sochnev.v.74@gmail.com>
+To: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH] net: e1000: use all RX descriptors
+Date: Tue, 29 Sep 2026 00:30:11 +0300
+Message-ID: <20260928213011.290839-1-sochnev.v.74@gmail.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rB6VhlUbkFrpXksJ"
-Content-Disposition: inline
-In-Reply-To: <20260928064041.1432227-8-sumit.dhami@oss.qualcomm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -186,84 +171,189 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+The driver hands one RX descriptor at a time to the hardware and points
+every descriptor at the same buffer, so the ring holds a single frame.
+The legacy stack mostly copes, but lwIP opens a TCP window and the peer
+sends segments back to back. On QEMU with e1000, lwIP wget of 1 MB
+takes about 300 s; virtio-net transfers 20 MiB in under a second.
 
---rB6VhlUbkFrpXksJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Give each descriptor its own buffer and keep the ring filled. The ring
+grows to 16 descriptors. Descriptors are handed back one cache line at
+a time, with one line held back, so that flushing a descriptor never
+overwrites a neighbour the hardware has written back meanwhile on
+platforms without coherent DMA.
 
-On Mon, Sep 28, 2026 at 12:10:40PM +0530, Sumit Singh Dhami wrote:
-> The hard-coded 4096-byte EP_BUFFER_SIZE limits the maximum length of a
-> fastboot command received over USB. Long "oem run" commands, such as
-> a multi-partition "gpt write", can exceed that and get rejected with
-> "buffer overflow".
->=20
-> Make the buffer size configurable via CONFIG_FASTBOOT_EP_BUFFER_SIZE,
-> defaulting to 4096. The value must stay a multiple of the endpoint's
-> maxpacket size.
->=20
-> Signed-off-by: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>
-> ---
->  drivers/fastboot/Kconfig        | 14 ++++++++++++++
->  drivers/usb/gadget/f_fastboot.c |  2 +-
->  2 files changed, 15 insertions(+), 1 deletion(-)
->=20
-> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-> index a4539844d89..32609fddecb 100644
-> --- a/drivers/fastboot/Kconfig
-> +++ b/drivers/fastboot/Kconfig
-> @@ -49,6 +49,20 @@ config TCP_FUNCTION_FASTBOOT
-> =20
->  if FASTBOOT
-> =20
-> +config FASTBOOT_EP_BUFFER_SIZE
-> +	hex "Fastboot bulk endpoint buffer size"
-> +	default 0x1000
-> +	help
-> +	  Size of the buffer used for fastboot bulk endpoint transfers.
-> +	  This bounds both the maximum length of a fastboot command received
-> +	  over USB and the chunk size used during the download data phase.
-> +	  A larger value is needed to accept long commands, for example
-> +	  "oem run" with a large command string.
-> +
-> +	  Must be an integral multiple of the endpoint maxpacket size (64,
-> +	  512 or 1024 bytes), otherwise transfers break on controllers such
-> +	  as DWC3.
-> +
->  config FASTBOOT_BUF_ADDR
->  	hex "Define FASTBOOT buffer address"
->  	default 0x82000000 if MX6SX || MX6SL || MX6UL || MX6SLL
-> diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastb=
-oot.c
-> index 8df0e3f331d..d65ed1c70a4 100644
-> --- a/drivers/usb/gadget/f_fastboot.c
-> +++ b/drivers/usb/gadget/f_fastboot.c
-> @@ -31,7 +31,7 @@
->  #define RX_ENDPOINT_MAXIMUM_PACKET_SIZE_1_1  (0x0040)
->  #define TX_ENDPOINT_MAXIMUM_PACKET_SIZE      (0x0040)
-> =20
-> -#define EP_BUFFER_SIZE			4096
-> +#define EP_BUFFER_SIZE		CONFIG_FASTBOOT_EP_BUFFER_SIZE
->  /*
->   * EP_BUFFER_SIZE must always be an integral multiple of maxpacket size
->   * (64 or 512 or 1024), else we break on certain controllers like DWC3
+With this change, 1 MB takes under 5 s and 20 MiB take 5.5 s.
 
-Now that EP_BUFFER_SIZE is user-controlled, do we have some logic
-further in the code to introduce a build time failure if what this
-comment is saying is not true?
+A similar change was proposed in 2023 but not merged.
 
---=20
-Tom
+Link: https://lore.kernel.org/u-boot/20230303204844.112105-1-christian.gmeiner@gmail.com/
+Signed-off-by: Vitaliy Sochnev <sochnev.v.74@gmail.com>
+---
 
---rB6VhlUbkFrpXksJ
-Content-Type: application/pgp-signature; name="signature.asc"
+Notes:
+    Tested on qemu_arm64 with e1000 and virtio-net: TFTP of 20 MiB with the
+    legacy stack and lwIP, lwIP wget of 300 KB, 1 MB and 20 MiB, test/py
+    test_net. Built for qemu_arm and run on cortex-a15: wget and TFTP of
+    20 MiB. Not tested on real hardware.
 
------BEGIN PGP SIGNATURE-----
+ drivers/net/e1000.c | 87 +++++++++++++++++++++++++++++----------------
+ 1 file changed, 56 insertions(+), 31 deletions(-)
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCarrcQQAKCRAr4qD1Cr/k
-Cvu+AQDI5iGsEOOQXsJlaX2wk6XkQGeiGXasFvwFNyP+lyWAZAEAiPxCfQ5iZCZP
-2jx4z/tdB+3rSppVCfhv65NJ2Rd8Agg=
-=Jxb6
------END PGP SIGNATURE-----
+diff --git a/drivers/net/e1000.c b/drivers/net/e1000.c
+index 1c8767dbe..3805fc5d5 100644
+--- a/drivers/net/e1000.c
++++ b/drivers/net/e1000.c
+@@ -57,11 +57,21 @@ tested on both gig copper and gig fiber boards
+  * move these buffers and the tx/rx pointers to struct e1000_hw.
+  */
+ DEFINE_ALIGN_BUFFER(struct e1000_tx_desc, tx_base, 16, E1000_BUFFER_ALIGN);
+-DEFINE_ALIGN_BUFFER(struct e1000_rx_desc, rx_base, 16, E1000_BUFFER_ALIGN);
+-DEFINE_ALIGN_BUFFER(unsigned char, packet, 4096, E1000_BUFFER_ALIGN);
++#define E1000_RX_DESC_NUM	16
++#define E1000_RX_BUF_SIZE	2048
++/*
++ * RX descriptors are handed back to the hardware one cache line at a time,
++ * so that flushing a descriptor never overwrites a neighbour the hardware
++ * has just written back.
++ */
++#define E1000_RX_DESC_BATCH	(ARCH_DMA_MINALIGN / sizeof(struct e1000_rx_desc))
++DEFINE_ALIGN_BUFFER(struct e1000_rx_desc, rx_base, E1000_RX_DESC_NUM,
++		    E1000_BUFFER_ALIGN);
++DEFINE_ALIGN_BUFFER(unsigned char, packet, E1000_RX_DESC_NUM * E1000_RX_BUF_SIZE,
++		    E1000_BUFFER_ALIGN);
+ 
+ static int tx_tail;
+-static int rx_tail, rx_last;
++static int rx_last;
+ static int num_cards;	/* Number of E1000 devices seen so far */
+ 
+ static struct pci_device_id e1000_supported[] = {
+@@ -5120,31 +5130,33 @@ e1000_sw_init(struct e1000_hw *hw)
+ 	return E1000_SUCCESS;
+ }
+ 
+-void
+-fill_rx(struct e1000_hw *hw)
++static uchar *e1000_rx_buf(int i)
+ {
+-	struct e1000_rx_desc *rd;
+-	unsigned long flush_start, flush_end;
++	return packet + i * E1000_RX_BUF_SIZE;
++}
+ 
+-	rx_last = rx_tail;
+-	rd = rx_base + rx_tail;
+-	rx_tail = (rx_tail + 1) % 8;
+-	memset(rd, 0, 16);
+-	rd->buffer_addr = cpu_to_le64(virt_to_phys(packet));
++/* Reset the descriptors of the RX batch starting at @first */
++static void e1000_arm_rx(int first)
++{
++	struct e1000_rx_desc *rd = rx_base + first;
++	int i;
+ 
+-	/*
+-	 * Make sure there are no stale data in WB over this area, which
+-	 * might get written into the memory while the e1000 also writes
+-	 * into the same memory area.
+-	 */
+-	invalidate_dcache_range((unsigned long)packet,
+-				(unsigned long)packet + 4096);
+-	/* Dump the DMA descriptor into RAM. */
+-	flush_start = ((unsigned long)rd) & ~(ARCH_DMA_MINALIGN - 1);
+-	flush_end = flush_start + roundup(sizeof(*rd), ARCH_DMA_MINALIGN);
+-	flush_dcache_range(flush_start, flush_end);
++	BUILD_BUG_ON(sizeof(struct e1000_rx_desc) > ARCH_DMA_MINALIGN ||
++		     E1000_RX_DESC_NUM % E1000_RX_DESC_BATCH ||
++		     E1000_RX_DESC_NUM / E1000_RX_DESC_BATCH < 2 ||
++		     ARCH_DMA_MINALIGN > E1000_BUFFER_ALIGN);
++
++	for (i = first; i < first + E1000_RX_DESC_BATCH; i++, rd++) {
++		uchar *buf = e1000_rx_buf(i);
++
++		memset(rd, 0, sizeof(*rd));
++		rd->buffer_addr = cpu_to_le64(virt_to_phys(buf));
++		invalidate_dcache_range((unsigned long)buf,
++					(unsigned long)buf + E1000_RX_BUF_SIZE);
++	}
+ 
+-	E1000_WRITE_REG(hw, RDT, rx_tail);
++	flush_dcache_range((unsigned long)(rx_base + first),
++			   (unsigned long)(rx_base + first + E1000_RX_DESC_BATCH));
+ }
+ 
+ /**
+@@ -5279,7 +5291,7 @@ static void
+ e1000_configure_rx(struct e1000_hw *hw)
+ {
+ 	unsigned long rctl, ctrl_ext;
+-	rx_tail = 0;
++	int i;
+ 
+ 	/* make sure receives are disabled while setting up the descriptors */
+ 	rctl = E1000_READ_REG(hw, RCTL);
+@@ -5303,7 +5315,7 @@ e1000_configure_rx(struct e1000_hw *hw)
+ 	E1000_WRITE_REG(hw, RDBAL, lower_32_bits(virt_to_phys(rx_base)));
+ 	E1000_WRITE_REG(hw, RDBAH, upper_32_bits(virt_to_phys(rx_base)));
+ 
+-	E1000_WRITE_REG(hw, RDLEN, 128);
++	E1000_WRITE_REG(hw, RDLEN, E1000_RX_DESC_NUM * sizeof(struct e1000_rx_desc));
+ 
+ 	/* Setup the HW Rx Head and Tail Descriptor Pointers */
+ 	E1000_WRITE_REG(hw, RDH, 0);
+@@ -5320,7 +5332,11 @@ e1000_configure_rx(struct e1000_hw *hw)
+ 
+ 	E1000_WRITE_REG(hw, RCTL, rctl);
+ 
+-	fill_rx(hw);
++	for (i = 0; i < E1000_RX_DESC_NUM; i += E1000_RX_DESC_BATCH)
++		e1000_arm_rx(i);
++	rx_last = 0;
++	/* The hardware owns all descriptors but the last batch */
++	E1000_WRITE_REG(hw, RDT, E1000_RX_DESC_NUM - E1000_RX_DESC_BATCH);
+ }
+ 
+ /**************************************************************************
+@@ -5346,8 +5362,8 @@ _e1000_poll(struct e1000_hw *hw)
+ 	/* DEBUGOUT("recv: packet len=%d\n", rd->length); */
+ 	/* Packet received, make sure the data are re-loaded from RAM. */
+ 	len = le16_to_cpu(rd->length);
+-	invalidate_dcache_range((unsigned long)packet,
+-				(unsigned long)packet +
++	invalidate_dcache_range((unsigned long)e1000_rx_buf(rx_last),
++				(unsigned long)e1000_rx_buf(rx_last) +
+ 				roundup(len, ARCH_DMA_MINALIGN));
+ 	return len;
+ }
+@@ -5694,7 +5710,7 @@ static int e1000_eth_recv(struct udevice *dev, int flags, uchar **packetp)
+ 
+ 	len = _e1000_poll(hw);
+ 	if (len)
+-		*packetp = packet;
++		*packetp = e1000_rx_buf(rx_last);
+ 
+ 	return len ? len : -EAGAIN;
+ }
+@@ -5702,8 +5718,17 @@ static int e1000_eth_recv(struct udevice *dev, int flags, uchar **packetp)
+ static int e1000_free_pkt(struct udevice *dev, uchar *packet, int length)
+ {
+ 	struct e1000_hw *hw = dev_get_priv(dev);
++	int first;
++
++	rx_last = (rx_last + 1) % E1000_RX_DESC_NUM;
++	if (rx_last % E1000_RX_DESC_BATCH)
++		return 0;
+ 
+-	fill_rx(hw);
++	/* Batch processed: re-arm it and release the held-back batch */
++	first = (rx_last + E1000_RX_DESC_NUM - E1000_RX_DESC_BATCH) %
++		E1000_RX_DESC_NUM;
++	e1000_arm_rx(first);
++	E1000_WRITE_REG(hw, RDT, first);
+ 
+ 	return 0;
+ }
+-- 
+2.55.0
 
---rB6VhlUbkFrpXksJ--
