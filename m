@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 391B6CA5FA2
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 19:46:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E476CA5FA3
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 19:47:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C520D4043E;
-	Mon, 28 Sep 2026 19:46:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A354E80B12;
+	Mon, 28 Sep 2026 19:47:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZOx7DCtJjQFw; Mon, 28 Sep 2026 19:46:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 13E8640448
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790624805;
-	b=isiZfZKnOK/uYWcR5osLx26dr5pml9sIWsVanroyQgJp207UzgCYDwdSk3YAgmOApKN+
-	 KZi2Gw0cCjTqUZ45aLDp4o74GJvQPSykAMFGJutQF7eXBgAnz//BUwqvtqKYxCVrm58oV
-	 HIcNHk+KEPmdlU6TibOvJemxMoHJQHwC+46gO1an8Q0EKXjCdEpXsbnkLlOF8Hp9izSDH
-	 NS8YWi21I3HEQNG2T8zsFvXTd6BCx2gQi+cOEJPQwA0ncCXPEdjGiFmwiICtxCBBcfp6g
-	 p6nAFLrD8Tdp8nxCXDEUl1FaNdFNzQqgdPVULvvzS6MXi3DQYppd8B/mYF8hsUluSjw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id POEUcH10FE6B; Mon, 28 Sep 2026 19:47:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org D5CC7809F8
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790624822;
+	b=rN9jBUPBSU93tExY2vUTOiUtLDRNm53KsLjOgcd+AmjeqKDS3UZAzt7F2aRNXsZzGKDT
+	 PTjgikV2yTRXaTHLWUCxP50KzyR2RXqkjS66KfXVjEt8P6gpvkoFTPpyw23KmyFXoSlpy
+	 8s8mkhpsngF69Gbbw0badsDcRmrAZrh3hsJRv/aU4IkW4lowpDQ0vPsOP7mX9pf0tHGtR
+	 YXiE7ICP1UJUovni5yn2O2AlrDZvvsFQwP+yVoABl8n2MoI/utKLpJ0IwnKqNgy1AWfDB
+	 eCnA86triy9VEtK5yFxPWkpEXIWobiG+4swgTzd0p6igf5DmkE8FtQWivAVhU1nRd5w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790624805;
+	c=relaxed/relaxed; t=1790624822;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,126 +32,126 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=DjWL33RjV95xTt1D0/ChwR8xGehOiL3e+T7GPZ2yFCg=;
-	b=qxoco1R4bxN/DJSCI+Jnh6Zik+ZA85YqQKvPs9VZl3fXNrY2TPUYgMvR0lb36Q2Pa90V
-	 PCL1w2pLWe9AU5H64/WWgB4OgmA03YJo/nQNx/h9xsQKbZCQVTrrwZLhNufCqeD3++miE
-	 qWXeiunR5e9OePM9E5kp+CGVqOGpU9ojrrzoyx4hUqmhZvvxFAm5R7pwSy9sOtCTnA8cM
-	 JXuMdGB33a3/4/7c8ljbblrcJ+9zpGWUWJ0Ug1a+1Z2oy1vQRlt5Ld3kfaUTYonFmN1+R
-	 bOXbm1PJTCK5tsTgYM/jja6gYg5PEF/+uygR/ro4YID6tMrEfPrDot/A53sxEtii/Ww==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=konsulko.com;
-	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=Hv8nVJ6+;
+	bh=fvhvaEGNKTpTiCqq4ad73u0awfTeROdoHWrAgPUrXsE=;
+	b=LW+GYPIlN44gjaPp3LIx1K6/kcVjoQHlnGqu1VNwEZW/tqHJPTi8etZwENb9MYq9bBOB
+	 L0qiN32ob0JgReGjleL0v93jtxLnqP/IZsPp8trCaOH6vhE0XMcPf0d+/DXPmtPj4nfNS
+	 g9Tubc8IlR3LtX6TRstKQvTGPXI/DHKBMu9GoREwonPLC+Oav1ZQDqPcovAOg5hVuMgbc
+	 Cn9K3XUELA+ulVVaCD/CpZdDqFYihoWqtZVuOqHi7H/XuacKo6sAXG5OLzR90L2FIGxIg
+	 bCccQX56gDmpb1Vu8npEL9UX8g9v3NCYujlp4coQKSZQIW002Kk6UC/fSitoX4Kp2Kw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=konsulko.com;
+	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=D9oK+xoD;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790624805;
-	bh=DjWL33RjV95xTt1D0/ChwR8xGehOiL3e+T7GPZ2yFCg=;
+	d=lists.u-boot-project.org; s=default; t=1790624822;
+	bh=fvhvaEGNKTpTiCqq4ad73u0awfTeROdoHWrAgPUrXsE=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GOPE+m4phtmJlBheTLquUTxszkQlqL+gQqLJ62lfJ6kptZE/lHv8k6P9GENXQi2kC
-	 dDAeJ1n51+pa8BGhkiM7ZXuf+SYxaeXstKyZxKXRr6HaOhg3e/GZg4mHWUKx8EDKVP
-	 N3y3QztM4mM8r0BPXSzoet/LpLudohjX/e9Bw5Cfq0vBi6cPAS5ehUJC+qt1txKBcQ
-	 iU/0+n4t8K31EQ+VN9loJhDSkw5fi5OUfhijxkFtrsGKYY+uGEh2ll/RgWh8G7YBxA
-	 6Q/Qy5eXEdUix7mUyMHscY1IF7ptQzyTEdwvijJefIBW6y+BkQe/PeVk0Bxbq/46Ze
-	 +EI8leqJ1bkdA==
+	b=sgSO6VzOZJIbDam5GmTqa3hMoYEbxvvo1DHgLayWGC5Kgg+feJcKcrZwCS3auYsk6
+	 AbPxRKhcGNpf+nh4MXppezCNxOKIsXz1KYpvfh3lPCeBc4fpJvEHoSiq2uI+ahlbb4
+	 dfhg7BAxGCY8xFXzGtL3B/HFs0ZdbQh8XDjdh8FrFGdb0GUPgrxzzkNnJ1WAL55wyW
+	 ofNjnLCdVxISYKGGQTcmx+5NW7TjIiE7+PG/Bz+3IboCWuyl6e7QH0ELWX/5tDE/aG
+	 tWIB/6NpjcUP+V5jglmqyu3S/nMD5NLwe8AvceWZ9IZ4gpCzJ6ZFUPB+4uRjJ6GDb5
+	 VgJhgraXBXdCw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 13E8640448;
-	Mon, 28 Sep 2026 19:46:45 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 0B247335
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 19:46:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D5CC7809F8;
+	Mon, 28 Sep 2026 19:47:01 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2A556147
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 19:47:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E7D9940448
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 19:46:42 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1BD78809F8
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 19:47:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mHzaJqe4DHxk for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 19:46:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 317AE4043E
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:32::8"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790624802;
- b=M5zwTGEExgAMCcZnlyXlKUT/yAfyTOHfFnCC7g7XMGnHrHi4pce153o8WgQR5EjjTA9j
- K6S47/z3cKZ+p+AWV3peU/1YFm7sv6RDzP52hKoJ/Vj4UsD968KZe724L8exa5jStwbRV
- OULYqyVXYY1mSPRYz/vnCnQzGY7EL2/oFXiib6O6GsCN2+R4QnAdGI8Vlx4cfGS58E5g8
- fn2b24ikslAiQJJdCn+2EuKGgo3v+mGY6Xk8ENG4jmdDNL1+tVSphjTq/pDxWXs0DaUZ2
- YaEPxcIw+WGiFO7Og5K25Ta5kGlnk5UwprZf+85oVAz0/yki95ZpeH+FWE2e6trSIWg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9iEiMftOIjr0 for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 19:46:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 57348809F5
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790624819;
+ b=gKyHywj3ff6T0wW7eBBoIGcaOgzwpvlJBPGdiph1WVRg5LlN5ne4bixkeNwge67swczZ
+ C8vVlRteb1pnQfFmeG6ZFihktXfO9zI2LlcF8j3aly7DYoJyCQiCtKsFoAa8FiW2eM+2d
+ tO5XkpMRdlfajqwmmZHXWNGFKlzQhELs92l71D64rwejsm44Pq1CVoTEEuRtWJD1VLu0a
+ WrymP9wYuLugQXwYj0yaGOj6YSe1ujQ9t3HcaIRgDu9iiyqnhph1KAIfImq6NqyNqwVFc
+ 2GI67MPnZ8FhuuLkt9HYhoWU9M4za0rtrTYdcJOiE1ghJGvttdUC+7SMbbOGePVuENQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790624802;
+ c=relaxed/relaxed; t=1790624819;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
  Subject:Message-ID:References:MIME-Version:Content-Type:
  Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=DjWL33RjV95xTt1D0/ChwR8xGehOiL3e+T7GPZ2yFCg=;
- b=gvmu5b2nF2Bo07HI80tzT+ZEpQHhhyX5GnMrZTk97GyhfInWGGptQ0OrqrmK1V0gme1L
- JPxZ5pi8KcejHcsFOyqzTgz0YzlM9jCAbXvQwngcLMCrPwPNHFJNrrAPPEteN97N03GHp
- 3ecEJerPTRG/4AzmlR5hi3jOX2DmfULmG5527FJTyBt2E/mqd8GFKNcESOgZVJ9OA9H4T
- P13xYsb+Z/w+3NKFcfEWhEVDfNlHMTi/r9pnv6tyrEQLOSaIQCeFlY5h0TLSUGb+EvDHx
- ytRKKTAhLMsbxoeSO7VVa7+iexU8XcohWGonoWJ7hnGvdpSVrL2PJR/H1liThRWVaaw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=fvhvaEGNKTpTiCqq4ad73u0awfTeROdoHWrAgPUrXsE=;
+ b=L7llGPYanHUur/SxSsBqW0xyLq3xSuhWvwtHajzFcNOfc+xhnOwxCby9qVlFqdpJtbDD
+ ipR5xfM9Q5k5ND/M9FpvepxnQC24bwDZ3L2eo7ZfFuvb69RFE+T5Q1992uM6uHrpfg1FO
+ 8m7fzb1a5b9bXpuTNL7ECO+uCqnZyxrWmxfItYdO0ykbSaZUXpmsI/YO4qLUPrZda4X23
+ a0yqMQwjhBYtY6GrxebqEfkhvzQgzS+lcf78Y0NdCndme1AZ0QM3FyZ+XQJSJL8fD6GDk
+ 404c2Ll5UXqDdu+ZepwcxbDE5dhNggmmCFMjA53HtMMfmLo5UkHuHeDVK3SK90Fqktw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=konsulko.com; 
  dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=Hv8nVJ6+; 
- arc=none smtp.remote-ip="2607:f8b0:4864:32::8"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:32::8;
- helo=mail-oi2-x08.google.com; envelope-from=trini@konsulko.com;
+ header.s=google header.b=D9oK+xoD; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::e"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::e;
+ helo=mail-oo2-x0e.google.com; envelope-from=trini@konsulko.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=Hv8nVJ6+
-Received: from mail-oi2-x08.google.com (mail-oi2-x08.google.com
- [IPv6:2607:f8b0:4864:32::8])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 317AE4043E
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 19:46:41 +0000 (UTC)
-Received: by mail-oi2-x08.google.com with SMTP id
- 5614622812f47-4b94bb43008so649611b6e.0
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 12:46:41 -0700 (PDT)
+ header.s=google header.b=D9oK+xoD
+Received: from mail-oo2-x0e.google.com (mail-oo2-x0e.google.com
+ [IPv6:2607:f8b0:4864:31::e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 57348809F5
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 19:46:58 +0000 (UTC)
+Received: by mail-oo2-x0e.google.com with SMTP id
+ 006d021491bc7-6d797cfdd1fso609280eaf.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 12:46:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1790624801; x=1791229601;
+ d=konsulko.com; s=google; t=1790624817; x=1791229617;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=DjWL33RjV95xTt1D0/ChwR8xGehOiL3e+T7GPZ2yFCg=;
- b=Hv8nVJ6+eU3V+qF3KymklCv4qB+1hfBbbs5dbTNljpzX9ck3OZ0rd/1OeDWJCsqTU0
- zgXS1mlBROH+O/81ch2Qas+Scj7PhmOqvvgzFzfUM2L1isWs3did49md8bmiYsvhKHPV
- UVEUy3xvJMVibVZl64wnivTSpjDZWHy107YGU=
+ bh=fvhvaEGNKTpTiCqq4ad73u0awfTeROdoHWrAgPUrXsE=;
+ b=D9oK+xoDoE8IO80B4bQ0wm09Bvf3OVkQLbNUxCCK0Wqm6E98Sz3ydzLytN5NcGX3ZH
+ q0GMbDbSZ2cD4yfdS/GyrgFexTcjfMGwAdwBkSZ/HvtY8VobONTTVUSX2QH5f62gPYab
+ K7OE6TuQd6wAemEua4jMc4sMu7caRz2gyjnEs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790624801; x=1791229601;
+ d=1e100.net; s=20260707; t=1790624817; x=1791229617;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=DjWL33RjV95xTt1D0/ChwR8xGehOiL3e+T7GPZ2yFCg=;
- b=k5mmPJ+vV8et/dieCX/+AKfoSWlhQ9UxgnNTL4/l3xlARoxKtf9tjcsW8p12iU8uXT
- RVxStXzgwuP1ziVRxRC9+8FtvEcL+jr7MfJqh0r5FVpiZ1+pISIdREC9HDuj0pLnBZAY
- OeEbCRJkFv/1NAxXHQDTu8I36lTKz/rKM7V4DQpHr9E6oOLl7ZYmcpGcX8imrt0/nfJ7
- ga5+lf29JIgnRyfXpmf5R6x8TH2YoDM96nD8q+0kaTD8YYXOYpCizG9kh/LH3dzwXrV5
- UuiQPBrlFSXlURa+nSvurc1MHfvZAARip5WEIa6xmJmLQmRHUr8vuWBXOsexly6tmTSz
- hWYg==
-X-Gm-Message-State: AFuF++lAEcU9Ir5HZ8QXIjjaxJoktxF6Py9hL+ocar1diXcp/Wgts7vZ
- uo/K+loPHU4AvjaHCjHXPGuVDV6a5J2BRox3fkLmAv5HiHp1SQPhk4mLjr836woODUw=
-X-Gm-Gg: AYBFou08/jnJgpQE9rWW1Zbxt/bHm4/mUYsEGpf1zRnwaoMXP1YcHppqtFmuJZL4YDE
- BYWHVLgPNEQ97tIn3fIY+2binXm+d0z781RJAE/5hlRoEWFgvie3MCGUls1LYtGOoTazoOtKJsN
- 0EAFiM8S4r7ZFEqRbDsrQYgQCG5AM3B+PYqiF8+yP95b2u6Ns9VruYSAi8ETB0WE3H1eN7xwZad
- dgGChlpQRfgTyInzTKFe/EWlue7i3y4vM0UiFVk/7GrepWmVm5xYwjB4AiwXTN5szdty5j+DdmI
- oZYmKmxPigBAnKv/9mt+v8eCOoRTY1gmNyB4C4CM6OF6W8z85EzlBkFXZRlmaLBc0D0ML5i6JXe
- TfwDuB5133L/MHDDRdznk2Xo+HUp2FD2yVyFc971f5zXa6tZ4xel3ovOSjFS0GjVljLHcJF0jM7
- suZP49j3UfCXcHKFX4mFE2W4w/Vr82bHn22tf/rZhjVSWoK6xO088E7bnnvsdGYAfOzuvKCzkU/
- lg9VhowTEQR1vgKWXkJ1M1zunxWUmvCKD4YKzvbYDeiR7PxONdvCh1lFEHQTO4g112KK3QD8aat
- qYQbbfMzz7VUxjzIPCrj
-X-Received: by 2002:a05:6808:6402:b0:4b9:a88b:8894 with SMTP id
- 5614622812f47-4d72c738d20mr14311306b6e.42.1790624800717; 
- Mon, 28 Sep 2026 12:46:40 -0700 (PDT)
+ bh=fvhvaEGNKTpTiCqq4ad73u0awfTeROdoHWrAgPUrXsE=;
+ b=VYmEfmuupnr7bgzd3AwUrWc8ydEQvA1+1cYbm6+oTrneTBoMQZHeXuUKvXc1yeC1/E
+ W61G046t//xFaXpq5Q3WiPKAVqJmsqZwp9N8ZWPPKAMBNR+aY7mb+yV0xtbqJ2/j7gdO
+ yYZo1BIHABarouXO3OFIOUBju+NHTRawZNdpaU7VMqNsusRTPoLoklQ2KzmelxZEpc6J
+ gO8bf2eJkvMTaMc/528AclA1183EiSbXpQqxkNdVkm02/0mlDrlLoNdRWL6uGrmMOuyn
+ 88Fi+eHBuxkvyaIRtePFDShfuEbJHY+/uA2CkqVxaEHgbQ3erEgKNStl4sk2lJ6pS23s
+ Nh3A==
+X-Gm-Message-State: AFuF++klKYXS/TKzZDqI1JishyjFmXZuz1eEG8XmmXmJvXMSMzhwwyte
+ WWGVHCiMn/95QejftrFlrpzWYg87VmFfRq87jMy1t8FmOahNAw8GszyJgPm4OWMcBOk=
+X-Gm-Gg: AYBFou0aU6HKDWy0vIHMD3Qqg64mPDHprjclqVZ0UXAQie2W0N+MvkhGiHUayk1rQRE
+ ZmPN5a4Y9q4Pz12Jqes9v3aUetJLRJyA3PcEKlsLm5NZ+bG7sPPHQVdB5hJB7f3srxPIu0cPFv6
+ 9ewDWJIQE5amDs8e/577RW9X8y9+6aHwBciSwgBYastXlII9XWajGJTvzIWhNIph6oelUB+FFdl
+ IhdyYOB4eSAwZvNvXlu2dsBRUBoT/l5Mw4DsGremtCoDdAbChMkeOlLfDZ5SCmixWZ2SqABT5F1
+ zDSKWJnVSmO5sG8B6if3iMdMXraYJboTwqTW16bqvny99K+YjRP0aTFg6d8LI1O2bNYurA4hzQ+
+ WrwcdVN56CsWtEUf4+GNQ+lP9C7jEzDh3eYqjmHMf6TXBXco1gW9UQnVvbwGGi4Bxw1ITla9Ntt
+ awcWAIKs4YHr13keMNf3upB5kdCoLd4oeODr/lE/VUnAcpEpWEXpXmdhQ+2uQpOy3FX2UGFs/CK
+ uHvfp0ILbbN7oc95kZVvOwW0/6D4jmH9JWHYglhlgPmtFlKGjJ+3UJIT4MJKP31p9UrbZkV1P++
+ 7tvkAMqYDddqlTpDmo8=
+X-Received: by 2002:a05:6820:160e:b0:6d8:ac5f:88af with SMTP id
+ 006d021491bc7-6d8ac5f892fmr4000463eaf.33.1790624816966; 
+ Mon, 28 Sep 2026 12:46:56 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4ebbd25cf71sm2450054b6e.16.2026.09.28.12.46.38
+ 586e51a60fabf-493356565b6sm11092120fac.9.2026.09.28.12.46.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Sep 2026 12:46:39 -0700 (PDT)
-Date: Mon, 28 Sep 2026 13:46:37 -0600
+ Mon, 28 Sep 2026 12:46:56 -0700 (PDT)
+Date: Mon, 28 Sep 2026 13:46:53 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Josef Schlehofer <pepe.schlehofer@gmail.com>
 Cc: u-boot@lists.u-boot-project.org,
@@ -167,16 +167,16 @@ Cc: u-boot@lists.u-boot-project.org,
  Holger Brunck <holger.brunck@hitachienergy.com>,
  Simon Glass <sjg@chromium.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [PATCH next 02/13] Makefile: Link a toolchain libgcc outside
- --whole-archive with LTO
-Message-ID: <20260928194637.GO858934@bill-the-cat>
+Subject: Re: [PATCH next 01/13] Makefile: Skip undefined symbols in
+ keep-syms-lto.c
+Message-ID: <20260928194653.GP858934@bill-the-cat>
 References: <20260928110434.70686-1-pepe.schlehofer@gmail.com>
- <20260928110434.70686-3-pepe.schlehofer@gmail.com>
+ <20260928110434.70686-2-pepe.schlehofer@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kEVfmPcX0R3QW93x"
+ protocol="application/pgp-signature"; boundary="0gt0URn8COHXMVBL"
 Content-Disposition: inline
-In-Reply-To: <20260928110434.70686-3-pepe.schlehofer@gmail.com>
+In-Reply-To: <20260928110434.70686-2-pepe.schlehofer@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -192,27 +192,32 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
---kEVfmPcX0R3QW93x
+--0gt0URn8COHXMVBL
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 28, 2026 at 01:04:23PM +0200, Josef Schlehofer wrote:
+On Mon, Sep 28, 2026 at 01:04:22PM +0200, Josef Schlehofer wrote:
 
-> Commit c1094987d1dc ("build: support building with Link Time
-> Optimizations") put $(PLATFORM_LIBS) inside the --whole-archive group
-> of the LTO link rules. That works for the in-tree libgcc that
-> CONFIG_USE_PRIVATE_LIBGCC builds.
+> The generated keep-syms-lto.c gets an __ADDRESSABLE() entry for every
+> linker list symbol that nm prints, including symbols the input objects
+> only reference and nothing defines. keep-syms-lto.c is compiled with
+> the LTO flags filtered out, so such an entry turns into a hard
+> reference that the link cannot resolve unless .discard.addressable is
+> dropped.
 >=20
-> A toolchain libgcc, though, then gets every member force-linked,
-> split-stack helpers included. With Debian's powerpc-linux-gnu GCC
-> 14.2, turris_1x_nor with CONFIG_LTO=3Dy, which mpc85xx allows later in
-> this series, fails to link with undefined references such as
-> __morestack_fail and __tls_get_addr.
+> The turris_1x SD card SPL, for example, links
+> board/CZ.NIC/turris_atsha_otp.o, which references the ATSHA204 driver,
+> while the driver itself is not part of the SPL. With LTO, which mpc85xx
+> allows later in this series, and without the /DISCARD/ rule that
+> "powerpc: mpc85xx: Discard LTO keep-syms sections" adds, its link
+> fails:
 >=20
-> Keep the in-tree libgcc inside --whole-archive, but link a toolchain
-> libgcc after --no-whole-archive, as the non-LTO link rules do. ARM64
-> has no private libgcc, so its LTO boards now link libgcc this way too.
+>   keep-syms-lto.c:5:(.discard.addressable+0xc):
+>     undefined reference to `_u_boot_list_2_driver_2_atsha204'
+>=20
+> Pass --defined-only to nm, so that only symbols defined by the scanned
+> objects reach the generator.
 >=20
 > Fixes: c1094987d1dc ("build: support building with Link Time Optimization=
 s")
@@ -220,32 +225,22 @@ s")
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: Simon Glass <sjg@chromium.org>
 > Cc: Marek Beh=FAn <kabel@kernel.org>
-> ---
-> --gc-sections, which commit 34ccadcd3334 ("ARM: don't use --gc-sections
-> with LTO when using private libgcc") keeps on ARM for LTO with a
-> toolchain libgcc, is set on powerpc and does not help here.
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Since we have ARM boards that do, and others that don't, set
-USE_PRIVATE_LIBGCC why isn't the solution to just replicate that logic
-under arch/powerpc/config.mk ? I also don't see a later patch that
-guards and drops out -ffunction-sections -fdata-sections when LTO is
-enabled.
-
-Also, in your next iteration please drop Pali Roh=E1r from the emails as
-he does not wish to be involved with U-Boot. Thanks.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---kEVfmPcX0R3QW93x
+--0gt0URn8COHXMVBL
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCarrEFQAKCRAr4qD1Cr/k
-CqmdAP48U1a8i5JTW/NYzEw7EFjUzqXqRSqCJYGok+jtWDt2YQD+PkJFfuuBvM5e
-BzD6vc8a1okS9T+Bcw42A/uJdcDVzA8=
-=iuZ/
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCarrELQAKCRAr4qD1Cr/k
+Cg2OAQCbuX3vjFj73Pl6ZcXz7bCmd9rOa0QWPRXid1Xr9PRgLgD7B/SUgo16DKt/
+fhwF6/sA9Wi5CiDcMtMi5xYztHU3vQw=
+=kLwb
 -----END PGP SIGNATURE-----
 
---kEVfmPcX0R3QW93x--
+--0gt0URn8COHXMVBL--
