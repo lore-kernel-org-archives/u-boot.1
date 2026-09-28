@@ -1,309 +1,213 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DC45CA5FA2
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 17:05:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE87BCA5FA1
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 17:05:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DDCAC80EDA;
-	Mon, 28 Sep 2026 17:05:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 783B1606EC;
+	Mon, 28 Sep 2026 17:05:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SuQzolZsnejn; Mon, 28 Sep 2026 17:05:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org C582480E9C
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1790615107;
-	b=SgnSabv1ssucNsQqyYnZUFsTtxwqTbxG536AsXt7nlGCSRRXny83Wzx6nZNfKDb+cLLh
-	 wjMHhFr5O/V4dz4qM1NJykAQnifJKBPCoI21yRcW6rSU2LEau6Ff2tSPPwolWr5xsx5yN
-	 54dDvHOPj0jh+zt4SpK7r+ammMQ4IxUQhqzVNTqPLg9LGLl5ZSxMhM4lRnhgRbKBfZuCN
-	 mGGuuhVHZsBXuZRxcM+xOdWH1eUrc2TUIgZTUPeGPnNe2pckr9uPVsZQXi8HoIS3HuU8U
-	 9KKLS395mhCsVFMMRk0ul+kn2xK368cly/CKTMqdLmHhfUCZ+YTwledo8QPKzYuWtag==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LvCOhjv-8mVg; Mon, 28 Sep 2026 17:05:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4B356606F8
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790615110;
+	b=oT0Maw2w8Oec4s0sTwC6ktsv5hZv8iQDee/r9ggC9e1eWQHGIXDP6nr5zsX8Cp7gSIoq
+	 KDaztTqWETwqfGtrCf2RbKgJ3VseUTEAC19hFXPrBAzlrp12ERaVlGNJ/oKR0lQCbspHK
+	 IFWQEN1pqBolea9IPTnFC/cLcRkcx2C6I3saV+KVDfMF4hx7aRzPaGOL0ozowLTWRObxk
+	 kKb6d2jcfReERfn6B8FsHkNbHccP4E8Sg+cokWIrmfcYZzQkZ98manlohyi0S+Noai8Oq
+	 hfXGC8YLvb14eRtCyn+yopBOfL/6vU/7lthNLdm51pXBXBcWAStJjjia05xiOJknoqw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790615107;
+	c=relaxed/relaxed; t=1790615110;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:DKIM-Signature:Received:Received:
-	 X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
-	 Received:Received:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:CC:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-EOPAttributedMessage:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
-	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Proofpoint-GUID:
-	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-Mailman-Approved-At:X-BeenThere:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=o7yg0l0DQ7wbF6bCSYBslskESY4YZVh3w33+OZM7zUU=;
-	b=Zl8ZCWDpx9zpFy6RigvrWBb+85cdLVVroG/VkdA+PJNLlFdbqskPRPdUZwcf6l65Jw38
-	 X/nm9hiSa90ylsSiKMj/dvCyMSb6dCXKCM7WC5mW7WCSc4D244dsxKW7NHC17zEha2aiX
-	 8Yq0W5wWyd7prVwaO9VuHE5tAtKYeiLTsstxBG7I1ymNrnnJaq8r/h0ZmtHErlylcveJg
-	 kjcv2jcsQ9pP/GjUyvYO3TQEWBy6R27PSkiqtyWWn41xowX/VoOBA754AnMSrY9IEXs37
-	 eemToMCyLWWDO5X90G8OHvOhKp0+dDqnF3FjaH3s9AgNAovaPtb3m2eFGGveAxueVow==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+	bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
+	b=c4AxI2OXg+yM7upkpPKU+22Rth2ABVSHk3r9SUnEai+Rsp68wJ89iC0Og5iftadzkH6V
+	 S3VaGY8M2NgZGeB1jNIPxVEw2CANjOCE+2qL3KUUdVSvR19lQVBPmpzaLVGQlH+/LKN0m
+	 Kk9SiPpcIDhvElAa+VqyTofFhN0p/n4Fz+s7WGXGHiRw51QHlXBSvkj6X1rOyjqYBTq9h
+	 vI6MCV6VzkdcFNArcnnU7ISJomQGPeh5VUV7SkSlDrJQX8dHIDq91BIEpSJafC78F41DQ
+	 +esS2mq4gxkfGgW8sTxgt6NBqXfs3ApH1pTiZS076Kb2ylPnkoD5CJeixNxMmr7kdgw==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=pass header.from=flipper.net;
+	dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=IdxLR2io;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790615107;
-	bh=o7yg0l0DQ7wbF6bCSYBslskESY4YZVh3w33+OZM7zUU=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790615110;
+	bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=JupOvO3KxjPEZRqy3TDsCaonS5lVCLuQ96H9u7Sxtcym++9UXFJRi6vF3MdJZMPPT
-	 JzQGCK+On4gUaKX25a8m6YZsG44xLGO6kUQEdOcNwVSuDLfEdG6kiNcm0qZPC3leb8
-	 j612cdSvxnvu33kM1bMuIe7g4B9zs0cchYH2KgMss/XRaXXJTo5eMF2mZYj9G9+WqM
-	 aCH3nJQP4yEb9+Cb19rziVoBYlYwtgXQMYENd5rqa5czBrK9BKTB/WYAQSjjqVuMxj
-	 RMfpUbaQw05Q/yPbX+Txj8tcdLQYxd9x0VftQchfI87e/mZVoXkENt5dyTLgno7bXp
-	 vr+08pX6T3XUQ==
+	b=S9c0ZvA/S9zOzhVaM5fhfy6TMtNWU4GsxIMyJE959bC5P0hJMSbEZFk8D9n3Yz8VD
+	 oiIxwLEB+tt0zCtJ4w+R5MooydSC2SHz3ueqQ3fDBKtjxWavz8SKxk7rXjkEzMdAEz
+	 IWveZXi5HUCqKTWsgL+uURyXuRTcRiz1rfkkHdWev3ihy1JgLOglgfLGJM4D7PG0Y/
+	 nRt4P419hX1eF/cQptV+O80gtF1WM0y/GNZdy9X1ZCbTYr8MC3ihTvnQlrYh/dwBEZ
+	 VTPEZT/XefeeW1pcgIucWM+qAChuGxg0ZWhtpIqw1fvs96IHuNhBZFpvQ+phjVzEL9
+	 hAzD/B8Uhwx6w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C582480E9C;
-	Mon, 28 Sep 2026 17:05:07 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id AAAAE3D8
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:35:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4B356606F8;
+	Mon, 28 Sep 2026 17:05:10 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 683793A0
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:44:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9C170400CD
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:35:12 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 58EF960615
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:44:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pdUpCoRSlXL5 for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 16:35:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org F1CD1400B4
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=148.163.150.75
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790613311;
- b=ms1YG7eQwh0rZCYbuGQs2cgNGVUP4Jbe6VDNS21emB0+GepE0IUOJIhz84AivS5SwejA
- Y80pKg6p2VhXSt2LUcx6qlagilSOXz2e22Zmvy2lfzFfNSQGoOOAb7lZItoaLLTbQH4/c
- 0zPrX7HrqcyoBzJxGKTyVWAOqM2zXssOkKLnJ+qeOZenyzgu75vxltHgOAqFKXTCfAazm
- z27id3IFbIEhlFYWSrVlR7q0mraFb6VYjRO9j/f09Sou/8c5BUzS7VUX8g9iXJJOt2EKa
- 3BKmiC8x2Bgt5yRqxhbls8KlsYRnMjKlNAO/WL8F+D7R95N6uGfxeJ1VMk348kGVT2A==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9pj5-ooYomrE for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 16:44:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org F1855605FC
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:34::f"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790613890;
+ b=bQS67WVhHrmEiKkN2D8ITdlE1P5gDmYVcUD/okKqz23Bvi9eo1E0R1DE6Jz9S7JsuHvV
+ fWwLdXvx6VD16Opi6tip1BlrngkHKwENhZKL6dCE57LiadFpYOv9Vk4EOPaF2YoS0AUoi
+ oDEIHFzHLXQcnUcF0rzpQ7HDzNC7nkEQH0mJhwxf2hakrq2znBDMgc/3ZwdVpoVb90+ar
+ 7VVFiD21GyLPz2ZPPQAmPIF63jMCVb10KgmviqEXqkBSbU6LNTqe674peFi6H3Odilzgi
+ Pl4KiL5tzXrQynQP8nS5Q/0op7aCmvE4kjWozhkF+Ol4h89WCWgcxVvijTFDiYLjxYA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790613311;
- h=Received-SPF:Received:DKIM-Signature:Received:DKIM-Signature:
- Received:Received:X-MS-Exchange-Authentication-Results:Received-SPF:
- Received:Received:Received:Received:Received:Message-ID:Date:
- MIME-Version:User-Agent:Subject:To:CC:References:Content-Language:
- From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- X-EOPAttributedMessage:X-MS-PublicTrafficType:
- X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
- X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
- X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
- X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
- X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-Id:
- X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Proofpoint-GUID:
- X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
- X-Proofpoint-Spam-Details;
- bh=o7yg0l0DQ7wbF6bCSYBslskESY4YZVh3w33+OZM7zUU=;
- b=hB8sz4ZNPWY8cOnTt3kpxs0TV8B5gr+1fiU+wi3hKahQSHW2Tfbzjw+ATlf/aEQeOpTF
- uX7txu5N1xay6BuqvgsmMYnYWq+10p1U0D8STxNeZHxWwPfdmQVUCd/8mzsjaI2rqwlZA
- G3GQHlIO+1AG3ORdXWoai/FKSqeIxyvD+WCWZWPCyNFiZsDHVE5TDmDdJmVXXMvOtyprT
- F907AnAgJT40TXowJAkez+Ms2ggxmtei4cs5iTmnke7JhOtuRDGdkfU87TnQfycH6p6E+
- kMhB9TVoITw5vpySzgYgBFXq0LBsSQpEsquW/Tibc767dQLkmHGIn4lVgjPKlzGT5Pg==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
- dmarc=pass header.from=ti.com; 
- dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=proofpoint-05-2026 header.b=QLC0GUtd; 
- dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=hrYn5pFv; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=148.163.150.75
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
- helo=mx0a-0002e601.pphosted.com; envelope-from=afd@ti.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
- header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=QLC0GUtd; 
- dkim=pass (1024-bit key,
- unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=hrYn5pFv
-Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
- [148.163.150.75])
- by smtp2.osuosl.org (Postfix) with ESMTPS id F1CD1400B4
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:35:09 +0000 (UTC)
-Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
- by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 68SFK1NQ2811903;
- Mon, 28 Sep 2026 11:34:29 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=o7yg0l0DQ7wbF6bCSYBslskESY4YZVh3w33+OZM7z
- UU=; b=QLC0GUtdMboX6eMqhORdt5jF10c8RLGBwbi5Og+bNdeY5AAgMiRbVz4pe
- ZTzjTnDdsrHlvnf9/kHoO5KUolYINTwdfGRJoFp6SElyW8ZEbSQCB6acxTDrlJca
- h3BRHM7O00lp02tt1Vlin23GzA4XNjKe+BTBem82YB+7EYeAxiU01hmo6jfD0B/h
- RyhfPn4hoSfhh16DYTJCV4mj0udgxGaWon/YW7H2EDIZX4hXzQl6hjkpPYVwqtOX
- UZjYlscl+50Isvgd34kDfUDGRSdalYc6FKwlxiYtssfOmbM1FcoQUH57CTCaeHRD
- EElQHy87fjR+RYlnTV3ahjBGQq2kQ==
-Received: from ch4pr04cu002.outbound.protection.outlook.com
- (mail-northcentralusazon11013060.outbound.protection.outlook.com
- [40.107.201.60])
- by m0384305.ppops.net (PPS) with ESMTPS id 4gy00nf08e-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Mon, 28 Sep 2026 11:34:29 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AFaAPIyD215mXsMYrVYpv6RPjcRBfmKByIdTx2k4gV96SeCEAQIKylExhlAg7qgrpyX+wUEt/iqdYZLjO+HmW/OLQPEbBWP7zSJAff1wnWPHvcBbdSXLBmD44aWo0KKn9O8+Eem7mh0qBjl0JAnIoW4qFUkfR1l0+1nxg9qCKNX9tl8ooaSfi5YHitxoQMvIX4oB9BS7eFVf/ge/9gXjXF2kcmVeW+/ON4aCTnIzkeePiaaK3YpjwZta/s+7uBQVMlzMrJbYwBQUy8PgVygzEhtmXH17kvPUwsFbMAZ15rCFyTpaCHEKu8nm9dzuMIhzP3Xb8dMgcljSgdZHTmiTPw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=o7yg0l0DQ7wbF6bCSYBslskESY4YZVh3w33+OZM7zUU=;
- b=ODVjHr7500PDUZlHNWxQO2/SoPz4aBCgr2Ts3hHjo3c8ZjakPaKcROPSYlsEsNb82YTIL5b4tcfoOekD8Ccs77AL8+wgLqd0MCqDzu7yYy4y/xTK1OAnjI1Gr5iIAytwOkuQ07FnXxuzxmGCpBxvDnEhbpT8QV1UArVRzpqyNPzlnggLm889xyzgFxWNvXytDHKc8Riy5LGmZoiLXTWQmKNbSquMAFl77Lx1dHuCGR2ISUAF02Lt1CUxSgrRLCiAbb7eAmICdTc9e+H7KfeJr1WwvCU/Pnl8MQZ5c5a/QRAIdO0JO5cH8asT9akTQpNaTkhSXi06X4+HfhHauSLX6Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=bootlin.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o7yg0l0DQ7wbF6bCSYBslskESY4YZVh3w33+OZM7zUU=;
- b=hrYn5pFvcKFSGbpkaDzqX9QzTMzti0XZ/XTxnGt3P53kYeUUwKOb78kzvYcaG4lZDvjhmyijjZMpkdDz+3ApBkTgTfet2dVo4sXlD0I5YlwbkHLvjay46P/S3IzlZBhTP9HbiRAGnSd7BRmiew7fiW4iqVSWkN89XJQnBI22y6Q=
-Received: from CH0PR03CA0366.namprd03.prod.outlook.com (2603:10b6:610:119::12)
- by SN4PR10MB5798.namprd10.prod.outlook.com (2603:10b6:806:20d::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.14; Mon, 28 Sep
- 2026 16:34:23 +0000
-Received: from BL02EPF00021F68.namprd02.prod.outlook.com
- (2603:10b6:610:119:cafe::82) by CH0PR03CA0366.outlook.office365.com
- (2603:10b6:610:119::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.23 via Frontend Transport; Mon,
- 28 Sep 2026 16:34:23 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 198.47.21.195) smtp.mailfrom=ti.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BL02EPF00021F68.mail.protection.outlook.com (10.167.249.4) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.472.14 via Frontend Transport; Mon, 28 Sep 2026 16:34:22 +0000
-Received: from DFLE20.ent.ti.com (10.64.6.57) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 28 Sep
- 2026 11:33:40 -0500
-Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE20.ent.ti.com
- (10.64.6.57) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 28 Sep
- 2026 11:33:39 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Mon, 28 Sep 2026 11:33:27 -0500
-Received: from [10.249.33.243] ([10.249.33.243])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 68SGXQlW214544;
- Mon, 28 Sep 2026 11:33:26 -0500
-Message-ID: <da1e4a57-a511-4e6e-9f53-8e781b9a334b@ti.com>
-Date: Mon, 28 Sep 2026 11:33:26 -0500
+ c=relaxed/relaxed; t=1790613890;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+ In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+ Content-Type:Content-Transfer-Encoding;
+ bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
+ b=MwsOeIqm+ddVdKTRZ/PUTDKVLP1HfQidyQmRVkpuD5tEQB20241vVQ7S4l05uWuncLvJ
+ zHn6SwukW8tZkuv9t7ygmA2KQ0iwmJb+1uC3+gWsRMZcFuNz6vPXecF94MT6btKHFTr9f
+ H8FKA4bAfiedBaw7RLjAydm1V3sYPJdk2fzzPKIDl+RAaXwTP4gzEirfXIDysftS8D7XM
+ oXUYR9wBEkLxOIoKLkGtj9eF0qkKXewIdi6Bk/CZM24emaYuCHCqEZD8hnm2MHFDcnWSW
+ jcZQFi8E1H7S8l00eAjUNntKM+hjYBzzodkPj822dkOXPN4mMPRZf7/lWWWQZchZm7w==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
+ dmarc=pass header.from=flipper.net; 
+ dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=IdxLR2io; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:34::f"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:34::f;
+ helo=mail-ej2-x0f.google.com; envelope-from=alchark@flipper.net;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=IdxLR2io
+Received: from mail-ej2-x0f.google.com (mail-ej2-x0f.google.com
+ [IPv6:2a00:1450:4864:34::f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id F1855605FC
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:44:49 +0000 (UTC)
+Received: by mail-ej2-x0f.google.com with SMTP id
+ a640c23a62f3a-c2a9edfc851so407243266b.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 09:44:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790613887; cv=none;
+ d=google.com; s=arc-20260327;
+ b=TowxF72cz6wBvemQ98i2OWNMUCGyQ+mh1VXUxNaNjpCmnJv7WHnr5hhpAJXlWdJP1L
+ udCbNOq7X+s/khAPqXs2M1Q0MMix+sfEjDrH8wceV2P90VI8g9sSapfUGwIopIr6srzO
+ JNLUYh9hed2Aym2ZxH9f1g9PQkurcV3wp53fBdkMm7EBjJXw2iH89Ori+5SlysbGGxn1
+ O9pUTdQ7wGaFSrMPK+v8n0kszn1M6mfkOG48OUnzM/RS/62q9TICqK8g4QVJmznynSbk
+ QH3+5NofW20M7MXiWnFYC4N08zAdrJuexTo5NTgWzNzlTg68/RbY9j113w+aeqsvgIBG
+ bxiw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
+ fh=X0PN9lBUC28xruMLlb/E9GWPFyBweSpvg8ZgHdQS2Mc=;
+ b=ARk0L0htqH3VR5lCDrqYY+yQFhhlWe1P0f/LYHXt65wo6w1ewhw82w4S0xzEQpybeP
+ ncse35rwLQBapUO08LpuALOVVAGlQwu3g6LPnz4bJdZLIeWMKxPXvzAHQCTyjQlFOh9l
+ YMdqcxX9pbEcOERY1zVZ8QYtft333hkUKOoMxJpr2SUiQAts4ZfFK1HNOc6zbmmjY/N7
+ RqSdV2vVWUenhLDNAkcUytzXkYXHzCpL4nwaanf9qYXZF91tyvO8UX+iPm+Kv/Ad4RDX
+ ZtUUfJiEvhzNUVfHfz/rX6oYynTH65XiTgFgVOYKw74h+3M5OnQ1vjV7cWS+jY82Hl9W
+ IEgw==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1790613887; x=1791218687;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
+ b=IdxLR2io2ujKxzpsyQ2d9A0IhtKL6hCaXw6T9sJJOm8A9GL9EVKOzmIhFvq3XK2OQf
+ LbwsqN2ydl/Q3JxEEPqzisgql7YBoLyIT82ZsVPK4LezX7vqWGaB8g4BEl1qOlytHTxK
+ VUDB5NvDRVUp3JzWhEviwJBXkHaf9RZLZCDEzUlmdnq89CaVGG0bBjEWgu+OJULyhy0e
+ tj3mxagrDOY89XnLVGIrlcKQtDiin9bIoT+iHbZwj2z+0IexWmX1ihUJ3fG0eoqflAJ/
+ ff5Fe14sbmbMNnd+3R2n6+4+gkWjTv3KgjOu3sMgc9YhvDdDw5dkLm9nk6GN7CVK0GZH
+ vC+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790613887; x=1791218687;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=2pQfGNLElZruUlbAUWld9/fAn1Ovq3vaUe1eHpg0rNA=;
+ b=Vmo3OGhOwq+A5VArCVlTuakuGSWLdYu0z7qwngbrZs3TVfOCc+AlPEkewmKeYNh1F0
+ 4aVemRDmkO7nV6m+ejEfKBDiLH0CLqgnJAbAQWv868sTUwYQQGfS+n3Mg2bbbE39ZeWe
+ tzGR7FMeRaoBRLR0rJEHMnneCdrXq0/KF7M6sbB4Ne1ZkNShzP0ELs3iu68fuD9ivV7v
+ MyWFDhoBT5HUnUfi406MewSQgm8brk27F5TRveURCLWb9jca5dp2JP35/Pl8jHQBJR8p
+ WtXTOeLFJTmYcnBIXUOCienpisNW6vGdetZiTSlYAmlHME/EqetllwFoDDAxHS7DLo2Y
+ qB7g==
+X-Gm-Message-State: AFuF++mPM8onjCU5XQAFbS0i9RkiJptJghYFFIlDNRhpXxU9Z+mKYd09
+ qsymVgs39yAOKvjZ6YSrylu6sugmtxgjaLeWzNTTe2FWzzEBQBxY1dfqMFVmzut0+KOnt6+HQ5/
+ l3yZfLCpCJj0Tdfop7LiLxHMWRuUNN9VD0qMpNyfOKw==
+X-Gm-Gg: AYBFou0RXScU6Qpt10RvLhmZOEDOyh2mdzwvVxFVXNILYC3q6r+Hxj1rDOdYrDDq8fx
+ hgUzwMczeJ5vlJwnPoVih3f7V1ajz0uAhRvMZRI4qPkb/tYil8uIQXW4QJNfe7QCrpxlKjh1OwD
+ FucWW7l0zAQ1I789R5JEypDBI93z0ylE+hawRBdtJf7kaTKDPVzXD+JvQwUTwRmfNAXn7JVuvl5
+ KWtTMXPCVRs20mI8mjv0oOWJ8prAm3gj/Xr7UcVX3N3RSVbwCK2N1nojkTszAKGga/HZrwWp9kr
+ Gpbgn4+o6z2YNzHnMyfu6J43B/ZLrYmulGfR2NH3K8AcBDjP63SM6l1S0rNPUdongrcLDE+u4YY
+ 7YEVpuAN2h+Y0
+X-Received: by 2002:a17:907:9342:b0:c26:19de:9ad5 with SMTP id
+ a640c23a62f3a-c2aea09c1ebmr867857666b.45.1790613887076; Mon, 28 Sep 2026
+ 09:44:47 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 09/10] rockchip: binman: Add support for Falcon mode
- FIT images with TF-A+Linux
-To: Quentin Schulz <quentin.schulz@cherry.de>, Alexey Charkov
- <alchark@flipper.net>, <u-boot@lists.u-boot-project.org>
-CC: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, Neha Malcom Francis
- <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>, Peng Fan
- <peng.fan@nxp.com>, Tien Fong Chee <tien.fong.chee@altera.com>, "Andre
- Przywara" <andre.przywara@arm.com>,
- Hrushikesh Salunke <h-salunke@ti.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Ronald Wahl <ronald.wahl@legrand.com>, "Richard
- Genoud" <richard.genoud@bootlin.com>, Miquel Raynal
- <miquel.raynal@bootlin.com>, Bastien Curutchet
- <bastien.curutchet@bootlin.com>, Johan Jonker <jbx6244@gmail.com>, "Daniel
- Golle" <daniel@makrotopia.org>, "Markus Schneider-Pargmann (TI)"
- <msp@baylibre.com>, Peter Robinson <pbrobinson@gmail.com>, Tony Dinh
- <mibodhi@gmail.com>, James Hilliard <james.hilliard1@gmail.com>, "Quentin
- Schulz" <u-boot@0leil.net>, =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?=
- <joaomarcos.costa@bootlin.com>
 References: <20260731-atf-falcon-v2-0-acb97c172993@flipper.net>
- <20260731-atf-falcon-v2-9-acb97c172993@flipper.net>
- <75fbfc49-a610-414c-99f3-9b86c1b415d7@cherry.de>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <75fbfc49-a610-414c-99f3-9b86c1b415d7@cherry.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF00021F68:EE_|SN4PR10MB5798:EE_
-X-MS-Office365-Filtering-Correlation-Id: a1ebf299-2055-4756-b0e0-08df1d7e5a2b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|7416014|23010399003|1800799024|36860700016|6133799003|22082099003|18002099003|5023799004|56012099006|10067099003|4143699003;
-X-Microsoft-Antispam-Message-Info: kSELR0vpwBQquSEMvCMHM4Et1qKJ0yxpgVj7RvTSBUw02wCzRC0HD8UQiueXw9RbJ/uOq7FSRm939AoVkJSI5amCOGpz8LFaTz7SyDj7LVp9u1/etfuZQfH6QE4WSIRtZwgMXjOAAsWOTcmLewtnEjad5nMgjrl5FewVNHVqWhFW36L9yaQYreJFD+JnSp/zgV7gErW7pW0pC2Z+/q8bUJ3mQSKiIphmsZa9calfvLB7aoGmXZ0qYT4Mjr00XxhwBkOq6Qju5O1qXXdAkEjRKIC3ah/AukZ1ajQJ6finhH81tnyqLt9tOQKv6mvAulxnJcC66PHUsmpHUyu0E2XL7HBh9UKFglIBaxESnxE/LDX4SOu+5W+jV4AWetrSdzLRyhceaqQU0liJoap5uoLgObvLIfosJItFffwWMLNsXrRP76hl4bVkwpAVgttg+0CFNTjRqWa1E2PK92Yg85cFDX3NHB2irkxgbtRGirFjkQZIOqgoAok+5apR2bEQ07vEl6bHf7kxITCELIIkRtCloFgzLdFiUrRRyt1MrHO2uz5ig0Ece+S0/lhhf/mterDTWnkb23KxH5di4ravS/MKOy8xOk7HzxlCPht5ogpkKYIAUeA9JiJZUSUQkoXHlP4HiI+XJ/QA9ByzGac2LpKuU1jVyAGfb1Jd3ajftkc+hgc=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(7416014)(23010399003)(1800799024)(36860700016)(6133799003)(22082099003)(18002099003)(5023799004)(56012099006)(10067099003)(4143699003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: /FZ4nQj8MbXdQA4s1fBwtGjwOyC0W6goek7PzUbV3RuU48ex8AxgZ6RSL+3Qb2ZT0Hn80rAQcf5Bo+vTs9e5PmAwXeZ21SHxIh0QUGZCHjLGQMP9vXHukKvxNQ2mmXPLtOqwHTYqUPHpB12Zuz8lXG+vRCAstFaR9i5qXDaPKEjmvQ8fuLL5uJslHxEI+SDgWPMS54lwNT00EIp8QBFYN0k3DAULfR+/Wf/+wx6V3bXvqw8FM7B+Y/dDvg3Um4Rw+y4AgGQoKBbKARoPS+alrLFgg/0hry5QL8TcXEok3fyhmQNC5Sv8i9Y16S1wSNpnlA+lAhR5wC9pS+ynsSxGjjC0ENMTUFZqaxMZcg67OQoorpxbLbj0aed+HDi5PNgeb7NCBloso3P4WohHj+wXiNGBTbX6K1ov+zPfnBL/vg0luvlvYY4i7wQg9OYhSuN3
-X-Exchange-RoutingPolicyChecked: YTptRSFr4lApb407vYNeSLZI8ecgWe1VFxlYB948PHzZ6h+mfB4d3tBM6SmZKIv2/sV3NbfLduDGh2D6lYk3Yju8QSFIAnmJujJypdZuF2wipeno/GOyuhKtodKN3aLsJ7YX8NawCHRVWa3tqwmCOur60h5GIbQHHQdX3JuqVWozcJfACGic02cwTzdG9zYDvzIQs/7ZJ+QS1cL/tY79i3EMxB7Ylns82kr9oKYaW1cs4WhonZDTo+S66xyWQufgawyVX7x0X7T0qNE8AYqzKRXDiSV7lz6/YiqmkALmrY8y7XFwLN0htS78cPSel4/lYyC7sTA45EpoUE7YE7h9Ag==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2026 16:34:22.4981 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a1ebf299-2055-4756-b0e0-08df1d7e5a2b
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00021F68.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN4PR10MB5798
-X-Proofpoint-GUID: nZ-LBxAfaXQw0yuSeN3IVyQFLDMnP-z_
-X-Authority-Analysis: v=2.4 cv=fKysTpae c=1 sm=1 tr=0 ts=6aba9715 cx=c_pps
- a=qSo88s0AsKk38onbse8luQ==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=taLDd7a_hP9WKsMzeGRc:22 a=VwQbUJbxAAAA:8 a=sozttTNsAAAA:8 a=NEAV23lmAAAA:8
- a=IQDsJNHIAAAA:8 a=YLEENLuxxDyuZr8Da7gA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=2-utFV9abThaIUZd8OCy:22
-X-Proofpoint-ORIG-GUID: nZ-LBxAfaXQw0yuSeN3IVyQFLDMnP-z_
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI4MDA2NSBTYWx0ZWRfXziekywaQWviR
- fYrh5jPloiwnKU2RByKraayP2l7Y2zZuqA0zw7Lpja75amNgHEvT23tcBWq86hlbg8YyVgL+/px
- 7ctLatBsW6qNqDDG0hMfl0vpgfp31gQ=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI4MDA2NSBTYWx0ZWRfXxae83krNjTim
- KWz4eieFg5dwFPFkuQb9ywsZCPkPAlRSEjgGxyZnyS67EdC7fnhOKB8wZM6iBae7ulkjKmppLOk
- fBa+vBLa99KJWYif9A8YnEiYz++FbBD8IFClvEPMHRNPgdUvSTlBj2dsy9nLxCRaUj6fNekcH+2
- nytB3UZhT33Ki5wLHzRvL4c+N6rn/XqTd09/loReTCza/1gmb+UlKwIg5qsx7+W88BUZah7KaRf
- gt47ucczByD8SSITjS+NKIsMxES0qAM0yO5GeV7HRS3kwJDhmTqNgjYGaQXv9WZZ2L0ly/6CjAM
- UHVtGEwMJGB2K81sBa1EbKh9OP0p0DjcBjYvOmIaNVEmWz/3icQADSNqcV5mSZH5pSm+xzc4GFc
- cIQmMWqtdlmsxudYzxgaUOdWnAsepDKuvqmLfRgdhoMxntyrzgbSPGAIPvLL2j+r8wLSkd4PArK
- WF2cYYOwxGjGawBZsxg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-28_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 suspectscore=0 bulkscore=0 spamscore=0 priorityscore=1501
- malwarescore=0 impostorscore=0 adultscore=0 phishscore=0 clxscore=1011
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609280065
+ <20260731-atf-falcon-v2-6-acb97c172993@flipper.net>
+ <00e2291d-7fc5-4ea1-abb2-9b9100a2b680@cherry.de>
+ <CAKTNdwFMCK2frVyrmYWe67k6WgjA7pmJn-SbU+_9NtceHqHERw@mail.gmail.com>
+ <6ea99943-eb9d-43a8-a238-edbc1b9c767d@cherry.de>
+In-Reply-To: <6ea99943-eb9d-43a8-a238-edbc1b9c767d@cherry.de>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Mon, 28 Sep 2026 20:44:34 +0400
+X-Gm-Features: AclHuK8mtXZ36IawKZnYphSkFPwqtefcQcREeenJwCLKxLbaTvZIzyekYbwjVic
+Message-ID: <CAKTNdwELO46dZ1Cy+-wpBbQNsP9XJyTgCjBYLQpE39YJ3XP0wg@mail.gmail.com>
+Subject: Re: [PATCH v2 06/10] binman: Add support for pre-patching FDTs in a
+ FIT with a /chosen node
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ Peng Fan <peng.fan@nxp.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Andrew Davis <afd@ti.com>, Hrushikesh Salunke <h-salunke@ti.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Ronald Wahl <ronald.wahl@legrand.com>,
+ Richard Genoud <richard.genoud@bootlin.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Johan Jonker <jbx6244@gmail.com>, Daniel Golle <daniel@makrotopia.org>,
+ "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Tony Dinh <mibodhi@gmail.com>, 
+ James Hilliard <james.hilliard1@gmail.com>, Quentin Schulz <u-boot@0leil.net>, 
+ =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Mon, 28 Sep 2026 17:04:44 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -318,128 +222,188 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 9/28/26 10:14 AM, Quentin Schulz wrote:
-> Hi Alexey,
-> 
-> On 7/31/26 7:10 PM, Alexey Charkov wrote:
->> Modern Rockchip SoCs such as RK3576 require TF-A to be running to provide
->> firmware services to the OS. To enable booting Linux in Falcon mode on
->> such SoCs, add a binman template for generation of FIT images containing
->> appropriately split TF-A and TEE binaries (as is currently done by binman
->> for U-boot proper images), externally provided Linux kernel and optionally
->> an initrd.
->>
->> Any FDTs provided to the generator will be pre-patched with a /chosen
->> node containing an initrd load address and size (if an initrd is provided)
->> and a bootargs property containing the kernel command line (if provided),
->> so that the kernel can be booted directly without external preprocessing.
->>
->> A config fragment rockchip-falcon.config can be used to enable Falcon
->> mode boot and the building of TF-A+Falcon with binman, e.g.:
->>
->>    make nanopi-m5-rk3576_defconfig \
->>          rockchip-falcon.config
->>
->> This will produce a FIT image u-boot-rockchip-falcon.itb containing TF-A,
->> TEE, Linux kernel and optionally an initrd, which can be flashed to UFS
->> and booted in Falcon mode.
->>
->> This can also be combined with the existing rockchip-ramboot.config
->> fragment to obtain images suitable for booting from RAM, e.g.:
->>
->>    make nanopi-m5-rk3576_defconfig \
->>          rockchip-falcon.config \
->>          rockchip-ramboot.config
->>
->> The resulting images can be uploaded directly to RAM via Maskrom with no
->> storage or USB loader required, e.g.:
->>
->>    rockusb download-sram u-boot-rockchip-usb471.bin
->>    rockusb download-ddr u-boot-rockchip-usb472-falcon.bin
->>
-> 
-> I'm sorry but I don't see the benefit for U-Boot to have this complexity in.
-> 
-> I already find arch/arm/dts/rockchip-u-boot.dtsi difficult to parse, and this is not helping.
-> 
-> Moreover, this has almost nothing to do with U-Boot, except:
-> a) it uses U-Boot device trees,
-> b) it concatenates SPL with the Falcon FIT,
-> 
-> a) You should likely use the kernel Device Tree instead. Even though we sync regularly, we still add our own stuff and may lag behind. The Device Tree used for the kernel doesn't have to be linked to a given version of U-Boot.
-> 
-> b) You can simply generate this image ad-hoc with a simple cat (taking into account padding). Also, this doesn't take into account boards for which there's only an SPL, in which case 0x471 binary should be SPL and not TPL. While that is already an issue with the current code (which would generate an empty 0x471 as far as I understood), it doesn't improve the situation. I'm worried about the increased test matrix needed for this, how do we actually make sure this still works and we don't regress? We would need a gold kernel binary and initrd on a supported board and test that.
-> 
-> Honestly, all those concerns could be alleviated if we had binman as an external (to U-Boot) tool, then I wouldn't need to care about what you do with it. There was some discussions about which tools to move out of U-Boot's scope and we started with patman but binman was also on the table. Neha Malcom Francis suggested it could be useful to other projects, c.f. https://lore.kernel.org/u-boot/f697d6c6-3cf9-41eb-a833-880a892643c1@ti.com/
-> 
+On Mon, Sep 28, 2026 at 7:53=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
+ry.de> wrote:
+>
+>
+>
+> On 9/28/26 4:03 PM, Alexey Charkov wrote:
+> > Hi Quentin,
+> >
+> > On Mon, Sep 28, 2026 at 5:26=E2=80=AFPM Quentin Schulz <quentin.schulz@=
+cherry.de> wrote:
+> >>
+> >> Hi Alexey,
+> >>
+> >> On 7/31/26 7:10 PM, Alexey Charkov wrote:
+> >>> When a generated FIT is used to boot Linux directly, bypassing U-Boot
+> >>> proper (Falcon mode), there is no runtime code to discover the kernel
+> >>> command line and (optional) initrd location and include them in a FDT=
+.
+> >>>
+> >>> To facilitate easier preparation of a ready-to-boot FIT, add support =
+for
+> >>> pre-patching the FDTs in a FIT with a preconfigured /chosen node incl=
+uding
+> >>> the bootargs and initrd location.
+> >>>
+> >>
+> >> This sounds wrong to me. Why should we hardcode those at build time? W=
+e
+> >> already do DT fixups in U-Boot proper *at runtime*, so we should
+> >> probably do the same in xPL when booting in Falcon mode instead of
+> >> hardcoding stuff. Since you're aware of this, I'm guessing you decided
+> >> against, but you don't tell us why. I'm a bit worried going with the
+> >> suggested implementation means we'll eventually have a binman node
+> >> property for each DT node/property we want to write/override.
+> >
+> > The "regular" Falcon way of doing things (i.e. the one not involving
+> > TF-A) has so far been: "capture what U-Boot patches into the args to
+> > be passed to the kernel, package it into a fixed binary, and boot only
+> > that". No runtime fixups. So I more or less followed that pattern, but
+> > tried to make it a bit more accessible by eliminating the "capture
+> > something at runtime and save it somehow somewhere" step, which I find
+> > unnecessarily painful.
+> >
+> > Maybe runtime fixups could be brought into xPL, but they are
+> > excruciatingly slow, whereas speed is the main reason for wanting
+> > Falcon mode boot in the first place. Right now with Falcon mode on
+> > RK3576 I'm getting 2.5 seconds from applying power to _userspace_
+> > (i.e. full graphical UI drawn on the screen), whereas the best I could
+> > get with U-Boot is just over 3s to its boot menu, much of that time
+> > spent going over the flat devicetree before relocation in O(n^2)
+> > passes. And those 3s are after stripping the massive pinctrl node with
+> > hundreds of its always-present children from the pre-relocation DT,
+> > which alone saves ~0.4s.
+> >
+>
+> Are they always present, even with /omit-if-no-ref/ instruction? Or
+> maybe you're building the device trees with -@? Trying to figure out if
+> somehow we have a bug in dtc (or in our scripts making use of it).
 
-Just to provide some more info on the need for binman as an external tool. We (TI)
-had all the boot image packaging, signing, blob fetching, etc. as an external tool
-originally[0]. We moved all this into binman with the hope that someday it could be
-factored out into a standalone tool for use by other projects. Like was done with
-the tools in `u-boot-tools` package. And like that project this doesn't require the
-source itself to live externally to the U-Boot repo either, just that binman can be
-used outside of a U-Boot context (not so strongly coupled to the U-Boot build and DTS
-files).
+The problem is that there are a lot of `status =3D "disabled";` device
+nodes referencing pinctrl nodes, which keep dtc from dropping them
+altogether, so a lot of unused pin configs end up in the binary -
+enough to be noticeable in boot time.
 
-One such use would be in Zephyr where we are trying to build standalone bootable
-images. Without pulling all of U-Boot in as a Zephyr module, this is currently
-requiring us to duplicate all this binman logic/scripting into the Zephyr repo[1].
+> Don't we have FDT and DM in SPL anyway as that's how we probe drivers in
+> that stage (not counting the few SPL-only boards we have)?
 
-Not sure what the next steps would be in making this happen, but it would have ours
-(and probably many others) full support.
+SPL's DTB is tiny due to bootph-* markup (it was just 27 nodes last
+time I counted for my RK3576 use case). Making SPL parse the whole
+OS-oriented device tree, along with all the relocations required to
+insert stuff at runtime, will hurt.
 
-Andrew
+> I don't have anything better to suggest, I'm just really worried about
+> the potential ballooning of properties we need to mirror in binman.
+>
+> >>> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> >>> ---
+> >>>    tools/binman/entry.py     |   8 ++++
+> >>>    tools/binman/etype/fit.py | 103 ++++++++++++++++++++++++++++++++++=
+++++++++++++
+> >>>    2 files changed, 111 insertions(+)
+> >>>
+> >>> diff --git a/tools/binman/entry.py b/tools/binman/entry.py
+> >>> index ce7ef28e94b1..e0dea8bf3a49 100644
+> >>> --- a/tools/binman/entry.py
+> >>> +++ b/tools/binman/entry.py
+> >>> @@ -636,6 +636,14 @@ class Entry(object):
+> >>>            self.Detail('GetData: size %s' % to_hex_size(self.data))
+> >>>            return self.data
+> >>>
+> >>> +    def GetNode(self):
+> >>> +        """Get the devicetree node which describes this entry
+> >>> +
+> >>> +        Returns:
+> >>> +            Node: Node for this entry
+> >>> +        """
+> >>> +        return self._node
+> >>> +
+> >>>        def GetPaddedData(self, data=3DNone):
+> >>>            """Get the data for an entry including any padding
+> >>>
+> >>> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+> >>> index 32caa03a7e16..750ff5b47ed5 100644
+> >>> --- a/tools/binman/etype/fit.py
+> >>> +++ b/tools/binman/etype/fit.py
+> >>> @@ -304,6 +304,40 @@ class Entry_fit(Entry_section):
+> >>>
+> >>>        See :ref:`fdtgrep_filter` for more information.
+> >>>
+> >>> +    Patching /chosen into the generated device trees
+> >>> +    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >>> +
+> >>> +    When the OS is booted directly from this FIT (e.g. Falcon mode) =
+U-Boot
+> >>> +    proper never runs, so its usual runtime /chosen fixups do not ha=
+ppen. Two
+> >>> +    optional properties on the `@fdt-SEQ` node make binman patch eac=
+h generated
+> >>> +    device tree at build time:
+> >>> +
+> >>> +    fit,bootargs
+> >>> +        A string written to /chosen/bootargs of every generated devi=
+ce tree
+> >>> +        (any existing value is overwritten). Typically set to `CONFI=
+G_BOOTARGS`
+> >>> +        via the preprocessed devicetree source.
+> >>> +
+> >>> +    fit,initrd
+> >>> +        The image name of a loadable (e.g. "ramdisk") to use as the =
+initramfs.
+> >>> +        Its `load` address and packed size are written to
+> >>> +        /chosen/linux,initrd-start and /chosen/linux,initrd-end (at =
+the width of
+> >>> +        the device tree's root #address-cells) and reserved in the F=
+DT
+> >>> +        memory-reservation map, mirroring fdt_initrd(). If the refer=
+enced image
+> >>> +        is absent or empty (e.g. an optional initramfs that was not =
+supplied)
+> >>> +        the initrd properties are omitted.
+> >>> +
+> >>
+> >> This sounds wrong, why would the FDT image node need to know about whi=
+ch
+> >> ramdisk may be used? Shouldn't we rather have a ramdisk property in a
+> >> configuration node, and then patch the FDT based on that information?
+> >
+> > Falcon mode boot where these are useful is for a fixed-configuration
+> > boot flow anyway, where one wouldn't have a way to select among
+>
+> How do you plan on doing A/B with Falcon boot? How do you know from
+> which partition the kernel you booted originated so you don't upgrade on
+> the currently booted partition? There must be some way for U-Boot SPL to
+> tell the kernel at runtime where it came from?
 
-[0] https://github.com/beagleboard/k3-image-gen
-[1] https://github.com/zephyrproject-rtos/zephyr/pull/106763
+I don't currently do A/B with Falcon; instead, I rely on the fallback
+to U-Boot, and U-Boot in turn loads from a UFS boot W-LU (which is A/B
+native). Making A/B work with Falcon would be a nice follow-up, but I
+believe it will require some external metadata to choose the active
+boot source anyway - and then the same external metadata can be used
+for the upgrade. Such as the UFS device attributes, or whatever people
+use for RAUC and such.
 
-> I've provided one additional review below that may be useful for the other patches.
-> 
->> Signed-off-by: Alexey Charkov <alchark@flipper.net>
->> ---
->>   arch/arm/dts/rockchip-u-boot.dtsi     | 204 ++++++++++++++++++++++++++++------
->>   arch/arm/mach-rockchip/Kconfig        |  49 ++++++++
->>   board/rockchip/rockchip-falcon.config |   3 +
->>   3 files changed, 225 insertions(+), 31 deletions(-)
->>
->> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
->> index 4ba6a87e78ab..5e23ff761751 100644
->> --- a/arch/arm/dts/rockchip-u-boot.dtsi
->> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-> [...]
->> +    fit_falcon_template: template-falcon {
-> [...]
->> +            ramdisk {
->> +                description = "ramdisk";
->> +                type = "ramdisk";
->> +                arch = FIT_ARCH;
->> +                compression = "none";
->> +                load = <FALCON_INITRD_LOAD>;
->> +
->> +                linux-initrd {
->> +                    optional;
->> +                };
->> +#ifdef FIT_HASH_ALGO
->> +                hash {
->> +                    algo = FIT_HASH_ALGO;
->> +                };
->> +#endif
->> +            };
->> +
->> +            @fdt-SEQ {
->> +                description = "fdt-NAME";
->> +                type = "flat_dt";
->> +                arch = FIT_ARCH;
->> +                compression = "none";
->> +                load = <FALCON_FDT_LOAD>;
->> +#ifdef CONFIG_USE_BOOTARGS
->> +                fit,bootargs = CONFIG_BOOTARGS;
->> +#endif
->> +                fit,initrd = "ramdisk";
-> 
-> I've just had an idea now but can't we use &ramdisk here? This would avoid issues of typos between the property value and the node name? of course we would need a phandle for it (ramdisk: ramdisk) or use the full path (&{/binman/simple-bin-usb472-falcon/payload/u-boot-any/fit/ramdisk} (and the other one, as we cannot declare a phandle inside a template if the template is instantiated twice like here). But again, I don't think this is a good idea, I think we should rather do runtime fixup of the FDT based on an initrd property in the configuration node.
-> 
-> Cheers,
-> Quentin
+> > several ramdisks to go with the kernel image. So putting this
+> > information directly where the user (i.e. the kernel) will find it
+> > cuts out intermediate steps, which in turn improves speed and reduces
+> > complexity.
+>
+> You already have:
+>
+> fit,firmware =3D "atf-1", "kernel", "ramdisk";
+> fdt =3D "fdt-SEQ";
+>
+> in the configuration node. So simply have binman derive from
+> fit,firmware which node is included of type "ramdisk" and fixup the
+> device trees in fdt-SEQ based on that info? Less user-prone IMO.
 
+Ah, I thought you were referring to runtime FDT fixups based on the
+selected configuration. Patching it in using binman based on the
+configuration node contents should work, too, but what's the practical
+benefit? It would still use the same ramdisk node, just written in a
+different place - or am I missing something?
+
+Best regards,
+Alexey
