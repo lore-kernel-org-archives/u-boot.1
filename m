@@ -1,131 +1,174 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBAE7CA5FA1
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 16:30:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47CF3CA5FA2
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 17:01:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8F234606EA;
-	Mon, 28 Sep 2026 16:30:28 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uk5MkB2wWCwS; Mon, 28 Sep 2026 16:30:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org B6AB9606CE
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790613027;
-	b=T12sXY/rSZiOV4XUPW6Ua2biTwUH2y0Xzf5ZsMKEuii9FqZcy5xnETeXcwgTwDlsKMA4
-	 ZTZ1QSxvU4nkNnIcDuwWx3eZrImyIZhMdR0Dvul7pzJi7SD4P1sn2uLCWTBLh7vzEcIbS
-	 CWclSMiFCoFOzPxF1xe3zLRKqg8TWFT3aM/p7jESrgkLucqtJ1PC3MN2bn1xJPfwfpefb
-	 EN887nuB8rDZIrd3eyXFQ+Ve1LT6rpoIKeohlv2qlkiqISUfkkwUG9r2rkD9PlcYyJGVR
-	 T+4nCI6Riol+OvW92qGQZS3Xj8OWpPUlSKIT8tWW/pE3hRLWXX55h/lNoW526Qgfzzw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790613027;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=QNX6zVZpMG4zRCsXia6DLDzE1+d/cazD29abIiUMscg=;
-	b=Vx/5jLBdPp14OACLScSnWCUzwvS1TiaUush150hRfOtroZ2J6L2GvPEfNPojCAWfjk2R
-	 XGFeC9CnIvU6AJoFTpOP6sSpcmqoNWiF4IthrRlVt21NHz7gvmfG3kI79+H/YH5AbziJn
-	 1iUi2ZRB0tfNMuQ25rvbVs6+ZckN/V6QKjAuscatkuUWU3VRYn2ehjG4RyaCO7Xw8Vv0Y
-	 fgLWaUF8Y/zaOj0kTl0jB9xX+2bBovnWNm9MDaCogOoFJD82oHZGRB9y7IKFj8dJq0+Kr
-	 gapdgYYDuQSVKd2Pbg5IyFyAQMEix/8wau7C+vpWcq+CW6B6xhlXmLHHZh5HzEBOXxA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790613027;
-	bh=QNX6zVZpMG4zRCsXia6DLDzE1+d/cazD29abIiUMscg=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=l0+T3J4M4c/4/1ZDJgtL1BRAWVxZQGG6NLpJAdVqf211vW9Q1U0+46+qJYd1acNpt
-	 QAZjMiJivap/vpvkXq1ZWDbALCrNNOlRsB43yZHxQQkccjIpyVDOjkw/YqeCDLtvcG
-	 ruF8fNuMLTL968KVHdIlqocsN+5Su9pj8QYubvz+hA703pXiOucwtO9LTq1CjKDGoA
-	 l/H/AG5FVpGEdQJiEk1gbivcLBFnBFQvfALGcD1giYAVILpGVaai5FfPLIlley2bNv
-	 GvdgvnKtir1wTKxtPcDjEDo3VZSGbQ0Smpnp7VJQ8Qnr3AkCUpvRvOPrAkiZH4yz4q
-	 RVqCY/x1bG+vQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B6AB9606CE;
-	Mon, 28 Sep 2026 16:30:27 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 9AF2F3D8
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:30:26 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 807A880C77
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:30:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A3B2780E09;
+	Mon, 28 Sep 2026 17:01:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Vg4uGAwPguhr for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 16:30:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org ABCFB80DC8
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=212.27.42.1
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790613025;
- b=pHYuxMBcJSqniMYdx6PVOF3Yey54//kmqsW5ln0GzvllDP87HaN9w89a2fw10hHxoxe7
- o0IlCVm35BMPXozrfSG+xuv/8czJhkGL1DWmspJivdiZkY9tPKSOq0G4/JskOW8fRr2GI
- XgBQWolwoyh4NPMoQdYsw6nf/wzS7tnDjMGOrWQ8x45agq2PmHCstdPlzXzvQXiAhRhxj
- emsdvNHgPzRDsb1co5tnzgwDnKk9JCi0vEOrSM2+FaWNgytlikpNDSvmc52OtLio7HkHK
- NKvBoI7LtScZlhST1YYhJb8T0+w1xSDDtJHizOQ5zVN4iDrb72eM2/5K8P5Mkf8cuUw==
+ id MVSXjOb1ETzP; Mon, 28 Sep 2026 17:01:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org B555680D39
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790614914;
+	b=LvlelM9OS+gSHGnV0PlrAwgXBiY7PzBbNqOrtHqEFO76XkpP0v2vJVveICUUuJttDgXl
+	 LJL+rQIoKN8fZioyz0g2kbyIAk3FbaoCMmEgNe6ybrT72LjoJ/EXRIES0okb10ME63fff
+	 R7SleUxUZlxAyAm+fSMn8XLFI9ALig/XtYUKmQeMlCFRT9OqA8aSPvJb8WQak14JpN2G1
+	 hqA7H8pBuXHOPVBL/fvpUINY8ADw4YU2Xc3iV+Bf/4TyViKRWL7SkRP96bV6WNtjExLz0
+	 Qbbs3V66+vRUaSbPfeOmfuwLCgImRyzc7BxLU3ltNyn+5oLTxw2OX1BSXENfU02eaDA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790614914;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=uIe6E9rUxPtcA4nRWUZzQU8szb2oa+oj0DPZqBuoRrQ=;
+	b=IMAfnQNA9cbprgpMWkXj5unYXnBEF2QoHrRXv1Zdrl50dGXDpP/TahUSVPY3uGjL85ir
+	 OvFTKiJR/AevW7lczd91/XVEHmpdfYq+ih1CifP0RrZvqTOl1vXCyT+LUUXcn1aKFwlSK
+	 AO+DOyWUPtqVesnhs0r6tbP0V3A4ZoCfq/ZKntn6jdyFYFpd+Y67M+qAOGl/+pypzFtzQ
+	 uyXo2FTtf8dw5kwvhkLgZiFca2ICG7a4fr7uYwe9hGnsHpvv82PUPWl2LW1o/a12caIFt
+	 BgxLmqIA2hxgGVjUG2QL5VuiAaIEENMcD5Q+NGON9w8qJ3K0PRsKXjebg9rNBfHTyRg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=konsulko.com;
+	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=tlwPIQYB;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1790614914;
+	bh=uIe6E9rUxPtcA4nRWUZzQU8szb2oa+oj0DPZqBuoRrQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=lu2neDnhVBoxfzexpvkw589fhG05AMF7LZyXxJlYK4MHPSPpzM0sRjE6H0ufqaw2R
+	 mW2YOPwmNWUPb8QRk9XeyyNY43PYin/LNtJsT1tXTjyguE0hoFAsq+aK+GKap8ZffB
+	 ZDmGX3BErz1yF2CZ/bwy8NrobCD8QPrOp/b8w4aSldRUaIMcadmtWXpJs9kzZp+YW9
+	 6LykpQntCXn7Fa4HvyynKWUMHzl/c2hXHBA8hLVeGpXS9f85SmlfbsUpIsAklpDdkY
+	 tBjmZ2DrPw8PTjG7NbfMCITus8L3EXfLzHIO35ltqX1po3sLh4x8v8ZsjND5X+76vX
+	 MM5B4qvN1+AUQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id B555680D39;
+	Mon, 28 Sep 2026 17:01:54 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 086ED72
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 17:01:53 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id E4D9780DEE
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 17:01:52 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id F8Q3gdgjBoXF for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 17:01:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0D35680D39
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::9"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790614912;
+ b=fTuWeR2dq2i7WJ1+8h4EhxX//HLuGSx2m2tJwpkjnhfFBjdniduEwOvvYAQEgDuLYu2K
+ Fxp2gW8/vkXZYthq3hwOlt4rOui+LjOnZUl9ssY6V+TF1gScvvcLBxNzcVy64781ZIlSt
+ vj1rCEfWpA2mOJgtknVgnd3A5RV5rJGUhsiaUs87ewUWIj52hMcEeeCt/fncqccUdKFpD
+ r82PFue6s7teojqkFHj5kGY+vCl9J6yhJYbnmk+bMNa/JEetoyBlfju21NOxZsc2q3Nbt
+ XcVI3L6GKNBe5yjGvPwrCrFkoVKg5LVIDGq+3G3xErtg6LdLsPdZjMTSHf4eIP2JLLA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790613025;
- h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
- Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding;
- bh=QNX6zVZpMG4zRCsXia6DLDzE1+d/cazD29abIiUMscg=;
- b=Ilw6AaqVpjmcM+h4fbxN98Rp4akkDNev5G7VsPFYACg+Gl+rV+1eh4HTCytRuEIcM1bU
- DTJ3YgfTKu4Ox1gXbvFVEmksjWQCZxXRTOFfN/sG3fXA1NekCPpBMJwapW2oJy0ZndPwK
- TSd2MqubcBqKuwUSGoGhVFf670fuGLXXJDI8rATpq+LxMww2h1sOXcBrHJ4xDrM8GpI8Y
- 7TGxQtyek9mO0B0CBysDRYP/4Rvgw7X66Y9WTJNdJ7rB6aRaIjSZ+rzbemBhCVrT4b1Sl
- e3Sr2R+ayswFgKm0+G0TsAWsr82lUiHckfZlhwXcEBLxqAYMBphSXUn8qsy5AuDFd/Q==
+ c=relaxed/relaxed; t=1790614912;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+ Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
+ bh=uIe6E9rUxPtcA4nRWUZzQU8szb2oa+oj0DPZqBuoRrQ=;
+ b=krxZyhD4ZXUIV1/Li/1As9qqC56Yn1+UDeZZn9qqkK2x7f5ZA46vhRlCUcEsJvKvV5mR
+ Z9FzhzpbckdMzRRGPn+t3JTgQRynTv9tI8y273x2OKQe9Q+wudIR3vCVXwQNpNsxY0cTG
+ b5jVCEpZxc+AkhMZXxYyJEfeZqqbwvqFKoSM2nQLTPTK9EKZE5lt7u+cyxmkIvDb3l5Eg
+ o7RwvQYqWpDdgA8l6Kz+gkYkR8rWeE3K2T6JuUQ6F3uESbYFwfh1O/zu272LYMZfT+Ggl
+ JF1kJ3Wnlf3rXHalbSMVoJN7CVu/1zuPe3sGd6rmioFusclGONnHAgrr+z96/vcSrEQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=free.fr; 
- dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=gbTsyDhQ; 
- arc=none smtp.remote-ip=212.27.42.1
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
- helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
+ dmarc=pass header.from=konsulko.com; 
+ dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=tlwPIQYB; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::9"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::9;
+ helo=mail-oo2-x09.google.com; envelope-from=trini@konsulko.com;
+ receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
- header.a=rsa-sha256 header.s=smtp-20201208 header.b=gbTsyDhQ
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id ABCFB80DC8
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:30:24 +0000 (UTC)
-Received: from localhost.localdomain (unknown [91.160.0.144])
- (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 2C7C8B00565;
- Mon, 28 Sep 2026 18:30:14 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1790613022;
- bh=84BOhi9/eXMo6gTb09UuGSLO2Bltss0ZdmgKr7IQPD0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gbTsyDhQ73IzQGO4LCRb0bUkvbYEKKikHKw+g2xM3BWCXo+yo8PGM6WZL+FQvtvTc
- PwSQC/BZgg1U2gTtI8owTEXtc/oN5WruN2ef4DB69lxHEGgBsvz5k4ErDtUB235Tpm
- rY10FoS3U7zw8BWxM25cg5NHt8ely7DKap49io02wPyDwIQJWcAufm3LvyQr6bD913
- wNY497928DtOUtBIYLB2bJqWAH46hZlyI7NU6lSwKe/DWaZr/X55rPOgfSGIX9ZgOn
- wqBAWfpGVgzYNiKArAUQLTNDd6zFAe1mCuHmrl2enM93d6tDqse9RjqPi7Dp1L2Lwx
- vvzVNDSF8GBTg==
-From: Vincent Jardin <vjardin@free.fr>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
- Vincent Jardin <vjardin@free.fr>, Nicolas Perrin <nperrin@freebox.fr>
-Subject: [PATCH v1 4/4] board: nbxv3: VID handoff writes table value,
- no droop compensation
-Date: Mon, 28 Sep 2026 18:29:04 +0200
-Message-ID: <20260928162904.1143614-5-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260928162904.1143614-1-vjardin@free.fr>
-References: <20260928162904.1143614-1-vjardin@free.fr>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=tlwPIQYB
+Received: from mail-oo2-x09.google.com (mail-oo2-x09.google.com
+ [IPv6:2607:f8b0:4864:31::9])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0D35680D39
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 17:01:49 +0000 (UTC)
+Received: by mail-oo2-x09.google.com with SMTP id
+ 006d021491bc7-6d771dcaf3fso658934eaf.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 10:01:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1790614909; x=1791219709;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=uIe6E9rUxPtcA4nRWUZzQU8szb2oa+oj0DPZqBuoRrQ=;
+ b=tlwPIQYBt931tNTIw5G+wZ54F7fVVZ4jGgXCnCfq2f3jGbRyPr3I5WSNo6Le5Nw32B
+ aFQNLq5k01q0gO1Wi+PSeCtxn9BfshdytLxJMGpwUbNu9ScEWAbrtT+t3C4gRdF5dG/m
+ YK+bwkV8H0jQoqcFFwXt5cjAZIRFyFfQUIL6o=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790614909; x=1791219709;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=uIe6E9rUxPtcA4nRWUZzQU8szb2oa+oj0DPZqBuoRrQ=;
+ b=WSJl1CHUgwXuDI2YgsZfWShsNLuMN7Ktilb8tKqVvAui03zkVYVUuACzmvz0W+OtM+
+ exwmC/i9FiwvCcGoAHdRLxeMSypEFqi635Ps86hFOkzWL8G8ECEq1h5DD1fYJP5+DzNb
+ tvbRnoYxZqXOnO1Y7rUsR2/Scyx2RdDzDoErR41Q2FCvqoE/aJSrhKCRjcmMfOa4qQjg
+ iI/BZV9o6ETXdoIFYhIme4ahHMOibSfgUWcTE3g3xI773x+ZEVT1Spi6IPgWUQYf+KYb
+ U4RnejiikjsqBJLizLdcu7ZZHVH65JDp1ZL7bZ5Rf/eBm2blbnxPtQHAwDYEbShO588o
+ 4BRg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBz7VE+XjkYGx9fyOghlFZ5aHddDGbbqauV/TmOuO+/UcM7K6DRDEOlOFXDq7Q/XIi8qNO7esA8=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++k9AdXuTc6kiYjR+0Cw9F7hXN2/P5cs4D4KBOIdzwkGq+4EN6on
+ GeQBWxR1HwRzbcID6jsgQt8M2hfNTTPMggEpc3/9XPIF3zI1hFB46GU5ZYuJgltWTuw=
+X-Gm-Gg: AYBFou3vWKI6fOZVR4eMVcaXCIIrXX0bGOcekoj+5OOffbfy1xKPISEpJKTMfFvPZm5
+ 9UK/lqftV2mp/dmyxwwv+ZEonclmDZGOhfBAop4w4IQqxFKjHOsNdWLOqWwze4MnPHfPgGIJ4/q
+ WFIyPeX4l6RJsPO7EkWo4PruveH1UzTy6pxOhNBAFRkrXTq1pJDohrHoXBmLunPpul06ZvWYdSi
+ jkIenvoUhI8OTFafKZjmM1fJF8Nwe1aNG9GMpYYbo0kcEX4R/LNUJWJ2jzCHZaZO0NQE5O693uw
+ c1i1cbMX70yNzbWbnpKGTYr2/sPyFyykXjjWTYxd+5jllnSIV+H6qPGrjE6D0edmlU4LkQMEGic
+ Sisog0q8yZ6+v+nUqHqkcPyNAYXAfTH6VlTO/nFCtxwZXUr1cVtxmVAXcj9+YwXzngwZTsm+YH0
+ QSQYeGRJziv7RuhE/mx0NjvTAb69AQu+b0M6BBGJx8+9v8uqFm1gVqdl1xx62DvCsBNVQGd2FJX
+ R4KQBev05ocqlCWffYolbZLdlqT4267KhBibNyDkvZlOKfBM/nJHDBN7ywddwPQIsKdbVNwBo8N
+ r36NBLGuGMzNNbzMf31DbipOuZ97Pg==
+X-Received: by 2002:a05:6820:88b:b0:6cd:3fcc:96d2 with SMTP id
+ 006d021491bc7-6d440b0c2dcmr13084755eaf.80.1790614908553; 
+ Mon, 28 Sep 2026 10:01:48 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-81d58f113b0sm2044606a34.21.2026.09.28.10.01.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Sep 2026 10:01:47 -0700 (PDT)
+Date: Mon, 28 Sep 2026 11:01:45 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Chukun Pan <amadeus@jmu.edu.cn>
+Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ u-boot@lists.u-boot-project.org, Heiko Stuebner <heiko@sntech.de>
+Subject: Re: [PATCH v2 1/2] arm64: dts: rockchip: Add HINLINK H28K
+Message-ID: <20260928170145.GL858934@bill-the-cat>
+References: <20260918120001.2256317-1-amadeus@jmu.edu.cn>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="V3Aar9BpLIMvrGdB"
+Content-Disposition: inline
+In-Reply-To: <20260918120001.2256317-1-amadeus@jmu.edu.cn>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -139,155 +182,48 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The handoff compared READ_VOUT with the fused voltage, and when the
-rail read low it wrote the table value, then a second VOUT_COMMAND
-raised by the measured shortfall:
-  cmd = target + (target - rail).
 
-On a module fused 0x14 (850 mV) the loaded rail reads 824.2 mV, so it wrote
-875.8 mV:
+--V3Aar9BpLIMvrGdB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  VID handoff fuse=0x14 rail 824218 uV, target 850 mV -> write 850000 uV
-  VID handoff verified 849609 uV (target 850000 uV, cmd 875782 uV after 1 correction)
+On Fri, Sep 18, 2026 at 08:00:00PM +0800, Chukun Pan wrote:
 
-The 25 mV is the load line the MPQ8646 applies from its NVM
-(MFR_DROOP_CFG). It is the VR's design, not an error to correct, and
-compensating it in software runs the core above its fused voltage.
+> The HINLINK H28K (LinkStar H28K) is a SBC with the
+> Rockchip RK3528 SoC. It has the following features:
+>=20
+> - 1x USB 2.0
+> - 8/32GB eMMC
+> - 1/2/4GB LPDDR4
+> - MicroSD card slot
+> - 1x 1GbE RTL8111H Ethernet
+> - 1x 1GbE RTL8211F Ethernet
+>=20
+> Signed-off-by: Chukun Pan <amadeus@jmu.edu.cn>
+> Link: https://patch.msgid.link/20260610100006.366963-3-amadeus@jmu.edu.cn
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>=20
+> [ upstream commit: 5fd91b4f3ef20ecdc6db7a9e5c831209c7042c08 ]
+>=20
+> (cherry picked from commit 056a3d3a36a2f0bbcfc9019b57dbbbf9ee33929e)
 
-Do what the VR expects: map the fuse through the LX2160ARM table and
-write that value, unaltered, to VOUT_COMMAND. Compare the setpoint
-(VOUT_COMMAND), never the loaded rail, to decide whether to write, and
-read the setpoint back to verify.
+Thanks for pulling this in the right way.
 
-READ_VOUT is printed for information only.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-A module whose VR boots with a setpoint above its fuse, e.g. 850 mV on
-a 0x12 (825 mV) part, now gets 825 mV written. The previous code left
-it untouched, because the loaded rail happened to read 824.2 mV.
+--=20
+Tom
 
-Reported-by: Nicolas Perrin <nperrin@freebox.fr>
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
----
+--V3Aar9BpLIMvrGdB
+Content-Type: application/pgp-signature; name="signature.asc"
 
- board/nxp/lx2160a/nbxv3/vid_handoff.c | 77 +++++++++++----------------
- 1 file changed, 30 insertions(+), 47 deletions(-)
+-----BEGIN PGP SIGNATURE-----
 
-diff --git a/board/nxp/lx2160a/nbxv3/vid_handoff.c b/board/nxp/lx2160a/nbxv3/vid_handoff.c
-index d3edaa61080..65f2814b30d 100644
---- a/board/nxp/lx2160a/nbxv3/vid_handoff.c
-+++ b/board/nxp/lx2160a/nbxv3/vid_handoff.c
-@@ -11,6 +11,7 @@
- #include <event.h>
- #include <linux/delay.h>
- #include <log.h>
-+#include <pmbus.h>
- #include <vsprintf.h>
- #include <asm/io.h>
- #include <asm/arch/immap_lsch3.h>
-@@ -40,27 +41,13 @@ static const u16 lx2160a_vid_table[32] = {
- 	[0x14] = 8500,
- };
- 
--/*
-- * Write VOUT_COMMAND, let the slew finish, read the rail back.
-- * Returns the rail in uV, or a negative errno from the write.
-- */
--static int nbxv3_vid_write_readback(struct udevice *reg, int cmd_uV)
--{
--	int ret = regulator_set_value(reg, cmd_uV);
--
--	if (ret)
--		return ret;
--	udelay(NBXV3_VID_SLEW_SETTLE_US);
--	return regulator_get_value(reg);
--}
--
- static int nbxv3_vid_handoff(void)
- {
- 	struct ccsr_gur *gur = (void *)(CFG_SYS_FSL_GUTS_ADDR);
- 	struct udevice *reg;
- 	u32 fusesr;
- 	u8 vid;
--	int target_mv, target_uV, actual_uV, cmd_uV;
-+	int target_mv, target_uV, rail_uV, set_uV;
- 	char *override_str;
- 	unsigned long override_mv;
- 	int ret;
-@@ -98,46 +85,42 @@ static int nbxv3_vid_handoff(void)
- 	}
- 
- 	target_uV = target_mv * 1000;
--	actual_uV = regulator_get_value(reg);
--
--	if (abs(actual_uV - target_uV) <= NBXV3_VID_LSB_uV) {
--		printf("MPQ8785 (%s): VID handoff fuse=0x%02x target=%d mV (rail already at %d uV, untouched)\n",
--		       NBXV3_VDD_REGULATOR_NAME, vid, target_mv, actual_uV);
-+	rail_uV = regulator_get_value(reg);
-+
-+	/*
-+	 * Compare the setpoint, VOUT_COMMAND, with the table value, never
-+	 * the rail. READ_VOUT sits below the setpoint under load, by the
-+	 * load line the VR applies from its NVM (MFR_DROOP_CFG): that is
-+	 * the VR's design, not an error to correct.
-+	 * Writing the setpoint higher to bring READ_VOUT onto the fuse
-+	 * drives the core above its fused voltage. Don't do it !
-+	 */
-+	if (!pmbus_regulator_read_vout_command(reg, &set_uV) &&
-+	    abs(set_uV - target_uV) <= NBXV3_VID_LSB_uV) {
-+		printf("MPQ8785 (%s): VID handoff fuse=0x%02x target=%d mV, VOUT_COMMAND already %d uV (rail %d uV), untouched\n",
-+		       NBXV3_VDD_REGULATOR_NAME, vid, target_mv, set_uV,
-+		       rail_uV);
- 		return 0;
- 	}
- 
--	printf("MPQ8785 (%s): VID handoff fuse=0x%02x rail %d uV, target %d mV -> write %d uV\n",
--	       NBXV3_VDD_REGULATOR_NAME, vid, actual_uV, target_mv, target_uV);
--
--	ret = nbxv3_vid_write_readback(reg, target_uV);
--	if (ret < 0) {
-+	/* The table value, as is: the VR corrects internally */
-+	ret = regulator_set_value(reg, target_uV);
-+	if (ret) {
- 		printf("WARNING: MPQ8785 (%s): VID handoff set_value(%d uV) failed (%d), rail left at %d uV\n",
--		       NBXV3_VDD_REGULATOR_NAME, target_uV, ret, actual_uV);
--		return 0;
--	}
--	actual_uV = ret;
--	if (abs(actual_uV - target_uV) <= NBXV3_VID_LSB_uV) {
--		printf("MPQ8785 (%s): VID handoff verified %d uV (target %d uV, cmd %d uV)\n",
--		       NBXV3_VDD_REGULATOR_NAME, actual_uV, target_uV, target_uV);
-+		       NBXV3_VDD_REGULATOR_NAME, target_uV, ret, rail_uV);
- 		return 0;
- 	}
-+	udelay(NBXV3_VID_SLEW_SETTLE_US);
-+	rail_uV = regulator_get_value(reg);
- 
--	cmd_uV = target_uV + (target_uV - actual_uV);
--	ret = nbxv3_vid_write_readback(reg, cmd_uV);
--	if (ret < 0) {
--		printf("WARNING: MPQ8785 (%s): VID handoff correction set_value(%d uV) failed (%d), rail left at %d uV\n",
--		       NBXV3_VDD_REGULATOR_NAME, cmd_uV, ret, actual_uV);
--		return 0;
--	}
--	actual_uV = ret;
--	if (abs(actual_uV - target_uV) <= NBXV3_VID_LSB_uV)
--		printf("MPQ8785 (%s): VID handoff verified %d uV (target %d uV, cmd %d uV after 1 correction)\n",
--		       NBXV3_VDD_REGULATOR_NAME, actual_uV, target_uV, cmd_uV);
-+	ret = pmbus_regulator_read_vout_command(reg, &set_uV);
-+	if (ret || abs(set_uV - target_uV) > NBXV3_VID_LSB_uV)
-+		printf("WARNING: MPQ8785 (%s): VID handoff wrote %d uV, VOUT_COMMAND reads %d uV (%d)\n",
-+		       NBXV3_VDD_REGULATOR_NAME, target_uV, ret ? 0 : set_uV,
-+		       ret);
- 	else
--		printf("WARNING: MPQ8785 (%s): VID handoff rail %d uV %s target %d uV after correction (cmd %d uV) -- VOUT_MAX / non-linear load line, fix on the VR side\n",
--		       NBXV3_VDD_REGULATOR_NAME, actual_uV,
--		       actual_uV < target_uV ? "below" : "above", target_uV,
--		       cmd_uV);
-+		printf("MPQ8785 (%s): VID handoff fuse=0x%02x VOUT_COMMAND set to %d uV (rail %d uV under load)\n",
-+		       NBXV3_VDD_REGULATOR_NAME, vid, set_uV, rail_uV);
- 	return 0;
- }
- 
--- 
-2.43.0
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCarqddgAKCRAr4qD1Cr/k
+CjedAP9HPeuwvhKouwZFyD+g5aJlH2vOp1LddvhccDm55iqb+wEAxjeA0l7zkhLB
+6vsbZ4IySCfmjl8Nh1SXcC6nls/y4Qc=
+=zPlz
+-----END PGP SIGNATURE-----
 
+--V3Aar9BpLIMvrGdB--
