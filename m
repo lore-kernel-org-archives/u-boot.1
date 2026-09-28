@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5133CA5FA2
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 15:06:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F349CA5FA5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 15:06:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 888B180ECD;
+	by smtp4.osuosl.org (Postfix) with ESMTP id DE662406F4;
 	Mon, 28 Sep 2026 15:06:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XX7DiRrlkTri; Mon, 28 Sep 2026 15:06:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 1355F80EBB
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790608008;
-	b=hdzIdEwfD7sWkWh6x+4w21d3T6uzYKsY2cJczuelxOJj0+MBTtV2PjO/jueae/IZu8t3
-	 tWSExQiFhDsT6NWAq5crjGmw/5APrG16ICNlzGWPRf0AbsMNIG9YcBE6biK3XViHOqv8P
-	 FEd6Izd8E2Qg7a4Q1OQ5iaB9W18uyo1EIlwAmj4YQ4V7MAKYRQYc+pnpOUL4GcUZllmwt
-	 lyc94x3py5ukHclD98AUcj79SKpC/E74MBuAo4/sMbPpUsnaFbetn5yWKeSUJoqd6+e4v
-	 oOxLYuuFPWHCTnqirG2riNfGSvKK+GqSdusMaNSqhR1H14Io6sDpR8XWkO76GQ+U1Lg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qYVhRkjGAEKl; Mon, 28 Sep 2026 15:06:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org F27C7406F1
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790608010;
+	b=jMc0hIzUhvZhvTvksddn7lynYFQt6FJpLTFzrQ+uBaXAWe+z9dXtT3Uiq6YCyuXW3Md7
+	 kM0mX8PyFPRWoDdQpozIJQrJGCHWW1AcwsE5dIWamhFKJLnZNr/GCLcjpdmmU7wjXiwp0
+	 eKICJ/hAyReqw2/gMm91ZrNJ5I3TytGOWaO/TVVNmjTjjH2vD8v6cREzDfyZ3Zng3SzsK
+	 AtNoJZqrQ1IVyEcAk/MibzfvH6JIpsKLJjyklS7WJciV7xiP1EOMsqzQSw5w08GQM/jy6
+	 wslql0u+Z1k4jUWGyQs0Qj2nnQhO8eum47Qlv5Q12QY756ZfIqwgNkcZr0JHsl9Colg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790608008;
+	c=relaxed/relaxed; t=1790608010;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,137 +32,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=AClgjogaFQSA8zjJP/0IX0ywGu36jRnZT0QyqqSbHG8=;
-	b=tZEi6fOp5RVGpT5a9AZitoHjRNlDRaB/FDjc1pbs8P77OQDbKFyZMHklmTpUGWRXM/DM
-	 6sS4alEZsXAnvT3l3wUpvt7ucirBVUy2RQSmWAbq+przXdvbQWYzdavRAXjxHl7eTkd72
-	 jt6uLr0oe8HKOiKifiUuSYOZEey9966xx+M9HxtyHwvi0t27o+4m1Q2Y8+hgzg1qQDIZB
-	 g4iG/rF4hoVMrCDAiotlbigHuJGLsuIQUFZNaGB3p9Xq3IV87GCBD7CUQg0xfnZsXk9mX
-	 zv9fmznW6zCrRm56nJizIIqXAnxgNPUm1r1Ftw9guWxhN9B9rZpLWQEwQMtAWFfM2bw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=AzGf/0o66eLXQCt+rb6oD2vCWIiHZgtRuI9qVbdCabE=;
+	b=PPxB5X7dvh9c/Zdl4GCO24LEZ7U8iXmuja21h/ikunGFben6/cYpgxLn/16yEutIRPWk
+	 v3xNrI5ufsjw7m46CaLbZ5jiy305XMlyF62EDAq/og3QKfZqow/m3eEvJsImDL/DwVnoA
+	 YYMOnKUAnGLEAeieP9leTb7dR9v1P8p4F7TeSrKWDMqBcB/L/MrABkDPnBU6cM6qOH2xf
+	 UzOmhYXe253f6dfWQU3rRqy3NiadAOQriX7hgqeLZmSq6g+2b7qtenab8QVlrA2RJ54hE
+	 eGMJDz4E3ltozRprSNDkE8pKu0QPP2OOcN8F4Ueza6KgFBWATMRF/6+Ai7Zsv5+ZC6g==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790608008;
-	bh=AClgjogaFQSA8zjJP/0IX0ywGu36jRnZT0QyqqSbHG8=;
+	d=lists.u-boot-project.org; s=default; t=1790608010;
+	bh=AzGf/0o66eLXQCt+rb6oD2vCWIiHZgtRuI9qVbdCabE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=KHckIWogQ+eiKj65MUBAxAV7e5k1noD4Ye934q/OuxvfzNiRoNMr85Xj12uG+P1ji
-	 O/vZ8+Lru4QG6QLwFkL4RU/Oa2/ccMN2yXQihoPRRBlnmvidF/o3mAG9Z1aHy0iDMt
-	 6Yr/JtckLul/5wONF6D+STvamJZKubi4jkaiQhlh4W6U5jYQhhl2CIJKXewTZnIpMq
-	 L1TjELMLOVxJFogctFdb2wp8G2W7TJTpBD409A+DIEqfb5v5Z1KZigPpTpAIhRyyW7
-	 SUG2y9wQkU2EiFABkHchKQqdj4q7OtTZtBfCg5TM+qY+ecvrgOT4pao9Ho0BK/dpZr
-	 lb49PdkekJKJw==
+	b=afNGTS17rbRluLz8UZKlc/HduhKFYgOsoGYDDLy9ZwTRFTxYL7r+Wz8l8GqySwO53
+	 hodBQi2xneCOvikkR51UrhbsR32cE7y7sRk4icAYtuMRmJ1Px3EpfXr1SHyg+nQMIp
+	 xKOTehzG09EB2CUVnkH1eahbiGQ/1S5Nb6uoDEUHYcaghkPSpD/xgipvdlz9wzsysN
+	 FGvTXIShzE/01aQEkoMhKZVx7D0K1Njjf202UqWzcRT4WW+JUgpamGZEtbV5HOvTZe
+	 fmt1IILdFNNRowabdjAO5OYMIrSPg8NtS2TgvabZOGiIab9n+eV9QhggdJBGaFtfbq
+	 7ulb2K4ZM2AZw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1355F80EBB;
-	Mon, 28 Sep 2026 15:06:48 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id B3F6324E
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 15:06:46 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F27C7406F1;
+	Mon, 28 Sep 2026 15:06:49 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 227EFD1
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 15:06:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A31B14069D
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 15:06:46 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1413340055
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 15:06:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vGuyLNrijiFa for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 15:06:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 82630406A7
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3j8r--UWA-dz for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 15:06:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 0B6C840048
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip="2a00:1450:4864:31::11"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790608003;
- b=lXn4eJWlIB0uqM3y0XkSoE9FCCvnpHYlfeTAs28okcZNX3Bbg0WHPQA6UvvF5l+m29CU
- 5VXFwEqNY3tTedMjGvYHa0EsbMMieMgyOZxhj7UtY8FvZxikKiujhw/cNUJGHG+bsEGnb
- pge4228RV8EHTl0b6Hj9U2YTUiROMTSlMOOKBJyZ3mL1a5W2QsXlt62Jm1LxB6GjjjESP
- jbzI2MIjUcV8EDATXIBouKb9+gyblpVPeNXUWbaN7tL7kaMbonK7/WVNBn9WiU38AXiwg
- NG/I1rBypSSpkCd9Odf0AXznSfKzA2RnnM2pd9AAj3/UBcGrDEKVQ9BOnEmGbx6iR1Q==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790608006;
+ b=PtBQ7ODUbE6OfItNJ6SK9UyQnrFF1Gr4mGJ00HJ+Z1D0cKNbXskQt62QFp4Y7PhxrTQe
+ g5UAbEk4GCUddsnyAXK/4CAF/LbnSDKSW74YjNzrtjpMQtS/OoGcG3tkj+YSfkooTC8q7
+ EwY/m/VNR06H0kehpOWPU7Hg7VEgc3jps1H7AUrNuvYJ1rEgpnXqNICFfgxgpkz9UaNnc
+ H33cJsBk5wthoDxjmG+VhIlITbNEsgpfm9lGX0sHINvpslYCQ2tInbdUwFmugzHNg7vi+
+ W+mlbHdvwvAJoMIgJiTXXVX6t7+EjqHesO5hc7oTJqZv4WF772Tso3h59ddpYPcjBYA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790608003;
+ c=relaxed/relaxed; t=1790608006;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=AClgjogaFQSA8zjJP/0IX0ywGu36jRnZT0QyqqSbHG8=;
- b=aapBkV79rSrV5u9n4pWT6Lc+MKJXpgXp4UVji2XHi85UQSYDw8QfwBY6aQu5bRDP0dP+
- Q9CDxU2zGTo5E7A8fRSF5s5g0HPR+etDHpWkv5BOoqWfYpVOzcZo5kun6ocPII9LWMDXf
- 3QO9umGQlXaFaBdvZkjVup8KtjNcr3CJzbgJ+VTQluDl8+zflgs9mInxr6xuDT2GpS4DD
- qkurCTZKpDSGgT6lCRIxVd/KRe+jOGxcOhYkHquGW+9+O6XD1LkZCtMitEh8NBdToZbZK
- OFsuYh3kSfrPNuy5lhBxFCGGEERS0iBBAbu4cquYxIfzG6mJykZEgRMkZMz7i9YSc6w==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=AzGf/0o66eLXQCt+rb6oD2vCWIiHZgtRuI9qVbdCabE=;
+ b=kWeM0uPnvNtmQLld48B/VlQDKYDsWdCJVpz7auei769heJ33xl+wg1VQgocwifZih1rP
+ fAhLMAqJjHay4dmrcpBeqq//aNLkjKYUifAr7HzwoHKauRFZCI7I04XdoqD2zYR56ZLku
+ MpUh4jcf/yd5MPScHeZn5gxYQSzfJ705QwpqE+kL3vEoNkf0CzjHXUNqy4rQkzsKN7eXA
+ N8jNMsNKvbHGcQ3E0GODhvilDLhCgOpt8DdpE26uC3XifPYfONsAgR18QvcG9uRkb/NBB
+ CT4o5t5qQGfoqQcjfpjwL4um0N7H9/hG62rxSOuMs0w/1Si1q/1Yu6hzKF4yxMCXICQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=mOayP4EW; 
+ header.s=google header.b=eCJjKkCx; 
  arc=none smtp.remote-ip="2a00:1450:4864:31::11"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:31::11; helo=mail-wm2-x11.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=mOayP4EW
+ header.a=rsa-sha256 header.s=google header.b=eCJjKkCx
 Received: from mail-wm2-x11.google.com (mail-wm2-x11.google.com
  [IPv6:2a00:1450:4864:31::11])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 82630406A7
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 15:06:43 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0B6C840048
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 15:06:45 +0000 (UTC)
 Received: by mail-wm2-x11.google.com with SMTP id
- 5b1f17b1804b1-49e721b5503so30332815e9.0
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 08:06:43 -0700 (PDT)
+ 5b1f17b1804b1-49ffe817151so10712055e9.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 08:06:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790608001; x=1791212801;
+ d=baylibre.com; s=google; t=1790608004; x=1791212804;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=AClgjogaFQSA8zjJP/0IX0ywGu36jRnZT0QyqqSbHG8=;
- b=mOayP4EWNzJiR+33PsvxBVer/Uk3pp4Sxf3VxcbiRl3JT2aCPAwmjZw2OWKscrLuSi
- jE2BUUEO+C5mLlRwFqkMY1KOcFUqtu31EvTqNZCMxsoxwIvxmBkw2YmmnFfFw4cVVGR5
- E8SrFO9Ight9toZ8WQMze87hrMrZ+qmhbLJGiBPGTigc7W//FjW/VSscB1/btmYToKks
- VRH3mRnaFih2fGCt6fF5Z2mUsKf/EqV/PE35U4QSFM31IUGjR6/WWv+ZKPbJJyPrPmlf
- 5nbidirgmbQLQT+BVcRr4YbHz1Sd6zI77hzgZWk9zbzrX31gSTtq2O39ZE7hpe1qkz8q
- iZBw==
+ bh=AzGf/0o66eLXQCt+rb6oD2vCWIiHZgtRuI9qVbdCabE=;
+ b=eCJjKkCxh+U7WUnUFDZycTs0pQbdNpr4AMN4bKvMHpbdnMVWkR8ScrJexeHK9uAemR
+ k5koFexNpK5e0wot+au67r+yxfGPMleiior8k8kiAT/XZUOl0MDCVjv1i2bkBRqnmMO+
+ PzyrXScS3HOc/JBJpUQkaP9BF+Z6WNoi6OCbOq33DRGOHtYcr5wer+baipC61Tm0C/eN
+ +Xg8GQxLLs1dZ4tT69ViZBVUXVyKdJq814Y3KCzSvuihwSdRvp64+GSRgcQW3HpXc2ao
+ gfYlhf1T86z1f0O2AJTnosd4ph5UUId6XPF6IgzDar+rlTadTPo71fzk5noelrXvBrR1
+ rSpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790608001; x=1791212801;
+ d=1e100.net; s=20260707; t=1790608004; x=1791212804;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=AClgjogaFQSA8zjJP/0IX0ywGu36jRnZT0QyqqSbHG8=;
- b=LyQQgQDZfAN/2igUEhRo0s1SRwNKcCvnxLAY7+ARbS04m7TnAXhxZel6VwPUIsj4Oh
- XKzoXUxShXw/2G+7AV3yCZbMWaj5jdVt/T2ZO8od5P+olRPttLg3UMaW0nkVcrLRogbZ
- 7Ek0kDofdvbKH3xWjuNBiNyEX6tBTCgdBiX6bcaPXCcOxdV+uj4qjYomExDZd+XfbiJW
- AeJY6cLrk0mFCJunqO2qINmUGBy2rCodgv4FKG6RkjXgEJs+FAout083ZjK+ijdp1o/S
- BbQm3AbmZWIMo7aINtwGT2SqNJTM1zCC4Mld+ELVeK0nVetzpV13dF9RiKg9f49SQ0Ms
- BScQ==
+ bh=AzGf/0o66eLXQCt+rb6oD2vCWIiHZgtRuI9qVbdCabE=;
+ b=Dhd5gvzyRfJkjnjUB6DBcdvzGoOcOwUDIoKFcIRH9udsjTaoX4xvV4lp/vPC+EoVAo
+ ZoLr6Ww9Oz5r1ed9Nq1STkQsAnM4ha+eOE8kWWTVsomFb33pOCqI6Pk/XisgGBdsgnOL
+ N05qWKkz7CGwE9S+lEPlW9ae2anG47RcV22YzXB7/9xJls35vIBF3JoK0gX0Zvk/R9rN
+ XQl2VYoIcsf33kd78EwYw7azaD7aqgMyNrlXSIVXUcpOSrU99EBD8VQCuCAnZP1uHyCf
+ cy+q/A6qa/qjHR1UIlLKY0K4+mFhBUDlDfhyjCVy9HLhRsSyiBLkD2bA+k/kayZlf0g8
+ nQJg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwmrA+P2LkqNwfkOLcDRDH9Myg5okcibPOxUn2pfv6PojffoAT8nUYNHjwOfCbMB3FHdrRBlXs=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kMyWp4fQ0wA3tO2ZPZXN2PYPpPSvoK0OuSywQapzOLdCmLkMJW
- SScfzCsCLcS6nLsMeESWZGsURSOOSzNmKEAP7w1UO/5WJ2j8tpZwbwyCeCjhGgrkrtY=
-X-Gm-Gg: AYBFou2w3LZSH1kFyyAH/QGQ3KlrgpSiyLzw2RGS4kkzXXFq87BhNjox56dj+8tXdP3
- 45FqS2qDudFlZtYcZNKRyIBx0TQiwZwfHj7jueJ8Wn2aoY//KMAg8W++B98hCkauxVtHugNHcxR
- EAi1V/G96I/Yy+fhACb3KqB7leVtKQDvdOpzpOskquZcQev382USTbPsMb5iX3d7jtmDaifFlXP
- l0uecLwj7VbYNQkaVpHc7hRWrqVq7ApAwmpqTDTjySPw/gT0Z+DZwzRWQVRFDgf2GOKIyMM+hYL
- Lg3LSObUvp60BvAGgl93/a8IvirTvcxPFNkpozlQSe9Vw4F3d3vKBcuRWcjiQ5JfY7rj5Wgx+/3
- iGTpDuJ29NvOoe1QGnwyAx2ZQNMcGRyjVFJZNx7NdTfApnhhWP4e2rjhMRPyoZHMNG9pSmPPLFi
- XxhFtwZGVXBu4Wv8fi/hvNpAxLjfAlN2gvCx1rouNH0sVOnBCQ6AWVVvEQ2U7gMC8DQ3MNUIv/T
- 6G+2sEokCYgaWb7K0jxsBlkAVX+9FmeD5N7z8F0ZJofUJtoEpHjlQ4ev9U5iS9LhnILfmOSSwNA
- 77dm2hSGGRs6gL4oxiSPit9Id+NClG6/h2+52nEyZPDQaYnuETaovxI=
-X-Received: by 2002:a05:600c:c4a1:b0:4a0:bc1:8056 with SMTP id
- 5b1f17b1804b1-4a00bc18145mr14684125e9.22.1790608001025; 
- Mon, 28 Sep 2026 08:06:41 -0700 (PDT)
+ AKwUvByBkudcSLJFuuqdhJjwYNZJmNwI0JOjdVMH/nPN8qjt1G/Q1iS7uUm+OLIgl3YPh4qTDfeOc0k=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lwHhQVmVYtsPDXN5zGgzRktz1D9eQUyV8jc2bxCrRcNwj05jJx
+ 0ZPP0vTB9SicCGAxPfztcX1a7UNaUfGPWIt9t23CsloI2UCp6kLnn98I+TXgxOqUfjo=
+X-Gm-Gg: AYBFou1MIlmVh5p34jWQEpeG1w697UmduoohB55uMlZwy2083Irwp+DDnq8+TZHMVzs
+ uc/AsIrwBur5reFwTe9qb6j9oXGT5JY8wuwOA3+u6GOY1H35/32IZ9Q2c0phaUsd/nZfP9M/YiY
+ XEYqvGCPQfqno1a9WRfD2es/nzGRFyn5IomLTYxuhBE621GnmTyLC+HFJ3dGVhGySUZjBOFZCdV
+ ANlT9z5IlXhtoA1v+6oiae8fuIdjUITMt5tuDC5KKhGG8dYXVdrxdEEsRqrwn/qtLpLSvbss2+B
+ jcK2b6pAEVNAa0tyhE8IletKU9bomSiS9JEfAS3oekbOd98UjQ/udLoBD4dfG+wQmxkx0IJnv4h
+ R/J7KSvVHPoHg9g6FcUNeZpVLppaDZDoEiBnu03cjmD9BNcuEShdb0J4+QQQHXXih8xWrsu+Djw
+ IqlsHbqyJ3N83fLhsn1uCX4gKAhT//FLUwv83wAljk2Jw0Dh2OSao2U/59Aj+qeW7Ab9JLFtO2p
+ eDxG+SJq/7HPZ8oKBLoSJkE5oXIbLB5g8MYfxKaKDCRz0XXogPwo2Dhx/Qe+tLG7Gv0Az//Y9qy
+ mbX3W9WLTNe444SJXn3Hhkae7SFQ+gBFcvZnufbz3iKyu8o+qObEgTQ=
+X-Received: by 2002:a05:600c:1546:b0:49e:81a7:9fbc with SMTP id
+ 5b1f17b1804b1-49fe66fa0ddmr241823455e9.24.1790608003597; 
+ Mon, 28 Sep 2026 08:06:43 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a0018f0e79sm235270105e9.7.2026.09.28.08.06.39
+ 5b1f17b1804b1-4a0018f0e79sm235270105e9.7.2026.09.28.08.06.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Sep 2026 08:06:40 -0700 (PDT)
+ Mon, 28 Sep 2026 08:06:41 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Mon, 28 Sep 2026 17:08:40 +0200
-Subject: [PATCH 03/13] video: mediatek: add disp rdma component
+Date: Mon, 28 Sep 2026 17:08:41 +0200
+Subject: [PATCH 04/13] video: mediatek: add color component
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260928-mt8365-mt8366-add-dsi-support-v1-3-212f51b1742b@baylibre.com>
+Message-Id: <20260928-mt8365-mt8366-add-dsi-support-v1-4-212f51b1742b@baylibre.com>
 References: <20260928-mt8365-mt8366-add-dsi-support-v1-0-212f51b1742b@baylibre.com>
 In-Reply-To: <20260928-mt8365-mt8366-add-dsi-support-v1-0-212f51b1742b@baylibre.com>
 To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
@@ -191,56 +191,33 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The rdma (read DMA) block is one of the components of the video pipeline
-on some MediaTek SoCs, such as the MT8365 and the MT8366. It feeds the
-pipeline either from a framebuffer in DRAM, or from the stream coming out
-of the overlay.
+The color block is one of the components of the video pipeline on some
+MediaTek SoCs, such as the MT8365. It provides the picture quality
+adjustments of the pipeline, such as contrast, hue and saturation.
 
-The DSI pipeline only goes through it in direct mode, the overlay being
-the DMA master there, so the driver programs the frame size and the FIFO
-thresholds and starts the block, leaving its memory mode alone. The
-larb feeding it is still ungated with it, as the block sits behind it
-either way.
+None of them is needed to display a splash screen, so the driver
+programs the frame size and starts the block with all the adjustments
+bypassed.
 
-The driver matches "mediatek,mt8183-disp-rdma" and
-"mediatek,mt8195-disp-rdma", the generic fallbacks the MT8365 and the
-MT8366 rdma nodes respectively carry behind their SoC specific string,
-so a single entry covers every SoC reusing either generation. The FIFO
-size of the compatible is only a default: the instances of one SoC may
-differ, and "mediatek,rdma-fifo-size" overrides it when the device tree
-describes it.
+The driver matches "mediatek,mt8173-disp-color", the generic fallback
+the MT8365 color0 node carries behind "mediatek,mt8365-disp-color", so
+a single entry covers every SoC reusing that block.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/video/mediatek/mtk_disp_comp.h |   4 +-
- drivers/video/mediatek/mtk_disp_rdma.c | 154 +++++++++++++++++++++++++++++++++
- drivers/video/mediatek/mtk_disp_rdma.h |  30 +++++++
- 3 files changed, 186 insertions(+), 2 deletions(-)
+ drivers/video/mediatek/mtk_disp_color.c | 50 +++++++++++++++++++++++++++++++++
+ drivers/video/mediatek/mtk_disp_color.h | 31 ++++++++++++++++++++
+ 2 files changed, 81 insertions(+)
 
-diff --git a/drivers/video/mediatek/mtk_disp_comp.h b/drivers/video/mediatek/mtk_disp_comp.h
-index fbc2174352e..9e525521cc4 100644
---- a/drivers/video/mediatek/mtk_disp_comp.h
-+++ b/drivers/video/mediatek/mtk_disp_comp.h
-@@ -18,8 +18,8 @@ struct udevice;
-  * @base: register window of the component
-  * @clk_bulk: clocks of the component
-  * @larb: optional SMI larb device (UCLASS_MEMORY), enabled and disabled
-- *	  together with the component. Only the DMA masters of the pipelines,
-- *	  the overlays and the MDP RDMAs, have one.
-+ *	  together with the component. Only the components sitting behind an
-+ *	  SMI larb, the overlays and the rdmas, have one.
-  * @larb_port: M4U port index of the component within @larb
-  */
- struct mtk_disp_comp_priv {
-diff --git a/drivers/video/mediatek/mtk_disp_rdma.c b/drivers/video/mediatek/mtk_disp_rdma.c
+diff --git a/drivers/video/mediatek/mtk_disp_color.c b/drivers/video/mediatek/mtk_disp_color.c
 new file mode 100644
-index 00000000000..e66092c7799
+index 00000000000..759e7c800b4
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_disp_rdma.c
-@@ -0,0 +1,154 @@
++++ b/drivers/video/mediatek/mtk_disp_color.c
+@@ -0,0 +1,50 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * MediaTek Video RDMA support
++ * MediaTek Video Color support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Masson <jmasson@baylibre.com>
@@ -248,156 +225,52 @@ index 00000000000..e66092c7799
 + */
 +
 +#include <dm/device.h>
-+#include <dm/device_compat.h>
-+#include <dm/read.h>
-+#include <errno.h>
 +#include <fdtdec.h>
-+#include <linux/bitfield.h>
 +#include <linux/bitops.h>
-+#include <linux/sizes.h>
 +
++#include "mtk_disp_color.h"
 +#include "mtk_disp_comp.h"
-+#include "mtk_disp_rdma.h"
 +
-+#define DISP_REG_RDMA_GLOBAL_CON	0x010
-+#define RDMA_ENGINE_EN				BIT(0)
++#define DISP_COLOR_CFG_MAIN	0x400
++#define COLOR_BYPASS_ALL		BIT(7)
++#define COLOR_SEQ_SEL			BIT(13)
 +
-+#define DISP_REG_RDMA_SIZE_CON_0	0x014
-+#define RDMA_SIZE_CON_0_WIDTH			GENMASK(11, 0)
++#define DISP_COLOR_START	0xc00
 +
-+#define DISP_REG_RDMA_SIZE_CON_1	0x018
-+#define RDMA_SIZE_CON_1_HEIGHT			GENMASK(19, 0)
++#define DISP_COLOR_WIDTH	0xc50
++#define DISP_COLOR_HEIGHT	0xc54
 +
-+#define DISP_REG_RDMA_FIFO_CON		0x040
-+#define RDMA_FIFO_UNDERFLOW_EN			BIT(31)
-+#define RDMA_FIFO_PSEUDO_SIZE			GENMASK(27, 16)
-+#define RDMA_OUTPUT_VALID_FIFO_THRESHOLD	GENMASK(11, 0)
-+
-+/* the FIFO registers count in 16-byte words */
-+#define RDMA_FIFO_WORD(bytes)		((bytes) / 16)
-+
-+/**
-+ * struct mtk_disp_rdma_data - per-SoC rdma data
-+ * @fifo_size: default FIFO size, in bytes
-+ */
-+struct mtk_disp_rdma_data {
-+	u32 fifo_size;
-+};
-+
-+/**
-+ * struct mtk_disp_rdma_priv - private data of an rdma
-+ * @comp: common component state, must be the first member
-+ * @fifo_size: FIFO size, in bytes, from "mediatek,rdma-fifo-size" or the
-+ *	       per-SoC default
-+ */
-+struct mtk_disp_rdma_priv {
-+	struct mtk_disp_comp_priv comp;
-+	u32 fifo_size;
-+};
-+
-+void mtk_rdma_config(struct udevice *dev, const struct display_timing *timing)
++void mtk_color_config(struct udevice *dev, const struct display_timing *timing)
 +{
-+	struct mtk_disp_rdma_priv *rdma = dev_get_priv(dev);
-+	u32 threshold = rdma->fifo_size * 7 / 10;
-+
-+	mtk_disp_comp_update(dev, DISP_REG_RDMA_SIZE_CON_0,
-+			     FIELD_PREP(RDMA_SIZE_CON_0_WIDTH, timing->hactive.typ),
-+			     RDMA_SIZE_CON_0_WIDTH);
-+	mtk_disp_comp_update(dev, DISP_REG_RDMA_SIZE_CON_1,
-+			     FIELD_PREP(RDMA_SIZE_CON_1_HEIGHT, timing->vactive.typ),
-+			     RDMA_SIZE_CON_1_HEIGHT);
-+
-+	/*
-+	 * Enable FIFO underflow since the DSI and the DPI can't be blocked,
-+	 * and set the output threshold to 70% of the FIFO size so that it
-+	 * never overflows.
-+	 */
-+	mtk_disp_comp_write(dev, DISP_REG_RDMA_FIFO_CON,
-+			    RDMA_FIFO_UNDERFLOW_EN |
-+			    FIELD_PREP(RDMA_FIFO_PSEUDO_SIZE,
-+				       RDMA_FIFO_WORD(rdma->fifo_size)) |
-+			    FIELD_PREP(RDMA_OUTPUT_VALID_FIFO_THRESHOLD,
-+				       RDMA_FIFO_WORD(threshold)));
++	mtk_disp_comp_write(dev, DISP_COLOR_WIDTH, timing->hactive.typ);
++	mtk_disp_comp_write(dev, DISP_COLOR_HEIGHT, timing->vactive.typ);
 +}
 +
-+void mtk_rdma_start(struct udevice *dev)
++void mtk_color_start(struct udevice *dev)
 +{
-+	mtk_disp_comp_update(dev, DISP_REG_RDMA_GLOBAL_CON, RDMA_ENGINE_EN,
-+			     RDMA_ENGINE_EN);
++	mtk_disp_comp_write(dev, DISP_COLOR_CFG_MAIN,
++			    COLOR_BYPASS_ALL | COLOR_SEQ_SEL);
++	mtk_disp_comp_write(dev, DISP_COLOR_START, 1);
 +}
 +
-+static int mtk_disp_rdma_probe(struct udevice *dev)
-+{
-+	struct mtk_disp_rdma_priv *rdma = dev_get_priv(dev);
-+	const struct mtk_disp_rdma_data *data;
-+	int ret;
-+
-+	data = (const struct mtk_disp_rdma_data *)dev_get_driver_data(dev);
-+	if (!data)
-+		return -EINVAL;
-+
-+	ret = mtk_disp_comp_probe(dev);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * The rdma sits behind an SMI larb, which has to be ungated with it
-+	 * even on the paths where the overlay is the one doing the DMA.
-+	 */
-+	ret = mtk_disp_comp_get_larb(dev);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * The instances of a same SoC may have different FIFO depths, so the
-+	 * per-compatible size is only the default: the MT8365 and the MT8183
-+	 * describe both of their RDMAs in the device tree, the MT8186 none.
-+	 */
-+	ret = dev_read_u32(dev, "mediatek,rdma-fifo-size", &rdma->fifo_size);
-+	if (ret && ret != -EINVAL) {
-+		dev_err(dev, "failed to get the rdma fifo size: %d\n", ret);
-+		return ret;
-+	}
-+
-+	if (ret)
-+		rdma->fifo_size = data->fifo_size;
-+
-+	return 0;
-+}
-+
-+static const struct mtk_disp_rdma_data mt8183_rdma_driver_data = {
-+	.fifo_size = 5 * SZ_1K,
-+};
-+
-+static const struct mtk_disp_rdma_data mt8195_rdma_driver_data = {
-+	.fifo_size = 1920,
-+};
-+
-+static const struct udevice_id mtk_disp_rdma_ids[] = {
-+	{
-+		.compatible = "mediatek,mt8183-disp-rdma",
-+		.data = (ulong)&mt8183_rdma_driver_data,
-+	},
-+	{
-+		.compatible = "mediatek,mt8195-disp-rdma",
-+		.data = (ulong)&mt8195_rdma_driver_data,
-+	},
++static const struct udevice_id mtk_disp_color_ids[] = {
++	{ .compatible = "mediatek,mt8173-disp-color" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(mtk_disp_rdma) = {
-+	.name	   = "mtk_disp_rdma",
++U_BOOT_DRIVER(mtk_disp_color) = {
++	.name	   = "mtk_disp_color",
 +	.id	   = UCLASS_MISC,
-+	.of_match  = mtk_disp_rdma_ids,
-+	.probe	   = mtk_disp_rdma_probe,
-+	.priv_auto = sizeof(struct mtk_disp_rdma_priv),
++	.of_match  = mtk_disp_color_ids,
++	.probe	   = mtk_disp_comp_probe,
++	.priv_auto = sizeof(struct mtk_disp_comp_priv),
 +};
-diff --git a/drivers/video/mediatek/mtk_disp_rdma.h b/drivers/video/mediatek/mtk_disp_rdma.h
+diff --git a/drivers/video/mediatek/mtk_disp_color.h b/drivers/video/mediatek/mtk_disp_color.h
 new file mode 100644
-index 00000000000..c2fe9228661
+index 00000000000..9858ee95d5b
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_disp_rdma.h
-@@ -0,0 +1,30 @@
++++ b/drivers/video/mediatek/mtk_disp_color.h
+@@ -0,0 +1,31 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
 + * Copyright (c) 2026 BayLibre, SAS.
@@ -405,29 +278,30 @@ index 00000000000..c2fe9228661
 + *         Julien Stephan <jstephan@baylibre.com>
 + */
 +
-+#ifndef _MTK_DISP_RDMA_H
-+#define _MTK_DISP_RDMA_H
++#ifndef _MTK_DISP_COLOR_H
++#define _MTK_DISP_COLOR_H
 +
 +struct display_timing;
 +struct udevice;
 +
 +/**
-+ * mtk_rdma_config() - configure an rdma
-+ * @dev: rdma device
++ * mtk_color_config() - configure the color block
++ * @dev: color device
 + * @timing: display timing, giving the frame size
 + *
-+ * Set the frame size and the FIFO thresholds of the rdma, which passes the
-+ * overlay output through without reading DRAM itself.
++ * Set the frame size of the color block.
 + */
-+void mtk_rdma_config(struct udevice *dev, const struct display_timing *timing);
++void mtk_color_config(struct udevice *dev, const struct display_timing *timing);
 +
 +/**
-+ * mtk_rdma_start() - start an rdma
-+ * @dev: rdma device
++ * mtk_color_start() - start the color block
++ * @dev: color device
++ *
++ * Start the color block with every color adjustment bypassed.
 + */
-+void mtk_rdma_start(struct udevice *dev);
++void mtk_color_start(struct udevice *dev);
 +
-+#endif /* _MTK_DISP_RDMA_H */
++#endif /* _MTK_DISP_COLOR_H */
 
 -- 
 2.55.0
