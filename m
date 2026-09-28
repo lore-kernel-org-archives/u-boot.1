@@ -4,145 +4,226 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6671CA5FA2
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 11:55:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07AC8C9833F
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 12:02:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3142A80D86;
-	Mon, 28 Sep 2026 11:55:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5B43480981;
+	Mon, 28 Sep 2026 12:02:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QrYq4lZrbDw7; Mon, 28 Sep 2026 11:55:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 139DD80D73
+ id fiMgS7_ckCFy; Mon, 28 Sep 2026 12:02:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5459B808AC
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790596519;
-	b=ZmILbYlE+hT2ynGMrs3vX415K/CWxJg/daQaS+jDU+jkyG83fsofdsTCJ7aPQ1kx8pxJ
-	 fZHMg0Qm9k3jkvzOu2VIPX2ZFw2wEQy6Iy0aI4mhON8TqkzSLJpr4qBLhunGV5UZ3J6Hl
-	 qkjTs7KpaqDGUiX9actCyBo9GIIJ5vOlWjoVNA3e59xHvwShoosMqb3QGaURc6cVXQ1E5
-	 AxwRF7OzghqKAoL1BR2EG9zNuf/v1b1NpHHeQM7D0NJX4wRPXK+6ZvDRSS6+gf3PitTqS
-	 kF2WBxnWpDNcfXDQDMsvuCwpnqCHusclFYCmWlCuX3I6aGi2yH+YgoeLq+TxqZya60g==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790596948;
+	b=TvkFKyxMyfvL/xWrk1mskXdXEDnl67GSrNz/A4R+46jEFg8YazhQ4OzKmy3+Pmazq07i
+	 l6efc6g2bLATiC59lz51Q6A/x9+g2MzXXMCYLEzs5UNqfm8VlUfJro4rVSP83mmmOCsww
+	 8Y58FxlM1+bQFfaMDiW2aVh6WHJZR3vpaLWQWdTCxwW3r+6brypuKDDZMIRTAzuIqjR/F
+	 FK7fvH19rgKJsdNtXJKIKU+ve/r2v1wQNPOWLdt60WgaUnnEooX+mi1pjaue5TY373pIa
+	 oH0HuLL/v+IpEDbwaY4g5FDPfXC7SAIAGZthcoerTRIBPWVsVrYFgDDilp1/t+FhkcQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790596519;
+	c=relaxed/relaxed; t=1790596948;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
-	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
-	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=T0Hcc1PDrH7R4eJgSztYTs6jUDXucLZmh8Tw+q7NVSg=;
-	b=lVMBVkihN4Absj+JWk90KijNGY7FOoDUPI/uyMGqitIQoPfpn1s/z7jvba5qKh9KzlsB
-	 jlAtBw5w6oFf9Ce9A8ehSrjTnsiSaYjQXY2xVrUNLUk8KBHVmyvt8ltsPnKwD+hwNveyS
-	 rEqFWprrbLfp3h5DZoVI+C3pl9Comzo+AWLn23UTSQJ2zTvtiUbDONODvPpVFoihVBshe
-	 jbdWPUoBYwJCraihFwb82eEHfZJmjK9ghGtpBfYLlXcevRTmiTa5/KFN799VfCaC8AYvX
-	 oOnlFo93U0ps4qR75V9rFCnWpSa9kzEvS5xhRzfkcMgU9QQ+VJtJW2U6OoAuI/ewiBA==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
+	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=0SbH6j8N8xQiNWU3HjO0vRXuBaHTKb3LbW9cPqec0K0=;
+	b=kUhjsC/x6IfZi3seI5T2AN98tc29cE3HynJI/3/be+/9MTFZb3LwJL6lXsuVLHHubByu
+	 C+fGkCWeyu9T9mwCdPwRlhn9ddbINm9G+3mlVEpsqNZ2RqUUIN4mVdjZWVeYXCpImMziA
+	 qT2TP1tv14Sd/q0y9XCb3whZczvUn/KGK/zK6F6740r3tL6IWkCS8Sh4hjDORETTGt/2m
+	 3izne1MEkGJBnmCECtg3sttRuiptfGktnXbkgQk0Vhs658HiGFYXZJqI6zRXtiJiQ2HM9
+	 jETXffxn6dvFO+tSRTkfK6xBIUnFNifKsZ8Kw81hLsdc+05laDQChku4SLAhXRW/GjQ==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790596519;
-	bh=T0Hcc1PDrH7R4eJgSztYTs6jUDXucLZmh8Tw+q7NVSg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=WCNBnf9nZMFDKm7VquLglLEqvkzGxjyQZflZ0iRiLvRk32aeFpDdjvG36kDaojlcy
-	 81vt6nB3VQhJT/qiBLO2dvoF3cOYSWIpqMS5EIMKXeeyCpvUhzL8FAxC+SQ/Ne9Q2m
-	 wgzniDSNOLPZZbzcneBNxVQeKhOlaym4CKNYso9P7De1CjQS/+kF11uA2IhHk1HhjQ
-	 ew8+53vt9roq93AEzMwgrAlpwk1s0OQGafvdoCCJsQjHI0UvJUIZrlBUNo3O6bGPO1
-	 cgvooeR9t1QC9Cgm2lofuR0IoiC0E8JKcbPIAdfgHEKqhu0vknEh49n7Y0aR1NTUIT
-	 HQwZ2CX8zgSiQ==
+	d=lists.u-boot-project.org; s=default; t=1790596948;
+	bh=0SbH6j8N8xQiNWU3HjO0vRXuBaHTKb3LbW9cPqec0K0=;
+	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=hsmecR1kbDU9jJQf0oOnDJ+88CLF+R17uaTzrOu235QI9eoIughKLhWEB3gVQW766
+	 0eGOdpXgEzfVBM9ZZIZGxBKNQZZC64L3TiBZFUjKaIzGn9/kdMJgqhCGWl2uEv6VZU
+	 ZDZYmNwInGdHbHGBtKN7b48mZlm3hWypMjGNXMzjN7TILl5jlRzZ1sUjeCRwSCq10q
+	 qXWTBbJh6sGCFS5hePHTgV4sV8IcQ+dtNihq9001E/8IomklDncVcn+STx5VxNW6tz
+	 SRd0C/WSD8gHzgChTmwV9mDdgLobdm5O5SwNTtb0q/vCZ+lx6HHGmJ5rq08tNF+pK7
+	 XZ21KhCfHaDYA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 139DD80D73;
-	Mon, 28 Sep 2026 11:55:19 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 43B84194
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 11:55:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5459B808AC;
+	Mon, 28 Sep 2026 12:02:28 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7099DD1
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 12:02:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 354E7400DB
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 11:55:17 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 568D760632
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 12:02:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BO6ZiXxvAwe8 for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 11:55:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 17F6C40063
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=121.127.44.73
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790596516;
- b=ErEasyjRDpPinRMAB1rGgyrpgKC1joNdd6QYZUbidPVNrdgXnU09a0I+NijQZ2vA5zHE
- H6ViHU0cNq3594cC7uV1Rjw43DtZsxYtzFqZ18P8d4T9ctZZlTZGqHmNGkNlDQphe0gte
- oanSB/oXgRunS52Y8nSx9NFDCIcFpvW9+x1sQD+Zs3JDDARq9UGsgpNc55XoLRJraJZ+h
- yzGlMuc4I1bjUhIjnstqnqaScfsg4OjBway1HLvjMxlibPmrcm6vdzjR0f0FL9Ueb34OG
- OunrVMOICd9vCDDt0L0KNE9AQMZESYoxgcyo/AtkWfnpZe/IZv1H1JRResOR6e5ZEvw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gmO-NeXDAvJk for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 12:02:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7026660625
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790596946;
+ b=PqkT5txFaQuQiVc/4o6RTxG4dKH7WZQkEA9PYhFnWwjzOak4WEd8oFUjlaJ3yEIj44vc
+ qxPfB+7W4avkH6SMR2hdA2/ByZVsHq3XJ/dIhepdAV5NkJtk7aSwxDT7B4NxxbDYEfv0k
+ 9co+9ddOL+SXi//AtpNzj5FpErnB03RYldnB9CUgQVNK+l/C7BWAcf7ZGJoDUSYtszK7q
+ DRmcbYYyGOCjX/Z7Fqw3Opt7EbreqbDDONPdjJQzWQ+kYpYx5KcpjCjhQEU4KTARCujKP
+ 1VxH311lmZr8sCwQlLsC9pV6ulzN3pa/n6BEkGtzfLQ8Wf7ZjxPIoZUhob2b0+LaTXg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790596516;
- h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
- X-Forward-Email-Sender:X-Forward-Email-Version:
- X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
- X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
- Cc:References:Content-Language:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding;
- bh=T0Hcc1PDrH7R4eJgSztYTs6jUDXucLZmh8Tw+q7NVSg=;
- b=Lka+XJRGnSbk7Oamv78FbGjCY99EMM95H2U0nBXzLElS5cN3yVOUWmvc2lbUwhhuD/8f
- p6SihGZz2/HDaTatWhzOaXTeQyLxF0tXAO0z4ioJ/2le6x3LlLSozugizfjoRwPdCybcS
- kOuizD8bVPP5lfcakfA426de3NFNLtn1lhI92u0Dea+JQEa6/EiNaCMLhqlrAFqbzQWOp
- GoLy7lziEnZNElD9dhfTo8XLg46nOk/6dsWedySCY4Qwvy4ZdVhi7PJCI/4cJQl+Afyq+
- FGZ+vIBRdTBxU6qKVJp+eksDvhL/iN8Gqsrm0sSDI6vDSDt/7kCWVS5MVGcS6MMQ08g==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=kwiboo.se; 
- dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=fZAnbNOL; 
- arc=none smtp.remote-ip=121.127.44.73
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=c238=hu=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ c=relaxed/relaxed; t=1790596946;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:
+ Subject:Date:Message-Id:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+ X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=0SbH6j8N8xQiNWU3HjO0vRXuBaHTKb3LbW9cPqec0K0=;
+ b=ZwKPz47NUTfgHwEmuZ/LtHC2wEpvHhr1rZP39dXdfXTO0WX0oMAapexkLBOSexGa4lTj
+ GRAN1xVA0Z4oXzIauczvuVpGmj7ORU+3Vv2JI10bdEhcl6G7kDwU9jv+DbaNzJtHx41Cp
+ ZVS7ffEpTe03ZNRQzNBH0kR62dEMJYKgOcpOAET4uRiY6wjHoNOKLC0jxD+DArsrrda68
+ cwfSJDAYHSn3v6bqQQ6z08hNBB051Awv89sU+L0QGp5XCFFnc0eERmrCBWiLqeiEim0Pc
+ sXUJsS8CqTbUdjESGshQPrkMo+d2hUKwfm0M4YRg4Z8wQG0QbRNTS5rLiTQl8TX51MQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ dmarc=pass header.from=oss.qualcomm.com; 
+ dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
+ header.s=qcppdkim1 header.b=ktOWj8BQ; 
+ dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b="VS4QxiI/"; 
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=fZAnbNOL
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 17F6C40063
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 11:55:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1790596513;
- bh=T0Hcc1PDrH7R4eJgSztYTs6jUDXucLZmh8Tw+q7NVSg=;
- b=fZAnbNOLSVsE5SedcjD6YZzwjDcJiBEvLrYMzaOUTLtUPYoT5J9n000RzFre6QNM2l++Gh9dp
- JrYiOIK7ZcYagA8OTBTnqNoYkPQ1dLDCedCYO6SEoveppjjI/XzKRrKZJxLFd7S0GBZKG9kQP6n
- KduReBK+4hlrNnvVb/w4lxgWfNe3VRdfDJee/gIHMcJwq+Apf8GEd1Zre0tQKZ16l4g31etO264
- sC6vYN36nOV8ejcoVboO9nEc27EbRCkbtkN//JeSgpoYlPQeJ9M03DhIc6YsbXx/r5UxeOrl3Kc
- IpSA0FE9fzrzdxoQPXCod5Dqaw7kr13jKEOhBr73yeKQ==
-X-Forward-Email-ID: 6aba559f7c3fbae63f6e831b
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.16.3
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <a12a9273-af9f-4477-8965-2e5f1d4a00da@kwiboo.se>
-Date: Mon, 28 Sep 2026 13:55:09 +0200
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=ktOWj8BQ; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=VS4QxiI/
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7026660625
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 12:02:25 +0000 (UTC)
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68SBAHVi1682977
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 12:02:24 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=0SbH6j8N8xQiNWU3HjO0vRXuBaHTKb3LbW9
+ cPqec0K0=; b=ktOWj8BQzmP6HjGENTcumlj+WgCmeiW7NVbHMnf4wEXeVQtClNd
+ aa0LyAOenIJzxVbKSYeh/p12Oqw8Bimk3MqRH7mYxLIx12aaoF3R+1EeJpsE9acP
+ +XKn67vRisnEyMiP0ywuBCwBYBiu2ZDmzxVc7MxKd36e61IwolY+a74VKr08jWYD
+ ncnUkvZ5JkTAG7uZp+HInqDOUXb3lwoP/3QnPUd/7OdDUcZmzo1H7jg9m+sO5ZsV
+ K8UIt6jsZcicoDDuTjckeVyKOSfg9nLVOEr7q4DWvE5pE+8EfJ83jD4GnhY9r8Jh
+ OIrJh6+Ac1XuuoRtiLHVwChznAaeO1dCcXQ==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
+ [74.125.82.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gynfkrj26-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 12:02:24 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id
+ 5a478bee46e88-313d1015161so10526404eec.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 05:02:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1790596943; x=1791201743;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=0SbH6j8N8xQiNWU3HjO0vRXuBaHTKb3LbW9cPqec0K0=;
+ b=VS4QxiI/yfaLOdcpRnzndmmHU1XFQbcq+teJQuLCG+Rfhc9e01XQs96n8SrGd4FoHx
+ 1Z++9hWM/aakWU4R+w4KuPMdEPyg5fIJGfreTYHRTfD9d7EEYRS09FDfoGL/GdPdaQSu
+ 9JG+cKPYVMnx3YjD98q6o6oDiFS8ELg/jGP0Psi+Dzy+xk3JSpub59h+yd/TH8OZOG8J
+ Jlord1o1R7Vm1FlH0atApYvPm2/I9xwNJeeTGNMDCSnlUvSLh6fI033SV/WBEaSltOT3
+ wbjspuFbGMeEtF2Hh99bWn6rB3vP5Y7zpZtlD9YPTj+r4fgiiTKxXq+eKyPcp/Ew+hwg
+ 42jA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790596943; x=1791201743;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=0SbH6j8N8xQiNWU3HjO0vRXuBaHTKb3LbW9cPqec0K0=;
+ b=StX1HeLM6LB8nEmgkpesKGcvb6/+ahBo7/giDrbU0uXgALq9me2fjZZAZ5VC9xS4T/
+ Yg36KewIPl9a1iQsklBP33g7HMTpDHBewg0SXwzET+aNHGu0grOOHF5rlW9JOt1JaW7b
+ Gz6swJr4lC78Ez7I9Br7izVNy1wdqTovRm16/jPoc8tBSp6ZZStVOiR/VzHuP8z9bfHO
+ P9IfprLEF7d0AsILiarNVy6PPwBVRfVqESx+5ODw8femYIykMDgb1ONJvVcj3ndiNFoK
+ 1sQJjvqm8b9620PXKtCzXwu7idYVBxevlFgD2z4xbF9AeYD+m460OssloasL7G1Pd6If
+ hrkQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwXSCPKneM0Ob/2aG4Zh0lXuDyQ+GXCjVnabH7H2hoHbl8+nmBjoMpaL3Om6IMOzXffEBK0E4Q=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYI8KE3/8x/lEeOlsD8abOuwBTZieUmNSN6+ZCeMkTgloFZfG+1l
+ 2IbxkscVEAl2//cjkVY7q1xAylvVXEFUsZyyAI/O/hn+fNoLLnOSGRu0MD2JzFwyyZP/A88b+Lc
+ vJzrpqi5LHBz1487t7miv2sNff8bLH75y+UPnYqtVDgUsZlKyH2YHOwuWotOAuZIx5EbetsQ=
+X-Gm-Gg: AYBFou3ZG4N0EjoWHCI3LRYc+k1whS4As7I098ThCUt5HTYgg1vQXPWH51rnBXwfn3f
+ iNmHQp+SXMt+++zJuoELuG2tE1p4Mviiu4PEELpPDNQJkFZZWevCu3FfimrJeFyz8WrSxk7suYN
+ G+8BcbD0I9uJB2ZPal0Obfp6YIXgYwER0o6ZtRXPqWOoiEllEpF3ODYwCbxZ01XYg/2krj7Ank4
+ YfGVCESrTe3mfNpbfEozwcE8M24OPdfhnuHJPXoR12vx1/z/itX0/6I77ymWzWn2XCg/Zlkd+ak
+ B+YT9ixObkYm7IuqQtR1d3DOpzfWjvCx9wHnvu7xy6zwYOM27mcpd9ZowDu1qzxD0zZbPTlN82i
+ 0vrfhftiMGhR2ZH7RUybCoa9HfXNsZ9HVJA4AKUfE/tn0A5w2PgI1nphBRjzmzR71+AULQ/Hy7f
+ HgOebAB8LcgHcgmzX7HA==
+X-Received: by 2002:a05:7300:d204:b0:33b:f8f9:c8e8 with SMTP id
+ 5a478bee46e88-3426feb9da1mr9390000eec.1.1790596941166; 
+ Mon, 28 Sep 2026 05:02:21 -0700 (PDT)
+X-Received: by 2002:a05:7300:d204:b0:33b:f8f9:c8e8 with SMTP id
+ 5a478bee46e88-3426feb9da1mr9389888eec.1.1790596939499; 
+ Mon, 28 Sep 2026 05:02:19 -0700 (PDT)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-34144b4ae50sm28658382eec.17.2026.09.28.05.02.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Sep 2026 05:02:18 -0700 (PDT)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com, lukma@denx.de,
+ aswin.murugan@oss.qualcomm.com, nathbappai@gmail.com,
+ Michael.Srba@seznam.cz, luca.weiss@fairphone.com,
+ nikroks@mainlining.org, jbx6244@gmail.com,
+ krzysztof.kozlowski@oss.qualcomm.com,
+ bartosz.golaszewski@oss.qualcomm.com, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH v2 0/9] arm64: qcom: Add initial support for Nord SoC
+Date: Mon, 28 Sep 2026 17:32:00 +0530
+Message-Id: <20260928120209.1064781-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/30] sysreset: rockchip: Add rockchip_sysreset_bind()
- helper
-To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang
- <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
- <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-References: <20260805174509.2968252-1-jonas@kwiboo.se>
- <20260805174509.2968252-22-jonas@kwiboo.se>
- <CAC928Hbh+XG_EA89aBeG4=fUYrm1YbuZug7JFy7EOnOdzv__+g@mail.gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAC928Hbh+XG_EA89aBeG4=fUYrm1YbuZug7JFy7EOnOdzv__+g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI4MDA0NyBTYWx0ZWRfX3UZlf3jQSRoI
+ YuL0L5xJCulvGuaPiGdFBmsv987dZAow3tUGmnEYoW0wvf2jeRoYQRZwM2SSHyY+5pEiEpAcmSI
+ 7b049Z0G7R855V9HFlhjTEK1flNZCdLbz99qWklOdP+iBYJ4rw3naXNoudUp3GtlWGvxO9hmCWP
+ lXU0eqCrqvaucip0XTeKeof3iACUXUB9CcyriIRVBY4paiS8zGgVKfGi1odwBtIvAn9CqDnfhEI
+ hESVh/tJgi9PZYBXvo8VUtL1KlKuDt1BH+jD0ewu8254Qb6LOBfMYmyej6Yosi60+6Ha6Z+V5wD
+ l6VEI//ZaqmjJxYtpq526pwmQGJhVIaKFfcajw3d0oUCY0kBqWdhZSJQEKf0KVTabHa/j6TVvGm
+ 8aRPep5UzqrfzaYAJg0DZlEbjTRMEV8f9f3yVrXvnlxGBP8QANYXSXKSXXDX9Lq1F56zWcKz3XN
+ E+pJ+uWvdvy5SCb3JjA==
+X-Authority-Analysis: v=2.4 cv=e6aT2qp/ c=1 sm=1 tr=0 ts=6aba5750 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=gu6fZOg2AAAA:8
+ a=-KWCMSehS6Sf777T99UA:9 a=scEy_gLbYbu1JhEsrz4S:22 a=2RSlZUUhi9gRBrsHwhhZ:22
+X-Proofpoint-GUID: 9yw6vRGFrMvKSioNCj_qFUYFKsqpkEsB
+X-Proofpoint-ORIG-GUID: 9yw6vRGFrMvKSioNCj_qFUYFKsqpkEsB
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI4MDA0NyBTYWx0ZWRfX7I5249MmpXBV
+ hSYelCaJeX0BC47uLLd4iau5HofERnLIwXhv83tyqdwJNUvWyGIz0urD4FKlIxtm2tvMhtoZwYH
+ Lf/TLqzI+abUhAltAhvik5k14gDQf28=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-28_03,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 priorityscore=1501 adultscore=0 suspectscore=0 bulkscore=0
+ clxscore=1015 impostorscore=0 malwarescore=0 phishscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609280047
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -156,159 +237,65 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Massimo,
+This series adds foundational support for the Qualcomm Nord SoC in
+U-Boot, including clock, pinctrl, USB HS PHY, and configuration updates
+required for early platform enablement.
 
-On 9/27/2026 5:17 PM, Massimo Pegorer wrote:
-> Hi Jonas,
-> 
-> On 8/5/2026 5:44 PM, Jonas Karlman wrote:
->>
->> Implement the sysreset get_status() ops and return same value as the
->> existing get_reset_cause() helper used for DISPLAY_CPUINFO. Only include
->> the ops in U-Boot proper to avoid increasing code size for xPL builds.
-> 
-> Does excluding xPL build guard break any XPL size constraint? Otherwise, I would
-> avoid it, to have a driver with the same functions wherever it is built in. It
-> can be added later on, should constraints require dropping unused functions.
+The series includes:
 
-There is currently no use for sysreset_get_status() in xPL, and my recent
-rk3562 branch push failed due to xPL size limits on rk3288-popmetal. So
-including this in xPL would mostly just waste space for no real gain,
-or do you have any specific use-case in mind?
+  - Clock driver support for Nord
+  - Pinctrl driver support for Nord TLMM
+  - USB HS PHY support for Nord
+  - Configuration updates required for platform enablement
 
-> 
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->>  drivers/sysreset/sysreset_rockchip.c | 52 ++++++++++++++++++++++++++++
->>  1 file changed, 52 insertions(+)
->>
->> diff --git a/drivers/sysreset/sysreset_rockchip.c b/drivers/sysreset/sysreset_rockchip.c
->> index 27ba4ee0667c..4b10d6bb762e 100644
->> --- a/drivers/sysreset/sysreset_rockchip.c
->> +++ b/drivers/sysreset/sysreset_rockchip.c
->> @@ -11,8 +11,19 @@
->>  #include <asm/arch-rockchip/clock.h>
->>  #include <asm/arch-rockchip/hardware.h>
->>
->> +enum {
->> +       GLB_POR_RST,
->> +       FST_GLB_RST_ST          = BIT(0),
->> +       SND_GLB_RST_ST          = BIT(1),
->> +       FST_GLB_TSADC_RST_ST    = BIT(2),
->> +       SND_GLB_TSADC_RST_ST    = BIT(3),
->> +       FST_GLB_WDT_RST_ST      = BIT(4),
->> +       SND_GLB_WDT_RST_ST      = BIT(5),
->> +};
->> +
->>  struct sysreset_reg {
->>         unsigned long cru_base;
->> +       unsigned int glb_rst_st;
->>         unsigned int glb_srst_fst;
->>         unsigned int glb_srst_snd;
->>  };
->> @@ -38,8 +49,48 @@ static int rockchip_sysreset_request(struct udevice *dev, enum sysreset_t type)
->>         return -EINPROGRESS;
->>  }
->>
->> +static const char __maybe_unused *rockchip_sysreset_get_cause(u32 data)
->> +{
->> +       if (data == GLB_POR_RST)
->> +               return "POR";
->> +       else if (data & (FST_GLB_RST_ST | SND_GLB_RST_ST))
->> +               return "RST";
->> +       else if (data & (FST_GLB_TSADC_RST_ST | SND_GLB_TSADC_RST_ST))
->> +               return "THERMAL";
->> +       else if (data & (FST_GLB_WDT_RST_ST | SND_GLB_WDT_RST_ST))
->> +               return "WDOG";
->> +       else
->> +               return NULL;
->> +}
-> 
-> As already stated in the RFC I sent [1], neither the glb_rst_st register
-> bit-flag definitions nor the logic on how to handle them are common across
-> Rockchip SoCs.
+Changes in v2:
+  - Drop DT patches; they will be synced once the corresponding changes
+    land in the upstream Linux kernel
+  - Drop Nord-specific defconfig
+  - Drop ELF 4K-alignment support changes
+  - Add USB HS PHY support for Nord
+  - Retain only clock, pinctrl, USB, and platform enablement changes
+  - Address review comments from v1
 
-Please be explicit, from what I can see in TRM for the mentioned SoCs,
-PX30 and RK3308, both have similar status stored in bit 0-5.
+Link to v1: https://marc.info/?l=u-boot&m=178695918491771&w=2
 
-> 
-> [1] https://lore.kernel.org/all/20260920-reset-v1-0-42820216369f@gmail.com/
-> 
-> Possibile approaches I see to overcome the issue: add a bit of information into
-> rockchip_sysreset_bind() arguments to instruct the sysreset driver on how to
-> decode glb_rst_st value; implement rockchip_sysreset_get_cause() at mach level
-> and pass it to the driver as function pointer arg of rockchip_sysreset_bind().
-> Other ideas?
+Thanks,
+Aswin Murugan
 
-This series is trying to move away from using arch/board specific
-functions. If we need to extend with support for the finer grain reset
-statuses, it should be handled with logic in the driver. E.g. checking
-compatible of CRU ofnode.
+Aswin Murugan (8):
+  clk: qcom: add GCC driver for nord
+  clk: qcom: add NEGCC driver for nord
+  clk: qcom: add SEGCC driver for nord
+  clk: qcom: add NWGCC driver for nord
+  clk: qcom: add TCSRCC driver for nord
+  configs: qcom_defconfig: enable nord clock drivers
+  pinctrl: qcom: add TLMM driver for nord
+  phy: qcom: snps-eusb2: add Nord compatible
 
-> 
-> In both of the cases I would probably feel that the mach area is a better place
-> to implement get_cause() instead of sysreset driver code. Of course, we would
-> lose static advantage but with LTO it is probably a minor issue. Anyway, I do
-> not have enough deep knowledge of U-Boot architecture.
+Bartosz Golaszewski (1):
+  dt-bindings: clock: qcom: add the definition for the USB2 PHY reset
 
-We should avoid new uses of arch/board functions in U-Boot proper, as it
-would hinder a future possibility to use same U-Boot proper binary on
-multiple SoCs. We are not even close to have that possibility but normal
-handling in U-Boot is to use driver model and check compatible to handle
-SoC specific parts.
+ configs/qcom_defconfig                        |   5 +
+ drivers/clk/qcom/Kconfig                      |  43 ++
+ drivers/clk/qcom/Makefile                     |   5 +
+ drivers/clk/qcom/clock-nord-gcc.c             | 165 +++++
+ drivers/clk/qcom/clock-nord-negcc.c           | 186 ++++++
+ drivers/clk/qcom/clock-nord-nwgcc.c           |  91 +++
+ drivers/clk/qcom/clock-nord-segcc.c           | 137 ++++
+ drivers/clk/qcom/clock-nord-tcsrcc.c          |  88 +++
+ drivers/phy/qcom/phy-qcom-snps-eusb2.c        |   3 +
+ drivers/pinctrl/qcom/Kconfig                  |   8 +
+ drivers/pinctrl/qcom/Makefile                 |   1 +
+ drivers/pinctrl/qcom/pinctrl-nord.c           | 615 ++++++++++++++++++
+ .../dt-bindings/clock/qcom,nord-negcc.h       |   1 +
+ 13 files changed, 1348 insertions(+)
+ create mode 100644 drivers/clk/qcom/clock-nord-gcc.c
+ create mode 100644 drivers/clk/qcom/clock-nord-negcc.c
+ create mode 100644 drivers/clk/qcom/clock-nord-nwgcc.c
+ create mode 100644 drivers/clk/qcom/clock-nord-segcc.c
+ create mode 100644 drivers/clk/qcom/clock-nord-tcsrcc.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-nord.c
 
-Current sysreset driver is not bound to the CRU ofnode, so checking cru
-compatible may hard. However, it could be a different/future direction
-for this driver once we need SoC specific handling.
-
-Regards,
-Jonas
-
-> 
-> Regards,
-> Massimo
-> 
->> +
->> +static int __maybe_unused rockchip_sysreset_get_status(struct udevice *dev,
->> +                                                      char *buf, int size)
->> +{
->> +       struct sysreset_reg *priv = dev_get_priv(dev);
->> +       const char *cause;
->> +       u32 data;
->> +
->> +       if (!buf || size <= 0)
->> +               return -EINVAL;
->> +
->> +       if (!priv->cru_base || !priv->glb_rst_st)
->> +               return -ENOSYS;
->> +
->> +       data = readl(priv->cru_base + priv->glb_rst_st);
->> +       cause = rockchip_sysreset_get_cause(data);
->> +       if (!cause)
->> +               return -ENODATA;
->> +
->> +       strlcpy(buf, cause, size);
->> +
->> +       return 0;
->> +}
->> +
->>  static struct sysreset_ops rockchip_sysreset = {
->>         .request        = rockchip_sysreset_request,
->> +#if !IS_ENABLED(CONFIG_XPL_BUILD)
->> +       .get_status     = rockchip_sysreset_get_status,
->> +#endif
->>  };
->>
->>  U_BOOT_DRIVER(sysreset_rockchip) = {
->> @@ -68,6 +119,7 @@ int rockchip_sysreset_bind(struct udevice *pdev,
->>                 return -ENOMEM;
->>
->>         priv->cru_base = cru_base;
->> +       priv->glb_rst_st = glb_rst_st;
->>         priv->glb_srst_fst = glb_srst_fst;
->>         priv->glb_srst_snd = glb_srst_snd;
->>         dev_set_priv(sysreset_dev, priv);
->> --
->> 2.54.0
+-- 
+2.34.1
 
