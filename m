@@ -1,125 +1,131 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3098CA5FA1
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 16:29:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94FFCCA5FA1
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 16:29:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 801D280E7B;
-	Mon, 28 Sep 2026 16:29:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 51526606EA;
+	Mon, 28 Sep 2026 16:29:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UPMxb4u6J1Kc; Mon, 28 Sep 2026 16:29:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org B8FD580E84
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790612958;
-	b=bSEicwkaTnnCFiykre40PqFevpJB86l0RJpt77GThGyEKoVtsnI0mciYX6k7m4qmpduJ
-	 MGCCqaPrVoDihIfntNbRsrWetBlHD/rDHYJGEegpYQlViceVqzDxCUgJcKIqo35I4F64H
-	 5YFhGc1vldDl1/pIrcIoSPraFtL622GjSQzIpnxfIq28XjVzbZ/wobap3ZX0zEb6ghAtG
-	 lTIhb8L8JebwVAz3sg/0qXgbf1+auNHUb5zAtKMLoBORCXU7PFA8UTgDmyyF2Z6ecmcp3
-	 Xl+VJSwh5+ogxd/448ZTTo3UqeHR+qPvHDBQXl0cBwdlnAinfn5Sdo/d8PxnxzT62aA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fpJWJwlKZfXS; Mon, 28 Sep 2026 16:29:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A4930606C2
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790612974;
+	b=NDMTgkq+twfiTLr2WX9eSPBJJDkJsXLmHXgUf6tsy1BtjySHrxf1ut2RufiJUo232sfA
+	 85dNi2eOVzJHU0PM+6IhCqLcf/WoxZbgegiKPWJw+BCU8TXr+IJ6NSwfynMCfZflIUNKh
+	 Z2fUFKLJoOldCI/Nn6KemZhlXG1ITJxla3jDVMAzz0yS231QOwxbknSp1Z9jRenWF7TEd
+	 eT6KjILhFDK8/9YVFfPHsyWOPEqFMqubnjeGlbwWHA9YiK8PPYD6o1XRhkne4ybqdhriY
+	 0IVlrUu9MaHDP7lUXaxgM2xfe0cDWB03VMvK1H7DyParXUAS9uBimiNIEGE3obMxhCg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790612958;
+	c=relaxed/relaxed; t=1790612974;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=x8hiItQy/lSh9x0fC0v00F3zJ2xPBR6YCZujyYB7Lmo=;
-	b=ZYXiDoaBvjzG1Aa2djfkvoFjLjfDRvMGTGS+cb93e7RO/1hg9vgxCoBGWpCHD9RokA9u
-	 5uh4ha5M2wXaWjydEg9rIfnM96Y2qg8ZiQe6VUOqwKRzknLvJxHeMLc/cykOWXKMx8iR3
-	 0kd3Jhnh73WmgP9xOxYdljSm5I5KNk+fQLaJ1vb/J9W/jsYZI7oSLcgIFZtEmz+M+QlOx
-	 jFY6eL2MY2JyKJQPAmE0L6x8/WjqwgT8aMErdbkaCIH4fxautalXPGn9QbYdyXcPNcDk6
-	 r7/t/7ruGXHlongWz1B/lDqEwTTrm4QxGb5+QAEbojRvSOpED1erQ0sHRMVKjWOr/cw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=54PfNBVw9Mgz5Ebz2CcO1nEk5ADAZrgjM1MF6Ph6ubM=;
+	b=VDzUVix1WyikxsPVca/QAs7CWvqZOeht0njEDnm4ZzcovWuXNtJ8scm++b5GlAx+lDnw
+	 GXZ99EKfU3QFQjOtozpFTIr7HPPosE0giCRgUWAnD1QpIPZ7bK3RnBI34n2nfUe9mLcqt
+	 4ZGPUmQVOrVIIBP+B3iW5WnC/i7GRDErakPdObDWykaoJVNrXc3uRc0sf3OSHSo40rmqz
+	 Ib4oxLzdzbIoHNvUkET2T+wQODUU0bhuJ8ABaB/518IDBoHhkczNbpAYrQRpCydSMM+ct
+	 EcIJ+rAP3SsmcToRVdNX/AIq3/aG3V9+hnkm4RBzdDUFkzukYRiCf5kEs6tpLi4m8eA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=free.fr;
+	dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256 header.s=smtp-20201208 header.b=YcwJ+who;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790612958;
-	bh=x8hiItQy/lSh9x0fC0v00F3zJ2xPBR6YCZujyYB7Lmo=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=QE441vUNAQI4UJjE/rdKpxhTPlQjMVKZU8lMyTmuEh2hMySi2j3E+MV7/mZ/wPHrq
-	 wwey/60x3bpg/TyEAxStwfRzswM+nMY+hL5PbBpn0/XTX0CsqD1QkslsG1I5VY1ssB
-	 Oe5b++PE4/sr0HKEJ1RRs29qndkpHqMhIrXOFCsLo7xCF+4vQZm/WU6EYU4rlti3Cc
-	 2bSPputPdRo3KZN1FirDZfr70qw0TZticPobj+FEdXWvZVFR7vmfLvL0iLwqDGzN5f
-	 CosM90zHXEVN25LAo8oDIVSpkEp7ZUXfPkuBcdf5+CW/HI8nDIlh+Ir3+d2Wzr9740
-	 eE6ewWmoM4Svg==
+	d=lists.u-boot-project.org; s=default; t=1790612974;
+	bh=54PfNBVw9Mgz5Ebz2CcO1nEk5ADAZrgjM1MF6Ph6ubM=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=KHNrBKbVNyBYDmiWp4GyIk1Mq3J+LEzNgC1+9m9MgIFu4YZvRp6hz+SNPAmDqdnGj
+	 Rl6CFEKXVPGzfeJsoxik6ljuzLV6JLNVN1RviR5bEjOkXih/Xs758qg9YJZm/yLho6
+	 kQVdZw05pvJCfK7ZFW48GbtQU7z59+yihok+JRCkU/U1iGk+/5Zrx35OYgulP+JL7B
+	 O8nlBSuUaOH+ig5oAybkm5rMgHEH6vR/b1+hmzPx24ApPgGwHiRUwjVXCa1UXLT1oz
+	 nf/LvK1Up+yANYtWMuDWDq6EZ720w2OAmph4zMCchlrJXXUpXYF5XvdDHgXtAUHgZE
+	 Lg/WjC0yszTHA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B8FD580E84;
-	Mon, 28 Sep 2026 16:29:18 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 4BBD63D8
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:29:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A4930606C2;
+	Mon, 28 Sep 2026 16:29:34 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8844532F
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:29:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3D58F406AC
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:29:17 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6E8BA606C2
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:29:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2D2ZR_Aj5UqV for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 16:29:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org D71AA406A7
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=212.27.42.1
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790612956;
- b=c5jw5tv01R/vj3DKHvecGAjb/CbaebHM+ayI+NevI7URq+0kZUTk0bT/Mzqo4shstoaG
- R/T+h9ypz4f6hr8uQE6TtQ/anAU0UZSJ7YNaMJ3ljA27PojfHEM20Q/vLwR9EZ3/4Buhq
- 7ztrKKxTowjRojUAwT8RbM0a5AJ+bguMTqjHszFmH/LTuYlan4b1GDoCL/x+TYOBTUmnm
- 0uI3JRrUjy0qrAxJnme+Rb0O/nly+UN57H/t8c1/+sb2v1NEhg4xlNdXXnYYnF8pB+Fwb
- ACXTInSKNAo2Hcd3VEEc21sBIO2InkIpDsS8QXbCOZqZVsYu6TAaFRHsKtaceFAYqFA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5XFs3G9UPK44 for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 16:29:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A12B1605B0
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=212.27.42.1
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790612972;
+ b=Dw4k7Ub9h9+dRwzjEVB3JsAPT9/Y5lRuieB0PMZykgM4iAyormzMzVaTuP/WY4z6h/gT
+ MuncRSRsw+KuWf/l9ZRuEWDXIiFp6cAKLy5kkxT1oDSEB0Xi4E4ax5YGvy1KnI3cTB53H
+ Pk7P8DZo96M3MNMuim1uiVEAjLj5VgeMyxvFgBdFDOxWlGHHPnWZxFooSrw5kiXJyFIF7
+ SIB8kP8N6NLnR+WSAV6ATn2xFFUt2yyQT/hYn3Wybpe9aG4pjBtjoEk/Aos7Zcs1GUEY4
+ AO6kcH21MRjVzQ3ooVs2WVIggPIxGqmMN1wi9xWY05Bwgv+5Qa6QcfwVmsFITDSzS0g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790612956;
+ c=relaxed/relaxed; t=1790612972;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
- Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=x8hiItQy/lSh9x0fC0v00F3zJ2xPBR6YCZujyYB7Lmo=;
- b=Ot0VA9iOc5HYt2aAUt3SHiuRuUELsduR5vMRwwSmA2rE2DhnJ7bkrzeFO1jlpUCThsAl
- xCfclOr2h1tP2vjJieD1cqYljfE1Yp6N+mCQVHBBhXLArNIaKEvwUacmBvVCO7E2ugjET
- FoN+1cS1Tr67rhai5oktDySFK4RnUviG/IttipCVlGb4y2aZUBTMpPKlnU7Fw+CHwjoHU
- CEjwzKvBv+U4MH41uN/vTf3BdmdOb9r7DiSU06XfY03vSYPmSjcLFsF7PC59Q6PEhGPBv
- zkOxn/KWv+6qnET6baBhdefex5Il2O/eo1R0EP4bLUORzJiq8wOLtNSPpTxNogkvg7A==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding;
+ bh=54PfNBVw9Mgz5Ebz2CcO1nEk5ADAZrgjM1MF6Ph6ubM=;
+ b=VbWlX7T/0fTWW/MhPkl5r0Cra2sEuafHiHeoyWWB4TekcuC+lmZGUoV9/qMNOdJkNkbQ
+ vVdeIWGMMxY8QW35KwANdkqw6yRdSwuW3CcNhaHrGcUVjhRvFHm5MHtLM+0fkKdkTeuLI
+ O22jdGS9cl2BH1yh4fYfI4a32w2f+A+ERQQ3GJGQq+GWuEgStwTP5f3QB2rfcWoDnzNeS
+ K1bYsNTgf0eAtrcEIHHMB5O6OqW8zdtLAPkARMqBnnQEUfshRJDLv5Kg4aKV4ZksS7FRJ
+ 8D9KfxDAWqkvEW4zF4sfNg9ij4/XoqzZt2hb59+HnZNWyUwGWJxM2boIwWbuQWtKmHA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=free.fr; 
  dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=gEXMlyMk; 
+ header.s=smtp-20201208 header.b=YcwJ+who; 
  arc=none smtp.remote-ip=212.27.42.1
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
  helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
- header.a=rsa-sha256 header.s=smtp-20201208 header.b=gEXMlyMk
+ header.a=rsa-sha256 header.s=smtp-20201208 header.b=YcwJ+who
 Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D71AA406A7
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:29:14 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A12B1605B0
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 16:29:31 +0000 (UTC)
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id C0BB5B00576;
- Mon, 28 Sep 2026 18:29:06 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 752FBB00576;
+ Mon, 28 Sep 2026 18:29:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1790612953;
- bh=tdvxleiPXPGG0pLTNOphf8YJ6iechdfQ1XAnAr7vKSA=;
- h=From:To:Cc:Subject:Date:From;
- b=gEXMlyMkYOVfMRBNBxJL8RkOZA5UKE8XDVbi185pageiDI+3adkK1aMIgbMuf81qs
- UTgBTAa5fUIHaBfQd+ZiwlMpJWJL8PEzo7pPFnb9l5I4PkwcB97wV31YctLNkdKg49
- 5nuAaVZWI2FYLjrB44SWQwv9LQiRYrfOMK3av11LeY+IzXZ2LwvbIsDYpmGMF+Ubjb
- Y0UkEQ4XhyQdcBuaqjH/ObrC7En+UjlOOszH2eEgY1H08EK5LMJBazlLX2TbAxvMLa
- wix2L0n+KCP758oVLp0CMHa0z0PoJm/LZsLl71mcuQ3S+6Jgi9yEWbexFedhrBMkyR
- wZ21t+Ox6t/3w==
+ s=smtp-20201208; t=1790612970;
+ bh=04ME1mEMXoB4WoHNRouiS2d20nQ3cAn9LdQ32jAo4bA=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=YcwJ+whobGvxZYpUnn0RE40jolXcyBPot2OgkTCrH5IGHfZF2subsF0kZV92cAAnA
+ lH5V9MORzYdHF3HoGGdl8fWob0+K8VexWFAn3WLBq8jD5IWZrmcl1RtVFb5Ih8etRT
+ qF4ZRMHWpc7RiyIhIMAIzA7ZFp5luD6Pnw8VmHjW/VL521j+e5S9SzKpj38l7V6jkc
+ gIbkknGKz0GJ/zlpVxkO34aovNK6qJxjMhn/OA+p0T7RKEm7XShgIv6jEjyzVoALh+
+ xcBu2g0OuyfClYCpmyCJ9+JuPK9jXJ4CPWmpBe1EJLgki0oiuWpoKYab5LYliQOtNQ
+ 1DOJ6PzkdaODA==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
  Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v1 0/4] pmbus: read back the VOUT_COMMAND setpoint,
- fix the nbxv3 VID handoff
-Date: Mon, 28 Sep 2026 18:29:00 +0200
-Message-ID: <20260928162904.1143614-1-vjardin@free.fr>
+Subject: [PATCH v1 1/4] power: regulator: pmbus: check the device in the
+ exported helpers
+Date: Mon, 28 Sep 2026 18:29:01 +0200
+Message-ID: <20260928162904.1143614-2-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260928162904.1143614-1-vjardin@free.fr>
+References: <20260928162904.1143614-1-vjardin@free.fr>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -135,41 +141,49 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+pmbus_regulator_read_temp() takes any struct udevice and reads its
+private data as a struct pmbus_regulator_priv.
 
-On nbxv3 the VID handoff compared READ_VOUT with the fused core
-voltage and raised VOUT_COMMAND by the difference. READ_VOUT sits
-below the setpoint by the load line (droop) the MPQ8646 applies from
-its NVM, so a module fused 0x14 (850 mV) got 875.8 mV: the core ran
-above its fused voltage.
+Add a pmbus_regulator_dev_priv() in order to return the private data of
+a device for which driver uses pmbus_regulator_ops, the ops every PMBus
+chip driver installs, and use it in pmbus_regulator_read_temp().
 
-The handoff has to compare and verify the setpoint instead. PMBus
-exposes it as VOUT_COMMAND, which regulator_get_value() does not
-return:
-
-- patch 1 makes the exported PMBus regulator helpers check that the
-  device is a PMBus regulator
-- patch 2 adds pmbus_regulator_read_vout_command()
-- patch 3 tests it on sandbox, the patch 1 check included
-- patch 4 makes the nbxv3 handoff write the fused table value as is
-  and verify it through VOUT_COMMAND.
-
-
-Vincent Jardin (4):
-  power: regulator: pmbus: check the device in the exported helpers
-  power: regulator: pmbus: read back the VOUT_COMMAND setpoint
-  test: dm: pmbus: test pmbus_regulator_read_vout_command()
-  board: nbxv3: VID handoff writes table value, no droop compensation
-
- board/nxp/lx2160a/nbxv3/vid_handoff.c  | 77 ++++++++++----------------
- drivers/power/regulator/pmbus_helper.c | 64 +++++++++++++++++----
- include/pmbus.h                        | 14 +++++
- test/dm/pmbus.c                        | 41 ++++++++++++++
- 4 files changed, 137 insertions(+), 59 deletions(-)
+Signed-off-by: Vincent Jardin <vjardin@free.fr>
 
 ---
-base-commit: 2b8902913c19eb581fb0d567201c09b8fa46ac74
-branch: for-upstream/pmbus-vout-command-v1
 
+ drivers/power/regulator/pmbus_helper.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/power/regulator/pmbus_helper.c b/drivers/power/regulator/pmbus_helper.c
+index 4763470442d..1809c6cdfb5 100644
+--- a/drivers/power/regulator/pmbus_helper.c
++++ b/drivers/power/regulator/pmbus_helper.c
+@@ -144,6 +144,15 @@ const struct dm_regulator_ops pmbus_regulator_ops = {
+ 	.set_enable = pmbus_regulator_set_enable,
+ };
+ 
++static struct pmbus_regulator_priv *
++pmbus_regulator_dev_priv(struct udevice *dev)
++{
++	if (!dev || !dev->driver || dev->driver->ops != &pmbus_regulator_ops)
++		return NULL;
++
++	return dev_get_priv(dev);
++}
++
+ int pmbus_regulator_read_temp(struct udevice *reg_dev, int *temp_mc)
+ {
+ 	struct pmbus_regulator_priv *priv;
+@@ -153,7 +162,7 @@ int pmbus_regulator_read_temp(struct udevice *reg_dev, int *temp_mc)
+ 
+ 	if (!reg_dev || !temp_mc)
+ 		return -EINVAL;
+-	priv = dev_get_priv(reg_dev);
++	priv = pmbus_regulator_dev_priv(reg_dev);
+ 	if (!priv || !priv->i2c_dev)
+ 		return -ENODEV;
+ 
 -- 
 2.43.0
 
