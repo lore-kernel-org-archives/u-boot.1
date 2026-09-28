@@ -1,195 +1,160 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A852CA5FA1
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 22:43:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33AC2CA5FA5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 22:43:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1CBF880ADA;
-	Mon, 28 Sep 2026 22:43:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E1059606EA;
+	Mon, 28 Sep 2026 22:43:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vD5Ohttk2CZS; Mon, 28 Sep 2026 22:43:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 813D380A50
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790635412;
-	b=tQ0BECR6YXnF3KxgivysXni6xrxJCcbgWhht3vGUfjxNnkJfqlY9MUk2IkpGtx8Z3UKI
-	 Gqh8UYh1jgftvgDWGmVg7ZtyQSbcZowoekKk3ixzGn1J1yLpAgdMJrwCb+c1UXbCH6wc5
-	 ZSWthnu2d2COYsrmyziELF4cd8EbhGuFnyPzGRygshkaSZ/fXiUbjR8iOovovvRJFL4r1
-	 BpnkdLri7IZNmqCGa/tUkZUsHJvBZFcwUzlLpXfza7J0KrILD58YE00PfbwtTU/0hWGn0
-	 gPT3i8SIQIfhoC98V6eneMWK7Nd/DMTvYWUxQkkrN/NG/q2AI9qoB7VSdDE9/w+w7qA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Gmd8HBWnwOw4; Mon, 28 Sep 2026 22:43:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0A07560614
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790635438;
+	b=LcjFvr4gcK9YpokfnEZ+crwMncjZP6F3Ayg0hhPQb8X3UJMfsETl59FLMUX7V3XbWexi
+	 F57RCmxBsh0oq/G2cH/O5I1ABjD/Q83JxIxd5wl5mwaCgDIF8R9UHcciWdWqsueubHcaC
+	 vD+mO1J+/zFAWPfHJYxv3VU9KpLZf/aFlztkLe4+sevMbauYLoWMBI2zp+5CniRowFTH5
+	 P2Vp1uibEjsa6gF07wz4K8LJbjViIBRCq3nbECIHPbwfDrIddQWPfq79ThtfwUHO4Jz+E
+	 hSh7BXsjVxhRAYW+YyB+tdzveRiODfvLvqsKVpcrlAdujJAxrGOiU7IT3d0rX1P1zjA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790635412;
+	c=relaxed/relaxed; t=1790635438;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
-	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=6Km1WyJ0muBos2YU6T+5d8bqFwKedLPnLEmw4aF+G4k=;
-	b=C5iRcq+v9ykoFv5QO1vE96whlFPBw6hPQzfvIftF94qntQ4JnJiECVHFmhzcd0hqcuBq
-	 jVxKBd05aeLrKHQ9zNSVRkgFhPrl84hZeWdjWk8gWmcCeUwlrPUFGpTQ4ZT6Fs8uVznJR
-	 d4GAD7qNuPMXRNytx1GZ9LIxJaZ9qnFbR+CIDbrBdvSR9dY7WTTq03gkAAjbqASQGwDGj
-	 hKbwY+VlDcNci7PQN7VxTtYjAgl3EhPHu2hqS6ccIPCEbTr/LsTZGh7/r6svhRdFx58C+
-	 mA/oQ0bVn3EW51snGBK+dvgp47sg38LoLu20HUri8PMiQ5shDK9MiA6V9tdHi/n+USw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=C3fGUrmRFc3WGNWjxmDjd6tiiA++H249S8w+k/evXdM=;
+	b=tBYCvUByxyyUhTBm2AxhxXFnZMuhwu1iuAak4oXpASmR6O2Qp2vBgq4JCkDsIbeysgeO
+	 3N4UpakQiyL9GpUtv624zIhw9gBzfar+Bk6uFxuF1ukXzmosHlWtTK5usBfk58wV5zUN/
+	 pf2rMC+VRybFhhuEn5LWqncIWAfNzLb/QiCSYEGNJ1bxBKTbAXzwi3L2ctqPSRDc3dbWV
+	 4ocsGwgrixqHJKzszleV8Fif1AMn8DDo/tMpDCKfz7kJ6Sak9uJuXlbSJs5vOE4RrABAq
+	 PzZKFXz0HRVk4Ifbjgk3UFaOWfMOWXBssPr/TmTF5wOYsno9RfrmTl+ZtYORYnSlcZw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790635412;
-	bh=6Km1WyJ0muBos2YU6T+5d8bqFwKedLPnLEmw4aF+G4k=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=IPDqvRcg7n/XdJRWNKD6id31QNWJNcNmCVW9eIyA3F4I3JCOspo2EBCkze4p991Oo
-	 0aB1yXVe3r07AQeGPmHl8Q2TX/9JSSKB5LKTQ6xyJCzeiq8VvBiiPLMBoQHyv3B1LZ
-	 3HF6l1CXzhgRjnZJDEj8K908rUBnw6n7ahdefBibZLYnQHJQMgLeRhXBOayZxYxdCW
-	 I3hyOwan09Mhex1Dx+vi3vQdnQl6kz15LodUhZNSLqsNlXLa/7ejDEiB3v5Gci5mo6
-	 w2MXumYpDpS/3RF+Q0vnycT5n7vGRUlp1nBEVaCfDtFlpbM17oMdqs9+VCIlwYhs8Q
-	 0Di98yUxJtUFQ==
+	d=lists.u-boot-project.org; s=default; t=1790635438;
+	bh=C3fGUrmRFc3WGNWjxmDjd6tiiA++H249S8w+k/evXdM=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=nwzcp4O3JxVBq6HwEq1G9QLCLLsiNceB6a3hSa27JxfG0f8HUzp5sYeACFkfaXHJO
+	 9VKuJU8xBVl+FG134CVlzSkh2/5prk0byETFMS7ZqPnyVfU1PF1uiQPs0qXkVwu+RO
+	 3zSV6FBw8Q7DBTqhoch6AJ4J4YRbTqc1hV5KiYOukFPfxnAZ/uvp5pSF2NUJ3Er8U/
+	 PotbLYKqKbZVSgpi5PND+BYxo5+1sRa04ME0bsqVsIG9w19ZfH/EQU9Bp+58wrJSvz
+	 +Ih/A/EPeEIH2HpjkIMFHSxv/HLTo6OqVpoLNMWaKsSZtcAfsDPYuKrqZK9lODdKo5
+	 kkEkUppOI/03w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 813D380A50;
-	Mon, 28 Sep 2026 22:43:32 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 29AB2335
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:43:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0A07560614;
+	Mon, 28 Sep 2026 22:43:58 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E2F7561
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:43:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1B6B640090
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:43:30 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id D41D0403C5
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:43:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sKUQJzzJLOwu for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 22:43:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 56EB84008A
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:31::2b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790635409;
- b=rP2H34yslUgp5ZYgkli2iNYTPm1RxPNNePLcHmNJTSs/i2wagVHot7keym/VNMp8BdcK
- qeQ7SF5sMIOV/EhpBUH4j0Ftvs+KrKcR0vAtVP/RE3XmpVNYW1KefVkGVpewPqASLas7L
- f731C9Mq6/jwKtHm0Z65yPSyxMKYBulY9wVFR7eemfMSjmJtT+pQn/K7X4eP5ZUhoGcej
- Ff8bgjoSOgFE9Tc5+GV8apEkUJOkRtjzl6/mhjnrRiH4pbYRw72ju1N1GZ2Wy+uRFSwxu
- Yn45Rk7og8IFqYdDkhIN2j5iu7vi0qbXWjF44LM9hVuQZGdGRJVevHGmKgIrNTdKFaQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6ant1ps-pF_5 for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 22:43:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 66FEE403B4
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:38::f"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790635435;
+ b=KnTZ9gnjMkAS87nkSEQSxbXkhS0+cuthx9b6SMxBQbIR7L75yIPvJTcAh1fD7XJmy4a6
+ khwvVL+HPor6BCctmJScEFVvfSRHmK1V1K14uk+3WEsNG0LWP9LmkYDDznAangIkrlDR9
+ N/oMaBst1wJ11cgiDWBqi0F69BGt5wnaDw3uoKFibS6Y7kd0PPb5JZnt7FxguqUgMeVbI
+ g1kXRkZ5cc93rxgnFLszEov278s1OUmH6gtjJWYHs217W+Sx3ev4iFc+BMoPq0YdqLstF
+ MSTmtM7mcK8+M8mkO+TREJaEOKI8VG+K3kNeWLNXaJl2kGN+73La5XRwCZ/9yJf55YA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790635409;
+ c=relaxed/relaxed; t=1790635435;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
- Content-Language:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding;
- bh=6Km1WyJ0muBos2YU6T+5d8bqFwKedLPnLEmw4aF+G4k=;
- b=OzQNK74acs9s0MHiLQgE4B6FKeVBDBy8bNu4IH/KLNQj0Wkb1x5exl7TCb5vl2fNgB2L
- 9WhSxDvW48hsenmMHVGhGcCTgXCFw71NEKOZTF9U3deyNia7mr21R51oLXNVuc1D6n56c
- aNvx8f6gaBzxm7orO5FAy3+8ubP7AevhcvE/5oHqBKeNVDICHuLsIiMMHZSvvxaPjvnqK
- j15JTl7XIAbPkxCMZbckqjMRDP5yYkw+LVSneI2+1PuVxx6QOsojnzafUWaDnBPXXnEfG
- 7EgztYDXbUglutfEjv9weIELLrZ83vP3KUhTKwnBJEiLDxrHEau3TzUbU1i/o9NqmiA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=none header.from=baylibre.com; 
- dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=Nly5gQjN; 
- arc=none smtp.remote-ip="2607:f8b0:4864:31::2b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:31::2b; helo=mail-oo2-x2b.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=Nly5gQjN
-Received: from mail-oo2-x2b.google.com (mail-oo2-x2b.google.com
- [IPv6:2607:f8b0:4864:31::2b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 56EB84008A
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:43:28 +0000 (UTC)
-Received: by mail-oo2-x2b.google.com with SMTP id
- 006d021491bc7-6d8d3336db0so481152eaf.1
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 15:43:28 -0700 (PDT)
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+ Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+ bh=C3fGUrmRFc3WGNWjxmDjd6tiiA++H249S8w+k/evXdM=;
+ b=LrHwwyJAwteNx+FVZ1qK+X8XFyqNp+Ql6n1z2p4/0NTkVgei/6rPtJ9CAs6HrO6Zl9vE
+ UdMqp6zKrXRl0IkX3JXsH1xvyb9B49e81DFvzKeFzOj/VDl1RLPW1EsoVllR3ESjEWb1s
+ A2xD9WeIJhHu4XE5JxHV8mEIKHR208NAJQASr7i6GywUm9vuEhZyXvNuLK/Vk1r7dI7Hv
+ /svl0g7aJX2S/CYNS5fCIKoSkgIxEGZO860rSSGKwBNVLQaY3AEPzh+j9n3ezhVRgl8i8
+ AAzqjNLGi8aNbg3fmMoCNbnt5Jg2BPyZ6vof5iYCwQC7x4yzpEHizquvSzBEKWd4jrw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=gmail.com; 
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=VutOkI44; 
+ arc=none smtp.remote-ip="2a00:1450:4864:38::f"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:38::f;
+ helo=mail-lr2-x0f.google.com; envelope-from=sochnev.v.74@gmail.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=VutOkI44
+Received: from mail-lr2-x0f.google.com (mail-lr2-x0f.google.com
+ [IPv6:2a00:1450:4864:38::f])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 66FEE403B4
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:43:54 +0000 (UTC)
+Received: by mail-lr2-x0f.google.com with SMTP id
+ 38308e7fff4ca-3a60e33d456so27235251fa.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 15:43:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790635407; x=1791240207;
+ d=gmail.com; s=20251104; t=1790635432; x=1791240232;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=6Km1WyJ0muBos2YU6T+5d8bqFwKedLPnLEmw4aF+G4k=;
- b=Nly5gQjNWcKZVRSth9B1Yck7zGY7F+FVPGE9OmZ8Bh6G2wHPS279p9mVWpqR2ovNN7
- 9S0aOSqb6dLztFVEyfqle1Bym22i2tD/BlD0NhYhuDMd4sHKPaAHBs1Kc04hiawesZa3
- Z4ZXXk358l1hxxCYHy0A+sDBQCr+g1z0xCJZA4HuRLUAa7NuBHFFQEy9Jw4TqDAPhvvm
- cGF6moV8D7z2MMTHwDWXAJQWhe7dGqMxnQPOnqypNuoU2004e1mO2DHyOn7ogtUyMDRO
- r7M8chFN4icibkmc+oGrIUeOFHBlrKRjxqYl3N4IntwAqR+L18xB0nghEHS+FroMatcD
- gEjA==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=C3fGUrmRFc3WGNWjxmDjd6tiiA++H249S8w+k/evXdM=;
+ b=VutOkI44dUKBxw9XnoQmKTseGH2XPaizRKWyf6Y4Rg5+mRLM0DtAV0O1r8A0RRYIEN
+ cBdCjL/rLYhK//gL94J7x0CKCEFytGV8/szIG/1wGrXgSIbk3O3jURySZNYKlj0qSnCT
+ RV8d3m6pva8GyhitlUbqXvbDivQdmi9yMMCFXwIAW9wvdHBAF+W1LBJ48Ob5VE/owFQL
+ d5z9liRMLj1AZs2ottW4DSUsH3NKdhYHJyFsZirXZVGSu3Z+RfhlaCIoiIm+zvKvWDYz
+ +OLjTgjulyE+0WnYuFNoAEFApSF0mCHDQbhPH6Uq30fvJddmT1ZJe7AAhkqVE5tVsnhn
+ oZ8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790635407; x=1791240207;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20260707; t=1790635432; x=1791240232;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=6Km1WyJ0muBos2YU6T+5d8bqFwKedLPnLEmw4aF+G4k=;
- b=jX3Be3qlA2WI3Ghgzjrif6RIoQXIbd1QW+/ikr/r0zdr+fgEqgeGM0HGCcFjvQCbkh
- czkQPXIrz8YPeOL6qpOe/nsHoalMvuXj2XbJtapdLHlm6TR95g3f9OlVaaqJnZJLCtGS
- HM/5mWLO3pSJjuG5fYswVS9dhC7spIDZtVs4ysji6croPUm1N/rV2AczBemL8Ip9TJKP
- hUpsLzGeXo5MEhSCfgyZ//FZXocOLg7FdHsFCOeo7u2dNFZ1nAUFO5LEYP7vG++97waP
- WtSq2RlxsGLdj/LSPNvVda8136MjRJbV5ty8HxiOteUc93AVEbeDW0Gmx2nNYfSi3zdf
- 4Tug==
-X-Forwarded-Encrypted: i=1;
- AKwUvBz5okYgyZaw1lm8pGuW4qLGnlLZU7oXrL8YPqji2K7CvhCJOGtb+vDDD/46uw1AaDAbXCALYLM=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++m01xo/Qq5Y/m4AQY2nGj9I5QTxJkyjoJlqt5+8UxwQT0eLoRS/
- BOAnSGGX57xktPG5IW/bI6ONiU/uWr7fT0IU5CWuuxGpt/L8BxXUwuQsUJueHRy1Axs=
-X-Gm-Gg: AYBFou3Th5L43zUl6emfzeN6uvgafqaVnX/lxq4ER8C1qieId+XzJKfyZxVxNL2ykg3
- ysQQBJtbzz9n9z604pA9zQWNEIUghhWFNHSe2BzlwqcY/g8y3WyT2FGnpJHERUBb7RLU0sguWfe
- GGokimgHwHjwUq/UQUy7tMQHaPszael7W5EmxlBBUhKPJU7eAKxFPXZHixV/NQZXmRjgRpwPCbJ
- lDzXYNkl6I5HIk2WzUYbExx3EVdkOrLseunEjwDYuIlW/HNL07LJLsPXmyHkVsHRAbcblq/j7fT
- cwMy6/w8TNUxDOe6AAx3SEtLzhaLlZVKcLvFqdbZF0aY6rk8C5K8YM6RZi/vO7oPxgiOES861bx
- 2xbdmC8Ld/iC/uHgp4j0luoDx75pEQsZZsDFfr80iHd8PhMYltTIIMhPPUcGTPwjetKWNeoyFPf
- Qcms+W+omSOF+bboezkM5IG+bSGh8fsbj6F27K0GS9aDBcxnkEhJIvW1Fzk6cOX337M7+DVBCrv
- H/wIc4Hq61oBR1iPdHsh/R9ayWXHtyJyxkp9+Yc8k+f86U4
-X-Received: by 2002:a05:6820:160e:b0:6d8:ac5f:88af with SMTP id
- 006d021491bc7-6d8ac5f892fmr4328971eaf.33.1790635407677; 
- Mon, 28 Sep 2026 15:43:27 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:9b16:2a1a:ef3f:3700?
- ([2600:8803:e7e4:500:9b16:2a1a:ef3f:3700])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6d882bd143asm6950454eaf.8.2026.09.28.15.43.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Sep 2026 15:43:27 -0700 (PDT)
-Message-ID: <898e280a-7af1-4f0f-9d10-a7350e4579bd@baylibre.com>
-Date: Mon, 28 Sep 2026 17:43:26 -0500
+ bh=C3fGUrmRFc3WGNWjxmDjd6tiiA++H249S8w+k/evXdM=;
+ b=p6qY2DRhrl04mqGLjg112XH8gNZUIfgKrcIsNNAZ1SOBNZryIAoCmzRrvhcM3fvMJb
+ zMnlc50Y+cVyndC6cY+7P9tS+g0x6AOB/ff6P/4up2anhZ4FIW813aQnIISMAacKYKWs
+ 9B9jZQa+Omrh3LNaOnIyxCFjYgbAaMwDMNaadDcGyOaAtut/AyVDYx3OaIP0Luqz224E
+ Qe/Jv3YZxTSFKE/XiOt1KFfujUsNAPA32twpQUWqjjaZ8wYwQjNDJ+LNfEo+eUTNLncF
+ IE53iBX7t9QUt2x7Ge5lk1Q8rIfCtZyUY0CvxtrpD5VZDqiBrX4YLT3YjKyWPUnOFMQ7
+ d3ag==
+X-Gm-Message-State: AFq9FYIhnzYfGV3CRF+JhsWncCaehUeLnyVSiRtPxggsM7HrmXBb9ynQ
+ KvvdsuENxEmVC9KDzj9HAJZ1JLNQrXB1BtoQTXPI9TVgBeNtDlgNB+q1AHZSsZI=
+X-Gm-Gg: AYBFou1U/KyJAQC/joZi2vBau9VICsA+9qz46ye217zgpUn6Qh5V7ciShSq4YocC0ej
+ 9Y8sH394jZ4395rMxoF4AeWoKNiybTgjsCKPem1We444yzXNEcpuM7TuqvQkWkEDQpulKaPCeYM
+ /jVtPc4XdZMQixh3HtKDHXBcgU7naMbt9EK+tnKOCFITRQC5MZLXIXJVgdfIDGlJeFg0rTA3my+
+ NhHn/OHwy96hocmVABbFYKphRxpqI+fvNtnrLF5C0QX5C+DlpwJgYwpcoOZmmX8ib0ORkDx13bW
+ /xv3BZG0hGoLGlqEz7OzmvKFwjVayVH8Odjumkhz/lWNHTPw1qjI1+5/arzSFYnMIECmOVDFXTB
+ EqFrI3CPBmkZUy00iCArZ1RlAZe4kikX8egZmWszz7i8C9DoX+WdUJYTuu/5BbAML/W0AHGs8xq
+ M4E3dt9jsH4Pr08JUoCBuzeYKVCg/vprrhIbc19PdR/ADDJVU/LdudmzsRUb6t
+X-Received: by 2002:a05:6512:404c:b0:5b8:f9b0:5796 with SMTP id
+ 2adb3069b0e04-5ba2b2ae28bmr1028929e87.12.1790635432402; 
+ Mon, 28 Sep 2026 15:43:52 -0700 (PDT)
+Received: from fedora ([46.8.219.5]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5b9debb0eccsm902212e87.43.2026.09.28.15.43.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Sep 2026 15:43:52 -0700 (PDT)
+From: Vitaliy Sochnev <sochnev.v.74@gmail.com>
+To: u-boot@lists.u-boot-project.org,
+	trini@konsulko.com
+Cc: ansuelsmth@gmail.com, mikhail.kshevetskiy@iopsys.eu, sughosh.ganu@arm.com,
+ xypron.glpk@gmx.de, Vitaliy Sochnev <sochnev.v.74@gmail.com>
+Subject: [PATCH RESEND 1/2] rng: airoha: add support for the Airoha TRNG
+Date: Tue, 29 Sep 2026 01:43:37 +0300
+Message-ID: <20260928224338.505923-1-sochnev.v.74@gmail.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] arm: mediatek: enable U-Boot fastboot DAs on Genio
- 510 and 700
-To: Carlo Caione <ccaione@baylibre.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Julien Stephan <jstephan@baylibre.com>, Julien Masson
- <jmasson@baylibre.com>, Johan Jonker <jbx6244@gmail.com>,
- Macpaul Lin <macpaul.lin@mediatek.com>,
- Chris-QJ Chen <chris-qj.chen@mediatek.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Alexey Charkov <alchark@gmail.com>,
- Vitor Sato Eschholz <vsatoes@baylibre.com>,
- =?UTF-8?B?UGFibG8gU3VuICjlravmr5Pnv5Qp?= <pablo.sun@mediatek.com>,
- Arnaud Ferraris <arnaud.ferraris@collabora.com>,
- Suhrid Subramaniam <Suhrid.Subramaniam@mediatek.com>,
- Marek Vasut <marek.vasut+usb@mailbox.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Michael Srba <Michael.Srba@seznam.cz>
-References: <20260923-ccaione-upstream-mt8390-da-v2-0-8f264678ac29@baylibre.com>
- <20260923-ccaione-upstream-mt8390-da-v2-2-8f264678ac29@baylibre.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260923-ccaione-upstream-mt8390-da-v2-2-8f264678ac29@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -203,91 +168,197 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 9/23/26 4:17 PM, Carlo Caione wrote:
-> Prefer fastboot in U-Boot proper when the complete download agent fits
-> the BootROM SRAM limit. Its shell and boot commands support provisioning
-> and recovery beyond the SPL agent's flashing operations, without relying
-> on the installed firmware.
-> 
-> This variant requires BL31 and an external DDR loader.
-> 
+Port the Linux driver for the True Random Number Generator found on
+Airoha EN7581/AN7581 SoCs to the U-Boot driver model.
 
-...
+The Linux driver waits for an interrupt to learn that the startup
+health test finished. U-Boot has no interrupts, so the TRNG interrupt
+is kept masked and RST_STARTUP_TEST_DONE is polled instead.
 
-> diff --git a/arch/arm/mach-mediatek/spl.c b/arch/arm/mach-mediatek/spl.c
-> index 6f1ec052b95..120a94c6598 100644
-> --- a/arch/arm/mach-mediatek/spl.c
-> +++ b/arch/arm/mach-mediatek/spl.c
-> @@ -33,15 +33,17 @@ void board_init_f(ulong dummy)
->  
->  u32 spl_boot_device(void)
->  {
-> -#if defined(CONFIG_SPL_SPI)
-> -	return BOOT_DEVICE_SPI;
-> -#elif defined(CONFIG_SPL_MMC)
-> -	return BOOT_DEVICE_MMC1;
-> -#elif defined(CONFIG_SPL_NAND_SUPPORT)
-> -	return BOOT_DEVICE_NAND;
-> -#elif defined(CONFIG_SPL_NOR_SUPPORT)
-> -	return BOOT_DEVICE_NOR;
-> -#else
-> +	if (IS_ENABLED(CONFIG_MTK_BROM_DOWNLOAD_AGENT_UBOOT_FASTBOOT))
-> +		return BOOT_DEVICE_RAM;
-> +
-> +	if (CONFIG_IS_ENABLED(SPI))
-> +		return BOOT_DEVICE_SPI;
-> +	if (CONFIG_IS_ENABLED(MMC))
-> +		return BOOT_DEVICE_MMC1;
-> +	if (CONFIG_IS_ENABLED(NAND_SUPPORT))
-> +		return BOOT_DEVICE_NAND;
-> +	if (CONFIG_IS_ENABLED(NOR_SUPPORT))
-> +		return BOOT_DEVICE_NOR;
-> +
->  	return BOOT_DEVICE_NONE;
-> -#endif
->  }
+U-Boot can then provide /chosen/kaslr-seed, which KASLR requires.
 
-Could be nice to do the CONFIG_IS_ENABLED() conversion as a separate patch
-so it is easier to see what is added here.
+Signed-off-by: Vitaliy Sochnev <sochnev.v.74@gmail.com>
+---
 
-> diff --git a/configs/mt8370-genio-da-uboot-fastboot.config b/configs/mt8370-genio-da-uboot-fastboot.config
-> new file mode 100644
-> index 00000000000..5a85b26df0d
-> --- /dev/null
-> +++ b/configs/mt8370-genio-da-uboot-fastboot.config
-> @@ -0,0 +1,28 @@
-> +#include <configs/mt8370-genio-da.config>
-> +
-> +CONFIG_MTK_BROM_DOWNLOAD_AGENT_UBOOT_FASTBOOT=y
-> +CONFIG_SYS_MALLOC_LEN=0x9000000
+Notes:
+    The first posting on 2026-09-20 was held by list moderation (non-member
+    post) and never reached the list. Resent to the current list address.
 
-What is driving the need for such large allocations?
+ drivers/rng/Kconfig      |   7 ++
+ drivers/rng/Makefile     |   1 +
+ drivers/rng/airoha-rng.c | 136 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 144 insertions(+)
+ create mode 100644 drivers/rng/airoha-rng.c
 
-> +CONFIG_CMD_FASTBOOT=y
-> +CONFIG_USB_FUNCTION_FASTBOOT=y
-> +CONFIG_FASTBOOT_FLASH=y
-> +CONFIG_FASTBOOT_FLASH_MMC=y
-> +CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-> +CONFIG_FASTBOOT_MMC_BOOT_SUPPORT=y
-> +CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
+diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
+index bacb02630..3f829fccf 100644
+--- a/drivers/rng/Kconfig
++++ b/drivers/rng/Kconfig
+@@ -140,4 +140,11 @@ config RNG_EXYNOS
+ 	  case the LDFW (Loadable Firmware) has to be loaded first, as it
+ 	  actually implements TRNG SMC calls.
+ 
++config RNG_AIROHA
++	bool "Airoha True Random Number Generator support"
++	depends on DM_RNG && ARCH_AIROHA
++	help
++	  Enable support for the True Random Number Generator (TRNG) found
++	  on Airoha EN7581/AN7581 SoCs.
++
+ endif
+diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
+index 50622d470..c005231b6 100644
+--- a/drivers/rng/Makefile
++++ b/drivers/rng/Makefile
+@@ -20,3 +20,4 @@ obj-$(CONFIG_TPM_RNG) += tpm_rng.o
+ obj-$(CONFIG_RNG_JH7110) += jh7110_rng.o
+ obj-$(CONFIG_RNG_TURRIS_RWTM) += turris_rwtm_rng.o
+ obj-$(CONFIG_RNG_EXYNOS) += exynos-trng.o
++obj-$(CONFIG_RNG_AIROHA) += airoha-rng.o
+diff --git a/drivers/rng/airoha-rng.c b/drivers/rng/airoha-rng.c
+new file mode 100644
+index 000000000..a94161ad2
+--- /dev/null
++++ b/drivers/rng/airoha-rng.c
+@@ -0,0 +1,136 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Airoha True Random Number Generator driver
++ *
++ * Ported from the Linux driver drivers/char/hw_random/airoha-trng.c
++ *
++ * Copyright (C) 2024 Christian Marangi <ansuelsmth@gmail.com>
++ */
++
++#include <dm.h>
++#include <rng.h>
++#include <dm/device_compat.h>
++#include <asm/io.h>
++#include <linux/bitfield.h>
++#include <linux/bitops.h>
++#include <linux/iopoll.h>
++#include <linux/string.h>
++
++#define TRNG_IP_RDY			0x800
++#define   CNT_TRANS			GENMASK(15, 8)
++#define   SAMPLE_RDY			BIT(0)
++#define TRNG_NS_SEK_AND_DAT_EN		0x804
++#define   RNG_EN			BIT(31)
++#define   RAW_DATA_EN			BIT(16)
++#define TRNG_HEALTH_TEST_SW_RST		0x808
++#define   SW_RST			BIT(0) /* Active High */
++#define TRNG_INTR_EN			0x818
++#define   INTR_MASK			BIT(16)
++#define   RST_STARTUP_INITR_EN		BIT(0)
++#define TRNG_HEALTH_TEST_STATUS		0x824
++#define   RST_STARTUP_TEST_DONE		BIT(18)
++#define   RST_STARTUP_AP_TEST_FAIL	BIT(17)
++#define   RST_STARTUP_RC_TEST_FAIL	BIT(16)
++#define   RAW_DATA_VALID		BIT(7)
++#define TRNG_RAW_DATA_OUT		0x828
++
++#define TRNG_CNT_TRANS_VALID		0x80
++#define TRNG_TIMEOUT_US			100000
++
++struct airoha_trng {
++	void __iomem *base;
++};
++
++static int airoha_trng_read(struct udevice *dev, void *data, size_t len)
++{
++	struct airoha_trng *trng = dev_get_priv(dev);
++	u8 *buf = data;
++
++	while (len) {
++		size_t step = min(len, sizeof(u32));
++		u32 status, val;
++		int ret;
++
++		ret = readl_poll_timeout(trng->base + TRNG_HEALTH_TEST_STATUS,
++					 status, status & RAW_DATA_VALID,
++					 TRNG_TIMEOUT_US);
++		if (ret) {
++			dev_err(dev, "Timeout waiting for TRNG RAW Data valid\n");
++			return ret;
++		}
++
++		val = readl(trng->base + TRNG_RAW_DATA_OUT);
++		memcpy(buf, &val, step);
++
++		buf += step;
++		len -= step;
++	}
++
++	return 0;
++}
++
++static int airoha_trng_probe(struct udevice *dev)
++{
++	struct airoha_trng *trng = dev_get_priv(dev);
++	u32 val;
++	int ret;
++
++	trng->base = dev_read_addr_ptr(dev);
++	if (!trng->base)
++		return -EINVAL;
++
++	/* No interrupts in U-Boot: keep the TRNG one masked and poll instead */
++	val = readl(trng->base + TRNG_INTR_EN);
++	val |= INTR_MASK | RST_STARTUP_INITR_EN;
++	writel(val, trng->base + TRNG_INTR_EN);
++
++	val = readl(trng->base + TRNG_NS_SEK_AND_DAT_EN);
++	val |= RAW_DATA_EN | RNG_EN;
++	writel(val, trng->base + TRNG_NS_SEK_AND_DAT_EN);
++
++	/* Health Test runs only on the transition out of SW Reset */
++	writel(SW_RST, trng->base + TRNG_HEALTH_TEST_SW_RST);
++	writel(0, trng->base + TRNG_HEALTH_TEST_SW_RST);
++
++	ret = readl_poll_timeout(trng->base + TRNG_HEALTH_TEST_STATUS, val,
++				 val & RST_STARTUP_TEST_DONE, TRNG_TIMEOUT_US);
++	if (ret) {
++		dev_err(dev, "Timeout waiting for Health Check\n");
++		return ret;
++	}
++
++	if (val & (RST_STARTUP_AP_TEST_FAIL | RST_STARTUP_RC_TEST_FAIL)) {
++		dev_err(dev, "Health Check fail: %s test fail\n",
++			val & RST_STARTUP_AP_TEST_FAIL ? "AP" : "RC");
++		return -EIO;
++	}
++
++	ret = readl_poll_timeout(trng->base + TRNG_IP_RDY, val,
++				 val & SAMPLE_RDY &&
++				 FIELD_GET(CNT_TRANS, val) == TRNG_CNT_TRANS_VALID,
++				 TRNG_TIMEOUT_US);
++	if (ret) {
++		dev_err(dev, "Timeout waiting for IP ready\n");
++		return ret;
++	}
++
++	return 0;
++}
++
++static const struct dm_rng_ops airoha_trng_ops = {
++	.read = airoha_trng_read,
++};
++
++static const struct udevice_id airoha_trng_match[] = {
++	{ .compatible = "airoha,en7581-trng" },
++	{ }
++};
++
++U_BOOT_DRIVER(airoha_trng) = {
++	.name = "airoha-trng",
++	.id = UCLASS_RNG,
++	.of_match = airoha_trng_match,
++	.ops = &airoha_trng_ops,
++	.probe = airoha_trng_probe,
++	.priv_auto = sizeof(struct airoha_trng),
++};
 
-Do we need to enable FASTBOOT_CMD_OEM_PARTCONF and FASTBOOT_CMD_OEM_BOOTBUS
-to allow flashing a blank eMMC?
+base-commit: f61f50a79dab97c8a4109ee9c15b90bf6157d4e8
+-- 
+2.55.0
 
-> +CONFIG_SPL_RAM_DEVICE=y
-> +CONFIG_SPL_LOAD_FIT_ADDRESS=0x41000000
-> +CONFIG_SPL_MAX_SIZE=0x25000
-> +CONFIG_SPL_CRC32=y
-> +CONFIG_SPL_GZIP=y
-> +# CONFIG_SPL_MMC is not set
-> +# CONFIG_SPL_LIBDISK_SUPPORT is not set
-> +# CONFIG_SPL_EFI_PARTITION is not set
-> +# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
-> +CONFIG_BOOTDELAY=0
-> +CONFIG_USE_BOOTCOMMAND=y
-> +CONFIG_BOOTCOMMAND="fastboot usb 0"
-> +CONFIG_ENV_IS_NOWHERE=y
-> +# CONFIG_ENV_IS_IN_MMC is not set
-> +# CONFIG_BOOTSTD_FULL is not set
-> +# CONFIG_CMD_BOOTFLOW is not set
-> +# CONFIG_EFI_LOADER is not set
