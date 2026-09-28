@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 910D6CA5FA2
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 11:35:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6671CA5FA2
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 11:55:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5D31680D6E;
-	Mon, 28 Sep 2026 11:35:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3142A80D86;
+	Mon, 28 Sep 2026 11:55:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Hfwql1k4FYlK; Mon, 28 Sep 2026 11:35:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 85BB580D60
+ id QrYq4lZrbDw7; Mon, 28 Sep 2026 11:55:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 139DD80D73
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790595308;
-	b=sWlftE2nsy5kzaYZiT2sgRJFQ3AUEm5ns19RKT6YMseSusjJKLjeqiHsNQAOhAAZJm+0
-	 EtnlYdFrU7j/vLT9NoVQs7Nv3VWDmyKbEHTPfQJZAeJl+AnNh55D+rrzLVBFCBDF6Z1Bm
-	 HchpQzKtT6+/P6ZwAtDnVjiMcVa6JuUH344FkMJgYMP/ZOweujuu2O5MNwCk5Gv6hi4lD
-	 Ubu5vng+U4aTvqPNNc6myx1/qYM4WPCIH3pzktqYgOXuitwAHTgBaTB4+R7UC1MbZFKUi
-	 y0nLFYdWDWoGeFCtRvmk8gFQwctL7nKXR+sv9OsFWfp0St8xTNZPBmrtMiMlPjq3RhA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790596519;
+	b=ZmILbYlE+hT2ynGMrs3vX415K/CWxJg/daQaS+jDU+jkyG83fsofdsTCJ7aPQ1kx8pxJ
+	 fZHMg0Qm9k3jkvzOu2VIPX2ZFw2wEQy6Iy0aI4mhON8TqkzSLJpr4qBLhunGV5UZ3J6Hl
+	 qkjTs7KpaqDGUiX9actCyBo9GIIJ5vOlWjoVNA3e59xHvwShoosMqb3QGaURc6cVXQ1E5
+	 AxwRF7OzghqKAoL1BR2EG9zNuf/v1b1NpHHeQM7D0NJX4wRPXK+6ZvDRSS6+gf3PitTqS
+	 kF2WBxnWpDNcfXDQDMsvuCwpnqCHusclFYCmWlCuX3I6aGi2yH+YgoeLq+TxqZya60g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790595308;
+	c=relaxed/relaxed; t=1790596519;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -33,115 +33,114 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=zRyMvXK4nnnRRoDIgqjpt0OSjxuKZ+9XY5I+ei5Eq9U=;
-	b=Jn9w6Yv6B/8UAuEjYnoChLQDJJy+yjFmnAAm0RA7yFD1LCnq6gjp5lmnp/4lnfLacF4a
-	 LADJ877XCGhyQFnN4AW/JYIcrt3IZGusODzR1C3f8u+N3Ba5wIRgQGjxiuLkV/RhP6UiX
-	 bhkX8t2e/Lho0GquD3rp/pCBuxhvNZ36t4lbY9cWxV029Tl7alPStsnqPHAkAL1GjuJny
-	 bofcKSEiXxWnlFdNjnSssdWYULeE4YtJkBTpVz4lNA+VC8qgIcX3BlAisjGaoAk/4nWq1
-	 5wlWDm03Pv5OpdM0BOA/izfGPNx5cKp9aOgz/sCJn2roqc1jDmvYa/n0yDMjIrNHcGQ==
+	bh=T0Hcc1PDrH7R4eJgSztYTs6jUDXucLZmh8Tw+q7NVSg=;
+	b=lVMBVkihN4Absj+JWk90KijNGY7FOoDUPI/uyMGqitIQoPfpn1s/z7jvba5qKh9KzlsB
+	 jlAtBw5w6oFf9Ce9A8ehSrjTnsiSaYjQXY2xVrUNLUk8KBHVmyvt8ltsPnKwD+hwNveyS
+	 rEqFWprrbLfp3h5DZoVI+C3pl9Comzo+AWLn23UTSQJ2zTvtiUbDONODvPpVFoihVBshe
+	 jbdWPUoBYwJCraihFwb82eEHfZJmjK9ghGtpBfYLlXcevRTmiTa5/KFN799VfCaC8AYvX
+	 oOnlFo93U0ps4qR75V9rFCnWpSa9kzEvS5xhRzfkcMgU9QQ+VJtJW2U6OoAuI/ewiBA==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790595308;
-	bh=zRyMvXK4nnnRRoDIgqjpt0OSjxuKZ+9XY5I+ei5Eq9U=;
+	d=lists.u-boot-project.org; s=default; t=1790596519;
+	bh=T0Hcc1PDrH7R4eJgSztYTs6jUDXucLZmh8Tw+q7NVSg=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=BjKma7r+cwQHKoAwSmm9XEIpXEyzNoeF//hFWN+sKtkWYUUZjJrLp2U2yGhdwM/5B
-	 bknspjCgc3Df+phcYhJtEAmiehBgebucV1kW30Q0KtAaruWem0C4HJy+pzspA5yhU1
-	 TQ4iwFTs+r9q89xvJFecMBSRzjyST0O3zaul6NJJT+XFAmbgbfsYW7X5+zgs85/mFR
-	 IUZEvtEzvPfY2fAWIxL/lNjSIlLkh21kMq/qKw/GF18DXHn+SbnGQMFwzjEVFJc4Ac
-	 PngVsbCgH0hgZeoMIRT0UNKKeJ83wCiT4DeR/O4V5+aGHX2vT+koda+JTl4XJfI/BT
-	 ga6UHzeuqTYQg==
+	b=WCNBnf9nZMFDKm7VquLglLEqvkzGxjyQZflZ0iRiLvRk32aeFpDdjvG36kDaojlcy
+	 81vt6nB3VQhJT/qiBLO2dvoF3cOYSWIpqMS5EIMKXeeyCpvUhzL8FAxC+SQ/Ne9Q2m
+	 wgzniDSNOLPZZbzcneBNxVQeKhOlaym4CKNYso9P7De1CjQS/+kF11uA2IhHk1HhjQ
+	 ew8+53vt9roq93AEzMwgrAlpwk1s0OQGafvdoCCJsQjHI0UvJUIZrlBUNo3O6bGPO1
+	 cgvooeR9t1QC9Cgm2lofuR0IoiC0E8JKcbPIAdfgHEKqhu0vknEh49n7Y0aR1NTUIT
+	 HQwZ2CX8zgSiQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 85BB580D60;
-	Mon, 28 Sep 2026 11:35:08 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E3E9C24E
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 11:35:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 139DD80D73;
+	Mon, 28 Sep 2026 11:55:19 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 43B84194
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 11:55:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C95F760631
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 11:35:06 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 354E7400DB
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 11:55:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FGzcHjHJkTWA for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 11:35:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org D879D60601
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=149.28.215.223
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790595306;
- b=cQn+6WjS9EpCzSbIHEPEfVJ3/IAuiraWLSW8vhz7854B9kL8+DJqXlOetcub0mYxjsN+
- nqaLIskzhd20jm1mkAssV02BAvIcFb7jl6t/rgInN519TgVjiBJENJ3el3Yc6PHtlReTj
- lIl6QpPYRT+vJ4kE6FaAxpzZFVaJojaMKMIReS22C0HB8AjYyaUMnGVld+mIovqNlZLKt
- Zut8ezqnh4InThP+1h/gq8DqRpRZR1GQN6+Cpw17OdAx/Fw9/5ovbJn83MweNo5E2g3Ri
- kyeKPVa4UAfFOzC4cLamb+EuvoAR4BiR5sy44y2xOZ+lQATXgwY8IaHaMsjlLGlldXg==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BO6ZiXxvAwe8 for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 11:55:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 17F6C40063
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=121.127.44.73
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790596516;
+ b=ErEasyjRDpPinRMAB1rGgyrpgKC1joNdd6QYZUbidPVNrdgXnU09a0I+NijQZ2vA5zHE
+ H6ViHU0cNq3594cC7uV1Rjw43DtZsxYtzFqZ18P8d4T9ctZZlTZGqHmNGkNlDQphe0gte
+ oanSB/oXgRunS52Y8nSx9NFDCIcFpvW9+x1sQD+Zs3JDDARq9UGsgpNc55XoLRJraJZ+h
+ yzGlMuc4I1bjUhIjnstqnqaScfsg4OjBway1HLvjMxlibPmrcm6vdzjR0f0FL9Ueb34OG
+ OunrVMOICd9vCDDt0L0KNE9AQMZESYoxgcyo/AtkWfnpZe/IZv1H1JRResOR6e5ZEvw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790595306;
+ c=relaxed/relaxed; t=1790596516;
  h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
  X-Forward-Email-Sender:X-Forward-Email-Version:
  X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
  X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
  Cc:References:Content-Language:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding;
- bh=zRyMvXK4nnnRRoDIgqjpt0OSjxuKZ+9XY5I+ei5Eq9U=;
- b=We4ai/t1zerRcx5CAEw3bCzWN9Icly44gyDRfJSnZ9Jh1NTarXWdrxDYUGkCw1petPzB
- qWgH71jg5MjYpKkse3+6XyrgER53wiuSYePz9+R3z+VuQ99JuGr0Z2RHNup0NlKNg31Yv
- FuN49hgbbQScrZo312Wy2c39ViYVnl8k8I8esZ4f0IQsQ2RwR+okPtk1MLhWR0ZkkJklX
- vYfiQeyixXjyZmJK2xOpnX7lsIX3uuhuurjf/jDii83Edtj4WHLqkoiXfMAkU9Fy6hLPF
- Kq4XaSrLAJ/b02bMEkHat0FjPkPYvzO6e8R7Tadfwy19SdsA5J6V2/Yj58pPkLCEA5g==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ bh=T0Hcc1PDrH7R4eJgSztYTs6jUDXucLZmh8Tw+q7NVSg=;
+ b=Lka+XJRGnSbk7Oamv78FbGjCY99EMM95H2U0nBXzLElS5cN3yVOUWmvc2lbUwhhuD/8f
+ p6SihGZz2/HDaTatWhzOaXTeQyLxF0tXAO0z4ioJ/2le6x3LlLSozugizfjoRwPdCybcS
+ kOuizD8bVPP5lfcakfA426de3NFNLtn1lhI92u0Dea+JQEa6/EiNaCMLhqlrAFqbzQWOp
+ GoLy7lziEnZNElD9dhfTo8XLg46nOk/6dsWedySCY4Qwvy4ZdVhi7PJCI/4cJQl+Afyq+
+ FGZ+vIBRdTBxU6qKVJp+eksDvhL/iN8Gqsrm0sSDI6vDSDt/7kCWVS5MVGcS6MMQ08g==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=kwiboo.se; 
  dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=WyKPbThD; 
- arc=none smtp.remote-ip=149.28.215.223
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
+ header.s=fe-e1b5cab7be header.b=fZAnbNOL; 
+ arc=none smtp.remote-ip=121.127.44.73
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
  helo=smtp.forwardemail.net;
  envelope-from=srs0=c238=hu=kwiboo.se=jonas@fe-bounces.kwiboo.se;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=WyKPbThD
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D879D60601
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 11:35:05 +0000 (UTC)
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=fZAnbNOL
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 17F6C40063
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 11:55:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1790595304;
- bh=zRyMvXK4nnnRRoDIgqjpt0OSjxuKZ+9XY5I+ei5Eq9U=;
- b=WyKPbThDikBnob+tqPONmwZxRETPBpFpKvKec0rOHWWGbGGrzDWcYb+vs9H/T85m4Svs2Cw+D
- UazMHSSqyByp1fVLtybdwbk6ljvc2HUUpNmB+YLCgD7jctbszaYBXMuM6HeQaKHhz7NCgwqx8uv
- edzIiW9rI/wXZ4xvlBa0rJ7Xj7Awxu48xT4OQCP4+ugx7nAksNx3X+iqFH1Z2If5ErYgw+zyESM
- KFAEIu1DwAT31Z5WfhHFppq3tkVEt4EDe7QdIDGKScx8owTn7jQCnXwri4VkTIPr5mgmbQLySXf
- g3M2p4+h66/nDMzIAOyAMBFyZrQ5xITIgXA38MkgyYow==
-X-Forward-Email-ID: 6aba50e35860254349dec012
+ s=fe-e1b5cab7be; t=1790596513;
+ bh=T0Hcc1PDrH7R4eJgSztYTs6jUDXucLZmh8Tw+q7NVSg=;
+ b=fZAnbNOLSVsE5SedcjD6YZzwjDcJiBEvLrYMzaOUTLtUPYoT5J9n000RzFre6QNM2l++Gh9dp
+ JrYiOIK7ZcYagA8OTBTnqNoYkPQ1dLDCedCYO6SEoveppjjI/XzKRrKZJxLFd7S0GBZKG9kQP6n
+ KduReBK+4hlrNnvVb/w4lxgWfNe3VRdfDJee/gIHMcJwq+Apf8GEd1Zre0tQKZ16l4g31etO264
+ sC6vYN36nOV8ejcoVboO9nEc27EbRCkbtkN//JeSgpoYlPQeJ9M03DhIc6YsbXx/r5UxeOrl3Kc
+ IpSA0FE9fzrzdxoQPXCod5Dqaw7kr13jKEOhBr73yeKQ==
+X-Forward-Email-ID: 6aba559f7c3fbae63f6e831b
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
+ 121.127.44.73
 X-Forward-Email-Version: 2.16.3
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <2bd91337-2648-4f7c-be21-d526574f7c64@kwiboo.se>
-Date: Mon, 28 Sep 2026 13:34:55 +0200
+Message-ID: <a12a9273-af9f-4477-8965-2e5f1d4a00da@kwiboo.se>
+Date: Mon, 28 Sep 2026 13:55:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 01/30] sysreset: rockchip: Add rockchip_sysreset_bind()
  helper
 To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Cc: Quentin Schulz <u-boot@0leil.net>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang
+ <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
+ <trini@konsulko.com>, u-boot@lists.u-boot-project.org
 References: <20260805174509.2968252-1-jonas@kwiboo.se>
- <20260805174509.2968252-2-jonas@kwiboo.se>
- <CAC928HbGTRYNXdVnExJLGMDLBewYVSJ9uZiwG2aF5b6PsOC9oA@mail.gmail.com>
+ <20260805174509.2968252-22-jonas@kwiboo.se>
+ <CAC928Hbh+XG_EA89aBeG4=fUYrm1YbuZug7JFy7EOnOdzv__+g@mail.gmail.com>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAC928HbGTRYNXdVnExJLGMDLBewYVSJ9uZiwG2aF5b6PsOC9oA@mail.gmail.com>
+In-Reply-To: <CAC928Hbh+XG_EA89aBeG4=fUYrm1YbuZug7JFy7EOnOdzv__+g@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -159,31 +158,109 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 Hi Massimo,
 
-On 9/27/2026 2:09 PM, Massimo Pegorer wrote:
+On 9/27/2026 5:17 PM, Massimo Pegorer wrote:
 > Hi Jonas,
 > 
 > On 8/5/2026 5:44 PM, Jonas Karlman wrote:
 >>
->> The sysreset_rockchip driver uses the rockchip_get_cru() helper to get
->> the CRU base address. However, use of this helper adds unnecessary
->> abstractions and limits the driver to only work for a single SoC.
->>
->> Add a rockchip_sysreset_bind() helper intended to be used in clock
->> drivers. This helper expects the CRU base address and the offset to the
->> global reset state register as parameters in addition to the offset to
->> the first and second global software reset register.
+>> Implement the sysreset get_status() ops and return same value as the
+>> existing get_reset_cause() helper used for DISPLAY_CPUINFO. Only include
+>> the ops in U-Boot proper to avoid increasing code size for xPL builds.
 > 
-> What do you think about dropping cru_base from sysreset_reg struct and providing
-> registers addresses instead of offsets as arguments of rockchip_sysreset_bind(),
-> to be stored in sysreset_reg struct? There is no other use of cru_base than
-> summing it with offsets.
+> Does excluding xPL build guard break any XPL size constraint? Otherwise, I would
+> avoid it, to have a driver with the same functions wherever it is built in. It
+> can be added later on, should constraints require dropping unused functions.
 
-I think it is better to keep base address and regs address different.
-Mostly because that is current practice, semi-required to keep
-bisect-ability, and more closely matches base + reg description in TRM.
+There is currently no use for sysreset_get_status() in xPL, and my recent
+rk3562 branch push failed due to xPL size limits on rk3288-popmetal. So
+including this in xPL would mostly just waste space for no real gain,
+or do you have any specific use-case in mind?
 
-It will also ease a possible future transition to use regmap API or a
-possible change to get the base address from cru ofnode.
+> 
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>  drivers/sysreset/sysreset_rockchip.c | 52 ++++++++++++++++++++++++++++
+>>  1 file changed, 52 insertions(+)
+>>
+>> diff --git a/drivers/sysreset/sysreset_rockchip.c b/drivers/sysreset/sysreset_rockchip.c
+>> index 27ba4ee0667c..4b10d6bb762e 100644
+>> --- a/drivers/sysreset/sysreset_rockchip.c
+>> +++ b/drivers/sysreset/sysreset_rockchip.c
+>> @@ -11,8 +11,19 @@
+>>  #include <asm/arch-rockchip/clock.h>
+>>  #include <asm/arch-rockchip/hardware.h>
+>>
+>> +enum {
+>> +       GLB_POR_RST,
+>> +       FST_GLB_RST_ST          = BIT(0),
+>> +       SND_GLB_RST_ST          = BIT(1),
+>> +       FST_GLB_TSADC_RST_ST    = BIT(2),
+>> +       SND_GLB_TSADC_RST_ST    = BIT(3),
+>> +       FST_GLB_WDT_RST_ST      = BIT(4),
+>> +       SND_GLB_WDT_RST_ST      = BIT(5),
+>> +};
+>> +
+>>  struct sysreset_reg {
+>>         unsigned long cru_base;
+>> +       unsigned int glb_rst_st;
+>>         unsigned int glb_srst_fst;
+>>         unsigned int glb_srst_snd;
+>>  };
+>> @@ -38,8 +49,48 @@ static int rockchip_sysreset_request(struct udevice *dev, enum sysreset_t type)
+>>         return -EINPROGRESS;
+>>  }
+>>
+>> +static const char __maybe_unused *rockchip_sysreset_get_cause(u32 data)
+>> +{
+>> +       if (data == GLB_POR_RST)
+>> +               return "POR";
+>> +       else if (data & (FST_GLB_RST_ST | SND_GLB_RST_ST))
+>> +               return "RST";
+>> +       else if (data & (FST_GLB_TSADC_RST_ST | SND_GLB_TSADC_RST_ST))
+>> +               return "THERMAL";
+>> +       else if (data & (FST_GLB_WDT_RST_ST | SND_GLB_WDT_RST_ST))
+>> +               return "WDOG";
+>> +       else
+>> +               return NULL;
+>> +}
+> 
+> As already stated in the RFC I sent [1], neither the glb_rst_st register
+> bit-flag definitions nor the logic on how to handle them are common across
+> Rockchip SoCs.
+
+Please be explicit, from what I can see in TRM for the mentioned SoCs,
+PX30 and RK3308, both have similar status stored in bit 0-5.
+
+> 
+> [1] https://lore.kernel.org/all/20260920-reset-v1-0-42820216369f@gmail.com/
+> 
+> Possibile approaches I see to overcome the issue: add a bit of information into
+> rockchip_sysreset_bind() arguments to instruct the sysreset driver on how to
+> decode glb_rst_st value; implement rockchip_sysreset_get_cause() at mach level
+> and pass it to the driver as function pointer arg of rockchip_sysreset_bind().
+> Other ideas?
+
+This series is trying to move away from using arch/board specific
+functions. If we need to extend with support for the finer grain reset
+statuses, it should be handled with logic in the driver. E.g. checking
+compatible of CRU ofnode.
+
+> 
+> In both of the cases I would probably feel that the mach area is a better place
+> to implement get_cause() instead of sysreset driver code. Of course, we would
+> lose static advantage but with LTO it is probably a minor issue. Anyway, I do
+> not have enough deep knowledge of U-Boot architecture.
+
+We should avoid new uses of arch/board functions in U-Boot proper, as it
+would hinder a future possibility to use same U-Boot proper binary on
+multiple SoCs. We are not even close to have that possibility but normal
+handling in U-Boot is to use driver model and check compatible to handle
+SoC specific parts.
+
+Current sysreset driver is not bound to the CRU ofnode, so checking cru
+compatible may hard. However, it could be a different/future direction
+for this driver once we need SoC specific handling.
 
 Regards,
 Jonas
@@ -192,91 +269,46 @@ Jonas
 > Regards,
 > Massimo
 > 
->>
->> The helper wraps similar handling as existing clock drivers, and will
->> be extended to make use of the CRU base address and state register
->> offset after all clock drivers have been converted to use this helper.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->>  arch/arm/include/asm/arch-rockchip/clock.h | 15 +++++++++++
->>  drivers/sysreset/sysreset_rockchip.c       | 31 ++++++++++++++++++++--
->>  2 files changed, 44 insertions(+), 2 deletions(-)
->>
->> diff --git a/arch/arm/include/asm/arch-rockchip/clock.h b/arch/arm/include/asm/arch-rockchip/clock.h
->> index cf8bb0f04636..1b12867b489b 100644
->> --- a/arch/arm/include/asm/arch-rockchip/clock.h
->> +++ b/arch/arm/include/asm/arch-rockchip/clock.h
->> @@ -186,6 +186,21 @@ void rk3288_clk_configure_cpu(struct rockchip_cru *cru, struct rk3288_grf *grf);
->>
->>  int rockchip_get_clk(struct udevice **devp);
->>
->> +/*
->> + * rockchip_sysreset_bind() - Bind system reset device as child of clock device
->> + *
->> + * @pdev: clock udevice
->> + * @cru_base: base address of the clock/reset unit registers
->> + * @glb_rst_st: offset of the global reset state register
->> + * @glb_srst_fst: offset of the first global software reset register
->> + * @glb_srst_snd: offset of the second global software reset register
->> + * Return: 0 success, or error value
->> + */
->> +int rockchip_sysreset_bind(struct udevice *pdev,
->> +                          unsigned long cru_base,
->> +                          unsigned int glb_rst_st,
->> +                          unsigned int glb_srst_fst,
->> +                          unsigned int glb_srst_snd);
->>  /*
->>   * rockchip_reset_bind() - Bind soft reset device as child of clock device
->>   *
->> diff --git a/drivers/sysreset/sysreset_rockchip.c b/drivers/sysreset/sysreset_rockchip.c
->> index 00308f9a33b7..39cb16ec5456 100644
->> --- a/drivers/sysreset/sysreset_rockchip.c
->> +++ b/drivers/sysreset/sysreset_rockchip.c
->> @@ -4,10 +4,11 @@
->>   */
->>
->>  #include <dm.h>
->> -#include <errno.h>
->> +#include <dm/device-internal.h>
->> +#include <dm/lists.h>
->> +#include <stdlib.h>
->>  #include <sysreset.h>
->>  #include <asm/arch-rockchip/clock.h>
->> -#include <asm/arch-rockchip/cru_rk3328.h>
->>  #include <asm/arch-rockchip/hardware.h>
->>  #include <linux/err.h>
->>
->> @@ -42,3 +43,29 @@ U_BOOT_DRIVER(sysreset_rockchip) = {
->>         .id     = UCLASS_SYSRESET,
->>         .ops    = &rockchip_sysreset,
->>  };
 >> +
->> +int rockchip_sysreset_bind(struct udevice *pdev,
->> +                          unsigned long cru_base,
->> +                          unsigned int glb_rst_st,
->> +                          unsigned int glb_srst_fst,
->> +                          unsigned int glb_srst_snd)
+>> +static int __maybe_unused rockchip_sysreset_get_status(struct udevice *dev,
+>> +                                                      char *buf, int size)
 >> +{
->> +       struct udevice *sysreset_dev;
->> +       struct sysreset_reg *priv;
->> +       int ret;
+>> +       struct sysreset_reg *priv = dev_get_priv(dev);
+>> +       const char *cause;
+>> +       u32 data;
 >> +
->> +       ret = device_bind_driver(pdev, "rockchip_sysreset", "sysreset",
->> +                                &sysreset_dev);
->> +       if (ret)
->> +               return ret;
+>> +       if (!buf || size <= 0)
+>> +               return -EINVAL;
 >> +
->> +       priv = malloc(sizeof(struct sysreset_reg));
->> +       if (!priv)
->> +               return -ENOMEM;
+>> +       if (!priv->cru_base || !priv->glb_rst_st)
+>> +               return -ENOSYS;
 >> +
->> +       priv->glb_srst_fst_value = glb_srst_fst;
->> +       priv->glb_srst_snd_value = glb_srst_snd;
->> +       dev_set_priv(sysreset_dev, priv);
+>> +       data = readl(priv->cru_base + priv->glb_rst_st);
+>> +       cause = rockchip_sysreset_get_cause(data);
+>> +       if (!cause)
+>> +               return -ENODATA;
+>> +
+>> +       strlcpy(buf, cause, size);
 >> +
 >> +       return 0;
 >> +}
+>> +
+>>  static struct sysreset_ops rockchip_sysreset = {
+>>         .request        = rockchip_sysreset_request,
+>> +#if !IS_ENABLED(CONFIG_XPL_BUILD)
+>> +       .get_status     = rockchip_sysreset_get_status,
+>> +#endif
+>>  };
+>>
+>>  U_BOOT_DRIVER(sysreset_rockchip) = {
+>> @@ -68,6 +119,7 @@ int rockchip_sysreset_bind(struct udevice *pdev,
+>>                 return -ENOMEM;
+>>
+>>         priv->cru_base = cru_base;
+>> +       priv->glb_rst_st = glb_rst_st;
+>>         priv->glb_srst_fst = glb_srst_fst;
+>>         priv->glb_srst_snd = glb_srst_snd;
+>>         dev_set_priv(sysreset_dev, priv);
 >> --
 >> 2.54.0
 
