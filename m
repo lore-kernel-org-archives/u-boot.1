@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 853B7CA5FA1
-	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 22:32:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 317A1CA5FA5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Sep 2026 22:32:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 520C180848;
-	Mon, 28 Sep 2026 22:32:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id F0985605ED;
+	Mon, 28 Sep 2026 22:32:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HsQhuWVQg3CJ; Mon, 28 Sep 2026 22:32:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4D54880A82
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790634751;
-	b=mPXy825AJ/A+J6v66JFQmcdBaT/con4ADdABm7LizUBNr4PYZmOER13erDJtZ6xYVNLu
-	 SuJsO0Futn5L4wyO+Pe7NN29tJbT8fMkRb1kO7xtSIcCMyAo9XyMJz/AdYo+GGM4S+H4e
-	 4aDwKY9zbc/ASaBBB84fXbC3BeHjyA+zqPRIUPqTyrrZNbu5aHrWFdnrJcXI53wT+s3F4
-	 ySZiOgZnVjGx6yQ0MGWJQIvltswc8t0H+k8d3y7/s4u+STvQi0/5uPdSHiWqdlJc99Hqa
-	 5STMFWIYwI6d1oIL+KFxPCLljvfcw+nPDuoi8PejoaAIFZsTzoC4AGjx+nPJFzcFntw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id v1i4SG7NFKXO; Mon, 28 Sep 2026 22:32:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 29ECC60614
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790634758;
+	b=rsH6luok+S8OqdLM8XOka7xm6J2KFTiyzzPowyRiq0BRo2ttLj30Ke+2l+Yackhoxq3g
+	 V5fTsNTFTaQuevoIbkqkAPg1vxHvP7qMijxjml1R+f9OsPRbGLrZqwkKFmgZ+avArCTV9
+	 HHhSL3USK0gWAmQzyJG/UNlX2WHlgbJ8e+6/p7b/770EZ1P1b7K2J4DNpSW2RrVV2OrAu
+	 iFplW4jbofq4DF8dfoMpRqZSYH677xFUVJGlrroPVGVgM5U5SwqD1DSIKzWZps1FUxoBZ
+	 vJxhoOSPNVlJvAcwSgeuncpbZswhKIMX923LSXMTI9/ZvF6oTgeRbF23eC71m+CCCXA==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790634751;
+	c=relaxed/relaxed; t=1790634758;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,147 +32,150 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=TeZhNoKcRbPIxDGxNg0dLpD1DT5Z82ytSkgAfzadhxE=;
-	b=aOHdo8BQKGQ+W0vuryMCVuaFoGrO1HURwCDlW6bNyiCzxxnEkwiTBORYTurO2gKLP0y0
-	 WKWQMplPE3oaq4teSjtKta/5teTCx55Q6ku+spFupebS4OREWkBbMJh9QcBiiKv/n6lzI
-	 hLODbDWyReoxk+WrWSNNWcRAFfKy9HRfzD6h5fSXhEsNtQCKR/uXHn88v3B27OD9iOMDf
-	 QjYgNsRDH0dg2rgPphslsXlTjAmLpUatcfSY/T27JwSVqVj6c8WbmkKs67lvNDvAXDtJZ
-	 RbwqAMjVfmu47m3OlgO/QeWww4rGXcuHKuqIvtjhPZ9OgEMIY1OrTXpn0rJbkBOr1fg==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=PXrTIpY+jkIFK70X91FIy/XZt0vg3cJz7yPKIaOsV88=;
+	b=Oj0oZchtNhlIFLRxAVx7JMH20WVgDKyBrzssFusijnvnkXOXAFCcfVEKMcO/iDKuCHKq
+	 1ROrgMy8cRay8R069tGMTpqM9m0VM9mFxzB7RxnVCw8LDroF0vxM87L7JBSv1Jy1LRRcv
+	 fEgfJB6qM7AMlXTYhaeBKWiARKMH16WoWPsZo9hzRHau1zPBKlqTY0kqlHBEg57bq+73a
+	 mYTk9LsLdTt9ws6PJbtNe5NGfcg7TqF54kLCRO5N0X2tVB2kBwS19cXLj/TSYj5FW04cT
+	 JO8tglCUb2yK1lao9q3CstBGu8bGzSdtYCsOfsqUzXELrzgV+9/FxEI3nRIhOnFRd2g==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=pass header.from=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=PglfDNbr;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790634751;
-	bh=TeZhNoKcRbPIxDGxNg0dLpD1DT5Z82ytSkgAfzadhxE=;
+	d=lists.u-boot-project.org; s=default; t=1790634758;
+	bh=PXrTIpY+jkIFK70X91FIy/XZt0vg3cJz7yPKIaOsV88=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nIuf0gcA4h3qS79ic2Q3Y9rvxX8IDNlB11IInDH1YW0lGE4Ga3y0Rv50ZpZK+KYQm
-	 JFltrOnc9d7770vXuutcpfQpQ0To2TtR87XB/L5e56yWnoiNHEqtOMNNGIOsYiet+t
-	 W2u8NYdwF6f8b4ovKb7Iz4vXifwS+j5U7bLgBwbUqL7w0HXMl6DvMWFaRgPkGefCsr
-	 kpw/Kr6SQa6+L7rD+aE1q9SNoDmQSWyIoW5X5P+iYbktUPLFs/bbcOYBC+0zjdhlyO
-	 +y2ZJfW5HX2D1n1yGe66JgSGJ3q1ugDJzPpNsaH+bl85luQYS9EwXs+X2O1F6vYUe2
-	 L8LdRBJZ/gB2Q==
+	b=W3KZnbvffaoMVbEh+/yWszPVvQnb024Jz0rUsk05fEQIbn3EAKdzx/y/rekKccfLt
+	 i816SVkxgnoQbBuOfw0M3ON06p/nEwDpJJGrqcqMDrXBtmn9b+FtMhHyAERxL+w81w
+	 6eOCFrAmVAHDliReJ/Nnr1T//cYQte4c0Ko7dFvNowoZJccUb3Xfv91FSt6utKV+IM
+	 dLF9IyQel9JODi7TdU8PayqTihXUtotZxlKM+qBqdfc6gOyyC4YMkqKhhUFRefQoNr
+	 F8/ReuFYlO8DP35wkjN+eDDci7qn52SN/9KyEGDLqc6aNLrsMJiewMsk6Yk/R4toka
+	 uxF5URWwTvGBA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4D54880A82;
-	Mon, 28 Sep 2026 22:32:31 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 3CBB272
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:32:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 29ECC60614;
+	Mon, 28 Sep 2026 22:32:38 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8E935335
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:32:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2EB9C4027B
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:32:30 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7428C60614
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:32:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id P6Vd-2sMaxXN for <u-boot@lists.u-boot-project.org>;
- Mon, 28 Sep 2026 22:32:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 1668C40216
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:33::27"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790634749;
- b=MDoT9UFMgiKo2lNnPsDJhXMd11KFOelL6WVWQSF3B7iKr0sB2X7FjLJSxDZpIHDed2LB
- Zm5GZKOGzGzRimn4gFvcB+kyWLmGU5ASYOvWRRWJgnH2JpI3dtOh2BPfa5t3Uu6EtlHlk
- x1RLuxHuxbYVQCQU0f2r/YDiaVndWsg3Qv8B64o9r1PK9tIgM10qZC/0pOM/2WaHlq+3H
- 38Z8SkQzLKoHh3O5pcdzYT9DvQRWKJbARJj3TkGaoscE6JMgTlZDlhmBMN3xA9V9f58/4
- Ke7Xn8fzgqDP5j1R3xAAijCybATxeDaOZWmu3cLa6P8L4kziIWJAuiAThQ8x51HuRFQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id v3nBpEe_gYPX for <u-boot@lists.u-boot-project.org>;
+ Mon, 28 Sep 2026 22:32:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 6D79E605ED
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:33::e"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790634756;
+ b=m/cB70NEcYhx7DFzef2Gz8QgsSSi+meadGq8On9/9MHxbXBNvxLKV32CuRyf1trtEITM
+ HtUyFkSPFxcZkeOIGQ0BIPCR1TWAfFZy2438+Zf1rGy+2LbJjB5167JGc44TuCEel9tJ3
+ JdaWfSewjfbZoQpiPe8jNZm8ZAc6DIhSPpKb+9apA3vY9BouEf5i5Q2TVViCyIx7RG9XW
+ FNA3ghMTnWKSzdmn/q1LtGWgpMyAB73rH5q8gEtcQCKOCB6tXYfvuoce1mwEUIoFVsQmP
+ RUXLtPNmobxRoMlvOXP885bj/c0hVQXSRzj2mCSFp6yYmF+YN/jkid+Bk4WT91xwkUQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790634749;
+ c=relaxed/relaxed; t=1790634756;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
  MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
- bh=TeZhNoKcRbPIxDGxNg0dLpD1DT5Z82ytSkgAfzadhxE=;
- b=H1bn3qQGyQgi9/lw6/BmbPn8P/I1/2I0rOivk99qGjvjpp1JukJ8qtEKLTADNK0npzEk
- bR7w/SmTQQM5AVaGW6RgrShWmj7z77Ri1Q+WwZ2oNhWPqIG4f4zhT6h7wZrtkxmd4uh8K
- ksv9QsAHXVf33lAOeLhbAT4oerN5Zyfzq35ITME/qTrOUyr6aWTFlDr1CNx3sn/seoUsL
- NmfGdmOaB+QrP6Wu71ar/JnTGOf/X030oyulSAHEcfmg37hldm7YWQ4Z5Q0tTk1HFU/jt
- SeAvpmdv6kXJmCs41HwMjEozd3GKL5A7+uOkoh7rZk0hiEgKitFVsBcTP9eEnSiStaQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ bh=PXrTIpY+jkIFK70X91FIy/XZt0vg3cJz7yPKIaOsV88=;
+ b=PjQEfADaTcNRZG4aUpnO2bRJElN583pgI6c+BCdau9Aaheg2Is71Otxg33VkcB+F+CSa
+ nnVFrXkivQRG+vRmCcBH6Xnsjf+z1tarbSUhMunXkMCbYi/wfDqt9n7XFND0z5t6bk6AY
+ J/njl5ogPAQZl38Cxh4OmQ6OW7ALt+Aup4974/QSVrk2k9Izb5Soj5jnXAwlv/a3s6eMt
+ yjI0f0JlUQ6mwIiDH2aVLf1N/QFv/RgjdT4Hd3dkQeaRXV0qyqRze6umYSntwF2Kgm+eb
+ EfgR02PQ6kUgTOkDYtQ/om5eOKCTmNcBbH8HuSaoKp9FA2/jwQ9ShgT5+HSr5s2q2HQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
  dmarc=pass header.from=chromium.org; 
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b="icGRuD//"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::27"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:33::27; helo=mail-ed2-x27.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+ header.s=google header.b=PglfDNbr; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::e"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:33::e;
+ helo=mail-ed2-x0e.google.com; envelope-from=sjg@chromium.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=icGRuD//
-Received: from mail-ed2-x27.google.com (mail-ed2-x27.google.com
- [IPv6:2a00:1450:4864:33::27])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1668C40216
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:32:28 +0000 (UTC)
-Received: by mail-ed2-x27.google.com with SMTP id
- 4fb4d7f45d1cf-6aa135d6e97so5617522a12.2
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 15:32:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790634747; cv=none;
+ header.a=rsa-sha256 header.s=google header.b=PglfDNbr
+Received: from mail-ed2-x0e.google.com (mail-ed2-x0e.google.com
+ [IPv6:2a00:1450:4864:33::e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6D79E605ED
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 22:32:36 +0000 (UTC)
+Received: by mail-ed2-x0e.google.com with SMTP id
+ 4fb4d7f45d1cf-6aaf688ebb0so4017034a12.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 15:32:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790634754; cv=none;
  d=google.com; s=arc-20260327;
- b=N1BUpo9AYwOeNjEqU4UZeA6tk/IfciVBobWVw8NqmC8SNd7oFg/8UoaTOCydqWwoJd
- mbq/sJqLqxhzgJwS/YsmNekF3LSV7veib/J/alNDHIOq3q9LeYQXL1fq6PzfCuO4tpIS
- ZP5yXluVXTXjKzlmPRubLzgf7C+veDWdVP+xieWFL6i0EKv+IPi+zQJteON70gNYfIGN
- gIPFjC34RJRFppysaGlkAJNqWKBsEeO3Z+trGuZ1bHhMFlyhRNBKax0zyxqzQIBecUJo
- z89qoiI3aTNhXSl8Dx7CiGIzqYIjfxDapSzKb5LOEEwjTWmCHJD6teKuibTQtEzFPi4+
- itBw==
+ b=EeEv8i5ciCbpg9BrZ+G8NEhBvTNgq3l58XTzFAldaH8k64dSD67vPIUwOaUlAwSkl+
+ haphcoWOUQaznh4PSc4phg7r7Rqhz1DmpkCBu0R61ULlY8xPbancg/m4Xrn0u1EIH4Ak
+ sz6SLbQqaiqaps/8vVk5fkbLevtD2Uklxl1JbC3uBPkejFdIcegvmguwWm5360EJtohv
+ RSddiVpdaEpSFn2u0sAdmApaZEQ8MrSOJMSY1b41cwI0bCEIbECCTddT7mrZg6VpBV99
+ yjmrFaehMXnubQNGi4UyJuaLIBTqtCb2NcWA65OHg4ZWQQPdjB9v84XsXFmTX8BqciRH
+ XCYQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=TeZhNoKcRbPIxDGxNg0dLpD1DT5Z82ytSkgAfzadhxE=;
- fh=8V1Yh2X1GL7nlXTgHazgTXtUO3A+qNj9epPLeM9oi1c=;
- b=MMD014SjLrEJ5+ltCkqh5HzQ1X5Tq0UMUzhz3x+x9XChAY/2vVfHcPrCWHwgtztR+T
- frdJ6MvB/JH2b5eS2GGHmXGCi4sQmpxBiQClB6PytLeOHziqBEhj+cITVAyrzUVsE912
- FqyCuc8hL8+rNGs7HSIb6dRvzV+++Q0FIRWyBx8mK3bavOPxvl8NwuV7ilJoWOqiekHT
- +1JCKv5iiU/exuF1d3ltPnGaUnZMchK8uN3GfXLAqCs/oDp6MwufXfNeH6GJi8QvFVge
- 5nU5PdeeUoHZ9Ovc8BCAA/7q6rDlWSpXc2WpRct9pg4ylKuaEokM1ESw5H0vFXyvFFWu
- vOgg==; darn=lists.u-boot-project.org
+ bh=PXrTIpY+jkIFK70X91FIy/XZt0vg3cJz7yPKIaOsV88=;
+ fh=bFUxJLktzAAw44NUo8K810njxzDqWaY84yRZTytHMqo=;
+ b=kKr+fAgSmGCSVAewK3qrgScdkCyW/PjbTfXzlG6t7oVYjkBil1G4+WN6HEGVGhGXhQ
+ Th8LmJg+fAdzd+Y3+u7ucSTKPJHAj0w1mqEyq8wGqEOFAtOSbuWtseXaeEeBRZ98fEir
+ /5bL8PDh+ivr72sM7qE9GCKcG4daSmpUjzFs6H6Z2Ya2snYWYJ87jm3jq8nLCSxpcxpB
+ 9LrjFgJlOqTXtAdOM/t2nPzxkA4J5kLyGQw0hTbOka2QXAyIAodFLaGV+ePBpcZf82Y0
+ MJmV8PHY7GZZzC0Et8vEfjOVFBtdvwoM4euD5oBdK8diFrMCltVWj+q23XcHYkDoybJN
+ fXMg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1790634747; x=1791239547;
+ d=chromium.org; s=google; t=1790634754; x=1791239554;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=TeZhNoKcRbPIxDGxNg0dLpD1DT5Z82ytSkgAfzadhxE=;
- b=icGRuD//dHGu6aK2LMwOUjo34OXS5PhG6q1Az9EH8i1OKxRPTzrDoOzTuJ+mq4epE8
- jfucsrm25Ga+9/93JKgNdb9nLR2WM3KhY45+OObnFZ+3vYab66L5NNLUyrOG3vGCUemS
- TJPg/2bn98JLEgd0Uz5cYtTIgrQiOPtMU3Fok=
+ bh=PXrTIpY+jkIFK70X91FIy/XZt0vg3cJz7yPKIaOsV88=;
+ b=PglfDNbrb21LwqDnaCJdGJ7ingW7+OVLjFXx9vL0EIf8N8tuPJaOLjjQum/7KfACAY
+ 2rlsJH/BexAxdaqpL0YgfJhTfoOXS55U4foGBiIftvVpemJKh97bg7qjLlp1BCvCiNOc
+ hcOYxAXpZ4T3xXLc8AhF7eSpYz/9Uz/CioqhU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790634747; x=1791239547;
+ d=1e100.net; s=20260707; t=1790634754; x=1791239554;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=TeZhNoKcRbPIxDGxNg0dLpD1DT5Z82ytSkgAfzadhxE=;
- b=vc7oD3hmePfJsYWN3Ajw1w14j6SFzth0fkAco2+Hg2rROS3fEZv97EQ7qEFzi5o+5Y
- jaeLSG7y/FQoJepCpM1Ht40mYcWwQrIA2m9MXeb8OQ/IkOyfcStgDtzDKinrfKMm1MsG
- M1i2tX+02oc02g1+oycjTwuYnJEgpyERdBGdHROHzlzO83YM98OpEjkmGe8wK5JSGxI9
- 8QVG/Nfw9u3RRVBJtqZyEyusFEKjUgRi08EGCnDprjGOodY7uATPcgzaNIoG0HrKmKKP
- DtZUclL23qBTjp54IgCQ7guArkblwe4FWWj8//6RoLpgvM5qcZ29/hdAXYiQtzvhs+/P
- +FlQ==
+ bh=PXrTIpY+jkIFK70X91FIy/XZt0vg3cJz7yPKIaOsV88=;
+ b=ckOVgm1q9EUfxGWvxO81McwYJh24CAPXYqHYafKmke+CIsYELUhIXYffGc9f9mAd1S
+ x9NbRDxVNDZLceP5yIaeeAAocoZ1QWNeV1RpHeTEdI6//+FkmYY0qBHI8uDJBlGb8kbo
+ TouMkqqhIjGBh3gOAtJS7Tkb0qg7J+2BO1EeU1UJTUeenPU+5uGJvnxNOA6Nrq0pq87k
+ dim8GudAqh2HEx83puwOEj1HzpGtpxq0Pv50n0phdfiUPkYnhs4lMRDJUW7GkrjjJVlI
+ nTW9pjiL1zplQ2Szra9IP9omtW7t/9rKpBRKuQT3feuLfaRVeVMmlRSFmlgPGGN8ASr5
+ a/oQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwePR7cVRBdvuVDGA1bEje2HtI7fHpm7sKuvRxPZwFlrIR9ka7+cyLs+wchB5pQP/q5hQr6Mks=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJKJSAjkTnS3x5ffffVFGOZDPMdh85+PWPugZLs9/Mm08RESz+T
- 5mV+64gysENBDzmbYU+BIJAhHsxSIIPcJkBcLUpYrPL4OQtjEDaWQFNKlUyv3uktmjQWqm9IPZh
- ZQ42Y9HCxcAJQjBDutKNID7A/TCMN/aWhHOBV3WhN
-X-Gm-Gg: AYBFou3n0lThe16/Kz6ZTDFc4xdRn1OqRGuuY6Hnf+pgpym8zfV98uRU5gG/TGPtItC
- fkOoipHPxF99PxTTRW9dQa677ykUl4DNXHT67VUQcW+afST6ffqhaCfPxAuPWnto6Bwh6Pgl4c5
- yLZbAbmgQMliJ1GcoVtS+nimc8kbpv9LJfpNhNp32/ZnC+qG3xCemrIjv6mgVLlhKYYejHFudDk
- mR+MZinxAjFuEtNWkKeCY8drrIxFiVQzWoFjx2h/7h0m6LIDi7G8RHKd3rQmlMPiGqLGTWr75o3
- jqcRdVAgglZ/jBXKfxXKQMeB25gJH0vCjNlT/tGOxOteu8qL8ki7y3Q1VQ==
-X-Received: by 2002:a05:6402:4381:b0:6ac:94cf:9f4c with SMTP id
- 4fb4d7f45d1cf-6ac94cfab0bmr1735505a12.45.1790634746669; Mon, 28 Sep 2026
- 15:32:26 -0700 (PDT)
+ AKwUvBxY9llwW44IPUPSicoYmpsOov+FAocGs53IZI/cK2CV/kYxoDxOnCHEVBw6+BzCMrjFFvds9PE=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJDiMwNJP8oazhecO1HRz++pQX0bbX8Tu7R+5UOvg/mJg0b7z+y
+ sy5imqP5xE+paXPUClIlItFJzfqNsDgB3XzcTkP6rBrP2YvPrppnbT6xuUIwX04QsAbqePl7xCK
+ dgj9rHI14CxQlnoBcnnt5cedOIp30JCKp8OW7cEQl
+X-Gm-Gg: AYBFou1zj4xfiKa4wOcCe8qQwOc2r1LdHlF0NVfEG00xBmk/pZPGBJtuMKgY150r5Ur
+ htkljUqi7qx2ELuNs1Jq2yRoFQYx5sp1dZn9eD6ekddOXTdign3VaeI5lqq17gDMskoRIdXPkJK
+ wcdPEcJ3k5AXS4Nh/Vgx7ecgRs7+ESlzxRaa/rR4Y6NvhEEOpcGOY0biln0SWCKceJMyI/uq9D8
+ CLqNCFmHPL5FEmpMZ2B2jiztzHEW2+KHmsmSZ95we4Dl8D+io6D+70dkK2RoHrBuCqorJbpNKDL
+ lwYU0S/6GWcjzr7T0t+eWG8BpGdtOK/+j3FTY9W1dweUU2Toqghg8UPhww==
+X-Received: by 2002:a05:6402:5187:b0:6ac:7d7e:e56c with SMTP id
+ 4fb4d7f45d1cf-6ac7d7eebcdmr3053938a12.5.1790634754551; Mon, 28 Sep 2026
+ 15:32:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260911-imx93-secureboot-v3-0-542a99793af0@bootlin.com>
- <20260911-imx93-secureboot-v3-6-542a99793af0@bootlin.com>
-In-Reply-To: <20260911-imx93-secureboot-v3-6-542a99793af0@bootlin.com>
+ <20260911-imx93-secureboot-v3-7-542a99793af0@bootlin.com>
+In-Reply-To: <20260911-imx93-secureboot-v3-7-542a99793af0@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 28 Sep 2026 16:32:13 -0600
-X-Gm-Features: AclHuK_hUhvHUkICafebwdwtOWf0PkJIhg7BCqBPt_ESYSziksgZIBlzMDDN5Bo
-Message-ID: <CAFLszTj5JN_3Uw9iwMDYYmWh-LohRmnastDEBB9vS4QYON30dg@mail.gmail.com>
-Subject: Re: [PATCH v3 6/7] doc: imx: ahab: add i.MX93 secure boot guide
+Date: Mon, 28 Sep 2026 16:32:22 -0600
+X-Gm-Features: AclHuK_oAOw899mDUDVa7Npa6HMCAJspeFxwLizTRCEIrjnk2OuroMWZWMKLxhY
+Message-ID: <CAFLszTjfgWwNMNvkVfxednbw+ZoC+wAAwBUoACnooe2G1c=q9Q@mail.gmail.com>
+Subject: Re: [PATCH v3 7/7] binman: test: add code coverage for nxp_imx93cst
+ etype
 To: jeremie.dautheribes@bootlin.com
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.u-boot-project.org,
  =?UTF-8?Q?Miqu=C3=A8l_Raynal?= <miquel.raynal@bootlin.com>, 
@@ -207,90 +210,85 @@ Hi J=C3=A9r=C3=A9mie,
 
 On 2026-09-11T16:35:05, J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric)
 <jeremie.dautheribes@bootlin.com> wrote:
-> doc: imx: ahab: add i.MX93 secure boot guide
+> binman: test: add code coverage for nxp_imx93cst etype
 >
-> Add a step-by-step guide describing how to securely boot an i.MX93
-> image using AHAB.
+> Add test methods to cover all code paths of the nxp_imx93cst etype,
+> reusing the pattern of the nxp_imx8mcst as done in commit 0cab35362d77
+> ("binman: test: Fix code coverage for iMX8 and cst bintool") by Simon
+> Glass.
 >
-> This guide is largely based on the following documents:
->   - doc/imx/ahab/guides/mx8ulp_9x_secure_boot.txt, from uboot-imx
->   (lf_v2026.04), originally written by Utkarsh Gupta
->   - doc/imx/habv4/guides/mx8m_spl_secure_boot.txt, from this tree,
->   originally written by Marek Vasut
+> This brings nxp_imx93cst to 100% coverage.
 >
 > Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jeremi=
 e.dautheribes@bootlin.com>
 >
-> doc/imx/ahab/guides/mx93_secure_boot.rst | 294 ++++++++++++++++++++++++++=
+> tools/binman/ftest.py                              | 85 +++++++++++++++++=
 +++++
->  doc/imx/ahab/introduction_ahab.rst       |   3 +-
->  doc/imx/index.rst                        |   1 +
->  3 files changed, 297 insertions(+), 1 deletion(-)
+>  tools/binman/test/vendor/nxp_imx93_csf.dts         | 18 +++++
+>  .../binman/test/vendor/nxp_imx93_csf_imagename.dts | 24 ++++++
+>  3 files changed, 127 insertions(+)
 
-> diff --git a/doc/imx/ahab/guides/mx93_secure_boot.rst b/doc/imx/ahab/guid=
-es/mx93_secure_boot.rst
-> @@ -0,0 +1,294 @@
-> +The paths to the SRK table and the certificate can be modified via
-> +changes to the nxp-imx93cst device tree node(s) or via the environment
-> +variables.
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> @@ -8152,6 +8153,90 @@ fdt         fdtmap                Extract the devi=
+cetree blob from the fdtmap
+> +        ele_data =3D bytearray(0x410)
+> +        ele_data[3] =3D nxp_imx93cst.CONTAINER_HDR_TAG
+> +        ele_data[40:44] =3D struct.pack('<I', 0x866)
+> +        ele_data[0x400 + 3] =3D nxp_imx93cst.CONTAINER_HDR_TAG
+> +        ele_data[0x400 + 12:0x400 + 14] =3D struct.pack('<H', 0x90)
+> +        self._MakeInputFile('imx93-container.bin', bytes(ele_data))
 > +
-> +The nxp-imx93cst etype is configurable using either DT properties or
-> +environment variables. The following DT properties and environment
-> +variables are supported. Note that environment variables override DT
-> +properties.
+> +        with terminal.capture() as (_, stderr):
+> +            self._DoTestFile('vendor/nxp_imx93_csf.dts',
+> +                             force_missing_bintools=3D'cst')
+> +        err =3D stderr.getvalue()
+> +        self.assertRegex(err, "Image 'image'.*missing bintools.*: cst")
 
-These two paragraphs say the same thing. Please can you drop the first
-one, or fold it into the second?
+These tests execute the lines but do not check the result of the only
+real logic in BuildSectionData(): the header-address detection and the
+signing-offset computation. Since write_config() runs before run_cst()
+records the missing bintool, the generated config is available even in
+this case, so please can you check it, e.g.:
 
-> diff --git a/doc/imx/ahab/guides/mx93_secure_boot.rst b/doc/imx/ahab/guid=
-es/mx93_secure_boot.rst
-> @@ -0,0 +1,294 @@
-> +The SRK private key (``SRK1_sha384_secp384r1_v3_usr_key.pem``) must be l=
-ocated
-> +next to the certificate so that can find it.
+    cfg =3D tools.read_file(tools.get_output_filename(
+        'nxp.csf-config-txt.nxp-imx93cst'), binary=3DFalse)
+    self.assertIn('Offsets =3D 0x400 0x490', cfg)
 
-Missing word: 'so that CST can find it'.
+and similarly '0x0 0x90' in testNxpImx93cstNormal. Without that, a
+mistake in the hdr_addr handling would go unnoticed.
 
-Also, 'next to the certificate' does not look right. The list above
-tells the reader to copy crts/... and keys/... into the build
-directory, and the environment-variable example below points SRK_KEY
-at $CST_DIR/crts/, where the key lives in the sibling keys/ directory
-rather than next to the certificate. My understanding is that CST
-derives the key path from the certificate path (crts -> keys, _crt ->
-_key), so both layouts work, but the text contradicts the example. The
-mx8m guide says the other files 'are required by the CST tools as
-well, and will be searched for in relation to them'; something similar
-here would avoid the confusion. It is also worth mentioning
-key_pass.txt in that sentence, since it is listed above but never
-explained.
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> @@ -8152,6 +8153,90 @@ fdt         fdtmap                Extract the devi=
+cetree blob from the fdtmap
+> +        # Mock run_cmd() so that when cst is invoked, it creates a fake
+> +        # output blob and returns success, thus covering the signing pat=
+h
+> +        original =3D bintool.Bintool.run_cmd
+> +
+> +        def fake_cst_run_cmd(self_tool, *args, binary=3DFalse):
+> +            if self_tool.name =3D=3D 'cst':
+> +                arg_list =3D list(args)
+> +                if '-o' in arg_list:
+> +                    idx =3D arg_list.index('-o')
+> +                    tools.write_file(arg_list[idx + 1], b'\x00' * 32)
+> +                return 'fake cst output'
+> +            return original(self_tool, *args, binary=3Dbinary)
 
-> diff --git a/doc/imx/ahab/guides/mx93_secure_boot.rst b/doc/imx/ahab/guid=
-es/mx93_secure_boot.rst
-> @@ -0,0 +1,294 @@
-> +   $ export SRK_TABLE=3D$CST_DIR/crts/SRK_1_2_3_4_table.bin
-> +   $ export SRK_KEY=3D$CST_DIR/crts/SRK1_sha384_secp384r1_v3_usr_crt.pem
-> +   $ make flash.bin
+This is a copy of the mock in testNxpImx8mCSTSigned(). Please can you
+move it into a small helper (or a context-manager method on the test
+class) and use it from both tests?
 
-Just to check, is CST_DIR the CST installation directory or the
-PKI-tree directory? The introduction generates the tree under the CST
-directory, so it works, but it would be clearer to define the variable
-(or use <work> as in section 1) before using it.
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> @@ -8152,6 +8153,90 @@ fdt         fdtmap                Extract the devi=
+cetree blob from the fdtmap
+> +        self._DoTestFile('vendor/nxp_imx93_csf_imagename.dts',
+> +                         force_missing_bintools=3D'mkimage')
 
-> diff --git a/doc/imx/ahab/guides/mx93_secure_boot.rst b/doc/imx/ahab/guid=
-es/mx93_secure_boot.rst
-> @@ -0,0 +1,294 @@
-> +The existing file structure is automatically collected by the nxp-imx93c=
-st
-> +etype and submitted as a single signing operation: the container header
-> +and the signature block offsets are read from the i.MX container header,
-> +so the offsets in the CST configuration file are always correct, whether
-> +the ELE FW is bundled in the image or not.
-
-'The existing file structure' is unclear; I suspect you mean the SPL
-and U-Boot containers produced by nxp-imx9image. Also, from patch 4
-each container is wrapped in its own nxp-imx93cst node, so this is two
-signing operations (one per container), not a single one. Please can
-you reword this to match what the etype actually does?
+Just to check, is 'mkimage' needed here? The nxp-imx93cst etype
+overrides BuildSectionData() so mkimage is never invoked, unlike the
+nxp-imx8mimage etype used by testNxpImx8ImageSizeNone(), which this
+appears to be modelled on. If it is not needed, please drop it so the
+test does not suggest otherwise.
 
 Regards,
 Simon
