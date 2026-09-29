@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 965E0CA5FA1
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 10:14:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E45A8CA5FA1
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 10:15:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3B25B40619;
-	Tue, 29 Sep 2026 10:14:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A5AC04062D;
+	Tue, 29 Sep 2026 10:15:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id onZEupSu_GuF; Tue, 29 Sep 2026 10:14:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 4D1B8405A6
+ id VBzp5QkJxR0R; Tue, 29 Sep 2026 10:15:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org BDBE940602
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790676851;
-	b=h1uJ+Uh5UhGy0mnVlExMkGVquhcTUAa/F779/BfmWNDsFy5Lhs9PoEoW76drMrPkRTfN
-	 InmUtWmkIemb+HFKhOQiTr3cROQxjPOXLWAxdfaFXLJ6e2/wvw18LPadK8Q5KVenu3ICk
-	 qrYRe5DGrA+Y+sYtV/0lRur0JqxoNDyQMmoOc56jiJMI8xJ3Qar7RGYbWloTKNzEwbkUb
-	 vELeX24lEi5QGhsrZduIZA2ZiR0/boq14mYcybFX9vJKfVtfFyuX/ySGRt36raTz6+MX4
-	 W7Jmle9Pavz5Gm7Y84h7ye4XrkXq6ybJ/eAWd2xt7ZlCJYKdp/y5AVsj4IqiReLwr/g==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790676954;
+	b=SMHMFn9JjtNAVeP6F5n4v3abXd/SkdHqpqx+D/tBH79UCWx8aC4La8mv8xOzkHaiczST
+	 5brfEVy7njQV+Jz92YkF2+vzZeWUbNfAhJfNPUCbuqdtTS+LrS47xpQYK/CvwjlJmPIdg
+	 25Fg9o0FLad2CFtBujYb06Z+u3ROupo5RBypA4/J72grAcXwZKwq9l8UVHb66QrTjZvOz
+	 0Enon3lYcgY+L4Ub545sPKVV9V1LW8TNxXE+ak4/nCqjBTWxdDoleJgfpUt+8yukUVYVe
+	 7PzOQtdV4Vp+DFMFC9OibToN7T6VKgBSRIJWwREVzRovSHMLqZenEin12qNmpWUmFmg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790676851;
+	c=relaxed/relaxed; t=1790676954;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,108 +31,112 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=JCHTW0j6kSCY0SnDPzfpfdCVAZPvS/A0jLuIDtCVHYo=;
-	b=qiEhTdyJdCtMgplTJNa1wBhN3cAL6XRpJS8zqpRz79VaocRSYd0vtY7EYgYMFbb88JM7
-	 /n7FOXbB+tef+1hwN9WPgwZz6+9pbG0EcyMHF55F7t8rn7sd4LNvh3c4NxLg70HXD81o3
-	 8VER81rYXyz2xUTdiGjtpNCniYc2mak24UIOH+OVtxDFOlMzjlic+IaPGdY5br0QIxfP7
-	 F1oMZf8xS26UEF0sqCHNwxs/iCTOz6L4hCSKyXvPxhLcDtZ21rQi0dvQDcGRe4XYZzWi4
-	 /r9b1LnHZWzUQoItoRon6atC/VqMX4CKxyhoFE9HQYcuw/CDiq1wm+f6BaV8jYoFAgQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZCkMlM4u;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=6JEE5GPjh2y5Jcxb456m0dzpR9il2Hf4L1umHmFf2Q0=;
+	b=bBUbavvp+e+YKBj5Wmm6reiQXmFdbKjQ7hAoF0fxCsKu8tFhhFORsLvZDApTSIEVBXYB
+	 ZcPHNNc8rnYCROnyVhP1tVQYrISErTtci/d6Xbo5vYdOtOv5610zFlezm0hrH16eTIgh8
+	 8ekcfy2ZVE78j1ol6Y3G3V98OaEW5pRkM0y/x/LGYazhUyi8G2t4veTIjcUKZiZiZDAWe
+	 wg51J/ulWckfa7OwFZQu+gnLDJFURHR2R3PbkTFpkWW57IaSiXhjqq8cgy93UWEWL0Qe0
+	 tj/+i3LdY27bEy6oH0S4F6wi0lBKhNjAWOw9TD40+5pbJRMYx76NnvXfGNVH0ck4mIA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790676851;
-	bh=JCHTW0j6kSCY0SnDPzfpfdCVAZPvS/A0jLuIDtCVHYo=;
+	d=lists.u-boot-project.org; s=default; t=1790676954;
+	bh=6JEE5GPjh2y5Jcxb456m0dzpR9il2Hf4L1umHmFf2Q0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=tv9MpmHK4HBhH6cA/bffpA4tB6yF67GDbMHKFfFRL08iBWIJe1swfSN8RaNYN7Y4I
-	 qKsCbVY2gatej7tw4sOrzMBQrt2qOe96HMGZUB4jKLECpZbDGue10RZMierzeVzWE6
-	 0afHkN13B3O31BDbtgfqBv03MSDRsaSWntVy36r29oqUsawRzCVEJkIGnraOsEQYOy
-	 V3y95ht9ggkAeUiWiTybYEWmbjmN70VNWaC1vCDKZdwz58J9rEQp2+k8J0wSnnXmSA
-	 YfgrPGHte9ucze6rxEdsobSApj4O/WnadfFPzeOL/cVQ2plCel7w7yxd0W0JRDdyH+
-	 8qiJ1yuLNGr8g==
+	b=c6Dn1jL1frOJKYgNoNB+FwChWp3Mxr5iHadOsWdSrjaM/W5yLJvG/EqeN0jmIXQOo
+	 chp8IL646bZu1NZfeUyJyI1kpbn2laFLdX1kXlMtdYkKdq1u8SBOSBu7EAeH0lK7Vw
+	 EN0WvjJIzqGI3qo9S+7ibcwRMJSIsWa+eL5mXc/LPzCreka8Ru93PZ6IFe3T2g7z/H
+	 aW72xdvG6nana9dp5vt+ike9Mdbqtq55Q0rx09wGsPOPHRnqfUogOuqWQid043+dY1
+	 NT8gxgq6j3lM8WnXgvPfKphvktEY883we+HPYK9bgOOg50Tv3y4XzTlrruGrxPTiAh
+	 4QZ7rcsomQI/Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4D1B8405A6;
-	Tue, 29 Sep 2026 10:14:11 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8E0D532A
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 10:14:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BDBE940602;
+	Tue, 29 Sep 2026 10:15:54 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0F49061
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 10:15:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 73BA9405A6
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 10:14:09 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E968060767
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 10:15:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SDqiLjFrWK8B for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 10:14:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 9BFDD4059C
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790676848;
- b=ZBR6toOP/OPw+ID8SKocgl2T6TNvhi0rWQGFOmABSOeMEX+6+E1ukKSQJEoutN6kClM2
- qUHs+zGvAKMnaKRqm6ed/+VO3dLSe7VMueEo76r1O5ZUBjOkEcIU6bQ27Ar9gtq5wZKuU
- JIcOABxaacqfJWe8H4/60Ho2aKI8Gx6p05BuQxYMlrpI7ISvoig+BFSzJx/EzrVYsAMVZ
- 9t2jCVmyINxDpJ+Rwma0/5wKNEVoWSxe8uHhsD5lZDG4QPvbzyH7gs5Mj2/ksHuIB41nq
- ykild0m1X1lCbapwsiXkzeE7ySUSyxr+79i6Mt86UShhwcBP0KB3yr7OUoMCBTkYQRg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yH0ByR0hbaP3 for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 10:15:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 258F260731
+Authentication-Results: smtp3.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790676952;
+ b=X08rtUiDmZ5nBh+t7hztRxoOVq43FjY8dtapqBLAr9ckJ+mZsISQJNa8fPP6OQFh/VM4
+ vxaA26/PBMG5PAMjV2Z60zt5fZi9ia/Gvss9D198mTO4UnaYRZSsHZNJsl0YyCnE7D68N
+ SSQYBZbYeJ8vRrUV6kNlo9Bl8RvCDxfqn4v8W48mADYj0bdtyBPMVrPbxE0yM/TQ8lVYm
+ Vuc/IsxuD1pBReRImYdMxP/n4EXYMbWfN4qsZ5UN5DCIdpjVAqUGaCDeGp8YQgR7C5Sb8
+ i3N9PZ4FW7CFYi/plnLVaFui2RfuKjXQb907z6ogM0qlJpohQ7C70+WW80nk54bCBpA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790676848;
+ c=relaxed/relaxed; t=1790676952;
  h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Type:Content-Transfer-Encoding;
- bh=JCHTW0j6kSCY0SnDPzfpfdCVAZPvS/A0jLuIDtCVHYo=;
- b=R9DDno2ayAEpb92VU3egeF+uLglvNlBvLVUAu66o3GwCs2mcs7i4XV+frhIVlRJ78RLL
- ukRVupFhubf5tMxqkln4cFcK9Mr8LK0Yn1yeDpLGg/Ltsd+e+VIyjNoFCg2JlIElZumge
- 0txQMiCWXtrEd0WJs+GWH6vY5PzTPDfAXvsEXBVUn2+6aBQYEMU146gDE+y1bJ2lvGfjU
- /q1r2C4Zy6XrR8XvCBXCLKVvtzkAUr35YTUBogcF3fY7eLbFC15Jcmt9vkOq+rn7QQ1tT
- etMDAfRwBIwiINX/4YDCrDUiY+DCmbGPeuYPROQMYwYvE08vLEB4lzyRINfwC+kVb0Q==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=6JEE5GPjh2y5Jcxb456m0dzpR9il2Hf4L1umHmFf2Q0=;
+ b=sLFq72K4hIzQSaP1VOkBnEJCM/pq1jr//qkkjmKc2N2TbKxy7Fd+UeycgDYA+QEI0ZMj
+ Afjke/+OuzW+yb5ySEQAXVRixd+tQRtrhs+TgiXAPL+gib2Eh5cryMIrrog5Pxu8VrcZv
+ mYZVJjfXxyLtmj2ksr9WmtufvDvy0/XlrBqM5oozwPM6bmEoQ/Hn9XpAqY1seyk3VrMYY
+ I/CFf5xDwfHi1oKaEnbf0l2taYnkPH5zz8SJ0Vs5Kpch/IxjR3G8ivTQfntRZDM186fMc
+ V4P7rRgWcNCGw/cttw8GbXOMtqSOk72y7t/7M7wKLkuavjq6dQqbDwgS1ttrv8bA5XA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=kernel.org; 
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=ZCkMlM4u; 
- arc=none smtp.remote-ip=172.105.4.254
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
- helo=tor.source.kernel.org; envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.s=k20260515 header.b=iIBPwD4s; 
+ arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=ZCkMlM4u
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9BFDD4059C
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 10:14:07 +0000 (UTC)
+ header.a=rsa-sha256 header.s=k20260515 header.b=iIBPwD4s
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 258F260731
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 10:15:51 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id D2CF6601DB;
- Tue, 29 Sep 2026 10:14:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9C8B1F000FF;
- Tue, 29 Sep 2026 10:14:02 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A3664600D1;
+ Tue, 29 Sep 2026 10:15:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C6F01F000FF;
+ Tue, 29 Sep 2026 10:15:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1790676846;
- bh=JCHTW0j6kSCY0SnDPzfpfdCVAZPvS/A0jLuIDtCVHYo=;
+ s=k20260515; t=1790676950;
+ bh=6JEE5GPjh2y5Jcxb456m0dzpR9il2Hf4L1umHmFf2Q0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=ZCkMlM4utBtN3yYJ5Z4rZseeqKHqSQre3rQVpcwz/KJEL6r7BdYTgVJdM1e7Kfu9C
- 0O67WnpRaqhqIOiVkqpxZO1IKxKr9bVnZHjIv3kVQLbe+yJC+oxq0L86gaWOY7cHn8
- VJGTaoV41UNO1iw+BIz+1yCvFCEWfyFvD5Tki/4X/OJqUoJcYRGxyhfD768zcGXlX+
- J/cHYRO+zoptVatL0a0/e/xmsM5mj8aM/9YuDRZG/6U/1eGaplcsIEW8cNNqFByA52
- 81BdAhO+fFESisJIA2xJHSSonCYb0h6P/qekwL/rD3b0wwClAi5qU7TapyTIKntKJ6
- OTb1FAtL3ooXA==
+ b=iIBPwD4sjVMeG1f0ecXQBD9t5QByFDs0qlF8iX1x2wvv0IfAET5uuJiasNNeMgqbE
+ eL4+QV06xzld+ejaljFcBb2ymwak3PpDtjCNzyZTjhGAXZ1/RcKF0dOAXpHPv4DyoX
+ XrxfoyRY6HGdamyBhW9ChidwXKYj3y5iO2biRBN6NUwo02XLAwKMTJIq6Ss0jRg7wH
+ B7rEk6M3kIN2m2JRlhE9lRk9sJI8YhQIWHlAz6UbhKUshXBCDeh6QbHB68RYqTOs22
+ 64fUFnG9yFYWQlsCcO20wi6gJIZJBqtmKUzIQl+2E6xNE6+cEc48pLGzCsAEGmGhyY
+ qYK8p69MGK12A==
 From: Yixun Lan <dlan@kernel.org>
 To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org,
- Yao Zi <me@ziyao.cc>, Eric Chung <eric.chung@riscstar.com>
+ Eric Chung <eric.chung@riscstar.com>
 Cc: Yixun Lan <dlan@kernel.org>, Tom Rini <trini@konsulko.com>,
  Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
- Wei Fu <wefu@redhat.com>, Scott Bambrough <scott@riscstar.com>,
- Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Anshul Dalal <anshuld@ti.com>, Siu Ming Tong <smtong@axiado.com>,
- Johan Jonker <jbx6244@gmail.com>
-Subject: Re: [PATCH v13 0/7] spacemit mmc driver
-Date: Tue, 29 Sep 2026 10:14:00 +0000
-Message-ID: <179067680265.1560050.7465254545699739868.b4-ty@b4>
+ Scott Bambrough <scott@riststar.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ David Lechner <dlechner@baylibre.com>,
+ Julien Stephan <jstephan@baylibre.com>, Johan Jonker <jbx6244@gmail.com>,
+ Siu Ming Tong <smtong@axiado.com>, "Lucien.Jheng" <lucienzx159@gmail.com>,
+ Huan Zhou <pericycle.cc@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Pranav Sanwal <pranav.sanwal@amd.com>,
+ Raymond Mao <raymond.mao@riscstar.com>, Yixun Lan <dlan@gentoo.org>
+Subject: Re: [PATCH v2 0/4] pci: enable designware pci and phy on spacemit k1
+ SoC
+Date: Tue, 29 Sep 2026 10:15:39 +0000
+Message-ID: <179067692083.1561522.1819581167894094558.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260912-m4-v13-0-71043b29630f@riscstar.com>
-References: <20260912-m4-v13-0-71043b29630f@riscstar.com>
+In-Reply-To: <20260913-pci-v2-0-4fa1a8b5de06@riscstar.com>
+References: <20260913-pci-v2-0-4fa1a8b5de06@riscstar.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -150,33 +154,20 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
-On Sat, 12 Sep 2026 20:36:53 +0800, Eric Chung wrote:
-> This series adds MMC support for the SpacemiT K1: an SDHCI platform
-> driver, the SD card device-tree overlay, defconfig options, and SPL
-> boot-device selection from the SoC strap/config registers. The SDHCI
-> driver is usable in both SPL and U-Boot proper.
+On Sun, 13 Sep 2026 12:23:09 +0800, Eric Chung wrote:
 > 
-> A flashing guide (doc/board/spacemit/k1-flash.rst) describes how to
-> write images to eMMC.
-> 
-> [...]
+
 
 Applied, thanks!
 
-[1/7] spacemit: k1: select boot device via config registers
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/aa3091dcd7012ca77fae5854da62e360a9d4ddeb
-[2/7] mmc: k1: add sdhci platform driver
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/18e9745c932718335d0a8cf0223a00d216f71272
-[3/7] dts: k1: enable mmc devices in SPL
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/c8d4129cb9a4ef84fb167324a4fee1b2807e9219
-[4/7] configs: k1: enable SD and eMMC support
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/f570dfb74e7ddcd4063bec68e3e81a7063179700
-[5/7] MAINTAINER: update Spacemit K1 entry
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/a75e1ed839a31f8ae9e534fa76167290f1180d94
-[6/7] doc: spacemit: flash on K1 SoC based boards
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/69d82789fe6fdaea697fa124a934aa5e4a92b3d1
-[7/7] spacemit: k1: fix product name detection and DTB matching in SPL
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/6f8c134610b9d139ff3e104e4cdba3512c4ee7e1
+[1/4] phy: spacemit: add K1 PCIe/USB3 combo PHY driver
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/57eb5723d5feb3226cff9ac1d8379f0b31eb09b1
+[2/4] pci: spacemit: add DesignWare PCIe host controller driver
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/c8764b8db670152ff8e3b393c8de52823bef51ec
+[3/4] configs: k1: enable PCIe and NVMe support
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/d70d033928044754e9ac6ea103bfaea19b300816
+[4/4] MAINTAINER: add K1 PCIe driver to Spacemit entry
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/dfa681ec397aed90bd13aa5e0e887ee533d41988
 
 Best regards,
 -- 
