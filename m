@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5D36CA5FA5
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 15:14:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 757EDC9832A
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 15:14:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6007C80E15;
-	Tue, 29 Sep 2026 15:14:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3ABAF80EDB;
+	Tue, 29 Sep 2026 15:14:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1fBiMJOYZyGp; Tue, 29 Sep 2026 15:13:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4A4D680DF4
+ id xQiQ9ai_9j4l; Tue, 29 Sep 2026 15:14:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5CB0180E0C
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790694839;
-	b=DfanMmUX5MjAqYw5UAbocL1falsPQA1wC3uUWZy+6AYd0xXxiGem9qqGQTtUAQANSa7U
-	 akkjGkdyy1AfUGFNbebqhaCdBM+n9yVlwfjtEJ1TlkC0/4JF1obPuQi5seSl1EQ05jDGV
-	 mOolPbvSFY0G/nahN/rvCBjwMHAQLmpMs96Sefc3AaGw8j/w+BVTUOiO4vRCizOb059il
-	 zofFTpXp4nktZYb3jWpz/BymdJc+eufPzIWnBgQzRCyOCTtfkrlfjnTD6uRUPnCCSJXFb
-	 ve3thLL+vVpJg8CtLjFxjYyzfky6PikEK28alN6REtq/HsHodcNQHb4WosRVIMhmI/Q==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790694848;
+	b=fgTQ69R9dDOupYEuppAzPnCuwqAMFFOTemEgjL4a4o8Rx2Wh36zVuqq0DGqrGE/l3Cnh
+	 A5yggNcWGn7P5nB1Z7ew2VCoUs1LsRhI7TXqgTK6SRa9fm5HJ5BYR5Tvk11Jtp3q0eRkk
+	 M6duVhydE9+Rwpo4zX6v6xTJGCuoIfSS+x9tyhWg+JmQ0wp5AxZfWSWnIUqu3r8qvQhGz
+	 fBash9Xx+PdEUpqf4IMQjQ2GZPgG99AsYK2T84mz26fWMyVlPamN5mUVhSc8efMMht9gq
+	 0oLpyBCbYc3o/i0iT0ENsGaVP5Oi/Z7yEEJigpmRvAMxGvH58+E1ESudYTNX1M0qvrQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790694839;
+	c=relaxed/relaxed; t=1790694848;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,134 +32,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=B3Pb4+cw1XX13gvKMBdlX6HW9o970CPxg2gO2aIk9gg=;
-	b=pLIYn0tM6k/CQJ9jql8cBVVGNqptqvJisqwIoCd+vvB5ynL+WZ9knpiNTzgXgTzaSo+8
-	 u3kFDuJXuPt9FC6NjYqWhIyDjwsbU75i+M0Edr811Hn/A+2vuYA8mtOYfPvTiKV/S9R7X
-	 OdXVdPAqFuESsMIsvM9v+unaz1tJmJDDfYEaO2t0HKPWcY3yQH52zzV0QMbsKP/ueOsQw
-	 RCvdi6pIPIscChojFXddmV55BN9p+KuZKsvRaIW0PG6ra209irePnVu8VUQIXvwWytR/E
-	 X/ZsfuVCwTJfh7gZyfNxAs1GHIzRjZIT9EZ4Xf57SiLqSj6CG9V/VN2kNrSB06JdOkg==
+	bh=LFfLUaLWNMMVOcgectjVQ4vXBtUz1GFje9i5mdFc6a8=;
+	b=ONQ9IHZsKlz+5w2IM/nwHfeUBsD5lsdmFRXpaS3ASV815fYrAvYYcoFP+N4DOJzzWtrT
+	 MbF4t5W3BYPYLM5XwBbteTT0XBQyB8GYl0+rfpBtoO/N2XEnFa3wFV2a/zWRzhtsad+Hl
+	 xb2M2/NleBZq7h3op3VEgMtMIyYWqi2wTn8iGmEW1eB8jvvKvJfgDd20KlsFZnLd9ppYh
+	 jbQzA2kOwZ0UgxwTY8o7woAOhb+EicAD8lAyCC1AFGfQnYc+72wRlEgX4jPrH2xFTTStG
+	 E/4oKG9mINk9WiDIbnxTG2F9Odl4MuGBxfeT05MSp1M3sb7GIV+X/HmQTNJDV7tuY6g==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790694839;
-	bh=B3Pb4+cw1XX13gvKMBdlX6HW9o970CPxg2gO2aIk9gg=;
+	d=lists.u-boot-project.org; s=default; t=1790694848;
+	bh=LFfLUaLWNMMVOcgectjVQ4vXBtUz1GFje9i5mdFc6a8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NQgvUttmtvpAV2dRXz9EtNtj6OHQhzsZvGIPn7E57WC3qpPPfz00T7KMzzy7CUSUK
-	 fNTCILB/kc8sILq8J7wBsW+LqTs8LXittp1x/9kyPus1mxS/MYn9wGh+PdEJMxJ+Je
-	 EuvisrRqeVZtzzErJtYDc+igisdAZoNNCMEzkFLsp12frnmqeIH8wy7jdqdywvjbNp
-	 782YOOVpihpVdGfi0ZkgtI8LUmNhl3KKtIVbKbO7P2YnntcCvGK9bO7f2Ag4YFR1+R
-	 cnlwb8ahnCsByN6s1h7BDQcQ6wOWlybddsQnkO9tIJrT5+u5hrnieLRuGP3Tfs/8AB
-	 HsGrYwZPoN+lA==
+	b=rvL+b1W7RVf3E2ZX+BCEUwcGqW/Kt5bLttScEp7JHrQcFYgClKmh5eV7NNrk+7+NF
+	 j6dK+pR8RJpBFumY9eskMzkVqwzP6w2kAsb2hrtAZVhKG6al3zVmCf2wchY2gv7vlp
+	 AVfFsjOj2yoEqDjdma/f7dMcpI4/jiVkxMrIm/iiVYQXv/lvP9guxJSJcHCtDgNpac
+	 U/j37v0nQUUOULzxMyErnZP7GqgtSKbyD/tlmg1zC8HPIPT8ENhO9lYuxKLhJ8ZkHw
+	 /R9rQFT/JHZlSTo9hLuXY8wUdQCd3IhHw3syxgHlFALcCboPIAsIbaEJxd4G1us4uV
+	 6Ixr0TiERLy+Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4A4D680DF4;
-	Tue, 29 Sep 2026 15:13:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5CB0180E0C;
+	Tue, 29 Sep 2026 15:14:08 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id EE31932A
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:13:57 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 6CF0472
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:14:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D47A94032B
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:13:57 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6AA5A4032B
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:14:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ViznYb_M4DLg for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 15:13:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 6671140304
+ id TbCYJ-jYZe1Z for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 15:14:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 77A3940304
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:31::2a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790694837;
- b=g4g3UygIk4TGmrnpgdGY8HyB1Ie9msFbFPgXqalH33SFiw95Gp/umZ6SfbmV1l+JlulJ
- 8dDw+5q8pCkvruCr80qK7Bc6cQWUqvrN1B8pXULoXOSJEMMoYfqVR9vK13ZvRu4XJEWgW
- +OMfjXRLpFqCOISRLDsU1txjCVCVoA4GKGrIFK/QF4IiJldgjB/PNB66rINeu5xUOhrJU
- RJITLN/DYR0d0u5KgBsth3rosMQu7NtT1Xdu/WyOrdg8p+HUH27ObaRRhmkYX4r5EKlrP
- 4AwLcKc3ySL51L484QesqX9PKlznk1G8crQm2jAsgAPlGkfuX16wdJ7ebWMU/fCEJ6g==
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::2b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790694845;
+ b=CdCUBUshX92qqg9F9nBKuhCC9wJP8vR91KAbh2jHlolTo4iU5q8TThSkf6P0fdYj7ezs
+ y0RMtvPgOURksxIA0h9bdgZLG6td8Qrw8zrfKzoOdoYbHav4bAEUHtxtzjCz3FQm0aQQQ
+ bukoN89QitqDG0ib7qVp7F5QAXKvKXBcUak9aWW21uyKjR0uGXHMaj2QDafyuE0BVCibJ
+ eLgB44KSh5ANb1srTpnlzqs6B7jnx6uGC5sQhKuFpbsn/WoyhjAMHLVb9l2z9ClppVC8G
+ l0KwMofGyqFWFARy18671ypd9cEpqsrsTpy3yVNvU89kKrMlKamZeUDTPdNQY7OSUzA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790694837;
+ c=relaxed/relaxed; t=1790694845;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
  Content-Language:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding;
- bh=B3Pb4+cw1XX13gvKMBdlX6HW9o970CPxg2gO2aIk9gg=;
- b=DqB9ElFl8PXE5rsvCgGABQW0+M5KH9vNMxORBCqvsxBt7T7vkm2xZnDaUO7JxTiKEzf/
- JlI5yM0nASG1DEFDcua7jJaODTEJ/FO0pXIMSOZ3qXB+Gg57OvkI/KnLTakwO1Bh1Kg0n
- cnnuddBb8iKa35Vm/y9IlJsmV4t54oaA8oTi/wMi2yQPTXcDunDJAOsXiAekWvMDi6nJ6
- kZWuNM9XO1gaECOWfbfSjSwsX5PpleMtRBOZ9+XzaB+pBpqa+3Z4mNqTcG6y96639uPJV
- 4T00N1WNq2isZhkQs6alXgTqxF9HCYRDVAefxKUK/Pvia6LufBttjF5Fvmc3Yw68THA==
+ bh=LFfLUaLWNMMVOcgectjVQ4vXBtUz1GFje9i5mdFc6a8=;
+ b=Cj70ZhBFNx5PV7YgPqh0zD2PJ5n4rT+ALi7h+Kz97P4vZ8lNvIkOJCQkqROQkPWa5R5o
+ puNaHb9EKTXDJ/Pl9gtF+D84hCo6awo5PVjlUayvvPrDbT9EBUqJIpNFtl8b8hZgHKo10
+ 5scgSLnT0LSuuALdVYeKpahij/acMTTljx7ZFXL+Q8KIh2ImkIAKa3lQ4HVfNLGGT21xx
+ EsM/b88XrNVuypnaKvg6NBKD5fvjWkDFpxU4LROK30LDb4fSxS7gbr9TEkxMfb1d7iAaA
+ fJmafI5OvLju92hVkadkuJnY44vedWeIU8tyV0ubLYn/Q9EQLpUunAlss1IQTY4GwaQ==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b="J1ctPZH/"; 
- arc=none smtp.remote-ip="2607:f8b0:4864:31::2a"
+ header.s=google header.b=nlxtGEaU; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::2b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:31::2a; helo=mail-oo2-x2a.google.com;
+ client-ip=2607:f8b0:4864:31::2b; helo=mail-oo2-x2b.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=J1ctPZH/
-Received: from mail-oo2-x2a.google.com (mail-oo2-x2a.google.com
- [IPv6:2607:f8b0:4864:31::2a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6671140304
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:13:54 +0000 (UTC)
-Received: by mail-oo2-x2a.google.com with SMTP id
- 46e09a7af769-81eab67b951so552021a34.2
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:13:54 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=nlxtGEaU
+Received: from mail-oo2-x2b.google.com (mail-oo2-x2b.google.com
+ [IPv6:2607:f8b0:4864:31::2b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 77A3940304
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:14:05 +0000 (UTC)
+Received: by mail-oo2-x2b.google.com with SMTP id
+ 46e09a7af769-8167e0d1f90so2717040a34.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:14:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790694833; x=1791299633;
+ d=baylibre.com; s=google; t=1790694844; x=1791299644;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=B3Pb4+cw1XX13gvKMBdlX6HW9o970CPxg2gO2aIk9gg=;
- b=J1ctPZH/+3p8dgm5D17qS0X4hAzjqutokBYmX2rHBAJ9cFSb24j7/ZGBzejgrU2oiq
- qCgoT6Buur3FcMbuCweAIS3hko6OLBT0tlF1ijsPMnfD+x4NvmJ9wQa8a4tHljsoRqVS
- RxxwxwheFRttxpQo4vAzUnrn4YYjj7M1kVno/Knvbi4zvMHV67hJQoygtPoJmw7nYyHB
- 0ObEmGYWTpc1DaqVrM3lfq+6lwMqpD2ujp5iL80Vi4QyVPtJjS5wxbMr1jaM2/QFupyS
- Pb2c+otRuga3O46Znb8TSfP6O/DWVf1mBp/QIgPT4B80/Fc3jwYLSvZW/ReppGPd4OZR
- 1gBg==
+ :content-type; bh=LFfLUaLWNMMVOcgectjVQ4vXBtUz1GFje9i5mdFc6a8=;
+ b=nlxtGEaU7LkXVlXXlxb0c4zpAwwZ7kG/hdu/Wq/FRwLorBULeTFsB8Uo0ZFkF1FWS9
+ bm5ONR1FD8qP26GAgwyiJfVn3d0lFbjTlRf+crM/viLFGJl6EsAZCR7fb7vlF2r1NUoU
+ YJT8Wi4wSGSIAoxa1Ez2oA8EQbCe3Tl0XtuMPVssf2HcX3vq9UpcrTarKv22f26ggmo/
+ ZAwp73ygIpoTN8BV/QmA3m3iO7yslf03/ydupysxrTstfU40MrHHGvqeGFAgSDOoOVP1
+ chTjaLgRPGeuZVYuZ/AsUuPV7tb5W33cH9XXKWCNTUXVUckQgJlnW6BhVI8VWDTUxnlw
+ ya4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790694833; x=1791299633;
+ d=1e100.net; s=20260707; t=1790694844; x=1791299644;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=B3Pb4+cw1XX13gvKMBdlX6HW9o970CPxg2gO2aIk9gg=;
- b=xSSaKg9MVbucU6djJCA2cyGsU9S4GfBqW9Vh/XSPPDJaJw5DGkeuQP44BK4CyqpJfr
- TkPddy34pjZcXGsdt03jOMmVzQ28n/BJKYMO9aKoWh0gBxpc6nZ5VuleWckZbL7ZOqwV
- 9qXpe/U1bXiE8vuVDEht8q6sY5CbFS2Z5INQk1wM4rDR1j0xfLydBumNGshOYP0bFiX8
- UjCkOJDieQ/dGJN1LVt0p2zX9vrtmSsX5YwWf7vWu0yOp+qw22yKD4cDrdWzxrhuF4h9
- 99HDGjFpumsuy7DeFqRKUjeWeguJHnGDnr6CUDVy2rvQXIYpLNq63pJGbxc1qjACpezj
- iUJQ==
+ bh=LFfLUaLWNMMVOcgectjVQ4vXBtUz1GFje9i5mdFc6a8=;
+ b=qX7wMK33U6TP8UWQoJEShk1jrbVAkFbN0KFOxZ8+xd52UVqvhl4KUS1RgYeJAZoKNU
+ ZuiFOP3KackwEhDc07GBMtb7ebpTObmQG3CFZm/0DKwJKvQiPRjKSqwenaOC/igi35t/
+ p0ImQKzA9dcYmum9pCkz3XAHUCqVXiNvnk9KGyR4zRVaAWqxwqBwlpYqbGuwns6w4hb4
+ X2lW1VFH18NN8noBLaDjFmyGfVmkZBUF5DrGTnKZ1L6m/hqV4+/xj5aD+alUQ9cZyI5L
+ Cko9dQBjq2q/I7C2/1o53f/n7B1KkiSCL3/GupnV6KrflbMeHUMnd2BQ4YFQoYRUEHjk
+ 6H0g==
 X-Forwarded-Encrypted: i=1;
- AKwUvByWWNYIFFtcLsUJf94Pm0mwMomx5vEo/6SvorCkbOPu4M+CqQoXznGQDqlDNe0N3TYTeRyVghs=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nZWhs9UV1WNyKmKULkwlxgtGEdHC4nwxuS5HPS03qPEpyGXmKj
- iQdBxmGrdln/1YsYR1Bspx2K2Eexzy690Sok7zfNEaAEc4GuZQ/jiJ1G0KxHjWBGzpc=
-X-Gm-Gg: AYBFou3O5AEixti7rhgN3GWpd2af/FgCCyu94z70PYvQBjN+O4RIY203DaBX7aJjDHU
- 2vicVJ7EwF8cMI0X4biHHnRfp6ufu0ioS5OSZimcR+wnkDU9nn/Ck4x1OmMp1Yq4425L152+Evk
- WbiSHaAaSA7J/Uour0uSlerxhDwZ8Jxj8ZuJKHSaJ2OAWtqw7MIuibKnUiBmYIJAujZJcUe2piD
- i8q7oLiF6C8ifQO3r+2br4upUfdTyCuwFUmWrv9S9rpnKYgZD9S72CGXkHhogteQCMJLGqShGYg
- eP33Ero7GVEJv1XI3rSN1Z/j3M4/GVx06rWGn2TIeyQwKOwK3mi3HYZTDCvqfbhoicDzjxd6XsL
- C20M4tz2TiaEBCp+k+dv3Q0ZhxfPudoB5/ayPIifZ+7MUbkFVk8wvr+udy/AVMpA7qDgoDJYBik
- i8UCERL42cETswiNJ76fxWP9YGZWUkjbZWXwNMwdC5Kht4yMvINsr9CeRwH0jSDYx3OXrTNUlA8
- azz1LvxZC4HwxOf0NeE2imNXa9HqC9dscgMpeixwXMOiclHRrI5eoTXOJI=
-X-Received: by 2002:a05:6820:1c8d:b0:6d8:6b04:cf39 with SMTP id
- 006d021491bc7-6d86b04d181mr6529300eaf.51.1790694833352; 
- Tue, 29 Sep 2026 08:13:53 -0700 (PDT)
+ AKwUvBw3/bN/wDmqHHcVZ7dp28gC39StBjUpKWR9+XAwH88r5i1yQpYNYxwiQYykYehw0im63qWhc7I=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lHrmjL+1Cgb1SMfC7n28JkKesoEocplH2cftwxBewHDq5Aq0O3
+ dvu7pu2pCGmYBHl+aNQxaEeWGwxC3XdopZFHar2Ztzc5zcO1B/UZSlARYVNy7VLk94w=
+X-Gm-Gg: AYBFou0eiu1xPomL+iVzgfZ8yz4m5SKRgkC9O2WkoU+nQrUEBYvImfp9UfnpPjMXIJo
+ Pp83eC188X6qgn97jIzrE9QWcYhr1XgOK/bH7Y4aZmvR44ihufmCP1hmkDHnxdXBCg0eYAI9Hes
+ NR31sVrtXKlCRJm2UroXNzaj9/dNbwuaMjExrTFRDBw9Ije4s614fBYdCFSLH1gMTbSZfl+xHDO
+ 5KGaNRAamBQUXBLhs/OwRAb/VNIwpzQieWLA7gKuGmczRqk1VDB5ogfhIvvfGVxhqowLgtpYvT7
+ rn1jKXBP8toOo396TkYfyXwvjS/+lV6SC3G4ogJUE/B5BOY1aerVibUrqZ4ESTehe949ccICqJq
+ CyrJaJpRzleNLMEiZX4+lPCqA4ZypfoRRuw6GtpUFOioxXAs9RLzOv/avH1bq3VWXKd3TSu4122
+ ZD2mQ802wPim0J0j+1E3HwPlpDu0GaljG91Igu5mp+NcfA3/na+gf/XRwLU61QqnF1Dcpl0IKTE
+ Szi3nV7Mh3kY5SaRV1/51DTn5jgNMxVcBsuCXGjNkhnYWc3
+X-Received: by 2002:a05:6830:82f7:b0:7f4:bba7:f547 with SMTP id
+ 46e09a7af769-81781795b3fmr16717991a34.10.1790694843996; 
+ Tue, 29 Sep 2026 08:14:03 -0700 (PDT)
 Received: from ?IPV6:2600:8803:e7e4:500:9b16:2a1a:ef3f:3700?
  ([2600:8803:e7e4:500:9b16:2a1a:ef3f:3700])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6dc4483b07asm116255eaf.3.2026.09.29.08.13.51
+ 46e09a7af769-81fafcd4b67sm62628a34.21.2026.09.29.08.14.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Sep 2026 08:13:52 -0700 (PDT)
-Message-ID: <a27b71eb-c80d-489d-b1c9-55d73dd0f658@baylibre.com>
-Date: Tue, 29 Sep 2026 10:13:51 -0500
+ Tue, 29 Sep 2026 08:14:03 -0700 (PDT)
+Message-ID: <839740df-5921-4941-9b7c-a852130029ae@baylibre.com>
+Date: Tue, 29 Sep 2026 10:14:02 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] drivers: spmi: add new driver for MediaTek's SPMI PMIF
+Subject: Re: [PATCH 2/3] drivers: power: pmic: add driver for MediaTek PMICs
+ over SPMI
 To: Arnaud Ferraris <arnaud.ferraris@collabora.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  u-boot@lists.u-boot-project.org
@@ -177,10 +178,10 @@ Cc: Tom Rini <trini@konsulko.com>,
  Joy Zou <joy.zou@nxp.com>, Vincent Jardin <vjardin@free.fr>,
  Guodong Xu <guodong@riscstar.com>
 References: <20260924-mt8196-spmi-v1-0-dd2263403691@collabora.com>
- <20260924-mt8196-spmi-v1-1-dd2263403691@collabora.com>
+ <20260924-mt8196-spmi-v1-2-dd2263403691@collabora.com>
 Content-Language: en-US
 From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260924-mt8196-spmi-v1-1-dd2263403691@collabora.com>
+In-Reply-To: <20260924-mt8196-spmi-v1-2-dd2263403691@collabora.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -197,262 +198,161 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 On 9/24/26 11:02 AM, Arnaud Ferraris wrote:
-> This driver (ported from the Linux kernel) implements 1-byte wide read
-> and write operations for the SPMI-PMIF bus found on MediaTek SoCs. It
-> currently supports MT8195 and MT8196.
+> This driver acts mostly as an interface between PMIC/regulator devices
+> connected to MediaTek SoCs over SPMI, providing read/write functions to
+> those devices.
+> 
+> It has been successfully tested with the MT6373 PMIC but should work
+> just as well with other PMICs as long as the corresponding compatible
+> string is added to the driver.
 > 
 > Signed-off-by: Arnaud Ferraris <arnaud.ferraris@collabora.com>
 > ---
->  drivers/spmi/Kconfig         |   7 +
->  drivers/spmi/Makefile        |   1 +
->  drivers/spmi/spmi-mtk-pmif.c | 462 +++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 470 insertions(+)
+>  drivers/power/pmic/Kconfig    |  6 +++
+>  drivers/power/pmic/Makefile   |  1 +
+>  drivers/power/pmic/mtk-spmi.c | 88 +++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 95 insertions(+)
 > 
-> diff --git a/drivers/spmi/Kconfig b/drivers/spmi/Kconfig
-> index f8972371150..cab82e83c24 100644
-> --- a/drivers/spmi/Kconfig
-> +++ b/drivers/spmi/Kconfig
-> @@ -27,6 +27,13 @@ config SPL_SPMI_MSM
->  	  Support SPMI bus implementation found on Qualcomm Snapdragon SoCs
->  	  in SPL.
+> diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
+> index 95687d0bdfd..8f35dfdea84 100644
+> --- a/drivers/power/pmic/Kconfig
+> +++ b/drivers/power/pmic/Kconfig
+> @@ -464,6 +464,12 @@ config DM_PMIC_MTK_PWRAP
+>  	  on different MediaTek SoCs. The PMIC wrapper is a proprietary
+>  	  hardware to connect the PMIC.
 >  
-> +config SPMI_MTK_PMIF
-> +	bool "Support MediaTek SPMI-PMIF bus"
-> +	depends on SPMI
-> +	help
-> +	  Support SPMI bus implementation found on MediaTek SoCs. This
-> +	  driver currently support the MT8195 and MT8196 SoCs.
-> +
->  config SPMI_SANDBOX
->  	bool "Support for Sandbox SPMI bus"
->  	depends on SPMI
-> diff --git a/drivers/spmi/Makefile b/drivers/spmi/Makefile
-> index 8cb93c820e0..016a8e6b734 100644
-> --- a/drivers/spmi/Makefile
-> +++ b/drivers/spmi/Makefile
-> @@ -4,4 +4,5 @@
->  
->  obj-$(CONFIG_$(PHASE_)SPMI)  += spmi-uclass.o
->  obj-$(CONFIG_$(PHASE_)SPMI_MSM) += spmi-msm.o
-> +obj-$(CONFIG_SPMI_MTK_PMIF) += spmi-mtk-pmif.o
->  obj-$(CONFIG_SPMI_SANDBOX) += spmi-sandbox.o
-> diff --git a/drivers/spmi/spmi-mtk-pmif.c b/drivers/spmi/spmi-mtk-pmif.c
-> new file mode 100644
-> index 00000000000..0bc8309b447
-> --- /dev/null
-> +++ b/drivers/spmi/spmi-mtk-pmif.c
-> @@ -0,0 +1,462 @@
-> +// SPDX-License-Identifier: GPL-2.0
+> +config DM_PMIC_MTK_SPMI
+> +	bool "Enable driver for MediaTek PMIC Support over SPMI"
 
-GPL-2.0 is deprecated. Prefer GPL-2.0-only or GPL-2.0-or-later.
+This won't work without SPMI, so...
+
+	depends on SPMI
+
+> +	help
+> +	  Say yes here to add support for controlling MediaTek PMICs using the
+> +	  SPMI bus.
+> +
+>  endif
+>  
+>  config PMIC_TPS65217
+> diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
+> index da9b810de90..a6a16b90bc6 100644
+> --- a/drivers/power/pmic/Makefile
+> +++ b/drivers/power/pmic/Makefile
+> @@ -42,6 +42,7 @@ obj-$(CONFIG_PMIC_RAA215300) += raa215300.o
+>  obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
+>  obj-$(CONFIG_$(PHASE_)DM_PMIC_CPCAP) += cpcap.o
+>  obj-$(CONFIG_DM_PMIC_MTK_PWRAP) += mtk-pwrap.o
+> +obj-$(CONFIG_DM_PMIC_MTK_SPMI) += mtk-spmi.o
+>  
+>  ifeq ($(CONFIG_$(PHASE_)POWER_LEGACY),y)
+>  obj-$(CONFIG_POWER_LTC3676) += pmic_ltc3676.o
+> diff --git a/drivers/power/pmic/mtk-spmi.c b/drivers/power/pmic/mtk-spmi.c
+> new file mode 100644
+> index 00000000000..39895bf9c0d
+> --- /dev/null
+> +++ b/drivers/power/pmic/mtk-spmi.c
+> @@ -0,0 +1,88 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+
+GPL-2.0-or-later
 
 > +/*
-> + * Copyright (c) 2021 MediaTek Inc.
-> + * Copyright (c) 2025-2026 Collabora Ltd
-> + * Authors: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-> + *          Arnaud Ferraris <arnaud.ferraris@collabora.com>
+> + * MediaTek generic PMIC driver
+> + *
+> + * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+> + * (C) Copyright 2026 Collabora Ltd
+> + * Author: Arnaud Ferraris <arnaud.ferraris@collabora.com>
 > + */
-> +
-> +#include <clk.h>
 > +#include <dm.h>
-> +#include <malloc.h>
-> +#include <regmap.h>
-> +#include <syscon.h>
-> +#include <asm/io.h>
-> +#include <asm/processor.h>
-> +#include <linux/bitops.h>
-> +#include <linux/err.h>
-> +#include <linux/iopoll.h>
-> +#include <linux/time.h>
-> +#include <dm/device_compat.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/devres.h>
-> +#include <inttypes.h>
+> +#include <power/pmic.h>
 > +#include <spmi/spmi.h>
-
-Are we actually using all of these headers?
-
-
-> +static int pmif_spmi_read(struct udevice *dev, int sid, int pid, int reg)
-> +{
-> +	struct pmif_bus *pbus = dev_get_priv(dev);
-> +	struct pmif *arb = pbus->arb;
-> +	struct ch_reg *inf_reg;
-> +	int ret, data;
-> +	u32 cmd;
 > +
-> +	/* Check for argument validation. */
-> +	if (sid & ~0xf) {
-> +		dev_err(dev, "exceed the max slv id\n");
-> +		return -EINVAL;
-> +	}
+> +#define REG_MASK 0xFFFF
 > +
-> +	/* Wait for Software Interface FSM state to be IDLE. */
-> +	inf_reg = &arb->chan;
-> +	ret = readl_poll_sleep_timeout(pbus->base + arb->data->regs[inf_reg->ch_sta],
-> +				       data, GET_SWINF(data) == SWINF_IDLE,
-> +				       PMIF_DELAY_US, PMIF_TIMEOUT_US);
-> +	if (ret < 0) {
-> +		/* set channel ready if the data has transferred */
-> +		if (pmif_is_fsm_vldclr(arb, pbus))
-> +			pmif_writel(arb, pbus, 1, inf_reg->ch_rdy);
-> +		dev_err(dev, "failed to wait for SWINF_IDLE\n");
-> +		return ret;
-> +	}
-> +
-> +	/* Send the command. */
-> +	cmd = (PMIF_CMD_EXT_REG_LONG << 30) | (sid << 24) | reg;
-> +	pmif_writel(arb, pbus, cmd, inf_reg->ch_send);
-> +
-> +	/*
-> +	 * Wait for Software Interface FSM state to be WFVLDCLR,
-> +	 * read the data and clear the valid flag.
-> +	 */
-> +	ret = readl_poll_sleep_timeout(pbus->base + arb->data->regs[inf_reg->ch_sta],
-> +				       data, GET_SWINF(data) == SWINF_WFVLDCLR,
-> +				       PMIF_DELAY_US, PMIF_TIMEOUT_US);
-> +	if (ret < 0) {
-> +		dev_err(dev, "failed to wait for SWINF_WFVLDCLR\n");
-> +		return ret;
-> +	}
-> +
-> +	data = (int)pmif_readl(arb, pbus, inf_reg->rdata);
-
-This cast looks potentially dangerous. If bit 31 is set, it will be treated
-as an error. Should we be doing && 0xff instead since we are dealing with
-only 8-bit values here.
-
-> +	pmif_writel(arb, pbus, 1, inf_reg->ch_rdy);
-> +
-> +	return data;
-> +}
-> +
-
-...
-
-> +static int mtk_spmi_probe(struct udevice *dev)
-> +{
-> +	struct pmif_bus *pbus = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	if (!pbus) {
-> +		dev_info(dev, "Not probing a non-bus spmi device\n");
-> +		return 0;
-> +	}
-> +
-> +	pbus->base = devfdt_remap_addr_name(dev, "pmif");
-
-This returns NULL on error, not negative error code.
-
-> +	if (IS_ERR(pbus->base))
-> +		return PTR_ERR(pbus->base);
-> +
-> +	pbus->spmimst_base = devfdt_remap_addr_name(dev, "spmimst");
-> +	if (IS_ERR(pbus->spmimst_base))
-> +		return PTR_ERR(pbus->spmimst_base);
-> +
-> +	ret = clk_get_bulk(dev, &pbus->clks);
-> +	if (ret < 0) {
-> +		dev_err(dev, "Failed to get clocks\n");
-> +		return ret;
-> +	}
-> +
-> +	ret = clk_enable_bulk(&pbus->clks);
-> +	if (ret) {
-> +		dev_err(dev, "Failed to enable clocks\n");
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct udevice_id mtk_spmi_match_table[] = {
-> +	{
-> +		.compatible = "mediatek,mt8195-spmi",
-> +		.data = (unsigned long)&mt8195_pmif_arb,
-> +	}, {
-> +		.compatible = "mediatek,mt8196-spmi",
-> +		.data = (unsigned long)&mt8196_pmif_arb,
-> +	}, {
-> +		/* sentinel */
-> +	},
+> +struct pmic_mtk_priv {
+> +	u32 usid; /* Slave ID on SPMI bus */
 > +};
 > +
-> +static int mtk_spmi_bind(struct udevice *dev)
+> +static int pmic_mtk_reg_count(struct udevice *dev)
 > +{
-> +	struct pmif_data *drv_data = (struct pmif_data *)dev_get_driver_data(dev);
-> +	ofnode child, node = dev_ofnode(dev);
-> +	int ret = 0;
+> +	return 0xFFFF;
+
+Do we know what the actual max defined register is? Making this smaller
+makes the register dump command go faster.
+
+> +}
 > +
-> +	if (!drv_data) {
-> +		dev_err(dev, "Cannot get drv_data\n");
+> +static int pmic_mtk_write(struct udevice *dev, uint reg, const u8 *buff, int len)
+> +{
+> +	struct pmic_mtk_priv *priv = dev_get_priv(dev);
+> +
+> +	if (len != 1)
 > +		return -EINVAL;
-> +	}
 > +
+> +	return spmi_reg_write(dev->parent, priv->usid, /* pid */ 0, reg & REG_MASK, *buff);
 
-This could use some comments to explain how it is supposed to work. It looks
-like we are using the same driver to also bind child nodes? That seems a bit
-strange/confusing. And the MT8195 parent node (only node) is named "spmi",
-so this looks broken since it would match that and try to use the Soc node
-as the arbitrator. I would probably go as far as making 3 different driver
-structs each with their own bind function. One for the MT8196 arbitrator
-that registers new devices for each spmi instance. One for the MT8196 child
-devices and one for MT8195 which is just a single node (no arbitrator).
+Could make a macro for pid rather than the inline comment.
 
-> +	if (ofnode_name_eq(node, "spmi")) {
-> +		struct pmif_bus *bus = devm_kzalloc(dev, sizeof(struct pmif_bus), GFP_KERNEL);
+> +}
 > +
-> +		if (!bus)
-> +			return -ENOMEM;
-> +		bus->arb = dev_get_plat(dev->parent);
-> +		dev_set_priv(dev, bus);
-> +	} else {
-> +		struct pmif *arb;
-> +		u32 chan_offset;
+> +static int pmic_mtk_read(struct udevice *dev, uint reg, u8 *buff, int len)
+> +{
+> +	struct pmic_mtk_priv *priv = dev_get_priv(dev);
+> +	int val;
 > +
-> +		arb = devm_kzalloc(dev, sizeof(struct pmif), GFP_KERNEL);
-> +		if (!arb)
-> +			return -ENOMEM;
-> +		dev_set_plat(dev, arb);
+> +	if (len != 1)
+> +		return -EINVAL;
 > +
-> +		arb->data = drv_data;
-> +		chan_offset = PMIF_CHAN_OFFSET * arb->data->soc_chan;
-> +		arb->chan.ch_sta = PMIF_SWINF_0_STA + chan_offset;
-> +		arb->chan.wdata = PMIF_SWINF_0_WDATA_31_0 + chan_offset;
-> +		arb->chan.rdata = PMIF_SWINF_0_RDATA_31_0 + chan_offset;
-> +		arb->chan.ch_send = PMIF_SWINF_0_ACC + chan_offset;
-> +		arb->chan.ch_rdy = PMIF_SWINF_0_VLD_CLR + chan_offset;
+> +	val = spmi_reg_read(dev->parent, priv->usid, /* pid */ 0, reg & REG_MASK);
 > +
-> +		if (arb->data->num_spmi_buses) {
-> +			ofnode_for_each_subnode(child, node) {
-> +				if (!ofnode_name_eq(child, "spmi"))
-> +					continue;
+> +	if (val < 0)
+> +		return val;
+> +	*buff = val;
+> +	return 0;
+> +}
 > +
-> +				/* Bind the subnode to this driver */
-> +				ret = device_bind_with_driver_data(dev, dev->driver,
-> +								   ofnode_get_name(child),
-> +								   dev->driver_data,
-> +								   child,
-> +								   NULL);
-> +				if (ret == -ENODEV)
-> +					printf("Driver '%s' refuses to bind\n",
-> +					       dev->driver->name);
+> +static struct dm_pmic_ops pmic_mtk_ops = {
+> +	.reg_count = pmic_mtk_reg_count,
+> +	.read = pmic_mtk_read,
+> +	.write = pmic_mtk_write,
+> +};
 > +
-> +				if (ret)
-> +					printf("Error binding driver '%s': %d\n",
-> +					       dev->driver->name, ret);> +			}
-> +		} else {
-> +			struct pmif_bus *bus = devm_kzalloc(dev,
-> +							    sizeof(struct pmif_bus),
-> +							    GFP_KERNEL);
+> +static const struct udevice_id pmic_mtk_ids[] = {
+> +	{ .compatible = "mediatek,mt6373" },
+> +	{ }
+> +};
 > +
-> +			if (!bus)
-> +				return -ENOMEM;
-> +			bus->arb = arb;
-> +			dev_set_priv(dev, bus);
-> +		}
-> +	}
+> +static int pmic_mtk_probe(struct udevice *dev)
+> +{
+> +	struct pmic_mtk_priv *priv = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	/*
+> +	 * dev_read_addr() can't be used here because the reg property actually
+> +	 * contains two discrete values, not a single 64-bit address.
+> +	 * The address is the first value.
+> +	 */
+> +	ret = ofnode_read_u32_index(dev_ofnode(dev), "reg", 0, &priv->usid);
+> +	if (ret < 0)
+> +		return -EINVAL;
+> +
+> +	debug("usid: %d\n", priv->usid);
 > +
 > +	return 0;
 > +}
 > +
+> +U_BOOT_DRIVER(pmic_mtk_spmi) = {
+> +	.name = "pmic_mtk_spmi",
+> +	.id = UCLASS_PMIC,
+> +	.of_match = pmic_mtk_ids,
+> +	.bind = dm_scan_fdt_dev,
+> +	.probe = pmic_mtk_probe,
+> +	.ops = &pmic_mtk_ops,
+> +	.priv_auto	= sizeof(struct pmic_mtk_priv),
+
+Make this a space like everything else above.
+
+> +};
+> 
+
