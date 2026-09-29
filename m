@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13EAACA5FAD
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 20:32:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A32D7CA5FA7
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 20:32:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CA8DD407E8;
-	Tue, 29 Sep 2026 20:32:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 69A4B810E4;
+	Tue, 29 Sep 2026 20:32:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mCm-lVnh51tG; Tue, 29 Sep 2026 20:32:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org D59D2407D8
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790713977;
-	b=eMyhcjgQqjA00GrfDTDkrjKQIpy2Rgq7Onr9N3uZmYWj4fK9qa2vVvKIOYBSlJjLgJfp
-	 FlVit5SK1A4jzmgq/h33oVuAQev4o63/S3G7vi7f7+3vJfUhc9TI5YoRUXlse8tX6YPhX
-	 IsZ9VLc7IO3xTWY5Yen8M7G5h/xh9KWwY3L6bk1hKi6C2hVOACakjAeOCHArN1OjwNH6n
-	 Y01DjkUmvD7oj1ZnJxDm/amcmVV34HXmznt/CSBwAS0swjbC9CBw2531tjybD98/d4ZqA
-	 DGePNq6FWw34Msj3TEV56G6BrK8vBOkWz4LZkfRf3kiTOE8m+dnUZOzpaCQBitwPIxw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id d0XuTgl3iTdO; Tue, 29 Sep 2026 20:32:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org A87B8810D0
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790713978;
+	b=BebUzg2bbx1mCzK9gwUhQXEdJ6A6DbPBPnxRB5gbkE1Op1lVMvSnx33qGgcZYlXSYef0
+	 pP9nvj4PtZmtKqX+miwlWbaZLLjOXg5P7/lZbmLiIhNUqPOIJj2GVQVrjzZdXF4kyArl4
+	 7jK4/TK/aG02Qt/bcmBNx0KXax6WQ/dSgFbK82IPyzKN6PywIBKdSbahJ+J3Hu+hdaVGm
+	 1R3qjd3e1CYUdbyIlXIsfp9KHF/molCzVs2Wq2tktYpr6pRJVvrYmYF1qhFV/Uc0O+Em3
+	 Bg2iMt2gewI8txqKHsV1BUKc2tO7XL3SRTT0b0UQgoK0YA0mgVwtJ1q54Np4sJhN7nw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790713977;
+	c=relaxed/relaxed; t=1790713978;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,134 +32,132 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=7mpZf9zSG4aebIyRGKV83fhGT9psEYBk4ZzeKrNzVGo=;
-	b=kqkUiGOwvhJhIYO9gXWXkT8lfSBSdeOlTd4jc4MVXsvcQfavyJT9SZQUx0xqMaigMUWb
-	 2MGiKWw2WbP0qgyf3HnKCXutHzcHJcBzDBaiCMcFpciCqvLtPMDbc8l8v5T3dETrM2Et+
-	 35P0vSDl+rBB9hKGStwFJ9kXdy0UZyUPpje7w8N6/q3+aj+l0jR9BQF3DrAcYeg0wumJJ
-	 gpy7MqTtGZ/SkwZC5JKjJupYOBU0Fco+7lLSNh6x8ry5cjtA2zjr7EL4kBeGo1MGYtjqW
-	 /1ywf5wXv0WZWMQ3RoyR4Py9Is8u+q+IrZH3CR7Ox5qf8WwRqTw4uPfho/zRyGbD/Fw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=wI2OIsbWdYV6bPFWheByAHe7H6csNjBynmwDlgJdNFk=;
+	b=m02ACd0+ffvkzTGkGE4UidA0lmZiC9NI2AFUJtNyhSvCqu4SDjyZelMVLZIpWeRtylId
+	 fStcyX5CxWS85Q99/k7aa7oZi1TrKInU8TIRI60kC6mih92mRjpZBAVwzy7tmBl3XRe2w
+	 spI7VTbB1VzGMimu/Bxdnk/F+OxlEEDI430f/Lpad/chvFU+qmYzIDDRZLuaMqxr5gKMi
+	 dc3+6DSEnVLBoZWh0DzcdG+jMAZKFvs1eVUzBjf1DSWH1rdvaD1EKgwu0j9MatzxHdsrF
+	 UMO7pZVMd0EQ833N4xMOcb2G976QD3d/0G/LR58yXsVCnCvvK1fJlPx7x152AbviY5w==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790713977;
-	bh=7mpZf9zSG4aebIyRGKV83fhGT9psEYBk4ZzeKrNzVGo=;
+	d=lists.u-boot-project.org; s=default; t=1790713978;
+	bh=wI2OIsbWdYV6bPFWheByAHe7H6csNjBynmwDlgJdNFk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xvlkRvH1OCD9WEpGU7cr6CDuth0J6m7PatKHfS5M5XGi4VjrUtPpYb/5Eme0fuMka
-	 DVh6aFWma2yphaoBlHzquP/gYOz9JSP0FCzGo2y3Hx/worzXOtbvnxmDHGBE2fb9gX
-	 r0szDSN9YrGRniAtIQehkuB5y2y1hbIpRlb86/Kzv+VOF8G/9/kwfOMMk1Sy2j0NmH
-	 oUOZEyjNsOvrd60b3wj+LiMrVrYoDtBXP7TlLGyHcORojuG6UHRvK+7RfDXWeS1Fk2
-	 OC8l79fxaQ9PcEcPAqJjFowfGQAbj74te7BwN9z6hQrG72MZLpaYcxkau0a8PaddPJ
-	 3J2dyKRgTi5qw==
+	b=FyNq1EBz+p493kOIO9zfAqQwlf7kLdmN3v7Nq7G7x9O4JCrAN/WZ/5yxgBU8K/0lJ
+	 3/W60DzJzm3yNry1W4N26z8OeUuI0AaXopiIM250E1qO7jfEAyHGtEsjSnGUDeetls
+	 0un+cRVe4ZiB+mvfN2Bdee4Ic/bQRTq2ntM5nGCTv3IplIZEOcZ+HtpfqpZqWlLZeJ
+	 MaFqCwhuDW/ZyVrydl0hgas9LS49mRQsN6HBn0Sea2j3mIJUjvJeJB2FF9mi3AW7sB
+	 GHme97poSpbf7clo2bK+9Qh8x50SpEm8KTVFp08aHiE19UfhniBLZyo76/ovz1Rwc8
+	 KOBIXaowYBbWw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D59D2407D8;
-	Tue, 29 Sep 2026 20:32:56 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id DD76F282
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:07:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A87B8810D0;
+	Tue, 29 Sep 2026 20:32:58 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 195F73D8
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:07:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C337860699
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:07:30 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0B2FA400D5
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:07:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LvgrdgPrjaPb for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 18:07:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org BADE4605ED
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:34::c"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790705250;
- b=sZ/359twg96Y6GiVs9Aa5hyjRRbiM0hfnEO5irB4V5igOGgCAk2HtOY9/l98cWluI6UH
- GQ8zKmGjK0XS5mmpZelaLGb2R4Yr0UOHjqx2vA/63fpeYoXdVpnmktORMz+4tIU+pja29
- k8rGrsvQNU3B800r4PLDCBKBjCqiMzYBhP2E8fYgb6C+ZXpiQSv9Z3cpaOSecKnpnSGEE
- YaHysKrm538WrR+E+dbO8NAPXAjlpXMImwg52OX93lFtjV0hnelsoDOOVvONY0Y9PzSIe
- FRpnFNz6JsjPvDJjIfMu017AEWz0zi3LaVNUQUK2HHT3yCmfCUWfcPGR8TYJx2vek/w==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VKD3W8DSpnPL for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 18:07:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 04CD3400CC
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:34::f"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790705251;
+ b=P8wMCjZQ8EnNe7RSgWmzWT3LirmMCTLSa3SRyVijlN+MRdtSKiMqSTwHq8c+Y/u683Gz
+ VcMGDkybP/zZDIK/58jcy9zqEiqRseFHuaQ+ElwS3zcXkPAnIqfMjBSCf41L3iNf6tWMf
+ lxOUVpkSPDg5JWoWgiy0K83c0YyZ01W0G00lGUyr/hLeQf4DlpcQJqLgIhtrLvPyyMA7/
+ qLX6UV4D8MTvUDCX1uwpRdku7vZEO1IJLA4ocBeyzzT0qfdob5eFSEhWPzO/r1cEIVdQ1
+ iwgO6Bg5TIxvQPcEClbKq1efyiavDZwoWA2IIzCyLrTiy3bLv+kU+kminhh3S4IpItA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790705250;
+ c=relaxed/relaxed; t=1790705251;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding;
- bh=7mpZf9zSG4aebIyRGKV83fhGT9psEYBk4ZzeKrNzVGo=;
- b=ZsdcjUk3bwcB12M19vC3DeKnn8aG3DPQ35gqhzXqvihQWL2+3ix09G5/Ol/dzvIBSFc1
- 4HShRoH1kKF7U3Dw5qonYAjsouubrnsTl/wyDtKbW09pvfNFh90xn3GDonvzYDMeksDqq
- 9Zwk25QzhB6Af2S014IjGBP7TJ0Ww/UgTLn92VCkAUPmC7DV9o49F0QOBCLhZiMH8G+Il
- afxi5mDD7Z1+KkAvYpG2nGTrxVoKojRpkQ3gSUFDPR6YDGk/fS4RpXOmiOkS7uYd9bi3N
- DTnyQ/hhCdOLsomHA34XZUIq9yTNEJogFY/wKaqHlEiMpz+F8LIKtzwtaCYtnYMKusQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ bh=wI2OIsbWdYV6bPFWheByAHe7H6csNjBynmwDlgJdNFk=;
+ b=kkOUEW/KTkH6xzNbQOixnIs1eHwUVAK+9ICfaCTLjCaRc++v260VJGiqS38VkKKX5FD0
+ jGFkQXSbvA0EX59phk/7Q5XBQ6Gh/rU9zd28VqYzg2N48wifVS1v+k1lIIlZXrW5uichy
+ MGAz881fSjmzETQcSGhIUywqQLekeSnmLwIU2iJbhwm45wmnslAqH0mFhObMKnLXm2afa
+ u4jCshVFYWt8V5Aih3SZvpSdMy/ppwR+4Vi3rxpfM9cYsXSAw70/QvUki1lFpxCOBfW28
+ 98XYxRyrdrAwzPKuCBzrc+BPckFys3gaMFfdmgSeIV6XSp6XlVuYZ3bhFXktGLOrjWw==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=brivo.com; 
  dkim=pass header.d=brivo.com header.i=@brivo.com header.a=rsa-sha256
- header.s=google header.b=o+hkmxDw; 
- arc=none smtp.remote-ip="2607:f8b0:4864:34::c"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:34::c;
- helo=mail-qk2-x0c.google.com; envelope-from=sanderson@brivo.com;
+ header.s=google header.b=Ss1Fi5tc; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:34::f"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:34::f;
+ helo=mail-qk2-x0f.google.com; envelope-from=sanderson@brivo.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=brivo.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=brivo.com header.i=@brivo.com
- header.a=rsa-sha256 header.s=google header.b=o+hkmxDw
-Received: from mail-qk2-x0c.google.com (mail-qk2-x0c.google.com
- [IPv6:2607:f8b0:4864:34::c])
- by smtp3.osuosl.org (Postfix) with ESMTPS id BADE4605ED
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:07:29 +0000 (UTC)
-Received: by mail-qk2-x0c.google.com with SMTP id
- af79cd13be357-93c5a24e868so388340485a.2
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 11:07:29 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=Ss1Fi5tc
+Received: from mail-qk2-x0f.google.com (mail-qk2-x0f.google.com
+ [IPv6:2607:f8b0:4864:34::f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 04CD3400CC
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:07:30 +0000 (UTC)
+Received: by mail-qk2-x0f.google.com with SMTP id
+ af79cd13be357-93910c9ff1fso459933585a.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 11:07:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brivo.com; s=google; t=1790705248; x=1791310048;
+ d=brivo.com; s=google; t=1790705249; x=1791310049;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=7mpZf9zSG4aebIyRGKV83fhGT9psEYBk4ZzeKrNzVGo=;
- b=o+hkmxDwXKQeiuZew0wHWYOSEm5E+9XCPMObm3FNptbJuvXY0+h48VYva8rkO1QTy4
- JJoRyhUyXWTOlCMgoWfldnoweaQxl6YMnja+t2Ei3UeBlmI5+Qa/Pb9MrLqYGEiz4MQ4
- a+dKgxAZe7R340bQgQjVSEBeLqGNESUyDHCNpU7Mmreqh6yRvsbzZMClK482I8ruHz1R
- lwuedrFu6MmfaCLX2+YlQ18SsHgVBKs1pa9BAzM+pjJdBDwvFc/yPc9L6291vGpfZl4f
- EGqOn4WjE03COeNAef31KOBIwO9aFsuUAsTlCCmnBpb0mSBZWv1mF1EO3lW2mIUYkrAQ
- f5KQ==
+ bh=wI2OIsbWdYV6bPFWheByAHe7H6csNjBynmwDlgJdNFk=;
+ b=Ss1Fi5tcmum0JQFmAQ9QH5fMb3WC5ZTgjULTQ+Ql9YZW5wECg9iuQSYDGJsHAxgkXc
+ HMxwqDqUNi7VcZBXGpQOH/Hw+QSXmZACi+mYtSHUdKZFf8tZCrghMHT+lFqFuPwZFhar
+ dlvVrREdpUu9WzyZoaXW4FsmfUgrn9FPGbdT5D4BaEXyEI0sBGgmEI4B9Q+q99pdXQvS
+ 5o5smEYPCxZ38kX0vtWPUksvcffxhfh0OCgHmzK1ppnPVZn943Fp3mLH3pOJGVUGlkKr
+ 01z9f8nngisQ/ZYSjiBUbBAoC6tMu4sxPGpkgCPO44ACUODvdxjf5LTqjoFSLZh3UNxB
+ eKQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790705248; x=1791310048;
+ d=1e100.net; s=20260707; t=1790705249; x=1791310049;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=7mpZf9zSG4aebIyRGKV83fhGT9psEYBk4ZzeKrNzVGo=;
- b=1+b5ZdylyNh2ZxYIzu0p21xU+gbpBBzG8pJQZEvZJqF2aNCY7ZkixceowNwWocUc96
- P9hUWaTvuLZ3UKUkbMCVGeC1lZN+1ICYDVjgxb2pof3kdBq0kYFz0mKc1ayYXt4HZUPg
- HeKdlcaIMHd8Mm8lBARzn3mPF2BguWwH832ghzvCR0fVW3Nblc9Pv+brPiFBJ7Idxoxq
- 9Xg8TAY0T1NYWdb9SZ8+Gus9Tx9fdguNVph2kglZNzckMe9Cq5dpBlkAHQCRsqh9tKVr
- PAf9o2cgem9ZLBTODt0aPbLCOUiu6UPLcN/TslnAEVFuR0G6GfgcgFO0o6IQLL5gmZYJ
- Ni7w==
+ bh=wI2OIsbWdYV6bPFWheByAHe7H6csNjBynmwDlgJdNFk=;
+ b=zqbsxgwMn+Ixc3F8ytE9h1w3aON8zrHUsWuhda8HqaTYiY+Q0fklbSf11XH1C2CnkB
+ ST+Yzm7Kkejv4BuYw24Q8QrESI0ng+8B4fU+LqFhXJ+Z/O2BCYTxVqm784J3LYViEkb9
+ PjIrb0yiSFy4JXmDDtSpUaT2s94nT/Q0ulHMlQIV1uqrVGYgJSzzSWIBXhyrhRkHGX7T
+ Mpkmv575ZrauvVAcPuaF8F85XDiCFtGPo5GHeke+q7XRRT6I5ju8Bla7W259V77+xtwS
+ 6fg+Elf2DDptjswtj4y3Ch+rsdIBCJAssc0VolX6H5awiL31H8ltTrqm/j5bRcSQXvEX
+ zObw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwUfa/5UxYYZJu/JaG8m9FEkJH9YcR3jA9KbZTEeZ6hC7qgYx2GUeIEenyZuDWnvR7vmKebs1Q=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nWsjCilQaflgYCL4GSzUatQVwXrTtTFd222F99EvU72X+XZKWA
- QwGfQvXk4NcoB9sLa6NoQr6Xanl8XQamFj9jjeJx3E+uszJNheuCwCbvxtziXtaRQJc3IbFOoz3
- Bss8b4ZcGe0idna4WzT5A8ho/0zdBKoTvXG9i5a9pX5XWOxlGByB/HOLs+f+MZ6evkXiP3RHhZy
- qbzO0=
-X-Gm-Gg: AYBFou06HAA2sQjRXybRQb7TEFq3ONPWqavPuncZTZj0Esj9jGjL4wTC0HVsp7IydE0
- MBrHMznqyEvqu1062oKddB4Q7awbA1r1x6X6KE2SzuGKmJ+jeIRqOLVk5UiaNn7MsPqt/Xgp93X
- 5IDxrdLORyVmDDmjxqH7CdsmcbvjxGLOlG9iUW+n7NWCwbhqfMhyW9SDzeh0ddQb5NwgdcpH4rn
- hRzrH2lfXb+52DS2xmKFZBULZ5+Ob0GgO/RT6rbADBPzpDNxxL4PowKlNVEpNPDoR2u0dGBAhMO
- ZByh38/mNSpS7R40TZm+g/OFPCioP8eHVDitmHXA86H/g7WW1aExtClUZ2dLG/suRyM03iInBfK
- 0Wy1Oy+Yd7We4fTkiBmNSfjVAwWnI//A3Z9PKuWiVrkYKKL0RuCGVrFh0RV1Lps5MJk08n+2yB4
- fWijGJlUMi92tJ1KQOBD5CiCV6ZrREBxv5EsdoLpuUMcoJu0yoQHuBKkDQwWyXrcoV
-X-Received: by 2002:a05:620a:410f:b0:93c:7955:afd9 with SMTP id
- af79cd13be357-93c9fc84b26mr59232785a.52.1790705247516; 
- Tue, 29 Sep 2026 11:07:27 -0700 (PDT)
+ AKwUvBxF9dXk5n/vHVhEJVlNScFueAkfRzWqorwNS3QKq9SRT426c59gV2UAUhHik93lSSbB0uGze0I=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mWkDvwuJQFPzY4HplLjDL3BGJ+3HtKQNjZS4wMUG4LuSfOqFrm
+ m7waIa/Y94eg0B6rm2OOtEwnxBWZMT2vA3k/zbeKz+zJfl+r7hlLhXYJKVHiO9sqgyhcqFEjP2p
+ dDoyob35i1ePyaonRIKGNZH0BiaeuQQjVbubOEMpgWUkyr+S3ea3sf7z8xYApl0Y=
+X-Gm-Gg: AYBFou18mgLphQ5Cryh0xLOI7hJHWlccCKaQoY/0tFOGoN7npKtrFMv/FRd/SXxfPm/
+ w/QGehzFnAXh0/mBKkFFKXKITKv+3xBKyrwBfq5NbO7uSjDpMNQj/PNnd1MT9Ypk7driPzLLyQw
+ 1KCg5IPJQPIQQJ7WdB38LLKe+DlpjJoVAbHMZAmGZxe5g37eTQgI7eKlHEq9IC5AbwiS8pazBBB
+ Z2wsU+o0oFv8DloDsxVDurZrb2WfpuW0oXe7C6qJ18cqjn713Zs30kikUJeuQ3VZ64x2+y5axku
+ J5LDOo10syCqA/L4AqwuU//2+CDV2gtmlKxy0Igrnl2D2GZYTpgo8AYo31PdkvYExaphdpjPNj9
+ kW/qM1Bz8iagqeqCYw7yvzH6F8ZDheU8pg9OJNYC16aELz8PR4Bo7CF61uWzvJqBsqLsZ2SfQUi
+ Y8L4eWWBYEp7FsXquQSxIAKKPn9rPFkFI6ukO1fKg9Xw0Zd/d7B3HyiZ9onJOpZLBp
+X-Received: by 2002:a05:620a:1728:b0:93c:65f2:7d63 with SMTP id
+ af79cd13be357-93c9fa23772mr66834885a.31.1790705249285; 
+ Tue, 29 Sep 2026 11:07:29 -0700 (PDT)
 Received: from strozzi ([71.163.254.246]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-93c9f462b0esm28802785a.9.2026.09.29.11.07.26
+ af79cd13be357-93c9f462b0esm28802785a.9.2026.09.29.11.07.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Sep 2026 11:07:26 -0700 (PDT)
+ Tue, 29 Sep 2026 11:07:29 -0700 (PDT)
 From: Sean Anderson <sanderson@brivo.com>
 To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.u-boot-project.org
 Cc: u-boot-amlogic@groups.io, Tom Rini <trini@konsulko.com>,
  Sean Anderson <sanderson@brivo.com>, Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH v2 4/9] clk: meson: Use soc-specific naming for common
- functions
-Date: Tue, 29 Sep 2026 14:06:26 -0400
-Message-ID: <20260929180721.3440839-5-sanderson@brivo.com>
+Subject: [PATCH v2 6/9] clk: meson: Support fractional fixed-factor clocks
+Date: Tue, 29 Sep 2026 14:06:28 -0400
+Message-ID: <20260929180721.3440839-7-sanderson@brivo.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260929180721.3440839-1-sanderson@brivo.com>
 References: <20260929180721.3440839-1-sanderson@brivo.com>
@@ -179,9 +177,8 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-In preparation for moving a1 versions of several common functions into a
-shared file, rename all the conflicting functions to have a soc-specific
-component.
+One of the s4 clocks has a non-integer divisor (2.5). Add support for
+this.
 
 Signed-off-by: Sean Anderson <sanderson@brivo.com>
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
@@ -189,237 +186,67 @@ Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
 (no changes since v1)
 
- drivers/clk/meson/axg-ao.c  |  8 ++++----
- drivers/clk/meson/axg.c     | 12 ++++++------
- drivers/clk/meson/g12a-ao.c |  8 ++++----
- drivers/clk/meson/g12a.c    | 20 ++++++++++----------
- drivers/clk/meson/gxbb.c    | 20 ++++++++++----------
- 5 files changed, 34 insertions(+), 34 deletions(-)
+ drivers/clk/meson/clk_meson.c |  3 ++-
+ drivers/clk/meson/clk_meson.h | 12 +++++++++---
+ 2 files changed, 11 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/clk/meson/axg-ao.c b/drivers/clk/meson/axg-ao.c
-index 6ccf52127b0..3215391006e 100644
---- a/drivers/clk/meson/axg-ao.c
-+++ b/drivers/clk/meson/axg-ao.c
-@@ -35,12 +35,12 @@ static int meson_set_gate(struct clk *clk, bool on)
- 	return 0;
- }
+diff --git a/drivers/clk/meson/clk_meson.c b/drivers/clk/meson/clk_meson.c
+index de5aa5ae3c9..29615fdae77 100644
+--- a/drivers/clk/meson/clk_meson.c
++++ b/drivers/clk/meson/clk_meson.c
+@@ -153,7 +153,8 @@ ulong meson_clk_get_rate(struct clk *clk)
+ 	case MESON_CLK_FIXED_DIV:
+ 		parent.dev = clk->dev;
+ 		parent.id = meson_clk_get_parent(clk);
+-		return meson_clk_get_rate(&parent) / info->div;
++		return mult_frac(meson_clk_get_rate(&parent), info->mult,
++				 info->div);
+ 	case MESON_CLK_EXTERNAL: {
+ 		int ret;
+ 		struct clk external_clk;
+diff --git a/drivers/clk/meson/clk_meson.h b/drivers/clk/meson/clk_meson.h
+index 990e9434126..86b272985ab 100644
+--- a/drivers/clk/meson/clk_meson.h
++++ b/drivers/clk/meson/clk_meson.h
+@@ -61,7 +61,7 @@ struct meson_clk {
+  * @MESON_CLK_GATE: This clock is a gate
+  * @MESON_CLK_MUX: This clock is a multiplexer
+  * @MESON_CLK_DIV: This clock is a configurable divider
+- * @MESON_CLK_FIXED_DIV: This clock is a configurable divider
++ * @MESON_CLK_FIXED_DIV: This clock is a (fractional) fixed-factor clock
+  * @MESON_CLK_EXTERNAL: This is an external clock from different clock provider
+  * @MESON_CLK_PLL: This is a PLL
+  */
+@@ -87,7 +87,10 @@ struct meson_clk_info {
+ 	const char *name;
+ 	union {
+ 		const struct parm *parm;
+-		u8 div;
++		struct {
++			u8 mult;
++			u8 div;
++		};
+ 	};
+ 	const unsigned int *parents;
+ 	const enum meson_clk_type type;
+@@ -133,13 +136,16 @@ struct meson_clk_data {
+ 	})
  
--static int meson_clk_enable(struct clk *clk)
-+static int meson_axg_ao_clk_enable(struct clk *clk)
- {
- 	return meson_set_gate(clk, true);
- }
+ /* A fixed divider */
+-#define CLK_DIV_FIXED(_name, _div, _parent)				\
++#define CLK_DIV_FIXED_FULL(_name, _mult, _div, _parent)			\
+ 	(&(struct meson_clk_info){					\
+ 		.parents = (const unsigned int[]) { (_parent) },	\
++		.mult = (_mult),					\
+ 		.div = (_div),						\
+ 		.name = (_name),					\
+ 		.type = MESON_CLK_FIXED_DIV,				\
+ 	})
++#define CLK_DIV_FIXED(name, div, parent)				\
++	CLK_DIV_FIXED_FULL(name, 1, div, parent)
  
--static int meson_clk_disable(struct clk *clk)
-+static int meson_axg_ao_clk_disable(struct clk *clk)
- {
- 	return meson_set_gate(clk, false);
- }
-@@ -65,8 +65,8 @@ static int meson_clk_request(struct clk *clk)
- }
- 
- static struct clk_ops meson_clk_ops = {
--	.disable	= meson_clk_disable,
--	.enable		= meson_clk_enable,
-+	.disable	= meson_axg_ao_clk_disable,
-+	.enable		= meson_axg_ao_clk_enable,
- 	.request	= meson_clk_request,
- };
- 
-diff --git a/drivers/clk/meson/axg.c b/drivers/clk/meson/axg.c
-index c421a622a58..e20d3feaade 100644
---- a/drivers/clk/meson/axg.c
-+++ b/drivers/clk/meson/axg.c
-@@ -69,12 +69,12 @@ static int meson_set_gate(struct clk *clk, bool on)
- 	return 0;
- }
- 
--static int meson_clk_enable(struct clk *clk)
-+static int meson_axg_clk_enable(struct clk *clk)
- {
- 	return meson_set_gate(clk, true);
- }
- 
--static int meson_clk_disable(struct clk *clk)
-+static int meson_axg_clk_disable(struct clk *clk)
- {
- 	return meson_set_gate(clk, false);
- }
-@@ -279,7 +279,7 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
- 	return rate;
- }
- 
--static ulong meson_clk_get_rate(struct clk *clk)
-+static ulong meson_axg_clk_get_rate(struct clk *clk)
- {
- 	return meson_clk_get_rate_by_id(clk, clk->id);
- }
-@@ -305,9 +305,9 @@ static int meson_clk_probe(struct udevice *dev)
- }
- 
- static struct clk_ops meson_clk_ops = {
--	.disable	= meson_clk_disable,
--	.enable		= meson_clk_enable,
--	.get_rate	= meson_clk_get_rate,
-+	.disable	= meson_axg_clk_disable,
-+	.enable		= meson_axg_clk_enable,
-+	.get_rate	= meson_axg_clk_get_rate,
- };
- 
- static const struct udevice_id meson_clk_ids[] = {
-diff --git a/drivers/clk/meson/g12a-ao.c b/drivers/clk/meson/g12a-ao.c
-index 61d489c6e1c..e89638d65b5 100644
---- a/drivers/clk/meson/g12a-ao.c
-+++ b/drivers/clk/meson/g12a-ao.c
-@@ -35,12 +35,12 @@ static int meson_set_gate(struct clk *clk, bool on)
- 	return 0;
- }
- 
--static int meson_clk_enable(struct clk *clk)
-+static int meson_g12a_ao_clk_enable(struct clk *clk)
- {
- 	return meson_set_gate(clk, true);
- }
- 
--static int meson_clk_disable(struct clk *clk)
-+static int meson_g12a_ao_clk_disable(struct clk *clk)
- {
- 	return meson_set_gate(clk, false);
- }
-@@ -65,8 +65,8 @@ static int meson_clk_request(struct clk *clk)
- }
- 
- static struct clk_ops meson_clk_ops = {
--	.disable	= meson_clk_disable,
--	.enable		= meson_clk_enable,
-+	.disable	= meson_g12a_ao_clk_disable,
-+	.enable		= meson_g12a_ao_clk_enable,
- 	.request	= meson_clk_request,
- };
- 
-diff --git a/drivers/clk/meson/g12a.c b/drivers/clk/meson/g12a.c
-index f33938e1419..cc7bfe9e2a2 100644
---- a/drivers/clk/meson/g12a.c
-+++ b/drivers/clk/meson/g12a.c
-@@ -194,12 +194,12 @@ static int meson_set_gate_by_id(struct clk *clk, unsigned long id, bool on)
- 	return 0;
- }
- 
--static int meson_clk_enable(struct clk *clk)
-+static int meson_g12a_clk_enable(struct clk *clk)
- {
- 	return meson_set_gate_by_id(clk, clk->id, true);
- }
- 
--static int meson_clk_disable(struct clk *clk)
-+static int meson_g12a_clk_disable(struct clk *clk)
- {
- 	return meson_set_gate_by_id(clk, clk->id, false);
- }
-@@ -858,7 +858,7 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
- 	return rate;
- }
- 
--static ulong meson_clk_get_rate(struct clk *clk)
-+static ulong meson_g12a_clk_get_rate(struct clk *clk)
- {
- 	return meson_clk_get_rate_by_id(clk, clk->id);
- }
-@@ -888,7 +888,7 @@ static ulong meson_pcie_pll_set_rate(struct clk *clk, ulong rate)
- 	return 100000000;
- }
- 
--static int meson_clk_set_parent(struct clk *clk, struct clk *parent)
-+static int meson_g12a_clk_set_parent(struct clk *clk, struct clk *parent)
- {
- 	return meson_mux_set_parent(clk, clk->id, parent->id);
- }
-@@ -958,7 +958,7 @@ static ulong meson_clk_set_rate_by_id(struct clk *clk, unsigned long id,
- 	return -EINVAL;
- }
- 
--static ulong meson_clk_set_rate(struct clk *clk, ulong rate)
-+static ulong meson_g12a_clk_set_rate(struct clk *clk, ulong rate)
- {
- 	ulong current_rate = meson_clk_get_rate_by_id(clk, clk->id);
- 	int ret;
-@@ -1000,11 +1000,11 @@ static int meson_clk_probe(struct udevice *dev)
- }
- 
- static struct clk_ops meson_clk_ops = {
--	.disable	= meson_clk_disable,
--	.enable		= meson_clk_enable,
--	.get_rate	= meson_clk_get_rate,
--	.set_parent	= meson_clk_set_parent,
--	.set_rate	= meson_clk_set_rate,
-+	.disable	= meson_g12a_clk_disable,
-+	.enable		= meson_g12a_clk_enable,
-+	.get_rate	= meson_g12a_clk_get_rate,
-+	.set_parent	= meson_g12a_clk_set_parent,
-+	.set_rate	= meson_g12a_clk_set_rate,
- };
- 
- static const struct udevice_id meson_clk_ids[] = {
-diff --git a/drivers/clk/meson/gxbb.c b/drivers/clk/meson/gxbb.c
-index bf46f4d50bc..24b5f9b5d40 100644
---- a/drivers/clk/meson/gxbb.c
-+++ b/drivers/clk/meson/gxbb.c
-@@ -236,12 +236,12 @@ static int meson_set_gate_by_id(struct clk *clk, unsigned long id, bool on)
- 	return 0;
- }
- 
--static int meson_clk_enable(struct clk *clk)
-+static int meson_gxbb_clk_enable(struct clk *clk)
- {
- 	return meson_set_gate_by_id(clk, clk->id, true);
- }
- 
--static int meson_clk_disable(struct clk *clk)
-+static int meson_gxbb_clk_disable(struct clk *clk)
- {
- 	return meson_set_gate_by_id(clk, clk->id, false);
- }
-@@ -840,12 +840,12 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
- 	return rate;
- }
- 
--static ulong meson_clk_get_rate(struct clk *clk)
-+static ulong meson_gxbb_clk_get_rate(struct clk *clk)
- {
- 	return meson_clk_get_rate_by_id(clk, clk->id);
- }
- 
--static int meson_clk_set_parent(struct clk *clk, struct clk *parent)
-+static int meson_gxbb_clk_set_parent(struct clk *clk, struct clk *parent)
- {
- 	return meson_mux_set_parent(clk, clk->id, parent->id);
- }
-@@ -912,7 +912,7 @@ static ulong meson_clk_set_rate_by_id(struct clk *clk, unsigned long id,
- 	return -EINVAL;
- }
- 
--static ulong meson_clk_set_rate(struct clk *clk, ulong rate)
-+static ulong meson_gxbb_clk_set_rate(struct clk *clk, ulong rate)
- {
- 	ulong current_rate = meson_clk_get_rate_by_id(clk, clk->id);
- 	int ret;
-@@ -954,11 +954,11 @@ static int meson_clk_probe(struct udevice *dev)
- }
- 
- static struct clk_ops meson_clk_ops = {
--	.disable	= meson_clk_disable,
--	.enable		= meson_clk_enable,
--	.get_rate	= meson_clk_get_rate,
--	.set_parent	= meson_clk_set_parent,
--	.set_rate	= meson_clk_set_rate,
-+	.disable	= meson_gxbb_clk_disable,
-+	.enable		= meson_gxbb_clk_enable,
-+	.get_rate	= meson_gxbb_clk_get_rate,
-+	.set_parent	= meson_gxbb_clk_set_parent,
-+	.set_rate	= meson_gxbb_clk_set_rate,
- };
- 
- static const struct udevice_id meson_clk_ids[] = {
+ /* An external clock */
+ #define CLK_EXTERNAL(_name)						\
 -- 
 2.53.0
 
