@@ -1,128 +1,132 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1038CA5FAC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 12:53:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9470ECA5FA1
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 12:53:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6608480F5C;
-	Tue, 29 Sep 2026 12:53:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4E07260852;
+	Tue, 29 Sep 2026 12:53:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hUwbuqiO1JlZ; Tue, 29 Sep 2026 12:53:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 10E1D80EDE
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790686393;
-	b=rPaOyVvETilD3waXTm3L9xw7zMCot8SFbeWKckrUTvTDLx1d1lnlUKP4C3uk/LDpT4ZM
-	 QtSQxaHSxIBcr4wV6csTOnySkn+wwAPTmWSqc+03gH8UTq15X9ZI9z7UNWboUx/mBLI2c
-	 47lbceyK6P31gLYKOMttLYPYVvrI7dFSmEV20DTNxaRIAgNpfAguSIGVDH4jYrTZTstQ0
-	 Ccv9VMlx4Bq7jp1Pg+/eQz8DlSRYcPEu4LjxK/fnEZuDHY/7Y4pWTPb6BU801z/WsUp4b
-	 6kIfqPAq5IvAPItu9BmQa4xsKZzjkDgjpB0tVkL1u62jkZ1M4e/FJSy0a42GsXfGnXw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RVw-ICci42yK; Tue, 29 Sep 2026 12:53:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org ED773607EB
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790686395;
+	b=eQSXBBGikIBeac7pXZZmcgz9Do2tv/mjCOOPaV/l1LNehmyj0AerFrC/HD2+sMT++1rN
+	 agiEVCWs4ikL6VLT4YiJqOCbohkEaAO1/JGZSTeJpSd/KVEL5TcBreuCgURuKWkyUaIsn
+	 l0sqlYXUevoyWUA3p7Mu7T3v7nNF5veED6KGk/RqK9Ud7PfLZn4gnMh6mp6fJDkRCWY6P
+	 6KXwfF0jCCdcaCKsBajAysPjTdJZi4aOdvmVYRqsfGOL53f1LpV0/1FmYCTDfJyiJNkxh
+	 q0Ow+k9XISEilQkIqieW51F7oiaTxI5cxrkhc6ZFtEZy5wMwRmViz9otFGVcGWwE+MA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790686393;
+	c=relaxed/relaxed; t=1790686395;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:Feedback-ID:
-	 X-Pm-Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=YvcGGUBk9IbFmjPl+FUleFf0YcJbJhciPbVzGm5lX6M=;
-	b=clMWLLvp3HStOGAWm5yXqvk0q7Lz3cZteD+LohdtMEo1cGFQ3KX4CMvwpJ7gTyqSoArq
-	 ijYH+SbVj8e0f6pGrTECE/QP3Vm+x36pygvGtrRJDZGf0l5OZD4kQ1XtOBZfHt6YtJFOR
-	 hBVMdlCvgSUqLgNBm1D12NFD7Zumc53vpvnsxbG9Cl/829cvNxgkcdaU5bUVs0gXEMdyc
-	 WxnMAo94Vb9eySlu8G8Z6exjL2kzaSRdRZJj6fFWM6vaVvirwauMsIdj7M+1At5QRWBMF
-	 CnBunsapLm1U0WX41vP1TfkYZgGzD44VA4LozJdt4bR2E67Sn6ffpwhmQeXcegqO/Mg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=nQJhDMDyrmDxrYd419fN2B+cTagaTOP++9NVlHlX0J0=;
+	b=WUbXqrw8YD1b6Lp4XiN592EyYIy3YAyshDPwCZWCwbV9M20AOl3LmhZYMJBCJ3fifYLW
+	 de/RU+lL2S282fFIGVjMyVJTaU5mZWeQ7DEqPTmgtq3NyKlC3nwCrdEl95as1CuNfNwsF
+	 gW3HbqdOarUKGBVtYJ0FdtxOIhIrwXuVv4UYE8f7tFOdJixIfNP1oTRmCchTz3v9pxrxO
+	 mRkw3HsVN+aObXDGs6AikxS8T9nGCfPLX/awNeqUZ60Mp6tdnR/VsIs89ta/376LTaYgn
+	 PiOBevLZM9dJZhmz+EZPBXjZ7fSFlWt2v5L4frQyUwtxrEtLHka+iwtpxzpltQeXI8g==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790686393;
-	bh=YvcGGUBk9IbFmjPl+FUleFf0YcJbJhciPbVzGm5lX6M=;
-	h=Date:To:From:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org; s=default; t=1790686395;
+	bh=nQJhDMDyrmDxrYd419fN2B+cTagaTOP++9NVlHlX0J0=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=NLswbOMAXXbK+A+2xk89QebAQxQNvEteaotANrMj/JVQqIOFlu/aiAyfYzqMAA+D0
-	 mzNaccD7e692xc1m9d9QreEpxi81grjK6rk6+EmaX2FnooLqFmW2c5Kl3zT3elwJx+
-	 YnZH2dYhhoQIKe0I9i6MzbQgua2lIt2PPgya3Kb99joSGfaWVnlcQpjVETD4AeisVg
-	 BLoqnd/tSjff3BDWRepApgkRvJD6Rcq2VRf/BZz6Xe5hr1eJeMnNcryfXc5rYbxcmS
-	 9ogt2wl9oz5OUa7Zla7g2WaE33NO017FVN2OziZFTZomKJECabcmUieai9G1+MlPPi
-	 AuaJerZ07tCRQ==
+	b=rgc4BYhJOcmErn5qARghMD9jId4fPL/eubN35Lx8BvO8Fl4zPXF8tE50naGZLMvKN
+	 fERj8lwXYocjjEGzrTgUv9a8SRLdkLs1E0lsZMUDZDBaSlaYF4ULCBX3JXmo0va/Sw
+	 3dl74Of1PbdAPKo2BIFXv3oqEMj4ejILZ3JguGKngId/odjAUOITTLIbPsLTEv5uHp
+	 VdV0xH0VNXAp4qnpWII1g2PfJgTXIMTzHkudsqLLan3QXOVM6Xe6qNZdwgbRB21Zhy
+	 s73KeXcQfJ6KTbhl9xB0tHV2RU8LQYMaXW1Hc0SWaeTSzI5Hx/PEKTDL/xTBeWIL7p
+	 NLfliu8wS+6mw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 10E1D80EDE;
-	Tue, 29 Sep 2026 12:53:13 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 85932D1
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 12:49:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id ED773607EB;
+	Tue, 29 Sep 2026 12:53:14 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 526F52E5
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 12:52:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6B7AD402EB
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 12:49:12 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2ED9C40714
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 12:52:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5437HI3PgHf1 for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 12:49:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 7A70D402E6
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=185.70.43.27
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790686151;
- b=O/TetiIJ/3WUPQxBT/WJBK65As7ocyBHiKyKPhj+EPhy65tybzmDyQNhnNmgqBw0rVS5
- 8M/Yb+SxzzpFvHxYIJMtWgHf3+PbJMv6b+yide8A5DGaQqR4Y48jU/6CNvSUOl4okMwbl
- kd1et87gwAFde7vmuWE51mGevNoHUIwPP+hg2B3fwcpEN7Gqg5Jp6EEmgxxTAM6pDtA9v
- gFOozESu70kPlCroxOyqYDHDedZ3hNc36zDUX/olpE7VqqVQwhhbHgLvDIVoLerSBNzkV
- TJFbLA1hDEclqVTxikdimyiJ5HDwjR4BBbnzS0PVtgplQP//DG0qqTZrZC0gC6Hc+ew==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0Jhts3VUqcak for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 12:52:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 266CC40703
+Authentication-Results: smtp4.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790686336;
+ b=BljSsXeMu2F7fegv3TONggzyz4caz1Q+GGtLuMjYTmEU8xHu9xstmnd/d6oYMDuGw+0Y
+ iI6v/t2j8RYZaeW5OF2E5RZcFC9a0ZAp2acfVMvx+XXBsMqZZTMLOjmtBdXtNkV3BPVf9
+ voS/MNXjxzUe5oqit+R1V88O3p3SqkUvZNM5sJ5ZhdmxpBGk+aNYaPvH8p5kavzpMkGo0
+ aQZm6o9BRsS1PDasVQCG3/Hr332b1GfA/CSP3KoSiz57YACgWmANjzwOJviB3iraeqiaH
+ 9gvbUlvOOs3Rpheg5XFMvic1R9XYTLXrRs0ft8KOhrEeMSay4n+DwIHrWzx1z0bXI/g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790686151;
- h=Received-SPF:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
- Feedback-ID:X-Pm-Message-ID:MIME-Version:Content-Type:
- Content-Transfer-Encoding;
- bh=YvcGGUBk9IbFmjPl+FUleFf0YcJbJhciPbVzGm5lX6M=;
- b=jcmdf3L3V0Yj6j2mqSO9nMACn4EWvBEP5cItHTZVZH2XLg1MEvypCUtYNzqyLuIaQNLO
- m07+Zg2FmQHtmmVC75U/ePlGOXcJ5LcytJP9bK3PlwW8fwhsRsZLsHrNURd0jCu3MXERI
- /dvE0lwjSPEyX6dmqnMgA0WNIDQwdFvJSX/OyI3gJlmRPiWi5m+1G6LJKXBlvKO+LJsGq
- ugAItrX9rOgKgzjppvdph5X/fO0GMUp7bRPtLyjHP+oIyEOzPLSsol8oxt0GWGGTg1HB4
- 4ILnaHXbk299865FYiqXaNwce25PAZ4tdOJ+gxUnMH//3IGObY/V/BIrP99ZgqbLCMA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=proton.me; 
- dkim=pass header.d=proton.me header.i=@proton.me header.a=rsa-sha256
- header.s=protonmail2 header.b=GAtl0vlW; 
- arc=none smtp.remote-ip=185.70.43.27
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.70.43.27;
- helo=mail-4327.protonmail.ch; envelope-from=iostreampy@proton.me;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=proton.me header.i=@proton.me header.a=rsa-sha256
- header.s=protonmail2 header.b=GAtl0vlW
-Received: from mail-4327.protonmail.ch (mail-4327.protonmail.ch [185.70.43.27])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7A70D402E6
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 12:49:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail2; t=1790686133; x=1790945333;
- bh=YvcGGUBk9IbFmjPl+FUleFf0YcJbJhciPbVzGm5lX6M=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=GAtl0vlWzkycqwfLc5/KpTwwYuWsVm+lD3i/0N30aY/L/NwPeFu1ThdUOh4CxUuso
- 7x6mTfP71Rf6S+0rB0VI0yiAScxk1P6muOy3o1QAoZdqxloSGBjgfEQH08Vv1qZRoY
- OLDEnTRjq4+26g1hsH8LQuCJrks34ActdHa4PzgKVI4FX9oV6XSzy6AUfVjUh20GkM
- bhpT3Wf0LOALbenrJ6329cJV2vuAphLe2cAQbU02FH6U0KrhYm5SdEQ8NOloTte6UD
- jLWyqxLUrVYKuyRZtjbv0Y1HBt3RtI8QMB7KuPHd36baha8fTwM43DJHmXL0p5PCow
- ARoQjgRVnhWZQ==
-Date: Tue, 29 Sep 2026 12:48:46 +0000
-To: u-boot@lists.u-boot-project.org
-From: Jaeyeong Lee <iostreampy@proton.me>
-Cc: trini@konsulko.com, sughosh.ganu@arm.com, kory.maincent@bootlin.com
-Subject: [SECURITY] FWU v2 metadata_size under-validation causes heap
- out-of-bounds read
-Message-ID: <179068612070.290852.2536897028462322324@proton.me>
-Feedback-ID: 96968035:user:proton
-X-Pm-Message-ID: 7ee492dce674faf6fd2da416a7d9915795c1182e
+ c=relaxed/relaxed; t=1790686336;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
+ Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+ bh=nQJhDMDyrmDxrYd419fN2B+cTagaTOP++9NVlHlX0J0=;
+ b=oIl/IkfLnOK5qqGJYUOeQ9JEFU5YcJZTYj456+a+cCZIG3udFqK8amz9t0CeXEwaAhzf
+ oeuTsEk+U+uKo4KlWKQo/IQLcicnHqX0v2GofLhmxjFw1Ba1m/17t+ok08xKx7UqZh/3G
+ x992YwQgPPCnm6ARGl8KZE5WH31SiPHol/Ag/IT7TIbQikSL1N3yK1BVMhtiufhyqOqXy
+ wlrGV9wVk7xjrgAGNCrEFfE8GVtfl7FoFOwevxlyus0A9jMEDiYY7g/cJEkkKbdMjrJAm
+ lcg+GvreQ1V4pwUpQpq0uzakK4hHmCd1a2Vvhms55IbFSZvhkS/2WioF6o7isb8OigQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=kernel.org; 
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=KEdWUaRY; 
+ arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ envelope-from=mwalle@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=KEdWUaRY
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 266CC40703
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 12:52:15 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id EEB4E600E2;
+ Tue, 29 Sep 2026 12:52:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 599A41F000FF;
+ Tue, 29 Sep 2026 12:52:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1790686332;
+ bh=nQJhDMDyrmDxrYd419fN2B+cTagaTOP++9NVlHlX0J0=;
+ h=From:To:Cc:Subject:Date;
+ b=KEdWUaRYeWW//p/iS3wKSpZ/I2H/IDrc2AF3w8O6yEyjn3BV4UM9b7WpBg8jdyK7e
+ Ha9jIPRJfshYxTdk2sM+QlK4i1f91ZEUapnycZKR482p0R1EM729y+QiJa1aURfgs6
+ o2h/GR9IvNfuzlga18CzMYLXyIzKTXTQygmXw/MT0CvFGgFPWfwp6BwvAMtg3Oj82k
+ zVh1WydGCrfb3ToI54Z+OTv0TzHcfhbyaiUZxN/nP/Ux/brM13JM8XhiI3BGXnliIb
+ G4M8VgCrVJM9ZLUonqR9TqcNBrUewHw/dtbYb/JiBtGypc51slWfR9GSTdRRWnoUeb
+ r1xWeWN1a7+pw==
+From: Michael Walle <mwalle@kernel.org>
+To: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Alice Guo <alice.guo@nxp.com>
+Cc: Michael Walle <mwalle@kernel.org>,
+	u-boot@lists.u-boot-project.org
+Subject: [PATCH RESEND v4] binman: imx9image: respect BINMAN_INDIRS for
+ external files
+Date: Tue, 29 Sep 2026 14:51:05 +0200
+Message-ID: <20260929125203.592014-1-mwalle@kernel.org>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 29 Sep 2026 12:52:50 +0000
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,149 +140,97 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hello U-Boot maintainers,
+We have the BINMAN_INDIRS for any external binaries, so they don't have
+to be copied into the source/build directory of u-boot. This is
+especially important for image builders like buildroot.
 
-I found a heap out-of-bounds read in the FWU v2 metadata initialization pat=
-h.
+Use the get_input_filename() helper which will also look up the paths in
+BINMAN_INDIRS. The append case only handle external files, thus we can
+use that helper unconditionally.
 
-Tested version
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+While at it, update and extend the test case for this image format.
+That is, first create the image in the input directory and then check if
+there is actually an append comand with that image name in the resulting
+.cfgout file.
 
-U-Boot v2026.10-rc5
-Commit: a06e89ab05eaa2b8344d521319399333cd760ae5
+Signed-off-by: Michael Walle <mwalle@kernel.org>
+---
+v4:
+ - reword commit message
+ - update test case
+ - (RESEND) to the new uboot mailing list address.
 
-Affected configuration
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+v3:
+ - emit the command strings
 
-CONFIG_FWU_MULTI_BANK_UPDATE=3Dy
-CONFIG_FWU_MDATA_V2=3Dy
-CONFIG_FWU_NUM_BANKS=3D2
-CONFIG_FWU_NUM_IMAGES_PER_BANK=3D2
+v2:
+ - forgot to add second lookup. add the same fix
 
-Summary
-=3D=3D=3D=3D=3D=3D=3D
+ tools/binman/etype/nxp_imx9image.py | 22 ++++++++++++----------
+ tools/binman/ftest.py               |  9 ++++++---
+ 2 files changed, 18 insertions(+), 13 deletions(-)
 
-FWU v2 uses the metadata_size value read from persistent FWU metadata to
-allocate heap storage for two metadata copies.
-
-A metadata_size of 40 bytes contains the 32-byte top-level header and the
-8-byte firmware-store descriptor header. It can therefore pass the version,
-descriptor offset, CRC, bank count, and image count checks.
-
-The metadata does not contain the image-entry array required by the configu=
-red
-number of images. However, fwu_data_init() copies the entire image array wh=
-ose
-size is determined by the compile-time configuration. This results in a hea=
-p
-out-of-bounds read.
-
-Technical details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-lib/fwu_updates/fwu.c allocates storage for two copies using the metadata s=
-ize:
-
-    int fwu_mdata_copies_allocate(u32 mdata_size)
-    {
-        ...
-        g_fwu_data.fwu_mdata =3D calloc(2, mdata_size);
-        ...
-    }
-
-With metadata_size=3D40, the total allocation is 80 bytes.
-
-lib/fwu_updates/fwu_v2.c compares the descriptor's bank and image counts wi=
-th
-the configured values:
-
-    num_banks =3D fwu_get_fw_desc(mdata)->num_banks;
-    num_images =3D fwu_get_fw_desc(mdata)->num_images;
-
-    if (num_banks !=3D CONFIG_FWU_NUM_BANKS)
-        return -EINVAL;
-
-    if (num_images !=3D CONFIG_FWU_NUM_IMAGES_PER_BANK)
-        return -EINVAL;
-
-There is no check that metadata_size includes the corresponding
-struct fwu_image_entry array.
-
-fwu_data_init() subsequently performs this copy:
-
-    image_info_size =3D sizeof(data->fwu_images);
-    src_img_info =3D &fwu_get_fw_desc(mdata)->img_entry[0];
-    dst_img_info =3D &data->fwu_images[0];
-
-    memcpy(dst_img_info, src_img_info, image_info_size);
-
-With two banks and two images, the relevant sizes are:
-
-    sizeof(struct fwu_mdata)             =3D 32
-    descriptor header                    =3D 8
-    declared metadata_size               =3D 40
-    allocation for two metadata copies   =3D 80
-    sizeof(data->fwu_images)              =3D 160
-    copy source offset                    =3D 40
-    bytes read beyond the allocation      =3D 120
-
-memcpy() reads 160 bytes beginning at allocation offset 40. The allocation
-ends at offset 80, so the final 120 bytes are outside the heap object.
-
-Reproduction
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-1. Build U-Boot with the configuration shown above.
-2. Prepare both the primary and secondary FWU metadata copies with:
-
-       version       =3D 2
-       metadata_size =3D 40
-       desc_offset   =3D 32
-       num_banks     =3D 2
-       num_images    =3D 2
-
-3. Set a valid CRC32 for the declared 40-byte metadata.
-4. Store both copies in the configured FWU metadata locations.
-5. Invoke fwu_init() through the normal FWU initialization path.
-
-The mandatory-header, CRC, bank-count, and image-count checks pass.
-fwu_data_init() then reads the missing image entries beyond the allocated
-metadata storage.
-
-ASan result
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-    top-level metadata size: 32
-    descriptor header size: 8
-    declared metadata size: 40
-    image copy size: 160
-    total allocation for two copies: 80
-
-    ERROR: AddressSanitizer: heap-buffer-overflow
-    READ of size 160
-        #0 memcpy
-        #1 fwu_data_init
-           lib/fwu_updates/fwu_v2.c:55
-        #2 fwu_init
-           lib/fwu_updates/fwu_v2.c:259
-
-    The read begins at allocation offset 40 and extends to offset 199.
-    The allocation ends at offset 80, resulting in a 120-byte over-read.
-
-Impact
-=3D=3D=3D=3D=3D=3D
-
-An attacker who can modify or supply FWU v2 metadata with a valid CRC can
-trigger a heap out-of-bounds read while U-Boot initializes the metadata.
-
-The confirmed impact is a bootloader crash or denial of service. Data locat=
-ed
-after the allocation may also be copied into U-Boot's internal FWU image
-information, although I have not demonstrated disclosure or control-flow
-impact.
-
-The issue is present in current main at the tested revision.
-
-Regards,
-Jaeyeong Lee
+diff --git a/tools/binman/etype/nxp_imx9image.py b/tools/binman/etype/nxp_imx9image.py
+index e0e806f2b7f..1a1465d7e7b 100644
+--- a/tools/binman/etype/nxp_imx9image.py
++++ b/tools/binman/etype/nxp_imx9image.py
+@@ -50,21 +50,23 @@ class Entry_nxp_imx9image(Entry_mkimage):
+ 
+                 if key.startswith('image') and isinstance(value, list) and len(value) == 3:
+                     file = value[1]
+-                    image_path = os.path.join(tools.get_output_dir(), value[1])
+-                    value[1] = image_path
+-                    combined = ' '.join(map(str, value))
+-
+-                    if file in external_files and not os.path.exists(value[1]):
+-                        print(f"file '{image_path}' does not exist. flash.bin may be not-functional.")
++                    if file in external_files:
++                        value[1] = tools.get_input_filename(file, allow_missing=True)
++                        if not value[1]:
++                            print(f"file '{file}' does not exist. flash.bin may be not-functional.")
++                            continue
+                     else:
+-                        f.write(f'image {combined}\n')
++                        value[1] = os.path.join(tools.get_output_dir(), file)
++
++                    combined = ' '.join(map(str, value))
++                    f.write(f'image {combined}\n')
+                 elif isinstance(value, str):
+                     if key.startswith('append'):
+-                        file_path = os.path.join(tools.get_output_dir(), value)
+-                        if os.path.exists(file_path):
++                        file_path = tools.get_input_filename(value, allow_missing=True)
++                        if file_path:
+                             f.write(f'append {file_path}\n')
+                         else:
+-                            print(f"file '{file_path}' does not exist. flash.bin may be not-functional.")
++                            print(f"file '{value}' does not exist. flash.bin may be not-functional.")
+                     else:
+                         f.write(f'{formatted_key} {value}\n')
+                 elif isinstance(value, bool):
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index bf98b268ac1..48c5a08b4eb 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -8126,12 +8126,15 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         image_path = os.path.join(testdir, 'image.bin')
+         with open(image_path, 'w') as f:
+             pass
+-        container_path = os.path.join(testdir, 'mx95b0-ahab-container.img')
+-        with open(container_path, 'w') as f:
+-            f.write(bytes([0x87]).decode('latin1') * 32768)
++        self._MakeInputFile('mx95b0-ahab-container.img', bytes([0x87] * 32768))
+         with terminal.capture():
+             self._DoTestFile('vendor/nxp_imx95.dts', output_dir=testdir)
+ 
++        fname = tools.get_output_filename('u-boot-container.cfgout')
++        with open(fname, 'r') as fd:
++            data = fd.read()
++            self.assertRegex(data, "append .*/mx95b0-ahab-container.img\n")
++
+     def testFitSignSimple(self):
+         """Test that image with FIT and signature nodes can be signed"""
+         if not elf.ELF_TOOLS:
+-- 
+2.47.3
 
