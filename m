@@ -1,180 +1,194 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C938CA5FA5
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 08:50:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C68FCA5FA5
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 08:53:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1FE796073E;
-	Tue, 29 Sep 2026 08:50:46 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DDBDF405AD;
+	Tue, 29 Sep 2026 08:53:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MsiPCp-SiRTj; Tue, 29 Sep 2026 08:50:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org BD5B460754
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790671844;
-	b=j9DdutLDHts8k1i1RklxQyEN6/VHsnCFj8RKmk8kRkPotlsNrL88uvhx1cUcXQQj4L7f
-	 FSOBSAhAuZZTm/zT0Aac4jL0N7ptQFq3Xk7JWLU46R4jsm4y2GoMMdsVzMtY/bfsLVPkZ
-	 qT//lCJm/2wJDoCxD1eotlSaV4DDx4oMIP1HeNbzCcnFWROI3hrWB6HHlTdtcKWNzaMqi
-	 qbN1jEiioNm7ENWbdxu2xZ49JYPt170/hEPST2F90c/bLQAzkqXIHXm5kjUz8eIrcyync
-	 SaEGh7/TY2zgbhwWK5ot8X6ez8HA3T4KD/iuQtPMJwxotdj7EJbPtwHeKdFn+70eXhw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790671844;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RLLlrFb4FgXo; Tue, 29 Sep 2026 08:53:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 103B1405A6
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790671998;
+	b=r8dJXZ4j849Jy47VYT7mRiV1GR9d/pDOhd1CdmUuzrdR0DlvRV+pabdOV+aCqzdc6HGQ
+	 MyqVg+iwbKCznUI4InpUj0oqsFzhZKHr9hOaZMFEHTWascBdLCE2RzSd4WZ3HNzR61Qz7
+	 tE72p1CTINTNIHk3pMz8Do5ozij43CUP9X7q4WKTliDV1TC+fMNvwCXwerhkz7kv5f/bD
+	 vrv2ZQhM86S9GrbvgeWSx2Nhol6LaS/NGFBZ2fAwvVKJGGXN5H/NWd+kxQxMS4rdMPLNB
+	 fg3un/eGcYmnJ1toPhTKvGW+ETYqikuuluWSJNOCoHiomDWy2/S02aJxPsMukoypXwg==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790671998;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=wWvobzZ8H2bAG1a2b43C7GTkR9jMUQFibDL7cjTNvgM=;
-	b=WQi1KXVwmwnvrRTBYsa/71HpEsrGa48buL4Z3+f/0NQfNe7MwZA4TlVMMuo7O1sSDrsc
-	 GC0+lDlDCmnZy0ztcCCbnDgOAajTyLTDq+ysusbTZPxs4PRjG0zeBrOYkdcB2MEUOF57h
-	 Jn86nQNmQCcscDgYDjIyfIR28GUIlP01IIZbgMKOX9o0E0dGtKiG1o6tv0DPeqaa20WwC
-	 yLsK5XqnrpkcsGpKexR2L4V63go2hj6gwelXofdc8AMeW56pm1BkgPFrqZOz5sUQ2LT2d
-	 gcQCwfSqSHfL1YB38Inws1YGsF7waZucu0X91HVj+KZ1vMkcB0MXMEqvM3rvKwItPxw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=8rV5jyjuOYJYlsT4uTTxDvu9pGJRNcRVUcWkLeZY/f0=;
+	b=RkG5kcxwisciSdwFDp9QyRAAGaTcNs2dvjfJUJhkIUm8sDhR2iQDIsmkEBGIvKcy6BAC
+	 LbxyDIgxdqWigJdTyjd86Yxo446KWjuUZYm45lu2F+X07S2bztCMPlJlTm/BVZRUt5gAQ
+	 +2ZQkXDWgDZipqO/9I/gYh1oiq6V4bxr8bloUpVDRbV/CAAU6V8r4AzF7Vzu6mJ7cZghK
+	 qrYB+QrGdmnl3aKDOGcNxSSWnd0d3FLx1g+VOjzfpp1S3EcsQ9su0odfjkVHauHW8WT9R
+	 7rvfJ0DgfWtqE5m/sWAOkd+8t1/mdnHDxnL00AOn6dfY+x6Devaase8I23QpQ045mYw==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790671844;
-	bh=wWvobzZ8H2bAG1a2b43C7GTkR9jMUQFibDL7cjTNvgM=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790671998;
+	bh=8rV5jyjuOYJYlsT4uTTxDvu9pGJRNcRVUcWkLeZY/f0=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=UFcraSHmGtYT6NjHTbYmmtBFjOmTKuSJvYGR4RhE0UzM0hVsg3jnMRi+uIYEMAxAw
-	 TYY6Tsbz3cfkFFL656m49LlAyJCvlN3FirUx8MwRd1oK/eohTKwOfLh7DpNfac/JOE
-	 Frk0bzeSgI3unrI7HZnwUVTdZ5AO7RbRAPELTCtt/Uyl2n0ymzRAE398WXfnbACWzn
-	 oKF5ernZJBLqlAF8XCefukHEV9viwp+s1XiWETnQN36Us0IYzhX/XdMNxDGCIGdzgT
-	 z4metTBzIfMhEotRIx2XHyNJjM5HgoT0OrDE8q9yDK3heaew9hZaXovtqZ2H0D8/Fg
-	 AlhlU3p6ckCyw==
+	b=BejvRYLorBx9pG9GmFcyeUH3BK1LoJg/zfxUD+0GkvKQ2AEnesYEiiuGvw7j72z3V
+	 lAZzeWuO3U34CLV80Lq8Mf2vNH+seiBy9RMEIcCRIBlSy8mMLeujYopiPDHsWYfxjt
+	 vITYNcGoO4NgI1YC9+bvR2K3IqC0KxZLtlO2CVmAIcGVIOuHqVizc4yYzhERnQg0KP
+	 1+pwsq09Hr7jSr75nwTtd1hptZmxJZ/lU/UbtjZLDnEsQhOEUEE5n5kE5EoOZiVtoe
+	 x8lzMKDrjJQkC8p9fRYiqqXrJ/r5r0+msZTnsVMRROClC2ZjOH4CJ31rdaoTMivV4q
+	 pJR+I6Mn4EE8w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BD5B460754;
-	Tue, 29 Sep 2026 08:50:44 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id B483A32A
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:50:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 103B1405A6;
+	Tue, 29 Sep 2026 08:53:18 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6AFDED1
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:53:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A6656405A1
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:50:37 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5C6F280C7E
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:53:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id n5M9_k1o9v0O for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 08:50:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 54522405FB
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790671836;
- b=eVeoXQ7uyOtSs7wEtnhTjSFzR41J2q6PkvKmQnqW5+X+/PRklTJjxiEbWjrDjyVmFsvP
- NqyY2Uojy3qev9OpjlyOtbL1EFPkrb+SbbWlFqZadmw3NxCXaaxbYt1zeMY/ipKF0qBZ1
- 1S2a7xHTYHg9uziBD5mj5o1TeSwOCCt0wCQIHCr71rNoSANqV89mDQCyOxnTavB/yBmzw
- /m5qevediKDdHqqfuFfBsND/K0ernPV5J1mVdTB6yH6PDpJtaEQ2HDXv/aiba/J3l8zOf
- ckvbUxH9LsSu4uXuUtsKPxCHXwVIgXdkb49ACZxATZWzTDmwYsQl3SbDMBeUNCCZC6g==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790671836;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hUJIBpedI48L for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 08:53:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 56FC380C77
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:34::20"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790671995;
+ b=g6Z1iKBqvTvR/a6muexg8wDLMgZclOx1RHMJ+cJ1TYvWi8Psw8UhS3TtU+/kjG+RBVDs
+ 6LcO6Ai0mfXvJThNM33krFNBkAAwDAx7Wuq1KmcDcSS0ebtcJZjhueRx2YiBwFC2WTpkq
+ 3hohASrD399jdg6P6cIldcpWeTamwlwEkGe8R/t1tXOZT0HLHDJoVxQKuCUkh8kImG6Qr
+ oOmZgdzjxVc1swKfLJ8BUQUsU+LDzbAxYXCyWpn+kprK59QZME82LM2AYbLQEInOkYpfR
+ dZc8oD75cNwRBeRVzj9QrwLuEtalo8KNwSkTgtWflIfsCY0VsdkbfT6hqQHVnGG725w==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790671995;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
- References:In-Reply-To:To:Cc:X-Mailer;
- bh=wWvobzZ8H2bAG1a2b43C7GTkR9jMUQFibDL7cjTNvgM=;
- b=FSFQw480jSicBu18OIb/3YAmYETofKTdaOvXCyBlXhhyS0rtZjGJWJzfZ43mnIMVjVU2
- abJAYDcQVTfAZpKTnD5uE1hDcZEK3zJI+k1KUkUmDPtIr6HezOZFC4cWdNd8rJKikxiJN
- 0ARnaIynqFa1T6wacPHeuZRMOHCIUTCGI3oDjk07rxUO6bQaA7Su8d2kz9JlpnizG0ZeF
- gUqDmIBekPoX1G7v9us8BKnl1TEiCnYbAdi5WMrqU+OrSrbbZN7XtTo4ddzSB4RrcVhtM
- yGbPJD6RZdrgnZf0uCW6iFmQdupPXzGRk2WCg6bfiw3acgCGSULXPgyUDG8u9KYgo8w==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+ In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+ Content-Type:Content-Transfer-Encoding;
+ bh=8rV5jyjuOYJYlsT4uTTxDvu9pGJRNcRVUcWkLeZY/f0=;
+ b=VyiqBp7VbzESNN1dB4hqtMVTsxB8aMynpXQlKYY9YU+P7eayT/o/aSvqtwQteFzsHH8h
+ x5r9NXCEG9sMtJ4CMSAG1CUS0QSz+VvO08DwNIC9bsutIrRr9ePUlIpctVHxUMuOpfdJa
+ yohRwM46oIEzcU/QoV4CdpnFZSXhnv+gm705ZmY6k9jRBPlX3DYT+2le0D57XPj45jbZJ
+ aNRw/zFL6M7ccVcO1RPONH4u0+w73RifyGes99aqZZo0xiAtnOILpDgn1ivi8afnwu1Sf
+ mSMor+cTZDsD2d3cG56XlH8AKUviOl70An8D/LkRShwnkbCnFQ6PTHe+QXF5w89OyUA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=IQJRdrir; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
+ header.s=google header.b=jwkVvWyK; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:34::20"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::11; helo=mail-wm2-x11.google.com;
+ client-ip=2a00:1450:4864:34::20; helo=mail-ej2-x20.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=IQJRdrir
-Received: from mail-wm2-x11.google.com (mail-wm2-x11.google.com
- [IPv6:2a00:1450:4864:31::11])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 54522405FB
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:50:36 +0000 (UTC)
-Received: by mail-wm2-x11.google.com with SMTP id
- 5b1f17b1804b1-49ff9642c57so3352665e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 01:50:36 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=jwkVvWyK
+Received: from mail-ej2-x20.google.com (mail-ej2-x20.google.com
+ [IPv6:2a00:1450:4864:34::20])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 56FC380C77
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:53:14 +0000 (UTC)
+Received: by mail-ej2-x20.google.com with SMTP id
+ a640c23a62f3a-c2af3701927so580896966b.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 01:53:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790671993; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Sddjat2NxU2tcu4g79kv59LjzowhZqiN4JTEYKzmY1bilJE1C/T4yQc1W00fxXLeWv
+ DVlrXgJmfhiZppZm2YRUX1XPJ2zknDdykBB32fuskwG4Qrai7bqOwlMRIdaV3xCfsEGm
+ FmzKbFUMgYrfwGv0B12IXDIqx5AId5fAaqDb7+ql4vg9I9u7kml0XeeTgQWY0TrtiMf2
+ RXYYZWDiN+IskzlUF7BgBOLnD2XsG3VwADb8FhduYyggFKkAPgMXWaHxk5hVn7yF7H7V
+ VeUnRLulZUE1SWJIqhbjftMVWaqKS8SEXk+2qxDa00mcRMTq0N8TtuMo/rzG+dacwPz1
+ wYtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=8rV5jyjuOYJYlsT4uTTxDvu9pGJRNcRVUcWkLeZY/f0=;
+ fh=KIfNOq+Km7+/+2Ri7qez7XY3eRRoz5hXWW6tM1vilbg=;
+ b=eNXtsB5nsdWnh7w/78duQtzf3vOXlqCNNfOkL7TZupG6tY/oSYhY+ZU9NPSz1+YxWP
+ XL9glwaQcGccm/xuf+OiiemX4r0KpGfY7HXKTu357gRh1Xz7zXCs06sg+SqMB2hdrU/w
+ cvA1Utx0YgMmA6NYg5wvVBwiLLVG/6ypQRj/fdKcdFM3xzYr0XdD8ytvhNGWdFkruLNL
+ Zc0N6C65uVK8FgsKYIBNA80wAwJqExE5lTT3tlvuiNp0AWWpncy7oPZ7/8RcPKyrvxWi
+ L9W5OfVpf/BmUCzexfC6+xaM68FdePYi6BoRp8ieLRCIxuUIwFXStHkoYEdYrSnpOptu
+ h/eA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790671834; x=1791276634;
+ d=baylibre.com; s=google; t=1790671993; x=1791276793;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=wWvobzZ8H2bAG1a2b43C7GTkR9jMUQFibDL7cjTNvgM=;
- b=IQJRdrirYYZUFjIsicN5f+c9Vq0cIix5jUyoecyXKNfkUvy33khBos1e2EOgcr8cV9
- VK2eTYliWEVnRP66JwSIi64j8bC+//H3eKV0Jt8kBuV/1VF6ZucjYUCVEj6CGD1x5Je8
- JlAEe6hd1wTMxwEnN4q/bf+zP7vclQDmaKVg31i4pzBkhFOP+B+c5fW/tdJsh56I50fV
- C8eFPP8ZODFExfBMq4g0uFYZuEM99f8z+uW7IxBxWX8mt57JRQzOXf89qMZ+uh4nod8F
- WYsOv/UlV5WRkY1xWRy00M29tcZI4JK2Yw7JwA50PIV0W/6H8RGzkUty80XsaqWjNIpo
- 7CyQ==
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=8rV5jyjuOYJYlsT4uTTxDvu9pGJRNcRVUcWkLeZY/f0=;
+ b=jwkVvWyKnXA4M+WxCemolXQHIM6Qc8spZghh23xOUthSgoxxiqOf9wggXeGbJYEOxE
+ DJfg4+/b80i4atR8JPmdT1L1stOIqnARQjm6u7tsZ/nWMkWpApMf89MaGOG5wvQ3dH6L
+ I6K7kHy30WMMTgqCj3C/DgPKFJ2RtzrAqgY/rzzAlvCN7Ei9XmBZX8Cmla2RNlcGbNWI
+ yOE/If8iwWJnTYxZPAjgcCHfy4K58brIBJzGE0VOs+sl+n5JoFUGtO2YUeV+BPIfE15k
+ ODiCQus0Aga6wlpoOPJzbfcp/8rSEcHqN3jkoKdh/+aYC/ui1QuljkSrpaBMwLqu7LYG
+ EaeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790671834; x=1791276634;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
+ d=1e100.net; s=20260707; t=1790671993; x=1791276793;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=wWvobzZ8H2bAG1a2b43C7GTkR9jMUQFibDL7cjTNvgM=;
- b=rV+0FErBxHdcj19efQASxsvisruq7rW7Or9meopQQHB1yoQZM699cr6LKnyUNxRmO8
- Mk00aG1RRqfYKWEvZQ0mwKc7nVpZMnnQd7/+sqADjzKe1is9YhcMNlgKpYRMNtkWDfLk
- rqtCIyhNbs6+JqbNgoOgmyOMxvFKWrA4Q2bVviFBiDMcuJIZsn1W7h1l/KA+ogjcLprZ
- /TXFgxJAnLu+Ou72yqG30IhyH+MnrQ2693TpMGmRfs8u0DNPytbFtWzMlHH4k2Ad8WA7
- l8gxYnwNAHgc9Ve1vIJ3qaZgAfYwsT0WY13Hj1p/K1afy7zAKAUeBYXO25trViVDiUcw
- MWDw==
-X-Gm-Message-State: AFuF++kuhn6O3Ots/hDQAs985FHg5pR2t+UA/PL304qDSBCEAN9D/cXA
- 7zYTv1o4mUSfmDYR9aNjQ+rc5bBEw+GQdOcDTZ6QwjWi7TOcNkumSbVY9EnZGrZ9Az0=
-X-Gm-Gg: AYBFou3tiQztYPXhjOFUeGS+dqu1nrtDUlBCDR0ZEN+TLrWnLaQrlP724/ykxjxroan
- CfrWc60no04E28zQyex1QJDwyZ/0xdWQGX2lB/zM92oeOar7Qm2ZbYOLExDThOrKb1HqGty8VQI
- 5RzfzybNKxOtX5ri+gxRxkIEZ9LL8jzWavqiPirfr4+CHTt/Zo8qlUMCNHdDiXpOyt7LhBkSmlj
- 66OoRxj5uYXNgp4Z10P22ul+hLeXyV6WNx9SanEX9Gq5/6yQ5geZ7d03fsF7+ys7i0BRLv4XzXG
- 7pG15GDRD1uRIKl+cQIpW00n38RwweBJT+DUXaV/na+Hf/qZrepRqBnnsd0CPQla+KQUt8w5abO
- M+N2GwsCaoeRyg7VvBZhWV2w9DF7jQX0BbxbnHwgrv/vsK3ev36jUJUucb1uqJy9x9P7JFKZkP3
- AJ3NHiW5INkliU45Ul/Sfu5+XxFN45DsrOPZNfNoJd4B86HvnonedmjlEyhZ/VRVEVWVzhxNN7i
- byr5WfeVyEuk/kID/7Vn/VgWSt8FbElWGBxA7uFYVeERYFE8kRckZJvfyyw5iBGxy/8a38j8B8L
- FdBLdQLB7LEgFnGot0HS0VH1fpCFIh65cdaclkWzn1YzTnihV+HOkXE=
-X-Received: by 2002:a05:600c:1daa:b0:4a0:ec5:46d9 with SMTP id
- 5b1f17b1804b1-4a00ec54708mr20204705e9.0.1790671834118; 
- Tue, 29 Sep 2026 01:50:34 -0700 (PDT)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
- [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a00cfe16a2sm60967475e9.4.2026.09.29.01.50.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Sep 2026 01:50:33 -0700 (PDT)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 29 Sep 2026 10:52:43 +0200
-Subject: [PATCH v2 3/3] phy: phy-mtk-mipi-dsi: add new driver
+ bh=8rV5jyjuOYJYlsT4uTTxDvu9pGJRNcRVUcWkLeZY/f0=;
+ b=eM58i4sy08S7qm/yopX1uusbxcCGn1itoJArwIZIrSi37zgqm6wzj5fSn0aKKjaw9W
+ gO1Q7ou7erXLYEt0m8/JwmcQJh11alk+gl8RQEWuIINr5bjhvIZH7jzntsxb0XHu4g8c
+ 5wbpqG4xF2Os+fpLTPwQgV3VCGXfZQzch+8kFfLItSqOIT1ZDKKfoZfJnjzJGDm5xmZU
+ RxlDjwwl2T5PZNm+7ni9zykJkb/s9bhXvWVmwQxCcm7XEAM99UNqFGkP4lN3t+T7szMU
+ 5nI78JFeHTBDIBaKAybvMjMbrtUrpDJvOkOXFFM3zM541mcNnknPJzObEQZI2yaS2hrK
+ mdKw==
+X-Gm-Message-State: AFuF++l9Jp5M4FdwwSz/PaJe8mf7j1cq38N76JivlMBB3Y93CclQPE5M
+ LKrwOMlpLD07g3qDTa8+McKpjpiDLVaufhAPA9UdsaGdx11AKyCLxKsgxJ0vemfZwV/bFiByybO
+ RgoKZGNU9FifmchcUq0lqVzk0r6boORK2kR4d5CYimA==
+X-Gm-Gg: AYBFou25JFwCNHOGQBW54V+7M18gHkxTtL+sVn1Ugmr/jStzL9u63ZLvEdnkokANdz7
+ wf5jkpCKWkJn+WMDJ3HSV4NZkJyclFZZUpPA2/NvOlqiUMAdQLHnf0ZKnbtIdvc/8ABQjOUJWdQ
+ Ji01OPpEsmaXHbwBUWlnyGHni03rgpld/42PKCJGmIZxz4uEGXeaJoOc3RWwwRrEX5pVObEF6FW
+ 6u9GrvrS6JXmVZXfWs/J1UfBb70Pisrh98U3pc08cdR5IgH8q71A5K6l5jlwk5qUGusZH1q6DbD
+ LgIYg4qI+7HmCnkk3jwTslmwFEaHepTHec2mJFeHNbLgaoJyN80i4NO6AOShHQinV4/HM4Wf2Tx
+ 4wYdHvkuNPb/NEH6KFtGAGUnJHHcs0+ACkswaqtrlv4PV/lHsIdMZy/Xl4Hy7k0pSd4aki8wxMN
+ OlEkXaKqyqAg==
+X-Received: by 2002:a17:907:3e87:b0:c29:f5d8:9c78 with SMTP id
+ a640c23a62f3a-c2ac229ee9cmr1286024366b.39.1790671992719; Tue, 29 Sep 2026
+ 01:53:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260929-mt8365-add-phy-mtk-mipi-dsi-driver-v2-3-7a1bd29d0e6d@baylibre.com>
-References: <20260929-mt8365-add-phy-mtk-mipi-dsi-driver-v2-0-7a1bd29d0e6d@baylibre.com>
-In-Reply-To: <20260929-mt8365-add-phy-mtk-mipi-dsi-driver-v2-0-7a1bd29d0e6d@baylibre.com>
-To: u-boot@lists.u-boot-project.org, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>, 
+References: <20260915-mt8365-add-phy-mtk-mipi-dsi-driver-v1-0-83707ed5242a@baylibre.com>
+ <20260915-mt8365-add-phy-mtk-mipi-dsi-driver-v1-3-83707ed5242a@baylibre.com>
+ <eded0ea7-a3ee-4735-b520-c0e2beccdd63@baylibre.com>
+In-Reply-To: <eded0ea7-a3ee-4735-b520-c0e2beccdd63@baylibre.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Tue, 29 Sep 2026 10:55:13 +0200
+X-Gm-Features: AclHuK-WmaAfyHmKGjqme9c-ut4rC77PqTp1O6xXh2-LwmClv5PIdkrzWnZ1Y6U
+Message-ID: <CAEHHSvZR-oosVGZLizJpi+Nb=QKsxVU_8Ps+NQ13sM8VhbCJVQ@mail.gmail.com>
+Subject: Re: [PATCH 3/3] phy: phy-mtk-mipi-dsi: add new driver
+To: David Lechner <dlechner@baylibre.com>
+Cc: u-boot@lists.u-boot-project.org, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>, 
  "Lucien.Jheng" <lucienzx159@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Pavlo Yadvychuk <pyadvychuk@baylibre.com>, 
+ Pavlo Yadvychuk <pyadvychuk@baylibre.com>,
  Neil Armstrong <neil.armstrong@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Julien Stephan <jstephan@baylibre.com>, Siu Ming Tong <smtong@axiado.com>
-X-Mailer: b4 0.15.2
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -188,446 +202,144 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a new driver for the MIPI DSI PHY. The driver supports MT8183
-compatible SoCs. The driver is based on the corresponding kernel driver
-commit 2ec9c210c1f9 ("phy: mediatek: Add support for MT8196 MIPI DSI PHY")
+Le mer. 23 sept. 2026 =C3=A0 17:50, David Lechner <dlechner@baylibre.com> a=
+ =C3=A9crit :
+>
+> On 9/15/26 10:00 AM, Julien Stephan wrote:
+> > Add a new driver for the MIPI DSI PHY. The driver supports MT8183
+> > compatible SoCs. The driver is base on the corresponding kernel driver
+>
+> s/base/based/
+>
+> > commit 2ec9c210c1f9 ("phy: mediatek: Add support for MT8196 MIPI DSI PH=
+Y")
+> >
+> > Few notes about the port from kernel:
+>
+> s/Few/A few/
+>
+> > - tested on Genio-350 which does not have nvmem-cells, so keep rt_code[=
+]
+> >   zeroed and fallback to 0x210 has kernel does when no cell available.
+>
+> s/has/as the/
+>
+> >   Can be implemented later.
+> > - PLL is not registered as a clock provider:
+> >     - configure() =3D determine_rate+set_rate
+> >     - power_on() =3D clk_prepare_enable
+> >   configure() takes a struct phy_configure_opts_mipi_dphy and uses its
+> >   hs_clk_rate member, which carries the per-lane data rate the kernel
+> >   would have set on the "hs" clock.
+> >
+>
+> ...
+>
+> > +static int mtk_mipi_tx_pll_enable(struct mtk_mipi_tx *mipi_tx)
+> > +{
+> > +     void __iomem *base =3D mipi_tx->regs;
+> > +     unsigned int txdiv, txdiv0;
+> > +     u64 pcw;
+> > +
+> > +     dev_dbg(mipi_tx->dev, "enable: %llu bps\n", mipi_tx->data_rate);
+> > +
+> > +     if (mipi_tx->data_rate >=3D 2000000000) {
+> > +             txdiv =3D 1;
+> > +             txdiv0 =3D 0;
+> > +     } else if (mipi_tx->data_rate >=3D 1000000000) {
+> > +             txdiv =3D 2;
+> > +             txdiv0 =3D 1;
+> > +     } else if (mipi_tx->data_rate >=3D 500000000) {
+> > +             txdiv =3D 4;
+> > +             txdiv0 =3D 2;
+> > +     } else if (mipi_tx->data_rate > 250000000) {
+> > +             txdiv =3D 8;
+> > +             txdiv0 =3D 3;
+> > +     } else if (mipi_tx->data_rate >=3D 125000000) {
+> > +             txdiv =3D 16;
+> > +             txdiv0 =3D 4;
+> > +     } else {
+> > +             return -EINVAL;
+> > +     }
+> > +
+> > +     mtk_phy_clear_bits(base + MIPITX_PLL_CON4, RG_DSI_PLL_IBIAS);
+> > +
+> > +     mtk_phy_set_bits(base + MIPITX_PLL_PWR, AD_DSI_PLL_SDM_PWR_ON);
+> > +     mtk_phy_clear_bits(base + MIPITX_PLL_CON1, RG_DSI_PLL_EN);
+> > +     udelay(1);
+> > +     mtk_phy_clear_bits(base + MIPITX_PLL_PWR, AD_DSI_PLL_SDM_ISO_EN);
+> > +     pcw =3D div_u64(mipi_tx->data_rate * txdiv << 24, MIPITX_PLL_REF_=
+RATE);
+>
+> (mipi_tx->data_rate * txdiv) << 24
+>
+> For those of us that can't remember order of operations.
+>
+> > +     writel(pcw, base + MIPITX_PLL_CON0);
+> > +     mtk_phy_update_field(base + MIPITX_PLL_CON1, RG_DSI_PLL_POSDIV, t=
+xdiv0);
+> > +     mtk_phy_set_bits(base + MIPITX_PLL_CON1, RG_DSI_PLL_EN);
+> > +
+> > +     return 0;
+> > +}
+> > +
+>
+> ...
+>
+> > +static void mtk_mipi_tx_power_on_signal(struct mtk_mipi_tx *mipi_tx)
+> > +{
+> > +     void __iomem *base =3D mipi_tx->regs;
+> > +
+> > +     /* BG_LPF_EN / BG_CORE_EN */
+> > +     writel(RG_DSI_PAD_TIEL_SEL | RG_DSI_BG_CORE_EN, base + MIPITX_LAN=
+E_CON);
+> > +     udelay(30);
+> > +     writel(RG_DSI_BG_CORE_EN | RG_DSI_BG_LPF_EN, base + MIPITX_LANE_C=
+ON);
+> > +
+> > +     /* Switch OFF each Lane */
+> > +     mtk_phy_clear_bits(base + MIPITX_D0_SW_CTL_EN, DSI_SW_CTL_EN);
+> > +     mtk_phy_clear_bits(base + MIPITX_D1_SW_CTL_EN, DSI_SW_CTL_EN);
+> > +     mtk_phy_clear_bits(base + MIPITX_D2_SW_CTL_EN, DSI_SW_CTL_EN);
+> > +     mtk_phy_clear_bits(base + MIPITX_D3_SW_CTL_EN, DSI_SW_CTL_EN);
+> > +     mtk_phy_clear_bits(base + MIPITX_CK_SW_CTL_EN, DSI_SW_CTL_EN);
+> > +
+> > +     mtk_phy_update_field(base + MIPITX_VOLTAGE_SEL, RG_DSI_HSTX_LDO_R=
+EF_SEL,
+> > +                          (mipi_tx->mipitx_drive - 3000) / 200);
+>
+> Is this 3000 supposed to be MIPITX_DRIVE_MIN_UA?
 
-A few notes about the port from kernel:
-- tested on Genio-350 which does not have nvmem-cells, so keep rt_code[]
-  zeroed and fallback to 0x210 as the kernel does when no cell available.
-  Can be implemented later.
-- PLL is not registered as a clock provider:
-    - configure() = determine_rate+set_rate
-    - power_on() = clk_prepare_enable
-  configure() takes a struct phy_configure_opts_mipi_dphy and uses its
-  hs_clk_rate member, which carries the per-lane data rate the kernel
-  would have set on the "hs" clock.
-
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
----
- drivers/phy/mediatek/Kconfig                   |  11 ++
- drivers/phy/mediatek/Makefile                  |   1 +
- drivers/phy/mediatek/phy-mtk-mipi-dsi-mt8183.c | 175 +++++++++++++++++++++++++
- drivers/phy/mediatek/phy-mtk-mipi-dsi.c        | 143 ++++++++++++++++++++
- drivers/phy/mediatek/phy-mtk-mipi-dsi.h        |  45 +++++++
- 5 files changed, 375 insertions(+)
-
-diff --git a/drivers/phy/mediatek/Kconfig b/drivers/phy/mediatek/Kconfig
-index ce7279daa75..26d0de54a23 100644
---- a/drivers/phy/mediatek/Kconfig
-+++ b/drivers/phy/mediatek/Kconfig
-@@ -11,6 +11,17 @@ config PHY_MTK_HDMI
- 	  MT8188 and MT8195. The PHY provides the TMDS links and the pixel
- 	  clock PLL to the HDMI TX controller.
- 
-+config PHY_MTK_MIPI_DSI
-+	bool "MediaTek MIPI-DSI PHY Driver"
-+	depends on PHY
-+	depends on ARCH_MEDIATEK
-+	depends on ARM64
-+	depends on CLK
-+	help
-+	  Support for the MIPI TX D-PHY found on MediaTek SoCs such as the
-+	  MT8183 and MT8365. The PHY provides the D-PHY lanes and the byte
-+	  clock PLL to the DSI host controller.
-+
- config PHY_MTK_TPHY
- 	bool "MediaTek T-PHY Driver"
- 	depends on PHY
-diff --git a/drivers/phy/mediatek/Makefile b/drivers/phy/mediatek/Makefile
-index 00ab10a238e..6dedec70edc 100644
---- a/drivers/phy/mediatek/Makefile
-+++ b/drivers/phy/mediatek/Makefile
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-or-later
- 
- obj-$(CONFIG_PHY_MTK_HDMI) += phy-mtk-hdmi.o phy-mtk-hdmi-mt8195.o
-+obj-$(CONFIG_PHY_MTK_MIPI_DSI) += phy-mtk-mipi-dsi.o phy-mtk-mipi-dsi-mt8183.o
- obj-$(CONFIG_PHY_MTK_TPHY) += phy-mtk-tphy.o
- obj-$(CONFIG_PHY_MTK_UFS) += phy-mtk-ufs.o
- obj-$(CONFIG_PHY_MTK_XSPHY) += phy-mtk-xsphy.o
-diff --git a/drivers/phy/mediatek/phy-mtk-mipi-dsi-mt8183.c b/drivers/phy/mediatek/phy-mtk-mipi-dsi-mt8183.c
-new file mode 100644
-index 00000000000..fd2da6acff9
---- /dev/null
-+++ b/drivers/phy/mediatek/phy-mtk-mipi-dsi-mt8183.c
-@@ -0,0 +1,175 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2019 MediaTek Inc.
-+ * Copyright (c) 2026 BayLibre, SAS
-+ * Author: Jitao Shi <jitao.shi@mediatek.com>
-+ */
-+
-+#include <dm/device_compat.h>
-+#include <linux/bitops.h>
-+#include <linux/delay.h>
-+#include <linux/kernel.h>
-+#include <linux/math64.h>
-+
-+#include "phy-mtk-io.h"
-+#include "phy-mtk-mipi-dsi.h"
-+
-+#define MIPITX_LANE_CON		0x000c
-+#define RG_DSI_BG_LPF_EN		BIT(6)
-+#define RG_DSI_BG_CORE_EN		BIT(7)
-+#define RG_DSI_PAD_TIEL_SEL		BIT(8)
-+
-+#define MIPITX_VOLTAGE_SEL	0x0010
-+#define RG_DSI_HSTX_LDO_REF_SEL		GENMASK(9, 6)
-+
-+#define MIPITX_PLL_PWR		0x0028
-+#define AD_DSI_PLL_SDM_PWR_ON		BIT(0)
-+#define AD_DSI_PLL_SDM_ISO_EN		BIT(1)
-+
-+#define MIPITX_PLL_CON0		0x002c
-+
-+#define MIPITX_PLL_CON1		0x0030
-+#define RG_DSI_PLL_EN			BIT(4)
-+#define RG_DSI_PLL_POSDIV		GENMASK(10, 8)
-+
-+#define MIPITX_PLL_CON4		0x003c
-+#define RG_DSI_PLL_IBIAS		GENMASK(11, 10)
-+
-+#define MIPITX_D2P_RTCODE	0x0100
-+#define MIPITX_D2_SW_CTL_EN	0x0144
-+#define MIPITX_D0_SW_CTL_EN	0x0244
-+
-+#define MIPITX_CK_CKMODE_EN	0x0328
-+#define DSI_CK_CKMODE_EN		BIT(0)
-+
-+#define MIPITX_CK_SW_CTL_EN	0x0344
-+#define MIPITX_D1_SW_CTL_EN	0x0444
-+#define MIPITX_D3_SW_CTL_EN	0x0544
-+#define DSI_SW_CTL_EN			BIT(0)
-+
-+/* Reference clock feeding the PLL, fixed at 26MHz on all supported SoCs. */
-+#define MIPITX_PLL_REF_RATE	26000000
-+
-+#define MIPITX_DATA_RATE_MIN	125000000ULL
-+#define MIPITX_DATA_RATE_MAX	1600000000ULL
-+
-+static u64 mtk_mipi_tx_pll_determine_rate(struct mtk_mipi_tx *mipi_tx, u64 rate)
-+{
-+	return clamp_val(rate, MIPITX_DATA_RATE_MIN, MIPITX_DATA_RATE_MAX);
-+}
-+
-+static int mtk_mipi_tx_pll_enable(struct mtk_mipi_tx *mipi_tx)
-+{
-+	void __iomem *base = mipi_tx->regs;
-+	unsigned int txdiv, txdiv0;
-+	u64 pcw;
-+
-+	dev_dbg(mipi_tx->dev, "enable: %llu bps\n", mipi_tx->data_rate);
-+
-+	if (mipi_tx->data_rate >= 2000000000) {
-+		txdiv = 1;
-+		txdiv0 = 0;
-+	} else if (mipi_tx->data_rate >= 1000000000) {
-+		txdiv = 2;
-+		txdiv0 = 1;
-+	} else if (mipi_tx->data_rate >= 500000000) {
-+		txdiv = 4;
-+		txdiv0 = 2;
-+	} else if (mipi_tx->data_rate > 250000000) {
-+		txdiv = 8;
-+		txdiv0 = 3;
-+	} else if (mipi_tx->data_rate >= 125000000) {
-+		txdiv = 16;
-+		txdiv0 = 4;
-+	} else {
-+		return -EINVAL;
-+	}
-+
-+	mtk_phy_clear_bits(base + MIPITX_PLL_CON4, RG_DSI_PLL_IBIAS);
-+
-+	mtk_phy_set_bits(base + MIPITX_PLL_PWR, AD_DSI_PLL_SDM_PWR_ON);
-+	mtk_phy_clear_bits(base + MIPITX_PLL_CON1, RG_DSI_PLL_EN);
-+	udelay(1);
-+	mtk_phy_clear_bits(base + MIPITX_PLL_PWR, AD_DSI_PLL_SDM_ISO_EN);
-+	pcw = div_u64((mipi_tx->data_rate * txdiv) << 24, MIPITX_PLL_REF_RATE);
-+	writel(pcw, base + MIPITX_PLL_CON0);
-+	mtk_phy_update_field(base + MIPITX_PLL_CON1, RG_DSI_PLL_POSDIV, txdiv0);
-+	mtk_phy_set_bits(base + MIPITX_PLL_CON1, RG_DSI_PLL_EN);
-+
-+	return 0;
-+}
-+
-+static void mtk_mipi_tx_pll_disable(struct mtk_mipi_tx *mipi_tx)
-+{
-+	void __iomem *base = mipi_tx->regs;
-+
-+	mtk_phy_clear_bits(base + MIPITX_PLL_CON1, RG_DSI_PLL_EN);
-+
-+	mtk_phy_set_bits(base + MIPITX_PLL_PWR, AD_DSI_PLL_SDM_ISO_EN);
-+	mtk_phy_clear_bits(base + MIPITX_PLL_PWR, AD_DSI_PLL_SDM_PWR_ON);
-+}
-+
-+static void mtk_mipi_tx_config_calibration_data(struct mtk_mipi_tx *mipi_tx)
-+{
-+	int i, j;
-+
-+	for (i = 0; i < 5; i++) {
-+		if ((mipi_tx->rt_code[i] & 0x1f) == 0)
-+			mipi_tx->rt_code[i] |= 0x10;
-+
-+		if ((mipi_tx->rt_code[i] >> 5 & 0x1f) == 0)
-+			mipi_tx->rt_code[i] |= 0x10 << 5;
-+
-+		for (j = 0; j < 10; j++)
-+			mtk_phy_update_bits(mipi_tx->regs +
-+				MIPITX_D2P_RTCODE * (i + 1) + j * 4,
-+				1, mipi_tx->rt_code[i] >> j & 1);
-+	}
-+}
-+
-+static void mtk_mipi_tx_power_on_signal(struct mtk_mipi_tx *mipi_tx)
-+{
-+	void __iomem *base = mipi_tx->regs;
-+
-+	/* BG_LPF_EN / BG_CORE_EN */
-+	writel(RG_DSI_PAD_TIEL_SEL | RG_DSI_BG_CORE_EN, base + MIPITX_LANE_CON);
-+	udelay(30);
-+	writel(RG_DSI_BG_CORE_EN | RG_DSI_BG_LPF_EN, base + MIPITX_LANE_CON);
-+
-+	/* Switch OFF each Lane */
-+	mtk_phy_clear_bits(base + MIPITX_D0_SW_CTL_EN, DSI_SW_CTL_EN);
-+	mtk_phy_clear_bits(base + MIPITX_D1_SW_CTL_EN, DSI_SW_CTL_EN);
-+	mtk_phy_clear_bits(base + MIPITX_D2_SW_CTL_EN, DSI_SW_CTL_EN);
-+	mtk_phy_clear_bits(base + MIPITX_D3_SW_CTL_EN, DSI_SW_CTL_EN);
-+	mtk_phy_clear_bits(base + MIPITX_CK_SW_CTL_EN, DSI_SW_CTL_EN);
-+
-+	mtk_phy_update_field(base + MIPITX_VOLTAGE_SEL, RG_DSI_HSTX_LDO_REF_SEL,
-+			     (mipi_tx->mipitx_drive - 3000) / 200);
-+
-+	mtk_mipi_tx_config_calibration_data(mipi_tx);
-+
-+	mtk_phy_set_bits(base + MIPITX_CK_CKMODE_EN, DSI_CK_CKMODE_EN);
-+}
-+
-+static void mtk_mipi_tx_power_off_signal(struct mtk_mipi_tx *mipi_tx)
-+{
-+	void __iomem *base = mipi_tx->regs;
-+
-+	/* Switch ON each Lane */
-+	mtk_phy_set_bits(base + MIPITX_D0_SW_CTL_EN, DSI_SW_CTL_EN);
-+	mtk_phy_set_bits(base + MIPITX_D1_SW_CTL_EN, DSI_SW_CTL_EN);
-+	mtk_phy_set_bits(base + MIPITX_D2_SW_CTL_EN, DSI_SW_CTL_EN);
-+	mtk_phy_set_bits(base + MIPITX_D3_SW_CTL_EN, DSI_SW_CTL_EN);
-+	mtk_phy_set_bits(base + MIPITX_CK_SW_CTL_EN, DSI_SW_CTL_EN);
-+
-+	writel(RG_DSI_PAD_TIEL_SEL | RG_DSI_BG_CORE_EN, base + MIPITX_LANE_CON);
-+	writel(RG_DSI_PAD_TIEL_SEL, base + MIPITX_LANE_CON);
-+}
-+
-+const struct mtk_mipitx_data mt8183_mipitx_data = {
-+	.pll_determine_rate = mtk_mipi_tx_pll_determine_rate,
-+	.pll_enable = mtk_mipi_tx_pll_enable,
-+	.pll_disable = mtk_mipi_tx_pll_disable,
-+	.mipi_tx_enable_signal = mtk_mipi_tx_power_on_signal,
-+	.mipi_tx_disable_signal = mtk_mipi_tx_power_off_signal,
-+};
-diff --git a/drivers/phy/mediatek/phy-mtk-mipi-dsi.c b/drivers/phy/mediatek/phy-mtk-mipi-dsi.c
-new file mode 100644
-index 00000000000..f294b8bd797
---- /dev/null
-+++ b/drivers/phy/mediatek/phy-mtk-mipi-dsi.c
-@@ -0,0 +1,143 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2015 MediaTek Inc.
-+ * Copyright (c) 2026 BayLibre, SAS
-+ */
-+
-+#include <clk.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <generic-phy.h>
-+#include <linux/kernel.h>
-+#include <phy-mipi-dphy.h>
-+
-+#include "phy-mtk-mipi-dsi.h"
-+
-+#define MIPITX_DRIVE_DEFAULT_UA		4600
-+#define MIPITX_DRIVE_MIN_UA		3000
-+#define MIPITX_DRIVE_MAX_UA		6000
-+
-+static int mtk_mipi_tx_power_on(struct phy *phy)
-+{
-+	struct mtk_mipi_tx *mipi_tx = dev_get_priv(phy->dev);
-+	int ret;
-+
-+	if (!mipi_tx->data_rate) {
-+		dev_err(phy->dev, "No data rate set, configure the PHY first\n");
-+		return -EINVAL;
-+	}
-+
-+	/* Power up core and enable PLL */
-+	ret = mipi_tx->driver_data->pll_enable(mipi_tx);
-+	if (ret)
-+		return ret;
-+
-+	/* Enable DSI Lane LDO outputs, disable pad tie low */
-+	mipi_tx->driver_data->mipi_tx_enable_signal(mipi_tx);
-+
-+	return 0;
-+}
-+
-+static int mtk_mipi_tx_power_off(struct phy *phy)
-+{
-+	struct mtk_mipi_tx *mipi_tx = dev_get_priv(phy->dev);
-+
-+	/* Enable pad tie low, disable DSI Lane LDO outputs */
-+	mipi_tx->driver_data->mipi_tx_disable_signal(mipi_tx);
-+
-+	/* Disable PLL and power down core */
-+	mipi_tx->driver_data->pll_disable(mipi_tx);
-+
-+	return 0;
-+}
-+
-+/*
-+ * Equivalent of the kernel PLL clock's determine_rate and set_rate ops: clamp
-+ * the requested data rate to what the PLL can lock to and latch it, the
-+ * hardware is programmed when the PHY is powered on.
-+ */
-+static int mtk_mipi_tx_configure(struct phy *phy, void *params)
-+{
-+	struct mtk_mipi_tx *mipi_tx = dev_get_priv(phy->dev);
-+	struct phy_configure_opts_mipi_dphy *opts = params;
-+
-+	if (!opts)
-+		return -EINVAL;
-+
-+	mipi_tx->data_rate =
-+		mipi_tx->driver_data->pll_determine_rate(mipi_tx,
-+							 opts->hs_clk_rate);
-+
-+	return 0;
-+}
-+
-+static int mtk_mipi_tx_probe(struct udevice *dev)
-+{
-+	struct mtk_mipi_tx *mipi_tx = dev_get_priv(dev);
-+	int ret;
-+
-+	mipi_tx->dev = dev;
-+	mipi_tx->driver_data =
-+		(const struct mtk_mipitx_data *)dev_get_driver_data(dev);
-+	if (!mipi_tx->driver_data)
-+		return -ENODEV;
-+
-+	mipi_tx->regs = dev_remap_addr(dev);
-+	if (!mipi_tx->regs)
-+		return -EINVAL;
-+
-+	ret = clk_get_by_index(dev, 0, &mipi_tx->ref_clk);
-+	if (ret) {
-+		dev_err(dev, "Failed to get reference clock: %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = clk_enable(&mipi_tx->ref_clk);
-+	if (ret) {
-+		dev_err(dev, "Failed to enable reference clock: %d\n", ret);
-+		return ret;
-+	}
-+
-+	mipi_tx->mipitx_drive = dev_read_u32_default(dev, "drive-strength-microamp",
-+						     MIPITX_DRIVE_DEFAULT_UA);
-+	if (mipi_tx->mipitx_drive > MIPITX_DRIVE_MAX_UA ||
-+	    mipi_tx->mipitx_drive < MIPITX_DRIVE_MIN_UA) {
-+		dev_warn(dev, "drive-strength-microamp is invalid %u, not in %u ~ %u\n",
-+			 mipi_tx->mipitx_drive, MIPITX_DRIVE_MIN_UA,
-+			 MIPITX_DRIVE_MAX_UA);
-+		mipi_tx->mipitx_drive = clamp_val(mipi_tx->mipitx_drive,
-+						  MIPITX_DRIVE_MIN_UA,
-+						  MIPITX_DRIVE_MAX_UA);
-+	}
-+
-+	/*
-+	 * The kernel reads the per-lane impedance trim codes from the
-+	 * "calibration-data" nvmem cell,falling back to a mid-scale default
-+	 * when unavailable. U-Boot driver does not support this yet, so
-+	 * rt_code[] is left zeroed and the SoC layer applies the same default.
-+	 */
-+
-+	return 0;
-+}
-+
-+static const struct phy_ops mtk_mipi_tx_phy_ops = {
-+	.power_on	= mtk_mipi_tx_power_on,
-+	.power_off	= mtk_mipi_tx_power_off,
-+	.configure	= mtk_mipi_tx_configure,
-+};
-+
-+static const struct udevice_id mtk_mipi_tx_ids[] = {
-+	{ .compatible = "mediatek,mt8183-mipi-tx",
-+	  .data = (ulong)&mt8183_mipitx_data,
-+	},
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(mtk_mipi_tx) = {
-+	.name		= "mtk-mipi-tx",
-+	.id		= UCLASS_PHY,
-+	.of_match	= mtk_mipi_tx_ids,
-+	.ops		= &mtk_mipi_tx_phy_ops,
-+	.probe		= mtk_mipi_tx_probe,
-+	.priv_auto	= sizeof(struct mtk_mipi_tx),
-+};
-diff --git a/drivers/phy/mediatek/phy-mtk-mipi-dsi.h b/drivers/phy/mediatek/phy-mtk-mipi-dsi.h
-new file mode 100644
-index 00000000000..96a93e5ba5f
---- /dev/null
-+++ b/drivers/phy/mediatek/phy-mtk-mipi-dsi.h
-@@ -0,0 +1,45 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (c) 2019 MediaTek Inc.
-+ * Copyright (c) 2026 BayLibre, SAS
-+ * Author: Jitao Shi <jitao.shi@mediatek.com>
-+ */
-+
-+#ifndef _PHY_MTK_MIPI_DSI_H
-+#define _PHY_MTK_MIPI_DSI_H
-+
-+#include <clk.h>
-+#include <linux/compiler.h>
-+#include <linux/types.h>
-+
-+struct mtk_mipi_tx;
-+struct udevice;
-+
-+/*
-+ * The Linux driver models the MIPI TX PLL as a clock provider (struct clk_hw /
-+ * struct clk_ops) fed to the DSI host as its "hs" clock. U-Boot has no consumer
-+ * for that clock, so the PLL clk_ops are folded into the callbacks below
-+ * (keeping the kernel determine_rate/enable/disable naming) and are driven
-+ * directly from the PHY ops.
-+ */
-+struct mtk_mipitx_data {
-+	u64 (*pll_determine_rate)(struct mtk_mipi_tx *mipi_tx, u64 rate);
-+	int (*pll_enable)(struct mtk_mipi_tx *mipi_tx);
-+	void (*pll_disable)(struct mtk_mipi_tx *mipi_tx);
-+	void (*mipi_tx_enable_signal)(struct mtk_mipi_tx *mipi_tx);
-+	void (*mipi_tx_disable_signal)(struct mtk_mipi_tx *mipi_tx);
-+};
-+
-+struct mtk_mipi_tx {
-+	struct udevice *dev;
-+	void __iomem *regs;
-+	struct clk ref_clk;
-+	u64 data_rate;
-+	u32 mipitx_drive;
-+	u32 rt_code[5];
-+	const struct mtk_mipitx_data *driver_data;
-+};
-+
-+extern const struct mtk_mipitx_data mt8183_mipitx_data;
-+
-+#endif /* _PHY_MTK_MIPI_DSI_H */
-
--- 
-2.55.0
-
+Hmm probably, but not sure. This is copied verbatim from kernel, so I
+didn't change it in v2
+>
+> > +
+> > +     mtk_mipi_tx_config_calibration_data(mipi_tx);
+> > +
+> > +     mtk_phy_set_bits(base + MIPITX_CK_CKMODE_EN, DSI_CK_CKMODE_EN);
+> > +}
+> > +
+>
+> ...
+>
+> > +     /*
+> > +      * The kernel reads the per-lane impedance trim codes from the
+> > +      * "calibration-data" nvmem cell. No MediaTek board describes tha=
+t cell
+>
+> Technically, mipi_tx0: dsi-phy@11e50000 does in mt8183.dtsi
+>
+> Not saying we need to implement it right now though. Just the comment isn=
+'t
+> 100% accurate.
+>
+> > +      * in its device tree yet, so rt_code[] is left zeroed here and t=
+he
+> > +      * SoC layer substitutes the same mid-scale default the kernel us=
+es
+> > +      * when the cell is absent.
+> > +      */
+> > +
+> > +     return 0;
+> > +}
+> > +
