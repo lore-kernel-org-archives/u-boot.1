@@ -1,167 +1,179 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BCAECA5FAD
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 22:51:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EE74CA5FAD
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 22:51:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 14238810D8;
-	Tue, 29 Sep 2026 22:51:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D6D7F60821;
+	Tue, 29 Sep 2026 22:51:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jtvZBtUNKcke; Tue, 29 Sep 2026 22:51:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5A5DB810ED
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790722274;
-	b=cRola5Sto9e+aqHxI7Qcpag6dBXnjWXvpFTk3XOKr13VGB+2tISFuzriqlZgoHDi8uRX
-	 Tke8oh7cCThgW5JBRMgGmbUoAPyPL06lp5aUTA4BNqiCNnxgC9nonQldUUYU547bZgmx/
-	 yTO2na4zsRcbLDm/f4oxyymDDzybjVk3Tkxh0hUWj81O6f/TIeXbq+hoBk65RBuonnY0m
-	 hg+RvHQodsJ/cjbvC6q4jNjH+vXbK/0aqjCbOjTz0vKhDhzc/kDudI6WbnTYhsQO8pnHp
-	 KO2fmN7VbwOuPlpy6jrf9l2WNr5NwIoQ+VrQb+x+U3vN9JW+0o2Sdz3NyJ88JF9F4ew==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id N4x4qDkm3fdU; Tue, 29 Sep 2026 22:51:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 1AAD6607FD
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790722295;
+	b=k/kaAErI8dpEPnqldJEYxfGKaBhPxDnw3O3yhKs0Qt6eV6U/867WqWtyfCWAzdAY/INc
+	 mYj4dVEK4bgN5GUYm8W70LysP6zJgfW/hDoSPLIxWmz1iJDD49/xH4wkOD68xi2BeTwSm
+	 7RBZe7kiLGXR2SbXIcmGGTKg0cMNbk7eOIsYijBI5XGZdF2Vzhg00sr2bkU1mKsIhhzLv
+	 MsRdc/cb56sL4EGtFj15qTHggvH0iRcVn9wNM6/4D3OQU5vNI5libGwK71/r6+ceDpgao
+	 iA2CraEUTIyN1zKPO7GFVhI3QF4dlCWG9Nz0gi7fumbxKBGWLH6f+RNCQJ5876QsMcw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790722274;
+	c=relaxed/relaxed; t=1790722295;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=wbNw6btFVYPiPyBNKeFbf4L524F3BuehODCr1ClIQwE=;
-	b=pHoQmP+Q9dRTMLTCIv5d9vtkTh3v90EJfYfFI79Ei9MPTzppAcVOsqCdArehuITVsJjw
-	 wdArrmX87dp5+td8H69t0GbqoqlvW49fN+zIK2BmSKgPC0CmuegVJsNGy1Qh9hoOg2whR
-	 FV+NDAp5kaPVIrldefjD9U6Fj7HMFv/b7GIpKmuqA6dTjPu2Bv594yHZJpPJvAgt2rX4Z
-	 DlUHV/NRhhUcNS2L2LIVhgthp2keBI8YXRpEgeEDX7SngqY1A3wFKYy6cW8Zb+2aRl5CS
-	 4SkV0/XvQNz98raMUzVFen6ykRRyKrB26xl1+nHM/oOyxqiywmjkDBDgNaYaYAoU0vw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=gk0xHj2SvDkM2lli5tGaBekY/Rylxywg4WNsXQMvfmU=;
+	b=lcL0kq9QqfGmWerS3cBXNv/lyI9HWQiB5dJYHHcyaJojt8wLFJqMSe5lzzuV7wPrYQ2v
+	 qROru+p3tHw95wEmF+vFlrEdK7QBxTt7rHN/7hhg0K3g7tYAI7SsquzZNntw6EccLnIBz
+	 1T+HGIvDk0+aUFxa0auvoaSbCmBf5OQ+A10IF9rWGjjj5z2OxfbuASoWB8yl9jYI5enzM
+	 bCMMOs7xWSj0No7D/gynUuMODDsw9z4CbHUzIMzXTolQUQS7blT8M3vxfIlt78XKEZnL+
+	 cN9SI2dTsIKIxVvC0LSK3LBWyiQLM2ZdVOS6VuPLrYnohUF4HwGGh2upCE+vYmD7Vhg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790722274;
-	bh=wbNw6btFVYPiPyBNKeFbf4L524F3BuehODCr1ClIQwE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790722295;
+	bh=gk0xHj2SvDkM2lli5tGaBekY/Rylxywg4WNsXQMvfmU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HKoms6JMpoRILZ/KV+fRYhN5ujtQrki0fCoEOibVqdUCHva2Al7sNrL3vOT4URX45
-	 PZQh+xVmYajtrCcbAvuZ9ZuAx9jWpY2+d7otCO2Fav19vcQSwm4RealsHAZqSANPq4
-	 ovVPm3gYH99StdhC4l2NSiktl9DuP1CQSv4CyxfDlViLWfCqxp51SE/WIw/0GVwTTJ
-	 Nxjw4LEu/dm5xCGANfwGl0w2zxu0q4a9jfEpyQjXN3jCRrZucm0LM1YGG8hrS+Kwji
-	 lvpEqQt92a/+P/3Uv5Jfee8VaPfAI3f3QobPuBsLP6u1JMBLZDMYk/ARWrM5Dam/5h
-	 0r3VZVfs4ZPcQ==
+	b=lw0rbnnBkGgg+5v0HGTxUJAeteHwNdCrj6r1ktMuLxzudDZJ0p2N+Y0PZqAbiq5j+
+	 Z/dV1hXV4+4J4OXzpWGGTWkuGN/W7GxFXaXQbD43qXBUwfLRysZ0ggN0lIZJfBNXEy
+	 Ya+Gd/Ry3IlFdx71q9ldmW9Yzcff+VgybnPD8B6+67Uv/NUmG2AJmRQsLhC0E2KJn5
+	 F23UJ6jwQiqSg/iQ7wDzdH4VukLVCrsJUBmUnDceElXWwc9f0PWgG2UawxPU85mAfV
+	 +9+80wq+8RZ2QO2SM2m1R5jhRDV8cHiUayffj9qCnpzp42y96jD+uLVRAxjaem8Zzj
+	 wx0+vWblv1f1w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5A5DB810ED;
-	Tue, 29 Sep 2026 22:51:14 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7796D32A
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 22:51:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1AAD6607FD;
+	Tue, 29 Sep 2026 22:51:35 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A057733B
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 21:08:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5D72F4034D
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 22:51:13 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8618B4069F
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 21:08:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OHXy65g2YSvb for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 22:51:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 8B9ED4034A
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:31::2a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790722272;
- b=nXs6VShx8P6X2//pUz3MMUNgR/WQ/COjESG3GVng+FLUyYez8sO5vs8j9COw+EEvTTIk
- rD4usotO2Fc5+rqyOGrfZN6XWNs1fh6MQFEDX1pgFbWUvO8IYaR7yRLE8xxb8FKqNcygd
- SWUUNdBgZjuQlpQooOWRr+JV9v/JyvdRUDf/OKkrEx/uVi/FsCZxhmbULPzPd+Lu7YO1R
- tD7FDarLpnBE+ldfwv9b5pSCVg+Ce9CJCxAS2dWYLRvGClsaZPzpnPYp3ySlyDc8aEdwI
- 0Zlm47l40IzIsDooSJPAsO15npg6di+bdTWde+wMrn472xrWmR8M6DpGE7xyl08fVEQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id K4lXfkxIwbde for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 21:08:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 21626406DF
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:34::c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790716129;
+ b=OurUFsfdHcC6TqCPuNtBPP7jh5WdL53Q0/KnA2WCDQy0i+sXZe9xJhM695OIbz+tCMDr
+ vJmzp0PEEKS/gn84bHqaHNeHONusPYdd73t5hfXiTNlkPuDqArDBOB/wjmEOW7EYd1V4R
+ apuiN3yulS3kqmiPJ+tv/5DEsn8OQjcXBkGoWQk4g6kXSGRpGiHV7YKYMwyhvkfN41RAC
+ pW9PJUBRcZmJgWHKeepG+QtWp7bjwvJZa8qW9p7B0qbjqayt60LmZUeKvq7+r0hp/5734
+ bE1LBD9bPCyeL0tF0VtOiMt2JMTXrKtxqHGhMAC7EfV9ZvHv25JB/DH1YgNTNe41Wyw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790722272;
+ c=relaxed/relaxed; t=1790716129;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
- Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=wbNw6btFVYPiPyBNKeFbf4L524F3BuehODCr1ClIQwE=;
- b=tbWQ9Q93rSQk7lMduwNDpU2ST0j0WRPUtyPaD7Ll4iJQLoJpCipog0eYnyQeLZlzf0ba
- 9bFtSLxrjclQrfoJzAOERDseNZfqw4nk07cS7m2XjKfXy5+k7ZEv18sCnCzOp64TZvGtS
- pR5pwbTcAwjr0EnDMFzpyfW4LfdjMAVtlkiRL0sHnFApiHo63ukLzBWtuC3LOc3iWrouI
- JGeiFzYeWfIaGNmM0eXdQ+xr52YGecLCEiQiJrzm8ALsv8FGmCYsGy0vFpdDgDuNhpHo4
- SLf0VkYiPEENn8uZF5TRybgO13VU/0z9I4MBHGsx+YT0alaynM1srmOKxu4xokykk+A==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=konsulko.com; 
- dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=dHKigpNQ; 
- arc=none smtp.remote-ip="2607:f8b0:4864:31::2a"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:31::2a; helo=mail-oo2-x2a.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=dHKigpNQ
-Received: from mail-oo2-x2a.google.com (mail-oo2-x2a.google.com
- [IPv6:2607:f8b0:4864:31::2a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 8B9ED4034A
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 22:51:12 +0000 (UTC)
-Received: by mail-oo2-x2a.google.com with SMTP id
- 46e09a7af769-81be5042c56so2329689a34.0
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:51:12 -0700 (PDT)
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+ Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=gk0xHj2SvDkM2lli5tGaBekY/Rylxywg4WNsXQMvfmU=;
+ b=DVNxBHkOhfeX0ttA95lsXZFMxkHLEBkesbZato10lE9m/jp5ejGgexMtCmTD2VVnzTK9
+ lhEXOUFilKh9WW5pPf/IPfYOwLG5cNv9dzzD0kpYMxtfqJwOsGkE9fHn7z+d89F9E5DIH
+ uwMJY7fygzGnEH3MYkUztzzm7JnnHzYe3Zy31QW9sSgUI6hjKopUP/BLi9nVHtCRFK4qm
+ DGRqqd9BuUpOblZbtARahf9jtoDiJff5gH8fG7it3mYz0watr9433cj2NTasCZGyhMdjf
+ uWe8dwZfSdq57qucZUeMjfzCz6SGlfL/HwZb1fSGW2bXa0DHYKwtogWQd8i8s03FlZA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=brivo.com; 
+ dkim=pass header.d=brivo.com header.i=@brivo.com header.a=rsa-sha256
+ header.s=google header.b=R8Bg7mpA; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:34::c"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:34::c;
+ helo=mail-qk2-x0c.google.com; envelope-from=sanderson@brivo.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=brivo.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=brivo.com header.i=@brivo.com header.a=rsa-sha256
+ header.s=google header.b=R8Bg7mpA
+Received: from mail-qk2-x0c.google.com (mail-qk2-x0c.google.com
+ [IPv6:2607:f8b0:4864:34::c])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 21626406DF
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 21:08:48 +0000 (UTC)
+Received: by mail-qk2-x0c.google.com with SMTP id
+ d75a77b69052e-53324cfe178so32402281cf.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 14:08:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1790722271; x=1791327071;
+ d=brivo.com; s=google; t=1790716127; x=1791320927;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=wbNw6btFVYPiPyBNKeFbf4L524F3BuehODCr1ClIQwE=;
- b=dHKigpNQ02UDpI+EM2MZ8DRrUVLcJdcaCjNAr8X8Eohty3hPYJpNHNqbB4bkAY83kw
- BIjqKY8nmLieHhljODRCsUfZJ0ynjUn9et7Pb36XAWpG7N6Vsg71G06wYU0slRcBaPkW
- ngoId0dPYlrGaOV2Q3IIpKdBSeWmffy2HpNIs=
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=gk0xHj2SvDkM2lli5tGaBekY/Rylxywg4WNsXQMvfmU=;
+ b=R8Bg7mpAF+A3PhLhsk/iizewYke4hrpppPxt7KIYAPd2SVcIxVB1Z/o17dQku05xxJ
+ YONqsR1184Kzz5aGCGxSrCQr1FCoIQIMA1ahECILUwq1PuJ53a250ulxUq2KDGKeRMwT
+ ldPWdqdGvw/x/kMP83ZLwWxaECYGZWDs7DEfINRBI4am5jUINrkc7mk3IJZUl1uJ3vsC
+ k2KA2THCMYeSCEU9ij4D9Vuh5jIQdGqSho8kF9evhny3Xh8158WFELdXXoM1o0Zcwwj4
+ zziPs/JY1IR4T98fiDP2URobPD8+YFyubAAakAKDHYf4ElPa662O5BXY7t3JkGgEbs5r
+ XGww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790722271; x=1791327071;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=wbNw6btFVYPiPyBNKeFbf4L524F3BuehODCr1ClIQwE=;
- b=pyH7c5eTBOUlYYOGtr1qVZ9HxIJGmAGKdF1CVXibV+NAZcxsroBwtpwxv10clNMnde
- ZrrGFj05fn/8Obo62Unqn59oDIysV+/aDcuecEubsCCNtXmY2dsjfe3YY8zR5pASwbFi
- 36Lg8o1n78aTiQvfsQB2ch7R3mloacwrFGv8s3/Q01NRdO/C5OLU9PQeC5iRW7/eQMtQ
- iGUionVgG0QxXv65+rgHOf1zyR+gDc5mdBzxmCOaQwCeFmPWonrhypGKOPh1+FitFgXC
- CaTlkMPkWjexl53L05RikBvPAfFOdFZ6VEs8BwI0PWmubo+bv+ehLWh73OmO/E5xexYj
- 9KSQ==
-X-Gm-Message-State: AFuF++kvklhqTHf5a0hNv8VhcUZtAkLPnNlfRaqIiINumSFrgP3ZNpcZ
- Ad3LUIpZstQz7immj3yGknDGDrg8UNWKes3lTm0KadKG2+nwBqZy7gQNbgwEbEDeqHQ=
-X-Gm-Gg: AYBFou2y6RxAWYoA3aqdc424VUQB+aPm0G9/KGo7/GYbeha5rGC03rogV2XmRZU+Vht
- EHNH3nZPFVoVn4F6H94+nI/n6nUNg8hrnrMkSpoBLbV3UKir3IZ6rElBXe7inw1rDkm8kWRdIMj
- w0RV66x2SHT2cM+Wakvo+2aIQGF67da0uTpM732bNA6TXXgZp/iw0osrN+7tIRDqT30vHTlXAZg
- Fx0wgVJiaaNcNvT5AZSNB/h0wXO4Ypymr5pHcweQ65pjW24UHOeCUcclW2shxXjURQWMmIbQJPr
- pMhadnILemI5Y/4h5+l8zk5C7v+fD0qOnmPBed7+zrBpcWnoDD/lMXiT1BGYMIsRS1QBvjByFZy
- epJZC98L1ZIBBIQBnwCp9z23eNkQp4UjVPB4ZDCGc5PiZoQRvDkDoYkvlNiXqqdB7VxDTxMjbkl
- s0DuyDBcXUhtotFFWvevr1nHOPhcPQO88kzdZOH82nop9tzNzIU8WF+24xfyyYP5d9e+u5LW8yT
- 2gAp6/wn+DTFBy5rEXFV5uSo6vWSSdegPZ/4kJg1x6dh9SYkkgAMd9UZdTNwYg5yh5YLhQnnkzK
- zHVqMdUI3cazTtVEz6s=
-X-Received: by 2002:a05:6830:6736:b0:814:b62d:3122 with SMTP id
- 46e09a7af769-81fd6137c82mr860515a34.22.1790722271116; 
- Tue, 29 Sep 2026 15:51:11 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-81faf30c204sm1288422a34.12.2026.09.29.15.51.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Sep 2026 15:51:10 -0700 (PDT)
-Date: Tue, 29 Sep 2026 16:51:08 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] cmd: config: Add additional embedded text option
-Message-ID: <20260929225108.GD858934@bill-the-cat>
-References: <20260929173244.369402-1-marek.vasut+renesas@mailbox.org>
+ d=1e100.net; s=20260707; t=1790716127; x=1791320927;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=gk0xHj2SvDkM2lli5tGaBekY/Rylxywg4WNsXQMvfmU=;
+ b=oMvdAizHohAkpqTddU/OFp0vfrnuV6P8AjBaEi6rotYO6C9cu6f2QXm/MlgJwITTLr
+ xwNP1CoMHv/BPt11CpqpsBnry6S4Z+7RpOe5n+si3O4Q/zFn5nbs6BXDakbhrce22Y9B
+ FisVvNm0SzhuS1ehEpAppcuQqdl1qWBLYZik8A/0bPOnDrJz851hJVD6pXCAGWjL4BLE
+ FQTlBQQpNiA7K5ROQ251cVI0Y4TNzeFzQr83U0UqAEwy5mw1HSsoBAizZoAmPyz1nJzL
+ lodatu1eNMQ8stm4ufhAuD1U/p8h4pRdORejZC3pLRSkaD28avI9j2SYD92cAUGH6hqb
+ Qobg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBy/9jJJ7pPYZh5gyhPuR7I4Oqq0m8XUMqQsVVJnhRsirzQfe3+oKtJJY9vXr1U4ra7MPD+WT/0=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lJxznledjuY2kXSbsPhH/e42LMtbOMvVB4yvlb8WHsRU0b4EaE
+ UjSqha2cCW3nhblCM6MGMeSic5j8mPPL+vGGPAv+Y3xbsumZoySXgUyedAVh+DFfcSc2TlvSy/E
+ j9xnSF01Z2XmbwmfCs/AkhHDumU5QhwDLiiPpxl7FlT4Sh0v1iklfQ/NOvsY8Sgo=
+X-Gm-Gg: AYBFou2hIi1BzVvygYzdexUc+zbC7U9sURUbIcL4cZ4PiZ22wftx3fE/aNpRj/BUPmA
+ taskTAX0tHfjHcb56/1I3Z9JPp/n9z9/vTofNpnmD2IK13ss7q9IWIdPkgxtj4OwE2/aRgGlQO0
+ eU0P9AuZUglCw7JVLfmki4X12gp21PySHIiiWMQ+J4kdKj83ZswuhKDFU0UM8zxssghlKlxPubs
+ dKveKZLkxukJmwEsR/0dEVQhUovtDEttzSz55ndtDXYqC+Vml6/jFcQ5jR52VHntMJri9A9Ai7L
+ Kc5ShxeyQz/N+PI3V5CqyiLXL9KRKBcPBK35sMLKF1JsTVwBa3fCN5ASdzKHT14KvSHaQM/Tw9F
+ ON6ev8+tG5RaBPEreDCNq0SNWga6q2XkYLGfkF4fF9e2XXxskVXK+gNrZAwlEORj8Ca/CA6q0co
+ 1Ed3K8lt4umSTIN+aQXUFtJ2X20jzGajT3VuYj/Q3jPfy5som9BCP7WB0LKrvlCuuNMmjjUvuee
+ Fdz
+X-Received: by 2002:a05:622a:118a:b0:532:c7bf:7f88 with SMTP id
+ d75a77b69052e-5336a4d6296mr10668931cf.9.1790716126998; 
+ Tue, 29 Sep 2026 14:08:46 -0700 (PDT)
+Received: from [10.200.233.210] ([71.163.254.246])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-917987e2746sm4303226d6.20.2026.09.29.14.08.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 29 Sep 2026 14:08:46 -0700 (PDT)
+Message-ID: <4393349e-d4cf-4bf3-b4d3-5b6fee378051@brivo.com>
+Date: Tue, 29 Sep 2026 17:08:45 -0400
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9G0XGw4REiY8HViD"
-Content-Disposition: inline
-In-Reply-To: <20260929173244.369402-1-marek.vasut+renesas@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] net: mdio-mux: Remove ourselves when our parent is
+ removed
+To: Jerome Forissier <jerome.forissier@arm.com>,
+ u-boot@lists.u-boot-project.org
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Joe Hershberger <joe.hershberger@ni.com>
+References: <20260929175936.3374213-1-sanderson@brivo.com>
+ <20260929175936.3374213-3-sanderson@brivo.com>
+Content-Language: en-US
+From: Sean Anderson <sanderson@brivo.com>
+In-Reply-To: <20260929175936.3374213-3-sanderson@brivo.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Tue, 29 Sep 2026 22:51:32 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -176,93 +188,86 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
---9G0XGw4REiY8HViD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 29, 2026 at 07:31:59PM +0200, Marek Vasut wrote:
-
-> Add empty string Kconfig option, which depends on CMD_CONFIG and lets
-> user embed a short piece of text into the U-Boot config, which is then
-> printed by the "config" command as part of the embedded .config.
->=20
-> This can be used for example to embed OE /etc/os-release into the U-Boot
-> binary, which can then be used to identify the exact OE build from which
-> the U-Boot build was built from:
->=20
-> Insert content of buildinfo:
-> "
-> $ sed 's@$@\\n@' /etc/buildinfo | tr -d "\n" | \
->   sed 's@.*@CONFIG_CMD_CONFIG_EXTRA_TEXT=3D"&"\n@' >> .config
-> "
->=20
-> Print the configuration option:
-> "
-> =3D> config CONFIG_CMD_CONFIG_EXTRA_TEXT=3D
-> "
->=20
-> The output is a one-liner print of the embedded string, it is possible
-> to interpret the result and the embedded control characters using e.g.
-> echo:
->=20
-> "
-> $ echo -e "-----------------------\nBuild Configuration:  |\n...\n"
-> -----------------------
-> Build Configuration:  |
-> ...
-> "
->=20
-> Please note that this does increase the U-Boot binary size, and
-> therefore use with caution.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+On 9/29/26 1:59 PM, Sean Anderson wrote:
+> Normally, all child devices are removed before their parent is removed.
+> However, mdio muxes are not direct children of their parents, so they
+> can stick around even when their parent has been removed. This can cause
+> crashes when the mux tries to access the parent bus.
+> 
+> Fix this by listening for device removals. When an MDIO bus is removed,
+> we remove any child that has that bus as a parent. It's possible we may
+> fail to remove a child if there are multiple children of a bus and the
+> first child fails to remove. However, there are no such configurations
+> in-tree so I went with a simpler approach.
+> 
+> Fixes: 8880edba06d5 ("net: add MDIO_MUX DM class")
+> Signed-off-by: Sean Anderson <sanderson@brivo.com>
 > ---
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.u-boot-project.org
-> ---
->  cmd/Kconfig | 11 +++++++++++
->  1 file changed, 11 insertions(+)
->=20
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index ff90a87024c..0d8b152f12c 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -170,6 +170,17 @@ config CMD_CONFIG
->  	  command.  This provides information of which options are enabled on
->  	  the running U-Boot.
-> =20
-> +config CMD_CONFIG_EXTRA_TEXT
-> +	string "Additional text embedded in .config variable"
-> +	depends on CMD_CONFIG
-> +	default ""
-> +	help
-> +	  This option can include additional text embedded in U-Boot .config,
-> +	  which is printed as part of the .config by the "config" command.
-> +	  This is useful for example for embedding build information into
-> +	  the U-Boot binary, e.g. content of OE /etc/buildinfo, but please
-> +	  do keep in mind that this does also increase the U-Boot binary size.
+> 
+>   drivers/net/Kconfig   |  1 +
+>   net/mdio-mux-uclass.c | 29 +++++++++++++++++++++++++++++
+>   2 files changed, 30 insertions(+)
+> 
+> diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+> index c057504cf66..5124c4a644e 100644
+> --- a/drivers/net/Kconfig
+> +++ b/drivers/net/Kconfig
+> @@ -30,6 +30,7 @@ config DM_MDIO
+>   
+>   config DM_MDIO_MUX
+>   	bool "Enable Driver Model for MDIO MUX devices"
+> +	select DM_EVENT
+>   	depends on DM_MDIO
+>   	help
+>   	  Enable driver model for MDIO MUX devices
+> diff --git a/net/mdio-mux-uclass.c b/net/mdio-mux-uclass.c
+> index 14143ca0ab6..a45575f526c 100644
+> --- a/net/mdio-mux-uclass.c
+> +++ b/net/mdio-mux-uclass.c
+> @@ -7,6 +7,7 @@
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <miiphy.h>
+> +#include <dm/device_compat.h>
+>   #include <dm/device-internal.h>
+>   #include <dm/uclass-internal.h>
+>   #include <dm/lists.h>
+> @@ -231,3 +232,31 @@ UCLASS_DRIVER(mdio_mux) = {
+>   	.per_device_auto	= sizeof(struct mdio_mux_perdev_priv),
+>   	.per_child_plat_auto	= sizeof(struct mdio_mux_ch_data),
+>   };
 > +
->  config CMD_CONSOLE
->  	bool "coninfo"
->  	default y
+> +static int dm_mdio_mux_parent_pre_remove(void *ctx, struct event *event)
+> +{
+> +	struct udevice *mdio_parent = event->data.dm.dev;
+> +	struct udevice *mux, *mux_next;
+> +	struct uclass *uc;
+> +	int ret;
+> +
+> +	if (device_get_uclass_id(mdio_parent) != UCLASS_MDIO)
+> +		return 0;
+> +
+> +	if (uclass_get(UCLASS_MDIO_MUX, &uc))
+> +		return 0;
+> +
+> +	uclass_foreach_dev_safe(mux, mux_next, uc) {
+> +		if (mmux_get_parent_mdio(mux) != mdio_parent)
 
-Is this just intended as a do-not-apply? Otherwise, it needs a gating
-option as well.
+This needs a check for device_active() which I will add in v2.
 
---=20
-Tom
+--Sean
 
---9G0XGw4REiY8HViD
-Content-Type: application/pgp-signature; name="signature.asc"
+> +			continue;
+> +
+> +		dev_dbg(mdio_parent, "removing %s %s\n", mux->driver->name,
+> +			mux->name);
+> +		ret = device_remove(mux, DM_REMOVE_NORMAL);
+> +		if (ret)
+> +			return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +EVENT_SPY_FULL(EVT_DM_PRE_REMOVE, dm_mdio_mux_parent_pre_remove);
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCarxA2AAKCRAr4qD1Cr/k
-ChhvAP9itSUMjcgsur9BKcAEWf/EMF4SR8vq+KMAxie23InABwD/Rmh6Lf2XMtyo
-qwdRdUYK1U7N0iP0fHhItLFPBe9TuQk=
-=0R++
------END PGP SIGNATURE-----
-
---9G0XGw4REiY8HViD--
