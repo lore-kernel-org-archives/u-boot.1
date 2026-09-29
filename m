@@ -1,189 +1,187 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC732CA5FA5
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 14:17:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF922CA5FA5
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 15:00:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E53C640735;
-	Tue, 29 Sep 2026 14:17:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 69F2A80ED5;
+	Tue, 29 Sep 2026 15:00:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ipKhEPq-HhgR; Tue, 29 Sep 2026 14:17:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 0747A405D1
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790691421;
-	b=MMwHWfEeWQbvq3dBoe/L+SBVMcMTAtX1LtkVKrqJsPyTBlnmbUxAxJX/HZVJFMYsSqgj
-	 xUB19P7AajMxsbNGvP6a6cpoln1CR65rVzepUBi4MN8V/LWdo5H2s8sozZZBtGpsJ+HEO
-	 YCC/THIgGjvrwwRXXxwED8QeVFeSKtJWUwIAymW4npyJDkqnv/B+78bkr8dUMrjjsDM2z
-	 LLfd6xujDoeVUNh61JJ0T6xLso50AFXb6M9LdugqatvxXOcWPdzuR7l6HuL2tjGbxHkzA
-	 /Wz1xymfRLdiuJLK+JZXLv+6szGs/zgodAajw18nB2K36PGlsNBHDiVEarErjpX/Gvw==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790691421;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Mq9xBYD9EZBJ; Tue, 29 Sep 2026 15:00:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 56D2B80EBB
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790694045;
+	b=KGV8AU7fCkSSbC9GEuyxtIg0Z+SJ+E1qGDi1ewMqnqp37A13yUGLMgSxD4XidDEyrTgT
+	 npwU5BbJU5NLmtnJMkoGIr1+1cG3O61aXVHkm2LxNdag/LS7r/q0Y+BciL1JkzMM5TM78
+	 RcEIaWME5J8mDU0eJOaPdAd7LGqXKEovK7l3eDMB+SjN2lPO/BwyEDU2kakkX7xP5pOL2
+	 DWQkpWk5M9OA+WFutcmIZARdEEe2Su2QdJgq47h6f1FeY0c5wBur4JH37ZAMaZDXEIt5U
+	 AJdNfMSOHimrRVI19qTkmz1WQIv52oiWqJbFZ0ozm6QRK6ZBh2HtdEkvI3nVGlmwDtQ==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790694045;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=nMWr9mXSEcWuU+gxalfA2Zgu/hgBPgEjNoFQEQz9Vzs=;
-	b=fBTcrwrQ9tLuiob21Gt24CNkCFoQeRYpWYUB3BjTwczCW/DAi/xJXmPnl6singj9iWZq
-	 DJ1F23fiNwOXO72apQF/Q4/ZVJOOhBQVfwixL2tqZdY1QzIFuqj+GMEwFXD29q48mTW49
-	 5Vh7I+wvXGRFIqncgsDl23vncUqxZkJQ+a6S/KFpf3uiU7wji+iOjXUD/mbmJFSJckHcG
-	 CoIMtY7PQw0VsqWwqFNwgs+Tz0+2Ja9eRKqMIG5/U+L7AIqh1EQslXNjgl1AOlud5j3cL
-	 pGG/LmlQJZ+jsQwhqUo+qGQM/Kx79z1j4XzZg1+EfnF95BU7ZT95KYLPBwEM6c3uE3A==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=samwSZVv;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
+	 References:Date:Message-Id:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=5FDlkbsp1G/RJKi5Ih82jUIMxZAkXLQO/NeefX7rqAg=;
+	b=Az5fpwr4Z8AVi0Kyguai6P8iInzesJU/8qcMwakMZcV01RHg/A4h/VNGcEzAYubu1BzB
+	 qnlSri6PMjR5I5W44bzHhAT+VwedSqRUMRX8/Twf0u+pWXfFs/G/ZJQNYUjZYv0XJ2Uh5
+	 7Jf/S/0x58pGjxiz6sHoSUqdyagEFCXeIy/2R2KiD6mx1ZMa8o+OJ38JhjvNAKVEPrtFo
+	 U7o9QJVrBagX7rnSkbcsotb6KHDP8UgAVaAXqX9Kr+X1+aP2cazvtwdgfnCLltWhgu4GZ
+	 WPNpv4lYMxG5Q+RdoI7y80G+tfMU3yxgaf3fGoKbSDcgDp8/uYu3TKJD0VuHnFGOPuA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790691421;
-	bh=nMWr9mXSEcWuU+gxalfA2Zgu/hgBPgEjNoFQEQz9Vzs=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790694045;
+	bh=5FDlkbsp1G/RJKi5Ih82jUIMxZAkXLQO/NeefX7rqAg=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=QmZoORx8cI8emEIKKhcbCks+yHyXyKmb+9L4/2XrV99uC3rXJKkhavcjCwqCHfj4F
-	 7wYP/nZBnjLRLPEI4FnoB4ts5RgbPKRjX/BDCPvOSp+bYevpq1zrSMqtz3UfL79nLq
-	 jNq6/NNax50keRO2DzJs3icvIyCb1peoGke0l5t+n3rcZQDokmY+jIM5LqsFVPkALY
-	 gsp476rnpzvf4uxEeqrsYpXWjn6d3nK+VY93XSWRyD5xmsnG+7ToSMYUyaWH04Ht4A
-	 LmWsgWWZjE1T8Hqf+qtz/nT7owRt9a6CV9VUfEYU6014zDPmn1LuzVvk+X3M14nTV1
-	 OYpNmLyHuuWXA==
+	b=rZxcD0KEhExeil1+iqGbSm9k/GoZn3j35GgdpKBvhy5lFJYslXcKDki33y3LnX03W
+	 CU/IHkSIe6nUhTC7TtRFrvvOnPVCIDEzGEJFEbYPGw74czXgIHrMxoevuMoGMnTg/S
+	 ZdiMQG+yILNr7ghkiTRyoI0WORjFK8ABoLxPwu7W1WdkOG8uX8QWuUffk83BkgnXnT
+	 tXEiy1OEP7EGGGKUh10fBEDKhk9Jw4l0dzBirTLS9uPUa+MVzUZVNSykR5T1jGIjZh
+	 Ha5M88vrNSiUKvtNXpTX9xtnicFyueOhkKQXwac3n7oHtW34r+QqY85dQ6pd47OEa5
+	 4FfRa8DiMjF7A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0747A405D1;
-	Tue, 29 Sep 2026 14:17:01 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id DA31432F
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 14:16:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 56D2B80EBB;
+	Tue, 29 Sep 2026 15:00:45 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D81B532F
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:00:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CB9D9405D1
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 14:16:58 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id BEB7B4032B
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:00:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PBNbg1hwGnQW for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 14:16:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A1DE94052F
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:41::2a"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790691418;
- b=UBTSUzG7B1rdgYMDNna6j6d75BnKksoFCZaO+MWeJQB4TlT3Pi45mGD7r15AZI0z8jJf
- YqqG9nsO81Nw6P1zmXetBEYE5SiwN3VaJXhDsGx3Dg/qAA6ZJRkHeluo+rk287ZWvuJI0
- 8A4Lho1fjtc4GUf86o6zYt6+yghTDRgKqmAOL2kvJ1vny7OVNoPc+mzut/rcn/TUGceNb
- QOGAeJgXub9sAKFdz5PCkxKe/qOww0coSjxMQ0pTJTq7H1+CwixzgPlBs0CNSX+8saLQp
- /SgDYOhw2943OXrTV3pYOyuniLobfRl2yAi1+WhPzly55dj44XG6XiDZPmXFxD6qs7A==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790691418;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RqM8sAhL6-uQ for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 15:00:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 99B014031B
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:31::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790694042;
+ b=KcI39WnG9fnvLAg7+uZEbObKbaKi/nYsSaiHkmgBGDGRbzz1Z++j+w+pcKASvhQLk8jc
+ 34ZsWEmukvBSNFRNwTa7Y6cM0x5je2V/JGK79eCAAYqsLacNt05C+8f4rDgX2gXFc1VAJ
+ ipssHlt2krE2uu3UN72ghFlm6sTXp1q6bHrCz5iTh014YGZJuofy+/p/3crVGU9eODTvC
+ 1izPR/p4JhppDV6OdzB2JHarSfaCfUMNOv4HIOKUjeZiRFZyCX4J9QkQgHoTGoVq+8Xsv
+ QqYp+Ccchkm2jsqbfFL2MzKRDuHByCvRdLMLTpsXEhk/GEBIhdLcT/rDogX3B5rQFQw==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790694042;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type;
- bh=nMWr9mXSEcWuU+gxalfA2Zgu/hgBPgEjNoFQEQz9Vzs=;
- b=TWVTUYXyjgmx+EcYPBqchCbfacOQ5S86F6C8Q8M/cJ13C0jdKAAKkSF5dg/e1BML+A1p
- 1t0rz51k3eOvi23oY388P4iQbuuSyuEjovG8VscooNr1XrOAFewIGDclzCCmNFy4GM48g
- VlGWSqW7J+fV0OxfQSuNyjNuRv4lePoZh34Ht7ukDrPXybbp6cY0FLiXQL3xdUA6WNEJb
- Zka+xoudderP19o6w7m1JIZ6WlUvC+42NT6YoqTz8PDaL0KOWTfN8w/WF5NOOVyHdwXRQ
- PZc+X0bkCUadWZc2IBO5u5jsyhBNMzGGaiS/TFA2hUCKoY5z9yvg9tJm4Fbz+ZN+Pow==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org;
- dmarc=pass header.from=linaro.org; 
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=samwSZVv; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:41::2a"
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:From:To:
+ Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
+ X-Developer-Signature:X-Developer-Key;
+ bh=5FDlkbsp1G/RJKi5Ih82jUIMxZAkXLQO/NeefX7rqAg=;
+ b=nZQaKB11n0TnZVu9Ptf9AB+3AfM9PCjnz85WR8FxAIPkE02ufgGzM8RdkFkpjx7Z49PB
+ IQWDt5SY+PFAsWm0mEdr9RaoyrVDyv+RJjzP9bEdSmfv9KI02W8RqlxwUcTrdTDZTBYGo
+ leVa5AbhAu9aUE/0NT5Ztth8TZsCK50xlNHmBYsXfHDqqMY9+8taBHWLKrRT2FYORw8fD
+ Qw4EVtLBWVUFmN9Gqlji7pZr7HaVju9HuOkv6QAWQYxFXbXY6gdJ6FUY7cFDPeekAQnNB
+ 3w0GnoRLiWk0l/JZwU8t0H/NjGd9YPz926ZHkmGkiVrCetZiPy10hLI+m/oCmR9xsxA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=none header.from=baylibre.com; 
+ dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=itcLymoO; 
+ arc=none smtp.remote-ip="2a00:1450:4864:31::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:41::2a; helo=mail-yx2-x2a.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=samwSZVv
-Received: from mail-yx2-x2a.google.com (mail-yx2-x2a.google.com
- [IPv6:2607:f8b0:4864:41::2a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A1DE94052F
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 14:16:57 +0000 (UTC)
-Received: by mail-yx2-x2a.google.com with SMTP id
- 00721157ae682-8ab3fa8a788so9288727b3.3
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 07:16:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790691416; cv=none;
- d=google.com; s=arc-20260327;
- b=H+8x0XeBdfF3M86duPGdr01IdNxx/dbioPrqRJHxVPfiV5CoPWyGdL3ct0CxqCSCV4
- ybiOUtEDdjvE6zDJQh1JWOEuClssURJRBaXxqhn4EBIzm7pcwMt3D4Al/WM/FSQTEUp+
- lvKgfhA7bcuwotQKWXFz41a/UEpeRi/kSwZ3IbbATyaMOyoPhGdW8hIJW5SFLndDxX52
- YHSzOX/lEUthBdmCyr46tvmb9AmrR5FAqC8a/q/LYFN3eBYSrf8xo2NPa6Yu8USGTX6s
- e7QVd+5X72FWgcM5OXCjSIVYTF/UlPQSTiOQLAJSChyLQhtLl6hii052Ilb25DQXrHJX
- bA/Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=nMWr9mXSEcWuU+gxalfA2Zgu/hgBPgEjNoFQEQz9Vzs=;
- fh=2iRdfu1MfbZEyLcJ6OJLQV3z1tHNmux/5Q/ZTPFM8Zc=;
- b=IJAG6FXM9g6H5pPFQSV+4S2GIEvr/suFMOpIhBhnQ13nLYwWWd1G5nxLpKR+dR6Nhk
- kKqV9xSDO1aINWhRmW0spqrQkl+llp06pOCKgtDU4604W5I2ocxwYlx7rFDy0efWpSha
- eUo57ulWKDWq/JrCDWoDk48DivbYh/Aj0Ovugzfuao786Rc8GGpyW/+Yb1xHr9g13XFH
- ZUsSVA65jdkBsUvSWHymDtYBjhbm4MAj4FcNgRPdALKsbVVB8Pd2lRdm4r3pHE5AoXP/
- eFNsuRaZrO/I5xi+l7rJQN4xgc5g6HCR1/fWKP+SmodFWGMCEErjF0IdvbO+f6wgS/nl
- p4vA==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2a00:1450:4864:31::10; helo=mail-wm2-x10.google.com;
+ envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=itcLymoO
+Received: from mail-wm2-x10.google.com (mail-wm2-x10.google.com
+ [IPv6:2a00:1450:4864:31::10])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 99B014031B
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:00:40 +0000 (UTC)
+Received: by mail-wm2-x10.google.com with SMTP id
+ 5b1f17b1804b1-49ff9621c5dso23276705e9.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:00:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1790691416; x=1791296216;
+ d=baylibre.com; s=google; t=1790694038; x=1791298838;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=nMWr9mXSEcWuU+gxalfA2Zgu/hgBPgEjNoFQEQz9Vzs=;
- b=samwSZVvRmrXChaxpWS/gOXmUGAhHU47uri+bOKEOA6/3ej+NL1E1uOoEf3+Z6x/kW
- Udvj8ENBe7MWlifnO84B/lM+EGHGLNYuuL+z37YzGcoT+D8eFm6oWFpa0u+yhhBXO6Ma
- VLHO44PlPpjHfo84ZgsgulW7IDchcam+NGKjmve1dE0AFgU39baM9SSZzncGEwGVNo/t
- BR8HAnBIqibVK2LLaZK69W5RazBig+gk5lTC4P8b0frq9VIDCgv6ulXXlEqiJxrts3mU
- /9dFRfEKhdHjf4UwexwqcJ7S7sDXnkJ+BUvcN/MHGm6dPug5IUs1TfDNbiPQ5WitjlFl
- AO2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790691416; x=1791296216;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ h=message-id:date:references:in-reply-to:cc:to:from:subject
+ :content-transfer-encoding:content-type:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=nMWr9mXSEcWuU+gxalfA2Zgu/hgBPgEjNoFQEQz9Vzs=;
- b=FrE+fWjssxfRvhTR1wlswEaifXqKivG4KB5UdDlHKPMr2gDxY2k+razgJqs9Yu3UuY
- RhHmKhDsQR+y7YuoEAML/IUa/9mzzNk43ymjW/W6gukm6lOjQqnusNkMjNQwiuov1XDP
- UKTvsC/Wa3CEOyULppQjID1apX8FbVo5W9+4CYUF4JxBrrZYuLi+vKPpO87hgMr4XZ1e
- 32qqv5pVT03MK8JVmgI3EdhH2ktmKuTJQxdbOoiH1VhnEfgZOr8YF8abfBp3Gx3iJEnS
- vuKIVpFARs3YYOl4I3HOiXw8nfu8GOJlgWSUOFpYc8QdPcw4XhWptPSXY+qjIaLnkWGP
- 1UbQ==
-X-Gm-Message-State: AFq9FYJ8GCXs9PkHW2Agt2rUzJjT3PiKyiP721AbT0RR9qrtzgiiKQWj
- PanfMcyJMOIxEq1kJwgaNtbWscKB/bI7UcyUNM7D7d6gwGiTH54XUPQ3FKGgqjn3Ca3MWF7WlGs
- CV0m/VNW4QMYQdHAmuuuGvAuD0UmOysPGDNXtflCj1w==
-X-Gm-Gg: AYBFou3CRYAwTeiYPEO5SCxOhdRv4uRgtXHXzmjqUgSRfAgMSLlHTuiazF1iMJwRsVu
- gzq4oubwI1010eycIni4J1aDShxHgZSypoMin/AOKP+mjw6MNlY/3FKFBKQh+DNxo63Acc0bGDD
- TfyvT785dVtW3xu11FDJLen/HtrcqPcxEsVrGGYaTnkEqFyqIKaKi4WZDDwVEoNX1YYtfy0fG27
- a8d06CjAbgK/C3G8xto1Ty1Dxu0+cmLUb0LSbk8uHihyV6nECiaZuI98p8VaIg/su+S+L6qBQ1g
- BXVZplD78TEk7iA9v56wbma58qdfG6R7uGc+bdgPeW5xNcvn5ZiChKKZqY1POp9fv57OzDYgBVZ
- UkcYJU5xPfoWrkUXlmi4j3EN6zr2I/2VE3U3LaRcsXCEYG1dRxHO3IsV5LnC1kwDoBokDty4YIq
- m0DNT1au6ooB2aOMaTLKRRmuhw98dDksdWy70CgTNy2GG7EBBYPe506LSockNoq7mtdvD1grtiE
- BON5T+fBgC9KfmvKyw0WCBUT3iY6cEj74JRlFbwKb9QsFqNcs2YTzlh1wgEq71dlUOk+CGrz9s3
- uNIbl/3Cw2r/2Q0q3VMae49Cld5tEPF7FA7idhIlwSPENa63GXM2bnFsQ2tFEaxcomeuis+m3Wb
- Ox6WB9NmVNIoKdgBszJsB2tFOnXBEbV5Dkcs7d+BRzmNBvc5U8cK4HVQ=
-X-Received: by 2002:a05:690c:e3e1:b0:873:17c9:afca with SMTP id
- 00721157ae682-8a64bc4f8b5mr68927967b3.29.1790691415561; Tue, 29 Sep 2026
- 07:16:55 -0700 (PDT)
+ bh=5FDlkbsp1G/RJKi5Ih82jUIMxZAkXLQO/NeefX7rqAg=;
+ b=itcLymoOOPLITM43YIQsSxdR2lmrHkON6PesiX3OZRYNgx422yPhlNtjtVkHpyMT9v
+ kWv/cbBJHYXMUrrp/YWyYPDYkJwFSE89Z9iJZMAUQxUja0Tsb5RrAymjjwCztZ2/gJMH
+ d0SGKfJIG1S3OmrrACpBnrUFKCoVG5gVPL86QCL32YpscOzYqHzkzQmo1yqPphyy0tg9
+ +Jf7mEmFR9+Tig9+WzYgmSQFCgTL2ZMQ6j69L5s0/SxRsr6twpJ15ihqzDmY6M19fiT7
+ A5qtaELidq5PrtNUNORCtHMjzYDz4jeeuP1izHvVWfIk2kmxkD5pQ2S4nhQqCuiiteiO
+ aKcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790694038; x=1791298838;
+ h=message-id:date:references:in-reply-to:cc:to:from:subject
+ :content-transfer-encoding:content-type:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=5FDlkbsp1G/RJKi5Ih82jUIMxZAkXLQO/NeefX7rqAg=;
+ b=ADDBZEzPBI3eTUO8IUca8/+rW15sWKLBYksQFor4AY5ydeduzr5WHI1WUiRtRZhQWG
+ h17kT9HqwraMJ2Pqao//WByT62k8+RIiwJ12yz+eD9BahZW7PmbS57iu7jX4IRol7+aC
+ BSIHDloDT3hct9+dQMI6Gj0pF2FP7qbPYSkeGtoabNapZfYfplgZtSSMH5v8FAuR/t6T
+ iXQBnPdUvLZAHWpXvBoDOuXRmrPSpgoUPqAyYeZxYvQXmW1Mvd/QDxBAd6VPLZniHhZu
+ 58XcshrS0iEHydCe3zK8A9cvf/qlZ/LqnXMc3Cef+ioqlgKKK5a2PodqBBqgJkvsEvGR
+ Kwyg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByDgo9RHJadypv/hlL6QwaCpAkGalzTKFlHBmOJsKBK3CJuVgYjdAeSY00Gm7+D43H6VZ77XU8=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mHcnM9Nxf/8ZqA32cI0AZnH/23JQsOpO+TzB71Ff86laLVy0co
+ jt6Dftik9/MQp01TislwEdOWBVeOBpw01k5plBmJKhCtW4NKYso67TKiV2BnmySIj4M=
+X-Gm-Gg: AYBFou2QxAwM2Fwz+ZM+2hLVEBMRepEoErelvu63hJZUdGTWNdG9rbZPSx9D+tPYZsu
+ wyfWIj9hanJUu79jaad4yylx7iWKz0+ADmZ8jAZXkPCY2qrJ/8qnmNYkQmC/nDQMpIiGAUF110B
+ UmRZ3B+ewDD8KLY/zeMwcWd8rY0KgK4BhoFwoQ2PHiXDJSICSPZJ6lO7VmMHbQUJBLx3EQwW3zM
+ E+wC9ojo+TVTuCS76qh3qjTmct1+csFxklEPRZdv0abJIr1AYkuQDn6QLl12HXe7CnezBm7B6wH
+ CCeRoz4Eak2b7A11TPdBFV6JeriREj7/iy4J6l1b4A8LMFBoTUUU2qpS654oZSGMhb9X9x69M+c
+ DKPx3tTfjOCiFs0SmT4TRKtCue4Z9UFr7v8T/aZoXkRdVnO8liiW6KKq5tMnCb/eBDx8+JtR2Hl
+ ESrnDCoecj6wXBfvuH22cTU8qNPEywh9eDW4i0U3SjESg2I3gyMZMVCymaksRhHuoGP8C3rxxjL
+ VAg6AkJLIm3P8YPsJvV7Qf596iFbIw3pwuiUJqTYQ04TKamtJFJe2ogECc+vGM6c7Vneup45z+e
+ A6J68A/4ylpxzGAEE3wJq4DQUqlVbk+amQWuwRNre4rbg+gx3+txySo=
+X-Received: by 2002:a05:600c:34c3:b0:49c:e27c:6b10 with SMTP id
+ 5b1f17b1804b1-49fe66abcebmr286253375e9.3.1790694038346; 
+ Tue, 29 Sep 2026 08:00:38 -0700 (PDT)
+Received: from [192.168.1.100]
+ (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
+ [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a00cf868b5sm119351065e9.1.2026.09.29.08.00.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Sep 2026 08:00:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260813-tpm-trunc-resp-v5-0-153b492a3256@byteray.co.uk>
- <71222064-d97a-41d2-b811-38c0944bf769@byteray.co.uk>
-In-Reply-To: <71222064-d97a-41d2-b811-38c0944bf769@byteray.co.uk>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 29 Sep 2026 17:16:19 +0300
-X-Gm-Features: AclHuK8jY8C_7bf2lC1etDttLAhvA1SMOCPZF2p5SCBCz1rEDM4uye3FHvU5LoQ
-Message-ID: <CAC_iWjLHUR69y8n8t-Wy7vLUXpi7RwXaJ0O2E=-UGfdw3C2Vrw@mail.gmail.com>
-Subject: Re: [PATCH v5 0/2] tpm: bounds-check device-reported response lengths
-To: shj <shahriyar@byteray.co.uk>
-Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Reinhard Pfau <pfau@gdsys.de>,
- Tom Rini <trini@konsulko.com>, Argus <argus@byteray.co.uk>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v3] video: panel-startek-kd070fhfid078: new driver
+From: Julien Stephan <jstephan@baylibre.com>
+To: David Lechner <dlechner@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org
+In-Reply-To: <20260918-mtk-video-panel-startek-078-v3-1-631a63ce255c@baylibre.com>
+References: <20260918-mtk-video-panel-startek-078-v3-1-631a63ce255c@baylibre.com>
+Date: Tue, 29 Sep 2026 17:02:50 +0200
+Message-Id: <179069417031.1887049.8619892190348130386.b4-review@b4>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openssh-sha256; t=1790694174; l=8146;
+ i=jstephan@baylibre.com; h=from:subject:message-id;
+ bh=rWi51hhFfetb4zVZEg1lebEi/8pHfQEPWJ1U6UbZ2m4=;
+ b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgphAWFBQbyQxHwqbCvwEwIl9NQxnNa
+ Ewt+3w/AUXP10QAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
+ QB1pqY5mYTNM/2asUk7ksqlgU7Mz+eSN9kMKqPMtKYLOF3DZ0cxVDjeMDAW4/MVfYS60i4vcfYX
+ SOTPxqUO1OAM=
+X-Developer-Key: i=jstephan@baylibre.com; a=openssh;
+ fpr=SHA256:PPc8djUi3lnQXuiRHH4CZ/icbEYOsksrEsOV7pDEmZg
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -197,99 +195,216 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Shahriyar
+> Add a driver for the Startek KD070FHFID078 7" DSI panel. This panel is
+> used on the MediaTek Genio 360 EVK board.
+>
+> The display mode and DSI mode flags follow the upstream Linux driver
+> panel-himax-hx8279.c, which is what the "himax,hx8279" fallback
+> compatible in the device tree binds to.
+>
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index c1e09c7d087..0af0957e5b6 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1671,6 +1671,12 @@ R:	GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+>  S:	Maintained
+>  F:	drivers/video/panel-startek-kd070fhfid015.c
+>
+> +STARTEK KD070FHFID078 PANEL
 
-On Tue, 29 Sept 2026 at 16:03, shj <shahriyar@byteray.co.uk> wrote:
->
-> Hi,
->
-> Could you please review the TPM response parsing patch I sent on 13
-> August 2026?
->
-> Please let me know if any changes or a resend are needed.
+open question: what about merging this with KD070FHFID015 just above?
 
-Apologies, I somehow missed V5 and thought we were still on v4.
-
-I'll have a look,
-
-Cheers
-/Ilias
+> +M:	David Lechner <dlechner@baylibre.com>
+> +R:	GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+> +S:	Maintained
+> +F:	drivers/video/panel-startek-kd070fhfid078.c
+> +
+>  TARGET_BCMNS3
+>  M:	Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+>  S:	Maintained
+> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> index cfa3cccb911..500a8a54192 100644
+> --- a/drivers/video/Kconfig
+> +++ b/drivers/video/Kconfig
+> @@ -330,6 +330,16 @@ config PANEL_STARTEK_KD070FHFID015
+>  	  1200 x 1920 pixels. It provides a MIPI DSI interface to the host, a
+>  	  built-in LED backlight and touch controller.
 >
-> Thanks,
-> Shah
+> +config PANEL_STARTEK_KD070FHFID078
+> +	bool "STARTEK KD070FHFID078 panel"
+> +	depends on PANEL && BACKLIGHT && DM_GPIO && DM_REGULATOR
+> +	select VIDEO_MIPI_DSI
+> +	help
+> +	  Say Y here if you want to enable support for STARTEK KD070FHFID078
+> +	  DSI panel. The panel is a 7-inch TFT LCD display with a resolution of
+> +	  1200 x 1920 pixels. It provides a MIPI DSI interface to the host, a
+> +	  built-in LED backlight and touch controller.
+> +
+>  config VIDEO_BOCHS
+>  	bool "Enable Bochs video emulation for QEMU"
+>  	help
+> diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+> index 16e9ee2c11c..a4b28f3b3d8 100644
+> --- a/drivers/video/Makefile
+> +++ b/drivers/video/Makefile
+> @@ -23,6 +23,7 @@ obj-$(CONFIG_$(PHASE_)VIDEO) += video_bmp.o
+>  obj-$(CONFIG_$(PHASE_)PANEL) += panel-uclass.o
+>  obj-$(CONFIG_PANEL_HX8238D) += hx8238d.o
+>  obj-$(CONFIG_PANEL_STARTEK_KD070FHFID015) += panel-startek-kd070fhfid015.o
+> +obj-$(CONFIG_PANEL_STARTEK_KD070FHFID078) += panel-startek-kd070fhfid078.o
+>  obj-$(CONFIG_$(PHASE_)SIMPLE_PANEL) += simple_panel.o
 >
-> On 13.08.26 17:58, Shahriyar Jalayeri wrote:
-> > A TPM reply's length is taken from the device and only upper-capped, then
-> > several callers use it unchecked: the TPM1 OIAP helpers and the TPM2
-> > GetCapability parser subtract a fixed header length from it, so a reply too
-> > short underflows the subtraction into a huge memcpy; the GetCapability
-> > parser then copies that many bytes into the caller's buffer, so a reply
-> > longer than the buffer overruns it. Because a TPM sits on a physically
-> > accessible bus, a cheap bus interposer (the kind used to sniff
-> > disk-encryption keys) can inject such a reply, and on the TPM2 path this
-> > parsing runs during measured boot, which is exactly the physical attacker
-> > that measured boot is meant to resist.
-> >
-> > Patch 1 checks the reported length once in tpm_sendrecv_command(), so every
-> > command that reads a reply rejects a too-short response, and passes the
-> > caller's buffer size to tpm2_get_capability() so its copy cannot overrun for
-> > any capability. Patch 2 adds regression tests driving the GetCapability
-> > parser and the TPM1 OIAP helpers with truncated and over-long replies
-> > through the sandbox emulator.
-> >
-> > Based on v2026.07 (fdfe2ec48d5c). A reproducer is available on request.
-> >
-> > Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-> > ---
-> > Changes in v5:
-> > - Count the TPM1 LoadKey2 minimum reply length from the header, like the
-> >    other commands, so it is 55 rather than 41. (Ilias Apalodimas)
-> > - Move the TPM2_PT_SANDBOX_* test-hook properties out of the common
-> >    tpm-v2.h into the sandbox TPM header drivers/tpm/sandbox_common.h.
-> >    (Ilias Apalodimas)
-> >
-> > Changes in v4:
-> > - tpm2_get_capability(): bound the copy by the caller's buffer size, passed
-> >    in as a new buf_size argument, instead of a prop_count-derived guess; this
-> >    covers every capability, not just the properties query. Document @buf_size
-> >    and @prop_count. (Simon Glass)
-> > - Add regression tests for the TPM1 OIAP tpm1_load_key2_oiap() and
-> >    tpm1_get_pub_key_oiap() length checks; enable CONFIG_TPM_AUTH_SESSIONS in
-> >    the sandbox config so they build. (Simon Glass)
-> >
-> > Changes in v3:
-> > - Rework per review: check the response length once in
-> >    tpm_sendrecv_command() instead of at each call site, so every command
-> >    that reads a reply is guarded. Drop the per-site lower-bound checks; keep
-> >    the GetCapability buffer bound.
-> > - Drop Miquel's Acked-by, as the fix changed substantially.
-> >
-> > Changes in v2:
-> > - Use my real name in the From and Signed-off-by (Miquel Raynal)
-> >
-> > ---
-> > Shahriyar Jalayeri (2):
-> >        tpm: bounds-check the device-reported response length
-> >        test: tpm: check malformed capability and OIAP responses are rejected
-> >
-> >   cmd/tpm-v2.c                   |  4 +-
-> >   configs/sandbox_defconfig      |  1 +
-> >   drivers/tpm/sandbox_common.h   | 10 +++++
-> >   drivers/tpm/tpm2_tis_sandbox.c | 28 +++++++++++++
-> >   drivers/tpm/tpm_tis_sandbox.c  |  9 +++++
-> >   include/tpm-v2.h               |  5 ++-
-> >   lib/efi_loader/efi_tcg2.c      |  9 +++--
-> >   lib/tpm-common.c               | 16 ++++++--
-> >   lib/tpm-utils.h                |  6 ++-
-> >   lib/tpm-v1.c                   | 62 +++++++++++++++++------------
-> >   lib/tpm-v2.c                   | 60 ++++++++++++++++------------
-> >   lib/tpm_api.c                  |  4 +-
-> >   test/dm/tpm.c                  | 89 ++++++++++++++++++++++++++++++++++++++++++
-> >   13 files changed, 244 insertions(+), 59 deletions(-)
-> > ---
-> > base-commit: fdfe2ec48d5c1c2ed03073d73edd3fdd3fe1ffa1
-> > change-id: 20260723-tpm-trunc-resp-664a3babf1cf
-> >
-> > Best regards,
-> > --
-> > Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+>  obj-$(CONFIG_VIDEO_LOGO) += u_boot_logo.bmp.o
+> diff --git a/drivers/video/panel-startek-kd070fhfid078.c b/drivers/video/panel-startek-kd070fhfid078.c
+> new file mode 100644
+> index 00000000000..b86d5197ab4
+> --- /dev/null
+> +++ b/drivers/video/panel-startek-kd070fhfid078.c
+> @@ -0,0 +1,276 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (C) 2025 MediaTek Inc.
+> + * Copyright (C) 2026 BayLibre, SAS
+> + *
+> + * Authors:
+> + * - Guillaume La Roque <glaroque@baylibre.com>
+> + * - Jitao Shi <jitao.shi@mediatek.com>
+> + * - David Lechner <dlechner@baylibre.com>
+> + */
+> +
+> +#include <asm-generic/gpio.h>
+> +#include <backlight.h>
+> +#include <dm.h>
+> +#include <dm/device_compat.h>
+> +#include <errno.h>
+
+nit: <errno.h> is unused. You can drop it.
+
+> +#include <linux/delay.h>
+> +#include <linux/err.h>
+> +#include <mipi_dsi.h>
+> +#include <panel.h>
+> +#include <power/regulator.h>
+> +
+> +struct stk078_panel {
+> +	struct gpio_desc *enable_gpio;
+> +	struct gpio_desc *reset_gpio;
+> +	struct mipi_dsi_device *dsi;
+> +	struct udevice *iovcc;
+> +	struct udevice *vdd;
+> +	struct udevice *backlight;
+> +};
+> +
+> +static const struct drm_display_mode default_mode = {
+> +	.clock = 156458,
+> +	.hdisplay = 1200,
+> +	.hsync_start = 1200 + 50,
+> +	.hsync_end = 1200 + 50 + 24,
+> +	.htotal = 1200 + 50 + 24 + 66,
+> +	.vdisplay = 1920,
+> +	.vsync_start = 1920 + 14,
+> +	.vsync_end = 1920 + 14 + 2,
+> +	.vtotal = 1920 + 14 + 2 + 10,
+> +};
+> +
+> +static int stk078_panel_init(struct stk078_panel *stk)
+> +{
+> +	struct mipi_dsi_device *dsi = stk->dsi;
+> +	int ret;
+> +
+> +	mipi_dsi_generic_write_seq(dsi, 0xB0, 0x05);
+> +	mipi_dsi_generic_write_seq(dsi, 0xB3, 0x52);
+> +	mipi_dsi_generic_write_seq(dsi, 0xB8, 0x7F);
+> +	mipi_dsi_generic_write_seq(dsi, 0xBC, 0x20);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD6, 0x7F);
+> +	mipi_dsi_generic_write_seq(dsi, 0xB0, 0x01);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC0, 0x0D);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC1, 0x0D);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC2, 0x06);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC3, 0x06);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC4, 0x08);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC5, 0x08);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC6, 0x0A);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC7, 0x0A);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC8, 0x0C);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC9, 0x0C);
+> +	mipi_dsi_generic_write_seq(dsi, 0xCA, 0x00);
+> +	mipi_dsi_generic_write_seq(dsi, 0xCB, 0x00);
+> +	mipi_dsi_generic_write_seq(dsi, 0xCC, 0x0E);
+> +	mipi_dsi_generic_write_seq(dsi, 0xCD, 0x0E);
+> +	mipi_dsi_generic_write_seq(dsi, 0xCE, 0x01);
+> +	mipi_dsi_generic_write_seq(dsi, 0xCF, 0x01);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD0, 0x04);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD1, 0x04);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD2, 0x00);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD3, 0x00);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD4, 0x0D);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD5, 0x0D);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD6, 0x05);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD7, 0x05);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD8, 0x07);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD9, 0x07);
+> +	mipi_dsi_generic_write_seq(dsi, 0xDA, 0x09);
+> +	mipi_dsi_generic_write_seq(dsi, 0xDB, 0x09);
+> +	mipi_dsi_generic_write_seq(dsi, 0xDC, 0x0B);
+> +	mipi_dsi_generic_write_seq(dsi, 0xDD, 0x0B);
+> +	mipi_dsi_generic_write_seq(dsi, 0xDE, 0x00);
+> +	mipi_dsi_generic_write_seq(dsi, 0xDF, 0x00);
+> +	mipi_dsi_generic_write_seq(dsi, 0xE0, 0x0E);
+> +	mipi_dsi_generic_write_seq(dsi, 0xE1, 0x0E);
+> +	mipi_dsi_generic_write_seq(dsi, 0xE2, 0x01);
+> +	mipi_dsi_generic_write_seq(dsi, 0xE3, 0x01);
+> +	mipi_dsi_generic_write_seq(dsi, 0xE4, 0x03);
+> +	mipi_dsi_generic_write_seq(dsi, 0xE5, 0x03);
+> +	mipi_dsi_generic_write_seq(dsi, 0xE6, 0x00);
+> +	mipi_dsi_generic_write_seq(dsi, 0xE7, 0x00);
+> +	mipi_dsi_generic_write_seq(dsi, 0xB0, 0x03);
+> +	mipi_dsi_generic_write_seq(dsi, 0xBA, 0xF0);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC8, 0x07);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC9, 0x03);
+> +	mipi_dsi_generic_write_seq(dsi, 0xCA, 0x41);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD2, 0x01);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD3, 0x05);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD4, 0x05);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD5, 0x8A);
+> +	mipi_dsi_generic_write_seq(dsi, 0xE4, 0xC0);
+> +	mipi_dsi_generic_write_seq(dsi, 0xE5, 0x00);
+> +	mipi_dsi_generic_write_seq(dsi, 0xB0, 0x00);
+> +	mipi_dsi_generic_write_seq(dsi, 0xBF, 0x1F);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC0, 0x12);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC2, 0x1E);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC4, 0x1E);
+> +	mipi_dsi_generic_write_seq(dsi, 0xB0, 0x06);
+> +	mipi_dsi_generic_write_seq(dsi, 0xB8, 0xA5);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC0, 0xA5);
+> +	mipi_dsi_generic_write_seq(dsi, 0xBC, 0x11);
+> +	mipi_dsi_generic_write_seq(dsi, 0xD5, 0x48);
+> +	mipi_dsi_generic_write_seq(dsi, 0xB8, 0x00);
+> +	mipi_dsi_generic_write_seq(dsi, 0xC0, 0x00);
+> +
+
+Looking at panel-himax-hx8279.c in the kernel, it looks like all of
+these commands already have named defines. Can you use them?
+
+> +	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	mdelay(120);
+
+Nit: Linux hx8279_prepare() waits 130 ms after exit_sleep_mode
+anyreason to have 120 here?
+
+> +
+> +	ret = mipi_dsi_dcs_set_display_on(dsi);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	mdelay(20);
+
+any reason to wait again 20 ms? Looks like the kernel does not
+
+-- 
+Julien Stephan <jstephan@baylibre.com>
