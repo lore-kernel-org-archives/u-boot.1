@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7790FC9832A
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 04:48:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC9A3C9832A
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 04:59:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BFE6040578;
-	Tue, 29 Sep 2026 04:48:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7D21E404DE;
+	Tue, 29 Sep 2026 04:59:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RPO81oAHmxPB; Tue, 29 Sep 2026 04:48:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 7D36D40541
+ id XRuzkMWt5k_i; Tue, 29 Sep 2026 04:59:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B0BE34043A
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790657326;
-	b=hb15ZPGD9B1dkxF325PExCZduLL4uDnBsafgjWExkh+5kblC5qCZaZWGzZbyjB47CmJY
-	 DR3q8p+P4seYuQ17w39RKGd0SH6TZYq8fDAXpD2tnvMVpVKgKFx/ysu/GcbrPHbSIQbxy
-	 OUNSoKJK3C4rTzR3AxHFinUKBglfmMrxdmtpuQnnDaa14UFbBYgP4z8rjwwKe1vXlC5Sd
-	 IQ/zzYC9xEi9H5xBaLGkhQ7taT+kZHFuT0RoBUixohdyd6q6vCAMzx/EhShgJieRIL91m
-	 Cw7Qx4f4MrES/e9emPp04lU8Eky7VZshFHG7RSZPjxUCRCfZ4h5P6ST5BPUG8v71x3g==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790657944;
+	b=p4nV6A8gziTpeBCslQ/wJr8LBviMMa7Zpc2lNTdxU1uMZdaTfjHRpa9qiv57C7eg3Zhg
+	 8loXJC4cuGK4WHX9Hfq1s3x84cCuAKOLtHWUb2ZgDxOGl/BGczAj3GlZ8f16qm4Py1dUz
+	 7THR29eYf/A+mdIk1Q8VzaQ3MHtXeynCfLeRJA+GBtuc3N0EVnAIa/N9ksti6Z6kCFsf7
+	 wRq8LQUdpfW5dwEbAJwKJ76yHVpE7Ps+EcylQeB8bF2sA8JezAksvEAHrX4fo6sXwDOmV
+	 ZFDglIwpusvhzXrtaxdTnOhiW5IA5F46Dg7Vi6CNdZoYJT7maoqaLxbqbzA3g82oDrw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790657326;
+	c=relaxed/relaxed; t=1790657944;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,105 +31,107 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 User-Agent:MIME-Version:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=cZZ1IRaO3r4UxHTjYsdMczFPdZybLSkSu7BvXnbXLj8=;
-	b=qAFV6VCJqHROIKUMZXn3Zc0RSIys42AFsUEu/WSlhSh7Hkabrfq6CMcap8XQRzh6LM90
-	 56oHjIXsdVKofIGk20JdWAh+OW/xLmiROrXJ6OTd7uW78TQVBHFb+3jpZO5XQCnAwDjnK
-	 98DQ/6pSr62KpTCcS5ePOVyj5r95NitGtxcU3oNv0iENJGwOyGaz85r7lNockIadrJvsz
-	 Qt89FAxI0W8eyrzRSkVl0Y/bTgp9rr7fz7xbjn0u5ca1PnRxWz6MWg5V4Apkrvm1g/ysp
-	 3+kINiB4dDHqybB7MKaPHz/uTyMEpMhOU87LP+uxI+ixs5cFshbtEkYRnq5Ka1cN+5Q==
+	bh=XdrmrNl8UyXgzdlNHIaX5cpKyL+rX33JlTwiaA8e0z0=;
+	b=rpNkb66O/3bgphDjgA0i0cSMAX85V1YfUaaktucN5qCvT4OcRDL8ciG8Q4L2ii9MnVWK
+	 PiaOnTNjwuRkiM9741DSKSJzSXaE+8O+I2poIplW93zTSDS+c5dWObocrvFmss9tOB6ZK
+	 9lknnSLSW2it1YNgTL02BBw/kueqE8QAUkwcq1VuPiHVblZkJ9JvZUBaxbsg1kEXAREyp
+	 5wuyedN3cAOtZtR+69hPXaB34nR2QEZOi8Fbld2HfY7czfV0AXSx7I6G9Ts3q8Ic+6Df/
+	 0bFarcZMxq0dNsiA5XqAocVlLYVgwNc2OiZ3pNB8mv5lrAOYUKQ5c+Ds17JkFlv7xOQ==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790657326;
-	bh=cZZ1IRaO3r4UxHTjYsdMczFPdZybLSkSu7BvXnbXLj8=;
+	d=lists.u-boot-project.org; s=default; t=1790657944;
+	bh=XdrmrNl8UyXgzdlNHIaX5cpKyL+rX33JlTwiaA8e0z0=;
 	h=Subject:From:To:Cc:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DN8AdbfjMlrvCZDtZudLLiaSODm3Ntz3UF7QHRJjcoSjbFCFzss2l9b5c3MZGknD6
-	 yGswX4KYns7ypjw+hNItJsu8FDykUfT2Y+/EkuIC6s6DwuMBuPSuZ1yI9GyeKmF6Lo
-	 KC0tqQZmNGQFz1bNvNaNnNrTXp/g8QCxF5xLfmbuyKj0zkyYNEVVuhxuGfHYJ/0r8R
-	 ouJQ/5ow8xJVfm0/JxYkbOW3NJwOL+bx+ZeBRlIQSSwhaVip4sNnDhZLot+SI5Eioy
-	 zXJ8bNDQC7jEb1W1gnHT+j79OGkXZwlK5QLHb8ayindjM4w0698fy6nTOzomSsXZnD
-	 OMR0wn0KCFb4g==
+	b=ShTfWMFF/Kb9mjE43rJXVYHmRZwwIvKCzJ0A6UPMjxFnacP0EwUejDoGIbhBSeHiA
+	 ADr8GI0pmD+Tld4fxiMQOmxf6ohIy4N7OHueJ7ziv0wavlqNME+54RcPd2yu2eakqm
+	 0tGs6BMJtspt2RcrzpgM8uzm3Wz/X/fu0FjoIWc/w0Y1QIMFi1Eht8yToLJF8DANY7
+	 7Wjf6LccQLePTZdqeHkkh9cowtku8Zzt4xgHhb+lyAhePg/ZeKir4hdMMAEdkBlvV+
+	 NMWOgPSAAcz6XWCwPw4zM84A7cj845C5nZLqmUdPApNkrGHdExRfsMcDXsZBtqoJxn
+	 /JE4KAonxqhcQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7D36D40541;
-	Tue, 29 Sep 2026 04:48:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id DD38461
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 04:48:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B0BE34043A;
+	Tue, 29 Sep 2026 04:59:04 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3AB9461
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 04:59:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C2C3180BBD
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 04:48:45 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 209006070F
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 04:59:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wJPMNPKH18PV for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 04:48:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 14CDD80BB6
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=178.154.239.82
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790657324;
- b=kuhBBPy3B30f33bujdJi5yAKdvYTuUY3iwYNRUCHpp9IGkDbc/qEjTqiAoYIEEWfRAbs
- xld7uvHAodyIbp9IxKBT98/JlS/GihSOE9XPyrzoLIuNl5WkVSJjOb5J/wP6A9/Pg0aIE
- wB75g0Nr1J6c+n46462ipk5ez9tT6r1MY/pkXLfMGj8q3ntDFJ2FW8Y1jAG8X2qHnIGlC
- SVBKjFNpVn3Gw3KQDbZoFk8oESm6A/H1ut9kGkHFT08qotGM5DzNNGujqG1DXx37GMhrr
- ageZvbGuVTJmVIKzWnPH4Dqv1T6vj/8mDHaRKimI3Ds3av+gTtwYWWTRRLGdB70u6wg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id U417bPzRaRQh for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 04:59:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3526F6070C
+Authentication-Results: smtp3.osuosl.org; arc=none
+ smtp.remote-ip="2a02:6b8:c0e:500:1:45:d181:d501"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790657942;
+ b=A6PYTikIyzXe+shte86Y3SfHDbN93c1R8TwLDl8TodYps6rBEJAfSFq+ruJT10J/1Ge9
+ NrpsFIvloI3lOhadReCqp2XYW+SJc+mLAvT8kGRyFHUgkv71qgnZXWgtuX/2XuRprj4KF
+ A0mw+mNtbtzdVCIHLGQttLPkxpzQpqWCefyp/8+GuWHXP9c0Ca2HL3w++/K9Ded8V5giQ
+ CrdTVtJmhGskLzuavTcFf3mgQRo6JBhm1eF9BR6CAclNwj1fBiB6wUNfXwSZ7Lj+ViHE7
+ KzrDcbnB8+SW1OU0GU5fiK6gn9W6tNnarampIddiX+dMR8wQqWnh4JVMkJHqyqxjkcw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790657324;
+ c=relaxed/relaxed; t=1790657942;
  h=Received-SPF:Received:Received:X-Yandex-Fwd:DKIM-Signature:
  Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
  Content-Type:Content-Transfer-Encoding:User-Agent:MIME-Version;
- bh=cZZ1IRaO3r4UxHTjYsdMczFPdZybLSkSu7BvXnbXLj8=;
- b=WlNq+MVkzyOVgIx7jXWqn0pNnzGEfV2jhX3fGKNSfP5+AVOWTKPfwizm8cLn3VzHxkPP
- drlcpyu6DmLe2//Z5bwsnyD7U9OBan/l0HYRqHE7h46JEpTi+PjSup8iQhp+6W6NvPNOy
- QX2vzf4FAGQ+DuPYoSwloT+IXzLZmDytw6bbotk6IzePfD23a8GDwPPdbw3Gg+zE/ZJGx
- f2WXi/+lhpVp+fx67HP2/mL4+m4ZgBjMGCCGCYBS0wt+gtUFlObAc1EWgaPgDiuJ2utAA
- CID/vM1rdPZ7zP5pJRUu1ctmVVAok34fXk9Aq78NsWRgYC4by/MZTXUtu0H0kpMQdVQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=XdrmrNl8UyXgzdlNHIaX5cpKyL+rX33JlTwiaA8e0z0=;
+ b=f9WJuI6QsWKU6dH3mPYsynpZfusdcW099voymxw/BrLAq5bvCVUwEo0jUS4kk2UfnX8j
+ zNmOyctiTYgAWLu+iUxyty8o8+/v45ZaXzJ0lAn3lA7fempZ/sLXC4K55yb144tkfIeDj
+ FJmbvygrd4n9Ti+2xU7+ciaF6oJvIiDuDpEUeMOzYMGL3bCOxsgXkMLf9MdWzysOnCTIy
+ PKBOiTFM5lWxM3KD2nvfgVy6h3JesQNua4+DLhaSHVBNNjsY3CufXD4/hP+n8qmjjVrRC
+ zPSly5nQ7bR20qUT2Jzg+ZG+o2NvnRcWmFWb/KVFmzOQy9307jnBpKGE0/xzuLcNC6w==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=none header.from=maquefel.me; 
  dkim=pass header.d=maquefel.me header.i=@maquefel.me header.a=rsa-sha256
- header.s=mail header.b=fwobGoe2; 
- arc=none smtp.remote-ip=178.154.239.82
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.154.239.82;
- helo=forward502a.mail.yandex.net; envelope-from=nikita.shubin@maquefel.me;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+ header.s=mail header.b=RXuk4czo; 
+ arc=none smtp.remote-ip="2a02:6b8:c0e:500:1:45:d181:d501"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a02:6b8:c0e:500:1:45:d181:d501; helo=forward501a.mail.yandex.net;
+ envelope-from=nikita.shubin@maquefel.me; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=maquefel.me
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=maquefel.me header.i=@maquefel.me header.a=rsa-sha256
- header.s=mail header.b=fwobGoe2
-Received: from forward502a.mail.yandex.net (forward502a.mail.yandex.net
- [178.154.239.82])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 14CDD80BB6
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 04:48:40 +0000 (UTC)
-Received: from mail-nwsmtp-smtp-production-main-63.sas.yp-c.yandex.net
- (mail-nwsmtp-smtp-production-main-63.sas.yp-c.yandex.net
- [IPv6:2a02:6b8:c23:4403:0:640:bf85:0])
- by forward502a.mail.yandex.net (postfix) with ESMTPS id C09CE836E2;
- Tue, 29 Sep 2026 07:48:35 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-63.sas.yp-c.yandex.net (smtp)
- with ESMTPSA id WmZmtZticqM0-d9nPcTIk; 
- Tue, 29 Sep 2026 07:48:35 +0300
+ header.s=mail header.b=RXuk4czo
+Received: from forward501a.mail.yandex.net (forward501a.mail.yandex.net
+ [IPv6:2a02:6b8:c0e:500:1:45:d181:d501])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3526F6070C
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 04:58:59 +0000 (UTC)
+Received: from mail-nwsmtp-smtp-production-main-68.vla.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-68.vla.yp-c.yandex.net
+ [IPv6:2a02:6b8:c1f:638c:0:640:aae5:0])
+ by forward501a.mail.yandex.net (postfix) with ESMTPS id B90B4829CA;
+ Tue, 29 Sep 2026 07:58:54 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-68.vla.yp-c.yandex.net (smtp)
+ with ESMTPSA id kwZ6f5wgYW20-eLXP4s3B; 
+ Tue, 29 Sep 2026 07:58:54 +0300
 X-Yandex-Fwd: 1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maquefel.me; s=mail;
- t=1790657315; bh=cZZ1IRaO3r4UxHTjYsdMczFPdZybLSkSu7BvXnbXLj8=;
+ t=1790657934; bh=XdrmrNl8UyXgzdlNHIaX5cpKyL+rX33JlTwiaA8e0z0=;
  h=References:Date:In-Reply-To:Cc:To:From:Subject:Message-ID;
- b=fwobGoe2kDGsOJgpbFdPIGSBLsS/cByQdxf4EJdne+dxknVS8CxSxIyaiGDAiCW56
- +f0L4ZHprp4THEEodQf5JkuUwReSHEUoopx2qFYZNsvCyY2tRkwVj5e8Aa+h1kjkKK
- e4JO6DNzY2EAgmc0o9wYgN2w7NrBe5GPX3Ykubds=
-Authentication-Results: mail-nwsmtp-smtp-production-main-63.sas.yp-c.yandex.net;
+ b=RXuk4czoPx0o45j0I+xPfRika+SfDxHN//+UVpzZ6BWIupYOi47Ggy1ybsLfYdEGQ
+ x9TQNKAvZrmg7drb2nKYoJ1kf3rYjryUjdPQjlrvA7wqGCKyOE8CTtUiouHCGHkpDm
+ bBznIUmQLnxCfxY7e7AUhIxnekVWMSww8q3Q7lXY=
+Authentication-Results: mail-nwsmtp-smtp-production-main-68.vla.yp-c.yandex.net;
  dkim=pass header.i=@maquefel.me
-Message-ID: <4f4121117eb212454498a6fe01d9ceac1d13e0b4.camel@maquefel.me>
-Subject: Re: [PATCH v2 0/6] RISC-V SPL: fix OpenSBI FULL FIT loading
+Message-ID: <b40e05037fa322d747ab6b48f7e38838f38370e2.camel@maquefel.me>
+Subject: Re: [PATCH] riscv: Fix IPI not initialized in riscv_cpu_setup()
 From: Nikita Shubin <nikita.shubin@maquefel.me>
-To: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Daniel Golle <daniel@makrotopia.org>, 
- James Hilliard <james.hilliard1@gmail.com>, Aristo Chen
- <aristo.chen@canonical.com>, Francesco Valla	 <francesco@valla.it>, Anton
- Ivanov <anton@binarly.io>
-Date: Tue, 29 Sep 2026 07:48:33 +0300
-In-Reply-To: <20260902-riscv-full-fit-support-v2-0-493e904a129e@maquefel.me>
-References: <20260902-riscv-full-fit-support-v2-0-493e904a129e@maquefel.me>
+To: u-boot@lists.u-boot-project.org, Tim Ouyang <tim609@andestech.com>, Leo
+ Liang <leo.liang@sifive.com>
+Cc: Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>, Michal Simek
+ <michal.simek@amd.com>
+Date: Tue, 29 Sep 2026 07:58:46 +0300
+In-Reply-To: <arZdGzVgm9ZtnSm_@pie>
+References: <20260904-fix_skipped_ipi_init-v1-1-3f4e7a10efe8@maquefel.me>
+ <972c116f-a430-4ed8-8b94-e4c1982e5f22@amd.com>
+ <856f099441f717605de9be5456dde8c97bbd04d1.camel@maquefel.me>
+ <arZdGzVgm9ZtnSm_@pie>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.60.2 
@@ -147,120 +149,98 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Simon !
+Hi Tim Ouyang and Leo Liang !
 
-A gentle ping on this series.
+Any comments on this ?
 
 Thanks !
 
-On Wed, 2026-09-02 at 09:31 +0300, Nikita Shubin wrote:
-> Hi all,
+On Fri, 2026-09-25 at 11:38 +0000, Yao Zi wrote:
+> On Fri, Sep 25, 2026 at 01:19:15PM +0300, Nikita Shubin wrote:
+> > Hi Yao Zi!
+> >=20
+> > A shy ping on this patch.
+> >=20
+> > Thanks !
 >=20
-> This series improves CONFIG_SPL_LOAD_FIT_FULL support on RISC-V,
-> primarily to enable loading OpenSBI as firmware and recording
-> loadable images (e.g., U-Boot) into the FDT passed to the next boot
-> stage. This aligns spl_load_fit_image() with the behaviour already
-> present in spl_load_simple_fit().
+> Sorry for the delay.
 >=20
-> Patch summary:
+> > On Fri, 2026-09-04 at 08:20 +0200, Michal Simek wrote:
+> > >=20
+> > >=20
+> > > On 9/4/26 08:07, Nikita Shubin wrote:
+> > > > If riscv_cpu_setup() is skipped we end up with riscv_init_ipi()
+> > > > not
+> > > > being called.
+> > > >=20
+> > > > But we still use riscv_send_ipi() in spl_invoke_opensbi(), so
+> > > > even
+> > > > if
+> > > > CONFIG_PHASE_CPU not set we still need init IPI and clear
+> > > > pending
+> > > > IPIs
+> > > > on harts.
+> > > >=20
+> > > > Fixes: d8810e1d4f82 ("riscv: Skip riscv_cpu_setup() when CPU
+> > > > driver
+> > > > is disabled")
+> > > > Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
+> > > > ---
+> > > > =C2=A0 arch/riscv/cpu/cpu.c | 3 ++-
+> > > > =C2=A0 1 file changed, 2 insertions(+), 1 deletion(-)
+> > > >=20
+> > > > diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
+> > > > index 3bec7c7cb6d..a65e6951384 100644
+> > > > --- a/arch/riscv/cpu/cpu.c
+> > > > +++ b/arch/riscv/cpu/cpu.c
+> > > > @@ -639,7 +639,7 @@ int riscv_cpu_setup(void)
+> > > > =C2=A0=C2=A0	struct udevice *dev;
+> > > > =C2=A0=20
+> > > > =C2=A0=C2=A0	if (!CONFIG_IS_ENABLED(CPU))
+> > > > -		return 0;
+> > > > +		goto init_riscv_ipi;
+> > > > =C2=A0=20
+> > > > =C2=A0=C2=A0	uclass_find_first_device(UCLASS_CPU, &dev);
+> > > > =C2=A0=C2=A0	if (!dev) {
+> > > > @@ -687,6 +687,7 @@ int riscv_cpu_setup(void)
+> > > > =C2=A0 #endif
+> > > > =C2=A0=C2=A0	}
+> > > > =C2=A0=20
+> > > > +init_riscv_ipi:
+> > > > =C2=A0 #if CONFIG_IS_ENABLED(SMP)
+> > > > =C2=A0=C2=A0	ret =3D riscv_init_ipi();
+> > > > =C2=A0=C2=A0	if (ret)
+> > > >=20
+> > > > ---
+> > > > base-commit: cc557af4553382f6f50e3ed62b9577054e7bc54f
+> > > > change-id: 20260904-fix_skipped_ipi_init-aa5575f55bc4
+> > > >=20
+> > > > Best regards,
+> > >=20
+> > > There are 2 other approaches how to do it in the code but it is
+> > > up to
+> > > maintainer=20
+> > > to decide. No issue from my side to solve it via goto. Obviously
+> > > one
+> > > big if=20
+> > > (CONFIG_IS_ENABLED(CPU)) is another one. Or move it to own
+> > > function.
+> > >=20
+> > > Anyway
+> > > Acked-by: Michal Simek <michal.simek@amd.com>
 >=20
-> 1/6: Allow IH_OS_OPENSBI in fit_image_load() so OpenSBI firmware can
-> be loaded without error.
+> I think it's likely a bad idea to have IPI stuff in
+> riscv_cpu_setup(),
+> but this fix itself is okay. I should have noticed it when reviewing.
 >=20
-> 2/6: Enable spl_load_fit_image() for RAM boot when
-> CONFIG_SPL_LOAD_FIT_FULL is selected.
+> Reviewed-by: Yao Zi <me@ziyao.cc>
 >=20
-> 3/6: Use map_sysmem() for FDT address handling to keep the code
-> sandbox=E2=80=91friendly.
+> However, I'm RISC-V's reviewer instead of maintainer, so I couldn't
+> pick
+> the patch for you though.
 >=20
-> 4/6: Initialize spl_image_info in
-> spl_test_load()/spl_test_load_fit_full().
->=20
-> 5/6: Record loadables into spl_image->fdt_addr during FIT load,
-> providing the entry addresses needed by subsequent stages (e.g.,
-> OpenSBI).
->=20
-> 6/6: Add a unit test to verify that loadables are correctly recorded
-> in the FDT.
->=20
-> Tested with provided sandbox test with a grafted FIT image containing
-> OpenSBI (firmware), U=E2=80=91Boot (loadable) and a DTB.
->=20
-> Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
-> ---
-> Changes in v2:
->=20
-> Addressed all review comments from Simon Glass:
->=20
-> - Patch 2/6: common: spl: ram: Add LOAD_FIT_FULL support:
-> =C2=A0 - Reworded commit message to explain that FULL parser is needed fo=
-r
-> full image verification (CONFIG_SPL_FIT_FULL_CHECK)
-> =C2=A0 - Added fallback: if spl_load_fit_image() fails, try
-> spl_load_simple_fit()
-> =C2=A0 - Mentioned fallback behavior in commit message
-> =C2=A0
-> - Patch 4/6: test: spl: Zero spl_image_info:
-> =C2=A0 - New patch added to zero-initialize spl_image_info structures in
-> tests
->=20
-> - Patch 5/6: spl: fit: Record loadables to spl_image->fdt_addr
-> =C2=A0 - Fixed typo: "lodable" =E2=86=92 "loadable" (subject, commit mess=
-age,
-> code)
-> =C2=A0 - Replaced -1 with FDT_ERROR (from image.h) for missing entry poin=
-t
-> =C2=A0 - Moved FDT size adjustment before loop: use
-> fdt_shrink_to_minimum() once instead of fdt_increase_size() per
-> iteration
-> =C2=A0 - Extracted duplicated code into helper function
-> fit_record_loadable()
-> =C2=A0 - Replaced debug() with log_debug()
-> =C2=A0 - Removed backslashes from debug string concatenation
-> =C2=A0 - Added note about gd->fdt_blob limitation in commit message
-> =C2=A0
-> - Patch 6/6: spl: fit: Add test to check loadables
-> =C2=A0 - Fixed typo: "lodables" =E2=86=92 "loadables" (subject, commit me=
-ssage)
-> =C2=A0 - Removed unused variables (uname, str)
-> =C2=A0 - Added FDT size fix after fdt_finish() to prevent external data
-> offset drift
-> =C2=A0 - Replaced #address-cells =3D 2 with ADDRESS_CELLS macro
-> =C2=A0 - Replaced fdt_property_u64() with fdt_property_addr() for
-> entry/load properties
-> =C2=A0 - Extracted duplicated image node creation into helper
-> append_fit_node()
-> =C2=A0 - Fixed assertion: ut_assert(noffset > 0) instead of
-> ut_assert(noffset)
->=20
-> - Link to v1:
-> https://patch.msgid.link/20260807-riscv-full-fit-support-v1-0-21a34f79c35=
-0@maquefel.me
->=20
-> ---
-> Nikita Shubin (6):
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 image: fit: allow IH_OS_OPENSBI in fit_ima=
-ge_load()
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 common: spl: ram: Add LOAD_FIT_FULL suppor=
-t
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spl: fit: Use map_sysmem() with buffers fo=
-r fdt address
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 test: spl: Zero spl_image_info
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spl: fit: Record loadables to spl_image->f=
-dt_addr
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spl: fit: Add test to check loadables
->=20
-> =C2=A0boot/image-fit.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=
-=C2=A0=C2=A0 1 +
-> =C2=A0common/spl/spl_fit.c=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 66 +++++++++++=
-+-----
-> =C2=A0common/spl/spl_ram.c=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 19 +++--
-> =C2=A0test/image/spl_load.c=C2=A0=C2=A0=C2=A0 | 184
-> +++++++++++++++++++++++++++++++++++++++++++++++
-> =C2=A0test/image/spl_load_os.c |=C2=A0=C2=A0 4 +-
-> =C2=A05 files changed, 250 insertions(+), 24 deletions(-)
-> ---
-> base-commit: cc8c034e78eba6b2a3845783889b80753bb1af1e
-> change-id: 20260731-riscv-full-fit-support-320d38f8311e
+> > > Thanks,
+> > > Michal
 >=20
 > Best regards,
+> Yao Zi
