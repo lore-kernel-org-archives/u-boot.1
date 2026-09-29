@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F0FDCA5FA7
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 19:34:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE61CA5FA7
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 19:34:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E9A03407C1;
-	Tue, 29 Sep 2026 19:34:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CE855407B9;
+	Tue, 29 Sep 2026 19:34:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cxK-4YeaoXjq; Tue, 29 Sep 2026 19:34:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 2F461407B2
+ id aZhPUrLCFeTP; Tue, 29 Sep 2026 19:34:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 1D6CC407B2
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790710472;
-	b=bJ08iSVYs3St2I+W43jiKDgo6Vglhq097T0Vmx8zjdinqBurZvzLijwes6T38P/q0Hm/
-	 DKdylsnoPMwB/VkJFo48+JaUwMXC85E1mHe700TnLyogUkkhuB4SLDXrgSCVYiwsQ/DkR
-	 Bp+EnMa4+OREPF9HJgrDt+YmGfrMXoqv9yTktIsxBF/GM42CgQwgZlFPhE+0yiIYUdsES
-	 hnxMJz2U87ue2NqHSY8LITV01r5w2jbN/DtJvBe29P4i7aVc6ThbKtekTWGR6imbCVCdU
-	 W5CqxVGGiq57NlYlappWD2kdBqVA60xn6pikuxF1adEYi/TiZH2sl2ftaU9TZI8v1og==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790710494;
+	b=qh6NocLaM5jO66AE+iGxtmbh3CI+/8dhlT5wAlBkzyk/Lm4fa2jI4Bph1r1kkYCna9Li
+	 faxT1Uye96pNHzzjMltslneLIpKwMkpXjAb+T7MVSnDAbpVkubqiRRTZhyjaP+J9K/hLE
+	 qsoMuZS7P2xNqeDoHoyyd6tyAlZwc43lwE/Rdcvfc8eEQ8INkVaueD7Ww87ZBJnWfQSo/
+	 SR43C62fwBYbiq75uaozDU90T5rm46oPGMpGL14+oCCH2BkUO4Z8TVBzZ2CSpKbHiMenE
+	 S/+tNWBMsHnIw3f7zdUoSk51tPMXSKVU4YkBHPmQibLr+VkthJ4O2JiQcnI6JF5PsrA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790710472;
+	c=relaxed/relaxed; t=1790710494;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -30,88 +30,89 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=dIdnYhER7I7asF7Ehiqktb7hdGwXBwlsXjJqjS23UJY=;
-	b=dWUQTjK9VDpYlADNV3bLWZ0hHC18DwGMTaeiQaOeC4uoiJz+d55NUUr7zVSmCUSZkP47
-	 5wcNeSn2P5J23brbiJikJpFjz77F8+ATVNOvPq5P8PJUUcGQZkvJFXHF0Fr9t6O7OtXhO
-	 mTM0LsJPdbhbSPEqBLGE2qK83cbZvSz25RudVI7WfTJTZIVRox+FP84B0zlKUop8Mwphe
-	 aaw9+ERhwbU+WcJMfy53LI5+5XmHFkk0HcP69uaTtKLQgrt1DnwBfQTCGTBRStcq/v9dD
-	 2qj/kGa+Lchx5zMBxxrYw7/ilh1VXH72xm0iB87jMSsTRvLPkFkNpVgGtjlXiSlXhJQ==
+	bh=aWwygf00VUdjbu47+IoMJ3Lgz2NJLIYYVtJ1w1HuWiY=;
+	b=TRNIHxSD3d00lbTL0QI8AY1oQEeKJ1gVPiQvlU3Zi6OOWCEZHI/paQrln3N7E8+M++Rh
+	 tUBdzSzdbmGQw6mO+3igA7+ITYfXpDMayLIl+jjU732MmK9PIZXb4fChoEJBkpXIYXctp
+	 hFe13/uQh920AN+uxGOBio+8np17akfclAkZLDDkBQQWeOPE7R3LoKsR8ERv9CCJpbLjv
+	 w48i8Dco2sl7YvDx0Wx0qe4sCHXxCz77yVAYzUB5DjrBhRKEv0SSAhKcNhQ1926oEevTT
+	 yq7Cyf/JnN+soFUtEyXryTbi7LS1yfofv/339+l2o8PutGZIK/CwNpFUFVQ6yKjbHgA==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790710472;
-	bh=dIdnYhER7I7asF7Ehiqktb7hdGwXBwlsXjJqjS23UJY=;
+	d=lists.u-boot-project.org; s=default; t=1790710494;
+	bh=aWwygf00VUdjbu47+IoMJ3Lgz2NJLIYYVtJ1w1HuWiY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YihcqLXu4G5l5RjQlBi+SQNeqf3vp+YeVB8wJE3jW+SG8azRb0c4DG7BOYrZ8tW0z
-	 L2jEQyK2YFRdZ72u+5olIA12jzCYHCItGkvCLR/Y10hJWGkOzqawMgZBnZOREKw8vY
-	 GpLr8PBCchN0x0vCD+zGipfr5JW+n7BnK4NcQ85+7Jy0FqoU0LPtE23iB8ww7bJv3h
-	 ZIJ0v0RKABkryRt8qj7V55rb2Z45OtcSwMYuib8SS1Pd9qf+GmdENK5lm7uASFh+1Y
-	 o/B6b7/V4DylVY0My6p1YH7fQECCUMx3TUD2W6iKAmx5DLsfM+YMvB0j+PgRfDn1zv
-	 SKk2JCm2oy+GA==
+	b=UY7lxyhnRxijh0pN+1KdUj92NePbfagdjnViwg9bz+2l7nz6KoTEta1GB2/fBuyCK
+	 d72at2NOKnRLFvEUCv9UDaSAB9NRXYOL8IGpYZVxt9J9lvVJaS9tuG+8rDSsmppQmX
+	 C9Iv9VQzDQ8HGyJ3H+AYm0b/55XJNaQ232mgdsyloOwZ5siXxx6VPRrnTlvMocZjG2
+	 nj6A3KFFgNOfqVnSHKVOayZH1Z+7eVvWlrzPHtJGFAlPdeKKYjPMbcXOZzMhp7kFH0
+	 VMCg4qd4X3RgvzDaulvGE44768oXV4ZN4w+XgKn1iPUtth5DJMKAG+ARa5NMKgXpAX
+	 1drivdRsek4ug==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2F461407B2;
-	Tue, 29 Sep 2026 19:34:32 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id C21AF32A
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 19:34:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1D6CC407B2;
+	Tue, 29 Sep 2026 19:34:54 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 690B932A
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 19:34:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id AF27B607EF
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 19:34:30 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5B2AA40333
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 19:34:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NaTtMHcB6VsL for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 19:34:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0CC25607AA
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=212.27.42.1
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790710469;
- b=G/RUtW3jriQay5khJEtUSW/fgrthnv9kTDJgq0/Y6dbjSWWkkRON1Jb8+py63dsl/XHG
- S6SxzcF82fhu14ozo/kTdXLdODhYk3BD4D7JQq9E/RXpyssn8K1uU3M+aBS/wvepdq7Lu
- HjDpp/aBGJohXDXW8CSQLbJEXFr8JRr+pvQfiHRogaquncqmaadV8iMiqBsWU8031/26p
- Py/ImvV6qO0P7urXQRdPjWhNlqG9vhXq+YYJXJOhv61K1Z8EKV2GPnrlmMcLqilQsyGuo
- fYYGP6wuPUGXP7qR/7RZI3/GJm/1MADSHzm5Zz5Ade1CdxAAltRpQ9Qzj4nUqgtwKuA==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6UXoEUpsGRtQ for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 19:34:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 0F6C84032B
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a01:e0c:1:1599::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790710491;
+ b=fy+JDFJZcmcVoFdomuMHa5+qsVQ9pqZsnJ9w9d0/nlSdnegg7Ah2jFAxW2xyJOMxjQzh
+ W4gJ1u0MeCLipVee6VZBWWWhmsZlEbhVNa1OCrMDN4EEJHnQdDQjhGhdhQ/8/Xfi1wKFU
+ iXd4jSDN63+6Wyo72ZGckhaxZwA3+nNvKj7KTh9VukGwfaJEeXiBofY1ZBm32PQhRbR8g
+ DSa5+uY65DIEeSEbiUCXvrRVkL2/8zM2iap0Gs9fwfZ6rFQMJivnndc+/diNdNs078Xvg
+ Q5m+jRJ+0nwTfcdJu72cZBdAWjIL7ymyDz/HrT0ddj2dlfhIrgs6cNTkqftbHf30eIw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790710469;
+ c=relaxed/relaxed; t=1790710491;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=dIdnYhER7I7asF7Ehiqktb7hdGwXBwlsXjJqjS23UJY=;
- b=MbHNp2kRi0vcYrNizzB5OHvajGSGXmNPalMVb9bpc3t3H97YLfgL5pP2wSzgtjQKeuWS
- F3U854xwclsNuGaoMCSnPdfv/gnW/mR45bpXXXUOPU4l+lLNNz0EgLjnmxBBhkEQ81pqQ
- fi4Hg2fSahAu1atKafuSZxdhXeGYlHTgwagblv5FRVvMWw4/4S3PBgX3JoyHW5Yo8W/rj
- ToxsW96hRHc9zab8rlOsNIHzrzXopoEf4oSYWoMjFg9PvGucplSXdccBgGTIK7okbY5V8
- OSIljrEhxeCbYRTd1Jup7fE/zK5YfaIEzQgwnRZmkxTP79obIx0gmoLkrq/5CGKmDTg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ bh=aWwygf00VUdjbu47+IoMJ3Lgz2NJLIYYVtJ1w1HuWiY=;
+ b=sgw3IaTeTo/pOHM5BWTUJg+1G2+pKjjJ6bQuJQNJS4kp+d4d/lmtDjUi4CodSN2a/Gij
+ 7QIeSTR5XkGIlzu/7e9QSX+8lGZbYnwTFauMEAVleDZXB0+TxzlJ7FFd2A6WaCiRm/+TT
+ WxHTc07DitOq85wwKxZdMkQ4TqspUJA8CRUWdQANVXXJjvJO9Zs3vsskDkzu61u5Qnpby
+ MQ1Z/mIBbxpYQkjXLKr5N+G0FTg+cQEnkuXdpKXQl8fArWT4xCcwI7Z3NQcBe/9jlds/z
+ uUpV+H6C4k/58d7/LP86ESwZqwe7U8qAnQPSwL6qL9oPQpnulebriXb3ICzj2MV1Aeg==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=free.fr; 
  dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=i5JZk8xF; 
- arc=none smtp.remote-ip=212.27.42.1
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
+ header.s=smtp-20201208 header.b="p1pic/Af"; 
+ arc=none smtp.remote-ip="2a01:e0c:1:1599::10"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:e0c:1:1599::10;
  helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=i5JZk8xF
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0CC25607AA
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 19:34:28 +0000 (UTC)
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
+ header.a=rsa-sha256 header.s=smtp-20201208 header.b=p1pic/Af
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0F6C84032B
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 19:34:50 +0000 (UTC)
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 04E46B00579;
- Tue, 29 Sep 2026 21:34:15 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 3BFEAB0051B;
+ Tue, 29 Sep 2026 21:34:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1790710466;
- bh=2G2Pd5HL5z4JlHmX/LFx2fA1Z+5ulNgTDAS1axvM/qM=;
+ s=smtp-20201208; t=1790710488;
+ bh=tIonJwQibOMMfyq0nx5OWln6yAVAKVRkMaCLG4miq9o=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=i5JZk8xF1J0V7vZM9Wic67pQQTiIC+2El+5WHSsd5boYWOq+uEOGh/NlKbvDCQRfb
- a+FleH7FNTBA3HviD6gDEASmabGg/5bVuMdTBQB9sCp1M7KWwsi16FCEy3H+B64I4S
- K8SeeCII8OCrx2OEavSxv9HHhD3N9oINWIm8zOfqenl7ZSLNUEUkOS+fPkUSd7qniM
- DnkwzyRU3tDxDW2udNCv6BXc7OWxScuPYVeZh6/MgdtyoLYjm4grJ6tblSNk/ZK/E/
- f1Di6eA5W6Vmn/fcP0TGRbjnd0JmTjoP6Qk6UyYiJVIw8AILk4lcTaocfP4TjO1xvo
- b8K4SmDMlFF5w==
+ b=p1pic/Afh7J+/34ea2iTOXbD8MNZ8F+ReNJNIowVFSrFb7buv3fdcDrO05vA2FKTW
+ fL0Ed5vSScsao7H29kLEuhs0Y6Mp+HcSF80SBO4cEOuQLSAmW+zNqfLWLkwHvFUQTY
+ K6NFa9qeYz7xowB8HEdz2m8RMHtnN72vRQuHOwmFBDh4OJcm7JDgma7ftgIBI4sSBX
+ +c0jz4THKxfi7hHvYOEtCQcPL9Lqm0SblRAEejY+6bmuNhqqdWwchfluLbz6GpriHy
+ w6cv+RFlFjF1WbBebslqbL4h661pkCuCkv47VU+VXDpwxf/sNKUyKqmTCeKDtoq2Tt
+ iyTa9IaPEkPIQ==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
@@ -121,9 +122,10 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
  Wasim Khan <wasim.khan@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
  Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v5 01/13] board: lx2160a: serdes: drop the split subcommand
-Date: Tue, 29 Sep 2026 19:59:33 +0200
-Message-ID: <20260929175947.1379710-2-vjardin@free.fr>
+Subject: [PATCH v5 02/13] board: lx2160a: serdes: rename serdes1:split to
+ serdes1:100g4x25g
+Date: Tue, 29 Sep 2026 19:59:34 +0200
+Message-ID: <20260929175947.1379710-3-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260929175947.1379710-1-vjardin@free.fr>
 References: <20260929175947.1379710-1-vjardin@free.fr>
@@ -142,78 +144,81 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-lx2160_serdes split command configure SD1 lanes from the U-Boot prompt.
+The following patches will be adding other cases for SD1 lanes:
+  2x 40GE, 1x 40GE + 4x 10G and 1x 100GE + 4x 10G.
 
-But the MC firmware has very likely normally been started already.
+So "split" is no longer meaningful.
 
-The split must be before the MC starts. That is the purpose of
-  hwconfig=serdes1:split
+Let's name each hwconfig value based on the SD1's lanes settings:
+  1x 100GE + 4x 25G.
 
-Suggested-by: Vladimir Oltean <vladimir.oltean@nxp.com>
+note: serdes1:split has only been in next, never in a release, so
+we should not need a compatibility alias.
+
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 Reviewed-by: Vladimir Oltean <vladimir.oltean@nxp.com>
 
 ---
 
-(no changes since v4)
+Changes in v5:
+- Fix typos in the commit message
 
 Changes in v4:
 - New patch
 
- board/nxp/lx2160a/serdes_split.c | 28 ----------------------------
- 1 file changed, 28 deletions(-)
+ board/nxp/lx2160a/eth_lx2160aqds.c | 4 ++--
+ board/nxp/lx2160a/serdes_split.c   | 4 ++--
+ board/nxp/lx2160a/serdes_split.h   | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
+diff --git a/board/nxp/lx2160a/eth_lx2160aqds.c b/board/nxp/lx2160a/eth_lx2160aqds.c
+index c1a060877cd..8f48b14c0e3 100644
+--- a/board/nxp/lx2160a/eth_lx2160aqds.c
++++ b/board/nxp/lx2160a/eth_lx2160aqds.c
+@@ -18,8 +18,8 @@ void reset_phy(void)
+ {
+ 	/*
+ 	 * Before the MC boots: it latches the live protocol-converter
+-	 * configuration when it starts, so `hwconfig=serdes1:split` has to
+-	 * be applied here and not later.
++	 * configuration when it starts, so `hwconfig=serdes1:<mode>` has
++	 * to be applied here and not later.
+ 	 */
+ 	lx2160a_serdes_apply_hwconfig();
+ 
 diff --git a/board/nxp/lx2160a/serdes_split.c b/board/nxp/lx2160a/serdes_split.c
-index ca3d7228977..6d9743a28dc 100644
+index 6d9743a28dc..1a5c44e7740 100644
 --- a/board/nxp/lx2160a/serdes_split.c
 +++ b/board/nxp/lx2160a/serdes_split.c
-@@ -449,23 +449,6 @@ static int do_lx2160_serdes(struct cmd_tbl *cmdtp, int flag,
- 	if (argc < 2)
- 		return CMD_RET_USAGE;
- 
--	if (!strcmp(argv[1], "split")) {
--#if !defined(CONFIG_ARCH_LX2160A)
--		printf("no 100GE on SerDes 1 to split on this SoC\n");
--		return CMD_RET_FAILURE;
--#else
--		if (argc != 2)
--			return CMD_RET_USAGE;
--		if (lx2160a_serdes1_is_split()) {
--			printf("SD1 is already split, nothing to do\n");
--			return CMD_RET_SUCCESS;
--		}
--		if (lx2160a_serdes1_split())
--			return CMD_RET_FAILURE;
--		return CMD_RET_SUCCESS;
--#endif
--	}
--
- 	if (strcmp(argv[1], "status"))
- 		return CMD_RET_USAGE;
- 
-@@ -487,16 +470,6 @@ static int do_lx2160_serdes(struct cmd_tbl *cmdtp, int flag,
- 	return do_serdes_status(sd);
+@@ -409,13 +409,13 @@ int lx2160a_serdes1_split(void)
  }
  
--#if defined(CONFIG_ARCH_LX2160A)
--#define SPLIT_CMD_HELP							\
--	"lx2160_serdes split\n"						\
--	"    - split Lynx 28G SD1 100GE.1 (lanes LNE-LNH) into 4x 25G.\n"	\
--	"      Runs before the MC starts. To make it permanent on a board\n"	\
--	"      that needs it: setenv hwconfig serdes1:split && saveenv"
--#else
--#define SPLIT_CMD_HELP ""
--#endif
--
- U_BOOT_CMD(
- 	lx2160_serdes, 3, 0, do_lx2160_serdes,
- 	"inspect the LX2160A 28G-Lynx SerDes protocol configuration",
-@@ -505,5 +478,4 @@ U_BOOT_CMD(
- 	"      per-lane port grouping and protocol (LNmGCR0), next to the\n"
- 	"      protocol number the RCW latched.\n"
- 	"      No argument prints all three SerDes."
--	SPLIT_CMD_HELP
- );
+ /*
+- *   setenv hwconfig serdes1:split
++ *   setenv hwconfig serdes1:100g4x25g
+  *
+  * Idempotent: a board whose PBI already split SD1 skip it too.
+  */
+ void lx2160a_serdes_apply_hwconfig(void)
+ {
+-	if (!hwconfig_sub("serdes1", "split"))
++	if (!hwconfig_sub("serdes1", "100g4x25g"))
+ 		return;
+ 
+ 	if (lx2160a_serdes1_is_split())
+diff --git a/board/nxp/lx2160a/serdes_split.h b/board/nxp/lx2160a/serdes_split.h
+index 67e8c4873a7..8dce9ddf97a 100644
+--- a/board/nxp/lx2160a/serdes_split.h
++++ b/board/nxp/lx2160a/serdes_split.h
+@@ -25,7 +25,7 @@ bool lx2160a_serdes1_is_split(void);
+ int lx2160a_serdes1_split(void);
+ 
+ /*
+- * Apply `hwconfig=serdes1:split` if the board's environment asks for it.
++ * Apply `hwconfig=serdes1:100g4x25g` if the board's environment asks for it.
+  * Boards call this from reset_phy(), before mc_env_boot().
+  */
+ void lx2160a_serdes_apply_hwconfig(void);
 -- 
 2.43.0
 
