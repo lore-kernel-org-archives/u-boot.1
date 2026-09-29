@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7FBECA5FA7
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 20:32:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C64F7CA5FAC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 20:32:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 90461810CE;
-	Tue, 29 Sep 2026 20:32:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 80D5C607F6;
+	Tue, 29 Sep 2026 20:32:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Cf5pnp6JxGgf; Tue, 29 Sep 2026 20:32:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org A0CBA810C6
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790713968;
-	b=Q1OSb5GMWtD9+/oKrDWE/B41e44clagKKbk0S3K/5fy23SZlC29lVOSlyo+s/FZCaxbb
-	 TfuMgmMv2krsqOU4nTgF7Wy3LycbcX86Hmbu9XauV1Y5+svlLunzp0ItZP00z/5Xo5cmt
-	 2uoyIR6rF1mPPIUYAdKOqSKeOKT295k+SXGl98dmsOWfLL6D9zGCDtLDUVj/2BYGW10GQ
-	 rFrY1OjEmYiTmRN17f8k8tG/sT9ow/BUxHp/eAeeCu0IiuZlnZho8iMp60it71wlUMQ4m
-	 BlAgjok/UwPas7S7gFsa3QADO1wiE5vBEwsilWiS+0bqhPCLrpyuJBZPs7Oem/RaFNA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id T3TPvwJDJd8B; Tue, 29 Sep 2026 20:32:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 5AFB6607E5
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790713970;
+	b=Qgjv8PCN4hlaxbSWuj62dcM2Jz0bnXiSUdvuIFOG0Kr+p9Sla3WihDBamhXdFAcZnfkU
+	 l8UrQn3+RBSxlit/XMwL6xROe5hZnvPU1ohh1n8TOGMKzWVN+hsgUFPytmytBx9CblkVW
+	 O3Qs6NDL0qnsBWFpcXNv5cg4PQHPrvSvt9BsbXJRjYbhrbKal1l7qford+k/Ex1hntEEe
+	 i1Ng0tT1Ju/oizb4lUkt2/Z7Ug9SQaN60MzS0uHR8PoupHlUgHTL38oXRrNBHQZVNUYkY
+	 fTbypjZm+X9pnWbzZBMnbzx2pe+sOyjWbE22cRUyidCuYPzp5GPZJEmkohqhmK8BVOA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790713968;
+	c=relaxed/relaxed; t=1790713970;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,133 +32,133 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=YPIKFqFNfAsJh2si3aegTlSdSHRw2sKEWB5DaHLmFa0=;
-	b=c3GAMIY7ghA6nnhidRcD3h/azER1WbvTJxPo4Ah1mSLduxKuz4+Bk8iuftQkyWkbnAiM
-	 Xx/4oYFqZgpviOuL9LnJUNrR65a/U6NncQguw/ICtgn/a4eIiUJfVTCVRiEeazptfEA5D
-	 52ZqYT0QybP2tM6OK2P5992T69zgkXiVGbJJoKI6cchF/1iczMJ4NNDOUgTbbDKPLTJ8K
-	 8irNgsWiaBv7h0u/E+SZk2kE3CzyG5hKMROo/C77mUUhqL1GqlrU6BvYVEkGwsunzr8Db
-	 KCPIckk+D5h/nBb5FZFfVHuIgGhXjU6ZraM+KXHgp7dKGtv4LgsNWgvek5h2sgPL9+Q==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=TBZmtfpV5NapNTjQVYNLYgTNXg38/j+JDNHjnLI5C6Q=;
+	b=elhP2k0yxhXaiqCCpR88Ekrj0ms2AFV7C5+i+tr+qObEWuH56xcCY2xWIuM36aciUkO2
+	 TxuCgAWmtr3HjcBICz3E6LqGH3KCPRMDD5SqEOYtn9pyM7vahXBlbfZ6JAANP1sOelb5t
+	 Zw94Zmz2a+yIfhzU8alph0PKVIredjepd5bP1dwyd2Jg8GaEZ8W5z37FJGopBzQuIJMy1
+	 RfAInX1CIGWBtMrCG6MtLpXpF7DiK/0wnIFxKo0geWEUuYhVsSb+pSAosdL8kzDfe9N7N
+	 RkdtGkTW8XUodI4/bL21eMN7NaHygw2ryVsuIoMSqVNiS/icxBRz5LT9JMuNKA21dxQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790713968;
-	bh=YPIKFqFNfAsJh2si3aegTlSdSHRw2sKEWB5DaHLmFa0=;
+	d=lists.u-boot-project.org; s=default; t=1790713970;
+	bh=TBZmtfpV5NapNTjQVYNLYgTNXg38/j+JDNHjnLI5C6Q=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=QRAV/SQUpAp8bnhz+78uiAfuMku1iCSGrzpQIXVsYs7XkskjFTgv0igWp/DW6WhtP
-	 r5Yt1tvxnt45rMDhLUS1A0GgxLYzPgT6bxGY4MhI8qmyAdzDQ1IBOzEBHTx1I2CgFp
-	 Foqxt3jFprfq5gek80jvT3Zyh9SkQ/Sq3NFxG68ykOXO03XJMeFP3R/5O6/pM1jehd
-	 B/dbAWT5bv/0oYzlOD+ryCqXUdU4r+k13rq0ez8CTkTKAnWKiWFDmwNeCCrrnfiFgv
-	 /PYU3XqTK0Tu2WqcYCl5X/V9PB2+QC1J4/5g6YHLHUtkQb/l+jNnBdTZlWT6F+V7xo
-	 cUpzQLnlhbX+w==
+	b=jxMNYUGXTR4f7REMxr0lppQjEaqzQS2mv472UawqyYiUzU8+05I7E6Q2Eqe1sL+3r
+	 usM6vxAopApK3K1atG0DitDK1hTJcd89Vzm0EZXXMs7ByZ80QLKDZUfH+sICvouXQg
+	 X+inBFfX5Ox1Uj9fMAEAm8lFV77Wd2Mfi59wjsCncFqCa4ZDszkQqu+DrDfXHIOya5
+	 5wbKMkzzC1ZXelmFKis3TFtIZkwjY1qCII3/MlO5ZFXm+18Z3iKBULJnq4XIvRsOub
+	 dFfjvfg/8Ueb9DIibtaVDeeEzBmpONRezYerDygLELBkoTHgsQZpF/fK3vn1Vb75C7
+	 nogbdykirTEAw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A0CBA810C6;
-	Tue, 29 Sep 2026 20:32:48 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id C974F14C
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:01:01 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5AFB6607E5;
+	Tue, 29 Sep 2026 20:32:50 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B671314C
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:07:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BB4E3407B2
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:01:01 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9C2AC400D5
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:07:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9N4A4HrnD9Qu for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 18:01:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org D7ED440766
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:34::e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790704861;
- b=Whdr3Iiy6HiixDW4QIo3dEc+cZ0PXlGxBm5fv8FR4cZ6digx2CLux9ESlzkf8jXi2H8I
- i+zMFBD37lBO5blZLILV0RBfaNLtwuzP0FADB92kTSa+gubZa1HFrlI8yW/KaUhmABNy3
- T3r5POOE0WJlqWDkZ9g+dPZwgerIGAQwNNS3jTjwwUD4wVIUVId2pcWQmH9vvTAVxkUdp
- DSu4jArMXR16piKaDC5w8ntdQz2cq2JMhd7mjApYqWkH7wdcEoeHCgN0bq+4nROCChiKN
- c09qGncGY0UnRKcAfQTf38zDn1a3Kato5Zq6zJdHXYJOug5cslF/uVWkeEX1zgmA/aQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zkD_AVrvPZn2 for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 18:07:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 58AD6400CC
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:34::2a"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790705245;
+ b=NrVFAHDGGM0nM/Sky94IIRPvEyKsA4QXJ/ZWiy1xV+bPJOVwM8CHRyHaCLb5kTeJohDl
+ iVjdepJztSv3hpeglHk5S4wsmDlPktEx7S3r13jCcB5lVoX1JGZxD5bvkcnBP1owS3+FB
+ P8UETFtj7pheoY/limZm8n6HCAqMAPLkpmsJ/+Dg9vD45BXpY2DESIwi+BUmjzrr9vrld
+ x3sHuVns18FS/kg0rJ9Bq/eIo/+os1ByzR3z7vg2wMd0QAIEXKq8JBlmrNR0/UPBUB6e0
+ GPG49sZAQQ+JVeXj58c0VVTgMR6OeUuclMtYJWWUn1Lfdzfh/etW/8NzFMf5F+E7V+Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790704861;
+ c=relaxed/relaxed; t=1790705245;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
  Content-Transfer-Encoding;
- bh=YPIKFqFNfAsJh2si3aegTlSdSHRw2sKEWB5DaHLmFa0=;
- b=BhrQihQ8dE1Hk6F91vxXgLX0+aixXCQ+Mcfq/K4dFwAi9VVAAvK6ddbFlVQPebjOhN9t
- mCvbTHNyNfV8r+JHfU8jNkEvA1foWbV4Z8rTXL9ClCC+IfYOyiWzDl8rcbAK0OiD4wuFx
- pxS/Lnj0V4bGpJ1BmHCx4Rc7fHMZppSEDpclqdSmxi0c+tCKAfASMmD6ORRnUvtW2cLBD
- bklvcsSQyvvNaPAZCgFKaN93f63FlP3M4QZyXC6HYlPrpK2pZGW5vdpZt4FVm1aZy7Kps
- tsX4Tq9pcRKcScFAHy+Xt3lMBrb6Bl7fSLig89rcHHUYAg7681IgC9+WmAxREu9aYlQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=TBZmtfpV5NapNTjQVYNLYgTNXg38/j+JDNHjnLI5C6Q=;
+ b=MWov25mSpAOeoe/usKHHKjdQHgc+dxkdFmqkIEJZHNgwsG5f29+Q5Ej5JAd1+WnXNHPM
+ SyFsNVE/lT2rtjHgGsmAnjXTUupK4MYrMT/Vt6OpXaaVyDUXdak+i6QgB6GoGHQDqlk7w
+ CKj6K8GcUJ1u12qv7RSxil6WobH/PcdhAcZ2EilGv5535ZyQJ7piLurwqIPQd5ZTzMFN3
+ FmLsFhrs6bg8A3HR7eZiDfevXqIcJqdKBCTOAmWYEO6eda9NwhqVFLxeZMBlQpGaxU9sC
+ VucvCY7ggCNCfpJnYxqluy0dnUebP9sQ7Sw3LKfnahpC8LW1+NWsGfOo2N7ojc6KK1Q==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=brivo.com; 
  dkim=pass header.d=brivo.com header.i=@brivo.com header.a=rsa-sha256
- header.s=google header.b=cTfX4R6X; 
- arc=none smtp.remote-ip="2607:f8b0:4864:34::e"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:34::e;
- helo=mail-qk2-x0e.google.com; envelope-from=sanderson@brivo.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+ header.s=google header.b=VDonxCVj; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:34::2a"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:34::2a; helo=mail-qk2-x2a.google.com;
+ envelope-from=sanderson@brivo.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=brivo.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=brivo.com header.i=@brivo.com
- header.a=rsa-sha256 header.s=google header.b=cTfX4R6X
-Received: from mail-qk2-x0e.google.com (mail-qk2-x0e.google.com
- [IPv6:2607:f8b0:4864:34::e])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D7ED440766
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:01:00 +0000 (UTC)
-Received: by mail-qk2-x0e.google.com with SMTP id
- d75a77b69052e-53122c5bbb4so51313251cf.2
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 11:00:59 -0700 (PDT)
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=brivo.com header.i=@brivo.com header.a=rsa-sha256
+ header.s=google header.b=VDonxCVj
+Received: from mail-qk2-x2a.google.com (mail-qk2-x2a.google.com
+ [IPv6:2607:f8b0:4864:34::2a])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 58AD6400CC
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 18:07:24 +0000 (UTC)
+Received: by mail-qk2-x2a.google.com with SMTP id
+ af79cd13be357-93c7519e76bso178601985a.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 11:07:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brivo.com; s=google; t=1790704859; x=1791309659;
+ d=brivo.com; s=google; t=1790705244; x=1791310044;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=YPIKFqFNfAsJh2si3aegTlSdSHRw2sKEWB5DaHLmFa0=;
- b=cTfX4R6Xu4GZi6pW358ZwOMFV13C73FGqKRN7KvgVfRxOSDIZlpEhrITZu1X82IcKd
- KV2lTsFYWEfg+j7B+vn1uaenUDo8m6iejBP0wgObx9q6PzHq1K+eV54zo6jerNAvw8rm
- DDC3otudVodFxevoLlly4hilhBEPn3dK9PsQ4Hn6WzE5ldJSe4yCO7VX1Woc70oxepoU
- rBLU8quVJ8nIZavnshI8YlEqPZ8pd9tSvi+mzvl1Lr4y1J+Uqe0O7bpD0Y6kLF8F+ngE
- TISy4F4/BVs9lSp5UHmjhDYhEs955CjXOqtQlly6k3OKJtfLcd/L+YRnjDtY6zCIWWRt
- 3Uzg==
+ bh=TBZmtfpV5NapNTjQVYNLYgTNXg38/j+JDNHjnLI5C6Q=;
+ b=VDonxCVjCYdz4Z2mbM3IcXSGR6OBLSEbutw0IfA9urhc12Fju7NlOUlv8lZbHMR9cx
+ 0wVQKLgXT6ghVfxp8Ig6+nmSL6aqk3fMWAu4g8n+2BbiQ9doy6uRyOdA4gLBwJL47pIA
+ RDbbScuoh/iY/gOtGkhToPgzt5fx27jxaJC3sm4XEaa05PqV8G5VAiDWApP7msycWmxo
+ Py/lFeUXal2Eb8+cltYamDrOEnhn5/TOnOpNM8rlYOrqHSKJtgTspGIjAZ5G+/N4fmyE
+ p34fqIyYUuSMVC0izhbUz+oB1NCtVcftb6JhOQ0xpuJFgjhw0gYwKVkkZQraUoMpG//v
+ R6wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790704859; x=1791309659;
+ d=1e100.net; s=20260707; t=1790705244; x=1791310044;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=YPIKFqFNfAsJh2si3aegTlSdSHRw2sKEWB5DaHLmFa0=;
- b=JrtmgsVfZoZYNNdMA+tnt6xGs0CGmg4MG5prVbUdFRxVdWX76+hRRPS2OPYBHzYN/T
- d+JA1+6bcC7OSrb3iS6g9OClv5Oe7EIAkdiMOxPDHCt0kb91EreaJ2WGP3Nshnnp9wA9
- FC9IthlaQEOIwhaXNYaskk0EGJoz7eih328Gixve7Vk4JnvO1XYjpgQcjzr8zbAqfC0y
- 7z4/GGi4kMf4fMOWsNEMCteX6/7OPSgSlyVe+UfWIxtne8VD0oBfRzaAC5DgLVfufa7S
- tq1M7Hzfuvpib3scer+ImkIxTq2i9nchduLMiW6eMClBZHMDCmyTsYYDhHWP55HiPXU6
- xB3w==
+ bh=TBZmtfpV5NapNTjQVYNLYgTNXg38/j+JDNHjnLI5C6Q=;
+ b=QCnMrH0998qN2H5sH6pRA8hDGIaHALujOsz5ErML4nmKmkWVFQPLx18mrd5PwSFzxt
+ 97P6qEhtXDNT7zA3fZ7UmZvzfyCNHQ1kkCH6Ir43XN1Xbae8U5IcS23+ZVDDYaQOgmeH
+ k5Crluhy5fwyDJOaDfpa9RjBCrZctpD/HZWwUDKl6LDKrn3cO5fhEHTm0/rTZ9im+Xwc
+ 8L6Cz+MZphrV/NoKp6van5+IPhIngWDws7djJ71uE9LdqMu6U6lEFFp871SVVU4ahzsR
+ 2PW0lVZ/U37J231nQIUFioPHOJWtKdDWpDta2NTaD8tEOqOE4yKMGcFw92Zv0ctIoRWk
+ W3Jw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxYxIf8NnymLQC5OeL6HL/0dLsQ4qfgY6BiPWO4wSzTOhZqz79vifGeTmJQ8f+kzCBbRjUhTnI=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mRn9NhZdw+jQcVFa7yM+pctTZiwUJrsEOo14HtPcBkPLMWMC6H
- Jwj2heFquhx9m/hXIYh3myigOyiOJLCMRXV/m0GKUl4vqbej+Vor4hvuJt2YMBMWXTelEQ4qbIa
- O/S0JhUMAYiLmFKZK1G2RvBXTAX71tGfWFbSZZz+pluk+U1gj8zKbQ7871cHZhKw=
-X-Gm-Gg: AYBFou1wUC1nETp3dtZeBL4NdEHZrHqIo9y7wD7ZDLJ57zSUTmQQ66Crf08N+vLJE/j
- 52+IHNJJPgyoU0oAS7mHzJCq+UULolfPmPqkc+6cr4fFaMcvqAuua7yr7WoQnbfgXksk23/U35H
- kmmzOCWaNjl1/ncTUmqKAnC64kdbY4P0gZOBUr1WPeTTbrl1MJwLT1VzLSHPss6jtHVMQmLdgnq
- Ypk2k1r+KnbP7PbIwmz58iPoc/y7LzLNCeasVFakwz0KJ7bN/5fFduS3cN8Jg8gkBZ8Thqk+XMB
- ehkDn70x19F3iYPJDXoAg9Kef+COC68eQp5VywJ5HgWqnsw41w+ENLxYqpFMbkYfbVi243csh9I
- xrH4AWPmHIJatHi7YjivqiBtB5WhIKbQRX4jFdxQsY+/rUsX26uxA25GLVabIIhbL7LxqDFhJGp
- V9ikoVtwBQlWXyrxmmTbNJpq/urBJxrU3VWdP2OOlOOly4eMUjj5d8YdHlGa7RTysB
-X-Received: by 2002:a05:622a:1816:b0:531:2243:436a with SMTP id
- d75a77b69052e-5336a5eba19mr159311cf.55.1790704858503; 
- Tue, 29 Sep 2026 11:00:58 -0700 (PDT)
+ AKwUvByQprjrQY/i6ucLR/YohqG5izGN5xhp0EEndaxZhJO6Yp20OVkb1wAuYGu4/z0v52scD9mzomU=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++kfai5DrW/lcc5IYV0AGijCEVMHyt++TfEgZRc3CquyNhjd1VGB
+ GiuwvTdB372ROip+awvypBFvCrERRzy13lf1OL5k9BR6FhECF3KYRu5a1fJKXXKzKyg2YyUNodl
+ UDKmMeOxqZGMxg8b2wNbPZMmQnN1ABhw7V3AnnxFbP/lQmCN7uxDlZIv36hq0XSg=
+X-Gm-Gg: AYBFou1Ok41s6pzqLawSD/QHw1OJoW6R+gOCzcEaWBENFn/E9wnTV6p8IxYtRZtoI+a
+ hEquD4+9EI9JbzOikrsX0xxhD9UtCQVQn1/DwNhOCVwBLrX4fyTfXS0LCFnlfq2inwDHYLQGvkw
+ wZO+ErQLFOpGUPLETioW8BBULJYG/ReGfq/fnD2r9qxSJhDOaJT6Ir38T1m0/lGJzkIKi9G4tvv
+ fZ174lyfwLJFr1fBMg6E9r+KBCRjpe2yZ+uh9K7OSbPg4DjENZ2aKB/EWfzRFgAwYeD8PnOYO00
+ MpESr9/zx+brch5C7FWVQF3X+/AuxRY8LFxM701GCKf7PF/URDhzWaCqVmvwqkEPQxb7hbBw27Y
+ AOj5bpQIBCn9C/KhkVfBpJ9Rpbon4e7W+I10+ZMOslXXz0EYHMeL67LlOvv5XH15c9eGepct7+Q
+ jQSuayuRKZsA8iU7qAdNB5bBGFI6ER5A38TGgQ/oRysfEieT9v2USqkKVOcApQ9ibe5g==
+X-Received: by 2002:a05:620a:370d:b0:93c:17db:d91f with SMTP id
+ af79cd13be357-93c9fb59e46mr57265385a.39.1790705243208; 
+ Tue, 29 Sep 2026 11:07:23 -0700 (PDT)
 Received: from strozzi ([71.163.254.246]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-53369c4dfe3sm895901cf.31.2026.09.29.11.00.57
+ af79cd13be357-93c9f462b0esm28802785a.9.2026.09.29.11.07.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Sep 2026 11:00:57 -0700 (PDT)
+ Tue, 29 Sep 2026 11:07:22 -0700 (PDT)
 From: Sean Anderson <sanderson@brivo.com>
-To: Jerome Forissier <jerome.forissier@arm.com>,
- u-boot@lists.u-boot-project.org
-Cc: u-boot-amlogic@groups.io, Ramon Fried <rfried.dev@gmail.com>,
- Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.u-boot-project.org
+Cc: u-boot-amlogic@groups.io, Tom Rini <trini@konsulko.com>,
  Sean Anderson <sanderson@brivo.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: [PATCH] net: designware: Fix MDIO bus getting bound multiple times
-Date: Tue, 29 Sep 2026 14:00:53 -0400
-Message-ID: <20260929180055.3439132-1-sanderson@brivo.com>
+ Christian Hewitt <christianshewitt@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>, Nick Xie <nick@khadas.com>
+Subject: [PATCH v2 0/9] arm64: meson: Add s4 support
+Date: Tue, 29 Sep 2026 14:06:22 -0400
+Message-ID: <20260929180721.3440839-1-sanderson@brivo.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -176,197 +176,146 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-designware_eth_probe may be called multiple times for a given device.
-such as if the first probe (or post_probe) fails for whatever reason.
-When this happens, subsequent probes still try to bind the MDIO bus,
-creating several duplicate copies of the bus (all possibly sharing the
-same of_node). This can cause an infinite loop in dm_mdio_probe_devices
-if we have been probed at least once already:
+This series (along with several patches submitted separately) adds basic
+support for the amlogic s4 SoCs (S805X2/S905W2/S905Y4). My tree with all
+patches on it is at [1].
 
-dm_mdio_probe_devices()
- device_probe(dwmac.mac0)
-  device_probe(dwmac)
-   designware_eth_probe()
-    device_bind_driver_to_node(dwmac.mac1)
-    return -EFOO
- device_probe(dwmac.mac1)
-  ...
+I developed this for a custom board, but I believe a better candidate
+for a defconfig is the publically-available Khadas VIM1S [2]. Khadas
+has kindly sent me a VIM1S so I was able to add some more features and
+fix a few bugs.
 
-Prevent this by binding the MDIO bus in designware_eth_bind instead of
-designware_eth_probe.
+Creating a bootable image currently requires modifying AMLogic's
+FIP [3]. Unfortunately, that software has a proprietary license and I
+have already reviewed it in order to make the necessary modifications.
+Therefore, I am wary about submitting patches to [4] (or binman). If
+anyone would like to do so, I can try writing up a specification for you
+to implement so we can avoid any copyright issues.
 
-Fixes: 5160b4567c71 ("net: designware: add DM_MDIO support")
-Signed-off-by: Sean Anderson <sanderson@brivo.com>
----
+Linux boots but can't read either the eMMC or SD card (mmc0/mmc1):
 
- drivers/net/designware.c    | 35 ++++++++++++++++++-----------------
- drivers/net/designware.h    |  1 +
- drivers/net/dwmac_meson8b.c |  3 +++
- drivers/net/dwmac_s700.c    |  3 +++
- drivers/net/dwmac_socfpga.c |  3 +++
- drivers/net/dwmac_thead.c   |  3 +++
- drivers/net/gmac_rockchip.c |  3 +++
- 7 files changed, 34 insertions(+), 17 deletions(-)
+[    1.537445] Run /init as init process
+[    1.573054] mmc1: new SDHC card at address 0001
+[    1.573722] mmcblk1: mmc1:0001 032GB 29.1 GiB
+[    1.578302]  mmcblk1: p1 p2
+[    1.594234] mmc0: new HS200 MMC card at address 0001
+[    1.595881] mmcblk0: mmc0:0001 AJTD4R 14.6 GiB
+[    1.598333] mmcblk0boot0: mmc0:0001 AJTD4R 4.00 MiB
+[    1.600596] mmcblk0boot1: mmc0:0001 AJTD4R 4.00 MiB
+[    1.602689] mmcblk0rpmb: mmc0:0001 AJTD4R 4.00 MiB, chardev (239:0)
+Starting systemd-udevd version 255.21^
+[    1.681013] mmc2: new UHS-I speed SDR104 SDIO card at address 0001
+[    1.758610] usb 1-1: new high-speed USB device number 2 using xhci-hcd
+[    1.884396] mmc1: card 0001 removed
+[    1.902656] hub 1-1:1.0: USB hub found
+[    1.902829] hub 1-1:1.0: 4 ports detected
+Waiting for /dev/mmcblk0p2 to show up...
+[    2.083595] mmc1: new SDHC card at address 0001
+[    2.084253] mmcblk1: mmc1:0001 032GB 29.1 GiB
+[    2.086749]  mmcblk1: p1 p2
+[    3.102764] mmc1: card 0001 removed
+[    3.247600] mmc1: new SDHC card at address 0001
+[    3.248274] mmcblk1: mmc1:0001 032GB 29.1 GiB
+[    3.250416]  mmcblk1: p1 p2
+[    4.254738] mmc1: card 0001 removed
+[    4.399589] mmc1: new SDHC card at address 0001
+[    4.400230] mmcblk1: mmc1:0001 032GB 29.1 GiB
+[    4.402721]  mmcblk1: p1 p2
+[    5.406737] mmc1: card 0001 removed
+[    6.604775] mmc1: new SDHC card at address 0001
+[    6.605518] mmcblk1: mmc1:0001 032GB 29.1 GiB
+[    6.607752]  mmcblk1: p1 p2
+[    6.774076] mmc1: tried to HW reset card, got error -95
+[    6.774133] mmcblk1: recovery failed!
+[    6.774594] I/O error, dev mmcblk1, sector 61066752 op 0x0:(READ) flags 0x80700 phys_seg 5 prio class 2
+[    6.780963] I/O error, dev mmcblk1, sector 61067016 op 0x0:(READ) flags 0x80700 phys_seg 2 prio class 2
+[    6.781018] mmc1: card 0001 removed
+[    6.927580] mmc1: new SDHC card at address 0001
+[    6.928252] mmcblk1: mmc1:0001 032GB 29.1 GiB
+[    6.930422]  mmcblk1: p1 p2
+[    7.934738] mmc1: card 0001 removed
+[    8.003206] meson-gx-mmc fe08a000.mmc: card claims to support voltages below defined range
+[    8.003576] meson-gx-mmc fe08a000.mmc: no support for card's volts
+[    8.004334] mmc1: error -22 whilst initialising SDIO card
+[    8.032146] mmc1: error -95 whilst initialising SD card
+[    9.163594] mmc1: new SDHC card at address 0001
+[    9.164282] mmcblk1: mmc1:0001 032GB 29.1 GiB
+[    9.166825]  mmcblk1: p1 p2
+[    9.334084] mmc1: tried to HW reset card, got error -95
+[    9.334140] mmcblk1: recovery failed!
+[    9.334605] I/O error, dev mmcblk1, sector 61067016 op 0x0:(READ) flags 0x80700 phys_seg 14 prio class 2
+[    9.340984] I/O error, dev mmcblk1, sector 61067208 op 0x0:(READ) flags 0x80700 phys_seg 5 prio class 2
+[    9.341040] mmc1: card 0001 removed
+[    9.491572] mmc1: new SDHC card at address 0001
+[    9.492239] mmcblk1: mmc1:0001 032GB 29.1 GiB
+[    9.494407]  mmcblk1: p1 p2
+[   10.526746] mmc1: card 0001 removed
 
-diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-index 6ed9c6d538a..256e474a565 100644
---- a/drivers/net/designware.c
-+++ b/drivers/net/designware.c
-@@ -209,15 +209,14 @@ static int dw_mdio_init(const char *name, void *priv)
- }
- 
- #if IS_ENABLED(CONFIG_DM_MDIO)
--static int dw_dm_mdio_init(const char *name, void *priv)
-+int dw_dm_mdio_bind(struct udevice *dev)
- {
--	struct udevice *dev = priv;
-+	struct udevice *mdiodev;
- 	ofnode node;
- 	int ret;
- 
- 	ofnode_for_each_subnode(node, dev_ofnode(dev)) {
- 		const char *subnode_name = ofnode_get_name(node);
--		struct udevice *mdiodev;
- 
- 		if (strcmp(subnode_name, "mdio"))
- 			continue;
-@@ -231,8 +230,10 @@ static int dw_dm_mdio_init(const char *name, void *priv)
- 	}
- 
- 	printf("%s: mdio node is missing, registering legacy mdio bus", __func__);
--
--	return dw_mdio_init(name, priv);
-+	ret = device_bind_driver(dev, "eth_designware_mdio", dev->name, &mdiodev);
-+	if (ret)
-+		debug("%s: not able to create mdio bus\n", __func__);
-+	return ret;
- }
- #endif
- 
-@@ -855,6 +856,9 @@ static int designware_eth_bind(struct udevice *dev)
- 		}
- 	}
- 
-+#if IS_ENABLED(CONFIG_DM_MDIO)
-+	return dw_dm_mdio_bind(dev);
-+#endif
- 	return 0;
- }
- 
-@@ -961,19 +965,16 @@ int designware_eth_probe(struct udevice *dev)
- 		}
- 	} else
- #endif
--	{
--#if IS_ENABLED(CONFIG_DM_MDIO)
--		ret = dw_dm_mdio_init(dev->name, dev);
--#else
--		ret = dw_mdio_init(dev->name, dev);
--#endif
--		if (ret) {
--			err = ret;
--			goto mdio_err;
--		}
--		priv->bus = miiphy_get_dev_by_name(dev->name);
--		priv->dev = dev;
-+
-+	priv->dev = dev;
-+#if !IS_ENABLED(CONFIG_DM_MDIO)
-+	ret = dw_mdio_init(dev->name, dev);
-+	if (ret) {
-+		err = ret;
-+		goto mdio_err;
- 	}
-+	priv->bus = miiphy_get_dev_by_name(dev->name);
-+#endif
- 
- 	ret = dw_phy_init(priv, dev);
- 	debug("%s, ret=%d\n", __func__, ret);
-diff --git a/drivers/net/designware.h b/drivers/net/designware.h
-index cccf9d54e02..3618300f4c5 100644
---- a/drivers/net/designware.h
-+++ b/drivers/net/designware.h
-@@ -249,6 +249,7 @@ struct dw_eth_dev {
- 	struct mii_dev *bus;
- };
- 
-+int dw_dm_mdio_bind(struct udevice *dev);
- int designware_eth_of_to_plat(struct udevice *dev);
- int designware_eth_probe(struct udevice *dev);
- extern const struct eth_ops designware_eth_ops;
-diff --git a/drivers/net/dwmac_meson8b.c b/drivers/net/dwmac_meson8b.c
-index fde4aabbace..cb9de81a819 100644
---- a/drivers/net/dwmac_meson8b.c
-+++ b/drivers/net/dwmac_meson8b.c
-@@ -157,6 +157,9 @@ U_BOOT_DRIVER(dwmac_meson8b) = {
- 	.id		= UCLASS_ETH,
- 	.of_match	= dwmac_meson8b_ids,
- 	.of_to_plat = dwmac_meson8b_of_to_plat,
-+#if IS_ENABLED(CONFIG_DM_MDIO)
-+	.bind		= dw_dm_mdio_bind,
-+#endif
- 	.probe		= dwmac_meson8b_probe,
- 	.ops		= &designware_eth_ops,
- 	.priv_auto	= sizeof(struct dw_eth_dev),
-diff --git a/drivers/net/dwmac_s700.c b/drivers/net/dwmac_s700.c
-index 76daab961c0..d95f2111a5b 100644
---- a/drivers/net/dwmac_s700.c
-+++ b/drivers/net/dwmac_s700.c
-@@ -56,6 +56,9 @@ U_BOOT_DRIVER(dwmac_s700) = {
- 	.id     = UCLASS_ETH,
- 	.of_match = dwmac_s700_ids,
- 	.of_to_plat = dwmac_s700_of_to_plat,
-+#if IS_ENABLED(CONFIG_DM_MDIO)
-+	.bind		= dw_dm_mdio_bind,
-+#endif
- 	.probe  = dwmac_s700_probe,
- 	.ops    = &designware_eth_ops,
- 	.priv_auto	= sizeof(struct dw_eth_dev),
-diff --git a/drivers/net/dwmac_socfpga.c b/drivers/net/dwmac_socfpga.c
-index a55f3e29f9f..64bb2dbfbe3 100644
---- a/drivers/net/dwmac_socfpga.c
-+++ b/drivers/net/dwmac_socfpga.c
-@@ -143,6 +143,9 @@ U_BOOT_DRIVER(dwmac_socfpga) = {
- 	.id		= UCLASS_ETH,
- 	.of_match	= dwmac_socfpga_ids,
- 	.of_to_plat = dwmac_socfpga_of_to_plat,
-+#if IS_ENABLED(CONFIG_DM_MDIO)
-+	.bind		= dw_dm_mdio_bind,
-+#endif
- 	.probe		= dwmac_socfpga_probe,
- 	.ops		= &designware_eth_ops,
- 	.priv_auto	= sizeof(struct dw_eth_dev),
-diff --git a/drivers/net/dwmac_thead.c b/drivers/net/dwmac_thead.c
-index 138d71a6202..5843bed49cb 100644
---- a/drivers/net/dwmac_thead.c
-+++ b/drivers/net/dwmac_thead.c
-@@ -280,6 +280,9 @@ U_BOOT_DRIVER(dwmac_thead) = {
- 	.id		= UCLASS_ETH,
- 	.of_match	= dwmac_thead_match,
- 	.of_to_plat	= dwmac_thead_of_to_plat,
-+#if IS_ENABLED(CONFIG_DM_MDIO)
-+	.bind		= dw_dm_mdio_bind,
-+#endif
- 	.probe		= dwmac_thead_probe,
- 	.ops		= &dwmac_thead_eth_ops,
- 	.priv_auto	= sizeof(struct dw_eth_dev),
-diff --git a/drivers/net/gmac_rockchip.c b/drivers/net/gmac_rockchip.c
-index 2b6080dd9ee..1d21cb2606d 100644
---- a/drivers/net/gmac_rockchip.c
-+++ b/drivers/net/gmac_rockchip.c
-@@ -790,6 +790,9 @@ U_BOOT_DRIVER(eth_gmac_rockchip) = {
- 	.id	= UCLASS_ETH,
- 	.of_match = rockchip_gmac_ids,
- 	.of_to_plat = gmac_rockchip_of_to_plat,
-+#if IS_ENABLED(CONFIG_DM_MDIO)
-+	.bind		= dw_dm_mdio_bind,
-+#endif
- 	.probe	= gmac_rockchip_probe,
- 	.ops	= &gmac_rockchip_eth_ops,
- 	.priv_auto	= sizeof(struct dw_eth_dev),
+Not sure what's going on. Maybe the drive strength needs to be adjusted?
+
+[1] https://github.com/brivolabs/u-boot/tree/meson_s4
+[2] https://www.khadas.com/vim1s
+[3] https://github.com/khadas/u-boot-fip-yocto
+[4] https://github.com/LibreELEC/amlogic-boot-fip
+
+Changes in v2:
+- Add S4 to meson board info
+- Add DEBUG_UART defaults
+- Extend initial padding to 4096 to match what Amlogic does
+- Add ADC clocks
+- Use our own board instead of reusing q200
+- Enable more peripherals (buttons, LEDs, etc.)
+- Use defaults where possible (commands, distro boot, etc.)
+- Set mac address the same way Khadas does
+- Set config/stdout-path so we can find the serial
+
+Sean Anderson (9):
+  arm64: meson: Add s4 SoC support
+  clk: meson: a1: Eliminate separate id parameter
+  clk: meson: a1: Use clk_set_rate from meson_mux_set_rate
+  clk: meson: Use soc-specific naming for common functions
+  clk: meson: Export a1 functions to common file
+  clk: meson: Support fractional fixed-factor clocks
+  clk: meson: Support power-of-two dividers
+  clk: meson: Add s4 clock driver
+  meson: Add Khadas VIM1S support
+
+ .../meson-s4-s905y4-khadas-vim1s-u-boot.dtsi  |   5 +
+ arch/arm/include/asm/arch-meson/boot0.h       |  12 +
+ arch/arm/mach-meson/Kconfig                   |   7 +
+ arch/arm/mach-meson/Makefile                  |   1 +
+ arch/arm/mach-meson/board-info.c              |   2 +
+ arch/arm/mach-meson/board-s4.c                |  50 ++
+ board/amlogic/vim1s/MAINTAINERS               |   7 +
+ board/amlogic/vim1s/Makefile                  |   1 +
+ board/amlogic/vim1s/vim1s.c                   |  26 +
+ configs/khadas-vim1s_defconfig                |  66 ++
+ drivers/clk/meson/Kconfig                     |   8 +
+ drivers/clk/meson/Makefile                    |   2 +
+ drivers/clk/meson/a1.c                        | 495 +--------------
+ drivers/clk/meson/axg-ao.c                    |  12 +-
+ drivers/clk/meson/axg.c                       |  16 +-
+ drivers/clk/meson/clk_meson.c                 | 376 +++++++++++
+ drivers/clk/meson/clk_meson.h                 | 149 +++++
+ drivers/clk/meson/g12a-ao.c                   |  12 +-
+ drivers/clk/meson/g12a.c                      |  24 +-
+ drivers/clk/meson/gxbb.c                      |  24 +-
+ drivers/clk/meson/s4.c                        | 601 ++++++++++++++++++
+ drivers/serial/Kconfig                        |   2 +
+ 22 files changed, 1358 insertions(+), 540 deletions(-)
+ create mode 100644 arch/arm/dts/meson-s4-s905y4-khadas-vim1s-u-boot.dtsi
+ create mode 100644 arch/arm/include/asm/arch-meson/boot0.h
+ create mode 100644 arch/arm/mach-meson/board-s4.c
+ create mode 100644 board/amlogic/vim1s/MAINTAINERS
+ create mode 100644 board/amlogic/vim1s/Makefile
+ create mode 100644 board/amlogic/vim1s/vim1s.c
+ create mode 100644 configs/khadas-vim1s_defconfig
+ create mode 100644 drivers/clk/meson/clk_meson.c
+ create mode 100644 drivers/clk/meson/s4.c
+
 ---
 base-commit: 2b8902913c19eb581fb0d567201c09b8fa46ac74
-branch: dw_mdio_bind
+branch: s4_clk
 
 -- 
 2.53.0
