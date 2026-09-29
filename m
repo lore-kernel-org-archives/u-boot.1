@@ -4,184 +4,185 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF922CA5FA5
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 15:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5D36CA5FA5
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 15:14:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 69F2A80ED5;
-	Tue, 29 Sep 2026 15:00:46 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6007C80E15;
+	Tue, 29 Sep 2026 15:14:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Mq9xBYD9EZBJ; Tue, 29 Sep 2026 15:00:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 56D2B80EBB
+ id 1fBiMJOYZyGp; Tue, 29 Sep 2026 15:13:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4A4D680DF4
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790694045;
-	b=KGV8AU7fCkSSbC9GEuyxtIg0Z+SJ+E1qGDi1ewMqnqp37A13yUGLMgSxD4XidDEyrTgT
-	 npwU5BbJU5NLmtnJMkoGIr1+1cG3O61aXVHkm2LxNdag/LS7r/q0Y+BciL1JkzMM5TM78
-	 RcEIaWME5J8mDU0eJOaPdAd7LGqXKEovK7l3eDMB+SjN2lPO/BwyEDU2kakkX7xP5pOL2
-	 DWQkpWk5M9OA+WFutcmIZARdEEe2Su2QdJgq47h6f1FeY0c5wBur4JH37ZAMaZDXEIt5U
-	 AJdNfMSOHimrRVI19qTkmz1WQIv52oiWqJbFZ0ozm6QRK6ZBh2HtdEkvI3nVGlmwDtQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790694839;
+	b=DfanMmUX5MjAqYw5UAbocL1falsPQA1wC3uUWZy+6AYd0xXxiGem9qqGQTtUAQANSa7U
+	 akkjGkdyy1AfUGFNbebqhaCdBM+n9yVlwfjtEJ1TlkC0/4JF1obPuQi5seSl1EQ05jDGV
+	 mOolPbvSFY0G/nahN/rvCBjwMHAQLmpMs96Sefc3AaGw8j/w+BVTUOiO4vRCizOb059il
+	 zofFTpXp4nktZYb3jWpz/BymdJc+eufPzIWnBgQzRCyOCTtfkrlfjnTD6uRUPnCCSJXFb
+	 ve3thLL+vVpJg8CtLjFxjYyzfky6PikEK28alN6REtq/HsHodcNQHb4WosRVIMhmI/Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790694045;
+	c=relaxed/relaxed; t=1790694839;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=5FDlkbsp1G/RJKi5Ih82jUIMxZAkXLQO/NeefX7rqAg=;
-	b=Az5fpwr4Z8AVi0Kyguai6P8iInzesJU/8qcMwakMZcV01RHg/A4h/VNGcEzAYubu1BzB
-	 qnlSri6PMjR5I5W44bzHhAT+VwedSqRUMRX8/Twf0u+pWXfFs/G/ZJQNYUjZYv0XJ2Uh5
-	 7Jf/S/0x58pGjxiz6sHoSUqdyagEFCXeIy/2R2KiD6mx1ZMa8o+OJ38JhjvNAKVEPrtFo
-	 U7o9QJVrBagX7rnSkbcsotb6KHDP8UgAVaAXqX9Kr+X1+aP2cazvtwdgfnCLltWhgu4GZ
-	 WPNpv4lYMxG5Q+RdoI7y80G+tfMU3yxgaf3fGoKbSDcgDp8/uYu3TKJD0VuHnFGOPuA==
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=B3Pb4+cw1XX13gvKMBdlX6HW9o970CPxg2gO2aIk9gg=;
+	b=pLIYn0tM6k/CQJ9jql8cBVVGNqptqvJisqwIoCd+vvB5ynL+WZ9knpiNTzgXgTzaSo+8
+	 u3kFDuJXuPt9FC6NjYqWhIyDjwsbU75i+M0Edr811Hn/A+2vuYA8mtOYfPvTiKV/S9R7X
+	 OdXVdPAqFuESsMIsvM9v+unaz1tJmJDDfYEaO2t0HKPWcY3yQH52zzV0QMbsKP/ueOsQw
+	 RCvdi6pIPIscChojFXddmV55BN9p+KuZKsvRaIW0PG6ra209irePnVu8VUQIXvwWytR/E
+	 X/ZsfuVCwTJfh7gZyfNxAs1GHIzRjZIT9EZ4Xf57SiLqSj6CG9V/VN2kNrSB06JdOkg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790694045;
-	bh=5FDlkbsp1G/RJKi5Ih82jUIMxZAkXLQO/NeefX7rqAg=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790694839;
+	bh=B3Pb4+cw1XX13gvKMBdlX6HW9o970CPxg2gO2aIk9gg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rZxcD0KEhExeil1+iqGbSm9k/GoZn3j35GgdpKBvhy5lFJYslXcKDki33y3LnX03W
-	 CU/IHkSIe6nUhTC7TtRFrvvOnPVCIDEzGEJFEbYPGw74czXgIHrMxoevuMoGMnTg/S
-	 ZdiMQG+yILNr7ghkiTRyoI0WORjFK8ABoLxPwu7W1WdkOG8uX8QWuUffk83BkgnXnT
-	 tXEiy1OEP7EGGGKUh10fBEDKhk9Jw4l0dzBirTLS9uPUa+MVzUZVNSykR5T1jGIjZh
-	 Ha5M88vrNSiUKvtNXpTX9xtnicFyueOhkKQXwac3n7oHtW34r+QqY85dQ6pd47OEa5
-	 4FfRa8DiMjF7A==
+	b=NQgvUttmtvpAV2dRXz9EtNtj6OHQhzsZvGIPn7E57WC3qpPPfz00T7KMzzy7CUSUK
+	 fNTCILB/kc8sILq8J7wBsW+LqTs8LXittp1x/9kyPus1mxS/MYn9wGh+PdEJMxJ+Je
+	 EuvisrRqeVZtzzErJtYDc+igisdAZoNNCMEzkFLsp12frnmqeIH8wy7jdqdywvjbNp
+	 782YOOVpihpVdGfi0ZkgtI8LUmNhl3KKtIVbKbO7P2YnntcCvGK9bO7f2Ag4YFR1+R
+	 cnlwb8ahnCsByN6s1h7BDQcQ6wOWlybddsQnkO9tIJrT5+u5hrnieLRuGP3Tfs/8AB
+	 HsGrYwZPoN+lA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 56D2B80EBB;
-	Tue, 29 Sep 2026 15:00:45 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id D81B532F
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:00:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4A4D680DF4;
+	Tue, 29 Sep 2026 15:13:59 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id EE31932A
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:13:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BEB7B4032B
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:00:43 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D47A94032B
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:13:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RqM8sAhL6-uQ for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 15:00:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 99B014031B
+ id ViznYb_M4DLg for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 15:13:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 6671140304
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790694042;
- b=KcI39WnG9fnvLAg7+uZEbObKbaKi/nYsSaiHkmgBGDGRbzz1Z++j+w+pcKASvhQLk8jc
- 34ZsWEmukvBSNFRNwTa7Y6cM0x5je2V/JGK79eCAAYqsLacNt05C+8f4rDgX2gXFc1VAJ
- ipssHlt2krE2uu3UN72ghFlm6sTXp1q6bHrCz5iTh014YGZJuofy+/p/3crVGU9eODTvC
- 1izPR/p4JhppDV6OdzB2JHarSfaCfUMNOv4HIOKUjeZiRFZyCX4J9QkQgHoTGoVq+8Xsv
- QqYp+Ccchkm2jsqbfFL2MzKRDuHByCvRdLMLTpsXEhk/GEBIhdLcT/rDogX3B5rQFQw==
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::2a"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790694837;
+ b=g4g3UygIk4TGmrnpgdGY8HyB1Ie9msFbFPgXqalH33SFiw95Gp/umZ6SfbmV1l+JlulJ
+ 8dDw+5q8pCkvruCr80qK7Bc6cQWUqvrN1B8pXULoXOSJEMMoYfqVR9vK13ZvRu4XJEWgW
+ +OMfjXRLpFqCOISRLDsU1txjCVCVoA4GKGrIFK/QF4IiJldgjB/PNB66rINeu5xUOhrJU
+ RJITLN/DYR0d0u5KgBsth3rosMQu7NtT1Xdu/WyOrdg8p+HUH27ObaRRhmkYX4r5EKlrP
+ 4AwLcKc3ySL51L484QesqX9PKlznk1G8crQm2jAsgAPlGkfuX16wdJ7ebWMU/fCEJ6g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790694042;
+ c=relaxed/relaxed; t=1790694837;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:From:To:
- Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
- X-Developer-Signature:X-Developer-Key;
- bh=5FDlkbsp1G/RJKi5Ih82jUIMxZAkXLQO/NeefX7rqAg=;
- b=nZQaKB11n0TnZVu9Ptf9AB+3AfM9PCjnz85WR8FxAIPkE02ufgGzM8RdkFkpjx7Z49PB
- IQWDt5SY+PFAsWm0mEdr9RaoyrVDyv+RJjzP9bEdSmfv9KI02W8RqlxwUcTrdTDZTBYGo
- leVa5AbhAu9aUE/0NT5Ztth8TZsCK50xlNHmBYsXfHDqqMY9+8taBHWLKrRT2FYORw8fD
- Qw4EVtLBWVUFmN9Gqlji7pZr7HaVju9HuOkv6QAWQYxFXbXY6gdJ6FUY7cFDPeekAQnNB
- 3w0GnoRLiWk0l/JZwU8t0H/NjGd9YPz926ZHkmGkiVrCetZiPy10hLI+m/oCmR9xsxA==
+ Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+ Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=B3Pb4+cw1XX13gvKMBdlX6HW9o970CPxg2gO2aIk9gg=;
+ b=DqB9ElFl8PXE5rsvCgGABQW0+M5KH9vNMxORBCqvsxBt7T7vkm2xZnDaUO7JxTiKEzf/
+ JlI5yM0nASG1DEFDcua7jJaODTEJ/FO0pXIMSOZ3qXB+Gg57OvkI/KnLTakwO1Bh1Kg0n
+ cnnuddBb8iKa35Vm/y9IlJsmV4t54oaA8oTi/wMi2yQPTXcDunDJAOsXiAekWvMDi6nJ6
+ kZWuNM9XO1gaECOWfbfSjSwsX5PpleMtRBOZ9+XzaB+pBpqa+3Z4mNqTcG6y96639uPJV
+ 4T00N1WNq2isZhkQs6alXgTqxF9HCYRDVAefxKUK/Pvia6LufBttjF5Fvmc3Yw68THA==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=itcLymoO; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
+ header.s=google header.b="J1ctPZH/"; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::2a"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::10; helo=mail-wm2-x10.google.com;
- envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
+ client-ip=2607:f8b0:4864:31::2a; helo=mail-oo2-x2a.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=itcLymoO
-Received: from mail-wm2-x10.google.com (mail-wm2-x10.google.com
- [IPv6:2a00:1450:4864:31::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 99B014031B
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:00:40 +0000 (UTC)
-Received: by mail-wm2-x10.google.com with SMTP id
- 5b1f17b1804b1-49ff9621c5dso23276705e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:00:40 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=J1ctPZH/
+Received: from mail-oo2-x2a.google.com (mail-oo2-x2a.google.com
+ [IPv6:2607:f8b0:4864:31::2a])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6671140304
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:13:54 +0000 (UTC)
+Received: by mail-oo2-x2a.google.com with SMTP id
+ 46e09a7af769-81eab67b951so552021a34.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:13:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790694038; x=1791298838;
+ d=baylibre.com; s=google; t=1790694833; x=1791299633;
  darn=lists.u-boot-project.org; 
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=5FDlkbsp1G/RJKi5Ih82jUIMxZAkXLQO/NeefX7rqAg=;
- b=itcLymoOOPLITM43YIQsSxdR2lmrHkON6PesiX3OZRYNgx422yPhlNtjtVkHpyMT9v
- kWv/cbBJHYXMUrrp/YWyYPDYkJwFSE89Z9iJZMAUQxUja0Tsb5RrAymjjwCztZ2/gJMH
- d0SGKfJIG1S3OmrrACpBnrUFKCoVG5gVPL86QCL32YpscOzYqHzkzQmo1yqPphyy0tg9
- +Jf7mEmFR9+Tig9+WzYgmSQFCgTL2ZMQ6j69L5s0/SxRsr6twpJ15ihqzDmY6M19fiT7
- A5qtaELidq5PrtNUNORCtHMjzYDz4jeeuP1izHvVWfIk2kmxkD5pQ2S4nhQqCuiiteiO
- aKcA==
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=B3Pb4+cw1XX13gvKMBdlX6HW9o970CPxg2gO2aIk9gg=;
+ b=J1ctPZH/+3p8dgm5D17qS0X4hAzjqutokBYmX2rHBAJ9cFSb24j7/ZGBzejgrU2oiq
+ qCgoT6Buur3FcMbuCweAIS3hko6OLBT0tlF1ijsPMnfD+x4NvmJ9wQa8a4tHljsoRqVS
+ RxxwxwheFRttxpQo4vAzUnrn4YYjj7M1kVno/Knvbi4zvMHV67hJQoygtPoJmw7nYyHB
+ 0ObEmGYWTpc1DaqVrM3lfq+6lwMqpD2ujp5iL80Vi4QyVPtJjS5wxbMr1jaM2/QFupyS
+ Pb2c+otRuga3O46Znb8TSfP6O/DWVf1mBp/QIgPT4B80/Fc3jwYLSvZW/ReppGPd4OZR
+ 1gBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790694038; x=1791298838;
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=5FDlkbsp1G/RJKi5Ih82jUIMxZAkXLQO/NeefX7rqAg=;
- b=ADDBZEzPBI3eTUO8IUca8/+rW15sWKLBYksQFor4AY5ydeduzr5WHI1WUiRtRZhQWG
- h17kT9HqwraMJ2Pqao//WByT62k8+RIiwJ12yz+eD9BahZW7PmbS57iu7jX4IRol7+aC
- BSIHDloDT3hct9+dQMI6Gj0pF2FP7qbPYSkeGtoabNapZfYfplgZtSSMH5v8FAuR/t6T
- iXQBnPdUvLZAHWpXvBoDOuXRmrPSpgoUPqAyYeZxYvQXmW1Mvd/QDxBAd6VPLZniHhZu
- 58XcshrS0iEHydCe3zK8A9cvf/qlZ/LqnXMc3Cef+ioqlgKKK5a2PodqBBqgJkvsEvGR
- Kwyg==
+ d=1e100.net; s=20260707; t=1790694833; x=1791299633;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=B3Pb4+cw1XX13gvKMBdlX6HW9o970CPxg2gO2aIk9gg=;
+ b=xSSaKg9MVbucU6djJCA2cyGsU9S4GfBqW9Vh/XSPPDJaJw5DGkeuQP44BK4CyqpJfr
+ TkPddy34pjZcXGsdt03jOMmVzQ28n/BJKYMO9aKoWh0gBxpc6nZ5VuleWckZbL7ZOqwV
+ 9qXpe/U1bXiE8vuVDEht8q6sY5CbFS2Z5INQk1wM4rDR1j0xfLydBumNGshOYP0bFiX8
+ UjCkOJDieQ/dGJN1LVt0p2zX9vrtmSsX5YwWf7vWu0yOp+qw22yKD4cDrdWzxrhuF4h9
+ 99HDGjFpumsuy7DeFqRKUjeWeguJHnGDnr6CUDVy2rvQXIYpLNq63pJGbxc1qjACpezj
+ iUJQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvByDgo9RHJadypv/hlL6QwaCpAkGalzTKFlHBmOJsKBK3CJuVgYjdAeSY00Gm7+D43H6VZ77XU8=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mHcnM9Nxf/8ZqA32cI0AZnH/23JQsOpO+TzB71Ff86laLVy0co
- jt6Dftik9/MQp01TislwEdOWBVeOBpw01k5plBmJKhCtW4NKYso67TKiV2BnmySIj4M=
-X-Gm-Gg: AYBFou2QxAwM2Fwz+ZM+2hLVEBMRepEoErelvu63hJZUdGTWNdG9rbZPSx9D+tPYZsu
- wyfWIj9hanJUu79jaad4yylx7iWKz0+ADmZ8jAZXkPCY2qrJ/8qnmNYkQmC/nDQMpIiGAUF110B
- UmRZ3B+ewDD8KLY/zeMwcWd8rY0KgK4BhoFwoQ2PHiXDJSICSPZJ6lO7VmMHbQUJBLx3EQwW3zM
- E+wC9ojo+TVTuCS76qh3qjTmct1+csFxklEPRZdv0abJIr1AYkuQDn6QLl12HXe7CnezBm7B6wH
- CCeRoz4Eak2b7A11TPdBFV6JeriREj7/iy4J6l1b4A8LMFBoTUUU2qpS654oZSGMhb9X9x69M+c
- DKPx3tTfjOCiFs0SmT4TRKtCue4Z9UFr7v8T/aZoXkRdVnO8liiW6KKq5tMnCb/eBDx8+JtR2Hl
- ESrnDCoecj6wXBfvuH22cTU8qNPEywh9eDW4i0U3SjESg2I3gyMZMVCymaksRhHuoGP8C3rxxjL
- VAg6AkJLIm3P8YPsJvV7Qf596iFbIw3pwuiUJqTYQ04TKamtJFJe2ogECc+vGM6c7Vneup45z+e
- A6J68A/4ylpxzGAEE3wJq4DQUqlVbk+amQWuwRNre4rbg+gx3+txySo=
-X-Received: by 2002:a05:600c:34c3:b0:49c:e27c:6b10 with SMTP id
- 5b1f17b1804b1-49fe66abcebmr286253375e9.3.1790694038346; 
- Tue, 29 Sep 2026 08:00:38 -0700 (PDT)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
- [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
+ AKwUvByWWNYIFFtcLsUJf94Pm0mwMomx5vEo/6SvorCkbOPu4M+CqQoXznGQDqlDNe0N3TYTeRyVghs=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nZWhs9UV1WNyKmKULkwlxgtGEdHC4nwxuS5HPS03qPEpyGXmKj
+ iQdBxmGrdln/1YsYR1Bspx2K2Eexzy690Sok7zfNEaAEc4GuZQ/jiJ1G0KxHjWBGzpc=
+X-Gm-Gg: AYBFou3O5AEixti7rhgN3GWpd2af/FgCCyu94z70PYvQBjN+O4RIY203DaBX7aJjDHU
+ 2vicVJ7EwF8cMI0X4biHHnRfp6ufu0ioS5OSZimcR+wnkDU9nn/Ck4x1OmMp1Yq4425L152+Evk
+ WbiSHaAaSA7J/Uour0uSlerxhDwZ8Jxj8ZuJKHSaJ2OAWtqw7MIuibKnUiBmYIJAujZJcUe2piD
+ i8q7oLiF6C8ifQO3r+2br4upUfdTyCuwFUmWrv9S9rpnKYgZD9S72CGXkHhogteQCMJLGqShGYg
+ eP33Ero7GVEJv1XI3rSN1Z/j3M4/GVx06rWGn2TIeyQwKOwK3mi3HYZTDCvqfbhoicDzjxd6XsL
+ C20M4tz2TiaEBCp+k+dv3Q0ZhxfPudoB5/ayPIifZ+7MUbkFVk8wvr+udy/AVMpA7qDgoDJYBik
+ i8UCERL42cETswiNJ76fxWP9YGZWUkjbZWXwNMwdC5Kht4yMvINsr9CeRwH0jSDYx3OXrTNUlA8
+ azz1LvxZC4HwxOf0NeE2imNXa9HqC9dscgMpeixwXMOiclHRrI5eoTXOJI=
+X-Received: by 2002:a05:6820:1c8d:b0:6d8:6b04:cf39 with SMTP id
+ 006d021491bc7-6d86b04d181mr6529300eaf.51.1790694833352; 
+ Tue, 29 Sep 2026 08:13:53 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:9b16:2a1a:ef3f:3700?
+ ([2600:8803:e7e4:500:9b16:2a1a:ef3f:3700])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a00cf868b5sm119351065e9.1.2026.09.29.08.00.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Sep 2026 08:00:37 -0700 (PDT)
+ 006d021491bc7-6dc4483b07asm116255eaf.3.2026.09.29.08.13.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 29 Sep 2026 08:13:52 -0700 (PDT)
+Message-ID: <a27b71eb-c80d-489d-b1c9-55d73dd0f658@baylibre.com>
+Date: Tue, 29 Sep 2026 10:13:51 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] drivers: spmi: add new driver for MediaTek's SPMI PMIF
+To: Arnaud Ferraris <arnaud.ferraris@collabora.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Julien Stephan <jstephan@baylibre.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Michael Srba <Michael.Srba@seznam.cz>, Johan Jonker <jbx6244@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ =?UTF-8?Q?Krzysztof_Drobi=C5=84ski?= <krzysztof@kd-solutions.pl>,
+ Joy Zou <joy.zou@nxp.com>, Vincent Jardin <vjardin@free.fr>,
+ Guodong Xu <guodong@riscstar.com>
+References: <20260924-mt8196-spmi-v1-0-dd2263403691@collabora.com>
+ <20260924-mt8196-spmi-v1-1-dd2263403691@collabora.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260924-mt8196-spmi-v1-1-dd2263403691@collabora.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v3] video: panel-startek-kd070fhfid078: new driver
-From: Julien Stephan <jstephan@baylibre.com>
-To: David Lechner <dlechner@baylibre.com>
-Cc: Tom Rini <trini@konsulko.com>, 
- Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org
-In-Reply-To: <20260918-mtk-video-panel-startek-078-v3-1-631a63ce255c@baylibre.com>
-References: <20260918-mtk-video-panel-startek-078-v3-1-631a63ce255c@baylibre.com>
-Date: Tue, 29 Sep 2026 17:02:50 +0200
-Message-Id: <179069417031.1887049.8619892190348130386.b4-review@b4>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openssh-sha256; t=1790694174; l=8146;
- i=jstephan@baylibre.com; h=from:subject:message-id;
- bh=rWi51hhFfetb4zVZEg1lebEi/8pHfQEPWJ1U6UbZ2m4=;
- b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgphAWFBQbyQxHwqbCvwEwIl9NQxnNa
- Ewt+3w/AUXP10QAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QB1pqY5mYTNM/2asUk7ksqlgU7Mz+eSN9kMKqPMtKYLOF3DZ0cxVDjeMDAW4/MVfYS60i4vcfYX
- SOTPxqUO1OAM=
-X-Developer-Key: i=jstephan@baylibre.com; a=openssh;
- fpr=SHA256:PPc8djUi3lnQXuiRHH4CZ/icbEYOsksrEsOV7pDEmZg
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -195,216 +196,263 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-> Add a driver for the Startek KD070FHFID078 7" DSI panel. This panel is
-> used on the MediaTek Genio 360 EVK board.
->
-> The display mode and DSI mode flags follow the upstream Linux driver
-> panel-himax-hx8279.c, which is what the "himax,hx8279" fallback
-> compatible in the device tree binds to.
->
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index c1e09c7d087..0af0957e5b6 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1671,6 +1671,12 @@ R:	GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
->  S:	Maintained
->  F:	drivers/video/panel-startek-kd070fhfid015.c
->
-> +STARTEK KD070FHFID078 PANEL
-
-open question: what about merging this with KD070FHFID015 just above?
-
-> +M:	David Lechner <dlechner@baylibre.com>
-> +R:	GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-> +S:	Maintained
-> +F:	drivers/video/panel-startek-kd070fhfid078.c
-> +
->  TARGET_BCMNS3
->  M:	Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
->  S:	Maintained
-> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-> index cfa3cccb911..500a8a54192 100644
-> --- a/drivers/video/Kconfig
-> +++ b/drivers/video/Kconfig
-> @@ -330,6 +330,16 @@ config PANEL_STARTEK_KD070FHFID015
->  	  1200 x 1920 pixels. It provides a MIPI DSI interface to the host, a
->  	  built-in LED backlight and touch controller.
->
-> +config PANEL_STARTEK_KD070FHFID078
-> +	bool "STARTEK KD070FHFID078 panel"
-> +	depends on PANEL && BACKLIGHT && DM_GPIO && DM_REGULATOR
-> +	select VIDEO_MIPI_DSI
+On 9/24/26 11:02 AM, Arnaud Ferraris wrote:
+> This driver (ported from the Linux kernel) implements 1-byte wide read
+> and write operations for the SPMI-PMIF bus found on MediaTek SoCs. It
+> currently supports MT8195 and MT8196.
+> 
+> Signed-off-by: Arnaud Ferraris <arnaud.ferraris@collabora.com>
+> ---
+>  drivers/spmi/Kconfig         |   7 +
+>  drivers/spmi/Makefile        |   1 +
+>  drivers/spmi/spmi-mtk-pmif.c | 462 +++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 470 insertions(+)
+> 
+> diff --git a/drivers/spmi/Kconfig b/drivers/spmi/Kconfig
+> index f8972371150..cab82e83c24 100644
+> --- a/drivers/spmi/Kconfig
+> +++ b/drivers/spmi/Kconfig
+> @@ -27,6 +27,13 @@ config SPL_SPMI_MSM
+>  	  Support SPMI bus implementation found on Qualcomm Snapdragon SoCs
+>  	  in SPL.
+>  
+> +config SPMI_MTK_PMIF
+> +	bool "Support MediaTek SPMI-PMIF bus"
+> +	depends on SPMI
 > +	help
-> +	  Say Y here if you want to enable support for STARTEK KD070FHFID078
-> +	  DSI panel. The panel is a 7-inch TFT LCD display with a resolution of
-> +	  1200 x 1920 pixels. It provides a MIPI DSI interface to the host, a
-> +	  built-in LED backlight and touch controller.
+> +	  Support SPMI bus implementation found on MediaTek SoCs. This
+> +	  driver currently support the MT8195 and MT8196 SoCs.
 > +
->  config VIDEO_BOCHS
->  	bool "Enable Bochs video emulation for QEMU"
->  	help
-> diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-> index 16e9ee2c11c..a4b28f3b3d8 100644
-> --- a/drivers/video/Makefile
-> +++ b/drivers/video/Makefile
-> @@ -23,6 +23,7 @@ obj-$(CONFIG_$(PHASE_)VIDEO) += video_bmp.o
->  obj-$(CONFIG_$(PHASE_)PANEL) += panel-uclass.o
->  obj-$(CONFIG_PANEL_HX8238D) += hx8238d.o
->  obj-$(CONFIG_PANEL_STARTEK_KD070FHFID015) += panel-startek-kd070fhfid015.o
-> +obj-$(CONFIG_PANEL_STARTEK_KD070FHFID078) += panel-startek-kd070fhfid078.o
->  obj-$(CONFIG_$(PHASE_)SIMPLE_PANEL) += simple_panel.o
->
->  obj-$(CONFIG_VIDEO_LOGO) += u_boot_logo.bmp.o
-> diff --git a/drivers/video/panel-startek-kd070fhfid078.c b/drivers/video/panel-startek-kd070fhfid078.c
+>  config SPMI_SANDBOX
+>  	bool "Support for Sandbox SPMI bus"
+>  	depends on SPMI
+> diff --git a/drivers/spmi/Makefile b/drivers/spmi/Makefile
+> index 8cb93c820e0..016a8e6b734 100644
+> --- a/drivers/spmi/Makefile
+> +++ b/drivers/spmi/Makefile
+> @@ -4,4 +4,5 @@
+>  
+>  obj-$(CONFIG_$(PHASE_)SPMI)  += spmi-uclass.o
+>  obj-$(CONFIG_$(PHASE_)SPMI_MSM) += spmi-msm.o
+> +obj-$(CONFIG_SPMI_MTK_PMIF) += spmi-mtk-pmif.o
+>  obj-$(CONFIG_SPMI_SANDBOX) += spmi-sandbox.o
+> diff --git a/drivers/spmi/spmi-mtk-pmif.c b/drivers/spmi/spmi-mtk-pmif.c
 > new file mode 100644
-> index 00000000000..b86d5197ab4
+> index 00000000000..0bc8309b447
 > --- /dev/null
-> +++ b/drivers/video/panel-startek-kd070fhfid078.c
-> @@ -0,0 +1,276 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
+> +++ b/drivers/spmi/spmi-mtk-pmif.c
+> @@ -0,0 +1,462 @@
+> +// SPDX-License-Identifier: GPL-2.0
+
+GPL-2.0 is deprecated. Prefer GPL-2.0-only or GPL-2.0-or-later.
+
 > +/*
-> + * Copyright (C) 2025 MediaTek Inc.
-> + * Copyright (C) 2026 BayLibre, SAS
-> + *
-> + * Authors:
-> + * - Guillaume La Roque <glaroque@baylibre.com>
-> + * - Jitao Shi <jitao.shi@mediatek.com>
-> + * - David Lechner <dlechner@baylibre.com>
+> + * Copyright (c) 2021 MediaTek Inc.
+> + * Copyright (c) 2025-2026 Collabora Ltd
+> + * Authors: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+> + *          Arnaud Ferraris <arnaud.ferraris@collabora.com>
 > + */
 > +
-> +#include <asm-generic/gpio.h>
-> +#include <backlight.h>
+> +#include <clk.h>
 > +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <errno.h>
-
-nit: <errno.h> is unused. You can drop it.
-
-> +#include <linux/delay.h>
+> +#include <malloc.h>
+> +#include <regmap.h>
+> +#include <syscon.h>
+> +#include <asm/io.h>
+> +#include <asm/processor.h>
+> +#include <linux/bitops.h>
 > +#include <linux/err.h>
-> +#include <mipi_dsi.h>
-> +#include <panel.h>
-> +#include <power/regulator.h>
-> +
-> +struct stk078_panel {
-> +	struct gpio_desc *enable_gpio;
-> +	struct gpio_desc *reset_gpio;
-> +	struct mipi_dsi_device *dsi;
-> +	struct udevice *iovcc;
-> +	struct udevice *vdd;
-> +	struct udevice *backlight;
-> +};
-> +
-> +static const struct drm_display_mode default_mode = {
-> +	.clock = 156458,
-> +	.hdisplay = 1200,
-> +	.hsync_start = 1200 + 50,
-> +	.hsync_end = 1200 + 50 + 24,
-> +	.htotal = 1200 + 50 + 24 + 66,
-> +	.vdisplay = 1920,
-> +	.vsync_start = 1920 + 14,
-> +	.vsync_end = 1920 + 14 + 2,
-> +	.vtotal = 1920 + 14 + 2 + 10,
-> +};
-> +
-> +static int stk078_panel_init(struct stk078_panel *stk)
+> +#include <linux/iopoll.h>
+> +#include <linux/time.h>
+> +#include <dm/device_compat.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/devres.h>
+> +#include <inttypes.h>
+> +#include <spmi/spmi.h>
+
+Are we actually using all of these headers?
+
+
+> +static int pmif_spmi_read(struct udevice *dev, int sid, int pid, int reg)
 > +{
-> +	struct mipi_dsi_device *dsi = stk->dsi;
+> +	struct pmif_bus *pbus = dev_get_priv(dev);
+> +	struct pmif *arb = pbus->arb;
+> +	struct ch_reg *inf_reg;
+> +	int ret, data;
+> +	u32 cmd;
+> +
+> +	/* Check for argument validation. */
+> +	if (sid & ~0xf) {
+> +		dev_err(dev, "exceed the max slv id\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	/* Wait for Software Interface FSM state to be IDLE. */
+> +	inf_reg = &arb->chan;
+> +	ret = readl_poll_sleep_timeout(pbus->base + arb->data->regs[inf_reg->ch_sta],
+> +				       data, GET_SWINF(data) == SWINF_IDLE,
+> +				       PMIF_DELAY_US, PMIF_TIMEOUT_US);
+> +	if (ret < 0) {
+> +		/* set channel ready if the data has transferred */
+> +		if (pmif_is_fsm_vldclr(arb, pbus))
+> +			pmif_writel(arb, pbus, 1, inf_reg->ch_rdy);
+> +		dev_err(dev, "failed to wait for SWINF_IDLE\n");
+> +		return ret;
+> +	}
+> +
+> +	/* Send the command. */
+> +	cmd = (PMIF_CMD_EXT_REG_LONG << 30) | (sid << 24) | reg;
+> +	pmif_writel(arb, pbus, cmd, inf_reg->ch_send);
+> +
+> +	/*
+> +	 * Wait for Software Interface FSM state to be WFVLDCLR,
+> +	 * read the data and clear the valid flag.
+> +	 */
+> +	ret = readl_poll_sleep_timeout(pbus->base + arb->data->regs[inf_reg->ch_sta],
+> +				       data, GET_SWINF(data) == SWINF_WFVLDCLR,
+> +				       PMIF_DELAY_US, PMIF_TIMEOUT_US);
+> +	if (ret < 0) {
+> +		dev_err(dev, "failed to wait for SWINF_WFVLDCLR\n");
+> +		return ret;
+> +	}
+> +
+> +	data = (int)pmif_readl(arb, pbus, inf_reg->rdata);
+
+This cast looks potentially dangerous. If bit 31 is set, it will be treated
+as an error. Should we be doing && 0xff instead since we are dealing with
+only 8-bit values here.
+
+> +	pmif_writel(arb, pbus, 1, inf_reg->ch_rdy);
+> +
+> +	return data;
+> +}
+> +
+
+...
+
+> +static int mtk_spmi_probe(struct udevice *dev)
+> +{
+> +	struct pmif_bus *pbus = dev_get_priv(dev);
 > +	int ret;
 > +
-> +	mipi_dsi_generic_write_seq(dsi, 0xB0, 0x05);
-> +	mipi_dsi_generic_write_seq(dsi, 0xB3, 0x52);
-> +	mipi_dsi_generic_write_seq(dsi, 0xB8, 0x7F);
-> +	mipi_dsi_generic_write_seq(dsi, 0xBC, 0x20);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD6, 0x7F);
-> +	mipi_dsi_generic_write_seq(dsi, 0xB0, 0x01);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC0, 0x0D);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC1, 0x0D);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC2, 0x06);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC3, 0x06);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC4, 0x08);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC5, 0x08);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC6, 0x0A);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC7, 0x0A);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC8, 0x0C);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC9, 0x0C);
-> +	mipi_dsi_generic_write_seq(dsi, 0xCA, 0x00);
-> +	mipi_dsi_generic_write_seq(dsi, 0xCB, 0x00);
-> +	mipi_dsi_generic_write_seq(dsi, 0xCC, 0x0E);
-> +	mipi_dsi_generic_write_seq(dsi, 0xCD, 0x0E);
-> +	mipi_dsi_generic_write_seq(dsi, 0xCE, 0x01);
-> +	mipi_dsi_generic_write_seq(dsi, 0xCF, 0x01);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD0, 0x04);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD1, 0x04);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD2, 0x00);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD3, 0x00);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD4, 0x0D);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD5, 0x0D);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD6, 0x05);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD7, 0x05);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD8, 0x07);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD9, 0x07);
-> +	mipi_dsi_generic_write_seq(dsi, 0xDA, 0x09);
-> +	mipi_dsi_generic_write_seq(dsi, 0xDB, 0x09);
-> +	mipi_dsi_generic_write_seq(dsi, 0xDC, 0x0B);
-> +	mipi_dsi_generic_write_seq(dsi, 0xDD, 0x0B);
-> +	mipi_dsi_generic_write_seq(dsi, 0xDE, 0x00);
-> +	mipi_dsi_generic_write_seq(dsi, 0xDF, 0x00);
-> +	mipi_dsi_generic_write_seq(dsi, 0xE0, 0x0E);
-> +	mipi_dsi_generic_write_seq(dsi, 0xE1, 0x0E);
-> +	mipi_dsi_generic_write_seq(dsi, 0xE2, 0x01);
-> +	mipi_dsi_generic_write_seq(dsi, 0xE3, 0x01);
-> +	mipi_dsi_generic_write_seq(dsi, 0xE4, 0x03);
-> +	mipi_dsi_generic_write_seq(dsi, 0xE5, 0x03);
-> +	mipi_dsi_generic_write_seq(dsi, 0xE6, 0x00);
-> +	mipi_dsi_generic_write_seq(dsi, 0xE7, 0x00);
-> +	mipi_dsi_generic_write_seq(dsi, 0xB0, 0x03);
-> +	mipi_dsi_generic_write_seq(dsi, 0xBA, 0xF0);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC8, 0x07);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC9, 0x03);
-> +	mipi_dsi_generic_write_seq(dsi, 0xCA, 0x41);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD2, 0x01);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD3, 0x05);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD4, 0x05);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD5, 0x8A);
-> +	mipi_dsi_generic_write_seq(dsi, 0xE4, 0xC0);
-> +	mipi_dsi_generic_write_seq(dsi, 0xE5, 0x00);
-> +	mipi_dsi_generic_write_seq(dsi, 0xB0, 0x00);
-> +	mipi_dsi_generic_write_seq(dsi, 0xBF, 0x1F);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC0, 0x12);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC2, 0x1E);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC4, 0x1E);
-> +	mipi_dsi_generic_write_seq(dsi, 0xB0, 0x06);
-> +	mipi_dsi_generic_write_seq(dsi, 0xB8, 0xA5);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC0, 0xA5);
-> +	mipi_dsi_generic_write_seq(dsi, 0xBC, 0x11);
-> +	mipi_dsi_generic_write_seq(dsi, 0xD5, 0x48);
-> +	mipi_dsi_generic_write_seq(dsi, 0xB8, 0x00);
-> +	mipi_dsi_generic_write_seq(dsi, 0xC0, 0x00);
+> +	if (!pbus) {
+> +		dev_info(dev, "Not probing a non-bus spmi device\n");
+> +		return 0;
+> +	}
 > +
+> +	pbus->base = devfdt_remap_addr_name(dev, "pmif");
 
-Looking at panel-himax-hx8279.c in the kernel, it looks like all of
-these commands already have named defines. Can you use them?
+This returns NULL on error, not negative error code.
 
-> +	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
-> +	if (ret < 0)
+> +	if (IS_ERR(pbus->base))
+> +		return PTR_ERR(pbus->base);
+> +
+> +	pbus->spmimst_base = devfdt_remap_addr_name(dev, "spmimst");
+> +	if (IS_ERR(pbus->spmimst_base))
+> +		return PTR_ERR(pbus->spmimst_base);
+> +
+> +	ret = clk_get_bulk(dev, &pbus->clks);
+> +	if (ret < 0) {
+> +		dev_err(dev, "Failed to get clocks\n");
 > +		return ret;
+> +	}
 > +
-> +	mdelay(120);
-
-Nit: Linux hx8279_prepare() waits 130 ms after exit_sleep_mode
-anyreason to have 120 here?
-
-> +
-> +	ret = mipi_dsi_dcs_set_display_on(dsi);
-> +	if (ret < 0)
+> +	ret = clk_enable_bulk(&pbus->clks);
+> +	if (ret) {
+> +		dev_err(dev, "Failed to enable clocks\n");
 > +		return ret;
+> +	}
 > +
-> +	mdelay(20);
+> +	return 0;
+> +}
+> +
+> +static const struct udevice_id mtk_spmi_match_table[] = {
+> +	{
+> +		.compatible = "mediatek,mt8195-spmi",
+> +		.data = (unsigned long)&mt8195_pmif_arb,
+> +	}, {
+> +		.compatible = "mediatek,mt8196-spmi",
+> +		.data = (unsigned long)&mt8196_pmif_arb,
+> +	}, {
+> +		/* sentinel */
+> +	},
+> +};
+> +
+> +static int mtk_spmi_bind(struct udevice *dev)
+> +{
+> +	struct pmif_data *drv_data = (struct pmif_data *)dev_get_driver_data(dev);
+> +	ofnode child, node = dev_ofnode(dev);
+> +	int ret = 0;
+> +
+> +	if (!drv_data) {
+> +		dev_err(dev, "Cannot get drv_data\n");
+> +		return -EINVAL;
+> +	}
+> +
 
-any reason to wait again 20 ms? Looks like the kernel does not
+This could use some comments to explain how it is supposed to work. It looks
+like we are using the same driver to also bind child nodes? That seems a bit
+strange/confusing. And the MT8195 parent node (only node) is named "spmi",
+so this looks broken since it would match that and try to use the Soc node
+as the arbitrator. I would probably go as far as making 3 different driver
+structs each with their own bind function. One for the MT8196 arbitrator
+that registers new devices for each spmi instance. One for the MT8196 child
+devices and one for MT8195 which is just a single node (no arbitrator).
 
--- 
-Julien Stephan <jstephan@baylibre.com>
+> +	if (ofnode_name_eq(node, "spmi")) {
+> +		struct pmif_bus *bus = devm_kzalloc(dev, sizeof(struct pmif_bus), GFP_KERNEL);
+> +
+> +		if (!bus)
+> +			return -ENOMEM;
+> +		bus->arb = dev_get_plat(dev->parent);
+> +		dev_set_priv(dev, bus);
+> +	} else {
+> +		struct pmif *arb;
+> +		u32 chan_offset;
+> +
+> +		arb = devm_kzalloc(dev, sizeof(struct pmif), GFP_KERNEL);
+> +		if (!arb)
+> +			return -ENOMEM;
+> +		dev_set_plat(dev, arb);
+> +
+> +		arb->data = drv_data;
+> +		chan_offset = PMIF_CHAN_OFFSET * arb->data->soc_chan;
+> +		arb->chan.ch_sta = PMIF_SWINF_0_STA + chan_offset;
+> +		arb->chan.wdata = PMIF_SWINF_0_WDATA_31_0 + chan_offset;
+> +		arb->chan.rdata = PMIF_SWINF_0_RDATA_31_0 + chan_offset;
+> +		arb->chan.ch_send = PMIF_SWINF_0_ACC + chan_offset;
+> +		arb->chan.ch_rdy = PMIF_SWINF_0_VLD_CLR + chan_offset;
+> +
+> +		if (arb->data->num_spmi_buses) {
+> +			ofnode_for_each_subnode(child, node) {
+> +				if (!ofnode_name_eq(child, "spmi"))
+> +					continue;
+> +
+> +				/* Bind the subnode to this driver */
+> +				ret = device_bind_with_driver_data(dev, dev->driver,
+> +								   ofnode_get_name(child),
+> +								   dev->driver_data,
+> +								   child,
+> +								   NULL);
+> +				if (ret == -ENODEV)
+> +					printf("Driver '%s' refuses to bind\n",
+> +					       dev->driver->name);
+> +
+> +				if (ret)
+> +					printf("Error binding driver '%s': %d\n",
+> +					       dev->driver->name, ret);> +			}
+> +		} else {
+> +			struct pmif_bus *bus = devm_kzalloc(dev,
+> +							    sizeof(struct pmif_bus),
+> +							    GFP_KERNEL);
+> +
+> +			if (!bus)
+> +				return -ENOMEM;
+> +			bus->arb = arb;
+> +			dev_set_priv(dev, bus);
+> +		}
+> +	}
+> +
+> +	return 0;
+> +}
+> +
