@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E29CA5FAD
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 00:22:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8443ACA5FA1
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 00:22:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4933940372;
-	Tue, 29 Sep 2026 00:22:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2FC1560788;
+	Tue, 29 Sep 2026 00:22:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tgyjoBORM147; Tue, 29 Sep 2026 00:22:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 56F48403AA
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790641353;
-	b=CKWL2O+tTAO6EU9sbZI5IMdh1bCa3aM42WK39Xf3arEzgApz+/qDPbYyxW9+lRYxiy9N
-	 poa2Ugqh3pqSCDXoOUR1pIvp9I82CX2oibi1b6cw2odUuQXtsyd+S8Z6OwHukTB+N0WkC
-	 0maOBW151zlYCSu7TJx/fEQIbJkK7uer+qmmU2aY7wo/3QG+ZTd1KLhIFdANKCs+/G9qh
-	 3UkWSPCExx48NElEk/WIijEVY/idScLGsoLVOmjUYgcWILvs/tmfCmCT4CvmBybHT3ixT
-	 saJ/Mby++ubR198QIN18B579sMWBKnjJMcluKJ8Gm/0gqS4BiNd0tSu2TWXKov3sJvA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id p5cKSmNToJz4; Tue, 29 Sep 2026 00:22:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 377E960774
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790641348;
+	b=s5iooxjaiEO9TD6YJ6TrpmLyQxr6Du+t9Z7dJ1v9waGTHMsWLOWMCKZ4CdVzWpkmcp3J
+	 fp5jyZkG3DcPg6BjE2oZMaOhSKAkhzUW4T4v6Cze1W8RE1UNJoArWU5bmg4b14HOqi6FC
+	 FCR6i1dbiWgdM6oOCROkytOjcV/LFpgCyLIRMRBmaS2POWd1ud1Sd58Dlmg07FoNxJidz
+	 SYusdTCg2OcKRLV7biKZ5IrYGmNDKIVvOjWSYxU04nL1HzSh10OkcDMZf44/Ux7Vv58pt
+	 sQpJvf3qN+iwTtPe8GDPGdQrP5sQ+01itmaQTUZM+67wqS2TB8hJ2wMPMRkWS6MDswg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790641353;
+	c=relaxed/relaxed; t=1790641348;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,135 +32,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=++OUM/1O4N4uWLejDztYIfnDLwIuTIvhg2qLIwWWHME=;
-	b=F9xw/7e8LMddUf8rtwmyOWHD8/ro1k82gnzjlNd6kFOAXlV3v54wNOUzzwPx1Tr4UUnq
-	 d+jl6cIHUxg7VcEgtOchS/qvl4IyCgK+s0Qg4RQE7n8DZ+XMCs8Y5lOrYQJGelegLCREV
-	 KTQTc3hTghVE7dJ7KqmRupW9HXdeHIwMZNEJIEEOvJ8NI+llqXgcY+aJxXZQxmQ0+mv1Q
-	 cjXbklsmLuZsccqXo4UCsJNN74wnOP56fGfdeCIY7AtufTjnIvemWxeX3mBBL7Dd8aA1M
-	 rokI8eE9PKiBdo7j0Dlq8GsQAWem23+7aS9kaPWiwhEE+MTcT2whUuhkI6F66l+U/RA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=TH/DXz9gnW1xnRdSbC15vW1MrhLqit17A0RJrgp+gvw=;
+	b=K0GO53HJa+9nStN6J2yu2zWUBFzf0lNBQhyUpogQzBxdbE4II5k9fGeXn9qOpPgvVK7l
+	 dvcNUhnDhXRpDDIhp7g0E3pzxqocIf6XUwnGpLavbF47dI04icHno43NbZmO7AQSJDULV
+	 QTond6/U+jNv1N73SYC02g0w8mKAUymmsWLVjH/6eXWad84y+qgsTIN9BY4A6D0p2JMSZ
+	 KDCHhAmSbVIeVRJz9SIM/551Q8ZsoIa+oRBFSqU9bPvVkxppIuNRFi6RT22UKAR35Zx23
+	 mQEEDCMYwpzuM3UoBcYjhwi58/tsKezRSvJPQYy9dWbDO/wttWTNzW/iTpQ6woV6W9Q==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790641353;
-	bh=++OUM/1O4N4uWLejDztYIfnDLwIuTIvhg2qLIwWWHME=;
+	d=lists.u-boot-project.org; s=default; t=1790641348;
+	bh=TH/DXz9gnW1xnRdSbC15vW1MrhLqit17A0RJrgp+gvw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Q59sClOGt7Zfy3DtHgugdMDqmmzgoBuBuD1JDR37AlqdQW0l5e83IQHXDpoiPPPC2
-	 7nRSWDve40YSkxzOQatprfE4f2R9uSEWZNpRakGK5RnxiywNH8uN4ABIRI/e0+BLsP
-	 PdawDqju6EC5a/1OQnQPEoiyYNEE5fJWxVBLQNbzLEMY6tqwbXP1QtmDG09Pn4Ntve
-	 mJVUrw4NC8SnBbO6pu490SZEhZRdEV6elDdbSLCphJFr2Oxs4HkWyVvCrJsQ2sM3dy
-	 HQPNudcHuU9pKX74taI/mjpA7fkgR3Kg6ZQJRCwxlswwk9HgV2yEVUlg+b1Rn3jKKe
-	 qbr/O6NYCz/wQ==
+	b=zB1SpG9zBE/+Drq+smWlJZSxQSMQR4KJ+YacLfbyoS433yzJiof9rYivjgzx6AEA1
+	 ZvqDDARTjfrh2jn22EOIP3OXNhFBxxju6bisvU91j9EHPs1h+RnMq6AC0NFydMYDpx
+	 PiTDtnzc5/mse71UWHWojgXvaENLDFsRz0fy1Kn4Jqj5C6fpKAQx2bxZztc/e4kH1h
+	 66wmWaRgmkzvmPeAxm2xFMOQUNV6T91b5F4n9Djz3aZi/t/t/yVzs+xFUkvGCZyC10
+	 YKNkBbgfhd7/ViVRwqeQsSHJd1sdtzDEFSC+SoMs/F39PaP+jYgNEkuudak317HudT
+	 oMvQrhflGw8cg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 56F48403AA;
-	Tue, 29 Sep 2026 00:22:33 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id EF293417
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 377E960774;
+	Tue, 29 Sep 2026 00:22:28 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B92A932F
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id EBAB56075D
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:27 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9EEB74024D
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rZwpN-qeEEn0 for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 00:22:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4AEE260767
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:30::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790641343;
- b=eWXM3ZvZG2KFRiVh2SXdKPuIqof9fKnfnZL3IIbOtF5clHDMeMguDaZvD7TYggnUYhgM
- a+6DgDnVbh+fdbY82/gRom9mSMwPb58gygi1jjnSDrQrI5sPUX/on290qWXAmFuHy2Cq1
- 4lRMKFVL8raV+rkz6l/FQcdaFqhdDhx0tKb04qmyxT+3CpeidmxhparJDr4Z2Q+7Tv0r+
- qeObtVepgT1aG4E0GEvLkn7GiTy2FiW1QZJ9lgOPbh+ffYx2opvh0YDV/MeWmk/+gCe/h
- 1T9pR12UHtrJDguLhj3K8yrqximlyMuThMuGev66jYFQqv90Xvn+l4vWNEASNqZehJA==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id m-t3oNrYM0mA for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 00:22:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 7F4DD40247
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:30::f"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790641340;
+ b=YnhBpn0yl7bJhfykDZGQ1B4itja4bL9ThcF78gcvYf4veimH4kaN0Bumsoi//h8H4BZb
+ 4G5RXWa5IhNi/WOSISwpUEYsf7jIOZh52G//ClB3Z44AngVt41EHESo4PjcaVVuRHkJUm
+ K7ivqctlajwODEToSVMT+znpAA0evJbHLxsD7rq+YwKxwbDPscd3iIc4TErVQD4o3mnRW
+ qXAwSOBlOhoVF813XICCub+EsOrSg1LPdBx/3Ini3TyACUFCmDkERZ402SFZPrWvKcvt1
+ /5QaFnLfLJXUpvchXSnnh6xGbQB7PPkUMwSZhvV2zV695dtM1xLL4X4YCysO71rt5xA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790641343;
+ c=relaxed/relaxed; t=1790641340;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=++OUM/1O4N4uWLejDztYIfnDLwIuTIvhg2qLIwWWHME=;
- b=IIG7x1SJC0rqz7MzA9lYh3viUZDGJULnuiv943caVUv0zhXTiuaUJsUcjgBnwqDEAglw
- 4ghjdnA339zwQVWhN7+KMDBUJflxPqOcz4gLGEukizDuZvcJLzg0WBUMAZhYgy69JuzAT
- a+3KlC9KKlwDzdgw2AgzShtLb0gtSvFSYMxTiwVyaiuoHhKQmMsg3wNA2trVUbsCpjk+s
- XiXKnWiCa0Wvt35tzW+kq7MttWKbY2Hv0k2qwDRlBw9KOnlTtA+4Og//zj8kcvXFxDIKB
- nNUJI9t5Fm3vndUTtRBnu/Iino7VPUIbwzeFjVMWQXTRuCkY1Avi9IWG3CALty/4mfw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ bh=TH/DXz9gnW1xnRdSbC15vW1MrhLqit17A0RJrgp+gvw=;
+ b=rUS58bmx5vNtFvgjx2+rxy8p64dunnVHflAJJaulLlMw2Pedxk5XEnPuWdhee/2JPEFs
+ qcipa+/CPnHP3naAqsKNLjXjGrbAXK4sOEoLPhJyRdMMkqFSRx2lvLXvEYk2UMRrbXiXG
+ YzZrdbQozPawJqzX294jzh1cSwmhPMWBSCHzbcuzMiTP5/wlOLbDV+X+ttDHljHt3KCkN
+ Vkeeja9y41VTQxGQDO+4a2DBv9iK5DzQi4Q+bKbR9gQo7Ac8V/THSXUBRJhUAe+PjJCsM
+ kuS8u9ZHSoSpqsSc3t76h36spl2YOZ9P3HpMzkFaT/8Gn4x8iVGo8pqRv193dMgoRIQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=e3lckTRm; 
- arc=none smtp.remote-ip="2607:f8b0:4864:30::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:30::10; helo=mail-oa2-x10.google.com;
- envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+ header.s=20251104 header.b="N8u+/sFb"; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:30::f"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:30::f;
+ helo=mail-oa2-x0f.google.com; envelope-from=james.hilliard1@gmail.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=e3lckTRm
-Received: from mail-oa2-x10.google.com (mail-oa2-x10.google.com
- [IPv6:2607:f8b0:4864:30::10])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4AEE260767
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:22 +0000 (UTC)
-Received: by mail-oa2-x10.google.com with SMTP id
- 586e51a60fabf-483c65c2fa7so2069775fac.1
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 17:22:22 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=N8u+/sFb
+Received: from mail-oa2-x0f.google.com (mail-oa2-x0f.google.com
+ [IPv6:2607:f8b0:4864:30::f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7F4DD40247
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:19 +0000 (UTC)
+Received: by mail-oa2-x0f.google.com with SMTP id
+ 586e51a60fabf-49172f18b40so2151556fac.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 17:22:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790641342; x=1791246142;
+ d=gmail.com; s=20251104; t=1790641339; x=1791246139;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=++OUM/1O4N4uWLejDztYIfnDLwIuTIvhg2qLIwWWHME=;
- b=e3lckTRmQdKk1Bv5+UEUZ6Vb5lSuWzzRg6dtZKLrJm8DKhRLXmj9Ki88J3sunwPyWe
- 1yvg8krlWrSQPb4H/vGRexpsPV5bLI+mzeMAnKwFwJQfscHA4LFNWSkkXqxWAIeQP0bn
- rUecgLGDD0WJsMQ3ZOtPgaQFFbRvCUxsrhS8xgE/3GKpl5S1SUJPo1FVIYLnbCyc2oBm
- ycXc1XcCntDJE9bARpCg+ZY9mv0pXCDbmStFoOhZT3mNlTMkm4kYlwV4BAYhU11T3lR1
- xB3O5w9CWHA2rc72DJ+8y80r6G7FKo9sz4laEGmnusI9kaGALX0+X92Hb9riOYHZCvDj
- xPgw==
+ bh=TH/DXz9gnW1xnRdSbC15vW1MrhLqit17A0RJrgp+gvw=;
+ b=N8u+/sFbpeYObU/K+k+FnU4LYeEX6T5dLiqRB5E5DgNHlxK/oUQk9yX53p/2+5Kfmy
+ dYZEp57YsEBz2ZY869Q3SmLq/VGMJzFwOtiya7o0MSGW2B6R86GJOm50c/LIXmWhL2Sf
+ 1it3MPxIKX7cxZgyxjFpe1E5L6xzk+LXv7C01MIFHrPT+uwI9PecyD0DFf8XDxr7pWUx
+ rXfXMlWOYKiT6zmygo+YCVixTYESNzzBg/cVYGXzi0w7JUZk5h3YduNvjeSLCzduLpIO
+ yNS1wUYnYVmMInGJAMF59mD7or7UKkt31EOUlektxrAmOg52nWQSMW4utAWQBKFMbPQr
+ RYLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790641342; x=1791246142;
+ d=1e100.net; s=20260707; t=1790641339; x=1791246139;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=++OUM/1O4N4uWLejDztYIfnDLwIuTIvhg2qLIwWWHME=;
- b=zNDJF3htHmiImMJQbl0sfPr5RPDUTnwcdz1mpgYu2MO/GuEoq1nMIIBjqesylZo9kV
- LweiEUCTuNNYv04EP+W3hMkXp6WtiUvq1/FEv7LoybkS9wqXDeTkxfL/9Lc6eGbbCQaY
- w/1hOLH+SBOYRD/zJUoKZbFUj+aCSXxdM7VKYdr6Jfw0W55Vki3p1lacHz2fonK5wRuX
- xQM96IvJjF/M+b0c3qtECmSms0lE7rrbBNV3PO5Gf5Udt/Lh6emu4QjTM6XVNb2vou28
- skIfYb8NIBxBmeJ3DbIZ5fWj/UXt7pVBSrF2O6MOGzBRYqXpQICoOe45dUIkIfoXcRf6
- ID2A==
-X-Gm-Message-State: AFuF++mUoR/+nboGNwv5emWN0Z6wVNujDXHdvNKaVbw9UcxE26VZms2Z
- 2H6pcqfrQj0hWx4cuRPjLoqJXbh1Ofz8kzqzvgUkILoSerNoequECX7n
-X-Gm-Gg: AYBFou1YQ5JqbMi6ZjYyAAJKsw1YsnXEjl0LstcXC8HN1x25XZUOQbIco6aAAq9MKn0
- uYMffJAgOVWiw3Ok9xASvFehnaLvt9UfJpmP8/C9Nch1uDCG1amG3gr27GiR1o0L+MblvwBujAW
- hlCGGyaGJzO8wS3w6UC+9/OR3mt+1XWpBnjqdiZnLC0LDRTnYu+BqdSWARPYgD2Ws005N9vwEF0
- 8Vo0Z5lnX6APj4ZdfautrNPDiesCdvL/XuaSAQYPMnKlnZRTt0guLxE/eaSAO2OxZ2KlIqGXCk6
- /uAYWRsGf0jQ3Jady0D/ubCg3DX9TN/Fm8wa/4B9jl8k/BM9yciFFn38s4bmCQ7xUnGGDXKsYHt
- GLwFD+MWbGlecqfgQqfZB5aP46LwVCQVgquOj/cGXLFuZG5nPgzbjzhGrpPPM7+e7xNbYzRdZKY
- /XdhuZdLuagX9zzzJkk6H1VVse40KtXUILS7f0z5B3DhOvr5F8ejCI9l44tnxzm8bgpB5YV/GBF
- 8gty25mraucIucbJL+2cDN3+wi13dZTe39dgc/LGZ6oW2v7FhqXT1COEVgKHuk5NP3EtRg7fkz5
- DS9txA6VeJ8aQnDUgD7zS/NcNDdse8RbsfKIcUpO6/2cxWAaKYk7dthUorrspeeCaVMGE/p+Zg2
- ORI0ZV31qMbzTKAFhWOnk
-X-Received: by 2002:a05:6871:8289:b0:486:a82a:a204 with SMTP id
- 586e51a60fabf-491e9750977mr14086649fac.5.1790641340982; 
- Mon, 28 Sep 2026 17:22:20 -0700 (PDT)
+ bh=TH/DXz9gnW1xnRdSbC15vW1MrhLqit17A0RJrgp+gvw=;
+ b=s4wJbtHr7b2yM4g7pk3z5WWmfn0Wgp9RNnIBJGSBVMDlgCRSAmkr5eO4RBBkMYWDvW
+ vu8YVZppLDZdqAatydC2VTGbMbvnCUJ54a2164vIqnRysk3UHOXJUf9o9YYu5MpJJRgH
+ l3/EPHhzBDDyzjOuUjGbULYSFxjOQsAic7sen44Cf1wd3Ai4o+RYPS3ICh7sjo53vFrC
+ g1cfn96yt+9tRrSZkJ7MQGePvf5juXFhhuNv0W/xDsbXvyVgUh7gC4gUMvowIkK1vMnw
+ P9R54TODXoZ0UhSIaTZ6N1//D4idM/tb1B46H158RP7bfi/5Yq310mwg3ukA32oHoedf
+ T01g==
+X-Gm-Message-State: AFq9FYIEyHXX2X+wTr+z6oNyqXhv2lY/9jJDb9+I0STrEtPH8dePBOae
+ dx3WRofnBNEWT2G3LzXUlfoExmGblTRUjAmXtN8ZW6c4xdI1vTXESeAE
+X-Gm-Gg: AYBFou2gA/bMS7laWViVMRJaTZ2d/fQUhJsBekDK6v1U43tVN/r9nG+c3w0F25AcnZI
+ 8yoVjyi8k6V+f+tzQBs1plfxsaPnl13JTCS86x/YDa7FDeLb/II6EjUE/m6Yj4t4uJi1EoZRNMV
+ VVd0mhzd7eJ7IzFQd9+gKMmuA7vbSPswraB56pGMprvehE566VfEUnsHe8zqE8pKu+1CwE+Hr6L
+ UHGdhIG17jbPrvM/Q0PaY6QI3vpPy+H9zm0VGtlVnKOcrttsFG8/iGbrCe/yR2mwTedNrDF99uW
+ rizuMnqakeCmSGEcqc9IjiQUlY3RSK4AtorJFdrRFFnY5uhjNYX+oAkek/0yrycrSzO8XVmVON8
+ GMBclf47zwtYsnMgXohReAMzavdd0yE5U9orMg4i6rYdz8178CmWu/uKhV4Bv95HCPqIgcjMlh/
+ U/Ci4Ku9SRG88+8vXI/GmBUNUWaj8YfgrjaSUD8LTGBfjLPRMP2IDjoHALNfYSl8jAAod3XV1ua
+ +gH2oPNQxtV0YVc0XfJKJZoPlNBbV2E8E4ezCFtdLqhoX4MASvbRqs2ZhuWHCtgCtil/tEcwXmq
+ IbqcqE4IbEQvhrR0y/QF4LFD8m1WycmdDWIIFQTI2roMAthjBic3mL8b62HU+XrBvIZwr8MBDjG
+ S7jYhCvYzAMd/uxpRfOlO
+X-Received: by 2002:a05:6871:acd9:b0:494:396:1205 with SMTP id
+ 586e51a60fabf-49403a67d91mr7181220fac.14.1790641338944; 
+ Mon, 28 Sep 2026 17:22:18 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-494877590e5sm8175688fac.13.2026.09.28.17.22.19
+ 586e51a60fabf-494877590e5sm8175688fac.13.2026.09.28.17.22.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Sep 2026 17:22:20 -0700 (PDT)
+ Mon, 28 Sep 2026 17:22:18 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Mon, 28 Sep 2026 18:21:53 -0600
-Subject: [PATCH 16/20] net: lwip: retry DHCP acquisition using the network
- failure policy
+Date: Mon, 28 Sep 2026 18:21:52 -0600
+Subject: [PATCH 15/20] net: lwip: retain boot metadata from the selected
+ DHCP offer
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260928-lwip-dhcp-v1-v1-16-2060c7365b0c@gmail.com>
+Message-Id: <20260928-lwip-dhcp-v1-v1-15-2060c7365b0c@gmail.com>
 References: <20260928-lwip-dhcp-v1-v1-0-2060c7365b0c@gmail.com>
 In-Reply-To: <20260928-lwip-dhcp-v1-v1-0-2060c7365b0c@gmail.com>
 To: u-boot@lists.u-boot-project.org
@@ -194,478 +194,324 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Distinguish an acquisition timeout from cancellation and local errors.
-Retire the old DHCP client before invoking the exclusive-runtime
-restart helper, reset per-attempt metadata, and preserve shared users
-on restart rejection. Honor netretry, ethrotate and BOOTP_MAY_FAIL,
-with fresh retry accounting for each command.
+Keep transaction-local defaults from the offer selected by the core,
+and overlay the accepted ACK without publishing either candidate early.
+Validate offers after the core parser and before selection; ignore
+later offers. Require the ACK to carry its own message type and
+selected server identifier.
 
-Use the first retry to remember the initial interface for wrap
-detection instead of an unchanging net_restarted flag. Add sandbox
-coverage for backoff bounds, request fields, invalid controls,
-deadlines, NIC rotation, numeric retries, cancellation and
-shared-runtime cleanup.
+Reset defaults on a new discovery, let explicit ACK values override
+them, and discard an offered file size when the ACK replaces the
+filename without a size. Keep the EFI cache as the unmodified wire ACK.
+Cover missing options, rejected ACKs, late offers, replacement and
+subsequent transactions.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- cmd/Kconfig                |   7 +-
- net/lwip/dhcp.c            |  52 +++++++--
- net/lwip/net-lwip.c        |   6 +-
- test/dm/Makefile           |   1 +
- test/dm/lwip_dhcp_policy.c | 286 +++++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 334 insertions(+), 18 deletions(-)
+ lib/lwip/lwip/src/core/ipv4/dhcp.c   |  6 ++++
+ lib/lwip/lwip/src/include/lwip/opt.h | 21 +++++++++++
+ lib/lwip/u-boot/lwip-dhcp.h          |  2 ++
+ net/lwip/dhcp.c                      | 48 ++++++++++++++++++++++---
+ test/dm/lwip_dhcp_options.c          | 68 ++++++++++++++++++++++++++++++++++--
+ 5 files changed, 138 insertions(+), 7 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index cf4dbb77fda..975b8374832 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2005,16 +2005,19 @@ config DHCP6_RAPID_COMMIT
+diff --git a/lib/lwip/lwip/src/core/ipv4/dhcp.c b/lib/lwip/lwip/src/core/ipv4/dhcp.c
+index 260c743f5db..c25bb3b4fc5 100644
+--- a/lib/lwip/lwip/src/core/ipv4/dhcp.c
++++ b/lib/lwip/lwip/src/core/ipv4/dhcp.c
+@@ -98,6 +98,9 @@
+ #ifndef LWIP_HOOK_DHCP_RECV
+ #define LWIP_HOOK_DHCP_RECV(netif, dhcp, pbuf) ERR_OK
+ #endif
++#ifndef LWIP_HOOK_DHCP_HANDLE_OFFER
++#define LWIP_HOOK_DHCP_HANDLE_OFFER(netif, dhcp, pbuf) ERR_OK
++#endif
  
- endif
+ /** DHCP_ADD_EXTRA_REQUEST_OPTIONS: Additional options added to the list of options
+  * that the client requests from the servers (opt 55: DHCP_OPTION_PARAMETER_REQUEST_LIST)
+@@ -1906,6 +1909,9 @@ dhcp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr,
+   /* received a DHCP_OFFER in DHCP_STATE_SELECTING state? */
+   else if ((msg_type == DHCP_OFFER) && (dhcp->state == DHCP_STATE_SELECTING)) {
+     LWIP_DEBUGF(DHCP_DEBUG | LWIP_DBG_TRACE, ("DHCP_OFFER received in DHCP_STATE_SELECTING state\n"));
++    if (LWIP_HOOK_DHCP_HANDLE_OFFER(netif, dhcp, p) != ERR_OK) {
++      goto free_pbuf_and_return;
++    }
+     /* remember offered lease */
+     dhcp_handle_offer(netif, msg_in);
+   }
+diff --git a/lib/lwip/lwip/src/include/lwip/opt.h b/lib/lwip/lwip/src/include/lwip/opt.h
+index 3645f78db14..013cd76355c 100644
+--- a/lib/lwip/lwip/src/include/lwip/opt.h
++++ b/lib/lwip/lwip/src/include/lwip/opt.h
+@@ -3215,6 +3215,27 @@
+ #define LWIP_HOOK_DHCP_RECV(netif, dhcp, pbuf)
+ #endif
  
-+endif
++/**
++ * LWIP_HOOK_DHCP_HANDLE_OFFER(netif, dhcp, pbuf):
++ * Called after successfully parsing a matching DHCPOFFER while selecting,
++ * before accepting the offer and sending DHCPREQUEST.
++ * Signature:\code{.c}
++ *   err_t my_hook(struct netif *netif, struct dhcp *dhcp, struct pbuf *pbuf);
++ * \endcode
++ * Arguments:
++ * - netif: receiving interface
++ * - dhcp: DHCP client on that interface
++ * - pbuf: complete DHCP reply; the payload starts at the DHCP header
++ *
++ * Return ERR_OK to accept the offer, or another error to discard it. Do not
++ * modify or free the pbuf. Copy any metadata needed later, and do not publish
++ * it until an ACK is accepted and the client has bound the lease. Forget
++ * saved defaults when starting another discovery transaction.
++ */
++#ifdef __DOXYGEN__
++#define LWIP_HOOK_DHCP_HANDLE_OFFER(netif, dhcp, pbuf)
++#endif
 +
- config BOOTP_MAY_FAIL
- 	bool "Allow for the BOOTP/DHCP server to not be found"
--	depends on CMD_BOOTP
-+	depends on CMD_BOOTP || CMD_DHCP
- 	help
- 	  If the DHCP server is not found after the configured retry count, the
- 	  call will fail instead of starting over.  This can be used to fail
- 	  over to Link-local IP address configuration if the DHCP server is not
- 	  available.
+ /**
+  * LWIP_HOOK_DHCP_HANDLE_ACK(netif, dhcp, pbuf):
+  * Called after parsing a matching DHCPACK in a state that accepts it, before
+diff --git a/lib/lwip/u-boot/lwip-dhcp.h b/lib/lwip/u-boot/lwip-dhcp.h
+index 03f8a6a2a14..16be8b6a09b 100644
+--- a/lib/lwip/u-boot/lwip-dhcp.h
++++ b/lib/lwip/u-boot/lwip-dhcp.h
+@@ -15,11 +15,13 @@ u32_t net_lwip_dhcp_timeout(u8_t tries);
+ #define DHCP_REQUEST_BACKOFF_SEQUENCE net_lwip_dhcp_timeout
  
--endif
-+	  With lwIP, do not repeat the interface cycle once every interface
-+	  has timed out, even with netretry=yes.
+ err_t net_lwip_dhcp_ack(struct netif *netif, struct dhcp *dhcp, struct pbuf *p);
++err_t net_lwip_dhcp_offer(struct netif *netif, struct dhcp *dhcp, struct pbuf *p);
+ err_t net_lwip_dhcp_recv(struct netif *netif, struct dhcp *dhcp, struct pbuf *p);
+ void net_lwip_dhcp_append(struct netif *netif, struct dhcp *dhcp, u8_t state,
+ 			  struct dhcp_msg *msg, u8_t type, u16_t *len);
  
- config BOOTP_BOOTPATH
- 	bool "Request & store 'rootpath' from BOOTP/DHCP server"
+ #define LWIP_HOOK_DHCP_HANDLE_ACK net_lwip_dhcp_ack
++#define LWIP_HOOK_DHCP_HANDLE_OFFER net_lwip_dhcp_offer
+ #define LWIP_HOOK_DHCP_RECV net_lwip_dhcp_recv
+ #define LWIP_HOOK_DHCP_APPEND_OPTIONS net_lwip_dhcp_append
+ 
 diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-index 98f6864144b..8898fa4efd8 100644
+index b223261ff23..98f6864144b 100644
 --- a/net/lwip/dhcp.c
 +++ b/net/lwip/dhcp.c
-@@ -609,7 +609,7 @@ static int dhcp_loop(struct net_lwip_ctx *net, bool explicit_file,
- 			return CMD_RET_FAILURE;
- 		if (ctrlc()) {
- 			printf("Abort\n");
--			return CMD_RET_FAILURE;
-+			return -EINTR;
+@@ -60,6 +60,8 @@ struct dhcp_options {
+ 	u16 discover_secs;
+ 	struct dhcp_boot_data reply;
+ 	struct dhcp_boot_data candidate;
++	struct dhcp_boot_data offer;
++	bool have_offer;
+ 	struct dhcp_boot_data proxy;
+ 	ip4_addr_t proxy_server;
+ 	u32 proxy_xid;
+@@ -238,11 +240,15 @@ static err_t dhcp_parse_boot_data(struct pbuf *p, struct dhcp_boot_data *data,
+ 		{ 60, proxy, true, data->vendor, sizeof(data->vendor) - 1 },
+ 		{ 6, IS_ENABLED(CONFIG_BOOTP_DNS), false, data->dns, sizeof(data->dns) },
+ 	};
++	bool have_filename = false, have_file_size = false;
+ 	u8 overload = 0;
+ 	u32 cookie;
+ 	size_t i;
+ 	int ret;
+ 
++	/* A fallback offer cannot supply the ACK's type or server identity. */
++	data->type = 0;
++	ip4_addr_set_zero(&data->server);
+ 	if (pbuf_copy_partial(p, &cookie, sizeof(cookie), DHCP_MSG_LEN) != sizeof(cookie) ||
+ 	    ntohl(cookie) != DHCP_MAGIC_COOKIE)
+ 		return ERR_VAL;
+@@ -262,6 +268,8 @@ static err_t dhcp_parse_boot_data(struct pbuf *p, struct dhcp_boot_data *data,
+ 
+ 		if (!opt->len)
+ 			continue;
++		if (opt->code == 67)
++			have_filename = true;
+ 		if (opt->string) {
+ 			/* RFC 2132 allows trailing NULs, not an embedded terminator. */
+ 			while (opt->len && !str[opt->len - 1])
+@@ -280,19 +288,44 @@ static err_t dhcp_parse_boot_data(struct pbuf *p, struct dhcp_boot_data *data,
+ 		} else {
+ 			if (opt->len != opt->size)
+ 				return ERR_VAL;
+-			if (opt->code == 13)
++			if (opt->code == 13) {
+ 				data->have_size = true;
+-			else if (opt->code == 2)
++				have_file_size = true;
++			} else if (opt->code == 2) {
+ 				data->have_offset = true;
++			}
  		}
- 		if (IS_ENABLED(CONFIG_SERVERIP_FROM_PROXYDHCP) &&
- 		    !bound && dhcp_supplied_address(net->netif))
-@@ -631,7 +631,7 @@ static int dhcp_loop(struct net_lwip_ctx *net, bool explicit_file,
  	}
+-	if (!(overload & DHCP_OVERLOAD_FILE) && !data->bootfile[0]) {
++	if (!(overload & DHCP_OVERLOAD_FILE) && !have_filename &&
++	    pbuf_get_at(p, DHCP_FILE_OFS)) {
+ 		size_t len = min_t(size_t, DHCP_FILE_LEN, sizeof(data->bootfile) - 1);
  
- 	if (!bound)
--		return CMD_RET_FAILURE;
-+		return -ETIMEDOUT;
- 
- 	dhcp = netif_dhcp_data(net->netif);
- 	if (options->have_proxy) {
-@@ -686,6 +686,17 @@ static int dhcp_loop(struct net_lwip_ctx *net, bool explicit_file,
- 	return CMD_RET_SUCCESS;
- }
- 
-+static void dhcp_retire(struct net_lwip_ctx *net)
+ 		if (pbuf_copy_partial(p, data->bootfile, len, DHCP_FILE_OFS) != len)
+ 			return ERR_VAL;
+ 		data->bootfile[len] = 0;
++		have_filename = true;
+ 	}
++	/* An offered size must not describe a replacement filename in the ACK. */
++	if (!have_file_size && have_filename)
++		data->have_size = false;
++
++	return ERR_OK;
++}
++
++err_t net_lwip_dhcp_offer(struct netif *netif, struct dhcp *dhcp, struct pbuf *p)
 +{
-+	if (!net->netif || !netif_dhcp_data(net->netif))
-+		return;
-+	if (dhcp_supplied_address(net->netif))
-+		dhcp_stop_without_release(net->netif);
++	struct dhcp_options *options = active_options;
++	struct dhcp_boot_data *data;
++
++	if (!options || options->netif != netif)
++		return ERR_OK;
++	options->have_offer = false;
++	data = &options->offer;
++	memset(data, 0, sizeof(*data));
++	if (dhcp_parse_boot_data(p, data, false) || data->type != DHCP_OFFER ||
++	    ip4_addr_isany(&data->server))
++		return ERR_VAL;
++	options->have_offer = true;
+ 
+ 	return ERR_OK;
+ }
+@@ -373,7 +406,11 @@ err_t net_lwip_dhcp_ack(struct netif *netif, struct dhcp *dhcp, struct pbuf *p)
+ 		return ERR_OK;
+ 	/* A rejected renewal must leave the accepted lease metadata intact. */
+ 	data = &active_options->candidate;
+-	memset(data, 0, sizeof(*data));
++	if (active_options->have_offer && dhcp->state == DHCP_STATE_REQUESTING &&
++	    ip4_addr_cmp(&active_options->offer.server, ip_2_ip4(&dhcp->server_ip_addr)))
++		*data = active_options->offer;
 +	else
-+		dhcp_release_and_stop(net->netif);
-+	dhcp_cleanup(net->netif);
-+}
-+
- static int dhcp_nfs_autoload(struct cmd_tbl *cmdtp, int flag, int argc,
- 			     char *const argv[])
- {
-@@ -758,27 +769,44 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		free(options);
- 		return CMD_RET_FAILURE;
- 	}
--	options->netif = net.netif;
-+	net_try_count = 1;
-+	net_restart_wrap = 0;
- 	active_options = options;
- 
--	ret = dhcp_loop(&net, !!filename, options);
-+	for (;;) {
-+		options->netif = net.netif;
-+		options->have_offer = false;
-+		options->have_proxy = false;
-+		memset(&options->reply, 0, sizeof(options->reply));
-+		if (CONFIG_IS_ENABLED(EFI_LOADER)) {
-+			options->efi->ack_len = 0;
-+			options->efi->proxy_len = 0;
-+		}
-+		ret = dhcp_loop(&net, !!filename, options);
-+		if (ret != -ETIMEDOUT)
-+			break;
-+		dhcp_retire(&net);
-+		if (IS_ENABLED(CONFIG_BOOTP_MAY_FAIL) &&
-+		    (env_get_yesno("ethrotate") == 0 || net_restart_wrap))
-+			break;
-+		/* Other runtime clients must not lose their interface on retry. */
-+		ret = net_lwip_restart(&net);
-+		if (ret || (IS_ENABLED(CONFIG_BOOTP_MAY_FAIL) && net_restart_wrap)) {
-+			ret = CMD_RET_FAILURE;
-+			break;
-+		}
-+	}
- 	/*
- 	 * A download needs strict addressing, incompatible with DHCP's
- 	 * address-less runtime attachment. Retire DHCP before handing off.
- 	 */
--	if (net.netif) {
--		if (dhcp_supplied_address(net.netif))
--			dhcp_stop_without_release(net.netif);
--		else
--			dhcp_release_and_stop(net.netif);
--		dhcp_cleanup(net.netif);
--	}
-+	dhcp_retire(&net);
- 	active_options = NULL;
- 	free(options);
- 	net_lwip_stop(&net);
- 
++		memset(data, 0, sizeof(*data));
+ 	ret = dhcp_parse_boot_data(p, data, false);
  	if (ret)
--		return ret;
-+		return CMD_RET_FAILURE;
- 	autoload = env_get("autoload");
- 	if (autoload && !strcmp(autoload, "NFS")) {
- 		if (IS_ENABLED(CONFIG_CMD_NFS))
-diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index eb9eebadaa1..4319f4441e8 100644
---- a/net/lwip/net-lwip.c
-+++ b/net/lwip/net-lwip.c
-@@ -30,7 +30,6 @@
- void (*push_packet)(void *, int len) = 0;
- #endif
- int net_try_count;
--static int net_restarted;
- int net_restart_wrap;
- static struct {
- 	struct udevice *dev;
-@@ -753,11 +752,10 @@ int net_start_again(void)
- 		return -ETIMEDOUT;
+ 		return ret;
+@@ -421,8 +458,9 @@ void net_lwip_dhcp_append(struct netif *netif, struct dhcp *dhcp, u8_t state,
+ 	if (!active_options || active_options->netif != netif ||
+ 	    (type != DHCP_DISCOVER && type != DHCP_REQUEST))
+ 		return;
+-	if (type == DHCP_DISCOVER && options->proxy_xid != dhcp->xid) {
++	if (type == DHCP_DISCOVER && (!dhcp->tries || options->proxy_xid != dhcp->xid)) {
+ 		options->have_proxy = false;
++		options->have_offer = false;
+ 		options->proxy_xid = dhcp->xid;
  	}
+ 	if (type == DHCP_DISCOVER)
+diff --git a/test/dm/lwip_dhcp_options.c b/test/dm/lwip_dhcp_options.c
+index 5fdeae6b2f0..ede51bc1116 100644
+--- a/test/dm/lwip_dhcp_options.c
++++ b/test/dm/lwip_dhcp_options.c
+@@ -35,6 +35,9 @@ enum dhcp_reply_kind {
  
--	net_try_count++;
--
- 	eth_halt();
- #if !defined(CONFIG_NET_DO_NOT_TRY_ANOTHER)
--	eth_try_another(!net_restarted);
-+	eth_try_another(net_try_count == 1);
- #endif
-+	net_try_count++;
- 	return eth_init();
- }
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index 00e2e52af59..564980c122c 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -55,6 +55,7 @@ endif
- ifeq ($(CONFIG_NET_LWIP)$(CONFIG_CMD_DHCP),yy)
- obj-y += lwip_dhcp.o
- obj-y += lwip_dhcp_options.o
-+obj-y += lwip_dhcp_policy.o
- endif
- ifeq ($(CONFIG_NET_LWIP)$(CONFIG_NETCONSOLE),yy)
- obj-y += netconsole.o
-diff --git a/test/dm/lwip_dhcp_policy.c b/test/dm/lwip_dhcp_policy.c
-new file mode 100644
-index 00000000000..d60bebcd86b
---- /dev/null
-+++ b/test/dm/lwip_dhcp_policy.c
-@@ -0,0 +1,286 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/* Copyright 2026 James Hilliard <james.hilliard1@gmail.com> */
-+
-+#include <command.h>
-+#include <console.h>
-+#include <dm.h>
-+#include <env.h>
-+#include <lwip-dhcp.h>
-+#include <malloc.h>
-+#include <net.h>
-+#include <time.h>
-+#include <asm/eth.h>
-+#include <dm/test.h>
-+#include <lwip/dhcp.h>
-+#include <lwip/prot/dhcp.h>
-+#include <lwip/timeouts.h>
-+#include <test/ut.h>
-+
-+struct dhcp_policy_test {
-+	unsigned int packets;
-+	unsigned int first_packets;
-+	unsigned int bind_after;
-+	bool fail_first;
-+	bool cancel;
-+	bool ticking;
-+	u16 secs;
-+	u32 initial;
-+	u32 second;
-+	u32 maximum;
-+	char file[DHCP_FILE_LEN];
-+};
-+
-+static void dhcp_policy_tick(void *arg)
-+{
-+	struct dhcp_policy_test *test = arg;
-+
-+	if (!test->ticking)
-+		return;
-+	timer_test_add_offset(500);
-+	sys_timeout(1, dhcp_policy_tick, test);
-+}
-+
-+static int dhcp_policy_tx(struct udevice *dev, void *packet, unsigned int len)
-+{
-+	struct eth_sandbox_priv *priv = dev_get_priv(dev);
-+	struct dhcp_policy_test *test = priv->priv;
-+	struct ethernet_hdr *eth = packet;
-+	struct ip_udp_hdr *ip;
-+	struct dhcp_msg *msg;
-+	struct dhcp *dhcp;
-+
-+	if (len < ETHER_HDR_SIZE + IP_UDP_HDR_SIZE + DHCP_OPTIONS_OFS ||
-+	    ntohs(eth->et_protlen) != PROT_IP)
-+		return 0;
-+	ip = (void *)(eth + 1);
-+	if (ip->ip_p != IPPROTO_UDP || ntohs(ip->udp_dst) != 67)
-+		return 0;
-+	msg = (void *)(ip + 1);
-+	test->packets++;
-+	if (!dev_seq(dev))
-+		test->first_packets++;
-+	test->secs = ntohs(msg->secs);
-+	memcpy(test->file, msg->file, sizeof(test->file));
-+	test->initial = net_lwip_dhcp_timeout(1);
-+	test->second = net_lwip_dhcp_timeout(2);
-+	test->maximum = net_lwip_dhcp_timeout(255);
-+	if (test->cancel) {
-+		console_in_puts("\x03");
-+		return 0;
+ struct dhcp_options_test {
+ 	enum dhcp_reply_kind kind;
++	bool offer_metadata;
++	bool extra_offer;
++	unsigned int replacement;
+ 	unsigned int discover;
+ 	unsigned int request;
+ 	bool requested[256];
+@@ -213,6 +216,16 @@ static int dhcp_options_reply(struct udevice *dev, struct dhcp_msg *request,
+ 			pos = dhcp_test_option(pos, 209, "x", 1);
+ 		}
+ 	}
++	if (type == DHCP_ACK && test->replacement) {
++		if (test->replacement <= 2)
++			pos = dhcp_test_option(pos, 67, "replacement.bin", 15);
++		else
++			strcpy((char *)reply->file, "replacement.bin");
++		if (test->replacement & 1)
++			pos = dhcp_test_option(pos, 13, size, sizeof(size));
++		else
++			pos = dhcp_test_option(pos, 2, offset, sizeof(offset));
 +	}
-+	if ((test->fail_first && !dev_seq(dev)) || !test->bind_after) {
-+		timer_test_add_offset(4000);
-+		return 0;
+ 	/* Exercise custom options before the message-type option. */
+ 	pos = dhcp_test_option(pos, DHCP_OPTION_MESSAGE_TYPE, &type, 1);
+ 	if (kind == DHCP_REPLY_TRUNCATED) {
+@@ -310,14 +323,20 @@ static int dhcp_options_tx(struct udevice *dev, void *packet, unsigned int len)
+ 		test->discover_secs = ntohs(msg->secs);
+ 		/* REQUEST must retain the DISCOVER value despite this delay. */
+ 		timer_test_add_offset(1200);
+-		/* An offer must not publish its metadata when the ACK omits it. */
+-		return dhcp_options_reply(dev, msg, DHCP_OFFER, DHCP_REPLY_BASIC);
++		return dhcp_options_reply(dev, msg, DHCP_OFFER,
++					  test->offer_metadata ? DHCP_REPLY_BASIC :
++					  DHCP_REPLY_EMPTY);
+ 	}
+ 	if (type != DHCP_REQUEST)
+ 		return 0;
+ 	test->request++;
+ 	memcpy(test->request_file, msg->file, sizeof(test->request_file));
+ 	test->request_secs = ntohs(msg->secs);
++	if (test->extra_offer) {
++		ret = dhcp_options_reply(dev, msg, DHCP_OFFER, DHCP_REPLY_BASIC);
++		if (ret)
++			return ret;
 +	}
-+	if (test->packets < test->bind_after)
-+		return 0;
-+	/* Exercise command policy, independently of the wire parser fixtures. */
-+	dhcp = netif_dhcp_data(netif_default);
-+	ip4addr_aton("1.1.2.3", &dhcp->offered_ip_addr);
-+	ip4addr_aton("255.255.255.0", &dhcp->offered_sn_mask);
-+	ip4addr_aton("1.1.2.2", &dhcp->server_ip_addr);
-+	netif_set_addr(netif_default, &dhcp->offered_ip_addr,
-+		       &dhcp->offered_sn_mask, &dhcp->offered_gw_addr);
-+	dhcp->state = DHCP_STATE_BOUND;
-+
-+	return 0;
-+}
-+
-+static int dhcp_policy_check(struct unit_test_state *uts, struct dhcp_policy_test *test)
-+{
-+	static const struct {
-+		const char *name;
-+		const char *value;
-+	} controls[] = {
-+		{ "bootpretryperiod", "3000" },
-+		{ "bootpretransmitperiodinit", "500" },
-+		{ "bootpretransmitperiodmax", "2000" },
-+	};
-+	static const char * const invalid[] = {
-+		"-1", "junk", "0x100", "99999999999999999999999999",
-+		/* Values which strict_strtoul() would wrap to zero or 500. */
-+		sizeof(ulong) == 4 ? "4294967296" : "18446744073709551616",
-+		sizeof(ulong) == 4 ? "4294967796" : "18446744073709552116",
-+	};
-+	static const char * const invalid_interval[] = { "0", "32767501", "4294967796" };
-+	struct net_lwip_ctx other = {};
-+	char * const argv[] = { "dhcp" };
-+	char name[256];
-+	char max_timeout[32];
-+	unsigned int i, j;
-+	ulong start;
-+	int ret;
-+
-+	ut_assertok(env_set("autoload", "no"));
-+	ut_assertok(env_set("ethact", "eth@10002000"));
-+	ut_assertok(env_set("ethrotate", "no"));
-+	ut_assertok(env_set("netretry", "no"));
-+	ut_assertok(env_set("bootpretryperiod", "3000"));
-+	ut_assertok(env_set("bootpretransmitperiodinit", "500"));
-+	ut_assertok(env_set("bootpretransmitperiodmax", "2000"));
-+	memset(name, 'x', sizeof(name) - 1);
-+	name[sizeof(name) - 1] = 0;
-+	ut_assertok(env_set("bootfile", name));
-+	*test = (struct dhcp_policy_test){ .bind_after = 3, .ticking = true };
-+	sys_timeout(1, dhcp_policy_tick, test);
-+	ret = do_dhcp(NULL, 0, 1, argv);
-+	test->ticking = false;
-+	sys_untimeout(dhcp_policy_tick, test);
-+	ut_assertok(ret);
-+	ut_asserteq(3, test->packets);
-+	ut_assert(test->secs >= 1);
-+	ut_asserteq(500, test->initial);
-+	ut_assert(test->second >= 900 && test->second <= 1099);
-+	ut_assert(test->maximum >= 1800 && test->maximum <= 2000);
-+	ut_asserteq(127, strlen(test->file));
-+	ut_asserteq_str(name, env_get("bootfile"));
-+	ut_assertnull(netif_default);
-+
-+	/* Invalid timing cannot send even one packet. */
-+	for (i = 0; i < ARRAY_SIZE(controls); i++) {
-+		for (j = 0; j < ARRAY_SIZE(invalid); j++) {
-+			*test = (struct dhcp_policy_test){ .bind_after = 1 };
-+			ut_assertok(env_set(controls[i].name, invalid[j]));
-+			ut_asserteq(CMD_RET_FAILURE, do_dhcp(NULL, 0, 1, argv));
-+			ut_asserteq(0, test->packets);
-+			ut_assertnull(netif_default);
-+		}
-+		ut_assertok(env_set(controls[i].name, controls[i].value));
-+	}
-+	for (i = 1; i < ARRAY_SIZE(controls); i++) {
-+		for (j = 0; j < ARRAY_SIZE(invalid_interval); j++) {
-+			*test = (struct dhcp_policy_test){ .bind_after = 1 };
-+			ut_assertok(env_set(controls[i].name, invalid_interval[j]));
-+			ut_asserteq(CMD_RET_FAILURE, do_dhcp(NULL, 0, 1, argv));
-+			ut_asserteq(0, test->packets);
-+			ut_assertnull(netif_default);
-+		}
-+		ut_assertok(env_set(controls[i].name, controls[i].value));
-+	}
-+	/* The acquisition deadline retains the full native unsigned-long range. */
-+	snprintf(max_timeout, sizeof(max_timeout), "%lu", ULONG_MAX);
-+	ut_assertok(env_set("bootpretryperiod", max_timeout));
-+	*test = (struct dhcp_policy_test){ .bind_after = 1 };
-+	ut_assertok(do_dhcp(NULL, 0, 1, argv));
-+	ut_assertok(env_set("bootpretryperiod", "3000"));
-+	ut_assertok(env_set("bootpretransmitperiodinit", "32767500"));
-+	ut_assertok(env_set("bootpretransmitperiodmax", "32767500"));
-+	*test = (struct dhcp_policy_test){ .bind_after = 1 };
-+	ut_assertok(do_dhcp(NULL, 0, 1, argv));
-+	ut_asserteq(32767500, test->initial);
-+	ut_assert(test->maximum <= 32767500);
-+	ut_assertok(env_set("bootpretransmitperiodmax", "5000"));
-+	*test = (struct dhcp_policy_test){ .bind_after = 1 };
-+	ut_assertok(do_dhcp(NULL, 0, 1, argv));
-+	ut_asserteq(5000, test->initial);
-+	ut_assertok(env_set("bootpretransmitperiodinit", "5000"));
-+	ut_assertok(env_set("bootfile", "default.bin"));
-+
-+	/* no/unset never rotate; once permits one retry, also on the next command. */
-+	for (i = 0; i < 2; i++) {
-+		ut_assertok(env_set("netretry", i ? NULL : "no"));
-+		ut_assertok(env_set("ethrotate", NULL));
-+		*test = (struct dhcp_policy_test){ .fail_first = true, .bind_after = 1 };
-+		ut_asserteq(CMD_RET_FAILURE, do_dhcp(NULL, 0, 1, argv));
-+		ut_asserteq(1, test->packets);
-+		ut_assertnull(netif_default);
-+	}
-+	for (i = 0; i < 2; i++) {
-+		ut_assertok(env_set("ethact", "eth@10002000"));
-+		ut_assertok(env_set("netretry", i ? "1" : "once"));
-+		*test = (struct dhcp_policy_test){ .fail_first = true, .bind_after = 1 };
+ 	ret = dhcp_options_reply(dev, msg, DHCP_ACK, test->kind);
+ 	if (!ret && test->kind >= DHCP_REPLY_BAD_STRING &&
+ 	    test->kind != DHCP_REPLY_ZERO_OFFSET)
+@@ -408,6 +427,23 @@ static int dhcp_options_check(struct unit_test_state *uts, struct dhcp_options_t
+ 	ut_assertok(env_set("bootp_arch", "1234"));
+ 	ut_assertok(env_set("pxeuuid", "00112233-4455-6677-8899-aabbccddeeff"));
+ 	ut_assertok(dhcp_server_check(uts, test));
++	/*
++	 * Size belongs to the replacement filename, independently of option 2.
++	 * Cover both option 67 and the fixed BOOTP file field in the ACK.
++	 */
++	for (kind = 1; kind <= 4; kind++) {
++		*test = (struct dhcp_options_test){
++			.kind = DHCP_REPLY_EMPTY,
++			.offer_metadata = true,
++			.replacement = kind,
++		};
 +		ut_assertok(do_dhcp(NULL, 0, 1, argv));
-+		ut_asserteq(1, test->first_packets);
-+		ut_asserteq(2, test->packets);
-+		ut_asserteq_str("eth@10003000", env_get("ethact"));
-+		ut_assertnull(netif_default);
++		ut_asserteq_str("replacement.bin", env_get("bootfile"));
++		ut_asserteq((kind & 1) && IS_ENABLED(CONFIG_BOOTP_BOOTFILESIZE) ? 42 : 0,
++			    net_boot_file_expected_size_in_blocks);
++		ut_assert(!test->chain_failed);
++		ut_assertok(dhcp_cache_check(uts, test));
 +	}
-+	ut_assertok(env_set("ethact", "eth@10002000"));
-+	ut_assertok(env_set("netretry", "2"));
-+	ut_assertok(env_set("ethrotate", "no"));
-+	*test = (struct dhcp_policy_test){};
-+	ut_asserteq(CMD_RET_FAILURE, do_dhcp(NULL, 0, 1, argv));
-+	ut_asserteq(IS_ENABLED(CONFIG_BOOTP_MAY_FAIL) ? 1 : 3, test->packets);
-+
-+	/* Neither an interrupt nor another runtime user permits a retry. */
-+	ut_assertok(env_set("netretry", "yes"));
-+	*test = (struct dhcp_policy_test){ .cancel = true };
-+	ut_asserteq(CMD_RET_FAILURE, do_dhcp(NULL, 0, 1, argv));
-+	clear_ctrlc();
-+	ut_asserteq(1, test->packets);
-+	ut_assertok(env_set("ethrotate", NULL));
-+	ut_assertok(net_lwip_start(&other, NET_LWIP_ADDR_ENV_FLEXIBLE));
-+	*test = (struct dhcp_policy_test){};
-+	ret = do_dhcp(NULL, 0, 1, argv);
-+	i = other.netif == netif_default && !netif_dhcp_data(other.netif);
-+	net_lwip_stop(&other);
-+	ut_asserteq(CMD_RET_FAILURE, ret);
-+	ut_assert(i);
-+	ut_asserteq(1, test->packets);
-+	ut_assertnull(netif_default);
-+
-+	ut_assertok(env_set("netretry", "no"));
-+	ut_assertok(env_set("bootpretryperiod", "0"));
-+	*test = (struct dhcp_policy_test){ .bind_after = 2 };
-+	start = get_timer(0);
-+	ut_asserteq(CMD_RET_FAILURE, do_dhcp(NULL, 0, 1, argv));
-+	ut_assert(get_timer(start) < 500);
-+	ut_asserteq(1, test->packets);
-+
-+	return 0;
-+}
-+
-+static int dm_test_lwip_dhcp_policy(struct unit_test_state *uts)
-+{
-+	static const char * const vars[] = {
-+		"ethact", "ethrotate", "netretry", "autoload", "bootfile",
-+		"bootpretryperiod", "bootpretransmitperiodinit", "bootpretransmitperiodmax",
-+		"ipaddr", "netmask", "gatewayip", "ipaddr5", "netmask5", "gatewayip5",
-+		"serverip", "tftpserverip", "dnsip", "dnsip2",
-+	};
-+	struct dhcp_policy_test test = {};
-+	char *saved[ARRAY_SIZE(vars)] = {};
-+	char file[sizeof(net_boot_file_name)];
-+	char *config = pxelinux_configfile;
-+	u32 size = net_boot_file_expected_size_in_blocks;
-+	int i, ret = -ENOMEM, ctrlc_state;
-+
-+	for (i = 0; i < ARRAY_SIZE(vars); i++) {
-+		const char *value = env_get(vars[i]);
-+
-+		if (value) {
-+			saved[i] = strdup(value);
-+			if (!saved[i])
-+				goto out;
-+		}
-+	}
-+	memcpy(file, net_boot_file_name, sizeof(file));
-+	pxelinux_configfile = NULL;
-+	ctrlc_state = disable_ctrlc(0);
-+	sandbox_eth_set_tx_handler(0, dhcp_policy_tx);
-+	sandbox_eth_set_tx_handler(1, dhcp_policy_tx);
-+	sandbox_eth_set_priv(0, &test);
-+	sandbox_eth_set_priv(1, &test);
-+	ret = dhcp_policy_check(uts, &test);
-+	sys_untimeout(dhcp_policy_tick, &test);
-+	clear_ctrlc();
-+	disable_ctrlc(ctrlc_state);
-+	sandbox_eth_set_tx_handler(0, NULL);
-+	sandbox_eth_set_tx_handler(1, NULL);
-+	sandbox_eth_set_priv(0, NULL);
-+	sandbox_eth_set_priv(1, NULL);
-+	memcpy(net_boot_file_name, file, sizeof(file));
-+	net_boot_file_expected_size_in_blocks = size;
-+	free(pxelinux_configfile);
-+	pxelinux_configfile = config;
-+	for (i = 0; i < ARRAY_SIZE(vars); i++)
-+		if (env_set(vars[i], saved[i]))
-+			ret = -EINVAL;
-+out:
-+	for (i = 0; i < ARRAY_SIZE(vars); i++)
-+		free(saved[i]);
-+
-+	return ret;
-+}
-+
-+DM_TEST(dm_test_lwip_dhcp_policy, UTF_SCAN_FDT | UTF_CONSOLE);
+ 	for (kind = DHCP_REPLY_BASIC; kind <= DHCP_REPLY_BAD_DNS; kind++) {
+ 		bool supplied = kind == DHCP_REPLY_BASIC || kind == DHCP_REPLY_OVERLOAD;
+ 		bool have_ntp = IS_ENABLED(CONFIG_BOOTP_NTPSERVER) && supplied;
+@@ -503,6 +539,34 @@ static int dhcp_options_check(struct unit_test_state *uts, struct dhcp_options_t
+ 		ut_asserteq(kind == DHCP_REPLY_BASIC && IS_ENABLED(CONFIG_BOOTP_BOOTFILESIZE) ?
+ 			   42 : 0, net_boot_file_expected_size_in_blocks);
+ 	}
++	/*
++	 * Only the selected offer supplies defaults; rejected ACKs cannot poison
++	 * them, and neither late offers nor a previous exchange are inherited.
++	 */
++	*test = (struct dhcp_options_test){ .kind = DHCP_REPLY_BAD_STRING,
++		.offer_metadata = true };
++	ut_assertok(do_dhcp(NULL, 0, 1, argv));
++	ut_assertok(dhcp_cache_check(uts, test));
++	ut_asserteq_str("option.bin", env_get("bootfile"));
++	if (IS_ENABLED(CONFIG_BOOTP_BOOTPATH))
++		ut_asserteq_str("/srv/root", env_get("rootpath"));
++	ut_asserteq(IS_ENABLED(CONFIG_BOOTP_BOOTFILESIZE) ? 42 : 0,
++		    net_boot_file_expected_size_in_blocks);
++	*test = (struct dhcp_options_test){ .kind = DHCP_REPLY_OVERLOAD,
++		.offer_metadata = true };
++	ut_assertok(do_dhcp(NULL, 0, 1, argv));
++	ut_asserteq_str("subdir/overloaded.bin", env_get("bootfile"));
++	if (IS_ENABLED(CONFIG_BOOTP_BOOTPATH))
++		ut_asserteq_str("/srv/root/fs", env_get("rootpath"));
++	ut_asserteq(0, net_boot_file_expected_size_in_blocks);
++	*test = (struct dhcp_options_test){ .kind = DHCP_REPLY_EMPTY, .extra_offer = true };
++	ut_assertok(env_set("bootfile", "default.bin"));
++	ut_assertok(env_set("rootpath", "/original"));
++	ut_assertok(do_dhcp(NULL, 0, 1, argv));
++	ut_asserteq_str("default.bin", env_get("bootfile"));
++	ut_asserteq_str("/original", env_get("rootpath"));
++	ut_asserteq(0, net_boot_file_expected_size_in_blocks);
++	ut_assertnull(pxelinux_configfile);
+ 	*test = (struct dhcp_options_test){ .kind = DHCP_REPLY_BASIC };
+ 	ut_assertok(do_dhcp(NULL, 0, 3, argv));
+ 	ut_asserteq_str("explicit.bin", env_get("bootfile"));
 
 -- 
 2.53.0
