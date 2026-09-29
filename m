@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EC82CA5FA1
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 00:22:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 537F9CA5FA1
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 00:22:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DA31C6071E;
-	Tue, 29 Sep 2026 00:22:25 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1C33660732;
+	Tue, 29 Sep 2026 00:22:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LO7td3gsCxpJ; Tue, 29 Sep 2026 00:22:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org B4B1C60725
+ id jOEdpEv212qO; Tue, 29 Sep 2026 00:22:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7AB006076D
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790641342;
-	b=r423t4l80nnHdE7Oc2cgLmzFQNkCwZ0SfAhZ1ctIB75+NJacr7d0zgH96NXOwpHekIhi
-	 Xf0SK5C9cmFiNRL0qCgthtoiMLNaEIFfzLZr8SFMLg8PYyl8cZc9SxPNiGJeV04io8hfc
-	 SgJ3Ve8TwHojpe0xa2OBDf8C4x+8C5t7ue/uw8/R7YIHCjl2m/qlBRqf/tCuwsjN9xqLI
-	 u1Jjzh6EpreJKe2QOJCuQcGJCFYi86660Z0M+8KRQ4Nn20FHxM1uu8sMHFkOmLTsz15Ar
-	 lr/+A4HFCOF9Xid/Z+fFA49cnJj20tvbF5WCk2U7Tzmy4j/JsmsIzTqxbCThWB98oIQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790641346;
+	b=fvR6ZwRwcpj+UnjYfE0XCLq2p7UTMddl+xzwJ39OfbeWcf9qgmEgVv+kIlZNYoFsRq+6
+	 ciGQj2KvoN5bm8yCzJWy8JhEjLP3EEUGT+3YwfRD7mjFdDCJtfBFo4CaBZo9CPALpoohH
+	 aKRRpFQw+s+q/n+wYCA5qXXK0MhYw2YU05F8MNgoKpWeI5OjM37dt76e7nNCY3yweHFlk
+	 zjY/Jn/zPbR0p+lWwkyrV1NdUbX2Z2Am72Z4PQfiZMVlX8KvjhnO9LouxGf8SnP+4X5zE
+	 nVrozvAqHsS/UD805D7ATjL4vzr0/v1/VVDM4/FGE8F93PPsMCumuxfqIHnCdMOUWPw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790641342;
+	c=relaxed/relaxed; t=1790641346;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,135 +32,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=eI/GqNqGcntVVe6MZw4iTqECcvQOsLQu/YXTscsCqLo=;
-	b=eAsWeswQv1xF6LQnD7fSmKh9XgpKdb866kT70TIC0Ck25LW/G7HOiw9StrU++cvJR1+U
-	 USHVu0TDMJd0eNukIU9miaYzd8YbxerwiQOJmAy0UY7BbrU0OL1BYQWbGMU4eL8/SeXHF
-	 aZnGVC2L+j4tzw9fhYHANqUqdluPPp2+R5JewVI4AmIGOCM182xcDo9tEX2FCpznk6Rc8
-	 bn3qznayxOGjFw8q9dvvWxPFCos03BiihnBAHHnxqdk0jlc0lrDrVVEI4PQUSqaeox9u1
-	 Lgg/ZPMwIiG8k8Ckmz2cxtGohrz/kQKAPEhqqxmFXOt96Sz7zkXXOup3b/ttupfXjZg==
+	bh=YSNcdG5wBS0QFLpR1gisHDXbglTEvZAvL/Pe2LIAk+U=;
+	b=JNtDpzuO1ToLtfRcs0h0jduKbqHwmfcO3rlgXWcVPkZ1KN/RabEyX6JlD0PPJtjrYI/I
+	 J1tZVgkrgL8ccZPB2oFL3xnVM+pDP6+d8x8I8GmPEYXbl4RWHSe1P7vY3Pg8JCeimKrax
+	 YiPZnXHnumgXjvVoG2EnWWWScLUyHH/9i8AqordMZtAJrksqp3yC5J6TwpTuVXHJbJzbM
+	 dArzTUCUWpmm1YZePZzODqJw17E0XWW+F1wIXzjEkU5TjAQieEGkz6knhdRnfW44Q9tqL
+	 f2ZZj2jl7YtIbmukYK9AMXJvHab26t4GpAi5ECBfcHMDoZdQAZo89g3Tl4RB5pFnv6Q==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790641342;
-	bh=eI/GqNqGcntVVe6MZw4iTqECcvQOsLQu/YXTscsCqLo=;
+	d=lists.u-boot-project.org; s=default; t=1790641346;
+	bh=YSNcdG5wBS0QFLpR1gisHDXbglTEvZAvL/Pe2LIAk+U=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=aX6yOZhP3yjvBZ8A1WqckxT86y+1tilslRJfW2pVpk+xM8Cx7/TeW9+995NmTrQCA
-	 2mVqM7/f+YnqHaaNpNtekPuVYSsmojQKCKkMndOgC1T/WPjvlmLnX5hQLKtps1wLo8
-	 ZHXEYNqPldsUlFDU5F0qs9Jo5O+GCFT52NEx+NFdHx+SlHr4HX1+oRBT/NhGBgEtEu
-	 uylumkkq8GH+s/YEtzArheOjs7D/tzgewwD8rhCsUDkg0TMgGQJB7RJFtf0CQZd0bT
-	 VAnQz6vhBnO9JDiDODsOXLlb+E7coHJn4kTXi4NLdBZS5H4kfyVJmTWc2cjILSE9cb
-	 HKW2AB3qkVDYQ==
+	b=FcfzhiEAVeYtZs0bBhACDJFL0JmQP9O8g4kfw6LXHS9QV3iG+Xwf7nK808DsxebSM
+	 DlLMmvA/Mfo8gK2yb5izGyRHCJvAtwpcE/zTd2benBLptlZpTuRNAy7hqgDd9arLxu
+	 By6jvAywAIxg6oMeiEktFSvljsTs/CaxbTDvGs714APYmkme6kB8g7NtneEla8RHRI
+	 V1Od+UXgvBVc4metBbHeEqrx9v0ZVWKYCHI2UFNRNkgl1zbdySI7qcyHKcQUELeoPu
+	 y+nFOTOPVQr+1Vlyv8D0mG4P56Ox/AR8p6G12TiwVGAVlWcNHhx6jIr41WLC0CJYWI
+	 qqU+wCBZwekWA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B4B1C60725;
-	Tue, 29 Sep 2026 00:22:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7AB006076D;
+	Tue, 29 Sep 2026 00:22:26 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 893004CD
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:15 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 57D0961
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7A5F240247
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:15 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 49DFD40252
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bfIkS3a7ZJ-h for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 00:22:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 61D2C4024D
+ id 1PNI4JQyZ7vD for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 00:22:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org E58C340247
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::335"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790641334;
- b=G8TC9Cjjd1EcjpRGt+wZhAlFJwJatzl+GAexgQ6PiKLid5uGDLmHby/O62P1HeLaRNXZ
- t4tZA9DXAxbfeQ9HTKX3r25u0SKh5NqKHKFKlc08N5sCEZyBtbWDM1GcEPTqUI+YwizHU
- wJSZB9925ME9oNI4Pqskjv0FHZqeSAVVhDrjinoQsVkqHiMghQ6gqIQrCEo5IMlMGru0+
- lRY2bY+SSogGbrrzcIvx7wf6CHKaphHJ+8gdHTGKdzqX6dyUmNgE8gq7eXaHjH21N06j+
- 54YjjTQliwuGYINhrNYqVW/h+K9d5Hk/xBXtbEtQGx8Evq6pduJJLpScEBzDnC2VVPA==
+ arc=none smtp.remote-ip="2607:f8b0:4864:30::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790641339;
+ b=IQas/5o5i990JHNMqzWl69TPZsRSB3VP7NxUh5qSGdDVDRcSGAi5d3Ka3GsQRt7c5pZg
+ mEFLBdjl3L8sIrAi03qhVV6ZK8kiZBBOrd/OPQ9hCE0sxfj4+YdsO9J80NLSCSKtbc2tp
+ wET33DEpjmauQwq8ejELisZEem7cZvuovYCT4RAs2cDg+Xg491tiJF7O9G5PJN8hu7yjy
+ vPWOZwi4LN/u2HhIJ/jVH03uPGVALcExFNfsKQSnVDAsegQIOfd9o09ogYNpmrGChVj+A
+ DZB4T8ijDOoe2BgaoVW0gJ+FcbeW7VAx+S20+uy4dg4xCcSnAWUp52noB4sx3Xzk6DA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790641334;
+ c=relaxed/relaxed; t=1790641339;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=eI/GqNqGcntVVe6MZw4iTqECcvQOsLQu/YXTscsCqLo=;
- b=qdaMV2dXFk5m56unWbVqDihce8txe9QLLZxxKkzdz/b86Gry94dsMLdf+Om+FrppSKbt
- eUjhxx1YtkTgLDgiq7bVqeV0y+ylDyh17/z9750AFJUWLh8ocYI7dQGrezriWsUBvQjSw
- wFzPe1+cZOGjyXXoaAXFTol9hEWMFt0ukgVIhBVeBdwVrLuzNWf6vyHuhosUKjHTRqlrw
- DGQTqqnLYWBepzxGf5anOx8amvYNEgEpL6uVdxAdetQZ3rIhdZuNzpx+zOT8tkuC5uMtN
- IQxL56/CJFRYFYepPXPiU4L/eSkqZ/8ymtIJ4Z19NeqGz7GH8yr9/m8VxqW0gkBQubw==
+ bh=YSNcdG5wBS0QFLpR1gisHDXbglTEvZAvL/Pe2LIAk+U=;
+ b=cAdG5BLSErKqyztISsTxqjo3CqT/30BmFmwqTOCAAcOHNnZLqc6enWYzSCModceHndkm
+ wvT47YheyZ0S3azfc3Xf9fXvtnKzNkFrcO1DOwHP2wHphz9nCnbC4zck0hwxbkwt0H3WC
+ +ebxvFrVlr2n1ZL+A4JDafHb3piE1OJZWLHN911qfPlgOykXKaKP4dBm7JYARuOQsC57K
+ D/3uDam42zOwmVwKJ7kXRz70fkjIAiJtwxdyHqJ6a9QaUkjl/PlBAHfZcEMo9Kesx06pI
+ fDYRFKjH76biQHFQc30ynuD2+4mS+goYtfG9NiHqHsB+5uRG7yaTOUrrTz0hPClKoow==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=VCj38zMU; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::335"
+ header.s=20251104 header.b="F76qmz0/"; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:30::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::335; helo=mail-ot1-x335.google.com;
+ client-ip=2607:f8b0:4864:30::10; helo=mail-oa2-x10.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=VCj38zMU
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 61D2C4024D
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:13 +0000 (UTC)
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-81ad35a4608so278924a34.1
- for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 17:22:13 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=F76qmz0/
+Received: from mail-oa2-x10.google.com (mail-oa2-x10.google.com
+ [IPv6:2607:f8b0:4864:30::10])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E58C340247
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:22:18 +0000 (UTC)
+Received: by mail-oa2-x10.google.com with SMTP id
+ 586e51a60fabf-466ccde2ad8so2294848fac.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 28 Sep 2026 17:22:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790641333; x=1791246133;
+ d=gmail.com; s=20251104; t=1790641337; x=1791246137;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=eI/GqNqGcntVVe6MZw4iTqECcvQOsLQu/YXTscsCqLo=;
- b=VCj38zMU0tHJbk0PIF2+TvHFd0ng/1xh6G8OJQiSND+OW5h7IIJVzzl0PdOZdnV+O8
- jTqdWsZ5Ux+OMuixBaWhrofuCNqPNqaM7f1C1mJLvpKVzOE0nnvbEgSTfV4BScEcFs3K
- VHlu8AJLjiviPKumwtSMzo0b+kPy0hC/mJuM4RDuduGqPL/JXp7SMB0xJs3VSYiNDVaS
- Vj1vVQyv54kit4lWa44kxdRLQpiInkXxGWuEXafuO0VGoJsArzlL7Y9CANiJ3Q0SSwmN
- kvMHYlorxdDu8KQHrFmpv8Oz5r3F1VvQCEeZAbwdqvv+5q4cz5/vshfU06jxCyJ8HnEx
- PBbQ==
+ bh=YSNcdG5wBS0QFLpR1gisHDXbglTEvZAvL/Pe2LIAk+U=;
+ b=F76qmz0/3RvZH4VVS7drIt2ufWELO7PGPG7LLEtLBLvP5EPN4th+PBz7bnb8jadP17
+ rV0tdUzJe8mRJKE+Y9HJWyOXGXtk1SZr+sXy1lh8Q+Nc1DkCr/biq+mVLjrD/uMyxnuw
+ 3qEVC9rAQK4NgOOF8nNSSt0LD5B0xDnGmqqQ8ov3qlsChmozacH+irJFODLAAorKNoe4
+ 1YWkDyWikghzqsPtlKu5Qw0vEWeUbUzlq+T3WCZpWI286ktqBVSkewAdsYEJTEcSVFBB
+ 9NOmPlttn9eiaV2YhosKcOte3TPDn5nhIYMxRjIv9kKdIWlbn2/3GZBO5+dQM8kcJu2Q
+ 0pEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790641333; x=1791246133;
+ d=1e100.net; s=20260707; t=1790641337; x=1791246137;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=eI/GqNqGcntVVe6MZw4iTqECcvQOsLQu/YXTscsCqLo=;
- b=Ypu8z14jeBR4KKxRSw253Pva66osvfDSbey4yDNStaWLhWwnNjs7IWmpYdbGEbUu7l
- 92M2CCTP1jfu9KvGPtSW3xIGfnfMz2z9UBVhn6FDjxcIs88uYavL69l1zSwNNU9v1hjT
- 1SBc5OC0zUEhwhavAuIhl988t0+G3eB20wOioSqqxOYduXaQ5aphX6kho7k2PBHgvB5h
- ECcW5LqKDImuAath6QlhVlnpggDBLRWNkmwIIQ71OJwYGgbLo0gqQnv0WEyicr4+4UxI
- 5VOO1oySQiwccrJyMeXqddWJ+QWgblm0LTOgl8NX+qSFx0AxNO7JC5XYSan3we6XO0wu
- R28w==
-X-Gm-Message-State: AFuF++mrAZqg4cFVInKSrq/KyzCO0fpBjp1Y1BkBOtkLDfUwkXGxwDsz
- 5B3ByeMEoRq66Wn2qjbRfD+Taia7ALk65rcPfQ6IT3TN1bgLzpa2EpUO
-X-Gm-Gg: AYBFou2PewSoHVz/K4lDP52pJVvunUFCtDRbgkbfTcIeVxhZEcqtwYgI75iVeUy294T
- Rx2HlN2R5ZmNnpJUZzaAt+nPGsysLII89/7DZyq2Xt6cnVurUjOWxKlpEQgYpYEFCzOAL6ual63
- cLpFaDNjz+tyRhUjl1GklXzL7ovb2FyF6wRNdhDgVsTXXUvfJ1briwr3gsEOGcqHhkRJxEKHAWy
- psa4GtqHj8tlVE+KGHuDmGUeqoefs9fi9cOXIAm9BSPnftnS0U/oWDKItS6LJO/ZqSlMyCUwUFE
- 7fThjsMCMmzu3iGXl11ueRw5DMqNiwnDcWThsaTw5IEf2k2YGot7ut8TdN/jXkx7kb056m5B8si
- mJI26z0vpMIiWYD3+OH4Dz+s5PwJKmaatUwVxnBGLRSJ8jAZTGXQPk4P9leflPf+q97DnfMTNMG
- k+P7tkMhFtedBpkSGrQhsiEPpBaRT7F15iFVJGU+ynLamA9m+ykHLCar9RlN2/Sk7DxgDDBQR0Q
- kmntE89S85Vp7dfe2DRlaPCinG+O9PUAU2jEzPNth6z4+ua42r6Fs9HcsaZVGhRDgVsJrV30Ib8
- cPF1BlEj2zOeJYNe+z2bGze7Nw2mV+JJS2d3C0x8rbwE5mGlYEDrKD6VYsBDfvLORP74+gsV5zK
- PSObJhoA0iOclooh5Lj8b
-X-Received: by 2002:a05:6820:1905:b0:6d7:aca3:bba6 with SMTP id
- 006d021491bc7-6db15a7dfbamr595394eaf.47.1790641332813; 
- Mon, 28 Sep 2026 17:22:12 -0700 (PDT)
+ bh=YSNcdG5wBS0QFLpR1gisHDXbglTEvZAvL/Pe2LIAk+U=;
+ b=utrVZMQJQVTYD37vtrJfr5rlEFF+cV/30/c1zMxEQQKyAjVnt6GXiXCFpZkPKBZu11
+ 29hnrYXPXotYcYVUklCd+dbeK40OQq+c552u3YpmwGVGAXcJOAJQTgD2YlroKzMhw3E2
+ JVxszcvQFovnK9y78aUy7KRyQS5UWInUR8ES1E0iD9B2Lm/9rPy/ywPbZmSIVo0m7flY
+ 2NN+qE9/qkRtVhLAtDH9Dz474xCN3ER/2hXtpzEDpuQpLhNcvhL4IrnYVUnvF/zKgJB3
+ 6FVF9c5B4CRL1pK1UQ5gdg6Fz8XNXMPJltlv9l6Hz737FAnV9EVUanMPDKjxD+F10tv0
+ vD3w==
+X-Gm-Message-State: AFuF++nKGb6tzzItHYnhL36ynzdNeleIfmQElrlCh3TLmS65tT8yBeW7
+ AiZus4UYoksMuYz7QLnVSI87+/m+UyAuCG0Oj5b06UhD0nXnHPV7JDDL
+X-Gm-Gg: AYBFou38Rjd4UZPVw7FUmdFCEzz1yK0fs6Q+a0AZfwniogOygdzCOp0bBWEtZ+w/W8s
+ bDiB3zsrpYi6F18hkUos1FP3ISpOu8z8mylXuiina8OfEuGLm7EAq1/oVVrPdoG/MW7Mm4w277o
+ RS3LgAp8qaAYmzmesZf8iyvmlhO6YvKAwWDW0mAonMhDvK9Qc94L+bv1ovT7LnX3lfsMYFHbCKN
+ hUT+Um70RIOCoHczY0TL/omH6ZXgp7vqs7pLWeZrIrjjnuYEg7Vk0PrqROtt5Ch5/QIY7xvyxXh
+ kt4WfeZemoS8JlBxDPmk0lGT8m6hWk8BXg21T5f3HsQQ9RYA+PNf3GwGjFZ0Utmrezv+gus/nkS
+ 6XksT9qrlT3+66U4XCyUyRBRA9A0A6HNLQ2ZBnXWnWO2WignobioLgk8xXTEOw9Wx8WpGP5Ho9P
+ M+e38pVawBITxCGh1eco/oTGaHlAMIvFP7pC5wlJgMHB9s8DFQbYbI2JvyPUMHMVO8vHBRUdbrb
+ WNCDw0pJVj0Fys2bIcQNKevHeKsN9fpe/LZuawPnRacjfbzYPNFikCXqugbiYpLAYcigoBxB7Oi
+ L7wCaaRTkn3jtakDq7dDH70IzC2PuKD7u9dcWyh/95xDp8sNH7+kdCLKtrJy8nQJnewdMUWFi/k
+ 9X131XvxEPMLeqacY1NPv
+X-Received: by 2002:a05:6808:11cc:b0:4d6:9252:48cb with SMTP id
+ 5614622812f47-4d72b83b8fcmr15153237b6e.55.1790641337022; 
+ Mon, 28 Sep 2026 17:22:17 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-494877590e5sm8175688fac.13.2026.09.28.17.22.11
+ 586e51a60fabf-494877590e5sm8175688fac.13.2026.09.28.17.22.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Sep 2026 17:22:12 -0700 (PDT)
+ Mon, 28 Sep 2026 17:22:16 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Mon, 28 Sep 2026 18:21:49 -0600
-Subject: [PATCH 12/20] net: lwip: honor DHCP timing controls and request
- header fields
+Date: Mon, 28 Sep 2026 18:21:51 -0600
+Subject: [PATCH 14/20] net: lwip: accept direct ProxyDHCP replies without a
+ lease
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260928-lwip-dhcp-v1-v1-12-2060c7365b0c@gmail.com>
+Message-Id: <20260928-lwip-dhcp-v1-v1-14-2060c7365b0c@gmail.com>
 References: <20260928-lwip-dhcp-v1-v1-0-2060c7365b0c@gmail.com>
 In-Reply-To: <20260928-lwip-dhcp-v1-v1-0-2060c7365b0c@gmail.com>
 To: u-boot@lists.u-boot-project.org
@@ -194,333 +194,465 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Use the legacy acquisition deadline and configurable initial/maximum
-retransmission intervals instead of a fixed ten-second timeout. Share
-the customizable backoff between DISCOVER and selecting REQUEST, retain
-the other lwIP lease timers, and bound values to the fine timer
-representation.
+Consume matching zero-address boot replies before the lease parser can
+select them or clear the accepted boot filename. Require a valid PXE
+vendor class and server identifier, validate the complete boot
+metadata, and retain the first usable reply for this transaction. Keep
+DHCPNAK processing and discard stale proxy selection when discovery
+starts a new transaction.
 
-Include elapsed acquisition time and the requested boot filename. Keep
-the last DISCOVER secs value in selecting REQUEST as required by RFC
-2131, and saturate elapsed time instead of wrapping. Cover the request
-fields with wire tests.
+Continue polling during a bounded post-ACK wait instead of blocking
+after an offer. A missing proxy is not a lease failure. Take only
+boot-server, filename and configuration data from the proxy, preserving
+explicit filenames and configured server preferences. Keep host network
+configuration and the EFI ACK from the address server. Publish the
+separate proxy packet and its validity flag alongside the ACK for EFI
+consumers.
+
+Expose the existing ProxyDHCP controls to lwIP. This does not implement
+PXE boot menus or port-4011 boot-service discovery.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- lib/lwip/lwip/src/core/ipv4/dhcp.c | 12 ++++---
- lib/lwip/u-boot/lwip-dhcp.h        |  3 ++
- net/Kconfig                        |  8 ++---
- net/lwip/dhcp.c                    | 66 ++++++++++++++++++++++++++++++++++++--
- test/dm/lwip_dhcp_options.c        | 20 ++++++++++++
- 5 files changed, 97 insertions(+), 12 deletions(-)
+ include/efi_loader.h        |   4 +-
+ lib/efi_loader/efi_net.c    |  23 ++++++-
+ lib/lwip/u-boot/lwip-dhcp.h |   2 +
+ net/Kconfig                 |  21 +++++--
+ net/bootp.c                 |   2 +-
+ net/lwip/dhcp.c             | 149 ++++++++++++++++++++++++++++++++++++++++----
+ 6 files changed, 180 insertions(+), 21 deletions(-)
 
-diff --git a/lib/lwip/lwip/src/core/ipv4/dhcp.c b/lib/lwip/lwip/src/core/ipv4/dhcp.c
-index 035df0f302f..387f8f8660f 100644
---- a/lib/lwip/lwip/src/core/ipv4/dhcp.c
-+++ b/lib/lwip/lwip/src/core/ipv4/dhcp.c
-@@ -132,7 +132,9 @@
- #define DHCP_SET_TIMEOUT_FROM_OFFERED_T2_REBIND(res, dhcp) SET_TIMEOUT_FROM_OFFERED(res, (dhcp)->offered_t2_rebind, 0, 0xffff)
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 830b086e6a2..7b865fe900a 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -81,7 +81,7 @@ efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len);
+ void efi_restore_gd(void);
  
- #define DHCP_NEXT_TIMEOUT_THRESHOLD ((60 + DHCP_COARSE_TIMER_SECS / 2) / DHCP_COARSE_TIMER_SECS)
-+#ifndef DHCP_REQUEST_BACKOFF_SEQUENCE
- #define DHCP_REQUEST_BACKOFF_SEQUENCE(tries)   (u16_t)(( (tries) < 6 ? 1 << (tries) : 60) * 1000)
-+#endif
+ /* Called by networking code to memorize the dhcp ack package */
+-void efi_net_set_dhcp_ack(void *pkt, int len);
++void efi_net_set_dhcp_ack(void *pkt, int len, void *proxy, int proxy_len);
+ /* Populate PXE mode with the newest cached reply for this interface. */
+ void efi_net_get_dhcp_ack(struct udevice *dev, struct efi_pxe_mode *mode);
+ /* Print information about all loaded images */
+@@ -103,7 +103,7 @@ static inline efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len)
  
- #endif /* DHCP_DEFINE_CUSTOM_TIMEOUTS */
+ /* No loader configured, stub out EFI_ENTRY */
+ static inline void efi_restore_gd(void) { }
+-static inline void efi_net_set_dhcp_ack(void *pkt, int len) { }
++static inline void efi_net_set_dhcp_ack(void *pkt, int len, void *proxy, int proxy_len) { }
+ static inline void efi_net_get_dhcp_ack(struct udevice *dev, struct efi_pxe_mode *mode) { }
+ static inline void efi_print_image_infos(void *pc) { }
+ static inline efi_status_t efi_launch_capsules(void)
+diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+index 331efb9a5f2..a572a35d340 100644
+--- a/lib/efi_loader/efi_net.c
++++ b/lib/efi_loader/efi_net.c
+@@ -59,6 +59,8 @@ static struct wget_http_info efi_wget_info = {
  
-@@ -454,7 +456,7 @@ dhcp_select(struct netif *netif)
+ struct dhcp_entry {
+ 	struct efi_pxe_packet *dhcp_ack;
++	struct efi_pxe_packet *proxy_offer;
++	bool have_proxy;
+ 	struct udevice *dev;
+ 	bool is_valid;
+ };
+@@ -770,9 +772,12 @@ out:
+  *
+  * @pkt:	packet received by dhcp_handler()
+  * @len:	length of the packet received
++ * @proxy:	optional direct ProxyDHCP reply from the same exchange
++ * @proxy_len:	length of the proxy reply, zero if absent
+  */
+-void efi_net_set_dhcp_ack(void *pkt, int len)
++void efi_net_set_dhcp_ack(void *pkt, int len, void *proxy, int proxy_len)
  {
-   struct dhcp *dhcp;
-   err_t result;
--  u16_t msecs;
-+  u32_t msecs;
-   u8_t i;
-   struct pbuf *p_out;
-   u16_t options_out_len;
-@@ -503,9 +505,9 @@ dhcp_select(struct netif *netif)
-   if (dhcp->tries < 255) {
-     dhcp->tries++;
-   }
--  msecs = (u16_t)((dhcp->tries < 6 ? 1 << dhcp->tries : 60) * 1000);
-+  msecs = DHCP_REQUEST_BACKOFF_SEQUENCE(dhcp->tries);
-   dhcp->request_timeout = (u16_t)((msecs + DHCP_FINE_TIMER_MSECS - 1) / DHCP_FINE_TIMER_MSECS);
--  LWIP_DEBUGF(DHCP_DEBUG | LWIP_DBG_STATE, ("dhcp_select(): set request timeout %"U16_F" msecs\n", msecs));
-+  LWIP_DEBUGF(DHCP_DEBUG | LWIP_DBG_STATE, ("dhcp_select(): set request timeout %"U32_F" msecs\n", msecs));
-   return result;
- }
++	struct dhcp_entry *entry = &dhcp_cache[next_dhcp_entry];
+ 	struct efi_pxe_packet **dhcp_ack;
+ 	struct udevice *dev;
+ 	int i;
+@@ -792,8 +797,18 @@ void efi_net_set_dhcp_ack(void *pkt, int len)
+ 		if (!*dhcp_ack)
+ 			return;
+ 	}
++	if (proxy && proxy_len > 0 && !entry->proxy_offer) {
++		entry->proxy_offer = malloc(maxsize);
++		if (!entry->proxy_offer)
++			return;
++	}
+ 	memset(*dhcp_ack, 0, maxsize);
+ 	memcpy(*dhcp_ack, pkt, min(len, maxsize));
++	entry->have_proxy = proxy && proxy_len > 0;
++	if (entry->have_proxy) {
++		memset(entry->proxy_offer, 0, maxsize);
++		memcpy(entry->proxy_offer, proxy, min(proxy_len, maxsize));
++	}
  
-@@ -1027,7 +1029,7 @@ dhcp_discover(struct netif *netif)
- {
-   struct dhcp *dhcp = netif_dhcp_data(netif);
-   err_t result = ERR_OK;
--  u16_t msecs;
-+  u32_t msecs;
-   u8_t i;
-   struct pbuf *p_out;
-   u16_t options_out_len;
-@@ -1076,7 +1078,7 @@ dhcp_discover(struct netif *netif)
-   }
-   msecs = DHCP_REQUEST_BACKOFF_SEQUENCE(dhcp->tries);
-   dhcp->request_timeout = (u16_t)((msecs + DHCP_FINE_TIMER_MSECS - 1) / DHCP_FINE_TIMER_MSECS);
--  LWIP_DEBUGF(DHCP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_STATE, ("dhcp_discover(): set request timeout %"U16_F" msecs\n", msecs));
-+  LWIP_DEBUGF(DHCP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_STATE, ("dhcp_discover(): set request timeout %"U32_F" msecs\n", msecs));
-   return result;
- }
+ 	dhcp_cache[next_dhcp_entry].is_valid = true;
+ 	dhcp_cache[next_dhcp_entry].dev = dev;
+@@ -820,13 +835,19 @@ void efi_net_get_dhcp_ack(struct udevice *dev, struct efi_pxe_mode *mode)
+ 	int i, j;
  
+ 	mode->dhcp_ack_received = false;
++	mode->proxy_offer_received = false;
+ 	memset(&mode->dhcp_ack, 0, sizeof(mode->dhcp_ack));
++	memset(&mode->proxy_offer, 0, sizeof(mode->proxy_offer));
+ 	i = (next_dhcp_entry + MAX_NUM_DHCP_ENTRIES - 1) % MAX_NUM_DHCP_ENTRIES;
+ 	for (j = 0; dhcp_cache[i].is_valid && j < MAX_NUM_DHCP_ENTRIES;
+ 	     i = (i + MAX_NUM_DHCP_ENTRIES - 1) % MAX_NUM_DHCP_ENTRIES, j++) {
+ 		if (dev == dhcp_cache[i].dev) {
+ 			mode->dhcp_ack = *dhcp_cache[i].dhcp_ack;
+ 			mode->dhcp_ack_received = true;
++			if (dhcp_cache[i].have_proxy) {
++				mode->proxy_offer = *dhcp_cache[i].proxy_offer;
++				mode->proxy_offer_received = true;
++			}
+ 			break;
+ 		}
+ 	}
 diff --git a/lib/lwip/u-boot/lwip-dhcp.h b/lib/lwip/u-boot/lwip-dhcp.h
-index b3bbd9e5ba4..fd60dec2dcc 100644
+index fd60dec2dcc..03f8a6a2a14 100644
 --- a/lib/lwip/u-boot/lwip-dhcp.h
 +++ b/lib/lwip/u-boot/lwip-dhcp.h
-@@ -11,6 +11,9 @@ struct dhcp_msg;
- struct netif;
- struct pbuf;
+@@ -15,10 +15,12 @@ u32_t net_lwip_dhcp_timeout(u8_t tries);
+ #define DHCP_REQUEST_BACKOFF_SEQUENCE net_lwip_dhcp_timeout
  
-+u32_t net_lwip_dhcp_timeout(u8_t tries);
-+#define DHCP_REQUEST_BACKOFF_SEQUENCE net_lwip_dhcp_timeout
-+
  err_t net_lwip_dhcp_ack(struct netif *netif, struct dhcp *dhcp, struct pbuf *p);
++err_t net_lwip_dhcp_recv(struct netif *netif, struct dhcp *dhcp, struct pbuf *p);
  void net_lwip_dhcp_append(struct netif *netif, struct dhcp *dhcp, u8_t state,
  			  struct dhcp_msg *msg, u8_t type, u16_t *len);
+ 
+ #define LWIP_HOOK_DHCP_HANDLE_ACK net_lwip_dhcp_ack
++#define LWIP_HOOK_DHCP_RECV net_lwip_dhcp_recv
+ #define LWIP_HOOK_DHCP_APPEND_OPTIONS net_lwip_dhcp_append
+ 
+ #endif /* __UBOOT_LWIP_DHCP_H */
 diff --git a/net/Kconfig b/net/Kconfig
-index b8b37c09442..93f80eabb18 100644
+index 93f80eabb18..f732da4e2fc 100644
 --- a/net/Kconfig
 +++ b/net/Kconfig
-@@ -46,10 +46,9 @@ config NETCONSOLE
- 	  Support the 'nc' input/output device for networked console.
- 	  See doc/usage/netconsole.rst for details.
+@@ -116,19 +116,30 @@ config TFTP_TSIZE
+ 	  size from server, and if supported, limits the progress bar to
+ 	  50 characters total which fits on single line.
  
--if NET_LEGACY
--
- config ARP_TIMEOUT
- 	int "Milliseconds before trying ARP again"
-+	depends on NET_LEGACY
- 	default 5000
- 
- config NET_RETRY_COUNT
-@@ -58,15 +57,16 @@ config NET_RETRY_COUNT
++endif
++
+ config SERVERIP_FROM_PROXYDHCP
+ 	bool "Get serverip value from Proxy DHCP response"
++	depends on NET_LEGACY || CMD_DHCP
  	help
- 	  This variable defines the number of retries for network operations
- 	  like ARP, RARP, TFTP, or BOOTP before giving up the operation.
-+	  With lwIP this sets the default DHCP acquisition timeout to
-+	  (3 + 5 * NET_RETRY_COUNT) seconds.
+-	  Allows bootfile config to be fetched from Proxy DHCP server
+-	  while IP is obtained from main DHCP server.
++	  Obtain the IP lease from the DHCP server and boot information from
++	  a separate ProxyDHCP server. With lwIP, accept direct boot replies
++	  on the DHCP client port; PXE boot menus and UDP port 4011 boot-service
++	  discovery are not implemented.
  
- config PROT_UDP
- 	bool "Enable generic udp framework"
-+	depends on NET_LEGACY
+ config SERVERIP_FROM_PROXYDHCP_DELAY_MS
+ 	int "# of additional milliseconds to wait for ProxyDHCP response"
++	depends on SERVERIP_FROM_PROXYDHCP
++	range 0 10000
+ 	default 100
  	help
- 	  Enable a generic udp framework that allows defining a custom
- 	  handler for udp protocol.
+-	  Amount of additional time to wait for ProxyDHCP response after
+-	  receiving response from main DHCP server. Has no effect if
+-	  SERVERIP_FROM_PROXYDHCP is false.
++	  With lwIP, keep polling for a direct ProxyDHCP reply for up to this
++	  many milliseconds after obtaining the IP lease. Return immediately
++	  if a usable proxy reply already arrived. Missing proxy information
++	  does not fail an otherwise successful lease.
++	  The legacy client waits after receiving the DHCP offer.
++
++if NET_LEGACY
  
--endif
--
- config BOOTP_SEND_HOSTNAME
- 	bool "Send hostname to DHCP server"
- 	depends on NET_LEGACY || CMD_BOOTP || CMD_DHCP
+ config KEEP_SERVERADDR
+ 	bool "Write the server's MAC address to 'serveraddr'"
+diff --git a/net/bootp.c b/net/bootp.c
+index 320a545ad5d..cba0608009c 100644
+--- a/net/bootp.c
++++ b/net/bootp.c
+@@ -1154,7 +1154,7 @@ dhcp_got_bootp:
+ 			dhcp_state = BOUND;
+ 			if (CONFIG_IS_ENABLED(EFI_LOADER) &&
+ 			    IS_ENABLED(CONFIG_NETDEVICES))
+-				efi_net_set_dhcp_ack(pkt, len);
++				efi_net_set_dhcp_ack(pkt, len, NULL, 0);
+ 			printf("DHCP client bound to address %pI4 (%lu ms)\n",
+ 			       &net_ip, get_timer(bootp_start));
+ 			net_set_timeout_handler(0, (thand_f *)0);
 diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-index c68f97c5d89..94d4edf5c98 100644
+index 94d4edf5c98..b223261ff23 100644
 --- a/net/lwip/dhcp.c
 +++ b/net/lwip/dhcp.c
-@@ -10,6 +10,7 @@
- #include <lwip-dhcp.h>
- #include <malloc.h>
- #include <net.h>
-+#include <rand.h>
- #include <time.h>
- #include <asm/unaligned.h>
- #include <dm/device.h>
-@@ -21,7 +22,8 @@
- #include <lwip/prot/dhcp.h>
- #include <u-boot/uuid.h>
+@@ -31,6 +31,9 @@ struct dhcp_boot_data {
+ 	char domain[256];
+ 	char bootfile[sizeof(net_boot_file_name)];
+ 	char pxe_config[256];
++	char vendor[256];
++	ip4_addr_t server;
++	u8 type;
+ 	u8 file_size[2];
+ 	u8 time_offset[4];
+ 	ip4_addr_t ntp;
+@@ -43,7 +46,9 @@ struct dhcp_boot_data {
  
--#define DHCP_TIMEOUT_MS 10000
-+#define DHCP_TIMEOUT_MS ((3ULL + 5ULL * CONFIG_NET_RETRY_COUNT) * 1000)
-+#define DHCP_RETRANSMIT_MAX_MS (U16_MAX * DHCP_FINE_TIMER_MSECS)
- 
- struct dhcp_boot_data {
- 	char hostname[256];
-@@ -46,6 +48,11 @@ struct dhcp_efi_cache {
+ struct dhcp_efi_cache {
+ 	struct efi_pxe_packet ack;
++	struct efi_pxe_packet proxy_offer;
+ 	u16 ack_len;
++	u16 proxy_len;
+ };
  
  struct dhcp_options {
- 	struct netif *netif;
-+	ulong start;
-+	ulong timeout;
-+	u32 retransmit_init;
-+	u32 retransmit_max;
-+	u16 discover_secs;
+@@ -55,6 +60,10 @@ struct dhcp_options {
+ 	u16 discover_secs;
  	struct dhcp_boot_data reply;
  	struct dhcp_boot_data candidate;
++	struct dhcp_boot_data proxy;
++	ip4_addr_t proxy_server;
++	u32 proxy_xid;
++	bool have_proxy;
  	char hostname[256];
-@@ -88,6 +95,52 @@ static int dhcp_parse_number(const char *str, uint base, ulong limit, ulong *res
+ 	char vendor[256];
+ 	u16 arch;
+@@ -205,7 +214,8 @@ static int dhcp_boot_options(struct pbuf *p, unsigned int pos, unsigned int end,
  	return 0;
  }
  
-+/* The core rounds the result up to its fine timer interval. */
-+u32_t net_lwip_dhcp_timeout(u8_t tries)
+-static err_t dhcp_parse_boot_data(struct pbuf *p, struct dhcp_boot_data *data)
++static err_t dhcp_parse_boot_data(struct pbuf *p, struct dhcp_boot_data *data,
++				  bool proxy)
+ {
+ 	struct dhcp_boot_option opts[] = {
+ 		{ 12, IS_ENABLED(CONFIG_BOOTP_HOSTNAME), true,
+@@ -223,6 +233,9 @@ static err_t dhcp_parse_boot_data(struct pbuf *p, struct dhcp_boot_data *data)
+ 		  data->time_offset, sizeof(data->time_offset) },
+ 		{ 42, IS_ENABLED(CONFIG_BOOTP_NTPSERVER), false,
+ 		  &data->ntp, sizeof(data->ntp) },
++		{ 53, true, false, &data->type, sizeof(data->type) },
++		{ 54, true, false, &data->server, sizeof(data->server) },
++		{ 60, proxy, true, data->vendor, sizeof(data->vendor) - 1 },
+ 		{ 6, IS_ENABLED(CONFIG_BOOTP_DNS), false, data->dns, sizeof(data->dns) },
+ 	};
+ 	u8 overload = 0;
+@@ -269,7 +282,7 @@ static err_t dhcp_parse_boot_data(struct pbuf *p, struct dhcp_boot_data *data)
+ 				return ERR_VAL;
+ 			if (opt->code == 13)
+ 				data->have_size = true;
+-			else
++			else if (opt->code == 2)
+ 				data->have_offset = true;
+ 		}
+ 	}
+@@ -284,6 +297,73 @@ static err_t dhcp_parse_boot_data(struct pbuf *p, struct dhcp_boot_data *data)
+ 	return ERR_OK;
+ }
+ 
++err_t net_lwip_dhcp_recv(struct netif *netif, struct dhcp *dhcp, struct pbuf *p)
 +{
 +	struct dhcp_options *options = active_options;
-+	u32 timeout;
-+	unsigned int i;
-+	s64 jitter;
++	struct dhcp_boot_data *data;
++	ip4_addr_t offered, server;
++	u32 cookie;
++	u8 type = 0, overload = 0;
++	struct dhcp_boot_option msg_type = { 53, true, false, &type, sizeof(type) };
 +
-+	if (!options)
-+		return (tries < 6 ? 1U << tries : 60) * 1000;
-+	timeout = options->retransmit_init;
-+	for (i = 1; i < tries && timeout < options->retransmit_max; i++)
-+		timeout = min(timeout * 2, options->retransmit_max);
-+	if (tries <= 1)
-+		return timeout;
-+	/* Match the legacy client's approximately ten percent randomization. */
-+	jitter = (s64)timeout * ((int)(rand() % 200) - 100) / 1000;
++	if (!options || options->netif != netif)
++		return ERR_OK;
++	if (pbuf_copy_partial(p, &cookie, sizeof(cookie), DHCP_MSG_LEN) != sizeof(cookie) ||
++	    ntohl(cookie) != DHCP_MAGIC_COOKIE ||
++	    pbuf_get_at(p, offsetof(struct dhcp_msg, htype)) != 1 ||
++	    pbuf_get_at(p, offsetof(struct dhcp_msg, hlen)) != netif->hwaddr_len ||
++	    pbuf_copy_partial(p, &offered, sizeof(offered),
++			      offsetof(struct dhcp_msg, yiaddr)) != sizeof(offered))
++		return ERR_VAL;
++	if (!ip4_addr_isany(&offered))
++		return ERR_OK;
++	/*
++	 * NAK also has a zero yiaddr and must still drive the lease state
++	 * machine. Leave its full validation to the built-in DHCP parser.
++	 */
++	if (dhcp_boot_options(p, DHCP_OPTIONS_OFS, p->tot_len, &msg_type, 1, &overload) ||
++	    msg_type.len != 1)
++		return ERR_VAL;
++	if (type == DHCP_NAK)
++		return ERR_OK;
 +
-+	return clamp_t(s64, timeout + jitter, 1, options->retransmit_max);
-+}
-+
-+static int dhcp_timing_options(struct dhcp_options *options)
-+{
-+	static const char * const names[] = {
-+		"bootpretryperiod", "bootpretransmitperiodinit", "bootpretransmitperiodmax",
-+	};
-+	ulong values[] = { min_t(u64, DHCP_TIMEOUT_MS, ULONG_MAX), 250, 60000 };
-+	unsigned int i;
-+
-+	for (i = 0; i < ARRAY_SIZE(names); i++) {
-+		const char *value = env_get(names[i]);
-+
-+		if ((value && dhcp_parse_number(value, 10,
-+						i ? DHCP_RETRANSMIT_MAX_MS : ULONG_MAX,
-+						&values[i])) || (i && !values[i])) {
-+			log_err("Invalid DHCP timing setting: %s\n", names[i]);
-+			return -EINVAL;
-+		}
++	/*
++	 * Zero-address offers must never select a lease, even without proxy
++	 * support. Consume them before lwIP clears the ACK's boot filename.
++	 */
++	if (!IS_ENABLED(CONFIG_SERVERIP_FROM_PROXYDHCP) || options->have_proxy ||
++	    (dhcp->state != DHCP_STATE_SELECTING && dhcp->state != DHCP_STATE_REQUESTING &&
++	     dhcp->state != DHCP_STATE_BOUND))
++		return ERR_VAL;
++	data = &options->proxy;
++	memset(data, 0, sizeof(*data));
++	if (dhcp_parse_boot_data(p, data, true) ||
++	    (data->type != DHCP_OFFER && data->type != DHCP_ACK) ||
++	    strncmp(data->vendor, "PXEClient", 9) || ip4_addr_isany(&data->server))
++		return ERR_VAL;
++	if (pbuf_copy_partial(p, &server, sizeof(server),
++			      offsetof(struct dhcp_msg, siaddr)) != sizeof(server))
++		return ERR_VAL;
++	if (ip4_addr_isany(&server)) {
++		/* Menu-only offers need PXE boot-service discovery, not TFTP. */
++		if (!data->bootfile[0] && !data->pxe_config[0])
++			return ERR_VAL;
++		server = data->server;
 +	}
-+	options->timeout = values[0];
-+	options->retransmit_max = values[2];
-+	options->retransmit_init = min(values[1], values[2]);
++	if (ip4_addr_ismulticast(&server) || ip4_addr_isbroadcast(&server, netif))
++		return ERR_VAL;
++	options->proxy_server = server;
++	options->have_proxy = true;
++	if (CONFIG_IS_ENABLED(EFI_LOADER)) {
++		struct dhcp_efi_cache *efi = options->efi;
 +
-+	return 0;
++		efi->proxy_len = min_t(size_t, p->tot_len, sizeof(efi->proxy_offer));
++		pbuf_copy_partial(p, &efi->proxy_offer, efi->proxy_len, 0);
++	}
++
++	return ERR_ABRT;
 +}
 +
- struct dhcp_boot_option {
- 	u8 code;
- 	bool enabled;
-@@ -283,6 +336,12 @@ void net_lwip_dhcp_append(struct netif *netif, struct dhcp *dhcp, u8_t state,
+ err_t net_lwip_dhcp_ack(struct netif *netif, struct dhcp *dhcp, struct pbuf *p)
+ {
+ 	struct dhcp_boot_data *data;
+@@ -294,9 +374,14 @@ err_t net_lwip_dhcp_ack(struct netif *netif, struct dhcp *dhcp, struct pbuf *p)
+ 	/* A rejected renewal must leave the accepted lease metadata intact. */
+ 	data = &active_options->candidate;
+ 	memset(data, 0, sizeof(*data));
+-	ret = dhcp_parse_boot_data(p, data);
++	ret = dhcp_parse_boot_data(p, data, false);
+ 	if (ret)
+ 		return ret;
++	/* The lease comes only from the selected DHCP server, not the proxy. */
++	if (data->type != DHCP_ACK || ip4_addr_isany(&data->server) ||
++	    (dhcp->state == DHCP_STATE_REQUESTING &&
++	     !ip4_addr_cmp(&data->server, ip_2_ip4(&dhcp->server_ip_addr))))
++		return ERR_VAL;
+ 	active_options->reply = *data;
+ 	if (CONFIG_IS_ENABLED(EFI_LOADER)) {
+ 		struct dhcp_efi_cache *efi = active_options->efi;
+@@ -336,6 +421,10 @@ void net_lwip_dhcp_append(struct netif *netif, struct dhcp *dhcp, u8_t state,
  	if (!active_options || active_options->netif != netif ||
  	    (type != DHCP_DISCOVER && type != DHCP_REQUEST))
  		return;
-+	if (type == DHCP_DISCOVER)
-+		options->discover_secs = min_t(ulong, get_timer(options->start) / 1000,
-+					       U16_MAX);
-+	/* RFC 2131 requires selecting REQUESTs to reuse DISCOVER's secs. */
-+	msg->secs = htons(options->discover_secs);
-+	copy_filename((char *)msg->file, net_boot_file_name, sizeof(msg->file));
- 	dhcp_append(options, msg, len, DHCP_OPTION_HOSTNAME,
- 		    options->hostname, strlen(options->hostname));
- 	dhcp_append(options, msg, len, DHCP_OPTION_US, options->vendor, strlen(options->vendor));
-@@ -404,6 +463,7 @@ static int dhcp_loop(struct net_lwip_ctx *net, bool explicit_file,
- 	}
++	if (type == DHCP_DISCOVER && options->proxy_xid != dhcp->xid) {
++		options->have_proxy = false;
++		options->proxy_xid = dhcp->xid;
++	}
+ 	if (type == DHCP_DISCOVER)
+ 		options->discover_secs = min_t(ulong, get_timer(options->start) / 1000,
+ 					       U16_MAX);
+@@ -429,7 +518,7 @@ static int dhcp_boot_env(struct dhcp_boot_data *data)
+ 	return CMD_RET_SUCCESS;
+ }
  
- 	start = get_timer(0);
-+	options->start = start;
+-static int dhcp_server_env(struct dhcp *dhcp)
++static int dhcp_server_env(struct dhcp *dhcp, struct dhcp_options *options)
+ {
+ 	const char *server = env_get("serverip");
+ 	ip4_addr_t addr;
+@@ -440,6 +529,10 @@ static int dhcp_server_env(struct dhcp *dhcp)
+ 	     ip4addr_aton(server, &addr) && !ip4_addr_isany(&addr)))
+ 		return env_set("tftpserverip", NULL);
  
++	if (options->have_proxy)
++		return env_set("serverip", ip4addr_ntoa(&options->proxy_server)) ||
++			env_set("tftpserverip", ip4addr_ntoa(&options->proxy_server));
++
+ 	return env_set("serverip", ip4addr_ntoa(&dhcp->server_ip_addr)) ||
+ 		env_set("tftpserverip", ip4_addr_isany(&dhcp->offered_si_addr) ?
+ 			NULL : ip4addr_ntoa(&dhcp->offered_si_addr));
+@@ -452,6 +545,7 @@ static int dhcp_loop(struct net_lwip_ctx *net, bool explicit_file,
+ 	char maskstr[] = "netmask\0\0\0";
+ 	char gwstr[] = "gatewayip\0\0\0";
+ 	unsigned long start;
++	unsigned long proxy_start = 0;
+ 	struct dhcp *dhcp;
+ 	bool bound = false;
+ 	int idx;
+@@ -468,24 +562,53 @@ static int dhcp_loop(struct net_lwip_ctx *net, bool explicit_file,
  	if (dhcp_start(net->netif) || options->append_failed)
  		return CMD_RET_FAILURE;
-@@ -420,7 +480,7 @@ static int dhcp_loop(struct net_lwip_ctx *net, bool explicit_file,
+ 
+-	/* Wait for DHCP to complete */
+-	do {
++	/*
++	 * Keep the lease and optional proxy reply separate. Continue receiving
++	 * packets during the bounded proxy wait, without delaying DHCPREQUEST.
++	 */
++	for (;;) {
+ 		if (net_lwip_poll() < 0 || options->append_failed)
+ 			return CMD_RET_FAILURE;
+-		bound = dhcp_supplied_address(net->netif);
+-		if (bound)
+-			break;
+ 		if (ctrlc()) {
+ 			printf("Abort\n");
++			return CMD_RET_FAILURE;
++		}
++		if (IS_ENABLED(CONFIG_SERVERIP_FROM_PROXYDHCP) &&
++		    !bound && dhcp_supplied_address(net->netif))
++			proxy_start = get_timer(0);
++		bound = dhcp_supplied_address(net->netif);
++		if (bound) {
++			if (IS_ENABLED(CONFIG_SERVERIP_FROM_PROXYDHCP) && !options->have_proxy &&
++			    get_timer(proxy_start) <
++			    IF_ENABLED_INT(CONFIG_SERVERIP_FROM_PROXYDHCP,
++					   CONFIG_SERVERIP_FROM_PROXYDHCP_DELAY_MS)) {
++				mdelay(1);
++				continue;
++			}
  			break;
  		}
++		if (get_timer(start) >= options->timeout)
++			break;
  		mdelay(1);
--	} while (get_timer(start) < DHCP_TIMEOUT_MS);
-+	} while (get_timer(start) < options->timeout);
+-	} while (get_timer(start) < options->timeout);
++	}
  
  	if (!bound)
  		return CMD_RET_FAILURE;
-@@ -527,7 +587,7 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		return CMD_RET_FAILURE;
- 	strlcpy(options->hostname, hostname ?: "", sizeof(options->hostname));
- 	strlcpy(options->vendor, vendor, sizeof(options->vendor));
--	if (dhcp_pxe_options(options)) {
-+	if (dhcp_pxe_options(options) || dhcp_timing_options(options)) {
- 		free(options);
- 		return CMD_RET_FAILURE;
- 	}
-diff --git a/test/dm/lwip_dhcp_options.c b/test/dm/lwip_dhcp_options.c
-index 1d3923291bc..5fdeae6b2f0 100644
---- a/test/dm/lwip_dhcp_options.c
-+++ b/test/dm/lwip_dhcp_options.c
-@@ -8,6 +8,7 @@
- #include <lwip-dhcp.h>
- #include <malloc.h>
- #include <net.h>
-+#include <time.h>
- #include <asm/eth.h>
- #include <asm/unaligned.h>
- #include <dm/test.h>
-@@ -39,6 +40,10 @@ struct dhcp_options_test {
- 	bool requested[256];
- 	char hostname[256];
- 	char vendor[256];
-+	char discover_file[DHCP_FILE_LEN];
-+	char request_file[DHCP_FILE_LEN];
-+	u16 discover_secs;
-+	u16 request_secs;
- 	u8 arch[2];
- 	u8 undi[3];
- 	u8 uuid[17];
-@@ -301,12 +306,18 @@ static int dhcp_options_tx(struct udevice *dev, void *packet, unsigned int len)
- 	}
- 	if (type == DHCP_DISCOVER) {
- 		test->discover++;
-+		memcpy(test->discover_file, msg->file, sizeof(test->discover_file));
-+		test->discover_secs = ntohs(msg->secs);
-+		/* REQUEST must retain the DISCOVER value despite this delay. */
-+		timer_test_add_offset(1200);
- 		/* An offer must not publish its metadata when the ACK omits it. */
- 		return dhcp_options_reply(dev, msg, DHCP_OFFER, DHCP_REPLY_BASIC);
- 	}
- 	if (type != DHCP_REQUEST)
- 		return 0;
- 	test->request++;
-+	memcpy(test->request_file, msg->file, sizeof(test->request_file));
-+	test->request_secs = ntohs(msg->secs);
- 	ret = dhcp_options_reply(dev, msg, DHCP_ACK, test->kind);
- 	if (!ret && test->kind >= DHCP_REPLY_BAD_STRING &&
- 	    test->kind != DHCP_REPLY_ZERO_OFFSET)
-@@ -390,6 +401,9 @@ static int dhcp_options_check(struct unit_test_state *uts, struct dhcp_options_t
  
- 	ut_assertok(env_set("ethact", "eth@10002000"));
- 	ut_assertok(env_set("autoload", "no"));
-+	ut_assertok(env_set("bootpretransmitperiodinit", "5000"));
-+	ut_assertok(env_set("bootpretransmitperiodmax", "60000"));
-+	ut_assertok(env_set("bootpretryperiod", "10000"));
- 	ut_assertok(env_set("bootp_vci", "U-Boot.test"));
- 	ut_assertok(env_set("bootp_arch", "1234"));
- 	ut_assertok(env_set("pxeuuid", "00112233-4455-6677-8899-aabbccddeeff"));
-@@ -426,6 +440,9 @@ static int dhcp_options_check(struct unit_test_state *uts, struct dhcp_options_t
- 		ut_assertok(dhcp_cache_check(uts, test));
- 		ut_asserteq(1, test->discover);
- 		ut_asserteq(1, test->request);
-+		ut_asserteq_str("default.bin", test->discover_file);
-+		ut_asserteq_str("default.bin", test->request_file);
-+		ut_asserteq(test->discover_secs, test->request_secs);
- 		ut_assert(!test->chain_failed);
- 		ut_assertnull(netif_default);
- 		ut_asserteq_str("1.1.2.3", env_get("ipaddr"));
-@@ -489,6 +506,8 @@ static int dhcp_options_check(struct unit_test_state *uts, struct dhcp_options_t
- 	*test = (struct dhcp_options_test){ .kind = DHCP_REPLY_BASIC };
- 	ut_assertok(do_dhcp(NULL, 0, 3, argv));
- 	ut_asserteq_str("explicit.bin", env_get("bootfile"));
-+	ut_asserteq_str("explicit.bin", test->discover_file);
-+	ut_asserteq_str("explicit.bin", test->request_file);
+ 	dhcp = netif_dhcp_data(net->netif);
++	if (options->have_proxy) {
++		struct dhcp_boot_data *proxy = &options->proxy;
++		struct dhcp_boot_data *reply = &options->reply;
++
++		if (proxy->bootfile[0]) {
++			strlcpy(reply->bootfile, proxy->bootfile, sizeof(reply->bootfile));
++			/* An ACK's size describes its own file, not the proxy's file. */
++			reply->have_size = proxy->have_size;
++			memcpy(reply->file_size, proxy->file_size, sizeof(reply->file_size));
++		}
++		if (proxy->pxe_config[0])
++			strlcpy(reply->pxe_config, proxy->pxe_config, sizeof(reply->pxe_config));
++	}
  
- 	/* Maximum option values fit; a larger value is rejected before sending. */
- 	memset(long_name, 'x', sizeof(long_name));
-@@ -561,6 +580,7 @@ static int dm_test_lwip_dhcp_options(struct unit_test_state *uts)
- 		"bootfile", "timeoffset", "ntpserverip", "ipaddr", "netmask", "gatewayip",
- 		"serverip", "tftpserverip", "dnsip", "dnsip2",
- 		"bootp_arch", "pxeuuid",
-+		"bootpretransmitperiodinit", "bootpretransmitperiodmax", "bootpretryperiod",
- 	};
- 	struct dhcp_options_test test = {};
- 	ip_addr_t old_ntp;
+ 	/* The core's file field also reflects replies it subsequently ignores. */
+ 	if (!explicit_file && options->reply.bootfile[0])
+@@ -505,7 +628,7 @@ static int dhcp_loop(struct net_lwip_ctx *net, bool explicit_file,
+ 	if (env_set(ipstr, ip4addr_ntoa(&dhcp->offered_ip_addr)) ||
+ 	    env_set(maskstr, ip4addr_ntoa(&dhcp->offered_sn_mask)) ||
+ 	    env_set(gwstr, ip4addr_ntoa(&dhcp->offered_gw_addr)) ||
+-	    dhcp_server_env(dhcp))
++	    dhcp_server_env(dhcp, options))
+ 		return CMD_RET_FAILURE;
+ 
+ 	if (dhcp_boot_env(&options->reply))
+@@ -514,7 +637,9 @@ static int dhcp_loop(struct net_lwip_ctx *net, bool explicit_file,
+ 	if (CONFIG_IS_ENABLED(EFI_LOADER)) {
+ 		struct dhcp_efi_cache *efi = options->efi;
+ 
+-		efi_net_set_dhcp_ack(&efi->ack, efi->ack_len);
++		efi_net_set_dhcp_ack(&efi->ack, efi->ack_len,
++				     options->have_proxy ? &efi->proxy_offer : NULL,
++				     options->have_proxy ? efi->proxy_len : 0);
+ 	}
+ 
+ 	printf("DHCP client bound to address %pI4 (%lu ms)\n",
 
 -- 
 2.53.0
