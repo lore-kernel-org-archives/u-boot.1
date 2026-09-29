@@ -4,138 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC9A3C9832A
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 04:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CE66C9832A
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 05:02:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7D21E404DE;
-	Tue, 29 Sep 2026 04:59:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A6F4540541;
+	Tue, 29 Sep 2026 05:02:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XRuzkMWt5k_i; Tue, 29 Sep 2026 04:59:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B0BE34043A
+ id 9BwCN5F5RaW1; Tue, 29 Sep 2026 05:02:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org ABEFA403FF
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790657944;
-	b=p4nV6A8gziTpeBCslQ/wJr8LBviMMa7Zpc2lNTdxU1uMZdaTfjHRpa9qiv57C7eg3Zhg
-	 8loXJC4cuGK4WHX9Hfq1s3x84cCuAKOLtHWUb2ZgDxOGl/BGczAj3GlZ8f16qm4Py1dUz
-	 7THR29eYf/A+mdIk1Q8VzaQ3MHtXeynCfLeRJA+GBtuc3N0EVnAIa/N9ksti6Z6kCFsf7
-	 wRq8LQUdpfW5dwEbAJwKJ76yHVpE7Ps+EcylQeB8bF2sA8JezAksvEAHrX4fo6sXwDOmV
-	 ZFDglIwpusvhzXrtaxdTnOhiW5IA5F46Dg7Vi6CNdZoYJT7maoqaLxbqbzA3g82oDrw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790658142;
+	b=UvIoZ+eF85gbqV7apzJ+f/cHvELnU56BGYkIaAutbrAJgaIdUOWLVmHdkSJ5D2M0eEru
+	 HhQLSwcIXO9qZ48YTHuEViANH+Ixp8bBFCNErbqIqn5vpJPq/PkvweQ0J6B4qrKh3VTyL
+	 GrdbU3gy8uxfc59NMIskNHwS0ktPs6yvi77fcaXpN295UKGruF68y5HDDMBAXXldpElPf
+	 NN1ADBCqAqgzIEikaLUz/HwaDlQ/dK+lUyjqJ31LjLnREteq+OTyqicEXx3j1eBnNQ1WP
+	 3QoGbEnqcW6X8haOiMRQ8fRAVkwkzEGe7RVYvHuZZDsXZo0bLSRaZCswbdpkeiduJXw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790657944;
+	c=relaxed/relaxed; t=1790658142;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:X-Yandex-Fwd:DKIM-Signature:Message-ID:Subject:From:To:Cc:
-	 Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:
-	 User-Agent:MIME-Version:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=XdrmrNl8UyXgzdlNHIaX5cpKyL+rX33JlTwiaA8e0z0=;
-	b=rpNkb66O/3bgphDjgA0i0cSMAX85V1YfUaaktucN5qCvT4OcRDL8ciG8Q4L2ii9MnVWK
-	 PiaOnTNjwuRkiM9741DSKSJzSXaE+8O+I2poIplW93zTSDS+c5dWObocrvFmss9tOB6ZK
-	 9lknnSLSW2it1YNgTL02BBw/kueqE8QAUkwcq1VuPiHVblZkJ9JvZUBaxbsg1kEXAREyp
-	 5wuyedN3cAOtZtR+69hPXaB34nR2QEZOi8Fbld2HfY7czfV0AXSx7I6G9Ts3q8Ic+6Df/
-	 0bFarcZMxq0dNsiA5XqAocVlLYVgwNc2OiZ3pNB8mv5lrAOYUKQ5c+Ds17JkFlv7xOQ==
+	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Content-Language:To:Cc:References:From:Subject:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=E7Bye5uABpxMStYSpJalartNH8llUoKrbDrRMHzsFWg=;
+	b=rnZmrT79b7adDIhd1PGoP122gQth1N3GsxILBdnPYlyrtSSR9yf+vEwgAbZHYFTEk0dl
+	 fpc2OwTeaxa1JVkqKO09R4GOv75f2h7/Ns28yPyLmBmoEpSpzYCR0jG9lQVvRoyPVmMV3
+	 IEDZ6ILpkrfQxSF1+/iwBj0UQD5HpU4hW59MZKTmke6xi2OWRWhXRAxhrDDpEuiXUW7ST
+	 4ybOY8zpROPSO83tAT/+z9dVIYVsdBY70drsYJ07jyl9O3vOYd6PXQU40IfkwCPV5mrZ4
+	 CqxW/T8U53qfdsKYnfWtx2WC4jQLkrRKq9IRKBHVygPnZPegCJbErpN8scli6lPakEg==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790657944;
-	bh=XdrmrNl8UyXgzdlNHIaX5cpKyL+rX33JlTwiaA8e0z0=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790658142;
+	bh=E7Bye5uABpxMStYSpJalartNH8llUoKrbDrRMHzsFWg=;
+	h=Date:To:Cc:References:From:Subject:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ShTfWMFF/Kb9mjE43rJXVYHmRZwwIvKCzJ0A6UPMjxFnacP0EwUejDoGIbhBSeHiA
-	 ADr8GI0pmD+Tld4fxiMQOmxf6ohIy4N7OHueJ7ziv0wavlqNME+54RcPd2yu2eakqm
-	 0tGs6BMJtspt2RcrzpgM8uzm3Wz/X/fu0FjoIWc/w0Y1QIMFi1Eht8yToLJF8DANY7
-	 7Wjf6LccQLePTZdqeHkkh9cowtku8Zzt4xgHhb+lyAhePg/ZeKir4hdMMAEdkBlvV+
-	 NMWOgPSAAcz6XWCwPw4zM84A7cj845C5nZLqmUdPApNkrGHdExRfsMcDXsZBtqoJxn
-	 /JE4KAonxqhcQ==
+	b=zwSTILNk6Iu/6bvAFeaUhtGdtu1pQpXUiFuYEITWSXUbNSEKyZJd/8AiCV3LQ5JvZ
+	 KhYOFYeLux13kxfTiGehPWf9qt/0OatNczeqHmppEjR4crJt8z/o6r+jkdsCe72Jqd
+	 /sXW886UcN6qUrgEbNQyi9vy33L/ca3zMmin+V8Zxzoai1Di0kpFKUtggDt5Yb7ly7
+	 pWvFxTEHG7fqTgUYjUPFxBW6WBLF3TwAajyhLYlF5QsKc22/Q3d/8iTMcgi8GQTSdB
+	 XUIhnjnyGDdlrwPzhvcXmuhKdj+uEKBV0LSwqjwKBtHBxCJzn74bkR0rfw/ImGKldX
+	 lZC7iMu8TM/Uw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B0BE34043A;
-	Tue, 29 Sep 2026 04:59:04 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 3AB9461
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 04:59:03 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id ABEFA403FF;
+	Tue, 29 Sep 2026 05:02:22 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id C418472
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 05:02:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 209006070F
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 04:59:03 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A9922807A8
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 05:02:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id U417bPzRaRQh for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 04:59:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3526F6070C
-Authentication-Results: smtp3.osuosl.org; arc=none
- smtp.remote-ip="2a02:6b8:c0e:500:1:45:d181:d501"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790657942;
- b=A6PYTikIyzXe+shte86Y3SfHDbN93c1R8TwLDl8TodYps6rBEJAfSFq+ruJT10J/1Ge9
- NrpsFIvloI3lOhadReCqp2XYW+SJc+mLAvT8kGRyFHUgkv71qgnZXWgtuX/2XuRprj4KF
- A0mw+mNtbtzdVCIHLGQttLPkxpzQpqWCefyp/8+GuWHXP9c0Ca2HL3w++/K9Ded8V5giQ
- CrdTVtJmhGskLzuavTcFf3mgQRo6JBhm1eF9BR6CAclNwj1fBiB6wUNfXwSZ7Lj+ViHE7
- KzrDcbnB8+SW1OU0GU5fiK6gn9W6tNnarampIddiX+dMR8wQqWnh4JVMkJHqyqxjkcw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BkQ0DbCyjKdU for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 05:02:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 73B338078C
+Authentication-Results: smtp1.osuosl.org; arc=none
+ smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790658139;
+ b=fmAXGeKp/Y2ACoQodlXsnHMvcBFkvCnRSRPfTtvV+dMeM5b5nOeoIIIGtvajt92TgqM2
+ 8MtgVASX6PtiT5QFzrkXlvEe6zM+i1tr/YrmAIi+fwrhNIbKL3S7BB9dDt9alGtqagK1X
+ jqP0HHELdgekxyqtjjdW1JntcdaVcXtiDw2I3VO6viG7l4r24j2U1prROzFF3R1zgYjco
+ t0tB0qKJZgrYCdC2jtGt7N44zsjkuFkB3y0FtMkv04c5iJgdBIliDFsNKdKXUBdjVd7bD
+ ERXcEfV5EjaWGahqmpCQ/fnRrJohjeQ1RGx3hAz0bzY1LR+VxlyhKSYl2vhaNO1hQ3w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790657942;
- h=Received-SPF:Received:Received:X-Yandex-Fwd:DKIM-Signature:
- Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
- Content-Type:Content-Transfer-Encoding:User-Agent:MIME-Version;
- bh=XdrmrNl8UyXgzdlNHIaX5cpKyL+rX33JlTwiaA8e0z0=;
- b=f9WJuI6QsWKU6dH3mPYsynpZfusdcW099voymxw/BrLAq5bvCVUwEo0jUS4kk2UfnX8j
- zNmOyctiTYgAWLu+iUxyty8o8+/v45ZaXzJ0lAn3lA7fempZ/sLXC4K55yb144tkfIeDj
- FJmbvygrd4n9Ti+2xU7+ciaF6oJvIiDuDpEUeMOzYMGL3bCOxsgXkMLf9MdWzysOnCTIy
- PKBOiTFM5lWxM3KD2nvfgVy6h3JesQNua4+DLhaSHVBNNjsY3CufXD4/hP+n8qmjjVrRC
- zPSly5nQ7bR20qUT2Jzg+ZG+o2NvnRcWmFWb/KVFmzOQy9307jnBpKGE0/xzuLcNC6w==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=none header.from=maquefel.me; 
- dkim=pass header.d=maquefel.me header.i=@maquefel.me header.a=rsa-sha256
- header.s=mail header.b=RXuk4czo; 
- arc=none smtp.remote-ip="2a02:6b8:c0e:500:1:45:d181:d501"
+ c=relaxed/relaxed; t=1790658139;
+ h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+ User-Agent:Content-Language:To:Cc:References:From:Subject:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version;
+ bh=E7Bye5uABpxMStYSpJalartNH8llUoKrbDrRMHzsFWg=;
+ b=m0AVf7mwHcVsU9FZ19ABrKcyhFIq+ra88Z19dDWH0NwLSfWxMINUsxfpxrGMAwMtx+Aw
+ zJ/4GgnCbemtUOrzWEH6YwjvScVRJ3X+vVlvxBK85HDDbHrxSrRYR3+PJstsJ6bpSuNUU
+ 2lOw3Weo0lqc8kryZomJtHJMPfqfvNWgFonIxUF/Xseo9gL9r9tnkk0DA6LfrkwcwP54L
+ gieQxNQ035tTb5Lr/wBZvgTaG+t9lnPwR8Uw/8tZG/VWl1DaWOJTvcqd7TGG0gJce4N4N
+ CJpgIfXVYPyDKfFwDlUkumnPb+Ujc7ho5KZsMVIzllsNS+K/AReMwQ8nYtfH5wk8vpw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ dmarc=pass header.from=nabladev.com; 
+ dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=ZSQyHiNN; 
+ arc=none smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a02:6b8:c0e:500:1:45:d181:d501; helo=forward501a.mail.yandex.net;
- envelope-from=nikita.shubin@maquefel.me; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=maquefel.me
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=maquefel.me header.i=@maquefel.me header.a=rsa-sha256
- header.s=mail header.b=RXuk4czo
-Received: from forward501a.mail.yandex.net (forward501a.mail.yandex.net
- [IPv6:2a02:6b8:c0e:500:1:45:d181:d501])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3526F6070C
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 04:58:59 +0000 (UTC)
-Received: from mail-nwsmtp-smtp-production-main-68.vla.yp-c.yandex.net
- (mail-nwsmtp-smtp-production-main-68.vla.yp-c.yandex.net
- [IPv6:2a02:6b8:c1f:638c:0:640:aae5:0])
- by forward501a.mail.yandex.net (postfix) with ESMTPS id B90B4829CA;
- Tue, 29 Sep 2026 07:58:54 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-68.vla.yp-c.yandex.net (smtp)
- with ESMTPSA id kwZ6f5wgYW20-eLXP4s3B; 
- Tue, 29 Sep 2026 07:58:54 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maquefel.me; s=mail;
- t=1790657934; bh=XdrmrNl8UyXgzdlNHIaX5cpKyL+rX33JlTwiaA8e0z0=;
- h=References:Date:In-Reply-To:Cc:To:From:Subject:Message-ID;
- b=RXuk4czoPx0o45j0I+xPfRika+SfDxHN//+UVpzZ6BWIupYOi47Ggy1ybsLfYdEGQ
- x9TQNKAvZrmg7drb2nKYoJ1kf3rYjryUjdPQjlrvA7wqGCKyOE8CTtUiouHCGHkpDm
- bBznIUmQLnxCfxY7e7AUhIxnekVWMSww8q3Q7lXY=
-Authentication-Results: mail-nwsmtp-smtp-production-main-68.vla.yp-c.yandex.net;
- dkim=pass header.i=@maquefel.me
-Message-ID: <b40e05037fa322d747ab6b48f7e38838f38370e2.camel@maquefel.me>
-Subject: Re: [PATCH] riscv: Fix IPI not initialized in riscv_cpu_setup()
-From: Nikita Shubin <nikita.shubin@maquefel.me>
-To: u-boot@lists.u-boot-project.org, Tim Ouyang <tim609@andestech.com>, Leo
- Liang <leo.liang@sifive.com>
-Cc: Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>, Michal Simek
- <michal.simek@amd.com>
-Date: Tue, 29 Sep 2026 07:58:46 +0300
-In-Reply-To: <arZdGzVgm9ZtnSm_@pie>
-References: <20260904-fix_skipped_ipi_init-v1-1-3f4e7a10efe8@maquefel.me>
- <972c116f-a430-4ed8-8b94-e4c1982e5f22@amd.com>
- <856f099441f717605de9be5456dde8c97bbd04d1.camel@maquefel.me>
- <arZdGzVgm9ZtnSm_@pie>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.60.2 
+ client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
+ envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=nabladev.com header.i=@nabladev.com
+ header.a=rsa-sha256 header.s=dkim header.b=ZSQyHiNN
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 73B338078C
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 05:02:19 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 69BB91064E7; Tue, 29 Sep 2026 07:02:10 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1790658133;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=E7Bye5uABpxMStYSpJalartNH8llUoKrbDrRMHzsFWg=;
+ b=ZSQyHiNNWR+IvlQP1gYXPjkhR/wUymBKfubrNEK7sTGb5TR+EkP0YNTFgZhZk00kxA+2PU
+ 2wFfr/AvJZnm8nGRXb5YSM3XrIuK+nb/NnBk6OqUzpOVlYW6qv83EmTW0jSjPxybExEUkK
+ qaKKm9FYfSgaOhy1Ju5Aws3is0fx4CheEI8ecKQHSEE0cWpA9Aq1/BNluie+Xvf61lb6Em
+ bRh7OU1ywxy1aaLaFbj/Yw4yfx7uAMTdl6LTZYuJXFZ1XJ/G+ozITF0c9UH/JtlWUCKSeM
+ n5POSMJIRPDvLIfQxvFNDN696gaaiMgrhwEM0cFxQqzkiupoySMPyLUWpFWO5A==
+Message-ID: <c0bab099-0a25-6e72-a36b-35ab56d2519e@nabladev.com>
+Date: Tue, 29 Sep 2026 07:01:18 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.u-boot-project.org>,
+ Vignesh R <vigneshr@ti.com>, Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+ Stefan Bigler <stefan.bigler@securiton.ch>, Guodong Xu
+ <guodong@riscstar.com>, Johan Jonker <jbx6244@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Raymond Mao <raymond.mao@riscstar.com>,
+ Ssunk <ssunkkan@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Vincent Jardin <vjardin@free.fr>
+References: <20260922060941.534035-1-hs@nabladev.com>
+ <20260922060941.534035-2-hs@nabladev.com>
+ <CAFLszTgKFvGkH0OKpkffj7YpgqX98+591tnADOZVxBfX85L9Qw@mail.gmail.com>
+From: Heiko Schocher <hs@nabladev.com>
+Subject: Re: [PATCH v1 1/3] mtd: spi: add driver for the Microchip 23LCV1024
+ SPI SRAM
+In-Reply-To: <CAFLszTgKFvGkH0OKpkffj7YpgqX98+591tnADOZVxBfX85L9Qw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,98 +151,218 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Tim Ouyang and Leo Liang !
+Hello Simon,
 
-Any comments on this ?
+Thanks for the review!
 
-Thanks !
+On 28.09.26 16:45, Simon Glass wrote:
+> Hi Stefan,
+> 
+> On 2026-09-22T06:09:29, Heiko Schocher <hs@nabladev.com> wrote:
+>> mtd: spi: add driver for the Microchip 23LCV1024 SPI SRAM
+>>
+>> The 23LCV1024 is a 1 Mbit serial SRAM with battery backup, sitting on an
+>> SPI bus and used as non volatile scratch storage. Bind it to the
+>> spi_flash uclass so that the sf command reaches it, and register it as an
+>> MTD device of type MTD_RAM, so mtd command can be used.
+> 
+> Is UCLASS_SPI_FLASH really the right home for a device with no flash
+> semantics? The uclass allocates a struct spi_nor for every instance
+> and every user of it (sf command, bootdev, MTD helpers) assumes NOR
+> behaviour. It works because you shim the fields in, but it feels
+> wrong. Have you considered driving it purely through UCLASS_MTD, or
+> adding a small UCLASS_SPI_RAM with the same ops? What do you think?
 
-On Fri, 2026-09-25 at 11:38 +0000, Yao Zi wrote:
-> On Fri, Sep 25, 2026 at 01:19:15PM +0300, Nikita Shubin wrote:
-> > Hi Yao Zi!
-> >=20
-> > A shy ping on this patch.
-> >=20
-> > Thanks !
->=20
-> Sorry for the delay.
->=20
-> > On Fri, 2026-09-04 at 08:20 +0200, Michal Simek wrote:
-> > >=20
-> > >=20
-> > > On 9/4/26 08:07, Nikita Shubin wrote:
-> > > > If riscv_cpu_setup() is skipped we end up with riscv_init_ipi()
-> > > > not
-> > > > being called.
-> > > >=20
-> > > > But we still use riscv_send_ipi() in spl_invoke_opensbi(), so
-> > > > even
-> > > > if
-> > > > CONFIG_PHASE_CPU not set we still need init IPI and clear
-> > > > pending
-> > > > IPIs
-> > > > on harts.
-> > > >=20
-> > > > Fixes: d8810e1d4f82 ("riscv: Skip riscv_cpu_setup() when CPU
-> > > > driver
-> > > > is disabled")
-> > > > Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
-> > > > ---
-> > > > =C2=A0 arch/riscv/cpu/cpu.c | 3 ++-
-> > > > =C2=A0 1 file changed, 2 insertions(+), 1 deletion(-)
-> > > >=20
-> > > > diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
-> > > > index 3bec7c7cb6d..a65e6951384 100644
-> > > > --- a/arch/riscv/cpu/cpu.c
-> > > > +++ b/arch/riscv/cpu/cpu.c
-> > > > @@ -639,7 +639,7 @@ int riscv_cpu_setup(void)
-> > > > =C2=A0=C2=A0	struct udevice *dev;
-> > > > =C2=A0=20
-> > > > =C2=A0=C2=A0	if (!CONFIG_IS_ENABLED(CPU))
-> > > > -		return 0;
-> > > > +		goto init_riscv_ipi;
-> > > > =C2=A0=20
-> > > > =C2=A0=C2=A0	uclass_find_first_device(UCLASS_CPU, &dev);
-> > > > =C2=A0=C2=A0	if (!dev) {
-> > > > @@ -687,6 +687,7 @@ int riscv_cpu_setup(void)
-> > > > =C2=A0 #endif
-> > > > =C2=A0=C2=A0	}
-> > > > =C2=A0=20
-> > > > +init_riscv_ipi:
-> > > > =C2=A0 #if CONFIG_IS_ENABLED(SMP)
-> > > > =C2=A0=C2=A0	ret =3D riscv_init_ipi();
-> > > > =C2=A0=C2=A0	if (ret)
-> > > >=20
-> > > > ---
-> > > > base-commit: cc557af4553382f6f50e3ed62b9577054e7bc54f
-> > > > change-id: 20260904-fix_skipped_ipi_init-aa5575f55bc4
-> > > >=20
-> > > > Best regards,
-> > >=20
-> > > There are 2 other approaches how to do it in the code but it is
-> > > up to
-> > > maintainer=20
-> > > to decide. No issue from my side to solve it via goto. Obviously
-> > > one
-> > > big if=20
-> > > (CONFIG_IS_ENABLED(CPU)) is another one. Or move it to own
-> > > function.
-> > >=20
-> > > Anyway
-> > > Acked-by: Michal Simek <michal.simek@amd.com>
->=20
-> I think it's likely a bad idea to have IPI stuff in
-> riscv_cpu_setup(),
-> but this fix itself is okay. I should have noticed it when reviewing.
->=20
-> Reviewed-by: Yao Zi <me@ziyao.cc>
->=20
-> However, I'm RISC-V's reviewer instead of maintainer, so I couldn't
-> pick
-> the patch for you though.
->=20
-> > > Thanks,
-> > > Michal
->=20
-> Best regards,
-> Yao Zi
+At start of this, we had such an UCLASS_SPI_RAM approach, but we had a
+lot of duplicated code... I think again about this.
+
+Hmm... I tend to say, I would prefer UCLASS_MTD, which is the lower
+impact I think, we only use the "sf command" and have only the mtd
+read/write functions... and driver drivers/mtd/nand/spi makes
+it the same way.
+
+With UCLASS_SPI_RAM I do not see what we win, and the impact is bigger.
+
+Let me think about it.
+
+> 
+>>
+>> The device powers up in byte operation, where every command carries
+>> exactly one data byte. Select sequential operation once during probe, as
+>> Linux does in drivers/mtd/devices/mchp23k256.c, so that a read or a write
+>> of any length is served by a single command.
+>>
+>> A RAM needs no erase before a write, but a caller that asks for one
+>> expects the area to read back the way an erased flash would, so both
+>> erase operations fill it with 0xff, which is what the sandbox flash
+>> emulation leaves behind as well. Leaving the operation out is no option
+>> either, because the uclass calls it without checking for it first.
+>>
+>> Signed-off-by: Stefan Bigler <stefan.bigler@securiton.ch>
+>> Signed-off-by: Heiko Schocher <hs@nabladev.com>
+>>
+>> configs/sandbox_defconfig |   1 +
+>>   drivers/mtd/spi/Kconfig   |  11 ++
+>>   drivers/mtd/spi/Makefile  |   1 +
+>>   drivers/mtd/spi/spi_ram.c | 280 ++++++++++++++++++++++++++++++++++++++++++++++
+>>   4 files changed, 293 insertions(+)
+> 
+>> diff --git a/drivers/mtd/spi/spi_ram.c b/drivers/mtd/spi/spi_ram.c
+>> @@ -0,0 +1,280 @@
+>> +#include <dm.h>
+>> +#include <dm/device_compat.h>
+>> +#include <log.h>
+>> +#include <malloc.h>
+>> +#include <spi.h>
+>> +#include <spi_flash.h>
+>> +#include <vsprintf.h>
+>> +#include <linux/bitops.h>
+>> +#include <linux/kernel.h>
+>> +#include <linux/mtd/mtd.h>
+>> +#include <linux/mtd/spi-nor.h>
+>> +#include <linux/sizes.h>
+> 
+> The linux/mtd/spi-nor.h include is redundant — spi_flash.h already
+> pulls it in — and it advertises that this driver is a NOR driver,
+> which it is not. Please drop it.
+
+Will do.
+
+> 
+>> diff --git a/drivers/mtd/spi/spi_ram.c b/drivers/mtd/spi/spi_ram.c
+>> @@ -0,0 +1,280 @@
+>> +static int spi_ram_erase(struct udevice *dev, u32 offset, size_t len)
+>> +{
+>> +     size_t step = min_t(size_t, len, SPI_RAM_ERASE_STEP);
+>> +     u8 *buf;
+>> +     int ret = 0;
+>> +
+>> +     buf = malloc(step);
+> 
+> I wish we could avoid malloc() here?
+
+I look for it, when preparing v2.
+
+> 
+>> +     if (!buf)
+>> +             return -ENOMEM;
+>> +
+>> +     memset(buf, SPI_RAM_ERASE_BYTE, step);
+>> +
+>> +     while (len) {
+>> +             step = min_t(size_t, len, SPI_RAM_ERASE_STEP);
+>> +
+>> +             ret = spi_ram_write(dev, offset, step, buf);
+>> +             if (ret)
+>> +                     break;
+>> +
+>> +             offset += step;
+>> +             len -= step;
+>> +     }
+>> +
+>> +     free(buf);
+>> +
+>> +     return ret;
+>> +}
+> 
+> Two things. If len is 0 we still malloc(0) - please return early. And
+> each loop iteration calls spi_ram_write(), which claims and releases
+> the bus for every 1 KB chunk. Since you have already put the device
+> into sequential mode at probe, one claim/release around the whole loop
+> (or a helper that emits one WRITE command and streams the fill) would
+> be much cheaper and match what the data sheet allows.
+
+Yes, that sounds better.
+
+Hmm.. can we drop the erase function at all, as we do not need it?
+
+Ah, I see, we already have
+
+mtd->flags and MTD_NO_ERASE from linux.
+
+I will drop erase function from spi ram driver, and if I see it
+correct I can get rid with this step of the malloc() too!
+
+I just need to add in mtd_erase() the MTD_NO_ERASE handling (will add
+this in v2 as a seperate patch.
+
+Oh, I see in linux, that mtd_erase() there only checks:
+
+	if (!mtd->erasesize || !master->_erase)
+		return -ENOTSUPP;
+
+This linux check is missing currently in U-Boots implementation.
+
+Do you agree, that we can simply add this check?
+
+But why not checking the flag MTD_NO_ERASE too?
+
+What do you prefer, the NULL check from linux and/or check the MTD_NO_ERASE
+flag?
+
+> 
+>> diff --git a/drivers/mtd/spi/spi_ram.c b/drivers/mtd/spi/spi_ram.c
+>> @@ -0,0 +1,280 @@
+>> +     mtd->writesize = 1;
+>> +     mtd->erasesize = 1;
+>> +     mtd->_erase = spi_ram_mtd_erase;
+>> +     mtd->_read = spi_ram_mtd_read;
+>> +     mtd->_write = spi_ram_mtd_write;
+>> +
+>> +     flash->name = data->name;
+>> +     flash->size = data->size;
+>> +     flash->erase_size = mtd->erasesize;
+>> +     flash->sector_size = mtd->erasesize;
+> 
+> Setting sector_size to 1 makes the sf update path in cmd/sf.c drop to
+> a one-byte read/erase/write loop over the whole region (see
+> spi_flash_update() and spi_flash_update_block()) - 128 KB of
+> byte-at-a-time round trips. Please pick something more useful (the
+> 32-byte page, or a larger convenience value) for sector_size, even if
+> erasesize stays at 1.
+
+Yes, on the other side, there is no real sector size, you can write
+byte per byte... and in case writting exact one byte, we have with
+other settings for writesize/erasize overhead...
+
+I think, the writesize setting should stay at 1, and erasesize gets 0
+
+> 
+>> diff --git a/drivers/mtd/spi/spi_ram.c b/drivers/mtd/spi/spi_ram.c
+>> @@ -0,0 +1,280 @@
+>> +     sprintf(flash->mtd_name, "ram%d", dev_seq(dev));
+> 
+> Please use snprintf() with sizeof(flash->mtd_name) - the buffer is
+> MTD_NAME_SIZE(MTD_DEV_TYPE_NOR), which only just happens to fit 'ram'
+> because it is also three characters, and any future change to that
+> macro or DM_MAX_SEQ_STR will bite silently.
+
+Good hint, thanks!
+
+> 
+>> diff --git a/drivers/mtd/spi/spi_ram.c b/drivers/mtd/spi/spi_ram.c
+>> @@ -0,0 +1,280 @@
+>> + * Copyright (C) 2019 S. Bigler Securiton AG
+>> + * Copyright (C) 2023 Heiko Schocher, DENX Software Engineering, hs@denx.de.
+> 
+> Nit: please drop the trailing full stop after the email address on the
+
+Will do, sorry.
+
+> 2023 line - do you have an email for the Bigler person?
+
+Yes, I add it in v2
+
+bye,
+Heiko
+> 
+> Regards,
+> Simon
+> 
+
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
