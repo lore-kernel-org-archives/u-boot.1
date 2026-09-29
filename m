@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE8ACA5FAB
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 00:05:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2CA7CA5FAB
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 00:05:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 139FF6071C;
-	Tue, 29 Sep 2026 00:05:41 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id ADB3E403B5;
+	Tue, 29 Sep 2026 00:05:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Eb3zq6jyBCFg; Tue, 29 Sep 2026 00:05:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 5A1D46070E
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790640340;
-	b=NJA/zP/2lBmfALIQU/B6yhsvu9b8pL/3hy6l/tTjtImAzPWbEvb0Bg2h3EvZRDY3Nbv+
-	 khZoX3Zoh/lBxr8+1WfK97t/70QU1sg+HecAqE7bttL6UezLaNzPexin6gO9duqLyGXZ4
-	 hjk58fxAfyHc9FQVfJXzWWRHhg+yQPapwO8B4wowdPEnDvYmB3VNFt9SAPJ7+YSGip1fc
-	 6YoAtvCMiiH5tDaVMlXnXfk7U/0WkwYVLWogxTfEasGGR8BFGAX3dEeIbnLfEWn/WItc3
-	 Ibtzut49hS/jz4fZS6qVVXxXUynSbE1xa/DvGksA1iYqfz6Gn8qtTzLuErP7fj0fW6w==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4z8xNMyYO8Sb; Tue, 29 Sep 2026 00:05:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 19DD140568
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790640347;
+	b=MOpWHiOUG1kG3XDl8zhyxAMdMOZzTFiHaMFg/phWePAVKq5UFCMcm8ZYVS3BWZLvqmEv
+	 Rxw7yIrhK8s64bnFfequklUbzZkfpM47eM9A68Py00NaDwqU2aw1Fv0E4FnjXLJXp5EsR
+	 DoK/HEW7tac6ky5GalHc8vS0k3MceMRTJWw841woLzVHPX6YvOAL2deoyVjGsNv0n6yGM
+	 tnFQ3VZpNsj6Dl6PkH5p4XNP7Ohhkz164R9dWuX2Kwg7mCjIAz2KxG5t2fuoBD2oVZa5H
+	 VK2QRls0i19cgqxJR5776d38ldz5o1lmxYv0qPugVP1tC91WbeAhHuloXMPWNps5UPw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790640340;
+	c=relaxed/relaxed; t=1790640347;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:Date:
@@ -30,76 +30,76 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Disposition:In-Reply-To:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=9C3VCbRhL76NbM8mcqz6TUUJR+9s3S5eDuEsGonUn4w=;
-	b=nnVZe8Br7nYy2R8xdXSs4OXaljzrwsv7S9V9KYXxM6kcE5OkXmtgLdRL7qRZEiHmwiy6
-	 nbRQ9RMeTuoi125J7+6jioVr4Ts/oGe7WirFoEmjTjvigr0eFXIJJrbqX3cuEVxgeK4NV
-	 lhpVTF36JqmUiqjjYYKm+G0DqOT+Xwtb894mDCbynAoh/W9RFWgF5AJPF/Y8mVKC2Kjx7
-	 RHGuH54QaWF/2v8sgPqBF5RmCm+8n3t6ahVX01EhvArJNxHu7Pa9+3hf5a9J3XB7hdsSM
-	 54p4+L1Lb3ZTkNTEddg6JInXF4MCmYE3usWk3MFvXEK3Xmf890uLjqd2mN4a+cgP7AA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=DBHDOoDWNfx9rdmZLRh61KGkJEKXuDixhdVNwcxpbH0=;
+	b=GNyKPpF4QhOLiuY9C1pxdsoGNAX1AnszLXREIaEZr5LGRG3Be0MDiiTqy7Tskp9TEjvC
+	 iYdDX0gFVauu+HlmDG8MvEy5w7q+e6I5hP4cLY2Wy+7vJSZEMnG6YtUWMY3SvrjnnRkP+
+	 xnuTE96smU0I6L1K+2qF0NBPumftLpZI7FlrO5Qb8i7XYlNHkFSCkTAtF2N4+7CCqxWho
+	 YPn/ERh2tqcdMT0IV4c7z8dAz/JmNKm1/17eeoTDiztaR5T1Qba+uEESwLsHml8M+XFrG
+	 S9Ij0LjeAm/TWu+rmmgPUJwXxUaIvcaLjeFgmu363QrEIcp0j7FUMqRecSkKP0RCzsg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790640340;
-	bh=9C3VCbRhL76NbM8mcqz6TUUJR+9s3S5eDuEsGonUn4w=;
+	d=lists.u-boot-project.org; s=default; t=1790640347;
+	bh=DBHDOoDWNfx9rdmZLRh61KGkJEKXuDixhdVNwcxpbH0=;
 	h=Date:From:To:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=E76Nkw0e+9A6QyVIMIFbQAZd31tEuvrAHO2Pssf2EoErkwZYQS4mlwbIlweh4oQHv
-	 mJSij/8ZYwIa/ZjvYmg4l3SPIsv9L5kVTDdUgA+emjD1Y86RdFO1iczK5JcrJKFini
-	 uXzDc4NOHjpRdILmQ1HiPC4rW8F8E+JFML3zimldsOdJq1fjk68hTgzYYpDpQbHoqW
-	 Hs7hxV61K2xf60Ma+MA2zOl0pt/a7KKjd3UG7b0LipCk3Osql5J8TrXw34gvNOi2EJ
-	 pDHhmCgu2hRg0oIHKp6JZH+rNLH6BOdDNhdvsoSPvmITm39fE6LfSogmtU00gEfFZa
-	 NQAY/X8g1jkIQ==
+	b=Qd0cxDaTaVXOQNjtiy3O4ChK+XuwL52G5MYgVYMfJhWjTfPTJALaJ5MvQk2WAMrH1
+	 J+ngEPZPTlkzwyH3HtiUnj2/r7lE7sFcfboypEcPCArKF2W3LKQl6KLlhGH9SFLLFI
+	 yBNQG2NDFCiaVL3OgBhixiuAD9M5FOkqfQZQxaFkb+bC3Y6fAaAXcIiOoDk/LrDT2P
+	 kl6MvDDXWHQmfgG2ZrxFfUtv6/ALfW82Lzgl8qQbh1npeb76/yli1XyxMBGmtBHWlI
+	 euNQY4/WVsrUzYiqLH7VzZQrhqY4gfBWiQ6YioURMHJXnFXDXSdylMeSEe6DQGJpd1
+	 gOYWnBhNq3MWw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5A1D46070E;
-	Tue, 29 Sep 2026 00:05:40 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1DD693D8
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:05:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 19DD140568;
+	Tue, 29 Sep 2026 00:05:47 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C5A8D4CD
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:05:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0D56A40568
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:05:39 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C2C704024D
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:05:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id y7pxDQwsrr7d for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 00:05:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 5E98F403B5
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tN7YhcwkOVgh for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 00:05:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 1DCBC40253
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip="2a07:2ec0:3002::65"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790640338;
- b=Au4lDfVvOLxtFTehOwZFxgKjfALyvJBI8VUg0+SsdzxeGb9F0weJMQgoTHif5OzRFAwi
- wtdcRiTXdqV/5zL0LdEBxn3uQVaUbUZXZ1Mf8RERz+uojE4OxncGQPqtEpWGAgHOhOYH+
- RhA4TQu7yY0k7BkVCyIEZLeeVAZdkNBbErkmQGru5W9d2vNutsFGLibmDjRVUolTYP2xx
- gPeHORvm1Uczd1WRfK1EotrRv2HEhbBPK1rCOpYfmUJ0A4ZwPBakJUS1spEDqlus7RnXN
- Eu9lyNa9xb5BC114XXe1oVYg0gJYLnzm+HIRBoyZg2RrX7Kysy41ZBxpBCSSBIPh0Tw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790640345;
+ b=e9ca3ZxKfd6LSjRFMZddnJEB4WI17NKQ6gXTzXOTsrFuadmN0RppvOX47xMmu7A70VA9
+ IfGlNdG711g/g9tchcTiCH3KgYXK6X87sMSSAcZLCrdpCFu1ZtfFC6m1SfCQFp18TqxFm
+ zvwQ1psaLePaeLXoM9kdnqEQJZCQQSC+PyPNigHWVMEBrfkzSyK1FxwO1BaT3tNWY01WN
+ UAqEOLRnAsN/QCrVxjUXkyZRUosuXpNYQIGr6jPmVUChiG5qHLPGeiY/aEBv+ijN+Q9/V
+ ufnkjta5qXmFWOL2b5oDPpCuzpoeGzLyMwOh9NDq9/KSvpQy4K0TyUVMAuIk5BpEe/A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790640338;
+ c=relaxed/relaxed; t=1790640345;
  h=Received-SPF:Received:Date:From:To:Subject:Message-ID:References:
  MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
- bh=9C3VCbRhL76NbM8mcqz6TUUJR+9s3S5eDuEsGonUn4w=;
- b=aSQ1/6/tXEDEz1ghN4ouv04qi1VruIS0dMVrxj52SDt0LQn7pNoFefeTFiZXrhzDFeIz
- 4BOqy73gAsO2NOMZNQKu6UG92XDVfUbAyk/3EC7IamP97KIy1CfjeHhOVmF9EJZaabY7M
- xeoZXkzYgeeP76GGpeSNFzQHMXmnjQos06eALqnd3xm4KuWu0gFh8puKlw2hEx2NpoRdy
- 718svywIu06H19oDzC+tjlsGRcf/TUPhfNybWakh3e545GJ8oi0r42xgZTSV8Ei8ig+0m
- 1Mdgc/TmCk7NXoU9yitgZjhI1yP36wJvuxjbX1Pr3uC87Xkh+YCrV1iq5dwGhJPltgg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=DBHDOoDWNfx9rdmZLRh61KGkJEKXuDixhdVNwcxpbH0=;
+ b=bTHca+fh4x88UMAw2Bz2kJI3jKNSY8DKF2f9GNvPM6cNF+o33Nnu5m9BDhrYweTovwXW
+ F+2FNYaOmFhd3NWRDANj0rebMiD+U65aJbb4f9ZgW2cpQjTxwtd7uyVLeT4oz7T/0owwQ
+ X1VDJQ3t9GTlpHUDoHFQqMMVSx8+vcOqvwAmNfmGufv5u0yW000ekhsc6bFNpgD1cML0k
+ 6fMPTguTMkiK6TUO8ycd4nQlBu8e7ThzCtZ62y1M9JgWf3Rpd2K6b7NCm0jDQyBQ2nwmN
+ WbC9mFbyjfMV+Lvox1g0P1MAP2R1Dg+XEVfx/2Ix0noIMHpY+0ipGj0cehq4tfGzuww==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=none header.from=makrotopia.org; 
  arc=none smtp.remote-ip="2a07:2ec0:3002::65"
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
  helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=none (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5E98F403B5
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:05:37 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1DCBC40253
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 00:05:44 +0000 (UTC)
 Received: from local by pidgin.makrotopia.org with esmtpsa
  (TLS1.3:TLS_AES_256_GCM_SHA384:256:X25519MLKEM768) (Exim 4.100)
- (envelope-from <daniel@makrotopia.org>) id 1xBLLi-000000001Nz-3Flz;
- Tue, 29 Sep 2026 00:05:34 +0000
-Date: Tue, 29 Sep 2026 01:05:32 +0100
+ (envelope-from <daniel@makrotopia.org>) id 1xBLLp-000000001OS-1uia;
+ Tue, 29 Sep 2026 00:05:41 +0000
+Date: Tue, 29 Sep 2026 01:05:38 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Daniel Golle <daniel@makrotopia.org>,
  Kyungmin Park <kmpark@infradead.org>,
@@ -107,8 +107,8 @@ To: Tom Rini <trini@konsulko.com>, Daniel Golle <daniel@makrotopia.org>,
  Aristo Chen <aristo.chen@canonical.com>, Anton Ivanov <anton@binarly.io>,
  Weijie Gao <weijie.gao@mediatek.com>,
  u-boot@lists.u-boot-project.org, openwrt-devel@lists.openwrt.org
-Subject: [PATCH 06/11] boot: imagemap: read only the bytes an extend adds
-Message-ID: <9a960bc5139c79b9f60f37f8ea6255e6e8a76c2a.1790626459.git.daniel@makrotopia.org>
+Subject: [PATCH 07/11] boot: fit: unmap the load address after a storage read
+Message-ID: <9ecd2cb0a242f1dd110422e8554df8bcd091b655.1790626459.git.daniel@makrotopia.org>
 References: <cover.1790626459.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -127,67 +127,42 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Growing a region re-reads it from the start even when the reservation
-was renewed at the same address and the leading bytes are still valid.
-The translation table exists to avoid re-reading data that is already in
-RAM, so the common case of probing a FIT header and then mapping the
-whole structure pays for the header twice.
+fit_image_load_storage() maps the load address to get a destination for
+imagemap_map_to() and never unmaps it. The mapping is a no-op on most
+architectures but not on sandbox, which is where the unit tests run.
 
-Read only the range the larger request adds when the region has not
-moved. A reservation that had to be placed elsewhere still needs the
-whole range.
+Pair the map_sysmem() with an unmap_sysmem() once the read is done.
 
-Fixes: 9b41c7dbee96 ("boot: add imagemap on-demand loading from storage")
+Fixes: 46d32e38ee4e ("boot: fit: support on-demand loading in fit_image_load()")
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- boot/imagemap.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+ boot/image-fit.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/boot/imagemap.c b/boot/imagemap.c
-index a28c7928e46..b004aa1644b 100644
---- a/boot/imagemap.c
-+++ b/boot/imagemap.c
-@@ -213,8 +213,10 @@ void *imagemap_map(struct udevice *dev, loff_t img_offset, ulong size)
- 	ulong overhead = img_offset & (bl_len - 1);
- 	loff_t base_off = img_offset - overhead;
- 	ulong read_size = ALIGN(size + overhead, bl_len);
-+	phys_addr_t old_addr;
- 	phys_addr_t addr;
- 	phys_size_t alloc_size;
-+	ulong old_size;
- 	void *base;
- 	int ret;
- 	struct imagemap_region *r;
-@@ -241,9 +243,11 @@ void *imagemap_map(struct udevice *dev, loff_t img_offset, ulong size)
- 			if (!r->lmb_reserved)
- 				break;
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 60e47db5fb0..5d86342852c 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2190,6 +2190,7 @@ static int fit_image_load_storage(struct bootm_headers *images, const void *fit,
+ 	ulong img_load;
+ 	u8 img_comp = IH_COMP_NONE;
+ 	void *mapped;
++	void *dst;
  
--			addr = map_to_sysmem(r->ram);
-+			old_size = r->size;
-+			old_addr = map_to_sysmem(r->ram);
-+			addr = old_addr;
+ 	if (CONFIG_IS_ENABLED(FIT_VERITY)) {
+ 		u8 img_type;
+@@ -2222,10 +2223,11 @@ static int fit_image_load_storage(struct bootm_headers *images, const void *fit,
  
--			lmb_free(addr, ALIGN(r->size, ARCH_DMA_MINALIGN),
-+			lmb_free(addr, ALIGN(old_size, ARCH_DMA_MINALIGN),
- 				 LMB_NONE);
+ 	if (img_comp == IH_COMP_NONE && load_op != FIT_LOAD_IGNORED &&
+ 	    !fit_image_get_load(fit, noffset, &img_load)) {
+-		void *dst = map_sysmem(img_load, data_sz);
++		dst = map_sysmem(img_load, data_sz);
  
- 			/* Try to re-reserve at the same address with new size */
-@@ -261,8 +265,14 @@ void *imagemap_map(struct udevice *dev, loff_t img_offset, ulong size)
- 			}
- 			base = map_sysmem(addr, alloc_size);
- 
--			ret = spl_load_region(&priv->info, img_offset, size,
--					      base);
-+			if (addr == old_addr)
-+				ret = spl_load_region(&priv->info,
-+						      base_off + old_size,
-+						      read_size - old_size,
-+						      (char *)base + old_size);
-+			else
-+				ret = spl_load_region(&priv->info, img_offset,
-+						      size, base);
- 			if (ret < 0) {
- 				log_err("imagemap: read failed at offset 0x%llx (size 0x%lx): %d\n",
- 					(unsigned long long)img_offset, size, ret);
+ 		mapped = imagemap_map_to(images->imagemap, data_off, data_sz,
+ 					 dst);
++		unmap_sysmem(dst);
+ 	} else {
+ 		mapped = imagemap_map(images->imagemap, data_off, data_sz);
+ 	}
 -- 
 2.55.0
