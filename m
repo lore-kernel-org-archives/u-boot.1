@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 757EDC9832A
-	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 15:14:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 959B4CA5FA5
+	for <u-boot@archiver.kernel.org>; Tue, 29 Sep 2026 15:15:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3ABAF80EDB;
-	Tue, 29 Sep 2026 15:14:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 47B6B80ED1;
+	Tue, 29 Sep 2026 15:15:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xQiQ9ai_9j4l; Tue, 29 Sep 2026 15:14:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5CB0180E0C
+ id arouXEgNc0DC; Tue, 29 Sep 2026 15:15:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org C47A380E0C
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790694848;
-	b=fgTQ69R9dDOupYEuppAzPnCuwqAMFFOTemEgjL4a4o8Rx2Wh36zVuqq0DGqrGE/l3Cnh
-	 A5yggNcWGn7P5nB1Z7ew2VCoUs1LsRhI7TXqgTK6SRa9fm5HJ5BYR5Tvk11Jtp3q0eRkk
-	 M6duVhydE9+Rwpo4zX6v6xTJGCuoIfSS+x9tyhWg+JmQ0wp5AxZfWSWnIUqu3r8qvQhGz
-	 fBash9Xx+PdEUpqf4IMQjQ2GZPgG99AsYK2T84mz26fWMyVlPamN5mUVhSc8efMMht9gq
-	 0oLpyBCbYc3o/i0iT0ENsGaVP5Oi/Z7yEEJigpmRvAMxGvH58+E1ESudYTNX1M0qvrQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790694929;
+	b=JQywn3xNEuF1lXyk8KdX5yPpLfEx9oYRmOe7GiEw8pw25PH5oNwFpOgYZHyW/eE49Ika
+	 pRnrspvFREkYTJXtBUEyGU6EG4dzwsbOzMKYSy0z/1jR4M0bJIAsVRkPvdqPPZaJapkTR
+	 o1Qp9N79azObGQrP00wYpoy2Pd0p9Y6N2NbXDe3JbVBPJ5sPbSuUBIrr/zVI7+9pSAHAK
+	 GuIuK7pLbo/noX0dy0pvPTbghVpIi9QJmIdAl89goNSSXqWtNqDmSzt6nNdZHFqXexyTS
+	 uJVMWAh+4TDknDaSIdbJm/TRSL+/ybDydCymTkhnjEukby7zcDVxiQoNo1nkGll+0RA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790694848;
+	c=relaxed/relaxed; t=1790694929;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,135 +32,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=LFfLUaLWNMMVOcgectjVQ4vXBtUz1GFje9i5mdFc6a8=;
-	b=ONQ9IHZsKlz+5w2IM/nwHfeUBsD5lsdmFRXpaS3ASV815fYrAvYYcoFP+N4DOJzzWtrT
-	 MbF4t5W3BYPYLM5XwBbteTT0XBQyB8GYl0+rfpBtoO/N2XEnFa3wFV2a/zWRzhtsad+Hl
-	 xb2M2/NleBZq7h3op3VEgMtMIyYWqi2wTn8iGmEW1eB8jvvKvJfgDd20KlsFZnLd9ppYh
-	 jbQzA2kOwZ0UgxwTY8o7woAOhb+EicAD8lAyCC1AFGfQnYc+72wRlEgX4jPrH2xFTTStG
-	 E/4oKG9mINk9WiDIbnxTG2F9Odl4MuGBxfeT05MSp1M3sb7GIV+X/HmQTNJDV7tuY6g==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=PRCX3IiwtL6x3/hhboJQ/8PQE5STgoHDvwGiZ46dWPk=;
+	b=PiGRudtbu8doy6HYtUiAizj61DsD4MJ3pb/N4H+Nuc/2Wq0Hokn/UASPKLnaNIVqUPRv
+	 YwCnk6b1KOtsp0Sij5SkZO38Bq0JejlFEctM3+l2L6hcviLu9V1FNdi9qtTUWG+8s5EGi
+	 jUllSMXBZ6L9PcTKiRo8/7Qv7VljYqlnwlKOgAouOt2P+KnqVH/MYYJUnuLoAGG2I/kOy
+	 e6nZgIrCRuFBHCo7d0YGmzmgAOtDo5XuGUd9KeLGIGdemfLULubx4PLCDJYIffnjVP3Bw
+	 CiEN8BbupRycpv+W5dCQtQFH1kpeAb2RR6oV9PYzlT68TOr2z78JM1hEGGtYibBDdgA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=none header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=YZKzftCd;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790694848;
-	bh=LFfLUaLWNMMVOcgectjVQ4vXBtUz1GFje9i5mdFc6a8=;
+	d=lists.u-boot-project.org; s=default; t=1790694929;
+	bh=PRCX3IiwtL6x3/hhboJQ/8PQE5STgoHDvwGiZ46dWPk=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rvL+b1W7RVf3E2ZX+BCEUwcGqW/Kt5bLttScEp7JHrQcFYgClKmh5eV7NNrk+7+NF
-	 j6dK+pR8RJpBFumY9eskMzkVqwzP6w2kAsb2hrtAZVhKG6al3zVmCf2wchY2gv7vlp
-	 AVfFsjOj2yoEqDjdma/f7dMcpI4/jiVkxMrIm/iiVYQXv/lvP9guxJSJcHCtDgNpac
-	 U/j37v0nQUUOULzxMyErnZP7GqgtSKbyD/tlmg1zC8HPIPT8ENhO9lYuxKLhJ8ZkHw
-	 /R9rQFT/JHZlSTo9hLuXY8wUdQCd3IhHw3syxgHlFALcCboPIAsIbaEJxd4G1us4uV
-	 6Ixr0TiERLy+Q==
+	b=Ts0xiDmIJ0YjnDAILOWNiOSfWPMeP/xRVDqop74LI7ycI6OJ4CKozS0WGSlPCAn/I
+	 T+6g+Tu88lAWnMILujpzl59N4CvDGWwiXA6QKOzpeRauo707lTDnKOdgN+MRdf8hmk
+	 SHSjCCLqgWzCZzp6pWMFYjE11YSvcvnYfJU7GcJfLTgG8dURru0Ur0Uafa8T1mVqgb
+	 AyTEEGn3BWVA3x8VAVCkC7h/u/l341L4qsIJj6vYNHllaZ3GhzLoAILz9cgm/Rv0eV
+	 yKf0kCD/kQNTrlPZhuG4ZMUBJGmR5zh6/6yjbhnNFKEsuLfhskt0TPewu45+IN/Ht3
+	 CnONI7/tCw/Mw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5CB0180E0C;
-	Tue, 29 Sep 2026 15:14:08 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6CF0472
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:14:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C47A380E0C;
+	Tue, 29 Sep 2026 15:15:29 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id B26C232A
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:15:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6AA5A4032B
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:14:06 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 9719780E0C
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:15:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TbCYJ-jYZe1Z for <u-boot@lists.u-boot-project.org>;
- Tue, 29 Sep 2026 15:14:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 77A3940304
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:31::2b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790694845;
- b=CdCUBUshX92qqg9F9nBKuhCC9wJP8vR91KAbh2jHlolTo4iU5q8TThSkf6P0fdYj7ezs
- y0RMtvPgOURksxIA0h9bdgZLG6td8Qrw8zrfKzoOdoYbHav4bAEUHtxtzjCz3FQm0aQQQ
- bukoN89QitqDG0ib7qVp7F5QAXKvKXBcUak9aWW21uyKjR0uGXHMaj2QDafyuE0BVCibJ
- eLgB44KSh5ANb1srTpnlzqs6B7jnx6uGC5sQhKuFpbsn/WoyhjAMHLVb9l2z9ClppVC8G
- l0KwMofGyqFWFARy18671ypd9cEpqsrsTpy3yVNvU89kKrMlKamZeUDTPdNQY7OSUzA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qfH1Pb0KZwH0 for <u-boot@lists.u-boot-project.org>;
+ Tue, 29 Sep 2026 15:15:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 41AF580E09
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c2b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790694927;
+ b=PDd9ngpdFBSWcmMGQHgp/eeLPCRb3T5v1tIQpQt/iZ/J4RgX5Xq57XRE+m6ACSgLaZUo
+ ayD0q2yfxg+WY3tJ2jDLlwo3n8a+YyuAjhcSJHNXRKDZ0TJYVrxEI4JsbO3SIFPSCjuIg
+ ofnVGIVsZOpF7b2R96AP/Y5feWrWBXFDIrLPVJ46X/rALKod7PS1gJu+jT9TxnDHrO53u
+ qqfjKa/YKR1IRCVeR0CwH0mJuMAunb468J/bynLybE7NwF3X4N/eVkhXvAc4KDI48/4vV
+ UeYErtuQGxVCG+kALY02Wt1L07RCGDlhTGwcYIYgOGaqGhsCzhnwbDAMVepRulf4Fag==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790694845;
+ c=relaxed/relaxed; t=1790694927;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
  Content-Language:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding;
- bh=LFfLUaLWNMMVOcgectjVQ4vXBtUz1GFje9i5mdFc6a8=;
- b=Cj70ZhBFNx5PV7YgPqh0zD2PJ5n4rT+ALi7h+Kz97P4vZ8lNvIkOJCQkqROQkPWa5R5o
- puNaHb9EKTXDJ/Pl9gtF+D84hCo6awo5PVjlUayvvPrDbT9EBUqJIpNFtl8b8hZgHKo10
- 5scgSLnT0LSuuALdVYeKpahij/acMTTljx7ZFXL+Q8KIh2ImkIAKa3lQ4HVfNLGGT21xx
- EsM/b88XrNVuypnaKvg6NBKD5fvjWkDFpxU4LROK30LDb4fSxS7gbr9TEkxMfb1d7iAaA
- fJmafI5OvLju92hVkadkuJnY44vedWeIU8tyV0ubLYn/Q9EQLpUunAlss1IQTY4GwaQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=PRCX3IiwtL6x3/hhboJQ/8PQE5STgoHDvwGiZ46dWPk=;
+ b=eT6Y90LYPVRvey39oVm2k6xM5WGsU6hSW1dkXa5T3YIm0HyKH3gwwKQp7WtrUQx/py4/
+ +LfSStsyy35kg65y1u7f14oVWZdUYcCopMyPsR5lOpV6pqRvbPUraV6BqXSgitpPAgt/l
+ 4zcWobYevqjU4EvyiPdk3kUIf+kIQrmhA64Z8djS7PMUWkAmsh5qLYXfpqn4y7GLoxkxi
+ Z2JL2Ys9q8hODzjCDougPkYXK+LMORjMCmh9fRweB+uE5GyDz/262sP9WqX8mWv/KQyin
+ RvEQVECtNFS7KjTT6Inamvg0QIIxOtmofJxAsgmiSujCQDxHj1L0blFdKCSv+zNDv5g==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=nlxtGEaU; 
- arc=none smtp.remote-ip="2607:f8b0:4864:31::2b"
+ header.s=google header.b=YZKzftCd; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c2b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:31::2b; helo=mail-oo2-x2b.google.com;
+ client-ip=2607:f8b0:4864:20::c2b; helo=mail-oo1-xc2b.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=nlxtGEaU
-Received: from mail-oo2-x2b.google.com (mail-oo2-x2b.google.com
- [IPv6:2607:f8b0:4864:31::2b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 77A3940304
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:14:05 +0000 (UTC)
-Received: by mail-oo2-x2b.google.com with SMTP id
- 46e09a7af769-8167e0d1f90so2717040a34.0
- for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:14:05 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=YZKzftCd
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 41AF580E09
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 15:15:26 +0000 (UTC)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-6c8f6a53fabso732656eaf.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 29 Sep 2026 08:15:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790694844; x=1791299644;
+ d=baylibre.com; s=google; t=1790694925; x=1791299725;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=LFfLUaLWNMMVOcgectjVQ4vXBtUz1GFje9i5mdFc6a8=;
- b=nlxtGEaU7LkXVlXXlxb0c4zpAwwZ7kG/hdu/Wq/FRwLorBULeTFsB8Uo0ZFkF1FWS9
- bm5ONR1FD8qP26GAgwyiJfVn3d0lFbjTlRf+crM/viLFGJl6EsAZCR7fb7vlF2r1NUoU
- YJT8Wi4wSGSIAoxa1Ez2oA8EQbCe3Tl0XtuMPVssf2HcX3vq9UpcrTarKv22f26ggmo/
- ZAwp73ygIpoTN8BV/QmA3m3iO7yslf03/ydupysxrTstfU40MrHHGvqeGFAgSDOoOVP1
- chTjaLgRPGeuZVYuZ/AsUuPV7tb5W33cH9XXKWCNTUXVUckQgJlnW6BhVI8VWDTUxnlw
- ya4A==
+ :content-type; bh=PRCX3IiwtL6x3/hhboJQ/8PQE5STgoHDvwGiZ46dWPk=;
+ b=YZKzftCddhtrvlFg6NnsTteHOxSQ9ImVFrMraBSGCwDjyuRX0DVCXoG2TcFVjqEqYQ
+ Ne0iq5EWokWGbu9IcDE3zQeA1c4SB3WJPz+mMSGSKuTfe+GPkqE/6lD0KznxxcLIZgOT
+ NwO5i1rvVIpL056We8Kfb17FcD/QrR5FMIAfXsyfBfeKNLaYtCFMTne71JogH2TPmtbT
+ YoV70COZxc+D4SMTkfJAfsoEAsiikdgeVS9DjD765uS10ELppCX9UGnSv3KBuu3GUipd
+ 22AN0metj6+v0sYj+EWobSAiiIuJ9wK62eCFZfKqIf3miQL7ppTgZI2RoKElTY0eO2bo
+ s/FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790694844; x=1791299644;
+ d=1e100.net; s=20260707; t=1790694925; x=1791299725;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=LFfLUaLWNMMVOcgectjVQ4vXBtUz1GFje9i5mdFc6a8=;
- b=qX7wMK33U6TP8UWQoJEShk1jrbVAkFbN0KFOxZ8+xd52UVqvhl4KUS1RgYeJAZoKNU
- ZuiFOP3KackwEhDc07GBMtb7ebpTObmQG3CFZm/0DKwJKvQiPRjKSqwenaOC/igi35t/
- p0ImQKzA9dcYmum9pCkz3XAHUCqVXiNvnk9KGyR4zRVaAWqxwqBwlpYqbGuwns6w4hb4
- X2lW1VFH18NN8noBLaDjFmyGfVmkZBUF5DrGTnKZ1L6m/hqV4+/xj5aD+alUQ9cZyI5L
- Cko9dQBjq2q/I7C2/1o53f/n7B1KkiSCL3/GupnV6KrflbMeHUMnd2BQ4YFQoYRUEHjk
- 6H0g==
+ bh=PRCX3IiwtL6x3/hhboJQ/8PQE5STgoHDvwGiZ46dWPk=;
+ b=o5bhjR8zyY2qea6qSxVZ069pjtK/olPrnO1+jTx/UsITvyDV7//p4bRcpBJ7aDbwaR
+ JpoINFj1mTmtESUlPCgarfLW11SNILtwmQMGAvxaDJrIXL51GW/4cSIrhagnVYDIelw3
+ GV8tNwHI08CdVdwnRDGss3vErNPhoLa+3AFZPnfJZC4KPI8+0zrm6ERHnb2DVYKEKNyt
+ IOc6QnNJuyWdDvxU9hgcssf0IsPhLEjY1+OQqSLvkcxA7s0XgJCQQ8Z4umVXvJWJoHlL
+ kJNUlrCeCu2PQIyjRP2iSnSW/rsxIdRE4u7zLTFJCqd32JtB9Z3Nxy0FwIVTvgCqJMb9
+ UdNQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBw3/bN/wDmqHHcVZ7dp28gC39StBjUpKWR9+XAwH88r5i1yQpYNYxwiQYykYehw0im63qWhc7I=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lHrmjL+1Cgb1SMfC7n28JkKesoEocplH2cftwxBewHDq5Aq0O3
- dvu7pu2pCGmYBHl+aNQxaEeWGwxC3XdopZFHar2Ztzc5zcO1B/UZSlARYVNy7VLk94w=
-X-Gm-Gg: AYBFou0eiu1xPomL+iVzgfZ8yz4m5SKRgkC9O2WkoU+nQrUEBYvImfp9UfnpPjMXIJo
- Pp83eC188X6qgn97jIzrE9QWcYhr1XgOK/bH7Y4aZmvR44ihufmCP1hmkDHnxdXBCg0eYAI9Hes
- NR31sVrtXKlCRJm2UroXNzaj9/dNbwuaMjExrTFRDBw9Ije4s614fBYdCFSLH1gMTbSZfl+xHDO
- 5KGaNRAamBQUXBLhs/OwRAb/VNIwpzQieWLA7gKuGmczRqk1VDB5ogfhIvvfGVxhqowLgtpYvT7
- rn1jKXBP8toOo396TkYfyXwvjS/+lV6SC3G4ogJUE/B5BOY1aerVibUrqZ4ESTehe949ccICqJq
- CyrJaJpRzleNLMEiZX4+lPCqA4ZypfoRRuw6GtpUFOioxXAs9RLzOv/avH1bq3VWXKd3TSu4122
- ZD2mQ802wPim0J0j+1E3HwPlpDu0GaljG91Igu5mp+NcfA3/na+gf/XRwLU61QqnF1Dcpl0IKTE
- Szi3nV7Mh3kY5SaRV1/51DTn5jgNMxVcBsuCXGjNkhnYWc3
-X-Received: by 2002:a05:6830:82f7:b0:7f4:bba7:f547 with SMTP id
- 46e09a7af769-81781795b3fmr16717991a34.10.1790694843996; 
- Tue, 29 Sep 2026 08:14:03 -0700 (PDT)
+ AKwUvByq9Lniyl5m0SMpLdrzmqrFylJuW6LWFzR5Eotr3cSQ4InvLrzqwSM2h8fNLVCZ+Zgfpm6wH20=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++m3CqKN8sSZC2o68aPrzErFTdDkecLjQItTV13BeJ0UaQ2n3Bcr
+ O3X6H5xmoEMcYq6QuQzfRV3qeiCDnkRDqCKnDINuqAAQDBxyVJJjZUPDdAsJfFplKec=
+X-Gm-Gg: AYBFou1DZvDm2BTuVPPv1Tz2Qrbiu7TZpPbQE8FebUoTN6JSYHTirDJg7VAnh1M2dZ2
+ 32yFViYJYu4wBHCa6Asl6qlNUH/8ZRagPJikt7kN7DFXVNlLaU3d+ONlX3rcvluA870DHRokLF3
+ iFzvrR9FAylfHHTNQjSBmJYX1+sviHsyLNBJ0GXgm3j+1BgMfpy4KsqTnjt22FIQbA/CDt68ObF
+ oiVcsm5YI6KPCN0SxiVfVVndSF0XTutoheg+of1CWehHvzaguR9Wsi7Z1z766WLS8+c0YIPxT0f
+ 7vPK1TVV5L43zqkik7/RDjBGS2eLWCu14iPF1BKHEuCN3Iq2Iyh7BqjdHHCQPhyQKGI72YL46bD
+ Swgwkydd9kYY9aqqIuzhIOMmen7zuzSgrSVlVHuw1klt4+W4miKmY/hmEl4Zz1WLh29axUSW1+s
+ ZxAiKc3Ie/YuI5tYhsou5Z8rHU74xI394tZev8tLJ+5FqLAvUEYPK/XYerhzMJ31OAUCun+dGpx
+ /1lZZKlJa9v4rGl3Ai9nt3TAa6VQ18dulxS6yu80Ki3ZKRt
+X-Received: by 2002:a05:6820:178c:b0:6b9:3a84:a156 with SMTP id
+ 006d021491bc7-6db147e559bmr1665032eaf.26.1790694925435; 
+ Tue, 29 Sep 2026 08:15:25 -0700 (PDT)
 Received: from ?IPV6:2600:8803:e7e4:500:9b16:2a1a:ef3f:3700?
  ([2600:8803:e7e4:500:9b16:2a1a:ef3f:3700])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-81fafcd4b67sm62628a34.21.2026.09.29.08.14.02
+ 46e09a7af769-81faf31059asm100323a34.15.2026.09.29.08.15.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Sep 2026 08:14:03 -0700 (PDT)
-Message-ID: <839740df-5921-4941-9b7c-a852130029ae@baylibre.com>
-Date: Tue, 29 Sep 2026 10:14:02 -0500
+ Tue, 29 Sep 2026 08:15:24 -0700 (PDT)
+Message-ID: <17015c04-0745-4c47-999d-942a59cbf854@baylibre.com>
+Date: Tue, 29 Sep 2026 10:15:23 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] drivers: power: pmic: add driver for MediaTek PMICs
- over SPMI
+Subject: Re: [PATCH 3/3] drivers: power: regulator: add driver for the
+ regulators of MT6373
 To: Arnaud Ferraris <arnaud.ferraris@collabora.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  u-boot@lists.u-boot-project.org
@@ -178,10 +180,10 @@ Cc: Tom Rini <trini@konsulko.com>,
  Joy Zou <joy.zou@nxp.com>, Vincent Jardin <vjardin@free.fr>,
  Guodong Xu <guodong@riscstar.com>
 References: <20260924-mt8196-spmi-v1-0-dd2263403691@collabora.com>
- <20260924-mt8196-spmi-v1-2-dd2263403691@collabora.com>
+ <20260924-mt8196-spmi-v1-3-dd2263403691@collabora.com>
 Content-Language: en-US
 From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260924-mt8196-spmi-v1-2-dd2263403691@collabora.com>
+In-Reply-To: <20260924-mt8196-spmi-v1-3-dd2263403691@collabora.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -198,161 +200,385 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 On 9/24/26 11:02 AM, Arnaud Ferraris wrote:
-> This driver acts mostly as an interface between PMIC/regulator devices
-> connected to MediaTek SoCs over SPMI, providing read/write functions to
-> those devices.
-> 
-> It has been successfully tested with the MT6373 PMIC but should work
-> just as well with other PMICs as long as the corresponding compatible
-> string is added to the driver.
+> This driver supports basic operations (get/set voltage, enable/disable)
+> for regulators found in the MediaTek MT6373 PMIC.
+
+I saw in [1] that VBUCK4 gets special handling. Do we need that in U-Boot?
+
+[1]: https://lore.kernel.org/all/20260511101355.122478-3-angelogioacchino.delregno@collabora.com/
+
 > 
 > Signed-off-by: Arnaud Ferraris <arnaud.ferraris@collabora.com>
 > ---
->  drivers/power/pmic/Kconfig    |  6 +++
->  drivers/power/pmic/Makefile   |  1 +
->  drivers/power/pmic/mtk-spmi.c | 88 +++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 95 insertions(+)
+>  drivers/power/regulator/Kconfig            |   9 +
+>  drivers/power/regulator/Makefile           |   1 +
+>  drivers/power/regulator/mt6373_regulator.c | 797 +++++++++++++++++++++++++++++
+>  3 files changed, 807 insertions(+)
 > 
-> diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-> index 95687d0bdfd..8f35dfdea84 100644
-> --- a/drivers/power/pmic/Kconfig
-> +++ b/drivers/power/pmic/Kconfig
-> @@ -464,6 +464,12 @@ config DM_PMIC_MTK_PWRAP
->  	  on different MediaTek SoCs. The PMIC wrapper is a proprietary
->  	  hardware to connect the PMIC.
+> diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+> index 428689702c8..b529285cfd7 100644
+> --- a/drivers/power/regulator/Kconfig
+> +++ b/drivers/power/regulator/Kconfig
+> @@ -581,6 +581,15 @@ config DM_REGULATOR_MT6359
+>  	  This driver supports the control of different power rails of device
+>  	  through regulator interface.
 >  
-> +config DM_PMIC_MTK_SPMI
-> +	bool "Enable driver for MediaTek PMIC Support over SPMI"
+> +config DM_REGULATOR_MT6373
+> +	bool "Enable driver for MediaTek MT6373 PMIC regulators"
+> +	depends on DM_REGULATOR && PMIC_MTK
 
-This won't work without SPMI, so...
-
-	depends on SPMI
+Did you mean DM_PMIC_MTK_SPMI instead of PMIC_MTK?
 
 > +	help
-> +	  Say yes here to add support for controlling MediaTek PMICs using the
-> +	  SPMI bus.
+> +	  Say y here to select this option to enable the power regulator of
+> +	  MediaTek MT6373 PMIC.
+> +	  This driver supports the control of different power rails of device
+> +	  through regulator interface.
 > +
->  endif
->  
->  config PMIC_TPS65217
-> diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-> index da9b810de90..a6a16b90bc6 100644
-> --- a/drivers/power/pmic/Makefile
-> +++ b/drivers/power/pmic/Makefile
-> @@ -42,6 +42,7 @@ obj-$(CONFIG_PMIC_RAA215300) += raa215300.o
->  obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
->  obj-$(CONFIG_$(PHASE_)DM_PMIC_CPCAP) += cpcap.o
->  obj-$(CONFIG_DM_PMIC_MTK_PWRAP) += mtk-pwrap.o
-> +obj-$(CONFIG_DM_PMIC_MTK_SPMI) += mtk-spmi.o
->  
->  ifeq ($(CONFIG_$(PHASE_)POWER_LEGACY),y)
->  obj-$(CONFIG_POWER_LTC3676) += pmic_ltc3676.o
-> diff --git a/drivers/power/pmic/mtk-spmi.c b/drivers/power/pmic/mtk-spmi.c
+>  config DM_REGULATOR_PMBUS_HELPER
+>  	bool "Shared regulator helpers for PMBus chip drivers"
+>  	depends on DM_REGULATOR && PMBUS && DM_I2C
+> diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
+> index e17937f4c26..ce8b465afc4 100644
+> --- a/drivers/power/regulator/Makefile
+> +++ b/drivers/power/regulator/Makefile
+> @@ -13,6 +13,7 @@ obj-$(CONFIG_$(PHASE_)REGULATOR_AXP_USB_POWER) += axp_usb_power.o
+>  obj-$(CONFIG_$(PHASE_)DM_REGULATOR_DA9063) += da9063.o
+>  obj-$(CONFIG_$(PHASE_)DM_REGULATOR_MAX77663) += max77663_regulator.o
+>  obj-$(CONFIG_$(PHASE_)DM_REGULATOR_MAX8907) += max8907_regulator.o
+> +obj-$(CONFIG_$(PHASE_)DM_REGULATOR_MT6373) += mt6373_regulator.o
+>  obj-$(CONFIG_DM_REGULATOR_MAX77686) += max77686.o
+>  obj-$(CONFIG_DM_REGULATOR_NPCM8XX) += npcm8xx_regulator.o
+>  obj-$(CONFIG_$(PHASE_)DM_REGULATOR_PFUZE100) += pfuze100.o
+> diff --git a/drivers/power/regulator/mt6373_regulator.c b/drivers/power/regulator/mt6373_regulator.c
 > new file mode 100644
-> index 00000000000..39895bf9c0d
+> index 00000000000..7927a620fb6
 > --- /dev/null
-> +++ b/drivers/power/pmic/mtk-spmi.c
-> @@ -0,0 +1,88 @@
-> +// SPDX-License-Identifier: GPL-2.0+
+> +++ b/drivers/power/regulator/mt6373_regulator.c
+> @@ -0,0 +1,797 @@
+> +// SPDX-License-Identifier: GPL-2.0
 
-GPL-2.0-or-later
+Prefer GPL-2.0-only or GPL-2.0-or-later
 
 > +/*
-> + * MediaTek generic PMIC driver
-> + *
-> + * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-> + * (C) Copyright 2026 Collabora Ltd
-> + * Author: Arnaud Ferraris <arnaud.ferraris@collabora.com>
+> + * Copyright (c) 2024 MediaTek Inc.
+> + * Copyright (c) 2025-2026 Collabora Ltd
+> + * Authors: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+> + *          Arnaud Ferraris <arnaud.ferraris@collabora.com>
 > + */
-> +#include <dm.h>
+> +
+> +#include <dm/device_compat.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/device.h>
+> +#include <dm/devres.h>
+> +#include <dm/lists.h>
+> +#include <linux/bitfield.h>
+> +#include <linux/delay.h>
+> +#include <linux/err.h>
+> +#include <log.h>
 > +#include <power/pmic.h>
-> +#include <spmi/spmi.h>
+> +#include <power/regulator.h>
+
+Headers could use some work here to include only what we use (and directly
+rather than indirectly).
+
 > +
-> +#define REG_MASK 0xFFFF
-> +
-> +struct pmic_mtk_priv {
-> +	u32 usid; /* Slave ID on SPMI bus */
+> +/**
+> + * struct linear_range - table of selector - value pairs
+> + *
+> + * Define a lookup-table for range of values. Intended to help when looking
+> + * for a register value matching certaing physical measure (like voltage).
+> + * Usable when increment of one in register always results a constant increment
+> + * of the physical measure (like voltage).
+> + *
+> + * @min:  Lowest value in range
+> + * @min_sel: Lowest selector for range
+> + * @max_sel: Highest selector for range
+> + * @step: Value step size
+> + */
+> +struct linear_range {
+> +	unsigned int min;
+> +	unsigned int min_sel;
+> +	unsigned int max_sel;
+
+It looks like this is not being used as much as it should. min_sel is never
+read and max_sel is only read in one case.
+
+> +	unsigned int step;
 > +};
 > +
-> +static int pmic_mtk_reg_count(struct udevice *dev)
-> +{
-> +	return 0xFFFF;
-
-Do we know what the actual max defined register is? Making this smaller
-makes the register dump command go faster.
-
+> +/* Initialize struct linear_range for regulators */
+> +#define REGULATOR_LINEAR_RANGE(_min_uV, _min_sel, _max_sel, _step_uV)	\
+> +{									\
+> +	.min		= _min_uV,					\
+> +	.min_sel	= _min_sel,					\
+> +	.max_sel	= _max_sel,					\
+> +	.step		= _step_uV,					\
 > +}
 > +
-> +static int pmic_mtk_write(struct udevice *dev, uint reg, const u8 *buff, int len)
+
+...
+
+> +#define MT6373_PMIC_RG_LDO_VAUD18_ADDR		0x1b57
+> +#define MT6373_PMIC_RG_LDO_VUSB_ADDR		0x1b65
+> +#define MT6373_PMIC_RG_LDO_VAUX18_ADDR		0x1b73
+> +#define MT6373_PMIC_RG_LDO_VRF13_AIF_ADDR	0x1b81
+> +#define MT6373_PMIC_RG_LDO_VRF18_AIF_ADDR	0x1b8f
+> +#define MT6373_PMIC_RG_LDO_VRFIO18_AIF_ADDR	0x1b9d
+> +#define MT6373_PMIC_RG_LDO_VCN33_1_ADDR		0x1bd7
+> +#define MT6373_PMIC_RG_LDO_VCN33_2_ADDR		0x1be5
+> +#define MT6373_PMIC_RG_LDO_VCN33_3_ADDR		0x1bf3
+> +#define MT6373_PMIC_RG_LDO_VCN18IO_ADDR		0x1c01
+> +#define MT6373_PMIC_RG_LDO_VRF09_AIF_ADDR	0x1c0f
+> +#define MT6373_PMIC_RG_LDO_VRF12_AIF_ADDR	0x1c1d
+> +#define MT6373_PMIC_RG_LDO_VANT18_ADDR		0x1c57
+> +#define MT6373_PMIC_RG_LDO_VEFUSE_ADDR		0x1c73
+> +#define MT6373_PMIC_RG_LDO_VMCH_ADDR		0x1c81
+> +#define MT6373_PMIC_RG_LDO_VMCH_EINT_ADDR	0x1c8f
+> +#define MT6373_PMIC_RG_LDO_VMCH_EINT_HIGH_ADDR	MT6373_PMIC_RG_LDO_VMCH_EINT_ADDR
+> +#define MT6373_PMIC_RG_LDO_VMCH_EINT_LOW_ADDR	MT6373_PMIC_RG_LDO_VMCH_EINT_ADDR
+> +#define MT6373_PMIC_RG_LDO_VMCH_EINT_POL_BIT	BIT(2)
+> +#define MT6373_PMIC_RG_LDO_VMC_ADDR		0x1c90
+> +#define MT6373_PMIC_RG_LDO_VIBR_ADDR		0x1c9e
+> +#define MT6373_PMIC_RG_LDO_VIO28_ADDR		0x1cd7
+> +#define MT6373_PMIC_RG_LDO_VFP_ADDR		0x1ce5
+> +#define MT6373_PMIC_RG_LDO_VTP_ADDR		0x1cf3
+> +#define MT6373_PMIC_RG_LDO_VSIM1_ADDR		0x1d01
+> +#define MT6373_PMIC_RG_LDO_VSIM2_ADDR		0x1d10
+> +#define MT6373_PMIC_RG_LDO_VSIM2_LP_ADDR	0x1d10
+> +#define MT6373_PMIC_RG_LDO_VSRAM_DIGRF_AIF_ADDR	0x1d57
+> +#define MT6373_PMIC_RG_VAUX18_VOCAL_ADDR	0x1dd8
+> +#define MT6373_PMIC_RG_VAUX18_VOSEL_ADDR	0x1dd9
+> +#define MT6373_PMIC_RG_VUSB_VOCAL_ADDR		0x1ddc
+> +#define MT6373_PMIC_RG_VUSB_VOSEL_ADDR		0x1ddd
+> +#define MT6373_PMIC_RG_VCN33_1_VOCAL_ADDR	0x1de0
+> +#define MT6373_PMIC_RG_VCN33_1_VOSEL_ADDR	0x1de1
+> +#define MT6373_PMIC_RG_VCN33_2_VOCAL_ADDR	0x1de4
+> +#define MT6373_PMIC_RG_VCN33_2_VOSEL_ADDR	0x1de5
+> +#define MT6373_PMIC_RG_VCN33_3_VOCAL_ADDR	0x1de8
+> +#define MT6373_PMIC_RG_VCN33_3_VOSEL_ADDR	0x1de9
+> +#define MT6373_PMIC_RG_VMCH_VOCAL_ADDR		0x1dec
+> +#define MT6373_PMIC_RG_VMCH_VOSEL_ADDR		0x1ded
+> +#define MT6373_PMIC_RG_VMCH_EINT_HIGH_VOSEL_ADDR MT6373_PMIC_RG_VMCH_VOSEL_ADDR
+> +#define MT6373_PMIC_RG_VMCH_EINT_LOW_VOSEL_ADDR	MT6373_PMIC_RG_VMCH_VOSEL_ADDR
+> +#define MT6373_PMIC_RG_VEFUSE_VOCAL_ADDR	0x1df0
+> +#define MT6373_PMIC_RG_VEFUSE_VOSEL_ADDR	0x1df1
+> +#define MT6373_PMIC_RG_VMC_VOCAL_ADDR		0x1df4
+> +#define MT6373_PMIC_RG_VMCH_EINT_HIGH_VOCAL_ADDR MT6373_PMIC_RG_VMC_VOCAL_ADDR
+> +#define MT6373_PMIC_RG_VMCH_EINT_LOW_VOCAL_ADDR	MT6373_PMIC_RG_VMC_VOCAL_ADDR
+
+Is there a typo here? Aren't VMC and VMCH separate entities?
+
+> +#define MT6373_PMIC_RG_VMC_VOSEL_ADDR		0x1df5
+> +#define MT6373_PMIC_RG_VIBR_VOCAL_ADDR		0x1df8
+> +#define MT6373_PMIC_RG_VIBR_VOSEL_ADDR		0x1df9
+> +#define MT6373_PMIC_RG_VIO28_VOCAL_ADDR		0x1dfc
+> +#define MT6373_PMIC_RG_VIO28_VOSEL_ADDR		0x1dfd
+> +#define MT6373_PMIC_RG_VFP_VOCAL_ADDR		0x1e00
+> +#define MT6373_PMIC_RG_VFP_VOSEL_ADDR		0x1e01
+> +#define MT6373_PMIC_RG_VTP_VOCAL_ADDR		0x1e04
+> +#define MT6373_PMIC_RG_VTP_VOSEL_ADDR		0x1e05
+> +#define MT6373_PMIC_RG_VSIM1_VOCAL_ADDR		0x1e08
+> +#define MT6373_PMIC_RG_VSIM1_VOSEL_ADDR		0x1e09
+> +#define MT6373_PMIC_RG_VSIM2_VOCAL_ADDR		0x1e0c
+> +#define MT6373_PMIC_RG_VSIM2_VOSEL_ADDR		0x1e0d
+> +#define MT6373_PMIC_RG_VAUD18_VOCAL_ADDR	0x1e58
+> +#define MT6373_PMIC_RG_VAUD18_VOSEL_ADDR	0x1e59
+> +#define MT6373_PMIC_RG_VRF18_AIF_VOCAL_ADDR	0x1e5c
+> +#define MT6373_PMIC_RG_VRF18_AIF_VOSEL_ADDR	0x1e5d
+> +#define MT6373_PMIC_RG_VCN18IO_VOCAL_ADDR	0x1e60
+> +#define MT6373_PMIC_RG_VCN18IO_VOSEL_ADDR	0x1e61
+> +#define MT6373_PMIC_RG_VRFIO18_AIF_VOCAL_ADDR	0x1e64
+> +#define MT6373_PMIC_RG_VRFIO18_AIF_VOSEL_ADDR	0x1e65
+> +#define MT6373_PMIC_RG_VANT18_VOCAL_ADDR	0x1e68
+> +#define MT6373_PMIC_RG_VANT18_VOSEL_ADDR	0x1e69
+> +#define MT6373_PMIC_RG_VRF13_AIF_VOCAL_ADDR	0x1ed8
+> +#define MT6373_PMIC_RG_VRF13_AIF_VOSEL_ADDR	0x1ed9
+> +#define MT6373_PMIC_RG_VRF12_AIF_VOCAL_ADDR	0x1edc
+> +#define MT6373_PMIC_RG_VRF12_AIF_VOSEL_ADDR	0x1edd
+> +#define MT6373_PMIC_RG_VRF09_AIF_VOCAL_ADDR	0x1f58
+> +#define MT6373_PMIC_RG_VRF09_AIF_VOSEL_ADDR	0x1f59
+> +#define MT6373_PMIC_RG_LDO_VT_VOCALSEL_MASK	GENMASK(7, 0)
+> +
+
+...
+
+> +static u8 mt6373_read(struct mt6373_regulator *reg, u16 addr, u8 *value)
+
+Needs to return int instead of u8 to pass error along.
+
 > +{
-> +	struct pmic_mtk_priv *priv = dev_get_priv(dev);
-> +
-> +	if (len != 1)
-> +		return -EINVAL;
-> +
-> +	return spmi_reg_write(dev->parent, priv->usid, /* pid */ 0, reg & REG_MASK, *buff);
-
-Could make a macro for pid rather than the inline comment.
-
+> +	return pmic_read(reg->data->pmic, reg->data->base + addr, value, 1);
 > +}
 > +
-> +static int pmic_mtk_read(struct udevice *dev, uint reg, u8 *buff, int len)
+
+...
+
+> +static int mt6373_regulator_set_value(struct udevice *dev, int uV)
 > +{
-> +	struct pmic_mtk_priv *priv = dev_get_priv(dev);
-> +	int val;
+> +	struct mt6373_regulator *plat = dev_get_plat(dev);
+> +	const struct linear_range *range = NULL;
+> +	int i, max, ret, nranges = plat->info->n_linear_ranges;
+> +	unsigned int vsel;
 > +
-> +	if (len != 1)
-> +		return -EINVAL;
+> +	if (nranges > 1) {
+> +		for (i = 0; i < nranges; i++) {
+> +			if (uV < plat->info->linear_ranges[i].min) {
+> +				if (i) {
+> +					i--;
+> +					range = &plat->info->linear_ranges[i];
+> +					break;
+> +				}
 > +
-> +	val = spmi_reg_read(dev->parent, priv->usid, /* pid */ 0, reg & REG_MASK);
+> +				dev_err(dev,
+> +					"Requested voltage (%d) is lower than"
+> +					" minimum regulator voltage (%d)\n",
+> +					uV, plat->info->linear_ranges[0].min);
+> +				return -EINVAL;
+> +			}
+> +		}
 > +
-> +	if (val < 0)
-> +		return val;
-> +	*buff = val;
-> +	return 0;
+> +		if (!range) {
+> +			i = nranges - 1;
+> +			max = plat->info->linear_ranges[i].min
+> +				+ (plat->info->linear_ranges[i].max_sel
+> +					* plat->info->linear_ranges[i].step);
+> +
+> +			if (uV > max)
+> +				dev_err(dev,
+> +					"Requested voltage (%d) is higher than"
+> +					" maximum regulator voltage (%d)\n",
+> +					uV, max);
+> +			else
+> +				range = &plat->info->linear_ranges[i];
+> +		}
+> +
+> +		if (!range) {
+> +			dev_err(dev,
+> +				"Unable to determine proper range for value (%d)\n",
+> +				uV);
+> +			return -EINVAL;
+> +		}
+> +
+> +		ret = mt6373_write(plat, plat->info->vsel_range_reg,
+> +				   (u8)i & plat->info->vsel_range_mask);
+> +		if (ret)
+> +			return ret;
+> +	} else {
+> +		range = plat->info->linear_ranges;
+> +	}
+> +
+> +	vsel = (uV - range->min) / range->step;
+
+Should this round up? (I think that is what Linux does.)
+
+> +	return mt6373_write(plat, plat->info->vsel_reg,
+> +			    (u8)vsel & plat->info->vsel_mask);
 > +}
 > +
-> +static struct dm_pmic_ops pmic_mtk_ops = {
-> +	.reg_count = pmic_mtk_reg_count,
-> +	.read = pmic_mtk_read,
-> +	.write = pmic_mtk_write,
-> +};
-> +
-> +static const struct udevice_id pmic_mtk_ids[] = {
-> +	{ .compatible = "mediatek,mt6373" },
-> +	{ }
-> +};
-> +
-> +static int pmic_mtk_probe(struct udevice *dev)
+
+...
+
+> +static int mt6373_regulators_bind(struct udevice *dev)
 > +{
-> +	struct pmic_mtk_priv *priv = dev_get_priv(dev);
+> +	struct mt6373_regulator_data *data = dev_get_plat(dev);
+> +	struct driver *drv;
+> +	char *name;
+> +	ofnode child, node = dev_ofnode(dev);
 > +	int ret;
+> +	size_t namelen;
+> +	u32 addr;
 > +
-> +	/*
-> +	 * dev_read_addr() can't be used here because the reg property actually
-> +	 * contains two discrete values, not a single 64-bit address.
-> +	 * The address is the first value.
-> +	 */
-> +	ret = ofnode_read_u32_index(dev_ofnode(dev), "reg", 0, &priv->usid);
+> +	ret = ofnode_read_u32_index(node, "reg", 0, &addr);
 > +	if (ret < 0)
 > +		return -EINVAL;
+
+Why ignoring the actual error return?
+
 > +
-> +	debug("usid: %d\n", priv->usid);
+> +	data->base = (u16)addr;
+
+Cast is not necessary.
+
+> +	data->pmic = dev->parent;
+> +
+> +	ofnode_for_each_subnode(child, node) {
+> +		struct mt6373_regulator reg;
+> +
+> +		reg.data = data;
+> +		reg.info = mt6373_get_regulator_info(child);
+> +		if (!reg.info)
+> +			continue;
+> +
+> +		namelen = strlen("reg-mt6373-") + strlen(reg.info->name) + 1;
+> +		name = devm_kzalloc(dev, namelen, GFP_KERNEL);
+
+Should check !name before using it.
+
+> +		ret = snprintf(name, namelen, "reg-mt6373-%s", reg.info->name);
+> +		if (ret < 0 || ret >= namelen) {
+
+Doesn't snprintf() return number of bytes actually written, so could not be
+>= namelen?
+
+Also, it doesn't return negative error.
+
+> +			dev_err(dev, "Failed to create MT6373 regulator name\n");
+> +			return -ENOMEM;
+> +		}
+> +
+> +		if (reg.info->id <= MT6373_ID_VBUCK9)
+> +			drv = DM_DRIVER_GET(mt6373_regulator_buck);
+> +		else
+> +			drv = DM_DRIVER_GET(mt6373_regulator_ldo);
+> +
+> +		ret = device_bind_with_driver_data(dev, drv, name, (ulong)&reg,
+> +						   child, NULL);
+
+This is dangling pointer. reg is on the stack and the device will keep a
+pointer to it. Even if it doesn't get used now, someone might accidentally
+use it in the future.
+
+It would make more sense to just past the static per-regulator info here.
+And since the data is the same for each regulator, it can be fetched with
+dev_get_plat(dev->parent) without having to make a per-regulator pointer
+to it.
+
+> +		if (ret < 0) {
+> +			dev_err(dev, "Failed to bind MT6373 regulator %s: %d\n",
+> +				name, ret);
+> +			return ret;
+> +		}
+> +	}
 > +
 > +	return 0;
 > +}
 > +
-> +U_BOOT_DRIVER(pmic_mtk_spmi) = {
-> +	.name = "pmic_mtk_spmi",
-> +	.id = UCLASS_PMIC,
-> +	.of_match = pmic_mtk_ids,
-> +	.bind = dm_scan_fdt_dev,
-> +	.probe = pmic_mtk_probe,
-> +	.ops = &pmic_mtk_ops,
-> +	.priv_auto	= sizeof(struct pmic_mtk_priv),
+> +static const struct udevice_id mt6373_regulators_ids[] = {
+> +	{ .compatible = "mediatek,mt6373-regulator" },
+> +	{ /* sentinel */ }
+> +};
+> +
+> +/*
+> + * Driver for a 'bank' of regulators. This creates devices for each
+> + * individual regulator
+> + */
+> +U_BOOT_DRIVER(mt6373_regulators) = {
+> +	.name = "mt6373_regulators",
+> +	.id = UCLASS_MISC,
 
-Make this a space like everything else above.
+Should be UCLASS_REGULATOR? UCLASS_MISC requires ops to be struct misc_ops.
 
+Or I guess this is because this is binding to the parent node rather than
+individual regulators. In other MediaTek drivers, we have the PMIC driver
+register the regulators with pmic_bind_children() instead. That seems
+simpler than re-implementing the same logic here.
+
+> +	.bind = mt6373_regulators_bind,
+> +	.probe = mt6373_regulators_probe,
+> +	.of_match = mt6373_regulators_ids,
+> +	.ops = &mt6373_regulator_ldo_ops,
+> +	.plat_auto = sizeof(struct mt6373_regulator_data),
 > +};
 > 
 
