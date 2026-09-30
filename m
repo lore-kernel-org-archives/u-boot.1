@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D94CBCA5FB1
-	for <u-boot@archiver.kernel.org>; Wed, 30 Sep 2026 09:45:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10E44CA5FC3
+	for <u-boot@archiver.kernel.org>; Wed, 30 Sep 2026 09:45:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6BFCD6085C;
-	Wed, 30 Sep 2026 09:45:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9AD4080FFD;
+	Wed, 30 Sep 2026 09:45:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mis0cUZOh_0O; Wed, 30 Sep 2026 09:45:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 62C986082E
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790761521;
-	b=F0fVFdq+tjNWMnBmBixjHO4PmzjYrCuGz9w4dqQen+LYkhuvLukssNspB1ivBRpTRZsY
-	 FMkoPrVzpJ+UgznP5yzDbrg3MQQYr5LQU5FHIgDsBakemY0TN1ctIKvEwj/kjiwBqlF2T
-	 0io1V8AfvZkelT/4EPLyqr50U7V334T9KTWVqF5t3JZp9+Bmiw55sscqevcRlUYd37Wly
-	 k122PrCW50knj/g61f/QaVO4s6tfNgoQQ4PZ2UiFcS0IgLLfHgf6yuPmEaXikUX2WRw+S
-	 zsEEE/kbvwkajrXJ0DtqiWK9JBrZQOT7HTqQaL0QfsTDaD7TJ+FmcGyCcVZzHiXFSqA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5BaYg08He29H; Wed, 30 Sep 2026 09:45:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org E171D80CA7
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790761524;
+	b=IXGESSpzHkiYOX1c75J/o27Hbq+vXiEWgpkPbHX5u6TPAKVaBGMjIvp8acyMjrziD2de
+	 Y48lSUyy9EZAWytcf1J1Qaa3Peq4/QN0EtwXExHMD2wO4e9HzAWFnShKRpYtlJfzQrjvA
+	 4nij6yV5F8ae/0JoUSs56GV/Z5ul7S+olX5PIUFaNK4qgoKnypqYJQ7389jg80+8gDpYm
+	 v4xPfjtYacUU4NvR4PrOcon1UWrnZGYrlIrYifP6Q6YBPlknUYSTKQoINPrawyGnQbntx
+	 FuXB3hPNaiCtKhoE0pnUvOuTZzCx/gLQOBEjswjcZqk8JumRU+aBoha6rVUb94g+Lvw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790761521;
+	c=relaxed/relaxed; t=1790761524;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,135 +33,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=supoa2/tqEYpx7EGtDFlYGdPXvv5qVGZNr3CvoRBIlE=;
-	b=TsryWIuxDP+RXw3q9iqiTqImyKzUBvi5ZwkveylqIv5rVoJMzhVlg6ZRrCacRcTrkH6Q
-	 MPuA65Mq4xdkN0tabUX0APdmro1zgH7z9w6n8S/OHg2xIrV44uZvldxpYErshpGtjWS1u
-	 3iMMwqnasKg2gqs/RI9dVwEkQCZVNZPhqb9j49BY61DPS/lYVTVAI2X+Y4vym8nTzs5nK
-	 GNDVu0w/R+EF7ObLjyToDGu1Pj5Izt0hGL3QeQLmD3cZGdnO6eRus+RyoeqouYEt4b1FF
-	 ArVRyzJcEBP/vnZyElmcx2bnRsReqQib5eCy3lgCELB4rofLSF3MYvVtn0Hd3nrZPJQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=2A+EWLQwVd2E44QyxJ9W94ixj58AwrOducH907UakUg=;
+	b=hOiA4a1OsHyhND/P4ZOPCXgrAnre1+HqYXy52FDv1+ipO/rnC0RSd9uXXaaLzRo5MrMx
+	 vyBhN/6QTjXXzC34qicG+m+plZ5pV/JUx0T5aOsAUBnATh1xBfKMQcfBlE//vpXYX8+/F
+	 5+EjXqRtySr8JdGfGxGPKOCjbRxQgprNjyKuOcW7ZFnSc9jgCBL/ov57gukU/9yYXMMxf
+	 Y0U9rAYe0cYk6Z+UUvbSaNgl6evK+bvSbRUaYnynVrv5ju6yfI68xAPx5Cn563aWgQ4PZ
+	 ymc4+yY1sKAjsEM3NuXBKgLEt99yMzqNu4KGwsn0i3phGoQ7/jr6sTwKuA7DcTGduEg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790761521;
-	bh=supoa2/tqEYpx7EGtDFlYGdPXvv5qVGZNr3CvoRBIlE=;
+	d=lists.u-boot-project.org; s=default; t=1790761524;
+	bh=2A+EWLQwVd2E44QyxJ9W94ixj58AwrOducH907UakUg=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=LQUpgnUR8eaC1HXfs6/VBl7hkZ8+vj6L7gznYGWtAHoq1JZh7Wzs2LY6nniArY9ZA
-	 Fqf3lHaxIm/A/6cgFCFrTdeJEF+8BVLNgmbM3YH/87v5tZn3nyoeK8Ih1ohT9xRoaN
-	 ZZHPCOdWElpd6SPRBA82WbNfvYaxNTvrT/NlpmEaoBCdnGYGJ623je2lN+PkSnGavH
-	 obiQnZ87Di6rpgdDz8THMvbbGwrCTG0VuP6KY0yBKLGpaXhUlUaTxbZFtrUHsnKUjm
-	 fn0GR+EA2oc0njkEFhng+1NXrjk248NRjVLJRg3yh4VQY9ROVT68jW+J9FKMavbox+
-	 YpLeIOEQxMpyw==
+	b=YnWSRcmLF9+Rgx5NSLLI8vBxEaV1Zok8WMJiYxp6b6hIUh3HWFM0AMNMK6v0mHWcX
+	 sjZg0MtPG/hP5syT9oqd1CBlhlqINDFsRB+d/2Z2ajEJ391NDt1AM6wuj1P+KGnGzR
+	 w9hVpcnMHl/C7yS3dkDorH8kIxwxiCf1lf/jMl4LXBjf8knS7szvfhSV4zY7mFJI+r
+	 q0A5mZNLJ7YBal8jBLiNFB0Yu7gxX+p0YGsnnqD3AZABU/r6ya46rvDxEdbZlBmME7
+	 IGJSqac+q5jx9/8FTJ+WMx1vEAYsdzU5ZyGwZLaJOsN+RA/9M8dhHmwh3Rt5jBnPWZ
+	 OxJPY0YTFdIGA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 62C986082E;
-	Wed, 30 Sep 2026 09:45:21 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 1EEBF380
+	by smtp1.osuosl.org (Postfix) with ESMTP id E171D80CA7;
+	Wed, 30 Sep 2026 09:45:23 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id BEC7A33B
  for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 09:45:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 1C90A80FF9
+ by smtp4.osuosl.org (Postfix) with ESMTP id B104240A35
  for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 09:45:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id obzbDoikiP7e for <u-boot@lists.u-boot-project.org>;
- Wed, 30 Sep 2026 09:45:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 2FF8F80C8F
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790761519;
- b=JaAQd+nshC9e8rQhbIO2gbAqL/L1hDWY2k/drj3SAtgyLuYMqwZxXMGIHm4ILeV3/yeO
- Lf7e4+Afa10mmxCFp2UltGMYixcYAkwfGZCTQKEid4OgOu18eOQuWT0gn//YD2OUdd+uj
- uM8vx83gZMsatv4IdtGR/kI4laAOTCJh+wu9q6vz1TQtA786DWKrVFiDMgB+a7tXTSXYS
- dCnkUcXNSUkPBHZWTi/5OUBIDG4duVVr1njeS2/5S3B52n16W48USisp0gZOM7gG/iFst
- Z/WQ4IXRqTtwS6+YLpQ2GNP9oqkyD6sNI7Hrt4WgWK3BCe2rpjdsPKwKMboR2tIzDmg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id StVl55OGxtLB for <u-boot@lists.u-boot-project.org>;
+ Wed, 30 Sep 2026 09:45:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 19C7C4085B
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:31::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790761520;
+ b=rlFoRtJXqpiW71wvY6iUCWc9CScOTnED5tFbYNEa95hNN/JvxcQRmq0skSkXx1wNGPM+
+ MFQBWDaGDkOWa6sF3SGZSfF5wa3lT+jrHRlHbRFNFBfxrngnQJGOp+esC/kIcmkxKvESp
+ BPxVesY/C7LxkR9MdB6UeCTzr2J2GPgSX1OFzMyoQBfscG9Q41kNIHHFtnGc07hzTxJFN
+ 7ywnqkroZ1fE6JQFcdaoG7yfRcxoqUhwRuwCqK2jkysMclzhOmWKY1zA1ZmwUJTlA9Kcs
+ f6AQnNeriyvkZW69MW89d3s6vXmijqpYFXuUbJXGf/XlsDuCyX+myLefBVgXlTw+fiA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790761519;
+ c=relaxed/relaxed; t=1790761520;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:From:To:
  Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
  X-Developer-Signature:X-Developer-Key;
- bh=supoa2/tqEYpx7EGtDFlYGdPXvv5qVGZNr3CvoRBIlE=;
- b=d7Zq7cxMboSn8UpwA8CBikhq78G7Rx/nntWNUmC5uKf0V3jjPl5Zwk55SvLzsHGqWq0h
- Ypft5nTUjZWPIub6piW8TX1pL1kW6pbHR2NuQzOknHiBTIaM1fT8Bx9J8rDTTQGvNZnm+
- 4FyKU7zHZOxasOIgL/Swt85EMUZshsS0Fa8zp0SE//3ksSOaGshcwFhxN5UjcPLgwd8Q2
- oPrQxNqHUA/C3HzenQZvvNQ5KnbXqCLLZQsyRKj212U4uN9tUKHz+1BQqQ3NLFG72mG03
- Au1iHWWuhGgt+90UB31kGsoi8U+JpGZSrS7ceObTFkAgg7sBwtWxl6vNQ15nVlaObmw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=2A+EWLQwVd2E44QyxJ9W94ixj58AwrOducH907UakUg=;
+ b=KA1y8O8YtyNvC+MknmSoGxLLqiVBrIgzNwtoqHVzlgApw6NbvXxCBdZOVMV/7NALXvOq
+ bvdh51nEwi47dByeqiKIW73TbUMwUoly1QvcJXbKnOe+5fGf36ijd3EunEZpbEIpiEXVy
+ 720/GKfbwCrFHhuK8ckEz2PG98leuROYqo4wlQASHaupEG8/rOzGYNxEQ+/1PHkGaHCp1
+ Dz11+68x2K9a8yD8NkxFUlClgZbb29yR79dQDb3pQyxJ12zUalpU+vspGXGceKd4EK2Oa
+ TST4X1FhY7GgWX8GgvxB6ijot0eWHeVa9PNaKlayk364eAUzN5d/Jr5XHWPlv5fl6WA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=bGmXpZeN; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::11"
+ header.s=google header.b=gk1Fn4QO; 
+ arc=none smtp.remote-ip="2a00:1450:4864:31::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::11; helo=mail-wm2-x11.google.com;
+ client-ip=2a00:1450:4864:31::10; helo=mail-wm2-x10.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=bGmXpZeN
-Received: from mail-wm2-x11.google.com (mail-wm2-x11.google.com
- [IPv6:2a00:1450:4864:31::11])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2FF8F80C8F
- for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 09:45:17 +0000 (UTC)
-Received: by mail-wm2-x11.google.com with SMTP id
- 5b1f17b1804b1-49ffe817151so21559755e9.0
- for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 02:45:17 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=gk1Fn4QO
+Received: from mail-wm2-x10.google.com (mail-wm2-x10.google.com
+ [IPv6:2a00:1450:4864:31::10])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 19C7C4085B
+ for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 09:45:18 +0000 (UTC)
+Received: by mail-wm2-x10.google.com with SMTP id
+ 5b1f17b1804b1-49e66390995so29075635e9.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 02:45:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790761515; x=1791366315;
+ d=baylibre.com; s=google; t=1790761516; x=1791366316;
  darn=lists.u-boot-project.org; 
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=supoa2/tqEYpx7EGtDFlYGdPXvv5qVGZNr3CvoRBIlE=;
- b=bGmXpZeNkXl/1L2TOcJc9GRF53TBVqMBek4Bj6nQK6xR0Zl5hDlOeymsfDyDw6xCpp
- ObNZcsB7K7S7kRmb+UpclWGa3FQxUf7jTbVqSkaKuP0C3EkOk03h2+RJ5yPmiVRTh7cL
- +Ac6A7It6PcKuFX/8sOnIOCS9QKpLtVKy3Wxt8D8pUFvbl4RUeaAOJKNrGHsKi35vZ6k
- 473XPgPcSqgQSFKtomBczF5KRfvRWSMhIU6VHry5eVaH52NDakEON0aHCz/fTVRtjwS3
- zkt8zlI62LLnLHMfYjW08gXwejwr90MJYVXyCoKTS4mHyj1zkmwuyWGEcCbll5eJWsTh
- qxZg==
+ bh=2A+EWLQwVd2E44QyxJ9W94ixj58AwrOducH907UakUg=;
+ b=gk1Fn4QO8oAWTZ1EI31YXCOZKnyAigbFoQb8+GEbHdvybKa786fLtVtRB3ph3KGSZu
+ 2lORL0pZ3VJnd9bsDMboc8y2H7QnSOzvegKWP1qpIkR7QCSb9Jn7N1ZLg6Nme6TsweqD
+ iMzuFP2KAoehwZcYFv/O1QQIYeWsZwsE2bqWZRVrQbfCxp64nokXOt3KioZHG96yrBXz
+ 9CwQOKTu6udb2OSyQlIu6ZuaoDz0EUa++Etn8QiEwMsKl86p3Xzz2CCYTbks3zOptzo8
+ J3dJQej3+YbdtgPVEm7VnpxFnon8rhYhjSrVs4xLRRQIwb05jwZ2JtT3g6Voui6REjsb
+ ZF2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790761515; x=1791366315;
+ d=1e100.net; s=20260707; t=1790761516; x=1791366316;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=supoa2/tqEYpx7EGtDFlYGdPXvv5qVGZNr3CvoRBIlE=;
- b=ypLSW/iB3q9nMeETsBL2x3LlEbmBqVITiUOFpVFxJ4Z/vkCtmJZDCfowG8h0xAD/7p
- pKcd/qIW10oPHlp9HKV8ELMSy6WKOdR/NVb0YOnL4mrd8YZ7qep4nFaI0srzGuwnw5DG
- 5No7kqOwwGnY3BuA/6T5XayAX5OD9oIrDy1RXt0cLwPhp4+eV54ji0Deuk0itdPEMRJz
- tCZ/wonEywOVtd1LX1iiaDMrQEi6lPOdT2yo6B3BEKNcekT3ojUuYs/pIlMNjkX1ZGGM
- G4aWSwncaGSAo9jWQEb9hOm5+rJzGYD2exroLSxJlI+uguTSqvsAtcBUtfxYgZ9QHTB3
- M4FA==
+ bh=2A+EWLQwVd2E44QyxJ9W94ixj58AwrOducH907UakUg=;
+ b=TqpvXk10NIC9eD33cKi1M8VsAbH+49Q485PMPW338gSV/oRVo2n8QD6SUh9SzPpjGZ
+ NFpgX+LWZiYskcvexA+V32rXtcv7eU4w0wh5ssQmRBsvMoMHFX9sHVIsZZbODslNg1qX
+ o6ivesGC6F7h9ubPdzCpAXFAA1x7p4eGESF7cOTlGdoYmoKQRhgccoG22nnVUUe8Oq6n
+ 8+AQJZ+ElqN/BBilQL0Z2Bq95ysT/5j8iK5Eu2TbTCqE57ZWEtnVpTAP7RIXb0+zM+9Y
+ mcBKUwMNjVsXyvlhyO7jzGsbkICyWQpq7B/OjIgcYLwSuTMoQdRvl2eAXvwSxACOQCI2
+ Uz3A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxTSzaZNQi4o/L9VJSN1/ZvsDziQzEYo2n4jdu5Ej8HtrHX6A6U+UQRWzXkurO2ZsauUh73aUM=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++ntvkAccFeq9bvHhMKNCchEv5lRUf5w4zUPDsFiM9yAxsZwv6mp
- /smqZCua3yv3BtS4k7p3xVbSc/gPfV0TEvA4A+G1xdSNoYR9Z9l6LDqNLhvUMXuX/ks=
-X-Gm-Gg: AYBFou0Vl7PINOH3vYZgQfIJiq9UrQAgA6EqGWqnzh0j1B1nR5pKuj4NzVxAUAGx351
- Ea5GxpuokasxKu/drFut9pcJny5LXfM3MYluu07nlv4QDxjUODzHnghMCfGxRYVuqDC/pvORsMY
- i4jIMkw68ys6ek231rsaBosqI8LoUlJtcPQvgmzAGhIEpD5H+W8bd9YR22tm7WDZkPqVd1XD6K1
- Ca/nbjjy0dfiBspSv2ZHCvciXOhskbOYYNkIqhTDBc1xeDhQcSu/q0B7it6tXIcFHkzE+UyPvku
- SVR+hP9oAYz6eQEtjvMBzee/16hgsVOKkj2LJkqAHrO8uKqYKjz/FJ2mToJY8vvwA2MPtMVnHP0
- 7+eI3ebO3MBzmBWl244Mwi+DFVutVwHSP0+nqE1dvPRtnYR8WBC2tL/d2huu9V6bO/KtJchQfoN
- /yPKUutd7iMasBgMZz/Yo6ERLf9PiPA5WXGPvHVJPLpYr2uryQzbAwMbp1NlCGtdT92vWW6F+yt
- zYnGhPtovdz78gThaFAj+k2T2XctznBOAmrFI0q6ewjksWw7nz0BcuWYoPoernJ4GuI70/WUb2+
- XWVUrAeLFzoK/7/b189zRZxUhWWCVibSCgzx5vdN1XCD60dVZt5ne9ph
-X-Received: by 2002:a05:600c:8b5b:b0:4a0:159b:d283 with SMTP id
- 5b1f17b1804b1-4a01b120613mr14265235e9.30.1790761515113; 
- Wed, 30 Sep 2026 02:45:15 -0700 (PDT)
+ AKwUvBzL0Nqtf7lEYlE1KS9bzAyP5M338Zoujjuc1qQj1y9+O4y9IwpkxtlLt3SdnDNUnCRXHTsqt8E=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++ndLnS+wM1ZeTJNWT7EbTnvrW9Ql8a/fmPcxglo+rZNMBYnP88B
+ mAK5WOEXx5KUMIKgM07EgS0y8d3PCbl9nuntcurk0pYpPr4N5yJfr+HkeSgmJn0dDxI=
+X-Gm-Gg: AYBFou3E9vh3hNWUXTeEE/Vkl7rmi/AyntGRngOGqs4yGpsA0wckzLq3daXB1HEKu5W
+ TZ4v/hCleQL4ByuukqHI4VJ5dX6WriJCv1/1+/Y0x/f5SWmR1peQBJnClOIkc3v+V+0JW1pMBDz
+ osPKORJxCu4QuV2fNYaOiu/izmAERmO+gIWwVomYktiC1iOFEPTib1Qfq8qUDw03YnrzAlmLJBx
+ HFPc6sxCNlZkGrd+HIfF3Vol4+DzqQE3IUflyO5QxZKRvQ6n2k6F/ur0JHQ/FuAge1LTHFLr+h/
+ tQAUpyviIt9xgfD2iNQvy0K8xtBjL0vxZiKrRD6hIzeZZPfTd2+XqkFormio54jubcbSIx+uEek
+ Q3KZIUJA4qqnX3+nUJHzNP4AVfITJ3cCbAlRssKhpIDqqyje/kdnQ0OI9lXIA4AxTBpige4BnR/
+ AFx+VghvG1HjJDZTOXchT9DDIEuMfd5qbmDQcGHXGfV/JBOmPO3MI6y3mtzoslgJF1LnScR4TnV
+ pLi1AeIR0zgU/ZY390psH4UJrtEwTH3+Qgg5uH9dEPbj4T0NuNHKIsKipQz1bLcD73ao0Nn7X3K
+ 00hHbBpbJo7jjCcOtvxR1dS1UJYV5npJ9j7AR7mmiC6HTKsDaQqsQtiY
+X-Received: by 2002:a05:600c:4fc9:b0:49f:ff7b:f056 with SMTP id
+ 5b1f17b1804b1-4a01afe1e29mr13256155e9.9.1790761516418; 
+ Wed, 30 Sep 2026 02:45:16 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a017468b10sm54109345e9.0.2026.09.30.02.45.13
+ 5b1f17b1804b1-4a017468b10sm54109345e9.0.2026.09.30.02.45.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Sep 2026 02:45:14 -0700 (PDT)
+ Wed, 30 Sep 2026 02:45:15 -0700 (PDT)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 00/15] clk: mediatek: merge single ops into mtk_clk_ops
+Subject: Re: [PATCH 02/15] clk: mediatek: merge the of_xlate callbacks
 From: Julien Stephan <jstephan@baylibre.com>
 To: David Lechner <dlechner@baylibre.com>
 Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -174,18 +174,19 @@ Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  u-boot@lists.u-boot-project.org, 
  Arnaud Ferraris <arnaud.ferraris@collabora.com>
-In-Reply-To: <20260924-clk-mtk-single-ops-v1-0-1c3b5d8744ba@baylibre.com>
+In-Reply-To: <20260924-clk-mtk-single-ops-v1-2-1c3b5d8744ba@baylibre.com>
 References: <20260924-clk-mtk-single-ops-v1-0-1c3b5d8744ba@baylibre.com>
+ <20260924-clk-mtk-single-ops-v1-2-1c3b5d8744ba@baylibre.com>
 Date: Wed, 30 Sep 2026 11:47:31 +0200
-Message-Id: <179076165160.1985961.2539005097677862185.b4-review@b4>
+Message-Id: <179076165161.1985961.801152555202224516.b4-review@b4>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openssh-sha256; t=1790761655; l=3504;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1790761655; l=1388;
  i=jstephan@baylibre.com; h=from:subject:message-id;
- bh=TUfRsd0eF1O5NRp4p/1u+b5XcNi4o2NVXd9GLilNi4A=;
+ bh=qDpy5jyj+r5TVhQlQMxH+n/JRbQjIjMEkK0g7JITVcc=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgphAWFBQbyQxHwqbCvwEwIl9NQxnNa
  Ewt+3w/AUXP10QAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QPzb0lbQeYHOk0NjzunEWFcqpp+uKMECO7k9PK8hS9DYS2frC1BoWgMQWmD8WsdS1gqQELIvBH2
- P9KUEGu/UeQw=
+ QI6mwedOKMNMARW2srtQ1ZCLxh6ISQNpx6ylZoZcb7uOzCXPYrTjxxIlf7jTgnFLv3QNVtHppHI
+ v9H2IzRZJGgk=
 X-Developer-Key: i=jstephan@baylibre.com; a=openssh;
  fpr=SHA256:PPc8djUi3lnQXuiRHH4CZ/icbEYOsksrEsOV7pDEmZg
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -201,78 +202,33 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-> This is the final chapter in the year-long quest to remove duplication
-> and increase consistency across the MediaTek clock drivers. Most of the
-> clock ops now are duplicated code that can be combined into a single
-> functions. So we do that and then consolidate all of the mt8xxx clock
-> drivers to use this single set of operations (mt7xxx have some extra
-> hooks on certain clock trees, so they are not consolidated here).
+> Replace the apmixedsys, topckgen and infrasys of_xlate callbacks with a
+> single mtk_clk_of_xlate() that accepts an ID if it belongs to any of
+> the tables of the clock tree.
 >
-> This depends on [1] to apply cleanly.
->
-> And if you happen to be working on a clock driver for a new MediaTek
-> target, all of this will be available in the mediatek-staging branch
-> shortly to base your changes on [2].
->
-> [1]: https://lore.kernel.org/u-boot/20260917-clk-mediatek-cleanups-v1-0-4dccf8ed98fc@baylibre.com/
-> [2]: https://git.u-boot-project.org/u-boot/custodians/u-boot-mediatek
+> The three callbacks only differed in which clock types they accepted,
+> but each mtk_clk_id_is_*() check already requires the matching table to
+> be defined, so the tree contents do that filtering by themselves. No
+> tree using the apmixedsys ops defines fixed clocks, fixed factors or
+> muxes, none using the topckgen ops defines PLLs, and none using the
+> infrasys ops defines PLLs or fixed clocks, so this is no functional
+> change.
 >
 > Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
-> David Lechner (15):
->       clk: mediatek: add fclks_offs to struct mtk_clk_tree
->       clk: mediatek: merge the of_xlate callbacks
->       clk: mediatek: merge the enable and disable callbacks
->       clk: mediatek: merge the get_rate callbacks
->       clk: mediatek: merge the dump callbacks
->       clk: mediatek: use a single clk_ops for all drivers
->       clk: mediatek: mt8183: merge the apmixedsys driver into mt8183-clk
->       clk: mediatek: mt8188: merge the apmixedsys driver into mt8188-clk
->       clk: mediatek: mt8189: merge the remaining drivers into mt8189-clk
->       clk: mediatek: mt8195: merge the apmixedsys driver into mt8195-clk
->       clk: mediatek: mt8365: merge the apmixedsys driver into mt8365-clk
->       clk: mediatek: mt8366: merge the apmixedsys driver into mt8366-clk
->       clk: mediatek: mt8512: merge the apmixedsys driver into mt8512-clk
->       clk: mediatek: mt8516: merge the apmixedsys driver into mt8516-clk
->       clk: mediatek: mt8518: merge the apmixedsys driver into mt8518-clk
 >
->  arch/arm/mach-mediatek/mt8516/init.c |   6 +-
->  drivers/clk/mediatek/clk-mt7622.c    |  10 +-
->  drivers/clk/mediatek/clk-mt7623.c    |  10 +-
->  drivers/clk/mediatek/clk-mt7629.c    |  10 +-
->  drivers/clk/mediatek/clk-mt7981.c    |  10 +-
->  drivers/clk/mediatek/clk-mt7986.c    |   8 +-
->  drivers/clk/mediatek/clk-mt7987.c    |   8 +-
->  drivers/clk/mediatek/clk-mt7988.c    |  12 +-
->  drivers/clk/mediatek/clk-mt8183.c    |  18 +-
->  drivers/clk/mediatek/clk-mt8188.c    |  18 +-
->  drivers/clk/mediatek/clk-mt8189.c    |  40 +---
->  drivers/clk/mediatek/clk-mt8195.c    |  18 +-
->  drivers/clk/mediatek/clk-mt8365.c    |  18 +-
->  drivers/clk/mediatek/clk-mt8366.c    |  18 +-
->  drivers/clk/mediatek/clk-mt8512.c    |  18 +-
->  drivers/clk/mediatek/clk-mt8516.c    |  18 +-
->  drivers/clk/mediatek/clk-mt8518.c    |  18 +-
->  drivers/clk/mediatek/clk-mtk.c       | 379 +++++++----------------------------
->  drivers/clk/mediatek/clk-mtk.h       |  10 +-
->  19 files changed, 144 insertions(+), 503 deletions(-)
-> ---
-> base-commit: 8189f1c305fa8af99780a84dbffc34d2f0f06743
-> change-id: 20260924-clk-mtk-single-ops-75410cf38279
+> diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
+> index 78ce206197d..d93c19c74db 100644
+> --- a/drivers/clk/mediatek/clk-mtk.c
+> +++ b/drivers/clk/mediatek/clk-mtk.c
+> @@ -177,6 +177,24 @@ static bool mtk_clk_id_is_gate(const struct mtk_clk_tree *tree, int mapped_id)
+>  	       mapped_id < tree->gates_offs + tree->num_gates;
+>  }
 >
-> Best regards,
-> --
-> David Lechner <dlechner@baylibre.com>
+> +static int mtk_clk_of_xlate(struct clk *clk, struct ofnode_phandle_args *args)
 
-
-Tested en Genio-350 and clk dump before/after is identical.
-
-LGTM, except for the two nitpicks that can be fixed while applying.
-
-For the whole series:
-
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
-Tested-by: Julien Stephan <jstephan@baylibre.com>
+Nit: Here we drop the const qualifier present on all other xlate
+callbacks. Since const on an integer return type is useless, maybe add a
+comment explaining why it is intentionally dropped?
 
 -- 
 Julien Stephan <jstephan@baylibre.com>
