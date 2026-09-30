@@ -4,141 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60CBFCA5FAD
-	for <u-boot@archiver.kernel.org>; Wed, 30 Sep 2026 01:00:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38F43CA5FA5
+	for <u-boot@archiver.kernel.org>; Wed, 30 Sep 2026 01:51:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C6056810DE;
-	Wed, 30 Sep 2026 01:00:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D3FDF81177;
+	Wed, 30 Sep 2026 01:51:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zI_orid6Z1Sj; Wed, 30 Sep 2026 01:00:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0A8D5810D0
+ id s-KF9sl8w07W; Wed, 30 Sep 2026 01:51:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 852BF8116A
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790730008;
-	b=ClpMIDVoNFEvU+xwW+NYhTLSF5WNi37kKSIeZOghrmR4Ad5R6n/bN8ibpT0N4j5zsE+V
-	 +kPVYFbGw7mCgoXr0ASzJG3h82sb1ugBghColvA7ckEhaeUDveFcCzMt7m8ZgjBaLqP6M
-	 bL2MXmLwPmRR228uSFmK2s3/uz6Zm0b2kQbZ/ELF/R77ZV1S1QCL0e2iSIQi1sO1ShgWw
-	 /w8WkpyqAvoGdzI9KfP4OqQFanJe+zVq0v/pJuprLRT44zOeJ3Ge+K3CjvUNzVVRvImYl
-	 X3gKbfYqe9P3C2mvfnY1UsNPkrAJHGyr8W5gyt3f7P3sBtDno1UypmLKpX65yn6F+yw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790733110;
+	b=SlBX2QOPiTqzib/2S+ZDvymnpXgKyotmIJjAkQV4gYQW7sSjqEMeE6cnEW45OM6MAScM
+	 RYCm8FeYd/SONycSKlfu+qoHbpmp4S9wU3E97hGKkEK0PkQarLbRr/u28tuA/RlLEmuB7
+	 pg45Oh71sDDkGglHfaBDkgT9+AztfFXBq3q3EfZ+Shdjo7wME3id5oSeJ5FZRvvS2x7Lk
+	 Obm43TR39mtxMvEFbah+r/Ht/SCrRMIV5S6+618WZDjgFBYtnmh4S8u8EwQYmjcMcxYok
+	 Y2fblee9I+KPhpgbVA42jd/eAj+4PmY9rZSnz912RQQrNpopcKvLl9ioxjfrPRX2Nlg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790730008;
+	c=relaxed/relaxed; t=1790733110;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=bjIeoCImtNNyXOBaOYEwElmAma6FtVXoJls+F+Yz6pc=;
-	b=KX77gSFX4bNGYfUAvsFEpdIRj5JMhizVs9kW8cg81po4pegMyPvF+eFKjUbseURuKvLF
-	 UbHLhPdWggkzdsIZocwzLK31p1yMCOi1M/TeE4tQBm7HNMbitBkC4Ed66flJwwVWmcWqL
-	 ejURtpKd8j5xmfejeyBsJ/4xHNruQX0vOqCAFW5zcOZxELs1l1RxlZdwFWyP83h1YrnLF
-	 yj/QtNlaLA2eTxWQCHLnvUl4L4AQleCb7IbG53/PTa2yIeu8wufgkKHDRA2tZ4Q+3/dhH
-	 fVvZyeMScWALsbomboDQGDtqLandLRWGNIkxpkBrT1m5BUkV3y6RY8gSB5oGA4Sgjyw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=mailbox.org;
-	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b="JI/qeLVp";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=ahQtXOMcX/gyaDzQadA8KE9VdrYwDQTEFhQOj+l4aDI=;
+	b=bMcdwj32pYGziM9DgyywIsZkVftsdtu98gnYEYhycH8Nclx6AplDyV0ZAvO4qJEIrCfx
+	 IAab/E4qDZxZgcf33rquApC687ZT1L7N6e691zuI7bFb8z2LOTWBmqjcjBhW6ShsI+5kS
+	 x4QVznn2j44Hsn+h+GlEIkl3DJAJwarggkfXRbOfHrDYTT18g5uT6qcQYXbNNGDozsXAb
+	 TYMSC1iDcajDw0jV3Vl7YzUOta0SopoJ9YOfZIVfE76cbTNJiC99EmXUX7QMTXCv0tiQA
+	 +Yx1LDUJqgv6D2HfFqH5m+j5WbSLfccKcI3hLMcmX2fbGOBmVTDXpa9joByr91j4RnA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790730008;
-	bh=bjIeoCImtNNyXOBaOYEwElmAma6FtVXoJls+F+Yz6pc=;
+	d=lists.u-boot-project.org; s=default; t=1790733110;
+	bh=ahQtXOMcX/gyaDzQadA8KE9VdrYwDQTEFhQOj+l4aDI=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0yPrB/xtWpTLQGh5HBRtMSbXHqiRcIuFsSt460hmdFr+9KL8q3NRjwPDpGe+cnVV/
-	 vbN8jdbWOcJcGWLBNaAXcjgi0ySvRpvYCzRlbW+qC8Syknl/b9O8iR71vJiAlHukBK
-	 CUVmX1kEJpWi37zYaQRIiZw8yphutve5YsGl4vc3IF/y5JlJ27MAcl15duTpmMmPeB
-	 xqa+bhro8/TsG2N3S2op/8Leh/QYGKC3G8pYcg5yFlQGu2Vcy2a/wewoajkXfgPFSY
-	 TqXqULb9NYT3hXBXKVqfX3heE5kbiD5ijVMuFo+Mctqb0NZoiEp4AZc/Z4dboEgG2z
-	 OGcypoJoy2i7w==
+	b=JXO62sjHQXMM0kIEcuJlprwkxRXpOBWHGG0Gp8MbHhcBWwpoWZ1DXO89v4nBBjbuQ
+	 J0+QV3/F4FxLWMxv8Q0hiq113HlCa015/PvxJyAX8cNDN0qJ/E+0R0Q1TJhPI42NJ7
+	 SMsIPS7CUUSW29H5PywITEI/BdSSq1vUyI00uM4iKYxR9B1yGAEu0IPGHdOZDsnQp9
+	 Q8flNemzpf2S0ousT9ELxc+Wt+vbB1YxVRBvK/zCYZqykLOJEv6b8f1MAttGv2AEu0
+	 TAWoMu4raiwOEuAfI6Hhe4nhNtwPSPfvS13Jv2Qdl47tLJHbJa8F7Vl4a9i3ZpdIWB
+	 wxxrXpj6QFN9Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0A8D5810D0;
-	Wed, 30 Sep 2026 01:00:08 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 6F3FC33B
- for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 01:00:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 852BF8116A;
+	Wed, 30 Sep 2026 01:51:50 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id CDAE3282
+ for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 01:51:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 60538810D0
- for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 01:00:06 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id CB5DB40098
+ for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 01:51:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VeVWLciPGGzn for <u-boot@lists.u-boot-project.org>;
- Wed, 30 Sep 2026 01:00:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 1C176810CA
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=80.241.56.151
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790730005;
- b=jUWQVKAcxjFn9yentcvKGFsEqLUcWGBw1tObX7PgNF44CXjgF4tJ2bDj1Y4my1MdOS/6
- mdGHnLrXMdiHBCVoK1wctyUTRaePOlo1Lr5a7yKPsH625px8HrJ6HZfYgQplgIZ+wADNe
- RgJ34USLAL7nRGRlmflk8cYYFOXk6JzuxVvZD5XS7LgAGGAdNcc+9SB1GVjEnFf0YHesR
- Q3/kui3ZlKUItRrloxcKJTEb4zbmKDY9Cg8XWn0HiNIsrtiiBrtHZ5a8U2lSKxM7iEWes
- V7vsIW6JVI++qrSkC2EPIPQUpN2r8FoOHuJJVgrd9zweq92ly8tCwEPrzknGrKQ2V2Q==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6wktFZlnihKl for <u-boot@lists.u-boot-project.org>;
+ Wed, 30 Sep 2026 01:51:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 56086400AE
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790733107;
+ b=NrMat1ZmYjeQDGDiBXrFMB0qAvY+G843xVTa9QJxSYc5WQ/ckt6FvNq66k+8dapOYyMt
+ 4NS9rDZM/pCEpwZQLBC3xU9k1eDoZNDxWgXMNi9SmwIUW7/boVUa0eqxrCWCmjgR/RwNS
+ JBD1DTV56fhzLzIFZIGQczBmFuF83aEfgRlt4lmF7SDqXW86mw4VtqkA0ltzAN8vPiour
+ QYG7KhJQBQeR23/JWBIMOn4w7i4l6J5XSUdjz1mzf2wumVCSL66ZcIo+Clqg6LQ3DNeWy
+ UCwKwPavco/19zCZ2YcdS6xJO0TfeS29UZTgUY1ynUzd+5zo0roIHV8hqo8qxlPVjnw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790730005;
- h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+ c=relaxed/relaxed; t=1790733107;
+ h=Received-SPF:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
  User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID;
- bh=bjIeoCImtNNyXOBaOYEwElmAma6FtVXoJls+F+Yz6pc=;
- b=Un5tGe47SD26N7n+Bl8C56HJm6fe/JoAukrgktM2WescRw4uVj2suVpmD8d4MSPpddHO
- JAP+LZj4FXtI5h9us5l8GYw/gCVipTXgqf9JGUSEyi+P/AaHb5SAghAZkAc9vlOhrBYWu
- jGqyGgQxlkjhk9TanUAh5VW5Aq4idVnoM2HdxFjFgVI7WTO/XuleQn5iSq1FIEoROagHJ
- GBGorYK/eazg8FsHVft6OxnyuTpPQna5rrUME2KwGgTU6wCLV3xu60yaTOmcJgPkYCsyS
- /cR2PlDnkRcEBEAww0PKVsFzR4A3PmM+BY5Zy3JZ44PvMq29ul3lfuEzfjon2UzE4SQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=mailbox.org; 
- dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b="JI/qeLVp"; 
- arc=none smtp.remote-ip=80.241.56.151
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.151;
- helo=mout-p-101.mailbox.org; envelope-from=marek.vasut@mailbox.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=JI/qeLVp
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1C176810CA
- for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 01:00:03 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4hvcCM6Qs8z8v5T;
- Wed, 30 Sep 2026 02:59:59 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1790729999;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=bjIeoCImtNNyXOBaOYEwElmAma6FtVXoJls+F+Yz6pc=;
- b=JI/qeLVpkVevEnGgPVdHOfNRHcV9GKfnEAQrdOl93WzcUHIebNT+hnV5gZUAsl546X4iSO
- ULR7JTkNrv888iBevg6bfUFAMLfJfBzjEhgi16SVkjInSNlh/v1jaZ3uKgOQ6Q8nlDf9h/
- tmrZlY2/j/Ujobs/Xa+rskaQpUfGpJArlGVZUA2UbFAM2NLKb+G0xbVU1ikJuypzfalyy4
- d9D9JQpjx3b5aCq5D3w5Q//8CEtEWvxWsZ01QJuLCFtGKdx27OT7PdKCDlXCOgdblRzD/g
- XN09+skOaHDGCIr7BL2gt1E/2lSaRTat9KwOp0fY42AVNhdgYVgMzwq/nw+ohQ==
-Message-ID: <26150591-3420-475b-9cbc-fcd2729495c9@mailbox.org>
-Date: Wed, 30 Sep 2026 02:59:58 +0200
+ Content-Type:Content-Transfer-Encoding;
+ bh=ahQtXOMcX/gyaDzQadA8KE9VdrYwDQTEFhQOj+l4aDI=;
+ b=lqMNNaKZJA1D6M2lOS4zGTm9ggrdLOHR5yKSvfmNdFRaoKLsBkzEkrc75XT2VzBy9uRP
+ 9o3uUCOjb4oza4qExbwzEgutXp/7+IzDx4iq8eqomSdv3RPYMlmfgMjbOj8l7kq6a0AkF
+ IlJgAEra2Om9vXQTgRnzxug2EsXEIxrPTzaXsptH5DjKp9Hgg7NhGP6+kIof9Bbo1mUc4
+ dp/i68PlTc4uk+AW36gXfCUFKzEPrN/5ML8UbFslOPpz6fV2GZ2kpejkjQ7od0fIS3q5F
+ vWsLmMzDllbbJzbLBlY9BgEOUUcTFKoc6ETjOI+I2c6vP5qz1bGPc3fwJ/l8iSfffUg==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=pass header.from=freeshell.de; 
+ dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=jMzIwxYD; 
+ arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:4f8:231:482b::2;
+ helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=jMzIwxYD
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 56086400AE
+ for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 01:51:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1790733098;
+ bh=ahQtXOMcX/gyaDzQadA8KE9VdrYwDQTEFhQOj+l4aDI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=jMzIwxYDxKO5TGrKl+fY896Xj++qWhFpQqNmr7rP5etvuN3bpSmcD14IibxRgBPHY
+ 6Be/vfFKhFXZ8II1JrXyk+X7dZN4O9pKmUMrxaiUAadeCnv7tfD/yvQPEr1uUu1XlN
+ OtALe82/zL2mkdAkRksD6Llwii2t+G9McAG8d1L1gSD53Mta0+0N5wcQ5QgDROmF9v
+ FrJa1qbcJ12UBoXebYrANLxX7apCJc0t/+UNmr/qZjjRKVtt4DbVr5H918aywLUjku
+ Hz1jhE9ugvC+fVV0usV2+EKepLEGRi34HYGUYdPRLE93THXxKgZqP5sju29NMA9vHT
+ 1H3OMH92suDhA==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 5F507B2203BF;
+ Wed, 30 Sep 2026 03:51:37 +0200 (CEST)
+Message-ID: <8a759e95-866e-460c-9899-d5bb30ff4e04@freeshell.de>
+Date: Tue, 29 Sep 2026 18:51:24 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] cmd: config: Add additional embedded text option
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>
-References: <20260929173244.369402-1-marek.vasut+renesas@mailbox.org>
- <20260929225108.GD858934@bill-the-cat>
- <71a56a26-67a6-43eb-a90c-71231ec2cc0a@mailbox.org>
- <20260930001840.GE858934@bill-the-cat>
+Subject: Re: [PATCH] lmb: Add StarFive JH-7110 SoC as requiring DMA below 4G
+To: Marek Vasut <marek.vasut@mailbox.org>, Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Leo Liang
+ <leo.liang@sifive.com>, u-boot@lists.u-boot-project.org
+References: <20260929230758.616924-1-e@freeshell.de>
+ <bdec8558-0408-4efc-8a50-e726c8be9cee@mailbox.org>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260930001840.GE858934@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <bdec8558-0408-4efc-8a50-e726c8be9cee@mailbox.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: i6amb3hu9ba8hcoggioyqw1e49aer7w5
-X-MBO-RS-ID: 57e3982434a298329fe
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,71 +143,32 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 9/30/26 2:18 AM, Tom Rini wrote:
+Hi,
 
-Hello Tom,
-
->>>> Please note that this does increase the U-Boot binary size, and
->>>> therefore use with caution.
-
-[...]
-
->>>> +config CMD_CONFIG_EXTRA_TEXT
->>>> +	string "Additional text embedded in .config variable"
->>>> +	depends on CMD_CONFIG
->>>> +	default ""
->>>> +	help
->>>> +	  This option can include additional text embedded in U-Boot .config,
->>>> +	  which is printed as part of the .config by the "config" command.
->>>> +	  This is useful for example for embedding build information into
->>>> +	  the U-Boot binary, e.g. content of OE /etc/buildinfo, but please
->>>> +	  do keep in mind that this does also increase the U-Boot binary size.
->>>> +
->>>>    config CMD_CONSOLE
->>>>    	bool "coninfo"
->>>>    	default y
->>>
->>> Is this just intended as a do-not-apply?
->>
->> No, but if there is a better way to bake /etc/buildinfo into U-Boot binary
->> and then print it, I am open to suggestions. I am looking for some way to
->> finally replace .scmversion with something more flexible.
->>
->>> Otherwise, it needs a gating
->>> option as well.
->> What kind of gating option ? This is gated by CMD_CONFIG already.
+On 9/29/26 17:43, Marek Vasut wrote:
+> On 9/30/26 1:07 AM, E Shattow wrote:
+>> Platform drivers and hardware for StarFive JH-7110 SoC are not capable of
+>> DMA access above 4GB
 > 
-> Yes, and there's platforms enabling it today. So yes I'd prefer an
-> option asking if you want to add this string which depends on CMD_CONFIG
-> and then this option depends on that new one.
+> 4 GiB
 
-That kind of option would actually make this patch worse, see the quoted 
-part of commit message above.
+Yes, I agree.
 
-If we add a gating option, we would end up with this in .config (which 
-is included in the U-Boot binary and increases its size) for enabled:
-CONFIG_CMD_CONFIG=y
-CONFIG_CMD_CONFIG_EXTRA=y
-CONFIG_CMD_CONFIG_EXTRA_TEXT="blah"
-or disabled:
-CONFIG_CMD_CONFIG=y
-# CONFIG_CMD_CONFIG_EXTRA is not set
+> 
+>> . This was previously a problem for MMC access then
+>> resolved by a workaround, since reverted in a3075db94d49 ("lmb: Reinstate
+>> access to memory above ram_top"). The symptom of this is EFI boot failure
+>> of GRUB from EFI System Partition on USB MSC with a starfive_visionfive2
+>> board target that has the on-chip Cadence USB, tested with Pine64 Star64.
+>>
+>> Restore the workaround with a dependency on LMB_LIMIT_DMA_BELOW_RAM_TOP.
+>>
+>> Signed-off-by: E Shattow <e@freeshell.de>
+> 
+> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Without gating option, we end up with enabled and used case:
-CONFIG_CMD_CONFIG=y
-CONFIG_CMD_CONFIG_EXTRA_TEXT="blah"
-or disabled case:
-CONFIG_CMD_CONFIG=y
-CONFIG_CMD_CONFIG_EXTRA_TEXT=""
+Looks good to me as suggested.
 
-Notice, that in the disabled case, '# CONFIG_CMD_CONFIG_EXTRA is not 
-set' is actually longer than 'CONFIG_CMD_CONFIG_EXTRA_TEXT=""' and grows 
-the U-Boot binary more, hence, worse.
+Thanks,  -E
 
-(In case of the enabled case, it is obviously worse with gating option)
 
-But in either case, this will grow the size of the embedded .config, and 
-the only alternative I can come up with is to turn CONFIG_CMD_CONFIG 
-into string itself, but that is awful.
-
-Thoughts ?
