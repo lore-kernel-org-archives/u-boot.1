@@ -1,154 +1,174 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1D0CCA5FC1
-	for <u-boot@archiver.kernel.org>; Wed, 30 Sep 2026 17:41:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30B48CA5FC1
+	for <u-boot@archiver.kernel.org>; Wed, 30 Sep 2026 17:46:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1DF4040AC9;
-	Wed, 30 Sep 2026 17:41:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CF43F80EBA;
+	Wed, 30 Sep 2026 17:46:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vM5ph8VkJYYN; Wed, 30 Sep 2026 17:41:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 73FD040ABD
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790790117;
-	b=nYmxwkTdFuGSPzmQu6FcQBGP7aPXjVSQMFb4nMlZz9IXH+9qegWeR0zDJa7WJHbsoBMT
-	 kQtWCrue422VM3Cx9MAq1y0sphlngwIExP0ysBkqwmAkF2qyTKCAwUEeNpTt+GA80r32o
-	 ZOBRHZNtr+UVgtqS1Va3Yq9v/5BEQAw46SFNPdQmQNIOKDkYNiTssAFRzz/IQtbruAHox
-	 TDL4EQrQQS6rXWjEO+i3qx8mF3vUplergRB5zMGuE6B1/QO5vewMsXI05ybhvrOfvmelX
-	 Y1ZFjI/WQDNnOITozgfv0r7rTKBrlnA9ikR+ZChENzlmZPZkFDV93G9VE92km/tHBKA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790790117;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yNWH8L2863uY; Wed, 30 Sep 2026 17:46:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 07011810B7
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790790386;
+	b=VBA+uiYwLGhAJGiGcmuKIQM8pD3MmT6psM6pd2h2Pv4gIfCf6LHgRFnILSzUaMJjdWPw
+	 S38irCyTx3wKZTsn5avC28i0WJzhFRgu1M+GgVmNsi0lRuRa8/TW1xDpPOldi/+ZXRgv0
+	 acAH/699f71h1EyXghIY695y22YQ7/S4kRzPvk3CrsHb5kkLfh9hnXxWfFrnsO/jkaMcJ
+	 qEVsO8g+3ZhN4F1j8vPAtkrSKLNqZmr9Z2+kiHFIy/yX/d0G7JmHUhjQZUjx0cFUk0GYM
+	 bUztugtqb2xOuJj0jG0HIJ1C8hDGUN6ZnTBl79p+KJUbfGaULqy0a0/UgfH0zE2ueqg==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790790386;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Reply-To:Errors-To;
-	bh=t9T1jggI8aAWgecXKxWfjKo6MAod+mKha3ceGj2eVns=;
-	b=Lm4Q2ZqHKdn6Talq/7AxB4rR5VJNbGD8oJNmgI8Y8X9OkIlsNb/ulfTIjmXWSa7A1Lm9
-	 IPm94dbHzD2Mz8tdQEWHt/nmFU4VfPhmsD7sKI7rp96VJhl6e2K+KGROnUM3OolpW/cFy
-	 JFvQxcAYkCs7A0gSQGb5mxKCd7w/DGegnn7r1c00vRYpIToZPVBjvFb/tFCAeE9yRMMbO
-	 Hboxa2V+qIrrJPEQxrDlkvPx/BAt+SZjNGBNAD9hpK76cE+wd4Kh00B8KydeyktrbDzmV
-	 Qw4X1BfG8vtz+Zmo/QUgWdYn/3qfCFkbXV0J/0OIFgOBn+q7SE12Dx2OuQcBJNqqQEQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:From:Date:X-Gm-Features:Message-ID:Subject:To:
+	 Cc:Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=k0GOdr7oLFBoLzJVprvOcKez/5An7D/0rHTGbd0EwCg=;
+	b=eAP2gPvDMWPcXBX2JNqklZM0vjRLMRIQV+ddUhM3OejJvRzEAxIiBdCuq9RQh6VnAN0p
+	 3fhNzxuT0t8EAc8Tf71PSn+BN1puc5eohtPnoxLy5buYJHhqwYWRhwGTGdTE4LjLUaizJ
+	 MS4gbGpnMKL3L0VeUMAI1KlH3Q29HdibFpdeTFaVIQdXrKKyc57uhGsaNNjknPYvskx2a
+	 IGgUGi4eb03IP4sygIpqi/6ADC2f1tFtnc/3i74x5f/CZqqVAu26ttljK6ID5CwrAKUFK
+	 EQDrQA13zkBBoe/8tOlYu0464tb7eLevbyTReTEar9q72gf1Ofghn7q/eiwCQ580fQQ==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790790117;
-	bh=t9T1jggI8aAWgecXKxWfjKo6MAod+mKha3ceGj2eVns=;
+	d=lists.u-boot-project.org; s=default; t=1790790386;
+	bh=k0GOdr7oLFBoLzJVprvOcKez/5An7D/0rHTGbd0EwCg=;
 	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=CqpaPZdq3D2tNKBASp2yS4w8ZlWEQHjzbCjtbU5p/kV7DZBVY77xYY7b+WfMR55cr
-	 R3XRPhAzX3fF/6grC27j3/V5KCrj5Z3jCtfahDwPBzLaP2XDTo31kradmXqk6B9Pfo
-	 T+Ij/cJg+ZzL/WnSUOlj3A6LP1nBnh+CA++gZOMCP11vdlDwIrtAQhvyzuB0kK/94G
-	 euLxwMVd7zb1bpuA/5yNR+RZoiU36lb0gCnrFUpmkUnBaMWjuLO+7RTsDP7Os4wATy
-	 orMhzvAknn0oGf0Zs9qpGyR6o1PWfUBP2S0NG/XfZnKTW/plittP/FXm4Ach8ZvGpS
-	 9/fDmV1+ZdZfg==
+	 List-Post:List-Help:List-Subscribe:From;
+	b=ApP9oZWXvhTRSkLXT+owEu7nk0x7M6MAfSgfQ5JpvduvDjIrf0ezMOY3noHMILyhQ
+	 sm48nSYPHsJzHt/FPSYW3qzNY9uaSw/y6P0/diXsLSiF0CsQp8pqEmgGG2XetbcUFB
+	 zh5hW/ThrzN44zGbk0a2FgUpi9pVFAS9QxmmQOh6eYzsaBdcFPPsW/UBiGfEy0Yip2
+	 DFBjHxi1ZDaayaHkTKBk33zpx62IFrfzDSdrYxQ6bK87Norm+OPkJ3ynGu4SBrowVC
+	 Z0kGhRxlSj5zLAs7f4muI1IDD8c0v0PvI7jZDBHQHRqwrPxn744YsMr9GnYU1vQxrd
+	 cCDciw6uJukLg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 73FD040ABD;
-	Wed, 30 Sep 2026 17:41:57 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id CC2583AC
- for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 17:26:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 07011810B7;
+	Wed, 30 Sep 2026 17:46:26 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 82F1714C
+ for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 17:46:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B1F7660B68
- for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 17:26:56 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 749F140ABD
+ for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 17:46:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Yx2X_7nu5lKN for <u-boot@lists.u-boot-project.org>;
- Wed, 30 Sep 2026 17:26:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0AB1760B20
-Authentication-Results: smtp3.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790789216;
- b=Rc5/zGRSwTvkiBd94rcCfqyozxXr7C2m0Z/s/02+u9ZIacRLQqRqpx5lDNPLEGwQMxpo
- Hk6uzttP3KEHc6JEJhZeYYLpTN1nH+J9qIHAcVqMEFLFZhJy1cvSuPG97OIO/gKMZcjSo
- OZ9FskY7HcbvIAhEhuRv2ixUs5VFeTry6aXz5ct3U7Mdy2euGR87tCdwMWPoJNlr4vSWG
- Gcq85YzZJmbFhElHUPRiaxd3QGCp+eAWtMtZ1h1dahBDPdg7gvemhENC6CgshjmO1vsFN
- +f7HApjZtdSUFWYaltWSqv3xsyJH/63cDEOJ0a/cvqZlZcBY74WrlIqxDGcy/taY6Kg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790789216;
- h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
- Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:X-B4-Tracking:To:Cc:X-Mailer:X-Developer-Signature:
- X-Developer-Key:X-Endpoint-Received:X-Original-From:Reply-To;
- bh=t9T1jggI8aAWgecXKxWfjKo6MAod+mKha3ceGj2eVns=;
- b=FjNqg3zG+5eQ72se8rlM4UBCaGM+lk21JBHOa7O/88ACmK4PefFTagUpECNv0iDGHQSY
- uZSqeBEec7MEjTiYt5pDYj0X0+XbSx1W+Xyb4dwrvRj5ATYn4oVyL9a0uh6AlzCh5CteX
- q1OMHwdJJkjsQS2tzDrvlezqoOIwzQEF6+vvdq1ppVrLikfjHS89Z9oo8znWbkI34EOer
- esVm2b9NWZwcDyluqs9DzfsziGTAzTxtFSYp3nDsaDMHV5tD5CI8rnxmnl/ruj+GYLZ/K
- NWYhKf6m8/MwxBc0Wjol3gFlP3ZgW/SflR8W4OiqrLv1Xw3Z0umeZIviERfoBS1NVaw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=kernel.org; 
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=WbpIpgCV; 
- arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
- envelope-from=devnull+iav.iav.lv@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=WbpIpgCV
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0AB1760B20
- for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 17:26:55 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id DC7F741B67;
- Wed, 30 Sep 2026 17:26:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id BD3CEC4AF12;
- Wed, 30 Sep 2026 17:26:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1790789214;
- bh=fOffxSvXJClxBVKup8ErFpNbJjlnNiKqhb15FGaIkLU=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=WbpIpgCViG07sOdcX4zgw1Ac9AExByDLyaWBzgiq8EV3VZGKd6bCYy1pC4nlr+tiI
- tPLJOnGzSxWZONlrNQYF55FmIQYUwsXOxjM0bGZQW3oqDRxlEIlqb3c7a85lTN3o3L
- HVCJnanemIU09Uo6OHZEXnVhe3OLSK7lVBp+sS4OZ5LQLL5vZ++dDYeQR+o/Js8Z3g
- brhipAfeWXaxYsRiAOckNMsEy3KWciOrKg2w4Fvb5HfnxM8JIsl0bG9Jc3gJIVqvYf
- qwf1mDwN7BV1owQc1H7FQmRAirPAPbflPriH+r8ddmqdUA2PYu9Up0NNvEYK8CIJie
- rx0ZYSnalKBWA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id A9A91CA5FC4;
- Wed, 30 Sep 2026 17:26:54 +0000 (UTC)
-From: Igor Velkov via B4 Relay <devnull+iav.iav.lv@kernel.org>
-Date: Wed, 30 Sep 2026 17:26:47 +0000
-Subject: [PATCH] arm: mvebu: helios4_defconfig: enable the RTC
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QXvZM6_11x4f for <u-boot@lists.u-boot-project.org>;
+ Wed, 30 Sep 2026 17:46:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 64C2B4086C
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:34::f"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790790383;
+ b=n8pFhoTB+uZOSvBdJbEtk5A0S25GS6wZ8mJybdlK/fcQSE4UNOk7t++qLFEcRfxcXfI+
+ bXEustTNExRDyM0bscVBKvARSLpsQnB2hHBEFMsFYCYjR6ROpUK9L8ILIFnNuBvCZ4nVw
+ zDMKuL2HvgKTLxHJS1wVnEddkEzU+ZsGBJujdzkFXlypdnq9Q38P++nfVBZTZuQAVgLMT
+ 5neALRavOsR4xVhKxJu/yVhmINXFB9nFHH053+aHCac7euOLZmjMxWSpeTTsHt9ilEr4J
+ kaKpb/d9mHjSRrjdgODP/49uEGvGdJj9qK9xEiJZXLhAP2H6egdRo2eZnhA2vPiwwMA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790790383;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:From:Date:
+ X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type;
+ bh=k0GOdr7oLFBoLzJVprvOcKez/5An7D/0rHTGbd0EwCg=;
+ b=j61RoQr/ygrnvCmQNTqUiMn8uovzb3aQGEZjRQ1msIgMY+M15GKNckwcuUzutCrLL8gC
+ LHFoLcnVGpZTGXCDY1Bp382PR4X761fRBQya9irGSMPlqqqIVaZqrduUl8oQuEFA28hJ0
+ sXJYViFxka6xUzJm4IeU23e6eQ0NQ1gnYFC/5uEfK47ICyuAUIOiDy7G9smpHbThLCrJ8
+ chN0iu4GglRMpstme8N/h94T9+P14j6SVHD/me1gYqaUHg3p6smrPb9QxmDt5Kxoz5r/o
+ 1bxZBD2JqABJzqFtQ3DYORDFzwnQhDWKbx1JdjFce7LMPGB7bv7ZS9/r9TemlU8vrWg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ dmarc=pass header.from=gmail.com; 
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=MX9Vo+QN; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:34::f"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:34::f;
+ helo=mail-ej2-x0f.google.com; envelope-from=massimo.pegorer@gmail.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=MX9Vo+QN
+Received: from mail-ej2-x0f.google.com (mail-ej2-x0f.google.com
+ [IPv6:2a00:1450:4864:34::f])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 64C2B4086C
+ for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 17:46:21 +0000 (UTC)
+Received: by mail-ej2-x0f.google.com with SMTP id
+ a640c23a62f3a-c2e17363b97so182809566b.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 30 Sep 2026 10:46:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790790380; cv=none;
+ d=google.com; s=arc-20260327;
+ b=GQFH9LEY/d+5tC0OeNyUBFroufjeIOXlgLOO6TOLOlXsyxlJb9GuwSFDRAStKwb5K0
+ V4edjAN1UtSiIb3RLuvJ0O0hBVB1cNUH+GjCVgFePaLiLepFOBk/7IN8qLRv5J8jORvY
+ wWKTDxT3B+6pAixS9FVBdL//yxVotsBbO8nE7ED7ZKc++0TM16cBfZyYH3AycHeTU6PZ
+ +z4Q2+rLhv+8zJ3/HlPutyF1MkB5giZlvMh+e5kaH76ZRGDy5+v8PURILDeNmvgpBBrE
+ m1tgwWWpKSaJtSt0Cr6QQWBUjJxrdC7ZpEUdTq3qmXlBdFM/eM6khdDkjDfo89sm/zru
+ vGKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=k0GOdr7oLFBoLzJVprvOcKez/5An7D/0rHTGbd0EwCg=;
+ fh=k6xPnGHBdclR8VQUQhxzMkG582Pw/zvu1Ix0zA0WlPA=;
+ b=Qh34DBAH+onM9dPRibT0rd+n20akN1bnin5LCA2FgUTZKMUzUTYkh0edZX5SrdCM8r
+ 2FErogvJWEnupeTLtTOJdIL+XU7Yr7Zx1XRyR3ouCdf7F3x524E6RlNcJ3jeVwmPBlFM
+ Lm/l/xHEJ5ItgJJLK7emMvJyTd0yKMGourYyXDHwb8ffeDjlZxRY8jOpdDkg3qtC+7XQ
+ x3uPAh/nDOrpyQmUj33TAKLQjoaaYSCfpIn+G6gKpxIRHfRC+o6Yfb0bh3x/GoEESqSY
+ z5O61OjOwMw14ILmEpvsaDwftrDbDa+UMoUJyIfdS27tIobaGAOhWgOm4fO0k0CnirwJ
+ d4yA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1790790380; x=1791395180;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:mime-version:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=k0GOdr7oLFBoLzJVprvOcKez/5An7D/0rHTGbd0EwCg=;
+ b=MX9Vo+QNEz1GjvR47DJB05BCYU+uqs+UICwRgIWpBCwoymcCdgxjnQW1oUPxaOyP4n
+ 62L9pMRvceW+3e9TXrG5VmiUOXwil+SheWaZZzU++Rm7ln3nyLswb15VGk6Sc+eaPOMb
+ aCJBuuiO01hpl16y2QD87yTi9u4r4wceDwBmxKL/5jEg2yx91Ay9XzRTc2IZpI8ZqVPD
+ Dw6c/sFqArb7iiKVRJYjSk0LyQ7ATYaHGZEYILt+8VsIKr3RMP0nJ44yRLhCp6VhDoYk
+ P04CPcqfAM0X8LxD/6Ca+pmhxEg0YTKC6u5LQMEaG5EvLIxZmB6owmHOqx4ehBfSpPCf
+ KRjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790790380; x=1791395180;
+ h=content-type:cc:to:subject:message-id:date:from:mime-version
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=k0GOdr7oLFBoLzJVprvOcKez/5An7D/0rHTGbd0EwCg=;
+ b=VpHbE2nRZlZOfT+taUnvlJJqSsLHX6HB6DbFhGzkUwSIb4dEOIxy8XkvCKFsofy1lQ
+ 33unDQUnAKW68sOhPbh9+88du4PowNXQFdaAV+S+SaSV265PjN1neS1ex9/HaQG/tFbF
+ 70m+t/93nbhbHDeNF1zt/FlvFPFs8ycIubMUYnGLivfmXXTcd0LzYi+2z65T9DNAx6kh
+ sjwe757z9IINXDA47lMQYzIBQf395DrKZozbeANCxnr/7s0zO4Yy99WoMwwvV6jevYWu
+ lIB1L6gidFsDCOM/6Qj/MwlTjaIRReVoZjmAoMYaABpcXuMP8Fb5kLPY68V+uoKLyBWc
+ OXEg==
+X-Gm-Message-State: AFuF++nxu7vVuHDijhsqMD49hS++rTsxDXujx+S4WBVaVX0wHl8xj20C
+ ZdHEdurk+oDy2mN46LIIWN8yYQz9HhivfgJqBlR4J7ms6NsJTjBqPoZFoqv7Mb78HqJUJ1pK+mZ
+ 561VsGHkhbG22TlBFwt1l27BijgXmxXIAfFKe
+X-Gm-Gg: AYBFou0dO8ymkKnqeUQFtrUV92A/Eh7qGzgJeeBggfjliYFH1VS4a1vUrScu0Pwnozo
+ 7XRMBXdv7Jtbqo2Ki+lq1OnxOFQ+AzUamTreCc20BD1tCeAla7LKcXp/Q//93WuDDlqlITjdB4u
+ 36e4wHsLajh9YPpPN37rtcxh2c0OUQ0mx3sC+jL7Bla3UqLI3h0zh3CDdcMAGi7EV/DGNfKJVps
+ UlG/LA0UYgwmZVF9nUxWj1ELP7he/+hsg8DNsUu3eD+RMLTyw84EtBHzgXi1KDDadjvfaNEWyDR
+ PnkaqhqOEXdiTUSgADtefW+VutDGdXpcCJVSmnZc5O4aC2mvahFr+jbhGXu5yIIgiNs=
+X-Received: by 2002:a17:907:ca85:b0:c29:45f6:6a0b with SMTP id
+ a640c23a62f3a-c2e23dfb7a6mr207408366b.34.1790790379537; Wed, 30 Sep 2026
+ 10:46:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260930-helios4-rtc-v1-1-0e6ea4ce400b@iav.lv>
-X-B4-Tracking: v=1; b=H4sIAFZGvWoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDS2MD3YzUnMz8YhPdopJk3RRjI9MkM1PLVHNzEyWgjoKi1LTMCrBp0bG
- 1tQApVi+cXQAAAA==
-To: Stefan Roese <stefan.roese@mailbox.org>, 
- Dennis Gilmore <dgilmore@redhat.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org, 
- Igor Velkov <iav@iav.lv>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1019; i=iav@iav.lv;
- h=from:subject:message-id;
- bh=Z1m9AfZCgsRoTLxgUsNpAbVYQPwoPwUJtO4gm0s+YbU=;
- b=owGbwMvMwCVmNH1q96v4SmbG02pJDFl73WKfTAhpC5l4uUXc8OW2jNV8Jsxpm9fOn5ts6z9x1
- 7uCnvqujlIWBjEuBlkxRZYJhzRuZSy5+tffw/wBzBxWJpAhDFycAjCRs2oM/z0Cv1hbZaTe9Fs6
- 7/TpAw4H9rae+VZ5Uq7O83dTXsKBvxsY/rvuffer84FZ3os/+08WdK2uYA9kEpF5xM3JYiWmOav
- EjBEA
-X-Developer-Key: i=iav@iav.lv; a=openpgp;
- fpr=90C228DA68A4D5FD4F4837E03297958BEA5F7903
-X-Endpoint-Received: by B4 Relay for iav@iav.lv/default with auth_id=1060
-X-Original-From: Igor Velkov <iav@iav.lv>
-X-Mailman-Approved-At: Wed, 30 Sep 2026 17:41:55 +0000
+From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Date: Wed, 30 Sep 2026 19:46:08 +0200
+X-Gm-Features: AclHuK8nKFHlyuhpbnvvkLRIxABnidNTW77NW58CywfUkeVtFBWNihL2d0yW4c0
+Message-ID: <CAC928HYhgVNM9BwpJJ821PWpZuR2gCKZisuQK4exKSCG42AO3g@mail.gmail.com>
+Subject: [RFC] XPL linker scripts and related Kconfig options questions
+To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <u-boot@0leil.net>, Jonas Karlman <jonas@kwiboo.se>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -160,45 +180,62 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: iav@iav.lv
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Igor Velkov <iav@iav.lv>
+Hi,
 
-Helios4 has the Armada 38x internal RTC, with a battery on the board.
-Enable its driver so that the date command reads it.
+I'm going to send a patch to fix arch/arm/cpu/armv8/u-boot-spl.lds linker
+script, making it honor the TPL_SEPARATE_BSS value and not the SPL_SEPARATE_BSS
+one within TPL builds (quite trivial). In the meanwhile, I would like feedback
+on some doubts I have, starting with the comment that stated to use "#ifdef
+[CONFIG_SPL_SEPARATE_BSS] to avoid using CONFIG_SPL_BSS_START_ADDR which is
+not valid in this case" in commit:
 
-Based on a patch by Aditya Prayoga in Armbian.
+a3403e6fbf8 ("armv8: Support not having separate BSS")
 
-Signed-off-by: Igor Velkov <iav@iav.lv>
----
-Tested on Helios4 with an Armbian v2026.07 build that carries the same
-options: date shows the RTC time. The main build is compile-tested
-only.
----
- configs/helios4_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+First of all, I've noticed that there are several linker scripts using
+SPL_BSS_START_ADDR without any guard. Second, the Kconfig guard for
+SPL_BSS_START_ADDR is SPL_HAS_BSS_LINKER_SECTION.
 
-diff --git a/configs/helios4_defconfig b/configs/helios4_defconfig
-index d218949e307..fa00fbc809d 100644
---- a/configs/helios4_defconfig
-+++ b/configs/helios4_defconfig
-@@ -71,6 +71,8 @@ CONFIG_MVMDIO=y
- CONFIG_PHY_ANEG_TIMEOUT=8000
- CONFIG_PHY_MARVELL=y
- CONFIG_PCI_MVEBU=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_ARMADA38X=y
- CONFIG_SPL_DEBUG_UART_BASE=0xd0012000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550=y
+Therefore, wouldn't it make sense to have the Kconfig default value for
+SPL_LDSCRIPT pointing to these linker scripts if and only if
+SPL_HAS_BSS_LINKER_SECTION is selected?
 
----
-base-commit: f8eb3469e1a17c79b047b3fd38ae820e8816a115
-change-id: 20260930-helios4-rtc-d325b659e774
+Moreover, I would expect all architectures relying on these default linker
+scripts to have at least 'imply' SPL_HAS_BSS_LINKER_SECTION under their own
+'config' ARCH_XXX section. But I found it just for ARCH_SNAPDRAGON.
 
-Best regards,
--- 
-Igor Velkov <iav@iav.lv>
+ARCH_ROCKCHIP has a second 'config' statement for SPL_HAS_BSS_LINKER_SECTION
+and for SPL_BSS_START_ADDR too, the latter losing its dependency from the first:
+unselecting SPL_HAS_BSS_LINKER_SECTION does not make SPL_BSS_START_ADDR
+undefined anymore, which does not sound very good.
 
+Another point is related to the relationship between SPL_HAS_BSS_LINKER_SECTION
+and SPL_SEPARATE_BSS: looking at armv8/u-boot-spl.lds SPL_SEPARATE_BSS makes
+sense to be defined if and only if SPL_BSS_START_ADDR exists and therefore
+SPL_HAS_BSS_LINKER_SECTION is defined. Is this always true? If it is true,
+shouldn't we have a 'depends on' SPL_HAS_BSS_LINKER_SECTION under 'config'
+SPL_SEPARATE_BSS?
 
+Third: TPL_SEPARATE_BSS exists but TPL_HAS_BSS_LINKER_SECTION TPL_BSS_START_ADDR
+etc. do not, even if armv8/u-boot-spl.lds is the default value for TPL_LDSCRIPT,
+therefore it would be used to build TPL too. Do these TPL config options need to
+be created (maybe with defaults equal to SPL ones), or are there no real use
+cases where SPL and TPL need different values? In the latter case, I would
+prefer to rename these 'common' SPL_XXX config options as XPL_XXX to underline
+that they are common to all XPL builds and not SPL specific only. My cases are
+without TPL_SEPARATE_BSS, thus I do not care.
+
+I would also rename all linker scripts not used solely for SPL as u-boot-xpl.lds
+instead of u-boot-spl.lds, as before, for the same reason.
+
+For SPL_BSS_MAX_SIZE/SPL_BSS_LIMIT the situation is similar to that one of
+SPL_BSS_START_ADDR/SPL_HAS_BSS_LINKER_SECTION described.
+
+We maybe can drop IMAGE_TEXT_BASE and IMAGE_MAX_SIZE definitions appended to
+LDPPFLAGS in scripts/Makefile.xpl and use CONFIG_VAL(TEXT_BASE) and
+CONFIG_VAL(MAX_SIZE) in the linker scripts.
+
+Thanks for your support.
+Regards,
+Massimo
