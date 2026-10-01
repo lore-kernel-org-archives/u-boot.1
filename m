@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14082CA5FD4
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 17:22:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A21CA5FD4
+	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 17:22:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 58CB281258;
-	Thu,  1 Oct 2026 17:22:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 54A8F808A8;
+	Thu,  1 Oct 2026 17:22:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qKwlTjx5tilO; Thu,  1 Oct 2026 17:22:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org B656D8118B
+ id Oa6r8lTa3I67; Thu,  1 Oct 2026 17:22:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 76D1A8085F
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790875323;
-	b=SMZW72IJAewIHqOaw7Qs/VJoPcTN2ldo3Pf2zJrnzWo9p2RqDAPEpRE79xap/vMmJ9EK
-	 W1yKfuv7FlLE/wzmTufq4TA/8B/bZF1brBsSm2As1DLYo7GNoDWxdeMDoWL7Wzwq+d4+u
-	 CtgUGCinGQdFtUU+Ypd02vs41OEWNFamp8rtsDM8HdDH2tu/zGjWr7uqc8gFNhc/JNhrG
-	 O6qIQfStbFk42JltOSHmKYirVCwBg4enSubNDXfsFYsRFp6XCUGs7Z3waswsnMd0/3hfQ
-	 Hp5nfE6owD2rSLJNBB7oIASfUg06l/P7QuWusSFDwx1Bak54tmWdmkBG8jLDL21QHfg==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790875333;
+	b=gnTFzICw7Dj1Ef1Bpi+VE0zUqBdcTL/5ZEmgKUBq+s42vBrbZxihe4CeyzrDs16TfdaL
+	 o6VzYAS8nmVcf27vDvcjMebc7PliTH0nAgtvaaJO6fXsvbziJaBkXk/cNihwVY5Hkwe++
+	 nkoI9UEFJ10ld7+1/Y4Kc8mGCP2SFTMIeZE+HLJ8KjVdTnQXu+V1NW68a+FoXd46BH9DO
+	 G1xThXt31LNs4Vz3VcTT1FFco5hgOQ4DX4MGSBBajlcyoL6Bh3vUX/DzKMmWSPHit+ZrL
+	 SZQFR+L/d6wSpO915QVkmahbOHUKx6qmNadCpfDFa+DHNHuMhSMsBibA0kRK+kHsdXQ==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790875323;
+	c=relaxed/relaxed; t=1790875333;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,143 +31,145 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=FLinN+kJVHrT7KPs2ZTONY6Pe4+X5LZoRZTaIAQYdDg=;
-	b=Uv5r/y2MEtppKwKuz9DHC7rF5AZqtNR7atHGRKkGrYaGesu0pIoj/0ZQeHkthfaQ0Op/
-	 b1h7NWdYHMqajr6XGh0ax2IggsaIPaWoQVuZNN4tFxOqJqmTxUHt1jx+9F1VZFrWcmeye
-	 q/UuqGSDsx2o5IvKMvkvigWoh4Id7QM+/reI3ETPPQkoxowXan3KY+AAQtb6pYx2UMuiU
-	 KOJWyXcHdEYIABqbd8k6zCBtQjD1TuEGGJyoXIdBFAX19W+/XSHq33lyuryRyKTcucPcm
-	 V5RZUZGo/Utz/tqolTobPPccVaxNMvdng6qJxtEvNm+RO5zLDK/VLP9NjlSAfp3/nRQ==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
+	b=KWZwOpv35XE7J7WpVheR+8ZQ33pP2+XO2Ocw4pWc8scS4T5qWNlOvXbm3BPUW2yhcKPj
+	 iiDWplsfQIsYkLuGjsazFqjHlx+VrUb08RzRNxSvOgXvUvRFTmJCgl2c+982xCR/BNAfX
+	 hFw8g1/H0HYomQA87MVbVUTamuYUv5HzaOnLzYVB15orq+dxfTR6FdjYs5CyE+2ouE9Y5
+	 HoQguHXmnPCGW9qI8AzGAnVzLPClhmbV25TItv/Uw8DbhNBZnItTh/yd1WAVtG4P9xdD/
+	 t1K0LOXgKbIB10OdE9WfVc38Ek9OKdFLvPGoBxBHlcFOaMckcADS2vEGQgX4WR3/BcQ==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; dmarc=pass header.from=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b="A1/tPaPH";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790875323;
-	bh=FLinN+kJVHrT7KPs2ZTONY6Pe4+X5LZoRZTaIAQYdDg=;
+	d=lists.u-boot-project.org; s=default; t=1790875333;
+	bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=L4HtMeFoFszCIaIN6FRX2pj5C80Ff9RrUinsq7zVb4D34FUuq8jWhSAgIfL2Uh0/G
-	 2vpTOYL2GTQ53QyEkPof+uCN8AJpucwdmGudKtngCi9TEtDf76T7W5oKNQ82KqNszP
-	 Lai4kHcw06kvR7X4Fs8O1BYd1fdbaWe2BDnaVX0+hMm/rfm8FaBmigq/EpnXQ8edOZ
-	 7dQbDPIeMB7OURKEXiYOCCmgc2t+Sup+ufQQOqfGP3981exdpn94S9G8p541XievcE
-	 AyFDPyZ2YAzaF3DvVMETeeKFJL/n8JxPS9GjN+pSPKvTM7H7tL/Lqr99435PFcrAaM
-	 ZShlDovdEb1rw==
+	b=MbFdCqWXiQOiRMz1VJ/cQWTtwq3VG8D6RJqxT9UudG8ggNHExHnNfAu0kF9SXIE2l
+	 86HC1icji1LK0FKDBdyiQ0ZHJ/y1rLpgoPvHilgDmtWlo1YfNinMf9U/nq+KknNNPG
+	 2Oc/kV80HCiXr89A+HkML0cYRHZJZL7+D3MMoz8Dpd4j5j7XrnyJazz707LK4GI//7
+	 DwVHN1w49MPsDComFeQVeJO8BKJELO7pK7VoEp8zc4y//NIDXIt2BJbUIxETnsKK1O
+	 fgpwE8Szv1QUcA/K3CuDF3+AX345GWXywusr1EeD6ud2tc84tWjhE4iOhFKKawplj2
+	 4/0iTaUGSjbzw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B656D8118B;
-	Thu,  1 Oct 2026 17:22:03 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E665B22B
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 76D1A8085F;
+	Thu,  1 Oct 2026 17:22:13 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4B4AB1A6
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D821F60823
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:01 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 311128125B
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WEgibkzf8fTl for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 17:22:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org CE11D607EB
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:33::2b"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790875321;
- b=CY384yNoRX7LaZC4LZYG9tc9nuYUB8mTb/Jo5+rTg9uuILfLqOnJyc+SQPGoQ33fUAQ9
- gM14H84mgnccplUK5/M7ml6oc8CgtNWSbFrO8TosIFHVF8zyTO8GpVcw3DIC1mmeKNUt2
- CJOvkYnseqd96shX+QZEbCgZ7YBSZKifa0gs5VWFEE+X90ThNWEBTpikHYjxfTvylPRGe
- 633KTffaASbKjEU9zhSlfXhes2MQWpaOrygGY6GCtZ/L6a/CjaGzQAnPesYv/Y+je+hvx
- 9a6+Ibk7yfvocutgUNcw0b2vLOwWd7xW2vm5pgdSlOvfN5jZcWt2PzN5LCamTrIXA8Q==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5okGQ8LKluwB for <u-boot@lists.u-boot-project.org>;
+ Thu,  1 Oct 2026 17:22:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org D850581259
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:33::c"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790875330;
+ b=bKO4mSaDdYn6w18GW1oEcfvn3oYDkxF4sw5LCak9tJyOzvEfkx8Yyaq+FPQDvu3S/cnX
+ P5GLMUIRy43HMLSgl5u+j2i8eiqnDTFhpRXUIPCCkARZA4X8v2Spwdwtgj3EwmgyEFKbB
+ JJyzEcIuosvVmnafFh8f41v0VRVDOycgpXAmJ5suwUqhhQQIsnY3FEadsz3maQtcAmQ3U
+ 5phjX0KYOT3HQt7OVoR0CcdbnlygKZfbN1JfFDC5gVSFNhJMKx7Lzon5Mql+/YEhE0hiN
+ S97stmxVR7Mi5opC3RKHGCIHMUnSHOgLDXpDKvW8rqc9oYzyIFLeT8DHNFUhl7P8QWg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790875321;
+ c=relaxed/relaxed; t=1790875330;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
  In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
  Content-Type;
- bh=FLinN+kJVHrT7KPs2ZTONY6Pe4+X5LZoRZTaIAQYdDg=;
- b=Sxb2/mFFy2Fanh4iNhuXNhQmJh7iPnj7Z1u4jIm8y5afr+x84+yc28ONpZYD19WECRrL
- PMt3txVPsxwY3AgWE9pgjR0z3UbVULi/5TmYeKWIymIbcR++pGKliLqKrf5VI/3RtKElw
- VUx4VIZq/OwO5imbQiajU6phRvt1vAcNVC38d649dOijuA6mxlg1Oyv7BoLUn2+8W+ggC
- O4QuT6ez2vr3Hw9WhYcBMJO4+HQqeVZSui+l1IaeOgO73zJaTIR4Pcfuoho3uP4hQFgRX
- IxIvkLzQH+9NwQxtmSOAw2wHJ3Lm7kqlxQKbszg0vORnwsV1r4vQaUTAjuBdkgMLmAw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org;
+ bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
+ b=sf8KtEi4+OJO+Gawxkr4DydF5HdG8+Mqw4G6WS2zyCEj0QOzP1CZ7yeng5HqcBEJTpDn
+ pEnCS0kUX7GtCKJo9f6ynkgEOFoif8KmKQYSUhGvTxWlivLJLddtPYqE2ZFAcrPISPaPK
+ 6/pHHsyVueIRRkGVmfHr4ya9BviL3lq6T1sk87TRiHF+l7hB8wZG6A4n/75s7lSwWHJSU
+ R/uxkxRfGjn+uQcItvzc5gEjV54MATsExAzcfA1GPsU+ggeDlJyU52N7OEkTLhq8dBZid
+ DNUyddEXMhPXGYbc9whVnXjxMAHcfxv31JRmVQ1qCjigqOBhgNU1ibO47XcQo9CV0Dg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org;
  dmarc=pass header.from=chromium.org; 
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=P95G6Lgy; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::2b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:33::2b; helo=mail-ed2-x2b.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+ header.s=google header.b="A1/tPaPH"; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::c"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:33::c;
+ helo=mail-ed2-x0c.google.com; envelope-from=sjg@chromium.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=P95G6Lgy
-Received: from mail-ed2-x2b.google.com (mail-ed2-x2b.google.com
- [IPv6:2a00:1450:4864:33::2b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id CE11D607EB
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:00 +0000 (UTC)
-Received: by mail-ed2-x2b.google.com with SMTP id
- 4fb4d7f45d1cf-6ae42b3e901so890744a12.0
- for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 10:22:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790875318; cv=none;
+ header.s=google header.b=A1/tPaPH
+Received: from mail-ed2-x0c.google.com (mail-ed2-x0c.google.com
+ [IPv6:2a00:1450:4864:33::c])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D850581259
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:09 +0000 (UTC)
+Received: by mail-ed2-x0c.google.com with SMTP id
+ 4fb4d7f45d1cf-6acae8342d2so543305a12.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 10:22:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790875326; cv=none;
  d=google.com; s=arc-20260327;
- b=aQM4ZWkDGM0gazcM/4jZk4Gcu+RB9Ji3Z9yjUTL613N5IDTVydTz+iv+Y97e4aEIw9
- VLORmGllVM8dZMcDDcgtJyt+Iq5gKAT2cccxqD50L9vZceF7Le2iB5GlYLV0TdEF4E7E
- AtsFcylC0ZY52Fa9hS/BwARGPzx1w+Nl4a+581S142Wjo8j53xiFkL305sCmOopTNXFC
- n2IUiRdku7dIkSG+bd2bTJo5F4h6lHPadDRp5zUmCFS4Gu677l87C0jTdwYykh+zFv79
- D7vSK+zpe48ToHTToBGaa5PqE+SjVPGLM2YxTyy3FGMjoGjvIyJWEYUrEih3fs5VpCgd
- o0gA==
+ b=ZgkKfoTbRB71t/LlBdOJXnk2qNeJI1dE91ot64NoPWgXly0wEVMPK03JGswa6f1f/F
+ qzDNyGKoSGfJ2cJ+vovof1WYI+o6Zj6J3F7IcCzGqt+VaalEpzSJL206VH0BPMaNBr9r
+ AVSPoCJmm5/OMvFHLfp2zhZSkqmGRdbNPht258css/BR1+ohTBOkd5e8sW8BEjAHCwly
+ uih/vHYMF1FapX2UB19lMyhah7AVdZbm2riqu1cbvAT9AHvCiAUak5InZAv2ZqZ8tZyO
+ yjXbjLWZjwGEVc7Q/lV6Li5EMMy2e1Wzc1zlDYyNgjLQcDEWdJ6KkzZa1F2g3iRaZG3b
+ QV3w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=FLinN+kJVHrT7KPs2ZTONY6Pe4+X5LZoRZTaIAQYdDg=;
+ bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
  fh=f+3YHrvj6jGhkBhPyVUqKuV+eWYFrOfCOWHRGid3M5g=;
- b=JmNEyZm/sFkgY3/dQ9+xjMF4Jce6taNjSO0cisY9YdtoRpyObBRjUyWgatuieRBG4D
- znSsMdzwaAiXEf5IMpWsKQqrAcsWhCkufA5o8LBqOXUza4gZrPwAOZViX/CZqAu7uA2X
- 8N567OFobCT015EP4u6cpJc+pKoZEKhWJA07vTe/hVDbFOBQBHhw+GtDM+Xc1y911//N
- khm0olMSeXg+/B5U6iTNyosUxln+aSSmD5XFQrNkzhd8lCml6dHjmrGGd943q2T+AopJ
- O7tfzAx82QU2BKWwfm+wBlQxO5OPOXgFC6h1gIGawtkrtbY3K3W/7K+VLhoYamNzqNsy
- nNYQ==; darn=lists.u-boot-project.org
+ b=nmnlfB9dooLHsMZdOOcKUOIV7fh3MSiD6KacLBU7Qu2KmkHxar5UfhCN8wWT7Ro9Fg
+ wG3prXtFPQQSc5ldEpX/aiODa8Tk9o05G3/UPf+RtpJ7cJa/ZEe/5AxLXdOuinALSvTF
+ ZYtCzDCd68vau5ZAOvvyzKC4s23+ynp3mNtFwJm7sRlZXAf4lf7OMqDNQNbS8QGuysTc
+ HtJZ+1ITfhHUoJ4N9VTkm164yGqF0QCupg5G4tPDgmFS3eIa8x/OqofGKYYJ32gZZ61u
+ D3O05npehj2i6H3vRxFGZxeongoxkWN94WLfLaaLSlI1kDfKTDZnjVpkfnbav8BwvEf2
+ 9Y8A==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1790875318; x=1791480118;
+ d=chromium.org; s=google; t=1790875326; x=1791480126;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=FLinN+kJVHrT7KPs2ZTONY6Pe4+X5LZoRZTaIAQYdDg=;
- b=P95G6Lgy7r16QaW0h7pW6/6BEUot+JoHGi9BTdMrItebaGvSGIlM1citjEvo8SlCV6
- jJ3MZpFJ0oF4jDkVWwk3wt5KQHCfTOlinpaRjRVPGC+iw2+Gxjzvvy3zmax/zi56rYaY
- oIj3wiy+inTHtxk/uIj+iDWYplQmXMRNlIybQ=
+ :content-type; bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
+ b=A1/tPaPH4dje/pbMLp9rND4tIPams2GLVaHwVivfswwI7jifvKnTxAA11j1pwnzSmt
+ HuTJnrpYaUmBYV+n4CxlV38dwo6NtVuRkCxwaJc/RcVB1DE9ITTKZO0jwml7s71m60FP
+ lN0r5/pPDPTl8TNVKRzS2Gq0LKT40pkG/aHlw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790875318; x=1791480118;
+ d=1e100.net; s=20260707; t=1790875326; x=1791480126;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=FLinN+kJVHrT7KPs2ZTONY6Pe4+X5LZoRZTaIAQYdDg=;
- b=nn4IZlXvPKSMlGlZ9mDh8VXRTSZwYsHG1BlRMWjqZoOPR0nemkPSYp3Hb9XJeM0B5o
- /byTXTPEuR65gAGnG+q5iEAHqUk7Y3nfnWErCjBM8gCEMRVRAq/VhzqeOw0gTHACdPub
- OcW2UuzCpFToNo2X22tNk/zXOoxWBx45fwM6Ao/2hJvUHdS4J3fHZmWZgXHEP++Sn0vb
- +hWOnLlXlu6enjkl8NHBp5kj5lVXWpoPpHmC6Gq2XelIVKaiFvQQ7/9HTX9zmIqgYsoJ
- VpY9E0ry6HFD4PEAc507dJ1I1qbdm3cWFLZtIsTHDId9BQ7yWLm2z2XTnX5rVuQgrLPq
- PrBQ==
-X-Gm-Message-State: AFq9FYKSu5wcFj5l7nPBsdWYH5oHMI3TqW3u4SV0wIHuQd6kcDTYEulI
- IOwUreGhn6LtA29vEq4m7FpVXDiiMjIvotA7QI5FZdz9za3Ch9IqCGMnn2Po0smNRea4ipz5I9e
- lk6X9GHjlmoeU7TJc2IiSPUOVzeuNofDAmVw+HWNW
-X-Gm-Gg: AYBFou3YQ1svSwXLgvA5m1hVSJKH7N/afMZFo2biScPJXxly+kiBJRfJHsReU8gY9O5
- V+AzT4nxMJH3bd533vWyQGIvxTJAjB7ljS2u4SDepy4vn0+eyiZmWxNx1PYYZG5Yd943hapgx5f
- Loh+m2WRixHaN9i2T3VfbWSplHCblgSKbJYezutsbPrHlcUuEPJ9YzBSNhE2B5BTx1PqXnluCgd
- Ob8UI1q2JTWEgzsH1hn8WQWrlMPiUphqzt9ft34j/4D8CRadSP/wVzyGi4Pej5B3q1s7tAa51DW
- 2d8mMRGM3X26pjz6HQZTElBjyIGGpPBl/hTmtn1I0ya4MkrfVlCDcHl+E/+0di/RfCE=
-X-Received: by 2002:a05:6402:a0d4:b0:6a6:32e3:9ba with SMTP id
- 4fb4d7f45d1cf-6ae307db1a4mr2598256a12.10.1790875318510; Thu, 01 Oct 2026
- 10:21:58 -0700 (PDT)
+ bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
+ b=NPAjOIJ5MZbgLtrVG+aBd4GF0Z9PyBIYHiabz/CXEk0duawdrt4vnwSTWpXfq+tdBC
+ V9mUq5mJhlzbcsoy8h7Fw+1k2dPPWZl12OD+tzaabkzCAiMod2nifcfdnAoFyOKEsvYy
+ Ezj8j6oVin47oimNFyr9gb1GBoc7Wkw2D4waLj10FlDB6eRPR4YGfdTY6vYR1qUERXfn
+ nHJUTGTpJRulNu7vgUZ0P9ZNII8YQr6KLE7UtedFWPhx+GGba5FIYB90duLutrmuJyAG
+ /m0R09VVz+8Vo6uPmThYVLuw4ljqG3Hwg4MFG7jy3e2/PYkjclHnxe+ai7eo3HxyzzYK
+ 8DaA==
+X-Gm-Message-State: AFq9FYJnMOBy0PmG3YDwb83CzRevqxZXZQH083UZny4rl7Zz1jc4ao+1
+ zY7u42RFvFv94z5v6wXz4dmjptUoo/ISW02jI1nwPHEgcQ+Iiy8xuS+BEUPpYJKdigdX6M1C6tF
+ urA3Trru6VQIFDbu7yUy4J6PbPheAxxd8tokmjhCb
+X-Gm-Gg: AYBFou0Ln20EMgwdBYKVa5ugbIH7P1D0c4IMdfkUX3CBDTEQ7cjLapSHvQNWD5w+YE7
+ wA5/jWV5Llo32C25JZ48JT0jLk0GG8baRqwmumhT51CET2J1OIjnrPBqr23mrYm9rnLKwws0cg9
+ D9pQOVK3/TJ/ion0WLcC6IJ/66ifwYGUzhZVCIQeXcXkDk9bdaNNti1R5q6kYDNFrFdqJyrFccT
+ Xd0LqmZJ3BHz9LsbuiOZE75y1hKVZ+T0UlqKE2JPHdbkWWBFU5HxcP2TfI8XT1T5PWy8rRxqGtK
+ 77Fa5nWibs2yX5oyf2+D/J8t4JSoiUK9e0fJ9sI1TY7ixcJj3qYmRFXqLg==
+X-Received: by 2002:a05:6402:1e91:b0:6ac:9a44:d3fc with SMTP id
+ 4fb4d7f45d1cf-6ae199623b5mr4168083a12.37.1790875326164; Thu, 01 Oct 2026
+ 10:22:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260918172127.66014-1-ayoub.zaki@embetrix.com>
- <20260918172127.66014-3-ayoub.zaki@embetrix.com>
-In-Reply-To: <20260918172127.66014-3-ayoub.zaki@embetrix.com>
+ <20260918172127.66014-2-ayoub.zaki@embetrix.com>
+In-Reply-To: <20260918172127.66014-2-ayoub.zaki@embetrix.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 Oct 2026 18:21:44 +0100
-X-Gm-Features: AclHuK_PNmAden6PyfWo610vm7WFyAgbvpNz7Dz7-tjl4INYA8lMo4UtvOTVPiw
-Message-ID: <CAFLszTiKL72qQUFWyQgFSY5LjVj3n6VZJH1UUV836aFYXi74Xg@mail.gmail.com>
-Subject: Re: [PATCH 2/4] crypto: add FIPS 204 ML-DSA verification
+Date: Thu, 1 Oct 2026 18:21:53 +0100
+X-Gm-Features: AclHuK_b72Y3jL9tOiw-GDKDwyztC57jlKQM2eEFUNncTa7iUR9hKXdu_Zpt4e8
+Message-ID: <CAFLszTiyKg9nC_MyOBYSLt8csu8ZxBxyJ=gekfthYGuXAz9kpg@mail.gmail.com>
+Subject: Re: [PATCH 1/4] crypto: add SHAKE128 and SHAKE256 support
 To: ayoub.zaki@embetrix.com
 Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com, 
  mkorpershoek@kernel.org, sjg@chromium.org, ilias.apalodimas@linaro.org, 
@@ -190,79 +192,85 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Hi Ayoub,
 
 On 2026-09-18T17:21:23, Ayoub Zaki <ayoub.zaki@embetrix.com> wrote:
-> crypto: add FIPS 204 ML-DSA verification
+> crypto: add SHAKE128 and SHAKE256 support
 >
-> Port the Linux verify-only ML-DSA implementation introduced by commit
-> 64edccea594cf7cb1e2975fdf44531e3377b32db. Include the API
-> documentation update from commit
-> ffd42b6d0420c4be97cc28fd1bb5f4c29e286e98.
+> Add generic incremental and one-shot SHAKE interfaces backed by
+> Keccak-f[1600].
+
+This patch also adds the fixed-output SHA3-224/256/384/512 digests
+(sha3_224() etc. and the sha3_ctx API), but the commit message does
+not mention them. Nothing in the series uses them, they are not wired
+into the hash framework and patch 3 only tests SHAKE. Please can you
+either drop them or mention them here and add known-answer tests? If
+they stay, the Kconfig symbol should probably be SHA3 rather than
+SHAKE, since it builds both.
+
 >
-> Support all three FIPS 204 parameter sets with raw keys and raw
-> signatures. Do not add signing, private-key handling, FIT integration
-> or an external library dependency.
->
-> Keep the initial public API aligned with Linux. It accepts one
-> contiguous message. Defer FIT integration to a separate series.
->
-> Add U-Boot argument validation for invalid parameter-set values.
-> Reject a NULL message when its length is nonzero.
+> Adapt the implementation from the Linux SHA-3 library introduced by
+> commit 0593447248044ab609b43b947d0e198c887ac281. Retain its
+> provenance and licensing.
+
+This patch cites three different Linux commits: 0593447248044 in the
+commit message, f1799d17285c in include/crypto/sha3.h and 0354d3c1f1b8
+in lib/crypto/sha3.c. Since you plan to track upstream fixes, please
+say clearly which tree/tag each file was synced from, ideally the same
+one for both files.
+
 >
 > Signed-off-by: Ayoub Zaki <ayoub.zaki@embetrix.com>
 >
-> include/crypto/mldsa.h |  67 +++++
->  lib/Kconfig            |  14 +
->  lib/crypto/Makefile    |   3 +
->  lib/crypto/mldsa.c     | 679 +++++++++++++++++++++++++++++++++++++++++++++++++
->  4 files changed, 763 insertions(+)
+> include/crypto/sha3.h | 353 ++++++++++++++++++++++++++++++++++++++++++++++
+>  lib/crypto/sha3.c     | 382 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 735 insertions(+)
 
-I'm reviewing this but of course it depends on the outcome of the
-mbedtls discussion.
+> diff --git a/lib/crypto/sha3.c b/lib/crypto/sha3.c
+> @@ -0,0 +1,382 @@
+> +void __sha3_update(struct __sha3_ctx *ctx, const u8 *in, size_t in_len)
+> +{
+> +     const size_t block_size = ctx->block_size;
+> +     size_t absorb_offset = ctx->absorb_offset;
+> +
+> +     /* Warn if squeezing has already begun. */
+> +     if (absorb_offset >= block_size)
+> +             return;
 
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> @@ -634,6 +640,14 @@ config SM3
-> +config MLDSA_VERIFY
-> +     bool "Enable ML-DSA signature verification"
-> +     select SHAKE
+The comment says 'warn', but the code silently drops the input. Linux
+uses WARN_ON_ONCE() here. For a hash this is a nasty failure mode: a
+caller that misuses the API gets a digest that does not cover all its
+data, with no sign of a problem. U-Boot has WARN_ON_ONCE() in
+linux/bug.h, so you could keep that, or at least somehow return an
+error.
 
-You asked about Kconfig placement. ML-DSA is a signature scheme, not a
-hash, so it fits better in the "Security support" menu next to
-lib/ecdsa/Kconfig and lib/rsa/Kconfig than under "Hashing Support",
-e.g. as lib/mldsa/Kconfig or inside lib/crypto/Kconfig. Then when FIT
-support arrives, it will sit alongside the other verification options
-it has to interact with. What do you think?
+> diff --git a/lib/crypto/sha3.c b/lib/crypto/sha3.c
+> @@ -0,0 +1,382 @@
+> +static inline u64 sha3_rol64(u64 value, unsigned int shift)
+> +{
+> +     return (value << shift) | (value >> (64 - shift));
+> +}
+> +
+> +#define rol64(value, shift) sha3_rol64((value), (shift))
 
-> diff --git a/include/crypto/mldsa.h b/include/crypto/mldsa.h
-> @@ -0,0 +1,67 @@
-> + * Return:
-> + * * 0 if the signature is valid
-> + * * -EBADMSG if the signature and/or public key is malformed
-> + * * -EKEYREJECTED if the signature is invalid but otherwise well-formed
-> + * * -ENOMEM if out of memory so the validity of the signature is unknown
-> + */
+U-Boot's linux/bitops.h lacks rol64(), so I see why this is here. I
+suggest adding rol64() and ror64() to include/linux/bitops.h, matching
+Linux, so this file stays closer to upstream and other code can use
+them.
 
-The U-Boot-specific checks in mldsa_verify() return -EINVAL, which is
-missing from this list. Please can you add it?
+> diff --git a/lib/crypto/sha3.c b/lib/crypto/sha3.c
+> @@ -0,0 +1,382 @@
+> +#ifndef sha3_224_arch
+> +static inline bool sha3_224_arch(const u8 *in, size_t in_len,
+> +                              u8 out[SHA3_224_DIGEST_SIZE])
+> +{
+> +     return false;
+> +}
+> +#endif
 
-> diff --git a/lib/crypto/mldsa.c b/lib/crypto/mldsa.c
-> @@ -0,0 +1,679 @@
-> +     if (alg < MLDSA44 || alg > MLDSA87)
-> +             return -EINVAL;
-
-If the enum has an unsigned underlying type, 'alg < MLDSA44' is always
-false and -Wtype-limits warns about it. Checking '(unsigned int)alg >=
-ARRAY_SIZE(mldsa_parameter_sets)' avoids that and stays correct if a
-parameter set is added later.
-
-> diff --git a/lib/crypto/mldsa.c b/lib/crypto/mldsa.c
-> @@ -0,0 +1,679 @@
-> +      * For freeing it, use kfree_sensitive() rather than kfree().  This is
-> +      * mainly to comply with FIPS 204 Section 3.6.3 "Intermediate Values".
-> +      * In reality it's a bit gratuitous, as this is a public key operation.
-> +      */
-
-This comment is out of date, since the port uses
-memset()/barrier_data()/free(). It also contradicts the doc in patch
-4. Please can you update it to describe what the code actually does?
+Nothing in U-Boot defines sha3_*_arch, so these four stubs are dead
+code, as are the __maybe_unused and the
+sha3_keccakf/sha3_absorb_blocks #define indirection. You could keep
+them to make Linux syncs easier, but then please say so in the commit
+message (or the doc in patch 4) so that later readers don't tidy them
+away. Otherwise I'd drop them.
 
 Regards,
 Simon
