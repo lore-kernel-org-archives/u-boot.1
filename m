@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 700E8CA5FD4
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 16:00:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F5B4CA5FD2
+	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 16:00:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 30BC160A41;
-	Thu,  1 Oct 2026 16:00:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1467F60D77;
+	Thu,  1 Oct 2026 16:00:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vdtu14SxBPQJ; Thu,  1 Oct 2026 16:00:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org B746760D61
+ id JkH33XrJ9r0O; Thu,  1 Oct 2026 16:00:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 2C25B60D62
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790870426;
-	b=nIqnFAeXNC5OGPpjrkANx5OT4KNdy60GlcafIZIcUMri3XPPmIKqOI8wj7oi3nnwWmJn
-	 D2ZkIlvVLJDzh1f7ylzNw9Z3mjTHMldGRJgNbk5JJ88+PUfvz+De4M2xFN3DMiphDyq+R
-	 APHmMaou8+HeZzdZrIPf8vuxpxl3pHesQI73WrrCq6W194NUk/B985uoeBS3CYvQE1acd
-	 xl2zC6sWKd9GBKoBpmWh1YLVBnrAiIfmyKHqDAGCpb7u3TVbKWaBbJIbTUlSNq556YT/p
-	 2B0/2wAfu86dqzeFpREjfbtp6G0kIe4M+sqEAKS6iz3LkIYfHBdGmXuGxOTIsik9bhA==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790870431;
+	b=iuY+XLyEg1azMYb9ivZu4AQBMnvtWAbQV2pfWd8O6G5QLlfvoC93OgSDwGocggr5bt8U
+	 uyMfpSzxL0+kbShZhHfcKQjWNK/0SInFUTYeP7w0fkFtHVCZYE7hP37a4JlXvMrUpcZcz
+	 WoIiWq/2zm+hE/RZHwxb5sq+imHKs1/uHF9Uq8bMAkdMae5r96hbyE5cwWBvSK/dKXL+0
+	 9DtgZaKUij7vm+glWI3/R54/iRLzpNOvLP7xRe+yWCDJLgBFF0QSdaJTx9MqWp7wtarBR
+	 INqQLQmyAeVCJINS3gC1he/1BfF4x+5WH+8Z5b4LWIxunZuR+KjLPL3Zl/NxaUtxVeQ==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790870426;
+	c=relaxed/relaxed; t=1790870431;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,146 +32,145 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=FCqUl/3HFPDd0E71UmG0fkIHyKaZa8W9dhWp13AszzU=;
-	b=rqCadzuBADIfXtCL32FWKWGQdDhn4ESRaMpZqTzkk+1ZlCoXuehQZzglj9s9KGLMtGJh
-	 cASpK+RCgUTiiFni1I49unOQeXPWDpD/nFX3PZ9T+VJyBdpfLkyPqc8OKZTiNEWXK6aCQ
-	 cJXiNzUn1+GUG5+bjornn2A88IMUiMEpzuyX0gFUHg0XuLqnu2pGc1Uum5j4FV4c//CRZ
-	 dpv2+BjT3QvFqzkqaCsZ5hbgg3kDbvuJd292ho22fZdqFQfjkJyUeO2hQK+91rJDqODY9
-	 BZSSw3AUQ7QqsAZOzQ1AlnF8Yh2QJfglCUPoBql7cz6UJZZc45z0o30j0a8G5OHyIrA==
+	bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
+	b=XTuJLilbEbIR7F52vtNmWvDpnr1dpq0fF+OgZOMvHZVy1Pv5MGg82q+Jjm8+H5bWEMh9
+	 tCM9lFMCWirhX1e7fgIN6UI1gukD5B5C2w3H1JPNKZ/sXgEuImV+2t68TAlvpFt8QnWFv
+	 0vLPo0AhTp+8g0kBtqOimqs5ifceXFkWUJ6UpMOex9VRyrbHJapkySWWt4CpHB8PPyFi+
+	 FmaqY9qKXB03DBSa1ojRTC+GngZRSnYkSGb+wZnTpcDHzC50Wj3OnTIAeCCIqDYNswTEw
+	 Pbr4BXdt9F0tBQR7DFw6en7MnYXQ8GK5hrYOKhHcGNJHceZ7yzx8WBHHQCUI7CM2tKg==
 ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790870426;
-	bh=FCqUl/3HFPDd0E71UmG0fkIHyKaZa8W9dhWp13AszzU=;
+	d=lists.u-boot-project.org; s=default; t=1790870431;
+	bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NE/AYnTJzMuzAY5vISI9rOnBcK7DU8hJPKiRe4Lqtft+VH/hNjqn992thAsuOaQ4l
-	 cIuQJUgy/8J/g+LGnXKuiDumOnBFrRg+0TmpNjqzM9Za7xJSLrmCuq/cJ+ZD7b5wFq
-	 fdXbV1QvYDKapvg6E+70/laklPb1bSpcIKRjGNX2+nZvc92Kyu3KuJrAL4+yV1WcK9
-	 7g03qJxfF/Qj7G/j0oU34CLSzHu8sbxK69fB6nCI4vNZ+ndtT94D0yc9Syd0S230xP
-	 IlI2Fh/5xRG1OouRj37BQyjmln+H3PlJkPAbIvQQMsZmOq0PvPPI3lWqmXMvNK/lgO
-	 Jgd29PgoyLrLg==
+	b=uGqY1xn6Vpr/vuKzJ0ud5eSSXYn83uzsKelprjDLWGJ2jRuTcSKOHgCC9IJYeCGV7
+	 /ItnH4sDYlBxmnCy3g2bxmMD7WfhIIxfmIQX9Tmikld2daknJ5QSU9UP4mM4HJWETW
+	 XPZpoOobcf9qJIJ6ibMRncISAOCpHGb+5woCjY7A5+SaqcgTFoVtLMybM2zlHgb0BS
+	 XHGRsHW6ByBrBJUjYCeLSKnVoefc6h5GGdbG77uWmc3N4ajb3CLqCLQEf8lw/Q1TCZ
+	 p4PmEZ99//xhYo6QPT0yV/GGILzgnU8TMyNqGPrafSC6s07RguKc10gcLNBJztduYD
+	 kU7VR9ZTbv27Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B746760D61;
-	Thu,  1 Oct 2026 16:00:25 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2C25B60D62;
+	Thu,  1 Oct 2026 16:00:31 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 1C46D33B
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:24 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 43DE832F
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0CF3181219
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:24 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2994D81219
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id chvG1OnlfYMi for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 16:00:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 43BDE81139
+ id EHRClqtOqGBN for <u-boot@lists.u-boot-project.org>;
+ Thu,  1 Oct 2026 16:00:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 738EB81139
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:39::10"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790870423;
- b=oPacTm1hjLq/LHGUdrXudWGPEV6bq5bRgw40osM3cZhG8lN+3o9wRPbPQctqudizKjGA
- QEpwuw9E6pemIKtapwyBqQH+DCOTIOzAtU39dk3YLVoWpEtCRLucBOVzQ7TYQHkRcRGSL
- AYHZXOfrpxhDpzHMp8qgcMAM2YGBZIlSPmnR35sbaPL7nZ2POfD3teGpCWJgx/D6ufemd
- l0zMfy/r4NPlS/awWKF1ep9pNVrf4euCC2PhB0a+Oy95PVT8x9cv88KxV0Dudr7DqpW5h
- ochMr5iW8RKD9E+7jtZnDwUDDJzi/z+HH+m5XEAE/FbCXic5cIe3Iq4xOhXgQa19xrQ==
+ smtp.remote-ip="2607:f8b0:4864:39::c"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790870428;
+ b=e9y/IqfiooIKLxczg9MSp6xwzbwNJFSy15HRlnUaPvtUBewIJHutAidgibtWHv5iLtMD
+ 64p9oPd7Eoz1mg54FjNvm9kI3xRrYjBNw1UT4plvxEAmrhOsUcF9judcy3vzGU3jGYwmc
+ VJUwVgirWwsqIUNEs4ooWwsHwle71EHDtxgDNEsgP0S/XayBx5c2xFQ9B/F+CBJ41kBy+
+ Alpvtjb7N+tI+u4e/Kph4XD5+rl+okYvNQSt+stoP2Cg6c2s3mtmRv0nePMjj0zAR7MWu
+ ZXqwGHF8KyBfIZ/eaOghAIZiwmheT2YCVDvK2zXGrAXpVAAs6OFu66FgCH0HjLs5WTg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790870423;
+ c=relaxed/relaxed; t=1790870428;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
  MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type;
- bh=FCqUl/3HFPDd0E71UmG0fkIHyKaZa8W9dhWp13AszzU=;
- b=qTcX2JRZMP3KrnRmaRIUiCmciPbAXOMGgMwLpOZc0UMUarFrJkCDW6BiISOvVoNXPAoB
- zyFOBuWwbR5j9IqTBdHZ3urroDkNBxoVZyE8/C/AUmsiWcpECpmKDA0UoBDpVrZubwBnk
- a05v3iR3/tuc9ni4eyFRQ4lQucpU4nO5JzNpX7Jux3wgNtSLVujdKfU8vgWLrCAnaoS6k
- ACeHuXeUGVnWVMTC8UTKhZtTv4BHtWDSAajMhqzytzxfzTmYJKRdwhMAN01pcmoozDZ1O
- aKXXT40/yHG7XNKvlOyWigZ0G+7sD5HEAu6mjESNUb27k4jeRzudbn6b/1HtHAmefhg==
+ bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
+ b=el+9ZDuIQKcr4jvGctqm/lBj2RU1Ir8nbDYkxQcokceyGOnr8qx/ZUKmr7L1UEQTdFm7
+ gMY1j/KYShs/o58Rjbckr+V4gH9oXs5pY5rBqmu2PYRGEwXKP6L1QQ3WapKQ0V0i01Foz
+ aGI59llvjkddOEfa546I7+D7so6yKBi6+SLtY2HgpNDtT+nhSmGQ6+a7hFT5o5P9Ux+Z8
+ iVIEFG14S7pUZJdY4KDsv/uN+OPJIQMFAZaITrXalNKO6k+QNIE5YNiZkvOpJxdmU0qya
+ qMkTFkAdPJeal6/WF9tnSyo0o8ovyNSgqMZtToPR9FAUm9BvYiR8B/e6ScX43dm9rxA==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org;
  dmarc=pass header.from=chromium.org; 
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=NtOPqXaO; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:39::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:39::10; helo=mail-pj2-x10.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+ header.s=google header.b=gMt6y4eq; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:39::c"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:39::c;
+ helo=mail-pj2-x0c.google.com; envelope-from=sjg@chromium.org;
+ receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=NtOPqXaO
-Received: from mail-pj2-x10.google.com (mail-pj2-x10.google.com
- [IPv6:2607:f8b0:4864:39::10])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 43BDE81139
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:22 +0000 (UTC)
-Received: by mail-pj2-x10.google.com with SMTP id
- d9443c01a7336-2d747ee1f9bso32799395ad.3
- for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 09:00:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790870422; cv=none;
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=gMt6y4eq
+Received: from mail-pj2-x0c.google.com (mail-pj2-x0c.google.com
+ [IPv6:2607:f8b0:4864:39::c])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 738EB81139
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:27 +0000 (UTC)
+Received: by mail-pj2-x0c.google.com with SMTP id
+ d9443c01a7336-2e494adf48dso1291725ad.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 09:00:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790870427; cv=none;
  d=google.com; s=arc-20260327;
- b=deHxeJMtjma7fugxuySEc7dj5pfuuRcA+NfOnMoKUegyVLEkC9GmuwffaNtrVW68rL
- 1sPzy+OtiKLwgG/fAW4sm2QpBeUar9AxgGzeeJ2ZZmjxL23UZsRtnGgIKd1NY/zdeiRz
- IZsGNR4u7GdBafwT4aIUbaZX+kjWRyNtfLiN2BlSIfyC4Wimc0oB4idO8rplrraU+Tl+
- +Hfqgkq5zQi1bN4LKgo0Ls+SrzSw5sOPHHzS63zqd0vsxmGQ4vGh2xCYumTH/FT+MBrL
- UTAG+38lCei2ONCmi5Dqei2vzSNneoKG4ZkIZYrLYKEMGdpn0RulFccWJD310/VeGAH+
- q0mg==
+ b=jLgyXALzrlKeKDzh8P5V6PjYS5Y2a2ZxjqfMOFX21CsC3JSdah6iBIzW29Vq7am+12
+ hy5S2YgnfO9jLajKw5Frd5PDbezqTZNFaGaQ4OzvyDjtZlmhyAYnhNqk2R7Q2E5I3XXw
+ WouXCwEFoeP/9w5CPCNcUsXepblrumUalTTNIXE+oofsgqBU8QlBAbxYSVqTgnvSl9++
+ Kk9sJGS/NpMqGfFJhJhAanUB6GinbJQ4+lfPcb1CO7VsZ+W/AvAG2PX+yrrl9nIzGbxg
+ OISqSw8twoeFByBcVb7XI6NphsNXjuPS0ckRoCq1Vyo6iAFzFGycU8ljXVUx6hJRV2kS
+ xVHQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=FCqUl/3HFPDd0E71UmG0fkIHyKaZa8W9dhWp13AszzU=;
- fh=xUw8U6NCLY9FhsHEUwvbSq1tWW6yC3cX/vKds+UnBJU=;
- b=GKKk2zkcKr7J8BUOQjLhqxXksYYNG7PB4tmAPq3K1UH9cBTCZPCwcwHjfHxDySCqdv
- meAUrZa/iA+rYqkL943fYXdmPe7bHyQU66xIp2/RruBB3jzIRAalZdzN6uc1AFezVDdj
- +50zQ6B7WN1ddunGJME+YLXF86NdRRoy1SH6PmhLqea/eK0A4zDqNyxb7GOJWY3kTcHT
- SiDKi0oKbkwiHIFBDUWa5UuzxBUJHScddHbwqyy15LJnBl4Ua2gKi0m1VxVoRUOx9kmy
- H5GjGDDfQ9sP0IfoFyh9d+Uv7+VCmYzepePWs4C8850Pcd3eSRhQStTifUSfRzGdg5i6
- GzEw==; darn=lists.u-boot-project.org
+ bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
+ fh=iO7aF5sJ0jvhl3MuzrDCAVJjSWl4GZX0gewNaLqEfAY=;
+ b=rj1HbzjIND0wqWe7Ea320SuEhx4wFP2+3kOHzPe1kWZiabCkm8CiJqeQIRT50lYTXa
+ XUIQn0Y7F8C6nrKuukRSzlUUDvL4B2GSCHqiXVyuLhyds4VT0Bs9Mz0+OjFJt9f/3G+q
+ HDlHgoLRg5RXVd93GK3uiJ8wqL3MVoQY6+yegM5ihV7a+7VPwQ3wNt1bGGQzVjXp7mTD
+ 7dy1Cy1sLWt0MByNi1998CHVTys0p7zPzMLzu1HInoKVG/uB46zVL+Txb/cHAFacBDU8
+ HOzbMNXyHiTw/aQSZE2K5W0UJ0OjkgCzEbsMI+Xfk4WT8q3RBnaXQSHqbH6ZuZBbyvm/
+ WVHQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1790870422; x=1791475222;
+ d=chromium.org; s=google; t=1790870427; x=1791475227;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=FCqUl/3HFPDd0E71UmG0fkIHyKaZa8W9dhWp13AszzU=;
- b=NtOPqXaOiTAlI8g50YIZOqzZU89QKoiIjHikL2c+3N/AeTbWUgVyQvBHYDSQ0jEjdI
- NZdJJJoqaSDE4CQX4cLv591ihuDeErTysUz8hWb0J4f3MNNDZRWLWRxgD6YiPs8AB8xX
- BpAsGYrXbWRERrBfE0Sm9LanqC0xirJALR7XA=
+ :content-type; bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
+ b=gMt6y4eqBuFN0/FAyxPpxZuIytSNheZbt71Dcsppt857XXs6Zi0Ismk1KIW9XQlrxw
+ 4AnJ5dmrR+aaaoMdrtY2np5VUpuV87eTCp5DuJP+RY9Fq7ROSalcvyMp3O6y/v3KiPQC
+ qVHWreheZYCYa8L8M2VoPRhu1Nl8GkYWTIJGk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790870422; x=1791475222;
+ d=1e100.net; s=20260707; t=1790870427; x=1791475227;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=FCqUl/3HFPDd0E71UmG0fkIHyKaZa8W9dhWp13AszzU=;
- b=rogoNmLi0i44xjBRZsW8WfxZDTxkjA3v1GFa//IgbjNmL0WiJfqQ4DKwe+b9K9rtP2
- Jb28hWSJfYe5f6WWrF014JadsMI/bFDEx28uENTikLCYh0Gw/TteiRMGI9dqKON8CcQN
- AS0WKriSKP/zx8tg5VG/F5vCf+7h7B57esXSHskDEy/ssZYh9Ydr6u5EOFtMaanGfpRo
- U1Uj6pqib9patAsvdK8cerAXtVrZq65Rrz6pg0C5NuTZWvEf14X4S452euQQgTNeSVCI
- cK1+bVJVrv4hCwwehpxb8IHLo0rkM59DS6uztK2Cqsn6Zc33ncXIUwDwRS7bLoVUk6Bh
- X6GQ==
+ bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
+ b=KIjXm8xRB4J6rpyI/AXF70g1seSQBt+SUAQU6hPSzcWX5e4ucTFeiDirGcvCejuFyT
+ PF8OVnMQk5Z/J95l5thT5OOFRV69MaZFnHOm7urb721qhzNrvwJjDOEKuTqnvwfB1oWy
+ oX1vt2zWHtOxIqEf7I92ABfgUSWjx7jgztHcoXG4SZQobifUtr/z7kPp7Ue7twi/0Xr2
+ FtTyHugxwZCZ9Mi5OtpldyRPI2YxgtNBBbK9ruxafgCP9/wOhFvbFf4MVJMg9DXPlxgu
+ bYxflZssUebG00eNU+rHuX9d6A3DIT/JTrIHQkF6kLyiKIz09KpXkAf4Y9t1OUvkn+mP
+ l+Hg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBw8SnQSclJ+YDyYoa0zpo022aQAhesbdhs32mOA7rzXBmBxOzUkALV/B6+lIVcc8Klw5zS09EM=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYK4Ilgy12TvMqFOuC91DWyritIICeuobpmSCe1rNNbZnFg4dLyc
- Yrv5HC4GJBRf8q/Dk24FZTb1bqvqiRqPV7vJvKEvITxpRGHoX6gmwNB8qdUtauEK2r9+Yl7rzhz
- mTbCNj6aBQX2PZXK4OSTJfmfgLzUnJct18DfSWy6RvWztF6TroyIelw==
-X-Gm-Gg: AYBFou2jhg1Yy+rSJcssj3p4t1JD+mYxVPpWvBTpIVpR6YCfS9Rv1/J1P6YkDNI8Lfr
- ep2lwQxcZ24ivDvfxZEqEBU7nW7tIF8VP2ohFCPtCFvUVpGxacB47lhPR8oikto4HRlXrfy3aH1
- ut4PDGEp8QMyN7XtStaXJJd6ExCHUBuk5a3ndDN0RO60PeP1t98/l9n8uPkE/0XxlQYSZ5CRVB+
- xhuUHVClvBRStOZaQXYudso3ZPuNOh7rXsXBEl9MgERjchwAa4RxHV5zTLffZT4l5wnNdc5UOkX
- 4MS2LUvttEVa6y9c8IFvfRlwoNp6hp2IZL3XgvDmpTbRJSL6qGDvya423K8iP5RANbM=
-X-Received: by 2002:a17:902:e88d:b0:2df:5a29:ea5f with SMTP id
- d9443c01a7336-2e2e4a20448mr39229315ad.57.1790870421703; Thu, 01 Oct 2026
- 09:00:21 -0700 (PDT)
+ AKwUvBwW5EsOdbL0iopmf16DbhOANOIyB5e2a/LKE6T38/uwEMdDzuwjLMy10Ap05zxjuYa463/uFtY=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYIo2SCCw/x7yEMQPQ2c1NEQig6aVkR3DS9ks9yYhpnitnsqp+9M
+ 8bs0i7IvHBLZBxJSjatqecFsjOr7IgPtcyWYmzcwK/3ft2JpCeHv8kyrGubdH90EHBIndasjhI6
+ Cyk+ccOFh09DwmG4PS2BEnU+c40uAleBgpHoX5nBJ
+X-Gm-Gg: AYBFou1t4Oaqu523lZ0p6ooDLN/nVARzqZdbAKLo0VbHr9+3BJ4ZHfQFIoSiMKSuY0u
+ tqTKR81dbOpoY8GLhryzuZNEOXh4iUlhJG1Dkw/74zC0FnR/iUNU8rTehUSnNEPIPgzqmp2Ox/F
+ XAAFyvItZo2Trigg7dLBpuzecltH5pFfP9h3jchU1dwhm8C2CfgdH1pmVmxLA6pN+Hlx0VzxBvC
+ JafcOzK4NQrcS2CsVYyoL3nl1tYMmQtcM2PDhmcx05Gel8214Boo1a7l1PEnhZ+/E6flcjyvNtP
+ cyAqBL4TC0dQWQ3YMTHlW1Ln4hPw+0WNQZu1jWSgG6QrJffRPuYuZWMy
+X-Received: by 2002:a17:902:ec91:b0:2e2:e7aa:74a5 with SMTP id
+ d9443c01a7336-2e2e7aa8292mr39075235ad.25.1790870427125; Thu, 01 Oct 2026
+ 09:00:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1790626459.git.daniel@makrotopia.org>
- <7bbbd8ae1f506f1d50cae0cf224675811d324ff0.1790626459.git.daniel@makrotopia.org>
-In-Reply-To: <7bbbd8ae1f506f1d50cae0cf224675811d324ff0.1790626459.git.daniel@makrotopia.org>
+ <9a960bc5139c79b9f60f37f8ea6255e6e8a76c2a.1790626459.git.daniel@makrotopia.org>
+In-Reply-To: <9a960bc5139c79b9f60f37f8ea6255e6e8a76c2a.1790626459.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 Oct 2026 16:59:57 +0100
-X-Gm-Features: AclHuK8b3khvZ8obqGG0Y0m7iJVvHuuwrHGuUjIpr_KTzNbtlK6SqTfnHBRxM7o
-Message-ID: <CAFLszTivcrh4SqCBBw32Ck7x0A-=tsg6uvuVTVq5ktgQ=a2gcA@mail.gmail.com>
-Subject: Re: [PATCH 05/11] boot: imagemap: do not resize a region the caller
- owns
+Date: Thu, 1 Oct 2026 17:00:01 +0100
+X-Gm-Features: AclHuK-6vywql5mrK0iQL1hp7GS66J4KwUOG-f1IYNzG76RAocGEK2ax2Cn0boQ
+Message-ID: <CAFLszThrXu=rdgnmMBZiftAKLUsCr1jPgmuK_KcDRszgFoSSvA@mail.gmail.com>
+Subject: Re: [PATCH 06/11] boot: imagemap: read only the bytes an extend adds
 To: daniel@makrotopia.org
 Cc: Tom Rini <trini@konsulko.com>, Kyungmin Park <kmpark@infradead.org>, 
  Heiko Schocher <hs@nabladev.com>, Simon Glass <sjg@chromium.org>, 
@@ -195,65 +194,71 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Hi Daniel,
 
 On 2026-09-29T00:04:16, Daniel Golle <daniel@makrotopia.org> wrote:
-> boot: imagemap: do not resize a region the caller owns
+> boot: imagemap: read only the bytes an extend adds
 >
-> The extend path reserves memory at the recorded address and re-reads the
-> region into it. For a region recorded by imagemap_map_to() that address
-> belongs to the caller, which asked for the payload to be placed there:
-> imagemap reserves memory it was never given and overwrites whatever the
-> caller had put at the destination.
+> Growing a region re-reads it from the start even when the reservation
+> was renewed at the same address and the leading bytes are still valid.
+> The translation table exists to avoid re-reading data that is already in
+> RAM, so the common case of probing a FIT header and then mapping the
+> whole structure pays for the header twice.
 >
-> Restrict the extend path to regions allocated from LMB by imagemap
-> itself. A larger request against a caller-owned region now falls through
-> to a fresh allocation, leaving the caller's memory untouched.
+> Read only the range the larger request adds when the region has not
+> moved. A reservation that had to be placed elsewhere still needs the
+> whole range.
 >
 > Fixes: 9b41c7dbee96 ("boot: add imagemap on-demand loading from storage")
+
+This is an optimisation rather than a bug fix: the current code reads
+more than it needs to, but the result is correct. Please can you drop
+the Fixes: tag so this is not picked up as a stable fix?
+
+> Read only the range the larger request adds when the region has not
+> moved. A reservation that had to be placed elsewhere still needs the
+> whole range.
+
+Strictly, it doesn't need the whole range from storage. The old
+reservation has been freed but nothing has written over it, so the old
+bytes are still in RAM. A memmove() from the old address to the new
+one would keep them, and copes with the new block overlapping the old
+one, which is quite likely here. See also below.
+
 > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 >
-> boot/imagemap.c | 15 ++++++++++-----
->  1 file changed, 10 insertions(+), 5 deletions(-)
+> boot/imagemap.c | 18 ++++++++++++++----
+>  1 file changed, 14 insertions(+), 4 deletions(-)
 
 > diff --git a/boot/imagemap.c b/boot/imagemap.c
-> @@ -233,13 +233,18 @@ void *imagemap_map(struct udevice *dev, loff_t img_offset, ulong size)
-> +                     /*
-> +                      * Only a region this device allocated may be resized;
-> +                      * one recorded by imagemap_map_to() lives at an address
-> +                      * the caller chose and owns.
-> +                      */
-> +                     if (!r->lmb_reserved)
-> +                             break;
+> @@ -261,8 +265,14 @@ void *imagemap_map(struct udevice *dev, loff_t img_offset, ulong size)
+> -                     ret = spl_load_region(&priv->info, img_offset, size,
+> -                                           base);
+> +                     if (addr == old_addr)
+> +                             ret = spl_load_region(&priv->info,
+> +                                                   base_off + old_size,
+> +                                                   read_size - old_size,
+> +                                                   (char *)base + old_size);
+> +                     else
+> +                             ret = spl_load_region(&priv->info, img_offset,
+> +                                                   size, base);
 
-The logic looks right to me. imagemap_record() dedups on img_offset,
-so there is at most one match and the break is fine.
+Just to check: how often is the addr == old_addr case taken in
+practice? LMB_MEM_ALLOC_ANY allocates top-down, so the FIT header
+region is normally the last allocation, sitting directly below the
+previous one or below U-Boot's own reservation. Growing it upwards at
+the same address runs into that memory and fails, so we end up in the
+else branch. If so, the 'common case' in the commit message mostly
+does not benefit. Copying the already-loaded bytes across in the else
+branch would make the saving apply in both cases.
 
-Please can you add a test? For example, call imagemap_map_to(dev, 0,
-64, dst) with a guard pattern in dst beyond 64 bytes, then
-imagemap_map(dev, 0, 256), and check that the guard bytes are
-unchanged, the returned pointer is not dst, and the new region is
-LMB-reserved. Without a test this is easy to break again.
+The comment above the loop still says "re-reading the full range from
+storage", so please update it too.
 
-It may also be worth saying in the commit message that the
-fall-through replaces the caller's record in the table, via
-imagemap_record(). A later imagemap_map_to() to the same dst then
-misses the 'already mapped' shortcut and reads the data again. That is
-harmless, but not obvious from the description.
-
-> +                     lmb_free(addr, ALIGN(r->size, ARCH_DMA_MINALIGN),
-> +                              LMB_NONE);
-
-BTW, this is not from your patch, but it is the same class of bug the
-series is fixing. The old reservation is freed here, but r is only
-updated on success. Both the -ENOMEM and read-failure exits leave
-r->lmb_reserved true and r->ram pointing at memory that is no longer
-reserved. imagemap_cleanup() then frees it a second time, which could
-drop someone else's reservation, and a later imagemap_lookup() can
-return a pointer into unreserved memory. On the in-place read-failure
-path, r also still claims r->size valid bytes, although the partial
-read may have overwritten them. Perhaps those exits should drop the
-entry or re-reserve the old range? After patch 6, the in-place case
-could instead shrink the reservation back to old_size, since those
-bytes are still valid. It could go in this series or the follow-up,
-whichever you prefer.
+For the test, imagemap_test_map_extend() only checks read_count, which
+is 2 whether the code reads the whole range or just the extra bytes.
+The mock already records last_off and last_size. Please can you assert
+that the second read is (64, 192), and add a variant using
+create_mock_loader_bl() with a block size larger than 1? That would
+show the new path is really used and the offsets are right for block
+media.
 
 Regards,
 Simon
