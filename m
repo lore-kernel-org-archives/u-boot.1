@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A21CA5FD4
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 17:22:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA9E0CA5FD4
+	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 17:22:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 54A8F808A8;
-	Thu,  1 Oct 2026 17:22:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2FD9C40CB4;
+	Thu,  1 Oct 2026 17:22:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Oa6r8lTa3I67; Thu,  1 Oct 2026 17:22:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 76D1A8085F
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790875333;
-	b=gnTFzICw7Dj1Ef1Bpi+VE0zUqBdcTL/5ZEmgKUBq+s42vBrbZxihe4CeyzrDs16TfdaL
-	 o6VzYAS8nmVcf27vDvcjMebc7PliTH0nAgtvaaJO6fXsvbziJaBkXk/cNihwVY5Hkwe++
-	 nkoI9UEFJ10ld7+1/Y4Kc8mGCP2SFTMIeZE+HLJ8KjVdTnQXu+V1NW68a+FoXd46BH9DO
-	 G1xThXt31LNs4Vz3VcTT1FFco5hgOQ4DX4MGSBBajlcyoL6Bh3vUX/DzKMmWSPHit+ZrL
-	 SZQFR+L/d6wSpO915QVkmahbOHUKx6qmNadCpfDFa+DHNHuMhSMsBibA0kRK+kHsdXQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7zwigUSSB0LP; Thu,  1 Oct 2026 17:22:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 55078408CB
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790875339;
+	b=tKDH3g20T+3qnVOPz+i5R7zizkYVRQTSrVwGerL7CnvhJz3+OlvhsJWCCVyA9wCeKUOw
+	 vB70o+3eB2TUKaMb8tNf0A97iL15nZbA5tAN9dYm4tqWrr/yePoN8ZzDeGB4m0xlSJOgk
+	 qbt1N8mZ68/TIPP02eRXDDJAqOHuNA4ovXWm6JC9zxBtl7kfx99HD+rDzycJs0q0CxNeN
+	 dVToZoYdnAr5RR+VsK4t9ndd3ZZthSXEvv/tjn9WpY5372rCXJYztaDDfBi+Gexcw+KCB
+	 1Ad0UdyYoxwRrs8+zuYV3HvjBKzc0G2UtOZ8lZeYq6NZmOwjmyeHjewYXFtHOGhz1jw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790875333;
+	c=relaxed/relaxed; t=1790875339;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,145 +31,143 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
-	b=KWZwOpv35XE7J7WpVheR+8ZQ33pP2+XO2Ocw4pWc8scS4T5qWNlOvXbm3BPUW2yhcKPj
-	 iiDWplsfQIsYkLuGjsazFqjHlx+VrUb08RzRNxSvOgXvUvRFTmJCgl2c+982xCR/BNAfX
-	 hFw8g1/H0HYomQA87MVbVUTamuYUv5HzaOnLzYVB15orq+dxfTR6FdjYs5CyE+2ouE9Y5
-	 HoQguHXmnPCGW9qI8AzGAnVzLPClhmbV25TItv/Uw8DbhNBZnItTh/yd1WAVtG4P9xdD/
-	 t1K0LOXgKbIB10OdE9WfVc38Ek9OKdFLvPGoBxBHlcFOaMckcADS2vEGQgX4WR3/BcQ==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; dmarc=pass header.from=chromium.org;
-	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b="A1/tPaPH";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=OsiVcCypBfx9GBwvkkMJRKi7+HOnoi6Ce8eErxF5G8k=;
+	b=SLYL3VIZK3k697ghwQw4ZdpjgfVmvylAuCjSSBTSVx/1OCBYDFOBk1NE8358lYo3HE93
+	 Ft+liSqN5SohpHoFHe1PZPdYM1s8c8KENoUn3zwpF4asZZaE1c4mhJlgFFSjqnIAB1KUu
+	 rGLu5fO+B7M9AJ6zs9ydpwjJ9YU9MafANWGVtqLtVHHCwRWdGG56Ie9tosOaYgiUVBA5E
+	 fuSpVqdC00zXqdRpprDGJasgjz56+MjTE3gO2oFxnZgfnH8wNHOLSocahg/pJ3qe5QhgI
+	 YYPgHSNLBUWASh4jrdAf4qSQj4u40pHfKCXkeNa+Wu3F25mAFhzI0jCCA0KTrt6Rc7A==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790875333;
-	bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
+	d=lists.u-boot-project.org; s=default; t=1790875339;
+	bh=OsiVcCypBfx9GBwvkkMJRKi7+HOnoi6Ce8eErxF5G8k=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MbFdCqWXiQOiRMz1VJ/cQWTtwq3VG8D6RJqxT9UudG8ggNHExHnNfAu0kF9SXIE2l
-	 86HC1icji1LK0FKDBdyiQ0ZHJ/y1rLpgoPvHilgDmtWlo1YfNinMf9U/nq+KknNNPG
-	 2Oc/kV80HCiXr89A+HkML0cYRHZJZL7+D3MMoz8Dpd4j5j7XrnyJazz707LK4GI//7
-	 DwVHN1w49MPsDComFeQVeJO8BKJELO7pK7VoEp8zc4y//NIDXIt2BJbUIxETnsKK1O
-	 fgpwE8Szv1QUcA/K3CuDF3+AX345GWXywusr1EeD6ud2tc84tWjhE4iOhFKKawplj2
-	 4/0iTaUGSjbzw==
+	b=le03aVkNlL6wesFj0cSWzz83v8XzeZ6Amj1ODdoqTjizDWRWsgAyIB6MV6M1DUP3N
+	 otqBEslo7oz35sVVGf/TExOMRocFaAjCNPfDfkzRW5AsjUcUMeVkz6qldK2UHNVvef
+	 QgOgpnYEL3PcBnGw18uG/LmyXNIJD37iUU9vpvu2c8fuGZdCNe6wqa9gb8Y+VQ8wTT
+	 wPc1c5+D8GDMEe6KH32f6P4brJNzefTILpF6fWFIVcmNVB9L0GpTaQYlT6xeZ8E1Vq
+	 GwzASb1/zcH3ZyNBFTpGorherfv0tFmh1exx43LNMWBtxqsI+Eb0Dw+RlcsKpdYV0f
+	 GnJcDQ988Dd4A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 76D1A8085F;
-	Thu,  1 Oct 2026 17:22:13 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 4B4AB1A6
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 55078408CB;
+	Thu,  1 Oct 2026 17:22:19 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7F3DB1A6
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 311128125B
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:11 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7D41B40533
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5okGQ8LKluwB for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 17:22:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org D850581259
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:33::c"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790875330;
- b=bKO4mSaDdYn6w18GW1oEcfvn3oYDkxF4sw5LCak9tJyOzvEfkx8Yyaq+FPQDvu3S/cnX
- P5GLMUIRy43HMLSgl5u+j2i8eiqnDTFhpRXUIPCCkARZA4X8v2Spwdwtgj3EwmgyEFKbB
- JJyzEcIuosvVmnafFh8f41v0VRVDOycgpXAmJ5suwUqhhQQIsnY3FEadsz3maQtcAmQ3U
- 5phjX0KYOT3HQt7OVoR0CcdbnlygKZfbN1JfFDC5gVSFNhJMKx7Lzon5Mql+/YEhE0hiN
- S97stmxVR7Mi5opC3RKHGCIHMUnSHOgLDXpDKvW8rqc9oYzyIFLeT8DHNFUhl7P8QWg==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wI7YxiONsU-d for <u-boot@lists.u-boot-project.org>;
+ Thu,  1 Oct 2026 17:22:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 6072C40098
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:33::10"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790875336;
+ b=YXH/1UDQ8ivGkXq50O3yGxJiIVmjEA2sHdpOMjdkvAu9NXI4di6DVG9GGS3rEy7SENR3
+ F84gsXIo5+7IyWctbEMnldVHOIcdTH1+BJelLqfHUtoJYj7eOiO/c7fSznep4f8CAN9nH
+ NCY1G2VWw3K8T3kz/vQt/gXgpRWX4RMo/mj1mbJ5EgkBYaD5JC0hY+TR5CHs+v1oIABgR
+ q+HbOuNp2L9wgIipTNxPN6UjvrhlJ3RoTOc/u0UKmOrDOq9HO5ZMTyeRKmO0q3JicMH0y
+ glwT3ilgtcnwIYp1bhG/gxy2mvXS1fJxajKHkAQNWQL5CcezOZTKEGTwAd0AnM3NaPw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790875330;
+ c=relaxed/relaxed; t=1790875336;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
  In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
  Content-Type;
- bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
- b=sf8KtEi4+OJO+Gawxkr4DydF5HdG8+Mqw4G6WS2zyCEj0QOzP1CZ7yeng5HqcBEJTpDn
- pEnCS0kUX7GtCKJo9f6ynkgEOFoif8KmKQYSUhGvTxWlivLJLddtPYqE2ZFAcrPISPaPK
- 6/pHHsyVueIRRkGVmfHr4ya9BviL3lq6T1sk87TRiHF+l7hB8wZG6A4n/75s7lSwWHJSU
- R/uxkxRfGjn+uQcItvzc5gEjV54MATsExAzcfA1GPsU+ggeDlJyU52N7OEkTLhq8dBZid
- DNUyddEXMhPXGYbc9whVnXjxMAHcfxv31JRmVQ1qCjigqOBhgNU1ibO47XcQo9CV0Dg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org;
+ bh=OsiVcCypBfx9GBwvkkMJRKi7+HOnoi6Ce8eErxF5G8k=;
+ b=Gw2OoPk4Vu6cdm8QtJGJGGoPBLu6LLepGFFQ4wozLg5k1hX4YfSqND19rt/eFqoUL+1m
+ tipb8Qb0JeZuwt6XucYpmSITI9HQDMc6AdNKgD0M3TIeuna3BnW4oXAOynvHVlGJYiyjj
+ eGoHNjoYohPgvBtzEL2ygkKnxksdqTsC1aICo9HohuYMxEnNvZCqobdn/hCjpHDD9Jh5F
+ up5tYtgkm32E4mxuMKCmXabQ6+l8FqIMwKkWWKgLauEnPF5cdsiw27el9P5x8bqUlLkKq
+ O6UFzZDfJfNM+qBEGewiMvNsqmZOijE9n77/kKWkvObUBc1E/IF2S2fEB+NMLhvZCmw==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
  dmarc=pass header.from=chromium.org; 
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b="A1/tPaPH"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::c"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:33::c;
- helo=mail-ed2-x0c.google.com; envelope-from=sjg@chromium.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+ header.s=google header.b=ERtlpROA; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::10"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:33::10; helo=mail-ed2-x10.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=A1/tPaPH
-Received: from mail-ed2-x0c.google.com (mail-ed2-x0c.google.com
- [IPv6:2a00:1450:4864:33::c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D850581259
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:09 +0000 (UTC)
-Received: by mail-ed2-x0c.google.com with SMTP id
- 4fb4d7f45d1cf-6acae8342d2so543305a12.3
- for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 10:22:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790875326; cv=none;
+ header.s=google header.b=ERtlpROA
+Received: from mail-ed2-x10.google.com (mail-ed2-x10.google.com
+ [IPv6:2a00:1450:4864:33::10])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6072C40098
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 17:22:16 +0000 (UTC)
+Received: by mail-ed2-x10.google.com with SMTP id
+ 4fb4d7f45d1cf-6a6056ac81fso10442882a12.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 10:22:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790875334; cv=none;
  d=google.com; s=arc-20260327;
- b=ZgkKfoTbRB71t/LlBdOJXnk2qNeJI1dE91ot64NoPWgXly0wEVMPK03JGswa6f1f/F
- qzDNyGKoSGfJ2cJ+vovof1WYI+o6Zj6J3F7IcCzGqt+VaalEpzSJL206VH0BPMaNBr9r
- AVSPoCJmm5/OMvFHLfp2zhZSkqmGRdbNPht258css/BR1+ohTBOkd5e8sW8BEjAHCwly
- uih/vHYMF1FapX2UB19lMyhah7AVdZbm2riqu1cbvAT9AHvCiAUak5InZAv2ZqZ8tZyO
- yjXbjLWZjwGEVc7Q/lV6Li5EMMy2e1Wzc1zlDYyNgjLQcDEWdJ6KkzZa1F2g3iRaZG3b
- QV3w==
+ b=pBs9R44/7aryI64V+Y7KBxjGMyrpoJfAQBJMVCf2/UWQP07EIUGrNl4jxETfU7qjyh
+ U2HsLPCnFiutVsV/UqFVh56TtgHb5TZ7AfoaCXksCHhLIxiux0QfgqYrgMxxw9VHQcUi
+ rrAcFct3/Zv1zqymhyf0WqPrgktvH4r41u/CvePevmNaB6lLWHKQ2Ksxs/O6sOdDhmc7
+ J5ilIHcY7HYJljHjD8OWezH/mBf8Im3UhiXmgk2vk2XHATctmxgOVDChGpVcbvU3VEoo
+ y+KKNPAsSeGhrxOCODxjBv51ZVUk8kIjbp9VXyUyLrLbLxJDf82g2vtz58Hv5YFgyWW1
+ 2+Rw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
+ bh=OsiVcCypBfx9GBwvkkMJRKi7+HOnoi6Ce8eErxF5G8k=;
  fh=f+3YHrvj6jGhkBhPyVUqKuV+eWYFrOfCOWHRGid3M5g=;
- b=nmnlfB9dooLHsMZdOOcKUOIV7fh3MSiD6KacLBU7Qu2KmkHxar5UfhCN8wWT7Ro9Fg
- wG3prXtFPQQSc5ldEpX/aiODa8Tk9o05G3/UPf+RtpJ7cJa/ZEe/5AxLXdOuinALSvTF
- ZYtCzDCd68vau5ZAOvvyzKC4s23+ynp3mNtFwJm7sRlZXAf4lf7OMqDNQNbS8QGuysTc
- HtJZ+1ITfhHUoJ4N9VTkm164yGqF0QCupg5G4tPDgmFS3eIa8x/OqofGKYYJ32gZZ61u
- D3O05npehj2i6H3vRxFGZxeongoxkWN94WLfLaaLSlI1kDfKTDZnjVpkfnbav8BwvEf2
- 9Y8A==; darn=lists.u-boot-project.org
+ b=ZYFNy41KzTMyVAs9Cfgkyf6wI8BklsnHzLrxfA/E4egOjkXv5pfhT989rcKadvr2mX
+ cgyEHsXSa2I1ukvWWZZzTnWbvj2zCn4M20LVXv3+wjsLK7K2X4vReX28Aia8dPsTCKJ1
+ 4FAmg1LOd5afgkIS4JGrCC0ZeiM4HIxJVk+e5ETOlCryqxcyAOMnjaf6G0f1zQr8iLaH
+ TyIYm5qrrxP8vIlpsLt/ZrTJ7PpqxOrNrTzjD02rwrrVn8n9wgvq34Z4X4dOkp6iCvMA
+ XgWU//xBmT6sHajRHOZWdZC/F6kF8lH10NEf99pWm0pUeSJ6IoIiZRZ99Ogldmfpjkel
+ yhDw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1790875326; x=1791480126;
+ d=chromium.org; s=google; t=1790875334; x=1791480134;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
- b=A1/tPaPH4dje/pbMLp9rND4tIPams2GLVaHwVivfswwI7jifvKnTxAA11j1pwnzSmt
- HuTJnrpYaUmBYV+n4CxlV38dwo6NtVuRkCxwaJc/RcVB1DE9ITTKZO0jwml7s71m60FP
- lN0r5/pPDPTl8TNVKRzS2Gq0LKT40pkG/aHlw=
+ :content-type; bh=OsiVcCypBfx9GBwvkkMJRKi7+HOnoi6Ce8eErxF5G8k=;
+ b=ERtlpROA0LfMosDuAqc6WVz8WEDFQJo1LE/nBhkzTsrE2GNIQLQKlyRhZiTwGyonMY
+ hIQu2ovaEwAaD2w6Bmq9eDeK0eAj8mnCMAQ5uu0gepfYF85zweeK4oz36i8O0uZGAvB3
+ UROCFhaTAtzhIazQ6WuPEgffRURC/QFY6tYlQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790875326; x=1791480126;
+ d=1e100.net; s=20260707; t=1790875334; x=1791480134;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=DhZAdX9rgY+gN1AypYIV7z9zM2WrZ/lvBXvXn5ar4ak=;
- b=NPAjOIJ5MZbgLtrVG+aBd4GF0Z9PyBIYHiabz/CXEk0duawdrt4vnwSTWpXfq+tdBC
- V9mUq5mJhlzbcsoy8h7Fw+1k2dPPWZl12OD+tzaabkzCAiMod2nifcfdnAoFyOKEsvYy
- Ezj8j6oVin47oimNFyr9gb1GBoc7Wkw2D4waLj10FlDB6eRPR4YGfdTY6vYR1qUERXfn
- nHJUTGTpJRulNu7vgUZ0P9ZNII8YQr6KLE7UtedFWPhx+GGba5FIYB90duLutrmuJyAG
- /m0R09VVz+8Vo6uPmThYVLuw4ljqG3Hwg4MFG7jy3e2/PYkjclHnxe+ai7eo3HxyzzYK
- 8DaA==
-X-Gm-Message-State: AFq9FYJnMOBy0PmG3YDwb83CzRevqxZXZQH083UZny4rl7Zz1jc4ao+1
- zY7u42RFvFv94z5v6wXz4dmjptUoo/ISW02jI1nwPHEgcQ+Iiy8xuS+BEUPpYJKdigdX6M1C6tF
- urA3Trru6VQIFDbu7yUy4J6PbPheAxxd8tokmjhCb
-X-Gm-Gg: AYBFou0Ln20EMgwdBYKVa5ugbIH7P1D0c4IMdfkUX3CBDTEQ7cjLapSHvQNWD5w+YE7
- wA5/jWV5Llo32C25JZ48JT0jLk0GG8baRqwmumhT51CET2J1OIjnrPBqr23mrYm9rnLKwws0cg9
- D9pQOVK3/TJ/ion0WLcC6IJ/66ifwYGUzhZVCIQeXcXkDk9bdaNNti1R5q6kYDNFrFdqJyrFccT
- Xd0LqmZJ3BHz9LsbuiOZE75y1hKVZ+T0UlqKE2JPHdbkWWBFU5HxcP2TfI8XT1T5PWy8rRxqGtK
- 77Fa5nWibs2yX5oyf2+D/J8t4JSoiUK9e0fJ9sI1TY7ixcJj3qYmRFXqLg==
-X-Received: by 2002:a05:6402:1e91:b0:6ac:9a44:d3fc with SMTP id
- 4fb4d7f45d1cf-6ae199623b5mr4168083a12.37.1790875326164; Thu, 01 Oct 2026
- 10:22:06 -0700 (PDT)
+ bh=OsiVcCypBfx9GBwvkkMJRKi7+HOnoi6Ce8eErxF5G8k=;
+ b=ak3yxYgeOXT1RuXn/fbgNiG2gLoZEELKX5sPeUrk/8QwyZMgXaAHHHs1jLb9Wt/HfM
+ BfHRrEZPaDbz1Kvux/vio6aG3Ns0QWo9/rZe1M0/nkvCNnJYconrmVAoKAj5v/Ut1N1k
+ hpL6P5jzijt+2qgmQj7q9VOmM3N23GfQtvHv3ANW6oxeCxxZPUEXo5L39MjUOvq70n8c
+ +kuPrfKmXIHSvjag0U+A74MClAbVOPSU3wXlFZdY5dAwoWC1P9DBriPEvNWA43sN3hMS
+ A1TNUCBC1DlH+9E//pYmqP0fe9C9wT5+hgPl2fzeLWo03b+K+Z+PUAd5UGcvUOzhmmEw
+ 9o6g==
+X-Gm-Message-State: AFq9FYKfL2X4Cj6TGMpMDK5d0iBw0jFRs1QIX73Z+p7eMEIQ0ANJOUsw
+ OXR2vpQr/TX+TlX+MdzIdiiKjCEEMhJujnS4WzJHJD/2zF6C6KZ0boDROrn4HH4Wr5IC0/6gBS0
+ zhtEy0zkkBwTLFI8g/jCGQplqe+XdSKNpTyDN0vsq
+X-Gm-Gg: AYBFou0mvb9LVvUAz6nK+auhXnrzP8r+OFZv0M/wWpPz0HegfVz1sBvTDoC1VgTuBCg
+ xtaHLT7+KUqRlT1CPNRNvhLYQwsZm4Cj48+u8FK0jcauqua7M8umM5CH/9Oj30MPh+SZIcfCOvv
+ o31ADBsR+fMvx7CnfPCi5ACfmRlZmGQd/I0yu593cRLoMiGJDzCdMAJ/pZ3PopBHESh/rnPdm+f
+ keydZjn29d1S+PyH4WoImNI5VTcqPvy0iiOVtc92zv+bAKrENwcfzmiS8+HKZTbJAh1HNMJWJr1
+ kXtmMQKoiNR0jL5Etm3yy5BBtSEA2kP6t8N6ZotMDnGlwTKOuRf1FP54gA==
+X-Received: by 2002:a05:6402:21ca:b0:6af:82b2:902 with SMTP id
+ 4fb4d7f45d1cf-6af82b20bc9mr1521873a12.31.1790875334140; Thu, 01 Oct 2026
+ 10:22:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260918172127.66014-1-ayoub.zaki@embetrix.com>
- <20260918172127.66014-2-ayoub.zaki@embetrix.com>
-In-Reply-To: <20260918172127.66014-2-ayoub.zaki@embetrix.com>
+ <20260918172127.66014-4-ayoub.zaki@embetrix.com>
+In-Reply-To: <20260918172127.66014-4-ayoub.zaki@embetrix.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 Oct 2026 18:21:53 +0100
-X-Gm-Features: AclHuK_b72Y3jL9tOiw-GDKDwyztC57jlKQM2eEFUNncTa7iUR9hKXdu_Zpt4e8
-Message-ID: <CAFLszTiyKg9nC_MyOBYSLt8csu8ZxBxyJ=gekfthYGuXAz9kpg@mail.gmail.com>
-Subject: Re: [PATCH 1/4] crypto: add SHAKE128 and SHAKE256 support
+Date: Thu, 1 Oct 2026 18:21:58 +0100
+X-Gm-Features: AclHuK8v-k9GutdrVUJPsHH10c_kII6NzX_SvpAP1iJfJABv7AMqe4ujVark2FE
+Message-ID: <CAFLszTiR-WMjsD2bRx15Pt9J7k9EnOEPY1ojCCHRrptQ-anP7A@mail.gmail.com>
+Subject: Re: [PATCH 3/4] test: add ML-DSA verification tests
 To: ayoub.zaki@embetrix.com
 Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com, 
  mkorpershoek@kernel.org, sjg@chromium.org, ilias.apalodimas@linaro.org, 
@@ -192,85 +190,71 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Hi Ayoub,
 
 On 2026-09-18T17:21:23, Ayoub Zaki <ayoub.zaki@embetrix.com> wrote:
-> crypto: add SHAKE128 and SHAKE256 support
+> test: add ML-DSA verification tests
 >
-> Add generic incremental and one-shot SHAKE interfaces backed by
-> Keccak-f[1600].
+> Adapt the Linux KUnit coverage introduced by commit
+> ed894faccb8de55cd755e093c4b0971f190d384d to the U-Boot unit-test
+> framework. Import its fixed vectors for ML-DSA-44, ML-DSA-65 and
+> ML-DSA-87.
 
-This patch also adds the fixed-output SHA3-224/256/384/512 digests
-(sha3_224() etc. and the sha3_ctx API), but the commit message does
-not mention them. Nothing in the series uses them, they are not wired
-into the hash framework and patch 3 only tests SHAKE. Please can you
-either drop them or mention them here and add known-answer tests? If
-they stay, the Kconfig symbol should probably be SHA3 rather than
-SHAKE, since it builds both.
+Please can you use the usual form, i.e. commit ed894faccb8d
+('subject'), so that people can see what the commit is without looking
+it up? The same applies to patch 2.
 
 >
-> Adapt the implementation from the Linux SHA-3 library introduced by
-> commit 0593447248044ab609b43b947d0e198c887ac281. Retain its
-> provenance and licensing.
-
-This patch cites three different Linux commits: 0593447248044 in the
-commit message, f1799d17285c in include/crypto/sha3.h and 0354d3c1f1b8
-in lib/crypto/sha3.c. Since you plan to track upstream fixes, please
-say clearly which tree/tag each file was synced from, ideally the same
-one for both files.
-
+> Use deterministic mutation positions for reproducible U-Boot tests.
+> Test valid signatures for every parameter set. Test signature and
+> public-key length errors plus a changed message length. Test malformed
+> encodings and every valid UseHint input.
+>
+> Add an invalid-algorithm test beyond the Linux coverage. Test SHAKE128
+> and SHAKE256 against FIPS 202 known answers.
 >
 > Signed-off-by: Ayoub Zaki <ayoub.zaki@embetrix.com>
 >
-> include/crypto/sha3.h | 353 ++++++++++++++++++++++++++++++++++++++++++++++
->  lib/crypto/sha3.c     | 382 ++++++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 735 insertions(+)
+> test/Kconfig              |    9 +
+>  test/lib/Makefile         |    1 +
+>  test/lib/mldsa-testvecs.h | 1896 +++++++++++++++++++++++++++++++++++++++++++++
+>  test/lib/mldsa.c          |  383 +++++++++
+>  4 files changed, 2289 insertions(+)
 
-> diff --git a/lib/crypto/sha3.c b/lib/crypto/sha3.c
-> @@ -0,0 +1,382 @@
-> +void __sha3_update(struct __sha3_ctx *ctx, const u8 *in, size_t in_len)
+> diff --git a/test/Kconfig b/test/Kconfig
+> @@ -75,6 +75,15 @@ config UT_LIB_RSA
+> +config UT_LIB_MLDSA
+> +     bool "Unit tests for ML-DSA verification"
+> +     default y
+> +     select MLDSA_VERIFY
+
+With 'default y' and 'select', any board with UNIT_TEST now builds the
+ML-DSA verifier, SHAKE and about 9KB of test vectors. That includes
+QEMU boards (qemu_arm64, qemu-riscv64, malta, etc.), not just sandbox.
+Enabling unit tests should not silently turn on a crypto feature.
+Please can you use 'depends on MLDSA_VERIFY' instead, as UT_LIB_RSA
+does, and enable MLDSA_VERIFY for sandbox (e.g. imply it from SANDBOX
+or add it to sandbox_defconfig)? Then the test runs wherever the
+feature is actually used.
+
+BTW the tests all pass on sandbox. lib_mldsa_use_hint takes about
+150ms on my machine there, which is fine, though it will be much
+slower under QEMU emulation.
+
+> diff --git a/test/lib/mldsa.c b/test/lib/mldsa.c
+> @@ -0,0 +1,383 @@
+> +static int lib_shake(struct unit_test_state *uts)
 > +{
-> +     const size_t block_size = ctx->block_size;
-> +     size_t absorb_offset = ctx->absorb_offset;
-> +
-> +     /* Warn if squeezing has already begun. */
-> +     if (absorb_offset >= block_size)
-> +             return;
+> +     static const u8 shake128_empty[32] = {
 
-The comment says 'warn', but the code silently drops the input. Linux
-uses WARN_ON_ONCE() here. For a hash this is a nasty failure mode: a
-caller that misuses the API gets a digest that does not cover all its
-data, with no sign of a problem. U-Boot has WARN_ON_ONCE() in
-linux/bug.h, so you could keep that, or at least somehow return an
-error.
+SHAKE comes in patch 1 and is meant to be generic, so its test belongs
+with it, in patch 1 or a separate patch straight after it. Please put
+it in its own file (e.g. test/lib/sha3.c) controlled by CONFIG_SHAKE
+or its own option. At present it is only built when the ML-DSA test is
+enabled.
 
-> diff --git a/lib/crypto/sha3.c b/lib/crypto/sha3.c
-> @@ -0,0 +1,382 @@
-> +static inline u64 sha3_rol64(u64 value, unsigned int shift)
-> +{
-> +     return (value << shift) | (value >> (64 - shift));
-> +}
-> +
-> +#define rol64(value, shift) sha3_rol64((value), (shift))
-
-U-Boot's linux/bitops.h lacks rol64(), so I see why this is here. I
-suggest adding rol64() and ror64() to include/linux/bitops.h, matching
-Linux, so this file stays closer to upstream and other code can use
-them.
-
-> diff --git a/lib/crypto/sha3.c b/lib/crypto/sha3.c
-> @@ -0,0 +1,382 @@
-> +#ifndef sha3_224_arch
-> +static inline bool sha3_224_arch(const u8 *in, size_t in_len,
-> +                              u8 out[SHA3_224_DIGEST_SIZE])
-> +{
-> +     return false;
-> +}
-> +#endif
-
-Nothing in U-Boot defines sha3_*_arch, so these four stubs are dead
-code, as are the __maybe_unused and the
-sha3_keccakf/sha3_absorb_blocks #define indirection. You could keep
-them to make Linux syncs easier, but then please say so in the commit
-message (or the doc in patch 4) so that later readers don't tidy them
-away. Otherwise I'd drop them.
+The coverage is also thin. Only the empty message is tested, so the
+absorb path never processes a full block (168 bytes for SHAKE128, 136
+for SHAKE256) and shake_update() never handles partial blocks. Linux
+has lib/crypto/tests/sha3_kunit.c with vectors you could port,
+including multi-block and incremental cases. Please can you add those?
 
 Regards,
 Simon
