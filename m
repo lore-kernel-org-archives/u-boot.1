@@ -4,139 +4,181 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E13CA5FD9
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 15:48:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC268CA5FD2
+	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 16:00:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0CDEB60660;
-	Thu,  1 Oct 2026 15:48:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 71B3060B18;
+	Thu,  1 Oct 2026 16:00:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LxVzIaDQf2ub; Thu,  1 Oct 2026 15:48:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E5E63607E7
+ id ZKABMI2_XkzN; Thu,  1 Oct 2026 16:00:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A64C860828
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790869706;
-	b=UJwYsdflM5mOtvJeX4XbSUVdagnweHwO+cBnc8Zm9MH9tgFlSkKedszd3SFKNgCgPP2q
-	 I3zVrIF3NLqMX71Ks1IYbB1zX2kwBJWyVrp8NnjkX4A2QkBEorPHx0ED9sOAJDAAZ8u3s
-	 5naPy1qv3n3h9MVVwidOjnSyRkARd6ZhuJ98+cS/rGy3D4rZIkDhfQd2Wp/ikD+7OPVHi
-	 o9iof+D3Co5o4Ft6gVQM8u/rLyzrZRh84+cXVFM5hr+nq/8Eai9enNW0vypGdY2BGRUFC
-	 c6bc1BkUs9mkvPYZFXwTR0KQDfbHYMvD0UpdAgTGD+E6KVcjeZFExgD2+UW8sJxcL/w==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790869706;
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790870400;
+	b=cYQgY1i4K7l+2djRSVABV2T9pLpdr6ABoSCUxrDdth5iyBZLYeXgmmX2/Ws3/T/YqSjs
+	 YMhdaP1vz0wW9Eji5l+d7yyn8NwdfaOwFguBheiydtjB9uTpnZOLuEi9vxBQJjRWwF9RP
+	 nPgfTPf2260aB0IsivXbSjCZFfiI5PQWz7s9Pu9hoNKwGwFoAcnNNDRfFboRXrxBHP6fK
+	 ETTGmlF/5akVpw6w4GWgSToPOQ6xSOoc105XxCMySLXQE9jM0UG1REMpVlnDEARZxCUPc
+	 q13WH+ld6iyvv1M3XF3cs2YdxQ+5ESEneOERiGIenmi3n9l/PzmKpaZFc4ktW1W96AA==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790870400;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:From:To:Cc:References:Content-Language:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=QpS3zVsII9GAyr5VscnnVU71zcht9ZJM7LwUT3EoFfs=;
-	b=lxzaLilt8VmIrZ62g7eMpeMNAe2xCwqgnPedVIwzkCEIMNtrylro485+lvMq4Flgy7Z/
-	 3r2kZHPQ7De9T1kZ1zqe1DAvS0J4eZUgbFs2gvUAHwfs/udhgh2RtyeQnLhV13FlNELeX
-	 CLXYH8B8yG7qbutk9kcl7gEQnJav1pAw4lvDob1mtT+bg7W2ewwZ+fJ47HIGtMYjG65tP
-	 N9+gloqjJO0DLX31GfKtOTxx2tTQSIsMqJjdDSoJMods/3at0VSM+2OMq5E9ULvrc1Auc
-	 R+SyOCr2skjt4gh7Uqtami67ELOL0u2UbKHuX6e7LLAaL+DhHUrgp89XJvogj9LQT5A==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=Z9AYOyEwgYqmiwpExLKhnrEOifpoHcPqaS2iXhqVN98=;
+	b=nJdSy9lZLwSygMhGBLgZlOc4k0gOZ1ZkdNjz5wWfc2XTN0fRn3EuBSiEDcJfkJNG8J7e
+	 CS15cSjVY5YqfA84LiSDYuVObUka9bvRabzG6os6j84C05tXQ03FlKZdCRdy1OIv1cSQE
+	 mpXExWxGpesyPP5oyG8qVnj+8ruX+u9F/5FzMk409bz06OkaPzL+TiEr6AGIf3E5cP+GF
+	 +itYCbHRcgvLc1VYSn9gTR+Oxro+Ts8IHs9a+Cc5pl3esO76LBcQaIIe7j0rXIU7GP5fl
+	 PCloPIJYNm6vWLLPaDaOUla0LtU3pM/VBPPmpw6VanyTNCyvd9S38qAJTAsGa8oGdlg==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790869706;
-	bh=QpS3zVsII9GAyr5VscnnVU71zcht9ZJM7LwUT3EoFfs=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790870400;
+	bh=Z9AYOyEwgYqmiwpExLKhnrEOifpoHcPqaS2iXhqVN98=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=QauZ5YjCDZBPsY7LCyD2R/EZn3RaYBI+ptfPCc4NGkt8/OK3Z/Q96VOV2abDljTG1
-	 O0TESp1csEsGGiU+ccBekGZHOvYJ45dqoxNKt42zw3Vp9X3R08UTY2fQnfp5x0Fd2U
-	 2kXze/OoEN0dXKdiNiMJ3ERR3eCGY5ATjxdmd7acL/243Ub4mqFl4IvD8HH3qifSMt
-	 UFiPp9s59oEVV5A8kMGRHdvCQbbn3hYCbC7XrRgEYiNKOPdn0pl9MJn/2mvFpa/KuZ
-	 2N7W8EF0qJLiULe/fRUSk8Tbg8xsYwwAzcQpBG+0/V+DsPsuHc7eSv9GJk9mQ+QGEr
-	 NbMHNm67UFO0w==
+	b=YUgb19JEk3bRzTzRxkbpP+k6WI86RDFa5i75S0SNiUlw9J3MW5CNM5hK8jVbnzEkZ
+	 qlyF5ngmB8YDPiJgcEfEnDCUn7FvyP3fqwJaAXVDBYTXVAVjoGedosLmDqJL99RjbZ
+	 XDZF5CKtWpXWRPI7MhIv6vv0TEQaaklzpVCW69rT+eA8H+hh5Ssveqrezrkbnic/jb
+	 BctLfqTVYa9kAmS2fW0Do5MlbOwcbyc4KAD+mNiDEAbtUMIu08h/s7BnZJa9YAxEh9
+	 3ZtE8Ft66PFOrcnRKBQKNPJpas0wfJQtX6p2M4NHo6+idgU5yG54bUJvwq6DqDaBX5
+	 eX23hHkVb4hpw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E5E63607E7;
-	Thu,  1 Oct 2026 15:48:25 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 8ACC91A6
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:48:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A64C860828;
+	Thu,  1 Oct 2026 16:00:00 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id DF80032F
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:59:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4C27440528
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:48:24 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C4FE440CBE
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:59:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VpwE1UosgjU0 for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 15:48:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 2412A40098
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2001:1600:19:8e30::8fa9"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790869702;
- b=UXkZw2ph5phlsItA1Jf77UlVnm69vV9wmT7PSk7/iG9lVcskjmFg2cnptMlfpkxbhbIc
- c0+oSskehfOWBYc0EUGsgpZ4CcYINqyrNCE7cL36EO3TCaWtjJW7RFEyYoubkBG5lzjYT
- 5xDlu9fXNdCNfTaYgul+TR3l/MHsUxu9nOvAFOnSxZAvN7LWbVH4KWfvzx4YV/mW9csB5
- aK9Qz6iFOSO9I/RytMNPq2xeIdsR2u4k4TTbmISuCkPxyXullikpKCj6a8vSxWPVE1Y0/
- hcVUKNqAcherilhvxxUE2vQ4rJw5mfTBRijDr79IdB6iJh+fTvCbq2keQq72du5Dqzw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790869702;
- h=Received-SPF:Received:DKIM-Signature:Received:Message-ID:Date:
- MIME-Version:User-Agent:Subject:From:To:Cc:References:
- Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- X-Infomaniak-Routing;
- bh=QpS3zVsII9GAyr5VscnnVU71zcht9ZJM7LwUT3EoFfs=;
- b=GcCVRXaHlilag8ZoAsvd0XOkZYQxcY351+g24uhi0zsS+oOq3yQUv12XfQIsbDyr2rJ+
- HTq4o+i44cbjkcREKHfkwAoU4JxKGBFD5p3LOgx+koYiEr+VBm3bNl9i97V/qs7ySps+0
- DwJQ2G2lBp3+xmg9JKlqzvGo70Jb9Poki652thH9YzJGt4ExlyjYQlnUXYMzPY3i0OLfe
- 9ih0+WnWuzNWi6ltOxJuQHS8HFRJnQoNCTQUKsdCFsqiXrcI/oqsrjer8lDUWfCHMvgye
- RcnC6sIPfYmfYxOmekV/y9BLWMouaQgJcPo8N9kgJ1E+eChd9d4ijYrGXiHsWTH1ZRA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=0leil.net; 
- dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=iDAuhMOG; 
- arc=none smtp.remote-ip="2001:1600:19:8e30::8fa9"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:1600:19:8e30::8fa9; helo=smtp-8fa9.mail.infomaniak.ch;
- envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=iDAuhMOG
-Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
- [IPv6:2001:1600:19:8e30::8fa9])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2412A40098
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:48:20 +0000 (UTC)
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hwbsq0DFqzVTZ;
- Thu,  1 Oct 2026 17:48:15 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1790869694;
- bh=QpS3zVsII9GAyr5VscnnVU71zcht9ZJM7LwUT3EoFfs=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=iDAuhMOGMkvOnjfM22KRFnslrz5EPErGOuiuUez65KqlZVmaQYc1e50r8RJwJm6j4
- 6FfQkjAinzLbdTegDiU3h8upGQ7RidoC+kBbTJC705XPHgjFk7meLufkPifzHor+fo
- NxhTJrgYEp8jWt92WpvUudGGpG6Vh0HCRUuD0hT8QwPUe0gwt28CRoLc07MTAZ1Hws
- QwCHsX0uwn+iEH9LOV+TTrA4h+JaPa74rT84wxoG78wtYCICzE8gffM04L57c5mVc9
- cbGVH/HdWkoSGZQ+n88otLTUjYF+WNZd8k51o+bnJJc/EQAGYGk2EfQ0CUnCuuCJkX
- 2/WSNR1kJkgLg==
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4hwbsp1wbYzDqK; Thu,  1 Oct 2026 17:48:14 +0200 (CEST)
-Message-ID: <52e81472-3fc2-43b5-bc4e-076d9484eb0a@0leil.net>
-Date: Thu, 1 Oct 2026 17:48:13 +0200
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sNF2ad5qi0lH for <u-boot@lists.u-boot-project.org>;
+ Thu,  1 Oct 2026 15:59:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A044540CB0
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:33::f"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790870398;
+ b=GnjyX5BbHDEmgDmzFYKhSCTf3FiNLUYPF6a4NnzA6qtp/ygjsevT/wP9knqGHntvlVmY
+ sgK1wdr/DOg/VwqQl5SAPCnmeuv8G2k8IJmuX/wu+mmgbSc+AmjtzaxNtoJcpyDVj7cqU
+ E3FX0cfmpvkSrSDOT+jDLhAl9IZIrF73kyYBt1gfzxsTrwR0svoz/YOneF4qu435JyX4E
+ I6AzGHyeHWrP/Udk+hLsvuCaGdR5xZ3nzxCOT6m3QNcRHVZHFxxmUQOXMd490cR3IfQ01
+ DRGpQvvB21TTGTQuD5ARaapk/hrcSpT20+p+BvAuXjlWGTevN4MDqrUoMYPoMYbijbw==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790870398;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+ Message-ID:Subject:To:Cc:Content-Type;
+ bh=Z9AYOyEwgYqmiwpExLKhnrEOifpoHcPqaS2iXhqVN98=;
+ b=HlQvODjJo7GjhHDwNr98ndc+6sy4hQEDfADQ1Hl+1n5tu7vC1m12zJWAFOR18958JCTq
+ fSTmpYBmwElZfAhO1rIM/ss0dDqHY0AgjXRajIRo7vTHGEtekZWS0Mu1Mx153+Z4wUuF4
+ yt1rVu6lh6RUpSv29jTxqfLOS5f1I0zjRhFdw464Glm4GkY/LUDACxyOqMYQF0rnzUjWn
+ wpUpBn1javSr7UCOg8qMOxqsUQolAMkWtjCOzhyO/kgQK9NcbiDby2dZKhDBAkC2Parkr
+ Kq+dHi1HztBLu68TjuykcZy52Wqx9N+q2hyNoNmxyvmX6othvMy4Adm/BaYXaq2ARjQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ dmarc=pass header.from=chromium.org; 
+ dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=cQn9HMZj; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::f"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:33::f;
+ helo=mail-ed2-x0f.google.com; envelope-from=sjg@chromium.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=cQn9HMZj
+Received: from mail-ed2-x0f.google.com (mail-ed2-x0f.google.com
+ [IPv6:2a00:1450:4864:33::f])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A044540CB0
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:59:56 +0000 (UTC)
+Received: by mail-ed2-x0f.google.com with SMTP id
+ 4fb4d7f45d1cf-6aaf10bf094so9765299a12.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 08:59:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790870395; cv=none;
+ d=google.com; s=arc-20260327;
+ b=hQGwI9J+bkq+ett1V7VZRR5zpIG0vEjXl/QwuQMFBzWr/yuSDOMQUmwUxKfIQh5e6+
+ fmxLL7hvsv6Dkw7LlIn9Q0BlxuVLRBfhKOJwh1qF0FgcVBtnOFUkhGKDC23XD9l2eX9L
+ Kef9vqOgdR0TLsERIzDlxt+XbbIAdO8uKUFqw8mmn3kuJ2MclgE8KcHaKCvzJTrX6iJ/
+ x1p9GPWoP1AvIK+aZLpYSkSfYxbGShAQ9krimiJ5kVA2rymJmsMm6oLv0/jUQpWgiSGW
+ MJwsOETKQS0TMzqji/f2K+udYAdV+NUmMl6cezRWBdzB0JbDkVByWk7pYRkl58HMQqI7
+ 0+vw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Z9AYOyEwgYqmiwpExLKhnrEOifpoHcPqaS2iXhqVN98=;
+ fh=9cm6Iccx0xZRJVFqEoZOk9A1y5F4RO/H5MXuti4jeLI=;
+ b=DwzdCav3AhRQS5xiYxrLU0r3i0lCCRXXk6FvlyrjNleAwkshAn1vfJ3zTvRiqH3sT0
+ yLcbJu8P3NRCetL1RsByI0ehbDTLnaXPKU0roZe0oumyMYWNLdu8pDueasLotMbwovyQ
+ SNI2A03s1ZC7DCbf1JmY9Tt0u2bsPvoa7Axxo9TSCqysKfgmY9QqgbIvS9a2U+/CdPxv
+ b2TDy7HNM7oW8hKy7Pq3V0jMVaCwVcd+g2lxeeHQLGrpdrx/MhFw5h1jBzhAuVIt6dd5
+ VS2q0bGOt/+Jcf/EnSod5zAY0I7/Aazk1n6PD9PRVe1kVtLxKBKEjpDemZzrhMsBJTID
+ 2+1Q==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1790870395; x=1791475195;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=Z9AYOyEwgYqmiwpExLKhnrEOifpoHcPqaS2iXhqVN98=;
+ b=cQn9HMZjjdWVGl11v0Qy6YZAxfI3V24csCJUg7SzcgDWssR6xgbIaFRNzAqaMkMkEp
+ cmi2va7nuYgsyt+KrlMkgCEcWVhZfXxZ8thK5fX6saG858oimm1c32iy6LI1GZV9Ku76
+ 7IpjaH7MY81s5ZZGqsA9I3F3V++a6e1vb1Gg0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790870395; x=1791475195;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Z9AYOyEwgYqmiwpExLKhnrEOifpoHcPqaS2iXhqVN98=;
+ b=fRRy+LKnFcaNbVL00qn93uytS3uj6948A5dhVnjk5hK7itRmhLoL4dC/LIkxBQi+mX
+ HyPVJ3BcrXQgTvdkmEI21hkG4xpd7QnDrE8mtBXnkVGrIIncqav72ochNSyFvuK9dXvj
+ mtabqCct/rAgNoHHhjMK5p4ycw6X3Ly5mwTbbpKBoMSgscQ8WVZH9molC/6SNjwDr/zB
+ dZor/d2VJMKnpQaIurD86/RqybDAhJh5WNFjL6u+sUEdWdHbE9GaEcF2LCUmEpXF3h40
+ qnbXAW5ha9BqQemEMqjXfVbnJXxt3utRkoZsi8PVprzbCGDACb9PzB+OKTbxm2EFtWYv
+ KJsA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzY6fjrmSCdRYzXxd+7VH7cAAIfqaKdW1Y1fwNL0WtrU+0CIGuh9vHzlVGqrcOoMBG8vgV0WHE=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJbqPm3atFL5XyBlB0BwmgSXTnMPxT4e5qY9vBBaDue7etFzVnn
+ Pqcn8J6C4L2FVFgYXOg6l2kARjo5L0poRSmVzTkfH5vx0lZ8QNGzl6+/b0gM2v8URRyEREJ3CIU
+ cMNLDC2szHoH5CQwvlQvPV7++9edbMV5msnW74ltv
+X-Gm-Gg: AYBFou0pctQDGlvLGrCR7V24scirLBzUckAfdylfdMkjwAMkANABAoiNws2Io2oUrJJ
+ gy4iFnEm6AWF8QCzbYQX6AfrI3x6OgsHiZBXKA/JMQJDDjXXM4n/GDqGWCcoU0TYTVhVVLxdYPd
+ ccU25Qw3siT7rqzfv0FcU5klcbveBQ6MAx/UpGYlLjFm3P+WPYlBh5ZY5pnU9ooOflhFygfhqbm
+ +PXiGHaSIothJPTtxcZcYIyvhNjKi0/z434BdDvUh8nnfTAVZoVs9A2WJ9LO2yfSZ1KMsbgPVPb
+ aXtnZjy7Lcx5+O0WLeeyP4Yx5DWYjZIepK8Z+g3jhqPLSosBhWWbzkGy
+X-Received: by 2002:a05:6402:2082:20b0:6ae:1a0a:ae9b with SMTP id
+ 4fb4d7f45d1cf-6ae1a0ab0e4mr3271545a12.25.1790870395007; Thu, 01 Oct 2026
+ 08:59:55 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Disable SMBIOS table creation for Odroid M2
-From: Quentin Schulz <u-boot@0leil.net>
-To: Milivoje Legenovic <m.legenovic@gmail.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.u-boot-project.org, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
-References: <20260926005853.1727-1-m.legenovic@gmail.com>
- <CAFLszTh=X272wjo4_7B54hYMz4gRZ78KhUuDCKBPzOR8L4RA3g@mail.gmail.com>
- <CAGuQyfUdhhFuW-DCgw8C5hA8mkgP9DGyUW6XnLdMZ0q+Ui0QzA@mail.gmail.com>
- <49c6cdf8-4074-4325-9744-9fcfdce0317b@0leil.net>
-Content-Language: en-US
-In-Reply-To: <49c6cdf8-4074-4325-9744-9fcfdce0317b@0leil.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Infomaniak-Routing: alpha
+References: <cover.1790626459.git.daniel@makrotopia.org>
+ <891afb4991f1e6825b5715fc918e9a9eda210bd6.1790626459.git.daniel@makrotopia.org>
+In-Reply-To: <891afb4991f1e6825b5715fc918e9a9eda210bd6.1790626459.git.daniel@makrotopia.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 1 Oct 2026 16:59:39 +0100
+X-Gm-Features: AclHuK_eQ09OJp1PFwWn2b7yDH5Mcrfx0TQbo1-By7IG29llGVwDTjP584QfRU4
+Message-ID: <CAFLszTgKXnNihqhE5hHv0FU6ZwTzX8y-65i-KjaLF3y_Y+fuzA@mail.gmail.com>
+Subject: Re: [PATCH 01/11] mtd: bind the block device without leaking on
+ failure
+To: daniel@makrotopia.org
+Cc: Tom Rini <trini@konsulko.com>, Kyungmin Park <kmpark@infradead.org>, 
+ Heiko Schocher <hs@nabladev.com>, Simon Glass <sjg@chromium.org>, 
+ Aristo Chen <aristo.chen@canonical.com>, Anton Ivanov <anton@binarly.io>, 
+ Weijie Gao <weijie.gao@mediatek.com>, u-boot@lists.u-boot-project.org, 
+ openwrt-devel@lists.openwrt.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -150,117 +192,58 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Sorry, forgot to add something.
+Hi Daniel,
 
-On 10/1/26 5:35 PM, Quentin Schulz wrote:
-> Hi Milivoje,
-> 
-> On 10/1/26 12:28 AM, Milivoje Legenovic wrote:
->> [You don't often get email from m.legenovic@gmail.com. Learn why this 
->> is important at https://aka.ms/LearnAboutSenderIdentification ]
->>
->> Hello everyone,
->>
->> Here are the details of my analysis:
->> The commit that introduced the change in behavior in version 2026.01
->> is this one:
->>
->> commit 209bbc4e0032228c6ea17e2172a8a6b89756c4f5
->> Author: Adriana Nicolae <adriana@arista.com>
->> Date:   Thu Nov 27 08:28:34 2025 -0800
->>
->>      boot/bootfdt: Add smbios3-entrypoint to FDT for non-EFI boots
->>
->>      The Linux kernel can discover SMBIOS tables through two primary 
->> methods:
->>      1. Via EFI tables, when using EFI boot;
->>      2. Via the 'smbios3-entrypoint' property in the /chosen node of the
->>      device tree.
->> ...
->>
->> I found this out by comparing the device tree from a working version,
->> decompiled using
->>
->> sudo dtc -I fs -O dts /sys/firmware/devicetree/base -o live_tree.dts
->>
->> and difference was in /chosen node:
->>
->> chosen {
->>          u-boot,version =
->> "2026.01_armbian-2026.01-S127a-P7283-Hee1c-V2928-B3a7f-R448a";
->>          linux,initrd-end = <0x00 0xecbffca5>;
->>          bootargs = ...
->>          smbios3-entrypoint = <0x00 0xedf47000>;
->>          kaslr-seed = <0x00 0x00>;
->>          linux,initrd-start = <0x00 0xeb519000>;
->>          stdout-path = "serial2:1500000n8";
->> };
->>
->> In 2026.01 version smbios3-entrypoint was there, in 2025.10 not. I
->> searched for this term in git history and found the commit mentioned
->> above.
->> With git show I saw what activates this, and made a patch in armbian
->> build system to disable it and confirm it fixes the problem. And it
->> fixed it.
->>
-> 
+On 2026-09-29T00:04:16, Daniel Golle <daniel@makrotopia.org> wrote:
+> mtd: bind the block device without leaking on failure
+>
+> add_mtd_device() allocates a slot to hold the mtd_info pointer that
+> mtd_bind() keeps, but drops the return value. mtd_bind() only logs and
+> returns on failure, so the slot leaks. A failed kmalloc() is ignored
+> too, leaving the master without a block device and no hint why its
+> partitions are unreachable.
+>
+> Move the bind into a helper that frees the slot when mtd_bind() fails
+> and warns with the errno in both cases.
+>
+> Fixes: e8a7453824b7 ("mtd: bind an mtd_blk device for non-NAND MTD masters")
+> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+>
+> drivers/mtd/mtdcore.c | 37 ++++++++++++++++++++++++++-----------
+>  1 file changed, 26 insertions(+), 11 deletions(-)
 
-Can you run a bisect between 2025.10 and 2026.01 without a change to the 
-defconfig? I'm pretty sure this commit is not the issue (you can revert 
-it and keep CONFIG_GENERATE_SMBIOS_TABLE enabled and you'll likely see 
-behavior hasn't changed, meaning the breaking change is coming from 
-another commit). After a glance at the log between 2025.10 and 2026.01, 
-I don't see anything obviously related to smbios that changed (aside 
-from the commit you mentioned and 2d226a735e0e ("smbios: Fix warning 
-when building with clang") but that isn't a clear candidate for a 
-breakage of this kind).
+> diff --git a/drivers/mtd/mtdcore.c b/drivers/mtd/mtdcore.c
+> @@ -396,6 +396,31 @@ static struct device_type mtd_devtype = {
+> +     /*
+> +      * mtd_bind() keeps the passed pointer, so it needs storage that lives
+> +      * as long as the block device; an MTD master is never removed.
+> +      */
 
-> As far as my understanding goes, there's actually nothing consuming this 
-> DT property right now. There is a patch on the Linux kernel mailing 
-> list, c.f. https://lore.kernel.org/lkml/20251031115917.713105-2- 
-> adriana@arista.com/ but it's not merged. I doubt Armbian would backport 
-> this but maybe they did?
-> So I don't think the *presence* of this property changes anything, but 
-> there could be side-effects (e.g. actually having the SMBIOS3 table 
-> somewhere it isn't expected, potentially corrupting e.g. the kernel). 
-> I'm a bit skeptical though as the commit you point to only adds a 
-> property, it doesn't seem to be doing anything else.
-> 
->> Here is also where kernel hangs for 60 seconds (always at the same 
->> place):
->>
->> [   14.482048] calling  gpio_led_driver_init+0x0/0x38 @ 1
->> [   78.137967] Freeing initrd memory: 23448K
->> [   78.165027] probe of leds returned 0 after 63677665 usecs
->> [   78.166792] initcall gpio_led_driver_init+0x0/0x38 returned 0 after
->> 63684076 usecs
->>
-> 
-> So the probe of the drivers/leds/leds-gpio.c driver took 60+seconds, 
-> that seems quite improbable (well, it technically could be anything on 
-> the path for this driver to probe, c.f. really_probe() in drivers/base/ 
-> dd.c.
-> 
-> Can you disable that driver (CONFIG_LEDS_GPIO) and see if it goes 
-> further? Being curious :) (I see Armbian did some - clearly downstream - 
-> changes to this driver, so being curious :) ).
-> 
-> Can you provide us with a link (with commit hash) to the exact sources 
-> of U-Boot and Linux kernel that Armbian builds for your board?
-> 
-> Can you provide us with the full bootlog (including U-Boot up until the 
-> Linux kernel's hung)?
-> 
->> As you can see, I was only able to find the cause, but that’s the
->> extent of my expertise.
->>
->> At first, I wanted to sort out the problem with a patch in the Armbian
->> build project, but then I thought: "Why not sort it out at source?"
->>
-> 
-> I'm not convinced we're there yet but that's the kind of spirit I like, 
-> let's not fix symptoms or consequences :)
-> 
-> Cheers,
-> Quentin
+I don't think this holds for SPI flash. With DM_SPI_FLASH, 'sf probe'
+calls device_remove() on the existing flash device before probing it
+again (cmd/sf.c:135). spi_flash_std_remove() then calls
+spi_flash_mtd_unregister() -> del_mtd_device(), and the new probe
+calls add_mtd_device() again. Neither del_mtd_device() nor
+device_remove() unbinds the mtd_blk child, so each 'sf probe'
+allocates another slot and binds a second mtd_blk device under the
+same flash device, while the old one still points at the old slot.
+That leak is more frequent than the mtd_bind() failure fixed here.
+Please can you either skip the bind when mtd->dev already has a
+UCLASS_BLK child (device_find_first_child_by_uclass()), or unbind the
+block device and free the slot in del_mtd_device(), as patch 3 does
+for UBI? Either way, please update the comment.
 
+> diff --git a/drivers/mtd/mtdcore.c b/drivers/mtd/mtdcore.c
+> @@ -396,6 +396,31 @@ static struct device_type mtd_devtype = {
+> +     kfree(mtdp);
+> +warn:
+> +     pr_warn("mtd: %s: cannot bind a block device: %d\n", mtd->name, ret);
+
+mtd_bind() already does pr_err("Cannot create block device\n") on
+failure, so this prints two lines for one failure. Not a big deal, but
+you could drop the message from mtd_bind() (the SPI NAND caller in
+nand/spi/core.c already checks the return value) and keep this one,
+since it has the name and errno.
+
+Regards,
+Simon
