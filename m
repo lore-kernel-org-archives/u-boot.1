@@ -1,172 +1,187 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1707ACA5FD2
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 21:25:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA28FCA5FD2
+	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 21:54:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CC51140CBA;
-	Thu,  1 Oct 2026 21:24:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7CEDA81138;
+	Thu,  1 Oct 2026 21:54:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ybohepq5ukNs; Thu,  1 Oct 2026 21:24:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org E23CB40C00
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790889899;
-	b=g4mGYm0m5N1cQ/UdLDmoBkj3R43oXhmJ9QiByfnE7TGqCEI9cRvUUBi3cv9892MKcQiY
-	 yUgcyvNDDgf4pmt06EoOZ24nl92XXUi2Klp34EMtIbzy/DYvRnnx+ar9xmJ1c14Q/HlJY
-	 FO0/t7Zk2vAZAexuTOkLOVUDWMhBnGrSsx7rA6/sCRU0zYqyaOMeoii2VYmSpj0CP06NZ
-	 DTmFNop+faUYchHKmNNfcw++Xbfu4pJKVoUlEdNbd8swUEtzBs6FrVAn/VKyweU3X0gmf
-	 wSlmKXNkMtTsealrJFBhRlu0BGZuLjHeuJyuVxr1xvsq75e1HMXXkZIoutJQIAqdizQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790889899;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mK5l1byaFKsl; Thu,  1 Oct 2026 21:54:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org BEE0181139
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790891670;
+	b=NOiiwl/inyHJvgaptoYyAE7c3LfscsF5jiG8IELW8Xdrg4nQ3KqN3bpQ2jjI65e0Azrr
+	 LYZcjO5MypL1zRV51BAD8H0ex8N/7kC/57Syj365lmtkQH5LFq0KJqnATI5XejSnY3z6a
+	 tcieYbya3RmMABvBQMs/5xqIyVY++9WMH2CigoxgyVn1nrrky7KGz8wc1uIwmzhYuXq5C
+	 3JQ0HayF2aR7MrpPreVwkz2Sl+ApRlVwAeassXZ5Z5R4pGZP3IQ8mPfcAARCYyBnocEY4
+	 7QlPZX41hAyPkMgB7yr8GH5fO/fwmoa4YALrEFOW64A/Z6ECrI8v85pCL7GMrxsx7JA==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790891670;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=8E/K+jzZ+8aL7IdSB+JiWOS9RKT+/+u4wJvFpOzs/H0=;
-	b=ZuH551SMr7NEYOSZk+So3E2QA+0NdKDG2GVVChJ+1AgI7Y/MT22xt5byxvXxLKYSrlyy
-	 zFlkLre0W8OHUTFeT1UqcFUyQJFZ2uc3n5Mbl2au3W51e3KhHtBNm+hQR4S71PIdqj2uX
-	 sscOgKHhYPGZUuIOmGTVVkGvc0d/WP2hfV/Nr+jXd1UtdDpCX1zROgl8FQo/j1uxKtyWU
-	 EbUYBkT72IyjFiiaYUPV2p0nfzmGdJUCr0QW0RLnfuzU4AziEgx+9f7D0SJdghyIrNHA2
-	 PaQtS0PaqR0MfL85kbFNyb4iYF/DGBIkzdoRU2fFsrUV4I79etyE/ybMfqwtplgUfkQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=ZpC8OgKr6WS7EcCCPpZRnNItE0BiBmAww/8FVywnjmQ=;
+	b=RmWyKuM/ylyz09IjBS6BYKMJDKYVB37cPBlGgZCtrqc8/bpYk1qQeI/pkb0EXm8sw/OJ
+	 LpQei8lt18Rv3zqcgWo/lt2oXSA4gwNQZqblXNEKJ4xvTvPYG//gdk+SMPyXaJIMrM+aM
+	 TvKEooTA7CBvhKwyIrPphByzOGnyfVj0KKxEGs6tUZK79Jv4jg39RjktUyJiQtHMjfSuz
+	 6x/CwrMeCinCIWWmDqyiJXVs4ct7sIqlq3N5VAri3ZNeW4QfoG2COEVqP39dYGNSR6PFK
+	 RfhZGEKgBy2jw3B9s2FiyNM71uoXVtgy91yClQjjKV8g+sh3b1KJ3LvRf50UZA/cIfA==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790889899;
-	bh=8E/K+jzZ+8aL7IdSB+JiWOS9RKT+/+u4wJvFpOzs/H0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790891670;
+	bh=ZpC8OgKr6WS7EcCCPpZRnNItE0BiBmAww/8FVywnjmQ=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=AK8htcOflHtgJyriak8f7YTPYDV2zhjifb8rdWUfjYJGuGpk389aU4fMrI7+CbFai
-	 mHyFmM6dEyvhcZwo8IlN88yK0qNdoiTSiT7S56Xs9dOAzaVBTMSTAGpRGYoIh84qgh
-	 ckOpAszRNRE8tS/RSmZ1mxTZ2mtB1J2NeNv63SH3QBBCLCohCSmqAMOfDTk3Rv9jyE
-	 F6IhtbEWlHMJrBIxDUFCoyD1flMt9snwiSKf+E1TK+cKgeWvfcxUmHRoclgs+0WE3b
-	 kqJEtZB2z5b+M3/zrm+S8AUR5C5CCj8pGDpOLTSv/rXs9JYID5Vob5eqAskLr3ab6g
-	 /lTXURZWBp5ng==
+	b=KXixnOfvRKcFFXu96+foWyeyQ9unAfnj719seXyZcmIS6KxnN5rYIib6T3mc+JMaR
+	 umCegoLZZhIaat0tgp16VTQeseBc9GmIeKU+BLysPkd9WOXnD9pv83QQxhjcEDnTsT
+	 exGdYFwkbFQFii4MsRY7ctZeakRtOfJbXFhjg28aZdWVjXIitC9WZoT5TISH8eZFRJ
+	 yDVn2yPoyrSbr5CnwfRRGFK9BcXZZYE3nqOMeHMjN1h/y6dcG+wdxNjlkourO8PGRQ
+	 Ne64xFPgIJ79rZviTHyFQHYlm6kEBcIROQGDHDg7jwNICbjZ9RJDsUKfw4md9pwGqg
+	 /t/1c19rusSNw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E23CB40C00;
-	Thu,  1 Oct 2026 21:24:58 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id BCFF222B
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 20:45:31 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BEE0181139;
+	Thu,  1 Oct 2026 21:54:30 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5564322B
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 21:54:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AEB2B811D4
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 20:45:31 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id DE46540BF0
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 21:54:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MAVd9pou3w9N for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 20:45:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0478C810B8
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:39::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790887531;
- b=LKDlu/QIrH7xpRJDXy0ctpLsPfLKUakQ3db/ZvuxyLoNZGRJt89j7fLr5RSePFJ6cSXK
- fMmrhMLhhxj151a6ZJDFf013wHpjD7QtV2KLDsDNGwf0EEe1sDlUaf2RJUp2DHY3gD/x3
- 81z0x8mMlhepcWSmiX3qaL5T9IbyA2aRtO3Tikk6S9lFP/vm+FQIMkm72L2yVtszG2m4z
- SgNvBUX/ckcQQYnKuOeMOSyL+IuZlmMee4AaJqUt6RpDs68hkGGmnMINhJX6+7XV041O+
- RdF1D49iRfMDNqcmKRCzothXVsdX522k840fA//EcNjaIPo44hUITzEvDZShgkSAVQw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790887531;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 69achN4iajeb for <u-boot@lists.u-boot-project.org>;
+ Thu,  1 Oct 2026 21:54:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org C7EDA40BE8
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:38::d"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790891668;
+ b=hnbsK5ly6JrvF7NJOsuvcbJqcnB1joTaeAozTD8qFXlq2lNZKKSaxceZAYwubkv5w8yS
+ CDBNKQUXU65x+T6afzq8zlcg6qzeRHdlDZ9kxtyM3f9wOBrIMIwuV9/V0mu7s7DxsyFAU
+ Dsemn9qPwaMtIUFvjqHboxR6yDKQzqFD6Obc0MuYh6VXeDgPsvWrtjF+0wZBUk8GbOJtN
+ aun18Uejv7v4deD9z+1s5KkyX2Mj8YFX2AGE7puvlwZIl/G0pO9kE+tnnRHdtOSWtLrTo
+ oTC53y6GIJzfMT1ieYCDaqjfAJr9DK5E1WbC0oiIa8p44Y+iOQrDKCKLzUPuYrpamhg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790891668;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
- MIME-Version:Content-Transfer-Encoding;
- bh=8E/K+jzZ+8aL7IdSB+JiWOS9RKT+/+u4wJvFpOzs/H0=;
- b=sPYGhUvse+vszuVwEer1bwEfGzoIWrkUUK7XUlJ+epn/KvJx/SUQnfeCP+yaeDAdKpai
- f58T0IxonW4OBB9URkKte51Z7VndqQ8uH4ve7RV7oe5hGH6XgcfqBGQGT+7RrWf9w6vEl
- uNOa1sEIzTFtR4Hoiqdi9gC8sAWlAZusUEuo5k19/8sTmgP/Q6IGpWjbcomn89pNoTkQ4
- iyYlQayF7Lnzx065SKV03erKjv20XNneIEvLVAM9vn3AJ6VoAq2sjx5P4N8U7A7FUv/G2
- EMA4DTAepI4YHCUJ3vJ1IQt3nr5MpI8zxp6wQVNpSvrO2v8EFhXpWf81e/6f2pHwJYw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+ Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+ bh=ZpC8OgKr6WS7EcCCPpZRnNItE0BiBmAww/8FVywnjmQ=;
+ b=WPxHgjjrpsDDrYzMfqP7G88ADN+cmkfQSWcvQjnrJaDH8+16gmMguXgS0kTBTH94xXWT
+ Oi2dEeyD0xpx5MwOij82SjNSz0TBBOpTgDlnuzAWFXXbAjen9BlArbLCC6jvbV7ps+W9j
+ dRjodK5/QTXxlTyvmZj2elomk4L0WDVGJ1RAEoPSahcM7WnnTahUGrjjAKSiJ4AUV4SEl
+ wts2iJQPa+kLBAC/W4icaNJGDlcLBOov9Z8YMzuHrFrvQkif0m4oSiN/X+65jKx0qXi/V
+ zFWzEdU6raod5ETwkZ8sJIEk0KQ31r+F//2t8Uv6ni6d217Swr7km0L2xw+3qn84KwA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=JiaEUAJE; 
- arc=none smtp.remote-ip="2607:f8b0:4864:39::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:39::10; helo=mail-pj2-x10.google.com;
- envelope-from=lqing2013@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+ header.s=20251104 header.b=hwdeHhtW; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:38::d"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:38::d;
+ helo=mail-lr2-x0d.google.com; envelope-from=festevam@gmail.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=JiaEUAJE
-Received: from mail-pj2-x10.google.com (mail-pj2-x10.google.com
- [IPv6:2607:f8b0:4864:39::10])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 0478C810B8
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 20:45:30 +0000 (UTC)
-Received: by mail-pj2-x10.google.com with SMTP id
- 98e67ed59e1d1-396ccb652d7so5045870a91.0
- for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 13:45:30 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=hwdeHhtW
+Received: from mail-lr2-x0d.google.com (mail-lr2-x0d.google.com
+ [IPv6:2a00:1450:4864:38::d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C7EDA40BE8
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 21:54:27 +0000 (UTC)
+Received: by mail-lr2-x0d.google.com with SMTP id
+ 38308e7fff4ca-3a881d2e66cso1708091fa.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 14:54:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790891665; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Lb5MOOHZq5R4MsaaygaGhoKy3kM9L40GfkRRaecLM57otJ74XCvGSjS4+OvNq80ryp
+ PfZv1w+VDU307191iFHMbB3yNWBYTpXyXmtB22slqc9i+9csyzG6Jn4mzElttwMFMdRM
+ yjhyxjAvu6ykOqsoIiQTCL4OyZFMDGSEPsdjRrqe7KJBb9mYBA4MbUBHYMpajnRuXwyF
+ u7yUVd2ZtdsBvvDssgM9ed+/PVTAazekcgQSFxdLSlCNRLDRtzf6bSImSuF5Hcq7E4r4
+ VMfMx14CSj+8rB2k+lQ6sy6IYbtVk4qSYBCJEEYNnmYEYA0XfRo5OsRKkYCH1Ph5zmI8
+ 0asA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=ZpC8OgKr6WS7EcCCPpZRnNItE0BiBmAww/8FVywnjmQ=;
+ fh=tXq3xWMh9Qs5w+VCJzO273L7HyIpBiaT/XiDZReOa6A=;
+ b=nGWlSQWJkNISlE1SnN8nsyDVrbrr/7cihMBL2xHgIMfpDFLj3zTVaQ9GZ/slzGL8ml
+ +HxFcahY3sy0gavKX+ZgPzf/Vlo8ObTVQryrM3Qdj9s8l378HxurUc+Or3x52yOgcrlI
+ qZqKMZfO0Cz4kXQ2FNOdCAc7YY9l061c22p8A4OFzlC7+WIC9IORlCFJTRWsDC2gqcnZ
+ 1ZgYrA653DyHj4CpX0kTLjqcuwrO9dpJ3TtqlQpCFAN/KgU+Tjy7nQ+1zQHlMKFEILWH
+ XzVdlD7jf8lkgL5K1jujtoYHCHvOClUu4hB2hSqzms+LquTEI87jMnQXuHhCUwCPHpui
+ fyOg==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790887530; x=1791492330;
+ d=gmail.com; s=20251104; t=1790891665; x=1791496465;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=8E/K+jzZ+8aL7IdSB+JiWOS9RKT+/+u4wJvFpOzs/H0=;
- b=JiaEUAJEEoCVDlMeAyN4F5n+81uPxPmDJHLVsKjpAbDEh3ZwJbNWDx0MoGUZkOv/fZ
- gFwq6yIMUJpM8h1Zi476/QRhew8ljwSw0F/wA2BBb+K6cFfF7BscEDtNM46tlo27Q7Ii
- Pt4bJYYZI/vb9NWyxNf5F9XdYiEz1yk6NI0C87XtjMLtH5anPW7vL8I7/Lws1kzqT0K6
- 0EdysPUIA+5xY4wInm5/cbarfjPJp78xT0V8Fb1LXbo4KGEkAZ4PShcO9Y8fNA1Gc09W
- 615wUjy2IBefWG6De650UzolTDFsrF7wBMOLrD0Wz/p36BQo4BDIggTIDI8PnN8GEbP3
- CjMQ==
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ZpC8OgKr6WS7EcCCPpZRnNItE0BiBmAww/8FVywnjmQ=;
+ b=hwdeHhtW37Lrk+5rrcMbN7FBIqObK7MwE9gy6G6EquwCXMq2Jm9nhqzw3ct4s0vYcP
+ WERuJvgtllR5qQU7aagUxXd8LMPZ3g2rLWLnb/u8SkpKvzZlKzqguPSRs1RSCm7xQJtV
+ vUMvyXHcfGQoF1xYNGf0z/3KNr9Aj1KusFfFTJoikboq5rAgAg7F8ldkWM4c/MSpFoks
+ eUR9xGBVAkvQHl0zcSqIkFxjQRrI6VLGTo7jdakZIqAQP6U6l5Dxs/gBy4RbRQT9Px0v
+ F/HhifhkgQuOwee8+92pyCsegyKwejuh5SUfPdttYHLBstd5KYO8kiCty1DFnjoeB6Zq
+ yxIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790887530; x=1791492330;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=8E/K+jzZ+8aL7IdSB+JiWOS9RKT+/+u4wJvFpOzs/H0=;
- b=Y9cWBleEqrAolJEHXdPSGQDzIh8rZX4JIqPJI/Sm/GgNXnNGiy6yaOxtultIFpzY8H
- 848DLF0ZJCzC4swuT+4EiEYP8FZmTGRN6u1phl9WnIGhV6hHcv2iYEScY39ATE2ni7zL
- DQzTjmO7pvntVCIDLwK+yqeIWWc1pzI3k1u9IJYUB/3HrnLO1JSo1Ysjd/RsffjRTIB1
- 0hwD7JlBbQJz7eQlxZBymAMGNsxZY4HczBRtQkvEuTAAxpvOimWkqj+N0+rSC641SOKT
- IJzQp3luwDq+gsqfnypONVF+oO/3A5lD2exmra+jYOlRsiodj+OQh9cmaQmtQTzJ+gtj
- aLkQ==
+ d=1e100.net; s=20260707; t=1790891665; x=1791496465;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ZpC8OgKr6WS7EcCCPpZRnNItE0BiBmAww/8FVywnjmQ=;
+ b=YU7NCebXGosxdQhev8PQRJ6zKW17kLjP61OxxJ+AdqdghEJward2K9akR82c1EYm/O
+ by1O3m/h2u8LemJVEA3Q8rCzP+6ZdHWKiWmsycqBI4PUMkL7056nJsk3HNRpatEuqqFS
+ p7I0YpMsb3URi47FfncOgj8jOQPesP/uNwOIDfTQiOIyH7gF1sL3GmZYQTaeqWhD9zcH
+ 7C084wdidRCn4vmeRQd+ZEFnzIPxzVpwO5MlTjVL+nFdsKQW3H5SftXVlmG+func/4La
+ o8kul4O+gbi5zqjep9QnYnR1CCnEuOBU4JTtUcQ1Upmau86SVqeTBGRhs1qosSAzNI6M
+ 6u4A==
 X-Forwarded-Encrypted: i=1;
- AKwUvByxiFkIR/ioZs1mbu42tW7SotC4g+vxKCw44D5s113CI2Ic6giEbBJh9L/wJudRzAR1zfS/jBc=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJDT1jWOop1XOqNIMJp30GyFMEQpZeqzyV38UWlEuU2Yls0c3+3
- E2pKw9OadbowQPSJ1p5iL0LUTUduAf15iLwRA16TVVYF6pHJ4blFLiL+
-X-Gm-Gg: AYBFou36vct1BERdiqnBDEl6zNJBK1pUTDDtTqH2Rh0WlaQdzwrYzDN7ysA1f5yyW74
- CICSheIAI6DtgsbuKiFbbms/ZLq+nKR+Vp/eiZyQZSPWEISF3Il9hxK0vsxkxOJfckUbMHKK1PJ
- YqJRqXNSjUkOCrOqhRU+Ig9tSxXyTdEKS9ZoOfYOPPhets8UCYK1Dk3A2mJzDxruyIZPcBvIG4y
- a07MShNY1CK61KEmqlTQmeP0meKTaW9cSqWQegZTaud+YtgiO75JeGPtxwg14ynKPRm0TmSXktT
- 7C3DDplksSin7LyHs2adsWkwDekDSFiilTUkx3B/fOYwUUI00+IkgxmkuvbqWNmJElwBlXy8BFI
- 2Zw2OQYjo51uhKXWe/0QalrfdSKalgKr5hnP4coED5057dzR4IRWdn0rdY2a8UpLoSmFXSGeZX/
- OAoHtHIk9HWYCAYG1m9zyvxKVdyP4VuHdykI//HQEuHnuxZnndpqdyzhJHAh7pPGFlcqKixCLXB
- OZbealUuW5t6IZoh/eaHKdmW4cQXbzItosseQ==
-X-Received: by 2002:a17:90b:4d83:b0:3a0:7261:d58e with SMTP id
- 98e67ed59e1d1-3a6ce6e7eb1mr628939a91.22.1790887529693; 
- Thu, 01 Oct 2026 13:45:29 -0700 (PDT)
-Received: from localhost.localdomain
- ([2409:8a30:2e86:1710:20ae:2ce4:794c:d830])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3a6cd634734sm883877a91.17.2026.10.01.13.45.26
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 01 Oct 2026 13:45:29 -0700 (PDT)
-From: Qing Li <lqing2013@gmail.com>
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org
-Cc: Qing Li <lqing2013@gmail.com>, Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 9/9] board: qualcomm: xiaomi-crux: add board support
-Date: Fri,  2 Oct 2026 04:44:52 +0800
-Message-ID: <e17ece23193bea9c9107d96bba117ec0f8fc45f3.1790887323.git.lqing2013@gmail.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <cover.1790887323.git.lqing2013@gmail.com>
-References: <cover.1790887323.git.lqing2013@gmail.com>
+ AKwUvBxpDmcv8iBULHzY3dxVSEkiYsKCQB5PxJH6swinE3uckaA4gpVryfWnXStRlF23gwsbi93GUvs=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYIBblex9bnKq7T9ZTj6lULx1AZ4jMOte5DtoffEVDiDideVACnr
+ 8XxX+TQKepQdjQJTxOtiI1u0LDV/JSXeigGCKXJrXyAdlXPJ0OIRGmUp7m/wpttQixkOaPc+VUn
+ /BmviK6Gf+So3XslN4mQbdd1eOdNYi3oKvA==
+X-Gm-Gg: AYBFou0zHNzgVt0SITtCM9OnfZnY7USIIgpSQWhDrUL3ETNHjamr7VSY23zpm0lhzK/
+ nzDgpMIKfL4lhN9mkVMAzXgk6+FDTPnDgNY+af9Gs8oUvgv5mwDpYQ4adaXalY5Ptkr27jd3xc+
+ 0jkBrbemH9RbbQd79hdt0zx6ITApGfgN5Fk6QDd/dR32n5bB7kNce1mEn2jfj6VHW6873cGIp4E
+ FM3RiohGUoVYFlfn3NpsOMC6rj5+7vFDy5jC0WJAVwtMbTX9UlUu6xyq005qbMkAQoA3B82wpxO
+ K1gft8+9Jt7B7vMwp6nNmmcaDJbCDkUBvjWcsv3/PPASAJDbGObtHN/FaYzw7HVvWiFgrNZGuqX
+ oD4jtCttLU7++ioQpkVBfRJ+6Wnp6ki9BvxrQKOYuVgjU
+X-Received: by 2002:a05:6512:3052:b0:5ba:3c5e:2b20 with SMTP id
+ 2adb3069b0e04-5bb9bb203b9mr182027e87.29.1790891664690; Thu, 01 Oct 2026
+ 14:54:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 01 Oct 2026 21:24:42 +0000
+References: <20260930155239.7091-1-stefano.manni@gmail.com>
+ <20260930155239.7091-3-stefano.manni@gmail.com>
+In-Reply-To: <20260930155239.7091-3-stefano.manni@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 1 Oct 2026 18:54:13 -0300
+X-Gm-Features: AclHuK8HVbN0Fpzr_j4QyjoZGw1Bm9fdQrRdnqpgbTEsZ46v06PWEkvfdePf_qU
+Message-ID: <CAOMZO5BkEHkRVSAtkcOEBuO7sZnj1_fYXDCosJbv=j5SBVnraA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] wdog: add i.MX system controller watchdog support
+To: Stefano Manni <stefano.manni@gmail.com>
+Cc: stefan.roese@mailbox.org, sbabic@nabladev.com, uboot-imx@nxp.com, 
+ U-Boot Mailing List <u-boot@lists.u-boot-project.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -180,151 +195,25 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add the defconfig and default environment for the Xiaomi Mi 9 Pro 5G
-(crux, SM8150), based on qcom_defconfig plus the phone settings from
-board/qualcomm/qcom-phone.config.
+Hi Stefano,
 
-- build the devicetree from arch/arm/dts because CONFIG_OF_UPSTREAM is
-  disabled for the board: the crux devicetree is not in dts/upstream
-  yet
-- disable CONFIG_REQUIRE_SERIAL_CONSOLE: the phone has no externally
-  accessible UART and U-Boot would panic before bringing up the USB
-  console
-- probe UFS and bring up the USB CDC-ACM console during preboot so the
-  board is usable without a serial port
-- enable the pstore command with the ramoops layout used by the
-  downstream kernel (0xB0000000, 4 MiB, console/pmsg 2 MiB each), but
-  keep CONFIG_CMD_PSTORE_FDT off because that kernel registers its own
-  ramoops device
-- enable CONFIG_SUPPORT_RAW_INITRD and CONFIG_OF_LIBFDT_OVERLAY to
-  chainload Android recovery images with raw ramdisks and DTBO overlays
-- keep the fastboot buffer in normal DRAM: 0x1A000000 is below the crux
-  DRAM base and cannot be used for DMA; add fastboot_addr_r to the
-  default environment
+[Added the new U-Boot mailing list address]
 
-Signed-off-by: Qing Li <lqing2013@gmail.com>
----
- board/qualcomm/xiaomi-crux.env | 50 ++++++++++++++++++++++++++++++++
- configs/xiaomi-crux_defconfig  | 53 ++++++++++++++++++++++++++++++++++
- 2 files changed, 103 insertions(+)
- create mode 100644 board/qualcomm/xiaomi-crux.env
- create mode 100644 configs/xiaomi-crux_defconfig
+On Wed, Sep 30, 2026 at 12:53=E2=80=AFPM Stefano Manni <stefano.manni@gmail=
+.com> wrote:
+>
+> i.MX8QXP is an ARMv8 SoC which has a Cortex-M4 system controller
+> inside, the system controller is in charge of controlling power,
+> clock and watchdog etc..
+>
+> This patch adds i.MX system controller watchdog driver support,
 
-diff --git a/board/qualcomm/xiaomi-crux.env b/board/qualcomm/xiaomi-crux.env
-new file mode 100644
-index 00000000000..de3cf1e4de5
---- /dev/null
-+++ b/board/qualcomm/xiaomi-crux.env
-@@ -0,0 +1,50 @@
-+# Bring-up environment for Xiaomi Mi 9 Pro 5G (crux)
-+#
-+# The phone has no external UART, so the first job is to bring the USB
-+# (CDC-ACM) console up automatically, then drop to the U-Boot shell.
-+
-+bootdelay=-1
-+loglevel=7
-+bootretry=-1
-+stdin=serial,button-kbd
-+stdout=serial,vidconsole
-+stderr=serial,vidconsole
-+
-+# Probe storage and enable the USB serial gadget console on every boot.
-+preboot=log level 6; scsi scan; run serial_gadget
-+fastboot_addr_r=0xC0000000
-+
-+serial_gadget=setenv stdin serial,button-kbd,usbacm; \
-+	setenv stdout serial,vidconsole,usbacm; \
-+	setenv stderr serial,vidconsole,usbacm; \
-+	echo "USB CDC-ACM console enabled"
-+
-+# Handy shortcuts, mapped to the qcom-phone menu too.
-+fastboot=fastboot -l $fastboot_addr_r usb 0
-+usb_mass_storage=ums 0 scsi 0
-+
-+# Keep autoboot disabled; leave the board at the U-Boot shell for bring-up.
-+bootcmd=echo "crux U-Boot: starting fastboot mode"; fastboot usb 0
-+
-+menucmd=bootmenu
-+bootmenu_0=Boot first available device=bootefi bootmgr
-+bootmenu_1=Enable serial console gadget=run serial_gadget
-+bootmenu_2=Enable USB mass storage=echo "Press any key to exit UMS"; ums 0 scsi 0
-+bootmenu_3=Enable fastboot mode=run fastboot
-+bootmenu_4=Drop to shell=setenv bootretry -1
-+bootmenu_5=Reset device=reset
-+bootmenu_6=Dump environment=printenv
-+bootmenu_7=Board info=bdinfo
-+bootmenu_8=UFS device info=scsi info
-+bootmenu_9=Reset device=reset
-+
-+button_cmd_0_name=Volume Down
-+button_cmd_0=run menucmd
-+
-+# Drop the USB CDC-ACM console (its stop() releases the UDC) and
-+# start U-Boot's fastboot gadget instead.
-+usb_fastboot=setenv stdin serial,button-kbd; \
-+	setenv stdout serial,vidconsole; \
-+	setenv stderr serial,vidconsole; \
-+	echo "ACM stopped, starting fastboot"; \
-+	fastboot usb 0
-diff --git a/configs/xiaomi-crux_defconfig b/configs/xiaomi-crux_defconfig
-new file mode 100644
-index 00000000000..ae545e3b957
---- /dev/null
-+++ b/configs/xiaomi-crux_defconfig
-@@ -0,0 +1,53 @@
-+# Configuration for building U-Boot for Xiaomi Mi 9 Pro 5G (crux)
-+#
-+# Based on qcom_defconfig plus the phone-oriented settings from
-+# board/qualcomm/qcom-phone.config, with a crux-specific environment.
-+
-+#include "qcom_defconfig"
-+
-+# The crux devicetree is not in dts/upstream yet; build it from
-+# arch/arm/dts like other boards whose DT has not been synced.
-+# CONFIG_OF_UPSTREAM is not set
-+CONFIG_DEFAULT_DEVICE_TREE="sm8150-xiaomi-crux"
-+CONFIG_ENV_DEFAULT_ENV_TEXT_FILE="board/qualcomm/xiaomi-crux.env"
-+
-+# --- phone settings (mirrors board/qualcomm/qcom-phone.config) ---
-+CONFIG_PANIC_HANG=y
-+CONFIG_CMD_PAUSE=y
-+CONFIG_BOOT_RETRY=y
-+CONFIG_BOOT_RETRY_TIME=1
-+CONFIG_BUTTON_REMAP_PHONE_KEYS=y
-+CONFIG_RETRY_BOOTCMD=y
-+# Crux DRAM starts at 0x80000000; keep DMA/fastboot buffers in normal RAM.
-+CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_USB_FUNCTION_ACM=y
-+CONFIG_CMD_UMS_ABORT_KEYED=y
-+CONFIG_CONSOLE_RECORD=y
-+CONFIG_CONSOLE_RECORD_INIT_F=y
-+CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000
-+CONFIG_FASTBOOT_CMD_OEM_CONSOLE=y
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-+CONFIG_FASTBOOT_OEM_RUN=y
-+CONFIG_CMD_FASTBOOT_ABORT_KEYED=y
-+
-+# Phones have no serial port; without this U-Boot panics early
-+# ("No serial driver found") and PANIC_HANG hides everything.
-+# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
-+
-+# Pstore / ramoops (stock crux kernel uses ramoops_memreserve=4M @ 0xB0000000)
-+CONFIG_CMD_PSTORE=y
-+# The downstream kernel registers ramoops itself via ramoops_memreserve.
-+# CONFIG_CMD_PSTORE_FDT is not set
-+CONFIG_CMD_PSTORE_MEM_ADDR=0xB0000000
-+CONFIG_CMD_PSTORE_MEM_SIZE=0x400000
-+CONFIG_CMD_PSTORE_RECORD_SIZE=0x1000
-+CONFIG_CMD_PSTORE_CONSOLE_SIZE=0x200000
-+CONFIG_CMD_PSTORE_FTRACE_SIZE=0x0
-+CONFIG_CMD_PSTORE_PMSG_SIZE=0x200000
-+CONFIG_CMD_PSTORE_ECC_SIZE=0x0
-+
-+# Chainload helpers: raw (gzip) Android ramdisks + DTBO overlays
-+CONFIG_SUPPORT_RAW_INITRD=y
-+CONFIG_OF_LIBFDT_OVERLAY=y
--- 
-2.50.1 (Apple Git-155)
+Nit: Please avoid writing "This patch adds...".
 
+Use imperative mood instead: "Add i.MX system controller watchdog...".
+
+Also, it would be better to squash the two patches into a single one.
+
+Please also add a user for this driver; otherwise, it's just dead code.
+
+Thanks
