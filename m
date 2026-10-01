@@ -4,131 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D42EBCA5FD4
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 15:46:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A89CA5FD2
+	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 15:48:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 21A1860B26;
-	Thu,  1 Oct 2026 15:46:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 04CC660894;
+	Thu,  1 Oct 2026 15:48:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jlTxiFBgd1TL; Thu,  1 Oct 2026 15:46:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 76583607F2
+ id VdJlEKTRjd3y; Thu,  1 Oct 2026 15:48:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 61744607E7
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790869611;
-	b=RdHYK9mCclM/DMHv86Ag+443ng8QaLIgrqKq9DlCpal79G4AzytVN0smo2n+0X4YDtL3
-	 YCnUWatu4dUoTKOkwUz+JVDCjJ1BF5gaAUHUiXLOMMtWVRPo//EDD8/QEHrQjzE6fg15o
-	 nfwEmepxBHyzzhsvBMWLFj+N2sCD/14tHNXWzKDLuJRwKHKTvwzyIHMXc37ERKHTxw8ul
-	 8FpiaOwAO9p+AS4R03tmaiIwvLxTMbibKyWHiLDcgSk8213zg31kQhQXQL97kbgRnqC0b
-	 /uKUqDFS1CMQgC8yNNU7cHS0rmYO7hqfymTsVnbZBKL1zQQIceCAVUumXt9KVaOXShA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790869691;
+	b=pxWMvsi+SE/iibmXfxykmeVwhZANSlRU1I+dC1pxBVpLN9bJBoGxF9imkqV6rq8HObxa
+	 bpz8FhCCmA4j4DlxFA7Jw5hnWhlz2woB2WQn7DRfvhb7aXo0xKuBU+pjcgf3ez2Oolv2b
+	 wFXY6Far6DN1OSJc42QojyEtolGLSyoAlivBRCWjbCxLqCVUAM6HE+h6w9cKiOCxn1Keq
+	 F59KJ2hvbgsxhAMMzBbYJ9rxBhOBEg1dIB/4J3WMwbFeoYqzfzKvYzr3SjG1wy4G6thpl
+	 //AiL1sxc+WNc8lN+H/lTDQ6SyiENRVtJ3dqGwgUSpeCl2i/TfH9yeTs5MYSKM+H8Eg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790869611;
+	c=relaxed/relaxed; t=1790869691;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=eRf7ZgAMSCQa0UhXj0iIIZpZhJCsvv9l4PZKz1lQy7I=;
-	b=cfmhcfTZ17c6p+xWFemwZ/dDggIsTdroCOLDyDPd2tP+GZ8KO25f5k9slPy7K0gqTa0y
-	 I/jN+mT6F9wBp2mwcq+9zVQNNx56hTfh0cWDS3g4FIF17rOmY55ka8FvMEG+0n8KpFJu2
-	 ahTcoJeXBoIVYeO1fWT2bIcZEHeK+SbC3J2VF13LuNct0DENIJFn6huAZVO/s2vJYYMcq
-	 10m1mlYJKVMphbs/u0ZnfJxnpS6B7tBnnfct5U2f7TPwtKhub6aCj28bYrPu9pvsBnYFZ
-	 lPH1cdGV4UD+oJOPy+jKjqT/o6J+gLdpAHzCYUdasOW25EFe4DEhqCBW479oxavXWZA==
+	 DKIM-Filter:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=Q/8k5T0G9QUfn5022mSWPuKXXQuxR/pqq6eVRaovgOg=;
+	b=nqjA6aql/FE+pBGNIcAjTUgbts9H1WLWX1e+O0vL10TVyXEov/DfUqMl9E70FG6nfXKE
+	 wkTNAmsR6lMZJEfaaX7MxqXA17VdzfSJT8lEsnumDoLFkgVno8qOolskL0GqwX9uEFLZS
+	 LxUrMl9XNhCp8pbNExDBmbVrcaYxjG9fc9cRRE8KaGtWmL3kSJOJuhI8R0rtGXBsLBo/0
+	 fJPfUXmGVBlZ9nnTofRHDd5CLQuONbVW55XG3MoFZaTKSGughhxHpIEVGwWzWoi0e3Hcu
+	 SZuDH6/BWq6f5ahpJH5xCl91VHxZIbtLs+tX0cyi/7tHc89I02ynt5WSBObR074AKyw==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790869611;
-	bh=eRf7ZgAMSCQa0UhXj0iIIZpZhJCsvv9l4PZKz1lQy7I=;
+	d=lists.u-boot-project.org; s=default; t=1790869691;
+	bh=Q/8k5T0G9QUfn5022mSWPuKXXQuxR/pqq6eVRaovgOg=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Vu7thLScP/lxlnI6DKHG5C1YeZ0eK05p6cuaYgda8FtMUdZEoaUCXEoCJaf6p3PMq
-	 Hy95SO6i+ovX2sj9KQJz9M0KE0s3QvLjRMKn3Loh8GndB+Mx/Htq+NOUv6LT+/t6vJ
-	 HFDa5xMIywobc0taxicy/y+Ftx1b/ZPq0CBd20LjKaA/PxFfq/xDrb6stxK43gFVOe
-	 NIj52Yl7CCLzo7mVQelZEytQUVakaNElNPW73IHyzYBEydRJ8WkeVYztXq8b48NCeG
-	 D2TiZ0P5wpTTkNLGTqWcQVU5JvDzO9s1RqPYehsLgZ2cXJhKHZFRulqCOgiY4hv3Z1
-	 noUhzuTY/sZ7A==
+	b=UX8g6zxWQCTjQMu9df15eGaTeV6Wy3hUbjf7qqJB77j7ZK5xfRPIPbiaYj1ySeLeO
+	 PIk9byaKPr7pvHkMi2ehEz5s5n0efzy0anoeqIiMch1XuUV/+c4YEIM6O1gXRA96BW
+	 jlTLnDP0xmPW0hkl+/glN3UOAUSa5cjM45tjh8rbvpI6uCNg1/QiOD6y05ixF6xQBi
+	 hzlCuhV5HTomoyXQP78sZAp1YVTIEiYyCB2U1SBBifLZnBp3jDgUEZPrvp8yhe7Y4X
+	 BTrTw8Yaf66S3OcS7t0Y1CG8WJZKnADBujDKgetDfYuOGCKyCoiAGNce6EepHh8SHh
+	 r24wH8NoOC2uQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 76583607F2;
-	Thu,  1 Oct 2026 15:46:51 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 93D97263
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:46:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 61744607E7;
+	Thu,  1 Oct 2026 15:48:11 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6AFC91A6
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:48:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9197740C9E
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:46:50 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 509E040B9A
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:48:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zuiPTt4MVCpH for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 15:46:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 4EB1B40CA8
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=217.140.110.172
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790869609;
- b=adT3jqxZGxNN44Bpj1Lu33mEt9D0VEpv93N09ScYn4fq0IoInvPrhEuPZDQVWHZA3dVd
- hkRR/2CQUkPKBSDparSlOEQd0yJvPzF3Hbgh62sAkZiCD1MRyc369ab2EAbotjKEUOrQ8
- PbcCraPW8tEOtB+SGfjOsQdpo/3pvbHPVvNPl9fVy2h9Fil51D1rlJU87A0LXovb56xLY
- KuM2dADagONyt77+dd4tFLOpwfeGMbbYAOBSPAeMLAq1b2yZh8dgLhYQwyEk6VfNsorBK
- omZ6Mm+IL0vS54QM+zmTZ3vCElnGAMO3TBpOzpGfpBaxCk5Sz46b3X/kAELkFqTnG0A==
+ id vBzFujyybDkc for <u-boot@lists.u-boot-project.org>;
+ Thu,  1 Oct 2026 15:48:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A814940B98
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=13.77.154.182
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790869689;
+ b=bndTrnQcqtDxsUEhBi6o3MW0JNCgRtFZvYhb88hqKl2MLgc0PBNstdYgXaYBcKrl/SJO
+ J7E7uaz64eb3ZUOAWcudrsgGQoxfeoyLpMv22dJLpHFb1DH/mw4VhbOm7nQK0qOC3OHJi
+ a7GUx+sd0UveBHhtEWtrPNEZ9lykn8QdfGOWp6lvpIHNAcpavbHWNZ+dC3yumcT0cRNAP
+ c1qYgv++Xm54han3RCOTDL3CEooPoZQNZEH3kgF2qc36rsyVfN/5DQU+CnFpLPsOTjjBU
+ PivChaCHrals+cAi7AtNOrZJQ+GcCzs1WPkeXbJiA2j6y4LqU6pyKt7+3bo723Ais9Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790869609;
- h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
+ c=relaxed/relaxed; t=1790869689;
+ h=Received-SPF:Received:DKIM-Filter:DKIM-Signature:Date:From:To:Cc:
  Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:Content-Transfer-Encoding:In-Reply-To;
- bh=eRf7ZgAMSCQa0UhXj0iIIZpZhJCsvv9l4PZKz1lQy7I=;
- b=cnazZrlBi2RM6U1ddWF9FEJQaL/lMg7FSxQOVrLo2M6aSCfELLJ9EFPY8oUnL51Kha5b
- y6RYt98EDw2mOEfbM6QLyeAt9b9iyMv41di0ohxXsNooNAhPE93jRWd27jS37AIWu4J/q
- 43l8n2A5Vgg0HjwOigbgdsyuizDuftGy8p3ORrj9vi/lj/EfJ5QoqeVaEdS21qyC9MJYh
- jstQQRCFAvkXCIqwRNlc1NkJ/TMtnumdS/cOizab8MM/gCQhfHZDhvAKQ+31s8ifCRaqs
- eguA3jHoTW5GJ+QiDWqwuh6F0zaJlU8Vcg9jJnndJmGnoYnHCK0YgbNL8lBBvs0S3gg==
+ Content-Disposition:In-Reply-To;
+ bh=Q/8k5T0G9QUfn5022mSWPuKXXQuxR/pqq6eVRaovgOg=;
+ b=chmshW2lG/5ebwRhmn8Rnrm0BexxuFrEh7HEJX1nG7zQ3eTObYB27oqDqVFDBCMR13HR
+ 8NIaDt9zCIH1SJnhqenz+2kFyJz9yPpUNL0140YisNsJmBCU5Js40VN8MHMQeQoEOiCXK
+ 6MI+HQQmnZXpsWG0sLbmizweJvVe/V74ibtTjQfaG9q6Kh1ReOJr/+2TVUuTIaN6FpUkM
+ uck558BO3aCroLBSm2+GWoaXS8QMk4rCH89xW5ZiMj4ThZuotWxKsbxYnr46zRar2xutQ
+ YrwjJA7D7ZLycD7V0bBNk9QaWOCCWkAts+wUsYe4emDwtN5D9gTJYDl9zeeJoQlOOkw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org;
- dmarc=pass header.from=arm.com; 
- dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=FyRSduO0; 
- arc=none smtp.remote-ip=217.140.110.172
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
- helo=foss.arm.com; envelope-from=vincent.stehle@arm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass header.from=linux.microsoft.com; 
+ dkim=pass header.d=linux.microsoft.com header.i=@linux.microsoft.com
+ header.a=rsa-sha256 header.s=default header.b=UTEpDynQ; 
+ arc=none smtp.remote-ip=13.77.154.182
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=13.77.154.182;
+ helo=linux.microsoft.com; envelope-from=sriramsriram@linux.microsoft.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
+ header.from=linux.microsoft.com
 Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
- header.s=foss header.b=FyRSduO0
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4EB1B40CA8
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:46:47 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 31C2A497;
- Thu,  1 Oct 2026 08:46:43 -0700 (PDT)
-Received: from debian (X72Y076X74-2.nice.arm.com [10.34.129.17])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 139653F86F;
- Thu,  1 Oct 2026 08:46:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1790869606; bh=5w7T0H5/Vrfd4AMyAvfx0yfUK0gl0t9xkNuMo4dAovQ=;
+ unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com
+ header.a=rsa-sha256 header.s=default header.b=UTEpDynQ
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by smtp4.osuosl.org (Postfix) with ESMTP id A814940B98
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:48:09 +0000 (UTC)
+Received: by linux.microsoft.com (Postfix, from userid 1251)
+ id 828EB20B7166; Thu,  1 Oct 2026 08:47:15 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 828EB20B7166
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+ s=default; t=1790869635;
+ bh=Q/8k5T0G9QUfn5022mSWPuKXXQuxR/pqq6eVRaovgOg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=FyRSduO0mGF7mh9s01RGM+czLC+44JxJNxG3gDcAYgRNZ6bPci4FY0w/DTJx4eF8+
- kZWlnpmOUsnqrFXGUvwpTJr+K6p02oK7jIw2SfK4/fZzSUeWNWsyfgJFYrm/AkIXev
- xg00XHkk0CPfWf8sMwlp+592SacR72bZh2wb6yMs=
-Date: Thu, 1 Oct 2026 17:46:42 +0200
-From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.u-boot-project.org, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Udit Kumar <u-kumar1@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH 2/2] efi_selftest: add minimal fmp test
-Message-ID: <ar6AYk2f_na162Ed@debian>
-References: <20260922-authi-v1-0-e943530349bb@arm.com>
- <20260922-authi-v1-2-e943530349bb@arm.com>
- <CAFLszThhM2msTbVUmtAvaZzepE6qmb1w-GMb9SV5xYZY862BXQ@mail.gmail.com>
+ b=UTEpDynQ22WYpsBTmM8NyIk8OgSo/tThGqQORql2ayB/rp2ReX7OW1iDEtXpEJ7y3
+ V5t2yNSR2kiUniBgJJ2Ic3bYDCx0MGFayRdbnfOJgktS79w+9nWEXZeMoWYMIGuC0n
+ bH/xbxWpVdM8GBxIOvOHjYGMmAX5dJGI78B1ghWc=
+Date: Thu, 1 Oct 2026 08:47:15 -0700
+From: Sriram Sriram <sriramsriram@linux.microsoft.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Drew Kluemke <ankluemk@microsoft.com>,
+ Daniel Munic <v-dmunic@microsoft.com>
+Subject: Re: (subset) [PATCH v2 0/3] Bounds hardening in NFS, TFTP and ext4
+Message-ID: <ar6Ag0tw4KYUrgev@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
+References: <20260909192016.217183-1-sriramsriram@linux.microsoft.com>
+ <20260915205210.260404-1-sriramsriram@linux.microsoft.com>
+ <179081761139.570197.9802971587834247609.b4-ty@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAFLszThhM2msTbVUmtAvaZzepE6qmb1w-GMb9SV5xYZY862BXQ@mail.gmail.com>
+In-Reply-To: <179081761139.570197.9802971587834247609.b4-ty@konsulko.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,85 +138,39 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Thu, Oct 01, 2026 at 02:31:48AM +0100, Simon Glass wrote:
-> Hi Vincent,
+On Wed, Sep 30, 2026 at 07:20:11PM -0600, Tom Rini wrote:
+> On Tue, 15 Sep 2026 13:52:07 -0700, Sriram Sriram wrote:
+> 
+> > Three independent hardening fixes found by internal static analysis and
+> > code review. They do not depend on each other.
+> > 
+> > Changes in v2:
+> >  - Dropped "boot: image-fit: add overflow guard for FIT decompression
+> >    buffer" (2/4 in v1). As Tom pointed out, max_decomp_len is used both
+> >    as the allocation size and as the unc_len bound handed to
+> >    image_decomp(), so a wrapped multiply cannot leave the bound larger
+> >    than the buffer, and image_decomp() already fails cleanly on a bound
+> >    that is too small. The claim in that commit message was wrong, so the
+> >    patch is withdrawn rather than reworded.
+> >  - net: tftp: replaced the four bounded strncasecmp() comparisons with a
+> >    single check that the packet ends in a NUL, per Tom's review. It is
+> >    smaller (+16 bytes of .text on am335x_evm_defconfig instead of +24)
+> >    and it also covers the dectoul() calls, which v1 left unbounded.
+> >    Retitled to match.
+> >  - Rebased onto current master (a44f46af0aa).
+> >  - No change to the NFS and ext4 patches.
+> > 
+> > [...]
+> 
+> Applied to u-boot/next, thanks!
+> 
+> [3/3] fs: ext4: widen ext4fs_update() block-group loop counter
+>       commit: 1c1b6c2b2ae03912007ed2ffd361f43b7c2e5401
+> -- 
+> Tom
+>
+Great! Thank you.
 
-Hi Simon,
-
-Thank you very much for your review.
-I will send a v2 addressing all your remarks.
-
-Best regards,
-Vincent.
-
-> 
-> On 2026-09-22T14:58:39, Vincent Stehlé <vincent.stehle@arm.com> wrote:
-> > efi_selftest: add minimal fmp test
-> >
-> > Add a minimal test for the UEFI Firmware Management Protocol.
-> > At this point the test only does the following:
-> >
-> > - Get current firmware images info.
-> > - For each image, verify consistency of the authentication flags.
-> >
-> > This can be tested on the sandbox with the following command:
-> >
-> >   ./u-boot -T -c "setenv efi_selftest firmware management protocol; \
-> >                   bootefi selftest"
-> >
-> > Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >
-> > lib/efi_selftest/Makefile           |   2 +
-> >  lib/efi_selftest/efi_selftest_fmp.c | 135 ++++++++++++++++++++++++++++++++++++
-> >  2 files changed, 137 insertions(+)
-> 
-> > diff --git a/lib/efi_selftest/efi_selftest_fmp.c b/lib/efi_selftest/efi_selftest_fmp.c
-> > @@ -0,0 +1,135 @@
-> > +     /* Verify each image info */
-> > +     for (i = 0; i < desc_cnt; i++) {
-> > +             const struct efi_firmware_image_descriptor *inf = &img_info[i];
-> 
-> The spec says callers must step through the array using
-> DescriptorSize, since firmware may return a larger (newer) descriptor
-> than the one we know about. U-Boot happens to use sizeof(), but since
-> this is a protocol test, please can you use desc_size as the stride,
-> e.g. (void *)img_info + i * desc_size, and perhaps check that
-> desc_size >= sizeof(*inf)?
-> 
-> > diff --git a/lib/efi_selftest/efi_selftest_fmp.c b/lib/efi_selftest/efi_selftest_fmp.c
-> > @@ -0,0 +1,135 @@
-> > +             /* Verify authentication */
-> > +             if (CONFIG_IS_ENABLED(EFI_CAPSULE_AUTHENTICATE) &&
-> > +                 (attr_supp & IMAGE_ATTRIBUTE_IMAGE_UPDATABLE) &&
-> > +                 !(attr_supp & IMAGE_ATTRIBUTE_AUTHENTICATION_REQUIRED)) {
-> > +                     efi_st_error("Bad AttributesSupported %u\n",
-> > +                                  (unsigned int)attr_supp);
-> > +                     goto out;
-> > +             }
-> 
-> efi_firmware.c uses IS_ENABLED(CONFIG_EFI_CAPSULE_AUTHENTICATE), so
-> please match that. There is no SPL variant of this option, so
-> CONFIG_IS_ENABLED() just adds confusion.
-> 
-> This only checks one direction. You could also check that any bit set
-> in AttributesSetting is also set in AttributesSupported, and that
-> AUTHENTICATION_REQUIRED is not set in AttributesSetting when
-> authentication is disabled. That would also catch regressions on
-> boards without CONFIG_EFI_CAPSULE_AUTHENTICATE. What do you think?
-> 
-> > diff --git a/lib/efi_selftest/efi_selftest_fmp.c b/lib/efi_selftest/efi_selftest_fmp.c
-> > @@ -0,0 +1,135 @@
-> > +     ret = boottime->locate_protocol(&firmware_management_protocol_guid,
-> > +                                     NULL, (void **)&fmp);
-> 
-> This only tests the first FMP instance. With
-> CONFIG_EFI_CAPSULE_FIRMWARE_FIT and _RAW both enabled on sandbox there
-> can be two, so using locate_handle_buffer() and checking each one
-> would make the test more useful as it grows. I'm fine with leaving
-> that for later though, since the patch says 'minimal'.
-> 
-> Regards,
-> Simon
+Regards,
+Sriram
+ 
