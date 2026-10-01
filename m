@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12CFACA5FCE
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 18:05:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DB36CA5FCF
+	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 18:07:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9A29340BE4;
-	Thu,  1 Oct 2026 18:05:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D74BD40B9A;
+	Thu,  1 Oct 2026 18:07:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4v2HtYt28xeq; Thu,  1 Oct 2026 18:05:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org D885C40BEC
+ id nMkrefPSabQx; Thu,  1 Oct 2026 18:07:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 59F9A40B30
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790877948;
-	b=q13VR8l6UHmAMxNQQztuvkIuOs/Ise4+KyY/dVSz8zgGqrOja5mHxx/CwUZujXgcPA/k
-	 Og/xfSukMvrRn2uXuyNlnlHGcTu4WV2pbaLLHX6ckRNm7N+2Vwh9qqiWsm+vo4ebn+Xx4
-	 vnnzBwDXMrlOOKq2RdlCOSavBVcJzhZ+sWapMiuXB+/554kHrapdScwIV0C18sCf9UAst
-	 41Jm7GmQzam4sxRA9k0YsRRhGMAQzcWY5QBmXe2xpL1CGDAqIcBQ8Rn2x1QUkqCIzEtsl
-	 TDsZOxXZWiorckscENJ8B4k4gnv8F3guPTRPOC+8qQR/CT7GzgiQfLw5/c/9YVtqbwA==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790878071;
+	b=EaMNFabP/gPDslHi8zfl8kBGShV4wREWpqksyArZpEei/8czDuEQ+tIzrKmYEaHjGzCs
+	 wPoB9jXdQm/VWW2JNjZ9xLTn/OuQFOTSQfdO2G6rdsOw4t9vrHRRrwUNYpCSR5JwTbnzw
+	 ajiQATzeWklrW3IcEkW0ysUEAuk6TCCGV3eFA/LyBq0DDGwe+Lg8zSAOHVgGd00oFLu78
+	 EObx6Hjp2h+00QB+25l0mRJnX6fEcmRaZsYGYS0JDlE6rnYxnJLQ5WV07l2ElilxVIAa+
+	 oaH4v2ET7SOftJkkyYNGHh3v0PNKJsQkef/znyEQobE0AxxiPNxAUGwIXOeSKJK5N/A==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790877948;
+	c=relaxed/relaxed; t=1790878071;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,160 +32,157 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=IsgHghsPdGYLjRfxbXg3RBl+HKF2KJYCjS8S30Fapjc=;
-	b=I1kj1sHVqKDwhL66szZsNAz9+qIS4cY+DOjDFcCDPPVpZDS/op/kJ6yvkCGj1QiTLEaH
-	 vvkbSp/+8TCjZ0SCtu3ukJQhQl2qUBOThwCLhQng4wMLpXy0L+Joh25vsvxPnGlIq76ne
-	 j5c1yU17iGftiIQeBAwFyYtgvgUUuSorvyZBTfrmtKHjtwkC+XrJ6hcqZB0tQT/rtqE6Y
-	 fRUlmvNb0i8gQme1mriZ4a3U4HmDDw7fMuoTwGpIIGAaSGNYjqq3Xjadd0WUv8arm+7GR
-	 11h7H7UZ/EQBTlsT/TDcjeVe8UpnkZ04UH20uF92EYhNfwPanEUkDXk8V2WI/uqwAUQ==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=MGezBFfX;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=AqmblDSbUFtm679dafvu5hfbRhHPn7R+BK54In0SrDw=;
+	b=EhALZVZGqCkStlt6sdmBuXxlnIl9VuN698Lda/mTwHHcZHgVKz9wzlONGxTalO9cXgxl
+	 BmzYCPZI2grmAdfSpZGpzTm3DUFgcrN/gTzkOFcvQ7DDvm6TElCxM2JoVMyKjKI8Q9eIc
+	 R1EZ9WADJXKezIK0oCgDANMpV/YHssMYgwxuoBnIQC/gTu4ZfMLA/u9vVlwkrGh0fCEI3
+	 FZTZcyUbtbZPOKlTNk53r6P1kckYBWr4BKojyTL8jn8e8+IMQ89k+ZUjtCsjygQx96onQ
+	 NEU99RBKXptyMYvp9eaN7GvDFN1K9b7Met93vANHFmDpLRgNuzHNhTm0waVjyiVAvLw==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790877948;
-	bh=IsgHghsPdGYLjRfxbXg3RBl+HKF2KJYCjS8S30Fapjc=;
+	d=lists.u-boot-project.org; s=default; t=1790878071;
+	bh=AqmblDSbUFtm679dafvu5hfbRhHPn7R+BK54In0SrDw=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DAQHSFlse6sCnN3PztJ+cDAgaY0zfPkPyORwZe0jfq9xYspsLmXzyv091Y4WAcBzV
-	 yd5N6zxzsaqbDZR1UcsqntMSMElJLhAyv7Cx3fmp/UtGMpatwUSZWU9P0K43TtsP0c
-	 TS4iR+5iCv46yy7VUM/nNcfntAgeg0ojhiWkEYM/Di8No9+z8pwUe8JyTnevnXsQEl
-	 KPgDXdQ4BE14WW2UR95UsH/lXVxLXVzs1z6qBdFJSpScvREeMQCNOTpbQ1VhTw2UpL
-	 ox1dXfE2wb+cRGFqm3aGOVdUK+mW13+qTZeotcXSgCbEOZSqyMLa5de3T0LcNwfA9F
-	 1AIII+kHekY1Q==
+	b=Y9svqBbdWYOiU0WfForoXGPyJGsiMnMdRdz9DBNWlUhKE2b0Ts76JA195yyyW2Z8n
+	 FEGgiGD8xQOliaCBUcYp5slkthvZNfDJOuc5aHFmMjmlj/KfXOFjXkEu4xTLExrhYJ
+	 RmI4pwt1JuX60vApYb1nki4tu7TZH6yiNRy1pImTMF5AE/3grbiBFRCfAHigTlQa+z
+	 h6L4ixGjhUN2QYKjdjuQ/uOTVLXKughkFNRxWT/7phpmVKyzXkMgLKRhIEUsIHOci2
+	 B1c2QFAvKu7VcV8nyb0TZPglAP7eG6iRcAVde1THeyXuFawQS1344eMbVeoy/WttIS
+	 WAjnAJd20fJrQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D885C40BEC;
-	Thu,  1 Oct 2026 18:05:47 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 5C430282
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 18:05:46 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 59F9A40B30;
+	Thu,  1 Oct 2026 18:07:51 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 770AA282
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 18:07:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 420CA40BEC
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 18:05:46 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 68DA581089
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 18:07:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JpJMDCF6Mj2V for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 18:05:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 607E840BE4
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:41::f"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790877945;
- b=U3Zk/ThHcLpcY4sap0Xidg5wTTRtwygdcU/gRinBy4JG+8z7cWcuKZJq5+IeRKBv2orr
- +ullwVfScpuOs8SxhlTIyanH+mri7GAtB5wd1pHu/cJOQimsamGrnXZJXNpYx/OA6wdqB
- xqGa76qOTCn0PG+bYCKNgJS8ACwmLSAlryIt9Ha0EfDNjh2c+ZCC0MhKOuTA5KTaOp65O
- LhuS5mKXacweOU2NkndVdySr8VXoGRSK/EIYAJJwPx9KIhYSi8wgnXAXZ7M7Autyu3lcH
- y/oxeMozY4hTZnFX6rJqVxGLj+thTPFR50ne8aaxATOhvF1w4kae646gXU/J5oe8isQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id r8ndbQAFzujD for <u-boot@lists.u-boot-project.org>;
+ Thu,  1 Oct 2026 18:07:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 517FB81086
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:41::2a"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790878069;
+ b=jUPNrOjC++sskfUuwn4PsSpPL3ycPQve3CND44f5kS1MWAuR6yzBmlGgp057hW+hc5zT
+ Ichck5HaHatRbPqZaTAnc8n68Vp2kbAJr2Ybzwr757/cITXp38H17y68kDuBNHuugCHxa
+ rVh1zauRyaSAvdbTvPMsqnCDlKKZkdY7g8QZrocECjBkSv1lqdFCNtLIMty0U614gKHNk
+ toIGN05JbRxoSYsxGP8rlAkTKxdKE5JySknODIwlVeQHtzdwmvBDVLdJlla9mXqotHnf4
+ 6YdTADYFljImnhSBfacyzX9PZDigBiNTz+tNI9qMsfeUDur1CVFqueISmimErv2KVRA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790877945;
+ c=relaxed/relaxed; t=1790878069;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
  MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type;
- bh=IsgHghsPdGYLjRfxbXg3RBl+HKF2KJYCjS8S30Fapjc=;
- b=JnPouPwAi8GXqrvQuByHT6+ydNZxLJLeTfOJa/EBxFN/t11YjPIpPDe8eKqIiS5MqkHC
- SmsZcYtsGxOw6g/4Y5LCZk2DvVLfDp1NYPGwTjOeRkdb/TjpDYs7upguBjNfA6UjT3Z6a
- WLz/hGq06s6nGISuN4qbBydp3FGKK0ygZqDJaEYTuS5FyhXN8EPA71/jH9zqrtWN9s275
- lllLvb+svpJhoKosE/q8KVNzms6KZLI/PQVycA0UzontJZlQO7v4mHpGC7EQ6/bRS76oU
- BZdgIAopd3trf1vAEsD63yvnhLw8yo+75k597j7zYpkMSObIGQum17joai8NSOeUh9g==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ bh=AqmblDSbUFtm679dafvu5hfbRhHPn7R+BK54In0SrDw=;
+ b=NBO2NGpDLy2KaO3Op8jAu/LQTuERykft3WtE18/20eugM5uDvPS2xqGhk+xfA5j3qoc/
+ YVHW1UB656gzK5kr23lLrksvhbhO04XkiVk4fR6HH5ZOee5vhwyZcdz2yKfrp9Mf0WTTS
+ uFrYZYZ1ys8PLpOd296gbDp50/88Ha/Kqyg3VvhsVs81gNCsG/L1e2GBjz95t7WD8TyvC
+ e9pZc1MoIhHsyjsP6noP3rK9RHQp3MUsfB+lZcikGpx7KdTPXGdV8nuarfQHHrcgEwt7M
+ 7WGXkF+Ai229DCUm9fx+z9+G2zceWJFfe3H5391FF11h5U4HwmVXz0b5CF0iqpY5RYQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org;
  dmarc=pass header.from=linaro.org; 
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=MGezBFfX; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:41::f"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:41::f;
- helo=mail-yx2-x0f.google.com; envelope-from=ilias.apalodimas@linaro.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+ header.s=google header.b=xZT+lxzc; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:41::2a"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:41::2a; helo=mail-yx2-x2a.google.com;
+ envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=MGezBFfX
-Received: from mail-yx2-x0f.google.com (mail-yx2-x0f.google.com
- [IPv6:2607:f8b0:4864:41::f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 607E840BE4
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 18:05:44 +0000 (UTC)
-Received: by mail-yx2-x0f.google.com with SMTP id
- 00721157ae682-895353e9051so68076677b3.0
- for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 11:05:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790877944; cv=none;
+ header.s=google header.b=xZT+lxzc
+Received: from mail-yx2-x2a.google.com (mail-yx2-x2a.google.com
+ [IPv6:2607:f8b0:4864:41::2a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 517FB81086
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 18:07:48 +0000 (UTC)
+Received: by mail-yx2-x2a.google.com with SMTP id
+ 00721157ae682-8ab408a38bdso16608697b3.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 11:07:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790878067; cv=none;
  d=google.com; s=arc-20260327;
- b=Z6YePS72Fyi57l8FnBRKIsWE47GgM1UzFY/PieGyCDYaU1fKO35mtD3kJt0nI8WuGH
- qP/l6PnEDN6EhknbzBsaafZ3O6SELsVpjzZGnARhxJ82zLgiWGtfaSiI7p5xzcFB/9O/
- Wvmfc3toluXSTb5Y1+NrfFd1AZ25RzRMrzC0tYzISo7pJ2Z5WNXeX5io0KUqL0EDOzwJ
- gxLCi3SvhwMLb59MtLMgLO29e8QLA6fobmhGJFrHW7B1hWHJdgwvIWDENgvUovZI3s+e
- zS7eNE0AY0wD4X6L3LLb86HdXN3bQRKcDFNTrfwZ/kSzSWQHGeOM6RVNZwLoLPO0BOga
- NRPA==
+ b=naTbgXg+gE1wTDMeqILgD7gdt1nK2A+8embhpC6D3bCUQAti8TULdsfqgYvfNXQqlv
+ 3mmkUi7AFFAmRHnxezYR6D0RpwgqDdxYYWI0tpX+IRrROKcx42UzYi+tfNo8fghi9PjB
+ ScPvg7VIvJWuSY8fBsXD8vlXFea8lyNoC/914smClEqLqj4g8jCv2TasjNUL+I1gZmuw
+ ttIiPhR2TC04N0J+g/IW4wHCtB8z1yi2q1kLSbQTRWHHnYqjI6ycRettg11U9pEeuX+3
+ hbbxldM76AblE15vGVs3kxZFPegtyZmB1zCsprVAW6PE7dF4qCBf9YSdFkvTTptfMeMm
+ pd2w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=IsgHghsPdGYLjRfxbXg3RBl+HKF2KJYCjS8S30Fapjc=;
- fh=SAaPAFZX4WKlKd/mCetnRE/KSbe1e0xp/fK3yEItU3g=;
- b=q/Tv0xdzpQAYhPi7UjwW+5qDoIP7shiytksYJatYTmQnvDX3gAn7z0S08y+3wfbfq+
- bYA2d4QONoY+/96HbQouwkbSJ1/zsz1jpymQhHcamZt5VcnINtqki7MDU7XUezFvKVYc
- 0G+F5C5cJst1DE3pEPYVfb2LyCp4pKJl4Ce/xXG4x0xPnb81vb8dDEHhDRYlAdZXoGiM
- qx8UtId8Or9+InVJJ4rflA+UAL/vYNtFVEy8yQRFA9zCBByKJVyal0hVNEBGJiHU9bMu
- EZm3yTjdhXEpMshuuZGdVEF99LsRNR8EFdq9sG9vDPb5xAOqPBVVD2eNKwRpX1men56u
- tPag==; darn=lists.u-boot-project.org
+ bh=AqmblDSbUFtm679dafvu5hfbRhHPn7R+BK54In0SrDw=;
+ fh=t4XXbWIBXSJ5nkLSW0fFOvWlYyMJMGKoT0o135yG9YE=;
+ b=iZiljSN5xg5FhaGpzcgQ/isN/ZD+gjhxdAO6aiKE6idwuUnuaHEMGpDfSWmhr5renT
+ VkE7bLwj4gpE0qfLwtmPwc33k4T66ILzixJTUEqB1/PhT2vIdJb1qdeVqUkHvDcsnOiA
+ FZ8wg5qls5amVw69l/DEuFVs80OPVU32+Bullsdm9aFzFKNnEmN1wE4MyY+giwFzVxqd
+ vyBYPAWMxhAkgRYv0ZFLzNnfmns0iJ6UJPiCwA7V3RV0FhD0lHLaTK4Ufw583aByxYHP
+ NpKqoYGyxjgnn9X9rPQw8mE+BU2gYAAytAwWKbWC3kY7RGjtoduuTGA+0bVtg2xnp9Bs
+ /izQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1790877944; x=1791482744;
+ d=linaro.org; s=google; t=1790878067; x=1791482867;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=IsgHghsPdGYLjRfxbXg3RBl+HKF2KJYCjS8S30Fapjc=;
- b=MGezBFfXW/tywQDHqC+HxBp0NTrzBsUIupr1HBriXOR/818lf23tgxv86i+udgrPOU
- LAt+e5ieIYN0uOVPU/mJd8MVfRO5Z250XvnVwP3YPd5UMQ8L/EkXv3OQ4RinQ4Ey1V6P
- AR0uk4kToGbooi1aTUrmfiVQr4HI4MI95J2jfXE/SkPgyxNsPfNXGSTcG4yE3+mfzMyi
- R8RZEByuzjjKf2zMdg0JD9zNXjWW1RPEa4OHuRypJppWSknMemJIsov3LASo7SCYQcJk
- 88Z+DJPWvve9nE5JhWvQ8pwsMSo9CnM++udeL49eGxVWkEucvQas1WkXS1w1ljt4UL43
- 0eDg==
+ :content-type; bh=AqmblDSbUFtm679dafvu5hfbRhHPn7R+BK54In0SrDw=;
+ b=xZT+lxzcs+VwyRNxJXWWFA46U0T/AYw2h9F+s26063na1r0eiJImc5Wi/G6jVSnceW
+ NI/EtjVJjcWgJLk/X7OrQ1/UoC0p1gk/RsUmvJBEY0+GRGkRbEnAPbIvXsCjeP4UlNXg
+ wDHVdfinFad3Iqg+Z1Cf/d1CkCeYFZIkp7s6MJksi0UHU2eFVIbMdOS6RowK6DdMYUKy
+ JdaVXQRCsLw2uICLEnpyOTD00IecoyfOe1GiJII+CozHP0wO8JMyKBcPuotAxDf8yZVa
+ 9MkJmIs1bbsSa2jquGOV9uebYDGhywE/7TlqVFubUgLjZCfhpxDcvU9n/9t+ZNO22XC0
+ k1WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790877944; x=1791482744;
+ d=1e100.net; s=20260707; t=1790878067; x=1791482867;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=IsgHghsPdGYLjRfxbXg3RBl+HKF2KJYCjS8S30Fapjc=;
- b=g82/j1VAxWaxVVyXSz7py3LSTaG5VxlZ2QFlJI8J6i1bxh3S5OUFgmn39JlrQD9hJJ
- U4Yj6T+x5YYEgH6DMZ3sCYkUFSqOKFFyH9QbSVjNNk78ynT11ELO5x3NDytVhAhfBa5P
- /sslon1H3JSloYbR7PqoAv+du0L/zoYyL1bZd1rmgzbtL9wGhCF53iRqFMEsa354rhLO
- uG3K9/fypsyDjb1hd2EPbJfkh7r0CRPqPQ1lw5L0DxqtrOha4p9CqPcD0C076og1d8JK
- wa7KBvLn1jdK78WPpStI8FvEt/1ou5Cd0blgwsTsfBY5fB1/MgiDMAW6tuD42SGmwhYE
- 7vdQ==
+ bh=AqmblDSbUFtm679dafvu5hfbRhHPn7R+BK54In0SrDw=;
+ b=lUoq/OE8fgwKKdoMrpVBfF7PlaUD/LgftNd1LDM66t/N8t+TfIL2sX2iKNjeWO3AhM
+ +CAqh/Mpad1zgWYrYgFi9r04fIxwFfFMszWGSPVYPONe6k+iNz+injPIpnuyulselA/9
+ 8I5JFy7J7VAT+ePnBrH0lLK3duIo3qcn1sM1xUNf6roS1L3qh3qgb/9xjYhN/VeRx582
+ xULJRz/oJazVB3lRorDs1gPWB079mCcVXNg9aNGmTEvOgpgASCaRXYE4be4G1KtEQPcq
+ Bkh88tUtMKBq49QujTzqRd/zASxYOj/TiH7kUeL5o3WMRlK9PmJe4EkoS5OnmSoM9UFl
+ yFtA==
 X-Forwarded-Encrypted: i=1;
- AKwUvByo94MT2B73yOQ5Q67kackBNyNLWms0155KaU4tWwu/BHZVyuSD9iqWPyGAMH/5ocR4zA1LULU=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLyr1Af7Em59LulpqMFlt4M7lqRCBS3BpW1sbPB+uF4pQhLSCAM
- 5ecnhzS3hfIXhLiNpJWlPTZ8e3kMzACye9aKx4SffrmkOXql4vxOUNQmECinG9FWRSFnHWJjSZG
- 6OPr3vg+slj9YneQb+H5SPTyD3294yONxdjAOmt3I+UafUUVekxfgxF4=
-X-Gm-Gg: AYBFou0/vIX4h2gx1+YkawDonXUb6UFEhdQuPyMwP0fwLebURM4x4IsHiZC90XIubBA
- bV1F4/ZIcza3EbfBA6B7tB/RrY+bzJsrKg9kPiv+RpPt9Nqjb63zV4Z2jWzVNnl/dadEhvfT4B3
- Ac5lP0cI4IRWpmHpSncxlhDjU9lKEoCzWU3xN1kJrtTBx/VJ0EFxSoippXpcaGrn6w9ABIr25Ls
- hTjxN8oQotDMNtef2MGk3+qwzZpsw7XJ4vNdjz9SKUWV8KtNNX4GGVVEeF9K/Ps3rbPzr2uLqj+
- bOwSoNLauhVIhSvxMTUwAPh5q5Q0yvFb9XUFRciYp8EGXrJ0HkQXsYuQDzb74uzDmqeTF3Al//3
- FWRByY2lbNYtqIVcZdgYvNEcTvWwBReef8SdNoK/K7OxxtDHlTq1nKRuGQvjusQvEUUtsTlnKSU
- yj+o5wlUOn6sjkwqQCMiXAcuMm+MCRdo9RS1zYT+krUslya4EDqPJc3Iw8CIIyDNRX2PJ3ArQFl
- jzvDWlykRTDo4Wu88hRhpZf5FLuZBMkOGpwCLKwXFFmNBdrhIMvsNrzB5n4QWKymdPrtYIdimk5
- /6THgOQyNhNIJx1lCyYx36YdiKZStjZXSuaYXnbBH0RmFw7zfLwiLYK8GZalg5QQxoLw5QedsNO
- 4VuM4S1rIUoAjZziqva8q4cUZeba2S0vvccvn3ypLDTPUReC90hAiVA==
-X-Received: by 2002:a05:690c:e21a:20b0:8ab:3960:65af with SMTP id
- 00721157ae682-8ae3a7ea362mr257917b3.56.1790877943394; Thu, 01 Oct 2026
- 11:05:43 -0700 (PDT)
+ AKwUvBx+6Miv5sxhYSQRa8WevBvT6JCUhRQ0/C0w/TaG1R791j+mMaxHK4u0TI41YkwDtoJZz8IwGKg=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJIGEx1k57r8zoT2IgW+MLU8NVTKaufvZtm3YEzsHK4T1NyBBWs
+ L5QZ2o7V93Jj+u62Oy5UTemjDs/tA+j2cIDet2VoTuEGXQrELhuFKScqD0iX8Qi6QbnInK0dbe1
+ Kou4/k6UCPGzLTFHfPD+8i+Ni0O8lhM8fgduKhJ/fCQ==
+X-Gm-Gg: AYBFou17eggXE6KX/vXEzUULuRc2E3mZJqb5xg66ku6RhtPLp0DwPebkc3bqku48buG
+ ZTz6EdN0dROi9UjalhfDJbYdgYSBJUduyO7y/k/KeK6Sy/UN58+PIqxFp4jeGY4kHF/9A4pEvZH
+ Si0UrAQLjwEyWMCaqWw+BPbxfrzjz2uLlc958saDymm+d7hUy8SkgOwPEmUg/75Pkj8Guxhrema
+ 9E3hNmRwRMLFSc1yASlSFhpn3VAfuFm0JwtTSSgEnUJvq+PnF4fxLVMr1MSO/8O567APEV9RjQI
+ 7C/mupxp5vMQysx7mRl7xjelOTkRAZjmnqGPQtKdbyw97+s6bQ5jahlF4Aw4aWi8dlt69jQHsPp
+ /PH/wxJloF8Xf9HLOwi58881NXkXajq3TtXvk2xyKxC01k12zo/5d+6CW8Z+ZsJGQFWdEhGhiMj
+ I5ulk/N+P8DihcmslsyT14J/4jDm+lQ07wuQH5J/pXjWRh2xdc34yzRHiCBkacCo+Xwrz06mAf+
+ DWqDN1+6N+4IHbJg4XvLGLEGemYv7zijH6rgrCqAOhoveq8CsXpsB6L9w0UpvVYuPd1+9fuO8Eb
+ EG4kccaq5VTBTIka2iGxpvOZtxlMuPXGsA1GdacyycDIo9BmjRxDdCRc+wWQ10XZPx+oGkbkjx8
+ W9494dWkHj7OfgcLpOb3H0eGMpdeN9dgQzEe+niXTwFWPcTKivllIaw==
+X-Received: by 2002:a05:690c:5811:b0:87f:32fa:aa08 with SMTP id
+ 00721157ae682-8ae39c0cd92mr321017b3.14.1790878067072; Thu, 01 Oct 2026
+ 11:07:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260930090512.52342-1-michael.haener@siemens.com>
  <CAFLszThPOmn6Z3hA6H1r812kKdEWxtv_RV70BNW_w5U0M1TBDQ@mail.gmail.com>
  <CAC_iWjJqezM8j=5jcAA8w9ApNP5b+pqC=CkRxEA8mqdNCu1RFg@mail.gmail.com>
  <CAFLszTgXVSKxOhdmgGqUG=YEyekP=3jtz=AtHF4zD8Y_CKY50g@mail.gmail.com>
- <20261001172745.GO858934@bill-the-cat>
-In-Reply-To: <20261001172745.GO858934@bill-the-cat>
+In-Reply-To: <CAFLszTgXVSKxOhdmgGqUG=YEyekP=3jtz=AtHF4zD8Y_CKY50g@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 1 Oct 2026 21:05:07 +0300
-X-Gm-Features: AclHuK-6ycLI0PhGMzYM5haYqPzU10rp-hnrdubcbd6AZTh5W9CvVDGb-XOPiIo
-Message-ID: <CAC_iWjLZahHaYeuCgFr7bXbAv=TKLBk2-_=E_RPoBK0oOSN9Og@mail.gmail.com>
+Date: Thu, 1 Oct 2026 21:07:10 +0300
+X-Gm-Features: AclHuK8VdMGvfiIFJgNDilFbp16fc58-yKtnm_cD7UKXWUYXPG5CrS4VUuYs-9I
+Message-ID: <CAC_iWjJ+4G_u6sCPcM6HMhVRcnkmGLSaAYHkOScy5CVSDrpS_A@mail.gmail.com>
 Subject: Re: [PATCH] tpm: Add an option to start the TPM during init
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, michael.haener@siemens.com, 
+To: Simon Glass <sjg@chromium.org>
+Cc: michael.haener@siemens.com, Tom Rini <trini@konsulko.com>, 
  u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -201,48 +198,134 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Tom
+Hi Simon
 
-On Thu, 1 Oct 2026 at 20:27, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 1 Oct 2026 at 19:03, Simon Glass <sjg@chromium.org> wrote:
 >
-> On Thu, Oct 01, 2026 at 05:03:31PM +0100, Simon Glass wrote:
-> > Hi Ilias,
-> >
-> > On Thu, 1 Oct 2026 at 09:41, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > Hi all,
-> > >
-> > > Any reason why we can't add this directly to the uclass probe instead?
-> > > According to our docs, the probe is supposed to 'make a device ready
-> > > for use'.
-> >
-> > IIRC we talked about that a few years ago. Probing a device is
-> > supposed to get ready for using the hardware, so we typically have a
-> > separate operation to actually talk to it and get it into a particular
-> > state - otherwise just probing the device would take quite a while (it
-> > also means that TPM cannot be used for certain things after init()
-> > unless the board is reset!). The same approach is used by the
-> > keyboard, for example.
-> >
-> > But given that this keeps coming up, we could perhaps provide DM
-> > support for this sort of thing - it's not obvious the best way to do
-> > it in a generic way, though. We could have a DM flag and perhaps send
-> > an event that the TPM uclass picks up on?
+> Hi Ilias,
 >
-> I'll let Ilias weigh in here, but I feel like maybe we've just been
-> treating TPM wrong and it should just be on-probe.
+> On Thu, 1 Oct 2026 at 09:41, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi all,
+> >
+> > Any reason why we can't add this directly to the uclass probe instead?
+> > According to our docs, the probe is supposed to 'make a device ready
+> > for use'.
+>
+> IIRC we talked about that a few years ago. Probing a device is
+> supposed to get ready for using the hardware, so we typically have a
+> separate operation to actually talk to it and get it into a particular
+> state - otherwise just probing the device would take quite a while (it
+> also means that TPM cannot be used for certain things after init()
+> unless the board is reset!). The same approach is used by the
+> keyboard, for example.
 
-I can buy into the argument: 'The TPM self test is slow and i might
-want to skip it'. However, I don't see why people who care about boot
-speed and not the TPM and don't want the extra security layer don't
-just disable it from the DT. Probing it at the uclass or an event or a
-cmd makes no difference, it just complicates our code. If anyone has a
-use case in mind that I am missing please shout.
+I am not sure I follow this one. What do you mean after init? The TPM
+is only supposed to reset with the CPU.
 
-Cheers
+>
+> But given that this keeps coming up, we could perhaps provide DM
+> support for this sort of thing - it's not obvious the best way to do
+> it in a generic way, though. We could have a DM flag and perhaps send
+> an event that the TPM uclass picks up on?
+
+What would we we gain from the event vs just initializing it on probe?
+
+Thanks
 /Ilias
-
 >
-> --
-> Tom
+> Regards,
+> Simon
+>
+>
+> >
+> > Cheers
+> > /Ilias
+> >
+> > On Thu, 1 Oct 2026 at 11:20, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Michael,
+> > >
+> > > On 2026-09-30T09:05:12, Michael Haener <michael.haener@siemens.com> wrote:
+> > > > tpm: Add an option to start the TPM during init
+> > > >
+> > > > Add CONFIG_TPM_AUTOSTART, which runs the TPM startup and self-test
+> > > > sequence from an EVT_LAST_STAGE_INIT handler. This is the same thing the
+> > > > 'tpm autostart' command does, but it does not depend on a boot script or
+> > > > on the environment, so it cannot be skipped by a stale or edited env.
+> > > >
+> > > > Today a TPM is only started automatically when either CONFIG_MEASURED_BOOT
+> > > > is used (and then only from bootm) or when booting via EFI with
+> > > > CONFIG_EFI_TCG2_PROTOCOL. A plain booti/bootm therefore leaves the chip
+> > > > uninitialised and the OS has to start it itself, which Linux reports as
+> > > > "A TPM error (256) occurred attempting the self test". Boards have worked
+> > > > around this by putting 'tpm autostart' into their environment, see
+> > > > board/xilinx/zynqmp/zynqmp_kria.env.
+> > > >
+> > > > Boards that share one binary between variants with and without a TPM
+> > > > fitted can enable this safely: when no TPM device is found the startup is
+> > > > skipped silently.
+> > > >
+> > > > Signed-off-by: Michael Haener <michael.haener@siemens.com>
+> > > >
+> > > > drivers/tpm/Kconfig         | 15 +++++++++++++++
+> > > >  drivers/tpm/Makefile        |  1 +
+> > > >  drivers/tpm/tpm_autostart.c | 33 +++++++++++++++++++++++++++++++++
+> > > >  3 files changed, 49 insertions(+)
+> > >
+> > > This seems like a good way to enable the TPM for boards that want it.
+> > > It would be good to document this somewhere, e.g. where we mention
+> > > MEASURED_BOOT
+> > >
+> > > > diff --git a/drivers/tpm/tpm_autostart.c b/drivers/tpm/tpm_autostart.c
+> > > > @@ -0,0 +1,33 @@
+> > > > +     /* A board may share one binary between variants without a TPM. */
+> > > > +     ret = uclass_first_device_err(UCLASS_TPM, &dev);
+> > > > +     if (ret) {
+> > > > +             log_debug("No TPM found (err=%d)\n", ret);
+> > > > +             return 0;
+> > > > +     }
+> > >
+> > > It seems odd to ignore an error in this case - if the board maintainer
+> > > says that a TPM must be present, then I would expect U-Boot to fail if
+> > > it is not.
+> > >
+> > > In any case, uclass_first_device_err() also fails when the TPM is in
+> > > the devicetree but fails to probe, e.g. because of a bus or GPIO-reset
+> > > problem on a board that has the chip fitted. That is a real fault, but
+> > > log_debug() hides it. Please can you stay silent only for -ENODEV and
+> > > use log_warning() for anything else?
+> > >
+> > > > diff --git a/drivers/tpm/tpm_autostart.c b/drivers/tpm/tpm_autostart.c
+> > > > @@ -0,0 +1,33 @@
+> > > > +     ret = tpm_auto_start(dev);
+> > > > +     if (ret)
+> > > > +             log_warning("TPM startup failed (err=%d)\n", ret);
+> > >
+> > > tpm_auto_start() returns a u32, which may be a negative errno or a TPM
+> > > response code (e.g. TPM2_RC_INITIALIZE). A response code printed in
+> > > decimal from an int is hard to match against the spec, so please use a
+> > > u32 and %#x here, as report_return_code() does for the tpm command.
+> > >
+> > > > diff --git a/drivers/tpm/tpm_autostart.c b/drivers/tpm/tpm_autostart.c
+> > > > @@ -0,0 +1,33 @@
+> > > > +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, tpm_evt_autostart);
+> > >
+> > > This is not really a driver, so lib/ (next to tpm_api.c) may be a
+> > > better home than drivers/tpm. What do you think?
+> > >
+> > > Please can you enable this on sandbox and it would be nice to have a
+> > > test in test/dm/tpm.c, checking that the TPM is started after init and
+> > > that a missing TPM is handled. Your test could send the event.
+> > >
+> > > A full self-test on a TPMv2 can take a noticeable time, so the help
+> > > should mention that this adds to the boot time on every boot, even
+> > > when the TPM is not used.
+> > >
+> > > BTW, since the commit message mentions
+> > > board/xilinx/zynqmp/zynqmp_kria.env, you could convert that board in a
+> > > follow-up patch to show how the option is used.
+> > >
+> > > Regards,
+> > > Simon
