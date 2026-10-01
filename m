@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBE62CA5FD4
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 20:51:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76F1ACA5FD4
+	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 20:51:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 80FE381259;
-	Thu,  1 Oct 2026 20:51:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4249F6080A;
+	Thu,  1 Oct 2026 20:51:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uoddgNUap9dt; Thu,  1 Oct 2026 20:51:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org C05918121D
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790887888;
-	b=ML/6oFmNA9PI45EHoWPcI9Q7QG2oQ2mN/ve8i2yn17DgnzvIMP/g5MYXGTotO3b+qiMI
-	 7E2kEyHWfhVwv8ro0LSpDai0XhzSB1XUlMmGDJ1vE3g32rJEqHFbJbhpob4HQ2RUY2HLw
-	 zpCoPbxb04lPYVw+zrKjjo1b+ecJatCI/P9gaC/+M8dn3VeMpl+W6JRBiMNHsX7Tztbxi
-	 8YKfwEAWx5ax9Y9oDB0Ah3TmEBuA6hHV7smIQot9qstDO5S72vF8W3ODHS5TcsRPD1B/k
-	 YM+DWHu7/rVPpA5UtAfL4PIUvQVBX2vVIYEoNax4o9Bl2DUnKHlPIl3b2c6BPK5zDUg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ycVI1uZK99HB; Thu,  1 Oct 2026 20:51:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 844F1607F8
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790887908;
+	b=gy4WDG/1IkeAMWhW+EZqlQoVYAWCx8Vzy5mtbVWB70pHN2bgHyyw00I+B3f5nx9UWh8X
+	 nwMpvbfrQvgTJlutKCeV7xak9bMTzUemCgy4USHf8PbO8Bd8tDxz3hz5eIKdNVhpACTIX
+	 QVhD86H8EleVw4pNXKKzjSQW0L0vOkx1YaknvnIDHCEvdixrudKD1aP0MCzDKZM8oigYX
+	 y3HbIGrKi7XsgfZQxI3qK4qynFtBEqoQMFtmrrQ9l/RmxTDNgQyicvKgVTElgWJPbAKMi
+	 Mf+LtH56VDAAzn2y4E3u23CjKNsaI40axC1mQi8yHJo6oczcWrE1lq3KjtGozbqxAAQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790887888;
+	c=relaxed/relaxed; t=1790887908;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -30,89 +30,90 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=GeLLri7M5MXI+CfkrAfwh+Qe9GOS6iuRkkuvq6/YgQQ=;
-	b=eU9scB/qEtqC3LGo1jyR2551iRSyUUP8X9YTdg2QthkFJjDsdVIITBiIR8szQpeasMr7
-	 j6cxIwt1DCN2RpNuz+CW5CuXIuR5xFhXN2pU4srukNy1WzxEtJmfHhKOi/mQ/y2+N31wh
-	 v+Vja/SDbsJD5b8Kkq4q5BsF/PMCo0CkiF5kVkmK6qhldnjy8TXSyCAeC6FKxm0wolfbP
-	 3CbF5SIJXBGw8AAxgSmVID1VUzNGfElbam5r7drpdxSBzIzllhvsrJhpKyheboWRdgavA
-	 Cc1MfLHr9VJLetv5GxXkOJ2CoUrgDAHIXn15D3Mnk+IM1rZXKkTOUXmBmiugKil6YPg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=NrIgwFXcgNy8qej8JztaU0D3VzDephfzIM9V31gWw+Y=;
+	b=CLeSc/clIrQeFXd966IHMuC64UO/qFzMTBWDGGDDJ/tSM68dhwsfLpGXYng4adxYx+b/
+	 UggfGH9vVHlekYdnV0pxmOL2yUIRlOG2i0v69XzXkfO3nOOQ0ACWBsoKxKn5SRUgtWLEK
+	 qaKGaogXuLcarSwXacpFUJ9kZYNUnbnB1gj7VaTWBX+HrBTlsjejNc4odjcRLKpdEqjUN
+	 Sd1V1Ksgoa+oTq8C4FSPfyt3X988glLsTtYz65hzFjxRO36X34/Nyjt/PiTIGibmuXiuE
+	 9wXAVktOLTE+iJBT/mwwR6EHp/OkQe1TKZ3UBQ53F4HzsrUKIGvP9XZMJWz7PVaeOjg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=free.fr;
+	dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256 header.s=smtp-20201208 header.b=puxa0SVQ;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790887888;
-	bh=GeLLri7M5MXI+CfkrAfwh+Qe9GOS6iuRkkuvq6/YgQQ=;
+	d=lists.u-boot-project.org; s=default; t=1790887908;
+	bh=NrIgwFXcgNy8qej8JztaU0D3VzDephfzIM9V31gWw+Y=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=KHtWnAjltr9QOx/0J00WRgHF9peBEe3168hV8kq8CRItMH6CWyvNiIT/jb5+dkml7
-	 XQSbfAYS0PHPVT91U0qFaobvcroN9SRURGvaRyJG/kBNUewii6LwQR7XMmRQsq2vXT
-	 vPR2xN7Wy4hjhc3WbhdYSydJxwAFKEDxzoGLZeKW1ptVQmAvaDmG/DT5L56D7zNKyy
-	 Gr72WVT+Ir1Aa2iLEZalakdsjg7fOxTmNy2h6bXB8RPy9PJHjwmeIjQXbVrC3QVkkm
-	 LKmr+u6TdIkgsYo28YE6UNs32X6Md7Qq8lDQVPQiahOIxLFIVTgKJm03t99OJRFm/d
-	 DknHm1DOmapZw==
+	b=l10i5RF94ceMtxYXP0qcKFvxxUbKcGwwH4E3+ZMAJG8In7pSni+RtVaohDSaSlznq
+	 mqg0Ll9wgldNLJKgboq4Uk5ybIQyz9xoRYRieQK8ffTxM58acL3HmJjsJZlx5Fog9Y
+	 9WkPHycPjZuJKaiInGZrWoT+UUGqRQA/kISCRZ52uPmnT2LprjPWAh6r8ccY7/OkIv
+	 UQLQIgoPniCCpVNtCxwWsCjSVqLRgjNSgcoeQ9sRgWIuE6ms5mynCnQR5a/YHMCYVd
+	 HJwUv+l8TseSO5BkGx7y5uZ/25s1kxQwUD9WhvmUXevmgI5mSEOzC63fapUi1UvNgy
+	 sNaYD7gwyIfBA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C05918121D;
-	Thu,  1 Oct 2026 20:51:28 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id ABAEA282
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 20:51:26 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 844F1607F8;
+	Thu,  1 Oct 2026 20:51:48 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 78C50282
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 20:51:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9D7D240062
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 20:51:26 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5E872607F8
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 20:51:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RJOoP8WGvnct for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 20:51:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org D69AB40022
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a01:e0c:1:1599::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790887886;
- b=mb2NwleNEkiL8WYbPgSheXpbOFuB6UhQjZcK0rARKMrOdmCyfH5LsnVgkHNvPkyk7mOT
- 0YxqpSG6SsZUF43Zx+Vi/lXJCamNN3txWoEkD3/jjp57B3fMQvjZLE7omUgZgJo88WwLc
- kicrTmmM6d5Qk1y0tpRT2k+xCBI5Vl3L2B8R9MaH1vDRpSkniiZz9pNMFculYtwKulrgl
- 2iGx0347txw6uksgHKQSw9p4UER4foLTWF/2lGlVBgCalF8ILtB1J4WGARRpt2uxiV7rk
- 7MWEr7aUGOhHWDXNfgXNbWeyyz9nrnSuMq1uKvdf0WATLOb9zRqWvFOKlBNWqEqqrxA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id borHiyk02NsF for <u-boot@lists.u-boot-project.org>;
+ Thu,  1 Oct 2026 20:51:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org ABFE1607E3
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=212.27.42.1
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790887906;
+ b=l6meF/9b64uhju8ny9LyWwlmm4Ofha3dJLPsywnZIn72Axr7PTYAwo4gKrrTSl6Bo3rr
+ WBRJn5S6uRKeURwU7p0ch7GvHk7JSyjjFerVPmDjGY0MMAbMeul7o/srn0NdzYxcM46/3
+ rkzAtdjMzdWHrpulOS30XbcLOZjDq2Lcccec+aC8WYVzw9OmxAsZTBRPQ5QIfOGQszFo9
+ /RW8m/DUG29vYV5eI6xSlGRy7KtnIHmpqgBJLQNskC2522OqeP42VxFQTzzfRNUL0M0EQ
+ FBt1mrhePwyPKXD04GnjdKedb93g5xJfBgQdO1TjvXE/QRLjaKUbDk+D0DZ5LEika+w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790887886;
+ c=relaxed/relaxed; t=1790887906;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=GeLLri7M5MXI+CfkrAfwh+Qe9GOS6iuRkkuvq6/YgQQ=;
- b=UT+VnJG/DQ1PzAhmN6LtL0/Eo8UjJ3qBjwlIGq8esKnzuG2sHWL2XauSeHHpqs9Yo8Pd
- wA2GIS+vja3WxwtmYxS/bXBhyETGo6rwvNc+goMLO+kEnSCoBu0V5YvccdEU8ym10kLY8
- RzznaovqYmj8fRg5K86YQ73EtbrSFcyCNooVpbXxbn0QABJQofX5YRoURGLFktm8qm30f
- jQLIIrM8Ucmtk85PKXUwH4LwGMQWoPHj+KdvkakfQ+CQgHwmEJeHHiOJCMVYdYyxfcGne
- dZ6MLfvyTBtqY/OziP4RMGz34R0QrlP4nSkO648CKGDLTRP10DZNUB6353l74mgwB/Q==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=NrIgwFXcgNy8qej8JztaU0D3VzDephfzIM9V31gWw+Y=;
+ b=DAWiSZMH4OIJLvWC9KR3T0i3F8bkw967EOixtSLBz7PgCMxiOxGgbtqR/Tj78dIVaBqu
+ 7pFpv4iybA6pgfuzSu0IDBm/mck2UZmGgFiIjSfp9h01ht6WkUJt4FeF2ANdeWRK6noF6
+ ioQ3pt/K09i6tsaRvK5FFMYRI42ixrghIuy/JxS/IWae72NsRtVGKK2aTSNX7JMINPhdj
+ mg3YbNySJMzctey37kVnD70Hp/t3uQe7Tq/yYvAKW0CECe5CP+T2A5tVfXf4m/lWW573I
+ JMqEBMb1N4WHT+wx4B93lVGgNau97oRF7Yf8Er3Oz7gUmpSN7rP/wX9nTVJsq+Bl14w==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=free.fr; 
  dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=V0sRiPQL; 
- arc=none smtp.remote-ip="2a01:e0c:1:1599::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:e0c:1:1599::10;
+ header.s=smtp-20201208 header.b=puxa0SVQ; 
+ arc=none smtp.remote-ip=212.27.42.1
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
  helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
- header.a=rsa-sha256 header.s=smtp-20201208 header.b=V0sRiPQL
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D69AB40022
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 20:51:25 +0000 (UTC)
+ header.a=rsa-sha256 header.s=smtp-20201208 header.b=puxa0SVQ
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id ABFE1607E3
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 20:51:46 +0000 (UTC)
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 5AFB6B0054C;
- Thu,  1 Oct 2026 22:51:13 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 83C2FB00563;
+ Thu,  1 Oct 2026 22:51:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1790887884;
- bh=Vv+1BlaBvXxekD3+k/ckT5Re3dJ/4SbX9xouTHK6ros=;
+ s=smtp-20201208; t=1790887905;
+ bh=mrFw6n997vBbHy5N45+v2aooTNDleRTMq3ruLKXnDos=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=V0sRiPQL4YLdibOb/1aQ48Zg9MkKciqQlDy1AbMifOtPGg6a0OWRGdnvJ/QxynQlm
- QGzSPYnyDkzITipJovaUihC4102txn068leo206WxXuUM0q0lXKKN+cJ4plocA3JWZ
- 8Wp/LFwN52kI5ZfqtGA3OxxWcwokMrgbdoDCiIruSVdsWbQwPc4FdyNkiKjgeTyphI
- EQexB6rDAdP0M8ATBTH+c2afKlO13zMTQrKGDakRA/JmPkbAR8hOlTyvQO9Ev+Cxh9
- qMp9VL4x/RZpKlsm8Fh4ALuJbNm3R5j6jbG2jEZ9NuKrpzAfP8DhtxFEKma+mPJuKT
- gaJTNdQ2fS+1A==
+ b=puxa0SVQwepSm3wstFhwCV0ngldvn6u3p0lalGZw9zREq7rveGatYDynhEZIbsrUz
+ GTeJNVNG7eH4m77Z5KnNFP7dyYSj6gP/d5Dqxu3HnMwDChJ6Pq1vHuDhoAqTDjHhIf
+ 3JisaY3H4mLXzpPTG5WSoMj9PpBRyaPLtNpDjjEAMbNYdMKFVjYkLFxRW1OKnnPKbi
+ x0WfDPrHTSIyTN3gqa1gTSnbeWo9RnkHDA6dssbYz+XR/dAIusmZ+NsWVgXJcYaqLm
+ 7ObZM71EvMy0ZKrzMfivvv3m1l0bgOomW/CF8fvwF9Ko+d+xPVpoTnpbh7i2DDerIy
+ 3996R+wFZIwgw==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.u-boot-project.org
 Cc: Priyanka Jain <priyanka.jain@nxp.com>, Wasim Khan <wasim.khan@nxp.com>,
@@ -121,9 +122,9 @@ Cc: Priyanka Jain <priyanka.jain@nxp.com>, Wasim Khan <wasim.khan@nxp.com>,
  Hemant Agrawal <hemant.agrawal@nxp.com>,
  Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
  Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v6 10/13] board: lx2160a: serdes: add serdes1:40g4x10g
-Date: Thu,  1 Oct 2026 22:47:27 +0200
-Message-ID: <20261001204731.1774613-11-vjardin@free.fr>
+Subject: [PATCH v6 11/13] board: lx2160a: serdes: add serdes1:100g4x10g
+Date: Thu,  1 Oct 2026 22:47:28 +0200
+Message-ID: <20261001204731.1774613-12-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261001204731.1774613-1-vjardin@free.fr>
 References: <20261001204731.1774613-1-vjardin@free.fr>
@@ -142,89 +143,48 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a SD1 mode that keeps dpmac.2 as 40GE on LNA-LND and that changes
-the LNE-LNH 40GE port 4xXFI ports, dpmac.3-6.
+Add the SD1 mode that keeps dpmac.2 as 100GE on LNA-LND and makes
+LNE-LNH four XFI ports, dpmac.3-6.
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
+Reviewed-by: Vladimir Oltean <vladimir.oltean@nxp.com>
 
 ---
 
-(no changes since v5)
-
-Changes in v5:
-- sd1_reset_req()
+(no changes since v4)
 
 Changes in v4:
-- was on v3 3/5, now let's add an entry of the mode table
+- Was on v3 with 4/5, now let's add an entry of the mode table
 
- board/nxp/lx2160a/serdes_split.c | 69 +++++++++++++++++++++++++++++++-
- 1 file changed, 67 insertions(+), 2 deletions(-)
+ board/nxp/lx2160a/serdes_split.c | 56 ++++++++++++++++++++++++++++++++
+ 1 file changed, 56 insertions(+)
 
 diff --git a/board/nxp/lx2160a/serdes_split.c b/board/nxp/lx2160a/serdes_split.c
-index 41208ca79ab..479e4789eaf 100644
+index 479e4789eaf..ea7a745c31b 100644
 --- a/board/nxp/lx2160a/serdes_split.c
 +++ b/board/nxp/lx2160a/serdes_split.c
-@@ -380,11 +380,13 @@ static int sd1_halt_port(unsigned long base, unsigned long lanes)
- 	return 0;
- }
- 
--static void sd1_reset_req(unsigned long base, unsigned long lanes)
-+static void sd1_reset_req(unsigned long base, unsigned long lanes, int skip)
- {
- 	int m;
- 
- 	for_each_set_bit(m, &lanes, SRDS_LANES) {
-+		if (m == skip)
-+			continue;
- 		out_le32((void __iomem *)SRDS_LNmTRSTCTL(base, m),
- 			 RSTCTL_RST_REQ);
- 		out_le32((void __iomem *)SRDS_LNmRRSTCTL(base, m),
-@@ -441,7 +443,7 @@ static int sd1_enter_100g4x25g(unsigned long base)
- 	out_le32((void __iomem *)SRDS_PCCD(base), SPLIT_PCCD);
- 
- 	/* Reset. Every lane is its own master now, so all four count. */
--	sd1_reset_req(base, lanes);
-+	sd1_reset_req(base, lanes, -1);
- 	err = sd1_reset_wait(base, lanes);
- 
- 	return err ? err : ret;
-@@ -572,6 +574,62 @@ static int sd1_enter_2x40g(unsigned long base)
+@@ -630,6 +630,55 @@ static int sd1_enter_40g4x10g(unsigned long base)
  	return err ? err : ret;
  }
  
 +/*
-+ * 1x40GE + 4x10G: dpmac.2 stays 40GE on LNA-LND, LNE-LNH become
-+ * 4xXFI ports, dpmac.3-6.
-+ * An XFI lane is a 40GE lane that is its own port master:
-+ * same PROTO_SEL and width, same PLLS and rate.
++ * 1x100GE + 4x10G: dpmac.2 stays 100GE on LNA-LND at 25.78125 Gbaud on PLLF,
++ * and LNE-LNH become four XFI ports, dpmac.3-6, at 10.3125 Gbaud on PLLS.
 + *
-+ *   XFI   LNmGCR0 = 0x00000052   LNmTGCR0 = 0x10000000
-+ *   40GE  LNmGCR0 = 0x00010052   LNmTGCR0 = 0x10000000  (but its master)
-+ *                        ^ PORT_LN0_B
++ * Note: it is the only mode that runs SD1 on both PLLs Slow and Fast !
 + */
-+#define XFI_GCR0		0x00000052	/* as 40GE, but own port master */
-+#define X10G_PCCE		0x01000000	/* E40Gb kept (lanes 0-3) */
-+#define XFI_PCCC		0x88889999	/* XFI converters for lanes 4-7 */
++#define M100G_PCCE		SPLIT_PCCE	/* E100Gb kept (lanes 0-3) */
 +
-+static bool sd1_is_40g4x10g(unsigned long base)
++static bool sd1_is_100g4x10g(unsigned long base)
 +{
 +	u32 pccc = in_le32((void __iomem *)SRDS_PCCC(base));
 +	u32 pcce = in_le32((void __iomem *)SRDS_PCCE(base));
 +
-+	return PCCE_E40GB_CFG(pcce) != 0 && PCCE_E40GA_CFG(pcce) == 0 &&
++	return PCCE_E100GB_CFG(pcce) != 0 && PCCE_E100GA_CFG(pcce) == 0 &&
 +	       (pccc & 0xffff) == 0x9999;
 +}
 +
-+static int sd1_reset_both(unsigned long base, int keep)
-+{
-+	sd1_reset_req(base, SD1_LNE_LNH, -1);
-+	sd1_reset_req(base, SD1_LNA_LND, keep);
-+	sd1_reset_req(base, BIT(keep), -1);
-+
-+	return sd1_reset_wait(base, SD1_LNA_LND | SD1_LNE_LNH);
-+}
-+
-+static int sd1_enter_40g4x10g(unsigned long base)
++static int sd1_enter_100g4x10g(unsigned long base)
 +{
 +	unsigned long lanes = SD1_LNE_LNH;
 +	int m, keep, ret, err;
@@ -233,14 +193,22 @@ index 41208ca79ab..479e4789eaf 100644
 +	if (keep < 0)
 +		return -EINVAL;
 +
++	ret = sd1_plls_up(base);
++	if (ret)
++		return ret;
++
++	/* Halt only the port that moves. */
 +	ret = sd1_halt_port(base, lanes);
 +	if (ret == -EINVAL)
 +		return ret;
 +
-+	for_each_set_bit(m, &lanes, SRDS_LANES)
++	for_each_set_bit(m, &lanes, SRDS_LANES) {
 +		out_le32((void __iomem *)SRDS_LNmGCR0(base, m), XFI_GCR0);
++		out_le32((void __iomem *)SRDS_LNmTGCR0(base, m), SLOW_LANE_GCR);
++		out_le32((void __iomem *)SRDS_LNmRGCR0(base, m), SLOW_LANE_GCR);
++	}
 +
-+	out_le32((void __iomem *)SRDS_PCCE(base), X10G_PCCE);
++	out_le32((void __iomem *)SRDS_PCCE(base), M100G_PCCE);
 +	out_le32((void __iomem *)SRDS_PCCC(base), XFI_PCCC);
 +
 +	err = sd1_reset_both(base, keep);
@@ -251,16 +219,16 @@ index 41208ca79ab..479e4789eaf 100644
  static const struct sd1_mode sd1_modes[] = {
  	{
  		.name = "2x100g",
-@@ -592,6 +650,13 @@ static const struct sd1_mode sd1_modes[] = {
- 		.is_active = sd1_is_2x40g,
- 		.enter = sd1_enter_2x40g,
+@@ -657,6 +706,13 @@ static const struct sd1_mode sd1_modes[] = {
+ 		.is_active = sd1_is_40g4x10g,
+ 		.enter = sd1_enter_40g4x10g,
  	},
 +	{
-+		.name = "40g4x10g",
-+		.desc = "1x 40GE + 4x 10G",
-+		.from = "2x40g",
-+		.is_active = sd1_is_40g4x10g,
-+		.enter = sd1_enter_40g4x10g,
++		.name = "100g4x10g",
++		.desc = "1x 100GE + 4x 10G",
++		.from = "2x100g",
++		.is_active = sd1_is_100g4x10g,
++		.enter = sd1_enter_100g4x10g,
 +	},
  };
  
