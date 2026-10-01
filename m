@@ -4,172 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16DF7CA5FD4
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 15:35:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FB74CA5FD4
+	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 15:41:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BF11A60897;
-	Thu,  1 Oct 2026 15:35:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 919DB60C29;
+	Thu,  1 Oct 2026 15:41:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5CDsieU6EtVm; Thu,  1 Oct 2026 15:35:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0DF2F60A41
+ id 5WtSWSJaGg7V; Thu,  1 Oct 2026 15:40:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 1C9A360B5E
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790868905;
-	b=j7kwtC+ZoLqYhRNhLbM3InjQwmVVUg34rtpDo1A+WWxaFMmlf9jDfrLrBw8pERF+m9TM
-	 lpTpkNzEt3SIcJDWVrCBYB5dOTTS7iDrtvO2WTpkmTq5dIygfobYXuB0qV67OeQ7FEgQf
-	 w57TEDq3uvwrMKEZ7nVwT7Mk3x1aFSDC5TVWg8i+kKH3jNsb9sYAJzk/lA2j7ghcYyDUe
-	 FfaW4XvVR0CRMQQLBB1iJ5sJne49gwh3JYfii10g2+OdN6eos/nRjqD3ChsN8frrQh9Bq
-	 sPP+WxFMh4Ua/RxajmUtG81VPD2+jtxKVH3QzACFZZ/z4ZKK4WYm205tpb0QJUJMt1w==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790868905;
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790869259;
+	b=LYKrPs3ozoLNdaUPm9qJ+gC47ySfDuc5bv9FaLNFSeiwPaoJTRAm+8f9dAxY4b4zbhfb
+	 KZZ5lLeseVk96jcEK+Cp6grzoyHAksezMUt+DD3hoptctz1W2Q7vkXTLj4pvNY5Z3GxvQ
+	 AhOyI8FKQe+ui/5uJFMfLKjHxFvVP53O5xn0dHcYCrvlt7WfpV6p6eJfVyEIffHZMCfFm
+	 Cl86xemm3N/rl2BxwilAz/0X6UrPIngAQK22fVQduzrwp4oiLTLe+zvMwrhQuRr53yVvI
+	 I0lZyUTvv1/CxcFN9+EjMCTYswb5Xx5ScCkgVOnpREZRZAZjKCN5p5hJT8wW9lOC9kQ==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790869259;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=MrH9wjKiOFBI7owHOAFlpSTvD6uaDWgt4XtU/cWA6Tg=;
-	b=OlgnOxz+uKbGZxRwRRrpPTMx2o+ugpNv9y3Vvz8Y/KLqD8xbZFtUkYoycHxGeQrDm3xo
-	 aS7SKRJURCEKV858+lQjReTOz7WXV96znjg+W3fx+2EMElpnSEnotdy/S/2Id5jbn9a94
-	 vLZInKaLeMQxZnv5wrEhJpf6niKRpWnBXNm+OUu4PLHlmn+FCrRmLsy1TQi+FDLdd3CPy
-	 ort2uBGx6dbtJsJvaX1IyhAj0Yu6UDpShKWNbHZHsYGo27FHBhnQhWW1jD0Y4Q5iVRgc6
-	 AU+lRZ6ItMHNkTS95Q0id2RuwC+F2iqMO2NaTn8pZwmLD0FKqAy/YVUG8dLqLTFAzYQ==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=ePkvKhlkDNFVUCqZUtwBmV5LbczDHzCOH8hIPimkI7w=;
+	b=nhpN5bDUye/JOz0hGFM/665CHMWYx7flTN1OA7g5YVLC4ed/LVtsbyv1uT0JQyCfILsM
+	 PXN49/OzcATTfjWmZIXXDNUwacbFYRdGIcJUykVQ7bAbqgtOKiyBLgDZSGf7q1bMnATcc
+	 cG/ZX5UCgnSOzI2zEp9WZddxzB85rLM5QSB1CIx4Z2zQailjrc3C0Fu2NK9nxn2oKgABd
+	 X8vRgN4TwzkLDbd+nRTpzUNVDkEr2Tum4upYaTGS6Z3/afOFWKhLMkDzq3Ge1H/iO9yLs
+	 BpIOZACr3rtSReHzS3PxQsIFkgwgXatzw/dKOCcCMS9nu9gOFGccskJtZ4/ftyrLIWA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790868905;
-	bh=MrH9wjKiOFBI7owHOAFlpSTvD6uaDWgt4XtU/cWA6Tg=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790869259;
+	bh=ePkvKhlkDNFVUCqZUtwBmV5LbczDHzCOH8hIPimkI7w=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Ks5GXDleRFmo+4gIB8k9h8cCSRFGrsU7F3zwyGmjstwtxWeqE5fW/uCE+GjdEwyOZ
-	 KaJPmSA2s6wXiVhcA9m1IAvLdzoV2dS1B6j/N9JKa3JcIgJXrWJ2EB5hDXyqw7vuzK
-	 SvjruxKNn9An+EbRsmTyUKBYI/JGIQV1dohUW+UO6PoiJ/AHyFPnd6flvxIJ0TgLQR
-	 AmRnbrE00B6TJmlDbTl+UweZfgYTVf18JMP2G8I1HkaY7voxNI7OQNBWdVkiRjxswd
-	 7bys8jZgaNBGKHU/IHF3kXFx9M/bFLa4lRQB2fR9TMt6DJ38Ct5c1vuAvCssKoEHdV
-	 4Vq6OgyhPWuAg==
+	b=g93UWTpUKQeuDrvg5b9YinAZorMLJn4yCQby9Z6B+NTMGK6Oazt4wmVXjDxENhG8G
+	 IUeeWUSOQV/EXIURoDFWpUlQz3JJ36popBvEuTFTThRNowsfZ0yxLJTlVd16331kzw
+	 +Mk4LOm2a1ur6ShY1/yZyqJ2ieV1NIawbukq58W9jyYsEEX8HRn3RPO4aq90S63L1J
+	 nL5ap8MJP5twToVrzqtxHqJmAxhrzItmU2YKmbQZOIWCf89wTGKs4NymaS9tJ2B1lk
+	 GyD60MJdquSZDOVhxSL8Kh7Qqq/we5XZzg+2vFH2kOF1t7oeWY0omIrRL5Rlt59r/s
+	 Vjz0tlSKPdCGQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0DF2F60A41;
-	Thu,  1 Oct 2026 15:35:05 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id D8C6B3D8
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:35:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1C9A360B5E;
+	Thu,  1 Oct 2026 15:40:59 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E384C263
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:40:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BFBC340098
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:35:03 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C8A1240C9C
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:40:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mwGEqKxPR3Zs for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 15:35:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org B58AA40528
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:33::2b"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790868903;
- b=kmtS2glpUEqXV3btUty+qxo/GbbISEe+4vAUnwOnclWVhMbIUW0IVsFbm18oircyiYnW
- c1KsGu/aos5ZRVwj3YaYMICElANs0c01AGmE0By84oUeUaFwW3IBw5PFaGGhKZZO3oUxD
- k0PVSBlFMCVBjfkqZtELaQpULLYHe2Kp8bCCPHqmNMN/JbH4AH82WMMjJn8phJ80jBCq5
- JmUH+8kgmS5quFAc9RU6Q0zuj3EyCzHNcWiZ1QX2SR6VtdpVyV8iNiuUj+HTzenZm36uE
- Q2FZv90M001TlrqyMdqvQAHI+n1r8vqah2ngeeSiLvYSaR6LumbDsWDopSGdknpkjkQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790868903;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type;
- bh=MrH9wjKiOFBI7owHOAFlpSTvD6uaDWgt4XtU/cWA6Tg=;
- b=nIKTYA/6qW496fIBdwu/ijqsfDli17WmJmWtT+ddd8xvUx7XX28rD1ZBzx3rjScEicNo
- us0HNbSUZqPGekGB4wcIiXK9HOBo/1aFLZpVxm6KEub41gwSz5qVEglwiQjHf0BUG8bT4
- u6Uoa1ZxHSXXep/XAi+UD8yF+Z1Sy6Ccs/lYIc8PB6TLFzSDv5FP1+aavkZYJb9xcVKV6
- XYyCqIMGO+NehcdG8cxSmyKa5OWv5nZ+MAEASUXaZTOrc+WMAmuSdW1zwpomDGgTvoZgc
- klBURqNJyQS1Rf5JuSLvow7t/4MrDleij0s/L9y/284FYN1wfuRZqpYn1Z2iPYmY2Dw==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org;
- dmarc=pass header.from=chromium.org; 
- dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b="kVKr4G/l"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:33::2b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:33::2b; helo=mail-ed2-x2b.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=kVKr4G/l
-Received: from mail-ed2-x2b.google.com (mail-ed2-x2b.google.com
- [IPv6:2a00:1450:4864:33::2b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B58AA40528
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:35:01 +0000 (UTC)
-Received: by mail-ed2-x2b.google.com with SMTP id
- 4fb4d7f45d1cf-6af85996a92so393153a12.1
- for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 08:35:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790868899; cv=none;
- d=google.com; s=arc-20260327;
- b=eM2abfWNzpFtpRBlI0wIQZDuetK14IYj4ba/oMhJJJhvSKJkv82TZ1/IO6kCjYRjrT
- b3OnYMQ9DcjoNmU35cIt/lIDpzp6vM6Yd1/wUQb+bYAc7DzzfyPgSdnIvdtpZFBHlE7j
- 5KSRJNaw8KFDS2iWeNOmj6bByYDhIqWyjFApueaLLdR8CTCHZAeO4hRwzV4Flqbgri7c
- ZiA/0zP2ucjl6Ooj5XFVO3sNlH8F+LFGFV8eRz6mY4TIkGjMJNp3MfEYR2aq9ueP4xsB
- 3k16bgWEKz/cRhx+pcOXy8/qmS2o9MyL0yI9edvYgFGO8VVBn2QiKAQw2nBrxKb7lPhN
- KDHg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=MrH9wjKiOFBI7owHOAFlpSTvD6uaDWgt4XtU/cWA6Tg=;
- fh=SZWRwRB2eydBZIDGUvU9lOvA4h6PDO0/7AUOlFyuM4E=;
- b=F9+IcHbhRz7kt2EAU6QTtPs2LJ1BBRtBIuUJ0DRYIw7ktzspYtEPF0s18Bf0003IN3
- FYlJBDfJI9NFwzMV4M75vbZAxUbaLhiH9idhnR7/2n5roddoSTmyGv45fk3PzpLhq5+I
- YQ2qF9EQsalzh3Z9l40epUOVhUrqERqTN3Nd2NjywKSbb03h01N2+OPKvdYDCKs0mbkU
- 7MGd79jCpBw5gW6m6y8bsrRNkgqIxitvFcvBdVv9wMHwchRrSvDsL0mNWxZ7fkYXp2xt
- D5lu5JckchZbVJ66tlzfPZXxGkv9CNJfUHhmmFODtZkkjr5h8nYGmiGdsNtClsSYi1Ik
- gZUA==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1790868899; x=1791473699;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=MrH9wjKiOFBI7owHOAFlpSTvD6uaDWgt4XtU/cWA6Tg=;
- b=kVKr4G/l9anCfqSLtVdh+cmM9xJUoMZL39KN2wFxY6L2YMb5Zg9GMiK0jC74HWephT
- wiShZ8yMkQ1PE69bblIK9uh4Zp29Hf3d26p9YN9Ksd8v7Zy0BSZkxvADl2E7YendtRjB
- pyangsz1rRT3wQsnuNpl8qHJm32AxRhdU85u4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790868899; x=1791473699;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=MrH9wjKiOFBI7owHOAFlpSTvD6uaDWgt4XtU/cWA6Tg=;
- b=eRwocxMl8oTYIOws6UAlDGBQd/4uCpZld+EcRuYGkjtCwv9m6Nhy3yDrTlqBHlvyaN
- EMEJta5A5ZMAKw3ywWYaj7ZRRA3WT8VxI6ba4AQqsDvUYp/mG98P3sR4yUo0ZPbX2D2M
- qSaT+Wjd2xWMMtzK3KeoNL7HtK+No3ZFpc/aGYII8K5sXnl5qwa1tjUSiFpY52qAjnfP
- jZetAAhn7WdbgHwGUdU4LiVSqb58ZBJqh3xYu24vqQzK7mPboGXPqgdM6HgT12ANPpOr
- 6FmZBDXXINUX7qtu0toXik+IM2t7Xl6zdCFspzxTGM5GmFM2ZmMkVd7sovBJCCJUa68c
- 57nw==
-X-Gm-Message-State: AFq9FYJmLtcNATXsURj3djii1w5vqK4zvHDGYBIaZMOpLXSNTu9q32WK
- fc2rkEBV/52LiwxvwQ/WkdOhAqhZaIAwpdj66xU+pmjdTPFOwkCdLLOUOkTsr9PWkp47fcAbRVH
- RX2X6IftlXoo17f/qZroh6r9cdkOvicv2/C8glal1yN3AGtNeLUt8HA==
-X-Gm-Gg: AYBFou1t43V3KUJlJquukxEe0xL1LRKUja0fVgNo88wwg4y35kvRJ6KPE1jGSavuSKS
- YAMgKT66K3qh/fsaEoW5JGu+l2kT13fzpUolWROYZSJ9bCpeNi7agfKCsb8nmpC6Wq3KDS2npHL
- +TmiRA8dM2TwUuCWYcvryiKVPw12QU5q0htQf92naTvPmw4IXLFkBSGHiJ0agxEG1+W9xd3tWlO
- 00CVHGOh+z388vSyg5C2kYTGRohL9uFjEz6NGom+KILwAHqKmtS14xrn4c6ANFPlrw0ISof4OBK
- dF1DpN3zMf4rajkVDLUfvl5bKH7wjLau6f+fiEh+RisxBQVYGJN/NKYnCc9u0mD0Cvo=
-X-Received: by 2002:a05:6402:50d2:b0:6ab:e30:c9a0 with SMTP id
- 4fb4d7f45d1cf-6ae307f3220mr2948405a12.13.1790868899411; Thu, 01 Oct 2026
- 08:34:59 -0700 (PDT)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UWNr2b_sexCK for <u-boot@lists.u-boot-project.org>;
+ Thu,  1 Oct 2026 15:40:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 5391640C9A
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=185.125.25.15
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790869256;
+ b=oLMzQtdxwOFf/zO75MjfSiN87EN/f4M6Dkls766LB3QwOA5vmgmBat/jZvxmVWoDUuLE
+ 0uxaXn9b+BHGxOiAtcccutPMuf/mbcym0Ydu9qeBMQNykrK3Poy1exgj++u2C+gDWJu5R
+ ZaqLrOJx+zfk70SYutxrvHZvnhZNGBJjaR2PHgmDealXoC9FQAPdbhBFnJsi3ZNkUOLN1
+ Hsljrllr+e31LBoszuT12SUpiq403AoYni9XPxOlXrLVQ2qHLzfjDPLb/YebE4OTu5PDY
+ 1w74dg2Wt+tMQxq4sJN8/+rE+qUSxg89bBx6pDfku5M9RagO6GFEowPSQNLUFevS7rg==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1790869256;
+ h=X-Greylist:Received-SPF:Received:DKIM-Signature:Received:Message-ID:
+ Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+ Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:X-Infomaniak-Routing;
+ bh=ePkvKhlkDNFVUCqZUtwBmV5LbczDHzCOH8hIPimkI7w=;
+ b=oMJHmH8lzge6eu9UCcZxq9XCX5ON/zrzADmr7/968fyn/qvMa1UI7FwsEbFYB5KR5L4P
+ ESeQd63gIa7BMYRVrLCpmug9xQn3yo5cE4rd6Esxj6YjmqBlnaxa13zHdF7VmymD7cU82
+ tYn+Otm16nqtqaIaQBReMqws5HQGVjhrZ0077ThZOzg+BiTMTDkCbjE24DmisH/DqMBmQ
+ ZZsoJINHmUKe3t26XLlVbsZjmSlJzv8TcjwqRLUon4kD7++bbhRVF2bWU/A5jolqxM8+/
+ z9iMr5jWJ+HMiuzBPyPhw0cqkzUO1gmVH/52akNxAItJJS1tvTWg9R9FQ8AScrp4ubw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=0leil.net; 
+ dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=Bq4rcZXB; 
+ arc=none smtp.remote-ip=185.125.25.15
+X-Greylist: delayed 310 seconds by postgrey-1.37 at util1.osuosl.org;
+ Thu, 01 Oct 2026 15:40:56 UTC
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
+ header.a=rsa-sha256 header.s=20231125 header.b=Bq4rcZXB
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.25.15;
+ helo=smtp-190f.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
+ receiver=<UNKNOWN> 
+Received: from smtp-190f.mail.infomaniak.ch (smtp-190f.mail.infomaniak.ch
+ [185.125.25.15])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5391640C9A
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 15:40:55 +0000 (UTC)
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hwbbM1KYYzHXY;
+ Thu,  1 Oct 2026 17:35:43 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1790868943;
+ bh=ePkvKhlkDNFVUCqZUtwBmV5LbczDHzCOH8hIPimkI7w=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Bq4rcZXBb7/4BbtDMDud1qt00tP/Eibn2F1XcqA4RyFhkFVuHyIXbEOjetRrA1pid
+ bjB5zbbBAGGr3bSJ85wNymN8gw0DnaZv0IDDTrGM7STo0AIYL+i65CbiPfClTJFYhq
+ VBw0qS7qRHBs1llr1ASZkOELqY63ZL2/lxKn+ADdgT6Tmv+pnnHyZn4g+dCzCli+1P
+ OcZq6jc/jgtewYvzkUWL6ReZwf2m/f5AS+w1QuHrCNazp1DXlWEOl6EQWHqZml3Yiv
+ iZvdwGxtqjg7uKEnZKuF+LNcfAobXh16wB1dQxTu+KDRhG/WDYHdo0HZYdMXXWkWct
+ YLGyrQMlOCZtw==
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4hwbbK70PRz48m; Thu,  1 Oct 2026 17:35:41 +0200 (CEST)
+Message-ID: <49c6cdf8-4074-4325-9744-9fcfdce0317b@0leil.net>
+Date: Thu, 1 Oct 2026 17:35:41 +0200
 MIME-Version: 1.0
-References: <20261001071620.2377255-1-prasad.kummari@amd.com>
-In-Reply-To: <20261001071620.2377255-1-prasad.kummari@amd.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 Oct 2026 16:34:47 +0100
-X-Gm-Features: AclHuK_hcmhkB89Ra6TWrWRJMO5mR0lRI68nQ4FLuAcC2uoen80Ua-h9k_wE64c
-Message-ID: <CAFLszTgdRbTrANeQya0emHgEmsZvqd2ujx6ycwDFq-xhUfr5+A@mail.gmail.com>
-Subject: Re: [PATCH] rsa: fix undersized modulus buffers in rsa_gen_key_prop()
-To: prasad.kummari@amd.com
-Cc: u-boot@lists.u-boot-project.org, git@amd.com, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Disable SMBIOS table creation for Odroid M2
+To: Milivoje Legenovic <m.legenovic@gmail.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.u-boot-project.org, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+References: <20260926005853.1727-1-m.legenovic@gmail.com>
+ <CAFLszTh=X272wjo4_7B54hYMz4gRZ78KhUuDCKBPzOR8L4RA3g@mail.gmail.com>
+ <CAGuQyfUdhhFuW-DCgw8C5hA8mkgP9DGyUW6XnLdMZ0q+Ui0QzA@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <u-boot@0leil.net>
+In-Reply-To: <CAGuQyfUdhhFuW-DCgw8C5hA8mkgP9DGyUW6XnLdMZ0q+Ui0QzA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -183,53 +150,98 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Prasad,
+Hi Milivoje,
 
-On 2026-10-01T07:16:20, Prasad Kummari <prasad.kummari@amd.com> wrote:
-> rsa: fix undersized modulus buffers in rsa_gen_key_prop()
->
-> n and rr are sized with a floor division by 32 (num_bits >> 5), but
-> br_i32_decode() and the zero-init loop before br_i32_reduce() need
-> ceil(bits/32) words plus a header word. Whenever the stripped modulus
-> byte length isn't a multiple of 4, br_i32_decode() writes one word
-> past the end of n; whenever it's odd, the zero-init loop writes one
-> zero word past the end of rr. The modulus length is fully
-> attacker-controlled via the DER public key's ASN.1 INTEGER length, so
-> both overflows are reachable with a crafted key.
->
-> Switch both allocations to ceiling division so they always hold the
-> full word count each site writes. rrtmp is already exactly sized and
-> is left unchanged.
->
-> Fixes: 49d0ea3746ca ("lib: rsa: fix allocated size for rr and rrtmp in rsa_gen_key_prop()")
-> Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
->
-> lib/rsa/rsa-keyprop.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+On 10/1/26 12:28 AM, Milivoje Legenovic wrote:
+> [You don't often get email from m.legenovic@gmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> Hello everyone,
+> 
+> Here are the details of my analysis:
+> The commit that introduced the change in behavior in version 2026.01
+> is this one:
+> 
+> commit 209bbc4e0032228c6ea17e2172a8a6b89756c4f5
+> Author: Adriana Nicolae <adriana@arista.com>
+> Date:   Thu Nov 27 08:28:34 2025 -0800
+> 
+>      boot/bootfdt: Add smbios3-entrypoint to FDT for non-EFI boots
+> 
+>      The Linux kernel can discover SMBIOS tables through two primary methods:
+>      1. Via EFI tables, when using EFI boot;
+>      2. Via the 'smbios3-entrypoint' property in the /chosen node of the
+>      device tree.
+> ...
+> 
+> I found this out by comparing the device tree from a working version,
+> decompiled using
+> 
+> sudo dtc -I fs -O dts /sys/firmware/devicetree/base -o live_tree.dts
+> 
+> and difference was in /chosen node:
+> 
+> chosen {
+>          u-boot,version =
+> "2026.01_armbian-2026.01-S127a-P7283-Hee1c-V2928-B3a7f-R448a";
+>          linux,initrd-end = <0x00 0xecbffca5>;
+>          bootargs = ...
+>          smbios3-entrypoint = <0x00 0xedf47000>;
+>          kaslr-seed = <0x00 0x00>;
+>          linux,initrd-start = <0x00 0xeb519000>;
+>          stdout-path = "serial2:1500000n8";
+> };
+> 
+> In 2026.01 version smbios3-entrypoint was there, in 2025.10 not. I
+> searched for this term in git history and found the commit mentioned
+> above.
+> With git show I saw what activates this, and made a patch in armbian
+> build system to disable it and confirm it fixes the problem. And it
+> fixed it.
+> 
 
-> diff --git a/lib/rsa/rsa-keyprop.c b/lib/rsa/rsa-keyprop.c
-> @@ -687,8 +687,8 @@ int rsa_gen_key_prop(const void *key, uint32_t keylen, struct key_prop **prop)
-> -     n = calloc(sizeof(uint32_t), 1 + ((*prop)->num_bits >> 5));
-> -     rr = calloc(sizeof(uint32_t), 1 + (((*prop)->num_bits * 2) >> 5));
-> +     n = calloc(sizeof(uint32_t), 1 + (((*prop)->num_bits + 31) >> 5));
-> +     rr = calloc(sizeof(uint32_t), 1 + ((((*prop)->num_bits * 2) + 31) >> 5));
+As far as my understanding goes, there's actually nothing consuming this 
+DT property right now. There is a patch on the Linux kernel mailing 
+list, c.f. 
+https://lore.kernel.org/lkml/20251031115917.713105-2-adriana@arista.com/ 
+but it's not merged. I doubt Armbian would backport this but maybe they did?
+So I don't think the *presence* of this property changes anything, but 
+there could be side-effects (e.g. actually having the SMBIOS3 table 
+somewhere it isn't expected, potentially corrupting e.g. the kernel). 
+I'm a bit skeptical though as the commit you point to only adds a 
+property, it doesn't seem to be doing anything else.
 
-The rr line is now over 80 columns and the brackets are hard to
-follow. Please can you use DIV_ROUND_UP(), as used for mlen in
-br_i32_reduce():
+> Here is also where kernel hangs for 60 seconds (always at the same place):
+> 
+> [   14.482048] calling  gpio_led_driver_init+0x0/0x38 @ 1
+> [   78.137967] Freeing initrd memory: 23448K
+> [   78.165027] probe of leds returned 0 after 63677665 usecs
+> [   78.166792] initcall gpio_led_driver_init+0x0/0x38 returned 0 after
+> 63684076 usecs
+> 
 
-        n = calloc(sizeof(uint32_t), 1 + DIV_ROUND_UP((*prop)->num_bits, 32));
-        rr = calloc(sizeof(uint32_t), 1 +
-DIV_ROUND_UP((*prop)->num_bits * 2, 32));
+So the probe of the drivers/leds/leds-gpio.c driver took 60+seconds, 
+that seems quite improbable (well, it technically could be anything on 
+the path for this driver to probe, c.f. really_probe() in drivers/base/dd.c.
 
-BTW there is a related problem. rsa_get_n() only rejects a zero-length
-INTEGER, so an all-zero modulus (e.g. a single 0x00 byte) leaves
-num_bits as 0. Then n is a single word, br_i32_ninv32(n[1]) reads past
-the end, and modulus is malloc(0). Please can you reject num_bits == 0
-with -EINVAL after stripping the leading zeroes, perhaps in a separate
-patch?
+Can you disable that driver (CONFIG_LEDS_GPIO) and see if it goes 
+further? Being curious :) (I see Armbian did some - clearly downstream - 
+changes to this driver, so being curious :) ).
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Can you provide us with a link (with commit hash) to the exact sources 
+of U-Boot and Linux kernel that Armbian builds for your board?
 
-Regards,
-Simon
+Can you provide us with the full bootlog (including U-Boot up until the 
+Linux kernel's hung)?
+
+> As you can see, I was only able to find the cause, but that’s the
+> extent of my expertise.
+> 
+> At first, I wanted to sort out the problem with a patch in the Armbian
+> build project, but then I thought: "Why not sort it out at source?"
+> 
+
+I'm not convinced we're there yet but that's the kind of spirit I like, 
+let's not fix symptoms or consequences :)
+
+Cheers,
+Quentin
