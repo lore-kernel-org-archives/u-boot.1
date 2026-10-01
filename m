@@ -1,235 +1,171 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEABECA5FD2
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 13:55:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5DEFCA5FCB
+	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 14:10:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 962B860D61;
-	Thu,  1 Oct 2026 13:55:29 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cMHJRng7HIRV; Thu,  1 Oct 2026 13:55:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 43C3D60C00
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790862927;
-	b=VqRbHD/9wY2kl9oLyIhhfXXLWrPRs3ikak74QYb6NplzKaxf9d8bd/ClVQXrKJi7yYbp
-	 QqJ09PKmdl67OlaHfC8xsN0xGEefp8m+jPeAw6erkftnQg2DMqczitmo+9EFMtRgI1JKx
-	 Cz4ut8DuUJgJCVCbON7tp0WvrOfcdYfjR7V2Ud4CafRUm9a331C5fFk/Yo0zknuQ2dQNI
-	 xkVBthNtycGpv7kuOt+s3eD4xnJ1+wE7wms75TqETOZiZ/OIfWgi1rAhCjnm4t1yyLcm4
-	 +QwykAS2EZiuLN4QCRFRoUNiEw/p8vTma31nXYUfH2x6ULDjrGuKSqFGsFsEL+AaaLg==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790862927;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-UI-Sender-Class:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
-	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-Provags-ID:
-	 UI-OutboundReport:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=Zvax4uOFohMjvZpLHPNsa9PdUKkT1wjdQzqkaOtbj98=;
-	b=P6FSNy7gpGKHhliflmJ0iUMp/3nNYnKNCnbV9a/jKn7jFCajsltX0x8TfNsZIj23jinH
-	 cbKPxtnFYS9lk0UGASMd4yLx4OkIYKvxUbO1LSzUCB8o+WXcpR8d64FBXwjrHcKU/aXJ9
-	 EQx+Ae9OMaY/aQKW13xTltSxL53IvFOWgUiTemLW3ydx3oNzlXDETfvOhAD0J5v5sQ3T9
-	 Aw7YTuXvHrm1mc5uUi8HHwYy0FYX2Tbn71jwyShfU9ZYeLuK8xrEF1ZBweFxHkMIpLIkK
-	 p1wzFqfMDdcx9nGCZAOf6ENMQLc1cXxxJ8X9ms25WKCCpRLjjtDetjr0F1pxZbHW9eQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790862927;
-	bh=Zvax4uOFohMjvZpLHPNsa9PdUKkT1wjdQzqkaOtbj98=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=diLYF3Civzxg8LyaHh6dVSW0AGDqpWFyAipj//fSL71u/ZDwCUn1EsI1ge84DNPc1
-	 dEm98Mg0IK44vAdRBpWwGbnmKEGYjBqFNuFFyiJSbP78UpRA+ChF5eKUS7SH+pMr00
-	 tzTJ+I2gLD5NIvIeQXXvHw8kZsktDsNDyEMGjNa2wJL2P18j7ySMFuyJ/pCwXutve6
-	 4JM8F4hsVOYU7mj1xe/wZgNqrmhGzACmwnQtj8BD4Y7o/6pyx+P9hR8GStdEzD9WOJ
-	 leOTAdli5orHopWr1YzDzXlyTk2YufMhuzx30rVAOTUE2AnVMe6yUovHQKb2jRkvBE
-	 8uOHQl5ptlhZg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 43C3D60C00;
-	Thu,  1 Oct 2026 13:55:27 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id A9B913D8
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 13:55:25 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8F30A812CD
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 13:55:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 399DA811BC;
+	Thu,  1 Oct 2026 14:10:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id R1Y61g-Hab4P for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 13:55:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 2EABD81149
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=212.227.15.19
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790862924;
- b=dLUXeR+eSYbRziITjGPNl0QbMMTu1EWrWbWRz74WuX+LrMDzSKvnpHdwCvkVbw8tZsIg
- cV2DzQlp7QMuIGaEZuoMz1+h1R68p/1UPRV9hFZFyxMIIzVPtQBU9PkpkVrOcdK+E9UyW
- fFtjnnNqUVZTb5FYNtgDC3t5tfLc9XlnlbzVBg6koSqt+LS50GoHh2YjzCcyCdI8IPE/M
- axLrUavgaCtha6N8TqPeyCGE6QEFd6tnVCoT/eez6ftGLzDieLaTWeoCM691qE9BrlWlp
- ZD/ewmjb9HsW7DBjV/Ts6ZKPicUqdUuWfPCerdZJ5b+UrrgqSdrmGolOO61WEOM797g==
+ id iBAzG2hqbykJ; Thu,  1 Oct 2026 14:10:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5D62B811C9
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790863812;
+	b=qC8/VtrXTAhRYZgWFNYKnWnZnwEX98PLpz4+ZZiFyzfKR1Jv17nGSzz6xUOy/LbvX4k3
+	 qAjlLJbIt8b8yWN2qJHU/9lkKlWhVJOXkKQZct+gM6ivv1QVocYAqC/LgisB91iA6gL8y
+	 /QEyxViqzqBxdl+W/lOfBUR/4tVQgWGr9x/ezGCcfNmb5xHHnZo+BOivC4RCscsSlvbCE
+	 eb+oor0XuCi+a7ThK0x38lxof2W4dNURZ+9vtCv0lpaRO3M3xhHI7VhUQe7HXCBKYAim9
+	 pSGhaXI+NtuN3+gGG7PrPboBVcwqew5wSnd6G9S+1+I1UfQXXO29zvtWH6Ykdqomp6w==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790863812;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=ywh/uLB6umrFY8OyoZWeX1TnLqkpmoVBmAjY18M6gH4=;
+	b=YepqeQN48431JzXht/elIZAkPUEnZv1IT1WCtJcBaIXAgLnG729MW9v4cHmgJ3nzEvw3
+	 8c5ObadKSa25/cvdsqqEEU26r9XefmauvslD0dX66XRMLvmxQo1bQZ1Ud/lMwEAdiyP07
+	 /1DeLmfbm2TLqNOlMPyCFv6L5by3nD8jiXGJvVSKwrcAXK1J2XnTy+LzEIxs5tBI9U2Jd
+	 nIM72DP827xVY3mU3mu7KJqKAuoUSzFr1Q7QG35iCLVfaT7QGXqD7DY8pEOBX744cCUht
+	 N0P3Tj+CGAz5Mfh8vIiwn04GpU2ugxaJcMCLqL+DBX73s89lGIysuZqnziHZCom5+GA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1790863812;
+	bh=ywh/uLB6umrFY8OyoZWeX1TnLqkpmoVBmAjY18M6gH4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=kgS+0lCyGU8uINNwkNplmOFUI7xjRwvYvzAjNDU7789er2hlYSZbIGLYvNoUFgMki
+	 CdTS9SqUf11367c7XcHNW/DT60JQ2x+TpVkdBLZFpUtbmIlEhsBKqSAXcj2+aMFvls
+	 nGGg/0rQxwrW7+rQmS9JFBhqC9XkqPCdsZRo2P8IBRCSKxlI19fZDah8S7p50soCny
+	 Hfl1Wb4p+UcncSQ3EYmHiUIG4iHmJE12PhHvfCK4gR1LJ7rRzxq88VAOeuQ7yYtyv7
+	 HJrS29fjX3SYQ2gnwy+n/0VayLRfy2hc2w4P6Aph+NRLWTGV3M0telTJQO+pUvU4Sh
+	 SXrfYqryReSuQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5D62B811C9;
+	Thu,  1 Oct 2026 14:10:12 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8A0C41A6
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 14:10:10 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7B91340CB4
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 14:10:10 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BpTR-Ul0VhEO for <u-boot@lists.u-boot-project.org>;
+ Thu,  1 Oct 2026 14:10:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B342740BEC
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::26"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790863809;
+ b=SuS8pgbC+cVgnJ9Miy+XDz48Pbb/0T4JB59RLHaxKczkyRlawrcTfHodFIYrBwaPyEt5
+ vlbIbC8aPSDktwcDtmoJaSsnpPY6/e/3bdOLdcGFnESXRr8ZEAmCFAzdinF3SWnANQxPh
+ IZnQRavLxgJ+OLLBdPcikE13QBBordITuZYMJyAxqdCGvJNBYg1mD7Et4ldd04AS/WPyI
+ DE6nuprP/R34HgWA3GswX7y9CMUqKV913fQtgqREUucsrq1s2IygzKqKvpSg1ewuJLC6v
+ Xnxce2mrK3SbgBU+fFU5CFuYlLWcmGO3QbcEZ7nLnCVpmLz9Z8llKmVY6kldDWN3HbA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790862924;
- h=Received-SPF:DKIM-Signature:X-UI-Sender-Class:Received:Message-ID:
- Date:MIME-Version:User-Agent:Subject:To:Cc:References:
- Content-Language:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:X-Provags-ID:X-Spam-Flag:UI-OutboundReport;
- bh=Zvax4uOFohMjvZpLHPNsa9PdUKkT1wjdQzqkaOtbj98=;
- b=eqg/1Q8qNqu8mmdlEIamVFHwdOfYIC2swDrEYzgH1GZZ3WsVbHEZYARsOCWzQyCYXPyg
- hhUrsdKxafmLAm44ei7hmdwJexzpCZe2/67kj8X09pceRtAac0DqLWWnWxj0ODj2/m9/T
- tULFd3HCuBKIUYzRmuISrYi/JhX10fxxYcMV59uhZS+Won9XG+W0fGTm2ViKSeo3VazMA
- f64Bqq0f0Fw4SqMpC9kohnGug0nd9F2bO0sPseiTCOqpvrKEb8VSPi2jF8l2sNoviuvo7
- 0tTxMAeBElMQXTgSUJhx5CjMOnQ0yFN7g1De6tsWyXcLMpN2tuYKs10VLdO1C6OxqEg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=gmx.de; 
- dkim=pass header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256
- header.s=s31663417 header.b=L2h90bBo; 
- arc=none smtp.remote-ip=212.227.15.19
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.15.19;
- helo=mout.gmx.net; envelope-from=xypron.glpk@gmx.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256
- header.s=s31663417 header.b=L2h90bBo
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2EABD81149
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 13:55:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1790862918; x=1791467718; i=xypron.glpk@gmx.de;
- bh=Zvax4uOFohMjvZpLHPNsa9PdUKkT1wjdQzqkaOtbj98=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=L2h90bBokPQDkt5VC+nmPv1vMQh4jX6YXAEql3LUQD75gfcB8cf8nGzS/U/fHOGt
- xiorkAz1jowxGxN4kl6uYL4KTGW/hPIP7WG8EmCc1VGZJEfdXtZ15INX4dDCqOwon
- 0YBbanqT5NI3UPfG14L3JhKi+s586FrAfPTGAB3Tdyix7Fv4OyNvPwvvHsQg/y3l/
- aZO//JM6V3zffzvnKXJMqMPMJTmYcJ9ky4reC1I+uFnsvhQDBdzCVZsIybVw5KtLp
- y5od9Xnk+0931MqWX1i72IiWl2g8xKhkfPItFmhSMGhsJY3cjqxIpO5D4yeKTGiRS
- sQv9DnIQeIHk7zgiPQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MDysg-1x2L6P46k8-0098Bf; Thu, 01
- Oct 2026 15:55:18 +0200
-Message-ID: <79ac74ea-390e-409e-bfcf-033357832d71@gmx.de>
-Date: Thu, 1 Oct 2026 15:55:10 +0200
+ c=relaxed/relaxed; t=1790863809;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To:X-Clacks-Overhead;
+ bh=ywh/uLB6umrFY8OyoZWeX1TnLqkpmoVBmAjY18M6gH4=;
+ b=MF3B3gk1GMFQw4LhoVzXkdKxZaO6wCnVIUzl3TIPP5HCFi6z9b8UYGbxz6rt/+zoWstM
+ 8FR9q/sEskZyqPemkUxjIxPVE1P5nleyi5dFi4fAJ0P7s1h4qjCJFf3JWpiGkMfa2PRjW
+ bxojOC8O6YpSvvEj/hlOqca4C2ncyFF2fg82aNUrrVMFTaFad0e9hCVlBJzpNxTsXEGXj
+ IUOiv3OPCob774dl+ox88LrEoPvovj1/5aVh/4iyZTWpQAtAOPupHwx1rlVNvVeb2JGbE
+ HCPRPv7MYA/AWgUCMS5OfShsFWV34RwA9UCO07b/mvtbajMB5WO15JMPccFRSERg7Mw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=konsulko.com; 
+ dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b="T/wNa1wX"; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::26"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:31::26; helo=mail-oo2-x26.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=T/wNa1wX
+Received: from mail-oo2-x26.google.com (mail-oo2-x26.google.com
+ [IPv6:2607:f8b0:4864:31::26])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B342740BEC
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 14:10:09 +0000 (UTC)
+Received: by mail-oo2-x26.google.com with SMTP id
+ 46e09a7af769-821c01c2fc5so506438a34.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 07:10:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1790863808; x=1791468608;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ywh/uLB6umrFY8OyoZWeX1TnLqkpmoVBmAjY18M6gH4=;
+ b=T/wNa1wX+O3wI4dzLBK1QxEu9XAs3FBBW5ar62Xn0bMxk98wWrE43OTf+a/583RXSA
+ x3uE5o1nYqF3RKGNwBWrliC9xKHYPiHKHUqF3orUwbX7eKo4gmrq32iczXP2x+uMv6H8
+ hPfUf7cvaCh/ImJx57IK/pXZbqJrny/gzJBHw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790863808; x=1791468608;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ywh/uLB6umrFY8OyoZWeX1TnLqkpmoVBmAjY18M6gH4=;
+ b=VvpJrUwigAOiD9XW18V7uR+AHwyhNsKcp4sQGNn8+28zmOQHToCvecJ+C/Zu700BMy
+ z+pFNdXX8wTpx5UOa4c9k5pUW9j/FGsNrn3qwXfaMpxg/jBJhn7Nlc9/L2x/BktnBkZ8
+ 0GPeEQo7b22nG+mkRZaHcEUvwyTElRWcamcRPNXeAvQ1XbncJQBBiCS1IT7ExX4gKH05
+ pTHq/byFeQLV/+8mLkFSSPVdU/Vt5LCI2bB32jiZ9zvEjp4aTmsssGPQ4mhuNnMtli6O
+ n4X6DY/mBstlg4U8luzL3+NSOZ+6PeLJUqDVO51JFdnOAKD0UllcU5j0Q503oGbET0fi
+ Mq4g==
+X-Gm-Message-State: AFuF++n+wiHYNHMyqBY1599x9qa4YtQ3nYJEUdAo+/BsoY8q9WXKA14+
+ 1Ov0iCBhxjd2yswrvHcnd68vIugVNKnsG7JKen7RYX6thGosJ+ECVp5k+ADGWc/apaI=
+X-Gm-Gg: AYBFou22mnyVaUErQJK0ikoxzyhi62XsF1De+MU6Vwjl0MHFbLusDjoFM1vVeDn91vS
+ BBSSLEoP8GsPQCg53TwmOwmXdsdIE0Eq3oeUgEQhotdGPBca3QR4zF+u6aHMUBQmZDfbrAsNHG/
+ soAiNYMOzkTWsrj+lANu/v2FAld5eO6ihzlLi3JYGHaMHykdSZOyXRqNtiw7fIv34ggS4v93+hv
+ Z/LpKn+Wie24wDIoa7Ej2iqNAh2S2gRhM877QmXV1U7IdNioXQIe/Oqs/5h1OR54lpqH/1Z6cYA
+ nsWvhnn+rbtc8Ngxnq22RicufbA4bnKdzeo3fVnvxm/4KZQwDUH2VXhUc2oMNmGCJ9oo4vH4wtw
+ FNhS0m44wDODK1PVTrjwoaFRcHRHcnCyGXFd1DgSSpcwXBGdO9IuYXbClxJRttZtHUdn4Ms0jRI
+ JeC7AomjqAjwlcNpZ0KF2hPdxo+x1RTTkzXXVauQbSooLNT+hGnrJva66TOR99wuSzm62nrgBQv
+ 1rrWh2luz9lX0pgXlaTRxkHT35pmFzWlqKsYM9W/TdtD4ZOgoPdNnkHu3cp/TPfhRUOeeZ4O/Hc
+ KOzrm9HlhJKTdTz5AMs=
+X-Received: by 2002:a05:6820:4b01:b0:6cd:3fcc:96d1 with SMTP id
+ 006d021491bc7-6dcf7208044mr4117277eaf.79.1790863807934; 
+ Thu, 01 Oct 2026 07:10:07 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-49decb70f38sm2601912fac.0.2026.10.01.07.10.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Oct 2026 07:10:06 -0700 (PDT)
+Date: Thu, 1 Oct 2026 08:10:03 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>, Milivoje Legenovic <m.legenovic@gmail.com>
+Cc: u-boot@lists.u-boot-project.org, Jonas Karlman <jonas@kwiboo.se>,
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>
+Subject: Re: [PATCH] Disable SMBIOS table creation for Odroid M2
+Message-ID: <20261001141003.GL858934@bill-the-cat>
+References: <20260926005853.1727-1-m.legenovic@gmail.com>
+ <CAFLszTh=X272wjo4_7B54hYMz4gRZ78KhUuDCKBPzOR8L4RA3g@mail.gmail.com>
+ <CAGuQyfUdhhFuW-DCgw8C5hA8mkgP9DGyUW6XnLdMZ0q+Ui0QzA@mail.gmail.com>
+ <CAFLszThQZy=Sj7bRsbWOFn=Sn4mgzkeo=4Sj0Qyhu9cWotO1ZA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] efi_selftest: add minimal fmp test
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Udit Kumar <u-kumar1@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- u-boot@lists.u-boot-project.org
-References: <20260922-authi-v1-0-e943530349bb@arm.com>
- <20260922-authi-v1-2-e943530349bb@arm.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20260922-authi-v1-2-e943530349bb@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:LlIvva4l6mMLNBast8KINVpO8xLx+9liOCeis+jsPFaU/9orfPM
- rjRSZ67HmQvgnPP6xlAp9DACgJXSWVPjsM+bsl13wSVJg8zPSZqOLXHpmil7MkwgaJnVvxD
- F4yg7ghU0FBvMuq/8JplI068pGdS2N3GvKuuI/xm6XcDu4yP3JXqPAl9N4aIRZTFk9ThXqE
- jdBkzbww9Q58+y2xseyFg==
-UI-OutboundReport: notjunk:1;M01:P0:4xcOc8CnZww=;+CWv3Zhv+vUMp87ufmgroLSWfRa
- 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
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="AFRXat5sBxQpEBc3"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThQZy=Sj7bRsbWOFn=Sn4mgzkeo=4Sj0Qyhu9cWotO1ZA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -243,209 +179,107 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 9/22/26 16:58, Vincent Stehl=C3=A9 wrote:
-> Add a minimal test for the UEFI Firmware Management Protocol.
-> At this point the test only does the following:
+
+--AFRXat5sBxQpEBc3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Oct 01, 2026 at 02:27:38AM +0100, Simon Glass wrote:
+> Hi Milivoje,
 >=20
-> - Get current firmware images info.
-> - For each image, verify consistency of the authentication flags.
+> On Wed, 30 Sept 2026 at 23:29, Milivoje Legenovic <m.legenovic@gmail.com>=
+ wrote:
+> >
+> > Hello everyone,
+> >
+> > Here are the details of my analysis:
+> > The commit that introduced the change in behavior in version 2026.01
+> > is this one:
+> >
+> > commit 209bbc4e0032228c6ea17e2172a8a6b89756c4f5
+> > Author: Adriana Nicolae <adriana@arista.com>
+> > Date:   Thu Nov 27 08:28:34 2025 -0800
+> >
+> >     boot/bootfdt: Add smbios3-entrypoint to FDT for non-EFI boots
+> >
+> >     The Linux kernel can discover SMBIOS tables through two primary met=
+hods:
+> >     1. Via EFI tables, when using EFI boot;
+> >     2. Via the 'smbios3-entrypoint' property in the /chosen node of the
+> >     device tree.
+> > ...
+> >
+> > I found this out by comparing the device tree from a working version,
+> > decompiled using
+> >
+> > sudo dtc -I fs -O dts /sys/firmware/devicetree/base -o live_tree.dts
+> >
+> > and difference was in /chosen node:
+> >
+> > chosen {
+> >         u-boot,version =3D
+> > "2026.01_armbian-2026.01-S127a-P7283-Hee1c-V2928-B3a7f-R448a";
+> >         linux,initrd-end =3D <0x00 0xecbffca5>;
+> >         bootargs =3D ...
+> >         smbios3-entrypoint =3D <0x00 0xedf47000>;
+> >         kaslr-seed =3D <0x00 0x00>;
+> >         linux,initrd-start =3D <0x00 0xeb519000>;
+> >         stdout-path =3D "serial2:1500000n8";
+> > };
+> >
+> > In 2026.01 version smbios3-entrypoint was there, in 2025.10 not. I
+> > searched for this term in git history and found the commit mentioned
+> > above.
+> > With git show I saw what activates this, and made a patch in armbian
+> > build system to disable it and confirm it fixes the problem. And it
+> > fixed it.
+> >
+> > Here is also where kernel hangs for 60 seconds (always at the same plac=
+e):
+> >
+> > [   14.482048] calling  gpio_led_driver_init+0x0/0x38 @ 1
+> > [   78.137967] Freeing initrd memory: 23448K
+> > [   78.165027] probe of leds returned 0 after 63677665 usecs
+> > [   78.166792] initcall gpio_led_driver_init+0x0/0x38 returned 0 after
+> > 63684076 usecs
+> >
+> > As you can see, I was only able to find the cause, but that=E2=80=99s t=
+he
+> > extent of my expertise.
+> >
+> > At first, I wanted to sort out the problem with a patch in the Armbian
+> > build project, but then I thought: "Why not sort it out at source?"
 >=20
-> This can be tested on the sandbox with the following command:
+> Good idea!
 >=20
->    ./u-boot -T -c "setenv efi_selftest firmware management protocol; \
->                    bootefi selftest"
+> Does 'dmesg | grep -i dmi' show a DMI line, and is
+> /sys/firmware/dmi/tables populated? That shows whether the kernel
+> reads the property.
 >=20
-> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->   lib/efi_selftest/Makefile           |   2 +
->   lib/efi_selftest/efi_selftest_fmp.c | 135 ++++++++++++++++++++++++++++=
-++++++++
->   2 files changed, 137 insertions(+)
+> Does the hang go away if the property stays but the region is
+> reserved? A quick hack is fdt_add_mem_rsv(fdt, smbiosaddr, TABLE_SIZE)
+> next to the setprop in fdt_chosen()
 >=20
-> diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
-> index 67102648703..9882d9f2748 100644
-> --- a/lib/efi_selftest/Makefile
-> +++ b/lib/efi_selftest/Makefile
-> @@ -80,6 +80,8 @@ obj-$(CONFIG_EFI_ESRT) +=3D efi_selftest_esrt.o
->  =20
->   obj-$(CONFIG_EFI_DEBUG_SUPPORT) +=3D efi_selftest_debug_support.o
->  =20
-> +obj-$(CONFIG_EFI_CAPSULE_FIRMWARE) +=3D efi_selftest_fmp.o
-> +
->   targets +=3D \
->   efi_miniapp_file_image_exception.h \
->   efi_miniapp_file_image_exit.h \
-> diff --git a/lib/efi_selftest/efi_selftest_fmp.c b/lib/efi_selftest/efi_=
-selftest_fmp.c
-> new file mode 100644
-> index 00000000000..c17cf59a237
-> --- /dev/null
-> +++ b/lib/efi_selftest/efi_selftest_fmp.c
-> @@ -0,0 +1,135 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Test Firmware Management Protocol support.
-> + *
-> + * Copyright (C) 2026 Arm Ltd.
-> + */
-> +#include <efi_selftest.h>
-> +
-> +static const efi_guid_t firmware_management_protocol_guid =3D
-> +	EFI_FIRMWARE_MANAGEMENT_PROTOCOL_GUID;
-> +
-> +static struct efi_boot_services *boottime;
-> +static struct efi_firmware_management_protocol *fmp;
-> +
-> +/**
-> + * setup() - Setup unit test.
-> + * @handle:	handle of the loaded image
-> + * @systable:	system table
-> + *
-> + * Keep Boot Services and locate firmware management protocol.
-> + *
-> + * Return:	EFI_ST_SUCCESS for success, EFI_ST_FAILURE in case of error.
-> + */
-> +static int setup(const efi_handle_t handle,
-> +		 const struct efi_system_table *systable)
-> +{
-> +	efi_status_t ret;
-> +
-> +	boottime =3D systable->boottime;
-> +
-> +	ret =3D boottime->locate_protocol(&firmware_management_protocol_guid,
-> +					NULL, (void **)&fmp);
-> +	if (ret !=3D EFI_SUCCESS) {
-> +		efi_st_error("Firmware management protocol not available.\n");
-> +		return EFI_ST_FAILURE;
-> +	}
-> +
-> +	return EFI_ST_SUCCESS;
-> +}
-> +
-> +/**
-> + * execute() - Perform the test.
-> + *
-> + * Call GetImageInfo() to retrieve current firmware images descriptors.
-> + * For each descriptor, verify image authentication consistency.
-> + *
-> + * Return:	EFI_ST_SUCCESS for success, EFI_ST_FAILURE in case of error.
-> + */
-> +static int execute(void)
-> +{
-> +	efi_status_t ret;
-> +	efi_uintn_t img_info_size, desc_size;
-> +	struct efi_firmware_image_descriptor *img_info =3D NULL;
-> +	u32 desc_ver, pkg_ver;
-> +	u8 desc_cnt;
-> +	u16 *pkg_ver_name;
-> +	int i, result =3D EFI_ST_FAILURE;
-> +
-> +	/* Determine buffer size */
-> +	img_info_size =3D 0;
-> +	ret =3D fmp->get_image_info(fmp, &img_info_size, NULL, NULL, NULL, NUL=
-L,
-> +				  NULL, NULL);
-> +	if (ret !=3D EFI_BUFFER_TOO_SMALL) {
-> +		efi_st_error("GetImageInfo returned %u\n", (unsigned int)ret);
-> +		goto out;
-> +	}
+> If so, you could add a fix for 209bbc4e003 - i.e. reserve the table.
 
-This fails if the number of images is 0.
+Thanks for the additional details Milivoje, I'm hoping that someone else
+that worked on this can explain how the change in question here leads to
+a kernel hang. Can you please confirm what kernel(s) you've seen this
+with? It might be worth increasing the kernel loglevel too.
 
-ERROR: GetImageInfo returned 2 (EFI_INVALID_PARAMETER)
+--=20
+Tom
 
-+struct efi_fw_image fw_images[] =3D {
-+};
-+
-+struct efi_capsule_update_info update_info =3D {
-+       .dfu_string =3D NULL,
-+       .num_images =3D ARRAY_SIZE(fw_images),
-+       .images =3D fw_images,
-+};
+--AFRXat5sBxQpEBc3
+Content-Type: application/pgp-signature; name="signature.asc"
 
-This looks like a bug in efi_fill_image_desc_array((). Why does it=20
-return EFI_INVALID_PARAMETER if the number of images is 0?
+-----BEGIN PGP SIGNATURE-----
 
-We should just return *img_info_size =3D 0 and EFI_SUCCESS instead.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCar5puAAKCRAr4qD1Cr/k
+CqbUAP9ruO2k4rYy8uHv3XRHat24zpU7Z3ML2pl5LVFiOUP9gQD/euYjpI/1XKvm
+1iX9Gj4f7IGgS2UfDH6xF8iKv3VlaQQ=
+=6LLH
+-----END PGP SIGNATURE-----
 
-The test should return EFI_ST_SUCCESS in this case.
-
-Best regards
-
-Heinrich
-
-> +
-> +	/* Allocate enough memory for image info */
-> +	ret =3D boottime->allocate_pool(EFI_LOADER_DATA, img_info_size,
-> +				      (void **)&img_info);
-> +	if (ret !=3D EFI_SUCCESS) {
-> +		efi_st_error("AllocatePool returned %u\n", (unsigned int)ret);
-> +		goto out;
-> +	}
-> +
-> +	ret =3D fmp->get_image_info(fmp, &img_info_size, img_info, &desc_ver,
-> +				  &desc_cnt, &desc_size, &pkg_ver,
-> +				  &pkg_ver_name);
-> +	if (ret !=3D EFI_SUCCESS) {
-> +		efi_st_error("GetImageInfo returned %u\n", (unsigned int)ret);
-> +		goto out;
-> +	}
-> +
-> +	if (desc_ver !=3D EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION) {
-> +		efi_st_error("Bad DescriptorVersion %u\n", desc_ver);
-> +		goto out;
-> +	}
-> +
-> +	/* Verify each image info */
-> +	for (i =3D 0; i < desc_cnt; i++) {
-> +		const struct efi_firmware_image_descriptor *inf =3D &img_info[i];
-> +		u64 attr_supp =3D inf->attributes_supported,
-> +		    attr_set =3D inf->attributes_setting;
-> +
-> +		efi_st_printf("  image %u: %ps\n", inf->image_index, inf->image_id_na=
-me);
-> +
-> +		/* Verify authentication */
-> +		if (CONFIG_IS_ENABLED(EFI_CAPSULE_AUTHENTICATE) &&
-> +		    (attr_supp & IMAGE_ATTRIBUTE_IMAGE_UPDATABLE) &&
-> +		    !(attr_supp & IMAGE_ATTRIBUTE_AUTHENTICATION_REQUIRED)) {
-> +			efi_st_error("Bad AttributesSupported %u\n",
-> +				     (unsigned int)attr_supp);
-> +			goto out;
-> +		}
-> +
-> +		if (CONFIG_IS_ENABLED(EFI_CAPSULE_AUTHENTICATE) &&
-> +		    (attr_set & IMAGE_ATTRIBUTE_IMAGE_UPDATABLE) &&
-> +		    !(attr_set & IMAGE_ATTRIBUTE_AUTHENTICATION_REQUIRED)) {
-> +			efi_st_error("Bad AttributesSetting %u\n",
-> +				     (unsigned int)attr_set);
-> +			goto out;
-> +		}
-> +	}
-> +
-> +	result =3D EFI_ST_SUCCESS;
-> +
-> +out:
-> +	if (img_info) {
-> +		ret =3D boottime->free_pool(img_info);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			efi_st_error("FreePool returned %u\n",
-> +				     (unsigned int)ret);
-> +			result =3D EFI_ST_FAILURE;
-> +		}
-> +	}
-> +
-> +	return result;
-> +}
-> +
-> +EFI_UNIT_TEST(fmp) =3D {
-> +	.name =3D "firmware management protocol",
-> +	.phase =3D EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
-> +	.setup =3D setup,
-> +	.execute =3D execute,
-> +};
->=20
-
+--AFRXat5sBxQpEBc3--
