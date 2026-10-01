@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F5B4CA5FD2
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 16:00:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AB27CA5FD4
+	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 16:00:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1467F60D77;
-	Thu,  1 Oct 2026 16:00:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C29C760D64;
+	Thu,  1 Oct 2026 16:00:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JkH33XrJ9r0O; Thu,  1 Oct 2026 16:00:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 2C25B60D62
+ id nqib4WsNPBDh; Thu,  1 Oct 2026 16:00:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org EF05260B74
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790870431;
-	b=iuY+XLyEg1azMYb9ivZu4AQBMnvtWAbQV2pfWd8O6G5QLlfvoC93OgSDwGocggr5bt8U
-	 uyMfpSzxL0+kbShZhHfcKQjWNK/0SInFUTYeP7w0fkFtHVCZYE7hP37a4JlXvMrUpcZcz
-	 WoIiWq/2zm+hE/RZHwxb5sq+imHKs1/uHF9Uq8bMAkdMae5r96hbyE5cwWBvSK/dKXL+0
-	 9DtgZaKUij7vm+glWI3/R54/iRLzpNOvLP7xRe+yWCDJLgBFF0QSdaJTx9MqWp7wtarBR
-	 INqQLQmyAeVCJINS3gC1he/1BfF4x+5WH+8Z5b4LWIxunZuR+KjLPL3Zl/NxaUtxVeQ==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790870441;
+	b=cSHmdJiYRqub3U3N6SF2Qn4wtRBuGe78D+02SGmgsEIyysWEWV4OPtvRPeTa/4G0xUmJ
+	 YPBijRnHFhG2Ekis3cRm6HP+wkdm79VqVXMQPykZAK+cUfjf7PzLlpgmm7qO7Ogzam5fL
+	 JfRoyHYMlQa73kpDKWcVW1KZdVRbxq9A+5w70KIGBKAiWZd7kwD6JIse81+fcq6cZc8wB
+	 3OpjQnRAGuUMrj71Yz0ZBL6jgCP1VEXyqTTcaNf6sCONFuZKbRBlhruA0E3T5dzeObXvG
+	 LsL6q9je+T1ptAhSwXvf+pbuAavWKaJXY3/tpiePBIbXgL7/sjbyZfhDe5soZTe/v0Q==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790870431;
+	c=relaxed/relaxed; t=1790870441;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,145 +32,147 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
-	b=XTuJLilbEbIR7F52vtNmWvDpnr1dpq0fF+OgZOMvHZVy1Pv5MGg82q+Jjm8+H5bWEMh9
-	 tCM9lFMCWirhX1e7fgIN6UI1gukD5B5C2w3H1JPNKZ/sXgEuImV+2t68TAlvpFt8QnWFv
-	 0vLPo0AhTp+8g0kBtqOimqs5ifceXFkWUJ6UpMOex9VRyrbHJapkySWWt4CpHB8PPyFi+
-	 FmaqY9qKXB03DBSa1ojRTC+GngZRSnYkSGb+wZnTpcDHzC50Wj3OnTIAeCCIqDYNswTEw
-	 Pbr4BXdt9F0tBQR7DFw6en7MnYXQ8GK5hrYOKhHcGNJHceZ7yzx8WBHHQCUI7CM2tKg==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=m96j3CYx1xmic3BL4Z8BGQScyEw88aPFjmMhja/m2ZY=;
+	b=k0Cvmu02x/v+pHX8XKMcx4Vk1rTU6xir4cEBIwicqTRzN5ttM0ndvcsorBDNwVPvSKzI
+	 wz/Rs8yAMdxXBbYMUASTqaHiODOu45tv2YcGkR3SlhNoqnEdDNVtHE2yteX/R4pYTe/5h
+	 OQpW+/RpcXWe+sDhXQuzDguzAFPSNcV7ZR6lYPmsCm82CWegg9xedPpZSBLJUfmJ4y/tE
+	 VOfU7bfG4IYN47pHYzn1sc1LqGzPWVyTicBJmXpvazqYYysDydPt2RQqtqt8teflMI5Fj
+	 mOeYb0uGSMtePVkeL2iSGA42ke+cRfDIix7C0WmZPQPUo/dksL1Ibos5FY6phbsvsYA==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; dmarc=pass header.from=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=J9fGa2OO;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790870431;
-	bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
+	d=lists.u-boot-project.org; s=default; t=1790870441;
+	bh=m96j3CYx1xmic3BL4Z8BGQScyEw88aPFjmMhja/m2ZY=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uGqY1xn6Vpr/vuKzJ0ud5eSSXYn83uzsKelprjDLWGJ2jRuTcSKOHgCC9IJYeCGV7
-	 /ItnH4sDYlBxmnCy3g2bxmMD7WfhIIxfmIQX9Tmikld2daknJ5QSU9UP4mM4HJWETW
-	 XPZpoOobcf9qJIJ6ibMRncISAOCpHGb+5woCjY7A5+SaqcgTFoVtLMybM2zlHgb0BS
-	 XHGRsHW6ByBrBJUjYCeLSKnVoefc6h5GGdbG77uWmc3N4ajb3CLqCLQEf8lw/Q1TCZ
-	 p4PmEZ99//xhYo6QPT0yV/GGILzgnU8TMyNqGPrafSC6s07RguKc10gcLNBJztduYD
-	 kU7VR9ZTbv27Q==
+	b=lhYxM8MKtbu4AFgIIkY3p6I9VU0Dw/6OG2V9lR6ZZJeVULkqrbz6FOYBXt+u47r8H
+	 wanlM28VZXgWvlsFPLy6oDVdvGKkijqiw7TtcF58NQCNbLhIM+XnC4nrb64q1KFJtS
+	 1p5VJKVvgt/Yt4CEVABOBVusouH+TK8CWGHvOdu2ZoQhf3GwaWamPyAZ/Mpnl30T1K
+	 kJxFRJJSjn2W8jjgz6gskibT1V20FoFEIsMp/uuw3tQqAWKUud+86gQL9r3owdei4S
+	 Ra3MPenpz0N8gALcYnXlwFNCOj1DTb2Ve6XJB5RE66MfLI/6HLDhioMuVkt85fWddV
+	 FuU46WUE3tiiA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2C25B60D62;
-	Thu,  1 Oct 2026 16:00:31 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 43DE832F
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EF05260B74;
+	Thu,  1 Oct 2026 16:00:40 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id CC02733B
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2994D81219
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:29 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id B1A6C60B74
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EHRClqtOqGBN for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 16:00:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 738EB81139
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:39::c"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790870428;
- b=e9y/IqfiooIKLxczg9MSp6xwzbwNJFSy15HRlnUaPvtUBewIJHutAidgibtWHv5iLtMD
- 64p9oPd7Eoz1mg54FjNvm9kI3xRrYjBNw1UT4plvxEAmrhOsUcF9judcy3vzGU3jGYwmc
- VJUwVgirWwsqIUNEs4ooWwsHwle71EHDtxgDNEsgP0S/XayBx5c2xFQ9B/F+CBJ41kBy+
- Alpvtjb7N+tI+u4e/Kph4XD5+rl+okYvNQSt+stoP2Cg6c2s3mtmRv0nePMjj0zAR7MWu
- ZXqwGHF8KyBfIZ/eaOghAIZiwmheT2YCVDvK2zXGrAXpVAAs6OFu66FgCH0HjLs5WTg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0RD3ZD5omxtP for <u-boot@lists.u-boot-project.org>;
+ Thu,  1 Oct 2026 16:00:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org DBDB260B18
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:3b::29"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790870439;
+ b=S62owUcsxy4SWC9rUqYM8K5/Fbsbnqujwk2rXGcP5A4wFiU7nMmU7AVkenIQROrG5XEG
+ Q1ofr8eTw1o4biYmW74gSZn38wCGWbE3W5J9c9AQF2BhqT4OSOI27bwYMGtUd4Z749Km+
+ 61u0GhfxfT7cBKJ19xnXGdiHsN4mR3uUDsxEUt+qy7fstmWsABX4HbUBboW9PIHCQ04gf
+ TlNyaTAZ3rs9PVYS0PlOAH57WZcmKrUV0rwHV+El9W2q3NBnwSQZUaKk9ErZ6+Dc0x4S4
+ +ptZydEnq3GbCMwStDu/JbXVuF9U3Jfr1fKiikeQK90oPS50QYlXDXM0NvOfVda3dig==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790870428;
+ c=relaxed/relaxed; t=1790870439;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
  MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type;
- bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
- b=el+9ZDuIQKcr4jvGctqm/lBj2RU1Ir8nbDYkxQcokceyGOnr8qx/ZUKmr7L1UEQTdFm7
- gMY1j/KYShs/o58Rjbckr+V4gH9oXs5pY5rBqmu2PYRGEwXKP6L1QQ3WapKQ0V0i01Foz
- aGI59llvjkddOEfa546I7+D7so6yKBi6+SLtY2HgpNDtT+nhSmGQ6+a7hFT5o5P9Ux+Z8
- iVIEFG14S7pUZJdY4KDsv/uN+OPJIQMFAZaITrXalNKO6k+QNIE5YNiZkvOpJxdmU0qya
- qMkTFkAdPJeal6/WF9tnSyo0o8ovyNSgqMZtToPR9FAUm9BvYiR8B/e6ScX43dm9rxA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org;
+ bh=m96j3CYx1xmic3BL4Z8BGQScyEw88aPFjmMhja/m2ZY=;
+ b=tAjeM+lR5jFWzicpxAKLOGLUAp52au0Cx3t04FcP9KZOuCm2rqqUH6OQm2TY5dM5xhqD
+ 3rjG+7tIObkZsd/71twPFDDzFcC0woba8hmnr7sHaMeCdOJGp+xEna5j1EX2X1L7+NpYo
+ muD5CL65qX5h429/XZfUKYfzToESa+qmXYwUD5dZmLDMb61LGJ1re9coYh4uycBJw8nSr
+ CvCj+P7b8icaPTm7ZOqDGWkj5YT1nIMvyHo3Ry6yWjB2TJlM7kaciE+XIbYcf3HCjGRxc
+ U+/drdmMRcoU0/NF7z2L68Pzrd1WckquKuIdQ2wmqo0mqpogOZ/p2ASwDEiGRqTTNSQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
  dmarc=pass header.from=chromium.org; 
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=gMt6y4eq; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:39::c"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:39::c;
- helo=mail-pj2-x0c.google.com; envelope-from=sjg@chromium.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+ header.s=google header.b=J9fGa2OO; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:3b::29"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:3b::29; helo=mail-pz2-x29.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=gMt6y4eq
-Received: from mail-pj2-x0c.google.com (mail-pj2-x0c.google.com
- [IPv6:2607:f8b0:4864:39::c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 738EB81139
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:27 +0000 (UTC)
-Received: by mail-pj2-x0c.google.com with SMTP id
- d9443c01a7336-2e494adf48dso1291725ad.0
- for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 09:00:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790870427; cv=none;
+ header.a=rsa-sha256 header.s=google header.b=J9fGa2OO
+Received: from mail-pz2-x29.google.com (mail-pz2-x29.google.com
+ [IPv6:2607:f8b0:4864:3b::29])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id DBDB260B18
+ for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 16:00:38 +0000 (UTC)
+Received: by mail-pz2-x29.google.com with SMTP id
+ d2e1a72fcca58-88732460a36so1304936b3a.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 09:00:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790870438; cv=none;
  d=google.com; s=arc-20260327;
- b=jLgyXALzrlKeKDzh8P5V6PjYS5Y2a2ZxjqfMOFX21CsC3JSdah6iBIzW29Vq7am+12
- hy5S2YgnfO9jLajKw5Frd5PDbezqTZNFaGaQ4OzvyDjtZlmhyAYnhNqk2R7Q2E5I3XXw
- WouXCwEFoeP/9w5CPCNcUsXepblrumUalTTNIXE+oofsgqBU8QlBAbxYSVqTgnvSl9++
- Kk9sJGS/NpMqGfFJhJhAanUB6GinbJQ4+lfPcb1CO7VsZ+W/AvAG2PX+yrrl9nIzGbxg
- OISqSw8twoeFByBcVb7XI6NphsNXjuPS0ckRoCq1Vyo6iAFzFGycU8ljXVUx6hJRV2kS
- xVHQ==
+ b=Q8z5oSk8jLe0Mzz/K5rKeIujlfLgk/MgCudnqfLUYH3AGsCdaqKh1Q91GXnQdM6x7x
+ zwUBL9zJe5QM7n9tROnvE3dx05+uHDXvi+t3H9zJ5dK+TKJM7/qofwJRomToT20dlSvt
+ +FWoNTLR6YliJysjxeOtN7Q+slBzrzIHshrpu+Kxnqy5J31p9h4pLy3gUyvGKbcPjuOW
+ 2nbiSyD6QhMTtdQsVQO3awr6la0Wemkv+Jo+j6ibqcSDqWe4JZbg8TmFBIGYoi1Uv5TJ
+ SSX27dvnTb4Gjdx1DaOc+uViHIdHIN8mm5cgToYMxkBhP4AE0Lncz8YH63Y4x9qN03eV
+ tHPQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
- fh=iO7aF5sJ0jvhl3MuzrDCAVJjSWl4GZX0gewNaLqEfAY=;
- b=rj1HbzjIND0wqWe7Ea320SuEhx4wFP2+3kOHzPe1kWZiabCkm8CiJqeQIRT50lYTXa
- XUIQn0Y7F8C6nrKuukRSzlUUDvL4B2GSCHqiXVyuLhyds4VT0Bs9Mz0+OjFJt9f/3G+q
- HDlHgoLRg5RXVd93GK3uiJ8wqL3MVoQY6+yegM5ihV7a+7VPwQ3wNt1bGGQzVjXp7mTD
- 7dy1Cy1sLWt0MByNi1998CHVTys0p7zPzMLzu1HInoKVG/uB46zVL+Txb/cHAFacBDU8
- HOzbMNXyHiTw/aQSZE2K5W0UJ0OjkgCzEbsMI+Xfk4WT8q3RBnaXQSHqbH6ZuZBbyvm/
- WVHQ==; darn=lists.u-boot-project.org
+ bh=m96j3CYx1xmic3BL4Z8BGQScyEw88aPFjmMhja/m2ZY=;
+ fh=1RVHjn0Zk1rMG+C017PuisFbdTsEouWZ3XqWINBBat4=;
+ b=I19txBb1quTTOobrvoazK1+4R2yo6OA8Dm48cPPxfaumUay+cfXqpD4wYgKuDFPBZh
+ 4TgKEi5NVEd+yULd6dnvjfZcsiUpktVQ4CBdhSiFj2QT68FFWkTCd6N1oDInWdZXYpjJ
+ /MmA4itNfJdiVYQjTLdrIIxvODc/TmgeLCj02EeJ1tb4G5qob9C9zvbWXc9gNKy+55Ag
+ 5OgB3OU1o0MZQULHmmKiqYAiNrClsUsR624eK6jfSwrxxougMlycpxRJzmP15zEOHaLi
+ prLJd3YPX7ckBqvvCyOuREA6X5f6ZFD4bZuB0bLPh6wG8+29EnLuy4FQTAbYZAAzLRPi
+ 9ecA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1790870427; x=1791475227;
+ d=chromium.org; s=google; t=1790870438; x=1791475238;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
- b=gMt6y4eqBuFN0/FAyxPpxZuIytSNheZbt71Dcsppt857XXs6Zi0Ismk1KIW9XQlrxw
- 4AnJ5dmrR+aaaoMdrtY2np5VUpuV87eTCp5DuJP+RY9Fq7ROSalcvyMp3O6y/v3KiPQC
- qVHWreheZYCYa8L8M2VoPRhu1Nl8GkYWTIJGk=
+ :content-type; bh=m96j3CYx1xmic3BL4Z8BGQScyEw88aPFjmMhja/m2ZY=;
+ b=J9fGa2OONa732L1gorWrgbKt+7TadRSc1ymGmTFJftLIC/4WhbqNsXTBQ1ptGBcHNG
+ aAy+AvpdqtdpsSgvZ/OrJhdzVzRZeZF6oZHn7AqGWDu1USg4srz61x42zkPK9F2ONMZI
+ cDMo34naDo78leGIHEyQ5hF0L+9iGVsNe0+Ss=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790870427; x=1791475227;
+ d=1e100.net; s=20260707; t=1790870438; x=1791475238;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=VWjBefMuO3TPeAmFrjh56WtQok/jTohaXkWtmERgIQE=;
- b=KIjXm8xRB4J6rpyI/AXF70g1seSQBt+SUAQU6hPSzcWX5e4ucTFeiDirGcvCejuFyT
- PF8OVnMQk5Z/J95l5thT5OOFRV69MaZFnHOm7urb721qhzNrvwJjDOEKuTqnvwfB1oWy
- oX1vt2zWHtOxIqEf7I92ABfgUSWjx7jgztHcoXG4SZQobifUtr/z7kPp7Ue7twi/0Xr2
- FtTyHugxwZCZ9Mi5OtpldyRPI2YxgtNBBbK9ruxafgCP9/wOhFvbFf4MVJMg9DXPlxgu
- bYxflZssUebG00eNU+rHuX9d6A3DIT/JTrIHQkF6kLyiKIz09KpXkAf4Y9t1OUvkn+mP
- l+Hg==
+ bh=m96j3CYx1xmic3BL4Z8BGQScyEw88aPFjmMhja/m2ZY=;
+ b=Qpur0fNHxMFPZtiucEO4hZpZUCYNwu/hjvHLRezB8MM1sYGa7nTjbL+UjpZubZNue4
+ 9sLETS3RbI5qtLIsOlacYQAXzYKXbZ1c+pUgFzL6MBUuz4WAOf+b0c+8P/s0LPkqAPtc
+ QZZqmsSzZFSFDizGThLBMgvSleKyuMrRPkElgPTn39YDEyJNjT4BargOKEmsAInxsN40
+ U0mG/AOBHBG9pk5z59rcdU3tTTiq3FNkCTuc8YuxdCS3bGonMhvHnZhjisGh0phsEb1T
+ RWYKo7e4ZOdP0zj/HygIg0nrQqgFQnacyi5QeMpIzowTLob+qSMsdDI4HdJRlOPlaDuV
+ 96Eg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwW5EsOdbL0iopmf16DbhOANOIyB5e2a/LKE6T38/uwEMdDzuwjLMy10Ap05zxjuYa463/uFtY=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIo2SCCw/x7yEMQPQ2c1NEQig6aVkR3DS9ks9yYhpnitnsqp+9M
- 8bs0i7IvHBLZBxJSjatqecFsjOr7IgPtcyWYmzcwK/3ft2JpCeHv8kyrGubdH90EHBIndasjhI6
- Cyk+ccOFh09DwmG4PS2BEnU+c40uAleBgpHoX5nBJ
-X-Gm-Gg: AYBFou1t4Oaqu523lZ0p6ooDLN/nVARzqZdbAKLo0VbHr9+3BJ4ZHfQFIoSiMKSuY0u
- tqTKR81dbOpoY8GLhryzuZNEOXh4iUlhJG1Dkw/74zC0FnR/iUNU8rTehUSnNEPIPgzqmp2Ox/F
- XAAFyvItZo2Trigg7dLBpuzecltH5pFfP9h3jchU1dwhm8C2CfgdH1pmVmxLA6pN+Hlx0VzxBvC
- JafcOzK4NQrcS2CsVYyoL3nl1tYMmQtcM2PDhmcx05Gel8214Boo1a7l1PEnhZ+/E6flcjyvNtP
- cyAqBL4TC0dQWQ3YMTHlW1Ln4hPw+0WNQZu1jWSgG6QrJffRPuYuZWMy
-X-Received: by 2002:a17:902:ec91:b0:2e2:e7aa:74a5 with SMTP id
- d9443c01a7336-2e2e7aa8292mr39075235ad.25.1790870427125; Thu, 01 Oct 2026
- 09:00:27 -0700 (PDT)
+ AKwUvByVklTXYoDV4jCDIHdNNCEjDCrgmfRS7+thrMrtNoioRh3mAkmxqxjdSPIF0D6e5I0PqFVnDrg=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mfpGF/JPbIlSaCtirfov6rKiPWZn7oZ0abstcfgkrIBQ+KORjc
+ xj4xUj25AQN0xQksRNjSWGx19FeXn4a3pKMdXqmsQzaXoNYrpoHoLUXV2IQ4NcyN/n+XIqbJiHq
+ HqcvNJZ0mjEgE9u4o4/C19MnfJ3ESMufwocyH8pDC
+X-Gm-Gg: AYBFou34bLqxYO5eriO/BjSDa2CgXOY5JA9KVRbtVnr4bXMWZNatQzf+WGwikwU0aT0
+ jb1Qfk4jPwD2tTAGbtA8VhZ3gPWTdiwqFOH7dSnZCMFiyP6wcEChShfNTgYryFuSFGRJjCEpXqH
+ M1PLtMGYpXUT61WGlyvG8FhEqcl2OOmDkeTW/6+k/e1TAs5760sU8omUy7cqw1KcGeV9rS3KKA9
+ BhsPc84L2Ef/WO11AP5HWO9E+qgcAZmV5eWOA3q+mIBhT5dxGtUIqMhuKO8iudSYdUjoMZLwIw/
+ eNYGHXt8n55v8IlJ0tptho066YW0G/itIgcFs9n3p8P/Nkp7NPDt8wZ/
+X-Received: by 2002:a05:6a00:2d19:b0:888:402c:b8ea with SMTP id
+ d2e1a72fcca58-88af846f8bdmr6507b3a.41.1790870437441; Thu, 01 Oct 2026
+ 09:00:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1790626459.git.daniel@makrotopia.org>
- <9a960bc5139c79b9f60f37f8ea6255e6e8a76c2a.1790626459.git.daniel@makrotopia.org>
-In-Reply-To: <9a960bc5139c79b9f60f37f8ea6255e6e8a76c2a.1790626459.git.daniel@makrotopia.org>
+ <57d688c070e2624e8d37a4e16a0f0d3ac3806410.1790626459.git.daniel@makrotopia.org>
+In-Reply-To: <57d688c070e2624e8d37a4e16a0f0d3ac3806410.1790626459.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 Oct 2026 17:00:01 +0100
-X-Gm-Features: AclHuK-6vywql5mrK0iQL1hp7GS66J4KwUOG-f1IYNzG76RAocGEK2ax2Cn0boQ
-Message-ID: <CAFLszThrXu=rdgnmMBZiftAKLUsCr1jPgmuK_KcDRszgFoSSvA@mail.gmail.com>
-Subject: Re: [PATCH 06/11] boot: imagemap: read only the bytes an extend adds
+Date: Thu, 1 Oct 2026 16:59:49 +0100
+X-Gm-Features: AclHuK_go1MQ9ZhQFVHD8vJQXOEVuldcsePIB8bH_Zo-Wc71jnJyzY-9HtBkVX0
+Message-ID: <CAFLszTjEwMCXqxJ64oJomm6BVT3p-NUrj4e+rknc6NzoX3HpNA@mail.gmail.com>
+Subject: Re: [PATCH 03/11] cmd: ubi: unbind the block device when detaching UBI
 To: daniel@makrotopia.org
 Cc: Tom Rini <trini@konsulko.com>, Kyungmin Park <kmpark@infradead.org>, 
  Heiko Schocher <hs@nabladev.com>, Simon Glass <sjg@chromium.org>, 
@@ -194,71 +196,75 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Hi Daniel,
 
 On 2026-09-29T00:04:16, Daniel Golle <daniel@makrotopia.org> wrote:
-> boot: imagemap: read only the bytes an extend adds
+> cmd: ubi: unbind the block device when detaching UBI
 >
-> Growing a region re-reads it from the start even when the reservation
-> was renewed at the same address and the leading bytes are still valid.
-> The translation table exists to avoid re-reading data that is already in
-> RAM, so the common case of probing a FIT header and then mapping the
-> whole structure pays for the header twice.
+> The ubi_blk device is parented to the MTD device UBI was attached to,
+> but ubi_detach() leaves it bound. After 'ubi part A; ubi detach; ubi
+> part B' the device still hangs off A's MTD while UBI sits on B, so the
+> driver-model tree describes a parent that is no longer in use and A's
+> MTD can no longer be removed. Reads happen to keep working only because
+> get_ubi_device() always returns ubi_devices[0].
 >
-> Read only the range the larger request adds when the region has not
-> moved. A reservation that had to be placed elsewhere still needs the
-> whole range.
+> Return the new device from ubi_bind(), remember it, and unbind it in
+> ubi_detach() so the next attach binds a fresh one under the right
+> parent. Tracking the device also replaces the scan of every UCLASS_BLK
+> device that was used to find it.
 >
-> Fixes: 9b41c7dbee96 ("boot: add imagemap on-demand loading from storage")
-
-This is an optimisation rather than a bug fix: the current code reads
-more than it needs to, but the result is correct. Please can you drop
-the Fixes: tag so this is not picked up as a stable fix?
-
-> Read only the range the larger request adds when the region has not
-> moved. A reservation that had to be placed elsewhere still needs the
-> whole range.
-
-Strictly, it doesn't need the whole range from storage. The old
-reservation has been freed but nothing has written over it, so the old
-bytes are still in RAM. A memmove() from the old address to the new
-one would keep them, and copes with the new block overlapping the old
-one, which is quite likely here. See also below.
-
+> Fixes: dec405d1653a ("cmd: ubi: create a ubi_blk device when attaching UBI")
 > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 >
-> boot/imagemap.c | 18 ++++++++++++++----
->  1 file changed, 14 insertions(+), 4 deletions(-)
+> cmd/ubi.c               | 73 +++++++++++++++++++++++++++++--------------------
+>  drivers/mtd/ubi/block.c |  4 ++-
+>  include/ubi_uboot.h     |  4 +--
+>  3 files changed, 49 insertions(+), 32 deletions(-)
 
-> diff --git a/boot/imagemap.c b/boot/imagemap.c
-> @@ -261,8 +265,14 @@ void *imagemap_map(struct udevice *dev, loff_t img_offset, ulong size)
-> -                     ret = spl_load_region(&priv->info, img_offset, size,
-> -                                           base);
-> +                     if (addr == old_addr)
-> +                             ret = spl_load_region(&priv->info,
-> +                                                   base_off + old_size,
-> +                                                   read_size - old_size,
-> +                                                   (char *)base + old_size);
-> +                     else
-> +                             ret = spl_load_region(&priv->info, img_offset,
-> +                                                   size, base);
+> diff --git a/cmd/ubi.c b/cmd/ubi.c
+> @@ -650,6 +651,47 @@ static int ubi_set_skip_check(const char *volume, bool skip_check)
+> +#if CONFIG_IS_ENABLED(UBI_BLOCK)
+> +static struct udevice *ubi_blk_dev;
+> +
+> +static void ubi_blk_bind_once(void)
+> +{
+> +     struct udevice *parent;
+> +     int ret;
+> +
+> +     /*
+> +      * A single ubi_blk device serves all volumes of the attached UBI
+> +      * device, the volume being selected through the block descriptor's
+> +      * hwpart. It is parented to the MTD device UBI sits on, so it must
+> +      * not outlive the attach that created it.
+> +      */
+> +     if (ubi_blk_dev)
+> +             return;
 
-Just to check: how often is the addr == old_addr case taken in
-practice? LMB_MEM_ALLOC_ANY allocates top-down, so the FIT header
-region is normally the last allocation, sitting directly below the
-previous one or below U-Boot's own reservation. Growing it upwards at
-the same address runs into that memory and fails, so we end up in the
-else branch. If so, the 'common case' in the commit message mostly
-does not benefit. Copying the already-loaded bytes across in the else
-branch would make the saving apply in both cases.
+Driver model can free this device without cmd/ubi.c knowing. If
+anything unbinds the MTD parent (e.g. 'unbind' on the flash device),
+DM unbinds the ubi_blk child too, leaving ubi_blk_dev pointing at
+freed memory. The next ubi_detach() passes it to device_remove(), and
+the next ubi_part() returns early and never binds a new device.
 
-The comment above the loop still says "re-reading the full range from
-storage", so please update it too.
+Patch 11 makes this easier to hit. With UTF_DM the DM tree is torn
+down after each test, so if imagemap_test_ubiblock() fails an
+assertion between ubi_part() and the final ubi_detach(), the next
+run's initial ubi_detach() uses the stale pointer. The UCLASS_BLK scan
+you are removing does not have this problem, since it can only find
+devices that still exist.
 
-For the test, imagemap_test_map_extend() only checks read_count, which
-is 2 whether the code reads the whole range or just the extra bytes.
-The mock already records last_off and last_size. Please can you assert
-that the second read is (64, 192), and add a variant using
-create_mock_loader_bl() with a block size larger than 1? That would
-show the new path is really used and the offsets are right for block
-media.
+Please can you keep the scan, and use it in ubi_blk_unbind() too to
+find the device to unbind? That still fixes the wrong-parent problem
+without global state. What do you think?
+
+> diff --git a/cmd/ubi.c b/cmd/ubi.c
+> @@ -650,6 +651,47 @@ static int ubi_set_skip_check(const char *volume, bool skip_check)
+> +     device_remove(ubi_blk_dev, DM_REMOVE_NORMAL);
+> +     device_unbind(ubi_blk_dev);
+> +     ubi_blk_dev = NULL;
+
+Both return values are ignored. If device_remove() fails,
+device_unbind() returns -EINVAL for an activated device, and the
+pointer is cleared anyway, so the device stays bound under the old
+parent, which is the case this patch is trying to fix. Please at least
+log the error.
 
 Regards,
 Simon
