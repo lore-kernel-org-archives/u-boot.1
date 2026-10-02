@@ -4,192 +4,249 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EC14CA5FD4
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 11:26:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 956F1CA5FD4
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 11:41:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DB30240D48;
-	Fri,  2 Oct 2026 11:26:03 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 442E740CAC;
+	Fri,  2 Oct 2026 11:41:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1cW6p7i-dvYG; Fri,  2 Oct 2026 11:26:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 60BED40D19
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790940362;
-	b=Pbn60Be8RYatXpQiyQq0l42uOWQvbP2MZ1sTk52kA6o8jPf+0FXLZmR4CWNKZEi4cP2A
-	 DKKEBXjgp7eRhTKz4XbNSDERCLGYLiSBHdmNDtyqIkzmPAOdomLDU+B6q3NGKGAGT5bBK
-	 iuPUEw14BZJD0MXgDxhaIznw9aBSBwjCv136xHvgWVcmrETsKQC6ZChfWZLYCeOXaBXve
-	 /XV6is2GLGGc0R7vgBAWLz5yqaP4tGQqRhx4Pv8UPt05wtdOB51Y0ttSQa3rwjBzIM8Y5
-	 CayyT5dHNzTZE9ZiwXLI1pmxK5kUUSubNmLWRaF3Doeb8+0Cdoik5ofSM4RLNhFP/ww==
+ id wvC4ZQV63_Iq; Fri,  2 Oct 2026 11:41:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 8ED2540CBE
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1790941287;
+	b=qC91RhytpHty4YUSMM7x0SXaEoSnux187MFQurTmPrDMJFNg2BuwbLCSglnkatfg9qLB
+	 aJ97z+Wibq5zSD4qecmgX6iI+SaR3OBHX7OF8pUupxW2o2m3IpjOzE8OQz40NsOLrI6yk
+	 +UfSkDVr/ch1XHtQKtB5vTK7BckQpIp1HJh0+bYoY/eoIJYDe4BZY6n5/Ym+f8G/2Filr
+	 49VWl4cvfbSY6h8R6Truw0mePWW4OqxuVgBXgBO5+VKPbh2DX8QAoxqLYPkN+kd/javy3
+	 8OtotvwdmA7tSy4LwncFbPz7ySAFhq5zoL5EE0gawC++yN3Z17PVrEcEILI+nawlpFg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790940362;
+	c=relaxed/relaxed; t=1790941287;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:From:To:CC:Subject:Thread-Topic:
+	 Thread-Index:Date:Message-ID:References:In-Reply-To:Accept-Language:
+	 Content-Language:X-MS-Has-Attach:X-MS-TNEF-Correlator:msip_labels:
+	 x-ms-publictraffictype:x-ms-traffictypediagnostic:
+	 x-ms-office365-filtering-correlation-id:x-microsoft-antispam:
+	 x-microsoft-antispam-message-info:
+	 x-ms-exchange-antispam-messagedata-chunkcount:
+	 x-ms-exchange-antispam-messagedata-0:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-AuthAs:X-MS-Exchange-CrossTenant-AuthSource:
+	 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-originalarrivaltime:
+	 X-MS-Exchange-CrossTenant-fromentityheader:
+	 X-MS-Exchange-CrossTenant-id:
+	 X-MS-Exchange-CrossTenant-rms-persistedconsumerorg:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
-	b=i0sjDoHA9t4Ewic9bxgzvNkvzjAVvr08qhDqYh1iPhY04ndYDQgWhML00Y2KCTi/Zyr3
-	 xWO7MOJdX1tOgbk/3TY4x1jbcRvoPICvGDhG/Us+I3TPuShpQUOIXysCy18Ojnm0Jwtxg
-	 H2jQXgkEWNPHpzl20uwuX5hllskGGQGTP4LAqyljCxGXIOjuXdJjYtfjBAPEvtMdtmo9D
-	 k1e71k3bbL2V5/ACaBlctUiZE+Ozs3Ll0rX39rngHS6Sod/uM95/sj7/FvYiwHEeqLswq
-	 ItWX2Kmm3954hFhSDIfuBzcnH/nTW6HHbgkaDZva8eNsoncV8vL7ypt7odoq4nwe0kQ==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=ryJNlYB02LXRLUJcGnCbvtVRW2gV/AJIVYOsKZ9mMO8=;
+	b=Nj+Soaml2jZjwjJ8xfi+sfe6kryVpUAllJ08zmScypVE+5rgakyUYXB5Y3mg+p29UdqD
+	 6wW/VuGgl3g2qLsik1Z3AxQzFK0ObN+ERUyRD3HlsdGB6uDlppOVawOyz2/7i4MHoM7uS
+	 sTbno0EeZ2/pACGI5tNobcAHEV7zuSsjhwvhwT+76/lXuFrUPIHHLt6j/Ae1s7ZQAQ3wD
+	 qPzhvpabNuugRoUhwKoBjBshtM6Pm6JU9gAstZNsisAhkxd8vG/2+P+VgsjJpV5BA+B80
+	 77CfMEy5/8Z5xuingCzBQnzkcOCc2AjWAWbu1+qlbQ5JsWM2s1yH70PzC6gKUQZ3IPA==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790940362;
-	bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790941287;
+	bh=ryJNlYB02LXRLUJcGnCbvtVRW2gV/AJIVYOsKZ9mMO8=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=d11TMkDjalZdcgU/Kd2OFjdWuw7bvSUlfUWZUjqL+ELeBOkEDmNA+9Y3h6ULZ2iSF
-	 O2VQTlOFW0GqAHv6W5wHsbMOg34TwOtwqb/uLDKYtVCe4srgOZEyY92KmhGy2MBcac
-	 /4qG9ddmNAouTo0jobF49tF9VeAzwWIWKr7qft5Q8ljeESnFxX1sGCUBZaIIOEdkPR
-	 x4k/1I2CAUu05mKwVeVoCB1VcLJqa7HyJT4gUdwmsRLmZsuVGU2Xwk4XIe1y6K0Lur
-	 smnozj5h6MQ/4zxBLfeMJlh+tobgRk0J+v7t3M16vSau7LhmwOMj55Q46AV+j4J53o
-	 ZJijHTWXNFaRQ==
+	b=iCDl0k0U+y6FIwlI0/OukxAfoardHBiIqNoUQM9oprfb8OkPljBN47thb8MKeqhoa
+	 CvNkBBdYCTEdchDDStb8ZtQbOP+Xtv9KF5z31+pigcu8sMXScxwEN/Zj0h3V5QnFA/
+	 JBs0c3sBgfzpCqASHv9BFQXr7J+5AOyE4MJEZrZkFkraYCHnShEHmkGjgf9lCkG5jR
+	 1Wr+aXV1ZJ2jjeNJQiKnrMp3oxfkYiHXlX2EADP+O7Rqb4Pw4F+5sth6O1Q2QilyKH
+	 TzN1vpqrvVwqtdUxjmbkTaRwl5Y42xzddYZvomyqlCEKAi/CLBHytB/Wo1dZ0apG40
+	 sSzj4au1aYwCQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 60BED40D19;
-	Fri,  2 Oct 2026 11:26:02 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5812534D
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:26:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8ED2540CBE;
+	Fri,  2 Oct 2026 11:41:27 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id ADF772E0
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:41:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E7F6C6071D
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:26:00 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9EF3640059
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:41:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XfkFTmUty54G for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 11:26:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 76B88606FD
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:41::c"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790940359;
- b=CqctoIWP3/7NIj/MfyiFThN5UXuijLVJvNhcABERGtxD28EfjR04cvcvqaHMf5RGNRUY
- cLfmrGaIOCnXwS5EA6XxPWpDOj3ME4u/xMo+KDEVL688V4Zg2BClctZwEzQETu9K+jzUw
- uIffhoe6i61feF/TCA2plp3PcvkgWUr0hgqPwLIW2TxK7vtQcUozfLhyyCw6ZiONGMTIZ
- b9B09MtCNGh+vtoCMzVdjohXZe4VBKOhz7BpRJJ99Or4WnF9kdzmB2EyG7nMqI0GybU3t
- 8QiZ5KaiGMAmylnY7EuKt3WSB63ULS7fRQIZPvoGiNyokC03L6FZRyPicoYglHLUO3Q==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4nU3sXkjX_8G for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 11:41:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org CE57A4004A
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:d406::"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790941285;
+ b=l+ehDciWXPH97z3yExYbsZIWuuSlRQacY7JDN9HdV7L+T810+/R8dZCJQBmzB2miUxas
+ ssa5TTgl7NrZ0kMA9GHHM7cQgK7Hih8wDOudSwQaPPixm2kMn7zzwBkzRPpcGEBeEl+zA
+ wwJc56tGbkOAwKVx4Q0+pVZZ1mPZMHwPB16TguxkU7Rl3f3HTQVwej04WyOONK33GRcEC
+ w29wsJ9GMWEarQEWFgobge0b+vXHlZWh4TTijNPm1GKPf/ak+xK1vOuj8aIaJt+vaq622
+ D6htBetXoHWqgYS7BMYiM4+g3RqhTc7sEer5edv8d99RzhZuSF7PWF2jepjSwf/qt1w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790940359;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type;
- bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
- b=K5M+Rj8o5Jp2izdJ7jMLwPkRo7NIUasTi4jBJdJL31Gtaf/pEzMDqyjNavr4ESHxVMdB
- IWxcMZqDb2P/8doRUfdm1TQe+6q6imnQbkSn3p4zKFUy8nDYOtQx5ra5wGa/Ah/p/t0P7
- L0TXoER9VxZV2OjWGpvgY2SpudUkrIdd3Jw8ER+R4LbEuNjauaN15uFiLWq7/LMakf/UV
- uwTwzXXbHOA8Knkt7oYl9hXs+OelodVpCTWOJR43JB/1opl6DlSbuv/928VMh3nFg+L88
- WbLRno/l4R3jxE602gVRrjwKkUvMkifn7FWqmm4lu455W3h7u/8zzyUfy5/I595kddg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org;
- dmarc=pass header.from=linaro.org; 
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=sDRHgynS; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:41::c"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:41::c;
- helo=mail-yx2-x0c.google.com; envelope-from=ilias.apalodimas@linaro.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=sDRHgynS
-Received: from mail-yx2-x0c.google.com (mail-yx2-x0c.google.com
- [IPv6:2607:f8b0:4864:41::c])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 76B88606FD
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:25:58 +0000 (UTC)
-Received: by mail-yx2-x0c.google.com with SMTP id
- 00721157ae682-8ab46253999so46180957b3.2
- for <u-boot@lists.u-boot-project.org>; Fri, 02 Oct 2026 04:25:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790940357; cv=none;
- d=google.com; s=arc-20260327;
- b=gENCf1PHlsWObpCFJekA0a3w89dhpiB1Gv0H0aCP/hQ2ojA1ale50g8QtnTOKOsL4E
- fwlxM+tVG7U8HVfG3PhenLhJxbGtRVKlrXSELCsuHWDmYTxvsqrtYLBvPhWOa66UHHgE
- ousmsZqDd9+9IcEirYstlk3Y6ReAnfD62hm3nu0w8yvbJq2Fw2VOoXMVNHREfRgM3rIm
- txbfx8KAsSxAfzobcNVQMdV7kQ7HLHM0nAgpeMvXSPhIJOQ4rN1iNwQr1lP4yVDQHQQM
- /oribiQSuuj7kGYI2ZvjrTnjVyHP/UGMOfEdsM8FUkaezUjodrtqO5rm14ks0TjHmZVz
- eSiA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
- fh=lfFqgAHmeXyPYtVc3raXXc0t9xB6fh0Hwyo9AWxg7PA=;
- b=PZPC4X4IgyE6ya0ASzoAnDVBd9z+65OhdegguXnBW7ct8K0QGv8zOMpLnJQt08jJp4
- qET5xttwBQLiAoL+30VWfVX85VS5eu8XZSQNK9+WeZVmyXeo9gBtr0s+IF2pRJGqDvvb
- z17YI94s79T7+Lkld6UWAe+ZRP1wkzI2lQnxCmYFIb9b+xmIlIKLgIWbOcwi9HL3kgKh
- YDtxirpYqbH7yCJrny3nnGl/79uEX7PcSkWc26292PpIWCXQs4+sUM7CKpGOPIoZr0CB
- K9nHqDTg68ynJuQo7zB7Ah4Yh88vxa+MR+qif8DiL/0YGCmjIW1o20pfHUsfazL9mMwQ
- G6dQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1790940357; x=1791545157;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
- b=sDRHgynSOxPrDh7Czyx4RxReXNpR/zZVTkbJKzPdAfK1iFE/8IA2uz9vxmy+o8u82e
- OeWjni6m6hBNH963VDfOBEYx6eZgkgiYaxnmgbTj4Nb3k2s6HpDv0qSY3Go6nDYbZXeZ
- v7a+F1GBaj0LryHFUYVZfsTMpHAjCMv8hdaHqhnT9/6cW3SeEhNsZViX8al7LI/nEoQq
- bO84nTvsuQxfx5UDS1hJHSg552iq+xqEUvRmH17B62gb173VoXKFIModr5T5Ary7Cy4i
- +SRDO88lOrMOtOJU//I7ZpXOTQl+IZtc2lX7bp9mtdwZhVkOAHyAC/tAokR++g+8E/Kb
- 4UwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790940357; x=1791545157;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
- b=mZtKUk46RPhCPXp6JvOsJGLeZ9nlcCdGOwTi9G02s5by3mCiSaqgSz0lsLXPNIRk6W
- kqMsY5HmI5E/drP7LEKDt13y4r4TIUBH19pi2J+Z3T9zQThJHbmNesPFIZJWFHYQJMw/
- 0SGeb+RcP3KKc7elBnlMX6dRR22Sf8qHrnSMWE+DYSy0qo04DufAbM8YKgziQl7oyKEH
- xZYcGC44Xq64e4ZbVrOopbSAO/wabK5OwH+PlX8MbXDeyV7Mu+HXKqCDbdgVv0k5msNl
- joX81FyZMdniJrX7Rl6rCU3BVcK9qH/xKpcaTtpXJGx10lcBeF5tFNFIRpSQnH1PIOHC
- Di2w==
-X-Gm-Message-State: AFq9FYLdBPsCfoRkN6e2ug3V5yngAOf4gCmpSY3DLpqIqasPiB4Mwpay
- Bz4HyPDx0W2WT4GLYekgUhWgDW4k9wOc3Dx5JzhTVSRfvNNf7l2iAMonyUPXcVHRocO5LUG6O/n
- xFRpodLDa+dpUabUx1p+FRsdAW1Uq6VpUJ6bReg39kw==
-X-Gm-Gg: AYBFou0ABjNQelcy2p953srh8+Us9H7fxrDwRJ1+hAs7aNUuqpdurt6CMBVnrNtQi7G
- nf+NV2dBWTTZB0k2nVoLT2+qQOMfNBkTKJTYA45fokm6tH5A11JcwXCsMZBPpP5WZQ/STSS5Waw
- lpP97upRoAOewElFPursmQasCLa9g7mX61pNG6ZuiDRZ4twywIaCIixoDSKgm2Fwi3/XtsBZxPF
- M1WjjCcojYGwnT2y8xRxTVwjE5W93h9d2NxQs/Ig+s3I3m8C5mS4f13lgEF3XUkfWWEmJT5TlmS
- DyRylI+UWAyEGzQoDLVvuo4X9WO3MgxX0LtxJdIqvKQsLl36cuNNg4bszZdo6+MSEAFz1SJlZew
- Ni0XJdxb6kII5OsiP02dz5ZuYpilVgT4LAcFFRzFWHxt5YDmg4Fs+R3uPSNV2gi8MRp9GDL6SLb
- mzL7D0OCVqohqtu5gyJIEJyRFxPhkDUf9kgD1+NiHItsYJYhzIkvXjaI7KFbXjzox5Sx/loJoEE
- VyRS9ML7dlBDeCfWHz0zI0s9RHuTlAKb4ArM0d7g6wuOVR+bbWQJqrPAkQ6D4Th1EjK6VAdPlJ+
- BKhDWwXojfCcrnCH99gKtTxMjIYcJQPCJEqqG4dy7WBEIkW5Um1b5XZyU+ghmQ+X325CuDyFGeq
- +RpDVxKg9iuTmGqsIE4IZxV6jnZAADw6qGATwuCuoQBWiA85lcxO8gw==
-X-Received: by 2002:a05:690c:e1d8:20b0:854:b86b:d206 with SMTP id
- 00721157ae682-8ae394a7bc1mr7228557b3.12.1790940357390; Fri, 02 Oct 2026
- 04:25:57 -0700 (PDT)
+ c=relaxed/relaxed; t=1790941285;
+ h=Received-SPF:DKIM-Signature:Received:Received:From:To:CC:Subject:
+ Thread-Topic:Thread-Index:Date:Message-ID:References:In-Reply-To:
+ Accept-Language:Content-Language:X-MS-Has-Attach:X-MS-TNEF-Correlator:
+ msip_labels:x-ms-publictraffictype:x-ms-traffictypediagnostic:
+ x-ms-office365-filtering-correlation-id:x-microsoft-antispam:
+ x-microsoft-antispam-message-info:
+ x-ms-exchange-antispam-messagedata-chunkcount:
+ x-ms-exchange-antispam-messagedata-0:Content-Type:
+ Content-Transfer-Encoding:MIME-Version:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-AuthAs:X-MS-Exchange-CrossTenant-AuthSource:
+ X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-originalarrivaltime:
+ X-MS-Exchange-CrossTenant-fromentityheader:
+ X-MS-Exchange-CrossTenant-id:
+ X-MS-Exchange-CrossTenant-rms-persistedconsumerorg:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=ryJNlYB02LXRLUJcGnCbvtVRW2gV/AJIVYOsKZ9mMO8=;
+ b=GhB+ZwLf6tIN1O99mNZPp8FRSTGyhyILFE3D58T/Bq9SaZwOwQstjDDcfhsXvLOXNHu6
+ MZhbQI62vRBDL6k8F5VtF1dieRTSHG26wJoJvDSEnETzJ+eiBaN++CGv/tlIEdPuBNOa+
+ WlRyvN3VJfqfXw2uJ7gEarN3q2QJGfkVj6vJaCpvcA+LzLkbz6O7SpF+U+5G297WsFWGT
+ 5xa2BUfxcN2RiY5Nn6jgtpezApY3JEH2wG9WVN3nuLRsueBEd8oep1J96DyBIzoe02LUt
+ NDAVFAwOYkIhvSRgUTfAWyBR8SY5oOe/qi+dSyU2xtTcHsK/6NgqegxbXYAfjqlgZ4w==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ dmarc=pass header.from=outlook.com; 
+ dkim=pass header.d=outlook.com header.i=@outlook.com header.a=rsa-sha256
+ header.s=selector1 header.b=gCaulblY; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:d406::"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:111:f403:d406::;
+ helo=os0p286cu011.outbound.protection.outlook.com;
+ envelope-from=yangshiji66@outlook.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=outlook.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=outlook.com header.i=@outlook.com header.a=rsa-sha256
+ header.s=selector1 header.b=gCaulblY
+Received: from OS0P286CU011.outbound.protection.outlook.com
+ (mail-japanwestazolkn190100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d406::])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id CE57A4004A
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:41:24 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QbzjevkIxAc6xiXS/XttpZ7dkoTx12zPmFMsSEGgR97fDWOHOEkUzbp80bXxLSe9RvFruNmr7siI6gFnpjGlAMMgMiOHxzhFaLH6FU3bRSfkEshTEe+j5HzO2MBvO03S/Slb/yi4ITypJihrBlHgfv9LCq1OTCzc85XlWVjJMFpAlysHLQvB/pC2iF8cW0ED5i9De4OHWfpYBPojm0oezH9gl7uf6EZ3lOZzSWUyLb0ApWfEyYQJQU/PEtei28rEkHTPDlujNgjpxVjU5bm+gs93nAFj0dZJHxhhtP2fmmJsdJc0BDCJY62x8ioFlFP/QCrfLjL0OiptWSiCDrj4eg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ryJNlYB02LXRLUJcGnCbvtVRW2gV/AJIVYOsKZ9mMO8=;
+ b=oFEPyp0a7+OQ/vkaFBouREVH87w/U7DhJnBxzJS43M2aveiJGkGPqlRadItC6LohE6gO45XLUjk0Ihi+KtOF+s9ihrrmymD/p8gg/9Y3DQGDXIdbl/o5F0Vr4dVDh6La42FXKxURZJBt37rca9pdFjFLi+5RN+0J8uokMH3Z26/CkMhQKO6yDawngGkdiHPd4c7W3jvXOrfy8kAKdigyu2zcYbZVlJSmfSpme9vUUrNJxORd+n5Zpc4Ugo7kiAMDAYDAyzW3fzJwSYWT+SJriW9KxiK9wFYY1zlMOL5Yk9+AncwelWjsAotQq9cPwkNtzZRxY0CdsBJaMT3uumJY8g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ryJNlYB02LXRLUJcGnCbvtVRW2gV/AJIVYOsKZ9mMO8=;
+ b=gCaulblY/hOJWYs8fbiZqEc5vHURlJkiv1IMscqCYRs0OVw2lZHIaxoXe3k3t2aQIe9KI0T18YvMMFMvapLPyeIQQTt1+TKH8ohq5X4Tp3PgJ8ID2TZwjXpKr3GRvKOGbPwx4HQ7M2EA73vbpZTz72WCeIyAl1aqovqQGr5U9Km9kYKzq3XljKAjbAPV3bEON5PqeRpO4qxAU4ynWU8gMl9P85kHoRdRPRhb8HBphGI6Wy0AtAi0kPhI/qATy6Sg+AIIGa9lV2kVtnIwfVrDWVZ08K/F65A0+s3pEgeoOwEE9Q92aVcpYnNOSRwfm/7hcJLk2OnjIjvKbkh3D0+dug==
+Received: from OSZPR01MB8140.jpnprd01.prod.outlook.com (2603:1096:604:1a5::10)
+ by TYCPR01MB10228.jpnprd01.prod.outlook.com (2603:1096:400:1ed::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.18; Fri, 2 Oct
+ 2026 11:41:19 +0000
+Received: from OSZPR01MB8140.jpnprd01.prod.outlook.com
+ ([fe80::91ec:49f5:d743:6d5b]) by OSZPR01MB8140.jpnprd01.prod.outlook.com
+ ([fe80::91ec:49f5:d743:6d5b%6]) with mapi id 15.21.0472.016; Fri, 2 Oct 2026
+ 11:41:19 +0000
+From: =?gb2312?B?0e4gysC7+Q==?= <yangshiji66@outlook.com>
+To: Weijie Gao <weijie.gao@mediatek.com>, "u-boot@lists.u-boot-project.org"
+ <u-boot@lists.u-boot-project.org>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>
+Subject: Re: [PATCH,RESEND] env: mtd: fix unbalanced put_mtd_device()
+Thread-Topic: [PATCH,RESEND] env: mtd: fix unbalanced put_mtd_device()
+Thread-Index: AQHdIJp1mDZ8zShPK0Gz2ox6Dbcf6rbqg/9P
+Date: Fri, 2 Oct 2026 11:41:19 +0000
+Message-ID: <OSZPR01MB8140D4A0EBEC73725E0DFA7FBC892@OSZPR01MB8140.jpnprd01.prod.outlook.com>
+References: <20260731031227.82743-1-weijie.gao@mediatek.com>
+In-Reply-To: <20260731031227.82743-1-weijie.gao@mediatek.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: OSZPR01MB8140:EE_|TYCPR01MB10228:EE_
+x-ms-office365-filtering-correlation-id: fb36ab4b-ed85-4eee-94ec-08df207a1365
+x-microsoft-antispam: BCL:0;
+ ARA:14566002|51005399006|22091999003|8062599012|8060799015|19110799012|31061999003|4140399003|24121999003|25010399006|41001999006|24021099003|15080799012|40105399003|12091999003|2607281247196008|102099032|440099028|3412199025;
+x-microsoft-antispam-message-info: =?gb2312?B?eFV5NGZETXZJQlVnOXYxemlIUlBrcXRkZllITUpHbUpmVEFoQzZKNlZIeG9O?=
+ =?gb2312?B?aEQ1Z0FyTVVlNkFZVnc0OEk2MHVZMDRiOGtHUE9rWC90K2FCaExUbjJtaGI3?=
+ =?gb2312?B?OEFDcW9Sc1hGTTJ0a0dUaFFPRnZBczV5V1BMNkhURndEd3pLcHNIKzBndzdV?=
+ =?gb2312?B?RFd1MTYwcDJZY0xEK1h6VEVia29nTC9xZ3hzME5yQlJjZmRic1hjL3pPQzd4?=
+ =?gb2312?B?ejZrenJrQU9weklrNmEvRSs1a2MyRkNKeUlyUFVCcU84SC9Ed0pSa3AzdTdn?=
+ =?gb2312?B?N2hFODFjSFA3THZ0WEVXVFJFOVBzUTdyRUJTQmQ5OFEzaEJZUGpBcHQrU0la?=
+ =?gb2312?B?ZnVwVnVtNmVrcWxMQXVEaG94aXVMZ3hROGQ3TXlseGJUaVhMQkl5OG9OZGdD?=
+ =?gb2312?B?UTMzTnZkMDJESnhYTjMxUG5MaU4yZ2J0ZHNEcEdjWk1iQ1cvcm53Slp2TnNh?=
+ =?gb2312?B?SGJ6TWdLdVN2NS9QczFqaGVYV0ZaZ1NFQTBibCs5bko2T1dPNlA2Z28vS0tm?=
+ =?gb2312?B?cmx6cTQ0dEc5WitmOWo4UWtJd0c1cExpckJLcEZhQzNwQVF3RngwTHJtODd2?=
+ =?gb2312?B?SGp3QnpwSm1PbEM4VEN0eXlIckhMUU9pY1Qxc3NHdnhKSVEvM1hnOVdHUFpS?=
+ =?gb2312?B?Wld5cEU2ZVBVVDlOLzdnbEsra3NTejBBcTdSU3dTNGFPeTdPY0JXSGhqcm8z?=
+ =?gb2312?B?WFpBZEJQQUVRQ2k5T3hKY1U5VUpPVWFOQnJZK1NreGJLRTluZzB0OWtJd0hS?=
+ =?gb2312?B?VHBwY1BYRE5aUUJkYmFhcWRKb0U2eisvWXdwOUo4K1hoSGYrS1MyYThlWDZI?=
+ =?gb2312?B?U211N1hTTEJNbkRLN2gxeUNwbnFsWjRlNFQyanp5M0d6THJ5cnBBRk90cGR4?=
+ =?gb2312?B?V091ZS9GM0J0d04rZjRHclI0dm9QMVVkb2kxWWV5aXZsRzFUZW9Ldm9hT2NU?=
+ =?gb2312?B?cVU4M2FHYndhOSthT2g0WWQ2K2hCdkl1My9NcS9TRDdxY3h1RGhVMnBkSGxP?=
+ =?gb2312?B?aGZ5aW9QS1FZbTVUdzVGVERkejQwTzdmeWtVaFJjNmEzY1RzNDUwTk1DM2s3?=
+ =?gb2312?B?eTV5YnF3QXYxODh1OGpjdWk1WEdFcllQS1k0aER6dFQvRGR4eFhuTm0xU1pT?=
+ =?gb2312?B?TWR3WGQ0K0pueW05TDFXZ21Tcm1vT05UN0diUG1QcjVMTG5TaFFOZDZna1RV?=
+ =?gb2312?B?VlJ4U3Y5dU94K1pIcXBXWCtoYXpCTjdOLzhHMDF4dktqSExXTzNhakp6ZFlY?=
+ =?gb2312?B?T1prelJ2eHdpN1hrcCtCZkRGVElETjNFdG5JLzcwL1JiMGtTZmN1VUZlUEVt?=
+ =?gb2312?B?RGh1S2NGR3pVVkd1TXU5dDFjZGMvVDJyNSt6emcvUnlCc05hWTFBU0pZeDNT?=
+ =?gb2312?B?RGZhYi9XQUFqSG1USDJSK3RHTFhGRzlYZGxxanNHbEdpOWQ3STk3WjgzZkkw?=
+ =?gb2312?Q?NQpJvQvw?=
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?gb2312?B?cmFDUlBtdmVndkEyRDhxRExKSUZzMU8yZmpKc2F2UStpQ2wvdWxyWlJlcTRo?=
+ =?gb2312?B?RkpQenpTU2RLWU5mbjJuNG5lWTZrcGJEc2pLVWZGQnpXZnVVQzBScHlnTFpx?=
+ =?gb2312?B?aHV3UFAvQWc2UVVRRldmcXIyNkJrTGN5ZHZFN3ZlZ0tFQlhITk5lZFRrQmpE?=
+ =?gb2312?B?NGZ1dnRBa1BnU3NkTlFWR2twMXRpNzdqR1JQMFdlOGtEYzBXeVkxMmpyRHJr?=
+ =?gb2312?B?U1lnOTU3UjBkUUFTZFdrQnkySldXN2UxZGp0ZkFUQkdzeTZlVm16eUNaNEJL?=
+ =?gb2312?B?SVl3cVcrWjZyVmI3c2FER0I4U1YrNE5qSjJsWm9pRVA1QUJVeStWMzc0SmZM?=
+ =?gb2312?B?M0ZxZEprSlR1OS9IUGJkdlc3Z0RWOUJtWFIzb3BQOWVjUmdjVHdBSmM1cVMy?=
+ =?gb2312?B?ZTZlc25WU0ZnMXJhUVRiL05GTERsSEtyVkZzRnR2SWFic280VlQxcnZGV0l2?=
+ =?gb2312?B?b1MvVnB1TTZiSWRXWFp0RDEyUzhudElSNUltbmRTaUx4THVYREJZNHdIS0I1?=
+ =?gb2312?B?QStJQXNWK1RUdHQ5ZXlmUVlsZ3ZBdVI5cTRrazBLbEFxbkhmVWxyOXgyVGEx?=
+ =?gb2312?B?MEZkemN2UFdKZG5pKzZQWHVQV3FMeWFLODJGWTNFVFJyUlJQUzZJNkJFK1Z0?=
+ =?gb2312?B?MlNHU3NwbXpmWGh3RDQ3RTdVNTFUa2RLaHlMM3pDcStJd0R4MWFEUTFoZ3hG?=
+ =?gb2312?B?R0hJMnZOZG5TS3JtbjJyNDR6RWxybE9Ea091bWNDV00wTXIyRThOUnlHTlRq?=
+ =?gb2312?B?S0NOZWJhMXpIZnYxdWl5ZWZ2WUV4RkE4MW1qaEYzeklJTXB2dDh2V3M0cnBT?=
+ =?gb2312?B?emNreTI0aURmd204bm9UT2JCb1VjbksycnpyWGNCRFdXMnI1SkJCVHlpbnR0?=
+ =?gb2312?B?S1BadTRoNzF3amNMSEZHYXlhTmFUV1hqbzhsaTdVV1VnT1JnVzVXZi9YMDVK?=
+ =?gb2312?B?elJBcWdweER1YVcvenVFeFhWTFpUaFR5cm5lcUJnTEhZTERoZ1JpZjE2dzRn?=
+ =?gb2312?B?ZjU5VXh6dy9KVmxoQi9vUFVUNEJ5aFVoOXR5TVdFdSs4M2xuVm5PRHhRUExN?=
+ =?gb2312?B?dXFwckFXVlBNczg2aTdTeEdmNWUzVUJRblFSSCtXVGRNYkJYT3RmK05HbStE?=
+ =?gb2312?B?N1VzMFhoNFk0M2dXRnNHbWpSWFBFc3hNNVgwRG1MMjJmUjVmRmVJeGV5ajJL?=
+ =?gb2312?B?KzBqZEpESUFWWjBVSjFQSDVTUjdWUmg1N2NERFhEWXFuZ0owUE5JWXZQdDA4?=
+ =?gb2312?B?RFZGR2EyaWNtaHBLQjBtK2ZtZlJaYnowdzdzaEdjYStRZWFuYVRuazRORDZG?=
+ =?gb2312?B?RWJld3RNeG4xMDZEYnYyTDduRXdUakRXeU0yV3kvYW8vUHpOKzhPTDBIckQ3?=
+ =?gb2312?B?Nk0xY1ova0hGOFF0Z0ZTaGxBMFJCaExWd0FENHcreUVTYVNya002Rzh1eHRQ?=
+ =?gb2312?B?Ukdwb216cEVWQ2ZlcTRsUVA5STdueVZXSmJQQWRmckY1d3M1Yng5UzRrSmRK?=
+ =?gb2312?B?d3JaT2ttMXZUazJJdml1R0J2K1pNQUlHS3pSSkh4UlVNTklIY1FaRWlBalAz?=
+ =?gb2312?B?Z2wrbUZoVnp0dHpFRXBQM01KVC9ZcWg0RWdNN2RhK3RxWWZmSmRNM0plcHpa?=
+ =?gb2312?B?WGxKN1pBYVQxdTVtQUgxSGVUK2xWL3h5T2d6Zk9WR2MxTFNMcmtkenNVeG01?=
+ =?gb2312?B?UUdYSjRtaGNLTlRNKzdjSldIeFRyd0I4b3Y5VHRYSGhvY0d3a04yZVg1Y0gx?=
+ =?gb2312?B?R2JwQXJqZmZ5b21YREtxYVhXeDJqZHd3OTBUSmJhUjZTY3U0MjF4cnRERkNB?=
+ =?gb2312?B?WitReEV5TUs1UTJOWkVUTi93L3Fwa3hKUW5OUXFtcVlpZXlaZE1IM2tRc1dS?=
+ =?gb2312?B?VWdVaWxBdW1BZ3RTejFoeU9vM2VYS0hpRDBZNlpGOWhERWc9PQ==?=
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 2 Oct 2026 14:25:19 +0300
-X-Gm-Features: AclHuK_I2fDa_eRtB6I89dXKK8kIjtOP_a4qg_iT7NBYH-Kg2WtJHyFg0WtcNZs
-Message-ID: <CAC_iWjLEhgPKU7CmZ-vuZMiLV9KtAQZ5-EV24bxyabd92PknCw@mail.gmail.com>
-Subject: Re: [PATCH v6 00/24] Introduce Firmware Update Support for Arm PSA
-To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jens Wiklander <jens.wiklander@linaro.org>, Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Davidson kumaresan <davidson.kumaresan@arm.com>, 
- Adam Johnston <Adam.Johnston@arm.com>,
- Srinivas Kalaga <Srinivas.Kalaga2@arm.com>, 
- Alex Chapman <alex.chapman@arm.com>, David Hu <david.hu2@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: OSZPR01MB8140.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: fb36ab4b-ed85-4eee-94ec-08df207a1365
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Oct 2026 11:41:19.3040 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCPR01MB10228
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -203,285 +260,25 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Harsimran
-
-On Thu, 17 Sept 2026 at 20:18, Harsimran Singh Tungal
-<harsimransingh.tungal@arm.com> wrote:
->
-> This patch series adds Firmware Update (FWU) support for Arm PSA
-> Certified platforms [1], enabling U-Boot to serve as
-> the FWU Client, with the Secure World acting as the Update Agent that
-> manages the firmware store and its metadata.
-
-Since this is only applicable to Arm devices any chance you can get an
-Ack from Sughosh who has worked on the initial implementation ?
-
-Thanks
-/Ilias
->
-> This implementation adheres to the Platform Security Firmware Update
-> specification [3] for the A-profile Arm Architecture and leverages the
-> Trusted Services framework [4] to interact with the Secure World update
-> agent. By delegating update management to the Secure World, U-Boot
-> handles only the client-side coordination, invoking a well-defined set
-> of ABIs over the FF-A interface [5] to deliver update capsules.
->
-> Key features include:
->
-> - Generic, platform-agnostic design.
-> - FF-A-based ABI: All interactions between U-Boot and the update agent
->     occur over the FF-A interface, ensuring compatibility across
->     PSA-compliant systems.
-> - Multi-payload capsules: Support for capsules containing multiple
->     payloads, start/end markers, signed firmware images.
-> - ESRT support: Capsule payloads may be signed for authenticity, and
->     U-Boot can populate the EFI System Resource Table (ESRT) for
->      OS-level firmware management.
-> - On-disk and standard capsule handling.
->
-> For implementation details, please refer to the documentation [6].
-> Testing logs for standard and on-disk capsule update flows on
-> Corstone-1000 FVP are included below.
->
-> Changes in v6:
->
-> * As suggested by Sughosh:
->   - Addressed review feedback by separating Arm PSA FWU from the existing
->     normal-world FWU multi-bank implementation.
->   - Moved PSA FWU code and Kconfig/Makefile integration from lib/fwu_updates to
->     lib/efi_loader.
->   - Dropped v5 changes to lib/fwu_updates/{Kconfig,Makefile,fwu.c}. PSA FWU no
->     longer extends the generic FWU update path.
->   - Made CONFIG_FWU_ARM_PSA mutually exclusive with CONFIG_FWU_MULTI_BANK_UPDATE.
->   - Reworked PSA FWU trial-state and image-acceptance handling to use the cached
->     PSA FWU directory from Secure world instead of generic FWU metadata.
->   - Reworked Corstone-1000 active-index handling to read and validate FWU
->     metadata directly for kernel setup.
-> * Rebased on master.
->
-> Regards,
-> Harsimran Singh Tungal
->
-> [1]: PSA: https://www.psacertified.org
-> [2]: Corstone-1000: https://developer.arm.com/Processors/Corstone-1000
-> [3]: DEN0118 v1.0 A specification: https://developer.arm.com/documentation/den0118/latest
-> [4]: Trusted Services documentation: https://trusted-services.readthedocs.io/en/stable
-> [5]: FF-A interface: doc/arch/arm64.ffa.rst
-> [6]: Documentation of the FWU for Arm PSA support: doc/develop/uefi/fwu_arm_psa.rst
-> [7]: Arm PSA FWU logs when used for on-disk capsule update in Corstone-1000
->
-> Testing:
-> The implementation has been tested on Corstone-1000 FVP with both
-> standard capsule update and on-disk capsule update flows.
->
-> Tested on Corstone-1000 FVP:
->   - Standard capsule update: passed
->   - On-disk capsule update: passed
->   - ESRT entries verified from Linux after update
->
-> Testing logs for standard capsule update:
->
-> A trimmed standard capsule update log is included below.
->
-> ```
-> CapsuleApp: capsule block/size              0xDCF56040/0x867B5A
-> FWU: Updating 4 payload(s)
-> resetting ...
-> NOTICE:  BL2: v2.14.2(debug):lts-v2.14.2-dirty
-> ...
-> U-Boot 2026.07 (Sep 08 2026 - 15:59:00 +0000) corstone1000 aarch64
-> ...
-> FWU: System booting in Trial State
-> ...
-> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
-> ...
-> root@corstone1000-fvp:~# reboot
-> ...
-> U-Boot 2026.07 (Sep 08 2026 - 15:59:00 +0000) corstone1000 aarch64
-> ...
-> FWU: System booting in Regular State
-> ...
-> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
->
-> corstone1000-fvp login:
->
-> root@corstone1000-fvp:~# cat /sys/firmware/efi/esrt/entries/entry*/*
-> 0x0
-> f1d883f9-dfeb-5363-98d8-686ee3b69f4f
-> 1
-> 6
-> 0
-> 6
-> 0
-> 0x0
-> 7fad470e-5ec5-5c03-a2c1-4756b495de61
-> 1
-> 6
-> 0
-> 6
-> 0
-> 0x0
-> f1933675-5a8c-5b6d-9ef4-846739e89bc8
-> 1
-> 6
-> 0
-> 6
-> 0
-> 0x0
-> f771aff9-c7e9-5f99-9eda-2369dd694f61
-> 1
-> 6
-> 0
-> 6
-> 0
->
-> root@corstone1000-fvp:~#
-> ```
->
-> Testing logs for On-Disk capsule update:
->
-> A trimmed on-disk capsule update log is included below for one payload
->
-> ```
-> CapsuleApp: capsule block/size              0xDCF61040/0x867B5A
-> Found EFI system partition on Boot0001: OnDiskFWU
-> FS2:;HD0b:;BLK4:
-> Succeed to write corstone1000-fvp-v6.uefi.capsule
-> resetting ...
-> NOTICE:  BL2: v2.14.2(debug):lts-v2.14.2-dirty
-> ...
-> U-Boot 2026.07 (Sep 08 2026 - 15:59:00 +0000) corstone1000 aarch64
-> ...
-> FWU: System booting in Regular State
-> FWU: ABI version 1.0 detected
-> FWU: Updating 1 payload(s)
-> Applying capsule corstone1000-fvp-v6.uefi.capsule succeeded.
-> Reboot after firmware update.
-> NOTICE:  BL2: v2.14.2(debug):lts-v2.14.2-dirty
-> ...
-> U-Boot 2026.07 (Sep 08 2026 - 15:59:00 +0000) corstone1000 aarch64
-> ...
-> FWU: System booting in Trial State
-> ...
-> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
-> ...
-> root@corstone1000-fvp:~# reboot
-> ...
-> U-Boot 2026.07 (Sep 08 2026 - 15:59:00 +0000) corstone1000 aarch64
-> ...
-> FWU: System booting in Regular State
-> ...
-> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
->
-> corstone1000-fvp login:
->
-> root@corstone1000-fvp:~# cat /sys/firmware/efi/esrt/entries/entry*/*
-> 0x0
-> f1d883f9-dfeb-5363-98d8-686ee3b69f4f
-> 0
-> 6
-> 0
-> 6
-> 0
-> 0x0
-> 7fad470e-5ec5-5c03-a2c1-4756b495de61
-> 0
-> 0
-> 0
-> 0
-> 0
-> 0x0
-> f1933675-5a8c-5b6d-9ef4-846739e89bc8
-> 0
-> 0
-> 0
-> 0
-> 0
-> 0x0
-> f771aff9-c7e9-5f99-9eda-2369dd694f61
-> 0
-> 0
-> 0
-> 0
-> 0
-> root@corstone1000-fvp:~#
-> ```
-> Link to v5: https://lore.kernel.org/all/20250926141351.1755829-1-abdellatif.elkhlifi@arm.com/
->
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Jens Wiklander <jens.wiklander@linaro.org>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Adriano Cordova <adrianox@gmail.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Davidson kumaresan <davidson.kumaresan@arm.com>
-> Cc: Adam Johnston <Adam.Johnston@arm.com>
-> Cc: Srinivas Kalaga <Srinivas.Kalaga2@arm.com>
-> Cc: Alex Chapman <alex.chapman@arm.com>
-> Cc: David Hu <david.hu2@arm.com>
->
-> Abdellatif El Khlifi (23):
->   arm_ffa: Add FFA_MEM_SHARE support
->   arm_ffa: Add FFA_MEM_RECLAIM support
->   arm_ffa: sandbox: Replace the emulator error log with debug log
->   arm_ffa: sandbox: Improve the readability of clearing the X registers
->   arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
->   arm_ffa: sandbox: Add FFA_MEM_SHARE tests
->   arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
->   arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
->   fwu_arm_psa: Initialize the update agent
->   fwu_arm_psa: Read the FWU directory through get_image_info()
->   fwu_arm_psa: Add staging ABIs
->   efi_loader: fwu_arm_psa: Add set_image() support
->   efi_loader: fwu_arm_psa: Allow keeping the FMP payload header
->   efi_loader: fwu_arm_psa: Skip accepting payload after set_image()
->   efi_loader: fwu_arm_psa: Disable trial state handling
->   fwu_arm_psa: Add FWU acceptance mechanism
->   fwu_arm_psa: Add ESRT support
->   fwu_arm_psa: Add ExitBootServices() notification handler
->   fwu_arm_psa: corstone1000: Enable FWU support
->   fwu_arm_psa: corstone1000: Read active index for kernel setup
->   fwu_arm_psa: corstone1000: Notify SE Proxy SP on ExitBootServices()
->   fwu_arm_psa: corstone1000: Set Boot0001 for on-disk FWU
->   fwu_arm_psa: Document FWU support for Arm PSA
->
-> Emekcan Aras (1):
->   efi_loader: capsule: Add runtime capsule flags checks
->
->  MAINTAINERS                                   |    9 +
->  .../include/asm/sandbox_arm_ffa_priv.h        |   21 +-
->  board/armltd/corstone1000/corstone1000.c      |  406 ++++-
->  board/armltd/corstone1000/corstone1000.env    |    8 +
->  configs/corstone1000_defconfig                |   15 +-
->  doc/arch/arm64.ffa.rst                        |    4 +
->  doc/develop/uefi/fwu_arm_psa.rst              |  154 ++
->  doc/develop/uefi/index.rst                    |    1 +
->  drivers/firmware/arm-ffa/arm-ffa-uclass.c     |  285 ++-
->  drivers/firmware/arm-ffa/arm-ffa.c            |    4 +-
->  drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  108 +-
->  drivers/firmware/arm-ffa/sandbox_ffa.c        |    4 +-
->  include/arm_ffa.h                             |  128 +-
->  include/arm_ffa_priv.h                        |  153 +-
->  include/efi_api.h                             |    3 +
->  include/efi_loader.h                          |    3 +
->  include/fwu_arm_psa.h                         |  422 +++++
->  lib/efi_loader/Kconfig                        |   53 +
->  lib/efi_loader/Makefile                       |    1 +
->  lib/efi_loader/efi_capsule.c                  |   45 +-
->  lib/efi_loader/efi_firmware.c                 |   32 +-
->  lib/efi_loader/fwu_arm_psa.c                  | 1616 +++++++++++++++++
->  test/dm/ffa.c                                 |   73 +-
->  23 files changed, 3458 insertions(+), 90 deletions(-)
->  create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
->  create mode 100644 include/fwu_arm_psa.h
->  create mode 100644 lib/efi_loader/fwu_arm_psa.c
->
-> --
-> 2.43.0
->
+T24gRnJpLCAzMSBKdWwgMjAyNiAxMToxMjoyNyArMDgwMCwgV2VpamllIEdhbyB3cm90ZToKCj4g
+SW4gZW52X210ZF9sb2FkKCksIHB1dF9tdGRfZGV2aWNlKG10ZF9lbnYpIHNob3VsZCBvbmx5IGJl
+IGNhbGxlZCBhZnRlcgo+IHNldHVwX210ZF9kZXZpY2UoJm10ZF9lbnYpIHJldHVybmVkIHN1Y2Nl
+c3MuIEZhaWxpbmcgdG8gZG8gc28gd2lsbCB0cmlnZ2VyCj4gQlVHX09OKG10ZC0+dXNlY291bnQg
+PCAwKSBjcmFzaCBpbiBfX3B1dF9tdGRfZGV2aWNlKCkuCj4gCj4gQWRkaW5nIGFuIGVhcmx5IGVy
+cm9yIG91dCBwYXRoIGZvciBzZXR1cF9tdGRfZGV2aWNlKCkgdG8gc2tpcAo+IHB1dF9tdGRfZGV2
+aWNlKCkgd2lsbCBzb2x2ZSB0aGlzIGlzc3VlLgo+IAo+IEZpeGVzOiAzOWFlOTU0YjA0ZWYgKCJl
+bnY6IG10ZDogYWRkIHRoZSBtaXNzaW5nIHB1dF9tdGRfZGV2aWNlKCkiKQo+IFJldmlld2VkLUJ5
+OiBNaWNoYWVsIFRyaW1hcmNoaSA8bWljaGFlbEBhbWFydWxhc29sdXRpb25zLmNvbT4KPiBTaWdu
+ZWQtb2ZmLWJ5OiBXZWlqaWUgR2FvIDx3ZWlqaWUuZ2FvQG1lZGlhdGVrLmNvbT4KPiAtLS0KPiAg
+ZW52L210ZC5jIHwgMyArKy0KPiAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMSBk
+ZWxldGlvbigtKQo+IAo+IGRpZmYgLS1naXQgYS9lbnYvbXRkLmMgYi9lbnYvbXRkLmMKPiBpbmRl
+eCBiMjZlZTgwOTg1YS4uNjdkMjA3MjcyZDggMTAwNjQ0Cj4gLS0tIGEvZW52L210ZC5jCj4gKysr
+IGIvZW52L210ZC5jCj4gQEAgLTE1Nyw3ICsxNTcsNyBAQCBzdGF0aWMgaW50IGVudl9tdGRfbG9h
+ZCh2b2lkKQo+ICAKPiAgICAgICAgICByZXQgPSBzZXR1cF9tdGRfZGV2aWNlKCZtdGRfZW52KTsK
+PiAgICAgICAgICBpZiAocmV0KQo+IC0gICAgICAgICAgICAgICBnb3RvIG91dDsKPiArICAgICAg
+ICAgICAgICAgZ290byBlYXJseV9vdXQ7Cj4gIAo+ICAgICAgICAgIHNlY3Rfc2l6ZSA9IG10ZF9l
+bnYtPmVyYXNlc2l6ZTsKPiAgCj4gQEAgLTE5Miw2ICsxOTIsNyBAQCBzdGF0aWMgaW50IGVudl9t
+dGRfbG9hZCh2b2lkKQo+ICBvdXQ6Cj4gICAgICAgICAgcHV0X210ZF9kZXZpY2UobXRkX2Vudik7
+Cj4gIAo+ICtlYXJseV9vdXQ6Cj4gICAgICAgICAgZnJlZShidWYpOwo+ICAKPiAgICAgICAgICBy
+ZXR1cm4gcmV0Owo+IC0tCj4gMi40NS4yCgpSZXZpZXdlZC1CeTogU2hpamkgWWFuZyA8eWFuZ3No
+aWppNjZAb3V0bG9vay5jb20+Cg==
