@@ -1,140 +1,139 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5647CA5FD4
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 09:41:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1792CA5FC4
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 09:41:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3BF1840C9C;
-	Fri,  2 Oct 2026 09:41:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D96D681167;
+	Fri,  2 Oct 2026 09:41:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zs5ia3ZUb0th; Fri,  2 Oct 2026 09:41:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 5AD9C40A77
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790934107;
-	b=C8T69QaYb7JNJl6kNl9hkP2qAXsk3qkPCpW09HIydXpywUh3L3XsTT9GqCghlaEKqPII
-	 nQ1P4M9+w606hBnIIb95bgX3u8Ree6v04HauO+S+sH8MGsB2UV3Z0s2AUMfdQZ5CrFOVb
-	 lAYlbS5xj2h1uaFLHweRQdyF32JmtIjeeL1oSRI2iyXkzwx8ZA1uochIiEAd1ipmwl+O7
-	 XXozSqolTlt+eL0ZYKqJFjDC7uK2yG8VgtLrl+R+Yk6Fvdjnfq6VRIJstItge1jGk1dnH
-	 dxLlMvHQlRYHBfVBAY0V9ln4yEN3c2ixv8FGhNjdZcrNqExQZQWay03avIk4lfDBAKw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6s3RgH6ycndB; Fri,  2 Oct 2026 09:41:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 211068116C
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790934109;
+	b=jDYz57bN/DGEKu4OdRm/TtE4B9f1v/Tu9mf1Qg4V8SIwsJ8YdUjatJHGrMDjkBmhb4vq
+	 gYTq+6d0dZwEXI5zJmAV2iHHzzAAKTxMAEI0FZ4QpRoGAow/0GVqwknYuiZY4sajOIMPr
+	 RSaHJYtaN7t7CQOYgRgn5pUoKrzH0JkVsRVUh2s2rhe63UDeEPxZ+4T6TNDlsCfSB4Wua
+	 rBygRehi9pAuuZJeBTRW7El3NWQBHzeI9JgHzL+laXsvKP7JrReBhPb2Jnz1oUR2tn8Do
+	 y5/mHfHBMBMMcw8qrgfBxEydqBJTWYvl0hvFDz2/404hkU/a73dkJjpQI+RtgFU5LLA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790934107;
+	c=relaxed/relaxed; t=1790934109;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
-	 References:MIME-Version:Content-Transfer-Encoding:X-MBO-RS-META:
-	 X-MBO-RS-ID:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=iO7TwTAia5jVfrG7h4UmRewV/Bd6kbK2M8IkJBtw4PQ=;
-	b=q/Dj8S1aMuozRKxwv/plBBwXwyM7GbnJRtjyR7CyEQ8CUGmWyCg6yWhkH3K4v6/oNNwr
-	 b75LHmJ8o3eqHwgAwx/QC0YUp5EMWh7YU3nz6kq73SZaz7yyAUu/fbk39tU9Vv4tO8AmI
-	 t4BJd5Qpx2y21JXlD3Vt1McJbDGGQJa6pRRjtx1jETCZ/o6DZNTxnKValfaVhrUPzWuVp
-	 X9jBZgjUZU/2v8c8YWYLj+zXW7ZzEFqOLKUwd7Hr7mFE95qeEeBO0oIF/T2QiLsVjpVqo
-	 A4hewo6zJAJcF9KzeAd3zT/a5K9TqqTHqOfi+BEJK4aULpH/9wSh0vmIOgjxQkSHO3A==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=mailbox.org;
-	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b="OkpuSEz/";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=z0gIa65QH/DpTy9w2irHAMgQGUaey/pgHtAVAWUWHeI=;
+	b=i7nAuxl+ZkBsVBWRM65WQpy+Gcp8JX8IacsgpJUNPHZaxAUPHH+J1E+TDO/vx3kWy65E
+	 gVMZ9zUrmOT4yqrlfEtvtR+5NsHCZt/+SHx8piBLqe0xTFyckVos+93XAyvc5IAnL/QB7
+	 quZC+aeQhNwBJM/vNwtlIMhTk8TUtZTofF/SKYm2rMlN/+NEMuxw14fBGoYgUJPQe3u0S
+	 piDsokq14RS6FIZig5IFoaWCak5uiC770KoF9BAAvGIrcWhmzos5UXeeLkXes3MSGeJqD
+	 1hTI5dQZ0QW5UBmlGQ9lnHUiL5gJgt/1LHLp3LfkZIopDFELVI7SFDdi7sR9O5z6C7A==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790934107;
-	bh=iO7TwTAia5jVfrG7h4UmRewV/Bd6kbK2M8IkJBtw4PQ=;
+	d=lists.u-boot-project.org; s=default; t=1790934109;
+	bh=z0gIa65QH/DpTy9w2irHAMgQGUaey/pgHtAVAWUWHeI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=OvJ5I6YJj9XY+ajzUipiA7bfvdWvwl6rXL8+IoyuUIOWOi2cqEju6GD/xoUWIQF7O
-	 HRz7nypCA4f6DqiOxGtm8iiIwsMNgGeZ/GymUdL/O4wPBujIehq2oh56rH7S08fuFl
-	 rnQuiX3clwvlUwxYl+uLnCOGr8MZ/Gs6lO8cKljSlSNBcVcnfazEXDAxdrMxowui4D
-	 NbhaQCeh3cB2Y7VT6S0MDAKcPIFfRszRAmEtgsmdx3VaUC+4/92tqF+l7m62CmI3m6
-	 H80/xTGeTC0Zyz7IJs0lma2KX3ubxVQh7uE/CPw6FKg7AnQLAC7rlUA3mMSu1VZAsK
-	 eAssBkgdISnGw==
+	b=KnObW3enTFLszwKI261pbsCXWFwIf11Efk2IsP0kux81VnM3KG5Mg+PqmcCOelQQQ
+	 vYNaIrcxNbtaGeTngNPzt7RSPw5vmBAJd6gi/uRhJ8eOdsRLDUmOkM6yDNAVk6/XZT
+	 wjNzZegmTsxxLv8lEvFUv+M3vwbBtSg80ShxTSDWhJvS1xwkkDBGcqDDdzVXgVj5xF
+	 mitmi8nCaQnWkKYNd3mWhThLQ2Sh06lC9MrjB4VFyaYAVkKjuiOFCRta7JMbRND5Jo
+	 dYNQ/C/dwPgwtq5pYMKYo9OYZsskWAEq0VsGtsz8G8y8nDq5R+Y8TYKWF34NcICvnQ
+	 WBz5/OE8Tfd1g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5AD9C40A77;
-	Fri,  2 Oct 2026 09:41:47 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1B9B33AC
+	by smtp1.osuosl.org (Postfix) with ESMTP id 211068116C;
+	Fri,  2 Oct 2026 09:41:49 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 698EF34D
  for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 09:41:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 014EF40A77
+ by smtp2.osuosl.org (Postfix) with ESMTP id 500AD400B3
  for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 09:41:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GXO2L9XyEkRg for <u-boot@lists.u-boot-project.org>;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jFQKgeVbbSQB for <u-boot@lists.u-boot-project.org>;
  Fri,  2 Oct 2026 09:41:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 0D9F140623
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.151
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org DAEF84004A
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=80.241.56.151
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790934105;
- b=d48gWjBB1Sa4OyWtOaNraP1CLdaEuH9NL4lzaT1UwN8Qtv9nws7lrb6vNEmwkWqt1kdP
- 95NzdGtN7nSd7vdXgygzpUTe6scLKraBhKr+HMCNWhY6iIQbTxhU63A/Zyv5Sk03jzTC7
- pQTJt2oLqZj+NgW0tcHLSwiHjp6nOj+2PEo49a+l7FzHMTWKw4g3hzvn5pLiTNgG6tMcW
- RDp3LJ9E1llkzHTHHJ/sXoAh3kRc/fVorTTGjH0ObmUgaqvpVgJdxDgDo3ki14J7JDmne
- G+AWRRGzHYDbPNK3HZByIgIgd8zYVurHYtUc6Rx6a+a+jl8Tb8A9/F8FlClF7dAXTzA==
+ b=G1KS5Sjv1mRAPX4BKJFZh4DZEQabMFVwT73c8XUE4CPc/4yqZHeOe1iutK070iNjVfVM
+ YHwb1BGt70OICwZbThaG+Qwgb46gJQ+RF9vEM+UdOmEY+a6v70ThJMQM1bg2xW+/baVGD
+ t8rXjLab2vDyAUgnDzr0bSyXMqV3EzZcQAeS2k14nspbyQhAWztXGKm4rcyos8mGEqp8A
+ ddkZn02TrrpS/uxy3+JpbNkDr1tB9TFGu9MnIfEzHeCqO4x7+a5ftQCHd/CgrkOj02fpO
+ gbhB4suO5COIHvxrqtn/K5suUwxDSt7MO6n++ZCNbYnMq/H3MNSSSFkWEXPNxfJGiJg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1790934105;
- h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
- Message-ID:In-Reply-To:References:MIME-Version:
+ h=X-Greylist:Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:
+ Date:Message-ID:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID;
- bh=iO7TwTAia5jVfrG7h4UmRewV/Bd6kbK2M8IkJBtw4PQ=;
- b=WMPxrIczexemFc23QIX0MIUUT7SjYeTT/tP8nsgZc363+iC5mewNtwxo0TpnK3WBZ8yd
- 1ZICb8KlHTPJn58T4Q3JrJE/4yLsMAQhM2Kmi7iiYonWCT62mX4M0wLRLK2VXrvE42PFJ
- cQYWYnuXbsYrbWYS819kx0/PNu6ptqCvjwTtrxXH9KMb6KHiatAgNpqVj+yjJmmAPSWZk
- avFWoOSXRMc9B3W7LetGLd6HtMmeD0QbJkuIl/udf7OtpQM1/QGxzmV5VMoGMhHNRRHWO
- 9E4P6qE+Nfy/UIXtM+BF0kiaTa+RYYA65pyFIApqABTgRA5+SCHwLHZheMVTt5gIm8w==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=z0gIa65QH/DpTy9w2irHAMgQGUaey/pgHtAVAWUWHeI=;
+ b=QkLrvIr2cvJ8/VYDsP2s2+vZLI195eFCE//8bn8/4SpWSAA9tj3Gd0ZqycbUOfywgY7W
+ auP6FeiS0PfKMbjDGbhd0DXVbt1780HjVl4pNjNIOcJRJYVrsHSUa1tN6isDC/HB+K91Q
+ ysihj1E7yeW6pLlmM6Xqgf5FFUr38UQ3ejd3uYETl4YbTmDTZoxLTPqGSaz4Hwei7xUI1
+ dMUXp4HaqbVWkjZ3Pat4zFgFy6rsJOWYE8IjZBoYgpv5vIRY+jPTPvb8YlJAIrYkxs2Ri
+ dV6uwoFwwD7OelCq9xf2v3ZmZxy7CK2WOqgSD7DeKc5c2IQ6k1ZLqVUzqm2DFs67l8w==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=mailbox.org; 
  dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b="OkpuSEz/"; 
+ header.s=mail20150812 header.b="ko444e/S"; 
  arc=none smtp.remote-ip=80.241.56.151
+X-Greylist: delayed 583 seconds by postgrey-1.37 at util1.osuosl.org;
+ Fri, 02 Oct 2026 09:41:44 UTC
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=ko444e/S
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.151;
  helo=mout-p-101.mailbox.org; envelope-from=stefan.roese@mailbox.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=OkpuSEz/
 Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0D9F140623
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DAEF84004A
  for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 09:41:44 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4hx3TB6gHwz8shn;
- Fri, 02 Oct 2026 11:31:58 +0200 (CEST)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4hx3TD3kYRz8vFf;
+ Fri, 02 Oct 2026 11:32:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1790933518;
+ s=mail20150812; t=1790933520;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iO7TwTAia5jVfrG7h4UmRewV/Bd6kbK2M8IkJBtw4PQ=;
- b=OkpuSEz/t8rNV8VRhtaAfXBf+OO4YPbvKvpJd176g3RmKrxwPSndAMdkAaZyw1mhLvW5nZ
- c0uZx1Qx5LRBKcGWkFVnBRwbNy56I0se3lQY/PQBiROoYHlO6q1xyp5BTLTW7RiRiSLuvH
- XeSTJCQ+9lWjlH2CNkx8JJksx4/Of230rFv3v0ZXOX2UgsmAhuj5NolKMPkEClhvDkT1Ef
- 6E+2DGTCQU8ISC+uyX3IZVKY4zE7WVCywTg6nRzSTqx+ruOUsLCCgYgIPiwQdNQAaEKvIw
- v84GR71ytpZ5XynD7jr4C7IHkqfnxOQf1le79o7t2Dyu3TbfDyJKgPpobRPjYQ==
+ bh=z0gIa65QH/DpTy9w2irHAMgQGUaey/pgHtAVAWUWHeI=;
+ b=ko444e/S5KDSz++awFwBl5M3Zt5RLlvN9mDSZ3KiMC1xNHZDv0a/dskY3Iu42Ffc+zlzRH
+ bE46qhqTMAMf9j4MBzkSldJ/Oc0BRvYnm/yLbBz1SrVBzOuXUFnQM5U8AbGFQhOQlUZeXa
+ IHR+Pmi8TuLBpJiwqAenw0kgfjhY4VDJ0Fq6FeC0lJToe/p9jZA99oFdZwebg/UK5okxA8
+ sCe9RpB0twSQypEGw+C2ZNef+NwQBcXrjMM6CzBrg4HfvapuoiBpYAyMi/Vm+hExheJxW9
+ H3MhgiVcvCrNM+OFkusbgWBMvfpLZn8K6eVc2MWT0DI/vBH65pAU2OX7n1mLPA==
 From: Stefan Roese <stefan.roese@mailbox.org>
 To: Jan Kiszka <jan.kiszka@siemens.com>
 Cc: u-boot@lists.u-boot-project.org,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [PATCH v2 1/2] watchdog: Add support for i6300esb
-Date: Fri,  2 Oct 2026 11:31:53 +0200
-Message-ID: <20261002093156.2238815-2-stefan.roese@mailbox.org>
-In-Reply-To: <d2d659169ff5dcfc8e72e03abe887afe20a685a7.1788526864.git.jan.kiszka@siemens.com>
+Subject: Re: [PATCH v2 2/2] board: qemu: arm/riscv: Probe watchdogs late
+Date: Fri,  2 Oct 2026 11:31:54 +0200
+Message-ID: <20261002093156.2238815-3-stefan.roese@mailbox.org>
+In-Reply-To: <d25423772d51278dae4631f4f22923bfed1f8bdb.1788526864.git.jan.kiszka@siemens.com>
 References: <cover.1788526864.git.jan.kiszka@siemens.com>
- <d2d659169ff5dcfc8e72e03abe887afe20a685a7.1788526864.git.jan.kiszka@siemens.com>
+ <d25423772d51278dae4631f4f22923bfed1f8bdb.1788526864.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: c5ss4ht8rpok8n3etsy71wgpa9k46rxk
-X-MBO-RS-ID: 14efdd214ece2b10171
+X-MBO-RS-META: prisg4opw899qpymi56f6ynimmrdzpch
+X-MBO-RS-ID: 84e7f650bcb92689ffe
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -150,64 +149,20 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 Hi Jan,
 
-sorry for the delay. A few comments below.
-
 On 04.09.26 15:01, Jan Kiszka wrote:
-> +static int i6300esb_wdt_start(struct udevice *dev, u64 ms, ulong flags)
-> +{
-> +	struct i6300_wdt *wdt = dev_get_priv(dev);
-> +	uint32_t val;
-> +
-> +	/*
-> +	 * Scale to ns, then divide by 983040 ns, the period of the timer
-> +	 * (30 ns PCI bus tick * 2^15). This is timer 1 (IRQ). Timer 2
-> +	 * (reboot) is set to immediate expiry.
-> +	 */
-> +	val = ms * 1000000ULL / 983040;
+> +	/* watchdog may come via PCI but was probed too early */
+> +	if (CONFIG_IS_ENABLED(WDT))
+> +		initr_watchdog();
 
-There is no upper limit here. The preload registers are 20 bits wide
-(Linux caps the heartbeat at 2046s, 2046 << 9 per timer, just below
-2^20), so with your scaling anything above roughly 1030s silently
-wraps. Please clamp it. Once Juuso's series ("watchdog: report
-effective timeout") is in next, setting max_timeout_ms in uc_plat in
-probe would be the preferred way.
+initr_watchdog() walks all WDT devices again, not only the new PCI
+one. A watchdog that was already started in the first pass gets
+wdt_start() a second time, and with SYSRESET_WATCHDOG_AUTO
+sysreset_register_wdt() binds a second wdt_reboot device for it.
 
-> +
-> +	unlock_timer_regs(wdt);
-> +	writel(val, ESB_TIMER1_REG(wdt));
-> +
-> +	unlock_timer_regs(wdt);
-> +	writel(0, ESB_TIMER2_REG(wdt));
-> +
-> +	dm_pci_write_config8(dev, ESB_LOCK_REG, ESB_WDT_ENABLE);
-
-Linux does a reload after writing the preload values
-(esb_timer_set_heartbeat()) and again in esb_timer_start() before
-enabling. Without it the new value is only picked up with the first
-wdt_reset(), so the first period still runs with whatever was
-preloaded before. I'd add the reload here, before enabling.
-
-> +static int i6300esb_wdt_stop(struct udevice *dev)
-> +{
-[...]
-> +	/* Returns 0 if the timer was disabled, non-zero otherwise */
-> +	return val & ESB_WDT_ENABLE;
-
-That's taken over from Linux, but in U-Boot the callers expect 0 or a
-negative error code. Something like -EBUSY when the enable bit is
-still set (locked) would fit better.
-
-> +static int i6300esb_wdt_probe(struct udevice *dev)
-> +{
-> +	struct i6300_wdt *wdt = dev_get_priv(dev);
-> +	uint8_t val;
-> +
-> +	wdt->base = dm_pci_map_bar(dev, PCI_BASE_ADDRESS_0, 0, 0,
-> +				   PCI_REGION_TYPE, PCI_REGION_MEM);
-
-Please check for NULL here.
-
-Nit: checkpatch --strict prefers u32/u8 over uint32_t/uint8_t.
+On qemu virt there is no other watchdog today, so this is harmless
+right now. But I'd rather not rely on that. Either skip devices that
+are already running in init_watchdog_dev(), or only handle the
+i6300esb here.
 
 Thanks,
 Stefan
