@@ -1,168 +1,169 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B743CA5FD4
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 10:05:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28939CA5FD4
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 10:05:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C7B6C81205;
-	Fri,  2 Oct 2026 10:05:03 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 73C9740CD5;
+	Fri,  2 Oct 2026 10:05:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id d0Uka5cXwAqS; Fri,  2 Oct 2026 10:05:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 9E75380DC2
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790935502;
-	b=ikMg/Xn/fn6XpvKYUh1wV9Egb6E50tXRaXusQ6AP3lxF9EAj4qw/76uOoIpI69PM6LsK
-	 gQM0/KVjB4BuB+9k2egKMaInQ3uVJCmV82bVNsKt2+vbMnw3qy+RUJy+Zr7aFAOkpphIh
-	 VCoRZHybrJUGJUFyXbYMSHEMuHHDKYaXdr0ZK3NTN3T4LcAl1NZVpRqMktwu1pfUle8mA
-	 F3Xu3qKfsVXQPXDEIyUcVWbT2AumlgheabMZQNKJN1nxUbOTLVyFxdSImyhRvAB3gCUa0
-	 ixVTSo7kSggXUTO92oTRTNowT/xZvMnaQAHjmAf8ofYbx7L0XINwbEwBbn6x0r0F80w==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DZadlbJv5PpY; Fri,  2 Oct 2026 10:05:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 6626440BA0
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790935509;
+	b=MuX6cicUay2M7qI3v8Z8ohPeQn48yXhhfWe2+6T9p/fTJd+z77PcN+VauF4Zk0jxWqXH
+	 tZV08J9p1n+m80Z13QnifioYDpDjzLrzg6M3ZaUeJUbS2Sw6V0yAUo6hPB9JXfyKg+g7l
+	 ST38tam/z+Ym27m9u2j+SI/+El+4I+1YnTS8EHqDnQWUKs6QoaXywDpRkw1Ts/7ad/602
+	 zhF6SNj32M85PSOFPey9TiM6eHHCKI83BuGGzknZV1K7A5D7/rKoy1Yic3rt0RXVCHbyj
+	 S6tw9YknXH4MvLWYMfCHEpSntrwQoenBTrAp1dm+w5fQ7PWg6N1QVYx3QJc+5F8MKaQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790935502;
+	c=relaxed/relaxed; t=1790935509;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=cUbePSj1ozg1KhGCVKGgIdcasd20SVrlLKTgc4iHBT8=;
-	b=nDZh7R9GzOztRDfNUG6EwR2BSl6aQVDCtnpgP4MmtcWyRWYLlSkRbUmS1XhUPnl4rL4T
-	 Qv/ztfma1u9ZMqJC6IEPB9iNmJEH9BEsr4CqBt+86u3C+lAjMmvJ3uy85vrlz1wClYvCW
-	 i7Lrz1bCKb3uTIX3wYYDMr6seWURFlOvVz7j0FRwFQrtiESYADJY+bhDhZuglLCX5UWEe
-	 WozQKrg5PeE6DCXSKNSV4y2VPWdQIRRbWttzwFX4UETr0Cn2Bg2tbIJuHYAX/hurTvltB
-	 C/B50D9n/2v8rfbV/gZWWpMWzFZKqwoYly9cAwhQE117nG69VdSKUnffPwqDcvXuDzA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=Lz2hVSd7ntbxjl/LJHq0xlThok7XiB19zrs/4QUlHro=;
+	b=IatElLyY+nJH4FNWvLhbxixmz8q5P/7Ct74ybX0haIVm/7gREEt9Dji+B5tSjWwIUWSY
+	 IR9KP56/i7sS+AWP4mYP25f0IoJPhj1cNffAguMRAY0tcfoGvPLuoJdrMaRWzcQXBKjZ/
+	 S6Ppf9S8WDFaNS7D5I7crjOJdAx3xQGnS31v0Q1Tq3GKMD//FP/XenWT2E37nk2WwOt3a
+	 4HlsJmzD7eJR74iAafiAEtsa3N8hstXbLWji2UtXtf/Dq5uLhiM4ALIvQBLRcgUsdCWwg
+	 Kd3DxaVbuM9dBe0Mx3Izl9qhvDtVvsa/U72RZr9i953fLdXEJxh5713N54sJhHj3wBQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=flipper.net;
+	dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=yNQ7hv9w;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790935502;
-	bh=cUbePSj1ozg1KhGCVKGgIdcasd20SVrlLKTgc4iHBT8=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=hch7idx31MXlBt2C0F7gxUoB7IBS6EtZQsW+ClnuTIlLWMsya2aID+F6xKsdRWM7y
-	 hMoxXIUJlvxsDYHeR9GLvhfsqdKouokWV2S6yuYP3pkbxhQ4bZaCV4Yb0FljUYSKxs
-	 VWXE6dMIEEwWc2GAOaNwygtftX5SgUK4BTQYegdN1p5HW3vU5C26yEeKXh4PyKiuX2
-	 FdUSjUuZO39cna2KcOFsAp0m/ARnH3ciexqlAqO5NaJzhIedi6nD8Pweg0SBzSeCTH
-	 RotpzDLpJYJc8x0dos/IUik1vwrtMQ2GXwEE5SMZM63WnByashAKHM6KkngNq6ofDq
-	 wmp0B+CKnxlqg==
+	d=lists.u-boot-project.org; s=default; t=1790935509;
+	bh=Lz2hVSd7ntbxjl/LJHq0xlThok7XiB19zrs/4QUlHro=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=COMQ3bklccbRCojC7r4VrktPOI9EKqCQkT/uldkwt82H+zuEypBK4YsPvoV/RnkWe
+	 Q8KkvBW/QGLCaoUm3pTY6ot2oIezebzwQsnn1pqYM6FajN62IS9Ipk5UQ64Xpm4oOZ
+	 zeZbxb55kgs6HxDtsXyZR1D80MzL855AZ8pX0Dk4Nq1C5IWRKsrWQoPwD3D2rI0q6p
+	 b4Eh40UGJhbJq2xLcNvSC/7vCWIh/QGQczk08s5nx+dg4BQUGNpD41K9mlpOzlkN57
+	 MzDlZsSN+FsRVTBja35x0YyGGw9pCCJjfllQ2CJJB6hgacV1CEeIipvmlfutyTyi71
+	 aQ5eG4ihVLq7g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9E75380DC2;
-	Fri,  2 Oct 2026 10:05:02 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6626440BA0;
+	Fri,  2 Oct 2026 10:05:09 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id E53F5282
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 10:05:01 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 5C2393AC
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 10:05:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D758D40BA0
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 10:05:01 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 42A3D40BA0
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 10:05:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3dSLPgucm76L for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 10:05:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 8D49A40ABA
+ id 1ij2xWpLcLli for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 10:05:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 1EBC740ABA
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790935501;
- b=IBjnrvJ/fdlIQ3FYteXtSoXadjrSKINtl00LEAmE7cCH6FxXU9roOs1DsjstAHgfIcSt
- oPIDs5fKWPuIeYaJOqIucKlyfm40xWHBMZcHAsRrQBeyAlFlRUyyF+vesUhu0w/Xpcq6P
- d8Vc8TvcESOe0swfD1qcRczKAVk/hkpFGbs+pGGJW9jLgHRM6kzEeg9jcETGLkk5tb9S2
- GJ+gIoyxRAQWOvkIfm/05PMG+7/E93vXEfZ1Ptv1gaIHZ1kQbYtCwIXkatENq/aFnCE4M
- mWSf2dKFUsqCbykAv5ySiJps+9wMjZhtWHZLHm78VUnsgItMHXZm2JXDl+Ko7rp1mvQ==
+ arc=none smtp.remote-ip="2a00:1450:4864:30::10"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790935506;
+ b=QROc7l49SnB5CcUkvBvI4hCDzlD+cC+bPjYiMKMhdLREpt2u7eOvsdwC6dEUmtGVqstM
+ DbRL+orNndoAIkTs+70tcaXrfLbfid2FgwF/pJKCnZUVgI0iPUiFp3BM35M7J+Izd/EJI
+ epQImaBT0AKjvQI7DQNLA7zOjlWYGkdUN4jMUGiITJ4ghm7+AVeI2Myy6RMwn50oNdIK4
+ EOXICgF9fayk6pos5b2T/C0juJ9L53Oz9I4U8drMHftdwIl76kiK9v+JYHRgd8uV8bfUZ
+ sH4vlWrgfEZ+uesSJZ69+1XxdlWPdpYNdHC2E/zfZcgyB7SFdfxXcXqrz3MgkBGJ4Dg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790935501;
+ c=relaxed/relaxed; t=1790935506;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
- Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=cUbePSj1ozg1KhGCVKGgIdcasd20SVrlLKTgc4iHBT8=;
- b=QgOmLKU8/3lIgTeRloTpZg9aaaVtNuSxU4gKa359THJhKz5PsfvkI8JfEmn96Soj5zQz
- AWbZbvN+SKs930wt7GgEaUbAwmqDMMWlb9BGHYCu+eMqsbyrIF6dQJXLFN9cKeqDPR//a
- QJPdMCHLnb1H2Em4JB/oQbilQWLWpCeLQUaToB5pQ52ZFx6LD8+YFNEEjp+qTMekoSUnT
- y9EdVQ7VxbvUtgBiDZr3WQentxhSGJ+Q47tPWlx16qVftBqah2xQMdt4wIIOcFXUGWsRl
- 8YzbQjMwLz79iGtBAwPNczTdUZoU1d7a+59mWLNq3PLdojHA6S44ItZk9xQduQk4qRA==
+ bh=Lz2hVSd7ntbxjl/LJHq0xlThok7XiB19zrs/4QUlHro=;
+ b=d1zq8fXwQcA5fwIyVmSRaKZFB5d/A1EJGssGFrPhHPvWvsMdLrKZHAz2vxdR+eKUYkTL
+ McKr+DKULvIbYocU4w45nAXR6w2cmEel8YcCXDUKv+uRJh/fnoDjd0fvJXyazp6+M82pG
+ t3TtnArtpVo+X8xxWZWWyQZ7W3OpMRsIu0unSYhWX1OYJEXi1JI0zQAEb2oUtzhWbjTp/
+ y5m6Tg4BRJ2rnoQOmWbzjt+eGQseGp2LHOV/H28YMgr8g1YkSYnRl0IalM0yh9RNTl0Yb
+ cuOYrPg5KCXZJaQyLOI6A8XPxsbLFV5K8U8yvQ6QvRK9UL0Hu7kdVojr3grIUDD77dg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=flipper.net; 
  dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=wQqEOJN1; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
+ header.s=google header.b=yNQ7hv9w; 
+ arc=none smtp.remote-ip="2a00:1450:4864:30::10"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::10; helo=mail-wm2-x10.google.com;
+ client-ip=2a00:1450:4864:30::10; helo=mail-wr2-x10.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=wQqEOJN1
-Received: from mail-wm2-x10.google.com (mail-wm2-x10.google.com
- [IPv6:2a00:1450:4864:31::10])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8D49A40ABA
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 10:04:59 +0000 (UTC)
-Received: by mail-wm2-x10.google.com with SMTP id
- 5b1f17b1804b1-49b912d391aso56919975e9.2
- for <u-boot@lists.u-boot-project.org>; Fri, 02 Oct 2026 03:04:59 -0700 (PDT)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
+ header.a=rsa-sha256 header.s=google header.b=yNQ7hv9w
+Received: from mail-wr2-x10.google.com (mail-wr2-x10.google.com
+ [IPv6:2a00:1450:4864:30::10])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1EBC740ABA
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 10:05:02 +0000 (UTC)
+Received: by mail-wr2-x10.google.com with SMTP id
+ ffacd0b85a97d-482f6351831so4353988f8f.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 02 Oct 2026 03:05:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1790935498; x=1791540298;
+ d=flipper.net; s=google; t=1790935501; x=1791540301;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=cUbePSj1ozg1KhGCVKGgIdcasd20SVrlLKTgc4iHBT8=;
- b=wQqEOJN1GH1Q4S5uxOh3qxFsxEZRYivmCa78raCQd2OyngMrwtnGrToCm+nRE6FStw
- AeLVeQMtgeXGF5phiiuRQ8lo0fAgt9RF8qO3XFyQLfIjybOPAOQwfOaW2KhDFQMq44fu
- BlGkpQTgTWdYJHoj0wGpDqa6NQjC31ELDeBgqp3Gz0vAkCq0tVNpw5QbpSM51Ali2L6w
- 2NjW+A0w/tTKqOxbOvwdwzRHLzSeCsL+IAukD6/hj09wAtaKaAjCgzFIPV8+JTut8cIH
- 2zjFJdPE3HxNwUR2eNJo0O+fVcBANwSbxf9snnmnZs3ueBQH4S/ilVm5t76mN4UP8gLG
- /2YA==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Lz2hVSd7ntbxjl/LJHq0xlThok7XiB19zrs/4QUlHro=;
+ b=yNQ7hv9wWBeoJ+YRfPjDfZsMsHLhzb/ru63p1BphUJLd71EJoR0HhE7L+0z9VqEBtz
+ lDJMFbpgB/ODFn8jWaCjayPzd8GGsLEe2yVIrf56RjfQ1jgFBdJNJuIIjIiMSvYR8txv
+ TZOMyGIwb3TILVNLoAn9nF38EHTwAGcxt84PGDQCsfaHpLaSwf1cbKxz6+1xxV/A3xyu
+ 9I+W/YkGoA5Fc0Y+TQ1j/jBDX6slHGGxUjDaM+pdqlH51SnNUJQhCrvtQndsLcw5y4cD
+ 0Si85KYDnR7laDu53ZcsuO01GWyvEuaAUNrhi68fDTF4B+0UrO7A5vEGmzY4/gaeylOs
+ EMPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790935498; x=1791540298;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=cUbePSj1ozg1KhGCVKGgIdcasd20SVrlLKTgc4iHBT8=;
- b=Vk1J5sfusy4jvzUOsN3+1RvodjtpQn8gw8aPoAT7kQqjcIXAnmkXMTGPKlk+9UwdAs
- u26c+Jx7phTnLwk/dMaTkrqfBXrY8XksUwwByvkKPOqY3Z+XiRMRIVpcNwi85ojGVe/v
- SsYnDqRgGO6L/97fPO7a2ZubEtEZKrify8KP32FVmv0uGXUBT5nfk1kd0UcBidvF17dz
- Onat6Ev3rBpCFSAyZzu1LryolUMmWnM/rHqfb8W8EfasHGAAmmY+cjK/xL9AYAjICapS
- J+Un3UGT62PBJaotPCvYq6BvY6HZcRuePyZKtWjH9pw8CEd37MTAr+rzhtI87cA5Nirh
- y3og==
-X-Gm-Message-State: AFuF++m8lQWsIRsnk1ifZcvW0RqSRpEak98mN5pRi7esimN1ngZHvOlO
- o/8Cun1x7HPYdR+DxQw9qbtBWph9k8Yq6LEV8H6KcqpuoVuOQ2ulJVb+qco13hcSSKI=
-X-Gm-Gg: AYBFou3CLk42CaGVp8JK1f1BEi23fCSN9ptUanjrvySER+oUq6xMn6qG2si8khqHn/g
- yPv0360Mf91i5F0qaLTFfbUSRGTFoPb5mnSBdEc3dcTruUZN25oLJiErFQHy53oBHJI1odtM09X
- kM8HgKT9YQk2hAlcOihkbZTSWmcKZHhSNY+kQqMl7mqjK8wCExc1f3QlQtD02RycD3XYbb8q0lc
- uZ/+fO18v/8zWrn4NaUqG/qpCnWmGe0Pa127D25+EvaYOQIx1a3SkxkMMjmUBpuzLTEWKBE5FGy
- stZjUvlTpVttGi786n5U8EfvYAO/S509gMNn19kQ+LMmpMh5aDYXBU7xaT7Ux9HrozOSSQWkkKz
- N+RctdJNbbhFR4sSticl/AUZAJsLK9MsD3ykirMJ5KqVJZSvvBWsPQ5QO2iPT1VLsQPg5D+9OO0
- aTNhm1yJEHiFxVnaO0y6KGPBDixoQfdGKzIU0/Qqp9QvXmyho6s/2YVeTRv5JwunsfGEQSgbbqQ
- BxcD6A4hhyiS5289yYscS4hjTR6
-X-Received: by 2002:a05:600c:8b4b:b0:49e:799a:8969 with SMTP id
- 5b1f17b1804b1-4a0276b9c4cmr38597175e9.30.1790935497613; 
- Fri, 02 Oct 2026 03:04:57 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1790935501; x=1791540301;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Lz2hVSd7ntbxjl/LJHq0xlThok7XiB19zrs/4QUlHro=;
+ b=x3hYnRX2RsMClwiIFjVMhOyhOoJEL2wYKow3BM2cCP2yVKGp3X4jqal3g6j0YBoYv3
+ QMgY6oZZENMQfmgLsef6LD3oYD5DHs7iDFkzCo23C0dXWEum/nxujWdlfu2MNg0QBSMl
+ fHdYAa4MzeSYzcc90K675Uk4Y2OcULor0ecueXWZrYDN3pkWo4oYiX6hev/sfl61KxT5
+ FO/pira7y6AYjIP5egbWN7oKVp4mbIHxOwmzh+yUY8OqkWHAYKvbeTFZLZN726HJPjCK
+ wQ5M/zB3pDCduZTBQCDfN4eKlhKNmTdXN33Xqee0O4/3o4FHRi1OCxOa9TgriShB2UzF
+ cOvA==
+X-Gm-Message-State: AFuF++mY2s6+1N2zVwtuH6Z3b5DPVTTfvl7hrfUVrAJpBp+hobuhEqUO
+ CfyZTpj+gLBQecOdGzTg+60W4MPFGrpAxEZLpwq2EJToIYUxUo7u+eO2Eyqr5wgKnkE=
+X-Gm-Gg: AYBFou0CgNp7x8qPn9nefgk/ytVuuTt6VjCKXOkCuzCxJpGiqZmQUo7RD8nac7kUUGY
+ QCSaDsqf7UaokKWNkpGHFqW8nV6LmjmGtOkJmHRq0hpm/05qmg+qjeG2DYtNTJcvxbJxbMpPjdE
+ NTJI9NclU2T0DSeOAPtiW5+k7LhRCwLh0OpAi4nhqZ32E03MRWlRD7HRdFaE6bhlrvVJWwBTpjQ
+ XQFU4lrJ7KtmN2QERAceNQmJ4LLhN1ET3mp1ilbwoFCNmluDz2jvbpQQSkXWzPxgK7p2Wcr1Kcw
+ QpzRyVCkPij0qBmuG9rShAvkiMSsOocAatYyIXJX5ilzNT7lGPoQQelZ24CtKBi7TrvdWLMygft
+ DMyYXEAuMdFaEowM+iYm/RHYbZ7TE8P9kgMuLAAimEusLMKdaU/obASFn7fdOY1cogni4YWqcHv
+ SJdM4JjyS9N9EUSWuAIP4m3uRA5aeB8g+fgg6LeqdfeY7+Hsg32Qlm61M1TvXCXrW8nZTCt4DMd
+ vhlSPmnv5Q6zDhP
+X-Received: by 2002:a05:600c:8b6a:b0:4a0:2391:6529 with SMTP id
+ 5b1f17b1804b1-4a02757f1e4mr36023375e9.29.1790935500783; 
+ Fri, 02 Oct 2026 03:05:00 -0700 (PDT)
 Received: from alchark-surface.localdomain ([5.194.93.183])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a0280ceaf0sm72887985e9.12.2026.10.02.03.04.53
+ 5b1f17b1804b1-4a0280ceaf0sm72887985e9.12.2026.10.02.03.04.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Oct 2026 03:04:56 -0700 (PDT)
+ Fri, 02 Oct 2026 03:04:59 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Subject: [PATCH v2 0/2] lib: Allow unaligned memory access from
- decompressors selectively
-Date: Fri, 02 Oct 2026 14:04:47 +0400
-Message-Id: <20261002-unaligned-decomp-v2-0-675466ced78a@flipper.net>
+Date: Fri, 02 Oct 2026 14:04:48 +0400
+Subject: [PATCH v2 1/2] lib: Let the decompressors use unaligned loads if
+ platform allows
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32Nyw6CMBQFf4XctTUt4WFd8R+GBdADXIOlaYFoC
- P8u4N7lJHPmrBTgGYHu0UoeCwce7Q7xJaKmr2wHwWZnimWcSa1uYrbVwJ2FEQbN+HJCogVUopC
- nCe0z59Hy+0w+yh+HuX6imY7OYfQcptF/zs9FHd6f/KKEFKnWUps6U0kui3Zg5+CvFhOV27Z9A
- e7vN5bEAAAA
-X-Change-ID: 20260918-unaligned-decomp-0efee141e754
+Message-Id: <20261002-unaligned-decomp-v2-1-675466ced78a@flipper.net>
+References: <20261002-unaligned-decomp-v2-0-675466ced78a@flipper.net>
+In-Reply-To: <20261002-unaligned-decomp-v2-0-675466ced78a@flipper.net>
 To: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
@@ -172,12 +173,12 @@ Cc: Tom Rini <trini@konsulko.com>,
  Cole Munz <Munzzyy1@proton.me>, Quentin Schulz <u-boot@0leil.net>, 
  Kever Yang <kever.yang@rock-chips.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2438; i=alchark@flipper.net;
- h=from:subject:message-id; bh=SlCM1R6zQ06kAfxANBea6oFnlVFYWdgGXCNtCfFv9cQ=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTtbzzRymdcbOcR91i7Rjfx7Ou2juNLdL7ZN7wRNXLZr
- LvddM3djoksDGJcDJZiiixzvy2xnWrEN2uXh8dXmDmsTCBDpEUaGICAhYEvNzGv1EjHSM9U21DP
- 0EjHWMeIgYtTAKZaxpWRYUG5I1tN4zJ3oZur/857yfYja+qS9by7rZg/nHyy+mTv/NkM/8sVQk4
- fE7n7e9M9I44Up6VLX9ul1TG+8ZueonVpgpa5CDsA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7273; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=mdTzNQvwpGEbiUzzoNtqTiwhs+FWtSxNpkTNOXrdTfc=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTtbzxRv4+hJC3LfJbhoVN187l38/ltV6+4XO2k9ezZ/
+ Yms7ZGvOiayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
+ QyMdYx0jBi5OAZjqQ48Y/vC5J5w43WTT6FPC8+qfbvif8+8fOS+QyGP85/t0qubbf7wMf+WmzTh
+ YEDwpe5XaqSs/mtdJv+qLNd/3YWuni7nY9kn33dkB
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -193,63 +194,187 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Some decompressors rely on wide unaligned loads, which get very expensive
-on strict alignment architectures such as ARM due to the need for the
-compiler to reassemble each wide load byte at a time.
+ARM passes -mstrict-align (-mno-unaligned-access on ARMv7) to everything,
+because when the MMU is off any unaligned access there faults. The
+compiler then has to assemble every wide unaligned load out of single
+bytes: one ldr becomes eight ldrb and seven orr/lsl.
 
-On the other hand, some ARM platforms such as Rockchip enable the MMU and
-d-cache early, making plain unaligned loads work too.
+This is especially painful for decompressors which refill their buffer
+in 64-bit words. On a Rockchip RK3576 SPL, zstd unpacks a 30MiB Falcon
+mode Linux kernel in 1947ms built this way and 596ms without the flag,
+and the SPL gets 2.3KiB smaller by cutting down on the byte-wise loads and
+ORs. gzip, whose inflate walks its input a byte at a time anyway, gains
+6%.
 
-Current Makefiles force the compiler to work around the unaligned loads
-unconditionally, which in case of e.g. Zstd in SPL on Rockchip degrades
-its performance by a factor of 4+ compared to native unaligned loads.
+Add ASSUME_UNALIGNED_ACCESS_OK for a platform to state that the MMU is on
+by the time it unpacks an image, and let the decompression libraries drop
+the flag when it is set. The arch exports the flag it added rather than
+lib/ naming it, so this stays correct for anything else which adds one.
 
-Add an option for arches to opt out of the strict alignment flags for
-decompressors, when they can guarantee that wide unaligned loads are safe.
+No functional change anywhere until the symbol is selected.
 
-This improves the decompression performance and reduces the SPL size due
-to fewer instructions generated per each unaligned load.
-
-CI for this series: https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/pipelines/1431
-
+Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
-Changes in v2:
-- More caution-forward messaging in the symbol name and help texts (thanks Tom)
-- Link to v1: https://patch.msgid.link/20260918-unaligned-decomp-v1-0-59909db61470@flipper.net
+ arch/Kconfig                 | 35 +++++++++++++++++++++++++++++++++++
+ arch/arm/cpu/armv7/config.mk |  3 +++
+ arch/arm/cpu/armv8/config.mk |  3 +++
+ lib/Makefile                 |  3 +++
+ lib/lzma/Makefile            |  8 ++++++++
+ lib/lzo/Makefile             |  8 ++++++++
+ lib/zlib/Makefile            |  8 ++++++++
+ lib/zstd/Makefile            |  8 ++++++++
+ 8 files changed, 76 insertions(+)
 
-To: u-boot@lists.u-boot-project.org
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Alexey Charkov <alchark@flipper.net>
-Cc: Johan Jonker <jbx6244@gmail.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Vincent Jardin <vjardin@free.fr>
-Cc: Michael Srba <Michael.Srba@seznam.cz>
-Cc: Cole Munz <Munzzyy1@proton.me>
-Cc: Quentin Schulz <u-boot@0leil.net>
-Cc: Kever Yang <kever.yang@rock-chips.com>
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 8d63afeb138e..606b9d79ecd8 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -27,6 +27,41 @@ config SUPPORT_LITTLE_ENDIAN
+ 	bool
+ 	default y if !SUPPORT_BIG_ENDIAN
+ 
++config ASSUME_UNALIGNED_ACCESS_OK
++	bool
++	help
++	  Assume that an unaligned access cannot fault by the time U-Boot
++	  proper unpacks an image, and build the decompression libraries
++	  without the architecture's strict-alignment flag on that basis.
++
++	  Architectures whose unaligned accesses fault while the MMU is off
++	  pass such a flag to everything, which makes the compiler assemble
++	  each wide unaligned load out of single bytes. That is both slower
++	  and larger, and a decompressor refilling its bit buffer in machine
++	  words can spend up to four times as long for it.
++
++	  The assumption holds only once the MMU is on, which on most
++	  platforms has not happened by the time an image is unpacked, and
++	  nothing checks it. Select it from code which enables the MMU
++	  first, under the same condition that code tests, so that the two
++	  cannot drift apart. It has no prompt because there is no safe way
++	  to answer it by hand.
++
++	  The flag is only dropped from the decompression libraries. Every
++	  other part of U-Boot keeps it, including all of the code which runs
++	  before the MMU comes up.
++
++config SPL_ASSUME_UNALIGNED_ACCESS_OK
++	bool
++	depends on SPL
++	help
++	  The same assumption for SPL, which on most platforms runs with the
++	  MMU off from start to finish and must therefore leave the flag
++	  alone. See ASSUME_UNALIGNED_ACCESS_OK.
++
++	  There is deliberately no TPL or VPL variant: those phases run before
++	  DRAM is up, so the flag always stays.
++
+ config SYS_CACHE_SHIFT_4
+ 	bool
+ 
+diff --git a/arch/arm/cpu/armv7/config.mk b/arch/arm/cpu/armv7/config.mk
+index 68036d6fbdaf..a1d1fb40d78e 100644
+--- a/arch/arm/cpu/armv7/config.mk
++++ b/arch/arm/cpu/armv7/config.mk
+@@ -9,3 +9,6 @@
+ # of our decision.
+ PF_NO_UNALIGNED := $(call cc-option, -mno-unaligned-access,)
+ PLATFORM_CPPFLAGS += $(PF_NO_UNALIGNED)
++# Code which only runs with the MMU on may drop this again; see
++# CONFIG_ASSUME_UNALIGNED_ACCESS_OK.
++export PF_NO_UNALIGNED
+diff --git a/arch/arm/cpu/armv8/config.mk b/arch/arm/cpu/armv8/config.mk
+index 4d74b2a533e0..a27d3e3aa8a1 100644
+--- a/arch/arm/cpu/armv8/config.mk
++++ b/arch/arm/cpu/armv8/config.mk
+@@ -6,6 +6,9 @@ PLATFORM_RELFLAGS += $(call cc-option,-mbranch-protection=none)
+ 
+ PF_NO_UNALIGNED := $(call cc-option, -mstrict-align)
+ PLATFORM_CPPFLAGS += $(PF_NO_UNALIGNED)
++# Code which only runs with the MMU on may drop this again; see
++# CONFIG_ASSUME_UNALIGNED_ACCESS_OK.
++export PF_NO_UNALIGNED
+ 
+ EFI_LDS := elf_aarch64_efi.lds
+ EFI_CRT0 := crt0_aarch64_efi.o
+diff --git a/lib/Makefile b/lib/Makefile
+index b7272c6f0cba..dd93d41df5d7 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -93,6 +93,9 @@ obj-$(CONFIG_$(PHASE_)GZIP) += gunzip.o
+ obj-$(CONFIG_$(PHASE_)LZO) += lzo/
+ obj-$(CONFIG_$(PHASE_)LZMA) += lzma/
+ obj-$(CONFIG_$(PHASE_)LZ4) += lz4_wrapper.o
++ifdef CONFIG_$(PHASE_)ASSUME_UNALIGNED_ACCESS_OK
++CFLAGS_REMOVE_lz4_wrapper.o += $(PF_NO_UNALIGNED)
++endif
+ 
+ obj-$(CONFIG_$(PHASE_)LIB_RATIONAL) += rational.o
+ 
+diff --git a/lib/lzma/Makefile b/lib/lzma/Makefile
+index 09380074b3df..1a85b5210386 100644
+--- a/lib/lzma/Makefile
++++ b/lib/lzma/Makefile
+@@ -10,3 +10,11 @@ ccflags-y += -DZ7_LZMA_PROB32
+ ccflags-$(CONFIG_$(PHASE_)LZMA_SIZE_OPTIMIZATION) += -DZ7_LZMA_SIZE_OPT
+ 
+ obj-y += LzmaDec.o LzmaTools.o
++
++# These only run once an image is being unpacked, which on some platforms is
++# late enough that unaligned accesses are safe. Where the platform says so,
++# let the compiler use them: assembling a 64-bit read out of bytes is both
++# slower and larger.
++ifdef CONFIG_$(PHASE_)ASSUME_UNALIGNED_ACCESS_OK
++ccflags-remove-y += $(PF_NO_UNALIGNED)
++endif
+diff --git a/lib/lzo/Makefile b/lib/lzo/Makefile
+index 45612a83dabc..66b02ede0f19 100644
+--- a/lib/lzo/Makefile
++++ b/lib/lzo/Makefile
+@@ -4,3 +4,11 @@
+ # Stefan Roese, DENX Software Engineering, sr@denx.de.
+ 
+ obj-y += lzo1x_decompress.o
++
++# These only run once an image is being unpacked, which on some platforms is
++# late enough that unaligned accesses are safe. Where the platform says so,
++# let the compiler use them: assembling a 64-bit read out of bytes is both
++# slower and larger.
++ifdef CONFIG_$(PHASE_)ASSUME_UNALIGNED_ACCESS_OK
++ccflags-remove-y += $(PF_NO_UNALIGNED)
++endif
+diff --git a/lib/zlib/Makefile b/lib/zlib/Makefile
+index 4a3e985a9494..9ad1c73b3e6c 100644
+--- a/lib/zlib/Makefile
++++ b/lib/zlib/Makefile
+@@ -4,3 +4,11 @@
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+ obj-y += zlib.o
++
++# These only run once an image is being unpacked, which on some platforms is
++# late enough that unaligned accesses are safe. Where the platform says so,
++# let the compiler use them: assembling a 64-bit read out of bytes is both
++# slower and larger.
++ifdef CONFIG_$(PHASE_)ASSUME_UNALIGNED_ACCESS_OK
++ccflags-remove-y += $(PF_NO_UNALIGNED)
++endif
+diff --git a/lib/zstd/Makefile b/lib/zstd/Makefile
+index c9a7dfe405b4..76b8a992d7b1 100644
+--- a/lib/zstd/Makefile
++++ b/lib/zstd/Makefile
+@@ -35,3 +35,11 @@ zstd_common-y := \
+ 		common/error_private.o \
+ 		common/fse_decompress.o \
+ 		common/zstd_common.o \
++
++# These only run once an image is being unpacked, which on some platforms is
++# late enough that unaligned accesses are safe. Where the platform says so,
++# let the compiler use them: assembling a 64-bit read out of bytes is both
++# slower and larger.
++ifdef CONFIG_$(PHASE_)ASSUME_UNALIGNED_ACCESS_OK
++ccflags-remove-y += $(PF_NO_UNALIGNED)
++endif
 
----
-Alexey Charkov (2):
-      lib: Let the decompressors use unaligned loads if platform allows
-      rockchip: Declare unaligned access safe in the ARM64 SPL
-
- arch/Kconfig                   | 35 +++++++++++++++++++++++++++++++++++
- arch/arm/cpu/armv7/config.mk   |  3 +++
- arch/arm/cpu/armv8/config.mk   |  3 +++
- arch/arm/mach-rockchip/Kconfig |  5 +++++
- lib/Makefile                   |  3 +++
- lib/lzma/Makefile              |  8 ++++++++
- lib/lzo/Makefile               |  8 ++++++++
- lib/zlib/Makefile              |  8 ++++++++
- lib/zstd/Makefile              |  8 ++++++++
- 9 files changed, 81 insertions(+)
----
-base-commit: ed28577c31d895fa766ffb71ec1c35c4b39db2a7
-change-id: 20260918-unaligned-decomp-0efee141e754
-
-Best regards,
---  
-Alexey Charkov <alchark@flipper.net>
+-- 
+2.55.0
 
