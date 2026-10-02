@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DDCECA5FE3
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 16:47:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91E97CA5FE2
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 16:47:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 22DE481298;
-	Fri,  2 Oct 2026 16:47:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4E86340B39;
+	Fri,  2 Oct 2026 16:47:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qJX7Z59U1lwy; Fri,  2 Oct 2026 16:47:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 52C5A81222
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790959651;
-	b=LX/YGnbnb+37XojT0jTx09teOxQ9pB78Cz6+TOKjCU+ugwHEfCsi81QffT45/Ii7aERu
-	 NA9L2d6Hnx2Ql/GTvLoO5lVSL6zVPJn6Vo/+XJyelbRQ5/XZBVg6cY0zNx8S8lUHZScb8
-	 trV4Mde0PPvw5vDmNCJVSTmmaUYD9huBlPrxRgLlpTr1470MOp7sJID5iKzUl2LYL6riy
-	 uMBc4IuWyA22qcdyGoMAcU+FFFcIRdR/RzIB/z24kFM8jATtB54L9xNrdGHF7CMJ6uOKl
-	 Sipl2ZO5f9BSd3ayY/yMichpeGVqcHZHQWq9EwZQF/8Rd1AUt+sXkPYp7o7DhYkF+aw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4NLANCruEpuD; Fri,  2 Oct 2026 16:47:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org C523540B48
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790959650;
+	b=L8//K5R5GMHN1IzPJyVhsf0u7esNsPYdrCp4QessIcfh67IZ0FfBONQ4co7vRH6D4GC/
+	 iifwzXm+U8wFGkY4GYBeKAadGAQ7kxrMlZat7U1Io1X3CpCoROJMyS149yzsXQliRt2Ub
+	 Opiuwo5UbJq0ih5ZTgEkxInJHJAXvAksk/ZE1FO+g9vremGF5vqCQcIhmTSas992bm+Ci
+	 FXlyEqMc54I+jaP1AhotfIm9MAvi5++tiNqzWyPLrI6DVeDfB77lLxm0Smao/j9B4xneu
+	 YJWaHZrRFmWyzjdy93bHmEoN98qn9PPXg9gTnqxFYVvsXDs1F0RiNVBX/4z5e7QdAgA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790959651;
+	c=relaxed/relaxed; t=1790959650;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,102 +32,101 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=z8zni5n2/e1GfUbU2zv1TWn7LX1kI1GA6LzRaXUPAGs=;
-	b=Y+YJraV9dJHQajWId+nszbL05LnMsDpsNWRfbe0jQUUkzKAB1BHkqhigDElQ+lyHbehZ
-	 zKbuXY991gGiLVJvFm2ppbzC0gCbwltVLwcWXm/zET/zaUeDXk0TuPN9aERCHPc6qCLZN
-	 aXxM1ivy/FDUx/SOR/4/HBqjJCj61H/0t+zs5MSG2uSVtT93yn80rvRithLhQWR90AoPJ
-	 MuWCtJRh1lxPpTvyL5xnJrz23tVuvd5pHBHfErgPyTnN3lv0yRvNuLGaCajzZUVrcCmjj
-	 pvlrCceqEzr+1RJ1XXFSenqT8VIswtmhI9AneaL05TdullC7XAEB6zPGkUs9tmvx1Dg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=rmsIEuJb3cYkce4WE5JnnUV99Lh6xpzAjJQ8sK4EZss=;
+	b=UUqVsQIzFoskGSy5acq39B4oYkO0RYWIYo5fdYoWwb9HsERkmsvtKKRqrfqBZm/1sCoa
+	 Og/pM7SDRMQtKwKrkK1M8dGEPz2VpjzfEJjK4XHb1d6jeDXOr+MJRwWpXSp4RLL9HHrzu
+	 tEoP/FqtzEpEyFKiNRO4aJSbr819kZePpXkYqrTcqC7Y5VWCk72Npe4ok/DwFMJbg8wWA
+	 rvxEUaDcLK9nn7mR4FOBkhe+Q2wI5JhplFOLeyIOUo9RJ7N5sifn8SZc+jqG6EG1Ymkmc
+	 rCitbcf1dy91wq6tj9jC71ENXiwosjxpJJrYbCbVm8ejaclr543CyqxbILlz8GhxY+g==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790959651;
-	bh=z8zni5n2/e1GfUbU2zv1TWn7LX1kI1GA6LzRaXUPAGs=;
+	d=lists.u-boot-project.org; s=default; t=1790959649;
+	bh=rmsIEuJb3cYkce4WE5JnnUV99Lh6xpzAjJQ8sK4EZss=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rIf//jGjXQz8spjVH5sAY+zYMuWn+DE1MArQUIY9yJXU3uwOmhGsv/yxMaTUOXOEH
-	 5aLTglY6MLS8nOf3nhJWDhtldB5wj4kYPD4akb89bF4nAIEBvSHJjyb7HkZB8v0zt8
-	 lx2VEoc6hG7Mp/kHMQ+7Br4nHtNhqnAiGTi8PegcVPOgOXCn4x1PEgPrItfHtCblcn
-	 ebkm3Ncz8irFAGQBtOqq0IH0ZZpAV+kge2yK4FShXApyesByB2qawFbvmt+oaJvvVz
-	 MoxVU6aZYr/oUlTdHQdy6IlBrHlH5nmJIAPv/pE+dT+4xHzNQ4yrBwAbpjbAmHld7T
-	 Ra6Imk22baZag==
+	b=tGFsXMB/Tu0xjI58zB0vxn5Px4oNQLjXhlPged1B9CPxitNbYG79dFhm3iwaBZQd7
+	 UPVJpuXHitd4M50VdDfesf17glfbDuzPWAPcBflH9UTYSxrUjwfgAUOeyjkM20WwEg
+	 G/2NROa/xOaerbzZ0fVzJ7JQHjPdDtHex+oSgyCC1rmP35jZkWDNz9iGub3/MHzCZu
+	 WRmwmRlAZ6sqNHNRM91sZiMdpR5bfgoESxUTYUsQkscu9ankRgIhJEP/y1o4bSEBVh
+	 3kv8aDZ/T3rlQ7mq5A2bQK2x6NsXJk6LVoXATDeORzqbYS9h0b8Iw4RdTSasveGfSI
+	 KtNbrOvYf+3zg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 52C5A81222;
-	Fri,  2 Oct 2026 16:47:31 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id C4EEA3AC
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C523540B48;
+	Fri,  2 Oct 2026 16:47:29 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2591B435
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:13:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B604E40565
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:05 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0C1FF60BBC
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:13:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3GN6xUAmC1jG for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 13:14:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 6A27C4055D
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=185.246.85.4
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790946844;
- b=oUorbfhFiMF24lgT0URkr8pWnz1a0xfwvLnA6BM86tsPwfDJCu1NkSsVf9IG0dyxqh0A
- KUQXrzRuJiuzF1HTy4dBBWkjeHVKyc1Aa9Aj3X8fvBwgIn5lbBJltuCaDcV9H54AwRQfh
- 15ZdIONSZA342Re9oWi9qD2jCTam0teH6LpeFQRKBB1REETRkupq+CMGptgEMi0hnI95d
- FaIc/3ZY5impxu5XMBEjslfmr28sS8W3A/f8VJyCw3zB1ZZanAid9Hy0S7kUVTjdwIqNE
- kc/FZCD8y7rfSKQZ77U8xy2mYSNrao8kRhIr3CgG+3PSA3S6faHQ3hKapBlPuLN+qOw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pFXH5DRgNqc0 for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 13:13:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 1209B60BBB
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=185.246.85.4
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790946835;
+ b=OqEiZuX4RvcPA6w23UnAcTVpgIE3F5M66QqBRMrBIrmKPUzLNYSHdjdI1D7CGgDaLbkS
+ NqNywRcApoEwPcREfExPQzCL2NpHynC4bCry3T57/RcfJV/0OaO+GuLjo9uREqtrVZTW+
+ x+lBK4z29VxZYEjXh0XVaXFPQYsDD77Xqq06oKwm5VuPNX31/qEtkxkRP2ADR4CPcd8Wn
+ ZkqDuN/BWAH1tyCPo8hPEaNst7TdqkLPcye1XKVOo1M5b7IX4DJ2nHev8A8e7ZVrd5/3d
+ viu/D3F+WC0lisC40T/RolzhsNGfHI2j1Y5lIbCbn5bCBwYTwQv5TKU6zAi5KXJrdUw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790946844;
+ c=relaxed/relaxed; t=1790946835;
  h=Received-SPF:Received:Received:Received:DKIM-Signature:From:Date:
  Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Last-TLS-Session-Version;
- bh=z8zni5n2/e1GfUbU2zv1TWn7LX1kI1GA6LzRaXUPAGs=;
- b=G2Ec092M9EMZQ4IPWZTyoL4DRJ+2sEPHLHCJcpb9pVnqvlOZcyzwuDP/NlU7E3hBZsYR
- E+sxOm5rsdH4TE8JtVxtxtD3KWd0INdxG9TmZEFs++p9B1+DaqCIpsqdGayzKRPTCauv0
- dZY1zBR/KNwAzwOQ3+UZXBzQLjvEVgZiY154cgZYmfk10HoWP1Jlf22K9h5At3287qqLh
- SWG/Fd29VGyYtmABOI4hvPJbRaH+suBdcMn0pw+cHzao04iLicHdV94bDxnWT6Du80g+d
- QkZx02XuMeF1Sp1cO8+chwTS2cG1knvS84UE7EIRniZIvbdijUp+ES44fJ/HKHiXaFA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=rmsIEuJb3cYkce4WE5JnnUV99Lh6xpzAjJQ8sK4EZss=;
+ b=gpVy1FK+xD+pPCmTZXQ0QcxCe8l5BaywsgML1vc0D7mrqy5AoefT4x3L/qwfgwyb7dqT
+ kGr3UDSoGmtqOMM63GyEKqWMSzv7fxOuLWg86IukGrPuWe/LsAqLS7fCE2VkkQ1zXODgl
+ +KLaEpAtUsgH5IBNk3csxiOXdksPHqkLvSTpcEppAJ+DelkXnxF0QuVRadeNSZ87xipn3
+ LLn6F7x0ztesI0qpuJXZ0EVifqIxamRhhAvmDslBUMnhkiZ+/jjxc9T4/3XCF1x1VNB8H
+ 4basW/gt+AETWl+hCIhMRppqlmWFivE6GnGMBmRKUFj/w7CgeMSURa0T1GdxC9+zPBg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=bootlin.com; 
  dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=z4Y7y4mb; 
+ header.s=dkim header.b=kGS3Lo15; 
  arc=none smtp.remote-ip=185.246.85.4
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
  helo=smtpout-03.galae.net; envelope-from=benoit.monin@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=z4Y7y4mb
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
+ header.a=rsa-sha256 header.s=dkim header.b=kGS3Lo15
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6A27C4055D
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:03 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1209B60BBB
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:13:54 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 1F1AF4E41113;
- Fri,  2 Oct 2026 13:14:02 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id B4B3D4E41111;
+ Fri,  2 Oct 2026 13:13:52 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id E5DD0603DC;
- Fri,  2 Oct 2026 13:14:01 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 8826E603DC;
+ Fri,  2 Oct 2026 13:13:52 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 11CBE10328255; 
- Fri,  2 Oct 2026 15:13:50 +0200 (CEST)
+ with ESMTPSA id E585910328262; 
+ Fri,  2 Oct 2026 15:13:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1790946835; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1790946826; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=z8zni5n2/e1GfUbU2zv1TWn7LX1kI1GA6LzRaXUPAGs=;
- b=z4Y7y4mbNaFU4/RoLx/BjsSa9Y4SncOqQWpYykI6uJKcOb09VLfC91QawsLwNWTS2ifaLu
- tnYjAddz39t/BJXbOHPCtl5hyjrpwo6EitZsWN/B263oiNGtiyvu5bg6b2EGunlg3T/I9+
- hFkSMBc/et/ZsSM3b6H9P7IdQbXM0BCCrN5DOl0wflTvZdxGY48zH7QPCAWt9lhlth/Sdb
- wGex8matM/vM0E1usakH6M2b3dhqABIQPUUV/hW07z5AGG7v43NE0qp5tRquQSC22myX7S
- 5ENn/kidcwkhWX6Bxsx+uZgRdlwWXzrGf6JgFoqmFX73XxqBylIUuRmWjekyUA==
+ bh=rmsIEuJb3cYkce4WE5JnnUV99Lh6xpzAjJQ8sK4EZss=;
+ b=kGS3Lo15TGFjYnKesQFsKqQmsYLzgODb1nMXxy+Sg5nn6YwdY/dbiM2YCEGrzgHyjAE4EK
+ Jo9TkhahlVFnaDbQu/eL64MOmeGzW/v2yd9XDf7Cx5fMibygJnotM8Y5l880T0XRN4WdUt
+ II+Mrqc1ZpAHpY4WTVKZmU8WgL02rRmZ6fvJlHIfXiQHEcyLlNKOA014Uh3a99GTncNyon
+ ZRSbMUV4EnKFhXNKnupbC5yeX3TgBYr/hxL7yqBMWK7SalCsAihrOJ/LV8Bn7Cvmd3rdim
+ U4I2PBJON4hgkZfQdVYpEAAgpUQdSju8bovsL1mx4lc3ZF2ncGOszQkxdSz5ZQ==
 From: =?utf-8?q?Beno=C3=AEt_Monin?= <benoit.monin@bootlin.com>
-Date: Fri, 02 Oct 2026 15:02:21 +0200
-Subject: [PATCH 03/10] disk: efi: Reuse the GPT entries buffer with simple
- malloc
+Date: Fri, 02 Oct 2026 15:02:20 +0200
+Subject: [PATCH 02/10] reset: Add a driver for simple controller
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20261002-mt2824-v1-3-bc44cf0e0289@bootlin.com>
+Message-Id: <20261002-mt2824-v1-2-bc44cf0e0289@bootlin.com>
 References: <20261002-mt2824-v1-0-bc44cf0e0289@bootlin.com>
 In-Reply-To: <20261002-mt2824-v1-0-bc44cf0e0289@bootlin.com>
 To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
@@ -164,71 +163,190 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The simple malloc used in SPL has a no-op free(), so allocating the
-GPT partition entries buffer on every partition table read leaks
-memory. With repeated lookups, SPL can exhaust its small heap.
+Add a driver for simple reset controllers, where each reset line is
+controlled by a single bit in a memory-mapped register range.
 
-Keep a single cached buffer and reuse it while the allocation size
-does not change. The entries are re-read on every call, so the buffer
-is device- and LBA-agnostic.
-
-It is safe to reuse the same buffer in the single-threaded xPL context
-as the returned pointer is only ever handed out within a single
-partition-table lookup and every caller consumes or copies the entries
-before the next lookup.
-
-The change is gated on CONFIG_IS_ENABLED(SYS_MALLOC_SIMPLE), so builds
-with a real free() (U-Boot proper) keep the original malloc/free behavior.
+The implementation is derived from the Linux reset-simple driver. The
+controller logic itself is generic; the driver currently matches the
+Metanoia MT2824 instance and further controllers can be supported by
+adding their compatible to the match table.
 
 Signed-off-by: Benoît Monin <benoit.monin@bootlin.com>
 ---
- disk/part_efi.c | 25 +++++++++++++++++++++----
- 1 file changed, 21 insertions(+), 4 deletions(-)
+ MAINTAINERS                  |   5 ++
+ drivers/reset/Kconfig        |   8 +++
+ drivers/reset/Makefile       |   1 +
+ drivers/reset/reset-simple.c | 115 +++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 129 insertions(+)
 
-diff --git a/disk/part_efi.c b/disk/part_efi.c
-index d8b17ec2e91..8a57fe911c4 100644
---- a/disk/part_efi.c
-+++ b/disk/part_efi.c
-@@ -1141,7 +1141,7 @@ static int find_valid_gpt(struct blk_desc *desc, gpt_header *gpt_head,
- static gpt_entry *alloc_read_gpt_entries(struct blk_desc *desc,
- 					 gpt_header *pgpt_head)
- {
--	size_t count = 0, blk_cnt;
-+	size_t count = 0, blk_cnt, size;
- 	lbaint_t blk;
- 	gpt_entry *pte = NULL;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index eb4209bdea6..aed0dcc515a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1570,6 +1570,11 @@ S:	Maintained
+ T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-nand-flash.git
+ F:	drivers/mtd/nand/raw/
  
-@@ -1158,10 +1158,27 @@ static gpt_entry *alloc_read_gpt_entries(struct blk_desc *desc,
- 		  (u32)le32_to_cpu(pgpt_head->sizeof_partition_entry),
- 		  (ulong)count);
- 
-+	size = PAD_TO_BLOCKSIZE(count, desc);
++RESET SIMPLE DRIVER
++M:	Benoît Monin <benoit.monin@bootlin.com>
++S:	Maintained
++F:	drivers/reset/reset-simple.c
 +
- 	/* Allocate memory for PTE, remember to FREE */
--	if (count != 0) {
--		pte = memalign(ARCH_DMA_MINALIGN,
--			       PAD_TO_BLOCKSIZE(count, desc));
-+	if (CONFIG_IS_ENABLED(SYS_MALLOC_SIMPLE)) {
-+		/*
-+		 * The simple malloc has a no-op free(): keep one
-+		 * buffer and reuse it. The entries are re-read on
-+		 * every call, so the buffer is device- and LBA-agnostic.
-+		 */
-+		static gpt_entry *cache;
-+		static size_t cache_size;
-+
-+		if (cache && cache_size == size) {
-+			pte = cache;
-+		} else {
-+			pte = memalign(ARCH_DMA_MINALIGN, size);
-+			cache = pte;
-+			cache_size = size;
-+		}
-+	} else {
-+		pte = memalign(ARCH_DMA_MINALIGN, size);
- 	}
+ RISC-V
+ M:	Tim Ouyang <tim609@andestech.com>
+ M:	Leo Liang <leo.liang@sifive.com>
+diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+index db764ed5ace..be178125be6 100644
+--- a/drivers/reset/Kconfig
++++ b/drivers/reset/Kconfig
+@@ -149,6 +149,14 @@ config RESET_MESON
+ 	help
+ 	  Support for reset controller on Amlogic Meson SoC.
  
- 	if (count == 0 || pte == NULL) {
++config RESET_SIMPLE
++	bool "Generic driver for simple reset controller"
++	depends on DM_RESET
++	help
++	  This enables the reset driver for simple controllers where
++	  each reset line is controlled by a single bit in a memory
++	  mapped region.
++
+ config RESET_SOCFPGA
+ 	bool "Reset controller driver for SoCFPGA"
+ 	depends on DM_RESET && ARCH_SOCFPGA
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index 384f4336331..553260a71e8 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -21,6 +21,7 @@ obj-$(CONFIG_RESET_AST2600) += reset-ast2600.o
+ obj-$(CONFIG_RESET_AST2700) += reset-ast2700.o
+ obj-$(CONFIG_$(PHASE_)RESET_ROCKCHIP) += reset-rockchip.o rst-rk3506.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
+ obj-$(CONFIG_RESET_MESON) += reset-meson.o
++obj-$(CONFIG_RESET_SIMPLE) += reset-simple.o
+ obj-$(CONFIG_RESET_SOCFPGA) += reset-socfpga.o
+ obj-$(CONFIG_RESET_MEDIATEK) += reset-mediatek.o
+ obj-$(CONFIG_RESET_MTMIPS) += reset-mtmips.o
+diff --git a/drivers/reset/reset-simple.c b/drivers/reset/reset-simple.c
+new file mode 100644
+index 00000000000..5df16a341d4
+--- /dev/null
++++ b/drivers/reset/reset-simple.c
+@@ -0,0 +1,115 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Simple Reset Controller Driver
++ *
++ * Based on Linux reset-simple driver
++ */
++
++#include <dm.h>
++#include <reset-uclass.h>
++#include <linux/io.h>
++
++struct reset_simple_priv {
++	void __iomem *membase;
++	int nr_resets;
++};
++
++static int reset_simple_update(struct reset_ctl *rst, bool assert)
++{
++	struct reset_simple_priv *priv = dev_get_priv(rst->dev);
++	int reg_width = sizeof(u32);
++	int bank, offset;
++	u32 reg;
++
++	if (rst->id >= priv->nr_resets)
++		return -EINVAL;
++
++	bank = rst->id / (reg_width * BITS_PER_BYTE);
++	offset = rst->id % (reg_width * BITS_PER_BYTE);
++
++	reg = readl(priv->membase + (bank * reg_width));
++	if (assert)
++		writel(reg | BIT(offset), priv->membase + (bank * reg_width));
++	else
++		writel(reg & ~BIT(offset), priv->membase + (bank * reg_width));
++
++	return 0;
++}
++
++static int reset_simple_request(struct reset_ctl *rst)
++{
++	struct reset_simple_priv *priv = dev_get_priv(rst->dev);
++
++	if (rst->id >= priv->nr_resets)
++		return -EINVAL;
++
++	return 0;
++}
++
++static int reset_simple_assert(struct reset_ctl *rst)
++{
++	return reset_simple_update(rst, true);
++}
++
++static int reset_simple_deassert(struct reset_ctl *rst)
++{
++	return reset_simple_update(rst, false);
++}
++
++static int reset_simple_status(struct reset_ctl *rst)
++{
++	struct reset_simple_priv *priv = dev_get_priv(rst->dev);
++	int reg_width = sizeof(u32);
++	int bank, offset;
++	u32 reg;
++
++	if (rst->id >= priv->nr_resets)
++		return -EINVAL;
++
++	bank = rst->id / (reg_width * BITS_PER_BYTE);
++	offset = rst->id % (reg_width * BITS_PER_BYTE);
++
++	reg = readl(priv->membase + (bank * reg_width));
++
++	return !!(reg & BIT(offset));
++}
++
++static const struct reset_ops reset_simple_ops = {
++	.request = reset_simple_request,
++	.rst_assert = reset_simple_assert,
++	.rst_deassert = reset_simple_deassert,
++	.rst_status = reset_simple_status,
++};
++
++static const struct udevice_id reset_simple_ids[] = {
++	{ .compatible = "metanoia,mt2824-reset" },
++	{ }
++};
++
++static int reset_simple_probe(struct udevice *dev)
++{
++	struct reset_simple_priv *priv = dev_get_priv(dev);
++	fdt_addr_t addr;
++	fdt_size_t size;
++
++	addr = dev_read_addr_size_index(dev, 0, &size);
++	if (addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	priv->nr_resets = size * BITS_PER_BYTE;
++
++	priv->membase = devm_ioremap(dev, addr, size);
++	if (!priv->membase)
++		return -EFAULT;
++
++	return 0;
++}
++
++U_BOOT_DRIVER(reset_simple) = {
++	.name = "simple-reset",
++	.id = UCLASS_RESET,
++	.of_match = reset_simple_ids,
++	.ops = &reset_simple_ops,
++	.probe = reset_simple_probe,
++	.priv_auto = sizeof(struct reset_simple_priv),
++};
 
 -- 
 2.55.0
