@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BE40CA5FCE
-	for <u-boot@archiver.kernel.org>; Thu,  1 Oct 2026 23:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32178CA5FCE
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 00:22:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F1EBC60863;
-	Thu,  1 Oct 2026 23:36:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CF70F605FD;
+	Fri,  2 Oct 2026 00:22:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id E4bSCzqWdCYK; Thu,  1 Oct 2026 23:36:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0381A6080F
+ id NgGvA3UFEXIj; Fri,  2 Oct 2026 00:22:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 26E4260B01
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790897801;
-	b=mwag7PS+wYa9HB1jtNUBLonQ9R+7Agkebbrd8YihqTVfBDuqeDAz7C2ZctF5RQoslagt
-	 UjyJWMC5tW7oqT3T6flUsPndCSjXwfgRsChzFUijOhJw+UCQZyVZa0Oe3qz+ZPihMy7hc
-	 FeL0YSoIL4kEkEUntvn4lV7QPf0/kMX0jc/WczmFtIdraCTW2ax0ENj1Uoric9CwI5j1v
-	 vNBQR/FHbuRNv5tsErR7JWFRbpe6Yyuzaa2eS1pmSxf9EfIpyndtC+dV9v6HwpYFGX8RN
-	 SXjDcMKg0con2r2vqEe3jLur1A/2BD3Hqxt+0g0Bg6OjGaMuCaZHIisPrzZ7ThMw3qw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790900559;
+	b=RTJZLrgP+ZTv7U6BVFXJxibTTsp63vpRVyp1ilRmtnB/QJ2WaNXxPVDeeX/tO2KilOz6
+	 VtEIpUzJ13tR+JRCbPGGuWLJG0dAoWQRJTQmOQkKJhQTHHNyVky8Pg4v0LgJiPpNFzznp
+	 yummfeM/Cr235W/iaFiauaH0SUtDOXP5mkICCc6jkTL4vG/FBN6KkvHnMFSvHW3TSMBHd
+	 rJtK7it1kBm533Id02QocTU2fH2Caep13aOWgtG2EN0CdqMKakEp+lR8BZmCiPfY+WQET
+	 PMKUmmIS/UKaDYI19wN0n28/Tt+uut3tmVGv21pSTKLohgyk+jJxrgU0VJb90ym4HCQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790897801;
+	c=relaxed/relaxed; t=1790900559;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,135 +32,136 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=CVLdafFHfk7fb33AcHw9lIQSS9d4rak8LT/IkxV+hnU=;
-	b=X3p04YkMAjctPvJyePUli9KvaYZv4KvM8uTtR9oYsdTkrT6/NXTH+oygYdKCSNnWsM53
-	 TA00Lt5ioezRz7UTPVN1AIrP7K0AD8rmGlig3CmhQ1JTnei6AjdWR9FZkfv0GgQ29ShMQ
-	 TogscphTrOvIcGpDCNGTpJn39pFv8NMJngxlCm5csy7UKPwxN7Cz55CDqfXseCO333aRm
-	 28y7f2kthxiinoo0PeHt7SvY2qdw5nzuuwtaIuGi6Ru1vGOdv+Q8RMP+khwHnnJ8+W+y/
-	 Mzx5YAbD7DBw4nPiB0oS93nbS6eqgLPTqDBV6vgeuI3KXlObM0RqjEvEBD0G+bQx9Rg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=rLDhAPTVjbnr3Ir8jJgJFhNXq9t7YuRU9KEidJMHEec=;
+	b=YnR5Ckz4PnPys52fE7XiCVVdhCpKorKVbQ1NL3oCJwjifZ1aeP4B5dPrKEolpIeTmFog
+	 as2M4Sgi8qeuRz8Ge7+12uy1j6buDyZWLeDzxUicur6U07/RzbUqnceR9I0knc6fce/8l
+	 FGLPsJ0/abmHFo7zOLt6Zp/Aix2PBaep692vSAaZjebYpSweLTqBJvpFKOvNZcbYxD24K
+	 1oyE20jtAtjSEErCFYCnWrJUxWO0HUFiQKhvqbUk3m2vb6RDatjmgigkn7ZtTxHCXmDHV
+	 faN9A/GNaElOC8gyuVbvAzPKuWo7xnbOkBMyVUq66c7AJ/PtobgjlBXrltmK6CGK+rA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=none header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=pSXuVAWE;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790897801;
-	bh=CVLdafFHfk7fb33AcHw9lIQSS9d4rak8LT/IkxV+hnU=;
+	d=lists.u-boot-project.org; s=default; t=1790900559;
+	bh=rLDhAPTVjbnr3Ir8jJgJFhNXq9t7YuRU9KEidJMHEec=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZtuaRi16yFZ1Bhqw9tsiJRuGsEXpBSmHcocIsqyMx2CMP9Y/YMKxZs1zXhkPHIwtE
-	 6LOEDztiaTRQtaPX1sNVKDCtK7dKTX96jrnYQjoA0ENXOp/nfnCLxRc9MY8lp/3u3I
-	 mcPHWoPo/1HX8NaD/KWPs1IPv3rBh62cWx7/ZFgzNlYXZZtQN8d2jGHIhMKWLoNo6Z
-	 JyyykFH/tQdSiM44tuSN6d5oOvogMCuZXoGftnfNHtt4YV1NWnT/2Y2qx6H3AHv+Zj
-	 DBtQn/z0NHXXLLtfT8QZPNgPD4eMmcuK5tF30nZ7N6g+KBuJw78+w2/hsr1FC92Fn/
-	 +IMw4i9zr8S7A==
+	b=OdhAFt9rXrJWw9xSZN+9VJhGeRs5l8RXYRQZUUkYcsvcLm4jSFWXjUMNRietLqlRJ
+	 xOy3k2RHrFIh6N2y6g9WwfFn5KusnFcoaAGIo1/1cWZbQOMXx0cDt0CqQ3OXWwBzC2
+	 UpPWPVcB8y8hXthwsqsPdiot+NT6MrgpYhfJuVPNjHpKPtBqQgrbHATSM7wtc4kP0k
+	 4TjJOD3Ijl2jNMnoHr+/LLrakt19yk0QjLSaHsy+SsUEHy5TrP66u1uY6ymbscD56c
+	 l1VgQ2QXWrHHtCjSVkvmusj7vSgOtch1hFfROEjjZBqgXuWjodjzp7+hEhkBBGDDvP
+	 orGtSKXg2gGcQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0381A6080F;
-	Thu,  1 Oct 2026 23:36:41 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 831C43AC
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 23:36:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 26E4260B01;
+	Fri,  2 Oct 2026 00:22:39 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6FE9032F
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 00:22:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6FA5540B4C
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 23:36:37 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5555B60B01
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 00:22:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZmuC4Xtkq1e9 for <u-boot@lists.u-boot-project.org>;
- Thu,  1 Oct 2026 23:36:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B16C240B48
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:31::e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790897796;
- b=Zlr9zVb16wm09nxHizqvxQPE1/EWvzvvd+W7eBmGCDexKNU/WfHCEZwoZaglI7EKkEsN
- DCFxR0mihc4ik0GyvRylCpIpNWVlohXIABwZwjcbJuhni2iP8h9+MkDhNR5RGZYfJ5fD4
- 9neuy4uRWxJFLUHrjWjr3s/zUF4ZwdLxLqh1zJu/V6olq3vA2wyvqwzWE9SAf4UrQmOYb
- /MzVBgEotzoBojfIPzWiRb3NIxX/hXA1DrbmIIicKYeyXchrXVHMyyzpKJtWWE2YXmoVS
- 2GNCdD32hWUuKOhFAg7hKIY13OH/2bNAUsoIJsd45IY9S/wTfZ1SMiBuuKYf/Eh3lDQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PFHrozKhzMw8 for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 00:22:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 873C460880
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:32::11"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790900557;
+ b=eTSWTZNYTUPfxc2CyKByiClkVU6SIqo9vaOzeTHEK7VGfI84oUImM31BF7KJwVHgch6C
+ LEDTQSUA6Dyl/bIFce4PkwaXPEPclEjaWqHpzM8BSB+SkgcBzblTSkRmCAO/iPvj0A9nS
+ rcERRH/APkAwXAqD3dpe2s3ARk2+ufBYxDzmbW1J88TYiSqGWtD0GJJ0YEflAsAX3JHNT
+ 8CM4syBjbsR6/R2+XdHoDjaeEIYUSJ3fCvoh9ak2YjzWpY7p6FmzNYlQGidA26hfS4Dpz
+ Dggl/WINGgAndSQkigoR3RNwi5onPTFXFCIcjL8kWgSn8DzUihtyH2bRYKHZImkvjZw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790897796;
+ c=relaxed/relaxed; t=1790900557;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
  Content-Language:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding;
- bh=CVLdafFHfk7fb33AcHw9lIQSS9d4rak8LT/IkxV+hnU=;
- b=PaYMmFHI/XVG9d8sZ/t2ydlo8HIFvmf1oDu4jkZfbvtk3do3jc2teu3CPxONDx0ck9Z3
- zwz4T757qHrHCW8z08V2WJHiuTqG/iPRT2kX/a6c0fLEUzejP4ANuVMt6+wG6pK6SKKcN
- vb9nlRhshV5sNubXXS0xcFuepk3L+T+0LapLbLQud+Ta13o9y2DRCQ0Py2NRTvUmeerOC
- LuRc4Mb9EaRBwlzcItuBR26lDVk21xGHv0ZZFBqp65rh0drEZF3S0clnZ7aq/KmnF5bXN
- sI0+MC6NE+NpdQQEaNqs+K6A0Xlt/1rHJNb3StPhsaRsisVH/7ZmU3+N008e6JYJSWw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=rLDhAPTVjbnr3Ir8jJgJFhNXq9t7YuRU9KEidJMHEec=;
+ b=YQRtRStdRDQTozlxWn2J0M7P2W/CDJJ2R8WE3GV/2dY6O3OQD2eE6obU4lJ/FrXCMVyJ
+ E0pp2ZWgPdhcW30C1KbhLldlX8d5bQdHLawYzMl7h1Xv4lTHPSPvLvhurMSwXYap6zlsg
+ zxvJIRbnfDGfcnflBEEnQUI3RqvaYC1OI+PEBwJQRg+LCToG6TAMl9AyUWcWR3WEZI6Yq
+ x22+RrFZx38rwJgcbyxy1+OBnn/8NlsIdhmyxAI/qM+Zn0kLfYH0Zgjh9RDdiPmig+MBV
+ dPaDwiDsYaJabMRgviT5dHIsqnAkbl7RuB8sJ773HVO61XLoD0ELZYP//173XzVR48g==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=js+xevZ6; 
- arc=none smtp.remote-ip="2607:f8b0:4864:31::e"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::e;
- helo=mail-oo2-x0e.google.com; envelope-from=dlechner@baylibre.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+ header.s=google header.b=pSXuVAWE; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:32::11"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:32::11; helo=mail-oi2-x11.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=js+xevZ6
-Received: from mail-oo2-x0e.google.com (mail-oo2-x0e.google.com
- [IPv6:2607:f8b0:4864:31::e])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B16C240B48
- for <u-boot@lists.u-boot-project.org>; Thu,  1 Oct 2026 23:36:34 +0000 (UTC)
-Received: by mail-oo2-x0e.google.com with SMTP id
- 46e09a7af769-81b8e8e9cb0so3941042a34.3
- for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 16:36:34 -0700 (PDT)
+ header.s=google header.b=pSXuVAWE
+Received: from mail-oi2-x11.google.com (mail-oi2-x11.google.com
+ [IPv6:2607:f8b0:4864:32::11])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 873C460880
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 00:22:35 +0000 (UTC)
+Received: by mail-oi2-x11.google.com with SMTP id
+ 5614622812f47-4c4923c9429so3492955b6e.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 17:22:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790897794; x=1791502594;
+ d=baylibre.com; s=google; t=1790900554; x=1791505354;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=CVLdafFHfk7fb33AcHw9lIQSS9d4rak8LT/IkxV+hnU=;
- b=js+xevZ6Ais+LGwA00KDpfyC8lrx0viXOxr7m2f4Ys/lLEApzDgs0W8Ab9Xx/hb+SK
- LB/keiBg4TfGqXSzsumZ/jJSgTWuk3payTS7/TnbRwI/dtoa6kVKryAXILecSofGI01L
- Y5b7BdK4P7LnPH632R7e7kRQre/0MoiFNhQ3AWw85+O9ympmbXDquT9iN9dr8Jz5G3GY
- zeEZhTdE7SS7LhWlAT1RXkSzI7lwiopxAHFNxB3AkYiDt5EUbT25vgLarGVxdhdGwG86
- jlM0tHLNIRuG3tF0MXg78QDSmRYrP63vdSaIh3gacGEA8R8ZzApW4jfKUn27/0KmnDcN
- K9Dw==
+ :content-type; bh=rLDhAPTVjbnr3Ir8jJgJFhNXq9t7YuRU9KEidJMHEec=;
+ b=pSXuVAWExhxi1E142rbwaaxhymKvwxCa7aYxRHphyLl6aXmT0zbd/Yjfqf3YMokv8j
+ 93opl5cPCC5qi6SwFNGdV/XD2RkvgsMFjQwxVh+zmsdw7nZLiLHbdkE3ptfgrOMayu/b
+ nhP6Kv7qgQvWHLjxNvmF4QMyxydGzUMh4SiwWDujn+AvZBUY/KDFJtG4UMjPp+Ao+4rU
+ nu2hORuSx2rErIaKNc3ZxjjcpQiBsHwiSz6eYyPINQN3kOlOyv9XDMWEhFm8vRhUcVS9
+ ftm7ajwFrLiwNwpxQELoowxDgbiHFCx6Ronwwrb6HYnN16ERLhn1DWJJsMbueKF88Ok/
+ QbVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790897794; x=1791502594;
+ d=1e100.net; s=20260707; t=1790900554; x=1791505354;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=CVLdafFHfk7fb33AcHw9lIQSS9d4rak8LT/IkxV+hnU=;
- b=aWfaHp9V0QBY13QYh+lHto/tT9eeQHJTCQf/dnx+VtZ20uv3taPkuPMnK3XfhvXi6d
- HeeptOewf34SRJRv9d1Wt5dYYWbB/XsehlW5xwcdcILafYKvGqyOd41qFGWrJVS/dq1H
- 0JYsBf6MDdOk6hrzLAfIoTIN88aEB4BupgOAZ5BVcAddyhQaGE/qfe2xiQZHxsKExZ8z
- NZw71qJFNR5VPTeg67gumYVEkOqpTslV/0ed2VvZkA0raevCUg05Yu9aYCwJwfFI0fOb
- 6grdFJPQ1nUBsYdojXOdPRkcJJQsSI1ehpIi96fS9iVQHbvOX2QwgVQKCt/nZCwa0oQk
- MZVQ==
+ bh=rLDhAPTVjbnr3Ir8jJgJFhNXq9t7YuRU9KEidJMHEec=;
+ b=ySQMu1TNvNeZSssZtOEpGEC2y8rhrweAz+fhOs7DOG9elfnpplGOmF6kqa1wY/SAaY
+ hLL4NKdZ+lrf3n/uJTzS+OlNBi1iJdJm/wZBCX+huV9YhrbIvYFRo4i84D5WvBNu/Ta5
+ JrIG2w1Rgi4K0p5k4imoQRiXAVUQZ3jDkfzw3LeEoDvy9e2c3OlkBPsfK9bg5dunw9TA
+ QKotTFniZrmBlkuMGw60fDl5MxMDIXBCgPMeJI/mBeXa6n6lkaLVLrwqc/BFLo9mevsk
+ PgJKykRbGNdjpxtuYVExcGzD62VlK+saRnnq2f1F8afvYALq9R7E4b7Ihxl1pgFGYqfZ
+ nzXA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwWZNum5ShwVP8hLOnYm4Ejffose18XrqFo5U4da6oX88if+5Wi53EEY3UuoO5kXcHTdbYFzaw=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lc73mJ1cCFiE1UGGMKnVaHkh8c9c3TUU+M1lA12SbdC64QF8HF
- wf2ffsWyRT6MPSGpBQUoLU7GYngMqL0+gK9LVzUoCNnH5jJxWm4sUeuLLm5a4J6L7ZY=
-X-Gm-Gg: AYBFou0237441R1GvgL9F0hHtGXKIDhDiSS+BZcKkKt0x6sNOa5TFspH4zxhZqu3Sfi
- Rt94iZTB69A3TAP3/EHS9Li4jT1c7nuKHaGwpVAKmtPmZZK8pHVtszK0Bu99fYRFBLJsuD+tjlO
- UAa6bdAIDOD9o7JAJIVg3J5BXebO2gxamtiN2Z/FkM8lwRN2pihYutrFyXZ/CNXoej3SfszZIDc
- PsfdxH2+AOk/WmAz3F9fiJykP/SQxpv+te35H9lcycD9CPCYnl2CU3s3Tkh3WoLsBA0iBXt9psA
- abyyrFLmss2kfgNFlSIbotArvHAliqtlV3OqVSCcBPl0+15kOUe67SZPvr5/1kQ03NeB0SU0yTy
- 1ICSY6rNvCWImSpQ8p+Kf6ivjif9mP4hxFklhkODhqKZ0Bc0R42snTPTc+WoHKpSdzdSTb4dUKr
- 0ZZ4Ic+iz1vIcrlHgXZtfqrAFta1jvkVs7sz5CGi987TwRhYRvDBOB5LBrOdNOVL57SCzmD3qGq
- AakKDKtYQuSFbAXUmF7H+DMOBlFcg6RI/thux4xD4fnL+4K
-X-Received: by 2002:a05:6820:806:b0:6b7:2cab:be91 with SMTP id
- 006d021491bc7-6df2f6ffc1bmr981594eaf.10.1790897792318; 
- Thu, 01 Oct 2026 16:36:32 -0700 (PDT)
+ AKwUvByhkH/QkUczLdWOwHCRf5SnlmfOaiF9dScHQdThWwfhPivRq+SxuoeDH17LO00Bv6EhwL6ejmY=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lIiDTLQaJZTZ8tmuUpjZDwWTxmPqN7+wmQy/wrzfJrart0Q5rG
+ 1aENy9jclCHEtWqkY7PRToF5EMwE6HGSBe6L0Cy++AChhSNP28cssQDdn94i4x/S9pM=
+X-Gm-Gg: AYBFou3DpVlT1D6WrS2bQo7nY9fjiDYmnJuf+1IviNBkoDBYVXM8V78hcpBfdN7RN4l
+ YQu6yxpHCt+37/1uwVeHCI8KYhVqdLemczZSvlhHhTbiItY42h/32Mmi5bXSDosAvplcpz6eeqH
+ IOdC8yP8sbeXORAx6HK0rNmv4pVY+o+d/rgkvou1sCWLHjWbMrr+sdH5FPDZ8gBAV2TjYWPZe/7
+ ezNaYrOQJhHVPp/sjq5vg2SmrGNfHfGmN80c8gBpx86NWsMWVL+6dZDv1ant+ZfQxl4/Z5+YJmh
+ kYKOYRDisz9BNHVM7dEOjIgb7yFp4seXERkFeKqP0xlSGBnI/+0kKN//cGCiUj3vOFHRlSZSa22
+ i7XN3gC9DcUx6lZHDsdtnCgbyLU26mHrsFGAmMPn2YstDPCHQsrqs6+I4n9qSwucaIlF8O1eHsh
+ 8xiH0ucr6mqsWYnyKVwaJfQlEErPkPJihfFN3uckWFi3RIJ1n4gLPC01hvU1T6Qe4/LlW3vWf6h
+ uSXmam6mtPfqroEv3dyx6jHjIeEUVlDJ6WQWe2geI9/zn1o
+X-Received: by 2002:a05:6808:4fcc:b0:4b9:e65b:8c33 with SMTP id
+ 5614622812f47-4f529905f6amr1052481b6e.33.1790900554690; 
+ Thu, 01 Oct 2026 17:22:34 -0700 (PDT)
 Received: from ?IPV6:2600:8803:e7e4:500:b543:49c5:7c72:a244?
  ([2600:8803:e7e4:500:b543:49c5:7c72:a244])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6df3a2c4a26sm739493eaf.3.2026.10.01.16.36.28
+ 5614622812f47-4f523d9ea7csm944789b6e.4.2026.10.01.17.22.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Oct 2026 16:36:30 -0700 (PDT)
-Message-ID: <c6fbb920-b5d4-4430-9871-1e8ae128fc1c@baylibre.com>
-Date: Thu, 1 Oct 2026 18:36:28 -0500
+ Thu, 01 Oct 2026 17:22:34 -0700 (PDT)
+Message-ID: <e1d13aac-cab9-414c-9e60-8f03d09188cb@baylibre.com>
+Date: Thu, 1 Oct 2026 19:22:33 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/13] memory: mediatek: mtk-smi: support smi_common and
- the larb ports
+Subject: Re: [PATCH 02/13] video: mediatek: add ovl component
 To: Julien Stephan <jstephan@baylibre.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  u-boot@lists.u-boot-project.org
@@ -173,10 +174,10 @@ Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  Julien Masson <jmasson@baylibre.com>,
  Pavlo Yadvychuk <pyadvychuk@baylibre.com>
 References: <20260928-mt8365-mt8366-add-dsi-support-v1-0-212f51b1742b@baylibre.com>
- <20260928-mt8365-mt8366-add-dsi-support-v1-1-212f51b1742b@baylibre.com>
+ <20260928-mt8365-mt8366-add-dsi-support-v1-2-212f51b1742b@baylibre.com>
 Content-Language: en-US
 From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260928-mt8365-mt8366-add-dsi-support-v1-1-212f51b1742b@baylibre.com>
+In-Reply-To: <20260928-mt8365-mt8366-add-dsi-support-v1-2-212f51b1742b@baylibre.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -193,266 +194,17 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 On 9/28/26 10:08 AM, Julien Stephan wrote:
-> The DMA masters of a display pipeline reach DRAM through an SMI local
-> arbiter, and the larbs themselves through the smi_common block behind
-> them, whose clocks must be ungated as well. Drive it with a second
-> driver in the same file, found through the "mediatek,smi" phandle of the
-> larb, and reference count both: several masters share a larb, and
-> several larbs share an smi_common.
+> The overlay (ovl) is the entry point of the video pipeline on some
+> MediaTek SoCs, such as the MT8365 and the MT8366: it reads the layers
+> from DRAM and blends them into the stream handed to the rest of the
+> pipeline.
 > 
-> U-Boot has no IOMMU driver, so those masters address DRAM directly: add
-> a helper taking one larb port out of the translated address space, which
-> the overlay calls once its larb is ungated.
-> 
-> On some generations, such as on the MT8366, the port mmu_en bits of
-> SMI_LARB_NONSEC_CON live in the secure world, so clearing them from
-> U-Boot has no effect, as the Linux driver spells out:
-> 
-> 	/*
-> 	 * When mmu_en bits are in security world, the bank_sel still is
-> 	 * in the LARB_NONSEC_CON below. And the mmu_en bits of
-> 	 * LARB_NONSEC_CON have no effect in this case.
-> 	 */
-> 	if (MTK_SMI_CAPS(flags_general, MTK_SMI_FLAG_CFG_PORT_SEC_CTL))
-> 		arm_smccc_smc(MTK_SIP_KERNEL_IOMMU_CONTROL,
-> 			      IOMMU_ATF_CMD_CONFIG_SMI_LARB, ...);
-> 
-> Ask the secure monitor for an empty mask of IOMMU ports, matching the
-> physical addresses U-Boot hands to the DMA masters. As in Linux, the call
-> is only made once the larb clocks are on, from mtk_smi_larb_enable().
-> 
-> Four compatibles are added:
-> 
->  - "mediatek,mt8186-smi-larb", the generic fallback the MT8365 larbs
->    carry behind their SoC specific string, so a single entry covers
->    every SoC reusing that larb generation,
->  - "mediatek,mt8366-smi-larb", which the MT8366 larbs carry on its own
->    as that SoC is not upstream yet. It is the only entry with driver
->    data, since it is the only one needing the secure monitor call,
+...
 
-Upstream Linux sets the MTK_SMI_FLAG_CFG_PORT_SEC_CTL flag for mt8188 and
-mt8189 also. So it is not that these don't have the bit. It is just that
-apparently these work by default without it (at least HDMI on mt8188, I
-would have to go back and test DSI on mt8189 without it to be sure - mt8189
-is not added in this patch anyway).
+> +#define DISP_REG_OVL_CLRFMT_EXT	0x2d0
+> +#define OVL_CON_CLRFMT_BIT_DEPTH_MASK(n) (GENMASK(1, 0) << (4 * (n)))
+> +#define OVL_CON_CLRFMT_BIT_DEPTH(depth, n) ((depth) << (4 * (n)))
+> +#define OVL_CON_CLRFMT_8_BIT		0
 
->  - "mediatek,mt8365-smi-common" and "mediatek,mt8366-smi-common" for
->    the smi_common driver. Neither node declares a generic fallback, so
->    both SoC specific strings have to be listed.
-> 
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> ---
->  drivers/memory/Kconfig   |   1 +
->  drivers/memory/mtk-smi.c | 223 ++++++++++++++++++++++++++++++++++++++++++++---
->  include/mtk_smi.h        |  19 +++-
->  3 files changed, 229 insertions(+), 14 deletions(-)
-> 
-> diff --git a/drivers/memory/Kconfig b/drivers/memory/Kconfig
-> index a3b7c722070..772b315d41b 100644
-> --- a/drivers/memory/Kconfig
-> +++ b/drivers/memory/Kconfig
-> @@ -23,6 +23,7 @@ config ATMEL_EBI
->  config MTK_SMI
->  	bool "MediaTek SoC Memory Controller driver"
->  	depends on ARCH_MEDIATEK && DM
-> +	select ARM_SMCCC
->  	select MEMORY
->  	help
->  	  This driver is for the Memory Controller module in MediaTek SoCs,
-> diff --git a/drivers/memory/mtk-smi.c b/drivers/memory/mtk-smi.c
-> index b90f5cc135f..caba8b5c72a 100644
-> --- a/drivers/memory/mtk-smi.c
-> +++ b/drivers/memory/mtk-smi.c
-> @@ -1,47 +1,204 @@
->  // SPDX-License-Identifier: GPL-2.0-only
->  /*
-> - * MediaTek SMI local arbiter (larb) driver
-> + * MediaTek SMI larb and smi_common driver
-
-I would leave "local arbiter (larb)" in the comment for those that don't
-know what larb means.
-
-
-> +static const struct udevice_id mtk_smi_common_ids[] = {
-> +	{ .compatible = "mediatek,mt8365-smi-common" },
-> +	{ .compatible = "mediatek,mt8366-smi-common" },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(mtk_smi_common) = {
-> +	.name	   = "mtk_smi_common",
-> +	.id	   = UCLASS_MEMORY,
-> +	.of_match  = mtk_smi_common_ids,
-> +	.probe	   = mtk_smi_common_probe,
-> +	.priv_auto = sizeof(struct mtk_smi_common_priv),
-
-nit: I would not bother to align these. Alignment tends to break over time.
-
-> +};
-> +
->  int mtk_smi_larb_enable(struct udevice *dev)
->  {
->  	struct mtk_smi_larb_priv *priv = dev_get_priv(dev);
->  	int ret;
->  
-> -	/* several DMA masters can sit behind the same larb */
-> +	/* one larb feeds several DMA masters, only the first ungates it */
->  	if (priv->enable_count++)
->  		return 0;
->  
-> +	if (priv->smi_common) {
-> +		ret = mtk_smi_common_enable(priv->smi_common);
-> +		if (ret)
-> +			goto err;
-> +	}
-> +
->  	ret = clk_enable_bulk(&priv->clk_bulk);
->  	if (ret) {
->  		dev_err(dev, "failed to enable clocks: %d\n", ret);
-> -		priv->enable_count--;
-> +		goto err_disable_common;
-> +	}
-> +
-> +	/* as in Linux, only talk to the secure monitor once the larb is on */
-> +	if (priv->data && priv->data->port_sec_ctl) {
-> +		ret = mtk_smi_larb_bypass_iommu(dev);
-> +		if (ret)
-> +			goto err_disable_clks;
->  	}
->  
-> +	return 0;
-> +
-> +err_disable_clks:
-> +	clk_disable_bulk(&priv->clk_bulk);
-> +err_disable_common:
-> +	if (priv->smi_common)
-> +		mtk_smi_common_disable(priv->smi_common);
-> +err:
-> +	priv->enable_count = 0;
-> +
->  	return ret;
->  }
->  
-> @@ -60,23 +217,67 @@ int mtk_smi_larb_disable(struct udevice *dev)
->  	if (ret)
->  		dev_err(dev, "failed to disable clocks: %d\n", ret);
->  
-> +	if (priv->smi_common)
-> +		mtk_smi_common_disable(priv->smi_common);
-> +
->  	return ret;
->  }
->  
-> +void mtk_smi_larb_port_set_pa(struct udevice *dev, unsigned int port)
-> +{
-> +	struct mtk_smi_larb_priv *priv = dev_get_priv(dev);
-> +
-> +	clrbits_le32(priv->base + SMI_LARB_NONSEC_CON(port), MMU_EN);
-> +}
-> +
->  static int mtk_smi_larb_probe(struct udevice *dev)
->  {
->  	struct mtk_smi_larb_priv *priv = dev_get_priv(dev);
->  	int ret;
->  
-> +	priv->base = dev_remap_addr(dev);
-> +	if (!priv->base)
-> +		return -EINVAL;
-> +
->  	ret = clk_get_bulk(dev, &priv->clk_bulk);
-> -	if (ret)
-> +	if (ret) {
->  		dev_err(dev, "failed to get clocks: %d\n", ret);
-> +		return ret;
-> +	}
->  
-> -	return ret;
-> +	/*
-> +	 * Not every smi_common block is handled by this driver: where it
-> +	 * isn't, its clocks are already ungated by the time the DMA masters
-> +	 * run, so having no device for it is not an error.
-> +	 */
-> +	ret = uclass_get_device_by_phandle(UCLASS_MEMORY, dev, "mediatek,smi",
-> +					   &priv->smi_common);
-> +	if (ret) {
-
-This would ignore fail-to-probe errors since it caused the device to be
-probed if it was not already. Should probabaly only allow -ENODEV and
--ENOENT to mean that it is already bound to another driver or there is not
-such a node.
-
-> +		dev_dbg(dev, "no smi_common device: %d\n", ret);
-> +		priv->smi_common = NULL;
-> +	}
-> +
-> +	priv->data = (const struct mtk_smi_larb_data *)dev_get_driver_data(dev);
-> +
-> +	return 0;
->  }
->  
-> +/*
-> + * The MT8365 larbs also carry the generic mediatek,mt8186-smi-larb
-> + * compatible, which is the one matched here. The MT8366 ones only have
-> + * their own, as that SoC is not upstream yet.
-> + */
->  static const struct udevice_id mtk_smi_larb_ids[] = {
-> -	{ .compatible = "mediatek,mt8188-smi-larb" },
-> +	{
-> +		.compatible = "mediatek,mt8186-smi-larb",
-> +	},
-> +	{
-> +		.compatible = "mediatek,mt8188-smi-larb",
-> +	},
-> +	{
-> +		.compatible = "mediatek,mt8366-smi-larb",
-> +		.data = (ulong)&mt8366_larb_data,
-> +	},
->  	{ }
->  };
->  
-> diff --git a/include/mtk_smi.h b/include/mtk_smi.h
-> index b0166b37538..4c904d8bfe1 100644
-> --- a/include/mtk_smi.h
-> +++ b/include/mtk_smi.h
-> @@ -15,8 +15,11 @@ struct udevice;
->   * mtk_smi_larb_enable() - ungate an SMI local arbiter
->   * @dev: larb device
->   *
-> - * Enable the clocks of the larb so that the DMA master behind it can reach
-> - * DRAM. Calls are refcounted, so several masters can share one larb.
-> + * Enable the clocks of the smi_common block behind the larb, if any, then
-> + * the larb ones, so that the DMA master in front of it can reach DRAM. On
-> + * the SoCs where the secure world owns the port mmu_en bits, also ask the
-> + * secure monitor to keep every port of the larb out of the IOMMU. Calls
-> + * are refcounted, so several masters can share one larb.
->   *
->   * Return: 0 on success, or a negative error code
->   */
-> @@ -27,11 +30,21 @@ int mtk_smi_larb_enable(struct udevice *dev);
->   * @dev: larb device
->   *
->   * Drop one reference taken by mtk_smi_larb_enable(), and disable the larb
-> - * clocks when it was the last one.
-> + * clocks, then the smi_common ones, when it was the last one.
->   *
->   * Return: 0 on success, -EINVAL if the larb is not enabled, or another
->   * negative error code
->   */
->  int mtk_smi_larb_disable(struct udevice *dev);
->  
-> +/**
-> + * mtk_smi_larb_port_set_pa() - take a larb port out of the IOMMU
-
-I assume that pa means "physical address"? Can we put that in the description?
-
-> + * @dev: larb device
-> + * @port: M4U port index within the larb
-> + *
-> + * Without an IOMMU driver the DMA masters address DRAM directly, so their
-> + * ports must be taken out of the translated address space.
-> + */
-> +void mtk_smi_larb_port_set_pa(struct udevice *dev, unsigned int port);
-> +
->  #endif /* _MTK_SMI_H */
-> 
+nit: inconsistent indent in this block
 
