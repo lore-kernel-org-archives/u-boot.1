@@ -4,159 +4,173 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66CE0CA5FC4
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 12:26:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC42CCA5FDD
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 12:26:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 67A8D40DA0;
-	Fri,  2 Oct 2026 12:26:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 42D4D40DA3;
+	Fri,  2 Oct 2026 12:26:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Z9-wKNvUI3St; Fri,  2 Oct 2026 12:26:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 13AF240DA8
+ id 9hpgcMvvgKqz; Fri,  2 Oct 2026 12:26:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 7589440DBC
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790943989;
-	b=TJy4O5D+MegjXvxGmTVjiaTfDVx63wbQ2htUAAyGAkhJawJa+ix9ncqz4W+yKsn9D7T5
-	 xITZtcRC0yJGMH1PTBUSdDNEfSm82ssOB3XpydrlRtTQx9R4B4BAUZd1pIDus+b3pmP9E
-	 qlSOsFyQo417uPFl0xNe55/JalFtrJ8JQNAoVVKlwx5hMPxjp3FA7Dpl/HHvGQ5GdX7m3
-	 rltk1bLBW7nUJvvoOSZg7wk/kV6IjrhCVktNFG3XytbjJqcFgRhUnnYt8LEdqQm28R9h8
-	 E0w0TzVMcWaAJpc9aeGY6hNu090uyna1ERuKkX+vNfpc7lq7fBVt1YXlpYJb9G4akgQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790943992;
+	b=ClAcbaA+kc6wLi9vcWXjqYpIQ6SvnUaaEGkTsRI31Kyihob0mUIKDhzAQpD5MF/s18GW
+	 OhKKq1aVyA0v6yoDasGOjL9A9UcKAQO6zxA24WheUBoLCipkfbtsokmhu+RuPDo2oD89n
+	 V0I7u0UNmIKn23I7QJwZo/ihUqL1eI7Id6W5fbIGCRt9hCAjDTRYVSJsoSf6MVMaeyznx
+	 pJAthV29+xjIxjKZSY20LTKYbYCaChM6or5LdA3/KjN44e6AkYzPBjzOs/pcyhevKodQJ
+	 relwKPAk/EB5ObMk3bi3ajeTGxU9/npRXXS6yK8KEQeql53/xV+wImVNuIZZte9cdUw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790943989;
+	c=relaxed/relaxed; t=1790943992;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:X-IronPort-AV:
-	 X-IronPort-AV:X-Amp-Result:Received:Received:Received:Received:From:
-	 To:CC:Subject:Thread-Topic:Thread-Index:Date:Message-ID:References:
-	 In-Reply-To:Accept-Language:Content-Language:X-MS-Has-Attach:
-	 X-MS-TNEF-Correlator:x-originating-ip:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=y5mJ0FgB+0C9y3X7L1wIBK3k35S2ODYpZgz0rIBqE34=;
-	b=emcViCPr8OkNfbUv4MTQuJpSkVivAkt1KVY34W3aL6eFR3NJeF2IG9Ka+KqhKba6zcci
-	 0Nh1VwcrJ+xeAKE4J9sKZd4vNcbpIkGrHs3e1a/v9p/naxy2tkE3ujZwCthxNetSrT6is
-	 XQ3lqJPb3UQn9T996QP5xHMRUtNU2ous73L2kfyz7ZV5qwvMSTLLkWLG9D97S355EeH4h
-	 YbVc4syNmT11toVydUVhD20ozFNLNLXZI+T9Przz3qJYskMZNtuvnX32hTNvg8SVNt8H9
-	 ZHfGHxOi+bXKuqA6/NJVDfsKRpL+rjNjI5Cj9I3Lwe53d0UEk54ebfCqSKXn5ylKIHw==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=qVLlzOqi4Bu5W4YAbkaR29OM8dslM69abB+OA678CmI=;
+	b=s+XpMIw+02umBJbzG3bKA+kUlfF25440eN1jVtRGpvPZV8GA4xDE2zTrNRN9Leyu2VM5
+	 U9S7OYqT8PECKr0ay9N2iGfL1sgwl6bVlUOxJ9lhe4+/IG/EYFxV9uiBonle/JKWvjQTv
+	 hN5r3hMCWp8LgpZcjm1ioOlh8nHsJUg8ix7RhHYqZ19eFHwNaFP4uPzsKqVWo7VURVNBv
+	 Yl0lUx9fbCC0Ut+s9uQFbKEZoerOsMBe8kMw2pGE0EcB7ctlCCRCvTXpyFqM7Yw3FDHud
+	 h28NGFAqmnoYJ5ggeqqrGGEO5hNF9SJ0Tm5j3kh3U170Q0rtQCwjncRGnG22MnW38dg==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790943989;
-	bh=y5mJ0FgB+0C9y3X7L1wIBK3k35S2ODYpZgz0rIBqE34=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=0GumNApgXn/gBcVnPf+lTASUqTQBafFYNHd5NOUWtK4VbGpNgXZjNk7S7cZVhGcTr
-	 gGNhMoo3AlNLIWm75QorfA875F0OLCDG2yosVKtBPfXcFdMVEXQ/8qdfzeD3pO96At
-	 SBaVTWCPejetMUW9UOICmB4vGcr3rfu6UFPx2U9H1tR22TcO6SW+u4jWKP/OGO4Us5
-	 5D2NiIeUWGjWg7p99CheNU0KUF6ppYgAtevsyQQLWP1K+DR3VuUINiIhREzjKEu5Jc
-	 KSXIkELWbbGqRCGP1Pv6OSWeD1ls0VD93rnG9978AHjTbu4W8aDkfNH1Z1qJzq8/kj
-	 cSLih6uFOcUpA==
+	d=lists.u-boot-project.org; s=default; t=1790943992;
+	bh=qVLlzOqi4Bu5W4YAbkaR29OM8dslM69abB+OA678CmI=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=TrFmLa4wQPMWZ8jkse2TCtpi4hFpWdfiMPBunHMehzlTZqi0+oODvB2oGNfNkip6K
+	 TZCs+3aq2AVvR15xbIvo680ZvIppolsNK+orIvY9ZiCoo+9uGJhv6nDovwpbGgsmfa
+	 uCiXstBoInsik19dw4ICPL5kMuEtVhu3yrXkNmiBa1rxDBI17Gwp7POTPaWcSC3dUk
+	 Zi/MpCxHDPHugKTVBfI9k6OrmG0jGOpBrgJfxWzQDbltRREDvkJWEuuMRAdnALt+bq
+	 IllfJ3B3a9BmQlwHFSpYn7xrxnhasdQR2bOVMblYQ0g+apOyuZPuXLqGiRNdaOYnWM
+	 KVP+xBbaZNJXA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 13AF240DA8;
-	Fri,  2 Oct 2026 12:26:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7589440DBC;
+	Fri,  2 Oct 2026 12:26:31 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7B36032F
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 07:16:06 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id F3F32282
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 07:34:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6090040382
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 07:16:06 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id E60B1400B3
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 07:34:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WdwITWrnq2s0 for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 07:16:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org DEC2B40057
+ id PN36GgMrR4rS for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 07:34:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 619BE40057
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:18f0:1e00:4::6"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790925365;
- b=iTWCp6IuHFAU6oVT15bsHQNRBfu17Q68xi6KKD0tiinWcPkDtFsyb5eKs9dsDVRhidkX
- c+rqZeA6Cl8MKSVQSLfUF6gdvom77cawwOiHp1K+fTtF1QCyw6vXPIk7CgwCfVzmtzAJI
- RjRD8FR9g19yRDjKUfe1hleQnALzJFBnFFBpKcVSythi/hs2mTGWD93oezYbncsDDIa3S
- bo6mGKZ9FFZxWutBPEhzV+amTgo9hPzC0Rg331vmF5EIfo8Dvk9Akz+VZUVeaOarSOLdp
- RtYXscnWlWMgkueDRpi4AUaGCeHGCweP6ghwpf0sRM/1qHcj919/szePLs9Sa2+giAA==
+ arc=none smtp.remote-ip=185.125.188.123
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790926473;
+ b=VeWSVP7F4C8KQuTLSxOHPnCt0fCq+haI411ZEma1m+oRdLkobiqXMs+raGI/Czj7/4lm
+ c7wUCQeN/UhXVSYO0GI3mtFDe929DqnR6x7oMGFBS/yUeQuwDClbo93izmN6Szn4wLbhx
+ GQyJ7agSxt93PvKTvNzcEXwVe/onS4vPkz04Bk8Tvo0O/pnrfZ+15RZBBdDiNmmd2tbtB
+ 7wnALplJQGDF1MdPshN1B3ED0V3NqtCNBNEkDR4sraHaELVyq+vTOdr7t8wmgKDUjr/qn
+ QS2pJbLYXXJ+1GM5apxJObt1HB8bnSIpx4BQPlDaJuQBg2cX8p3iSL7j66yyHEI6pCA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790925365;
- h=Received-SPF:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
- X-IronPort-AV:X-IronPort-AV:X-Amp-Result:Received:Received:Received:
- Received:From:To:CC:Subject:Thread-Topic:Thread-Index:Date:Message-ID:
- References:In-Reply-To:Accept-Language:Content-Language:
- X-MS-Has-Attach:X-MS-TNEF-Correlator:x-originating-ip:Content-Type:
- Content-Transfer-Encoding:MIME-Version;
- bh=y5mJ0FgB+0C9y3X7L1wIBK3k35S2ODYpZgz0rIBqE34=;
- b=rcg2lZtLY+lRmISPB17ts6M/yYO76kbaA0Yonq6A3AG93l4124XRSoNqEpvnptSmYjg8
- DEQJCvLeqCZe9auMeWYU3kQHhKnelQsqHJcWtqJSTS1b6C8OEIkoBFQ76A/a/RQwCiguA
- BYsqbVVuqa73N0Tcf63UMwhGCvqZ6vJM6+CAOtYSnQQFV++FGXpE16HzQJefLqiUKw7nA
- hXR21zFUMANGcPuxjzPmph+fZwc2Ezu26raPFd83bi5weHGCzCakEdqNYTTBI1UuA+0uh
- ggC3/gtIoq1Q5XVRMaptamdc1z0DDh34H0Y2ylc+MAqhZQMyuLwV4811oULiP6jMomQ==
+ c=relaxed/relaxed; t=1790926473;
+ h=Received-SPF:Received:DKIM-Signature:Received:
+ X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+ MIME-Version:Content-Transfer-Encoding;
+ bh=qVLlzOqi4Bu5W4YAbkaR29OM8dslM69abB+OA678CmI=;
+ b=OEBxNw5kwg+uNBqaiZbyEjpntjMF0jlfVLMMyMsLBGWddu3FMOxYV2Hny1B8j7IthRy8
+ mU5MGeupiS/13Z4f5ljx3kTo/Nxfkm4LrTZktjyKVhFGQkJJ+mKx9FePYBYVYzMDD8nxE
+ A8w5b8RazcZuOzAgDtoJaqXVFhPnxN+VIE+ucXhBYgo+Cqksd9ggV6bjRl+JcYpj2eFpA
+ MXdl9jRJtlX18ynnSJI9I8ylLt4rgfY2F6FEoNn3a4lBNnQOShBoyE6e2ZnXoGE/Voobn
+ MEqcBHYiHFZC2u/00I/9fC6gCs3zoCfUwkkSW7H6vR77zlkJ8GAB1EQVOjKFJCwfHeA==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=infineon.com; 
- dkim=pass header.d=infineon.com header.i=@infineon.com header.a=rsa-sha256
- header.s=IFXMAIL header.b=FsMLTbEy; 
- arc=none smtp.remote-ip="2a00:18f0:1e00:4::6"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:18f0:1e00:4::6;
- helo=smtp14.infineon.com; envelope-from=takahiro.kuwano@infineon.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=infineon.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=infineon.com header.i=@infineon.com header.a=rsa-sha256
- header.s=IFXMAIL header.b=FsMLTbEy
-Received: from smtp14.infineon.com (smtp14.infineon.com
- [IPv6:2a00:18f0:1e00:4::6])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DEC2B40057
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 07:16:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
- t=1790925365; x=1822461365;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=kxcDb2/62tyIBjTIv2vPM1JK7eL9hHsgWmN/j5gH0mU=;
- b=FsMLTbEyyztuLImbSRubJ4h0qBbjL6PlKYw7Gc94bJZnATKGbmtakd2J
- ENiKSd4LINru7X7PZqDatC+1Q09dyqT8q6Jb6Tpne+O8XBVg0XTZjrA02
- j1PqqL1QzdwNJ2XBXidYy4iORHOUxQJF1KjbQb986NexLH5asNnI9DoW+ M=;
-X-CSE-ConnectionGUID: OJ9raYPKTgmyFY6j9+U5aA==
-X-CSE-MsgGUID: NCM1T+g6Skium3lOB2GItQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11922"; a="149559433"
-X-IronPort-AV: E=Sophos;i="6.27,136,1787004000"; d="scan'208";a="149559433"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO MUCSE819.infineon.com) ([172.23.29.45])
- by smtp14.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2026 09:16:02 +0200
-Received: from MUCSE817.infineon.com (172.23.29.43) by MUCSE819.infineon.com
- (172.23.29.45) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Fri, 2 Oct
- 2026 09:16:01 +0200
-Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE817.infineon.com
- (172.23.29.43) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Fri, 2 Oct
- 2026 09:16:00 +0200
-Received: from MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14]) by
- MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14%12]) with mapi id
- 15.02.2562.049; Fri, 2 Oct 2026 09:16:00 +0200
-From: <Takahiro.Kuwano@infineon.com>
-To: <marex@nabladev.com>, <u-boot@lists.u-boot-project.org>
-CC: <jbx6244@gmail.com>, <js07.lee@samsung.com>, <trini@konsulko.com>,
- <tudor.ambarus@microchip.com>, <vigneshr@ti.com>
-Subject: RE: [PATCH] cmd: sf: Add rdreg and wrreg subcommands for SPI NOR
- register access
-Thread-Topic: [PATCH] cmd: sf: Add rdreg and wrreg subcommands for SPI NOR
- register access
-Thread-Index: AQHdTGoXA0JikWI6fkCrim2OW6ePJrbp0gFw
-Date: Fri, 2 Oct 2026 07:16:00 +0000
-Message-ID: <1629bc58ddad414fb223ed7348c4cbbc@infineon.com>
-References: <20260924211708.108526-1-marex@nabladev.com>
-In-Reply-To: <20260924211708.108526-1-marex@nabladev.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.161.6.196]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass header.from=canonical.com; 
+ dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
+ header.s=20251003 header.b=KBtzp24Y; 
+ arc=none smtp.remote-ip=185.125.188.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=KBtzp24Y
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 619BE40057
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 07:34:31 +0000 (UTC)
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
+ [209.85.216.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 3B1CE3F2A8
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 07:34:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1790926469;
+ bh=qVLlzOqi4Bu5W4YAbkaR29OM8dslM69abB+OA678CmI=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=KBtzp24Y0rTX8WOuFrsvjJHhX3OwAJzEK96Ad/jj3GRU1glCTPVwLekXFLg21brhP
+ v53FE0ozbrKxH58WPg0d8sIXuvisY/ToK9rZ0HEgl+3/DpIKmzr3H9lzPenNG0eJW3
+ 5cai+8m0LW6ClfMy5H2Vrxysg0w6liURzT9nF4FPytRGP/tW8gQNrtsmAXRmqeIomi
+ MOaYw3WVY7pEzhrkzWpSCmtO9T2L3bA/qOOsOk89zBsdde4ku0Jx8qeVKWuaKylNmw
+ iedZ1yiAcviIbHFHiiuG4nvxtIXDvUnVK77oGyuNltrL2Kxyrv+CERqkabvjCRmuic
+ jmFbrhlD7p0xnpg1UU02ugh7XSBFJdafRj6UmP/0xTtBKNFe2Ikj/Okh1zyEJfIFQ8
+ 70u0fP1Mdjgavsh60baqUmS/5zUxUMcfxIT96gUm6SPVAg3jEYhAy1N9KdgaU/RsZK
+ OkwaqWaM4SdJPXVs/1vsYb5CuiQ28MOlzhcK1lKRBPpqcJSraW737lNkbmor4K51xa
+ shLTojhKWb+gfzQbvq71787WNYpP4YZ87GDNUAaRkCHGu30y57h5ZLN161MN7NXCNh
+ Kfu+KL2yN6nKVI0qPLy2al4em2CgxDb5AVgrFTkKz24bB9m8FSHCy1i5Dwqyrm5hps
+ 7gNY2d1cKJ6Wmg3LHU7Pk3Ho=
+Received: by mail-pj1-f71.google.com with SMTP id
+ 98e67ed59e1d1-3a4e36d5a77so2440542a91.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 02 Oct 2026 00:34:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790926468; x=1791531268;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=qVLlzOqi4Bu5W4YAbkaR29OM8dslM69abB+OA678CmI=;
+ b=Vf8cIn0gaKI/sY59tp3oETQug8mgW9wfGEgOKH0mWPX1i9ofOSBRFsiOMvOsWaO7WG
+ 9c8bujWF8fRrqDGGsdMHlU+WDCly2p23/Mn5Cmj2k/kw4C1xESWv/4TQbaP4LWSQGdMs
+ 1N2OBZUwXDregFomCznQdEh1FBD9AG7TkVcEnuwLEFsf63BOwUGrAzchxNntFzNW5REy
+ qxjon0WGEWRvVXf6O9E9Is9Ys6zANHLOIfvKDzUfxOJbo02bI/xnMKvn8ZrlBnAA0Hnt
+ S0PWmUWnK1LHjy2ljmyUM+uLS1aoaMCV+U645sl267AYxcfDS1VVKsVDUXNjXfIdj/dt
+ hUSQ==
+X-Gm-Message-State: AFq9FYLmJfvfauk7thR2XATc2HT/RJhXzsulfhZhXiLFkir1WnXBzvAe
+ CxY9cRHNdPRRHyeJcwjC7RH5sa12FTdYmknbIKSPtZoe/2uFU4nYj6+2rNdrJf9uVFGK4BZzOnK
+ BsjoCKL8jXbAhWuholim0k4l2UainpcyBve5WVJhvtGcuiNih8BaF9A7a9Aw7fzQ2OOOR80APSv
+ U5xT8FwyjVqYNDy38CJA==
+X-Gm-Gg: AYBFou18FXliEiU3yNC1I3zjTLSDIQ1s72Nb81jeAlodCI2Ix0qs8tMrqnUFSFyPP98
+ KuxjN3enSSgf98PlvQeNgpknSjPLooyysPBqU7U7hBoL1uqFSYlXamk+zq2usckqYgJINetWSip
+ FIoN5XtCGbpRYvo2ukZl7wXY8DaELS7rBAepE1msttKzqUAdu096828E+kxMHcEGpwMLn1y7ql/
+ vdF6X4581dQxBiMB+6++h65ZJwNq8wIu6yybX6/DAbxGDYaJqjBDnXtC2AQ9MppjppInL0uE15k
+ CgngAoCh0uyI0Zfm6SEr7kxU2Jxckx/eEMfWUixQbdcXuTWrdupAB7MRxr3WsGLL2WpZazNLiAL
+ opr8A1cXxhvTFIa2SkCRLlS6ZfH9aVeiHe9+oGzTbTWRBA/2tmng=
+X-Received: by 2002:a17:90b:260b:b0:3a4:f1f9:1cb2 with SMTP id
+ 98e67ed59e1d1-3a6ce6b4005mr1954161a91.13.1790926467669; 
+ Fri, 02 Oct 2026 00:34:27 -0700 (PDT)
+X-Received: by 2002:a17:90b:260b:b0:3a4:f1f9:1cb2 with SMTP id
+ 98e67ed59e1d1-3a6ce6b4005mr1954148a91.13.1790926467247; 
+ Fri, 02 Oct 2026 00:34:27 -0700 (PDT)
+Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
+ [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3a6cd44c2c9sm3172004a91.6.2026.10.02.00.34.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Oct 2026 00:34:26 -0700 (PDT)
+From: Aristo Chen <aristo.chen@canonical.com>
+To: u-boot@lists.u-boot-project.org
+Cc: trini@konsulko.com,
+	Aristo Chen <aristo.chen@canonical.com>
+Subject: [PATCH v1 0/6] Drop duplicate macro definitions
+Date: Fri,  2 Oct 2026 07:31:50 +0000
+Message-ID: <20261002073357.382228-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 02 Oct 2026 12:26:15 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -171,300 +185,58 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Marek,
+Six files define one or two macros twice, with the same value and under
+the same preprocessor conditions: two SPI NOR opcodes, two SCSI opcodes,
+an ACPI PPTT cache type, two GT-64120 register offsets, an i.MX8 power
+domain name and two constants in the video test. An identical
+redefinition is valid C, so the compiler never warned about them. This
+series drops the second copy, one patch per file.
 
-> Add two subcommands, rdreg and wrreg, to read and write SPI NOR
-> registers respectively. The registers are always accessed using
-> register specific access opcode and arbitrary amount of data are
-> read from SPI NOR register and stored to memory or loaded from
-> memory and written to SPI NOR register. This is useful in case
-> the SPI NOR non-volatile registers have to be configured in some
-> non-standard way, or when debugging the SPI NOR configuration.
->=20
-> Example usage:
->=20
-> Read 6 Bytes of SPI NOR ID (Read ID opcode is 0x9e):
-> "
-> =3D> sf rdreg 0x9e $loadaddr 6
-> =3D> md.b $loadaddr 6
-> 00000000: 20 ba 20 10 44 00
-> "
->=20
-> Read Micron Nonvolatile Configuration Register (opcode 0xb5):
-> "
-> =3D> sf rdreg 0xb5 $loadaddr 2
-> =3D> md.b $loadaddr 2
-> 00000000: ff ff
-> "
->=20
-> Write 0xfffe (LSByte first) into Micron Nonvolatile Configuration
-> Register (opcode 0xb1):
-> "
-> =3D> mw.b 0x00000000 0xfe
-> =3D> mw.b 0x00000001 0xff
-> =3D> sf wrreg 0xb1 $loadaddr 2
-> "
->=20
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
+Three of them need a word of explanation. In include/scsi.h the two
+SCSI_SEND_DIAG copies also disagreed on the command type, optional in
+one table and mandatory in the other. SCSI-2 makes SEND DIAGNOSTIC
+mandatory for all device types, so the copy patch 2 keeps now says
+mandatory. include/gt64120.h was imported from Linux, which had the
+same duplicate until the fix for it was applied to mips-next [1].
+Apart from that, Linux has only changed the header's SPDX tag since the
+import, so rather than re-syncing, patch 4 drops the duplicate here as
+well. In test/dm/video.c both copies sit inside test functions,
+although check_vidconsole_output() further down uses SCROLL_LINES too,
+so patch 6 defines both constants once at file scope instead.
 
-I understand register access from CLI is useful for developing and debuggin=
-g.
-However, if we want to make this a generic debugging feature, we need to
-consider many vendor/chip-specific variations. For example, non-volatile
-register write require polling the status until completion (which is curren=
-tly
-missing from your implementation). Some registers require address cycles fo=
-r
-access. Some registers require latency cycles for reads, and so on.
+No functional change is intended. Built for sandbox, malta,
+imx8qxp_mek, imx8qm_mek, qemu-arm-sbsa, rpi_arm64 and evb-ast2600,
+which between them cover every touched file, all objects rebuilt by
+the series are identical before and after once debug info is stripped
+and the embedded version string and timestamp are held fixed, and so
+are the final images and the i.MX8 device trees. The only exception is
+test/dm/video.o, and with it the sandbox binary: its assertions record
+__LINE__ values that patch 6 moves by three lines. Each patch builds
+for all seven boards, and the sandbox video tests pass.
 
-Unless we can support these known variations, I think this feature should
-remain a temporary local modification.
+The patches are independent of each other and touch different areas
+(SPI NOR, SCSI, ACPI, the GT-64120 PCI driver, the i.MX8 device tree
+bindings and the video test), so they can be applied one by one or as
+a whole. The series is based on next.
 
-Thanks,
-Takahiro
+[1] https://lore.kernel.org/all/20261001053016.76578-1-aristo.chen@canonical.com/
 
-> ---
-> Cc: Johan Jonker <jbx6244@gmail.com>
-> Cc: Jungseung Lee <js07.lee@samsung.com>
-> Cc: Takahiro Kuwano <takahiro.kuwano@infineon.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Tudor Ambarus <tudor.ambarus@microchip.com>
-> Cc: Vignesh R <vigneshr@ti.com>
-> Cc: u-boot@lists.u-boot-project.org
-> ---
->  cmd/Kconfig                    |  7 ++++
->  cmd/sf.c                       | 63 ++++++++++++++++++++++++++++++++++
->  drivers/mtd/spi/spi-nor-core.c |  8 ++---
->  drivers/mtd/spi/spi-nor-tiny.c |  8 ++---
->  include/spi_flash.h            |  5 +++
->  5 files changed, 83 insertions(+), 8 deletions(-)
->=20
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index ff90a87024c..562f85bead0 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -1783,6 +1783,13 @@ config CMD_SF
->         help
->           SPI Flash support
->=20
-> +config CMD_SF_REG
-> +       bool "sf reg - SPI NOR register access"
-> +       depends on CMD_SF
-> +       help
-> +         Provides a way to access SPI flash registers using register acc=
-ess
-> +         specific opcodes.
-> +
->  config CMD_SF_TEST
->         bool "sf test - Allow testing of SPI flash"
->         depends on CMD_SF
-> diff --git a/cmd/sf.c b/cmd/sf.c
-> index b5b7f671fb9..4426440045d 100644
-> --- a/cmd/sf.c
-> +++ b/cmd/sf.c
-> @@ -541,6 +541,59 @@ static int spi_flash_test(struct spi_flash *flash, u=
-int8_t *buf, ulong len,
->         return 0;
->  }
->=20
-> +static int do_spi_flash_reg(int argc, char *const argv[], bool rdreg)
-> +{
-> +       unsigned long opcode, addr, len;
-> +       struct spi_nor *nor =3D flash;
-> +       uint8_t *buf;
-> +       char *endp;
-> +       int ret;
-> +
-> +       if (argc < 4)
-> +               return -1;
-> +       opcode =3D hextoul(argv[1], &endp);
-> +       if (*argv[1] =3D=3D 0 || *endp !=3D 0)
-> +               return -1;
-> +       addr =3D hextoul(argv[2], &endp);
-> +       if (*argv[2] =3D=3D 0 || *endp !=3D 0)
-> +               return -1;
-> +       len =3D hextoul(argv[3], &endp);
-> +       if (*argv[3] =3D=3D 0 || *endp !=3D 0)
-> +               return -1;
-> +
-> +       buf =3D map_sysmem(addr, 0);
-> +       if (rdreg) {
-> +               ret =3D spi_nor_read_reg(nor, opcode, buf, len);
-> +               if (ret) {
-> +                       printf("Read command 0x%02lx failed (%d)\n", opco=
-de, ret);
-> +                       goto exit;
-> +               }
-> +       } else {
-> +               ret =3D write_enable(nor);
-> +               if (ret) {
-> +                       printf("Write enable for command 0x%02lx failed (=
-%d)\n", opcode, ret);
-> +                       goto exit;
-> +               }
-> +
-> +               ret =3D spi_nor_write_reg(nor, opcode, buf, len);
-> +               if (ret) {
-> +                       printf("Write command 0x%02lx failed (%d)\n", opc=
-ode, ret);
-> +                       goto exit;
-> +               }
-> +
-> +               ret =3D write_disable(nor);
-> +               if (ret) {
-> +                       printf("Write disable for command 0x%02lx failed =
-(%d)\n", opcode, ret);
-> +                       goto exit;
-> +               }
-> +       }
-> +
-> +exit:
-> +       unmap_sysmem(buf);
-> +
-> +       return ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
-> +}
-> +
->  static int do_spi_flash_test(int argc, char *const argv[])
->  {
->         unsigned long offset;
-> @@ -614,6 +667,10 @@ static int do_spi_flash(struct cmd_tbl *cmdtp, int f=
-lag, int argc,
->                 ret =3D do_spi_flash_erase(argc, argv);
->         else if (IS_ENABLED(CONFIG_SPI_FLASH_LOCK) && strcmp(cmd, "protec=
-t") =3D=3D 0)
->                 ret =3D do_spi_protect(argc, argv);
-> +       else if (IS_ENABLED(CONFIG_CMD_SF_REG) && !strcmp(cmd, "rdreg"))
-> +               ret =3D do_spi_flash_reg(argc, argv, true);
-> +       else if (IS_ENABLED(CONFIG_CMD_SF_REG) && !strcmp(cmd, "wrreg"))
-> +               ret =3D do_spi_flash_reg(argc, argv, false);
->         else if (IS_ENABLED(CONFIG_CMD_SF_TEST) && !strcmp(cmd, "test"))
->                 ret =3D do_spi_flash_test(argc, argv);
->         else
-> @@ -641,6 +698,12 @@ U_BOOT_LONGHELP(sf,
->         "sf protect lock/unlock sector len      - protect/unprotect 'len'=
- bytes starting\n"
->         "                                         at address 'sector'"
->  #endif
-> +#ifdef CONFIG_CMD_SF_REG
-> +       "\nsf rdreg cmd addr len                        - read SPI NOR re=
-gister using 'cmd' opcode\n"
-> +       "                                                 and store 'len'=
- read data at 'addr'\n"
-> +       "sf wrreg cmd addr len                  - write SPI NOR register =
-using 'cmd' opcode\n"
-> +       "                                                 and load 'len' =
-write data from 'addr'"
-> +#endif
->  #ifdef CONFIG_CMD_SF_TEST
->         "\nsf test offset len           - run a very basic destructive te=
-st"
->  #endif
-> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-cor=
-e.c
-> index c73f2c7c3f8..eb022e577a2 100644
-> --- a/drivers/mtd/spi/spi-nor-core.c
-> +++ b/drivers/mtd/spi/spi-nor-core.c
-> @@ -298,7 +298,7 @@ static int spi_nor_read_write_reg(struct spi_nor *nor=
-, struct spi_mem_op
->         return spi_mem_exec_op(nor->spi, op);
->  }
->=20
-> -static int spi_nor_read_reg(struct spi_nor *nor, u8 code, u8 *val, int l=
-en)
-> +int spi_nor_read_reg(struct spi_nor *nor, u8 code, u8 *val, int len)
->  {
->         struct spi_mem_op op =3D SPI_MEM_OP(SPI_MEM_OP_CMD(code, 0),
->                                           SPI_MEM_OP_NO_ADDR,
-> @@ -315,7 +315,7 @@ static int spi_nor_read_reg(struct spi_nor *nor, u8 c=
-ode, u8 *val, int len)
->         return ret;
->  }
->=20
-> -static int spi_nor_write_reg(struct spi_nor *nor, u8 opcode, u8 *buf, in=
-t len)
-> +int spi_nor_write_reg(struct spi_nor *nor, u8 opcode, u8 *buf, int len)
->  {
->         struct spi_mem_op op =3D SPI_MEM_OP(SPI_MEM_OP_CMD(opcode, 0),
->                                           SPI_MEM_OP_NO_ADDR,
-> @@ -637,7 +637,7 @@ static int write_sr3(struct spi_nor *nor, u8 val)
->   * Set write enable latch with Write Enable command.
->   * Returns negative if error occurred.
->   */
-> -static int write_enable(struct spi_nor *nor)
-> +int write_enable(struct spi_nor *nor)
->  {
->         return nor->write_reg(nor, SPINOR_OP_WREN, NULL, 0);
->  }
-> @@ -645,7 +645,7 @@ static int write_enable(struct spi_nor *nor)
->  /*
->   * Send write disable instruction to the chip.
->   */
-> -static int write_disable(struct spi_nor *nor)
-> +int write_disable(struct spi_nor *nor)
->  {
->         return nor->write_reg(nor, SPINOR_OP_WRDI, NULL, 0);
->  }
-> diff --git a/drivers/mtd/spi/spi-nor-tiny.c b/drivers/mtd/spi/spi-nor-tin=
-y.c
-> index cf00473ee83..7b6b7432af8 100644
-> --- a/drivers/mtd/spi/spi-nor-tiny.c
-> +++ b/drivers/mtd/spi/spi-nor-tiny.c
-> @@ -46,7 +46,7 @@ static int spi_nor_read_write_reg(struct spi_nor *nor, =
-struct spi_mem_op
->         return spi_mem_exec_op(nor->spi, op);
->  }
->=20
-> -static int spi_nor_read_reg(struct spi_nor *nor, u8 code, u8 *val, int l=
-en)
-> +int spi_nor_read_reg(struct spi_nor *nor, u8 code, u8 *val, int len)
->  {
->         struct spi_mem_op op =3D SPI_MEM_OP(SPI_MEM_OP_CMD(code, 1),
->                                           SPI_MEM_OP_NO_ADDR,
-> @@ -72,7 +72,7 @@ static int spi_nor_read_reg(struct spi_nor *nor, u8 cod=
-e, u8 *val, int len)
->         return ret;
->  }
->=20
-> -static int spi_nor_write_reg(struct spi_nor *nor, u8 opcode, u8 *buf, in=
-t len)
-> +int spi_nor_write_reg(struct spi_nor *nor, u8 opcode, u8 *buf, int len)
->  {
->         struct spi_mem_op op =3D SPI_MEM_OP(SPI_MEM_OP_CMD(opcode, 1),
->                                           SPI_MEM_OP_NO_ADDR,
-> @@ -155,7 +155,7 @@ static inline int write_sr(struct spi_nor *nor, u8 va=
-l)
->   * Set write enable latch with Write Enable command.
->   * Returns negative if error occurred.
->   */
-> -static inline int write_enable(struct spi_nor *nor)
-> +int write_enable(struct spi_nor *nor)
->  {
->         return spi_nor_write_reg(nor, SPINOR_OP_WREN, NULL, 0);
->  }
-> @@ -163,7 +163,7 @@ static inline int write_enable(struct spi_nor *nor)
->  /*
->   * Send write disable instruction to the chip.
->   */
-> -static inline int write_disable(struct spi_nor *nor)
-> +int write_disable(struct spi_nor *nor)
->  {
->         return spi_nor_write_reg(nor, SPINOR_OP_WRDI, NULL, 0);
->  }
-> diff --git a/include/spi_flash.h b/include/spi_flash.h
-> index 2e703e85250..b7622bce48c 100644
-> --- a/include/spi_flash.h
-> +++ b/include/spi_flash.h
-> @@ -236,4 +236,9 @@ static inline int spi_flash_protect(struct spi_flash =
-*flash, u32 ofs, u32 len,
->                 return flash->flash_unlock(flash, ofs, len);
->  }
->=20
-> +int write_enable(struct spi_nor *nor);
-> +int write_disable(struct spi_nor *nor);
-> +int spi_nor_read_reg(struct spi_nor *nor, u8 code, u8 *val, int len);
-> +int spi_nor_write_reg(struct spi_nor *nor, u8 opcode, u8 *buf, int len);
-> +
->  #endif /* _SPI_FLASH_H_ */
-> --
-> 2.53.0
+Aristo Chen (6):
+  mtd: spi-nor: drop the duplicate EN4B/EX4B opcode definitions
+  scsi: drop the duplicate COMPARE and SEND DIAGNOSTIC opcodes
+  acpi: drop the duplicate ACPI_PPTT_CACHE_TYPE_DATA definition
+  pci: gt64120: drop the duplicate GT_PCI1M1LD/HD_OFS definitions
+  dt-bindings: soc: imx8_pd: drop the duplicate PD_LVDS0_PWM definition
+  test: video: define WHITE and SCROLL_LINES once at file scope
+
+ include/acpi/acpi_table.h         | 1 -
+ include/dt-bindings/soc/imx8_pd.h | 1 -
+ include/gt64120.h                 | 2 --
+ include/linux/mtd/spi-nor.h       | 2 --
+ include/scsi.h                    | 4 +---
+ test/dm/video.c                   | 9 +++------
+ 6 files changed, 4 insertions(+), 15 deletions(-)
+
+-- 
+2.43.0
 
