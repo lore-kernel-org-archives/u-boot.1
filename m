@@ -4,173 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 563DACA5FC4
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 14:59:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40A74CA5FC4
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 15:11:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1218360668;
-	Fri,  2 Oct 2026 14:59:16 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A60C060C2A;
+	Fri,  2 Oct 2026 15:11:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aI7dmb13XVTc; Fri,  2 Oct 2026 14:59:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 57F7F606F5
+ id 02BeO13ADccC; Fri,  2 Oct 2026 15:11:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 085C860BBB
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790953155;
-	b=qeohc3/d5g2Bd4qRT+wrTDgWr5DYDARQ2NYSui2p+P8SbH7/P2jQopVUh+TYWK93XYaG
-	 MvlQrDzQjAPBVC7hnFpctVS4ZPgahw0HpGAwQmZiMaei7i0HnzP2W6JbxxC1eNZQWmaOz
-	 kIvYenQUTmYuc1pLdFaPWUIOVc1fEmwn6K69Ki6nllSiYMCmeATZe2HciiccXCgHkBjG6
-	 EiUOH7KWwSsVt2kE+zX4Xj/WtkenzkMJZC07FfkLTkk0Ynz5wQZiMAZzCgI2xMQGAZD+N
-	 +bSMIUoLqqfvtVAyeJhH8Y43jpulvIK2IULUBdHqKESddmReQumQ8F2vp/Z8jl5W8EA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790953906;
+	b=L5zwATjvy47S7tyHPS2dAreDsZheDWTRAg4GQmS7JA+DBISAKHzEZT3bRPyRitSlmUEx
+	 G3sj8QuNBXfK07/QeKcMHNGGijizyhk1CKK8ZzhpFi0Lqq89g7ujoW7h8Lpf8hax3bHrL
+	 hl6oOGGeh4igcTRqWJ/EiyMa/XIKXIHtWn95+uMg9WtZNSSdVxoQYhuNg2rN/dfJ04LFG
+	 ieIwbKLY5+T7uKG0zryG4HJ4fx94RbW94uLvDj2g12LF1vCQsDyihMxr2yqNDcj6c/uIT
+	 psufXKlBgsEpR/z1an0FJUngMmtcbta+Pspxa4hUB0dDt4OxfXZB++vXj7X28gnykig==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790953155;
+	c=relaxed/relaxed; t=1790953906;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=TrJXAuNS0mHV66ka+gFt/jW5epPNNg6TrN+9durFt/U=;
-	b=K8Hig4OOc+A9qmAp26MNCXqraziQjzjG/7eLhOxWcOQiJ+QOyXHHTgV0Kaw6tTvct6mn
-	 VIHqMMZe8bdxZMDyVv1n6mpoDsG6NfXSbXrH9Ly1HzLlRhkGeRaBot3Le2Q30vk+tseVR
-	 jLj6+/RxZ6YwmVcv5LJtubdX5wtE0QNSsYpzaSfJ8TcEvdYzG2KBMeM2uXpKXX7F3fH80
-	 BjzF+r4H4DLWcpW6fT+IkEcSGRomJOfaFoNmy3+myM006R+YgsGZEY5e/4/edS6TquML6
-	 hoba33IhP7/f91nvmgwEDar3lL1IF61EcTYYzoV2dSxB2SgLxwRoNTFn3+9Wzb0xOdg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=konsulko.com;
-	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=Thqcvg5g;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=WC4hfF22u2DJF+VwZTlqDo6E4/vbYXDVmNoivE6sLuE=;
+	b=CzeG/VBBH8D4PQIMZbZJ6krwV5iiSyXFL3/N55l2cfT5LBWKD7ljEljAEPpmboZ6gnPy
+	 Y0s2XiReVmf4cs6LO8dx5cV03XiTmNQ8b3eQKfyVmyo40BwiCYh4ygbHobXp6QlmCgL1T
+	 2rOEI2YSWSvzN9VuizfrFnp3m1EYfesradAtZAMtAcyPvRELAvmGBxAmLtkxDCwzGCC5J
+	 lspsQTqRxSISte/UUz6mOccYm+R76IWEJ7pt63GOvSMF8U9AuNlEg4JymaY+Kghu/NinR
+	 JLsZ6zySqRTe+FJfRb2vz1yIHFlHbRdPVD2iG/NSSGXMIjw6AA15uCHNse8Gu0IkLGA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790953155;
-	bh=TrJXAuNS0mHV66ka+gFt/jW5epPNNg6TrN+9durFt/U=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790953906;
+	bh=WC4hfF22u2DJF+VwZTlqDo6E4/vbYXDVmNoivE6sLuE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MSR13ZH4QAoyHgEA0mm1zjuZbGHHFYbQLbV1Nu6ZzlATIAVsouD7YafsR7BsCOB20
-	 lo8YgO9jozEckMfA1ar1eoN3zo+c4BasofptC1/7B2EAuY1EYFxwNFdWh5qSuNOVkW
-	 +X2sZZL96KvrE/a/eM0PuwBG/OLfAj/VbxzwMSrwvEdftPDA/FEmgz8Nu3Y2D4ziKL
-	 KIFUH5Gk3y8rnc4qJibk4y6542Xl9AYcGDLF1Vi0aqYjB+aDzT3/XbJkO8IOyF2JAH
-	 tiPJ5lqXJtoUTwpau03GBIEMTJmQ/Xd3Ln21lJZZq0QAZ6dVKWeYidt19lLoqDhC44
-	 vnhS6LYkbbQhQ==
+	b=NJdWAljRYOMOFSnFcakRXw//1ebxH4nSWpd4o7mHIknPohKynADoGk+6LlPyxOPlp
+	 igT86fivyB9h13MmEkZKW5Qwt68YJ3afH70tardaf6Njs0hinWlXNgZzYPmIqBevdN
+	 ac7YO10w1HdRr+MiipZg7gSNQqF/wjYuxOfC5cQ/nqT2sueks1rQPoLpzE9XiLCGs1
+	 LEfhJL/iXEEZ1H1vhV72EkAH2fr+UJf/r6htfHiJDg/sHnWAzRMIJ0kHrwy3hhTN5H
+	 DwaH5OOKlNf+IlrwI/gduApNUd35InrfZJEL2QL//3zMrR3qtC/ZI+tWtx+5hEkcrQ
+	 XfSLF9DQTjr4Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 57F7F606F5;
-	Fri,  2 Oct 2026 14:59:15 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 630202E0
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 14:59:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 085C860BBB;
+	Fri,  2 Oct 2026 15:11:46 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 68FA832F
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 15:11:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 54C99606F5
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 14:59:13 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 4F2FA400D1
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 15:11:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OANyGGK4-AXm for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 14:59:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A268960668
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:31::f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790953152;
- b=hW9JNBGyOO7/Owy55HIPg5q+qHuhxSo7/i6riW5Q8eB348RSJGDwUhQQUeK3PNPtwHBX
- 8eW+aIqhXyPwUe4ahV1QrC1zof5+YKYlH85fpncUDuB3UbR2ZZuVrUTTn8HeaiE78DHI/
- fRKEYMMIQKD7Do6wOtrjn2LJK6y7HNSZ0+1EPy8xBx29BZnvefKBR02cLDym84fVnwfBv
- suIn4h31khtp6rlgWTecYH5kvetxb9opRzyg5wCAr2oR4P8k7wAkOKr78nqOZpMu4X59c
- mRHiYMAWNoeQmh8e0QAWV47m+Kb4WPMXY3E3nUIzpswgAAGjwp7Egx7rNoMEuomhr/g==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YZUlmvOFe4jV for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 15:11:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org A4AFA4004A
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=45.157.188.14
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790953903;
+ b=I9R30Dp7WC+5p1eWCZcdRzgNETvqXkRguz+SB4yqD4tDMXKXZ2h48tAJ0KvbTPr6SO5Z
+ Zk9f9rlACey8lLb2u0dj8rVKNVuUwJR1BmOxpxJaTQOOeYeshWejy8pCjEulIpSFr5CNt
+ joSKEYRwtlshrwYO1V+bkUQYmO0feblXY7hR6w5lekVx2ikWZS1wpNTv4fEZwvfCXFiKf
+ NAzUnSEVdjffVtzUDWcfvOBNOUIqK9eGQmRHSVqUP4TNSKkhUD5dTxm7x9mpzoyc2oApx
+ +3WGuBZpRjHsIcfsIoAbRxPIjnT0XrXvI1mUqUki7wSuEa/4KKx09Gu9+CtaacQqbVA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790953152;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
- Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=TrJXAuNS0mHV66ka+gFt/jW5epPNNg6TrN+9durFt/U=;
- b=C4zklrKbwAd2nlEHxjRpV15LckQxTNC3s1PZHsmwm7iIgkiudTrdvYEcP0TW+fRZti2X
- UBLONV7OyyfzK/yc9m77mpuLBR+ssX0VjyQjQAA7M2heTYrM71HYFqAulj1rNaOJ5ys3W
- SzfgUl7wKTpq1OKQffHKqvWSYi7bJyYOLB1U0wazMZvpeJKqryM7iLShY8vYzQXEtcExg
- WDMi1H+yTPec93HqWkGPJiUrSv0cgOYD9Aq8TrWEQCly7qXodqNg8oz/yXbh+QdeF4Cj2
- ydhX10HO0qAFkQ1f3brNyxwYVkefzTcA9DHipz2plcRfiFeqepATB4VF6T9PFdLEDUQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=konsulko.com; 
- dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=Thqcvg5g; 
- arc=none smtp.remote-ip="2607:f8b0:4864:31::f"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::f;
- helo=mail-oo2-x0f.google.com; envelope-from=trini@konsulko.com;
+ c=relaxed/relaxed; t=1790953903;
+ h=Received-SPF:Received:DKIM-Signature:Received:Message-ID:Date:
+ MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+ From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+ X-Infomaniak-Routing;
+ bh=WC4hfF22u2DJF+VwZTlqDo6E4/vbYXDVmNoivE6sLuE=;
+ b=VIyyAhxx7KvAwv1MWTyn1bnk/o2C5JkIqYWuezUXUh32uH9URlosBo1xIIvhAOmK0Chu
+ gMPp3u1yA/H0/nxjanJ9rtBUJNYgwBCYT2TYD6bUZJ4Y/YyzcBLsjE6Gf8Mnlb+rccdQQ
+ 0JzGdgwluUznIEeOJw9xoIRdPchheUihrWp07HzN/JYBJDSld+8197yRHTBah1iL8Owyr
+ D20Do/0D6k5CJJONk4U0KJdFvDWt2uzq112jbTWVobsi28kESRMNuM7B3q35FavEqk8mA
+ sKdQxwao8rwxGCZFyaQgw2pe9cp2eozLNSer3iRhTaircuRs78XvsLDhnbrq5Qg6oJg==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=pass header.from=0leil.net; 
+ dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=UiyaDsrZ; 
+ arc=none smtp.remote-ip=45.157.188.14
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=45.157.188.14;
+ helo=smtp-bc0e.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=Thqcvg5g
-Received: from mail-oo2-x0f.google.com (mail-oo2-x0f.google.com
- [IPv6:2607:f8b0:4864:31::f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A268960668
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 14:59:10 +0000 (UTC)
-Received: by mail-oo2-x0f.google.com with SMTP id
- 006d021491bc7-6deaf09ecaeso830726eaf.1
- for <u-boot@lists.u-boot-project.org>; Fri, 02 Oct 2026 07:59:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1790953149; x=1791557949;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=TrJXAuNS0mHV66ka+gFt/jW5epPNNg6TrN+9durFt/U=;
- b=Thqcvg5gEDt5tfZFFucTmtzWzy2tC/hCqMUFC7BiSBrJNKkUR8L4t+6CqYLaC2nxLA
- cEd1tN5wfSYJDrJ1WFyD/bior/WjCIRB6nOujje4VCYfEPu05lONknuE0uVspEaRd/f3
- Ha2aTc98U3WL7wvEm1TmxbpsRF/nu2Z9AD1ow=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790953149; x=1791557949;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=TrJXAuNS0mHV66ka+gFt/jW5epPNNg6TrN+9durFt/U=;
- b=qRSL3ceDn1GMwKEuCQM/H4OtWDT5GDUqOMDNuTeOc3YuQduDe8j9TT12iAII5ou6wI
- gTCUMM6+RR8Lyihwpc/x5+1ASAufiGHOZmy4usQcK1GafhgEA3BMLqZfh7ABIheBfgPG
- GQzDrG1uz22k8CntdUCRDZnyhyBu/M9iWHkv3tprzxDVXYFSbfs8L7fh9Esl6l9RwZoN
- E59GTO/bMzDiSLggieLX6s9HLT7qZ6vJ3q6YNSZGzHuePJK88yHX0oXvF5IeZXCMYQc2
- pVSDqDUr2AjZ82OEYH2rnc2TZ416prIdVDfNLJcpT2x2WlzRkxWTGWqfrwuidmnR6asK
- JGWA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBz0qrK2zPXy0fgcLJOyxAc6mxr3x7vMOemZ334WJhozrugv1wfZrv5q//mhFUtsP1O6lkEk3xc=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lUmLSj0nZF7o5F9Z1BgMjgonL7JpS5pSVyTl5qnhclJzwa8ugx
- ZVdVXJDbSLx6UH/Fa5C2n3DXLitO/EgWgeR8MX/2nUHaMLhjGVmmG+D6w/oaCLgRMTc=
-X-Gm-Gg: AYBFou3xr0o/xc73l7RiwtC0U0dEKhtl1Pa6ztZjm3y0y/shYv4exT4Ot/4tphWoTUQ
- r7NEY0lcgR7kNhwgBHMNd/D/T1bN1wdPmKBOA/GiYRpdrIyEH9nPTCZOT3fFDx+eqkQY4eaT7G6
- 61rwSugq4tg+a/pMUHSJt6CN8956lpo2PBscsWTe+MSNt2edhyMVzsaFRhUScbDB/cCYLB0n632
- wXAZ8Pd5h5f/RGtTC7FcZUn88nCcf/YCEKHbBo0x7NWsBdZvt4LxeZ/USWT9cGOpJ8tMbJWgTXt
- SdxDdlsrtDr5X3FXlp3tE+afq5mtsjHxDbalifcM9IpbtEDDPWaUo+0Z4m42ARznQUegkVVyG5a
- ONP/KK1jFQTCXC6v5coii23qy35Fhhhka7/aD2Hpv+4/GW9RIXmz7XaODLD9ZNi7DXiBzuj0ct8
- Rs+BR9hJflU5U99PlsWi7oTD9g1R24jjYV1Q4ghE9JIhirk4166tQfKW5JAJT/hoVJo1lO4S0KX
- gWbHuiUGz1gT2W7/uWGkVxkXtXSKkqUiW5hu88SQhNEM1p5s++/r8eE3cwrVFtjsCXrlZdpQmSc
- rQqi09NR/ESzcXzeB/g=
-X-Received: by 2002:a05:6820:4dc4:b0:6e0:6c72:772 with SMTP id
- 006d021491bc7-6e06c815da6mr64139eaf.13.1790953149686; 
- Fri, 02 Oct 2026 07:59:09 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-8227a66650bsm2749936a34.22.2026.10.02.07.59.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Oct 2026 07:59:09 -0700 (PDT)
-Date: Fri, 2 Oct 2026 08:59:07 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Qing Li <lqing2013@gmail.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 7/9] soc: qcom: smem: expose SoC identification in the
- environment
-Message-ID: <20261002145907.GR858934@bill-the-cat>
-References: <cover.1790887323.git.lqing2013@gmail.com>
- <cf7f290393c41e0c0afc0be2af9e1fd51876f3e0.1790887323.git.lqing2013@gmail.com>
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
+ header.a=rsa-sha256 header.s=20231125 header.b=UiyaDsrZ
+Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
+ [45.157.188.14])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A4AFA4004A
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 15:11:41 +0000 (UTC)
+Received: from smtp-4-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6c])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hxC16575TzChk;
+ Fri,  2 Oct 2026 17:11:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1790953898;
+ bh=WC4hfF22u2DJF+VwZTlqDo6E4/vbYXDVmNoivE6sLuE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=UiyaDsrZAFLaQK1XeSX0W9K40wyw/j8H9dksUr6F69CBWvzTfwMCzpyrPNfzK0ZFZ
+ jz8f46FJE/OBZVjkCbKF2Ft5Dt/on02IKLiU1Hdx35C5KfGRevE6tIhtCN/a+9YcUF
+ K56AWIUCATd3m4ZoQ3a7cG0dCNaBvbINLyI3P6mEZYHQOTEuyZX1TeTpGo3I1/6NPw
+ e/ee0i83LWaXcY2DZx9lFRRnXtgDsZfGsZENIqZzLLsKhkBZwQoQDiqGaBoWvKM3IQ
+ nWS2JKZgZ7nozlyZG7H7VsxN6IyzltRqEKH6PZpRNMdZ0utLbKKhk9Mu+b4KRYed95
+ zP/qSiecIELLg==
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4hxC152Cnvzm8R; Fri,  2 Oct 2026 17:11:37 +0200 (CEST)
+Message-ID: <a2d13cd0-7704-4152-8b29-73328cdbad01@0leil.net>
+Date: Fri, 2 Oct 2026 17:11:36 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2tBLzB4+ooNdiVAG"
-Content-Disposition: inline
-In-Reply-To: <cf7f290393c41e0c0afc0be2af9e1fd51876f3e0.1790887323.git.lqing2013@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/5] board: rockchip: Add Xunlong Orange Pi 5 Pro
+To: Dennis Gilmore <dennis@ausil.us>, u-boot@lists.u-boot-project.org
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Alexey Charkov <alchark@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20261002031334.3285687-1-dennis@ausil.us>
+ <20261002031334.3285687-6-dennis@ausil.us>
+Content-Language: en-US
+From: Quentin Schulz <u-boot@0leil.net>
+In-Reply-To: <20261002031334.3285687-6-dennis@ausil.us>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -184,59 +148,207 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Hi Dennis,
 
---2tBLzB4+ooNdiVAG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10/2/26 5:13 AM, Dennis Gilmore wrote:
+> The Xunlong Orange Pi 5 Pro is a single-board computer based on the
+> Rockchip RK3588S SoC. The board provides many interfaces, including
+> two HDMI output ports, a PCIe-attached Motorcomm YT6801 2.5GbE port,
+> an M.2 M-Key slot, one USB 3.0 and four USB 2.0 ports.
+> 
+> Features tested on an Orange Pi 5 Pro 16GB:
+> - SD-card boot
+> - eMMC boot
+> - PCIe/NVMe
+> 
+> The devicetree is taken from Linux v7.3 via the preceding dts/upstream
+> picks.
+> 
+> The upstream devicetree muxes the PERST# pin of pcie2x1l1 and
+> pcie2x1l2 to the controller's dedicated function while also using it
+> as reset-gpios. Linux switches the pin to GPIO when it is requested,
+> U-Boot does not, and probing pcie2x1l2 then hangs. Override the
+> pinctrl in the -u-boot.dtsi to use GPIO function for the reset pins,
+> like rk3568-rock-3a-u-boot.dtsi does, until the Linux devicetree is
+> fixed.
 
-On Fri, Oct 02, 2026 at 04:44:50AM +0800, Qing Li wrote:
+Please add the link to the patch on the kernel mailing list so it's 
+easier to follow its status.
 
-> qcom_socinfo_init() already exports the serial number. Also export the
-> socinfo id, version, raw id/version and the chip name so board scripts
-> can distinguish SoC revisions and select the matching device tree
-> without decoding SMEM themselves.
->=20
-> Signed-off-by: Qing Li <lqing2013@gmail.com>
+https://lore.kernel.org/linux-rockchip/20261002025746.3284691-1-dennis@ausil.us/
+
+> 
+> Signed-off-by: Dennis Gilmore <dennis@ausil.us>
 > ---
->  drivers/soc/qcom/smem.c | 10 ++++++++++
->  1 file changed, 10 insertions(+)
->=20
-> diff --git a/drivers/soc/qcom/smem.c b/drivers/soc/qcom/smem.c
-> index e20523e2cec..cf433957bc2 100644
-> --- a/drivers/soc/qcom/smem.c
-> +++ b/drivers/soc/qcom/smem.c
-> @@ -1014,6 +1014,16 @@ int qcom_socinfo_init(void)
->  		return -ENOENT;
->  	}
-> =20
-> +	/* Expose the SoC identification for board scripts and diagnostics */
-> +	env_set_ulong("socinfo_id", le32_to_cpu(info->id));
-> +	env_set_ulong("socinfo_ver", le32_to_cpu(info->ver));
-> +	if (offsetof(struct socinfo, raw_id) + sizeof(info->raw_id) <=3D item_s=
-ize) {
-> +		env_set_ulong("socinfo_raw_id", le32_to_cpu(info->raw_id));
-> +		env_set_ulong("socinfo_raw_ver", le32_to_cpu(info->raw_ver));
-> +	}
-> +	if (offsetof(struct socinfo, chip_id) + SMEM_SOCINFO_CHIP_ID_LENGTH <=
-=3D item_size)
-> +		env_set("socinfo_chip", info->chip_id);
+>   .../dts/rk3588s-orangepi-5-pro-u-boot.dtsi    | 25 ++++++
+>   board/rockchip/evb_rk3588/MAINTAINERS         |  6 ++
+>   configs/orangepi-5-pro-rk3588s_defconfig      | 82 +++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst               |  1 +
+>   4 files changed, 114 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3588s-orangepi-5-pro-u-boot.dtsi
+>   create mode 100644 configs/orangepi-5-pro-rk3588s_defconfig
+> 
+> diff --git a/arch/arm/dts/rk3588s-orangepi-5-pro-u-boot.dtsi b/arch/arm/dts/rk3588s-orangepi-5-pro-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..142db4a0fcf
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3588s-orangepi-5-pro-u-boot.dtsi
+> @@ -0,0 +1,25 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk3588s-u-boot.dtsi"
+> +
+> +&pcie2x1l1 {
+> +	pinctrl-0 = <&pcie2x1l1_reset_h>, <&pcie30x1m1_1_clkreqn>,
+> +		    <&pcie30x1m1_1_waken>;
+> +};
+> +
+> +&pcie2x1l2 {
+> +	pinctrl-0 = <&pcie2x1l2_reset_h>, <&pcie20x1m0_clkreqn>,
+> +		    <&pcie20x1m0_waken>;
+> +};
+> +
+> +&pinctrl {
+> +	pcie {
+> +		pcie2x1l1_reset_h: pcie2x1l1-reset-h {
+> +			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		pcie2x1l2_reset_h: pcie2x1l2-reset-h {
+> +			rockchip,pins = <3 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +};
+> diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
+> index b64dd4947ee..0cc32a6e28e 100644
+> --- a/board/rockchip/evb_rk3588/MAINTAINERS
+> +++ b/board/rockchip/evb_rk3588/MAINTAINERS
+> @@ -35,6 +35,12 @@ S:	Maintained
+>   F:	configs/orangepi-5-rk3588s_defconfig
+>   F:	arch/arm/dts/rk3588s-orangepi-5-u-boot.dtsi
+>   
+> +ORANGEPI-5-PRO-RK3588S
+> +M:	Dennis Gilmore <dennis@ausil.us>
+> +S:	Maintained
+> +F:	configs/orangepi-5-pro-rk3588s_defconfig
+> +F:	arch/arm/dts/rk3588s-orangepi-5-pro-u-boot.dtsi
+> +
 
-These variables should be documented under doc/ somewhere in rST, and
-done in this same patch.
+Please order alphabetically with the other entries in this file.
 
---=20
-Tom
+>   ORANGEPI-5-MAX-RK3588
+>   M:	Ilya Katsnelson <me@0upti.me>
+>   S:	Maintained
+> diff --git a/configs/orangepi-5-pro-rk3588s_defconfig b/configs/orangepi-5-pro-rk3588s_defconfig
+> new file mode 100644
+> index 00000000000..f4c6eecf2d5
+> --- /dev/null
+> +++ b/configs/orangepi-5-pro-rk3588s_defconfig
+> @@ -0,0 +1,82 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-orangepi-5-pro"
+> +CONFIG_ROCKCHIP_RK3588=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_TARGET_EVB_RK3588=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_DEBUG_UART_BASE=0xFEB50000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_EFI_SECURE_BOOT=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_USE_PREBOOT=y
+> +CONFIG_PREBOOT="pci enum; usb start; nvme scan;"
 
---2tBLzB4+ooNdiVAG
-Content-Type: application/pgp-signature; name="signature.asc"
+I know Jonas has been pretty vocal against having PREBOOT set by default 
+as it drastically increases the boot time in all scenarios. We don't 
+have many Rockchip boards that set this variable, do you really need it? 
+Shouldn't bootflow set this up properly when attempting to use 
+PCI/USB/NVMe storage to locate files?
 
------BEGIN PGP SIGNATURE-----
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-orangepi-5-pro.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_NVEDIT_EFI=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_USB=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_EFIDEBUG=y
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCar/GuwAKCRAr4qD1Cr/k
-CgD4AP42prCaO/SfjjXqFO6VL56kA3zVCrQKfvkLS4sNX0k53AEAngBoCpwn2u4U
-y5zJh2JLKPXFM3+whHa/8htZ/9M7ogo=
-=IhrQ
------END PGP SIGNATURE-----
+Do we really need to remove the clock-names from the SPL DTB?
 
---2tBLzB4+ooNdiVAG--
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_PHY_ROCKCHIP_USBDP=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_PWM_ROCKCHIP=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SPI=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_VIDEO=y
+> +CONFIG_DISPLAY=y
+> +CONFIG_VIDEO_ROCKCHIP=y
+> +CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+
+I don't think we have VOP2 support in U-Boot yet, so how did you test 
+video support?
+
+> +CONFIG_ERRNO_STR=y
+
+There are PWM leds on the board, would enabling CONFIG_LED_PWM, 
+CONFIG_CMD_LED and CONFIG_PWM_ROCKCHIP help you control them maybe?
+
+There's an RTL8111HS, I'm assuming we don't have a driver for this in 
+U-Boot? Have you tried CONFIG_RTL8169 maybe?
+
+Looks ok to me otherwise!
+
+Cheers,
+Quentin
