@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05844CA5FE6
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 22:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9670CA5FDD
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 22:10:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 30C0160E0F;
-	Fri,  2 Oct 2026 22:10:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8D4F360E1A;
+	Fri,  2 Oct 2026 22:10:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MS4Z6g7nx6Ed; Fri,  2 Oct 2026 22:10:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org BD2AD60E05
+ id vc8mX8ds5rt8; Fri,  2 Oct 2026 22:10:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A31D660E1C
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790979015;
-	b=ibNqc71uoZRHYsAZEOp3h3GbNy2VGiMJS3Wl0/YUdgX3No2zzIBS5sgboaQEyUpyuplk
-	 q+Lt5J6XTxP5/HhAXJnYJ4t6GBc69Onh4qzZqXPVi3Vjn0ILtBCTNSXHV5e1880taqvCh
-	 A+K+9Ba2c6KCTY+bqNXT5H49KD4aeFdzCmzy7D2eMTVVGC/neYUwKaJFVtLiMlADaWfnd
-	 nvJ6m8WdNZYEiqw90xrdOjO70GO9ALCrm5DblzheMBjWXfbY/0PjfEIfi95HcqGOdhqD6
-	 e6AfNKa9nd74kyNQ8uylaO2Gojk58Q9H1n76N64koEU+JqSKLoXMr/+FPurd/3JmJpA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790979019;
+	b=RrAI5rFk/5j6NyEFbL/Zdpugym/1CB7bVmPNMPBZYQALlAYfE0yhcdjl+1SpCmNTq0cQ
+	 Q6e12yX07t267Z0W+84+CcreuORdjwYq8NdQg1iCpD7IlC7r2CwOYFkdmGo1EvM/VDGnI
+	 ps17+yojExd/EvtfW9gnUcYgNoteVMT586UwB19ByKSsKK4jp/Qs78heFy/6nqhf+29jZ
+	 3GZO4TYkSfOX+nlQpCi8nUjDn5GJ9mWy6zc8TG7/LZ7NZNPdWkln2R3eUEjQ7Mi0Zt+ow
+	 PrVN1o5Z5GV70ZRDmeRohrhlMFxj01Ol13i6leCuH9zh8z58MCGfePe4KvBnk6C0k+Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790979015;
+	c=relaxed/relaxed; t=1790979019;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,100 +31,102 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=sB5TDdOUCxj8NJeLUwlg9UsMM4PTl89RNOMSLoga83M=;
-	b=rPTJGNrPS3eyqIxjJUWydxbXiKrWqlDY4CAWWan9ovebk8jHMvmM6ntSEZ5d4xrmijhT
-	 kJJtCL9Z1DznJ4KoxEiHH+ZNQ7Zi9xif4owHhulULkaYvLwgES/PbVOtpbeU0vinAMFKP
-	 pxSSnlClZv+v6Bbt5zSQtkKth+r1JmggrzCHVXapTaop/0Wfk6kKphDiuIry6/fB1d+tq
-	 tV1kbRcY0WwDEKwU3kuccXZs59HomjgisA85J3I5KVb9T/5po9Mb0Ms+4eS+XX4HQakKv
-	 7evBoPD2wfuNXY+YpqXpFC4O62G/AobZ63MpSLTUPtAK3jERBFUMWbFFAPG+y3SrcCA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=ogpDbgqvPCFCmRHcDJrGSGBL9UxJCowK/eRuY5VfrVo=;
+	b=UsuB8vu9AQyN58Rp2cdb70kUAUwKkB6cn1JYcN/3M8b8JrfKoEoqXofRf3dJbi/P+B1F
+	 g1WH3/55J13q1Fck9fGtCcwwzLMwI8DTiz4TyvDFsB3/Xnq/BMDoJiVa552rX314i0o/2
+	 OUWsQ4ui0TUSD7PsPAYHD/gX65u0ZL5xmyJgu+sTRacEg16txuzQqpsG6uIJqpodVNUDV
+	 hbYJTZJrWu0W0TM1FiyIxq36lQuR3tQMm/fP9IfL20VwnVourJVuK4a5+QxLYvkDoIiOs
+	 OHAI2Gy+6xgjNTya6sOIUgEAOgjayZp8wA+ZLRcOT6Xzk1Oz1CBsulP422PY/VbfpKA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=protonmail.com;
+	dkim=pass header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256 header.s=protonmail3 header.b=tUq3UV9+;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790979015;
-	bh=sB5TDdOUCxj8NJeLUwlg9UsMM4PTl89RNOMSLoga83M=;
+	d=lists.u-boot-project.org; s=default; t=1790979019;
+	bh=ogpDbgqvPCFCmRHcDJrGSGBL9UxJCowK/eRuY5VfrVo=;
 	h=Date:To:From:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lNxlPI484c35ElDimqGJ+a1ESzrHv2PFwchScT4VXiUVp5DUY5ikHCabFAjcyArYl
-	 +4eco3U963DIdoQIO4oi2H/iJRiWp+gILORA2ut+GH8xHGZeZEMr1/dYYzZuc5cdIs
-	 NAGxbsDGCD1q06nNzSflR2l4x4NVWygdYLW4heUvKKdZMJzwJrNBjHbe0xGLEMT4mr
-	 zMeSqrlK4Dqvgh76AaYAU8c69bKNQxsyiDTh5as0qJniqidbR+U/E7O4H5y/6XI+ND
-	 UvhBhYy5u5A90TNciRH3/YKRPnO8UJSWypWchmo2qXRIn5qrYdA6u+08qVvruwtbce
-	 ORYbraNDAYqSQ==
+	b=GyGlBvwbiR6TGdtdU8/Kz3kJWCpC6T23UzcC93j3F6cVZ5+p/ZAZI0QAJCghX4sin
+	 btD4E5OcubCzzVmaxMmMDzQmon3aZuvp48Ju/dfc6aPzlbqLl2QjSRGIZDV4/Uuy4p
+	 JTLyY4f+XKjIRgGbg1xZO1HlAhmS9C9+bwSCpsllwj/1x8tDQ31bBBn8ia1OfKXuZO
+	 cUjq3t3zG8o23yHTKQ380aEU1HlzeQPvexsL+C8AmNIuy3BMVtqqOdquFKAEsBBXcq
+	 gRSx77TlxBGEGeP5K3zfLP7yjfvVc2UjLsye88Yu7zls+76sLul/2s4XLU3qOiyZ9V
+	 XZ5j8i3YYYOGA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BD2AD60E05;
-	Fri,  2 Oct 2026 22:10:14 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 25C6B179
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 22:06:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A31D660E1C;
+	Fri,  2 Oct 2026 22:10:18 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0E93134E
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 22:06:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 172EA40585
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 22:06:20 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E8D4F60D9A
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 22:06:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Lz0pcNPVApul for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 22:06:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org D681C40061
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=185.70.43.16
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790978779;
- b=qXErSVOSB+scEh/cUNvX98hGleArTDHtEJRm94yRweuPIUcyfywOCOWV6/PAG4Ym6jcD
- rkj8V60Q5lxo47m1xWw0SRu8F7F5Lnnf6ODlA9rxFyGOL0X1a2yIefdK0OkkHWhrB8tfG
- tIqQux/noBvpLENacERJHSY9/PfQ2ssoGuHLddbGxhb9r9Kh7nL7PdDXzsmfOEjfW9OYE
- zFKVYWydFhQ5y/+FMMRFfuQFEux7m9LN03GKhHba89rCLrDWBHycXCuPpruiD2YG/Y/4o
- dWFcest4+TgoXfLWb4DJXPsx6X1VQXqk2oGPFgeSVewXtNHyyDwYO1SWvcumtCb62RQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aApxjDatKe7b for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 22:06:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A378F60D70
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=79.135.106.121
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790978816;
+ b=K3JJ5xG9VXP6O27ssLE1oowpYuVMbBxt7PoszH7Yc+5Q1fllnjzA3Kf7PRDCQklEd4Ty
+ RVX18FZX9gyjx/FPXgo9M8Y1e1AZOCi32XW67AsDAtrxKY6odm4Nnhc7eivPVmThlkvGh
+ leIAqgH0/ZyIC7f5B+hq380jBsaxjOwCm+El8FiLPr0LlrarCcpvLueevykyZzpdOm6mD
+ BkyQl9TmeXKKHLFLKvBToSk72VxeF2kbnFn5tbsKMmaE/x4nNsuHudceaH3G0T4D76kAZ
+ JbGcNJZ39rQGM94WtNYlB62VUFPdZlGPOV0Nu4Cl4Y50DI9jGVJn/EsiAUWM1E2XDrQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790978779;
+ c=relaxed/relaxed; t=1790978816;
  h=Received-SPF:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
  In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
  Content-Type:Content-Transfer-Encoding;
- bh=sB5TDdOUCxj8NJeLUwlg9UsMM4PTl89RNOMSLoga83M=;
- b=H4EfoXxVci4qz5WMsqxjt3h6hvxZRb1IRTiOkg/+umRDgf0ASdBM+QOlLcDkvguO+y6m
- oNW9zdEatmH24tCJy7er8zgL9ryk1kcSQhOPs3tuEQoWuY1SqkIPlaIbUDijie4Fp2ACV
- 35mLdg/Q9y3VtKxvFpjDHVwXNnuyhsHCFlOGMmJSULV9YepPJyXx3IVm/A2r2dvd6H6CD
- S/9UgjdDxpvqTVpXgXwyVndV2GzGlYIs/00QGyJBNZK7GjlST8I4ZZCfGhC7uLdJ7voc1
- luI8l7jwEILr3HcrJrJUHB67F5Tag/ZRD9fazgq5c5hoQIPA4ebmmYsg9meExCibvxg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=ogpDbgqvPCFCmRHcDJrGSGBL9UxJCowK/eRuY5VfrVo=;
+ b=AcHeIt9puImSY5KP1dGBY2CW5ZWxGyiVR5mI+dF/BvSFK722d3xxNsk25NuN4xyvCqJi
+ icewJ7G1A4Bjb+gB/XkRwRGr5MGmDH7dDiWmCln4WExBHnymIvAZgvJeJ+vf61/rgL96x
+ z7thYK2I1oVddojd1+bRo9VHWlzxm7HC2m4bHaV0aQTfjkkwVaDLT3IiIRxVvivkzb3Ll
+ adZE9JxVNXArXqpS13XEK8IQm89IP/IYzC3OBM2YSxu7KhBzx0Bpxm9k8xfIGZMTPWL7G
+ UXBPjxsSUZ78+qOVTlMsTt1/psk5/G51jPEzg68ButgWFqaIdeY0NZ/X/NvB/BlFmmw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=protonmail.com; 
  dkim=pass header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256
- header.s=protonmail3 header.b=AgE8Umlk; 
- arc=none smtp.remote-ip=185.70.43.16
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.70.43.16;
- helo=mail-4316.protonmail.ch; envelope-from=davewk225@protonmail.com;
+ header.s=protonmail3 header.b=tUq3UV9+; 
+ arc=none smtp.remote-ip=79.135.106.121
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=79.135.106.121;
+ helo=mail-106121.protonmail.ch; envelope-from=davewk225@protonmail.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=protonmail.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=protonmail.com header.i=@protonmail.com
- header.a=rsa-sha256 header.s=protonmail3 header.b=AgE8Umlk
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D681C40061
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 22:06:18 +0000 (UTC)
+ header.a=rsa-sha256 header.s=protonmail3 header.b=tUq3UV9+
+Received: from mail-106121.protonmail.ch (mail-106121.protonmail.ch
+ [79.135.106.121])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A378F60D70
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 22:06:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1790978776; x=1791237976;
- bh=sB5TDdOUCxj8NJeLUwlg9UsMM4PTl89RNOMSLoga83M=;
+ s=protonmail3; t=1790978813; x=1791238013;
+ bh=ogpDbgqvPCFCmRHcDJrGSGBL9UxJCowK/eRuY5VfrVo=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=AgE8UmlkwTmTgkCIH/LSs5uhN+VCVy1Ifl6fAG7dTzz+EvQxzfWg/c3VBeM2B15N2
- gWC4Wt9oe3fgIkLsFqYdsTgj/AGp5b+nFLDyX82W3tS9H0lbsoEi6MKD6WTCCw1Zqs
- 6gI0SkxxAiS1vW2xy9ssNGXlxYeOdQxFE6R46b5x4LzPOE8/WgDzBBwMnyLJ/F5Dgs
- SvIhBVTKx9T7oDBDNYHcVT4Fi85OEj+GYsFeaoV0NkLnI5BWUeprXj/SgtgAbEfXVO
- Aaz7W3mQXmqGk7R39Fy5FhD4zfbQdyw6rEUmlOUNsC6MHAcAeaMgbPo8L7bPe6D2dx
- PYhRaYo8AaBkQ==
-Date: Fri, 02 Oct 2026 22:06:10 +0000
+ b=tUq3UV9+zfC5r86/iZGebIQsWoGIgjPcNtQcL8RaEeI1Qliz1WRvgWl02oc1ToUv3
+ 9+uYBMWvB24LJmfyOTva7Q+vlb6MRRprk4Yc1y+uNyChL+eTsOv5YiIYsePbkWLTDs
+ KihkEGIzTdq1KTAgEA1SgyzwPa7W+t8f2um+fLE/vjc2UENebmngDuda3pRMwZ4t/U
+ y1pDFHnLU8JSXrfE6UPTAo4MAIrmy3cSV3IEdinYwXAJpJosH31eE3tf6o3UBR0nlw
+ o1mLDph5NbUhJ8R0/qM6/BOULbfXI64XJQJaW48+QcxQvsdKoY2RRE0ic6I4ssmgT0
+ Xp5HDN6dXCOoA==
+Date: Fri, 02 Oct 2026 22:06:47 +0000
 To: u-boot@lists.u-boot-project.org
 From: Dave Klotz <DaveWK225@protonmail.com>
-Cc: Huan Zhou <pericycle.cc@gmail.com>, Eric Chung <eric.chung@riscstar.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>, Yixun Lan <dlan@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 0/3] mmc: k1: fixes for the SpacemiT K1 SDHCI driver
-Message-ID: <20261002220607.314126-1-DaveWK225@protonmail.com>
-In-Reply-To: <cover.1790975596.git.DaveWK225@protonmail.com>
-References: <cover.1790975596.git.DaveWK225@protonmail.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Yixun Lan <dlan@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Eric Chung <eric.chung@riscstar.com>
+Subject: Re: [PATCH 0/7] phy: spacemit: k1: fix the PCIe and combo PHY driver
+Message-ID: <20261002220642.314419-1-DaveWK225@protonmail.com>
+In-Reply-To: <cover.1790975597.git.DaveWK225@protonmail.com>
+References: <cover.1790975597.git.DaveWK225@protonmail.com>
 Feedback-ID: 100562830:user:proton
-X-Pm-Message-ID: 56133328e59af82b592dc018a1747e4faa59af07
+X-Pm-Message-ID: c9fedc0f55d27aca0fd8de382ab44a1a98982f4e
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -146,12 +148,9 @@ Also tested on an OrangePi R2S (K1, 2 GiB, boots from eMMC), with the
 same tree as the RV2 runs (upstream next plus these series and board
 support that is not posted yet):
 
-- the SPL starts the eMMC (SDH2, io clock moved from the BootROM's
-  409.6 MHz to 204.8 MHz through max-frequency) and loads U-Boot;
-- U-Boot proper runs the eMMC in HS200 with tuning ("Mode: HS200
-  (200MHz)"), finds the EFI system partition and boots FreeBSD;
-- FreeBSD then runs the eMMC at 200 MHz, 8-bit, without errors.
-
-Patch 2 (SD only) and the failure path of patch 3 are not exercised on
-this board.
+- the combo PHY is calibrated at probe and switched to USB 3, the PLL
+  locks and the xHCI starts ("Bus usb@c0a00000: 1 USB Device(s) found");
+- nothing was plugged into the port, so no SuperSpeed device was
+  enumerated on this board (the RV2 enumerated one at 5 Gb/s);
+- the PCIe PHYs are not used by U-Boot on this board.
 
