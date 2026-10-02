@@ -1,133 +1,128 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0799CCA5FE7
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 21:31:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 098A0CA5FDD
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 21:31:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4D79560D97;
-	Fri,  2 Oct 2026 21:31:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4376581396;
+	Fri,  2 Oct 2026 21:31:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zjSehlumoet1; Fri,  2 Oct 2026 21:31:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 922D160D92
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790976662;
-	b=ok2cuRFnvPH/ENvanUYgBj+cqfugom8eKLkmQtT4j4/R1zhK4d/lp5N1is/Jxlz/vGor
-	 wQXevw/mgOX86XVC9y5j5/MV43oIw2yGvyLrHqhXMjM3yCawh3f0gWtY8/g9MXTIXBXuN
-	 yeqDiBq4zmkGfS/p+GyEjwOcx7c3/Cn7m1zRpYf8eSTSu1uP3w7AIddz987D2wFFXDbhn
-	 jvDVBm1bvK6aVNG0VT0KhMLDQG3fUgI1px67AzYjcFptWEz6izAJ2cnfntnf8TISwxCkI
-	 yi+BcE0ZhjYXJjr2xLTq+0RcRiDhY0BNYbBKA8lm4feSL/QEJFWcUhIbSw8lXkG3Q/g==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id A3K4PJiN9Kgv; Fri,  2 Oct 2026 21:31:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 6BE7F81372
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790976664;
+	b=W+FtZkg0YDsiJWto4HN0pzf9jwLEOZLQf6w79pm6SZCMMTzBK1i0enjcYw64eXY9EYdf
+	 ++y0cnlGY7Sb2nYXl7dhV1tqI2Bi2FFjWSYSt93KgxdblEJhuF4tcOvzA8ffI8hwXXr92
+	 aHsnIA0Twi/+EzjBBkwLrvavHSvOOfUgvKPaBFX3YZ/UhPi0MBBm9lXhltzZ24ODR+HEo
+	 OCtFzvsSqKTCUXiQfj9sAMKMZMA6LQKCGibdajhcRd10Y8BM12Akgwm/t54j7qaJzhzBD
+	 nYE2ScBoJ5T6fDZZ3z3Lyoy5o7zEuGmJmaiN9lX5IIA9SyXp9Dpv7ic80FIeLxp/CDQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790976662;
+	c=relaxed/relaxed; t=1790976664;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:In-Reply-To:
-	 References:Feedback-ID:X-Pm-Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=tzZJB+0n/8VgvfOcihvRdeFOBymK88aG8gIbynhAUmA=;
-	b=i90RnT7Ij3cqW7nv804yQlUdBWibNkzv/efwohZQsjLzvOfwkmm+GvFtG7W/faCrn0C/
-	 AsH5FvSOMZaL0jYZcGLteHR7iUFqfwQJfCdNW8PNW/leJ44DmWala+5587FCRdMIszgU3
-	 j6cWZpB5tK8vqhGZctIMq3pIiEd/hkaQz9rlfK4+Hffmrdgcp7zu668eIBh2Id7ryQTwe
-	 aCdRYnnXAf0K2JmKrmpq/KEMQgT2cHvmm/7cTcl3VAy91miGJ9Kwidv8O0FvgV6EZDtgG
-	 pJ8LdqWQfkhMqEMuj3Y9KGoMx+Ee0h1JXUX8SI4Jq/S81g3Zz9L499j7zU5PHlPLnRg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=protonmail.com;
-	dkim=pass header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256 header.s=protonmail3 header.b=QdKifS5y;
+	 DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:Feedback-ID:
+	 X-Pm-Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=9JG0o3DLDkD4k+IP442D0wznfNNKuEF0SxBcPHed86w=;
+	b=PxRiNXRvBOIVup0bBzQFEEZ+Stt0iVgkGnedBL7LGc79PqmpzFQBj7Uofwy/24UMxx8h
+	 B9WungrzuYDgcQX/HRygfUqBs42Q91yVbJGjVW1H5uR6fBAJH3evUlMubbANqsaNvkcXI
+	 Nz9gNeCCIo2/hAUngdGyFCtTwz+ALAiQWOd1kJSRMKS/Gke2WoiWkn38YUaRTn9lJ98nN
+	 6P/28vroUhIoOOG69VS0U+b6QwjJuxB9BdSXoorcG6JCh2umXRCJyS8rL3U9S5rb1aj1U
+	 N21SsODwM5+mM7eSksZi6tLkcT7NLkbj2lNw8RyXqCaouYZ5VpZHtjtzzNChq0W20ww==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=protonmail.com;
+	dkim=pass header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256 header.s=protonmail3 header.b=fB4TITFZ;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790976662;
-	bh=tzZJB+0n/8VgvfOcihvRdeFOBymK88aG8gIbynhAUmA=;
-	h=Date:To:From:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=jZs4KIS+L18CdID1GzKQ0UvekkaCP1RMLMu1u93ATGOQ6zuhP04GHy5/hmmpgCGA/
-	 S0z7AZAL/sVYYr+n2p/kyHxnLLQ1bpvTl2Q6z3+3eD9256oXhrgVp7NDzg61e/pxA5
-	 MJ1uB/rN4tpeFieiolzlJ6kYKYuBrm6riVuz2OtlWq/sh5OXkHcJnQBJmTht7IISSU
-	 xrgkN+tVy32uDcJXVkuGrM6jvZZn/tS8rlr0w6ygt6qzb5PeLkpj4wuL8giyaZa9k+
-	 x+0VvtXVDqYOyu5D6h/ymFf+vhtheiyydrD4CDaS1Q6EwMF57rqIR/ZBaGFbtnDOhR
-	 91cxavxlpZ9jQ==
+	d=lists.u-boot-project.org; s=default; t=1790976664;
+	bh=9JG0o3DLDkD4k+IP442D0wznfNNKuEF0SxBcPHed86w=;
+	h=Date:To:From:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=XnM/V7rvetLy+CTMCn3pbuUw4FJp3OfrDAlRZO9+Q5wjo85KIF+bIVcFHDJSaDC0X
+	 mb7ebSjOR7sGbIf1FHbLakMQKwDmQ3TdT2QwvwjGWvNzD6cpRu4TJ2DXPBwmlY1ugB
+	 dT9gdSmPpFdz6OwmatjAzU6kw9lwREPE0YFUb3f/51wUyJAUqHMxN3ve1B77KC0iU8
+	 BEk3stkh0PmZnUVRgty/aHN2xAZgyXV/XcjQXYcRXkw8ebk/UPWDKzGzCHUgT2TQCk
+	 Sw603A0GiP/t30+qO3rEXvY18Ygi/r/cu/L/faroMFcgXsJNTdcift03ta8PU5B4Tu
+	 rxdJEzojjQQsA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 922D160D92;
-	Fri,  2 Oct 2026 21:31:02 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 33A36179
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:29:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6BE7F81372;
+	Fri,  2 Oct 2026 21:31:04 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id BC6ED179
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1956F60D92
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:29:56 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id AE36E81365
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rLUeT8oqu4UB for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 21:29:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3837C60D70
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=85.9.210.45
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790976595;
- b=ZiCvn/DKW+RdHsvkZtn7yonrA7ghqNj9wG80RHpjWumb8A5EWOj5dnTHucEIKJohvcc9
- fp+dnzseui9CLMHYuIxbQN06iowJLVuSZvadT/DNxFuh1kUFwXIwxCJ+mlN8SFGMooJNT
- ifv+evVECSybl243wSKUc2RMvF2k9JwkJJmoVSuYVfqmD8dWssXipPw4IZF/Y7XKjENcE
- 2H8TmjR7GDQqpFXB6n/2qc438iF+mrbHcvTzemjRNDU5Uhp+VHtYWnXme0iO6Ryc0XUJI
- hCFoID35p5wblOjc+g5e0j9gbMxe8b9QPP/qbsGZYGOHxahVtmEGSj0n/ySZWKH5P9g==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JJWI1XGRY9Eu for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 21:30:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 9F47281323
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=109.224.244.102
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790976600;
+ b=gcnBJGBKfdPZc9jMfKt1woNcWt7YWn9IFs33ojRWDURiMwIvxNFjctbcIZ6ulntADGSz
+ 9QBl3fn0Xx+QJvi4E9i0ni2EmCIFY19Yy8wPHsuHeeAZogiPfXCUzhVH/ppMAIYB5exJ8
+ IKSqB8BQqvTHBjKcz49BaJbyEdTHtFKAYMtaKIHF2PSizLxL6hKDEJzPcZHCyLII05fRg
+ 1pnMWseSvxA7NR/xDQXwNhSU/ZlGnA0DnoGl3QR6azdV1a7ej0gmUaMcuoJgpis47ZqRF
+ RvWFQuc7heg79TdJNJMVEQQDpevPtNb3mg9O+XObd5WgCiiteei/gcRHTsCbp0t/lBQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790976595;
+ c=relaxed/relaxed; t=1790976600;
  h=Received-SPF:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
- In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
- Content-Type:Content-Transfer-Encoding;
- bh=tzZJB+0n/8VgvfOcihvRdeFOBymK88aG8gIbynhAUmA=;
- b=K7R3+kEb0bj5ep3HQLYyobxzlqVTxGdeEIUJVeZxmbuJvYQv69o+PgfrBCGttHzF0vmy
- FisIaGdhzt9gpXD4PFgHMiOf3Rt817Br2skUvE8FGCMvsI3ZYTXzyozWz/I956g+NVIRo
- S1LbDM+ZdaCQpIuHEWmH4lQxH4eQJOda/CTa8yY5VADXVmGoNBcbBCUCJ+nSt1+Am1lvU
- 01DopnB/Slm4j2o70g5p2WgM7DYOHfVcvw7eLX3kMgheABQuyvQLEDd5VokevWd6R2cfx
- DKVRMWqUMPE1fiD4eHEijwRH+KARxAHUxpQkfwuCk4RLlOInvGt3VzKvXBSfH4hBx/g==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ Feedback-ID:X-Pm-Message-ID:MIME-Version:Content-Type:
+ Content-Transfer-Encoding;
+ bh=9JG0o3DLDkD4k+IP442D0wznfNNKuEF0SxBcPHed86w=;
+ b=oKQC5zCEiAxzw2GFpKvEKqkxjeohkGf8tp9OzFml+MR7e5O+wuD2hY1X02zIDRZ+6E/h
+ qQIdlpEov2KpaQghUPFaHZAKHJDxOHJmwQY98kD7Qa2rMj0EBRE48GWMSmk/AAlI6Fxj9
+ ZwnW28kNlDIgO3xPw5R0Or35+AzK16CmtXohZ0PkWOSkx1jcX7FV6Q2Ro7sZ9fzmwW35A
+ TxoOSQlDb7Zv/iD+fM+0F4eoWYz376e0SoywYQDX8AwRLYoqZ50G02gsFTNAcaVj96vje
+ dJjtvRvEtkOE4ip9y4dJa/Ewbmobej3LNn6277V++IUNFISxB6G6CByjTclkYg6ZAvw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=protonmail.com; 
  dkim=pass header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256
- header.s=protonmail3 header.b=QdKifS5y; 
- arc=none smtp.remote-ip=85.9.210.45
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=85.9.210.45;
- helo=mail-06.mail-europe.com; envelope-from=davewk225@protonmail.com;
+ header.s=protonmail3 header.b=fB4TITFZ; 
+ arc=none smtp.remote-ip=109.224.244.102
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=109.224.244.102;
+ helo=mail-244102.protonmail.ch; envelope-from=davewk225@protonmail.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=protonmail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=protonmail.com header.i=@protonmail.com
- header.a=rsa-sha256 header.s=protonmail3 header.b=QdKifS5y
-Received: from mail-06.mail-europe.com (mail-06.mail-europe.com [85.9.210.45])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3837C60D70
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:29:54 +0000 (UTC)
+ header.a=rsa-sha256 header.s=protonmail3 header.b=fB4TITFZ
+Received: from mail-244102.protonmail.ch (mail-244102.protonmail.ch
+ [109.224.244.102])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 9F47281323
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1790976586; x=1791235786;
- bh=tzZJB+0n/8VgvfOcihvRdeFOBymK88aG8gIbynhAUmA=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=QdKifS5ymaD2o+DtgszVDxs4gPKDZZR0zv7HZKmdxzDVgYNcY7v2KBB/ZK65f8q3x
- QSW4i56eskdARXyaH0aQ2nFd4qhwQtkx4WXIJ9cKBygqxHZXrguiVR8s13ETa5lcxV
- 0MquOKqo4xi7aGMz4W31hdOBgoIgRwE1oC3h5jJ9rNA+wSU2ZM1RaJKHZIF7T+FhvA
- DECtqo6bs0JcOG/hn2LbpvgW5NBBRFMjIcnhLRJ9MklhzDOJPRYULfrJH8PF7M1tvc
- a16uIIHYSH227WzioNcdqu9FhvissVMXBQDSOeAMesM93ovTsRX2f4bEG2Li/vLqB/
- vNBizw6sQEeNQ==
-Date: Fri, 02 Oct 2026 21:29:41 +0000
+ s=protonmail3; t=1790976589; x=1791235789;
+ bh=9JG0o3DLDkD4k+IP442D0wznfNNKuEF0SxBcPHed86w=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=fB4TITFZCWdH0/EgBG3pGuaibl0IEzubX3a0Orjbn0bhZIZKnl7Jc+PypeFOzhDHy
+ U841yZqbXm8PuX2dXtchPruXz0PeIgWpYao8sBRwEhlRgPxcJ5ohpzBeLigvkAk3id
+ T3oOMW5Flrg7lwqr+7h8tZdx74OmnAZFrAWj08WSzHW+qotPEb/cA5uNf99sW08C12
+ p+jP0VE59BBXFMA0H7RKmsR1vRayqHddlnxZAyNiqUzfUtxcTo8Q4QxxPohiNqWZf7
+ PTAT9XnpIEEiJSNlvxUI5WTMnjt2fvMIlJ9hpzjWPkxF0uPtciNSskWCAb92P4E4JA
+ 5bfL2GKFpbnew==
+Date: Fri, 02 Oct 2026 21:29:45 +0000
 To: u-boot@lists.u-boot-project.org
 From: Dave Klotz <DaveWK225@protonmail.com>
-Cc: Huan Zhou <pericycle.cc@gmail.com>, Eric Chung <eric.chung@riscstar.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>, Yixun Lan <dlan@kernel.org>,
- Tom Rini <trini@konsulko.com>, u-boot-spacemit@groups.io
-Subject: [PATCH 3/3] mmc: k1: do not release the shared AXI clock and reset on
- probe failure
-Message-ID: <a00ed2e7d78b57722496ffb58f1e2965142f456a.1790975596.git.DaveWK225@protonmail.com>
-In-Reply-To: <cover.1790975596.git.DaveWK225@protonmail.com>
-References: <cover.1790975596.git.DaveWK225@protonmail.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Yixun Lan <dlan@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Eric Chung <eric.chung@riscstar.com>
+Subject: [PATCH 0/7] phy: spacemit: k1: fix the PCIe and combo PHY driver
+Message-ID: <cover.1790975597.git.DaveWK225@protonmail.com>
 Feedback-ID: 100562830:user:proton
-X-Pm-Message-ID: ac16d250e1d9332cabeddb8739ef3090466c1d6f
+X-Pm-Message-ID: 714564032662356bb443047cd40f97d8766e5770
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -145,45 +140,40 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-When the probe fails, the driver releases its clock and reset bulks.
-clk_release_bulk() disables every clock and reset_release_bulk()
-asserts every reset, and the first entry of each is the SDH AXI bus
-clock and reset, which all three SDHCI controllers of the K1 share.
+Fixes for the K1 PCIe/combo PHY driver from "phy: spacemit: add K1
+PCIe/USB3 combo PHY driver", bringing it in line with the Linux driver:
 
-One controller failing to probe therefore stops the bus of the others,
-and the next register access to any of them hangs the hart. On an
-OrangePi RV2, whose device tree enables the eMMC controller without a
-max-frequency, the eMMC probe failed in sdhci_setup_cfg() and U-Boot
-then hung at "MMC:" probing the microSD controller.
+- enable refclk and take the PHY out of reset at probe, using the clock
+  and reset the binding names, instead of fetching them unused;
+- calibrate the termination values the way Linux does, without starting
+  port A's PLL in PCIe mode, and put port A back as it was afterwards;
+- clear the termination fields before writing them, set EN_RTERM, set
+  CLKSEL on every lane, and update the PLL control registers with
+  read-modify-write instead of overwriting them;
+- add a power_on op that brings the combo PHY up in USB 3 mode (select,
+  test control, timer adjust, SSC, PLL lock wait). Switching the select
+  bit alone leaves the PLL unlocked and the xHCI reset never completes.
 
-Keep the clocks running and the resets deasserted on failure.
+Tested on an OrangePi RV2: NVMe on PCIe port B (link up, EFI boot from
+the drive), an empty port C reporting no link, and a USB 3 stick behind
+the on-board hub enumerating at 5 Gb/s through the combo PHY with a
+DWC3 glue driver I will post separately. Not tested: a device on
+port C, or USB 3 on other K1 boards.
 
-Signed-off-by: Dave Klotz <DaveWK225@protonmail.com>
----
- drivers/mmc/spacemit_sdhci.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+Dave Klotz (7):
+  phy: spacemit: k1: enable refclk and deassert the PHY reset at probe
+  phy: spacemit: k1: don't start the combo PHY PLL to calibrate
+  phy: spacemit: k1: restore port A state after calibration
+  phy: spacemit: k1: program the termination fields properly
+  phy: spacemit: k1: set CLKSEL on every lane
+  phy: spacemit: k1: don't overwrite whole PLL control registers
+  phy: spacemit: k1: power on the combo PHY in USB 3 mode
 
-diff --git a/drivers/mmc/spacemit_sdhci.c b/drivers/mmc/spacemit_sdhci.c
-index fec95e3bd7..c191d78067 100644
---- a/drivers/mmc/spacemit_sdhci.c
-+++ b/drivers/mmc/spacemit_sdhci.c
-@@ -640,10 +640,14 @@ static int spacemit_sdhci_probe(struct udevice *dev)
- =09spacemit_sdhci_phy_init(dev, host);
- =09return 0;
-=20
-+=09/*
-+=09 * Leave the clocks and resets alone on failure. The "core" clock and
-+=09 * the "axi" reset are the AXI clock and reset that every SDHCI
-+=09 * controller of the K1 shares: releasing them would gate the bus of
-+=09 * the other controllers, and the next access to one of them hangs.
-+=09 */
- err_reset:
--=09reset_release_bulk(&plat->resets);
- err_clk:
--=09clk_release_bulk(&plat->clks);
- =09return ret;
- }
-=20
+ drivers/phy/spacemit/phy-k1-pcie.c | 270 +++++++++++++++++++++--------
+ 1 file changed, 196 insertions(+), 74 deletions(-)
+
+
+base-commit: a000f2af240eaa996cec92f8d44bad96fdf3f898
 --=20
 2.55.0
 
