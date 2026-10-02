@@ -1,131 +1,135 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA59CA5FE4
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 21:31:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B9CCCA5FDD
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 21:31:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A62C48137A;
-	Fri,  2 Oct 2026 21:31:07 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4E55A60D9E;
+	Fri,  2 Oct 2026 21:31:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fjCmBuNY_eus; Fri,  2 Oct 2026 21:31:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4C2FE813A3
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790976666;
-	b=dgv/EX/folkHk4jEyENWQNyM4tBKmP73XMESUsV7oeulmG+1LMnchNgeV5nSGoy5l6pM
-	 w/NNpzmhHgHs46KGlFVZNmaYHAqJrhKEge7zJ9jbNUu3X/JoffGzXN6cKV2k7oYPSS7SQ
-	 4Ef6NDvy3MZ5107g0C47UGg9FUtqGwyBF/53e9HBni4KG253/F8IK7GnIR/3M4kUKijuj
-	 nvMfCT3CogZvqKikLJiK+KyQ9RAuWQo9JHy6ht9sRzguRTTAw9i4A4Nm0l5nG9oUlnHNQ
-	 2Z5O5fbwXfzglKmBRGvwg/AJ5f+Sz+i+prfUa0MKyq+2f197wuUtS2ZEGFkKqVF6XNQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oAYxQBJ8Q0QA; Fri,  2 Oct 2026 21:31:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 7ED0560D96
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790976670;
+	b=dJRJ+Zm6GaQgKbsEJJvE/msMEFIm3URl3KqSxn0o/DJvW4QMDfzwA1cqY8m1LELTyhvL
+	 8etZdZFYOv4mnjzZRJHPHlyBukKl49vuL4wVmRmxJuqKa4umj2CMrG8gecINMztqarOPs
+	 KxqXDMdWxrtq3NAISkWMKjAQgajQpuOZcDZ2Om6wH+q435kMrDMvHfCtg2vNkeNgJSkU5
+	 47KJaHXQ0A4SLA8yersXnGMu8fbaXekBppdHl4LDHNCCKEHeE2UnArs5Ka9fbRqlOWkae
+	 0Ca8YXrajvVt9SVqO/kXrchy0uXMM4jqR1xGWx/LxldqzjGBs6NDmwSwenflYSb3jsA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790976666;
+	c=relaxed/relaxed; t=1790976670;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
 	 DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:In-Reply-To:
 	 References:Feedback-ID:X-Pm-Message-ID:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=m9C0+Hd/OxKylw56K4tYEB9N8+7bGe7YRb5AU61aDck=;
-	b=Gz1BBsVAukrkPnzRB4NDngzxyEuIp+RrUDpgUfNuDOMB2S0brAuezvdjgzPdecQS5TnJ
-	 S/y5xOXPbYcTSTsZKMDO6zq16nYB6wNBYf9nD9NKEeidXlM4NQNCZcIAou8/vmpbuiYta
-	 CB+9p+/PEV0glHFVVp6G+ntN+43FvqJ4iNDccQHA3UruXJWHhB2TueX3GsEmBg3b48XBq
-	 7TfUCG0r1kylQM8vhZxxO9Lis2tZeoC6s8VK13GUCpdBwKRY0Pf0iItOXO4TvsvbtZEn6
-	 9OPVjyGqEKZ1n6HJRjrItj2wZ6cPweWmJbwzpCVHgmoh5jQiBj/fQfS5KyTs/gZvNaw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=protonmail.com;
-	dkim=pass header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256 header.s=protonmail3 header.b=tE2sVOxz;
+	bh=GRb4Ji59EUTwgafCasLgTUFDkpcYpKJfsy9GAEb2A2o=;
+	b=jtyTVx7gxEVKSc+12CBgIdI+iU/WM9u6Y5261yT4AOjWTF01tqdpii8D3fuzDDoddRfu
+	 ++SmVy6z42Z2URyJauwB0uIKgYcnCMKMPC76c9ejKqHo1TqH2iyGxdfszU42hu21fNA03
+	 xLRPP5CvjtepuXQ/orP4de3u/se0kSRdYbpK5RTFyMY0YzGhV1DUCTKz7TI/dpOdH9kfi
+	 kyehjgYrKUKQkq4LAOBOFgelUnE1bvq5CwRI02g/8n6vR6L7+y7Y6L1dCconIWp3s3coJ
+	 vp/6jfN+Yy6Mp1tLoCqM5RSURGMnsce1nm64nNu5y/fs3+xCeX6NpqXtaKb9b2jTAZw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=protonmail.com;
+	dkim=pass header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256 header.s=protonmail3 header.b=Sr6yYTQo;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790976666;
-	bh=m9C0+Hd/OxKylw56K4tYEB9N8+7bGe7YRb5AU61aDck=;
+	d=lists.u-boot-project.org; s=default; t=1790976670;
+	bh=GRb4Ji59EUTwgafCasLgTUFDkpcYpKJfsy9GAEb2A2o=;
 	h=Date:To:From:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fTUiykM61xyH7DIKBSNGQ9/k/TkLXBXvrkp/drbXj3NzcJIpwnPl5v5XOW9nrxPpA
-	 ud5H780CvcSTP4IiRyIYgiqODjHfIxfizEQ/mpYuukjbfx6k9FOy6Wdet8xMrAjmPo
-	 C6EDuMlSpOTqlAbz38u1ZILgVIESzia42pep2Ztf72E+Ad9zd1gHJGebb3bb0Embo2
-	 MQ0TJeCJUWdhHtvUybbUcy2i0jdY6nGOW31flVHY4ktA3toRtkt4LgVH+fgnOWPmaZ
-	 XcKMxagov7i2G+JJ2t2rjlTblK3x5PDUs4H2wqoR7khZ9Acj12wqoHrLsBwj5Ft8tf
-	 4YtgfqxMU+CiA==
+	b=E8CEIk1MfctyswKsCJ0UudDqopnXj5o0nwqz09VpwaRyTGy7lBSexo8DwBoY2cUio
+	 h+ni+ODn8l5qrUSVmypCvO96QMG4Nu/CoE18fqop/yALHRwJ0u4vsq9j4RdY/kgqG3
+	 3qNciKxJm9H2SrAZrl7ClvrTxirSDRebX2VRNBb2wTM96cq1oeaglKQBrXliTm7gW/
+	 Gww32pHI6Y1hpI+Iq0ncZjPxaA8WTmuPIiGRHefgqjIsKSgd7tNVlczYsUmqDjrJ0e
+	 2Dp3ZMzmv4AxmQTdcH5//fTWiHyjTNls1ipg6jo2fTBBnwAC2kp+IG7p+JtYRRl59q
+	 FJDJ9de0I1bBQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4C2FE813A3;
-	Fri,  2 Oct 2026 21:31:06 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id A8A3734D
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7ED0560D96;
+	Fri,  2 Oct 2026 21:31:10 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6F145179
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9A3B881365
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:05 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6086D60D92
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qbt9UdA1U0ca for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 21:30:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org C542D81370
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=85.9.210.45
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790976605;
- b=SapUoyZvWfj/EZs5JHujxSiN2n6K8iZImWFoZ7WWfZbtObJOJdzPfeb1aH1O375AvRHI
- RBqaE2GchjMYTiCwCuvy35D3gfVGgNOvU/F36f96voVRpkLn/JHV3CnUaHr+sqTEP/5nf
- xbpMnlQzuURu2CTgU/8PzEI1UfPh/rTCnwlA3K/ya0YTzeohl/HVAeOASMIrDtqftMO9f
- h5TI95mHeClLr9R4wrD/l4hSQzlQAoD7kwucqS2PxEoODUkxvoXcRPBAUt9VTWHdyHoFK
- 6TQHP3YgElMtWlVFdMl9opUqf30i1fh9CCLZ+5gBGhFOLd92lw2BFNMuMjfkqOjt+Fg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6OnBxPLm5i61 for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 21:30:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E5F1660D70
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=109.224.244.17
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790976628;
+ b=pt8P+5atWlSqxGvl0TVHxQmMcTUnwjZRzI7QAp3DoyjGgRYTMgviz1OcYTWo+YFYnmgJ
+ 9aqCfmCl/ShF2LqM6e4v8Qkx7ZcqAQjkhNRzxOUR/VKBfDAtntx8ehOE8Cd0srvuk2VzG
+ WcTBKuQfvJGeYa0FiZMYhyMQrFJJqkBbJH03DQ57n+cdvyHyB+VOLeBraey6L3JRY37Hp
+ xe0wcvKvhbDQR4Szmk15y3mIajixxNswoRUEogsEAMUl+4zZTLjJjOAczx24yeFWshlEI
+ ROsF/iKBf5gRTzRna6SWcu/NLinyuxcFH1rgIG5eUTVDkaJqmQDeWLYc7wJ9WbN5Adw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790976605;
- h=Received-SPF:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
- In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
- Content-Type:Content-Transfer-Encoding;
- bh=m9C0+Hd/OxKylw56K4tYEB9N8+7bGe7YRb5AU61aDck=;
- b=Z65LHVCsetYrWyTLzrR+y0yKc03tgCxXA7oNZ1iaZ/KBg1wmc1BkokxXKRtQmdPd63f3
- GW3zdAirf/I9QoY3rrcG+q7A7FnNPfuKwGRrzgpEKS0Dqor6Shc0m6B5MXgFklipgL4T1
- hEy2NoOB1v1SCWSVXK8TNT2kDsekqhBD25TfqRlrcJQNYZXF09sDf1T1Si/0S9/oh6WsG
- xdbTO3HpIp0ZSa8YLCf62v3+OmusYynUhLJ8Vk8zSiZdIeArUIC1eCWv4aEKvKBLTIHlV
- h78BAM51owOC3EGnVjFYFvuWhVYKl0fagTgiVOzG/9wPAx0oTXVQkFN+SgtngKKSnyg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ c=relaxed/relaxed; t=1790976628;
+ h=X-Greylist:Received-SPF:DKIM-Signature:Date:To:From:Cc:Subject:
+ Message-ID:In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:
+ MIME-Version:Content-Type:Content-Transfer-Encoding;
+ bh=GRb4Ji59EUTwgafCasLgTUFDkpcYpKJfsy9GAEb2A2o=;
+ b=ACa6HHkLCXFpi0VC++u7qiU7h7foSFriI54uiyPOhG5kORmxprmVGxK/cHGDDWyMny/t
+ uc223ePRiEhmMNLYV3GohtOPbOa7ymwSH36J8vSQ1U8H1OPyAa/0L+7XRWKqIgcrTSO9T
+ mgXmMxzOyaRItvvsXXittm6DiKZxjIbuJXZesTlIyVNOMEv45eMneYHyY52L95uECO9jQ
+ ctd8jhVuXv+IFbAa9HT/KQ/RhmPN3YFEAN3rYJ2NrX2LuYdSn9ZjpNvk5n5RRPuHMJikQ
+ gzcRxFyyauPNjbLPKGgopurwZ8/FVWHDaE2lKULgma29eQmHo3YkdrBjwNDFDd/sV2g==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=protonmail.com; 
  dkim=pass header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256
- header.s=protonmail3 header.b=tE2sVOxz; 
- arc=none smtp.remote-ip=85.9.210.45
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=85.9.210.45;
- helo=mail-06.mail-europe.com; envelope-from=davewk225@protonmail.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.s=protonmail3 header.b=Sr6yYTQo; 
+ arc=none smtp.remote-ip=109.224.244.17
+X-Greylist: delayed 65 seconds by postgrey-1.37 at util1.osuosl.org;
+ Fri, 02 Oct 2026 21:30:27 UTC
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=protonmail.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com
- header.a=rsa-sha256 header.s=protonmail3 header.b=tE2sVOxz
-Received: from mail-06.mail-europe.com (mail-06.mail-europe.com [85.9.210.45])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C542D81370
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:04 +0000 (UTC)
+ header.a=rsa-sha256 header.s=protonmail3 header.b=Sr6yYTQo
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=109.224.244.17;
+ helo=mail-24417.protonmail.ch; envelope-from=davewk225@protonmail.com;
+ receiver=<UNKNOWN> 
+Received: from mail-24417.protonmail.ch (mail-24417.protonmail.ch
+ [109.224.244.17])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id E5F1660D70
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1790976597; x=1791235797;
- bh=m9C0+Hd/OxKylw56K4tYEB9N8+7bGe7YRb5AU61aDck=;
+ s=protonmail3; t=1790976626; x=1791235826;
+ bh=GRb4Ji59EUTwgafCasLgTUFDkpcYpKJfsy9GAEb2A2o=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=tE2sVOxzthYWvZrDW+t0gYkAxZ7rGXwn9Hz7jHKEcouJ43ni3SZVaaYLz6pkQ0POD
- /fmNaS0Hv2MR7EXJGdsyfl4Qii9lcKK4Dco3MvDFPdA4SyuhxW/JzrxoEvG58WhlH0
- j8LLmrBggK/bZxhdVWUQKEuA8kyE/3u/voLhhL2daAprL3iIIcDA9poEvfHhAsVj7K
- 0VzVaOwcc/58IemlUlUGKztbSwJ4mlU0NBAlx31Og7nZ1Xc/XSH5R/D/mVYX7d2IW9
- yISRFCW56JSNwTNLKJM+bkQFYiJ2mxt4O9WeTSfLk09ziz2osiPvJskQTP96S6DHQu
- qTsPyWUsiGHTA==
-Date: Fri, 02 Oct 2026 21:29:52 +0000
+ b=Sr6yYTQoTfyYFzTi0KEn9mov5DS0WgVl8BGJTqWBaT0axv/8HHS/eg4XnoQrVQIUB
+ wyAoRJa6Yqyv7fXm+014syvAdu0ZfJ41z5G/PDSZ5jOus8JzdYDeglbuqIkHgvGeZR
+ GSFAogGHzc3m/zix2SuFVo14SltgnSBVVBOL5Layw6lLvntPV3vWnboldMBdXRQfYh
+ 7MKoJrSCIFBqYiDOdQeCuT6gQJUO+HjCW87QO2Dyl0jh28du8iK+VrLoDRkyWxLF8y
+ Q/so+/crZKGWikl1Ssry6Tu9pPDhYw4Y3g18RydnvJ4E8W7aFOBEDxflT+rUqRpfLx
+ NOFFCphCC8OHA==
+Date: Fri, 02 Oct 2026 21:30:22 +0000
 To: u-boot@lists.u-boot-project.org
 From: Dave Klotz <DaveWK225@protonmail.com>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>, Yixun Lan <dlan@kernel.org>,
  Tom Rini <trini@konsulko.com>, Eric Chung <eric.chung@riscstar.com>
-Subject: [PATCH 1/7] phy: spacemit: k1: enable refclk and deassert the PHY
- reset at probe
-Message-ID: <40be5679408eabffea146616801c6d976dc45ff9.1790975597.git.DaveWK225@protonmail.com>
+Subject: [PATCH 6/7] phy: spacemit: k1: don't overwrite whole PLL control
+ registers
+Message-ID: <c30fb31cd4fa39c5a322116b99ef0efc91316bcb.1790975597.git.DaveWK225@protonmail.com>
 In-Reply-To: <cover.1790975597.git.DaveWK225@protonmail.com>
 References: <cover.1790975597.git.DaveWK225@protonmail.com>
 Feedback-ID: 100562830:user:proton
-X-Pm-Message-ID: 5576cc6775b8f765d0a6c0c19a912d796f42aeb4
+X-Pm-Message-ID: afa65ef4b27ac64c906490943217d8f437e148d1
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -143,152 +147,75 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The driver gets the clocks and resets listed in the device tree with
-clk_get_bulk() and reset_get_bulk(), but never enables or deasserts
-any of them, and only warns if getting them fails. The combo PHY
-instead clears GLOBAL_PHY_RST by hand in the APMU before calibrating,
-and ports B and C rely on the PCIe controller driver to do the same
-for them.
+To start the PHY PLL, init writes 0xb78 over the whole of
+PCIE_PU_ADDR_CLK_CFG, and CFG_FORCE_RCV_RETRY over the whole of
+PCIE_RC_DONE_STATUS, clearing every other field of both. 0xb78 is
+CFG_SW_PHY_INIT_DONE, CFG_INTERNAL_TIMER_ADJ =3D 6 (PCIe) and four
+undocumented low bits. The lane 1 register is written even when the
+PHY has only one lane, as the combo PHY always does.
 
-Linux gets the "phy" reset of every K1 PCIe PHY deasserted at probe
-(devm_reset_control_get_exclusive_deasserted()) and leaves it that
-way; the "refclk" oscillator is the parent of the PHY PLL and is
-enabled with it. Do the same here: at probe, before any PHY register
-is accessed, enable "refclk" and deassert the "phy" reset, and fail
-the probe if either cannot be got or enabled. The combo PHY's PCIe
-port A application clocks and resets are not part of this: the
-calibration handles them, as it does in Linux.
-
-The calibration no longer needs to clear GLOBAL_PHY_RST itself, since
-that is the bit the "phy" reset controls.
+Linux's PLL prepare sets CFG_INTERNAL_TIMER_ADJ to TIMER_ADJ_PCIE on
+each lane in use, sets CFG_FORCE_RCV_RETRY, clears REF_100_WSSC along
+with selecting the 24 MHz reference in PCIE_PU_PLL_1, and only then
+sets CFG_SW_PHY_INIT_DONE on each lane to start the PLL, all with
+read-modify-write. Do the same here, using the existing named fields
+instead of the magic value.
 
 Signed-off-by: Dave Klotz <DaveWK225@protonmail.com>
 ---
- drivers/phy/spacemit/phy-k1-pcie.c | 69 ++++++++++++++++++++++--------
- 1 file changed, 50 insertions(+), 19 deletions(-)
+ drivers/phy/spacemit/phy-k1-pcie.c | 27 +++++++++++++++++++--------
+ 1 file changed, 19 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/phy/spacemit/phy-k1-pcie.c b/drivers/phy/spacemit/phy-=
 k1-pcie.c
-index e54742a2a9..b445ee9d01 100644
+index 0e18f29024..c3d29d6a2a 100644
 --- a/drivers/phy/spacemit/phy-k1-pcie.c
 +++ b/drivers/phy/spacemit/phy-k1-pcie.c
-@@ -92,7 +92,6 @@
- #define PCIE_CLK_RES_CTRL=09=090x03cc
- #define PCIE_APP_HOLD_PHY_RST=09=09BIT(30)
- #define DEVICE_TYPE_RC=09=09=09BIT(31)
--#define GLOBAL_PHY_RST=09=09=09BIT(8)
+@@ -311,9 +311,9 @@ static int k1_pcie_phy_init(struct phy *phy)
+ =09val |=3D FIELD_PREP(CFG_REFCLK_MODE, RFCLK_MODE_DRIVER);
+ =09writel(val, regs + PHY_LANE_OFFSET + PCIE_LTSSM_DIS_ENTRY);
 =20
- #define APMU_CLK_GATE_MASK=09=090x3f
+-=09/* Configure PLL: select 24MHz reference */
++=09/* Configure PLL: select 24MHz reference, no 100MHz SSC input */
+ =09val =3D readl(regs + PCIE_PU_PLL_1);
+-=09val &=3D ~FREF_SEL;
++=09val &=3D ~(FREF_SEL | REF_100_WSSC);
+ =09writel(val, regs + PCIE_PU_PLL_1);
 =20
-@@ -107,8 +106,8 @@ struct k1_pcie_phy {
- =09void __iomem *apmu_base;=09/* only for combo PHY */
- =09u32 pcie_lanes;
- =09bool is_combo;
--=09struct clk_bulk clks;
--=09struct reset_ctl_bulk rst;
-+=09struct clk refclk;
-+=09struct reset_ctl phy_rst;
- };
+ =09val =3D readl(regs + PCIE_PU_PLL_1);
+@@ -330,15 +330,26 @@ static int k1_pcie_phy_init(struct phy *phy)
+ =09val &=3D ~SSC_DEP_SEL;
+ =09writel(val, regs + PCIE_PU_PLL_1);
 =20
- static bool k1_phy_rterm_valid(void)
-@@ -155,13 +154,11 @@ int k1_pcie_combo_phy_calibrate(struct udevice *dev, =
-struct k1_pcie_phy *k1_phy)
+-=09/* Set PU_ADDR_CLK_CFG for both lanes */
+-=09val =3D 0x00000B78;
+-=09writel(val, regs + PCIE_PU_ADDR_CLK_CFG);
+-=09writel(val, regs + PHY_LANE_OFFSET + PCIE_PU_ADDR_CLK_CFG);
++=09/* Set the PCIe internal timer adjustment for all lanes */
++=09for (i =3D 0; i < lane; i++) {
++=09=09val =3D readl(regs + PCIE_PU_ADDR_CLK_CFG + PHY_LANE_OFFSET * i);
++=09=09val &=3D ~CFG_INTERNAL_TIMER_ADJ;
++=09=09val |=3D FIELD_PREP(CFG_INTERNAL_TIMER_ADJ, TIMER_ADJ_PCIE);
++=09=09writel(val, regs + PCIE_PU_ADDR_CLK_CFG + PHY_LANE_OFFSET * i);
++=09}
 =20
- =09/*
- =09 * Initialize the APMU control register: set RC mode, enable
--=09 * clock gates (bits 0-5), deassert PHY global reset, then
--=09 * release the PHY hold.  Without this the PHY registers are
--=09 * not accessible and reads will hang.
-+=09 * clock gates (bits 0-5), then release the PHY hold.  The PHY
-+=09 * (global) reset was deasserted at probe.
- =09 */
- =09val =3D readl(k1_phy->apmu_base + PCIE_CLK_RES_CTRL);
- =09val |=3D DEVICE_TYPE_RC | PCIE_APP_HOLD_PHY_RST | APMU_CLK_GATE_MASK;
--=09val &=3D ~GLOBAL_PHY_RST;
- =09writel(val, k1_phy->apmu_base + PCIE_CLK_RES_CTRL);
- =09val &=3D ~PCIE_APP_HOLD_PHY_RST;
- =09writel(val, k1_phy->apmu_base + PCIE_CLK_RES_CTRL);
-@@ -384,6 +381,48 @@ static const struct phy_ops k1_pcie_phy_ops =3D {
- =09.exit=09=09=3D k1_pcie_phy_exit,
- };
+-=09/* Force receiver done */
+-=09val =3D CFG_FORCE_RCV_RETRY;
++=09/* Force receiver retry */
++=09val =3D readl(regs + PCIE_RC_DONE_STATUS);
++=09val |=3D CFG_FORCE_RCV_RETRY;
+ =09writel(val, regs + PCIE_RC_DONE_STATUS);
 =20
-+/*
-+ * Enable the 24 MHz reference clock that feeds the PHY PLL, and
-+ * deassert the PHY (global) reset, leaving it deasserted.  This must
-+ * happen before any PHY register is accessed.
-+ */
-+static int k1_pcie_phy_enable_resources(struct udevice *dev,
-+=09=09=09=09=09struct k1_pcie_phy *k1_phy)
-+{
-+=09int ret;
-+
-+=09ret =3D clk_get_by_name(dev, "refclk", &k1_phy->refclk);
-+=09if (ret) {
-+=09=09dev_err(dev, "failed to get refclk: %d\n", ret);
-+=09=09return ret;
++=09/* PLL configuration is done; start the PLL on all lanes */
++=09for (i =3D 0; i < lane; i++) {
++=09=09val =3D readl(regs + PCIE_PU_ADDR_CLK_CFG + PHY_LANE_OFFSET * i);
++=09=09val |=3D CFG_SW_PHY_INIT_DONE;
++=09=09writel(val, regs + PCIE_PU_ADDR_CLK_CFG + PHY_LANE_OFFSET * i);
 +=09}
 +
-+=09ret =3D clk_enable(&k1_phy->refclk);
-+=09if (ret) {
-+=09=09dev_err(dev, "failed to enable refclk: %d\n", ret);
-+=09=09return ret;
-+=09}
-+
-+=09ret =3D reset_get_by_name(dev, "phy", &k1_phy->phy_rst);
-+=09if (ret) {
-+=09=09dev_err(dev, "failed to get phy reset: %d\n", ret);
-+=09=09goto err_clk;
-+=09}
-+
-+=09ret =3D reset_deassert(&k1_phy->phy_rst);
-+=09if (ret) {
-+=09=09dev_err(dev, "failed to deassert phy reset: %d\n", ret);
-+=09=09goto err_clk;
-+=09}
-+
-+=09return 0;
-+
-+err_clk:
-+=09clk_disable(&k1_phy->refclk);
-+
-+=09return ret;
-+}
-+
- static int k1_pcie_phy_probe(struct udevice *dev)
- {
- =09struct k1_pcie_phy *k1_phy =3D dev_get_priv(dev);
-@@ -425,13 +464,9 @@ static int k1_pcie_phy_probe(struct udevice *dev)
- =09=09if (!k1_phy->apmu_base)
- =09=09=09return -EINVAL;
-=20
--=09=09ret =3D clk_get_bulk(dev, &k1_phy->clks);
--=09=09if (ret)
--=09=09=09dev_warn(dev, "failed to get clocks: %d\n", ret);
--
--=09=09ret =3D reset_get_bulk(dev, &k1_phy->rst);
-+=09=09ret =3D k1_pcie_phy_enable_resources(dev, k1_phy);
- =09=09if (ret)
--=09=09=09dev_warn(dev, "failed to get resets: %d\n", ret);
-+=09=09=09return ret;
-=20
- =09=09ret =3D k1_pcie_combo_phy_calibrate(dev, k1_phy);
- =09=09if (ret)
-@@ -461,13 +496,9 @@ static int k1_pcie_phy_probe(struct udevice *dev)
- =09=09=09return -ENOENT;
- =09=09}
-=20
--=09=09ret =3D clk_get_bulk(dev, &k1_phy->clks);
-+=09=09ret =3D k1_pcie_phy_enable_resources(dev, k1_phy);
- =09=09if (ret)
--=09=09=09dev_warn(dev, "failed to get clocks: %d\n", ret);
--
--=09=09ret =3D reset_get_bulk(dev, &k1_phy->rst);
--=09=09if (ret)
--=09=09=09dev_warn(dev, "failed to get resets: %d\n", ret);
-+=09=09=09return ret;
- =09}
-=20
- =09dev_dbg(dev, "probed (combo=3D%d lanes=3D%u rterm=3D0x%02x)\n",
+ =09/* Wait for PLL lock */
+ =09ret =3D readl_poll_timeout(regs + PCIE_PU_ADDR_CLK_CFG, val,
+ =09=09=09=09 val & PLL_READY, PLL_TIMEOUT_US);
 --=20
 2.55.0
 
