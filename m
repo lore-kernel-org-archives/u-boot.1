@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 203FCCA5FD4
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 16:47:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA9B0CA5FE3
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 16:47:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D930440BAA;
-	Fri,  2 Oct 2026 16:47:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 91E988132B;
+	Fri,  2 Oct 2026 16:47:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Bwng_qTimisu; Fri,  2 Oct 2026 16:47:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org D71EE4084B
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790959660;
-	b=ccdLGK8fF/cFzU5el05Ze5xgN5BtXVZKSjKK+JzY5yOQPBQnTqeBIuI6GP4Oxy5EFfrt
-	 TKqWOQWGfDO4y1qiPxHgar/rwev4Lj39YBYiu0uojd/l9cK7w6TdkLCgL8cXh18PaWQ5r
-	 47iJU2YdxIEA2axFybCP7BX1U7rlejBt+0mAokO8tztOfNmKC6c8bw1Lrzw7Ydr2bi6/b
-	 SYSVv27zVd21lf65FeyQOE4TX0/s21xXpBtzTHie8pRNKWCf2I/SuMoVj71f0HxWWv/6m
-	 X1A+eIaOsIVzWXnOjjHmMwH21hPqrjgzOZJBR7096ieVevRkPUyV+5F4DPWnTqcpXRw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xwOmOsWq9EBF; Fri,  2 Oct 2026 16:47:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 81C9181325
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790959661;
+	b=AzUTikRRHtWeYq7r4noVHE/G/o6v7I+E/wYCIP+PJ0DbCeovfZqB51LlKiYdCJOBgo0u
+	 J6R+k7wX3V5rO8Nc+rwSzPhj+NLWv6+KCnW9MxpVwBw6rM5Xa7griEcxdr1h74OBrHf7J
+	 uPVdDJdoWpLODC5NrX2GA7rSXkGYrxqXXjjo1swPidQUwceBnMRMOkGS721IrakGR6eMe
+	 tfKP70t8FMOQhRyws0hU0nhEMcmoDdJXYjvZXRDuigWrO4jv1LlXKxCR39Df5Oic1GWc9
+	 dCZKpZSF5Uu6V53e0VLYiFQo6XhbSlABgqSS/dkshYQ5BKSod/IYv37WM/Qfpsg1lMQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790959660;
+	c=relaxed/relaxed; t=1790959661;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,102 +32,101 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=tJg2Yd8pKC+PBNuU517PkiEQxJ/syKGp1Byfo61tPFQ=;
-	b=DSa0NZC59RpP5HTM1W4md8LgTKwEZ2/OpZIoq87NHNRxQs+kEUFBXbZ5P5L/1EDUHfAc
-	 CSmqJYBMEZ15kxlvoTzNtRXqgNCjDtzzUw6YfTNXnzR2guM61jV/x+grwKUy2Sz1dvKfi
-	 4YFqz7Xb/SIsqTY+id5KKqHXHddyi6MslC1WLheq0QOiY/03/gFxqV5a9LJKyt2P55beW
-	 D8TlJYVxRTpdQm7dssL4pkWmeutMclIRp3KFy3721n+Ytb2D7pw39J2GOzYsYe1cLJmhs
-	 w+ykbcwvKoNc+ZmW9uGOHfqbP6gZi+ZLHbTr8EnfnZDofdvzCM1H/fAUPva9qUVfhew==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=heDv2D81dUQ8cl3Z4uccJzlxnC0UJ5chrTZAFWe432I=;
+	b=bcEZW/QuEQEL4SZf7sLh3VOc0Hpk4sWEWP+OI4+K5PJsnzn7By4vi+GbbFQZtL3CFSqU
+	 Uu9nO7C/Kitz9sOuaCQYEQjcK9w4wJxutIoYgda0GGRlnftpJxTSEMp6pJcbbLBnFdnD6
+	 0vz+UEbmqlV+CD8TNinmnk7PZucxXGZWBfknXTcEiSC9/I7vJYvpeuDDUTuHivRRLtHQx
+	 pr2vMhsTzMqLz5u1/QvOvbWxklC6bC7sGKbhyTu82CenR7h1QFYb6PARhJw/MLWiXB8i6
+	 1Oyu5hDPfUF7KsAKtjrYf8Q+GAZb/K1WcddZbyiVtx8V6OjAOBC/Y5iv1G+Hx4zMhBw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790959660;
-	bh=tJg2Yd8pKC+PBNuU517PkiEQxJ/syKGp1Byfo61tPFQ=;
+	d=lists.u-boot-project.org; s=default; t=1790959661;
+	bh=heDv2D81dUQ8cl3Z4uccJzlxnC0UJ5chrTZAFWe432I=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MV9Ln2B1iY/dB3/Xgj4PnY0LgrOyT0/0SYFXLnbwkzoNQSUWl+YZ8MC1W31f5VMXc
-	 8dcBUfTs8GiIXNccQtIueXdA35uay5oK2ycCEAaqURrS5G1Mz8LgZWpgla3cvJHHGA
-	 QA6NU6hU4qiRyDV45z2lQ1kUfeNOj3bw6pSa10zmIqxcEcyrsfGxGEkR2MWvC1lvUm
-	 IXvquszQ3poVwWZhm9kUjnwQD7qm3nZbHc0rNCHHZKv1pSKgs0+minMWcaAOjtWJA7
-	 JmJnJfjp9M/KAUozQS/AuvUZuCYXh2bQ5bPIB6d+BQD8SVeerkhiYCmpJWoy8Yc6XG
-	 MLHgd/1aZQYeQ==
+	b=LlnQu1lc1CteYiBL+1uJ/KwUaLuedS3NPTYgUn0gq1SHiCQJKXY9wqopdDC24nx1f
+	 PXtc+y7w203ggy05lYweIeSeITW7mfmOsRnarc4Ng/gGZrDOoZkDNnXMqnXcJfqGZx
+	 1sS5HkSLkkWzDHY4Qmpw5P3Wrtk7hGqNSc726MJjwW8ukxORxhNPckLurfpKI3mG2+
+	 4WstuEKbZg//EGol51S9nCXwk5wb92Xku+tIqMt3PBYlZpOj6KbAAh7PStnYZ8wzY3
+	 FTSXHOOW75ZcOaTHN/rXAGYjJCwtf3Wmt5b4UrMu7qtIdcGRHVjXkjT8EeE7P8GLw9
+	 Iv6+uv0fDwGcA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D71EE4084B;
-	Fri,  2 Oct 2026 16:47:39 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3956834D
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 81C9181325;
+	Fri,  2 Oct 2026 16:47:41 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4D9BD34E
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1EF564055D
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:39 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 338FF60BBB
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 46JrctcbTlZr for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 13:14:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 0EE11400D1
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790946878;
- b=TUWVnGONAZdGgs3V9kJlo6iS9lKEoEY4H29vBCWFjpacXawJRyHRKEove5ps/mZZpMa8
- DqAMmLzHpf20DQK9nhZlB5WSNE69Hnj8bhxJSCQkQGpR4hXJwoLlM/wKagEpOw8yMhm2X
- vc1QsIYPh5FovI2/x5MwjVXxPAPAMUo880kKLnHXdaLu1J33lofCKFT3GifCAcavJ9Vxp
- 5CJIKxxVMkDADftAgugOCUCC1ZXkKSGAcXtjngkryDDHOr8KdjjHO27UNOepFbKgdmcRu
- YEOZbVGUWKVwEGYhFHF2ZSrM2dZea9tvSn7hdmcdi7sPndmE0EerlKYRejCt0/ReA0g==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cKcymHpS5q5z for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 13:14:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0A61660BBC
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=185.246.85.4
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790946882;
+ b=Xa8ZkRbfOv6kdsV0ZhMbChue3wyjqAI9eRf3ebrY1g0xlJHOaJcBAAVRjI4AfPBH+lok
+ pQ6+SmT7NJczWTmxaxH0q9J6ySzqqCjYVKOOBKwUo03jAqVEfcP2F/BnHqsuaVZwksF6Y
+ 4QHbgaQJxqNeUcGDhN/0MEKZ+YpgEQBjLppXXa3wC6JiIcVUkJyWMDBL5oa9MqZsCG9dY
+ CH3P+TF1o70VSqp6lI7iPNx8k0dXvpnKNjjJJo8UafdnwrYBYGzUmqMWgd+zqA25pbhDw
+ 0RIz9Myb4jwRxTllQZluitMFnNtb4usjkJvaBldd6j7XOKJ0uC3Dr7Tj1fH5hTvxYVA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790946878;
+ c=relaxed/relaxed; t=1790946882;
  h=Received-SPF:Received:Received:Received:DKIM-Signature:From:Date:
  Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Last-TLS-Session-Version;
- bh=tJg2Yd8pKC+PBNuU517PkiEQxJ/syKGp1Byfo61tPFQ=;
- b=UvAtj7ZmHc9bJpPnoxZKBLBAd0fIHNvJxiAQB4ljH1VYTEEMK8mjuuozozdP75a96P/Z
- fLHfOnO+/D2YzBQasTk9oUzTOLcVIuXMXugzLl64/E37BkxaLLCoUSquYAogxKI/4vOvh
- 0kmmDC+Mhj7PlxOIF5k9oMV2k38GPp5/Vsb0TunmxXqCsJNjtYqZR6yWTZFWDRFczKdny
- jkyr7j1VIAGE07JHjCcovTYSScjfhfhZaPngoS0aj7nL5GePrXKku7n7JC+gxkWgTcRoE
- baobbqhhxYDGeGyoUDFSLDSzCg4DBU11QSaWOHRAo4wtfzjM82OmzwNVqPtmAxKujlw==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=heDv2D81dUQ8cl3Z4uccJzlxnC0UJ5chrTZAFWe432I=;
+ b=oGYYKCaFWNEyXVwmuzVgZmybBblI3DbIMXLRisE4dJwKnnIV2Ul+06UhLNIh6auaDuFS
+ O7btjAeQmujZZ0wVbszeMUYQZdxWUvnAbbYQxW88sPO17180BMCLvw7DI3kRZmhWNRq4l
+ QVwHtDfKG5zniSK+wXQoceso/4s0UOXdrU91Lb1shxF1U1pOQsE0zcxHB5MLdrSpcKT2t
+ ZLyyJNnM+7HAIEDoiPM3M7noqK/jZYTKD1szD7MXHWCnocCLJovvuusVmcSxHIyXMlj1s
+ /bi+ibVyVMjc55alKshAvT+bSv+ad6GfRiPGU3piMx8oG3vy7hZAPKbCYlE8wCV++cw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=bootlin.com; 
  dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=G2W5Tla0; 
- arc=none smtp.remote-ip=185.246.84.56
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
- helo=smtpout-02.galae.net; envelope-from=benoit.monin@bootlin.com;
+ header.s=dkim header.b=Kf6HWlWX; 
+ arc=none smtp.remote-ip=185.246.85.4
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
+ helo=smtpout-03.galae.net; envelope-from=benoit.monin@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
- header.a=rsa-sha256 header.s=dkim header.b=G2W5Tla0
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0EE11400D1
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:37 +0000 (UTC)
+ header.a=rsa-sha256 header.s=dkim header.b=Kf6HWlWX
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0A61660BBC
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:41 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 175AA1A10E8;
- Fri,  2 Oct 2026 13:14:36 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 0B41C4E4111B;
+ Fri,  2 Oct 2026 13:14:40 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id DFE3B603DC;
- Fri,  2 Oct 2026 13:14:35 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id D344C603DC;
+ Fri,  2 Oct 2026 13:14:39 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E9FC2103281F4; 
- Fri,  2 Oct 2026 15:14:29 +0200 (CEST)
+ with ESMTPSA id 057A2103281E3; 
+ Fri,  2 Oct 2026 15:14:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1790946873; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1790946878; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=tJg2Yd8pKC+PBNuU517PkiEQxJ/syKGp1Byfo61tPFQ=;
- b=G2W5Tla0yyEKSa/q+NL35K+EydiZ8oDaE1gCjVQ5bUZlOqznSldDzR3jSrSmX6BcRRQhRZ
- 94Yi46gpPp1GA8UK5SJ6Gw/HjHPl0SwDvm/tw/3B52jEl8Um+fuDBU0WoEMzSk3SlfPWrS
- y8x3ypX8ZtLt/TRdA7JHVEPdpFo1hTcb/aRIuaihByeFoRAvoBq1yszLQQW/2QA6z5o4jb
- iISJcUcHC6WEY4wQRUZj9OJAFPJrfBaKvFVyANgrrxJJA3ueX75zRm80GwSqanDvPZWxNI
- 4h3VdKoP4PdIx3vdCwo5uQxQGDWAL7V+n8AcHhLjciCTHGvfuOoQ5/2wGvNNwA==
+ bh=heDv2D81dUQ8cl3Z4uccJzlxnC0UJ5chrTZAFWe432I=;
+ b=Kf6HWlWXGjqqvm5tbDs7Bba8vph/yFPg6fananIqfGAeDKOXCS8rJ7m0ix1H2jYzKqHWYt
+ GIMkWtnU4XiEmgl90cgANsCYGIbdXgBdr+dQF4fNRPkVGMMyhQkumLqIlrk84BpDmMNBA0
+ QSn4sOk+3oquqkAQuAzGbmBwl1ncSj+eaF/eVLx+YRvj9GXANXUhcah6+BS627k8VhjLdb
+ 0rR8Hl73Gl9cIlT8Aa/MCBefelKY5H5zkb2H9iMeeA+yjEWZpUTB3pICdXHIWatbcHA5TB
+ EkcK226EK2Omf0MNsEGuP9If2yo317Aejcu6dL8iT25mdS2PuEioQtM50TpUDg==
 From: =?utf-8?q?Beno=C3=AEt_Monin?= <benoit.monin@bootlin.com>
-Date: Fri, 02 Oct 2026 15:02:26 +0200
-Subject: [PATCH 08/10] spi: atcspi200_spi: Add spi-mem support for the
- Metanoia ATCSPI200 variant
+Date: Fri, 02 Oct 2026 15:02:27 +0200
+Subject: [PATCH 09/10] riscv: dts: add MT2824 SoC and MT5824 EVB device trees
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20261002-mt2824-v1-8-bc44cf0e0289@bootlin.com>
+Message-Id: <20261002-mt2824-v1-9-bc44cf0e0289@bootlin.com>
 References: <20261002-mt2824-v1-0-bc44cf0e0289@bootlin.com>
 In-Reply-To: <20261002-mt2824-v1-0-bc44cf0e0289@bootlin.com>
 To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
@@ -164,246 +163,377 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The Metanoia variant of the ATCSPI200 core adds hardware command and
-address phases along with the dual and quad I/O data formats. Expose
-them through the spi-mem operations, which is required to use SPI NOR
-flash devices at full speed.
+Add the device trees for the MT2824 SoC (mt2824.dtsi) and the MT5824
+EVB board (mt5824-evb.dts). The SoC integrates:
 
-The Metanoia variant is detected at probe time with
-device_is_compatible() and gets the mem_ops assigned, following the
-same pattern as the Octeon driver. The Andes instances keep the
-generic spi-mem fallback built on top of the .xfer operation,
-unchanged.
+- a dual-core Andes AX45MP with 256 KB unified L2 cache
+- PLIC, PLIC SW and PLMT interrupt and timer controllers
+- a DesignWare-derived SDHCI controller
+- an ATCSPI200 QSPI controller with a 32 MiB Macronix NOR flash
+  exposed as a memory-mapped device through nvmxip
+- a DDR controller with its firmware mapped through a "fw" reg entry
+
+The u-boot.dtsi overlay marks the nodes used by the SPL with
+bootph-pre-ram and describes the binman FIT image packing OpenSBI,
+U-Boot and the device tree.
 
 Signed-off-by: Benoît Monin <benoit.monin@bootlin.com>
 ---
- drivers/spi/atcspi200_spi.c | 176 ++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 168 insertions(+), 8 deletions(-)
+ arch/riscv/dts/Makefile           |   1 +
+ arch/riscv/dts/mt2824-u-boot.dtsi |  66 ++++++++++++
+ arch/riscv/dts/mt2824.dtsi        | 219 ++++++++++++++++++++++++++++++++++++++
+ arch/riscv/dts/mt5824-evb.dts     |  34 ++++++
+ 4 files changed, 320 insertions(+)
 
-diff --git a/drivers/spi/atcspi200_spi.c b/drivers/spi/atcspi200_spi.c
-index 72b612c6560..a229b196de1 100644
---- a/drivers/spi/atcspi200_spi.c
-+++ b/drivers/spi/atcspi200_spi.c
-@@ -10,6 +10,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <spi.h>
-+#include <spi-mem.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <dm.h>
-@@ -30,6 +31,7 @@ struct atcspi200_spi_regs {
- 	u32	reserve1[3];
- 	u32	format;		/* 0x10 */
- #define DATA_LENGTH(x)	((x-1)<<8)
-+#define ADDR_LENGTH(x)	((x-1)<<16)
- 	u32	pio;
- 	u32	reserve2[2];
- 	u32	tctrl;		/* 0x20 */
-@@ -49,6 +51,10 @@ struct atcspi200_spi_regs {
- #define WCNT_MASK	(0x1FF<<WCNT_OFFSET)
- #define RCNT_OFFSET	0
- #define RCNT_MASK	(0x1FF<<RCNT_OFFSET)
-+#define CMD_EN		(1<<30)
-+#define ADDR_EN		(1<<29)
-+#define DUAL_QUAD(x)	((x)<<22)
-+#define DUMMY_CNT(x)	(((x)-1)<<9)
- 	u32	cmd;
- 	u32	addr;
- 	u32	data;
-@@ -364,6 +370,164 @@ static int atcspi200_spi_get_clk(struct udevice *bus)
- 	return 0;
- }
- 
+diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
+index 8ba75fdb9f5..b13e0436b98 100644
+--- a/arch/riscv/dts/Makefile
++++ b/arch/riscv/dts/Makefile
+@@ -3,6 +3,7 @@
+ dtb-$(CONFIG_TARGET_ANDES_AE350) += ae350_32.dtb ae350_64.dtb
+ dtb-$(CONFIG_TARGET_ANDES_VOYAGER) += qilai-voyager.dtb
+ dtb-$(CONFIG_TARGET_K230_CANMV) += k230-canmv.dtb
++dtb-$(CONFIG_TARGET_METANOIA_MT5824_EVB) += mt5824-evb.dtb
+ dtb-$(CONFIG_TARGET_MICROCHIP_ICICLE) += mpfs-icicle-kit.dtb
+ dtb-$(CONFIG_TARGET_MILKV_DUO) += cv1800b-milkv-duo.dtb
+ dtb-$(CONFIG_TARGET_MILKV_DUO_256M) += sg2002-milkv-duo256m.dtb
+diff --git a/arch/riscv/dts/mt2824-u-boot.dtsi b/arch/riscv/dts/mt2824-u-boot.dtsi
+new file mode 100644
+index 00000000000..8155fe580eb
+--- /dev/null
++++ b/arch/riscv/dts/mt2824-u-boot.dtsi
+@@ -0,0 +1,66 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
-+ * The dummy phase is generated in units of 8 bits: one unit takes
-+ * (8 / data buswidth) SCLK cycles. The unit count is programmed in the
-+ * 2-bit DummyCnt field of the TransCtrl register.
++ * Copyright (C) 2026 Metanoia Communications Inc. All rights reserved.
 + */
-+static unsigned int atcspi200_mem_dummy_units(const struct spi_mem_op *op)
-+{
-+	unsigned int cycles;
 +
-+	cycles = op->dummy.nbytes * 8 /
-+		 max_t(unsigned int, op->dummy.buswidth, 1U);
++#include "binman.dtsi"
 +
-+	return cycles * op->data.buswidth / 8;
-+}
++/ {
++	cpus {
++		bootph-pre-ram;
 +
-+static int atcspi200_mem_adjust_op_size(struct spi_slave *slave,
-+					struct spi_mem_op *op)
-+{
-+	op->data.nbytes = min(op->data.nbytes, (unsigned int)MAX_TRANSFER_LEN);
++		cpu0: cpu@0 {
++			bootph-pre-ram;
++		};
 +
-+	return 0;
-+}
++		cpu1: cpu@1 {
++			bootph-pre-ram;
++		};
++	};
 +
-+static bool atcspi200_mem_supports_op(struct spi_slave *slave,
-+				      const struct spi_mem_op *op)
-+{
-+	unsigned int cycles, units;
++	l2: l2-cache@a000000 {
++		bootph-pre-ram;
++	};
 +
-+	if (!spi_mem_default_supports_op(slave, op))
-+		return false;
++	soc {
++		bootph-pre-ram;
 +
-+	/* the address phase is always transferred on a single line */
-+	if (op->addr.nbytes > 4 || (op->addr.nbytes && op->addr.buswidth != 1))
-+		return false;
++		plicsw: interrupt-controller@c800000 {
++			bootph-pre-ram;
++		};
 +
-+	/* a dummy phase without data cannot be expressed by the controller */
-+	if (op->dummy.nbytes && !op->data.nbytes)
-+		return false;
++		plmt0@c400000 {
++			bootph-pre-ram;
++		};
 +
-+	if (!op->data.nbytes)
-+		return true;
++		rst: reset-controller@1000000c {
++			bootph-pre-ram;
++		};
 +
-+	if (op->data.buswidth != 1 && op->data.buswidth != 2 &&
-+	    op->data.buswidth != 4)
-+		return false;
++		ddrc: ddrc@10060000 {
++			compatible = "metanoia,mt2824-ddrc";
++			reg = <0x0 0x10060000 0x0 0x1000>,
++			      <0x0 0x14000000 0x0 0x800000>,
++			      <0x0 0x70080000 0x0 0x20000>;
++			reg-names = "ctrl", "phy", "fw";
++			resets = <&rst 17>;
++			bootph-pre-ram;
++		};
 +
-+	/* the write and read counters are 9-bit fields */
-+	if (op->data.nbytes > MAX_TRANSFER_LEN)
-+		return false;
++		serial0: serial@100e0000 {
++			bootph-pre-ram;
++		};
 +
-+	/* reject dummy cycles which cannot be represented by DummyCnt */
-+	cycles = op->dummy.nbytes * 8 /
-+		 max_t(unsigned int, op->dummy.buswidth, 1U);
-+	if (cycles * op->data.buswidth % 8)
-+		return false;
++		nvmxip@20000000 {
++			compatible = "nvmxip,qspi";
++			reg = <0x0 0x20000000 0x0 0x2000000>;
++			lba_shift = <9>;
++			lba = <65536>;
++			bootph-pre-ram;
++		};
 +
-+	units = cycles * op->data.buswidth / 8;
-+
-+	return units <= 4;
-+}
-+
-+static int atcspi200_mem_exec_op(struct spi_slave *slave,
-+				 const struct spi_mem_op *op)
-+{
-+	struct udevice *bus = slave->dev->parent;
-+	struct nds_spi_slave *ns = dev_get_priv(bus);
-+	unsigned int format, tc = 0, units;
-+	unsigned int len = op->data.nbytes;
-+	const u8 *dout = op->data.buf.out;
-+	u8 *din = op->data.buf.in;
-+	int timeout = SPI_TIMEOUT;
-+
-+	/* reprogram the address length for this operation */
-+	format = in_le32(&ns->regs->format) & ~(0x3 << 16);
-+	if (op->addr.nbytes)
-+		format |= ADDR_LENGTH(op->addr.nbytes);
-+	out_le32(&ns->regs->format, format);
-+
-+	if (op->cmd.nbytes)
-+		tc |= CMD_EN;
-+	if (op->addr.nbytes) {
-+		tc |= ADDR_EN;
-+		out_le32(&ns->regs->addr, op->addr.val);
-+	}
-+
-+	if (op->data.nbytes) {
-+		if (op->data.buswidth == 2)
-+			tc |= DUAL_QUAD(1);
-+		else if (op->data.buswidth == 4)
-+			tc |= DUAL_QUAD(2);
-+
-+		if (op->data.dir == SPI_MEM_DATA_IN) {
-+			units = atcspi200_mem_dummy_units(op);
-+			tc |= units ? TRAMODE_DR : TRAMODE_RO;
-+			if (units)
-+				tc |= DUMMY_CNT(units);
-+			tc |= (op->data.nbytes - 1) & 0x1FF;
-+		} else {
-+			tc |= TRAMODE_WO;
-+			tc |= ((op->data.nbytes - 1) & 0x1FF) << WCNT_OFFSET;
-+		}
-+	} else {
-+		tc |= TRAMODE_NONE;
-+	}
-+
-+	out_le32(&ns->regs->tctrl, tc);
-+	out_le32(&ns->regs->cmd, op->cmd.opcode);
-+
-+	while (len) {
-+		unsigned int event = in_le32(&ns->regs->status);
-+
-+		if (op->data.dir == SPI_MEM_DATA_OUT) {
-+			if (!(event & TXFFL)) {
-+				out_le32(&ns->regs->data, *dout++);
-+				len--;
-+			}
-+		} else {
-+			if (event & RXFVE_MASK) {
-+				*din++ = in_le32(&ns->regs->data);
-+				len--;
-+			}
-+		}
-+
-+		if (!timeout--)
-+			return -ETIMEDOUT;
-+	}
-+
-+	while (in_le32(&ns->regs->status) & SPIBSY) {
-+		if (!timeout--)
-+			return -ETIMEDOUT;
-+	}
-+
-+	/* restore the timing register like the legacy path does */
-+	out_le32(&ns->regs->timing, ns->mtiming);
-+
-+	return 0;
-+}
-+
++		mmcsd: mmc@4100000 {
++			bootph-pre-ram;
++		};
++	};
++};
+diff --git a/arch/riscv/dts/mt2824.dtsi b/arch/riscv/dts/mt2824.dtsi
+new file mode 100644
+index 00000000000..cd11a949f22
+--- /dev/null
++++ b/arch/riscv/dts/mt2824.dtsi
+@@ -0,0 +1,219 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
-+ * The Metanoia variant of the ATCSPI200 core adds the command and address
-+ * phases along with the dual and quad I/O data formats, exposed through the
-+ * spi-mem operations assigned at probe time below. The other instances keep
-+ * using the generic spi-mem fallback on top of .xfer.
++ * Copyright (C) 2026 Metanoia Communications Inc. All rights reserved.
 + */
-+static struct dm_spi_ops atcspi200_spi_ops = {
-+	.claim_bus	= atcspi200_spi_claim_bus,
-+	.release_bus	= atcspi200_spi_release_bus,
-+	.xfer		= atcspi200_spi_xfer,
-+	.set_speed	= atcspi200_spi_set_speed,
-+	.set_mode	= atcspi200_spi_set_mode,
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/interrupt-controller/irq.h>
++
++/ {
++	#address-cells = <0x02>;
++	#size-cells = <0x02>;
++	model = "Metanoia MT2824";
++	compatible = "metanoia,mt2824";
++
++	aliases {
++		uart0 = &serial0;
++	};
++
++	cpus: cpus {
++		#address-cells = <0x01>;
++		#size-cells = <0x00>;
++		timebase-frequency = <20000000>;
++
++		cpu0: cpu@0 {
++			device_type = "cpu";
++			reg = <0x00>;
++			status = "okay";
++			compatible = "andestech,ax45mp", "riscv";
++			riscv,isa-base = "rv64i";
++			riscv,isa-extensions = "i", "m", "a", "f", "d", "c",
++					       "zicntr", "zicsr", "zifencei",
++					       "zihpm", "xandespmu";
++			mmu-type = "riscv,sv39";
++			clock-frequency = <900000000>;
++			i-cache-size = <0x8000>;
++			i-cache-sets = <0x100>;
++			i-cache-line-size = <0x40>;
++			i-cache-block-size = <0x40>;
++			d-cache-size = <0x8000>;
++			d-cache-sets = <0x80>;
++			d-cache-line-size = <0x40>;
++			d-cache-block-size = <0x40>;
++			next-level-cache = <&l2>;
++
++			cpu0intc: interrupt-controller {
++				#interrupt-cells = <0x01>;
++				interrupt-controller;
++				compatible = "andestech,cpu-intc", "riscv,cpu-intc";
++			};
++		};
++
++		cpu1: cpu@1 {
++			device_type = "cpu";
++			reg = <0x01>;
++			status = "okay";
++			compatible = "andestech,ax45mp", "riscv";
++			riscv,isa-base = "rv64i";
++			riscv,isa-extensions = "i", "m", "a", "f", "d", "c",
++					       "zicntr", "zicsr", "zifencei",
++					       "zihpm", "xandespmu";
++			mmu-type = "riscv,sv39";
++			clock-frequency = <900000000>;
++			i-cache-size = <0x8000>;
++			i-cache-sets = <0x100>;
++			i-cache-line-size = <0x40>;
++			i-cache-block-size = <0x40>;
++			d-cache-size = <0x8000>;
++			d-cache-sets = <0x80>;
++			d-cache-line-size = <0x40>;
++			d-cache-block-size = <0x40>;
++			next-level-cache = <&l2>;
++
++			cpu1intc: interrupt-controller {
++				#interrupt-cells = <0x01>;
++				interrupt-controller;
++				compatible = "andestech,cpu-intc", "riscv,cpu-intc";
++			};
++		};
++	};
++
++	l2: l2-cache@a000000 {
++		compatible = "metanoia,mt2824-ax45mp-cache",
++			     "andestech,ax45mp-cache",
++			     "cache";
++		reg = <0x00 0xa000000 0x00 0x40000>;
++		cache-line-size = <64>;
++		cache-level = <2>;
++		cache-size = <0x40000>;
++		cache-sets = <1024>;
++		cache-unified;
++		interrupts = <1 IRQ_TYPE_LEVEL_HIGH>;
++		interrupt-parent = <&plic>;
++	};
++
++	clocks {
++		ext_clk: ext-clk {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <20000000>;
++			clock-output-names = "ext-clk";
++		};
++
++		pclk: platform-clock {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <900000000>;
++			clock-output-names = "platform-clock";
++		};
++
++		pclk_div2: platform-clock-div2 {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <450000000>;
++			clock-output-names = "platform-clock-div2";
++		};
++
++		pclk_div4: platform-clock-div4 {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <225000000>;
++			clock-output-names = "platform-clock-div4";
++		};
++
++		pll_soc_out3: pll-soc-out3 {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <180000000>;
++			clock-output-names = "pll-soc-out3";
++		};
++
++		usb_otg_ahb_clk: clock-usb-otg-ahb {
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <60000000>;
++			clock-output-names = "otg";
++		};
++	};
++
++	soc: soc {
++		#address-cells = <0x02>;
++		#size-cells = <0x02>;
++		compatible = "simple-bus";
++		interrupt-parent = <&plic>;
++		ranges;
++
++		plic: interrupt-controller@c000000 {
++			compatible = "metanoia,mt2824-plic", "andestech,nceplic100";
++			reg = <0x0 0x0c000000 0x0 0x400000>;
++			interrupts-extended = <&cpu0intc 0x0b>, <&cpu0intc 0x09>,
++					      <&cpu1intc 0x0b>, <&cpu1intc 0x09>;
++			interrupt-controller;
++			#address-cells = <0x00>;
++			#interrupt-cells = <0x02>;
++			riscv,ndev = <0x47>;
++		};
++
++		plicsw: interrupt-controller@c800000 {
++			compatible = "metanoia,mt2824-plicsw", "andestech,plicsw";
++			reg = <0x00 0x0c800000 0x00 0x400000>;
++			interrupts-extended =
++			<&cpu0intc IRQ_TYPE_EDGE_BOTH>,
++			<&cpu1intc IRQ_TYPE_EDGE_BOTH>;
++		};
++
++		plmt0@c400000 {
++			compatible = "metanoia,mt2824-plmt", "andestech,plmt0";
++			reg = <0x0 0x0c400000 0x0 0x00400000>;
++			interrupts-extended = <&cpu0intc 0x07>,
++					      <&cpu1intc 0x07>;
++		};
++
++		reboot: reboot@10000004 {
++			compatible = "metanoia,mt2824-reboot";
++			reg = <0x0 0x10000004 0x0 0x08>;
++		};
++
++		rst: reset-controller@1000000c {
++			#reset-cells = <1>;
++			compatible = "metanoia,mt2824-reset";
++			reg = <0x0 0x1000000c 0x0 0x04>;
++		};
++
++		serial0: serial@100e0000 {
++			compatible = "ns16550a";
++			reg = <0x00 0x100e0000 0x00 0x1000>;
++			interrupts = <17 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-parent = <&plic>;
++			clocks = <&pclk_div4>;
++			current-speed = <115200>;
++			reg-shift = <0x02>;
++			reg-offset = <0x20>;
++			reg-io-width = <0x04>;
++		};
++
++		qspi: spi@10120000 {
++			compatible = "metanoia,mt2824-spi";
++			reg = <0x00 0x10120000 0x00 0x10000>;
++			interrupts = <13 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-parent = <&plic>;
++			#address-cells = <0x01>;
++			#size-cells = <0x00>;
++			num-cs = <0x01>;
++			clocks = <&pll_soc_out3>;
++			clock-names = "spi_clk_src";
++		};
++
++		mmcsd: mmc@4100000 {
++			compatible = "metanoia,mt2824-dwcmshc";
++			max-frequency = <200000000>;
++			clocks = <&pll_soc_out3>;
++			clock-names = "core";
++			reg = <0x0 0x04100000 0x0 0x00100000>;
++			interrupts = <5 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-parent = <&plic>;
++			sdhci-caps-mask = <0x80000006 0x00000000>;
++			bus-width = <4>;
++			disable-wp;
++		};
++	};
++};
+diff --git a/arch/riscv/dts/mt5824-evb.dts b/arch/riscv/dts/mt5824-evb.dts
+new file mode 100644
+index 00000000000..207051e8a14
+--- /dev/null
++++ b/arch/riscv/dts/mt5824-evb.dts
+@@ -0,0 +1,34 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2026 Metanoia Communications Inc. All rights reserved.
++ */
++/dts-v1/;
++
++#include "mt2824.dtsi"
++
++/ {
++	#address-cells = <0x02>;
++	#size-cells = <0x02>;
++	model = "Metanoia MT5824 EVB";
++	compatible = "metanoia,mt5824-evb", "metanoia,mt2824";
++
++	chosen {
++		stdout-path = "uart0:115200n8";
++	};
++
++	ddr: memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0000000080000000 0x00000000 0x80000000>,
++		      <0x1 0x0000000000000000 0x00000000 0x80000000>;
++	};
 +};
 +
-+static const struct spi_controller_mem_ops atcspi200_mem_ops = {
-+	.adjust_op_size = atcspi200_mem_adjust_op_size,
-+	.supports_op = atcspi200_mem_supports_op,
-+	.exec_op = atcspi200_mem_exec_op,
++&qspi {
++	flash@0 {
++		compatible = "jedec,spi-nor";
++		spi-rx-bus-width = <0x4>;
++		spi-tx-bus-width = <0x4>;
++		spi-max-frequency = <100000000>;
++		reg = <0x0>;
++	};
 +};
-+
- static int atcspi200_spi_probe(struct udevice *bus)
- {
- 	struct nds_spi_slave *ns = dev_get_priv(bus);
-@@ -373,6 +537,9 @@ static int atcspi200_spi_probe(struct udevice *bus)
- 	ns->mtiming = ns->regs->timing;
- 	atcspi200_spi_get_clk(bus);
- 
-+	if (device_is_compatible(bus, "metanoia,mt2824-spi"))
-+		atcspi200_spi_ops.mem_ops = &atcspi200_mem_ops;
-+
- 	return 0;
- }
- 
-@@ -394,16 +561,9 @@ static int atcspi200_ofdata_to_platadata(struct udevice *bus)
- 	return 0;
- }
- 
--static const struct dm_spi_ops atcspi200_spi_ops = {
--	.claim_bus	= atcspi200_spi_claim_bus,
--	.release_bus	= atcspi200_spi_release_bus,
--	.xfer		= atcspi200_spi_xfer,
--	.set_speed	= atcspi200_spi_set_speed,
--	.set_mode	= atcspi200_spi_set_mode,
--};
--
- static const struct udevice_id atcspi200_spi_ids[] = {
- 	{ .compatible = "andestech,atcspi200" },
-+	{ .compatible = "metanoia,mt2824-spi" },
- 	{ }
- };
- 
 
 -- 
 2.55.0
