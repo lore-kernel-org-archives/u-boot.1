@@ -1,129 +1,152 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0123CA5FE7
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 21:31:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E21ACA5FE8
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 21:31:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5C37160DB5;
-	Fri,  2 Oct 2026 21:31:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 577A1813DC;
+	Fri,  2 Oct 2026 21:31:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id b8mMYR7aOwFq; Fri,  2 Oct 2026 21:31:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A499060DB6
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790976675;
-	b=tWBTHffJNzYXEfx3oGE5Qk6yXU8f5q4tyXOY/ploIoaj2lEBkdTDhpIvg6QuVpEa9oKR
-	 f3bhX1k4S9QY4Ee54qxUK+fmT4+xYxltf4aDAJTzxGlWHODgZjPIlV9OIhtBkAHdVFut0
-	 Qz1GOEP3CHAc47RrnOkl33SaTt/JURjlrrAXPdjV8JlKNmfSLb5wmzinEvfSctdp6s0YI
-	 grFt/HVGNlyoYSYMQ5JsbArhYoFQleSdJiPZ0UQ5yEKU1N4DzlG8owcPxnj/Lw316lZik
-	 uXgZ6nafD/XJQ/SbomqTglrvmKWDWM/owhsCDRPGsBhBBcBkxiUM0W05DuN2u92/MeA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MwmeecPZDjAB; Fri,  2 Oct 2026 21:31:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 6F38C81379
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790976677;
+	b=a6pb4i2xnAgDOnJs4sxae3ZK129qwXqJQ2ez5SDeRzZhun0kzwrUe5wC0PzBj5Wf0lYw
+	 fFMOfVpvF+7JEXHCEzwQurZ1c70T6DFN1jfu2VZqdagFQRtC/j0816o8gf7fGi4iIeL5W
+	 dFCzAEjA+wye4N+GtYoUIh8PggenRExJTKX+YAOM2VyYbd1Rp+LcR8Af8AFRup9ZRGK4H
+	 QtnLw3s3tRn7tbP28Cq4Re3hatdamYNMTyOSDzphldyZjBAGw7WnB5m0ZWgRwQs/uLh/d
+	 /lmAbNAVGiexJ3AoJlUMNhSH7UHxtwwL7PjsOUTf53JrURp2eA7ZGNsKR7HotqUdJxQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790976675;
+	c=relaxed/relaxed; t=1790976677;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:Feedback-ID:
-	 X-Pm-Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=LJw7EsStORdqBy35TEYoiJjWRd9vSJ/AqNoeVd3yD+c=;
-	b=PnNlK0febo4eR/2p0aSubbQcuAGevyKWWv/NOz8gLjfyxawIe5u7Y9V4lhdsh5NVEMsY
-	 +d2pSW+Kil2TadugN0pp+TsGG61IsX55dpzvJqmc0t0bUlDRBemX1jMF3K6GSf1v4nlMn
-	 lPg+JMP9Lisoz+mTjuLg0MwMHQkhbNpHjm0u/HjwDnue74keVL7eXdRumfKV0cHkKebt1
-	 OM4eD9DXGW73qw50fdqQVvXSx4mCuUrEzdTBtcDgnYj5d7X8Eeew5KQeMwQr6WU2EqyRQ
-	 axTCEJak4cTnrg6o/K6NSv9sIf0JMa0x1q/iPt8vCAX33NT0HLT+njamINUXP2RUwpw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Reply-To:Errors-To;
+	bh=piRqUXzZiHMOEhTkWxFqhwZujdAg2wplI+fDu+c743s=;
+	b=pCyn+wsKENAMuL7Wq0hMBaab0nmp4nPnhQR9+WfUou5XfGbqh/f3o7jRR6L9NM+PU4On
+	 46JtS/SvNXsC3+k9nY7poA+rIf7dNAoMvtfp1AYLe+KJiNXOaRHKK2fX86Xsl7oz5H3AG
+	 vq/PygNUSX00YvW7QSpXQasFh/Q8wovZ1eZpAh4PZt0h/o5Wlgn1sX/26ILMyMr0WvsKU
+	 99hB/z8IfFCqWGwdgYfNtB6sMDrBQ//RTwkmCW8f4HBUNEBaZM1kamNZ74kzEIGGAj8Y2
+	 fDK/0S/Q/re4/dHnVPAzwIHXJDADgjeYKwkmRj/TwWOLVrNk283lrgCfsP7yQo9ljbQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790976675;
-	bh=LJw7EsStORdqBy35TEYoiJjWRd9vSJ/AqNoeVd3yD+c=;
-	h=Date:To:From:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=uiHJNetdBTv6Yjm9gbyvkko/2DsLDCDnwRzsftix9ZiB+Jx+kPJ2lGQ9i3ugWkz65
-	 HN7XA6suWWLTEqNO3fF0kyrqxiGRWi9seojg/RTJEPmWc6svHOOONw/OC3sdSEGOtC
-	 d4vXdAqbUX7TDMK+XcPqoZIRHOeESt1a17OTvFSTFEKv6Lt7HKrsm2xqfcpNvxB/F4
-	 sVDRIrOdUP2OpriuGDuDtKRwIDRtA92BVIXzThLQp8IuD15psw84YSahQPvVhHPNm/
-	 DT2Utes5dsF4MoRC2w0mc7PbOTZvX1vebk500bPpuFMn8JZJTFwJJGY1KclgiamOb/
-	 2QqYO+jlHPKhQ==
+	d=lists.u-boot-project.org; s=default; t=1790976677;
+	bh=piRqUXzZiHMOEhTkWxFqhwZujdAg2wplI+fDu+c743s=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=S59hDmhRaLrBu+2J6YN9EJdjMzERQhUQm65w0IlzFVkCKce5i1EU/MTpWA3V3aJoP
+	 FwCYvqsnxR7GqLnL0c9LBY2D92+RrJkadfESGtLt3cBu5klALsdG2D+spWxqUCzvZm
+	 bdzkz9vcIkP7K3KotyVMiMPNoDlfYqSh3EqYJFG3/qD0tfYXzW5L/tP1giURcJbawh
+	 fxvLpskHVdPRaWmF/WGO+9DxaayEMjKt13YlEGbITlKQmVCYpoTee8l7DQnWCweBoc
+	 yT1FtSd+MbOnuwtup1VrGC86NNDFjli9sszTsI+NbBylXK5lLZEDE5J5tQ7631GKkS
+	 lgupJr7JjmzzQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A499060DB6;
-	Fri,  2 Oct 2026 21:31:15 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 10908282
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6F38C81379;
+	Fri,  2 Oct 2026 21:31:17 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id EB32D282
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 19:49:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0239D40590
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:45 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id D15A040DC4
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 19:49:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VQWgU8sZDTtP for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 21:30:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org A6F3140585
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=85.9.210.45
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790976643;
- b=i4hv8kn/JXJ1SDJ4ka+mm2JTUK6PN2n297isXZ5SvkQDoUU+S1h3Q75l/ZZwaEOSFWxc
- 6coO7HYbHHK4k/vDwAo8jwJ63zeyjsjil4xadR5Zz1Ue38tuchDJ3ryWkGQzpeZwWXc8w
- UGdoFOWYhek+tZGX4ykxPIyMnlISaX9mDp11l2hbZgMoyUN/4LfvQOtaW7CZ7T1aGoG4i
- wFfXfDkbFkzB/7O7ljRiFkZzOBwnmm49MmlblwWKKeEY8joDCwRDbfUSjYvLaPR5eke98
- haiz3362zvOQpJBHOYDAyLs5zpiKcZ3nlruHA7Y54ouC9Uk0WMU3i2s4kF8QvVLEHXA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ANbByTBizBLT for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 19:49:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 3EB5340CA6
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790970569;
+ b=mcTt8LwTLCX3/NJu66fYri1yvA+VSL58X+0oFahp4rj71GzCUOmfLjIb8SJd8DjefYFJ
+ IMj8ML+JP7bC2SZxa1DxSgoCgWv63JXdFGd4atGeIkN09vns98rzcwRCavJzUFwRdKI3h
+ JI4Qq7MdQ17eAEloN5WVrB2G+u5bVDdrtJrOlJIUTAYofmmuYF+MxwUYR4f0xTVGRhZ5c
+ Z09JHiR+IffAOloVxRV7wpwMseBLq1K6e1pAhM33fFPIawW44WMXBRR8tYP3+G3iTwO4/
+ /0dvLtMRzlsmaLv2dKQQJ5pElPv/kz65FGGBRwtKWED+HuPnEkCwOjsPe2q19kk04zQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790976643;
- h=Received-SPF:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
- Feedback-ID:X-Pm-Message-ID:MIME-Version:Content-Type:
- Content-Transfer-Encoding;
- bh=LJw7EsStORdqBy35TEYoiJjWRd9vSJ/AqNoeVd3yD+c=;
- b=pk4hmled3BQqTNj7J7F6RnSlChxsiX4OKR2qP2cvGRSYDqpEBhEbEWT+OG96G3oL3zo+
- JYx29rpM5mMhzAIxsrnZvgc18Cl5PXm/9S20c4vqNfY12JJiNUhMmH6SmJaLaQg73bZsu
- xehdWE95U7G05rErdUl4RVg7WtDmBz6YnVig6YdC/IhpZged5ZVbIb9Upkief6lwOHX8L
- R2zkZmVkNUGRBQ1XuG3SebLNC7TZUe7E3wiGwipTJx4/iZEPmb76NPO3cNo+9hGAXGjc0
- 7kzNDlbKg0pqnyxRHuCaPMuy6Aki9wnU5hXxhzCxOv3kE+JqOBMPhp3D8/kGvkPzKZg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=protonmail.com; 
- dkim=pass header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256
- header.s=protonmail3 header.b=GO+iecbn; 
- arc=none smtp.remote-ip=85.9.210.45
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=85.9.210.45;
- helo=mail-06.mail-europe.com; envelope-from=davewk225@protonmail.com;
+ c=relaxed/relaxed; t=1790970569;
+ h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:X-B4-Tracking:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Developer-Key:X-Endpoint-Received:X-Original-From:Reply-To;
+ bh=piRqUXzZiHMOEhTkWxFqhwZujdAg2wplI+fDu+c743s=;
+ b=cBqCXQKZOOB/R6jLq+xecDx48Gd4YZefjXsv7nnKHAs4o85JWxOZ/hQdDk1pdqe39rPR
+ LUh2CUClK+6PVi4LGPMUGkf2bowegzQjR0TVau0xhLbhIWsUPKAkxX/0Oqyju3OY6AW0s
+ YLSASC8Zxht2Jk2W8JsIJjGL8UVQlmqexHG8W6/69ftucDAu2cS5dYakMyK8rBpAs0/G5
+ 7+ltyayZLjyx1gQmIgegbqV4om2ubn2MGmvB/MJGxqGkvEFiuaP0bEhxSDInZJZGCw2Eg
+ xw5wdEBZtW2QF74Zp3OWul4QOvgczw3NAm3LYVg02Tm0zAnkz56Bg4oibuhIaBAUZ9A==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=kernel.org; 
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=GXgxeC2q; 
+ arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=devnull+iav.iav.lv@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=protonmail.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com
- header.a=rsa-sha256 header.s=protonmail3 header.b=GO+iecbn
-Received: from mail-06.mail-europe.com (mail-06.mail-europe.com [85.9.210.45])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A6F3140585
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 21:30:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1790976636; x=1791235836;
- bh=LJw7EsStORdqBy35TEYoiJjWRd9vSJ/AqNoeVd3yD+c=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=GO+iecbnnnRa4wghsnpcOEIICO+YO7CqpEjB2FtdiibCDUlonN8Ob1IAnT3Z0jk9Z
- g13c1R57JHbWDeSEhZZTWMQOp/JaJ2vQmJUCY0aGuXhYytZFIG53uoeMWB+7KZwfFr
- wE9tmYJIEk6mvCsibGAEgLdyiGKS6EDavamBvPgUKuJL+3ARRPT2MBvbhsBfaLnFjm
- 5h3B68NexECqFllVWkroRs3URx58i6b7nZxm3qE1L3d7L2yCPPYGt0comXMc36UEHT
- iEtnZCK2gW3aGlgP6JVdVWFNOnh85TJ2kBXYe+X8hOazd87D0V4SmWXqLms4AkM0sf
- uizixDqzaD4NA==
-Date: Fri, 02 Oct 2026 21:30:32 +0000
-To: u-boot@lists.u-boot-project.org
-From: Dave Klotz <DaveWK225@protonmail.com>
-Cc: Huan Zhou <pericycle.cc@gmail.com>, Eric Chung <eric.chung@riscstar.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Yixun Lan <dlan@kernel.org>,
- Tom Rini <trini@konsulko.com>, u-boot-spacemit@groups.io
-Subject: [PATCH 0/9] pci: spacemit: fixes for the K1 PCIe host driver
-Message-ID: <cover.1790975598.git.DaveWK225@protonmail.com>
-Feedback-ID: 100562830:user:proton
-X-Pm-Message-ID: 4d02411929f2c87b4cf3cac8a1f757b105cb4058
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=GXgxeC2q
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3EB5340CA6
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 19:49:28 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 56DCE60AAF;
+ Fri,  2 Oct 2026 19:49:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 0A6C7C4AF12;
+ Fri,  2 Oct 2026 19:49:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1790970567;
+ bh=xuwLwvaxpGJ1SnpHxf9bXaliu/rB8vOjLhSw2Ho66h0=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=GXgxeC2qQzECu7SifG79kcOcWED+C5voBQrqT50L14j40XHAzzoiPppkTTRfK3kqo
+ k8a9TFrzC4v44eo+dFieQD+otMYG0h6StLcrXhUUl84YAsKMbZ0xxcu6/JesJ0nmol
+ KcT0mf1K7eRNQ3YPnnZ+zZ5r4TeLPsgQQW3PHm8+kmBfUVbxnxUpXptajqDnzuW2Yb
+ 6QoIwCQAf9cfUoMbL4Xb2pS80lDQTf0rDv7u7EHttYbERZj5e9k72JraazGDxStS22
+ AS4u2GDD0bvbMzaeFtQO+jcKbfpQJ5Wr8vDzMDpkhywzwqgNR1/vpWD9jA0uMOKUJv
+ vcakUq/OgRjDA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id D2211CA5FE5;
+ Fri,  2 Oct 2026 19:49:26 +0000 (UTC)
+From: Igor Velkov via B4 Relay <devnull+iav.iav.lv@kernel.org>
+Date: Fri, 02 Oct 2026 19:49:20 +0000
+Subject: [PATCH] arm: mvebu: helios4_defconfig: enable device tree overlays
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 02 Oct 2026 21:30:59 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261002-helios4-overlays-v1-1-2e03eb306e38@iav.lv>
+X-B4-Tracking: v=1; b=H4sIAL8KwGoC/x3MQQqAIBBA0avIrBN00IiuEi0kpxoIDQekiO6et
+ HyL/x8QKkwCo3qgUGXhnBpsp2DZQ9pIc2wGNNhbY1DvdHAWp3OlcoRb9ICEMVpvXfTQsrPQyte
+ /nOb3/QB8ehiSYgAAAA==
+To: Stefan Roese <stefan.roese@mailbox.org>, 
+ Dennis Gilmore <dgilmore@redhat.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org, 
+ Igor Velkov <iav@iav.lv>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=998; i=iav@iav.lv;
+ h=from:subject:message-id;
+ bh=wEpmrk9QbEB6mk+TlnWcyRteT/tXf6DXqjhPx4OuQZg=;
+ b=owGbwMvMwCVmNH1q96v4SmbG02pJDFkHuA7u3Nd6Y1FD1p3qfQn1yqlTbx5eKBGmaLj2ypK/2
+ Tc4VcKmdpSyMIhxMciKKbJMOKRxK2PJ1b/+HuYPYOawMoEMYeDiFICJvJvPyDB7T4ps2i/mvMLc
+ Raq89rVcR79lVoV9Lgpdd8jnjGNz6HdGhtesFo9nLRHvjLH/Y7s1K9faTvdOyp5Ef5maAIP5Lxo
+ jOQA=
+X-Developer-Key: i=iav@iav.lv; a=openpgp;
+ fpr=90C228DA68A4D5FD4F4837E03297958BEA5F7903
+X-Endpoint-Received: by B4 Relay for iav@iav.lv/default with auth_id=1060
+X-Original-From: Igor Velkov <iav@iav.lv>
+X-Mailman-Approved-At: Fri, 02 Oct 2026 21:31:06 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -135,56 +158,41 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+Reply-To: iav@iav.lv
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Fixes for "pci: spacemit: add DesignWare PCIe host controller driver",
-following the Linux driver and the bring-up order that works on the
-boards I have:
+From: Igor Velkov <iav@iav.lv>
 
-- power the slot from the root port's vpcie3v3-supply (the vendor
-  k1x,pwr_on property is not in any upstream device tree);
-- keep the PHY interface in reset until LTSSM enable, and soft-reset
-  the controller before bring-up so a warm reset starts clean;
-- check clock, reset and iATU setup errors;
-- report link up from the SMLH/RDLH bits in the link window;
-- leave the link speed alone unless max-link-speed is set, instead of
-  writing Gen1 into LNKCAP and LNKCTL2, so the OS can still train the
-  link at its full speed;
-- drop ASPM L1 from LNKCAP as Linux does for NVMe drives;
-- set the link width from num-lanes;
-- keep the probe successful when the link is down (an empty slot), and
-  answer config cycles behind a down link with all ones.
+Enable OF_LIBFDT_OVERLAY so that "fdt apply" is available and boot
+scripts can apply device tree overlays on Helios4.
 
-Tested on an OrangePi RV2: an NVMe drive on port B is found and
-FreeBSD boots from it by EFI; FreeBSD then retrains the link to x2 at
-5 GT/s (with the Gen1 cap in place it could not). Port C, empty, reports
-"Link down" and nothing hangs. Under U-Boot this drive still trains x1
-at 2.5 GT/s.
+Signed-off-by: Igor Velkov <iav@iav.lv>
+---
+Tested on Helios4: with this option "fdt apply" merges an overlay into a
+device tree in RAM; without it fdt has no apply subcommand.
+---
+ configs/helios4_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-Two observations about the RV2 device tree, not addressed here:
-pcie1_3_cfg and pcie2_4_cfg mux CLKREQ#, and with CLKREQ# muxed the
-controller gates its DBI clock whenever the endpoint leaves CLKREQ# high,
-so the next DBI access hangs; I run the board with PERST# only in those
-groups. And port B needs num-lanes =3D <2>, which the tree does not set.
+diff --git a/configs/helios4_defconfig b/configs/helios4_defconfig
+index d218949e307..9b56d87ea29 100644
+--- a/configs/helios4_defconfig
++++ b/configs/helios4_defconfig
+@@ -11,6 +11,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
+ CONFIG_TARGET_HELIOS4=y
+ CONFIG_MVEBU_SPL_BOOT_DEVICE_MMC=y
+ CONFIG_DEFAULT_DEVICE_TREE="armada-388-helios4"
++CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK=0x4002c000
+ CONFIG_SPL_TEXT_BASE=0x40000030
 
-Dave Klotz (9):
-  pci: spacemit: power the slot from vpcie3v3-supply
-  pci: spacemit: hold the PHY interface in reset until link start
-  pci: spacemit: soft reset the controller before bring-up
-  pci: spacemit: check clock, reset and iATU setup results
-  pci: spacemit: report link up from the link status register
-  pci: spacemit: do not force the link to 2.5 GT/s
-  pci: spacemit: do not advertise ASPM L1
-  pci: spacemit: set the link width from num-lanes
-  pci: spacemit: do not fail the probe when the link is down
+---
+base-commit: a6ab6a66146ed0bf1420db0ee858b49005783222
+change-id: 20261002-helios4-overlays-82e2dd1514d5
 
- drivers/pci/pcie_dw_spacemit.c | 231 +++++++++++++++++++++++----------
- drivers/pci/pcie_dw_spacemit.h |  12 --
- 2 files changed, 162 insertions(+), 81 deletions(-)
-
-
-base-commit: a000f2af240eaa996cec92f8d44bad96fdf3f898
---=20
-2.55.0
+Best regards,
+-- 
+Igor Velkov <iav@iav.lv>
 
 
