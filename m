@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F7E4CA5FE2
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 16:47:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 203FCCA5FD4
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 16:47:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 06A9360BCF;
+	by smtp4.osuosl.org (Postfix) with ESMTP id D930440BAA;
 	Fri,  2 Oct 2026 16:47:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rtdtWlpjfyr4; Fri,  2 Oct 2026 16:47:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4C6AB60D87
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790959658;
-	b=VIXWw7vdfmJRtagfmUXsY4dnvxgQgE3qfXjn8Z8GP3ezScePT+HNGL6CPZcogqM1mxxo
-	 pgZ+LlfrXLUiLkqGZb9xSUsq3X3m26kWUL4Pq/otprRKe4qoIewCThCqM3uqZTLsPB+79
-	 M5bj7q12C7S9bu6SYC5Jp332vLe4YfAPkYsJvdSuWoTWyP/apF7s5eItRn5yWQuCQPfsC
-	 BrUGro+OnFqV4iXXR7njAUvkqgBeo072LlrNoxItZqQRnYs9NdLv+TMKLtfN/yx194Ebi
-	 MAzHodK2op+9iYB/OmHrsBE0UWI5RjkdzWUEYIDe/jvE6iDaqD4BWcPVEOugn7Ax+kQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Bwng_qTimisu; Fri,  2 Oct 2026 16:47:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org D71EE4084B
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790959660;
+	b=ccdLGK8fF/cFzU5el05Ze5xgN5BtXVZKSjKK+JzY5yOQPBQnTqeBIuI6GP4Oxy5EFfrt
+	 TKqWOQWGfDO4y1qiPxHgar/rwev4Lj39YBYiu0uojd/l9cK7w6TdkLCgL8cXh18PaWQ5r
+	 47iJU2YdxIEA2axFybCP7BX1U7rlejBt+0mAokO8tztOfNmKC6c8bw1Lrzw7Ydr2bi6/b
+	 SYSVv27zVd21lf65FeyQOE4TX0/s21xXpBtzTHie8pRNKWCf2I/SuMoVj71f0HxWWv/6m
+	 X1A+eIaOsIVzWXnOjjHmMwH21hPqrjgzOZJBR7096ieVevRkPUyV+5F4DPWnTqcpXRw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790959658;
+	c=relaxed/relaxed; t=1790959660;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,101 +32,102 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=5cCRVsQaXGftXjzo909Hqh/K3ir75g+KWW423zhHPsw=;
-	b=TK115zCxaAoRPgoL8TlWO3IM7ShNXucGDAIf21Vwgf8j0HTiuMqwaz+zgnAL6jcjB+H7
-	 iUcNc9f/v7BMk7YvcE9m2VgUlGNhZ2LNkvVGFM6JA9jA612QXEzCxA1eWD0MHF5sGIxfg
-	 pDaUWEL8mPwnFUM7bc1rK/dX2WS7OH23vf9BqL4lBsQ/Lxn7L1bJK1RSMP20ruM5/6P4S
-	 dq47ve0hVTtQJU+1iVc8J037nrAoLgt7Z6EbWPbx0vlGKcvv6pvBxaGOURecODs6K0HGe
-	 YhMbZWogW/xrQnU2HirQe5XQGbhRpOmLfSP6ngx9Ogp5DXTKnS+E+q2MVb2FPIfDyqQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=tJg2Yd8pKC+PBNuU517PkiEQxJ/syKGp1Byfo61tPFQ=;
+	b=DSa0NZC59RpP5HTM1W4md8LgTKwEZ2/OpZIoq87NHNRxQs+kEUFBXbZ5P5L/1EDUHfAc
+	 CSmqJYBMEZ15kxlvoTzNtRXqgNCjDtzzUw6YfTNXnzR2guM61jV/x+grwKUy2Sz1dvKfi
+	 4YFqz7Xb/SIsqTY+id5KKqHXHddyi6MslC1WLheq0QOiY/03/gFxqV5a9LJKyt2P55beW
+	 D8TlJYVxRTpdQm7dssL4pkWmeutMclIRp3KFy3721n+Ytb2D7pw39J2GOzYsYe1cLJmhs
+	 w+ykbcwvKoNc+ZmW9uGOHfqbP6gZi+ZLHbTr8EnfnZDofdvzCM1H/fAUPva9qUVfhew==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790959658;
-	bh=5cCRVsQaXGftXjzo909Hqh/K3ir75g+KWW423zhHPsw=;
+	d=lists.u-boot-project.org; s=default; t=1790959660;
+	bh=tJg2Yd8pKC+PBNuU517PkiEQxJ/syKGp1Byfo61tPFQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=1PPcn8f9oZrtKaa5Dw0IYpzdiU9Q0OdZR9lblNLdsJDOyyg/SSw1+Mjkz8VFS6a1L
-	 kf9JVDpLOv533Ey7teKYf/yM3cvrgJrov201/ig0q4s/IO7WvRCvdCo9wxa8wMhqiR
-	 5WsYud/V+ycMlyKwpVkeSoGkhj0VHIjUG5vcr3E4NoKaxOeOwwb1ZsL2IKMgP1/gzx
-	 vFR+FsEqTXCC9bhi1eYg4Yz6+XWQ4D5+BhlLAZJxNsiAI4xf5YQXgU6AHIL7w3F/TK
-	 UIwb1YhCmFC+XVcH+rbv/pHN7MQkkkazIcPhv8XLmvqt4xw71CGsFRnw2f96pbjjbW
-	 nRybiYnSid1Xw==
+	b=MV9Ln2B1iY/dB3/Xgj4PnY0LgrOyT0/0SYFXLnbwkzoNQSUWl+YZ8MC1W31f5VMXc
+	 8dcBUfTs8GiIXNccQtIueXdA35uay5oK2ycCEAaqURrS5G1Mz8LgZWpgla3cvJHHGA
+	 QA6NU6hU4qiRyDV45z2lQ1kUfeNOj3bw6pSa10zmIqxcEcyrsfGxGEkR2MWvC1lvUm
+	 IXvquszQ3poVwWZhm9kUjnwQD7qm3nZbHc0rNCHHZKv1pSKgs0+minMWcaAOjtWJA7
+	 JmJnJfjp9M/KAUozQS/AuvUZuCYXh2bQ5bPIB6d+BQD8SVeerkhiYCmpJWoy8Yc6XG
+	 MLHgd/1aZQYeQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4C6AB60D87;
-	Fri,  2 Oct 2026 16:47:38 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 5023D32F
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D71EE4084B;
+	Fri,  2 Oct 2026 16:47:39 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3956834D
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 42372812AB
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:36 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1EF564055D
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OC-ndySI6eom for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 13:14:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org AF2AE81291
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790946875;
- b=O7epQjAUudXX2RxRVQzwmUqcy596gC0odUOSU7/NgD1qw8vx9R9VslkQ4n14z5l6E4HY
- PI5G/7FYR+LiLypARk8ldEL3JuVseXeQWqxd9BrtsiSwJ2n6MBd+kt6j+KIBh7j8BSqDR
- A+3f1+dJ5SP9lPAlTXS/XcZAsZgIRqEgIlqxjiBilv++Cj3bICvoGxLeEVCP2SZBnYk3g
- alu8bJ/Zj+OW/13ISKjnwMqIrQdbq1liezRH8euVceAh0D8RqvTo8/iCol5YdBjAXQbyp
- TroYkX/gQ2Kt4wEVUgBB01Y91VfSTE9YvTw9R7nu5H9jOFqBKkhmNXffRJ+nRCBdDxQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 46JrctcbTlZr for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 13:14:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 0EE11400D1
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790946878;
+ b=TUWVnGONAZdGgs3V9kJlo6iS9lKEoEY4H29vBCWFjpacXawJRyHRKEove5ps/mZZpMa8
+ DqAMmLzHpf20DQK9nhZlB5WSNE69Hnj8bhxJSCQkQGpR4hXJwoLlM/wKagEpOw8yMhm2X
+ vc1QsIYPh5FovI2/x5MwjVXxPAPAMUo880kKLnHXdaLu1J33lofCKFT3GifCAcavJ9Vxp
+ 5CJIKxxVMkDADftAgugOCUCC1ZXkKSGAcXtjngkryDDHOr8KdjjHO27UNOepFbKgdmcRu
+ YEOZbVGUWKVwEGYhFHF2ZSrM2dZea9tvSn7hdmcdi7sPndmE0EerlKYRejCt0/ReA0g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790946875;
+ c=relaxed/relaxed; t=1790946878;
  h=Received-SPF:Received:Received:Received:DKIM-Signature:From:Date:
  Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Last-TLS-Session-Version;
- bh=5cCRVsQaXGftXjzo909Hqh/K3ir75g+KWW423zhHPsw=;
- b=mkcdAl2ZbwsPT75Oub2ZznknR71/DNb1HXM2ne+d/5j+ZvqdPfm34i0VXBuhyaUcoBEf
- 5Yg2iUZfDCbcBFUuoa6ruPu+6aKhC4bT9PP31/E/TQVptqg0UMcNW4Knv4QYVz/IFXkKd
- ON3SDU7gelwNbpfB1UTWWCoJ1FE+RJdwm/gMdBCbKilnnBLbQ1Pc8v9qa0IjWKWyKTcoG
- 6/Rza5xrFd0AzaovSI/axXIoYNjfi89vSjfqwT4lOzSZYbpjMSpE91DyAk45QozHhxvnq
- jLgdHwQ9h1TX+cOZfZEHgrzmrq6xOInbE4Eh0xqJicSeFnaDLrK/ZTytaoy2DP1KY0g==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=tJg2Yd8pKC+PBNuU517PkiEQxJ/syKGp1Byfo61tPFQ=;
+ b=UvAtj7ZmHc9bJpPnoxZKBLBAd0fIHNvJxiAQB4ljH1VYTEEMK8mjuuozozdP75a96P/Z
+ fLHfOnO+/D2YzBQasTk9oUzTOLcVIuXMXugzLl64/E37BkxaLLCoUSquYAogxKI/4vOvh
+ 0kmmDC+Mhj7PlxOIF5k9oMV2k38GPp5/Vsb0TunmxXqCsJNjtYqZR6yWTZFWDRFczKdny
+ jkyr7j1VIAGE07JHjCcovTYSScjfhfhZaPngoS0aj7nL5GePrXKku7n7JC+gxkWgTcRoE
+ baobbqhhxYDGeGyoUDFSLDSzCg4DBU11QSaWOHRAo4wtfzjM82OmzwNVqPtmAxKujlw==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=bootlin.com; 
  dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=yPvwAhNv; 
+ header.s=dkim header.b=G2W5Tla0; 
  arc=none smtp.remote-ip=185.246.84.56
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
  helo=smtpout-02.galae.net; envelope-from=benoit.monin@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
- header.a=rsa-sha256 header.s=dkim header.b=yPvwAhNv
+ header.a=rsa-sha256 header.s=dkim header.b=G2W5Tla0
 Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- by smtp1.osuosl.org (Postfix) with ESMTPS id AF2AE81291
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:33 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0EE11400D1
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:37 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 7DB7C1A10E3;
- Fri,  2 Oct 2026 13:14:31 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 175AA1A10E8;
+ Fri,  2 Oct 2026 13:14:36 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 50889603DC;
- Fri,  2 Oct 2026 13:14:31 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id DFE3B603DC;
+ Fri,  2 Oct 2026 13:14:35 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 312CE1032820F; 
- Fri,  2 Oct 2026 15:14:20 +0200 (CEST)
+ with ESMTPSA id E9FC2103281F4; 
+ Fri,  2 Oct 2026 15:14:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1790946869; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1790946873; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=5cCRVsQaXGftXjzo909Hqh/K3ir75g+KWW423zhHPsw=;
- b=yPvwAhNvHAUGl5LGzZtP0JBgZ+Q74acbR+g/u0BXCM3u416SqJG7VCZU/pdIxZ7McbvDG0
- RKBy8RGsPggUcU4Uilu1ZBLp7cx1D+WGy9fcgbPfNN3B3a9EHghRm1UqS6Ur3fMZ4tCdqe
- Y/hAqK/Z2Q2wY41J1yud1LFYsQTazwzS1sv6WozRx6ZNAQaHHnvFRJjw5HTrmjV/L6ZzsH
- ZA1plogeYoLVQ2OoaYLdow7+4w1+ajIqPKMp9nUVdhs44e17F9BI4M14wFtKRgvab+H4G5
- rtdSiF0OMDcM6BuuNxGvp5/SBpwsWJQJ5z2xDSZ0ntLgROR4UKvGZtN5TURDUA==
+ bh=tJg2Yd8pKC+PBNuU517PkiEQxJ/syKGp1Byfo61tPFQ=;
+ b=G2W5Tla0yyEKSa/q+NL35K+EydiZ8oDaE1gCjVQ5bUZlOqznSldDzR3jSrSmX6BcRRQhRZ
+ 94Yi46gpPp1GA8UK5SJ6Gw/HjHPl0SwDvm/tw/3B52jEl8Um+fuDBU0WoEMzSk3SlfPWrS
+ y8x3ypX8ZtLt/TRdA7JHVEPdpFo1hTcb/aRIuaihByeFoRAvoBq1yszLQQW/2QA6z5o4jb
+ iISJcUcHC6WEY4wQRUZj9OJAFPJrfBaKvFVyANgrrxJJA3ueX75zRm80GwSqanDvPZWxNI
+ 4h3VdKoP4PdIx3vdCwo5uQxQGDWAL7V+n8AcHhLjciCTHGvfuOoQ5/2wGvNNwA==
 From: =?utf-8?q?Beno=C3=AEt_Monin?= <benoit.monin@bootlin.com>
-Date: Fri, 02 Oct 2026 15:02:25 +0200
-Subject: [PATCH 07/10] ram: metanoia: Add driver for MT2824 DDR controller
+Date: Fri, 02 Oct 2026 15:02:26 +0200
+Subject: [PATCH 08/10] spi: atcspi200_spi: Add spi-mem support for the
+ Metanoia ATCSPI200 variant
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20261002-mt2824-v1-7-bc44cf0e0289@bootlin.com>
+Message-Id: <20261002-mt2824-v1-8-bc44cf0e0289@bootlin.com>
 References: <20261002-mt2824-v1-0-bc44cf0e0289@bootlin.com>
 In-Reply-To: <20261002-mt2824-v1-0-bc44cf0e0289@bootlin.com>
 To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
@@ -163,767 +164,246 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a DDR controller driver for the Metanoia MT2824 SoC, supporting
-initialization and training of the DDR subsystem in SPL, and implementing
-the driver-model for the RAM uclass.
+The Metanoia variant of the ATCSPI200 core adds hardware command and
+address phases along with the dual and quad I/O data formats. Expose
+them through the spi-mem operations, which is required to use SPI NOR
+flash devices at full speed.
 
-The driver relies on a firmware to configure the DDR controller, and
-expects the firmware to be found via a device tree reg entry named "fw".
-
-The driver expects the DDR firmware to be packaged inside a FIT image,
-as the firmware node of the default configuration, and it supports signed
-FIT image.
+The Metanoia variant is detected at probe time with
+device_is_compatible() and gets the mem_ops assigned, following the
+same pattern as the Octeon driver. The Andes instances keep the
+generic spi-mem fallback built on top of the .xfer operation,
+unchanged.
 
 Signed-off-by: Benoît Monin <benoit.monin@bootlin.com>
 ---
- drivers/ram/Kconfig      |   7 +
- drivers/ram/Makefile     |   2 +
- drivers/ram/mt2824-ddr.c | 706 +++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 715 insertions(+)
+ drivers/spi/atcspi200_spi.c | 176 ++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 168 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
-index acd6d9cfd6a..feb1754e40e 100644
---- a/drivers/ram/Kconfig
-+++ b/drivers/ram/Kconfig
-@@ -139,6 +139,13 @@ config K3_MULTI_DDR
- 	  responsible for interleaving between the controllers.
- 	default y if SOC_K3_J721S2 || SOC_K3_J784S4
+diff --git a/drivers/spi/atcspi200_spi.c b/drivers/spi/atcspi200_spi.c
+index 72b612c6560..a229b196de1 100644
+--- a/drivers/spi/atcspi200_spi.c
++++ b/drivers/spi/atcspi200_spi.c
+@@ -10,6 +10,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <spi.h>
++#include <spi-mem.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <dm.h>
+@@ -30,6 +31,7 @@ struct atcspi200_spi_regs {
+ 	u32	reserve1[3];
+ 	u32	format;		/* 0x10 */
+ #define DATA_LENGTH(x)	((x-1)<<8)
++#define ADDR_LENGTH(x)	((x-1)<<16)
+ 	u32	pio;
+ 	u32	reserve2[2];
+ 	u32	tctrl;		/* 0x20 */
+@@ -49,6 +51,10 @@ struct atcspi200_spi_regs {
+ #define WCNT_MASK	(0x1FF<<WCNT_OFFSET)
+ #define RCNT_OFFSET	0
+ #define RCNT_MASK	(0x1FF<<RCNT_OFFSET)
++#define CMD_EN		(1<<30)
++#define ADDR_EN		(1<<29)
++#define DUAL_QUAD(x)	((x)<<22)
++#define DUMMY_CNT(x)	(((x)-1)<<9)
+ 	u32	cmd;
+ 	u32	addr;
+ 	u32	data;
+@@ -364,6 +370,164 @@ static int atcspi200_spi_get_clk(struct udevice *bus)
+ 	return 0;
+ }
  
-+config SPL_METANOIA_MT2824_DDR
-+	bool "Metanoia MT2824 DDR driver in SPL"
-+	depends on SPL_RAM
-+	help
-+	   Enable support for the internal DDR Memory Controller
-+	   of the Metanoia MT2824 SoC in the SPL.
-+
- source "drivers/ram/aspeed/Kconfig"
- source "drivers/ram/cadence/Kconfig"
- source "drivers/ram/octeon/Kconfig"
-diff --git a/drivers/ram/Makefile b/drivers/ram/Makefile
-index 82afd5fcbcc..6e1b86127ce 100644
---- a/drivers/ram/Makefile
-+++ b/drivers/ram/Makefile
-@@ -19,6 +19,8 @@ obj-$(CONFIG_K3_DDRSS) += k3-ddrss/
- 
- obj-$(CONFIG_IMXRT_SDRAM) += imxrt_sdram.o
- 
-+obj-$(CONFIG_SPL_METANOIA_MT2824_DDR) += mt2824-ddr.o
-+
- obj-$(CONFIG_RAM_SIFIVE) += sifive/
- ifdef CONFIG_XPL_BUILD
- obj-$(CONFIG_SPL_STARFIVE_DDR) += starfive/
-diff --git a/drivers/ram/mt2824-ddr.c b/drivers/ram/mt2824-ddr.c
-new file mode 100644
-index 00000000000..c01c30089ca
---- /dev/null
-+++ b/drivers/ram/mt2824-ddr.c
-@@ -0,0 +1,706 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include <dm.h>
-+#include <image.h>
-+#include <ram.h>
-+#include <reset.h>
-+#include <dm/device_compat.h>
-+#include <linux/bitfield.h>
-+#include <linux/delay.h>
-+#include <linux/io.h>
-+#include <linux/iopoll.h>
-+#include <linux/ioport.h>
-+#include <u-boot/crc.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+/* controller registers */
-+#define CTRL_STAT				0x00000004
-+#define CTRL_PWRCTL				0x00000030
-+#define CTRL_RFSHCTL3				0x00000060
-+#define CTRL_INIT7				0x000000ec
-+#define CTRL_DFITMG0				0x00000190
-+#define CTRL_DFITMG1				0x00000194
-+#define CTRL_DFIMISC				0x000001b0
-+#define CTRL_DFISTAT				0x000001bc
-+#define CTRL_SWCTL				0x00000320
-+#define CTRL_SWSTAT				0x00000324
-+
-+#define CTRL_STAT_MODE				GENMASK(2, 0)
-+#define CTRL_STAT_NORMAL			1
-+
-+#define CTRL_PWRCTL_SELFREF			BIT(5)
-+#define CTRL_PWRCTL_CLKDIS			BIT(3)
-+#define CTRL_PWRCTL_PWRDN			BIT(1)
-+
-+#define CTRL_RFSHCTL3_DIS_AUTO			BIT(0)
-+
-+#define CTRL_INIT7_MR22				GENMASK(31, 16)
-+#define CTRL_INIT7_MR14				GENMASK(15, 0)
-+
-+#define CTRL_DFITMG0_CTRL_DELAY			GENMASK(28, 24)
-+#define CTRL_DFITMG0_RDDATA_USE_DFI_PHY_CLK	BIT(23)
-+#define CTRL_DFITMG0_RDDATA_EN			GENMASK(22, 16)
-+#define CTRL_DFITMG0_WRDATA_USE_DFI_PHY_CLK	BIT(15)
-+#define CTRL_DFITMG0_TPHY_WRDATA		GENMASK(13, 8)
-+#define CTRL_DFITMG0_TPHY_WRLAT			GENMASK(5, 0)
-+
-+#define CTRL_DFITMG1_WRDATA_DELAY		GENMASK(20, 16)
-+#define CTRL_DFITMG1_CLK_DIS			GENMASK(12, 8)
-+#define CTRL_DFITMG1_CLK_EN			GENMASK(4, 0)
-+
-+#define CTRL_DFIMISC_START			BIT(5)
-+#define CTRL_DFIMISC_COMPLETE			BIT(0)
-+
-+#define CTRL_DFISTAT_COMPLETE			BIT(0)
-+
-+#define CTRL_SWCTL_DONE				BIT(0)
-+#define CTRL_SWSTAT_DONE			BIT(0)
-+
-+/* PHY registers */
-+#define PHY_DQS_DELAY_GRP0			0x000201a0
-+#define PHY_RDPTR_INITVAL			0x0004005c
-+#define PHY_ICCM_BASE				0x000a0000
-+#define PHY_DCCM_BASE				0x000a8000
-+#define PHY_DCCM_V26				0x000a804c
-+#define PHY_DCCM_V27				0x000a804e
-+#define PHY_DCCM_V40				0x000a8080
-+#define PHY_PMU_MUX_SEL				0x001a0000
-+#define PHY_UCTSHADOWREGS			0x001a0008
-+#define PHY_DCTWRITEPROT			0x001a0062
-+#define PHY_UCTWRITEONLYSHADOW			0x001a0064
-+#define PHY_UCTDATWRITEONLYSHADOW		0x001a0068
-+#define PHY_UC_CTRL				0x001a0132
-+
-+#define PHY_DQS_DELAY_COARSE			GENMASK(9, 6)
-+#define PHY_DQS_DELAY_FINE			GENMASK(4, 0)
-+
-+#define PHY_ICCM_SIZE				0x00008000
-+#define PHY_DCCM_SIZE				0x00002000
-+
-+#define PHY_PMU_MUX_SEL_UC			BIT(0)
-+
-+#define PHY_UC_CTRL_RESET			BIT(3)
-+#define PHY_UC_CTRL_STALL			BIT(0)
-+
-+/* DDR parameters */
-+#define PARAM_BL				16
-+#define PARAM_CLK_DIS				2
-+#define PARAM_CLK_EN				2
-+#define PARAM_MISC				0
-+#define PARAM_MR22				5
-+#define PARAM_RD				0
-+#define PARAM_RL				28
-+#define PARAM_TDQSS				1
-+#define PARAM_WL				14
-+#define PARAM_WR				0
-+#define PARAM_WRDATA				2
-+
-+#define TRAINING_STAGES				2
-+
-+#define POLL_TIMEOUT				1000000
-+
-+#define MSG_TRAINING_DONE			0x07
-+#define MSG_TRAINING_FAIL			0xff
-+
-+#define FW_MAGIC				0x44445246 /* "DDRF" */
-+#define FW_VERSION				0x01000000
-+
-+/* Base address used in the firmware for the controller */
-+#define CTRL_FW_BASE				0x10060000
-+
-+enum {
-+	FW_COMP_CTRL_CFG = 0,
-+	FW_COMP_PHY_CFG,
-+	FW_COMP_PMU_1D_IMEM,
-+	FW_COMP_PMU_1D_DMEM,
-+	FW_COMP_PMU_2D_IMEM,
-+	FW_COMP_PMU_2D_DMEM,
-+	FW_COMP_PIE_IMAGE,
-+	FW_COMP_MAX
-+};
-+
-+struct fw_comp {
-+	u32 offset;
-+	u32 size;
-+	u32 crc32;
-+	u32 reserved;
-+};
-+
-+struct fw_header {
-+	u32 magic;
-+	u32 version;
-+	u32 header_size;
-+	u32 total_size;
-+	u32 flags;
-+	u32 timestamp;
-+	u32 reserved1;
-+	u32 reserved2;
-+	struct fw_comp comps[FW_COMP_MAX];
-+	u32 header_crc32;
-+	u32 reserved[27]; /* Padding to 256 bytes */
-+};
-+
-+struct fw_reg {
-+	u32 addr;
-+	u32 value;
-+};
-+
-+struct mt2824_ddr_priv {
-+	void __iomem *ctrl;
-+	resource_size_t ctrl_size;
-+	void __iomem *phy;
-+	resource_size_t phy_size;
-+	void *fw;
-+	resource_size_t fw_size;
-+	struct reset_ctl rst;
-+	const void *fw_img;
-+};
-+
-+static int get_fw_img_from_fit(const void *fit, size_t fit_size,
-+			       const void **fw_img, size_t *fw_size)
++/*
++ * The dummy phase is generated in units of 8 bits: one unit takes
++ * (8 / data buswidth) SCLK cycles. The unit count is programmed in the
++ * 2-bit DummyCnt field of the TransCtrl register.
++ */
++static unsigned int atcspi200_mem_dummy_units(const struct spi_mem_op *op)
 +{
-+	int conf_noffset;
-+	const char *img_name;
-+	int img_noffset;
++	unsigned int cycles;
 +
-+	if (fit_check_format(fit, fit_size))
-+		return -EINVAL;
++	cycles = op->dummy.nbytes * 8 /
++		 max_t(unsigned int, op->dummy.buswidth, 1U);
 +
-+	conf_noffset = fit_conf_get_node(fit, NULL);
-+	if (conf_noffset < 0)
-+		return -EINVAL;
++	return cycles * op->data.buswidth / 8;
++}
 +
-+	printf("## Checking hash(es) for config %s ... ",
-+	       fit_get_name(fit, conf_noffset, NULL));
-+	if (fit_config_verify(fit, conf_noffset))
-+		return -EPERM;
-+	puts("OK\n");
-+
-+	img_name = fdt_getprop(fit, conf_noffset, FIT_FIRMWARE_PROP, NULL);
-+	if (!img_name)
-+		return -EINVAL;
-+
-+	img_noffset = fit_image_get_node(fit, img_name);
-+	if (img_noffset < 0)
-+		return -EINVAL;
-+
-+	if (fit_image_get_emb_data(fit, img_noffset, fw_img, fw_size))
-+		return -EINVAL;
-+
-+	printf("## Checking hash(es) for image %s ... ", img_name);
-+	if (!fit_image_verify_with_data(fit, img_noffset, gd_fdt_blob(), *fw_img, *fw_size))
-+		return -EPERM;
-+	puts("OK\n");
++static int atcspi200_mem_adjust_op_size(struct spi_slave *slave,
++					struct spi_mem_op *op)
++{
++	op->data.nbytes = min(op->data.nbytes, (unsigned int)MAX_TRANSFER_LEN);
 +
 +	return 0;
 +}
 +
-+static int check_firmware(struct udevice *dev)
++static bool atcspi200_mem_supports_op(struct spi_slave *slave,
++				      const struct spi_mem_op *op)
 +{
-+	struct mt2824_ddr_priv *priv = dev_get_priv(dev);
-+	const struct fw_header *header;
-+	u32 calculated_crc;
-+	int ret = 0;
-+	size_t fw_size;
++	unsigned int cycles, units;
 +
-+	ret = get_fw_img_from_fit(priv->fw, priv->fw_size, &priv->fw_img, &fw_size);
-+	if (ret)
-+		return ret;
++	if (!spi_mem_default_supports_op(slave, op))
++		return false;
 +
-+	header = priv->fw_img;
++	/* the address phase is always transferred on a single line */
++	if (op->addr.nbytes > 4 || (op->addr.nbytes && op->addr.buswidth != 1))
++		return false;
 +
-+	if (header->magic != FW_MAGIC) {
-+		dev_err(dev, "Invalid firmware magic: 0x%08x (expected 0x%08x)\n",
-+			header->magic, FW_MAGIC);
-+		return -EINVAL;
++	/* a dummy phase without data cannot be expressed by the controller */
++	if (op->dummy.nbytes && !op->data.nbytes)
++		return false;
++
++	if (!op->data.nbytes)
++		return true;
++
++	if (op->data.buswidth != 1 && op->data.buswidth != 2 &&
++	    op->data.buswidth != 4)
++		return false;
++
++	/* the write and read counters are 9-bit fields */
++	if (op->data.nbytes > MAX_TRANSFER_LEN)
++		return false;
++
++	/* reject dummy cycles which cannot be represented by DummyCnt */
++	cycles = op->dummy.nbytes * 8 /
++		 max_t(unsigned int, op->dummy.buswidth, 1U);
++	if (cycles * op->data.buswidth % 8)
++		return false;
++
++	units = cycles * op->data.buswidth / 8;
++
++	return units <= 4;
++}
++
++static int atcspi200_mem_exec_op(struct spi_slave *slave,
++				 const struct spi_mem_op *op)
++{
++	struct udevice *bus = slave->dev->parent;
++	struct nds_spi_slave *ns = dev_get_priv(bus);
++	unsigned int format, tc = 0, units;
++	unsigned int len = op->data.nbytes;
++	const u8 *dout = op->data.buf.out;
++	u8 *din = op->data.buf.in;
++	int timeout = SPI_TIMEOUT;
++
++	/* reprogram the address length for this operation */
++	format = in_le32(&ns->regs->format) & ~(0x3 << 16);
++	if (op->addr.nbytes)
++		format |= ADDR_LENGTH(op->addr.nbytes);
++	out_le32(&ns->regs->format, format);
++
++	if (op->cmd.nbytes)
++		tc |= CMD_EN;
++	if (op->addr.nbytes) {
++		tc |= ADDR_EN;
++		out_le32(&ns->regs->addr, op->addr.val);
 +	}
 +
-+	if (header->version != FW_VERSION) {
-+		dev_err(dev, "Invalid firmware version %u\n", header->version);
-+		return -EINVAL;
++	if (op->data.nbytes) {
++		if (op->data.buswidth == 2)
++			tc |= DUAL_QUAD(1);
++		else if (op->data.buswidth == 4)
++			tc |= DUAL_QUAD(2);
++
++		if (op->data.dir == SPI_MEM_DATA_IN) {
++			units = atcspi200_mem_dummy_units(op);
++			tc |= units ? TRAMODE_DR : TRAMODE_RO;
++			if (units)
++				tc |= DUMMY_CNT(units);
++			tc |= (op->data.nbytes - 1) & 0x1FF;
++		} else {
++			tc |= TRAMODE_WO;
++			tc |= ((op->data.nbytes - 1) & 0x1FF) << WCNT_OFFSET;
++		}
++	} else {
++		tc |= TRAMODE_NONE;
 +	}
 +
-+	if (header->header_size != sizeof(struct fw_header)) {
-+		dev_err(dev, "Invalid firmware header size %u\n", header->header_size);
-+		return -EINVAL;
-+	}
++	out_le32(&ns->regs->tctrl, tc);
++	out_le32(&ns->regs->cmd, op->cmd.opcode);
 +
-+	if (header->total_size > fw_size) {
-+		dev_err(dev, "firmware too big\n");
-+		return -EINVAL;
-+	}
++	while (len) {
++		unsigned int event = in_le32(&ns->regs->status);
 +
-+	calculated_crc = crc32(0, priv->fw_img, offsetof(struct fw_header, header_crc32));
-+	if (calculated_crc != header->header_crc32) {
-+		dev_err(dev, "Header CRC mismatch: calculated=0x%08x, expected=0x%08x\n",
-+			calculated_crc, header->header_crc32);
-+		return -EINVAL;
-+	}
-+
-+	for (int i = 0; i < FW_COMP_MAX; i++) {
-+		u32 offset = header->comps[i].offset;
-+		u32 size = header->comps[i].size;
-+		u32 expected_crc = header->comps[i].crc32;
-+
-+		if (size == 0) {
-+			dev_err(dev, "Component #%d is empty\n", i);
-+			ret = -EINVAL;
-+			continue;
++		if (op->data.dir == SPI_MEM_DATA_OUT) {
++			if (!(event & TXFFL)) {
++				out_le32(&ns->regs->data, *dout++);
++				len--;
++			}
++		} else {
++			if (event & RXFVE_MASK) {
++				*din++ = in_le32(&ns->regs->data);
++				len--;
++			}
 +		}
 +
-+		if ((resource_size_t)offset + size > fw_size) {
-+			dev_err(dev, "Component #%d out of range\n", i);
-+			ret = -EINVAL;
-+			continue;
-+		}
-+
-+		calculated_crc = crc32(0, priv->fw_img + offset, size);
-+		if (calculated_crc != expected_crc) {
-+			dev_err(dev, "Component #%d CRC verification failed\n", i);
-+			ret = -EINVAL;
-+		}
++		if (!timeout--)
++			return -ETIMEDOUT;
 +	}
 +
-+	return ret;
-+}
-+
-+static int ddr_ctrl_load_config(struct mt2824_ddr_priv *priv)
-+{
-+	const struct fw_header *header = priv->fw_img;
-+	const struct fw_reg *reg;
-+	unsigned int nb_regs;
-+	u32 addr;
-+
-+	/* address + value per register */
-+	nb_regs = header->comps[FW_COMP_CTRL_CFG].size / sizeof(struct fw_reg);
-+	reg = priv->fw_img + header->comps[FW_COMP_CTRL_CFG].offset;
-+
-+	/* Apply each register configuration */
-+	for (unsigned int i = 0; i < nb_regs; i++, reg++) {
-+		addr = reg->addr;
-+
-+		/*
-+		 * Some firmware version use an absolute address,
-+		 * convert to a relative offset
-+		 */
-+		if (addr >= CTRL_FW_BASE)
-+			addr -= CTRL_FW_BASE;
-+
-+		if (addr >= priv->ctrl_size)
-+			return -EINVAL;
-+
-+		writel(reg->value, priv->ctrl + addr);
++	while (in_le32(&ns->regs->status) & SPIBSY) {
++		if (!timeout--)
++			return -ETIMEDOUT;
 +	}
 +
-+	return 0;
-+}
-+
-+static int ddr_ctrl_init(struct mt2824_ddr_priv *priv)
-+{
-+	u32 val;
-+
-+	setbits_le32(priv->ctrl + CTRL_RFSHCTL3, CTRL_RFSHCTL3_DIS_AUTO);
-+	clrbits_le32(priv->ctrl + CTRL_PWRCTL, CTRL_PWRCTL_PWRDN | CTRL_PWRCTL_CLKDIS);
-+	writel(0, priv->ctrl + CTRL_SWCTL);
-+	clrbits_le32(priv->ctrl + CTRL_DFIMISC, CTRL_DFIMISC_COMPLETE);
-+	setbits_le32(priv->ctrl + CTRL_SWCTL, CTRL_SWCTL_DONE);
-+
-+	return readl_poll_timeout(priv->ctrl + CTRL_SWSTAT, val,
-+				  val == CTRL_SWSTAT_DONE, POLL_TIMEOUT);
-+}
-+
-+static int ddr_phy_load_comp(struct mt2824_ddr_priv *priv, unsigned int comp)
-+{
-+	const struct fw_header *header = priv->fw_img;
-+	const struct fw_reg *reg;
-+	unsigned int nb_regs;
-+
-+	/* address + value per register */
-+	nb_regs = header->comps[comp].size / sizeof(struct fw_reg);
-+	reg = priv->fw_img + header->comps[comp].offset;
-+
-+	/* Apply each register configuration */
-+	for (unsigned int i = 0; i < nb_regs; i++, reg++) {
-+		if (reg->addr >= priv->phy_size / 2)
-+			return -EINVAL;
-+		writew((u16)(reg->value & 0xFFFF), priv->phy + reg->addr * 2);
-+	}
++	/* restore the timing register like the legacy path does */
++	out_le32(&ns->regs->timing, ns->mtiming);
 +
 +	return 0;
 +}
 +
-+static int phy_load_training_data(struct mt2824_ddr_priv *priv, unsigned int comp,
-+				  void __iomem *base, resource_size_t size)
-+{
-+	const struct fw_header *header = priv->fw_img;
-+	unsigned int nb_vals;
-+	const u16 *val;
-+
-+	if (header->comps[comp].size > size)
-+		return -EINVAL;
-+
-+	nb_vals = header->comps[comp].size / sizeof(u16);
-+	val = priv->fw_img + header->comps[comp].offset;
-+
-+	for (unsigned int i = 0; i < nb_vals; i++) {
-+		writew(*val, base + i * 2);
-+		val++;
-+	}
-+
-+	return 0;
-+}
-+
-+static u32 get_mail(struct mt2824_ddr_priv *priv, int mode)
-+{
-+	u32 mail;
-+	u16 val;
-+
-+	readw_poll_sleep_timeout(priv->phy + PHY_UCTSHADOWREGS, val,
-+				 !(val & BIT(0)), mode ? 0 : 100, 0);
-+
-+	mail = readw(priv->phy + PHY_UCTWRITEONLYSHADOW);
-+	if (mode == 1)
-+		mail |= (readw(priv->phy + PHY_UCTDATWRITEONLYSHADOW) << 16);
-+
-+	writew(0, priv->phy + PHY_DCTWRITEPROT);
-+	readw_poll_timeout(priv->phy + PHY_UCTSHADOWREGS, val, val, 0);
-+	writew(1, priv->phy + PHY_DCTWRITEPROT);
-+
-+	return mail;
-+}
-+
-+static void decode_streaming_message(struct mt2824_ddr_priv *priv)
-+{
-+	u32 msg_len = get_mail(priv, 1) & 0xffff;
-+
-+	for (unsigned int i = 0; i < msg_len; i++)
-+		get_mail(priv, 1);
-+}
-+
-+static void decode_major_message(struct mt2824_ddr_priv *priv, u32 mail)
-+{
-+	switch (mail) {
-+	case MSG_TRAINING_DONE:
-+		debug("DDRPHY: Training has run successfully\n");
-+		break;
-+	case MSG_TRAINING_FAIL:
-+		debug("DDRPHY: Training has failed\n");
-+		break;
-+	case 0x00:
-+		debug("DDRPHY: End of initialization\n");
-+		break;
-+	case 0x01:
-+		debug("DDRPHY: End of fine write leveling\n");
-+		break;
-+	case 0x02:
-+		debug("DDRPHY: End of read enable training\n");
-+		break;
-+	case 0x03:
-+		debug("DDRPHY: End of read delay center optimization\n");
-+		break;
-+	case 0x04:
-+		debug("DDRPHY: End of write delay center optimization\n");
-+		break;
-+	case 0x05:
-+		debug("DDRPHY: End of 2D read delay/voltage center optimization\n");
-+		break;
-+	case 0x06:
-+		debug("DDRPHY: End of 2D write delay/voltage center optimization\n");
-+		break;
-+	case 0x09:
-+		debug("DDRPHY: End of max read latency training\n");
-+		break;
-+	case 0x0a:
-+		debug("DDRPHY: End of read dq deskew training\n");
-+		break;
-+	case 0x0b:
-+		debug("DDRPHY: Reserved\n");
-+		break;
-+	case 0x0c:
-+		debug("DDRPHY: End of all DB training (MREP/DWL/MRD/MWD complete)\n");
-+		break;
-+	case 0x0d:
-+		debug("DDRPHY: End of CA training\n");
-+		break;
-+	case 0xfd:
-+		debug("DDRPHY: End of MPR read delay center optimization\n");
-+		break;
-+	case 0xfe:
-+		debug("DDRPHY: End of Write leveling coarse delay\n");
-+		break;
-+	case 0x08:
-+		debug("DDRPHY: Start streaming message mode\n");
-+		decode_streaming_message(priv);
-+		break;
-+	default:
-+		debug("DDRPHY: Error, unknown major_message %x\n", mail);
-+	}
-+}
-+
-+static int ddr_phy_wait_training_done(struct mt2824_ddr_priv *priv)
-+{
-+	u32 mail = 0;
-+
-+	do {
-+		mail = get_mail(priv, 0);
-+		decode_major_message(priv, mail);
-+	} while (mail != MSG_TRAINING_DONE && mail != MSG_TRAINING_FAIL);
-+
-+	return (mail == MSG_TRAINING_DONE) ? 0 : -EIO;
-+}
-+
-+static void write_mr14_to_register(struct mt2824_ddr_priv *priv)
-+{
-+	u16 v26 = readw(priv->phy + PHY_DCCM_V26);
-+	u16 v27 = readw(priv->phy + PHY_DCCM_V27);
-+	u16 v40 = readw(priv->phy + PHY_DCCM_V40);
-+
-+	u8 b0 = (v26 >> 8) & 0xff;
-+	u8 b1 = v27 & 0xff;
-+	u8 b2 = v40 & 0xff;
-+	u8 b3 = (v40 >> 8) & 0xff;
-+
-+	u32 sum = (u32)b0 + b1 + b2 + b3;
-+	u8 avg = (sum + 2) / 4;
-+
-+	writel(FIELD_PREP(CTRL_INIT7_MR22, PARAM_MR22) | FIELD_PREP(CTRL_INIT7_MR14, avg),
-+	       priv->ctrl + CTRL_INIT7);
-+}
-+
-+static int ddr_phy_training(struct mt2824_ddr_priv *priv)
-+{
-+	struct {
-+		unsigned int imem_comp;
-+		unsigned int dmem_comp;
-+	} fw_info[TRAINING_STAGES] = {
-+		{FW_COMP_PMU_1D_IMEM, FW_COMP_PMU_1D_DMEM},
-+		{FW_COMP_PMU_2D_IMEM, FW_COMP_PMU_2D_DMEM}
-+	};
-+	int ret;
-+
-+	for (unsigned int stage = 0; stage < TRAINING_STAGES; stage++) {
-+		ret = phy_load_training_data(priv, fw_info[stage].imem_comp,
-+					     priv->phy + PHY_ICCM_BASE, PHY_ICCM_SIZE);
-+		if (ret)
-+			return ret;
-+
-+		writew(PHY_PMU_MUX_SEL_UC, priv->phy + PHY_PMU_MUX_SEL);
-+		writew(0, priv->phy + PHY_PMU_MUX_SEL);
-+
-+		ret = phy_load_training_data(priv, fw_info[stage].dmem_comp,
-+					     priv->phy + PHY_DCCM_BASE, PHY_DCCM_SIZE);
-+		if (ret)
-+			return ret;
-+
-+		/*
-+		 * MicroContMuxSel=1, written twice to match the PhyInit
-+		 * sequence (end of DMEM load and start of the firmware).
-+		 */
-+		writew(PHY_PMU_MUX_SEL_UC, priv->phy + PHY_PMU_MUX_SEL);
-+		writew(PHY_PMU_MUX_SEL_UC, priv->phy + PHY_PMU_MUX_SEL);
-+
-+		writew(PHY_UC_CTRL_RESET | PHY_UC_CTRL_STALL, priv->phy + PHY_UC_CTRL);
-+		writew(PHY_UC_CTRL_STALL, priv->phy + PHY_UC_CTRL);
-+		writew(0, priv->phy + PHY_UC_CTRL);
-+
-+		ret = ddr_phy_wait_training_done(priv);
-+		if (ret)
-+			return ret;
-+
-+		writew(PHY_UC_CTRL_STALL, priv->phy + PHY_UC_CTRL);
-+		writew(0, priv->phy + PHY_PMU_MUX_SEL);
-+
-+		if (stage == 1)
-+			write_mr14_to_register(priv);
-+
-+		writew(PHY_PMU_MUX_SEL_UC, priv->phy + PHY_PMU_MUX_SEL);
-+		writew(0, priv->phy + PHY_PMU_MUX_SEL);
-+	}
-+
-+	return 0;
-+}
-+
-+static int ddr_ctrl_configure(struct mt2824_ddr_priv *priv)
-+{
-+	u8 trddata_en = PARAM_RL - 5 + 2 * (PARAM_MISC - PARAM_RD);
-+	u8 tphy_wrlat = PARAM_WL - 5 + 2 * (PARAM_MISC - PARAM_WR) + PARAM_TDQSS;
-+	u8 twrdata_delay;
-+	u8 tctrl_delay;
-+	u8 ardptrinitval;
-+	u16 dqs_dly;
-+	u8 trained_txdqsdly;
-+	u32 val;
-+	int ret;
-+
-+	clrbits_le32(priv->ctrl + CTRL_SWCTL, CTRL_SWCTL_DONE);
-+	setbits_le32(priv->ctrl + CTRL_DFIMISC, CTRL_DFIMISC_START);
-+	setbits_le32(priv->ctrl + CTRL_SWCTL, CTRL_SWCTL_DONE);
-+
-+	ret = readl_poll_timeout(priv->ctrl + CTRL_SWSTAT, val,
-+				 val == CTRL_SWSTAT_DONE, POLL_TIMEOUT);
-+	if (ret)
-+		return ret;
-+
-+	ret = readl_poll_timeout(priv->ctrl + CTRL_DFISTAT, val,
-+				 FIELD_GET(CTRL_DFISTAT_COMPLETE, val), POLL_TIMEOUT);
-+	if (ret)
-+		return ret;
-+
-+	clrbits_le32(priv->ctrl + CTRL_SWCTL, CTRL_SWCTL_DONE);
-+	clrbits_le32(priv->ctrl + CTRL_DFIMISC, CTRL_DFIMISC_START);
-+	setbits_le32(priv->ctrl + CTRL_DFIMISC, CTRL_DFIMISC_COMPLETE);
-+	clrbits_le32(priv->ctrl + CTRL_PWRCTL, CTRL_PWRCTL_SELFREF);
-+
-+	writew(0, priv->phy + PHY_PMU_MUX_SEL);
-+
-+	/* read the trained DQS delay and round it up */
-+	dqs_dly = readw(priv->phy + PHY_DQS_DELAY_GRP0);
-+	trained_txdqsdly = FIELD_GET(PHY_DQS_DELAY_COARSE, dqs_dly) +
-+			   (FIELD_GET(PHY_DQS_DELAY_FINE, dqs_dly) +
-+			    FIELD_MAX(PHY_DQS_DELAY_FINE)) /
-+			   (FIELD_MAX(PHY_DQS_DELAY_FINE) + 1);
-+
-+	ardptrinitval = readw(priv->phy + PHY_RDPTR_INITVAL);
-+	tctrl_delay = ((ardptrinitval / 2) + (PARAM_MISC * 2) * 1 + 3);
-+	twrdata_delay = tctrl_delay + (6 + PARAM_BL / 2) + trained_txdqsdly;
-+
-+	writew(PHY_PMU_MUX_SEL_UC, priv->phy + PHY_PMU_MUX_SEL);
-+
-+	writel(FIELD_PREP(CTRL_DFITMG0_CTRL_DELAY, tctrl_delay) |
-+	       CTRL_DFITMG0_RDDATA_USE_DFI_PHY_CLK |
-+	       FIELD_PREP(CTRL_DFITMG0_RDDATA_EN, trddata_en) |
-+	       CTRL_DFITMG0_WRDATA_USE_DFI_PHY_CLK |
-+	       FIELD_PREP(CTRL_DFITMG0_TPHY_WRDATA, PARAM_WRDATA) |
-+	       FIELD_PREP(CTRL_DFITMG0_TPHY_WRLAT, tphy_wrlat),
-+	       priv->ctrl + CTRL_DFITMG0);
-+
-+	writel(FIELD_PREP(CTRL_DFITMG1_WRDATA_DELAY, twrdata_delay) |
-+	       FIELD_PREP(CTRL_DFITMG1_CLK_DIS, PARAM_CLK_DIS) |
-+	       FIELD_PREP(CTRL_DFITMG1_CLK_EN, PARAM_CLK_EN),
-+	       priv->ctrl + CTRL_DFITMG1);
-+
-+	setbits_le32(priv->ctrl + CTRL_DFIMISC, CTRL_DFIMISC_COMPLETE);
-+
-+	clrbits_le32(priv->ctrl + CTRL_PWRCTL, CTRL_PWRCTL_SELFREF);
-+
-+	setbits_le32(priv->ctrl + CTRL_SWCTL, CTRL_SWCTL_DONE);
-+	ret = readl_poll_timeout(priv->ctrl + CTRL_SWSTAT, val,
-+				 val == CTRL_SWSTAT_DONE, POLL_TIMEOUT);
-+	if (ret)
-+		return ret;
-+
-+	ret = readl_poll_timeout(priv->ctrl + CTRL_STAT, val,
-+				 FIELD_GET(CTRL_STAT_MODE, val) == CTRL_STAT_NORMAL,
-+				 POLL_TIMEOUT);
-+	if (ret)
-+		return ret;
-+
-+	clrbits_le32(priv->ctrl + CTRL_RFSHCTL3, CTRL_RFSHCTL3_DIS_AUTO);
-+
-+	return 0;
-+}
-+
-+static int mt2824_ddr_init(struct udevice *dev)
-+{
-+	struct mt2824_ddr_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = check_firmware(dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = reset_assert(&priv->rst);
-+	if (ret)
-+		return ret;
-+
-+	ret = ddr_ctrl_load_config(priv);
-+	if (ret)
-+		return ret;
-+
-+	ret = reset_deassert(&priv->rst);
-+	if (ret)
-+		return ret;
-+
-+	ret = ddr_ctrl_init(priv);
-+	if (ret)
-+		return ret;
-+
-+	ret = ddr_phy_load_comp(priv, FW_COMP_PHY_CFG);
-+	if (ret)
-+		return ret;
-+
-+	ret = ddr_phy_training(priv);
-+	if (ret)
-+		return ret;
-+
-+	ret = ddr_phy_load_comp(priv, FW_COMP_PIE_IMAGE);
-+	if (ret)
-+		return ret;
-+
-+	ret = ddr_ctrl_configure(priv);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int mt2824_ddr_probe(struct udevice *dev)
-+{
-+	struct mt2824_ddr_priv *priv = dev_get_priv(dev);
-+	struct resource res;
-+	int ret;
-+
-+	ret = dev_read_resource_byname(dev, "ctrl", &res);
-+	if (ret)
-+		return ret;
-+
-+	priv->ctrl_size = resource_size(&res);
-+	priv->ctrl = devm_ioremap(dev, res.start, priv->ctrl_size);
-+
-+	ret = dev_read_resource_byname(dev, "phy", &res);
-+	if (ret)
-+		return ret;
-+
-+	priv->phy_size = resource_size(&res);
-+	priv->phy = devm_ioremap(dev, res.start, priv->phy_size);
-+
-+	ret = dev_read_resource_byname(dev, "fw", &res);
-+	if (ret)
-+		return ret;
-+
-+	priv->fw_size = resource_size(&res);
-+	priv->fw = devm_ioremap(dev, res.start, priv->fw_size);
-+
-+	ret = reset_get_by_index(dev, 0, &priv->rst);
-+	if (ret)
-+		return ret;
-+
-+	return mt2824_ddr_init(dev);
-+}
-+
-+static int mt2824_ddr_get_info(struct udevice *dev, struct ram_info *info)
-+{
-+	info->base = gd->ram_base;
-+	info->size = gd->ram_size;
-+
-+	return 0;
-+}
-+
-+static const struct ram_ops mt2824_ddr_ops = {
-+	.get_info = mt2824_ddr_get_info,
++/*
++ * The Metanoia variant of the ATCSPI200 core adds the command and address
++ * phases along with the dual and quad I/O data formats, exposed through the
++ * spi-mem operations assigned at probe time below. The other instances keep
++ * using the generic spi-mem fallback on top of .xfer.
++ */
++static struct dm_spi_ops atcspi200_spi_ops = {
++	.claim_bus	= atcspi200_spi_claim_bus,
++	.release_bus	= atcspi200_spi_release_bus,
++	.xfer		= atcspi200_spi_xfer,
++	.set_speed	= atcspi200_spi_set_speed,
++	.set_mode	= atcspi200_spi_set_mode,
 +};
 +
-+static const struct udevice_id mt2824_ddr_ids[] = {
-+	{ .compatible = "metanoia,mt2824-ddrc" },
-+	{ }
++static const struct spi_controller_mem_ops atcspi200_mem_ops = {
++	.adjust_op_size = atcspi200_mem_adjust_op_size,
++	.supports_op = atcspi200_mem_supports_op,
++	.exec_op = atcspi200_mem_exec_op,
 +};
 +
-+U_BOOT_DRIVER(mt2824_ddr) = {
-+	.name = "mt2824_ddr",
-+	.id = UCLASS_RAM,
-+	.ops = &mt2824_ddr_ops,
-+	.of_match = mt2824_ddr_ids,
-+	.probe = mt2824_ddr_probe,
-+	.priv_auto = sizeof(struct mt2824_ddr_priv),
-+};
+ static int atcspi200_spi_probe(struct udevice *bus)
+ {
+ 	struct nds_spi_slave *ns = dev_get_priv(bus);
+@@ -373,6 +537,9 @@ static int atcspi200_spi_probe(struct udevice *bus)
+ 	ns->mtiming = ns->regs->timing;
+ 	atcspi200_spi_get_clk(bus);
+ 
++	if (device_is_compatible(bus, "metanoia,mt2824-spi"))
++		atcspi200_spi_ops.mem_ops = &atcspi200_mem_ops;
++
+ 	return 0;
+ }
+ 
+@@ -394,16 +561,9 @@ static int atcspi200_ofdata_to_platadata(struct udevice *bus)
+ 	return 0;
+ }
+ 
+-static const struct dm_spi_ops atcspi200_spi_ops = {
+-	.claim_bus	= atcspi200_spi_claim_bus,
+-	.release_bus	= atcspi200_spi_release_bus,
+-	.xfer		= atcspi200_spi_xfer,
+-	.set_speed	= atcspi200_spi_set_speed,
+-	.set_mode	= atcspi200_spi_set_mode,
+-};
+-
+ static const struct udevice_id atcspi200_spi_ids[] = {
+ 	{ .compatible = "andestech,atcspi200" },
++	{ .compatible = "metanoia,mt2824-spi" },
+ 	{ }
+ };
+ 
 
 -- 
 2.55.0
