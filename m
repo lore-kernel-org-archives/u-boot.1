@@ -1,135 +1,141 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5059DCA5FC4
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 09:26:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67059CA5FC4
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 09:37:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B953481102;
-	Fri,  2 Oct 2026 09:26:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 21F134062C;
+	Fri,  2 Oct 2026 09:37:46 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1uHZrW54bACs; Fri,  2 Oct 2026 09:37:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 6FE00407A4
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790933865;
+	b=XXb9aDC294sphUP9dX+UfKTfzxExgDPhNpcKf7GHUeG/9Bbfv8Wr0E5lI1IXVDU4A/9k
+	 /sHBiRauo1UlbsUF5/USfc5dZFl6JYZBHHDOCPYO+wafwR+y8FfHILOy81ugkzt17VnD4
+	 8WczYHalYiPlN+eHFANLBl/smkNIl2FrQ8wghedby9IrxnbKERF1m71KtTVMbUxPIuR/x
+	 D+IfeVHV5l5LUA+waqgYOsbxIExL+PMtkuSK6yV5qfgA6wyXvionE38vupKCkdpAH3cjx
+	 QEPdlPfL8E18r6e25I1Plm3nUwAZrfEyGmbw/CJ+jNPMi553bGquwwHPBKkLh81I17A==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1790933865;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=3vnYnI1e1gSw3/ZaZIbGSnMLuWKKmEO65TD4r7mw9lM=;
+	b=m1Ori1YH0yYrnLIS/h94uA2U39QgHMf1TmXfZTB4Tm8tppdCz+DKoqo4AcmnH2/8zFOz
+	 KGSX0tkHnzaPx4lMORVCRmJk1aMl1fHE8J97cg7P2HRFZNSiHhsaW3+Ece3TPfpNuCmnN
+	 5EmUvW6h2nu2cjm5gYKZgX0M/06UvOQuwg56dPZSwq3hJ9Uz1lzI0/j/W1ZgkHCCwllAG
+	 254UdXdxNKiR/JG2ptSvNcV1+LeBAdmOdLez9SNP7In9gsLSJPcXAkavlHjk7UorfUZ2G
+	 Y+k5VvDNSbCp9SWs+Ezb07nO89w2PrtTnWJ38Zd7SAVIwMKdQlj5PsSKGD0GHm0W05A==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1790933865;
+	bh=3vnYnI1e1gSw3/ZaZIbGSnMLuWKKmEO65TD4r7mw9lM=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Z9yzf79sJhv+PeFoucjEgu1uzAswlMxDJBHzllHiI/EBFIePB/0tGEXOHZaxE1CqU
+	 5IhXwk7rjivtlHn/7sffc8udplv14Zlm98rMDjdvITh1UIbgwJrRILrxUrNgAGU3WY
+	 MsEQSx2rtrZf3t7PoXKRLMNQv2f/XzhIfrSnI8WPeF7gMgYKTHQOjy7GlRGSZnzRpP
+	 8dKSYEdLaQha4ngZvw9nPOT+Gu3M6UsdF/woh4xjP9C3Th9p59AY02yyFw0shsc9dS
+	 sZ0MjoUWJK8lAp6qUqPzf8HpMP6TezoymP72hTMyvVmURzFspoFoudQrmw0tElbv0G
+	 aUzhf8BzeinoA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6FE00407A4;
+	Fri,  2 Oct 2026 09:37:45 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id AEB2A3AC
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 09:37:43 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 92CFC80A82
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 09:37:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JbA-EDRT-QNk; Fri,  2 Oct 2026 09:26:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0A70E81108
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790933209;
-	b=gJlzFo+WbXFe1rtVyuQKoblE8pKD8hMyawmQ2nyWOcnZQc+GOKLvkjLW0E+gtS8yG4ty
-	 YiCV9buZ6IJEXclPgFGLy27poKK1GR2+aVSaycmADkjNORaSnEBAdZFTpC53NgkXWuhns
-	 DH088yymnfpt1wLI3caG2SX+p2mZGHiqg7ROqaJFSLHl5EFOnTwjrGd1uhlCkFGUtrj6n
-	 0YTpWwHt7dxQZnB2LteIiPncSK1O1oAbqGgmN/u21RY6btxWW1tTJRgtBBE4c4mdDytiq
-	 y+2CR+wjAjhqkqnc5/RIoApFi8nicSqXci2+uiOsG2r+OtFRbebCz8gn9zc32dSMbIw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790933209;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=sJDgq7xjB1PjfPZkrkIDqvuiZUrJA67RFGg8nx6txL0=;
-	b=N+o9AjRKilgNbA7Wb0WYR1AmuvEl7nR45GUwIVfykBj+u450M537iOcRH/qdhNJJqP+k
-	 731y1gb6GTXeo+i+f0UX6yIK8q2vuJrM70Q0ubS2wBu+bsKfDa+vK3ylvhdEoPWg5NMz7
-	 pyuNdi/HnR43oev9DmNul1En1OzvEkkeKtDXPvJ/SBy9GMND0DJL3y2CjwLeXa/cjRRrs
-	 KP6slQA0kAjTldTd5K5znlIMAGBtXQb3aSkIJJpwJqeLmJWUSoWh+t2v2Zd4rm2vJPtSm
-	 sgNbmkEpmtjDorOUsRZN02M2h6Sv2DBVXqMkw6LMekORAYdzW/cQk7W8uQaQFAMOAfg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790933209;
-	bh=sJDgq7xjB1PjfPZkrkIDqvuiZUrJA67RFGg8nx6txL0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=f7owjP/RlMMfkMvmWqR0PlClhXuhkqyQcrBnndXINA+3JGu5p+UrgCdkDkLTFsbn6
-	 H5yhx3N1AxpMrVtb+ZLo0teixfimN8uKA7xJx1sm+dRrou6ULSGsNGTB2MEaGK+p3s
-	 jKGUcX5NKnVplwRIdyxSKF3WkW+lR2amuOtEcW5Y7/Nsa5ACaPyDmXhrrCDkEqXwjJ
-	 l9rWFXIHCwRHQadq2G6vtwA02+8TlpHhU7AjsQn2ysSI0bK6HK02W/GrvD2vHXOHOI
-	 3PwkpzvtuYd0LIHyNakxYGyMGotDisOC8bNn6BWXjPuNFP3YkLCLvtNQh4vJ5cGt+/
-	 giUMtdaMeaiNA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0A70E81108;
-	Fri,  2 Oct 2026 09:26:49 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id A269F3AC
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 09:26:47 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8821F6080A
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 09:26:47 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7xVdPk_JOV24 for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 09:26:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 911186066D
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=217.140.110.172
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790933207;
- b=TF+NdKgJWK/NKGabztSL6ezHTYbZzioGAxB2a8EUsSlP4foj8zr5LUyn5WVSfDH2yj11
- SLz52Qdm2T74aX0fCOb112H8/1ytM2zcDyreGcO7pPI1t8q7P/9nv4LPd0tcBYQ6z7pg9
- i1z86XnHPAWj19iu/zUmiFLyfsgNNcjZPjDES+XCtydq0Y1D2QMcI+YgtDNaVQjVBgQUz
- dUSAHSHtJBMURat/Csotr6ECPo/Bkw3FiPIWoWevuFDhV9Tp7Oe2d7RVSifIITz3QGJXC
- Yh7WXqlyRFyLd3szJRgwN0msPlYmXx4PB1uXOE5ggX/WsGT/Gpw6BgOHAAtHdR9uD+A==
+ id 6VX6uLtqRCxr for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 09:37:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5E66580A53
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::202"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790933862;
+ b=asElv7DYvYHGn8+TxO2//BmsVoFN/EQx8XnhubER4qfWQsMEtETWWLx1/VYvjQKuXW/s
+ 5LWagucBSWihuIu8snz1KnQz98fMJo8wCIcknCGhyvQB1MOHxYa8AHYj/sx6g/2ox/WP3
+ EAs6EOdV6M1KBUT8/WvDuw6ap3iJQUNbEHG0u3xB3ofMwuSDaNcHe3hr2nKulonTa77k3
+ wbEJVuQQhDMc3VHCzbYkxL5XmpV1PJ1WX49bbcgEi6IuYvIg5V9/EyrfpQkiC0B2DyA5I
+ iA3+Re78QKFgnIdgw2dN2wM7KMYiwcf6gp1xreMMT5x/PahybGjV2PDdEQ70fmY7CaQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790933207;
- h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
- Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:Content-Transfer-Encoding:In-Reply-To;
- bh=sJDgq7xjB1PjfPZkrkIDqvuiZUrJA67RFGg8nx6txL0=;
- b=m3f0FMdm8Ng+8WQLf+KiKUascECVHB4Rgzuxdqj6xSCrs9EpFbFoP/B0NjEbV76updIb
- Z4cIBzCb7OtNtlOYapuflOxnyIThlWYeRy/yNQN4iuLRnIhub6eCBEimEzylCuxyirszB
- xZRxALbtUiIsogj+dJwoBC6PvKxIMCxrpBHFmp71Lvs0tAZEGRq9lQJUcrZhSKTicl9lW
- Ei4G6wQTEjc3sLYUz/WXAyZ0rbFhJ+KbcL3hLvRSg0voX27G7WpZKQi1rvA23WN4p0xR+
- 3rRK9n9UVoI1tz4VVbBSgmd1ajHwiexKLPx7jKo1Q7UOw2jVdLLxc/BrHKJ8yvMc5fQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=arm.com; 
- dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=T7d1z5ES; 
- arc=none smtp.remote-ip=217.140.110.172
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
- helo=foss.arm.com; envelope-from=vincent.stehle@arm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=T7d1z5ES
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp3.osuosl.org (Postfix) with ESMTP id 911186066D
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 09:26:46 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 17E8D497;
- Fri,  2 Oct 2026 02:26:42 -0700 (PDT)
-Received: from debian (unknown [10.57.11.46])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 237A43F86F;
- Fri,  2 Oct 2026 02:26:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1790933205; bh=AhZZoolECQumdW8AbWJLJyvNekXP1oAhsO6PlGJAlkw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=T7d1z5ES066VhBdSxgGp0KmUXU/l6/NkdPLjtjt4Gran4NDCI5yY/NDykub+vv2up
- T+v7utUmcT0iObHnQHmIkfJEUDWyqeFH/occWF/QexzqiZFzWjy6+yvsC3ffdfQiwL
- xsfTvmKFoS1s/z0x0/0q4L5AIDVIdLP4t5V/ocV0=
-Date: Fri, 2 Oct 2026 11:26:38 +0200
-From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Udit Kumar <u-kumar1@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH 2/2] efi_selftest: add minimal fmp test
-Message-ID: <ar94zly0zywmoZn2@debian>
-References: <20260922-authi-v1-0-e943530349bb@arm.com>
- <20260922-authi-v1-2-e943530349bb@arm.com>
- <79ac74ea-390e-409e-bfcf-033357832d71@gmx.de>
+ c=relaxed/relaxed; t=1790933862;
+ h=X-Greylist:Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:
+ Date:Message-ID:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID;
+ bh=3vnYnI1e1gSw3/ZaZIbGSnMLuWKKmEO65TD4r7mw9lM=;
+ b=cM/j4ugvjd2LSRks1yEJo+T4LanGpxXCRRjd/hpYjDTUuLfFblT8K+bUbhHbo4eBJIiZ
+ rRVM/WgUBIVTvqUrCtC4/ah/S6c3jEQNSuh5Jkloc4BidI7PunwJYHfRo93tPWo1Dk0i4
+ udcOTG70tV0OpNRbO6UuomHHFJDFx7SHGvDvrNfZRzrlyWMpXhL/bm0zBI8XjPgkA0oo8
+ xFOrU9v+lUaoal8D/Y7SzMw/s0sWnB8mDwzJDZQ38B5kYKYnlSkRTycXGi0YQD3YVq8vn
+ J0ddneXGBeJ4vnNZeVw3Km6+9pqdAxhlN3LZOIflCkYE+pN6Sb1Im1URp6AI025lk3A==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ dmarc=pass header.from=mailbox.org; 
+ dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=uMejfVbS; 
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::202"
+X-Greylist: delayed 340 seconds by postgrey-1.37 at util1.osuosl.org;
+ Fri, 02 Oct 2026 09:37:42 UTC
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=uMejfVbS
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:67c:2050:0:465::202; helo=mout-p-202.mailbox.org;
+ envelope-from=stefan.roese@mailbox.org; receiver=<UNKNOWN> 
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5E66580A53
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 09:37:42 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4hx3T92McVzMlZM;
+ Fri, 02 Oct 2026 11:31:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1790933517;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=3vnYnI1e1gSw3/ZaZIbGSnMLuWKKmEO65TD4r7mw9lM=;
+ b=uMejfVbS2c7FsJOrBJaCYJWqE8n6S6kQjazVDQl2DTkxQt99a73VLf3zyE/ILh/AbVWeFN
+ 7a6M091qJRgPi+eF0gHiY72x2b9uYwjjoTZCu1+pluEhdvKbhXIaCeIQQ/15fZTjSAE20m
+ mF0Dy4bosh2OdYT2nMawRlUvp0kskMzv47XXiDi9HtEChho9UNKuS8ScPjcEyMnzkfl5Bo
+ ua3KAJ0mBKPH5Ya95WkWwuGP4vudj02lCrbJQfOEllphzZ1egnFSohz8axHuhxG7q7GZaj
+ FSzCz08c7jxBUpOgRtGD9xDEf6TAXcSGpW/IGw78Q0eJLIyEBq+kiif9t/WPfw==
+From: Stefan Roese <stefan.roese@mailbox.org>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: u-boot@lists.u-boot-project.org,
+	Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] arm: kirkwood: remove obsolete configs for Zyxel NSA325
+ board
+Date: Fri,  2 Oct 2026 11:31:52 +0200
+Message-ID: <20261002093156.2238815-1-stefan.roese@mailbox.org>
+In-Reply-To: <20260914-nsa325_configs-v1-1-d4089f3f5bff@gmail.com>
+References: <20260914-nsa325_configs-v1-1-d4089f3f5bff@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <79ac74ea-390e-409e-bfcf-033357832d71@gmx.de>
+X-MBO-RS-META: 9nyqbufxjxhhazh4ts3kect36mckcsuo
+X-MBO-RS-ID: fa7036bb0fbdbb083ba
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,62 +149,15 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Thu, Oct 01, 2026 at 03:55:10PM +0200, Heinrich Schuchardt wrote:
-> On 9/22/26 16:58, Vincent Stehlé wrote:
-> > Add a minimal test for the UEFI Firmware Management Protocol.
-(..)
-> > +	/* Determine buffer size */
-> > +	img_info_size = 0;
-> > +	ret = fmp->get_image_info(fmp, &img_info_size, NULL, NULL, NULL, NULL,
-> > +				  NULL, NULL);
-> > +	if (ret != EFI_BUFFER_TOO_SMALL) {
-> > +		efi_st_error("GetImageInfo returned %u\n", (unsigned int)ret);
-> > +		goto out;
-> > +	}
-> 
-> This fails if the number of images is 0.
-> 
-> ERROR: GetImageInfo returned 2 (EFI_INVALID_PARAMETER)
-> 
-> +struct efi_fw_image fw_images[] = {
-> +};
-> +
-> +struct efi_capsule_update_info update_info = {
-> +       .dfu_string = NULL,
-> +       .num_images = ARRAY_SIZE(fw_images),
-> +       .images = fw_images,
-> +};
-> 
-> This looks like a bug in efi_fill_image_desc_array((). Why does it return
-> EFI_INVALID_PARAMETER if the number of images is 0?
-> 
-> We should just return *img_info_size = 0 and EFI_SUCCESS instead.
-> 
-> The test should return EFI_ST_SUCCESS in this case.
+Hi Tony,
 
-Hi Heinrich,
-
-Thank you very much for reviewing.
-
-I confirm that I could reproduce this corner case with your changes.
-
-In the end I think the test (v2) itself is fine, as it does pass when I
-replace the calls to get_image_info() by the following code:
-
-+       img_info = NULL;
-+       desc_ver = EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION;
-+       desc_cnt = 0;
-+       desc_size = sizeof(struct efi_firmware_image_descriptor);
-+       pkg_ver = 0;
-+       pkg_ver_name = NULL;
-
-I will try to send a fix for efi_fill_image_desc_array() as you
-mentioned, but if you agree that will be separated from this series.
-
-Best regards,
-Vincent.
-
+On 14.09.26 22:24, Tony Dinh wrote:
+> Zyxel NSA325 board has been updated to bootstd, remove obsolete configs.
 > 
-> Best regards
-> 
-> Heinrich
+> ---
+
+Your Signed-off-by is missing, so I can't apply this one. Could you
+please resend it with the SoB added?
+
+Thanks,
+Stefan
