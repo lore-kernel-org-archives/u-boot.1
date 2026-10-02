@@ -1,136 +1,130 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9E78CA5FCE
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 01:04:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9084FCA5FD4
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 01:04:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DF506607F8;
-	Fri,  2 Oct 2026 01:04:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DC12540BF7;
+	Fri,  2 Oct 2026 01:04:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id O1XaSN8Km9CA; Fri,  2 Oct 2026 01:04:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E3C7E60B52
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790903041;
-	b=G57N9v70FDX+sD9F40qfIVfqOejtz6a9cg0334p/FrwQPmS9hBKcbeWFYzu9KbiPradR
-	 e0xSf8N6n6rWf40i9bB+VW98PHO3D5tIYyLUkUlFHuuB5nZuBevDv4Q7QTY/WXeEdO4Y9
-	 3vSgzW7OLhM3YftT4JrAWvKljKleKYuXTPn+gYj/6WKHbAk6ReeaEEi1e8jCVFduq2v1u
-	 onCOX4BEBXSlhSNX3iCyKtnAsw1MAHCmxJpJU9FlOZnzVuFA1Bh0GX/KBzg72E79TFyjV
-	 nw1vKH5z2uaLd6028c9kH4f+iC31S87/ZN5W50rdGxIK8p/UwjmcJ6jrw6X1IhjHB1Q==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WloAGSDkID6P; Fri,  2 Oct 2026 01:04:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org F217D40B2E
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790903043;
+	b=fc0tBKxtEt4zDSa0DASgZZUE2Uv/2t+RxuY7c2R0iVm8Wioskmqia/5VyDFpTf3/0WEu
+	 +RYCbcPT68JVqCg11/0WNRZpNS2Bp15WLxP0xP19m4bWs09yu2VZK3pJetR2y89zHVPEO
+	 r7qMnpP0nlKOpocOw8Azn6msrUd8G/TvgFHB+DUpXMMu6tqi0AxmiJ9FqSsxk+Vwm6+w+
+	 O7BPy8IOWKn0fJjZJ68PSxXv/4ySxG0D+3GgvatyFCT+7wsJVrrhskC9Rr4J1ikio6CdG
+	 Co/TrxGiIda7yos+077BWvuKjwFI/90ge/aM+6Gy7UDyT2JY+oKymz3ZCClslY1i+pA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790903041;
+	c=relaxed/relaxed; t=1790903043;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=SJGz++QwAR8rB9A1DioiVCX58FB+vPlPzxH21jQYMtA=;
-	b=DUomi6GDKo2lCE+wCIxSoRvgD1w6p4MX3tU2QrU+zHrzUjycLBSbbXTifYhzTrlC5oJD
-	 lG/l2ybd22WlAZUJmu6wzEZtx9lpG7/x2eg1wj+rFFVols6yVaoV/lzywL29ac/H3jyuk
-	 J3J1KBqc0SNZKJB0XU6YhvIVO38doGMDi46VBT5cc9VOpVB6Hj7h7ajojTgonAudbaHBk
-	 SmOE2ISyJ/g0Syu/p87UHrLVfibZj1pOPBYNHgSUUiszBjNiwOO2HaC2vVAGz7gadq8NB
-	 R/FYIiTt5dziPLVAXPB4ZhUXKd/C1OOFLU2ndOItSvivAkPWmN6QUfgfhDAkycDu74A==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=P3mU9Ubo;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=QYrQ9KZgDkOMb50RalmXurg+flvXofHx0UIkxHI3944=;
+	b=LuYD+M8IWemiQ/jTzUUAvQR0ccAUqqfKN6rc9b/j+jTj4GOKj59eczyq1hpeMCU0WQ00
+	 ymVa7T1gS82hsRzs+xLIDTVA2OFIIHPIIy4URxmJCU1dFCXwp2JNt76vaLF9RR7eraeps
+	 rehZs0jyux8I3nmLrOMZdhEEjJHHegLMkyvdvhBkIgdEBhomoTP0pL6/vwujmXwqEB0lo
+	 jq+E7BducxYFeO4tNvbsHzPDD2CyYQl03oDs08CDcHu2FaqZnuykTJq++RN6Ur7FBFSo8
+	 OVr8FmW53WjXMau3u0KRJkXomw6P20Wf+lQ2w9wGop8OJtRkiJkHNZxp+VhWr4c8o1w==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790903041;
-	bh=SJGz++QwAR8rB9A1DioiVCX58FB+vPlPzxH21jQYMtA=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=FOGXgPP5DsCT6bLxK9TXQYox0Nl0MdEa8eG9Oqk1wxgUV01jv4gDOqFndJKXktU7O
-	 zQMyZ+eiNsswTKl348u9Vb+Qt0nUE+a17EZBE0bCENblZLYwHQ6LVwPeP6wxP1/3Ue
-	 77bS4FLqOuPG6QHMdnGvFk9E3ooQziMKsyB4A6ZoRfz9v8AQbYoLQUjDjD1EsQVull
-	 6c/08v5GKONT3gW8BwwKTPrynIR40/7BEBxtv/jTd3T0mXAT0TcrEczTYxTjaTmSjQ
-	 ujQuaV30mcaavWnNrBAkdBxqvxYhBwHmxjpkLbdfJg7yk/Vq4EcgyMNr8EZcARziqx
-	 +tPEsZ0N/72MA==
+	d=lists.u-boot-project.org; s=default; t=1790903043;
+	bh=QYrQ9KZgDkOMb50RalmXurg+flvXofHx0UIkxHI3944=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=F72wlmDEAR0RNpBjhrG8RPnGOzITv4EE30SbODiXx05L2o1lxs/Hlsvz9oAnlfPUI
+	 0aNUCQdZ4kdBqp/HmXhjtLBYtzjlprTsIdOzykKepJuXknrVUJQmskkcmc8INTIRTO
+	 VY1vOA8RyoC26MLghd4KiYAMUQ1CLFie4ummc6c4XvBEZ8UM60NNwBgrQU0qAbx2tC
+	 gNWlhDDB47ZXzx25uT/h5CqesYExn0dWNx47i0Zr/kp8Ur6L9s8VAFiX3eLhxu3z85
+	 InlZEKklCHmHCPdMmIWpQWlsWiRBA6dlueZ0nKtfHHG3TCtDzTYKnNh2N2xklkJ0pf
+	 YvXeR4gJSRFVg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E3C7E60B52;
-	Fri,  2 Oct 2026 01:04:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F217D40B2E;
+	Fri,  2 Oct 2026 01:04:02 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 23AA932F
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 01:03:59 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 6E8B932A
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 01:04:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 09530607F8
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 01:03:59 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6035060B74
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 01:04:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SM1XVMFSkQA8 for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 01:03:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 2CBB460670
-Authentication-Results: smtp3.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790903038;
- b=a9pYAU4ly5YmSjojTcyzfLt3EEJJFX0eG4sNyK0oPkyumTPD7U9ggF1FleMff8Bh+Uba
- nBAJje5gdQhcyGDoEFWaUr9sP/PmGOpg6T500xFyN4ccwzwtMwLgXOjlJ6qN+G/WS6/8q
- cCIk35C8ARRZ2Vz8M8vR4j9uz/TNbcOhPSKyp80MVzjq6etPrzfwgwKvnkIX5pjSZQlec
- TpgRTiSqLU/HqieYAh80OCYug/JCiTN1OF1VPswHdVmd5481XkIw3Gf675kz8Uq9wVShN
- 3Smi9i6qDzLcHyS3yIDEjTSZDNMmETqmRSG2pulFY4m9D3dObDvWGxVExJutV/atXgA==
+ id dWwiWHCyZnVo for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 01:04:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 840ED60670
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=172.234.252.31
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790903040;
+ b=lHzFucjDO885dwDtFiY6KJtjEVtUuS0kkOUuV7k6ftt/jArt2WvEhuJHyfe0FYt7c1z7
+ ZZV2uWDMYq5phvs4O+RiEnbtSG3lDvND7LM4MWK2sP/4enuA6r+0228yzoVrHqkhAa6aK
+ cyAW19rlPXbMFrdbHGpequ2sId2KYZw3lpzFooKerCLVtt6oEU2QqRxUYFJKEcvhxvdEO
+ Cp9d1mqbxQrVy8H0K/8NUWRjdUsvboc8QtdaUDHyUQ87RGdQZ/4OegGNlf4IhjTRJObmC
+ f3Rqe+a24RVfBFTo1m9xPgIW4mugbazH0n8NnlQffW3GRJgavTFXlv+AMjsFB+HnHuQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790903038;
- h=Received-SPF:Received:Received:DKIM-Signature:From:Subject:Date:
- Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ c=relaxed/relaxed; t=1790903040;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=SJGz++QwAR8rB9A1DioiVCX58FB+vPlPzxH21jQYMtA=;
- b=GHbGIBzvRYt1ER7JKOGC8dLjcCymv6IsME5x1gbKKfrsntS3JiDBg8EXCuoiXLsvZCwS
- IBBiDSi7afZP9yuzAMBWwW86f3BxAPyAsJ7S7erc5bgOMuw6iSOtGgWuGFy4egblRT8r2
- r0noxffzkfKBma04gtXd7ztW1WYyAQMArofpLJ85PyDWOKC5HRj2QFxo3QQJEt/vAX7J+
- 5+RKeITBZJRpD1fCbS04jMm9p+fywmlKEU5ToLdSvkle4bFhRbtxj17shPmemQGaWDHcA
- So2WJ2EgfbHZjNNgqZ3HG0GxKwQtCG7sBueFvfK4zLCLmfW/wZdYwSUcz9gVm01Sdkg==
+ bh=QYrQ9KZgDkOMb50RalmXurg+flvXofHx0UIkxHI3944=;
+ b=MkdCHaJe30m+Vajccgsb7P4WjkFI/zQw3tnVRMhBanuqs3E5Zfs5RNWCJtx9O4Sy7rZA
+ Keg9cZeRidHok4l17m6vQ/3lntqqC4Azt1x9F0wahOttMnkn5eq9/ba4AjVjyaoc7g1Er
+ Lzx5dJuXHCpc7fU4BYiz6GE+w8CIaoLbeHBy6950QAfbQSlRTqwIZRVTmNYqDU9CxqY25
+ k/ojb8IoieSEuK6Xh0C7d3VyhRa7Q60VjCOtdVwGix++g6tvvgUbiKKQwG2VjfqJ0WJqr
+ dOup/k1VcxSmOvGQOyxTqvNFYTEbopxEhbSMpqMhjn0DTtaBnvs/4mIhBIVjbNy3IhQ==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=kernel.org; 
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=P3mU9Ubo; 
- arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
- envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+ header.s=k20260515 header.b=aTbKADA4; 
+ arc=none smtp.remote-ip=172.234.252.31
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org; envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=P3mU9Ubo
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2CBB460670
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 01:03:57 +0000 (UTC)
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=aTbKADA4
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 840ED60670
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 01:03:59 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 9678C438D6;
+ by sea.source.kernel.org (Postfix) with ESMTP id D5B2F43C54;
+ Fri,  2 Oct 2026 01:03:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E29FC1F000FF;
  Fri,  2 Oct 2026 01:03:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A4F741F000FF;
- Fri,  2 Oct 2026 01:03:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1790903036;
- bh=SJGz++QwAR8rB9A1DioiVCX58FB+vPlPzxH21jQYMtA=;
- h=From:Subject:Date:To:Cc;
- b=P3mU9UboOhYrTkDbERjjghIl6JFzAKKffrPWny1SRurn4Hjuciuw24h6tgHc7Pr72
- QF3bYggrbcntQsYrPWQG1pYEt1VI0F5xnM8rt1DaIkZb+9lmt2QLni608VdkV+4Ax0
- 1agauY1MN3LShtsqxZ1N6z5xQUdYZ8v0HHH1iNLrjhaonfcqE6AZb03jB6X18OJdUf
- 9nkqHWteUnKinKe1ehcekoT7NjaT0iUMTZfWhskWPXpi5TZTxO5J+m1oYU1e4PK7qi
- zM1a/OQ+lyIpD1l+rVpib55wgQj6pGD6v1EKmhep1gDLd6xdS2draqoLurpjdiALNu
- QX75C7N+fDofw==
+ s=k20260515; t=1790903038;
+ bh=QYrQ9KZgDkOMb50RalmXurg+flvXofHx0UIkxHI3944=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc;
+ b=aTbKADA4Dvb9PUFK6dw+G5lXzSVvL5NbnMc958P2mjhX9jbKSYCLOWwXUq9s7hG2H
+ X8s2BC0Ml+5XnkT7nits90+fGCu5VVFfZiLQ3Fh7u7aYo3kUHk1Oht1ShtyzOMiH/m
+ 9hSLvU1M4P2V7omJpGsFWiXqgbHQl9idsKqGgOPAPiotT8zG8S5+aCan/TTMP+myrC
+ Gd068aPp1sazJnW1+YplMlXofHNy2EWZTBTdpO6buSC2AQDrELEOdjw6X8/TUl71p+
+ +mByCXVNUF4/feWtLFdrUSggtjYDeqAvsJz/jrh/8y7cUk4zCzBTCMbUCUC1A4rki4
+ q00pVJ4PmbboA==
 From: Yixun Lan <dlan@kernel.org>
-Subject: [PATCH v2 0/4] riscv: spacemit: Add support for K3 Pico-ITX board
-Date: Fri, 02 Oct 2026 01:03:10 +0000
-Message-Id: <20261002-00-basic-spacemit-k3-v2-0-fd6779a0317c@kernel.org>
+Date: Fri, 02 Oct 2026 01:03:11 +0000
+Subject: [PATCH v2 1/4] board: spacemit: add SpacemiT K3 Pico-ITX
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22Nyw6CMBBFf4V07Zg+hIAr/8OwKGWAES2kg0RD+
- HcLxp3Lk9x7ziIYAyGLc7KIgDMxDT6CPiTCdda3CFRHFlrqTBZagZRQWSYHPFqHD5qgN5CbXKk
- iO6W1KUS8jgEbeu3aa/llflY3dNPm2hYd8TSE996d1bb7Jcz/xBzT0FglVdpoV6vq0mPweD8Oo
- RXluq4fYkfuNMsAAAA=
-X-Change-ID: 20260921-00-basic-spacemit-k3-838119645d39
+Message-Id: <20261002-00-basic-spacemit-k3-v2-1-fd6779a0317c@kernel.org>
+References: <20261002-00-basic-spacemit-k3-v2-0-fd6779a0317c@kernel.org>
+In-Reply-To: <20261002-00-basic-spacemit-k3-v2-0-fd6779a0317c@kernel.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Yao Zi <me@ziyao.cc>, Tim Ouyang <tim609@andestech.com>, 
  Leo Liang <leo.liang@sifive.com>, Tom Rini <trini@konsulko.com>, 
@@ -138,22 +132,22 @@ Cc: Yao Zi <me@ziyao.cc>, Tim Ouyang <tim609@andestech.com>,
  Hiago De Franco <hfranco@baylibre.com>, 
  Junhui Liu <junhui.liu@pigmoral.tech>, Yixun Lan <dlan@kernel.org>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1861; i=dlan@kernel.org;
- h=from:subject:message-id; bh=b6ETMEw4SQwNNLvoOpoV3LGbANHSWaO3sS78z2cnI94=;
- b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBqvwLWXkrD5ff6Boh4HQu8fS3BGVeVO3HP8MsuP
- HvvmIPo1jCJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCar8C1hsUgAAAAAAEAA5t
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4689; i=dlan@kernel.org;
+ h=from:subject:message-id; bh=8DvxkYK75fnB5sctItbIZW2vlbX/JJeEGs58mJR3eS0=;
+ b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBqvwLtZjlQRTStL229X8me8GF+YvzjTLk9CIR3r
+ wCEwD8Itr+JAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCar8C7RsUgAAAAAAEAA5t
  YW51MiwyLjUrMS4xMiwyLDJfFIAAAAAALgAoaXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5
  maWZ0aGhvcnNlbWFuLm5ldEI1QkFCOEM5QzMxQjcxMTU2NzAyMjNEQzMxQUFFQTQ3NTk0REJCRU
- QACgkQMarqR1lNu+042Q//TW6o1FESRyari45XwlYMRWshFMQsBDT35bpCmyCg5qk61pZcR5r5N
- O1WOqozJqowlUmQ8fp6NXp8ZtPxOM4msH3PLJtZHD4fjsib3miYN79gUXcfcXMUI+X6Qlp5I43y
- bj7FQr/MmglLe2ozv4MWxNKcOjwEUt34oELVOwsLqK7ZDBzc/EFzApR0a0EEpWcMVLn5Ps5PhKT
- 5RkGUqI/OqnMuosA2koP3ROhIpTVtVTO1BqW33iRCSEEO2YjQSl9LyFlvr6q29VTpVlFpy7W2BV
- 8rhxSdlSKzidPDRGVE/pWdpAuULZNwgZt4oMUFvrdH3X4za3mXJk0WyS5ckse8Ftxk6NG7anUqN
- IHMdiMwYFHB2UqOR63FDe8t0lqov+wY9gD76adr7pQX2+/1qIsvDL9sFKQC++hGW84jXeHD+K8E
- wOXwhmrrADJPNqThF0i6+Bw1JSviFWT9EO5OjMZVMWBokjZfl5MQPPm9d7rRCs5M/ABH+xbbq2g
- l9NdARJ3ms8nexmEF9BCeP7btmSTU/kq2EOICFNR54tR89WMn8PuSTBKSj8h6uerzuxn8OkNAN8
- nkm5YWm3ubHL0gb/4ZttuwzNTmCVITYWooaT22T6w1rYlC0bStRPl+gv081040xQS3x6/Vb8OrM
- Szq9A3LsGPiO+sZHGYrk+hRejkrDFo=
+ QACgkQMarqR1lNu+1p7A/+P9PjM1i0loggtjZEsq2JfmwOrQCQf1pKqr3mEItq6lie9SepnqCNM
+ FeJBzkH4r95SYXzWig4w2HrIrZH8wKgxxjHJf4p/+jhvKLFZQV5gsu0xXlJF1FElToAWmGzHPP4
+ tCzf98NyYeHsH1NzgmYRnOmMq9sdjhuka4OByOD3RLFrifAD6nCekl2CJcDc4LzFJ+2eE8XEv9I
+ cQ8HzK1OF6XUJX2XlXfnFNQSpmxrjNSLb1FyOuFKn7Up5oh3x1SpGnaSnCUILk2O6wCgAb+hoK1
+ KMYGyBf9k/b2A9aniMOCtF6oeYihFHOFpIn8rgRWAV7JDqv8rHm/2aQ0CDRPimb6MhXCPVAleU7
+ Yg6iDWD3yB+t7EUfYw4lJrWa2ZU0vogBXe84XOTGdwsRwTui/d8MQVCP2MZqkbG8diweaki1eQj
+ yBaAiD/+83ybGKlqXjm4s1UubPJAdWEx3O7ibiWC34IuoBSFEIRVBiw6CogcrshsXamsCfHDgdz
+ YQlAjzYTb15pEoGgQMs7Dc9UVMObEaOb+DS6f46ttt3BrhW0h/RuK6Gfb+2edVVBjZ4VtMiTnMO
+ q3P+w7AZ43MDT1jH0GMedV7+m+XlAOfuB0vf1nmD42RX/s6oAJgiz1fEnaHmHTSXfdOZswTZg7X
+ PRPPinMSF7hcMatGUtDTC546/b2hlg=
 X-Developer-Key: i=dlan@kernel.org; a=openpgp;
  fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -169,53 +163,183 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add initial support for SpacemiT K3 Pico-ITX board, the config file
-will enable all basic components which make it able to run into U-Boot
-serial console.
-
-The series actually depend on previous sent patches, I'm not adding
-dependency to this series, but list it here for reference.
-
-Pinctrl:
- https://patch.msgid.link/20260923-01-k3-pinctrl-support-v2-0-e76a917ee252@kernel.org
-
-GPIO:
- https://patch.msgid.link/20260822-01-gpio-pinctrl-support-v1-1-6be2f4c71c5d@kernel.org
-
-clock and reset:
- https://patch.msgid.link/20260923-01-k3-clock-reset-support-v2-0-6ec0abb1c7b5@kernel.org
+Add initial support for K3 Pico-ITX board, in this version, the DRAM
+information is parsed from DTS "/memory" node. And with UART enabled,
+the U-Boot serial console works fine now.
 
 Signed-off-by: Yixun Lan <dlan@kernel.org>
 ---
-Changes in v2:
-- drop board_get_usable_ram_top()
-- drop empty source file
-- Link to v1: https://patch.msgid.link/20260923-00-basic-spacemit-k3-v1-0-fa1015f2cd1b@kernel.org
+ arch/riscv/Kconfig            |  5 +++++
+ arch/riscv/cpu/k3/Kconfig     | 18 ++++++++++++++++++
+ arch/riscv/cpu/k3/Makefile    |  5 +++++
+ arch/riscv/cpu/k3/dram.c      | 21 +++++++++++++++++++++
+ board/spacemit/k3/Kconfig     | 30 ++++++++++++++++++++++++++++++
+ board/spacemit/k3/MAINTAINERS |  8 ++++++++
+ include/configs/k3.h          | 13 +++++++++++++
+ 7 files changed, 100 insertions(+)
 
----
-Yixun Lan (4):
-      board: spacemit: add SpacemiT K3 Pico-ITX
-      riscv: dts: spacemit: k3: add binman node
-      configs: spacemit: Add K3 default configuration
-      doc: spacemit: k3: Add Pico-ITX board
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index c1b2890f1f3..386241efd4a 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -53,6 +53,9 @@ config TARGET_SIPEED_MAIX
+ config TARGET_SPACEMIT_K1
+ 	bool "Support Spacemit K1 SoC"
+ 
++config TARGET_SPACEMIT_K3
++	bool "Support SpacemiT K3 SoC"
++
+ config TARGET_STARFIVE_VISIONFIVE2
+ 	bool "Support StarFive VisionFive2 Board"
+ 	select BOARD_LATE_INIT
+@@ -124,6 +127,7 @@ source "board/sophgo/milkv_duo/Kconfig"
+ source "board/sophgo/milkv_duo_256m/Kconfig"
+ source "board/sophgo/licheerv_nano/Kconfig"
+ source "board/spacemit/k1/Kconfig"
++source "board/spacemit/k3/Kconfig"
+ source "board/starfive/visionfive2/Kconfig"
+ source "board/thead/th1520_lpi4a/Kconfig"
+ source "board/xilinx/mbv/Kconfig"
+@@ -138,6 +142,7 @@ source "arch/riscv/cpu/mpfs/Kconfig"
+ source "arch/riscv/cpu/generic/Kconfig"
+ source "arch/riscv/cpu/jh7110/Kconfig"
+ source "arch/riscv/cpu/k1/Kconfig"
++source "arch/riscv/cpu/k3/Kconfig"
+ source "arch/riscv/cpu/k230/Kconfig"
+ source "arch/riscv/cpu/th1520/Kconfig"
+ 
+diff --git a/arch/riscv/cpu/k3/Kconfig b/arch/riscv/cpu/k3/Kconfig
+new file mode 100644
+index 00000000000..5474ac11243
+--- /dev/null
++++ b/arch/riscv/cpu/k3/Kconfig
+@@ -0,0 +1,18 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
++
++if TARGET_SPACEMIT_K3
++
++config SPACEMIT_K3
++	bool
++	select BINMAN
++	select ARCH_EARLY_INIT_R
++	select SYS_CACHE_SHIFT_6
++	imply CPU
++	imply CPU_RISCV
++	imply RISCV_TIMER if RISCV_SMODE
++	imply CMD_CPU
++	imply OF_UPSTREAM
++
++endif
+diff --git a/arch/riscv/cpu/k3/Makefile b/arch/riscv/cpu/k3/Makefile
+new file mode 100644
+index 00000000000..fba4e4b0a3f
+--- /dev/null
++++ b/arch/riscv/cpu/k3/Makefile
+@@ -0,0 +1,5 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
++
++obj-y += dram.o
+diff --git a/arch/riscv/cpu/k3/dram.c b/arch/riscv/cpu/k3/dram.c
+new file mode 100644
+index 00000000000..e20d35dc1bf
+--- /dev/null
++++ b/arch/riscv/cpu/k3/dram.c
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
++ */
++
++#include <fdtdec.h>
++#include <init.h>
++#include <linux/sizes.h>
++#include <asm/global_data.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++int dram_init(void)
++{
++	return fdtdec_setup_mem_size_base();
++}
++
++int dram_init_banksize(void)
++{
++	return fdtdec_setup_memory_banksize();
++}
+diff --git a/board/spacemit/k3/Kconfig b/board/spacemit/k3/Kconfig
+new file mode 100644
+index 00000000000..b0e423d829c
+--- /dev/null
++++ b/board/spacemit/k3/Kconfig
+@@ -0,0 +1,30 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
++
++if TARGET_SPACEMIT_K3
++
++config SYS_BOARD
++	default "k3"
++
++config SYS_VENDOR
++	default "spacemit"
++
++config SYS_CPU
++	default "k3"
++
++config SYS_CONFIG_NAME
++	default "k3"
++
++config TEXT_BASE
++	default 0x102000000
++
++config SPL_OPENSBI_LOAD_ADDR
++	hex
++	default 0x100000000
++
++config BOARD_SPECIFIC_OPTIONS
++	def_bool y
++	select SPACEMIT_K3
++
++endif
+diff --git a/board/spacemit/k3/MAINTAINERS b/board/spacemit/k3/MAINTAINERS
+new file mode 100644
+index 00000000000..34cf1ed4453
+--- /dev/null
++++ b/board/spacemit/k3/MAINTAINERS
+@@ -0,0 +1,8 @@
++SPACEMIT K3
++M:	Yixun Lan <dlan@kernel.org>
++S:	Maintained
++F:	arch/riscv/cpu/k3/
++F:	board/spacemit/k3/
++F:	configs/spacemit_k3_defconfig
++F:	include/configs/k3.h
++F:	arch/riscv/dts/k3-u-boot.dtsi
+diff --git a/include/configs/k3.h b/include/configs/k3.h
+new file mode 100644
+index 00000000000..83e4945d2b3
+--- /dev/null
++++ b/include/configs/k3.h
+@@ -0,0 +1,13 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
++ */
++
++#ifndef __CONFIG_H
++#define __CONFIG_H
++
++#define CFG_SYS_NS16550_IER	0x40
++
++#define RISCV_SMODE_TIMER_FREQ	24000000
++
++#endif /* __CONFIG_H */
 
- arch/riscv/Kconfig                       |   5 +
- arch/riscv/cpu/k3/Kconfig                |  18 +++
- arch/riscv/cpu/k3/Makefile               |   5 +
- arch/riscv/cpu/k3/dram.c                 |  21 ++++
- arch/riscv/dts/k3-u-boot.dtsi            |   6 +
- board/spacemit/k3/Kconfig                |  30 +++++
- board/spacemit/k3/MAINTAINERS            |   8 ++
- configs/spacemit_k3_defconfig            |  50 ++++++++
- doc/board/spacemit/index.rst             |   1 +
- doc/board/spacemit/spacemit-pico-itx.rst | 204 +++++++++++++++++++++++++++++++
- include/configs/k3.h                     |  13 ++
- 11 files changed, 361 insertions(+)
----
-base-commit: cf615aafae36fc49f55e3e6a3648d29201b26d51
-change-id: 20260921-00-basic-spacemit-k3-838119645d39
-
-Best regards,
---  
-Yixun Lan <dlan@kernel.org>
+-- 
+2.56.0
 
