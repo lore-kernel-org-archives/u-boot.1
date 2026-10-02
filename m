@@ -1,192 +1,195 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E6ABCA5FC4
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 11:24:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EC14CA5FD4
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 11:26:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DCC2060894;
-	Fri,  2 Oct 2026 11:24:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DB30240D48;
+	Fri,  2 Oct 2026 11:26:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DVA9F3TqA8T1; Fri,  2 Oct 2026 11:24:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 02DDD6071D
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790940287;
-	b=EYW/nuW9oXoEM8YzpxEB5P5gZmkbuVB6loq+gBh8oLwFq+qyzfYulKjvl0sSaISniwUB
-	 swjtcOnrNbQrU/C4yn+NZRcBgPjlytrkre3QD4MPGKkbB+2g2pAcPFJDyW5zBV39+lv6K
-	 22FGfmJK5N0SpVP7V/8KzoeJGuN0ihyvCj0dUKZ1QSw8TysvT4P8RFRTk+97ID7WLq77f
-	 x6WLaUCDdamxhAYzTRDq7cQTAHK3/s/eAD2gqjOn8GB4dStJHDMrHm3gBDDrpry3TMpaA
-	 kZtGhSpLwm8V6rkGJ//FRlvIgXkZvWvOAm94GDjDZUwkfAuZVFEi90aITNnXaw3U5Gg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1cW6p7i-dvYG; Fri,  2 Oct 2026 11:26:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 60BED40D19
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790940362;
+	b=Pbn60Be8RYatXpQiyQq0l42uOWQvbP2MZ1sTk52kA6o8jPf+0FXLZmR4CWNKZEi4cP2A
+	 DKKEBXjgp7eRhTKz4XbNSDERCLGYLiSBHdmNDtyqIkzmPAOdomLDU+B6q3NGKGAGT5bBK
+	 iuPUEw14BZJD0MXgDxhaIznw9aBSBwjCv136xHvgWVcmrETsKQC6ZChfWZLYCeOXaBXve
+	 /XV6is2GLGGc0R7vgBAWLz5yqaP4tGQqRhx4Pv8UPt05wtdOB51Y0ttSQa3rwjBzIM8Y5
+	 CayyT5dHNzTZE9ZiwXLI1pmxK5kUUSubNmLWRaF3Doeb8+0Cdoik5ofSM4RLNhFP/ww==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790940287;
+	c=relaxed/relaxed; t=1790940362;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=VJ2tpY/ucLi3+RaCJPyECy8k0blfL3GZiiR78JU9UxM=;
-	b=sM4RIqxsP1QCiNwRMBz7ZBrNmLQHCN5fgPS9xubVRuj/eEs7F6UmIU1so44/xfNH1dse
-	 7trEis5rtHEFMkFMbEQE/enUJ2GU2AlvTmndlLEcpFqlhgfKPoV8u6bh4RhNjnqNE35mi
-	 4p8yiTy/Ai3eTVlco8OBpR0XtT3ueYxMmahH9fVqogQFHYsfCwLhrkaAVPISt5wZk6kzm
-	 NbcOKftXCzOkx0M3HmD+zZ+xthvLHKkk1z0eC2k4pj/OFr1Ifuxeu1Idh+XQEeQINas/m
-	 GQt8lAjHOUs9To+OXcsPfBk6pWGJ7TANxat7rO2BscZTECrr8MBFsnzdt5WI5cO5mGQ==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
+	b=i0sjDoHA9t4Ewic9bxgzvNkvzjAVvr08qhDqYh1iPhY04ndYDQgWhML00Y2KCTi/Zyr3
+	 xWO7MOJdX1tOgbk/3TY4x1jbcRvoPICvGDhG/Us+I3TPuShpQUOIXysCy18Ojnm0Jwtxg
+	 H2jQXgkEWNPHpzl20uwuX5hllskGGQGTP4LAqyljCxGXIOjuXdJjYtfjBAPEvtMdtmo9D
+	 k1e71k3bbL2V5/ACaBlctUiZE+Ozs3Ll0rX39rngHS6Sod/uM95/sj7/FvYiwHEeqLswq
+	 ItWX2Kmm3954hFhSDIfuBzcnH/nTW6HHbgkaDZva8eNsoncV8vL7ypt7odoq4nwe0kQ==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790940287;
-	bh=VJ2tpY/ucLi3+RaCJPyECy8k0blfL3GZiiR78JU9UxM=;
+	d=lists.u-boot-project.org; s=default; t=1790940362;
+	bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qDuJvYhhxOlj89JsdCIqKiJBuqeIlG6o1sgPwV7D1cEulmynXNPoPZc4KNVo25g9g
-	 pb88qNGCnMI1whPzPxWJ+bvmf4GcrS69azr7rLmvITL1Ktlnj+nUI+mLM5skA7OfYO
-	 NFc1kq4XxvcERHB8UiwvF3cbImqqeoFrvHihB2I4kzS83codwsTrw+oQmIVSf1CqKe
-	 oUS94RRbK8sN5aZDah5EZJNhNVARUBqmozrbxxdD7AtOn0RaA0AFoma0CUO68I7a3u
-	 EnaCFjfSM8NtcECqkgLa/uGeKLuxRd7SCmgDOYu7dOLJ4VQxAwY8K0ica2/bPB9A1n
-	 UNezX3V36v/Iw==
+	b=d11TMkDjalZdcgU/Kd2OFjdWuw7bvSUlfUWZUjqL+ELeBOkEDmNA+9Y3h6ULZ2iSF
+	 O2VQTlOFW0GqAHv6W5wHsbMOg34TwOtwqb/uLDKYtVCe4srgOZEyY92KmhGy2MBcac
+	 /4qG9ddmNAouTo0jobF49tF9VeAzwWIWKr7qft5Q8ljeESnFxX1sGCUBZaIIOEdkPR
+	 x4k/1I2CAUu05mKwVeVoCB1VcLJqa7HyJT4gUdwmsRLmZsuVGU2Xwk4XIe1y6K0Lur
+	 smnozj5h6MQ/4zxBLfeMJlh+tobgRk0J+v7t3M16vSau7LhmwOMj55Q46AV+j4J53o
+	 ZJijHTWXNFaRQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 02DDD6071D;
-	Fri,  2 Oct 2026 11:24:47 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8E24232F
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:24:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 60BED40D19;
+	Fri,  2 Oct 2026 11:26:02 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5812534D
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:26:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7411440D1C
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:24:45 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E7F6C6071D
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:26:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ckR8VNoWsis8 for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 11:24:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 4BB8F40D19
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XfkFTmUty54G for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 11:26:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 76B88606FD
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2607:f8b0:4864:41::c"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790940284;
- b=Ie4VFqxB58Lem8ofI2TINkmu8fQljRPMzLRQEipE4aYk+wK+TDSOpXFe7Dkc/alZZWgO
- KCabL101gW4tE1tibobxYUAV80BY81tLbkbBN65e+69HdHJ8DGGaBYBqay13u1Hv9lTOF
- znqZC6+u01voicHA27vZpjQ01RJ3SJw3lwifpyLCje1v1IAogzlZyv3PtCg6TorjhvcRH
- vgpInAgSr93PhsntQaoE8G+941SdNzyXWRxmdhGDknzbX1maaJvHOXFfvdCNMVZVLs8ez
- xje0PGvt6p3S+Zwa9cqP6wgHdFg8n+RoA6bj211sAbxQkcTx6gak6J/4p29Bh/zXAKQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790940359;
+ b=CqctoIWP3/7NIj/MfyiFThN5UXuijLVJvNhcABERGtxD28EfjR04cvcvqaHMf5RGNRUY
+ cLfmrGaIOCnXwS5EA6XxPWpDOj3ME4u/xMo+KDEVL688V4Zg2BClctZwEzQETu9K+jzUw
+ uIffhoe6i61feF/TCA2plp3PcvkgWUr0hgqPwLIW2TxK7vtQcUozfLhyyCw6ZiONGMTIZ
+ b9B09MtCNGh+vtoCMzVdjohXZe4VBKOhz7BpRJJ99Or4WnF9kdzmB2EyG7nMqI0GybU3t
+ 8QiZ5KaiGMAmylnY7EuKt3WSB63ULS7fRQIZPvoGiNyokC03L6FZRyPicoYglHLUO3Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790940284;
+ c=relaxed/relaxed; t=1790940359;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
  In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type:Content-Transfer-Encoding;
- bh=VJ2tpY/ucLi3+RaCJPyECy8k0blfL3GZiiR78JU9UxM=;
- b=UOElq+QG5W7q1nr5aFcZ7zc3no0ImOQ+shi+GrPX1P+8wqy2a51CPqqzyVoWmwK55q9b
- pxbDxzWh2+1nEsorh3dCPdhDKoOZEWUut9gthsJjtpIf83SF9+o4W+PO/wsVXsfZ8SP6Y
- mRn17Gce6IkcnarRRVoAHBD+7V53RG3+R5dnqbgcW9SXiL0snE/wNc/DA4NYkZZ2NWb3f
- yOmVo6JIubxisDUaBlLhuMOp0Eh7y1CgU55ifzZTU2Y1280uDpm0mGoCS5wycQgAA9bl1
- PgV4/NkIMtLpbdeUZEv4Qa45Eu09FiUwAb7SzoZtS2D4SEnb1/BbZpoFNNumyIKXkSQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ Content-Type;
+ bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
+ b=K5M+Rj8o5Jp2izdJ7jMLwPkRo7NIUasTi4jBJdJL31Gtaf/pEzMDqyjNavr4ESHxVMdB
+ IWxcMZqDb2P/8doRUfdm1TQe+6q6imnQbkSn3p4zKFUy8nDYOtQx5ra5wGa/Ah/p/t0P7
+ L0TXoER9VxZV2OjWGpvgY2SpudUkrIdd3Jw8ER+R4LbEuNjauaN15uFiLWq7/LMakf/UV
+ uwTwzXXbHOA8Knkt7oYl9hXs+OelodVpCTWOJR43JB/1opl6DlSbuv/928VMh3nFg+L88
+ WbLRno/l4R3jxE602gVRrjwKkUvMkifn7FWqmm4lu455W3h7u/8zzyUfy5/I595kddg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org;
  dmarc=pass header.from=linaro.org; 
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=jefK3EJ5; 
+ header.s=google header.b=sDRHgynS; 
  arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:41::c"
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:41::c;
  helo=mail-yx2-x0c.google.com; envelope-from=ilias.apalodimas@linaro.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=jefK3EJ5
+ header.s=google header.b=sDRHgynS
 Received: from mail-yx2-x0c.google.com (mail-yx2-x0c.google.com
  [IPv6:2607:f8b0:4864:41::c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4BB8F40D19
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:24:43 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 76B88606FD
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 11:25:58 +0000 (UTC)
 Received: by mail-yx2-x0c.google.com with SMTP id
- 00721157ae682-8abc87cbd93so31647837b3.1
- for <u-boot@lists.u-boot-project.org>; Fri, 02 Oct 2026 04:24:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790940283; cv=none;
+ 00721157ae682-8ab46253999so46180957b3.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 02 Oct 2026 04:25:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790940357; cv=none;
  d=google.com; s=arc-20260327;
- b=oL67U8xUEcOgv5BxxOUcthoK0rfgC9/7leAKt9vQkiZwvk8lggNCmE4n93oLY3BGi4
- w0hPny/aUoNz35+uDp37ms4kNqDUDfsLM7S8N52uTOAdieUQZ/yAbSL2wrDOLDmHZlIc
- oBvvzbA0J+/W9TOOhWeRXWjUdJPTkZgvgWapBZ80H93M3xGqbJFu+hATvKmVyT5gisJ/
- XCk/D2lscjG9fchGExx51KV/rBAOs7hv9R/ZHrmJYaISsSHWkxxHvg/yyYEwDRVzrJRF
- l3SIjjGGDx0+8NzV0jpDOv6WLqdPSSM7Ktye8ZpFJI/W0s/DWKkwDgVSx3Mc6uVF9nf4
- RkZQ==
+ b=gENCf1PHlsWObpCFJekA0a3w89dhpiB1Gv0H0aCP/hQ2ojA1ale50g8QtnTOKOsL4E
+ fwlxM+tVG7U8HVfG3PhenLhJxbGtRVKlrXSELCsuHWDmYTxvsqrtYLBvPhWOa66UHHgE
+ ousmsZqDd9+9IcEirYstlk3Y6ReAnfD62hm3nu0w8yvbJq2Fw2VOoXMVNHREfRgM3rIm
+ txbfx8KAsSxAfzobcNVQMdV7kQ7HLHM0nAgpeMvXSPhIJOQ4rN1iNwQr1lP4yVDQHQQM
+ /oribiQSuuj7kGYI2ZvjrTnjVyHP/UGMOfEdsM8FUkaezUjodrtqO5rm14ks0TjHmZVz
+ eSiA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=VJ2tpY/ucLi3+RaCJPyECy8k0blfL3GZiiR78JU9UxM=;
- fh=nuBf3wKo1f6h1jUIZsacuBBNlSv8DnOg+7qF0rK2IQQ=;
- b=gFoGojlTVvmhU0EKI+NlHsnvohPZISkBrThIVUI/4+rq6caNMMBnhE9AWIUCnVefYt
- V3scwnbFvH2YLn7g+QvvmOW/lRsrbLZc79KwLMoKIhlOm8gRPHF+prz68RW8oGf424Db
- W8rijwVLp5ZYmiqHlIWqpk7O/IFeOi/py5xh8UuKnUoVfs1uLNWcJImkyRmPkK8F7ZZE
- NYGJ3RFmpkI8ijRUAuOBU4HIjGauzvrzP5AMbE2oOibytkZfnMg+qZ4mvb60ajA4sr/9
- lcXYqKUoF+oBxvUkBj9f9QG1mpNOmPouqhUzMuxAC2ORWVUaeLdnrRKAgjSyrP25uM78
- Vc7w==; darn=lists.u-boot-project.org
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
+ fh=lfFqgAHmeXyPYtVc3raXXc0t9xB6fh0Hwyo9AWxg7PA=;
+ b=PZPC4X4IgyE6ya0ASzoAnDVBd9z+65OhdegguXnBW7ct8K0QGv8zOMpLnJQt08jJp4
+ qET5xttwBQLiAoL+30VWfVX85VS5eu8XZSQNK9+WeZVmyXeo9gBtr0s+IF2pRJGqDvvb
+ z17YI94s79T7+Lkld6UWAe+ZRP1wkzI2lQnxCmYFIb9b+xmIlIKLgIWbOcwi9HL3kgKh
+ YDtxirpYqbH7yCJrny3nnGl/79uEX7PcSkWc26292PpIWCXQs4+sUM7CKpGOPIoZr0CB
+ K9nHqDTg68ynJuQo7zB7Ah4Yh88vxa+MR+qif8DiL/0YGCmjIW1o20pfHUsfazL9mMwQ
+ G6dQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1790940283; x=1791545083;
+ d=linaro.org; s=google; t=1790940357; x=1791545157;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=VJ2tpY/ucLi3+RaCJPyECy8k0blfL3GZiiR78JU9UxM=;
- b=jefK3EJ5gv6GOWKDDKDI5VJkVbEx+EHA+QBPJHZGRXDeh7Mb2AHcOZgpnjuH5GRXrT
- rHOYLv/ck26yY/cKc7n66UCHkc/fsNnlsoZ3taI6aB8W+6TrrJAIgsXy0pLq03KkkdO+
- iKGux4N60Fbyj3kDEcXwDaJZc7JznkcSGQvF53J53+g/IVAXUV7BZGQyl8CK4PbSi8TU
- 02g4aWFIrGe3EfKWdSjKTKw1WCFcZVOZNI3hIIcuBNGpljiu4aFcuIZKQDCuyDA7HOja
- yVOchxnYD/28mF4yhPg5XWvP4FyDBNiFZKi28NSsCpPkRS125VQcvBH4+EObNLrq5TOO
- z+2w==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
+ b=sDRHgynSOxPrDh7Czyx4RxReXNpR/zZVTkbJKzPdAfK1iFE/8IA2uz9vxmy+o8u82e
+ OeWjni6m6hBNH963VDfOBEYx6eZgkgiYaxnmgbTj4Nb3k2s6HpDv0qSY3Go6nDYbZXeZ
+ v7a+F1GBaj0LryHFUYVZfsTMpHAjCMv8hdaHqhnT9/6cW3SeEhNsZViX8al7LI/nEoQq
+ bO84nTvsuQxfx5UDS1hJHSg552iq+xqEUvRmH17B62gb173VoXKFIModr5T5Ary7Cy4i
+ +SRDO88lOrMOtOJU//I7ZpXOTQl+IZtc2lX7bp9mtdwZhVkOAHyAC/tAokR++g+8E/Kb
+ 4UwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790940283; x=1791545083;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=VJ2tpY/ucLi3+RaCJPyECy8k0blfL3GZiiR78JU9UxM=;
- b=JzKjtwpHvurSB6SZyR641+On/Y/Wu4vfCc0sWyISXOSH3Pv7nPlCi+i0yJjdxkUuv+
- cjsNPPQliR0VDy7La5DLhrvILKK0LpZ8++fBvRZ6DP+LB/od0dnRAETH8awK4GRu9Rs1
- jMV5S8Fqd3FF+KXHSB1kRfeqkCP5rMkoR5MOu/9NszEkf0DZCXicRUPVeGpEuf2pyG6e
- 49NQywlgal966vKZ+YfFpdPa/XbWtJl9gjGYWVSayUqzpCtEsB7g+v+3bt3tQq9T9vwe
- SbF1DAOisDhGZoRpOwDZovhv0vuSIMBCL/aHMSbqmQn776cyw40H1ImYLpvcrYuzwCdw
- PAzg==
-X-Gm-Message-State: AFq9FYJshR2PaKuWKVJ1fSTSh9RGCEt/dGpedO/SA/ELlloQJ6OjEgfS
- +8MfPeIKJ9XgnHNBtd20iKd5pSjiJxCAY1EU5BBdxj52jEN+HFdRpTfWzj0aeh2CyXfX3L7SJ0a
- KjkbhUJwOiTBpQfwg9YWiYD/zyh29pMLSUIbmJ846RQ==
-X-Gm-Gg: AYBFou3mDv+kKxv5292Nl6sAbYwKwi7wPMs33/3Ly7Ps/r6I/2VKzH5BtCmfYzfy1Hx
- tPrI2IE1TEigVbWpxNuqpXBu/+irPmkbypYKoXQu/43QT/miwdq7wcIBoyGW/jfS6rT0Y2dlZZ/
- BHrMsCTqi/pUmMojfcEV03KBFMr4X0vO8SA7vAGUlQiLq59qoGuACO8iQmXvXoKQnDtnJxltaJG
- 6UcguO6FYBx8AlxQ0bCLzltlTo7NF9WvBWg248KsRXNJ0D2qDv9xc1nutcM1J5a/ZaN0aWTINvb
- 3YyKXD1lPkwwk1gNuWtkdiQWrQW57fzh3cRSF4hKRZbj7Gcf875bU6dQpV52xdn1Pznor3O+POW
- TfxVOrnenXHy7t0mun4eC5nBSkKy+V85Fx3c1oLyUzZ/VdN0qSZGG++NRn/GymRo5gxJU3JaiSB
- 49c6ONPQnpekaS7z7FAx5wVByHAcmvXv8pqhwvNqejc0pxVuM7TsMl7jIXxcXjKyFE1+9zVdMmm
- tYAuxEWKwErsvRVoPjxvlW1dBuamZj3IBivst2K797AmNWkIXQxWXZI81HGJQ5tbd8ofXNBNHPC
- vBplhCU0UhVASIPLcip25WzlG4J76f0A+Wg4Fh7VxS4tZ1VFVqCXVTFEjcOHpXn2v4ngA7UTI6y
- 8SwiMg78JFK+xzKi3c1Fd1OWkWaLSos509Ump+qAYAcu3UyL/In08Zw==
-X-Received: by 2002:a05:690c:e217:10b0:8a8:90d6:5754 with SMTP id
- 00721157ae682-8ae3aee0e03mr6192037b3.65.1790940282517; Fri, 02 Oct 2026
- 04:24:42 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1790940357; x=1791545157;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=/XZA3VEGe17k+QMa5VmS+A9BWT4/WhTzGoIclHm/IKY=;
+ b=mZtKUk46RPhCPXp6JvOsJGLeZ9nlcCdGOwTi9G02s5by3mCiSaqgSz0lsLXPNIRk6W
+ kqMsY5HmI5E/drP7LEKDt13y4r4TIUBH19pi2J+Z3T9zQThJHbmNesPFIZJWFHYQJMw/
+ 0SGeb+RcP3KKc7elBnlMX6dRR22Sf8qHrnSMWE+DYSy0qo04DufAbM8YKgziQl7oyKEH
+ xZYcGC44Xq64e4ZbVrOopbSAO/wabK5OwH+PlX8MbXDeyV7Mu+HXKqCDbdgVv0k5msNl
+ joX81FyZMdniJrX7Rl6rCU3BVcK9qH/xKpcaTtpXJGx10lcBeF5tFNFIRpSQnH1PIOHC
+ Di2w==
+X-Gm-Message-State: AFq9FYLdBPsCfoRkN6e2ug3V5yngAOf4gCmpSY3DLpqIqasPiB4Mwpay
+ Bz4HyPDx0W2WT4GLYekgUhWgDW4k9wOc3Dx5JzhTVSRfvNNf7l2iAMonyUPXcVHRocO5LUG6O/n
+ xFRpodLDa+dpUabUx1p+FRsdAW1Uq6VpUJ6bReg39kw==
+X-Gm-Gg: AYBFou0ABjNQelcy2p953srh8+Us9H7fxrDwRJ1+hAs7aNUuqpdurt6CMBVnrNtQi7G
+ nf+NV2dBWTTZB0k2nVoLT2+qQOMfNBkTKJTYA45fokm6tH5A11JcwXCsMZBPpP5WZQ/STSS5Waw
+ lpP97upRoAOewElFPursmQasCLa9g7mX61pNG6ZuiDRZ4twywIaCIixoDSKgm2Fwi3/XtsBZxPF
+ M1WjjCcojYGwnT2y8xRxTVwjE5W93h9d2NxQs/Ig+s3I3m8C5mS4f13lgEF3XUkfWWEmJT5TlmS
+ DyRylI+UWAyEGzQoDLVvuo4X9WO3MgxX0LtxJdIqvKQsLl36cuNNg4bszZdo6+MSEAFz1SJlZew
+ Ni0XJdxb6kII5OsiP02dz5ZuYpilVgT4LAcFFRzFWHxt5YDmg4Fs+R3uPSNV2gi8MRp9GDL6SLb
+ mzL7D0OCVqohqtu5gyJIEJyRFxPhkDUf9kgD1+NiHItsYJYhzIkvXjaI7KFbXjzox5Sx/loJoEE
+ VyRS9ML7dlBDeCfWHz0zI0s9RHuTlAKb4ArM0d7g6wuOVR+bbWQJqrPAkQ6D4Th1EjK6VAdPlJ+
+ BKhDWwXojfCcrnCH99gKtTxMjIYcJQPCJEqqG4dy7WBEIkW5Um1b5XZyU+ghmQ+X325CuDyFGeq
+ +RpDVxKg9iuTmGqsIE4IZxV6jnZAADw6qGATwuCuoQBWiA85lcxO8gw==
+X-Received: by 2002:a05:690c:e1d8:20b0:854:b86b:d206 with SMTP id
+ 00721157ae682-8ae394a7bc1mr7228557b3.12.1790940357390; Fri, 02 Oct 2026
+ 04:25:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260921-conform-v2-0-daeb00359af9@arm.com>
- <20260921-conform-v2-2-daeb00359af9@arm.com>
-In-Reply-To: <20260921-conform-v2-2-daeb00359af9@arm.com>
+References: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260917171810.4122899-1-harsimransingh.tungal@arm.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 2 Oct 2026 14:24:06 +0300
-X-Gm-Features: AclHuK-BTyURzKK_crzU-JXR_7Eq3v41R37b6XXEDbF9ACkRiwAMO7J7PjgZ3vw
-Message-ID: <CAC_iWjLhqHRuPfxp9vaRP1pvYbfwe4pZgVgK+beayqNNbpTwNw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] efi_loader: add EBBR 2.2-2.4 ECPT entries
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: u-boot@lists.u-boot-project.org, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Shantur Rathore <i@shantur.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
+Date: Fri, 2 Oct 2026 14:25:19 +0300
+X-Gm-Features: AclHuK_I2fDa_eRtB6I89dXKK8kIjtOP_a4qg_iT7NBYH-Kg2WtJHyFg0WtcNZs
+Message-ID: <CAC_iWjLEhgPKU7CmZ-vuZMiLV9KtAQZ5-EV24bxyabd92PknCw@mail.gmail.com>
+Subject: Re: [PATCH v6 00/24] Introduce Firmware Update Support for Arm PSA
+To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jens Wiklander <jens.wiklander@linaro.org>, Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Davidson kumaresan <davidson.kumaresan@arm.com>, 
+ Adam Johnston <Adam.Johnston@arm.com>,
+ Srinivas Kalaga <Srinivas.Kalaga2@arm.com>, 
+ Alex Chapman <alex.chapman@arm.com>, David Hu <david.hu2@arm.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -200,171 +203,285 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Mon, 21 Sept 2026 at 16:12, Vincent Stehl=C3=A9 <vincent.stehle@arm.com>=
- wrote:
+Hi Harsimran
+
+On Thu, 17 Sept 2026 at 20:18, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
 >
-> Add three ECPT entries for the EBBR versions 2.2, 2.3 and 2.4
-> conformance profiles:
-> - Define the three EFI_CONFORMANCE_PROFILE_EBBR_2_[234]_GUIDs.
-> - Introduce the three HAVE_EFI_EBBR_2_[234] non-visible configuration
->   symbols to compute the actual system conformance status with the
->   dependencies.
-> - Add the three EFI_EBBR_2_[234]_CONFORMANCE configuration menu entries
->   to control the addition of the corresponding GUIDs in the ECPT.
+> This patch series adds Firmware Update (FWU) support for Arm PSA
+> Certified platforms [1], enabling U-Boot to serve as
+> the FWU Client, with the Secure World acting as the Update Agent that
+> manages the firmware store and its metadata.
+
+Since this is only applicable to Arm devices any chance you can get an
+Ack from Sughosh who has worked on the initial implementation ?
+
+Thanks
+/Ilias
 >
-> Following what was done for version 2.1, as many entries as possible are
-> added optimistically by default in the ECPT, and this can be overridden
-> manually by the system integrator after inspection if necessary.
+> This implementation adheres to the Platform Security Firmware Update
+> specification [3] for the A-profile Arm Architecture and leverages the
+> Trusted Services framework [4] to interact with the Secure World update
+> agent. By delegating update management to the Secure World, U-Boot
+> handles only the client-side coordination, invoking a well-defined set
+> of ABIs over the FF-A interface [5] to deliver update capsules.
 >
-> Conformance cheat sheet:
+> Key features include:
 >
->   EBBR  Additional requirements
->   ----  ---------------------------------------------------
->    2.2  TCG2 & capsule "on disk"
->    2.3  Authenticated capsules in FMP format & boot manager
->    2.4  Non-UEFI (privileged firmware)
+> - Generic, platform-agnostic design.
+> - FF-A-based ABI: All interactions between U-Boot and the update agent
+>     occur over the FF-A interface, ensuring compatibility across
+>     PSA-compliant systems.
+> - Multi-payload capsules: Support for capsules containing multiple
+>     payloads, start/end markers, signed firmware images.
+> - ESRT support: Capsule payloads may be signed for authenticity, and
+>     U-Boot can populate the EFI System Resource Table (ESRT) for
+>      OS-level firmware management.
+> - On-disk and standard capsule handling.
 >
-> We do the following configurations dependencies approximations:
+> For implementation details, please refer to the documentation [6].
+> Testing logs for standard and on-disk capsule update flows on
+> Corstone-1000 FVP are included below.
 >
->       Configuration symbol  Used to approximate
->   ------------------------  ------------------------------------
->   EFI_HAVE_CAPSULE_SUPPORT  Firmware update is performed in-band
->                     TPM_V2  A TPM is present
+> Changes in v6:
 >
-> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> * As suggested by Sughosh:
+>   - Addressed review feedback by separating Arm PSA FWU from the existing
+>     normal-world FWU multi-bank implementation.
+>   - Moved PSA FWU code and Kconfig/Makefile integration from lib/fwu_updates to
+>     lib/efi_loader.
+>   - Dropped v5 changes to lib/fwu_updates/{Kconfig,Makefile,fwu.c}. PSA FWU no
+>     longer extends the generic FWU update path.
+>   - Made CONFIG_FWU_ARM_PSA mutually exclusive with CONFIG_FWU_MULTI_BANK_UPDATE.
+>   - Reworked PSA FWU trial-state and image-acceptance handling to use the cached
+>     PSA FWU directory from Secure world instead of generic FWU metadata.
+>   - Reworked Corstone-1000 active-index handling to read and validate FWU
+>     metadata directly for kernel setup.
+> * Rebased on master.
+>
+> Regards,
+> Harsimran Singh Tungal
+>
+> [1]: PSA: https://www.psacertified.org
+> [2]: Corstone-1000: https://developer.arm.com/Processors/Corstone-1000
+> [3]: DEN0118 v1.0 A specification: https://developer.arm.com/documentation/den0118/latest
+> [4]: Trusted Services documentation: https://trusted-services.readthedocs.io/en/stable
+> [5]: FF-A interface: doc/arch/arm64.ffa.rst
+> [6]: Documentation of the FWU for Arm PSA support: doc/develop/uefi/fwu_arm_psa.rst
+> [7]: Arm PSA FWU logs when used for on-disk capsule update in Corstone-1000
+>
+> Testing:
+> The implementation has been tested on Corstone-1000 FVP with both
+> standard capsule update and on-disk capsule update flows.
+>
+> Tested on Corstone-1000 FVP:
+>   - Standard capsule update: passed
+>   - On-disk capsule update: passed
+>   - ESRT entries verified from Linux after update
+>
+> Testing logs for standard capsule update:
+>
+> A trimmed standard capsule update log is included below.
+>
+> ```
+> CapsuleApp: capsule block/size              0xDCF56040/0x867B5A
+> FWU: Updating 4 payload(s)
+> resetting ...
+> NOTICE:  BL2: v2.14.2(debug):lts-v2.14.2-dirty
+> ...
+> U-Boot 2026.07 (Sep 08 2026 - 15:59:00 +0000) corstone1000 aarch64
+> ...
+> FWU: System booting in Trial State
+> ...
+> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
+> ...
+> root@corstone1000-fvp:~# reboot
+> ...
+> U-Boot 2026.07 (Sep 08 2026 - 15:59:00 +0000) corstone1000 aarch64
+> ...
+> FWU: System booting in Regular State
+> ...
+> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
+>
+> corstone1000-fvp login:
+>
+> root@corstone1000-fvp:~# cat /sys/firmware/efi/esrt/entries/entry*/*
+> 0x0
+> f1d883f9-dfeb-5363-98d8-686ee3b69f4f
+> 1
+> 6
+> 0
+> 6
+> 0
+> 0x0
+> 7fad470e-5ec5-5c03-a2c1-4756b495de61
+> 1
+> 6
+> 0
+> 6
+> 0
+> 0x0
+> f1933675-5a8c-5b6d-9ef4-846739e89bc8
+> 1
+> 6
+> 0
+> 6
+> 0
+> 0x0
+> f771aff9-c7e9-5f99-9eda-2369dd694f61
+> 1
+> 6
+> 0
+> 6
+> 0
+>
+> root@corstone1000-fvp:~#
+> ```
+>
+> Testing logs for On-Disk capsule update:
+>
+> A trimmed on-disk capsule update log is included below for one payload
+>
+> ```
+> CapsuleApp: capsule block/size              0xDCF61040/0x867B5A
+> Found EFI system partition on Boot0001: OnDiskFWU
+> FS2:;HD0b:;BLK4:
+> Succeed to write corstone1000-fvp-v6.uefi.capsule
+> resetting ...
+> NOTICE:  BL2: v2.14.2(debug):lts-v2.14.2-dirty
+> ...
+> U-Boot 2026.07 (Sep 08 2026 - 15:59:00 +0000) corstone1000 aarch64
+> ...
+> FWU: System booting in Regular State
+> FWU: ABI version 1.0 detected
+> FWU: Updating 1 payload(s)
+> Applying capsule corstone1000-fvp-v6.uefi.capsule succeeded.
+> Reboot after firmware update.
+> NOTICE:  BL2: v2.14.2(debug):lts-v2.14.2-dirty
+> ...
+> U-Boot 2026.07 (Sep 08 2026 - 15:59:00 +0000) corstone1000 aarch64
+> ...
+> FWU: System booting in Trial State
+> ...
+> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
+> ...
+> root@corstone1000-fvp:~# reboot
+> ...
+> U-Boot 2026.07 (Sep 08 2026 - 15:59:00 +0000) corstone1000 aarch64
+> ...
+> FWU: System booting in Regular State
+> ...
+> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
+>
+> corstone1000-fvp login:
+>
+> root@corstone1000-fvp:~# cat /sys/firmware/efi/esrt/entries/entry*/*
+> 0x0
+> f1d883f9-dfeb-5363-98d8-686ee3b69f4f
+> 0
+> 6
+> 0
+> 6
+> 0
+> 0x0
+> 7fad470e-5ec5-5c03-a2c1-4756b495de61
+> 0
+> 0
+> 0
+> 0
+> 0
+> 0x0
+> f1933675-5a8c-5b6d-9ef4-846739e89bc8
+> 0
+> 0
+> 0
+> 0
+> 0
+> 0x0
+> f771aff9-c7e9-5f99-9eda-2369dd694f61
+> 0
+> 0
+> 0
+> 0
+> 0
+> root@corstone1000-fvp:~#
+> ```
+> Link to v5: https://lore.kernel.org/all/20250926141351.1755829-1-abdellatif.elkhlifi@arm.com/
+>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->  include/efi_api.h                | 12 ++++++++++
->  lib/efi_loader/Kconfig           | 51 ++++++++++++++++++++++++++++++++++=
-++++++
->  lib/efi_loader/efi_conformance.c |  9 +++++++
->  3 files changed, 72 insertions(+)
+> Cc: Jens Wiklander <jens.wiklander@linaro.org>
+> Cc: Michal Simek <michal.simek@amd.com>
+> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Cc: Casey Connolly <casey.connolly@linaro.org>
+> Cc: Adriano Cordova <adrianox@gmail.com>
+> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Cc: Davidson kumaresan <davidson.kumaresan@arm.com>
+> Cc: Adam Johnston <Adam.Johnston@arm.com>
+> Cc: Srinivas Kalaga <Srinivas.Kalaga2@arm.com>
+> Cc: Alex Chapman <alex.chapman@arm.com>
+> Cc: David Hu <david.hu2@arm.com>
 >
-> diff --git a/include/efi_api.h b/include/efi_api.h
-> index d4fdd50c49e..17e55118cda 100644
-> --- a/include/efi_api.h
-> +++ b/include/efi_api.h
-> @@ -238,6 +238,18 @@ enum efi_reset_type {
->         EFI_GUID(0xcce33c35, 0x74ac, 0x4087, 0xbc, 0xe7, \
->                  0x8b, 0x29, 0xb0, 0x2e, 0xeb, 0x27)
+> Abdellatif El Khlifi (23):
+>   arm_ffa: Add FFA_MEM_SHARE support
+>   arm_ffa: Add FFA_MEM_RECLAIM support
+>   arm_ffa: sandbox: Replace the emulator error log with debug log
+>   arm_ffa: sandbox: Improve the readability of clearing the X registers
+>   arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
+>   arm_ffa: sandbox: Add FFA_MEM_SHARE tests
+>   arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
+>   arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
+>   fwu_arm_psa: Initialize the update agent
+>   fwu_arm_psa: Read the FWU directory through get_image_info()
+>   fwu_arm_psa: Add staging ABIs
+>   efi_loader: fwu_arm_psa: Add set_image() support
+>   efi_loader: fwu_arm_psa: Allow keeping the FMP payload header
+>   efi_loader: fwu_arm_psa: Skip accepting payload after set_image()
+>   efi_loader: fwu_arm_psa: Disable trial state handling
+>   fwu_arm_psa: Add FWU acceptance mechanism
+>   fwu_arm_psa: Add ESRT support
+>   fwu_arm_psa: Add ExitBootServices() notification handler
+>   fwu_arm_psa: corstone1000: Enable FWU support
+>   fwu_arm_psa: corstone1000: Read active index for kernel setup
+>   fwu_arm_psa: corstone1000: Notify SE Proxy SP on ExitBootServices()
+>   fwu_arm_psa: corstone1000: Set Boot0001 for on-disk FWU
+>   fwu_arm_psa: Document FWU support for Arm PSA
 >
-> +#define EFI_CONFORMANCE_PROFILE_EBBR_2_2_GUID \
-> +       EFI_GUID(0x9073eed4, 0xe50d, 0x11ee, 0xb8, 0xb0, \
-> +                0x8b, 0x68, 0xda, 0x62, 0xfc, 0x80)
-> +
-> +#define EFI_CONFORMANCE_PROFILE_EBBR_2_3_GUID \
-> +       EFI_GUID(0x7721fc77, 0xa724, 0x11ef, 0x8e, 0xaa, \
-> +                0xf7, 0xc9, 0xb1, 0x94, 0xba, 0x75)
-> +
-> +#define EFI_CONFORMANCE_PROFILE_EBBR_2_4_GUID \
-> +       EFI_GUID(0xf2bb0422, 0xda8e, 0x11f0, 0xa6, 0x7b, \
-> +                0x1b, 0xe2, 0x20, 0x85, 0x40, 0x98)
-> +
->  #define EFI_DEBUG_IMAGE_INFO_TABLE_GUID \
->         EFI_GUID(0x49152e77, 0x1ada, 0x4764, 0xb7, 0xa2, \
->                  0x7a, 0xfe, 0xfe, 0xd9, 0x5e, 0x8b)
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index aad8f860868..81231533946 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -577,6 +577,26 @@ config HAVE_EFI_EBBR_2_1
->         depends on EFI_CAPSULE_FIRMWARE || !EFI_HAVE_CAPSULE_SUPPORT
->         default y
+> Emekcan Aras (1):
+>   efi_loader: capsule: Add runtime capsule flags checks
 >
-> +config HAVE_EFI_EBBR_2_2
-> +       bool
-> +       depends on HAVE_EFI_EBBR_2_1
-> +       depends on EFI_TCG2_PROTOCOL || !TPM_V2
-> +       depends on EFI_CAPSULE_ON_DISK || !EFI_HAVE_CAPSULE_SUPPORT
-> +       default y
-> +
-> +config HAVE_EFI_EBBR_2_3
-> +       bool
-> +       depends on HAVE_EFI_EBBR_2_2
-> +       depends on EFI_CAPSULE_AUTHENTICATE || !EFI_HAVE_CAPSULE_SUPPORT
-> +       depends on EFI_CAPSULE_FIRMWARE_MANAGEMENT || !EFI_HAVE_CAPSULE_S=
-UPPORT
-> +       depends on EFI_BOOTMGR
-> +       default y
-> +
-> +config HAVE_EFI_EBBR_2_4
-> +       bool
-> +       depends on HAVE_EFI_EBBR_2_3
-> +       default y
-> +
->  config EFI_ECPT
->         bool "Enable the UEFI ECPT generation"
->         default y
-> @@ -592,6 +612,37 @@ config EFI_EBBR_2_1_CONFORMANCE
->           Enabling this option adds the Embedded Base Boot Requirements (=
-EBBR)
->           v2.1 conformance entry to the ECPT.
->
-> +config EFI_EBBR_2_2_CONFORMANCE
-> +       bool "Add the EBBR v2.2 conformance entry to the ECPT"
-> +       depends on EFI_ECPT && HAVE_EFI_EBBR_2_2
-> +       default y
-> +       help
-> +         Enabling this option adds the Embedded Base Boot Requirements (=
-EBBR)
-> +         v2.2 conformance entry to the ECPT.
-> +
-> +         Version 2.2 adds requirements around TCG2 and capsule "on disk"=
-.
-> +
-> +config EFI_EBBR_2_3_CONFORMANCE
-> +       bool "Add the EBBR v2.3 conformance entry to the ECPT"
-> +       depends on EFI_ECPT && HAVE_EFI_EBBR_2_3
-> +       default y
-> +       help
-> +         Enabling this option adds the Embedded Base Boot Requirements (=
-EBBR)
-> +         v2.3 conformance entry to the ECPT.
-> +
-> +         Version 2.3 adds requirements around authenticated capsules in =
-FMP
-> +         format and the boot manager.
-> +
-> +config EFI_EBBR_2_4_CONFORMANCE
-> +       bool "Add the EBBR v2.4 conformance entry to the ECPT"
-> +       depends on EFI_ECPT && HAVE_EFI_EBBR_2_4
-> +       default y
-> +       help
-> +         Enabling this option adds the Embedded Base Boot Requirements (=
-EBBR)
-> +         v2.4 conformance entry to the ECPT.
-> +
-> +         Version 2.4 adds non-UEFI requirements.
-> +
->  config EFI_CONSOLE_DISABLE_ANSI
->         bool "Disable ANSI escape sequence queries for console size"
->         help
-> diff --git a/lib/efi_loader/efi_conformance.c b/lib/efi_loader/efi_confor=
-mance.c
-> index 470141af483..c1234681bb6 100644
-> --- a/lib/efi_loader/efi_conformance.c
-> +++ b/lib/efi_loader/efi_conformance.c
-> @@ -29,6 +29,15 @@ efi_status_t efi_ecpt_register(void)
->         #if CONFIG_IS_ENABLED(EFI_EBBR_2_1_CONFORMANCE)
->                 EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID,
->         #endif
-> +       #if CONFIG_IS_ENABLED(EFI_EBBR_2_2_CONFORMANCE)
-> +               EFI_CONFORMANCE_PROFILE_EBBR_2_2_GUID,
-> +       #endif
-> +       #if CONFIG_IS_ENABLED(EFI_EBBR_2_3_CONFORMANCE)
-> +               EFI_CONFORMANCE_PROFILE_EBBR_2_3_GUID,
-> +       #endif
-> +       #if CONFIG_IS_ENABLED(EFI_EBBR_2_4_CONFORMANCE)
-> +               EFI_CONFORMANCE_PROFILE_EBBR_2_4_GUID,
-> +       #endif
->         };
->
->         ecpt_size =3D sizeof(profiles)
+>  MAINTAINERS                                   |    9 +
+>  .../include/asm/sandbox_arm_ffa_priv.h        |   21 +-
+>  board/armltd/corstone1000/corstone1000.c      |  406 ++++-
+>  board/armltd/corstone1000/corstone1000.env    |    8 +
+>  configs/corstone1000_defconfig                |   15 +-
+>  doc/arch/arm64.ffa.rst                        |    4 +
+>  doc/develop/uefi/fwu_arm_psa.rst              |  154 ++
+>  doc/develop/uefi/index.rst                    |    1 +
+>  drivers/firmware/arm-ffa/arm-ffa-uclass.c     |  285 ++-
+>  drivers/firmware/arm-ffa/arm-ffa.c            |    4 +-
+>  drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  108 +-
+>  drivers/firmware/arm-ffa/sandbox_ffa.c        |    4 +-
+>  include/arm_ffa.h                             |  128 +-
+>  include/arm_ffa_priv.h                        |  153 +-
+>  include/efi_api.h                             |    3 +
+>  include/efi_loader.h                          |    3 +
+>  include/fwu_arm_psa.h                         |  422 +++++
+>  lib/efi_loader/Kconfig                        |   53 +
+>  lib/efi_loader/Makefile                       |    1 +
+>  lib/efi_loader/efi_capsule.c                  |   45 +-
+>  lib/efi_loader/efi_firmware.c                 |   32 +-
+>  lib/efi_loader/fwu_arm_psa.c                  | 1616 +++++++++++++++++
+>  test/dm/ffa.c                                 |   73 +-
+>  23 files changed, 3458 insertions(+), 90 deletions(-)
+>  create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
+>  create mode 100644 include/fwu_arm_psa.h
+>  create mode 100644 lib/efi_loader/fwu_arm_psa.c
 >
 > --
-> 2.53.0
+> 2.43.0
 >
