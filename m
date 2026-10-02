@@ -4,156 +4,183 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72E2FCA5FC4
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 12:26:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5170CA5FD4
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 12:26:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E2DA640D06;
-	Fri,  2 Oct 2026 12:26:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3284440D48;
+	Fri,  2 Oct 2026 12:26:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XPFA7DVV-eWB; Fri,  2 Oct 2026 12:26:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 07DC540C88
+ id niARAwqP8Eil; Fri,  2 Oct 2026 12:26:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 0CCE840D77
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790943977;
-	b=Ouy7Q31GnqF4HGZjoYlk7gJoTwp+Exmk3e76Y9r3pia9VPCrW5xA76g4l90GnLqHYapG
-	 v/1tJQRxz/3e3lJkM+ozNFkROK5Lw3GsArmiWgZKHjRj0E10IFJ8+LOkB1FD0ZX5B/lGF
-	 QBttTvxHgSVKSf2Myu931OZ4vWoyMZSa1FIRxPQtP39EVQA/CxeBbUycH9tbHXXWMXu5N
-	 DL5F1c3s15WlO13sUIVKyti15ldy3SIURTtAn4GUkSpNT1CvSOdxC5Rvc72kkbihFugCE
-	 O4RjklmbvSsrsEmGoDMOpQTVk7R4DMDueHEXl0rBYqoafcoA+Ed+PBHByEV0+Cnvn1Q==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790943979;
+	b=rkoz9yfpxTT96fBYT5XQU5cDC3/5V+4SY/vmI+ARBblZ29uA/+kxCnVOiF5GMitnFamG
+	 RXAlvVflKsAOKIQZFOJ0Kx2LHA5PktEqJcxURW0LUMYjmF60pOHX9NXauAYqjwif4B6wT
+	 6g/ZWRHjFFmxo120RbE2Qe1lpS0jkb6aG7TIqTWNeaoSuiiX2j2zAFhizpiNFM4jcgVuM
+	 5pRMJuyObdi+DFuO20Hynos/R5ZfmobUO9qNzP7uQYYPhSSA6LXW6bb4OUNr9idFHG0Fx
+	 Oar10hi8w+iuQ53HFtOdVMF2YEcbjqIjx0kEHryrxwhp8raM+oOLqtDyr+X2JPN4vNQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790943977;
+	c=relaxed/relaxed; t=1790943979;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:X-IronPort-AV:
-	 X-IronPort-AV:X-Amp-Result:Received:Received:Received:Received:From:
-	 To:CC:Subject:Thread-Topic:Thread-Index:Date:Message-ID:References:
-	 In-Reply-To:Accept-Language:Content-Language:X-MS-Has-Attach:
-	 X-MS-TNEF-Correlator:x-originating-ip:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=benQypfP7Cej4hgefA98uRPaFMq4mdzCL4YJPLqrhHM=;
-	b=Xb6trTpza22OiNgoFfbet202Mh/icJtfhdBXut2TqoV5q984y8meKQ7vfvwDLqyfOqPV
-	 /YfJ5g1N/fWknoOj1HOfBvdvcqcdSNgzUEF9n5mD3h30v7DwGnZ4pWswMbY9qHaEDR8RD
-	 6yyQJNRt8coRMKv/ay25A3S/iqD4cA3uvKraj2A9lFhmqAXpWPijeup6kMGrqVVmn1Buq
-	 hQKZOxZTOmrrqxVkpuMn8pHrXZypEz0tB0jH9PCl6cug7HtIqvoEriPFvu+C+yZ0SPebu
-	 eS5K4rBq7k1UXwR36Sl/9HPtXVtYxBsLl3uzHJSmk3VNmFq4tI1rkH7aB50Dmj2uXjA==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=DrN0GM9vsJtle69fxDb1xywy7K78kPsm5JWQ7ghizN8=;
+	b=V5pUjXdgyeui9MYqUEBp3sRNdHbukn4v+L7OXOaPnzBxBDpI2gMMyChzydL+Z43+w+Sy
+	 35ya/hG1uCNi0qnK3LSTVg1Wu0To//y4p07iQokuh4gEFJ3lw+1yjcqeizg/gFj+jjJY0
+	 1TeFKUlfBCnUoykCDT3yUnVNBDg+OUWLWvHU23/8XG1oA/ED1H2VkbOxt2eclD9xLm0Hu
+	 T3gP/dJcN2qng7KapkUrD82G7NTiIaZZL9L3jGH0leehRGsgO3qsH2zLd1bvLkmJ7sag7
+	 sVd/yZ9w0KSh/7al55H18F/lrGm2tWYV+YdX5siHKTcCSqKqNppfBybShTlXIrdB1uQ==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790943977;
-	bh=benQypfP7Cej4hgefA98uRPaFMq4mdzCL4YJPLqrhHM=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=EkpeypjxVcaPbKKGfVy3F5JYKXjc7XBQNQ0mI11M/gxvGnQQxhzR0aLcXkd2SoRqr
-	 duaWV6cq2dpqyEc7Ch+NlznMLkZ65UOk/5bRTTLGLzuB2Lemi2m+7OSyUby9UUHAgw
-	 R0YHF6DnRxR3TX3cFrGu7CKxYfCXB+TbUA7ooAD7Wq+LKq/CdmwOUS9SIQ8jzlzWQM
-	 yTwk5Q0T2XYofAu2OvfBpqwsVC24PYKobLh+9MXvkhCIkCDiSZ5exfnLYea55Ni4j5
-	 hidXtg24P1Uh24SGGACOHUpEegbn2/4p1tI/FXRxR0scSsOdHLg5btcI7lfZs4dobg
-	 YfUOksM65Fprw==
+	d=lists.u-boot-project.org; s=default; t=1790943979;
+	bh=DrN0GM9vsJtle69fxDb1xywy7K78kPsm5JWQ7ghizN8=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=bE7gTkyGswvbsSylAvIvPHUsOMO06CjG0qGLmcEBOwleGvzyVTnTGvi0B5rHJ1rJg
+	 7/ZD/gfZBJyANBn/aUyVuFxXsb851Lroz053YrTjebdwfD2KFDYeLAi2An3GVDAps0
+	 LyPE8tSNu4LLertDqdkU4wut/IvaG6aLgUO+QoLSF7aYNRv9abdAwOHY1deIq3nFm3
+	 6ouD6jHBMzumbVzdfRUEVJOZbom/bPvdkzVzmzNXhLlXna05V+afBzMLBsb5z33ue2
+	 Rte1ltZNrCybwKo5j73FNnueX8mwWP5m1SGmfEyfi/4m1rcN+89yy8MicDSpVTbSZj
+	 1ZSr8M3HFUFNg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 07DC540C88;
-	Fri,  2 Oct 2026 12:26:17 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 81A1B32A
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 03:09:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0CCE840D77;
+	Fri,  2 Oct 2026 12:26:19 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 062BA4D9F
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 03:36:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 67D938113C
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 03:09:32 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id EC457400E5
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 03:36:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Xo5z-JDVtM6Q for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 03:09:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4B8028112F
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:18f0:1e00:4::4"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790910570;
- b=FcR7BwTEAdj/+6Z/tUO+182nldWDnfFpCKlDmDTJcQpbOq8GQScsgZ5qS2T8DAR1KYrk
- OHz1fMjQJuglZ7sugmn2Q7cwkzgexHjTT9PLEVxxQMXkJSxBJa5L2CSPmUwAKZVR1+SZU
- Xvb5R7T/aQgJmH5H5HDJF4fkw9o3VAESMAFxAf7H5Yn/mvGIEv6I6xljFG8IzYy+mXFRI
- igQluG+KMwp5+KCgrr8i3WRaMT0Jys3sABMc37zS3BVeLNNvIN+ePHYX4ISUPph1+dE1S
- wuihTkvwxJQMADfCzVO/4Qff6nJKRsp5tijD8Kb7oQ558YVrR5LJ/a6ByQwwnsHT67w==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 70Qpg4Uo-KJx for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 03:36:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 184C040062
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:39::c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790912193;
+ b=XPWdpNohS0xUB2S9NYKu9koJf22PclD/mXk0PBIfRMTph3Zd9xDWRZvvDhBqA8IBGGJN
+ 6SuTfZ4DYnjP5JDLTUOOo9EUCVPJafXo1gqLUubZSlPuM8gugcrnDSw5GjRmpvIBu3QdS
+ MkRlZBoJiT7BfwKWtJY5BY4ggXRj+X401mmjXDFc+D5IoMfaY06ZZHMjtT4cQrFvlZ6Iy
+ DZWxo/0p/6wcfXVaaggYbAleqeOXFFmjxULECDTKNlDmZzSEbDSWwBwmdVgWC/saRxJkh
+ ZLoNGh0ZCaExWZ8INSZg9OU+DFHJ/AE+OI/ANN27m8a29NrZMU6q05xVhxgVsoyAv6Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790910570;
- h=Received-SPF:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
- X-IronPort-AV:X-IronPort-AV:X-Amp-Result:Received:Received:Received:
- Received:From:To:CC:Subject:Thread-Topic:Thread-Index:Date:Message-ID:
- References:In-Reply-To:Accept-Language:Content-Language:
- X-MS-Has-Attach:X-MS-TNEF-Correlator:x-originating-ip:Content-Type:
- Content-Transfer-Encoding:MIME-Version;
- bh=benQypfP7Cej4hgefA98uRPaFMq4mdzCL4YJPLqrhHM=;
- b=rIhP7jWPxteChvO5a1MlTiqA6pQ4mmcrZLJmKKhhMElKEuqgimR45n5o+GKmGmgJwPug
- bo42U8/jmb/04RgwbF81gQ+rxZ9SP75sgJ/HDfb4tA5rYIFGKMZs5yTJotjg0WMWa8YfW
- IohgR7Lv0dWevvj3EwMdfdmXg8OJhjfz4fTnL+1vaMjjGT/I/xM1xYgaPaa//vhNod90e
- zedzeBCKhNox9Xu7H9ugEJxvECeILQwe/C+fPTRbKdFSVX4l4Lt+XMqOLM3+8OeGxk6YV
- GNxBcJrjBLsWM0KtzaVCxhkJ0+s4a2L0hJQBjSkOMeY+9xL4hqEB8+YUU0pJY0dssSA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=infineon.com; 
- dkim=pass header.d=infineon.com header.i=@infineon.com header.a=rsa-sha256
- header.s=IFXMAIL header.b=T+jQ89xP; 
- arc=none smtp.remote-ip="2a00:18f0:1e00:4::4"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:18f0:1e00:4::4;
- helo=smtp2.infineon.com; envelope-from=takahiro.kuwano@infineon.com;
+ c=relaxed/relaxed; t=1790912193;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
+ Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Developer-Key;
+ bh=DrN0GM9vsJtle69fxDb1xywy7K78kPsm5JWQ7ghizN8=;
+ b=TNCtTWSVdy+ClpECUz2+hgRXBeoQfryxPKho4v8QBxE58OuR5Bp8FQTvPeD5o3ZjB/Ob
+ qrIlXZUZneSpXIRPX1ny9tgbEYA+OJwRC6rdy/3v6vTDwPJIunOSWNoZx8zcUiYPHXDI0
+ 1F/JVmwwOtyQ5XW1FAqZSqFgHbsNk9QSpi3kSjJqNd1far9MWieKozKyhFlPJhLJnz5zy
+ iCPvnhJ264M/fC9P02QuQRUkT4qw181jQXk/lU7SH4u7K+jL75I6EOOz3jAAW1n23nHiP
+ APwTDYneS0zx0K+b7oxj+ad5iSb2mx86xKleJ2jenUcqW5GA6JfaXY8qdYYVhSeBFkw==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=pass header.from=gmail.com; 
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=eTWtEz9A; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:39::c"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:39::c;
+ helo=mail-pj2-x0c.google.com; envelope-from=sycamoremoon376@gmail.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=infineon.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=infineon.com header.i=@infineon.com header.a=rsa-sha256
- header.s=IFXMAIL header.b=T+jQ89xP
-Received: from smtp2.infineon.com (smtp2.infineon.com
- [IPv6:2a00:18f0:1e00:4::4])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4B8028112F
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 03:09:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
- t=1790910570; x=1822446570;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=Jv1NK0/JlL033n7itnFmUdRdk5SIZF2DmLRMCjFZ/V8=;
- b=T+jQ89xPna4YYMggeNuoN9Og2CKW/51H74JUl0KRZPVstkcWSbQvficK
- IJ6jl97nbQps9OwSAeUGwn15NzklkgrA4hlEkTvN9V01LIHiHNEIpwVkL
- 2cJbgzowtnVRx5sVeEzAxO/Y4viINb5Z6/jLcRa3pLWbKdNolGvZsuxQW w=;
-X-CSE-ConnectionGUID: vmGYm3SIRrim8+/t8nGAaA==
-X-CSE-MsgGUID: x/HTOvpRS9uLyn/ZmS9wGQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11922"; a="181876421"
-X-IronPort-AV: E=Sophos;i="6.27,135,1787004000"; d="scan'208";a="181876421"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO MUCSE812.infineon.com) ([172.23.29.38])
- by smtp2.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2026 05:09:26 +0200
-Received: from MUCSE811.infineon.com (172.23.29.37) by MUCSE812.infineon.com
- (172.23.29.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Fri, 2 Oct
- 2026 05:09:25 +0200
-Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE811.infineon.com
- (172.23.29.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Fri, 2 Oct
- 2026 05:09:25 +0200
-Received: from MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14]) by
- MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14%12]) with mapi id
- 15.02.2562.049; Fri, 2 Oct 2026 05:09:25 +0200
-From: <Takahiro.Kuwano@infineon.com>
-To: <vjardin@free.fr>, <u-boot@lists.u-boot-project.org>
-CC: <trini@konsulko.com>, <vigneshr@ti.com>
-Subject: RE: [PATCH v1] mtd: spi-nor-ids: gd55lb02gf: add SPI_NOR_DUAL_READ
-Thread-Topic: [PATCH v1] mtd: spi-nor-ids: gd55lb02gf: add SPI_NOR_DUAL_READ
-Thread-Index: AQHdTIs6VFk37gpiRUa4fOjxEvR9ErbpnDWQ
-Date: Fri, 2 Oct 2026 03:09:25 +0000
-Message-ID: <7867546d20dc4990b8749a0709fdf44a@infineon.com>
-References: <20260925011422.290027-1-vjardin@free.fr>
-In-Reply-To: <20260925011422.290027-1-vjardin@free.fr>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.161.6.196]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=eTWtEz9A
+Received: from mail-pj2-x0c.google.com (mail-pj2-x0c.google.com
+ [IPv6:2607:f8b0:4864:39::c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 184C040062
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 03:36:32 +0000 (UTC)
+Received: by mail-pj2-x0c.google.com with SMTP id
+ 98e67ed59e1d1-3a0d31bda43so4734775a91.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 01 Oct 2026 20:36:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1790912192; x=1791516992;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=DrN0GM9vsJtle69fxDb1xywy7K78kPsm5JWQ7ghizN8=;
+ b=eTWtEz9ALPCO649/E75ZXi0wMJc8dREsMQat5j2nMHou+4T+8IODcnjC3fWhcntyuB
+ ONtyyrKM/8bwF7Xg3zGJ8aqUWOhxuHjeT0M93mYN0F1LgXbn2rpue7WaFYu1riQV6o1l
+ qzOjixILHpLIsTVNUM2LAnVEhKoXRi6zDA3yW8EE1XAdosNWHY2A6s8I3ZFiVupvSsww
+ GIykPh/b60KHLGpWsP7JSOT+IMuDY7sqWuE7hy7Oyhbnoz6uW5ZTRI9hrd6SDTB0xzOG
+ wCFws/5RcCIH4PBDKY1buPPAv/rKKTrQrzkke/WHDs1cpQoymfrIFKpO8zujbrweKfwS
+ 4stw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790912192; x=1791516992;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=DrN0GM9vsJtle69fxDb1xywy7K78kPsm5JWQ7ghizN8=;
+ b=nOzFOAat96UUfBnKSaGmcOq0gi17rE52RVh/xfnGhkghJWnrHrR63BHKQshZo937PW
+ V2tis4uqfnRNfSuS9Ngx8GTC2qSo45UNofjPN/7T5gIabP+Jb9tBwJdIb4b8iWHXfVTd
+ bKiDe9ERP4u+oVJMaTyoxqsWdRgEjs5ulqDyE2RaipQkHqycb3Ga6KRxD58aD6JLa2/C
+ DIEAhbE3S/oujb1fuHI8rFW5JHU9qM/rRcNGyGuAOa1qDpUEz9qBTvJSPo+lJKbpQC2N
+ uVk4JP6QEy0P0ooVbOZR1xsU704F+t6NxoiX8FkW/N6yKw0i/G0ulzGikCAWYtnXVIwG
+ RWUw==
+X-Gm-Message-State: AFq9FYLWDyBcPjJP8YZ6hiHOR8vnwsVfpivAdKHbPeb+tXKtX/gDXV8w
+ 3Pq0QpvAJtgdY5Vf9mzivaC4nR2XmzXSdOcPiK17Ujl3awbn3HH/yYlM
+X-Gm-Gg: AYBFou1N8xFm7HSuJdcSthlXbDwerthiyI9mJssVln2UotMc/EuooHF3MQXbNwfkuRw
+ oKs7iaj0SpRktFqOD1g+ln85SMjvPURaiqxTR1ZKSqawdaQ3FFw4sLdWvpWq+xxkGlnXaxwNjJM
+ fpit1hfn03K4H3ku36HDWr7TA+x2TIASzFk1uRr7YPZciRie6E+QstWSkiGch0nQLmOHMppyAic
+ feB6eonuKG9Afwd4fOoP2rnRQ43gMCFxpmSppk/WkanaKj8CvQ3xvdckwyQ+Avviay4ZSzXbG/c
+ +rXsgEtfdGNDiuXtAQNLRS3p/on5oqW+phsZkBm8TxBxtLi59PAAeMR2WXvAbzmK5EIe/pxxV1j
+ MmH0RhucoE/sz//Bfji7SdZfQUtSPpiQpAKrRpIaciyu77VfHeBJ7pY0l0z1bNZVulv2zB5Gjhx
+ /qIgijvi8zC6o8eaBSUZZpebHoMK+brrT4rTsdWAkZ8UA3xyfXwlAYSRL/OoZPUHNUADNHNnSIW
+ ibP5Y00TG+zO6OlTMcADpc=
+X-Received: by 2002:a17:90a:dfc5:b0:3a1:8b70:d46b with SMTP id
+ 98e67ed59e1d1-3a6ce80d87amr1128530a91.42.1790912191716; 
+ Thu, 01 Oct 2026 20:36:31 -0700 (PDT)
+Received: from [10.27.250.254] ([58.194.169.253])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3a6cd634734sm2083232a91.17.2026.10.01.20.36.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Oct 2026 20:36:31 -0700 (PDT)
+From: Zixian Zeng <sycamoremoon376@gmail.com>
+Subject: [PATCH 0/3] net: add SpacemiT K1 EMAC support
+Date: Fri, 02 Oct 2026 11:35:24 +0800
+Message-Id: <20261002-b4-k1-emac-v1-0-e1b6806b018a@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDSyMz3SQT3WxD3dTcxGTdtETTNKMkQxOzNGMLJaCGgqLUtMwKsGHRsRB
+ +cWlSVmpyCcgEpdpaAHHKoPtuAAAA
+X-Change-ID: 20260926-b4-k1-emac-fa5f2b146f38
+To: u-boot@lists.u-boot-project.org, u-boot-spacemit@groups.io
+Cc: Tom Rini <trini@konsulko.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, Guodong Xu <guodong.xu@riscstar.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Julien Stephan <jstephan@baylibre.com>, Johan Jonker <jbx6244@gmail.com>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Eric Chung <eric.chung@riscstar.com>, Yixun Lan <dlan@kernel.org>, 
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Guodong Xu <guodong@riscstar.com>, Zixian Zeng <sycamoremoon376@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790912185; l=1449;
+ i=sycamoremoon376@gmail.com; s=20260926; h=from:subject:message-id;
+ bh=Wzqmy4wmCkgp9qRO++Ho6VOhRy5Wob7fn8x1a9U13n4=;
+ b=6eq3D/wiwElwcrFO9feMattKvnt0GDc2p2iUVvs8uxAmSjuUk6Tkv6zv8ldNkGcV6KmWUpA+7
+ 7hXsDPCe4ZdAKl678elkLISFQpZpNLvHfXhMxe1dgNT1uEn6wnZBq63
+X-Developer-Key: i=sycamoremoon376@gmail.com; a=ed25519;
+ pk=xO+BwE3DuX3uCUVEo06fonjJtjMp0vUdCPuPP450qO4=
 X-Mailman-Approved-At: Fri, 02 Oct 2026 12:26:15 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -168,46 +195,40 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-> The GD55LB02GF supports Dual Output Fast Read and Dual IO Fast Read
-> according to its datasheet, but its entry only declares the single
-> and quad reads.
->=20
+This series adds support for the Ethernet MACs integrated in
+the SpacemiT K1 SoC, which includes adding a k1_emac driver with
+MDIO and PHYLIB support for RGMII and RMII operation, enabling it
+in the k1 defconfig, and adding MAINTAINERS coverage on new directory.
 
-Please confirm the datasheet link [1] and add Link: tag followed by
-the link if correct.
+The k1_emac driver in series draws upon Vivian Wang's work [1]. To make it
+simple and working, driver which using small ring-buffers operates primarily
+on polling and only implements basic functions.
 
-> Signed-off-by: Vincent Jardin <vjardin@free.fr>
->=20
-> ---
->=20
->  drivers/mtd/spi/spi-nor-ids.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->=20
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
-c
-> index 31a2ba49a87..59247b3f4b9 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -233,7 +233,8 @@ const struct flash_info spi_nor_ids[] =3D {
->         },
->         {
->                 INFO("gd55lb02gf", 0xc8601c, 0, 64 * 1024, 4096,
-> -                    SECT_4K | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES)
-> +                    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-> +                    SPI_NOR_4B_OPCODES)
->         },
->  #endif
->  #ifdef CONFIG_SPI_FLASH_ISSI           /* ISSI */
-> ---
-> base-commit: a06e89ab05eaa2b8344d521319399333cd760ae5
-> branch: for-upstream/mtd-gd55lb02gf-dual-read-v1
->=20
-> --
-> 2.43.0
+Tested on both Banana Pi F3 Ethernet ports with RTL8211F PHYs
+at 1000 Mbps full duplex, and tested command: dhcp, ping, tftp, etc.
 
-Thanks,
-Takahiro
+[1]: https://lore.kernel.org/all/20250914-net-k1-emac-v12-0-65b31b398f44@iscas.ac.cn/
 
-[1] https://download.gigadevice.com/Datasheet/DS-01015-GD55LB02GF-Rev1.3.pd=
-f
+Signed-off-by: Zixian Zeng <sycamoremoon376@gmail.com>
+---
+Zixian Zeng (3):
+      net: k1: add Ethernet MAC driver
+      configs: k1: enable Ethernet support
+      MAINTAINERS: spacemit: add K1 Ethernet driver
+
+ board/spacemit/k1/MAINTAINERS  |   1 +
+ configs/spacemit_k1_defconfig  |   6 +
+ drivers/net/Kconfig            |   1 +
+ drivers/net/Makefile           |   1 +
+ drivers/net/spacemit/Kconfig   |  15 +
+ drivers/net/spacemit/Makefile  |   3 +
+ drivers/net/spacemit/k1_emac.c | 952 +++++++++++++++++++++++++++++++++++++++++
+ 7 files changed, 979 insertions(+)
+---
+base-commit: a000f2af240eaa996cec92f8d44bad96fdf3f898
+change-id: 20260926-b4-k1-emac-fa5f2b146f38
+
+Best regards,
+--  
+Zixian Zeng <sycamoremoon376@gmail.com>
 
