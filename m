@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C557DCA5FE3
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 13:23:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ACF7CA5FD4
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 13:23:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8EE9D40DC4;
-	Fri,  2 Oct 2026 13:23:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id F05C360D69;
+	Fri,  2 Oct 2026 13:23:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lJtcAO_wioiO; Fri,  2 Oct 2026 13:23:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 8BE2240DBC
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790947381;
-	b=sYOADqNIhVnpdihNIrFgxS3P/8aDyy02XxwAOQKfaSeqjJx84ap9huCn6MQaPcOdWubf
-	 KyGkI05wwb3ZIv44SGtQr2frALgLxAFdQWPvJDVeYLR2Bb5/ouCBLroqNvIoSyL55X/C7
-	 qVn87JqdPDdrXpHzflffIVAVuTap+BT+nozuuqajc+O5FiQ9Ghbq4Z9hq9puxuuOI7NA5
-	 tyb2BuYYPOOQg6IaEXTyq0n2S3O0OJ4cAj/6CUeUl8SYNA08uc28DMHd05OikINMSEhJq
-	 A4mUedJoA8o/QF5QCS3Cg9BxIbcseFzciQ7zkQDcpPbJFnc2Y60psrw+rfZUJFuEJyQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id d2NzbSmrwNB2; Fri,  2 Oct 2026 13:23:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org D93CF60C2B
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790947384;
+	b=iOZBnNU5O/aVKoYkt8GvSyyRgf8ZoR14Gxjs1qFhds4ITOzg/V75eh6zDsBXTvRAF4g5
+	 Izh4zNYtHJP9KEsznqU4Uii2UFCmmQs0xjtYnYOXaYN7OE5lym8m64JFal1oMdLx7eNFW
+	 1yeV40IDbt63ifVbVscOnDlKbjX9+Y7nFBFkDm8+t4x8Na1aPB9p/p2DnCFnWLU5ms3Ec
+	 olJJaIGd7PRlzsxaIirmDLk+JpE62cUgbS6E7uuvjf0EaYmMXQeD5ewhQqCuS3GU3QDTW
+	 zffYitsD6YWV4Dhx+JQJC6AdkNvm1d12cCqADUxjGMQNMOM5FLksJRJR8K0NG8Zkecw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790947381;
+	c=relaxed/relaxed; t=1790947384;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,136 +32,138 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=xAYu33S0etPXdZko2vdzeklCwnKNnrFGMmFRozHkagU=;
-	b=pJLcpoTTCbw4qWgggpP4xb5xLQUVMcYFeVt94PCLDX0YT52sNKbFHUqTnxIHA84qprgx
-	 Er6QIJ+IwVlHg/RdBdzfLxGOiul7Si0yIMc4LhC8fHHmveztjuHQ6Hn51CPZEzSTC/MoK
-	 +9AiJmVH+az2lTblh0w8yOrBBUB7pHV6Z9OwvXDP2nnw6bbEfDB2SqGMz14eZFK74XVOC
-	 vgyV8cqmftI4/fywzpzb9AhkNI/0xbgrCskWbz02I6hJKwXtW5k9sSTtBulOp0uwjXMPB
-	 Uy/BtROqLDp3HJady3Sn3b7pQ+iS08pNLTrNiCdcbLql0MQhkY8cLEx1DGHYub3h9iA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=kFUVYwFTO4+/3IKw9DHwNwmXh4H0LqBDbW8HxttV0SQ=;
+	b=SCvYE3aXkWuF8Xr2W/Wco6JwFJSCNzYGA/Q2kvPEZTOGwZ4jSR3qbjPxZAK5w/bcHWa0
+	 KmeLN/Y2goITaHgpPqAAuautpFuR0ND0RDCIem9CnxS5T0/U5BqI+H0j2GgJp04rckmOQ
+	 IrF9zjIDYzT9qak5K9lasLyF5esRGm4kaDLaV2o9BrFugev2H2vLZrtUyUUaPZzNUuI+u
+	 DLEgJemTQ+OAxPT7571OVCfyk9Xp0rig7oSC+AvYlsqcN3sHKrqVM/wzsaBJTdRmV3v9/
+	 u9PtBDjRZDqqHCWrn+4KF4FfYePiYTuBdKx+vyzHrUwIhAXFpfIFuZdpbOAU1W11Ktw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=none header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=HQLDYfrj;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790947381;
-	bh=xAYu33S0etPXdZko2vdzeklCwnKNnrFGMmFRozHkagU=;
+	d=lists.u-boot-project.org; s=default; t=1790947384;
+	bh=kFUVYwFTO4+/3IKw9DHwNwmXh4H0LqBDbW8HxttV0SQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xoQnpc62iDJQdHXudfztEBuEO61zlXPOP//2eFmG2iFoQe4M+o8ddqlROgavaLVn8
-	 KPU1KtFzuNGOMBemTE7a+HmgoHc8a65oA2Ht+PZCAq5uQfq2oQ+GR/q8v5FwcrkuJJ
-	 JOayHOVnkK28UTtL2Nd0cooErNK+R87h1tBYWMfjP0S7WQrxEcu6R4QKXWh8aJuBVp
-	 7/QCLSbAjHv7ktz+nZ2edZCA+sRDOrAYcdffmwzd7qs49H7e1M+JkMkwATkXsA+HhZ
-	 gC6hZFUEWxoxpIl24IVPSS+ekqEZki8lc0x2vLsLcHdEYbiM9k+fGKKoksxRCUCQgP
-	 oyZqz+OyoDIjg==
+	b=eYaIxOh5Avnun+6H74pkcRUp/ki/7KsGSWH/ZHI7nxtkC1ZIUBUv75CorxVwhSes2
+	 CCp2MtcofptHwq8jVM9pxqWlb4OccnYUtsru/m62NAikUFGq/dTC9dBdRGXB5UpUSN
+	 fBNinqhEB7ZVq05riPw+qXL85REBGQyQ4qHh851bXWlz98qmF3TopxJmB0cDxBkskj
+	 CUmRmhnMZZfNCjshcc54LY/Ofvzqu/2UtEM4ewIi8SmbwhQOvdEWsbos+uLB0bVEZn
+	 vE6WjAfeQWyaVZIP5IXneBBJK67LPgmFBfb32Ki6cqD69XrMF1jmfNMNdekDVWeRvg
+	 lWjTCt/f3saSA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8BE2240DBC;
-	Fri,  2 Oct 2026 13:23:01 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6AC2B282
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:22:58 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D93CF60C2B;
+	Fri,  2 Oct 2026 13:23:03 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 028A1435
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:22:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5061B400D1
+ by smtp3.osuosl.org (Postfix) with ESMTP id DD4BB60B5E
  for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:22:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UhIE_Ej8Pkq5 for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 13:22:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 2A0D84004A
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:30::e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790947377;
- b=ZhUDNnrv4GjvB+eQAgOj5BQQ9C1cecikyNN52kBeuYAeSAZk3UtASoFhli+YyKT/6Acq
- yMYat2+KdwioKicwtlabu3drPgTv3HBXXAuULgHqXyWZGK3fR20yMPurtgM/17X9Paau1
- ubHl2kxJQsNll2ZrKvFk/SDCKhcKJAH37YjfpUqsIy2KkZZxtEKFgCw7mHiU1NWHaB+Qa
- csAIqPXsFfMIGTu2efJmYVMsE+BG93pPfVefBxhCi6J09Kuoj5m8ZhUTkgEe9Ie+Abixb
- gJij+WIphgmqY0ZN3h9Y4A0ZeseKDvM22g5T9Hi/q4VDHJ/RfvKhrqKlQqoksrqfO2w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zfIC8gicV-W7 for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 13:22:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 98B2B6069A
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:30::f"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790947378;
+ b=bdSDFnbBvUSEwnN+vUdbd7UzA7ExoRljvxyvV5h+fUoxWQ3DNV7UTf5+MDfYdoVxE1Xf
+ KU1QzREXW3Box0t0Z9MmFSVq6LPiKylYuyntcWMxGrdGXNHNLeeLpbwdAStWCAeqrr62Q
+ XHv4pRs6gNVru7xs8iMBG+F1V0RGcBlBwsTK9NUJKVeb0DAYqKhhZ53OjGurAKENW3whl
+ RiqErRxeruXPOR9EaNweLwf26Vw8feMjNuD1BZjiS1p4FV0hiz7+yXOqhzk7d3O2QNy/s
+ opNXjE8LRdQCjjhYQFiNZ3mWBYK5xT/5Sn2D4dxxbRaUvkcA7md9ldwjgz0+MOkLNUQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790947377;
+ c=relaxed/relaxed; t=1790947378;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=xAYu33S0etPXdZko2vdzeklCwnKNnrFGMmFRozHkagU=;
- b=nICOI6j0zIJAjfhUaow9IyunfItkpJIjcn0iSoPmOZN8rst6U4rPBjWCH03SuHgxDv16
- mbISNteWnlROMplAeFSYRf2Wnoy9rjZzFY2IkOvEgGnmPAj2hGDu5qyI/GDLMcUP8oVLr
- 3rgogFyDtJkb/0fKqFKzgJn7vI1HLcnY9cz57ixpJQjdCivEvj7F/5vULYsvcKOiN7mQD
- icxnLDa1C71pfsUmUtBqn8iefyCqK+CkwzZ2tD69bHMMFHbd4jiVijwQ5bCv6tDpAZfTq
- Mg3dfehw2zD9qrmGrPV25VuZ20GRAc/5BSflfnQJPgmwJJMh9e1cc1eCDDlTTML9TIg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=kFUVYwFTO4+/3IKw9DHwNwmXh4H0LqBDbW8HxttV0SQ=;
+ b=TRMcWLEKzc4KYvtK8M8g9WlWj+3GYBLbWYl7lRk3El9Z4mqPnat/tLNkcIavyhwxhnBy
+ fj7Ow0ilWVXd5G8Bea8i7D0wzRBE2mdkPjGoJxOnZf5h74Gzjv7NlH9wHCSDsPOrGA9a9
+ XL3cSuJRCHt0a4/AKUCJxp1maJ9ztQ38h8WjtQ4h2+HqeozO2Wd0bEdJ4muIhbWL1/C9K
+ cv9/w4kRO6953Xgna6GfOWKiLTxNfwwUnvy4IDIL/F+mlD4YJF1MhWuVMN8S3sWa5Bjfv
+ 5djdQHzTZlpGWmw9EJvwgqQcow3yUOulDWxjHymDvzDTwISPNK9L/TSvLrAgH6EWh+g==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b="gd/0O/Ip"; 
- arc=none smtp.remote-ip="2a00:1450:4864:30::e"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:30::e;
- helo=mail-wr2-x0e.google.com; envelope-from=jstephan@baylibre.com;
+ header.s=google header.b=HQLDYfrj; 
+ arc=none smtp.remote-ip="2a00:1450:4864:30::f"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:30::f;
+ helo=mail-wr2-x0f.google.com; envelope-from=jstephan@baylibre.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=gd/0O/Ip
-Received: from mail-wr2-x0e.google.com (mail-wr2-x0e.google.com
- [IPv6:2a00:1450:4864:30::e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2A0D84004A
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:22:55 +0000 (UTC)
-Received: by mail-wr2-x0e.google.com with SMTP id
- ffacd0b85a97d-48b00a0ac65so1819865f8f.0
- for <u-boot@lists.u-boot-project.org>; Fri, 02 Oct 2026 06:22:55 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=HQLDYfrj
+Received: from mail-wr2-x0f.google.com (mail-wr2-x0f.google.com
+ [IPv6:2a00:1450:4864:30::f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 98B2B6069A
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:22:57 +0000 (UTC)
+Received: by mail-wr2-x0f.google.com with SMTP id
+ ffacd0b85a97d-48b0f4efe31so1066491f8f.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 02 Oct 2026 06:22:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790947374; x=1791552174;
+ d=baylibre.com; s=google; t=1790947375; x=1791552175;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=xAYu33S0etPXdZko2vdzeklCwnKNnrFGMmFRozHkagU=;
- b=gd/0O/IpKz5bzoXO9elRdtrsuJlrousMYyIAUK++y4NGie60ic385dFRq0vBIKC9fq
- pMBkkuNP+SFwEy38g0s9L2lXRyqjjq7guM6SJgHBMyTlr5Lo6LsdIX+p/ftfLI+qkWsU
- JW6z6WxXQs3TLv+/NEzI0Q2S4J0Zi3HaDdCyj+0ayylJeH++J2zZQweFt7UhnWIgbdI2
- VGSUtaLNZc1i1ldoOCNL8C1xMHnOqW9B5vkB+CXmlw9BjL+sALwUmIKo0Y7ypz+o6OSk
- FADfFEIU4T1Meh8tlkAqW5+WuzxaBJCZatkAFXj2kMzB3ZqX1HpwTnrG4Upjfa6TCtpD
- 7lbA==
+ bh=kFUVYwFTO4+/3IKw9DHwNwmXh4H0LqBDbW8HxttV0SQ=;
+ b=HQLDYfrj3yvzBr4V60e/PKcTzpAujZsb9ZXX77ATkRSyremq6L26gu4N5V8dgiA3oE
+ FwOz1d1YchN3ZNjmAqjrsjRQnhK/alBTar/ftSdEWNtIQkhDz1C6GIzM1Aw7LzRglEjB
+ KKcqcAMy0kMlSQD3C7T99DEb/0Q12SCVaNtRGDR7dyyVfbAMj3mKl48YuLAqyJN3q2hf
+ ++VDs8ou7vKZ2thNsyykxlB7e9ws96Q9B7PVfZxpMboKOZkTctWn0s4SOEQXb4Va3nwA
+ cMQ9JA64W62avwyt8mKSg2SqDJSd5xjm3XYxH1HF+EX1JfBDIJ6bPt9DCg5RWHsy7cth
+ M2Uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790947374; x=1791552174;
+ d=1e100.net; s=20260707; t=1790947375; x=1791552175;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=xAYu33S0etPXdZko2vdzeklCwnKNnrFGMmFRozHkagU=;
- b=aMQA3VL6Aa260SPRIFxRJLOF7JFWAdKM2eRUvvQ4JobtbZU+dkUIMciEkxoBwXfE/9
- HRZbAjLps+rlPgJpwsnhFy2bV+Xklb/RGnCthul6GsB8zRjkloHwsgQ7Ir0dZInNgizP
- GwcQazFFYMOjQVWW2tpsUwqaDfjig5nQr3qa1CbBsJZWiO4lWGYNh7TJk6qW1YtSRlq6
- zpoVerrIZZNJu0EkowOMxhU/vovzzrKkxWZKgB0FlGBGtSeQgEQeJVM1detEdTo6F46I
- nynAC+6Os45pIzHmhyQa+HK34302eIpdac4NYWEadB/MLJEjjZ2dPMFYZquzMLYg3CZY
- ucvA==
-X-Gm-Message-State: AFq9FYLxLHOzd1vOTvBWSe6UaALfaFbFFi/VSsapOKr2ay9QyMv29zu5
- scNk6uTcr5xFR06StN1qnI/Vsf6Oaf6ReX7LuN4L6KAqD74IiuYkyJFGYNau1jQ2/R4=
-X-Gm-Gg: AYBFou1Rsw0L80SMDHZ5b9AfIv0cywkAbJAcY3Q/ORASaBqSfG013trJZyMK2VNzdgR
- ftpQMMeMLHeUVtMHkVExGK/OsjmarRE6Av5JsULkAFMxLwS3YTXh9jRjcRFUFs9U7f9w5OSEbpC
- C2TWlbKAjlqT85gmPenLxP+71EVNUB3jSM0zW2xoKAibkvKHt468lxE7n21LBbaw8YuKmkE92h5
- 3+gu8iEX40+nvB7NFIucU054cbQhzEmyPbWt8tTHVe/fpsX5XXLb88Kf2+mPpkLRdjSwer8OSCT
- OVTWEt8twBfoGXyDCtmg9JuwCMpFJ976bPoAzoFZTjKvvAr6u1OwwtNTO0qU/cxypELz/rH9KaG
- 9BGhijozjB2fJyHHB3CBZ2ghYCX4/aIlFsd1KoeGvgvdgznk+g2iC7QBwBLRpOX9XQo8LdYfL+h
- wm8B7CERiYZYpNF34ijgY/Nm6cnlYtmDYXouRWVERz9E7x26wMmtscj7tOB0Sabtd+f8Xt1VsqK
- ZfiV8voMBAuL6sgqJ9yYQYc5YjfS3eM0yrj06ujkOyWAIoKLujXCC45UP+LkLOQ3nm3z/hPjNdb
- I9DzrfpUq4IfZ3xMVrNQMEJq5lnQMXOkaqNwbDYcyJOq74LSrXcnv3M=
-X-Received: by 2002:a05:6000:480c:b0:488:8904:cf19 with SMTP id
- ffacd0b85a97d-48b12739924mr5350618f8f.10.1790947373715; 
- Fri, 02 Oct 2026 06:22:53 -0700 (PDT)
+ bh=kFUVYwFTO4+/3IKw9DHwNwmXh4H0LqBDbW8HxttV0SQ=;
+ b=na1Nt97vAOPb6DfbRvxOK/acSIWA8rSEIa1K4uBz7EorB8NSjGBzd5P1WU2VKxtVnS
+ /mJSAUNRP3n454Z4XZVdwybNoMxZ+p6tfAE2+9T3iCDz1iL1/wvHDXeNVA1LuSlTEpwb
+ YsbAzN9GuvHFSbsDTEw7SsCiaRNBmQrI5DUUxElKjoGenLOxZwEZsfHT9Vindc011uJa
+ IgISae6DsV5ZmgFV4f8emz34yQZKQsx6Pzwub7PDrB715L6dj+782kFbJgFNvCpflW9l
+ ntXj2o7SKX2xyJKIRtaNUJxo1IfnsFYmUKg69UqOGgURYZghPmKW2LExwh9SWptK4ofa
+ jKvw==
+X-Gm-Message-State: AFq9FYLaXdogF9aJVRQEr8U+ri+53ad911d3iEizkvwdx4V9svW/sRIq
+ vIujVg/h+CApWb4jj2Zo45EoIdQHoc4U/iD2J8esps8WmpruLgMUPCCZvw1STsPdvlc=
+X-Gm-Gg: AYBFou3ZtdI0T7lH3ddK9bheDKH5cN92tpTINDqb3QFFbuLb3av1H+up+KA8bzKpqlY
+ osPd34GVw/tjzN4W6NjYhQaw7eYJWtPKsCbGmyNmCTWjfPMsk5v9nYjhn7ziO6EQYJzWy8Jl2Tj
+ UtnwRXL8nZIVdRGGlSG1gQ4C/PRh2Oruh0/Bvx/fZAoX/VcDcT/2TfBcwhNtl7+0tnhcZ85QFkd
+ o/WnPEu51y0jy/Lq5xgT7ZJRKNk2w9Kcn+2AQ6NFp8UenhotAG8bY1jiA6Yp0Cb64/nzG4Qk5n4
+ K28GOpz1SLJ6EEH5szxFHbMq9VyHpbMKDC/N7cAacJH/nj8JWLK0sNSl+RvLxrG2q7Jk/a1h8fN
+ SLBGCxaX0A+bG+Xzs+skz7+iLfV88Bv+uF6lpuEw/c0Y+iCi1HBV9CbXXW8MDhI41QT7sbQ8csX
+ yl4TXF07BtAZKECUxkNUWhPUgw+NfYPUn7Ao8taIOLtAj+GuMyfv/D249aQ0jAuQrxG1uA8WfVd
+ CODMpgTVi7CWAUHfsir+XX1BOttIwMCdQvGwVZOW0U5CR6hx9XyQQ81OG0xUL1tjCZ+lPtxmblu
+ zGMlaP0cbB0SuUzMvAu/NBp9ayT3fo+rcPWQr3+qSZm57QlA8MBDocI=
+X-Received: by 2002:a05:6000:4553:b0:488:8751:e78e with SMTP id
+ ffacd0b85a97d-48b1270e6e6mr3307680f8f.16.1790947375073; 
+ Fri, 02 Oct 2026 06:22:55 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48b38104f89sm6264125f8f.30.2026.10.02.06.22.52
+ ffacd0b85a97d-48b38104f89sm6264125f8f.30.2026.10.02.06.22.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Oct 2026 06:22:53 -0700 (PDT)
+ Fri, 02 Oct 2026 06:22:54 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 02 Oct 2026 15:25:38 +0200
-Subject: [PATCH v8 04/12] video: mediatek: add ethdr component
+Date: Fri, 02 Oct 2026 15:25:39 +0200
+Subject: [PATCH v8 05/12] video: mediatek: add merge component
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261002-add-genio-510-and-genio-700-hdmi-v8-4-2a6de7cf2a88@baylibre.com>
+Message-Id: <20261002-add-genio-510-and-genio-700-hdmi-v8-5-2a6de7cf2a88@baylibre.com>
 References: <20261002-add-genio-510-and-genio-700-hdmi-v8-0-2a6de7cf2a88@baylibre.com>
 In-Reply-To: <20261002-add-genio-510-and-genio-700-hdmi-v8-0-2a6de7cf2a88@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -184,13 +186,13 @@ Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Anshul Dalal <anshuld@ti.com>, Neha Malcom Francis <n-francis@ti.com>, 
  Siddharth Vadapalli <s-vadapalli@ti.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openssh-sha256; t=1790947536; l=5483;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1790947536; l=7923;
  i=jstephan@baylibre.com; h=from:subject:message-id;
- bh=qAhkq2f9Phk5FlUIMFXFT9QR/1QDQnFtZY4DvwKHtcU=;
+ bh=dfXwoJx9RJSuy1o7oLSgXI52ih77+Acg4+R6TSDzcS0=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgphAWFBQbyQxHwqbCvwEwIl9NQxnNa
  Ewt+3w/AUXP10QAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QO6Lum035CVW/mtIv8VsoEg0o8EyddyZKk+NwGaIrOnz58D7a2ptn4xuohHv0qcTzf+hhAs8j6S
- iT2JMhda6+gc=
+ QHWGUg58yB7TGLSd2GZDKx8jLF435bSRPPgFAHWBa/Mq8rH6bGCbzHkSLhRpQUEGu/xHjW7ywXs
+ 3TV4HIsjP/wY=
 X-Developer-Key: i=jstephan@baylibre.com; a=openssh;
  fpr=SHA256:PPc8djUi3lnQXuiRHH4CZ/icbEYOsksrEsOV7pDEmZg
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -206,175 +208,237 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The ETHDR is one of the components of the video pipeline on some
-MediaTek SoCs, such as the MT8188. Two of its sub-blocks are used: the
-mixer, which is the block's first register window and does the
-compositing, and the HDR video back-end, which sits on the same data
-path and is put in bypass since this pipeline does no tone mapping.
+The merge block is one of the components of the video pipeline on
+some MediaTek SoCs, such as the MT8188. With two inputs it combines
+them side by side into one output; with a single input it only buffers
+that input through its SRAMs.
+
+A merge declaring "mediatek,merge-fifo-en" additionally uses both SRAMs
+as a FIFO, which needs the DRAM latency thresholds to be programmed so
+that the block does not underrun.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/video/mediatek/mtk_ethdr.c | 106 +++++++++++++++++++++++++++++++++++++
- drivers/video/mediatek/mtk_ethdr.h |  39 ++++++++++++++
- 2 files changed, 145 insertions(+)
+ drivers/video/mediatek/mtk_disp_merge.c | 155 ++++++++++++++++++++++++++++++++
+ drivers/video/mediatek/mtk_disp_merge.h |  49 ++++++++++
+ 2 files changed, 204 insertions(+)
 
-diff --git a/drivers/video/mediatek/mtk_ethdr.c b/drivers/video/mediatek/mtk_ethdr.c
+diff --git a/drivers/video/mediatek/mtk_disp_merge.c b/drivers/video/mediatek/mtk_disp_merge.c
 new file mode 100644
-index 00000000000..6b480ad8319
+index 00000000000..d7502c28a55
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_ethdr.c
-@@ -0,0 +1,106 @@
++++ b/drivers/video/mediatek/mtk_disp_merge.c
+@@ -0,0 +1,155 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * MediaTek Video ETHDR support
++ * MediaTek Video Disp Merge Support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
-+#include <asm/io.h>
 +#include <dm.h>
-+#include <errno.h>
++#include <linux/bitfield.h>
 +#include <linux/bitops.h>
 +
 +#include "mtk_disp_comp.h"
-+#include "mtk_ethdr.h"
++#include "mtk_disp_merge.h"
 +
-+#define MIX_EN				0xc
-+#define MIX_ROI_SIZE			0x18
-+#define MIX_DATAPATH_CON		0x1c
-+#define OUTPUT_NO_RND				BIT(3)
-+#define SOURCE_RGB_SEL				BIT(7)
-+#define BACKGROUND_RELAY			(4 << 9)
-+#define MIX_ROI_BGCLR			0x20
-+#define BGCLR_BLACK				0xff000000
-+#define MIX_SRC_CON			0x24
-+#define MIX_L_SRC_CON(n)		(0x28 + 0x18 * (n))
-+#define NON_PREMULTI_SOURCE			(2 << 12)
-+#define MIX_L_SRC_SIZE(n)		(0x30 + 0x18 * (n))
-+#define MIX_L_SRC_OFFSET(n)		(0x34 + 0x18 * (n))
-+#define MIX_FUNC_DCM0			0x120
-+#define MIX_FUNC_DCM1			0x124
-+#define MIX_FUNC_DCM_ENABLE			0xffffffff
++#define DISP_REG_MERGE_CTRL		0x000
++#define MERGE_EN				1
++#define DISP_REG_MERGE_CFG_0		0x010
++#define DISP_REG_MERGE_CFG_1		0x014
++#define DISP_REG_MERGE_CFG_4		0x020
++#define DISP_REG_MERGE_CFG_10		0x038
++#define SWAP_MODE				0
++#define FLD_SWAP_MODE				GENMASK(4, 0)
++#define DISP_REG_MERGE_CFG_12		0x040
++#define CFG_10_10_1PI_2PO_BUF_MODE		6
++#define CFG_10_10_2PI_2PO_BUF_MODE		8
++#define CFG_11_10_1PI_2PO_MERGE			18
++#define FLD_CFG_MERGE_MODE			GENMASK(4, 0)
++#define DISP_REG_MERGE_CFG_24		0x070
++#define DISP_REG_MERGE_CFG_25		0x074
++#define DISP_REG_MERGE_CFG_26		0x078
++#define DISP_REG_MERGE_CFG_27		0x07c
++#define DISP_REG_MERGE_CFG_36		0x0a0
++#define ULTRA_EN				BIT(0)
++#define PREULTRA_EN				BIT(4)
++#define DISP_REG_MERGE_CFG_37		0x0a4
++/* BUFFER_MODE: 0 - no fifo, 1 - SRAM0, 2 - SRAM1, 3 - SRAM0 and SRAM1 */
++#define BUFFER_MODE				3
++#define FLD_BUFFER_MODE				GENMASK(1, 0)
++/*
++ * ultra threshold in units of pixels, the recommended values are
++ * 6 us and 8 us worth of pixels at 594 Mpixel/s.
++ */
++#define ULTRA_TH_LOW				(6 * 594)
++#define ULTRA_TH_HIGH				(8 * 594)
++#define DISP_REG_MERGE_CFG_40		0x0b0
++#define FLD_ULTRA_TH_LOW			GENMASK(15, 0)
++#define FLD_ULTRA_TH_HIGH			GENMASK(31, 16)
++#define PREULTRA_TH_LOW				(8 * 594)
++#define PREULTRA_TH_HIGH			(9 * 594)
++#define DISP_REG_MERGE_CFG_41		0x0b4
++#define FLD_PREULTRA_TH_LOW			GENMASK(15, 0)
++#define FLD_PREULTRA_TH_HIGH			GENMASK(31, 16)
++#define DISP_REG_MERGE_MUTE_0		0xf00
 +
-+/* HDR video back-end registers, in the "vdo_be" register window */
-+#define HDR_VDO_BE_0204_VDO_DM_BE	0x204
-+#define HDR_VDO_BE_0204_BYPASS_ALL		0x7e
++/* CFG_30 (0x088, "12 bit lsb off") is not present in the upstream driver */
++#define DISP_REG_MERGE_CFG_30		0x088
 +
-+/* Fields used by this driver but not present in the upstream driver */
-+#define MIX_SRC_L2_EN				BIT(2)
-+#define L2_SRC_SEL				(2 << 20)
-+#define L2_OUT_SEL				(2 << 22)
-+
-+void mtk_ethdr_config(struct udevice *dev, u16 width, u16 height)
++/*
++ * The DRAM latency thresholds that keep the merge from underrunning while it
++ * buffers a line through its SRAMs.
++ */
++static void mtk_disp_merge_fifo_setting(struct udevice *dev)
 +{
-+	struct mtk_ethdr_priv *priv = dev_get_priv(dev);
-+
-+	/*
-+	 * The HDR video back-end sits between the mixer output and the final
-+	 * merge, so put it in bypass: this pipeline does no tone mapping.
-+	 */
-+	writel(HDR_VDO_BE_0204_BYPASS_ALL,
-+	       priv->vdo_be + HDR_VDO_BE_0204_VDO_DM_BE);
-+
-+	/* enable internal clocks */
-+	mtk_disp_comp_write(dev, MIX_FUNC_DCM0, MIX_FUNC_DCM_ENABLE);
-+	mtk_disp_comp_write(dev, MIX_FUNC_DCM1, MIX_FUNC_DCM_ENABLE);
-+
-+	mtk_disp_comp_write(dev, MIX_ROI_SIZE, (height << 16) | width);
-+	mtk_disp_comp_write(dev, MIX_DATAPATH_CON,
-+			    OUTPUT_NO_RND | SOURCE_RGB_SEL | BACKGROUND_RELAY);
-+	mtk_disp_comp_write(dev, MIX_L_SRC_SIZE(2), (height << 16) | width);
-+	mtk_disp_comp_write(dev, MIX_L_SRC_OFFSET(2), 0);
-+	mtk_disp_comp_write(dev, MIX_ROI_BGCLR, BGCLR_BLACK);
-+
-+	/* only configure L2 since only rdma4 and rdma5 are used */
-+	mtk_disp_comp_write(dev, MIX_L_SRC_CON(2), NON_PREMULTI_SOURCE);
-+	mtk_disp_comp_write(dev, MIX_SRC_CON,
-+			    MIX_SRC_L2_EN | L2_SRC_SEL | L2_OUT_SEL);
-+
-+	/* enable the mixer once its geometry is set, as Linux does */
-+	mtk_disp_comp_write(dev, MIX_EN, 0x1);
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_36,
++			    ULTRA_EN | PREULTRA_EN);
++	mtk_disp_comp_update(dev, DISP_REG_MERGE_CFG_37,
++			     FIELD_PREP(FLD_BUFFER_MODE, BUFFER_MODE),
++			     FLD_BUFFER_MODE);
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_40,
++			    FIELD_PREP(FLD_ULTRA_TH_LOW, ULTRA_TH_LOW) |
++			    FIELD_PREP(FLD_ULTRA_TH_HIGH, ULTRA_TH_HIGH));
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_41,
++			    FIELD_PREP(FLD_PREULTRA_TH_LOW, PREULTRA_TH_LOW) |
++			    FIELD_PREP(FLD_PREULTRA_TH_HIGH,
++				       PREULTRA_TH_HIGH));
 +}
 +
-+static int mtk_ethdr_probe(struct udevice *dev)
++void mtk_disp_merge_config(struct udevice *dev, u16 l_w, u16 r_w, u16 h)
 +{
-+	struct mtk_ethdr_priv *priv = dev_get_priv(dev);
++	struct mtk_disp_merge_priv *priv = dev_get_priv(dev);
++	u32 mode = CFG_10_10_1PI_2PO_BUF_MODE;
++
++	if (priv->fifo_en) {
++		mtk_disp_merge_fifo_setting(dev);
++		mode = CFG_10_10_2PI_2PO_BUF_MODE;
++	}
++
++	if (r_w)
++		mode = CFG_11_10_1PI_2PO_MERGE;
++
++	/* input 1 and input 2 sizes */
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_0, h << 16 | l_w);
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_1, h << 16 | r_w);
++
++	/* output size */
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_4, h << 16 | (l_w + r_w));
++
++	/* no pixel/channel swap */
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_10,
++			    FIELD_PREP(FLD_SWAP_MODE, SWAP_MODE));
++
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_12,
++			    FIELD_PREP(FLD_CFG_MERGE_MODE, mode));
++
++	/*
++	 * CFG_24 is the merge SRAM0 size and CFG_25 the SRAM1 size. In merge
++	 * mode input 1 goes to SRAM0 and input 2 to SRAM1; in buffer mode the
++	 * single input goes through SRAM0 and then SRAM1, so both hold it.
++	 */
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_24, h << 16 | l_w);
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_25,
++			    h << 16 | (r_w ? r_w : l_w));
++
++	/* merged sizes of inputs 1 and 2, only used in merge mode */
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_26, h << 16 | l_w);
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_27, h << 16 | r_w);
++
++	/* 12 bit lsb off */
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CFG_30, 0x0);
++
++	if (priv->mute_support)
++		mtk_disp_comp_write(dev, DISP_REG_MERGE_MUTE_0, 0x0);
++
++	/* enable */
++	mtk_disp_comp_write(dev, DISP_REG_MERGE_CTRL, MERGE_EN);
++}
++
++static int mtk_disp_merge_probe(struct udevice *dev)
++{
++	struct mtk_disp_merge_priv *priv = dev_get_priv(dev);
 +	int ret;
 +
 +	ret = mtk_disp_comp_probe(dev);
 +	if (ret)
 +		return ret;
 +
-+	priv->vdo_be = dev_remap_addr_name(dev, "vdo_be");
-+	if (!priv->vdo_be)
-+		return -EINVAL;
++	priv->fifo_en = dev_read_bool(dev, "mediatek,merge-fifo-en");
++	priv->mute_support = dev_read_bool(dev, "mediatek,merge-mute");
 +
 +	return 0;
 +}
 +
-+static const struct udevice_id mtk_ethdr_ids[] = {
-+	{ .compatible = "mediatek,mt8195-disp-ethdr" },
++static const struct udevice_id mtk_disp_merge_ids[] = {
++	{ .compatible = "mediatek,mt8195-disp-merge" },
 +	{ }
 +};
 +
-+/*
-+ * The mixer is the first register window ("mixer" in reg-names) of the
-+ * ethdr block, so binding the ethdr node with default register index 0
-+ * gives the mixer registers.
-+ */
-+U_BOOT_DRIVER(mtk_ethdr) = {
-+	.name	   = "mtk_ethdr",
++U_BOOT_DRIVER(mtk_disp_merge) = {
++	.name	   = "mtk_disp_merge",
 +	.id	   = UCLASS_MISC,
-+	.of_match  = mtk_ethdr_ids,
-+	.probe	   = mtk_ethdr_probe,
-+	.priv_auto = sizeof(struct mtk_ethdr_priv),
++	.of_match  = mtk_disp_merge_ids,
++	.probe	   = mtk_disp_merge_probe,
++	.priv_auto = sizeof(struct mtk_disp_merge_priv),
 +};
-diff --git a/drivers/video/mediatek/mtk_ethdr.h b/drivers/video/mediatek/mtk_ethdr.h
+diff --git a/drivers/video/mediatek/mtk_disp_merge.h b/drivers/video/mediatek/mtk_disp_merge.h
 new file mode 100644
-index 00000000000..620558132be
+index 00000000000..74ed5c6f5b1
 --- /dev/null
-+++ b/drivers/video/mediatek/mtk_ethdr.h
-@@ -0,0 +1,39 @@
++++ b/drivers/video/mediatek/mtk_disp_merge.h
+@@ -0,0 +1,49 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * MediaTek Video ETHDR support
++ * MediaTek Video Disp Merge Support
 + *
 + * Copyright (c) 2026 BayLibre, SAS.
 + * Author: Julien Stephan <jstephan@baylibre.com>
 + */
 +
-+#ifndef _MTK_ETHDR_H
-+#define _MTK_ETHDR_H
++#ifndef _MTK_DISP_MERGE_H
++#define _MTK_DISP_MERGE_H
 +
 +#include <linux/types.h>
 +
 +#include "mtk_disp_comp.h"
 +
 +/**
-+ * struct mtk_ethdr_priv - private data of the ethdr component
-+ * @comp: common component state, holding the "mixer" register window. It
-+ *	  must be the first member: the shared component helpers cast the
-+ *	  private data of every pipeline component to struct mtk_disp_comp_priv
-+ * @vdo_be: HDR video back-end ("vdo_be") register window
++ * struct mtk_disp_merge_priv - private data of a merge component
++ * @comp: common component state, must be the first member: the shared
++ *	  component helpers cast the private data of every pipeline component
++ *	  to struct mtk_disp_comp_priv
++ * @fifo_en: buffer the input through the merge SRAMs, from the
++ *	     "mediatek,merge-fifo-en" property
++ * @mute_support: the merge has a mute control, from the
++ *		  "mediatek,merge-mute" property
 + */
-+struct mtk_ethdr_priv {
++struct mtk_disp_merge_priv {
 +	struct mtk_disp_comp_priv comp;
-+	void __iomem *vdo_be;
++	bool fifo_en;
++	bool mute_support;
 +};
 +
 +/**
-+ * mtk_ethdr_config() - configure the ethdr mixer
-+ * @dev: ethdr device
-+ * @width: width of the frame
-+ * @height: height of the frame
++ * mtk_disp_merge_config() - configure a merge component
++ * @dev: merge device
++ * @l_w: width of the left input
++ * @r_w: width of the right input, or 0 when there is none
++ * @h: height of both inputs
 + *
-+ * Put the HDR video back-end in bypass and set up the mixer to output its
-+ * layer 2 alone, over a black background.
++ * With a right input the two inputs are merged side by side, otherwise the
++ * single input is only buffered through the merge SRAMs.
++ *
++ * A single input with no fifo just goes straight through, one pixel in and
++ * two out. The HDMI pipeline never takes that path (merge3 has a right input
++ * and merge5 declares mediatek,merge-fifo-en), so it is untested and only
++ * here for a future single-pixel user.
 + */
-+void mtk_ethdr_config(struct udevice *dev, u16 width, u16 height);
++void mtk_disp_merge_config(struct udevice *dev, u16 l_w, u16 r_w, u16 h);
 +
-+#endif /* _MTK_ETHDR_H */
++#endif /* _MTK_DISP_MERGE_H */
 
 -- 
 2.55.0
