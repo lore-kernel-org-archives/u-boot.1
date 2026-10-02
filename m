@@ -4,232 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3BCECA5FD4
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 14:39:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F26BCA5FD4
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 14:49:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DF23640DAF;
-	Fri,  2 Oct 2026 14:39:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0ED6F40D99;
+	Fri,  2 Oct 2026 14:49:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id S8n5am2pQSmE; Fri,  2 Oct 2026 14:39:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A4EA740D97
+ id OTPFoAXGsvGn; Fri,  2 Oct 2026 14:49:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 2A06440CD6
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790951966;
-	b=eIGNT/4MzXukbM2tsKjMf9Wi5Zuq1wlrkPqdZhBophKHAv4iLLm6iEFXWvPFrSMCveI2
-	 WQXQ64JhYUkUbFKSvT03zZWqTCjsngHMKLnqSMVRexPCEzRJ/6k9MkLbegaidtQ9qTsr4
-	 jDbO7er+zO+35EPaxWbViBplG0Yp3EBDiFu+MV0P8YxG+XSy8XghKfZ9HxR5qka5b/dAM
-	 nMVVY8/+9j6oHwnJruyvp0bigvyxxSKGi644CA1/OFvasHwMZPkXz4YvTjdmnzzhR8hki
-	 oyGsv1z72tnl8AE351cGnrTEyEyFu8d6UiRwSPiKicIEJgVzI17a/h/Rndl+O2plH4A==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790952593;
+	b=H0Lbi3EBXjEn7gur8Ma5Cm34zM3M12fc6fb1dV4Z1c3MTyjsZEg/tUl0zcqM3/Md4J28
+	 bMyaYbHHC9ea5+X2wkCY7a07NjwQ/mkjr+8eCAYl5zt9S/S1LgvPIukP9/OO9DhigP1iG
+	 5FHmmi2OTYbV/eoMHF9oEDFj6HUhNZT1fWgg21eBuIA4TPxjyCgb93AbgpXBLvYLeyLyy
+	 ggqUlwvdyK15CGRPXlGG59kpWy6WCrS+ryMYrDgc24tdS3VdVD/LtMnIzpf9AhOnAb6WR
+	 VOAgR1dGi5ipYvOcVLlLirueBLpTkPa8/RC0uiVw6r8s2uLFGQcGV1EWyYoR0adngSQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790951966;
+	c=relaxed/relaxed; t=1790952593;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-UI-Sender-Class:Received:Date:From:To:CC:Subject:
-	 User-Agent:In-Reply-To:References:Message-ID:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-Provags-ID:UI-OutboundReport:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=VM1kxAmKEgOBQFnRPVihtvkItdOHfvvM1cD0pFQe6i4=;
-	b=F9u7blpc+STiHn2K8vq2OQhD/LVgZs4VMqPwUmZ6TWgOjdKtUVTdCwxgG2IaT76SK1Xj
-	 RTxxYta2E+pyBs2JCIgnzYKDpcxgG4caIk/DnfTLoIdPOXXBBZWx/Y20jjH479r8Mg5Gf
-	 OFzfPxHAYqaKWbEdEZMdMn45YCy5Qam6taIvFwralfEqqWL9zLtgBO/Q6QsD1OIOK9792
-	 b0R3mb0fM8F7B9lObHqQIRCEzb/kV08pKBHKTcw8l7Os4vZCbvgXGCed+HDdASiYegdJT
-	 XOMpEDpWwUIuWut/xs0h+JbGzXR2NEd/YLXBvDLcTmOoMvbC5WuVE2Kf7ud4MaPpRxg==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
+	 Date:Message-ID:MIME-Version:Content-Type:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=bvfBoCArgKppMMRoHHUObOKNUltJ6jJUCZBAfFCT92U=;
+	b=U+uFSm2qKXwki1zDz3dL+MJq566VPVL1rn598twhjhvSI0xZ7XnVCbOUPZELmQS3QYAF
+	 KWqxGegkz88Hv620sJbJ4kxW8X8GuKnxVJC5uQDljlV07NHnXT/Kn/j3XWJhOy5w7xqna
+	 iHzNerEhK4P28HS+dKSpRzEVoi11Ig1zNc85Mf2P9Fm6p3Hj39wuohTuAUSq+SAY1iauF
+	 CWtMOxioNGWBr5RcveUKwD5ItJMsgUd61Kjbl7ELYFdKJhDEXZpscXxk5n1xLpdSGtmS9
+	 PpRJnvE9nxNpFfZIoD1FY98RjSSDr/6+YX6AAaMyWCvXlnCRPiJLQn/Rt/kbBQLPliA==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790951966;
-	bh=VM1kxAmKEgOBQFnRPVihtvkItdOHfvvM1cD0pFQe6i4=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1790952593;
+	bh=bvfBoCArgKppMMRoHHUObOKNUltJ6jJUCZBAfFCT92U=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bO+r25pumdbOUhAB3dZQHPiizLarL+mHp/PiT28+lIbksBnAogszTwDVccOrfLXgm
-	 8aK0tUoVRdBHlinmMXRp/xmajkAkagO88Ys00ZPBSHSQml5oSl/WPmU2NCy1IWH4/M
-	 /ep75BlAR+DmKmBSlUZ8CGi1bHEl1+vGjF5VZ3UtTIunjswFuROw+cYxiMctm3l3RT
-	 fQMqy5wUxO6wysIY8TIXjCOzlCZQn1SSDBA8E2+TsOX10i+m68F5Los4KvmoCxxR2d
-	 Cm9qc8vNiWmJS/1LHyQOYEneyRIErAsWlwQ7sxfCsD9gHm4XTVHczS0NNbjDdwrRoG
-	 7ryXEmnl8wDkw==
+	b=t5DoW4I16q1vXw5ABWDE6aQtHPVxdvRTr84JaTacajsl75BiK48w7b1ze5eAzg+/j
+	 MHlLKOM3PGuPLvqZCaQ8VAVbgiDZSQfehh8gR2F7VT1kxX/SYOtiUeViR2RFhiQWba
+	 W9lHXN2TQtonZB/3nl32jNl1bd119OCERz11Vku0fWPOjUjg/VGHnqcp8gbtr060ha
+	 tQKjV7zX06rn/6r0X0/tzGFs48JIa0+jXPF8mTzZF4ybJvRvBYbwInFV0P/ik2/XKs
+	 ULHWdKoqi5yhNRxBYvX7/YnUJpQWkROHO2VNCPgvQULJ5WQlHcWgIc8TYNUCDbHm99
+	 PFtDeiBR61GJw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A4EA740D97;
-	Fri,  2 Oct 2026 14:39:26 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 08D38435
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 14:39:25 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2A06440CD6;
+	Fri,  2 Oct 2026 14:49:53 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 08C7B282
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 14:49:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 060F2811BC
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 14:39:25 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id E3375400AD
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 14:49:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FX0ykxtmv9Sr for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 14:39:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 4C17981183
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=212.227.15.19
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790951964;
- b=Ir9jqBOzGkfIiYe07Cl1lsRzAUXmYppuL/BAWlviBDwEOV1EhXQvXpGJCEqtoPHRqVT2
- kBqEU0BUOLxpSnIy6luNbuB2dtGnqK8GgEwJ7WrObOXvjym80a7eS/TP7c6t4SG8Oeu5g
- fGfTGCKkX/l/gs7OJaSMd56LQ2f+H+TnD4O6Av+F/iGtJKIhzEVrDgzUCx99CWdrYnc5v
- iCLQJMJxdZ99uGPRIf9vDVc1m6JDnzNbT7+bijCLpGRzP3Sz+vHYp2VJ2qfFPEQfWhLcV
- 12P2D5OJ0LliEPVDCt9jIIWr0XZHRNcb1oiFg0xU9kLGNaCpQ36NG4W1HG6trTgjiwQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2Rz4sw4XBkxH for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 14:49:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 165D54004A
+Authentication-Results: smtp2.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790952590;
+ b=lHjIxPYrrDFR8uYoerpQ5CR/I+oI5OpuWicL5NmEr7MNbzqjnvr05fklQr9LqbKm6ssQ
+ vTLG81pdLIDGL7QQTtE0BH1GbcmniKrL6A9qILuXNkXzVoGnXmFvbVhen7MuhnVxHhYeJ
+ n+PlEjOSGyTarUVUmP5PI11DYvtVlzAxT+CXc2Fub+DJC/3DzyKIUar6/8cQxOO+BGcwL
+ 3JgJGugiGXOaZuImMCUkENxEeLubmhsxCW1EVzZCSWXk9jODvu0yFIrlYXg5VdRJF+/mT
+ VApF7Ne4dLxlECzsrPecm9rZA4bZhnYmfrYSLS5XsbakHkD36HJ3GEjjzHc0pLwY5Gw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790951964;
- h=Received-SPF:DKIM-Signature:X-UI-Sender-Class:Received:Date:From:To:
- CC:Subject:User-Agent:In-Reply-To:References:Message-ID:MIME-Version:
- Content-Type:Content-Transfer-Encoding:X-Provags-ID:X-Spam-Flag:
- UI-OutboundReport;
- bh=VM1kxAmKEgOBQFnRPVihtvkItdOHfvvM1cD0pFQe6i4=;
- b=nwddt1cNz7EbiaQsBmgelWAiDVKLjxNfzHwpTgODvsZzW6YZsSZGBfaL/2dtrJTS7Jir
- L11cCNxMBGEZXdZXE03vj1Rel56tu1gMC04upSvwKZPlLDGa9kjll4wrPBg5V6izGmbDX
- 1Fgeqi1AUN7H+IavaZwzNHwaXrrLvDauOW5rY6QSknd377xkNlweLL5R/gf9u0uNkeNqD
- z35KbG5Gkdfq3WszzKMxUFv6nAC5o22luu0XFcpycX4z5a/I0II5RW568ID2377CW7f+f
- a1XSgEy5iIoj8wuTEYZjfgeV4FWYrBJ7ErxQwB6fofP8Kxa1Mlc9odICLYW3fOD43Jw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
- dmarc=pass header.from=gmx.de; 
- dkim=pass header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256
- header.s=s31663417 header.b=oBLkXmRS; 
- arc=none smtp.remote-ip=212.227.15.19
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.15.19;
- helo=mout.gmx.net; envelope-from=xypron.glpk@gmx.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256
- header.s=s31663417 header.b=oBLkXmRS
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4C17981183
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 14:39:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1790951957; x=1791556757; i=xypron.glpk@gmx.de;
- bh=VM1kxAmKEgOBQFnRPVihtvkItdOHfvvM1cD0pFQe6i4=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=oBLkXmRSeZBmGC8Nz95lU+k/+P9YvUkMtFo63mBnXAt8VBHZu4B96hVwj41YQNBY
- dmw6QnPUSBJKRKHEfuuh6t17o0zytKqDGIxkw6S2HJ8kIbZ5bUOfFIJ/6e5J2N4pq
- zm2CumYzNeZxYHzZSUKqU7QmDW08gepok9C5z6EWmdweKcb2tBdNHwvdFHtz1lArn
- 8p18Y2U+rCXJqUviiMupW+KjECCKlFxad7dvSjAvwjd2Axo20hBnWJ1CrPiBPBakh
- DJfmao5oXEldWAwT9AtVvKtyT2y6SFB4nNq24YQtexZpjCh2NgfAcoolFxLKBNL7x
- V1qhnVHtnErb5gbavQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MgvvT-1wVNAu1vqf-00fwx5; Fri, 02
- Oct 2026 16:39:17 +0200
-Date: Fri, 02 Oct 2026 16:39:14 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: =?ISO-8859-1?Q?Vincent_Stehl=E9?= <vincent.stehle@arm.com>
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- Sughosh Ganu <sughosh.ganu@arm.com>, Udit Kumar <u-kumar1@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH 2/2] efi_selftest: add minimal fmp test
-User-Agent: Thunderbird for Android
-In-Reply-To: <ar94zly0zywmoZn2@debian>
-References: <20260922-authi-v1-0-e943530349bb@arm.com>
- <20260922-authi-v1-2-e943530349bb@arm.com>
- <79ac74ea-390e-409e-bfcf-033357832d71@gmx.de> <ar94zly0zywmoZn2@debian>
-Message-ID: <CF811B8E-B192-499E-AEE2-3AFEB7243895@gmx.de>
+ c=relaxed/relaxed; t=1790952590;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
+ In-Reply-To:References:Date:Message-ID:MIME-Version:Content-Type;
+ bh=bvfBoCArgKppMMRoHHUObOKNUltJ6jJUCZBAfFCT92U=;
+ b=s+gaK+xbBiTdKkkQGQwr52q2JOFLuAIal6SqYufgoV48zUdBHWCbrKCADL3grA2mXpYv
+ yYOm78BOPuiG2GHM6EAKFK6HMf/KTeBTnwzgbF1vd63cgL/F6YAPBLlr0e8coORAtb/Xt
+ wjS/UCpekOgld4vF4iey9yLkXvShuLfN1URg/eu83zDFj8Bp1lO9NcbPAPHTzYaOwAn8y
+ qz4wAEat/bL30MANSjGmAV9piYmTIXKY/EcXlw18UPZOdkddAJ0LfMufhi6lherRaBdMZ
+ V65OsMIKEm33GFJ50d6VraF1VGnlYmjATwteLsVoesRmnOggipHTr5kJ4YyuOz0QyFA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=pass header.from=kernel.org; 
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b="oqPYqW/v"; 
+ arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=oqPYqW/v
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 165D54004A
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 14:49:49 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 7C18C42E5A;
+ Fri,  2 Oct 2026 14:49:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF0141F000FF;
+ Fri,  2 Oct 2026 14:49:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1790952588;
+ bh=bvfBoCArgKppMMRoHHUObOKNUltJ6jJUCZBAfFCT92U=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=oqPYqW/v3++4SYu4SplGswICBp6Yl1dq09pB7xms+p4CksTyFPNk3iVlZcfSAULxh
+ O10J89U4Y5jUnQM/X4NIl6QiBHezqvo/VwQ7252lRmqXkb4HkML/g32uRQdPuWfJGF
+ y3E6UnUMU+5fyn2ET7U9Cw35l9EfktO5HYoYw4buTse3iDYUgGwI7yoA7BSOFAXev1
+ BitsHS0cm/ike6ai/N0UokTwgtgoWTu3OpH8iYCQVzLXTEFheScHHAbocOaWeYI2xh
+ xr78p1TxEy4IA0zpJqrYyb8Gp/9aKmlG2brVQMOkI3Wy1CFb1ptK0tblG0OPZYHY8H
+ 6jYlgQ5+61USg==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Jan Kehren <jan.kehren@emteria.com>, u-boot@lists.u-boot-project.org
+Cc: igor.opaniuk@gmail.com, sjg@chromium.org, trini@konsulko.com, Jan Kehren
+ <jan.kehren@emteria.com>
+Subject: Re: [PATCH] avb: Take a storage interface in the AVB operations
+In-Reply-To: <20260915145629.995499-1-jan.kehren@emteria.com>
+References: <20260915145629.995499-1-jan.kehren@emteria.com>
+Date: Fri, 02 Oct 2026 16:49:46 +0200
+Message-ID: <xhkdbv77ktawl.fsf@mkorpers-koolstof.csb>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Bl9UjgDiVq2xpaf/yCzKOuyyRVJmPclB884SpTZgmw6k2pm9X/L
- Jo5DewssrZgi99UB2R0V8E420Q9pFLq9c6vj6K2ISJCmGUmyCFX/QObaBT+LCxtnG0ZHYOS
- 2sLdaK8TtKjiz7XkvgY2m8fhiKBOLwBZg9Wmw58z/AmbT7IX/izhv/9S0atA26XAY1Ixmhf
- un1pUoxw7v5IPk9gOhHDw==
-UI-OutboundReport: notjunk:1;M01:P0:mY/bhsFY9nk=;4m+DH1KlNRjgBQx1H4Jh6W9JnrU
- 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
- oNz56h2+nZMod
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -243,79 +139,678 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Am 2=2E Oktober 2026 11:26:38 MESZ schrieb "Vincent Stehl=C3=A9" <vincent=
-=2Estehle@arm=2Ecom>:
->On Thu, Oct 01, 2026 at 03:55:10PM +0200, Heinrich Schuchardt wrote:
->> On 9/22/26 16:58, Vincent Stehl=C3=A9 wrote:
->> > Add a minimal test for the UEFI Firmware Management Protocol=2E
->(=2E=2E)
->> > +	/* Determine buffer size */
->> > +	img_info_size =3D 0;
->> > +	ret =3D fmp->get_image_info(fmp, &img_info_size, NULL, NULL, NULL, =
-NULL,
->> > +				  NULL, NULL);
->> > +	if (ret !=3D EFI_BUFFER_TOO_SMALL) {
->> > +		efi_st_error("GetImageInfo returned %u\n", (unsigned int)ret);
->> > +		goto out;
->> > +	}
->>=20
->> This fails if the number of images is 0=2E
->>=20
->> ERROR: GetImageInfo returned 2 (EFI_INVALID_PARAMETER)
->>=20
->> +struct efi_fw_image fw_images[] =3D {
->> +};
->> +
->> +struct efi_capsule_update_info update_info =3D {
->> +       =2Edfu_string =3D NULL,
->> +       =2Enum_images =3D ARRAY_SIZE(fw_images),
->> +       =2Eimages =3D fw_images,
->> +};
->>=20
->> This looks like a bug in efi_fill_image_desc_array(()=2E Why does it re=
-turn
->> EFI_INVALID_PARAMETER if the number of images is 0?
->>=20
->> We should just return *img_info_size =3D 0 and EFI_SUCCESS instead=2E
->>=20
->> The test should return EFI_ST_SUCCESS in this case=2E
->
->Hi Heinrich,
->
->Thank you very much for reviewing=2E
->
->I confirm that I could reproduce this corner case with your changes=2E
->
->In the end I think the test (v2) itself is fine, as it does pass when I
->replace the calls to get_image_info() by the following code:
->
->+       img_info =3D NULL;
->+       desc_ver =3D EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION;
->+       desc_cnt =3D 0;
->+       desc_size =3D sizeof(struct efi_firmware_image_descriptor);
->+       pkg_ver =3D 0;
->+       pkg_ver_name =3D NULL;
->
->I will try to send a fix for efi_fill_image_desc_array() as you
->mentioned, but if you agree that will be separated from this series=2E
+Hi Jan,
 
-The UEFI specification does not define if AllocatePool(size =3D 0) may ret=
-urn NULL which would lead to a failure of the subsequent Free()=2E
+Thank you for the patch.
+And sorry for the review delays.
 
-I think we should return if size =3D 0 before trying to allocate memory=2E
+Overall, the patch looks good to me. I have a couple of remarks below.
 
-Best regards
+On Tue, Sep 15, 2026 at 16:56, Jan Kehren <jan.kehren@emteria.com> wrote:
 
-Heinrich
+> AVB assumed its partitions were on mmc: avb_ops_alloc() took a bare device
+> number and get_partition() called find_mmc_device(). bootmeth_android
+> accepts any bootdev but passes only desc->devnum, so an Android bootflow
+> found on nvme 0 or usb 0 is verified against mmc 0.
 
-
+Oops, that's not pretty. Note that bootmeth_android has other
+mmc-specific bits in there such as bootflow_iter_check_mmc(). So even
+with this patch, we don't support booting from another storage medium in
+bootmeth_android.
 
 >
->Best regards,
->Vincent=2E
+> Carry a uclass id alongside the device number and resolve the block device
+> with blk_get_devnum_by_uclass_id(), keeping mmc_init() and the hardware
+> partition switch on the mmc path only. "avb init <dev>" still means mmc,
+> "avb init <interface> <dev>" selects another bus, and both now look the
+> device up before allocating. get_boot_interface() returns UCLASS_INVALID
+> without ops, so a caller that skipped "avb init" fails rather than reading
+> mmc.
 >
->>=20
->> Best regards
->>=20
->> Heinrich
+> The IO helpers and struct mmc_part only ever used struct blk_desc, so
+> rename them avb_blk_read(), avb_blk_write() and struct avb_blk_part.
 
+It would help a lot the review of this if there is a prepatory patch
+that does the rename (without introducing the support of other storage
+interfaces), followed by the actual support of another storage
+interface.
+
+>
+> Signed-off-by: Jan Kehren <jan.kehren@emteria.com>
+> ---
+> Prior art: this is the third attempt at the same change. Both earlier ones
+> stalled without a design objection being raised.
+>
+>   https://lore.kernel.org/u-boot/20220926220211.868968-1-adelva@google.com/
+>   https://lore.kernel.org/u-boot/20220801080717.9899-3-andrii_chepurnyi@epam.com/
+>
+> The first carries Reviewed-by: Simon Glass. Review asked for the in-tree
+> "avb init" callers to be updated, plus docs and tests, and the v2 never
+> came. That version made the interface argument mandatory, which is what
+> broke the callers; keeping "avb init <dev>" as mmc avoids the problem, so
+> no caller changes and board/ti/am57xx/am57xx.env keeps working as is.
+>
+> AVB_VERIFY keeps its "depends on MMC": the mmc bring-up path still calls
+> into the mmc core. Dropping it needs IS_ENABLED(CONFIG_MMC) guards and is
+> left as a separate change.
+>
+> "avb init" still parses <dev> as hex, as it always has, and the help text
+> now says so. Happy to switch the new interface form to decimal to match
+> every other block command if that is preferred.
+>
+> Tested on Raspberry Pi 4 and Raspberry Pi 5, verifying and booting Android
+> from SD on both and from USB mass storage on the Pi 4. Those boards boot
+> through a downstream command rather than bootstd, so the bootmeth_android
+> hunk is build tested only.
+>
+> On the Pi 4 "avb init usb 0" then "avb verify _a" passes, "avb init 0" still
+> resolves to mmc, and an unknown interface or an out-of-range index on either
+> bus is rejected without disturbing ops that were already initialised.
+>
+> Build tested with khadas-vim3_android_defconfig and
+> khadas-vim3l_android_ab_defconfig, both AVB_VERIFY=y CMD_AVB=y
+> BOOTMETH_ANDROID=y. checkpatch --strict is clean apart from two CamelCase
+> notes on libavb's own AvbOps/AvbIOResult types.
+>
+>  boot/bootmeth_android.c                |   2 +-
+>  cmd/avb.c                              |  24 +++-
+>  common/Kconfig                         |   7 +-
+>  common/avb_verify.c                    | 168 ++++++++++++++-----------
+>  doc/android/avb2.rst                   |   7 +-
+>  include/avb_verify.h                   |  38 ++++--
+>  test/py/tests/test_android/test_avb.py |  28 +++++
+>  7 files changed, 182 insertions(+), 92 deletions(-)
+>
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> index 0db08d4f86..ae05c08488 100644
+> --- a/boot/bootmeth_android.c
+> +++ b/boot/bootmeth_android.c
+> @@ -443,7 +443,7 @@ static int run_avb_verification(struct bootflow *bflow)
+>  	bool unlocked = false;
+>  	int ret;
+>  
+> -	avb_ops = avb_ops_alloc(desc->devnum);
+> +	avb_ops = avb_ops_alloc(desc->uclass_id, desc->devnum);
+>  	if (!avb_ops)
+>  		return log_msg_ret("avb ops", -ENOMEM);
+>  
+> diff --git a/cmd/avb.c b/cmd/avb.c
+> index 8fbd48ee5a..9381c2aa68 100644
+> --- a/cmd/avb.c
+> +++ b/cmd/avb.c
+> @@ -16,17 +16,28 @@ static struct AvbOps *avb_ops;
+>  
+>  int do_avb_init(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  {
+> -	unsigned long mmc_dev;
+> +	struct blk_desc *desc;
+>  
+> -	if (argc != 2)
+> +	if (argc < 2 || argc > 3)
+>  		return CMD_RET_USAGE;
+>  
+> -	mmc_dev = hextoul(argv[1], NULL);
+> +	/* "avb init <dev>" keeps its old meaning of mmc <dev> */
+> +	if (argc == 3)
+
+Can we please change this so that the comment is close to what actually do.
+I mean the following:
+
+     /* "avb init <dev>" keeps its old meaning of mmc <dev> */
+     if (argc == 2)
+		desc = blk_get_devnum_by_uclass_id(UCLASS_MMC,
+						   hextoul(argv[1], NULL));
+
+
+> +		desc = blk_get_devnum_by_uclass_idname(argv[1],
+> +						       hextoul(argv[2], NULL));
+> +	else
+> +		desc = blk_get_devnum_by_uclass_id(UCLASS_MMC,
+> +						   hextoul(argv[1], NULL));
+> +
+> +	if (!desc) {
+> +		printf("Can't find the requested device\n");
+> +		return CMD_RET_FAILURE;
+> +	}
+>  
+>  	if (avb_ops)
+>  		avb_ops_free(avb_ops);
+>  
+> -	avb_ops = avb_ops_alloc(mmc_dev);
+> +	avb_ops = avb_ops_alloc(desc->uclass_id, desc->devnum);
+>  	if (avb_ops)
+>  		return CMD_RET_SUCCESS;
+>  	else
+> @@ -428,7 +439,7 @@ int do_avb_write_pvalue(struct cmd_tbl *cmdtp, int flag, int argc,
+>  }
+>  
+>  static struct cmd_tbl cmd_avb[] = {
+> -	U_BOOT_CMD_MKENT(init, 2, 0, do_avb_init, "", ""),
+> +	U_BOOT_CMD_MKENT(init, 3, 0, do_avb_init, "", ""),
+>  	U_BOOT_CMD_MKENT(read_rb, 2, 0, do_avb_read_rb, "", ""),
+>  	U_BOOT_CMD_MKENT(write_rb, 3, 0, do_avb_write_rb, "", ""),
+>  	U_BOOT_CMD_MKENT(is_unlocked, 1, 0, do_avb_is_unlocked, "", ""),
+> @@ -464,7 +475,8 @@ static int do_avb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  U_BOOT_CMD(
+>  	avb, 29, 0, do_avb,
+>  	"Provides commands for testing Android Verified Boot 2.0 functionality",
+> -	"init <dev> - initialize avb2 for <dev>\n"
+> +	"init [<interface>] <dev> - initialize avb2 for hex <dev> on <interface>\n"
+> +	"    (mmc, nvme, usb, ...; defaults to mmc)\n"
+>  	"avb read_rb <num> - read rollback index at location <num>\n"
+>  	"avb write_rb <num> <rb> - write rollback index <rb> to <num>\n"
+>  	"avb is_unlocked - returns unlock status of the device\n"
+> diff --git a/common/Kconfig b/common/Kconfig
+> index c739225621..5590fbfdb2 100644
+> --- a/common/Kconfig
+> +++ b/common/Kconfig
+> @@ -885,9 +885,14 @@ config AVB_VERIFY
+>  	  This option enables compilation of bootloader-dependent operations,
+>  	  used by Android Verified Boot 2.0 library (libavb). Includes:
+>  	  * Helpers to process strings in order to build OS bootargs.
+> -	  * Helpers to access MMC, similar to drivers/fastboot/fb_mmc.c.
+> +	  * Helpers to access block devices, similar to
+> +	    drivers/fastboot/fb_mmc.c.
+>  	  * Helpers to alloc/init/free avb ops.
+>  
+> +	  Only mmc is initialised by AVB itself. Any other interface must
+> +	  already be enumerated when AVB runs, either by the board code or by
+> +	  a command such as "usb start".
+> +
+>  if AVB_VERIFY
+>  
+>  config AVB_BUF_ADDR
+> diff --git a/common/avb_verify.c b/common/avb_verify.c
+> index b96cd1ebd7..6be34db129 100644
+> --- a/common/avb_verify.c
+> +++ b/common/avb_verify.c
+> @@ -8,6 +8,7 @@
+>  #include <cpu_func.h>
+>  #include <image.h>
+>  #include <malloc.h>
+> +#include <mmc.h>
+>  #include <part.h>
+>  #include <tee.h>
+>  #include <tee/optee_ta_avb.h>
+> @@ -304,13 +305,13 @@ char *avb_set_enforce_verity(const char *cmdline)
+>  
+>  /**
+>   * ============================================================================
+> - * IO(mmc) auxiliary functions
+> + * Block IO auxiliary functions
+>   * ============================================================================
+>   */
+> -static unsigned long mmc_read_and_flush(struct mmc_part *part,
+> -					lbaint_t start,
+> -					lbaint_t sectors,
+> -					void *buffer)
+> +static unsigned long avb_blk_read(struct avb_blk_part *part,
+
+Can we please call this avb_blk_read_and_flush() ? As far as I
+understand, we still flush the cache after reading.
+
+> +				  lbaint_t start,
+> +				  lbaint_t sectors,
+> +				  void *buffer)
+>  {
+>  	unsigned long blks;
+>  	void *tmp_buf;
+> @@ -342,7 +343,7 @@ static unsigned long mmc_read_and_flush(struct mmc_part *part,
+>  		tmp_buf = buffer;
+>  	}
+>  
+> -	blks = blk_dread(part->mmc_blk,
+> +	blks = blk_dread(part->blk,
+>  			 start, sectors, tmp_buf);
+>  	/* flush cache after read */
+>  	flush_cache((ulong)tmp_buf, sectors * part->info.blksz);
+> @@ -353,8 +354,8 @@ static unsigned long mmc_read_and_flush(struct mmc_part *part,
+>  	return blks;
+>  }
+>  
+> -static unsigned long mmc_write(struct mmc_part *part, lbaint_t start,
+> -			       lbaint_t sectors, void *buffer)
+> +static unsigned long avb_blk_write(struct avb_blk_part *part, lbaint_t start,
+> +				   lbaint_t sectors, void *buffer)
+>  {
+>  	void *tmp_buf;
+>  	size_t buf_size;
+> @@ -382,59 +383,83 @@ static unsigned long mmc_write(struct mmc_part *part, lbaint_t start,
+>  		tmp_buf = buffer;
+>  	}
+>  
+> -	return blk_dwrite(part->mmc_blk,
+> +	return blk_dwrite(part->blk,
+>  			  start, sectors, tmp_buf);
+>  }
+>  
+> -static struct mmc_part *get_partition(AvbOps *ops, const char *partition)
+> +/* Hardware partition 0 is the user area, where the GPT and our images live */
+
+Can the comment be scoped with the variable?
+
+Or even better, since we ony use this variable once, can't we just drop
+it and put the comment next to mmc_switch_part() ?
+
+The rest of it looks good, thanks again
+
+Mattijs
+
+> +static int avb_init_mmc(int dev_num)
+>  {
+> -	int ret;
+> -	u8 dev_num;
+>  	int part_num = 0;
+> -	struct mmc_part *part;
+> -	struct blk_desc *mmc_blk;
+> -
+> -	part = malloc(sizeof(struct mmc_part));
+> -	if (!part)
+> -		return NULL;
+> +	struct mmc *mmc;
+> +	int ret;
+>  
+> -	dev_num = get_boot_device(ops);
+> -	part->mmc = find_mmc_device(dev_num);
+> -	if (!part->mmc) {
+> +	mmc = find_mmc_device(dev_num);
+> +	if (!mmc) {
+>  		printf("%s: no MMC device at slot %x\n", __func__, dev_num);
+> -		goto err;
+> +		return -ENODEV;
+>  	}
+>  
+> -	ret = mmc_init(part->mmc);
+> +	ret = mmc_init(mmc);
+>  	if (ret) {
+>  		printf("%s: MMC initialization failed, err = %d\n",
+>  		       __func__, ret);
+> -		goto err;
+> +		return ret;
+>  	}
+>  
+> -	if (IS_MMC(part->mmc)) {
+> -		ret = mmc_switch_part(part->mmc, part_num);
+> +	if (IS_MMC(mmc)) {
+> +		ret = mmc_switch_part(mmc, part_num);
+>  		if (ret) {
+>  			printf("%s: MMC part switch failed, err = %d\n",
+>  			       __func__, ret);
+> -			goto err;
+> +			return ret;
+>  		}
+>  	}
+>  
+> -	mmc_blk = mmc_get_blk_desc(part->mmc);
+> -	if (!mmc_blk) {
+> -		printf("%s: failed to obtain block descriptor\n", __func__);
+> +	return 0;
+> +}
+> +
+> +static struct avb_blk_part *get_partition(AvbOps *ops, const char *partition)
+> +{
+> +	int ret;
+> +	int dev_num;
+> +	enum uclass_id uclass_id;
+> +	struct avb_blk_part *part;
+> +	struct blk_desc *blk;
+> +
+> +	part = malloc(sizeof(struct avb_blk_part));
+> +	if (!part)
+> +		return NULL;
+> +
+> +	dev_num = get_boot_device(ops);
+> +	uclass_id = get_boot_interface(ops);
+> +	if (uclass_id == UCLASS_INVALID || dev_num < 0) {
+> +		printf("%s: no storage interface, run 'avb init' first\n",
+> +		       __func__);
+> +		goto err;
+> +	}
+> +
+> +	if (uclass_id == UCLASS_MMC) {
+> +		ret = avb_init_mmc(dev_num);
+> +		if (ret)
+> +			goto err;
+> +	}
+> +
+> +	blk = blk_get_devnum_by_uclass_id(uclass_id, dev_num);
+> +	if (!blk) {
+> +		/* Every bus but mmc must already be started when AVB runs */
+> +		printf("%s: no %s device %d, is the bus started?\n", __func__,
+> +		       blk_get_uclass_name(uclass_id), dev_num);
+>  		goto err;
+>  	}
+>  
+> -	ret = part_get_info_by_name(mmc_blk, partition, &part->info);
+> +	ret = part_get_info_by_name(blk, partition, &part->info);
+>  	if (ret < 0) {
+>  		printf("%s: can't find partition '%s'\n", __func__, partition);
+>  		goto err;
+>  	}
+>  
+> -	part->dev_num = dev_num;
+> -	part->mmc_blk = mmc_blk;
+> +	part->blk = blk;
+>  
+>  	return part;
+>  err:
+> @@ -442,22 +467,22 @@ err:
+>  	return NULL;
+>  }
+>  
+> -static AvbIOResult mmc_byte_io(AvbOps *ops,
+> -			       const char *partition,
+> -			       s64 offset,
+> -			       size_t num_bytes,
+> -			       void *buffer,
+> -			       size_t *out_num_read,
+> -			       enum mmc_io_type io_type)
+> +static AvbIOResult avb_blk_byte_io(AvbOps *ops,
+> +				   const char *partition,
+> +				   s64 offset,
+> +				   size_t num_bytes,
+> +				   void *buffer,
+> +				   size_t *out_num_read,
+> +				   enum avb_io_type io_type)
+>  {
+>  	ulong ret;
+> -	struct mmc_part *part;
+> +	struct avb_blk_part *part;
+>  	u64 start_offset, start_sector, sectors, residue;
+>  	u8 *tmp_buf;
+>  	size_t io_cnt = 0;
+>  	AvbIOResult io_ret = AVB_IO_RESULT_OK;
+>  
+> -	if (!partition || !buffer || io_type > IO_WRITE)
+> +	if (!partition || !buffer || io_type > AVB_IO_WRITE)
+>  		return AVB_IO_RESULT_ERROR_IO;
+>  
+>  	part = get_partition(ops, partition);
+> @@ -486,11 +511,11 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+>  				residue = num_bytes;
+>  			}
+>  
+> -			if (io_type == IO_READ) {
+> -				ret = mmc_read_and_flush(part,
+> -							 part->info.start +
+> -							 start_sector,
+> -							 1, tmp_buf);
+> +			if (io_type == AVB_IO_READ) {
+> +				ret = avb_blk_read(part,
+> +						   part->info.start +
+> +						   start_sector,
+> +						   1, tmp_buf);
+>  
+>  				if (ret != 1) {
+>  					printf("%s: read error (%ld, %lld)\n",
+> @@ -505,10 +530,10 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+>  				tmp_buf += (start_offset % part->info.blksz);
+>  				memcpy(buffer, (void *)tmp_buf, residue);
+>  			} else {
+> -				ret = mmc_read_and_flush(part,
+> -							 part->info.start +
+> -							 start_sector,
+> -							 1, tmp_buf);
+> +				ret = avb_blk_read(part,
+> +						   part->info.start +
+> +						   start_sector,
+> +						   1, tmp_buf);
+>  
+>  				if (ret != 1) {
+>  					printf("%s: read error (%ld, %lld)\n",
+> @@ -520,8 +545,8 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+>  					start_offset % part->info.blksz,
+>  					buffer, residue);
+>  
+> -				ret = mmc_write(part, part->info.start +
+> -						start_sector, 1, tmp_buf);
+> +				ret = avb_blk_write(part, part->info.start +
+> +						    start_sector, 1, tmp_buf);
+>  				if (ret != 1) {
+>  					printf("%s: write error (%ld, %lld)\n",
+>  					       __func__, ret, start_sector);
+> @@ -538,16 +563,16 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+>  		}
+>  
+>  		if (sectors) {
+> -			if (io_type == IO_READ) {
+> -				ret = mmc_read_and_flush(part,
+> -							 part->info.start +
+> -							 start_sector,
+> -							 sectors, buffer);
+> +			if (io_type == AVB_IO_READ) {
+> +				ret = avb_blk_read(part,
+> +						   part->info.start +
+> +						   start_sector,
+> +						   sectors, buffer);
+>  			} else {
+> -				ret = mmc_write(part,
+> -						part->info.start +
+> -						start_sector,
+> -						sectors, buffer);
+> +				ret = avb_blk_write(part,
+> +						    part->info.start +
+> +						    start_sector,
+> +						    sectors, buffer);
+>  			}
+>  
+>  			if (!ret) {
+> @@ -564,7 +589,7 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+>  	}
+>  
+>  	/* Set counter for read operation */
+> -	if (io_type == IO_READ && out_num_read)
+> +	if (io_type == AVB_IO_READ && out_num_read)
+>  		*out_num_read = io_cnt;
+>  
+>  out:
+> @@ -603,8 +628,8 @@ static AvbIOResult read_from_partition(AvbOps *ops,
+>  				       void *buffer,
+>  				       size_t *out_num_read)
+>  {
+> -	return mmc_byte_io(ops, partition_name, offset_from_partition,
+> -			   num_bytes, buffer, out_num_read, IO_READ);
+> +	return avb_blk_byte_io(ops, partition_name, offset_from_partition,
+> +			       num_bytes, buffer, out_num_read, AVB_IO_READ);
+>  }
+>  
+>  /**
+> @@ -630,8 +655,8 @@ static AvbIOResult write_to_partition(AvbOps *ops,
+>  				      size_t num_bytes,
+>  				      const void *buffer)
+>  {
+> -	return mmc_byte_io(ops, partition_name, offset_from_partition,
+> -			   num_bytes, (void *)buffer, NULL, IO_WRITE);
+> +	return avb_blk_byte_io(ops, partition_name, offset_from_partition,
+> +			       num_bytes, (void *)buffer, NULL, AVB_IO_WRITE);
+>  }
+>  
+>  /**
+> @@ -883,7 +908,7 @@ static AvbIOResult get_unique_guid_for_partition(AvbOps *ops,
+>  						 char *guid_buf,
+>  						 size_t guid_buf_size)
+>  {
+> -	struct mmc_part *part;
+> +	struct avb_blk_part *part;
+>  	size_t uuid_size;
+>  
+>  	part = get_partition(ops, partition);
+> @@ -920,7 +945,7 @@ static AvbIOResult get_size_of_partition(AvbOps *ops,
+>  					 const char *partition,
+>  					 u64 *out_size_num_bytes)
+>  {
+> -	struct mmc_part *part;
+> +	struct avb_blk_part *part;
+>  
+>  	if (!out_size_num_bytes)
+>  		return AVB_IO_RESULT_ERROR_INSUFFICIENT_SPACE;
+> @@ -1111,7 +1136,7 @@ __weak AvbIOResult avb_read_root_key_digest(AvbOps *ops, uint8_t *digest)
+>   * AVB2.0 AvbOps alloc/initialisation/free
+>   * ============================================================================
+>   */
+> -AvbOps *avb_ops_alloc(int boot_device)
+> +AvbOps *avb_ops_alloc(enum uclass_id uclass_id, int dev_num)
+>  {
+>  	struct AvbOpsData *ops_data;
+>  
+> @@ -1134,7 +1159,8 @@ AvbOps *avb_ops_alloc(int boot_device)
+>  	ops_data->ops.read_persistent_value = read_persistent_value;
+>  #endif
+>  	ops_data->ops.get_size_of_partition = get_size_of_partition;
+> -	ops_data->mmc_dev = boot_device;
+> +	ops_data->uclass_id = uclass_id;
+> +	ops_data->dev_num = dev_num;
+>  
+>  	return &ops_data->ops;
+>  }
+> diff --git a/doc/android/avb2.rst b/doc/android/avb2.rst
+> index a514701241..cef49d3e0d 100644
+> --- a/doc/android/avb2.rst
+> +++ b/doc/android/avb2.rst
+> @@ -29,6 +29,10 @@ integration in ``common/avb_verify.c`` and the platform port under
+>  
+>  For additional details check [1]_.
+>  
+> +Only mmc is started by AVB itself. Any other interface must already be
+> +enumerated when AVB runs, either by the board code or by a command such as
+> +``usb start``, or the partition lookup fails.
+> +
+>  AVB using OP-TEE (optional)
+>  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  
+> @@ -80,7 +84,8 @@ AVB 2.0 U-Boot shell commands
+>  Provides CLI interface to invoke AVB 2.0 verification + misc. commands for
+>  different testing purposes::
+>  
+> -    avb init <dev> - initialize avb 2 for <dev>
+> +    avb init [<interface>] <dev> - initialize avb 2 for hex <dev> on
+> +        <interface> (mmc, nvme, usb, ...; defaults to mmc)
+>      avb read_rb <num> - read rollback index at location <num>
+>      avb write_rb <num> <rb> - write rollback index <rb> to <num>
+>      avb is_unlocked - returns unlock status of the device
+> diff --git a/include/avb_verify.h b/include/avb_verify.h
+> index 66655aab87..6dbbb39a8a 100644
+> --- a/include/avb_verify.h
+> +++ b/include/avb_verify.h
+> @@ -7,8 +7,9 @@
+>  #define _AVB_VERIFY_H
+>  
+>  #include <../lib/libavb/libavb.h>
+> +#include <blk.h>
+>  #include <mapmem.h>
+> -#include <mmc.h>
+> +#include <part.h>
+>  
+>  #define AVB_MAX_ARGS			1024
+>  #define VERITY_TABLE_OPT_RESTART	"restart_on_corruption"
+> @@ -24,7 +25,8 @@ enum avb_boot_state {
+>  
+>  struct AvbOpsData {
+>  	struct AvbOps ops;
+> -	int mmc_dev;
+> +	enum uclass_id uclass_id;
+> +	int dev_num;
+>  	enum avb_boot_state boot_state;
+>  #ifdef CONFIG_OPTEE_TA_AVB
+>  	struct udevice *tee;
+> @@ -32,19 +34,17 @@ struct AvbOpsData {
+>  #endif
+>  };
+>  
+> -struct mmc_part {
+> -	int dev_num;
+> -	struct mmc *mmc;
+> -	struct blk_desc *mmc_blk;
+> +struct avb_blk_part {
+> +	struct blk_desc *blk;
+>  	struct disk_partition info;
+>  };
+>  
+> -enum mmc_io_type {
+> -	IO_READ,
+> -	IO_WRITE
+> +enum avb_io_type {
+> +	AVB_IO_READ,
+> +	AVB_IO_WRITE
+>  };
+>  
+> -AvbOps *avb_ops_alloc(int boot_device);
+> +AvbOps *avb_ops_alloc(enum uclass_id uclass_id, int dev_num);
+>  void avb_ops_free(AvbOps *ops);
+>  
+>  /**
+> @@ -78,7 +78,7 @@ const char *str_avb_slot_error(AvbSlotVerifyResult res);
+>   * I/O helper inline functions
+>   * ============================================================================
+>   */
+> -static inline uint64_t calc_offset(struct mmc_part *part, int64_t offset)
+> +static inline uint64_t calc_offset(struct avb_blk_part *part, int64_t offset)
+>  {
+>  	u64 part_size = part->info.size * part->info.blksz;
+>  
+> @@ -110,10 +110,24 @@ static inline int get_boot_device(AvbOps *ops)
+>  	if (ops) {
+>  		data = ops->user_data;
+>  		if (data)
+> -			return data->mmc_dev;
+> +			return data->dev_num;
+>  	}
+>  
+>  	return -1;
+>  }
+>  
+> +/* Mirrors get_boot_device(): no ops means no interface, not a default one */
+> +static inline enum uclass_id get_boot_interface(AvbOps *ops)
+> +{
+> +	struct AvbOpsData *data;
+> +
+> +	if (ops) {
+> +		data = ops->user_data;
+> +		if (data)
+> +			return data->uclass_id;
+> +	}
+> +
+> +	return UCLASS_INVALID;
+> +}
+> +
+>  #endif /* _AVB_VERIFY_H */
+> diff --git a/test/py/tests/test_android/test_avb.py b/test/py/tests/test_android/test_avb.py
+> index 137d83e1de..4c5b3c6f59 100644
+> --- a/test/py/tests/test_android/test_avb.py
+> +++ b/test/py/tests/test_android/test_avb.py
+> @@ -135,3 +135,31 @@ def test_avb_persistent_values(ubman):
+>  
+>      response = ubman.run_command('avb read_pvalue test 12')
+>      assert response == 'Read 12 bytes, value = value_value'
+> +
+> +
+> +@pytest.mark.buildconfigspec('cmd_avb')
+> +@pytest.mark.buildconfigspec('cmd_mmc')
+> +def test_avb_init_interface(ubman):
+> +    """Check that 'avb init' accepts an explicit interface
+> +    """
+> +
+> +    response = ubman.run_command('avb init mmc %s' % str(mmc_dev))
+> +    assert response == ''
+> +
+> +    response = ubman.run_command('avb init %s' % str(mmc_dev))
+> +    assert response == ''
+> +
+> +
+> +@pytest.mark.buildconfigspec('cmd_avb')
+> +def test_avb_init_bad_device(ubman):
+> +    """Check that 'avb init' rejects a device that does not exist
+> +    """
+> +
+> +    response = ubman.run_command('avb init mmc ff')
+> +    assert response.find("Can't find the requested device") != -1
+> +
+> +    response = ubman.run_command('avb init ff')
+> +    assert response.find("Can't find the requested device") != -1
+> +
+> +    response = ubman.run_command('avb init nonsense 0')
+> +    assert response.find("Can't find the requested device") != -1
+>
+> base-commit: 6e3f574e576585b0250ac387475d59e581bb5d9f
+> -- 
+> 2.43.0
