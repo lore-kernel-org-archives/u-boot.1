@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A9CBCA5FDD
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 16:47:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAAADCA5FE2
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 16:47:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0CF6D60D7F;
-	Fri,  2 Oct 2026 16:47:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 81BF7404C0;
+	Fri,  2 Oct 2026 16:47:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aJz6j1ic73mD; Fri,  2 Oct 2026 16:47:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 46E4E60D70
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790959653;
-	b=lC/CiA8GIVq8imO0wLyQpZNra5+lfhq5DBpBpRkx2IjFYSs8OTusd9MqoyTqghVU2wit
-	 DaCz5gxMPv8pzs1tKaZgADNVa/oYmL5kP/cv/PYpDOD7zHsTX/fSzIohyTBXI+gtRkBhR
-	 oTMDTf/XLBDxPxY/5HPXl6h7n8YRCGyPB+X6rPnUHszB/X969vD54t2/qcT3XNDmlLo8J
-	 RIY6ub+y12Lr/fjl3lzRnyc8ayNARO+TeDl6y2UtRgScZ0rFS/Q74Ll1KnhJUkmD9t/Ax
-	 qQ8tW6dC7iBQX4R6ZaobDv4rVp1tqUHbA7JDVgYL9K59vG5/AGMX1NuA62genBNT9Bw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QUd1HqVrlmKN; Fri,  2 Oct 2026 16:47:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org CB05140A18
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790959655;
+	b=ESlg7ipMaFZ6+9bmuXhovHq92Ok6DhzNNVdHjMzA6/6gmyed+3osc8qJtkqBkgRCYxl2
+	 xLpndcTlmOiE0Lg4dO6ZCVMuQDrd33s92G+M+OYqAN6HbVkMkqgL77QRjpFXnZQnYSzTf
+	 rYDELZjTv8HURJlK8M5Xdo4LtHdWRuA2lSLO5sL1HmsOoLFguj7AoMWpxCPm1hfs0en5N
+	 OkoyMsLyvbxEH7Q8Xd98+S+jPdtopqhnpotM+ouW84nJfEhRmUXmv6atwjBqX8DgiHiK7
+	 AoCxN6if/lKAJ8KtyyXHK5yNLZA2z06noHLNsjOVGLdATZgcbsDREear6w7XyWi2KrA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790959653;
+	c=relaxed/relaxed; t=1790959655;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,103 +32,104 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=0EPJY7pUcP1pyFcu80nVLOa4o+dlR4ta+WBY+MOWNAU=;
-	b=PgljUNo2G/BhSXcX7keXyO+rzMwhSerX1IXVsDEbs3+pTy95LZ0UVvjPOEzFoItj5fYT
-	 J6Th7hBdUeB1wDIhHTPOPebMhIb1+NV0Ir0gcLsw4bjCECe5r1TJuYHpBBQZ3d/ilUY+y
-	 BOsQ/CN+5LEfzl8dpLZn+WZXEBRwtPThRzP1PxjqQKgPF4shgN7jOVi7iOsB8jC/ck0YA
-	 1fyfm6lhaLW3sBYK7MfAYmJ/Mz4G2m16hzOB0C0IW7xxkIpuYzC7mxVdmQJSsbup+9z+I
-	 yxaAb9Xgu9dZSiCGvXrv1bSClz07pAHegTEkc/lybazA6gNrBe7JgtAgG30tyYVrLGA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=NSOXeob1;
+	bh=UFNXiNq55ZqG5GfmYVAcbN6nrME2ZEndiYfFq5nEZxQ=;
+	b=IQJBt0t2tyIceQBWjLS/Qzrx3qOtiHTn/adjjtAcaje029VL+6Nxl+oveZxHd8UxVBUZ
+	 m/CZPKWkAMvHzdSoDv8dT+i3ov4QhEo6NuIXhKN8Hw9PJ+YerTAKKlFlX2+jsQcUtPaTh
+	 S3rEgYt2bpTGgXd6b0gnRggEvAmeA9jaVm8b9II22e20TCfhSSJqz7qDy5u9Zt96YoTlG
+	 EwPVt4lbj1h8fN9X+gUI84bBa5lJVkirXbtSc6c0ZL5LBtVwKW1y9WoexX2nThBttFhiF
+	 2IQuG2E6x/Brhu/wGuXhY3sv4pP7xFaEJtgVdpuQQZ52Za6E1zJUIqxpg8K2f3LO+Wg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=m3GgS3Db;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790959653;
-	bh=0EPJY7pUcP1pyFcu80nVLOa4o+dlR4ta+WBY+MOWNAU=;
+	d=lists.u-boot-project.org; s=default; t=1790959654;
+	bh=UFNXiNq55ZqG5GfmYVAcbN6nrME2ZEndiYfFq5nEZxQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=OVlBO3ojaqhG4C5lvtTxBToGoaQQAAH6S3SDgRFGIeWrwoNLjJ9JhZ9QD7GiPEdiY
-	 WPgydHaZr7zfkSInBS92IuOhJC4sHv09VnVBazJdimeRNJyeShQUXyepGFd8I8MsqD
-	 /jMZkhGljsvPkb+1snDWcbYjKfIWknr33suXm5fLxhWiqu1SgOrQi40m+I/TvT0/ju
-	 iD81PoYTKgmbv8jgcsUfWwTCiWcsWcNtLrZHY8V6AuShSWIFLxF2RaeevDHdW3eP5y
-	 0uKm7Znm7Edb9+GiNtcogukdS9xzLu+b5W6SG0VjlVHUp11F3CK9erCCZ/+aZwZPYO
-	 GQJnbuIQ8rAwQ==
+	b=zA3637k6NOv0R0FqYiIwVS8hYwgoZpETblO7uu6w83yWpqtodSmEQIzv//A/KCFm2
+	 C2K5v0Xofs3ztQnvbziiuT9w9bQ8XOJRQ4lXb8lt2VY+6U5T8wNzngX9DvSCGGQx2P
+	 VR3EaBVmakIOdz37Rg7Pq37NMxe/bweMU+hSmmoLzaVtIvqQkevMFPCvU8isGSN4qf
+	 0852oLRmjDl5diBD4Eh27ahOXNOUTkAHqbDWzVW2DDgOkLK676A/Ecbq83Q63CZtPU
+	 lvQSG47PEwzufkqDk6zOzZscPdIYv8Uo5X6qFI5HLwqTUKsLraijpC2o78LA7+x4mT
+	 1NWxlmRBd0jnA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 46E4E60D70;
-	Fri,  2 Oct 2026 16:47:33 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id C8FB5282
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CB05140A18;
+	Fri,  2 Oct 2026 16:47:34 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5BCFC282
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id BAA9F60BBC
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:12 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5943C40D93
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aG3OPNTLPXSF for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 13:14:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0E91760BBB
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=185.246.85.4
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790946852;
- b=DAJ8u6ssVvt6fjLOq7gITo9sukexiHjb1uT0+XzDNMD9Zd9Ke4WbXpP+NJQH6/2paimr
- Ro61pBYzNxf0CJ1vW31sqLXNqXGa5S1IA+VEJqhrtls6F0cgSYlpr+0xjnHI1L0xczy0d
- vheo1KAd2zdHRT6Xa33zHzKohw4BdM0pzq3VQ1bkSNVQzeZNdPM4Lm/Zce/Lsk4qVPhVR
- QB9T4JWGE2xrBs2DHSh1O3t6vRO1L3nCU3gPRz0DvqzpYSBIHgb7MdL1xGYMk0//Y6P6/
- VLmi1sQ429EZ8qrRfjRuvGvjpOuC+I1lFjlIs9s/MP+T+UPacO+7YfaICWdnXjAtowg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gbMB5fOqACp3 for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 13:14:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 04EC640866
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790946861;
+ b=A07jpvwtYDzC5NBW/EJzdds02mpxZVtSdTvRorZ/TqNog7q9kVxU/RPtWi36E06dcrsP
+ nGBNMGFMPwZQKI+pUCOG5ciN/1mmj/VEujXj4bYlWtcufp84XtuvXC2spI4l+QIfNlAcE
+ 9QpCJhY6XO82RiUxuYMKOgw/2qdYLt3ckaWpU+ohH4oI+JeemNoiVWr9zWWG4ukeYoVu7
+ TM/dFrJZBDjZORF+LXSBOlvmZHd+3FMOUYfJbFZRId8Op0iSdzYN8u4aOzSwutD/90A0P
+ 8kVKkehpX5/ZiRjUL6a5vgqLRxhHwtHVFpkqqSJFNHnF60uNPgv2cNvchgXwvKA9M5Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790946852;
+ c=relaxed/relaxed; t=1790946861;
  h=Received-SPF:Received:Received:Received:DKIM-Signature:From:Date:
  Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Last-TLS-Session-Version;
- bh=0EPJY7pUcP1pyFcu80nVLOa4o+dlR4ta+WBY+MOWNAU=;
- b=ZHiqnBSgEHE8cLdzEbJT5VGWg9CsWd+mNPXJrFy+07Ad0wu9tSxyaVPwUQXdwj609wFi
- 5LS8IvkAtOGOOn1bzaQI/OXeHCRegum6xylBOoJUS5DFYVbkj0Bb1smSDR+P/7Kypr633
- 4IlcV/f9fsZBRIri3sjwiArKyUVi3m9BSfnliEA4wM8CuXesseyGJbcDZLQoeK6KKQm9c
- HcBM1ZIgMbqWj5/qALSdoRqxhPz25O07tNeKRFCGk5wTDl8LwKm241NAjf2hqeX3S1vhR
- 4OIX7ow+kr4g+mLT0kO1kzbsEJBQbbuO8JcvoKOFDgckyUKEYG7Fl01jjW7q/VH6zgQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ bh=UFNXiNq55ZqG5GfmYVAcbN6nrME2ZEndiYfFq5nEZxQ=;
+ b=RTeGdIiElmY3+EiVPuwCXGDXoGQCyojFpA3oIcMdJrZ9KzS4TredP8pWNNK5LzQdIH7Y
+ sftOH0/rRS5YDb96xN607QSxFSme6JB1jP2VPan6faUKKJTd5AcysY2xw1q7dlZcDsBhk
+ fc4oI8Q6FEa8dFrs49aXjstk4Aatprbolsp8WpJjNsDO9b+SR/6YSXA22Dr4pt1vbpM0f
+ 4Ltozi9csMTQs8x6jfV6bRLpqPjdSr/OGS15Ka8pbmGglTwBERH8J3w8NEbXDIBUhlAiB
+ br0Mk5CtEoXzcHZ8qhvZjXUcQbztx8vu4uUe/pW/+SonIaaqpjcQnZB/xjnJJe/G1iQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=bootlin.com; 
  dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=NSOXeob1; 
- arc=none smtp.remote-ip=185.246.85.4
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
- helo=smtpout-03.galae.net; envelope-from=benoit.monin@bootlin.com;
+ header.s=dkim header.b=m3GgS3Db; 
+ arc=none smtp.remote-ip=185.246.84.56
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
+ helo=smtpout-02.galae.net; envelope-from=benoit.monin@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
- header.a=rsa-sha256 header.s=dkim header.b=NSOXeob1
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0E91760BBB
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:11 +0000 (UTC)
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
+ header.s=dkim header.b=m3GgS3Db
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 04EC640866
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:20 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 0D11B4E41113;
- Fri,  2 Oct 2026 13:14:10 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 96DC01A10E3;
+ Fri,  2 Oct 2026 13:14:18 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id D26C0603DC;
- Fri,  2 Oct 2026 13:14:09 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 68CBE603DC;
+ Fri,  2 Oct 2026 13:14:18 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 7240110328213; 
- Fri,  2 Oct 2026 15:14:00 +0200 (CEST)
+ with ESMTPSA id 6881010328212; 
+ Fri,  2 Oct 2026 15:14:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1790946843; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1790946852; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=0EPJY7pUcP1pyFcu80nVLOa4o+dlR4ta+WBY+MOWNAU=;
- b=NSOXeob1Uytv1ZVFJc7bhi5JIpzqBXawS+Yy9qukILQseAZcW48ZrN2JtnVIIzgHSs00Kn
- NlsdT8abUMqjqjgTUMkJ3muRaVvWR7715KDz5qgqo4IweedsVI5B7XAeVCwBhZKhJO2JQs
- WbOrfkS6KADUy4wCzdTORvhWjqX71eGQ9QaMeOLo1ebE3gWCNej4xuPkcV5eLe/qBeXEcS
- 7l0BK3b60Ye/BFenv16EqISi5/S1kB7lQkh2VPO7SBbbQ2ISIAMHh0dnpqg/iGMXw0GPx2
- aui4n9PwWmbGYiVSXF5iLlSe9hNsjOt64QJrB2yzuYIKvZ5Lx1jZ/8H92HpDbw==
+ bh=UFNXiNq55ZqG5GfmYVAcbN6nrME2ZEndiYfFq5nEZxQ=;
+ b=m3GgS3DbMklfNHqpHGU1sgMAVEEmGvUbwAIQCtxCQaNxuLwHLP6P7KVNN/RtB8asRbEaWE
+ 672lTkws+xHEsp896+cz5UKvkmoKYmJ5A6IwR4oWdnYnwVnR3O3QJxnWDbpo8E0chJiWll
+ pjvDRz3zzOsSNS7GMPMA6FrtTbD1OnMod6YyaI8yJhc4VOJ6XegGELDaNgMHX6xmEYxQZq
+ pzqv5ReVF1p8/+yzrUmGwcZ2jjbd7RKiY9ful3TM0cYSU1bIKCeeAgurRyc2hoQ2aESWnX
+ 4PwN4B6gePzpHtk8kcNc9xcy+dZslfJyAsWJCnCTvQGCc9L5EpJ7h4BGbg+GJQ==
 From: =?utf-8?q?Beno=C3=AEt_Monin?= <benoit.monin@bootlin.com>
-Date: Fri, 02 Oct 2026 15:02:22 +0200
-Subject: [PATCH 04/10] nvmxip: Make NVM XIP devices available in SPL
+Date: Fri, 02 Oct 2026 15:02:23 +0200
+Subject: [PATCH 05/10] riscv: andes: Add Kconfig option for Andes erratum
+ #35102
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20261002-mt2824-v1-4-bc44cf0e0289@bootlin.com>
+Message-Id: <20261002-mt2824-v1-5-bc44cf0e0289@bootlin.com>
 References: <20261002-mt2824-v1-0-bc44cf0e0289@bootlin.com>
 In-Reply-To: <20261002-mt2824-v1-0-bc44cf0e0289@bootlin.com>
 To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
@@ -165,48 +166,49 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add the SPL variant of the NVMXIP option and build the driver when it
-is enabled for the current phase. This allows the SPL to use the block
-devices emulated on top of a directly mapped non-volatile memory (XIP)
-to read data, such as the next stage image or a firmware, from the
-memory-mapped flash.
+From: Jun Chang <jun.chang@metanoia-comm.com>
 
+Add the ANDES_ERRATA_35102 config option to control the workaround for
+Andes CPU erratum #35102. When enabled, non-blocking load is disabled in
+the MMISC_CTL register during harts_early_init() to prevent potential
+data corruption.
+
+Signed-off-by: Jun Chang <jun.chang@metanoia-comm.com>
 Signed-off-by: Benoît Monin <benoit.monin@bootlin.com>
 ---
- common/spl/Kconfig   | 8 ++++++++
- drivers/mtd/Makefile | 1 +
- 2 files changed, 9 insertions(+)
+ arch/riscv/cpu/andes/Kconfig | 3 +++
+ arch/riscv/cpu/andes/cpu.c   | 7 ++++++-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 0618f42c941..1c0628b2350 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1605,6 +1605,14 @@ config SYS_SPI_ARGS_SIZE
- 	hex "Falcon mode: size of args payload in SPI flash"
- 	depends on SPL_SPI_FLASH_SUPPORT && SPL_OS_BOOT_ARGS
- 
-+config SPL_NVMXIP
-+	bool "NVM XIP devices support"
-+	select SPL_BLK
-+	help
-+	  This option allows the emulation of a block storage device
-+	  on top of a direct access non volatile memory XIP flash devices.
-+	  This support provides the read operation.
-+
- config SPL_THERMAL
- 	bool "Driver support for thermal devices"
+diff --git a/arch/riscv/cpu/andes/Kconfig b/arch/riscv/cpu/andes/Kconfig
+index 120fec5e540..a2e68b6ad9c 100644
+--- a/arch/riscv/cpu/andes/Kconfig
++++ b/arch/riscv/cpu/andes/Kconfig
+@@ -15,3 +15,6 @@ config RISCV_ANDES
  	help
-diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
-index ce05e206073..7ccc5da6d19 100644
---- a/drivers/mtd/Makefile
-+++ b/drivers/mtd/Makefile
-@@ -38,5 +38,6 @@ obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += nand/
- obj-$(CONFIG_SPL_ONENAND_SUPPORT) += onenand/
- obj-$(CONFIG_$(PHASE_)SPI_FLASH_SUPPORT) += spi/
- obj-$(CONFIG_SPL_UBI) += ubispl/
-+obj-$(CONFIG_$(PHASE_)NVMXIP) += nvmxip/
+ 	  Run U-Boot on AndeStar V5 platforms and use some specific features
+ 	  which are provided by Andes Technology AndeStar V5 families.
++
++config ANDES_ERRATA_35102
++	bool
+diff --git a/arch/riscv/cpu/andes/cpu.c b/arch/riscv/cpu/andes/cpu.c
+index d25ecba0e88..44704a2359e 100644
+--- a/arch/riscv/cpu/andes/cpu.c
++++ b/arch/riscv/cpu/andes/cpu.c
+@@ -57,7 +57,12 @@ void harts_early_init(void)
+ 			}
+ 		}
  
- endif
+-		mmisc_ctl_val |= MMISC_CTL_NON_BLOCKING_EN;
++		if (IS_ENABLED(CONFIG_ANDES_ERRATA_35102)) {
++			/* Errata #35102: Disable non-blocking load */
++			mmisc_ctl_val &= ~MMISC_CTL_NON_BLOCKING_EN;
++		} else {
++			mmisc_ctl_val |= MMISC_CTL_NON_BLOCKING_EN;
++		}
+ 
+ 		csr_write(CSR_MMISC_CTL, mmisc_ctl_val);
+ 	}
 
 -- 
 2.55.0
