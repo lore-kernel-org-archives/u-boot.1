@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F2C4CA5FDD
-	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 16:47:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F7E4CA5FE2
+	for <u-boot@archiver.kernel.org>; Fri,  2 Oct 2026 16:47:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 12EA481192;
-	Fri,  2 Oct 2026 16:47:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 06A9360BCF;
+	Fri,  2 Oct 2026 16:47:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 71MBZ2vQIrqq; Fri,  2 Oct 2026 16:47:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org A937A8122B
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790959656;
-	b=BXiG3b/xepcncgn1w+9cWGra6XDtREIUX6ajf7uprqLG4UhKcPfWNn0pkl0PWKoDmhks
-	 gSfD+AGW4+BzzJP/PkB2h8fnBwqEpO37nQxWRJpPLDK2jNIZ655PJFEVFB39WNk95jVNF
-	 Gm9Vuo9Rt1hYJxGL5di/pVwQNzwSwUudVGg8rZti007E2yTBslpmeJiu6YoT8k44vQ5Jf
-	 wrsacf7fE6jnIDkuWs7xZfZ4qk12j/VHpPrucSXLj8x6jqhH4l0NsVQNFTPcL1EyP+LhE
-	 hoKmmsfFKzZ46JTSyUcOhYYPRcbG/2ev9rIC5Lo6/ocrF4fXHk5zJO/BaaUawZ+ybhw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rtdtWlpjfyr4; Fri,  2 Oct 2026 16:47:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 4C6AB60D87
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1790959658;
+	b=VIXWw7vdfmJRtagfmUXsY4dnvxgQgE3qfXjn8Z8GP3ezScePT+HNGL6CPZcogqM1mxxo
+	 pgZ+LlfrXLUiLkqGZb9xSUsq3X3m26kWUL4Pq/otprRKe4qoIewCThCqM3uqZTLsPB+79
+	 M5bj7q12C7S9bu6SYC5Jp332vLe4YfAPkYsJvdSuWoTWyP/apF7s5eItRn5yWQuCQPfsC
+	 BrUGro+OnFqV4iXXR7njAUvkqgBeo072LlrNoxItZqQRnYs9NdLv+TMKLtfN/yx194Ebi
+	 MAzHodK2op+9iYB/OmHrsBE0UWI5RjkdzWUEYIDe/jvE6iDaqD4BWcPVEOugn7Ax+kQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790959656;
+	c=relaxed/relaxed; t=1790959658;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,104 +32,101 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=I1CaDmcOjJA0yD8cP/aEyg/0SPrduKDWWlpnG2hO1Nw=;
-	b=a0SK+khNxvFPcL02u4o4I+mmziXq4SOyTYIRS9Wl/OH5p2RYK67Hyyk38QGQofpRMg/P
-	 om8BgHif0ewBoajhpmWTr7KXJzQ8dnk4VRy2XPnar4qkkTNBiYXzYk97qWPD/xlZorhJ1
-	 w1S9rb6tboC0VNnczuex3Yuge/5Fg6eKWT4rDEvqACaOnFFxUyPwH2caEgppQoy+zmbqQ
-	 6LmnEFmfusk0dyT2UBVuQC2VREFyrjGJWybIMhJJCTMzlisVU0evE1q7A0W/KUgpbylBd
-	 q8/qirLiAcwjN7bLmaZehBE6maCczWKDSramv2QCUcFfiv/0WE9wFTiCawryKteyJKA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=CihynBB3;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=5cCRVsQaXGftXjzo909Hqh/K3ir75g+KWW423zhHPsw=;
+	b=TK115zCxaAoRPgoL8TlWO3IM7ShNXucGDAIf21Vwgf8j0HTiuMqwaz+zgnAL6jcjB+H7
+	 iUcNc9f/v7BMk7YvcE9m2VgUlGNhZ2LNkvVGFM6JA9jA612QXEzCxA1eWD0MHF5sGIxfg
+	 pDaUWEL8mPwnFUM7bc1rK/dX2WS7OH23vf9BqL4lBsQ/Lxn7L1bJK1RSMP20ruM5/6P4S
+	 dq47ve0hVTtQJU+1iVc8J037nrAoLgt7Z6EbWPbx0vlGKcvv6pvBxaGOURecODs6K0HGe
+	 YhMbZWogW/xrQnU2HirQe5XQGbhRpOmLfSP6ngx9Ogp5DXTKnS+E+q2MVb2FPIfDyqQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1790959656;
-	bh=I1CaDmcOjJA0yD8cP/aEyg/0SPrduKDWWlpnG2hO1Nw=;
+	d=lists.u-boot-project.org; s=default; t=1790959658;
+	bh=5cCRVsQaXGftXjzo909Hqh/K3ir75g+KWW423zhHPsw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=yirFiiyg2rXrHbfh8wpWo1dL2h1wNOAQMCPsBw6hNrN/zZtjd6QlK+gnb/oZq+ERh
-	 FXFGAYeAj711W+xsjj+LXlfXTsHnrgNWsD1wj3DW+hTPWEcfuFowMxVBUJanxSGbgN
-	 1j9mXsQze2gZVMo+1v0m1zs8VsmxhWlK4XoRzJZ2CVTBRi5LpXq7I4unsU3a6Ww3pb
-	 ot7tbPW9lUsradIQFRfckO8gZ9hB93ODkS23J3OCjDbIcLb6khnq38Yp63z+SJ6POb
-	 yzOysjb3kU5vfqJNDhTAg2t40hroIin14JPx+Z/xdbc/c9lJPbZUUGb4AM7T2lpVDT
-	 RUBSK6XPkneSQ==
+	b=1PPcn8f9oZrtKaa5Dw0IYpzdiU9Q0OdZR9lblNLdsJDOyyg/SSw1+Mjkz8VFS6a1L
+	 kf9JVDpLOv533Ey7teKYf/yM3cvrgJrov201/ig0q4s/IO7WvRCvdCo9wxa8wMhqiR
+	 5WsYud/V+ycMlyKwpVkeSoGkhj0VHIjUG5vcr3E4NoKaxOeOwwb1ZsL2IKMgP1/gzx
+	 vFR+FsEqTXCC9bhi1eYg4Yz6+XWQ4D5+BhlLAZJxNsiAI4xf5YQXgU6AHIL7w3F/TK
+	 UIwb1YhCmFC+XVcH+rbv/pHN7MQkkkazIcPhv8XLmvqt4xw71CGsFRnw2f96pbjjbW
+	 nRybiYnSid1Xw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A937A8122B;
-	Fri,  2 Oct 2026 16:47:36 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4C6AB60D87;
+	Fri,  2 Oct 2026 16:47:38 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id D9F914C2
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:26 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 5023D32F
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id CC347812AB
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:26 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 42372812AB
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PsvoxvTCXkE5 for <u-boot@lists.u-boot-project.org>;
- Fri,  2 Oct 2026 13:14:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 5185C81291
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=185.246.85.4
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790946865;
- b=nqxuntUK/luI+Xmc6DrYaSIngCg63XGRLAQ0UwvlSl4EauOL9ujlMhPIVN8rElF+lloX
- hGmpdH1iFBsUWhq9UQqVhjnczAiDVX2+3Tfnwpw2VRRqdD5OnmoH6pHJ/wssU37Dlescr
- qUW8oHuKlQL01UhXnzfKHBiBTvO9WFjsYiTZ9WHGHCjYemquHxmDW/JIlzEr9bCBAut6I
- 6L+jJg9JBWptrxs5ptuhZh0apgT6awWVS/aiDUkUY6/8A7AJxbUtZ/tR1PLrtkgp8TQhl
- 6MdeVDZ8lYTN7J/Wimfy2iQ6PZHFMUAOqJ3owzw1yYqsFoypdj6eBZhia/n8zjHIRHw==
+ id OC-ndySI6eom for <u-boot@lists.u-boot-project.org>;
+ Fri,  2 Oct 2026 13:14:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org AF2AE81291
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1790946875;
+ b=O7epQjAUudXX2RxRVQzwmUqcy596gC0odUOSU7/NgD1qw8vx9R9VslkQ4n14z5l6E4HY
+ PI5G/7FYR+LiLypARk8ldEL3JuVseXeQWqxd9BrtsiSwJ2n6MBd+kt6j+KIBh7j8BSqDR
+ A+3f1+dJ5SP9lPAlTXS/XcZAsZgIRqEgIlqxjiBilv++Cj3bICvoGxLeEVCP2SZBnYk3g
+ alu8bJ/Zj+OW/13ISKjnwMqIrQdbq1liezRH8euVceAh0D8RqvTo8/iCol5YdBjAXQbyp
+ TroYkX/gQ2Kt4wEVUgBB01Y91VfSTE9YvTw9R7nu5H9jOFqBKkhmNXffRJ+nRCBdDxQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1790946865;
+ c=relaxed/relaxed; t=1790946875;
  h=Received-SPF:Received:Received:Received:DKIM-Signature:From:Date:
  Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Last-TLS-Session-Version;
- bh=I1CaDmcOjJA0yD8cP/aEyg/0SPrduKDWWlpnG2hO1Nw=;
- b=FMytmKQFR268dCMUOdLs9f2rwRGDPEi/6ZSNQFZH1ztCpBZm3UvTDVxTbHAGEB2140BU
- tjCYnaqqZa4pP6sN0pz8cZMNbM4ee2FXIFmZV+1av6TbMwh9nNbtN1SdoyWMMSokq9e14
- 77b0YgdtCxOEqzd3gPxV7DFBwkG8C4Djp96UioIA2pW7uL80rFDCrTHrCqKP2DIiBO8qZ
- p563v5e8XEeTdpLGrmybsrc1fVlMuZBiBHwwa+ido31/71WWpOygoW+lZ/lrKlPCS+GTC
- gIaLOu9mCxC6Hrlrc7uoTdLf+/zw47V521v7fXD6ggTM6llIJhq1UGOVCOUQI5u5UMQ==
+ bh=5cCRVsQaXGftXjzo909Hqh/K3ir75g+KWW423zhHPsw=;
+ b=mkcdAl2ZbwsPT75Oub2ZznknR71/DNb1HXM2ne+d/5j+ZvqdPfm34i0VXBuhyaUcoBEf
+ 5Yg2iUZfDCbcBFUuoa6ruPu+6aKhC4bT9PP31/E/TQVptqg0UMcNW4Knv4QYVz/IFXkKd
+ ON3SDU7gelwNbpfB1UTWWCoJ1FE+RJdwm/gMdBCbKilnnBLbQ1Pc8v9qa0IjWKWyKTcoG
+ 6/Rza5xrFd0AzaovSI/axXIoYNjfi89vSjfqwT4lOzSZYbpjMSpE91DyAk45QozHhxvnq
+ jLgdHwQ9h1TX+cOZfZEHgrzmrq6xOInbE4Eh0xqJicSeFnaDLrK/ZTytaoy2DP1KY0g==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org;
  dmarc=pass header.from=bootlin.com; 
  dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=CihynBB3; 
- arc=none smtp.remote-ip=185.246.85.4
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
- helo=smtpout-03.galae.net; envelope-from=benoit.monin@bootlin.com;
+ header.s=dkim header.b=yPvwAhNv; 
+ arc=none smtp.remote-ip=185.246.84.56
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
+ helo=smtpout-02.galae.net; envelope-from=benoit.monin@bootlin.com;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
- header.a=rsa-sha256 header.s=dkim header.b=CihynBB3
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 5185C81291
- for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:24 +0000 (UTC)
+ header.a=rsa-sha256 header.s=dkim header.b=yPvwAhNv
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id AF2AE81291
+ for <u-boot@lists.u-boot-project.org>; Fri,  2 Oct 2026 13:14:33 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 2ABF04E41114;
- Fri,  2 Oct 2026 13:14:23 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 7DB7C1A10E3;
+ Fri,  2 Oct 2026 13:14:31 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id EF7AA603DC;
- Fri,  2 Oct 2026 13:14:22 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 50889603DC;
+ Fri,  2 Oct 2026 13:14:31 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E301F103281F4; 
- Fri,  2 Oct 2026 15:14:16 +0200 (CEST)
+ with ESMTPSA id 312CE1032820F; 
+ Fri,  2 Oct 2026 15:14:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1790946860; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1790946869; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=I1CaDmcOjJA0yD8cP/aEyg/0SPrduKDWWlpnG2hO1Nw=;
- b=CihynBB3lPZqnPd45KnHLKYhPYFRjheiwFXYawhqCdOMWEIPml7O5ld6xomZC1pgNKaRGX
- EUHZMR/IXp+GhBKCI2WkBGqY2UME/pAYvEFwenq7dsOSOJW6FCKKq6iwYgv6slJTxt2RtV
- M0moLJFljZVTAC2cA3RQoVzevczye8lPIwu6DAJ9I7KrPWIAQvDbFOQ5yBZitu67gSQ0CH
- zzsPgoqpbZA5BC55X9Kq21toFzDhS6tIkHVBVq1IrBYfj55dYEJz6MMjQKJ6YnVIwlvQ62
- krJD2RFqz3TJcFEHlzijWvAe0lvM7OFtcndV+jDT5gIWbK1q1NbD/y2uI2cH0A==
+ bh=5cCRVsQaXGftXjzo909Hqh/K3ir75g+KWW423zhHPsw=;
+ b=yPvwAhNvHAUGl5LGzZtP0JBgZ+Q74acbR+g/u0BXCM3u416SqJG7VCZU/pdIxZ7McbvDG0
+ RKBy8RGsPggUcU4Uilu1ZBLp7cx1D+WGy9fcgbPfNN3B3a9EHghRm1UqS6Ur3fMZ4tCdqe
+ Y/hAqK/Z2Q2wY41J1yud1LFYsQTazwzS1sv6WozRx6ZNAQaHHnvFRJjw5HTrmjV/L6ZzsH
+ ZA1plogeYoLVQ2OoaYLdow7+4w1+ajIqPKMp9nUVdhs44e17F9BI4M14wFtKRgvab+H4G5
+ rtdSiF0OMDcM6BuuNxGvp5/SBpwsWJQJ5z2xDSZ0ntLgROR4UKvGZtN5TURDUA==
 From: =?utf-8?q?Beno=C3=AEt_Monin?= <benoit.monin@bootlin.com>
-Date: Fri, 02 Oct 2026 15:02:24 +0200
-Subject: [PATCH 06/10] mmc: metanoia_sdhci: Add SDHCI driver for Metanoia
- MT2824 SoC
+Date: Fri, 02 Oct 2026 15:02:25 +0200
+Subject: [PATCH 07/10] ram: metanoia: Add driver for MT2824 DDR controller
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20261002-mt2824-v1-6-bc44cf0e0289@bootlin.com>
+Message-Id: <20261002-mt2824-v1-7-bc44cf0e0289@bootlin.com>
 References: <20261002-mt2824-v1-0-bc44cf0e0289@bootlin.com>
 In-Reply-To: <20261002-mt2824-v1-0-bc44cf0e0289@bootlin.com>
 To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
@@ -166,569 +163,766 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add an SDHCI driver for the DesignWare Mobile Storage Host Controller
-(DWC MSHC) integrated in the Metanoia MT2824 SoC. It supports eMMC up to
-HS400/HS400ES and SD cards, and implements the MMC driver model.
+Add a DDR controller driver for the Metanoia MT2824 SoC, supporting
+initialization and training of the DDR subsystem in SPL, and implementing
+the driver-model for the RAM uclass.
 
-The controller is a DWC MSHC instance, but its PHY programming,
-voltage/speed-mode handling and tuning model are silicon-specific
-and differ from the existing DWC MSHC drivers.
+The driver relies on a firmware to configure the DDR controller, and
+expects the firmware to be found via a device tree reg entry named "fw".
 
-The PHY pad drive strength, receiver select and weak-pull settings
-depend on the card type (eMMC vs SD) and are re-applied on every ios,
-whereas snps_sdhci.c uses fixed pad values.
-
-High-speed modes force 1.8V signalling and HS400 uses an explicit PHY
-DLL lock sequence (set_control_reg()/set_ios_post()), which snps_sdhci.c
-does not implement.
-
-Tuning relies on the generic SDHCI core tuner, whereas snps_sdhci.c uses
-the hardware auto-tuning block.
-
-Keeping a dedicated driver avoids per-variant branches in the shared
-DWC MSHC drivers, matching how snps_sdhci.c, adi_sdhci.c and
-cv1800b_sdhci.c are already split in U-Boot.
+The driver expects the DDR firmware to be packaged inside a FIT image,
+as the firmware node of the default configuration, and it supports signed
+FIT image.
 
 Signed-off-by: Benoît Monin <benoit.monin@bootlin.com>
 ---
- drivers/mmc/Kconfig          |  11 +
- drivers/mmc/Makefile         |   1 +
- drivers/mmc/metanoia_sdhci.c | 494 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 506 insertions(+)
+ drivers/ram/Kconfig      |   7 +
+ drivers/ram/Makefile     |   2 +
+ drivers/ram/mt2824-ddr.c | 706 +++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 715 insertions(+)
 
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index f9f7aa5cf97..b4ac68c04c3 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -654,6 +654,17 @@ config MMC_SDHCI_F_SDH30
- 	  If you have a controller with this interface, say Y here.
- 	  If unsure, say N.
+diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
+index acd6d9cfd6a..feb1754e40e 100644
+--- a/drivers/ram/Kconfig
++++ b/drivers/ram/Kconfig
+@@ -139,6 +139,13 @@ config K3_MULTI_DDR
+ 	  responsible for interleaving between the controllers.
+ 	default y if SOC_K3_J721S2 || SOC_K3_J784S4
  
-+config MMC_SDHCI_METANOIA
-+	bool "SDHCI support for Metanoia MT2824 SoC"
-+	depends on MMC_SDHCI
-+	depends on OF_CONTROL
++config SPL_METANOIA_MT2824_DDR
++	bool "Metanoia MT2824 DDR driver in SPL"
++	depends on SPL_RAM
 +	help
-+	  Support for SDHCI host controller on Metanoia MT2824 SoC platform.
++	   Enable support for the internal DDR Memory Controller
++	   of the Metanoia MT2824 SoC in the SPL.
 +
-+	  If you have a controller with this interface, say Y here.
+ source "drivers/ram/aspeed/Kconfig"
+ source "drivers/ram/cadence/Kconfig"
+ source "drivers/ram/octeon/Kconfig"
+diff --git a/drivers/ram/Makefile b/drivers/ram/Makefile
+index 82afd5fcbcc..6e1b86127ce 100644
+--- a/drivers/ram/Makefile
++++ b/drivers/ram/Makefile
+@@ -19,6 +19,8 @@ obj-$(CONFIG_K3_DDRSS) += k3-ddrss/
+ 
+ obj-$(CONFIG_IMXRT_SDRAM) += imxrt_sdram.o
+ 
++obj-$(CONFIG_SPL_METANOIA_MT2824_DDR) += mt2824-ddr.o
 +
-+	  If unsure, say N.
-+
- config MMC_SDHCI_MSM
- 	bool "Qualcomm SDHCI controller"
- 	depends on MMC_SDHCI && ARCH_SNAPDRAGON
-diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
-index a23336d7d8d..f9e60370dd2 100644
---- a/drivers/mmc/Makefile
-+++ b/drivers/mmc/Makefile
-@@ -63,6 +63,7 @@ obj-$(CONFIG_MMC_SDHCI_CADENCE)		+= sdhci-cadence6.o
- obj-$(CONFIG_MMC_SDHCI_CV1800B)		+= cv1800b_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_AM654)		+= am654_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_IPROC)		+= iproc_sdhci.o
-+obj-$(CONFIG_MMC_SDHCI_METANOIA)	+= metanoia_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_MSM)		+= msm_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_MV)		+= mv_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_NPCM)            += npcm_sdhci.o
-diff --git a/drivers/mmc/metanoia_sdhci.c b/drivers/mmc/metanoia_sdhci.c
+ obj-$(CONFIG_RAM_SIFIVE) += sifive/
+ ifdef CONFIG_XPL_BUILD
+ obj-$(CONFIG_SPL_STARFIVE_DDR) += starfive/
+diff --git a/drivers/ram/mt2824-ddr.c b/drivers/ram/mt2824-ddr.c
 new file mode 100644
-index 00000000000..e109eebd0db
+index 00000000000..c01c30089ca
 --- /dev/null
-+++ b/drivers/mmc/metanoia_sdhci.c
-@@ -0,0 +1,494 @@
++++ b/drivers/ram/mt2824-ddr.c
+@@ -0,0 +1,706 @@
 +// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 Metanoia Communications Inc.,
-+ * Jun Chang, Metanoia Communications Inc. <jun.chang@metanoia-comm.com>
-+ * Wilson Kang, Metanoia Communications Inc. <wilson.kang@metanoia-comm.com>
-+ */
 +
-+#include <config.h>
-+#include <clk.h>
 +#include <dm.h>
-+#include <linux/delay.h>
++#include <image.h>
++#include <ram.h>
++#include <reset.h>
++#include <dm/device_compat.h>
 +#include <linux/bitfield.h>
++#include <linux/delay.h>
++#include <linux/io.h>
 +#include <linux/iopoll.h>
-+#include <linux/sizes.h>
-+#include <sdhci.h>
++#include <linux/ioport.h>
++#include <u-boot/crc.h>
 +
-+#define DWCMSHC_CTRL_HS400 0x7
-+#define EMMC_MIN_FREQ 400000
++DECLARE_GLOBAL_DATA_PTR;
 +
-+/* PHY register area pointer */
-+#define DWC_MSHC_PHY_REGS 0x300
++/* controller registers */
++#define CTRL_STAT				0x00000004
++#define CTRL_PWRCTL				0x00000030
++#define CTRL_RFSHCTL3				0x00000060
++#define CTRL_INIT7				0x000000ec
++#define CTRL_DFITMG0				0x00000190
++#define CTRL_DFITMG1				0x00000194
++#define CTRL_DFIMISC				0x000001b0
++#define CTRL_DFISTAT				0x000001bc
++#define CTRL_SWCTL				0x00000320
++#define CTRL_SWSTAT				0x00000324
 +
-+#define DWC_MSHC_PHY_CNFG_REG (DWC_MSHC_PHY_REGS + 0x00)
-+#define PHY_CNFG_RSTN_DEASSERT 0x1 /* Deassert PHY reset */
-+#define PHY_PAD_SN_MASK GENMASK(23, 20)
-+#define PHY_PAD_SN_SD 0x8
-+#define PHY_PAD_SN_EMMC 0x8
-+#define PHY_PAD_SP_MASK GENMASK(19, 16)
-+#define PHY_PAD_SP_SD 0x9
-+#define PHY_PAD_SP_EMMC 0x8
-+#define PHY_PWRGOOD BIT(1)
-+#define PHY_RSTN BIT(0)
++#define CTRL_STAT_MODE				GENMASK(2, 0)
++#define CTRL_STAT_NORMAL			1
 +
-+#define PHY_CMDPAD_CNFG_REG (DWC_MSHC_PHY_REGS + 0x04)
-+#define PHY_DATPAD_CNFG_REG (DWC_MSHC_PHY_REGS + 0x06)
-+#define PHY_CLKPAD_CNFG_REG (DWC_MSHC_PHY_REGS + 0x08)
-+#define PHY_STBPAD_CNFG_REG (DWC_MSHC_PHY_REGS + 0x0a)
-+#define PHY_RSTNPAD_CNFG_REG (DWC_MSHC_PHY_REGS + 0x0c)
-+#define PHY_SMPLDL_CNFG_REG (DWC_MSHC_PHY_REGS + 0x20)
-+#define PHY_ATDL_CNFG_REG (DWC_MSHC_PHY_REGS + 0x21)
-+#define PHY_DLL_CTRL_REG (DWC_MSHC_PHY_REGS + 0x24)
-+#define PHY_DLL_CNFG1_REG (DWC_MSHC_PHY_REGS + 0x25)
-+#define PHY_DLLDL_CNFG_REG (DWC_MSHC_PHY_REGS + 0x28)
-+#define PHY_DLL_STATUS_REG (DWC_MSHC_PHY_REGS + 0x2e)
++#define CTRL_PWRCTL_SELFREF			BIT(5)
++#define CTRL_PWRCTL_CLKDIS			BIT(3)
++#define CTRL_PWRCTL_PWRDN			BIT(1)
 +
-+#define PHY_RXSEL_MASK GENMASK(2, 0)
-+#define PHY_RXSEL_180V 0x01
-+#define PHY_RXSEL_330V 0x02
++#define CTRL_RFSHCTL3_DIS_AUTO			BIT(0)
 +
-+#define PHY_TXSLEW_CTRL_N_MASK GENMASK(12, 9)
-+#define PHY_TXSLEW_CTRL_N_EMMC 0x2
-+#define PHY_TXSLEW_CTRL_N_SD 0x1
-+#define PHY_TXSLEW_CTRL_P_MASK GENMASK(8, 5)
-+#define PHY_TXSLEW_CTRL_P_EMMC 0x2
-+#define PHY_TXSLEW_CTRL_P_SD 0x1
-+#define PHY_TXSLEW_CTRL_P_DS 0x3
++#define CTRL_INIT7_MR22				GENMASK(31, 16)
++#define CTRL_INIT7_MR14				GENMASK(15, 0)
 +
-+#define PHY_WEAKPULL_EN_PULLUP 0x08
-+#define PHY_WEAKPULL_EN_PULLDOWN 0x10
++#define CTRL_DFITMG0_CTRL_DELAY			GENMASK(28, 24)
++#define CTRL_DFITMG0_RDDATA_USE_DFI_PHY_CLK	BIT(23)
++#define CTRL_DFITMG0_RDDATA_EN			GENMASK(22, 16)
++#define CTRL_DFITMG0_WRDATA_USE_DFI_PHY_CLK	BIT(15)
++#define CTRL_DFITMG0_TPHY_WRDATA		GENMASK(13, 8)
++#define CTRL_DFITMG0_TPHY_WRLAT			GENMASK(5, 0)
 +
-+/* Vendor specific Registers */
-+#define VENDOR_SPECIFIC_AREA_BASE 0x500
++#define CTRL_DFITMG1_WRDATA_DELAY		GENMASK(20, 16)
++#define CTRL_DFITMG1_CLK_DIS			GENMASK(12, 8)
++#define CTRL_DFITMG1_CLK_EN			GENMASK(4, 0)
 +
-+#define DWCMSHC_HOST_CTRL3_REG (VENDOR_SPECIFIC_AREA_BASE + 0x08)
-+#define DWCMSHC_CMD_CONFLICT_CHECK BIT(0)
-+#define DWCMSHC_NEGEDGE_DATAOUT_EN BIT(1)
-+#define NEDGE_SMPL_EN BIT(7)
++#define CTRL_DFIMISC_START			BIT(5)
++#define CTRL_DFIMISC_COMPLETE			BIT(0)
 +
-+#define DWCMSHC_EMMC_CTRL_REG (VENDOR_SPECIFIC_AREA_BASE + 0x2c)
-+#define ENH_STROBE_ENABLE BIT(8)
-+#define CARD_IS_EMMC BIT(0)
++#define CTRL_DFISTAT_COMPLETE			BIT(0)
 +
-+#define DWCMSHC_AT_CTRL_REG (VENDOR_SPECIFIC_AREA_BASE + 0x40)
-+#define TUNE_CLK_STOP_EN BIT(16)
++#define CTRL_SWCTL_DONE				BIT(0)
++#define CTRL_SWSTAT_DONE			BIT(0)
 +
-+static inline int metanoia_boundary_ok(dma_addr_t addr, int len)
-+{
-+	return ((addr | (SZ_128M - 1)) == ((addr + len - 1) | (SZ_128M - 1)));
-+}
++/* PHY registers */
++#define PHY_DQS_DELAY_GRP0			0x000201a0
++#define PHY_RDPTR_INITVAL			0x0004005c
++#define PHY_ICCM_BASE				0x000a0000
++#define PHY_DCCM_BASE				0x000a8000
++#define PHY_DCCM_V26				0x000a804c
++#define PHY_DCCM_V27				0x000a804e
++#define PHY_DCCM_V40				0x000a8080
++#define PHY_PMU_MUX_SEL				0x001a0000
++#define PHY_UCTSHADOWREGS			0x001a0008
++#define PHY_DCTWRITEPROT			0x001a0062
++#define PHY_UCTWRITEONLYSHADOW			0x001a0064
++#define PHY_UCTDATWRITEONLYSHADOW		0x001a0068
++#define PHY_UC_CTRL				0x001a0132
 +
-+struct metanoia_sdhc_plat {
-+	struct mmc_config cfg;
-+	struct mmc mmc;
++#define PHY_DQS_DELAY_COARSE			GENMASK(9, 6)
++#define PHY_DQS_DELAY_FINE			GENMASK(4, 0)
++
++#define PHY_ICCM_SIZE				0x00008000
++#define PHY_DCCM_SIZE				0x00002000
++
++#define PHY_PMU_MUX_SEL_UC			BIT(0)
++
++#define PHY_UC_CTRL_RESET			BIT(3)
++#define PHY_UC_CTRL_STALL			BIT(0)
++
++/* DDR parameters */
++#define PARAM_BL				16
++#define PARAM_CLK_DIS				2
++#define PARAM_CLK_EN				2
++#define PARAM_MISC				0
++#define PARAM_MR22				5
++#define PARAM_RD				0
++#define PARAM_RL				28
++#define PARAM_TDQSS				1
++#define PARAM_WL				14
++#define PARAM_WR				0
++#define PARAM_WRDATA				2
++
++#define TRAINING_STAGES				2
++
++#define POLL_TIMEOUT				1000000
++
++#define MSG_TRAINING_DONE			0x07
++#define MSG_TRAINING_FAIL			0xff
++
++#define FW_MAGIC				0x44445246 /* "DDRF" */
++#define FW_VERSION				0x01000000
++
++/* Base address used in the firmware for the controller */
++#define CTRL_FW_BASE				0x10060000
++
++enum {
++	FW_COMP_CTRL_CFG = 0,
++	FW_COMP_PHY_CFG,
++	FW_COMP_PMU_1D_IMEM,
++	FW_COMP_PMU_1D_DMEM,
++	FW_COMP_PMU_2D_IMEM,
++	FW_COMP_PMU_2D_DMEM,
++	FW_COMP_PIE_IMAGE,
++	FW_COMP_MAX
 +};
 +
-+struct metanoia_sdhc {
-+	struct sdhci_host host;
++struct fw_comp {
++	u32 offset;
++	u32 size;
++	u32 crc32;
++	u32 reserved;
 +};
 +
-+static void metanoia_sdhci_sw_reset(struct sdhci_host *host, u8 mask)
++struct fw_header {
++	u32 magic;
++	u32 version;
++	u32 header_size;
++	u32 total_size;
++	u32 flags;
++	u32 timestamp;
++	u32 reserved1;
++	u32 reserved2;
++	struct fw_comp comps[FW_COMP_MAX];
++	u32 header_crc32;
++	u32 reserved[27]; /* Padding to 256 bytes */
++};
++
++struct fw_reg {
++	u32 addr;
++	u32 value;
++};
++
++struct mt2824_ddr_priv {
++	void __iomem *ctrl;
++	resource_size_t ctrl_size;
++	void __iomem *phy;
++	resource_size_t phy_size;
++	void *fw;
++	resource_size_t fw_size;
++	struct reset_ctl rst;
++	const void *fw_img;
++};
++
++static int get_fw_img_from_fit(const void *fit, size_t fit_size,
++			       const void **fw_img, size_t *fw_size)
 +{
-+	u8 val;
-+	int retries = 100;
++	int conf_noffset;
++	const char *img_name;
++	int img_noffset;
 +
-+	sdhci_writeb(host, mask, SDHCI_SOFTWARE_RESET);
-+	do {
-+		udelay(1000);
-+		val = sdhci_readb(host, SDHCI_SOFTWARE_RESET);
-+		if (!(val & mask))
-+			break;
-+	} while (--retries > 0);
++	if (fit_check_format(fit, fit_size))
++		return -EINVAL;
 +
-+	if (retries <= 0)
-+		pr_warn("%s: Reset 0x%x never completed.\n", __func__,
-+			(int)mask);
++	conf_noffset = fit_conf_get_node(fit, NULL);
++	if (conf_noffset < 0)
++		return -EINVAL;
++
++	printf("## Checking hash(es) for config %s ... ",
++	       fit_get_name(fit, conf_noffset, NULL));
++	if (fit_config_verify(fit, conf_noffset))
++		return -EPERM;
++	puts("OK\n");
++
++	img_name = fdt_getprop(fit, conf_noffset, FIT_FIRMWARE_PROP, NULL);
++	if (!img_name)
++		return -EINVAL;
++
++	img_noffset = fit_image_get_node(fit, img_name);
++	if (img_noffset < 0)
++		return -EINVAL;
++
++	if (fit_image_get_emb_data(fit, img_noffset, fw_img, fw_size))
++		return -EINVAL;
++
++	printf("## Checking hash(es) for image %s ... ", img_name);
++	if (!fit_image_verify_with_data(fit, img_noffset, gd_fdt_blob(), *fw_img, *fw_size))
++		return -EPERM;
++	puts("OK\n");
++
++	return 0;
 +}
 +
-+static bool metanoia_sdhci_is_emmc(struct mmc *mmc)
++static int check_firmware(struct udevice *dev)
 +{
-+	u32 bus_width;
++	struct mt2824_ddr_priv *priv = dev_get_priv(dev);
++	const struct fw_header *header;
++	u32 calculated_crc;
++	int ret = 0;
++	size_t fw_size;
 +
-+	if (IS_MMC(mmc))
-+		return true;
-+	if (IS_SD(mmc))
-+		return false;
-+
-+	/*
-+	 * Card type may be unknown early (before op-cond completes). Fall back
-+	 * to board description (e.g. non-removable in DT -> eMMC).
-+	 */
-+	if (mmc->dev) {
-+		bus_width = dev_read_u32_default(mmc->dev, "bus-width", 0);
-+		if (bus_width == 8)
-+			return true;
-+		if (dev_read_bool(mmc->dev, "non-removable"))
-+			return true;
-+	}
-+
-+	return false;
-+}
-+
-+void metanoia_sdhci_adma_write_desc(struct sdhci_host *host, void **desc,
-+				    dma_addr_t addr, int len, bool end)
-+{
-+	int tmplen, offset;
-+
-+	if (likely(!len || metanoia_boundary_ok(addr, len))) {
-+		sdhci_adma_write_desc(host, desc, addr, len, end);
-+		return;
-+	}
-+
-+	offset = addr & (SZ_128M - 1);
-+	tmplen = SZ_128M - offset;
-+	sdhci_adma_write_desc(host, desc, addr, tmplen, false);
-+
-+	addr += tmplen;
-+	len -= tmplen;
-+	sdhci_adma_write_desc(host, desc, addr, len, end);
-+}
-+
-+static int metanoia_sdhci_of_to_plat(struct udevice *dev)
-+{
-+	struct metanoia_sdhc_plat *plat = dev_get_plat(dev);
-+	struct sdhci_host *host = dev_get_priv(dev);
-+	struct mmc_config *cfg = &plat->cfg;
-+	int ret;
-+
-+	host->name = dev->name;
-+	host->ioaddr = dev_read_addr_ptr(dev);
-+	ret = mmc_of_parse(dev, cfg);
++	ret = get_fw_img_from_fit(priv->fw, priv->fw_size, &priv->fw_img, &fw_size);
 +	if (ret)
 +		return ret;
 +
-+	return 0;
-+}
++	header = priv->fw_img;
 +
-+static int metanoia_sdhci_bind(struct udevice *dev)
-+{
-+	struct metanoia_sdhc_plat *plat = dev_get_plat(dev);
-+
-+	return sdhci_bind(dev, &plat->mmc, &plat->cfg);
-+}
-+
-+static void metanoia_emmc_phy_pad_cfg(struct sdhci_host *host, bool is_emmc)
-+{
-+	u16 val;
-+	u16 txslew_n = 0;
-+	u16 txslew_p = 0;
-+	u16 rx_sel = PHY_RXSEL_330V;
-+
-+	if (host->mmc->signal_voltage == MMC_SIGNAL_VOLTAGE_180)
-+		rx_sel = PHY_RXSEL_180V;
-+
-+	if (is_emmc) {
-+		txslew_n = PHY_TXSLEW_CTRL_N_EMMC;
-+		txslew_p = PHY_TXSLEW_CTRL_P_EMMC;
-+	} else {
-+		txslew_n = PHY_TXSLEW_CTRL_N_SD;
-+		txslew_p = PHY_TXSLEW_CTRL_P_SD;
++	if (header->magic != FW_MAGIC) {
++		dev_err(dev, "Invalid firmware magic: 0x%08x (expected 0x%08x)\n",
++			header->magic, FW_MAGIC);
++		return -EINVAL;
 +	}
 +
-+	val = PHY_WEAKPULL_EN_PULLUP;
-+	val |= FIELD_PREP(PHY_TXSLEW_CTRL_N_MASK, txslew_n);
-+	val |= FIELD_PREP(PHY_TXSLEW_CTRL_P_MASK, txslew_p);
-+	val |= FIELD_PREP(PHY_RXSEL_MASK, rx_sel);
-+
-+	sdhci_writew(host, val, PHY_CMDPAD_CNFG_REG);
-+	sdhci_writew(host, val, PHY_DATPAD_CNFG_REG);
-+	sdhci_writew(host, val, PHY_RSTNPAD_CNFG_REG);
-+
-+	val = FIELD_PREP(PHY_TXSLEW_CTRL_N_MASK, txslew_n);
-+	val |= FIELD_PREP(PHY_TXSLEW_CTRL_P_MASK, txslew_p);
-+	sdhci_writew(host, val, PHY_CLKPAD_CNFG_REG);
-+
-+	if (CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)) {
-+		val = PHY_WEAKPULL_EN_PULLDOWN;
-+		val |= FIELD_PREP(PHY_TXSLEW_CTRL_N_MASK, PHY_TXSLEW_CTRL_N_SD);
-+		val |= FIELD_PREP(PHY_TXSLEW_CTRL_P_MASK, PHY_TXSLEW_CTRL_P_DS);
-+		val |= FIELD_PREP(PHY_RXSEL_MASK, PHY_RXSEL_180V);
-+		sdhci_writew(host, val, PHY_STBPAD_CNFG_REG);
-+	}
-+}
-+
-+static void metanoia_emmc_phy_dl_cfg(struct sdhci_host *host)
-+{
-+	sdhci_writeb(host, 0x0C, PHY_SMPLDL_CNFG_REG);
-+	sdhci_writeb(host, 0x0C, PHY_ATDL_CNFG_REG);
-+}
-+
-+static void metanoia_sdhci_apply_phy_type(struct sdhci_host *host, bool is_emmc)
-+{
-+	u32 val;
-+
-+	u32 phy_pad_sn = is_emmc ? PHY_PAD_SN_EMMC : PHY_PAD_SN_SD;
-+	u32 phy_pad_sp = is_emmc ? PHY_PAD_SP_EMMC : PHY_PAD_SP_SD;
-+
-+	val = sdhci_readl(host, DWC_MSHC_PHY_CNFG_REG);
-+	val &= ~(PHY_PAD_SN_MASK | PHY_PAD_SP_MASK);
-+	val |= FIELD_PREP(PHY_PAD_SN_MASK, phy_pad_sn);
-+	val |= FIELD_PREP(PHY_PAD_SP_MASK, phy_pad_sp);
-+	sdhci_writel(host, val, DWC_MSHC_PHY_CNFG_REG);
-+
-+	metanoia_emmc_phy_pad_cfg(host, is_emmc);
-+}
-+
-+static void metanoia_sdhci_apply_hs400_phy(struct sdhci_host *host)
-+{
-+	u16 clk;
-+	u8 val;
-+	int retries = 10;
-+
-+	/* configure DLL as user guide suggest */
-+	clk = sdhci_readw(host, SDHCI_CLOCK_CONTROL);
-+	clk &= ~SDHCI_CLOCK_CARD_EN;
-+	sdhci_writew(host, clk, SDHCI_CLOCK_CONTROL);
-+
-+	sdhci_writeb(host, 0x20, PHY_DLL_CNFG1_REG);
-+	sdhci_writeb(host, 0x60, PHY_DLLDL_CNFG_REG);
-+
-+	clk = sdhci_readw(host, SDHCI_CLOCK_CONTROL);
-+	clk |= SDHCI_CLOCK_CARD_EN;
-+	sdhci_writew(host, clk, SDHCI_CLOCK_CONTROL);
-+	udelay(10);
-+
-+	sdhci_writeb(host, 0x1, PHY_DLL_CTRL_REG);
-+
-+	do {
-+		udelay(1);
-+		val = sdhci_readb(host, PHY_DLL_STATUS_REG);
-+		if ((val & 0x1) == 0x1)
-+			break;
-+	} while (--retries);
-+
-+	if (!retries)
-+		pr_err("eMMC dll has not locked\n");
-+
-+	val = sdhci_readb(host, PHY_DLL_STATUS_REG);
-+	if (val & 0x2)
-+		pr_err("eMMC dll has locked and has errors\n");
-+
-+	metanoia_sdhci_sw_reset(host, 0x3 << 1);
-+}
-+
-+static int metanoia_sdhci_phy_init(struct sdhci_host *host)
-+{
-+	u32 val;
-+	int ret;
-+
-+	/* Wait powergood before deassert phy reset */
-+	ret = readl_poll_timeout(host->ioaddr + DWC_MSHC_PHY_CNFG_REG, val,
-+				 val & PHY_PWRGOOD, 20000);
-+	if (ret) {
-+		pr_warn("%s: Internal clock never stabilised.\n", __func__);
-+		return ret;
++	if (header->version != FW_VERSION) {
++		dev_err(dev, "Invalid firmware version %u\n", header->version);
++		return -EINVAL;
 +	}
 +
-+	val = sdhci_readl(host, DWC_MSHC_PHY_CNFG_REG);
-+	if (!(val & PHY_RSTN)) {
-+		val |= PHY_RSTN;
-+		sdhci_writel(host, val, DWC_MSHC_PHY_CNFG_REG);
++	if (header->header_size != sizeof(struct fw_header)) {
++		dev_err(dev, "Invalid firmware header size %u\n", header->header_size);
++		return -EINVAL;
 +	}
 +
-+	/* Set TUNE_CLK_STOP_EN to prevent glitching */
-+	val = sdhci_readl(host, DWCMSHC_AT_CTRL_REG);
-+	val |= TUNE_CLK_STOP_EN;
-+	sdhci_writel(host, val, DWCMSHC_AT_CTRL_REG);
++	if (header->total_size > fw_size) {
++		dev_err(dev, "firmware too big\n");
++		return -EINVAL;
++	}
 +
-+	return 0;
++	calculated_crc = crc32(0, priv->fw_img, offsetof(struct fw_header, header_crc32));
++	if (calculated_crc != header->header_crc32) {
++		dev_err(dev, "Header CRC mismatch: calculated=0x%08x, expected=0x%08x\n",
++			calculated_crc, header->header_crc32);
++		return -EINVAL;
++	}
++
++	for (int i = 0; i < FW_COMP_MAX; i++) {
++		u32 offset = header->comps[i].offset;
++		u32 size = header->comps[i].size;
++		u32 expected_crc = header->comps[i].crc32;
++
++		if (size == 0) {
++			dev_err(dev, "Component #%d is empty\n", i);
++			ret = -EINVAL;
++			continue;
++		}
++
++		if ((resource_size_t)offset + size > fw_size) {
++			dev_err(dev, "Component #%d out of range\n", i);
++			ret = -EINVAL;
++			continue;
++		}
++
++		calculated_crc = crc32(0, priv->fw_img + offset, size);
++		if (calculated_crc != expected_crc) {
++			dev_err(dev, "Component #%d CRC verification failed\n", i);
++			ret = -EINVAL;
++		}
++	}
++
++	return ret;
 +}
 +
-+static int metanoia_sdhci_apply_phy(struct sdhci_host *host)
++static int ddr_ctrl_load_config(struct mt2824_ddr_priv *priv)
 +{
-+	struct mmc *mmc = host->mmc;
-+	bool is_emmc = metanoia_sdhci_is_emmc(mmc);
-+	bool is_hs400 = is_emmc && (mmc->selected_mode == MMC_HS_400 ||
-+				    mmc->selected_mode == MMC_HS_400_ES);
-+	u32 emmc_ctrl;
-+	int ret;
++	const struct fw_header *header = priv->fw_img;
++	const struct fw_reg *reg;
++	unsigned int nb_regs;
++	u32 addr;
 +
-+	metanoia_emmc_phy_dl_cfg(host);
-+	metanoia_sdhci_apply_phy_type(host, is_emmc);
++	/* address + value per register */
++	nb_regs = header->comps[FW_COMP_CTRL_CFG].size / sizeof(struct fw_reg);
++	reg = priv->fw_img + header->comps[FW_COMP_CTRL_CFG].offset;
 +
-+	emmc_ctrl = sdhci_readl(host, DWCMSHC_EMMC_CTRL_REG);
-+	if (is_emmc)
-+		emmc_ctrl |= CARD_IS_EMMC;
-+	else
-+		emmc_ctrl &= ~CARD_IS_EMMC;
-+	sdhci_writel(host, emmc_ctrl, DWCMSHC_EMMC_CTRL_REG);
++	/* Apply each register configuration */
++	for (unsigned int i = 0; i < nb_regs; i++, reg++) {
++		addr = reg->addr;
 +
-+	/*
-+	 * PHY pad/voltage settings are programmed above based on the current
-+	 * ios. Ensure the PHY is out of reset afterwards; otherwise voltage
-+	 * switching (e.g. SD 3.3V -> 1.8V) can fail.
-+	 */
-+	ret = metanoia_sdhci_phy_init(host);
-+	if (ret)
-+		return ret;
-+
-+	if (is_hs400)
-+		metanoia_sdhci_apply_hs400_phy(host);
-+
-+	return 0;
-+}
-+
-+static int metanoia_sdhci_set_ios_post(struct sdhci_host *host)
-+{
-+	struct mmc *mmc = host->mmc;
-+	u32 reg;
-+	int ret;
-+
-+	/* Disable cmd conflict check, especially for clk 200MHz */
-+	reg = sdhci_readb(host, DWCMSHC_HOST_CTRL3_REG);
-+	reg &= ~DWCMSHC_CMD_CONFLICT_CHECK;
-+	if (host->mmc->ddr_mode && (mmc->selected_mode == MMC_DDR_52 ||
-+				    mmc->selected_mode == UHS_DDR50)) {
 +		/*
-+		 * Databook claims this bit only for HS400, however, it does
-+		 * not work on real silicon.
++		 * Some firmware version use an absolute address,
++		 * convert to a relative offset
 +		 */
-+		reg |= DWCMSHC_NEGEDGE_DATAOUT_EN;
-+	} else {
-+		reg &= ~DWCMSHC_NEGEDGE_DATAOUT_EN;
++		if (addr >= CTRL_FW_BASE)
++			addr -= CTRL_FW_BASE;
++
++		if (addr >= priv->ctrl_size)
++			return -EINVAL;
++
++		writel(reg->value, priv->ctrl + addr);
 +	}
-+
-+	if (mmc->selected_mode == MMC_HS_400 ||
-+	    mmc->selected_mode == MMC_HS_400_ES) {
-+		/* Samples CMD/DATA with respect to negative edge of cclk_rx */
-+		reg |= NEDGE_SMPL_EN;
-+	} else {
-+		reg &= ~NEDGE_SMPL_EN;
-+	}
-+
-+	sdhci_writeb(host, reg, DWCMSHC_HOST_CTRL3_REG);
-+
-+	ret = metanoia_sdhci_apply_phy(host);
-+	if (ret)
-+		return ret;
 +
 +	return 0;
 +}
 +
-+static int metanoia_sdhci_set_enhanced_strobe(struct sdhci_host *host)
++static int ddr_ctrl_init(struct mt2824_ddr_priv *priv)
 +{
-+	struct mmc *mmc = host->mmc;
 +	u32 val;
 +
-+	val = sdhci_readl(host, DWCMSHC_EMMC_CTRL_REG);
-+	if (mmc->selected_mode == MMC_HS_400_ES)
-+		val |= ENH_STROBE_ENABLE;
-+	else
-+		val &= ~ENH_STROBE_ENABLE;
-+	sdhci_writel(host, val, DWCMSHC_EMMC_CTRL_REG);
++	setbits_le32(priv->ctrl + CTRL_RFSHCTL3, CTRL_RFSHCTL3_DIS_AUTO);
++	clrbits_le32(priv->ctrl + CTRL_PWRCTL, CTRL_PWRCTL_PWRDN | CTRL_PWRCTL_CLKDIS);
++	writel(0, priv->ctrl + CTRL_SWCTL);
++	clrbits_le32(priv->ctrl + CTRL_DFIMISC, CTRL_DFIMISC_COMPLETE);
++	setbits_le32(priv->ctrl + CTRL_SWCTL, CTRL_SWCTL_DONE);
++
++	return readl_poll_timeout(priv->ctrl + CTRL_SWSTAT, val,
++				  val == CTRL_SWSTAT_DONE, POLL_TIMEOUT);
++}
++
++static int ddr_phy_load_comp(struct mt2824_ddr_priv *priv, unsigned int comp)
++{
++	const struct fw_header *header = priv->fw_img;
++	const struct fw_reg *reg;
++	unsigned int nb_regs;
++
++	/* address + value per register */
++	nb_regs = header->comps[comp].size / sizeof(struct fw_reg);
++	reg = priv->fw_img + header->comps[comp].offset;
++
++	/* Apply each register configuration */
++	for (unsigned int i = 0; i < nb_regs; i++, reg++) {
++		if (reg->addr >= priv->phy_size / 2)
++			return -EINVAL;
++		writew((u16)(reg->value & 0xFFFF), priv->phy + reg->addr * 2);
++	}
 +
 +	return 0;
 +}
 +
-+static void metanoia_sdhci_set_control_reg(struct sdhci_host *host)
++static int phy_load_training_data(struct mt2824_ddr_priv *priv, unsigned int comp,
++				  void __iomem *base, resource_size_t size)
 +{
-+	struct mmc *mmc = host->mmc;
-+	u32 val;
++	const struct fw_header *header = priv->fw_img;
++	unsigned int nb_vals;
++	const u16 *val;
 +
-+	if (mmc->selected_mode == MMC_HS || mmc->selected_mode == MMC_HS_52) {
-+		pr_debug("force 1.8v for MMC\n");
-+		mmc->signal_voltage = MMC_SIGNAL_VOLTAGE_180;
++	if (header->comps[comp].size > size)
++		return -EINVAL;
++
++	nb_vals = header->comps[comp].size / sizeof(u16);
++	val = priv->fw_img + header->comps[comp].offset;
++
++	for (unsigned int i = 0; i < nb_vals; i++) {
++		writew(*val, base + i * 2);
++		val++;
 +	}
 +
-+	sdhci_set_control_reg(host);
-+
-+	if (mmc->selected_mode == MMC_HS_400 ||
-+	    mmc->selected_mode == MMC_HS_400_ES) {
-+		val = sdhci_readw(host, SDHCI_HOST_CONTROL2);
-+		val &= ~SDHCI_CTRL_UHS_MASK;
-+		val |= DWCMSHC_CTRL_HS400;
-+		sdhci_writew(host, val, SDHCI_HOST_CONTROL2);
-+	}
-+
-+	/*
-+	 * Reinitializing the device tries to set it to lower-speed modes
-+	 * first, which fails if the Enhanced Strobe bit is set, making
-+	 * the device impossible to use. Set the correct value here to
-+	 * let reinitialization attempts succeed.
-+	 */
-+	if (CONFIG_IS_ENABLED(MMC_HS400_ES_SUPPORT))
-+		metanoia_sdhci_set_enhanced_strobe(host);
++	return 0;
 +}
 +
-+static const struct sdhci_ops metanoia_sdhci_ops = {
-+	.set_ios_post = metanoia_sdhci_set_ios_post,
-+	.set_control_reg = metanoia_sdhci_set_control_reg,
-+	.set_enhanced_strobe = metanoia_sdhci_set_enhanced_strobe,
-+#if CONFIG_IS_ENABLED(MMC_SDHCI_ADMA_HELPERS)
-+	.adma_write_desc = metanoia_sdhci_adma_write_desc,
-+#endif
-+};
-+
-+static int metanoia_sdhci_probe(struct udevice *dev)
++static u32 get_mail(struct mt2824_ddr_priv *priv, int mode)
 +{
-+	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
-+	struct metanoia_sdhc_plat *plat = dev_get_plat(dev);
-+	struct metanoia_sdhc *priv = dev_get_priv(dev);
-+	struct mmc_config *cfg = &plat->cfg;
-+	struct sdhci_host *host = &priv->host;
-+	struct clk clk = {};
-+	ulong clk_rate = 0;
++	u32 mail;
++	u16 val;
++
++	readw_poll_sleep_timeout(priv->phy + PHY_UCTSHADOWREGS, val,
++				 !(val & BIT(0)), mode ? 0 : 100, 0);
++
++	mail = readw(priv->phy + PHY_UCTWRITEONLYSHADOW);
++	if (mode == 1)
++		mail |= (readw(priv->phy + PHY_UCTDATWRITEONLYSHADOW) << 16);
++
++	writew(0, priv->phy + PHY_DCTWRITEPROT);
++	readw_poll_timeout(priv->phy + PHY_UCTSHADOWREGS, val, val, 0);
++	writew(1, priv->phy + PHY_DCTWRITEPROT);
++
++	return mail;
++}
++
++static void decode_streaming_message(struct mt2824_ddr_priv *priv)
++{
++	u32 msg_len = get_mail(priv, 1) & 0xffff;
++
++	for (unsigned int i = 0; i < msg_len; i++)
++		get_mail(priv, 1);
++}
++
++static void decode_major_message(struct mt2824_ddr_priv *priv, u32 mail)
++{
++	switch (mail) {
++	case MSG_TRAINING_DONE:
++		debug("DDRPHY: Training has run successfully\n");
++		break;
++	case MSG_TRAINING_FAIL:
++		debug("DDRPHY: Training has failed\n");
++		break;
++	case 0x00:
++		debug("DDRPHY: End of initialization\n");
++		break;
++	case 0x01:
++		debug("DDRPHY: End of fine write leveling\n");
++		break;
++	case 0x02:
++		debug("DDRPHY: End of read enable training\n");
++		break;
++	case 0x03:
++		debug("DDRPHY: End of read delay center optimization\n");
++		break;
++	case 0x04:
++		debug("DDRPHY: End of write delay center optimization\n");
++		break;
++	case 0x05:
++		debug("DDRPHY: End of 2D read delay/voltage center optimization\n");
++		break;
++	case 0x06:
++		debug("DDRPHY: End of 2D write delay/voltage center optimization\n");
++		break;
++	case 0x09:
++		debug("DDRPHY: End of max read latency training\n");
++		break;
++	case 0x0a:
++		debug("DDRPHY: End of read dq deskew training\n");
++		break;
++	case 0x0b:
++		debug("DDRPHY: Reserved\n");
++		break;
++	case 0x0c:
++		debug("DDRPHY: End of all DB training (MREP/DWL/MRD/MWD complete)\n");
++		break;
++	case 0x0d:
++		debug("DDRPHY: End of CA training\n");
++		break;
++	case 0xfd:
++		debug("DDRPHY: End of MPR read delay center optimization\n");
++		break;
++	case 0xfe:
++		debug("DDRPHY: End of Write leveling coarse delay\n");
++		break;
++	case 0x08:
++		debug("DDRPHY: Start streaming message mode\n");
++		decode_streaming_message(priv);
++		break;
++	default:
++		debug("DDRPHY: Error, unknown major_message %x\n", mail);
++	}
++}
++
++static int ddr_phy_wait_training_done(struct mt2824_ddr_priv *priv)
++{
++	u32 mail = 0;
++
++	do {
++		mail = get_mail(priv, 0);
++		decode_major_message(priv, mail);
++	} while (mail != MSG_TRAINING_DONE && mail != MSG_TRAINING_FAIL);
++
++	return (mail == MSG_TRAINING_DONE) ? 0 : -EIO;
++}
++
++static void write_mr14_to_register(struct mt2824_ddr_priv *priv)
++{
++	u16 v26 = readw(priv->phy + PHY_DCCM_V26);
++	u16 v27 = readw(priv->phy + PHY_DCCM_V27);
++	u16 v40 = readw(priv->phy + PHY_DCCM_V40);
++
++	u8 b0 = (v26 >> 8) & 0xff;
++	u8 b1 = v27 & 0xff;
++	u8 b2 = v40 & 0xff;
++	u8 b3 = (v40 >> 8) & 0xff;
++
++	u32 sum = (u32)b0 + b1 + b2 + b3;
++	u8 avg = (sum + 2) / 4;
++
++	writel(FIELD_PREP(CTRL_INIT7_MR22, PARAM_MR22) | FIELD_PREP(CTRL_INIT7_MR14, avg),
++	       priv->ctrl + CTRL_INIT7);
++}
++
++static int ddr_phy_training(struct mt2824_ddr_priv *priv)
++{
++	struct {
++		unsigned int imem_comp;
++		unsigned int dmem_comp;
++	} fw_info[TRAINING_STAGES] = {
++		{FW_COMP_PMU_1D_IMEM, FW_COMP_PMU_1D_DMEM},
++		{FW_COMP_PMU_2D_IMEM, FW_COMP_PMU_2D_DMEM}
++	};
 +	int ret;
 +
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (!ret) {
-+		clk_rate = clk_get_rate(&clk);
-+		if (IS_ERR_VALUE(clk_rate))
-+			clk_rate = 0;
++	for (unsigned int stage = 0; stage < TRAINING_STAGES; stage++) {
++		ret = phy_load_training_data(priv, fw_info[stage].imem_comp,
++					     priv->phy + PHY_ICCM_BASE, PHY_ICCM_SIZE);
++		if (ret)
++			return ret;
++
++		writew(PHY_PMU_MUX_SEL_UC, priv->phy + PHY_PMU_MUX_SEL);
++		writew(0, priv->phy + PHY_PMU_MUX_SEL);
++
++		ret = phy_load_training_data(priv, fw_info[stage].dmem_comp,
++					     priv->phy + PHY_DCCM_BASE, PHY_DCCM_SIZE);
++		if (ret)
++			return ret;
++
++		/*
++		 * MicroContMuxSel=1, written twice to match the PhyInit
++		 * sequence (end of DMEM load and start of the firmware).
++		 */
++		writew(PHY_PMU_MUX_SEL_UC, priv->phy + PHY_PMU_MUX_SEL);
++		writew(PHY_PMU_MUX_SEL_UC, priv->phy + PHY_PMU_MUX_SEL);
++
++		writew(PHY_UC_CTRL_RESET | PHY_UC_CTRL_STALL, priv->phy + PHY_UC_CTRL);
++		writew(PHY_UC_CTRL_STALL, priv->phy + PHY_UC_CTRL);
++		writew(0, priv->phy + PHY_UC_CTRL);
++
++		ret = ddr_phy_wait_training_done(priv);
++		if (ret)
++			return ret;
++
++		writew(PHY_UC_CTRL_STALL, priv->phy + PHY_UC_CTRL);
++		writew(0, priv->phy + PHY_PMU_MUX_SEL);
++
++		if (stage == 1)
++			write_mr14_to_register(priv);
++
++		writew(PHY_PMU_MUX_SEL_UC, priv->phy + PHY_PMU_MUX_SEL);
++		writew(0, priv->phy + PHY_PMU_MUX_SEL);
 +	}
 +
-+	if (!clk_rate) {
-+		u32 max_freq;
-+
-+		dev_read_u32(dev, "max-frequency", &max_freq);
-+		clk_rate = max_freq;
-+	}
-+
-+	if (clk_rate) {
-+		host->max_clk = clk_rate;
-+		if (!cfg->f_max || cfg->f_max > clk_rate)
-+			cfg->f_max = clk_rate;
-+	} else {
-+		host->max_clk = cfg->f_max;
-+	}
-+
-+	host->ops = &metanoia_sdhci_ops;
-+	host->quirks = SDHCI_QUIRK_WAIT_SEND_CMD | SDHCI_QUIRK_USE_WIDE8;
-+	host->mmc = &plat->mmc;
-+	host->mmc->priv = &priv->host;
-+	host->mmc->dev = dev;
-+	upriv->mmc = host->mmc;
-+
-+	ret = metanoia_sdhci_apply_phy(host);
-+	if (ret)
-+		return ret;
-+
-+	ret = sdhci_setup_cfg(cfg, host, cfg->f_max, EMMC_MIN_FREQ);
-+	if (ret)
-+		return ret;
-+
-+	cfg->host_caps |= MMC_MODE_8BIT | MMC_CAP(MMC_DDR_52);
-+
-+	return sdhci_probe(dev);
++	return 0;
 +}
 +
-+static const struct udevice_id metanoia_sdhci_ids[] = {
-+	{ .compatible = "metanoia,mt2824-dwcmshc" },
-+	{ /* sentinel */ }
++static int ddr_ctrl_configure(struct mt2824_ddr_priv *priv)
++{
++	u8 trddata_en = PARAM_RL - 5 + 2 * (PARAM_MISC - PARAM_RD);
++	u8 tphy_wrlat = PARAM_WL - 5 + 2 * (PARAM_MISC - PARAM_WR) + PARAM_TDQSS;
++	u8 twrdata_delay;
++	u8 tctrl_delay;
++	u8 ardptrinitval;
++	u16 dqs_dly;
++	u8 trained_txdqsdly;
++	u32 val;
++	int ret;
++
++	clrbits_le32(priv->ctrl + CTRL_SWCTL, CTRL_SWCTL_DONE);
++	setbits_le32(priv->ctrl + CTRL_DFIMISC, CTRL_DFIMISC_START);
++	setbits_le32(priv->ctrl + CTRL_SWCTL, CTRL_SWCTL_DONE);
++
++	ret = readl_poll_timeout(priv->ctrl + CTRL_SWSTAT, val,
++				 val == CTRL_SWSTAT_DONE, POLL_TIMEOUT);
++	if (ret)
++		return ret;
++
++	ret = readl_poll_timeout(priv->ctrl + CTRL_DFISTAT, val,
++				 FIELD_GET(CTRL_DFISTAT_COMPLETE, val), POLL_TIMEOUT);
++	if (ret)
++		return ret;
++
++	clrbits_le32(priv->ctrl + CTRL_SWCTL, CTRL_SWCTL_DONE);
++	clrbits_le32(priv->ctrl + CTRL_DFIMISC, CTRL_DFIMISC_START);
++	setbits_le32(priv->ctrl + CTRL_DFIMISC, CTRL_DFIMISC_COMPLETE);
++	clrbits_le32(priv->ctrl + CTRL_PWRCTL, CTRL_PWRCTL_SELFREF);
++
++	writew(0, priv->phy + PHY_PMU_MUX_SEL);
++
++	/* read the trained DQS delay and round it up */
++	dqs_dly = readw(priv->phy + PHY_DQS_DELAY_GRP0);
++	trained_txdqsdly = FIELD_GET(PHY_DQS_DELAY_COARSE, dqs_dly) +
++			   (FIELD_GET(PHY_DQS_DELAY_FINE, dqs_dly) +
++			    FIELD_MAX(PHY_DQS_DELAY_FINE)) /
++			   (FIELD_MAX(PHY_DQS_DELAY_FINE) + 1);
++
++	ardptrinitval = readw(priv->phy + PHY_RDPTR_INITVAL);
++	tctrl_delay = ((ardptrinitval / 2) + (PARAM_MISC * 2) * 1 + 3);
++	twrdata_delay = tctrl_delay + (6 + PARAM_BL / 2) + trained_txdqsdly;
++
++	writew(PHY_PMU_MUX_SEL_UC, priv->phy + PHY_PMU_MUX_SEL);
++
++	writel(FIELD_PREP(CTRL_DFITMG0_CTRL_DELAY, tctrl_delay) |
++	       CTRL_DFITMG0_RDDATA_USE_DFI_PHY_CLK |
++	       FIELD_PREP(CTRL_DFITMG0_RDDATA_EN, trddata_en) |
++	       CTRL_DFITMG0_WRDATA_USE_DFI_PHY_CLK |
++	       FIELD_PREP(CTRL_DFITMG0_TPHY_WRDATA, PARAM_WRDATA) |
++	       FIELD_PREP(CTRL_DFITMG0_TPHY_WRLAT, tphy_wrlat),
++	       priv->ctrl + CTRL_DFITMG0);
++
++	writel(FIELD_PREP(CTRL_DFITMG1_WRDATA_DELAY, twrdata_delay) |
++	       FIELD_PREP(CTRL_DFITMG1_CLK_DIS, PARAM_CLK_DIS) |
++	       FIELD_PREP(CTRL_DFITMG1_CLK_EN, PARAM_CLK_EN),
++	       priv->ctrl + CTRL_DFITMG1);
++
++	setbits_le32(priv->ctrl + CTRL_DFIMISC, CTRL_DFIMISC_COMPLETE);
++
++	clrbits_le32(priv->ctrl + CTRL_PWRCTL, CTRL_PWRCTL_SELFREF);
++
++	setbits_le32(priv->ctrl + CTRL_SWCTL, CTRL_SWCTL_DONE);
++	ret = readl_poll_timeout(priv->ctrl + CTRL_SWSTAT, val,
++				 val == CTRL_SWSTAT_DONE, POLL_TIMEOUT);
++	if (ret)
++		return ret;
++
++	ret = readl_poll_timeout(priv->ctrl + CTRL_STAT, val,
++				 FIELD_GET(CTRL_STAT_MODE, val) == CTRL_STAT_NORMAL,
++				 POLL_TIMEOUT);
++	if (ret)
++		return ret;
++
++	clrbits_le32(priv->ctrl + CTRL_RFSHCTL3, CTRL_RFSHCTL3_DIS_AUTO);
++
++	return 0;
++}
++
++static int mt2824_ddr_init(struct udevice *dev)
++{
++	struct mt2824_ddr_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	ret = check_firmware(dev);
++	if (ret)
++		return ret;
++
++	ret = reset_assert(&priv->rst);
++	if (ret)
++		return ret;
++
++	ret = ddr_ctrl_load_config(priv);
++	if (ret)
++		return ret;
++
++	ret = reset_deassert(&priv->rst);
++	if (ret)
++		return ret;
++
++	ret = ddr_ctrl_init(priv);
++	if (ret)
++		return ret;
++
++	ret = ddr_phy_load_comp(priv, FW_COMP_PHY_CFG);
++	if (ret)
++		return ret;
++
++	ret = ddr_phy_training(priv);
++	if (ret)
++		return ret;
++
++	ret = ddr_phy_load_comp(priv, FW_COMP_PIE_IMAGE);
++	if (ret)
++		return ret;
++
++	ret = ddr_ctrl_configure(priv);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static int mt2824_ddr_probe(struct udevice *dev)
++{
++	struct mt2824_ddr_priv *priv = dev_get_priv(dev);
++	struct resource res;
++	int ret;
++
++	ret = dev_read_resource_byname(dev, "ctrl", &res);
++	if (ret)
++		return ret;
++
++	priv->ctrl_size = resource_size(&res);
++	priv->ctrl = devm_ioremap(dev, res.start, priv->ctrl_size);
++
++	ret = dev_read_resource_byname(dev, "phy", &res);
++	if (ret)
++		return ret;
++
++	priv->phy_size = resource_size(&res);
++	priv->phy = devm_ioremap(dev, res.start, priv->phy_size);
++
++	ret = dev_read_resource_byname(dev, "fw", &res);
++	if (ret)
++		return ret;
++
++	priv->fw_size = resource_size(&res);
++	priv->fw = devm_ioremap(dev, res.start, priv->fw_size);
++
++	ret = reset_get_by_index(dev, 0, &priv->rst);
++	if (ret)
++		return ret;
++
++	return mt2824_ddr_init(dev);
++}
++
++static int mt2824_ddr_get_info(struct udevice *dev, struct ram_info *info)
++{
++	info->base = gd->ram_base;
++	info->size = gd->ram_size;
++
++	return 0;
++}
++
++static const struct ram_ops mt2824_ddr_ops = {
++	.get_info = mt2824_ddr_get_info,
 +};
 +
-+U_BOOT_DRIVER(metanoia_sdhci_drv) = {
-+	.name = "metanoia_sdhci",
-+	.id = UCLASS_MMC,
-+	.of_match = metanoia_sdhci_ids,
-+	.of_to_plat = metanoia_sdhci_of_to_plat,
-+	.ops = &sdhci_ops,
-+	.bind = metanoia_sdhci_bind,
-+	.probe = metanoia_sdhci_probe,
-+	.priv_auto = sizeof(struct metanoia_sdhc),
-+	.plat_auto = sizeof(struct metanoia_sdhc_plat),
++static const struct udevice_id mt2824_ddr_ids[] = {
++	{ .compatible = "metanoia,mt2824-ddrc" },
++	{ }
++};
++
++U_BOOT_DRIVER(mt2824_ddr) = {
++	.name = "mt2824_ddr",
++	.id = UCLASS_RAM,
++	.ops = &mt2824_ddr_ops,
++	.of_match = mt2824_ddr_ids,
++	.probe = mt2824_ddr_probe,
++	.priv_auto = sizeof(struct mt2824_ddr_priv),
 +};
 
 -- 
