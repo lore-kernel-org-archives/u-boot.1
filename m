@@ -1,137 +1,139 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7909ECA5FDD
-	for <u-boot@archiver.kernel.org>; Sat,  3 Oct 2026 10:03:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC22CCA5FDD
+	for <u-boot@archiver.kernel.org>; Sat,  3 Oct 2026 10:14:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0CC0740FAA;
-	Sat,  3 Oct 2026 10:03:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A6A0160F03;
+	Sat,  3 Oct 2026 10:14:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nMRjymLhHDVE; Sat,  3 Oct 2026 10:03:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 6D52540F9C
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791021788;
-	b=pDcknE9Yyn0s0QpaZ/ZW6NuiyIJq0pexK5ZBdEcCtdLVxWzJdmzpgkYVmkBULRqy2QGX
-	 7/eiUX3Ew6xo18HAGkZVSyein45G+Ou5O8idMxul7LFdtHLzc2+NJvJHt2ygWjsNvr9WT
-	 xDVhxzDDOWiGO0zjZ6Gp+b0EZ8BaAJIzMWwkqQ4VNzVVOEEbA9kCEa7AeoCtCBN84hPsh
-	 HLB9eVWIpBWYjBBtfaYlC6ejaOKrRqy5pn+yapXGi1/4H3uSHSgIT4o7/gy9T/aBuXes3
-	 UUbLAxFYyFCeWDxyXWPvOsNIXuBc/nRbLsI8OZBYty/O4UMQTcNhF2qq/FPu4OnDuBw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8S04vjAN4Xo8; Sat,  3 Oct 2026 10:14:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E649960EF8
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791022485;
+	b=RBJJSz2vdYpP4wWGEqeHOO7RI2ab+ldVqlL/W1XiHbljKKuH2vxEQp/KsGhtANNviuhh
+	 lAsUyFiS+IxTTEzEeDO/9CaTTg/tIlpNa9Fbv/6mQTh/ZXvFs8HIV/rMD9BvBoIy9zvXY
+	 ewzn1/xsHwIFuJLG+pF39cwxtZgtDqlmhfJUmkVOgNSrocQStUhx3kBemr/gf8fClN8T+
+	 a29dEh6Az0Q+tOAXZnctBBDecNhcW7p8wqq/5eM/ojblOZ8j5X0Rwyeuv8Hz7MhWLXO4n
+	 Hy9ZOJ21DCeEFe4OBptAQl/KTzuuTcX/OrchI2LfaKuWvThddXyI4OEsO61UV2PODTw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791021788;
+	c=relaxed/relaxed; t=1791022485;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:From:
-	 Subject:To:Cc:References:Content-Language:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=BEgOoIYNyZdWsSx6qJQ4gC5Vzv3GspOi29Zo8gtqBQg=;
-	b=g0x4dfS0pikI++9AqyeVxebo/X68bljO9RFa/dznNxcYW1GsTjOGGSHi6Z3VeZJrDuGd
-	 03lH5f4bnKUcqq5t73eFPKZbbCp36pfpHz6qdzNyF7hJujcGZVCiccL0b/bTf2tQbPTLI
-	 V/z4mhYFz8GsyeoW8XHIQfoPzBiTWVWxR6I+I0hQ0l4Zs/QCnM+fyOzJu5G+kOl32oh1e
-	 6rXdqAZhnQbIJcVU5zcSWKTiiV0gR3GZ5H0W15bqeT5i4neQEJDPZ5g+p7snvT4GSV6o7
-	 LEtvvq3l6I9m0dVoqWgHO7H6NO/Z7vXPnjbW9jFPlfNEwTeRYnT4HMcQEnBU/E7EjMQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=2VmWHvOJq3ei+FZj9fYa920sLoHkcpKfJwXQkSPQhUg=;
+	b=TqN17CAMGk9r+9mtcQOI9Jtph6//E7tGFpz1uFdJ+QElNOhXLZcliRpnDQwMf9EuzzgA
+	 ZZUu0AnyUfHvcGdsSuSpGC2fe5BpAgYUnKeaOr0T6t0OMHSa46L42V4zHLaPM5PP3ogRH
+	 /4AsYJ/U3FK2LmiJqVCqPg/0tCdKBFePsPBj3ftAyZctg3cbFhoLy41v2CzqmkkytDFFu
+	 Z6GzQF5C7bhWBQqNxjJOSLvoP8dp2KRFfcfY3vZAGDiwpgTOtsuNgsR47KGk/fbRP5gvG
+	 1yUfBBU6TYBePYFc8D6Ixe0s5Tj/nYAD4ZAWnq+fLLlZJrvDn7zFC4DZLeEYFGLvOyw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791021788;
-	bh=BEgOoIYNyZdWsSx6qJQ4gC5Vzv3GspOi29Zo8gtqBQg=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791022485;
+	bh=2VmWHvOJq3ei+FZj9fYa920sLoHkcpKfJwXQkSPQhUg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=e3Fi+/FNwd9A6XWHcX3EjjNUfdB9ObvkIgCnMPbkrGcF93Du0jKC34ikZXNNja49w
-	 Il3MPiM/4WtwKP27TgvzntLdN4h2f8wFll0h9dR6Lc72kDX/ImDfe3o9JG6S6GZqXa
-	 aSu8E3xw/UAIE9M1wYTWX/oIdjMW2CKXaEbb2L8SNNtw/aSdiruTKGt3vbgpTAdD4I
-	 bYVbuwsc1BveE3tAq9f8I00+UaTUVtztW3Xto8HqNf+TXe4KcsU5wGwj0e9kYH7k/i
-	 ngftjq5+Ax7iJdGKNcTBC/WPtCbwUa9UYgt6y6kbkjOIWQQUeHsomZBOt8KkFfGuhE
-	 a+F8kH8TJB7tg==
+	b=CSVF+iCb5S16LPzPen7Gzo7yyMIfG2v28FRAUGEpNXy+iRR6yX8pTxvYrkl/z3MkX
+	 /m8rlSrjg0lWV+HkKxKGbA4W3WjQW3rx8WtTZOcI0pYzfagl1HZtmSEyH6xzEfYu06
+	 7N2sB5mtZb9ufw9yCLRfYZ3fIZcRBJKft1NrdySFe3QXUWkt7R2Uw0LLaC39GHYx+0
+	 ec04dug70QgGXkh6aC8ow8T8oqU74jlGt/URpZsJNs/xQ0ud+maOl4jzbAdPnLINgU
+	 4t2x1plNt/pHzQCEzL0xz7EDGzS0bHQPa/I0x7D6b7sPnx9EJcr4UxTs868j/rOAFU
+	 mFYDW2tgUc0zQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6D52540F9C;
-	Sat,  3 Oct 2026 10:03:08 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 8B458179
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 10:03:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E649960EF8;
+	Sat,  3 Oct 2026 10:14:44 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id B37E2335
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 10:14:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4D19C4007C
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 10:03:06 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 99C0581102
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 10:14:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SL5oz9Bb3TIe for <u-boot@lists.u-boot-project.org>;
- Sat,  3 Oct 2026 10:03:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org DAFB140059
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791021784;
- b=i+wXvaL0aB9Bmv4VZACwHT1YxbqiDUcRlmEqKzngLA5+SdBat0w4Ka9AreyhdyCOgq5U
- Wx/V4sZYRA6OX1INhdedDD9ImTlxPvMFYXIKMRziwGSYMbMoF5F/Gl3hsSqSZiZuO4+uc
- 2bPSxkOdckXGwIx7+ap2RasjFfu0BszUlYXaIs4kTVr/aB6MIFjIU2ID04szFL3MBWwRy
- EjXN49ivsTbAvlb716nS2Z9unJ+a1maAxY9FYx7HTP2oDwgrXkiYyX+tFFfVweZp57BEw
- an/9NJi9cfye8hndZmlJ0fOgBQhYSmCdie3yWufIUc8K2s6iDZC7OGsu3cKB94hDeYg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jI1KmXFUDTQi for <u-boot@lists.u-boot-project.org>;
+ Sat,  3 Oct 2026 10:14:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org DA8BF80F6D
+Authentication-Results: smtp1.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791022471;
+ b=tGOQ5MzArz3K5tj7cnlO6i2JbWR4B0wBq+xB96e2RoeUuB24iSol3XCkSdZHhxT3fPBL
+ y7OQay21c+DzB/HAaitHwH8Tyr8ehoBdyeuvpyWqOzff5gbLhLrLNz/eG7MLjnTnoSy7L
+ WwmbTv1kH+5E9+Ym4AxyvxwbyOF5bbeCY3OT/nOjdQx4409GKsc7q36ldfAmLfRr7uGQx
+ 5AMGBwYbhSUdPqR8L3AQ2q3HUlGUPZHwfFjznbf9xcGnee4Dh8hV51siQa4SyAcq9vzlI
+ 5QUdEzhTHiU3uEW+/tfbIxrMoReQMxajpDaGN2lmeA62UYAH+a1icTARRvc492X9OyQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791021784;
- h=Received-SPF:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
- User-Agent:From:Subject:To:Cc:References:Content-Language:In-Reply-To:
- Content-Type:Content-Transfer-Encoding;
- bh=BEgOoIYNyZdWsSx6qJQ4gC5Vzv3GspOi29Zo8gtqBQg=;
- b=lYSxMykZdynKH196y5vM9Kc6mOXCC8PesIhBJtCkYRsOrmBkyNcZM/7vm7gAhbjpoCGk
- aq/IrY6GtqQ+BcnhHLs7Yc5wDcNN1hmik0D8MyhgCydpECnmTQ8V94KaWcwNFf2vdlvQc
- qZ6bpNre/HWu+svuEcQ/DGQoGczTzyGfzQFU+HWgw0eaO+toTKSIR0cgqCr+BoB/USOoK
- D+XW88j+RYrTx/lfxlL3Ao8yFJH/qMUY2P5UdBQw6L8Q0ud95ESwJxel1xYtmKiquLQ0b
- LTf06K1o5uJ52vg1xupq9LD/uWZy89s0Xajp9BxO8udm8hvdb2aMLPrhiDL12lvu4Cw==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=freeshell.de; 
- dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=mIQBHvYR; 
- arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:4f8:231:482b::2;
- helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=mIQBHvYR
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DAFB140059
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 10:03:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1791021745;
- bh=BEgOoIYNyZdWsSx6qJQ4gC5Vzv3GspOi29Zo8gtqBQg=;
- h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
- b=mIQBHvYRH4xaSRJAxsbZ3H67SGa4RGdG3ohRAoccnfvOBkBbYHYZz03L0k9E2geMq
- RdKuManQKsw8Cyd2tMkEaITbEScr10z3dRODLeZXJ9OY9o1DRWJBv09C999Tt/ROu0
- nnQ4cmZYgVP7a/0LNcUsY9K0Vf7px5yr0JO6Hlku1rMokfOa7Nad/eClzYL6/QQNGv
- 3LPJdwYuCVaxFfhxogV14pCsI16xeMPi0tECvHUhw1fw8j+Gopkuw8HCcQa4NEJ3hF
- BxvK5AJJ73DPYGokIgppGow1Jk1kafjhpEOF4WJGz1zEQjTZKCd7rNa2gEMeX+IKcT
- Qg7N8/1Wc63Qw==
-Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
- [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id CCD82B22264E;
- Sat,  3 Oct 2026 12:02:23 +0200 (CEST)
-Message-ID: <b8a9bb83-7839-4833-8750-1ca55e318f03@freeshell.de>
-Date: Sat, 3 Oct 2026 03:02:15 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: E Shattow <e@freeshell.de>
-Subject: Re: [PATCH v3 1/4] board: spacemit: add SpacemiT K3 Pico-ITX
-To: Yixun Lan <dlan@kernel.org>, u-boot@lists.u-boot-project.org
-Cc: Yao Zi <me@ziyao.cc>, Tim Ouyang <tim609@andestech.com>,
- Leo Liang <leo.liang@sifive.com>, Tom Rini <trini@konsulko.com>,
- Michal Simek <michal.simek@amd.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Hiago De Franco <hfranco@baylibre.com>, Junhui Liu <junhui.liu@pigmoral.tech>
+ c=relaxed/relaxed; t=1791022471;
+ h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To;
+ bh=2VmWHvOJq3ei+FZj9fYa920sLoHkcpKfJwXQkSPQhUg=;
+ b=me8JA29LsoWAqje7Pw6g2OOy3p0JQEzhRysMntl4rINZdYBkpf3QP0ynvLDye17C9yNA
+ PJz55v0qVxYKVNAx1kTqIYalpdDePx+xSoJJzP1PxvBHOd/HRZsRm8hdqmfLmKV9FPnKU
+ nAc30SbVIfRBi7ukVE1u2seG8hlIh24ZFEPWmFC3bAchYaAoCh2C6fKC1daDlZgqYo2yt
+ K5HV3xjdLadajvPCoAnJYOd2X6QenqLrSYUINdvs2ahrdWkvLm3qvkt0SCNaU72xh8Y6o
+ NlfvBkumtxc18xu+CeS5avvs8QZQNiA6atLCHKiWwNDqdPayPf5kiwqGXTOD+ptgIrQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ dmarc=pass header.from=kernel.org; 
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=gvtnl7+I; 
+ arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=gvtnl7+I
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DA8BF80F6D
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 10:14:30 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id C472D40A76;
+ Sat,  3 Oct 2026 10:14:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2EB281F0089B;
+ Sat,  3 Oct 2026 10:14:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1791022469;
+ bh=2VmWHvOJq3ei+FZj9fYa920sLoHkcpKfJwXQkSPQhUg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=gvtnl7+ID5OzDiQAIC9c7uebK8LX7jl+75bgE/AWzyTexA9t1pz/zI4wPUHGp0O/9
+ mHlm1mFGeXl2+ZhTyytXJxpOapZt/MdOMMq+0M8gfi11zqPFt20Kzel6nXbwBQB03X
+ /qlPiM96cb+ljXtZHWzKphQW3a3Wn6gsScWwheDU2tEh6BhRognu+RrDbQ4GVIjWiK
+ BOd455i7+M4yYLChaE4FwDud8lx9sai6ODWFRxAXovn9vCyu3kpf6NeRxJvrw7Y7V1
+ tsi3pOokXJl1r4FJB88+HwbYfR2n8bi6HCBZWucESwM4zmNoRbWGYnS+iQeRRQA1VS
+ Ly8it/j1edRdg==
+Date: Sat, 3 Oct 2026 10:14:27 +0000
+From: Yixun Lan <dlan@kernel.org>
+To: E Shattow <e@freeshell.de>
+Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>,
+ Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Hiago De Franco <hfranco@baylibre.com>,
+ Junhui Liu <junhui.liu@pigmoral.tech>
+Subject: Re: [PATCH v3 2/4] riscv: dts: spacemit: k3: add binman node
+Message-ID: <20261003101427-GKA68132@kernel.org>
 References: <20261003-00-basic-spacemit-k3-v3-0-dea68cd1bd7d@kernel.org>
- <20261003-00-basic-spacemit-k3-v3-1-dea68cd1bd7d@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20261003-00-basic-spacemit-k3-v3-1-dea68cd1bd7d@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <20261003-00-basic-spacemit-k3-v3-2-dea68cd1bd7d@kernel.org>
+ <2dcd6f21-ea10-4986-ae3c-fb81f5d768a4@freeshell.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <2dcd6f21-ea10-4986-ae3c-fb81f5d768a4@freeshell.de>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,207 +147,60 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Yixun,
+Hi E Shattow,
 
-On 10/2/26 17:34, Yixun Lan wrote:
-> Add initial support for K3 Pico-ITX board, in this version, the DRAM
-> information is parsed from DTS "/memory" node. And with UART enabled,
-> the U-Boot serial console works fine now.
+Thanks for the suggestion
+
+On 00:49 Sat 03 Oct     , E Shattow wrote:
+> On 10/2/26 17:34, Yixun Lan wrote:
+> > SpacemiT K3 follow the standard riscv binman layout, which has opensbi
+> > and U-Boot proper, so include the common binman dtsi file.
+> > 
+> > Signed-off-by: Yixun Lan <dlan@kernel.org>
+> > ---
+> >  arch/riscv/dts/spacemit-k3-u-boot.dtsi | 6 ++++++
+> >  1 file changed, 6 insertions(+)
+> > 
+> > diff --git a/arch/riscv/dts/spacemit-k3-u-boot.dtsi b/arch/riscv/dts/spacemit-k3-u-boot.dtsi
+> > new file mode 100644
+> > index 00000000000..f1c1c3ee6fd
+> > --- /dev/null
+> > +++ b/arch/riscv/dts/spacemit-k3-u-boot.dtsi
+> > @@ -0,0 +1,6 @@
+> > +// SPDX-License-Identifier: GPL-2.0+ OR MIT
+> > +/*
+> > + * Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
+> > + */
+> > +
+> > +#include "binman.dtsi"
+> > 
 > 
-> Signed-off-by: Yixun Lan <dlan@kernel.org>
-> ---
->  arch/riscv/Kconfig            |  5 +++++
->  arch/riscv/cpu/k3/Kconfig     | 18 ++++++++++++++++++
->  arch/riscv/cpu/k3/Makefile    |  5 +++++
->  arch/riscv/cpu/k3/dram.c      | 21 +++++++++++++++++++++
->  board/spacemit/k3/Kconfig     | 30 ++++++++++++++++++++++++++++++
->  board/spacemit/k3/MAINTAINERS |  8 ++++++++
->  include/configs/spacemit-k3.h | 13 +++++++++++++
->  7 files changed, 100 insertions(+)
+> Looks good to me. I suggest to introduce spacemit-k3-binman.dtsi now or
+> later, may as well do it now?
 > 
-> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-> index c1b2890f1f3..386241efd4a 100644
-> --- a/arch/riscv/Kconfig
-> +++ b/arch/riscv/Kconfig
-> @@ -53,6 +53,9 @@ config TARGET_SIPEED_MAIX
->  config TARGET_SPACEMIT_K1
->  	bool "Support Spacemit K1 SoC"
->  
-> +config TARGET_SPACEMIT_K3
-> +	bool "Support SpacemiT K3 SoC"
-> +
->  config TARGET_STARFIVE_VISIONFIVE2
->  	bool "Support StarFive VisionFive2 Board"
->  	select BOARD_LATE_INIT
-> @@ -124,6 +127,7 @@ source "board/sophgo/milkv_duo/Kconfig"
->  source "board/sophgo/milkv_duo_256m/Kconfig"
->  source "board/sophgo/licheerv_nano/Kconfig"
->  source "board/spacemit/k1/Kconfig"
-> +source "board/spacemit/k3/Kconfig"
->  source "board/starfive/visionfive2/Kconfig"
->  source "board/thead/th1520_lpi4a/Kconfig"
->  source "board/xilinx/mbv/Kconfig"
-> @@ -138,6 +142,7 @@ source "arch/riscv/cpu/mpfs/Kconfig"
->  source "arch/riscv/cpu/generic/Kconfig"
->  source "arch/riscv/cpu/jh7110/Kconfig"
->  source "arch/riscv/cpu/k1/Kconfig"
-> +source "arch/riscv/cpu/k3/Kconfig"
->  source "arch/riscv/cpu/k230/Kconfig"
->  source "arch/riscv/cpu/th1520/Kconfig"
->  
-> diff --git a/arch/riscv/cpu/k3/Kconfig b/arch/riscv/cpu/k3/Kconfig
-> new file mode 100644
-> index 00000000000..5474ac11243
-> --- /dev/null
-> +++ b/arch/riscv/cpu/k3/Kconfig
-> @@ -0,0 +1,18 @@
-> +# SPDX-License-Identifier: GPL-2.0-or-later
-> +#
-> +# Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
-> +
-> +if TARGET_SPACEMIT_K3
-> +
-> +config SPACEMIT_K3
-> +	bool
-> +	select BINMAN
-> +	select ARCH_EARLY_INIT_R
-> +	select SYS_CACHE_SHIFT_6
-> +	imply CPU
-> +	imply CPU_RISCV
-> +	imply RISCV_TIMER if RISCV_SMODE
-> +	imply CMD_CPU
-> +	imply OF_UPSTREAM
-> +
-> +endif
-> diff --git a/arch/riscv/cpu/k3/Makefile b/arch/riscv/cpu/k3/Makefile
-> new file mode 100644
-> index 00000000000..fba4e4b0a3f
-> --- /dev/null
-> +++ b/arch/riscv/cpu/k3/Makefile
-> @@ -0,0 +1,5 @@
-> +# SPDX-License-Identifier: GPL-2.0-or-later
-> +#
-> +# Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
-> +
-> +obj-y += dram.o
-> diff --git a/arch/riscv/cpu/k3/dram.c b/arch/riscv/cpu/k3/dram.c
-> new file mode 100644
-> index 00000000000..e20d35dc1bf
-> --- /dev/null
-> +++ b/arch/riscv/cpu/k3/dram.c
-> @@ -0,0 +1,21 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
-> + */
-> +
-> +#include <fdtdec.h>
-> +#include <init.h>
-> +#include <linux/sizes.h>
-> +#include <asm/global_data.h>
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +int dram_init(void)
-> +{
-> +	return fdtdec_setup_mem_size_base();
-> +}
-> +
-> +int dram_init_banksize(void)
-> +{
-> +	return fdtdec_setup_memory_banksize();
-> +}
-> diff --git a/board/spacemit/k3/Kconfig b/board/spacemit/k3/Kconfig
-> new file mode 100644
-> index 00000000000..1a63c73b6bb
-> --- /dev/null
-> +++ b/board/spacemit/k3/Kconfig
-> @@ -0,0 +1,30 @@
-> +# SPDX-License-Identifier: GPL-2.0-or-later
-> +#
-> +# Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
-> +
-> +if TARGET_SPACEMIT_K3
-> +
+Yes, I thought about this as we introduced new SpacemiT image format..
+I have no objection to do it now in this series
 
-> +config SYS_BOARD
-> +	default "k3"
-
-Let's arbitrarily change user-facing SYS_BOARD to "spacemit_k3" stem of
-u-boot config filename "spacemit_k3_defconfig":
-
-+config SYS_BOARD
--	default "k3"
-+	default "spacemit_k3"
-
-The use of SYS_BOARD is compiled-in as various runtime outputs e.g.
-SMBIOS data structure. I think "spacemit_k3" is not a very interesting
-or descriptive name to communicate all the boards that may be supported,
-but it is better for a user to see this defconfig filename stem than
-simply "k3" as the board name. I do not have any better suggestion
-because it is a compile-time substitution and board selection is likely
-to be at runtime.
-
-> +
-> +config SYS_VENDOR
-> +	default "spacemit"
-> +
-> +config SYS_CPU
-> +	default "k3"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "spacemit-k3"
-> +
-
-Looks good, thanks for picking up that rename.
-
-> +config TEXT_BASE
-> +	default 0x102000000
-> +
-> +config SPL_OPENSBI_LOAD_ADDR
-> +	hex
-> +	default 0x100000000
-> +
-> +config BOARD_SPECIFIC_OPTIONS
-> +	def_bool y
-> +	select SPACEMIT_K3
-> +
-> +endif
-> diff --git a/board/spacemit/k3/MAINTAINERS b/board/spacemit/k3/MAINTAINERS
-> new file mode 100644
-> index 00000000000..34cf1ed4453
-> --- /dev/null
-> +++ b/board/spacemit/k3/MAINTAINERS
-> @@ -0,0 +1,8 @@
-> +SPACEMIT K3
-> +M:	Yixun Lan <dlan@kernel.org>
-> +S:	Maintained
-> +F:	arch/riscv/cpu/k3/
-> +F:	board/spacemit/k3/
-> +F:	configs/spacemit_k3_defconfig
-> +F:	include/configs/k3.h
-> +F:	arch/riscv/dts/k3-u-boot.dtsi
-> diff --git a/include/configs/spacemit-k3.h b/include/configs/spacemit-k3.h
-> new file mode 100644
-> index 00000000000..9dd545e2a3b
-> --- /dev/null
-> +++ b/include/configs/spacemit-k3.h
-> @@ -0,0 +1,13 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/*
-> + * Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
-> + */
-> +
-> +#ifndef __SPACEMIT_K3_H
-> +#define __SPACEMIT_K3_H
-> +
-> +#define CFG_SYS_NS16550_IER	0x40
-> +
-> +#define RISCV_SMODE_TIMER_FREQ	24000000
-> +
-> +#endif /* __SPACEMIT_K3_H */
+> See for example of how this looks in files
+> starfive-visionfive2-binman.dtsi and starfive-visionfive2-u-boot.dtsi,
+> it would be as follows:
 > 
+> arch/riscv/dts/spacemit-k3-binman.dtsi:
+> ...copyright comment...
+> +#include "binman.dtsi"
+> +
+> +
+> 
+> arch/riscv/dts/spacemit-k3-u-boot.dtsi:
+> ...copyright comment...
+> -#include "binman.dtsi"
+> +
+> +
+> +#include "spacemit-k3-binman.dtsi"
+> 
+> With that,
+> 
+> Reviewed-by: E Shattow <e@freeshell.de>
 
-With that, looks good to me.
-
-Reviewed-by: E Shattow <e@freeshell.de>
+-- 
+Yixun Lan (dlan)
