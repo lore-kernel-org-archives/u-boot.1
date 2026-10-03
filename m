@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC22CCA5FDD
-	for <u-boot@archiver.kernel.org>; Sat,  3 Oct 2026 10:14:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44A47CA5FDD
+	for <u-boot@archiver.kernel.org>; Sat,  3 Oct 2026 11:08:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A6A0160F03;
-	Sat,  3 Oct 2026 10:14:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DAE6A41028;
+	Sat,  3 Oct 2026 11:08:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8S04vjAN4Xo8; Sat,  3 Oct 2026 10:14:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E649960EF8
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791022485;
-	b=RBJJSz2vdYpP4wWGEqeHOO7RI2ab+ldVqlL/W1XiHbljKKuH2vxEQp/KsGhtANNviuhh
-	 lAsUyFiS+IxTTEzEeDO/9CaTTg/tIlpNa9Fbv/6mQTh/ZXvFs8HIV/rMD9BvBoIy9zvXY
-	 ewzn1/xsHwIFuJLG+pF39cwxtZgtDqlmhfJUmkVOgNSrocQStUhx3kBemr/gf8fClN8T+
-	 a29dEh6Az0Q+tOAXZnctBBDecNhcW7p8wqq/5eM/ojblOZ8j5X0Rwyeuv8Hz7MhWLXO4n
-	 Hy9ZOJ21DCeEFe4OBptAQl/KTzuuTcX/OrchI2LfaKuWvThddXyI4OEsO61UV2PODTw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lE_H3UPa9rXu; Sat,  3 Oct 2026 11:08:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 1D56541049
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791025707;
+	b=fjK5kNajYS0dNi1sqCsCUhBvY8q/iHKbCXX3SrWpqMkmddEXicKuhsetkHPtjuHXcJv1
+	 YxEBu2dOMa9qTf4A9FGqmv5MzLLSlp48Gdydss71x0af98W67CRSZzvvEFwQ/we8x0CP3
+	 38NnIHZqlIbREkLiRR0pDymh/RyfbsNqFYqWuYxvY2uZqpxSzpG7vbzm/wwrde6P5TlkZ
+	 baqUbTiVc7yxXHRvMnVsMh4IZiNNwQNJlOAb6oA11AXxvLGa7uINj/LEK1MqgjYgwCEiE
+	 W7Ywhe2SHCBTDz6fnPxLTBEAV1kCrtE3eBd13IklJYNk6rbiCwoFwSKQIUdxuekeiQg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791022485;
+	c=relaxed/relaxed; t=1791025707;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -30,93 +30,92 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=2VmWHvOJq3ei+FZj9fYa920sLoHkcpKfJwXQkSPQhUg=;
-	b=TqN17CAMGk9r+9mtcQOI9Jtph6//E7tGFpz1uFdJ+QElNOhXLZcliRpnDQwMf9EuzzgA
-	 ZZUu0AnyUfHvcGdsSuSpGC2fe5BpAgYUnKeaOr0T6t0OMHSa46L42V4zHLaPM5PP3ogRH
-	 /4AsYJ/U3FK2LmiJqVCqPg/0tCdKBFePsPBj3ftAyZctg3cbFhoLy41v2CzqmkkytDFFu
-	 Z6GzQF5C7bhWBQqNxjJOSLvoP8dp2KRFfcfY3vZAGDiwpgTOtsuNgsR47KGk/fbRP5gvG
-	 1yUfBBU6TYBePYFc8D6Ixe0s5Tj/nYAD4ZAWnq+fLLlZJrvDn7zFC4DZLeEYFGLvOyw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=AEnErtWh7sZlHZdJsgofaVLAib2bAtC9sMrxaPxiuik=;
+	b=GSUu+BSwc0pbo+g39TZ9XcSNZ64yXmfIHMTBYRd2QK7ZZrR0t2yFP6f/RQ5tvjYW8KzF
+	 rvvUBH2likyMhemgwIoTP1D6QpqCjBs0hOQzObITmZG30iGehx9e8avkXYEq3QEBm8rke
+	 x8pwzbgU79nJS77MO7yA8h0DHvlYbMyWTU1Nwg5ynVBvPIusdOGxHJ0bzthxfPrmSIU7D
+	 iZOROk28Xy0YvaGt1UdpaNtQEYNLklt/EsNfZLyXHE3vdrWNY5fIaT/JswHt/Y+fExXGV
+	 G3ajaEQ6MG7o1qJ32KpWFGvvXpAWs6jX2dZl2DvX+HGyh1XFbcOF32gNDBGJvOQXSXQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="Qh9FFoi/";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791022485;
-	bh=2VmWHvOJq3ei+FZj9fYa920sLoHkcpKfJwXQkSPQhUg=;
+	d=lists.u-boot-project.org; s=default; t=1791025707;
+	bh=AEnErtWh7sZlHZdJsgofaVLAib2bAtC9sMrxaPxiuik=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CSVF+iCb5S16LPzPen7Gzo7yyMIfG2v28FRAUGEpNXy+iRR6yX8pTxvYrkl/z3MkX
-	 /m8rlSrjg0lWV+HkKxKGbA4W3WjQW3rx8WtTZOcI0pYzfagl1HZtmSEyH6xzEfYu06
-	 7N2sB5mtZb9ufw9yCLRfYZ3fIZcRBJKft1NrdySFe3QXUWkt7R2Uw0LLaC39GHYx+0
-	 ec04dug70QgGXkh6aC8ow8T8oqU74jlGt/URpZsJNs/xQ0ud+maOl4jzbAdPnLINgU
-	 4t2x1plNt/pHzQCEzL0xz7EDGzS0bHQPa/I0x7D6b7sPnx9EJcr4UxTs868j/rOAFU
-	 mFYDW2tgUc0zQ==
+	b=kDTTq0khZMViRguwb8uV7hNUFzCtQDwCI3BlYTPL1U7YjcQ2XQ9CAE8sBATOvOPFF
+	 mUJvCnQusC940hjTu+y2C8rCU3+BbRr7WSDp4nZCrSuwJdJyplQ2l+XL5L0kubKM4o
+	 ij+n1F1PL5oQzTtqJGV+hAlV1qJ8V+J9uOczQ6+gU6oo9nGZhwq8DjvPRJ7sLLJ4ja
+	 BpykKKiDnwx2Zi8t7zZSm1kJgIRgks10MzxbOZ2ZbvXNGaLf3wzxYBDQOd31UjeEts
+	 oJ5sl1ho91OPmZqLR7aBv7f6gGjcbv4OBG98jPKkMkLpoSw2kY6fXKkh+EfFRIxdmP
+	 YBRRUfp/CW7Qw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E649960EF8;
-	Sat,  3 Oct 2026 10:14:44 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id B37E2335
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 10:14:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1D56541049;
+	Sat,  3 Oct 2026 11:08:27 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A9FB222B
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 11:08:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 99C0581102
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 10:14:31 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9B9F340FFB
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 11:08:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jI1KmXFUDTQi for <u-boot@lists.u-boot-project.org>;
- Sat,  3 Oct 2026 10:14:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org DA8BF80F6D
-Authentication-Results: smtp1.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791022471;
- b=tGOQ5MzArz3K5tj7cnlO6i2JbWR4B0wBq+xB96e2RoeUuB24iSol3XCkSdZHhxT3fPBL
- y7OQay21c+DzB/HAaitHwH8Tyr8ehoBdyeuvpyWqOzff5gbLhLrLNz/eG7MLjnTnoSy7L
- WwmbTv1kH+5E9+Ym4AxyvxwbyOF5bbeCY3OT/nOjdQx4409GKsc7q36ldfAmLfRr7uGQx
- 5AMGBwYbhSUdPqR8L3AQ2q3HUlGUPZHwfFjznbf9xcGnee4Dh8hV51siQa4SyAcq9vzlI
- 5QUdEzhTHiU3uEW+/tfbIxrMoReQMxajpDaGN2lmeA62UYAH+a1icTARRvc492X9OyQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Htq9NnVyWP9a for <u-boot@lists.u-boot-project.org>;
+ Sat,  3 Oct 2026 11:08:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org D22C740FE4
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791025687;
+ b=OCptBQYZdlAiNn+X3iblNuaK+smX3wD+CPQuM3ftGXy6nMtripzblFRLTqhgLOC4sngH
+ lxa69xpHR+bLlNlUwuspLTxu/wPioT8IAobxgnHZ2nTjHYwdD0K5Gn6YWarP553uuaHN8
+ HTNqa5mVA5quOVfNeElRU/ymggzCks20CHAdT4ghWXC0zcayC/VaC9DJEOpwJ4C2F/XKI
+ OwAHSakgSWdImmYgUgDjygH6eqvv+kxmWBl3fUw7G0ZKnymjUOxeb/edxuhRlA+LHPQLS
+ GC/Hn9kplZ0XqHxYCnJzhbL4Ocrlh8BYg8ARb8A8P3QPFVUCTkPTxf0VCUlzlgvkJCg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791022471;
+ c=relaxed/relaxed; t=1791025687;
  h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
  Subject:Message-ID:References:MIME-Version:Content-Type:
  Content-Disposition:In-Reply-To;
- bh=2VmWHvOJq3ei+FZj9fYa920sLoHkcpKfJwXQkSPQhUg=;
- b=me8JA29LsoWAqje7Pw6g2OOy3p0JQEzhRysMntl4rINZdYBkpf3QP0ynvLDye17C9yNA
- PJz55v0qVxYKVNAx1kTqIYalpdDePx+xSoJJzP1PxvBHOd/HRZsRm8hdqmfLmKV9FPnKU
- nAc30SbVIfRBi7ukVE1u2seG8hlIh24ZFEPWmFC3bAchYaAoCh2C6fKC1daDlZgqYo2yt
- K5HV3xjdLadajvPCoAnJYOd2X6QenqLrSYUINdvs2ahrdWkvLm3qvkt0SCNaU72xh8Y6o
- NlfvBkumtxc18xu+CeS5avvs8QZQNiA6atLCHKiWwNDqdPayPf5kiwqGXTOD+ptgIrQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ bh=AEnErtWh7sZlHZdJsgofaVLAib2bAtC9sMrxaPxiuik=;
+ b=stqAL938GJvGRwkGV0/BrjbkhSbI1hHeqYcqUvCCSvzL/gxap1V8TZ5s/dA65iaXXvIC
+ UpeSJZL4nPIraPh6BuDfAqJjHjGf4HXUK2NqPOXuj5R3HHH9WD9I+6l9Ek7HNDD5VDAzF
+ XFZGNxmfo3yJ0NRdGl5U+qK+3UP4ndEyUpY8FgeMQiWs7cVMpr60hmSnKAHnG00wEqwi1
+ w5S1vc+xltkz92zi+YWeLGb6MyrukhGkoAvygqwFf5bi3kT4y1dyThOGzUWe+F/CTsWMd
+ gJpUEmSwpJVnAzzR64nvFaqBD8uQAjVVuku6TM53cbdhC1HopI3wifwquOwBR2exi8g==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=kernel.org; 
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=gvtnl7+I; 
- arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
- envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.s=k20260515 header.b="Qh9FFoi/"; 
+ arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=gvtnl7+I
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp1.osuosl.org (Postfix) with ESMTPS id DA8BF80F6D
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 10:14:30 +0000 (UTC)
+ header.s=k20260515 header.b=Qh9FFoi/
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D22C740FE4
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 11:08:06 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id C472D40A76;
- Sat,  3 Oct 2026 10:14:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2EB281F0089B;
- Sat,  3 Oct 2026 10:14:29 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A959D60A56;
+ Sat,  3 Oct 2026 11:08:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA2DB1F0089B;
+ Sat,  3 Oct 2026 11:08:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1791022469;
- bh=2VmWHvOJq3ei+FZj9fYa920sLoHkcpKfJwXQkSPQhUg=;
+ s=k20260515; t=1791025684;
+ bh=AEnErtWh7sZlHZdJsgofaVLAib2bAtC9sMrxaPxiuik=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=gvtnl7+ID5OzDiQAIC9c7uebK8LX7jl+75bgE/AWzyTexA9t1pz/zI4wPUHGp0O/9
- mHlm1mFGeXl2+ZhTyytXJxpOapZt/MdOMMq+0M8gfi11zqPFt20Kzel6nXbwBQB03X
- /qlPiM96cb+ljXtZHWzKphQW3a3Wn6gsScWwheDU2tEh6BhRognu+RrDbQ4GVIjWiK
- BOd455i7+M4yYLChaE4FwDud8lx9sai6ODWFRxAXovn9vCyu3kpf6NeRxJvrw7Y7V1
- tsi3pOokXJl1r4FJB88+HwbYfR2n8bi6HCBZWucESwM4zmNoRbWGYnS+iQeRRQA1VS
- Ly8it/j1edRdg==
-Date: Sat, 3 Oct 2026 10:14:27 +0000
+ b=Qh9FFoi/7YBEr0Xtb4NAAvo6A8SzJyn2+fWuFMo1hVsjlZ7mVRJROIQbJss8fTaE7
+ EMp5/Vao6YLH7p4GeYAk1rarmJhZnEflnyQNgJ9Jsa25U2yb06N5ptCBsvSQ+VmxeF
+ FR/q49T2NwSUFUJCIVe8gyCQt5HhvRy69JyUiRZ1+yNIbcVLf0ahVctKhCmW8yOX1I
+ ymJY0nMRbhJuVLB55IwQP3BjpTId8vQ20EVnuiofz22jyOOCxuSJ1PP49hJ2110H5V
+ 17xC9Pg8z5Tku7Fov4l/c/iWbRheOV5tQ8W7MxGXEWIpjtKx9gNDn6r8EaGM93Sg8X
+ dipp1UthcUm2Q==
+Date: Sat, 3 Oct 2026 11:08:02 +0000
 From: Yixun Lan <dlan@kernel.org>
 To: E Shattow <e@freeshell.de>
 Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>,
@@ -125,15 +124,15 @@ Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>,
  Raymond Mao <raymond.mao@riscstar.com>,
  Hiago De Franco <hfranco@baylibre.com>,
  Junhui Liu <junhui.liu@pigmoral.tech>
-Subject: Re: [PATCH v3 2/4] riscv: dts: spacemit: k3: add binman node
-Message-ID: <20261003101427-GKA68132@kernel.org>
+Subject: Re: [PATCH v3 1/4] board: spacemit: add SpacemiT K3 Pico-ITX
+Message-ID: <20261003110802-GKB68132@kernel.org>
 References: <20261003-00-basic-spacemit-k3-v3-0-dea68cd1bd7d@kernel.org>
- <20261003-00-basic-spacemit-k3-v3-2-dea68cd1bd7d@kernel.org>
- <2dcd6f21-ea10-4986-ae3c-fb81f5d768a4@freeshell.de>
+ <20261003-00-basic-spacemit-k3-v3-1-dea68cd1bd7d@kernel.org>
+ <b8a9bb83-7839-4833-8750-1ca55e318f03@freeshell.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <2dcd6f21-ea10-4986-ae3c-fb81f5d768a4@freeshell.de>
+In-Reply-To: <b8a9bb83-7839-4833-8750-1ca55e318f03@freeshell.de>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -147,60 +146,78 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi E Shattow,
+Hi E Shattow, 
 
-Thanks for the suggestion
-
-On 00:49 Sat 03 Oct     , E Shattow wrote:
-> On 10/2/26 17:34, Yixun Lan wrote:
-> > SpacemiT K3 follow the standard riscv binman layout, which has opensbi
-> > and U-Boot proper, so include the common binman dtsi file.
-> > 
-> > Signed-off-by: Yixun Lan <dlan@kernel.org>
-> > ---
-> >  arch/riscv/dts/spacemit-k3-u-boot.dtsi | 6 ++++++
-> >  1 file changed, 6 insertions(+)
-> > 
-> > diff --git a/arch/riscv/dts/spacemit-k3-u-boot.dtsi b/arch/riscv/dts/spacemit-k3-u-boot.dtsi
+On 03:02 Sat 03 Oct     , E Shattow wrote:
+> Hi Yixun,
+> 
+..
+> > diff --git a/board/spacemit/k3/Kconfig b/board/spacemit/k3/Kconfig
 > > new file mode 100644
-> > index 00000000000..f1c1c3ee6fd
+> > index 00000000000..1a63c73b6bb
 > > --- /dev/null
-> > +++ b/arch/riscv/dts/spacemit-k3-u-boot.dtsi
-> > @@ -0,0 +1,6 @@
-> > +// SPDX-License-Identifier: GPL-2.0+ OR MIT
-> > +/*
-> > + * Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
-> > + */
+> > +++ b/board/spacemit/k3/Kconfig
+> > @@ -0,0 +1,30 @@
+> > +# SPDX-License-Identifier: GPL-2.0-or-later
+> > +#
+> > +# Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
 > > +
-> > +#include "binman.dtsi"
-> > 
+> > +if TARGET_SPACEMIT_K3
+> > +
 > 
-> Looks good to me. I suggest to introduce spacemit-k3-binman.dtsi now or
-> later, may as well do it now?
+> > +config SYS_BOARD
+> > +	default "k3"
 > 
-Yes, I thought about this as we introduced new SpacemiT image format..
-I have no objection to do it now in this series
+> Let's arbitrarily change user-facing SYS_BOARD to "spacemit_k3" stem of
+> u-boot config filename "spacemit_k3_defconfig":
+> 
+> +config SYS_BOARD
+> -	default "k3"
+> +	default "spacemit_k3"
+> 
+> The use of SYS_BOARD is compiled-in as various runtime outputs e.g.
+> SMBIOS data structure. 
+Could you iterate a bit more on this? I've not seen K3 used SMBIOS or will
 
-> See for example of how this looks in files
-> starfive-visionfive2-binman.dtsi and starfive-visionfive2-u-boot.dtsi,
-> it would be as follows:
+> I think "spacemit_k3" is not a very interesting
+> or descriptive name to communicate all the boards that may be supported,
+> but it is better for a user to see this defconfig filename stem than
+> simply "k3" as the board name. I do not have any better suggestion
+> because it is a compile-time substitution and board selection is likely
+> to be at runtime.
 > 
-> arch/riscv/dts/spacemit-k3-binman.dtsi:
-> ...copyright comment...
-> +#include "binman.dtsi"
-> +
-> +
-> 
-> arch/riscv/dts/spacemit-k3-u-boot.dtsi:
-> ...copyright comment...
-> -#include "binman.dtsi"
-> +
-> +
-> +#include "spacemit-k3-binman.dtsi"
-> 
-> With that,
-> 
-> Reviewed-by: E Shattow <e@freeshell.de>
+I incline to simply keep it as "k3", I've checked all places refer to SYS_BOARD
+which all will be used under SYS_VENDOR realm or somehow has connection with it,
+so there should be no conflicts, to me, it's kind of redudant to change to
+'spacemit_k3', for reference to arch/Kconfig
+
+config SYS_BOARD
+        string
+        help
+          This option should contain the name of the target board.
+          If it is set, either board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
+          or board/<CONFIG_SYS_BOARD> directory is compiled depending on
+          whether CONFIG_SYS_VENDOR is set or not.
+
+          This is optional.  For those targets without the board directory,
+          leave this option empty.
+
+
+On the other hand, I do not see SYS_BOARD should strictly follow
+the name of defconfig, various board did so
+
+some other source code I checked
+
+cmd/pxe.c:20:   "default-" CONFIG_SYS_ARCH "-" CONFIG_SYS_SOC "-" CONFIG_SYS_BOARD,
+config.mk:29:BOARD := $(CONFIG_SYS_BOARD:"%"=%)
+env/Kconfig:20:   the file board/<vendor>/<board>/<SYS_BOARD>.env exists. Otherwise the
+include/env_default.h:93:#ifdef CONFIG_SYS_BOARD
+tools/buildman/boards.py:194:        'board' : 'SYS_BOARD',
+
+> > +
+> > +config SYS_VENDOR
+> > +	default "spacemit"
+> > +
 
 -- 
 Yixun Lan (dlan)
