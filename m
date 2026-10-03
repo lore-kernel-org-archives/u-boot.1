@@ -1,171 +1,138 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F3EECA5FDD
-	for <u-boot@archiver.kernel.org>; Sat,  3 Oct 2026 14:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 317CCCA5FEC
+	for <u-boot@archiver.kernel.org>; Sat,  3 Oct 2026 15:02:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8330181083;
-	Sat,  3 Oct 2026 14:40:57 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CrM-Av_nw0S0; Sat,  3 Oct 2026 14:40:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org CB55980F8C
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791038457;
-	b=cRpn52BMZKDR8uIMZGOAhtLPZtIbqEd0BPht0Efs6PlCLlRx+HDg5E5QiXV2T26q3ptz
-	 qGlNSIfTkBRNF2shfHqHwqeOcLcMJbqT6AUdHhy8XDY5l0UElMAnzyBNwjCacRZb8s/Jy
-	 Vts0vy8BguMbLVUYnHx5vvvAlW3tOEaj1HE3Wt1d0JLIlm+lHgk8GKSFMqmOms6w5ktzA
-	 WEwEYi2P2ZHdqcTw9nA4ZPApVpeqWr94sBe5WAzW64wL84hllWR6wuOq44Lz7LHN3qGX5
-	 rqXxFgx7oDxdvZ8QJrVNPDLpL/HpLc/RD2hPLu7OrNKv0s6dnFPzA0wQZKuYPNeFmtg==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791038457;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=L/nOOgT5xZf3JbqEQC3yae1lvJmooxSqvxvK6ulcdYQ=;
-	b=U66wtDYptHFIJ9Tv9tsL/oaVxkdV6ReXqI0GPKvgxDtcTr7c3jFPDzbzxvpJaQ8k6YYX
-	 yWvO8t2VCf931SLAi368ujqy5cxiV1HeKz+UP8QudiFueyYLjAiq2fZbrgvvYSE1peCcT
-	 kuLSLU+v/72niUFRUKTEAIWYhw099CTDpRsZPSrqrVgI0gV9app8IotIma3gjQCx9ReaC
-	 IXDkgo/80uBO8sUXhMiNmJGrw9gUn/hnGUz9aXIO/BbG8IISM/dPWOsUsXPiGxDfxyrke
-	 gKg8U8ctC0qdpLfMY0TKtH3F8bgsiRnKyrnOSWPQjG70YrW2LEXRS8YOM26nxCW03cw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791038456;
-	bh=L/nOOgT5xZf3JbqEQC3yae1lvJmooxSqvxvK6ulcdYQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=uBu9f58677/DicxcZk2A7/Otkp51DZNf984S5afwqHVtjTl4WcrykSwuiJTbBJFjs
-	 uQp1TwUpt23K3F92JtJzcY0iE6X3tzsqlQ1w77P/DOHr4eqiGesy6mVrMc0yQux8Ya
-	 ybdppqNwTtQeO97m2ewd5S9nyT/uyOQ7ZF41OwA9/bAe7kKXv8hJUDwMe0wXhx1uK1
-	 sl3CWAsjxxtHBD3d9Ce0lAs0k2IkInGhpn2yhJBp4uH4R5KUtDOATE10kn/aLLmMQJ
-	 6/Qghr+Tf4ZFhmPoJNwFHsEc6upg9aHbw5h+7W9jMp1gJ+oUncEBzhvqhUlEc0l6JH
-	 TUX1PIUUvi5CA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CB55980F8C;
-	Sat,  3 Oct 2026 14:40:56 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id B2E082E0
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 14:40:54 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A41DE60621
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 14:40:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CE20260611;
+	Sat,  3 Oct 2026 15:01:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RiEfGUg7ELx5 for <u-boot@lists.u-boot-project.org>;
- Sat,  3 Oct 2026 14:40:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org D8DF8605D2
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::32b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791038454;
- b=hVA85Zpy7YX2+DifXCIGch8XLbh5Sl4zCL0qVAusJDqxI14GPc4gWWuk8DfT5UgmXZpW
- ReNo/e/DqqIvW9QV3N5JUwWDnXcte237ZEQgHM6YYejkKje+lcGhFlAroUhG5JH1WRRJM
- 8d54NPW0E9/qQjdoU4NEAWelcRmzt0cScddl4hKS/Y53SAC7DPkoOnBoihrkFrV9AFrtq
- FDei6gy+pWrrOdrnqes6xlM4fK3vQUTql55bAUlJwzYisqxwhqcNNabkh7va7ThgciYMK
- a30fLiZAXpjjCwsmfSirXZeSXlZuvszDJpNr9J0mZEGGMfuwHlxyHi9JgXMH3MZEpwQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791038454;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
- Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=L/nOOgT5xZf3JbqEQC3yae1lvJmooxSqvxvK6ulcdYQ=;
- b=Ygle4iKIpxfEvnkdwMS9B9i3Hsu+EJgeHrUsWk4sM4b5aIUCYn4NzBlJJDCEIyl4Bhcu
- ga0p9BAH6IMY0Vte8exqiVeoT5ACNIrsLsV03qMtxR7cBd8uwjg/JwjHRFDpW9CqncGl0
- srUhWF6SCmfBc4pzL6YWePojU45LbxKEtetvyhU0bheHTftLm1SXg+KNg8ddxpB7npFWD
- i17CiQO5Gr6zrrT1SACLXH/l9pi3/qK9tMYNZP9cH6LddlclDXyiMsDHqABNJ/0eNA6Vr
- wvGtlCyM8hko76m6sp7B/Rx5EpvkT63hK8PCYjuqIhVcCBLGrMbJIpo72L/jspzCgPw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=konsulko.com; 
- dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=U0JFwzbR; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::32b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32b; helo=mail-ot1-x32b.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=U0JFwzbR
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D8DF8605D2
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 14:40:53 +0000 (UTC)
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-824c29c9da6so206220a34.3
- for <u-boot@lists.u-boot-project.org>; Sat, 03 Oct 2026 07:40:53 -0700 (PDT)
+ id VminP41TYgQY; Sat,  3 Oct 2026 15:01:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 0F82F60642
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791039719;
+	b=Gir6X4FsDcYnK9F4xxKgwwC7CuMEL2Imhmqpci9qo6QqqIkK5xsgpp7kOErXx0JT+/vO
+	 D4uT/7T/ejCYZF6nTWiPuP6ARutROSi865uM04SissVk+YRoB1v6W8b0wew6WAoPn61Jc
+	 nBCYh/5VQhSqPUR2J4TojxsbDxf70GZVJbkBbNPIlguHBAz3HtdJVcFu083i6wXPc/THM
+	 6JmDAUtOlNycdEQAXq9+ycPsqF+SyqKk3B3PTpi6sm8CdoaQ8wVxjmhggt7vj+E705pqC
+	 AGHvZIP8bffypzDQcqsW/6+0WorJS/jJ6aE5ATRQvzBkV0B9uHr0wmyRsSahg3nTY8A==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791039719;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-Id:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Flowmailer-Platform:Feedback-ID:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=ad/DFEwaYwjTbm4CfpGPTQHuD+GrgVuUmPQKaT+iDtc=;
+	b=YHQxAxYY03j2VyVagG4Ib7KfAphlP3br1uJwiiLRGaIzlHUN3tIlrKJFJqDF9XxhI4l7
+	 3DPj620SoifTPO71K6U8LFiN81ulR3xj+FP8cS6OvL1FY0G63IGy4xHI+Z+/jjKEpIbPr
+	 OU9dZJi4LgI3lsLqwiHT4FXiiGt7iPnKwQLvS8WdO/ZT3kmcdaex7Wn7SNxpz+Iu5X7BN
+	 3OH96NAjk2Ld7kA+5maSt6d8sKNMohO1pJ9yPknk+RNpOe5FZdNleMmN6J+KCvbvp2Qlf
+	 91z4af775TxYaRoQpLrxE6XbWKosRuUbSAaQlRgU9yZH/TWUSdIuaenHJ3bQcxy4w7Q==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=pass header.from=siemens.com;
+	dkim=pass header.d=siemens.com header.i=michael.haener@siemens.com header.a=rsa-sha256 header.s=fm1 header.b=W4WCOb5H;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1791038452; x=1791643252;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=L/nOOgT5xZf3JbqEQC3yae1lvJmooxSqvxvK6ulcdYQ=;
- b=U0JFwzbRpjAX+/5rhNYY5W6FeTJx9BnV+l5J24jikIxI7YZZL+lBg30FnabI2oBG1/
- LGtUPE6Azo5BmjQd34YzHZGxdGw1JJY7p9BltcsB5JQo96upQqW5gfBhOx7qxth+kCWu
- I1EmhHtsoXGZCrPVAEdbp692BjfcDeLKQINhM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791038452; x=1791643252;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=L/nOOgT5xZf3JbqEQC3yae1lvJmooxSqvxvK6ulcdYQ=;
- b=yQtXgSJ5t5ao1cRy0sLM3cWgwp+176tgjOwlCuTQ7vqcHAMPdUUxxxH9J20dNkD92c
- 3ysNlLHD4DG+DHQfluFZmupZniZe1rhZX3hx/xLqMT4nFml7HiCQH4agil8mtm4QYVPu
- c0cbEIClFEUpI0uRehcUoSEtd7oMH9kEKmJq06vk1Xakst0M8UKgVjXupRZBJinuoBSO
- 4BIS3xq0pomLJNgz3haxs112iGEHhoXB9pqTKeTK92Veuy58PDVZNYZoptVRvsBoOf+B
- iUxADTGZuNBofeHkcdgvUBCCqkkBheZRUTDlCjoT3zMBMhBL/S4zsQBcDIH/Xb7URgV2
- zpyg==
-X-Forwarded-Encrypted: i=1;
- AKwUvByIw5l4LIzbjVb+4YBcECX1UU+0eWUdsWolWQySkbLvC9XQOgtdnEVp2S7XKsLuKVqtLXvvZas=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nRi9Lr3CyUKCbfbXbtoRMO9ul1h71EdAk81jdskl74vvsJc353
- uVkK/wwJaVsl04RnNX/UoABhelHvHZWTR5rMh9HL32rkOzPqRIzOoT8NhMPrCtbJe0c=
-X-Gm-Gg: AYBFou3dpLT9YRxMv5gEn3U3Z1OKJUkxtvgJGhXJ7muYhS35wqwtataTcWZcf5MJv5E
- 9vDzok1ty8XmToBHzv8sPrUEl+Fz9kRJZAklgphvuJrJh+WWZD6nubc+UHaJXOVm63ygDfB9lZt
- UZBHYZm3gpVpvFcn74uxVQa237hCgOKQaT3XhhTBbZdaJDYtWeOAgb3u8e46GrdoE8BzwOZKstF
- bZdPi7k/IuewvNSKSVrDEi5tdDSclUe4LRA+nifIxY54KeOEI6FfvUxi1jOfQJNZAyw9fxqOB+a
- sLY4kv4bM0ncBqCDoYsaYoyw0RCikYt+HyFUa1jTYWJKQcrfsppuNQAFTDepZjEDqnOICnDa5eQ
- HN3wYyxEu6kRDlmGbB7sMkWT/MtdQ9+1J6lyWu+we4lSnNO1P0yFX/4HIkFTH2Y9F3xPQq/6JSu
- nMRKU5G3e7MZZpde2m9fvtEKKhGM+iUYMl6BJbqj+2b+bnAlPVTwkIJxkDlBfzX9G5OIYnQHaJE
- j/UNYSgO6b+5qZ64YGSttvEe4eNZKIeOjt9bFL3N9VRE9iIGI1juVcjEVQkUIxrgtuQfPnFtw96
- /xH78pPFQezPhZYtk/A=
-X-Received: by 2002:a05:6830:67c7:b0:7fa:ac4f:773 with SMTP id
- 46e09a7af769-823fd5f6e7bmr2661456a34.18.1791038452206; 
- Sat, 03 Oct 2026 07:40:52 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-823ebde0865sm2608370a34.3.2026.10.03.07.40.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 03 Oct 2026 07:40:51 -0700 (PDT)
-Date: Sat, 3 Oct 2026 08:40:48 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Haener <michael.haener@siemens.com>
+	d=lists.u-boot-project.org; s=default; t=1791039719;
+	bh=ad/DFEwaYwjTbm4CfpGPTQHuD+GrgVuUmPQKaT+iDtc=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=xcUo+mq6L1t89dnQ6c5N4+zXWy+3WKf//Yhz+M3KBQmfWNXtx94OLoywHp2TGCKnK
+	 XqEsBDfFOy2fOL+XY3gOxfhVonwRac9RkR5b4Ch/hehIpZumvZBCf+mtpBnrgEmY8G
+	 nnjvsJvrUmDE13/4vKn+mSbmbn9GC6pNxJRIXF8p4iWP6T3IQbiKXHvfh5rvcXTbKD
+	 oji/vR1FKYsurvyXljcrpbaWRnqPvy8K/IYiiw3UuU0dSzR7D9wBZ7w49rMaxGibBG
+	 hdtRK9UDDBWfGsQ+82k8zAGEWWyWAiheb5AoVGcVRafWJaGIRlTkT3JsxU8KoO9h+5
+	 NeIGy57PxWj3g==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0F82F60642;
+	Sat,  3 Oct 2026 15:01:59 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2FA391D2
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 15:01:57 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2151B60642
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 15:01:57 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VqJZhYMyy-Fm for <u-boot@lists.u-boot-project.org>;
+ Sat,  3 Oct 2026 15:01:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 8A83E60611
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=185.136.64.228
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791039716;
+ b=WtWiCFmf5ytdqQ7zJlNfa5ryNI3gvyApkYLxa7+T8uXvl8CHSYmROMhHBsiQ0ChnVWzj
+ Ju8p0+OtrsdUCd5Z54Gz53bp7fhbtQllQQ0Ynt6yZzxNmXDIuqYAhJ2PGIUm8b9mDwQtO
+ Bx/tB8O9YANTja/+dOG4LKmv3NmZhJRERy3BV1hqbSDQFcuUGV0rIAgFN4WlPKsutVHpr
+ FocP4ADjBjSMl8fJs27sbiSqh4EjMm4tMFdwL3+vVfFJ/jNd1a803F34TXnI4Zvt/nsQn
+ YrxKzm/wGgfHO9SFuEx6fVKwKNGZwWaE2LI6G4lXZNmyq1ZoT5EAJiI/zX41P9dAxfw==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791039716;
+ h=X-Greylist:Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:
+ Date:Message-Id:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding:X-Flowmailer-Platform:Feedback-ID;
+ bh=ad/DFEwaYwjTbm4CfpGPTQHuD+GrgVuUmPQKaT+iDtc=;
+ b=R//TXxLw8JkK1LRGMPINCwyNaZmTgB3l5v0ZfU1iCo1JjY44tlta0Qs9O7lOaV+qUpse
+ dj45SQMxpsVYNuJf2rkO9RzxnfuxTLXkGh1QcUT4LBNS72s3BL8J8lUUc3wI5LnR6f0Ct
+ EUhITXsleZneNRmpiei3G2Xz3LR6hzPFKnGowVCKRb5177dyj8ETYcfrB1HXbJIbXHzK/
+ 8bAmVSO7gCKsKmOaJa2xCjHymYWffNQRgpUEBSDF0iVpWeuXL49k20IKB2Z9tsbnPtQw6
+ rp76adzWL73taNy6o3lDXi+lrZ9a7YLpOGXVNgIYWPS35Is6rfgcH/1lbKyOpv7QQkw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ dmarc=pass header.from=siemens.com; 
+ dkim=pass header.d=siemens.com header.i=michael.haener@siemens.com
+ header.a=rsa-sha256 header.s=fm1 header.b=W4WCOb5H; 
+ arc=none smtp.remote-ip=185.136.64.228
+X-Greylist: delayed 63 seconds by postgrey-1.37 at util1.osuosl.org;
+ Sat, 03 Oct 2026 15:01:54 UTC
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=siemens.com header.i=michael.haener@siemens.com
+ header.a=rsa-sha256 header.s=fm1 header.b=W4WCOb5H
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.64.228;
+ helo=mta-64-228.siemens.flowmailer.net;
+ envelope-from=fm-664519-20261003150047c9f1e7f384000207a3-_uo_io@rts-flowmailer.siemens.com;
+ receiver=<UNKNOWN> 
+Received: from mta-64-228.siemens.flowmailer.net
+ (mta-64-228.siemens.flowmailer.net [185.136.64.228])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8A83E60611
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 15:01:54 +0000 (UTC)
+Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
+ 20261003150047c9f1e7f384000207a3
+ for <u-boot@lists.u-boot-project.org>;
+ Sat, 03 Oct 2026 17:00:47 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=michael.haener@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=ad/DFEwaYwjTbm4CfpGPTQHuD+GrgVuUmPQKaT+iDtc=;
+ b=W4WCOb5HJFK9v39PEPyWs5doWaMkKWIv92VfuSfeSYnAieOLHEEi8ncpFoDGMdqg5Wk5S2
+ ihmoPdcO9CILRNLF0hB/jFTS0CysBCp7RY5YaJA8OPrNchyWY7xapmu30wTycHDav4smxuVK
+ Hb5ZZ1Qn0Win/CtqHQw3Rf7dTDzbX9NcGIRDBHLzt7QyUvUE7i8el5xSoACGHdc/Upx5Nmkl
+ AlDd+vrmgiKdWsVLaMoeaQ7OrRC+rGnHbfFuk0fzpBi6yzo2iYS3XJBAe6ArKqzfsUPDeKF3
+ Hn9CHvoXKefiTvIF55FKkZY9gbaxYqIkQQh89pLmak5SSj0S79sRQi+A==;
+From: Michael Haener <michael.haener@siemens.com>
+To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+ Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
 Subject: Re: [PATCH] tpm: Add an option to start the TPM during init
-Message-ID: <20261003144048.GF2658242@bill-the-cat>
-References: <CAC_iWjJqezM8j=5jcAA8w9ApNP5b+pqC=CkRxEA8mqdNCu1RFg@mail.gmail.com>
- <20261003143524.71665-1-michael.haener@siemens.com>
+Date: Sat,  3 Oct 2026 17:00:46 +0200
+Message-Id: <20261003150046.75584-1-michael.haener@siemens.com>
+In-Reply-To: <CAFLszThPOmn6Z3hA6H1r812kKdEWxtv_RV70BNW_w5U0M1TBDQ@mail.gmail.com>
+References: <CAFLszThPOmn6Z3hA6H1r812kKdEWxtv_RV70BNW_w5U0M1TBDQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="J+4LbLe6+YuGRfCa"
-Content-Disposition: inline
-In-Reply-To: <20261003143524.71665-1-michael.haener@siemens.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-664519:519-21489:flowmailer
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -179,57 +146,73 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Hi Simon,
 
---J+4LbLe6+YuGRfCa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 1 Oct 2026 at 11:20, Simon Glass <sjg@chromium.org> wrote:
+> This seems like a good way to enable the TPM for boards that want it.
+> It would be good to document this somewhere, e.g. where we mention
+> MEASURED_BOOT
 
-On Sat, Oct 03, 2026 at 04:35:24PM +0200, Michael Haener wrote:
-> Hi Ilias,
->=20
-> On Thu, 1 Oct 2026 at 11:41, Ilias Apalodimas <ilias.apalodimas@linaro.or=
-g> wrote:
-> > Any reason why we can't add this directly to the uclass probe instead?
-> > According to our docs, the probe is supposed to 'make a device ready
-> > for use'.
->=20
-> I tried that, but there are two problems:
->=20
-> 1. On a plain booti/bootm nothing probes the TPM, so post_probe() never
->    runs. Something still has to probe it during init, which is what the
->    event handler does.
->=20
-> 2. It changes probe behaviour for every caller. Once post_probe() has
->    started the chip, tpm_init() returns -EBUSY. With that change, five
->    existing sandbox tests in test/dm/tpm.c fail.
->=20
-> The existing users (tpm command, efi_tcg2, tpm_tcg2) already call
-> tpm_auto_start() when they need it. Since a full self-test adds boot
-> time, I would prefer to keep this opt-in and explicit.
->=20
-> Following Simon's suggestion, I have moved the handler to lib/ for v2.
-> Are you OK with that direction?
+Thanks. I have added a section to doc/usage/measured_boot.rst for v2.
 
-This does show a concern I've long had which is that we wrote this "test
-this in sandbox" in mind, rather than "make real world use of this" in
-mind. If we need to refactor the sandbox tests so that they become one
-of the "reset the system" types while making real world usage match
-expectations and requirements, I'm fine with it. But it's still Ilias'
-area, so whatever he thinks is best here I'm ultimately OK with.
+> It seems odd to ignore an error in this case - if the board maintainer
+> says that a TPM must be present, then I would expect U-Boot to fail if
+> it is not.
 
---=20
-Tom
+The option is meant as "start the TPM if there is one" rather than "a
+TPM must be present". A non-zero return from an EVT_LAST_STAGE_INIT spy
+ends up in hang() via INITCALL_EVT(), so a missing or broken TPM would
+leave the board stuck in U-Boot without a way to diagnose or update it.
+It would also rule out boards like ours, which share one binary between
+variants with and without a TPM fitted, where a missing node is the
+normal case.
 
---J+4LbLe6+YuGRfCa
-Content-Type: application/pgp-signature; name="signature.asc"
+If a board really must refuse to boot without a TPM, I think that is
+better handled by a separate, stricter option than by this one.
 
------BEGIN PGP SIGNATURE-----
+> In any case, uclass_first_device_err() also fails when the TPM is in
+> the devicetree but fails to probe, e.g. because of a bus or GPIO-reset
+> problem on a board that has the chip fitted. That is a real fault, but
+> log_debug() hides it. Please can you stay silent only for -ENODEV and
+> use log_warning() for anything else?
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCasET8AAKCRAr4qD1Cr/k
-Ci5SAP9FhNkpHWpc7Dx1Bkzv5byqg4XOR3tgHIBbKI5lWFBYegEAxvBByurzFfAp
-ZT1zNGMlrlOmhgCsle1is3VhQ5aEfg0=
-=tpVI
------END PGP SIGNATURE-----
+Good point, done for v2.
 
---J+4LbLe6+YuGRfCa--
+> tpm_auto_start() returns a u32, which may be a negative errno or a TPM
+> response code (e.g. TPM2_RC_INITIALIZE). A response code printed in
+> decimal from an int is hard to match against the spec, so please use a
+> u32 and %#x here, as report_return_code() does for the tpm command.
+
+Done.
+
+> This is not really a driver, so lib/ (next to tpm_api.c) may be a
+> better home than drivers/tpm. What do you think?
+
+Agreed, moved to lib/tpm_autostart.c, with the Kconfig option next to
+TPM in lib/Kconfig. Whether the startup should go into probe instead is
+being discussed in the other part of this thread; I will follow what is
+agreed there for v2.
+
+> Please can you enable this on sandbox and it would be nice to have a
+> test in test/dm/tpm.c, checking that the TPM is started after init and
+> that a missing TPM is handled. Your test could send the event.
+
+Done. There are two new tests which send EVT_LAST_STAGE_INIT with
+event_notify_null(): one checks that init_done goes from 0 to 1, the
+other unbinds the TPMs and checks that the event still succeeds.
+
+> A full self-test on a TPMv2 can take a noticeable time, so the help
+> should mention that this adds to the boot time on every boot, even
+> when the TPM is not used.
+
+Done, in both the help text and the docs.
+
+> BTW, since the commit message mentions
+> board/xilinx/zynqmp/zynqmp_kria.env, you could convert that board in a
+> follow-up patch to show how the option is used.
+
+Yes, I can do that once this has landed. I don't have the hardware
+though, so it would need testing by someone who does.
+
+Regards,
+Michael
