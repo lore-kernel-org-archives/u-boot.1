@@ -1,166 +1,172 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CA2ECA5FEC
-	for <u-boot@archiver.kernel.org>; Sat,  3 Oct 2026 15:20:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3161ECA5FED
+	for <u-boot@archiver.kernel.org>; Sat,  3 Oct 2026 15:20:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E409E6064B;
-	Sat,  3 Oct 2026 15:20:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8CE0940E01;
+	Sat,  3 Oct 2026 15:20:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rB4aQcb6pRYQ; Sat,  3 Oct 2026 15:20:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 1B0116063A
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791040814;
-	b=qQgmPS4N9/V/+rNkBV3tBtSHLQEEP8fGqgMLfkXn9IXtTWYL7GjdwS29AGpoLA+wcuwT
-	 pcHKX2d2/iW1MFOlnhIiXMZJf+FvW5OIfvEm0FyKkX1yKobo4z6PtknjcHD3KVZIv7+bp
-	 fb/VQ48Ez6qe0Vk4gglVR8dr9g6/RyoSK/dger0+i4xNchm3SuO7oiLhr4w1XS5fdBWRF
-	 aXAj5fHQ1m414HGtv7tjVwEzO6jsz/DchykLj4PclXwtadZNM7G27HJ/RVTV52avGtTnA
-	 H2gUSPQZrabW3N+OBbfxi5yvxs9s38W5Gfy+fElmHDyBMI4JqOgmoxCYfskGXazg9yg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nfRbQC-7np6C; Sat,  3 Oct 2026 15:20:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 51C6940DEC
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791040812;
+	b=luzBvsfbN5vrWW9vcRYLlrONuQGpY9l53SJSmFrzK2x2bBytrv1L/6Ayydm/8tCTpZIb
+	 aXsmLfBGCYBiFs0+T6zhBmDd2WZ8ROJxvhOmDJEGOPp9vgPY94W6EdPmvZ7TDHO6LdzkE
+	 WSH8zdaoN/zyZGfYN8aw//trMXxTkByc3GvhbTdWcukUWMYAQ1WaRdXmGtnEVlZfhEFRz
+	 COEOdSpwX9aFuVq07L2dIhCqrE7EX9rN4HNO4AsnARrvNEm35Q47JhPmn4agpKRVPc5Q/
+	 tB+Swrt/bDccfyKVUMmzA9PgYynF5Y6hUf/GA+dUEAH1a/3A/rkB/yywr2bvyICxdnw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791040814;
+	c=relaxed/relaxed; t=1791040812;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=gzoemOYGTgVfuQP9BFQESUVLPWiS0tjOIQHI+E4Y7x0=;
-	b=g26MaAg1KD0ic3oCMK/NcEa3U3govYuI3beVsbJwmiVh7CpYEpRJ12LlN+qKhD/Oa5Wv
-	 8PXZTWPJUb8fl/WzVXoe+xkWUNW+ieWvqjVhB6EJKyObVLFMN8buERM+6/5kqc2tIRIFr
-	 H+T6pSjBrtowQftTRCximUIRSDH20BPiarhzPdVmMnIRakt1QdRCACEYVX/jNJ/y1NmCi
-	 bsh3lv9EFm98/Rhg/ATjJlpNFJbi74801AcqAMmuKsuz/32Ow16ysB1/zvMKtFNqZ7sAF
-	 U6bv2iXOa92QQlMHi6+pWA2Gzm7H/ht0GqdXhtBMIdejiJwmiRw+JlbJnBilNoWJ3Aw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=fXGcaOCpdGW7d0uMZGFYTmV27UHNAikfWO2XtLgqEN8=;
+	b=nU/xE5k9Olq3p5Ln4v6yOWo4q1NtAKETzc1P4I+rF8brKh3ftwIsLt4nhbk42d2HZ2Sg
+	 2yjyt2iIqpm/tOEqmph+aIPflaJ3eh7+M3S35c5YMsvV9haOk5PvIDPlmGN5/zZwSdFnl
+	 Ng0rBmNS5msgbgr0hi5Ri0sQhESKp5bhRjMW+vL1xmYJdzVgWc2rAt2FjJep7Vh8PrUXE
+	 5vrcV37lF1Hi1sNIxyyWcyFt/xPU7Ls0YlXH+zr/jWj7tKjv3SBMlbplXDV3B6EnHf2aI
+	 Kft9m7H8g9T15OjOlHOk8NfqLbsg3tPO6WHLpTzx1KVaDcIQtGtEXiFVAa/ky9guxAw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791040814;
-	bh=gzoemOYGTgVfuQP9BFQESUVLPWiS0tjOIQHI+E4Y7x0=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=OZOpVyKr+NGWzko6ykD4gvQc2EI3c5ifiLUGbUG+n0PmcugOAPsq8r7eLYWXsrXiW
-	 ymXe+u5/alW3TwmQkJZyvZqyEqPB3q7RfbgKmgrCLRNm13+IQw1gawaZna2LBUUGu5
-	 DrDzPnbwiLPW7/5nI0rJU2zMGpCG35Cn8iiuH4C0WueZwpStTKwAQTYIULoDqmH4xL
-	 rTGMv5+3xlwht5Wwxymw/j7rUBJq4V7JvPAmcAKYw+hCn2sAcB1pK7dy4pk3ihFtAu
-	 yimuvKJ+DcQv1E9R6j5pRFOBprOIWUOWsFH+ZpZDzqWd0T1HwHofagTLcn2Ej04kXy
-	 CHhIctEMZzlJw==
+	d=lists.u-boot-project.org; s=default; t=1791040812;
+	bh=fXGcaOCpdGW7d0uMZGFYTmV27UHNAikfWO2XtLgqEN8=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=H6HcPYDisrxqHVcdaiXDVEd/yTktWHmRX3dBQT72sPOU2p6XAJiH1/66aj9C2vcxc
+	 a/cYl8drwSUh4+w/pNkrBdHDPV7fZ27L9Esi+/Yj7nRsSHkOx/iA49diVP+FWRMFdp
+	 J4Bcie0396DC8W8Fm7TyKhgrEaz2NEECJNpHG3vYGhapSCmdiVGrnVn3w1puYGGLbM
+	 IezHf6117pmpz+KCyXcZDfs3FZFEniD2AcGCz69pSlycihl086Rx2L3zsUP2VGsyuJ
+	 RLchI1INBLevJPMUH+8CfjaWAqAfcKeNq7Gg2+KwvPynNDWum5KSPoQ/3ciFx0LYYD
+	 GJM/QkZq4O4uw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1B0116063A;
-	Sat,  3 Oct 2026 15:20:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 51C6940DEC;
+	Sat,  3 Oct 2026 15:20:12 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 892602E0
+ by lists1.osuosl.org (Postfix) with ESMTP id 8C3B5435
  for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 14:45:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CBCC8400D2
+ by smtp2.osuosl.org (Postfix) with ESMTP id B1C93400CB
  for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 14:45:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0fqWAe6YpaW2 for <u-boot@lists.u-boot-project.org>;
+ id hXmRYYhbdRkU for <u-boot@lists.u-boot-project.org>;
  Sat,  3 Oct 2026 14:45:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org D6E9940024
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org D9E88400AD
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
+ arc=none smtp.remote-ip="2a00:1450:4864:31::11"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791038717;
- b=AhieQbhehAYMLmeTQKDhhAL8pevHiAZsF+e4A90DBjN4FXU3it/x6pKtkVN1U6b4RtA3
- ZJU2FBv6Ti6OnKWaTv6pT8xQw9Eq24xEJ20hjDD3apTLI9En3Opa63wZCjZ0Z+UyCFalT
- m53PKHeCUwZJILqPNPoAOhGY7NqkBYYTaeT9i0rDvDNjSRu6h5G6yIs1/Gpt0TtPhXVpP
- FQODFLtU9Chkn3lktmzwrNhnym+o5rpfjkf9iMBB38+6RsM2xwaDkYS5V5hmRxiobUxlj
- r/eF3eIgkK6M/QzNtpdQlKTnIk9tFyWzFf9NlXxm+cHGEXcT1q9N9H3RHqz5bBx2Wtw==
+ b=Ty0WDq+N0HpPuvPbFWPDhVxmrwjo43/4TGqRqb/QIrvHymwE1U1+Tws0C6t0u5vDbCOJ
+ CITH+SCfOV37yx+8fnQjxR/osN3MXwSgntlaPcWDw0cpUuH9jpqNDI5onZnAsQIiuEk3E
+ xA93Hb/+w2NYAPD3qNUbRhaF2nqADbTcCd+jVJ2pTVMkDm/+/UUiK0jEuOoyba0Cr2e5b
+ 6SADQSAtoHxLQf5ghERxlgCn0Uo1ucYB+NnEpPVqRFIlNbNORWL2jRP8P0FaJG1Y+btCv
+ 6nyG5EN6sOpod/gH5Sj5ZIOqv1zYuIdH70OcXOnU+eAku73I3uN2IzSQXcETaAdrGYQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1791038717;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Type:
- Content-Transfer-Encoding;
- bh=gzoemOYGTgVfuQP9BFQESUVLPWiS0tjOIQHI+E4Y7x0=;
- b=SkLQ0ld9gS2DcNliYcHlrt8Dwfs4IgQ2FGtyc5Uzr4tiFu52y4mBUF5HtGvB4oWnp9r0
- sa8VgNDJDbVFG7MsmN93jr6Dtp5eynV2XTwE8Wuz79LH3UW7NCtVZ6DP61x/zGrf1xstt
- i0zSQ00xpKlIRp0Y99121GJpnRgefX4zmYPI0mE6GhgElbup5pzRjgeNxoAAsA74hc5uJ
- y/P2zFEAhB9bw++C51neNW7QsFlAvrPXFQKB6+930c5Oye0IPraV3P3PuvqSqst5lB9Ku
- qwIBKThiMg2GjqIerco8t/baotRn00bvJsuCj5y/pRaG3hqpBHsIPROl2Bqkam8uA9w==
+ Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Type:Content-Transfer-Encoding;
+ bh=fXGcaOCpdGW7d0uMZGFYTmV27UHNAikfWO2XtLgqEN8=;
+ b=BL9Tnr0c5Zrl1NsxcFxnhYJsqh8EJsJt6aaG/Mr3OGgFYZprX2Ft8/miaOq5qHwSXH9x
+ pubS087uwrK0GSuiwOuYYNY0TTnEAwPwud7cXlDXDe5d3FBeumbOmyfhgAtxTICO0Jn84
+ Vq8TNBaBMonsOAR1JVThOHDYZuE+onVN41XgK3QgVUQWl4fqPUyGuLcx+op8nlDpth87/
+ cyAgsR72AWXIcnjilI5O6S2jXKhpaeY9akgRtNswaMyt+rV6wIiBH3gLpobHcmoQpg6Jg
+ T1Wm8yahC4yXDa5W9KmE5o1d3ePayP33uL3wREtElFPCDShT5stdRMF/gx8nvjCw/vw==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=LKB0x+xW; 
- arc=none smtp.remote-ip="2a00:1450:4864:31::10"
+ header.s=20251104 header.b=g0zXNjIV; 
+ arc=none smtp.remote-ip="2a00:1450:4864:31::11"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:31::10; helo=mail-wm2-x10.google.com;
+ client-ip=2a00:1450:4864:31::11; helo=mail-wm2-x11.google.com;
  envelope-from=joaofl@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=LKB0x+xW
-Received: from mail-wm2-x10.google.com (mail-wm2-x10.google.com
- [IPv6:2a00:1450:4864:31::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D6E9940024
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 14:45:14 +0000 (UTC)
-Received: by mail-wm2-x10.google.com with SMTP id
- 5b1f17b1804b1-49e66390995so3945265e9.2
- for <u-boot@lists.u-boot-project.org>; Sat, 03 Oct 2026 07:45:14 -0700 (PDT)
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=g0zXNjIV
+Received: from mail-wm2-x11.google.com (mail-wm2-x11.google.com
+ [IPv6:2a00:1450:4864:31::11])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D9E88400AD
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 14:45:15 +0000 (UTC)
+Received: by mail-wm2-x11.google.com with SMTP id
+ 5b1f17b1804b1-4a1681949b8so3198065e9.1
+ for <u-boot@lists.u-boot-project.org>; Sat, 03 Oct 2026 07:45:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20251104; t=1791038713; x=1791643513;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=gzoemOYGTgVfuQP9BFQESUVLPWiS0tjOIQHI+E4Y7x0=;
- b=LKB0x+xWCLwLRK6UFgjaKpe5Wt4Tsb4jBQSk0UsF3cujoFwsDPpGyxACr8VpAJK5KH
- GPABJUJldIrv0V2xrSg/QxnNN2pCOxcL3AoEthO08SxiKrWduuwQ1gr7rNg80OaUKm6m
- GKq+WpOb7/3Am1X3WgAXTtpbJXq7hesMBPFxSVvj/Qly6JmJDwLFpFa8SnG+au2+TZfs
- 2C5kRjgftSR3qIZl4QrPPQPRQvBI2RPRtxrYfaf1/xk1vWLWR9cmhmYnfg39olFQhZSp
- 1idx1uXc4fjLchOqSDuD9rTxg6rTsMDlF3h8TugUO67YI5qGLI1iBUivrAMXq+8QUv20
- hSiQ==
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=fXGcaOCpdGW7d0uMZGFYTmV27UHNAikfWO2XtLgqEN8=;
+ b=g0zXNjIVPJDF3c4QsrjXO8aBIhjp5ayBjT0kfIWtHsh5O7U7PmBqDL1K8L42HgPQKq
+ PEvrXHh/sQ+lckejzSsOWnaEawBCWuaITY5/80XLx9vzGsZnmqfnRWOW8NvMn6mh2x1n
+ XF9t40a7Yy3ifjxuD7gPprzTGSjwpHvQJz/z8GFVpSl+DiJABvkeANDS4SpSdSfXOUX3
+ SfY4ePRb8fMER8Q7rbTzytFHq7+GxILluN4zdRAK2ihk0hy4dG6pPh12nx+RUD+fx8J9
+ +oW0q8t/Jf7bhNtgeyCi++dGqLFwtOQe1Qk+7N7iHMg4x5ctttBURXv9ec+Ns7LoALuA
+ Rl1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20260707; t=1791038713; x=1791643513;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=gzoemOYGTgVfuQP9BFQESUVLPWiS0tjOIQHI+E4Y7x0=;
- b=ElspXYBN96+oWfqubo04s2YGMMMb44ruY6/fKZR+ff7Dc9XyhrNp2lo2IwbEjYYlWL
- siRi18vetwof8ImGGcZMmyw/O19OZ7HMsglLWM3VjTIYoyIfUl2HwDaMzwndZJ4YVlkL
- OODx/qBmX6stn1CRnBLfzeR3DR+ZBEvJ/vXsDLa8vPvHeWqbWvA3viUnyIApa5EBTeOe
- Wb8+VIb8l9cdjOf/7z7qs/mSjLNlawmD8ZAO19J2MTJKx0MPa9SteL/Fcu2IYjMXQx2n
- UtNGvQ1bHyYndVci5ZmVlckECt1KBTEvwuTctqGvqCBmW5zUuNDMZc7cb+G3B1VSq8AU
- Lcpg==
-X-Gm-Message-State: AFuF++kpMjlohvXal+eQ9A7TbM79GAX8vVyTeSNoZRIdm335y3U1cAJZ
- k+Fcd/SKESbk9j+Gr7YahWxZln8+WU02srJYTRmgxwQ7JnJwOt2LbEKqYXab/A==
-X-Gm-Gg: AYBFou1MWEvrYT2nGDvw5nv+AdTqaohf6VlNoUJ4oxZEG+ybgYfnKHbSp6zUiZ9/zXP
- 46hax+IWK3KpWvH/S8p61Z6qQ2pTXuxrwFxjPfXw/ENkDwwEsE798wBPdRiJizp8WWmQdZq04HN
- hJ/kFfmIMysiXkPHZJoFay/4/bO6iW0TK4Mu/b0t2o7/x2jpHLMdpu6QMIQy1U9cLZ91jxG4fE8
- QojXE+8877Lc4qMsATfqUnRj0LHnpPymI6S9vJbL2NIW/Z/H158R9QCX65ZynkhAlzFUyWpVzk2
- mOyhjHkBKsssF/ff+OVQmvyhmmA1iANoTFDthSV0tBjh+vehFwrUPLltP+BTjlpxHH74sRfACQ8
- s9quvObzJJZauIQdovM4t7BRba/HfTUtlDHgRaQ5An0KUCyOsBXxak8kot8D+D8TpJp4aIjyxAi
- 1EXin1BM60LC2SFPi6lc0s+LF2m0HUtupPff1QjWcC6Rc2iJ+Gcw2SBpsZjf0xyuBynifZASQ5V
- JipVXR4Mg0Ldgpvd7vdZN/BCINAdYgKZiJiz4DiY6aoT22HfMT4pajzKqhIt2kORg6/OXISs2x9
- ao7H
-X-Received: by 2002:a05:600c:3501:b0:49f:fd40:80fa with SMTP id
- 5b1f17b1804b1-4a0276b78f7mr98321235e9.34.1791038712421; 
- Sat, 03 Oct 2026 07:45:12 -0700 (PDT)
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=fXGcaOCpdGW7d0uMZGFYTmV27UHNAikfWO2XtLgqEN8=;
+ b=R3p5aa+24uUWdviTfcYR9Jbg28D0IP2vzvDfdNxiObWJu/FcL51YytYP4Cr3qg96eZ
+ ATzj9p8O/pHYxL1PXTIyGumE6ckUdWHHMFRewNAJnc7WOxRDwv4MULxvN1/SrQHC8uhe
+ SbmvMrDkqBt1ezhwki/uZs+mbJs3aea4GB0/rJ5/RQzyXbrt3UoM61m4wBUB80ZBkQiy
+ z7Irwm/Pt3lF+vgzvymduyzborUR1j5eqLaDjOKdQTe+8C6Rx+FZezERP4usZkNJ++OO
+ LUeoXQLpLjrM96ms/w6IupjFF4Ybif+yvfH/p6bZq8+h4dDOJs0VjeZ/XXc9SBzBY8dX
+ ZdtQ==
+X-Gm-Message-State: AFuF++laxyAITMeHzrK0Nb2dh65oiE+7sT1B3aEihYEhpQopk6NlvIja
+ VZx7a5UsZ3IVkGV2PJz7t0JcrgU6FF2gH8n7cLVCTSTKDrHtwC9EAuyWlRRTgw==
+X-Gm-Gg: AYBFou2ZN2ZrdjyT5xpzR1sgPnjy2Mu5xeks/xl29zW1MaOprHy672X5ldvVVNbx1cQ
+ KPF4jUTyZNAYkWg4ih7p1lfuOFGGC0fNsPSyscwWivFpiRd7CUHcIZLKCzJkb/UbhTh1jPr0XFu
+ tabgfJxtYBwZlw3+prSqsNHAO5ncGRHy9rjnQ/ir04asX7APttk14R7XfbqsZ7iAx9gK2JzSU0X
+ DjsNTDtrTfEaG6KqumQ4OLL1ojWnt4U9ZEU+lpyMCf1Wudz9sFgzIrMCxI+ZbhQtgSQqjTWSf7L
+ tLWFwIG45ePLkXaJfqZhVcF9u0QEq5PFFpac2zmEBp4ZLdhLQj6Vqo0rzColta6uaH/NlM3PGFB
+ wviXiKZ4gz1iVW01/dAIQ8un27wpeN0OTu5jev4+iuUS3xZMyTjtsKCNuRDAr4Bh84Nq5qgBvzj
+ R1JZj/zECb/tauP5HW5AB9PWfwq7VzkQSaOczAaztUgZXJnGOsdV76NrBQpnC4K7Q6UrzRu1im1
+ hIsjZwYY1KRRdmWEM9uFbzSV32tD6yKrmJ0sTA+0wBjzGrsHcho5/PfSdPgTVNfzsVxiPivwD5S
+ NL7Btaxt6eaKDVw=
+X-Received: by 2002:a05:600c:620c:b0:49c:fa20:cbfd with SMTP id
+ 5b1f17b1804b1-4a027583fb0mr99969515e9.20.1791038713395; 
+ Sat, 03 Oct 2026 07:45:13 -0700 (PDT)
 Received: from lap.lan (xdsl-31-165-251-31.adslplus.ch. [31.165.251.31])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a0280bfafasm186553995e9.8.2026.10.03.07.45.11
+ 5b1f17b1804b1-4a0280bfafasm186553995e9.8.2026.10.03.07.45.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 03 Oct 2026 07:45:11 -0700 (PDT)
+ Sat, 03 Oct 2026 07:45:12 -0700 (PDT)
 From: =?UTF-8?q?Jo=C3=A3o=20Loureiro?= <joaofl@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  =?UTF-8?q?Jo=C3=A3o=20Loureiro?= <joaofl@gmail.com>
-Subject: [PATCH v7 0/3] spi: Introduce driver-model support for SPI EEPROMs
-Date: Sat,  3 Oct 2026 16:45:04 +0200
-Message-ID: <cover.1791038319.git.joaofl@gmail.com>
+Subject: [PATCH v7 1/3] test: dm: sf: Get the emulator attached to the flash
+ slave
+Date: Sat,  3 Oct 2026 16:45:05 +0200
+Message-ID: <4dbafdd2d36c3f504ea48815ef847c5835639db8.1791038319.git.joaofl@gmail.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <cover.1791038319.git.joaofl@gmail.com>
+References: <cover.1791038319.git.joaofl@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 03 Oct 2026 15:20:09 +0000
+X-Mailman-Approved-At: Sat, 03 Oct 2026 15:20:08 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -174,101 +180,47 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This series adds a UCLASS_SPI_EEPROM uclass, a driver for AT25-style
-parts, a sandbox emulator and a DM test.
+dm_test_spi_flash() picks up its SPI emulator with
+uclass_first_device_err(UCLASS_SPI_EMUL), which assumes the sandbox SPI
+flash emulator is the only device in that uclass. That holds today only
+because the flash emulator is bound lazily, on the first transfer.
 
-v7 addresses Simon's review of v6 2/3 and picks up his Reviewed-by on
-patches 1 and 2. Thanks, Simon.
+As soon as a second SPI emulator is described in the device tree it is
+bound during the devicetree scan and so comes first in the uclass. The
+test then hands a foreign device to sandbox_sf_set_block_protect(),
+which casts its private data to struct sandbox_spi_flash and writes
+past the end of it, corrupting the heap.
 
-On the status-register read in probe(): it was diagnostic, not a
-presence check - and on SPI it cannot be one. There is no acknowledge,
-so an unpopulated socket does not make the transfer fail; MISO just
-floats and the read returns 0x00 or 0xff. The only way the read could
-fail is a controller or bus-claim error, and failing probe() for that
-was, as you say, too strong. probe() now ignores a failed read and only
-logs the value at debug level, with a comment saying why. Any real bus
-problem still surfaces on the first spi_eeprom_read().
+Ask for the emulator attached to this particular slave instead, which
+is what the test means, and which stays correct however many SPI
+emulators exist.
 
-Testing on sandbox, against unpatched v2026.10-rc5: "ut dm" runs 583
-tests to rc5's 582 with an identical list of failures (all
-environment/fixture related), and the new spi_eeprom test passes. The
-sandbox_vpl CI selection ("vpl or test_spl") passes 12/12 on both.
+Signed-off-by: João Loureiro <joaofl@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ test/dm/sf.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-Changes in v7:
-- Patch 2: the status-register read in probe() is diagnostic only and
-  can no longer fail probe(); comment explains why SPI cannot detect
-  presence this way.
-- Patch 2: fix the comment above spi_eeprom_read_status(), which
-  described the return value wrongly.
-- Patch 2: commit message nit, "the faster of the two".
-- Patches 1 and 2: add Simon's Reviewed-by.
-
-Changes in v6:
-- Patch 3: build the sandbox SPI EEPROM emulator only in U-Boot
-  proper (not in TPL/VPL/SPL), fixing the sandbox_vpl CI failure.
-- Resent as a new, correctly threaded series.
-
-Changes in v5:
-- New patch 1: test/dm/sf.c now asks for the emulator attached to its
-  own slave rather than the first one in UCLASS_SPI_EMUL, fixing a
-  heap corruption once a second SPI emulator exists.
-- Patch 2 commit message reworded: imperative mood, "driver model"
-  rather than "driver mode", and it now explains the motivation.
-- SPI_EEPROM_CMD_SIZE removed. Address length is an addr_len field in
-  driver data, overridable from the device tree, so 8-, 16- and 24-bit
-  addressed parts are handled.
-- AT25_CMD_* opcodes moved to a private header,
-  drivers/misc/spi_eeprom_priv.h.
-- Read path no longer computes "offset + size"; probe() rejects a
-  "size" that does not fit the configured address width.
-- of_to_plat() dropped; geometry read in probe().
-- "size", "pagesize" and "address-width" follow the in-tree atmel,at25
-  binding (dts/upstream/Bindings/eeprom/at25.yaml).
-- Compatible list taken from that binding, plus the "atmel,at25"
-  fallback.
-- Kconfig: "depends on MISC" dropped, help text expanded.
-- include/spi_eeprom.h converted to kerneldoc.
-- Sandbox EEPROM node in test.dts follows the binding.
-
-Changes in v4:
-- Emulator frees its backing store in a remove() method.
-- Full kerneldoc for sandbox_spi_emul_get().
-
-Changes in v3:
-- Reindented with tabs; the series is now checkpatch-clean.
-- Dropped the no-op write stub in favour of returning -ENOSYS.
-- Removed dead code, fixed the read bounds check, corrected the
-  AT25160 geometry, switched to u8 types and added a MAINTAINERS entry.
-- Added the sandbox emulator and the DM test.
-
-João Loureiro (3):
-  test: dm: sf: Get the emulator attached to the flash slave
-  spi: Introduce initial driver-model support for SPI EEPROMs
-  sandbox: spi: Add SPI EEPROM emulator and DM test
-
- MAINTAINERS                    |   9 ++
- arch/sandbox/dts/test.dts      |  16 +-
- configs/sandbox_defconfig      |   1 +
- drivers/misc/Kconfig           |  15 ++
- drivers/misc/Makefile          |   2 +
- drivers/misc/spi_eeprom.c      | 266 +++++++++++++++++++++++++++++++++
- drivers/misc/spi_eeprom_emul.c | 130 ++++++++++++++++
- drivers/misc/spi_eeprom_priv.h |  18 +++
- drivers/spi/sandbox_spi.c      |  37 ++++-
- include/dm/uclass-id.h         |   1 +
- include/spi_eeprom.h           |  95 ++++++++++++
- test/dm/Makefile               |   1 +
- test/dm/sf.c                   |   9 +-
- test/dm/spi_eeprom.c           |  46 ++++++
- 14 files changed, 642 insertions(+), 4 deletions(-)
- create mode 100644 drivers/misc/spi_eeprom.c
- create mode 100644 drivers/misc/spi_eeprom_emul.c
- create mode 100644 drivers/misc/spi_eeprom_priv.h
- create mode 100644 include/spi_eeprom.h
- create mode 100644 test/dm/spi_eeprom.c
-
-
-base-commit: a06e89ab05eaa2b8344d521319399333cd760ae5
+diff --git a/test/dm/sf.c b/test/dm/sf.c
+index 3684d021709..0ec02ac694b 100644
+--- a/test/dm/sf.c
++++ b/test/dm/sf.c
+@@ -50,8 +50,13 @@ static int dm_test_spi_flash(struct unit_test_state *uts)
+ 	ut_assertok(spi_flash_read_dm(dev, 0, size, dst));
+ 	ut_asserteq_mem(src, dst, size);
+ 
+-	/* Try the write-protect stuff */
+-	ut_assertok(uclass_first_device_err(UCLASS_SPI_EMUL, &emul));
++	/*
++	 * Try the write-protect stuff. Ask for the emulator attached to this
++	 * particular slave rather than the first one in the uclass, since
++	 * other SPI emulators may be present.
++	 */
++	ut_assertok(sandbox_spi_get_emul(state_get_current(), dev->parent, dev,
++					 &emul));
+ 	ut_asserteq(0, spl_flash_get_sw_write_prot(dev));
+ 	sandbox_sf_set_block_protect(emul, 1);
+ 	ut_asserteq(1, spl_flash_get_sw_write_prot(dev));
 -- 
 2.55.0
 
