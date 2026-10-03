@@ -1,128 +1,165 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06CBBCA5FE7
-	for <u-boot@archiver.kernel.org>; Sat,  3 Oct 2026 12:48:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4851CA5FC1
+	for <u-boot@archiver.kernel.org>; Sat,  3 Oct 2026 12:48:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C12368136C;
-	Sat,  3 Oct 2026 12:48:06 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 88FF541390;
+	Sat,  3 Oct 2026 12:48:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PuKUwfG2-xUB; Sat,  3 Oct 2026 12:48:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0021081357
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791031686;
-	b=R510T10yur+WR+z8X0T6DNmQf3DhXwEaCKYF3+2clApJu3EqGj2oLhQAHlbyh0wY/4ag
-	 Fz5fvZDsenVGlCh8jJy1AJounvjssSLEwcjSQohyDPk0eJ/DdIqKNTHtWX2dacKwNHPJR
-	 r+xVbGJEhG6t5HzmKfSnma8iHwuzcG06y6LaL1uE0K/mYdIWheuhKwCpODp3jii3GkKSx
-	 b/yCy4mqWqfV+fB4+kPyIbG4af98I/nTV4WTQPsww/GBMfNcs+DIE38BRGFErWuAT1AP3
-	 k3AHCs/n8JQpup2J83jeVDxL2X2ulHtAeEMRXbe0i4EIfK+I0S7GCcB8wGsAV28DOWw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791031686;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1Akrp1cnTkV4; Sat,  3 Oct 2026 12:48:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A33A74123E
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791031687;
+	b=XZA+9y/ZqNtY7/i2vWCPHE3oP8xRJ9dJgOWS8NybPC+QDr6tQmbRGQ08AASdkJR6a3h4
+	 D9Yxh01qnJOT1SCSWnbc2vVYwbKjF2CJajtL1p7AVWQxou0SHgZe5o3n1v9YzJ6SI/I8d
+	 scWhN8HScoSUQAItYoSxtv16v+tRtWMaGgkpbkTMv+lCQ6c19jsafv6HLN+Ff/3KqHExQ
+	 UD9nBs2wVn23SPBwxdmtq/FvAsfeicvaOSsEtamSNIzHmzKiB0vJQ2Vwfs/S66uQ9d19o
+	 8Xo1/Z1s4DU8ilHNcz0guGV2sWX9/UdX6UWRJPfBr1fDM3fsf3TPqThu9N4GQudJwOQ==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791031687;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:Feedback-ID:
-	 X-Pm-Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:Feedback-ID:X-Zoho-CM-AccountID:X-ZohoMailClient:
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=hjm5MO+Uhf1yOXMm3TFQejsZvjWrFmidozD38ixXCq4=;
-	b=axU/P8Fgv2kpCqudkqMgu/28pMjsGP50wgsr9s+568QOaDZWuquCZ7dpOqyTED++mI/1
-	 9fYs06JYLLlC+ok57OCLXGXSWcvzKkGyMr3BtjiujxGAOqI+JLYMgnM0ji+VnsKKmP6xe
-	 /bpd9BVhdwzWhPJa6AqOxsHAUmejuXh+Nhi0dw+9VDgNuR/DTUjxbBOB+GohpVDYxL1Xq
-	 /rb2mlspaTsLjvNhn5pF/NSBiuPFO9q7mzCT5ba3Fi4w/Y76sIvt0f6H6I3Fj7lh5wWUN
-	 4PzwYbP5vfe2455N/+enYfp4eeKh5Mpc9ZCs/ZLnPVl8TXbO3XjqGktthwI12j3PfNw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=lqMJr3mjwDMpybG5juE/xBOLrVPgnk2dD9vW7PWg00E=;
+	b=VDr/L3XJjY2DJqa14VPGMd8sM9XtonEZHOjiENlWZ/oPlKSzYLUH3uOqhcOtPjtYzbSi
+	 l3HvFetu7fUT9iPpqWblWkzU8JUgIEMGf29+tws72II6phy0fgdghMqq5N2ZcAv+kUzff
+	 FMnlWXftP74t9D+8/Z/qO8oY2sentptOaWnU8BxWUy2aDCgjJvFWdZ/QMTIv6NQfc7QRb
+	 jH1jjQbIrNt20kk+uNrXIb5/v+gMoava9961ZOylDOfLO5eKmIKWCczZI1ivV2XZcHPgs
+	 zb+VVpysJxXLgAZ9bBGqo2yDRdOZymUaAkWB+ZYajtuir++Togu99qD2D0KQOG59Dzw==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; dmarc=pass header.from=zohomail.com;
+	dkim=pass header.d=zohomail.com header.i=zhuxu_ran@zohomail.com header.a=rsa-sha256 header.s=zm2022 header.b=QQr2wL22;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791031686;
-	bh=hjm5MO+Uhf1yOXMm3TFQejsZvjWrFmidozD38ixXCq4=;
-	h=Date:To:From:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org; s=default; t=1791031687;
+	bh=lqMJr3mjwDMpybG5juE/xBOLrVPgnk2dD9vW7PWg00E=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=S1YBIrcUZC9xijo1zzZ/nWHAuune/h8jTnX8BwOWqpZrskCtdvPEUq6t/zIZ1sm7X
-	 O8e5+wfUTfzEUep/IciDILJpG2NF5ADfojQXpCj+e+i6YyW2MDrrwWxQxx+/U5dUp3
-	 gOvP9Ly8poeUrv2y9Zgu5VZifda8FCeeej9dy5G3vWR1ALUCsuXphsVa9u1oaW1ShT
-	 21w6hjLwrVMsfJEfzKSFH/QvLuPDXUjUu0k/fjNSXPcFyjQydNArzidNjZHQ+h4mQ1
-	 /YQVIbFFBJmZP3Zu8AKnfO3XcOpI4Y+9jA9kT3rM0N0PKBls/WzzgeTjCCUHV7FK+l
-	 EyFkjmJhKFOwA==
+	b=ljcdzQAxJ+pPYqHyfmP9HmGjVuFEHfCP/MadXVEqAric+Jb6S024m/d2A2OZcr4MH
+	 dKxfazEM1NaGUzgfM/fTmE0q7zqHzU3YmZeRQ0cGERVfW1hE8dxLfEMEGF77G7rhow
+	 HY2WyGTw1OWobwNjSirSRVG6kEYN045gyHAAL1jWBX2vQVo0OHM9ayslt6XbjdInBm
+	 K+i7Cn+UM7Py0hJx0hnTeW3zuCrZf36TyGR78qhqpvsg2bIEc/UAEu1fldB5Qmy61t
+	 zzJGwwYDyCLYoaCZ9nN8VKRwWEx9nXeZD9G1bjno7SegZPUIp3FXwZ+hpxtqEcp/6R
+	 O4bgybfOzUEOA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0021081357;
-	Sat,  3 Oct 2026 12:48:05 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id D99D334E
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 07:33:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A33A74123E;
+	Sat,  3 Oct 2026 12:48:07 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id DE2112E0
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 11:57:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CB618605F7
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 07:33:35 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C457440E4B
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 11:57:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 82xj2YivBuU7 for <u-boot@lists.u-boot-project.org>;
- Sat,  3 Oct 2026 07:33:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 076DE605D9
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=109.224.244.18
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791012814;
- b=Jbfl1YXZft9NLJOKeuVsyNv23K9UIZKxUt93R0n8fz3lzgAApvtcdINlPXQYXR2U20ma
- zTuTLkeBFqAGDKOjyiKk42eMGqvdJWQ3SctDaZop8E9bZ0gAkFbUB4QYliQpZMGtIr/si
- XkHF2ZnJUUU9EyQ5R+38AUI59R2WjYfOPwHMgyQX+C55ez1o54AYxruZyPXienuFBBi/o
- 0zzSJa+IqReRYHwbOPiBJyJNgDvKh5Z+9OqCSX+R7PuSpseKYtT9HLb1/r8szNWtKlF0l
- sepPp3/vN99BI1ye/Ujvu4S6WyN4H5zAGZtf5RWAGNb1bIR//mOplirpikZLiFKvTaQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791012814;
- h=Received-SPF:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
- Feedback-ID:X-Pm-Message-ID:MIME-Version:Content-Type:
- Content-Transfer-Encoding;
- bh=hjm5MO+Uhf1yOXMm3TFQejsZvjWrFmidozD38ixXCq4=;
- b=PiiBKEFmuJb3O1WJw1fxppp9FcCjvTbXr3wXCaqZIdEIs4TDVDo13Tjh6WA1WwY95edy
- YCc2rV6/YdWrShBBHczlvFFTY/eR5Y6xwsXEp4EbMPvP/xIvqSDZaSdYRTKafN9ijLC+r
- +FTlvcfBkCOBcOxW+KPnkZV7Q5QTXCFjFqoA7B3v4J3/AJGKGE0A/j7YB/I2LvolZwzEC
- WBFJhB9gB4sAEhwooRMNIf+FCeuP4YwBfUjkcPL2mM+gPwy/rbQyxo8zbVc2xfmn+XrtQ
- IIXi4mYVmAj7TYb6ljelJOH8Xl7qtXFyM9wNmr6P0zKbesXXh/0rbB4GQ7iDbRaDKPQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=protonmail.com; 
- dkim=pass header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256
- header.s=protonmail3 header.b=e9ONhpHW; 
- arc=none smtp.remote-ip=109.224.244.18
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=109.224.244.18;
- helo=mail-24418.protonmail.ch; envelope-from=davewk225@protonmail.com;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dfW3P5Fp6hcC for <u-boot@lists.u-boot-project.org>;
+ Sat,  3 Oct 2026 11:57:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 0B03640E49
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=165.173.180.95
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791028676;
+ b=lQyk/9poecGi3FkZyPlM8ppwMUPtbgpn+FWcQhcBSxDGdhORPajdbCQFC+FzVxUbMSG6
+ y3Oax+6FpM4blixSITOWfZFjgg50hh1rIXjA1Ju1hW38WKMXMvuh+bjxSj5fueDBObwwU
+ 7knMgBDj6Y6yn1A6htgYtMiHl7urnKxsbNnVvCu9oQhL4DVUuqXSErNcyiB8v9a4/PJ9a
+ pHxY9m7eH8vcNFOssumqPzcr9QRtvgdfjjBeJzvGboQHAC93m1DCNHDKPgV+TYT5ydEhw
+ 0wgflQvVntZ+iKUOshVsk/u1iS7WPvSTy7X5SoA7snYnKGHPsvuQaG/hpJFoR9rf2ag==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791028676;
+ h=Received-SPF:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+ X-Change-ID:To:Cc:X-Mailer:Feedback-ID:X-Zoho-CM-AccountID:
+ X-ZohoMailClient;
+ bh=lqMJr3mjwDMpybG5juE/xBOLrVPgnk2dD9vW7PWg00E=;
+ b=lg8EgQRAYQteR4D3pZ5G/H7zb5DTqAVqAXZhd+jBWzK1CefIRjWmRK+U7uajq79kM8x2
+ V8/jR4IQWHII9sI6S46MhvQdIWtcUTHDfC8atI4Urk9ZChJAXhsJKYIUkHK5PZqu/KMB8
+ QAxFlbkU3g7NLnU0PFEwEBo7mhQu8rvOzQrFS5B96KLT2bDyX1CHcWUcyWr0Avwx76ayg
+ k2IyggqMXOlxWC6bi4jJroyUFVJXEwP7pB3H37R2YCKY/xuIBEut+VCi2YaPdMtaQNfmn
+ xsGGKN6eVLfczFPX0RrF86y9grPk0dA+GqgHGjJld6v7hoECdt9batosuQAPj/8Ijwg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org;
+ dmarc=pass header.from=zohomail.com; 
+ dkim=pass header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
+ header.a=rsa-sha256 header.s=zm2022 header.b=QQr2wL22; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.95
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.95;
+ helo=sender6-pp-o95.zoho.com; envelope-from=zhuxu_ran@zohomail.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=protonmail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=protonmail.com header.i=@protonmail.com
- header.a=rsa-sha256 header.s=protonmail3 header.b=e9ONhpHW
-Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
- [109.224.244.18])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 076DE605D9
- for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 07:33:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1791012810; x=1791272010;
- bh=hjm5MO+Uhf1yOXMm3TFQejsZvjWrFmidozD38ixXCq4=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=e9ONhpHW8njPW4yhP9Ont9juuCyR1Ocx/fIncmRg/JC8HVtyU1g2NiQexZqS+U9jk
- vn7ZgvGCUE/tJK4yprML66y3PDlQJCgnsYZolFhVPJ6TxA5DgB++9IFnNri2WIbboj
- IGvCSlmMHEOR1dZoCmCxj7a5EK8a/6iNDXLxhWjIj7NP5AIjAPYvxWls1V6JJRyn8O
- MqO4nOCbwPgk6xhiMDrwhVYu1du6GdIdIznF1tzvYuVhHZv2dwMjHaDztsrU4qOW0b
- VDJT1ISPttKjA+UwuhnlOkzne5m8/0k07pP9id7/DdwoL2py4NCmwAfeedpa/c0jfw
- 2arertelg3TGg==
-Date: Sat, 03 Oct 2026 07:33:26 +0000
-To: Zixian Zeng <sycamoremoon376@gmail.com>
-From: Dave Klotz <DaveWK225@protonmail.com>
-Cc: u-boot@lists.u-boot-project.org, dlan@kernel.org, trini@konsulko.com
-Subject: Re: [PATCH 1/3] net: k1: add Ethernet MAC driver
-Message-ID: <20261003031735.emac-v1-tested.DaveWK225@protonmail.com>
-Feedback-ID: 100562830:user:proton
-X-Pm-Message-ID: 3f43ea53134d335dac3a64e8468882f8cfef6c79
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=zohomail.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
+ header.a=rsa-sha256 header.s=zm2022 header.b=QQr2wL22
+Received: from sender6-pp-o95.zoho.com (sender6-pp-o95.zoho.com
+ [165.173.180.95])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 0B03640E49
+ for <u-boot@lists.u-boot-project.org>; Sat,  3 Oct 2026 11:57:55 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1791028640; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=g93jyHRY38yW0LKW4MMbeR+M0KVjfCnEpfK47LdejqOMk/BSv4EZYTvwXnEbKl/EdGWLhxgC0J/Q0oLaIDWcKEyA0imVwsaQvFQ9q+8CwJrxlXt+kXJAKfbObTN9dikVoT8eioRSwKRhOS255146rrZJaNXJgaBs0mynwPL59JQ=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1791028640;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=lqMJr3mjwDMpybG5juE/xBOLrVPgnk2dD9vW7PWg00E=; 
+ b=Q97jYMQeyWR8/YIA3plx4+20SUFKsjlb6xY6hP4GzzqACcNi0j9r2uBGgMLpnPyRx08yBrkBMloInE31wla0vA+74/sx75UsR/L/YEoh4wfXfOUH5tjVM/4qj/L6sTX93V+ebicFLpTTSod9aikmmM5xX3s8abI5oal6lu00lFo=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=zohomail.com;
+ spf=pass  smtp.mailfrom=zhuxu_ran@zohomail.com;
+ dmarc=pass header.from=<zhuxu_ran@zohomail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1791028640; 
+ s=zm2022; d=zohomail.com; i=zhuxu_ran@zohomail.com;
+ h=From:From:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:To:To:Cc:Cc:Feedback-ID:Reply-To;
+ bh=lqMJr3mjwDMpybG5juE/xBOLrVPgnk2dD9vW7PWg00E=;
+ b=QQr2wL22oc93qiNx2Ke3NM7xN9QU2/xclI1elAsGvp2OC0lYF2DVHL1z9hzfs+mJ
+ GamFc0smHmpAqi6x1DSVdgO+l7mmQh2WbT5Rfb/hfR/S9qOQH94LsSU3+0C73/u27PT
+ VEB661OqVtOZJMcnQwxsnn7V3Sop1x1UoDsf5wyQ=
+Received: by smtp.zohomail.com with SMTPS id 1791028639572122.82354148984132; 
+ Sat, 3 Oct 2026 04:57:19 -0700 (PDT)
+From: Zhuxu Ran <zhuxu_ran@zohomail.com>
+Subject: [PATCH 0/3] rtc: cv1800: Use the RTC node for time and system
+ reset
+Date: Sat, 03 Oct 2026 19:55:05 +0800
+Message-Id: <20261003-cv18xx-rtc-sysreset-v1-0-c0837e26eb29@zohomail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2O227DIBBEf8XiuVuBMRisqsp/VHnAsGloQpyw2
+ HIb5d9LLo9HmjkzV0aYIxIbmivLuESK06mCeGuY37vTN0IMlVnLW81ta8Evwqwr5OKBfikjYYH
+ RCI1aci07w2rznHEX14f1a/tkmscf9OWueiUyXuY6V54xNjpC8FNKsQyN4xqNdSNX6Fw7Gtl1Q
+ bVCCiutlVL60GvuUN1VCYnc4+fQfLxu9pDi8bBAmCeYz1QyugShECwKOPQ73VkjUVkUm79pPyU
+ Xj+91+5Ntb7d/zunSAhMBAAA=
+X-Change-ID: 20260929-cv18xx-rtc-sysreset-b816e6306348
+To: u-boot@lists.u-boot-project.org
+Cc: Yao Zi <me@ziyao.cc>, Tom Rini <trini@konsulko.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Alexander Koch <akoch@initse.com>, 
+ Kongyang Liu <seashell11234455@gmail.com>, 
+ Hiago De Franco <hfranco@baylibre.com>, 
+ Thomas Bonnefille <thomas.bonnefille@bootlin.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Leo Yu-Chi Liang <leo.liang@sifive.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, Heiko Stuebner <heiko@sntech.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Marek Vasut <marex@nabladev.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Zhuxu Ran <zhuxu_ran@zohomail.com>
+X-Mailer: b4 0.15.2
+Feedback-ID: zu08011227a9296a75a5978acb3d318a55000028788b3b82d2f1ccc9078e62d04d157b649adf77ea94c174ad:ZohoMail
+X-Zoho-CM-AccountID: 475a6e82b6074d1cdb8624e432e1257a5f0812bb6089f487c4846d9f660201e2
+X-ZohoMailClient: External
 X-Mailman-Approved-At: Sat, 03 Oct 2026 12:47:49 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -137,66 +174,55 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Zixian,
+The CV1800 RTC subsystem contains a seconds counter and system reset
+controls in a shared register range. U-Boot currently binds the system
+reset driver from Milk-V Duo board code and accesses fixed MMIO addresses.
+The upstream devicetrees describe this subsystem with an RTC node, but
+U-Boot has no driver matching that node.
 
-I tested v1 1/3 on OrangePi RV2 and R2S with YT8531 PHYs in rgmii-id
-mode. I reverted my local EMAC driver and applied the exact posted
-patch to my K1 lane, keeping the unposted board support, clock/DDR
-workarounds and OpenSBI v1.9 fixed. Both board defconfigs enable
-PHY_MOTORCOMM and ID_EEPROM. Both variants built without warnings.
-The existing SPL was retained; these were U-Boot proper tests.
+Add an RTC driver for the seconds counter, bind the existing system reset
+driver as its child, and obtain the reset register range from the shared
+devicetree node. Keep the existing reset requests unchanged, including
+the warm-reset sequence currently used for SYSRESET_COLD.
 
-RV2: both ports link at 1000 Mbps full duplex. DHCP passes on the LAN
-port; the isolated second port uses static addresses. R2S: the first
-port links at 1000 Mbps full duplex and DHCP passes; its second port
-was not connected. Router/peer ping passes where applicable.
+This series depends on the CV18xx upstream-devicetree conversion sent
+as v5.
 
-On every connected port, each driver passed small/1 MiB downloads,
-three 64 MiB downloads at each TFTP window 1/4/16, ten further 64 MiB
-window-16 stress downloads, a 128 MiB download, and 1/128 MiB uploads.
-Downloads were SHA256-checked in U-Boot, uploads at the receiver.
-The 128 MiB transfers cross 16-bit TFTP block rollover. No DMA TX
-timeout, exception or payload corruption was recorded.
+Tested on Milk-V Duo, Milk-V Duo 256M and LicheeRV Nano.
 
-Median 64 MiB download rates, local driver / v1, in Mb/s:
-                         window 1     window 4      window 16
-  RV2 MAC 0              15.58/14.89   80.66/82.19   153.04/151.44
-  RV2 MAC 1              16.15/14.05   82.48/82.43   152.09/153.30
-  R2S MAC 0             140.80/140.91 371.28/370.26  639.89/636.86
+Signed-off-by: Zhuxu Ran <zhuxu_ran@zohomail.com>
+---
+Zhuxu Ran (3):
+      rtc: cv1800: Add seconds counter support
+      riscv: sophgo: Enable RTC-backed system reset
+      sysreset: cv1800b: Use the RTC device node for register access
 
-Each pair used the same physical peer and settings. These are TFTP
-application rates, including peer/protocol overhead. RV2 window-1
-control samples vary; a separate three-sample repeat had a 15.33 Mb/s
-median. Its single 128 MiB MAC-0 upload was also slower with v1
-(13.60 versus 18.22 Mb/s); this n=3D1 observation needs more sampling
-before calling it a stable regression. R2S large-upload rates were
-151.52/151.12 Mb/s. Duplicate upload packets occurred with both
-drivers, with correct payload hashes and no receiver retries.
+ board/sophgo/milkv_duo/board.c         |   5 --
+ configs/milkv_duo_256m_defconfig       |   2 +
+ configs/milkv_duo_defconfig            |   2 +
+ configs/sipeed_licheerv_nano_defconfig |   2 +
+ drivers/rtc/Kconfig                    |   9 +++
+ drivers/rtc/Makefile                   |   1 +
+ drivers/rtc/rtc-cv1800.c               | 123 +++++++++++++++++++++++++++++++++
+ drivers/sysreset/Kconfig               |   6 +-
+ drivers/sysreset/sysreset_cv1800b.c    |  90 +++++++++++++++---------
+ 9 files changed, 199 insertions(+), 41 deletions(-)
+---
+base-commit: a06e89ab05eaa2b8344d521319399333cd760ae5
+change-id: 20260929-cv18xx-rtc-sysreset-b816e6306348
+prerequisite-message-id: <20260927-milkv-duo-upstream-dts-v5-0-7f64983e59e1@zohomail.com>
+prerequisite-patch-id: b8e6815314b7881a02de0066232864d522c4a26c
+prerequisite-patch-id: 0df1fa5db1b2bff402b429809796bad99a517483
+prerequisite-patch-id: 49e1e8263cf0a5ba8d63c8b598b6382cde5284b2
+prerequisite-patch-id: 86dd30e784f022f0a7bb6fbf125c9699467176d4
+prerequisite-patch-id: 49070c05ecf58331ec519a57d1b82f8b2b835a89
+prerequisite-patch-id: 6b6881e45cc6de6544aaa4509db21611158f4fa1
+prerequisite-patch-id: 7198127d4602eeb14212087ce9bb694d84e71a4c
+prerequisite-patch-id: 3a58bd8a061707ff27b8538d4897def3b595dc36
+prerequisite-patch-id: 9055ea941b73e35d1e825787d7eca14ffceb8e8b
+prerequisite-patch-id: 554c1487e8d596e0099677ca88eee0021b1ffbae
 
-I repeated the complete RV2 MAC-0 test set against a locally adjacent
-independent wired Linux peer. Its local/v1 medians at windows 1/4/16
-were 51.59/148.59, 396.80/393.31 and 531.56/672.77 Mb/s. All hashes,
-stress downloads and
-128 MiB upload/download rollover checks passed on that peer too.
-Both variants had window-1 samples near 3.6 and 10.4 seconds;
-the variable three-sample medians do not establish a stable speedup.
-The ten window-16 stress-transfer medians were 675.31/669.83 Mb/s.
-Single 128 MiB upload rates were 56.50/61.13 Mb/s (n=3D1).
-The isolated second-port cable remained on the first peer.
-
-Both variants booted FreeBSD with eight CPUs and connected links.
-R2S also passed the FreeBSD network checks. FreeBSD uses its own
-smte driver; these checks are separate from the U-Boot transfers.
-The original ESPs were restored and verified, including unchanged
-boot regions, followed by normal baseline boots. No long-duration
-soak or RMII/10/100 test is claimed.
-
-One source-review suggestion: k1_emac_dma32() validates each DMA
-starting address, but not the buffer/ring end. The local validator
-rejects a 1536-byte buffer starting at 0xfffffc00; the posted helper
-accepts it in an extracted-source identity-translation test. I did
-not force such an allocation on hardware. Checking the full range
-would retain that protection when allocations approach 4 GiB.
-
-Tested-by: Dave Klotz <DaveWK225@protonmail.com>
+Best regards,
+--  
+Zhuxu Ran <zhuxu_ran@zohomail.com>
 
