@@ -1,139 +1,141 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E75ACA5FCE
-	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 05:12:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A003CA5FCE
+	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 05:12:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 268BB80DA5;
-	Mon,  5 Oct 2026 05:12:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E1A6140684;
+	Mon,  5 Oct 2026 05:12:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZBz8zXKUl3od; Mon,  5 Oct 2026 05:12:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 1D6C580D83
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791177167;
-	b=rXavPXLlVqK4Kn6wERNVR8yLjYPl127A6dVe5dDANmcdYTyqz3YTRQPwNsSG/fmsOxtq
-	 ATXemkCX5bT4bOSsTw0hrnMAuSKlQZ+cTPtc5IeFVlE5aaC0w1tquNTunzouqL0xomodx
-	 gYnyOv5KNJbVwYsg3al3LMWyUGHUL2QFbNGoqeYQB6Ob3Sk5fQ6ou5RoLOGLb3btpQPZ+
-	 gsff4j8cYgehNu278hzpSC+naD0I3SOe6o7DvjjG94+nXBIbeM5Qs4qu1afqwEtIDasSP
-	 RKQQ5LiytnsUr59aZYNVtmkVMIb1PSDVI9R3R37dAQPH6LVhmGpCeGdOVASWarxx+fA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rH3Qf8sc_yNO; Mon,  5 Oct 2026 05:12:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 2340E4058A
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791177171;
+	b=DIHf2LtXmUZN9NMdq7WqLNaP+pTxQU81vTUU0lP0LmjxT3AHkSGB7RuabVUHe1dv60FR
+	 /MMCGOexY429rJLJBkqYy9Anx1RkcW/Gh9rNGSaObRIg0lFPLzpzLfgbQTOcFMztZu4M6
+	 6ClgiAj595jI0n8Q0cBYw4ihnMi3wl1ViBEEp3TnCZRK/Nc/zu0MQH8hkPGXQ7EremNSF
+	 8+wNW+69/ecWH5ckE78NSJdzC+ZG7X4/DZbDmJji1u2wIvJf73ZLnNUcx4qT8WbTTJElM
+	 OuFWbgKMoByGxx/Ut4tcASE8KFQB9xRDqfY5arwUjxmwurYyFyNUhMZvTXzQxqmPKPQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791177167;
+	c=relaxed/relaxed; t=1791177171;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=jZnBOItmo+GWl+bvWPicKi65rqcFkMNhrrePDc5Ubys=;
-	b=gJJ/+XxbKEl8cM6PTGg9X5t59UtsvUAhb2+AGs1FbllDRNML+VrSuqFcBkW0NlTa4cTF
-	 P1hU+Mscl9vUejGxW/ekGITfLfZrDwFBkKizPTME/axxVV2kaS2txQdKy6m4tuNB//uJI
-	 3pk0veNbsjHITWAju4lTWu1hvlFlxYkZm2jky9qZZQPwXVeHi3ezh+rGw0ADMcxcR5qZN
-	 fwexPKQTTwiOcp7JsgkcKIlQR1DttOW9JuaQgMIV6XjVXQm8uZbZXo5mnSUCW9y7i21Dy
-	 D8WTd3yxKCVfVw32yWnPOKhbDq27VapJmXVUw3TVdM8FuHp6B0CJ/HeuJxmrcvEVxjw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=Sd8UmzEdOztef5FY3Hr1AQz1hE9+rn9FLppfYMb+1/0=;
+	b=IhVlVZF4/NuGWzHiCwXOJCbm8/j1N4BRe6GCX028e5PiM4MT4Mr6XNGLTDbB9Y5XdDPA
+	 TL6Q72i8bUGzw7QwQCEEFsKkHydsTTbmZsfo1doimsSXD3m9txIEgLJmeFZgs/U4JlddS
+	 i4eYI00xXgxGJ+sKk+y11B6DeqDKSUEYcs/V10LBWAty/WUlhXxaJYnJGXI2brlgPiLj4
+	 R8J1IU7T0F0rrPivoMYn/UX55Kxme0MRpktWybiN/VtSw+3NdQuVEJBZuq2JcgILL0WJv
+	 RqtTqGfBGeFmVc1oxE8UzA5p4fytxYnFQ7tLkwcOOK0Ms+AG5pEVNff7yEpl9GrWyxw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=RpCHlrAZ;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791177167;
-	bh=jZnBOItmo+GWl+bvWPicKi65rqcFkMNhrrePDc5Ubys=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=pxnz3+VAThmO9uObcmUiPXs7vjNgX+Wpr7f7/DajH5vVoxc1/SeZjmhQe7/EgTPFP
-	 Tr5RETTvEg00goZyxxVv/pnUxrux6bxN7ivuhxHwkwAirreqhgXNMBuWvCz5iNRhs+
-	 Dr1bjUKjep2ODoAIoAhOo1v6FUUqQt1tTz5NxGl2fVCBqj4y2C/EHw70ArwInceyfX
-	 3Uw4ChbKLpFG093tpY7FUcj1HqcwIYutEKS2KfgxpOX67eNPN0pCmCc3T2RlKk2xJg
-	 Q9zwhzoW2DVMBMee1eDvxcycVGc5+XNWsrGoTbFU06jESA0IaaWN+2dWM585sPSw/V
-	 ndjQOMhqSxafQ==
+	d=lists.u-boot-project.org; s=default; t=1791177171;
+	bh=Sd8UmzEdOztef5FY3Hr1AQz1hE9+rn9FLppfYMb+1/0=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=cH+ctq21KThM60Dv0RdHshaQCTdu53c+omhyClsnXZ+IH6NoqtjXN67xuzAzs32qa
+	 9LLtdJrt+O11bXk8z47gVjWhLp9vr/A7z3/su+QToBvBosuVd+tVW+TfDnegwj2Fml
+	 uDYlsJ096R5wdLLBMJb4TU6yK5PanckDrno9BrXMwIEr6M0HHf9ku275kIAumjUWDP
+	 3guErYUs1nBlXuE4yATGh5vRujKZBYNYmUMivgpI2ihupOhSFRDHynkgBl4f9Y/4zO
+	 uEwHXl4Z8S9VNwr2thSjQFCD/b5pcvN6bJFCjEGC2/rFDTY5SJtz5fh89vLx3jkAqG
+	 2FhrXihw6ngWQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1D6C580D83;
-	Mon,  5 Oct 2026 05:12:47 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1704422B
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2340E4058A;
+	Mon,  5 Oct 2026 05:12:51 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3EC0722B
  for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 19:23:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 08E8540075
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2507B4040B
  for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 19:23:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sj4ffD_EP9Wb for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kGGrNNWCTf0x for <u-boot@lists.u-boot-project.org>;
  Sun,  4 Oct 2026 19:23:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 4F79540004
-Authentication-Results: smtp2.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 36D58403FF
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=172.234.252.31
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791141783;
- b=gPTfqWuTw3Zr8aqsTE519vjl9kOHdKeHa9Ijhzpcqyv1i+qYFivP7Jeqg7EQ/1qUkSKj
- ArKBuQhczgf4fwDpXcjpy3Dv7MzUamFU9aONCYYTtoGHGNXyR/+GMuykhZATZcIgMsl67
- lKfmoHCIqvRycangtmuYdqL9KQ3MYW1LH5rtcS8xEuB7fpE/X111R2CU8/HG+BfkQ4WZ9
- AW+8d4ZurLuYhVr7vaWFZGFkIQRSlSqkH00dhRDnlZE+P2rGUP19e9y/VmNRYYmXEUFic
- 4hiPf2Fy6ZTLrsUeR5O2ABZQ965y7bPywLIfkSQX43Eo6wjPKNvnPwQK7oGHEkuVn1Q==
+ b=e2nxrYesjZXvnZdyLSGYO7bBeWls2kve4ZS/DZxQNW1dpUoctMeb8kIJ9OZG4Nr7BHRH
+ j9xBmA3z5lsOK2rVY1jOCanOgXTQwtbSKUTNcl6UgHHja1dYo+bl4NwYfYctBxA1H5dhH
+ dVIUGPlLcmQWnHoJEbVVB3QTqu2QQTi6ywkFxOzNGECSt9Y/WKwcJbEPC9sNCt/MI0quv
+ 8MtPKMICO+Ui5Qx6vtq8TOnjBz68Gnv8RzIi2pZ2PUoAoXtNt/gZphYvJ8Jti5wnMUjzd
+ aJgED4DKARYoFZlR0RhauAAA2XxXAZQo5YmvyGbwIvtwLDlGRlJxeE8ygUydJhVvW7g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1791141783;
- h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
- Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
- X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
- X-Original-From:Reply-To;
- bh=jZnBOItmo+GWl+bvWPicKi65rqcFkMNhrrePDc5Ubys=;
- b=IcCbtjkrVVmgP+dXvcsjKaC/ptm6sussP2chlw4EpDGPa4BW0TTpgKeK22vno4IllCCO
- /wbOywPD+ENpgJ938ztrrnE/g5PobrHLSdRI7kFS1fbEXE9fCmeWMkw2KapSw+OuOctMJ
- Y83Ig6kbLLHHGr9i1Bf32cczMrPjX63YiEkiUOoUskf3EK7uRjhQAegcsVb6uPaQumKb3
- /zsUSHK0G3nTM4PNMKNurmGesBsJ2bX7g04dMcmIkLIywc9w0QbyN2N4+1rwHtNiCdps4
- KJR8DFVvj8axrfL3f2ERaSddNYg0faOPM+qCLWe4OdaqO8SAUfICOFp56PAZosv7ZHQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Subject:
+ Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Developer-Key:X-Endpoint-Received:X-Original-From:Reply-To;
+ bh=Sd8UmzEdOztef5FY3Hr1AQz1hE9+rn9FLppfYMb+1/0=;
+ b=osPPOnf0P0J64ChlWHlrT34kr/0HC7tibJPvRtwj53Gy8cXfX+sAJ4HAJB8oDY5ANqta
+ K5Fdja6m+NX+GeuuXxBEczSQF0i1ULv7PGaee4EW2DicAr36b0H98qw1XTDzyZI6u+WfS
+ NLC5t96U/8vBCFTTggAep2ZKny3o4gNDJBFSQrzZrsekaElkYGV7fCydy2AYFfpiR4Glf
+ gS+FYEYtd+VxRDDeTueLutk5tjFi5Omcbsp1WOyfJm7Urbas5dRwgkwCgFAwAFnWrcOzh
+ jx2SVvSeeWGRrTz/vI/Qb4YztuEDZrZX5yv7uNNBQrGMtgZY8BY5hcmRicJt+K3gcWg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=kernel.org; 
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=mPJTON4O; 
- arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ header.s=k20201202 header.b=RpCHlrAZ; 
+ arc=none smtp.remote-ip=172.234.252.31
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org;
  envelope-from=devnull+petr.hodina.protonmail.com@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=mPJTON4O
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4F79540004
- for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 19:23:03 +0000 (UTC)
+ header.s=k20201202 header.b=RpCHlrAZ
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 36D58403FF
+ for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 19:23:02 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 521CF43FB6;
- Sun,  4 Oct 2026 19:23:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 2121AC4AF67;
- Sun,  4 Oct 2026 19:23:02 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id E83E440887;
+ Sun,  4 Oct 2026 19:23:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id BB09FC2BCB9;
+ Sun,  4 Oct 2026 19:23:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1791141782;
- bh=MX6QpjcDLG3OdJxrWqdT8Yu78yba7xC++J2GgWxmHGw=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=mPJTON4OInJN+/Iao+QiBG2Jglxct3OD4Db+tLmoZKHRRuL9stRoebsaxlrLRDIZ8
- /W0ZBE0FE4r2qgoe4oX3TGpeA95/i2aUDQSSe81oksG2cRwIFbQxQz+W+TB515iXVV
- 429lb3S3+UtWB6basyIRu4Vbl4G4gU02aXYkSGiAYHdKWFzTZAIyY6C3xhZblUTPiO
- 2jBxlRy/nA7bmEfkospqMieK6o3Xk/iMqI8fJuKSM9pMjUpaftEAmm7qeKANnT2iI8
- g9Fn/AkVSoa05ZVcNEFvPZrriFLNvP1njNw4+7AcQsiAFZg5dgxJPkJAl7KcI7nTV9
- HV/W252BTzMgg==
+ s=k20201202; t=1791141781;
+ bh=PZPtEbRvlRqs18hXbbpx4eRshX2dFv2BkECdsBwGBVk=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=RpCHlrAZC7YGuw5lMHbSHeNxWEAyaZnRnxDvatLgqZhkO0P4Z/o1g3jW31lIafFn9
+ x2o/fgJgHznpWMbOFheopwGTp22H9RDKRDQBzzA+UknqN1djVg7TSHgTZt14nB0OaF
+ eqh4Vyh7Apiy8LMcbpDxoej0hXo0uRNJej39mDyus5yAQZCPs8nIwffcZOjnh+NK1f
+ L2XTTvt1Z4vRa7TUn5qXHZYnFTaemDPSAwhYDU8hON7APfzaif2vBcadJ22AChJi85
+ HD0ecEwbK/LhIGSZl4OjytnJWyOjG+rIE1ED2/BMqyBcWJNVywIM2l5baYwpLCOQEu
+ nWzaif43PPJBQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 0CD05CA5FCE;
- Sun,  4 Oct 2026 19:23:02 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 91616CA5FCE;
+ Sun,  4 Oct 2026 19:23:01 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Date: Sun, 04 Oct 2026 21:22:37 +0200
-Subject: [PATCH u-boot 5/8] scsi: ufs: refuse erase/UNMAP on NO_PURGE devices
+Subject: [PATCH u-boot 0/8] ufs: Sony Yoshino/Tama (MSM8998 / SDM845) UFS
+ bring-up
+Date: Sun, 04 Oct 2026 21:22:32 +0200
+Message-Id: <20261004-b4-ufs-sony-v1-0-54e71c95ba62@protonmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261004-b4-ufs-sony-v1-5-54e71c95ba62@protonmail.com>
-References: <20261004-b4-ufs-sony-v1-0-54e71c95ba62@protonmail.com>
-In-Reply-To: <20261004-b4-ufs-sony-v1-0-54e71c95ba62@protonmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWMQQ6CMBAAv0L27Ca0lhr9ivFAcRfWQ2u61EgIf
+ 6fKcSaZWUEpCyncmhUyfUQlxQrm1MAw9XEklGdlsK31rTcGg8PCiprigperO9uOPbueoRbvTCz
+ f/+0OBUNKMzwOryW8aJh/K9i2HTD3Si53AAAA
+X-Change-ID: 20260611-b4-ufs-sony-794325f6f4af
 To: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>, 
  u-boot-qcom@groups.io
 Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -167,11 +169,11 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Markus Niebel <Markus.Niebel@ew.tq-group.com>, Petr Pavlata <petr@acrux.cz>, 
  Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791141780; l=2283;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791141779; l=3712;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=6DAUFUAuX1kh2EGKP1zZL/kXMWnZ7K3mF+wCJzqM3dU=;
- b=Ut927M9BiT1NPo6Nh2l1okrMvskxdhzJMVL35MAcgfIyhwmuwG+cruu4TVWm1yBKApEJ+adE1
- SWVhUXsQT9HBtikSNFSeBYALm289PVEJUAExxBGyYMkKYl1LCTLlR8p
+ bh=PZPtEbRvlRqs18hXbbpx4eRshX2dFv2BkECdsBwGBVk=;
+ b=LyQFKS/S38L27SLZ/ZhevTqJQCn74peIL5+5fGabM1YTVtgk/dq1swnAJ0zvzmgmM8Svfp5NR
+ A39VfrHccReD/fPqba/gqfgUwS0zBg48NshmQRKvrPgywbmjhJlC7Ii
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -192,77 +194,99 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Reply-To: petr.hodina@protonmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Petr Hodina <petr.hodina@protonmail.com>
+This series brings up UFS on the Sony Xperia "Yoshino" (MSM8998) and
+"Tama" (SDM845) families.
 
-Enforce the UFS_DEVICE_QUIRK_NO_PURGE quirk on U-Boot's only path that
-can reach a UFS device with a destructive UNMAP: the block-device erase
-op (scsi_erase() -> SCSI_UNMAP). On Sony Yoshino/Tama a PURGE/UNMAP
-erases the bootloader and permanently bricks the device.
+The work falls into four layers:
+
+1. A small refactor that extends ufs_dev_desc with the product revision
+   string and the UFS spec version (patch 1). No behaviour change.
+
+2. A device-quirk infrastructure (patches 2-4) that lets us match
+   per-device link / power-mode workarounds against manufacturer id,
+   model and fw revision:
+
+     - patch 2: generic ufs_fixups[] table and ufshcd_fixup_dev_quirks(),
+       called from ufs_start() before power-mode negotiation
+     - patch 3: UFS_DEVICE_QUIRK_EXTEND_SYNC_LENGTH for SK Hynix devices
+       that need PA_TxHsG{1,2,3}SyncLength programmed to 0x48
+     - patch 4: CONFIG_UFS_RESTRICT_TX_LANES build-time knob for boards
+       with only a single reliable TX lane. Defaults to N so nothing
+       else is affected.
+
+3. The NO_PURGE quirk for devices that brick if issued PURGE / UNMAP
+   (patches 5-7):
+
+     - patch 5: refuse erase/UNMAP in the SCSI uclass when NO_PURGE
+       is set on the underlying UFS device
+     - patch 6: print device identification (vendor / model / rev /
+       spec version) at probe so quirk matching is observable on the
+       console
+     - patch 7: a platform gate that auto-enables NO_PURGE on Sony
+       Yoshino/Tama compatibles because per-UFS-chip rows can't see
+       blank string descriptors on some affected boards.
+
+4. Akatsuki DTS enablement (patch 8): re-enable the UFS controller node.
+
+Background on NO_PURGE: on the affected Sony platforms the SCSI ERASE /
+UNMAP / WRITE_BUFFER PURGE operation overwrites the bootloader region
+and permanently bricks the device.
+
+Based on the linux patches by Angelo:
+https://github.com/kholk/kernel/commit/2e7a9ee1c91a016baa0b826a7752ec45663a0561
+
+Tested on Sony XZ3 (akatsuki, SDM845) where U-Boot enumerates UFS LUN0
+and exposes the GPT.
+
+```
+UFS Device Information (ufshc@1d84000)
+  Manufacturer:    Samsung (0x01ce)
+  Model:           (unset)
+  Revision:        (unset)
+  Spec Version:    0x0210
+  Gear  - RX: 3, TX: 3
+  Lane  - RX: 2, TX: 2
+  Power - RX: 1, TX: 1, HS rate: 2
+  Device Quirks:   0x00000001
+  NO_PURGE Quirk:  Yes
+
+...
+
+=> scsi erase 0 1
+
+scsi erase: device 0 block # 0, count 1 ... scsi_erase: erase not supported on this device
+0 blocks erased: ERROR
+=> 
+```
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
- drivers/scsi/scsi.c      |  5 +++++
- drivers/ufs/ufs-uclass.c | 12 ++++++++++++
- include/scsi.h           |  5 +++++
- 3 files changed, 22 insertions(+)
+Petr Hodina (8):
+      ufs: read product revision and spec version into ufs_dev_desc
+      ufs: add device-quirk infrastructure
+      ufs: program extended HS sync length for SK Hynix devices
+      ufs: add CONFIG_UFS_RESTRICT_TX_LANES
+      scsi: ufs: refuse erase/UNMAP on NO_PURGE devices
+      ufs: print device information at probe
+      ufs: gate NO_PURGE on Sony Yoshino/Tama platform compatible
+      arm: dts: qcom: akatsuki: re-enable the UFS controller node
 
-diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-index 50e7d749921..ba7834ea035 100644
---- a/drivers/scsi/scsi.c
-+++ b/drivers/scsi/scsi.c
-@@ -300,6 +300,11 @@ static ulong scsi_erase(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt)
- 	lbaint_t start, blks, max_blks, blocks;
- 	struct scsi_cmd *pccb = (struct scsi_cmd *)&tempccb;
- 
-+	if (uc_plat->no_erase) {
-+		printf("%s: erase not supported on this device\n", __func__);
-+		return 0;
-+	}
-+
- 	/* Setup device */
- 	pccb->target = block_dev->target;
- 	pccb->lun = block_dev->lun;
-diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
-index 977ffebc21f..7dfba3ac1ac 100644
---- a/drivers/ufs/ufs-uclass.c
-+++ b/drivers/ufs/ufs-uclass.c
-@@ -2366,6 +2366,18 @@ int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
- 	if (err)
- 		return err;
- 
-+	/*
-+	 * Some devices must never receive a PURGE / UNMAP (secure erase): on
-+	 * the affected platforms it erases the bootloader and permanently
-+	 * bricks the device. Disable the SCSI erase op for the whole UFS
-+	 * device in that case.
-+	 */
-+	if (hba->dev_quirks & UFS_DEVICE_QUIRK_NO_PURGE) {
-+		scsi_plat->no_erase = true;
-+		dev_info(hba->dev,
-+			 "NO_PURGE quirk active: SCSI erase/UNMAP disabled\n");
-+	}
-+
- 	return 0;
- }
- 
-diff --git a/include/scsi.h b/include/scsi.h
-index 2520a8b8fe6..fc296285dd5 100644
---- a/include/scsi.h
-+++ b/include/scsi.h
-@@ -275,6 +275,11 @@ struct scsi_plat {
- 	unsigned long max_lun;
- 	unsigned long max_id;
- 	unsigned long max_bytes_per_req;
-+	/*
-+	 * Set by the controller driver to forbid the erase (UNMAP) operation,
-+	 * e.g. for UFS devices whose PURGE/UNMAP would erase the bootloader.
-+	 */
-+	bool no_erase;
- };
- 
- /* Operations for SCSI */
+ MAINTAINERS                                        |   1 +
+ .../sdm845-sony-xperia-tama-akatsuki-u-boot.dtsi   |   9 +
+ drivers/scsi/scsi.c                                |   5 +
+ drivers/ufs/Kconfig                                |  14 ++
+ drivers/ufs/ufs-uclass.c                           | 197 +++++++++++++++++++++
+ drivers/ufs/ufs.h                                  |   7 +
+ drivers/ufs/ufs_quirks.h                           |  94 ++++++++++
+ drivers/ufs/unipro.h                               |   3 +
+ include/scsi.h                                     |   5 +
+ 9 files changed, 335 insertions(+)
+---
+base-commit: ece349ade2973e220f524ce59e59711cc919263f
+change-id: 20260611-b4-ufs-sony-794325f6f4af
 
--- 
-2.55.0
+Best regards,
+--  
+Petr Hodina <petr.hodina@protonmail.com>
 
 
