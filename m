@@ -4,138 +4,180 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A971ECA5FE2
-	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 05:12:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E75ACA5FCE
+	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 05:12:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 511E880D39;
-	Mon,  5 Oct 2026 05:12:46 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 268BB80DA5;
+	Mon,  5 Oct 2026 05:12:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IpLz2zmhQ2KD; Mon,  5 Oct 2026 05:12:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 1476980D6F
+ id ZBz8zXKUl3od; Mon,  5 Oct 2026 05:12:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 1D6C580D83
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791177165;
-	b=Ob9ZcrA1Wn5s4m4GMCAiKpoFMzlZ3E+YIXfqAa0VPdI2FXkxryK3X2WrpZV1wySsEKKb
-	 YMpzySuT/3fU01xekX1inFbct+qkHsHG4r0rWovtP4rcSsAj1xTIu7kc5thLcmOJK04y5
-	 i3nzw3f9YcJOn88h2stEQ96HIp52EINpRYdWTjVmlTiOkSRqrMzKuVuPpy4EDvqCfLX3a
-	 gGzouTEI081I3uKD1um9E4ZQcrFfAnqJ8L7Qvj3HXWphAoldtsXMrMyhH+DGRqwyi9yM2
-	 LjsycaKQTXmNMgmzr3WQ3YyYgKYxMsGp94fkXvD5LGnXxKqNmSCZ/Znv7Gik5ooWnLA==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791177165;
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791177167;
+	b=rXavPXLlVqK4Kn6wERNVR8yLjYPl127A6dVe5dDANmcdYTyqz3YTRQPwNsSG/fmsOxtq
+	 ATXemkCX5bT4bOSsTw0hrnMAuSKlQZ+cTPtc5IeFVlE5aaC0w1tquNTunzouqL0xomodx
+	 gYnyOv5KNJbVwYsg3al3LMWyUGHUL2QFbNGoqeYQB6Ob3Sk5fQ6ou5RoLOGLb3btpQPZ+
+	 gsff4j8cYgehNu278hzpSC+naD0I3SOe6o7DvjjG94+nXBIbeM5Qs4qu1afqwEtIDasSP
+	 RKQQ5LiytnsUr59aZYNVtmkVMIb1PSDVI9R3R37dAQPH6LVhmGpCeGdOVASWarxx+fA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791177167;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:From:To:Cc:Subject:In-Reply-To:References:
-	 Date:Message-ID:Content-Type:Content-Transfer-Encoding:MIME-Version:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=9LoVFCWwjjhFEO3AmolAbOeEg2m/BIXRc+JKkZZKiVo=;
-	b=h1wfYjA1+zZ4eloT1B3fb5QFdj5EPikvPWjAn6S8ZjjD4WAsRH4pjfSXGT0WMd/6ld0s
-	 i5Uf4qgQsZ9tRbsHltFxQvUaV14eYSqHjaKRRUDLYsElBSxJWFV4EFgsWaMLhl/lfebbJ
-	 lIqO/JMoMkG7TWUK3g+Xm/yGNbCICXFeuXOlijxa+tpXBgD6yrrz/eLnVaVuxCHS33cWA
-	 IRzZqIdg7CbNYZiEWwx4maFtGXNvMtHBnZW+QQe+iHyGYBhwifz3m7ZNJYHf1DgWKnjJ2
-	 enqu9h9ujKvDk8LMDDzxXS1/7ZPHWoZlFLjTzduJgIhddElaO2MS+2V+/toNRhBBtRQ==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; dmarc=none header.from=iav.lv;
-	dkim=pass header.d=iav.lv header.i=iav@iav.lv header.a=rsa-sha256 header.s=zoho header.b=YjMlvA7w;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
+	bh=jZnBOItmo+GWl+bvWPicKi65rqcFkMNhrrePDc5Ubys=;
+	b=gJJ/+XxbKEl8cM6PTGg9X5t59UtsvUAhb2+AGs1FbllDRNML+VrSuqFcBkW0NlTa4cTF
+	 P1hU+Mscl9vUejGxW/ekGITfLfZrDwFBkKizPTME/axxVV2kaS2txQdKy6m4tuNB//uJI
+	 3pk0veNbsjHITWAju4lTWu1hvlFlxYkZm2jky9qZZQPwXVeHi3ezh+rGw0ADMcxcR5qZN
+	 fwexPKQTTwiOcp7JsgkcKIlQR1DttOW9JuaQgMIV6XjVXQm8uZbZXo5mnSUCW9y7i21Dy
+	 D8WTd3yxKCVfVw32yWnPOKhbDq27VapJmXVUw3TVdM8FuHp6B0CJ/HeuJxmrcvEVxjw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791177165;
-	bh=9LoVFCWwjjhFEO3AmolAbOeEg2m/BIXRc+JKkZZKiVo=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791177167;
+	bh=jZnBOItmo+GWl+bvWPicKi65rqcFkMNhrrePDc5Ubys=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=nqzproeaZlcWfRXRf7G7kRaqEBBtvcLeyzR+gyzK0D6dpPPcYmfx1l+7aBA7F//VI
-	 DMFWGNSf0eJ2biJFwTbpghEKe8rsXtPxY1k3AtESw/1JIyWlGRkTRRGxVpSA6J3kBS
-	 GJm07DWXPL4Bp+apl8hHnhJHj4jQVz6atQbogIkG0EzjNojn2+NSiAJP6OQbFynL8w
-	 LwYlu7eweddJRYZIINsPM0Ooziqzf8bwl2jLud8Grai82JRCMhxtRqee4x6moU/k1l
-	 0ICP5j+DwXIvHQiODrmO7bfCl8onB+L1Ts97KXBoStQg1gTX1zzp7jnJzqJg/OXpiD
-	 wz/tAlg2lejmA==
+	 Reply-To:From;
+	b=pxnz3+VAThmO9uObcmUiPXs7vjNgX+Wpr7f7/DajH5vVoxc1/SeZjmhQe7/EgTPFP
+	 Tr5RETTvEg00goZyxxVv/pnUxrux6bxN7ivuhxHwkwAirreqhgXNMBuWvCz5iNRhs+
+	 Dr1bjUKjep2ODoAIoAhOo1v6FUUqQt1tTz5NxGl2fVCBqj4y2C/EHw70ArwInceyfX
+	 3Uw4ChbKLpFG093tpY7FUcj1HqcwIYutEKS2KfgxpOX67eNPN0pCmCc3T2RlKk2xJg
+	 Q9zwhzoW2DVMBMee1eDvxcycVGc5+XNWsrGoTbFU06jESA0IaaWN+2dWM585sPSw/V
+	 ndjQOMhqSxafQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1476980D6F;
-	Mon,  5 Oct 2026 05:12:45 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id C60872E0
- for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 17:56:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1D6C580D83;
+	Mon,  5 Oct 2026 05:12:47 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1704422B
+ for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 19:23:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B7E5480E08
- for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 17:56:00 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 08E8540075
+ for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 19:23:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id b4vVZAlrYlyx for <u-boot@lists.u-boot-project.org>;
- Sun,  4 Oct 2026 17:55:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0EC4080D9D
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=136.143.169.16
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791136559;
- b=VFlG/xyhlRIOuc3b3vOcSXtWXiXlRMuDXKIfs3WpvesmLHbUC55SHDFpOZTMgrlPFe13
- VfS5qNHo/QC4bj77S94bZmD1FrQ0IbIoSfsuE/1JxKTAkYdN228/7dGE8+FxUGj8/8kvw
- naqUanMQtYypM5OJhsdRYQifBlayd+H1hPkk9N3XGLD6Tyvzge8OWJrtZ6mKCR5h6LVJV
- AUau/TLLqZNBMYed9mFCxxKDeDDkLbnje6yOfILaxQUMcYa2n5tAxUfMX2np4FmNC2A8x
- MhdT5gNwB49HMcOxnTbrf412WZibou7UEGUQ+h4uGN4RjziQN8HwDaJXqpOhHS72jWg==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791136559;
- h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:In-Reply-To:
- References:Date:Message-ID:Content-Type:Content-Transfer-Encoding:
- MIME-Version;
- bh=9LoVFCWwjjhFEO3AmolAbOeEg2m/BIXRc+JKkZZKiVo=;
- b=UfGVyKcQFlzAuMtmUr5Odv7DlB8AXnFx7+O9O6W5vcw+Xg3DPNiqA9eMp6pqvf/iOaiA
- 2Rj8IvXlHrIy8kbcDQX46+pne1x3DocQb0dfRWRtinq2pXlgjIleqRji+3kMqbiKj3rKw
- bAy9wzevxh6K225GegDWaIDOo11rsT71JkyGa3Cbt6dZXHmNAs1TZNCGnFk2RqMSXY9QC
- p8MZBGdX2cyjQWdyZFEhidPXlyka8a/tONPpRSJ6/2+JUrfqtsmwKM8fO6tGe90g6ZGLA
- XTRA2oVpTmIPhFpsR8MOh8k5hnAkdNIljW1l5yXt+Uol0rG15KJsMH+x23UtlFH7xgQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org;
- dmarc=none header.from=iav.lv; 
- dkim=pass header.d=iav.lv header.i=iav@iav.lv header.a=rsa-sha256
- header.s=zoho header.b=YjMlvA7w; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=136.143.169.16
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.169.16;
- helo=sender-op-o16.zoho.eu; envelope-from=iav@iav.lv; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none) header.from=iav.lv
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=iav.lv header.i=iav@iav.lv
- header.a=rsa-sha256 header.s=zoho header.b=YjMlvA7w
-Received: from sender-op-o16.zoho.eu (sender-op-o16.zoho.eu [136.143.169.16])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 0EC4080D9D
- for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 17:55:58 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1791136555; cv=none; d=zohomail.eu; s=zohoarc; 
- b=Q1glfK0Pkrn8zYItLt0EX3zj4T3RhixJCItr3pjOuyYE1LoQ1UKBJ7OQoU1sZVmGAsUmplOsBbI+Bm6V61O1K4N2xIUd7/D/vWwlqdJ1RN+IOeRG1vk/Tqc2HdqMvf/RBQuhr+LNkAEOiCCsppapUunaFt5e9Gf+hHopZo5nXBU=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.eu;
- s=zohoarc; t=1791136555;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=9LoVFCWwjjhFEO3AmolAbOeEg2m/BIXRc+JKkZZKiVo=; 
- b=FRxE4/62rk6ePbmGmUvV0Dr19pqpE8WC8TvET3hGZaF3E/cc3hVaV4YXwijgO0x+PGxby1uAL1aEH6zRkPFKQOAgHIGwueP9+NyFrbgHnGML0kfR7n1cn5+zIxskhotrqNp3TgRhMM2hlThwTAEgYh3SW8Qzg4I5S1qjC7VNQkY=
-ARC-Authentication-Results: i=1; mx.zohomail.eu; dkim=pass  header.i=iav.lv;
- spf=pass  smtp.mailfrom=iav@iav.lv;
- dmarc=pass header.from=<iav@iav.lv>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1791136555; 
- s=zoho; d=iav.lv; i=iav@iav.lv;
- h=From:From:To:To:Cc:Cc:Subject:Subject:In-Reply-To:Date:Date:Message-ID:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
- bh=9LoVFCWwjjhFEO3AmolAbOeEg2m/BIXRc+JKkZZKiVo=;
- b=YjMlvA7wSjea2MXv9WquxF/M2VwOgjzoW9g8aBSBxuvnVTunN6BrfcjUhjMpki8H
- kyZ27TwjJBcapNM99Kxfr9ESqcTqzgBjeN7Rdgw2swI8OYEoAo05g+KvPI/8E5BBLiG
- SC9PxSsBtd+EdPb9jMlbh7GbGexqCuh6HGzDa5AE=
-Received: by smtp.zoho.eu with SMTPS id 1791136551847497.55920227338163;
- Sun, 4 Oct 2026 19:55:51 +0200 (CEST)
-From: Igor Velkov <iav@iav.lv>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut@mailbox.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- u-boot@lists.u-boot-project.org, Igor Velkov <iav@iav.lv>
-Subject: Re: [PATCH] spi: Probe a device tree device at the requested speed
-In-Reply-To: <CAFLszTj_fXh+4c2Ldq4cw8n973=R-1z38SrE1cp6-Z0hy4+USg@mail.gmail.com>
-References: <20260930-spi-probe-speed-v1-1-ff9aebfebdf9@iav.lv>
- <CAFLszTj_fXh+4c2Ldq4cw8n973=R-1z38SrE1cp6-Z0hy4+USg@mail.gmail.com>
-Date: Sun, 04 Oct 2026 20:33:40 +0300
-Message-ID: <179113522079.1894383.11891966557600672757@iav.lv>
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sj4ffD_EP9Wb for <u-boot@lists.u-boot-project.org>;
+ Sun,  4 Oct 2026 19:23:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 4F79540004
+Authentication-Results: smtp2.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791141783;
+ b=gPTfqWuTw3Zr8aqsTE519vjl9kOHdKeHa9Ijhzpcqyv1i+qYFivP7Jeqg7EQ/1qUkSKj
+ ArKBuQhczgf4fwDpXcjpy3Dv7MzUamFU9aONCYYTtoGHGNXyR/+GMuykhZATZcIgMsl67
+ lKfmoHCIqvRycangtmuYdqL9KQ3MYW1LH5rtcS8xEuB7fpE/X111R2CU8/HG+BfkQ4WZ9
+ AW+8d4ZurLuYhVr7vaWFZGFkIQRSlSqkH00dhRDnlZE+P2rGUP19e9y/VmNRYYmXEUFic
+ 4hiPf2Fy6ZTLrsUeR5O2ABZQ965y7bPywLIfkSQX43Eo6wjPKNvnPwQK7oGHEkuVn1Q==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791141783;
+ h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+ X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+ X-Original-From:Reply-To;
+ bh=jZnBOItmo+GWl+bvWPicKi65rqcFkMNhrrePDc5Ubys=;
+ b=IcCbtjkrVVmgP+dXvcsjKaC/ptm6sussP2chlw4EpDGPa4BW0TTpgKeK22vno4IllCCO
+ /wbOywPD+ENpgJ938ztrrnE/g5PobrHLSdRI7kFS1fbEXE9fCmeWMkw2KapSw+OuOctMJ
+ Y83Ig6kbLLHHGr9i1Bf32cczMrPjX63YiEkiUOoUskf3EK7uRjhQAegcsVb6uPaQumKb3
+ /zsUSHK0G3nTM4PNMKNurmGesBsJ2bX7g04dMcmIkLIywc9w0QbyN2N4+1rwHtNiCdps4
+ KJR8DFVvj8axrfL3f2ERaSddNYg0faOPM+qCLWe4OdaqO8SAUfICOFp56PAZosv7ZHQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ dmarc=pass header.from=kernel.org; 
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=mPJTON4O; 
+ arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=devnull+petr.hodina.protonmail.com@kernel.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=mPJTON4O
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 4F79540004
+ for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 19:23:03 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 521CF43FB6;
+ Sun,  4 Oct 2026 19:23:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2121AC4AF67;
+ Sun,  4 Oct 2026 19:23:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1791141782;
+ bh=MX6QpjcDLG3OdJxrWqdT8Yu78yba7xC++J2GgWxmHGw=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=mPJTON4OInJN+/Iao+QiBG2Jglxct3OD4Db+tLmoZKHRRuL9stRoebsaxlrLRDIZ8
+ /W0ZBE0FE4r2qgoe4oX3TGpeA95/i2aUDQSSe81oksG2cRwIFbQxQz+W+TB515iXVV
+ 429lb3S3+UtWB6basyIRu4Vbl4G4gU02aXYkSGiAYHdKWFzTZAIyY6C3xhZblUTPiO
+ 2jBxlRy/nA7bmEfkospqMieK6o3Xk/iMqI8fJuKSM9pMjUpaftEAmm7qeKANnT2iI8
+ g9Fn/AkVSoa05ZVcNEFvPZrriFLNvP1njNw4+7AcQsiAFZg5dgxJPkJAl7KcI7nTV9
+ HV/W252BTzMgg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 0CD05CA5FCE;
+ Sun,  4 Oct 2026 19:23:02 +0000 (UTC)
+From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
+Date: Sun, 04 Oct 2026 21:22:37 +0200
+Subject: [PATCH u-boot 5/8] scsi: ufs: refuse erase/UNMAP on NO_PURGE devices
+MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-MIME-Version: 1.0
-X-Mailman-Approved-At: Mon, 05 Oct 2026 05:12:17 +0000
+Message-Id: <20261004-b4-ufs-sony-v1-5-54e71c95ba62@protonmail.com>
+References: <20261004-b4-ufs-sony-v1-0-54e71c95ba62@protonmail.com>
+In-Reply-To: <20261004-b4-ufs-sony-v1-0-54e71c95ba62@protonmail.com>
+To: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>, 
+ u-boot-qcom@groups.io
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Angelo Gioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+ David Heidelberg <david@ixit.cz>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Padmarao Begari <padmarao.begari@amd.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
+ Shawn Lin <shawn.lin@rock-chips.com>, Jared McArthur <j-mcarthur@ti.com>, 
+ Michal Simek <michal.simek@amd.com>, Udit Kumar <u-kumar1@ti.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Tuyen Dang <tuyen.dang.xa@renesas.com>, Alexey Charkov <alchark@gmail.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Simon Glass <sjg@chromium.org>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marek.vasut@mailbox.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Kory Maincent <kory.maincent@bootlin.com>, Peng Fan <peng.fan@nxp.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Janne Grunau <j@jannau.net>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Philip Molloy <philip.molloy@analog.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Markus Niebel <Markus.Niebel@ew.tq-group.com>, Petr Pavlata <petr@acrux.cz>, 
+ Petr Hodina <petr.hodina@protonmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791141780; l=2283;
+ i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
+ bh=6DAUFUAuX1kh2EGKP1zZL/kXMWnZ7K3mF+wCJzqM3dU=;
+ b=Ut927M9BiT1NPo6Nh2l1okrMvskxdhzJMVL35MAcgfIyhwmuwG+cruu4TVWm1yBKApEJ+adE1
+ SWVhUXsQT9HBtikSNFSeBYALm289PVEJUAExxBGyYMkKYl1LCTLlR8p
+X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
+ pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
+X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
+ with auth_id=594
+X-Original-From: Petr Hodina <petr.hodina@protonmail.com>
+X-Mailman-Approved-At: Mon, 05 Oct 2026 05:12:03 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -147,63 +189,80 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+Reply-To: petr.hodina@protonmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Simon,
+From: Petr Hodina <petr.hodina@protonmail.com>
 
-On Sat, 3 Oct 2026 at 06:41, Simon Glass <sjg@chromium.org> wrote:
-> Please can you override just max_hz here?
+Enforce the UFS_DEVICE_QUIRK_NO_PURGE quirk on U-Boot's only path that
+can reach a UFS device with a destructive UNMAP: the block-device erase
+op (scsi_erase() -> SCSI_UNMAP). On Sony Yoshino/Tama a PURGE/UNMAP
+erases the bootloader and permanently bricks the device.
 
-Yes, v2 will override only max_hz and keep the mode from the DT.
+Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
+---
+ drivers/scsi/scsi.c      |  5 +++++
+ drivers/ufs/ufs-uclass.c | 12 ++++++++++++
+ include/scsi.h           |  5 +++++
+ 3 files changed, 22 insertions(+)
 
-> Their flashes are now probed at that speed and stay there, since
-> slave->max_hz keeps it, rather than running at spi-max-frequency as
-> they do today.
+diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
+index 50e7d749921..ba7834ea035 100644
+--- a/drivers/scsi/scsi.c
++++ b/drivers/scsi/scsi.c
+@@ -300,6 +300,11 @@ static ulong scsi_erase(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt)
+ 	lbaint_t start, blks, max_blks, blocks;
+ 	struct scsi_cmd *pccb = (struct scsi_cmd *)&tempccb;
+ 
++	if (uc_plat->no_erase) {
++		printf("%s: erase not supported on this device\n", __func__);
++		return 0;
++	}
++
+ 	/* Setup device */
+ 	pccb->target = block_dev->target;
+ 	pccb->lun = block_dev->lun;
+diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+index 977ffebc21f..7dfba3ac1ac 100644
+--- a/drivers/ufs/ufs-uclass.c
++++ b/drivers/ufs/ufs-uclass.c
+@@ -2366,6 +2366,18 @@ int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
+ 	if (err)
+ 		return err;
+ 
++	/*
++	 * Some devices must never receive a PURGE / UNMAP (secure erase): on
++	 * the affected platforms it erases the bootloader and permanently
++	 * bricks the device. Disable the SCSI erase op for the whole UFS
++	 * device in that case.
++	 */
++	if (hba->dev_quirks & UFS_DEVICE_QUIRK_NO_PURGE) {
++		scsi_plat->no_erase = true;
++		dev_info(hba->dev,
++			 "NO_PURGE quirk active: SCSI erase/UNMAP disabled\n");
++	}
++
+ 	return 0;
+ }
+ 
+diff --git a/include/scsi.h b/include/scsi.h
+index 2520a8b8fe6..fc296285dd5 100644
+--- a/include/scsi.h
++++ b/include/scsi.h
+@@ -275,6 +275,11 @@ struct scsi_plat {
+ 	unsigned long max_lun;
+ 	unsigned long max_id;
+ 	unsigned long max_bytes_per_req;
++	/*
++	 * Set by the controller driver to forbid the erase (UNMAP) operation,
++	 * e.g. for UFS devices whose PURGE/UNMAP would erase the bootloader.
++	 */
++	bool no_erase;
+ };
+ 
+ /* Operations for SCSI */
 
-Checking this led me through the history:
+-- 
+2.55.0
 
-- 96907c0fe50a and b0cc1b846fcb ("dm: spi: Read default speed and mode
-  values from DT", 2016 and 2019): a device with a DT node gets the DT
-  values; the second says "even if speed and mode are requested" and
-  names SPL boot and the splash screen. The SF_DEFAULT_SPEED help says
-  the same.
-- e2e95e5e2542 ("spi: Update speed/mode on change", 2021): after the
-  probe, _spi_get_bus_and_cs() calls spi_set_speed_mode() with the
-  requested speed but does not update bus_data->speed.
-- 3feea0ba196a ("spi: spi_flash_probe_bus_cs() rely on DT for spi speed
-  and mode", 2022): callers that want the DT values use
-  spi_flash_probe_bus_cs(); sf probe uses spi_flash_probe() only when a
-  speed or mode is given.
 
-On sandbox at a6ab6a66146, spi_flash_probe(0, 0, 1000000, 0) on
-spi.bin@0 (40 MHz in the DT) leaves the controller at 1 MHz after the
-probe, after spi_claim_bus() and after spi_flash_read(), while
-slave->max_hz and bus_data->speed stay at 40 MHz: the claim compares
-against the stale cache and does not reprogram the bus. rk_spi behaves
-the same, as its set_speed() takes effect on the next transfer. So
-these callers already run at the requested speed after the probe; only
-the ID read happens at spi-max-frequency. It also makes a sentence in
-my v1 commit message wrong ("the next claim of the bus goes back to
-that frequency").
-
-> Just to check: should a requested speed above spi-max-frequency be
-> honoured here, rather than capped at it?
-
-I don't think this choice is mine to make; it is about what the SPI
-uclass should promise. The options I see:
-
-A. Keep the v1 scope and override only max_hz for the probe, so the
-   probe runs at the speed the callers already get after it, uncapped
-   as today.
-B. Honour the speed only for an explicit request from the shell
-   (sf probe with a speed), where whoever is debugging answers for the
-   value, and keep the DT speed for everyone else. That also needs the
-   path from e2e95e5e2542 to stop overriding the DT speed for them,
-   which is a separate fix.
-
-Which would you prefer? I will also add the checks you suggested to
-the test, on spi.bin@1, whose DT node sets spi-cpol and spi-cpha, so
-lost mode bits show up.
-
-Regards,
-Igor
