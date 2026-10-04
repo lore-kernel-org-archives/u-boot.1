@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AC09CA5FF5
-	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 05:12:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85F07CA5FE2
+	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 05:12:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CFBF480D5C;
-	Mon,  5 Oct 2026 05:12:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 262B680DC7;
+	Mon,  5 Oct 2026 05:12:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CHwIUg-CdxnR; Mon,  5 Oct 2026 05:12:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 0949580CB2
+ id Ya9owMOxuVsk; Mon,  5 Oct 2026 05:12:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org AFB6680D86
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791177174;
-	b=FCWr9+5W3P5tOn/I+zYhV7A0KQPn4lKoEnn/6icjZMbQBQi246RVpSqxDK9+vDMODy+g
-	 a8hAcPKCqTjgZ+cPWbS+ZXuxQ75XuycsqGriwGAbdpyrLJLCYIiZJ9RIDzEJDkcGFj8aN
-	 xHsCKcfWyNKqAixX9zkHjKngJ0LXFNabj8yT/S5qRkXofbAoKImCNE0SyHsLkq0JRglkV
-	 A06nX+3dgYewTgXUrv3uUWnHRxSITme3zylK805YN3IkC7bPYKEBKScfM/UCq9Rrt0CWE
-	 o+HNG7QvXVLHaaDeWUjVKI/KkTYN7lpwZVd4kjspram0u622IwliIA0/e7KGIJI2A3A==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791177176;
+	b=YM8msxZ4xWHk1Ivob+jx0u9L11N28mfArJMnU0piFw7z2CBtsXN1DG5fFvGBTiAi2ywE
+	 TD1est0TFOUIHLBpn0+uS7snsq7wlevE7b7cWsyjT3Lj1/jBdd+ugutDK8aUNDn3cY7RJ
+	 WM/cBPRWATaUicLYFJvNrBGyoJNxiORMJ5HcrcJDAjXjobhAXeWiYi9wFc44VG8nRQqnk
+	 eSpIrUoXRRTp7ASkmn3IJ9QRqSuW5ziyFsWYCIm9zEnIe+Mu/12x7fV7kcLlaS5eKV6XQ
+	 yduM6kGlqUDeyyKS8lttDZsrpbttpwLjtywAJTCNQFBlysndsecOAGrIclwOSxbUlQQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791177174;
+	c=relaxed/relaxed; t=1791177176;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,48 +32,49 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=aq2GTIom6ogzrcWbSixjWBoAirTPYMBQ/Mp2yqrZBIk=;
-	b=cnhwykq3T12EF//uP2ajh3kf/scDgV19TAcT0DVrnls0xenNXV6dK6C+/S0j78UvredL
-	 F/pusGVWov0iW3UbCOgA4X2CAu3gvXtI+R+Tjxh15hwiYAFm2dorYHIEemckOmn8t49He
-	 31YaXUphmidByCZMyf8pYESj4PPHPpndpSl50HZNzw8yg6ngRcegVtcu06pq7X3e10yLX
-	 QDcYE244wX3Q03BAHS7shTh/wesbO62ygNYiW2I5GDbMHwsruUyNorltkfZBcQBVwtDdE
-	 B3mrXm0SN6tVdV526qJgFbPwp/YEyVC4q52z8AnX34h9ntE8Pqk1iJWbsPNOApvvjVg==
+	bh=wPtPK2a5WuTo3m4F24TjicBPD3suBQpLO+2VKfL+KoU=;
+	b=FOCyi0FUm1yvR5vlT245fjhEtvrXzmY7QT+ORE1wb7RM0Bcvie7r3u0l48nF4kl7CiDt
+	 vWNXwYZXd7D8WiYnwLsJBdTeespAMqJg6cRb01wDJE5fYhX5kzQCfbBe2ehADhA7wt+1n
+	 3opp7M0Gmzl7pxQ8/nwGTBqfrkFx7j3pIvuM5JCT3dbXZURAK5HqTh17jYBJfgUy7gSR2
+	 sSwnYvQvx5cz/YQFv5ctXLMg5sBqgBZEHh5vDg5LRpPG0MtsjU6+K+AYPZoC4uaGEz/R/
+	 /Jz9wwqA7eWjjA5PzjpJKLJEPjNv4yF0/REL4lBJbGJ6gqu8L/JM/b/0QjJzPzmCAlw==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791177174;
-	bh=aq2GTIom6ogzrcWbSixjWBoAirTPYMBQ/Mp2yqrZBIk=;
+	d=lists.u-boot-project.org; s=default; t=1791177175;
+	bh=wPtPK2a5WuTo3m4F24TjicBPD3suBQpLO+2VKfL+KoU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=qUldXYA0wCltpLlpseojgc6p1lahZhOR0wKU/FfiEr69sSRepwoMEYoAyY6mC2E+M
-	 WKfFvJce4AKTL6RuG7JIRr/m9uDqM/wLvsBcocByh76OUCIN/DCBY7nnYhuPkbp0Q8
-	 dJxiDnTEOBIQ1a8V7SfZiQBZLZpz7B3YDMkxqz7j5iVb6tL5L6bHBnDjhViqfRyElr
-	 BGyTY9f9xcwLC/FP72v3AMT9k81sckB8tnPgYlAOXeXVsoJ2kq6zdH5zD9i14CvwGF
-	 BW0mLRnYyDyicS6Gi2IBdB//bVAT/hRfyNj/dwDR0gcnU13+E9xzNYSPuHDGOCDgc0
-	 vdTBhgF/OeF+w==
+	b=Ep5wjcv51qRh21MRPbt/9xww3Pw5dUQTtMbFgsxoNEbxoCMtlJEyrJ5fb5oDlycXG
+	 wpeb9ur77jd+6uIJosybb31HmJcP11qwoGcD4dOO/V00n1YxeHINvycNDy0nUSCMnM
+	 ln3NHaxrctOmrSs5b9l/F7etxoaXRfbx6HAqBVJgDb2385vFJHBqLgZZFwhMNY2kOn
+	 vHtycHyX/WlzY5dhaLicpPs6UqdakYWSkoE/aXMnZpbOxLq8QH3vMpFYK7bgUrV6Wf
+	 Y8qthn4k1Bqn+eh23NQqSPqdo5WdncOZQLsLPQVaJ6TfdUVI/1PvoqHgiJDmdEWfL7
+	 0rqyWC6GdIu7w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0949580CB2;
-	Mon,  5 Oct 2026 05:12:54 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 5E3B02E0
+	by smtp1.osuosl.org (Postfix) with ESMTP id AFB6680D86;
+	Mon,  5 Oct 2026 05:12:55 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8E217323
  for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 19:23:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 446984002B
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7EE0060705
  for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 19:23:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id U-Sxdm2LfQEy for <u-boot@lists.u-boot-project.org>;
- Sun,  4 Oct 2026 19:23:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 80E1540004
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SBJzGAr77y4d for <u-boot@lists.u-boot-project.org>;
+ Sun,  4 Oct 2026 19:23:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org A4674605CB
+Authentication-Results: smtp3.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791141784;
- b=VaksbO0qXf5ors2YfinBD6Yi99fIrHErKunhS2ADXqtXfA6j22AahBwwLXhIYPJHJ9c5
- Vbwa0OWyQqYLA2TUKXvsRMhYzPzdvx9E25cQeRzeRXXJ3UvYn9tL7ysWrq9LzM5BgkNwd
- BKR3omTOVLlq6uwBETP78fahtoZaIXblAVwzCYjC2/+sxM7/Q96Wdw7XPHYUYTXt6I7Uo
- HdQkTS+Ne1aMpXLxApR8y6VHXOoUH+jSSTxr0hqYrfUxAkoxTczf/0/RvoAiCf7b/z5Zf
- E1trAQhsyP+9khQR8rTn5bT8vGYmGQcGONkdVOFJbLfIbXMV/i3oCYGqgiWJzsBuKFA==
+ b=ixbKNhNYQfYTuGFGOVVgWOFrENKo85/xr8JntQ1t7JDL3FZT4QB4DCvd13RTGA3bw+xA
+ +/PHfPOmyd17hi8klWpj2LH9fXe2orriIt7IyGxwfkn9t1JHMRiVL7Npg3KPjCOALFHos
+ uz5JmzXFigTqip/dom3V9emHgvF/xDxCdd8FMm0UvmEIyDrOmaQo63f9uPVmK/jdK2PH/
+ S0djWaPNAZPMUKz5bF8kzTISJ7On6rXORGt9I6je7G6NakXzBUdaQOpbj2dG2rYWCgUhb
+ IjeobrqTeXiFp5tQIVUR4dMeOiD4gZfaLAqd5kPn7EKorhIJfmNq/AWEWcPKDYpPTOw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1791141784;
  h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
@@ -81,56 +82,56 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
  X-Original-From:Reply-To;
- bh=aq2GTIom6ogzrcWbSixjWBoAirTPYMBQ/Mp2yqrZBIk=;
- b=ifJvinzAYzw0N39nur5cT5mToJ5tTkWQ1wi7qGjPe2AHG90JSkFQhEqOWrmoiN7QN3VZ
- j+u6EE4QN2IgT1biNon0F2PFY6I6gHUdM93D6SybZxcv4HT+9dYEnhgyotNKXOxOglLc7
- RerPkQktEOqjU7Kotv4dKDmfWRztd5BkNDHLxjBR3JsagX4E1rNu7gZP5veZf5uent4LU
- +kioxSmeZRRA92cx1o8QulDg0heM2VJyi5Ej2Pi0fE0TbQhgigmzvEbEx8QXcSb6UGCEg
- ZLKImwENxWfLBd4renRgB7tQ4XHryUzkB9Iw5Y8W7WRw8SB2JV85/pboPIqrwKXanjA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=wPtPK2a5WuTo3m4F24TjicBPD3suBQpLO+2VKfL+KoU=;
+ b=NQ1wU4EEOLz6jOLlWFvvFty4WHfqlxG48f81j/OiZ1O92QUdB4gp3EyqtTOFsgtBbKLj
+ MmQIoJUCjaVSQWnPBPispM8Wj+JVRFrQT8u4Vkd9t/rmIQdIDZjmsSCcRM1r4raa1xzZ5
+ ICYU386qQRaSyTFUfLOkerTrwe3VQ6Tnv0AT339aRhztYUs3/s8c3IPoGwHxOqAKq3uAb
+ vHDRerOR3OsdP1ctoussPFK1JIBiaZSjy0dYKvTylj1P9EqjkE4CWjwEKJPjn2uSoLO1Z
+ NHRS1w2p1vbDvGPJPaggO3WvWqRTMZgH5OilKNUZrR868qegL5C4jHOqGuLllgTPy7A==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=kernel.org; 
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=kYSPZ0xi; 
- arc=none smtp.remote-ip=172.105.4.254
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
- helo=tor.source.kernel.org;
+ header.s=k20201202 header.b=j0geeioS; 
+ arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
  envelope-from=devnull+petr.hodina.protonmail.com@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=kYSPZ0xi
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 80E1540004
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=j0geeioS
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A4674605CB
  for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 19:23:04 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 5579D60213;
+ by tor.source.kernel.org (Postfix) with ESMTP id 5F9796021E;
  Sun,  4 Oct 2026 19:23:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id F2AC2C2BCB9;
- Sun,  4 Oct 2026 19:23:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 0C12DC4AF64;
+ Sun,  4 Oct 2026 19:23:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1791141782;
- bh=qF4uZdiIq1mYh6PITQQXrEE8Y48yZUX6phrj8m0nB8k=;
+ bh=Ib1tkhZ9ekTW8pmIrYfLBqfAGauOMLKnRPvsJlvsv1I=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=kYSPZ0xib6lVkQ9vEp3F/7W3JoGMXvH14qmDN2ZkipTCStfT2GmSlW8l5x0GtMWHx
- uF6Mz3MMrsvj01AWLQgRWW1hVHAxfhSGbxv1za4rueIOnfHW0M+wK/gzXGURZCHPbV
- PssHONIGv9LD/55nhoLB8KRFyYrFitVH8kM6HFwX4J5ZFs7iAevLC3xPfwNfYnhIC6
- XBPbI0fXNSPTw1u613aiN84jzi84/knFVsfVYxwx4L8wnu1V5T7Xqp4UYhnDXDv83A
- rt3RydaR7pJbETM0l53PnH/jFB/BumWeNGE/zWCp27MR1Uyfp+bxNsbKsrVRxmUdjw
- VzMzyBAKN2dzA==
+ b=j0geeioSfdLKeZzUfT0CQE0OhqSqzJqsKrPxYtUKsHXAB7QmXMNkwhc6fBYiqpaV2
+ 2UvGTHn9+5dbcLAKrnMI8M/Wkac2un0JAOhXA6b6QvsSKMFeKhFCm53+deCeOLhqlo
+ bpYcf0UFg8kp4Klsh4wZr49VCA6ANimpSZjFGBxP9Xm+yopp5f0IHsfxjHvcDOrbJB
+ ho7yFqA+ujV+A9zZj5Au0ZH5dfhHZIwQq7zf9HTB4d7uiRjyESfC7N68JSvMw/Z8Kf
+ eomZ0H8fELCC4j7TcKbhU5BzRZA+kYynYKX/gwfdXupOmODhDAsIBCzhxMkt6qCg+b
+ zfq4VwqAoE00g==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id D0A18CA5FF9;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id E8D7ACA5FF0;
  Sun,  4 Oct 2026 19:23:01 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Date: Sun, 04 Oct 2026 21:22:35 +0200
-Subject: [PATCH u-boot 3/8] ufs: program extended HS sync length for SK
- Hynix devices
+Date: Sun, 04 Oct 2026 21:22:36 +0200
+Subject: [PATCH u-boot 4/8] ufs: add CONFIG_UFS_RESTRICT_TX_LANES
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261004-b4-ufs-sony-v1-3-54e71c95ba62@protonmail.com>
+Message-Id: <20261004-b4-ufs-sony-v1-4-54e71c95ba62@protonmail.com>
 References: <20261004-b4-ufs-sony-v1-0-54e71c95ba62@protonmail.com>
 In-Reply-To: <20261004-b4-ufs-sony-v1-0-54e71c95ba62@protonmail.com>
 To: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>, 
@@ -166,11 +167,11 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Markus Niebel <Markus.Niebel@ew.tq-group.com>, Petr Pavlata <petr@acrux.cz>, 
  Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791141780; l=2751;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791141780; l=2153;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=+Ga7wnGJh3+7X1gT9+waTxAF3OMEBshDXzDZErbQz4g=;
- b=oX5AGAFhQmEhQ0p3R0VPx14L7h0507nFTUQXiq26KoalvcC0E2xcH71eThgvMacydnFgBnmqJ
- R5KEQu1E43fBUcRvxguLk9kp8jWk3ty4TXDUF35VYeJDAjixMymgDDa
+ bh=FTI5xYw1z/BewAVGIYfLfALDiWPTsnJhZaaKA4sllzY=;
+ b=O/YEMpqMSysfNs3B88QX1ZmllpqFahoApTXj+hxJBbtBmAFH9OeaICcWC6NMbKRhCYaLTLO75
+ N2hMWUUTuYxCo0xpxwJnxXwSVKP640NvHle0T6CZd5t4ymGU1nBNRX1
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -193,76 +194,67 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Petr Hodina <petr.hodina@protonmail.com>
 
-Add the UFS_DEVICE_QUIRK_EXTEND_SYNC_LENGTH bit. SK Hynix UFS devices
-on the Sony Yoshino/Tama (MSM8998 / SDM845) family need
-PA_TxHsG{1,2,3}SyncLength programmed to 0x48 before the power-mode
-change for a reliable HS link; without it link bring-up fails or the
-device falls back to a slow PWM mode.
+Add CONFIG_UFS_RESTRICT_TX_LANES, to restrict the amount
+PA_AVAILTXDATALANES = 1 at the start of ufshcd_link_startup().
+
+Some platforms (notably the Sony Yoshino/Tama families on MSM8998 /
+SDM845) have only a single reliably-usable UFS TX lane.
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
- drivers/ufs/ufs-uclass.c | 9 +++++++++
- drivers/ufs/ufs_quirks.h | 7 +++++++
- drivers/ufs/unipro.h     | 3 +++
- 3 files changed, 19 insertions(+)
+ drivers/ufs/Kconfig      | 14 ++++++++++++++
+ drivers/ufs/ufs-uclass.c | 13 +++++++++++++
+ 2 files changed, 27 insertions(+)
 
+diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+index 49472933de3..266e7180152 100644
+--- a/drivers/ufs/Kconfig
++++ b/drivers/ufs/Kconfig
+@@ -8,6 +8,20 @@ config UFS
+ 	  This selects support for Universal Flash Subsystem (UFS).
+ 	  Say Y here if you want UFS Support.
+ 
++config UFS_RESTRICT_TX_LANES
++	bool "Restrict the number of UFS TX lanes to 1"
++	depends on UFS
++	default n
++	help
++	  Say Y here to restrict the number of UFS TX lanes to 1. This saves
++	  power at the cost of write performance.
++
++	  This is useful (and on some devices required) for platforms such as
++	  the Sony Yoshino/Tama families where only a single TX lane is
++	  reliably usable.
++
++	  If unsure, say N.
++
+ config UFS_AMD_VERSAL2
+ 	bool "AMD Versal Gen 2 UFS controller platform driver"
+ 	depends on UFS && ZYNQMP_FIRMWARE
 diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
-index 05b95c510b4..fdf62a69c02 100644
+index fdf62a69c02..977ffebc21f 100644
 --- a/drivers/ufs/ufs-uclass.c
 +++ b/drivers/ufs/ufs-uclass.c
-@@ -1872,6 +1872,9 @@ out:
-  * fw revision; UFS_ANY_VENDOR / UFS_ANY_MODEL / UFS_ANY_VER act as wildcards.
-  */
- static const struct ufs_dev_quirk ufs_fixups[] = {
-+	/* SK Hynix devices need an extended HS sync length */
-+	UFS_FIX(UFS_VENDOR_SKHYNIX, UFS_ANY_MODEL,
-+		UFS_DEVICE_QUIRK_EXTEND_SYNC_LENGTH),
- 	/* Sony Yoshino/Tama: block PURGE/UNMAP to avoid bricking */
- 	UFS_FIX_REVISION(UFS_VENDOR_SKHYNIX, UFS_MODEL_HYNIX_32GB,
- 			 UFS_REVISION_HYNIX, UFS_DEVICE_QUIRK_NO_PURGE),
-@@ -2108,6 +2111,12 @@ static int ufshcd_change_power_mode(struct ufs_hba *hba,
- 		ufshcd_dme_set(hba, UIC_ARG_MIB(PA_HSSERIES),
- 			       pwr_mode->hs_rate);
+@@ -508,6 +508,19 @@ static int ufshcd_link_startup(struct ufs_hba *hba)
+ 	int ret;
+ 	int retries = DME_LINKSTARTUP_RETRIES;
  
-+	if (hba->dev_quirks & UFS_DEVICE_QUIRK_EXTEND_SYNC_LENGTH) {
-+		ufshcd_dme_set(hba, UIC_ARG_MIB(PA_TxHsG1SyncLength), 0x48);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB(PA_TxHsG2SyncLength), 0x48);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB(PA_TxHsG3SyncLength), 0x48);
++	if (IS_ENABLED(CONFIG_UFS_RESTRICT_TX_LANES)) {
++		/*
++		 * Restrict the number of available TX lanes to 1. This saves
++		 * power at the cost of write performance and is required on
++		 * some platforms (e.g. Sony Yoshino/Tama) where only a single
++		 * TX lane is reliably usable.
++		 */
++		ret = ufshcd_dme_set(hba, UIC_ARG_MIB(PA_AVAILTXDATALANES), 1);
++		if (ret)
++			dev_warn(hba->dev, "%s: failed to restrict TX lanes: %d\n",
++				 __func__, ret);
 +	}
 +
- 	ret = ufshcd_uic_change_pwr_mode(hba, pwr_mode->pwr_rx << 4 |
- 					 pwr_mode->pwr_tx);
- 
-diff --git a/drivers/ufs/ufs_quirks.h b/drivers/ufs/ufs_quirks.h
-index f5aa47722db..822315cb06d 100644
---- a/drivers/ufs/ufs_quirks.h
-+++ b/drivers/ufs/ufs_quirks.h
-@@ -84,4 +84,11 @@ struct ufs_dev_quirk {
-  */
- #define UFS_DEVICE_QUIRK_NO_PURGE		BIT(0)
- 
-+/*
-+ * Some SK Hynix devices on Sony Yoshino/Tama need an extended HS sync length
-+ * (PA_TxHsG{1,2,3}SyncLength) programmed before the power-mode change for a
-+ * reliable HS link.
-+ */
-+#define UFS_DEVICE_QUIRK_EXTEND_SYNC_LENGTH	BIT(1)
-+
- #endif /* _UFS_QUIRKS_H */
-diff --git a/drivers/ufs/unipro.h b/drivers/ufs/unipro.h
-index bde1490397c..4e163da0736 100644
---- a/drivers/ufs/unipro.h
-+++ b/drivers/ufs/unipro.h
-@@ -118,6 +118,9 @@
- #define PA_TXGEAR		0x1568
- #define PA_TXTERMINATION	0x1569
- #define PA_HSSERIES		0x156A
-+#define PA_TxHsG1SyncLength	0x1552
-+#define PA_TxHsG2SyncLength	0x1554
-+#define PA_TxHsG3SyncLength	0x1556
- #define PA_LEGACYDPHYESCDL	0x1570
- #define PA_PWRMODE		0x1571
- #define PA_ACTIVERXDATALANES	0x1580
+ 	do {
+ 		ret = ufshcd_ops_link_startup_notify(hba, PRE_CHANGE);
+ 		if (ret)
 
 -- 
 2.55.0
