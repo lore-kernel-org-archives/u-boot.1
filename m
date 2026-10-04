@@ -1,135 +1,138 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB3F9CA5FDD
-	for <u-boot@archiver.kernel.org>; Sun,  4 Oct 2026 02:18:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE2FCA5FE4
+	for <u-boot@archiver.kernel.org>; Sun,  4 Oct 2026 04:07:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5D6B340A3C;
-	Sun,  4 Oct 2026 02:18:38 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0ACF680993;
+	Sun,  4 Oct 2026 04:07:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5udnMuhS09uw; Sun,  4 Oct 2026 02:18:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 5DF6F40A5B
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791080317;
-	b=qpI1OtwC3iyMJFf9zSiETbooLBomdzosXeFxO+tjV+M77oZuJq/qDucmxw1bDv+ARZ+y
-	 uA7RJofssDWc/wagEaVM/34yXtZ+0ETH842v0mBOOrGM1+DQia9CQkbxk1ox3I21k7xbX
-	 CsnzNIJgSmIpFZE3TdZIyS5Bt+oMCu8d0784tBhXcujQZlznhbep4pGrIVygncUylBZk1
-	 5nBcYkk1gueam76tgAe6FeTPCkX8oX+TjuCOTVIEKt3Tmtv43jbxV6XCVImFnqIsnqYwr
-	 4wS9UBHHS71arjCuNfoolzmoHWsPid3euc5xz4uxB+ykoq8MUPV6A0D46eosIupk9IQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tjIXUNU2aP8d; Sun,  4 Oct 2026 04:07:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org EB135808AE
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791086835;
+	b=FE6prRGttEI0MJ9XR0/SIyD4LqSU5v/N8nOrJNuEs3p+LJqVBpl9PmFdLA5lvQ3mCbbY
+	 vG1Ech9KDqQrzCZp7R+3FURBynA+xLzx29BhRz64NYtsLkpevG6GNMs2hZZBOOIEyH7+d
+	 IudG4f2BdTmni+aLbCdmi+PSlhoVGu1eBpCUnNnBeySNrZn2TiL4IgrteDTJCtt5AuhmU
+	 MQ4tLv5xKJvmZEfXfEb5Scksh6+x0Tyx2zj9ruTi+dyRa54mVeX7kfT4bRWWXn/ma6IuO
+	 Iu/XDOPic4ETg25Z/VS8Vj6papN5Cf9OVLO3woDoo67MTBUPxLZj0NmU5OTPooijyHQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791080317;
+	c=relaxed/relaxed; t=1791086835;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=/wCrpswsjjU5nsYZOSJPUgSew53Mbn17zxYEDJjNrZ8=;
-	b=mVpLBq93ZGC19GwDQH9MdnSj6UdAooRX05bFQdw42vCzrqBitxB/BFweNmbL/p73ycXE
-	 9Jrz0biTNKPNCI+KUcfwtHh988bU+Q94ZDW+aZIWI8iG5VVWX3g5gr4UIWMpJNG9tSgVP
-	 DE9NF+XdCuOVTKCinwHo+aPJMLr29r6KIPKh+dSHcI0OIu8/CENsvKk7x0bdH8IhxUa5x
-	 7f4mpEI2XY+smisLA+7/GNVCqokDaZ1Uh5SFTKmnU4caSMrcm3WVDuYSKobcIvREBKgpQ
-	 a4G7eOoVUGDJmW+AJk1bvTUCQWNJQEPYgwpXuSoZmkQmFs0+19j/x36JFlVPYWjDYQg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-Last-TLS-Session-Version:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=+umWrWlBE+4aE3tpjfntqZ/ntN+WXq/Hki2c8F4NFww=;
+	b=Sh458WYeckN2D4TioE7x05uJMAnNP4VblC7bYMhbs1BlO9HQy0cNwV1dW8vw/vlOIWud
+	 BJ9G9TpFf1/tZ6nKSK4cV4mLpueBgZKXqaVkypK4V2HX1Rs+R1u3OBzAOsotGP1aUgsIN
+	 Wrq+9OPO0M15vPq/4l8gUNX6w6G31nsL6OtkvnBfL3MegdnS75zh63m4sNznPHHdd55s4
+	 lyWucHAxdS4APmrTaSl7kEPJmdF/1s1LtamUAm5kv8gPpnlsXX2ydvo4inpt94+nQDROc
+	 8lkctaknPNq3K+vdeH7/gj5z3qRE78EK+x6q9IIXnS1eXWXv2OuYVNKC1Hidhbhka7Q==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; dmarc=pass header.from=nabladev.com;
+	dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=cSWFFOpE;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791080317;
-	bh=/wCrpswsjjU5nsYZOSJPUgSew53Mbn17zxYEDJjNrZ8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=iT8AX5DOToKM8gEdkkmLF3rkz6x2Sc5sUo6SPSZlo2xDCxZrtr9KYlptu6yqsR+lw
-	 zgk2qqm2ssuf1Fqz7AIF0rGN8v32Zy275UPakn1JcTj5cTNNHIGs3/IuD2RW4J2aWp
-	 WrkFtJDQ7f55dStT+oUZ0AKuDEbcdqhv8DXxqPR6tdIysQvpQsp3oz48keZnZiW+Qn
-	 YhRAOgNHl0xKxgfroljoRyBDf+jBcMqJpQfBRRdSnt/5heBFYjevDq30jwlSvkD509
-	 FsawdYMtRAjc8kuN6ioN66ZpYGzMXCa6FKDvcAe1MVMTooDBPCYbGANq/eQoPVmWEX
-	 GYHinZ2PXko0A==
+	d=lists.u-boot-project.org; s=default; t=1791086835;
+	bh=+umWrWlBE+4aE3tpjfntqZ/ntN+WXq/Hki2c8F4NFww=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=ZFG0WetbBngkLlKZhLI9TcPwY44NBEMJuf0cbkYAVFLcTLPz4CcuVAsGnKmWdkw/9
+	 gNPBxnZgPsYIwfvHuCbIve2ETXYCqCiylmUOSSS3zGS1xE0PYCRI8naHJycZz3zzJA
+	 Hem5hWSOso+cAslZEtcdJxYRwUk3ZTl4hHAkRDc8FKeO35ivs2kN/9oqoaDeKgbUQ8
+	 vfpW8PeI5/L1tfZJ5Y++ViLPqgqJ+jxlWDv+nsi07bmNoxx0XuwZgifuGRHYlPypLI
+	 l67gxgJ/Vnn67RyFfTr2kOovk3Brl6htEyDtLk9nmRZDtz0saNocI5kNR2v7xqXxSW
+	 Z3qG/5WvEnMRA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5DF6F40A5B;
-	Sun,  4 Oct 2026 02:18:37 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id CE966435
- for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 02:18:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EB135808AE;
+	Sun,  4 Oct 2026 04:07:14 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 38F6E1A6
+ for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 04:07:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C050260624
- for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 02:18:35 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 363568088A
+ for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 04:07:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UT3pkJaR6ZlL for <u-boot@lists.u-boot-project.org>;
- Sun,  4 Oct 2026 02:18:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 9655F6061D
-Authentication-Results: smtp3.osuosl.org; arc=none
- smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791080314;
- b=SbmCSL8MjKiU5LWuX53VM5IsO2cuRVEdhifzbyfxgmnJXykRVc+Kfm3exDe0mZpueJUu
- WaWuryiRGnrz5S+iRM/SHoI5ocKjqmQ0gbKXAknfQ56jQBay5uQ53J+PuUZ+4uRY60iip
- JBoxQkpJs/56+6bcOG3057wwf+lFXZeM6dIici99vMKXe8/hOPvq0bqLJEi06LkffL1IX
- cas/G/9afeUoHIcvhdCiNYIu6UGyvZDCV4WDRJtDxb452vMAzh+3oJyc5ETI97KlqJ4w3
- wP3UjpchpYsVfzfdj9a/llCx/XMLc9f0eJgI9ntBp9Q1HHmJ9XK1HRa1eRn3/7kNVmw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id h2YgGEFrvyM6 for <u-boot@lists.u-boot-project.org>;
+ Sun,  4 Oct 2026 04:07:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org B6F6780F02
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=178.251.229.89
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791086833;
+ b=q8V+RcHbSoofDxjHSUO3/hnSQMuuCYHFMzjCPs3YWOuzOyu8cc3uLVqrp128hnRon5r3
+ jvlwCuisGhm9kbFIc1Wa08BqxIYVNLVA2hJHzvKzSeJGmwF3KBz1jScaftuTO0BpgCb2S
+ 9h3dnlxvFmz/yYQrhI4F71VA4dn6drDhy+rGsxEPRDb9o70s4jEHE6Vp0KO3LM3aU0yu9
+ WWOyGG3Mzjz/0Jg9JQRTu2OWTkrE5byU/gn4c+HODkII4AiDgOJeGyDMw7Q5ChrPH2Hs8
+ msIXRJvsGzcOs+YVv6XUBLTn7dd61UTU6sth/8sF01ReNw5lNrMtGYw4Dga748JQtqg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791080314;
- h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
- Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:In-Reply-To;
- bh=/wCrpswsjjU5nsYZOSJPUgSew53Mbn17zxYEDJjNrZ8=;
- b=G0ZtqWO0UduBv++aE674FlvrsFVPwcxeA39qhYMu8JbNAlzBjFWNRb23Vn18KoRMqjZ1
- 85PMJ+ObaSS9V4n1N5pIpWk+f+Gp84IfB30NyUsleh2E8+RXY0D08Zp3kiRTxVGWO+aH+
- 2QFbwA3w6ccMquIFZFCsRfR+JL1mJwRlFCTOMJwZBQng9ZVUUZ0gJdI+qGZuhGg8xggJY
- T/YpcdfKAud5yN4en60b595Pi5SxLgcW2kOBnjW8tSQslzJMbdZiQFxlqFT7tDawzpFOz
- uMoGKAKppb5qmXVRj8prgzyYpaefucYhGNU2AUyyUX+aRmLwujQ+ECxVDwetjeW/XIg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org;
- dmarc=pass header.from=kernel.org; 
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=ePusMDIC; 
- arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
- envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=ePusMDIC
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 9655F6061D
- for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 02:18:33 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 4A44560052;
- Sun,  4 Oct 2026 02:18:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8BF8E1F0089B;
- Sun,  4 Oct 2026 02:18:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1791080312;
- bh=/wCrpswsjjU5nsYZOSJPUgSew53Mbn17zxYEDJjNrZ8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=ePusMDICy2MwrAKnELeLvplrH08ugJ8HhaRsIYc0U8SIgj9/f9M45XWQrW8+c14iy
- ifYdI1yCYWSAAKQNFgRigUxBKgR9UWoxT+Auilyt3Jq5d3m+THEaGCTTOxX6SpjxAS
- c64BtBUONamEMf5ITbJQdOk8GNwpOimwsErKaNcvN0Nx+4vz4FxfwpjWdbAf+/wp/K
- MTC0m3ZqN5svW4uZVkf+IZIpDzwcXihawpLuX8cjdCt/nFyQGbXsueP+N2tg4RDEca
- 6Acf/+uz2iQmQBtWy0BjIb75Uakjr/4zYVJoFa1SGirvPFVzz/QcvG5/DEC9vWLyoY
- M2yKX8Nw7j9QA==
-Date: Sun, 4 Oct 2026 02:18:30 +0000
-From: Yixun Lan <dlan@kernel.org>
-To: Dave Klotz <DaveWK225@protonmail.com>
-Cc: u-boot@lists.u-boot-project.org, Lukasz Majewski <lukma@denx.de>,
- Tom Rini <trini@konsulko.com>, Junhui Liu <junhui.liu@pigmoral.tech>
-Subject: Re: [PATCH v2] clk: spacemit: program the mux when setting a mix
- clock's rate
-Message-ID: <20261004021830-GKD68132@kernel.org>
-References: <5aa2337bcb969568749c4728354164d5a6c88f27.1790975596.git.DaveWK225@protonmail.com>
- <25a05161c25d59a153acde52f798e5fcf570bd41.1790993264.git.DaveWK225@protonmail.com>
+ c=relaxed/relaxed; t=1791086833;
+ h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
+ Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+ X-Last-TLS-Session-Version;
+ bh=+umWrWlBE+4aE3tpjfntqZ/ntN+WXq/Hki2c8F4NFww=;
+ b=NmiLC5Cj+5gEaJdOIa0wofUHQiYiPs0sPzBlNUHc4T3DcWNDwgXTb7nlRefWAV1nsJlP
+ QS5Pwtx1OJk0jfwkfQGOvZ7FKW/O9wBs6HbySmWZAbSpvlRmaM6MSMYBAukl9l9UKUDFQ
+ Vj1yNjIQGqq+XncYuPhY2MNDyUSDKb2r0u8Tr8IovVKC4QJHZnbSn19T1j2/HsYYJtqpr
+ 2k4SXF29Jskzv/XBLwP7PPFPBTsWGplqFBPiy+JM+wPYtDRvxucrXxMletc5cEXv5yf0K
+ FKR6J+HLp3lvqAoBxgcDQfZ/lKZk/89i6u9u7+8l6utnRlFAkeqV32H9AJlHsUTf4/w==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org;
+ dmarc=pass header.from=nabladev.com; 
+ dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=cSWFFOpE; 
+ arc=none smtp.remote-ip=178.251.229.89
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.251.229.89;
+ helo=mx.nabladev.com; envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=cSWFFOpE
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B6F6780F02
+ for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 04:07:11 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 39900107834; Sun, 04 Oct 2026 06:07:03 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1791086828; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=+umWrWlBE+4aE3tpjfntqZ/ntN+WXq/Hki2c8F4NFww=;
+ b=cSWFFOpEuOxXdR1/kHnx1BuvD+MAb3OULphLHMVsrG8Mopb1fMkkmT99JMukl898WiA/1c
+ UWavgIxnzEqHuHn5PGCmHFKeBIM+O9Obzt7fH8oYeV1lVSue0kju7DgqlzT47Rqbah0DS8
+ 1R3qW5BiYenjpHpBzlXL934XQK+wiCyiwONqvYl2LOI/GGicMiA1AqueEaPX8E01/XYbZY
+ +fEu+ca6/h22gqoCgQsjevYnqT1REY6OEwv6BZFKufnlNwIxCGnD+3iPulIUuT9tzI1Pcp
+ ZaSzyMKNe62snakjHnOUTtnm6VFLpAlGebhWpa72AaSGYfUcXKsofNFtIeIPdg==
+From: Heiko Schocher <hs@nabladev.com>
+To: U-Boot Mailing List <u-boot@lists.u-boot-project.org>
+Cc: Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Vignesh R <vigneshr@ti.com>,
+ Johan Jonker <jbx6244@gmail.com>,
+ Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+ Heiko Schocher <hs@nabladev.com>, Anshul Dalal <anshuld@ti.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Cole Munz <Munzzyy1@proton.me>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Stefan Bigler <stefan.bigler@securiton.ch>, Tom Rini <trini@konsulko.com>,
+ Vincent Jardin <vjardin@free.fr>
+Subject: [PATCH v2 0/5] mtd: Microchip 23LCV1024 SPI SRAM
+Date: Sun,  4 Oct 2026 06:06:44 +0200
+Message-ID: <20261004040657.3156402-1-hs@nabladev.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <25a05161c25d59a153acde52f798e5fcf570bd41.1790993264.git.DaveWK225@protonmail.com>
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,107 +146,120 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Dave,
+The 23LCV1024 is a 1 Mbit serial SRAM with battery backup on an SPI
+bus, used as non volatile scratch storage. This adds a driver for it,
+plus a sandbox emulation and a unit test.
 
-On 02:39 Sat 03 Oct     , Dave Klotz wrote:
-> ccu_mix_set_rate() picks the best parent and divider but writes only
-> the divider. U-Boot's CCF has no determine_rate step that would reparent
-> the clock first, so the clock keeps running from whatever source the
-> mux selects, at a rate the caller never asked for. Worse, when the
-> hardware mux selects a source that this build's parent list does not
-> contain (the K1 SPL lists only pll1_d6_409p6 for the SDH clocks), init
-> registers the clock under parents[0] and the clock framework's idea of
-> the parent no longer matches the hardware.
-> 
-> Reparent the clock to the chosen parent with clk_set_parent() before
-> programming the divider, as the clock core does in Linux. Do so also
-> when the framework already has that parent but the mux selects another
-> source. Nothing is written when the mux and divider already match, so a
-> clock left running at the requested rate by an earlier stage is not
-> disturbed.
-> 
-> Signed-off-by: Dave Klotz <DaveWK225@protonmail.com>
-> ---
-> Changes in v2:
-> - Reparent through clk_set_parent() before programming the divider, as
->   suggested by Yixun Lan. CCF enables the new parent only when the clock
->   itself is enabled.
-> - Reparent also when only the hardware mux disagrees with the chosen
->   parent, including the SPL's single-parent clock registration case.
-> - Share parent-index lookup with ccu_mux_set_parent(). Keep the no-write
->   case when the mux and divider already match.
-> 
-> v1: https://lists.u-boot-project.org/pipermail/u-boot/2026-October/633805.html
-> 
-> The parent/divider selection algorithm is unchanged from v1. This
-> revision changes how the selected parent is applied.
-> 
-> Retested on 2026-10-02, with the integrated board-support lane on next
-> bd2f5794b7e2, OpenSBI v1.9, and "clk: spacemit: ccu_mix: fix inverted
-> condition in ccu_mix_trigger_fc()" from Yixun's k3/for-next tree:
-> - OrangePi R2S: eMMC SPL boot, SDH2 I/O clock 204.8 MHz instead of the
->   BootROM's 409.6 MHz; U-Boot HS200 at 200 MHz/8-bit, normal EFI and
->   FreeBSD boot, and a final unattended reboot.
-> - OrangePi RV2: microSD SPL boot, U-Boot SD High Speed at 50 MHz, EFI and
->   FreeBSD boot with root on NVMe; two boots checked.
-> 
-> Both CPU clusters remain at 1600 MHz on both boards, with SSH working
-> following boot. The R2S, RV2, generic K1 and RV2 SPI configurations build
-> SPL and U-Boot proper without compiler warnings; checkpatch passes.
-> Generic K1 and RV2 SPI are BUILD-ONLY for this revision. No before/after
-> performance benchmarks were run.
-> 
->  drivers/clk/spacemit/clk_mix.c | 79 ++++++++++++++++++++++++----------
->  1 file changed, 56 insertions(+), 23 deletions(-)
-> 
-> diff --git a/drivers/clk/spacemit/clk_mix.c b/drivers/clk/spacemit/clk_mix.c
-> index a1158512a9..fc8e0fd41d 100644
-> --- a/drivers/clk/spacemit/clk_mix.c
-> +++ b/drivers/clk/spacemit/clk_mix.c
-> @@ -136,14 +136,63 @@ ccu_mix_calc_best_rate(struct clk *clk, unsigned long rate,
->  	return best_rate;
->  }
->  
-..
-> +static u8 ccu_mux_get_parent(struct clk *clk)
-This problem isn't introduced in this patch, but while review it..
+The driver sits in UCLASS_MTD, the way the SPI NAND driver does, so
+the device is reached through the mtd command. v1 put it in
+UCLASS_SPI_FLASH to borrow the sf command, which meant shimming
+struct spi_nor fields for a device with no flash semantics.
 
-I have difficulty to understand the function name with what it exactly do
-here.. I think it trys to retrieve current parent index where the hardware
-programmed to, so I think it would be better to rename as
-ccu_mux_current_parent_index() or ccu_mux_get_parent_index()
+Reworked this now in v2 (comments from Simon)
 
-> +{
-> +	struct ccu_mix *mix = clk_to_ccu_mix(clk);
-> +	struct ccu_mux_config *mux = &mix->mux;
-..
-> +	u8 parent;
-I'd like to simply name it as 'index' instead of 'parent', we already have
-"struct clk *parent" which will brings confusion..
-> +
-> +	parent = ccu_read(&mix->common, ctrl) >> mux->shift;
-> +	parent &= (1 << mux->width) - 1;
-> +
-> +	return parent;
-> +}
-> +
-> +static int ccu_mux_parent_index(struct ccu_common *common, struct clk *parent)
-same reasone, how about ccu_mux_wanted_parent_index()? it's a parent index that
-expected to program to the hardware..
-> +{
-> +	int i;
-> +
-> +	for (i = 0; i < common->num_parents; i++)
-> +		if (!strcmp(parent->dev->name, common->parents[i]))
-> +			return i;
-> +
-> +	return -EINVAL;
-> +}
-> +
+Add patch "mtd: refuse an erase on a device that cannot erase" in v2
+which prepares the MTD core for devices which have no erase function.
 
-The patch looks good to me, so with or without changes
+Patch 2 does the same for partitions on such a device, which are
+aligned on the write size instead of the erase size the device does
+not have. Without it "mtd list" divides by zero as soon as the device
+tree gives the RAM partitions.
 
-Reviewed-by: Yixun Lan <dlan@kernel.org>
+Patch 3 is the driver itself, now in drivers/mtd/spi_ram.c without erase
+function.
 
---
-Yixun Lan (dlan)
+patch 4 teaches the sandbox SPI emulation to bind something other than
+the flash emulator
+
+patch 5 is the emulation and the test.
+
+Azure build:
+https://dev.azure.com/hs0298/hs/_build/results?buildId=218&view=results
+
+Changes in v2:
+- New patch. The SRAM driver of patch 3 has no erase, which the old
+  mtd_erase() would have turned into a NULL pointer jump
+- New patch mtd: align a partition on the write size if the device cannot erase
+  Testing on the board dropped for "mtd list" command:
+  ### ERROR ### Please RESET the board ###
+  This is because division by erase_size, which the SPI RAM driver
+  sets to 0. Added for this case also sandbox test.
+Added comments from Simon:
+- Moved from UCLASS_SPI_FLASH to UCLASS_MTD, the way the SPI NAND
+  driver sits. The struct spi_nor shim and the dm_spi_flash_ops are
+  gone with it, and the device is reached through the mtd command
+  rather than sf.
+- Moved from drivers/mtd/spi/ to drivers/mtd/, where the other
+  standalone MTD drivers live.
+- Dropped the erase operation. v1 filled the range with 0xff from a
+  malloc'd buffer and claimed the bus once per 1 KB chunk. A RAM needs
+  no erase, and patch 1 makes mtd_erase() answer -EOPNOTSUPP.
+- Dropped the linux/mtd/spi-nor.h include, spi_flash.h pulled it in
+  anyway and it advertised a NOR driver.
+- sprintf() into a fixed field replaced by snprintf() into a buffer the
+  driver owns.
+- Copyright: dropped the trailing full stop and added Stefan Bigler's
+  address.
+fixed checkpatch warning:
+- Added a MAINTAINERS entry, as the move out of drivers/mtd/spi/
+  dropped a checkpatch warning.
+Added comments from Simon:
+- sandbox,emul is a phandle to an emulation node whose compatible
+  selects the driver, instead of a string naming a U-Boot driver. That
+  property is already a phandle for I2C and PCI, and dtoc treats it as
+  one, so v1 would have given the same name two meanings.
+- Renamed sandbox_sf_unbind_emul() to sandbox_spi_unbind_emul(), it is
+  no longer specific to SPI NOR.
+- The error paths name the driver or the node that could not be bound.
+Added comments from Simon:
+- The test drives the device through the MTD layer instead of the
+  spi_flash uclass.
+- Uses sandbox_spi_get_emul() rather than reaching into state->spi[][].
+- Added a spi1 alias so that dev_seq() of the bus does not depend on
+  probe order.
+- The erase part checks for -EOPNOTSUPP now. The v1 comment about
+  covering more than one staging step went with the erase loop.
+- The emulation lives in its own node with its own compatible, which is
+  what patch 4 resolves the phandle to.
+- Added the emulation and the test to the MAINTAINERS entry.
+Found while Stefan Bigler tested the series on hardware:
+- Added partitions to the device in the test device tree and a second
+  test that writes through one of them, which is what "mtd list" on his
+  board fell over.
+
+Heiko Schocher (5):
+  mtd: refuse an erase on a device that cannot erase
+  mtd: align a partition on the write size if the device cannot erase
+  mtd: add driver for the Microchip 23LCV1024 SPI SRAM
+  sandbox: spi: let a slave point at the emulation it needs
+  test: dm: add a test for the Microchip 23LCV1024 SPI SRAM
+
+ MAINTAINERS                     |   7 +
+ arch/sandbox/dts/test.dts       |  37 ++++++
+ arch/sandbox/include/asm/test.h |   8 ++
+ configs/sandbox_defconfig       |   2 +
+ drivers/mtd/Kconfig             |  23 ++++
+ drivers/mtd/Makefile            |   2 +
+ drivers/mtd/mtdcore.c           |   3 +
+ drivers/mtd/mtdpart.c           |  38 ++++--
+ drivers/mtd/spi/sandbox.c       |  65 ++++++++--
+ drivers/mtd/spi_ram.c           | 222 ++++++++++++++++++++++++++++++++
+ drivers/mtd/spi_ram_sandbox.c   | 190 +++++++++++++++++++++++++++
+ drivers/spi/Kconfig             |   2 +-
+ include/spi_flash.h             |   2 +-
+ test/dm/Makefile                |   1 +
+ test/dm/sf.c                    |   4 +-
+ test/dm/spi.c                   |  10 +-
+ test/dm/spi_ram.c               | 167 ++++++++++++++++++++++++
+ 17 files changed, 752 insertions(+), 31 deletions(-)
+ create mode 100644 drivers/mtd/spi_ram.c
+ create mode 100644 drivers/mtd/spi_ram_sandbox.c
+ create mode 100644 test/dm/spi_ram.c
+
+---
+base-commit: 75df64103873fac09642860cedadaffb8cf6b2c7
+branch: spi-ram-v2
+
+-- 
+2.55.0
+
