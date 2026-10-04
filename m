@@ -4,140 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E76C5CA5FEC
-	for <u-boot@archiver.kernel.org>; Sun,  4 Oct 2026 21:14:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4D16CA5FF0
+	for <u-boot@archiver.kernel.org>; Sun,  4 Oct 2026 21:23:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6EBFE405FF;
-	Sun,  4 Oct 2026 21:14:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 913214067C;
+	Sun,  4 Oct 2026 21:23:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rrt9tRj_Hx9z; Sun,  4 Oct 2026 21:14:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org BAD45406E6
+ id IQHjizIH5zo1; Sun,  4 Oct 2026 21:23:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 4E3AD40687
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791148447;
-	b=nVx8z5mLDJMCwL/pZzoRwisObWOM95scY7uDjQ5jC2xsNow9RsCYoCHFfvtKcSaqv78d
-	 KfP+a5l4vCfIOkkwGurWzaBfdH4BfkwuT/VgmCvh2Y2/PGzdvR954m7yq4aSeXJW9OsxL
-	 w/V+mtiFj/a1XqV9F9D4JZvnh8Uwd+LFAqqSB7+Uciaec3XcB4sz8rYHgjXt5TYC73tW8
-	 bMGLfNLft2VhAy5B3vt7I2oq+hBV+YWAqLDhHyOr1hAF847n+/jyUkS/rQKp2kngHgsVk
-	 yAA91BvkA13C4vVV1yt91FHa/Rt0uZzsrqaGFDacLM44LQhD0uPLIvBoT23tChASU9w==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791149008;
+	b=nanI/mqfXlORWMaldbyN94VEvnGOINcDjJ+fjTrLWxXCFT+8IFO8fyBIjWBm8HDh71QU
+	 YQxIdizKCGcwxGN5gsX3xEjKAegv7qIJRYSAM8uvRN0bSWyOal1K+P6Y3p9hE3RH10c/p
+	 44bQreWA+A43lbUQCz45JZ+jdzHsZIpYz8nuD2Rmh8SeW85blzsKXVEAvDYFFIsaA9THe
+	 ZAGDBqPEvBPPXdMPuF0im2IEN+uGJeGELh7xOh+KMu9L9Zw2cFWK03unXK5dsLLqkqKnz
+	 k+p12jU54abUfWijXRsPmEJ4WTpn0etW0qLRuy8Zx/xUhcmEIJSDmkWJl0syq34bfwQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791148447;
+	c=relaxed/relaxed; t=1791149008;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
-	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
-	 X-Report-Abuse:X-Report-Abuse-To:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=JNIFREq4WKLAYRzCydh92K4R9UrdhFbobHwwvfbvIIo=;
-	b=sjjpgBdEVTvWH6Z+TqZxWuvH0LtLoWDZJ6kXca9aDFyd9PzM1evAoRwZxX3JIi1n5jkD
-	 BMrQMoqPErX9GDyeLAY1DKxg4GtWyHRqP4cjkmaCcTXUQuxfrhflHvzRSUGqkgnNRLKcj
-	 1BXan3HGDQBJtzeJDR/n44j1esHMgKMDFFzYo+vhfCikhHRYv6BZXMWJjHC+DXZs1kT8I
-	 6ujpdWM2M8w82Nge1YnHMAzxW77FU8EC2Mr1G0MbQoFeBd49t4v0feys/XOsG6FDaTj9W
-	 Wqu0bAVsYCfAVwkP+kvDZoMpRdWguX0uRMH010SBUW91PmjaY53h5unOurXvxByuaPA==
+	bh=/OUHZFnIbV9AReA94bQ08fxAoIzWGAOEjs0GbrA4Vo4=;
+	b=n2fLHg4uWx0prEuV0kcQC4TDZS7tQu4NQwtglChvKXbXCGKKp2qBOwi9vomYyveAcpRg
+	 mBJ8sW6u3HvOBL9tlYr1kG5Uau2UJhIszA2PLBDvStCtiaySBBZ+cWxv/jlyY6qBTZfFa
+	 ncuKBJk26Heov52TPBTuHcWoeIgxp0CLTYmc7lRDo7yCAxY+gPlOyhcil7ugJ+M8JIfrO
+	 v0sqPFmeifFnO/3/Ksvgk9SNjCOhn0K7Nq2CKO70CwbXnhp53ZJsYt14TVTqkrnymR+kz
+	 opGrnaQAhil/jfZDtdtwtTuONDuwVtJKHh5YQxeIlOAC6PUZQscF/5ZtQFYZ9D3W2JA==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791148447;
-	bh=JNIFREq4WKLAYRzCydh92K4R9UrdhFbobHwwvfbvIIo=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791149008;
+	bh=/OUHZFnIbV9AReA94bQ08fxAoIzWGAOEjs0GbrA4Vo4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=KD0Cd+jw3bUWaNpEhh60J/fhsGtFwyFSKcMLqqNw+BezCEGJe/LLzEzvPBy7j09wr
-	 bkyqV/H5659NeS7fylQi6RvLCa7hq9uhPqePp5U63dEFzpmAQUHfSNTiz2MfI29E3e
-	 vG+Wci/d/nSOVEQomu3qzL8ul4dMnTF/0f/XXTai7M8KuPoQzpyH7vc4F3hjTQO0AF
-	 oeFsIgxnXBWIhvPZPNa9YbTauP6bfwXwisV1lkj8JHGi34nFhU7RRLkjwLfNrDTW1z
-	 LWff5bREHPZ4Debm3+xLEARIwkh/ixZo9IeyTr0KQq04TuU2Y7WN2jl2Cx1PeNVwnf
-	 t9W/ytGOXW+EQ==
+	b=ybkeAGjFvX5pExbgY5Lym/Hhf/CTD4T1M3tCOQJcaVZ9wkgkmTrZqYIws/aDFDRor
+	 pC6SiJpTDcIGn+d+ftPjMxHN05lVPuoWpKER9p90XZNmU+BzNt+TKedCxoT67wxRzH
+	 xAyoH/iUNYApZtmKhy44jTOXjxSRR9RN+Ih/6TNQHcjVtUFNJ5aMItfY4cZhMF2Ons
+	 6Ytpl+9Leev8gQVNgSlNddbYgXJx3s+XieslnS49rfW5LjttrclJArR0ufAy2kqP6M
+	 psOM4Rhe/zkhbEdaqCTYXZhxAm5nhRviMoRvGHkwx1eRO3T38fC4cSAPaTD1Fm199E
+	 /Z7+tZFNjgpCQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BAD45406E6;
-	Sun,  4 Oct 2026 21:14:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4E3AD40687;
+	Sun,  4 Oct 2026 21:23:28 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id E24312E0
- for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 21:14:05 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 026B232F
+ for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 21:23:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D42FC40049
- for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 21:14:05 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id DC12340049
+ for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 21:23:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TeUnNrEdbrdQ for <u-boot@lists.u-boot-project.org>;
- Sun,  4 Oct 2026 21:14:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 2ADF640004
+ id HknkB2We517A for <u-boot@lists.u-boot-project.org>;
+ Sun,  4 Oct 2026 21:23:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org BC3F440004
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=149.28.215.223
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791148445;
- b=UWmL7A8f4sdoXxdJDwGosxiw3Pye2MMZrVD6Uech0mWiI5VuU/woYYB/a+J0pA4COUHG
- G0a+ZvpOxw89QNaDqVvJbP+bIK+iCccQjkwBz5PsAExCTE/Ga8CuK4afZTuS5W68Morde
- 71lzaSAqLwVAMBBNetjVWJV+CKMINheO5yBAIQVe8na/GNHc3SthSmWs4es5J+Cgk1XMe
- 7kUzosPWkvQc7zvXAjmcWFJfmdc0QpOlKMogUy59UyCOlhxbvPI8Glk+8WWUdAREdVWzH
- QM2UpetMBwR2sjZUEDLoNS0AQkIqhvo9Pz5v+w6sdUpsV6OL6BKVQWIznOvrKlJrAuw==
+ arc=none smtp.remote-ip=116.202.128.144
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791149005;
+ b=f0ckaofz93xMUkfEbJyhCcT66Kxr76qkUALOr5Qv+sa7YezFAAxKg8LLVDw8ujvE2dAD
+ HPWlX4vkrU6mUfxXvAtVPks9mBYXPJb0HJbEiM4vMWylCsqQFy8vzlVddr2dFcBlxFG8X
+ hXv4OBBrchPWt8wKkFX2Qg5rhttlUIipPY+rnsYWpVa6EZIY8pV9gep1jpwKiqs91lpPb
+ wtsGp0esqq/HDBg2a3F4UAyal8J/OjXsrJb37t3e+bfcVezEHcewQny89Uhsk9bRw8ro5
+ TIVI+2ceHgb25EPW3BFOHQsoOFN4YuIdoCEO9DxGn2fLdV22vQTSTlU0JWWFOxtOOvg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791148445;
- h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
- X-Forward-Email-Sender:X-Forward-Email-Version:
- X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
- X-Report-Abuse-To:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
- In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
- bh=JNIFREq4WKLAYRzCydh92K4R9UrdhFbobHwwvfbvIIo=;
- b=shzK3rSC3D25skoNyI0iguapa5UztUVVHQEPi97v0oV8pZZ4GjORPAiytrUap36PHbcQ
- WmZU0/HCXubUr64iEvyCpw64cGCeg92GgU4rz1nAuv9gEpnyGoopXnXVUH4TtXUwyE7CP
- jiddIMoErp7vKSNUBjkJVgG56OvN3ZpM1fj1yHpIyA22VO51fy0OmDoTOgRRrfwBeL0CR
- tUdMHqSOKkP4gs7gnXXlYkFsbPikHm4p5MYusWqCUyoiHm3K7IqxyKN20gNSaWqi4TDDp
- 34GS5UrZsWYTWX52TsRcKja7zsjALbzQstdaBUN08lgZu0GM9RWFSyXn0WmqZe5tg2w==
+ c=relaxed/relaxed; t=1791149005;
+ h=Received-SPF:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
+ User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding;
+ bh=/OUHZFnIbV9AReA94bQ08fxAoIzWGAOEjs0GbrA4Vo4=;
+ b=lwslOL+X3I0ABBJT/gK0eiJe0j7FJJp+w8uKwdCcFdjShcR0bGt5M7SS3j0kuaImQUip
+ uv2pCHp683EhgJBddJ/ovyiMJ/pyPX6D3k3dVspFxsGwz4LK7Qc8k/HZEvf5UQh/FOyG3
+ Etvjz2qqP0ywIHX7OVvmTe2BThz7nUTTF/btPGxd+10tHZ8/xFWw11saU619vip31GE6j
+ nNkrLM5rMhFRxSyDv5/Ns+MHurOsriuDpRpWOzd8rofmf3N/3tXPvbCHrbI+Hl2azP01k
+ Zer9JmkmMgwX8pfy996KzTP+iLsR+qGUSwECgGc8nt69NoqNRMVFzu2SJVa0L3GJpXw==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=kwiboo.se; 
- dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=0vLZefy6; 
- arc=none smtp.remote-ip=149.28.215.223
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=8573=h3=kwiboo.se=jonas@fe-bounces.kwiboo.se;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=0vLZefy6
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2ADF640004
- for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 21:14:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1791148443; bh=JNIFREq4WKLAYRzCydh92K4R9UrdhFbobHwwvfbvIIo=;
- b=0vLZefy6i5VtSG8c5Xh/bsM5D6hmUSolEn7NhYVDVEDY6lWPc7DM9O6udsqJ1QFSNiIGFKvrW
- HNABSLfOTVXbJIhff3wMOYV69nq42Z5qeNKLPiJFe50Iq9uISZSkMRlROAGOt54IEbPYpBFMYVN
- AvzR0xFcq+zPE59+HOjSAzsha15ReexcT5lH3RvDXuGL+uCxJCGuIYNIlOtMoT/0xKlDBZANBSd
- Ai8d5+/7Mc2usue0+kLJg2xS1kUrsNIWvSqLeOYXiy5we0c2NN0LTnrXfZlIZ3kLFCpJywsd6HS
- u4UWuATZfPhsX+lvw8amRNGIOw7SopdsXt5q0AaKHukQ==
-X-Forward-Email-ID: 6ac2c194341e63db0e52ac64
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.18.1
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 1/2] rng: rockchip_rng: Fix wrong TRNG version error message
-Date: Sun,  4 Oct 2026 21:13:47 +0000
-Message-ID: <20261004211349.62883-2-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261004211349.62883-1-jonas@kwiboo.se>
-References: <20261004211349.62883-1-jonas@kwiboo.se>
+ dmarc=pass header.from=freeshell.de; 
+ dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=ZKsaRWB2; 
+ arc=none smtp.remote-ip=116.202.128.144
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.202.128.144;
+ helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=ZKsaRWB2
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BC3F440004
+ for <u-boot@lists.u-boot-project.org>; Sun,  4 Oct 2026 21:23:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1791148966;
+ bh=/OUHZFnIbV9AReA94bQ08fxAoIzWGAOEjs0GbrA4Vo4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=ZKsaRWB2Y+Ej5oPOJNTY5vcks1khVooolSRqlHoqit3WApGzx6pa2C4Z+mXKl53Vm
+ /UKhYULEQM+BFDV0IHBUwSyHLnLYCgs3N/yCjyVxX7LLjacicjXPcdRRyCMUvVrD35
+ UJETwum44MOpGcpczMRT6HGg7BVRtjcE1qNHa7Tu19NkchrroiFUam65W48kQk3zhe
+ uo55uy891z657/mOL/xDj7Sl8Wne+bc2NcsNUHC4SItFx0K455eezOrTFserlm2J45
+ d85s/3B5wTl4q/RtWqSiOD4YM4EXvGACGkRd8f9wMwTvH4RlkOAPSWoO89gbiW9ZHJ
+ gQIqs7rpoNAYw==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id B1008B220271;
+ Sun,  4 Oct 2026 23:22:44 +0200 (CEST)
+Message-ID: <95e17452-4f40-4e1e-96b5-3c83f4389005@freeshell.de>
+Date: Sun, 4 Oct 2026 14:22:37 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] doc: board: spacemit: document the SpacemiT boot
+ image format
+To: Junhui Liu <junhui.liu@pigmoral.tech>, u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Simon Glass <sjg@chromium.org>, Daniel Golle <daniel@makrotopia.org>,
+ Randolph Sapp <rs@ti.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, Yixun Lan <dlan@kernel.org>,
+ spacemit@lists.linux.dev
+References: <20260909-spacemit-aihd-v2-0-780e98cf2fec@pigmoral.tech>
+ <20260909-spacemit-aihd-v2-2-780e98cf2fec@pigmoral.tech>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20260909-spacemit-aihd-v2-2-780e98cf2fec@pigmoral.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,32 +147,260 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The error message for unexpected TRNG version print out the reg offset
-instead of the expected reg value.
+Hi Junhui,
 
-Use the TRNG_v1_VERSION_CODE constant to correct the error message, also
-add the missing new line at end of the message.
+On 9/9/26 08:51, Junhui Liu wrote:
+> Document the boot image layout shared by the SpacemiT K1 and K3
+> BootROMs, including the metadata headers and authentication areas.
+> 
+> Describe the K3 non-secure CRC32 path supported by mkimage and provide
+> an example using the "smtimage" image type with "-n k3".
+> 
+> Tested-by: E Shattow <e@freeshell.de>
+> Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
+> ---
+>  doc/board/spacemit/index.rst    |   2 +-
+>  doc/board/spacemit/smtimage.rst | 143 ++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 144 insertions(+), 1 deletion(-)
+> 
+> diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
+> index a5e35ee12ab6..5797ada37d15 100644
+> --- a/doc/board/spacemit/index.rst
+> +++ b/doc/board/spacemit/index.rst
+> @@ -7,4 +7,4 @@ SpacemiT
+>  
+>     bananapi-f3
+>     k1-spl
+> -
+> +   smtimage
+> diff --git a/doc/board/spacemit/smtimage.rst b/doc/board/spacemit/smtimage.rst
+> new file mode 100644
+> index 000000000000..edcc3091e8e7
+> --- /dev/null
+> +++ b/doc/board/spacemit/smtimage.rst
+> @@ -0,0 +1,143 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +SpacemiT boot image format
+> +=========================
+> +
+> +The SpacemiT K1 and K3 BootROMs load a SpacemiT boot image as the first-stage
+> +bootloader (FSBL), either from persistent storage or over USB in MaskROM mode.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- drivers/rng/rockchip_rng.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Introduce the topic of SpacemiT boot image format without the unrelated
+boot flow. If the BootROM of both K1 and K3 are identical then use "K1
+and K3", else if they are distinct and being described sharing the same
+data structure format as input then use "K1 or K3".
 
-diff --git a/drivers/rng/rockchip_rng.c b/drivers/rng/rockchip_rng.c
-index 8cf750e043cf..178a76c09347 100644
---- a/drivers/rng/rockchip_rng.c
-+++ b/drivers/rng/rockchip_rng.c
-@@ -200,8 +200,8 @@ static int rk_trngv1_init(struct udevice *dev)
- 
- 	version = trng_read(pdata, TRNG_V1_VERSION);
- 	if (version != TRNG_v1_VERSION_CODE) {
--		printf("wrong trng version, expected = %08x, actual = %08x",
--		       TRNG_V1_VERSION, version);
-+		printf("wrong trng version, expected = %08x, actual = %08x\n",
-+		       TRNG_v1_VERSION_CODE, version);
- 		return -EFAULT;
- 	}
- 
--- 
-2.55.0
+Try instead, "BootROM on SpacemiT K1 or K3 System-on-Chip expects the
+First Stage BootLoader to be wrapped in a specially constructed image
+layout."
 
+> +
+> +Image layout
+> +------------
+> +
+> +K1 and K3 share the same layout. A fixed 4 KiB prefix contains two 32-byte
+
+Drop the redundant sentence "K1 and K3 share the same layout", as it is
+implied above and cannot be anything else by the later description.
+
+> +metadata headers, key slots, and signature slots. The aligned SPL payload and
+
+The reasoning of alignment should be written if it is known, by changing
+"The aligned SPL payload" to e.g. "The word-aligned SPL payload" or "The
+half-word aligned SPL payload" or "The nibble-aligned SPL payload" etc.
+whatever that is actually, or disregard my suggestion here if it is not
+known the reason for this.
+
+> +a trailing authentication area follow::
+> +
+> +    offset                                    size
+> +    0x000  +-------------------------------+
+> +           | root RSA-2048 modulus         |  0x100
+> +    0x100  +-------------------------------+
+> +           | header0                       |  0x020
+> +    0x120  +-------------------------------+
+> +           | key-selection metadata        |  0x1e0
+> +    0x300  +-------------------------------+
+> +           | OEM public-key slots          |  0x800
+> +    0xb00  +-------------------------------+
+> +           | signature0                    |  0x100
+> +    0xc00  +-------------------------------+
+> +           | reserved                      |  0x3e0
+> +    0xfe0  +-------------------------------+
+> +           | header1                       |  0x020
+> +    0x1000 +-------------------------------+
+> +           | SPL payload (32-byte aligned) |
+
+Keep as-is when discussing byte-layout to describe alignment as "n-byte"
+and not word or half-word or nibble etc. when considering my previous
+suggestion, FYI.
+
+> +           +-------------------------------+
+> +           | signature1                    |  0x100
+> +           +-------------------------------+
+> +
+> +For payload size ``P`` and ``A = ALIGN(P, 32)``, the image size is
+> +``0x1000 + A + 0x100``.
+> +
+> +Metadata header
+> +---------------
+> +
+> +Both header0 and header1 use the following format:
+> +
+> +.. list-table::
+> +   :header-rows: 1
+> +
+> +   * - Offset
+> +     - Size
+> +     - Field
+> +     - Description
+> +   * - 0x00
+> +     - 4
+> +     - ``magic``
+> +     - ``AIHD``
+> +   * - 0x04
+> +     - 1
+> +     - ``version``
+> +     - Anti-rollback image version
+> +   * - 0x05
+> +     - 1
+> +     - ``secure``
+> +     - Zero selects anti-rollback bank 0
+> +
+> +       Non-zero selects anti-rollback bank 1
+> +   * - 0x06
+> +     - 2
+> +     - ``reserved``
+> +     - Reserved
+> +   * - 0x08
+> +     - 8
+> +     - ``image_size``
+> +     - header0: prefix information
+> +
+> +       header1: aligned payload size
+> +   * - 0x10
+> +     - 8
+> +     - ``load_addr``
+> +     - Unused by the common authentication code
+> +   * - 0x18
+> +     - 4
+> +     - ``header_crc``
+> +     - K3: CRC32 over header bytes ``[0x00, 0x18)``
+> +   * - 0x1c
+> +     - 4
+> +     - ``image_crc``
+> +     - K3: CRC32 over the payload in header1 only
+> +
+> +``header1.image_size`` records the aligned payload size and therefore
+> +determines the location of signature1.
+> +
+> +Authentication
+> +--------------
+> +
+> +K1 and K3 apply different authentication policies:
+> +
+> +.. list-table::
+> +   :header-rows: 1
+
+list-table format on this axis orientation is confusing to review
+without first rendering the formatted output, and is a problem for
+'diff' tool output in future changes. Please flip the axis i.e.:
+
+Category 1
+  SoC 1
+  SoC 2
+  SoC 3
+
+Category 2
+  SoC 1
+  SoC 2
+  SoC 3
+
+Write instead this as:
+
+SoC 1
+  Category 1
+  Category 2
+
+SoC 2
+  Category 1
+  Category 2
+
+SoC 3
+  Category 1
+  Category 2
+
+> +
+> +   * - Area
+> +     - K1
+> +     - K3 non-secure boot mode
+> +     - K3 secure boot mode
+> +   * - Root and OEM keys
+> +     - RSA-2048 moduli with an eFuse root-hash check when secure boot is
+> +       enabled
+> +     - Unused
+> +     - RSA-2048 moduli with an eFuse root-hash check
+> +   * - Header CRC
+> +     - Not checked separately
+> +     - header1 verified
+> +
+> +       header0 ignored
+> +     - Both verified and covered by RSA
+> +   * - Image CRC
+> +     - Not checked separately
+> +     - Payload CRC32 in header1
+> +     - Covered by RSA but not checked separately
+> +   * - signature0
+> +     - Verified with the root key over ``[0x100, 0xb00)``
+> +     - Unused
+> +     - Verified with the root key over ``[0x100, 0xb00)``
+> +   * - signature1
+
+Why the mixed-use of square brackets and parenthesis?
+
+> +     - Verified with the SPL key over header1 and the aligned payload
+> +     - Unused
+> +     - Verified with the SPL key over header1 and the aligned payload
+> +
+> +K1 verifies both signatures even without a programmed root-key hash. In this
+> +case, the root key comes from the image and is not authenticated by hardware,
+> +so the image, keys, and signatures can be replaced together.
+> +
+> +K3 uses CRC32 in non-secure boot mode and hardware-rooted RSA in secure boot
+> +mode.
+> +
+> +Creating an image
+> +-----------------
+> +
+> +U-Boot currently creates only K3 images for non-secure boot mode. Package an
+> +SPL payload with::
+> +
+> +    $ tools/mkimage -T smtimage -n k3 -d u-boot-spl.bin FSBL.bin
+
+Use lowercase letters for the output filename if it is not any CONFIG_
+symbol or preprocessor define symbol, and re-use an existing filename
+stem as for example any of:
+
+u-boot-spl.smtimage
+u-boot-spl-mkimage.bin
+u-boot-spl.bin.smtimage
+spl.bin
+
+A distro package of u-boot or later user of the build system may copy
+this output to "FSBL.bin" but that is nothing to do with us here. In
+fact for documentation purpose here it is useful to retain "FSBL.bin" as
+a distinct description of the vendor firmware SPL and not get this
+confused for mainline u-boot.
+
+> +
+> +K1 images and RSA-authenticated K3 images are not yet supported.
+> 
+
+This statement may be simply deleted. It is obvious that support does
+not exist when it is not described here. If you would like to keep this
+line it is not any problem. I think it is more unnecessary work for
+later to update and remove it.
+
+-E
