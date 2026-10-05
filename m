@@ -1,141 +1,202 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4D8BCA5FFC
-	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 14:21:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68BCBCA5FFC
+	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 15:35:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2827580A95;
-	Mon,  5 Oct 2026 14:21:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0DC7C6072B;
+	Mon,  5 Oct 2026 15:35:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nsNC7wVaeKy8; Mon,  5 Oct 2026 14:21:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org EF84A80AA6
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791210110;
-	b=aij3jYNVcM2LRYAEbo8aR2ZJv7Ho39avnaiic1S7IpBxKtuuk99HoT0zFHYRxzbUAkJh
-	 DYeeIvgr8maoPHqHprB2va3HDv0/zGzGQR5YTupbBL0cmdB1EMNA80VPPcSX3frznV/uz
-	 m4wwm3/91NHO1SwnuKBr0AfZR7NBzyk7IpImxyFy1VlOvncRbqI+VOVIpXV5zsCAX4aIX
-	 SJJRHqXCQYOW4PENpTUT4/RMvbXEIDkXrP8N3R0zYjfh7aRd6wNTPG5Cx8hOvHqLRt2u+
-	 qEWxjFShFaCORpIQWLVGNt7VLCwIfOq0i3V6vvl5EGkurC/CAOZ0DJBLzzTTvBqRiLg==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791210110;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id u_GuN4sNMCQc; Mon,  5 Oct 2026 15:35:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 07D9960711
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791214500;
+	b=D+do3q+nf3lFhVxDpIS2V5m7TPQTRgFB27eLrxqFG3NdEKqNNYhnq2KxRx+UnA/u74+m
+	 dKLhj7Rba/B8v7r+6VOs8yBVvIHNJ4JQChtTQqrzSC89Q+55VO88XxJjX7XHVh3x/doK9
+	 62NUWSKRcbmbrz168NRdgnj1IKOMNO4NTqyJu3RbNkc2iVFXS1Jep2el8fi79VHGT4zne
+	 E0HBFXtit62dHQEsroRbQXXM4bOru87qBpebMBCllzNdqkVquM8f52KianLy1ACFxcEdT
+	 1iXlaFshNaiEJs7Y3tGgtTdZFhRMnNm2f+qcASOYHXXs3VqeZy+h9CJ67K9g6QrfgWA==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791214500;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
 	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=KWh1uW3nR0vEsf9pEA61mQQmL+TNxr3zlgdRqp2rkq8=;
-	b=kopRYpIUH+RnxttZTJazbNeVjinhyebSR0GE5Est+BCpkRhcJfxLz7T0cyDgmVYiL3Yq
-	 xKcbpIgQC8zhtOlhzdONLHe8xcYjmaZZVtLpD/Rs7jQF/7Q3HnqS2TufA4phy5xTikuGi
-	 CIwa1uzQ9I6/sRGEdahE1EEL+WOMk8Zeykuvefbod7DQy+bChrnGQcNJciYsiRTC/bdlq
-	 Dauu+ndwaDayhn38fOqYPxfwQzVEzy3JQsgwF9VYnwlja2RP+puz1AvjFckPYpXTS0smc
-	 Wegx/XNbTRkwF26kNCyeyV2isiVKC1xk9wiDRWBxtZIL0Rn5w1mYGApWy6+j5P07iBA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=EKxnc1KnT2XZc1EwnZIBGHUarLRzqM494/M9d6L8rwM=;
+	b=pXhBBEltQ0LCzeNr5dqvORn3Pp7v5DZ6rma8lozXOKwbxgYHkkVwEZcQdgNqtJHlKgbP
+	 MDMfXiSovzYKmiDTDFld4nNZcPG8r5kTXFIjSEmOxmNiVYKMmQUCxiA3XM0IF+zGEwmel
+	 59D2ZSHGdP+y7z/DKy6G9V7vKa/aLeNrJJXFHZUVbZNTWudTNhvC82wxMwDP+9FvlUYnZ
+	 r5ZT//hSQj5OTUHLuEqCOOcQkTgfglSsvcReSSvKTUUKgx1gw2Dva8+6TcD4VwMt5xAbY
+	 FrwtF+YvRcOP71soT3q9DblRJZusdN/qAnlIKIqtwY7q3rsIv9/RwXn4DAhIkGwHaqg==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791210110;
-	bh=KWh1uW3nR0vEsf9pEA61mQQmL+TNxr3zlgdRqp2rkq8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791214500;
+	bh=EKxnc1KnT2XZc1EwnZIBGHUarLRzqM494/M9d6L8rwM=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CIprO8puAUPASbFQvc6IKEArXwGolwzkKXL0hpyFKGDz0jDhMLECeGEZGy26ibp+q
-	 lWNxeX63HIT17AcutmmjxmWPdhy/j3q7vr2tRo1SQI+0hkBuhA4B21eJOBicLWBZth
-	 PzpFyXQlh3e5FZBHAdNzhhXa+w4kzw0nvf1Am4bPL9Fg/DQMv1D1Swxc2SdWmwAJpZ
-	 rQDr5Uc8+uccv/aj4FgaLBxGHuWgpDYrUu2lhpa3SKWyGVEQYJMhXVvOQHpzCiWtDg
-	 QIWZqOHfwbIU6D1GozyQDEZYLJZ/uE/OwU/iA/qz9GBk8aIfegdlcEkyjE8Pkhvoeq
-	 3DYodio3ayrkQ==
+	b=gV0lr4pV6bLuWOAJbMLmhdpIBf1JU4dEN8WS4YX7da2qpxc1IETH4G+BYZ4DVh3f/
+	 QAcCwJNIzK81bvhXJRWs7OfOpPQ2EgNYbqV01gi69+SpU4CKOw71522/sNbFu6bUxx
+	 svJHMXsqT1JbaVZmShjCulomAO8MsWz2uieRNjSBdXOYfjgiqCchkk2SG1HDRyrw5y
+	 TrNS6NeJn6EtE8YwH26+kqS1J/eWm6VY3IKzqT8fhoANCP0LoW3apEODTVmDien1jT
+	 sMQxlm9WOBbgtpS4h01UrQQHBWV00r+jOHM33BjM21/WN43IvfTBzXX3EiKDegorMT
+	 UuihRxCk0mTtA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EF84A80AA6;
-	Mon,  5 Oct 2026 14:21:49 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 24574338
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 14:16:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 07D9960711;
+	Mon,  5 Oct 2026 15:35:00 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8B4E4338
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 15:34:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0A9DD40648
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 14:16:27 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7106F401ED
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 15:34:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uVwH28BI7shB for <u-boot@lists.u-boot-project.org>;
- Mon,  5 Oct 2026 14:16:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 1EBB9405EE
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791209785;
- b=pGzKtHC8oDcDoYj8blseCZ6sj0RigZeQ6ToDuTGIam0kyN+W6yLDTXMivYzpTXzUUE5R
- X25iFjuqNFh8XJ6yaZ2qR8Gq1YBGXcGvOR6oGjx5OoRJuZgd4pqCGGyvH5BGOKhjOX1Bk
- 1EE4U3l8iYlSroTQAmUzxdmWDrG0gXsDEIj9y/riydxp+iSvGoVFmxI+EanhEF3umw4uy
- BcXXMIIPaqtcjZhVf4dh6WC9OMBGnmKoh9iiRostxWPcac1418Jpj8bm3UDRHBPHiqiKm
- fLGLoAuim0fl1W7uPGzY9y0uvAynxkf0E09QIqXG7/HFAf4yTzMDN4+DMQZcQo5zoTw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791209785;
- h=Received-SPF:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
- User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding;
- bh=KWh1uW3nR0vEsf9pEA61mQQmL+TNxr3zlgdRqp2rkq8=;
- b=ZHG+afj1ORV/Nn304oY6osS01lKfIbni1KdcSPQbZR3TuWfIi00WmkHOyKRfZX8bpvcT
- SUQgaVmmzDfYFB9ODSQSx3g195pccvBUTLnCcWzgwzIgnkpSEKSe2g8qVSiMDQg1lXseP
- ZJrgSDSUP30kb0LJD1HbbL1DKoZG7aWj9u8+7cvbPbdYhkOXaRyVFWlhhDmp3wAmyIxFB
- pi8x3Ij6/vPYwfZMicJ2SFnLhRPSMyzPvy75yzbNPhvMBbq3ro2Vp2FpUZ4U7ihm8jCBJ
- EbR9YdvyLHV2/B91QJyiaM8WadWr7WaQZN86n4bxa210L5o8ipsyyoRMp9fLCImnWNQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
- dmarc=pass header.from=freeshell.de; 
- dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=ktpsjT0r; 
- arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:4f8:231:482b::2;
- helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=ktpsjT0r
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1EBB9405EE
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 14:16:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1791209751;
- bh=KWh1uW3nR0vEsf9pEA61mQQmL+TNxr3zlgdRqp2rkq8=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ktpsjT0rQAPhcclUMXwG0xI8sM0sUffNRuSYZ1a8YxqUR/yxaZ/QiuE2+AAcmeh8S
- OOVc5/oCAxLiLfWPOlJ52tkB+1hl8soxGQS7hHheaLmqDCphiQ8n+qdULHV+tyljD+
- tmEMbekil2HrXNQiXfWam+S4njrDNqVQJdiXpRnPxjxX2B+7SDMGt7/42IJNU6LPXN
- TfTmilLPQj8EApm51XwbLfg4k3pk1sajG6EKs9a/HkNr8/foqIi/6xTOsogQzc6MHT
- E1WZ5oBSIPsofdHbzKJuDbJIQQmkf0hWKIgBIZke5nshbjcUJ9Exf1GOIE2A/+XOa4
- q93Vt0BXa4adw==
-Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
- [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 02973B2200FC;
- Mon,  5 Oct 2026 16:15:48 +0200 (CEST)
-Message-ID: <84099410-44e0-4d6c-aa62-674a5f9e9bf9@freeshell.de>
-Date: Mon, 5 Oct 2026 07:15:35 -0700
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id T-MgmxDJKP7C for <u-boot@lists.u-boot-project.org>;
+ Mon,  5 Oct 2026 15:34:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org D36C8401DE
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::22a"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791214470;
+ b=LtA/ESlD8wOK5zaFqMCInI/N/Y8+IACgpn9SgYqHT8XwlVNfogHsjq+TKTUyuuCm95iA
+ eb7xYDNgWaQbU80LV29jvJ2RwFmUb9JdzxMLzGnoJFSiXpg5nN4FaFHclTEsqep+cJnxe
+ YcdB7NMgk+ktDoueebL7aRoCrUWqgsmNIe1IEaa0B8WFisDZcikTD06X4+GjP6M2Iuf2j
+ kcu38NO/7cIGmX0jPNFC475AsH/8ik5ZxcOFmZFF2+bgaiYbl9957W2JPq9naiP3Ff9/5
+ dCdQ5uEHFydtYyW67k0o8yCeWdN1j2PYr280UoGINtyAckCdpK/XOnbuo4EvUKG+J3w==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791214470;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+ Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+ bh=EKxnc1KnT2XZc1EwnZIBGHUarLRzqM494/M9d6L8rwM=;
+ b=j688qIdJY8uAhxbOpty+KsngLywYIKLwhxtK89LmXmfZ+QkpZoAXKVoxRezTAlucVcK8
+ /sdNl2/uvrU32b4nyUfha8Mi0ilDj8PsAKSeoH+a3uoaVZ2KfavQggU4UHvCzj+vy2cG2
+ 1ek1oDIFKbemTrKBkfjGCXdBPlezC07yn3SSLO9jdYCHk5Z98mZWmZXAqiuYGSlJAM2Dp
+ fduaA3uViSarixNujuf4kpl7TipNXwnP2yEowTyxH48NQptB9bJKN8jr5jbXZr2MMfbMY
+ Pbg2THm0TrA++Xgr91q8PEBrJ8Z3YSHnNoQ2CdcFndH4EZQJbW7urLd0Np23qjo6aGQ==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ dmarc=pass header.from=riscstar.com; 
+ dkim=pass header.d=riscstar-com.20251104.gappssmtp.com
+ header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=UhSDyXnM; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::22a"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::22a; helo=mail-lj1-x22a.google.com;
+ envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=riscstar-com.20251104.gappssmtp.com
+ header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=UhSDyXnM
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D36C8401DE
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 15:34:29 +0000 (UTC)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-3a98f260f85so5534601fa.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 05 Oct 2026 08:34:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791214467; cv=none;
+ d=google.com; s=arc-20260327;
+ b=NSpV8ifXcwGk+FqKmqnsuRhE8bQlm9+0KNeVOrfEQyXfdFqpdLVEgYuCPgcmHDI1NQ
+ Gy5OpnOvR2tjQr5VAoSQeBDxSM3UsT4z34O/2QJPfO9on16/2ZwapG8TMOB6D9n0/QaM
+ Ai3V7ucEKNCb3/FO3CqCuXShbvbEbbpU08RDbmtejuXXFDpKjYf0gfC/TmqMpsagLn/h
+ J+ZWc7Ts8I1q0nVpjX4mq5MnG7LQEcOm9C9eu9zNvhXQwxSt0mNAHwA3xi3+3eg18MMe
+ 5+ogrYwkVoJFFm81dWIpULaRD7zGQj/xZ4hXch45W/9kcPHH4pLbcgKPYzB5tUOpt/u0
+ X13g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=EKxnc1KnT2XZc1EwnZIBGHUarLRzqM494/M9d6L8rwM=;
+ fh=ZaRyYmJQl3T0duIqN7KOjtGBwWanBeYnngva+h0bLQw=;
+ b=YPwj1w103baFn+MZ7kpgMCj5PSf36uTW84CiLXnUsRx264JbeVE1Ll4igWY3YLgd73
+ l0YPYTqfzmr8188gp8LkkK85uKhUmmoaQVmd7rZA9kax9YGhnDltDFzckHEvkGUFZvct
+ BrtjOmH1n1afGBBcdKj8Q9uEGQXSopO57/2JMrJihCgln99tfwdzeajy6APMZyhOGf13
+ s7x4MOd1f9tuegTgdDes8zZ1UxqFjiIK0qmR03EyEsxFwiLrSKlq3NwdEBd+ZAZ6umnl
+ tSG+B37rb5ZLNOwOObPqrRJ0p/QD4l28dCKJNiea5hDTJJv287FvZ26xgwAzF/OZ6CZN
+ Wz8g==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1791214467; x=1791819267;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=EKxnc1KnT2XZc1EwnZIBGHUarLRzqM494/M9d6L8rwM=;
+ b=UhSDyXnMZHs3E/8efhPkGtUIPksWt3KvMXOWuhfUZ6CRtVeCL1/esuFtin0iNlS54q
+ o84YjhItYHqk1YPMIIkWRpkT3CzbNECVCzQZIrrRQkWXFchRDdRO5caZMV5ljjzFgfWB
+ fzr4BkQ1cQ4yIlw3d3/08G+sF6x7inuxtqrf1r734goh+Sw5KMXQ1vHPWNYa6dPNFxnL
+ qWeoV/ZlLSOPFSoaqBrHSasandYPhnKavquCyXPFB3koDSydPQE4d+SB62u2o4OeAYPn
+ bzd85Xj2jgItkO9+3wHOCFqQPrwRs5ytGXhYUAoyeBZClGwYlCl6mtGjV/LO/Sx8vxyA
+ 74Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791214467; x=1791819267;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=EKxnc1KnT2XZc1EwnZIBGHUarLRzqM494/M9d6L8rwM=;
+ b=B0x6ILPq4dCX6tIKJvDz3FSPud//9acPEUsQvICDdFuMNf0VmsiFXCyWdF2CFjrol+
+ eJF4NyRRo6KNv6ch4z6gFrn0abQ6Cv8uqpjV2Ey8glr9p+2zKeq3T3+fzJMF40+mCST9
+ sEWFr7k4F3BzYt0uYGL/0l6xqSZUZLc+KzlXudT0eyDq5arZKyLlsTVAxGArsYY19zhY
+ wnxlmTGsdUuCvwRXKsKHUHWH6/wkrSbRXKq13UksvrzyEA+44j4YggVL8JK+tyCJQTI7
+ jxpw5KHdEaMQAL9eO9O8+Rfdm/Z1qDdoNFPKgBnfkajt6gAtk/6y5iyoi6/vqIyuZsXk
+ GjJQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBx2mxjnWbb1gs+RgLqOMuU2dVvmlUU1gMtIPowVa+2fB6lF+9WrLk6M3ktYekylvIuhAq8kIsg=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJN9SPQc7Ock3CABMwdUxeE+oZZKABNF3olq4L+Fi/zgaM7Lbrv
+ z7fQv0UNmwKWCjJEq6/CZ/VdtA9mH/AufATz346ssQK42w6LT0SkmEqvBfLeEUeCXasMEjyBIyp
+ 210reTqX/NK3DIQHncC/tipZ9Xoyp5KMBgxuk/E5LpQ==
+X-Gm-Gg: AYBFou0H7fDt5mcruYtxoiCLMNpIBnYj9kNIBz/VLtZeV+o2W5dLXE5WgDABTF0s3iL
+ X74MaYUiFkZKMN5TGDmCiKdPOOvS45b5B6/GHn7tANiu9X/sRYHLUrShmXSC1Sg9QXLAwzAkxiF
+ vAdBsjXZMjLnqxUiMrPvwQJCH1p9IvoO9ocg/kdc/eCZCXEGdPzA1ycrXlY5AicNUp12hheO+Ql
+ KJaS7iL8D5MUuFq3ldGDHTtabFXhM1DDxEz9WMXat3RY2k0fuY5BTssYEXWo8oIUV2zIOT8uEQf
+ lf6slBoJxvWzJLt3fBLsgymLEDKAeIcUdcAuexeBorS/EovIi2eeXNSYOEgg0fvfJePfAYA7DqJ
+ 1ogDbJa5Ns6RBNXiaBYI90aLX3wuHGE3CkyFI0mdtTleWM7RrFy4rj6zfAT28YZxnihz9tpL6O6
+ +z/qHP1Nbi+T8p
+X-Received: by 2002:a2e:be1d:0:b0:3a3:314d:1169 with SMTP id
+ 38308e7fff4ca-3a974e89932mr19233241fa.1.1791214466867; Mon, 05 Oct 2026
+ 08:34:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] doc: board: spacemit: document the SpacemiT boot
- image format
-To: Junhui Liu <junhui.liu@pigmoral.tech>, u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Simon Glass <sjg@chromium.org>, Daniel Golle <daniel@makrotopia.org>,
- Randolph Sapp <rs@ti.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>, Yixun Lan <dlan@kernel.org>,
- Yao Zi <me@ziyao.cc>, spacemit@lists.linux.dev
-References: <20260921-spacemit-aihd-v3-0-f660fc85d2a5@pigmoral.tech>
- <20260921-spacemit-aihd-v3-2-f660fc85d2a5@pigmoral.tech>
- <24dbd483-6b93-4d68-ae5b-e61f2af66857@freeshell.de>
- <DLWMAQASY7WL.2ZOX8PGPWR6XP@pigmoral.tech>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <DLWMAQASY7WL.2ZOX8PGPWR6XP@pigmoral.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260912-m4-v13-0-71043b29630f@riscstar.com>
+ <20260912-m4-v13-7-71043b29630f@riscstar.com>
+ <d1a8bab8-4d88-48f2-9ddb-89e8c0e323b8@gmail.com>
+ <CAH22mJw3MfVyEva=CGgaEp4y_V2cCv-=n3vz9oKpHtkjsScAPQ@mail.gmail.com>
+ <2575486d-429d-4044-9b78-bf9b13bb0aa9@gmail.com>
+In-Reply-To: <2575486d-429d-4044-9b78-bf9b13bb0aa9@gmail.com>
+From: Eric Chung <eric.chung@riscstar.com>
+Date: Mon, 5 Oct 2026 23:34:14 +0800
+X-Gm-Features: AclHuK_bVvPEjjHRMoWduwBKh5UVua5kxZ57Sifz_wmRce45WHxnSGUXDjBB42w
+Message-ID: <CAH22mJy=Ea-QG3uEY2pTJCPSrxyymOmcLdRCXm6zmbe7HYSVtA@mail.gmail.com>
+Subject: Re: [PATCH v13 7/7] spacemit: k1: fix product name detection and DTB
+ matching in SPL
+To: Andre Heider <a.heider@gmail.com>
+Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
+ Yao Zi <me@ziyao.cc>, Tom Rini <trini@konsulko.com>,
+ Tim Ouyang <tim609@andestech.com>, 
+ Leo Liang <leo.liang@sifive.com>, Wei Fu <wefu@redhat.com>, 
+ Scott Bambrough <scott@riscstar.com>, Huan Zhou <pericycle.cc@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Anshul Dalal <anshuld@ti.com>, Siu Ming Tong <smtong@axiado.com>,
+ Johan Jonker <jbx6244@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,231 +210,94 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Junhui, I have some follow-up to add to the discussion,
+On Mon, Oct 5, 2026 at 3:23=E2=80=AFPM Andre Heider <a.heider@gmail.com> wr=
+ote:
+>
+> On 05.10.26 6:01 AM, Eric Chung wrote:
+> > On Fri, Oct 2, 2026 at 8:58=E2=80=AFPM Andre Heider <a.heider@gmail.com=
+> wrote:
+> >>
+> >> Hi,
+> >>
+> >> just a general question related to this patch, not about the patch its=
+elf, see below:
+> >>
+> >> On 12.09.26 2:37 PM, Eric Chung wrote:
+> >>> +static const struct {
+> >>> +     const char *eeprom_name;
+> >>> +     const char *fit_name;
+> >>> +} k1_board_map[] =3D {
+> >>> +     { "k1-x_MUSE-Pi-Pro",   "spacemit/k1-musepi-pro"    },
+> >>> +     { "k1-x_deb1",          "spacemit/k1-bananapi-f3"   },
+> >>> +     { "k1-x_milkv-jupiter", "spacemit/k1-milkv-jupiter" },
+> >>> +};
+> >> This maps the EEPROMs product_name to the dtb, just like the vendor fo=
+rk, nice.
+> >>
+> >> But does the BPI F3 really have "k1-x_deb1" in there?
+> >> I know that's the fallback dtb of the vendor's fork [0][1], in case th=
+ere's nothing there, and I thought that was the case for the F3?
+> >>
+> >
+> > k1-x_deb1 means the internal development board. And it could work
+> > smoothly on the Banana Pi F3.
+>
+> Yes, but maybe someone with a F3 board can verify via `tlv_eeprom` if tha=
+t string is actually in there?
+>
+> >
+> >
+> >> Because it seems it's not set for BPI-CM6 IO board either [2], which t=
+hen makes it impossible to distinguish, at least based on the EEPROM value =
+:\
+> >>
+> >
+> > What's BPI-CM6 IO board? Is the BPI-CM6 IO board similar to the Banana
+> > Pi F3? Is it supported by linux kernel now?
+>
+> This one:
+> https://docs.banana-pi.org/en/BPI-CM6/BananaPi_BPI-CM6
+>
+> Supported by mainline via:
+> arch/riscv/boot/dts/spacemit/k1-bananapi-cm6-io.dts
+>
+> Apparently sinovoip *edited* k1-x_deb1.dts for CM6 and even ship that hac=
+k in their OS images (visible in the logs on that OpenWrt PR):
+> https://github.com/BPI-SINOVOIP/pi-linux/commit/333b99e8cd9b18e98bf718215=
+18548df345dbb61
+> /o\
+>
+> >
+> >> Are there any ideas how to handle that, yet?
+> >>
+> >> Can we distinguish between those boards in the SPL based on something =
+different?
+> >>
+> >> Or can we make up our own strings and let users write that to EEPROM? =
+Mainline and vendor technically allows it via e.g.:
+> >>     tlv_eeprom set 0x21 "k1-x_BPI-CM6-IO"
+> >>     tlv_eeprom write
+> >> But that's assuming the EEPROM is writable, which I haven't checked.
+> >> (And I neither have a F3 nor a CM6).
+> >>
+> >
+> > tlv_eeprom should support to write EEPROM. If it fails, we could
+> > enable ENV in SPL. I have a patch in the mailing list to enable ENV.
+> > But that patch was abandoned. You could review the mailing list to
+> > reuse it.
+>
+> In the meantime a board owner verified the EEPROM write as working:
+> https://github.com/openwrt/openwrt/pull/23231#issuecomment-5972395785
+>
+> For the record, I made up "k1-x_BPI-CM6-IO" as product name with a matchi=
+ng vendor fork device-tree file name, which makes u-boot as well as the ker=
+nel pick up their matching device-trees via CONFIG_FIT_BEST_MATCH.
+>
+> In case mainline u-boot goes the same way (let CM6 owners add a value to =
+EEPROM) to properly make multi-dtb fit images boot, can we agree on a value=
+? Or maybe someone here has connections to sinovoip and ask them to put tha=
+t/anything in there?
+>
 
-On 10/4/26 21:25, Junhui Liu wrote:
-> Hi E,
-> 
-> On Mon Oct 5, 2026 at 8:40 AM CST, E Shattow wrote:
->> Hi Junhui,
-...
->>
->> The previous list-table of offsets is okay for review and diff output,
->> however the following list-table is not acceptable.
->>
->>> +
->>> +   * - Area
->>> +     - K1
->>> +     - K3 non-secure boot mode
->>> +     - K3 secure boot mode
->>> +   * - Root and OEM keys
->>> +     - RSA-2048 moduli with an eFuse root-hash check when secure boot is
->>> +       enabled
->>> +     - Unused
->>> +     - RSA-2048 moduli with an eFuse root-hash check
->>> +   * - Header CRC
->>> +     - Not checked separately
->>> +     - header1 verified
->>> +
->>> +       header0 ignored
->>> +     - Both verified and covered by RSA
->>> +   * - Image CRC
->>> +     - Not checked separately
->>> +     - Payload CRC32 in header1
->>> +     - Covered by RSA but not checked separately
->>> +   * - signature0
->>> +     - Verified with the root key over ``[0x100, 0xb00)``
->>> +     - Unused
->>> +     - Verified with the root key over ``[0x100, 0xb00)``
->>
->> Why the mixed-use of square brackets and parenthesis?
-> 
-> I think this is a fairly common mathematical notation for a half-open
-> interval. If you find it less readable in this context, I can change it
-> to [0x100, 0xaff] instead.
-
-Let's qualify the interval notation with verbose "interval", for example:
-
--     - Verified with the root key over ``[0x100, 0xb00)``
-+     - Verified with the root key over ``[0x100, 0xb00)`` interval
-
-With this verbose qualifier I have some hope to search Wikipedia for
-"interval" and learn about the symbolic representation. I assume here a
-half-open interval representation is one of many forms of a
-classification of "interval", so simply adding "interval" is enough context.
-
-> 
->>
->>> +   * - signature1
->>> +     - Verified with the SPL key over header1 and the aligned payload
->>> +     - Unused
->>> +     - Verified with the SPL key over header1 and the aligned payload
->>> +
->>
->> I don't know what is preferred here by documentation reviewers but this
->> above list-table is not reviewable as-is. Maybe try to flip the axis, or
->> split into a series of tables as one-per-name of K1, K3 non-secure boot
->> mode, and K3 secure boot mode?  The purpose of restructuring this should
->> be readability before being rendered, and minimal 'diff' impact for
->> future changes.
-> 
-> I combined the three cases in one table intentionally, so readers can
-> compare the treatment of each field across the K1, K3 non-secure, and K3
-> secure paths side by side. Splitting it into three tables would make
-> that comparison less direct and require readers to move back and forth
-> between them. It would also duplicate the field names across the three
-> tables.
-> 
-> Given that trade-off, I would prefer to keep the current table layout.
-> 
-
-No complaint about the rendered output it is very useful.
-
-What I am meaning by "flip the axis" is for example:
-
-.. list-table:: Authentication policy
-   :header-rows: 1
-
-   * - Image Variant
-     - Root and OEM keys
-     - Header CRC
-     - Image CRC
-     - signature0
-     - signature1
-   * - K1
-     - RSA-2048 moduli with an eFuse root-hash check when secure boot is
-       enabled
-     - Not checked separately
-     - Not checked separately
-     - Verified with the root key over ``[0x100, 0xb00)`` interval
-     - Verified with the SPL key over header1 and the aligned payload
-   * - K3 non-secure
-     - Unused
-     - | header1 verified
-       | header0 ignored
-     - Payload CRC32 in header1
-     - Unused
-     - Unused
-   * - K3 secure
-     - RSA-2048 moduli with an eFuse root-hash check
-     - Both verified and covered by RSA
-     - Covered by RSA but not checked separately
-     - Verified with the root key over ``[0x100, 0xb00)``
-     - Verified with the SPL key over header1 and the aligned payload
-
-Reviewability is improved yet it remains confusing and is less readable
-on the rendered output.
-
-Next, to then delete the column headers, move column descriptions to
-natural-language descriptions, and keep a single-table format:
-
-.. list-table:: Authentication policy
-
-   * - K1
-     - RSA-2048 moduli root and OEM keys with an eFuse root-hash check
-       when secure boot is enabled
-     - No additional header verification
-     - No additional image checksum
-     - Verified signature0 with the root key over ``[0x100, 0xb00)``
-       interval
-     - Verified signature1 with the SPL key over header1 and the aligned
-       payload
-   * - K3 non-secure
-     - Unused root and OEM keys
-     - header0 ignored, header1 verified
-     - Image payload CRC32 in header1
-     - Unused signature0
-     - Unused signature1
-   * - K3 secure
-     - RSA-2048 moduli root and OEM keys with an eFuse root-hash check
-     - header0 and header1 both verified and covered by RSA
-     - No additional image checksum
-     - Verified signature0 with the root key over ``[0x100, 0xb00)``
-       interval
-     - Verified signature1 with the SPL key over header1 and the aligned
-       payload
-
-I can now read this comfortably both in source and in rendered output.
-What do you think?
-
->>
->>> +K1 verifies both signatures even without a programmed root-key hash. In this
->>> +case, the root key comes from the image and is not authenticated by hardware,
->>> +so the image, keys, and signatures can be replaced together.
->>> +
->>> +K3 uses CRC32 in non-secure boot mode and hardware-rooted RSA in secure boot
->>> +mode.
->>> +
->>> +Creating an image
->>> +-----------------
->>> +
->>> +U-Boot currently creates only K3 images for non-secure boot mode. Package an
->>> +SPL payload with::
->>> +
->>> +    $ tools/mkimage -T smtimage -n k3 -d u-boot-spl.bin FSBL.bin
->>
->> Use lowercase letters for the output filename if it is not any CONFIG_
->> symbol or preprocessor define symbol, and re-use an existing filename
->> stem as for example any of:
->>
->> u-boot-spl.smtimage
->> u-boot-spl-mkimage.bin
->> u-boot-spl.bin.smtimage
->> spl.bin
-> 
-> Okay. I prefer .bin as the filename suffix. I think I will use
-> u-boot-spl-smtimage.bin.
-
-Let's re-use "u-boot-spl-mkimage.bin" and
-"u-boot-spl-mkimage.signed.bin" since you prefer ".bin" suffix and not
-"smtimage" suffix?
-
-`uniq` counts:
-
-4  "spl/boot.bin"
-4  "u-boot-spl-mkimage.bin"
-4  "u-boot-spl-mkimage.signed.bin"
-8  "spl.bin"
-17  "u-boot-spl-ddr.bin"
-
-SpacemiT K1 boards do use "u-boot-spl-ddr.bin" filename for the
-processed SPL image but that is a binman artifact of some DDR training
-blob from before support for smtimage is added to mkimage.
-
-It may be a benefit for distro packagers and CI/CD workflow to have
-distinct filenames for unsigned and signed output, so
-"u-boot-spl-mkimage.bin" and "u-boot-spl-mkimage.signed.bin", otherwise
-I would say "spl.bin" is short and popular for re-use.
-
-> 
->>
->> A distro package of u-boot or later user of the build system may copy
->> this output to "FSBL.bin" but that is nothing to do with us here. In
->> fact for documentation purpose here it is useful to retain "FSBL.bin" as
->> a distinct description of the vendor firmware SPL and not get this
->> confused for mainline u-boot.
->>
->>> +
->>> +K1 images and RSA-authenticated K3 images are not yet supported.
->>>
->>
->> This statement may be simply deleted. It is obvious that support does
->> not exist when it is not described here. If you would like to keep this
->> line it is not any problem. Similarly for the sentence "U-Boot currently
->> creates only K3 images for non-secure boot mode." which is not really
->> accurate to say, as there is no makefile target or binman setup for any
->> of this yet. Technically U-Boot does nothing at all regarding this
->> documentation. It would just have to be more diff lines to review later
->> and can be omitted now.
-> 
-> I will remove it.
-> 
->>
->> -E
-> 
-
-With all that, and I'll confirm my R-by tag again in the next round so
-not to delay the series,
-
-Reviewed-by: E Shattow <e@freeshell.de>
-
+Yes, adding "k1-x_BPI-CM6-IO" to the EEPROM sounds good to me. Feel
+free to format a patch and send it to the mailing list.
