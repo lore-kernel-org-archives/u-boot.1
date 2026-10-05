@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5596CA5FF5
-	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 13:31:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4759BCA5FCE
+	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 13:38:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 60F1B40715;
-	Mon,  5 Oct 2026 13:31:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0F2804065D;
+	Mon,  5 Oct 2026 13:38:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LHPOcHmrjiwS; Mon,  5 Oct 2026 13:31:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 72423406C3
+ id MNAnnBoCRwse; Mon,  5 Oct 2026 13:38:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org DC31D40613
 Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=4; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791207089;
-	b=SY8ERzUKaZCYINFhu5iIanOhGqaeq0DzPZLYlsKgQ7UBlfE6EIIVR6tsEq44QLnBhYdY
-	 JtjkjaznDrRmhAatFVozBgGozjXVUFBS7BvlNA5OFV/5wJqz7x4LxOKgG6FN5K4ipd4Ge
-	 HtI/XP1CXUMZCNDsA8KpEXXRb7UJcc2sT7oEueuGreRTRO5+HmXcC2qMCKhjJ0amwWVef
-	 fwa0Xbx3P1duonQh9FjMOwydRdcDddW4iZq7L/DOatSWBxDIgEUTEk0uIl3FOh4p9k96b
-	 +jZe8rqTiw/FtX3PzbHHdmCRHOpzLSl1Er9NwAb1skn3WYIiiqJCAw5WrfTLabfzxnw==
+ARC-Seal: i=4; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791207504;
+	b=hXhzrgZHzzkpaAJ8JgGcarcLhCobkF581Udk940LY13+T6ARYzgfLYX5aOHYebUmbClQ
+	 1jhqApTHtf2E3yz0h4v4BjoQlukZ3tS8HZuhkSiNcvz/ozDqUchetkotDccn1k3yDpyFa
+	 eBugnD3K4CkOEers9B4JzGNgAxfjVTWm8jbvgeFne77vwOBOTUwClptC8h5X13Dw32KGP
+	 631pSfAu3ASS3JxprJZiBp61SDLwCo6AqIkNWiXkeBzKC3wFZMuQvBhvMC/pZb3AS1HKt
+	 vpqD7agk/UAa1YsdjG3XP36vkvl4eC3dv316e6uyidm0gBPp8bCWo87ez1iPvORhPPQ==
 ARC-Message-Signature: i=4; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791207089;
+	c=relaxed/relaxed; t=1791207504;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -54,51 +54,51 @@ ARC-Message-Signature: i=4; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=6JD8rKNcSLWxoizFHaTq36CTF23yfpTz3p708NSZZZ8=;
-	b=DG3e/8nw1HbfYQAFRS4pEq+/hd8BCcVwoM9fB8NTIeM3ObWSHE7RVdWzBV/+Dw8Zs1JP
-	 Ed4BIrMFSW/1x2yyjWL7pFGwUp1XadBrA8Cr4aq8isJnwl65FXOAG8cQf/vVpjcUnvjAl
-	 pveGvSQ3llm1XkU/J8GxO5HZzmEMawMNYMxghIrqi/sTakqlvNDBRVOtrkiLLQW4ACDpU
-	 Gy8DPsL5UcPEVZYiwM8tQCMFVRkgVDxYfQCirMktHRejRRX6+KTl95jutn+mRiYxhTqX7
-	 6mDvB24gS50jsh3GumFfolxWjoQgTCHtRf6goDQwFr90CirPsCxsWCc8gDnKAcEcOcA==
+	bh=GFrTeKvQBaYvtUOPNMOrcJa6SVozWFtQdOX8hJzulwI=;
+	b=lfHiPJ0ZYOvYflmgJVISJRIBs0jtv0NkeXYWEleOdOVRjcID9ujWseOHzmsjHdoUaAbD
+	 Qg+ouiLdnnEjxYK7n0oStnRi6GhBcumoK02kM90PE81VvlPAhXkuYF6XoNQkeA+e2qjrm
+	 ExCA93h57V4aPLLcerC13E4F9ZlQIMzPzxunqyqocmyWNcbXZD1FXMiq6wXapUuzualEU
+	 XDn++nAT+FEGWYVbulC9srEF/cbuK82IaviY9wX+OKPAGdCeKGK03E4Hi3X3n60Ex+jy3
+	 QdN4pXUBXeYI6yDnnKcku8IZESmnlsCpHCsdq9qWOWSSSW7nUni7+xYXpQxQVX5k9Pw==
 ARC-Authentication-Results: i=4; smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791207089;
-	bh=6JD8rKNcSLWxoizFHaTq36CTF23yfpTz3p708NSZZZ8=;
+	d=lists.u-boot-project.org; s=default; t=1791207504;
+	bh=GFrTeKvQBaYvtUOPNMOrcJa6SVozWFtQdOX8hJzulwI=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=B5X8eWS+6gjJsvHoS5kTTcyqrALUVJn7276cMNT51/UPm8tDs047ypJqu8o+pleZn
-	 UWxWR23XI0Pht+SsRTm65eefuiw3gXGFM5xceQeC1zmcVFpqnHrLEaTtppUxn9CoG0
-	 j0BdoMT//RzxJruwW2YQbhWNnob9y2garRvbZScAzsIOihU0ujlYw+UEF34cYZRJCR
-	 ctU5xpQKDvkRWB4ZDbmendCT0UVsBJi8CpyP5ONAx2KbbQgPM+Acfv3DtbfZatM9CW
-	 L19mypSYRZbbKTbxr/O/HS/s/TU2Rq4peDNI5RY/00aeDUMRaL9n7K6b96GAeZRjmG
-	 nvgd5i+RGJjAA==
+	b=XGoefEjwzf+7pT4bPKLxFExjg625T2GugnWkLfgHZVM4Uu35qAVw2DLqFfy+gv7Rn
+	 8vomCEe7j0j91zRx6Tm6NsPygZ/fdKGxYSCeGf/TZaiQ6oLGnHCSgWfB3SRxHVrvxf
+	 oVLSeD93JOCIc2XYWoZrTsYgKZlWzQ1fJrxxAamYaswp4Hs+K2XKx+6RtPwM2B7Vy1
+	 ACUW63gMIlRQ2IM8fHT16zbAhhl0T+6CHXBHZUQ7UId5m9xI5Mun74XSv6KzbvEiCk
+	 vUPJh3X2Mucsx5bIBlZmC8FQLN16jPZp/xzd6OibEjOIPivWD90gOZYXSIppNvJEE2
+	 1cmqvssW6WN4A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 72423406C3;
-	Mon,  5 Oct 2026 13:31:29 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id EA3AE2E0
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 11:13:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DC31D40613;
+	Mon,  5 Oct 2026 13:38:23 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6588A338
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 13:06:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CF96360611
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 11:13:20 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 610CC40184
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 13:06:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vuHqxbEab59h for <u-boot@lists.u-boot-project.org>;
- Mon,  5 Oct 2026 11:13:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E1A7560606
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=2
- smtp.remote-ip="2a01:111:f403:c202::7"
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791198799;
- b=Gvi7zWNsnxWRa8QcdrP1e2zkNzHz1vtaXxo9EIkWCN8aDcJvLkWGXPsjbjyQES+OxyrA
- T1VkcpfBdweMItfTH0TIlchQ0TvCem5B6vYMnIUfRDSwpXwlFRn29oriLYtg1C86vwMK6
- CkSvd+81JcocKZ2PID5TNXzakIJ3pPPSJpuDtgqqOWk/RZZTAYNoifTUtGVqYkeOOIo78
- Hoj88JmxqyTQNE+GNP0GOd67vhwZcobcakD+XvdbB2gGIPRQY8HLDtsPpiRj+5BXJwkbN
- 1Cd4L/LXFWkwIPaV7H2dJ/3sS48jf6TAVkvxTiZqWESLxlo7dlU/dNT3v0p7mQ9qRjw==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OVNyo74Yk0Tn for <u-boot@lists.u-boot-project.org>;
+ Mon,  5 Oct 2026 13:06:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 709D540188
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=2
+ smtp.remote-ip="2a01:111:f403:c200::1"
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791205615;
+ b=Kde+j2T4lWmTMdL8RQZQvnIkYYP6ex8aE3V1j/nkV8zJmA6PoATH12z52QHfX/5z/Tcp
+ 0MtqsdSFpv9tmxKzOJgOm0y7qXedFgpgJVs2/yhYge1Q8g8jjW9XwgmujUtUk4f2TV2Ew
+ wF4tppX1FTKAt3rlpVYKPoWk6NjqMUZT8+nthoza0zBMgYRPcVcIEpGzYlMoEbUo94Abk
+ fTMtIc7ruWQw4WR+416Zj05CHsqpo9lJAbwPIIGy9lXzHSkuA7UZ0AQvW8ZXGXT5gNPXX
+ rTkkr+8WgCp/aBvQpQxQ9p68EAbunKvCAijoXaTwbyhAskzaby2VIMK6/xsAv6L27kA==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791198799;
+ c=relaxed/relaxed; t=1791205615;
  h=Received-SPF:DKIM-Signature:Received:Received:
  X-MS-Exchange-Authentication-Results:Received-SPF:Received:
  DKIM-Signature:Authentication-Results-Original:Received:Received:
@@ -125,42 +125,42 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
  X-MS-Exchange-CrossTenant-FromEntityHeader:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=6JD8rKNcSLWxoizFHaTq36CTF23yfpTz3p708NSZZZ8=;
- b=myeXm+rv0FKtQ4VqRITIA0CL8B//x4fqQtOr+NHX03aH5ne9Blhid39QP4Gd/X2hWvdl
- wmSvvk1LCZx0INUPGf/oMCIb+cg29KfRd9yAZ0XjYLGQcePXP1NL4UsX+HSoomW9AVCg2
- WzOKyy6WJuO//dDLYOvtmXyjvcANfrbKG4yEjbBtjiBfMzJ6FMoZPt2eqhlqc1vvAunmk
- XIWOWQDeOEAQCj1uvYQQj5QZyGipmYE/3Sx5AWKaBFhcRCu2yl6+cgiJ6KHRF7WQGgl0D
- p+Y/LQ9jeNUI4/5UevH+Iq9HDMhYlish0YBTD8fpeE1ZaAneheMP9KtxUTU4Ongqciw==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org;
+ bh=GFrTeKvQBaYvtUOPNMOrcJa6SVozWFtQdOX8hJzulwI=;
+ b=VgwKvB1QueC++RSjLraV9/I6E6pzLkF7d056yF1u9PK8uPt1uCTz4mc87svKn3jzHHnA
+ 9icVNd0EThUSszLb7DKeMEq7Wku5YBJJAAAvoiIKUY2RecqLN6weESii7+JpBuQOkXkc0
+ AWVuk8vmLHVM2pXa3JKnckP4AYe6x5L1B92jw13+UhhQfGeQACh3sKl0XB2uv0KhUsOxP
+ 8PKOOtr1nKl6gufvt8al1I3Vfmg0He63a7C1POl3+GF411fuC4Dl8vA5dQ94UOpjZzzsR
+ OjbIUSbFWy9KfgDdgc2wiwvffJ6p6ZdsbCOM34v4kKJMhOihA4zZndiR+Q5l+ssHUXA==
+ARC-Authentication-Results: i=3; smtp2.osuosl.org;
  dmarc=pass header.from=arm.com; 
  dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256
- header.s=selector1 header.b=oJSWb9Gs; 
+ header.s=selector1 header.b=VFERIitd; 
  dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256
- header.s=selector1 header.b=oJSWb9Gs; 
- arc=pass header.oldest-pass=2 smtp.remote-ip="2a01:111:f403:c202::7"
+ header.s=selector1 header.b=VFERIitd; 
+ arc=pass header.oldest-pass=2 smtp.remote-ip="2a01:111:f403:c200::1"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c202::7;
- helo=gvxpr05cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c200::1;
+ helo=db3pr0202cu003.outbound.protection.outlook.com;
  envelope-from=harsimransingh.tungal@arm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=selector1 header.b=oJSWb9Gs; 
+ header.a=rsa-sha256 header.s=selector1 header.b=VFERIitd; 
  dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=selector1 header.b=oJSWb9Gs
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E1A7560606
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 11:13:17 +0000 (UTC)
+ header.a=rsa-sha256 header.s=selector1 header.b=VFERIitd
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 709D540188
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 13:06:52 +0000 (UTC)
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=Z27RSxCktSu3a3a7eBcH3Jc3WB4F32apQ7m6D0V+OYTC1X4G54OOAAcDZmqBpJsMTlI2witFTjN9ePdaqZrOK5fe9fQElOqnRJT2M3g+eHm+OwT5wKIBRjO8Q3lT/cOPEfCGF0igsCC3B2UAKciVIGXz0bhPaiEpJkIZoccBF445lCpaUHsUkCCStHWihmlFMXFfH8HmjHfo6M6ROUt/Bwk7Qp74evoEk0/QsOIOlC3PvfdQMXqojMFGKIXaFWj2NXsAyR5GIrstKBr7VkbyjAif6P42IDgG5F+4Y9H6szMOl3kYquujY4TzfikdnOUi+CAjzdatSSo8ryyvxulr6g==
+ b=sb65JmRSY3HieOxfMH8UyiUSOIwqvX6ssuw3DNzzi/lA8dYQic9yVUrTOOd6BStHzsAQxgvJjSX3IfWBqU1rY5dz1vcUxRDsSOxEB/bIkEr8kAivf2MGXlRAWP8CoJ4mcp+2V3JyiMZWk/CiD9+CMFdqNLzIfn3brJzBI21OJ4FdxN6LlJBn6qAc09vZ4Mi3+H4CnvkyZG4MaFfoOzTUEGsTVRXZ2jh+40Kv9/0kxjWq38rVABluVmmaRParqTMm+PaewpNI2k//8iVjqI85iX56T3+kc13Mb5WL0CZVk7gcoHa5RF+3R+vplp2x9Ijpe/i6R9LOVWChbG5+YGdd8Q==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6JD8rKNcSLWxoizFHaTq36CTF23yfpTz3p708NSZZZ8=;
- b=LgaaeAu9VGoEvmboC7peYu9XEy6IKLdPynLJsVmaE95jCECwwhPpGOuBEB+UszKpufWavGgrXGSiaTvfScRN/cObKs+aBX0OTfIUfpKX2ky2cLlGiy5C7bvSyQIgirqsYdQCIaJtlyuKmPiYjJvXzzEfrojgqrBGCZbfIzqQMU6kcPppJNlDK0Sjqnt08eCsJoR2sYz4eeBl7bZTiYVjmd/T23NtOB2cvUiASCF7l55DstWVA6fpaTLpo7DpdmYo7H0fk+htgI6zrc9KQqRdGX6gAH5PsS1GpUQ7tQojthB27uqvoZmAPzK6pY4EMWOaFNyfZl1xZXiDlPmrQWHxPg==
+ bh=GFrTeKvQBaYvtUOPNMOrcJa6SVozWFtQdOX8hJzulwI=;
+ b=yyoDz1rzwUzfT9poXqL4zeUIoQqnn/llLF3f7z7yimHBLV/O2DH3NMsBvhmyLDHGyLZtlAhpZYpqgPgpXF2dFLJHmiJGA2x5x9f0dWziQtdJPOlBEKKI+XDmfAkse6xYeYVU72IiwZqnEYNCFc32o14E4Q6mkuHrzMhk8sjOSmrQlTU43J2Vd5HRtHWtZjwigT3anuIILhuKDIno8a6xzb1zqLSfuycWVCamgJTebI9o9pQ/P2LoXhUZBgcYzKhZjlt/+QZihB9aL9a3JerdMd40/4MSvADis+0R4LssP9nv6OMICqNOas8KdicXfrN4BemT9VQTeoYRG8IZ7e1uMw==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  4.158.2.129) smtp.rcpttodomain=linaro.org smtp.mailfrom=arm.com; dmarc=pass
  (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
@@ -169,18 +169,18 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  dmarc=[1,1,header.from=arm.com])
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6JD8rKNcSLWxoizFHaTq36CTF23yfpTz3p708NSZZZ8=;
- b=oJSWb9GsGuTdtEPYPsLCPh9xEPvt4vQtclnJDSsJDq3NhDse290ic0ugc5mF/IRx5/jH4xD+IMcSRfxZogE9O7OWsbR5YrLZhTQl5wGaZQFpludqRv8JbTjGYTnF/+mYHI17Br3jW2mccFzVSC2ALRgO/8QkNo0VB1tkRkda204=
-Received: from GV3P280CA0098.SWEP280.PROD.OUTLOOK.COM (2603:10a6:150:8::30) by
- GVXPR08MB10451.eurprd08.prod.outlook.com (2603:10a6:150:159::21) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=GFrTeKvQBaYvtUOPNMOrcJa6SVozWFtQdOX8hJzulwI=;
+ b=VFERIitdbgefq+fo22pcQzVGgxM7GVsylUc5838OzZRNCNTkGRBcpDFsRctzcjWkg5b+MMMTWm9m6GML5q4Jq9hNkUNbSLzKznl0GEAOiv2Fb21zrysqFAmL3ph35FvO3A2zOGwjMOctvxgo4xl5DDnpkDx1XGvep4C13pag2FU=
+Received: from PAZP264CA0095.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1fb::19)
+ by DU4PR08MB11080.eurprd08.prod.outlook.com (2603:10a6:10:570::14)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.14; Mon, 5 Oct
- 2026 11:13:07 +0000
-Received: from CPH1EPF00000522.eurprd05.prod.outlook.com
- (2603:10a6:150:8:cafe::aa) by GV3P280CA0098.outlook.office365.com
- (2603:10a6:150:8::30) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 13:06:43 +0000
+Received: from ZR1PEPF0000E6B1.eurprd05.prod.outlook.com
+ (2603:10a6:102:1fb:cafe::1a) by PAZP264CA0095.outlook.office365.com
+ (2603:10a6:102:1fb::19) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.20 via Frontend Transport; Mon, 5
- Oct 2026 11:13:07 +0000
+ Oct 2026 13:06:42 +0000
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
  is 4.158.2.129) smtp.mailfrom=arm.com;
  dkim=pass (signature was verified)
@@ -189,96 +189,96 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  4.158.2.129 as permitted sender) receiver=protection.outlook.com;
  client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
 Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- CPH1EPF00000522.mail.protection.outlook.com (10.167.241.133) with Microsoft
+ ZR1PEPF0000E6B1.mail.protection.outlook.com (10.167.241.88) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.14
- via Frontend Transport; Mon, 5 Oct 2026 11:13:06 +0000
+ via Frontend Transport; Mon, 5 Oct 2026 13:06:42 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=U/OotVkrP7KGmJfncfcamBkXa3kRfj4NGF11oQpfXf5OM+fZw3LXXcnS22YzCGiHBJx9bhCGBBYv++6bX8gNyZnRdqVc8rQ0JCUWSSFkcRPi2LTNjbrhbnkgCLsqOrERcksL+eDKgqS5mFKPLawuYcnS+s4vHE0O6/c5sfno+omWHCD7Pf2oWuB4iIPWw9cQhL66xZrP0Yx5vhseX6Lg3RP2eP01K7466pNuN4WhiAY0ZfqpMIfsSs0o1mOXgYtJek5P/DWOGbzoRgSA0ITWnKJ73QGdC045Fsyq0Vyl0W4/qmg1uVIQNtR8Px2DoeQca/MXhoAlOPJa1E+5MsMzUQ==
+ b=pbjx3djyi+q2u4xHlGRgv4V7ORxNY+JnrDC1Yk/xkeMoep7PtlEZgwYXuBBsPW1ZmacyFl6nMQ+yIq2c+71+324QkbNCuGRg5qR5V9o6d5mCdmfTN/ISm+VCsGqmW4r8GmfRppvSsWgLz5Ik55gebshp5ixpJDdYoM/xuFilq5PNg92b6vLr7dQiD2nVCy4oOeIoSqAEw22ym9SfczqRWDKHe/n9HX3FoOQPzEw7PPPNThQTEUY71un3LTBZl8HAUyxQUu2dXCNxtmrJCMCMaxdFuZSIp6orzL7K/zfCheRNYxNlEw0sMz5iO8LP+3LVtBtyZ4BNDGivFAsjvEzYbg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6JD8rKNcSLWxoizFHaTq36CTF23yfpTz3p708NSZZZ8=;
- b=l+5S6zvWOD/cfunSIcxqTeThbq1jwF98w+phBiaVx8tFLid/zVdVd4jXiXU+qwFb+Vi2JpEcZ/gTSaEyN7gpBFgP95Hu1OsTXyFSxSnJduhN8aLfrem8DVDRCa03dTpOZWSHPYbeMxve1gpgG144nLmYlkZe64xtqcIHURdpgX55xAfTgVVcmXGPyxe9kl309MNbjjqKWYeu/4HmejLGyhpbmB+/9dHvBdC7NM8uJIua/BA9OHri+2ng7bJSrJoIJRCKYUkuXG97hon4WlZjuwN9OWte7+xXRxi7NBHvP0hCbVhoaQczstBfW8mVWYyCmIBLwyW4hZHPJBQ+f4E5eA==
+ bh=GFrTeKvQBaYvtUOPNMOrcJa6SVozWFtQdOX8hJzulwI=;
+ b=FtFiRSl1qnFbNOpmPLhBm8ZXdj9HPhxy1JbNvr1ALHuGsLj7I1gb2JwuK1krAW+n9ZHz+vZu6YH4fRgWCUWt/YOZeFnuNCt2j84jSmcpoMcMzgivRAue6Q5uoKitBLw0NnFM1knQYVMkGHkXzIUUkpmh9F4KjFi8SQq3nOgClilaLAb+Bm+h2bV6TcGZk8AgGWRf9J4pq9eRNBbxRJAPDngrqcEy85llwabOZB6bsJLrkVGL87tb1UUc0gKtxFfZG6CMnrc11y1njK3RXc/SHaUTEk6Dctg/hLkNq+b65mseYBoWvUpqQoT9ayJKpxjarF3LN5WwFN+O19pEuiM1tw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
  header.d=arm.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6JD8rKNcSLWxoizFHaTq36CTF23yfpTz3p708NSZZZ8=;
- b=oJSWb9GsGuTdtEPYPsLCPh9xEPvt4vQtclnJDSsJDq3NhDse290ic0ugc5mF/IRx5/jH4xD+IMcSRfxZogE9O7OWsbR5YrLZhTQl5wGaZQFpludqRv8JbTjGYTnF/+mYHI17Br3jW2mccFzVSC2ALRgO/8QkNo0VB1tkRkda204=
+ bh=GFrTeKvQBaYvtUOPNMOrcJa6SVozWFtQdOX8hJzulwI=;
+ b=VFERIitdbgefq+fo22pcQzVGgxM7GVsylUc5838OzZRNCNTkGRBcpDFsRctzcjWkg5b+MMMTWm9m6GML5q4Jq9hNkUNbSLzKznl0GEAOiv2Fb21zrysqFAmL3ph35FvO3A2zOGwjMOctvxgo4xl5DDnpkDx1XGvep4C13pag2FU=
 Authentication-Results-Original: mx.microsoft.com 1; dkim=none (message not
  signed) header.d=none;dmarc=none action=none header.from=arm.com;
 Received: from AM8PR08MB5620.eurprd08.prod.outlook.com (2603:10a6:20b:1c6::23)
- by GV1PR08MB10853.eurprd08.prod.outlook.com (2603:10a6:150:161::18)
+ by AS1PR08MB7537.eurprd08.prod.outlook.com (2603:10a6:20b:481::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.14; Mon, 5 Oct
- 2026 11:12:34 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Mon, 5 Oct
+ 2026 13:06:08 +0000
 Received: from AM8PR08MB5620.eurprd08.prod.outlook.com
  ([fe80::618d:6218:6962:17ad]) by AM8PR08MB5620.eurprd08.prod.outlook.com
  ([fe80::618d:6218:6962:17ad%6]) with mapi id 15.21.0496.010; Mon, 5 Oct 2026
- 11:12:33 +0000
-Message-ID: <bd9d4332-f1e7-4c66-8524-2dbee628a364@arm.com>
-Date: Mon, 5 Oct 2026 12:12:30 +0100
+ 13:06:08 +0000
+Message-ID: <eca5e6ca-ef4a-4e20-9255-f7d20ebe0788@arm.com>
+Date: Mon, 5 Oct 2026 14:06:07 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 12/22] efi_loader: reserve FF-A shared buffer for
- runtime variables
+Subject: Re: [PATCH v5 13/22] efi_loader: enable TEE runtime SetVariable()
+ over FF-A
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, Devaraj Ranganna <Devaraj.Ranganna@arm.com>
 References: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
- <20260914110106.1974894-13-harsimransingh.tungal@arm.com>
- <DLINN5K2BHFZ.19HZZJ3K3T9VR@linaro.org>
+ <20260914110106.1974894-14-harsimransingh.tungal@arm.com>
+ <DLINF8X5LGMM.22DVNGKNPMAM8@linaro.org>
 Content-Language: en-GB
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-In-Reply-To: <DLINN5K2BHFZ.19HZZJ3K3T9VR@linaro.org>
+In-Reply-To: <DLINF8X5LGMM.22DVNGKNPMAM8@linaro.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: PA7P264CA0100.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:348::18) To AM8PR08MB5620.eurprd08.prod.outlook.com
+X-ClientProxiedBy: LO4P265CA0073.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2bd::6) To AM8PR08MB5620.eurprd08.prod.outlook.com
  (2603:10a6:20b:1c6::23)
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: AM8PR08MB5620:EE_|GV1PR08MB10853:EE_|CPH1EPF00000522:EE_|GVXPR08MB10451:EE_
-X-MS-Office365-Filtering-Correlation-Id: 067b5327-6bea-42b7-c9d3-08df22d1a1fa
+X-MS-TrafficTypeDiagnostic: AM8PR08MB5620:EE_|AS1PR08MB7537:EE_|ZR1PEPF0000E6B1:EE_|DU4PR08MB11080:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8858d2d7-51c3-4b7d-6f26-08df22e1803b
 x-checkrecipientrouted: true
 NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|376014|23010399003|366016|1800799024|5023799004|11063799006|56012099006|4143699003|10067099003|18002099003|22082099003|6133799003;
-X-Microsoft-Antispam-Message-Info-Original: gF6hyWIaRYbDd6TIvkmLr3W7dRSE0ajbXzCHeyf9tyM0xii3iR2MpWiCBw8ix9ddNTFZuOC1xiJhH9hzlLGyyiugfnIw/n0Q2DqieeFd+5f8DWfcvTM9KoXQs4EDvGEGC+ubqRRuPQRk4k9MKopfuLIX3/2HtJS8nUbOAoozShp+ILYyM7G0WL5/RYrUELqMnUdDMMl/ovEnBjp+UAPYUlYpGzA6OxHFx2vRaoo3kUOUfGzRZrUTccBH6lOwGT536W98TaYj3jsQMqKc4dviMirc3wtXn7epNT7F1+3perKBCJ1ANCW4Jt1IQQs1nDLTLZ6sQIb45gXZNGQybqtMuvDKc8VNokKqYDuyU1virUiXoHeDEM7yrNTKnRWSi9KNAVMEPOlUl/DG1IH7v0N9PL6hLvpfMI1qwkuQc8/QLrxfBEz5vHlsBL1yTWNxukflphHjGryF79TER8d1pNYEvEr0kdaMWNSnBPA27nBB8gac+pWXzloZRMI2dThp/8bjx2rtZHkOok4esMEdIhiH6frwhdiE+HEd1jqLlOKSOpXaDKguFCtYSCclHxVS9/rI/GvgKIxme3c2/9mqi9pmW8G7BW2RfhKqkO1ewWhuxRmU667InAC3matblGOuDocnOO8A0x9Yf8DM+nLQg6mhrrMRGLek2t6XaO7h9WIBUhE=
+ ARA:13230040|366016|23010399003|1800799024|376014|6133799003|56012099006|4143699003|10067099003|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info-Original: /jKR3S+yVfGy+FXM2lFE9+adnbiwri+n6Deg4tzPPqOOTywWcd8aFyXZh4gFPjyfjfE+pXyRpcWD+CA44bpKILUJ7zecxt8lQW/Gh6knxba7toOAM/tWRvHwpCuUZvx3t2dfFx1dLcQ+rtIICZTxnQNNwxb+tKNrqrLa18BoTEKC1de2Q+CtLHFkAiKwOkGS0FGIVhizF/v9+A0EC8Bv1vjP7H9Ta3IJ1cNInYa6sqjCHbxs29JoCT7JaKC1Iv19SQmuHMdDha7so+nXdH15PA5aCgpdTi9zi/RzIChZ+WUfd9VpVTXcBfYwHw6Xt1E09p6ty07xYXMgD78WTql0t+DiHImSpvluFkJLsuOvnLZAsoL7PI/XinvYA2h8cljWDXdZoknW/ueQ1mC8FR95L1jiW95tasYoo948b/01W0iZ15qvvMtyacRlDEGJ0QqqPt7EGxZHRb6pAIUx2jcq5sankOlR+QTwcaN2FoMaz5Xa/9hYymOXc+0yv3gmuceiwT0V6o3lfjhzUWFxMy0gI6RJvnFnWQ0TMUq+opxKZRu8WJUVR9lHZxbtwYL5mqM5z6ARljFR0H1dB4zR05cI5TzlG6vTKNv8H4SghzubB/4OIAHIlGU+ICnSY0+rxAy8gS55AZA7mfK+p3tI+Z2C/KZDacHLtGKCdRuIkUjK+Bc=
 X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
  SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM8PR08MB5620.eurprd08.prod.outlook.com;
  PTR:; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(5023799004)(11063799006)(56012099006)(4143699003)(10067099003)(18002099003)(22082099003)(6133799003);
+ SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(6133799003)(56012099006)(4143699003)(10067099003)(11063799006)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
-X-Exchange-RoutingPolicyChecked: 4XmNIGe2FVtReiqhly/NqrVMmxn81RSWQIZxZeO5kKdX0v5RtSvR8o6tHPz3EkmWAps8zpNpF9S87vJuY7NReZ9m/XpbyuRTNm1xqCZE1MM8Dtm673LnXA4FK1lQKdusakvh3GVAkkc1mnVOYJh7vxsS+/WzNnTzleg9dcT49VqQvY6RjzcLEguD7EChb2mak5k3gdeOAMvXWMf2nvyfCEXQywPyJUP3YvG8+w9Gf0jCiwGWkGzidgrxdinIiIh2978zsZuXR2Rs5wCPME0yNW6VlBFuiFdI336HSJDwd7ZRk/bbcPZl+YKfb+6UP45TaeHwElzGpYLOAkrjz3eTVA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB10853
+X-Exchange-RoutingPolicyChecked: Wgvn/QQuZSd1DffCFwMEor42BP3nFM42GH751SDjvc+Pwxau3Mf77VPifRhNAGSnynP8P8/KFOsHXXRA6nrQdJhZtdlkQyd9e5nSgEd9fjm80dI40hrqeSLvNWeGVVwkAAIlVoqpStfsTgZ2dI3swIBq2GoJ1xMDDJdwfAI+ph+6i1pJrczZCLgN44Vcz7xDCrfhunm8UGSlU0xNnTQmRlfsTfjZJbHwmVsEIMnR+lPRIEU9OGN9LoNVYAOCoaUz+W8/+nfxEP369bpy84qcDHSSFEYHLFG8NaDIrnvHgSvs+r8OKibPhZVZiQXpn3yud9xjnsI0faH8Zr4t2gb9Uw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR08MB7537
 X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: CPH1EPF00000522.eurprd05.prod.outlook.com
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: ZR1PEPF0000E6B1.eurprd05.prod.outlook.com
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 6409fb6d-cb04-45bf-406a-08df22d18e07
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 5ebafe14-bbe3-4d14-127a-08df22e16bb2
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|35042699022|36860700016|1800799024|14060799003|23010399003|6133799003|22082099003|18002099003|10067099003|4143699003|11063799006|5023799004|56012099006;
-X-Microsoft-Antispam-Message-Info: eiWh+ecm3rU/72Ja1QJFuxsY4k5jx/PQUB159qiYg+ArB72CrvaOetPU/ElnBzD/vwKhPomyQwf1Z/L0WqsYTnbT07FBN4PiYw+rPKQDr8BvBxKcN89rREeKwokP1g74e8tYgdyyd2hnghLzvS3Ujwpdaa5EDWvWhCeKyf/V6M9Cq/gjZusNpFWxW9tzd0IG6oQfAB3O7I2DRnAD4Blho6hzan1OOUQhPN7P20sZ5xlfvfJS39NS3hLzCi4NGRrLbnrD/EJd/n2lnZEEXVisZFv5eHyVtKhYYeJbHi5eclXC+cHXmbQz3DA3KdD1CDQiS/35Y5sb3qWoS1xUiJIdICq6vlfJztaJFie5dEnvnnTr58bewFCllJVkJ7W+AarnoWiI11rFptI6Jvj9eIgysu/ywumy9dlKNOsNKxeT83AUIrda99oFYAej6RzWrXXridQcbWyoqlMRpplDy6gYdjt4/e4eC4rKGw6Ceqa0BsXcc0js3HuCOmZjibr4z5r9i6LZZ8O0gKg8GTWx1zJxJLENpkHc0w+eRbah3uRWSD+L0f5pa2LO3edb+QzSMn8dwxTFEPlMtMhatSFsQpZXr9dJn9t0viyg3WX9KbvYTTChKlf+xPVJrx8Y/6gGSnR1ON3smxqYOnMzfm0YAnHuaTANrwug1o5KNiy8EIOJPXDlltMgQOPF5Pc+t6hB/NPXWmMMHRP6qLRgr02gLzlBiA==
+ ARA:13230040|35042699022|1800799024|376014|14060799003|23010399003|36860700016|82310400026|11063799006|56012099006|4143699003|10067099003|22082099003|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: RqQCviYPNcSV0jDjHX89Al50qxlj+0FtGxVmyZ/CblaI1MoSEyKMEGDAwE/h0Qrwa29edtufOgzj9vlp1uUCZ2vF0QTSWy1u80i2CLMGjizjmop6YpFhUNb/dWOvibouuknuXRrryNGW1avajBe7xXOTcjNLSGkF1CZPVx8EINVrVyJ+m4OmU1aSFeKB+oOZzfvuQlbff9zHHDSx8n9ebTpUlHMd/3YQvZDtooTQ8J8afas/o99feP2PVDrpIBKcqNXQSENFBMbl6ETgw64jGzMus0Fko8vcy/Q7GOt+vpX3wOTd7RaVEt5qpRrGGoJOBcPUAdGXf5NA0HwZkiiCbzafNCb3yHgUeFf//IXPemOgJrtcEtCGXp/2ATPd5peYfMSkuPuaQqm9ifxtyWbLwlP3WL2KC8NsYRnNhalEPf8vwasYIXJEAKy8A/FLpidgbCukCJDuF6pgbnerNSZF72I6GGKH5Z2zb45cGkX5T1sYYUwrNVx8fBgaR5zhNjWWQOc/FE6K4nluI/MeUVczjv4Gg74X7tJm3H+Sb4Q4CykJUZ3p3EAwUTM0C4gA38TM/Ta/c5PVqs0PZRipkug349/YmnUmuY6f946w1SPt4E0vfNsTvUjbjeLZJvrrsVA3l8cpIYG/aoReRTMvBvmEr0TBEIDmJKtjbjILwtyd/yD6m3/CB4k/dSZaROk5rlIk6ZLgR/QUp4OuyJSIZvxYrA==
 X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
  PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(35042699022)(36860700016)(1800799024)(14060799003)(23010399003)(6133799003)(22082099003)(18002099003)(10067099003)(4143699003)(11063799006)(5023799004)(56012099006);
+ SFS:(13230040)(35042699022)(1800799024)(376014)(14060799003)(23010399003)(36860700016)(82310400026)(11063799006)(56012099006)(4143699003)(10067099003)(22082099003)(18002099003)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: GuNIv4fE9BjOdBVs6nyF9tH3wUwy7jVfA32NTOgd39cU9iOtNjsIVR9N9E1/6QnQ92sftePxW0M+vmmgqgI/bQPljmpjW0c8izq2NCpnEx/R9/ZJa+101kKOISpsMT/8ggVQTrVKQQBgmvltX7uCFDdRHiNcnZgqRntYACGui5b14p3pV7wV5rdAv0gczwENB1l9NW04uGGFZy1jY+WoKMQisQ89rHCSNQyzqSFbsn8J67f5W5Y+3dm1W0fXIYagzNKBQB3MqTg3gd3glC3hbWIkoteLCbEkNaiVcp+WPU2x77CHgqB8ODIEP4P+4LFRMXbEx4h04PvNPzEtGGWJ8HrMidGrrDyeAJhdc27QGNnK0fxDUd9xOfAl0okMTbVM9gBwew3KlkazVBRqhuW9eIUiHgre7UcagjQlEWSzmPalgwD2m+9WGUtoRirsrByj
+X-MS-Exchange-AntiSpam-MessageData-0: CF/TW0yvJvpSgcHkzWpqsG/TYC3i3egJ2zcyaXrLaEfRgAmTP68jMR1iRScbALFX1IbS5dUG0M5aRnUm3lRTxdm6no+5Jgui831qLe9376Dqikdml+RhRV1+qOIqf9k1LzERf0wUl0irKpyF2m/yQZvBOsGp3BKbBPptt5GYx3gqp+yckn9xI9LCA3Bfvr8SQhLAelkeCqc9UafOr2Ro2J9qNJgWG2vs+kCeZqYC+qgDGpLQgDmwDh0gygXdak3QiyWMboM8BQcTTqCEWSAH1M1eHtFtcITymBSZWiz8O8PXyWobCjru10xROxgHlp51kzgzlHi7SKFaGr756ZN/yDUKyTfr3lkxg81DC+J5uhonU/3ZVb8AMHZAtSGDZe74+LOS0N/B1+7hw3NCMgqrX6Y8Bm9BKX8NYmSc0emm3VofwIXaSr6kKFcbsPm4MI39
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2026 11:13:06.9368 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 067b5327-6bea-42b7-c9d3-08df22d1a1fa
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2026 13:06:42.2551 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8858d2d7-51c3-4b7d-6f26-08df22e1803b
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
  Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: CPH1EPF00000522.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: ZR1PEPF0000E6B1.eurprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR08MB10451
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR08MB11080
 X-Mailman-Approved-At: Mon, 05 Oct 2026 13:24:22 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -295,215 +295,257 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
 
-On 18/09/2026 19:30, Ilias Apalodimas wrote:
+On 18/09/2026 19:20, Ilias Apalodimas wrote:
 > Hi Harsimran
 >
->>
->>  /**
->> - * setup_mm_hdr() - Allocate a buffer for StandAloneMM and initialize t=
-he
->> - *                  header data.
->> + * get_comm_buf() - Obtain a communication buffer for MM/FF-A exchange
->> + * @payload_size: size of the payload that will be appended to the
->> + *                MM communication header
->> + *
->> + * This helper returns a buffer suitable for constructing an
->> + * EFI_MM_COMMUNICATE message. During the boot phase a new buffer is
->> + * dynamically allocated. After ExitBootServices(), dynamic
->> + * allocation is no longer permitted, and all runtime communication mus=
-t
->> + * use the statically reserved FF-A shared buffer.
->> + *
->> + * The caller owns the returned buffer only during the boot phase and
->> + * must release it with free(). During the runtime phase, the returned
->> + * pointer aliases the static FF-A shared buffer and must not be freed.
->> + *
->> + * Return:
->> + *   Pointer to a valid communication buffer on success.
->> + *   NULL if no suitable communication buffer is available.
->> + */
->> +static __efi_runtime u8 *get_comm_buf(efi_uintn_t payload_size)
+>
+> [...]
+>
+>> +                                                       efi_uintn_t name=
+_size,
+>> +                                                       const efi_guid_t=
+ *vendor,
+>> +                                                       struct var_check=
+_property *var_property)
 >> +{
->> +    efi_uintn_t comm_buf_size;
->> +    u8 *comm_buf;
+>> +    struct smm_variable_var_check_property *smm_property;
+>> +    efi_uintn_t payload_size;
+>> +    u8 *comm_buf =3D NULL;
+>> +    efi_status_t ret;
 >> +
->> +    comm_buf_size =3D MM_COMMUNICATE_HEADER_SIZE +
->> +                    MM_VARIABLE_COMMUNICATE_SIZE +
->> +                    payload_size;
+>> +    payload_size =3D sizeof(*smm_property) + name_size;
+>> +    if (payload_size > max_payload_size) {
+>> +            ret =3D EFI_INVALID_PARAMETER;
+>> +            return ret;
+>> +    }
+>> +    comm_buf =3D setup_mm_hdr((void **)&smm_property, payload_size,
+>> +                            SMM_VARIABLE_FUNCTION_VAR_CHECK_VARIABLE_PR=
+OPERTY_SET,
+>> +                            &ret);
+>> +    if (!comm_buf)
+>> +            return ret;
 >> +
+>> +    efi_memcpy_runtime(&smm_property->guid, vendor, sizeof(*vendor));
+>> +    smm_property->name_size =3D name_size;
+>> +    efi_memcpy_runtime(&smm_property->property, var_property,
+>> +                       sizeof(smm_property->property));
+>> +    efi_memcpy_runtime(smm_property->name, variable_name, name_size);
+>> +
+>> +    ret =3D mm_communicate(comm_buf, payload_size);
+>> +
+>> +    return ret;
+>> +}
+>> +
+>>  static efi_status_t get_property_int(const u16 *variable_name,
+>>                                   efi_uintn_t name_size,
+>>                                   const efi_guid_t *vendor,
+>> @@ -768,6 +800,49 @@ out:
+>>      return ret;
+>>  }
+>>
+>> +static efi_status_t __efi_runtime get_property_int_runtime(const u16 *v=
+ariable_name,
+>> +                                                       efi_uintn_t name=
+_size,
+>> +                                                       const efi_guid_t=
+ *vendor,
+>> +                                                       struct var_check=
+_property *var_property)
+>> +{
+>
+> The changes between this and the non-runtime version are limited to a few=
+ memcpy/memset calls.
+> It's pretty easy to only keep the runtime version and get rid of all the =
+duplication. Same
+> goes for the set_property_int()
+>
+>> +    struct smm_variable_var_check_property *smm_property;
+>> +    efi_uintn_t payload_size;
+>> +    u8 *comm_buf =3D NULL;
+>> +    efi_status_t ret;
+>> +
+>> +    efi_memset_runtime(var_property, 0, sizeof(*var_property));
+>> +    payload_size =3D sizeof(*smm_property) + name_size;
+>> +    if (payload_size > max_payload_size) {
+>> +            ret =3D EFI_INVALID_PARAMETER;
+>> +            return ret;
+>> +    }
+>> +    comm_buf =3D setup_mm_hdr((void **)&smm_property, payload_size,
+>> +                            SMM_VARIABLE_FUNCTION_VAR_CHECK_VARIABLE_PR=
+OPERTY_GET,
+>> +                            &ret);
+>> +    if (!comm_buf)
+>> +            return ret;
+>> +
+>> +    efi_memcpy_runtime(&smm_property->guid, vendor, sizeof(smm_property=
+->guid));
+>> +    smm_property->name_size =3D name_size;
+>> +    efi_memcpy_runtime(smm_property->name, variable_name, name_size);
+>> +
+>> +    ret =3D mm_communicate(comm_buf, payload_size);
 >> +    /*
->> +     * After ExitBootServices(), dynamic allocation is no longer permit=
-ted.
->> +     * Use the predefined FF-A shared buffer at runtime; otherwise allo=
-cate
->> +     * a fresh buffer during the boot phase.
+>> +     * Currently only R/O property is supported in StMM.
+>> +     * Variables that are not set to R/O will not set the property in S=
+tMM
+>> +     * and the call will return EFI_NOT_FOUND. We are setting the
+>> +     * properties to 0x0 so checking against that is enough for the
+>> +     * EFI_NOT_FOUND case.
 >> +     */
->> +    if (efi_at_runtime()) {
->> +#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
->> +            if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
->> +                    if (comm_buf_size > CONFIG_FFA_SHARED_MM_BUF_SIZE)
->> +                            return NULL;
->> +                    comm_buf =3D ffa_shared_buf;
->> +                    if (!comm_buf)
->> +                            return NULL;
->> +                    efi_memset_runtime(comm_buf, 0, comm_buf_size);
->> +            } else {
->> +                    return NULL;
->
-> This is problematic for the existing use case. With  the changes in the l=
-ater patches
-> that swap all runtime call unconditionally every call to setup_mm_hdr() w=
-ill return
-> EFI_OUT_OF_RESOURCES and none of the runtime services will work without F=
-F-A.
-> There's nothing elegant we can do about this .We either Let the fucntions=
- from efi_var_common.c
-> deal with the runtime part (which I think I prefer), or we define a simil=
-ar runtime
-> available buffer for comm_buf.
->
-Thanks Ilias.
-
-Yes, I agree this would break the existing non-FF-A runtime path once
-the later patches install the TEE runtime handlers unconditionally.
-
-I am planning to keep the existing efi_var_common.c runtime handlers for
-the non-FF-A case, and only replace the runtime service table with the
-TEE/FF-A runtime handlers when CONFIG_ARM_FFA_RT_MODE is enabled. That
-keeps the existing OP-TEE behaviour unchanged, while the FF-A runtime
-transport continues to use the static shared buffer after
-ExitBootServices().
-
-Does that approach make sense to you?
-
-Regards
-Harsimran Singh Tungal>> +              }
->> +#else
->> +            return NULL;
->> +#endif
->> +    } else {
->> +            comm_buf =3D calloc(1, comm_buf_size);
->> +            if (!comm_buf)
->> +                    return NULL;
->> +    }
->> +    return comm_buf;
+>> +    if (ret =3D=3D EFI_NOT_FOUND)
+>> +            return EFI_SUCCESS;
+>> +    if (ret !=3D EFI_SUCCESS)
+>> +            return ret;
+>> +    efi_memcpy_runtime(var_property, &smm_property->property, sizeof(*v=
+ar_property));
+>> +
+>> +    return EFI_SUCCESS;
 >> +}
 >> +
->> +/**
->> +static __efi_runtime u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_=
-size,
->> +                                  efi_uintn_t func, efi_status_t *ret)
->>  {
->> -    const efi_guid_t mm_var_guid =3D EFI_MM_VARIABLE_GUID;
->> +    static const __efi_runtime_rodata efi_guid_t mm_var_guid =3D
->> +            EFI_MM_VARIABLE_GUID;
->>      struct efi_mm_communicate_header *mm_hdr;
->>      struct smm_variable_communicate_header *var_hdr;
->>      u8 *comm_buf;
->> @@ -555,16 +615,15 @@ static u8 *setup_mm_hdr(void **dptr, efi_uintn_t p=
-ayload_size,
->>              return NULL;
+>>  efi_status_t efi_get_variable_int(const u16 *variable_name,
+>>                                const efi_guid_t *vendor,
+>>                                u32 *attributes, efi_uintn_t *data_size,
+>> @@ -1001,7 +1076,7 @@ efi_status_t efi_set_variable_int(const u16 *varia=
+ble_name,
+>>              var_property.property |=3D VAR_CHECK_VARIABLE_PROPERTY_READ=
+_ONLY;
+>>              var_property.attributes =3D attributes;
+>>              var_property.minsize =3D 1;
+>> -            var_property.maxsize =3D var_acc->data_size;
+>> +            var_property.maxsize =3D data_size;
+>>              ret =3D set_property_int(variable_name, name_size, vendor, =
+&var_property);
 >>      }
 >>
->> -    comm_buf =3D calloc(1, MM_COMMUNICATE_HEADER_SIZE +
->> -                      MM_VARIABLE_COMMUNICATE_SIZE +
->> -                      payload_size);
->> +    comm_buf =3D get_comm_buf(payload_size);
->>      if (!comm_buf) {
->>              *ret =3D EFI_OUT_OF_RESOURCES;
->>              return NULL;
->>      }
->>
->>      mm_hdr =3D (struct efi_mm_communicate_header *)comm_buf;
->> -    guidcpy(&mm_hdr->header_guid, &mm_var_guid);
->> +    efi_memcpy_runtime(&mm_hdr->header_guid, &mm_var_guid,
->> +                       sizeof(mm_hdr->header_guid));
->>      mm_hdr->message_len =3D MM_VARIABLE_COMMUNICATE_SIZE + payload_size=
-;
->>
->>      var_hdr =3D (struct smm_variable_communicate_header *)mm_hdr->data;
->> @@ -1077,6 +1136,20 @@ void efi_variables_boot_exit_notify(void)
->>      ebs_called =3D true;
+>> @@ -1078,7 +1153,7 @@ efi_query_variable_info_runtime(u32 attributes, u6=
+4 *max_variable_storage_size,
 >>  }
 >>
->> +/**
->> + * ffa_shared_buf_notify_virtual_address_map() - SetVirtualAddressMap c=
-allback
->> + *
->> + * @event:  callback event
->> + * @context:        callback context
->> + */
->> +#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_R=
-T_MODE)
->> +static void EFIAPI __efi_runtime
->> +ffa_shared_buf_notify_virtual_address_map(struct efi_event *event, void=
- *context)
->> +{
->> +    efi_convert_pointer(0, (void **)&ffa_shared_buf);
->> +}
->> +#endif
->> +
 >>  /**
->>   * efi_init_variables() - initialize variable services
+>> - * efi_set_variable_runtime() - runtime implementation of SetVariable()
+>> + * efi_set_variable_int_runtime() - runtime implementation of SetVariab=
+le()
 >>   *
->> @@ -1085,6 +1158,9 @@ void efi_variables_boot_exit_notify(void)
->>  efi_status_t efi_init_variables(void)
+>>   * @variable_name:  name of the variable
+>>   * @guid:           vendor GUID
+>> @@ -1088,11 +1163,69 @@ efi_query_variable_info_runtime(u32 attributes, =
+u64 *max_variable_storage_size,
+>>   * Return:          status code
+>>   */
+>>  static efi_status_t __efi_runtime EFIAPI
+>> -efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
+>> -                     u32 attributes, efi_uintn_t data_size,
+>> -                     const void *data)
+>> +efi_set_variable_int_runtime(u16 *variable_name, const efi_guid_t *guid=
+,
+>> +                         u32 attributes, efi_uintn_t data_size,
+>> +                         const void *data)
 >>  {
->>      efi_status_t ret;
->> +#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_R=
-T_MODE)
->> +    struct efi_event *event;
->> +#endif
->>
->>      /* Create a cached copy of the variables that will be enabled on Ex=
-itBootServices() */
->>      ret =3D efi_var_mem_init();
->> @@ -1103,5 +1179,37 @@ efi_status_t efi_init_variables(void)
->>      if (ret !=3D EFI_SUCCESS)
->>              return ret;
->>
->> +#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_R=
-T_MODE)
->> +    if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
->> +            /*
->> +             * The FF-A shared buffer is accessed by EFI runtime servic=
-es, so
->> +             * keep the resident pointer convertible across
->> +             * SetVirtualAddressMap() and mark the region as runtime me=
-mory.
->> +             *
->> +             * CONFIG_FFA_SHARED_MM_BUF_ADDR is expected to be EFI-page=
- aligned.
->> +             */
->> +            BUILD_BUG_ON(CONFIG_FFA_SHARED_MM_BUF_ADDR & EFI_PAGE_MASK)=
-;
->> +            ffa_shared_buf =3D (void *)CONFIG_FFA_SHARED_MM_BUF_ADDR;
->> +            ret =3D efi_create_event(EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE,
->> +                                   TPL_CALLBACK,
->> +                                   ffa_shared_buf_notify_virtual_addres=
-s_map,
->> +                                   NULL, NULL, &event);
->> +            if (ret !=3D EFI_SUCCESS)
->> +                    return ret;
->> +            ret =3D efi_add_memory_map(CONFIG_FFA_SHARED_MM_BUF_ADDR,
->> +                                     CONFIG_FFA_SHARED_MM_BUF_SIZE,
->> +                                     EFI_RUNTIME_SERVICES_DATA);
->> +            if (ret !=3D EFI_SUCCESS) {
->> +                    efi_close_event(event);
->> +                    log_err("EFI: failed to add FF-A shared buffer to r=
-untime map (%lu)\n",
->> +                            ret);
->> +                    return ret;
->> +            }
->> +            log_info("EFI: FF-A shared buffer runtime map: addr=3D0x%lx=
- size=3D0x%lx\n",
->> +                     (ulong)CONFIG_FFA_SHARED_MM_BUF_ADDR,
->> +                     (ulong)CONFIG_FFA_SHARED_MM_BUF_SIZE);
->> +    }
->> +#endif
+>> -    return EFI_UNSUPPORTED;
+>> +    efi_status_t ret, mm_communicate_ret =3D EFI_SUCCESS;
+>> +    struct var_check_property var_property;
+>> +    struct smm_variable_access *var_acc;
+>> +    efi_uintn_t payload_size;
+>> +    efi_uintn_t name_size;
+>> +    u8 *comm_buf =3D NULL;
+>> +    bool ro;
 >> +
->>      return EFI_SUCCESS;
+>> +    if (!variable_name || variable_name[0] =3D=3D 0 || !guid)
+>> +            return EFI_INVALID_PARAMETER;
+>> +
+>> +    if (data_size > 0 && !data)
+>> +            return EFI_INVALID_PARAMETER;
+>> +
+>> +    /* Check payload size */
+>> +    name_size =3D u16_strsize(variable_name);
+>> +    payload_size =3D MM_VARIABLE_ACCESS_HEADER_SIZE + name_size + data_=
+size;
+>> +    if (payload_size > max_payload_size)
+>> +            return EFI_INVALID_PARAMETER;
+>> +
+>> +    ro =3D !!(attributes & EFI_VARIABLE_READ_ONLY);
+>> +    attributes &=3D EFI_VARIABLE_MASK;
+>> +
+>> +    ret =3D get_property_int_runtime(variable_name, name_size, guid,
+>> +                                   &var_property);
+>> +    if (ret !=3D EFI_SUCCESS)
+>> +            return ret;
+>> +
+>> +    if (var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY)
+>> +            return EFI_WRITE_PROTECTED;
+>> +
+>> +    comm_buf =3D setup_mm_hdr((void **)&var_acc, payload_size,
+>> +                            SMM_VARIABLE_FUNCTION_SET_VARIABLE, &ret);
+>> +    if (!comm_buf)
+>> +            return ret;
+>> +
+>> +    /* Fill in contents */
+>> +    efi_memcpy_runtime(&var_acc->guid, guid, sizeof(*guid));
+>> +    var_acc->data_size =3D data_size;
+>> +    var_acc->name_size =3D name_size;
+>> +    var_acc->attr =3D attributes;
+>> +    efi_memcpy_runtime(var_acc->name, variable_name, name_size);
+>> +    efi_memcpy_runtime((u8 *)var_acc->name + name_size, data, data_size=
+);
+>> +
+>> +    /* Communicate */
+>> +    ret =3D mm_communicate(comm_buf, payload_size);
+>> +    if (ret !=3D EFI_SUCCESS)
+>> +            mm_communicate_ret =3D ret;
+>> +
+>> +    if (ro && !(var_property.property & VAR_CHECK_VARIABLE_PROPERTY_REA=
+D_ONLY)) {
+>> +            var_property.revision =3D VAR_CHECK_VARIABLE_PROPERTY_REVIS=
+ION;
+>> +            var_property.property |=3D VAR_CHECK_VARIABLE_PROPERTY_READ=
+_ONLY;
+>> +            var_property.attributes =3D attributes;
+>> +            var_property.minsize =3D 1;
+>> +            var_property.maxsize =3D data_size;
+>> +            ret =3D set_property_int_runtime(variable_name, name_size, =
+guid, &var_property);
+>> +    }
+>> +
+>> +    return (mm_communicate_ret =3D=3D EFI_SUCCESS) ? ret : mm_communica=
+te_ret;
 >>  }
+>>
+>>  /**
+>> @@ -1129,7 +1262,7 @@ void efi_variables_boot_exit_notify(void)
+>>      efi_runtime_services.get_variable =3D efi_get_variable_runtime;
+>>      efi_runtime_services.get_next_variable_name =3D
+>>                      efi_get_next_variable_name_runtime;
+>
+>
+> All the get_variable*() calls used to point to the function from efi_var_=
+common.c.
+> By changing this you are breaking the runtime case for OP-TEE since now w=
+e will get
+> EFI_OUT_OF_RESOURCES.
+> There's no easy way to fix this at runtime. For OP-TEE the kernel might r=
+eplace this call
+> with an internal OP-TEE call if it's part of the firmware and announces i=
+t can provide
+> EFI runtime services. However, the default uuse case, which we don't supp=
+ort SetVariable
+> at runtime only needs to keep working.
+>
+> I'll post a script next week so you can replicate and test this in QEMU w=
+ith OP-TEE etc.
+>
+> Cheers
+> /Ilias
+>
+Hi Ilias,
+Can you please share the script, so that I can replicate and test this
+in QEMU with OP-TEE?
+
+Thanks
+Harsimran Singh Tungal
+>> -    efi_runtime_services.set_variable =3D efi_set_variable_runtime;
+>> +    efi_runtime_services.set_variable =3D efi_set_variable_int_runtime;
+>>      efi_update_table_header_crc32(&efi_runtime_services.hdr);
+>>
+>>      /* Record that ExitBootServices() has been called */
 >
 
 IMPORTANT NOTICE: The contents of this email and any attachments are confid=
