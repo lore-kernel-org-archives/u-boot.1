@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE927CA5FCE
-	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 08:01:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 706A3CA5FFC
+	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 08:01:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id ABC4640665;
-	Mon,  5 Oct 2026 08:01:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2EC6580CD3;
+	Mon,  5 Oct 2026 08:01:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xvF75I_fdlh8; Mon,  5 Oct 2026 08:01:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B1C1240687
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791187314;
-	b=W9cg326hPReU3P6qcZ2nt7Ulwkuvh8PRqrbRoZFLZ5OMZ/JvWNb8slcasOzCLwkQNheU
-	 ka/eNMhL/6e0o5mOjn0mTGXfTqUQIodh1sp7/SkR6PbtDrLKesia26QvzYaB/bx4h1c7L
-	 52nOrkYwAFicYzztij/YDX510x5dLO4evpOBOq0xzJRhHuJrlgrd1/QpmqHbVTq2Squ1p
-	 Zcy5mq5/MlAlZQmd/AYzKZwpfaunLrf72pBy+G4Up63C9MFH+6X9iuIK57Vybd+J31PjP
-	 ZrrgZj8vlYSDkW86M/BDC1ea+9yaaDYRle0++p6HqoLVkpLPmnTPJZFz1WkCa1v/NiQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Zu0im8gMKf8k; Mon,  5 Oct 2026 08:01:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 701DC80CF2
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791187316;
+	b=KUKSjfApG76h4BUgfQpqGvhk8RQAGD8hwLu4b6KuIa/tVNAq1UNqzcxMQM8iAKF6iP6s
+	 6nVi2paF7WlH9/82oB3c4r5CQsl9JJzZuwx9GAiqCNcQU5AfSvXtSkdnJBXGd2SKBYN93
+	 vgmmns/tUeQpt2yL2HF6Ca8CnSsANBpy1jmYbbltK7TJTXeZzY+5abZ31UUE8mJrjxThf
+	 P4qaETOcTY9DLXBSjONW9ppptMdKSNW1voT1NLx5wC0GdCVaU0k/GynVIOqc9A18SZ0Cl
+	 XEeJ92NrG9/DW/PfrKoyRrGZsSxyKkGKzxLl5en9R2DsME197c4KgqTu6eFZ3OG3ndw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791187314;
+	c=relaxed/relaxed; t=1791187316;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,110 +31,107 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=hoAR4URBdn4HdP25L+foMatEeHcpJgwH4+wRtZWaILE=;
-	b=rXrkdHHjArW3gIyyp+dh/XkrscHCyWeX/vVms/jXbqWs1xsuqoVSuHF3feQ9Aq2VIuKf
-	 buYzpAHb2mazoBBjKjXFonuRkp3S4XikUH60l7A2dC+zhrRHnOvImY6qSbueAQZUoyGUA
-	 f1ChwehC+bysa3A9XJkKqHkpYrhqX1mg0dBwFtTUZtX7tuK9GChYwIzll5SqlYixHt0qn
-	 M02dLmA3ZrAfipBy1aZ9Mk2T6aHkbryIFz4gE/Xpoxh2bV+C12uam5XayjxJk3XwmmK61
-	 sEe8sUdNzgDcD5Ga8nML/FIWydwQ3fcbWz4f3LbQK5sX2KZqJzcUdQx+9qulNWV7pBg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=mailbox.org;
-	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=dP2edr0z;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=HYeWDuwBrSar+fDX3esTm1BankZr9jzMBU9C8FT617s=;
+	b=cnSMdu+JFrr2sDy8EMHBIeFSF9DzWG1gbCQd2d56zIcmHGThKRiN71+YgRm43mMwfZYI
+	 ifQGEjhdNTI52oggt8/lGydi9NUU9jcjyhgJDXcwP7++111o6tDWkeBH1A0P3uP7LuxMS
+	 H4jgrQoz4vF6Puwvjaz+oTzsHCGL6Uomt7r2LP/L9zkgIxt3xOmaA88bG5tBJdurYzGS4
+	 W3wwnwhi+jCJt4gPAS5vJfrbW7SxG9sW70nrifXJNYWlUwYUh3bPW3qBXHWmKOwamnK2k
+	 /bvMClczduBGjX9dBdr0TLwPTrgdTPbyipZLDJI5zCmfSVfo/OVFphI0UJNCUsQtX5g==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791187314;
-	bh=hoAR4URBdn4HdP25L+foMatEeHcpJgwH4+wRtZWaILE=;
+	d=lists.u-boot-project.org; s=default; t=1791187316;
+	bh=HYeWDuwBrSar+fDX3esTm1BankZr9jzMBU9C8FT617s=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=u4oxWDwCvDneMUffVI4bvbkX5r+PywhoAJ2OqVqsr31iSbIHBH6vy34Zk6IjJdaPD
-	 drogOxL3oNgJwope3YoR1J9sxdqKtduGZJd91O3qaQlJ4OgynR3kPEYdSJ2Snxq1mV
-	 B5AO4ClJcFbp1p5JrTzF8/mX5i5gveT/u28U2dUOhC8Ea4b3tCT9Z1ET19lJS3GMCu
-	 0qvX+CH/O3lIJ5it7ZXXIvxZvoMTfafYyW45YgrYeTE4vFrsue/73aFzpBHdcbAjlT
-	 nI+pW7CPoA5a+z6qMNdp+d3yMh2dGk3+uV086Hg1yvhY7F3O25EL3xmPQSi3UtaAQQ
-	 vPOsW+kmCUMow==
+	b=NHguCoebgMYQu8i3sG1Mfw00uP+Wxm9vzvtxQ/vy1HsvBuo/NrdNMUAHG9CErLPAB
+	 nkpN8jx5eC0nZnY+Yla4dG0cbtQ0Cg4NIMQuOUIYiiK7yj9vtjTOnd1yNEPK/z/ZNM
+	 uX2BB/dm6xNW+jLg2KLJUPFLieHyUwv5FbKV8U9gJoMlsxa82dl8Fm/t47oNqrw3hx
+	 n4jHRYXjGZ2HpjlXYGcvYBFhmLMjFI4vjI8rtOM9HVjsLAd2ihZX/waKLSRQkSIYFh
+	 GPYbavs+nduqYKUoBl2Qk1q1FymFNZBvTyJTLiHLAL9LQqH/FZc5XSPn5JKwYL1aWN
+	 Sxc5RUCNMmIWw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B1C1240687;
-	Mon,  5 Oct 2026 08:01:53 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 5CDDF34D
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 07:58:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 701DC80CF2;
+	Mon,  5 Oct 2026 08:01:56 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 09AE975
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 07:58:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4EFCA4060C
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 07:58:26 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id E38B6400AE
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 07:58:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oacjvNKc2c8O for <u-boot@lists.u-boot-project.org>;
- Mon,  5 Oct 2026 07:58:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 7C1894060A
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.161
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791187105;
- b=DH0ZqMFc2U1PebRmVU6gnKO07kQ8ffD+MD6Pvc6HKc0ob+FRRoYLGQ51CIukav2bV+N9
- vCZukA95P1UR7Vvzu+W3xUnpSitRi/jOQWLZ5U4sViLvnfGZYlMxqvzKXoBSmGsCnVhtw
- 3Zne4SFn7hE4cEhuj7gdHbrMDl+nfr4DUvtWcIHMBS4nmK+98kZLsuVM5npjwKvx2rvJ3
- t82Yj3S89xPLxaxkXZH73djaeJcHUHQWJ26J3rgBg1ijSsq3CT3hbUW6s69Ytfsj6Le5c
- 58XX34QNOP0IYOPhXhzr3aNJqcmh/+0dfB+/tzhruJrd/3SkDzWd7E/UMr7GBBEWO4g==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yotRGSfPcy69 for <u-boot@lists.u-boot-project.org>;
+ Mon,  5 Oct 2026 07:58:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org DD1D1400AA
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=80.241.56.161
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791187107;
+ b=dR8QvRcjl7zK3D2nmycQYksI+euANKp6LqKM8bq77CrSmQkgcMnhKKzcatf6bLM64aYT
+ sDfZrQ/3a0LaS9/TUWZwKKVq+W4ZenxRQpN35vSYkvwVEFkhi7qGfKZWLC3h91CzXVM6j
+ kaZ5iSsuGi+1sbF/9p1gzUZDyOCNvI50txT+uhtHruq4UTO0iHopK4Eq795xt+Lll/O8T
+ ir2yQdn7qOeTJ5C8rJVqUowFACgC8RteRhovPgzAPiUb6tJey0chBNa3Eoej9YXh7sTm2
+ 15YCIsHPA68sqt2iBF7UUmYfI4+AI3vB93GWuCRSfvso3Hq4CFGn7WTfJZbXfI78xmQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791187105;
+ c=relaxed/relaxed; t=1791187107;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:In-Reply-To:References:MIME-Version:Content-Type:
  Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID;
- bh=hoAR4URBdn4HdP25L+foMatEeHcpJgwH4+wRtZWaILE=;
- b=o2FBlvEv+PcfCDFk2fGNvOjJVJbiemz26LtGgM0tLoFmadpmt6Nx879/3rO2NJ3x79vW
- EBy8jsFurLSi+q3O27kLZ4qo72PB/UT6O4cOwDWV/veKiiIoxnMkAJz5qN0H9lWRi97aK
- 10XJ4TSVwrGyZUDrKuoDgSH4JMN2DH4SJfJCfzUyR3JWF+hKjh0BIFg/4HKCAzS5lci9r
- Ga1WDWn1ylwicIJ8cgyJl0jlhaSAV/eDK+slmxGyyHHxpZLxBkRfZJTwXKyQCJ4ki1qts
- 1ySVPGOuJRsqj03ajYsxxf7JgXR1d5VZ0FZcpT9B3lrvyoVxxsILUMTnoQvNeUmHnGQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ bh=HYeWDuwBrSar+fDX3esTm1BankZr9jzMBU9C8FT617s=;
+ b=ANPCq/bdxijp4bTbyiaiOrpezpoidcO+C6vQD81CDO6vvWXdc3yD+T1MsQx3FTyqKTSu
+ hcg4GRKEnIiMzBNw1WdkZWyb8awA5s1a8eq6F9qfzByMsa+6qyf9Pm3qWqez9kCPTb/4Z
+ xI8LdPEXRjkbQJcWDhpaGIXApAxqWLhoitF2VmviyltdhYAZdSeP5XmOV0JNLjBE08NTu
+ rEizWp8k/0dy6XYDMAw37/8mnfaYbJ6Ue84bRlTbJE7ixe+ztxGxCvqT4uSBHKCyVY5ry
+ 3mm/TRbPUeXZ99dGzWk0bcjZy6qQFa0Znf2AbEicWKxk7A+6n8gyavN4V1kDuRQpZng==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=mailbox.org; 
  dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=dP2edr0z; 
+ header.s=mail20150812 header.b=dHi6LccU; 
  arc=none smtp.remote-ip=80.241.56.161
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.161;
  helo=mout-p-103.mailbox.org; envelope-from=stefan.roese@mailbox.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=dP2edr0z
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=dHi6LccU
 Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7C1894060A
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 07:58:25 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DD1D1400AA
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 07:58:26 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4hysFn5dB0zKmYj;
- Mon, 05 Oct 2026 09:58:21 +0200 (CEST)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4hysFq1jM4zKn70;
+ Mon, 05 Oct 2026 09:58:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1791187101;
+ s=mail20150812; t=1791187103;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hoAR4URBdn4HdP25L+foMatEeHcpJgwH4+wRtZWaILE=;
- b=dP2edr0zyWKkQ6Kh5oBgsHDsi99YdmYXSIJgJiUauRVAqMct2/YOVcYbqnGxI/lYotzGbm
- bcNzN7k3Zlwlasf4elhm9MK0HPpKfIn2a5AIKIFooS+H/09Sa7ad3LwBKrhnRfwVZ/3GMO
- xRQD/W9U6Ck+eZGWWFMczaSMB7kZcxJx9msrf5Ylx3K7VcGnXV6bqyG4vJqQkjzCLVJIj7
- KvD2F3Hb23TP6yKUdzVeuET/oVMGkV52JN0DkFMHWUmFlmQGSpi8lglz16CrGOQYadweMo
- 477jqmXZvyunU3QHXg031lJO9cwiR5c6+t1QDxSm66bdykJ84qBJkcMmBj1sWw==
+ bh=HYeWDuwBrSar+fDX3esTm1BankZr9jzMBU9C8FT617s=;
+ b=dHi6LccUZ790lZ73TMmnqW1l/PATdf0cP95kWGK+l0fyKydN06iHczEx//GZsa+I8HyCBS
+ dju16ymQdckxH4RilYNs8ghT35eo7VS+laZYb+/5gsCoJWQO5N7x/4D6X+NxSfkVosjEOm
+ 9leKo2zdK6Bq7ESBciDoHuEhkQv5NBd0K5Bl86aBZMpu5iU9fTFnKZmaGRrzTyLZex22ff
+ B/oCu8JjCb7oT4aLI4fCoGg/KPbYZPn2xEbRYxUWcgX6NG4az9oAaYR4PLwmIYglbzxMIH
+ 5x6pHXS4He84MAmMllabgEArnj49V4P11T3BAlXHbaykCQmUvVw7L2zMi51IoQ==
 From: Stefan Roese <stefan.roese@mailbox.org>
-To: Igor Velkov <iav@iav.lv>
-Cc: u-boot@lists.u-boot-project.org, Dennis Gilmore <dgilmore@redhat.com>,
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: u-boot@lists.u-boot-project.org, Jason Cooper <u-boot@lakedaemon.net>,
  Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] arm: mvebu: helios4_defconfig: enable device tree overlays
-Date: Mon,  5 Oct 2026 09:58:10 +0200
-Message-ID: <20261005075813.601288-6-stefan.roese@mailbox.org>
-In-Reply-To: <20261002-helios4-overlays-v1-1-2e03eb306e38@iav.lv>
-References: <20261002-helios4-overlays-v1-1-2e03eb306e38@iav.lv>
+Subject: Re: [PATCH v2] MAINTAINERS: Add missing file entries for some boards
+Date: Mon,  5 Oct 2026 09:58:11 +0200
+Message-ID: <20261005075813.601288-7-stefan.roese@mailbox.org>
+In-Reply-To: <20261002-maintainers_file-v2-1-74a0f9963b19@gmail.com>
+References: <20261002-maintainers_file-v2-1-74a0f9963b19@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: deesroqtwf8chsrz4botc3hwzrtcwwjo
-X-MBO-RS-ID: cf8d34d5f97f166baf5
+X-MBO-RS-META: xkn56ikkn6ur51z6yi87qxupsk1f7mmo
+X-MBO-RS-ID: f98675e5c8e4659fb30
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,11 +145,10 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 02.10.26 21:49, Igor Velkov wrote:
-> Enable OF_LIBFDT_OVERLAY so that "fdt apply" is available and boot
-> scripts can apply device tree overlays on Helios4.
+On 03.10.26 06:21, Tony Dinh wrote:
+> Add missing *-u-boot.dtsi to MAINTAINERS file list.
 >
-> Signed-off-by: Igor Velkov <iav@iav.lv>
+> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 
 Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
 
