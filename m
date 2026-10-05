@@ -4,122 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7850CA5FCE
-	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 11:20:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 530AECA5FF0
+	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 11:20:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1DCCE406B9;
-	Mon,  5 Oct 2026 11:20:42 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9C702406CD;
+	Mon,  5 Oct 2026 11:20:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LnpFysao0iA3; Mon,  5 Oct 2026 11:20:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 940474061F
+ id F829OsWFwVlG; Mon,  5 Oct 2026 11:20:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 9E8AA406BC
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791199239;
-	b=B4gX8QXgGMtvsCj1B8kPi+IR9rFhVyZLaNLWNUIysmft0EDLyZAjp7PY2Od2aLfoFG01
-	 tHhkGjJynmx7/DBCqR3AZLN+CkmaM470MRvsA1gjUYYlRBNJbopf/KXxovoYspLyJldaS
-	 NL/5XwJyxa6S+WZIMoVYtLPezd+kaNTH9/7w2+MGIGJvwkgIL3xfWtU0oIpwdPSAw4j5d
-	 uy17hco3zSslc89cvN7lz5ZBcNonLJNp6rkmye8NIxMHvbNsYA+kFvnppZy3vU4qIn3/t
-	 RQLb5BI/hPUn4rHyi2HG1U5jPq5ExbMnuVsmUPyBCwfv8JtKl4SZ1+THwXzo8dJtPCQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791199243;
+	b=BErwQT1k9LJ2yRb6khDB6V/CEyOSXc7OtS+RzJQOrehIT6z7nTyHOsGdAoEfApRmccyY
+	 TG5uk6ccPzmU5f63VB16oWrIBJnK9n5HpbnPqX9alIhf15wuESCki1r5m/eu8wY3gVaKv
+	 mfh0m59FL0PEth0glayPDdQl1pkCAntPcrQDtnEprYxepdPFfrUCZSIMeuyAcNSa/kjMr
+	 KfxMSGUTcxHfXnXz8wSvYSYyMPTOnle/ZcUl1h/I6vODn6EVorBVxTBm0j9uKy4hNYKo2
+	 K7Du7ZRP8V0wbjcS66vKBU6s/pKctJ1Q/JZBzeDHvlqIaWRsOzogKpJiOpuDhDBA4dA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791199239;
+	c=relaxed/relaxed; t=1791199243;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
 	 References:Content-Type:MIME-Version:Content-Transfer-Encoding:
-	 X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:X-Mailman-Version:Precedence:
+	 X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=8wWgf5JUc8qhBN7ZPMcwxNEa3weS5ZDlc1ClvjObLF4=;
-	b=R1z2xhPj0kHMsqsAESyy+TAMT/zoFdaZZJUW5tUnzPAJnx9HypvGxIIXz3eKyopoq9Od
-	 4i4L6NhoiWessUUbmrDeTG3irGWQpYC6uuiCWiITHRsB96iNKj+LosVdOz5ZANL7yjPeJ
-	 KaP1Dz97fnZ5YxrwnyXpytCayvPKvxOaNMLv2ywb2+G/y7Uk6IXk/qyzz0EjI+gAf18nY
-	 0U9dfhbwo2fsWiniT0f/fq4HxKZ8t8Glh2OGvW+2Zg1Fq4lr1r1If6gl8+HPaf4ZydRRH
-	 wS/H3SwaL4JVQjXUTfqqnCiQTx5JVjCMaoPy+AX3mlc6cPzurcWVtYGrUyyzRkFQB+A==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=kO8DiHweZiiBFyhmqmLhl8EyUnJzw5GPbYDn+wLp9YU=;
+	b=InsR0MzdvKvser7Po3A+YNNR3AP1Arcm2tksLOWy+8w/fZta5//vMivJeVAl/MwpJQmD
+	 tFNZi/v5ZeT2KSOAb/EW/yLi828xpmYwWWGoY9RT8U9bdSonQDW2JxY5fBMoqzwD67U7R
+	 Rl0NzR7KgWLOF4pdNsFEa3iQdijI4yw8wR4kx27blCCjtXook+Iv2X99vmfMMmZ1JutIL
+	 9pCZeLlQDwtxaLvrFK1PyXWh94EAILkpU7v9HJqAGqXMzrb1IZzYjZ98fkUUi3MItvN/l
+	 4i0GbsWs+XwGXuuidERm2UIIt0pV0tWLPdlL+7mmvROb5LM1ynXs7M4FVtortaAq8DA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=mailbox.org;
+	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=Z74cN1Eh;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791199239;
-	bh=8wWgf5JUc8qhBN7ZPMcwxNEa3weS5ZDlc1ClvjObLF4=;
+	d=lists.u-boot-project.org; s=default; t=1791199243;
+	bh=kO8DiHweZiiBFyhmqmLhl8EyUnJzw5GPbYDn+wLp9YU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ITZDewyvJFfmTbyik0YIfQj0WQ4OUFJBgmgdi/W9vYC++P2mCl3quj0l9F04Q+6Ns
-	 BuV9tjS5arZV71abZYjYCdrhlucwX8IPQHQVpi5LdXueo/kwBHeEzcCPiC1EDDJkmt
-	 BYeoBwYW52CaxEjw6mBhBJQWFx2BfdQgaj+AaexyJWXNsthVHPPWbXegy8gkX1u+bU
-	 GW9kXO4ORPynFyAlg5B2urz2pxh5x/MGwIXjIo6QtMpY5XMmD+fg3hgcc48EFCNipt
-	 AfuGmZTHM8canZL0M3ca/33LoHLZKUtgRTQNROM5CsABZTUXmWUerHtHAJYR9E7j5y
-	 EYwEaD6hUn5bQ==
+	b=A3f27+Gb/+DBtutsn9wve3En7vMGo+9AQ90cT4KKFujQMJ5wgnKCOKUdE20tAd/6S
+	 0DMSUNT1debmwUZKuBfIrAKSbYWqkBIYhmoi+x4JJCkG9Dru/02IIsNB+kgJ2tL1oM
+	 tlHoP+WNYIu/71luOjuBDj99/mryKgVki58+fk4sOWk/LXH9VM2SCfJC2UBDGf55Op
+	 vRV2XL/rgqmLk9ghbDAVeUq6enmhyQBMeX8wENySNIMNPcJe1kCxPuvBGqGKgKRQ5P
+	 jhZ1mDeTtNRevc1otLauV10EJxlbBU91DVk+6GVETnXGykb50u92ZV5CGwD3h8Xaic
+	 IvUbll0/AZNGw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 940474061F;
-	Mon,  5 Oct 2026 11:20:39 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9C098282
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 11:13:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9E8AA406BC;
+	Mon,  5 Oct 2026 11:20:42 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id ACEF82E0
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 11:13:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8DC80400AA
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 11:13:29 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9E825405AB
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 11:13:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZK__bDE172di for <u-boot@lists.u-boot-project.org>;
- Mon,  5 Oct 2026 11:13:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 4904B4007E
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8pCHJqzuzdGS for <u-boot@lists.u-boot-project.org>;
+ Mon,  5 Oct 2026 11:13:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 9318A40589
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip="2001:67c:2050:0:465::201"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791198808;
- b=G20APNbcfy7yLBIhzxcYZGk/ctGHSLfLWQjksAiMeitZeSj7hVxK7Me1YMBXIUrKgJYu
- TAnfM47NFERNjgIQ+sC23ZoVNXuZN0V1rFj1gFJbjlQVY9ikjsUGE7C9tezsFtCbqFlER
- ENqG/tlsineWNGiPq/rDYLpVwMJE8oUo32PXlv+9lAdx1ttNai4xRnx2bDnvoTGP9PdYN
- ku3MzSUnoUgLbiDEkIMtD4UJE0OHZqF7azYcE3582CwlBsUe1nshSXsx61Xmpt3j7w1I1
- tViAC5TfV6g83H8Nx6p/LLG1KJJwY3UooeQipJojSSyVFUEz4ihdepOijRQS3FuUQnA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791198810;
+ b=Ueut8RkB67lbNaug6R1VMt1tJlSKdG3FWkTNDYsNZ/ppHv44Lrdxtswsf7aeSRQbrvCz
+ gnKnl+p+MdSXGCYz+FEwV40lERlnR9KV7+ZYn938UNILL8IdeHtNFl7XAKOBXX8a11wcG
+ P7uBijgCL/opSJOp99qF2WX0t8c7eLbBal7GtWcvQHw5EgjyFsoqUXicfuHcV89rXafVu
+ Nt7JjNZJeC8PDVDELuDmyDxYT7ogRP+kS0iLdGTGMj1AAvYSACsREINO4lLA7tw2zIPVK
+ H3YunhpvQWIE2cIkWk5HD2d4xiFMiC3RciKQ3rIwWwUclUzMwmtZltumZlFaAVMRbMg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791198808;
+ c=relaxed/relaxed; t=1791198810;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:In-Reply-To:References:Content-Type:MIME-Version:
- Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META;
- bh=8wWgf5JUc8qhBN7ZPMcwxNEa3weS5ZDlc1ClvjObLF4=;
- b=Am3EnDo14S1/psROGZTNVx0aeLpHYZ000HqNiMxFKgFe/fntqVwzNMqJzMZxK7iY/s2j
- D8yjIpKz191q66yOm8yePFp9NfSj2/YZIjG6snkjQAJVEaftragbmMBu7wc2F6upxFYXR
- on2Xj3YWVNi+JRKG/sMZF9mDFQ9NL3lXmHbKeZFBiTliL8yXF5NboL8asmQqn+iu8bxye
- DQACaD50zhyuCNAqA8jfRBK3CYyxZFzVjLtz9OJ6h4hMpdyoOtoqdkfHV80zAghtWJuRl
- sItOmfhQQQRTCCLO2Y7pltX+LnjqBBKhxt2FyY/FfPZYDwAQqf+sIcsMAxxeJk43apA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID;
+ bh=kO8DiHweZiiBFyhmqmLhl8EyUnJzw5GPbYDn+wLp9YU=;
+ b=PYqsEvo8qLKJgWkhhSxZGYgAuTH96y9o+Hud50UC3Hnsg2oCq75AvU5avQ+1TxIfNE13
+ jfGQlphNMI+S49rHJiPMzBnWEjYW7auqwiC9a1cSowsQY3xdsMra+u5en7vaZ3bzT1eoz
+ 4dJExZpI4QIvQNnaKNGuLeYJ8kqDtp+jKes2GLspxapyXLnClul4ft4uw9l3N6ViM58kN
+ ir3utHuutfRv1ASnhnylegxnoDqQfulJYLc5+9hDsLNzNnup73L/WsUDsqmFdeHZy97p+
+ o542Bsh5giLcDPWyKnQj04kPFFidlacH/vUIrCcVQAnTv/EUykKxxXjt5MFqpBlmz3A==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
  dmarc=pass header.from=mailbox.org; 
  dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=Vu3Vhqq1; 
+ header.s=mail20150812 header.b=Z74cN1Eh; 
  arc=none smtp.remote-ip="2001:67c:2050:0:465::201"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2001:67c:2050:0:465::201; helo=mout-p-201.mailbox.org;
  envelope-from=stefan.roese@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=Vu3Vhqq1
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=Z74cN1Eh
 Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
  [IPv6:2001:67c:2050:0:465::201])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4904B4007E
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 11:13:27 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9318A40589
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 11:13:29 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4hyxZr0b5lzMlJQ;
- Mon, 05 Oct 2026 13:13:24 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4hyxZt33xmzMlVR;
+ Mon, 05 Oct 2026 13:13:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1791198804;
+ s=mail20150812; t=1791198806;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=8wWgf5JUc8qhBN7ZPMcwxNEa3weS5ZDlc1ClvjObLF4=;
- b=Vu3Vhqq1qn1Gc8t9i3QluCjXbgkNn6yr+Rj0TdbpjzhjwRBA2GOO+viL2q35OYt8dHQ+CI
- tqy421elECWXdzIslwOCutqFbWplPIe3rjaQIOnQ9BBKlRayAxXk/2z5umSeQwXMC5yzTz
- XP2VoJWKr12w+agXxDEAUeW+QM2W6d19A6u0ZWHVJOKh4Z0tjKTMFMEyfqcSWU+Ue44CCE
- EMKeYSQnEWRen4c/tZvOvGDnATX2S0ZmwFJON4V62KumnH0Ng1gtz8yc0aadehZlmTrmAw
- omu593k3tsULl/m/IfT5FUoOWEOg5ndkgs+iOWfyfhW4yXd6OOW42pfa8WVGkA==
+ bh=kO8DiHweZiiBFyhmqmLhl8EyUnJzw5GPbYDn+wLp9YU=;
+ b=Z74cN1EhAQJr7aii3vbIwfwNKuVX1nTRdbFu8BGkRJEqMPYrWKf6cKgACqkV5dhHfZUkmC
+ pjbh8Nbml8EE76b23ZVSf58E49cq7rbyVvjY/7C0iIE1XK/+EZnEfjW8TkGDAxkydn+Kbs
+ zEU8jdovY2W045n4599wOXex8pWCa394TOz6ambC23ibb7Lnx/Z214yj4JRXxGjzSk9Jmi
+ 42+Bzg9ubdpCdOasPS3drxnSjwJlUDBLxvRNkPd0S8Wt47Xoko6DqWagZoU5wFc1dPZFya
+ SOEO1he64DGrasoDu+jOHiysmfqHe0MZA++SsRUejKmn7vlzNDOwY+PU6hqghA==
 From: Stefan Roese <stefan.roese@mailbox.org>
 To: Juuso Rinta <juuso.rinta@nokia.com>,
 	u-boot@lists.u-boot-project.org
@@ -127,17 +130,17 @@ Cc: Tom Rini <trini@konsulko.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
  Antonio Borneo <antonio.borneo@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
  Simon Glass <sjg@chromium.org>, Aaro Koskinen <aaro.koskinen@nokia.com>
-Subject: Re: [PATCH v3 4/6] watchdog: octeontx_wdt: set max_timeout_ms in probe
-Date: Mon,  5 Oct 2026 13:11:55 +0200
-Message-ID: <20261005111314.719129-4-stefan.roese@mailbox.org>
-In-Reply-To: <20260818-rinta-watchdog-gettime-v3-4-423f5caf526d@nokia.com>
+Subject: Re: [PATCH v3 5/6] watchdog: sandbox_wdt: set max_timeout_ms in probe
+Date: Mon,  5 Oct 2026 13:11:56 +0200
+Message-ID: <20261005111314.719129-5-stefan.roese@mailbox.org>
+In-Reply-To: <20260818-rinta-watchdog-gettime-v3-5-423f5caf526d@nokia.com>
 References: <20260818-rinta-watchdog-gettime-v3-0-423f5caf526d@nokia.com>
- <20260818-rinta-watchdog-gettime-v3-4-423f5caf526d@nokia.com>
+ <20260818-rinta-watchdog-gettime-v3-5-423f5caf526d@nokia.com>
 Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 7763ae7ee63eabaffa6
-X-MBO-RS-META: 74kepzgpsmz98dunzk1w6mwbg3ftkabz
+X-MBO-RS-META: qm6znpnicjmtg3k9uo84sji99rx95kzk
+X-MBO-RS-ID: 9cea5f8339fa0ec543d
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -153,15 +156,12 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 On 8/18/26 10:43, Juuso Rinta wrote:
 
-> Report the hardware-limited maximum timeout value to the wdt
-> uclass by setting max_timeout_ms in the per-device uclass-plat
-> data during octeontx_wdt_probe().
+> Add a SANDBOX_WDT_MAX_TIMEOUT_MS define to sandbox asm/state.h
+> to emulate a hardware-limited maximum timeout.
 >
-> The timeout is programmed via the 16-bit WDOG_LEN field in
-> configured steps, so the largest representable timeout is
-> (0xffff << 8) steps. This is then converted to milliseconds
-> via the timershift and clock rate, and set only when the rate
-> is valid and non-zero.
+> Report the maximum timeout value to the wdt uclass by setting
+> max_timeout_ms in the per-device uclass-plat data during
+> sandbox_wdt_probe().
 >
 > Signed-off-by: Juuso Rinta <juuso.rinta@nokia.com>
 
