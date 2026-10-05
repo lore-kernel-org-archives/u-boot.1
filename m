@@ -4,187 +4,174 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEEE8CA5FF5
-	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 21:04:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 390CCCA5FF0
+	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 21:04:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A723A4065B;
-	Mon,  5 Oct 2026 21:04:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E906C40680;
+	Mon,  5 Oct 2026 21:04:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1Hs3EQkVaNs8; Mon,  5 Oct 2026 21:04:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 0655F403FF
+ id YVrrhZ1iKnun; Mon,  5 Oct 2026 21:04:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 3B12C4064F
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791234274;
-	b=ewJc3/2Dcxq1h73WSmHScwtd1i1pe7n6P2+SUz3G1a8bZ9ujXuMZDS93AazxOTuGBlMP
-	 lph2EqvKlxtMfff6u7gXUcgQ44jkZEAnM49uMGPtq282aGIhtg3eqglfwhXOUykTm/Lto
-	 caVQd7bgsP4+NkjMCz9FWN+oNarC6daVvznG5x7VHepJBA59LnH58Gxv6RWjsvBhAm5sj
-	 QR2h/4xIVKGaCcTw7vlMntAzRM4ysRLtMxVzxvIvRjmapNI+1Y3mj+f/yGFdW9IW+4wmU
-	 LT/g4A7av5iIYPydM4EK/rUQkNgc4HvdkrxAQMYk/C991PvHzcVnQwyYBasZzpouHRA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791234288;
+	b=TKclPY2dIcCjsFN+umyw1i8P38mfVD2hMbjrOzKLwPxZaygE0C4SzCjFGH5kLeXnmDqJ
+	 r/1i1twyLtS9Db9kuembQHh+yuGyixVW4wsScFL7rGGVQyqKt5mjA7Lxh42V1dGjaoWIX
+	 nMGMVhZB0BbAXX74mor5Mw+w5RKt5WC86dHYvuqRpFPkj/zOqIwijKX5d3WN9mPnXuLKX
+	 e/wXu2uokUftpL01aikqeXQo6bTZkK8yd8g7/kKGe/uLzSrBvTvX6Fk8cYtS9DI/9ex3l
+	 el/da7EDPpBFqPG1HSGa1Th1hakVdSNBvTA+y1JsF80ZgqLe+woZfFqzts1pSJteoaw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791234274;
+	c=relaxed/relaxed; t=1791234288;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=ryg+J0QMyo9G99PxxCQmqJKg+CUiw0O4deDxTWuEtmc=;
-	b=pf8mS0Q9UOr1TlpQoAWAUOXUULYGaD5t2GfLNpayw4D4QQWSLofyhScumZ1FzSOyIMQe
-	 t6egu+cIpWdj0bG5ahxuv5n7JD6GLM0DXQcPFQXR8bgZCRAIkLGWtTu6lAm7i7PQ6zH6W
-	 X0faIa/7Y8wV7edHPhiCH/FpsqTkbH0KGjnKFIYqE3EAZjXDC75iCVmxYS/9031E1jAE4
-	 ftJgRlJVwoMavQL8qy18tG3Ty+TwaFlwdOxRUdfoyilDfx5vcy7nPasrkjC+GtPTiVP5S
-	 hXl3S2ybQPi72UrY9TTKkjJTxxkPO8DggGcQvgAaVqTEB1QYU+4Fre66tPQ10LQ0qig==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=ATUexWf+aDBG+fev2DU2cLnTP9wz99omzHwNNG2SGBk=;
+	b=eVISx71JXuuOQRKeclwWr21qxllucsKB8H6uC2bFKffBNOIZKWwzi8fU8hfL/flYGfwk
+	 c2/PiFhzJWyyUjWT49rkzrIsEETeMWAdFmxbldZXXJ35BJsMSDFU6n0J34dkhHi8jJT7j
+	 8fiMJa+Fa8ZM6wccO11CsdsDFTicyvBzNpKfjmYWV2kaTKsyxTf6XB3/wIIyluHYemBU4
+	 UKncLwklmIEvybfbiDLZlE6dZM18QwkMFuH61g7O5aFRUX7MFZmYh/IhkkFhxo8517rW4
+	 zfeqQtFm5UapwC/K7mIFWX5gNsFJBlPbqwxs1JjiAxQKBMCqkcwFJqKt8/O6DUijl6A==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=konsulko.com;
+	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=PMoBiCA3;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791234274;
-	bh=ryg+J0QMyo9G99PxxCQmqJKg+CUiw0O4deDxTWuEtmc=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=R5yHp7ecNN63cTpxOeZQ4SmMvwNF2eelD1iRCL9Pn7n6XfEhWfjHsmJa4AUSmV0FL
-	 zILTtQaM1w7LvtvIIKc0b1peAYjnivkhKWKrWU7hzVu0/L+uSdV4wYb26RNGMCM0Cf
-	 PXHYejDJBVWGCSQXTuoXTdwADrCuXcoK+2nTsly/CFzEdhvrP+b4bNbC995F58QYwB
-	 21CI8IxK7wnCtuT/UTmvFAPcw4YCsNHKZZkeOTfeeeiRuBcRlhrCM2f6Foxn8zfwFu
-	 CIQxpgfe3+b+aJLL7caN68Rs82lSo//Xn2YpYhhoTTbCoK5gvFjGqDMp0NHzcXl4sE
-	 9ucyuXusIEa/A==
+	d=lists.u-boot-project.org; s=default; t=1791234288;
+	bh=ATUexWf+aDBG+fev2DU2cLnTP9wz99omzHwNNG2SGBk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=QufLAmM1j84tZrC7f7XFJAhALEGzhGJwfeYc+zyk9bZYWOHG2J0Ktz74PgJ3bWtPy
+	 kPCCND+dphm6XVn8qjg4NBzpdGVhE/PXFCxtc6/D1850Y0JiZ6ciYiIRTp/5KMs1W5
+	 q2HKT38WAJl3ISbqe8AlOvwSjzpaaGFCm9C6dzu6uj2En0HNK1/0RfQ94REcu/HyG8
+	 oePHpOUjbBsas1Bn8Vf7ly0MpEZcczY6386/v7Wg2G8GoiP2WoTr65jKMHwAXbZ8Sy
+	 Zai5ytVkPq5qwoYVJ1jbMrqC7qK9OF1hdbBohbRXJ1gMxJAj9+Z0L2rMwhVomY+5RT
+	 GfnzqSfZIOEFQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0655F403FF;
-	Mon,  5 Oct 2026 21:04:34 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id ECC0F317
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 20:51:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3B12C4064F;
+	Mon,  5 Oct 2026 21:04:48 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4755922B
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 20:59:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D2A464008E
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 20:51:19 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2CD9D4062B
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 20:59:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bv51DRX8zpF4 for <u-boot@lists.u-boot-project.org>;
- Mon,  5 Oct 2026 20:51:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 9576B40042
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:31::f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791233478;
- b=S0Bq/3XlBslSJWS9ljCyFLQbp8oOc+rfCCaO0Bhng0GO/VaKgmHSc751++tksCOGbOC7
- SQov0E33CE3z+aUDH9AmrmZ49Y3EfJo6vZDAnne2NAV1VcrsLf0r9OnXqjtgAPS55lfWC
- +zjgTEUnunYauRlT1xISwTojwXb71x44Uth1aThS2c9DGqdBkeoU2U3GiAbt1s2ydi5zB
- NCczG26rDMgOCSi8MRSFobxFvFCUXEZGVGWQngjg500edp/d9rmYlctrIqM5DYajTiM/R
- vFlmC9OzseI5gA3gK0i+cKkA6EAT0dSIgaPJoel+R7q6fHY9wUExpP0CkwCV8TKGWWQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XrlaKoeIqSqd for <u-boot@lists.u-boot-project.org>;
+ Mon,  5 Oct 2026 20:59:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 7D6094059E
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::32a"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791233969;
+ b=Zp1BTZ07zMXEKIHQK3bLt2q46Nf545sqvr8Jf/sCB5qTOGd8aH6Mxda8j4u7HbmFHdkA
+ USFtqp9LBe46FW/OuY08YHxMVXm98hVxIir67t4pvx8JVCOCus1Sxo/K0OAdUa5li2igq
+ zOOwSS1EQf0ShVzsOBl44ZuOeTx8mCMBoQslYnhBFwS4Hk3kBM59mPBQY5xdh3Cg9IAUi
+ Vy98gVwtod43ehxluAEmULNF+CNjau3w4+gAfg4U50JokhEmc7PtmKSeyNdHrGkU+udem
+ AOKE4VwM5MH/skfpdPv6QDTeetrH5Hx07Bx5Fey8Ax2iUy99zadSHwy2xADffTZLKuA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791233478;
+ c=relaxed/relaxed; t=1791233969;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
- X-Developer-Signature:X-Developer-Key;
- bh=ryg+J0QMyo9G99PxxCQmqJKg+CUiw0O4deDxTWuEtmc=;
- b=awbt/ljBheilr6SnMrzlZjL8/T3VI29IZ+nbgsC3LN1tNS6Sm7ait7OVgEOIM+fik+Jt
- Z3lhAZsmDH6pOgqhxMJEEtgBDmQZuEN4f0579r8H10gha3oz4wNBQ5Wdr6DYhClP+XvGj
- xn/7O+AA5xSUyl+dyCepeso7lqSa4qq+er7EBiJ1OtHHpaewd3rD77lfo1YuwDbb9T6ir
- 9kzro653Jh5RAxwinxNB9K9OUuoT2fg2Hh7GvM6lmP/MX5l2TS4KBXCRFOEnq39ZGnhrs
- eXI/XnN1WxPiNQH7ku1hvscYpd+nksuTD9jfIf1njz7yfTNckdT7ncjAWTdBP6qds4A==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=none header.from=baylibre.com; 
- dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=alCvaAmv; 
- arc=none smtp.remote-ip="2607:f8b0:4864:31::f"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::f;
- helo=mail-oo2-x0f.google.com; envelope-from=dlechner@baylibre.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=alCvaAmv
-Received: from mail-oo2-x0f.google.com (mail-oo2-x0f.google.com
- [IPv6:2607:f8b0:4864:31::f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9576B40042
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 20:51:16 +0000 (UTC)
-Received: by mail-oo2-x0f.google.com with SMTP id
- 006d021491bc7-6defc0a3724so589440eaf.1
- for <u-boot@lists.u-boot-project.org>; Mon, 05 Oct 2026 13:51:16 -0700 (PDT)
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To:X-Clacks-Overhead;
+ bh=ATUexWf+aDBG+fev2DU2cLnTP9wz99omzHwNNG2SGBk=;
+ b=hSh0vzcZy6pBIu6XnxnvaqUkdqWAMmbn+qei5Hc/WmjFHBCO+gYMgmPfesfm888qpC5D
+ gEWvDilNy4aPNlh2MG+W9VVq/tlWNcNCM+vF/gNhotvl42ihzgakSQC+OFRfO0Euk1Edx
+ Vyfec2VV7EMPGeujA7mKCHjXHf2TYiFz//bt1E2MYmA72BZK85u1TL7R1wR3vLnQkiDBC
+ oEVFcj8GYUA6tNQYsMP7el4aAYZ6kSOSqPYQzP9tBSxlNNTIJTIAkzRvGewtnQ8bodqQH
+ KsPR9azNTxUG623pF1PdvbNDTlCWTuJwficHlDDPD3Vcr4Vgd5DSpVueZIgz86QuJpg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=konsulko.com; 
+ dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=PMoBiCA3; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::32a"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=PMoBiCA3
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 7D6094059E
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 20:59:29 +0000 (UTC)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-82478760557so1796561a34.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 05 Oct 2026 13:59:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1791233476; x=1791838276;
+ d=konsulko.com; s=google; t=1791233968; x=1791838768;
  darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=ryg+J0QMyo9G99PxxCQmqJKg+CUiw0O4deDxTWuEtmc=;
- b=alCvaAmveSxBvcSEaBveOy1UTY30iARs6oFXtPjKDgrimkphBIyRyJDh9FVLgCkMXY
- 81ky1QrGhKV0s9Dfjk/PFoLP8/OtQ8X5DTlAZeMn8jEcmXyDmSXZrhWn4tUDZ4ePKrOE
- +RqJM9r06+Gs30CNLKYv+j8KtaPzP7P69waRa3NmU8q2rLwtHyJLaeY/uZLZhx1HoxGv
- h/5uw52ZZqbUXHdPbL/jQCORJWy6ws3JnPCKFf0RQqP6fBnT2cvgV43Qq0v2hauDaAoJ
- Hn8lNkVXQ2tCoyZDVUg6/xRSx9bKS6Oe+nMsdsvOLZQWPb0Wr4omwY2g632T+jz82Kb9
- VQqg==
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ATUexWf+aDBG+fev2DU2cLnTP9wz99omzHwNNG2SGBk=;
+ b=PMoBiCA35Ybk7HmQdX5musyHgPitonyCkFtxMXzpYLzxO4VkKJCnVx4J7mkSuUi8nO
+ KXB3I8RCfLPRSFermR0wwJYcbTiboldwJsrNn4eaRa6IJh7Gm9uaOJRl/hbqwnvLXhsM
+ 7tCBf+ndQAi/S+41tvxDy3bepeyVYK70qIY4s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791233476; x=1791838276;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=ryg+J0QMyo9G99PxxCQmqJKg+CUiw0O4deDxTWuEtmc=;
- b=CqHhVJtWaxfBD4BQlCS7KcHxERc+gOdQncEi+NRFewV5khmvPd3aKjzmVKf8QynExz
- DYMnpDnrf97V9r0wAqgLpVQZwqn2oFoWWzWCNo0jVWD7fwb98oomkHRfFpI4LlPnnJiq
- AfDF1x6cvz3x3X711S9t3J9WAWrPYOXVD8Z7c8/Yy5dmyGNi8ggBCeqtilT/ahyMloA5
- I4RujQ+LlshtBeQmA/MvOZmn2Dvb2/Gpp5/Zkw543xuycVQmjJa8W7Oo5MGm7cLo1Fpt
- GRWOieGLJZkSLoKR9ub9VZJ+nZiqqBuyYonIYtLgkp26aq2ZIKuwZJAHNe3o3yuKPt2c
- wjYw==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxUyNeCCNjoU+JC9aKG4N5DNhMqRyTIEgQSCa2XNmS6zdBVapJ51CDkZL3S56PrLfcNixIo+qY=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++n8YM4TdU1soAIhRxvqtk9Icl68dm+w2cr9YMR5LEU/5xmbV5dG
- 3YBg2rdVn1JsIlHCUzqOHoKCbZur+HWQKqtWtATPbOkG3mCPhGTs3aJw+dvQdz3AYd4=
-X-Gm-Gg: AYBFou2hVB5hpuc06FlnRh+h1RS0Hsj9q40ZRDUbGrAyrZrkClH3NnwiJdrGmDes+A7
- oktWi3oNyPahVEZ7XBL+rEOywL+ktuUbpyzybJKpJs3Y7SSJRPq1FRf3SSLgB7BccNsAneMhau1
- zlSYPAKCmIJljmYOwCp4Y8oure3D9dMr6OzMbdv6675jkxYsGPKjdZXspfSh/qYdI+pz8twsPWZ
- fFC5da2KNO5AT9F9co+QSJ5KDDz6ju2N4TKRCDL1733+CqUJY9aGzScnsHLn8/LAIf7sRH9gMia
- zKnTHJ8+ULpQ7ow1gqM3Dhy3qSFNtzwpYaYU6wH5Ly8PLEsjyGpn9X+BWzx3z6ELO4LM70NZRbT
- EiBaA0a2/ZxM1Py7Heoyl1PqZVx9uuQW1lqaEDfz9tgl0ILCT1XWN3eTGsr9mu0QMmGMp4ZDJzL
- +6gSVdCLOKmUM/nBfEhtKIUlWUeOpJPAMJ+RwXsyQUPN3wTXG2T2cxBCcZG0bFwMNkGtci9qZJn
- A0=
-X-Received: by 2002:a05:6820:f012:b0:6d8:ac5f:88af with SMTP id
- 006d021491bc7-6df3448c37fmr9373318eaf.33.1791233475889; 
- Mon, 05 Oct 2026 13:51:15 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:33e3:ea0f:8b95:f69b])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6e4c04d915bsm451021eaf.2.2026.10.05.13.51.14
+ d=1e100.net; s=20260707; t=1791233968; x=1791838768;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ATUexWf+aDBG+fev2DU2cLnTP9wz99omzHwNNG2SGBk=;
+ b=kAUnyBAetfyPvG5CGf+xSWgGDp/PPLDDhnw6BknGjYZLmLUqHfy6JgC7+d+4z5j+wr
+ 9gyWWmEc7NkdNiR/okDLKRnxDRnO1JmQU0FxIDI6zxaU5daxVvjgqPP8NbIJc17AMYtX
+ sL0ojdDIZ0A2pbG9lH0Azh0KI8kpIKBcVAB5rKld3z88CIMFF/YrNLrSRT63j1iAwVdC
+ FvpmMthXEO0EvEATI2Ar5ERuB4RsDMOOpBz6DVK+25KAcJQSn+KcXoO9OtmIU9iOoP0C
+ gX1kyj/muGRkdawi6Xtkhb2vmW2gxD4b03VSxsDF90dDeEHGnpDb28ACRvR/jirhDS+j
+ fWBQ==
+X-Gm-Message-State: AFuF++lUrQLWyW9W1hZclGtWfNmRChDTbOj/Gro5vehlAjhVAAiBWR6J
+ sbC6zf7LRv3Ajcp3dE/O+CiEZ9wUvCoU+8Q3sVs0treaalkmM32r6UR+b04Pq2Jitzk=
+X-Gm-Gg: AYBFou0yUPx6OgP8otX6NNm7qb+VzbQIDm6LwZ23Fb9lr44XNz2DpfRbRJ1x1/PgoYD
+ ZDBT1CUsAGnUfttE1LJ71CYBxdcJsAuO4FteZgf72D7F2LDlDaoeneIapY8wAEcYyOmY5VIb5B1
+ 5gkKJT6znYCEFVJjzmAjAiIg+Zjwerh99vDHMQNbKLrw2uYDmL3FYXeem3Do9QBL0vmTkcF96a4
+ sWgBvTg+rjQ9LEocsrHDqZ9zvqvUcYpLi9VC1KrZ3FbCAz0pcIKcU1ciNNFGeNPHFESy+1DQH9T
+ UIx0BardGV9wpQ4oZ38rSUZBRn7d/Jr1e2JF2E6bRLq+TE5xfsQGxD7Yr2sNEa/eYYdo9rXmwQp
+ 4tShfM94vs9sTyBA4SbVzC0nCVkcgXPgg+ueD332iQH6gGXioNJkwfyrFbhHRGQRUTRsQptPjWV
+ t7H3d/ECJfCfmSa7pgC3coQVzXJR56wOSJqt0nR43H/VznWUWaMPtCSPv1qMPY2sOG+rZbbisd7
+ 3Em/xEfDk/N3VKEWR3dgdCShK1R65Z/lM7JmE4G1TsKsab3+5n5ugsa1mO0/ARfScgyLc0IAzpq
+ /poq+TLmXw/tCmtd9cM=
+X-Received: by 2002:a4a:e917:0:b0:6d8:d3d:de6c with SMTP id
+ 006d021491bc7-6e09db97021mr7298145eaf.37.1791233968131; 
+ Mon, 05 Oct 2026 13:59:28 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-49e16d6b450sm9400544fac.3.2026.10.05.13.59.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Oct 2026 13:51:15 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 05 Oct 2026 15:51:02 -0500
-Subject: [PATCH v4] video: panel-startek-kd070fhfid078: new driver
+ Mon, 05 Oct 2026 13:59:27 -0700 (PDT)
+Date: Mon, 5 Oct 2026 14:59:24 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.u-boot-project.org,
+ David Gibson <david@gibson.dropbear.id.au>,
+ =?iso-8859-1?Q?H=E9ctor_Or=F3n_Mart=EDnez?= <zumbi@debian.org>,
+ Niklas =?iso-8859-1?Q?S=F6derlund?= <niklas.soderlund+renesas@ragnatech.se>,
+ Rasmus Villemoes <rv@rasmusvillemoes.dk>,
+ "Rob Herring (Arm)" <robh@kernel.org>, Simon Glass <sjg@chromium.org>,
+ Vagrant Cascadian <vagrant@debian.org>
+Subject: Re: [PATCH 2/2] kbuild: Do not pass -Wno-graph_child_address to DTC
+ unless supported
+Message-ID: <20261005205924.GF3724959@bill-the-cat>
+References: <20261004061826.1028380-1-marek.vasut+renesas@mailbox.org>
+ <20261004061826.1028380-2-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261005-mtk-video-panel-startek-078-v4-1-2b18dc72ddb4@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43PTU7DMBAF4KtEXjMQ/8bpinsgFrYzoaZNUmzHa
- lXl7jgpEgihipX15NH3Zq4kYvAYya66koDZRz+NJYiHiri9Gd8QfFcyYTVTtaYChnSA7Duc4GR
- GPEJMJiQ8QN1ooKY1lmvUbd+QIpwC9v686S+vtxxn+44ureTXRMCPudSm2xixJiK4aRh82lVrm
- ZtjmjpvxqcBy7N29VOAEc+JrOjel/9w2S7IdDP+tWymQEH2WhjZMCGse7bmcvQ24GOp3+jMfnB
- M3edY4ZxUXDDbNJrLPzj+zbVU3+d44RSnRnGHTMrf2y3L8glhycNovAEAAA==
-X-Change-ID: 20260814-mtk-video-panel-startek-078-1a9ab38e89f7
-To: Tom Rini <trini@konsulko.com>, 
- Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=16346;
- i=dlechner@baylibre.com; h=from:subject:message-id;
- bh=6x9d2rRQJlDsQRqqTagS6d7gPFX9m/LUa9fZ4a2EbDo=;
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqxA22vJNkwvlU2h4QV6lf3lI27/r90erO1b8eG
- NBRXGjKuruJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCasQNthYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AAosIAJy3wi4r7qc58fzaiiJQEHSX8bT7GNRFD3553UD
- fJO0IyWjRXcz4MfNBmtMIEeTglRimF6kpnjX1EduzqgQEEQ7hulcy4kSn43cTe/LhNsSY59zwHn
- C5cn7jj6RKZNR5ASMny+B0RnVUh4eKlopfB8S37YFuhxL0H/73LDfCb5si/iaXh1OYg9t5Gftg4
- GucoVk1E6RZMZWiG/MrK1VdxoG0emBmTrqKYmNDGwGIv/I3swgSrlFdMY6Hfs1zkkzJKYXEgLQw
- +EKnFNWfFjl2sN8GZ3NTILHy2NUYKZ+DzU82vKQu22wCQn5+Bp484djczDJvcOd04eCHCfmq2Mi
- rx8E=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DnNtVLUekabGdy58"
+Content-Disposition: inline
+In-Reply-To: <20261004061826.1028380-2-marek.vasut+renesas@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -198,468 +185,50 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a driver for the Startek KD070FHFID078 7" DSI panel. This panel is
-used on the MediaTek Genio 360 EVK board.
 
-The display mode, DSI mode flags, init sequence and register names follow
-the upstream Linux driver panel-himax-hx8279.c, which is what the
-"himax,hx8279" fallback compatible in the device tree binds to.
+--DnNtVLUekabGdy58
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The MAINTAINERS entry is merged with the existing KD070FHFID015 entry so
-that one entry covers all Startek panel drivers.
+On Sun, Oct 04, 2026 at 08:17:43AM +0200, Marek Vasut wrote:
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
-Note: no defconfig enables this driver yet, since there is no MediaTek DSI
-host driver in U-Boot at this point. It will be enabled together with the
-display pipeline support.
----
-Changes in v4:
-- Use the register names from the Linux hx8279 driver for the init
-  sequence.
-- Wait 130 ms after exit-sleep and drop the delay after display-on,
-  matching the Linux driver.
-- Dropped the unused errno.h include.
-- Merged the MAINTAINERS entry with the KD070FHFID015 one.
-- Link to v3: https://patch.msgid.link/20260918-mtk-video-panel-startek-078-v3-1-631a63ce255c@baylibre.com
+> DTC commit cba90ce82064 ("checks: Remove check for graph child addresses")
+> removed -Wno-graph_child_address command line parameter. Apply this option
+> only to DTC older than 1.8.0.
+>=20
+> This can be triggered on e.g. Debian Testing (as of 2026-09-07) when
+> using system DTC:
+>=20
+> $ export DTC=3D/usr/bin/dtc
+> $ $DTC --version
+> Version: DTC 1.8.1
+> $ r8a779g3_sparrowhawk_defconfig
+> $ make -j$(nproc)
+> ...
+> FATAL ERROR: Unrecognized check name "graph_child_address"
+> Check /path/to/dts/upstream/src/arm64/renesas/.r8a779g3-sparrow-hawk.dtb.=
+pre.tmp for errors
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
 
-Changes in v3:
-- Undo mipi_dsi_attach() on the panel power-up error paths.
-- Power the panel back down in the same order as the Linux driver.
-- Dropped the dead IS_ERR() check on the optional enable-gpios.
-- Simplified the return from probe() and reflowed the Kconfig help text.
-- Link to v2: https://patch.msgid.link/20260826-mtk-video-panel-startek-078-v2-1-c56342b77835@baylibre.com
+We should just drop it unconditionally, both to easier match up with
+future kernel re-syncs and also because the DTC commit (as I read it)
+says the check itself was flawed / not useful.
 
-Changes in v2:
-- Added missing BACKLIGHT and DM_REGULATOR Kconfig dependencies.
-- Use the display mode and MIPI_DSI_CLOCK_NON_CONTINUOUS flag from the
-  upstream Linux panel-himax-hx8279.c driver instead of the MediaTek
-  downstream driver.
-- enable-gpios is now optional, matching the binding.
-- A missing backlight is now an error instead of a warning.
-- Do not request reset/enable GPIOs as active, so they are not asserted
-  before the regulators are enabled.
-- Use mipi_dsi_dcs_exit_sleep_mode()/mipi_dsi_dcs_set_display_on() instead
-  of raw DCS opcodes and check their return values.
-- Dropped stale InforceComputing/Linaro copyright and author lines.
-- Dropped the unused dev field and the unreachable mode check.
-- Link to v1: https://patch.msgid.link/20260814-mtk-video-panel-startek-078-v1-1-5f84a57244bc@baylibre.com
----
- MAINTAINERS                                 |   5 +-
- drivers/video/Kconfig                       |  10 +
- drivers/video/Makefile                      |   1 +
- drivers/video/panel-startek-kd070fhfid078.c | 345 ++++++++++++++++++++++++++++
- 4 files changed, 359 insertions(+), 2 deletions(-)
+--=20
+Tom
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index c6ca03741f5..a4c88223ec2 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1668,11 +1668,12 @@ F:	common/stackprot.c
- F:	cmd/stackprot_test.c
- F:	test/py/tests/test_stackprotector.py
- 
--STARTEK KD070FHFID015 PANEL
-+STARTEK PANELS
-+M:	David Lechner <dlechner@baylibre.com>
- M:	Julien Stephan <jstephan@baylibre.com>
- R:	GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
- S:	Maintained
--F:	drivers/video/panel-startek-kd070fhfid015.c
-+F:	drivers/video/panel-startek-*
- 
- TARGET_BCMNS3
- M:	Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index 3d8f4858721..de0197b21cd 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -330,6 +330,16 @@ config PANEL_STARTEK_KD070FHFID015
- 	  1200 x 1920 pixels. It provides a MIPI DSI interface to the host, a
- 	  built-in LED backlight and touch controller.
- 
-+config PANEL_STARTEK_KD070FHFID078
-+	bool "STARTEK KD070FHFID078 panel"
-+	depends on PANEL && BACKLIGHT && DM_GPIO && DM_REGULATOR
-+	select VIDEO_MIPI_DSI
-+	help
-+	  Say Y here if you want to enable support for STARTEK KD070FHFID078
-+	  DSI panel. The panel is a 7-inch TFT LCD display with a resolution of
-+	  1200 x 1920 pixels. It provides a MIPI DSI interface to the host, a
-+	  built-in LED backlight and touch controller.
-+
- config VIDEO_BOCHS
- 	bool "Enable Bochs video emulation for QEMU"
- 	help
-diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index 7a54f1f290d..7a7b54e6b53 100644
---- a/drivers/video/Makefile
-+++ b/drivers/video/Makefile
-@@ -23,6 +23,7 @@ obj-$(CONFIG_$(PHASE_)VIDEO) += video_bmp.o
- obj-$(CONFIG_$(PHASE_)PANEL) += panel-uclass.o
- obj-$(CONFIG_PANEL_HX8238D) += hx8238d.o
- obj-$(CONFIG_PANEL_STARTEK_KD070FHFID015) += panel-startek-kd070fhfid015.o
-+obj-$(CONFIG_PANEL_STARTEK_KD070FHFID078) += panel-startek-kd070fhfid078.o
- obj-$(CONFIG_$(PHASE_)SIMPLE_PANEL) += simple_panel.o
- 
- obj-$(CONFIG_VIDEO_LOGO) += u_boot_logo.bmp.o
-diff --git a/drivers/video/panel-startek-kd070fhfid078.c b/drivers/video/panel-startek-kd070fhfid078.c
-new file mode 100644
-index 00000000000..12bf04e9912
---- /dev/null
-+++ b/drivers/video/panel-startek-kd070fhfid078.c
-@@ -0,0 +1,345 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (C) 2025 MediaTek Inc.
-+ * Copyright (C) 2025 Collabora Ltd.
-+ * Copyright (C) 2026 BayLibre, SAS
-+ *
-+ * Authors:
-+ * - Guillaume La Roque <glaroque@baylibre.com>
-+ * - Jitao Shi <jitao.shi@mediatek.com>
-+ * - David Lechner <dlechner@baylibre.com>
-+ */
-+
-+#include <asm-generic/gpio.h>
-+#include <backlight.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <linux/bitfield.h>
-+#include <linux/bitops.h>
-+#include <linux/delay.h>
-+#include <linux/err.h>
-+#include <linux/kernel.h>
-+#include <linux/types.h>
-+#include <mipi_dsi.h>
-+#include <panel.h>
-+#include <power/regulator.h>
-+
-+/* Register definitions from the Linux panel-himax-hx8279.c driver */
-+#define HX8279_REG_PAGE			0xb0
-+
-+/* Page 0 - Driver/Module Configuration */
-+#define HX8279_P0_VGHS			0xbf
-+#define HX8279_P0_VGLS			0xc0
-+#define HX8279_P0_VGPHS			0xc2
-+#define HX8279_P0_VGNHS			0xc4
-+#define HX8279_VGH_MIN_MV		8700
-+#define HX8279_VGH_STEP_MV		300
-+#define HX8279_VGL_MIN_MV		6700
-+#define HX8279_VGL_STEP_MV		300
-+#define HX8279_VGPNH_MIN_MV		4000
-+#define HX8279_VGPNX_STEP_MV		50
-+#define HX8279_VGH_VOLT_SEL(x)		(((x) - HX8279_VGH_MIN_MV) / HX8279_VGH_STEP_MV)
-+#define HX8279_VGL_VOLT_SEL(x)		(((x) - HX8279_VGL_MIN_MV) / HX8279_VGL_STEP_MV)
-+#define HX8279_VGPN_VOLT_SEL(x)		(((x) - HX8279_VGPNH_MIN_MV) / HX8279_VGPNX_STEP_MV)
-+
-+/* Page 1 - Gate driver On Array (GOA) Mux Config */
-+#define HX8279_P1_REG_GOA_L		0xc0
-+#define HX8279_P1_REG_GOUTL(x)		(HX8279_P1_REG_GOA_L + (x))
-+#define HX8279_P1_REG_GOA_R		0xd4
-+#define HX8279_P1_REG_GOUTR(x)		(HX8279_P1_REG_GOA_R + (x))
-+
-+/* Page 3 - Gate driver On Array (GOA) Configuration */
-+#define HX8279_P3_REG_UNKNOWN_BA	0xba
-+#define HX8279_P3_REG_GOA_STVL		0xc8
-+#define HX8279_P3_GOA_STV_LEAD		GENMASK(4, 0)
-+#define HX8279_P3_REG_GOA_CKVL		0xc9
-+#define HX8279_P3_GOA_CKV_LEAD		GENMASK(4, 0)
-+#define HX8279_P3_REG_GOA_CKVD		0xca
-+#define HX8279_P3_GOA_CKV_RESERVED	BIT(6)
-+#define HX8279_P3_GOA_CKV_DUMMY		GENMASK(5, 0)
-+#define HX8279_P3_REG_GOA_CLR1_W_ADJ	0xd2
-+#define HX8279_P3_REG_GOA_CLR234_W_ADJ	0xd3
-+#define HX8279_P3_REG_GOA_CLR1_CFG	0xd4
-+#define HX8279_P3_REG_GOA_CLR_CFG(x)	(HX8279_P3_REG_GOA_CLR1_CFG + (x))
-+#define HX8279_P3_GOA_CLR_CFG_POLARITY	BIT(7)
-+#define HX8279_P3_GOA_CLR_CFG_STARTPOS	GENMASK(6, 0)
-+#define HX8279_P3_REG_UNKNOWN_E4	0xe4
-+#define HX8279_P3_REG_UNKNOWN_E5	0xe5
-+
-+/* Page 5 - MIPI Configuration */
-+#define HX8279_P5_REG_TIMING		0xb3
-+#define HX8279_P5_TIMING_THS_SETTLE	GENMASK(7, 5)
-+#define HX8279_P5_TIMING_LHS_SETTLE	BIT(4)
-+#define HX8279_P5_TIMING_TLPX		GENMASK(3, 0)
-+#define HX8279_P5_REG_UNKNOWN_B8	0xb8
-+#define HX8279_P5_REG_UNKNOWN_BC	0xbc
-+#define HX8279_P5_REG_UNKNOWN_D6	0xd6
-+
-+/* Page 6 - ENG/Gamma Configuration */
-+#define HX8279_P6_REG_ENGINEER_PWD	0xb8
-+#define HX8279_P6_REG_INHOUSE_FUNC	0xc0
-+#define HX8279_P6_ENG_UNLOCK_WORD	0xa5
-+#define HX8279_P6_REG_GAMMA_CHOPPER	0xbc
-+#define HX8279_P6_GAMMA_POCGM_CTL	GENMASK(6, 4)
-+#define HX8279_P6_GAMMA_POGCMD_CTL	GENMASK(2, 0)
-+#define HX8279_P6_REG_DLY_TIME_ADJ	0xd5
-+
-+struct stk078_panel {
-+	struct gpio_desc *enable_gpio;
-+	struct gpio_desc *reset_gpio;
-+	struct mipi_dsi_device *dsi;
-+	struct udevice *iovcc;
-+	struct udevice *vdd;
-+	struct udevice *backlight;
-+};
-+
-+static const struct drm_display_mode default_mode = {
-+	.clock = 156458,
-+	.hdisplay = 1200,
-+	.hsync_start = 1200 + 50,
-+	.hsync_end = 1200 + 50 + 24,
-+	.htotal = 1200 + 50 + 24 + 66,
-+	.vdisplay = 1920,
-+	.vsync_start = 1920 + 14,
-+	.vsync_end = 1920 + 14 + 2,
-+	.vtotal = 1920 + 14 + 2 + 10,
-+};
-+
-+static const u8 stk078_gout_l[] = {
-+	0x0d, 0x0d, 0x06, 0x06, 0x08, 0x08, 0x0a, 0x0a, 0x0c, 0x0c,
-+	0x00, 0x00, 0x0e, 0x0e, 0x01, 0x01, 0x04, 0x04, 0x00, 0x00,
-+};
-+
-+static const u8 stk078_gout_r[] = {
-+	0x0d, 0x0d, 0x05, 0x05, 0x07, 0x07, 0x09, 0x09, 0x0b, 0x0b,
-+	0x00, 0x00, 0x0e, 0x0e, 0x01, 0x01, 0x03, 0x03, 0x00, 0x00,
-+};
-+
-+static int stk078_panel_init(struct stk078_panel *stk)
-+{
-+	struct mipi_dsi_device *dsi = stk->dsi;
-+	int i, ret;
-+
-+	/* Page 5 - MIPI Configuration */
-+	mipi_dsi_generic_write_seq(dsi, HX8279_REG_PAGE, 5);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P5_REG_TIMING,
-+				   FIELD_PREP_CONST(HX8279_P5_TIMING_THS_SETTLE, 2) |
-+				   HX8279_P5_TIMING_LHS_SETTLE |
-+				   FIELD_PREP_CONST(HX8279_P5_TIMING_TLPX, 2));
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P5_REG_UNKNOWN_B8, 0x7f);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P5_REG_UNKNOWN_BC, 0x20);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P5_REG_UNKNOWN_D6, 0x7f);
-+
-+	/* Page 1 - GOA Mux Config */
-+	mipi_dsi_generic_write_seq(dsi, HX8279_REG_PAGE, 1);
-+	for (i = 0; i < ARRAY_SIZE(stk078_gout_l); i++) {
-+		const u8 buf[] = { HX8279_P1_REG_GOUTL(i), stk078_gout_l[i] };
-+
-+		ret = mipi_dsi_generic_write(dsi, buf, ARRAY_SIZE(buf));
-+		if (ret < 0)
-+			return ret;
-+	}
-+	for (i = 0; i < ARRAY_SIZE(stk078_gout_r); i++) {
-+		const u8 buf[] = { HX8279_P1_REG_GOUTR(i), stk078_gout_r[i] };
-+
-+		ret = mipi_dsi_generic_write(dsi, buf, ARRAY_SIZE(buf));
-+		if (ret < 0)
-+			return ret;
-+	}
-+
-+	/* Page 3 - GOA Configuration */
-+	mipi_dsi_generic_write_seq(dsi, HX8279_REG_PAGE, 3);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P3_REG_UNKNOWN_BA, 0xf0);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P3_REG_GOA_STVL,
-+				   FIELD_PREP_CONST(HX8279_P3_GOA_STV_LEAD, 7));
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P3_REG_GOA_CKVL,
-+				   FIELD_PREP_CONST(HX8279_P3_GOA_CKV_LEAD, 3));
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P3_REG_GOA_CKVD,
-+				   HX8279_P3_GOA_CKV_RESERVED |
-+				   FIELD_PREP_CONST(HX8279_P3_GOA_CKV_DUMMY, 1));
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P3_REG_GOA_CLR1_W_ADJ, 1);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P3_REG_GOA_CLR234_W_ADJ, 5);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P3_REG_GOA_CLR_CFG(0),
-+				   FIELD_PREP_CONST(HX8279_P3_GOA_CLR_CFG_STARTPOS, 5));
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P3_REG_GOA_CLR_CFG(1),
-+				   HX8279_P3_GOA_CLR_CFG_POLARITY |
-+				   FIELD_PREP_CONST(HX8279_P3_GOA_CLR_CFG_STARTPOS, 10));
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P3_REG_UNKNOWN_E4, 0xc0);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P3_REG_UNKNOWN_E5, 0x00);
-+
-+	/* Page 0 - Driver/Module Configuration */
-+	mipi_dsi_generic_write_seq(dsi, HX8279_REG_PAGE, 0);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P0_VGHS,
-+				   HX8279_VGH_VOLT_SEL(18000));
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P0_VGLS,
-+				   HX8279_VGL_VOLT_SEL(12100));
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P0_VGPHS,
-+				   HX8279_VGPN_VOLT_SEL(5500));
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P0_VGNHS,
-+				   HX8279_VGPN_VOLT_SEL(5500));
-+
-+	/* Page 6 - ENG/Gamma Configuration */
-+	mipi_dsi_generic_write_seq(dsi, HX8279_REG_PAGE, 6);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P6_REG_ENGINEER_PWD,
-+				   HX8279_P6_ENG_UNLOCK_WORD);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P6_REG_INHOUSE_FUNC,
-+				   HX8279_P6_ENG_UNLOCK_WORD);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P6_REG_GAMMA_CHOPPER,
-+				   FIELD_PREP_CONST(HX8279_P6_GAMMA_POCGM_CTL, 1) |
-+				   FIELD_PREP_CONST(HX8279_P6_GAMMA_POGCMD_CTL, 1));
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P6_REG_DLY_TIME_ADJ, 72);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P6_REG_ENGINEER_PWD, 0x00);
-+	mipi_dsi_generic_write_seq(dsi, HX8279_P6_REG_INHOUSE_FUNC, 0x00);
-+
-+	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
-+	if (ret < 0)
-+		return ret;
-+
-+	mdelay(130);
-+
-+	return mipi_dsi_dcs_set_display_on(dsi);
-+}
-+
-+static int stk078_panel_enable_backlight(struct udevice *dev)
-+{
-+	struct stk078_panel *stk = dev_get_priv(dev);
-+	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
-+	struct mipi_dsi_device *dsi = plat->device;
-+	int ret;
-+
-+	stk->dsi = dsi;
-+	ret = mipi_dsi_attach(dsi);
-+	if (ret < 0) {
-+		dev_err(dev, "mipi_dsi_attach failed: %d\n", ret);
-+		return ret;
-+	}
-+
-+	dm_gpio_set_value(stk->reset_gpio, 0);
-+	if (stk->enable_gpio)
-+		dm_gpio_set_value(stk->enable_gpio, 0);
-+	mdelay(10);
-+
-+	ret = regulator_enable(stk->vdd);
-+	if (ret < 0) {
-+		dev_err(dev, "enable vdd failed: %d\n", ret);
-+		goto out_detach;
-+	}
-+
-+	ret = regulator_enable(stk->iovcc);
-+	if (ret < 0) {
-+		dev_err(dev, "enable iovcc failed: %d\n", ret);
-+		goto out_vdd;
-+	}
-+
-+	mdelay(15);
-+	if (stk->enable_gpio)
-+		dm_gpio_set_value(stk->enable_gpio, 1);
-+	mdelay(10);
-+	dm_gpio_set_value(stk->reset_gpio, 1);
-+	mdelay(140);
-+
-+	ret = stk078_panel_init(stk);
-+	if (ret < 0) {
-+		dev_err(dev, "panel init sequence failed: %d\n", ret);
-+		goto out_iovcc;
-+	}
-+
-+	ret = backlight_enable(stk->backlight);
-+	if (ret < 0) {
-+		dev_err(dev, "enable backlight failed: %d\n", ret);
-+		goto out_iovcc;
-+	}
-+
-+	return 0;
-+
-+out_iovcc:
-+	dm_gpio_set_value(stk->reset_gpio, 0);
-+	udelay(100);
-+	if (stk->enable_gpio)
-+		dm_gpio_set_value(stk->enable_gpio, 0);
-+	regulator_disable(stk->iovcc);
-+out_vdd:
-+	regulator_disable(stk->vdd);
-+out_detach:
-+	mipi_dsi_detach(dsi);
-+
-+	return ret;
-+}
-+
-+static int stk078_panel_add(struct udevice *dev)
-+{
-+	struct stk078_panel *stk = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = device_get_supply_regulator(dev, "iovcc-supply", &stk->iovcc);
-+	if (ret) {
-+		dev_err(dev, "Failed to get iovcc regulator: %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = device_get_supply_regulator(dev, "vdd-supply", &stk->vdd);
-+	if (ret) {
-+		dev_err(dev, "Failed to get vdd regulator: %d\n", ret);
-+		return ret;
-+	}
-+
-+	stk->reset_gpio = devm_gpiod_get(dev, "reset", GPIOD_IS_OUT);
-+	if (IS_ERR(stk->reset_gpio)) {
-+		ret = PTR_ERR(stk->reset_gpio);
-+		dev_err(dev, "cannot get reset-gpios %d\n", ret);
-+		return ret;
-+	}
-+
-+	stk->enable_gpio = devm_gpiod_get_optional(dev, "enable", GPIOD_IS_OUT);
-+
-+	ret = uclass_get_device_by_phandle(UCLASS_PANEL_BACKLIGHT, dev,
-+					   "backlight", &stk->backlight);
-+	if (ret) {
-+		dev_err(dev, "failed to get backlight: %d\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int stk078_panel_probe(struct udevice *dev)
-+{
-+	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
-+
-+	plat->lanes = 4;
-+	plat->format = MIPI_DSI_FMT_RGB888;
-+	plat->mode_flags = MIPI_DSI_MODE_VIDEO |
-+			   MIPI_DSI_MODE_VIDEO_SYNC_PULSE |
-+			   MIPI_DSI_MODE_LPM |
-+			   MIPI_DSI_CLOCK_NON_CONTINUOUS;
-+
-+	return stk078_panel_add(dev);
-+}
-+
-+static int stk078_panel_get_modes(struct udevice *dev,
-+				  const struct drm_display_mode **modes)
-+{
-+	*modes = &default_mode;
-+
-+	return 1;
-+}
-+
-+static const struct panel_ops stk078_panel_ops = {
-+	.enable_backlight = stk078_panel_enable_backlight,
-+	.get_modes = stk078_panel_get_modes,
-+};
-+
-+static const struct udevice_id stk078_of_match[] = {
-+	{ .compatible = "startek,kd070fhfid078" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(stk078_panel_driver) = {
-+	.name		= "panel-startek-kd070fhfid078",
-+	.id		= UCLASS_PANEL,
-+	.of_match	= stk078_of_match,
-+	.ops		= &stk078_panel_ops,
-+	.probe		= stk078_panel_probe,
-+	.plat_auto	= sizeof(struct mipi_dsi_panel_plat),
-+	.priv_auto	= sizeof(struct stk078_panel),
-+};
+--DnNtVLUekabGdy58
+Content-Type: application/pgp-signature; name="signature.asc"
 
----
-base-commit: ca1c29c01bbd03f89cd86159b2959b4e72d41aa9
-change-id: 20260814-mtk-video-panel-startek-078-1a9ab38e89f7
+-----BEGIN PGP SIGNATURE-----
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCasQPqQAKCRAr4qD1Cr/k
+Cj3iAQDGgsa/ChSOjzHKP8vsPc1o5hnkoPwbNYfJvBDvQIwtqwEA0xxj3+8qMASr
+KAG3nG+RIeVyZYqtl6wE6C/qSJ1dOQ8=
+=Q/rv
+-----END PGP SIGNATURE-----
 
+--DnNtVLUekabGdy58--
