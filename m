@@ -1,175 +1,141 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD0C8CA5FFC
-	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 14:01:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4D8BCA5FFC
+	for <u-boot@archiver.kernel.org>; Mon,  5 Oct 2026 14:21:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 06D524069C;
-	Mon,  5 Oct 2026 14:01:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2827580A95;
+	Mon,  5 Oct 2026 14:21:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ViDX4goiNaiP; Mon,  5 Oct 2026 14:01:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 4D7B8406E7
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791208884;
-	b=Spbq1pn09/rUXlzDDIPOoj/JBY9hTpsRj/MFhMewMd6rE9q0Q4XpVNcBEbTOVyFNGCil
-	 MFWUpJE98uq4fxdjT3kqyYq3qmiffSaU4rOTPjz5weGg1SX0s6rDYX8m8aF/esO88fw57
-	 3w2ixVAlUJGlqm1m1aILm452blR5K3cFulsJ8hgKQxPW6S2srgHyYWh5ZeIrVQBKRn0Ky
-	 bfHOFc1dwZS+eUXU3pM2fTc/J3gkEqx64mFwQGwqXWIkJi5+s3pFVL7BT0s3e+9mO9nC0
-	 xrIfYJaYPIYT1KR47d4eblovMTRWDhnoV3NCSnKNhAlPXfXWzmLhHZG+bEnkUPlREZA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nsNC7wVaeKy8; Mon,  5 Oct 2026 14:21:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org EF84A80AA6
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791210110;
+	b=aij3jYNVcM2LRYAEbo8aR2ZJv7Ho39avnaiic1S7IpBxKtuuk99HoT0zFHYRxzbUAkJh
+	 DYeeIvgr8maoPHqHprB2va3HDv0/zGzGQR5YTupbBL0cmdB1EMNA80VPPcSX3frznV/uz
+	 m4wwm3/91NHO1SwnuKBr0AfZR7NBzyk7IpImxyFy1VlOvncRbqI+VOVIpXV5zsCAX4aIX
+	 SJJRHqXCQYOW4PENpTUT4/RMvbXEIDkXrP8N3R0zYjfh7aRd6wNTPG5Cx8hOvHqLRt2u+
+	 qEWxjFShFaCORpIQWLVGNt7VLCwIfOq0i3V6vvl5EGkurC/CAOZ0DJBLzzTTvBqRiLg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791208884;
+	c=relaxed/relaxed; t=1791210110;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=W+efKMCjZtMiNtXEoe5SLa5dOJzkpSk38OFJdT6WyyA=;
-	b=A2oIbfnu5uAhmiMQjPKsO1lVDgm3IJQ4+Z7XdepVxvTxo2QcvERnhr75zjTzMpGuf96C
-	 e4UmPvkAZ97gAkS6yW5rlx/kLu9H3EaigU7CZb/TszAxnCDDIeFd1m/iOuPBGpNL1WZnA
-	 RpNhTg6ON1VxJ4q1KOHiAtXVfRJjsTRtxjeBvYoN8XITsCaE0ROBpZ9SN34VlXp9s9tEh
-	 K5X5LgsmymiEs6Mufz6dkITTQ2sTC0P6O/92I0UIlVRmLQ9sFKQWWTkswEEMvcx+c0GA5
-	 pFaRrkY6hoJRmYYcDge9U3IcsmbakcNMEsvaYiY/LGlLr7CFG0bXEy4cXiYbhFJzT9A==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=brivo.com;
-	dkim=pass header.d=brivo.com header.i=@brivo.com header.a=rsa-sha256 header.s=google header.b=T++d3MaC;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=KWh1uW3nR0vEsf9pEA61mQQmL+TNxr3zlgdRqp2rkq8=;
+	b=kopRYpIUH+RnxttZTJazbNeVjinhyebSR0GE5Est+BCpkRhcJfxLz7T0cyDgmVYiL3Yq
+	 xKcbpIgQC8zhtOlhzdONLHe8xcYjmaZZVtLpD/Rs7jQF/7Q3HnqS2TufA4phy5xTikuGi
+	 CIwa1uzQ9I6/sRGEdahE1EEL+WOMk8Zeykuvefbod7DQy+bChrnGQcNJciYsiRTC/bdlq
+	 Dauu+ndwaDayhn38fOqYPxfwQzVEzy3JQsgwF9VYnwlja2RP+puz1AvjFckPYpXTS0smc
+	 Wegx/XNbTRkwF26kNCyeyV2isiVKC1xk9wiDRWBxtZIL0Rn5w1mYGApWy6+j5P07iBA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791208884;
-	bh=W+efKMCjZtMiNtXEoe5SLa5dOJzkpSk38OFJdT6WyyA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791210110;
+	bh=KWh1uW3nR0vEsf9pEA61mQQmL+TNxr3zlgdRqp2rkq8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=w4X8JUF/UuVSmj/9BsNjJNx6E4OLWjTBxaKAbfC1ofP1imEr482JcGvba/DMneb3M
-	 tCzbUwUbyMIuPXnMm45WdO/Kc0/g5OIxbBcaYxo/mP3H4iig9fz9wynjPngPIu8kpZ
-	 6nevuKIWLbLNyVRXPDyjokUl47NwNA3fRW4ZsH7eDtlD3nV/RTIDzYrKB5CWl/F4UM
-	 0QxgsvJ2pnX7wAYxA9NmtAHpZGB6KZUqlR7nYcfKfn7qg2J3U4N+DEQYAvQA9KiRdZ
-	 Ks2O0kiSeKib46T+zEsXauTdgJF8QJFTXq57pyZN1vVyli+T2WN6jFH/fEomy7KStP
-	 K95sxSkx+mm2Q==
+	b=CIprO8puAUPASbFQvc6IKEArXwGolwzkKXL0hpyFKGDz0jDhMLECeGEZGy26ibp+q
+	 lWNxeX63HIT17AcutmmjxmWPdhy/j3q7vr2tRo1SQI+0hkBuhA4B21eJOBicLWBZth
+	 PzpFyXQlh3e5FZBHAdNzhhXa+w4kzw0nvf1Am4bPL9Fg/DQMv1D1Swxc2SdWmwAJpZ
+	 rQDr5Uc8+uccv/aj4FgaLBxGHuWgpDYrUu2lhpa3SKWyGVEQYJMhXVvOQHpzCiWtDg
+	 QIWZqOHfwbIU6D1GozyQDEZYLJZ/uE/OwU/iA/qz9GBk8aIfegdlcEkyjE8Pkhvoeq
+	 3DYodio3ayrkQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4D7B8406E7;
-	Mon,  5 Oct 2026 14:01:24 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EF84A80AA6;
+	Mon,  5 Oct 2026 14:21:49 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 01EF9338
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 13:56:00 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 24574338
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 14:16:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DBE0E40670
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 13:55:59 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0A9DD40648
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 14:16:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8OabARVjStKD for <u-boot@lists.u-boot-project.org>;
- Mon,  5 Oct 2026 13:55:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org BBA784066E
+ id uVwH28BI7shB for <u-boot@lists.u-boot-project.org>;
+ Mon,  5 Oct 2026 14:16:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 1EBB9405EE
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:41::2a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791208559;
- b=R9bCcrtI+AhFrc3t+u/QvmKL4aUerOPZ7sAQsEvz4LinBcCEssuTKPGacVcpCXx4oFyg
- cyBlthAFhUwr/8XAl7FqcsV6ahPEa9I6rIKnMga61AYZ18IgYT3zSZGpAl//SKDw7HRi/
- Lj5SxHiY89CWSe6J2FXe2NGmxOqI//DNSVK7BlnwPYh/dNG2BE2yxdV4vyM00v3UJFtRC
- B8z4lKv+wrZuSEw3IHFEzmt8iRHk/YbIAV8Rh69eIK+GgtuavpIVxv4cD44vjdRjvhkiX
- 8Onak+7HQ3/74nXzRmj435pgfqi/foUuxePor4MoToH/A9KlDPvlVYbB4vRva0VEtuQ==
+ arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791209785;
+ b=pGzKtHC8oDcDoYj8blseCZ6sj0RigZeQ6ToDuTGIam0kyN+W6yLDTXMivYzpTXzUUE5R
+ X25iFjuqNFh8XJ6yaZ2qR8Gq1YBGXcGvOR6oGjx5OoRJuZgd4pqCGGyvH5BGOKhjOX1Bk
+ 1EE4U3l8iYlSroTQAmUzxdmWDrG0gXsDEIj9y/riydxp+iSvGoVFmxI+EanhEF3umw4uy
+ BcXXMIIPaqtcjZhVf4dh6WC9OMBGnmKoh9iiRostxWPcac1418Jpj8bm3UDRHBPHiqiKm
+ fLGLoAuim0fl1W7uPGzY9y0uvAynxkf0E09QIqXG7/HFAf4yTzMDN4+DMQZcQo5zoTw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791208559;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
- MIME-Version:Content-Transfer-Encoding;
- bh=W+efKMCjZtMiNtXEoe5SLa5dOJzkpSk38OFJdT6WyyA=;
- b=TzfOz1DXlMflM6JxuQ0/BknjL54JJmv1psuL0aJXZQmjj02efyIuhKr9r5SkCXHkE0YW
- Y68S0Uam6l17sG5E5mr8HOwUH+tuXhNpABsUA0y/eQ3yG+rW0J1JDo6oDGMLp6iKyX9F2
- fJ1KEtR6ellFEJae/ytsWFuVHZoshgnAk4S2Si81oQT8bqBbWrFBz/OVUHmcv0kaIj/6U
- ZbinZLpfWWF1/Vm+Zi/wHZ1t/fmvsnHyMjAklBCKTK+ajXDdjwzb3iHgAyTiyjeUOipYy
- UW9s8pUcOcaolhmDABmMk9JQ4clQSZb5zSNtuTkEuBlJnFwYjE08jTh6Q2u4w1TzVrg==
+ c=relaxed/relaxed; t=1791209785;
+ h=Received-SPF:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
+ User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding;
+ bh=KWh1uW3nR0vEsf9pEA61mQQmL+TNxr3zlgdRqp2rkq8=;
+ b=ZHG+afj1ORV/Nn304oY6osS01lKfIbni1KdcSPQbZR3TuWfIi00WmkHOyKRfZX8bpvcT
+ SUQgaVmmzDfYFB9ODSQSx3g195pccvBUTLnCcWzgwzIgnkpSEKSe2g8qVSiMDQg1lXseP
+ ZJrgSDSUP30kb0LJD1HbbL1DKoZG7aWj9u8+7cvbPbdYhkOXaRyVFWlhhDmp3wAmyIxFB
+ pi8x3Ij6/vPYwfZMicJ2SFnLhRPSMyzPvy75yzbNPhvMBbq3ro2Vp2FpUZ4U7ihm8jCBJ
+ EbR9YdvyLHV2/B91QJyiaM8WadWr7WaQZN86n4bxa210L5o8ipsyyoRMp9fLCImnWNQ==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org;
- dmarc=pass header.from=brivo.com; 
- dkim=pass header.d=brivo.com header.i=@brivo.com header.a=rsa-sha256
- header.s=google header.b=T++d3MaC; 
- arc=none smtp.remote-ip="2607:f8b0:4864:41::2a"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:41::2a; helo=mail-yx2-x2a.google.com;
- envelope-from=sanderson@brivo.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=brivo.com
+ dmarc=pass header.from=freeshell.de; 
+ dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=ktpsjT0r; 
+ arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:4f8:231:482b::2;
+ helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
 Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=brivo.com header.i=@brivo.com header.a=rsa-sha256
- header.s=google header.b=T++d3MaC
-Received: from mail-yx2-x2a.google.com (mail-yx2-x2a.google.com
- [IPv6:2607:f8b0:4864:41::2a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id BBA784066E
- for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 13:55:58 +0000 (UTC)
-Received: by mail-yx2-x2a.google.com with SMTP id
- 956f58d0204a3-675617094f5so1266815d50.1
- for <u-boot@lists.u-boot-project.org>; Mon, 05 Oct 2026 06:55:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brivo.com; s=google; t=1791208557; x=1791813357;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=W+efKMCjZtMiNtXEoe5SLa5dOJzkpSk38OFJdT6WyyA=;
- b=T++d3MaCbENHeDu8dsgDM1OphyC3UzVdiaLbT8NDSbPBRzAocQH1GP4tIJGdCiXwqc
- YA0G1YBm8cGYl7SP+coD4RweSPH9b7RrFLAnf7GLUwpRo2ZABiN9Jz8841bDhpooDmi0
- 6uXzSic603smRRoOnBfqpUa1zLwEEvWeW8OWW+Dhwexnh0/2yGBKQLR85dplR/3TFOfv
- 0ydgBFlf1egi0nSN0ydqzQRA2Lu2xq069QphYu59mSwxiZOP9EWDNayUeQKEB2+ZT1fm
- erpttzygC7141ekGyRNze/y/GZMHizcbJ7+rYLKZmqedmLAmvB+JyE3T6PVNj9HTf0Av
- +mFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791208557; x=1791813357;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=W+efKMCjZtMiNtXEoe5SLa5dOJzkpSk38OFJdT6WyyA=;
- b=DSGQvgv+azHGk4rcJJkEl3K9w9rAlfdIiGmc1RCBT5VHF8dxaSChQcbnxaDbB04eBR
- uv+b3rHtRmtfKFxyUJqpOR1Et9RC3gbsQlqk4emsYekCn3LcZCvt1o8SXAwF+tlJFEAW
- apO3lGSkdPPSml2oHiyPPQEbEQFvnVIw8R3tAWT6xZ+DDl3inO3rhhdX0vXEy6i79TgM
- piAQAv57m/fTZoGcQF/4G5n9vd8INckh8t7BfmgLLu17ZFuw8dmZwm4ih0hgT3tPSDh4
- qQr87oCZ7ryJKkkHXYKFCwjTtVyn2lEIbFnYhVW3R8tO1QDeVckC6S8y1yzZjRijQaAK
- uwVw==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxOJ9WVpeuP/9ViHuoXxQLcqiO4sF9Tb0928lwGr7Im/KRWiV9ffzF/E2sfU6x51wfyycja8Yw=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIA9zcj3tFoPhx2KZQkklB2EWn3dpALtom4IMXT9XTlw4HG81RJ
- IFw+gOyYWuUnE596d8kf6sHEm/4BZ81S5wgB/qNRGKJM+xH4dTg/7JU6GcIvtrZUqi1WbZ7v05m
- V2zBkwLlpb+xbpyoTGBu+huJMHFYzJ3swyZCaPaOAymSFKfbTta+CfNT5Ug/9aSQ1o4L9dsXy0F
- WNGoU=
-X-Gm-Gg: AYBFou2DfYe4tZu5ZijUEpU/xbfp6O6m6YlwL0+ziJPkZ10nbSct2GeSLRghBW0g+RZ
- OUFtEhut/8jlvKco6/iG2wmhpL9m4uvKUhminbsMP4fEto7emDmwCBB3rxWUtmK/qfLor29Cyij
- Wt7TnNi9w5wyiRmqxY/WL4jB/Qcp1E+MZOLlz/q5+Rzn5p1y95vtXVxZlbPa/AEBBUCmh7cEsnH
- en5l74q5OLcq/8tO123eDCa4nWi0oxsXd04M98QIMwcGi/HfhuZMAAiAoOxRHH0ZhasbXL32U+6
- iqgr5AiBPSl94DV6GvpzQ+iv/YVHu+h77mCI7CFk8AKIUxu991vOHnRrGqAqY4+5Yrd9gO39PC3
- eCfsVuabrUSsvE/t8aGbm787l5Fg2De+tq+W1eZIXAScwXvGWi4/Yp5RBr1HO3uP/QCOo0iVH1F
- lyOxNuZlEaOdEAWbCFgTI74M6NWuQEmkCqWFRuBu1Ze4HTSRDB+F0afzB3yDkxHdFHqQi21WKUF
- Q==
-X-Received: by 2002:a05:690e:118b:b0:677:d439:2fe7 with SMTP id
- 956f58d0204a3-677d43930d4mr1444362d50.25.1791208556825; 
- Mon, 05 Oct 2026 06:55:56 -0700 (PDT)
-Received: from strozzi ([66.193.28.125]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8ae328ee37asm39074437b3.10.2026.10.05.06.55.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Oct 2026 06:55:55 -0700 (PDT)
-From: Sean Anderson <sanderson@brivo.com>
-To: Jerome Forissier <jerome.forissier@arm.com>,
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Sean Anderson <sanderson@brivo.com>
-Subject: [PATCH v2 2/2] net: mdio-mux: Remove ourselves when our parent is
- removed
-Date: Mon,  5 Oct 2026 09:55:48 -0400
-Message-ID: <20261005135551.510145-3-sanderson@brivo.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261005135551.510145-1-sanderson@brivo.com>
-References: <20261005135551.510145-1-sanderson@brivo.com>
+ unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=ktpsjT0r
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1EBB9405EE
+ for <u-boot@lists.u-boot-project.org>; Mon,  5 Oct 2026 14:16:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1791209751;
+ bh=KWh1uW3nR0vEsf9pEA61mQQmL+TNxr3zlgdRqp2rkq8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=ktpsjT0rQAPhcclUMXwG0xI8sM0sUffNRuSYZ1a8YxqUR/yxaZ/QiuE2+AAcmeh8S
+ OOVc5/oCAxLiLfWPOlJ52tkB+1hl8soxGQS7hHheaLmqDCphiQ8n+qdULHV+tyljD+
+ tmEMbekil2HrXNQiXfWam+S4njrDNqVQJdiXpRnPxjxX2B+7SDMGt7/42IJNU6LPXN
+ TfTmilLPQj8EApm51XwbLfg4k3pk1sajG6EKs9a/HkNr8/foqIi/6xTOsogQzc6MHT
+ E1WZ5oBSIPsofdHbzKJuDbJIQQmkf0hWKIgBIZke5nshbjcUJ9Exf1GOIE2A/+XOa4
+ q93Vt0BXa4adw==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 02973B2200FC;
+ Mon,  5 Oct 2026 16:15:48 +0200 (CEST)
+Message-ID: <84099410-44e0-4d6c-aa62-674a5f9e9bf9@freeshell.de>
+Date: Mon, 5 Oct 2026 07:15:35 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/2] doc: board: spacemit: document the SpacemiT boot
+ image format
+To: Junhui Liu <junhui.liu@pigmoral.tech>, u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Simon Glass <sjg@chromium.org>, Daniel Golle <daniel@makrotopia.org>,
+ Randolph Sapp <rs@ti.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, Yixun Lan <dlan@kernel.org>,
+ Yao Zi <me@ziyao.cc>, spacemit@lists.linux.dev
+References: <20260921-spacemit-aihd-v3-0-f660fc85d2a5@pigmoral.tech>
+ <20260921-spacemit-aihd-v3-2-f660fc85d2a5@pigmoral.tech>
+ <24dbd483-6b93-4d68-ae5b-e61f2af66857@freeshell.de>
+ <DLWMAQASY7WL.2ZOX8PGPWR6XP@pigmoral.tech>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <DLWMAQASY7WL.2ZOX8PGPWR6XP@pigmoral.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -183,85 +149,231 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Normally, all child devices are removed before their parent is removed.
-However, mdio muxes are not direct children of their parents, so they
-can stick around even when their parent has been removed. This can cause
-crashes when the mux tries to access the parent bus.
+Hi Junhui, I have some follow-up to add to the discussion,
 
-Fix this by listening for device removals. When an MDIO bus is removed,
-we remove any child that has that bus as a parent. It's possible we may
-fail to remove a child if there are multiple children of a bus and the
-first child fails to remove. However, there are no such configurations
-in-tree so I went with a simpler approach.
+On 10/4/26 21:25, Junhui Liu wrote:
+> Hi E,
+> 
+> On Mon Oct 5, 2026 at 8:40 AM CST, E Shattow wrote:
+>> Hi Junhui,
+...
+>>
+>> The previous list-table of offsets is okay for review and diff output,
+>> however the following list-table is not acceptable.
+>>
+>>> +
+>>> +   * - Area
+>>> +     - K1
+>>> +     - K3 non-secure boot mode
+>>> +     - K3 secure boot mode
+>>> +   * - Root and OEM keys
+>>> +     - RSA-2048 moduli with an eFuse root-hash check when secure boot is
+>>> +       enabled
+>>> +     - Unused
+>>> +     - RSA-2048 moduli with an eFuse root-hash check
+>>> +   * - Header CRC
+>>> +     - Not checked separately
+>>> +     - header1 verified
+>>> +
+>>> +       header0 ignored
+>>> +     - Both verified and covered by RSA
+>>> +   * - Image CRC
+>>> +     - Not checked separately
+>>> +     - Payload CRC32 in header1
+>>> +     - Covered by RSA but not checked separately
+>>> +   * - signature0
+>>> +     - Verified with the root key over ``[0x100, 0xb00)``
+>>> +     - Unused
+>>> +     - Verified with the root key over ``[0x100, 0xb00)``
+>>
+>> Why the mixed-use of square brackets and parenthesis?
+> 
+> I think this is a fairly common mathematical notation for a half-open
+> interval. If you find it less readable in this context, I can change it
+> to [0x100, 0xaff] instead.
 
-Fixes: 8880edba06d5 ("net: add MDIO_MUX DM class")
-Signed-off-by: Sean Anderson <sanderson@brivo.com>
----
+Let's qualify the interval notation with verbose "interval", for example:
 
-Changes in v2:
-- Don't try to get the parent unless the mux is active
+-     - Verified with the root key over ``[0x100, 0xb00)``
++     - Verified with the root key over ``[0x100, 0xb00)`` interval
 
- drivers/net/Kconfig   |  1 +
- net/mdio-mux-uclass.c | 30 ++++++++++++++++++++++++++++++
- 2 files changed, 31 insertions(+)
+With this verbose qualifier I have some hope to search Wikipedia for
+"interval" and learn about the symbolic representation. I assume here a
+half-open interval representation is one of many forms of a
+classification of "interval", so simply adding "interval" is enough context.
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index c057504cf66..5124c4a644e 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -30,6 +30,7 @@ config DM_MDIO
- 
- config DM_MDIO_MUX
- 	bool "Enable Driver Model for MDIO MUX devices"
-+	select DM_EVENT
- 	depends on DM_MDIO
- 	help
- 	  Enable driver model for MDIO MUX devices
-diff --git a/net/mdio-mux-uclass.c b/net/mdio-mux-uclass.c
-index 14143ca0ab6..382f92d4fbe 100644
---- a/net/mdio-mux-uclass.c
-+++ b/net/mdio-mux-uclass.c
-@@ -7,6 +7,7 @@
- #include <dm.h>
- #include <log.h>
- #include <miiphy.h>
-+#include <dm/device_compat.h>
- #include <dm/device-internal.h>
- #include <dm/uclass-internal.h>
- #include <dm/lists.h>
-@@ -231,3 +232,32 @@ UCLASS_DRIVER(mdio_mux) = {
- 	.per_device_auto	= sizeof(struct mdio_mux_perdev_priv),
- 	.per_child_plat_auto	= sizeof(struct mdio_mux_ch_data),
- };
-+
-+static int dm_mdio_mux_parent_pre_remove(void *ctx, struct event *event)
-+{
-+	struct udevice *mdio_parent = event->data.dm.dev;
-+	struct udevice *mux, *mux_next;
-+	struct uclass *uc;
-+	int ret;
-+
-+	if (device_get_uclass_id(mdio_parent) != UCLASS_MDIO)
-+		return 0;
-+
-+	if (uclass_get(UCLASS_MDIO_MUX, &uc))
-+		return 0;
-+
-+	uclass_foreach_dev_safe(mux, mux_next, uc) {
-+		if (!device_active(mux) ||
-+		    mmux_get_parent_mdio(mux) != mdio_parent)
-+			continue;
-+
-+		dev_dbg(mdio_parent, "removing %s %s\n", mux->driver->name,
-+			mux->name);
-+		ret = device_remove(mux, DM_REMOVE_NORMAL);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+EVENT_SPY_FULL(EVT_DM_PRE_REMOVE, dm_mdio_mux_parent_pre_remove);
--- 
-2.53.0
+> 
+>>
+>>> +   * - signature1
+>>> +     - Verified with the SPL key over header1 and the aligned payload
+>>> +     - Unused
+>>> +     - Verified with the SPL key over header1 and the aligned payload
+>>> +
+>>
+>> I don't know what is preferred here by documentation reviewers but this
+>> above list-table is not reviewable as-is. Maybe try to flip the axis, or
+>> split into a series of tables as one-per-name of K1, K3 non-secure boot
+>> mode, and K3 secure boot mode?  The purpose of restructuring this should
+>> be readability before being rendered, and minimal 'diff' impact for
+>> future changes.
+> 
+> I combined the three cases in one table intentionally, so readers can
+> compare the treatment of each field across the K1, K3 non-secure, and K3
+> secure paths side by side. Splitting it into three tables would make
+> that comparison less direct and require readers to move back and forth
+> between them. It would also duplicate the field names across the three
+> tables.
+> 
+> Given that trade-off, I would prefer to keep the current table layout.
+> 
+
+No complaint about the rendered output it is very useful.
+
+What I am meaning by "flip the axis" is for example:
+
+.. list-table:: Authentication policy
+   :header-rows: 1
+
+   * - Image Variant
+     - Root and OEM keys
+     - Header CRC
+     - Image CRC
+     - signature0
+     - signature1
+   * - K1
+     - RSA-2048 moduli with an eFuse root-hash check when secure boot is
+       enabled
+     - Not checked separately
+     - Not checked separately
+     - Verified with the root key over ``[0x100, 0xb00)`` interval
+     - Verified with the SPL key over header1 and the aligned payload
+   * - K3 non-secure
+     - Unused
+     - | header1 verified
+       | header0 ignored
+     - Payload CRC32 in header1
+     - Unused
+     - Unused
+   * - K3 secure
+     - RSA-2048 moduli with an eFuse root-hash check
+     - Both verified and covered by RSA
+     - Covered by RSA but not checked separately
+     - Verified with the root key over ``[0x100, 0xb00)``
+     - Verified with the SPL key over header1 and the aligned payload
+
+Reviewability is improved yet it remains confusing and is less readable
+on the rendered output.
+
+Next, to then delete the column headers, move column descriptions to
+natural-language descriptions, and keep a single-table format:
+
+.. list-table:: Authentication policy
+
+   * - K1
+     - RSA-2048 moduli root and OEM keys with an eFuse root-hash check
+       when secure boot is enabled
+     - No additional header verification
+     - No additional image checksum
+     - Verified signature0 with the root key over ``[0x100, 0xb00)``
+       interval
+     - Verified signature1 with the SPL key over header1 and the aligned
+       payload
+   * - K3 non-secure
+     - Unused root and OEM keys
+     - header0 ignored, header1 verified
+     - Image payload CRC32 in header1
+     - Unused signature0
+     - Unused signature1
+   * - K3 secure
+     - RSA-2048 moduli root and OEM keys with an eFuse root-hash check
+     - header0 and header1 both verified and covered by RSA
+     - No additional image checksum
+     - Verified signature0 with the root key over ``[0x100, 0xb00)``
+       interval
+     - Verified signature1 with the SPL key over header1 and the aligned
+       payload
+
+I can now read this comfortably both in source and in rendered output.
+What do you think?
+
+>>
+>>> +K1 verifies both signatures even without a programmed root-key hash. In this
+>>> +case, the root key comes from the image and is not authenticated by hardware,
+>>> +so the image, keys, and signatures can be replaced together.
+>>> +
+>>> +K3 uses CRC32 in non-secure boot mode and hardware-rooted RSA in secure boot
+>>> +mode.
+>>> +
+>>> +Creating an image
+>>> +-----------------
+>>> +
+>>> +U-Boot currently creates only K3 images for non-secure boot mode. Package an
+>>> +SPL payload with::
+>>> +
+>>> +    $ tools/mkimage -T smtimage -n k3 -d u-boot-spl.bin FSBL.bin
+>>
+>> Use lowercase letters for the output filename if it is not any CONFIG_
+>> symbol or preprocessor define symbol, and re-use an existing filename
+>> stem as for example any of:
+>>
+>> u-boot-spl.smtimage
+>> u-boot-spl-mkimage.bin
+>> u-boot-spl.bin.smtimage
+>> spl.bin
+> 
+> Okay. I prefer .bin as the filename suffix. I think I will use
+> u-boot-spl-smtimage.bin.
+
+Let's re-use "u-boot-spl-mkimage.bin" and
+"u-boot-spl-mkimage.signed.bin" since you prefer ".bin" suffix and not
+"smtimage" suffix?
+
+`uniq` counts:
+
+4  "spl/boot.bin"
+4  "u-boot-spl-mkimage.bin"
+4  "u-boot-spl-mkimage.signed.bin"
+8  "spl.bin"
+17  "u-boot-spl-ddr.bin"
+
+SpacemiT K1 boards do use "u-boot-spl-ddr.bin" filename for the
+processed SPL image but that is a binman artifact of some DDR training
+blob from before support for smtimage is added to mkimage.
+
+It may be a benefit for distro packagers and CI/CD workflow to have
+distinct filenames for unsigned and signed output, so
+"u-boot-spl-mkimage.bin" and "u-boot-spl-mkimage.signed.bin", otherwise
+I would say "spl.bin" is short and popular for re-use.
+
+> 
+>>
+>> A distro package of u-boot or later user of the build system may copy
+>> this output to "FSBL.bin" but that is nothing to do with us here. In
+>> fact for documentation purpose here it is useful to retain "FSBL.bin" as
+>> a distinct description of the vendor firmware SPL and not get this
+>> confused for mainline u-boot.
+>>
+>>> +
+>>> +K1 images and RSA-authenticated K3 images are not yet supported.
+>>>
+>>
+>> This statement may be simply deleted. It is obvious that support does
+>> not exist when it is not described here. If you would like to keep this
+>> line it is not any problem. Similarly for the sentence "U-Boot currently
+>> creates only K3 images for non-secure boot mode." which is not really
+>> accurate to say, as there is no makefile target or binman setup for any
+>> of this yet. Technically U-Boot does nothing at all regarding this
+>> documentation. It would just have to be more diff lines to review later
+>> and can be omitted now.
+> 
+> I will remove it.
+> 
+>>
+>> -E
+> 
+
+With all that, and I'll confirm my R-by tag again in the next round so
+not to delay the series,
+
+Reviewed-by: E Shattow <e@freeshell.de>
 
