@@ -1,170 +1,170 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BEF1CA5FFC
-	for <u-boot@archiver.kernel.org>; Tue,  6 Oct 2026 21:48:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D2FCA5FED
+	for <u-boot@archiver.kernel.org>; Tue,  6 Oct 2026 21:48:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AF90140748;
-	Tue,  6 Oct 2026 21:48:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 215CB60815;
+	Tue,  6 Oct 2026 21:48:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id S3YGS5rfA4Jy; Tue,  6 Oct 2026 21:48:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org A32C24061E
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791323300;
-	b=CwLz5+OcmV7th97Kbe/D3zwb3NKTKwnQvJZBfqwtL0Df1mXKsY7oHm6lo90ooMFl/QzM
-	 r8PzzZrbe+qE978Vj9dmqtb65uT9RGwXOuddjN+34vvcDEP5WcBkZ7H85uAYiM7bpgs28
-	 7kJQtgrE8gMHcfpAFj1TPx8mwi/jliGmDT0FJTOhjlR9Vvj/o8C7S041cQ7EdWolVINie
-	 P3N56xW9kIQjzuLI0mRkyQakAfQmZ6cq70WA0wm1d8kmg22OJJ3Sbas4ewqb0wQWwClzA
-	 CHbd2linjlFNuhDlT0rJ0F8o9NBrDkvPN6KSZCRBHS82a5L5ofIjS6mZyOyo8Mnn8+A==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hkFwGTrLVVa7; Tue,  6 Oct 2026 21:48:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 5C89960871
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791323302;
+	b=rLqhd/ZYeKtoPOxPsB48mr/3F1iTaL4b3gEMNigXmCFPanSkMkbruS7CZn4Z1hwfue4S
+	 3IQJjDifrPW17P594GAbiJuCfgTfHGzMxdiQAp6Tglsvciuf46bAju15uMgn5LFfUIK3Y
+	 agnDfxabsQefDqfDBO8FGP0Hxb3N1JFa5NuswTfgRHawWSSz+a5p6/DlX3StAv4PgQNnl
+	 SeW8E0DUQ2AJ9k754rpruH0Z0RbEkVYXf+i3Qh4khNVUVRa5ObEeW08zgYs1jj4tv56lQ
+	 fp0O1rilfRopdIsmC+NoyoXM+UrNe4brd4gLvti3mVklPJqIlPQfI4DPaS/Si8+etaA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791323300;
+	c=relaxed/relaxed; t=1791323302;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Yal9Rsxm5FGFyZPhoPBOLQpmkiMQNlMunOaQbMGnR38=;
-	b=GgvlvMiQRY2raZ0vhPT5OdFhCRqdtCa0WR7r2toq8iMs/owvqGinrxUYtz0Nkb+6rF+b
-	 9bUCC5NCpUbY2Mq6bVy/2bcxsdMnWKOOCF8m79CKK5mxtYQ9GFwBRWS3W9+rGqynuzI+S
-	 g6p5KswJ8XPDMgvCMez12rq+fuwixUXihUoJ0U1dq8kXvYrio/18AQO0dpOsvEC6sW2G3
-	 O6ly9B65tW7mYLTpEV3sr3H08sTYekQ7DsK0amupAV2r8q3XrdR3DQnM5OLuQRqab0b4T
-	 ohTWpS2+5P1E7nDVLhCoj3yPo+KEUKU+imKrrRO0O8eXTKrhCIVsGtV/gQINeWpsjlg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=Xpqz51ZkPeHPHAPjNIw84/IsMs00sTLk1LxxyUSsPWw=;
+	b=S7jUDcLh5OoUCxtCujPXcq49Wj5rF9IdCN//YixlXjA00h5nGVzanNgxlpFAxF+KdROU
+	 CKD/NmMuAFtrrc+irn87qxYurSlU05JrFTsVHcVL+Hd5vX0j9YDHdrvpEadiOevSTL3UL
+	 ykrAYI3FG8fIWfT2sNThSiThs9YPOwvOKC0YgB1TkIfia9q1uKkj2j8dRLdtn85HeTFjs
+	 eETxB+i0FAymJ+mci/g0GDmY5FEDV7kd0sLqlw/SyYa8RbViTceTmtOpo7/5G2Rb6NRF5
+	 qfYQRop9jl1CvFJ5HPSLWQVGRPrI+cLNDzqfQ3YIo/AVHGq3QHsLPSkTK8QG6N65VyA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; dmarc=none header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=MxKBzt9H;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791323300;
-	bh=Yal9Rsxm5FGFyZPhoPBOLQpmkiMQNlMunOaQbMGnR38=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=AogwddY5B0V2s5FLHKKuNLDLw7h5fKYE4R5vXgYjFY6ICYqNLytxlP9CAO9s3uGMv
-	 cngfLDy+VQ/hvaspWZ0wuCuYL0viz9DjTii4ulj9rZyYbbfnIPSqEXhsYSPS7LTcN/
-	 qPq+QL7FHkvknFDV50Jc2XHbvRGCXSRwUnC2wmzFtcvVNM3ZMnU6ZYKBuVbiNZqNao
-	 4KUE5T/IYTv7oYoWW0ggpCZI/cyHCQF3LaG3tr3oyoWxK2adut/39RdVUWcuX4GBzo
-	 5Oe3ZDE9222PZzlXTr6brFRqLtQv9vAEIU1eV5SXCeE2PkL3ZRpwJyY/2zVQ0H2Mtd
-	 7rOKz8zdVN12A==
+	d=lists.u-boot-project.org; s=default; t=1791323302;
+	bh=Xpqz51ZkPeHPHAPjNIw84/IsMs00sTLk1LxxyUSsPWw=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=A3sD34SXRRLD6jSE2Xr34Fxrb8RX9wC7s69Z/XKOJWs6/x2Fc+dLsvXZGggGxoV1g
+	 eGdaWqUE2RfzTuRwarVwiikVh4X2cIiPl7PsC8H328nacS0539XTQAgRaa/gzfErjy
+	 LvGb3Q4GIwXBmGhx6K2PJW8w4S4S1JzI8R0WrUr9f8LQ2IB1gXGEWKNIKdCExvTpoK
+	 CgVniXBNbgONoW6RUlaNMnYKSndSgxAUjBgKn0zbz2p6WiUJcg6I9VKOrhk9Divy5u
+	 fnYbzuGBbvWLnvkFSGh/eGSVgjGxoaEySkQ39+/wu0nYk2SrvEo9+YwIvDERl9PxAl
+	 dL+6TOIwLSIlQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A32C24061E;
-	Tue,  6 Oct 2026 21:48:20 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id D826A22B
- for <u-boot@lists.u-boot-project.org>; Tue,  6 Oct 2026 21:37:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5C89960871;
+	Tue,  6 Oct 2026 21:48:22 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1832432F
+ for <u-boot@lists.u-boot-project.org>; Tue,  6 Oct 2026 21:37:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D5646402D6
- for <u-boot@lists.u-boot-project.org>; Tue,  6 Oct 2026 21:37:24 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 09817607ED
+ for <u-boot@lists.u-boot-project.org>; Tue,  6 Oct 2026 21:37:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sdRriFrYGjG1 for <u-boot@lists.u-boot-project.org>;
- Tue,  6 Oct 2026 21:37:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 1BB7240210
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::32a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791322644;
- b=slvq961K6MndSeOsQ1a0HcXFzzvtDfjmSF9MPbWMCHEmrLxgvCH4lI4ZSq7ia36jQNez
- rbE5Fu3vlrSylJIKVlYd23QncDE0vQBxQ3Z15Og6sKZwFZJ0m3KAcjnBp7n9Pc5LcwJkb
- dpT783MHrrC9iRyCB27fnXDcWo5C+xHkHMgz1NDLrIRGbA/BNP380FXkF+LcWIv/B8urP
- KuUEM4cljWXMusoPgh/6JkvDWuWlWfDC/O1l/PGI6ZlP5dmXlQ8QdwLgICP9N2l5KwpzW
- KVyv08nNipGlLJmKhbosstyICK/ZS10x7Qv9GF8CUamEp7N6KN5GZw0dc7ZLGbI7ZCA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6JbishXrfXig for <u-boot@lists.u-boot-project.org>;
+ Tue,  6 Oct 2026 21:37:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org C65AD607CC
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::22b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791322645;
+ b=Vd2kd4eXjISnLvQDOT4eiqkeDxLOXhXU/7PjTNh2CddmSl3gJh8ZiDK7/2x0a7uVO6P1
+ MH51aztuIhH4KF0dv8JjlI8tj+OsZnT0jWHmHIE43/b9aSurDMSWg5LbqyFnu2xmERiWA
+ x0EvbRMSPyiuq7B6Bj9BZx5u1ogji+gU/JmLZ5QfBxG69UQsMF8lwpC5Wfdyh8Yec5xsq
+ RKRUZyHmJH73MijW8DShp6DRLxE9hG/wwKjQdZmV9i2PN1kcyJRJBh92fOiIMlhZrd/K1
+ cs5zlG/mXlStSAaC8qkWYMckopckJyKS+unL4A+u6OJIecOFJATI5FPphWIhTQ+onOg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791322644;
+ c=relaxed/relaxed; t=1791322645;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
- Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=Yal9Rsxm5FGFyZPhoPBOLQpmkiMQNlMunOaQbMGnR38=;
- b=FokzO+8vlU6HBsRt4GN4PqskEFJ4dKPSSp7ke5ZvPCTRTugS38AeEfbeHk+e3EqDnoio
- eaPl9yx59i2DemRyfijgoKSLBpm+/8pY4UkaXz+sLU9bZTqKOH5ajpJ1E9mUOYEo32hwO
- ljiETd1yZ2y4WyBlk82SblvnM+UyCuZf//kw7e2+QO2GHsSfAWRYJy4Ekuv1Vl3Mjo/td
- i0j6CDJZQjGtr3ySYv+UzAZqvSPN5vvEd6eJDnsGlbphSvlMQql9U0E9O0NcUk3d8Pfr/
- NjCCOUhqlkq20MTs0r8uSifKxsr0/AgbeycoHmB+BpdCzKwCfgvt+s55enf9Lrp5xTw==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
+ bh=Xpqz51ZkPeHPHAPjNIw84/IsMs00sTLk1LxxyUSsPWw=;
+ b=isnKaY4NtQs5l9/Yu8f+hvJFn+3gKnBod2cFOmCpTV9SHI9HQBplrjCqIRLSxE4cukrF
+ niQr5rXqmPTFXN/VhrtpESqUbFcLslCemEM5FQJ5HrV/hjS1EFQit/9qg6Ujp+j3E4yti
+ akdQ/4RRv4SeoTeIOi6mSInQaSZn5PaoNcXcY5Br6H4b9MQgMsjg+CC50QAWjcrAEFen6
+ J1lSsh97WKcwRuBscuGWY4MOKwQL2wp8+yCoe9RK/H5tVh4wbnx8drHw6ClHtCckQBRmY
+ OlQg4PRmTYVPMcKLP8lkmBSl9TQCUWTXooPVfKZzzzGEIVoviDrdzcjMAocrDHZpVNA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=N6GzNfR7; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::32a"
+ header.s=google header.b=MxKBzt9H; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::22b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
+ client-ip=2607:f8b0:4864:20::22b; helo=mail-oi1-x22b.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=N6GzNfR7
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1BB7240210
- for <u-boot@lists.u-boot-project.org>; Tue,  6 Oct 2026 21:37:22 +0000 (UTC)
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-81ae6aefdceso3143448a34.0
- for <u-boot@lists.u-boot-project.org>; Tue, 06 Oct 2026 14:37:22 -0700 (PDT)
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=MxKBzt9H
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C65AD607CC
+ for <u-boot@lists.u-boot-project.org>; Tue,  6 Oct 2026 21:37:24 +0000 (UTC)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-4e85dac114fso623215b6e.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 06 Oct 2026 14:37:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1791322641; x=1791927441;
+ d=baylibre.com; s=google; t=1791322643; x=1791927443;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=Yal9Rsxm5FGFyZPhoPBOLQpmkiMQNlMunOaQbMGnR38=;
- b=N6GzNfR7bjLkG0zBAcAZRdg+EKj/DggJaa9x5k64KvZEb8vS2hDVNPU0t1lgXuGXW4
- pphIoUlihoi3Bn2t1CvkgT/Vo5TaJXItdyu/h+450+7PoxIP3C3wqcunnPN8Dv9jqrO3
- 78UfZBK5CwMPweqntJokd2NFKHKPi712kcnR8AXbIfNpEeY5viUeUueBIMdLV1AFqAvZ
- VS3hmmRgUiI3XyPjA5+LCk0x6w21Q1iwhjxvcoCkdFIsHvqxrY5QhIXbcS5uDi3nTFbK
- vub/BK0PoKNtTzrFeykStiiJn8yTd4F/vse/xeoY4s9HzVgtBWJ06N6bJAET2nJNf8gS
- PF1Q==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Xpqz51ZkPeHPHAPjNIw84/IsMs00sTLk1LxxyUSsPWw=;
+ b=MxKBzt9H7vn/tQjC5EKFC6RbycnbD5EuzSXBq8eVmtFp/1FRAp/Lv17aqW+Y5AOZSc
+ opTDoMjuFWqO36UfPA3GWa0bIXsB5Hm5+ojT/Snb42Vq5YbIcXaF7A6sJ+ZN5sz6AkgY
+ TEbwOPhRsrWfYQ/BRp3hl8FFO5r3Nn1xO7NyVCUMSkpsIRPmQdC75Eu4ay/7ml+3Vlli
+ FRDJq9UrhW4RA8kmAmP0rflRPXQu2swIDtbtN/IQ617BbEjfgKGN/P8CzzPXmRV0hQQg
+ S2hy2YhnavDVVGgLtOW8BV9k15JZ4EHBs3ApVHOt7z0jDLnsuYPxHjTQpxERSvZJ6gO1
+ WSrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791322641; x=1791927441;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=Yal9Rsxm5FGFyZPhoPBOLQpmkiMQNlMunOaQbMGnR38=;
- b=0JFV2CkDCGaFmwFER6bSvy6FfGODtMmpnWO134/OD6gHnPuxfYFfVf2R26c9RZ9SjD
- hD1wzCQWVI6CFHmFyFRykyU6xdMPNiHRavwze7Ra6Qg6kVZ0B0zFZo5Wghu6oxYgoMVd
- pcRG+JtqdaVKX4ca9WgV6ONfQ6lIwge96VLFBDQHWXbVsR5wRFL7IYYAjxkvSdJkhYBT
- /0qEEETGbbwt7OSose1LxTX8GmyWyMfodV/cxxG34YX1FVsaNTrlkK8ofvXBdAhP3kLh
- TZKqgsLXZkwJA5zAZCNXFp0hEr6wh3UXhAzsMUtm6mWIEcA0aWqZEoycVqlf1qOAJFlA
- T1cg==
-X-Gm-Message-State: AFuF++kVz3pgTUOFL2xXmbEdKUCn2pZqsHp+1p2VhA0BOyCeUPeIy9KG
- Wpg+F47tY2R5s7hf8JE61qgt4felIBceKV4i0mzm7aIWGL+8fWU/xELYNLoR2MP9QZ4=
-X-Gm-Gg: AYBFou3lLJyQT/XYWDHkcJGUXKYy2c4tbQx4nWPtDkfWYbtyHIYUzqojwx94fiEG7vV
- tpycXXQlrfKo0ytCXrdi1MyDy9UUvDl8ABhOXkm7xaKF6ArRkV3e9EFEb+Y8uZjh4BQSduYjqi/
- PNddBCJODvWmH1wKqGGJatWbURK1rjAcsUGsUnQEjcVYUfjF+hm5uZ2TxeKJJW4E0bZsYM0dQ3X
- BfrCBfNxup4CMQSASfPzfvGkyJlVLQYn0ROhFNHdug90GWZaMCTD7Xi/Rdch1QZcrQwzArDO7PZ
- GPrr48qnMzs8HF7wsATdlHu/L9JSOR3fPGWHP7B4fTcgL9EoFizT7NjeQzzHSVNgZ0pv9vTdZaN
- NGulS0rtFxvYBnorQp+2dayi+wgQCXZ5/EYfsbrQZFfRxHvdxygjaSTpjudblPpelTMIf2QXCqK
- 8QYhstqX7uPfyscXHlVxvE6vIlOryQvs/MUnaaCCjLSrsCYm08yYEkGYnu3RO+mJ0WJxqgmN6xP
- w==
-X-Received: by 2002:a05:6808:3089:b0:4b9:e5fa:8903 with SMTP id
- 5614622812f47-4fc44d4750amr742965b6e.22.1791322641368; 
- Tue, 06 Oct 2026 14:37:21 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1791322643; x=1791927443;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Xpqz51ZkPeHPHAPjNIw84/IsMs00sTLk1LxxyUSsPWw=;
+ b=NRi/lf4ozJAr3Ws4cWjYtit0ffq1e6+shDDOOlt75MK1HrZlHAhFHq2gY5QMhvFM+Y
+ GbhEJz4jhF+leWsxo9LQFNbpgJ8dIVJPUruDSo+gOYT82mpb/+Z7nwfrSLg38tDBlt+P
+ O5ykwDx/dQQ3xbf4pFz8erWmx624eDsx6SC0hzAtwcHOjJuAqdq2B6Q9cQaqVUJ2dpsG
+ suNY8GglbVsM0hjQsiwI3UGPahZzhpQSXpQlObNebtfMP00o/qbOUEKQCYcrAHACIKiT
+ s+6Izpn+pCMGlBF58Yspzb6WVPpfz5P1mkDJvBP9q57uSwIAa3jC+KfQAfZfV9JUeNZD
+ W4iA==
+X-Gm-Message-State: AFuF++nPcBKPfF9d9+wzn39pyTRjGUL9G4kXH+fLLuuYHipAi95cvUEC
+ ihNhHTltx8BzpeRRV6JrVHFDPgEPa/1XIUZdv2MZ6jV0YysrzETMYu4vuK10EoVF+YCjIh3K98p
+ 2TDuu
+X-Gm-Gg: AYBFou392R9czGzMerg6HOCcATr30zWJbzT3XA/BqrlxyCXvOTCQFjUJqwiIrLkDKRl
+ gmVFw7mxiywPXnmqbSt42MBPzSAPZf6bjVtKD7rUGdODoCv9xEmmN37MOJTED7uZo1pcvey0uI2
+ HOMYd5bwrKQO83mco8abf3N0aQJjRVSrVPO45C4xOwlMGSdLdRjUVlXwkqMhCrXN5Cm5emZyBPX
+ 0KREO45gTnwWFG1COdV4crXCi0qyAlWVwi79EFxq+5UyzYl+1oWKGe8qepgx/i5NwexlVcCZsVo
+ DwmTRX2ua3qn5nVTZY5pcxMLl8OWTG189s3Cuff9nQohL6nvTlxq5fm7HVVyHSHUp7u6YwLlYAV
+ YH+rySYT7pVPmTyZ9i33rx0oIW5PKak7qfsioY/e0r7pHQt+sZF0am3fQeDw8GLp17joP1NAk30
+ FIuQYfUcG2R9E5RPG41IUf3xuzFN60h0Ob3NXUT08jUh1djg3A7IlC0BGxB38KfRjNrVLWsbhD/
+ Q==
+X-Received: by 2002:a05:6808:198b:b0:4f7:d324:bc3a with SMTP id
+ 5614622812f47-4fc45d579f2mr719095b6e.18.1791322643338; 
+ Tue, 06 Oct 2026 14:37:23 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:372:3180:ce34:1fe7])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4fc4953f89fsm389386b6e.12.2026.10.06.14.37.19
+ 5614622812f47-4fc4953f89fsm389386b6e.12.2026.10.06.14.37.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Oct 2026 14:37:19 -0700 (PDT)
+ Tue, 06 Oct 2026 14:37:21 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH 0/8] arm: mediatek: add DSI display support for Genio 520
- and 720 EVKs
-Date: Tue, 06 Oct 2026 16:36:12 -0500
-Message-Id: <20261006-mtk-genio-720-dsi-v1-0-7fa10e9c4506@baylibre.com>
+Date: Tue, 06 Oct 2026 16:36:13 -0500
+Subject: [PATCH 1/8] video: mediatek: mtk_disp_mutex: describe the DSI
+ pipeline with data
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4WPwW7DIAyGXyXiPGtA0gTyKlMPBEzH0kAGJOpU9
- d1HkmnStsNO1m/Z32ffScLoMJG+upOIq0su+BLYU0X0q/IXBGdKJpzyllHawpRHuKB3ATpOwSQ
- HTFvRGX6SNW9I2ZsjWnfbmS/nI6dleEOdN9DXRMT3pcjyMfajA9/ivtq0VDJRtKJuT0dpQRmzq
- 9MyzyFmaCzFVlvT0Zr3K//t+EMUrNkfWZ3BALPyeIWUVcw4Au0EMCXVUAsU0nb92vzLk7zeefo
- 6bicyIWGa0keCzqIclNZM2bZf2QYaVCqAME0u99W+tKQcjFP+ecJSthtsiODxlsn58fgEAcFy7
- aMBAAA=
-X-Change-ID: 20261006-mtk-genio-720-dsi-1cf87d259324
+Message-Id: <20261006-mtk-genio-720-dsi-v1-1-7fa10e9c4506@baylibre.com>
+References: <20261006-mtk-genio-720-dsi-v1-0-7fa10e9c4506@baylibre.com>
+In-Reply-To: <20261006-mtk-genio-720-dsi-v1-0-7fa10e9c4506@baylibre.com>
 To: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
@@ -175,17 +175,17 @@ To: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3101; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3983; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=gT2dXYFVatydEeONdf3vbFVga4lUgWq91qCR7xT+P4I=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqxWnPyXJiSoBZoj0xakXJbw9kiBmrQHzwnKf8Q
- mZp5pBlzy+JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCasVpzxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AjaQH/0kfuLTlgmIIm94A2Xwcc5eWj8U/N4Kzu6bQPP0
- sBh8CFtGWMcF0bUMPPJ0GoOR2kQ1u/IJdnNw6l68WeLfrf6WoxEjEjRflVUnGzVj8tK4lHkh2bU
- GCPoFea0gxuY+lyeqnSl8NaLsHTknkft4ypgF2zMa2s2QFEN6DOqmr7BDXyGzq2NwnRufUKSBEf
- okQL0Eia4Q/CIZEkdNvVvz+Fa916Z8me0+Vrd5/m6bO5zpzsTy7z9IHlr2PfkQ5m7xMZ2PSY/gW
- P4XpzoD6pCEUIKwZ6SI60eH4ygZfCTXEQ/LywSddMcmNUy+uPLzJSc3jAENc0RseeAF0JldJS42
- yxEI=
+ bh=YT/8i+HDGas9OaJsN+/w+4TK4EhHZH5BrQZIAX06Jig=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqxWnW928t7D+WYP6s/DXWUMnXLIqHFGskj7do3
+ ZUojA5zXd+JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCasVp1hYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ac+4H/1sCIIdFZdvHVDETrhaIA5k+CBGgjcaRaeLIcHo
+ MxQ+pr0Ok+ek9BBsUGsC0k+MBoiygFoo9MSbUnkTgXc+pnPb6lhQXytVpH6svV3umNSYQgfX4GV
+ vXHuNJb3OXgWsKB9XlNGkAj0vbNpAX/Pf+qzG+vd/JCuPAc1t0udBf4uEsoiNnjEyaSXNzfZ+q7
+ TkDej5Txy7SsDprEJa2JhwrPIKr0bdbpEPfbyCv6/cxfBojHUAyagFT90uxD9W63pls33uWZdJ/
+ iYsAo+WKB7K7YK/ml06wrMoO3mL4OIm8p4GVJCjzCRf2Jl3c/81aio871v20OVZFGrHgihP6bC7
+ fQ00=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -201,63 +201,107 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add the MT8189 DSI display pipeline and enable the Startek KD070FHFID078
-panel on the Genio 520 and 720 EVKs.
+Replace the per-SoC functions that set up the mutex of the OVL -> DSI
+pipeline with per-SoC data: the MOD0 bits of the pipeline components and
+the start and end-of-frame selectors of the DSI, written by a single
+function.
 
-The MT8189 OVL0 -> RDMA0 -> DSI0 pipeline reuses the existing MediaTek
-display drivers, so the driver patch only adds per-SoC data. The panel
-has a VDDP input that these boards switch separately, so the panel
-driver gains an optional vddp-supply and follows the panel's power-on
-sequence more closely. The Genio 360 EVK panel node now describes its
-VDDP supply as well.
+The functions differed only in those values, so adding a SoC now only
+takes data, as in the Linux mtk-mutex driver.
 
-The vddp-supply property is being added to the himax,hx8279 binding in
-Linux [1]. The mediatek,mt8189-dsi compatible is from the in-flight
-MT8189 DSI binding in Linux [2]. The mediatek,mt8189-mipi-tx and
-mediatek,mt8189-disp-pwm compatibles have no upstream binding yet, and
-mediatek,mt8189-disp-rdma is not settled: we use the
-mediatek,mt8195-disp-rdma fallback, whose FIFO size matches MT8189's.
-
-Tested on a Genio 720 EVK: the panel shows the U-Boot console and Linux
-boots afterwards.
-
-This series depends on the MT8365/MT8366 DSI series [3] (and its
-prerequisites), the Startek KD070FHFID078 panel driver [4] and the
-MT8189 mmsys clock compatible fix [5].
-
-[1]: https://lore.kernel.org/all/20261006-panel-himax-hx8279-vddp-v1-0-50d884b42aae@baylibre.com/
-[2]: https://lore.kernel.org/all/20260916110825.102631-4-angelogioacchino.delregno@collabora.com/
-[3]: https://lore.kernel.org/u-boot/20261002-mt8365-mt8366-add-dsi-support-v2-0-9e435457b90c@baylibre.com/
-[4]: https://lore.kernel.org/u-boot/20261005-mtk-video-panel-startek-078-v4-1-2b18dc72ddb4@baylibre.com/
-[5]: https://lore.kernel.org/u-boot/20260924-mtk-clk-mt8189-mmsys-v1-1-cb4abe521454@baylibre.com/
+No functional change.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-David Lechner (8):
-      video: mediatek: mtk_disp_mutex: describe the DSI pipeline with data
-      video: mediatek: add MT8189 DSI display support
-      video: panel-startek-kd070fhfid078: support a separate VDDP supply
-      arm: dts: mediatek: drop the USB port 4 VBUS regulator on Genio 520/720
-      arm: dts: mediatek: describe the Genio 360 EVK panel VDDP rail
-      arm: dts: mediatek: mt8189: add the display blocks
-      arm: dts: mediatek: add the DSI panel to the Genio 520 and 720 EVKs
-      configs: mt8189: enable the DSI display
+ drivers/video/mediatek/mtk_disp_mutex.c | 52 +++++++++++++--------------------
+ 1 file changed, 21 insertions(+), 31 deletions(-)
 
- arch/arm/dts/mt8189.dtsi                      | 147 ++++++++++++++++++++++++++
- arch/arm/dts/mt8366-genio-360-evk-common.dtsi |   5 +-
- arch/arm/dts/mt8371-genio-common.dtsi         | 139 ++++++++++++++++++++++--
- configs/mt8189.config                         |   5 +
- drivers/memory/mtk-smi.c                      |   7 +-
- drivers/video/mediatek/mtk_disp_mutex.c       |  71 +++++++------
- drivers/video/mediatek/mtk_disp_ovl.c         |   5 +
- drivers/video/mediatek/mtk_dsi.c              |  20 +++-
- drivers/video/panel-startek-kd070fhfid078.c   |  52 +++++++--
- 9 files changed, 399 insertions(+), 52 deletions(-)
----
-base-commit: ca1c29c01bbd03f89cd86159b2959b4e72d41aa9
-change-id: 20261006-mtk-genio-720-dsi-1cf87d259324
+diff --git a/drivers/video/mediatek/mtk_disp_mutex.c b/drivers/video/mediatek/mtk_disp_mutex.c
+index af8e7032a01..1d987ad06f8 100644
+--- a/drivers/video/mediatek/mtk_disp_mutex.c
++++ b/drivers/video/mediatek/mtk_disp_mutex.c
+@@ -76,11 +76,13 @@
+ 
+ /**
+  * struct mtk_disp_mutex_data - per-SoC mutex data
+- * @ovl_dsi_enable: set up the mutex of the OVL -> DSI pipeline
++ * @dsi_mod: MOD0 bits of the components of the OVL -> DSI pipeline
++ * @dsi_sof: start and end-of-frame selectors of the DSI
+  * @no_clk: the mutex has no clock of its own
+  */
+ struct mtk_disp_mutex_data {
+-	void (*ovl_dsi_enable)(struct udevice *dev);
++	u32 dsi_mod;
++	u32 dsi_sof;
+ 	bool no_clk;
+ };
+ 
+@@ -111,39 +113,23 @@ void mt8188_mutex_config_hdmi(struct udevice *dev)
+ 	mtk_disp_comp_write(dev, DISP_MUTEX_EN(MUTEX_HDMI_ID), MUTEX_EN);
+ }
+ 
+-static void mt8365_mutex_ovl_dsi_enable(struct udevice *dev)
+-{
+-	mtk_disp_comp_write(dev, DISP_MUTEX_MOD0(MUTEX_DSI_ID),
+-			    MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_OVL0) |
+-			    MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_RDMA0) |
+-			    MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_COLOR0) |
+-			    MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_CCORR) |
+-			    MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_AAL) |
+-			    MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_GAMMA) |
+-			    MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_DITHER));
+-	mtk_disp_comp_write(dev, DISP_MUTEX_SOF(MUTEX_DSI_ID),
+-			    MT8365_MUTEX_EOF_DSI0 | MT8365_MUTEX_SOF_DSI0);
+-	mtk_disp_comp_write(dev, DISP_MUTEX_EN(MUTEX_DSI_ID), MUTEX_EN);
+-}
+-
+-static void mt8366_mutex_ovl_dsi_enable(struct udevice *dev)
+-{
+-	mtk_disp_comp_write(dev, DISP_MUTEX_MOD0(MUTEX_DSI_ID),
+-			    MUTEX_MOD_BIT(MT8366_MUTEX_MOD_DISP_OVL0) |
+-			    MUTEX_MOD_BIT(MT8366_MUTEX_MOD_DISP_RDMA0) |
+-			    MUTEX_MOD_BIT(MT8366_MUTEX_MOD_DISP_DSI0));
+-	mtk_disp_comp_write(dev, DISP_MUTEX_SOF(MUTEX_DSI_ID),
+-			    MT8366_MUTEX_EOF_DSI0 | MT8366_MUTEX_SOF_DSI0);
+-	mtk_disp_comp_write(dev, DISP_MUTEX_EN(MUTEX_DSI_ID), MUTEX_EN);
+-}
+-
+ static const struct mtk_disp_mutex_data mt8365_mutex_data = {
+-	.ovl_dsi_enable = mt8365_mutex_ovl_dsi_enable,
++	.dsi_mod = MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_OVL0) |
++		   MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_RDMA0) |
++		   MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_COLOR0) |
++		   MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_CCORR) |
++		   MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_AAL) |
++		   MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_GAMMA) |
++		   MUTEX_MOD_BIT(MT8365_MUTEX_MOD_DISP_DITHER),
++	.dsi_sof = MT8365_MUTEX_EOF_DSI0 | MT8365_MUTEX_SOF_DSI0,
+ 	.no_clk = true,
+ };
+ 
+ static const struct mtk_disp_mutex_data mt8366_mutex_data = {
+-	.ovl_dsi_enable = mt8366_mutex_ovl_dsi_enable,
++	.dsi_mod = MUTEX_MOD_BIT(MT8366_MUTEX_MOD_DISP_OVL0) |
++		   MUTEX_MOD_BIT(MT8366_MUTEX_MOD_DISP_RDMA0) |
++		   MUTEX_MOD_BIT(MT8366_MUTEX_MOD_DISP_DSI0),
++	.dsi_sof = MT8366_MUTEX_EOF_DSI0 | MT8366_MUTEX_SOF_DSI0,
+ };
+ 
+ int mtk_disp_mutex_ovl_dsi_enable(struct udevice *dev)
+@@ -155,7 +141,11 @@ int mtk_disp_mutex_ovl_dsi_enable(struct udevice *dev)
+ 		return -EOPNOTSUPP;
+ 	}
+ 
+-	mutex->data->ovl_dsi_enable(dev);
++	mtk_disp_comp_write(dev, DISP_MUTEX_MOD0(MUTEX_DSI_ID),
++			    mutex->data->dsi_mod);
++	mtk_disp_comp_write(dev, DISP_MUTEX_SOF(MUTEX_DSI_ID),
++			    mutex->data->dsi_sof);
++	mtk_disp_comp_write(dev, DISP_MUTEX_EN(MUTEX_DSI_ID), MUTEX_EN);
+ 
+ 	return 0;
+ }
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.53.0
 
