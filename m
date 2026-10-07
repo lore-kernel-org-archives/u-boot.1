@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64AA2CA6002
-	for <u-boot@archiver.kernel.org>; Wed,  7 Oct 2026 16:07:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80EB5CA5FFC
+	for <u-boot@archiver.kernel.org>; Wed,  7 Oct 2026 16:07:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 29AC540383;
-	Wed,  7 Oct 2026 16:07:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3B3FA60812;
+	Wed,  7 Oct 2026 16:07:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6-gqYuQX_bLs; Wed,  7 Oct 2026 16:07:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 6A072401F1
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791389241;
-	b=iamlHIYDrNtK6nnSfbXm1+GhZywiGB0Id++i96jgcXdLY90tIWTNouDuJAEJjHcR7WyH
-	 aRl+1iV5bpQ/NGj0W5OibbF9GuEiHdSZhylF9YvCMGmkw6N8RkX6JBGkSiTAvPmtF0MPb
-	 XqpVwn5S44LmpOuxOiqEJuN+wyAaC+vS7VxWgOmFZjGn7wGwN8Vs2ZXcXbXHUa6RE87g3
-	 hd0y8wMrBDW9S9igEXm1+/+zEma62ItjCDTPuRmB4d4ibuDBfJE2XJv3nNMDcStVH6D2x
-	 Vuexgm15MmPEu0v2HNwLcXSRRtjFiQ/RHp0qJ1TpASvu8OhzBKr3bujFAhFBoQvXwnA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ManJa86IpxBs; Wed,  7 Oct 2026 16:07:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 25AE76080E
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791389243;
+	b=JoQQP/Tk1tz51OMD4bw+D5p/b/WqU9kgGrI6K4M421LIz5Y13rCeeQq2ebYwmbZGvHYe
+	 SJQzU3Pp1WkV9C4VMu453kTvTNk+irPKji0uxi/rpUn1i3hyGig6EzHkhLOriS7adxgKG
+	 3W47/JSp4mZPUMMqU9kXdKyYTKESzA1SWbRlzDp7IxiGxTEjuJ6vd3yyBJXR/k+uddReC
+	 D9QFtPb7/1bT2ZZQ5BFe9vKegs/Hn0CElSXqf/AFbcxZpp+lhVpponDjbgfjV4qrEvJAK
+	 EXv5JUFlyje1uLirbtzVWDx5LujCu+Ap2Wexd5bh2y/s5enb8elPgvTQP6B/V09/dlA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791389241;
+	c=relaxed/relaxed; t=1791389243;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,135 +32,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=HNtN00SMoQ7aI4PxullC/dGL6VndlW4ZJK0xLnIG/b8=;
-	b=qMDSQvQMVB4KUYRNYWKnO+hVOC7QwhccQV2qjNi1kof5cOBwoIcaeJKMhPaX2PgsFK/e
-	 p8SsJhCA+rYhVpP9TFENYyY/a7/zgSklzgOilLZ6jSAB98XH74YvVmx4fX6h+UO86X4oX
-	 Vvkm68zwDSvgJJZ09KkaapZJitlNQISxw8FTQWBigUu0guWlhoRvmzOYshlbz04i5R3Bu
-	 qAKUSRXkOH4QE1A4Ox8ySgz0x3zojTskgRWkHpZpX5u5BWVYXYJQbdf5/1pv8oFJMqONF
-	 XkPt+YyZ2rdoR3LiHL83FLnKF2G+mjK8qz+EtfRFF1rhfU3hCaOItQ/nnP5a3HhDxpg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=lmZKjB5BBB+vMjFnVqohWt60+sBB8ub2L04B3d9sTck=;
+	b=IC9aCvZMIhw8wn3j9kH3lHNfXeajDMuZLHrWvHi4TySqp/tXss5gEXLiWwCk5PGFnr65
+	 UzACgWJjKKYN9WIoNp64WX/9Yo5Rm5Jjjo2PvP6VKxCE3gQH+wbIFu1SKpG7EI16pXhx+
+	 J3MOwPk2hOesr5eqiZRztYf9if7OHa2H137WR+jTs0s3YerefbZat4vR1jmIkrLXeTtPb
+	 Ve+hiZT37KmsIEeWteB/0C31ZTc5tQaRvpRO2+x+uQwJYhIMgRMWVU+jihcrkoHYc+IeP
+	 CpEdQQxf38KRwhgwe7coM1O3h7r4YUlS+ea4Kd2Bd1hH8XhGFW17auzXc2U7RtJ9cQg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791389241;
-	bh=HNtN00SMoQ7aI4PxullC/dGL6VndlW4ZJK0xLnIG/b8=;
+	d=lists.u-boot-project.org; s=default; t=1791389243;
+	bh=lmZKjB5BBB+vMjFnVqohWt60+sBB8ub2L04B3d9sTck=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fn397jWdcR1+w3HJbXNaZlcfnKAnydF2EdUzVku0Q/1fKNyqSL1Y8nk+MkNFXBT+n
-	 yG1aqp8edZyPG8V8PM4P8R+ZokDMIavXOYoVgsL4nqlj9bIWBhGY8fwBStlrOw/ahr
-	 ZEtSP9NFPh+f8veaLhKxM40SezHS7q4lQAEi0uq3L9PsuWPkYLmedHgbF/hDm7Y4Bv
-	 6p+Ol55WOJN58MV7blglgaPAfEOXNHzHalTPY72N/U9Nnuye3eBFrsPsxI/ByEBrHK
-	 4q3AYtHyAyBj8EqvbThE6fmBVbmcwVyIhtgiYGL8aXvNrc/ubWksRm1INAgshyUWXY
-	 vusISNvOBTeHw==
+	b=brliVSFJ010TIVgxEfexhWRxxGmSFynYhHSsoJC+9BKhdDaTmU176aevRb9rkk3ty
+	 AYyelq/w7Bo7vF78CiKzxoEdHJFXTw+CO3eQA57FiJEyLxgbhLTWrgGkkaY9HJwa2X
+	 G08zQBOXmlzuCOX9vGR8rfkKwc8PMH0dp+JwEkWUqYyp4PyP8goDMYzwozZwK29kfV
+	 QnqZHgs2kZpd1+8OuKjHPqjK9XKQUWGmTxIYgfKjA/P0lsmMvsG/h0DF83UbXdrA2k
+	 +6ImJhcG7XdCNmSQLtPClmwERPSNBVR2DGLkHBZwLRtwAOlEyBbAO95ZCdJnSNnbE0
+	 4LyhisWK0npRw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6A072401F1;
-	Wed,  7 Oct 2026 16:07:21 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id EEBD132F
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 14:45:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 25AE76080E;
+	Wed,  7 Oct 2026 16:07:23 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id AFE93335
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 14:45:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D54FB4031A
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 14:45:54 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 95EB0400B8
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 14:45:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sv9LZdspm6QY for <u-boot@lists.u-boot-project.org>;
- Wed,  7 Oct 2026 14:45:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org E682E400B8
+ id A1BPN9V9FcB3 for <u-boot@lists.u-boot-project.org>;
+ Wed,  7 Oct 2026 14:45:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 85C374021E
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32c"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791384354;
- b=pXku6jbWAujEG7an1qZ6c6rzK4tgxwA490YEwm2RewwMbR3W2xepGVNmwp+WWJuUYGHi
- 4cdji5eof37Pr/EGYaH99IkC6flYNxeI8cwjFr8sj/oc8jBu2CT86v4eqCmRfaPPyTHUe
- oA23P6GY7K+nkXrwglPSjA2Qd1qPwdD5Rj3k8vI9D1rmx0L9ONQtOegrZ8XCGekJwnRTI
- WWMM8uy9ogKp+RP38UNpS2qAJrgwYnABcSjOzP9ue2AN6l+ctXjuCFcL3mLlhhIR0J+sj
- KNk+y6qXqgI0p5m+mEQggaiYiXyLteGgVizs5d08FTLBZrk31dg9y5LbA2+TNplK4pw==
+ b=dDqJU1bdr1hdT8EDGhvXiviriHIa5nd5IqgbRbwzzRBfDslbNCCpQqNDxfBd+qpjs6g4
+ EIYZ8D9uPhhszM+I36mb2bLxC3c8+q8Gw/qAEXOBP6+H+lcD5cR+QdCNbU36cwjao2vWW
+ LERPVc3c8dut36qqO46x1xzeZEny8r1t3dyuYIsYihi7G6rduXmQq7vJeJqKfHCLPCYiW
+ g50dWQmDaUAchJfovzq90NxR76o1cBJZTJcU6uQCZvI9kNLIU8c5Te7UX4Ezfsr4BZ7vY
+ Q9TBje3mlb4YpZRo9BqECvHGNrmPzg2Z6pReutbaApzWYByTikdCCm9Y3E9vCBNyjmA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1791384354;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding;
- bh=HNtN00SMoQ7aI4PxullC/dGL6VndlW4ZJK0xLnIG/b8=;
- b=VPeH09Qcg8P/e7n7ON/a8VRlmRZR1A7v6gQsGKopOEtW0YJnOVzRFUQ4ou3Oirc1FqIm
- NqhKyBYZDbazOu61y525pCFJfzoQyCqteauN1Taz2NkI2BqEP3BftaKq1879in7hlXkq+
- C9qJWRtSkxcdaNWUqLTxywyY7LNDlGnElVVNqZqnJBn6zT8P5W2c+rW18YhQgzCObzPVI
- 7w3qfhxbC/Bj7iim1ZP6lLTVPPU5bIkJuvTp9gmcPWupEbfrc+cqk3PMPV4oVM9DrTEhW
- RySLuJfNAwf+imCrBLuG/Ndgo4ZSz3mcCrv0ffnfzSxQHlEnzc0f4LqW9ma8FGSSgHA==
+ bh=lmZKjB5BBB+vMjFnVqohWt60+sBB8ub2L04B3d9sTck=;
+ b=TJ1Mxh0qlQxu7Snem+v+NAnvpQsByc2sesf7utsaslP9wFtEJ8+zbYMsR0LGTa4BqoZF
+ e5nSJ6GvN5zoEwBrRs2Oemq2kx7oWVzY/XaWga+16KuX1ftk/o+sa3ydo2ZPqTOJ66twJ
+ yJ/QQWzGjCg6wDuxYg4ceIk6TiZvVMSE3rcXBOxfmI/nT0ixO+ltek1SQ8hmlJYw6ENaS
+ cjkG6Z6dsjfE95GbLQSYYMfvNEpruFSbM5u0qLgSDquk7eYMb2x+hQ6/smui4tIEDGeYF
+ oEjxyRepe7V4twj1IQNVT8ceh0anaELuSdKJO0gJqBg8fvJuy7iV2/T7+/Z4yA60cTg==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=pass header.from=gmail.com; 
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=i1G5rGjb; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
+ header.s=20251104 header.b=Ht7PS9ab; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
+ client-ip=2a00:1450:4864:20::32c; helo=mail-wm1-x32c.google.com;
  envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=i1G5rGjb
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E682E400B8
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 14:45:53 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4a16aaf2067so47775225e9.0
- for <u-boot@lists.u-boot-project.org>; Wed, 07 Oct 2026 07:45:53 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=Ht7PS9ab
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 85C374021E
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 14:45:54 +0000 (UTC)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4a0286c981dso38616135e9.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 07 Oct 2026 07:45:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791384351; x=1791989151;
+ d=gmail.com; s=20251104; t=1791384352; x=1791989152;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=HNtN00SMoQ7aI4PxullC/dGL6VndlW4ZJK0xLnIG/b8=;
- b=i1G5rGjbEga1xX+8feqUaHPJaIIuLaqrUICRWkL0RLGSUmqYHXmTV4kol0dPsuLkwS
- 1CwnQKXiqcfkS6a4Dh0+71da/EEgWnE44YOcEIWCdf/xYZgeE4IJl6MKcqMJtovVHn4+
- yzuTuwhq8YViKlIvRspL+bOJmUTBXgjW8in5rca9Pbx0Q22G9zhl+ok0rRAobuefxknY
- VIlMWf1wNRjcPQ0ua0TxfXxwReM+dr4tWRbeQAU6E2h8xXCxSsi4czH3sj7jlByLtrnh
- Es3RJFfbs0A1dz4E+lGSA7AgOJ3JpovDggLZ1AJYHFGg9KHQVL508h0LKngKIUitpPXz
- B0gQ==
+ bh=lmZKjB5BBB+vMjFnVqohWt60+sBB8ub2L04B3d9sTck=;
+ b=Ht7PS9abViu3V2fbin1/37vJPqOW9awZv2A8PPMGA20SRbAdK9TW2X/JDS+kx1nqIf
+ NMOtwmK8164Jp7RM/PYGFIYSy4I+doYLtmpurg3xD1iHYYDkq/qlWKLCLS98A4DM6th1
+ txKOA6zQPIexT4AVekpZ2ekAeL9nNL4d1fCimLuYNLMujG9N0H6qYJpiFPxYqbBgQ63e
+ Ndqe0I/DCzVNCvbB+vzRxnlsG2jx63+e+y4f1lmTlgMTKqhF2oPGhTsXiitsGWAMyHHZ
+ /LgMovdBz0ancCsAsqOv/kMwyDV5DisKJtaTFV87Halyj2iovKc/N7fGw42mz/7p8lwJ
+ WVQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791384351; x=1791989151;
+ d=1e100.net; s=20260707; t=1791384352; x=1791989152;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=HNtN00SMoQ7aI4PxullC/dGL6VndlW4ZJK0xLnIG/b8=;
- b=pf54ttez91FPWp3Y5qWQjX0q2W2Cr5rAXpqJJH2kCgEoqvCSHATzygaU08nkj1O4K2
- r39YpRdPS2NA5pOIvJpS4dKt0BpaERmrSDWXJDRvNmHYtRY2MSkF4dLF9TyrtYq24nzu
- 5B5d5l507qw3Vj4DeCpkn/Rze7knpmMh9WO2v44EGmflMTyHr/ICkU7C42IwO40T36zY
- 9hdhhEeYSCScd0urXdKQ8GAqxIl09hB2PTYFwF4WjutoG8HlgGlg4P4H/ak9XNI/TwMF
- 3jFfFa3wOeXfvNySHjLyFj1SiV2In/PRI9GFdI0sMyVWEmXK+19V0TQfZXSyH2ZXIsyT
- p1zQ==
+ bh=lmZKjB5BBB+vMjFnVqohWt60+sBB8ub2L04B3d9sTck=;
+ b=DyLMHgbKrlOWMOWN8rzxn/0krfmwugs1b+oFiK1cqprwTWTQUWSK5XSFRgT+kQc+d9
+ gmvisMgcMVe4UdB9uSMC97WtrQpPeTMWaGwkHVIM/ke2RiCB9WL7fe5f8sS9FRQvMRGF
+ Pk7lCVuev9ZO7J0y4WKdruLu52oV6ylrcMu+0hKNk0WiM1HNtViVGRSIoaKTufVot3zN
+ Zxir+7dqtoucBAP7SPW+boSQqJJqXwEkUcQdRAgC9QFVQJXoMwIZc3YGihqmXenJmgm8
+ O+2/TTFmuDKGCy6FhAG4AN0XQbMs6DQthL3ttnrBKy0Se0YXO1LHs1WgPzgOfpg5BUjE
+ eMRA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzqhhoskxbbQohdTwJsOEnvk5YkeabKEYlKEl4GZjroe64z5AymaI6O8kRzC+tM6Zqzs7b4euA=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++m6P/zXW6MCsL0ZydbNUko2GLjWoL33zHGGEPnAa/N2yzBBC93p
- 5renaqa6riZitVT/wGcG0ua+zB35DkvlXZS6rTTDuH43dppOPkhtzTiU8nZQdLbQ380=
-X-Gm-Gg: AYBFou0xHAYWm3cFUnOYyrbfLUjPQ/bCOyq5Sh5LVidsQz2HaFiOXuADtF/CkblaCt7
- vewbXGxPnZuESbVgTvv41g+0EEcKcEgbtB/lu/+JqPAo7tWVZ560xElutyPgMSqiaXDNpqTR1WT
- Q+xTqvxJg669ja4r1TJKGA0rWm6WAh/cy/SRIhdACX3/HkylRsh9hjVhi1TYBlzk+Ifcrfa5pgp
- bzHVntbQUITjyBHo8ypeD0k3p2QFk6LX5roeAHOvImlRsHr9LULuGmxY12VI/Bbf3iqgIRuw/wp
- UgrpxaaEV6I1h6EJzNAOU/BA9LW3oEWl0YZuyv62JwUaj4W1VmPQMdmePwVkNQkvoLuUoHe8FIE
- YOEsanJCPkpnR79mQ8HqyvAF3zhu5g8Le+JWpylCyU1lDWnd8enbeyrEdB3omFyjwh8Witja5Cf
- kpfqrgH3oyqoY5HRDQnGRh9vz1FyOnxYavVc1eM3ebIlGwEckckbjolG2UZEdrGXDzCdj7esJ0f
- 19Q
-X-Received: by 2002:a05:600c:810a:b0:4a1:6f41:9102 with SMTP id
- 5b1f17b1804b1-4a1802eb276mr43332505e9.9.1791384351069; 
+ AKwUvBxaktk68Zca9ZHBX1OWwkD8qUHyXVD9JGUKJ7BbzUSoPNNK9epCN8o1wx2zqoaNCUWv1gbVbh4=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lDCfhC3LXH1useSrDXje29LTYrc2hq0pDJvn0Jd0TED4DSsIkF
+ eENlKsGGQAo5SuIkOi2/y+0RIQN2lgQPi5vvFfQu72FImHDjevaClgy4
+X-Gm-Gg: AYBFou0xP0iJ47DQfnbLJuX+0v+1NG0srhKj0G4Jdxuc0N0WRzKLB6Is4VR3+qnV0qg
+ qJp+5FzcjWtEDsrVMZCDwgzTXDZ/AQdEQVVkS0WbwUrRhuwNYLf6izJRVShJt5+3nFFhPvzH48A
+ 75P+ElKCPbsPxaFXdLIOHZPg/izjNgKC/ZTQXIDTYV3szSERamVJNUV05yODX2CTqBGOxf7KU6V
+ lhBs+CcwT7thRcqVnPKB1bwSQvZn/Y4f+nfORLO8vHYbiQePKwpcfPnFVl4/MMoNRv5xslCmT1z
+ q5ZmSlWRJ3wdrdOj8BHqA/wfU1TpvNR+akfrXf4hGNLglqlqQtDRkCILp3vF5iHy6AAC5vmp8fH
+ LZFucOqCwa1zC24yMwlTSFRrQ7hFeVzx7SqqGm4mTYQGPGU/IJrVxqycatumtJSlsnL4bYCQgy9
+ IQy9Ny1ZpCd7jpze3z/oSrqGPtatbv+jRE2FvNIEYbDswbm6rUlBhbHsHv5T9iSuL4uZNappCPC
+ oW8
+X-Received: by 2002:a05:600c:4687:b0:4a1:688d:a41c with SMTP id
+ 5b1f17b1804b1-4a18065e235mr41907335e9.25.1791384351949; 
  Wed, 07 Oct 2026 07:45:51 -0700 (PDT)
 Received: from deb05.proceq.com ([213.160.61.66])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a17f557bcbsm111620105e9.9.2026.10.07.07.45.50
+ 5b1f17b1804b1-4a17f557bcbsm111620105e9.9.2026.10.07.07.45.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Oct 2026 07:45:50 -0700 (PDT)
+ Wed, 07 Oct 2026 07:45:51 -0700 (PDT)
 From: Mehmet Fide <mehmet.fide@gmail.com>
 To: Marek Vasut <marek.vasut+usb@mailbox.org>, Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>,
  Stefan Agner <stefan@agner.ch>, Francesco Dolcini <francesco@dolcini.it>,
  u-boot@lists.u-boot-project.org,
  Mehmet Fide <mehmet.fide@screeningeagle.com>
-Subject: [PATCH v4 3/6] usb: ehci-vf: drop the empty bind hook
-Date: Wed,  7 Oct 2026 16:45:41 +0200
-Message-ID: <aa075df3fb1c0e510818aeb41b0ff68dabc398c9.1791381507.git.mehmet.fide@screeningeagle.com>
+Subject: [PATCH v4 4/6] dm: core: add ofnode_get_alias_seq()
+Date: Wed,  7 Oct 2026 16:45:42 +0200
+Message-ID: <0dcd337468ebf2c5baebc91c32bbf990422c2d32.1791381507.git.mehmet.fide@screeningeagle.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1791381507.git.mehmet.fide@screeningeagle.com>
 References: <cover.1791381507.git.mehmet.fide@screeningeagle.com>
@@ -181,54 +181,168 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-vf_usb_bind() only returns 0. Its comment describes a hack that keeps
-the second controller from taking sequence number 0, but no such code
-is there, and an empty .bind cannot influence the numbering the uclass
-does. Remove it.
+The sequence number an aliases entry gives a node can only be looked up
+for a device, through dev_read_alias_seq(). A driver that has to know
+the number of a node it does not own, one it reached through a phandle
+for instance, has no livetree call for it and is left with fdtdec.
 
-Fixes: 0885cdb9d154 ("usb: host: ehci-vf: Migrate Vybrid USB to driver model")
-Fixes: b27347f425f7 ("usb: Update for new sequence numbers")
+Move the body of dev_read_alias_seq() to the ofnode level and let both
+of its variants call it. No functional change, so the moved lines keep
+the ENOTSUPP return, the #if and the fdtdec call they had, which is what
+checkpatch complains about here.
+
+A test checks the lookup on the live and on the flat tree.
+
 Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
 ---
 Changes in v4:
-- none, rebased on next
+- added a test, run on the live and on the flat tree
+- the kernel-doc no longer promises -ENOENT for a missing alias, the
+  live tree returns -ENODEV
 
- drivers/usb/host/ehci-vf.c | 15 ---------------
- 1 file changed, 15 deletions(-)
+ drivers/core/ofnode.c | 20 ++++++++++++++++++++
+ drivers/core/read.c   | 20 ++------------------
+ include/dm/ofnode.h   | 13 +++++++++++++
+ include/dm/read.h     |  8 ++------
+ test/dm/ofnode.c      | 20 ++++++++++++++++++++
+ 5 files changed, 57 insertions(+), 24 deletions(-)
 
-diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
-index 5d27318de62..e5f9ec0fdbb 100644
---- a/drivers/usb/host/ehci-vf.c
-+++ b/drivers/usb/host/ehci-vf.c
-@@ -261,20 +261,6 @@ static const struct ehci_ops vf_ehci_ops = {
- 	.init_after_reset = vf_init_after_reset
- };
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index b5d13c43db1..81d91ce5476 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -1233,6 +1233,26 @@ ofnode ofnode_get_aliases_node(const char *name)
+ 	return ofnode_path(prop);
+ }
  
--static int vf_usb_bind(struct udevice *dev)
--{
--	/*
--	 * Without this hack, if we return ENODEV for USB Controller 0, on
--	 * probe for the next controller, USB Controller 1 will be given a
--	 * sequence number of 0. This conflicts with our requirement of
--	 * sequence numbers while initialising the peripherals.
--	 *
--	 * FIXME: Check that this still works OK with the new sequence numbers
--	 */
--
--	return 0;
--}
--
- static int ehci_usb_probe(struct udevice *dev)
++int ofnode_get_alias_seq(ofnode node, const char *stem, int *seqp)
++{
++	int ret = -ENOTSUPP;
++
++	if (ofnode_is_np(node)) {
++		ret = of_alias_get_id(ofnode_to_np(node), stem);
++		if (ret >= 0) {
++			*seqp = ret;
++			ret = 0;
++		}
++	} else {
++#if CONFIG_IS_ENABLED(OF_CONTROL)
++		ret = fdtdec_get_alias_seq(ofnode_to_fdt(node), stem,
++					   ofnode_to_offset(node), seqp);
++#endif
++	}
++
++	return ret;
++}
++
+ int ofnode_get_child_count(ofnode parent)
  {
- 	struct usb_plat *plat = dev_get_plat(dev);
-@@ -315,7 +301,6 @@ U_BOOT_DRIVER(ehci_vf) = {
- 	.name = "ehci_vf",
- 	.id = UCLASS_USB,
- 	.of_match = vf_usb_ids,
--	.bind = vf_usb_bind,
- 	.probe = ehci_usb_probe,
- 	.remove = ehci_deregister,
- 	.ops = &ehci_usb_ops,
+ 	ofnode child;
+diff --git a/drivers/core/read.c b/drivers/core/read.c
+index ba48862f44b..985f6128d97 100644
+--- a/drivers/core/read.c
++++ b/drivers/core/read.c
+@@ -356,24 +356,8 @@ const void *dev_read_prop_by_prop(struct ofprop *prop,
+ 
+ int dev_read_alias_seq(const struct udevice *dev, int *devnump)
+ {
+-	ofnode node = dev_ofnode(dev);
+-	const char *uc_name = dev->uclass->uc_drv->name;
+-	int ret = -ENOTSUPP;
+-
+-	if (ofnode_is_np(node)) {
+-		ret = of_alias_get_id(ofnode_to_np(node), uc_name);
+-		if (ret >= 0) {
+-			*devnump = ret;
+-			ret = 0;
+-		}
+-	} else {
+-#if CONFIG_IS_ENABLED(OF_CONTROL)
+-		ret = fdtdec_get_alias_seq(gd->fdt_blob, uc_name,
+-					   ofnode_to_offset(node), devnump);
+-#endif
+-	}
+-
+-	return ret;
++	return ofnode_get_alias_seq(dev_ofnode(dev),
++				    dev->uclass->uc_drv->name, devnump);
+ }
+ 
+ int dev_read_u32_array(const struct udevice *dev, const char *propname,
+diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+index c905e86b283..e13271a824f 100644
+--- a/include/dm/ofnode.h
++++ b/include/dm/ofnode.h
+@@ -1180,6 +1180,19 @@ const void *ofnode_read_aliases_prop(const char *propname, int *sizep);
+  */
+ ofnode ofnode_get_aliases_node(const char *propname);
+ 
++/**
++ * ofnode_get_alias_seq() - get the sequence number of a node from its alias
++ *
++ * The aliases node can name a node with a stem and a number, such as
++ * "serial2". This looks the node up and returns the number.
++ *
++ * @node: Node to look for
++ * @stem: Alias stem, e.g. "serial"
++ * @seqp: Returns the sequence number of the alias, if found
++ * Return: 0 if a sequence number was found, -ve if not
++ */
++int ofnode_get_alias_seq(ofnode node, const char *stem, int *seqp);
++
+ struct display_timing;
+ /**
+  * ofnode_decode_display_timing() - decode display timings
+diff --git a/include/dm/read.h b/include/dm/read.h
+index 12dcde6645c..d0c17c3d343 100644
+--- a/include/dm/read.h
++++ b/include/dm/read.h
+@@ -1168,12 +1168,8 @@ static inline const void *dev_read_prop_by_prop(struct ofprop *prop,
+ 
+ static inline int dev_read_alias_seq(const struct udevice *dev, int *devnump)
+ {
+-#if CONFIG_IS_ENABLED(OF_CONTROL)
+-	return fdtdec_get_alias_seq(gd->fdt_blob, dev->uclass->uc_drv->name,
+-				    dev_of_offset(dev), devnump);
+-#else
+-	return -ENOTSUPP;
+-#endif
++	return ofnode_get_alias_seq(dev_ofnode(dev),
++				    dev->uclass->uc_drv->name, devnump);
+ }
+ 
+ static inline int dev_read_u32_array(const struct udevice *dev,
+diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
+index 0f60c2a6281..07c1965dd34 100644
+--- a/test/dm/ofnode.c
++++ b/test/dm/ofnode.c
+@@ -523,6 +523,26 @@ static int dm_test_ofnode_read_aliases(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_ofnode_read_aliases, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+ 
++/* test ofnode_get_alias_seq() */
++static int dm_test_ofnode_get_alias_seq(struct unit_test_state *uts)
++{
++	int seq;
++
++	ut_assertok(ofnode_get_alias_seq(ofnode_path("/i2c@0"), "i2c", &seq));
++	ut_asserteq(0, seq);
++
++	ut_assertok(ofnode_get_alias_seq(ofnode_path("/some-bus/c-test@1"),
++					 "testfdt", &seq));
++	ut_asserteq(12, seq);
++
++	ut_assert(ofnode_get_alias_seq(ofnode_path("/i2c@0"), "spi", &seq) < 0);
++	ut_assert(ofnode_get_alias_seq(ofnode_path("/some-bus"), "testfdt",
++				       &seq) < 0);
++
++	return 0;
++}
++DM_TEST(dm_test_ofnode_get_alias_seq, UTF_SCAN_FDT);
++
+ static int dm_test_ofnode_get_child_count(struct unit_test_state *uts)
+ {
+ 	ofnode node, child_node;
 -- 
 2.55.0
 
