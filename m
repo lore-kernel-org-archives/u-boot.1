@@ -1,137 +1,255 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E4F1CA5FF1
-	for <u-boot@archiver.kernel.org>; Wed,  7 Oct 2026 07:42:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0937CA5FF1
+	for <u-boot@archiver.kernel.org>; Wed,  7 Oct 2026 08:04:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1162E40519;
-	Wed,  7 Oct 2026 07:42:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 35DB780F16;
+	Wed,  7 Oct 2026 08:04:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MGo1AgDvdYQu; Wed,  7 Oct 2026 07:42:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 1DB5F40637
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791358932;
-	b=kXSG9bF2V2pIXwXSSeMQFs9LVYs9LgtHotQWMryNoZJcM8DKqb/kCmrD6N90+/5zjf9p
-	 DVE3FeP3dI+cDezPhwPiLlIWgQktu9tRFjGZ/ephuumOdm1MTQRlHZW7OLxEBQkypxLWu
-	 ToZmWVuFnWPjjBFGx+ai/99C1AVXFhRyTD1lW7w3vl2xOHDz5mRNh++6YPQct6qOaJ071
-	 PHVbQfbrBKccQ5nKyK6/rHvZjCq3vlZvRlExm472vP2Sh6f/mbwstd4P+5kqPEB+OX/40
-	 0PRTOy9W0pD+SzfnzcjQmw/7Z9+R+272WDtX6QTRIkh3vRfCKwfwCebAm3Dp6eV6EaA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791358932;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ErTPttl0A4k2; Wed,  7 Oct 2026 08:04:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 2C8BB80F0D
+Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791360283;
+	b=aHatssy9Bpq5CCqRMcejrVEu1Eiun43cGbcV/1l/FmLgJjYPWMw+NhEpF2ScZC3UD8Wq
+	 A3zbh2ZqGcER5Th+QDhFWQcFclpwYJsHtRf8rflCba+PofxbmM5KD3TXiy4CB2EpvO75G
+	 0mRMk/+6m69KVeHdwXSrq9YCe6qnnsvOMROFew95M0sxw8o+bGW7nV70zrrPGZtcDqL+7
+	 +aQOojLLQCrFBeQWKs2lTOW0dVzZTQGPyDppmfwNRKI98B3UlkUNpWSG20XHQTlAzb+LR
+	 wnKbpA6bUPM1Zxy2P5YfzUmCqzs1NeZ8bFev7Jnp2eQevo2FlZiuNb7nGeNClx9J4Hg==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791360283;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=GRT3PtelpfrkziCq+wHinDu/f0zMcvW05sNQ0ZVVG64=;
-	b=azgaux/Amfl0skV3t+Hga5CtmiP2ya/LFBH77IOlkKs9MLku3jhL6INolrWxED8OBRwd
-	 rA8ZXNmYKljCTZLVbX3L2a8sOREKpdC5sT0p7Kq7pDmm7He0QP4L4o6azQQSHKFHOXG8F
-	 BVkCCWuBC/D5o/is5jGvY0ZrjqNDJX2Lg1aRbgfYh4g2KT7s2NOpFFxAQqbmKj2MYzVho
-	 xQq3uk8db6iql6dS68IOjzlr+n4Jo2qtT9apM9sPKs/ZF/lx4VAX383eUiDgyuPNDcymI
-	 gEQFmr6rgWmfICroS95/GLYQFs5EqcU1fzZ6HX+FojjkWxX85s4YLnDODHhLPa+0awQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=5CJQut+Pqe3Lal0doWFgxn3HaPiHV0JhM/rV/MostEo=;
+	b=rJSGqRWDgYuPp/N2cf4hmPdqbJHJmExBW8v6oBXSlK11f5rqnTwPcnzCFTHUFzMnXtaF
+	 CtOhGHqVh0WLqK7cYuFXperO4kh71r/0Vd+3uw6vrbnd0DlEUJZp0Bpf8lgr3SiRrduaE
+	 zvWLmekyAdWl5oQ2utQNIHip7RQh/z/R0KHgIol02J5msyVuEYHZgm6BsoLxBkJSUFgWA
+	 bQCdvuD9s66VKulZE0lt+MJEJ9A63d5nzb1FxNrrOe4zjvnIzfT2ilZpoE7gSZqGv5BgI
+	 L3EPrc5zHW/0xhX95XRODgpcCsP2RHPxdsgtJUxANLvBYJNef7nsO0a+xhBcQnmX4aw==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791358932;
-	bh=GRT3PtelpfrkziCq+wHinDu/f0zMcvW05sNQ0ZVVG64=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791360283;
+	bh=5CJQut+Pqe3Lal0doWFgxn3HaPiHV0JhM/rV/MostEo=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lVSFoaBW4DXnJd7JaTTLOsf6UaxeXXDzSJYJZ8zX35KM3w9cBFiTGZ5TvFolggtkg
-	 fG72oR0oPBnLropBHRmE9Ai67t/vI4cWO5S36Q5a06FzeYthissra0oHNCuumGza6q
-	 yzaj8ajMjfxSsBcE+0LpTQCPZO/jJ5fCesOK0bGkKev3a6gdzQOXWgCgsVcTLBcj6D
-	 WJp/pHbUKgCuDvJwXJEsIbHIANiP/ljSAuPw+Q9irinckzmrxq4QEzrke48M1NG1fk
-	 fPxwV/NrBHT5nCbsPWQxX4pV98alyvmQO2Wh+PGIpHDov0kPpFFqtY7sRke5linIoF
-	 Cn7d25VSsicdQ==
+	b=EXfpW5dw4/4lww+dHnfIrFxxSFGN2vL3qT1tGlq2XjZruCDNnI5kuf1+CUp7eQ91c
+	 FUJUxy+/c9bX/aDYAdxh1+BVXNoaHJpG67A6pROwh1UKEJMmbBlCyp/MDvEU85iEU9
+	 +qCUo+yPjEga35LiNA82dyRb9MfdB3Pz27N3vtr7f5J4jqkvb0blV7QzF6cDWIpSpm
+	 9OeDke4QHrXy+g8SwHkTzEHIB8s69NZR9EwdEeEpkh+vG8KmhGTKGOXYgp1L4yyXwe
+	 10lK2a1mvc/eWwoflmFP0F2Wq/xA6zyvVnr2LncPXx10N9J/mxTIkKeSgSq6LRt6sm
+	 f2YOmImY5EKBw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1DB5F40637;
-	Wed,  7 Oct 2026 07:42:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2C8BB80F0D;
+	Wed,  7 Oct 2026 08:04:43 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id A7F83341
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 07:41:06 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id C4F31341
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 07:54:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8E9DB40070
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 07:41:06 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9029340070
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 07:54:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fssvFNMmTz00 for <u-boot@lists.u-boot-project.org>;
- Wed,  7 Oct 2026 07:41:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 20E6540062
+ id ELw9RAzODvhz for <u-boot@lists.u-boot-project.org>;
+ Wed,  7 Oct 2026 07:54:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org B5D5E40062
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c200::1"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791359659;
+ b=PguWBiulU66UB4TQ/HpoQRpT9iVaiXHsEHhugYnVnJNVlyYfus18Qr5gb9k3m0JmYEE+
+ CvEgju3YLz1UK4pynEp5v8DTJ2rzJSrnKy3/470FigJw8GoyB6uPEWdJBB5q+SjUt3jyz
+ sl7fXKfWb5ywLI4Io9WQwZPfV8jo6eH+ilqIZ6kGFl9YckuEfaSkKzhhGHoZGvCwdwMbz
+ jTbSqjr4bx31rUwI1rEq+0yuk/rfuj/9Q3sR0aRxvjOBh3pA2A9c22VnrOuBzJpH+iNDD
+ A1+NaU+vICC/nnIcYL1T0HZhF5NiGKXp6ANtAsYJf5g1H3iWDrKVx42Q2lxYxflsXNg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791359659;
+ h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
+ User-Agent:Subject:To:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+ X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+ X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+ X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+ X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+ X-MS-Exchange-CrossTenant-UserPrincipalName:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=5CJQut+Pqe3Lal0doWFgxn3HaPiHV0JhM/rV/MostEo=;
+ b=tfwEnoVBJIfBSwAUYWoqLgwR1sXYkwoo0waCH618ZW5e3haI/o78GIvtEgTfYeJQJfq/
+ tecLECSDgBTWelK0XePS4/8nvrhZmYGyvAKmVtPWm7pE4depDk3N0lNSIFiorwdexfijj
+ /JTZT5X4NuFCWtHWwngDVlfun/DuGLjHkXCe3BeGXLuucNCkKXZphys88jOAiRGMQVGje
+ kfCJSext3dKLzOTTwwyR+Mt0xJxwJLbjwB93ibHGcQJMRYl99VRMgDl/7hCkvI1vFZWDf
+ imZ691V54qYMTwP20RkAB9YY4PPVbhg+p4xf5WAz6ZkFD3rAfYMfB/Zmk9hcij42QaQ==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org;
+ dmarc=none header.from=kontron.de; 
+ dkim=pass header.d=kontron.de header.i=@kontron.de header.a=rsa-sha256
+ header.s=selector1 header.b=tNMdzzAf; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c200::1"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c200::1;
+ helo=db3pr0202cu003.outbound.protection.outlook.com;
+ envelope-from=frieder.schrempf@kontron.de; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=116.202.128.144
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791358865;
- b=oECa2NjCvEjYfmTMLHecKBdH8Swa0wgdlG/qMUY//LNIBIDIfw3DhKJfrzTsKjktQ+Gn
- 96xJYtGQ5FTB65e30401cVVdyxLFyplfTaymHKVQl8zYtxz68ET6Q9yBJgjOUa6X0mbpy
- oc0QErJeRs7BedkBWe9Ny1jDjl5BFJg0djqSOJdnV0X9hKTgWMcW4nt6jHEI/EZziLG5K
- nvQvFaY/RvUO3t02XrfSh9nz/FMGdQKCC5TLTfftdCJJlgym6SerWjbpp0GDRoXBQyX5r
- lLKlsL2gEFhz2fBNWg2C8vmKbt0iti6v94l7odDNSKH9OHsOib762wFeBTgS0pOUVwg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791358865;
- h=Received-SPF:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
- User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding;
- bh=GRT3PtelpfrkziCq+wHinDu/f0zMcvW05sNQ0ZVVG64=;
- b=Dy0QKAlCbFD48t7uRqzXzXwv8Fc/Q5UvqmKZNt+oBP1E2X6lWyazGnpaAYnbVyizlALS
- LxScbPbrU0hdlZO+b0PGwtv21HgBsJZj652qaGb4/S1A0+OmSZD44oZGzf6A5KnGswLzX
- FKRR1c0DGWWZY7oJ4jox3d2KH6yVcpMx2AdnjspX8uu6bOelRw6ky8nusH4eHySTMgPwQ
- ikLfU8N+VyPFlzEEdjlryhgOao3Mbv2Y/DvR0BqbMnc7od4PNm+mIIj24LSOZ5JZmuTje
- BcCcllR8XZFEg/O/nP+gCuRuF34hKsKhzj4QBldpCyGDyITX86QFk0Ln2AgptO+DENQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=freeshell.de; 
- dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=Fk8PbRNS; 
- arc=none smtp.remote-ip=116.202.128.144
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.202.128.144;
- helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
+ dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=Fk8PbRNS
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 20E6540062
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 07:41:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1791358825;
- bh=GRT3PtelpfrkziCq+wHinDu/f0zMcvW05sNQ0ZVVG64=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Fk8PbRNSKU8McVozsYvsykbSPVaMG7dSftQMwbPxRgbRgArzQAJvDazlAwaJOx5zN
- iZAOUtoACs1Q9kg7kU3XeuD8iN5ujQc1SyAEE6tPr9Obpr/x+q79waldD6HdpqbalT
- bFY8R/67P2TC3FqyQD8js+FteHFDfWfygx//9owe3buM0J5tsj5B8Skt8kuMHMIkbe
- fkQ0997km7dFCcwSJ1lZEQxpl4vXjXOPo3xab2Mm8BK4yuMPvfCIPf7mRL4KTWlLn0
- 9pAncURS+o3srtLSE2Ggfr5/y03O+hnNoXjPrTi+9Q3OtckYYE3Fv3QZR04R31HKdV
- KyW+GUcydhfWQ==
-Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
- [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 6B436B220082;
- Wed,  7 Oct 2026 09:40:23 +0200 (CEST)
-Message-ID: <006d1d63-d5e1-4b81-a8b3-b73e279912d1@freeshell.de>
-Date: Wed, 7 Oct 2026 00:40:14 -0700
-MIME-Version: 1.0
+ unprotected) header.d=kontron.de header.i=@kontron.de header.a=rsa-sha256
+ header.s=selector1 header.b=tNMdzzAf
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B5D5E40062
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 07:54:17 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=h9x9sFFOh0aj8fs6RYv+3HsnwKYS6s/wUHr9+JazMlolbYuP7mTv0/K6OG0juF5qRGguNhrUv8nDZ9/TR5x49wAmD4K++EIL5dOdIjZ7LLpnsEThiZICnFPeJ5IG2xoLk+sbMupVyPmiIwP2g5zoahFTz6g2dPkx0Xu7o0c9ixhAa44eK2CR6alaDbhXdzdpzEBSytMsTBqIC49/6i9vP9razL8u4Ap2jYThODFasrSRYd2XihNpIL89IsOWFowBwfR9DOvUUOYq58R8bZQdTfSw1KFSDuhbdiEbpKUslE+scb6KJr/F1tkW57Y5765n/0L1gbi/ta2W27WvOsj2sQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5CJQut+Pqe3Lal0doWFgxn3HaPiHV0JhM/rV/MostEo=;
+ b=EoSpJ3ZLTViP00ck08Mb409DwM9QrXpvYsnRMI+CctVzSLQ/DbNf99TWoqJjHwfdvBBPkrGPYfQYnIaX4cgelwjwaHmF8TY6+bm6Stxf1fjVnZeSMHZ5r3oZCVjlTz6mLPf8++FFYc0cJKh8cF5W6yJduFRj5wBlgqEiQljLmkdpvVsfN+UTrrI80UvbEg9/7vRp7ZuTaOnwQsqLMxRe8h22rjmr7qUpb/c+8r2I9BrThc9w+iBW7wJgHQL0QUMT3yKHkQGoe70U4P5ofwL9lwbZxmJlOK+AeaBDUCf8Cz0NycZFs+mLgO/dg3kv4HJ9hG3a701heInF57zdd8zEwQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
+ dkim=pass header.d=kontron.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5CJQut+Pqe3Lal0doWFgxn3HaPiHV0JhM/rV/MostEo=;
+ b=tNMdzzAf2BkMCqf6hryUkiTDmSNx1sBXyXbWMYsddTG2RQI8b4Y+QWONVX/1arEu6QP+Qq1mqbIdxqDnZilOsTh7qOHKfLST+8xyxi7T8kMuSkoEDKVb9mwyCWcFgQ5mYfbiTuSxM6/DdlqcLuxnd5FEdGpdJeAYqHi6P31tKSe1jtr4vmQ/1973kcfzrdpdXa8eYvoBGTZn45dsOomOCX9H7sE+0GRduqITMHNSXoMP4LGRNcLpEHNVw6/NyqmirEVYNa7Nydqmn0a0OJKIFPiej1IIk3ItGqIH2GLDLypF7UsG1iAxLtGp4LqvMSbH3I/lM0AxcESNSIViIIoTyA==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=kontron.de;
+Received: from AM8PR10MB4273.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:1e4::18)
+ by AS8PR10MB5808.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:523::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.15; Wed, 7 Oct
+ 2026 07:54:08 +0000
+Received: from AM8PR10MB4273.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::fec3:eb34:f163:4536]) by AM8PR10MB4273.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::fec3:eb34:f163:4536%6]) with mapi id 15.21.0472.016; Wed, 7 Oct 2026
+ 07:54:08 +0000
+Message-ID: <8c5b4eee-daca-4f64-bf55-d740f3417b36@kontron.de>
+Date: Wed, 7 Oct 2026 09:54:05 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/4] doc: spacemit: k3: Add Pico-ITX board
-To: Yixun Lan <dlan@kernel.org>, u-boot@lists.u-boot-project.org
-Cc: Yao Zi <me@ziyao.cc>, Tim Ouyang <tim609@andestech.com>,
- Leo Liang <leo.liang@sifive.com>, Tom Rini <trini@konsulko.com>,
- Michal Simek <michal.simek@amd.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Hiago De Franco <hfranco@baylibre.com>, Junhui Liu <junhui.liu@pigmoral.tech>
-References: <20261007-00-basic-spacemit-k3-v4-0-c44d09937088@kernel.org>
- <20261007-00-basic-spacemit-k3-v4-4-c44d09937088@kernel.org>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <20261007-00-basic-spacemit-k3-v4-4-c44d09937088@kernel.org>
+Subject: Re: [PATCH 0/5] mtd: spinand: sync with linux-7.3
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>, Vignesh R
+ <vigneshr@ti.com>, Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Eugen Hristev
+ <ehristev@kernel.org>, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Chin-Ting Kuo <chin-ting_kuo@aspeedtech.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Mark Brown <broonie@kernel.org>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Guodong Xu <guodong@riscstar.com>, Raymond Mao <raymond.mao@riscstar.com>,
+ Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>, u-boot@lists.u-boot-project.org
+References: <20260927235716.1872707-1-mikhail.kshevetskiy@iopsys.eu>
+Content-Language: en-US, de-DE
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+In-Reply-To: <20260927235716.1872707-1-mikhail.kshevetskiy@iopsys.eu>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0390.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f7::15) To AM8PR10MB4273.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:1e4::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM8PR10MB4273:EE_|AS8PR10MB5808:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7618a425-56ec-48c4-232d-08df24482a41
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|1800799024|376014|366016|7416014|921020|11063799006|10067099003|56012099006|22082099003|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: 4aRIvnIwU8k2u8wA4D1jxMKTIcNYr04NKf8UYWfOzOtzc+MRo7Hd4HF0KrciEchBAkhkPnUssraFK16kqojI+mKx+6QY5nW7qNHFDQFd43Sd1/8VO+2LopCIfoOy/CjDQetjNf38ZgN2bZM4X/exfyi4HD6Ere6VddYQrxIxYkO1qPOwHb+akPp5VM0ZdNg8CqUI6Fccch7psZDfUTRfDKHOC9LOASMRi7IX1b2jEQ91l9jzYWjzzI26pfWCUsPn8BEKUhcF3YI2+QSW3MGv+hi5bpQik9JhrHlAyDcNw0ANjWC25ETEr1ZC589xgItZRWCN3Bw5X+kT7x2Fwj2DD5BFsSUlSkVt7swkdzrZZdLRL1eANGqMSvLeZZzTz51ZeTOakzajJPDfjEOvPg3AdK5sfSIw+6tNRQeEcB8z4Otki3Sd363lwZJVlKybKyU+c/+pP5zQlgm+mODeQCtoh3uF00bMSJL05eXWnCf18dYPllWZLkhSOx0iMP8vCx7eIB1UzcXEXVCW6vLuSpe72eNaX+6Wv7MvUKYtgls02n3GkCu8Bw+l6TMBn9dqgF4bKQDhVzjQZXU+fYAp8SwyJDcztC8nGmfgDvz01Z4cocsZ/kVBdjL64SBPmMB02fO0LRlDzXemFkGDA6oT4mBn6M2YeBF2vismGZD7m+aSrCg+Qz0YbWvt1nZiOcCORZ7gJmH+wiuXocQBW6LPA+zJTA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM8PR10MB4273.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(7416014)(921020)(11063799006)(10067099003)(56012099006)(22082099003)(18002099003)(6133799003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WWRCU29BdXFWUU1vUmErdnU3YzkwSGYyZkJ1QkY0OG9OQ2tpU3A4TkE2TnBw?=
+ =?utf-8?B?MHBOcmZhUWY2Z2VtYzJmY1V2cld2V2MzQ3dpRmJBM1dJN25IeGY4OFF1QytX?=
+ =?utf-8?B?eE8rYVBQMWtwbzlhMGsvUVpPR0dPMHhrZkF1cmhCV1gwZ2s0cHJzVUZkUWdW?=
+ =?utf-8?B?cmRUR0FZeE9Fc09RVmttZFBhU0hpOXY2L2M1Sm1FL2tIeHhSTGNhK3BJUmxX?=
+ =?utf-8?B?SDRZYmpFaExuaUJISVhOajl4MmpjcDNUTk1RK210TG5zOUNxNVBnQ2RBNmpj?=
+ =?utf-8?B?K3NRL0h4TnVKL1RYZnltdGxrVXVLeDJPNmFDRmFuTnRPbWRJb0VkV3ZVSlk0?=
+ =?utf-8?B?VUhQdXhaQXk4Vkh0cWZmdnZnbTdjVmcyc3I0T1d6Mm9PVHphQjFobWNVeGdZ?=
+ =?utf-8?B?T3hBbEpzQ0dFMDdXMkNGc0U0S0Z0YlQyZWliczNIbFdVdjFBS2RkSUNQRC9s?=
+ =?utf-8?B?M2tJTGl0RzJNUDRJUVArMkI1ckFXN0sxM1R6TzM1QURrZnZFSk1ieURpQ0tG?=
+ =?utf-8?B?aGdzSXFHYndEbFdoQUxKYStlOW1md2VycXYvZzF3Tkx1YjhJYmdlZVpHY2Fk?=
+ =?utf-8?B?bmtwWUswbDgwN2I2THBsYmhLcXdDN2ZBN0V3RVZUUk50bHBFQlRqcjIzenF6?=
+ =?utf-8?B?aE1iM0tmaFVDcldvS0xnTHJkYVFlU1hmWWNlVXdSTkt1UjVhRFdjQ2dicUJZ?=
+ =?utf-8?B?dFZITkhxelQvb3EyY3hvajFaZmZCd05ZaUxjNFErSUNPYlNUaTA5T3ppTmxX?=
+ =?utf-8?B?TStweUxucTBkUEI5ZWJKT0V0ckJCUWQ3WThjVHZjUVF6Qkd1VEtCcDc0L1Rh?=
+ =?utf-8?B?bGJqUE0yV01TdFY4K0FOZjRPMkh3UDlueG5vR1d2bmY4TXBwTEMrOUtsTmtm?=
+ =?utf-8?B?ZTE0Vi9sa0EzMmRwKzUvaUhPNDRKc0pZVXNDU0xYRzVjWk4xZi9adGt1STNJ?=
+ =?utf-8?B?b0YxOGZMcEZ0aDdqN2VuaGN4SXNyemNMRUNqY3hLQmZPUnp2QmxqNExxQjdW?=
+ =?utf-8?B?d0IzNjAwUTlSK0pid25VMWdLNjIwUm0zN0RPNmtJYkMxVWFPYmsvR3BHTkhi?=
+ =?utf-8?B?bXpRUG8rVSs0WGp3VkYzREtHZXhoY0JFZ0dMOTFCZ2cxMHgwUmFjM0VFa0t4?=
+ =?utf-8?B?QjRFeUFaNStscisyMHh3azZRd1Jjc3VnYmlQTmV4TVRZUjNoWEdpMVFSOXUy?=
+ =?utf-8?B?Z3c3aEVNajRWQUZIblk3Mnh3Nk9pRVNGdW02ZEN5a1VkVjJBN3plY2NMUU9j?=
+ =?utf-8?B?Y2dmaU9tQ3ZScWtqQWswMXhoZDdqQjI0a1dnMXJuY1pZM3ZleWw5Ykw5WEZG?=
+ =?utf-8?B?NjRXOEc0UjgxNXVnaVgvd294MDF0aFFKcGNYQVJjTDQvK1RHYjJXQi9KVnEy?=
+ =?utf-8?B?MFpIcFRycUYrSCtVYWw3emxxc0U1R3FDbk5PdkJmazdnVlhXZ3NvNTd3VDl5?=
+ =?utf-8?B?TURIMjJXMk14TXo5K20rNmdVVkI4K2JKM2RmZkpGdWVtVDJpN3FmalJXeWlB?=
+ =?utf-8?B?SVhuQ0hsd3ZyNEFaakJDTU90bStJVU5PYmZ1SkN2Z1Rrc1RMWnIySnVxNzAx?=
+ =?utf-8?B?OE81d0xRYlNKazF6NkM5eldmSWNyanlaeVdtODlmNlhPY3NwaGFmV21ra2E4?=
+ =?utf-8?B?OWU2cDFIaG5ka2IreHVjUEY2alJ6MnlZMEsxejdjZlhYN2RaNDVab3E4a0hN?=
+ =?utf-8?B?Wm43NURQdGt6TTlyNFpqN1J4OUVhK0JpazVMakpsS2FON25kNGFGTzQxYUUy?=
+ =?utf-8?B?b21NV1hxWC84cVhNbG5LRjRVMzFZck8xYTIzdTIzbFJDRkZTZzNuSE4xYUMz?=
+ =?utf-8?B?Qk5ZcnBDQ0lNc3BGNWRCUkhYcDJzQUZpTE5ucmJnREltYkl4Mk8ybkJBU1Ur?=
+ =?utf-8?B?cEQyejZFTkxlVHo0cFpORVgwY3k1d2hLbkM4NWNaR2lLaGR0K1FFMmVuc1Ur?=
+ =?utf-8?B?bE0xRWp1YXVTMDQ1eUIvYzZHcmI2dDVDU2RtTGZXQ0R0Z3JYaU1ObXIzZWFD?=
+ =?utf-8?B?YU9xenlmdXF3S2hhQzNRY0FNY1c5bmlmQ1lqL0R3UGlicHpwdXFIZmt4RlVs?=
+ =?utf-8?B?UjFseGFSUkEzbFlyc2NNaVY5Y2g2RmQ5UlhJUGQvZEI2UmgwU1BhbHhrZFdQ?=
+ =?utf-8?B?RjZaR2dNUEw3bi9iZ0lPSGYwSEE5dXpMZ21TWHBoZVZ6a2xPR3gwN1pTWXhC?=
+ =?utf-8?B?Z1FjcG9kS1RaQ1IvTUlzeU1aS3pnMW4zcnUzYklMcDZRQnNwcDhLRHhzR1NB?=
+ =?utf-8?B?OEVvYkpKZkJ4cXhuL1ViTXRIWDBvQnFOQXd3WVRvM1k3VHRIZk1Dd1pzUTdE?=
+ =?utf-8?B?azVZUnpRdmM2WmhjMzVsemd2YjVKbEpzaC91UVZXY0NycGhwOXRzK28xQXJF?=
+ =?utf-8?Q?I36O+mF+32s505LA=3D?=
+X-OriginatorOrg: kontron.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7618a425-56ec-48c4-232d-08df24482a41
+X-MS-Exchange-CrossTenant-AuthSource: AM8PR10MB4273.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Oct 2026 07:54:08.5961 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: o462a9yCfEwiY+BgzhilCRgqhRK+tfZ9v9bOqaB4JDsHt+PAkgyy+N0tbdE9BS5neVC75j7SzrW0PhUy2vk75ijwOcXK7KdSkf4omPNoy4Y=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB5808
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,234 +263,59 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 10/6/26 22:11, Yixun Lan wrote:
-> Add documentation for how to test the mainline U-Boot on SpacemiT
-> K3 Pico-ITX board, currently it still rely on using vendor FSBL.bin
-> file to initialize DDR and boot U-Boot proper, and the opensbi
-> firmware is built from an on-going mainline branch.
+Hi Mikhail,
+
+On 28.09.26 01:57, Mikhail Kshevetskiy wrote:
+> This patch sync spinand & spi-mem code with linux-7.3. Here is a list of
+> major changes:
+>  * spi-mem: capabilities were added, so spi-mem or spinand drivers could check
+>             spi-controller for support of specific features
+>  * spinand: continuous mode improvements
+>  * spinand: octal DTR support
+>  * spinand: many flashes were supported
+
+Thanks a lot for the sync. I have some comments and found some issues,
+some of them with the help of an LLM reviewing the code. Please see the
+comments for the individual patches.
+
+Best regards
+Frieder
+
 > 
-> Signed-off-by: Yixun Lan <dlan@kernel.org>
-> ---
->  doc/board/spacemit/index.rst             |   1 +
->  doc/board/spacemit/spacemit-pico-itx.rst | 200 +++++++++++++++++++++++++++++++
->  2 files changed, 201 insertions(+)
+> Mikhail Kshevetskiy (3):
+>   spi: spi-mem: add spi-mem caps support
+>   spi: spi-mem: sync code and behavior with linux
+>   mtd: nand: spi: sync spinand code with linux-7.3
 > 
-> diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
-> index 71854e5735b..51918f0acc7 100644
-> --- a/doc/board/spacemit/index.rst
-> +++ b/doc/board/spacemit/index.rst
-> @@ -8,4 +8,5 @@ SpacemiT
->     bananapi-f3
->     k1-mmc
->     k1-spl
-> +   spacemit-pico-itx
->  
-> diff --git a/doc/board/spacemit/spacemit-pico-itx.rst b/doc/board/spacemit/spacemit-pico-itx.rst
-> new file mode 100644
-> index 00000000000..18d11d6671b
-> --- /dev/null
-> +++ b/doc/board/spacemit/spacemit-pico-itx.rst
-> @@ -0,0 +1,200 @@
-> +.. SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +SpacemiT K3 Pico-ITX
-> +====================
-> +
-> +Building
-> +~~~~~~~~
-> +1. Add a RISC-V toolchain to your PATH
-> +
-> +2. Setup cross compilation environment variable:
-> +
-> +   .. code-block:: console
-> +
-> +      export CROSS_COMPILE=<riscv64 toolchain prefix>
-> +
-> +3. U-Boot for SpacemiT K3 SoC requires OpenSBI in-development generic
-> +platform object fw_dynamic.bin to be included in the Flattened Image
-> +Tree blob. OpenSBI may be first built as below:
-> +
-> +   .. code-block:: console
-> +
-> +      # Clone OpenSBI fork sources with K3 specific patches
-> +      git clone https://github.com/spacemit-com/opensbi-upstream opensbi
-> +      cd opensbi
-> +      make PLATFORM=generic
-> +
-> +4. Then build U-Boot as following:
-> +
-> +   .. code-block:: console
-> +
-> +      cd <U-Boot-dir>
-> +      make spacemit_k3_defconfig
-> +      make OPENSBI=<OpenSBI-dir>/build/platform/generic/firmware/fw_dynamic.bin
-> +
-> +This will generate u-boot.itb
-> +
-> +Testing
-> +~~~~~~~
-> +Currently there is no U-Boot SPL build target. It is required to use 'FSBL.bin' vendor
-> +board support package SPL for DDR initialization and testing u-boot.itb. Please test with
-> +fastboot command via USB download.
-> +
-> +First, retrieve Bianbu Linux image from archive_ and extract the FSBL.bin firmware.
-> +
-> +Second, hold the FEL button of Pico-ITX board, then press reset button and release it .
-> +The board will enter into firmware download mode.
-> +
-> +   .. code-block:: none
-> +
-> +      sys: 0x10001200
-> +      bm:2
-> +      usb_init : enter 3296,3072
-> +      usb_core_init : enter
-> +      DWC3_GRXTHRCFG:0x4400000
-> +      ROM: usb download handler
-> +       rst
-> +      done H
-> +      setup= 0x1000680 0x400000,
-> +       rst
-> +      done H
-> +      setup= 0x290500 0x0,
-> +      setup= 0x1000680 0x120000,
-> +      setup= 0x2000680 0x90000,
-> +      setup= 0x2000680 0x200000,
-> +      setup= 0x3000680 0xff0000,
-> +      setup= 0x3020680 0xff0409,
-> +      setup= 0x3010680 0xff0409,
-> +      setup= 0x10900 0x0,
-> +      usb_rx_bytes : start len[4096]
-> +      setup= 0x3020680 0xff0409,
-> +      setup= 0x3040680 0xff0409,
-> +
-> +Run following command to test:
-> +
-> +   .. code-block:: console
-> +
-> +      fastboot stage FSBL.bin
-> +      fastboot continue
-> +      sleep 10
-> +      fastboot stage u-boot.itb
-> +      fastboot continue
-> +
-> +.. _archive: https://archive.spacemit.com/image/k3/version/bianbu/v4.0.7/
-> +.. _uboot: https://bianbu-linux.spacemit.com/en/device/boot#21-firmware-layout
-> +
-> +Booting
-> +~~~~~~~
-> +Sample boot log
-> +~~~~~~~~~~~~~~~
-> +   .. code-block:: none
-> +
-> +      sys: 0x10001200
-> +      bm:2
-> +      usb_init : enter 3296,3072
-> +      usb_core_init : enter
-> +      DWC3_GRXTHRCFG:0x4400000
-> +      ROM: usb download handler
-> +       rst
-> +      done H
-> +      setup= 0x1000680 0x400000,
-> +       rst
-> +      done H
-> +      setup= 0x2f0500 0x0,
-> +      setup= 0x1000680 0x120000,
-> +      setup= 0x2000680 0x90000,
-> +      setup= 0x2000680 0x200000,
-> +      setup= 0x3000680 0xff0000,
-> +      setup= 0x3020680 0xff0409,
-> +      setup= 0x3010680 0xff0409,
-> +      setup= 0x10900 0x0,
-> +      usb_rx_bytes : start len[4096]
-> +      setup= 0x3020680 0xff0409,
-> +      setup= 0x3040680 0xff0409,
-> +      fastboot_handle_command: max-download-size
-> +      usb_tx_bytes : start len[14]
-> +      usb_rx_bytes : start len[4096]
-> +      fastboot_handle_command: 00072b20
-> +      Starting download of 469792 bytes
-> +      usb_tx_bytes : start len[12]
-> +      usb_rx_bytes : start len[469792]
-> +      usb_tx_bytes : start len[4]
-> +      usb_rx_bytes : start len[4096]
-> +      fastboot_handle_command: continue
-> +      usb_tx_bytes : start len[4]
-> +      j...
-> +      U-Boot SPL 2022.10 (Sep 07 2026 - 11:31:13 +0000)
-> +      LPDDR5 total size: 16 GB, data rate: 6400 MT/s
-> +      DDR training consume 5625ms
-> +      ..
-> +      OpenSBI v1.9-72-g13a401f8
-> +         ____                    _____ ____ _____
-> +        / __ \                  / ____|  _ \_   _|
-> +       | |  | |_ __   ___ _ __ | (___ | |_) || |
-> +       | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
-> +       | |__| | |_) |  __/ | | |____) | |_) || |_
-> +        \____/| .__/ \___|_| |_|_____/|____/_____|
-> +              | |
-> +              |_|
-> +      Platform Name               : SpacemiT K3 Pico-ITX
-> +      Platform Features           : medeleg
-> +      Platform HART Count         : 8
-> +      Platform HART Protection    : pmp
-> +      Platform IPI Device         : aclint-mswi
-> +      Platform Timer Device       : aclint-mtimer @ 24000000Hz
-> +      Platform Console Device     : uart8250
-> +      Platform HSM Device         : spacemit-k3-hsm
-> +      Platform PMU Device         : ---
-> +      Platform Reboot Device      : spacemit-p1-reset
-> +      Platform Shutdown Device    : spacemit-p1-reset
-> +      Platform Suspend Device     : ---
-> +      Platform CPPC Device        : ---
-> +      Firmware Base               : 0x100000000
-> +      Firmware Size               : 416 KB
-> +      Firmware RW Offset          : 0x40000
-> +      Firmware RW Size            : 160 KB
-> +      Firmware Heap Offset        : 0x57000
-> +      Firmware Heap Size          : 68 KB (total), 1 KB (reserved), 14 KB (used), 52 KB (free)
-> +      Firmware Scratch Size       : 4096 B (total), 1472 B (used), 2624 B (free)
-> +      Runtime SBI Version         : 3.0
-> +      Standard SBI Extensions     : time,rfnc,ipi,base,hsm,srst,pmu,dbcn,fwft,legacy,dbtr,sse
-> +      Experimental SBI Extensions : none
-> +      Domain0 Name                : root
-> +      Domain0 Init Order          : 0xffffffff
-> +      Domain0 Boot HART           : 0
-> +      Domain0 HARTs               : 0x0*,0x1*,0x2*,0x3*,0x4*,0x5*,0x6*,0x7*
-> +      Domain0 Region00            : 0x0000000100000000-0x000000010003ffff M: (F,R,X) S/U: ()
-> +      Domain0 Region01            : 0x0000000100040000-0x000000010007ffff M: (F,R,W) S/U: ()
-> +      Domain0 Region02            : 0x00000000d4017000-0x00000000d4017fff M: (I,R,W) S/U: (R,W)
-> +      Domain0 Region03            : 0x00000000e081c000-0x00000000e081ffff M: (I,R,W) S/U: ()
-> +      Domain0 Region04            : 0x0000000000000000-0xffffffffffffffff M: () S/U: (R,W,X)
-> +      Domain0 Next Address        : 0x0000000102000000
-> +      Domain0 Next Arg1           : 0x0000000102091398
-> +      Domain0 Next Mode           : S-mode
-> +      Domain0 SysReset            : yes
-> +      Domain0 SysSuspend          : yes
-> +      Boot HART ID                : 0
-> +      Boot HART Domain            : root
-> +      Boot HART Priv Version      : v1.12
-> +      Boot HART Base ISA          : rv64imafdcbvhx
-> +      Boot HART ISA Extensions    : smaia,smstateen,sscofpmf,sstc,zicntr,zihpm,smcntrpmf,zicboz,zicbom,svpbmt,sdtrig,svade,ssstateen,v,f,d
-> +      Boot HART PMP Count         : 16
-> +      Boot HART PMP Granularity   : 12 bits
-> +      Boot HART PMP Address Bits  : 38
-> +      Boot HART MHPM Info         : 16 (0x0007fff8)
-> +      Boot HART Debug Triggers    : 4 triggers
-> +      Boot HART MIDELEG           : 0x0000000000003666
-> +      Boot HART MEDELEG           : 0x0000000000f0b509
-> +
-> +      <debug_uart>
-> +
-> +      U-Boot 2026.10-rc4-00501-g9fba7b59df42 (Sep 22 2026 - 13:08:33 +0000)
-> +
-> +      DRAM:  16 GiB
-> +      Core:  433 devices, 15 uclasses, devicetree: separate
-> +      Loading Environment from nowhere...Loading Environment from nowhere... OK
-> +      In:    serial@d4017000
-> +      Out:   serial@d4017000
-> +      Err:   serial@d4017000
-> +      Net:   No ethernet found.
-> +      =>
+> Miquel Raynal (2):
+>   spi: spi-mem: Transform the read operation template
+>   spi: spi-mem: Create a secondary read operation
+> 
+>  drivers/mtd/nand/spi/Makefile     |   5 +-
+>  drivers/mtd/nand/spi/core.c       | 504 +++++++++++++++++++++++++-----
+>  drivers/mtd/nand/spi/dosilicon.c  |  93 ++++++
+>  drivers/mtd/nand/spi/esmt.c       |  30 +-
+>  drivers/mtd/nand/spi/fmsh.c       | 175 +++++++++++
+>  drivers/mtd/nand/spi/foresee.c    |  34 ++
+>  drivers/mtd/nand/spi/gigadevice.c | 117 ++++++-
+>  drivers/mtd/nand/spi/heyangtek.c  | 132 ++++++++
+>  drivers/mtd/nand/spi/macronix.c   |  87 +++++-
+>  drivers/mtd/nand/spi/micron.c     |   8 +-
+>  drivers/mtd/nand/spi/toshiba.c    |   3 +-
+>  drivers/mtd/nand/spi/winbond.c    | 466 +++++++++++++++++++++------
+>  drivers/mtd/spi/sf_probe.c        |  22 +-
+>  drivers/mtd/spi/spi-nor-core.c    |  20 +-
+>  drivers/spi/airoha_snfi_spi.c     |  10 +-
+>  drivers/spi/atmel-quadspi.c       |   5 +
+>  drivers/spi/cadence_qspi.c        |  10 +-
+>  drivers/spi/nxp_xspi.c            |  12 +-
+>  drivers/spi/spi-aspeed-smc.c      |   8 +-
+>  drivers/spi/spi-mem.c             | 150 ++++++---
+>  include/linux/mtd/spinand.h       | 198 ++++++++++--
+>  include/spi-mem.h                 |  53 +++-
+>  include/spi.h                     |   1 +
+>  23 files changed, 1845 insertions(+), 298 deletions(-)
+>  create mode 100644 drivers/mtd/nand/spi/dosilicon.c
+>  create mode 100644 drivers/mtd/nand/spi/heyangtek.c
 > 
 
-Reviewed-by: E Shattow <e@freeshell.de>
