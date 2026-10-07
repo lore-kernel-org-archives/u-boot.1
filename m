@@ -1,174 +1,172 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88690CA6002
-	for <u-boot@archiver.kernel.org>; Wed,  7 Oct 2026 20:11:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A976CA5FFF
+	for <u-boot@archiver.kernel.org>; Wed,  7 Oct 2026 21:16:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 999D640A8E;
-	Wed,  7 Oct 2026 20:11:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7184B8127A;
+	Wed,  7 Oct 2026 21:16:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id njLQSMAbkVoh; Wed,  7 Oct 2026 20:11:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 6427A40A71
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791403906;
-	b=JS8QGrGBlr2ZrctowivKiWFdi/fD8kLkMY7TkYws1EAJI6F2V1DMVSZUwg2ymUBd+Fmc
-	 Ba43MhWe4bAIoNMdkjLc/GIuLHOXPBEP9lLcBuQ1Tp2RZ5umVWIH0JzEmykU4My2Xw9lH
-	 ZfVFiBYrmUXsS/JBioV2ZstFTTDerg1VYm/OWYxjxiTDxfQI1BqMFndh+rGN57rJWL1PJ
-	 /O1kT3NUEM4eVugAva8zu5c87Yi2ZXVQF5ZHPrK2LJ2vfv0rx6CM7AUfT8YMukPd2dDq9
-	 uORkV8pbsWNkWeuXroNg1mxtcaYvF6tV/D/WsDPq4m0CMbEMT3YoEmnfiw9qix2HD6Q==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3YVDLHBKcz-u; Wed,  7 Oct 2026 21:16:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org B00ED81274
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791407801;
+	b=HwY2bEvEYSKVzkdxaw4aRv6Ip2rNdhndoTqwYWDrIZxFgX01+xA51Cf01pMD0VJ/awK5
+	 S/N3vIyUPGNEZdVFou5NjXF2Lk2QF7WnWiU+rJlgf4GMiln71b3Ru0sg9kTU8udNjxAZ2
+	 sce5k7XQT3GivBd5RwF5DThLEGA7cZFzj6tgwHvAO3R3mESetsOqYJLjWHzywWjiSJ6d6
+	 5QmIFpf1AXPZ8ETE4qXPYsOuLnNBrfvNdaI22sVsd4ihO36qA1BlhXEE1Lu0ZmOWVlOtP
+	 g18Zir4z5BNAq+/6nTqqA6L2zz23e85ZwYHdZQhkikXVfBHNt+lx+xveGnowvHouzUA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791403906;
+	c=relaxed/relaxed; t=1791407801;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=fta4S1uM246NE3nUQCjJdnVTcAwbAhIKJnUL8q5m1fk=;
-	b=lFnav8aH+2ITTDw+pYqiDqr2m8HUEQ0sWgy12hB2r0y+YCwB6oo4oURT1LUn2jhSXbWt
-	 UWwH9hbuizY/P/ocFKkUDzQ/9FW1h5pwmDTeu4KMQWZmEprpKUISN2lzlCD3gAD5LNkEn
-	 wAfMMbfMRos8/blNKbwJmnnjKAEov9JgkdPek7LTnQo5KJ340trAhYyxQ4mX7rhI3CXIJ
-	 Jpumc4V8COgBG7hXlECr1dZa/Izv1EPHGFvy31gqb/kp2kxxcGoM2JXGqa95ToQF+zC1D
-	 HWQSHgGtFLee79nuspW00h+UthLIfWMv+aOqqwoRNmh/ZPAOemgOJvX3SVb7C32q1Yg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; dmarc=pass header.from=konsulko.com;
-	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=ZLgMQCKt;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=Ogl6B12WXj6SAX7NC/LFQ4jcPfKpuuidG1HJVpNErPY=;
+	b=TOZxcSMgyUHP81rUs9D5nyEGfdSIijh/oDMfRUbg9iGM75tdu1EfcO16DGxFbifINH8P
+	 H+X4b/cnSGRuHgYpr3EkteeeijK7gKL4KqtsZ5fz7DiAmzQ6u4/RNjjpzSEqsbfbuar5l
+	 dzt7NFyog/iNU384tkX6wJ43qvws8Y7RE0zGTXN2VmI6nU/LnGem4pCw1eXCYnF4QIzNe
+	 pWlVFy2tOkF167Vi7OFl0ejjJqSjdnvPmlJ4hcirlh978elQusT+GylYhTChgLYuu0LZI
+	 v1VU7qQCyMvNoeYyM2xeFhRrZaxDBw+Wt4X+yz3z5gARkP58m43Tt4aHPaBDQtyXipA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791403906;
-	bh=fta4S1uM246NE3nUQCjJdnVTcAwbAhIKJnUL8q5m1fk=;
+	d=lists.u-boot-project.org; s=default; t=1791407801;
+	bh=Ogl6B12WXj6SAX7NC/LFQ4jcPfKpuuidG1HJVpNErPY=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=IWGQHfuVD3niiJKJoX7lNBnfAfLgD6gSP/QnMC3h5gaggqg5qjPLiKKouIrWEJ8e/
-	 NPA0JZyXpFsII+9n/ue0WNNZPxL5nRjXjMbaGG/u2zv3w1TyJxikvXxlKAnNPbSRsS
-	 +V6Caj2eOQJs2AuE0O2RRxcRlAGZa1jmRxkKZijSSQ6ATUPX1GHhMkUDjAzzkkF17J
-	 mn/g/u2AM3GuacJwPxXiBqLCPEz5rdylPnXj3HwTKfYcRzVrZf1/+Fn4kWmN+YR8kY
-	 QRk/NZzBIKy3E6ejEq0gf96ge2cxvAMefAp0M0h4POG6Em3L+uo7y3NwXlVhixW8bZ
-	 HLoAru48CtU9Q==
+	b=0/ryp53oJHAtrO9c1AQ1fampm62wVg7hR4lORzJtZQbVi38luZhmx3RpAB90azHAl
+	 cyiJ4Un4TTJoG1Le1JSx7MIvSgNMlUl5eYWLFRqhATfJIYqkBGQjWKP/+zAz50hA5f
+	 1DR4YPwGxqUSndqhygWGk0WQ3NlKE+ukUNfPS+B4cRs+tJ0sJTOIMz9DeZjtjKqgbP
+	 MOcbuoQcoVDZ6KEeWtuZ4nM26IgCpcMmLV3PGrRh4yn+DjJFKSjqU1QjyNrbbtKev6
+	 VFdCJ2IUxiagytWiKereIRrrTuCe822iRNUKlaf5nO077EI8v1jTAwqZ//y2SHj7t3
+	 cJTbkOFf61Ztg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6427A40A71;
-	Wed,  7 Oct 2026 20:11:46 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 12489338
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 19:13:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B00ED81274;
+	Wed,  7 Oct 2026 21:16:41 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id AF14675
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 19:59:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 046A540B23
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 19:13:18 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id A0ADC60887
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 19:59:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AX2Bdwr6TTls for <u-boot@lists.u-boot-project.org>;
- Wed,  7 Oct 2026 19:13:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B91B240B22
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:31::b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791400397;
- b=iedYNdevkaOlK3pVw6mPLIW8pqgsvwJ8Au5KqCv3BIR66+JXy+70FUBNSvfx48oUtPEZ
- C1h+facoDyDPu7h0z/sXhky4JnpFg+W79GwX2wYRLNX83r3dxW/DC5hsYXizH9VMuZ5eP
- ZfhW/gTp1III3hROf0W2Q0yckpsya5RhfgZAxMZn2e00lmak1JcaAQcmPDJSnwJKdP0nK
- 9Ruv3v8m+CFTYkAveSDscB4S6ljlDEWqJBeYENSIfEc/OfrFdt0DtayDC86GNDDxcwB7t
- z3M0TFYNuN+ukYMvgz033NqovdrXQriHTEKJtuZA9k9rj8kEfwLr3fsbml+7qHXEung==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KnpKBvHNGU56 for <u-boot@lists.u-boot-project.org>;
+ Wed,  7 Oct 2026 19:59:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 885196087F
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c29"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791403195;
+ b=WX/IcmxrHNV7BNaVUsCgzIH4w+T0eCqqyoOIvat43nNAKVBGYuO8OUMgkCP6VTTLvX58
+ zwkqzsujoiF6vzOlrGrlOnyZIXI1Ze+j3PcNU4P+2oDgQNUCzf192+Ht6uruW3kf4CRyK
+ YPOek288b3YCBMPkPWt/BoOhSBxWP5gTGkv7dF4Yu4oWgNMW7exRkc9tHaVY1BKMCqhm9
+ NIOOoAYQyiPbhCa1ylCz8TUipPohwtv3duzFzjNVPVV5uipKdVwfSxft4B0UgKZEv/xqC
+ 2sT1MhanWe3Nk28dIaqEBVwlOEObLEMBe44fVtjM003SOYjhsJvSIDs0ilxryGTb2ig==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791400397;
+ c=relaxed/relaxed; t=1791403195;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
- Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=fta4S1uM246NE3nUQCjJdnVTcAwbAhIKJnUL8q5m1fk=;
- b=bceH5cHoMcrCjMy08fyLgJVaDhkH7dy0y06KXssxEIsAdyXkim3WXFAvrPZXAeWDzI19
- A/cTalUpMp3T+6UCJSYgKkrkL4/FoZqfVBNmPMUAc/UmF2pAy4/Nzs7tayJGLX17B0J3a
- q+y/Xm756PfQqknvVd+1DhVpaf8Pvxji2g+wZSkQcdgw289PTEoLasMf2gzSl+FASCxIx
- bn9+rE32YBYBDVlC0/5o0U1PIioAfHfx0Gcwr8ZqaqcQG78ZwP12yMY2rp68HH1HIdsya
- enBDH0SnH1SrHyfHWFdKatllpPxPHdS1DmsBc+zwvn0dShSJ5GYRj+xG9YonlNhqQlw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+ Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
+ bh=Ogl6B12WXj6SAX7NC/LFQ4jcPfKpuuidG1HJVpNErPY=;
+ b=aKIFtyFbBQjSMonwIihdGZVGOULN+OrwIWnw2oQRLrO2EbGoPxApqlQxow+Y9Et7/QdM
+ WdlEVyijlf8QxOTk7cYF6Ng2iin3VBkGUzgxPugSTvLBWH+Tqjo7qF+GA+r3R4VOfOR5H
+ 1PiKiiWxnzytjTTgqzYC/MVgL2NkZvGp7aNrGMWPECXh82oW+wKBpGkCeuYMlfMIm2GSs
+ 23qEP2KVRkQxtngHv4bbyVGDe4eD1zdZyaZoElF/uTx4NNnhZbWgD1fPDhXim2p6nWO08
+ f+VMC/Rhi1v+D2ANZVp7GViigb4EkHngpRv19hiFrBoZ4btN1RxGmQI/xvx3ROJDxaA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
  dmarc=pass header.from=konsulko.com; 
  dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=ZLgMQCKt; 
- arc=none smtp.remote-ip="2607:f8b0:4864:31::b"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::b;
- helo=mail-oo2-x0b.google.com; envelope-from=trini@konsulko.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+ header.s=google header.b=HRZFf2DX; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c29"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::c29; helo=mail-oo1-xc29.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=ZLgMQCKt
-Received: from mail-oo2-x0b.google.com (mail-oo2-x0b.google.com
- [IPv6:2607:f8b0:4864:31::b])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B91B240B22
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 19:13:16 +0000 (UTC)
-Received: by mail-oo2-x0b.google.com with SMTP id
- 46e09a7af769-82890dea412so939897a34.0
- for <u-boot@lists.u-boot-project.org>; Wed, 07 Oct 2026 12:13:16 -0700 (PDT)
+ header.s=google header.b=HRZFf2DX
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 885196087F
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 19:59:55 +0000 (UTC)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-6de1ca1b05aso1518904eaf.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 07 Oct 2026 12:59:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1791400395; x=1792005195;
+ d=konsulko.com; s=google; t=1791403194; x=1792007994;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=fta4S1uM246NE3nUQCjJdnVTcAwbAhIKJnUL8q5m1fk=;
- b=ZLgMQCKt3KCvk/hpxbeBlhNznBK/QFTAqvUrDfu0QQd+gDRREeujdlr00kqG5SD3/a
- kT1pLlSSCMncZBYbwsiz7SdUeGXjlX9y+a0ujnCvAuF9lsXvtjgK5KrpO0EwB4vuMP3B
- 9rrjFAd0RSCEg6LcoE1mNAEoydP/l/6I8aEUA=
+ bh=Ogl6B12WXj6SAX7NC/LFQ4jcPfKpuuidG1HJVpNErPY=;
+ b=HRZFf2DX7PnSZAv1H9ZM49IRdipy+wfZCZQvBukIROcdf8HK4vdUx75CnD2DJS78W5
+ yGMdlo0BQurSz9Q1BuFYlwyYvJoUR9ts3orBwbn0vdyll2Vy9ZeN4NXw4O4UaOP3+kUM
+ 6KTynckaHNAA4OLkU/NlOJlYwUAkRBKTRTlao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791400395; x=1792005195;
+ d=1e100.net; s=20260707; t=1791403194; x=1792007994;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=fta4S1uM246NE3nUQCjJdnVTcAwbAhIKJnUL8q5m1fk=;
- b=Tdr76MUsJcFibVDUm738i0EKGsWT748sAJxqTDiQAEc1EKxcTo0jXSkyYeBbUeNYYc
- FNhI48DPlmeeFIvnDaoQ100hcAScN5uthfMUH1Kt+6WYcCbWmQxq6xuBHyWH/x1A2vNS
- kCDeodiP3armXSlBjjVpyi6AMURfixBGX2n+rd/oPPGeIHTRawZcYB7ggPI1XkH78PGJ
- iTUmk35AGLBugtdfpKxQqPvGQxxIJ1CXqwFCrCwk5vKlOBJsKKJKb6TbrbN3kp0Ubqar
- WwNevuYmKW6ngO0gD9rjJUvte1JJ9JmBSYQIMhWlvydtt9Oiq+mStWtG8RdJtoFu2PTC
- NT5g==
-X-Gm-Message-State: AFuF++nvc0rHy7Q4BKKPAHVXsQhMRTTC5wmVlfvL736Qhe51hqpBetUZ
- PVfyNZ+CZ7+Pt1ubtou0oxEY2/J+kf1HVGHHj80AP+GFklQJjb7nEOms54ZJeX34P58=
-X-Gm-Gg: AYBFou0iMoimv3SOVOHs8/bvz06pWuVY7qvINqfFiMnNMJ84Y92IaPTK4RSvaN7jpUc
- RhaKlGOPqVhX9dl5WrTtKhtyRxf9C6N49WnW80ZNVBCzaJflAusryc93EI7tfs7pYe4dy4Ts58a
- 9mVlY7E40u63omwNdJysl/y/ORMmIWhVfNbVf7ltTymBTUYbeHijHJmIWqJbggj2C3zfkZR66CD
- x0CaRXcsEPwTr6tHkQCIjr5KibuLOL8B+xsckYPtywmXkIGZ704wdnVIf+i1GZ4pAaSDEP53IxO
- GDmLzHja45j5C8IJsRtjEw8/FNBTmgHX1upB92qdOVq5KszK8/mrR92rGhngT3NMeZKkx51CYRJ
- aZeL6Gvt/lpVp34NZatUSR2Rx64xUIo/2oSpu4LcdRv7HdPUZqNDIIptG5xuGSnAym63smKYOzn
- yh3iPE8K2c75N2x+HH4nbunMg6hNoqaGsXqVTg88RiZNc3162a4kmuIIyJIG248ZyqLi12CHORL
- HgrUwHgzZiHLLR227USay8+ynHiN6TakLggqUMTJt+O//q9vEj+Ndd7ooOrhdrOSY1STBknGvC0
- Dc6w2+HMIS4yG5djpE4=
-X-Received: by 2002:a05:6820:c2cb:10b0:6d9:4d1:5c3b with SMTP id
- 006d021491bc7-6e7a825bfc3mr2245303eaf.40.1791400394860; 
- Wed, 07 Oct 2026 12:13:14 -0700 (PDT)
+ bh=Ogl6B12WXj6SAX7NC/LFQ4jcPfKpuuidG1HJVpNErPY=;
+ b=iEOUKfdwQcgf0+OE2A63vSZmbLXbIQjGd8Vow75leUKLca6DQgjNjOFe1ql97Q8OPZ
+ 1qjlQL28WNkYp430k6AqVVa+wLaV1KnBd4uHD6boXAd28PwfaAs4T3eOgoun8Ak3hofE
+ VEIiY0MvIo13g4crDxq5WrueDxtp/zVXdzSrmjH1sAbt7LPEC7vbOmsQsnBgFFWDJrkq
+ 3qeEEWF9DYNJEA9l+48EEa/EfUONN4bgqvFHsbr++5zV9RqCP4xI6isbiFz6M7OQbSr9
+ WCsP2FquiYNkkiTlwETJtQsk23Pf/7lH9UN276/wZmXKttYCXXEBQs/jbV4gFM9M8AnB
+ XEFA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwAwbqYXtnCvYDg5o7PKZfpr+Gn/A3anGTcsAR1j4rP7DCUipHs5dhMYmJY3azNgHzGhzdnweA=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lbDItKN4HQKFlmK6y/snXan2MMQrSq+KejMLT7ofcJo+mTRMXt
+ 8WmUhyn+hHDuzj2pPl+SV6HuyVN6BIpQkiOw1OPGxnsa2QSzFi44pyo7mK5QqRTdrQGbdbv0sAM
+ va4j11MWlyz0K
+X-Gm-Gg: AYBFou1v9/7+cbDu4xK6SvcmJsG1AMieE+XO7keNuWJwd5PvxURzzz/8lCKHYicDqYV
+ tEIFK28tYdtltKumGEvaVQOPco1mj47+e8D4/Gqs++6WsZf1yIC+qQav41grt9Ud/7o9l8+lU7P
+ WhFBDAUhsBXobvAeIfyRHaNYxkzZddbYvcFzXELfNlaf9ta/Y5w6nPGzFA+9oNAxkbrg0iDxxKd
+ R1XNhLeM0L7VLWhv1Vq0hKgVJrj5rMFH4rFzAuL3x0jFG3uto3802s6iIQCyLFfl6sis/p/0hrJ
+ Dprr8bnQUma/OYfKpTf0Z1RSDLBBYg91O2OtItFT1cypQmnyKj1AiG2D+z/Q4jYc3S8DgAUlLzK
+ B6J3ye9+MFrPMPTsIzrrhIH1Ydl4Ize5kjRy13Qszx8uP+KVa0zwHVCtxS49B/Sy7dRoPaEYmZG
+ qZZRfw0GwxlEK1aFsdtKjEft+ek8tbPp5adFFZ4cLfkJU5Tztcjc8FxbN1RdCvHuEt/vUr6w9H9
+ IwAaJ041xVu66QQRhKgFI+NlIRcJwk2hoKUtoSQNQ8Ki7bLc3GUw6og3Tbo1ehBKAnCAb58236v
+ 0PossgowuNbR3BE2sa8=
+X-Received: by 2002:a05:6820:c8e:b0:6c1:a5a7:ab0b with SMTP id
+ 006d021491bc7-6e7a4c25b8amr3192903eaf.10.1791403194145; 
+ Wed, 07 Oct 2026 12:59:54 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6e793c6742fsm2889719eaf.7.2026.10.07.12.13.13
+ 46e09a7af769-82ad9eeb5eesm3684297a34.2.2026.10.07.12.59.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Oct 2026 12:13:14 -0700 (PDT)
-Date: Wed, 7 Oct 2026 13:13:12 -0600
+ Wed, 07 Oct 2026 12:59:53 -0700 (PDT)
+Date: Wed, 7 Oct 2026 13:59:51 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Vencislav Atanasov <user890104@freemyipod.org>
-Cc: u-boot@lists.u-boot-project.org, Janne Grunau <j@jannau.net>,
- Mark Kettenis <kettenis@openbsd.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@nabladev.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Marek Vasut <marek.vasut+usb@mailbox.org>
-Subject: Re: [PATCH] New platform: Samsung S5L87xx
-Message-ID: <20261007191312.GD3079290@bill-the-cat>
-References: <010701a10b3e4582-979b6c8d-12c9-4819-ad7f-7ce925de5824-000000@eu-central-1.amazonses.com>
+To: tuomas.tynkkynen@iki.fi, bmeng.cn@gmail.com, sjg@chromium.org,
+ jerome.forissier@arm.com, Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, marscheng@google.com,
+ u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH v3 0/6] fs: Add 9P filesystem support over virtio
+Message-ID: <20261007195951.GE3079290@bill-the-cat>
+References: <20260923213002.1070404-1-visitorckw@gmail.com>
+ <179139852309.3398671.7231524378185570223.b4-ty@konsulko.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nLVM4iFN+rkmS7HG"
+ protocol="application/pgp-signature"; boundary="pR9O9RIrz0iBJxhv"
 Content-Disposition: inline
-In-Reply-To: <010701a10b3e4582-979b6c8d-12c9-4819-ad7f-7ce925de5824-000000@eu-central-1.amazonses.com>
+In-Reply-To: <179139852309.3398671.7231524378185570223.b4-ty@konsulko.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -184,280 +182,58 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
---nLVM4iFN+rkmS7HG
-Content-Type: text/plain; charset=iso-8859-1
+--pR9O9RIrz0iBJxhv
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 05, 2026 at 08:46:32AM +0000, Vencislav Atanasov wrote:
-
-> Port U-Boot to the Samsung S5L87xx SoC family, which is used by the
-> Apple iPod nano (2nd to 7th generation), iPod classic (6th generation)
-> and iPod touch (2nd generation) digital audio players.
+On Wed, Oct 07, 2026 at 12:42:03PM -0600, Tom Rini wrote:
+> On Wed, 23 Sep 2026 21:29:56 +0000, Kuan-Wei Chiu wrote:
 >=20
-> ---
-> As there is no official documentation or datasheets available from the
-> manufacturer, all peripherals have been reverse-engineered in the span
-> of more than 18 years, initially by the Linux4Nano project, which was
-> later renamed to freemyipod.
+> > Add 9P network filesystem support to U-Boot.
+> >=20
+> > It allows U-Boot to directly mount host directories in virtualization
+> > environments via virtio. This is useful for loading kernel and
+> > initramfs images directly from the host into the VM during development
+> > and testing without having to rebuild disk images or set up a TFTP
+> > server.
+> >=20
+> > [...]
 >=20
-> The current code can be built and booted on the iPod nano series,
-> from 2nd to 7th generation inclusive, and on the iPod classic (6th
-> generation). While the iPod touch (2nd generation) uses the same SoC
-> as the iPod nano (4th generation), support for the former is not
-> currently included.
+> Applied to u-boot/main, thanks!
 >=20
-> On those supported devices, U-Boot's console works over UART, using
-> either the 30-pin connector's UART pins, or the UART pins on the
-> Lightning connector for iPod nano (7th generation). USB 2.0 works
-> in device mode, and U-Boot can successfully enumerate as a DFU device
-> and launch a firmware image - either another copy of U-Boot, or a
-> Linux FDT image.
->=20
-> U-Boot can be chain loaded from Apple's bootloader or from Rockbox.
-> Since Apple's bootloader verifies and decrypts all DFU images, an
-> additional tool is needed to generate a suitable image from u-boot.bin.
->=20
-> There are a couple issues, still being worked on:
-> - The timer on iPod nano (2nd generation) is not exact, there's a
->   drift of about 5 seconds every 5 minutes.
-> - The S5L8702 devices (iPod nano 3rd generation and iPod classic
->   6th generation) use a different UART baud rate - 57600. In addition,
->   the latter's UART interface is not stable when receiving data from
->   the computer.
-> - The iPod classic (6th generation) is currently using a wrong clock
->   for keeping time in U-Boot, so the sleep command is slower.
-> - The iPod nano (5th generation) build does not boot because of wrong
->   DTB alignment. The tool which launches U-Boot does not use a 8-byte
->   aligned address, which became a requirement since 0535e46d55d7.
->=20
-> This patch is the combined work of several developers:
-> iPod nano (2nd generation): Franz-Josef Haider <f_haider@gmx.at>
-> iPod nano (3rd generation): Tucker Osman <osmiumusa@gmail.com>
-> iPod nano (4th generation): Vencislav Atanasov
-> 				<user890104@freemyipod.org>
-> iPod nano (5th generation): Serge Bazanski <q3k@q3k.org>
-> iPod nano (6th generation): Vencislav Atanasov
-> 				<user890104@freemyipod.org>
-> iPod nano (7th generation): Mart=ED Guasch <m-gsch@guas.ch>
-> iPod classic (6th generation): Vencislav Atanasov
-> 				<user890104@freemyipod.org>
->=20
-> Links/resources:
-> - https://freemyipod.org/ - main project wiki
-> - https://github.com/freemyipod/u-boot - development repository
-> - https://freemyipod.org/wiki/U-Boot - building/running instructions
-> - https://freemyipod.org/wiki/Hardware - device and spec list
->=20
-> Signed-off-by: Vencislav Atanasov <user890104@freemyipod.org>
+> [1/6] net: 9p: Add 9P2000.L protocol support
+>       commit: 48bb83195682d189273bdba813fa67f7f2760d59
+> [2/6] fs: 9p: Add 9P filesystem support
+>       commit: 9e14f904f8f12cd9df07e99a679453c8782e523b
+> [3/6] virtio: 9p: Add 9P transport driver
+>       commit: 09e668e32b4c14ce5c929d6cebfac75d2aefb90d
+> [4/6] doc: 9p: Add 9P filesystem documentation
+>       commit: 7d963df1bc38f5ae070ea8b96e03afc1ef7e23ed
+> [5/6] test: 9p: Add test for 9P filesystem
+>       commit: d446ef40b87d53ef7ac59ac9b1d79a16f0a065b0
+> [6/6] MAINTAINERS: Add entry for 9PFS
+>       commit: f6002d5e8018714ca80dcf1835c230c99c5090b3
 
-It's very nice to see this. For the next iteration, please reword this
-so there's more information, and also the attributions, above the first
-"---" so git doesn't omit it.
-
-[snip]
-> diff --git a/arch/arm/cpu/arm1176/start.S b/arch/arm/cpu/arm1176/start.S
-> index d3ab5928eee..3e82676456d 100644
-> --- a/arch/arm/cpu/arm1176/start.S
-> +++ b/arch/arm/cpu/arm1176/start.S
-> @@ -37,6 +37,41 @@ reset:
->  	b	save_boot_params
->  .globl	save_boot_params_ret
->  save_boot_params_ret:
-> +#ifdef CONFIG_POSITION_INDEPENDENT
-> +    /*
-> +     * Fix .rela.dyn relocations. This allows U-Boot to loaded to and
-> +     * executed at a different address than it was linked at.
-> +     */
-> +pie_fixup:
-> +    adr r0, reset   /* r0 <- Runtime value of reset label */
-
-Globally, there are spacing issues where the changes don't match the
-rest of the file, please fix those. Similarly, please run checkpatch.pl
-and make sure there's not other fixes like that to do as well.
-
-[snip]
-> diff --git a/arch/arm/dts/s5l8701-n36.dts b/arch/arm/dts/s5l8701-n36.dts
-> new file mode 100644
-> index 00000000000..f8d6cdc8dba
-> --- /dev/null
-> +++ b/arch/arm/dts/s5l8701-n36.dts
-> @@ -0,0 +1,26 @@
-> +// SPDX-License-Identifier: GPL-2.0+ OR MIT
-> +/*
-> + * Apple iPod nano (2nd generation)
-> + *
-> + * target-type: N36
-> + *
-> + * Copyright (C) 2026 The freemyipod team (freemyipod.org)
-> + */
-> +
-> +/dts-v1/;
-> +
-> +#include "s5l8701.dtsi"
-> +#include "s5l87xx-nxx.dtsi"
-
-For all of these dts files, have you submitted them upstream?
-
-[snip]
-> diff --git a/arch/arm/include/asm/arch-s5l8701/uart.h b/arch/arm/include/=
-asm/arch-s5l8701/uart.h
-> new file mode 100644
-> index 00000000000..da07b296b6d
-> --- /dev/null
-> +++ b/arch/arm/include/asm/arch-s5l8701/uart.h
-> @@ -0,0 +1,29 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * (C) Copyright 2009 Samsung Electronics
-> + * Minkyu Kang <mk7.kang@samsung.com>
-> + * Heungjun Kim <riverful.kim@samsung.com>
-> + */
-> +
-> +#ifndef __ASM_ARCH_UART_H_
-> +#define __ASM_ARCH_UART_H_
-> +
-> +#ifndef __ASSEMBLY__
-> +
-> +struct s5p_uart {
-> +	unsigned int	ulcon;
-> +	unsigned int	ucon;
-> +	unsigned int	ufcon;
-> +	unsigned int	umcon;
-> +	unsigned int	utrstat;
-> +	unsigned int	uerstat;
-> +	unsigned int	ufstat;
-> +	unsigned int	umstat;
-> +	unsigned int	utxh;
-> +	unsigned int	urxh;
-> +	unsigned int	ubrdiv;
-> +};
-> +
-> +#endif	/* __ASSEMBLY__ */
-> +
-> +#endif
-
-Can we figure out a way to share includes? It seems like this one for
-example is cp'd a few times. Maybe arch-s5l8xxx ?
-
-[snip]
-> diff --git a/arch/arm/mach-s5l87xx/Kconfig b/arch/arm/mach-s5l87xx/Kconfig
-> new file mode 100644
-> index 00000000000..81485943d00
-> --- /dev/null
-> +++ b/arch/arm/mach-s5l87xx/Kconfig
-> @@ -0,0 +1,53 @@
-> +if ARCH_S5L87XX
-> +
-> +config S5L8701
-> +	bool "S5L8701"
-> +	# Actually an ARM940T
-> +	select CPU_ARM920T
-> +	help
-> +	  The Samsung S5L8701 is an ARM-based SoC with a single core ARM940T.
-> +	  Peripherals include USB2 device, USB1.1 OTG, I2C, I2S, UART and SPI.
-> +
-> +config S5L8702
-> +	bool "S5L8702"
-> +	select CPU_ARM926EJS
-> +	help
-> +	  The Samsung S5L8702 is an ARM-based SoC with a single core ARM926EJ-S.
-> +	  Peripherals include USB2 device, USB1.1 OTG, I2C, I2S, UART and SPI.
-> +
-> +config S5L8720
-> +	bool "S5L8720"
-> +	select CPU_ARM1176
-> +	help
-> +	  The Samsung S5L8720 is an ARM-based SoC with a single core ARM1176JZF=
--S.
-> +	  Peripherals include USB2 device, USB1.1 OTG, I2C, I2S, UART and SPI.
-> +
-> +config S5L8723
-> +	bool "S5L8723"
-> +	select CPU_ARM1176
-> +	help
-> +	  The Samsung S5L8723 is an ARM-based SoC with a single core ARM1176JZF=
--S.
-> +	  Peripherals include USB2 device, USB1.1 OTG, I2C, I2S, UART and SPI.
-> +
-> +config S5L8730
-> +	bool "S5L8730"
-> +	select CPU_ARM1176
-> +	help
-> +	  The Samsung S5L8730 is an ARM-based SoC with a single core ARM1176JZF=
--S.
-> +	  Peripherals include USB2 device, USB1.1 OTG, I2C, I2S, UART and SPI.
-> +
-> +config S5L8740
-> +	bool "S5L8740"
-> +	select CPU_V7A
-> +	help
-> +	  The Samsung S5L8740 is an ARM-based SoC with a single core ARM Cortex=
- A5.
-> +	  Peripherals include USB2 device, USB1.1 OTG, I2C, I2S, UART and SPI.
-
-We should probably handle this as a "choice" statement
-
-[snip]
-> +#obj-$(CONFIG_S5L8730) +=3D s5l87xx-buscon.o
-
-Commented out lines should be removed unless there's a very good reason
-to keep them (and in code, it should probably become some debug
-statement that'll be optimized out normally).
-
-[snip]
-> diff --git a/arch/arm/mach-s5l87xx/s5l8730.c b/arch/arm/mach-s5l87xx/s5l8=
-730.c
-> new file mode 100644
-> index 00000000000..91e6abfb03d
-> --- /dev/null
-> +++ b/arch/arm/mach-s5l87xx/s5l8730.c
-> @@ -0,0 +1,23 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2026 The freemyipod team (freemyipod.org)
-> + */
-> +
-> +#include <init.h>
-> +
-> +int print_cpuinfo(void)
-> +{
-> +	printf("CPU:   Samsung S5L8730 (ARM1176JZF-S)\n");
-> +	return 0;
-> +}
-> +
-> +void lowlevel_init(void)
-> +{
-> +	// unused
-> +}
-
-Empty functions like this should mean we just need to turn off a Kconfig
-symbol instead.
-
-[snip]
-> diff --git a/configs/apple_n20_defconfig b/configs/apple_n20_defconfig
-> new file mode 100644
-> index 00000000000..79ca75bb7b7
-> --- /dev/null
-> +++ b/configs/apple_n20_defconfig
-> @@ -0,0 +1,35 @@
-> +CONFIG_ARM=3Dy
-
-I can see this (and presumably the rest) weren't done via "make
-savedefconfig", so please do that for v2.
+Are there special permissions required for 9p to run? This works in
+Gitlab, but in Azure:
+test/py/tests/test_9p.py:46: in test_fs_9p
+    assert test_file_name in output
+E   assert '9p_test_small.txt' in "9P Error: No matching 9P transport devic=
+e found for '-'"
 
 --=20
 Tom
 
---nLVM4iFN+rkmS7HG
+--pR9O9RIrz0iBJxhv
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCasaZxAAKCRAr4qD1Cr/k
-CgPFAP9YK6lzvyI7kKs6AX7H4XhbvqXNaAIztrRdrIo3IhhzjQD/QZvRltEawqFC
-rg/ip/RuZrSyswkyPpXipny/VS/I6wg=
-=/C4v
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCasakswAKCRAr4qD1Cr/k
+Cu6qAP0T++bIoVdeWee7suNHCfMTpxPebpEEatGs/iww838srwEAuqauLFQrk0vT
+74JUjEba49N6jXZA3/kjEJAb/c6CQAM=
+=ZNbC
 -----END PGP SIGNATURE-----
 
---nLVM4iFN+rkmS7HG--
+--pR9O9RIrz0iBJxhv--
