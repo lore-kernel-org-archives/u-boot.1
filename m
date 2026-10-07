@@ -4,133 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1810ACA5FFC
-	for <u-boot@archiver.kernel.org>; Wed,  7 Oct 2026 16:58:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D5ECA6002
+	for <u-boot@archiver.kernel.org>; Wed,  7 Oct 2026 17:49:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C3A626080A;
-	Wed,  7 Oct 2026 16:58:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E6E5D60DB0;
+	Wed,  7 Oct 2026 17:49:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mdDoIJLx-hu6; Wed,  7 Oct 2026 16:58:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org E3D85607E8
+ id 5WYZ4H8CzX4x; Wed,  7 Oct 2026 17:49:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org B813760D4E
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791392317;
-	b=CZXT/d5XvElPEQXQ01QEe/9sfW72BGgGFRbX15y9+W3koE+JUVRJs8nJuLrInkygl2ZN
-	 jkRZF/CYFLyHrF53ycXyoboA1zkU3xMygjooB20IabLAudN3lqx3Rb8clw2O26KMzUz3q
-	 NHogbzvpJGq7w8gCzKgd7gGTQ/z7C05gnMYjSFhW2IjMkw2TMVfdBJmUBtLlBED7/rebH
-	 3hhuQl9e43pGJo0amJFLPVRcMg/1cyL637Shnbt/ngBlIy7xjs2FNn2oAhF6CoA7IFH+n
-	 MKzhTeN33q878ox/HAw4iSr2PMWmqCY2pfJ/KW06LHAx5jebthwqCLIgRZqug+ERq3w==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791395363;
+	b=eCT+dSW8gEy75G5/+BKrJ8osLF5HVnzNw08XbMZDLoE4F8ZrbtvKIH1oyJeUzj9/Tv+f
+	 mAYsLw/tDzFYycWbx/DWPkMC6oWzu7dCN78M3Yyvh0qzl/hkUmP1n/M2oeLzjnHf/JcIO
+	 +pyLixgVA0u/ZBQGzV6NX5v5OdIVF9t7gMy0cnCdw3tjLmXNP3ssjea6AHwlTwMgQuMFi
+	 9UDU8pbsRcPzm9N14S5U5xOtMojQEwQ4obNe474DtwFkPO1OVip+wzLl4fIg8WGJMsTSw
+	 tHjgc5n5+xjGF4W9SqEBxmE0P8RMSfUymWVzgxmFR3YpzChJTdR+vtxLt2qqxe5t+yw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791392317;
+	c=relaxed/relaxed; t=1791395363;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 DKIM-Signature:Received:Message-ID:Subject:From:To:Cc:Date:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:
-	 User-Agent:MIME-Version:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=fm6xdHt/WzcXTLsEJL16OKnaMuW6czGBlxID3zJVJ5I=;
-	b=n3NS8WUCJVa/s10ylprskSvCn3nARfe0p5iRPNlB+O5NCazMp/C4ljwz9MoMxqhvUABA
-	 E7MXIel60hAZ1KG3ZdAN93Gy5+mF/9ZI0WuEFSwnrIe1jxggaHL48zdQx9kuaBnmkeNY7
-	 qKeIPJfP+Hbvn3LhJ5u0u4904NLljGcRnfah5MdwQlRUr9o1im72DMKZKNl7bJTalKAzD
-	 +gAtVD6QyVdOalJMYc+wyW0/rNMUkAFKyv4PsTWa4CINXBCSHWHF71GV+uEeVlzGz0pls
-	 amiFslPC4B5IIiysDZ7cogXW+FXUYPRniQSOfwHO/OeqRV/uYIi6vsf98ZkKrADwtjQ==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:In-Reply-To:
+	 References:Feedback-ID:X-Pm-Message-ID:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=9g/glFx+gQUf9ZC5Ba1ovrEqoJ0GUuDXyfdFcHaN4Xs=;
+	b=hS6MIQpiY99AqNeoPr1pokqqsUktxkEhkerQ26ozdPwNsDwSR7fPG7I7jzPERP42tvfr
+	 +0npycN00csfgQfeE/KiroYdQCCVk10ZRadDNwfdQlhfyI36Foa3XAEk9hZ4g43BXfLVY
+	 HPOnB/051StDdy2DOYHdg+qaBgwV6ILTvtVmGS4typKipV1Utnsk93/6GegYYJsHFoEqf
+	 JdNry4DPG9sdgrXfMt2watpoH6RxlNDb4VNHKjG7hxYKPpwtHI2KSN3KYyW6DANpy8Csw
+	 /cryXZX8AJDq46pfbysOzuox5mucqujBnUmnCzcbkQivGQlQfIUSN35hdS0sH0FGYow==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791392317;
-	bh=fm6xdHt/WzcXTLsEJL16OKnaMuW6czGBlxID3zJVJ5I=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791395363;
+	bh=9g/glFx+gQUf9ZC5Ba1ovrEqoJ0GUuDXyfdFcHaN4Xs=;
+	h=Date:To:From:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rW2Wwne1IvgK9HHUMGS4jtqpasY9XM4WRokgcnkLCHvWXRgfhyHF64/bm5aiUWOdh
-	 BQukQA3jGTpXsJdZp3zjqSsBck7naKESEs4mm4WjjZ3cGoNIYlWLZUAT+S8xbxBXUw
-	 sVY5aj6RNfMrsUuB5jINFv6q+AIzTqDhiJiBlp2HeCEHYj2vG9nm0hSbjQWSpxfh4I
-	 W2pI+4WCKyyoXahrpjzRT42xIHPMEzUC2OEokB/YMS3enVGjiawYmwKbKY/g196z/0
-	 RiCWq9Ou8diLIkaTP/+dEkvT/l7ssidcYIU8RZVXcQwHJQB5pgKk7jsH/CZ0uKnTAj
-	 AFDdKyZ0hPNmQ==
+	b=0PoS4YPNGXX3t6qiI8AvfTl2f/epYzDCdTXWKQErKUPoZhOWIgSHyHwG4Em9Lhlbg
+	 QmNMYj5zU7nY6GkvsI2MDRc492E+pZ4KAOWBbSS4fEC1xIdt3liMQrn8W6GFIjnBo3
+	 KcZfXBDjZeuGuN+1fk0H45wpga/DU3ngfjDMISfc+nPeIsXJfNlnmRK+KCYZBcaLco
+	 jx3xqs2PfBxyZGCGfE7/tn7NoTb4W3Y2FZ9pgZW7FJIeep8iC1ZsI1sHBupJz479fm
+	 P05wGsKhZEZlh6QOzLdk0mtky/MEnyc4d4i5dvesUve0XfGgcZGO+VMvCqtun/4RTQ
+	 eEPEAkRjN0wjQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E3D85607E8;
-	Wed,  7 Oct 2026 16:58:36 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6FFDD1D2
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 16:08:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B813760D4E;
+	Wed,  7 Oct 2026 17:49:23 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2329222B
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 17:23:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5637B400B3
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 16:08:29 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0722C40E3A
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 17:23:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 46DAsb22pfJS for <u-boot@lists.u-boot-project.org>;
- Wed,  7 Oct 2026 16:08:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org A98C640204
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=150.107.74.76
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791389308;
- b=M7tPU086ioGOG1WvYny6N1RmGi7s2o3YyrYCeRvOFKbkl2UrUE7aNltxmzGfEqEGspF8
- KzfmCKUiAxpguDZ8oyZINW/8rP0exGbR/sWW88WhXsKLpgWCWvUdqkC6KcPbvRUHo0Leo
- FK4OhnePhofEfwHyt9J8CzHN6250W8d2vqu3UEhGqd9SqXKsAlgIPKY64nSYnOPTZ1n0P
- PYJ5kvEy93CToK/t+v4uIYgX/ppYgBXRxhCCulGTfQqg+qJV3BgLz2f0AKeJ6TXOySk4I
- Nj9c1wI53l/NP4NjKnKFThc3q4o43YSXawxHvdE0KLKsrhrbMgbFsw/Gz1YBK0n93Ng==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EyGT3Shiqrxn for <u-boot@lists.u-boot-project.org>;
+ Wed,  7 Oct 2026 17:23:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org B74C340C03
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=185.70.43.21
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791393778;
+ b=JICzlh8ke8OdlUxKK0W/eBVdHsnaM1vKsV+YaAry3IUtPNFk85EyE8u6jvO1pVe0pZpx
+ s6MAahjMBnw1xlQOXnGyamwZfXquP8Jdb6JUdpXrXHBy3oZy+TadCX7xmedyOi7bICJUe
+ oOZq69pIEsusi7pNMESIPEypKhVbamzPxBt0IjmgFgpN7LPdFRQ8RwTI+V8+N4hkmVEra
+ joV6tWZPJLFCOlg6N976PKhFnvhphBL9jfBmwDF46KFyRUwAQTNFohOYOq0XryrYa8jqn
+ 48cNmLqoNjhGd2YIXz1dGQc/dFBLvKDvLMGd0iexX/Lts4z/GDzJJOaMQ0oWVJtRARA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791389308;
- h=X-Greylist:Received-SPF:DKIM-Signature:Received:Message-ID:Subject:
- From:To:Cc:Date:In-Reply-To:References:Content-Type:
- Content-Transfer-Encoding:User-Agent:MIME-Version;
- bh=fm6xdHt/WzcXTLsEJL16OKnaMuW6czGBlxID3zJVJ5I=;
- b=gUYko48TSJCev+6x8TlQhfzu+QJ71wA3RLzMc0Tdw29VZsu7u00lBlC2j8BzSBFwPrZd
- 54yeVmNzEabJustxZIAoOTPpqi7x3FSUu10hTRNJhCyJPJMSSsuqPgV0oCgKdQm7fcHEw
- arSve5RJRL8fUGK21S8VYWerHFKulZrCGFeVMWfdoL7fxdH4HmamfXBCrOPWJ3G1heWW/
- H/I9SeWzaBtee4ujNcyV2JCDKvj86RYO3gNSH4VNfUAojNWG2kIl8X3kLU5+sLszrB7fs
- kisqggbve6fJRaG7bmWSPPClh/IYsgHk6dTP6t4a1GejcbzKlK/z/Lfkmf5LJ9gC9lA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org;
- dmarc=pass header.from=ozlabs.org; 
- dkim=pass header.d=ozlabs.org header.i=@ozlabs.org header.a=rsa-sha256
- header.s=201707 header.b=SyrCcyBu; 
- arc=none smtp.remote-ip=150.107.74.76
-X-Greylist: delayed 964 seconds by postgrey-1.37 at util1.osuosl.org;
- Wed, 07 Oct 2026 16:08:27 UTC
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=ozlabs.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=ozlabs.org header.i=@ozlabs.org header.a=rsa-sha256
- header.s=201707 header.b=SyrCcyBu
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=150.107.74.76;
- helo=mail.ozlabs.org; envelope-from=jk@ozlabs.org; receiver=<UNKNOWN> 
-Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A98C640204
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 16:08:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ozlabs.org;
- s=201707; t=1791388335;
- bh=fm6xdHt/WzcXTLsEJL16OKnaMuW6czGBlxID3zJVJ5I=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=SyrCcyBu2GAxUBdvEQKIn+AC4Yss9ILaF00GQ8f/gvaWhowolZC+wfsH+Pj4b9glu
- +EZdTFTEjHUumi+U4ThF9ARlMQn/Gd/ERAv1nYpfnBQbrw7c72FFTVdswkx3pzT3pY
- Qv4SQs7XniXZqHa4J2D1vbITJkvN0Tx0WJl2/HfkQhRy84GEGqg+zvSMZBJt3n/4R5
- /9V2QEOnWj/kM1eOHs/fik2NLCZ0QF3bca/bTVEr1k8gJ+P7hCiF4NddWDONOz+buM
- sokh2AU58GnvQM5rkXYh+yd1IhxtycVgKicfNjRR6uQfys1WyIea5nbx1wUlQIijjj
- kYcP+Zng5e6WQ==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4j0Hgd0LQWz4wCH;
- Thu, 08 Oct 2026 02:52:12 +1100 (AEDT)
-Message-ID: <1f5fb33c5e9009ee4cb521ca3ac6168301841da3.camel@ozlabs.org>
-Subject: Re: patchwork.ozlabs.org: slow responses and timeouts
-From: Jeremy Kerr <jk@ozlabs.org>
-To: Mehmet Fide <mehmet.fide@gmail.com>
-Cc: patchwork@lists.ozlabs.org, trini@konsulko.com, 
- u-boot@lists.u-boot-project.org, mehmet.fide@screeningeagle.com
-Date: Wed, 07 Oct 2026 23:52:05 +0800
-In-Reply-To: <20261007115918.2553308-1-mehmet.fide@gmail.com>
-References: <20261007115918.2553308-1-mehmet.fide@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-0+deb13u1 
+ c=relaxed/relaxed; t=1791393778;
+ h=Received-SPF:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
+ In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
+ Content-Type:Content-Transfer-Encoding;
+ bh=9g/glFx+gQUf9ZC5Ba1ovrEqoJ0GUuDXyfdFcHaN4Xs=;
+ b=UGGTSt/Tx7x8iIaxjKxCn60W/DqA31bL/6VtfDIyvZIA5O2YRmii3AxDZs7IDnx91Kk9
+ xj8ttD3NBI6BpRNa5CylyKS9Vfw937OldwONzTqTCd7XWn8tddTW9i1BgxwY4dCvnRtQm
+ /NxUY7QbvzFpzJRiSkWAlABKuyfgUpoVtHXoox1sGn766lFSqva8UK+3qNdw7e4H81SOq
+ QfIMVeP4p1Alg+GIZaue//kOI1tYyHo2bBYJYc3YpCKxuawQ1jSuld024e78sd7xCgW2A
+ 1M9GdzO0pv3VxtRbXAmlFvDcsas2aTolzAHr3hV+FggvyU/6hhW2OmlwgbzD8bzeG5w==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org;
+ dmarc=pass header.from=proton.me; 
+ dkim=pass header.d=proton.me header.i=@proton.me header.a=rsa-sha256
+ header.s=protonmail2 header.b=ZjsBUwwf; 
+ arc=none smtp.remote-ip=185.70.43.21
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.70.43.21;
+ helo=mail-4321.protonmail.ch; envelope-from=munzzyy1@proton.me;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=proton.me
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=proton.me header.i=@proton.me header.a=rsa-sha256
+ header.s=protonmail2 header.b=ZjsBUwwf
+Received: from mail-4321.protonmail.ch (mail-4321.protonmail.ch [185.70.43.21])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B74C340C03
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 17:22:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=protonmail2; t=1791393372; x=1791652572;
+ bh=9g/glFx+gQUf9ZC5Ba1ovrEqoJ0GUuDXyfdFcHaN4Xs=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=ZjsBUwwfHlestCtGw/19CTaLtxL6TwHVy6W/CE53z3X78fW7dOrPdGs2F5oWtYB5D
+ q1LT/DjtiEh+4uYVAOMSbN5mysB8PCeZlDSUqEonuJWHx0GRxxnSTbXJNGgl5JNuXA
+ pn5l5f1EBJKiIPfqixETtf0YQSyTjWDgVXw5jJEl40h4Q0Ywdlx2c4CzD5PYhPnk3x
+ BoDGuqa+jh+XBuEw0YvIqnNoOVXQckiMFW9PbYSveh2QgIJ4s2RB7df64F/G1hGYlr
+ DbScCOGaKWbctvemTU0/MQSEv+dB4UQZAdKP5W0nKu1hwP+hGAtiYxNW3tIpQ5K6rR
+ tB8ME3IcbZ46A==
+Date: Wed, 07 Oct 2026 17:16:06 +0000
+To: Simon Glass <sjg@chromium.org>
+From: Cole Munz <Munzzyy1@proton.me>
+Cc: Alexey Charkov <alchark@flipper.net>, u-boot@lists.u-boot-project.org,
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Vincent Jardin <vjardin@free.fr>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Michael Srba <Michael.Srba@seznam.cz>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Daniel Golle <daniel@makrotopia.org>, Francesco Valla <francesco@valla.it>,
+ Anton Ivanov <anton@binarly.io>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ James Hilliard <james.hilliard1@gmail.com>, Quentin Schulz <u-boot@0leil.net>,
+ Kever Yang <kever.yang@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>,
+ Aristo Chen <aristo.chen@canonical.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Joao Marcos Costa <joaomarcos.costa@bootlin.com>
+Subject: Re: [PATCH v2 09/11] sandbox: spl: Enable zstd
+Message-ID: <20261007171551.279289-1-Munzzyy1@proton.me>
+In-Reply-To: <CAFLszTjYA8J4V1mEOAe9_0Wdv66y4iawoZWfbaOPMPteNXooyw@mail.gmail.com>
+References: <20260918-spl-fit-compression-v2-0-28e946f57357@flipper.net>
+ <20260918-spl-fit-compression-v2-9-28e946f57357@flipper.net>
+ <CAFLszTjYA8J4V1mEOAe9_0Wdv66y4iawoZWfbaOPMPteNXooyw@mail.gmail.com>
+Feedback-ID: 209578162:user:proton
+X-Pm-Message-ID: d266cceeb8543b69362e7cb51a3d017e2d63aabf
 MIME-Version: 1.0
-X-Mailman-Approved-At: Wed, 07 Oct 2026 16:42:38 +0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,29 +155,17 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Mehmet,
+Hi Simon,
 
-> patchwork.ozlabs.org has been slow for us for some weeks, in a browser
-> and through the REST API, and requests often time out.
+On Sat, 3 Oct 2026 at 14:41, Simon Glass <sjg@chromium.org> wrote:
+> FIT_INTERNAL_ZSTD and FIT_EXTERNAL_ZSTD cases with a canned blob
 
-Particularly over the last week or so there have been some increased
-loads, this tends to be the ongoing whack-a-mole situation with scraper
-workloads.`
+I sent that pair on 21 September on top of this v2, plus a gzip pair:
+https://patch.msgid.link/cover.1790017078.git.Munzzyy1@proton.me
 
-Somewhat coincidentally, this tends to happen while I am travelling. I
-have scheduled some time next week to tweak the anubis settings and
-connection limits, when I am back at the desk.
+The blob is picked by name in do_spl_test_load() and the zstd cases
+check CONFIG_SPL_ZSTD on their own. NOR only so far. I can add the SPI,
+NAND and net lines in a resend, or Alexey can fold it all into v3.
 
-> Is this a known load problem on the machine, and is there anything
-> users can do to lighten it, for example in how often they poll the
-> API?
+Cole
 
-Legitimate web- and API- uses are only a fraction of the patchwork
-workload; the vast majority of problematic load is crawlers. There have
-been some cases of high-load actual-user API polling in the past, but
-that has been fairly easy to identify and resolve.
-
-Cheers,
-
-
-Jeremy
