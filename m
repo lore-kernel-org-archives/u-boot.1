@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36AD5CA5FFC
-	for <u-boot@archiver.kernel.org>; Wed,  7 Oct 2026 12:17:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0777ACA5FFC
+	for <u-boot@archiver.kernel.org>; Wed,  7 Oct 2026 12:30:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C8609606C6;
-	Wed,  7 Oct 2026 12:16:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A2DB2606C6;
+	Wed,  7 Oct 2026 12:30:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gX3ABXZZYRgJ; Wed,  7 Oct 2026 12:16:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 2540F6066D
+ id V7W4swKqR58X; Wed,  7 Oct 2026 12:30:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 9944260685
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791375419;
-	b=CKIbS/dtGd97ZGaEcBNYKqOn0n01LFRyN5KajjjZkKqGZzXR4z6UZCzUhfoLLe3/a6wK
-	 uPc2KPo4O7Ij11vIRySLScV4ZCbSecn8SNKBoAJ3/BusbXYSQtANbInrAsxcKr+lGoUBX
-	 ZP5DpXwfTzrlNdhe59v+cR/ZucInzriU9GIprmutIS16eTgOKNsTW6SmzYtm95SaSazqg
-	 uE6qR0hNr2z9V5jClbnt/RqKA7dTq+yaDSAVI2eCk32M7IpDs40JbFB2P98VXkghuiEOo
-	 9oUdmrZU/23M7Dw92v/M2GDpJbU4MRbfo36+vELtbMFVku5lG4ARNUZXsLlHGh2vFXg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791376220;
+	b=QCKq+sDbEEvxLTRXnbbSRjGRMeHH9KY6IHqPn4y+elLzGjTP5jPeDZZ1SYax2j/JUlw9
+	 F7N7pBDAy/cqV0vMpkM1eoV1FlmGVmNm33adAJG40cnHANbT906EvglRk4fKq7GhTv7RO
+	 vVY70BpxBD/mts6q62IO1NJffxIYk7ctKAwWQRoQikWbQZXRJPmW2OhgTBFJT7sbus7IQ
+	 yfWwNY/GJVpPKORSGwwjUBQrB4qKIUNDN9695lnGAZZ4ajKIt7vC4mxyXiGjQ6wbhf8so
+	 A1rrgg/cmesK/egkhxlcIBeEtltKB3Fifne/+XHEb3YeECGeCX6/U7Ygm5w7G6/Dp1g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791375419;
+	c=relaxed/relaxed; t=1791376220;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,152 +31,147 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=IYLAXWbJUmdgIqpTkAOtOYeFnNROW0vlagVC8Q873Mc=;
-	b=m5lCU6Bwg5776w3VenQ2n6g+KmGm3urWIOvEU5F5PURAF3mWnEAZYgSLg7xYjb3QEMl0
-	 4PjnlSU6OHghMQ0ii+17QeuvnrWSIEuEdB+BaS3VkOIXH4K024jxJgsWJiYDB29teyLjC
-	 k6KX/9BU0i37uIHScfUeQEXCZZzPaRHGRI1hg9NjUQ5oFDLWvRVbxnkiYvoHZSu3RpRJL
-	 2BucgH06gPUonYoK9ZfxiaYSD8biP1MJdJH/aHIuxMyW2loD07/tYOOfxn3DIbsflV/mN
-	 xPx2wVA4Ry6bMXwufq03Xv7vwu97orZnJvUlonHj7s/4jqP/6XGFdupg0yswY+Xt3nQ==
+	bh=WRcurHUTAGUKB63gn7AiVOQluqpH6+QSd3Yt/1XBJ2c=;
+	b=jm7wnsgc9Lkr99GVflokH7JBFYznInoDFMX4rEL+lxXLX7UeDxEaoKHgYU/LDQBNccAR
+	 2X5NqvUWo/+lyF3bokYLytMBsQWEKmKyV5CQklz3oQLJUQkAZP4XW43qp+8BbD49Toe4b
+	 ehHtUyq+SkFKmpGK/959jC8GZ0pm3kvHbP3lJ6+JzHHpMPAYMddrkg7L1Jxh4kTtTv1zg
+	 0UfetA0hBa2xb4QrRsSt1uw5TrikQYjK7M8PA03EBU1cYHCALd5h+N/LThMRvjg0lug2s
+	 whuM219q0aTottoFgFnfLiPu1XU308aR1W0dXSgO6Z1M2taPwhYaRZc6D8E68m+wJLg==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791375419;
-	bh=IYLAXWbJUmdgIqpTkAOtOYeFnNROW0vlagVC8Q873Mc=;
+	d=lists.u-boot-project.org; s=default; t=1791376220;
+	bh=WRcurHUTAGUKB63gn7AiVOQluqpH6+QSd3Yt/1XBJ2c=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=T+VDrwwA8VraPjr6I1UW3jWIQYAnEbCtl5fJRIT7duGjSdloTSMQBEBEztW+yj1LU
-	 oFFOC+iWnGwBRnBc/JwSptV3SgPSKunrky98wzUjsccfgQGbBImEuhrSI4oD2LK85R
-	 KuoKntL0YrBMEbrvUeyRM6+mxTCK/7nbOwrFW6CM1iz4XBcSS0bq0IedaBwunDvax/
-	 4R3aj2Q4lJkqlSajbrQ6LBaXJIevBeA+LzbTLDX4nqpw7UQINqP/H6p6MxF7ZJ46By
-	 DEYTlqzwa4g0eR1q5qX10SwA/65X6oU3+wza6HuLOJEC5K9pQof4HQN2aIMe3MocRA
-	 3EwYS/VE4BbUg==
+	b=QkX7edxnbRC0sFBCT2sJLnu5imIWeK27sPEZYYqvpKBSBXY9PlkAeAqxKCwVb0XCf
+	 i+bDiqczljOETIX2Jbmjgzttfjtdlz0LtZvPOaHNQHgd5emHiGPCKPwBYXkz1qUAhb
+	 edXshQQixE1aNh9k/VsVcEItVGLPmdji8AYziAppRDhqV/FeQj9nIulvChBxsI8PuH
+	 1OfMzT8tliNYp70VEeBlV/1rPrmVuSTBXndu2SX/0RvUs4d7+6IX9lCwMh9n9a+Flp
+	 hTMVsvLiAESiQFXFx060E1VUWZ5zCPu3qe+H+hwAUicgCwePRtcVUJf4TQeYmc1NcA
+	 pB1/ZT4KRr0xQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2540F6066D;
-	Wed,  7 Oct 2026 12:16:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1D5D7338
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 12:07:51 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9944260685;
+	Wed,  7 Oct 2026 12:30:20 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7EE2B1D2
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 12:17:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0373C40080
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 12:07:51 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6513E40057
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 12:17:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nSmep1zXUY6k for <u-boot@lists.u-boot-project.org>;
- Wed,  7 Oct 2026 12:07:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 3D7FC40057
+ id Va6ooabBwW1O for <u-boot@lists.u-boot-project.org>;
+ Wed,  7 Oct 2026 12:17:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp2.osuosl.org 3AB4740080
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791374870;
- b=MRRn8TiEL7pLCVwu7evHC6Y6lv/ZOV/19HjVimsRwTwhIl6Sh3Rc3aIa8br5nsWNAwZS
- uUwYi1NSTuA/w/uIoow9J5JAk4B1TtvBoCMdM/RZ+G7BL8sJaAva2PqgawWB/vl22iXbl
- RjpHLFYxEuCPTUZNM8ZGrruRQEgdUTgdDra0qxXVBDNeWMQ/J78BIZtbrRFHAwYAALJq1
- 57zBG4wfM0lLL2hYEouGr4H1EYbEpe7mlV5Mmk90Of5pKZAXgt2t1psfJL31j/5PeIq43
- L/a7nkcpg3gLj+V5sdWPksFS8lRvJlZuyM3q3OPpKKucMAyFRAQpC0+pvQLavKm/eJA==
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::629"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791375426;
+ b=qQgHcKH6khkgl5R5BIeOZnpFtZdcH3Kh9BQ4u/8xfGIC9Mu5AumDVHdzAn5quxVbFiAN
+ ar0t88duFdLT8akWWQNna0FtWFIL5bCKIQp6uufiQJ4JHP6ia5e//C2S4Rgohzv1KVvHW
+ hV0a/WFevSwt1XWArrQ1nBlCGfb3AWe9zqXbnVjCRUTYh/YtovumokOR9XMpIXuNnGZ8d
+ /pxKUiZbNyz3ecAv6UDqlLueWafikwhjzYjeSx2uR/bXFQCb90YoDZnGZsMFNiq/7RsE8
+ 9iiSqrVpaocC3xXx7BgUoyVfHJtbawetCpjVeypc+6qc+7fPzozyxPP5qbCkR1zvkIQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791374870;
+ c=relaxed/relaxed; t=1791375426;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
  Subject:Message-ID:References:MIME-Version:Content-Type:
  Content-Disposition:In-Reply-To;
- bh=IYLAXWbJUmdgIqpTkAOtOYeFnNROW0vlagVC8Q873Mc=;
- b=SwWocGYRIzBOVBBuvhZFf06vVhV2ueruGSr19BKINi8EaSztoITHbMTI8vfoDl0LLJlC
- 7veVc46/MGQppZhYqmaF2/YTTEzDFkJ30CqC2f7wtoWl7G/rPHjb4692tnzPBBp5rCDAD
- SRyV8lPj396J7nLr+C8wqLokvArlTnNmDVjLrsqdYlgwp7784tbMn1IJ4bLCBnZ+QuiD2
- 6MpYNIX6Sr4omQ+OY8GreF1Q9Gq0zckLELzPswMfwG8qFFXTmhWE7tHwsslebnZSEVCSh
- FziYmci3hFcnPk5k6+m0vJdXxt1K05mbOczwaTEOKg96PHY6LNzgvxDHbTi0/MX9OUw==
+ bh=WRcurHUTAGUKB63gn7AiVOQluqpH6+QSd3Yt/1XBJ2c=;
+ b=nSuP56RNfxxuQew9Kpzh3UdPuRA3ukbXaQmgeM49+Ai+qXP5reaiYyj28SWYhydt38OU
+ SkxKTGYm4v0MIe+GGcJdG0L3rUH1rS+WxLzfikAAKtjAOCIWg2SwIWX3r79+EVS6oWtRs
+ XjgjIvz/sJ0w+KQWEOoWiOWfwwHztBPEoSyU2gxI1F87KAe8lX5K/Y77p8coeoP8McMyT
+ 0MDdHCnNMRAoc9dpUlMbbP8nCL4+QMTpOaPN3FB4ClLS9Zzm4zAD6xTvb3AFKFlIaYtE3
+ RfM6jArowQuvsDE+BbrsOPp0Kb6u2/ZI8N3Nq9vzS8tphTPNbrsac9+824tX1QpK3+A==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org;
  dmarc=none header.from=baylibre.com; 
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=Gg4ieK86; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::42e"
+ header.s=google header.b=HFtOSp2X; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::629"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42e; helo=mail-wr1-x42e.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+ client-ip=2607:f8b0:4864:20::629; helo=mail-pl1-x629.google.com;
+ envelope-from=hfranco@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=Gg4ieK86
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3D7FC40057
- for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 12:07:48 +0000 (UTC)
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-48b042c0728so547607f8f.1
- for <u-boot@lists.u-boot-project.org>; Wed, 07 Oct 2026 05:07:48 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=HFtOSp2X
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 3AB4740080
+ for <u-boot@lists.u-boot-project.org>; Wed,  7 Oct 2026 12:17:05 +0000 (UTC)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-2e61ac64ec3so2371095ad.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 07 Oct 2026 05:17:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1791374867; x=1791979667;
+ d=baylibre.com; s=google; t=1791375425; x=1791980225;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=IYLAXWbJUmdgIqpTkAOtOYeFnNROW0vlagVC8Q873Mc=;
- b=Gg4ieK86Fx/Ed7fxF89+EWouKMW/xflPdubiDJQtXJUR5UmTX3vcZDK73tgrru8ZcB
- cgbRWeuJyt2e6mttxXPWOW0pdxQoR9jmKIatsfxdXwr671R/xaetEEtYrCI0VGCoEjFP
- KF9gYZ0XiJO/bKSHXY1q4jgjZTfw8/TkTH0YN06uFN6cdjngivDosEoKSxuTO9C54f/g
- WQHMdFpck0ZPS+QGJbb3X5DOc4KqjxTXbenwyTKoJnpz+ZpwVeOoWNS9bYKu62/JSbzz
- c0yTFAvmqjI/crErhAnqCWtyTD9H7iTCJrTOAEL8IwwgI3eLi6F9qnu8hZoFNdMyI0RN
- g/6g==
+ bh=WRcurHUTAGUKB63gn7AiVOQluqpH6+QSd3Yt/1XBJ2c=;
+ b=HFtOSp2XVdPIewl5soJ2CcU7KsbUUHPPj1NqiNZGcJzygc+4YEvgLvbztHW4bDb8h5
+ b2mQO7SQ4kzQXYFHIFacjI2dJFfV5V577RhooagNWgDP2Cee8WeKfGItcL8+mVHjJEU+
+ hksvWCkw9AvdL8ezIro/0q+kKh5R7n0RU9ZYOJzqHyuo/8dCwFCkcfc4362gIkg9pwx7
+ bvoBy5zCBnETuHL3C8OPT39aZmuJDtRBBs7I5a9CQ+L4O7M2ZoSr1i5abL55pWCCXEOZ
+ 9U9PfL0rnuHMwF0gxRoQPXTuPpR1Ha2eiiyDd1qPRRzJNZ+AaEQ72lNo8tn7ZgjSgJAp
+ 2OZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791374867; x=1791979667;
+ d=1e100.net; s=20260707; t=1791375425; x=1791980225;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=IYLAXWbJUmdgIqpTkAOtOYeFnNROW0vlagVC8Q873Mc=;
- b=bm6CxHJLcz2IdTtRMJb2l/d0Um2+5fD4hh+QjNP1vrB2rKk4ug7kxpv7AGrD85+9+d
- +Y8/kHFcbl3v254BZ7m0ZmVbY9DEf9saE4eryVpJUCyWL1U+c7Lbfy2Gfblw8ymsc2r6
- R3Sz2fc8heI3IdzfmQP/Z59tljCboVtHnr7vcGabKPDFnSl9F+jKuQg4uaY9EWsVo+nt
- gHPJUvr/O4sW2YqPyN+NsT8k1RIwaxQxjE4KH4cpQlP+KUK/+XxIjQlJ0i8/5hAvDL9z
- 43EFeYGPubTi60S2QzofJ5ASY3drnSD8yD238hpRAY0sh/r0SQuqsLhmOiucYklzj1Q8
- gPUA==
-X-Gm-Message-State: AFuF++kKpe72KKnaDjXlBtaxeW270zdSHCllNvKFpl7Rk/tHmSQXKmrG
- jnoCEKSw/sB9Q/Bcfqo/x53BY+gmkv51+6gLHrZpCXoZ9NirnTbJmHLhWiKP+0cghk8=
-X-Gm-Gg: AYBFou0OmNT91eMFM12UX9i2fJFsZO+0Zx5dFvWRFbY9DSWO3oEycIDBVOngqjKiemZ
- UQ/KHvk5L8Xzkt2Qj7h2aWiJViyoLek1WufiVk8+lOhjXXbapZUVBYSoR/IhU/GDUew4/Ek1SwQ
- Pa0Nli+dh3qPFwartkmysqsEGYPnjSRnPhMvRoTJtp9He5ICw+8DaAy6/syg7+NQkfCoMaIp7Dr
- DRlEUMmVGOJ/gcam82U6SuOC+gcHKO+h/qb9wJiAw+4Ty4O8eron4XGMWC6ykcgXOx61oTe5WEi
- 1NYT6UBHvryTbPvYdhxzPCXZrQQUL5LjirK1qpiZp9GN6h6XMq2bgliftQLC3CljFj+RvwEyBhw
- gvAfnaD3hYaFDZx1wpr9rxlnUdWFN4GY+hNkj99cSUTMZwvqGLWN1CdMiMvTXpMq09SjZTKYcho
- FiZjMnkryweGzNlTK2ewx7GU/Dx9ExVFTUmBLzJiuVs6EIFe8s8kEbHDQuY4/Q3G1LiqCtDayiy
- vaARFJXb8t/mHOZYzIpczBM7IJmWINrsbTK/rGz98vn1i8jkuxhzQOLegiN96ZGfOxkjJmb7Ove
- iM0=
-X-Received: by 2002:a05:600c:524f:b0:4a1:6d35:779a with SMTP id
- 5b1f17b1804b1-4a1800d1ca4mr32337335e9.3.1791374866730; 
- Wed, 07 Oct 2026 05:07:46 -0700 (PDT)
-Received: from macbook.tail959722.ts.net
- (host-79-45-166-197.retail.telecomitalia.it. [79.45.166.197])
+ bh=WRcurHUTAGUKB63gn7AiVOQluqpH6+QSd3Yt/1XBJ2c=;
+ b=fhPGT4cAVT5PsxtgHDEFqrTugOu6DERQnCndwBBuz/GWECknUDnVRNDeANFMI4OaWo
+ sGaYCdqVGmHMgndmijkHN6rqqdiVbKJwMWhCyoeY9wn5DmKxjl7tq29cOULBxBeCzQ73
+ OtlEVfLiFfJTWh5WfzdEfiEMa4dvwOCRKcSKk6Tmx7WHJpr/ztDD3feMgKfHf78AcRaF
+ 6nA7T+N30PRxNwaqdt7VnWBDkHqop7yTVRfyWUkvCm76kURRpd68xOs0FpGaYpRXk/+f
+ jdxNjURtdcBrvkpjGi1VXCTCQOZ6G5bO8PKLUIeMTuxAJ+LUytfqABSmlKaDbyo7GXuL
+ R6UA==
+X-Gm-Message-State: AFq9FYL9mKIusz8ATUE+OmFrlw63C3f4GA7aEpe5Sf/zTnSBJvqj3YOX
+ UG93zKW19TzqqskaM/JkaOKrZIPEnnGs48cByKwel19xYOOG5v0Oe2m1EA9ahul3Ir0=
+X-Gm-Gg: AYBFou3QaLqfh23hI78zJl6qZw8pMufYNFAWPJKQ+JuL4oHVIBIokIt5WR3lAxaOCfS
+ xTtDWK/90AoDn9Zg0X7Sj4g51yQy9dMsei13YKFBPYYiPD+tDdoR8tEJCfnB/xz8RErBZo2Y0O4
+ f7Eg7fEM/LPH1J/wFOSL0GXiyWOFBrb28co42E1nmMVcl0PfGvbupFfh9KmiyXwg/jfQRHyyOAj
+ T41zSXl7mIyzgE1icbkvX0JHQecfJaobprDRShMa7lV/LK8RnFb4MN5IMpr0K5owvO7HskPJcsf
+ Wh/0KqMZK/6vt7Dbigrva0jTOKcuh68HZRClGis36F7fCHjMY3f/cxdUGvqObMCM0wtnSXpCeYU
+ 4xAKwuC/RFZYU52UkJXxjEKL1DSliRnb1GwcFHWBogiNWEsPvNT7KUQZ4XU1oFHEW9MzyW6avvL
+ uebx8HXKKBxDdY/weoP+f+FPXDRtoVqSJTkoctoLX0NfYEKNfwvj3SLjLjP4R1XpNz5OG8FKyYS
+ EcQTD/LDPRLgLG/fPjJ1baQ84+oidKK
+X-Received: by 2002:a17:902:70cb:b0:2e2:c283:354f with SMTP id
+ d9443c01a7336-2e6003c02e6mr15037865ad.28.1791375424829; 
+ Wed, 07 Oct 2026 05:17:04 -0700 (PDT)
+Received: from hiagonb ([2804:14c:4c5:8bf0::ffae])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a180310c9fsm47592975e9.4.2026.10.07.05.07.45
+ d9443c01a7336-2e604b63d9bsm9024865ad.84.2026.10.07.05.16.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Oct 2026 05:07:46 -0700 (PDT)
-Date: Wed, 7 Oct 2026 14:07:45 +0200
-From: Carlo Caione <ccaione@baylibre.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.u-boot-project.org, Ahmad Fatoum <a.fatoum@barebox.org>, 
- David Lechner <dlechner@baylibre.com>, Julien Masson <jmasson@baylibre.com>, 
- Vitor Sato Eschholz <vsatoes@baylibre.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Johan Jonker <jbx6244@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Randolph Sapp <rs@ti.com>, Daniel Golle <daniel@makrotopia.org>,
- James Hilliard <james.hilliard1@gmail.com>, 
- Aristo Chen <aristo.chen@canonical.com>, Peng Fan <peng.fan@nxp.com>,
- Vincent Jardin <vjardin@free.fr>, Peter Robinson <pbrobinson@gmail.com>
-Subject: Re: [PATCH v3 0/5] firmware-owned devicetree for EBBR / SystemReady
- DeviceTree
-Message-ID: <asY1exCswTF3-TvB@macbook.tail959722.ts.net>
-References: <20260903-ccaione-upstream-ebbr-v3-0-016658d0b6ba@baylibre.com>
- <CF9CE178-91B3-4F7E-AC97-DE37B8D63CDF@gmx.de>
- <9A8EEB25-DEA9-4CBA-B932-1E1D1D477246@gmx.de>
+ Wed, 07 Oct 2026 05:17:04 -0700 (PDT)
+Date: Wed, 7 Oct 2026 09:16:57 -0300
+From: Hiago De Franco <hfranco@baylibre.com>
+To: Zhuxu Ran <zhuxu_ran@zohomail.com>
+Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>, 
+ Tom Rini <trini@konsulko.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Alexander Koch <akoch@initse.com>, Kongyang Liu <seashell11234455@gmail.com>, 
+ Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Peter Robinson <pbrobinson@gmail.com>, Leo Yu-Chi Liang <leo.liang@sifive.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, Heiko Stuebner <heiko@sntech.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@nabladev.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v3 0/3] rtc: cv1800b: Use the RTC node for time and
+ system reset
+Message-ID: <asY4AesoD7a9doj9@hiagonb>
+References: <20261007-cv18xx-rtc-sysreset-v3-0-194557fd5e78@zohomail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <9A8EEB25-DEA9-4CBA-B932-1E1D1D477246@gmx.de>
+In-Reply-To: <20261007-cv18xx-rtc-sysreset-v3-0-194557fd5e78@zohomail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -190,20 +185,77 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Tue, Sep 29, 2026 at 00:20:41 +0100, Heinrich Schuchardt wrote:
- 
-> Thinking of other boot stages like EDK II the device-tree may already
-> have to be created in U-Boot SPL.
+On Wed, Oct 07, 2026 at 11:33:04AM +0800, Zhuxu Ran wrote:
+> The CV1800B RTC subsystem contains a seconds counter and system reset
+> controls in a shared register range. U-Boot currently binds the system
+> reset driver from Milk-V Duo board code and accesses fixed MMIO addresses.
+> The upstream devicetrees describe this subsystem with an RTC node, but
+> U-Boot has no driver matching that node.
 > 
-> Multiple RISC-V systems boot via
+> Add an RTC driver for the seconds counter, bind the existing system reset
+> driver as its child, and obtain the reset register range from the shared
+> devicetree node. Keep the existing reset requests unchanged, including
+> the warm-reset sequence currently used for SYSRESET_COLD.
 > 
-> U-Boot SPL -> OpenSBI-> EDK II
+> This series depends on the CV18xx upstream-devicetree conversion sent
+> as v5.
+> 
+> Tested on Milk-V Duo, Milk-V Duo 256M and LicheeRV Nano.
+> 
+> Signed-off-by: Zhuxu Ran <zhuxu_ran@zohomail.com>
 
-Agreed: that chain has no U-Boot proper, so the EFI hooks in this series
-never run. If U-Boot prepares the DT, it would need to do so in SPL and
-hand it onward but, yes, this series does not yet enable it in SPL.
+Thanks for the patches. For the series:
 
-Cheers,
+Reviewed-by: Hiago De Franco <hfranco@baylibre.com>
 
---
-Carlo Caione
+> ---
+> Changes in v3:
+> - Rename the RTC driver file to cv1800b.c to match the RTC directory
+>   convention.
+> - Align the CV1800B sysreset register and request-bit definitions.
+> - Use uppercase hexadecimal digits in the sysreset driver.
+> - Link to v2: https://patch.msgid.link/20261006-cv18xx-rtc-sysreset-v2-0-67872888384e@zohomail.com
+> 
+> Changes in v2:
+> - Use CV1800B consistently in the RTC driver filename and identifiers.
+> - Link to v1: https://patch.msgid.link/20261003-cv18xx-rtc-sysreset-v1-0-c0837e26eb29@zohomail.com
+> 
+> ---
+> Zhuxu Ran (3):
+>       rtc: cv1800b: Add seconds counter support
+>       riscv: sophgo: Enable RTC-backed system reset
+>       sysreset: cv1800b: Use the RTC device node for register access
+> 
+>  board/sophgo/milkv_duo/board.c         |   5 --
+>  configs/milkv_duo_256m_defconfig       |   2 +
+>  configs/milkv_duo_defconfig            |   2 +
+>  configs/sipeed_licheerv_nano_defconfig |   2 +
+>  drivers/rtc/Kconfig                    |   9 +++
+>  drivers/rtc/Makefile                   |   1 +
+>  drivers/rtc/cv1800b.c                  | 123 +++++++++++++++++++++++++++++++++
+>  drivers/sysreset/Kconfig               |   6 +-
+>  drivers/sysreset/sysreset_cv1800b.c    |  90 +++++++++++++++---------
+>  9 files changed, 199 insertions(+), 41 deletions(-)
+> ---
+> base-commit: a06e89ab05eaa2b8344d521319399333cd760ae5
+> change-id: 20260929-cv18xx-rtc-sysreset-b816e6306348
+> prerequisite-message-id: <20260927-milkv-duo-upstream-dts-v5-0-7f64983e59e1@zohomail.com>
+> prerequisite-patch-id: b8e6815314b7881a02de0066232864d522c4a26c
+> prerequisite-patch-id: 0df1fa5db1b2bff402b429809796bad99a517483
+> prerequisite-patch-id: 49e1e8263cf0a5ba8d63c8b598b6382cde5284b2
+> prerequisite-patch-id: 86dd30e784f022f0a7bb6fbf125c9699467176d4
+> prerequisite-patch-id: 49070c05ecf58331ec519a57d1b82f8b2b835a89
+> prerequisite-patch-id: 6b6881e45cc6de6544aaa4509db21611158f4fa1
+> prerequisite-patch-id: 7198127d4602eeb14212087ce9bb694d84e71a4c
+> prerequisite-patch-id: 3a58bd8a061707ff27b8538d4897def3b595dc36
+> prerequisite-patch-id: 9055ea941b73e35d1e825787d7eca14ffceb8e8b
+> prerequisite-patch-id: 554c1487e8d596e0099677ca88eee0021b1ffbae
+> 
+> Best regards,
+> --  
+> Zhuxu Ran <zhuxu_ran@zohomail.com>
+> 
+
+Best regards,
+-- 
+Hiago
