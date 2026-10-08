@@ -1,193 +1,128 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67843CA6007
-	for <u-boot@archiver.kernel.org>; Thu,  8 Oct 2026 07:49:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECFEDCA600A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Oct 2026 08:31:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0B362607CB;
-	Thu,  8 Oct 2026 07:49:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F1AAD811BE;
+	Thu,  8 Oct 2026 08:31:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KgiFVrk1jhmS; Thu,  8 Oct 2026 07:49:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 359DA6078A
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791445782;
-	b=XSPw6qAWhhUjj6mwX6DQqb1XAZVuV9vYNCBUbwCcww1timPlIq553JyeCSqv3MvP8jMi
-	 kbZGgPZKUoCrYhTY6Uy09SkkdKDM9A99mj1XwgMtcOQZmiScVVCnXQ8jApUork/aHobFf
-	 XqodPdsVb4t9JQfhxxqBNcC/EdTn5KU26CQs3Uac3Tq+38EaZrUScyMPLc8dyIOrfAj6k
-	 w4b07mcub/CrlzG5UwnoC0Hf0uS4CQ506aAa3CHpGwFCfIQ8h9vpivBMR6UFBTGRFGvo3
-	 pXlY1mxDDouFJvLTnLcqu6FltwOGrDfHEJ/Wd7O5iFlwH+cBKHeTx2GLK+k0HyQ1wYg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9Jtar8LLYuCm; Thu,  8 Oct 2026 08:31:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp1.osuosl.org 392A9811AE
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791448265;
+	b=rWySsbtEm8nUcWjpPj8UHUmSzOeRArMS6ea9VDC8X5pABWlStbmocmCGEOH7DbM+Kb94
+	 9IRtRrJPGar8tu5QFuQ0BHLsS8ET8y5wyPbuWhZyMLyI/AAfXXe5g0+2aKiOJSv3e0t3U
+	 BmVDO6FvCxyVqS9vWqQaAMXUxYcd4jfeF6ZBbjq/nK+kgowk8f4OgV7Z2tCEu2/dSHGo7
+	 0wec44wfu61G+PX6frOrqmdtdbCY6/xYd5+Ab6C6MeSl5ba1b03KnIckZBpSfRwsuOhqe
+	 GvIOAKDrgP8OhfqBVsc3+OXchI6XLXmMRpQO0yKbhrCZAkwPmoOi03CyJ/kImDIXuog==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791445782;
+	c=relaxed/relaxed; t=1791448265;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=hcQHvNMdmoyjh+l/7nmB7eTBjfGBLtpQzdARxYYtQ6k=;
-	b=sxnrtT7VkRy8NxV/ebACQfDglW2aptk5ncSWsF4FuekL/AYdfQquLS4tVhsMczUnSRNv
-	 yJbmaZzbTPIyIpPmkHaE6Lt0TlnT+q2fbQa7kssrRn5tY2BGFVLP+fI4UU9rQHJGZLyNE
-	 8nBDpwZFTco+azVXQBy0+/q21fEzim2MFrYb45YIctdYsD/4MgfB2CeUXAwQlk3OtzWbp
-	 gJv9A68bN7UmZH4PtQgX8lL1LjUox/gf8X7kzhhKpWW0PCYwPC0GZ6Fi/+3hIrM0jEra5
-	 oXLvJtzVUv1UefCbLa1APN+VKEEaXp6dBtZGFO9uLxSBpsbg0N+LkPJ9oeeG2pgHqWQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	bh=edFGPhhamYDENAQVW+GW8qA7UppEPZ6Am+1+ez+n/14=;
+	b=bJuYGT0vrwki2h8zuyGkQyd810HHwLJZAnqV3y3daBmRWjgbxHCHC1q9MR8iMz2xXDgs
+	 DadNVbRtr92gRhxKovxIsFta3RDOBZaa4qHaq590VqHPY+76ZZRqZ+rqnS9VK+OsC1C0t
+	 Bev8FOmGJizgFZjJPt6vzuybUKvfa7AGRckRHDpxRvoZ1eScWoHLF8dmvp9FZcXXh1dS+
+	 rXVCmyDvKv6elIHf9IJLGx0ymV9XCRRc4RDok5eIYCDB82XBcw04efMnb7XAfCGB7FmDy
+	 56ZUfucwiVL1QKGN3YhFdMX9A2JiWAt9mzE17kAb4en8lVXvon6Uhm6tB1SJE69l9lw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791445782;
-	bh=hcQHvNMdmoyjh+l/7nmB7eTBjfGBLtpQzdARxYYtQ6k=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=fswN7ygt3TNrYy8XkHF9MSVBZ5e4Cx8juJNZ8+Ow/WpHe8CQIwSYRQN2Cq765ach6
-	 I4muRYbKKoXdVXwa1P8dtTNxUXQqSBuSivWiGghgwRXaLezvp8rGdVDZPFWgj0nCy4
-	 8dy76jTRs9UpaitaRuFGQ++/XNfY4l+YGANJRY7PFYJn1kjJTCVcDnEXxm3WOquFTm
-	 27nN0cPPZfhi31DhGuh1yZcYXAZM+GaN71LvngF8ccKCAD9H3QAy670M1z06KSllv1
-	 5tpA19IFG3noa3PjSxT1G6Vc5TdXgeDCMg36eZpr8/AQhwoUiXzQWIBUdTc4TZFa9M
-	 8ClG22qfkPACw==
+	d=lists.u-boot-project.org; s=default; t=1791448265;
+	bh=edFGPhhamYDENAQVW+GW8qA7UppEPZ6Am+1+ez+n/14=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=dXlMzna1ikE1tZ4sPm9O5Sk7MFcWq7nNjWBFa+7og0IPqavSPT8kf87TJsXBGTm2o
+	 bfp2bzlelH9VZjI+bfUJOKSmAfp/lItmAIsGrA+rnrrJcf3E1TbAzAVxQFj1dt97EH
+	 5IGAa4u7dNWmcpm9dAO0gI1PM7cyf+WjdZ8D1yvwhMrMUhGpEtj3cFzfoFBdaMF2sw
+	 kVOjEUvTG+wi3vynTtF3WiV3GMN6UMuLGmcQxrcPgG7E/QZxeXasg6Z9X/RrmcATHU
+	 ptHegEzMi2g/nuetVOhFbKTvVMVeAJlkuhYdUVT24F60iAsMoR3iSE8Io4yItYFr5N
+	 yxDHLdzjNJUlQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 359DA6078A;
-	Thu,  8 Oct 2026 07:49:42 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id B88702B2
- for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 07:49:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 392A9811AE;
+	Thu,  8 Oct 2026 08:31:05 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 28836338
+ for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 08:31:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A9FE640849
- for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 07:49:40 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 19FBA60792
+ for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 08:31:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5H5Lw1h-bhvu for <u-boot@lists.u-boot-project.org>;
- Thu,  8 Oct 2026 07:49:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.0 smtp4.osuosl.org 4C15440411
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=185.125.188.123
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791445779;
- b=pVyy53SOrVwG2csan2mZveYNXjnkwGIPq97Z+wt4Lb4hcUeo8WeDYc/xg/AU1sc27ktT
- jqIrXs1Efy7QbqoLbnXl5Ba3ifTYlC92qHz4xhzft9hDgXzU3GOjm+ltCMghh8CG9Weag
- NAKsgECc3JK425WhzX8D8BsGIrJCmng0uwQ4rkH50SbVjw5r5ghBlTTqh809XgS0XL4OL
- bv8oaMsEf5PndtY07Evj4BkpjzBb1kNpv0IChYVXDgfqf+X2cJ+dZC7iAWzOdueDq4eI9
- QD8NwG+U82R9JDIOgmntaIHBqtgwCjpMwm7lQnH8ctKhd8f5+PuGZY+eL6T+kycw/hg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id h5KbdNllnswS for <u-boot@lists.u-boot-project.org>;
+ Thu,  8 Oct 2026 08:31:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.0 smtp3.osuosl.org 3275F60659
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791448263;
+ b=sP+PwdP94Vji9A1vjD7c1VtVNLnuDAt4ELr2qhqtJFmz+JQU6o2f9gkGgC9ehCO9xfBs
+ HlgZtkO4unWa9tgS0mTqc6r43ug3LgXL54ES7xGEWOh+Pptk3B9uE5kaPVMZ7gJ16bNpI
+ Ps2Zr+ScZfW3P77eLaSPmCIcrvD6UJcIkLb+pu9h3ouAGSpKc2uzs3AUN6kGtJADxYLXR
+ lPGKwcolci8itXp7hIQEENg2Jt2O9mJfFTSmYYIf4Tc654Jcs6rmtVZoqEIQ8sEnAZ0yC
+ XYp2PBqNP8FsA/c80Byy0LQXSHCrhCExRTHjnDU8d99eZTFOE/EGRAdIsyuNNIqnsGA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791445779;
- h=Received-SPF:Received:DKIM-Signature:Received:
- X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
- X-Gm-Gg:X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
- User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding;
- bh=hcQHvNMdmoyjh+l/7nmB7eTBjfGBLtpQzdARxYYtQ6k=;
- b=lp9TpaMOuVq4jr0bwMp/887IM9Z12gG9LDDaQXdSEkvASD4sFRzFzcU8bhRS325D6C+J
- XJNP0aiddYCjq5fn8JmfHaM4VVvBs8p2o90EBLMPyCWej0/oR5W+maYYUFtALn0mDMhHh
- M1fN2R3pjsAX1cLGysl8QO00jVD+L5uOqf6fRXZfg0ysFqhajNb645xrdVkXLMBi1g2bZ
- 0+Izgn1NiKNuP+GAdAOMuVbUM4sFFukZ2hKjTkZatGCVuksarb1zjolODYCsJwlHpDQ1H
- 0TN3/yfsQrcETQ5Nv7IRp0US9d+Dig+TIvifKFQn6KWIEjhkZ2OpD761DO7Y2DiXQRA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org;
- dmarc=pass header.from=canonical.com; 
- dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
- header.s=20251003 header.b=DJAO3eNf; 
- arc=none smtp.remote-ip=185.125.188.123
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
- helo=smtp-relay-internal-1.canonical.com;
- envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=DJAO3eNf
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4C15440411
- for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 07:49:38 +0000 (UTC)
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C6DC13F60C
- for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 07:49:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1791445776;
- bh=hcQHvNMdmoyjh+l/7nmB7eTBjfGBLtpQzdARxYYtQ6k=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=DJAO3eNfoOnRx/UrU6dX99imMGPIk0UX0SRqTmlL73h9LkISOY5VmQntypK8ygzPL
- TihYW8dboRfuXkSav6virUAIMPxteT535i8hb0jThbADiCXd9I6fwyS/9NWI57WuKH
- 9oZV+XKPulQMz9YWHnBxW8OFKrnl1ugxMnpLYfucQejPj5ZSgoSz6DuRUImwjgXHB9
- OQrSJNStCIOTPxZEoAk9kJta7pxR4IdLPMYR5r+xBaPq/9KBvFrP29EmO7pwrz776z
- Mx/kGPEvphk7xv8C+40xZsdhfkZfelhGoMqDgjYeq6qz/AWsF08zIgag7Qa8gNqW4g
- jemopfSAOI7/P6qGqGSwRoMIAhACo7BuRGKHS9resZe2qLJLDL/XxDCf8IHWLYKqmW
- KxSetRN5C9u0UAYynE9PCYO//T9d7A7DJztZWMeAOgXNwNw2wPnwOuVSXMBhm1StUz
- uAZ0/J97uxlvXWgJk/651jnqwYwTnQVSDSjCARgeCX5ZEozJEw66Q/IeJyW0baVcRb
- OmSQds43CBRcHiu1sGC1PX10Iu6tnYzFyUGWlflXjrMRMICLazPyWBfcK0CJI/rmC4
- 3903ZUZX5uMjjULkUS6qX71JzFeWTaVA8JSLxJEoY0PzUl3WuIJuU/tc91G8yCgAwg
- BggFMfFrqtKRRJIECq/Fc7yY=
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4a17fe1f66aso17247575e9.3
- for <u-boot@lists.u-boot-project.org>; Thu, 08 Oct 2026 00:49:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791445776; x=1792050576;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=hcQHvNMdmoyjh+l/7nmB7eTBjfGBLtpQzdARxYYtQ6k=;
- b=C6wU4a5UjrpSW2k6+qtHYf35Z+qdfTkxTblTTmebhNubEDsbojqmSDy+SO1ebLkfI1
- It3taIHy1DY2ncTcdFMmzDhmLdQ7Z5hlzx1Wpxswd7zHfgjVo7/uUs+CQF/Dfhu4z8PI
- ddxo9UT4imVle9i8GeztoCklGXkl88qgNpSQwJA0+Fdk+14IxhqcUjKO4Zi9/23TsMBz
- XZlYcmeeoWtZA59GywQvjQHMlt2891maen8iMBC10kUTFaRrlyF5X40NKYyqcKf0+BO1
- ltR9+57IqyuwsprgCfwy5YeOuf3W2lFbqNDJXh6fCcvgcucrb9X2yvWSa63GV73OijRG
- 6T/w==
-X-Forwarded-Encrypted: i=1;
- AKwUvBy6kQS2CAk/2duQQ6SyJLiA75+PHhV0zYRNYdRwj4qTtud8SBc+6R1QRMnQcBFpgd2nRqd+YV4=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lir7tovNbdFmkdbf2TsaRIcbXEsHOa5nDSHcfn9437f/g2mPLP
- 01W4Yj3SErCYAdZg0zWpv2qiYeY18mLPzzNcS/Yt7shdlCRVJCwIg+GWHU5jzjF9xmE7xp8padx
- KdSosoqDyzui2QilG5LuzPboF9AC2AGP5pYvXzq5OT0aHe5lwaHqWm57w8CEO4KH99aPVrQ0Ceb
- H9i6UBF6TNvg==
-X-Gm-Gg: AYBFou0Bx8p0xIMxmSbqadqCIIetvUoBv7q4U7QGT1ho4569DF+vBKUh+CTmMcXMKGN
- Xqgl2+7qoLTTL3WO/haOGFSo8Ptt+ROTNEIKc20nKLT1k/nm2mHcLvLBNZpXV+CUiyXzTxEjqdv
- RboeF38JEfNsJ+SsIeTKlbOK3k5I9v8KDQ3JHBJqq9FgGb6SuWmdDUXf3GdCQwAUfx7q4vCSUm5
- xHyJN8u8iv+UaoHaZCLNQ8wlZqBuQrYWrCbH0t0R27rtBu9V2QEg77LzKGAOuJiV/o7b3DbfP2I
- N4r8F72z9RxOq1GaNDjTlWDex7bETNPx8QPEpJSotJRyeH1cg22SJPP7moClpHX1wyn8RgPL3+I
- Cq8Do8yRyEvQmcT50Z/l1nJYvWK3PMrnkqsUuUgZ5R5cqzFMAJ1Y7Tc9Q7WBboa2TdPbDAlnxra
- WSUemqYUz2WNiRF5AKxqjvvw==
-X-Received: by 2002:a05:600c:8116:b0:4a0:108:3b48 with SMTP id
- 5b1f17b1804b1-4a18030428cmr80205595e9.7.1791445776332; 
- Thu, 08 Oct 2026 00:49:36 -0700 (PDT)
-X-Received: by 2002:a05:600c:8116:b0:4a0:108:3b48 with SMTP id
- 5b1f17b1804b1-4a18030428cmr80205205e9.7.1791445775931; 
- Thu, 08 Oct 2026 00:49:35 -0700 (PDT)
-Received: from ?IPV6:2a02:908:1242:30e0:9d16:5fb9:2b0:6bae?
- ([2a02:908:1242:30e0:9d16:5fb9:2b0:6bae])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1843b5f28sm56528865e9.12.2026.10.08.00.49.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Oct 2026 00:49:35 -0700 (PDT)
-Message-ID: <5bb7fb09-2f7a-4012-a2cc-fc4598402d75@canonical.com>
-Date: Thu, 8 Oct 2026 09:49:34 +0200
+ c=relaxed/relaxed; t=1791448263;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
+ Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+ bh=edFGPhhamYDENAQVW+GW8qA7UppEPZ6Am+1+ez+n/14=;
+ b=aGlONXUyfBZ8sGNJ5PjMY+ViB7NR5xsRKcY/vZB2Ll+Z8v6T56P3bk+qZf78jjm+SAss
+ zNIB4tkcDgm+lpNvYv4Qu2noIcU1jr8CVGIu9KCByqoe2bPlgd9nR2CD0s5v2SW8r1c59
+ MfGIXJn2iJujIa0WLQ/Pnk1BOE+lF8H/5f7/9iEnpZJhPSBDmFWH5ku6HwZapuQlQyvRS
+ usWdqIE8Xi0WwHECjgvvu37Qom44MDZoohOWZEl9HB1I41+PSwtiR559Te6cn7B03jRwX
+ gh3iKsPjWdl82InDdtMCUmsZmk52uK9ADi4QF1yDheyG26KWx9xQt8efT7vIpejfhMA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org;
+ dmarc=pass header.from=kernel.org; 
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=ltSVOiDB; 
+ arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=mwalle@kernel.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=ltSVOiDB
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3275F60659
+ for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 08:31:02 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 1B5C7602C5;
+ Thu,  8 Oct 2026 08:31:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7BF0A1F000FF;
+ Thu,  8 Oct 2026 08:30:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1791448260;
+ bh=edFGPhhamYDENAQVW+GW8qA7UppEPZ6Am+1+ez+n/14=;
+ h=From:To:Cc:Subject:Date;
+ b=ltSVOiDBNL6xU8Usimn0woAGjiZV6bXyq0djJetTH1IvALZU05N1E5i0xO9Ukzq2s
+ IU7xfN2c4EeDIuhCRnv/feWSfosnuV3O9RY3u191XzDlYYNSCKoyNJ/8G1FCqvFm9s
+ mwde/RH3DGmeG0kzjAy6OArpSQhTyEJ4dsrPsulGjVI4x/sOjjdUm46Vnqk20c+OsT
+ Wc+kb4WZtfdPvvjTSMTvRyxdf2YGpjlUFqJSDexxJo9NyvHnnzNoBoAIV8zCQey3va
+ wE1G1cwS51/vgYYrxr/Ta9SUqiVVuT2SJhonmqgsVbtzMh7tiJAtvbkOlH7AdkXqn9
+ ChXBGE+z+PzMA==
+From: Michael Walle <mwalle@kernel.org>
+To: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Alice Guo <alice.guo@nxp.com>
+Cc: Michael Walle <mwalle@kernel.org>,
+	u-boot@lists.u-boot-project.org
+Subject: [PATCH v5] binman: imx9image: respect BINMAN_INDIRS for external files
+Date: Thu,  8 Oct 2026 10:28:45 +0200
+Message-ID: <20261008083044.3622658-1-mwalle@kernel.org>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/3] sysreset: provide sysreset driver for qemu-x86(_64)
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Johan Jonker <jbx6244@gmail.com>, Casey Connolly
- <casey.connolly@linaro.org>, Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Alexey Charkov <alchark@flipper.net>, u-boot@lists.u-boot-project.org
-References: <20261007190905.29585-1-heinrich.schuchardt@canonical.com>
- <CAEUhbmXm6UW+SGEyadyeH09m70X2xVsLSPe_6iTTUmptjKKt0g@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAEUhbmXm6UW+SGEyadyeH09m70X2xVsLSPe_6iTTUmptjKKt0g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -202,60 +137,116 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 10/8/26 07:43, Bin Meng wrote:
-> Hi Heinrich,
-> 
-> On Thu, Oct 8, 2026 at 3:09 AM Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> Currently we only support reset but not poweroff on x86 QEMU.
-> 
-> Could we just add the poweroff functionality to the existing sysreset driver?
+We have the BINMAN_INDIRS for any external binaries, so they don't have
+to be copied into the source/build directory of u-boot. This is
+especially important for image builders like buildroot.
 
-Hello Bin,
+Use the get_input_filename() helper which will also look up the paths in
+BINMAN_INDIRS. The append case only handles external files, thus we can
+use that helper unconditionally.
 
-On x86 the implementation of shutdonwl seems to be chipset specific. In 
-EDK II in OvmfPackage alone there are 3 drivers implementing 
-ResetShutdown().
+While at it, update and extend the test case for this image format.
+That is, first create the image in the input directory and then check if
+there is actually an append command with that image name in the resulting
+.cfgout file. To cover the not-found path also add a missing external
+image.
 
-On real hardware this is abstracted away via ACPI.
+Signed-off-by: Michael Walle <mwalle@kernel.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+v5:
+ - add a missing blob in the test dts, to cover the else branch in
+   the test
 
-To have a generic driver we would have to implement parsing the ACPI tables.
+v4:
+ - reword commit message
+ - update test case
+ - (RESEND) to the new uboot mailing list address.
 
-> 
-> The new driver is missing EFI efi_reset_system() implementation,
-> causing EFI reboot failure.
+v3:
+ - emit the command strings
 
-Maybe we should just keep the poweroff part and keep the preexisting 
-sysreset driver on QEMU? Which would match the 
-PcAtChipsetPkg/Library/ResetSystemLib/ResetSystemLib.c driver in EDK II.
+v2:
+ - forgot to add second lookup. add the same fix
 
-Best regards
+ tools/binman/etype/nxp_imx9image.py    | 22 ++++++++++++----------
+ tools/binman/ftest.py                  |  9 ++++++---
+ tools/binman/test/vendor/nxp_imx95.dts |  1 +
+ 3 files changed, 19 insertions(+), 13 deletions(-)
 
-Heinrich
-
-> 
->>
->> * Provide a new sysreset driver for qemu-x86 and qemu-x86_64.
->> * Add nodes for it to the qemu-x86_i440fx and qemu-x86_q35 device-trees.
->> * Use the driver by default.
->>
->> Heinrich Schuchardt (3):
->>    sysreset: provide sysreset driver for qemu-x86(_64)
->>    x86: add qemu power controller to device-trees
->>    x86: use x86 QEMU sysreset driver by default
->>
->>   arch/Kconfig                         |   2 +-
->>   arch/x86/dts/qemu-x86_i440fx.dts     |   3 +
->>   arch/x86/dts/qemu-x86_q35.dts        |   4 +
->>   board/emulation/qemu-x86/Kconfig     |   3 +
->>   drivers/sysreset/Kconfig             |   8 ++
->>   drivers/sysreset/Makefile            |   1 +
->>   drivers/sysreset/sysreset_qemu_x86.c | 155 +++++++++++++++++++++++++++
->>   7 files changed, 175 insertions(+), 1 deletion(-)
->>   create mode 100644 drivers/sysreset/sysreset_qemu_x86.c
->>
-> 
-> Regards,
-> Bin
+diff --git a/tools/binman/etype/nxp_imx9image.py b/tools/binman/etype/nxp_imx9image.py
+index e0e806f2b7f..1a1465d7e7b 100644
+--- a/tools/binman/etype/nxp_imx9image.py
++++ b/tools/binman/etype/nxp_imx9image.py
+@@ -50,21 +50,23 @@ class Entry_nxp_imx9image(Entry_mkimage):
+ 
+                 if key.startswith('image') and isinstance(value, list) and len(value) == 3:
+                     file = value[1]
+-                    image_path = os.path.join(tools.get_output_dir(), value[1])
+-                    value[1] = image_path
+-                    combined = ' '.join(map(str, value))
+-
+-                    if file in external_files and not os.path.exists(value[1]):
+-                        print(f"file '{image_path}' does not exist. flash.bin may be not-functional.")
++                    if file in external_files:
++                        value[1] = tools.get_input_filename(file, allow_missing=True)
++                        if not value[1]:
++                            print(f"file '{file}' does not exist. flash.bin may be not-functional.")
++                            continue
+                     else:
+-                        f.write(f'image {combined}\n')
++                        value[1] = os.path.join(tools.get_output_dir(), file)
++
++                    combined = ' '.join(map(str, value))
++                    f.write(f'image {combined}\n')
+                 elif isinstance(value, str):
+                     if key.startswith('append'):
+-                        file_path = os.path.join(tools.get_output_dir(), value)
+-                        if os.path.exists(file_path):
++                        file_path = tools.get_input_filename(value, allow_missing=True)
++                        if file_path:
+                             f.write(f'append {file_path}\n')
+                         else:
+-                            print(f"file '{file_path}' does not exist. flash.bin may be not-functional.")
++                            print(f"file '{value}' does not exist. flash.bin may be not-functional.")
+                     else:
+                         f.write(f'{formatted_key} {value}\n')
+                 elif isinstance(value, bool):
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index bf98b268ac1..48c5a08b4eb 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -8126,12 +8126,15 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         image_path = os.path.join(testdir, 'image.bin')
+         with open(image_path, 'w') as f:
+             pass
+-        container_path = os.path.join(testdir, 'mx95b0-ahab-container.img')
+-        with open(container_path, 'w') as f:
+-            f.write(bytes([0x87]).decode('latin1') * 32768)
++        self._MakeInputFile('mx95b0-ahab-container.img', bytes([0x87] * 32768))
+         with terminal.capture():
+             self._DoTestFile('vendor/nxp_imx95.dts', output_dir=testdir)
+ 
++        fname = tools.get_output_filename('u-boot-container.cfgout')
++        with open(fname, 'r') as fd:
++            data = fd.read()
++            self.assertRegex(data, "append .*/mx95b0-ahab-container.img\n")
++
+     def testFitSignSimple(self):
+         """Test that image with FIT and signature nodes can be signed"""
+         if not elf.ELF_TOOLS:
+diff --git a/tools/binman/test/vendor/nxp_imx95.dts b/tools/binman/test/vendor/nxp_imx95.dts
+index 3fc2de44b4a..36495792282 100644
+--- a/tools/binman/test/vendor/nxp_imx95.dts
++++ b/tools/binman/test/vendor/nxp_imx95.dts
+@@ -20,6 +20,7 @@
+ 			container;
+ 			image0 = "a55", "bl31.bin", "0x8a200000";
+ 			image1 = "a55", "image.bin", "0x90200000";
++			image2 = "m33", "m33_image.bin", "0x1ffc0000";
+ 		};
+ 	};
+ };
+-- 
+2.47.3
 
