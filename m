@@ -1,144 +1,138 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C134CA6016
-	for <u-boot@archiver.kernel.org>; Thu,  8 Oct 2026 21:05:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86778CA6017
+	for <u-boot@archiver.kernel.org>; Thu,  8 Oct 2026 21:25:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4C8F36088B;
-	Thu,  8 Oct 2026 21:05:25 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iISDLwoW5i1w; Thu,  8 Oct 2026 21:05:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 25DED6084F
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791493524;
-	b=dXNUVe/XVs2ZhTC9kkLTo3tEkyBP6dYDqxrK2hhaQiKjPOqFaYyRZ8kqmxrm/k8hyfWf
-	 +Upy++lPXq9LdRlK43W0R9Wwdf7UMB1w9Rln+8C5oDi43uyuWo6utr67jxHmAAmQ2WIDi
-	 0Z5Ql1OzNkNOFjBjck/MHhZFxQEH3p3L2PMQ1BuaIhVg5Efx4rNo9wojwVnWIRr8N0Y5H
-	 7+wMmX7FbtX9JQySL9dP/rcd1yAynoOj2Gd2xiUGEHxtFqrJy1EHKDjPCgtjB1WPwcQs6
-	 1pvRP0ZS8Hk8rotARL+mgFfR85UmLNgT9HVoLdp/B86yKOO1Xx9M2YZvvcAluovf4ig==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791493524;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 Received:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=VgH5FsZC/FEmZZKN2Gt0ebhCUHkPKCTXtKAS2AxSKaY=;
-	b=Ey8KnbCWL9vHoywyej2Xa2dPegYkCpBNz0HGqnxTXolUYi6C6kZkFtnUm2aXhG2VMkXF
-	 lHxYv9Qn1Rz9yN8fR8L/UKRZ5k+iCN9eZ1+S7Eh5Ip2AloOwT5O/BslaS8Oe0tCwlgMG5
-	 IY4UvLYIkm34Lq9mzZ7z03wYqW744ri+/tbh36JJ8J39xi7g3EhxIKuhCMEAIilSGxvtO
-	 YnaTWL/UmGv3wbl0k+2wLgzEFdSgbW56/m/fjhbAzNXFB8K+Dia5kCXY+ir/pyqHs4cg0
-	 0nso2GsRuFkAkp0e/N9qtWlIdX4E7FXPLn/ICupNBwPF4figZRZaeAQWVfTrT/Xlplw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791493524;
-	bh=VgH5FsZC/FEmZZKN2Gt0ebhCUHkPKCTXtKAS2AxSKaY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Y3HiYu3+LQYpnmprtBfUsT3G7wYMP8tgzYu7FGQ07e38gCFZiEMwM4qfHTUoFc8qS
-	 M4W3ibUnOvp89HG9DYFZRfwRc0FTgj/eeGExfoHSVdoJOweURhVJS87aM8b3KYIoNO
-	 nRZtKGM5Ik5vQCrPq+QrV1OLZfdpAxQbIwEr46Evwyiu9jWXYD1Vd5Vfd3mDdrLxH+
-	 AVu6tLX/F/yUpT6vOVT2/LAw1f9uuc1qLigVwaCOs9XIOxHBdZUN8rYzxRVFyDX6nD
-	 b7MbZo81SE5us7Ucd4OAu9BalqLsZ5KeMxxG2PP27gPTfXcw6NOUB9OLoWbhpOawQR
-	 cZ5pkzT3ksL9w==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 25DED6084F;
-	Thu,  8 Oct 2026 21:05:24 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id B2F8C2E0
- for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 21:05:22 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 98E2F812FE
- for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 21:05:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 731C581387;
+	Thu,  8 Oct 2026 21:25:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id g87IwmTO49aB for <u-boot@lists.u-boot-project.org>;
- Thu,  8 Oct 2026 21:05:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 46675812FA
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2001:1600:19:7ff8::bc0e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791493521;
- b=VmOiqseS4aXxRVmlt35qRhoziQodYPuG1WAmlYM9a04WykSq5z/oEFEytPTgLNdrOmgx
- qqU0QJ+h2hxOWqubescipJXTRxvZyRaTAsIAuohDZguZsWs1bJEMEYdZ4cb2cq1npTnOI
- f3rcz/nlUdQTcRMMRSDwJKZQaDFt8g/msxcdTouIL9bfdhptZ3MY6nDV4b52UDGO5VMFB
- 7tii1xpM4vNcwPbEoj2lxRGHX/XL59xXpGjiJeevJXzDH8xXx/BAcCIw5TDXgTNbLCtPg
- +nCWes8doJHmkOf/b2G80lG6Hhs2f3cAWBWWu2XWNDOX4AwqHFUgToA0ymC6HES0CZg==
+ id emf8tHPHOEMO; Thu,  8 Oct 2026 21:25:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A146481192
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791494711;
+	b=p9nuv5e73TmShu/o0G2Avtw0dXsujLgF/ZfyX/9DpKUispdrF7R9E1jR40ogde3Z+9c7
+	 8kPQi2qDRKgFInSNkP4+a8oFFbngXtB1gFVx6BgCkMqM6u7L76Cjvo1ND0AEjnsgz58gu
+	 lTWH7cvQ/dMJvb9U41fyBHbiIYHNuOvhEnRI0Z+tm5gm16aqc7sTm63A68citXgvyPJrA
+	 Xl9VrB6LN6IQOJ9XGyM8iJHNOYxi/uuF0fg4HqK2fQzmP53X8vit9iv4ikckizXKiUZg1
+	 NDsIMlvrIHg7F28aDG37nTWSbHhB1TpbH0NA8xA2tClAtAKznilo7iFBSf6ZCSKenjg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791494711;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-Id:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Flowmailer-Platform:Feedback-ID:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=mhBQLy2/tOyoL1ln58oS/5awdoTohwkIDu23vvboNeY=;
+	b=VcjduicXUAZlKNf7CexruiFCvB7d+FJRY1jNKdgp73FkzTgKEPsYOmMELJbABvY9laPo
+	 hYP/zXkqVddSRwF1wASokWRmMSCcHz/J2gZL/hj3FedRgI2UR7VaSifF8SsTJN1jzs71N
+	 zy7V69V2gXuC7lqHa5tsgCp9SHawXQXL0BmCkvxQ8qsZ2oZvKrTgRqngvsAOi1045d2o0
+	 7MMnU1NuKj+LX5LIY3zlQ2yzxxP+8Kt3DO+9bzIq5mcXswV0swBlg3kW7lRLa+/PCJPng
+	 +TNw3JJGwmKc/5uOnlqvLMhQkg5R5Su8tV/lbUzvooyu4iNM5Q/lJ61nJa+Nxe+QODw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1791494711;
+	bh=mhBQLy2/tOyoL1ln58oS/5awdoTohwkIDu23vvboNeY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=vX9vj9QHpGsrjCq3/fDNQLvg2GDmUUErvwjQsrLghROgWSwQkwSRzB5xFrSsEO6Ga
+	 6BSXcp13fysvkZxedmYpTre740M613lxg6x84BBBtXKZ6D2QF7uheMEt+OX2K4shPf
+	 5PPY//Vtdgp2NkatXMBo1BTiDiMAVNl08StlJPuU7HTVTvg2VeNTtoAJmgrcf8c9mQ
+	 FA/hNSfrgXTok12suGc3i9vd0g7BtBlXl6jgNIq1qdbunpltJ75ARobBsv+EocqCvS
+	 1vJiIK/wvCb7F8z+7Vt6KcWJV5O2ZWI1sSbxizI2+r9Ylbdg+jg9PJqNlfB0gYKRnn
+	 6wrqVUWX/P8yg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id A146481192;
+	Thu,  8 Oct 2026 21:25:11 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 623A62B2
+ for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 21:25:10 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 27B8F6084A
+ for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 21:25:10 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yv0ujRLHTkJ7 for <u-boot@lists.u-boot-project.org>;
+ Thu,  8 Oct 2026 21:25:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A0757607B2
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=185.136.65.228
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791494708;
+ b=kvkhegr41Jt2XcV20NqeuEkrW1c4t6Jp4FbWCyAmMoP1GWfCha10+M2mw4WvFG+w2XVk
+ nnwr0dPQtpU/TDiLNF8d1d/2jQYRj4a8MXSU+J2Ux5FS18KFnFsG2BV8Cg7CL90ZEBdFd
+ Py1aNpZQ/ztLqmWyy5oOsi7HoaH2Qb4VxQ8wrUCfQSWZ8RwZdShcWPBA1g/13B98R57iG
+ r0Jl8blJHJYYA+Bz1CR3qTuKGBPvk6qUWWEuUROSBj3ioXbewl/fOfhmAWPZGur/JJqzN
+ CRGRrYcgD+fHJfd3cM3H0aQp+Guhz/cGlbyo6SKjWbbxDapGoI7W9AF/KnXoH8+Askg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791493521;
- h=X-Greylist:Received-SPF:Received:DKIM-Signature:Received:Message-ID:
- Date:MIME-Version:User-Agent:Subject:To:Cc:References:
- Content-Language:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:X-Infomaniak-Routing;
- bh=VgH5FsZC/FEmZZKN2Gt0ebhCUHkPKCTXtKAS2AxSKaY=;
- b=q1b0rrULyXPNDns9XfvFhRsM1SSnVAfaldkHjxnojC0r+UYxHXDtHfqCGYuutZgI0BKm
- 19M3CdzBYRar8+I+3uVdQe7jU3ghFZmIqJpa0roMs6mPvPU8ACS0IJUcC2+gkiW6Ms0FK
- K2mLRcwnuBSEg8GdGBxR6yHIijx3FWDHOxMp7sIiwt2TRmooT9oHMsiShIizKWD/8T5s3
- h1YJd+ldXknAMhMLi69L225oYUCTh39Pt8gqXFqY0TgymcyOA3UJQo0ZBfYY9iEeesSEP
- m0GKWLVsXR4SV2ROp6oGmmpzk0Jb7IcH6kKgzfAr6Gy1bcpUUz6r+tcaG6inuh+Cliw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=0leil.net;
- dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=jiwTW4je; 
- arc=none smtp.remote-ip="2001:1600:19:7ff8::bc0e"
-X-Greylist: delayed 966 seconds by postgrey-1.37 at util1.osuosl.org;
- Thu, 08 Oct 2026 21:05:19 UTC
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=jiwTW4je
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:1600:19:7ff8::bc0e; helo=smtp-bc0e.mail.infomaniak.ch;
- envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
-Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
- [IPv6:2001:1600:19:7ff8::bc0e])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 46675812FA
- for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 21:05:19 +0000 (UTC)
-Received: from smtp-3-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246b])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4j12Cn62KZzSHq;
- Thu,  8 Oct 2026 22:49:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1791492549;
- bh=VgH5FsZC/FEmZZKN2Gt0ebhCUHkPKCTXtKAS2AxSKaY=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=jiwTW4jeS2XtMn6zW30qofxvUjZdiMSjfoXKS/pLYRmEYzDjmZ2Pn5KVKBbKwcjrS
- r42oxXZMPSy2RbR2WMYdLJ30TTlKtpgITof1oKQ3Njj1IpPegopm1jLwbjbmb6OvU0
- d9I7kfD9DFKi9tfx6pTGTZeCV6PtXYUBcZ0P5mpEEoTG/Xqp3E/3jgpkNSSb0bwODI
- y2foe/RqXGjo4fTV5BSUcnX2L4gGhLU/1bdMeHxM2kcphFjPN59N9Nprii2PG4llD1
- bVYCh7dKcbLq76m2QCMe1LkV4jlL9XbTanVngoz9UBjKIw4KMOJmu3oXh/0PVqXU1F
- DQpEX+L1QsRUQ==
-Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4j12Cm0vXGzgFv; Thu,  8 Oct 2026 22:49:08 +0200 (CEST)
-Message-ID: <0bba4247-2950-41c2-996f-d9c29043619c@0leil.net>
-Date: Thu, 8 Oct 2026 13:41:22 +0200
+ c=relaxed/relaxed; t=1791494708;
+ h=X-Greylist:Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:
+ Date:Message-Id:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding:X-Flowmailer-Platform:Feedback-ID;
+ bh=mhBQLy2/tOyoL1ln58oS/5awdoTohwkIDu23vvboNeY=;
+ b=Ut3K+ARNmmTUJt4eySP0tdd8fAYybuw/hmfv1sYad6Qv1gpbP3qlej0lIoTcmcLDJKYv
+ vThKqlfBVbrfYAk42tDLaUEHQ1Olrfnq6/vkpTauL/6JieUYqVS5V90aEm3ZpMiB4AWvi
+ cJijtXsUtDlhZjeqy8lTQxB29EmDoc9yO0Z4JvZF7OkYoaG5EPry4d3Aq0dUr689W0QBv
+ hCSeK4EupHJTDdsY7sclZnmAPfMz4tqWfFsCzfmpZgr2xoZHv52/4Cv7LmuLoccbblJDa
+ Q+YXlqYhmAuwJ6PWnIU4cDdOwST5ky+cTY8hmDTkyTdHSyIOrRr1WTDok4/zhY4V+TQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=siemens.com;
+ dkim=pass header.d=siemens.com header.i=michael.haener@siemens.com
+ header.a=rsa-sha256 header.s=fm1 header.b=tD3oFc6x; 
+ arc=none smtp.remote-ip=185.136.65.228
+X-Greylist: delayed 63 seconds by postgrey-1.37 at util1.osuosl.org;
+ Thu, 08 Oct 2026 21:25:06 UTC
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=siemens.com header.i=michael.haener@siemens.com
+ header.a=rsa-sha256 header.s=fm1 header.b=tD3oFc6x
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.65.228;
+ helo=mta-65-228.siemens.flowmailer.net;
+ envelope-from=fm-664519-20261008212400049ce31021000207a4-alkerz@rts-flowmailer.siemens.com;
+ receiver=<UNKNOWN> 
+Received: from mta-65-228.siemens.flowmailer.net
+ (mta-65-228.siemens.flowmailer.net [185.136.65.228])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A0757607B2
+ for <u-boot@lists.u-boot-project.org>; Thu,  8 Oct 2026 21:25:06 +0000 (UTC)
+Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id
+ 20261008212400049ce31021000207a4
+ for <u-boot@lists.u-boot-project.org>;
+ Thu, 08 Oct 2026 23:24:00 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=michael.haener@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=mhBQLy2/tOyoL1ln58oS/5awdoTohwkIDu23vvboNeY=;
+ b=tD3oFc6x1edNoO5dFlgFLPKTG7llR5idymCvBiPCp2ld6vWbA+uXe8oJhsY3MyRYKe4OoO
+ jj/gq+cAuDcF0QI1z7JsI1xhPG88DtKfikHX/CsMlFp0AtqjLAM+PTHDtoUmvy1GKu6B4+cS
+ ny1Ew0u951XM2EdNosmzXqk/yFdXbYWxmLKLsjQNsxtFnixQvb2ueYWxMrP9SW7GYnWJA1im
+ 4gS1yE96cIc5yeS1pBY93kXQrNe3aBr/HL+LQs5NqSqvcGGInCXlYTUEICY2921HmBxwN5Et
+ fd3dPoAYvQYvcmQcv1W505lf7TTsv5CYNAYjwjhtUXr+4+z8aFDjZwIw==;
+From: Michael Haener <michael.haener@siemens.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ u-boot@lists.u-boot-project.org
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: [PATCH v3 1/3] tpm: Add an option to start the TPM during init
+Date: Thu,  8 Oct 2026 23:23:59 +0200
+Message-Id: <20261008212359.204161-1-michael.haener@siemens.com>
+In-Reply-To: <DLZDZTZVOEHY.1MJ22UQOHL27P@linaro.org>
+References: <DLZDZTZVOEHY.1MJ22UQOHL27P@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] ram: rockchip: px30: allow multiple DDR types
- selection
-To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
-Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
-References: <20260829-ddr-multi-v1-0-c0c7837aed20@gmail.com>
- <20260829-ddr-multi-v1-2-c0c7837aed20@gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <20260829-ddr-multi-v1-2-c0c7837aed20@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-664519:519-21489:flowmailer
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,238 +146,20 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Massimo,
+Hi Ilias,
 
-On 8/29/26 7:03 PM, Massimo Pegorer wrote:
-> Allow the inclusion of more than one DDR parameters set in the PX30
-> SDRAM driver. The driver applies included sets in a predefined order
-> (DDR4, LPDDR2, LPDDR3, DDR3), stopping at the first one that makes
+On Thu Oct 8, 2026 at 1:32 PM EEST, Ilias Apalodimas wrote:
+> I am thinking if we should also remove the tpm_auto_start() from
+> efi_tcg2.c now and select the new Kconfig option.
 
-What made you decide on this order?
+I would rather not do that.
 
-> SDRAM initialization function to complete with success.
-> 
-> The default fallback behaviour is preserved: if no DDR configuration
-> option is selected, DDR3 parameters set is included.
+TPM_AUTOSTART is meant to be opt-in. EFI_TCG2_PROTOCOL is 'default y'
+for TPM_V2, so a select would enable the early startup on nearly every
+board with a TPMv2, even boards which never boot via EFI.
 
-We shouldn't do that, we instead should have the DDR3 symbol default to 
-y for PX30 (and other SoCs if applicable), to preserve the current 
-state. I don't like hidden defaults like that because you may end up 
-with RAM_ROCKCHIP_DDR3 not selected and build a DRAM driver that only 
-supports DDR3, which is kinda odd to be honest.
+I would keep the call in efi_tcg2.c instead. Calling tpm_auto_start()
+twice is harmless.
 
-> 
-> Due to limited PX30 TPL maximum size, including support for more than
-> one DDR type requires disabling some configuration options such as
-> CONFIG_RAM_ROCKCHIP_DEBUG.
-> 
-
-Good to know, thanks. But i'm assuming this likely means we can only 
-have up to two DRAM configurations enabled at the same time?
-
-I think the information printed by sdram_print_dram_type() is still 
-interesting. Maybe we should have some log level for the DRAM init so we 
-can select the verbosity of the debug output. In any case, just a 
-thought and not a blocker for this series at all.
-
-> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-> ---
->   drivers/ram/rockchip/Kconfig      | 67 +++++++++++++++++++++++++++++++--------
-
-No to those changes. Keep it simple please, no redefinition of the 
-symbol based on the SoC. For the RAM_ROCKCHIP_DEBUG needing to be 
-disabled, the information is quite nice for end users so i could see it 
-being added to all RAM_ROCKCHIP_ symbols as a hint (or have it somewhere 
-in doc/board/rockchip for example).
-
->   drivers/ram/rockchip/sdram_px30.c | 35 ++++++++++++--------
->   2 files changed, 74 insertions(+), 28 deletions(-)
-> 
-> diff --git a/drivers/ram/rockchip/Kconfig b/drivers/ram/rockchip/Kconfig
-> index 61a3193b3f5..d74980402ad 100644
-> --- a/drivers/ram/rockchip/Kconfig
-> +++ b/drivers/ram/rockchip/Kconfig
-> @@ -24,38 +24,77 @@ config RAM_ROCKCHIP_DEBUG
->   	  This is an option for developers to understand the ram drivers
->   	  initialization, configurations and etc.
->   
-> +config RAM_ROCKCHIP_DDR3
-> +	bool "DDR3 support for Rockchip SoCs"
-> +	depends on ROCKCHIP_PX30
-> +	help
-> +	  Enable DDR3 sdram support on Rockchip SoCs.
-> +
-> +	  Note that enabling support for multiple DDR/LPDDR types may cause TPL
-> +	  to exceed its maximum size constraint (TPL_MAX_SIZE), depending on
-> +	  other configuration options selection (such as RAM_ROCKCHIP_DEBUG).
-> +
-> +	  The driver applies selected sdram parameters sets in the following
-> +	  order - DDR4 LPDDR2 LPDDR3 DDR3 - stopping at first set that makes
-> +	  sdram_init_detect() to complete successfully.
-> +
-> +	  If no DDR/LPDDR option is selected, DDR3 sdram support is enabled by
-> +	  default for backward compatibility with existing board configurations.
-> +	  Therefore this option is only useful for multiple DDR/LPDDR types
-> +	  selection.
-> +
->   config RAM_ROCKCHIP_DDR4
->   	bool "DDR4 support for Rockchip SoCs"
-> -	depends on ROCKCHIP_PX30 || ROCKCHIP_RV1126
-> +	depends on ROCKCHIP_PX30
->   	help
-> -	  This enables DDR4 sdram support instead of the default DDR3 support
-> -	  on Rockchip SoCs.
-> +	  Enable DDR4 sdram support on Rockchip SoCs.
->   
-> -	  Note that even if multiple DDR/LPDDR types are selected, support is
-> -	  enabled only for the selected one that comes first in the following
-> -	  list: LPDDR4, DDR4, LPDDR2, LPDDR3, DDR3.
-> +	  Note that enabling support for multiple DDR/LPDDR types may cause TPL
-> +	  to exceed its maximum size constraint (TPL_MAX_SIZE), depending on
-> +	  other configuration options selection (such as RAM_ROCKCHIP_DEBUG).
-> +
-> +	  The driver applies selected sdram parameters sets in the following
-> +	  order - DDR4 LPDDR2 LPDDR3 DDR3 - stopping at first set that makes
-> +	  sdram_init_detect() to complete successfully.
->   
->   config RAM_ROCKCHIP_LPDDR2
->   	bool "LPDDR2 support for Rockchip SoCs"
->   	depends on ROCKCHIP_PX30
->   	help
-> -	  This enables LPDDR2 sdram support instead of the default DDR3 support
-> -	  on Rockchip SoCs.
-> +	  Enable LPDDR2 sdram support on Rockchip SoCs.
->   
-> -	  Note that even if multiple DDR/LPDDR types are selected, support is
-> -	  enabled only for the selected one that comes first in the following
-> -	  list: LPDDR4, DDR4, LPDDR2, LPDDR3, DDR3.
-> +	  Note that enabling support for multiple DDR/LPDDR types may cause TPL
-> +	  to exceed its maximum size constraint (TPL_MAX_SIZE), depending on
-> +	  other configuration options selection (such as RAM_ROCKCHIP_DEBUG).
-> +
-> +	  The driver applies selected sdram parameters sets in the following
-> +	  order - DDR4 LPDDR2 LPDDR3 DDR3 - stopping at first set that makes
-> +	  sdram_init_detect() to complete successfully.
->   
->   config RAM_ROCKCHIP_LPDDR3
->   	bool "LPDDR3 support for Rockchip SoCs"
->   	depends on ROCKCHIP_PX30
->   	help
-> -	  This enables LPDDR3 sdram support instead of the default DDR3 support
-> +	  Enable LPDDR3 sdram support on Rockchip SoCs.
-> +
-> +	  Note that enabling support for multiple DDR/LPDDR types may cause TPL
-> +	  to exceed its maximum size constraint (TPL_MAX_SIZE), depending on
-> +	  other configuration options selection (such as RAM_ROCKCHIP_DEBUG).
-> +
-> +	  The driver applies selected sdram parameters sets in the following
-> +	  order - DDR4 LPDDR2 LPDDR3 DDR3 - stopping at first set that makes
-> +	  sdram_init_detect() to complete successfully.
-> +
-> +config RAM_ROCKCHIP_DDR4
-> +	bool "DDR4 support for Rockchip SoCs"
-> +	depends on ROCKCHIP_RV1126
-> +	help
-> +	  This enables DDR4 sdram support instead of the default DDR3 support
->   	  on Rockchip SoCs.
->   
->   	  Note that even if multiple DDR/LPDDR types are selected, support is
->   	  enabled only for the selected one that comes first in the following
-> -	  list: LPDDR4, DDR4, LPDDR2, LPDDR3, DDR3.
-> +	  list: LPDDR4, DDR4, DDR3.
->   
->   config RAM_ROCKCHIP_LPDDR4
->   	depends on ROCKCHIP_RV1126
-> @@ -66,7 +105,7 @@ config RAM_ROCKCHIP_LPDDR4
->   
->   	  Note that even if multiple DDR/LPDDR types are selected, support is
->   	  enabled only for the selected one that comes first in the following
-> -	  list: LPDDR4, DDR4, LPDDR2, LPDDR3, DDR3.
-> +	  list: LPDDR4, DDR4, DDR3.
->   
->   config RAM_ROCKCHIP_LPDDR4
->   	bool "LPDDR4 support for Rockchip SoCs"
-> diff --git a/drivers/ram/rockchip/sdram_px30.c b/drivers/ram/rockchip/sdram_px30.c
-> index 37e62120504..ac9f5827d1d 100644
-> --- a/drivers/ram/rockchip/sdram_px30.c
-> +++ b/drivers/ram/rockchip/sdram_px30.c
-> @@ -126,11 +126,17 @@ struct dram_info dram_info;
->   struct px30_sdram_params sdram_configs[] = {
->   #if defined(CONFIG_RAM_ROCKCHIP_DDR4)
->   #include	"sdram-px30-ddr4-detect-333.inc"
-> -#elif defined(CONFIG_RAM_ROCKCHIP_LPDDR2)
-> +#endif
-> +#if defined(CONFIG_RAM_ROCKCHIP_LPDDR2)
->   #include	"sdram-px30-lpddr2-detect-333.inc"
-> -#elif defined(CONFIG_RAM_ROCKCHIP_LPDDR3)
-> +#endif
-> +#if defined(CONFIG_RAM_ROCKCHIP_LPDDR3)
->   #include	"sdram-px30-lpddr3-detect-333.inc"
-> -#else
-> +#endif
-> +#if defined(CONFIG_RAM_ROCKCHIP_DDR3) ||         \
-> +	(!defined(CONFIG_RAM_ROCKCHIP_DDR4) &&   \
-> +	 !defined(CONFIG_RAM_ROCKCHIP_LPDDR2) && \
-> +	 !defined(CONFIG_RAM_ROCKCHIP_LPDDR3))
->   #include	"sdram-px30-ddr3-detect-333.inc"
->   #endif
->   };
-> @@ -682,19 +688,11 @@ out:
->   	return ret;
->   }
->   
-> -struct px30_sdram_params
-> -		*get_default_sdram_config(void)
-> -{
-> -	sdram_configs[0].skew = &skew;
-> -
-> -	return &sdram_configs[0];
-> -}
-> -
->   /* return: 0 = success, other = fail */
->   int sdram_init(void)
->   {
->   	struct px30_sdram_params *sdram_params;
-> -	int ret = 0;
-> +	int ret, i = 0;
->   
->   	dram_info.phy = (void *)DDR_PHY_BASE_ADDR;
->   	dram_info.pctl = (void *)DDRC_BASE_ADDR;
-> @@ -704,12 +702,21 @@ int sdram_init(void)
->   	dram_info.ddr_grf = (void *)DDR_GRF_BASE_ADDR;
->   	dram_info.pmugrf = (void *)PMUGRF_BASE_ADDR;
->   
-> -	sdram_params = get_default_sdram_config();
-> -	ret = sdram_init_detect(&dram_info, sdram_params);
-> +	do {
-> +		sdram_configs[i].skew = &skew;
-> +		sdram_params = &sdram_configs[i];
-> +		ret = sdram_init_detect(&dram_info, sdram_params);
-> +	} while (ret && ++i < ARRAY_SIZE(sdram_configs));
-
-A simple for-loop on the ARRAY_SIZE() would be easier to read. Once you 
-have a match (ret = 0), break out of the loop and check ret before 
-continuing in the code.
-
->   
->   	if (ret)
->   		goto error;
->   
-> +	if (ARRAY_SIZE(sdram_configs) > 1) {
-> +		printascii("Applied sdram config: ");
-> +		printdec(i);
-> +		printascii("\n");
-
-This is not useful to the user as it's reflecting the index in an array 
-that is not stable by design. We should instead report the DDR type (if 
-we really want to). You can do this by simply calling 
-sdram_print_dram_type(sdram_params->base.dramtype); Of course, this 
-won't do anything right now since we need to disable RAM_ROCKCHIP_DEBUG 
-to be able to compile support for more than one DRAM type.
-
-I will only be able to test your series in November once I'm back in 
-office, but I for sure will. In the meantime, you can always send a v2 
-and/or discuss the feedback :)
-
-Cheers,
-Quentin
+Regards,
+Michael
