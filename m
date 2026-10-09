@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE4BDCA9EBB
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 19:54:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72928CA601F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 19:54:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B4C41815DB;
-	Fri,  9 Oct 2026 19:54:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 38E0D8162F;
+	Fri,  9 Oct 2026 19:54:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VVxdlOaPVBSm; Fri,  9 Oct 2026 19:54:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B5CC5815D7
+ id NUk-1Ly_AgOV; Fri,  9 Oct 2026 19:54:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E86B9815C6
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791575683;
-	b=Q2kNiUXrdChXdww3F22ZokzR77IhA5X193XGd5NElFSek3hX2QlnKXxlvot+XtigSLkY
-	 fGqrS3lysEZE08iiSqPGBZXJ7uFHY06Ar30ii1aifjra0b1RGei1Ilma2foDrvmipxGka
-	 n+N+LMDd7xS/7Nw6OTtaTfnfXj4HyXSgHqvZQTCFN5t3/PWENsF+phHrSdPY1ZWcXyUu8
-	 lSbZxytfUgQUQyj6C9SkHhB4ctYTBgP8uRKDrK5f+c5S5iZDFdupjizCwBvr8fV6QQ0DW
-	 XEDyOvOO9MzSecwlsuDXg/V/y2L5jE+ctI/QcZboAtWklIyLDVWSO0WnLLSKXadSfqg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791575687;
+	b=JXMl8OhHQDQEDs1KVy2ayt1dIefHDnPQgwUmagt0cUQt3Qf5NkPQdGfRbX6+ZOP7pNBy
+	 IJn8RC23WCPJlwDuZROzDvC1YZDJ6npkW+G4Bn6X6h6bFoxomVExyjb8zDk9GLYrEtRC3
+	 AWyaDDWkF6wRwoXP3I5BFnn3wP+T0kOebdBZ2CyBQ8F8qu6m02Kn44geox1wvOzaTKuPN
+	 X3q41vKOeAjTT9HY+vUgB6R0D/jEeoW4JVO6Nvk/TvQyAb8/BnqFdKX5AT3SRK5CxSqrc
+	 zD/cY9KmHsbsDhUIAiM69xlZG4yfbHuJlu12v4zK5na0QLjGkCuI7VU2cmsg4EH3S/A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791575683;
+	c=relaxed/relaxed; t=1791575687;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,93 +31,93 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Sc7vO2TNieIUtuBA0yZtgK900LDPAo++gJJAL2ueEho=;
-	b=l0rgwJ7HQjoBRfX6uoDztlXHUAIwx/gKio4ZaQRL0GnHE0uk0afTVH2YyQdsVLb4EonE
-	 fOrj2bYePFh2k1JLw3ek0y7wvChyd33tPIlS0kQiOFB/glNyuc9N2My2lccKLtQLYdnTh
-	 fwYMaqqszNGxWcDx6hnX+2ceartk7k/bqwq3v6xPPxirBCPEtDNfoQu6PJui9Q3/qemJW
-	 Zyi4gzb33KAUCK7YbKqf5e3KYczSFThUejQNZlCiJb+THtbQY806shdWA3TVx8jOOTsI9
-	 5I/b+9qe+IvG/ruiZhNv+sqxSMEznIyjuX54D1Y2nksi+0u64fckZb+LWXdg2hJNOIA==
+	bh=ylio9EpRtdvyRXYY+WZkILBG5AqVA3e/Fkk3ZzHpIVs=;
+	b=NO0rWZTfxSoMkUu/oQrFgbrGuUXbc4Jvk4b6pONKpR0mwejxr75TaOt0uWzQKEio9GYs
+	 6OH4S/42A+zy5ji8Rf8lP4KHsIv3VuO7nI2NvHkaoQ2j3Hz8AEg0R5ADP9M/joBxPjX2H
+	 E4pGJ0zBrirQxpohzSdc+NJvHF6zQnWgIb4wAOosNGK5H/CAY5D6aAVR79F+FcnI59iPH
+	 4aTjaUhmuSnAvr4h1iyXMT2l8SKveTmkA7v9Zh9144J0xXHCRLwp0FYsc3a4Xn8rMJ+Gt
+	 Qd99FHJfypiyS/SYMcgzd3+8ZYK088BJHbg70G0bPVwpB3A73q6lU0SbiVLOCPzNdUA==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791575683;
-	bh=Sc7vO2TNieIUtuBA0yZtgK900LDPAo++gJJAL2ueEho=;
+	d=lists.u-boot-project.org; s=default; t=1791575687;
+	bh=ylio9EpRtdvyRXYY+WZkILBG5AqVA3e/Fkk3ZzHpIVs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Lqsv7DhPdFWz83YFmW58qjPtCM2ieiVKoKcG4KOeYRmuEMwLiIsUX8zTx6W7y7u9F
-	 4x7zX512OnGnbm6UBKRlMshTYLQJff9Q2CFACUN8QeUGlXX6s6LBLdvPimW0n3lNt6
-	 bWKPizsBFrNCt708jepRpmQ8N9KTirnQ/84/cllaEX5K/ScP+Txhzqp+jJVCLU/hfc
-	 oBvpLAcsvl7Nlx5NNbmVWuyM7bPGNfYIYdBDT5fD3MEUHoiNWjTXAzeQwxqjJOMGZf
-	 3uyfhP+9xM7JJp4I1Tzz+xm7Rnj/azSKtoFs+YSHKjGGB99ZEBKB+ABI2TyMi3r/M8
-	 fjJFuNIFjxVRg==
+	b=WI5RIt87LDqr94it05823+4p62XboQsgd5uZYIebIt7uygenuGqQvgxr6iIJ8wLSi
+	 dgRCPt7NKFnKVtLMvCvupV9ua916xto1EYabbneDz4jsYa2R1CugNr08XZ5CI+bPjv
+	 4FF8TWXhZnh727mRKRIDtZLSK/MDhGYgH4GNrJOp1PpKe2ZPpMsayQS+bnxk+bbAuk
+	 LJYI6uHIzB/iFgBZPAX+rzsrlOPQzMAO74pwp6DGhOX5B6WmYoCuymyhcNnNYpSYDo
+	 xSd6hPCGMBqpc74aIBPt/Vd6fNVYPBq8zOGwbricDQgHqRHd0SG5xuOvdeJ00Ve7f0
+	 FrzJbMgCFqYMw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B5CC5815D7;
-	Fri,  9 Oct 2026 19:54:43 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with UTF8SMTP id A290113B
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E86B9815C6;
+	Fri,  9 Oct 2026 19:54:46 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with UTF8SMTP id 3B87913B
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with UTF8SMTP id 8670A40935
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:18 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with UTF8SMTP id 21B75606F8
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024)
- with UTF8SMTP id xUfGY2NI_vLn for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 19:40:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 60696408CB
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791574817;
- b=qtmGZndJzfSD19VifWbDg4W73MMkmVOffaTy6WNSx68rHPZyg1aQVG6+nerXCHuJIP4R
- QkrBASg6U0D+3pW/mucITjB0Acmf+/CYQ6IFUqjEMzTFbtawIzmKWLBTEeRsRcJWH1vFn
- S2LMbzLFTADXjRBmqGkf+ZM9sWT2Il/wLV6blPBFBhy3GD3BRVGrEfUjOy8F1it8Q4LfP
- 37iDwz/Cq5M8CI+atAGrzi3NYpWuteJ2HxJ7Gas7fJEXIMMuPjfaDpJpIj8qVKCHMDwgC
- iIDpeCguXlRMhMblQ+kgVXsXhf3M6lBkZnAeYR3aq5O6BZ0I7bNVldHJWljsbEKuhkA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024)
+ with UTF8SMTP id koPQb11IPQcb for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 19:40:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DEE9160844
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791574818;
+ b=BHL5fOukZ0rMOc7lMc1Ee7IJOOUQQTZipOjQ8IUSdXS+8f1g3IkAiavhOMgE/NsS1tt1
+ vDqhRlPEv8oFpiQRLyYn216zDbKDSJw4M/ctV61Ay/r5mrxUXdWPOF8JFKSLNBQm7wzSE
+ /gIqWUn1sVuIOHCXpolzBk+8GcAlbFwtLd3AU2G8TwYmFFznAIDx4qumnSXCsmyBizGQV
+ GDlf9EW6fttCaSLadn7J/WrjuVJfFdVWzQv+IjItJB4rVTcleFaOoZaErNmodDcdl8ibW
+ rt15MmDEoJWj4e2m5axl/ctOukSmkLeJO9qFdOY+zOy8l/gIHdKMMwmxUIDvKqFCCMg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791574817;
+ c=relaxed/relaxed; t=1791574818;
  h=Received-SPF:DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=Sc7vO2TNieIUtuBA0yZtgK900LDPAo++gJJAL2ueEho=;
- b=M16MNphUHfPRm6JbA8+4mfPvqniqyAbgB30egJaodo3FQBNdJMHOLQ1eEeYN04oY9r+y
- K6YWnPPL+taSvEAfuPJZyeoNlC7tH033p7auFXEsfBhqxE6fCxSQ20f2AYKg8noUNpyNb
- LArLj0fHaEl3QJ2BWkKS1qmv0BYDW2F18sMz/NGvR3FgifK46nk+cmBWbu8+e8IsNEdMt
- qVH7S8EYHaYQVeW1Ek7gXTYFOOsMtbJUDvob9keDwyo3K6MV68DHBTTyutjcGn4Y2rPYK
- dPZJSnMUZVSbMsyKnUUkVPp4VswmTEHFP0tGQKykcPNs5ZIVU5vUw7J+CWbD6RD9bUQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=ylio9EpRtdvyRXYY+WZkILBG5AqVA3e/Fkk3ZzHpIVs=;
+ b=CWjoL17EuV4TRHcmjp6XvuyrJurNnVm7bPZlvIO1eZ94jt+ngSd+k7OC7QAO+LmK6Wlw
+ HT2Mx93858dAAx2To1FMbbry9Z1oSCD3jcLvr1oj91pAaiOd7YGQRi5dutXt7afxu7KNI
+ mXTmanK4nhj7ZPdjyAwtgo3D4iK0WMsuoAUUj6gJDbQyn5q8s45IHYJB6GduRZ0gxsPCX
+ YutjLKMWDDJ+uu6ZqJ1RYuuNPm6G6LpJk6pStsbaz1g0ANleo14rvh6qxiht4jelya6mn
+ UGDLnEG7K2RfXlo9SacwxerXsB2DhGrNlb5aGyS23PT6ZjLsP1JU1uNa2Dhzp8K2VTg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=mainlining.org;
  dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
- header.s=202507r header.b=VgyO1Dt7; 
+ header.s=202507r header.b=PZmMDwAy; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=z2JoIu3U; 
+ header.a=ed25519-sha256 header.s=202507e header.b=f7+cWnoq; 
  arc=none smtp.remote-ip=5.75.144.95
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
  helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=mainlining.org
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org
- header.a=rsa-sha256 header.s=202507r header.b=VgyO1Dt7; 
+ header.a=rsa-sha256 header.s=202507r header.b=PZmMDwAy; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=z2JoIu3U
+ header.a=ed25519-sha256 header.s=202507e header.b=f7+cWnoq
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- by smtp4.osuosl.org (Postfix) with UTF8SMTPS id 60696408CB
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:16 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with UTF8SMTPS id DEE9160844
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1791574634; bh=Sc7vO2TNieIUtuBA0yZtgK9
- 00LDPAo++gJJAL2ueEho=; b=VgyO1Dt7ivyi3/wpGBl5713pLE1roYaCJVeGU2aO6oe//cdsbU
- /qMMjAHUu73rfQG4FFJbazpQdF/E91f3BGFjvbF4Wi5g/gVfmr7FEIUymwoWvslKQ0TbIW1G8qM
- 9UxTB2SLDvJgLigzExec2BUp79OT41q6REccqLiAX7FhkjBoxL7mLMKs/dKoB9JdmTULavd0YHG
- DvAzzi0iry2NVytGvGmYPKWaxc8hjM0GwptkdsiwM1/q7Iornhzt+ximg2dIcXpjwfcMHbgUBj9
- Ufgqw+V9MM5M6SWOYChaXE0UVnsHXR/BhmORL6febbM+uFdMRnZl2JiBRwFDOwjcOfA==;
+ h=Message-ID:Date:Subject:To:From; t=1791574626; bh=ylio9EpRtdvyRXYY+WZkILB
+ G5AqVA3e/Fkk3ZzHpIVs=; b=PZmMDwAywoDIUIWnjyLt01/qVpNoeE2j5nhw3H82ov9a2GLHOW
+ TJgggXcZ3ZRyhENCDw/ic2ODFqFpLGPwdCvXKgsgBzDd1JpxENBsEUCU0t3j5on2SLiPcdkSUfR
+ 4o2fI74jsE0zUYeYiLqkdWddFM448iLyuh2qJr637ItraLi9MBH8Ly9aQ2ueg3YA92K1yEWlZ0x
+ f5VkclPhkYXZJ/ZMaZiVdUgl2LqOZJnbYyd2JBiNWv4RSRqXN7lZmvGNka/GO1F45a/qknV3chl
+ ZNjkastzhp4OOGYptuej1SBQx2cXgULRbYhZLSbkwE4MuEoP5XB1GBG0i98PrH+L0BQ==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1791574634; bh=Sc7vO2TNieIUtuBA0yZtgK9
- 00LDPAo++gJJAL2ueEho=; b=z2JoIu3U+jWHZw5BjXxw6RqibZnG17yBYonK71FWAEJOzmk6kd
- OSXDOXBIjagyXjv92Q4iBGmqaaZGWPeGheCg==;
+ h=Message-ID:Date:Subject:To:From; t=1791574626; bh=ylio9EpRtdvyRXYY+WZkILB
+ G5AqVA3e/Fkk3ZzHpIVs=; b=f7+cWnoqt+1WUXCcjjS/mIkY4tRd/tuHVsaTP1AV7xfUnpMOMc
+ UO4x4CGXhZCxKs8UEkcz+2wXwlrjtitr1pAw==;
 From: Bradley Morgan <brads@mainlining.org>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.u-boot-project.org
@@ -142,9 +142,9 @@ Cc: Bradley Morgan <brads@mainlining.org>,
  Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
  Torsten Rupp <torsten.rupp@8tronix.de>, Vincent Jardin <vjardin@free.fr>,
  Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 22/26] powerpc: mpc85xx: Remove P1024 support
-Date: Fri,  9 Oct 2026 19:37:00 +0000
-Message-ID: <20261009193704.13061-23-brads@mainlining.org>
+Subject: [PATCH 04/26] board: powerpc: Remove P3041DS support
+Date: Fri,  9 Oct 2026 19:36:42 +0000
+Message-ID: <20261009193704.13061-5-brads@mainlining.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261009193704.13061-1-brads@mainlining.org>
 References: <20261009193704.13061-1-brads@mainlining.org>
@@ -164,210 +164,441 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-NXP marks P1024 End of Life, and no target in the tree selects
-ARCH_P1024. Its old RDB timing branch and SoC defaults still hang
-around in the shared P1020 code.
-
-Drop those paths.
+NXP marks the P3041 development system no longer manufactured. Drop its target and device tree.
 
 Signed-off-by: Bradley Morgan <brads@mainlining.org>
 ---
- arch/Kconfig                         |  2 +-
- arch/powerpc/cpu/mpc85xx/Kconfig     | 27 --------------------
- arch/powerpc/cpu/mpc85xx/Makefile    |  1 -
- arch/powerpc/cpu/mpc8xxx/cpu.c       |  1 -
- arch/powerpc/include/asm/processor.h |  1 -
- board/nxp/p1_p2_rdb_pc/README        |  1 -
- board/nxp/p1_p2_rdb_pc/ddr.c         | 37 ----------------------------
- doc/README.mpc85xx-sd-spi-boot       |  1 -
- 8 files changed, 1 insertion(+), 70 deletions(-)
+ arch/powerpc/cpu/mpc85xx/Kconfig   |   9 --
+ arch/powerpc/dts/Makefile          |   1 -
+ arch/powerpc/dts/p3041.dtsi        | 149 ---------------------------
+ arch/powerpc/dts/p3041ds.dts       | 158 -----------------------------
+ arch/powerpc/dts/p3041si-post.dtsi |  43 --------
+ board/nxp/common/Makefile          |   2 -
+ 6 files changed, 362 deletions(-)
+ delete mode 100644 arch/powerpc/dts/p3041.dtsi
+ delete mode 100644 arch/powerpc/dts/p3041ds.dts
+ delete mode 100644 arch/powerpc/dts/p3041si-post.dtsi
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index 8ea591cba4f..cb808df07f4 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -470,7 +470,7 @@ config SYS_IMMR
- 	default 0xE0000000 if MPC83xx
- 	default 0x01000000 if ARCH_LS1021A || FSL_LSCH2 || FSL_LSCH3
- 	default 0xFFE00000 if ARCH_P1010 || ARCH_P1020 || \
--			      ARCH_P1021 || ARCH_P1024 || \
-+			      ARCH_P1021 || \
- 			      ARCH_P2020
- 	default SYS_CCSRBAR_DEFAULT
- 	help
 diff --git a/arch/powerpc/cpu/mpc85xx/Kconfig b/arch/powerpc/cpu/mpc85xx/Kconfig
-index fe1592d75aa..6cb37b8a378 100644
+index 7e885014ebe..65081b5bd63 100644
 --- a/arch/powerpc/cpu/mpc85xx/Kconfig
 +++ b/arch/powerpc/cpu/mpc85xx/Kconfig
-@@ -392,29 +392,6 @@ config ARCH_P1021
- 	imply CMD_REGINFO
- 	imply SATA_SIL
+@@ -87,15 +87,6 @@ config TARGET_SOCRATES
+ 	select ARCH_MPC8544
+ 	select BINMAN
  
--config ARCH_P1024
--	bool
--	select FSL_LAW
--	select SYS_FSL_ERRATUM_A004508
--	select SYS_FSL_ERRATUM_A005125
--	select SYS_FSL_ERRATUM_ELBC_A001
--	select SYS_FSL_ERRATUM_ESDHC111
--	select FSL_PCIE_DISABLE_ASPM
--	select FSL_PCIE_RESET
--	select SYS_FSL_HAS_DDR3
--	select SYS_FSL_HAS_SEC
--	select SYS_FSL_RMU
--	select SYS_FSL_SEC_BE
--	select SYS_FSL_SEC_COMPAT_2
--	select SYS_PPC_E500_USE_DEBUG_TLB
--	select FSL_ELBC
--	imply CMD_EEPROM
--	imply CMD_NAND
+-config TARGET_P3041DS
+-	bool "Support P3041DS"
+-	select PHYS_64BIT
+-	select ARCH_P3041
+-	select BOARD_LATE_INIT if CHAIN_OF_TRUST
+-	select FSL_NGPIXIS
 -	imply SATA
--	imply CMD_PCI
--	imply CMD_REGINFO
--	imply SATA_SIL
+-	imply PANIC_HANG
 -
- config ARCH_P2020
- 	bool
- 	select BTB
-@@ -710,7 +687,6 @@ config MAX_CPUS
- 	default 2 if ARCH_B4420 || \
- 		     ARCH_P1020 || \
- 		     ARCH_P1021 || \
--		     ARCH_P1024 || \
- 		     ARCH_P2020 || \
- 		     ARCH_T1024
- 	default 1
-@@ -728,7 +704,6 @@ config SYS_CCSRBAR_DEFAULT
- 				ARCH_P1010	|| \
- 				ARCH_P1020	|| \
- 				ARCH_P1021	|| \
--				ARCH_P1024	|| \
- 				ARCH_P2020
- 	default 0xfe000000 if	ARCH_B4420	|| \
- 				ARCH_B4860	|| \
-@@ -933,7 +908,6 @@ config SYS_FSL_NUM_LAWS
- 			ARCH_P1010	|| \
- 			ARCH_P1020	|| \
- 			ARCH_P1021	|| \
--			ARCH_P1024	|| \
- 			ARCH_P2020
- 	default 10 if ARCH_MPC8544
- 	help
-@@ -1042,7 +1016,6 @@ config SYS_PPC_E500_DEBUG_TLB
- 	default 0 if ARCH_MPC8544
- 	default 2 if	ARCH_P1020	|| \
- 			ARCH_P1021	|| \
--			ARCH_P1024	|| \
- 			ARCH_P2020
- 	default 3 if	ARCH_P1010
- 	help
-diff --git a/arch/powerpc/cpu/mpc85xx/Makefile b/arch/powerpc/cpu/mpc85xx/Makefile
-index 9b7c02eae5f..5861f4bbe63 100644
---- a/arch/powerpc/cpu/mpc85xx/Makefile
-+++ b/arch/powerpc/cpu/mpc85xx/Makefile
-@@ -55,7 +55,6 @@ obj-$(CONFIG_ARCH_MPC8544) += mpc8544_serdes.o
- obj-$(CONFIG_ARCH_P1010)	+= p1010_serdes.o
- obj-$(CONFIG_ARCH_P1020)	+= p1021_serdes.o
- obj-$(CONFIG_ARCH_P1021)	+= p1021_serdes.o
--obj-$(CONFIG_ARCH_P1024)	+= p1021_serdes.o
- obj-$(CONFIG_ARCH_P2020)	+= p2020_serdes.o
- obj-$(CONFIG_ARCH_P2041) += p2041_serdes.o
- obj-$(CONFIG_ARCH_T4240) += t4240_serdes.o
-diff --git a/arch/powerpc/cpu/mpc8xxx/cpu.c b/arch/powerpc/cpu/mpc8xxx/cpu.c
-index 046ab063700..3840cb42b76 100644
---- a/arch/powerpc/cpu/mpc8xxx/cpu.c
-+++ b/arch/powerpc/cpu/mpc8xxx/cpu.c
-@@ -45,7 +45,6 @@ static struct cpu_type cpu_type_list[] = {
- 	CPU_TYPE_ENTRY(P1020, P1020, 2),
- 	CPU_TYPE_ENTRY(P1021, P1021, 2),
- 	CPU_TYPE_ENTRY(P1022, P1022, 2),
--	CPU_TYPE_ENTRY(P1024, P1024, 2),
- 	CPU_TYPE_ENTRY(P2010, P2010, 1),
- 	CPU_TYPE_ENTRY(P2020, P2020, 2),
- 	CPU_TYPE_ENTRY(P2040, P2040, 4),
-diff --git a/arch/powerpc/include/asm/processor.h b/arch/powerpc/include/asm/processor.h
-index 01228bee20f..6c274c9ceef 100644
---- a/arch/powerpc/include/asm/processor.h
-+++ b/arch/powerpc/include/asm/processor.h
-@@ -1033,7 +1033,6 @@
- #define SVR_P1020	0x80E400
- #define SVR_P1021	0x80E401
- #define SVR_P1022	0x80E600
--#define SVR_P1024	0x80E402
- #define SVR_P2010	0x80E300
- #define SVR_P2020	0x80E200
- #define SVR_P2040	0x821000
-diff --git a/board/nxp/p1_p2_rdb_pc/README b/board/nxp/p1_p2_rdb_pc/README
-index 5bf27816ab2..73226bd1a53 100644
---- a/board/nxp/p1_p2_rdb_pc/README
-+++ b/board/nxp/p1_p2_rdb_pc/README
-@@ -5,7 +5,6 @@ P1_P2_RDB_PC represents a set of boards including
-     P1020RDB-PC
-     P1020RDB-PD
-     P1021RDB-PC
--    P1024RDB
- 
- They have similar design of P1020RDB but have DDR3 instead of DDR2.
- 
-diff --git a/board/nxp/p1_p2_rdb_pc/ddr.c b/board/nxp/p1_p2_rdb_pc/ddr.c
-index 74c9c78c4e1..17138d92b0b 100644
---- a/board/nxp/p1_p2_rdb_pc/ddr.c
-+++ b/board/nxp/p1_p2_rdb_pc/ddr.c
-@@ -114,43 +114,6 @@ dimm_params_t ddr_raw_timing = {
- 	.refresh_rate_ps = 7800000,
- 	.tfaw_ps = 37500,
- };
--#elif	defined(CONFIG_TARGET_P1024RDB)
+ config TARGET_P4080DS
+ 	bool "Support P4080DS"
+ 	select PHYS_64BIT
+diff --git a/arch/powerpc/dts/Makefile b/arch/powerpc/dts/Makefile
+index e44d49cabdf..c603369e7cc 100644
+--- a/arch/powerpc/dts/Makefile
++++ b/arch/powerpc/dts/Makefile
+@@ -11,7 +11,6 @@ dtb-$(CONFIG_TARGET_P1010RDB_PA) += p1010rdb-pa.dtb p1010rdb-pa_36b.dtb
+ dtb-$(CONFIG_TARGET_P1010RDB_PB) += p1010rdb-pb.dtb p1010rdb-pb_36b.dtb
+ dtb-$(CONFIG_TARGET_P1020RDB_PC) += p1020rdb-pc.dtb p1020rdb-pc_36b.dtb
+ dtb-$(CONFIG_TARGET_P1020RDB_PD) += p1020rdb-pd.dtb
+-dtb-$(CONFIG_TARGET_P3041DS) += p3041ds.dtb
+ dtb-$(CONFIG_TARGET_P4080DS) += p4080ds.dtb
+ dtb-$(CONFIG_TARGET_P5040DS) += p5040ds.dtb
+ dtb-$(CONFIG_TARGET_SOCRATES) += socrates.dtb
+diff --git a/arch/powerpc/dts/p3041.dtsi b/arch/powerpc/dts/p3041.dtsi
+deleted file mode 100644
+index e34117b65a0..00000000000
+--- a/arch/powerpc/dts/p3041.dtsi
++++ /dev/null
+@@ -1,149 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
 -/*
-- * Samsung K4B2G0846C-HCH9
-- * The following timing are for "downshift"
-- * i.e. to use CL9 part as CL7
-- * otherwise, tAA, tRCD, tRP will be 13500ps
-- * and tRC will be 49500ps
+- * P3041 Silicon/SoC Device Tree Source (pre include)
+- *
+- * Copyright 2010 - 2015 Freescale Semiconductor Inc.
+- * Copyright 2019-2020 NXP
 - */
--dimm_params_t ddr_raw_timing = {
--	.n_ranks = 1,
--	.rank_density = 1073741824u,
--	.capacity = 1073741824u,
--	.primary_sdram_width = 32,
--	.ec_sdram_width = 0,
--	.registered_dimm = 0,
--	.mirrored_dimm = 0,
--	.n_row_addr = 15,
--	.n_col_addr = 10,
--	.n_banks_per_sdram_device = 8,
--	.edc_config = 0,
--	.burst_lengths_bitmask = 0x0c,
 -
--	.tckmin_x_ps = 1500,
--	.caslat_x = 0x3e << 4,	/* 5,6,7,8,9 */
--	.taa_ps = 13125,
--	.twr_ps = 15000,
--	.trcd_ps = 13125,
--	.trrd_ps = 6000,
--	.trp_ps = 13125,
--	.tras_ps = 36000,
--	.trc_ps = 49125,
--	.trfc_ps = 160000,
--	.twtr_ps = 7500,
--	.trtp_ps = 7500,
--	.refresh_rate_ps = 7800000,
--	.tfaw_ps = 30000,
+-/dts-v1/;
+-
+-/include/ "e500mc_power_isa.dtsi"
+-
+-/ {
+-	compatible = "fsl,P3041";
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-	interrupt-parent = <&mpic>;
+-
+-	cpus {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		cpu0: PowerPC,e500mc@0 {
+-			device_type = "cpu";
+-			reg = <0>;
+-			fsl,portid-mapping = <0x80000000>;
+-		};
+-		cpu1: PowerPC,e500mc@1 {
+-			device_type = "cpu";
+-			reg = <1>;
+-			fsl,portid-mapping = <0x40000000>;
+-		};
+-		cpu2: PowerPC,e500mc@2 {
+-			device_type = "cpu";
+-			reg = <2>;
+-			fsl,portid-mapping = <0x20000000>;
+-		};
+-		cpu3: PowerPC,e500mc@3 {
+-			device_type = "cpu";
+-			reg = <3>;
+-			fsl,portid-mapping = <0x10000000>;
+-		};
+-	};
+-
+-	soc: soc@ffe000000 {
+-		ranges = <0x00000000 0xf 0xfe000000 0x1000000>;
+-		reg = <0xf 0xfe000000 0 0x00001000>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		device_type = "soc";
+-		compatible = "simple-bus";
+-
+-		mpic: pic@40000 {
+-			interrupt-controller;
+-			#address-cells = <0>;
+-			#interrupt-cells = <4>;
+-			reg = <0x40000 0x40000>;
+-			compatible = "fsl,mpic", "chrp,open-pic";
+-			device_type = "open-pic";
+-			clock-frequency = <0x0>;
+-		};
+-
+-		espi0: spi@110000 {
+-			compatible = "fsl,mpc8536-espi";
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <0x110000 0x1000>;
+-			fsl,espi-num-chipselects = <4>;
+-			status = "disabled";
+-		};
+-
+-		usb0: usb@fe210000 {
+-			compatible = "fsl-usb2-mph";
+-			reg = <0x210000 0x1000>;
+-			phy_type = "utmi";
+-		};
+-
+-		usb1: usb@fe211000 {
+-			compatible = "fsl-usb2-dr";
+-			reg = <0x211000 0x1000>;
+-			phy_type = "utmi";
+-		};
+-
+-		sata: sata@220000 {
+-			compatible = "fsl,pq-sata-v2";
+-			reg = <0x220000 0x1000>;
+-			interrupts = <68 0x2 0 0>;
+-			sata-offset = <0x1000>;
+-			sata-number = <2>;
+-			sata-fpdma = <0>;
+-		};
+-
+-		esdhc: esdhc@114000 {
+-			compatible = "fsl,esdhc";
+-			reg = <0x114000 0x1000>;
+-			clock-frequency = <0>;
+-		};
+-		/include/ "qoriq-i2c-0.dtsi"
+-		/include/ "qoriq-i2c-1.dtsi"
+-	};
+-
+-	pcie@ffe200000 {
+-		compatible = "fsl,pcie-p3041", "fsl,pcie-fsl-qoriq";
+-		reg = <0xf 0xfe200000 0x0 0x1000>;   /* registers */
+-		law_trgt_if = <0>;
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		device_type = "pci";
+-		bus-range = <0x0 0xff>;
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8000000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xe0000000 0xc 0x00000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
+-
+-	pcie@ffe201000 {
+-		compatible = "fsl,pcie-p3041", "fsl,pcie-fsl-qoriq";
+-		reg = <0xf 0xfe201000 0x0 0x1000>;   /* registers */
+-		law_trgt_if = <1>;
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		device_type = "pci";
+-		bus-range = <0x0 0xff>;
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8010000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xe0000000 0xc 0x20000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
+-
+-	pcie@ffe202000 {
+-		compatible = "fsl,pcie-p3041", "fsl,pcie-fsl-qoriq";
+-		reg = <0xf 0xfe202000 0x0 0x1000>;   /* registers */
+-		law_trgt_if = <2>;
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		device_type = "pci";
+-		bus-range = <0x0 0xff>;
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8020000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xe0000000 0xc 0x40000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
+-
+-	pcie@ffe203000 {
+-		compatible = "fsl,pcie-p3041", "fsl,pcie-fsl-qoriq";
+-		reg = <0xf 0xfe203000 0x0 0x1000>;   /* registers */
+-		law_trgt_if = <3>;
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		device_type = "pci";
+-		bus-range = <0x0 0xff>;
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8030000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xe0000000 0xc 0x60000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
 -};
- #else
- #error Missing raw timing data for this board
- #endif
-diff --git a/doc/README.mpc85xx-sd-spi-boot b/doc/README.mpc85xx-sd-spi-boot
-index c382e9bf7aa..ace40b2c7cf 100644
---- a/doc/README.mpc85xx-sd-spi-boot
-+++ b/doc/README.mpc85xx-sd-spi-boot
-@@ -63,6 +63,5 @@ P1020RDB	config_ddr3_1gb_p1_p2_rdb_pc_800M.dat
- P1010RDB	config_ddr3_1gb_p1010rdb_800M.dat
- P1021RDB	config_ddr3_1gb_p1_p2_rdb_pc_800M.dat
- P1022DS		config_ddr3_2gb_p1022ds.dat
--P1024RDB	config_ddr3_1gb_p1_p2_rdb_pc_667M.dat
- P1020UTM	config_ddr3_1gb_p1_p2_rdb_pc_800M.dat
- P1020MBG	config_ddr3_1gb_p1_p2_rdb_pc_800M.dat
+diff --git a/arch/powerpc/dts/p3041ds.dts b/arch/powerpc/dts/p3041ds.dts
+deleted file mode 100644
+index 069dae3b85b..00000000000
+--- a/arch/powerpc/dts/p3041ds.dts
++++ /dev/null
+@@ -1,158 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
+-/*
+- * P3041DS Device Tree Source
+- *
+- * Copyright 2010 - 2015 Freescale Semiconductor Inc.
+- * Copyright 2019-2020 NXP
+- */
+-
+-/include/ "p3041.dtsi"
+-
+-/ {
+-	model = "fsl,P3041DS";
+-	compatible = "fsl,P3041DS";
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-	interrupt-parent = <&mpic>;
+-
+-	aliases{
+-		phy_rgmii_0 = &phy_rgmii_0;
+-		phy_rgmii_1 = &phy_rgmii_1;
+-		phy_sgmii_1c = &phy_sgmii_1c;
+-		phy_sgmii_1d = &phy_sgmii_1d;
+-		phy_sgmii_1e = &phy_sgmii_1e;
+-		phy_sgmii_1f = &phy_sgmii_1f;
+-		phy_xgmii_1 = &phy_xgmii_1;
+-		phy_xgmii_2 = &phy_xgmii_2;
+-		emi1_rgmii = &hydra_mdio_rgmii;
+-		emi1_sgmii = &hydra_mdio_sgmii;
+-		emi2_xgmii = &hydra_mdio_xgmii;
+-		spi0 = &espi0;
+-	};
+-
+-	soc: soc@ffe000000 {
+-		ranges = <0x00000000 0xf 0xfe000000 0x1000000>;
+-		reg = <0xf 0xfe000000 0 0x00001000>;
+-		fman@400000{
+-			ethernet@e0000 {
+-				phy-handle = <&phy_sgmii_1c>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@e2000 {
+-				phy-handle = <&phy_sgmii_1d>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@e4000 {
+-				phy-handle = <&phy_sgmii_1e>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@e6000 {
+-				phy-handle = <&phy_sgmii_1f>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@e8000 {
+-				phy-handle = <&phy_rgmii_1>;
+-				phy-connection-type = "rgmii";
+-			};
+-
+-			ethernet@f0000 {
+-				phy-handle = <&phy_xgmii_1>;
+-				phy-connection-type = "xgmii";
+-			};
+-
+-			hydra_mdio_xgmii: mdio@f1000 {
+-				status = "disabled";
+-
+-				phy_xgmii_1: ethernet-phy@4 {
+-					compatible = "ethernet-phy-ieee802.3-c45";
+-					reg = <0x4>;
+-				};
+-
+-				phy_xgmii_2: ethernet-phy@0 {
+-					compatible = "ethernet-phy-ieee802.3-c45";
+-					reg = <0x0>;
+-				};
+-			};
+-		};
+-	};
+-
+-	lbc: localbus@ffe124000 {
+-		reg = <0xf 0xfe124000 0 0x1000>;
+-		ranges = <0 0 0xf 0xe8000000 0x08000000
+-			  2 0 0xf 0xffa00000 0x00040000
+-			  3 0 0xf 0xffdf0000 0x00008000>;
+-
+-		board-control@3,0 {
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			compatible = "fsl,p3041ds-fpga", "fsl,fpga-ngpixis";
+-			reg = <3 0 0x30>;
+-			ranges = <0 3 0 0x30>;
+-
+-			mdio-mux-emi1 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				compatible = "mdio-mux-mmioreg", "mdio-mux";
+-				mdio-parent-bus = <&mdio0>;
+-				reg = <9 1>;
+-				mux-mask = <0x78>;
+-
+-				hydra_mdio_rgmii: rgmii-mdio@8 {
+-					#address-cells = <1>;
+-					#size-cells = <0>;
+-					reg = <8>;
+-					status = "disabled";
+-
+-					phy_rgmii_0: ethernet-phy@0 {
+-						reg = <0x0>;
+-					};
+-
+-					phy_rgmii_1: ethernet-phy@1 {
+-						reg = <0x1>;
+-					};
+-				};
+-
+-				hydra_mdio_sgmii: sgmii-mdio@28 {
+-					#address-cells = <1>;
+-					#size-cells = <0>;
+-					reg = <0x28>;
+-					status = "disabled";
+-
+-					phy_sgmii_1c: ethernet-phy@1c {
+-						reg = <0x1c>;
+-					};
+-
+-					phy_sgmii_1d: ethernet-phy@1d {
+-						reg = <0x1d>;
+-					};
+-
+-					phy_sgmii_1e: ethernet-phy@1e {
+-						reg = <0x1e>;
+-					};
+-
+-					phy_sgmii_1f: ethernet-phy@1f {
+-						reg = <0x1f>;
+-					};
+-				};
+-			};
+-		};
+-	};
+-};
+-
+-&espi0 {
+-	status = "okay";
+-	flash@0 {
+-		compatible = "jedec,spi-nor";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		reg = <0>;
+-		/* input clock */
+-		spi-max-frequency = <10000000>;
+-	};
+-};
+-
+-/include/ "p3041si-post.dtsi"
+diff --git a/arch/powerpc/dts/p3041si-post.dtsi b/arch/powerpc/dts/p3041si-post.dtsi
+deleted file mode 100644
+index a3e8088d25b..00000000000
+--- a/arch/powerpc/dts/p3041si-post.dtsi
++++ /dev/null
+@@ -1,43 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
+-/*
+- * P3041 Silicon/SoC Device Tree Source (post include)
+- *
+- * Copyright 2011 - 2015 Freescale Semiconductor Inc.
+- * Copyright 2020 NXP
+- *
+- */
+-
+-&soc {
+-
+-/include/ "qoriq-clockgen1.dtsi"
+-/include/ "qoriq-gpio-0.dtsi"
+-/include/ "qoriq-sec4.2-0.dtsi"
+-
+-/* include used FMan blocks */
+-/include/ "qoriq-fman-0.dtsi"
+-/include/ "qoriq-fman-0-1g-0.dtsi"
+-/include/ "qoriq-fman-0-1g-1.dtsi"
+-/include/ "qoriq-fman-0-1g-2.dtsi"
+-/include/ "qoriq-fman-0-1g-3.dtsi"
+-/include/ "qoriq-fman-0-1g-4.dtsi"
+-/include/ "qoriq-fman-0-10g-0.dtsi"
+-	fman@400000 {
+-		enet0: ethernet@e0000 {
+-		};
+-
+-		enet1: ethernet@e2000 {
+-		};
+-
+-		enet2: ethernet@e4000 {
+-		};
+-
+-		enet3: ethernet@e6000 {
+-		};
+-
+-		enet4: ethernet@e8000 {
+-		};
+-
+-		enet5: ethernet@f0000 {
+-		};
+-	};
+-};
+diff --git a/board/nxp/common/Makefile b/board/nxp/common/Makefile
+index 46e43a4e45a..ba1aa084aa4 100644
+--- a/board/nxp/common/Makefile
++++ b/board/nxp/common/Makefile
+@@ -49,7 +49,6 @@ obj-$(CONFIG_DEEP_SLEEP)		+= mpc85xx_sleep.o
+ endif
+ 
+ 
+-obj-$(CONFIG_TARGET_P3041DS)		+= ics307_clk.o
+ obj-$(CONFIG_TARGET_P4080DS)		+= ics307_clk.o
+ obj-$(CONFIG_TARGET_P5040DS)		+= ics307_clk.o
+ ifeq ($(CONFIG_$(PHASE_)POWER_LEGACY),y)
+@@ -67,7 +66,6 @@ obj-$(CONFIG_EMC2305)              += emc2305.o
+ 
+ # deal with common files for P-series corenet based devices
+ obj-$(CONFIG_TARGET_P2041RDB)	+= p_corenet/
+-obj-$(CONFIG_TARGET_P3041DS)	+= p_corenet/
+ obj-$(CONFIG_TARGET_P4080DS)	+= p_corenet/
+ obj-$(CONFIG_TARGET_P5040DS)	+= p_corenet/
+ 
 -- 
 2.47.3
 
