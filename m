@@ -4,156 +4,164 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12883CA601F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 19:55:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E048CA601E
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 20:09:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D1CCC815CE;
-	Fri,  9 Oct 2026 19:55:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 09B7F81471;
+	Fri,  9 Oct 2026 20:09:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nDjN9IutrjSo; Fri,  9 Oct 2026 19:55:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E52EE815D9
+ id BV8cJVuuzNRz; Fri,  9 Oct 2026 20:09:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D338081112
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791575702;
-	b=P8GsnN6p/HObkkfFNEaIVKSnO00oIn/pWMq/Pth3/8FalcWEjA1OaUjPPjeQRn/gVcFa
-	 T4xiKS5xB9V7kjN5Gzn/mhuO6srHCuAnx4qaT+YZuUjF8MpW7dE+BZSKpQjRLm1i9UwFh
-	 Q20VL+rWFHpWFPylmzvQ/L+Tg3uTgWQyuQDUG2KEz8YfD5ydCJz7ANAonHRLX1soCT+O7
-	 hIoALwTWG3keKQD8KHs8Ko1RgLaUC7PUg30lMacQ5cMHVMWV9obA9r1xEZ7aO0M4ayfnQ
-	 3FixoS6DVs+xlptWaF2G6lzQg5ryD9bz4lK5osxhQGhuDgdjwoWevTiY3NYSopjV9BQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791576569;
+	b=pKxopm6k8ggGfKbCpCUTCRv9qM57XH0uIUUGCs6iNirobL66YEIukD2u8ScXrD0NYl8o
+	 4Uz6maUDwCV4pRCD4Qi2v9AV+G29EPJbGGBhhdQvRchRBo6/V/3V4xMdRsfHH0tSVW560
+	 8OFPj9DyhrZVJEjISopLpWDwe1YryF6sBPY2SZFp3ANdNPi3hOAZ81TDZMIlbKRZ9Crk+
+	 bBsrw1kCg3BVPFWVGzmIfANGEB2AdGbNXSgiAo+thodtgcheb8hZS2XlBuxsp0cNp4QFy
+	 ZswXFhD6Xsu5udxBWVaDa777iP1XyYV+04QR1BS6DzAq0l9n+MPyFDdI8C3URvu5yXQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791575702;
+	c=relaxed/relaxed; t=1791576569;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=DlwP4Qkmox37ajs7nONTcdpjPHsgv0lwZiqbX9k3sf4=;
-	b=SfWhj2FSBUiaA6QjDEUxku6z1SKG+gL7bc+qHfuOpSwwM02jPsBuGiIuULgdE7Hvq7NN
-	 QVyQxjErOFmN4ykfD+9cVwNCI7u84m/avkCeLyDdGxgZQBG2DHc3DYIBkfUCm1LSvenD+
-	 Np8HiS1K0d00WxRaxLJRI7lw6jZoGib1Wtr5X7LDQasz2onHb/97GOEXeNRRGzdQ7w6Wz
-	 LWIYToebAlk/DyAY4Ca2nBUYI88iibBO8XIokTSRV9zurBjLpwm4QWQ5SpA7W0Oy0uakx
-	 k9027/SBEggbAnzV5jmZbVo5Q1jIUjWCAsiXOmdVaj5gBTunR71CPVzTsKyczka2DDA==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=0Q5h9aulu9Yn+ELTwduNFIWIoxhVvZoYMfTwsTvlK38=;
+	b=PliITOY+ZBV+0x7dAQ2fkM1ycuCdG2eiL2AysFgP8baybkEVx5rULgeJvs/wCuwFqsul
+	 YNBSLmogKeb2FGb+ZxR8RfPzoLSTrMlxU0N0ZE+2BI8tTAsUbPuI+l1m+7j0lj65+JGbf
+	 JSlxPMpx+b/CjNdd8SzI3fBKU3+kEWcP4GvLwEdtghDo+jJudPOT6O6wG9CYxlInHFOn8
+	 OTJo89Lw/93G9xK+mEkqHZvWCZTx9AabNjsnP74iaR8O0Du46r1rfv6m/7hTo2f+isaC7
+	 doD5t7x8InwcecZMp4gFG/W2vNxTAWn/tP8SpF2MSlxOYIRUTvUKaA9zmCN9wOzcgTA==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=mainlining.org;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=qf2uSze0;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=26IFRhpo;
+	dmarc=none header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Z10DDkpc;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791575702;
-	bh=DlwP4Qkmox37ajs7nONTcdpjPHsgv0lwZiqbX9k3sf4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=lWwKrOdPkAmVUhYk+lfTx1Rl5OY6D+01H8eif/ZUchYw5wjburNY4IqFm+Da6fwbz
-	 UbjZM4c8nc1VkXRsPYeUoOvTdVAqwMxGNV7GDRYpWP5kdUxJFCefQgnRsPLbUmb1Qj
-	 xs+gmdDTudJ6/2pJjemA+mXbYkNp20LCdR9FsebA/KAtvXqMWZJA9iTa7EXoOLxHIk
-	 mYbZHo9hIJ2LRpqDbaWQK0befb5hZ6ONIIAjLz8sIsJ7ABlDNUKX2k+ohphRHLISBZ
-	 pc5X8CYDyQhubb25fvOLK/sSyD0pY5MOfFQ6gjEwDiEtjhksXFd+tQt11wDBPQEdkj
-	 6DiJ9aol7beYA==
+	d=lists.u-boot-project.org; s=default; t=1791576569;
+	bh=0Q5h9aulu9Yn+ELTwduNFIWIoxhVvZoYMfTwsTvlK38=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=LXx21BJ1Q2WInNFm2lXDxhKKEItDVNdEHd4JSM9Bc6AabopYVN2yNzVS5yznp3k54
+	 yLorwP6cKPV9n56Anky3gFn71rVNUhtgkkGgNhuxwzm7vCeGyIPs+Z3/sc1tG1ApGt
+	 eDBAvWIov9ZBfX2CncSJSohFQEE0YzSni5vBz8jf5CKKDdLijscUNCLilVtYmeXWDT
+	 03+6/lZa9qkCR7KuNT4FmIi8FrHJZhz+rpLDR81ffC8exLUbRXw0abGgnMU4mOmF0F
+	 pEaZgrpg0pQ4/ZS1mEqbDjwrAVut1e9GBJ/UmMUi8eQrmSXhk8zikxctHzwDBNXWcK
+	 g0hehGcnBMidA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E52EE815D9;
-	Fri,  9 Oct 2026 19:55:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D338081112;
+	Fri,  9 Oct 2026 20:09:28 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with UTF8SMTP id 1AA50317
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:28 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 6B8E7380
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 20:09:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with UTF8SMTP id 0C93C8149C
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:28 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 681498110D
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 20:09:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024)
- with UTF8SMTP id 61pRu3e4pNYQ for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 19:40:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 10D2B814C5
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791574826;
- b=ivSappcChqWBCw2j3/V78Ah08Y5cbY05p76RcVrkRRXq5Kwwk0VZ8+/qO3Xdr0w5nNpK
- X4sIYkbflsBrhCIp2ke6RYeWrF6UMEW5118tkR6PuXawHG32jdqLw+eRIzzaIXKflvs4L
- /CQAC1X4qWvHnJg1j/muzdlSZLQkQtZg2RLinHNglOwssV8OHcyZDQxsFEvQLBveQHGKx
- 7tgrd/njeVziwcyKs9Hbt8zJAH42/ahbkfgoB/40WJpBm3yJNGISrAkiEwJSaR/8pA/wa
- M/KI8w8D4HbNj4ENr8TxaypEv5WPyUwge5YWn3q6kwiT6nzZS9tjPOF7NdbDrNaM4rw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791574826;
- h=Received-SPF:DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:
- Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding;
- bh=DlwP4Qkmox37ajs7nONTcdpjPHsgv0lwZiqbX9k3sf4=;
- b=JvIa+i8pzbfDNBUpko4Qqt9u9gsvnnsIaRSc/34+vPodHxF8YFgWfWy4YySHkqSP5AzN
- 4ko0tiOxLx98TJ8NoAITnT3Ni3MSt2my7+tKSYBGXEjS/vuKhB6x/SuP7ICyepjWGAHhl
- 0PMycYMfVuoLK1YcY6opy02502D/Cf8UPgWN75E3LGN6LA5y7605WUj4DcgwOL/0vQZZ1
- jRoIqXORjH5C7u0DNCz9e9Qy2v4aCKIfdXxN3a0Lle6dU+bAXI8MUsqOUXbY0jKLTKSqf
- ziILTHiRXd0d5FrWnFJPW5RAYqBJFYlTiQ0okHnFifG1B38eLucJJC0nmBK8YxsB6Fg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=mainlining.org;
- dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
- header.s=202507r header.b=qf2uSze0; 
- dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=26IFRhpo; 
- arc=none smtp.remote-ip=5.75.144.95
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
- helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=mainlining.org
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QxXvTjdH1bxR for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 20:09:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 99E9D81103
 Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org
- header.a=rsa-sha256 header.s=202507r header.b=qf2uSze0; 
- dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=26IFRhpo
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- by smtp1.osuosl.org (Postfix) with UTF8SMTPS id 10D2B814C5
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
- c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1791574625; bh=DlwP4Qkmox37ajs7nONTcdp
- jPHsgv0lwZiqbX9k3sf4=; b=qf2uSze0afDh04vSLiZ+86mMo1k11QLlTgo5LMS9zrYOlrFLSC
- wntuFzViPOcN6hzgM/ykXUCaYvVAJ9e8DYuiMwa6MVefVVRkQGt0YfHYvjgVooVCf87A00l0PBp
- HbZbL6jE19PvjEswmAYMBSY5LrowuV7XqA6dcXiNksEZooMAThU27dxedVUueznkBpHP/kKjWKX
- rgqNoYMH8UX6p4GO4biwHyoMSp1Cdq+3S1lVQxVKXBbJOCr0IjCCaFOkKy4EtPvvqT5ZSzp3M5s
- em/+Pdrgua9auxvd30EIl/KDysQPmJQqd8X82AnH5T7dNwVMBDNuM3b8g4ZR2Y6IlTg==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
- c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1791574625; bh=DlwP4Qkmox37ajs7nONTcdp
- jPHsgv0lwZiqbX9k3sf4=; b=26IFRhpoyw5qtLW5w5nAmcRUS2xRz3d81GiiZVka/7WuQbjsXD
- Od1x5N9xSKQ1MfqnpSGu3m5vyYwQXcIrcQCw==;
-From: Bradley Morgan <brads@mainlining.org>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.u-boot-project.org
-Cc: Bradley Morgan <brads@mainlining.org>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- =?UTF-8?q?Marek=20Moj=C3=ADk?= <marek.mojik@nic.cz>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Alexey Charkov <alchark@flipper.net>, Anshul Dalal <anshuld@ti.com>,
- Daniel Golle <daniel@makrotopia.org>, Fabio Estevam <festevam@gmail.com>,
- Gaurav Jain <gaurav.jain@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- James Hilliard <james.hilliard1@gmail.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Johan Jonker <jbx6244@gmail.com>, Lukasz Majewski <lukma@nabladev.com>,
- Marek Vasut <marek.vasut+usb@mailbox.org>, Mario Six <mario.six@gdsys.cc>,
- Michael Walle <mwalle@kernel.org>, Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Pengpeng Hou <hppiscas@163.com>, Priyanka Jain <priyanka.jain@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Stefano Babic <sbabic@nabladev.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Torsten Rupp <torsten.rupp@8tronix.de>, Vincent Jardin <vjardin@free.fr>,
- Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 02/26] board: powerpc: Remove MPC837XERDB support
-Date: Fri,  9 Oct 2026 19:36:40 +0000
-Message-ID: <20261009193704.13061-3-brads@mainlining.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261009193704.13061-1-brads@mainlining.org>
-References: <20261009193704.13061-1-brads@mainlining.org>
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::333"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791576566;
+ b=QG5oCcVFl4H/Fa+HsheV3YQ1B17KdgPH/EeOvONHh3z8k7s1cXxvw2P3NZCLReuJEFGw
+ nWdguKiAzVAENzUnj3J6IFzEBoQ+9YY4uNlZO0QuqxwDEDYUjofQ+PJDezfbm+9fn4DYA
+ ywOxNqRCsWf5Pd6a26SoQPvizijRg6atYGjP6UNss6hS8c9qLcm1oovu4aQiAMn6cULyf
+ 5oKh+kSs4KtfD4EadK69xdLyCBSTZXMgE622DHKwW4dyp+cviun6TzhQZn6cO8K2jM+uR
+ RzUdE3BKj98ubWqrnGfHY9cXZi+Vj4L+E1NBnv2h0AdYLPWBJDmS6Gg9zS9TPjrUuaQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791576566;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding;
+ bh=0Q5h9aulu9Yn+ELTwduNFIWIoxhVvZoYMfTwsTvlK38=;
+ b=lxmObti7wH9sdsWcV8hdN2l78+TNGgTifuvOoqXTiGeNatEqbdAoxBQ3DUzBsYNQOn0E
+ iu83Gm9Ux2AmJcHOpjhuK5SXx10NZMwyDzG4jsAn/YEhi/puRSkHjKN/IKqJGdouKWF4e
+ ScBRbA1QddH6zBT4ENhvduKL4gkka9JDhZc09/uVZCt6gL5uVxD1DhhbhpMJoWQ3NaMRs
+ gOD+L85M0e+sNCuD6J4PVTqIwTCK4sl1dqR4kAvgrVgJTWn8YsQlBWpUjBYZ2aB/Rd3Yy
+ KgKaD8n/Sc6v0oJWDhSgNesmj1eHCOv5wg0NWvcaiq6l/FfHoHnzN36TztKaSGY05nQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=none header.from=baylibre.com;
+ dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=Z10DDkpc; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::333"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::333; helo=mail-ot1-x333.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=Z10DDkpc
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 99E9D81103
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 20:09:24 +0000 (UTC)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-824329dc1ecso148174a34.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 13:09:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1791576564; x=1792181364;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=0Q5h9aulu9Yn+ELTwduNFIWIoxhVvZoYMfTwsTvlK38=;
+ b=Z10DDkpcqCIOK0JzDidNs1Gp3mIfA+a2xr9G0kFeAyaWEcyr2+vtYOqgV4syXGgWZD
+ Q6fbgoocbbeq8VfxhyL2/Zu8rUq+83eCGpH5VHMK/gbhb9AyW0njKYYbCguh5kGNmM34
+ m9Y43rPiSV8cpoJVE2vrzejtF/n608kDwQZAXwd23ZgyZtEFiq+4PS5yJpfRX0BeNN5I
+ 5ggND/bIxPVgTZLgZ9aJrn2AWJ1Y4jGAc1EP8t802TL7nx2KLxz7KnBjGnLZFqmfZV+P
+ BANS9AaFPpWuSj2zRI/9OXszyh2rWu3VU2ChiW45UeYo4sPsOzmlE09h9ZR1P2PyrwkP
+ oYEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791576564; x=1792181364;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=0Q5h9aulu9Yn+ELTwduNFIWIoxhVvZoYMfTwsTvlK38=;
+ b=IllY/t7S60PLSt6JHu1tGk1vmvTaLrdt7BKGrPVCPM99Z4ODCrOn3znAsv7+Ry7juc
+ C0fszwCWrkNodToU0w8Pg1H5knzZY1ZJRMHrlhDx2WPxAz5BKHrqK/FzZa4JBioxvAjO
+ PpdGOxynGh++PO6bGhqJNhYtIFU28GZM4KwI7DKoMwChyCnmdb72vxRDVHtcnk6u4K8O
+ kGWwG6c0zBOM5HJyie9upTCquuganNkAtAqiILfgkjB5VzZccVWuAZarf8pOC1+qFDH0
+ Ys9XshLfXGKEfBiU1QKWjKYvYW/t0qD2xs3o1xKwrA87taoIAX37l6oPs9inMAVhS1cO
+ T0hw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByiJi+2cGpDqU4zkdNdHDXhJKIZ5HvZbeOgyjaZOk7EFe8HkpyWV1zAur9U2QSBtlO49phzbSs=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lQcCgGZdWhTZHOHAYib61w7kdx5euBQ18V5uwHKZuIEKvO1/Cx
+ UX13R4X9HucUYBJVJ9g/MoV+3r24kW30SrI8f630zIfk+jlBk7PnDpEEHL1FNubyauA=
+X-Gm-Gg: AYBFou1JN7/YjwTtOjEfAdKTSPNlV/HNbqnLiaASDpoLmK4phkLUM76YNpAw0WP+i+p
+ 75LWYKFOFrgMZklJ4wq+NYdLyDl7+uaWw8GrDODwWK7g9XH2L7b0goAzJdNIQuGo3VweStZj8sA
+ K+yqoOHM8Ba6RvEbSFeZb4Ub2VVQZqoEuqXfNI7Oal94+jRJQlFcsCWSNVfPBNF50oKj7X2f48M
+ yKqnNyoiMR05XkvYsHc5jN10hkfkv0zzIg7CoE81inY8orZLCUN/UZ3MOQ5+9++2l+Vt/0cUATZ
+ CIlvLatUz27G9/zrKHlbZdV6TdYs7p52WDfVPJX2HxOn/zotH8mAk3OTVVphty9qt8qya3ddnOR
+ +HRVscCEtDxNU+tJqpgWcu9xxSNEnA5aQ1+HxoFkoqF4CslErNVEWhb+io/G30+m9RGF9bhLknL
+ op6mZfI5zLJQyY/Gzn07VuUd4Z4/eaND7yLMaO98231ax8cu4kH8U9cnZpO3vALrVRl0IsMesQ
+X-Received: by 2002:a05:6830:6995:b0:80b:95aa:5c2a with SMTP id
+ 46e09a7af769-8309506c076mr2471268a34.9.1791576563958; 
+ Fri, 09 Oct 2026 13:09:23 -0700 (PDT)
+Received: from freyr.lan ([2600:8803:e7e4:500:29bd:56f6:5ae7:35d2])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-83039d385dcsm2718388a34.21.2026.10.09.13.09.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 Oct 2026 13:09:23 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: David Lechner <dlechner@baylibre.com>, u-boot@lists.u-boot-project.org,
+ GSS_MTK_Uboot_upstream@mediatek.com,
+ Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>
+Subject: [GIT PULL] Please pull mediatek-for-main-2026-10-09 into main
+Date: Fri,  9 Oct 2026 15:04:46 -0500
+Message-ID: <20261009200920.2438383-1-dlechner@baylibre.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 09 Oct 2026 19:54:04 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -167,1045 +175,95 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-NXP marks the MPC8377ERDB as archived and no longer manufactured. Drop this target and its board files.
+The following changes since commit 0a55b098d6f5f6bafa84fc2f18b433dd167bf729:
 
-Signed-off-by: Bradley Morgan <brads@mainlining.org>
----
- arch/powerpc/cpu/mpc83xx/Kconfig    |   7 -
- arch/powerpc/dts/Makefile           |   1 -
- arch/powerpc/dts/mpc8379erdb.dts    | 153 ------------------
- board/nxp/mpc837xerdb/Kconfig       |  15 --
- board/nxp/mpc837xerdb/MAINTAINERS   |   6 -
- board/nxp/mpc837xerdb/Makefile      |   6 -
- board/nxp/mpc837xerdb/README        |  97 -----------
- board/nxp/mpc837xerdb/mpc837xerdb.c | 242 ----------------------------
- configs/MPC837XERDB_defconfig       | 193 ----------------------
- include/configs/MPC837XERDB.h       | 218 -------------------------
- 10 files changed, 938 deletions(-)
- delete mode 100644 arch/powerpc/dts/mpc8379erdb.dts
- delete mode 100644 board/nxp/mpc837xerdb/Kconfig
- delete mode 100644 board/nxp/mpc837xerdb/MAINTAINERS
- delete mode 100644 board/nxp/mpc837xerdb/Makefile
- delete mode 100644 board/nxp/mpc837xerdb/README
- delete mode 100644 board/nxp/mpc837xerdb/mpc837xerdb.c
- delete mode 100644 configs/MPC837XERDB_defconfig
- delete mode 100644 include/configs/MPC837XERDB.h
+  Merge patch series "rng: airoha: add support for the Airoha TRNG" (2026-10-08 10:41:43 -0600)
 
-diff --git a/arch/powerpc/cpu/mpc83xx/Kconfig b/arch/powerpc/cpu/mpc83xx/Kconfig
-index 0dc72c87423..088283d646c 100644
---- a/arch/powerpc/cpu/mpc83xx/Kconfig
-+++ b/arch/powerpc/cpu/mpc83xx/Kconfig
-@@ -24,12 +24,6 @@ config TARGET_CMPCPRO
- 	bool "Support CMPCPRO board from CSSI"
- 	select ARCH_MPC832X
- 
--config TARGET_MPC837XERDB
--	bool "Support MPC837XERDB"
--	select ARCH_MPC837X
--	select BOARD_EARLY_INIT_F
--	select SYS_83XX_DDR_USES_CS0
--
- config TARGET_KMETER1
- 	bool "Support kmeter1"
- 	select VENDOR_KM
-@@ -208,7 +202,6 @@ config FSL_SERDES
- config NEVER_ASSERT_ODT_TO_CPU
- 	bool "Never assert ODT to internal IOs"
- 
--source "board/nxp/mpc837xerdb/Kconfig"
- source "board/gdsys/mpc8308/Kconfig"
- source "board/cssi/cmpcpro/Kconfig"
- 
-diff --git a/arch/powerpc/dts/Makefile b/arch/powerpc/dts/Makefile
-index 2540684307e..01191273269 100644
---- a/arch/powerpc/dts/Makefile
-+++ b/arch/powerpc/dts/Makefile
-@@ -7,7 +7,6 @@ dtb-$(CONFIG_TARGET_KMOPTI2) += kmopti2.dtb
- dtb-$(CONFIG_TARGET_KMSUPX5) += kmsupc5.dtb kmsupm5.dtb
- dtb-$(CONFIG_TARGET_KMTEGR1) += kmtegr1.dtb
- dtb-$(CONFIG_TARGET_KMTEPR2) += kmtepr2.dtb
--dtb-$(CONFIG_TARGET_MPC837XERDB) += mpc8379erdb.dtb
- dtb-$(CONFIG_TARGET_P1010RDB_PA) += p1010rdb-pa.dtb p1010rdb-pa_36b.dtb
- dtb-$(CONFIG_TARGET_P1010RDB_PB) += p1010rdb-pb.dtb p1010rdb-pb_36b.dtb
- dtb-$(CONFIG_TARGET_P1020RDB_PC) += p1020rdb-pc.dtb p1020rdb-pc_36b.dtb
-diff --git a/arch/powerpc/dts/mpc8379erdb.dts b/arch/powerpc/dts/mpc8379erdb.dts
-deleted file mode 100644
-index 3db5ececaec..00000000000
---- a/arch/powerpc/dts/mpc8379erdb.dts
-+++ /dev/null
-@@ -1,153 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+ OR X11
--/*
-- * MPC8379E RDB Device Tree Source
-- *
-- * Copyright 2020 NXP
-- */
--
--/dts-v1/;
--
--/ {
--	compatible = "fsl,mpc8379erdb";
--
--	#address-cells = <1>;
--	#size-cells = <1>;
--
--	aliases {
--		serial0 = &serial0;
--		serial1 = &serial1;
--	};
--
--	cpus {
--		#address-cells = <1>;
--		#size-cells = <0>;
--
--		PowerPC,8379@0 {
--			device_type = "cpu";
--			reg = <0x0>;
--			d-cache-line-size = <32>;
--			i-cache-line-size = <32>;
--			d-cache-size = <32768>;
--			i-cache-size = <32768>;
--			timebase-frequency = <0>;
--			bus-frequency = <0>;
--			clock-frequency = <0>;
--		};
--	};
--
--	memory {
--		device_type = "memory";
--		reg = <0x00000000 0x10000000>;  // 256MB at 0
--	};
--
--	localbus@e0005000 {
--		#address-cells = <2>;
--		#size-cells = <1>;
--		compatible = "fsl,elbc", "simple-bus";
--		reg = <0xe0005000 0x1000>;
--		interrupts = <77 0x8>;
--		interrupt-parent = <&ipic>;
--	};
--
--	immr@e0000000 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		device_type = "soc";
--		compatible = "simple-bus";
--		ranges = <0 0xe0000000 0x00100000>;
--		reg = <0xe0000000 0x00000200>;
--		bus-frequency = <0>;
--
--		sdhc@2e000 {
--			compatible = "fsl,esdhc";
--			reg = <0x2e000 0x1000>;
--			bus-width = <0x4>;
--			clock-frequency = <0>;
--		};
--
--		serial0: serial@4500 {
--			cell-index = <0>;
--			device_type = "serial";
--			compatible = "fsl,ns16550", "ns16550";
--			reg = <0x4500 0x100>;
--			clock-frequency = <333333000>;
--			interrupts = <9 0x8>;
--			interrupt-parent = <&ipic>;
--			bootph-all;
--		};
--
--		serial1: serial@4600 {
--			cell-index = <1>;
--			device_type = "serial";
--			compatible = "fsl,ns16550", "ns16550";
--			reg = <0x4600 0x100>;
--			clock-frequency = <333333000>;
--			interrupts = <10 0x8>;
--			interrupt-parent = <&ipic>;
--			bootph-all;
--		};
--
--		ipic: interrupt-controller@700 {
--			compatible = "fsl,ipic";
--			interrupt-controller;
--			#address-cells = <0>;
--			#interrupt-cells = <2>;
--			reg = <0x700 0x100>;
--			device_type = "ipic";
--		};
--
--		usb@23000 {
--			compatible = "fsl-usb2-dr";
--			reg = <0x23000 0x1000>;
--			#address-cells = <1>;
--			#size-cells = <0>;
--			interrupt-parent = <&ipic>;
--			interrupts = <38 0x8>;
--			phy_type = "ulpi";
--		};
--
--		enet0: ethernet@24000 {
--			#address-cells = <1>;
--			#size-cells = <1>;
--			cell-index = <0>;
--			device_type = "network";
--			model = "eTSEC";
--			compatible = "fsl,etsec2";
--			reg = <0x24000 0x1000>;
--			ranges = <0x0 0x24000 0x1000>;
--			local-mac-address = [ 00 00 00 00 00 00 ];
--			interrupts = <32 0x8 33 0x8 34 0x8>;
--			phy-connection-type = "mii";
--			interrupt-parent = <&ipic>;
--			fixed-link = <1 0 1000 0 0>;
--			phy-handle = <&phy>;
--			fsl,magic-packet;
--
--			mdio@520 {
--				#address-cells = <1>;
--				#size-cells = <0>;
--				compatible = "fsl,etsec2-mdio";
--				reg = <0x520 0x20>;
--
--				phy: ethernet-phy@2 {
--					interrupt-parent = <&ipic>;
--					interrupts = <17 0x8>;
--					reg = <0x2>;
--					device_type = "ethernet-phy";
--				};
--			};
--		};
--
--		pci0: pci@e0008300 {
--	                #address-cells = <3>;
--	                #size-cells = <2>;
--	                #interrupt-cells = <1>;
--	                device_type = "pci";
--	                reg = <0x0 0xe0008300 0x0 0x00000fff>;
--			compatible = "fsl,mpc837x-pci";
--	                clock-frequency = <0>;
--		};
--
--	};
--
--};
-diff --git a/board/nxp/mpc837xerdb/Kconfig b/board/nxp/mpc837xerdb/Kconfig
-deleted file mode 100644
-index f11f6f5bfea..00000000000
---- a/board/nxp/mpc837xerdb/Kconfig
-+++ /dev/null
-@@ -1,15 +0,0 @@
--if TARGET_MPC837XERDB
--
--config PCIE
--	def_bool y
--
--config SYS_BOARD
--	default "mpc837xerdb"
--
--config SYS_VENDOR
--	default "nxp"
--
--config SYS_CONFIG_NAME
--	default "MPC837XERDB"
--
--endif
-diff --git a/board/nxp/mpc837xerdb/MAINTAINERS b/board/nxp/mpc837xerdb/MAINTAINERS
-deleted file mode 100644
-index cc0a6acd8c3..00000000000
---- a/board/nxp/mpc837xerdb/MAINTAINERS
-+++ /dev/null
-@@ -1,6 +0,0 @@
--MPC837XERDB BOARD
--M:	Sinan Akman <sinan@writeme.com>
--S:	Maintained
--F:	board/nxp/mpc837xerdb/
--F:	include/configs/MPC837XERDB.h
--F:	configs/MPC837XERDB_defconfig
-diff --git a/board/nxp/mpc837xerdb/Makefile b/board/nxp/mpc837xerdb/Makefile
-deleted file mode 100644
-index 4661e4cf232..00000000000
---- a/board/nxp/mpc837xerdb/Makefile
-+++ /dev/null
-@@ -1,6 +0,0 @@
--# SPDX-License-Identifier: GPL-2.0+
--#
--# (C) Copyright 2006
--# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
--
--obj-y += mpc837xerdb.o
-diff --git a/board/nxp/mpc837xerdb/README b/board/nxp/mpc837xerdb/README
-deleted file mode 100644
-index 12df2f2e756..00000000000
---- a/board/nxp/mpc837xerdb/README
-+++ /dev/null
-@@ -1,97 +0,0 @@
--Freescale MPC837xE-RDB Board
-------------------------------------------
--
--1.	Board Description
--
--	The MPC837xE-RDB are reference boards featuring the Freescale MPC8377E,
--	MPC8378E, and the MPC8379E processors in a Mini-ITX form factor.
--
--	The MPC837xE-RDB's have the following common features:
--
--	A) 256-MBytes on-board DDR2 unbuffered SDRAM
--	B) 8-Mbytes NOR Flash
--	C) 32-MBytes NAND Flash
--	D) 1 Secure Digital High Speed Card (SDHC) Interface
--	E) 1 Gigabit Ethernet
--	F) 5-port Ethernet switch (Vitesse 7385)
--	G) 1 32-bit, 3.3 V, PCI slot
--	H) 1 32-bit, 3.3 V, Mini-PCI slot
--	I) 4-port USB 2.0 Hub
--	J) 1-port OTG USB
--	K) 2 serial ports (top main console)
--	L) on board Oscillator: 66M
--
--	The MPC837xE-RDB's have the following differences:
--
--			    MPC8377E-RDB    MPC8378E-RDB    MPC8379E-RDB
--	SATA controllers	2		0		4
--	PCI-Express (mini)	2		2		0
--	SGMII Ports		0		2		0
--
--
--2.	Memory Map
--
--2.1.	The memory map should look pretty much like this:
--
--	Address Range			Device			Size		Port Size
--								(Bytes)		(Bits)
--	===========================	=================	=======		=========
--	0x0000_0000	0x0fff_ffff	DDR			256M		64
--	0x1000_0000	0x7fff_ffff	Empty			1.75G		-
--	0x8000_0000	0x8fff_ffff	PCI MEM prefetch	256M		32
--	0x9000_0000	0x9fff_ffff	PCI MEM non-prefetch	256M		32
--	0xe030_0000	0xe03f_ffff	PCI I/O space		1M		32
--	0xe000_0000	0xe00f_ffff	Int Mem Reg Space	1M		-
--	0xe060_0000	0xe060_7fff	NAND Flash		32K		8
--	0xfe00_0000	0xfe7f_ffff	NOR Flash on CS0	8M		16
--
--
--3. Definitions
--
--3.1 Explanation of NEW definitions in:
--
--	include/configs/MPC837XERDB.h
--
--    CONFIG_MPC83xx	    MPC83xx family for both MPC8349 and MPC8360
--    CONFIG_MPC837x	    MPC837x specific
--    CONFIG_MPC837XERDB	    MPC837xE-RDB board specific
--
--
--4. Compilation
--
--	Assuming you're using BASH shell:
--
--		export CROSS_COMPILE=your-cross-compile-prefix
--		cd u-boot
--		make distclean
--		make MPC837XERDB_config
--		make
--
--
--5. Downloading and Flashing Images
--
--5.0 Download over serial line using Kermit:
--
--	loadb $loadaddr
--	[Drop to kermit:
--	    ^\c
--	    send <u-boot-bin-image>
--	    c
--	]
--
--
--	Or via tftp:
--
--	tftp $loadaddr u-boot.bin
--
--5.1 Reflash U-Boot Image using U-Boot
--
--	tftp $loadaddr u-boot.bin
--	protect off fe000000 fe0fffff
--	erase fe000000 fe0fffff
--	cp.b $loadaddr fe000000 $filesize
--
--
--6. Additional Notes:
--	1) The console is connected to the top RS-232 connector and the
--	   baudrate for MPC837XE-RDB is 115200bps.
-diff --git a/board/nxp/mpc837xerdb/mpc837xerdb.c b/board/nxp/mpc837xerdb/mpc837xerdb.c
-deleted file mode 100644
-index 55299745a3c..00000000000
---- a/board/nxp/mpc837xerdb/mpc837xerdb.c
-+++ /dev/null
-@@ -1,242 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright (C) 2007 Freescale Semiconductor, Inc.
-- * Kevin Lam <kevin.lam@freescale.com>
-- * Joe D'Abbraccio <joe.d'abbraccio@freescale.com>
-- */
--
--#include <config.h>
--#include <env.h>
--#include <hwconfig.h>
--#include <i2c.h>
--#include <init.h>
--#include <asm/bitops.h>
--#include <asm/global_data.h>
--#include <asm/io.h>
--#include <asm/fsl_mpc83xx_serdes.h>
--#include <fdt_support.h>
--#include <spd_sdram.h>
--#include <vsc7385.h>
--#include <fsl_esdhc.h>
--#include <linux/delay.h>
--
--DECLARE_GLOBAL_DATA_PTR;
--
--#if defined(CFG_SYS_DRAM_TEST)
--int
--testdram(void)
--{
--	uint *pstart = (uint *) CONFIG_SYS_MEMTEST_START;
--	uint *pend = (uint *) CONFIG_SYS_MEMTEST_END;
--	uint *p;
--
--	printf("Testing DRAM from 0x%08x to 0x%08x\n",
--	       CONFIG_SYS_MEMTEST_START,
--	       CONFIG_SYS_MEMTEST_END);
--
--	printf("DRAM test phase 1:\n");
--	for (p = pstart; p < pend; p++)
--		*p = 0xaaaaaaaa;
--
--	for (p = pstart; p < pend; p++) {
--		if (*p != 0xaaaaaaaa) {
--			printf("DRAM test fails at: %08x\n", (uint) p);
--			return 1;
--		}
--	}
--
--	printf("DRAM test phase 2:\n");
--	for (p = pstart; p < pend; p++)
--		*p = 0x55555555;
--
--	for (p = pstart; p < pend; p++) {
--		if (*p != 0x55555555) {
--			printf("DRAM test fails at: %08x\n", (uint) p);
--			return 1;
--		}
--	}
--
--	printf("DRAM test passed.\n");
--	return 0;
--}
--#endif
--
--#if defined(CONFIG_DDR_ECC) && !defined(CONFIG_ECC_INIT_VIA_DDRCONTROLLER)
--void ddr_enable_ecc(unsigned int dram_size);
--#endif
--int fixed_sdram(void);
--
--int dram_init(void)
--{
--	immap_t *im = (immap_t *) CONFIG_SYS_IMMR;
--	u32 msize = 0;
--
--	if ((im->sysconf.immrbar & IMMRBAR_BASE_ADDR) != (u32) im)
--		return -ENXIO;
--
--#if defined(CONFIG_SPD_EEPROM)
--	msize = spd_sdram();
--#else
--	msize = fixed_sdram();
--#endif
--
--#if defined(CONFIG_DDR_ECC) && !defined(CONFIG_ECC_INIT_VIA_DDRCONTROLLER)
--	/* Initialize DDR ECC byte */
--	ddr_enable_ecc(msize * 1024 * 1024);
--#endif
--	/* return total bus DDR size(bytes) */
--	gd->ram_size = msize * 1024 * 1024;
--
--	return 0;
--}
--
--#if !defined(CONFIG_SPD_EEPROM)
--/*************************************************************************
-- *  fixed sdram init -- doesn't use serial presence detect.
-- ************************************************************************/
--int fixed_sdram(void)
--{
--	immap_t *im = (immap_t *) CONFIG_SYS_IMMR;
--	u32 msize = CFG_SYS_SDRAM_SIZE;
--	u32 msize_log2 = __ilog2(msize);
--
--	im->sysconf.ddrlaw[0].bar = CFG_SYS_SDRAM_BASE & 0xfffff000;
--	im->sysconf.ddrlaw[0].ar = LBLAWAR_EN | (msize_log2 - 1);
--
--	im->sysconf.ddrcdr = CFG_SYS_DDRCDR_VALUE;
--	udelay(50000);
--
--	im->ddr.sdram_clk_cntl = CFG_SYS_DDR_SDRAM_CLK_CNTL;
--	udelay(1000);
--
--	im->ddr.csbnds[0].csbnds = CFG_SYS_DDR_CS0_BNDS;
--	im->ddr.cs_config[0] = CFG_SYS_DDR_CS0_CONFIG;
--	udelay(1000);
--
--	im->ddr.timing_cfg_0 = CFG_SYS_DDR_TIMING_0;
--	im->ddr.timing_cfg_1 = CFG_SYS_DDR_TIMING_1;
--	im->ddr.timing_cfg_2 = CFG_SYS_DDR_TIMING_2;
--	im->ddr.timing_cfg_3 = CFG_SYS_DDR_TIMING_3;
--	im->ddr.sdram_cfg = CFG_SYS_DDR_SDRAM_CFG;
--	im->ddr.sdram_cfg2 = CFG_SYS_DDR_SDRAM_CFG2;
--	im->ddr.sdram_mode = CFG_SYS_DDR_MODE;
--	im->ddr.sdram_mode2 = CFG_SYS_DDR_MODE2;
--	im->ddr.sdram_interval = CFG_SYS_DDR_INTERVAL;
--	sync();
--	udelay(1000);
--
--	im->ddr.sdram_cfg |= SDRAM_CFG_MEM_EN;
--	udelay(2000);
--	return CFG_SYS_SDRAM_SIZE >> 20;
--}
--#endif	/*!CONFIG_SYS_SPD_EEPROM */
--
--int checkboard(void)
--{
--	puts("Board: Freescale MPC837xERDB\n");
--	return 0;
--}
--
--int board_early_init_f(void)
--{
--	immap_t *immr = (immap_t *)CONFIG_SYS_IMMR;
--#ifdef CONFIG_FSL_SERDES
--	u32 spridr = in_be32(&immr->sysconf.spridr);
--
--	/* we check only part num, and don't look for CPU revisions */
--	switch (PARTID_NO_E(spridr)) {
--	case SPR_8377:
--		fsl_setup_serdes(CFG_FSL_SERDES1, FSL_SERDES_PROTO_SATA,
--				 FSL_SERDES_CLK_100, FSL_SERDES_VDD_1V);
--		fsl_setup_serdes(CFG_FSL_SERDES2, FSL_SERDES_PROTO_PEX,
--				 FSL_SERDES_CLK_100, FSL_SERDES_VDD_1V);
--		break;
--	case SPR_8378:
--		fsl_setup_serdes(CFG_FSL_SERDES2, FSL_SERDES_PROTO_PEX,
--				 FSL_SERDES_CLK_100, FSL_SERDES_VDD_1V);
--		break;
--	case SPR_8379:
--		fsl_setup_serdes(CFG_FSL_SERDES1, FSL_SERDES_PROTO_SATA,
--				 FSL_SERDES_CLK_100, FSL_SERDES_VDD_1V);
--		fsl_setup_serdes(CFG_FSL_SERDES2, FSL_SERDES_PROTO_SATA,
--				 FSL_SERDES_CLK_100, FSL_SERDES_VDD_1V);
--		break;
--	default:
--		printf("serdes not configured: unknown CPU part number: "
--		       "%04x\n", spridr >> 16);
--		break;
--	}
--#endif /* CONFIG_FSL_SERDES */
--
--#ifdef CONFIG_FSL_ESDHC
--	clrsetbits_be32(&immr->sysconf.sicrl, SICRL_USB_B, SICRL_USB_B_SD);
--	clrsetbits_be32(&immr->sysconf.sicrh, SICRH_SPI, SICRH_SPI_SD);
--#endif
--	return 0;
--}
--
--#ifdef CONFIG_FSL_ESDHC
--#if !(CONFIG_IS_ENABLED(DM_MMC) || CONFIG_IS_ENABLED(DM_USB))
--int board_mmc_init(struct bd_info *bd)
--{
--	struct immap __iomem *im = (struct immap __iomem *)CONFIG_SYS_IMMR;
--	char buffer[HWCONFIG_BUFFER_SIZE] = {0};
--	int esdhc_hwconfig_enabled = 0;
--
--	if (env_get_f("hwconfig", buffer, sizeof(buffer)) > 0)
--		esdhc_hwconfig_enabled = hwconfig_f("esdhc", buffer);
--
--	if (esdhc_hwconfig_enabled == 0)
--		return 0;
--
--	clrsetbits_be32(&im->sysconf.sicrl, SICRL_USB_B, SICRL_USB_B_SD);
--	clrsetbits_be32(&im->sysconf.sicrh, SICRH_SPI, SICRH_SPI_SD);
--
--	return fsl_esdhc_mmc_init(bd);
--}
--#endif
--#endif
--
--/*
-- * Miscellaneous late-boot configurations
-- *
-- * If a VSC7385 microcode image is present, then upload it.
--*/
--int misc_init_r(void)
--{
--	int rc = 0;
--
--#ifdef CFG_VSC7385_IMAGE
--	if (vsc7385_upload_firmware((void *) CFG_VSC7385_IMAGE,
--		CFG_VSC7385_IMAGE_SIZE)) {
--		puts("Failure uploading VSC7385 microcode.\n");
--		rc = 1;
--	}
--#endif
--
--	return rc;
--}
--
--int board_late_init(void)
--{
--	volatile immap_t *immap = (immap_t *) CONFIG_SYS_IMMR;
--#ifdef CONFIG_USB_HOST
--	clrsetbits_be32(&immap->sysconf.sicrl, SICRL_USB_A, 0x40000000);
--#endif
--	return 0;
--}
--
--#if defined(CONFIG_OF_BOARD_SETUP)
--
--int ft_board_setup(void *blob, struct bd_info *bd)
--{
--#ifdef CONFIG_PCI
--	ft_pci_setup(blob, bd);
--#endif
--	ft_cpu_setup(blob, bd);
--	fsl_fdt_fixup_dr_usb(blob, bd);
--	fdt_fixup_esdhc(blob, bd);
--
--	return 0;
--}
--#endif /* CONFIG_OF_BOARD_SETUP */
-diff --git a/configs/MPC837XERDB_defconfig b/configs/MPC837XERDB_defconfig
-deleted file mode 100644
-index a9d06785186..00000000000
---- a/configs/MPC837XERDB_defconfig
-+++ /dev/null
-@@ -1,193 +0,0 @@
--CONFIG_PPC=y
--CONFIG_TEXT_BASE=0xFE000000
--CONFIG_SYS_MALLOC_LEN=0x80000
--CONFIG_ENV_SIZE=0x4000
--CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="mpc8379erdb"
--CONFIG_SYS_MONITOR_LEN=524288
--CONFIG_DEBUG_UART_BASE=0xe0004500
--CONFIG_DEBUG_UART_CLOCK=333333000
--CONFIG_SYS_CLK_FREQ=66666667
--CONFIG_ENV_ADDR=0xFE080000
--# CONFIG_SYS_PCI_64BIT is not set
--CONFIG_MPC83xx=y
--CONFIG_HIGH_BATS=y
--CONFIG_SYS_INIT_RAM_LOCK=y
--CONFIG_TARGET_MPC837XERDB=y
--CONFIG_DDR_MC_CLOCK_MODE_1_1=y
--CONFIG_SYSTEM_PLL_FACTOR_5_1=y
--CONFIG_CORE_PLL_RATIO_2_1=y
--CONFIG_PCI_HOST_MODE_ENABLE=y
--CONFIG_PCI_INT_ARBITER1_ENABLE=y
--CONFIG_BOOT_MEMORY_SPACE_LOW=y
--CONFIG_BOOT_ROM_INTERFACE_GPCM_16BIT=y
--CONFIG_TSEC1_MODE_RGMII=y
--CONFIG_TSEC2_MODE_RGMII=y
--CONFIG_LDP_PIN_MUX_STATE_0=y
--CONFIG_BAT0=y
--CONFIG_BAT0_NAME="SDRAM_LOWER"
--CONFIG_BAT0_BASE=0x00000000
--CONFIG_BAT0_LENGTH_256_MBYTES=y
--CONFIG_BAT0_ACCESS_RW=y
--CONFIG_BAT0_ICACHE_MEMORYCOHERENCE=y
--CONFIG_BAT0_DCACHE_MEMORYCOHERENCE=y
--CONFIG_BAT0_USER_MODE_VALID=y
--CONFIG_BAT0_SUPERVISOR_MODE_VALID=y
--CONFIG_BAT1=y
--CONFIG_BAT1_NAME="SDRAM_UPPER"
--CONFIG_BAT1_BASE=0x10000000
--CONFIG_BAT1_LENGTH_256_MBYTES=y
--CONFIG_BAT1_ACCESS_RW=y
--CONFIG_BAT1_ICACHE_MEMORYCOHERENCE=y
--CONFIG_BAT1_DCACHE_MEMORYCOHERENCE=y
--CONFIG_BAT1_USER_MODE_VALID=y
--CONFIG_BAT1_SUPERVISOR_MODE_VALID=y
--CONFIG_BAT2=y
--CONFIG_BAT2_NAME="IMMR"
--CONFIG_BAT2_BASE=0xE0000000
--CONFIG_BAT2_LENGTH_8_MBYTES=y
--CONFIG_BAT2_ACCESS_RW=y
--CONFIG_BAT2_ICACHE_INHIBITED=y
--CONFIG_BAT2_DCACHE_INHIBITED=y
--CONFIG_BAT2_DCACHE_GUARDED=y
--CONFIG_BAT2_USER_MODE_VALID=y
--CONFIG_BAT2_SUPERVISOR_MODE_VALID=y
--CONFIG_BAT3=y
--CONFIG_BAT3_NAME="L2_SWITCH"
--CONFIG_BAT3_BASE=0xF0000000
--CONFIG_BAT3_ACCESS_RW=y
--CONFIG_BAT3_ICACHE_INHIBITED=y
--CONFIG_BAT3_DCACHE_INHIBITED=y
--CONFIG_BAT3_DCACHE_GUARDED=y
--CONFIG_BAT3_USER_MODE_VALID=y
--CONFIG_BAT3_SUPERVISOR_MODE_VALID=y
--CONFIG_BAT4=y
--CONFIG_BAT4_NAME="FLASH"
--CONFIG_BAT4_BASE=0xFE000000
--CONFIG_BAT4_LENGTH_32_MBYTES=y
--CONFIG_BAT4_ACCESS_RW=y
--CONFIG_BAT4_ICACHE_MEMORYCOHERENCE=y
--CONFIG_BAT4_DCACHE_INHIBITED=y
--CONFIG_BAT4_DCACHE_GUARDED=y
--CONFIG_BAT4_USER_MODE_VALID=y
--CONFIG_BAT4_SUPERVISOR_MODE_VALID=y
--CONFIG_BAT5=y
--CONFIG_BAT5_NAME="STACH_IN_DCACHE"
--CONFIG_BAT5_BASE=0xE6000000
--CONFIG_BAT5_ACCESS_RW=y
--CONFIG_BAT5_USER_MODE_VALID=y
--CONFIG_BAT5_SUPERVISOR_MODE_VALID=y
--CONFIG_BAT6=y
--CONFIG_BAT6_NAME="PCI_MEM"
--CONFIG_BAT6_BASE=0x80000000
--CONFIG_BAT6_LENGTH_256_MBYTES=y
--CONFIG_BAT6_ACCESS_RW=y
--CONFIG_BAT6_ICACHE_MEMORYCOHERENCE=y
--CONFIG_BAT6_DCACHE_MEMORYCOHERENCE=y
--CONFIG_BAT6_USER_MODE_VALID=y
--CONFIG_BAT6_SUPERVISOR_MODE_VALID=y
--CONFIG_BAT7=y
--CONFIG_BAT7_NAME="PCI_MMIO"
--CONFIG_BAT7_BASE=0x90000000
--CONFIG_BAT7_LENGTH_256_MBYTES=y
--CONFIG_BAT7_ACCESS_RW=y
--CONFIG_BAT7_ICACHE_INHIBITED=y
--CONFIG_BAT7_DCACHE_INHIBITED=y
--CONFIG_BAT7_DCACHE_GUARDED=y
--CONFIG_BAT7_USER_MODE_VALID=y
--CONFIG_BAT7_SUPERVISOR_MODE_VALID=y
--CONFIG_LBLAW0=y
--CONFIG_LBLAW0_BASE=0xFE000000
--CONFIG_LBLAW0_NAME="FLASH"
--CONFIG_LBLAW0_LENGTH_8_MBYTES=y
--CONFIG_LBLAW1=y
--CONFIG_LBLAW1_BASE=0xE0600000
--CONFIG_LBLAW1_NAME="NAND"
--CONFIG_LBLAW1_LENGTH_32_KBYTES=y
--CONFIG_LBLAW2=y
--CONFIG_LBLAW2_BASE=0xF0000000
--CONFIG_LBLAW2_NAME="VSC7385"
--CONFIG_LBLAW2_LENGTH_128_KBYTES=y
--CONFIG_HID0_FINAL_EMCP=y
--CONFIG_HID0_FINAL_ICE=y
--CONFIG_HID2_HBE=y
--CONFIG_ACR_PIPE_DEP_4=y
--CONFIG_ACR_RPTCNT_4=y
--CONFIG_SPCR_TSECEP_3=y
--CONFIG_LCRR_DBYP_PLL_BYPASSED=y
--CONFIG_LCRR_CLKDIV_8=y
--CONFIG_FSL_SERDES=y
--CONFIG_USE_UBOOTPATH=y
--CONFIG_DEBUG_UART=y
--CONFIG_BOOTDELAY=6
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_SYS_PBSIZE=276
--CONFIG_BOARD_LATE_INIT=y
--CONFIG_MISC_INIT_R=y
--CONFIG_PCI_INIT_R=y
--CONFIG_HUSH_PARSER=y
--CONFIG_CMD_IMLS=y
--CONFIG_CMD_I2C=y
--CONFIG_LOADS_ECHO=y
--CONFIG_SYS_LOADS_BAUD_CHANGE=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_BOOTP_BOOTFILESIZE=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="uImage"
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="TSEC0"
--CONFIG_USE_HOSTNAME=y
--CONFIG_HOSTNAME="mpc837x_rdb"
--CONFIG_USE_ROOTPATH=y
--CONFIG_ROOTPATH="/nfsroot"
--CONFIG_SATA=y
--CONFIG_FSL_SATA=y
--CONFIG_SYS_SATA_MAX_DEVICE=2
--CONFIG_SYS_BR0_PRELIM_BOOL=y
--CONFIG_SYS_BR0_PRELIM=0xFE001001
--CONFIG_SYS_OR0_PRELIM=0xFF800193
--CONFIG_SYS_BR1_PRELIM_BOOL=y
--CONFIG_SYS_BR1_PRELIM=0xE0600C21
--CONFIG_SYS_OR1_PRELIM=0xFFFF8396
--CONFIG_SYS_BR2_PRELIM_BOOL=y
--CONFIG_SYS_BR2_PRELIM=0xF0000801
--CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
--CONFIG_SYS_I2C_LEGACY=y
--CONFIG_SYS_I2C_FSL=y
--CONFIG_SYS_FSL_I2C_OFFSET=0x3000
--CONFIG_SYS_I2C_SLAVE=0x7F
--CONFIG_SYS_I2C_SPEED=400000
--CONFIG_FSL_ESDHC=y
--CONFIG_FSL_ESDHC_PIN_MUX=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_FLASH_SHOW_PROGRESS=0
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_SYS_FLASH_PROTECTION=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_MAX_FLASH_SECT=256
--CONFIG_DM_MDIO=y
--CONFIG_DM_ETH_PHY=y
--CONFIG_RGMII=y
--CONFIG_MII=y
--CONFIG_VSC7385_ENET=y
--CONFIG_TSEC_ENET=y
--CONFIG_RTC_DS1374=y
--CONFIG_SPECIFY_CONSOLE_INDEX=y
--CONFIG_DM_SERIAL=y
--CONFIG_SYS_NS16550=y
--CONFIG_USB=y
--CONFIG_USB_EHCI_HCD=y
--CONFIG_USB_EHCI_FSL=y
-diff --git a/include/configs/MPC837XERDB.h b/include/configs/MPC837XERDB.h
-deleted file mode 100644
-index b22c720d07f..00000000000
---- a/include/configs/MPC837XERDB.h
-+++ /dev/null
-@@ -1,218 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Copyright (C) 2007 Freescale Semiconductor, Inc.
-- * Kevin Lam <kevin.lam@freescale.com>
-- * Joe D'Abbraccio <joe.d'abbraccio@freescale.com>
-- */
--
--#ifndef __CONFIG_H
--#define __CONFIG_H
--
--#include <linux/stringify.h>
--
--/*
-- * High Level Configuration Options
-- */
--
--/* System performance - define the value i.e. CONFIG_SYS_XXX
--*/
--
--/* System Clock Configuration Register */
--#define CFG_SYS_SCCR_TSEC1CM	1		/* eTSEC1 clock mode (0-3) */
--#define CFG_SYS_SCCR_TSEC2CM	1		/* eTSEC2 clock mode (0-3) */
--#define CFG_SYS_SCCR_SATACM	SCCR_SATACM_2	/* SATA1-4 clock mode (0-3) */
--
--/*
-- * System IO Config
-- */
--#define CFG_SYS_SICRH		0x08200000
--#define CFG_SYS_SICRL		0x00000000
--
--/*
-- * Output Buffer Impedance
-- */
--#define CFG_SYS_OBIR		0x30100000
--
--/*
-- * Device configurations
-- */
--
--/* Vitesse 7385 */
--
--#ifdef CONFIG_VSC7385_ENET
--
--/* The flash address and size of the VSC7385 firmware image */
--#define CFG_VSC7385_IMAGE		0xFE7FE000
--#define CFG_VSC7385_IMAGE_SIZE	8192
--
--#endif
--
--/*
-- * DDR Setup
-- */
--#define CFG_SYS_SDRAM_BASE		0x00000000 /* DDR is system memory */
--#define CFG_SYS_DDR_SDRAM_CLK_CNTL	0x03000000
--
--#define CFG_SYS_DDRCDR_VALUE	(DDRCDR_DHC_EN | DDRCDR_ODT | DDRCDR_Q_DRN)
--
--/*
-- * Manually set up DDR parameters
-- */
--#define CFG_SYS_SDRAM_SIZE		0x10000000 /* 256 MiB */
--#define CFG_SYS_DDR_CS0_BNDS		0x0000000f
--#define CFG_SYS_DDR_CS0_CONFIG	(CSCONFIG_EN \
--					| CSCONFIG_ODT_WR_ONLY_CURRENT \
--					| CSCONFIG_ROW_BIT_13 \
--					| CSCONFIG_COL_BIT_10)
--
--#define CFG_SYS_DDR_TIMING_3	0x00000000
--#define CFG_SYS_DDR_TIMING_0	((0 << TIMING_CFG0_RWT_SHIFT) \
--				| (0 << TIMING_CFG0_WRT_SHIFT) \
--				| (0 << TIMING_CFG0_RRT_SHIFT) \
--				| (0 << TIMING_CFG0_WWT_SHIFT) \
--				| (2 << TIMING_CFG0_ACT_PD_EXIT_SHIFT) \
--				| (6 << TIMING_CFG0_PRE_PD_EXIT_SHIFT) \
--				| (8 << TIMING_CFG0_ODT_PD_EXIT_SHIFT) \
--				| (2 << TIMING_CFG0_MRS_CYC_SHIFT))
--				/* 0x00260802 */ /* DDR400 */
--#define CFG_SYS_DDR_TIMING_1	((3 << TIMING_CFG1_PRETOACT_SHIFT) \
--				| (9 << TIMING_CFG1_ACTTOPRE_SHIFT) \
--				| (3 << TIMING_CFG1_ACTTORW_SHIFT) \
--				| (7 << TIMING_CFG1_CASLAT_SHIFT) \
--				| (13 << TIMING_CFG1_REFREC_SHIFT) \
--				| (3 << TIMING_CFG1_WRREC_SHIFT) \
--				| (2 << TIMING_CFG1_ACTTOACT_SHIFT) \
--				| (2 << TIMING_CFG1_WRTORD_SHIFT))
--				/* 0x3937d322 */
--#define CFG_SYS_DDR_TIMING_2	((0 << TIMING_CFG2_ADD_LAT_SHIFT) \
--				| (5 << TIMING_CFG2_CPO_SHIFT) \
--				| (3 << TIMING_CFG2_WR_LAT_DELAY_SHIFT) \
--				| (2 << TIMING_CFG2_RD_TO_PRE_SHIFT) \
--				| (3 << TIMING_CFG2_WR_DATA_DELAY_SHIFT) \
--				| (3 << TIMING_CFG2_CKE_PLS_SHIFT) \
--				| (8 << TIMING_CFG2_FOUR_ACT_SHIFT))
--				/* 0x02984cc8 */
--
--#define CFG_SYS_DDR_INTERVAL	((1024 << SDRAM_INTERVAL_REFINT_SHIFT) \
--				| (0 << SDRAM_INTERVAL_BSTOPRE_SHIFT))
--				/* 0x06090100 */
--
--#define CFG_SYS_DDR_SDRAM_CFG	(SDRAM_CFG_SREN \
--					| SDRAM_CFG_SDRAM_TYPE_DDR2)
--					/* 0x43000000 */
--#define CFG_SYS_DDR_SDRAM_CFG2	0x00001000 /* 1 posted refresh */
--#define CFG_SYS_DDR_MODE		((0x0406 << SDRAM_MODE_ESD_SHIFT) \
--					| (0x0442 << SDRAM_MODE_SD_SHIFT))
--					/* 0x04400442 */ /* DDR400 */
--#define CFG_SYS_DDR_MODE2		0x00000000
--
--/*
-- * Memory test
-- */
--#undef CFG_SYS_DRAM_TEST		/* memory test, takes time */
--
--/*
-- * The reserved memory
-- */
--
--/*
-- * Initial RAM Base Address Setup
-- */
--#define CFG_SYS_INIT_RAM_ADDR	0xE6000000 /* Initial RAM address */
--#define CFG_SYS_INIT_RAM_SIZE	0x1000 /* Size of used area in RAM */
--
--/*
-- * FLASH on the Local Bus
-- */
--#define CFG_SYS_FLASH_BASE		0xFE000000 /* FLASH base address */
--#define CFG_SYS_FLASH_SIZE		8 /* max FLASH size is 32M */
--
--/*
-- * NAND Flash on the Local Bus
-- */
--#define CFG_SYS_NAND_BASE	0xE0600000
--
--/* Vitesse 7385 */
--
--#define CFG_SYS_VSC7385_BASE	0xF0000000
--
--#define CFG_SYS_BAUDRATE_TABLE \
--		{300, 600, 1200, 2400, 4800, 9600, 19200, 38400, 115200}
--
--#define CFG_SYS_NS16550_COM1	(CONFIG_SYS_IMMR+0x4500)
--#define CFG_SYS_NS16550_COM2	(CONFIG_SYS_IMMR+0x4600)
--
--/* SERDES */
--#define CFG_FSL_SERDES1	0xe3000
--#define CFG_FSL_SERDES2	0xe3100
--
--/* I2C */
--#define CFG_SYS_I2C_NOPROBES		{ {0, 0x51} }
--
--/*
-- * Config on-board RTC
-- */
--#define CFG_SYS_I2C_RTC_ADDR	0x68 /* at address 0x68 */
--
--/*
-- * General PCI
-- * Addresses are mapped 1-1.
-- */
--#define CFG_SYS_PCIE1_CFG_BASE	0xA0000000
--#define CFG_SYS_PCIE1_CFG_SIZE	0x08000000
--#define CFG_SYS_PCIE1_MEM_PHYS	0xA8000000
--#define CFG_SYS_PCIE1_IO_PHYS	0xB8000000
--
--#define CFG_SYS_PCIE2_CFG_BASE	0xC0000000
--#define CFG_SYS_PCIE2_CFG_SIZE	0x08000000
--#define CFG_SYS_PCIE2_MEM_PHYS	0xC8000000
--#define CFG_SYS_PCIE2_IO_PHYS	0xD8000000
--
--#ifdef CONFIG_MMC
--#define CFG_SYS_FSL_ESDHC_ADDR	CFG_SYS_MPC83xx_ESDHC_ADDR
--#endif
--
--/*
-- * Miscellaneous configurable options
-- */
--
--/*
-- * For booting Linux, the board info and command line data
-- * have to be in the first 256 MB of memory, since this is
-- * the maximum mapped by the Linux kernel during initialization.
-- */
--#define CFG_SYS_BOOTMAPSZ	(256 << 20) /* Initial Memory map for Linux */
--
--/*
-- * Environment Configuration
-- */
--
--#define FDTFILE			"mpc8379_rdb.dtb"
--
--#define CFG_EXTRA_ENV_SETTINGS \
--	"netdev=eth1\0"				\
--	"uboot=" CONFIG_UBOOTPATH "\0"					\
--	"tftpflash=tftp $loadaddr $uboot;"				\
--		"protect off " __stringify(CONFIG_TEXT_BASE)	\
--			" +$filesize; "	\
--		"erase " __stringify(CONFIG_TEXT_BASE)		\
--			" +$filesize; "	\
--		"cp.b $loadaddr " __stringify(CONFIG_TEXT_BASE)	\
--			" $filesize; "	\
--		"protect on " __stringify(CONFIG_TEXT_BASE)		\
--			" +$filesize; "	\
--		"cmp.b $loadaddr " __stringify(CONFIG_TEXT_BASE)	\
--			" $filesize\0"	\
--	"fdtaddr=780000\0"						\
--	"fdtfile=" FDTFILE "\0"					\
--	"ramdiskaddr=1000000\0"						\
--	"ramdiskfile=rootfs.ext2.gz.uboot\0"				\
--	"console=ttyS0\0"						\
--	"setbootargs=setenv bootargs "					\
--		"root=$rootdev rw console=$console,$baudrate $othbootargs\0" \
--	"setipargs=setenv bootargs nfsroot=$serverip:$rootpath "	\
--		"ip=$ipaddr:$serverip:$gatewayip:$netmask:$hostname:"	\
--							"$netdev:off "	\
--		"root=$rootdev rw console=$console,$baudrate $othbootargs\0"
--
--#endif	/* __CONFIG_H */
--- 
-2.47.3
+are available in the Git repository at:
 
+  https://git.u-boot-project.org/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-main-2026-10-09
+
+for you to fetch changes up to 35ad65d943257d2764b342033aec087961b27eaa:
+
+  pinctrl: mediatek: add pinctrl driver for MT8196 (2026-10-09 14:37:45 -0500)
+
+This marks the conclusion of our year-long quest to reduce duplication in the
+MediaTek clock drivers and make it easier to add clock drivers for new targets
+without having to invent new things for each platform or follow confusing
+conventions that had evolved organically over time.
+
+And the very first patches for Genio Pro 5100 are starting to roll in.
+
+----------------------------------------------------------------
+* Fix MT8183 infracfg and MT8518 topckgen gate lookups
+* Merge the per-block MediaTek clock drivers into a single driver per SoC
+* New MTK_GATE_CLK_TREE() helper for gate-only clock trees
+* Consolidate the MediaTek clk_ops into a single mtk_clk_ops
+* Match the mmsys compatible for the MT8189 display clocks
+* New MT8365 multimedia (mmsys) clocks
+* New MT8196 pinctrl driver
+
+----------------------------------------------------------------
+Arnaud Ferraris (2):
+      pinctrl: mediatek: further increase max number of base addresses
+      pinctrl: mediatek: add pinctrl driver for MT8196
+
+David Lechner (18):
+      clk: mediatek: mt8183: fix infracfg gate lookup
+      clk: mediatek: mt8518: fix top gate lookup
+      clk: mediatek: mt8189: match the mmsys compatible
+      clk: mediatek: add fclks_offs to struct mtk_clk_tree
+      clk: mediatek: merge the of_xlate callbacks
+      clk: mediatek: merge the enable and disable callbacks
+      clk: mediatek: merge the get_rate callbacks
+      clk: mediatek: merge the dump callbacks
+      clk: mediatek: use a single clk_ops for all drivers
+      clk: mediatek: mt8183: merge the apmixedsys driver into mt8183-clk
+      clk: mediatek: mt8188: merge the apmixedsys driver into mt8188-clk
+      clk: mediatek: mt8189: merge the remaining drivers into mt8189-clk
+      clk: mediatek: mt8195: merge the apmixedsys driver into mt8195-clk
+      clk: mediatek: mt8365: merge the apmixedsys driver into mt8365-clk
+      clk: mediatek: mt8366: merge the apmixedsys driver into mt8366-clk
+      clk: mediatek: mt8512: merge the apmixedsys driver into mt8512-clk
+      clk: mediatek: mt8516: merge the apmixedsys driver into mt8516-clk
+      clk: mediatek: mt8518: merge the apmixedsys driver into mt8518-clk
+
+Julien Stephan (12):
+      clk: mediatek: mt8188: make the clock trees static
+      clk: mediatek: add a helper to declare gate-only clock trees
+      clk: mediatek: use MTK_GATE_CLK_TREE() for the gate-only clock trees
+      clk: mediatek: mt8183: merge the clock drivers into a single driver
+      clk: mediatek: mt8188: merge the clock drivers into a single driver
+      clk: mediatek: mt8189: merge the clock drivers into a single driver
+      clk: mediatek: mt8195: merge the clock drivers into a single driver
+      clk: mediatek: mt8365: merge the clock drivers into a single driver
+      clk: mediatek: mt8512: merge the clock drivers into a single driver
+      clk: mediatek: mt8516: merge the clock drivers into a single driver
+      clk: mediatek: mt8518: merge the clock drivers into a single driver
+      clk: mediatek: mt8365: add multimedia clocks
+
+ arch/arm/dts/mt8189.dtsi                      |    6 +-
+ arch/arm/mach-mediatek/mt8516/init.c          |    6 +-
+ drivers/clk/mediatek/clk-mt7622.c             |   10 +-
+ drivers/clk/mediatek/clk-mt7623.c             |   10 +-
+ drivers/clk/mediatek/clk-mt7629.c             |   10 +-
+ drivers/clk/mediatek/clk-mt7981.c             |   10 +-
+ drivers/clk/mediatek/clk-mt7986.c             |    8 +-
+ drivers/clk/mediatek/clk-mt7987.c             |    8 +-
+ drivers/clk/mediatek/clk-mt7988.c             |   12 +-
+ drivers/clk/mediatek/clk-mt8183.c             |   64 +-
+ drivers/clk/mediatek/clk-mt8188.c             |   97 +-
+ drivers/clk/mediatek/clk-mt8189.c             |  112 +-
+ drivers/clk/mediatek/clk-mt8195.c             |   45 +-
+ drivers/clk/mediatek/clk-mt8365.c             |  117 +-
+ drivers/clk/mediatek/clk-mt8366.c             |   82 +-
+ drivers/clk/mediatek/clk-mt8512.c             |   52 +-
+ drivers/clk/mediatek/clk-mt8516.c             |   45 +-
+ drivers/clk/mediatek/clk-mt8518.c             |   55 +-
+ drivers/clk/mediatek/clk-mtk.c                |  439 ++----
+ drivers/clk/mediatek/clk-mtk.h                |   32 +-
+ drivers/pinctrl/mediatek/Makefile             |    1 +
+ drivers/pinctrl/mediatek/pinctrl-mt8196.c     | 1905 +++++++++++++++++++++++++
+ drivers/pinctrl/mediatek/pinctrl-mtk-common.h |    2 +-
+ 23 files changed, 2278 insertions(+), 850 deletions(-)
+ create mode 100644 drivers/pinctrl/mediatek/pinctrl-mt8196.c
