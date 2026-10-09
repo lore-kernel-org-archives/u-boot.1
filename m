@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 346D3CA9EC1
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 19:55:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F0CCA601F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 19:55:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5172840896;
-	Fri,  9 Oct 2026 19:55:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 284F08169B;
+	Fri,  9 Oct 2026 19:55:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7VTz-2Vv0bc0; Fri,  9 Oct 2026 19:55:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 33DB940935
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791575704;
-	b=REdOhp4u4gm2TAqsaD6fIU5GekEHjcR7kv8fGD+bgsp9SXDYU8QLUgrKyPosCt047KXI
-	 cBsBVqwfUMZPQsKjEEbb6Oseen/XpgXxLeNlsBFr+2oPkc37K1cg5gerC/ORn1mJNaqOT
-	 TAY0ZOXKLcjxQtsegIsixbQGzAUCpa/zQ/1hM6sMSNsBeZsQLKbq6Q/7+s7AK8qZ3xKR6
-	 2q7i+FvXXeIHpz6b6mX0meEIVO4zg00zaldCkGpnv7NRw4YrIhZ48xBZIV5ymH45k7p0c
-	 d8lMeGvzqgnC4FjyrXdYvKvde7Els5wvihFNxVf2OHSQb1p3kZfeIWN6zduI+Y+Kbgw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 76Xo00G5rUTF; Fri,  9 Oct 2026 19:55:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A5A85816D5
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791575693;
+	b=HeFBeYubNhSOBI5Z8a95+WQYXOiJG2b2juI673oqJjtzh19e4XAeWapY7h0TBxsyZXtu
+	 whli5nMef1u933jqU9S0k1+XJipXLZp1oQv6WeBMm6UtyqN0qHG1jBZ1aZ5qiqmillj2y
+	 lQEMqo8ndzcv3TBQ8/p1ot2iucEdkHL/338fBHfXaPxfaFr61bTpzspwbdQrhpeh3Rn5j
+	 96uMCRwFDL6dKe8etRGzQWSxW3flKPhw2VeMaAmbjJhaLTXtZg7RVw8LZXAYXtcq7Y54c
+	 tMp9JhGITMcpQK82zgLZ8qnNamrm/GNKMP04DsUcaaALPXXnraHiKz/BVaPy7QExCSw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791575704;
+	c=relaxed/relaxed; t=1791575693;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,93 +31,93 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=+1nMFNuBPzvnV3X5mhqnnCN5N2G4pyYijsEs0sOwF0U=;
-	b=ZIgh7BdK2SvKJ7k4lCt6U8RNOED9RLo0lAMhPsxHoHa97MkOozd7V/SzKh10799RWpGJ
-	 gIehdZ34vtlTB3t8Xdv02C6ou64gMMhPOFaX1gt8EbSurH7V+FCWS7SishnfrBYmcz+s/
-	 QwlPXogpo/2UaTORtm+ZiuGPSiIEFMWo1bu0RhzoVynb5Ym/JfnUErpdFIXzRGotNVoJ6
-	 ZhlOjc6BAJZvmFi5BlZ3P6EZqZ85zEqN9nJx6fBcFM9Xv6ql3sFnoKLQy60twrXZLHc5H
-	 y63euCtKzyE5jiCMNu2ZHz0vl3SqJw1Zl3I2jr6nu4apc/6euGLL79EKXfFNg82rl0w==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=vHW9umcjaH8xJb2sPQciKt67BjsJjMPUp3DA07CKixE=;
+	b=rzLmzXX2FK9TJYJo/cslVLEmcEcvi/aaCOEebwcTcEngWjJgoMoceHDOMLsqt+TCELDt
+	 e//xJ+HGoguRaR4QvO89cF5t6e4/bFH2+7m8ixjN4cos4vVNB+r50fRD28x6XaeTPpHVp
+	 I6joa12DCAPPGdi07Y+/oYLwxHUmurlo40TyCX08sIJnm0eBw+nb3q31U8EnIP1BiEl9m
+	 Fau+bB91GSNwFUevkXm+g6bpXELOKN5fiBsaSw95gauaY0BoBlxXUDIUHrDcr4dw/kIPA
+	 75hsqh6X74bZEXtv+Y69P9pBgsRsFXbnJGXdh70JViWs/mxF3leUvvW+qzlTGcvbgfQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791575704;
-	bh=+1nMFNuBPzvnV3X5mhqnnCN5N2G4pyYijsEs0sOwF0U=;
+	d=lists.u-boot-project.org; s=default; t=1791575692;
+	bh=vHW9umcjaH8xJb2sPQciKt67BjsJjMPUp3DA07CKixE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=aGnl0bNT4OkeykBbM8O7RQO1M+4zgtFeKChnpYtv0lhi1jVJSYfUr+HjHgz6ROVu3
-	 9r7cF7eVzW+wIdWxqS3fvpi9Zzb5fbLD+2IdPvuVnjUN2h54VCIEofumVvxT+GfVND
-	 nGUlfVDKkfVii1NBYu1qJRAW919zNBf1t7VJRoqy6kLB7Y3luW4qVq4c/TZnOpAFFZ
-	 fPv7HkChgL4eRh3ZwFXLg/5FPFKyB0065LnQqAdo2RX8bYAYi0rDI3LUo33adj7VCA
-	 vrG3nuFgrFbpQafsamHqhsNxeu7h3TwkFKD2IJpfU6WyRWDQjRpILWeAEnRKBpjIai
-	 6aNGVD3yvozJA==
+	b=W7l0ofgv4oa0c4i8w7qWrGvvPVTQ/0G6igDB1nNxQIfAbLO5wOxQPhfJ2Zp4Ug9xJ
+	 h+AQ4EE3Kgwpq3W2TS5f1QQH+SQbUhVst/952ZJdg1eag+vj3D69MSywSzB5jdFXO4
+	 XjgBT32zNQkw7ImKRwftX5Z/Es9Z7IRCk7ehcNBXCi9bToGsGxfwwVHx/KbPrn5iWl
+	 WLYUc3MtLPWP9itvWdCp7f7J9x+r8zLXbxEADtReZbOQigGfu9bNjCWNvu9D4rmNu7
+	 Z8+YpYjwOq+Bh8UQP74DB7yutvxxyJ/vgkQNsvF2EZ7ZABVIBhlpa02EQjbtagzkcK
+	 l/tag5Io2dc4w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 33DB940935;
-	Fri,  9 Oct 2026 19:55:04 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with UTF8SMTP id 2DC2913B
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:41:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A5A85816D5;
+	Fri,  9 Oct 2026 19:54:52 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with UTF8SMTP id 27040184
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with UTF8SMTP id 127EE81490
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:41:13 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with UTF8SMTP id 0E1FE40053
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024)
- with UTF8SMTP id WNY6RtF2hr_b for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 19:41:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E39CD8148E
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791574871;
- b=n+JApSKMdcqIrGe28QV9CH8TwOHhlGqnANCz3M//VLEP9HL/asKyMvTdgQPUCBQXNUt7
- Wh4VsrbPdgECG90J7XmCP7rPdfLZDd/X9QijwlkYEFjlDhR1rGzZm8lMHXFGSebjUJj+L
- f5pEP5jCoed26nvqncazHGIXSEQjPwx/dTfQmdPKnhZG+Or1qRxahlnZ2ue7gngcT0EAq
- dHOTAoG/hNMHmisVoYS11uFncILgMD97ImLBgSNIKCl6dLb1RmlhpJjN4OML4TS6fxBjE
- uaF9lPShMAauCuhfXVd7BjuGUI7PD9QEXj9WILkc8B6xbILkJ9zADSOwL/YCHYzuTJw==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024)
+ with UTF8SMTP id 07aWsEQV-YQV for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 19:40:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 141BF4018C
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791574818;
+ b=mElO8kgdcx1NvAWcURk/QP57sL9M0iVMatwtYQx+p4ZR75Bq4EXg9pDRgom1PHlcLwcN
+ G2mEkNQIpJi0x9QB0pWo9IvQ9py7XnGtpu4JmV0X2ms0RWvcQM5pJjya7pOOdeJGZlDDR
+ qrgNAoQbpTwtGtvjjpKaiQcECjj4Rk/kQIgl5N7hrrCHDcLHXU3qMRMyvcNIZwhilz6Qw
+ M2XGmsf07CbrZc4jg2zKZigL1nA/XCaKjPHlPZ986eKjMCxwiAJVFwDkT0f/ywSTZ5kj5
+ dgqqIBYptYNfPjLCgemV//IW7aYZNcsJ3riGpUfWM3sKvkj/1Eh9omDa/JFE3DEp/YA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791574871;
+ c=relaxed/relaxed; t=1791574818;
  h=Received-SPF:DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=+1nMFNuBPzvnV3X5mhqnnCN5N2G4pyYijsEs0sOwF0U=;
- b=B/btBAcTCYMWXvzS3j9XV+sRtmqmIFKs4cI4+QW3hEW2XQiYrTDWQ9KwQQ1NzXZ/jrak
- lJR7cvyi40LgXeOiGSrVcvxYAwgR8YOjrcjYcFL4vz7vN9PXPjjotZG0hjU2lnz7B6Gst
- +vhFRxIRc7DnaCp98khaIp2FfYEJQmLLa3+1KWulcSfcVklCooRy0iihoWmV39FRpLX+P
- mFYvCA57WcNcTlxhuvLvNfaBGWCpGt8OEO/IIRnbsiiNT41CQhsJkTtzpvf1Rj0IvXbhz
- LPMXd/t41VMfjIlPMg6lfnFOdPzZrD/xRI5SI3igLKAGq/kkPTxAffaFH6qFTWIFrPw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=vHW9umcjaH8xJb2sPQciKt67BjsJjMPUp3DA07CKixE=;
+ b=rYNSrfklV7ePcpa0/qSUQa+tw2qKL9NSmS1JC488XFYaI0RBRfqN5J36SPKGPi05StRv
+ vzFXfm3uM8MIHb+yIVIRn6JlcWcUhJMUr88pjHdK0NRUgwfPKBHHemaxjD0G4lQ+7vW2w
+ 9aJA79aktz9Sm6Bn/SVqdD3uml400PhD0YS0VspcrmpsD0B/K/EVwzfmHjfGKuQ4LVhSH
+ OSO6uzDJBI/azqC5KbY17JNzUBtRHDH4EqPIrJM8XzBg6UWlC+EUwcY6UeUSrhT9TvDPz
+ 432LkxSU1+42CkZFyftEr6Y+uT7c8DgF0qQBkO+lxQ1s7jR40KhJN6aR+0xGX7xEDHw==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=mainlining.org;
  dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
- header.s=202507r header.b=IKSvRKwk; 
+ header.s=202507r header.b=C+0ZhAyD; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=bEZWTOx7; 
+ header.a=ed25519-sha256 header.s=202507e header.b=7hbv7hGt; 
  arc=none smtp.remote-ip=5.75.144.95
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
  helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=mainlining.org
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org
- header.a=rsa-sha256 header.s=202507r header.b=IKSvRKwk; 
+ header.a=rsa-sha256 header.s=202507r header.b=C+0ZhAyD; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=bEZWTOx7
+ header.a=ed25519-sha256 header.s=202507e header.b=7hbv7hGt
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- by smtp1.osuosl.org (Postfix) with UTF8SMTPS id E39CD8148E
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:41:10 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with UTF8SMTPS id 141BF4018C
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1791574633; bh=+1nMFNuBPzvnV3X5mhqnnCN
- 5N2G4pyYijsEs0sOwF0U=; b=IKSvRKwkHG44hxeg7iUuccsinTelYtVHMqs4feiSOsOFFh3+ks
- prpgpzc1UclFZ+YMfPj9GWZQ/Ewkl8Lt/t/TCNfQ7J1k2fdsoGx1D+kBCsPVsDlsyTND9ycXT9Y
- YdLOQ13sNLXsoeyz7Rl7+VsM8Q8wwF5EzVzgDUW8hguPb+AzMqyqj2444Mv4YeR0LJzyN8W0j92
- hLx4nxuMI40F1lyilt4+GD83iLg6lopZvIHTMk2kJyjVGtqu7bq04B5lK/Wj7Y7XdyOLBD2Up0t
- IQFp7dL/B7CIr+rBpV7gaBifj+PLcJFkBCufzpGuM7byKv22XCAiOblm2ws6jcGQI9Q==;
+ h=Message-ID:Date:Subject:To:From; t=1791574626; bh=vHW9umcjaH8xJb2sPQciKt6
+ 7BjsJjMPUp3DA07CKixE=; b=C+0ZhAyDsXSoKvnzliNDW0NnfB3W0Qtsur+Gm/esnI9Xf8H0BD
+ XXa++OJedIgMiyx9VULayQWTVHOTSInUcQRgv2zPdFvaDoIru58B36Iat/PdB8o93hjCEX+CNqb
+ PkySVL2+E8TO+bOY84NqGWu0DIFXTt8R/1NW96+m7X6EhxB/mSWs0NIOfw1mZjgEGRGhIEfoUYz
+ j6EDvfdWB+dtcGAXyI3U7NDJHz05TFuw35tDElXlcaallQGDYJ22monrHPWHOaMlnVANlmnZnxg
+ NcyEFptadFy3CJdwkMi9VeHqNhrTPEJCzWCHhYNtlqh6T5dVtbeNenU3OJecKCTN6Lw==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1791574633; bh=+1nMFNuBPzvnV3X5mhqnnCN
- 5N2G4pyYijsEs0sOwF0U=; b=bEZWTOx7/46EDXJNYiEjpyGesxCPNM5qTPB80DXz8UqOp0rCqf
- oG6MiH21dQ/T9Z3kXHEktV2xYbIzEx8vPwBw==;
+ h=Message-ID:Date:Subject:To:From; t=1791574626; bh=vHW9umcjaH8xJb2sPQciKt6
+ 7BjsJjMPUp3DA07CKixE=; b=7hbv7hGtF84EZm4cMNJP3hWysrPARlVRH418AKt+YOM3u8DRLB
+ gzbxNvQDdu/0Jh+vF12hgmSW8rK0vpYBsGCg==;
 From: Bradley Morgan <brads@mainlining.org>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.u-boot-project.org
@@ -142,9 +142,9 @@ Cc: Bradley Morgan <brads@mainlining.org>,
  Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
  Torsten Rupp <torsten.rupp@8tronix.de>, Vincent Jardin <vjardin@free.fr>,
  Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 20/26] powerpc: mpc83xx: Remove MPC831x support
-Date: Fri,  9 Oct 2026 19:36:58 +0000
-Message-ID: <20261009193704.13061-21-brads@mainlining.org>
+Subject: [PATCH 03/26] board: powerpc: Remove P2020RDB-PC support
+Date: Fri,  9 Oct 2026 19:36:41 +0000
+Message-ID: <20261009193704.13061-4-brads@mainlining.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261009193704.13061-1-brads@mainlining.org>
 References: <20261009193704.13061-1-brads@mainlining.org>
@@ -164,970 +164,1659 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-NXP no longer manufactures the MPC8313 and lists the MPC8314 and MPC8315 as end of life. No target in the tree selects ARCH_MPC831X, so remove the orphaned family support and its register and device tree handling.
+NXP marks the P2020 reference design board no longer manufactured. Remove its target, configurations, and board specific code.
 
 Signed-off-by: Bradley Morgan <brads@mainlining.org>
 ---
- arch/Kconfig                                  |  3 +-
- arch/powerpc/cpu/mpc83xx/Kconfig              | 13 ----
- arch/powerpc/cpu/mpc83xx/cpu.c                |  6 +-
- arch/powerpc/cpu/mpc83xx/cpu_init.c           | 14 +---
- arch/powerpc/cpu/mpc83xx/fdt.c                | 42 +----------
- arch/powerpc/cpu/mpc83xx/hid/hid.h            |  5 --
- arch/powerpc/cpu/mpc83xx/hrcw/Kconfig         | 38 +---------
- arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr |  2 +-
- arch/powerpc/cpu/mpc83xx/initreg/Kconfig.spcr |  2 +-
- arch/powerpc/cpu/mpc83xx/spd_sdram.c          |  2 +-
- arch/powerpc/cpu/mpc83xx/speed.c              | 27 +++----
- arch/powerpc/include/asm/arch-mpc83xx/gpio.h  |  2 +-
- arch/powerpc/include/asm/arch-mpc83xx/soc.h   | 20 +-----
- arch/powerpc/include/asm/global_data.h        |  4 +-
- arch/powerpc/include/asm/immap_83xx.h         | 35 ---------
- arch/powerpc/include/asm/mpc8xxx_spi.h        |  1 -
- .../clock/fsl,mpc83xx-clk.txt                 |  2 -
- doc/device-tree-bindings/cpu/fsl,mpc83xx.txt  |  8 +--
- drivers/clk/mpc83xx_clk.c                     |  8 +--
- drivers/clk/mpc83xx_clk.h                     |  8 +--
- drivers/cpu/mpc83xx_cpu.c                     | 17 -----
- drivers/cpu/mpc83xx_cpu.h                     | 14 ----
- drivers/ram/mpc83xx_sdram.c                   |  2 -
- include/mpc83xx.h                             | 72 ++-----------------
- 24 files changed, 42 insertions(+), 305 deletions(-)
+ arch/powerpc/cpu/mpc85xx/Kconfig             |  10 --
+ arch/powerpc/dts/Makefile                    |   1 -
+ arch/powerpc/dts/p2020rdb-pc.dts             |  59 -------
+ arch/powerpc/dts/p2020rdb-pc.dtsi            |  50 ------
+ arch/powerpc/dts/p2020rdb-pc_36b.dts         |  59 -------
+ board/nxp/p1_p2_rdb_pc/Kconfig               |   3 +-
+ board/nxp/p1_p2_rdb_pc/MAINTAINERS           |   8 -
+ board/nxp/p1_p2_rdb_pc/README                |   6 +-
+ board/nxp/p1_p2_rdb_pc/ddr.c                 |  31 ----
+ board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c        |   2 -
+ boot/Kconfig                                 |   2 +-
+ configs/P2020RDB-PC_36BIT_NAND_defconfig     | 164 -------------------
+ configs/P2020RDB-PC_36BIT_SDCARD_defconfig   | 145 ----------------
+ configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig | 147 -----------------
+ configs/P2020RDB-PC_36BIT_defconfig          | 125 --------------
+ configs/P2020RDB-PC_NAND_defconfig           | 162 ------------------
+ configs/P2020RDB-PC_SDCARD_defconfig         | 142 ----------------
+ configs/P2020RDB-PC_SPIFLASH_defconfig       | 145 ----------------
+ configs/P2020RDB-PC_defconfig                | 123 --------------
+ doc/README.mpc85xx-sd-spi-boot               |   3 -
+ drivers/ddr/fsl/Kconfig                      |   2 +-
+ include/configs/p1_p2_rdb_pc.h               |  21 ---
+ 22 files changed, 5 insertions(+), 1405 deletions(-)
+ delete mode 100644 arch/powerpc/dts/p2020rdb-pc.dts
+ delete mode 100644 arch/powerpc/dts/p2020rdb-pc.dtsi
+ delete mode 100644 arch/powerpc/dts/p2020rdb-pc_36b.dts
+ delete mode 100644 configs/P2020RDB-PC_36BIT_NAND_defconfig
+ delete mode 100644 configs/P2020RDB-PC_36BIT_SDCARD_defconfig
+ delete mode 100644 configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
+ delete mode 100644 configs/P2020RDB-PC_36BIT_defconfig
+ delete mode 100644 configs/P2020RDB-PC_NAND_defconfig
+ delete mode 100644 configs/P2020RDB-PC_SDCARD_defconfig
+ delete mode 100644 configs/P2020RDB-PC_SPIFLASH_defconfig
+ delete mode 100644 configs/P2020RDB-PC_defconfig
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index e806fa2e3e7..8ea591cba4f 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -467,8 +467,7 @@ config SYS_IMMR
- 	hex "Address for the Internal Memory-Mapped Registers (IMMR) window"
- 	depends on PPC || FSL_LSCH2 || FSL_LSCH3 || ARCH_LS1021A
- 	default 0xFF000000 if MPC8xx
--	default 0xF0000000 if ARCH_MPC8313
--	default 0xE0000000 if MPC83xx && !ARCH_MPC8313
-+	default 0xE0000000 if MPC83xx
- 	default 0x01000000 if ARCH_LS1021A || FSL_LSCH2 || FSL_LSCH3
- 	default 0xFFE00000 if ARCH_P1010 || ARCH_P1020 || \
- 			      ARCH_P1021 || ARCH_P1024 || \
-diff --git a/arch/powerpc/cpu/mpc83xx/Kconfig b/arch/powerpc/cpu/mpc83xx/Kconfig
-index daae933e52e..06d84c2d945 100644
---- a/arch/powerpc/cpu/mpc83xx/Kconfig
-+++ b/arch/powerpc/cpu/mpc83xx/Kconfig
-@@ -125,19 +125,6 @@ config ARCH_MPC8308
- 	select MPC83XX_PCIE1_SUPPORT
- 	select MPC83XX_SECOND_I2C
+diff --git a/arch/powerpc/cpu/mpc85xx/Kconfig b/arch/powerpc/cpu/mpc85xx/Kconfig
+index 309becda5ac..7e885014ebe 100644
+--- a/arch/powerpc/cpu/mpc85xx/Kconfig
++++ b/arch/powerpc/cpu/mpc85xx/Kconfig
+@@ -157,16 +157,6 @@ config TARGET_P1020RDB_PD
+ 	imply SATA
+ 	imply PANIC_HANG
  
--config ARCH_MPC831X
--	bool
--	select MPC83XX_PCI_SUPPORT
--	select MPC83XX_TSEC1_SUPPORT
--	select MPC83XX_TSEC2_SUPPORT
--	select SYS_CACHE_SHIFT_5
+-config TARGET_P2020RDB
+-	bool "Support P2020RDB-PC"
+-	select SUPPORT_SPL
+-	select SUPPORT_TPL
+-	select ARCH_P2020
+-	select SYS_L2_SIZE_512KB
+-	imply CMD_EEPROM
+-	imply SATA
+-	imply SATA_SIL
 -
--config ARCH_MPC8313
--	bool
--	select ARCH_MPC831X
--	select MPC83XX_SECOND_I2C
--	select FSL_ELBC
+ config TARGET_TURRIS_1X
+ 	bool "Support Turris 1.x"
+ 	select SUPPORT_SPL
+diff --git a/arch/powerpc/dts/Makefile b/arch/powerpc/dts/Makefile
+index 01191273269..e44d49cabdf 100644
+--- a/arch/powerpc/dts/Makefile
++++ b/arch/powerpc/dts/Makefile
+@@ -11,7 +11,6 @@ dtb-$(CONFIG_TARGET_P1010RDB_PA) += p1010rdb-pa.dtb p1010rdb-pa_36b.dtb
+ dtb-$(CONFIG_TARGET_P1010RDB_PB) += p1010rdb-pb.dtb p1010rdb-pb_36b.dtb
+ dtb-$(CONFIG_TARGET_P1020RDB_PC) += p1020rdb-pc.dtb p1020rdb-pc_36b.dtb
+ dtb-$(CONFIG_TARGET_P1020RDB_PD) += p1020rdb-pd.dtb
+-dtb-$(CONFIG_TARGET_P2020RDB) += p2020rdb-pc.dtb p2020rdb-pc_36b.dtb
+ dtb-$(CONFIG_TARGET_P3041DS) += p3041ds.dtb
+ dtb-$(CONFIG_TARGET_P4080DS) += p4080ds.dtb
+ dtb-$(CONFIG_TARGET_P5040DS) += p5040ds.dtb
+diff --git a/arch/powerpc/dts/p2020rdb-pc.dts b/arch/powerpc/dts/p2020rdb-pc.dts
+deleted file mode 100644
+index 84d32360baa..00000000000
+--- a/arch/powerpc/dts/p2020rdb-pc.dts
++++ /dev/null
+@@ -1,59 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
+-/*
+- * P2020RDB-PC Device Tree Source
+- *
+- * Copyright 2013 - 2015 Freescale Semiconductor Inc.
+- * Copyright 2019 NXP
+- */
 -
- config ARCH_MPC832X
- 	bool
- 	select MPC83XX_QUICC_ENGINE
-diff --git a/arch/powerpc/cpu/mpc83xx/cpu.c b/arch/powerpc/cpu/mpc83xx/cpu.c
-index f8e9f716936..e1f70f40fec 100644
---- a/arch/powerpc/cpu/mpc83xx/cpu.c
-+++ b/arch/powerpc/cpu/mpc83xx/cpu.c
-@@ -24,7 +24,7 @@
- #include <tsec.h>
- #include <netdev.h>
- #include <fsl_esdhc.h>
--#if defined(CONFIG_BOOTCOUNT_LIMIT) && !defined(CONFIG_ARCH_MPC831X)
-+#if defined(CONFIG_BOOTCOUNT_LIMIT)
- #include <linux/immap_qe.h>
- #include <asm/io.h>
- #endif
-@@ -48,10 +48,6 @@ int checkcpu(void)
- 	} cpu_type_list [] = {
- 		CPU_TYPE_ENTRY(8308),
- 		CPU_TYPE_ENTRY(8309),
--		CPU_TYPE_ENTRY(8311),
--		CPU_TYPE_ENTRY(8313),
--		CPU_TYPE_ENTRY(8314),
--		CPU_TYPE_ENTRY(8315),
- 		CPU_TYPE_ENTRY(8321),
- 		CPU_TYPE_ENTRY(8323),
- 		CPU_TYPE_ENTRY(8343),
-diff --git a/arch/powerpc/cpu/mpc83xx/cpu_init.c b/arch/powerpc/cpu/mpc83xx/cpu_init.c
-index 340f9a0da56..555dd502b36 100644
---- a/arch/powerpc/cpu/mpc83xx/cpu_init.c
-+++ b/arch/powerpc/cpu/mpc83xx/cpu_init.c
-@@ -84,12 +84,6 @@ void cpu_init_f (volatile immap_t * im)
- #ifdef CFG_SYS_SCCR_TSEC2CM /* TSEC2 clock mode */
- 		SCCR_TSEC2CM |
- #endif
--#ifdef CONFIG_SYS_SCCR_TSEC1ON /* TSEC1 clock switch */
--		SCCR_TSEC1ON |
--#endif
--#ifdef CONFIG_SYS_SCCR_TSEC2ON /* TSEC2 clock switch */
--		SCCR_TSEC2ON |
--#endif
- #ifdef CONFIG_SYS_SCCR_USBMPHCM /* USB MPH clock mode */
- 		SCCR_USBMPHCM |
- #endif
-@@ -122,12 +116,6 @@ void cpu_init_f (volatile immap_t * im)
- #ifdef CFG_SYS_SCCR_TSEC2CM /* TSEC2 clock mode */
- 		(CFG_SYS_SCCR_TSEC2CM << SCCR_TSEC2CM_SHIFT) |
- #endif
--#ifdef CONFIG_SYS_SCCR_TSEC1ON /* TSEC1 clock switch */
--		(CONFIG_SYS_SCCR_TSEC1ON << SCCR_TSEC1ON_SHIFT) |
--#endif
--#ifdef CONFIG_SYS_SCCR_TSEC2ON /* TSEC2 clock switch */
--		(CONFIG_SYS_SCCR_TSEC2ON << SCCR_TSEC2ON_SHIFT) |
--#endif
- #ifdef CONFIG_SYS_SCCR_USBMPHCM /* USB MPH clock mode */
- 		(CONFIG_SYS_SCCR_USBMPHCM << SCCR_USBMPHCM_SHIFT) |
- #endif
-@@ -177,7 +165,7 @@ void cpu_init_f (volatile immap_t * im)
- 
- 	/* System General Purpose Register */
- #ifdef CFG_SYS_SICRH
--#if defined(CONFIG_ARCH_MPC834X) || defined(CONFIG_ARCH_MPC8313)
-+#if defined(CONFIG_ARCH_MPC834X)
- 	/* regarding to MPC34x manual rev.1 bits 28..29 must be preserved */
- 	__raw_writel((im->sysconf.sicrh & 0x0000000C) | CFG_SYS_SICRH,
- 		     &im->sysconf.sicrh);
-diff --git a/arch/powerpc/cpu/mpc83xx/fdt.c b/arch/powerpc/cpu/mpc83xx/fdt.c
-index 1bd4f2b3449..08c3e783597 100644
---- a/arch/powerpc/cpu/mpc83xx/fdt.c
-+++ b/arch/powerpc/cpu/mpc83xx/fdt.c
-@@ -17,7 +17,7 @@ extern void ft_qe_setup(void *blob);
- DECLARE_GLOBAL_DATA_PTR;
- 
- #if defined(CONFIG_BOOTCOUNT_LIMIT) && \
--	(defined(CONFIG_QE) && !defined(CONFIG_ARCH_MPC831X))
-+	defined(CONFIG_QE)
- #include <linux/immap_qe.h>
- 
- void fdt_fixup_muram (void *blob)
-@@ -50,44 +50,6 @@ void ft_cpu_setup(void *blob, struct bd_info *bd)
- 		 REVID_MAJOR(spridr) >= 2)
- 		fdt_fixup_crypto_node(blob, 0x0204);
- 
--#ifdef CONFIG_ARCH_MPC8313
--	/*
--	* mpc8313e erratum IPIC1 swapped TSEC interrupt ID numbers on rev. 1
--	* h/w (see AN3545).  The base device tree in use has rev. 1 ID numbers,
--	* so if on Rev. 2 (and higher) h/w, we fix them up here
--	*/
--	if (REVID_MAJOR(immr->sysconf.spridr) >= 2) {
--		int nodeoffset, path;
--		const char *prop;
+-/include/ "p2020.dtsi"
 -
--		nodeoffset = fdt_path_offset(blob, "/aliases");
--		if (nodeoffset >= 0) {
--			prop = fdt_getprop(blob, nodeoffset, "ethernet0", NULL);
--			if (prop) {
--				u32 tmp[] = { 32, 0x8, 33, 0x8, 34, 0x8 };
+-/ {
+-	model = "fsl,P2020RDB-PC";
+-	compatible = "fsl,P2020RDB-PC";
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-	interrupt-parent = <&mpic>;
 -
--				path = fdt_path_offset(blob, prop);
--				prop = fdt_getprop(blob, path, "interrupts",
--						   NULL);
--				if (prop)
--					fdt_setprop(blob, path, "interrupts",
--						    &tmp, sizeof(tmp));
--			}
--			prop = fdt_getprop(blob, nodeoffset, "ethernet1", NULL);
--			if (prop) {
--				u32 tmp[] = { 35, 0x8, 36, 0x8, 37, 0x8 };
+-	lbc: localbus@ffe05000 {
+-		reg = <0 0xffe05000 0 0x1000>;
+-	};
 -
--				path = fdt_path_offset(blob, prop);
--				prop = fdt_getprop(blob, path, "interrupts",
--						   NULL);
--				if (prop)
--					fdt_setprop(blob, path, "interrupts",
--						    &tmp, sizeof(tmp));
--			}
--		}
--	}
--#endif
+-	soc: soc@ffe00000 {
+-		ranges = <0x0 0x0 0xffe00000 0x100000>;
+-	};
 -
- 	do_fixup_by_prop_u32(blob, "device_type", "cpu", 4,
- 		"timebase-frequency", (bd->bi_busfreq / 4), 1);
- 	do_fixup_by_prop_u32(blob, "device_type", "cpu", 4,
-@@ -116,7 +78,7 @@ void ft_cpu_setup(void *blob, struct bd_info *bd)
- 	fdt_fixup_memory(blob, (u64)gd->ram_base, (u64)gd->ram_size);
- 
- #if defined(CONFIG_BOOTCOUNT_LIMIT) && \
--	(defined(CONFIG_QE) && !defined(CONFIG_ARCH_MPC831X))
-+	defined(CONFIG_QE)
- 	fdt_fixup_muram (blob);
- #endif
- }
-diff --git a/arch/powerpc/cpu/mpc83xx/hid/hid.h b/arch/powerpc/cpu/mpc83xx/hid/hid.h
-index 089d1d77f0b..0ae528af878 100644
---- a/arch/powerpc/cpu/mpc83xx/hid/hid.h
-+++ b/arch/powerpc/cpu/mpc83xx/hid/hid.h
-@@ -48,12 +48,7 @@
- 	CONFIG_HID0_INIT_SLEEP_BIT \
- )
- 
--#ifdef CONFIG_TARGET_IDS8313
--/* IDS8313 defines a reserved bit; keep to not break compatibility */
--#define CFG_HID2_SPECIAL 0x00020000
--#else
- #define CFG_HID2_SPECIAL 0x0
--#endif
- 
- #define CFG_SYS_HID2 ( \
- 	CONFIG_HID2_LET_BIT |\
-diff --git a/arch/powerpc/cpu/mpc83xx/hrcw/Kconfig b/arch/powerpc/cpu/mpc83xx/hrcw/Kconfig
-index 49d5db098f7..eef39021354 100644
---- a/arch/powerpc/cpu/mpc83xx/hrcw/Kconfig
-+++ b/arch/powerpc/cpu/mpc83xx/hrcw/Kconfig
-@@ -24,7 +24,7 @@ config DDR_MC_CLOCK_MODE_1_1
- 
- endchoice
- 
--if !ARCH_MPC8313 && !ARCH_MPC832X
-+if !ARCH_MPC832X
- 
- choice
- 	prompt "System PLL VCO division"
-@@ -36,11 +36,9 @@ config SYSTEM_PLL_VCO_DIV_2
- 	bool "2"
- 
- config SYSTEM_PLL_VCO_DIV_4
--	depends on !ARCH_MPC831X
- 	bool "4"
- 
- config SYSTEM_PLL_VCO_DIV_8
--	depends on !ARCH_MPC831X
- 	bool "8"
- 
- endchoice
-@@ -418,21 +416,9 @@ choice
- config TSEC1_MODE_MII
- 	bool "MII"
- 
--config TSEC1_MODE_RMII
--	depends on ARCH_MPC831X
--	bool "RMII"
+-	pci2: pcie@ffe08000 {
+-		reg = <0x0 0xffe08000 0x0 0x1000>;	/* registers */
+-		status = "disabled";
+-	};
 -
- config TSEC1_MODE_RGMII
- 	bool "RGMII"
- 
--config TSEC1_MODE_RTBI
--	depends on ARCH_MPC831X
--	bool "RTBI"
+-	pci1: pcie@ffe09000 {
+-		reg = <0x0 0xffe09000 0x0 0x1000>;	/* registers */
+-		ranges = <0x01000000 0x0 0x00000000 0x0 0xffc10000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xa0000000 0x0 0xa0000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
 -
--config TSEC1_MODE_SGMII
--	depends on ARCH_MPC831X
--	bool "SGMII"
+-	pci0: pcie@ffe0a000 {
+-		reg = <0x0 0xffe0a000 0x0 0x1000>;	/* registers */
+-		ranges = <0x01000000 0x0 0x00000000 0x0 0xffc00000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0x80000000 0x0 0x80000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
 -
- endchoice
- 
- endif
-@@ -445,21 +431,9 @@ choice
- config TSEC2_MODE_MII
- 	bool "MII"
- 
--config TSEC2_MODE_RMII
--	depends on ARCH_MPC831X
--	bool "RMII"
+-	aliases {
+-		spi0 = &espi0;
+-	};
+-};
 -
- config TSEC2_MODE_RGMII
- 	bool "RGMII"
- 
--config TSEC2_MODE_RTBI
--	depends on ARCH_MPC831X
--	bool "RTBI"
+-/include/ "p2020rdb-pc.dtsi"
+-/include/ "p2020-post.dtsi"
 -
--config TSEC2_MODE_SGMII
--	depends on ARCH_MPC831X
--	bool "SGMII"
+-&espi0 {
+-	flash@0 {
+-		compatible = "jedec,spi-nor";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		reg = <0>;
+-		spi-max-frequency = <10000000>; /* input clock */
+-	};
+-};
+diff --git a/arch/powerpc/dts/p2020rdb-pc.dtsi b/arch/powerpc/dts/p2020rdb-pc.dtsi
+deleted file mode 100644
+index 0d2acc746e4..00000000000
+--- a/arch/powerpc/dts/p2020rdb-pc.dtsi
++++ /dev/null
+@@ -1,50 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
+-/*
+- * P2020 RDB-PC Device Tree Source stub (no addresses or top-level ranges)
+- *
+- * Copyright 2011 Freescale Semiconductor Inc.
+- * Copyright 2020 NXP
+- */
 -
- endchoice
- 
- endif
-@@ -490,7 +464,7 @@ endchoice
- 
- endif
- 
--if ARCH_MPC831X || ARCH_MPC832X || ARCH_MPC8360
-+if ARCH_MPC832X || ARCH_MPC8360
- 
- choice
- 	prompt "LALE timing"
-@@ -534,7 +508,7 @@ config DDR_MC_CLOCK_MODE
- 
- config SYSTEM_PLL_VCO_DIV
- 	int
--	default 2 if ARCH_MPC8313 || ARCH_MPC832X
-+	default 2 if ARCH_MPC832X
- 	default 0 if SYSTEM_PLL_VCO_DIV_2 && !ARCH_MPC8360
- 	default 1 if SYSTEM_PLL_VCO_DIV_4 && !ARCH_MPC8360
- 	default 2 if SYSTEM_PLL_VCO_DIV_8 && !ARCH_MPC8360
-@@ -615,19 +589,13 @@ config TSEC1_MODE
- 	hex
- 	default 0x0 if !MPC83XX_TSEC1_SUPPORT
- 	default 0x0 if TSEC1_MODE_MII
--	default 0x1 if TSEC1_MODE_RMII
- 	default 0x3 if TSEC1_MODE_RGMII
--	default 0x5 if TSEC1_MODE_RTBI
--	default 0x6 if TSEC1_MODE_SGMII
- 
- config TSEC2_MODE
- 	hex
- 	default 0x0 if !MPC83XX_TSEC2_SUPPORT
- 	default 0x0 if TSEC2_MODE_MII
--	default 0x1 if TSEC2_MODE_RMII
- 	default 0x3 if TSEC2_MODE_RGMII
--	default 0x5 if TSEC2_MODE_RTBI
--	default 0x6 if TSEC2_MODE_SGMII
- 
- config SECONDARY_DDR_IO
- 	int
-diff --git a/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr b/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr
-index 86c5f42dd37..a85e698a867 100644
---- a/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr
-+++ b/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr
-@@ -1,6 +1,6 @@
- menu "LCRR - Clock Ratio Register register"
- 
--if !ARCH_MPC831X && !ARCH_MPC832X
-+if !ARCH_MPC832X
- 
- choice
- 	prompt "DLL bypass"
-diff --git a/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.spcr b/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.spcr
-index 91686b3b8b4..7bf7bda09e0 100644
---- a/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.spcr
-+++ b/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.spcr
-@@ -14,7 +14,7 @@ config SPCR_OPT_SPEC_READ
- 
- endchoice
- 
--if ARCH_MPC8308 || ARCH_MPC831X
-+if ARCH_MPC8308
- 
- choice
- 	prompt "TSEC emergency priority"
-diff --git a/arch/powerpc/cpu/mpc83xx/spd_sdram.c b/arch/powerpc/cpu/mpc83xx/spd_sdram.c
-index e847c03f378..949efc8e828 100644
---- a/arch/powerpc/cpu/mpc83xx/spd_sdram.c
-+++ b/arch/powerpc/cpu/mpc83xx/spd_sdram.c
-@@ -37,7 +37,7 @@ void board_add_ram_info(int use_default)
- 	printf(" (DDR%d", ((ddr->sdram_cfg & SDRAM_CFG_SDRAM_TYPE_MASK)
- 			   >> SDRAM_CFG_SDRAM_TYPE_SHIFT) - 1);
- 
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
-+#if defined(CONFIG_ARCH_MPC8308)
- 	if ((ddr->sdram_cfg & SDRAM_CFG_DBW_MASK) == SDRAM_CFG_DBW_16)
- 		puts(", 16-bit");
- 	else if ((ddr->sdram_cfg & SDRAM_CFG_DBW_MASK) == SDRAM_CFG_DBW_32)
-diff --git a/arch/powerpc/cpu/mpc83xx/speed.c b/arch/powerpc/cpu/mpc83xx/speed.c
-index a2343c67f28..e2ed3caf022 100644
---- a/arch/powerpc/cpu/mpc83xx/speed.c
-+++ b/arch/powerpc/cpu/mpc83xx/speed.c
-@@ -87,7 +87,7 @@ int get_clocks(void)
- 	u32 lcrr;
- 
- 	u32 csb_clk;
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
-+#if defined(CONFIG_ARCH_MPC8308) || \
- 	defined(CONFIG_ARCH_MPC834X)
- 	u32 tsec1_clk;
- 	u32 tsec2_clk;
-@@ -117,7 +117,7 @@ int get_clocks(void)
- 	u32 qe_clk;
- 	u32 brg_clk;
- #endif
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
-+#if defined(CONFIG_ARCH_MPC8308)
- 	u32 pciexp1_clk;
- 	u32 pciexp2_clk;
- #endif
-@@ -146,7 +146,7 @@ int get_clocks(void)
- 
- 	sccr = im->clk.sccr;
- 
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
-+#if defined(CONFIG_ARCH_MPC8308) || \
- 	defined(CONFIG_ARCH_MPC834X)
- 	switch ((sccr & SCCR_TSEC1CM) >> SCCR_TSEC1CM_SHIFT) {
- 	case 0:
-@@ -167,7 +167,7 @@ int get_clocks(void)
- 	}
- #endif
- 
--#if defined(CONFIG_ARCH_MPC830X) || defined(CONFIG_ARCH_MPC831X) || \
-+#if defined(CONFIG_ARCH_MPC830X) || \
- 	defined(CONFIG_ARCH_MPC834X)
- 	switch ((sccr & SCCR_USBDRCM) >> SCCR_USBDRCM_SHIFT) {
- 	case 0:
-@@ -206,13 +206,6 @@ int get_clocks(void)
- 		/* unknown SCCR_TSEC2CM value */
- 		return -4;
- 	}
--#elif defined(CONFIG_ARCH_MPC8313)
--	tsec2_clk = tsec1_clk;
+-&soc {
+-	mdio@24520 {
+-		phy0: ethernet-phy@0 {
+-			interrupts = <3 1 0 0>;
+-			reg = <0x0>;
+-			};
+-		phy1: ethernet-phy@1 {
+-			interrupts = <2 1 0 0>;
+-			reg = <0x1>;
+-			};
+-	};
 -
--	if (!(sccr & SCCR_TSEC1ON))
--		tsec1_clk = 0;
--	if (!(sccr & SCCR_TSEC2ON))
--		tsec2_clk = 0;
- #endif
- 
- #if defined(CONFIG_ARCH_MPC834X)
-@@ -286,7 +279,7 @@ int get_clocks(void)
- 	i2c1_clk = csb_clk;
- #elif defined(CONFIG_ARCH_MPC832X)
- 	i2c1_clk = enc_clk;
--#elif defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
-+#elif defined(CONFIG_ARCH_MPC8308)
- 	i2c1_clk = enc_clk;
- #elif defined(CONFIG_FSL_ESDHC)
- 	i2c1_clk = sdhc_clk;
-@@ -295,7 +288,7 @@ int get_clocks(void)
- 	i2c2_clk = csb_clk; /* i2c-2 clk is equal to csb clk */
- #endif
- 
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
-+#if defined(CONFIG_ARCH_MPC8308)
- 	switch ((sccr & SCCR_PCIEXP1CM) >> SCCR_PCIEXP1CM_SHIFT) {
- 	case 0:
- 		pciexp1_clk = 0;
-@@ -392,7 +385,7 @@ int get_clocks(void)
- #endif
- 
- 	gd->arch.csb_clk = csb_clk;
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
-+#if defined(CONFIG_ARCH_MPC8308) || \
- 	defined(CONFIG_ARCH_MPC834X)
- 	gd->arch.tsec1_clk = tsec1_clk;
- 	gd->arch.tsec2_clk = tsec2_clk;
-@@ -420,7 +413,7 @@ int get_clocks(void)
- 	gd->arch.qe_clk = qe_clk;
- 	gd->arch.brg_clk = brg_clk;
- #endif
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
-+#if defined(CONFIG_ARCH_MPC8308)
- 	gd->arch.pciexp1_clk = pciexp1_clk;
- 	gd->arch.pciexp2_clk = pciexp2_clk;
- #endif
-@@ -491,7 +484,7 @@ static int do_clocks(struct cmd_tbl *cmdtp, int flag, int argc,
- 	printf("  SDHC:                %-4s MHz\n",
- 	       strmhz(buf, gd->arch.sdhc_clk));
- #endif
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
-+#if defined(CONFIG_ARCH_MPC8308) || \
- 	defined(CONFIG_ARCH_MPC834X)
- 	printf("  TSEC1:               %-4s MHz\n",
- 	       strmhz(buf, gd->arch.tsec1_clk));
-@@ -504,7 +497,7 @@ static int do_clocks(struct cmd_tbl *cmdtp, int flag, int argc,
- 	printf("  USB MPH:             %-4s MHz\n",
- 	       strmhz(buf, gd->arch.usbmph_clk));
- #endif
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
-+#if defined(CONFIG_ARCH_MPC8308)
- 	printf("  PCIEXP1:             %-4s MHz\n",
- 	       strmhz(buf, gd->arch.pciexp1_clk));
- 	printf("  PCIEXP2:             %-4s MHz\n",
-diff --git a/arch/powerpc/include/asm/arch-mpc83xx/gpio.h b/arch/powerpc/include/asm/arch-mpc83xx/gpio.h
-index dd368af7b91..6449fded125 100644
---- a/arch/powerpc/include/asm/arch-mpc83xx/gpio.h
-+++ b/arch/powerpc/include/asm/arch-mpc83xx/gpio.h
-@@ -6,7 +6,7 @@
- /*
-  * The MCP83xx's 1-2 GPIO controllers each with 32 bits.
-  */
--#if defined(CONFIG_ARCH_MPC8313) || defined(CONFIG_ARCH_MPC8308)
-+#if defined(CONFIG_ARCH_MPC8308)
- #define MPC83XX_GPIO_CTRLRS 1
- #elif defined(CONFIG_ARCH_MPC834X)
- #define MPC83XX_GPIO_CTRLRS 2
-diff --git a/arch/powerpc/include/asm/arch-mpc83xx/soc.h b/arch/powerpc/include/asm/arch-mpc83xx/soc.h
-index d61d3a944f1..0eeaa23b190 100644
---- a/arch/powerpc/include/asm/arch-mpc83xx/soc.h
-+++ b/arch/powerpc/include/asm/arch-mpc83xx/soc.h
-@@ -10,8 +10,6 @@
- enum soc_type {
- 	SOC_MPC8308,
- 	SOC_MPC8309,
--	SOC_MPC8313,
--	SOC_MPC8315,
- 	SOC_MPC832X,
- 	SOC_MPC8349,
- 	SOC_MPC8360,
-@@ -26,25 +24,12 @@ static inline bool mpc83xx_has_sdhc(int type)
- static inline bool mpc83xx_has_tsec(int type)
- {
- 	return (type == SOC_MPC8308) ||
--	       (type == SOC_MPC8313) ||
--	       (type == SOC_MPC8315) ||
- 	       (type == SOC_MPC8349);
- }
- 
- static inline bool mpc83xx_has_pcie1(int type)
- {
--	return (type == SOC_MPC8308) ||
--	       (type == SOC_MPC8315);
--}
+-	mdio@25520 {
+-		tbi0: tbi-phy@11 {
+-			reg = <0x11>;
+-			device_type = "tbi-phy";
+-		};
+-	};
 -
--static inline bool mpc83xx_has_pcie2(int type)
--{
--	return type == SOC_MPC8315;
--}
+-	mdio@26520 {
+-		status = "disabled";
+-	};
 -
--static inline bool mpc83xx_has_sata(int type)
--{
--	return type == SOC_MPC8315;
-+	return type == SOC_MPC8308;
- }
- 
- static inline bool mpc83xx_has_pci(int type)
-@@ -54,8 +39,7 @@ static inline bool mpc83xx_has_pci(int type)
- 
- static inline bool mpc83xx_has_second_i2c(int type)
- {
--	return (type != SOC_MPC8315) &&
--	       (type != SOC_MPC832X);
-+	return type != SOC_MPC832X;
- }
- 
- static inline bool mpc83xx_has_quicc_engine(int type)
-diff --git a/arch/powerpc/include/asm/global_data.h b/arch/powerpc/include/asm/global_data.h
-index 608e49667af..168eb55b497 100644
---- a/arch/powerpc/include/asm/global_data.h
-+++ b/arch/powerpc/include/asm/global_data.h
-@@ -26,7 +26,7 @@ struct arch_global_data {
- #else
- 	/* There are other clocks in the MPC83XX */
- 	u32 csb_clk;
--# if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
-+# if defined(CONFIG_ARCH_MPC8308) || \
- 	defined(CONFIG_ARCH_MPC834X)
- 	u32 tsec1_clk;
- 	u32 tsec2_clk;
-@@ -39,7 +39,7 @@ struct arch_global_data {
- 	u32 enc_clk;
- 	u32 lbiu_clk;
- 	u32 lclk_clk;
--# if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
-+# if defined(CONFIG_ARCH_MPC8308)
- 	u32 pciexp1_clk;
- 	u32 pciexp2_clk;
- # endif
-diff --git a/arch/powerpc/include/asm/immap_83xx.h b/arch/powerpc/include/asm/immap_83xx.h
-index 2eff504a80d..c7e7616529d 100644
---- a/arch/powerpc/include/asm/immap_83xx.h
-+++ b/arch/powerpc/include/asm/immap_83xx.h
-@@ -688,41 +688,6 @@ typedef struct immap {
- 	u8			res7[0xC0000];
- } immap_t;
- 
--#elif defined(CONFIG_ARCH_MPC8313)
--typedef struct immap {
--	sysconf83xx_t		sysconf;	/* System configuration */
--	wdt83xx_t		wdt;		/* Watch Dog Timer (WDT) Registers */
--	rtclk83xx_t		rtc;		/* Real Time Clock Module Registers */
--	rtclk83xx_t		pit;		/* Periodic Interval Timer */
--	gtm83xx_t		gtm[2];		/* Global Timers Module */
--	ipic83xx_t		ipic;		/* Integrated Programmable Interrupt Controller */
--	arbiter83xx_t		arbiter;	/* System Arbiter Registers */
--	reset83xx_t		reset;		/* Reset Module */
--	clk83xx_t		clk;		/* System Clock Module */
--	pmc83xx_t		pmc;		/* Power Management Control Module */
--	gpio83xx_t		gpio[1];	/* General purpose I/O module */
--	u8			res0[0x1300];
--	ddr83xx_t		ddr;		/* DDR Memory Controller Memory */
--	fsl_i2c_t		i2c[2];		/* I2C Controllers */
--	u8			res1[0x1300];
--	duart83xx_t		duart[2];	/* DUART */
--	u8			res2[0x900];
--	fsl_lbc_t		im_lbc;		/* Local Bus Controller Regs */
--	u8			res3[0x1000];
--	spi8xxx_t		spi;		/* Serial Peripheral Interface */
--	dma83xx_t		dma;		/* DMA */
--	pciconf83xx_t		pci_conf[1];	/* PCI Software Configuration Registers */
--	u8			res4[0x80];
--	ios83xx_t		ios;		/* Sequencer */
--	pcictrl83xx_t		pci_ctrl[1];	/* PCI Controller Control and Status Registers */
--	u8			res5[0x1aa00];
--	usb83xx_t		usb[1];
--	tsec83xx_t		tsec[2];
--	u8			res6[0xA000];
--	security83xx_t		security;
--	u8			res7[0xC0000];
--} immap_t;
+-	enet0: ethernet@24000 {
+-		phy-connection-type = "rgmii-id";
+-		fixed-link {
+-			speed = <1000>;
+-			full-duplex;
+-		};
+-	};
 -
- #elif defined(CONFIG_ARCH_MPC8308)
- typedef struct immap {
- 	sysconf83xx_t		sysconf;	/* System configuration */
-diff --git a/arch/powerpc/include/asm/mpc8xxx_spi.h b/arch/powerpc/include/asm/mpc8xxx_spi.h
-index c136b3fb4af..5d8d7db2933 100644
---- a/arch/powerpc/include/asm/mpc8xxx_spi.h
-+++ b/arch/powerpc/include/asm/mpc8xxx_spi.h
-@@ -11,7 +11,6 @@
- #include <asm/types.h>
+-	enet1: ethernet@25000 {
+-		tbi-handle = <&tbi0>;
+-		phy-handle = <&phy0>;
+-		phy-connection-type = "sgmii";
+-	};
+-
+-	enet2: ethernet@26000 {
+-		phy-handle = <&phy1>;
+-		phy-connection-type = "rgmii-id";
+-	};
+-};
+diff --git a/arch/powerpc/dts/p2020rdb-pc_36b.dts b/arch/powerpc/dts/p2020rdb-pc_36b.dts
+deleted file mode 100644
+index c847417df99..00000000000
+--- a/arch/powerpc/dts/p2020rdb-pc_36b.dts
++++ /dev/null
+@@ -1,59 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
+-/*
+- * P2020RDB-PC (36-bit address map) Device Tree Source
+- *
+- * Copyright 2013 - 2015 Freescale Semiconductor Inc.
+- * Copyright 2019 NXP
+- */
+-
+-/include/ "p2020.dtsi"
+-
+-/ {
+-	model = "fsl,P2020RDB-PC";
+-	compatible = "fsl,P2020RDB-PC";
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-	interrupt-parent = <&mpic>;
+-
+-	lbc: localbus@fffe05000 {
+-		reg = <0xf 0xffe05000 0 0x1000>;
+-	};
+-
+-	soc: soc@fffe00000 {
+-		ranges = <0x0 0xf 0xffe00000 0x100000>;
+-	};
+-
+-	pci2: pcie@fffe08000 {
+-		reg = <0xf 0xffe08000 0x0 0x1000>;	/* registers */
+-		status = "disabled";
+-	};
+-
+-	pci1: pcie@fffe09000 {
+-		reg = <0xf 0xffe09000 0x0 0x1000>;	/* registers */
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xffc10000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xc0000000 0xc 0x20000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
+-
+-	pci0: pcie@fffe0a000 {
+-		reg = <0xf 0xffe0a000 0x0 0x1000>;	/* registers */
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xffc00000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0x80000000 0xc 0x00000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
+-
+-	aliases {
+-		spi0 = &espi0;
+-	};
+-};
+-
+-/include/ "p2020rdb-pc.dtsi"
+-/include/ "p2020-post.dtsi"
+-
+-&espi0 {
+-	flash@0 {
+-		compatible = "jedec,spi-nor";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		reg = <0>;
+-		spi-max-frequency = <10000000>; /* input clock */
+-	};
+-};
+diff --git a/board/nxp/p1_p2_rdb_pc/Kconfig b/board/nxp/p1_p2_rdb_pc/Kconfig
+index 2ab46d99434..2c82048564d 100644
+--- a/board/nxp/p1_p2_rdb_pc/Kconfig
++++ b/board/nxp/p1_p2_rdb_pc/Kconfig
+@@ -1,6 +1,5 @@
+ if	TARGET_P1020RDB_PC	|| \
+-	TARGET_P1020RDB_PD	|| \
+-	TARGET_P2020RDB
++	TARGET_P1020RDB_PD
  
- #if defined(CONFIG_ARCH_MPC8308) || \
--	defined(CONFIG_ARCH_MPC8313) || \
- 	defined(CONFIG_ARCH_MPC832X) || \
- 	defined(CONFIG_ARCH_MPC834X)
+ config SYS_BOARD
+ 	default "p1_p2_rdb_pc"
+diff --git a/board/nxp/p1_p2_rdb_pc/MAINTAINERS b/board/nxp/p1_p2_rdb_pc/MAINTAINERS
+index 1ce3501f379..d9a5cdf3f42 100644
+--- a/board/nxp/p1_p2_rdb_pc/MAINTAINERS
++++ b/board/nxp/p1_p2_rdb_pc/MAINTAINERS
+@@ -15,11 +15,3 @@ F:	configs/P1020RDB-PD_defconfig
+ F:	configs/P1020RDB-PD_NAND_defconfig
+ F:	configs/P1020RDB-PD_SDCARD_defconfig
+ F:	configs/P1020RDB-PD_SPIFLASH_defconfig
+-F:	configs/P2020RDB-PC_defconfig
+-F:	configs/P2020RDB-PC_36BIT_defconfig
+-F:	configs/P2020RDB-PC_36BIT_NAND_defconfig
+-F:	configs/P2020RDB-PC_36BIT_SDCARD_defconfig
+-F:	configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
+-F:	configs/P2020RDB-PC_NAND_defconfig
+-F:	configs/P2020RDB-PC_SDCARD_defconfig
+-F:	configs/P2020RDB-PC_SPIFLASH_defconfig
+diff --git a/board/nxp/p1_p2_rdb_pc/README b/board/nxp/p1_p2_rdb_pc/README
+index fd849bfc29a..5bf27816ab2 100644
+--- a/board/nxp/p1_p2_rdb_pc/README
++++ b/board/nxp/p1_p2_rdb_pc/README
+@@ -6,10 +6,8 @@ P1_P2_RDB_PC represents a set of boards including
+     P1020RDB-PD
+     P1021RDB-PC
+     P1024RDB
+-    P2020RDB-PC
  
-diff --git a/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt b/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt
-index 065575d87f0..baaacb62846 100644
---- a/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt
-+++ b/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt
-@@ -6,8 +6,6 @@ system.
- Required properties:
- - compatible: must be one of "fsl,mpc8308-clk",
-                              "fsl,mpc8309-clk",
--                             "fsl,mpc8313-clk",
--                             "fsl,mpc8315-clk",
-                              "fsl,mpc832x-clk",
-                              "fsl,mpc8349-clk",
-                              "fsl,mpc8360-clk"
-diff --git a/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt b/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt
-index efdcdfbdba0..5bdbd309fbf 100644
---- a/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt
-+++ b/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt
-@@ -6,8 +6,6 @@ Required properties:
- - compatible: must be one of "fsl,mpc83xx",
-                              "fsl,mpc8308",
-                              "fsl,mpc8309",
--                             "fsl,mpc8313",
--                             "fsl,mpc8315",
-                              "fsl,mpc832x",
-                              "fsl,mpc8349",
-                              "fsl,mpc8360"
-@@ -18,15 +16,15 @@ Required properties:
- Example:
+-They have similar design of P1020RDB but have DDR3 instead of DDR2. P2020RDB-PC
+-has 64-bit DDR. All others have 32-bit DDR.
++They have similar design of P1020RDB but have DDR3 instead of DDR2.
  
- socclocks: clocks {
--	compatible = "fsl,mpc8315-clk";
-+	compatible = "fsl,mpc832x-clk";
- 	#clock-cells = <1>;
+ Key features on these boards include:
+     * DDR3
+@@ -46,7 +44,7 @@ enable QE-TDM for linux kernel, set "qe;tdm" in hwconfig. Syntax is as below
+ 
+ Device tree support and how to enable it for different configs
+ --------------------------------------------------------------
+-Device tree support is available for p1020rdb and p2020rdb for below mentioned boot,
++Device tree support is available for p1020rdb for below mentioned boot,
+ 1. NOR Boot
+ 2. NAND Boot
+ 3. SD Boot
+diff --git a/board/nxp/p1_p2_rdb_pc/ddr.c b/board/nxp/p1_p2_rdb_pc/ddr.c
+index 8622a5a610a..74c9c78c4e1 100644
+--- a/board/nxp/p1_p2_rdb_pc/ddr.c
++++ b/board/nxp/p1_p2_rdb_pc/ddr.c
+@@ -46,37 +46,6 @@ dimm_params_t ddr_raw_timing = {
+ 	.refresh_rate_ps = 7800000,
+ 	.tfaw_ps = 37500,
  };
+-#elif defined(CONFIG_TARGET_P2020RDB)
+-/* Micron MT41J128M16_15E */
+-dimm_params_t ddr_raw_timing = {
+-	.n_ranks = 1,
+-	.rank_density = 1073741824u,
+-	.capacity = 1073741824u,
+-	.primary_sdram_width = 64,
+-	.ec_sdram_width = 0,
+-	.registered_dimm = 0,
+-	.mirrored_dimm = 0,
+-	.n_row_addr = 14,
+-	.n_col_addr = 10,
+-	.n_banks_per_sdram_device = 8,
+-	.edc_config = 0,
+-	.burst_lengths_bitmask = 0x0c,
+-
+-	.tckmin_x_ps = 1500,
+-	.caslat_x = 0x7e << 4,	/* 5,6,7,8,9,10 */
+-	.taa_ps = 13500,
+-	.twr_ps = 15000,
+-	.trcd_ps = 13500,
+-	.trrd_ps = 6000,
+-	.trp_ps = 13500,
+-	.tras_ps = 36000,
+-	.trc_ps = 49500,
+-	.trfc_ps = 160000,
+-	.twtr_ps = 7500,
+-	.trtp_ps = 7500,
+-	.refresh_rate_ps = 7800000,
+-	.tfaw_ps = 30000,
+-};
+ #elif (defined(CONFIG_TARGET_P1020MBG) || defined(CONFIG_TARGET_P1020RDB_PD))
+ /* Micron MT41J512M8_187E */
+ dimm_params_t ddr_raw_timing = {
+diff --git a/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c b/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c
+index a19a98dd0d1..57c355068db 100644
+--- a/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c
++++ b/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c
+@@ -220,8 +220,6 @@ int board_early_init_f(void)
+ #define BOARD_NAME "P1020RDB-PC"
+ #elif defined(CONFIG_TARGET_P1020RDB_PD)
+ #define BOARD_NAME "P1020RDB-PD"
+-#elif defined(CONFIG_TARGET_P2020RDB)
+-#define BOARD_NAME "P2020RDB-PC"
+ #endif
  
- cpus {
- 	compatible = "cpu_bus";
+ int checkboard_p1_p2(void)
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 8fcdc36c931..11b5036caad 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -1179,7 +1179,7 @@ config RAMBOOT_PBL
+ choice
+ 	prompt "Freescale PBL (or predecessor) load location"
+ 	depends on RAMBOOT_PBL || ((TARGET_P1010RDB_PA || TARGET_P1010RDB_PB \
+-		|| TARGET_P1020RDB_PC || TARGET_P1020RDB_PD || TARGET_P2020RDB) \
++		|| TARGET_P1020RDB_PC || TARGET_P1020RDB_PD) \
+ 		&& !CMD_NAND) || (TARGET_TURRIS_1X && SYS_MPC85XX_NO_RESETVEC)
  
--	PowerPC,8315@0 {
--		compatible = "fsl,mpc8315";
-+	PowerPC,8321@0 {
-+		compatible = "fsl,mpc832x";
- 		clocks = <&socclocks MPC83XX_CLK_CORE
- 		          &socclocks MPC83XX_CLK_CSB>;
- 	};
-diff --git a/drivers/clk/mpc83xx_clk.c b/drivers/clk/mpc83xx_clk.c
-index 20f77a983da..bca09f17d5f 100644
---- a/drivers/clk/mpc83xx_clk.c
-+++ b/drivers/clk/mpc83xx_clk.c
-@@ -51,7 +51,7 @@ static inline bool is_clk_valid(struct udevice *clk, int id)
- 	case MPC83XX_CLK_I2C1:
- 		return true;
- 	case MPC83XX_CLK_TDM:
--		return type == SOC_MPC8315;
-+		return false;
- 	case MPC83XX_CLK_SDHC:
- 		return mpc83xx_has_sdhc(type);
- 	case MPC83XX_CLK_TSEC1:
-@@ -64,9 +64,9 @@ static inline bool is_clk_valid(struct udevice *clk, int id)
- 	case MPC83XX_CLK_PCIEXP1:
- 		return mpc83xx_has_pcie1(type);
- 	case MPC83XX_CLK_PCIEXP2:
--		return mpc83xx_has_pcie2(type);
-+		return false;
- 	case MPC83XX_CLK_SATA:
--		return mpc83xx_has_sata(type);
-+		return false;
- 	case MPC83XX_CLK_DMAC:
- 		return (type == SOC_MPC8308) || (type == SOC_MPC8309);
- 	case MPC83XX_CLK_PCI:
-@@ -321,8 +321,6 @@ const struct clk_ops mpc83xx_clk_ops = {
- static const struct udevice_id mpc83xx_clk_match[] = {
- 	{ .compatible = "fsl,mpc8308-clk", .data = SOC_MPC8308 },
- 	{ .compatible = "fsl,mpc8309-clk", .data = SOC_MPC8309 },
--	{ .compatible = "fsl,mpc8313-clk", .data = SOC_MPC8313 },
--	{ .compatible = "fsl,mpc8315-clk", .data = SOC_MPC8315 },
- 	{ .compatible = "fsl,mpc832x-clk", .data = SOC_MPC832X },
- 	{ .compatible = "fsl,mpc8349-clk", .data = SOC_MPC8349 },
- 	{ .compatible = "fsl,mpc8360-clk", .data = SOC_MPC8360 },
-diff --git a/drivers/clk/mpc83xx_clk.h b/drivers/clk/mpc83xx_clk.h
-index b9486a4c202..ce3683f3932 100644
---- a/drivers/clk/mpc83xx_clk.h
-+++ b/drivers/clk/mpc83xx_clk.h
-@@ -204,10 +204,8 @@ static int retrieve_mode(int clk, int soc_type, struct clk_mode *mode)
- 		set_mode(mode, 0, 1, TYPE_SCCR_STANDARD);
- 		break;
- 	case MPC83XX_CLK_TSEC2:
--		if (soc_type == SOC_MPC8313) /* I2C and TSEC2 are the same register */
--			set_mode(mode, 2, 3, TYPE_SCCR_STANDARD);
--		else /* FIXME(mario.six@gdsys.cc): This has separate enable/disable bit! */
--			set_mode(mode, 0, 1, TYPE_SCCR_STANDARD);
-+		/* FIXME(mario.six@gdsys.cc): This has separate enable/disable bit! */
-+		set_mode(mode, 0, 1, TYPE_SCCR_STANDARD);
- 		break;
- 	case MPC83XX_CLK_SDHC:
- 		set_mode(mode, 4, 5, TYPE_SCCR_STANDARD);
-@@ -228,7 +226,7 @@ static int retrieve_mode(int clk, int soc_type, struct clk_mode *mode)
- 		set_mode(mode, 12, 13, TYPE_SCCR_STANDARD);
- 		break;
- 	case MPC83XX_CLK_USBDR:
--		if (soc_type == SOC_MPC8313 || soc_type == SOC_MPC8349)
-+		if (soc_type == SOC_MPC8349)
- 			set_mode(mode, 10, 11, TYPE_SCCR_STANDARD);
- 		else
- 			set_mode(mode, 8, 9, TYPE_SCCR_STANDARD);
-diff --git a/drivers/cpu/mpc83xx_cpu.c b/drivers/cpu/mpc83xx_cpu.c
-index 780b08f0885..01ac307c821 100644
---- a/drivers/cpu/mpc83xx_cpu.c
-+++ b/drivers/cpu/mpc83xx_cpu.c
-@@ -70,9 +70,6 @@ static inline void determine_family(const struct udevice *dev)
- 	case 0x811:
- 		priv->family = FAMILY_830X;
- 		break;
--	case 0x80B:
--		priv->family = FAMILY_831X;
--		break;
- 	case 0x806:
- 		priv->family = FAMILY_832X;
- 		break;
-@@ -108,18 +105,6 @@ static inline void determine_type(const struct udevice *dev)
- 	case 0x8110:
- 		priv->type = TYPE_8309;
- 		break;
--	case 0x80B2:
--		priv->type = TYPE_8311;
--		break;
--	case 0x80B0:
--		priv->type = TYPE_8313;
--		break;
--	case 0x80B6:
--		priv->type = TYPE_8314;
--		break;
--	case 0x80B4:
--		priv->type = TYPE_8315;
--		break;
- 	case 0x8066:
- 		priv->type = TYPE_8321;
- 		break;
-@@ -321,8 +306,6 @@ static const struct udevice_id mpc83xx_cpu_ids[] = {
- 	{ .compatible = "fsl,mpc83xx", },
- 	{ .compatible = "fsl,mpc8308", },
- 	{ .compatible = "fsl,mpc8309", },
--	{ .compatible = "fsl,mpc8313", },
--	{ .compatible = "fsl,mpc8315", },
- 	{ .compatible = "fsl,mpc832x", },
- 	{ .compatible = "fsl,mpc8349", },
- 	{ .compatible = "fsl,mpc8360", },
-diff --git a/drivers/cpu/mpc83xx_cpu.h b/drivers/cpu/mpc83xx_cpu.h
-index 20579cecf5e..d9773d893f1 100644
---- a/drivers/cpu/mpc83xx_cpu.h
-+++ b/drivers/cpu/mpc83xx_cpu.h
-@@ -35,7 +35,6 @@ static const char * const e300_names[] = {
- /**
-  * enum mpc83xx_cpu_family - Identifiers for MPC83xx CPU families
-  * @FAMILY_830X:    Identifier for the MPC830x CPU family
-- * @FAMILY_831X:    Identifier for the MPC831x CPU family
-  * @FAMILY_832X:    Identifier for the MPC832x CPU family
-  * @FAMILY_834X:    Identifier for the MPC834x CPU family
-  * @FAMILY_836X:    Identifier for the MPC836x CPU family
-@@ -43,7 +42,6 @@ static const char * const e300_names[] = {
+ config SDCARD
+diff --git a/configs/P2020RDB-PC_36BIT_NAND_defconfig b/configs/P2020RDB-PC_36BIT_NAND_defconfig
+deleted file mode 100644
+index 6a8b750555b..00000000000
+--- a/configs/P2020RDB-PC_36BIT_NAND_defconfig
++++ /dev/null
+@@ -1,164 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_SERIAL=y
+-CONFIG_TPL_TEXT_BASE=0xF8F80000
+-CONFIG_TPL_LIBCOMMON_SUPPORT=y
+-CONFIG_TPL_LIBGENERIC_SUPPORT=y
+-CONFIG_TPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xFF800000
+-CONFIG_SPL=y
+-CONFIG_TPL_MAX_SIZE=0x20000
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_TPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PHYS_64BIT=y
+-CONFIG_MP=y
+-CONFIG_TPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x1000
+-CONFIG_SPL_NAND_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_INIT_MINIMAL=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_RELOC_TEXT_BASE=0xf8ffe000
+-CONFIG_SPL_RELOC_STACK=0xf8fffff0
+-CONFIG_TPL_GD_ADDR=0xf8fac000
+-CONFIG_TPL_RELOC_TEXT_BASE=0xf8f80000
+-CONFIG_TPL_RELOC_STACK=0xf8fb0000
+-CONFIG_TPL_RELOC_MALLOC=y
+-CONFIG_TPL_RELOC_MALLOC_ADDR=0xf8fb4000
+-CONFIG_TPL_RELOC_MALLOC_SIZE=0xc000
+-CONFIG_SPL_NAND_SUPPORT=y
+-CONFIG_TPL=y
+-CONFIG_TPL_ENV_SUPPORT=y
+-CONFIG_TPL_I2C=y
+-CONFIG_TPL_MPC8XXX_INIT_DDR=y
+-CONFIG_TPL_NAND_SUPPORT=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_NAND=y
+-CONFIG_ENV_RANGE=0xc000
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xFF800C21
+-CONFIG_SYS_OR0_PRELIM=0xFFFF8396
+-CONFIG_SYS_BR1_PRELIM_BOOL=y
+-CONFIG_SYS_BR1_PRELIM=0xEF001001
+-CONFIG_SYS_OR1_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_TPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_TPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_ELBC=y
+-CONFIG_SYS_NAND_BLOCK_SIZE=0x4000
+-CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
+-CONFIG_SYS_NAND_U_BOOT_OFFS=0x20000
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPL_NS16550_MIN_FUNCTIONS=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+diff --git a/configs/P2020RDB-PC_36BIT_SDCARD_defconfig b/configs/P2020RDB-PC_36BIT_SDCARD_defconfig
+deleted file mode 100644
+index e516e8c0d6e..00000000000
+--- a/configs/P2020RDB-PC_36BIT_SDCARD_defconfig
++++ /dev/null
+@@ -1,145 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x0
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xf8f80000
+-CONFIG_SPL=y
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PHYS_64BIT=y
+-CONFIG_MP=y
+-CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_FSL_FIXED_MMC_LOCATION=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x20000
+-CONFIG_SPL_MMC_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_GD_ADDR=0xf8f9c000
+-CONFIG_SPL_RELOC_STACK=0xf8f9d000
+-CONFIG_SPL_RELOC_MALLOC=y
+-CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
+-CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+diff --git a/configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig b/configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
+deleted file mode 100644
+index bc25dbe17df..00000000000
+--- a/configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
++++ /dev/null
+@@ -1,147 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xf8f80000
+-CONFIG_SPL=y
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PHYS_64BIT=y
+-CONFIG_MP=y
+-CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_SPIFLASH=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x20000
+-CONFIG_SPL_SPI_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_GD_ADDR=0xf8f9c000
+-CONFIG_SPL_RELOC_STACK=0xf8f9d000
+-CONFIG_SPL_RELOC_MALLOC=y
+-CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
+-CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+diff --git a/configs/P2020RDB-PC_36BIT_defconfig b/configs/P2020RDB-PC_36BIT_defconfig
+deleted file mode 100644
+index 429b83465ad..00000000000
+--- a/configs/P2020RDB-PC_36BIT_defconfig
++++ /dev/null
+@@ -1,125 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0xEFF40000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_SECT_SIZE=0x20000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_ENV_ADDR=0xEFF20000
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_MPC85XX_HAVE_RESET_VECTOR=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PHYS_64BIT=y
+-CONFIG_MP=y
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_NO_PBL=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_FLASH=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_COMMON_INIT_DDR=y
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SYS_NS16550=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+diff --git a/configs/P2020RDB-PC_NAND_defconfig b/configs/P2020RDB-PC_NAND_defconfig
+deleted file mode 100644
+index e60677d55dc..00000000000
+--- a/configs/P2020RDB-PC_NAND_defconfig
++++ /dev/null
+@@ -1,162 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_SERIAL=y
+-CONFIG_TPL_TEXT_BASE=0xF8F80000
+-CONFIG_TPL_LIBCOMMON_SUPPORT=y
+-CONFIG_TPL_LIBGENERIC_SUPPORT=y
+-CONFIG_TPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xFF800000
+-CONFIG_SPL=y
+-CONFIG_TPL_MAX_SIZE=0x20000
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_TPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_MP=y
+-CONFIG_TPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x1000
+-CONFIG_SPL_NAND_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_INIT_MINIMAL=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_RELOC_TEXT_BASE=0xf8ffe000
+-CONFIG_SPL_RELOC_STACK=0xf8fffff0
+-CONFIG_TPL_GD_ADDR=0xf8fac000
+-CONFIG_TPL_RELOC_TEXT_BASE=0xf8f80000
+-CONFIG_TPL_RELOC_STACK=0xf8fb0000
+-CONFIG_TPL_RELOC_MALLOC=y
+-CONFIG_TPL_RELOC_MALLOC_ADDR=0xf8fb4000
+-CONFIG_TPL_RELOC_MALLOC_SIZE=0xc000
+-CONFIG_SPL_NAND_SUPPORT=y
+-CONFIG_TPL=y
+-CONFIG_TPL_ENV_SUPPORT=y
+-CONFIG_TPL_I2C=y
+-CONFIG_TPL_MPC8XXX_INIT_DDR=y
+-CONFIG_TPL_NAND_SUPPORT=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_NAND=y
+-CONFIG_ENV_RANGE=0xc000
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xFF800C21
+-CONFIG_SYS_OR0_PRELIM=0xFFFF8396
+-CONFIG_SYS_BR1_PRELIM_BOOL=y
+-CONFIG_SYS_BR1_PRELIM=0xEF001001
+-CONFIG_SYS_OR1_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_TPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_TPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_ELBC=y
+-CONFIG_SYS_NAND_BLOCK_SIZE=0x4000
+-CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
+-CONFIG_SYS_NAND_U_BOOT_OFFS=0x20000
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPL_NS16550_MIN_FUNCTIONS=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+diff --git a/configs/P2020RDB-PC_SDCARD_defconfig b/configs/P2020RDB-PC_SDCARD_defconfig
+deleted file mode 100644
+index fe433c5e358..00000000000
+--- a/configs/P2020RDB-PC_SDCARD_defconfig
++++ /dev/null
+@@ -1,142 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x0
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xf8f80000
+-CONFIG_SPL=y
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_MP=y
+-CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_FSL_FIXED_MMC_LOCATION=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x20000
+-CONFIG_SPL_MMC_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_GD_ADDR=0xf8f9c000
+-CONFIG_SPL_RELOC_STACK=0xf8f9d000
+-CONFIG_SPL_RELOC_MALLOC=y
+-CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
+-CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+diff --git a/configs/P2020RDB-PC_SPIFLASH_defconfig b/configs/P2020RDB-PC_SPIFLASH_defconfig
+deleted file mode 100644
+index 0184dcb4e8b..00000000000
+--- a/configs/P2020RDB-PC_SPIFLASH_defconfig
++++ /dev/null
+@@ -1,145 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xf8f80000
+-CONFIG_SPL=y
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_MP=y
+-CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_SPIFLASH=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x20000
+-CONFIG_SPL_SPI_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_GD_ADDR=0xf8f9c000
+-CONFIG_SPL_RELOC_STACK=0xf8f9d000
+-CONFIG_SPL_RELOC_MALLOC=y
+-CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
+-CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+diff --git a/configs/P2020RDB-PC_defconfig b/configs/P2020RDB-PC_defconfig
+deleted file mode 100644
+index a3efd89e218..00000000000
+--- a/configs/P2020RDB-PC_defconfig
++++ /dev/null
+@@ -1,123 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0xEFF40000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_SECT_SIZE=0x20000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_ENV_ADDR=0xEFF20000
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_MPC85XX_HAVE_RESET_VECTOR=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_MP=y
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_NO_PBL=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_FLASH=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_COMMON_INIT_DDR=y
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SYS_NS16550=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+diff --git a/doc/README.mpc85xx-sd-spi-boot b/doc/README.mpc85xx-sd-spi-boot
+index 7608fc3aacb..8e98fc9f659 100644
+--- a/doc/README.mpc85xx-sd-spi-boot
++++ b/doc/README.mpc85xx-sd-spi-boot
+@@ -59,9 +59,6 @@ P1022DS		config_sram_p1022ds.dat
+ P2020DS		config_sram_p2020ds.dat
+ P1020RDB	config_ddr2_1g_p1020rdb_533M.dat
+ P1020RDB	config_ddr2_1g_p1020rdb_667M.dat
+-P2020RDB	config_ddr2_1g_p2020rdb_800M.dat
+-P2020RDB	config_ddr2_1g_p2020rdb_667M.dat
+-P2020RDB	config_ddr3_1gb_64bit_p2020rdb_pc.dat
+ P1020RDB	config_ddr3_1gb_p1_p2_rdb_pc_800M.dat
+ P1011RDB	config_ddr3_1gb_p1_p2_rdb_pc_800M.dat
+ P1010RDB	config_ddr3_1gb_p1010rdb_800M.dat
+diff --git a/drivers/ddr/fsl/Kconfig b/drivers/ddr/fsl/Kconfig
+index b11fa79ca59..d5c0af7d3b1 100644
+--- a/drivers/ddr/fsl/Kconfig
++++ b/drivers/ddr/fsl/Kconfig
+@@ -291,7 +291,7 @@ config SYS_OR7_PRELIM
+ endmenu
+ 
+ if TARGET_P1010RDB_PA || TARGET_P1010RDB_PB || TARGET_P1020RDB_PC || \
+-	TARGET_P1020RDB_PD || TARGET_P2020RDB
++	TARGET_P1020RDB_PD
+ 
+ config COMMON_INIT_DDR
+ 	bool "Do not have a TLB entry to cover common DDR init with serial presence detect (SPD)"
+diff --git a/include/configs/p1_p2_rdb_pc.h b/include/configs/p1_p2_rdb_pc.h
+index 2d9d5b27511..2ef8fa02188 100644
+--- a/include/configs/p1_p2_rdb_pc.h
++++ b/include/configs/p1_p2_rdb_pc.h
+@@ -60,25 +60,6 @@
   */
- enum mpc83xx_cpu_family {
- 	FAMILY_830X,
--	FAMILY_831X,
- 	FAMILY_832X,
- 	FAMILY_834X,
- 	FAMILY_836X,
-@@ -54,10 +52,6 @@ enum mpc83xx_cpu_family {
-  * enum mpc83xx_cpu_type - Identifiers for MPC83xx CPU types
-  * @TYPE_8308:      Identifier for the MPC8308 CPU type
-  * @TYPE_8309:      Identifier for the MPC8309 CPU type
-- * @TYPE_8311:      Identifier for the MPC8311 CPU type
-- * @TYPE_8313:      Identifier for the MPC8313 CPU type
-- * @TYPE_8314:      Identifier for the MPC8314 CPU type
-- * @TYPE_8315:      Identifier for the MPC8315 CPU type
-  * @TYPE_8321:      Identifier for the MPC8321 CPU type
-  * @TYPE_8323:      Identifier for the MPC8323 CPU type
-  * @TYPE_8343:      Identifier for the MPC8343 CPU type
-@@ -76,10 +70,6 @@ enum mpc83xx_cpu_family {
- enum mpc83xx_cpu_type {
- 	TYPE_8308,
- 	TYPE_8309,
--	TYPE_8311,
--	TYPE_8313,
--	TYPE_8314,
--	TYPE_8315,
- 	TYPE_8321,
- 	TYPE_8323,
- 	TYPE_8343,
-@@ -96,10 +86,6 @@ enum mpc83xx_cpu_type {
- static const char * const cpu_type_names[] = {
- 	[TYPE_8308] = "8308",
- 	[TYPE_8309] = "8309",
--	[TYPE_8311] = "8311",
--	[TYPE_8313] = "8313",
--	[TYPE_8314] = "8314",
--	[TYPE_8315] = "8315",
- 	[TYPE_8321] = "8321",
- 	[TYPE_8323] = "8323",
- 	[TYPE_8343] = "8343",
-diff --git a/drivers/ram/mpc83xx_sdram.c b/drivers/ram/mpc83xx_sdram.c
-index d45c4e6264e..888fec949df 100644
---- a/drivers/ram/mpc83xx_sdram.c
-+++ b/drivers/ram/mpc83xx_sdram.c
-@@ -177,7 +177,6 @@ static int mpc83xx_sdram_static_init(ofnode node, u32 cs, u32 mapaddr, u32 size)
- 	case ODT_RD_ONLY_CURRENT:
- 	case ODT_RD_ONLY_OTHER_CS:
- 		if (!IS_ENABLED(CONFIG_ARCH_MPC830X) &&
--		    !IS_ENABLED(CONFIG_ARCH_MPC831X) &&
- 		    !IS_ENABLED(CONFIG_ARCH_MPC8360)) {
- 			debug("%s: odt_rd_cfg value %d invalid.\n",
- 			      ofnode_get_name(node), odt_rd_cfg);
-@@ -206,7 +205,6 @@ static int mpc83xx_sdram_static_init(ofnode node, u32 cs, u32 mapaddr, u32 size)
- 	case ODT_WR_ONLY_CURRENT:
- 	case ODT_WR_ONLY_OTHER_CS:
- 		if (!IS_ENABLED(CONFIG_ARCH_MPC830X) &&
--		    !IS_ENABLED(CONFIG_ARCH_MPC831X) &&
- 		    !IS_ENABLED(CONFIG_ARCH_MPC8360)) {
- 			debug("%s: odt_wr_cfg value %d invalid.\n",
- 			      ofnode_get_name(node), odt_wr_cfg);
-diff --git a/include/mpc83xx.h b/include/mpc83xx.h
-index b8d2c3edd56..8a1a9e7a9b9 100644
---- a/include/mpc83xx.h
-+++ b/include/mpc83xx.h
-@@ -57,11 +57,6 @@
+ #endif
  
- #define SPR_8308			0x8100
- #define SPR_8309			0x8110
--#define SPR_831X_FAMILY			0x80B
--#define SPR_8311			0x80B2
--#define SPR_8313			0x80B0
--#define SPR_8314			0x80B6
--#define SPR_8315			0x80B4
- #define SPR_832X_FAMILY			0x806
- #define SPR_8321			0x8066
- #define SPR_8323			0x8062
-@@ -113,8 +108,8 @@
- #define SPCR_TSEC2EP			0x00000003
- #define SPCR_TSEC2EP_SHIFT		(31-31)
- 
--#elif defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
--/* SPCR bits - MPC8308 and MPC831x specific */
-+#elif defined(CONFIG_ARCH_MPC8308)
-+/* SPCR bits - MPC8308 specific */
- /* TSEC data priority */
- #define SPCR_TSECDP			0x00003000
- #define SPCR_TSECDP_SHIFT		(31-19)
-@@ -199,38 +194,6 @@
- #define SICRL_URT_CTPR			0x06000000
- #define SICRL_IRQ_CTPR			0x00C00000
- 
--#elif defined(CONFIG_ARCH_MPC8313)
--/* SICRL bits - MPC8313 specific */
--#define SICRL_LBC			0x30000000
--#define SICRL_UART			0x0C000000
--#define SICRL_SPI_A			0x03000000
--#define SICRL_SPI_B			0x00C00000
--#define SICRL_SPI_C			0x00300000
--#define SICRL_SPI_D			0x000C0000
--#define SICRL_USBDR_11			0x00000C00
--#define SICRL_USBDR_10			0x00000800
--#define SICRL_USBDR_01			0x00000400
--#define SICRL_USBDR_00			0x00000000
--#define SICRL_ETSEC1_A			0x0000000C
--#define SICRL_ETSEC2_A			0x00000003
+-#if defined(CONFIG_TARGET_P2020RDB)
+-#define __SW_BOOT_MASK		0x03
+-#define __SW_BOOT_NOR		0xc8
+-#define __SW_BOOT_SPI		0x28
+-#define __SW_BOOT_SD		0x68
+-#define __SW_BOOT_SD2		0x18
+-#define __SW_BOOT_NAND		0xe8
+-#define __SW_BOOT_PCIE		0xa8
+-#define __SW_NOR_BANK_MASK	0xfd
+-#define __SW_NOR_BANK_UP	0x00
+-#define __SW_NOR_BANK_LO	0x02
+-#define __SW_BOOT_NOR_BANK_UP	0xc8 /* (__SW_BOOT_NOR | __SW_NOR_BANK_UP) */
+-#define __SW_BOOT_NOR_BANK_LO	0xca /* (__SW_BOOT_NOR | __SW_NOR_BANK_LO) */
+-#define __SW_BOOT_NOR_BANK_MASK	0x01 /* (__SW_BOOT_MASK & __SW_NOR_BANK_MASK) */
+-/*
+- * Dynamic MTD Partition support with mtdparts
+- */
+-#endif
 -
--/* SICRH bits - MPC8313 specific */
--#define SICRH_INTR_A			0x02000000
--#define SICRH_INTR_B			0x00C00000
--#define SICRH_IIC			0x00300000
--#define SICRH_ETSEC2_B			0x000C0000
--#define SICRH_ETSEC2_C			0x00030000
--#define SICRH_ETSEC2_D			0x0000C000
--#define SICRH_ETSEC2_E			0x00003000
--#define SICRH_ETSEC2_F			0x00000C00
--#define SICRH_ETSEC2_G			0x00000300
--#define SICRH_ETSEC1_B			0x00000080
--#define SICRH_ETSEC1_C			0x00000060
--#define SICRH_GTX1_DLY			0x00000008
--#define SICRH_GTX2_DLY			0x00000004
--#define SICRH_TSOBI1			0x00000002
--#define SICRH_TSOBI2			0x00000001
--
- #elif defined(CONFIG_ARCH_MPC8308)
- /* SICRL bits - MPC8308 specific */
- #define SICRL_SPI_PF0			(0 << 28)
-@@ -514,7 +477,7 @@
- #define HRCWH_ROM_LOC_LOCAL_16BIT	0x00600000
- #define HRCWH_ROM_LOC_LOCAL_32BIT	0x00700000
+ #ifdef CONFIG_SDCARD
+ #define CFG_SYS_MMC_U_BOOT_SIZE	(768 << 10)
+ #define CFG_SYS_MMC_U_BOOT_DST	CONFIG_TEXT_BASE
+@@ -125,7 +106,6 @@
+ #define CFG_SYS_SDRAM_BASE		CFG_SYS_DDR_SDRAM_BASE
  
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
-+#if defined(CONFIG_ARCH_MPC8308)
- #define HRCWH_ROM_LOC_NAND_SP_8BIT	0x00100000
- #define HRCWH_ROM_LOC_NAND_SP_16BIT	0x00200000
- #define HRCWH_ROM_LOC_NAND_LP_8BIT	0x00500000
-@@ -566,7 +529,7 @@
+ /* Default settings for DDR3 */
+-#ifndef CONFIG_TARGET_P2020RDB
+ #define CFG_SYS_DDR_CS0_BNDS		0x0000003f
+ #define CFG_SYS_DDR_CS0_CONFIG	0x80014302
+ #define CFG_SYS_DDR_CS0_CONFIG_2	0x00000000
+@@ -155,7 +135,6 @@
+ #define CFG_SYS_DDR_MODE_1		0x40461520
+ #define CFG_SYS_DDR_MODE_2		0x8000c000
+ #define CFG_SYS_DDR_INTERVAL		0x0C300000
+-#endif
+ 
  /*
-  * RSR - Reset Status Register
-  */
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
-+#if defined(CONFIG_ARCH_MPC8308)
- #define RSR_RSTSRC			0xF0000000	/* Reset source */
- #define RSR_RSTSRC_SHIFT		28
- #else
-@@ -712,29 +675,8 @@
- #define SCCR_USBCM_2			0x00A00000
- #define SCCR_USBCM_3			0x00F00000
- 
--#elif defined(CONFIG_ARCH_MPC8313)
--/* TSEC1 bits are for TSEC2 as well */
--#define SCCR_TSEC1CM			0xc0000000
--#define SCCR_TSEC1CM_SHIFT		30
--#define SCCR_TSEC1CM_0			0x00000000
--#define SCCR_TSEC1CM_1			0x40000000
--#define SCCR_TSEC1CM_2			0x80000000
--#define SCCR_TSEC1CM_3			0xC0000000
--
--#define SCCR_TSEC1ON			0x20000000
--#define SCCR_TSEC1ON_SHIFT		29
--#define SCCR_TSEC2ON			0x10000000
--#define SCCR_TSEC2ON_SHIFT		28
--
--#define SCCR_USBDRCM			0x00300000
--#define SCCR_USBDRCM_SHIFT		20
--#define SCCR_USBDRCM_0			0x00000000
--#define SCCR_USBDRCM_1			0x00100000
--#define SCCR_USBDRCM_2			0x00200000
--#define SCCR_USBDRCM_3			0x00300000
--
- #elif defined(CONFIG_ARCH_MPC8308)
--/* SCCR bits - MPC8315/MPC8308 specific */
-+/* SCCR bits - MPC8308 specific */
- #define SCCR_TSEC1CM			0xc0000000
- #define SCCR_TSEC1CM_SHIFT		30
- #define SCCR_TSEC1CM_0			0x00000000
-@@ -810,7 +752,7 @@
-  */
- #define CSCONFIG_EN			0x80000000
- #define CSCONFIG_AP			0x00800000
--#if defined(CONFIG_ARCH_MPC830X) || defined(CONFIG_ARCH_MPC831X)
-+#if defined(CONFIG_ARCH_MPC830X)
- #define CSCONFIG_ODT_RD_NEVER		0x00000000
- #define CSCONFIG_ODT_RD_ONLY_CURRENT	0x00100000
- #define CSCONFIG_ODT_RD_ONLY_OTHER_CS	0x00200000
-@@ -932,7 +874,7 @@
- #define SDRAM_CFG_SDRAM_TYPE_MASK	0x07000000
- #define SDRAM_CFG_SDRAM_TYPE_SHIFT	24
- #define SDRAM_CFG_DYN_PWR		0x00200000
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
-+#if defined(CONFIG_ARCH_MPC8308)
- #define SDRAM_CFG_DBW_MASK		0x00180000
- #define SDRAM_CFG_DBW_16		0x00100000
- #define SDRAM_CFG_DBW_32		0x00080000
+  * Memory map
 -- 
 2.47.3
 
