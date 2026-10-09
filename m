@@ -1,240 +1,198 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 890CACA6015
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 16:02:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F4A8CA6019
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 16:15:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 847E840911;
-	Fri,  9 Oct 2026 16:02:50 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id r6xAcBd0Pzxp; Fri,  9 Oct 2026 16:02:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C6E6A408D7
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791561769;
-	b=V4lH1A5McISVNmrJkZDtmRhIOVXyjF3CseOhldBmYEIGqSYgB1fbYJSYBx4jFLrIhrqm
-	 EHPY4kf9zSE4WAxf9iPFwZweXy0pMyX51udnipYRnLqCOm8Cbf4Nstg1L59FRXslOdv2E
-	 TW382xF1r3TMyXBwPF6/P93CTlmb0fQ//veCHn0VuzyQY4Bo4L5+mCqaMLyHxxdKlVepo
-	 3EZkfr4X64BaagIs1W3cGM3rHbY6iTtTzCqdnv9hAH0EdCnki4OdQrfYP87cpAegWB5aV
-	 3CjLDmv+/1nzfo5vhohal00byp+StScf26w2Z7SW+JQ53PIRYaAhxRCiPYN0CLbmKwA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791561769;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=2D8v1ZGqo0LymYhTLsJaEbkm4mw2C4+IgOyaZOMOxdg=;
-	b=kKLCUfrs71W8F+hUYS4xJ+TrXl7lQ8IogFs5pFz46D41H9YUDvIk/R6x2ICQfC9WwSDd
-	 v/q1+YPjuFRuMcdPcyK0U+CGnLLQ1v/atfcERPym0hfsST+QusjVIligbF2VVlQ4wYFU8
-	 XZkvuwHyOVsy/d9JCDjurCA/Ftxb93qec0bUDtMuKGf2Y6GgPCfXi3xWOj7TswQ5J78bK
-	 5iEhR8jGw0o+yS3pPOn0gBOhxlN2s/WoOLJK0p7r+ZIoEiR8ruJ5wy6a/HviLkdravXwS
-	 sQ1Np4ialb6n04VxmV6EgzRtIKA74zfm/nG9oSDJy8zsN/X7RNeMMRyknMfDxc+vNMQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791561769;
-	bh=2D8v1ZGqo0LymYhTLsJaEbkm4mw2C4+IgOyaZOMOxdg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=mSgX6/P0VuomVmGei9+3t4zOXycs4evwUs66V4F8F9Nkxqultpc3mB7p5qkpR24X+
-	 /TBM8FBPQtvFzTmE6/HWpu5on3qf1WukPOF+ElRxFwLaR5JvId37z5NrxWTbsRt8OD
-	 c7qXgZGGWzTmtfZB80dRibzy/9J0+wqPh05dpt93ESdAgVsQMuGPvFwDh8DLingouS
-	 aXCtKI0F2fJeuLz9jHCml6JyGIyaj5H/8rM0CJv2YVa0DiGXllkaENSLZ4Y9MTnEpN
-	 lD+CBbUmAyva54KB7XUE9UIBk0kgT7/2s+yiLOA6LSOke0TARWFN8PGOalrMKKVsNb
-	 UqDNbIbbbcs5A==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C6E6A408D7;
-	Fri,  9 Oct 2026 16:02:49 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id DEBFB184
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:02:47 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id BA41D60656
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:02:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C72D9608BD;
+	Fri,  9 Oct 2026 16:15:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2MjVe6Kp4xJ7 for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 16:02:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DCA796062A
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791561767;
- b=I00ABj/VbtR92CZGlxEUt/ii0F5zCU8J3edyIKZ2gC95rYIRj7qkxhG5nqLFLAT1kF/4
- IWS9CNL4gdM5ZKb10NIOzi05K2CVwPF1hKDxNngZ8zxMez7A8XtjynYlUzZE0eqjXIbW3
- JWE1uZzyFXHhmPjaN9/BTySWAidDRaQE0Up8v5MW25zcdGtD+JABvA0xZ/n3Tg2qKIk+3
- CYocFsHIQ05kxrqUGMn8vfyRT9NWHciG4kCi6a1aRUbkdxvrerBKEhtxUWyrgFUe0m8gq
- mxp8DuyqGXNYkeJRomUM0nadG49M5XO1/Clx0Uf9TEC99/kF+EPGdABIn/wN1vbrtQw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791561767;
- h=Received-SPF:Received:DKIM-Signature:Received:Received:
- DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
- X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
- Date:MIME-Version:User-Agent:Subject:To:Cc:References:
- Content-Language:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
- X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
- X-Proofpoint-Spam-Details;
- bh=2D8v1ZGqo0LymYhTLsJaEbkm4mw2C4+IgOyaZOMOxdg=;
- b=OfLSvy+wa933zDG12+kKrFJUUItgSsXSW+3qcqWPsl9ZjZy01NmgrHuZ1MSSEBSFKgS2
- kJYuxw/8nAfr5Y8i3i2I8uf66AB6RnrvIRAhjW2iLGG2pV+ed5Ugqw5D3+cdZ8Z40fbF6
- uw/T0NswrYSIP+r6oNjPnWmIsO+aqZIAvO8MP4An2LcX97xI4KZyljl5NfWCj5/I8l7hq
- oDVkcCeHbRglpCPVw1Ca4jBpntLu24JCnHulaRUjLt0hv0DzrWgBnnQG0/cV5ljxUW+nF
- DvO56Ce78EXRUsNu1tR+A1t54ZRXFNicAv8OSSu4oV675zDnONHJEysoogZOYlEbEqQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=oss.qualcomm.com;
- dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=LTXOZYtG; 
- dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=Z1rnrEsl; 
- arc=none smtp.remote-ip=205.220.180.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=LTXOZYtG; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=Z1rnrEsl
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DCA796062A
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:02:46 +0000 (UTC)
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 699DkpPS1956611
- for <u-boot@lists.u-boot-project.org>; Fri, 9 Oct 2026 16:02:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 2D8v1ZGqo0LymYhTLsJaEbkm4mw2C4+IgOyaZOMOxdg=; b=LTXOZYtGMlSXY5Du
- rr2GipVpsLACSrv7uWHj2Lb5QrYL6ILAPFMRicTI5wzCuNasdZ55atsuSjSPdK3H
- LLsWXO48AJ+mb7z2mx3CxIyvGSoP6iTpXMozuV93sQsJZWdcQr+WlDlsreiXtTTa
- fV7L+Pm1DDdYWLUoQZrMJ+b22X/cVciC95VGxHhsh8jJ6Z9hbXXsPHMukSmwIHXB
- KACFcbqPgMoPdyttCVqyRYR3Pk1HOqRVsGA42Q8eWAyTO3V6BXi2T83B8kYkhgMJ
- C9fp0RU7pbBeJRm+cDSWoNflhbgteK0JmQhLV+t06rJMdqdQ7j3G4U9XzP12NCZ4
- VK9yNw==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
- [209.85.215.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h71f28hbm-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 16:02:45 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id
- 41be03b00d2f7-cc1b6f65dacso4226763a12.1
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 09:02:45 -0700 (PDT)
+ id FY9X5u_BYa3K; Fri,  9 Oct 2026 16:15:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B3E73607B2
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791562552;
+	b=AWGEagS7ggsYnXsd9izKnYft1hxPXBvYlnzRnWr4CDgdcaA4qsdnfF489K0z22yBs8l0
+	 uJMfMUPfV2drH2dn9tqWkaSjZCC3tTPfmWIBrR0gimjxI4aMFi7ayMB16xgMPMMfNemoS
+	 s3cb9t+si+mNz5QWixfi/DzO29X7v1gdN703bYhTutxPkA7xvLP+oIz2R2/T6QsBwcE0V
+	 qlLz7ljEZQrnOKFGKWXIm87/Fq5cUhvT7v3bdEMqhYFp4zODhCE8czhE5rsecFWMYDNnK
+	 F+R4l8SO42459lV/Kt07oIj2b3u0tbFA/J9hWrPg9RRl2hJRQG7UlHsxVVzJnlITEsw==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791562552;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=xhj1PZmMdBBO62m12GwZl3VhoCaUUMtFAjskgNWfUmA=;
+	b=lgzWWrM+WgntX6ZU6LAizM++ER4s4kXCS/oPpqStw36DEqWxUdqEnYQEVxUONbWyQ56R
+	 LzskDIomAQLxzdmaFQGHx0fFMlNj9I9EMy03iyuKutorZD/agHHwshCzBbfxflimHd/Zb
+	 iItMRzuM4O0S5zsNVTiGOdek9O7HQ+cAN75pjtOXBYjsKHvAPsinEyj8Gqp5YAHLalxFF
+	 KgbYiCxZDOgm1OCBtmSUwUrs9VJjTzKfxxTep4+ZJjCF+zymB3AFqtmRfRUkXnvm6nMs3
+	 P3yp04FqJtzPlXhYZWrNXbhI6R9M6uskWH7c8NR1eJNXxG7ol4CT73rXn3Tx9qLO1fQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	dmarc=none header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=XhNo1pYN;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791561764; x=1792166564;
+	d=lists.u-boot-project.org; s=default; t=1791562552;
+	bh=xhj1PZmMdBBO62m12GwZl3VhoCaUUMtFAjskgNWfUmA=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Ji8Ms6KlzD9bDe4ptCqLBMbLZTzeu0M1HkvF1mYo5PYx9luNcq4nzrYRSVmtKKfqH
+	 K6lslKILPp+se5VhIE7KByndtkFHi/0eV2wZomMgPTx9TPBWJxyh/7+LQ4Gyw0W6d6
+	 b9UYygeygzGULWC6SWuJW95l8C1E4SeTFLZZikmyCfGNNs0w68e462HJMIoaHBrOlk
+	 M2UpFp0LCKDJdiRThRg4WRVJZzvbzYjNeC0ISSd6b4Sgvu7IlAQBacMQrjJU/YwUax
+	 fNjmgA9NhYgD2PxHICQ3jqYsMeMgz8X2Fg/o7Y7LO2MbEuWqOjZm5xcxAQ9pDmhIrt
+	 WkNnQBHufr41g==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id B3E73607B2;
+	Fri,  9 Oct 2026 16:15:52 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C3A62356
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:15:51 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id A98FE60644
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:15:51 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JjeD8nB1xZ8Q for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 16:15:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 00C35607B2
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::231"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791562550;
+ b=RgGL4GpbQJVlKkqzXKfM2r1mN7CQb6nkDbG6EdB/+u87GlWX+B6kqCyL+Si9q//eNWFO
+ 6HBQhcCLeHD9xzkzMLD9kPhdoNzBGYQLWs8lZN0oL5iRe05RziGGc/xeBOU+YvrYhtmHM
+ /2nZH1+bEJ8CMLfLF6MKLaDRASYaTDOu20fZn1Wqq9UwO7QNL/Y/H8Tlfbi9uS+oObNoV
+ JfhjlaLR4uw3BwnW9yWRBM8KEriJC4FDfyGoZDuTQTCLBROXi/x5QGC6YPrD8NjztJsm/
+ FXjIdJWupVNsUzmDQoxbcSZxjQUBHHzIJY9nJj6QdQ/rfM+7LUC5pTdQaKGXxGqAyhQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791562550;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
+ Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Developer-Key;
+ bh=xhj1PZmMdBBO62m12GwZl3VhoCaUUMtFAjskgNWfUmA=;
+ b=rn8xXV9wSpHjbTRTICZbLGwwC4kDQMgphNCX2SeNlI7kpbjClB6oLkCLVgsKRg5pLZFD
+ AJXe9hL3CD6a7xYcdvIJY7gUZ6mSjObGEf01uZI6bYQkGGAB22a5N4X6bPyvM/ZuB/U7z
+ 929pvzO8yKwzUHQIlm/y8hVTlK7RsYkYrNOMiY1KNjodL8/u3N/YmhXWjlkoX5zGAw0b9
+ Ms8fU+Ob/Dw6wMRASq5Rmjk1O0atE6296lIKF+JJFWr5/Sea93ALc+6Nz2nUiVFPAe2c4
+ wPaAWjJ04Sxy1nrzsqOyaKW49lhEfKB3rmRGGLTqQGhJpGqEsxiqlL/mppToZ6sVc4A==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=none header.from=baylibre.com;
+ dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=XhNo1pYN; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::231"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::231; helo=mail-oi1-x231.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=XhNo1pYN
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 00C35607B2
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:15:49 +0000 (UTC)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-4d198f1a591so2204261b6e.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 09:15:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1791562548; x=1792167348;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=2D8v1ZGqo0LymYhTLsJaEbkm4mw2C4+IgOyaZOMOxdg=;
- b=Z1rnrEsl25MhipejzlWZsaMGcyzmRS0eRKjyY/R4hWSRz1A8nNUyUhpL7iy64HUsPB
- 5GzJztD3VQYVZ+73j8MgSB9+2smW7IJwz5rPlM/rF68g4dsyfpGCVpyVvEhGebOxA4Fd
- 3JMHUSFF4W7/HWl3pQ3bCQQtHr6+PExcdiNouSr0Pr/yiJojQHSb+13ObbfaAHWnyr17
- TWjWuK9NpP50iocQGa1E7qiQeOM5Yn4PefraNtQEuoRbQUJf0cNUSrIM6Onqov63mXMX
- FkcSNpTt3zY3Bj/se0xDpwdEK7ipLwQ8grbehGs5dF1ZR9uytpQZ554qJSiuCMKA5UBk
- Wwrw==
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=xhj1PZmMdBBO62m12GwZl3VhoCaUUMtFAjskgNWfUmA=;
+ b=XhNo1pYN5uAIw4uG8uq3VoiMC4Ha0O0XqVhEMFSIu0LJBqvlTqtDYdcgqE4JFrzAPi
+ I6hb4a+xv41oA8JAzLtSiW1+d8QYIU9aXa6V9HcChUcTb9tu1UPxkNFz9O1aAd15xhTw
+ oM2stKCkOigK34lEeBaStgbqNudzUFLQFShM0+sg3NrRGl8DJtturnyxhqAj939bWBlI
+ 7me2b2lf813jzVaS2oAq2ljAHgxBq/uODbFUiTv/vH+H/SiygF9MUb1WC4kA02yebhR1
+ PkRgKZvpgh3Lc3fi1zToR9vtRzsI4/Hqz164E6nyV5dc9+ZXZ/5ZOSKkFpE8RxZgp9OR
+ 8/vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791561764; x=1792166564;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=2D8v1ZGqo0LymYhTLsJaEbkm4mw2C4+IgOyaZOMOxdg=;
- b=GCE7cU7xxkBNF4fpYV7WQwS0J7/CV1F2iRgCioXxodQke2735scXmQEYoac6v8AjEO
- P4ES+2Gl/gjkqFpBXHvBqcgx1tZF+I16b+nr7SADbpGJDMaEQ+gWHwYipqa5BbnQWJ4B
- f7mC11NaIQZYeMpaSG85czuxIQiHFBv5dvrJ5AUWowa12/BSIF+KtyhdiA24DJ9Ofsm1
- +pvi69Yf22Gp3AORhKOvSzWy/hvXw3LGDMtYLunRfimTKxg7ERbrvcpU1sK7ik9da3aY
- buuTMvTIW7v8EHMAi7lTKNzY9TOFbEnam8T1kprcNdRWBpdihOr8NrmXSJmYL5x8xCQp
- rUIg==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwhZn4JORFyARtD0TW/LVSo3M2mkRWarPL8PmlcxE1YR2OlbJN9549foGLWVZKXoU9qzLqLTKc=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIeuq+AwqOHUohI83Vp5KCYMgW1NmHTPsSMNNflw/EiyKYxUUl/
- o0SPNUOCtj9IMvC2ZUT3fNCEWGdaq97NACL7LHY1txZnHOjZthzV3e8s3fI5yCQw5SsJJc320gQ
- 9skxLN2Lw/4h+eZu7tXGYA4GAfGnfZPV0WhcEjKHyuBZ1CscvFBoBWuQUEHu8Dn7nhslWM7s=
-X-Gm-Gg: AYBFou0XGiY1jgAhErju0k4MtaQZfGjVW8KrjBNn52m5ZJENAoofhkVELFZcUBrGaQY
- KzwQaQdzlic5JecV+GKfplXVJeVl2FXKxL/wnoFEZRX00hH7P7FrC2YCFd7ZL4JMaLScZRCsMQo
- xk4zmXX4Zj9bFPo/0/3qWeVUu8RUc1hqVvgr821jgJgpSk6Ur0URgwQQ5aJga1T+N6B+RTXbBdV
- qpWlyMeDdpHMJad3UjrvG7IyaHmjUmKZXV8Z/PBqeRhnlcAyyZqjy1iHxz8KHiRtObzaw3E7J99
- Bbbtr5th6MUSbEbWNd83lo5+A8dlGx3UyDh7M6ZBFjCp556fBmFF+k4AfE1+8ya+hCxcihFUtWM
- PVENoAfPdKkjBrFr900GbhYkXBHHutW8P
-X-Received: by 2002:a17:902:d2c8:b0:2e8:18aa:34e3 with SMTP id
- d9443c01a7336-2e842ab66femr23017665ad.11.1791561764296; 
- Fri, 09 Oct 2026 09:02:44 -0700 (PDT)
-X-Received: by 2002:a17:902:d2c8:b0:2e8:18aa:34e3 with SMTP id
- d9443c01a7336-2e842ab66femr23017225ad.11.1791561763675; 
- Fri, 09 Oct 2026 09:02:43 -0700 (PDT)
-Received: from [192.168.1.10] ([106.222.221.165])
+ d=1e100.net; s=20260707; t=1791562548; x=1792167348;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=xhj1PZmMdBBO62m12GwZl3VhoCaUUMtFAjskgNWfUmA=;
+ b=W9wqJIpRjNPMaAtXvczlsNfbDN7oOPFduunED7pSLQgE6oLFbLsYapKDjYXqCmxM7s
+ ls4zvDQ4txHObm8LRONgEn0gvKWhiDsUsK+MYh2ngQDHpsi5OTnEacAm6Pi+P8DptnwD
+ yFzmVYObdUXYyhF2/gwP7q3drRbmZLDvWz+SU1fuWC2DiOwDtyR8ncQij+G5L1T78bT5
+ 7qwEx1PRrA6ngf47t4P7h68qcr9iu/Q7+iKo6lsroGbnmmACKsms/h8BJaTm7HjWQVF0
+ dyOEXoh5NvYoWIvpV2gCI2aYBlBr3bGyvuakEheT3v7i6bzpW+JiqikjYnBKzuBILMMg
+ rdXQ==
+X-Gm-Message-State: AFuF++lz+zw/DNrr4PivNCyq+kKZwKelNAzYJBzaKKrwLTGtfEDF6PMk
+ K/ihUSM2OpJ79ASKW3sXc/1SjjsFUMc3CBoSCPeNe+yxongZcjA88iQ3facKVN5KBhA=
+X-Gm-Gg: AYBFou1WIvquyKE53L6wFw0aW8UWtssJNOff9MPZK9t0oLfzbmDrtjO+c1c8gTTEEVL
+ kav/ytD1vtnFwZtBSrOeOIIBCXWNUhKoKGPLYAgpWuOCJgekuEhta3HDqRMxuMBEMlV4JuATRLC
+ JKTx5Uw65mKSwZMYL5wj32Xg7V0wS0e7Qav7chKhm1e1cZjptfJYM93OR5IWCscZL3nWHV6BSVc
+ AGO4zZuuAg4U77L0zUO3ZIK6dgnmfheLCCOYV0fWkP0a8BhTdzJejXrgQm08td37kRBAnFjvYmE
+ 7LYHLtzIkHxLiupD9W9oD0HL6Di7DLn4+OYaW1sxw9ga1wlzzjl44CEDcWkPK7L2etNnaZDL9Em
+ i9WUtK+Ap693UmGQXtQG+miF61jJYcw7j196Ax3jZstRtmF71AU7k/tSGObV8Uy8TDoE42ym3K+
+ xIVd3voS4ddjJ5tH7ly1cDGBtV6zaprogO5+MQs0MecFMRmK5QFZ9kpKGeentfDiVZOtP/1XUIH
+ KHy6qyIw8RIGC4=
+X-Received: by 2002:a05:6808:23c2:b0:4f5:1273:14b0 with SMTP id
+ 5614622812f47-50c59399bb4mr2127722b6e.44.1791562548453; 
+ Fri, 09 Oct 2026 09:15:48 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:29bd:56f6:5ae7:35d2])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2e8422fa91asm12176345ad.81.2026.10.09.09.02.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 09 Oct 2026 09:02:43 -0700 (PDT)
-Message-ID: <70e53c3e-6ef7-4d15-b3eb-41342b6749ef@oss.qualcomm.com>
-Date: Fri, 9 Oct 2026 21:32:36 +0530
+ 5614622812f47-50c0c5fe7d0sm2451506b6e.2.2026.10.09.09.15.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 Oct 2026 09:15:46 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH 00/13] arm: mediatek: add eDP display support for Genio 520
+ and 720 EVKs
+Date: Fri, 09 Oct 2026 11:14:03 -0500
+Message-Id: <20261009-mtk-genio-720-edp-v1-0-4fbcf5b2904d@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] spmi: msm: bound the CMD_DONE poll with a timeout
-To: petr.hodina@protonmail.com, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, u-boot@lists.u-boot-project.org
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Tom Rini <trini@konsulko.com>, David Heidelberg <david@ixit.cz>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Yao Zi <me@ziyao.cc>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-References: <20261002-b4-qcom-spmi-v1-1-33fbd16ee559@protonmail.com>
-Content-Language: en-US
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <20261002-b4-qcom-spmi-v1-1-33fbd16ee559@protonmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: rqk5UfgQG663PmYAiNxAVcSWzAv6ICef
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA5MDA2MyBTYWx0ZWRfX65OLRgPSGBzb
- PQBl+tRf+Fru55LSEKk2xedoipUKSN29Xm/3qMQfYnG+0GqHfjHL5xKXHQ1UyD5Mo+hqupUwOn5
- 5FZYi/231qUzwO2eVK0UDT9WfjYqpkYPkges0/3KXDyOGzlW6J0QEjX1+zu2qiTUVZxAe9TUQ3Q
- OHQyJ3fiBYbHoAl5cxCxFd1mNGMl7vstJGkZT5G51ut+zzCGxBp1naDnP79bHmJ+GEti3wni3xA
- 7RdhmN7swH+L3EbTQqr81uf9ouZkznDUdnEJg1zmzhBi2auNvKrsy7tSe0JGGp//iJJx7q3cHQC
- 5XgNsrCaaBexIVCE1XNb0pxj5jvorVasRqfg0LM9Tb1sd28uQB5BSq2D9rIqwh1Dpramu1ZNB7O
- 6CKIW1sU9sf+uAm03N2vjupT9FVRYJ0Wij7cwV2SBQlQQQm6hMmTeaWEXvewIzzR9He2EEUTnGi
- kzmbiH8MaxReJNvkrfQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA5MDA2MyBTYWx0ZWRfXxPMQZ2wrp/g5
- hupUbPlITjd4n5u/Fj5qpAPIPLctfGWXtP+u2hgI95Lkz4/RpSumcb6tl72Ir+6oaJM0c/KKNql
- wJKN4c4FnvptctxRKtqwVY0DfirLn3c=
-X-Authority-Analysis: v=2.4 cv=B8ksQ+tM c=1 sm=1 tr=0 ts=6ac91025 cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=bFRRxX18LbU5lqfmm7P34w==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=sfOm8-O8AAAA:8 a=EUspDBNiAAAA:8 a=dG_cZb-kSgFIE5o2tQYA:9 a=QEXdDO2ut3YA:10
- a=_Vgx9l1VpLgwpw_dHYaR:22 a=TvTJqdcANYtsRzA46cdi:22
-X-Proofpoint-GUID: rqk5UfgQG663PmYAiNxAVcSWzAv6ICef
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-09_04,2026-10-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 spamscore=0 clxscore=1015 adultscore=0 priorityscore=1501
- lowpriorityscore=0 phishscore=0 impostorscore=0 malwarescore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610090063
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43Q226cMBAG4FdZcd1pfOBgUFT1PapcjO3x1lnAx
+ AaUKMq7x7AoVbeVkhujscbf/MNrkSh6SkV3ei0irT75MOaCfzsV5jeOZwJvc10IJmrOWAPDfIE
+ zjT5AIxiQnUDWqtLCoJVcF/ndFMn559389XCt06IfycwbdHREelrysPna9tcNfAzuTsfY+masT
+ R64caqxomqlKLuV37q3Cmu5yoqSdXX91IDW7lJapinEGUrHqDbONkyKbhWfioqXe67VWwow4Ug
+ 9pBnjTBdgjQKOLWqpSLWu6dby84RC7p7pL1tErloYhvSSoHHUajSGo6u/tKooD+QCUwwTnjF3x
+ e2QnOkMVQ256n87DpQSHtb9gbVXjKzHbTXTE47LlGAVwECLttZOYomt/Knxpfc60ncThh9fsv8
+ ETX489wRhg3mGuZG6sqopS43/whpT3jsMg5+70/7TljSHnHC8+wjqQoSRnufi4e3tHRh1X2HpA
+ gAA
+X-Change-ID: 20261007-mtk-genio-720-edp-3685b2cad31b
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4116; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=6FVQd/fnUVjqu44vrJ1Ea5Pe/pjDlYgHO1bTH23TIP4=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqyRLPcEpjmwd25/+8E7wNzN0uV34OqkzHBEQE9
+ NVjktEW0LSJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaskSzxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A4hcH/R/eheYF+Br6F4DY/I04R1gq3jBOTE2V+YFTLXs
+ 1Ag8RLcx2HaniM9m88T1RRX7su2DA97s6Tmqpd6JeGmMBOkyv8mzokPBlV7dZ8gp9LPZIFPFNEg
+ WGhHyHhBb7cree5hre1jtQvvQ6Hrn03Mw6o4p9k8fN56etXDsStUPPlYVTm7MdQkLqJcZcwt2t1
+ N3w/GE6Vc6NDN5KNHx4u/2oS4rxXYwcq99dZ0bc+Di+qruSkwnkoVD/P69m9205BBZTJz2J56Eo
+ MQ1Yq09V4SSBpNoj0ejMdm+jpG4ozDP+hHVNLfZ/qOksl6lh3oCKwW4+8XZ/rw+UoWR/hwLTRwW
+ KgTY=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -248,13 +206,82 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Add an eDP display path for the MT8189 and use it for the panel on the
+eDP connector of the Genio 520 and 720 EVKs. The pipeline is the same
+OVL -> RDMA one the DSI path uses, with the output crossbar switched to
+a DVO stage that feeds the eDP transmitter. The panel mode comes from
+its EDID over the AUX channel.
 
-On 10/3/2026 3:06 AM, Petr Hodina via B4 Relay wrote:
-> From: Petr Hodina <petr.hodina@protonmail.com>
->
-> msm_spmi_write()/msm_spmi_read() busy-wait in inifinte loop.
-> Bound the wait with readl_poll_timeout() and return -ETIMEDOUT on
-> failure when the PMIC peripheral does not respond.
->
-> Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
-Reviewed-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+The EVKs drive the DSI panel by default. A new device tree overlay
+switches them to eDP, and is built into eDP variants of the Genio 520
+and 720 device trees, with and without the UFS overlay.
+
+Tested on a Genio 720 EVK with the eDP variant.
+
+The device tree does not fully match the upstream bindings yet. The
+Linux bindings it follows are still under review and could change, and
+some of what it uses is not in any posted binding yet:
+
+- "mediatek,mt8189-edp-dvo" is added to the DVO binding in an in-flight
+  Linux series [1]. That binding also wants an input port@0, which is
+  left out until the MT8189 display path is described as a graph.
+- The eDP transmitter and its PHY are separate nodes linked by "phys",
+  following the in-flight MT8196 eDP [2] and DisplayPort PHY [3] series.
+  "mediatek,mt8189-edp-tx" and "mediatek,mt8189-edp-phy" are new
+  compatibles, and mediatek,dp.yaml has no "phys" property yet.
+
+This series depends on the Genio 520/720 DSI series [4] (and its
+prerequisites) and on the MediaTek clock rate propagation series [5].
+
+[1]: https://lore.kernel.org/all/20260714114414.184512-1-angelogioacchino.delregno@collabora.com/
+[2]: https://lore.kernel.org/all/20260709113148.49090-1-angelogioacchino.delregno@collabora.com/
+[3]: https://lore.kernel.org/all/20260910092038.48291-1-angelogioacchino.delregno@collabora.com/
+[4]: https://lore.kernel.org/u-boot/20261006-mtk-genio-720-dsi-v1-0-7fa10e9c4506@baylibre.com/
+[5]: https://lore.kernel.org/u-boot/20261005-clk-mtk-propagate-rate-v2-0-b823df57e4c8@baylibre.com/
+
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+David Lechner (13):
+      board: mediatek: MAINTAINERS: match the Genio 520/720 files with globs
+      linux: drm_dp_helper: add the definitions needed for eDP link training
+      phy: add the DisplayPort PHY configuration options
+      phy: mediatek: add an MT8189 eDP PHY driver
+      video: mediatek: mtk_ddp: allow routing the OVL output to DVO
+      video: mediatek: mtk_disp_mutex: add DVO support
+      video: mediatek: add a DVO driver
+      video: mediatek: build the overlay with the shared pipeline
+      video: mediatek: add an eDP driver
+      arm: dts: mediatek: mt8189: add the eDP display path
+      arm: dts: mediatek: describe the eDP panel on the Genio 520 and 720 EVKs
+      arm: dts: mediatek: add an eDP overlay for the Genio 520 and 720 EVKs
+      configs: mt8189: enable the eDP display path
+
+ arch/arm/dts/Makefile                     |   12 +
+ arch/arm/dts/mt8189.dtsi                  |   48 +-
+ arch/arm/dts/mt8371-genio-common-edp.dtso |   54 +
+ arch/arm/dts/mt8371-genio-common.dtsi     |  134 ++
+ board/mediatek/MAINTAINERS                |   11 +-
+ configs/mt8189.config                     |    1 +
+ drivers/phy/mediatek/Kconfig              |   10 +
+ drivers/phy/mediatek/Makefile             |    1 +
+ drivers/phy/mediatek/phy-mtk-dp.c         |  276 ++++
+ drivers/video/mediatek/Kconfig            |   30 +-
+ drivers/video/mediatek/Makefile           |    6 +-
+ drivers/video/mediatek/mtk_ddp.c          |   24 +-
+ drivers/video/mediatek/mtk_ddp.h          |    9 +
+ drivers/video/mediatek/mtk_disp_mutex.c   |   47 +-
+ drivers/video/mediatek/mtk_disp_mutex.h   |   11 +
+ drivers/video/mediatek/mtk_dvo.c          |  417 +++++
+ drivers/video/mediatek/mtk_dvo.h          |   33 +
+ drivers/video/mediatek/mtk_edp.c          | 2385 +++++++++++++++++++++++++++++
+ include/linux/drm_dp_helper.h             |   12 +
+ include/phy-dp.h                          |   98 ++
+ 20 files changed, 3599 insertions(+), 20 deletions(-)
+---
+base-commit: ca1c29c01bbd03f89cd86159b2959b4e72d41aa9
+change-id: 20261007-mtk-genio-720-edp-3685b2cad31b
+
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
+
