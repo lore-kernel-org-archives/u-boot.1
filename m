@@ -1,193 +1,163 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34CD9CA601E
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 17:12:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3CFECA601E
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 17:13:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7CC47608C0;
-	Fri,  9 Oct 2026 17:12:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3CC5C4093F;
+	Fri,  9 Oct 2026 17:13:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CW9qBStOq4S7; Fri,  9 Oct 2026 17:12:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B48B9607B2
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791565931;
-	b=pyJngo9HNFOG4OiGwTsBYs9b0BFVSBgEQhIEi2CB7zHQuPPnLAQ12ercpoxTSaOwnUvL
-	 JXsh66WZami6i7Pd87kK6qWYDBlUPWV6NtFkV48BdjKcuYvexYwfMw5kjP70LCBxzwRua
-	 IX7L6fZ2ewk3myxyzJi31ile8JVRI6nO2hAT55ISUm+3r34VtU+XPjDXIuLqHeyxH1iaY
-	 C1Vtxdps4t0BnjERECDXp3YxKJ0jpeu5NZ+wskNDee4ocnPtoTvICD6AZcuPkzmM4NH0i
-	 mXKGFn35Z2b7wJlV5Qg6ylMCYxg5LV3WuFhcLBxd3Jg6APcSGv9jZhEKC28Mpe/ugvQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id a6Sl9jgUydq3; Fri,  9 Oct 2026 17:13:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A32C04090C
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791566015;
+	b=RWUu4Di0K1EmtcuDodm8BP+0dPQyR4sPDXG7uflFeZNfznYZHIzlqTyu5qq5t62CBwUm
+	 5GO+UrdKO10Ffz+Yb2MSxtT7uti8s2My4dSyEhjtbX2OdqXRYdO8e9KeTdN/T6Kz6YlWP
+	 xWL1ZjidH2YOWLgxhsgzT7FcCTStIyMht98IIN6IRvk5lGin+m7f8i7RSm/DZUQwS7XIt
+	 hczCDo+Qc0WA74D+UvBGma68jBVsP/8/8A59NbRdrs5MLxq7aeTTzklzfBwJkwfqxadzT
+	 UAOkaBpdOvUyF1JroaXOt1JOqrmnF7qlinc+iqXyJz8PHHP1dJ8nRv27bhSdZ46zyNw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791565931;
+	c=relaxed/relaxed; t=1791566015;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=jdBZqE7SSsTQ8fFEiPe1m+DA4FmLhY8zIhk0QkSxDtw=;
-	b=XxUCful/Yky8lHXxl6BhEAU//AZz6oyTxE0aEhdxX4g0SwK7DCTvMM8GbQAk23R78nl+
-	 +35+SSKvrYA2iGmcYTqvgtbUZwGHkZV1O3nUkX/grkcHuL0pYxnb9EyOp/f8RDXTg83U8
-	 9Q2f2OTrwn8dGF8PqgvrALrICl3hhjoT9G3xELV0qOxx4GDMiAFYmdFQFrwAfzE1iuzhC
-	 cQEjWquLR48Af0cFu5FPyHlai7FQu0rWvN9dIY1JsO9tsv1mjIc49gh/qya+VMDs2ncQL
-	 r4PFmiagswL1O9TWOiTd+SMC1cSQ2YcI2GtSjfZ1GtRUGTZIwcEZwxhLyxZbYG7uGvA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=JUn0qaBY;
+	 X-Received:Received:From:To:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=5J1hQcmltZf0HgIOwl9aWVJtMzOD6MVQzPgyyRM7SwE=;
+	b=ix0yjWMVyNGvQczVAhxgQ8E0wmYZ0W/CyGRIlNDIjsQgnOKZcGebtrWagKRqtIJuxGg+
+	 Vne4TAVH+yxtpY387MfaxzpXzy1/drXBUsGMXOqV7tVQtuY3VmkJF8y9mBei5Cq9mF/kP
+	 8qI6ZJyx1YuTW+TzGXKv1sJVMvlvgZNie3kVSM3ccWDfP5jPYWGSca9nh7TFq9VPTvh6Y
+	 L50HoDNg/byBHvgFoBRl/XqAfP5G3dZXJSBP26svtG+zeg33TpAMyDgONkPpZNHqoqvdm
+	 M7PQhfCL2d3cqYqlCJmB2yyhTXquuajCDy7jRni8ioN2mKhjk1m+5cXN8WJtO53rgYQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=konsulko.com;
+	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=m8MRM94E;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791565931;
-	bh=jdBZqE7SSsTQ8fFEiPe1m+DA4FmLhY8zIhk0QkSxDtw=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=hVqizWFGTVxRHP0jnKScsOThW1egNd9MWtrxF8hy4dWa6dosdX7kuyLeffq/NrHlF
-	 DK6PTPLTw+a74MU+kp/ZGCmBJYBYGmTR9sF4BcJSsbWgspc0h32DmuogNY9a/g6/p3
-	 9aTnOYxZVz0XJaMwI01H3EyLuyelCsTOlj0i4EFP3sm9u26iGZbB/ZhmWuhYXCWguR
-	 4XAo2G0+u0i+R4ZmmM5v5L06Q7hI5WS03+VWx3zNMSbaqEr92FQy7UOfP16ech/qcM
-	 CpJOcldRDKTxya7AoNUoI7DmDTo1TEY51k1S6v/YeTgHjuVB83Oi7cRGmotknZ02Du
-	 wKRXnEFs7Sy3g==
+	d=lists.u-boot-project.org; s=default; t=1791566015;
+	bh=5J1hQcmltZf0HgIOwl9aWVJtMzOD6MVQzPgyyRM7SwE=;
+	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=qjqqL/RzjgcTAT9h/uPU7NaVzBnRIwBnwqCy//gaUZ0LzmLj9bo9oONwq7or37/hc
+	 5bBXlBdrYypSUDypl1zoDBh3PyLq7KXTsWEOWpRMhcb5Un0AcNfvXV1D4ky+xZzDd5
+	 WiUp0S9VbjxYjzZ1TBxyP3GThw6Re0UN3F+Dty/4Ahyzcyj/4fqkOcQbvTyQuRxJmF
+	 rjNPtlaBGLLGINICAAqXt/scpwYmnKEcV8dSSKfAm0vycNtNj4N6nRo/OuwhqU1WE3
+	 Kbq1M5bHa9ZTGsdqzE8UjIUQ1rGpzH88QZj+kz80sawoQCd7zjdiRNJrxF0UViilOw
+	 IQyA+atd8lGiw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B48B9607B2;
-	Fri,  9 Oct 2026 17:12:11 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 74C6BA14
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 17:12:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A32C04090C;
+	Fri,  9 Oct 2026 17:13:35 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C0499317
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 17:13:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 693EE607B2
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 17:12:10 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id A658D40902
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 17:13:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UAiXtk-3b7uU for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 17:12:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B5CAC60727
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::331"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791565930;
- b=DbZvvXqnZ225VjzTPXZAzaVuFJqOuG6+bG68+vdjSdag4vqm3ixwaW1Dui+G/VmKUaFm
- 7X30PijkyBlN0sY4XYtSgnnTQzNrdUUozNxTkXwkNf4T1ZcCDNNg0t+/id+08160Nwcki
- DsyM2wc5UPdJomlE4BHzxBdO0uukJ8nGs2mb1RpuoAs+iM53iJTBfvP6dA4qHa/AKJtUM
- rg4obwl4UWHY6KeoZeXAoZ6WkLcb9uC59xaPZBKe8eX37m84kYcf4idlbWmtm//yJ5NgD
- DT8uUHL884Lyh7KPyaqxGR5/fl/9lu2x0+Z1sMrz2ngbUt+4UAAMmbIXtsyNQC3XC5Q==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Po5j58y5_PMf for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 17:13:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 409AD408D7
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:32::9"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791566012;
+ b=EuPhEmSnEh8gwrtdQyNQLKT7y6TRx+P8L8i9bCPbYidZs/Tl9L2QOQ9NoOKDrByJEgOU
+ UX+scUVyWbTsQ4nFIf1r/nbx1aQ5uqC9gJnBOSLffU70obuO3iJb6QGgQBENwcqk3SiuS
+ Z7oirFIo/xY8AtnSymKJRYCOc23X5C0c9HWIHEOdPjACD1uBwH7wpaoghyqRYuAYHiEAR
+ 4f/0Gd7B8dl2AkkLT7evFlBw/EmXuo8aWxxZBhzimPnhemB+pgKaIuixjUaaE4S4k5ar9
+ 3gCw/FXGFjuH+WoVgSMLetheZ7Yt51yb+oTrRKr0jRTAPYRP8UzwGLQsFeC0/Augqpg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791565930;
+ c=relaxed/relaxed; t=1791566012;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:In-Reply-To:
- References:Subject:Message-Id:Date:MIME-Version:Content-Type:
- Content-Transfer-Encoding:X-Mailer:X-Developer-Signature:
- X-Developer-Key;
- bh=jdBZqE7SSsTQ8fFEiPe1m+DA4FmLhY8zIhk0QkSxDtw=;
- b=BLWOXzmhRRGrt8Dn1tRY+iIf/Hz5I5/oH7JgDB7c2odFI/BLFjDMZS2rnioc7/aU2LeU
- oz9FC1HTiL9GRK2ZGWX18rUq6RAZ5a4fB+kkDda7PF/hqoBAhfXYBFVKBsW4M47LwdarS
- BT8nh2LdpweYdw+bEZ0mFFDhC7NWgvQFhp4tVIZ9Ipmf3xZ0sfLMth9wZFwKiWTo05rjr
- Mukahw9iufDjqvidWQmW8jOlTdx5DiwI6+UBkUsQYGe12mo0E07N41Zx9/8LR4T0ieiRr
- 3bHB6U6Icq9Y8Zl3iW8An7voVmnVVVRZJRykR/zujTxw9MUgfxM5KWJZjHy3WV5EEIQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=none header.from=baylibre.com;
- dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=JUn0qaBY; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::331"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::331; helo=mail-ot1-x331.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=JUn0qaBY
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B5CAC60727
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 17:12:07 +0000 (UTC)
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-824329dc1ecso26853a34.1
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 10:12:06 -0700 (PDT)
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Subject:Date:
+ Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+ bh=5J1hQcmltZf0HgIOwl9aWVJtMzOD6MVQzPgyyRM7SwE=;
+ b=Y9eM+icMlXu5+K/JOo6E2cWAS7YQ5FAf80GLojU+vKAFEBcXSz7pKQ7xaeG/axMJsmYb
+ TwHgTOMQy0QhmZDaSoFmN1y+rNTpBNCRxUzlqOBpdcPX0ZF0naEsWiEARPLbRc/PmmQYG
+ UrDr4wCAYIrvc1NL42ReaNeYJLn70meR72QUOqj6b+6Q9Sjlrv7mUuJE04fp3buLuZfUJ
+ dpSVAeCIqyc2clQ0TWbV6CUiRckxZw16D1GRZenvcO3TZVGDjgfu7GP9Sg4n+xUr8Cs2S
+ W2D8kli4iKK4dT5qUOI6QS9EX/zQOf0QC8RaYBc3IshB3eHoH5/Tf70yXFpM0aUjL0w==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=konsulko.com;
+ dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=m8MRM94E; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:32::9"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:32::9;
+ helo=mail-oi2-x09.google.com; envelope-from=trini@konsulko.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=m8MRM94E
+Received: from mail-oi2-x09.google.com (mail-oi2-x09.google.com
+ [IPv6:2607:f8b0:4864:32::9])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 409AD408D7
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 17:13:31 +0000 (UTC)
+Received: by mail-oi2-x09.google.com with SMTP id
+ 5614622812f47-4f6da9ae8b2so561b6e.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 10:13:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1791565926; x=1792170726;
+ d=konsulko.com; s=google; t=1791566011; x=1792170811;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=jdBZqE7SSsTQ8fFEiPe1m+DA4FmLhY8zIhk0QkSxDtw=;
- b=JUn0qaBYiW5SKHJ1Wwl8B4Kr40JDeFpB9B0p6e8ABP0w5qy3b0Xmto9lr4UgLkjVUS
- fDIQRiT65OCutAXRpXDYbMUAHU6y2Qn0+wPuH/hmQElsfCnDZCdF6xeO+ofZyDb3rLSG
- FKXOdwpkO9yLJ30IfS51zcMvCy0IH4s11vycDeA4lgoRqpc9LTKnH7C8XTvurCUtGlG+
- VdtwBmIQI1yLwc5A7zq0ElQU0JP/30g5xWVZ+ke2ceU/rDUa9DuQHo9pJ7ruppV4Dh8e
- LAD2Fp6MK3vMBkDnGerdmneAUNKj0a1jtMel+T5cN5BQfJX1Q+7WRvAe09+oweeo0H9N
- wxmQ==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=5J1hQcmltZf0HgIOwl9aWVJtMzOD6MVQzPgyyRM7SwE=;
+ b=m8MRM94EZXHWfD7RUVH4QqwJIeghPikUkg/kpbPIF61xtlPc75Z2bTfK6xsc//DbGL
+ xDqxm6QMXnlTWRHsBCbjlEcB1+VKzjc+g1h2I/YP9AO/V5ak2jdsPVuOUANN6u7y2qF3
+ NokS0Fi3e7cFA8d+Ghqa0CMEGlUaZHnZQX930=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791565926; x=1792170726;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=jdBZqE7SSsTQ8fFEiPe1m+DA4FmLhY8zIhk0QkSxDtw=;
- b=Te5p6gE5a1o7iccfosHkQOMan4UhOhXlf/h+Ic+Lx8U/DGt/BOVQ4olvn/vUtC1gDu
- zQC4xurl2Vtu2BkGzhYdeQlTigqlUEfwBfoER/rkGK5B4Ic2rV1Q2u4itcGqLwCofC+d
- Xu7HA3y0gOXkAmfCFZlB/sMhZUsx6Dhco7wBHjHizvJBh7f5+JmbxvKgTI67fs7R5yDv
- pQ7cC8lVePZcViebeFKpk0S8HjltPKxvuI9yMSNV+hy9d3FfzN3Kyy76zmxGHzg5l2ZL
- Xu8hVU7rFPc97T+0Ol5kPWnKuoNtLIwShDTp1wSg60NrzUt3wTcIvFwtnx7jrZxhqsoT
- +OXg==
-X-Gm-Message-State: AFuF++n1wyAAAmkuVzL00sVRvD6wQP0q4USkfNFlK9FpUjF8n8NKZfkG
- LanbebkzYQzm6GuZ+crnE4hMmoE/6KAUoVe24srPe/zzPrwaLgodGptVLk/yMfXrwnnt3vp+9zY
- nCKh4
-X-Gm-Gg: AYBFou3c29tWChBp9zDYFMWj3F5MHKNZ7fwVKJlKIayzjXaAop2JmrkKO4E5Il2lti/
- rUhBcZsED+NIqhl5D7jSyHfy8RgDNZyU9jPaA+zZO7NvXw9Lc+rRDQPX99b27FsmwrpG9G+GHLT
- 6FPHdfnx4visUS6HtIntxwIO22GjR6qF7x9DoLIbPO9qmZ3+2cFE/gm+H8JZ4lUphzU2P3cQULD
- m1adsmckCNaxEUcj5eQuQ6TbGTaJzMsmwWxJXsJikL/+xOThBPjNUkIe0nu2vnl+dKh0h/5guUQ
- T47+7ZZ/4I5RekLM2qwpoUUhSGbEgkTLsHB5J5LAjb2akJiOXV2ksL7ojZzMmzybDpnQrp/WKIA
- wJ1Da/OVVptCeGD7+WNclGypPjWDXZyUG6aKQk7yTlwKL+CtGZKLIIn0GQolqTVCZ1JpAQdeQOP
- oiEzE6pa+JdGML1JMfpfLT2yizyIu385q3LEGHNTgWNLpZohzdbAVJIAu6F+iD/jZRPEgDTSu4f
- PY=
-X-Received: by 2002:a05:6830:700f:b0:812:b45f:6547 with SMTP id
- 46e09a7af769-830968d71f0mr2168940a34.19.1791565909198; 
- Fri, 09 Oct 2026 10:11:49 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:29bd:56f6:5ae7:35d2])
+ d=1e100.net; s=20260707; t=1791566011; x=1792170811;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=5J1hQcmltZf0HgIOwl9aWVJtMzOD6MVQzPgyyRM7SwE=;
+ b=S4pzjWDy+ggyrN9ok/7b+6qwbB6TIGmw7sqP2uVU2eNf0P4mto+4fXckNDi7RxxPQH
+ AWO7CJlVGu0Vk9I/tVZeXS05oJoV2afjJOcjSrTD94D0q9NZKpPRTakbygYJIC8/RQR8
+ xk53twBdIbMtkYJqDxhBKYCrogC43xE75khsmwhp1dVV3Gx2q/OvUh6Y68/A4evTRjNh
+ KuULZzOLDamiqd6MQb9xOXOkFLwsJw7Wd9RasBOePOhwOug/IUi09Ua5JVisPij8Xcwg
+ xYB0TYjgE/w2/imUEdA310NtnGa6874skHE+LasBlFy4XS8sISMv+LIFHWzgxsMEjnjp
+ JQ5w==
+X-Gm-Message-State: AFuF++mh3VrCY1WffYI29EW2EDmJ5l5Hm7MAJwK9V6ZUXaO7XzFE2Od+
+ EXd1bsqIAQJF2j086+x/7x94azZgAfKMwYdKv/RjzNOxN2vaWifPQJ6T6S0jUY0qzmHmxdkQjPd
+ OWqWIbQT9oe/IeAw=
+X-Gm-Gg: AYBFou3eSur0GrKdfOUmDOq7ROr/vKOe50l8obAmCJlRmoyN15prtfqViLJn06V2fUb
+ IHgh4++aFPZ9mGDPcxcXokSAOZ0H2z0mLbJNUKqvuw5tF/7VkJgE+8sG6f9IgKbyr1J7lAyJWxE
+ GE6YYpPwnRzCNOzlDxBfoqvokOMp5+wrv+5vVPmBTIrOIuC+YgKf3ZKEDms26eadvN2QiWp/XYh
+ Wh4IBROxgzlwAkPhZHDykfU5aMy1g7JruE4IhN2n2NgRazFagb+nxxp0AKbiUEZ8ZMq49yKb2Eu
+ qW1nmE86DmCwYQLRxmbGyqV1MoHagnvjZumvclVzdiqxuNaBI7+3WjZcXCM2VHZ0UeHPoJpq5tB
+ JGvo8wd4Cg5dtsxFMDnFH0D6V1KfgWclV/i7zp9RqofJU7xWxR/Bh8RyDGAZuDJTFsYU+kOWV3Z
+ UQ5FUHJmihf0mfC8QryH8VGdcD29MZarPcnqKLI/hP8BjteexGyGiZTqqm5nT15PnpPQ4Wo5NNg
+ vdx5UyV+8NYvPG1ZSgUpDPdM4vPDuIvhMKS5M4w3mDrLsfLTqXeWosmzhlmK5RU+nqQHTIlNmjv
+ BbSojHsT51MRJZ/qRz7AwYvO7yRm+J6cMBIkqQ3am0uS
+X-Received: by 2002:a05:6808:4fde:b0:4bc:fbd4:2a43 with SMTP id
+ 5614622812f47-50c56deebf1mr2365193b6e.41.1791566010706; 
+ Fri, 09 Oct 2026 10:13:30 -0700 (PDT)
+Received: from bill-the-cat.tailc58245.ts.net
+ (fixed-189-203-100-56.totalplay.net. [189.203.100.56])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-8303a328ee6sm2371959a34.23.2026.10.09.10.11.47
+ 5614622812f47-50c1815f03dsm2781005b6e.9.2026.10.09.10.13.29
+ for <u-boot@lists.u-boot-project.org>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Oct 2026 10:11:48 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Lukasz Majewski <lukma@nabladev.com>, David Lechner <dlechner@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org
-In-Reply-To: <20260924-mtk-clk-mt8189-mmsys-v1-1-cb4abe521454@baylibre.com>
-References: <20260924-mtk-clk-mt8189-mmsys-v1-1-cb4abe521454@baylibre.com>
-Subject: Re: [PATCH] clk: mediatek: mt8189: match the mmsys compatible
-Message-Id: <179156589636.1248553.16710183259750578960.b4-ty@b4>
-Date: Fri, 09 Oct 2026 12:11:36 -0500
+ Fri, 09 Oct 2026 10:13:30 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.u-boot-project.org
+Subject: [PATCH] labgrid-trini: Update for labgrid 26.0 support
+Date: Fri,  9 Oct 2026 11:13:28 -0600
+Message-ID: <20261009171328.2627684-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=328; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=Pums+Kb3WpgBqSAPRyIyuifxwU0slPhoSmCSB1AJq+8=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqySBKaRvT7+hsciihi0pUTXcIwNcSjEsaqSLfl
- fb1Q8Kmf0yJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaskgShYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AJu0IAIwGmuS9TcTiqAkOgVPMHOypI8Wz1PLfsD7XWZy
- Vqw0g8YRy/vc9HTixXpz4GOwCJjDg6vmx70ACgA1dvvpVe5WwMF5BjIvuYvGBZkQ/A65PAPVvFu
- 2jvN96SXtNE9lYuHjjqpz4R5QZrr2NForSgMCusoDAufHb7FWQDdyUVv7PkDMrxO9mLol1HlTMz
- YPhiKEkEcYIy19lvxe7xMAXuLf+XB9p3+2IPJJwWUPzJcLxRZ/xdZvPGv+M32hz2CgcLOVB09Wb
- lP5z0qDsnfJsjou06EO3hY2LXwc+hTfEpFVeCxnOP3NlU7oOTEVZThvr9f4x2Fhu1ap+RAu5QCt
- rGbs=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -201,15 +171,536 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Thu, 24 Sep 2026 07:54:12 -0500, David Lechner wrote:
-> clk: mediatek: mt8189: match the mmsys compatible
+As part of the development for labgrid 26.0, the behavior was changed[1]
+such that if you specify an environment file, all resources in it will
+be locked on acquire, not just the named place. Given that power control
+in this lab is not available in a supported regular driver, we must have
+an environment file for that. So, change to having an environment file
+per hardware device, which also means the environment file says the
+location of the coordinator.
 
-Applied to mediatek-for-main, thanks!
+[1]: https://github.com/labgrid-project/labgrid/commit/a9b59e4e
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+This is a medium-term solution. The long term solution is replacing the
+PDU with one that's fully supported in upstream labgrid, or being able
+to move to a version of labgrid that's integrated full support for this
+PDU. For the latter, https://github.com/labgrid-project/labgrid/pull/1789
+---
+ README.md                                |   4 +-
+ bin/common.labgrid-trini                 |   5 -
+ bin/sage/bbb-1-env.yaml                  |  29 ++++
+ bin/sage/hb-1-env.yaml                   |  29 ++++
+ bin/sage/labgrid-sage-env.yaml           | 175 -----------------------
+ bin/sage/pine64-1-env.yaml               |  29 ++++
+ bin/sage/rpi3-1-env.yaml                 |  29 ++++
+ bin/sage/rpi4-1-env.yaml                 |  29 ++++
+ bin/sage/sage-exporter-bbb-1-env.yaml    |  14 ++
+ bin/sage/sage-exporter-hb-1-env.yaml     |  14 ++
+ bin/sage/sage-exporter-pine64-1-env.yaml |  14 ++
+ bin/sage/sage-exporter-rpi3-1-env.yaml   |  14 ++
+ bin/sage/sage-exporter-rpi4-1-env.yaml   |  14 ++
+ 13 files changed, 217 insertions(+), 182 deletions(-)
+ create mode 100644 bin/sage/bbb-1-env.yaml
+ create mode 100644 bin/sage/hb-1-env.yaml
+ delete mode 100644 bin/sage/labgrid-sage-env.yaml
+ create mode 100644 bin/sage/pine64-1-env.yaml
+ create mode 100644 bin/sage/rpi3-1-env.yaml
+ create mode 100644 bin/sage/rpi4-1-env.yaml
+ create mode 100644 bin/sage/sage-exporter-bbb-1-env.yaml
+ create mode 100644 bin/sage/sage-exporter-hb-1-env.yaml
+ create mode 100644 bin/sage/sage-exporter-pine64-1-env.yaml
+ create mode 100644 bin/sage/sage-exporter-rpi3-1-env.yaml
+ create mode 100644 bin/sage/sage-exporter-rpi4-1-env.yaml
 
-[1/1] clk: mediatek: mt8189: match the mmsys compatible
-      commit: a560a142c0759959518532d41106e4f3f1ea3c8f
-
-Best regards,
+diff --git a/README.md b/README.md
+index 6171669228cf..9958e21bcf77 100644
+--- a/README.md
++++ b/README.md
+@@ -253,9 +253,9 @@ That should be all that is needed.
+ An alternate implementation requires setting the following environment
+ variables must be set as per your lab:
+ 
+-- `LG_COORDINATOR` must point at the labgrid coordinator service.
+ - `LG_PLACE` must point at the device under test.
+-- `LG_ENV` must point at the labgrid yaml file that describes your lab.
++- `LG_ENV` must point at the labgrid yaml file that describes your lab
++  including the coordinator.
+ 
+ In order for a given platform to be tested, it must be acquired before starting
+ tests and then released once complete. See the bin/konsulko-labgrid directory
+diff --git a/bin/common.labgrid-trini b/bin/common.labgrid-trini
+index b3c7d07ca7f0..0fe5ffcf300a 100644
+--- a/bin/common.labgrid-trini
++++ b/bin/common.labgrid-trini
+@@ -19,11 +19,6 @@
+ # DEALINGS IN THE SOFTWARE.
+ 
+ # Ensure we have all environment variables set
+-if [ -z "${LG_COORDINATOR}" ]; then
+-	echo "LG_COORDINATOR is unset";
+-	exit 1;
+-fi
+-
+ if [ -z "${LG_PLACE}" ]; then
+ 	echo "LG_PLACE is unset";
+ 	exit 1;
+diff --git a/bin/sage/bbb-1-env.yaml b/bin/sage/bbb-1-env.yaml
+new file mode 100644
+index 000000000000..9f79759b92ea
+--- /dev/null
++++ b/bin/sage/bbb-1-env.yaml
+@@ -0,0 +1,29 @@
++options:
++  coordinator_address: 192.168.1.10:20408
++targets:
++  bbb-1:
++    resources:
++      RemotePlace:
++        name: bbb-1
++    drivers:
++      power:
++        cls: ExternalPowerDriver
++        cmd_on: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.9 i 1
++        cmd_off: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.9 i 2
++      mux:
++        cls: USBSDMuxDriver
++      storage:
++        cls: USBStorageDriver
++      serial:
++        cls: SerialDriver
++      shell:
++        cls: ShellDriver
++        prompt: 'root@.*:~# '
++        login_prompt: 'login: '
++        username: root
++      uboot:
++        cls: UBootDriver
++        prompt: 'U-Boot> '
++        autoboot: Hit any key to stop autoboot
++      strategy:
++        cls: UBootStrategy
+diff --git a/bin/sage/hb-1-env.yaml b/bin/sage/hb-1-env.yaml
+new file mode 100644
+index 000000000000..6858213d619c
+--- /dev/null
++++ b/bin/sage/hb-1-env.yaml
+@@ -0,0 +1,29 @@
++options:
++  coordinator_address: 192.168.1.10:20408
++targets:
++  hb-1:
++    resources:
++      RemotePlace:
++        name: hb-1
++    drivers:
++      power:
++        cls: ExternalPowerDriver
++        cmd_on: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.3 i 1
++        cmd_off: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.3 i 2
++      mux:
++        cls: USBSDMuxDriver
++      storage:
++        cls: USBStorageDriver
++      serial:
++        cls: SerialDriver
++      shell:
++        cls: ShellDriver
++        prompt: 'root@.*:~# '
++        login_prompt: 'login: '
++        username: root
++      uboot:
++        cls: UBootDriver
++        prompt: 'U-Boot> '
++        autoboot: Hit any key to stop autoboot
++      strategy:
++        cls: UBootStrategy
+diff --git a/bin/sage/labgrid-sage-env.yaml b/bin/sage/labgrid-sage-env.yaml
+deleted file mode 100644
+index 8d3fe4ab53c3..000000000000
+--- a/bin/sage/labgrid-sage-env.yaml
++++ /dev/null
+@@ -1,175 +0,0 @@
+-# Sage environment
+-
+-options:
+-  coordinator_address: 172.17.0.1:20408
+-
+-targets:
+-  rpi3-1:
+-    resources:
+-      RemotePlace:
+-        name: rpi3-1
+-    drivers:
+-      power:
+-        cls: NetworkPowerDriver
+-      mux:
+-        cls: USBSDMuxDriver
+-      storage:
+-        cls: USBStorageDriver
+-      serial:
+-        cls: SerialDriver
+-      shell:
+-        cls: ShellDriver
+-        prompt: 'root@.*:~# '
+-        login_prompt: 'login: '
+-        username: 'root'
+-      uboot:
+-        cls: UBootDriver
+-        prompt: 'U-Boot> '
+-        autoboot: 'Hit any key to stop autoboot'
+-      strategy:
+-        cls: UBootStrategy
+-  rpi4-1:
+-    resources:
+-      RemotePlace:
+-        name: rpi4-1
+-    drivers:
+-      power:
+-        cls: NetworkPowerDriver
+-      mux:
+-        cls: USBSDMuxDriver
+-      storage:
+-        cls: USBStorageDriver
+-      serial:
+-        cls: SerialDriver
+-      shell:
+-        cls: ShellDriver
+-        prompt: 'root@.*:~# '
+-        login_prompt: 'login: '
+-        username: 'root'
+-      uboot:
+-        cls: UBootDriver
+-        prompt: 'U-Boot> '
+-        autoboot: 'Hit any key to stop autoboot'
+-      strategy:
+-        cls: UBootStrategy
+-  hb-1:
+-    resources:
+-      RemotePlace:
+-        name: hb-1
+-    drivers:
+-      power:
+-        cls: NetworkPowerDriver
+-      mux:
+-        cls: USBSDMuxDriver
+-      storage:
+-        cls: USBStorageDriver
+-      serial:
+-        cls: SerialDriver
+-      shell:
+-        cls: ShellDriver
+-        prompt: 'root@.*:~# '
+-        login_prompt: 'login: '
+-        username: 'root'
+-      uboot:
+-        cls: UBootDriver
+-        prompt: 'U-Boot> '
+-        autoboot: 'Hit any key to stop autoboot'
+-      strategy:
+-        cls: UBootStrategy
+-  pine64-1:
+-    resources:
+-      RemotePlace:
+-        name: pine64-1
+-    drivers:
+-      power:
+-        cls: NetworkPowerDriver
+-      mux:
+-        cls: USBSDMuxDriver
+-      storage:
+-        cls: USBStorageDriver
+-      serial:
+-        cls: SerialDriver
+-      shell:
+-        cls: ShellDriver
+-        prompt: 'root@.*:~# '
+-        login_prompt: 'login: '
+-        username: 'root'
+-      uboot:
+-        cls: UBootDriver
+-        prompt: 'U-Boot> '
+-        autoboot: 'Hit any key to stop autoboot'
+-      strategy:
+-        cls: UBootStrategy
+-  bbb-1:
+-    resources:
+-      RemotePlace:
+-        name: bbb-1
+-    drivers:
+-      power:
+-        cls: ExternalPowerDriver
+-        cmd_on: 'snmpset -v 2c -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.9 i 1'
+-        cmd_off: 'snmpset -v 2c -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.9 i 2'
+-      mux:
+-        cls: USBSDMuxDriver
+-      storage:
+-        cls: USBStorageDriver
+-      serial:
+-        cls: SerialDriver
+-      shell:
+-        cls: ShellDriver
+-        prompt: 'root@.*:~# '
+-        login_prompt: 'login: '
+-        username: 'root'
+-      uboot:
+-        cls: UBootDriver
+-        prompt: 'U-Boot> '
+-        autoboot: 'Hit any key to stop autoboot'
+-      strategy:
+-        cls: UBootStrategy
+-  sage-exporter-rpi3-1:
+-    resources:
+-      RemotePlace:
+-        name: sage-exporter-rpi3-1
+-    drivers:
+-      power:
+-        cls: NetworkPowerDriver
+-      ssh:
+-        cls: SSHDriver
+-  sage-exporter-rpi4-1:
+-    resources:
+-      RemotePlace:
+-        name: sage-exporter-rpi4-1
+-    drivers:
+-      power:
+-        cls: NetworkPowerDriver
+-      ssh:
+-        cls: SSHDriver
+-  sage-exporter-hb-1:
+-    resources:
+-      RemotePlace:
+-        name: sage-exporter-hb-1
+-    drivers:
+-      power:
+-        cls: NetworkPowerDriver
+-      ssh:
+-        cls: SSHDriver
+-  sage-exporter-pine64-1:
+-    resources:
+-      RemotePlace:
+-        name: sage-exporter-pine64-1
+-    drivers:
+-      power:
+-        cls: NetworkPowerDriver
+-      ssh:
+-        cls: SSHDriver
+-  sage-exporter-bbb-1:
+-    resources:
+-      RemotePlace:
+-        name: sage-exporter-bbb-1
+-    drivers:
+-      power:
+-        cls: ExternalPowerDriver
+-        cmd_on: 'snmpset -v 2c -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.13 i 1'
+-        cmd_off: 'snmpset -v 2c -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.13 i 2'
+-      ssh:
+-        cls: SSHDriver
+diff --git a/bin/sage/pine64-1-env.yaml b/bin/sage/pine64-1-env.yaml
+new file mode 100644
+index 000000000000..9ad5a56c6396
+--- /dev/null
++++ b/bin/sage/pine64-1-env.yaml
+@@ -0,0 +1,29 @@
++options:
++  coordinator_address: 192.168.1.10:20408
++targets:
++  pine64-1:
++    resources:
++      RemotePlace:
++        name: pine64-1
++    drivers:
++      power:
++        cls: ExternalPowerDriver
++        cmd_on: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.4 i 1
++        cmd_off: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.4 i 2
++      mux:
++        cls: USBSDMuxDriver
++      storage:
++        cls: USBStorageDriver
++      serial:
++        cls: SerialDriver
++      shell:
++        cls: ShellDriver
++        prompt: 'root@.*:~# '
++        login_prompt: 'login: '
++        username: root
++      uboot:
++        cls: UBootDriver
++        prompt: 'U-Boot> '
++        autoboot: Hit any key to stop autoboot
++      strategy:
++        cls: UBootStrategy
+diff --git a/bin/sage/rpi3-1-env.yaml b/bin/sage/rpi3-1-env.yaml
+new file mode 100644
+index 000000000000..ced8c46b05b0
+--- /dev/null
++++ b/bin/sage/rpi3-1-env.yaml
+@@ -0,0 +1,29 @@
++options:
++  coordinator_address: 192.168.1.10:20408
++targets:
++  rpi3-1:
++    resources:
++      RemotePlace:
++        name: rpi3-1
++    drivers:
++      power:
++        cls: ExternalPowerDriver
++        cmd_on: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.1 i 1
++        cmd_off: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.1 i 2
++      mux:
++        cls: USBSDMuxDriver
++      storage:
++        cls: USBStorageDriver
++      serial:
++        cls: SerialDriver
++      shell:
++        cls: ShellDriver
++        prompt: 'root@.*:~# '
++        login_prompt: 'login: '
++        username: root
++      uboot:
++        cls: UBootDriver
++        prompt: 'U-Boot> '
++        autoboot: Hit any key to stop autoboot
++      strategy:
++        cls: UBootStrategy
+diff --git a/bin/sage/rpi4-1-env.yaml b/bin/sage/rpi4-1-env.yaml
+new file mode 100644
+index 000000000000..24b81bc4571d
+--- /dev/null
++++ b/bin/sage/rpi4-1-env.yaml
+@@ -0,0 +1,29 @@
++options:
++  coordinator_address: 192.168.1.10:20408
++targets:
++  rpi4-1:
++    resources:
++      RemotePlace:
++        name: rpi4-1
++    drivers:
++      power:
++        cls: ExternalPowerDriver
++        cmd_on: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.2 i 1
++        cmd_off: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.2 i 2
++      mux:
++        cls: USBSDMuxDriver
++      storage:
++        cls: USBStorageDriver
++      serial:
++        cls: SerialDriver
++      shell:
++        cls: ShellDriver
++        prompt: 'root@.*:~# '
++        login_prompt: 'login: '
++        username: root
++      uboot:
++        cls: UBootDriver
++        prompt: 'U-Boot> '
++        autoboot: Hit any key to stop autoboot
++      strategy:
++        cls: UBootStrategy
+diff --git a/bin/sage/sage-exporter-bbb-1-env.yaml b/bin/sage/sage-exporter-bbb-1-env.yaml
+new file mode 100644
+index 000000000000..be82a5e58bf5
+--- /dev/null
++++ b/bin/sage/sage-exporter-bbb-1-env.yaml
+@@ -0,0 +1,14 @@
++options:
++  coordinator_address: 192.168.1.10:20408
++targets:
++  sage-exporter-bbb-1:
++    resources:
++      RemotePlace:
++        name: sage-exporter-bbb-1
++    drivers:
++      power:
++        cls: ExternalPowerDriver
++        cmd_on: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.13 i 1
++        cmd_off: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.13 i 2
++      ssh:
++        cls: SSHDriver
+diff --git a/bin/sage/sage-exporter-hb-1-env.yaml b/bin/sage/sage-exporter-hb-1-env.yaml
+new file mode 100644
+index 000000000000..1b5bd3f1c45e
+--- /dev/null
++++ b/bin/sage/sage-exporter-hb-1-env.yaml
+@@ -0,0 +1,14 @@
++options:
++  coordinator_address: 192.168.1.10:20408
++targets:
++  sage-exporter-hb-1:
++    resources:
++      RemotePlace:
++        name: sage-exporter-hb-1
++    drivers:
++      power:
++        cls: ExternalPowerDriver
++        cmd_on: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.7 i 1
++        cmd_off: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.7 i 2
++      ssh:
++        cls: SSHDriver
+diff --git a/bin/sage/sage-exporter-pine64-1-env.yaml b/bin/sage/sage-exporter-pine64-1-env.yaml
+new file mode 100644
+index 000000000000..34b3409904b4
+--- /dev/null
++++ b/bin/sage/sage-exporter-pine64-1-env.yaml
+@@ -0,0 +1,14 @@
++options:
++  coordinator_address: 192.168.1.10:20408
++targets:
++  sage-exporter-pine64-1:
++    resources:
++      RemotePlace:
++        name: sage-exporter-pine64-1
++    drivers:
++      power:
++        cls: ExternalPowerDriver
++        cmd_on: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.8 i 1
++        cmd_off: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.8 i 2
++      ssh:
++        cls: SSHDriver
+diff --git a/bin/sage/sage-exporter-rpi3-1-env.yaml b/bin/sage/sage-exporter-rpi3-1-env.yaml
+new file mode 100644
+index 000000000000..b6d1b0bd7e41
+--- /dev/null
++++ b/bin/sage/sage-exporter-rpi3-1-env.yaml
+@@ -0,0 +1,14 @@
++options:
++  coordinator_address: 192.168.1.10:20408
++targets:
++  sage-exporter-rpi3-1:
++    resources:
++      RemotePlace:
++        name: sage-exporter-rpi3-1
++    drivers:
++      power:
++        cls: ExternalPowerDriver
++        cmd_on: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.5 i 1
++        cmd_off: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.5 i 2
++      ssh:
++        cls: SSHDriver
+diff --git a/bin/sage/sage-exporter-rpi4-1-env.yaml b/bin/sage/sage-exporter-rpi4-1-env.yaml
+new file mode 100644
+index 000000000000..79b4fb9d9c5c
+--- /dev/null
++++ b/bin/sage/sage-exporter-rpi4-1-env.yaml
+@@ -0,0 +1,14 @@
++options:
++  coordinator_address: 192.168.1.10:20408
++targets:
++  sage-exporter-rpi4-1:
++    resources:
++      RemotePlace:
++        name: sage-exporter-rpi4-1
++    drivers:
++      power:
++        cls: ExternalPowerDriver
++        cmd_on: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.6 i 1
++        cmd_off: snmpset -v1 -c private 192.168.1.254 .1.3.6.1.4.1.1718.3.2.3.1.11.1.1.6 i 2
++      ssh:
++        cls: SSHDriver
 -- 
-David Lechner <dlechner@baylibre.com>
+2.43.0
 
