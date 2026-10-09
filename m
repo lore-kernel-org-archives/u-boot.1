@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A13EBCA6012
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 07:01:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 959F9CA6012
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 07:03:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C241F81376;
-	Fri,  9 Oct 2026 07:01:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DA1A781371;
+	Fri,  9 Oct 2026 07:03:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Q8grO2rBX45J; Fri,  9 Oct 2026 07:01:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7600D811BD
+ id t8nDsbd2LK_8; Fri,  9 Oct 2026 07:03:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 81939810D2
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791529271;
-	b=j7K9x/1m2W487Xgl9PhBIbIswA2aASoyTPa5zmJe0cXH/5JJAnhgg4gQX3z3p4kNfAwW
-	 x/VveJOO4tHAfufEF3SDyhnqTcxVfX5fN2MGvB1rfk8Ifsw72Enjtm3E2pMypvH0Eg77O
-	 t5msSWkB55sfdoljReaShCM4XUP74NXP9V6mRX0CTNU6suyFWmyiWhYOPimhVVQY/A3gn
-	 dzzoeDcEmEnK+9VY0U5ZOJsHEH4fjyLrBmtD+PXUQBb5wStOfjaMsmKKZOHj/8S/Co3DQ
-	 +n8tMXI41ytLG1nn6l07EFN+PyYblmwHcibAhcomSOO2ocLkmbt0H6+JfbtnKB4IW3A==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791529391;
+	b=dpFQWnpN2tf9N0ojgPAsudHlftjIocvFTvcs5CgiUEtYfIGHdHb2lADJqDMu258/MN/L
+	 DycEx2Jp2rsawzDRKMLalOhZhOaLtAHGsF5wbmF0TBGOK4KM+IrzAie8FPgYO6C/ySdHB
+	 se40KCbeGsMcNznVHR1PQPxvjVV9MZwNHZ9I5HLJXXZjsQVcY2vVPxPGPYvPUN2kmcZyy
+	 6NNvn+JnmxWihTe/AkX9sSR7hKV+Sp64nGSYFHi1SZGNXScqppp5uWK9gIz2jyYGT5F1x
+	 eb+gTE9iM0v/sKjvv2eGlHCRE1G637IAeqaiPZjb3+AEu1BqwbUXnMUhobsyuHjcqkw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791529271;
+	c=relaxed/relaxed; t=1791529391;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,146 +31,147 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=sWIu5Db0SBpDbhq2gWR132ueRklGBQ8nziU9jZYcrDQ=;
-	b=kzcEvZf4AU4PxL7CCdb9BUMOlX8hJWBZ8vkG1Coicbdo3kI/pP3LjJK35dND8Iqc1fs4
-	 s9aE3touMCPEP6HMPWRKWzL42cUHiOi6qsy6Yc15E0ktu7AoedopJ5dy65Na7V+fyTFAd
-	 CGLj5H61B8X0yl163W7UIf2gPBRBCpNaSPvL/y7p4p2gfpSLeEFUA3uJnduAXA5SM7zeO
-	 RDeZRftSU5d0mXA4HLCLdZgjuMXddZOtWWrOUmFP3suEdCMI2Rxa9iQw0OnpfZiu4ATTe
-	 1A/Zd1Ld+aMnc6ci9afvIOchikmycD11iI47Znqx0pTAQJ0GLuNlVSI3DYGW5FCBewQ==
+	bh=VJ4Be7AlVUowmNdcUrYxZ+qIyTIMPTbyFPRN+uTQIbQ=;
+	b=hJeCnIbe/zH4/e0FHGqodrQM5ytdiO4/Tqbj0RW6MYxYK/s/gJSaL0zoJV3M6iAtTw8Y
+	 HDvlE2ZHVNBuE8UfL64hvjczqEu4CU5e67xzqYSAp34qzCVD4q5qKJVZvtLCPkqwL46PV
+	 9sMvfU8ISrLj/xYnOdJUR2QgQ5/T6mhuCzKSiXWgFFKCMSAABG3EBPYkcbS+yuKCQGFDF
+	 vxTK4hMIdMOrO9S2hbs6qPplcqlgSTuqou3W+GvhtVB1yJxs6wM2D0VVlhak/J5GcsRU1
+	 NUovI8tl4lE3Qo4HZ+oKEKrnH/QrBNyHaAmLwktPMCRj2CczkBMKomo+XgCviGOsRtA==
 ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
 	dmarc=pass header.from=chromium.org;
-	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=bGQaP7QZ;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=FYfcE8ip;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791529271;
-	bh=sWIu5Db0SBpDbhq2gWR132ueRklGBQ8nziU9jZYcrDQ=;
+	d=lists.u-boot-project.org; s=default; t=1791529391;
+	bh=VJ4Be7AlVUowmNdcUrYxZ+qIyTIMPTbyFPRN+uTQIbQ=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GFFmT1dylnRp25dTAa4P1YaYqsAydQ1rgDzpTTnLwK6A7MlG3tbbhqjocD5MbSTdG
-	 veAcsz2xkjtKEeHTFUtUvMDYiiumUGqGP2LOS0G1dYFddX71UH+LWvec75gue4aU4o
-	 /BHdz5jMStxuRwa4ou41HCO2fJ6EsjJupiQLPtprclR6MwILyVzXAVVgTzc2yh02nH
-	 VV16+n3dPRUlCstC4TNxinYDDOVMs0/lQE1+UP8i85/pPAHfUWo18y3om8DrxWWhdL
-	 i0cTgYOpNAHWWCNRgaSqR4RpE7tkc/G4fvvnayFxGaxIs87n9SW40wi3lzLyuCT5QG
-	 izsyS3uzgRVJA==
+	b=IGvQKtNd33pkUm7cPj4GUGt9zktdquuoTr1TYJg/zrPP2EokwfjSmuoCEm7xmbd2k
+	 jlPKZXa4NvHGsy0lFfJlyZDokR+qz4oLbr+S1jftOm8ol1JJx5Y8Obnlrs0LhQYHgz
+	 jXX3fW6oEFY2gDo6OYLl3SF/WptGFF+dq8C1XZydnJezGe0mr4k79QvEbNPNdYbAhn
+	 IREonUslXK7TW5DL1irek5gqr0y5O6c743US3+Uu6W8pSvg0IBJukMCtltBFoAbuke
+	 wztW788B3Da8A5j/XcseFqCXRxSY/YP34/F5P/yds5KHpuXwWgQPxkwmMXcmLWg57c
+	 QU8dElGpvdYkQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7600D811BD;
-	Fri,  9 Oct 2026 07:01:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 81939810D2;
+	Fri,  9 Oct 2026 07:03:11 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id DB87075
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 07:01:07 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 381F92E0
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 07:03:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D8A41811BD
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 07:01:07 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1E32F810D2
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 07:03:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id In27hK2eECcb for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 07:01:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C2EF181155
+ id IrK71NEQWaJX for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 07:03:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 20AC880D21
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:20::530"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791529267;
- b=mdqodrY6LKqrKr/WyHiryCTaoTXgjgNEe8xyXwfASFnjV/JBL+SB3BKE0Sbqs4G2D7tx
- mNTn6lA+eWT1v2wsNNfVkA3z5VFw6wLqz9Q3POMJMgjZIUDYwkvXcNnUznv79mCuiTIHs
- trucgBMB8Rg+p7eGCmNdThH1kmZhkFSU9CsX3G2K7YoEvx1dJotfgtDxQ06HS9FMLxeuO
- 3Da83RKeXTVOzJ2Zl4JGDghR1BLhG1hpqMQvFLpzmVS+IDwkfIY1+glCpFEceoWaitH5G
- /ita81IA0b4VF8j6qyvLfBjww7Uu3L0xoFXvKczRiBXBo5Idf7tY2E0LIZ/P5zmD57w==
+ smtp.remote-ip="2a00:1450:4864:20::52c"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791529389;
+ b=taUQ6E8EcnSXM75ihYZL+65arPJfqdsjiNquonoIq/kj6dW94oQt6Dg8/C9s8rEfKbwi
+ 9bQFATnDLS3BP22eHBeQgeH2WL2V50z2U9mjzNp2JlK4YIXHRzUEU4nRkTJPJu/Q3C167
+ kq1PVfNSv/1pTSRELEp4Jk6PgEya+/TkWL7U3bpefsJcd4ueO4KMBHe93Xee69j6+U5ep
+ cIPZ12IlwpvnS5CVhqwqTipZEAPD72b6PfuLOVlTojOqYaFMOIVXLgUf5A25rKf8n8jMt
+ xgaH9I/on5HXT4cj6agaYDeRbocSg8a+6jM04M/TL/6kBf+spo72G1KKaLI+EBupBdg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791529267;
+ c=relaxed/relaxed; t=1791529389;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
  In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
  Content-Type;
- bh=sWIu5Db0SBpDbhq2gWR132ueRklGBQ8nziU9jZYcrDQ=;
- b=acxnSo6VGsIXKr5xyTrTSExJMp2pc/1Ur1F+vgnueo9nRvaWjEEZxePVRp2+rxHyOZtA
- 3BAS+/TXK5PnEFX6gesAjvNPi8zICTK401pGpZibaNb6jzd/nf4VWo8BLtErflhj5qpRT
- mEjcTVMzSF30B2K3RtcOHqqT4cxwbyUXnTzQxqNBL47UHyQNNquTs7T6KFvEJnTVqKVK1
- ToMewoONdZIHjr5YJoLVOD72EjrIcVgS2UwT/G8lnGE3JtRwlvHxKecANXJt77FOtTtce
- tCVGzlV/ht7GNJ3MubdjDcLLg5fleAeJHHa1MvMd68lS1ymoIV03YgLpU3Hecaf8Z8Q==
+ bh=VJ4Be7AlVUowmNdcUrYxZ+qIyTIMPTbyFPRN+uTQIbQ=;
+ b=ETA4JsRIZcjhQPrZe4LocNUe0hWITBswYVqjjVas7BjEfPVGMo3NJXDB27DQqav2zrxP
+ dDYpPLZ/R6Ul2TLyNwOOFcWzmaLXDdlpGTWBFUpgpeHfw6+YDvHFF8GNGSKaePyYbYuH5
+ GOXNqgzFqhpd+pf8lnVIZinZSPQNaNmB2EC2JsWhtR5rGKlTObon8E5FjxH3tZq+Dw0Te
+ bFZhIlseGchwdsbfyXjLE9X56DEpmy48BwAu+nUj7yx4txS+0Jv+1hJX9tZcoA2fkpOOj
+ OdRBww1xzR+JELXvLBcdQX/U6EQz4R3sKRLzgq7sw97OPcuXKrf9g3IVfIUTyl1HYYQ==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
  dmarc=pass header.from=chromium.org;
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=bGQaP7QZ; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::530"
+ header.s=google header.b=FYfcE8ip; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::52c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
+ client-ip=2a00:1450:4864:20::52c; helo=mail-ed1-x52c.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=bGQaP7QZ
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C2EF181155
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 07:01:06 +0000 (UTC)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6afe8d3980aso4607946a12.1
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 00:01:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791529264; cv=none;
+ header.s=google header.b=FYfcE8ip
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 20AC880D21
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 07:03:08 +0000 (UTC)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-6afa651700eso5889709a12.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 00:03:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791529387; cv=none;
  d=google.com; s=arc-20260327;
- b=EmWsr3TcCbuNi1yhDm3yoveAF+a4JwHIpRoQ+jRro6GBOcoB90mUAF2PXkKLUCzcvT
- VR6k3Hj/faalkbqLlRLe0huXePOSlEmvxKJ5e7otdGmW5ugKu1CzFyhnvz8/Yq2MvcWl
- SjAomYwMyNJ9zxNjusyEpofiDsXdmil7TLdKqpjo1UMn/BEfK8ugEODStxu8wZQb170t
- sX3WWHxDgAkZcsbV28s2MYdoKGiYVAQn+a05ZvdS/bURrLFCxE6nuV8bTl/efM9gWCHg
- 73lVv4rKOYhGOr+CzeRw8H8Chm0FuNGqc1FDhKsT7nLSLvNZBQjj5mCm9/TofY/A/5Hg
- mc+A==
+ b=eqYIOvmrmLXYTiz1QDSdlck2eoUcEQA1CV81asI12BlRW9kk8L4FExzN8KWlC6k9pD
+ VC6GbXF8yOFp4msX83PE1pL+jHsey6NkQH4WBB2YE4R3P3/mxGMUINfccfPG63n6R2PF
+ hRFEiQbxejLSDuggOMd7MpZn+uQ6WGX2o8bI4VsFAg6q9M14eBhfbC/dF4KJVr5B0R/l
+ r/j8FQZoAHAFZv0DPyLcQR//9X1BwmkTXHa3YAYileeBkYkvVAum9Du2L4YWDfzMsvC+
+ vLkaVksM4hJpK/rt5ElZyNXtGRr77NFRomcZJZemG1PLljuZOnUJJpV5rQR6wea+g6vz
+ Ko4Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=sWIu5Db0SBpDbhq2gWR132ueRklGBQ8nziU9jZYcrDQ=;
+ bh=VJ4Be7AlVUowmNdcUrYxZ+qIyTIMPTbyFPRN+uTQIbQ=;
  fh=KO+N9rDVG8oED9imVwAtmElOU+C+d9ci/tu6TAhBpYs=;
- b=S6hTWJhMRjogToG1w0CFiF38Kx7qZDB9VMw7ZWM3fId6RzaTPDGfje1n2jIHWgFFqP
- jXNWsnDr4xWND2Erk5rqfgGtGXf9/CAb8NuONZK4JjpQC7jt8u/lXuo7Qr2UvhhPeRDi
- +SzMAPp+Kzhfsp+5sTaLSAtael2AKBLoFl7mNsnHV5pbKNVanisd0jT5tFfVXuWfx3g4
- 6CnOuMKaRNU20T7tE5SQ2oQgI8Osc1yyreKqP9pkn/7bMSsvEBflYZieEtGMxWbiRGtS
- FdHqGO2jeZ4hLjMh6jgwgIXlSF2b6pzXwAvrlKwxladPFadIUHy3eUG6SjtEVoWpuHAE
- EK3w==; darn=lists.u-boot-project.org
+ b=Z+nenq+vYmfRrXd13JFgW8rK6jEJLQVVLtT2R+dB3tD6vlvuFw6PJ4jfcV/GEtEMTY
+ OGkgktT+YysD3/EBd6phSCOBEokPQVJlUP2WgagyMz934WW5RoSp3fw70qz5tk9kvnm8
+ Fyz6AiXvFJLxCNfmLv0ZTNnLJ/WO0kFJNag1PlrGnpLWOouxnBXAsDtX6yl0TO5BXcjg
+ JqldqeJHeYS3ZfGSNVszc2i61T3HirsCEz1h+ZJDTXxVHt2gGvF8LQCcU9qNyQCdhHjg
+ iHBWedswaOOGI0NO4YA1ZkfRnuuU5tkQcVO1U0MZa8bJWLNwncr6IHmzVL85sxWffPzV
+ xxeQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1791529264; x=1792134064;
+ d=chromium.org; s=google; t=1791529387; x=1792134187;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=sWIu5Db0SBpDbhq2gWR132ueRklGBQ8nziU9jZYcrDQ=;
- b=bGQaP7QZX3qNc3wA7OCaTijfXScAeY41lT0ZYjHLyiRMihhs7xzTiMYdVQpGE+ZCTE
- oAKHUuqZvrsOlpwlRW6bKBBnf+jFaknrGWr60RTUoIuS9tT6i3r1eXIo1w00vEqmhp5j
- RI0QMHAz4LDs4gUZDpkF3CFxNhyuxw4JYdlUY=
+ :content-type; bh=VJ4Be7AlVUowmNdcUrYxZ+qIyTIMPTbyFPRN+uTQIbQ=;
+ b=FYfcE8ipE7rjk2c/Oveg//cxkUw4tq1X083oRAovILIu/wwO+jlBozjLbVmTVW7QBz
+ xWS77Hr7x5zB1AHVtT6tZdvJZ4MzGoWWr88zl9tyYAFMw5hP4z16kvIWlgMWknc+UYXa
+ xsIF9Rq/scMlA6JrW3IzG7zSQcvYB6VH17PrM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791529264; x=1792134064;
+ d=1e100.net; s=20260707; t=1791529387; x=1792134187;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=sWIu5Db0SBpDbhq2gWR132ueRklGBQ8nziU9jZYcrDQ=;
- b=kAU5dCKUFHDDuzZuTjt3c+Ff081eVQur63ZKDnYpTBykprwblMo+mhd0bCvkmVVA3M
- 0aFhSAJJy/c8IAgrmwJs3pj17B2+k3wwl2jeKLVMVfobtidVmBmUS9p2usDgDoUGLWFA
- RFSmHF/wT1iQPUC6axOfFvkmYjMH18Ut/VFaTO6x9+w69BFytlXU5YqQUMdlEiB3sdI7
- l/kcsVQ+2bpTxorAx1qOQ+NoTIv8B+spC51ViidK+mugJpK33HOyZI7BV3/md6N0+njs
- ZFFO0Kkh6lF60CqZNz+YHy42Xn+MNsfgMYNRGpyBgHPC/YgPJ8JgQJyQbG/8UPwkTkhn
- I5tw==
-X-Gm-Message-State: AFq9FYI3SN/IUBEK5NNoeaogHMUWkgJIT0Lop3zxd6rPpi7v3sYXneT+
- hgmv5yXpJwTDmbCJFQvaXxrhiPYKyLA2yFAHZQSxlk+oQ/OKLTOSA/DB97LIuK9eW5ou+gPhnkv
- H5+Qp/yQnq9ygy83V2B0RQmRiCsuFm/rBZigfCRPT
-X-Gm-Gg: AYBFou3LPavL9aaTjFUMUmEJbJwIvxOoTV1k/TiUy7ZCOQFG5XEsoO3K8/Fobbz8dYR
- cV9bTzq4qELTl7uAuC5JtamcU5lNGDZwAW86FHSLHGaQYUu/kcAGamAH+3p1CIMFmZLyIwzxQql
- 8aZNv3KfLFjteLGZrMI5QcwHmyUlhi88pnjvywFEmrVWf+9ZeHqJni4hPlAy+TEdTFtuHhE04rI
- YcEGQbHpWnjrrDWGvHKIvKNMfTAeGX4RVpixeRfR4olVJ7kbB8fHQQgHMLgDOiBPnMyOGYDVhX+
- GbspiPAXYzk1TTYpeN7WEzcDj8yGF82cDMJ7Bh+7wdNBwbPjmdSGR1Y=
-X-Received: by 2002:a05:6402:2547:b0:6aa:1cf5:6076 with SMTP id
- 4fb4d7f45d1cf-6b17c1de908mr660693a12.1.1791529262668; Fri, 09 Oct 2026
- 00:01:02 -0700 (PDT)
+ bh=VJ4Be7AlVUowmNdcUrYxZ+qIyTIMPTbyFPRN+uTQIbQ=;
+ b=X2wLH1cXpeCTE+4vULT78rTpJve1tqLfZN7j0xcU3NsrJhOCWn+n6VXUZ571OmESMt
+ JdcD7SoDIbGWO+xXdaWZ60eCHIoLdvEcu/nIGrXo2wTqR07jQ9U0B3a2BiXnYij4kOBJ
+ uHDEzNAno85G98LS2V4TybCkSbZRlSCj0D8e0o/DOwYe9oHf9RjUObZjYDuSU7/l0vsK
+ +3vEA4gYxJtHjplLaOftIfm8zr1b2+XhHMcop3O4/GAdlozbDy4Xw2pMkVJaYEJwqK1F
+ 4eF8BNiaYiJqqKIw5sf7B8s5JTimbg0IcvsDSnIosP9/o17p5CN7+4RTAB0hBjhg4h/I
+ t7Lg==
+X-Gm-Message-State: AFq9FYIx8KIOaxbR+SYSvvuYfBAyAjOXI/pQKsbDSH5iZXWt+XUI+B+V
+ n+/SjzcZslMSmFAYQ3QKP6BM6F35Kt7pqC5PqaqT9DuXOanIkFxYhZLwcy0jcy+9O/EDFwmJPp+
+ ixud7JZBSUaAEN4smYkJzlaxRNWElfs2WH5zFnLbF2lT3Sz3rDp5M93db/vs=
+X-Gm-Gg: AYBFou0xRaQsEFpn2b8Hthtp+ilLn8fstylMuqxNC6awb7KFhaMNn6CM64MWHdKCdQA
+ ZsusIuG+clvqb1gOYqdVBMND1YMWTNkr60pmV6ZmRMPItWbICFVo0E719vXBHAl1xzt418Sn/3N
+ pQngUnXgXzsbR7ZS2kNhOMFtwznNRxXVxRhkRBx7KdwYyUuwCwviMSIxCwFrmpmlS5pjx2FQUJo
+ OxEigQuc+yE4MjtUS3XGWK7sNo/L2jyFj9TcKcVDw3mkOe5j72X0f+hOwO0X7IT2XrxLpGaL5uh
+ ctYRp7Ui31GBC6bjXS06wha1xubSY3R/Of6FJENAdLAZh880TGKnGPElRRySk84zZQU=
+X-Received: by 2002:a05:6402:27cc:b0:6ac:6a3f:c626 with SMTP id
+ 4fb4d7f45d1cf-6b17c2389bemr585133a12.8.1791529386630; Fri, 09 Oct 2026
+ 00:03:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20261004040657.3156402-1-hs@nabladev.com>
- <20261004040657.3156402-2-hs@nabladev.com>
-In-Reply-To: <20261004040657.3156402-2-hs@nabladev.com>
+ <20261004040657.3156402-3-hs@nabladev.com>
+In-Reply-To: <20261004040657.3156402-3-hs@nabladev.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 9 Oct 2026 08:00:50 +0100
-X-Gm-Features: AclHuK-ws77xJ-oBkAXgiTH3mf-IJsHD14GCeP2xSL_5x-LSJDavyJxJh3aTAuM
-Message-ID: <CAFLszThVWu+8sLzkyyDHgEh5ipM6YjBH7xLsP=xi=p9JccuR8w@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] mtd: refuse an erase on a device that cannot erase
+Date: Fri, 9 Oct 2026 08:02:54 +0100
+X-Gm-Features: AclHuK-eWErGe5dEXhY0UdtGvr-gHZZaPcfYrHp7MYqSKsRecMiVm8796TN8MFE
+Message-ID: <CAFLszTgUh-EdnBYGeRvGh2pkRLc7jyauGHXB1XoZSNSF2f-aWQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] mtd: align a partition on the write size if the
+ device cannot erase
 To: hs@nabladev.com
 Cc: U-Boot Mailing List <u-boot@lists.u-boot-project.org>,
  Simon Glass <sjg@chromium.org>, 
@@ -195,73 +196,50 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Hi Heiko,
 
 On 2026-10-04T04:06:44, Heiko Schocher <hs@nabladev.com> wrote:
-> mtd: refuse an erase on a device that cannot erase
+> mtd: align a partition on the write size if the device cannot erase
 >
-> mtd_erase() calls mtd->_erase() without checking that the driver has
-> one, so a device which does not provide one will end in accessing
-> NULL pointer.
+> allocate_partition() aligns a partition on the erase size of its master
+> and checks the offset and the size against it with mtd_mod_by_eb(). A
+> device which cannot erase has no erase size, so that check divides by
+> zero, "mtd list" shows
 >
-> MTD_NO_ERASE flag exists, but nobody reads it yet.
+>         ### ERROR ### Please RESET the board ###
+>
+> Linux aligns the partition of such a device on the write size instead,
+> see wr_alignment in allocate_partition() in drivers/mtd/mtdpart.c. Do
+> the same here, and take the alignment for the MTDPART_OFS_NXTBLK
+> rounding from the same place, which divided by the erase size as well.
 
-This sentence is confusing. spi-nor-core.c already sets MTD_NO_ERASE
-for SPI_NOR_NO_ERASE parts, which still have an _erase and a non-zero
-erasesize. This patch doesn't read the flag either, so it would be
-clearer to drop the sentence or to say why the check uses erasesize
-and _erase rather than the flag. Also, how about 'jumps to a NULL
-pointer' instead of 'will end in accessing NULL pointer'?
-
->
-> Linux guards mtd_erase() with
->
->         if (!mtd->erasesize || !master->_erase)
->                 return -ENOTSUPP;
->
-> so do the same in U-Boot, but with EOPNOTSUPP as the error code,
-> as checkpatch asks for ("ENOTSUPP is not a SUSV4 error code, prefer
-> EOPNOTSUPP").
 >
 > Signed-off-by: Heiko Schocher <hs@nabladev.com>
 >
-> drivers/mtd/mtdcore.c | 3 +++
->  drivers/mtd/mtdpart.c | 3 ++-
->  2 files changed, 5 insertions(+), 1 deletion(-)
-
-> diff --git a/drivers/mtd/mtdcore.c b/drivers/mtd/mtdcore.c
-> @@ -930,6 +930,9 @@ EXPORT_SYMBOL_GPL(__put_mtd_device);
->
->  int mtd_erase(struct mtd_info *mtd, struct erase_info *instr)
->  {
-> +     if (!mtd->erasesize || !mtd->_erase)
-> +             return -EOPNOTSUPP;
-> +
-
-From what I can see, but 'mtd erase' never gets this far.
-do_mtd_erase() first calls mtd_is_aligned_with_block_size(), which
-does do_div(size, mtd->erasesize), then mtd_div_by_eb(). With
-erasesize == 0 both divide by zero.
-
-do_mtd_io() also calls mtd_is_aligned_with_block_size(mtd, off) for
-every page, so I think 'mtd read' and 'mtd write' hit it too. The test
-in patch 5 calls mtd_read() and mtd_write() directly, so it doesn't
-catch this.
-
-Please can you make mtd_is_aligned_with_block_size() cope with
-erasesize == 0 (e.g. treating it as 'no blocks'), and have
-do_mtd_erase() bail out early with a message for such a device? A
-small test that runs 'mtd read', 'mtd write' and 'mtd erase' against
-the SRAM would cover it.
+> drivers/mtd/mtdpart.c | 35 ++++++++++++++++++++++++++---------
+>  1 file changed, 26 insertions(+), 9 deletions(-)
 
 > diff --git a/drivers/mtd/mtdpart.c b/drivers/mtd/mtdpart.c
-> @@ -654,7 +654,8 @@ static struct mtd_info *allocate_partition(struct mtd_info *master,
-> -     slave->_erase = part_erase;
-> +     if (master->_erase)
-> +             slave->_erase = part_erase;
+> @@ -563,8 +563,12 @@ static struct mtd_info *allocate_partition(struct mtd_info *master,
+> +     u32 wr_alignment = (master->flags & MTD_NO_ERASE) ? master->writesize :
+> +                                                         master->erasesize;
 
-This is fine, but please mention it in the commit message: a partition
-only gets part_erase() when its master has an _erase, so part_erase()
-can't call through a NULL master->_erase either.
+Patch 1 decides that a device cannot erase with !mtd->erasesize ||
+!mtd->_erase, but this patch checks MTD_NO_ERASE, and the two don't
+always agree. A driver that leaves erasesize at 0 without setting
+MTD_NO_ERASE still divides by zero here, as does an MTD_NO_ERASE
+driver that leaves writesize at 0. Since the point is to stop 'mtd
+list' crashing, I suggest skipping the alignment checks, or adding a
+WARN_ON(), when wr_alignment is 0, rather than relying on every driver
+setting the flags correctly. What do you think?
 
-With the above:
+> diff --git a/drivers/mtd/mtdpart.c b/drivers/mtd/mtdpart.c
+> @@ -731,19 +737,30 @@ static struct mtd_info *allocate_partition(struct mtd_info *master,
+> +     tmp = slave->offset;
+> +     remainder = do_div(tmp, wr_alignment);
+> +     if ((slave->flags & MTD_WRITEABLE) && remainder) {
+>               /* Doesn't start on a boundary of major erase size */
+
+This comment is now out of date.
+
+In any case:
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
