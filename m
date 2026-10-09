@@ -4,164 +4,155 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E048CA601E
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 20:09:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 844F0CA9EBB
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 20:21:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 09B7F81471;
-	Fri,  9 Oct 2026 20:09:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 43D678149E;
+	Fri,  9 Oct 2026 20:21:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BV8cJVuuzNRz; Fri,  9 Oct 2026 20:09:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D338081112
+ id 1BIp1u3ji_ow; Fri,  9 Oct 2026 20:21:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2C163812EE
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791576569;
-	b=pKxopm6k8ggGfKbCpCUTCRv9qM57XH0uIUUGCs6iNirobL66YEIukD2u8ScXrD0NYl8o
-	 4Uz6maUDwCV4pRCD4Qi2v9AV+G29EPJbGGBhhdQvRchRBo6/V/3V4xMdRsfHH0tSVW560
-	 8OFPj9DyhrZVJEjISopLpWDwe1YryF6sBPY2SZFp3ANdNPi3hOAZ81TDZMIlbKRZ9Crk+
-	 bBsrw1kCg3BVPFWVGzmIfANGEB2AdGbNXSgiAo+thodtgcheb8hZS2XlBuxsp0cNp4QFy
-	 ZswXFhD6Xsu5udxBWVaDa777iP1XyYV+04QR1BS6DzAq0l9n+MPyFDdI8C3URvu5yXQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791577295;
+	b=iXL6nl+SnUuZB6yzqtEHSZsxwuMvLLSw3RqBDZjlMSxuAcn7J6My1i1Z/iDT74Xd7bOB
+	 K9bmt91brUCyxUvf5Oiml7M8po/49G1YdlsN0GYb3S/8uVIndVjSh5fqlkhvTqzLAiPdx
+	 NGbC20lr6WD/GXv0duyXQlYfSu44m3/sIXMMqs/DtnixH3f96YTJHrHy7SXZZYkytUy7r
+	 bTi/roC3wsjy9RUgYuZ12FFOs6CKnOTq8JxHtMvElpUyrTsEonlyxfSAeGOLvnsRQrY/k
+	 BIkKlbxiSoSYhX9z4oZuixkoWiVk5y1EzP+4FqIvJbcLgspo3jTHOb0TmhXzyaUeDmQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791576569;
+	c=relaxed/relaxed; t=1791577295;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=0Q5h9aulu9Yn+ELTwduNFIWIoxhVvZoYMfTwsTvlK38=;
-	b=PliITOY+ZBV+0x7dAQ2fkM1ycuCdG2eiL2AysFgP8baybkEVx5rULgeJvs/wCuwFqsul
-	 YNBSLmogKeb2FGb+ZxR8RfPzoLSTrMlxU0N0ZE+2BI8tTAsUbPuI+l1m+7j0lj65+JGbf
-	 JSlxPMpx+b/CjNdd8SzI3fBKU3+kEWcP4GvLwEdtghDo+jJudPOT6O6wG9CYxlInHFOn8
-	 OTJo89Lw/93G9xK+mEkqHZvWCZTx9AabNjsnP74iaR8O0Du46r1rfv6m/7hTo2f+isaC7
-	 doD5t7x8InwcecZMp4gFG/W2vNxTAWn/tP8SpF2MSlxOYIRUTvUKaA9zmCN9wOzcgTA==
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
+	bh=AFMvz9b4dOMN1FRJpPmTaQ7hWyDEHRwaVHVlalZx7wU=;
+	b=UvsX2YvFKDReeGP9CMSwTL4gmL9vjUT8V1fRcLuUd0A8WXh7qBJtJobgI0uvzerl2Sv9
+	 Yu4EI4Jan3jHbertDgQ/Wm9Pq6gr0mxsSwG2MAfA8na2o2Nhiy17cmENbyv8jxTRVXFyV
+	 Ed3BsX+DanaD2i/kMNBqGpB5qq6u6TF8IX6b7UB76Yf5u+raK1L52ynp9Xbdh5PzA1XA6
+	 iKBIzpzhN697sDKbUF4YWBsvbST9JJba9Bz8Si5ijz2keYGOnVJafyNhlq6dK3awvCuJY
+	 gQINbIDG7f+d8kqV4ncUZq/3jqqvZLrJ1Qk4rTwOnAQCoJVzsiPxJ+6plhxc88XH14A==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Z10DDkpc;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791576569;
-	bh=0Q5h9aulu9Yn+ELTwduNFIWIoxhVvZoYMfTwsTvlK38=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=LXx21BJ1Q2WInNFm2lXDxhKKEItDVNdEHd4JSM9Bc6AabopYVN2yNzVS5yznp3k54
-	 yLorwP6cKPV9n56Anky3gFn71rVNUhtgkkGgNhuxwzm7vCeGyIPs+Z3/sc1tG1ApGt
-	 eDBAvWIov9ZBfX2CncSJSohFQEE0YzSni5vBz8jf5CKKDdLijscUNCLilVtYmeXWDT
-	 03+6/lZa9qkCR7KuNT4FmIi8FrHJZhz+rpLDR81ffC8exLUbRXw0abGgnMU4mOmF0F
-	 pEaZgrpg0pQ4/ZS1mEqbDjwrAVut1e9GBJ/UmMUi8eQrmSXhk8zikxctHzwDBNXWcK
-	 g0hehGcnBMidA==
+	d=lists.u-boot-project.org; s=default; t=1791577295;
+	bh=AFMvz9b4dOMN1FRJpPmTaQ7hWyDEHRwaVHVlalZx7wU=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=Ii7QQlRBUEVaSDmRnWUN+cmTeHbw3HIt/yTw8+cz5AIm7E7TTnO1ccqoiJa36FRFu
+	 wHDztBIwLtc73UPklVk9I0deHztmujoDtZe7KfpjK+VBAnr4pY9vIaZelEAQddHtEe
+	 /ZXFscAQWhEr4sveRafWQU2QRtMB5ftLwwZ7Bi8D5w6U40F929Mg+dV8NA2nBmWVGU
+	 E6IQASw1zAg+ZF5QXauPv7U4HlFWEEyIxAxyyrDpuQD1qkAGijPiHzYy6tHHzNJj1D
+	 wd/x6itYpJPQWSHE6danWsokhkQ1yE4VcJ5xr6HcVCzQrQ26g/1cfXVq/A1rZht0EJ
+	 l0mA8B6NMJPMg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D338081112;
-	Fri,  9 Oct 2026 20:09:28 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 6B8E7380
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 20:09:27 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2C163812EE;
+	Fri,  9 Oct 2026 20:21:35 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id F127A3B4
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 20:13:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 681498110D
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 20:09:27 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id E319440053
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 20:13:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QxXvTjdH1bxR for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 20:09:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 99E9D81103
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::333"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791576566;
- b=QG5oCcVFl4H/Fa+HsheV3YQ1B17KdgPH/EeOvONHh3z8k7s1cXxvw2P3NZCLReuJEFGw
- nWdguKiAzVAENzUnj3J6IFzEBoQ+9YY4uNlZO0QuqxwDEDYUjofQ+PJDezfbm+9fn4DYA
- ywOxNqRCsWf5Pd6a26SoQPvizijRg6atYGjP6UNss6hS8c9qLcm1oovu4aQiAMn6cULyf
- 5oKh+kSs4KtfD4EadK69xdLyCBSTZXMgE622DHKwW4dyp+cviun6TzhQZn6cO8K2jM+uR
- RzUdE3BKj98ubWqrnGfHY9cXZi+Vj4L+E1NBnv2h0AdYLPWBJDmS6Gg9zS9TPjrUuaQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aGjY_gSSwnM9 for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 20:13:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org D5C1D40080
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791576837;
+ b=lUb8TWkCEQq13aFLDn+kRZg1IlAXUSYZieTIWc1iVU59ZgSEmk+gRzDWF8Ih4NS7MY+L
+ d245USxdYA0rWyloRaCjqaVMrmcZYZOIOKnvemj9u+iA7mpZe38P0DISRNmqzHRWAZ+Va
+ 6N2g2aPSV0F1VNPeNGJ6u8broghJxxirTj5ggkcH75zumCbsLoxF9JscIJKMiFjjhWRAL
+ Lmu+5efmuXOTABBiYuYC+7pcUuI1ccHZXSwjV3AIqCo3bCI4o+dukJFvSP06dGBuJ1/ZO
+ AhsZdewtEFcsrIXRBSJn6XxiRQk8cAE7LTRuGiCrRF8iNU80pbtMNN9PVT62dyEsZWw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791576566;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
- Content-Transfer-Encoding;
- bh=0Q5h9aulu9Yn+ELTwduNFIWIoxhVvZoYMfTwsTvlK38=;
- b=lxmObti7wH9sdsWcV8hdN2l78+TNGgTifuvOoqXTiGeNatEqbdAoxBQ3DUzBsYNQOn0E
- iu83Gm9Ux2AmJcHOpjhuK5SXx10NZMwyDzG4jsAn/YEhi/puRSkHjKN/IKqJGdouKWF4e
- ScBRbA1QddH6zBT4ENhvduKL4gkka9JDhZc09/uVZCt6gL5uVxD1DhhbhpMJoWQ3NaMRs
- gOD+L85M0e+sNCuD6J4PVTqIwTCK4sl1dqR4kAvgrVgJTWn8YsQlBWpUjBYZ2aB/Rd3Yy
- KgKaD8n/Sc6v0oJWDhSgNesmj1eHCOv5wg0NWvcaiq6l/FfHoHnzN36TztKaSGY05nQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=none header.from=baylibre.com;
- dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=Z10DDkpc; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::333"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::333; helo=mail-ot1-x333.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=Z10DDkpc
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 99E9D81103
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 20:09:24 +0000 (UTC)
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-824329dc1ecso148174a34.1
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 13:09:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1791576564; x=1792181364;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=0Q5h9aulu9Yn+ELTwduNFIWIoxhVvZoYMfTwsTvlK38=;
- b=Z10DDkpcqCIOK0JzDidNs1Gp3mIfA+a2xr9G0kFeAyaWEcyr2+vtYOqgV4syXGgWZD
- Q6fbgoocbbeq8VfxhyL2/Zu8rUq+83eCGpH5VHMK/gbhb9AyW0njKYYbCguh5kGNmM34
- m9Y43rPiSV8cpoJVE2vrzejtF/n608kDwQZAXwd23ZgyZtEFiq+4PS5yJpfRX0BeNN5I
- 5ggND/bIxPVgTZLgZ9aJrn2AWJ1Y4jGAc1EP8t802TL7nx2KLxz7KnBjGnLZFqmfZV+P
- BANS9AaFPpWuSj2zRI/9OXszyh2rWu3VU2ChiW45UeYo4sPsOzmlE09h9ZR1P2PyrwkP
- oYEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791576564; x=1792181364;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=0Q5h9aulu9Yn+ELTwduNFIWIoxhVvZoYMfTwsTvlK38=;
- b=IllY/t7S60PLSt6JHu1tGk1vmvTaLrdt7BKGrPVCPM99Z4ODCrOn3znAsv7+Ry7juc
- C0fszwCWrkNodToU0w8Pg1H5knzZY1ZJRMHrlhDx2WPxAz5BKHrqK/FzZa4JBioxvAjO
- PpdGOxynGh++PO6bGhqJNhYtIFU28GZM4KwI7DKoMwChyCnmdb72vxRDVHtcnk6u4K8O
- kGWwG6c0zBOM5HJyie9upTCquuganNkAtAqiILfgkjB5VzZccVWuAZarf8pOC1+qFDH0
- Ys9XshLfXGKEfBiU1QKWjKYvYW/t0qD2xs3o1xKwrA87taoIAX37l6oPs9inMAVhS1cO
- T0hw==
-X-Forwarded-Encrypted: i=1;
- AKwUvByiJi+2cGpDqU4zkdNdHDXhJKIZ5HvZbeOgyjaZOk7EFe8HkpyWV1zAur9U2QSBtlO49phzbSs=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lQcCgGZdWhTZHOHAYib61w7kdx5euBQ18V5uwHKZuIEKvO1/Cx
- UX13R4X9HucUYBJVJ9g/MoV+3r24kW30SrI8f630zIfk+jlBk7PnDpEEHL1FNubyauA=
-X-Gm-Gg: AYBFou1JN7/YjwTtOjEfAdKTSPNlV/HNbqnLiaASDpoLmK4phkLUM76YNpAw0WP+i+p
- 75LWYKFOFrgMZklJ4wq+NYdLyDl7+uaWw8GrDODwWK7g9XH2L7b0goAzJdNIQuGo3VweStZj8sA
- K+yqoOHM8Ba6RvEbSFeZb4Ub2VVQZqoEuqXfNI7Oal94+jRJQlFcsCWSNVfPBNF50oKj7X2f48M
- yKqnNyoiMR05XkvYsHc5jN10hkfkv0zzIg7CoE81inY8orZLCUN/UZ3MOQ5+9++2l+Vt/0cUATZ
- CIlvLatUz27G9/zrKHlbZdV6TdYs7p52WDfVPJX2HxOn/zotH8mAk3OTVVphty9qt8qya3ddnOR
- +HRVscCEtDxNU+tJqpgWcu9xxSNEnA5aQ1+HxoFkoqF4CslErNVEWhb+io/G30+m9RGF9bhLknL
- op6mZfI5zLJQyY/Gzn07VuUd4Z4/eaND7yLMaO98231ax8cu4kH8U9cnZpO3vALrVRl0IsMesQ
-X-Received: by 2002:a05:6830:6995:b0:80b:95aa:5c2a with SMTP id
- 46e09a7af769-8309506c076mr2471268a34.9.1791576563958; 
- Fri, 09 Oct 2026 13:09:23 -0700 (PDT)
-Received: from freyr.lan ([2600:8803:e7e4:500:29bd:56f6:5ae7:35d2])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-83039d385dcsm2718388a34.21.2026.10.09.13.09.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Oct 2026 13:09:23 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: David Lechner <dlechner@baylibre.com>, u-boot@lists.u-boot-project.org,
- GSS_MTK_Uboot_upstream@mediatek.com,
- Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>
-Subject: [GIT PULL] Please pull mediatek-for-main-2026-10-09 into main
-Date: Fri,  9 Oct 2026 15:04:46 -0500
-Message-ID: <20261009200920.2438383-1-dlechner@baylibre.com>
-X-Mailer: git-send-email 2.53.0
+ c=relaxed/relaxed; t=1791576837;
+ h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+ X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+ X-Original-From:Reply-To;
+ bh=AFMvz9b4dOMN1FRJpPmTaQ7hWyDEHRwaVHVlalZx7wU=;
+ b=F/5JSwHQkYGSVtUGiky6Ga8osoroyKm/D4lwxR4YS6YEc05VaCa5w+HfO8q6DqAtp/Vr
+ orw9FAqOU6xkT+Nt/it7W+84+uU1AZjZnBzuKVj62jgChe1pvFAbVyu/z2JsY7Hg9cdDI
+ DbbAxOOSLNJgyC92gJu1tTFGM9EmZ3s9Fcn6vMqFSfgwZFO+wYDt8gyTEbpYBtostCmHO
+ G++UrPXlqsfUP2AR1OSN/AqCGmLE3aBmYTQ5CFseyCoKofyXR7HPiReV5BgIqQca+jCC+
+ 631G+fnJUay13aPeqAf9NnyFauFeUU3QYHWlzGtoAY2M1PsLp+lVdAeBzZ6uV+E7zJw==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=kernel.org;
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=ofFFKF1A; 
+ arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org;
+ envelope-from=devnull+wadowski.arkadiusz.gmail.com@kernel.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=ofFFKF1A
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D5C1D40080
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 20:13:56 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 0D59460120;
+ Fri,  9 Oct 2026 20:13:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B255EC2BCF5;
+ Fri,  9 Oct 2026 20:13:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1791576834;
+ bh=YdqPq/wM5sukbWCT3qOZsj7HR0HlQt+TQvjKTXSpAh8=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=ofFFKF1AO14TR0Iu5AS1fwHUPkG0VIPgGIo2SbgDtY+2P3PPHFLWM6hsPp1jLtrk6
+ JaWfYfYTAUYPKOXpqFLdrwSrycAXs4miieNmvL4dqxf+fKj/66XLan5CsOWv6FVfui
+ IWeZyudar5tv891YZFgWxgtLD5Qg0qDWY7Z6XRFhw9n1MKtthjI10AtTQg3H3XFlnQ
+ 3MWar7DWsIc7jijuFCQmyBZTrxcGLqW8iSba/UPLq9WWcAzWitL5WBJtvw7qr3vt3r
+ v0K4o8w4j9TFRuTvftI1bIBGRGfRBVzAOLfrdPBpjWJWFLNCcutOkpf5yndDM32/Vd
+ MuPU6MMKLbGmw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 8DE24CA9EBB;
+ Fri,  9 Oct 2026 20:13:54 +0000 (UTC)
+From: Arkadiusz Wadowski via B4 Relay
+ <devnull+wadowski.arkadiusz.gmail.com@kernel.org>
+Date: Fri, 09 Oct 2026 22:13:17 +0200
+Subject: [PATCH v2] board: qemu-arm: Add SPL support
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261009-spl-for-quemu-arm-v2-1-460427488c17@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NQQ6CMBBFr0Jm7Zi2KLauvIdhUXCAMZRiC0RDu
+ LuAe5cvef/9GSIFpgjXZIZAE0f23QrqkEDZ2K4m5MfKoITKpBAGY99i5QO+RnIj2uBQnaQyF1P
+ Ys0lh3fWBKn7vzXv+4zgWTyqHLbQZDcfBh89+OsnN+9efJErUZFMjMl1prW+1s9weS+8gX5blC
+ xqr8ETEAAAA
+X-Change-ID: 20261009-spl-for-quemu-arm-2412979ba593
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Arkadiusz Wadowski <wadowski.arkadiusz@gmail.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791576832; l=4979;
+ i=wadowski.arkadiusz@gmail.com; s=20261009; h=from:subject:message-id;
+ bh=JDkQR1jI2dR/+MdscKbdpNDlzhyz0P3/TwaN7s3vVZ4=;
+ b=j3UA4W8rEIyYREwUeSyNRITg2Xxycvn/9nLA6oDcUEAcCZ1Ccin5scumdFBSVlV97P9WmgwKp
+ XdnmqLlz9+XDeOSYaFbT6iKfBGiCWI89yFdhxTPQIF8DPLiJ4Nbpu/9
+X-Developer-Key: i=wadowski.arkadiusz@gmail.com; a=ed25519;
+ pk=HKeMLZz72hO1HTxmFN3fZohsVyICtXJ2xUrbSalR0wQ=
+X-Endpoint-Received: by B4 Relay for wadowski.arkadiusz@gmail.com/20261009
+ with auth_id=1144
+X-Original-From: Arkadiusz Wadowski <wadowski.arkadiusz@gmail.com>
+X-Mailman-Approved-At: Fri, 09 Oct 2026 20:21:34 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -173,97 +164,169 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+Reply-To: wadowski.arkadiusz@gmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The following changes since commit 0a55b098d6f5f6bafa84fc2f18b433dd167bf729:
+From: Arkadiusz Wadowski <wadowski.arkadiusz@gmail.com>
 
-  Merge patch series "rng: airoha: add support for the Airoha TRNG" (2026-10-08 10:41:43 -0600)
+Add an optional SPL boot path for the QEMU ARM64 virt machine,
+allowing the SPL-to-U-Boot boot flow to be explored without
+physical hardware.
 
-are available in the Git repository at:
+Use the existing NOR loader to load u-boot.img from flash into
+RAM at 0x41000000. Generate u-boot-with-spl.bin with the payload
+placed after SPL padding.
 
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-main-2026-10-09
+Signed-off-by: Arkadiusz Wadowski <wadowski.arkadiusz@gmail.com>
+---
+This patch adds an optional SPL boot path for the QEMU ARM64 virt
+machine. It provides an emulated environment for exploring the
+SPL-to-U-Boot boot flow without physical hardware.
 
-for you to fetch changes up to 35ad65d943257d2764b342033aec087961b27eaa:
+SPL starts at flash address zero and uses the existing NOR loader
+to load U-Boot proper into RAM at 0x41000000. The combined
+u-boot-with-spl.bin image places u-boot.img at flash offset 0x100000.
 
-  pinctrl: mediatek: add pinctrl driver for MT8196 (2026-10-09 14:37:45 -0500)
+QEMU provides initialized RAM at reset, so this boot path does
+not require a DRAM initialization sequence.
+---
+Changes in v2:
+- EDITME: describe what is new in this series revision.
+- EDITME: use bulletpoints and terse descriptions.
+- Link to v1: https://patch.msgid.link/20261009-spl-for-quemu-arm-v1-1-8ea39068f888@gmail.com
+---
+ Makefile                             |  2 +-
+ arch/arm/mach-qemu/Kconfig           |  1 +
+ board/emulation/qemu-arm/Kconfig     |  2 ++
+ board/emulation/qemu-arm/Kconfig.spl | 40 ++++++++++++++++++++++++++++++++++++
+ board/emulation/qemu-arm/qemu-arm.c  |  8 ++++++++
+ include/configs/qemu-arm.h           |  4 ++++
+ 6 files changed, 56 insertions(+), 1 deletion(-)
 
-This marks the conclusion of our year-long quest to reduce duplication in the
-MediaTek clock drivers and make it easier to add clock drivers for new targets
-without having to invent new things for each platform or follow confusing
-conventions that had evolved organically over time.
+diff --git a/Makefile b/Makefile
+index 6303a0cca6a..49c1da0fb03 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2458,7 +2458,7 @@ spl/u-boot-spl-dtb.bin: spl/u-boot-spl
+ spl/u-boot-spl-dtb.hex: spl/u-boot-spl
+ 	@:
+ 
+-spl/u-boot-spl: tools prepare $(if $(CONFIG_SPL_OF_CONTROL),dts/dt.dtb)
++spl/u-boot-spl: tools prepare $(if $(and $(CONFIG_SPL_OF_CONTROL),$(filter-out y,$(CONFIG_OF_OMIT_DTB))),dts/dt.dtb)
+ 	$(Q)$(MAKE) obj=spl -f $(srctree)/scripts/Makefile.xpl all
+ 
+ spl/sunxi-spl.bin: spl/u-boot-spl
+diff --git a/arch/arm/mach-qemu/Kconfig b/arch/arm/mach-qemu/Kconfig
+index 9c06c6a3a5c..7e8aa62d38c 100644
+--- a/arch/arm/mach-qemu/Kconfig
++++ b/arch/arm/mach-qemu/Kconfig
+@@ -18,6 +18,7 @@ config TARGET_QEMU_ARM_64BIT
+ 	bool "ARMv8, 64bit"
+ 	select ARM64
+ 	select BOARD_LATE_INIT
++	select SUPPORT_SPL
+ 
+ config TARGET_QEMU_ARM_SBSA
+ 	bool "SBSA Reference"
+diff --git a/board/emulation/qemu-arm/Kconfig b/board/emulation/qemu-arm/Kconfig
+index 447061b25cd..b66b260b292 100644
+--- a/board/emulation/qemu-arm/Kconfig
++++ b/board/emulation/qemu-arm/Kconfig
+@@ -1,3 +1,5 @@
++source "board/emulation/qemu-arm/Kconfig.spl"
++
+ if TARGET_QEMU_ARM_32BIT || TARGET_QEMU_ARM_64BIT
+ 
+ config TEXT_BASE
+diff --git a/board/emulation/qemu-arm/Kconfig.spl b/board/emulation/qemu-arm/Kconfig.spl
+new file mode 100644
+index 00000000000..5dd7f478e82
+--- /dev/null
++++ b/board/emulation/qemu-arm/Kconfig.spl
+@@ -0,0 +1,40 @@
++# SPDX-License-Identifier: GPL-2.0+
++if TARGET_QEMU_ARM_64BIT && SPL
++
++config TEXT_BASE
++	range 0x41000000 0xffffffff
++	default 0x41000000
++
++config QEMU_ARM64_SPL
++	def_bool y
++	select SPL_LIBCOMMON_SUPPORT
++	select SPL_LIBGENERIC_SUPPORT
++	select SPL_HAS_BSS_LINKER_SECTION
++	select SPL_SEPARATE_BSS
++	select SPL_NOR_SUPPORT
++	select PANIC_HANG
++	select SPL_LEGACY_IMAGE_FORMAT
++	select SPL_DM
++	select SPL_OF_CONTROL
++	select SPL_SERIAL
++	select SPL_DM_SERIAL
++
++config SPL_PAYLOAD
++	default "u-boot.img"
++
++config SPL_TARGET
++	default "u-boot-with-spl.bin"
++
++config SPL_BLOBLIST
++	default n
++
++config SPL_MAX_SIZE
++	default 0x100000
++
++config SPL_BSS_START_ADDR
++	default 0x40400000
++
++config SPL_BSS_MAX_SIZE
++	default 0x100000
++
++endif
+diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+index 38f0ec5f2fb..b0ab31ce793 100644
+--- a/board/emulation/qemu-arm/qemu-arm.c
++++ b/board/emulation/qemu-arm/qemu-arm.c
+@@ -11,6 +11,7 @@
+ #include <fdtdec.h>
+ #include <init.h>
+ #include <log.h>
++#include <spl.h>
+ #include <usb.h>
+ #include <virtio_types.h>
+ #include <virtio.h>
+@@ -202,3 +203,10 @@ void flash_write32(u32 value, void *addr)
+ {
+ 	asm("str %" __W "1, %0" : "=m"(*(u32 *)addr) : "r"(value));
+ }
++
++#if defined(CONFIG_TARGET_QEMU_ARM_64BIT) && defined(CONFIG_SPL_BUILD)
++u32 spl_boot_device(void)
++{
++	return BOOT_DEVICE_NOR;
++}
++#endif
+diff --git a/include/configs/qemu-arm.h b/include/configs/qemu-arm.h
+index e296f398798..18939dd8fd5 100644
+--- a/include/configs/qemu-arm.h
++++ b/include/configs/qemu-arm.h
+@@ -11,4 +11,8 @@
+ 
+ /* For timer, QEMU emulates an ARMv7/ARMv8 architected timer */
+ 
++#if defined(CONFIG_TARGET_QEMU_ARM_64BIT) && defined(CONFIG_SPL)
++#define CFG_SYS_UBOOT_BASE CONFIG_SPL_PAD_TO
++#endif
++
+ #endif /* __CONFIG_H */
 
-And the very first patches for Genio Pro 5100 are starting to roll in.
+---
+base-commit: 0a55b098d6f5f6bafa84fc2f18b433dd167bf729
+change-id: 20261009-spl-for-quemu-arm-2412979ba593
 
-----------------------------------------------------------------
-* Fix MT8183 infracfg and MT8518 topckgen gate lookups
-* Merge the per-block MediaTek clock drivers into a single driver per SoC
-* New MTK_GATE_CLK_TREE() helper for gate-only clock trees
-* Consolidate the MediaTek clk_ops into a single mtk_clk_ops
-* Match the mmsys compatible for the MT8189 display clocks
-* New MT8365 multimedia (mmsys) clocks
-* New MT8196 pinctrl driver
+Best regards,
+--  
+Arkadiusz Wadowski <wadowski.arkadiusz@gmail.com>
 
-----------------------------------------------------------------
-Arnaud Ferraris (2):
-      pinctrl: mediatek: further increase max number of base addresses
-      pinctrl: mediatek: add pinctrl driver for MT8196
 
-David Lechner (18):
-      clk: mediatek: mt8183: fix infracfg gate lookup
-      clk: mediatek: mt8518: fix top gate lookup
-      clk: mediatek: mt8189: match the mmsys compatible
-      clk: mediatek: add fclks_offs to struct mtk_clk_tree
-      clk: mediatek: merge the of_xlate callbacks
-      clk: mediatek: merge the enable and disable callbacks
-      clk: mediatek: merge the get_rate callbacks
-      clk: mediatek: merge the dump callbacks
-      clk: mediatek: use a single clk_ops for all drivers
-      clk: mediatek: mt8183: merge the apmixedsys driver into mt8183-clk
-      clk: mediatek: mt8188: merge the apmixedsys driver into mt8188-clk
-      clk: mediatek: mt8189: merge the remaining drivers into mt8189-clk
-      clk: mediatek: mt8195: merge the apmixedsys driver into mt8195-clk
-      clk: mediatek: mt8365: merge the apmixedsys driver into mt8365-clk
-      clk: mediatek: mt8366: merge the apmixedsys driver into mt8366-clk
-      clk: mediatek: mt8512: merge the apmixedsys driver into mt8512-clk
-      clk: mediatek: mt8516: merge the apmixedsys driver into mt8516-clk
-      clk: mediatek: mt8518: merge the apmixedsys driver into mt8518-clk
-
-Julien Stephan (12):
-      clk: mediatek: mt8188: make the clock trees static
-      clk: mediatek: add a helper to declare gate-only clock trees
-      clk: mediatek: use MTK_GATE_CLK_TREE() for the gate-only clock trees
-      clk: mediatek: mt8183: merge the clock drivers into a single driver
-      clk: mediatek: mt8188: merge the clock drivers into a single driver
-      clk: mediatek: mt8189: merge the clock drivers into a single driver
-      clk: mediatek: mt8195: merge the clock drivers into a single driver
-      clk: mediatek: mt8365: merge the clock drivers into a single driver
-      clk: mediatek: mt8512: merge the clock drivers into a single driver
-      clk: mediatek: mt8516: merge the clock drivers into a single driver
-      clk: mediatek: mt8518: merge the clock drivers into a single driver
-      clk: mediatek: mt8365: add multimedia clocks
-
- arch/arm/dts/mt8189.dtsi                      |    6 +-
- arch/arm/mach-mediatek/mt8516/init.c          |    6 +-
- drivers/clk/mediatek/clk-mt7622.c             |   10 +-
- drivers/clk/mediatek/clk-mt7623.c             |   10 +-
- drivers/clk/mediatek/clk-mt7629.c             |   10 +-
- drivers/clk/mediatek/clk-mt7981.c             |   10 +-
- drivers/clk/mediatek/clk-mt7986.c             |    8 +-
- drivers/clk/mediatek/clk-mt7987.c             |    8 +-
- drivers/clk/mediatek/clk-mt7988.c             |   12 +-
- drivers/clk/mediatek/clk-mt8183.c             |   64 +-
- drivers/clk/mediatek/clk-mt8188.c             |   97 +-
- drivers/clk/mediatek/clk-mt8189.c             |  112 +-
- drivers/clk/mediatek/clk-mt8195.c             |   45 +-
- drivers/clk/mediatek/clk-mt8365.c             |  117 +-
- drivers/clk/mediatek/clk-mt8366.c             |   82 +-
- drivers/clk/mediatek/clk-mt8512.c             |   52 +-
- drivers/clk/mediatek/clk-mt8516.c             |   45 +-
- drivers/clk/mediatek/clk-mt8518.c             |   55 +-
- drivers/clk/mediatek/clk-mtk.c                |  439 ++----
- drivers/clk/mediatek/clk-mtk.h                |   32 +-
- drivers/pinctrl/mediatek/Makefile             |    1 +
- drivers/pinctrl/mediatek/pinctrl-mt8196.c     | 1905 +++++++++++++++++++++++++
- drivers/pinctrl/mediatek/pinctrl-mtk-common.h |    2 +-
- 23 files changed, 2278 insertions(+), 850 deletions(-)
- create mode 100644 drivers/pinctrl/mediatek/pinctrl-mt8196.c
