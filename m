@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABE68CA9EC5
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 22:12:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 992D2CA9EBB
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 22:12:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 68EAD8153C;
-	Fri,  9 Oct 2026 22:12:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D60876090C;
+	Fri,  9 Oct 2026 22:12:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7e9rkSuRrAzE; Fri,  9 Oct 2026 22:12:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B3EE8814C6
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791583943;
-	b=i8PFvvls0jUGMFHY7APDhlU7ska4rq0OK+JP6wZKEm3ick25Y/CkSbYeFAOwKOE+vX6j
-	 fx1P4EIYmtanwbOFKcNE8gJwbti2zrhuN49eVfYJa79An3QNGB8zKlFtXsExWd5ftk+NB
-	 Bt1Lhhyu9y6IZPnJJILAN5jyTrJtjBwUXPXme2quYJH/aZ04Wts6Ju6G9tQvsIETNazfB
-	 zguSnMzqaxLSG8Nawz3IrYQVJC+F80CNpp+ErCORiomKre4P2h8CLFLXXuArZYiCSHOFg
-	 lumM2MeqkcMSAUg/WY4RgdDjoTbVGy41aO78Rhvd9LKaDZDVqmXevnX/LLB7WxwPQWw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KIQ5EOmuZVM1; Fri,  9 Oct 2026 22:12:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 88894608FB
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791583950;
+	b=eg/+0kxniGDi6fOPSC4g5RaBSeVXzsZRo6DQMSTSELrBeEjqoemTk/a8kKKpmT8aFGUq
+	 bT/p6eraKaCt1aNlZDl3y0TxHlFV2Yn6171vfMF92xzWTSRE8zlux06AH8u2wjeShx+Ui
+	 1kyeq7Q/WdcOmvjgUmzYQMtpTdfg/zoyPMO3yYOMnBj53us/0Gmt35zn5+m0t6vxSV5Ia
+	 y3A8ffFFhy7ixMpqMkLoHJmx3uLvWNRl51Xc6Xmb94rS0su8jFrArdpISNCjN0wFsQmMD
+	 R4hcTExAiddQ94josXLcRv/0YQYWfJglS+LUgLCsGWoKZv0ycga104rvTk4fao6uksA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791583943;
+	c=relaxed/relaxed; t=1791583950;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,104 +31,104 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=r61AhcJKEvLjeU8ElXi6I4seABG+R+1jUWZSOwkBIkc=;
-	b=eTz1UR0Tnypa+bvXOv4Edy7rEnAhmP4J2PvYEVTYPrvmjsgK9NOWt//TElV19JCbVwnS
-	 YZsM3YM+ALVkFHttrHaejltYzDg3OhvcfcigOnsiZscN9HzFzl2/wRMaCj2pKaQU9tRIU
-	 DhCVQK3k0/CPADqN1GemfPJ2671HMcq19ZR24iRH5b0WBjNEw41yPv0Wf1w2n+e+IUwLS
-	 U6KSGkknKCe5B8Jb5QEp8e11otCat8w+W2U7Kmrqys9lKKnP4TCmKw5nGipK9LPbB66YH
-	 ZjMLvLet9nSqYuPU63AqDNJ/+nhkZjv03zQPyClH2oz6Q1mGWCJYCiZ0N5lCYSGYJJQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=aHB7nKDmBkSujIEJmaL4sUfLvkEd1RrsqUWPI7D+oow=;
+	b=WkgG6x2lHGURiKeciLImnTarA+tsRqvtlJLVgs814Ns89GMQzIZWhKkgPKRcAU7QW5yL
+	 AqOaSwcEbQo9fp5VYqFRo7Xlah1nbMqDZ96MP/ZXC+4Glwyf+jzjh1Bz/FXeiPRkOuXBT
+	 b39kUzQRhkRwhy/m5Ds8tzRq45N9r/25a7eh5Jpiy3s/m8XEyfbjVfvyN4Q6i51Mn76rG
+	 2xYfBU9lIxmIfqDTzLoAHwORIac8DTqcvH0XkVeLOHnEq9mL46TQmW9EETttpfPHH1oef
+	 KeLn7o6SpE1lJSjjiCapsCXb0yu3tU26C5sr+WuDou9ib4ZmMZkGGGKBX9uQdN+vNjw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	dmarc=pass header.from=mainlining.org;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=BZxR0uQd;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=7qzrGbKQ;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b="b/51zRXy";
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=pgVxma4s;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791583943;
-	bh=r61AhcJKEvLjeU8ElXi6I4seABG+R+1jUWZSOwkBIkc=;
+	d=lists.u-boot-project.org; s=default; t=1791583950;
+	bh=aHB7nKDmBkSujIEJmaL4sUfLvkEd1RrsqUWPI7D+oow=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=q7QTASGhIPX7/lkXE8NuHxqx+lgNzSja4ZhvTFyeLrBnBG8O5dExRalgYHeyG9czj
-	 KHHcI2/5Lhu6TweaUyjcBeFUN+Kl/AqzRRN1vNTcYyMix+pn9OYlCJjBHo5N3we8F6
-	 1xqQnP2O6Z4jTGP1hX/brrkQK82kT6abqjVVwQwjmbEdxva/r8L5kDlfmTw1NwWFDn
-	 IB+9zVjYBnBUQm/DKx6t0Jt9ocyx8lhpNxoXUPYJ1UDvGcZdMNKV1Z4X2J1dcF+zhY
-	 QoyhHl6s50SX0ry8pXNgvvI0SW/5sCJTopCniZZS+4JDNKTkWnG/Lfoua1MSUArjAc
-	 lIFdX2/l+16Zg==
+	b=cSV1EtiDdCF06KK20w7eGAq4dqZs8x68htM9OVUP3EsRJn+fJo5/lsVazBzX5dv1N
+	 9ZkqREoDDd9PAbLKtg8ks+/pzyJU21sOITqmBW0Yz5e2nBh54mn9+GWvBkM6VtNzJl
+	 d+Utf/PaKNjvLSxCiOthFjgU/dakTM0IM0IID6frysmR2ibUX5+WrxLNeoZxxNubbp
+	 KEhw+qEHVNZqz5+MZGs0jz/BMjuocI9YzKbqqAkggXAYJk11Q0rEd/lXaRoxVyGALn
+	 R6wAsp0v8ve+vanTN0cXR3u9mDulW4hYPL1hga+m9UTjgh8CF/B9Nnyv63aPdDeGil
+	 lSGL32egkPMcQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B3EE8814C6;
-	Fri,  9 Oct 2026 22:12:23 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with UTF8SMTP id D4BF575
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 22:10:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 88894608FB;
+	Fri,  9 Oct 2026 22:12:30 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with UTF8SMTP id 1F0661DE
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 22:10:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with UTF8SMTP id C6756813A9
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 22:10:30 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with UTF8SMTP id 04BE860844
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 22:10:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024)
- with UTF8SMTP id L58XqcPoQXIj for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 22:10:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 94591812F1
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791583830;
- b=GxVFr/sOt+gjEhhVBUhkB5R5zzInNv1IrA78Z5QsW6wC44MZemxRocRdhY+RdGMMlcH3
- znJlWt7LFr5sgwfLi/TdcyFx9HaL8ZwULARkcDdcw0Xqw0YhkbrDVxWFEZFqjIcFp6zJY
- hj9BOhqls3FgjUeZgzAQ2cv05KuUIdsV3J9nliaGo2Qp9N4DXPldB/oCJhWcJejylAezl
- rPxS7eg/B5VFJbUJzkGgrm0s1me4mqd0MaiTzh6SMbh37s2Gfl5oA2gS7hLUvgpqzfeTP
- cM7klKD0Yu7zIkAY7qQ70JUWjV1vGdFhgCKqixcwtS3KtxXhHLIXEuH0O1pBD3bIOpA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024)
+ with UTF8SMTP id UhMCB9reX0NU for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 22:10:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org BBD74606F8
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791583832;
+ b=YrM+XMhgC27sTYGjWVQwfFk3Qms7Agkpn2enLFimdFK/30MtdMkUpEdL/gek3ajRTpCZ
+ WHpCIIFt2qrl+RObA5K8Rp7OExSwBYq97y0mQpuHptUSTtIUmAL4ktykBD9ZlT42FNVf7
+ u84glwNsuKuP0RAxgU9zhJQ6ec5xUtJUIKdu981WNNVwaP9UFI35mhaE6blenQtQbi6Vn
+ eaOaoiqB+YcKH0XdSXwTfBwR1JRf1avqhxh/v0nDWGXs7n/aGgfcd80qcw/zVFeAwMtaj
+ R4SWqaMbVdt8WgJxko9fz5jhPu991e4bUw1nDIOxooDJkARRzZ3xfQEfvMpEWH/lTGQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791583830;
+ c=relaxed/relaxed; t=1791583832;
  h=Received-SPF:DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=r61AhcJKEvLjeU8ElXi6I4seABG+R+1jUWZSOwkBIkc=;
- b=Gqz9CjupLx9JmRZDyiq3EO2ewfLEgqJwBZG4j7HEzHoodldblAAHJsf0cAMMro2G72gc
- ffBwSPRs33INBmYo6RBYObkkDxbntIal+J8u/OEBF3pLFxPWg2zG6Jpkw5kECXU198yZN
- 2ph/HrIplX4gyRE2nwigNEigEH7a+D42OiVo9cbMNvvP/DlYT+RhMEWCaVNA4lorCwBaW
- rDaYnni3d+NN9EgTPl2ZqjzkVlK9NkMw+My27+kaEduMBKfaHmSPkMfW1NODlW3to0KQ1
- Qd43Nu9JB/W/g1Yk9a7AZ20nO2QaZlNfOS83iw+nA4PVjGvtRRxoDBuEWgGugir17lQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=aHB7nKDmBkSujIEJmaL4sUfLvkEd1RrsqUWPI7D+oow=;
+ b=GkkSriV0uEyvU9r4n5a6LVCXOhpMhRqCH9GoID3vsaLDH9llhAVDgTPiKJwlQwf1/oK1
+ j7P3E9r08W0cBeYnIGH0RTvgaIxgZp2t+KEwXwZiXcAaiGxUL+KINsPtirtymrqKFnvZ3
+ N/sJFAaSTe5F+KKWqyu8O+gDosZTyrrd9KgiB9DvXGOQzYzyY6r7RbSdiQRXDDyh0O4Kv
+ KVLDsuP/oXA1jv00HNxd0vYxx45hs0SyMaGGJKqvyhPXpT9RJ7yUu+9VqDdW87GLn3euP
+ bZJ7TzHmTuUVyLcjgqKCR80MWQggvWGRu6VKccx1/f8qGPuesy3L16l74R8AEm5t55g==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=mainlining.org;
  dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
- header.s=202507r header.b=BZxR0uQd; 
+ header.s=202507r header.b="b/51zRXy"; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=7qzrGbKQ; 
+ header.a=ed25519-sha256 header.s=202507e header.b=pgVxma4s; 
  arc=none smtp.remote-ip=5.75.144.95
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
  helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=mainlining.org
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org
- header.a=rsa-sha256 header.s=202507r header.b=BZxR0uQd; 
+ header.a=rsa-sha256 header.s=202507r header.b=b/51zRXy; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=7qzrGbKQ
+ header.a=ed25519-sha256 header.s=202507e header.b=pgVxma4s
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- by smtp1.osuosl.org (Postfix) with UTF8SMTPS id 94591812F1
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 22:10:29 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with UTF8SMTPS id BBD74606F8
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 22:10:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1791583827; bh=r61AhcJKEvLjeU8ElXi6I4s
- eABG+R+1jUWZSOwkBIkc=; b=BZxR0uQdXkHJgw6EK3DBeApu6eYHgBdZbLxCrnBWWcFFINfiZs
- CgbWgETnUvk24XMU5He2+sK5LeV1mIubIczDgHTSnItSPzH8WXQp54GFzu0EhThoC6oL+jbOxrc
- riFgrMcRuDWhtJKHIw7ZNgtxjAqwDik390utXycx0JFrbD0ZdnVQCUpaGkjDGDjVtPKvb7MPct7
- Bzqd+GyXBKAg56VvJ8P00PZbdmSUJKa0IpDG3x96Xcn0rDiwVZS08E0pFT13SK1mU8OZetqoVzf
- WCQroibSDzdRjASed6sYiYvLJCJ8WwmJx2XN6DxAjvDvgwvX1spTlts7C5YFnhd+L9Q==;
+ h=Message-ID:Date:Subject:To:From; t=1791583823; bh=aHB7nKDmBkSujIEJmaL4sUf
+ LvkEd1RrsqUWPI7D+oow=; b=b/51zRXyw7pH+pqXKWoTwBN56mLLL0zXGmHLmWcNTCoaC+KKce
+ UkH8DQZ+3KCUipj4tJzIL6/VAUiN/2b3+JBeQS3F8UtoUXuFCshSUdA7v5gwBW9w3CC0m8CLY1v
+ ut88dJtcbEhHCv32RtvnG4USYTEdZ9LOYSjTVWng8jDimN8hBLilqq3S5JW4FHQHcBpxPh6XStF
+ I/HmlACM9w8HKcXoBzxkcsy+lC0nTyHhLOpm9OsWsLlG9WfBQuku6sRiYKZwrZLxchg7SjNN/d4
+ clKFAvVqPLmExRHaLQgkOgoFeShTPsHzrpJM6qEir4ryC7gXyLibkHrhisI9iQWePxA==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1791583827; bh=r61AhcJKEvLjeU8ElXi6I4s
- eABG+R+1jUWZSOwkBIkc=; b=7qzrGbKQC49N9QHnP3YxocOZwiaSmmzsWhKjY5GpeUb9YX3UJJ
- kaTgSRwlmq64h3UhM2tLVxTC6K0VeXAcXUCw==;
+ h=Message-ID:Date:Subject:To:From; t=1791583823; bh=aHB7nKDmBkSujIEJmaL4sUf
+ LvkEd1RrsqUWPI7D+oow=; b=pgVxma4sqFf39ldM1a/FJk3pQIQE4/LxMPq3SInpjJQYOfIAF0
+ 5m5m9eMQoHvST1XV97Pl/gV3gTblitTL5/Dg==;
 From: Bradley Morgan <brads@mainlining.org>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.u-boot-project.org
 Cc: Bradley Morgan <brads@mainlining.org>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH v2 23/26] powerpc: mpc85xx: Remove BSC9131 support
-Date: Fri,  9 Oct 2026 22:10:13 +0000
-Message-ID: <20261009221017.20385-24-brads@mainlining.org>
+Subject: [PATCH v2 14/26] powerpc: mpc85xx: Remove P1023 support
+Date: Fri,  9 Oct 2026 22:10:04 +0000
+Message-ID: <20261009221017.20385-15-brads@mainlining.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261009221017.20385-1-brads@mainlining.org>
 References: <20261009221017.20385-1-brads@mainlining.org>
@@ -148,304 +148,374 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-No target selects ARCH_BSC9131, and the platform lacks active
-community maintenance. Its mux, LAW and reset register paths have no
-users.
-
-Remove that family support.
+No board in the tree selects ARCH_P1023, and the family is unmaintained.
+Remove the unused SoC, FMan, and SERDES support.
 
 Signed-off-by: Bradley Morgan <brads@mainlining.org>
 ---
- arch/Kconfig.nxp                      |   3 +-
- arch/powerpc/cpu/mpc85xx/Kconfig      |  22 +----
- arch/powerpc/cpu/mpc8xxx/cpu.c        |   1 -
- arch/powerpc/include/asm/fsl_law.h    |   4 -
- arch/powerpc/include/asm/immap_85xx.h | 116 --------------------------
- board/nxp/common/sdhc_boot.c          |   2 +-
- boot/Kconfig                          |   2 +-
- drivers/mmc/Kconfig                   |   2 +-
- 8 files changed, 6 insertions(+), 146 deletions(-)
+ arch/powerpc/cpu/mpc85xx/Kconfig          | 19 +-----
+ arch/powerpc/cpu/mpc85xx/Makefile         |  1 -
+ arch/powerpc/cpu/mpc85xx/p1023_serdes.c   | 59 -------------------
+ arch/powerpc/cpu/mpc8xxx/cpu.c            |  1 -
+ arch/powerpc/include/asm/config_mpc85xx.h |  7 ---
+ arch/powerpc/include/asm/immap_85xx.h     | 15 -----
+ arch/powerpc/include/asm/processor.h      |  1 -
+ drivers/net/Kconfig                       |  1 -
+ drivers/net/fm/Makefile                   |  1 -
+ drivers/net/fm/fm.h                       |  4 --
+ drivers/net/fm/p1023.c                    | 72 -----------------------
+ 11 files changed, 1 insertion(+), 180 deletions(-)
+ delete mode 100644 arch/powerpc/cpu/mpc85xx/p1023_serdes.c
+ delete mode 100644 drivers/net/fm/p1023.c
 
-diff --git a/arch/Kconfig.nxp b/arch/Kconfig.nxp
-index 15e56ffb35a..e52ed3ddb21 100644
---- a/arch/Kconfig.nxp
-+++ b/arch/Kconfig.nxp
-@@ -286,8 +286,7 @@ config SYS_FSL_IFC_BANK_COUNT
- 	depends on ARCH_LS1043A || ARCH_LS1046A || ARCH_LS2080A || \
- 		ARCH_LS1088A || ARCH_LS1021A || ARCH_B4860 || ARCH_B4420 || \
- 		ARCH_T4240 || ARCH_T1040 || ARCH_T1042 || ARCH_T1024 || \
--		ARCH_T2080 || ARCH_P1010 || ARCH_BSC9131
--	default 3 if ARCH_BSC9131
-+		ARCH_T2080 || ARCH_P1010
- 	default 4 if ARCH_LS1043A || ARCH_LS1046A || ARCH_B4860 || \
- 			ARCH_B4420 || ARCH_P1010
- 	default 8 if ARCH_LS2080A || ARCH_LS1088A || ARCH_LS1021A || \
 diff --git a/arch/powerpc/cpu/mpc85xx/Kconfig b/arch/powerpc/cpu/mpc85xx/Kconfig
-index 6cb37b8a378..6d5e81f47ac 100644
+index ab66ffadebd..f4e34adbaea 100644
 --- a/arch/powerpc/cpu/mpc85xx/Kconfig
 +++ b/arch/powerpc/cpu/mpc85xx/Kconfig
-@@ -281,22 +281,6 @@ config ARCH_B4860
- 	imply CMD_NAND
+@@ -443,20 +443,6 @@ config ARCH_P1021
  	imply CMD_REGINFO
+ 	imply SATA_SIL
  
--config ARCH_BSC9131
+-config ARCH_P1023
 -	bool
 -	select FSL_LAW
--	select SYS_FSL_DDR_VER_44
--	select SYS_FSL_ERRATUM_A004477
+-	select SYS_FSL_ERRATUM_A004508
 -	select SYS_FSL_ERRATUM_A005125
--	select SYS_FSL_ERRATUM_ESDHC111
+-	select SYS_FSL_ERRATUM_I2C_A004447
+-	select FSL_PCIE_RESET
 -	select SYS_FSL_HAS_DDR3
 -	select SYS_FSL_HAS_SEC
+-	select SYS_FSL_PCIE_COMPAT_QORIQ_PCIE_v22
 -	select SYS_FSL_SEC_BE
 -	select SYS_FSL_SEC_COMPAT_4
--	select FSL_IFC
--	imply CMD_EEPROM
--	imply CMD_NAND
--	imply CMD_REGINFO
+-	select FSL_ELBC
 -
- config ARCH_MPC8544
+ config ARCH_P1024
  	bool
- 	select BTB
-@@ -699,8 +683,7 @@ config MAX_CPUS
+ 	select FSL_LAW
+@@ -794,7 +780,6 @@ config MAX_CPUS
+ 		     ARCH_BSC9132 || \
+ 		     ARCH_P1020 || \
+ 		     ARCH_P1021 || \
+-		     ARCH_P1023 || \
+ 		     ARCH_P1024 || \
+ 		     ARCH_P1025 || \
+ 		     ARCH_P2020 || \
+@@ -821,7 +806,6 @@ config SYS_CCSRBAR_DEFAULT
+ 				ARCH_P1024	|| \
+ 				ARCH_P1025	|| \
+ 				ARCH_P2020
+-	default 0xff600000 if	ARCH_P1023
+ 	default 0xfe000000 if	ARCH_B4420	|| \
+ 				ARCH_B4860	|| \
+ 				ARCH_P2041	|| \
+@@ -957,7 +941,7 @@ config SYS_FSL_A004447_SVR_REV
+ 	hex
+ 	depends on SYS_FSL_ERRATUM_I2C_A004447
+ 	default 0x10 if ARCH_P1010
+-	default 0x11 if ARCH_P1023 || ARCH_P2041 || ARCH_BSC9132
++	default 0x11 if ARCH_P2041 || ARCH_BSC9132
  
- config SYS_CCSRBAR_DEFAULT
- 	hex "Default CCSRBAR address"
--	default	0xff700000 if	ARCH_BSC9131	|| \
--				ARCH_MPC8544	|| \
-+	default	0xff700000 if	ARCH_MPC8544	|| \
- 				ARCH_P1010	|| \
- 				ARCH_P1020	|| \
- 				ARCH_P1021	|| \
-@@ -904,8 +887,7 @@ config SYS_FSL_NUM_LAWS
- 	default 16 if	ARCH_T1024	|| \
- 			ARCH_T1040	|| \
- 			ARCH_T1042
--	default 12 if	ARCH_BSC9131	|| \
--			ARCH_P1010	|| \
-+	default 12 if	ARCH_P1010	|| \
+ config SYS_FSL_ERRATUM_IFC_A002769
+ 	bool
+@@ -1027,7 +1011,6 @@ config SYS_FSL_NUM_LAWS
+ 			ARCH_P1010	|| \
  			ARCH_P1020	|| \
  			ARCH_P1021	|| \
+-			ARCH_P1023	|| \
+ 			ARCH_P1024	|| \
+ 			ARCH_P1025	|| \
  			ARCH_P2020
+diff --git a/arch/powerpc/cpu/mpc85xx/Makefile b/arch/powerpc/cpu/mpc85xx/Makefile
+index f78131dd61a..c40558880ea 100644
+--- a/arch/powerpc/cpu/mpc85xx/Makefile
++++ b/arch/powerpc/cpu/mpc85xx/Makefile
+@@ -56,7 +56,6 @@ obj-$(CONFIG_ARCH_MPC8544) += mpc8544_serdes.o
+ obj-$(CONFIG_ARCH_P1010)	+= p1010_serdes.o
+ obj-$(CONFIG_ARCH_P1020)	+= p1021_serdes.o
+ obj-$(CONFIG_ARCH_P1021)	+= p1021_serdes.o
+-obj-$(CONFIG_ARCH_P1023)	+= p1023_serdes.o
+ obj-$(CONFIG_ARCH_P1024)	+= p1021_serdes.o
+ obj-$(CONFIG_ARCH_P1025)	+= p1021_serdes.o
+ obj-$(CONFIG_ARCH_P2020)	+= p2020_serdes.o
+diff --git a/arch/powerpc/cpu/mpc85xx/p1023_serdes.c b/arch/powerpc/cpu/mpc85xx/p1023_serdes.c
+deleted file mode 100644
+index 6d306d99c32..00000000000
+--- a/arch/powerpc/cpu/mpc85xx/p1023_serdes.c
++++ /dev/null
+@@ -1,59 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2010-2011 Freescale Semiconductor, Inc.
+- * Author: Roy Zang <tie-fei.zang@freescale.com>
+- */
+-
+-#include <config.h>
+-#include <log.h>
+-#include <asm/io.h>
+-#include <asm/immap_85xx.h>
+-#include <asm/fsl_serdes.h>
+-
+-#define SRDS1_MAX_LANES		4
+-
+-static u32 serdes1_prtcl_map;
+-
+-static const u8 serdes1_cfg_tbl[][SRDS1_MAX_LANES] = {
+-	[0x00] = {PCIE1, PCIE2, NONE, NONE},
+-	[0x01] = {PCIE1, PCIE2, PCIE3, NONE},
+-	[0x02] = {PCIE1, PCIE2, PCIE3, SGMII_FM1_DTSEC2},
+-	[0x03] = {PCIE1, PCIE2, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2},
+-};
+-
+-int is_serdes_configured(enum srds_prtcl device)
+-{
+-	int ret;
+-
+-	if (!(serdes1_prtcl_map & (1 << NONE)))
+-		fsl_serdes_init();
+-
+-	ret = (1 << device) & serdes1_prtcl_map;
+-	return ret;
+-}
+-
+-void fsl_serdes_init(void)
+-{
+-	ccsr_gur_t *gur = (void *)CFG_SYS_MPC85xx_GUTS_ADDR;
+-	u32 pordevsr = in_be32(&gur->pordevsr);
+-	u32 srds_cfg = (pordevsr & MPC85xx_PORDEVSR_IO_SEL) >>
+-				MPC85xx_PORDEVSR_IO_SEL_SHIFT;
+-	int lane;
+-
+-	if (serdes1_prtcl_map & (1 << NONE))
+-		return;
+-
+-	debug("PORDEVSR[IO_SEL_SRDS] = %x\n", srds_cfg);
+-
+-	if (srds_cfg >= ARRAY_SIZE(serdes1_cfg_tbl)) {
+-		printf("Invalid PORDEVSR[IO_SEL_SRDS] = %d\n", srds_cfg);
+-		return;
+-	}
+-	for (lane = 0; lane < SRDS1_MAX_LANES; lane++) {
+-		enum srds_prtcl lane_prtcl = serdes1_cfg_tbl[srds_cfg][lane];
+-		serdes1_prtcl_map |= (1 << lane_prtcl);
+-	}
+-
+-	/* Set the first bit to indicate serdes has been initialized */
+-	serdes1_prtcl_map |= (1 << NONE);
+-}
 diff --git a/arch/powerpc/cpu/mpc8xxx/cpu.c b/arch/powerpc/cpu/mpc8xxx/cpu.c
-index 3840cb42b76..8ebef9d5991 100644
+index 641d2a199f8..52817a4fc2a 100644
 --- a/arch/powerpc/cpu/mpc8xxx/cpu.c
 +++ b/arch/powerpc/cpu/mpc8xxx/cpu.c
-@@ -77,7 +77,6 @@ static struct cpu_type cpu_type_list[] = {
- 	CPU_TYPE_ENTRY(T2080, T2080, 0),
- 	CPU_TYPE_ENTRY(T2081, T2081, 0),
- 	CPU_TYPE_ENTRY(BSC9130, 9130, 1),
--	CPU_TYPE_ENTRY(BSC9131, 9131, 1),
- 	CPU_TYPE_ENTRY(BSC9232, 9232, 2),
- 	CPU_TYPE_ENTRY(C291, C291, 1),
- 	CPU_TYPE_ENTRY(C292, C292, 1),
-diff --git a/arch/powerpc/include/asm/fsl_law.h b/arch/powerpc/include/asm/fsl_law.h
-index bdef61bc80f..ce40fe31742 100644
---- a/arch/powerpc/include/asm/fsl_law.h
-+++ b/arch/powerpc/include/asm/fsl_law.h
-@@ -79,12 +79,8 @@ enum law_trgt_if {
- 	LAW_TRGT_IF_PCI = 0x00,
- 	LAW_TRGT_IF_PCI_2 = 0x01,
- 	LAW_TRGT_IF_PCIE_1 = 0x02,
--#if defined(CONFIG_ARCH_BSC9131)
--	LAW_TRGT_IF_OCN_DSP = 0x03,
--#else
- #if !defined(CONFIG_ARCH_P2020)
- 	LAW_TRGT_IF_PCIE_3 = 0x03,
--#endif
- #endif
- 	LAW_TRGT_IF_LBC = 0x04,
- 	LAW_TRGT_IF_CCSR = 0x08,
+@@ -48,7 +48,6 @@ static struct cpu_type cpu_type_list[] = {
+ 	CPU_TYPE_ENTRY(P1020, P1020, 2),
+ 	CPU_TYPE_ENTRY(P1021, P1021, 2),
+ 	CPU_TYPE_ENTRY(P1022, P1022, 2),
+-	CPU_TYPE_ENTRY(P1023, P1023, 2),
+ 	CPU_TYPE_ENTRY(P1024, P1024, 2),
+ 	CPU_TYPE_ENTRY(P1025, P1025, 2),
+ 	CPU_TYPE_ENTRY(P2010, P2010, 1),
+diff --git a/arch/powerpc/include/asm/config_mpc85xx.h b/arch/powerpc/include/asm/config_mpc85xx.h
+index f115dcce76a..67804ada5ed 100644
+--- a/arch/powerpc/include/asm/config_mpc85xx.h
++++ b/arch/powerpc/include/asm/config_mpc85xx.h
+@@ -15,13 +15,6 @@
+ #define MAX_QE_RISC			1
+ #define QE_NUM_OF_SNUM			28
+ 
+-#elif defined(CONFIG_ARCH_P1023)
+-#define CFG_SYS_NUM_FMAN		1
+-#define CFG_SYS_NUM_FM1_DTSEC	2
+-#define CFG_SYS_QMAN_NUM_PORTALS	3
+-#define CFG_SYS_BMAN_NUM_PORTALS	3
+-#define CFG_SYS_FM_MURAM_SIZE	0x10000
+-
+ /* P1025 is lower end variant of P1021 */
+ #elif defined(CONFIG_ARCH_P1025)
+ #define QE_MURAM_SIZE			0x6000UL
 diff --git a/arch/powerpc/include/asm/immap_85xx.h b/arch/powerpc/include/asm/immap_85xx.h
-index e1167dbb3d7..45f96fefc62 100644
+index 489fcd43351..39ddfcfe308 100644
 --- a/arch/powerpc/include/asm/immap_85xx.h
 +++ b/arch/powerpc/include/asm/immap_85xx.h
-@@ -1726,11 +1726,7 @@ typedef struct ccsr_rcpm {
- #else
- typedef struct ccsr_gur {
- 	u32	porpllsr;	/* POR PLL ratio status */
--#if defined(CONFIG_ARCH_BSC9131)
--#define MPC85xx_PORPLLSR_DDR_RATIO	0x00003f00
+@@ -1790,22 +1790,12 @@ typedef struct ccsr_gur {
+ #define PORBMSR_ROMLOC_NOR	0xf
+ 	u32	porimpscr;	/* POR I/O impedance status & control */
+ 	u32	pordevsr;	/* POR I/O device status regsiter */
+-#if defined(CONFIG_ARCH_P1023)
+-#define MPC85xx_PORDEVSR_SGMII1_DIS	0x10000000
+-#define MPC85xx_PORDEVSR_SGMII2_DIS	0x08000000
+-#define MPC85xx_PORDEVSR_TSEC1_PRTC	0x02000000
 -#else
- #define MPC85xx_PORPLLSR_DDR_RATIO	0x00003e00
+ #define MPC85xx_PORDEVSR_SGMII1_DIS	0x20000000
+ #define MPC85xx_PORDEVSR_SGMII2_DIS	0x10000000
 -#endif
- #define MPC85xx_PORPLLSR_DDR_RATIO_SHIFT	9
- #define MPC85xx_PORPLLSR_QE_RATIO	0x3e000000
- #define MPC85xx_PORPLLSR_QE_RATIO_SHIFT		25
-@@ -1846,50 +1842,6 @@ typedef struct ccsr_gur {
+ #define MPC85xx_PORDEVSR_SGMII3_DIS	0x08000000
+ #define MPC85xx_PORDEVSR_SGMII4_DIS	0x04000000
+ #define MPC85xx_PORDEVSR_SRDS2_IO_SEL	0x38000000
+ #define MPC85xx_PORDEVSR_PCI1		0x00800000
+-#if defined(CONFIG_ARCH_P1023)
+-#define MPC85xx_PORDEVSR_IO_SEL		0x00600000
+-#define MPC85xx_PORDEVSR_IO_SEL_SHIFT	21
+-#else
+ #if defined(CONFIG_ARCH_P1010)
+ #define MPC85xx_PORDEVSR_IO_SEL		0x00600000
+ #define MPC85xx_PORDEVSR_IO_SEL_SHIFT	21
+@@ -1816,7 +1806,6 @@ typedef struct ccsr_gur {
+ #define MPC85xx_PORDEVSR_IO_SEL		0x00780000
+ #define MPC85xx_PORDEVSR_IO_SEL_SHIFT	19
+ #endif /* if defined(CONFIG_ARCH_P1010) */
+-#endif
+ #define MPC85xx_PORDEVSR_PCI2_ARB	0x00040000
+ #define MPC85xx_PORDEVSR_PCI1_ARB	0x00020000
+ #define MPC85xx_PORDEVSR_PCI1_PCI32	0x00010000
+@@ -1891,9 +1880,6 @@ typedef struct ccsr_gur {
+ #define MPC85xx_PMUXCR_CAN2_TDM			0x00000002
+ #define MPC85xx_PMUXCR_CAN2_RES			0x00000003
+ #endif
+-#if defined(CONFIG_ARCH_P1023)
+-#define MPC85xx_PMUXCR_TSEC1_1		0x10000000
+-#else
+ #define MPC85xx_PMUXCR_SD_DATA		0x80000000
+ #define MPC85xx_PMUXCR_SDHC_CD		0x40000000
+ #define MPC85xx_PMUXCR_SDHC_WP		0x20000000
+@@ -1912,7 +1898,6 @@ typedef struct ccsr_gur {
  #define MPC85xx_PMUXCR_QE10		0x00000020
  #define MPC85xx_PMUXCR_QE11		0x00000010
  #define MPC85xx_PMUXCR_QE12		0x00000008
--#if defined(CONFIG_ARCH_BSC9131)
--#define MPC85xx_PMUXCR_TSEC2_DMA_GPIO_IRQ	0x40000000
--#define MPC85xx_PMUXCR_TSEC2_USB		0xC0000000
--#define MPC85xx_PMUXCR_TSEC2_1588_PPS		0x10000000
--#define MPC85xx_PMUXCR_TSEC2_1588_RSVD		0x30000000
--#define MPC85xx_PMUXCR_IFC_AD_GPIO		0x04000000
--#define MPC85xx_PMUXCR_IFC_AD_GPIO_MASK		0x0C000000
--#define MPC85xx_PMUXCR_IFC_AD15_GPIO		0x01000000
--#define MPC85xx_PMUXCR_IFC_AD15_TIMER2		0x02000000
--#define MPC85xx_PMUXCR_IFC_AD16_GPO8		0x00400000
--#define MPC85xx_PMUXCR_IFC_AD16_MSRCID0		0x00800000
--#define MPC85xx_PMUXCR_IFC_AD17_GPO		0x00100000
--#define MPC85xx_PMUXCR_IFC_AD17_GPO_MASK	0x00300000
--#define MPC85xx_PMUXCR_IFC_AD17_MSRCID_DSP	0x00200000
--#define MPC85xx_PMUXCR_IFC_CS2_GPO65		0x00040000
--#define MPC85xx_PMUXCR_IFC_CS2_DSP_TDI		0x00080000
--#define MPC85xx_PMUXCR_SDHC_USIM		0x00010000
--#define MPC85xx_PMUXCR_SDHC_TDM_RFS_RCK		0x00020000
--#define MPC85xx_PMUXCR_SDHC_GPIO77		0x00030000
--#define MPC85xx_PMUXCR_SDHC_RESV		0x00004000
--#define MPC85xx_PMUXCR_SDHC_TDM_TXD_RXD		0x00008000
--#define MPC85xx_PMUXCR_SDHC_GPIO_TIMER4		0x0000C000
--#define MPC85xx_PMUXCR_USB_CLK_UART_SIN		0x00001000
--#define MPC85xx_PMUXCR_USB_CLK_GPIO69		0x00002000
--#define MPC85xx_PMUXCR_USB_CLK_TIMER3		0x00003000
--#define MPC85xx_PMUXCR_USB_UART_GPIO0		0x00000400
--#define MPC85xx_PMUXCR_USB_RSVD			0x00000C00
--#define MPC85xx_PMUXCR_USB_GPIO62_TRIG_IN	0x00000800
--#define MPC85xx_PMUXCR_USB_D1_2_IIC2_SDA_SCL	0x00000100
--#define MPC85xx_PMUXCR_USB_D1_2_GPIO71_72	0x00000200
--#define MPC85xx_PMUXCR_USB_D1_2_RSVD		0x00000300
--#define MPC85xx_PMUXCR_USB_DIR_GPIO2		0x00000040
--#define MPC85xx_PMUXCR_USB_DIR_TIMER1		0x00000080
--#define MPC85xx_PMUXCR_USB_DIR_MCP_B		0x000000C0
--#define MPC85xx_PMUXCR_SPI1_UART3		0x00000010
--#define MPC85xx_PMUXCR_SPI1_SIM			0x00000020
--#define MPC85xx_PMUXCR_SPI1_CKSTP_IN_GPO74	0x00000030
--#define MPC85xx_PMUXCR_SPI1_CS2_CKSTP_OUT_B	0x00000004
--#define MPC85xx_PMUXCR_SPI1_CS2_dbg_adi1_rxen	0x00000008
--#define MPC85xx_PMUXCR_SPI1_CS2_GPO75		0x0000000C
--#define MPC85xx_PMUXCR_SPI1_CS3_ANT_TCXO_PWM	0x00000001
--#define MPC85xx_PMUXCR_SPI1_CS3_dbg_adi2_rxen	0x00000002
--#define MPC85xx_PMUXCR_SPI1_CS3_GPO76		0x00000003
 -#endif
- 	u32	pmuxcr2;	/* Alt. function signal multiplex control 2 */
- #if defined(CONFIG_ARCH_P1010)
- #define MPC85xx_PMUXCR2_UART_GPIO		0x40000000
-@@ -1916,68 +1868,7 @@ typedef struct ccsr_gur {
- #define MPC85xx_PMUXCR2_DEBUG_MUX_SEL_USBPHY	0x00002000
- #define MPC85xx_PMUXCR2_PLL_LKDT_EXPOSE		0x00001000
- #endif
--#if defined(CONFIG_ARCH_BSC9131)
--#define MPC85xx_PMUXCR2_UART_CTS_B0_SIM_PD		0x40000000
--#define MPC85xx_PMUXCR2_UART_CTS_B0_DSP_TMS		0x80000000
--#define MPC85xx_PMUXCR2_UART_CTS_B0_GPIO42		0xC0000000
--#define MPC85xx_PMUXCR2_UART_RTS_B0_PWM2		0x10000000
--#define MPC85xx_PMUXCR2_UART_RTS_B0_DSP_TCK		0x20000000
--#define MPC85xx_PMUXCR2_UART_RTS_B0_GPIO43		0x30000000
--#define MPC85xx_PMUXCR2_UART_CTS_B1_SIM_PD		0x04000000
--#define MPC85xx_PMUXCR2_UART_CTS_B1_SRESET_B		0x08000000
--#define MPC85xx_PMUXCR2_UART_CTS_B1_GPIO44		0x0C000000
--#define MPC85xx_PMUXCR2_UART_RTS_B1_PPS_LED		0x01000000
--#define MPC85xx_PMUXCR2_UART_RTS_B1_RSVD		0x02000000
--#define MPC85xx_PMUXCR2_UART_RTS_B1_GPIO45		0x03000000
--#define MPC85xx_PMUXCR2_TRIG_OUT_ASLEEP			0x00400000
--#define MPC85xx_PMUXCR2_TRIG_OUT_DSP_TRST_B		0x00800000
--#define MPC85xx_PMUXCR2_ANT1_TIMER5			0x00100000
--#define MPC85xx_PMUXCR2_ANT1_TSEC_1588			0x00200000
--#define MPC85xx_PMUXCR2_ANT1_GPIO95_19			0x00300000
--#define MPC85xx_PMUXCR2_ANT1_TX_RX_FRAME_MAX3_LOCK	0x00040000
--#define MPC85xx_PMUXCR2_ANT1_TX_RX_FRAME_RSVD		0x00080000
--#define MPC85xx_PMUXCR2_ANT1_TX_RX_FRAME_GPIO80_20	0x000C0000
--#define MPC85xx_PMUXCR2_ANT1_DIO0_3_SPI3_CS0		0x00010000
--#define MPC85xx_PMUXCR2_ANT1_DIO0_3_ANT2_DO_3		0x00020000
--#define MPC85xx_PMUXCR2_ANT1_DIO0_3_GPIO81_84		0x00030000
--#define MPC85xx_PMUXCR2_ANT1_DIO4_7_SPI4		0x00004000
--#define MPC85xx_PMUXCR2_ANT1_DIO4_7_ANT2_DO4_7		0x00008000
--#define MPC85xx_PMUXCR2_ANT1_DIO4_7_GPIO85_88		0x0000C000
--#define MPC85xx_PMUXCR2_ANT1_DIO8_9_MAX2_1_LOCK		0x00001000
--#define MPC85xx_PMUXCR2_ANT1_DIO8_9_ANT2_DO8_9		0x00002000
--#define MPC85xx_PMUXCR2_ANT1_DIO8_9_GPIO21_22		0x00003000
--#define MPC85xx_PMUXCR2_ANT1_DIO10_11_TIMER6_7		0x00000400
--#define MPC85xx_PMUXCR2_ANT1_DIO10_11_ANT2_DO10_11	0x00000800
--#define MPC85xx_PMUXCR2_ANT1_DIO10_11_GPIO23_24		0x00000C00
--#define MPC85xx_PMUXCR2_ANT2_RSVD			0x00000100
--#define MPC85xx_PMUXCR2_ANT2_GPO90_91_DMA		0x00000300
--#define MPC85xx_PMUXCR2_ANT2_ENABLE_DIO0_10_USB		0x00000040
--#define MPC85xx_PMUXCR2_ANT2_ENABLE_DIO0_10_GPIO	0x000000C0
--#define MPC85xx_PMUXCR2_ANT2_DIO11_RSVD			0x00000010
--#define MPC85xx_PMUXCR2_ANT2_DIO11_TIMER8		0x00000020
--#define MPC85xx_PMUXCR2_ANT2_DIO11_GPIO61		0x00000030
--#define MPC85xx_PMUXCR2_ANT3_AGC_GPO53			0x00000004
--#define MPC85xx_PMUXCR2_ANT3_DO_TDM			0x00000001
--#define MPC85xx_PMUXCR2_ANT3_DO_GPIO46_49		0x00000002
--	u32	pmuxcr3;
--#define MPC85xx_PMUXCR3_ANT3_DO4_5_TDM			0x40000000
--#define MPC85xx_PMUXCR3_ANT3_DO4_5_GPIO_50_51		0x80000000
--#define MPC85xx_PMUXCR3_ANT3_DO6_7_TRIG_IN_SRESET_B	0x10000000
--#define MPC85xx_PMUXCR3_ANT3_DO6_7_GPIO_52_53		0x20000000
--#define MPC85xx_PMUXCR3_ANT3_DO8_MCP_B			0x04000000
--#define MPC85xx_PMUXCR3_ANT3_DO8_GPIO54			0x08000000
--#define MPC85xx_PMUXCR3_ANT3_DO9_10_CKSTP_IN_OUT	0x01000000
--#define MPC85xx_PMUXCR3_ANT3_DO9_10_GPIO55_56		0x02000000
--#define MPC85xx_PMUXCR3_ANT3_DO11_IRQ_OUT		0x00400000
--#define MPC85xx_PMUXCR3_ANT3_DO11_GPIO57		0x00800000
--#define MPC85xx_PMUXCR3_SPI2_CS2_GPO93			0x00100000
--#define MPC85xx_PMUXCR3_SPI2_CS3_GPO94			0x00040000
--#define MPC85xx_PMUXCR3_ANT2_AGC_RSVD			0x00010000
--#define MPC85xx_PMUXCR3_ANT2_GPO89			0x00030000
--	u32 pmuxcr4;
--#else
- 	u8	res6[8];
--#endif
- 	u32	devdisr;	/* Device disable control */
- #define MPC85xx_DEVDISR_PCI1		0x80000000
- #define MPC85xx_DEVDISR_PCI2		0x40000000
-@@ -2027,14 +1918,7 @@ typedef struct ccsr_gur {
- 	u32	ddrdllcr;	/* DDR DLL control */
- 	u8	res14[12];
- 	u32	lbcdllcr;	/* LBC DLL control */
--#if defined(CONFIG_ARCH_BSC9131)
--	u8	res15[12];
--	u32	halt_req_mask;
--#define HALTED_TO_HALT_REQ_MASK_0	0x80000000
--	u8	res18[232];
--#else
- 	u8	res15[248];
--#endif
- 	u32	lbiuiplldcr0;	/* LBIU PLL Debug Reg 0 */
- 	u32	lbiuiplldcr1;	/* LBIU PLL Debug Reg 1 */
- 	u32	ddrioovcr;	/* DDR IO Override Control */
-diff --git a/board/nxp/common/sdhc_boot.c b/board/nxp/common/sdhc_boot.c
-index 16b6f0fc343..d49064f23f0 100644
---- a/board/nxp/common/sdhc_boot.c
-+++ b/board/nxp/common/sdhc_boot.c
-@@ -45,7 +45,7 @@ int mmc_get_env_addr(struct mmc *mmc, int copy, u64 *env_addr)
+ #if defined(CONFIG_ARCH_BSC9131)
+ #define MPC85xx_PMUXCR_TSEC2_DMA_GPIO_IRQ	0x40000000
+ #define MPC85xx_PMUXCR_TSEC2_USB		0xC0000000
+diff --git a/arch/powerpc/include/asm/processor.h b/arch/powerpc/include/asm/processor.h
+index 36d8660cddc..2612f182a4c 100644
+--- a/arch/powerpc/include/asm/processor.h
++++ b/arch/powerpc/include/asm/processor.h
+@@ -1040,7 +1040,6 @@
+ #define SVR_P1020	0x80E400
+ #define SVR_P1021	0x80E401
+ #define SVR_P1022	0x80E600
+-#define SVR_P1023	0x80F600
+ #define SVR_P1024	0x80E402
+ #define SVR_P1025	0x80E403
+ #define SVR_P2010	0x80E300
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index b4224c24040..ac201ba45c2 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -962,7 +962,6 @@ config SYS_DPAA_QBMAN
+ 	depends on ARM || PPC
+ 	default y if ARCH_B4860 || \
+ 		     ARCH_B4420 || \
+-		     ARCH_P1023 || \
+ 		     ARCH_P2041 || \
+ 		     ARCH_T1024 || \
+ 		     ARCH_T1040 || \
+diff --git a/drivers/net/fm/Makefile b/drivers/net/fm/Makefile
+index 6ec673feec4..847c1cbe340 100644
+--- a/drivers/net/fm/Makefile
++++ b/drivers/net/fm/Makefile
+@@ -13,7 +13,6 @@ obj-y += tgec_phy.o
+ obj-$(CONFIG_SYS_FMAN_V3) += memac.o
  
- #ifdef CONFIG_ESDHC_HC_BLK_ADDR
- 	/*
--	 * On P1010 and BSC9131:
-+	 * On P1010:
- 	 * In High Capacity SD Cards (> 2 GBytes), the 32-bit source address and
- 	 * code length of these soc specify the memory address in block address
- 	 * format. Block length is fixed to 512 bytes as per the SD High
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 0fc550c3e01..63828e5e005 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1199,7 +1199,7 @@ config FSL_FIXED_MMC_LOCATION
+ # SoC specific SERDES support
+-obj-$(CONFIG_ARCH_P1023)	+= p1023.o
+ # The P204x and P5020 are the same
+ obj-$(CONFIG_ARCH_P2041) += p5020.o
+ obj-$(CONFIG_ARCH_T1040) += t1040.o
+diff --git a/drivers/net/fm/fm.h b/drivers/net/fm/fm.h
+index 5c45ad56d0a..cafdaf89014 100644
+--- a/drivers/net/fm/fm.h
++++ b/drivers/net/fm/fm.h
+@@ -96,11 +96,7 @@ struct fm_port_global_pram {
+ #define PRAM_MODE_GLOBAL	0x20000000
+ #define PRAM_MODE_GRACEFUL_STOP	0x00800000
  
- config ESDHC_HC_BLK_ADDR
- 	def_bool y
--	depends on FSL_FIXED_MMC_LOCATION && (ARCH_BSC9131 || ARCH_P1010)
-+	depends on FSL_FIXED_MMC_LOCATION && ARCH_P1010
- 	help
- 	  In High Capacity SD Cards (> 2 GBytes), the 32-bit source address and
- 	  code length of these soc specify the memory address in block address
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index 671cae7aaf2..7a690721b91 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -911,7 +911,7 @@ config FSL_SDHC_V2_3
- config FSL_ESDHC
- 	bool "Freescale/NXP eSDHC controller support"
- 	depends on ARCH_LS1021A || FSL_LSCH2 || FSL_LSCH3 || PPC
--	select FSL_SDHC_V2_3 if ARCH_P1010 || ARCH_BSC9131
-+	select FSL_SDHC_V2_3 if ARCH_P1010
- 	help
- 	  This selects support for the eSDHC (Enhanced Secure Digital Host
- 	  Controller) found on numerous Freescale/NXP SoCs.
+-#if defined(CONFIG_ARCH_P1023)
+-#define FM_FREE_POOL_SIZE	0x2000 /* 8K bytes */
+-#else
+ #define FM_FREE_POOL_SIZE	0x20000 /* 128K bytes */
+-#endif
+ #define FM_FREE_POOL_ALIGN	256
+ 
+ void *fm_muram_alloc(int fm_idx, size_t size, ulong align);
+diff --git a/drivers/net/fm/p1023.c b/drivers/net/fm/p1023.c
+deleted file mode 100644
+index 362bc9f30a1..00000000000
+--- a/drivers/net/fm/p1023.c
++++ /dev/null
+@@ -1,72 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2011 Freescale Semiconductor, Inc.
+- */
+-#include <config.h>
+-#include <phy.h>
+-#include <fm_eth.h>
+-#include <asm/io.h>
+-#include <asm/immap_85xx.h>
+-#include <asm/fsl_serdes.h>
+-
+-static u32 port_to_devdisr[] = {
+-	[FM1_DTSEC1] = MPC85xx_DEVDISR_TSEC1,
+-	[FM1_DTSEC2] = MPC85xx_DEVDISR_TSEC2,
+-};
+-
+-static int is_device_disabled(enum fm_port port)
+-{
+-	ccsr_gur_t *gur = (void *)(CFG_SYS_MPC85xx_GUTS_ADDR);
+-	u32 devdisr = in_be32(&gur->devdisr);
+-
+-	return port_to_devdisr[port] & devdisr;
+-}
+-
+-void fman_disable_port(enum fm_port port)
+-{
+-	ccsr_gur_t *gur = (void *)(CFG_SYS_MPC85xx_GUTS_ADDR);
+-
+-	/* don't allow disabling of DTSEC1 as its needed for MDIO */
+-	if (port == FM1_DTSEC1)
+-		return;
+-
+-	setbits_be32(&gur->devdisr, port_to_devdisr[port]);
+-}
+-
+-void fman_enable_port(enum fm_port port)
+-{
+-	ccsr_gur_t *gur = (void *)(CFG_SYS_MPC85xx_GUTS_ADDR);
+-
+-	clrbits_be32(&gur->devdisr, port_to_devdisr[port]);
+-}
+-
+-phy_interface_t fman_port_enet_if(enum fm_port port)
+-{
+-	ccsr_gur_t *gur = (void *)(CFG_SYS_MPC85xx_GUTS_ADDR);
+-	u32 pordevsr = in_be32(&gur->pordevsr);
+-
+-	if (is_device_disabled(port))
+-		return PHY_INTERFACE_MODE_NA;
+-
+-	/* DTSEC1 can be SGMII, RGMII or RMII */
+-	if (port == FM1_DTSEC1) {
+-		if (is_serdes_configured(SGMII_FM1_DTSEC1))
+-			return PHY_INTERFACE_MODE_SGMII;
+-		if (pordevsr & MPC85xx_PORDEVSR_SGMII1_DIS) {
+-			if (pordevsr & MPC85xx_PORDEVSR_TSEC1_PRTC)
+-				return PHY_INTERFACE_MODE_RGMII;
+-			else
+-				return PHY_INTERFACE_MODE_RMII;
+-		}
+-	}
+-
+-	/* DTSEC2 only supports SGMII or RGMII */
+-	if (port == FM1_DTSEC2) {
+-		if (is_serdes_configured(SGMII_FM1_DTSEC2))
+-			return PHY_INTERFACE_MODE_SGMII;
+-		if (pordevsr & MPC85xx_PORDEVSR_SGMII2_DIS)
+-			return PHY_INTERFACE_MODE_RGMII;
+-	}
+-
+-	return PHY_INTERFACE_MODE_NA;
+-}
 -- 
 2.47.3
 
