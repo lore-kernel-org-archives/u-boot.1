@@ -1,194 +1,170 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF9D4CA601E
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 19:26:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A9CFCA601F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 19:33:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1193C60844;
-	Fri,  9 Oct 2026 19:26:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BC19F8129A;
+	Fri,  9 Oct 2026 19:33:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fYFp0o0JYQKW; Fri,  9 Oct 2026 19:26:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3B314606F8
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791573965;
-	b=CqvZkQ29Ics91SRZAI2GOvX6OKYq5R21YTHABsdzr62e8vZTQ+jyiNUZYALgylMwShK2
-	 diUFg6aiW5ncCx1S+zFyJ0DWmVpmJi2F0JxCgrRg3nqia/Tp48uZeEuqVDggHL3I2+ykl
-	 ZroPWyOYfcNZ+14IOf9RPix15lINHRKy8ruw1lfpCArkLYFTUF8uMXwWG7Xbgtw0uMG/G
-	 HvfK6J+MkUurXnRYXUDMlwEhoF1NNE1rZtjOvF/5ifZtILUPSuTVVwNqgRo+HodVlgdi6
-	 UjoyntonKAtrhLnTwKBkE8mJwu6lzUpQH63Ro9vgBa4vcrhD6EUFLMY2le3PHYrxfsQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zMlu7sW3t6lu; Fri,  9 Oct 2026 19:33:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0974281158
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791574411;
+	b=WNm83jnxFuI+Bcx9bPQVPgjkyn+iMLgxOTzTFLlBKj157+KZZ8F9TXuY7xfZzdGTGWP7
+	 fNAMEtC0ECmUAqXBpwsLzUPlFzVpqdCGz+2jlHv2OGIbHZf5q0n6ZpsndTVoOb5C1S7xa
+	 SxxIyYhFnp3ddqRhDmY+u3XEnOO3mt5xUa3GsJtg2PMhRFQweM+OaO+ZDWzOsSspSJ2sZ
+	 i+sUHS+HaG1N2oxXQx4VnLE6HOYrsE3kn0vp+etqy18PF1PEVELpVQB6U8gW1Gc91sssw
+	 OVGTGkcNvkSxbNBpYEmeRGImEWck4beDIFa/7RRSmS+Bvg1p5oVJaMZFUOY19YActXQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791573965;
+	c=relaxed/relaxed; t=1791574411;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=yVP1pUa5YzJFKg9VOljJr12r4xoEJYdJK5ZKSw7GytA=;
-	b=doO/lh7AIp4Gz6pCJJ4ORk686/QlppSfO4wNboBeu5tHbpQP23NrtX73nUX/1wbylTtu
-	 E/m1sIUKn2M9b5xzYMTkCrrlnU4YfwFz0jZtQggcWWoLp+9se8qH6bcSiJY4dhujtj0tG
-	 SugfpN8a7iHZ3roOP7PQBocqtj92Nm6UNTVDbJM2x729cj+n+9euhF2kTQ9uXZAdy0I15
-	 5wBCL4cPUPBAszpao5C6X1rkiRGADVEIBhJDucjJ6Pz8sHtoMsZvclAxp4BH+PvR94NIb
-	 uPsERT9YXEGxJoJvcPhcSBGAkhxKQ/0v8C4PAmJfdRlTvZl2IJUlUMz3cCPEEHCxG6A==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=I11FCSdb;
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=VM7P7Dq80VJ+TW7/ntuBrh5EW9Fe37nFWCV76QYDkFU=;
+	b=oRewGRFH0KARk2oSHmDaKx4QmF08zL+C0xBUlYahfnD5sX7lAtnIvG1cANR0FLxXCeOw
+	 3uWZwtFQtQe8ZGmYrzJroAWFeaEGNdX2cs8b8Jg0MUjtHIpQ0Idr8PEtgBkNjxQWz9PG9
+	 jQvewv4sCOtcqoMOrxFhQiMaGIxun2sOxR/Py+lOR5Km6upJoBE4C4gPkMh73oFl0TBje
+	 ZbccLvhWWzd3R75XiR7r3ZZJXbazjK2lutcyqeO4zppW7ACENXSYGevoxPaLJlxHvfKt5
+	 cdrg7vQkQYzGvYt8hj4BRtWoP8v03biYk2pVhs+NkczczLawP3zd11et9T4l+8Tou9g==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791573965;
-	bh=yVP1pUa5YzJFKg9VOljJr12r4xoEJYdJK5ZKSw7GytA=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791574411;
+	bh=VM7P7Dq80VJ+TW7/ntuBrh5EW9Fe37nFWCV76QYDkFU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=K0Jc7Uytdi0hcQuMgjKFsvnDB/n5TftpmLWYLnRXviNFNP9EZqrLO+HdTqnDbhepR
-	 4/fEcuSbi+RXEe01Ds9IDYBmDgYKLwAqPetdeBl7BQp0Vg6qDwt6Qxe+Sb/3w8NhNl
-	 Kfn6P9MPmsqATqLc+yNf8CHp5lp/4sWPSb/wwgr3LDxUAFIaBSrDgSHkkMyOOLrNWS
-	 oZvf3Yw2/CQScH9sCffg7bUT0UWCpVf98fcSvWyArdNOk+UTg3nH7ambAXt6h6kf9E
-	 nG5g/4I6V8EA3KFBnn+5UL10wcnRV7Rxetvs2gyk3NilD77nRhYF1R7Dkd2omOl9Oe
-	 jdWiD5WQwV/uQ==
+	b=BS574ROv9ujh0Dzbiqina4bvLq89vMIRtZZ9h+1IkSeivsABk6Brs6Usqx5Qi3Z9c
+	 krEVVepvqMXwVDAqpMq5vZVgcIDGQFqeqMV4XzWV7GPsr7UlOOYch3hTt69IbQdRed
+	 OED5YHYlD/XFe/rjicX7UcmLtqnjPipuMQcjaPN3g0/q0rZNX3hj6O/Vt6dHt0x4RI
+	 fWBGkVnAK4pyJnCpPZq6+bZWBM/yWBOaB4vQypTv9u0pjPNpGChhuc1Ucz9bvn6JNs
+	 D7cwXkHKXAmRYEospn0F6SYkpPigNCnynIqlSYoF8lF4l++hZmn0+TLFJb5ENwnrPS
+	 gOXB9eF/gyfGw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3B314606F8;
-	Fri,  9 Oct 2026 19:26:05 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id BF4B513B
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:26:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0974281158;
+	Fri,  9 Oct 2026 19:33:31 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 57F4E184
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:33:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A4725606F8
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:26:03 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3DD4340080
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:33:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XQj82bWWxYgF for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 19:26:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 62C846066D
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::231"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791573963;
- b=YOorg4oKr3Xs3gE7RG6YAwy/sLTQz8Spw2kH50MtlkzbF4dowJoyfm7BsCKN7rXiW/Di
- jIn9b9x+lZbPfHBtXVUBUyW4rT76CdtxyFuVWHSqOkwkSu+Qa8M1c9vMhw587FAJQSXuP
- H1ZyIMYkMAYUcao4Hs57AKqnZ2YDSaJrGHgWqA4uclFg1nzowYPWMcwTmxyH32afVItc0
- aHuNwCXZKeRoI5aZgnC7AKvFgp/XxiYoy2ongjgw5VUaA72J0bodQDflcRvxrPyl4AQDf
- DsOOTUvE5xw+yFb0kX39OAmH/xJPBh793aKBFcbXdDFIKH1SdXsD9PFoP+jDhCw+0eg==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OuxIEPCc65Rq for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 19:33:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7F22840053
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::32c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791574409;
+ b=r0W6gWrx6iSbLvq9Xxtm71gCsh8FmGhw7Ds/cl056ulwdOb0OqKOmYMs8jMCr9GCDciu
+ c0PGkdpgvQGBCAjPzr2WOW9+igmmfaHoiJMLRnuQkq2Y5VS0rdz4X6xApbVIoF1fHueke
+ 3xJoQQsaVnI8w7Kc0czGRuv5WPeC23wGge2my0IeoSRhgCN30zxhaECqDxb28JCslEXRw
+ 5VTUpEZ0MXnCMNY3pKedmAmhSYE0ujfpXRYHQjVE0VfFPaqnT0REvL0DjBgaYwlv2wTfY
+ S+yzr5Ov4uHXPIxnzbMGFuKXEH9UEnzKFFerUboln6NBJjwkJRb2ZU8bHMHslonZurg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791573963;
+ c=relaxed/relaxed; t=1791574409;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:In-Reply-To:
- References:Subject:Message-Id:Date:MIME-Version:Content-Type:
- Content-Transfer-Encoding:X-Mailer:X-Developer-Signature:
- X-Developer-Key;
- bh=yVP1pUa5YzJFKg9VOljJr12r4xoEJYdJK5ZKSw7GytA=;
- b=LNj6GZeqhRAMlOXgIUoIz15uXJXoJCP6gssCWMnnzHVwQywf68xkRdv2iCm8/mHJZWBI
- gENfKG8gq6ltdghdxKxF8nrIUCNVpC/ooR5E4eaGnckfghCL0XM+4yUPGPw/8NSUCu3fz
- vvBaTR1Tl5rJLgWEhhRIYMZDoPrQYRRwGv9FlzUZU+PqAIfVsquf7eb8eQdX/Mxxex9kz
- 8OROZFVLQS9tdg+6suifzBcBpBRaV4GXMLFrFE1Mq9ZSy/wQs0Tvmc6ik1NgovOBRgDiD
- keFumFZ+XtHZXK9Px6IiG4xqpvzNY+EBB5MfAj90HO5KaeQylNGf1HAB04CowSG64uQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=none header.from=baylibre.com;
- dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=I11FCSdb; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::231"
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To:X-Clacks-Overhead;
+ bh=VM7P7Dq80VJ+TW7/ntuBrh5EW9Fe37nFWCV76QYDkFU=;
+ b=A53VcUOlmepVRLTmwExN8VT9PFpXzhZ8w+tt5Zo49Qu0kagKDOZN6D9CYPv6vCcf2UMu
+ bkUmzYZ79rDIoMDS2Vk55gajh+j296hldmyVIIYN0Qo3JjfmxAwLhdvGif4KLOI5Ejxr9
+ sIimyUzYBO1unkHvg29xtMdBYj7/8l+MS6QSeCF8/6ItvaXFEgDwa1vBqBs84rB9Ew7IA
+ QQ09MFzoTHtnCWxVw7iijHJ3EgskFPqYPNGyBnsqQgZd7vnho0oq0k+V090+42OI7ZQCw
+ Z/zEkB+/G77VCXVKczs3/CP8lnTiNfw381UQDbJfJrHulziPSVmHFEVkkslUazsYIMw==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=konsulko.com;
+ dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=lO66l01e; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::32c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::231; helo=mail-oi1-x231.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=I11FCSdb
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 62C846066D
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:26:01 +0000 (UTC)
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-4f9b643b13aso119002b6e.1
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 12:26:01 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::32c; helo=mail-ot1-x32c.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=lO66l01e
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7F22840053
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:33:28 +0000 (UTC)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-8266c388b67so148140a34.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 12:33:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1791573960; x=1792178760;
+ d=konsulko.com; s=google; t=1791574408; x=1792179208;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=yVP1pUa5YzJFKg9VOljJr12r4xoEJYdJK5ZKSw7GytA=;
- b=I11FCSdbhM18x3RKNMIeYQ+hTC+6tfPiIKitPjGtMMhyyvmlzftSd2WCnvtCrvcSwh
- x4NAGSg1MpUkXRH5/RDyqoKflRkro0FvV/7GjoqYU3rA42pu/wEGvFCjUnuCwgB2O3nq
- M5CiEO5w6Z90I3MWI5vHNAMLD/T6Oe6jKG1gJYBRffw91t0MgxrII8WrOStrQr4IqpG7
- RZD412utu+j0k2zlbIIiWNeNM/wua6QvXCP/J0IeQx5Jlq8zH/mpXfYYZYCJo4vXtI7j
- NEFP/kUnLom9gFNackBgQTxG7/niURnsvAEG/Sv5vSKFh+oEvRcGciWlNz+sOJI3tadr
- 5DVw==
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=VM7P7Dq80VJ+TW7/ntuBrh5EW9Fe37nFWCV76QYDkFU=;
+ b=lO66l01eDW9tYwXK+NdJsLyivXjdwFV8psBhip1aMaMvxQ6AIbgZeSampgYVHIc3Gf
+ HOCNTe4rD0qi7oYTCXNblq840OAeQudeFKqmmz4swKsd+jihgNsh/u4o9q/K2DkKvXPZ
+ FXQ44jkAi5Og1BKpvm8A86oeAhOAwn3L0QSf0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791573960; x=1792178760;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ d=1e100.net; s=20260707; t=1791574408; x=1792179208;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=yVP1pUa5YzJFKg9VOljJr12r4xoEJYdJK5ZKSw7GytA=;
- b=TweqEI6j8pi7To3ztgYmOPYJSCvgWmQdtkb+T2mr8I3cafNyCys6IJbsGy0uIMyP9N
- Nda5/HuB2GpdhEUBms7PUN+vqHXNw462QyHMm5xavMO9flOC8oPUnPev2hM9E1uVGAg7
- diJr9Y+X1G8ebbVGfZCT05t9qcUEiTrf/0rVP6lX5b0Wcj59cC18OOuLXKkGsiGGP1qE
- w3kKKGv2pDgVY9eJf7fxRE2M/jRtaBoQVmQpYAU+laPnd64bRh0yBliB9JsY4vPO34R4
- SDPpOViaIPCrj3Qhos5C1roxvZKgmi/fQTqPcmlDyyFFbx7SG73eT5b4gvSIDon3AO6k
- fVOg==
-X-Gm-Message-State: AFuF++m2oMT9PtO6amCHhECKKYxIhUyBc/0ERjx6rxzrwlmKTYssgcKL
- AKMyKLgNjBODMxJSt/EiZ8KU1y6GFrTbzvSC4V7juvxLDhT8x7I3fFEb+DgvbZPkar302ujpGaw
- UCOwA
-X-Gm-Gg: AYBFou0Or4JoQfPPcQ9PJ+MVYkb0u8jx5Dm/TEdF3dWaXCtplt3Hg2TNVDB026zfV/H
- In5oYHduFviMWTbPCYIHagHLLzxkq9EgL5in5I4by0AHsYsgWCdNHKW8n/93Fval4AT52DXJ67L
- prDT638Kogx4NBolmJl7tQFCo4mMUq+LXjEXxMJUQQoc2+cr6aeu+tvyRVRVVz7BUy2TgiREkiD
- Lw4ze9OXWHeKgGgY8PD8SXuwB5J6ocJVQwdqJrcdWTBLzY3ovPZpVYnMw6wPU9I43X4RbQJuwmJ
- YzpBGlQFV197R2PdWp6EHG25IgP7ithRHz5TNRQoBVS4UipKpCCIEactfniH+D+TH4hkij63+lK
- 96RsLLv6yHJg1dO1x3aqQnoC0SkCocXhOC3Hcf0y3fgjujjvzJT5pa5XUL87eq+wBo6+tPQTaDR
- Vw5vFeeVuOn7hclgF7nRmfMzGSNpTx01ZlBJWbL3VHHe8HT6+mNxSOLWyF0g4/v3LzINtnkJgo0
- mk=
-X-Received: by 2002:a05:6808:514a:b0:4f5:1202:9d56 with SMTP id
- 5614622812f47-50c56de8578mr2381132b6e.55.1791573960433; 
- Fri, 09 Oct 2026 12:26:00 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:29bd:56f6:5ae7:35d2])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-50c0c5fe916sm3144798b6e.1.2026.10.09.12.25.57
+ bh=VM7P7Dq80VJ+TW7/ntuBrh5EW9Fe37nFWCV76QYDkFU=;
+ b=VecQbuTN8+xUHcUyTt8HWweJS3tudb6X5re/X1TWiD3oQz79alnBCaHld4mq8BK0Ze
+ u6HRnIAObRC1Zg/ccHpQVt2/vbBG3yZ6ZH0M1qStLyEXetRb11PXsVu0r/jmeV7IWlB/
+ iqOCBi0Mi3msAHO8CtHRhOQew8Hz4a8p9RgZUmj5ZufHVNpoAxLZkOVlUMcgAbr6FfUF
+ gFg2x10MOXQrHDccc8x89ZiLnzXpIwn9VrnAHXZWUJGdHJyILxm2yfyqsErIK/18ZEVO
+ oLbM/sPCK6yHoTgypBGnkWXJZ9rEWmgVB3kwWmJSiZ8uWEEIUYuRq7sLJ3kBhLo0YIzg
+ 2aSA==
+X-Gm-Message-State: AFuF++kR3q9b6v/NCPEnl4UxyNTUbjhUlTWeICokt7x5szJXU+MPZDa9
+ 2Okb1/CWzchkZRdq4QW4CxdGiXIiYghBfp0QvfF71QKb7aKIkTB/5Xplktb7DqTyVGU=
+X-Gm-Gg: AYBFou0y8WrYvkeAtQyxN35urGb+IwDcxtrBmymFCd8JdghztEmk20rDScCHBQrDX3v
+ VBOK23HxRV4ET/8lXr2pj8WrReYe6kbafb/KYBOTU+vNBYCK8Mmdk9Fiikm6oMlLBWmVM4Wgylx
+ PyRctFsUP9DaUPeNtO45xJeVVjzxR4PyyEXkCz/9iToNnkMXDre+8rEhPEqSmGWnBlFmvznTNew
+ Y1SImK8Nb89t2/rcnMbXNtn41+6ocBzOnA3d55wRPBooMcBVwvSw+1ZVCDMNXS1gzKGp+ZUrK0c
+ +yL3A4ybRdL6VKjD73FTmhdvThALWOEfZtv4dEhdJlgRsk4Bk4U2ANKzMUuEPTiTPD319YOb3B5
+ 5ep5iA7po61ZwjbpgQdre01cbOUPG4ERK2eyXyi0tNOXC2awJk+i/5Uri/HBiIhjNIjNG6zVWHV
+ W3xKoonN05PIFsuvcwanQ92kp3R942A/XP3TT042RSgPSqRSvL+t2qAcq7hzTW5JKJ4CdeY0EQE
+ d18B5EgvFp6SRGDx9c5bR6x+Zp4XNkdwlzLSbASKQ6ZLAnnfxEyCyHFpGZOUG12VHj3EISM2VSk
+ 8IOjg5Ify4sPm2fCHKRfA1Yz/n46tQ==
+X-Received: by 2002:a05:6808:2222:b0:4be:d8dc:be57 with SMTP id
+ 5614622812f47-50c4084ede0mr2940050b6e.4.1791574407997; 
+ Fri, 09 Oct 2026 12:33:27 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-50c1c1246cbsm2871881b6e.18.2026.10.09.12.33.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Oct 2026 12:25:58 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Lukasz Majewski <lukma@nabladev.com>, David Lechner <dlechner@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org, 
- Arnaud Ferraris <arnaud.ferraris@collabora.com>
-In-Reply-To: <20260924-clk-mtk-single-ops-v1-0-1c3b5d8744ba@baylibre.com>
-References: <20260924-clk-mtk-single-ops-v1-0-1c3b5d8744ba@baylibre.com>
-Subject: Re: [PATCH 00/15] clk: mediatek: merge single ops into mtk_clk_ops
-Message-Id: <179157391636.1248553.16915107309869592365.b4-ty@b4>
-Date: Fri, 09 Oct 2026 14:25:16 -0500
+ Fri, 09 Oct 2026 12:33:27 -0700 (PDT)
+Date: Fri, 9 Oct 2026 13:33:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: wadowski.arkadiusz@gmail.com
+Cc: u-boot@lists.u-boot-project.org,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: Re: [PATCH] board: qemu-arm: Add SPL support
+Message-ID: <20261009193325.GF769217@bill-the-cat>
+References: <20261009-spl-for-quemu-arm-v1-1-8ea39068f888@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2636; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=hxWXHpztr2v2ICgb1ZPBdsh5aR2xD0446/z+rnG7IXo=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqyT+912GDfgA0sQ9j8onsjMYWTK/hRyejT7yAD
- EEpMRyM2lmJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCask/vRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AmQQH/10qdB72RUw2rzcJbD76Qp6vjxXNUKfsLgSO/p2
- 1RbEJ/7VNnfkPkS8oebwc0SywVE+aW0iyjYB0kPi+u/Hgqu/Qscj7a4ZMieOtlKZMlWR2PuOOP7
- x0RO6C3s6zF2ca8A9ah9Ehz3niwhVSuSFjGMAXD/YOy48/kuNOo9pKPP/z1WAriqD7sNUOe3xH+
- 7AyvS8A5VLkhcdw0aHdP/aamdfaTtH8qaI9GtAvHpGOH+GNwqsvWS/NAJJsCQCpgK8mdl2/NxpC
- w6lqXcY/FYOuTKwXv/NarNcNOXPx1Zgsh6zQ7bLcbL+vT9UxvdbyFLbgnAXODdOFUwgzVLY8zx8
- oct4=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1TdSqvGn845OKyhf"
+Content-Disposition: inline
+In-Reply-To: <20261009-spl-for-quemu-arm-v1-1-8ea39068f888@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -202,54 +178,112 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Thu, 24 Sep 2026 14:41:38 -0500, David Lechner wrote:
-> clk: mediatek: merge single ops into mtk_clk_ops
-> 
-> This is the final chapter in the year-long quest to remove duplication
-> and increase consistency across the MediaTek clock drivers. Most of the
-> clock ops now are duplicated code that can be combined into a single
-> functions. So we do that and then consolidate all of the mt8xxx clock
-> drivers to use this single set of operations (mt7xxx have some extra
-> hooks on certain clock trees, so they are not consolidated here).
-> 
-> [...]
 
-Applied to mediatek-for-main, thanks!
+--1TdSqvGn845OKyhf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fixed up the enable/disable parameters to be consistent while applying.
+On Fri, Oct 09, 2026 at 06:18:34PM +0200, Arkadiusz Wadowski via B4 Relay w=
+rote:
 
-[01/15] clk: mediatek: add fclks_offs to struct mtk_clk_tree
-        commit: 367d41c61a75e37dcaa0f3e42615434b478ff532
-[02/15] clk: mediatek: merge the of_xlate callbacks
-        commit: 16a16e613bcd0dac243e5937d58d9f23d25a03e7
-[03/15] clk: mediatek: merge the enable and disable callbacks
-        commit: dc814f155e21f949d3d35a502153b47d3a8f118e
-[04/15] clk: mediatek: merge the get_rate callbacks
-        commit: 812070700e7fac2b6f059c334eb5cf04f635c3ea
-[05/15] clk: mediatek: merge the dump callbacks
-        commit: 3b81c2a3c6cab081e393e01ac0589b1f864f8e30
-[06/15] clk: mediatek: use a single clk_ops for all drivers
-        commit: bda39b1bca72b9b471104415fe66d88450a4d722
-[07/15] clk: mediatek: mt8183: merge the apmixedsys driver into mt8183-clk
-        commit: ff3c69cabf189ea30ffe3ea1be6f750fa8a07e38
-[08/15] clk: mediatek: mt8188: merge the apmixedsys driver into mt8188-clk
-        commit: 193de6918d6537bd6fd34eb78f5f7bed9d4e4307
-[09/15] clk: mediatek: mt8189: merge the remaining drivers into mt8189-clk
-        commit: 1a8151be17a7ae4406653c5cffad9d20cd4fb91c
-[10/15] clk: mediatek: mt8195: merge the apmixedsys driver into mt8195-clk
-        commit: 01039780035638624ee04370650615ce7550eeaf
-[11/15] clk: mediatek: mt8365: merge the apmixedsys driver into mt8365-clk
-        commit: 57dc10d80f2fa78561033ebf326d39dcd8df51d8
-[12/15] clk: mediatek: mt8366: merge the apmixedsys driver into mt8366-clk
-        commit: 216015c98f2be9bd8cc63ac2262a331ee3d21712
-[13/15] clk: mediatek: mt8512: merge the apmixedsys driver into mt8512-clk
-        commit: f74fbdf159c1e15d48cf24335ada4aad0b77013e
-[14/15] clk: mediatek: mt8516: merge the apmixedsys driver into mt8516-clk
-        commit: 73777623b8e42dc6b474622aa15e5c720f8b6521
-[15/15] clk: mediatek: mt8518: merge the apmixedsys driver into mt8518-clk
-        commit: bed8b428c7349c714b546446bd7c32123f8c8774
+> From: Arkadiusz Wadowski <wadowski.arkadiusz@gmail.com>
+>=20
+> Add an optional SPL boot path for the QEMU ARM64 virt machine,
+> allowing the SPL-to-U-Boot boot flow to be explored without
+> physical hardware.
+>=20
+> Use the existing NOR loader to load u-boot.img from flash into
+> RAM at 0x41000000. Generate u-boot-with-spl.bin with the payload
+> placed after SPL padding.
+>=20
+> Signed-off-by: Arkadiusz Wadowski <wadowski.arkadiusz@gmail.com>
+> ---
+> This patch adds an optional SPL boot path for the QEMU ARM64 virt
+> machine. It provides an emulated environment for exploring the
+> SPL-to-U-Boot boot flow without physical hardware.
+>=20
+> SPL starts at flash address zero and uses the existing NOR loader
+> to load U-Boot proper into RAM at 0x41000000. The combined
+> u-boot-with-spl.bin image places u-boot.img at flash offset 0x100000.
+>=20
+> QEMU provides initialized RAM at reset, so this boot path does
+> not require a DRAM initialization sequence.
+[snip]
+> diff --git a/board/emulation/qemu-arm/Kconfig b/board/emulation/qemu-arm/=
+Kconfig
+> index 447061b25cd..c6bfb82e7f3 100644
+> --- a/board/emulation/qemu-arm/Kconfig
+> +++ b/board/emulation/qemu-arm/Kconfig
+> @@ -1,3 +1,7 @@
+> +if TARGET_QEMU_ARM_64BIT && SPL
+> +source "board/emulation/qemu-arm/Kconfig.spl"
+> +endif
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+This guard should be in the new file.
 
+> +
+>  if TARGET_QEMU_ARM_32BIT || TARGET_QEMU_ARM_64BIT
+> =20
+>  config TEXT_BASE
+> diff --git a/board/emulation/qemu-arm/Kconfig.spl b/board/emulation/qemu-=
+arm/Kconfig.spl
+> new file mode 100644
+> index 00000000000..38002a87b70
+> --- /dev/null
+> +++ b/board/emulation/qemu-arm/Kconfig.spl
+> @@ -0,0 +1,43 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +
+> +config TEXT_BASE
+> +	range 0x41000000 0xffffffff
+> +	default 0x41000000
+> +
+> +config OF_OMIT_DTB
+> +	default n
+> +
+> +config DEFAULT_DEVICE_TREE
+> +	default "qemu-arm64"
+> +
+> +config QEMU_ARM64_SPL
+> +	def_bool y
+> +	select SPL_LIBCOMMON_SUPPORT
+> +	select SPL_LIBGENERIC_SUPPORT
+> +	select SPL_HAS_BSS_LINKER_SECTION
+> +	select SPL_SEPARATE_BSS
+> +	select SPL_NOR_SUPPORT
+> +	select PANIC_HANG
+> +	select SPL_LEGACY_IMAGE_FORMAT
+> +	select SPL_DM
+> +	select SPL_OF_CONTROL
+> +	select SPL_SERIAL
+> +	select SPL_DM_SERIAL
+> +
+> +config SPL_PAYLOAD
+> +	default "u-boot.img"
+> +
+> +config SPL_TARGET
+> +	default "u-boot-with-spl.bin"
+> +
+> +config SPL_BLOBLIST
+> +	default n
+
+We should be able to omit the dtb, and then pass along the dtb we've
+been given via QEMU from one stage to the next, like some real hardware
+platforms do.
+
+--=20
+Tom
+
+--1TdSqvGn845OKyhf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaslBfQAKCRAr4qD1Cr/k
+CrFJAQC4tRBUSWx75vIdePxI8OLjUs97ff7Wc9Bwm5Y6yNYn0QD+NGOGISbOFvik
+fVOM2VvpWQr2oBfiRU+D2E6hzSLlEg0=
+=43Sa
+-----END PGP SIGNATURE-----
+
+--1TdSqvGn845OKyhf--
