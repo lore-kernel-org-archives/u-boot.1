@@ -1,198 +1,247 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3792BCA5FED
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 08:20:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1DF2CA5FED
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 08:38:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C0E3D608AE;
-	Fri,  9 Oct 2026 08:20:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 73BF040517;
+	Fri,  9 Oct 2026 08:38:12 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WdfDB4fjvcob; Fri,  9 Oct 2026 08:38:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3B00B4056F
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791535091;
+	b=WB5rvjB8LwjuUA7xrV6VPRRv5cLUHuykB1AVtwEAo2vsDm7wv9QyGBMCwXpTOxKRA9Nn
+	 63/gpMF4JU26HSIcB9ZgKB3A1W8UHQlozQfpr6bALg/7mTzNiqSUj1xNopXF1J1CARowA
+	 SiutUrKkQOR07ZJBMw6mYfo+V9AS7I5uh2pca25Clx+DcDzj5orRpdwuLxPucOQ9TBcyH
+	 Ze24Wp5aoxbUPV90HfaSeV6P4l49MBV3FLFwo/tGTAvBweT7opfB/O39B5mW0JDhISwaP
+	 21wDxkDQQK+cCm6B9yNuFkuIOtHHIum0ZfrPQLSVaBQvb5cSECTVlkTAov9ihmEiPTA==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791535091;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:
+	 X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=RL85pHKwiSSTPtuHvAhDgZ/PH/pv8oJOEn+suzg29Gg=;
+	b=baawTEtXhgmmbRalPTTt31FTztXYRpm24lQUHSDHXwkKdeMQUDF6WuG9aPG9XLFz+qz6
+	 pl3KYqJKRdFl48yIffixUAN8sERx0WBvzKf2MavFwg0pzj3K06FOCE0FLgsUQOFdQiVZi
+	 XvLVeE6t2P4Q9lxU0+f6AbIBMjfv3vfp0ipN8XOrcEfi39CuoeqpHhLp/ryWasxDuEbuS
+	 uKgHdVfNPVBF5ZtpVT35qpV2m1wHunZqQdi/hbz3NfFs6jPaUPpVPtRXe0m9qlxPZASvg
+	 tBipop4XgaQmYpgNVg6HchlC0aUSD6xsCQKrlYs8q0fmYIt1Q9KtP3WthbKVIFt8FqA==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	arc=fail smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1791535091;
+	bh=RL85pHKwiSSTPtuHvAhDgZ/PH/pv8oJOEn+suzg29Gg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=rWkSqOkpTW3F+MeG/63QSqmCx2sZombz3Hz72H5nZjloEoi5Sxrb5Ec2B9CPSDrm+
+	 54C+o+uzlbFCz39D5cnhDZcMQCXEqun0hsyAQE1ZGv+YHPjA44CiFkTHWK4J2vn6KO
+	 +np7KLubwjOi1/fY4RBfrAJ3+VbluHap6iG+G2oOgcl1LvLc8BReyo5dBGWz+iarMY
+	 MkP6vEVQlW3dUaECCadakaYvPYZdMvjzhUzai8zmTUFEMn4hdUETiEPe2QYL60sl/Z
+	 X1M4tcGJXPzmSmckkZElGn2m0vmsnYt5nRN2APTtU6ziDgCUdWe74S5M5U/WMJ4GNB
+	 lpQGDvYysrpig==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3B00B4056F;
+	Fri,  9 Oct 2026 08:38:11 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9F1AC1C6
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 08:38:10 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 910156069F
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 08:38:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yQ4Kv_DHyFuZ; Fri,  9 Oct 2026 08:20:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C79BD60892
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791534015;
-	b=mXgTMaAkAre5KAXaGaozI33QYcoDkIuB+gngZZx/eSWINi9i33TWsVKo7BZx1o5HVDSE
-	 AWaNFR1Erk6OieUi9T5DkdkaJ/dpLywBa3xZTZH6b/3BEt32/R1YEyw+VVIOqyPDMd5lO
-	 j671yqKjRJWdqjgpdYky1fwOsVW+ryLPW3HM2fgn2PyJMkMS3+UHSgkaqBWLZhnpq2rHL
-	 DqBzdrhq9QUiiDKiwACHW6qUPU9Z4UNiLKYj1bb9hfEe9mxwSXfwZQyccUH9DHYsANAws
-	 n5wwr2TsouM/ntbjzmdv3Rz+1+9/KdjPQIMqn92FfPj0vgsO1ch3cy8HNgL2dGo0NEw==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791534015;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=YWxYbcKQDoIkPQ1KUwPcNn2IvzNCXt4c1J/cnpJin2M=;
-	b=n1mHg2fVR+cH1JICQAUBIJF5o9YT72DY06wqpOJ6NsWHo6Cs2qplpNoe3OH+bw0ehVJG
-	 tJEAU8we76Uv0l28dQ9WY/yYnzZ/skcN9132ac2tZv7SuqS/N+qH9zeh5kTm5mNIXjl5f
-	 ktbwNcOfZIwNJM1Yl6Bh+29PZYurrA3EU2J8y0GtCRMt5nykhGHvi4pfHNvOCaOAYpWrr
-	 wobbX6tyu3jKGezk9Ysi3CC3u3qHk7fDKVhTR7oCgEsS7it9W4CzOXZAcXVEknOACSO2q
-	 veoXwbaIqZknqrKW5VVX8MqSXq/AVb9p09Dc/2MDmiafVLYiYxUOC0U8fXzcr3wgz2Q==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791534015;
-	bh=YWxYbcKQDoIkPQ1KUwPcNn2IvzNCXt4c1J/cnpJin2M=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Lo4gYdzSYYekYc6TvV70mLAnpP5MYzaBqVLbe+zDTIc/CPDAw+StFnPm6SmSxO+lV
-	 QYICicCNRqf/QSDSZvc+4zwBKt6hJPghJN0BvtTiSik17qGq37h0aCJFFn3wixBJIW
-	 3ZvCLZRLkS46+RXo/uZqKvrUVkH7+BMgCsGI2tfI8vGJJE789t1tdTdxjgbYQlu04E
-	 Vl4UAID/IcukEASuz/fuaY9Q51BASbIiHzJLI9F8RWvkjWGgVEBXJeDwxTPl+Qf00W
-	 XnkNQvPO3NFtoVr3y/HveHGTVJACoAvn6K5dv/wK0jL2TYgELzFtKBNkBnueEtzKH8
-	 n2nxnrfDOto4Q==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C79BD60892;
-	Fri,  9 Oct 2026 08:20:15 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7EA1F228
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 08:20:14 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6CD9B40080
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 08:20:14 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RV_ciXWIwyie for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 08:20:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1E85440061
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1129"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791534013;
- b=LftnzJWXjB5WqfP3mNak1n0jss2t3OKMdqq78hEvgzzN6/pZmzcd3RZBd0xloznuHyzk
- ZP9ADlMKKkY18Jt6vzbMxRtQoLkorWPFKMWzNVoQubK2t+usLwNxM5OjtWXu8QHsZtXg3
- qed1CplfFWe1MGFOq8kxvGSNhO4YzBvDuh8DZRGFhruTvROpqta2RceJd9O+NefqBw92p
- F12NPbCYontPrP+bki2ItTIb2r1NDlCaiUM+DXJci++8JsVnWTClcANd5wWKJHOFrb7yf
- RLVkdyt3hGhWmF5fTcYlqjEHLpjrAdbyLmBNauZ619fY1Yt6jUSzP4vUW6iLQPgvZ8g==
+ id PawNtgqIRh7L for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 08:38:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0608B605D0
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c207::1"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791535089;
+ b=QoIuJIIJcVefiay890eQp0pmv8/AtL8c+7lwBD7unxSyJKQIccbasNrmPeog6FySyyvv
+ EFZt6g9unqHRyQYj9hnPOAAnMoeW9gIHsHaj5sKu2dNZQC5SdXaVlrkccsazrERjklQW4
+ UxH3uaTeS2+YDVCtEGt2xbX5ojSWEIBcltczwk8/HRBt1hdV/7oa4E/eLzk6JpLM4qiSx
+ TQRAmcO4Z25Qe5QLEj+tN09HDUprwuVB70hGiB+d9IHquUTh9nRh7moEdi/KbNjwt50Rr
+ UUUOt9pc1Hmc7+TZddbMckvgWFzBNZ1Qqx2QxvDOKShn5Z1uiSUfZkadhI6OyDAvazg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791534013;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type:Content-Transfer-Encoding;
- bh=YWxYbcKQDoIkPQ1KUwPcNn2IvzNCXt4c1J/cnpJin2M=;
- b=d2CGeJiVhzkWQxsYTygAKQOOqBkNhaFRY+QoRhaR+tJ7LEoD63W0e99W0QuPFIivx1Wk
- /beIRF4IOnTCIDLFd1xRPW0Pwknc7eOJ9VBxhzcZ7uGQaWKlqFYU9DjvKgehxeqW6/Fai
- IkUbXdbuh4r++yiWyufEUmBLtvSht35xbrLXRhpdpCotWOXUg9MQDGXTbF1vHtjcuEDuw
- P5QmfsneFv2KXdAiTNDgMvvsBcGugyMcNuOMd4NwplQ8ICaIKDoZ8yCRPLv1Tt8pW7pN/
- IVndj/zpxD3rI7m+2vFuxI9yW3mF+WimTubHoZ7y78n5Rqr3wcQaKGPk6pVEPYsygCg==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=mluW0KRp; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1129"
+ c=relaxed/relaxed; t=1791535089;
+ h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
+ User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+ X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+ X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+ X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+ X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:
+ X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+ X-MS-Exchange-CrossTenant-UserPrincipalName:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=RL85pHKwiSSTPtuHvAhDgZ/PH/pv8oJOEn+suzg29Gg=;
+ b=kogdcDgCsEL0F9H2bx5nkZnNCpSyzX2Un32w4XSKvMcFK9JT/cjEyCLBVDLrFvf9La/u
+ 0jovppPIX3CIa8I/QRQoDEVP1jxhIy5vJeYuwV9ZRA6t1p7245benNdZagQOcJnrva3dl
+ nO0pgeiKvWMsJ/Zhy196mMTltYGuMiJlGmJF3QVvg/tda2nZS5eT9of/cF5CmFFHyLrX3
+ +8JtEeJPbLvWkvnoNf3apfTECzSdOB6zG4hJx4P0XxQ82ZwRsnJID+VJ+VnQMjJnolJhG
+ qrDiqwObhmABukRq0JLHVjZ8kYLyzhZBBrjS3N8UEeL3bF+2u+kCffBzKUG/jKLG1/w==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ dmarc=none header.from=softathome.com;
+ dkim=pass header.d=softathome1.onmicrosoft.com
+ header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
+ header.s=selector1-softathome1-onmicrosoft-com header.b=WpjpCQWL; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c207::1"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1129; helo=mail-yw1-x1129.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=mluW0KRp
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1E85440061
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 08:20:12 +0000 (UTC)
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-8726acc5eadso31592377b3.0
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 01:20:12 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791534011; cv=none;
- d=google.com; s=arc-20260327;
- b=nALO64GQVL8pOezGWe75fJuICANoLoMA5idgq7kz3D6P/ZPZLRnkgSJlemqqBsOnwC
- wYJAFvU8KSsCatnyZkk/ERpv6VyQDSy1de0iX+fdjFGVOxiF0Amaw2+Td9RBB0QR6AkY
- KIBHOcxXnNxiMO2g4T/BWlClvvOssXx5oJjO7yf5pF7mIR1FPIvHlT4XMcR/jzDsaH+1
- MCJ526/FiTg9TyDwpevtG3xpgOExqCV1QGy22c8ZKQhDdywN+BiLx8ybMgbFsq1UQzo/
- eMdWxbar07HmYrMm22bUtNHl7D6MJQbU9slLIXBy18wX9w8xM2MRygSC/MA+fEQS05K7
- Rolg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=YWxYbcKQDoIkPQ1KUwPcNn2IvzNCXt4c1J/cnpJin2M=;
- fh=dBPtYC1TZ/qisQKccqrPk+ZU1k6U81Ut+AAudAfs85g=;
- b=URIPUqFvMkmwJhqDSMvsRYtlktsV7qhNrzpjX6m5ZtMvYfCUU0Tmolqpd6tnR0Qs7S
- eyQnKekJy7CVPjsC9hsxcqbIGPLRToRbU0CDxxzvll3Nc77q39bqQqTm7tgAGuRLZ0KG
- iUqGOXBvimwgL3SXZnQh3ld0qqwE0bm2C3uUPh6xA3a9ya++ETaExaBhrdbNOrcusRrM
- 8W2gy/on1sNTrkqEIwGkjEFpyf23t386NseH/iuigxwks1vPj4SDLMWPnM1Ez5hDKrEM
- zwPUPUhAPcLR6M17gOQFWLecL6pmkoyeOG4AgKTYFc4BGKsCyi6ZHghcdFPxnJp8aDuJ
- yX9A==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2a01:111:f403:c207::1;
+ helo=mrzp264cu002.outbound.protection.outlook.com;
+ envelope-from=philippe.reynes@softathome.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=none (p=none dis=none)
+ header.from=softathome.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=softathome1.onmicrosoft.com
+ header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
+ header.s=selector1-softathome1-onmicrosoft-com header.b=WpjpCQWL
+Received: from MRZP264CU002.outbound.protection.outlook.com
+ (mail-francesouthazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0608B605D0
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 08:38:08 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FohfgcVfbq7NRlphE0fHicp2DsLxYvLrs/CgDkJNuk4bGVs9aM26DTBJMjLj5vzb3gnNimyPmYpIWWtzaUjFpG4LBp18Jd3dRXpl2qBWwGNLU7VjKF96g7kSsR3lYjTNgtL3BPJhKmDUuRclu79siVPGgLpeNyQklo5RMmMkhO+HbWwGDy0s3E9n2Ao6S1CeBFeoug+NWhBmu5VNk8LfMwJwJVvmTRpoeEvFXsNVoy1NwjcVzwMgl8mQONbY+7Vnol6e+2LJDUwLDe6gdNf1b44ybHaKjidfHCUcf7EninQKhrLe35Imz7B3DDGuRLjvDcVtj1yNbD/5rZcCCbEgtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RL85pHKwiSSTPtuHvAhDgZ/PH/pv8oJOEn+suzg29Gg=;
+ b=hgvFm+5ruol4JK0MkyFrgbAYwmB1xjDIhKyKIvnaCVQdAvizXFxa7cXmGSRsF/fC0yFsmEBrV0iWQ4v/07qUv8UVj32fS/3/0D6zSBfCAtIKn0kDjUDwAGCI0VvHhbXjWcniAEw8adYIVxx3PIKjJNtFUj1NQToBSWzrxpjwfA4mT7hVkMO9uGGxuPXFrGtgKD8CP/VIwUJQ4xEAISlE8Tlv6y5Ernr80MeekaWEqCnB+Jrb8eyJETahpvEH2sIeePqkTdaTaO0jgk71PlRfnrYiv/pD9lNczUGRzylviuo7MQHdxfolOS66cJkmEWecTvyTooCK6KtmqttUXJb1SA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=softathome.com; dmarc=pass action=none
+ header.from=softathome.com; dkim=pass header.d=softathome.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1791534011; x=1792138811;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=YWxYbcKQDoIkPQ1KUwPcNn2IvzNCXt4c1J/cnpJin2M=;
- b=mluW0KRpsk03rHmGsd1+c7ceiwEO7TkV24O2iRtzEwedkReFcF2/mDcTXN+HJ9MAYA
- HvZ5mnaEY09WCXsDSDDzpUhyqqK0TsnQfdu8Becl/EFiB/DkLdgLtSO3pctWpKswk/qN
- pZR49u6u7eKo7B5MNnTtRttMk5p9tdpTZhe6+8m77ZS0Wo7RcopUwFRK+3Jpy7nezgky
- gU4upaoiEamDHWRHrP0NuAO7XeYGzOsKNKBeKZsNaeug0UbdyymOEWmukU1uQ5fplbZv
- YsF06mduCm8aNrUdLlIYABpL3HBa0y4n0aEt448Z+C6IDLaAszQ5ZbWG8UKRGEj8LJAo
- mBDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791534011; x=1792138811;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=YWxYbcKQDoIkPQ1KUwPcNn2IvzNCXt4c1J/cnpJin2M=;
- b=LsSsyVU0zx/Cssel/R859L67XNtJphealO30QxyFs99k+zjtk0pjvROwGCdQ3P6a/a
- QTorjLbS2PLGl+gBYoktCtFVxIukouXN8yk+UcOT8tcEFzUSLjv1YMlC2Goyb6zfJNA8
- Xkot7Jmbh8ayvDhRaO7NAodkoCM2uhSdv7lBSptyvfqNb4NQ7OmjneqqJNsktFEskEMZ
- Yw04Kx2Oks1wbdsNdPHqtQ/fI3MrvUIr+lTVID/xa7/GtDJ2u9XndPk6FUx5QZ2xbgHR
- CcyH1nq9m6W6v0+mOdd5UjBAK6GvYRLOKdM9G2UC09sA/0JyAOxd7Qs4HtT34VrkxV/R
- vvSQ==
-X-Gm-Message-State: AFq9FYImd/i5YPX4cnbwmc9lfvFYiJVxPDIq4blVLrM2++0h/G8mPMKZ
- H4SgmnEcFeyTUM/y6PTt5ng1EuOHjA5yLA81HlYcVtrrXIpZBrCPq46bs+K95mfXrE93cVtcz0o
- PmS/xJT8brDn8UeIQNVIq+PfwpL8Yal9pbbFEhoWNXA==
-X-Gm-Gg: AYBFou3OjjSz8hVh39ln8CzQY5GNF/WUGpLNBIhrF7eSLbWC8BnCPuqGyeLDlNsOdiT
- qqR5iA5BjgnwxUrpa5tnLvRY43eFbB6hS13UTygrChNrAp+ONzTvX5rwvA+OWiTTqZP/jH5h0Qc
- wu4cZmGXkqMoLfNY0Ram9dmFKePGYIf9RQJrKEuywhzQJAjnNKc+ecsVigkzc4u2dv47gvACjJN
- tFFmH+oYsLtk3ZQY9hIbxjfsIzwPFOG1PHFsudem06LrZyHoi+wdKPQ8F7dNC+B3tR4nHucL9kH
- EVQ3+Xy2C6Y9XygYti1V0JnFzkGgGOBg1IrSxgIvuuTKUnAVQ+CxDkX35sw2fmwUcgryewYSAiW
- bptYPsSqGRErUpsyU1eS3GDYVMBpyVwxh+n67VkIoS4B1298HVeevePZFayaOC7WRox0Znoa2k1
- c9j9o8buArZIB/K4z6K5HOBTXXcVyTjyoPYRB32yyJrEmZfUvelYZ7d7O2PaCT2XalULVJmiIFa
- JA5thf2GBs/4MFWZFqkoepwuV3h5Ud35DdpsjrLXFGYXqhKclDL04mZnsYA/mJANucuhLIxbh3F
- ymIIkoyfD1XIzD9DpMiDIjmknCBj4U4JZ7u9C3TxpD7JF/Hz1r0V7pOLOJwp146872c60Cr1OKY
- bdRu/94eGAEjfnyDcxrwPtY2HzKjic3lEO/eRMCGVV2c7R2jYFSMt8A==
-X-Received: by 2002:a05:690c:6610:b0:8ab:4989:bcc5 with SMTP id
- 00721157ae682-8b07ec970bamr4146717b3.2.1791534011066; Fri, 09 Oct 2026
- 01:20:11 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260914110106.1974894-1-harsimransingh.tungal@arm.com>
- <20260914110106.1974894-14-harsimransingh.tungal@arm.com>
- <DLINF8X5LGMM.22DVNGKNPMAM8@linaro.org>
- <eca5e6ca-ef4a-4e20-9255-f7d20ebe0788@arm.com>
- <CAC_iWj+VHR_vGb8EYqR7tzLXihZLW586BjnjPsKswf9uDnngEw@mail.gmail.com>
- <55e2793e-33fe-43da-a509-8e64aed0c432@arm.com>
-In-Reply-To: <55e2793e-33fe-43da-a509-8e64aed0c432@arm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 9 Oct 2026 11:19:34 +0300
-X-Gm-Features: AclHuK_S7GI6-_HT0un63Gb6Ay7Z5E6K6Ja26u21r0QCKvlNZ72tnr-9H6rv9VM
-Message-ID: <CAC_iWjKRo7Dm4f7FmMi15fELP9_A5XYmMmBtQN8q8qBFs1e+Sg@mail.gmail.com>
-Subject: Re: [PATCH v5 13/22] efi_loader: enable TEE runtime SetVariable()
- over FF-A
-To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Cc: u-boot@lists.u-boot-project.org, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Devaraj Ranganna <Devaraj.Ranganna@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RL85pHKwiSSTPtuHvAhDgZ/PH/pv8oJOEn+suzg29Gg=;
+ b=WpjpCQWL7y1a9+uYi5WRbPJUScUeXVNeqEEiZZrlk08yuIIJu6qx2At//7OWM8Ik7l3VzLSqI96ob9HEeJhAuhx7Fr5WCXIK7TTB44vF2yynWkLkjAo5RHTxd8rnMt/QSQjZnZdvB7KL+AzulPaepmGyYqWyUgTmdASPvoi1LZsB9iGrNCqbwuvMhMK0E0BVa/tEYdIHjV3BV+69GYPPE9lAhTOo/UvbAcO1XX9kKev/dByWGftqUxyFyckjl7jRiKEHlRGJRUqXfxOZzuACJ17bd84nWoAX/oO4QyT2p1Klpa7BBL5tHI8R94JzW/vw3U4h6vbZ20mp+QN3L7pXPg==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=softathome.com;
+Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1d0::9)
+ by PR0P264MB3674.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:14a::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.17; Fri, 9 Oct
+ 2026 08:38:01 +0000
+Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::6e14:438b:5c18:8557]) by PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::6e14:438b:5c18:8557%5]) with mapi id 15.21.0496.015; Fri, 9 Oct 2026
+ 08:38:00 +0000
+Message-ID: <033e7c3d-9793-484f-bcc1-628ae5a9e214@softathome.com>
+Date: Fri, 9 Oct 2026 10:38:00 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v10 00/15] add software ecdsa support
+To: raymondmaoca@gmail.com
+Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com,
+ simon.glass@canonical.com
+References: <20260904083719.53132-1-philippe.reynes@softathome.com>
+Content-Language: en-US
+From: Philippe Reynes <philippe.reynes@softathome.com>
+In-Reply-To: <20260904083719.53132-1-philippe.reynes@softathome.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: PA7P264CA0116.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:34c::7) To PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:1d0::9)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PR0P264MB2741:EE_|PR0P264MB3674:EE_
+X-MS-Office365-Filtering-Correlation-Id: ff61d8db-b1b0-484b-5219-08df25e0a06e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|376014|1800799024|10070799003|366016|6133799003|22082099003|18002099003|10067099003|56012099006;
+X-Microsoft-Antispam-Message-Info: cO6Eaugb1MrSR3/RF/sxlPHQwi8MHy2vMUXMt0kwbedP4V7vUst7y4SazOxLyuvsKWPrdkj5m6GrpnHuXwWn/VkEaZb+gIfDMQDzw3cdVeyMh4NvCCAFhoWB6/+MFkgDsDDzV7PHZKTmirqADlcq0MZnBjw8wXLCBXk0I3zi89ZC2J1r8ENGXX27rVNWwJgMjjPBoMqDVzwaZU5mcHoSFQ3UFsRryIeV61EaBy5QnW60X3kBfPfUT14ZC9NozACQrWFWcpzHRPwSsK2LQI2vEwomjkvtMtq3JKj7s8jRdu7YFo3MuJzvUSX3bOGkXKNQWPQdqYZyONUaztDVsYrUyX0pahSANg7AubiaCmDMrbvyzoM1UZ9sIw+SGHXqb9wHWJBBo/jxnjFHI75bmzv07iFy9YAza8Yv49KleJ9LPkaGHWktq1M0Qyi0zPwDplznSfweZvMkEMfz93AV6PgGIJHkAru+6Ra/t4d2dZH++gdKMUpfQlWsMW+ob6+gmb8viXmBv8l3unnc6EDjSepvD+6I77iPNOCutwJy1bwy/eeMS16xTnz6VCPRG0WG+BYNdT8HfNteOz1fqlaNEQVkEAusq8J2jDzT7F7UMqxTJsBcuNTV027KmLr31HHv/xvl8RE2u+Jnnpm2p+eeeEvvwaJs0neBbJ16CqrIDjMVYFo=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(376014)(1800799024)(10070799003)(366016)(6133799003)(22082099003)(18002099003)(10067099003)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?elJLOGZHWHY0WVlLY3hqVGgxekphaHB2clZjMGFYTTRqVERzaXZCN1kvQ2ty?=
+ =?utf-8?B?OERNVHBaWUYyT2V6b1E0WW5Pd2ZVVEFkMXh2U09IQlovdGF6N0ZSb1JqUkQ2?=
+ =?utf-8?B?QnFrUUNpaHNob3B3TkFxNUQxbTd5NWorTkFKTGNKeSs5Z3FlL1NTaE42d0Vz?=
+ =?utf-8?B?STM3UUppbkhFNFdtRXNBRVJZbGdSdEZVU0svWlRsOEVpcElSeHg0UHd3ZStF?=
+ =?utf-8?B?a2YwcTBSSjZVS0NCbW05a2xQZFNmTWJKdDJiMWM3bzM0OUhpSitZU0I4eXpF?=
+ =?utf-8?B?QzE2RXB1ZDdSdFliZlV0RjBuemtERmF4L0Jqa2VycVY3RnZ2Unh0bWM5WVVj?=
+ =?utf-8?B?aTRpY0cyRXFqM05nSHlOREVFZ2RHR2NNb3N3ck1pWGJINXI4OXNLb2h0MVVI?=
+ =?utf-8?B?Y3cyY0RnanUwNGNtNC9XZVRXdEN0QThQOWNzalJPd055V1grSnp5VXNrYy9o?=
+ =?utf-8?B?Rk5kQ2grKzdTNlNBamlFbkNXMmxsbG5xNDcwUjFtcDJCVEhNMWhFbnNianda?=
+ =?utf-8?B?M3ZNQzhWdVdzMnlqWkFWa3owOHgrcUxHbVFEYlJGYXk2YkRzcHZqMXc2NUJQ?=
+ =?utf-8?B?N0pQU0pnNURVSUZiVjFlZ3RKT2U5REVEU2IvRlI2NzdBb2xUZnVmZ2FyWUJ5?=
+ =?utf-8?B?NDlzdENERE5oWmxJOHBCM2RIMWUxNFRtYkUxUThGMERCVFB3S0xCRmNiWW5K?=
+ =?utf-8?B?WnBDS2x6emFuR3dZQlIxTVBhSEI2UVY2OXhEbFVTVVFHSkRSVDRucXhybmkr?=
+ =?utf-8?B?a1dPbkJ5UXc0RFk3T2ZKOE4xazhzUGR3d3BqUVgvT3FrcnpJdVlLOHpsZUho?=
+ =?utf-8?B?eEZFdTJPTnVFOU9jQ3hKeHV3Q092N3NhV3VrMTFid29VSEZ5RHFZcGhBYVJ2?=
+ =?utf-8?B?dHJCZEliYmNMR0g5cFRlWGRRWVZoSGlPUW0wZ0J5UW1XeHFMVzlBeEc3R3Zj?=
+ =?utf-8?B?aTI0NWNHNkN2Zi9tOHQ5R3JQUDY5c0NoY0xTWmMzdjdDdWx6VUtjM1AyMUJN?=
+ =?utf-8?B?UmREOEF1REpOaEtCamxUUmNHUUdTRTVTNTNXT2pPWlZLZEQvbW9EZzlHdzlC?=
+ =?utf-8?B?bktya1ZuVjhhWHJzNXdzOGxjcU9HK1pkaDVicXBtb3ZMeVMwZms4eVlVQ1Vw?=
+ =?utf-8?B?cUh1SGlubWttdFJsOTZqRWNkRnhKVDc2NENOOGE5N3F3YUY5dXovb1ZyaGNu?=
+ =?utf-8?B?ZW93M1l0RVVLVHA3OElSSE51QTJPRTFsdi9JQXJvL1RORHQ4V2kxNUUvZldU?=
+ =?utf-8?B?dXY3TzNhdmd3TDhyaWhBa1hGZUd4NG1SSDJlR1JmVlNnOGRQRmJYSk9OTU5r?=
+ =?utf-8?B?U1FwbGRmeDVveDMyK1orcUs1czNQSTc5YVNjamNka0VhWEQ4QVhIRVl6SlZt?=
+ =?utf-8?B?L1hPL2JiRytvVWpxa1dhQXRNNXJua0Vpa1dZVCtjU0hqaWZWZzhudnpSZDJE?=
+ =?utf-8?B?b2lKQXo2dkpkSndPMWFuUUpiVFJMUzVlaXphWVp5Zk9laTRDWUJjNitKMmVl?=
+ =?utf-8?B?M3ZCTGVXdG5YZDBicnpJYkF3dU1FTzdvK01VUXlLcktVb05rUkJVem4wcktU?=
+ =?utf-8?B?K3JLdE5jTjMzby85eXVDU0JpR0JRSnIvdEVWYTlIT29URCtSVHBlQWg4cXlx?=
+ =?utf-8?B?SGtMUHVrVHBsVEZTYnBRYUtXUkNiaGN3YzRPOVF2QW8wcG5mdDFmVnhOeDV6?=
+ =?utf-8?B?T3VNWUg5bG15a3M5azMwQzJBNHhlRU1CNm93Z3NCSW9qVTNBVDFoZjFROVMr?=
+ =?utf-8?B?K3ZZQUp1YjlmM3ZDZzBOR2tuS0dXVHlmcGZyUFdyRisrSkJ1SEVvOHZUbGE2?=
+ =?utf-8?B?NjNqOUFkeS9tMDVvRUszZ1RwQjNnWXFWeDgzSVU5TEhQTURTUGtXU04xSjdL?=
+ =?utf-8?B?RUhjZmhqTjl1REtUTTlzbk9mdFFsaXMrcnYvbmpINld1YytiZ3prMG1vMVJW?=
+ =?utf-8?B?TjU2alM4dmtESW5BK1hkUGxqYnFHSXQzcXJSOHd2ZWRWd3N5K1hiTXhiTXM4?=
+ =?utf-8?B?VlBSMDgyS2RSUnhHZXVBK05PbjFKRGpHTmVFMUNkbVJjYjRqOVZDSVFxYzdr?=
+ =?utf-8?B?WTI1ZktybEUzdkx2L0JNSGR6WGpycjRCWjlzKzdoWW45S3F6ZVpoV1dzdzY3?=
+ =?utf-8?B?bUE5MkxsMmFSN3Y3V04wN1l6UnNlcWFJWTloamd1TThqbHlwVjQ3T3k2NE1U?=
+ =?utf-8?B?ZmlHVU0vSlVjQjZOOGFES0oySWxiUDJYalFhQm1yWWxUdlpzalk2aTNOS05M?=
+ =?utf-8?B?SmZjdkJINGZLUTZvMUc5MjVEdGpRL2VUQTFMbldIVkdTNzhaVzlrRE9vUFlw?=
+ =?utf-8?B?aEhuSy9qcEpyejFBR0trb0RSWmk4VDNOdE1xV1BzL1UyUTVQQTBIL1R4dnBL?=
+ =?utf-8?Q?U2ONgzUattWbMwjRwDdIzscAh0L8PCG81myTaMXmz6f+j?=
+X-MS-Exchange-AntiSpam-MessageData-1: 3HDe3jwqc3+99HH+lGf17VgOiiIW3TD/kDI=
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ff61d8db-b1b0-484b-5219-08df25e0a06e
+X-MS-Exchange-CrossTenant-AuthSource: PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2026 08:38:00.7993 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Okzo59W6otWt95bwAHRXli8jF86hJl3WheEXtzuAdouyQ3vDUuzmB05qYGyysXIjhwKjdCk5vqwWZrZEWU43Ft5TU1eDCTaYr3UOolw/+6Q=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB3674
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -206,103 +255,301 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-[...]
+Hi Raymond,
 
-> >>>>  /**
-> >>>> @@ -1129,7 +1262,7 @@ void efi_variables_boot_exit_notify(void)
-> >>>>      efi_runtime_services.get_variable =3D efi_get_variable_runtime;
-> >>>>      efi_runtime_services.get_next_variable_name =3D
-> >>>>                      efi_get_next_variable_name_runtime;
-> >>>
-> >>>
-> >>> All the get_variable*() calls used to point to the function from efi_=
-var_common.c.
-> >>> By changing this you are breaking the runtime case for OP-TEE since n=
-ow we will get
-> >>> EFI_OUT_OF_RESOURCES.
-> >>> There's no easy way to fix this at runtime. For OP-TEE the kernel mig=
-ht replace this call
-> >>> with an internal OP-TEE call if it's part of the firmware and announc=
-es it can provide
-> >>> EFI runtime services. However, the default uuse case, which we don't =
-support SetVariable
-> >>> at runtime only needs to keep working.
-> >>>
-> >>> I'll post a script next week so you can replicate and test this in QE=
-MU with OP-TEE etc.
-> >>>
-> >>> Cheers
-> >>> /Ilias
-> >>>
-> >> Hi Ilias,
-> >> Can you please share the script, so that I can replicate and test this
-> >> in QEMU with OP-TEE?
-> >
-> > https://github.com/apalos/efi_optee_variables
-> >
-> > make run-fip should give you a QEMU command line. You just have to add
-> > an OS image to test.
-> >
-> > Cheers
-> > /Ilias
-> >>
->
-> Hi Ilias,
->
-> Thank you for sharing the repository and instructions.
-> I tried the OP-TEE/non-FF-A QEMU setup from your repository and it
-> exposed a regression in my current series.
->
-> With CONFIG_EFI_MM_COMM_TEE=3Dy and CONFIG_ARM_FFA_RT_MODE=3Dn, Linux hit
-> an EFI runtime paging fault when booted through U-Boot EFI. The reason
-> was that TEE ExitBootServices() path only installed runtime variable
-> callbacks inside the CONFIG_ARM_FFA_RT_MODE path. That kept the FF-A
-> case working, but it accidentally stopped the non-FF-A OP-TEE case from
-> switching to the existing cached-variable runtime callbacks.
->
-> I tested a fix by keeping the FF-A/MM runtime callbacks only for
-> CONFIG_ARM_FFA_RT_MODE=3Dy, and using the common cached-variable runtime
-> callbacks when CONFIG_ARM_FFA_RT_MODE=3Dn. To make that clean, I plan to
-> add a small separate commit which moves the common runtime
-> QueryVariableInfo() and SetVariable() helpers, plus their shared
-> SetVariable() validation helper, from efi_variable.c into
-> efi_var_common.c.
+Do you think that this serie may by merged please ?
 
-I am not sure I understand the plan. efi_var_common.c already has
-callback for the above, it calls the _int variable for each service.
+Regards,
 
-Thanks
-/Ilias
-> Then, efi_variable_tee.c can select either the common
-> cached-variable runtime handlers for OP-TEE/non-FF-A, or the new MM/FF-A
-> runtime handlers for FF-A runtime mode.
+Philippe
+
+
+Le 04/09/2026 =C3=A0 10:37, Philippe Reynes a =C3=A9crit :
+> This series adds the support of ecdsa with software
+> using mbedtls. So boards without ecdsa hardware may
+> also use signature with ecdsa.
 >
-> With that change, the same QEMU setup boots Linux through bootefi and a
-> small initramfs, /sys/firmware/efi is present, and efivarfs mounts
-> successfully.
+> To achieve this goal, several changes are done:
+> - fix the support of secp521r1
+> - enable support of ecdsa in mbedtls
+> - add software ecdsa signature check using mbedtls
+> - add support of ecdsa for internal fit signature
+> - add test for ecdsa for internal fit signature in vboot
+> - add support of ecdsa for pre-load signature
+> - add test for ecdsa for pre-load signature in vboot
+> - enable software ecdsa signature check in sandbox
 >
-> Does this direction look reasonable to you?
 >
-> Regards,
-> Harsimran Singh Tungal
-> >> Thanks
-> >> Harsimran Singh Tungal
-> >>>> -    efi_runtime_services.set_variable =3D efi_set_variable_runtime;
-> >>>> +    efi_runtime_services.set_variable =3D efi_set_variable_int_runt=
-ime;
-> >>>>      efi_update_table_header_crc32(&efi_runtime_services.hdr);
-> >>>>
-> >>>>      /* Record that ExitBootServices() has been called */
-> >>>
-> >>
-> >> IMPORTANT NOTICE: The contents of this email and any attachments are c=
-onfidential and may also be privileged. If you are not the intended recipie=
-nt, please notify the sender immediately and do not disclose the contents t=
-o any other person, use it for any purpose, or store or copy the informatio=
-n in any medium. Thank you.
+> To test this new feature, just follow those steps:
 >
-> IMPORTANT NOTICE: The contents of this email and any attachments are conf=
-idential and may also be privileged. If you are not the intended recipient,=
- please notify the sender immediately and do not disclose the contents to a=
-ny other person, use it for any purpose, or store or copy the information i=
-n any medium. Thank you.
+> 0) build u-boot using sandbox_defconfig and adding those options:
+>
+> CONFIG_ECDSA_MBEDTLS=3Dy
+> CONFIG_ECDSA_VERIFY_MBEDTLS=3Dy
+> CONFIG_ECDSA=3Dy
+> CONFIG_ECDSA_VERIFY=3Dy
+>
+> 1) add a signature node to an its file
+>       signature-256 {
+>               algo =3D "sha256,ecdsa256";
+>               key-name-hint =3D "private-key-256";
+>       };
+>
+> 2) generate an ecdsa key
+> openssl ecparam -name prime256v1 -genkey -noout -out private-key-256.pem
+>
+> 3) create the itb file
+> ./tools/mkimage -f <file.its> -k . -K arch/sandbox/dts/test.dtb <file.itb=
+>
+>
+> 4) launch sandbox u-boot
+>
+> ./u-boot -d arch/sandbox/dts/test.dtb
+>
+> 5) on sandbox u-boot prompt, load the itb and launch bootm on it
+>
+> =3D> host load hostfs - 1000000 uboot-ecdsa.itb
+> 4628674 bytes read in 1 ms (4.3 GiB/s)
+> =3D> bootm 1000000
+> ...
+> ...
+>     Verifying Hash Integrity ... sha256,ecdsa256:private-key-256+ OK
+>
+>
+>
+>
+>
+> Changes in v2:
+> - move ECDSA_MBEDTLS to MBEDTLS_LIB_X509
+> - rename lib/mbedtls/sw_ecdsa.c to lib/mbedtls/ecdsa.c
+> - enhance dependencies for ECDSA_MBEDTLS
+> - fix support of ecdsa521/secp521r1
+> - add vboot test using ecdsa
+>
+> Changes in v3:
+> - do not use _MBEDTLS in mbedtls_def_config.h
+> - check returns and remove mem leak in lib/mbedtls/ecdsa.c
+> - remove useless field  *k in struct ecdsa_test_vector_s
+> - check returns in test/lib/ecdsa.c
+> - fix third parameter when calling sha*_csum_wd()
+> - add support of ecdsa in pre-load header
+>
+> Changes in v4:
+> - change some dependencies to enable ecc
+> - use ECDSA_MBEDTLS to build the ecdsa driver
+> - support ecdsa521 and secp521r1
+> - add a test calling ecdsa_verify for the ecdsa class
+> - merge patch 10 and 11 (support ecdsa pre-load for binman and tests)
+> - several code cleanup
+>
+> Change in v5:
+> - fix ecdsa 521 in the first patch (instead of the 5th patch)
+> - mbedtls: ecdsa is only compiled when ECDSA_MBEDTLS is enabled
+> - fit_image_setup_sig: required_keynode is initiazed to -1 instead of 0
+> - avoid hardcoded value for ecdsa sig and point size
+> - check pointer before using them
+> - free ecdsa keys when key are not found/used
+>
+> Change in v6:
+> - fix dependencies for ecdsa
+> - ecdsa is no more mandatory for tls
+> - remove include u-boot/ecdsa.h in ecdsa-sw.c
+> - do not use fdt_stderror with -1
+> -
+>
+> Change in v7:
+> - change uint8_t to u8 in test/dm/ecdsa.c
+> - change info->required_keynode >=3D 0 in lib/ecdsa/ecdsa-verify.c
+> - set required_keynode to -1 in test/dm/ecdsa.c
+>
+> Change in v8:
+> - check exact size of data read in dtb in function fdt_get_key
+> - enhance commit message to explain patch 2 (enable ecc)
+> - no longer use macro CHECK with goto inside macro
+> - some code cleanup
+>
+> Change in v9:
+> - rebase on next
+> - update cover letter
+>
+> Change in v10:
+> - remove empty line at the end of ecdsa-sw.c
+>
+>
+> Philippe Reynes (15):
+>    ecdsa: fix support of secp521r1
+>    mbedtls: enable support of ecc
+>    ecdsa: initial support of ecdsa using mbedtls
+>    test: lib: ecdsa: add initial test
+>    drivers: crypto: add software ecdsa support
+>    test: dm: ecdsa.c: clean this test as software ecdsa is now
+>      implemented
+>    test: py: vboot: prepare integration test for ecdsa
+>    test: vboot: add test for ecdsa
+>    tools: fit_image_setup_sig: set required_keynode to -1
+>    tools: mkimage: pre-load: add support of ecdsa
+>    tools: binman: pre-load: add support of ecdsa
+>    boot: pre-load: add support of ecdsa
+>    tools: preload_check_sign: add support of ecdsa
+>    test: py: vboot: prepare test for global signature with ecdsa
+>    test: py: vboot: add test for global signature with ecdsa
+>
+>   boot/image-pre-load.c                         |  53 +-
+>   configs/sandbox_defconfig                     |   2 +
+>   drivers/crypto/Makefile                       |   1 +
+>   drivers/crypto/ecdsa/Makefile                 |   6 +
+>   drivers/crypto/ecdsa/ecdsa-sw.c               |  31 ++
+>   include/crypto/ecdsa-uclass.h                 |  15 +-
+>   include/crypto/internal/ecdsa.h               |  39 ++
+>   lib/ecdsa/Kconfig                             |   1 +
+>   lib/ecdsa/ecdsa-libcrypto.c                   | 104 +++-
+>   lib/ecdsa/ecdsa-verify.c                      |  73 ++-
+>   lib/fdt-libcrypto.c                           |   2 +-
+>   lib/mbedtls/Kconfig                           |  24 +
+>   lib/mbedtls/Makefile                          |  20 +-
+>   lib/mbedtls/ecdsa.c                           | 152 ++++++
+>   lib/mbedtls/mbedtls_def_config.h              |  41 +-
+>   test/dm/ecdsa.c                               | 107 +++-
+>   test/lib/Makefile                             |   1 +
+>   test/lib/ecdsa.c                              | 456 ++++++++++++++++++
+>   test/py/tests/test_fit_ecdsa.py               |   2 +-
+>   test/py/tests/test_vboot.py                   | 148 +++---
+>   .../tests/vboot/sandbox-binman-ecdsa256.dts   |  24 +
+>   .../tests/vboot/sandbox-binman-ecdsa384.dts   |  24 +
+>   .../tests/vboot/sandbox-binman-ecdsa521.dts   |  24 +
+>   ...pss.dts =3D> sandbox-binman-rsa2048-pss.dts} |   0
+>   ...-binman.dts =3D> sandbox-binman-rsa2048.dts} |   0
+>   .../vboot/sandbox-u-boot-global-ecdsa256.dts  |  27 ++
+>   .../vboot/sandbox-u-boot-global-ecdsa384.dts  |  27 ++
+>   .../vboot/sandbox-u-boot-global-ecdsa521.dts  |  27 ++
+>   ... =3D> sandbox-u-boot-global-rsa2048-pss.dts} |   0
+>   ....dts =3D> sandbox-u-boot-global-rsa2048.dts} |   0
+>   ....its =3D> sign-configs-sha1-rsa2048-pss.its} |   0
+>   ...sha1.its =3D> sign-configs-sha1-rsa2048.its} |   0
+>   .../vboot/sign-configs-sha256-ecdsa256.its    |  44 ++
+>   .../vboot/sign-configs-sha256-ecdsa384.its    |  44 ++
+>   .../vboot/sign-configs-sha256-ecdsa521.its    |  44 ++
+>   ... sign-configs-sha256-rsa2048-pss-prod.its} |   0
+>   ...ts =3D> sign-configs-sha256-rsa2048-pss.its} |   0
+>   ...56.its =3D> sign-configs-sha256-rsa2048.its} |   0
+>   ...84.its =3D> sign-configs-sha384-rsa3072.its} |   0
+>   ...s.its =3D> sign-images-sha1-rsa2048-pss.its} |   0
+>   ...-sha1.its =3D> sign-images-sha1-rsa2048.its} |   0
+>   .../vboot/sign-images-sha256-ecdsa256.its     |  42 ++
+>   .../vboot/sign-images-sha256-ecdsa384.its     |  42 ++
+>   .../vboot/sign-images-sha256-ecdsa521.its     |  42 ++
+>   ...its =3D> sign-images-sha256-rsa2048-pss.its} |   0
+>   ...256.its =3D> sign-images-sha256-rsa2048.its} |   0
+>   ...384.its =3D> sign-images-sha384-rsa3072.its} |   0
+>   tools/binman/etype/pre_load.py                |  78 ++-
+>   tools/binman/ftest.py                         |  50 ++
+>   tools/binman/test/ecdsa521.pem                |   7 +
+>   tools/binman/test/security/pre_load_ecdsa.dts |  22 +
+>   .../security/pre_load_ecdsa_invalid_algo.dts  |  22 +
+>   .../security/pre_load_ecdsa_invalid_key.dts   |  22 +
+>   .../security/pre_load_ecdsa_invalid_sha.dts   |  22 +
+>   tools/image-host.c                            |  93 +++-
+>   tools/image-sig-host.c                        |   7 +
+>   tools/preload_check_sign.c                    |  30 ++
+>   57 files changed, 1892 insertions(+), 150 deletions(-)
+>   create mode 100644 drivers/crypto/ecdsa/Makefile
+>   create mode 100644 drivers/crypto/ecdsa/ecdsa-sw.c
+>   create mode 100644 include/crypto/internal/ecdsa.h
+>   create mode 100644 lib/mbedtls/ecdsa.c
+>   create mode 100644 test/lib/ecdsa.c
+>   create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa256.dts
+>   create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa384.dts
+>   create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa521.dts
+>   rename test/py/tests/vboot/{sandbox-binman-pss.dts =3D> sandbox-binman-=
+rsa2048-pss.dts} (100%)
+>   rename test/py/tests/vboot/{sandbox-binman.dts =3D> sandbox-binman-rsa2=
+048.dts} (100%)
+>   create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa256.d=
+ts
+>   create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa384.d=
+ts
+>   create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa521.d=
+ts
+>   rename test/py/tests/vboot/{sandbox-u-boot-global-pss.dts =3D> sandbox-=
+u-boot-global-rsa2048-pss.dts} (100%)
+>   rename test/py/tests/vboot/{sandbox-u-boot-global.dts =3D> sandbox-u-bo=
+ot-global-rsa2048.dts} (100%)
+>   rename test/py/tests/vboot/{sign-configs-sha1-pss.its =3D> sign-configs=
+-sha1-rsa2048-pss.its} (100%)
+>   rename test/py/tests/vboot/{sign-configs-sha1.its =3D> sign-configs-sha=
+1-rsa2048.its} (100%)
+>   create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
+>   create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
+>   create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
+>   rename test/py/tests/vboot/{sign-configs-sha256-pss-prod.its =3D> sign-=
+configs-sha256-rsa2048-pss-prod.its} (100%)
+>   rename test/py/tests/vboot/{sign-configs-sha256-pss.its =3D> sign-confi=
+gs-sha256-rsa2048-pss.its} (100%)
+>   rename test/py/tests/vboot/{sign-configs-sha256.its =3D> sign-configs-s=
+ha256-rsa2048.its} (100%)
+>   rename test/py/tests/vboot/{sign-configs-sha384.its =3D> sign-configs-s=
+ha384-rsa3072.its} (100%)
+>   rename test/py/tests/vboot/{sign-images-sha1-pss.its =3D> sign-images-s=
+ha1-rsa2048-pss.its} (100%)
+>   rename test/py/tests/vboot/{sign-images-sha1.its =3D> sign-images-sha1-=
+rsa2048.its} (100%)
+>   create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa256.its
+>   create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa384.its
+>   create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa521.its
+>   rename test/py/tests/vboot/{sign-images-sha256-pss.its =3D> sign-images=
+-sha256-rsa2048-pss.its} (100%)
+>   rename test/py/tests/vboot/{sign-images-sha256.its =3D> sign-images-sha=
+256-rsa2048.its} (100%)
+>   rename test/py/tests/vboot/{sign-images-sha384.its =3D> sign-images-sha=
+384-rsa3072.its} (100%)
+>   create mode 100644 tools/binman/test/ecdsa521.pem
+>   create mode 100644 tools/binman/test/security/pre_load_ecdsa.dts
+>   create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_al=
+go.dts
+>   create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_ke=
+y.dts
+>   create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_sh=
+a.dts
+>
+-- This message and any attachments herein are, unless otherwise stated, co=
+nfidential, intended solely for the addressees and are SoftAtHome=E2=80=99s=
+ ownership. Any unauthorized use, reproduction or dissemination is prohibit=
+ed unless formaly agreed beforehand by the sender. If you are not the inten=
+ded addressee of this message, please immediately delete it and all its att=
+achments from your computer system and notify the sender. SoftAtHome reserv=
+es the right to monitor all email communications through its networks. Any =
+views or opinions presented are solely those of its author and do not neces=
+sarily represent those of SoftAtHome. The internet cannot guarantee the int=
+egrity of this message. SoftAtHome not shall be liable for the message if a=
+ltered, changed or falsified. While we take all reasonable precautions to e=
+nsure that viruses are not transmitted via emails, we recommend that you ta=
+ke your own measures to prevent viruses from entering your computer system.=
+ SoftAtHome is a French Soci=C3=A9t=C3=A9 Anonyme with a Board of Directors=
+, having a capital of 6 450 699 Euros having its registered office located =
+at 9-11 rue du d=C3=A9barcad=C3=A8re =E2=80=93 92700 =E2=80=93 Colombes =E2=
+=80=93 France =E2=80=93 Tel + 33 (0)1 57 66 88 88 =E2=80=93 Fax + 33 (0)1 5=
+7 66 88 89 - RCS Nanterre B 500 440 813 =E2=80=93 Intra-Community VAT: FR 0=
+4500440813 -- Ce message et toutes les pi=C3=A8ces jointes qui y sont inclu=
+ses sont, sauf indication contraire, confidentiels, destin=C3=A9s uniquemen=
+t aux destinataires et sont la propri=C3=A9t=C3=A9 de SoftAtHome. Toute uti=
+lisation non autoris=C3=A9e, reproduction ou diffusion est interdite, sauf =
+accord formel pr=C3=A9alable de l'exp=C3=A9diteur. Si vous n'=C3=AAtes pas =
+le destinataire pr=C3=A9vu de ce message, veuillez le supprimer imm=C3=A9di=
+atement ainsi que toutes ses pi=C3=A8ces jointes de votre syst=C3=A8me info=
+rmatique et en informer l'exp=C3=A9diteur. SoftAtHome se r=C3=A9serve le dr=
+oit de surveiller toutes les communications par e-mail via ses r=C3=A9seaux=
+. Les opinions exprim=C3=A9es dans ce message sont celles de leur auteur et=
+ ne repr=C3=A9sentent pas n=C3=A9cessairement celles de SoftAtHome. L=E2=80=
+=99Internet ne permettant pas d=E2=80=99assurer l=E2=80=99int=C3=A9grit=C3=
+=A9 de ce message, SoftAtHome d=C3=A9cline toute responsabilit=C3=A9 =C3=A0=
+ ce titre, dans l=E2=80=99hypoth=C3=A8se o=C3=B9 il aurait =C3=A9t=C3=A9 al=
+t=C3=A9r=C3=A9, d=C3=A9form=C3=A9 ou falsifi=C3=A9. Par ailleurs et malgr=
+=C3=A9 toutes les pr=C3=A9cautions prises pour =C3=A9viter la pr=C3=A9sence=
+ de virus dans nos envois, nous vous recommandons de prendre, de votre c=C3=
+=B4t=C3=A9, les mesures permettant d'assurer la non-introduction de virus d=
+ans votre syst=C3=A8me informatique. SoftAtHome est une Soci=C3=A9t=C3=A9 A=
+nonyme fran=C3=A7aise =C3=A0 Conseil d=E2=80=99Administration ayant un capi=
+tal de 6 450 699 euros, dont le si=C3=A8ge social est situ=C3=A9 au 9-11 ru=
+e du d=C3=A9barcad=C3=A8re - 92700 - Colombes - France - Tel + 33 (0)1 57 6=
+6 88 88 - Fax + 33 (0)1 57 66 88 89 RCS Nanterre B 500 440 813 - TVA intrac=
+ommunautaire : FR 04500440813
