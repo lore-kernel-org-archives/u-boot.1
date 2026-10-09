@@ -4,172 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2954FCA6019
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 14:31:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43F52CA6015
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 14:34:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CA029809B0;
-	Fri,  9 Oct 2026 14:31:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 18155813FD;
+	Fri,  9 Oct 2026 14:34:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ga5B0sYaUoIb; Fri,  9 Oct 2026 14:31:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1A905813B0
+ id LiQNdaN--e1h; Fri,  9 Oct 2026 14:34:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8AF72811FD
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791556293;
-	b=F72hahfjn083FJLs7/9rDnH0nQAWj05/CQYNwetOhv4S3/sxAb4mUDr5jKEQgYX5gMZX
-	 cJSjnJqyqJpRcOuzrByqlux6s4I4NxzFaICHcL6wXyZhqWOiswJscY5Hoe0hfbwPMSN/J
-	 6dj7aJ4/iY+8KE68/6rYRvIcmNsWk7nVu6Qnb4rP/DR7dMRbS8B/GLwpJzjNM2TWleOxR
-	 Wn9zz3LEB9GN7IeyBfWpwK66d9xgLI4/e2l4T4+SWYLuTSA+NLXCl/GbPECVfnwraNnio
-	 nFOBXN5eHPgDwz2xd6M+64YuFG8xmlbQneelZCmqZi/xNlZZAZ8anH6Yh0BaiwpTUrA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791556486;
+	b=XScA0rduOZFb4+9pTE+qQnwqDNK5MptgcnqmtHWBRtWF6lkhDiHJRU/wODGaG6wKfHvp
+	 oZZl6FmbxlADUvZKFKyCOaQiNRMylGFyhNZwUqCVlFfgEdgJFMvFtyT00rnv5szMaa/+d
+	 8tdAxB4tEDFks7B9RDPYpcOUjwFYWN/BZU+/wiov2cOcYt5u+UQ939TQsM8k+IvIzd/3T
+	 K1rc/EQ8BtPyST7naxF9CmeqfLDw6DxTqTbA5G8PA62S+HXjT/vdUhnrjigHDueEJvhP8
+	 RaGONoY/mlkEBDCHm+oXKPg9dKJ4g+sSVBsda1MBlMGH/Gg+JF9cqjrwjImfliHmTUw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791556293;
+	c=relaxed/relaxed; t=1791556486;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-BeenThere:X-Mailman-Version:
+	 Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=FP8KQEwruwWB0w1RXQNGCIrQqlLamBdb5tbSGNyoDU4=;
-	b=ffJ3MyKfU6BM1OYQbPMAwCgHlmfxP3h6BME7eoO7LiTRL4/2kHSt64o0qPvul/dftYG4
-	 H6EwHWJVFI3WFJ5ycsMeqsBq7CoB7wAKig1vpz4+trTa2+kt6NI/slrvPHCjENbHNC5fb
-	 rhi82R3ePIimNL82MlP16keHs+mgaMWfIIqNt08w4RFhoAA5GMMpixAsUtlgWnN6+xBuK
-	 qHPQcJ/IlEuB5OaYYxoJHiWJhsx1fJ3VcOKKuzy+zMyRzybfx9w3ZNX4typnCJDUCA1zr
-	 IL70SBWP4O2M4cWDdQeJ0JqHPBC+lAO846Ly9kjhVnDdWWP7R9PW3vccC8WQucu8lJA==
+	bh=xSvq3Or5wfTfjh55+IPK6H+w+AsRpbKi4JlgjI+f0KY=;
+	b=IL+52ocqlqWf5yhb0IsCLpN2Q6EHa+5Pyqye29OBeHNH/CXLq17kmdzINYfFM8RHffw7
+	 xQSCC4c9EsRxoNX4CoaHCG/tEi7kqHbfQNs331+XQ+npQxZBSGi1PcwWSedBJaUI5bmrC
+	 W6DQ9gf+m38cWC86qGF3WqQ4ALuETsk8BEzyoo+z5iD5dyMC+/lDxKUkrlbZdBPO/TfZS
+	 IulaEEGQm4mt/UoSgaFEFyZiOkuKO2WOh1asHwp4Cl2hFxaETWNDQdQHDAlnXDlZ2SHXS
+	 5IXQGghOvu2p8mg01o2BlBqE6sOl62j9VM/buJiaVFUb2V241EJLtDiWjrjB65E1FPw==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791556293;
-	bh=FP8KQEwruwWB0w1RXQNGCIrQqlLamBdb5tbSGNyoDU4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791556486;
+	bh=xSvq3Or5wfTfjh55+IPK6H+w+AsRpbKi4JlgjI+f0KY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qv7kGcClMClsBLo6yprcpMpNMvAHT7Hlxi12n5ndz85rHJZl0yiO8vg+2t0J1nwZy
-	 SOFwPjJq1HkIMZsfyXzjXFOaJxrgN6mp0jA8R8jGi5JNo4lAhWgzoJ9uuMb4Rc3Veo
-	 Szea9m2xcHBifZu4X+cJWdfukelHS4oOSA0x1bKF3UBd9mUkBMvJcIGx8zFVgIdiKP
-	 K6LPMe6dvYP6ZFWIh3+9yrGJlB7Y9MvZZLpMd7NPd1Pk+w+yfSod8niDfSsPsbNVs1
-	 JUUsSIwn8xfgltD5qYPC9+b7u5YE8Kg+/BYtdU6IybmxQFDs/rTa/yWEY49fTdPZQV
-	 VRPZs0y9PY4kw==
+	b=e0OOsvJOAvaeBlBxhtPCH/wP48cAH8vMvSG6qDB7YzA/loG6sxx44cBfnmoGZ7Vvr
+	 OyHjqFH2Kft3B9/lubjWW+LJWx6jZvZDZpQtHW6MmgXwWMmKFAnlG3VfeIsNx3DPeD
+	 IiNHlvmgmNNh4ACdKKwMiAqvEPGkkPOayeY42/byRTTeDrddngmxIFzKdp2NeNz6P3
+	 Jm/b1PBBNxCvF4ZK13r6r/QWNSehV5jACUlSXo4jFK3nSdkPEYYyaZY4SZm2bi6j8L
+	 LxD6wUCmDCJOk7dC+QS531Ud3ZxXavnog+KRDSmLA7plNlr3cl00UWyDz/yxK4kfDo
+	 IQQpReBeVOLBQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1A905813B0;
-	Fri,  9 Oct 2026 14:31:33 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id A4167356
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 14:31:31 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8AF72811FD;
+	Fri,  9 Oct 2026 14:34:46 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8E5532AA
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 14:34:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8A050408CA
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 14:31:31 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 736D160680
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 14:34:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id koyLA84iKJSe for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 14:31:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C3DF7408AC
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::a2b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791556290;
- b=F8+JGbQuZFZzcBWmfvVhrvIL0ZqzAMmgrmpEFvPT5BD5qGpGKHxBfeOS+m0FrEbGbSaG
- hmYsbY+Kyx8bGDZe4JNMnRNJfQz1UogQIql7T6LRIHFRym+fKxjRjHh10eLUSGMxLlOBY
- 9gNzKvM9yJWCANxqVEPsJ/nsQAEql3vwSCiWKxJNCMTn6H37AsTuV1d3YXEdQNZ7hQqON
- R73/vwIXjDXiYhWNlU5niWxi6etx//5h2J3HTXwz4d7oMn99FJtydD7dhjANK65xvXtBJ
- SCpXB0r6Vw049OyU86BTB3onPoLf2jTdcbu8J83Ma6iV6K7bRhnnhXAckU4NDda50NQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1dlG7ynkl3Jn for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 14:34:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 63D1B60661
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=217.140.110.172
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791556483;
+ b=GBVxegINTJYGkKTUapbX5zojEp3st6GQZCkjhTI1yG+pQOEoTCVj/dVUqhf/OgzviRuR
+ sjUlS+PIt8xUSZrhPYRwZLdfrCixIlL8Uv2DrCXyjB+Fjs7GkcqOLGtyJz7DeMA1QefJx
+ rrf+MESYutxGZ5y2vYbMOuLlL8Vt54m/8vUxv+oUxOf7hWe0sjJK46mz3wngnDsoh4O4u
+ IUuv3r1uNNpBjDenmFEKO7MjI71bzKxukv+1FLowiqq5plaPaXSsno/EIyTJZ7pixSOH3
+ 2h10wkXs86cU0Nsdpm6XeQOKhxl7+dCCkGOTpcCsQhoxB6EdnxqfKzFjKhV0hQkSOLw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791556290;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
- Content-Type:Content-Disposition:In-Reply-To;
- bh=FP8KQEwruwWB0w1RXQNGCIrQqlLamBdb5tbSGNyoDU4=;
- b=q2+Wv1FmhLr7TL5Fj0T6keKvJ2W+61u0hu1urVd17VU9TAhuB1CJRoXAdlLUUeqllGdE
- 6zPH5BFcY2mnZTVke44j3j+KF81Y/8SdzAOlhkPyO/hAM5IjH8Yn0PRuYT+38reIdNqJ5
- MnJhD4uXH0FOfV7sL3xsyNRGO2cEuxl12OgUMhcMVl3a1tFrUZ+/MTSnhdU/wa/FyTKkD
- VKdP7g46z2/0Sgdqq+T5KHB0cHnsgD3pcLiF8Rm9KXuy+IN4WRx1j5dRdiqDFOCBXTFMO
- ZwueNl8In8Q+jbOhvUzPOTQKEAtihAyPld8rAgyXsSTH40ZxNzkGN2kQKdexrLUYemw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=none header.from=baylibre.com;
- dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=ZOTQl5sG; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::a2b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::a2b; helo=mail-vk1-xa2b.google.com;
- envelope-from=hfranco@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=ZOTQl5sG
-Received: from mail-vk1-xa2b.google.com (mail-vk1-xa2b.google.com
- [IPv6:2607:f8b0:4864:20::a2b])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C3DF7408AC
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 14:31:27 +0000 (UTC)
-Received: by mail-vk1-xa2b.google.com with SMTP id
- 71dfb90a1353d-5e9239c772cso413987e0c.2
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 07:31:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1791556287; x=1792161087;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=FP8KQEwruwWB0w1RXQNGCIrQqlLamBdb5tbSGNyoDU4=;
- b=ZOTQl5sGTsACeYZZ5LLEEtsB/Pao3e3yUW2wa+M8mP2ykdDy9fnFh4V8VN5VmUJ6Cq
- vbzlmgZwyXi6lY6L6gqfAe1Si0i6gcxHKDOnEjqxaC65/5sKeD6D+60XZZA8xQb33pd1
- uKM8HX5RqLzqsk72XisNNMv/hA5AJw36qID1hD0lapD+vU8WHjibxn+xZPzwONJ109Vw
- I5iSA9yXHXRdESEvxWtCvu2gynA+3YTaSXIw3TOChbXMYg04IVrSG5S3oqQlCPKWe5I4
- norFWvPp+CHmkBsNCL76DbGJ2/jUr88jTCkfWNMp4mdhylbbKa7NxTbO1Z97Wsu4oNfN
- OJvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791556287; x=1792161087;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=FP8KQEwruwWB0w1RXQNGCIrQqlLamBdb5tbSGNyoDU4=;
- b=tTWjR7LhO7CctyxqGmqk2K6RVYeduN4fp1g3bTEVxVfBbBDMNsWv27BmjTKfDzHmui
- yYh54gi3vV/tIgxkb24B1zXXipvk9VcTpnyRMl1uqjQhMe5/Iqa2E8s6289modCPhoV3
- T+k8pdtnMS3bahEz/vrHAODFGh4jsmmu/J0jKbWi30/hMqhNEkRAoaKdJmfUPW/oTmeT
- NRhjC2Fv0B3mMYZqTS9iipJisbjR0vlEHCy2qT7Bgie2VaqMcqTcml1zCE+zz7OOaOw/
- uvFFN53N7ZO1te5TL2JWjbwcDGYJjfNeLHNBDDKCllBCPZdCfxpVgvsQyXMZnahuOxkB
- YRhA==
-X-Forwarded-Encrypted: i=1;
- AKwUvByRCJu2MPR/fr+Xp/Hb/yO106OyGE4ttag9yHUVLmtF1e42lZkOYyeyCeXF+oDv/DbOJwcYcII=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJ7qWNJdmOnwhbO824cTIiLZdNTm7EkQaiqq3HPgfdHaXLolK3l
- GralzDBFHZaJqw/kHkdk/pogxV3Zstb5VI7PoNFpG2j8y985CGMLA9HbHZJBGydMx+4bN1TbDAb
- l4Jwv
-X-Gm-Gg: AYBFou3VAc3hhzaWEXN1F+bGUHKxBMReTv8DS/LxWxWDk+Aze+TPvkI4Zzbt7xoxaEu
- rz9a0WpAlr2g8OQaPJl0X5xsVYHZkbqTTKoWXOItYo/jJFLinWFK93dEdAGI4/sWclECEZ9BDCc
- pxlo/pu2R1X//PNJV62TuhIUrWpx813am5ngJe1AeR6A2kfevTt3z8RvNN11gl+MFU+e5Drn+bz
- 400xEDXMPdfVrGUSFFEoV1rgMB5eMPNhDbjSU681VdIqMm0QPdEfGE8Ozut8Dlu8j3xtfVgvbvj
- 81Sd8aVCh0uoJvvpJzQ8BJ6XkeaXF7MIMCKfgT59gs3md3IG6/OoBJbCJNMrvhLGrio/JYe5Xoj
- drchmX/XUAKH3vo5VTT8l0hBmEal8F9orFM61R6rrFzPRD0TgddS4YUEUbl1BEzmNDK5E+63m9u
- y9EehrBxw/6RzB+WNCsd5edDYmDuYo+LTE1UqpZRe7tFB77WG5joYIoVWNLGCJqbTMDWL1jnORP
- ju70ZV2UNbDkoo9OMZTyRFi7dCoi3Rk
-X-Received: by 2002:a05:6122:181e:b0:5de:655e:404e with SMTP id
- 71dfb90a1353d-5e91f4d2596mr742131e0c.15.1791556286689; 
- Fri, 09 Oct 2026 07:31:26 -0700 (PDT)
-Received: from hiagonb ([2804:14c:4c5:8bf0::ffae])
- by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-99003d37009sm1743371241.2.2026.10.09.07.31.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Oct 2026 07:31:25 -0700 (PDT)
-Date: Fri, 9 Oct 2026 11:31:21 -0300
-From: Hiago De Franco <hfranco@baylibre.com>
-To: Yao Zi <me@ziyao.cc>
-Cc: Leo Yu-Chi Liang <leo.liang@sifive.com>, 
- u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Tim Ouyang <tim609@andestech.com>, 
- Zhuxu Ran <zhuxu_ran@zohomail.com>, Kongyang Liu <seashell11234455@gmail.com>
-Subject: Re: [PATCH 0/2] riscv: cv1800b: Milk-V Duo boot fixes
-Message-ID: <asj6OaDxcTTEUvm6@hiagonb>
-References: <20260930-256m-fixes-v1-0-69546876ff28@baylibre.com>
- <asa-S7LCji4uX4af@pie>
+ c=relaxed/relaxed; t=1791556483;
+ h=Received-SPF:Received:Received:DKIM-Signature:Message-ID:Date:
+ MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+ From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ bh=xSvq3Or5wfTfjh55+IPK6H+w+AsRpbKi4JlgjI+f0KY=;
+ b=Xs6lIC1INBljVRzmcX6rIYJLP/Qp3DsTYiJIqvlRwIYjy4YpREBOgp04gaVe52H0rUGU
+ 1DNlM2hU4gXodKxO8QV0oh6s4Xj/HGY8RVJy5MnemWUy59bFs0wxXcse06I5bTLPSX7Fl
+ +QNkLHp3xh2YwqN4bXVX296JEWiq+4qFwtjp3q7aOXWD+bGRsOD7iuSMqPLOCszvyGTJ3
+ N0+MbTynsetJTEgJP5g+/2i3uwGlaIgXD/TbvL6cGFyytnY2rbI1cJc9H3deUruTbADUf
+ /WPEIxmtTa5WTSem38fD7yjsZG3mOUhB9cTEjxCeWzVORMzWPzqg3iBQ3GTs50ebhCA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=arm.com;
+ dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
+ header.b=M7NTXEnV; 
+ arc=none smtp.remote-ip=217.140.110.172
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
+ helo=foss.arm.com; envelope-from=andre.przywara@arm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
+ header.s=foss header.b=M7NTXEnV
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 63D1B60661
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 14:34:41 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7075F1BB2;
+ Fri,  9 Oct 2026 07:34:37 -0700 (PDT)
+Received: from [192.168.178.24] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id
+ 44A393F66F; Fri,  9 Oct 2026 07:34:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1791556480; bh=jlzMa0qhsV3s6TQpGmRzA74DVbECH23C+r3/Vq3xTgc=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=M7NTXEnVtwz7PtF5z9psPcCqorxcWW4tMIyt4Ps7mZhQKIV8pptv4ea4h9sKNnkhC
+ BXGCMIDIgD4UtNgV+1CZEMEfzUP1fIFmWSUR9pFURaayXt7SV5rS+uJPcc5vy8DIhg
+ MWa7wEcMQQTr9pKBzZJZfk9allmQgwUxGNfn2mIs=
+Message-ID: <3f57db40-a604-4800-b15f-2d159a3a5ca7@arm.com>
+Date: Fri, 9 Oct 2026 16:34:38 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <asa-S7LCji4uX4af@pie>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/9] sunxi: Add support for A733 SoC
+To: Vinicius Pedrosa <vinicius.eduardo.pedrosa@gmail.com>,
+ Yixun Lan <dlan@gentoo.org>
+Cc: u-boot@lists.u-boot-project.org, linux-sunxi@lists.linux.dev,
+ Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Paul Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>
+References: <20260113-01-a733-soc-support-v3-0-f19dcd098f60@gentoo.org>
+ <20261009120356.194364-1-vinicius.eduardo.pedrosa@gmail.com>
+Content-Language: en-GB
+From: Andre Przywara <andre.przywara@arm.com>
+In-Reply-To: <20261009120356.194364-1-vinicius.eduardo.pedrosa@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -183,59 +144,106 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hello,
+Hi Vinicius,
 
-On Wed, Oct 07, 2026 at 09:48:59PM +0000, Yao Zi wrote:
-> On Wed, Sep 30, 2026 at 09:17:48AM -0300, Hiago De Franco wrote:
-> > This series fixes two problems on the Sophgo CV1800B/SG2002 Milk-V Duo
-> > boards.
-> > 
-> > Patch 1 fixes the fdtfile environment variable of the Milk-V Duo 256M.
-> > CONFIG_DEFAULT_DEVICE_TREE is a quoted string, so the quotes ended up
-> > in the environment.
-> > 
-> > Patch 2 keeps U-Boot out of the memory reserved for the coprocessor
-> > firmware. The upstream devicetrees reserve the end of DRAM as a no-map
-> > region, but U-Boot relocates to ram_top, which is the end of DRAM, so
-> > it lands inside that region.
+On 10/9/26 14:03, Vinicius Pedrosa wrote:
+> Hi Yixun, Andre,
 > 
-> I think the issue solved by PATCH 2 is introduced during switching to
-> upstream devicetree? Could you please cooperate with Zhuxu so nothing
-> is broken at the first place? Thanks.
+> I'm porting U-Boot to the Radxa Cubie A7Z (A733, 1 GiB LPDDR4) and have
 
-Thanks for the review, you are right. The issue only shows up once the
-boards switch to the upstream devicetrees from Zhuxu's series, and
-Andrei's patches that drop the coprocessor reserved-memory nodes are
-already in the Sophgo tree for linux-next:
+I read this wording ("I port xxx to the <board name>") now multiple 
+times, from different people (blame AI?), but please avoid that.
 
-  6645398c4621 ("riscv: dts: sophgo: cv1800b-milkv-duo: drop reserved memory node")
-  60e4cafd3090 ("riscv: dts: sophgo: sg2002-milkv-duo256m: drop reserved memory node")
+First: The main thing here is the SoC support, the board is just a minor 
+technicality. Once we have the DT bindings(!) settled, and figured the 
+clocks and other basic peripherals, enabling a certain board is not a 
+big problem, it's mostly just the board .dts bits on top of the SoC. 
+dtsi. Relatively easy for boards with schematics.
 
-I tested Zhuxu's v5 plus these two commits applied to dts/upstream,
-without my patch 2, on both Milk-V Duo 64M and 256M. The reserved memory
-error is gone and U-Boot relocates to the top of DRAM as before:
+Second: you *contribute* to the efforts, building on the work of others. 
+Doing this all on your own would be a big effort, and not be 
+recommended, and be it just to avoid working in the wrong direction.
 
-  Duo 64M:  relocaddr = 0x83f79000
-  Duo 256M: relocaddr = 0x8ff6e000
-
-So I will drop patch 2 and send a v2 with only the fdtfile fix.
-
-Zhuxu (Cc'd), to avoid breaking these boards in between, could you carry
-those two devicetree changes in your series, or should we wait for the
-next dts/upstream sync that includes them before your series is merged?
-
+Third: Honest question, is it really *you*, or is it some LLM? I grew a 
+bit suspicious lately when it comes to lengthy contributions out of the 
+blue from "new" people.
+   > a board series (DTS, defconfig, MAINTAINERS, doc) on top of your A733
+> work. Before posting it I'd like to settle the base and the boot flow.
 > 
-> Regards,
-> Yao Zi
+> With A733/next (165f07a69706), TF-A A733 (f4c0b0dba78a) and sunxi-tools
+> PR #223, the SPL/FIT flow works here: boot0 trains DRAM, drops into FEL
+> on "2" over UART, and the SPL loads BL31 and U-Boot. I had to clamp the
+> SPL's fixed 2 GiB to the board's 1 GiB, and BL31 was linked for DRAM at
+> 0x48000000, which the vendor kernel needed.
 > 
-> > This was tested on both Milk-V Duo 64M and 256M (CV1800B and SG2002).
-> > 
-> > Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
-> > ---
-> > Hiago De Franco (2):
-> >       board: sophgo: milkv_duo_256m: fix fdtfile quoting
-> >       riscv: cpu: cv1800b: keep U-Boot out of reserved memory
+> Andre's suggestion from January works too: load BL31 and U-Boot proper
+> directly over FEL, no FIT. I used BL31 at 0x48000000 and U-Boot at
+> 0x4a000000, then reset64 into BL31. The RMR request gets the core to
+> AArch64 EL3 without an SPL, and the same BL31 and U-Boot binaries reach
+> the prompt.
 
-Best regards,
--- 
-Hiago
+Please note that this is all temporary. IIUC, some people already 
+cracked the DRAM init, within a mainline U-Boot base, which involves 
+uploading some firmware to the DRAM controller. I haven't seen any code 
+yet, but I guess it sits tightly on some github.
+So we don't need to make those hacks we are using for now pretty, it 
+just needs to be something usable.
+
+What I am using meanwile:
+Have *just* boot0 on an SD card, which automatically drops into FEL, if 
+it can't find the rest of the firmware. From there I just upload U-Boot 
+proper and TF-A, maybe the kernel via FEL.
+I have masssaged Yixun's patches to just cover U-Boot proper, which 
+looks much cleaner. I will post that at some point, but it's all a bit 
+premature without having the SoC .dtsi, which is still waiting for the 
+clock DT binding headers.
+  > What's missing there is the RAM size. I couldn't find a usable size
+> from boot0 in SRAM after entering FEL. Without it U-Boot falls back to
+> get_ram_size(), whose probe range covers BL31 and goes past the 1 GiB,
+> so I didn't let it run.
+
+Why not? Probing DRAM is somewhat the idea of that routine, and it 
+should restore the previous values it overwrote? So have you tried 
+running that?
+
+As for the rest: as I mentioned above, there is no reason in finding a 
+proper solution for that problem: we will have proper DRAM init soon 
+enough, it seems, and then the size will be at the right place in SRAM.
+Meanwhile either hardcode it or place a memory node in the DT already.
+
+Cheers,
+Andre
+
+> I added a "reset64-dram" command to sunxi-tools
+> on top of #223: the thunk writes the usual SPL header with dram_size at
+> 0x47000 once FEL has handed over, right before the RMR request. U-Boot
+> reads it as is. The A7Z U-Boot came up that way with 1 GiB from the
+> header and a working SD card.
+> 
+> The default SRAM BL31 layout clashes with that header. BL31 at 0x62000
+> has its .bss at 0x46000-0x48400 and clears it at startup, header
+> included, in the SPL flow as well. I ran that layout on October 7 and
+> got 1 GiB at the prompt, but didn't trace where the size came from.
+> 
+> Questions:
+> 
+> 1. Which base should the A7Z series go on: A733/next, boot-2026.04 or
+>     your next revision? The A7A defconfig differs between them (FIT at
+>     0x4d000000 vs 0x48200000). Would SPL_LOAD_FIT_ADDRESS and
+>     SPL_RAM_DEVICE fit better as SoC defaults?
+> 
+> 2. Andre, is direct FEL with an explicit size header something you'd
+>     take as a documented boot path, or do you prefer SPL/FIT?
+> 
+> 3. For the size handoff, would you rather keep the header out of the
+>     BL31 SRAM range, or use another interface? I'd also like to replace
+>     the SPL's fixed 2 GiB without a board-specific hack.
+> 
+> Everything ran from RAM on a single board. Linux, secondary CPUs and
+> UHS are untested with these binaries. If nobody else is on an A7Z port,
+> I'll send the board series and the sunxi-tools change separately once
+> we agree on the approach.
+> 
+> Thanks,
+> Vinicius
+
