@@ -1,126 +1,123 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DD9FCA601E
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 19:55:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D8D1CA601F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 19:55:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B8D85608F1;
-	Fri,  9 Oct 2026 19:55:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 66AA681549;
+	Fri,  9 Oct 2026 19:55:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VLxntn6n-eP6; Fri,  9 Oct 2026 19:55:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 49767608DE
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791575700;
-	b=RHsx5gcn5r4VoUqwUYTesy9uyQDM6nNODZU+xLgSFT7QWn5FquhlNEU5QOc2cWEc0Z2H
-	 pNABCTRtRB97gLqE4/BEcMU9DaaHAhWeDKwFfGvmvmH14qR9LWya6LNIuVDyYWVHpItvy
-	 h2s7VjioE1q1v8+08ZMU4uzB4Y+Pe12xpegoke9g2lXpIzzPqBlf1z2xBR9yyktl08mjl
-	 h6dEBsXsQBpmjy83ZC35NIrT6neDVooUrOEG72/Wtd6eZ+6VlvqWPDQpVyA0BSrP6/GLc
-	 VD6SERahjOIMOAsoch3xdhYWVH0++dCIIfiqHC0MjnI+ohPCpMETJEs1Wqvz3F8QFRQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0QAWAvMPAtdQ; Fri,  9 Oct 2026 19:54:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F09E581539
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791575691;
+	b=d6xncSFuE0GZT1EUHPxwDa47kI7zQi1HelDv4lplG2E5KsItV/vguLJqxi5yqYgYthnA
+	 +MD65XDcrVGTi+Rrpnb4esiQUps1PisptcNtCkykw/srR/O7gLtSBud8gRNL644NW2NDb
+	 gq4JzpNoTqcGNb1YJx6AJ3MgtZWzkAJJZQA1gvO0MYyABxt/u9rm6EwSnjmijiiMMgoLU
+	 sK9stNqYfJbjtScYWiqYtlRyT+rScnXn9EGy+dG3hcqjaXtNG1IOHSvsvKiLuP7Lc3q6x
+	 4LIVhjsxnT2ISGKAc/kdyO5S4BzciJNH3MZsJFIbn+Z1+RD2cr/47KiT5cdGQPCEj7g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791575700;
+	c=relaxed/relaxed; t=1791575691;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
 	 DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:
+	 X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=CtZFjzBCXfmnDHImRgMV/cdzq99+u7FxMByTG88o+hk=;
-	b=PV6N6Z0C2loklso0ZPcxsz/2jlWyp2Rd2D8zjnlm6PM3I0+IpyxQo8Wzt4AtWHsYQcO3
-	 vUMesIJZgtIyD/L5QnHB8TzxxLiybdqd/m5AAhqZVvnTb2LOWIPjCVrIxBG0jZ6hbkdVL
-	 ydMcjFPjNIbZ4JM5Mg9ZKl7djAXPRPHpakoubuCqydGCHA10l8NQo+3xT4BoSquRcl/q6
-	 W80bdIhGJ/Kft4GMQYdU6pwjtmfpnDD/UQqEANtsOUbut8kYW6cJdHNsqCjyzLCiyyn2b
-	 6zz4mvJPRt6ElQBwsD3As3jp0/QZcXbEwn2KKGfwibtSdO9ZU2HLlR9aI9LlDyh1NBg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=pass header.from=mainlining.org;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=hbeRfRao;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=b9VeySzv;
+	bh=h3/IgD1rI0VBx6NoIz8GtZypwmKWHoP4Mf2QCOkbbsI=;
+	b=d5FdE/TFIhs8n8xB6DYdRzn4NFg7zQ1jtKIVDzVdrw0Qk3lE/c1ebZ3D+hQjk4t7z5TY
+	 3NyH42XdR4Ia0p6zo+pNXX4+Mq1wOutq/afCsX6USfDg8NgSsXPqpSA2ysAHkvhUMsp6H
+	 IzwYDzbKgWTllhq1R6r8lALSP1tbClWojkb5uqBz7chV027IE1ib3gGWoVNcYmVln//lf
+	 uki927KQvsmMl3VwpKv1K1xDgt32ApXyZ/SiPLaSgeVr05jZPuU6618MFJEBWiwhlje1z
+	 hTGfBlXXblEhZHxQ44RC898rgfnIZSJfx8nyg3D22FuJ3gwqnEMpivPi84RP8ziAvLQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791575700;
-	bh=CtZFjzBCXfmnDHImRgMV/cdzq99+u7FxMByTG88o+hk=;
+	d=lists.u-boot-project.org; s=default; t=1791575691;
+	bh=h3/IgD1rI0VBx6NoIz8GtZypwmKWHoP4Mf2QCOkbbsI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=eHkSFmV6TV3j3xzMgAzfxqRT2NAVU0k+EctekV20tIdycD75jYgKBiixc0p72Vq07
-	 204H5npnMOTXRrlVOuXweNbl6eUfJxpnNVtHT0RsFvsLUHWoIhT8O9sQUisKsyFY24
-	 YLzb9/F3af3E7ZLDI5D1q93r99EDMUCL9NT4F+C8UcQSHy4Xm3LRr/gm0z4g8qXmaF
-	 fzt9pSfW27kTIq6LtnxxbPCUE9/96D1hX9W4lO3NXrC+M4Q1LsFvZ3MoD+A4iGWmhC
-	 yu4BU74o06jDXlU/EAnXIA+BNm/yE8b3U6djUinfXzfLJgQCulV+sp1QBrSM3m/BEY
-	 c0aEYibsTIjFw==
+	b=o0PUxI45/YZcpFFidWEg2UWPGRPlJm4BB+c0z8JhdDMhgdBJ66jAGaI7Fhc8FsYVr
+	 s7TFaKqoF/Su6XkBA+uzYZ22Sx7eKFjJEPe/Ib60IoEh1zAExvUOOqHYkgsK97hIUy
+	 Paw8swRRcwfP0CiNGDd16Z22YXeWBvKWMQRTgY/hit/fn/QEVv8N76g8iiXWajWFZy
+	 sRLfEYuEv0AONXi1UNf3V0ITq4NkFxAX1KxGLc21CupRDi0GufVaDqETYvY4rVPwHd
+	 skiYrLxIt375lrrN/5oVEXV3bCoLzSqEp9+JScCu9HKcTPuF7jap/fkH7/WLRxG8+L
+	 UZWdg7VGtUxNA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 49767608DE;
-	Fri,  9 Oct 2026 19:55:00 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with UTF8SMTP id BEEC213B
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F09E581539;
+	Fri,  9 Oct 2026 19:54:50 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with UTF8SMTP id 80E7F356
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with UTF8SMTP id A4D46606F8
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:26 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with UTF8SMTP id 7E6DB40053
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024)
- with UTF8SMTP id qhTbxJKGj3X6 for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 19:40:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2823D60844
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791574824;
- b=fOoHLw2iYww+AVZeZybKtFe9d1ldD47PuA2up0MEwMtpw2baBt1fJxI7XXPhl5emo/Zj
- lO8D19Og/tGZRue4INJ3nx8DS/y6Nbcg23WHnNj5I//VSg3UyPy2oD989Z8rIOe8NLGNQ
- YPFNcugeTGCgImgZ/LsycA10W/JMCEr4LBlIoyJhl5Heg3jbk9+wKNzJ1O2nL6+i+0B+0
- odCGmKgVoBT4Cq2JwmIA427X/by7j27G6V7xqkj1nBqwcEgB7JiY934ubK780dPzQoeli
- UJ+BCnKXgFA0p/u7B6VLh97pfGoReTKvVekb3Iw7ZScH61KcMwpFLcLeNZ836QpiX8w==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024)
+ with UTF8SMTP id cdvRKqAcIy4A for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 19:40:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 2D16140080
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791574818;
+ b=EgxFWVCfUDMdTm1pBRbYfRQYIZboMF2ACAIPwXb44Dwb5GpGK/iKbBsdhrCArUza7UAa
+ IkKDM7qHgHLs21cpL4gy05+e8J7HGEpMbv405UpHKERwkyVUsc/BvYjBn5tJT63i9MlQ1
+ JsZ7bYr54EzWivrmKNNM7coUMmDUwcQxQFRnLtYsdHlQIUfZ2JpsUtRwg36Zb8Atrxa1a
+ +1hX2NOEg9QxH6yoOLy3ttLRL8znqEeFqbYr6BS5GE3tY0dEGF2QIOzueyjY1oUyfQDic
+ Ap4+BsAjCuFRsa4VyUoFxLkfbJLUb/aXNdrkFKWYYrH/rn1y2CFfm0OepIHUPW2lxrQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791574824;
+ c=relaxed/relaxed; t=1791574818;
  h=Received-SPF:DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:
- Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
  Content-Transfer-Encoding;
- bh=CtZFjzBCXfmnDHImRgMV/cdzq99+u7FxMByTG88o+hk=;
- b=pkEVxVNXXUeM7BCXck97W58Pff6kaAVqU8Zp9rhoqNbdxPrPQZI8BnLz6O3I8ziBIu0K
- rDYHFqkW9z0sctn5cLti5Zt270ZcM39mmHicQc02OLLWp9svHK0dWQrGOfevGNHeTzp1n
- 6pR5SAVe858MFBCKInZG1yhUAk7G+z/rWXEkr0CZX9EEoSZcn4XpXC1PkQKd/rVtD/1xB
- 6I/EKSmKV0OVAjMXUxXipH5zHp1L/x0BRg6vQde7RUE3rVciw3pfY3rQ5AgtTf1P4A4ry
- UhHG9U0ZBNTHgdiEwjQq6EObaO5rwAZlTK623gP8VvNBjK6jH3HhPilHm6ELpRU05Hw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=h3/IgD1rI0VBx6NoIz8GtZypwmKWHoP4Mf2QCOkbbsI=;
+ b=QOeJC+IkqIwxBGSnrXWde7fxShwb+aUB9ObOiwojoQuE8C3nfHai04r08RZUc3aGumHW
+ g6u7WsI6q0u5NMQoWwYjiWnxROW8m5xlC6skOk2Lww7UjZyNj21qCakp+mFuzqBjWjf1z
+ LuVzkU61UmYWf6tEJjUn2gZ+GOVF0nTZmdCZurA9KRZO1Fa1qbx2OuvGK2WgzL0VtQaGG
+ JhTGmsvIXgfYum4+j1YZ6lM9t9uUxhva3MG0i3tchRkVYdj59s+nctruHzxOBmBzl6+NE
+ LaBUypWSJ8X1Sf1XuwSr3OfdnSo+gLsGyw1mpvYeB+WQ0oLx8KTt+exX2MqZt83XeRQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=mainlining.org;
  dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
- header.s=202507r header.b=hbeRfRao; 
+ header.s=202507r header.b=bvEcuY77; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=b9VeySzv; 
+ header.a=ed25519-sha256 header.s=202507e header.b=4FZgZ87g; 
  arc=none smtp.remote-ip=5.75.144.95
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
  helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=mainlining.org
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org
- header.a=rsa-sha256 header.s=202507r header.b=hbeRfRao; 
+ header.a=rsa-sha256 header.s=202507r header.b=bvEcuY77; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=b9VeySzv
+ header.a=ed25519-sha256 header.s=202507e header.b=4FZgZ87g
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- by smtp3.osuosl.org (Postfix) with UTF8SMTPS id 2823D60844
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:23 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with UTF8SMTPS id 2D16140080
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 19:40:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1791574634; bh=CtZFjzBCXfmnDHImRgMV/cd
- zq99+u7FxMByTG88o+hk=; b=hbeRfRao2dFUXsUQKTQadNHSKcMDA15HEhQ5CDE9AchgYgBR9r
- E48mGUntefEp2k/K0l3kTYCIKCdMmNgpgVUc2WnwhxhLqvfeze43oZG6V0excuNTzeGVIol5Y/h
- Q9R1QbzwffWxetJMulfMjXgz212joZmZA/XWVZ20fGj/ZDoHmjgDv8I+ndhf9XxgxyruM1Q8Aic
- tWY611p5iOaTK1hiGHWK7nSsIUgcKO1g6Vc2XGAGgkFgcZHHOmy4hU0hFJQNDHGZEO2RgFZNGp4
- Ek7/l3Sbs1cIthurgPwJvmmifhfxmwtaPIyw5pXaGcI3bg4ny13XF3LubOXoodwU0dg==;
+ h=Message-ID:Date:Subject:To:From; t=1791574627; bh=h3/IgD1rI0VBx6NoIz8GtZy
+ pwmKWHoP4Mf2QCOkbbsI=; b=bvEcuY77S3sBVwbBX9OIiTl+hcsa6vbeTugaX9wwn4+gzlvj0j
+ 69MxahUASDcRSSoFNLCpsTE9KnlGTX5IFEFYhXJEj5dF3T/RsCPy3yhB5SO74T319gZSxB2lMW7
+ /vkOBhDniM8PIKSWpCd1huuSecaoGYvClE9Uv9lmoffDxDLxHQg939NHHid1Qjt2rPe1OOQyCzs
+ KpDWBBu05PtInw6GYPTimsQLCtPnbyfyk7lFLcGpfkqZwK1XvHEq2lS3tmAlTeJ7tZ3g7njOFJc
+ PuYcepN7NLWy0XUIrVFYb2qT8ueBkHMZPYT8+qDHJxE3lGbfza/myEjHb5Tc3AmH7Lg==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1791574634; bh=CtZFjzBCXfmnDHImRgMV/cd
- zq99+u7FxMByTG88o+hk=; b=b9VeySzvYbQzzmBpPw9xABwmUfkRN6z1Cj1WZBdIMwNG52aYOI
- Txv9kSnDkV/KIorl0FGiGGOvttlhQjyy82Dw==;
+ h=Message-ID:Date:Subject:To:From; t=1791574627; bh=h3/IgD1rI0VBx6NoIz8GtZy
+ pwmKWHoP4Mf2QCOkbbsI=; b=4FZgZ87gp0knqZVf4Kc0TkwuLq0ENoDX6WXvgaLjXT1PoNCw/a
+ B5lhLrOZUUOfDVnufmKyDsD8eBZN5HQGkpDA==;
 From: Bradley Morgan <brads@mainlining.org>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.u-boot-project.org
@@ -145,13 +142,14 @@ Cc: Bradley Morgan <brads@mainlining.org>,
  Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
  Torsten Rupp <torsten.rupp@8tronix.de>, Vincent Jardin <vjardin@free.fr>,
  Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 21/26] powerpc: mpc83xx: Remove MPC834x support
-Date: Fri,  9 Oct 2026 19:36:59 +0000
-Message-ID: <20261009193704.13061-22-brads@mainlining.org>
+Subject: [PATCH 07/26] board: powerpc: Remove T1042D4RDB support
+Date: Fri,  9 Oct 2026 19:36:45 +0000
+Message-ID: <20261009193704.13061-8-brads@mainlining.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261009193704.13061-1-brads@mainlining.org>
 References: <20261009193704.13061-1-brads@mainlining.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 09 Oct 2026 19:54:04 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -167,1220 +165,2986 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-NXP marks the MPC8343, MPC8347 and MPC8349 no longer manufactured.
-No board selects ARCH_MPC834X, so none of its clock, register or CPU
-ID paths has a consumer.
-
-Remove the family code.
+The T1042D4RDB-PA is obsolete and no longer manufactured. Remove the target and its board support.
 
 Signed-off-by: Bradley Morgan <brads@mainlining.org>
 ---
- arch/powerpc/cpu/mpc83xx/Kconfig              |   4 -
- arch/powerpc/cpu/mpc83xx/cpu.c                |   7 +-
- arch/powerpc/cpu/mpc83xx/cpu_init.c           |  12 --
- arch/powerpc/cpu/mpc83xx/fdt.c                |   5 +-
- arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr |   4 +-
- arch/powerpc/cpu/mpc83xx/pci.c                |   2 -
- arch/powerpc/cpu/mpc83xx/spd_sdram.c          |   2 +-
- arch/powerpc/cpu/mpc83xx/speed.c              |  58 +-----
- arch/powerpc/cpu/mpc83xx/traps.c              |   1 -
- arch/powerpc/include/asm/arch-mpc83xx/gpio.h  |   2 -
- arch/powerpc/include/asm/arch-mpc83xx/soc.h   |   4 +-
- arch/powerpc/include/asm/fsl_lbc.h            |  10 +-
- arch/powerpc/include/asm/global_data.h        |   6 +-
- arch/powerpc/include/asm/immap_83xx.h         |  43 +----
- arch/powerpc/include/asm/mpc8349_pci.h        | 165 ------------------
- arch/powerpc/include/asm/mpc8xxx_spi.h        |   3 +-
- doc/README.mpc83xxads                         |  97 ----------
- .../clock/fsl,mpc83xx-clk.txt                 |   1 -
- doc/device-tree-bindings/cpu/fsl,mpc83xx.txt  |   1 -
- drivers/clk/mpc83xx_clk.c                     |   3 -
- drivers/clk/mpc83xx_clk.h                     |  13 +-
- drivers/cpu/mpc83xx_cpu.c                     |  28 +--
- drivers/cpu/mpc83xx_cpu.h                     |  16 --
- drivers/pci/pci_auto.c                        |  14 --
- include/dt-bindings/clk/mpc83xx-clk.h         |   1 -
- include/mpc83xx.h                             | 136 +--------------
- 26 files changed, 28 insertions(+), 610 deletions(-)
- delete mode 100644 arch/powerpc/include/asm/mpc8349_pci.h
- delete mode 100644 doc/README.mpc83xxads
+ arch/powerpc/cpu/mpc85xx/Kconfig           |  10 -
+ arch/powerpc/dts/Makefile                  |   1 -
+ arch/powerpc/dts/t1042d4rdb-u-boot.dtsi    |  12 -
+ arch/powerpc/dts/t1042d4rdb.dts            |  89 -----
+ arch/powerpc/dts/t104x.dtsi                | 148 --------
+ arch/powerpc/include/asm/fsl_secure_boot.h |   1 -
+ board/nxp/t104xrdb/Kconfig                 |  12 -
+ board/nxp/t104xrdb/MAINTAINERS             |  13 -
+ board/nxp/t104xrdb/Makefile                |  13 -
+ board/nxp/t104xrdb/README                  | 386 --------------------
+ board/nxp/t104xrdb/cpld.c                  | 116 ------
+ board/nxp/t104xrdb/cpld.h                  |  45 ---
+ board/nxp/t104xrdb/ddr.c                   | 148 --------
+ board/nxp/t104xrdb/ddr.h                   |  56 ---
+ board/nxp/t104xrdb/law.c                   |  31 --
+ board/nxp/t104xrdb/spl.c                   | 131 -------
+ board/nxp/t104xrdb/t1040_nand_rcw.cfg      |   7 -
+ board/nxp/t104xrdb/t1040_sd_rcw.cfg        |   7 -
+ board/nxp/t104xrdb/t1040_spi_rcw.cfg       |   7 -
+ board/nxp/t104xrdb/t1040d4_nand_rcw.cfg    |   7 -
+ board/nxp/t104xrdb/t1040d4_sd_rcw.cfg      |   7 -
+ board/nxp/t104xrdb/t1040d4_spi_rcw.cfg     |   7 -
+ board/nxp/t104xrdb/t1042_nand_rcw.cfg      |   7 -
+ board/nxp/t104xrdb/t1042_pi_nand_rcw.cfg   |   7 -
+ board/nxp/t104xrdb/t1042_pi_sd_rcw.cfg     |   7 -
+ board/nxp/t104xrdb/t1042_pi_spi_rcw.cfg    |   7 -
+ board/nxp/t104xrdb/t1042_sd_rcw.cfg        |   7 -
+ board/nxp/t104xrdb/t1042_spi_rcw.cfg       |   7 -
+ board/nxp/t104xrdb/t1042d4_nand_rcw.cfg    |   7 -
+ board/nxp/t104xrdb/t1042d4_sd_rcw.cfg      |   7 -
+ board/nxp/t104xrdb/t1042d4_spi_rcw.cfg     |   7 -
+ board/nxp/t104xrdb/t104x_pbi.cfg           |  36 --
+ board/nxp/t104xrdb/t104x_pbi_sb.cfg        |  38 --
+ board/nxp/t104xrdb/t104xrdb.c              | 159 ---------
+ board/nxp/t104xrdb/t104xrdb.h              |  11 -
+ board/nxp/t104xrdb/tlb.c                   | 132 -------
+ configs/T1042D4RDB_NAND_defconfig          | 144 --------
+ configs/T1042D4RDB_SDCARD_defconfig        | 138 -------
+ configs/T1042D4RDB_SPIFLASH_defconfig      | 141 --------
+ configs/T1042D4RDB_defconfig               | 114 ------
+ include/configs/T104xRDB.h                 | 397 ---------------------
+ 41 files changed, 2627 deletions(-)
+ delete mode 100644 arch/powerpc/dts/t1042d4rdb-u-boot.dtsi
+ delete mode 100644 arch/powerpc/dts/t1042d4rdb.dts
+ delete mode 100644 arch/powerpc/dts/t104x.dtsi
+ delete mode 100644 board/nxp/t104xrdb/Kconfig
+ delete mode 100644 board/nxp/t104xrdb/MAINTAINERS
+ delete mode 100644 board/nxp/t104xrdb/Makefile
+ delete mode 100644 board/nxp/t104xrdb/README
+ delete mode 100644 board/nxp/t104xrdb/cpld.c
+ delete mode 100644 board/nxp/t104xrdb/cpld.h
+ delete mode 100644 board/nxp/t104xrdb/ddr.c
+ delete mode 100644 board/nxp/t104xrdb/ddr.h
+ delete mode 100644 board/nxp/t104xrdb/law.c
+ delete mode 100644 board/nxp/t104xrdb/spl.c
+ delete mode 100644 board/nxp/t104xrdb/t1040_nand_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1040_sd_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1040_spi_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1040d4_nand_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1040d4_sd_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1040d4_spi_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1042_nand_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1042_pi_nand_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1042_pi_sd_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1042_pi_spi_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1042_sd_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1042_spi_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1042d4_nand_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1042d4_sd_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t1042d4_spi_rcw.cfg
+ delete mode 100644 board/nxp/t104xrdb/t104x_pbi.cfg
+ delete mode 100644 board/nxp/t104xrdb/t104x_pbi_sb.cfg
+ delete mode 100644 board/nxp/t104xrdb/t104xrdb.c
+ delete mode 100644 board/nxp/t104xrdb/t104xrdb.h
+ delete mode 100644 board/nxp/t104xrdb/tlb.c
+ delete mode 100644 configs/T1042D4RDB_NAND_defconfig
+ delete mode 100644 configs/T1042D4RDB_SDCARD_defconfig
+ delete mode 100644 configs/T1042D4RDB_SPIFLASH_defconfig
+ delete mode 100644 configs/T1042D4RDB_defconfig
+ delete mode 100644 include/configs/T104xRDB.h
 
-diff --git a/arch/powerpc/cpu/mpc83xx/Kconfig b/arch/powerpc/cpu/mpc83xx/Kconfig
-index 06d84c2d945..4b8e2181757 100644
---- a/arch/powerpc/cpu/mpc83xx/Kconfig
-+++ b/arch/powerpc/cpu/mpc83xx/Kconfig
-@@ -131,10 +131,6 @@ config ARCH_MPC832X
- 	select MPC83XX_PCI_SUPPORT
- 	select SYS_CACHE_SHIFT_5
+diff --git a/arch/powerpc/cpu/mpc85xx/Kconfig b/arch/powerpc/cpu/mpc85xx/Kconfig
+index 8a37191bea0..7fee93862c7 100644
+--- a/arch/powerpc/cpu/mpc85xx/Kconfig
++++ b/arch/powerpc/cpu/mpc85xx/Kconfig
+@@ -167,15 +167,6 @@ config TARGET_T1024RDB
+ 	imply CMD_EEPROM
+ 	imply PANIC_HANG
  
--config ARCH_MPC834X
--	bool
--	select SYS_CACHE_SHIFT_5
+-config TARGET_T1042D4RDB
+-	bool "Support T1042D4RDB"
+-	select ARCH_T1042
+-	select BOARD_LATE_INIT if CHAIN_OF_TRUST
+-	select SUPPORT_SPL
+-	select PHYS_64BIT
+-	select SYS_L3_SIZE_256KB
+-	imply PANIC_HANG
 -
- config ARCH_MPC8360
- 	bool
- 	select MPC83XX_QUICC_ENGINE
-diff --git a/arch/powerpc/cpu/mpc83xx/cpu.c b/arch/powerpc/cpu/mpc83xx/cpu.c
-index e1f70f40fec..7583121eb12 100644
---- a/arch/powerpc/cpu/mpc83xx/cpu.c
-+++ b/arch/powerpc/cpu/mpc83xx/cpu.c
-@@ -50,10 +50,6 @@ int checkcpu(void)
- 		CPU_TYPE_ENTRY(8309),
- 		CPU_TYPE_ENTRY(8321),
- 		CPU_TYPE_ENTRY(8323),
--		CPU_TYPE_ENTRY(8343),
--		CPU_TYPE_ENTRY(8347_TBGA_),
--		CPU_TYPE_ENTRY(8347_PBGA_),
--		CPU_TYPE_ENTRY(8349),
- 		CPU_TYPE_ENTRY(8358_TBGA_),
- 		CPU_TYPE_ENTRY(8358_PBGA_),
- 		CPU_TYPE_ENTRY(8360),
-@@ -96,8 +92,7 @@ int checkcpu(void)
- 			puts(cpu_type_list[i].name);
- 			if (IS_E_PROCESSOR(spridr))
- 				puts("E");
--			if ((SPR_FAMILY(spridr) == SPR_834X_FAMILY ||
--			     SPR_FAMILY(spridr) == SPR_836X_FAMILY) &&
-+			if (SPR_FAMILY(spridr) == SPR_836X_FAMILY &&
- 			    REVID_MAJOR(spridr) >= 2)
- 				puts("A");
- 			printf(", Rev: %d.%d", REVID_MAJOR(spridr),
-diff --git a/arch/powerpc/cpu/mpc83xx/cpu_init.c b/arch/powerpc/cpu/mpc83xx/cpu_init.c
-index 555dd502b36..6c34bdeac7b 100644
---- a/arch/powerpc/cpu/mpc83xx/cpu_init.c
-+++ b/arch/powerpc/cpu/mpc83xx/cpu_init.c
-@@ -84,9 +84,6 @@ void cpu_init_f (volatile immap_t * im)
- #ifdef CFG_SYS_SCCR_TSEC2CM /* TSEC2 clock mode */
- 		SCCR_TSEC2CM |
- #endif
--#ifdef CONFIG_SYS_SCCR_USBMPHCM /* USB MPH clock mode */
--		SCCR_USBMPHCM |
--#endif
- #ifdef CFG_SYS_SCCR_USBDRCM /* USB DR clock mode */
- 		SCCR_USBDRCM |
- #endif
-@@ -116,9 +113,6 @@ void cpu_init_f (volatile immap_t * im)
- #ifdef CFG_SYS_SCCR_TSEC2CM /* TSEC2 clock mode */
- 		(CFG_SYS_SCCR_TSEC2CM << SCCR_TSEC2CM_SHIFT) |
- #endif
--#ifdef CONFIG_SYS_SCCR_USBMPHCM /* USB MPH clock mode */
--		(CONFIG_SYS_SCCR_USBMPHCM << SCCR_USBMPHCM_SHIFT) |
--#endif
- #ifdef CFG_SYS_SCCR_USBDRCM /* USB DR clock mode */
- 		(CFG_SYS_SCCR_USBDRCM << SCCR_USBDRCM_SHIFT) |
- #endif
-@@ -165,14 +159,8 @@ void cpu_init_f (volatile immap_t * im)
- 
- 	/* System General Purpose Register */
- #ifdef CFG_SYS_SICRH
--#if defined(CONFIG_ARCH_MPC834X)
--	/* regarding to MPC34x manual rev.1 bits 28..29 must be preserved */
--	__raw_writel((im->sysconf.sicrh & 0x0000000C) | CFG_SYS_SICRH,
--		     &im->sysconf.sicrh);
--#else
- 	__raw_writel(CFG_SYS_SICRH, &im->sysconf.sicrh);
- #endif
--#endif
- #ifdef CFG_SYS_SICRL
- 	__raw_writel(CFG_SYS_SICRL, &im->sysconf.sicrl);
- #endif
-diff --git a/arch/powerpc/cpu/mpc83xx/fdt.c b/arch/powerpc/cpu/mpc83xx/fdt.c
-index 08c3e783597..1eaff5e5aad 100644
---- a/arch/powerpc/cpu/mpc83xx/fdt.c
-+++ b/arch/powerpc/cpu/mpc83xx/fdt.c
-@@ -38,15 +38,14 @@ void ft_cpu_setup(void *blob, struct bd_info *bd)
- 
- 	/*
- 	 * delete crypto node if not on an E-processor
--	 * initial revisions of the MPC834xE/6xE have the original SEC 2.0.
-+	 * Initial revisions of the MPC836xE have the original SEC 2.0.
- 	 * EA revisions got the SEC uprevved to 2.4 but since the default device
- 	 * tree contains SEC 2.0 properties we uprev them here.
- 	 */
- 	if (!IS_E_PROCESSOR(spridr))
- 		fdt_fixup_crypto_node(blob, 0);
- 	else if (IS_E_PROCESSOR(spridr) &&
--		 (SPR_FAMILY(spridr) == SPR_834X_FAMILY ||
--		  SPR_FAMILY(spridr) == SPR_836X_FAMILY) &&
-+		 SPR_FAMILY(spridr) == SPR_836X_FAMILY &&
- 		 REVID_MAJOR(spridr) >= 2)
- 		fdt_fixup_crypto_node(blob, 0x0204);
- 
-diff --git a/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr b/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr
-index a85e698a867..f62bdd62bb2 100644
---- a/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr
-+++ b/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr
-@@ -18,7 +18,7 @@ endchoice
- 
- endif
- 
--if ARCH_MPC834X || ARCH_MPC8360
-+if ARCH_MPC8360
- 
- choice
- 	prompt "Additional delay cycles for SDRAM control signals"
-@@ -60,7 +60,7 @@ config LCRR_ECL_7
- 
- endchoice
- 
--endif # ARCH_MPC834X || ARCH_MPC8360
-+endif # ARCH_MPC8360
- 
- if !ARCH_MPC8308
- 
-diff --git a/arch/powerpc/cpu/mpc83xx/pci.c b/arch/powerpc/cpu/mpc83xx/pci.c
-index aef1123a2b7..76023ae698b 100644
---- a/arch/powerpc/cpu/mpc83xx/pci.c
-+++ b/arch/powerpc/cpu/mpc83xx/pci.c
-@@ -17,8 +17,6 @@
- #include <fdt_support.h>
- #endif
- 
--#include <asm/mpc8349_pci.h>
--
- #define MAX_BUSES 2
- 
- DECLARE_GLOBAL_DATA_PTR;
-diff --git a/arch/powerpc/cpu/mpc83xx/spd_sdram.c b/arch/powerpc/cpu/mpc83xx/spd_sdram.c
-index 949efc8e828..6b3e59143fe 100644
---- a/arch/powerpc/cpu/mpc83xx/spd_sdram.c
-+++ b/arch/powerpc/cpu/mpc83xx/spd_sdram.c
-@@ -432,7 +432,7 @@ long int spd_sdram()
- 
- 	/*
- 	 * Errata DDR6 work around: input enable 2 cycles earlier.
--	 * including MPC834X Rev1.0/1.1 and MPC8360 Rev1.1/1.2.
-+	 * including MPC8360 Rev1.1/1.2.
- 	 */
- 	if(PVR_MAJ(pvr) <= 1 && spd.mem_type == SPD_MEMTYPE_DDR){
- 		if (caslat == 2)
-diff --git a/arch/powerpc/cpu/mpc83xx/speed.c b/arch/powerpc/cpu/mpc83xx/speed.c
-index e2ed3caf022..c0eeff1e0a5 100644
---- a/arch/powerpc/cpu/mpc83xx/speed.c
-+++ b/arch/powerpc/cpu/mpc83xx/speed.c
-@@ -87,14 +87,10 @@ int get_clocks(void)
- 	u32 lcrr;
- 
- 	u32 csb_clk;
--#if defined(CONFIG_ARCH_MPC8308) || \
--	defined(CONFIG_ARCH_MPC834X)
-+#if defined(CONFIG_ARCH_MPC8308)
- 	u32 tsec1_clk;
- 	u32 tsec2_clk;
- 	u32 usbdr_clk;
--#endif
--#ifdef CONFIG_ARCH_MPC834X
--	u32 usbmph_clk;
- #endif
- 	u32 core_clk;
- 	u32 i2c1_clk;
-@@ -146,8 +142,7 @@ int get_clocks(void)
- 
- 	sccr = im->clk.sccr;
- 
--#if defined(CONFIG_ARCH_MPC8308) || \
--	defined(CONFIG_ARCH_MPC834X)
-+#if defined(CONFIG_ARCH_MPC8308)
- 	switch ((sccr & SCCR_TSEC1CM) >> SCCR_TSEC1CM_SHIFT) {
- 	case 0:
- 		tsec1_clk = 0;
-@@ -167,8 +162,7 @@ int get_clocks(void)
- 	}
- #endif
- 
--#if defined(CONFIG_ARCH_MPC830X) || \
--	defined(CONFIG_ARCH_MPC834X)
-+#if defined(CONFIG_ARCH_MPC830X)
- 	switch ((sccr & SCCR_USBDRCM) >> SCCR_USBDRCM_SHIFT) {
- 	case 0:
- 		usbdr_clk = 0;
-@@ -188,7 +182,7 @@ int get_clocks(void)
- 	}
- #endif
- 
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC834X)
-+#if defined(CONFIG_ARCH_MPC8308)
- 	switch ((sccr & SCCR_TSEC2CM) >> SCCR_TSEC2CM_SHIFT) {
- 	case 0:
- 		tsec2_clk = 0;
-@@ -208,33 +202,6 @@ int get_clocks(void)
- 	}
- #endif
- 
--#if defined(CONFIG_ARCH_MPC834X)
--	switch ((sccr & SCCR_USBMPHCM) >> SCCR_USBMPHCM_SHIFT) {
--	case 0:
--		usbmph_clk = 0;
--		break;
--	case 1:
--		usbmph_clk = csb_clk;
--		break;
--	case 2:
--		usbmph_clk = csb_clk / 2;
--		break;
--	case 3:
--		usbmph_clk = csb_clk / 3;
--		break;
--	default:
--		/* unknown SCCR_USBMPHCM value */
--		return -5;
--	}
--
--	if (usbmph_clk != 0 && usbdr_clk != 0 && usbmph_clk != usbdr_clk) {
--		/* if USB MPH clock is not disabled and
--		 * USB DR clock is not disabled then
--		 * USB MPH & USB DR must have the same rate
--		 */
--		return -6;
--	}
--#endif
- 	switch ((sccr & SCCR_ENCCM) >> SCCR_ENCCM_SHIFT) {
- 	case 0:
- 		enc_clk = 0;
-@@ -273,9 +240,7 @@ int get_clocks(void)
- 	}
- #endif
- 
--#if defined(CONFIG_ARCH_MPC834X)
--	i2c1_clk = tsec2_clk;
--#elif defined(CONFIG_ARCH_MPC8360)
-+#if defined(CONFIG_ARCH_MPC8360)
- 	i2c1_clk = csb_clk;
- #elif defined(CONFIG_ARCH_MPC832X)
- 	i2c1_clk = enc_clk;
-@@ -385,15 +350,11 @@ int get_clocks(void)
- #endif
- 
- 	gd->arch.csb_clk = csb_clk;
--#if defined(CONFIG_ARCH_MPC8308) || \
--	defined(CONFIG_ARCH_MPC834X)
-+#if defined(CONFIG_ARCH_MPC8308)
- 	gd->arch.tsec1_clk = tsec1_clk;
- 	gd->arch.tsec2_clk = tsec2_clk;
- 	gd->arch.usbdr_clk = usbdr_clk;
- #endif
--#if defined(CONFIG_ARCH_MPC834X)
--	gd->arch.usbmph_clk = usbmph_clk;
--#endif
- #if defined(CONFIG_FSL_ESDHC)
- 	gd->arch.sdhc_clk = sdhc_clk;
- #endif
-@@ -484,8 +445,7 @@ static int do_clocks(struct cmd_tbl *cmdtp, int flag, int argc,
- 	printf("  SDHC:                %-4s MHz\n",
- 	       strmhz(buf, gd->arch.sdhc_clk));
- #endif
--#if defined(CONFIG_ARCH_MPC8308) || \
--	defined(CONFIG_ARCH_MPC834X)
-+#if defined(CONFIG_ARCH_MPC8308)
- 	printf("  TSEC1:               %-4s MHz\n",
- 	       strmhz(buf, gd->arch.tsec1_clk));
- 	printf("  TSEC2:               %-4s MHz\n",
-@@ -493,10 +453,6 @@ static int do_clocks(struct cmd_tbl *cmdtp, int flag, int argc,
- 	printf("  USB DR:              %-4s MHz\n",
- 	       strmhz(buf, gd->arch.usbdr_clk));
- #endif
--#if defined(CONFIG_ARCH_MPC834X)
--	printf("  USB MPH:             %-4s MHz\n",
--	       strmhz(buf, gd->arch.usbmph_clk));
--#endif
- #if defined(CONFIG_ARCH_MPC8308)
- 	printf("  PCIEXP1:             %-4s MHz\n",
- 	       strmhz(buf, gd->arch.pciexp1_clk));
-diff --git a/arch/powerpc/cpu/mpc83xx/traps.c b/arch/powerpc/cpu/mpc83xx/traps.c
-index d50499ceb7c..d68c0a23f18 100644
---- a/arch/powerpc/cpu/mpc83xx/traps.c
-+++ b/arch/powerpc/cpu/mpc83xx/traps.c
-@@ -16,7 +16,6 @@
- #include <command.h>
- #include <kgdb.h>
- #include <asm/processor.h>
--#include <asm/mpc8349_pci.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-diff --git a/arch/powerpc/include/asm/arch-mpc83xx/gpio.h b/arch/powerpc/include/asm/arch-mpc83xx/gpio.h
-index 6449fded125..7657471b99f 100644
---- a/arch/powerpc/include/asm/arch-mpc83xx/gpio.h
-+++ b/arch/powerpc/include/asm/arch-mpc83xx/gpio.h
-@@ -8,8 +8,6 @@
-  */
- #if defined(CONFIG_ARCH_MPC8308)
- #define MPC83XX_GPIO_CTRLRS 1
--#elif defined(CONFIG_ARCH_MPC834X)
--#define MPC83XX_GPIO_CTRLRS 2
- #else
- #define MPC83XX_GPIO_CTRLRS 0
- #endif
-diff --git a/arch/powerpc/include/asm/arch-mpc83xx/soc.h b/arch/powerpc/include/asm/arch-mpc83xx/soc.h
-index 0eeaa23b190..0473389bc7d 100644
---- a/arch/powerpc/include/asm/arch-mpc83xx/soc.h
-+++ b/arch/powerpc/include/asm/arch-mpc83xx/soc.h
-@@ -11,7 +11,6 @@ enum soc_type {
- 	SOC_MPC8308,
- 	SOC_MPC8309,
- 	SOC_MPC832X,
--	SOC_MPC8349,
- 	SOC_MPC8360,
- };
- 
-@@ -23,8 +22,7 @@ static inline bool mpc83xx_has_sdhc(int type)
- 
- static inline bool mpc83xx_has_tsec(int type)
- {
--	return (type == SOC_MPC8308) ||
--	       (type == SOC_MPC8349);
-+	return type == SOC_MPC8308;
- }
- 
- static inline bool mpc83xx_has_pcie1(int type)
-diff --git a/arch/powerpc/include/asm/fsl_lbc.h b/arch/powerpc/include/asm/fsl_lbc.h
-index 9efb6ae6cd0..37da14c45f1 100644
---- a/arch/powerpc/include/asm/fsl_lbc.h
-+++ b/arch/powerpc/include/asm/fsl_lbc.h
-@@ -40,10 +40,10 @@ void lbc_sdram_init(void);
- #define BR_MSEL				0x000000E0
- #define BR_MSEL_SHIFT			5
- #define BR_MS_GPCM			0x00000000	/* GPCM */
--#if !defined(CONFIG_ARCH_MPC834X) && !defined(CONFIG_ARCH_MPC8360)
-+#if !defined(CONFIG_ARCH_MPC8360)
- #define BR_MS_FCM			0x00000020	/* FCM */
- #endif
--#if defined(CONFIG_ARCH_MPC834X) || defined(CONFIG_ARCH_MPC8360)
-+#if defined(CONFIG_ARCH_MPC8360)
- #define BR_MS_SDRAM			0x00000060	/* SDRAM */
- #elif defined(CONFIG_MPC85xx)
- #define BR_MS_SDRAM			0x00000000	/* SDRAM */
-@@ -51,10 +51,8 @@ void lbc_sdram_init(void);
- #define BR_MS_UPMA			0x00000080	/* UPMA */
- #define BR_MS_UPMB			0x000000A0	/* UPMB */
- #define BR_MS_UPMC			0x000000C0	/* UPMC */
--#if !defined(CONFIG_ARCH_MPC834X)
- #define BR_ATOM				0x0000000C
- #define BR_ATOM_SHIFT			2
--#endif
- #define BR_V				0x00000001
- #define BR_V_SHIFT			0
- 
-@@ -64,11 +62,7 @@ void lbc_sdram_init(void);
- #define UPMB			1
- #define UPMC			2
- 
--#if defined(CONFIG_ARCH_MPC834X)
--#define BR_RES				~(BR_BA | BR_PS | BR_DECC | BR_WP | BR_MSEL | BR_V)
--#else
- #define BR_RES				~(BR_BA | BR_PS | BR_DECC | BR_WP | BR_MSEL | BR_ATOM | BR_V)
--#endif
- 
- /* Convert an address into the right format for the BR registers */
- #if defined(CONFIG_PHYS_64BIT) && !defined(CONFIG_FSL_ELBC)
-diff --git a/arch/powerpc/include/asm/global_data.h b/arch/powerpc/include/asm/global_data.h
-index 168eb55b497..710d538dad9 100644
---- a/arch/powerpc/include/asm/global_data.h
-+++ b/arch/powerpc/include/asm/global_data.h
-@@ -26,15 +26,11 @@ struct arch_global_data {
- #else
- 	/* There are other clocks in the MPC83XX */
- 	u32 csb_clk;
--# if defined(CONFIG_ARCH_MPC8308) || \
--	defined(CONFIG_ARCH_MPC834X)
-+# if defined(CONFIG_ARCH_MPC8308)
- 	u32 tsec1_clk;
- 	u32 tsec2_clk;
- 	u32 usbdr_clk;
- # endif
--# if defined(CONFIG_ARCH_MPC834X)
--	u32 usbmph_clk;
--# endif /* CONFIG_ARCH_MPC834X */
- 	u32 core_clk;
- 	u32 enc_clk;
- 	u32 lbiu_clk;
-diff --git a/arch/powerpc/include/asm/immap_83xx.h b/arch/powerpc/include/asm/immap_83xx.h
-index c7e7616529d..428839ad1a5 100644
---- a/arch/powerpc/include/asm/immap_83xx.h
-+++ b/arch/powerpc/include/asm/immap_83xx.h
-@@ -647,48 +647,7 @@ typedef struct tdmdmac83xx {
- } tdmdmac83xx_t;
- static_assert(sizeof(tdmdmac83xx_t) == 0x2000);
- 
--#if defined(CONFIG_ARCH_MPC834X)
--typedef struct immap {
--	sysconf83xx_t		sysconf;	/* System configuration */
--	wdt83xx_t		wdt;		/* Watch Dog Timer (WDT) Registers */
--	rtclk83xx_t		rtc;		/* Real Time Clock Module Registers */
--	rtclk83xx_t		pit;		/* Periodic Interval Timer */
--	gtm83xx_t		gtm[2];		/* Global Timers Module */
--	ipic83xx_t		ipic;		/* Integrated Programmable Interrupt Controller */
--	arbiter83xx_t		arbiter;	/* System Arbiter Registers */
--	reset83xx_t		reset;		/* Reset Module */
--	clk83xx_t		clk;		/* System Clock Module */
--	pmc83xx_t		pmc;		/* Power Management Control Module */
--	gpio83xx_t		gpio[2];	/* General purpose I/O module */
--	u8			res0[0x200];
--	u8			dll_ddr[0x100];
--	u8			dll_lbc[0x100];
--	u8			res1[0xE00];
--#if defined(CONFIG_SYS_FSL_DDR2) || defined(CONFIG_SYS_FSL_DDR3)
--	struct ccsr_ddr		ddr;	/* DDR Memory Controller Memory */
--#else
--	ddr83xx_t		ddr;	/* DDR Memory Controller Memory */
--#endif
--	fsl_i2c_t		i2c[2];		/* I2C Controllers */
--	u8			res2[0x1300];
--	duart83xx_t		duart[2];	/* DUART */
--	u8			res3[0x900];
--	fsl_lbc_t		im_lbc;		/* Local Bus Controller Regs */
--	u8			res4[0x1000];
--	spi8xxx_t		spi;		/* Serial Peripheral Interface */
--	dma83xx_t		dma;		/* DMA */
--	pciconf83xx_t		pci_conf[2];	/* PCI Software Configuration Registers */
--	ios83xx_t		ios;		/* Sequencer */
--	pcictrl83xx_t		pci_ctrl[2];	/* PCI Controller Control and Status Registers */
--	u8			res5[0x19900];
--	usb83xx_t		usb[2];
--	tsec83xx_t		tsec[2];
--	u8			res6[0xA000];
--	security83xx_t		security;
--	u8			res7[0xC0000];
--} immap_t;
--
--#elif defined(CONFIG_ARCH_MPC8308)
-+#if defined(CONFIG_ARCH_MPC8308)
- typedef struct immap {
- 	sysconf83xx_t		sysconf;	/* System configuration */
- 	wdt83xx_t		wdt;		/* Watch Dog Timer (WDT) Registers */
-diff --git a/arch/powerpc/include/asm/mpc8349_pci.h b/arch/powerpc/include/asm/mpc8349_pci.h
+ config TARGET_T2080QDS
+ 	bool "Support T2080QDS"
+ 	select ARCH_T2080
+@@ -1473,7 +1464,6 @@ source "board/nxp/p1010rdb/Kconfig"
+ source "board/nxp/p1_p2_rdb_pc/Kconfig"
+ source "board/nxp/p2041rdb/Kconfig"
+ source "board/nxp/t102xrdb/Kconfig"
+-source "board/nxp/t104xrdb/Kconfig"
+ source "board/nxp/t208xqds/Kconfig"
+ source "board/nxp/t208xrdb/Kconfig"
+ source "board/nxp/t4rdb/Kconfig"
+diff --git a/arch/powerpc/dts/Makefile b/arch/powerpc/dts/Makefile
+index 3f5473b80af..4bc6e9085f4 100644
+--- a/arch/powerpc/dts/Makefile
++++ b/arch/powerpc/dts/Makefile
+@@ -13,7 +13,6 @@ dtb-$(CONFIG_TARGET_P1020RDB_PC) += p1020rdb-pc.dtb p1020rdb-pc_36b.dtb
+ dtb-$(CONFIG_TARGET_P1020RDB_PD) += p1020rdb-pd.dtb
+ dtb-$(CONFIG_TARGET_SOCRATES) += socrates.dtb
+ dtb-$(CONFIG_TARGET_T1024RDB) += t1024rdb.dtb
+-dtb-$(CONFIG_TARGET_T1042D4RDB) += t1042d4rdb.dtb
+ dtb-$(CONFIG_TARGET_T2080QDS) += t2080qds.dtb
+ dtb-$(CONFIG_TARGET_T2080RDB) += t2080rdb.dtb
+ dtb-$(CONFIG_TARGET_T4240RDB) += t4240rdb.dtb
+diff --git a/arch/powerpc/dts/t1042d4rdb-u-boot.dtsi b/arch/powerpc/dts/t1042d4rdb-u-boot.dtsi
 deleted file mode 100644
-index 3d920c25ade..00000000000
---- a/arch/powerpc/include/asm/mpc8349_pci.h
+index b50b922aeb2..00000000000
+--- a/arch/powerpc/dts/t1042d4rdb-u-boot.dtsi
 +++ /dev/null
-@@ -1,165 +0,0 @@
--#ifndef _PPC_KERNEL_MPC8349_PCI_H
--#define _PPC_KERNEL_MPC8349_PCI_H
+@@ -1,12 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/* Copyright 2023 NXP */
 -
--#define M8265_PCIBR0	0x101ac
--#define M8265_PCIBR1	0x101b0
--#define M8265_PCIMSK0	0x101c4
--#define M8265_PCIMSK1	0x101c8
+-&serial0 {
+-	bootph-all;
+-};
 -
--/* Bit definitions for PCIBR registers */
+-&serial1 {
+-	bootph-all;
+-};
 -
--#define PCIBR_ENABLE        0x00000001
--
--/* Bit definitions for PCIMSK registers */
--
--#define PCIMSK_32KB         0xFFFF8000  /* Size of window, smallest */
--#define PCIMSK_64KB         0xFFFF0000
--#define PCIMSK_128KB        0xFFFE0000
--#define PCIMSK_256KB        0xFFFC0000
--#define PCIMSK_512KB        0xFFF80000
--#define PCIMSK_1MB          0xFFF00000
--#define PCIMSK_2MB          0xFFE00000
--#define PCIMSK_4MB          0xFFC00000
--#define PCIMSK_8MB          0xFF800000
--#define PCIMSK_16MB         0xFF000000
--#define PCIMSK_32MB         0xFE000000
--#define PCIMSK_64MB         0xFC000000
--#define PCIMSK_128MB        0xF8000000
--#define PCIMSK_256MB        0xF0000000
--#define PCIMSK_512MB        0xE0000000
--#define PCIMSK_1GB          0xC0000000  /* Size of window, largest */
--
--#define M826X_SCCR_PCI_MODE_EN 0x100
--
--/*
-- * Outbound ATU registers (3 sets). These registers control how 60x bus
-- * (local) addresses are translated to PCI addresses when the MPC826x is
-- * a PCI bus master (initiator).
-- */
--
--#define POTAR_REG0          0x10800     /* PCI Outbound Translation Addr registers */
--#define POTAR_REG1          0x10818
--#define POTAR_REG2          0x10830
--
--#define POBAR_REG0          0x10808     /* PCI Outbound Base Addr registers */
--#define POBAR_REG1          0x10820
--#define POBAR_REG2          0x10838
--
--#define POCMR_REG0          0x10810     /* PCI Outbound Comparison Mask registers */
--#define POCMR_REG1          0x10828
--#define POCMR_REG2          0x10840
--
--/* Bit definitions for POMCR registers */
--
--#define POCMR_MASK_4KB      0x000FFFFF
--#define POCMR_MASK_8KB      0x000FFFFE
--#define POCMR_MASK_16KB     0x000FFFFC
--#define POCMR_MASK_32KB     0x000FFFF8
--#define POCMR_MASK_64KB     0x000FFFF0
--#define POCMR_MASK_128KB    0x000FFFE0
--#define POCMR_MASK_256KB    0x000FFFC0
--#define POCMR_MASK_512KB    0x000FFF80
--#define POCMR_MASK_1MB      0x000FFF00
--#define POCMR_MASK_2MB      0x000FFE00
--#define POCMR_MASK_4MB      0x000FFC00
--#define POCMR_MASK_8MB      0x000FF800
--#define POCMR_MASK_16MB     0x000FF000
--#define POCMR_MASK_32MB     0x000FE000
--#define POCMR_MASK_64MB     0x000FC000
--#define POCMR_MASK_128MB    0x000F8000
--#define POCMR_MASK_256MB    0x000F0000
--#define POCMR_MASK_512MB    0x000E0000
--#define POCMR_MASK_1GB      0x000C0000
--
--#define POCMR_ENABLE        0x80000000
--#define POCMR_PCI_IO        0x40000000
--#define POCMR_PREFETCH_EN   0x20000000
--#define POCMR_PCI2          0x10000000
--
--/* Soft PCI reset */
--
--#define PCI_GCR_REG         0x10880
--
--/* Bit definitions for PCI_GCR registers */
--
--#define PCIGCR_PCI_BUS_EN   0x1
--
--/*
-- * Inbound ATU registers (2 sets). These registers control how PCI
-- * addresses are translated to 60x bus (local) addresses when the
-- * MPC826x is a PCI bus target.
-- */
--
--#define PITAR_REG1          0x108D0
--#define PIBAR_REG1          0x108D8
--#define PICMR_REG1          0x108E0
--#define PITAR_REG0          0x108E8
--#define PIBAR_REG0          0x108F0
--#define PICMR_REG0          0x108F8
--
--/* Bit definitions for PCI Inbound Comparison Mask registers */
--
--#define PICMR_MASK_4KB       0x000FFFFF
--#define PICMR_MASK_8KB       0x000FFFFE
--#define PICMR_MASK_16KB      0x000FFFFC
--#define PICMR_MASK_32KB      0x000FFFF8
--#define PICMR_MASK_64KB      0x000FFFF0
--#define PICMR_MASK_128KB     0x000FFFE0
--#define PICMR_MASK_256KB     0x000FFFC0
--#define PICMR_MASK_512KB     0x000FFF80
--#define PICMR_MASK_1MB       0x000FFF00
--#define PICMR_MASK_2MB       0x000FFE00
--#define PICMR_MASK_4MB       0x000FFC00
--#define PICMR_MASK_8MB       0x000FF800
--#define PICMR_MASK_16MB      0x000FF000
--#define PICMR_MASK_32MB      0x000FE000
--#define PICMR_MASK_64MB      0x000FC000
--#define PICMR_MASK_128MB     0x000F8000
--#define PICMR_MASK_256MB     0x000F0000
--#define PICMR_MASK_512MB     0x000E0000
--#define PICMR_MASK_1GB       0x000C0000
--
--#define PICMR_ENABLE         0x80000000
--#define PICMR_NO_SNOOP_EN    0x40000000
--#define PICMR_PREFETCH_EN    0x20000000
--
--/* PCI error Registers */
--
--#define	PCI_ERROR_STATUS_REG		0x10884
--#define	PCI_ERROR_MASK_REG		0x10888
--#define	PCI_ERROR_CONTROL_REG		0x1088C
--#define PCI_ERROR_ADRS_CAPTURE_REG      0x10890
--#define PCI_ERROR_DATA_CAPTURE_REG      0x10898
--#define PCI_ERROR_CTRL_CAPTURE_REG      0x108A0
--
--/* PCI error Register bit defines */
--
--#define	PCI_ERROR_PCI_ADDR_PAR			0x00000001
--#define	PCI_ERROR_PCI_DATA_PAR_WR		0x00000002
--#define	PCI_ERROR_PCI_DATA_PAR_RD		0x00000004
--#define	PCI_ERROR_PCI_NO_RSP			0x00000008
--#define	PCI_ERROR_PCI_TAR_ABT			0x00000010
--#define	PCI_ERROR_PCI_SERR			0x00000020
--#define	PCI_ERROR_PCI_PERR_RD			0x00000040
--#define	PCI_ERROR_PCI_PERR_WR			0x00000080
--#define	PCI_ERROR_I2O_OFQO			0x00000100
--#define	PCI_ERROR_I2O_IPQO			0x00000200
--#define	PCI_ERROR_IRA				0x00000400
--#define	PCI_ERROR_NMI				0x00000800
--#define	PCI_ERROR_I2O_DBMC			0x00001000
--
--/*
-- * Register pair used to generate configuration cycles on the PCI bus
-- * and access the MPC826x's own PCI configuration registers.
-- */
--
--#define PCI_CFG_ADDR_REG     0x10900
--#define PCI_CFG_DATA_REG     0x10904
--
--/* Bus parking decides where the bus control sits when idle */
--/* If modifying memory controllers for PCI park on the core */
--
--#define PPC_ACR_BUS_PARK_CORE 0x6
--#define PPC_ACR_BUS_PARK_PCI  0x3
--
--#endif /* _PPC_KERNEL_M8260_PCI_H */
-diff --git a/arch/powerpc/include/asm/mpc8xxx_spi.h b/arch/powerpc/include/asm/mpc8xxx_spi.h
-index 5d8d7db2933..f057040dfbc 100644
---- a/arch/powerpc/include/asm/mpc8xxx_spi.h
-+++ b/arch/powerpc/include/asm/mpc8xxx_spi.h
-@@ -11,8 +11,7 @@
- #include <asm/types.h>
- 
- #if defined(CONFIG_ARCH_MPC8308) || \
--	defined(CONFIG_ARCH_MPC832X) || \
--	defined(CONFIG_ARCH_MPC834X)
-+	defined(CONFIG_ARCH_MPC832X)
- 
- typedef struct spi8xxx {
- 	u8 res0[0x20];	/* 0x0-0x01f reserved */
-diff --git a/doc/README.mpc83xxads b/doc/README.mpc83xxads
+-#include "u-boot.dtsi"
+diff --git a/arch/powerpc/dts/t1042d4rdb.dts b/arch/powerpc/dts/t1042d4rdb.dts
 deleted file mode 100644
-index 372fdd9ce85..00000000000
---- a/doc/README.mpc83xxads
+index 0230d3ba675..00000000000
+--- a/arch/powerpc/dts/t1042d4rdb.dts
 +++ /dev/null
-@@ -1,97 +0,0 @@
--Freescale MPC83xx ADS Boards
-------------------------------------------
+@@ -1,89 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
+-/*
+- * T1042D4RDB Device Tree Source
+- *
+- * Copyright 2013 - 2015 Freescale Semiconductor Inc.
+- * Copyright 2019-2023 NXP
+- */
 -
--0. Toolchain / Building
+-/include/ "t104x.dtsi"
 -
--    $ PATH=$PATH:/usr/powerpc/bin
--    $ CROSS_COMPILE=powerpc-linux-
--    $ export PATH CROSS_COMPILE
+-/ {
+-	model = "fsl,T1042D4RDB";
+-	compatible = "fsl,T1042D4RDB";
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-	interrupt-parent = <&mpic>;
 -
--    $ powerpc-linux-gcc -v
--    Reading specs from /usr/powerpc/lib/gcc/powerpc-linux/3.4.3/specs
--    Configured with: ../configure --prefix=/usr/powerpc
--    --exec-prefix=/usr/powerpc --target=powerpc-linux --enable-shared
--    --disable-nls --disable-multilib --enable-languages=c,c++,ada,f77,objc
--    Thread model: posix
--    gcc version 3.4.3 (Debian)
+-	aliases {
+-		spi0 = &espi0;
+-		serial0 = &serial0;
+-		serial1 = &serial1;
+-		serial2 = &serial2;
+-		serial3 = &serial3;
+-	};
+-};
 -
--    $ powerpc-linux-as -v
--    GNU assembler version 2.15 (powerpc-linux) using BFD version 2.15
+-&soc {
+-	fman0: fman@400000 {
+-		ethernet@e0000 {
+-			phy-handle = <&phy_sgmii_0>;
+-			phy-connection-type = "sgmii";
+-		};
+-
+-		ethernet@e2000 {
+-			phy-handle = <&phy_sgmii_1>;
+-			phy-connection-type = "sgmii";
+-		};
+-
+-		ethernet@e4000 {
+-			phy-handle = <&phy_sgmii_2>;
+-			phy-connection-type = "sgmii";
+-		};
+-
+-		ethernet@e6000 {
+-			phy-handle = <&phy_rgmii_0>;
+-			phy-connection-type = "rgmii";
+-		};
+-
+-		ethernet@e8000 {
+-			phy-handle = <&phy_rgmii_1>;
+-			phy-connection-type = "rgmii";
+-		};
+-
+-		mdio0: mdio@fc000 {
+-			phy_sgmii_0: ethernet-phy@2 {
+-				reg = <0x02>;
+-			};
+-
+-			phy_sgmii_1: ethernet-phy@3 {
+-				reg = <0x03>;
+-			};
+-
+-			phy_sgmii_2: ethernet-phy@1 {
+-				reg = <0x01>;
+-			};
+-
+-			phy_rgmii_0: ethernet-phy@4 {
+-				reg = <0x04>;
+-			};
+-
+-			phy_rgmii_1: ethernet-phy@5 {
+-				reg = <0x05>;
+-			};
+-		};
+-	};
+-};
+-
+-&espi0 {
+-	status = "okay";
+-	flash@0 {
+-		compatible = "jedec,spi-nor";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		reg = <0>;
+-		spi-max-frequency = <10000000>; /* input clock */
+-	};
+-};
+-
+-/include/ "t1042si-post.dtsi"
+diff --git a/arch/powerpc/dts/t104x.dtsi b/arch/powerpc/dts/t104x.dtsi
+deleted file mode 100644
+index 2c7e5b47185..00000000000
+--- a/arch/powerpc/dts/t104x.dtsi
++++ /dev/null
+@@ -1,148 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
+-/*
+- * T104X Silicon/SoC Device Tree Source (pre include)
+- *
+- * Copyright 2013 Freescale Semiconductor Inc.
+- * Copyright 2019-2020 NXP
+- */
+-
+-/dts-v1/;
+-
+-/include/ "e5500_power_isa.dtsi"
+-
+-/ {
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-	interrupt-parent = <&mpic>;
+-
+-	cpus {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		cpu0: PowerPC,e5500@0 {
+-			device_type = "cpu";
+-			reg = <0>;
+-			#cooling-cells = <2>;
+-		};
+-		cpu1: PowerPC,e5500@1 {
+-			device_type = "cpu";
+-			reg = <1>;
+-			#cooling-cells = <2>;
+-		};
+-		cpu2: PowerPC,e5500@2 {
+-			device_type = "cpu";
+-			reg = <2>;
+-			#cooling-cells = <2>;
+-		};
+-		cpu3: PowerPC,e5500@3 {
+-			device_type = "cpu";
+-			reg = <3>;
+-			#cooling-cells = <2>;
+-		};
+-	};
+-
+-	soc: soc@ffe000000 {
+-		ranges = <0x00000000 0xf 0xfe000000 0x1000000>;
+-		reg = <0xf 0xfe000000 0 0x00001000>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		device_type = "soc";
+-		compatible = "simple-bus";
+-
+-		mpic: pic@40000 {
+-			interrupt-controller;
+-			#address-cells = <0>;
+-			#interrupt-cells = <4>;
+-			reg = <0x40000 0x40000>;
+-			compatible = "fsl,mpic", "chrp,open-pic";
+-			device_type = "open-pic";
+-			clock-frequency = <0x0>;
+-		};
+-
+-		espi0: spi@110000 {
+-			compatible = "fsl,mpc8536-espi";
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <0x110000 0x1000>;
+-			fsl,espi-num-chipselects = <4>;
+-			status = "disabled";
+-		};
+-
+-		usb0@210000 {
+-			compatible = "fsl-usb2-mph";
+-			reg = <0x210000 0x1000>;
+-			phy_type = "utmi";
+-		};
+-
+-		usb1@211000 {
+-			compatible = "fsl-usb2-dr";
+-			reg = <0x211000 0x1000>;
+-			phy_type = "utmi";
+-		};
+-
+-		sata: sata@220000 {
+-			compatible = "fsl,pq-sata-v2";
+-			reg = <0x220000 0x1000>;
+-			interrupts = <68 0x2 0 0>;
+-			sata-offset = <0x1000>;
+-			sata-number = <2>;
+-			sata-fpdma = <0>;
+-		};
+-
+-		esdhc: esdhc@114000 {
+-			compatible = "fsl,esdhc";
+-			reg = <0x114000 0x1000>;
+-			clock-frequency = <0>;
+-		};
+-		/include/ "qoriq-i2c-0.dtsi"
+-		/include/ "qoriq-i2c-1.dtsi"
+-	};
+-
+-	pcie@ffe240000 {
+-		compatible = "fsl,pcie-t104x", "fsl,pcie-fsl-qoriq";
+-		reg = <0xf 0xfe240000 0x0 0x1000>;   /* registers */
+-		law_trgt_if = <0>;
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		device_type = "pci";
+-		bus-range = <0x0 0xff>;
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8000000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xe0000000 0xc 0x00000000 0x0 0x10000000>; /* non-prefetchable memory */
+-	};
+-
+-	pcie@ffe250000 {
+-		compatible = "fsl,pcie-t104x", "fsl,pcie-fsl-qoriq";
+-		reg = <0xf 0xfe250000 0x0 0x1000>;   /* registers */
+-		law_trgt_if = <1>;
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		device_type = "pci";
+-		bus-range = <0x0 0xff>;
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8010000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xe0000000 0xc 0x10000000 0x0 0x10000000>; /* non-prefetchable memory */
+-	};
+-
+-	pcie@ffe260000 {
+-		compatible = "fsl,pcie-t104x", "fsl,pcie-fsl-qoriq";
+-		reg = <0xf 0xfe260000 0x0 0x1000>;   /* registers */
+-		law_trgt_if = <2>;
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		device_type = "pci";
+-		bus-range = <0x0 0xff>;
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8020000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xe0000000 0xc 0x20000000 0x0 0x10000000>; /* non-prefetchable memory */
+-	};
+-
+-	pcie@ffe270000 {
+-		compatible = "fsl,pcie-t104x", "fsl,pcie-fsl-qoriq";
+-		reg = <0xf 0xfe270000 0x0 0x1000>;   /* registers */
+-		law_trgt_if = <3>;
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		device_type = "pci";
+-		bus-range = <0x0 0xff>;
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8030000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xe0000000 0xc 0x30000000 0x0 0x10000000>; /* non-prefetchable memory */
+-	};
+-};
+diff --git a/arch/powerpc/include/asm/fsl_secure_boot.h b/arch/powerpc/include/asm/fsl_secure_boot.h
+index f12830984c6..10f8b0fcd09 100644
+--- a/arch/powerpc/include/asm/fsl_secure_boot.h
++++ b/arch/powerpc/include/asm/fsl_secure_boot.h
+@@ -17,7 +17,6 @@
+ 
+ #if defined(CONFIG_TARGET_T2080QDS) || \
+ 	defined(CONFIG_TARGET_T2080RDB) || \
+-	defined(CONFIG_TARGET_T1042D4RDB) || \
+ 	defined(CONFIG_ARCH_T1024)
+ #undef CFG_SYS_INIT_L3_ADDR
+ #define CFG_SYS_INIT_L3_ADDR			0xbff00000
+diff --git a/board/nxp/t104xrdb/Kconfig b/board/nxp/t104xrdb/Kconfig
+deleted file mode 100644
+index fb26b7c9256..00000000000
+--- a/board/nxp/t104xrdb/Kconfig
++++ /dev/null
+@@ -1,12 +0,0 @@
+-if TARGET_T1042D4RDB
+-
+-config SYS_BOARD
+-	default "t104xrdb"
+-
+-config SYS_VENDOR
+-	default "nxp"
+-
+-config SYS_CONFIG_NAME
+-	default "T104xRDB"
+-
+-endif
+diff --git a/board/nxp/t104xrdb/MAINTAINERS b/board/nxp/t104xrdb/MAINTAINERS
+deleted file mode 100644
+index d0b5709df81..00000000000
+--- a/board/nxp/t104xrdb/MAINTAINERS
++++ /dev/null
+@@ -1,13 +0,0 @@
+-T104XRDB BOARD
+-M:	Priyanka Jain <priyanka.jain@nxp.com>
+-S:	Maintained
+-F:	board/nxp/t104xrdb/
+-F:	include/configs/T104xRDB.h
+-F:	configs/T1042D4RDB_defconfig
+-F:	configs/T1042D4RDB_NAND_defconfig
+-F:	configs/T1042D4RDB_SPIFLASH_defconfig
+-
+-T1040RDB_SDCARD BOARD
+-M:	Priyanka Jain <priyanka.jain@nxp.com>
+-S:	Maintained
+-F:	configs/T1042D4RDB_SDCARD_defconfig
+diff --git a/board/nxp/t104xrdb/Makefile b/board/nxp/t104xrdb/Makefile
+deleted file mode 100644
+index cee574aabb9..00000000000
+--- a/board/nxp/t104xrdb/Makefile
++++ /dev/null
+@@ -1,13 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# Copyright 2013 Freescale Semiconductor, Inc.
+-
+-ifdef CONFIG_XPL_BUILD
+-obj-y += spl.o
+-else
+-obj-y	+= t104xrdb.o
+-obj-y	+= cpld.o
+-endif
+-obj-y	+= ddr.o
+-obj-y	+= law.o
+-obj-y	+= tlb.o
+diff --git a/board/nxp/t104xrdb/README b/board/nxp/t104xrdb/README
+deleted file mode 100644
+index b852f72998d..00000000000
+--- a/board/nxp/t104xrdb/README
++++ /dev/null
+@@ -1,386 +0,0 @@
+-Overview
+---------
+-The T1040RDB is a Freescale reference board that hosts the T1040 SoC
+-(and variants). Variants inclued T1042 presonality of T1040, in which
+-case T1040RDB can also be called T1042RDB.
+-
+-The T1042RDB is a Freescale reference board that hosts the T1042 SoC
+-(and variants). The board is similar to T1040RDB, T1040 is a reduced
+-personality of T1040 SoC without Integrated 8-port Gigabit(L2 Switch).
+-
+-The T1042RDB_PI is a Freescale reference board that hosts the T1042 SoC.
+-(a personality of T1040 SoC). The board is similar to T1040RDB but is
+-designed specially with low power features targeted for Printing Image Market.
+-
+-The T1040D4RDB is a Freescale reference board that hosts the T1040 SoC.
+-The board is re-designed T1040RDB board with following changes :
+-    - Support of DDR4 memory and some enhancements
+-
+-The T1042D4RDB is a Freescale reference board that hosts the T1042 SoC.
+-The board is re-designed T1040RDB board with following changes :
+-    - Support of DDR4 memory
+-    - Support for 0x86 serdes protocol which can support following interfaces
+-        - 2 RGMII's on DTSEC4, DTSEC5
+-        - 3 SGMII on DTSEC1, DTSEC2 & DTSEC3
+-
+-Basic difference's among T1040RDB, T1042RDB_PI, T1042RDB
+--------------------------------------------------------------------------
+-Board		Si		Protocol		Targeted Market
+--------------------------------------------------------------------------
+-T1040RDB	T1040		0x66                    Networking
+-T1040RDB	T1042		0x86                    Networking
+-T1042RDB_PI	T1042		0x06                    Printing & Imaging
+-T1040D4RDB	T1040		0x66                    Networking
+-T1042D4RDB	T1042		0x86                    Networking
 -
 -
--    $ make MPC8349ADS_config
--    Configuring for MPC8349ADS board...
+-T1040 SoC Overview
+-------------------
+-The QorIQ T1040/T1042 processor support four integrated 64-bit e5500 PA
+-processor cores with high-performance data path acceleration architecture
+-and network peripheral interfaces required for networking & telecommunications.
 -
--    $ make
+-The T1040/T1042 SoC includes the following function and features:
 -
+- - Four e5500 cores, each with a private 256 KB L2 cache
+- - 256 KB shared L3 CoreNet platform cache (CPC)
+- - Interconnect CoreNet platform
+- - 32-/64-bit DDR3L/DDR4 SDRAM memory controller with ECC and interleaving
+-   support
+- - Data Path Acceleration Architecture (DPAA) incorporating acceleration
+- for the following functions:
+-    -  Packet parsing, classification, and distribution
+-    -  Queue management for scheduling, packet sequencing, and congestion
+-       management
+-    -  Cryptography Acceleration (SEC 5.0)
+-    - RegEx Pattern Matching Acceleration (PME 2.2)
+-    - IEEE Std 1588 support
+-    - Hardware buffer management for buffer allocation and deallocation
+- - Ethernet interfaces
+-    - Integrated 8-port Gigabit Ethernet switch (T1040 only)
+-    - Four 1 Gbps Ethernet controllers
+- - Two RGMII interfaces or one RGMII and one MII interfaces
+- - High speed peripheral interfaces
+-   - Four PCI Express 2.0 controllers running at up to 5 GHz
+-   - Two SATA controllers supporting 1.5 and 3.0 Gb/s operation
+-   - Upto two QSGMII interface
+-   - Upto six SGMII interface supporting 1000 Mbps
+-   - One SGMII interface supporting upto 2500 Mbps
+- - Additional peripheral interfaces
+-   - Two USB 2.0 controllers with integrated PHY
+-   - SD/eSDHC/eMMC
+-   - eSPI controller
+-   - Four I2C controllers
+-   - Four UARTs
+-   - Four GPIO controllers
+-   - Integrated flash controller (IFC)
+-   - LCD and HDMI interface (DIU) with 12 bit dual data rate
+-   - TDM interface
+- - Multicore programmable interrupt controller (PIC)
+- - Two 8-channel DMA engines
+- - Single source clocking implementation
+- - Deep Sleep power implementaion (wakeup from GPIO/Timer/Ethernet/USB)
 -
--1. Board Switches and Jumpers
+-T1040 SoC Personalities
+--------------------------
+-T1022 Personality:
+-T1022 is a reduced personality of T1040 with less core/clusters.
 -
--
--2. Memory Map
--
--2.1. The memory map should look pretty much like this:
--
--     0x0000_0000     0x7fff_ffff     DDR		     2G
--     0x8000_0000     0x9fff_ffff     PCI MEM		     512M
--     0xc000_0000     0xdfff_ffff     Rapid IO		     512M
--     0xe000_0000     0xe00f_ffff     CCSR		     1M
--     0xe200_0000     0xe2ff_ffff     PCI IO		     16M
--     0xf000_0000     0xf7ff_ffff     SDRAM		     128M
--     0xf800_0000     0xf80f_ffff     BCSR		     1M
--     0xfe00_0000     0xffff_ffff     FLASH (boot bank)	     16M
--
--
--3. Definitions
--
--3.1 Explanation of NEW definitions in:
--
--	include/configs/MPC8349ADS.h
--
--    CONFIG_MPC83xx	    MPC83xx family
--    CONFIG_MPC8349	    MPC8349 specific
--    CONFIG_TSEC_ENET	    Use on-chip 10/100/1000 ethernet
--
--
--4. Compilation
--
--    Assuming you're using BASH shell:
--
--	export CROSS_COMPILE=your-cross-compile-prefix
--	cd u-boot
--	make distclean
--	make MPC8349ADS_config
--	make
--
--5. Downloading and Flashing Images
--
--5.0 Download over serial line using Kermit:
--
--	loadb
--	[Drop to kermit:
--	    ^\c
--	    send <u-boot-bin-image>
--	    c
--	]
--
--
--    Or via tftp:
--
--	tftp 10000 u-boot.bin
--
--5.1 Reflash U-Boot Image using U-Boot
--
--    tftp 10000 u-boot.bin
--    protect off fe000000 fe09ffff
--    erase fe000000 fe09ffff
--
--    cp.b 10000 fe000000 xxxx
--or
--    cp.b 10000 fe000000 a0000
--
--You might have to supply the correct byte count for 'xxxx' from
--the TFTP.  Maybe a0000 will work too, that corresponds to the
--erased sectors.
+-T1042 Personality:
+-T1042 is a reduced personality of T1040 without Integrated 8-port Gigabit
+-Ethernet switch. Rest of the blocks are same as T1040
 -
 -
--6. Notes
-diff --git a/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt b/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt
-index baaacb62846..213123dbab4 100644
---- a/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt
-+++ b/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt
-@@ -7,7 +7,6 @@ Required properties:
- - compatible: must be one of "fsl,mpc8308-clk",
-                              "fsl,mpc8309-clk",
-                              "fsl,mpc832x-clk",
--                             "fsl,mpc8349-clk",
-                              "fsl,mpc8360-clk"
-   depending on which SoC is employed
- - #clock-cells: Must be 1
-diff --git a/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt b/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt
-index 5bdbd309fbf..5acb2c403c9 100644
---- a/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt
-+++ b/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt
-@@ -7,7 +7,6 @@ Required properties:
-                              "fsl,mpc8308",
-                              "fsl,mpc8309",
-                              "fsl,mpc832x",
--                             "fsl,mpc8349",
-                              "fsl,mpc8360"
- - clocks: has to have two entries, which must be the core clock at index 0 and
-   the CSB (Coherent System Bus) clock at index 1. Both are given by a suitable
-diff --git a/drivers/clk/mpc83xx_clk.c b/drivers/clk/mpc83xx_clk.c
-index bca09f17d5f..4b2f1705b64 100644
---- a/drivers/clk/mpc83xx_clk.c
-+++ b/drivers/clk/mpc83xx_clk.c
-@@ -59,8 +59,6 @@ static inline bool is_clk_valid(struct udevice *clk, int id)
- 		return mpc83xx_has_tsec(type);
- 	case MPC83XX_CLK_USBDR:
- 		return type == SOC_MPC8360;
--	case MPC83XX_CLK_USBMPH:
--		return type == SOC_MPC8349;
- 	case MPC83XX_CLK_PCIEXP1:
- 		return mpc83xx_has_pcie1(type);
- 	case MPC83XX_CLK_PCIEXP2:
-@@ -322,7 +320,6 @@ static const struct udevice_id mpc83xx_clk_match[] = {
- 	{ .compatible = "fsl,mpc8308-clk", .data = SOC_MPC8308 },
- 	{ .compatible = "fsl,mpc8309-clk", .data = SOC_MPC8309 },
- 	{ .compatible = "fsl,mpc832x-clk", .data = SOC_MPC832X },
--	{ .compatible = "fsl,mpc8349-clk", .data = SOC_MPC8349 },
- 	{ .compatible = "fsl,mpc8360-clk", .data = SOC_MPC8360 },
- 	{ /* sentinel */ }
- };
-diff --git a/drivers/clk/mpc83xx_clk.h b/drivers/clk/mpc83xx_clk.h
-index ce3683f3932..ba7ea9dd741 100644
---- a/drivers/clk/mpc83xx_clk.h
-+++ b/drivers/clk/mpc83xx_clk.h
-@@ -125,7 +125,6 @@ static const char * const names[] = {
- 	[MPC83XX_CLK_TSEC1] = "TSEC1",
- 	[MPC83XX_CLK_TSEC2] = "TSEC2",
- 	[MPC83XX_CLK_USBDR] = "USB DR",
--	[MPC83XX_CLK_USBMPH] = "USB MPH",
- 	[MPC83XX_CLK_PCIEXP1] = "PCIEXP1",
- 	[MPC83XX_CLK_PCIEXP2] = "PCIEXP2",
- 	[MPC83XX_CLK_SATA] = "SATA",
-@@ -214,10 +213,8 @@ static int retrieve_mode(int clk, int soc_type, struct clk_mode *mode)
- 		set_mode(mode, 6, 7, TYPE_SCCR_STANDARD);
- 		break;
- 	case MPC83XX_CLK_I2C1:
--		if (soc_type == SOC_MPC8349)
--			set_mode(mode, 2, 3, TYPE_SCCR_STANDARD);
--		else /* I2C and ENC are the same register */
--			set_mode(mode, 6, 7, TYPE_SCCR_STANDARD);
-+		/* I2C and ENC use the same register */
-+		set_mode(mode, 6, 7, TYPE_SCCR_STANDARD);
- 		break;
- 	case MPC83XX_CLK_PCIEXP1:
- 		set_mode(mode, 10, 11, TYPE_SCCR_STANDARD);
-@@ -226,12 +223,6 @@ static int retrieve_mode(int clk, int soc_type, struct clk_mode *mode)
- 		set_mode(mode, 12, 13, TYPE_SCCR_STANDARD);
- 		break;
- 	case MPC83XX_CLK_USBDR:
--		if (soc_type == SOC_MPC8349)
--			set_mode(mode, 10, 11, TYPE_SCCR_STANDARD);
+-T1040RDB board Overview
+--------------------------
+- - SERDES Connections, 8 lanes information:
+-	1: None
+-	2: SGMII
+-	3: QSGMII
+-	4: QSGMII
+-	5: PCIe1 x1 slot
+-	6: mini PCIe connector
+-	7: mini PCIe connector
+-	8: SATA connector
+- - DDR Controller
+-     - Supports rates of up to 1600 MHz data-rate
+-     - Supports one DDR3LP UDIMM/RDIMMs, of single-, dual- or quad-rank types.
+- - IFC/Local Bus
+-     - NAND flash: 1GB 8-bit NAND flash
+-     - NOR: 128MB 16-bit NOR Flash
+- - Ethernet
+-     - Two on-board RGMII 10/100/1G ethernet ports.
+- - CPLD
+- - Clocks
+-     - System and DDR clock (SYSCLK, “DDRCLK”)
+-     - SERDES clocks
+- - Power Supplies
+- - USB
+-     - Supports two USB 2.0 ports with integrated PHYs
+-     - Two type A ports with 5V@1.5A per port.
+- - SDHC
+-     - SDHC/SDXC connector
+- - SPI
+-    -  On-board 64MB SPI flash
+- - Other IO
+-    - Two Serial ports
+-    - Four I2C ports
+-
+-T1042RDB_PI board Overview
+--------------------------
+- - SERDES Connections, 8 lanes information:
+-	1, 2, 3, 4 : PCIe x4 slot
+-	5: mini PCIe connector
+-	6: mini PCIe connector
+-	7: NA
+-	8: SATA connector
+- - DDR Controller
+-     - Supports rates of up to 1600 MHz data-rate
+-     - Supports one DDR3LP UDIMM/RDIMMs, of single-, dual- or quad-rank types.
+- - IFC/Local Bus
+-     - NAND flash: 1GB 8-bit NAND flash
+-     - NOR: 128MB 16-bit NOR Flash
+- - Ethernet
+-     - Two on-board RGMII 10/100/1G ethernet ports.
+- - CPLD
+- - Clocks
+-     - System and DDR clock (SYSCLK, “DDRCLK”)
+-     - SERDES clocks
+- - Video
+-     - DIU supports video at up to 1280x1024x32bpp
+- - Power Supplies
+- - USB
+-     - Supports two USB 2.0 ports with integrated PHYs
+-     - Two type A ports with 5V@1.5A per port.
+- - SDHC
+-     - SDHC/SDXC connector
+- - SPI
+-    -  On-board 64MB SPI flash
+- - Other IO
+-    - Two Serial ports
+-    - Four I2C ports
+-
+-Memory map
+------------
+-The addresses in brackets are physical addresses.
+-
+-Start Address  End Address      Description                     Size
+-0xF_FFDF_0000  0xF_FFDF_0FFF    IFC - CPLD                      4KB
+-0xF_FF80_0000  0xF_FF80_FFFF    IFC - NAND Flash                64KB
+-0xF_FE00_0000  0xF_FEFF_FFFF    CCSRBAR                         16MB
+-0xF_F803_0000  0xF_F803_FFFF    PCI Express 4 I/O Space         64KB
+-0xF_F802_0000  0xF_F802_FFFF    PCI Express 3 I/O Space	        64KB
+-0xF_F801_0000  0xF_F801_FFFF    PCI Express 2 I/O Space         64KB
+-0xF_F800_0000  0xF_F800_FFFF    PCI Express 1 I/O Space	        64KB
+-0xF_F600_0000  0xF_F7FF_FFFF    Queue manager software portal   32MB
+-0xF_F400_0000  0xF_F5FF_FFFF    Buffer manager software portal  32MB
+-0xF_E800_0000  0xF_EFFF_FFFF    IFC - NOR Flash                 128MB
+-0xF_0000_0000  0xF_003F_FFFF    DCSR                            4MB
+-0xC_3000_0000  0xC_3FFF_FFFF    PCI Express 4 Mem Space         256MB
+-0xC_2000_0000  0xC_2FFF_FFFF    PCI Express 3 Mem Space         256MB
+-0xC_1000_0000  0xC_1FFF_FFFF    PCI Express 2 Mem Space         256MB
+-0xC_0000_0000  0xC_0FFF_FFFF    PCI Express 1 Mem Space         256MB
+-0x0_0000_0000  0x0_ffff_ffff    DDR                             2GB
+-
+-
+-NOR Flash memory Map
+----------------------
+- Start          End             Definition                       Size
+-0xEFF40000      0xEFFFFFFF      U-Boot (current bank)            768KB
+-0xEFF20000      0xEFF3FFFF      U-Boot env (current bank)        128KB
+-0xEFF00000      0xEFF1FFFF      FMAN Ucode (current bank)        128KB
+-0xED300000      0xEFEFFFFF      rootfs (alt bank)                44MB
+-0xEC800000      0xEC8FFFFF      Hardware device tree (alt bank)  1MB
+-0xEC020000      0xEC7FFFFF      Linux.uImage (alt bank)          7MB + 875KB
+-0xEC000000      0xEC01FFFF      RCW (alt bank)                   128KB
+-0xEBF40000      0xEBFFFFFF      U-Boot (alt bank)                768KB
+-0xEBF20000      0xEBF3FFFF      U-Boot env (alt bank)            128KB
+-0xEBF00000      0xEBF1FFFF      FMAN ucode (alt bank)            128KB
+-0xE9300000      0xEBEFFFFF      rootfs (current bank)            44MB
+-0xE8800000      0xE88FFFFF      Hardware device tree (cur bank)  11MB + 512KB
+-0xE8020000      0xE86FFFFF      Linux.uImage (current bank)      7MB + 875KB
+-0xE8000000      0xE801FFFF      RCW (current bank)               128KB
+-
+-
+-Various Software configurations/environment variables/commands
+---------------------------------------------------------------
+-The below commands apply to the board
+-
+-1. U-Boot environment variable hwconfig
+-   The default hwconfig is:
+-	hwconfig=fsl_ddr:ctlr_intlv=null,bank_intlv=cs0_cs1;usb1:
+-					dr_mode=host,phy_type=utmi
+-   Note: For USB gadget set "dr_mode=peripheral"
+-
+-2. FMAN Ucode versions
+-   fsl_fman_ucode_t1040.bin
+-
+-3. Switching to alternate bank
+-   Commands for switching to alternate bank.
+-
+-	1. To change from vbank0 to vbank4
+-		=> cpld reset altbank (it will boot using vbank4)
+-
+-	2.To change from vbank4 to vbank0
+-		=> cpld reset (it will boot using vbank0)
+-
+-NAND boot with 2 Stage boot loader
+-----------------------------------
+-PBL initialise the internal SRAM and copy SPL(160KB) in SRAM.
+-SPL further initialise DDR using SPD and environment variables and copy
+-U-Boot(768 KB) from flash to DDR.
+-Finally SPL transer control to U-Boot for futher booting.
+-
+-SPL has following features:
+- - Executes within 256K
+- - No relocation required
+-
+- Run time view of SPL framework during  boot :-
+- -----------------------------------------------
+- Area        | Address                         |
+------------------------------------------------
+- Secure boot | 0xFFFC0000 (32KB)               |
+- headers     |                                 |
+- -----------------------------------------------
+- GD, BD      | 0xFFFC8000 (4KB)                |
+- -----------------------------------------------
+- ENV         | 0xFFFC9000 (8KB)                |
+- -----------------------------------------------
+- HEAP        | 0xFFFCB000 (30KB)               |
+- -----------------------------------------------
+- STACK       | 0xFFFD8000 (22KB)               |
+- -----------------------------------------------
+- U-Boot SPL  | 0xFFFD8000 (160KB)              |
+- -----------------------------------------------
+-
+-NAND Flash memory Map on T104xRDB
+-------------------------------------------
+- Start		 End		Definition			Size
+-0x000000	0x0FFFFF	U-Boot                          1MB
+-0x180000	0x19FFFF	U-Boot env                      128KB
+-0x280000	0x29FFFF	FMAN Ucode                      128KB
+-0x380000	0x39FFFF	QE Firmware                     128KB
+-
+-SD Card memory Map on T104xRDB
+-------------------------------------------
+- Block		#blocks		Definition			Size
+-0x008		2048		U-Boot                          1MB
+-0x800		0024		U-Boot env                      8KB
+-0x820		0256		FMAN Ucode                      128KB
+-0x920		0256		QE Firmware                     128KB
+-
+-SPI Flash memory Map on T104xRDB
+-------------------------------------------
+- Start		 End		Definition			Size
+-0x000000	0x0FFFFF	U-Boot                          1MB
+-0x100000	0x101FFF	U-Boot env                      8KB
+-0x110000	0x12FFFF	FMAN Ucode                      128KB
+-0x130000	0x14FFFF	QE Firmware                     128KB
+-
+-Please note QE Firmware is only valid for T1040RDB
+-
+-
+-Switch Settings for T104xRDB boards: (ON is 0, OFF is 1)
+-==========================================================
+-NOR boot SW setting:
+-SW1: 00010011
+-SW2: 10111011
+-SW3: 11100001
+-
+-NAND boot SW setting:
+-SW1: 10001000
+-SW2: 00111011
+-SW3: 11110001
+-
+-SPI boot SW setting:
+-SW1: 00100010
+-SW2: 10111011
+-SW3: 11100001
+-
+-SD boot SW setting:
+-SW1: 00100000
+-SW2: 00111011
+-SW3: 11100001
+-
+-Switch Settings for T104xD4RDB boards: (ON is 0, OFF is 1)
+-=============================================================
+-NOR boot SW setting:
+-SW1: 00010011
+-SW2: 10111001
+-SW3: 11100001
+-
+-NAND boot SW setting:
+-SW1: 10001000
+-SW2: 00111001
+-SW3: 11110001
+-
+-SPI boot SW setting:
+-SW1: 00100010
+-SW2: 10111001
+-SW3: 11100001
+-
+-SD boot SW setting:
+-SW1: 00100000
+-SW2: 00111001
+-SW3: 11100001
+-
+-PBL-based image generation
+-==========================
+-Changes only the required register bit in in PBI commands.
+-
+-Provides reference code which might needs some
+-modification as per requirement.
+-example:
+-By default PBI_SRC=14 (which is for IFC-NAND/NOR) in rcw.cfg file
+-which needs to be changed for SPI and SD.
+-
+-For SD-boot
+-==============
+-1. Set RCW[192:195], PBI_SRC bits as 6 in RCW file (t1040d4_rcw.cfg type files)
+-
+-example:
+- RCW file: board/nxp/t104xrdb/t1040d4_rcw.cfg
+-
+-Change
+-66000002 40000002 ec027000 01000000
+-to
+-66000002 40000002 6c027000 01000000
+-
+-2. SD does not support flush so remove flush from pbl, make changes in
+-   tools/pblimage.c file, Update value of pbl_end_cmd[0] = 0x09138000
+-   with 0x091380c0
+-
+-For SPI-boot
+-==============
+-1. Set RCW[192:195], PBI_SRC bits as 5 in RCW file (t1040d4_rcw.cfg type files)
+-
+-example:
+- RCW file: board/nxp/t104xrdb/t1040d4_rcw.cfg
+-
+-Change
+-66000002 40000002 ec027000 01000000
+-to
+-66000002 40000002 5c027000 01000000
+-
+-2. SPI does not support flush so remove flush from pbl, make changes in
+-   tools/pblimage.c file, Update value of pbl_end_cmd[0] = 0x09138000
+-   with 0x091380c0
+-
+-Device tree support and how to enable it for different configs
+---------------------------------------------------------------
+-Device tree support is available for t1042d4rdb for below mentioned boot,
+-1. NOR Boot
+-2. NAND Boot
+-3. SD Boot
+-4. SPIFLASH Boot
+-
+-To enable device tree support for other boot, below configs need to be
+-enabled in relative defconfig file,
+-1. CONFIG_DEFAULT_DEVICE_TREE="t1042d4rdb" (Change default device tree name if required)
+-2. CONFIG_OF_CONTROL
+-3. CONFIG_MPC85XX_HAVE_RESET_VECTOR if reset vector is located at
+-   CFG_RESET_VECTOR_ADDRESS - 0xffc
+-
+-If device tree support is enabled in defconfig,
+-1. use 'u-boot.bin' for NOR boot.
+-2. use 'u-boot-with-spl-pbl.bin' for other boot.
+diff --git a/board/nxp/t104xrdb/cpld.c b/board/nxp/t104xrdb/cpld.c
+deleted file mode 100644
+index 038e40e2fae..00000000000
+--- a/board/nxp/t104xrdb/cpld.c
++++ /dev/null
+@@ -1,116 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/**
+- * Copyright 2014 Freescale Semiconductor
+- *
+- * This file provides support for the board-specific CPLD used on some Freescale
+- * reference boards.
+- *
+- * The following macros need to be defined:
+- *
+- * CFG_SYS_CPLD_BASE-The virtual address of the base of the CPLD register map
+- */
+-
+-#include <config.h>
+-#include <command.h>
+-#include <linux/string.h>
+-#include <asm/io.h>
+-
+-#include "cpld.h"
+-
+-u8 cpld_read(unsigned int reg)
+-{
+-	void *p = (void *)CFG_SYS_CPLD_BASE;
+-
+-	return in_8(p + reg);
+-}
+-
+-void cpld_write(unsigned int reg, u8 value)
+-{
+-	void *p = (void *)CFG_SYS_CPLD_BASE;
+-
+-	out_8(p + reg, value);
+-}
+-
+-/**
+- * Set the boot bank to the alternate bank
+- */
+-void cpld_set_altbank(void)
+-{
+-	u8 reg = CPLD_READ(flash_ctl_status);
+-
+-	reg = (reg & ~CPLD_BANK_SEL_MASK) | CPLD_LBMAP_ALTBANK;
+-
+-	CPLD_WRITE(flash_ctl_status, reg);
+-	CPLD_WRITE(reset_ctl1, CPLD_LBMAP_RESET);
+-}
+-
+-/**
+- * Set the boot bank to the default bank
+- */
+-void cpld_set_defbank(void)
+-{
+-	u8 reg = CPLD_READ(flash_ctl_status);
+-
+-	reg = (reg & ~CPLD_BANK_SEL_MASK) | CPLD_LBMAP_DFLTBANK;
+-
+-	CPLD_WRITE(flash_ctl_status, reg);
+-	CPLD_WRITE(reset_ctl1, CPLD_LBMAP_RESET);
+-}
+-
+-#ifdef DEBUG
+-static void cpld_dump_regs(void)
+-{
+-	printf("cpld_ver	 = 0x%02x\n", CPLD_READ(cpld_ver));
+-	printf("cpld_ver_sub	 = 0x%02x\n", CPLD_READ(cpld_ver_sub));
+-	printf("hw_ver		 = 0x%02x\n", CPLD_READ(hw_ver));
+-	printf("sw_ver		 = 0x%02x\n", CPLD_READ(sw_ver));
+-	printf("reset_ctl1	 = 0x%02x\n", CPLD_READ(reset_ctl1));
+-	printf("reset_ctl2	 = 0x%02x\n", CPLD_READ(reset_ctl2));
+-	printf("int_status	 = 0x%02x\n", CPLD_READ(int_status));
+-	printf("flash_ctl_status = 0x%02x\n", CPLD_READ(flash_ctl_status));
+-	printf("fan_ctl_status	 = 0x%02x\n", CPLD_READ(fan_ctl_status));
+-#if defined(CONFIG_TARGET_T1040D4D4RDB) || defined(CONFIG_TARGET_T1042D4RDB)
+-	printf("int_mask	 = 0x%02x\n", CPLD_READ(int_mask));
+-#else
+-	printf("led_ctl_status	 = 0x%02x\n", CPLD_READ(led_ctl_status));
+-#endif
+-	printf("sfp_ctl_status	 = 0x%02x\n", CPLD_READ(sfp_ctl_status));
+-	printf("misc_ctl_status	 = 0x%02x\n", CPLD_READ(misc_ctl_status));
+-	printf("boot_override	 = 0x%02x\n", CPLD_READ(boot_override));
+-	printf("boot_config1	 = 0x%02x\n", CPLD_READ(boot_config1));
+-	printf("boot_config2	 = 0x%02x\n", CPLD_READ(boot_config2));
+-	putc('\n');
+-}
+-#endif
+-
+-int do_cpld(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-{
+-	int rc = 0;
+-
+-	if (argc <= 1)
+-		return cmd_usage(cmdtp);
+-
+-	if (strcmp(argv[1], "reset") == 0) {
+-		if (strcmp(argv[2], "altbank") == 0)
+-			cpld_set_altbank();
 -		else
--			set_mode(mode, 8, 9, TYPE_SCCR_STANDARD);
--		break;
--	case MPC83XX_CLK_USBMPH:
- 		set_mode(mode, 8, 9, TYPE_SCCR_STANDARD);
- 		break;
- 	case MPC83XX_CLK_PCI:
-diff --git a/drivers/cpu/mpc83xx_cpu.c b/drivers/cpu/mpc83xx_cpu.c
-index 01ac307c821..56b192ca153 100644
---- a/drivers/cpu/mpc83xx_cpu.c
-+++ b/drivers/cpu/mpc83xx_cpu.c
-@@ -73,9 +73,6 @@ static inline void determine_family(const struct udevice *dev)
- 	case 0x806:
- 		priv->family = FAMILY_832X;
- 		break;
--	case 0x803:
--		priv->family = FAMILY_834X;
--		break;
- 	case 0x804:
- 		priv->family = FAMILY_836X;
- 		break;
-@@ -111,18 +108,6 @@ static inline void determine_type(const struct udevice *dev)
- 	case 0x8062:
- 		priv->type = TYPE_8323;
- 		break;
--	case 0x8036:
--		priv->type = TYPE_8343;
--		break;
--	case 0x8032:
--		priv->type = TYPE_8347_TBGA;
--		break;
--	case 0x8034:
--		priv->type = TYPE_8347_PBGA;
--		break;
--	case 0x8030:
--		priv->type = TYPE_8349;
--		break;
- 	case 0x804A:
- 		priv->type = TYPE_8358_TBGA;
- 		break;
-@@ -177,13 +162,8 @@ static inline void determine_revid(const struct udevice *dev)
- 	u32 REVID_MINOR_MASK;
- 	u32 spridr = get_spridr();
- 
--	if (priv->family == FAMILY_834X) {
--		REVID_MAJOR_MASK = 0x0000FF00;
--		REVID_MINOR_MASK = 0x000000FF;
--	} else {
--		REVID_MAJOR_MASK = 0x000000F0;
--		REVID_MINOR_MASK = 0x0000000F;
--	}
-+	REVID_MAJOR_MASK = 0x000000F0;
-+	REVID_MINOR_MASK = 0x0000000F;
- 
- 	priv->revid.major = bitfield_extract_by_mask(spridr, REVID_MAJOR_MASK);
- 	priv->revid.minor = bitfield_extract_by_mask(spridr, REVID_MINOR_MASK);
-@@ -204,8 +184,7 @@ static void determine_cpu_data(const struct udevice *dev)
- 	determine_e300_type(dev);
- 	determine_revid(dev);
- 
--	if ((priv->family == FAMILY_834X ||
--	     priv->family == FAMILY_836X) && priv->revid.major >= 2)
-+	if (priv->family == FAMILY_836X && priv->revid.major >= 2)
- 		priv->is_a_variant = true;
- 
- 	priv->is_e_processor = !bitfield_extract_by_mask(spridr, E_FLAG_MASK);
-@@ -307,7 +286,6 @@ static const struct udevice_id mpc83xx_cpu_ids[] = {
- 	{ .compatible = "fsl,mpc8308", },
- 	{ .compatible = "fsl,mpc8309", },
- 	{ .compatible = "fsl,mpc832x", },
--	{ .compatible = "fsl,mpc8349", },
- 	{ .compatible = "fsl,mpc8360", },
- 	{ /* sentinel */ }
- };
-diff --git a/drivers/cpu/mpc83xx_cpu.h b/drivers/cpu/mpc83xx_cpu.h
-index d9773d893f1..f86b36114ab 100644
---- a/drivers/cpu/mpc83xx_cpu.h
-+++ b/drivers/cpu/mpc83xx_cpu.h
-@@ -36,14 +36,12 @@ static const char * const e300_names[] = {
-  * enum mpc83xx_cpu_family - Identifiers for MPC83xx CPU families
-  * @FAMILY_830X:    Identifier for the MPC830x CPU family
-  * @FAMILY_832X:    Identifier for the MPC832x CPU family
-- * @FAMILY_834X:    Identifier for the MPC834x CPU family
-  * @FAMILY_836X:    Identifier for the MPC836x CPU family
-  * @FAMILY_UNKNOWN: Identifier for an unknown MPC83xx CPU family
-  */
- enum mpc83xx_cpu_family {
- 	FAMILY_830X,
- 	FAMILY_832X,
--	FAMILY_834X,
- 	FAMILY_836X,
- 	FAMILY_UNKNOWN,
- };
-@@ -54,12 +52,6 @@ enum mpc83xx_cpu_family {
-  * @TYPE_8309:      Identifier for the MPC8309 CPU type
-  * @TYPE_8321:      Identifier for the MPC8321 CPU type
-  * @TYPE_8323:      Identifier for the MPC8323 CPU type
-- * @TYPE_8343:      Identifier for the MPC8343 CPU type
-- * @TYPE_8347_TBGA: Identifier for the MPC8347 CPU type (Tape Ball Grid Array
-- *		    version)
-- * @TYPE_8347_PBGA: Identifier for the MPC8347 CPU type (Plastic Ball Grid Array
-- *		    version)
-- * @TYPE_8349:      Identifier for the MPC8349 CPU type
-  * @TYPE_8358_TBGA: Identifier for the MPC8358 CPU type (Tape Ball Grid Array
-  *		    version)
-  * @TYPE_8358_PBGA: Identifier for the MPC8358 CPU type (Plastic Ball Grid Array
-@@ -72,10 +64,6 @@ enum mpc83xx_cpu_type {
- 	TYPE_8309,
- 	TYPE_8321,
- 	TYPE_8323,
--	TYPE_8343,
--	TYPE_8347_TBGA,
--	TYPE_8347_PBGA,
--	TYPE_8349,
- 	TYPE_8358_TBGA,
- 	TYPE_8358_PBGA,
- 	TYPE_8360,
-@@ -88,10 +76,6 @@ static const char * const cpu_type_names[] = {
- 	[TYPE_8309] = "8309",
- 	[TYPE_8321] = "8321",
- 	[TYPE_8323] = "8323",
--	[TYPE_8343] = "8343",
--	[TYPE_8347_TBGA] = "8347_TBGA",
--	[TYPE_8347_PBGA] = "8347_PBGA",
--	[TYPE_8349] = "8349",
- 	[TYPE_8358_TBGA] = "8358_TBGA",
- 	[TYPE_8358_PBGA] = "8358_PBGA",
- 	[TYPE_8360] = "8360",
-diff --git a/drivers/pci/pci_auto.c b/drivers/pci/pci_auto.c
-index 4a1c782be36..e1e1fb21e08 100644
---- a/drivers/pci/pci_auto.c
-+++ b/drivers/pci/pci_auto.c
-@@ -567,20 +567,6 @@ int dm_pciauto_config_device(struct udevice *dev)
- 		      PCI_DEV(dm_pci_get_bdf(dev)));
- 		break;
- #endif
--#if defined(CONFIG_ARCH_MPC834X)
--	case PCI_CLASS_BRIDGE_OTHER:
--		/*
--		 * The host/PCI bridge 1 seems broken in 8349 - it presents
--		 * itself as 'PCI_CLASS_BRIDGE_OTHER' and appears as an _agent_
--		 * device claiming resources io/mem/irq.. we only allow for
--		 * the PIMMR window to be allocated (BAR0 - 1MB size)
--		 */
--		debug("PCI Autoconfig: Broken bridge found, only minimal config\n");
--		dm_pciauto_setup_device(dev, 0, hose->pci_mem,
--					hose->pci_prefetch, hose->pci_io);
--		break;
+-			cpld_set_defbank();
+-#ifdef DEBUG
+-	} else if (strcmp(argv[1], "dump") == 0) {
+-		cpld_dump_regs();
 -#endif
+-	} else
+-		rc = cmd_usage(cmdtp);
 -
- 	default:
- 		dm_pciauto_setup_device(dev, pci_mem, pci_prefetch, pci_io);
- 		break;
-diff --git a/include/dt-bindings/clk/mpc83xx-clk.h b/include/dt-bindings/clk/mpc83xx-clk.h
-index db4ea15cf42..86d7101ef1c 100644
---- a/include/dt-bindings/clk/mpc83xx-clk.h
-+++ b/include/dt-bindings/clk/mpc83xx-clk.h
-@@ -22,7 +22,6 @@
- #define MPC83XX_CLK_TSEC1	13
- #define MPC83XX_CLK_TSEC2	14
- #define MPC83XX_CLK_USBDR	15
--#define MPC83XX_CLK_USBMPH	16
- #define MPC83XX_CLK_PCIEXP1	17
- #define MPC83XX_CLK_PCIEXP2	18
- #define MPC83XX_CLK_SATA	19
-diff --git a/include/mpc83xx.h b/include/mpc83xx.h
-index 8a1a9e7a9b9..d570ba61b7f 100644
---- a/include/mpc83xx.h
-+++ b/include/mpc83xx.h
-@@ -44,13 +44,8 @@
- #define SPRIDR_PARTID			0xFFFF0000	/* Part Id */
- #define SPRIDR_REVID			0x0000FFFF	/* Revision Id */
- 
--#if defined(CONFIG_ARCH_MPC834X)
--#define REVID_MAJOR(spridr)		((spridr & 0x0000FF00) >> 8)
--#define REVID_MINOR(spridr)		(spridr & 0x000000FF)
+-	return rc;
+-}
+-
+-U_BOOT_CMD(
+-	cpld, CONFIG_SYS_MAXARGS, 1, do_cpld,
+-	"Reset the board or alternate bank",
+-	"reset - hard reset to default bank\n"
+-	"cpld reset altbank - reset to alternate bank\n"
+-#ifdef DEBUG
+-	"cpld dump - display the CPLD registers\n"
+-#endif
+-	);
+diff --git a/board/nxp/t104xrdb/cpld.h b/board/nxp/t104xrdb/cpld.h
+deleted file mode 100644
+index 0384202fbcb..00000000000
+--- a/board/nxp/t104xrdb/cpld.h
++++ /dev/null
+@@ -1,45 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/**
+- * Copyright 2013 Freescale Semiconductor
+- *
+- * This file provides support for the ngPIXIS, a board-specific FPGA used on
+- * some Freescale reference boards.
+- */
+-
+-/*
+- * CPLD register set. Feel free to add board-specific #ifdefs where necessary.
+- */
+-struct cpld_data {
+-	u8 cpld_ver;		/* 0x00 - CPLD Major Revision Register */
+-	u8 cpld_ver_sub;	/* 0x01 - CPLD Minor Revision Register */
+-	u8 hw_ver;		/* 0x02 - Hardware Revision Register */
+-	u8 sw_ver;		/* 0x03 - Software Revision register */
+-	u8 res0[12];		/* 0x04 - 0x0F - not used */
+-	u8 reset_ctl1;		/* 0x10 - Reset control Register1 */
+-	u8 reset_ctl2;		/* 0x11 - Reset control Register2 */
+-	u8 int_status;		/* 0x12 - Interrupt status Register */
+-	u8 flash_ctl_status;	/* 0x13 - Flash control and status register */
+-	u8 fan_ctl_status;	/* 0x14 - Fan control and status register  */
+-#if defined(CONFIG_TARGET_T1042D4RDB)
+-	u8 int_mask;		/* 0x15 - Interrupt mask Register */
 -#else
- #define REVID_MAJOR(spridr)		((spridr & 0x000000F0) >> 4)
- #define REVID_MINOR(spridr)		(spridr & 0x0000000F)
+-	u8 led_ctl_status;	/* 0x15 - LED control and status register */
 -#endif
- 
- #define PARTID_NO_E(spridr)		((spridr & 0xFFFE0000) >> 16)
- #define SPR_FAMILY(spridr)		((spridr & 0xFFF00000) >> 20)
-@@ -60,11 +55,6 @@
- #define SPR_832X_FAMILY			0x806
- #define SPR_8321			0x8066
- #define SPR_8323			0x8062
--#define SPR_834X_FAMILY			0x803
--#define SPR_8343			0x8036
--#define SPR_8347_TBGA_			0x8032
--#define SPR_8347_PBGA_			0x8034
--#define SPR_8349			0x8030
- #define SPR_836X_FAMILY			0x804
- #define SPR_8358_TBGA_			0x804A
- #define SPR_8358_PBGA_			0x804E
-@@ -87,28 +77,7 @@
- #define SPCR_COREPR			0x00300000
- #define SPCR_COREPR_SHIFT		(31-11)
- 
--#if defined(CONFIG_ARCH_MPC834X)
--/* SPCR bits - MPC8349 specific */
--/* TSEC1 data priority */
--#define SPCR_TSEC1DP			0x00003000
--#define SPCR_TSEC1DP_SHIFT		(31-19)
--/* TSEC1 buffer descriptor priority */
--#define SPCR_TSEC1BDP			0x00000C00
--#define SPCR_TSEC1BDP_SHIFT		(31-21)
--/* TSEC1 emergency priority */
--#define SPCR_TSEC1EP			0x00000300
--#define SPCR_TSEC1EP_SHIFT		(31-23)
--/* TSEC2 data priority */
--#define SPCR_TSEC2DP			0x00000030
--#define SPCR_TSEC2DP_SHIFT		(31-27)
--/* TSEC2 buffer descriptor priority */
--#define SPCR_TSEC2BDP			0x0000000C
--#define SPCR_TSEC2BDP_SHIFT		(31-29)
--/* TSEC2 emergency priority */
--#define SPCR_TSEC2EP			0x00000003
--#define SPCR_TSEC2EP_SHIFT		(31-31)
+-	u8 sfp_ctl_status;	/* 0x16 - SFP control and status register  */
+-	u8 misc_ctl_status;	/* 0x17 - Miscellanies ctrl & status register*/
+-	u8 boot_override;	/* 0x18 - Boot override register */
+-	u8 boot_config1;	/* 0x19 - Boot config override register*/
+-	u8 boot_config2;	/* 0x1A - Boot config override register*/
+-};
 -
--#elif defined(CONFIG_ARCH_MPC8308)
-+#if defined(CONFIG_ARCH_MPC8308)
- /* SPCR bits - MPC8308 specific */
- /* TSEC data priority */
- #define SPCR_TSECDP			0x00003000
-@@ -123,53 +92,7 @@
- 
- /* SICRL/H - System I/O Configuration Register Low/High
-  */
--#if defined(CONFIG_ARCH_MPC834X)
--/* SICRL bits - MPC8349 specific */
--#define SICRL_LDP_A			0x80000000
--#define SICRL_USB1			0x40000000
--#define SICRL_USB0			0x20000000
--#define SICRL_UART			0x0C000000
--#define SICRL_GPIO1_A			0x02000000
--#define SICRL_GPIO1_B			0x01000000
--#define SICRL_GPIO1_C			0x00800000
--#define SICRL_GPIO1_D			0x00400000
--#define SICRL_GPIO1_E			0x00200000
--#define SICRL_GPIO1_F			0x00180000
--#define SICRL_GPIO1_G			0x00040000
--#define SICRL_GPIO1_H			0x00020000
--#define SICRL_GPIO1_I			0x00010000
--#define SICRL_GPIO1_J			0x00008000
--#define SICRL_GPIO1_K			0x00004000
--#define SICRL_GPIO1_L			0x00003000
+-/* Pointer to the CPLD register set */
 -
--/* SICRH bits - MPC8349 specific */
--#define SICRH_DDR			0x80000000
--#define SICRH_TSEC1_A			0x10000000
--#define SICRH_TSEC1_B			0x08000000
--#define SICRH_TSEC1_C			0x04000000
--#define SICRH_TSEC1_D			0x02000000
--#define SICRH_TSEC1_E			0x01000000
--#define SICRH_TSEC1_F			0x00800000
--#define SICRH_TSEC2_A			0x00400000
--#define SICRH_TSEC2_B			0x00200000
--#define SICRH_TSEC2_C			0x00100000
--#define SICRH_TSEC2_D			0x00080000
--#define SICRH_TSEC2_E			0x00040000
--#define SICRH_TSEC2_F			0x00020000
--#define SICRH_TSEC2_G			0x00010000
--#define SICRH_TSEC2_H			0x00008000
--#define SICRH_GPIO2_A			0x00004000
--#define SICRH_GPIO2_B			0x00002000
--#define SICRH_GPIO2_C			0x00001000
--#define SICRH_GPIO2_D			0x00000800
--#define SICRH_GPIO2_E			0x00000400
--#define SICRH_GPIO2_F			0x00000200
--#define SICRH_GPIO2_G			0x00000180
--#define SICRH_GPIO2_H			0x00000060
--#define SICRH_TSOBI1			0x00000002
--#define SICRH_TSOBI2			0x00000001
+-u8 cpld_read(unsigned int reg);
+-void cpld_write(unsigned int reg, u8 value);
 -
--#elif defined(CONFIG_ARCH_MPC8360)
-+#if defined(CONFIG_ARCH_MPC8360)
- /* SICRL bits - MPC8360 specific */
- #define SICRL_LDP_A			0xC0000000
- #define SICRL_LCLK_1			0x10000000
-@@ -435,22 +358,13 @@
- #define HRCWH_PCI_HOST_SHIFT		31
- #define HRCWH_PCI_AGENT			0x00000000
- 
--#if defined(CONFIG_ARCH_MPC834X)
--#define HRCWH_32_BIT_PCI		0x00000000
--#define HRCWH_64_BIT_PCI		0x40000000
+-#define CPLD_READ(reg) cpld_read(offsetof(struct cpld_data, reg))
+-#define CPLD_WRITE(reg, value)\
+-		cpld_write(offsetof(struct cpld_data, reg), value)
+-#define MISC_CTL_SG_SEL		0x80
+-#define MISC_CTL_AURORA_SEL	0x02
+-#define MISC_MUX_QE_TDM		0xc0
+diff --git a/board/nxp/t104xrdb/ddr.c b/board/nxp/t104xrdb/ddr.c
+deleted file mode 100644
+index 6c066480b46..00000000000
+--- a/board/nxp/t104xrdb/ddr.c
++++ /dev/null
+@@ -1,148 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2013 Freescale Semiconductor, Inc.
+- * Copyright 2021 NXP
+- */
+-
+-#include <config.h>
+-#include <i2c.h>
+-#include <hwconfig.h>
+-#include <init.h>
+-#include <log.h>
+-#include <asm/global_data.h>
+-#include <asm/mmu.h>
+-#include <fsl_ddr_sdram.h>
+-#include <fsl_ddr_dimm_params.h>
+-#include <asm/fsl_law.h>
+-#include <asm/mpc85xx_gpio.h>
+-#include <linux/delay.h>
+-#include "ddr.h"
+-
+-DECLARE_GLOBAL_DATA_PTR;
+-
+-void fsl_ddr_board_options(memctl_options_t *popts,
+-				dimm_params_t *pdimm,
+-				unsigned int ctrl_num)
+-{
+-	const struct board_specific_parameters *pbsp, *pbsp_highest = NULL;
+-	ulong ddr_freq;
+-
+-	if (ctrl_num > 1) {
+-		printf("Not supported controller number %d\n", ctrl_num);
+-		return;
+-	}
+-	if (!pdimm->n_ranks)
+-		return;
+-
+-	pbsp = udimms[0];
+-
+-	/* Get clk_adjust according to the board ddr
+-	 * freqency and n_banks specified in board_specific_parameters table.
+-	 */
+-	ddr_freq = get_ddr_freq(0) / 1000000;
+-	while (pbsp->datarate_mhz_high) {
+-		if (pbsp->n_ranks == pdimm->n_ranks &&
+-		    (pdimm->rank_density >> 30) >= pbsp->rank_gb) {
+-			if (ddr_freq <= pbsp->datarate_mhz_high) {
+-				popts->clk_adjust = pbsp->clk_adjust;
+-				popts->wrlvl_start = pbsp->wrlvl_start;
+-				popts->wrlvl_ctl_2 = pbsp->wrlvl_ctl_2;
+-				popts->wrlvl_ctl_3 = pbsp->wrlvl_ctl_3;
+-				goto found;
+-			}
+-			pbsp_highest = pbsp;
+-		}
+-		pbsp++;
+-	}
+-
+-	if (pbsp_highest) {
+-		printf("Error: board specific timing not found\n");
+-		printf("for data rate %lu MT/s\n", ddr_freq);
+-		printf("Trying to use the highest speed (%u) parameters\n",
+-		       pbsp_highest->datarate_mhz_high);
+-		popts->clk_adjust = pbsp_highest->clk_adjust;
+-		popts->wrlvl_start = pbsp_highest->wrlvl_start;
+-		popts->wrlvl_ctl_2 = pbsp->wrlvl_ctl_2;
+-		popts->wrlvl_ctl_3 = pbsp->wrlvl_ctl_3;
+-	} else {
+-		panic("DIMM is not supported by this board");
+-	}
+-found:
+-	debug("Found timing match: n_ranks %d, data rate %d, rank_gb %d\n"
+-		"\tclk_adjust %d, wrlvl_start %d, wrlvl_ctrl_2 0x%x, "
+-		"wrlvl_ctrl_3 0x%x\n",
+-		pbsp->n_ranks, pbsp->datarate_mhz_high, pbsp->rank_gb,
+-		pbsp->clk_adjust, pbsp->wrlvl_start, pbsp->wrlvl_ctl_2,
+-		pbsp->wrlvl_ctl_3);
+-
+-	/*
+-	 * Factors to consider for half-strength driver enable:
+-	 *	- number of DIMMs installed
+-	 */
+-#ifdef CONFIG_SYS_FSL_DDR4
+-	popts->half_strength_driver_enable = 1;
+-	/* optimize cpo for erratum A-009942 */
+-	popts->cpo_sample = 0x59;
+-#else
+-	popts->cpo_sample = 0x54;
+-	popts->half_strength_driver_enable = 0;
+-#endif
+-	/*
+-	 * Write leveling override
+-	 */
+-	popts->wrlvl_override = 1;
+-	popts->wrlvl_sample = 0xf;
+-
+-	/*
+-	 * rtt and rtt_wr override
+-	 */
+-	popts->rtt_override = 0;
+-
+-	/* Enable ZQ calibration */
+-	popts->zq_en = 1;
+-
+-	/* DHC_EN =1, ODT = 75 Ohm */
+-#ifdef CONFIG_SYS_FSL_DDR4
+-	popts->ddr_cdr1 = DDR_CDR1_DHC_EN | DDR_CDR1_ODT(DDR_CDR_ODT_120OHM);
+-	popts->ddr_cdr2 = DDR_CDR2_ODT(DDR_CDR_ODT_120OHM) |
+-		DDR_CDR2_VREF_OVRD(70);       /* Vref = 70% */
+-#else
+-	popts->ddr_cdr1 = DDR_CDR1_DHC_EN | DDR_CDR1_ODT(DDR_CDR_ODT_75ohm);
+-	popts->ddr_cdr2 = DDR_CDR2_ODT(DDR_CDR_ODT_75ohm);
+-#endif
+-}
+-
+-#if defined(CONFIG_DEEP_SLEEP)
+-void board_mem_sleep_setup(void)
+-{
+-	void __iomem *cpld_base = (void *)CFG_SYS_CPLD_BASE;
+-
+-	/* does not provide HW signals for power management */
+-	clrbits_8(cpld_base + 0x17, 0x40);
+-	/* Disable MCKE isolation */
+-	gpio_set_value(2, 0);
+-	udelay(1);
+-}
 -#endif
 -
- #define HRCWH_PCI1_ARBITER_DISABLE	0x00000000
- #define HRCWH_PCI1_ARBITER_ENABLE	0x20000000
- 
- #define HRCWH_PCI_ARBITER_DISABLE	0x00000000
- #define HRCWH_PCI_ARBITER_ENABLE	0x20000000
- 
--#if defined(CONFIG_ARCH_MPC834X)
--#define HRCWH_PCI2_ARBITER_DISABLE	0x00000000
--#define HRCWH_PCI2_ARBITER_ENABLE	0x10000000
+-int dram_init(void)
+-{
+-	phys_size_t dram_size;
 -
--#elif defined(CONFIG_ARCH_MPC8360)
-+#if defined(CONFIG_ARCH_MPC8360)
- #define HRCWH_PCICKDRV_DISABLE		0x00000000
- #define HRCWH_PCICKDRV_ENABLE		0x10000000
- #endif
-@@ -470,9 +384,6 @@
- 
- #define HRCWH_ROM_LOC_DDR_SDRAM		0x00000000
- #define HRCWH_ROM_LOC_PCI1		0x00100000
--#if defined(CONFIG_ARCH_MPC834X)
--#define HRCWH_ROM_LOC_PCI2		0x00200000
+-#if defined(CONFIG_XPL_BUILD) || !defined(CONFIG_RAMBOOT_PBL)
+-	puts("Initializing....using SPD\n");
+-	dram_size = fsl_ddr_sdram();
+-#else
+-	dram_size =  fsl_ddr_sdram_size();
 -#endif
- #define HRCWH_ROM_LOC_LOCAL_8BIT	0x00500000
- #define HRCWH_ROM_LOC_LOCAL_16BIT	0x00600000
- #define HRCWH_ROM_LOC_LOCAL_32BIT	0x00700000
-@@ -501,17 +412,6 @@
- #define HRCWH_TSEC2M_IN_SGMII		0x00001800
- #endif
- 
--#if defined(CONFIG_ARCH_MPC834X)
--#define HRCWH_TSEC1M_IN_RGMII		0x00000000
--#define HRCWH_TSEC1M_IN_RTBI		0x00004000
--#define HRCWH_TSEC1M_IN_GMII		0x00008000
--#define HRCWH_TSEC1M_IN_TBI		0x0000C000
--#define HRCWH_TSEC2M_IN_RGMII		0x00000000
--#define HRCWH_TSEC2M_IN_RTBI		0x00001000
--#define HRCWH_TSEC2M_IN_GMII		0x00002000
--#define HRCWH_TSEC2M_IN_TBI		0x00003000
+-	dram_size = setup_ddr_tlbs(dram_size / 0x100000);
+-	dram_size *= 0x100000;
+-
+-#if defined(CONFIG_DEEP_SLEEP) && !defined(CONFIG_XPL_BUILD)
+-	fsl_dp_resume();
 -#endif
 -
- #if defined(CONFIG_ARCH_MPC8360)
- #define HRCWH_SECONDARY_DDR_DISABLE	0x00000000
- #define HRCWH_SECONDARY_DDR_ENABLE	0x00000010
-@@ -647,35 +547,7 @@
- #define SCCR_PCICM			0x00010000
- #define SCCR_PCICM_SHIFT		16
- 
--#if defined(CONFIG_ARCH_MPC834X)
--/* SCCR bits - MPC834X specific */
--#define SCCR_TSEC1CM			0xc0000000
--#define SCCR_TSEC1CM_SHIFT		30
--#define SCCR_TSEC1CM_0			0x00000000
--#define SCCR_TSEC1CM_1			0x40000000
--#define SCCR_TSEC1CM_2			0x80000000
--#define SCCR_TSEC1CM_3			0xC0000000
+-	gd->ram_size = dram_size;
 -
--#define SCCR_TSEC2CM			0x30000000
--#define SCCR_TSEC2CM_SHIFT		28
--#define SCCR_TSEC2CM_0			0x00000000
--#define SCCR_TSEC2CM_1			0x10000000
--#define SCCR_TSEC2CM_2			0x20000000
--#define SCCR_TSEC2CM_3			0x30000000
+-	return 0;
+-}
+diff --git a/board/nxp/t104xrdb/ddr.h b/board/nxp/t104xrdb/ddr.h
+deleted file mode 100644
+index f9d667f6174..00000000000
+--- a/board/nxp/t104xrdb/ddr.h
++++ /dev/null
+@@ -1,56 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright 2013 Freescale Semiconductor, Inc.
+- */
 -
--/* The MPH must have the same clock ratio as DR, unless its clock disabled */
--#define SCCR_USBMPHCM			0x00c00000
--#define SCCR_USBMPHCM_SHIFT		22
--#define SCCR_USBDRCM			0x00300000
--#define SCCR_USBDRCM_SHIFT		20
--#define SCCR_USBCM			0x00f00000
--#define SCCR_USBCM_SHIFT		20
--#define SCCR_USBCM_0			0x00000000
--#define SCCR_USBCM_1			0x00500000
--#define SCCR_USBCM_2			0x00A00000
--#define SCCR_USBCM_3			0x00F00000
+-#ifndef __DDR_H__
+-#define __DDR_H__
+-struct board_specific_parameters {
+-	u32 n_ranks;
+-	u32 datarate_mhz_high;
+-	u32 rank_gb;
+-	u32 clk_adjust;
+-	u32 wrlvl_start;
+-	u32 wrlvl_ctl_2;
+-	u32 wrlvl_ctl_3;
+-};
 -
--#elif defined(CONFIG_ARCH_MPC8308)
-+#if defined(CONFIG_ARCH_MPC8308)
- /* SCCR bits - MPC8308 specific */
- #define SCCR_TSEC1CM			0xc0000000
- #define SCCR_TSEC1CM_SHIFT		30
+-/*
+- * These tables contain all valid speeds we want to override with board
+- * specific parameters. datarate_mhz_high values need to be in ascending order
+- * for each n_ranks group.
+- */
+-
+-static const struct board_specific_parameters udimm0[] = {
+-	/*
+-	 * memory controller 0
+-	 *   num|  hi| rank|  clk| wrlvl |   wrlvl
+-	 * ranks| mhz| GB  |adjst| start |   ctl2
+-	 */
+-#ifdef CONFIG_SYS_FSL_DDR4
+-	{2,  1600, 4, 8,     6, 0x07090A0c, 0x0e0f100a},
+-	{1,  1600, 4, 8,     5, 0x0607080B, 0x0C0C0D09},
+-#elif defined(CONFIG_SYS_FSL_DDR3)
+-	{2,  833,  4, 8,     6, 0x06060607, 0x08080807},
+-	{2,  833,  0, 8,     6, 0x06060607, 0x08080807},
+-	{2,  1350, 4, 8,     7, 0x0708080A, 0x0A0B0C09},
+-	{2,  1350, 0, 8,     7, 0x0708080A, 0x0A0B0C09},
+-	{2,  1666, 4, 8,     7, 0x0808090B, 0x0C0D0E0A},
+-	{2,  1666, 0, 8,     7, 0x0808090B, 0x0C0D0E0A},
+-	{1,  833,  4, 8,     6, 0x06060607, 0x08080807},
+-	{1,  833,  0, 8,     6, 0x06060607, 0x08080807},
+-	{1,  1350, 4, 8,     7, 0x0708080A, 0x0A0B0C09},
+-	{1,  1350, 0, 8,     7, 0x0708080A, 0x0A0B0C09},
+-	{1,  1666, 4, 8,     7, 0x0808090B, 0x0C0D0E0A},
+-	{1,  1666, 0, 8,     7, 0x0808090B, 0x0C0D0E0A},
+-#else
+-#error DDR type not defined
+-#endif
+-	{}
+-};
+-
+-#endif
+-
+-static const struct board_specific_parameters *udimms[] = {
+-	udimm0,
+-};
+diff --git a/board/nxp/t104xrdb/law.c b/board/nxp/t104xrdb/law.c
+deleted file mode 100644
+index d34641c2397..00000000000
+--- a/board/nxp/t104xrdb/law.c
++++ /dev/null
+@@ -1,31 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2013 Freescale Semiconductor, Inc.
+- */
+-
+-#include <config.h>
+-#include <asm/fsl_law.h>
+-#include <asm/mmu.h>
+-
+-struct law_entry law_table[] = {
+-#ifdef CONFIG_MTD_NOR_FLASH
+-	SET_LAW(CFG_SYS_FLASH_BASE_PHYS, LAW_SIZE_256M, LAW_TRGT_IF_IFC),
+-#endif
+-#ifdef CFG_SYS_BMAN_MEM_PHYS
+-	SET_LAW(CFG_SYS_BMAN_MEM_PHYS, LAW_SIZE_32M, LAW_TRGT_IF_BMAN),
+-#endif
+-#ifdef CFG_SYS_QMAN_MEM_PHYS
+-	SET_LAW(CFG_SYS_QMAN_MEM_PHYS, LAW_SIZE_32M, LAW_TRGT_IF_QMAN),
+-#endif
+-#ifdef CFG_SYS_CPLD_BASE_PHYS
+-	SET_LAW(CFG_SYS_CPLD_BASE_PHYS, LAW_SIZE_128K, LAW_TRGT_IF_IFC),
+-#endif
+-#ifdef CFG_SYS_DCSRBAR_PHYS
+-	SET_LAW(CFG_SYS_DCSRBAR_PHYS, LAW_SIZE_4M, LAW_TRGT_IF_DCSR),
+-#endif
+-#ifdef CFG_SYS_NAND_BASE_PHYS
+-	SET_LAW(CFG_SYS_NAND_BASE_PHYS, LAW_SIZE_64K, LAW_TRGT_IF_IFC),
+-#endif
+-};
+-
+-int num_law_entries = ARRAY_SIZE(law_table);
+diff --git a/board/nxp/t104xrdb/spl.c b/board/nxp/t104xrdb/spl.c
+deleted file mode 100644
+index e02a1f95d4c..00000000000
+--- a/board/nxp/t104xrdb/spl.c
++++ /dev/null
+@@ -1,131 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/* Copyright 2013 Freescale Semiconductor, Inc.
+- */
+-
+-#include <config.h>
+-#include <clock_legacy.h>
+-#include <console.h>
+-#include <env_internal.h>
+-#include <init.h>
+-#include <malloc.h>
+-#include <ns16550.h>
+-#include <nand.h>
+-#include <i2c.h>
+-#include <mmc.h>
+-#include <fsl_esdhc.h>
+-#include <spi_flash.h>
+-#include <asm/global_data.h>
+-#include "../common/sleep.h"
+-#include "../common/spl.h"
+-
+-DECLARE_GLOBAL_DATA_PTR;
+-
+-phys_size_t get_effective_memsize(void)
+-{
+-	return CONFIG_SYS_L3_SIZE;
+-}
+-
+-#define FSL_CORENET_CCSR_PORSR1_RCW_MASK	0xFF800000
+-void board_init_f(ulong bootflag)
+-{
+-	u32 plat_ratio, sys_clk, uart_clk;
+-#if defined(CONFIG_SPL_NAND_BOOT) && defined(CONFIG_A008044_WORKAROUND)
+-	u32 porsr1, pinctl;
+-	u32 svr = get_svr();
+-#endif
+-	ccsr_gur_t *gur = (void *)CFG_SYS_MPC85xx_GUTS_ADDR;
+-
+-#if defined(CONFIG_SPL_NAND_BOOT) && defined(CONFIG_A008044_WORKAROUND)
+-	if (IS_SVR_REV(svr, 1, 0)) {
+-		/*
+-		 * There is T1040 SoC issue where NOR, FPGA are inaccessible
+-		 * during NAND boot because IFC signals > IFC_AD7 are not
+-		 * enabled. This workaround changes RCW source to make all
+-		 * signals enabled.
+-		 */
+-		porsr1 = in_be32(&gur->porsr1);
+-		pinctl = ((porsr1 & ~(FSL_CORENET_CCSR_PORSR1_RCW_MASK))
+-			  | 0x24800000);
+-		out_be32((unsigned int *)(CFG_SYS_DCSRBAR + 0x20000),
+-			 pinctl);
+-	}
+-#endif
+-
+-	/* Memcpy existing GD at CONFIG_SPL_GD_ADDR */
+-	memcpy((void *)CONFIG_SPL_GD_ADDR, (void *)gd, sizeof(gd_t));
+-
+-	/* Update GD pointer */
+-	gd = (gd_t *)(CONFIG_SPL_GD_ADDR);
+-
+-#ifdef CONFIG_DEEP_SLEEP
+-	/* disable the console if boot from deep sleep */
+-	if (is_warm_boot())
+-		fsl_dp_disable_console();
+-#endif
+-	/* compiler optimization barrier needed for GCC >= 3.4 */
+-	__asm__ __volatile__("" : : : "memory");
+-
+-	console_init_f();
+-
+-	/* initialize selected port with appropriate baud rate */
+-	sys_clk = get_board_sys_clk();
+-	plat_ratio = (in_be32(&gur->rcwsr[0]) >> 25) & 0x1f;
+-	uart_clk = sys_clk * plat_ratio / 2;
+-
+-	ns16550_init((struct ns16550 *)CFG_SYS_NS16550_COM1,
+-		     uart_clk / 16 / CONFIG_BAUDRATE);
+-
+-	relocate_code(CONFIG_SPL_RELOC_STACK, (gd_t *)CONFIG_SPL_GD_ADDR, 0x0);
+-}
+-
+-void board_init_r(gd_t *gd, ulong dest_addr)
+-{
+-	struct bd_info *bd;
+-
+-	bd = (struct bd_info *)(gd + sizeof(gd_t));
+-	memset(bd, 0, sizeof(struct bd_info));
+-	gd->bd = bd;
+-
+-	arch_cpu_init();
+-	get_clocks();
+-	mem_malloc_init(CONFIG_SPL_RELOC_MALLOC_ADDR,
+-			CONFIG_SPL_RELOC_MALLOC_SIZE);
+-	gd->flags |= GD_FLG_FULL_MALLOC_INIT;
+-
+-#ifdef CONFIG_SPL_MMC_BOOT
+-	mmc_initialize(bd);
+-#endif
+-
+-	/* relocate environment function pointers etc. */
+-#if defined(CONFIG_ENV_IS_IN_NAND) || defined(CONFIG_ENV_IS_IN_MMC) || \
+-	defined(CONFIG_ENV_IS_IN_SPI_FLASH)
+-#ifdef CONFIG_SPL_NAND_BOOT
+-	nand_spl_load_image(CONFIG_ENV_OFFSET, CONFIG_ENV_SIZE,
+-			    (uchar *)SPL_ENV_ADDR);
+-#endif
+-#ifdef CONFIG_SPL_MMC_BOOT
+-	mmc_spl_load_image(CONFIG_ENV_OFFSET, CONFIG_ENV_SIZE,
+-			   (uchar *)SPL_ENV_ADDR);
+-#endif
+-#ifdef CONFIG_SPL_SPI_BOOT
+-	fsl_spi_spl_load_image(CONFIG_ENV_OFFSET, CONFIG_ENV_SIZE,
+-			       (uchar *)SPL_ENV_ADDR);
+-#endif
+-	gd->env_addr  = (ulong)(SPL_ENV_ADDR);
+-	gd->env_valid = ENV_VALID;
+-#endif
+-
+-	i2c_init_all();
+-
+-	puts("\n\n");
+-
+-	dram_init();
+-
+-#ifdef CONFIG_SPL_MMC_BOOT
+-	mmc_boot();
+-#elif defined(CONFIG_SPL_SPI_BOOT)
+-	fsl_spi_boot();
+-#elif defined(CONFIG_SPL_NAND_BOOT)
+-	nand_boot();
+-#endif
+-}
+diff --git a/board/nxp/t104xrdb/t1040_nand_rcw.cfg b/board/nxp/t104xrdb/t1040_nand_rcw.cfg
+deleted file mode 100644
+index 3300c184a1a..00000000000
+--- a/board/nxp/t104xrdb/t1040_nand_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x66
+-0c18000e 0e000000 00000000 00000000
+-66000002 80000002 e8106000 01000000
+-00000000 00000000 00000000 00032810
+-00000000 0342500f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1040_sd_rcw.cfg b/board/nxp/t104xrdb/t1040_sd_rcw.cfg
+deleted file mode 100644
+index fd3e8c5bbf5..00000000000
+--- a/board/nxp/t104xrdb/t1040_sd_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x66
+-0c18000e 0e000000 00000000 00000000
+-66000002 80000002 68106000 01000000
+-00000000 00000000 00000000 00032810
+-00000000 0342500f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1040_spi_rcw.cfg b/board/nxp/t104xrdb/t1040_spi_rcw.cfg
+deleted file mode 100644
+index fccde5e01fe..00000000000
+--- a/board/nxp/t104xrdb/t1040_spi_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x66
+-0c18000e 0e000000 00000000 00000000
+-66000002 80000002 58106000 01000000
+-00000000 00000000 00000000 00032810
+-00000000 0342500f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1040d4_nand_rcw.cfg b/board/nxp/t104xrdb/t1040d4_nand_rcw.cfg
+deleted file mode 100644
+index c1034b3dfa3..00000000000
+--- a/board/nxp/t104xrdb/t1040d4_nand_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x66
+-0c18000e 0e000000 00000000 00000000
+-66000002 40000002 ec027000 01000000
+-00000000 00000000 00000000 00030810
+-00000000 0342580f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1040d4_sd_rcw.cfg b/board/nxp/t104xrdb/t1040d4_sd_rcw.cfg
+deleted file mode 100644
+index e6f7585bb02..00000000000
+--- a/board/nxp/t104xrdb/t1040d4_sd_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x66
+-0c18000e 0e000000 00000000 00000000
+-66000002 40000002 6c027000 01000000
+-00000000 00000000 00000000 00030810
+-00000000 0342580f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1040d4_spi_rcw.cfg b/board/nxp/t104xrdb/t1040d4_spi_rcw.cfg
+deleted file mode 100644
+index cde862dff5c..00000000000
+--- a/board/nxp/t104xrdb/t1040d4_spi_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x66
+-0c18000e 0e000000 00000000 00000000
+-66000002 40000002 5c027000 01000000
+-00000000 00000000 00000000 00030810
+-00000000 0342580f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1042_nand_rcw.cfg b/board/nxp/t104xrdb/t1042_nand_rcw.cfg
+deleted file mode 100644
+index db4d52f397d..00000000000
+--- a/board/nxp/t104xrdb/t1042_nand_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x86
+-0c18000e 0e000000 00000000 00000000
+-86000002 80000002 ec027000 01000000
+-00000000 00000000 00000000 00032810
+-00000000 0342500f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1042_pi_nand_rcw.cfg b/board/nxp/t104xrdb/t1042_pi_nand_rcw.cfg
+deleted file mode 100644
+index 57de89ad0e7..00000000000
+--- a/board/nxp/t104xrdb/t1042_pi_nand_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x06
+-0c18000e 0e000000 00000000 00000000
+-06000002 00400002 e8106000 01000000
+-00000000 00000000 00000000 00030810
+-00000000 01fe0a06 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1042_pi_sd_rcw.cfg b/board/nxp/t104xrdb/t1042_pi_sd_rcw.cfg
+deleted file mode 100644
+index bbce9a36930..00000000000
+--- a/board/nxp/t104xrdb/t1042_pi_sd_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x06
+-0c18000e 0e000000 00000000 00000000
+-06000002 00400002 68106000 01000000
+-00000000 00000000 00000000 00030810
+-00000000 01fe0a06 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1042_pi_spi_rcw.cfg b/board/nxp/t104xrdb/t1042_pi_spi_rcw.cfg
+deleted file mode 100644
+index b1d8b4c65af..00000000000
+--- a/board/nxp/t104xrdb/t1042_pi_spi_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x06
+-0c18000e 0e000000 00000000 00000000
+-06000002 00400002 58106000 01000000
+-00000000 00000000 00000000 00030810
+-00000000 01fe0a06 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1042_sd_rcw.cfg b/board/nxp/t104xrdb/t1042_sd_rcw.cfg
+deleted file mode 100644
+index d77bf189b22..00000000000
+--- a/board/nxp/t104xrdb/t1042_sd_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x86
+-0c18000e 0e000000 00000000 00000000
+-86000002 80000002 6c027000 01000000
+-00000000 00000000 00000000 00032810
+-00000000 0342500f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1042_spi_rcw.cfg b/board/nxp/t104xrdb/t1042_spi_rcw.cfg
+deleted file mode 100644
+index e8a3ad12804..00000000000
+--- a/board/nxp/t104xrdb/t1042_spi_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x86
+-0c18000e 0e000000 00000000 00000000
+-86000002 80000002 5c027000 01000000
+-00000000 00000000 00000000 00032810
+-00000000 0342500f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1042d4_nand_rcw.cfg b/board/nxp/t104xrdb/t1042d4_nand_rcw.cfg
+deleted file mode 100644
+index 9e0ee2795f8..00000000000
+--- a/board/nxp/t104xrdb/t1042d4_nand_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x86
+-0c18000e 0e000000 00000000 00000000
+-86000002 40000002 ec027000 01000000
+-00000000 00000000 00000000 00030810
+-00000000 0342500f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1042d4_sd_rcw.cfg b/board/nxp/t104xrdb/t1042d4_sd_rcw.cfg
+deleted file mode 100644
+index 9d9046d6549..00000000000
+--- a/board/nxp/t104xrdb/t1042d4_sd_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x86
+-0c18000e 0e000000 00000000 00000000
+-86000002 40000002 6c027000 01000000
+-00000000 00000000 00000000 00030810
+-00000000 0342500f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t1042d4_spi_rcw.cfg b/board/nxp/t104xrdb/t1042d4_spi_rcw.cfg
+deleted file mode 100644
+index f1ec98932f8..00000000000
+--- a/board/nxp/t104xrdb/t1042d4_spi_rcw.cfg
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#PBL preamble and RCW header
+-aa55aa55 010e0100
+-# serdes protocol 0x86
+-0c18000e 0e000000 00000000 00000000
+-86000002 40000002 5c027000 01000000
+-00000000 00000000 00000000 00030810
+-00000000 0342500f 00000000 00000000
+diff --git a/board/nxp/t104xrdb/t104x_pbi.cfg b/board/nxp/t104xrdb/t104x_pbi.cfg
+deleted file mode 100644
+index 51945b47489..00000000000
+--- a/board/nxp/t104xrdb/t104x_pbi.cfg
++++ /dev/null
+@@ -1,36 +0,0 @@
+-#PBI commands
+-#Software Workaround for errata A-007662 to train PCIe2 controller in Gen2 speed
+-09250100 00000400
+-09250108 00002000
+-#Software Workaround for errata A-008007 to reset PVR register
+-09000010 0000000b
+-09000014 c0000000
+-09000018 81d00017
+-89020400 a1000000
+-091380c0 000f0000
+-89020400 00000000
+-#Initialize CPC1
+-09010000 00200400
+-09138000 00000000
+-091380c0 00000100
+-#Configure CPC1 as 256KB SRAM
+-09010100 00000000
+-09010104 fffc0007
+-09010f00 081e000d
+-09010000 80000000
+-#Configure LAW for CPC1
+-09000cd0 00000000
+-09000cd4 fffc0000
+-09000cd8 81000011
+-#Configure alternate space
+-09000010 00000000
+-09000014 ff000000
+-09000018 81000000
+-#Configure SPI controller
+-09110000 80000403
+-09110020 2d170008
+-09110024 00100008
+-09110028 00100008
+-0911002c 00100008
+-#Flush PBL data
+-091380c0 000FFFFF
+diff --git a/board/nxp/t104xrdb/t104x_pbi_sb.cfg b/board/nxp/t104xrdb/t104x_pbi_sb.cfg
+deleted file mode 100644
+index 98dc8e4c240..00000000000
+--- a/board/nxp/t104xrdb/t104x_pbi_sb.cfg
++++ /dev/null
+@@ -1,38 +0,0 @@
+-#PBI commands
+-#Software Workaround for errata A-007662 to train PCIe2 controller in Gen2 speed
+-09250100 00000400
+-09250108 00002000
+-#Software Workaround for errata A-008007 to reset PVR register
+-09000010 0000000b
+-09000014 c0000000
+-09000018 81d00017
+-89020400 a1000000
+-091380c0 000f0000
+-89020400 00000000
+-#Initialize CPC1
+-09010000 00200400
+-09138000 00000000
+-091380c0 00000100
+-#Configure CPC1 as 256KB SRAM
+-09010100 00000000
+-09010104 bffc0007
+-09010f00 081e000d
+-09010000 80000000
+-#Configure LAW for CPC1
+-09000cd0 00000000
+-09000cd4 bffc0000
+-09000cd8 81000011
+-#Configure alternate space
+-09000010 00000000
+-09000014 bf000000
+-09000018 81000000
+-#Configure SPI controller
+-09110000 80000403
+-09110020 2d170008
+-09110024 00100008
+-09110028 00100008
+-0911002c 00100008
+-#Flush PBL data
+-091380c0 000FFFFF
+-090e0200 bffd0000
+-091380c0 000FFFFF
+diff --git a/board/nxp/t104xrdb/t104xrdb.c b/board/nxp/t104xrdb/t104xrdb.c
+deleted file mode 100644
+index ef4dfef4965..00000000000
+--- a/board/nxp/t104xrdb/t104xrdb.c
++++ /dev/null
+@@ -1,159 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2013 Freescale Semiconductor, Inc.
+- * Copyright 2023 NXP
+- */
+-
+-#include <config.h>
+-#include <command.h>
+-#include <env.h>
+-#include <fdt_support.h>
+-#include <hwconfig.h>
+-#include <image.h>
+-#include <init.h>
+-#include <log.h>
+-#include <netdev.h>
+-#include <asm/global_data.h>
+-#include <linux/compiler.h>
+-#include <asm/mmu.h>
+-#include <asm/processor.h>
+-#include <asm/cache.h>
+-#include <asm/immap_85xx.h>
+-#include <asm/fsl_fdt.h>
+-#include <asm/fsl_law.h>
+-#include <asm/fsl_serdes.h>
+-#include <asm/fsl_liodn.h>
+-#include <clock_legacy.h>
+-#include <fm_eth.h>
+-#include "../common/sleep.h"
+-#include "t104xrdb.h"
+-#include "cpld.h"
+-
+-DECLARE_GLOBAL_DATA_PTR;
+-
+-#if CONFIG_IS_ENABLED(DM_SERIAL)
+-int get_serial_clock(void)
+-{
+-	return get_bus_freq(0) / 2;
+-}
+-#endif
+-
+-int checkboard(void)
+-{
+-	struct cpu_type *cpu = gd->arch.cpu;
+-	u8 sw;
+-
+-#if defined(CONFIG_TARGET_T1042D4RDB)
+-	printf("Board: %sD4RDB\n", cpu->name);
+-#else
+-	printf("Board: %sRDB\n", cpu->name);
+-#endif
+-	printf("Board rev: 0x%02x CPLD ver: 0x%02x, ",
+-	       CPLD_READ(hw_ver), CPLD_READ(sw_ver));
+-
+-	sw = CPLD_READ(flash_ctl_status);
+-	sw = ((sw & CPLD_LBMAP_MASK) >> CPLD_LBMAP_SHIFT);
+-
+-	printf("vBank: %d\n", sw);
+-
+-	return 0;
+-}
+-
+-int board_early_init_f(void)
+-{
+-#if defined(CONFIG_DEEP_SLEEP)
+-	if (is_warm_boot())
+-		fsl_dp_disable_console();
+-#endif
+-
+-	return 0;
+-}
+-
+-int board_early_init_r(void)
+-{
+-#ifdef CFG_SYS_FLASH_BASE
+-	const unsigned int flashbase = CFG_SYS_FLASH_BASE;
+-	int flash_esel = find_tlb_idx((void *)flashbase, 1);
+-
+-	/*
+-	 * Remap Boot flash region to caching-inhibited
+-	 * so that flash can be erased properly.
+-	 */
+-
+-	/* Flush d-cache and invalidate i-cache of any FLASH data */
+-	flush_dcache();
+-	invalidate_icache();
+-
+-	if (flash_esel == -1) {
+-		/* very unlikely unless something is messed up */
+-		puts("Error: Could not find TLB for FLASH BASE\n");
+-		flash_esel = 2;	/* give our best effort to continue */
+-	} else {
+-		/* invalidate existing TLB entry for flash */
+-		disable_tlb(flash_esel);
+-	}
+-
+-	set_tlb(1, flashbase, CFG_SYS_FLASH_BASE_PHYS,
+-		MAS3_SX|MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		0, flash_esel, BOOKE_PAGESZ_256M, 1);
+-#endif
+-
+-	pci_init();
+-
+-	return 0;
+-}
+-
+-int misc_init_r(void)
+-{
+-	ccsr_gur_t __iomem *gur = (void *)(CFG_SYS_MPC85xx_GUTS_ADDR);
+-	u32 srds_s1;
+-
+-	srds_s1 = in_be32(&gur->rcwsr[4]) >> 24;
+-
+-	printf("SERDES Reference : 0x%X\n", srds_s1);
+-
+-	/* select SGMII*/
+-	if (srds_s1 == 0x86)
+-		CPLD_WRITE(misc_ctl_status, CPLD_READ(misc_ctl_status) |
+-					 MISC_CTL_SG_SEL);
+-
+-	/* select SGMII and Aurora*/
+-	if (srds_s1 == 0x8E)
+-		CPLD_WRITE(misc_ctl_status, CPLD_READ(misc_ctl_status) |
+-					 MISC_CTL_SG_SEL | MISC_CTL_AURORA_SEL);
+-
+-	return 0;
+-}
+-
+-int ft_board_setup(void *blob, struct bd_info *bd)
+-{
+-	phys_addr_t base;
+-	phys_size_t size;
+-
+-	ft_cpu_setup(blob, bd);
+-
+-	base = env_get_bootm_low();
+-	size = env_get_bootm_size();
+-
+-	fdt_fixup_memory(blob, (u64)base, (u64)size);
+-
+-#ifdef CONFIG_PCI
+-	pci_of_setup(blob, bd);
+-#endif
+-
+-	fdt_fixup_liodn(blob);
+-
+-#ifdef CONFIG_HAS_FSL_DR_USB
+-	fsl_fdt_fixup_dr_usb(blob, bd);
+-#endif
+-
+-#ifdef CONFIG_SYS_DPAA_FMAN
+-#ifndef CONFIG_DM_ETH
+-	fdt_fixup_fman_ethernet(blob);
+-#endif
+-#endif
+-
+-	if (hwconfig("qe-tdm"))
+-		fdt_del_diu(blob);
+-	return 0;
+-}
+diff --git a/board/nxp/t104xrdb/t104xrdb.h b/board/nxp/t104xrdb/t104xrdb.h
+deleted file mode 100644
+index 5825e69cdb4..00000000000
+--- a/board/nxp/t104xrdb/t104xrdb.h
++++ /dev/null
+@@ -1,11 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright 2013 Freescale Semiconductor, Inc.
+- */
+-
+-#ifndef __T104x_RDB_H__
+-#define __T104x_RDB_H__
+-
+-void pci_of_setup(void *blob, struct bd_info *bd);
+-
+-#endif
+diff --git a/board/nxp/t104xrdb/tlb.c b/board/nxp/t104xrdb/tlb.c
+deleted file mode 100644
+index 7b2183da8b0..00000000000
+--- a/board/nxp/t104xrdb/tlb.c
++++ /dev/null
+@@ -1,132 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2013 Freescale Semiconductor, Inc.
+- */
+-
+-#include <config.h>
+-#include <asm/mmu.h>
+-#include <asm/ppc.h>
+-
+-struct fsl_e_tlb_entry tlb_table[] = {
+-	/* TLB 0 - for temp stack in cache */
+-	SET_TLB_ENTRY(0, CFG_SYS_INIT_RAM_ADDR,
+-		      CFG_SYS_INIT_RAM_ADDR_PHYS,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, 0,
+-		      0, 0, BOOKE_PAGESZ_4K, 0),
+-	SET_TLB_ENTRY(0, CFG_SYS_INIT_RAM_ADDR + 4 * 1024,
+-		      CFG_SYS_INIT_RAM_ADDR_PHYS + 4 * 1024,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, 0,
+-		      0, 0, BOOKE_PAGESZ_4K, 0),
+-	SET_TLB_ENTRY(0, CFG_SYS_INIT_RAM_ADDR + 8 * 1024,
+-		      CFG_SYS_INIT_RAM_ADDR_PHYS + 8 * 1024,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, 0,
+-		      0, 0, BOOKE_PAGESZ_4K, 0),
+-	SET_TLB_ENTRY(0, CFG_SYS_INIT_RAM_ADDR + 12 * 1024,
+-		      CFG_SYS_INIT_RAM_ADDR_PHYS + 12 * 1024,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, 0,
+-		      0, 0, BOOKE_PAGESZ_4K, 0),
+-
+-	/* TLB 1 */
+-	/* *I*** - Covers boot page */
+-#if defined(CONFIG_SYS_RAMBOOT) && defined(CFG_SYS_INIT_L3_ADDR) && \
+-	!defined(CONFIG_NXP_ESBC)
+-	/*
+-	 * *I*G - L3SRAM. When L3 is used as 256K SRAM, the address of the
+-	 * SRAM is at 0xfffc0000, it covered the 0xfffff000.
+-	 */
+-	SET_TLB_ENTRY(1, CFG_SYS_INIT_L3_ADDR, CFG_SYS_INIT_L3_ADDR,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		      0, 0, BOOKE_PAGESZ_256K, 1),
+-
+-#elif defined(CONFIG_NXP_ESBC) && defined(CONFIG_XPL_BUILD)
+-	/*
+-	 * *I*G - L3SRAM. When L3 is used as 256K SRAM, in case of Secure Boot
+-	 * the physical address of the SRAM is at 0xbffc0000,
+-	 * and virtual address is 0xfffc0000
+-	 */
+-
+-	SET_TLB_ENTRY(1, CFG_SYS_INIT_L3_VADDR,
+-		      CFG_SYS_INIT_L3_ADDR,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		      0, 0, BOOKE_PAGESZ_256K, 1),
+-#else
+-	SET_TLB_ENTRY(1, 0xfffff000, 0xfffff000,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		      0, 0, BOOKE_PAGESZ_4K, 1),
+-#endif
+-
+-	/* *I*G* - CCSRBAR */
+-	SET_TLB_ENTRY(1, CFG_SYS_CCSRBAR, CFG_SYS_CCSRBAR_PHYS,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		      0, 1, BOOKE_PAGESZ_16M, 1),
+-
+-	/* *I*G* - Flash, localbus */
+-	/* This will be changed to *I*G* after relocation to RAM. */
+-	SET_TLB_ENTRY(1, CFG_SYS_FLASH_BASE, CFG_SYS_FLASH_BASE_PHYS,
+-		      MAS3_SX|MAS3_SR, MAS2_W|MAS2_G,
+-		      0, 2, BOOKE_PAGESZ_256M, 1),
+-
+-#ifndef CONFIG_XPL_BUILD
+-	/* *I*G* - PCI */
+-	SET_TLB_ENTRY(1, CFG_SYS_PCIE1_MEM_VIRT, CFG_SYS_PCIE1_MEM_PHYS,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		      0, 3, BOOKE_PAGESZ_1G, 1),
+-
+-	/* *I*G* - PCI I/O */
+-	SET_TLB_ENTRY(1, CFG_SYS_PCIE1_IO_VIRT, CFG_SYS_PCIE1_IO_PHYS,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		      0, 4, BOOKE_PAGESZ_256K, 1),
+-
+-	/* Bman/Qman */
+-#ifdef CFG_SYS_BMAN_MEM_PHYS
+-	SET_TLB_ENTRY(1, CFG_SYS_BMAN_MEM_BASE, CFG_SYS_BMAN_MEM_PHYS,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, 0,
+-		      0, 5, BOOKE_PAGESZ_16M, 1),
+-	SET_TLB_ENTRY(1, CFG_SYS_BMAN_MEM_BASE + 0x01000000,
+-		      CFG_SYS_BMAN_MEM_PHYS + 0x01000000,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		      0, 6, BOOKE_PAGESZ_16M, 1),
+-#endif
+-#ifdef CFG_SYS_QMAN_MEM_PHYS
+-	SET_TLB_ENTRY(1, CFG_SYS_QMAN_MEM_BASE, CFG_SYS_QMAN_MEM_PHYS,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, 0,
+-		      0, 7, BOOKE_PAGESZ_16M, 1),
+-	SET_TLB_ENTRY(1, CFG_SYS_QMAN_MEM_BASE + 0x01000000,
+-		      CFG_SYS_QMAN_MEM_PHYS + 0x01000000,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		      0, 8, BOOKE_PAGESZ_16M, 1),
+-#endif
+-#endif
+-#ifdef CFG_SYS_DCSRBAR_PHYS
+-	SET_TLB_ENTRY(1, CFG_SYS_DCSRBAR, CFG_SYS_DCSRBAR_PHYS,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		      0, 9, BOOKE_PAGESZ_4M, 1),
+-#endif
+-#ifdef CFG_SYS_NAND_BASE
+-	/*
+-	 * *I*G - NAND
+-	 * entry 14 and 15 has been used hard coded, they will be disabled
+-	 * in cpu_init_f, so we use entry 16 for nand.
+-	 */
+-	SET_TLB_ENTRY(1, CFG_SYS_NAND_BASE, CFG_SYS_NAND_BASE_PHYS,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		      0, 10, BOOKE_PAGESZ_64K, 1),
+-#endif
+-#ifdef CFG_SYS_CPLD_BASE
+-	SET_TLB_ENTRY(1, CFG_SYS_CPLD_BASE, CFG_SYS_CPLD_BASE_PHYS,
+-		      MAS3_SW|MAS3_SR, MAS2_I|MAS2_G,
+-		      0, 11, BOOKE_PAGESZ_256K, 1),
+-#endif
+-
+-#if defined(CONFIG_RAMBOOT_PBL) && !defined(CONFIG_XPL_BUILD)
+-	SET_TLB_ENTRY(1, CFG_SYS_DDR_SDRAM_BASE, CFG_SYS_DDR_SDRAM_BASE,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_M,
+-		      0, 12, BOOKE_PAGESZ_1G, 1),
+-	SET_TLB_ENTRY(1, CFG_SYS_DDR_SDRAM_BASE + 0x40000000,
+-		      CFG_SYS_DDR_SDRAM_BASE + 0x40000000,
+-		      MAS3_SX|MAS3_SW|MAS3_SR, MAS2_M,
+-		      0, 13, BOOKE_PAGESZ_1G, 1)
+-#endif
+-};
+-
+-int num_tlb_entries = ARRAY_SIZE(tlb_table);
+diff --git a/configs/T1042D4RDB_NAND_defconfig b/configs/T1042D4RDB_NAND_defconfig
+deleted file mode 100644
+index 7ec5bfd2ad0..00000000000
+--- a/configs/T1042D4RDB_NAND_defconfig
++++ /dev/null
+@@ -1,144 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x30000000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x180000
+-CONFIG_DEFAULT_DEVICE_TREE="t1042d4rdb"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_TEXT_BASE=0xFFFD8000
+-CONFIG_SPL=y
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-CONFIG_TARGET_T1042D4RDB=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_BOOK3E_HV=y
+-CONFIG_SYS_CACHE_STASHING=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PCIE3=y
+-CONFIG_PCIE4=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=2
+-CONFIG_MP=y
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_RAMBOOT_PBL=y
+-CONFIG_SYS_FSL_PBL_PBI="$(SRCTREE)/board/nxp/t104xrdb/t104x_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="$(SRCTREE)/board/nxp/t104xrdb/t1042d4_nand_rcw.cfg"
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/ram rw console=$consoledev,$baudrate $othbootargs;setenv ramdiskaddr 0x02000000;setenv fdtaddr 0x00c00000;setenv loadaddr 0x1000000;bootm $loadaddr $ramdiskaddr $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_SILENT_CONSOLE=y
+-CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x28000
+-CONFIG_SPL_PAD_TO=0x40000
+-CONFIG_SPL_NAND_BOOT=y
+-CONFIG_SPL_FSL_PBL=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_SKIP_RELOCATE=y
+-CONFIG_SPL_GD_ADDR=0xfffc8000
+-CONFIG_SPL_RELOC_STACK=0xfffd8000
+-CONFIG_SPL_RELOC_MALLOC=y
+-CONFIG_SPL_RELOC_MALLOC_ADDR=0xfffcb000
+-CONFIG_SPL_RELOC_MALLOC_SIZE=0x7800
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_SPL_NAND_SUPPORT=y
+-CONFIG_HUSH_PARSER=y
+-CONFIG_CMD_IMLS=y
+-CONFIG_CMD_GREPENV=y
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fe8000000.nor,nand0=fff800000.flash,spi0=spife110000.0"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fe8000000.nor:1m(uboot),5m(kernel),128k(dtb),96m(fs),-(user);fff800000.flash:2m(uboot),9m(kernel),128k(dtb),96m(fs),-(user);spife110000.0:2m(uboot),9m(kernel),128k(dtb),-(user)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_NAND=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="FM1@DTSEC4"
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_FSL_CAAM=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_CHIP_SELECTS_PER_CTRL=2
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x118000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x118100
+-CONFIG_SYS_FSL_HAS_I2C3_OFFSET=y
+-CONFIG_SYS_FSL_I2C3_OFFSET=0x119000
+-CONFIG_SYS_FSL_HAS_I2C4_OFFSET=y
+-CONFIG_SYS_FSL_I2C4_OFFSET=0x119100
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=1024
+-CONFIG_SYS_MAX_FLASH_BANKS=2
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
+-CONFIG_SYS_NAND_U_BOOT_OFFS=0x40000
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_FMAN_ENET=y
+-CONFIG_SYS_FMAN_FW_ADDR=0x280000
+-CONFIG_MII=y
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_U_QE=y
+-CONFIG_SYS_QE_FW_ADDR=0x380000
+-CONFIG_SYS_QE_FMAN_FW_IN_NAND=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_DS1337=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_MAX_CONTROLLER_COUNT=2
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+-CONFIG_SYS_NUM_ADDR_MAP=64
+diff --git a/configs/T1042D4RDB_SDCARD_defconfig b/configs/T1042D4RDB_SDCARD_defconfig
+deleted file mode 100644
+index c418c3064d4..00000000000
+--- a/configs/T1042D4RDB_SDCARD_defconfig
++++ /dev/null
+@@ -1,138 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x30000000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_DEFAULT_DEVICE_TREE="t1042d4rdb"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_TEXT_BASE=0xFFFD8000
+-CONFIG_SPL=y
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-CONFIG_TARGET_T1042D4RDB=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_BOOK3E_HV=y
+-CONFIG_SYS_CACHE_STASHING=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PCIE3=y
+-CONFIG_PCIE4=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=2
+-CONFIG_MP=y
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_RAMBOOT_PBL=y
+-CONFIG_SYS_FSL_PBL_PBI="$(SRCTREE)/board/nxp/t104xrdb/t104x_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="$(SRCTREE)/board/nxp/t104xrdb/t1042d4_sd_rcw.cfg"
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/ram rw console=$consoledev,$baudrate $othbootargs;setenv ramdiskaddr 0x02000000;setenv fdtaddr 0x00c00000;setenv loadaddr 0x1000000;bootm $loadaddr $ramdiskaddr $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_SILENT_CONSOLE=y
+-CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x28000
+-CONFIG_SPL_PAD_TO=0x40000
+-CONFIG_SPL_MMC_BOOT=y
+-CONFIG_SPL_FSL_PBL=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_SKIP_RELOCATE=y
+-CONFIG_SPL_GD_ADDR=0xfffc8000
+-CONFIG_SPL_RELOC_STACK=0xfffd8000
+-CONFIG_SPL_RELOC_MALLOC=y
+-CONFIG_SPL_RELOC_MALLOC_ADDR=0xfffcb000
+-CONFIG_SPL_RELOC_MALLOC_SIZE=0x7800
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_HUSH_PARSER=y
+-CONFIG_CMD_IMLS=y
+-CONFIG_CMD_GREPENV=y
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fe8000000.nor,nand0=fff800000.flash,spi0=spife110000.0"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fe8000000.nor:1m(uboot),5m(kernel),128k(dtb),96m(fs),-(user);fff800000.flash:2m(uboot),9m(kernel),128k(dtb),96m(fs),-(user);spife110000.0:2m(uboot),9m(kernel),128k(dtb),-(user)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="FM1@DTSEC4"
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_FSL_CAAM=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_CHIP_SELECTS_PER_CTRL=2
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x118000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x118100
+-CONFIG_SYS_FSL_HAS_I2C3_OFFSET=y
+-CONFIG_SYS_FSL_I2C3_OFFSET=0x119000
+-CONFIG_SYS_FSL_HAS_I2C4_OFFSET=y
+-CONFIG_SYS_FSL_I2C4_OFFSET=0x119100
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=1024
+-CONFIG_SYS_MAX_FLASH_BANKS=2
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_FMAN_ENET=y
+-CONFIG_SYS_FMAN_FW_ADDR=0x10400
+-CONFIG_MII=y
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_U_QE=y
+-CONFIG_SYS_QE_FW_ADDR=0x124000
+-CONFIG_SYS_QE_FMAN_FW_IN_MMC=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_DS1337=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_MAX_CONTROLLER_COUNT=2
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+-CONFIG_SYS_NUM_ADDR_MAP=64
+diff --git a/configs/T1042D4RDB_SPIFLASH_defconfig b/configs/T1042D4RDB_SPIFLASH_defconfig
+deleted file mode 100644
+index f758cd9aaa5..00000000000
+--- a/configs/T1042D4RDB_SPIFLASH_defconfig
++++ /dev/null
+@@ -1,141 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x30000000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="t1042d4rdb"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_TEXT_BASE=0xFFFD8000
+-CONFIG_SPL=y
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-CONFIG_TARGET_T1042D4RDB=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_BOOK3E_HV=y
+-CONFIG_SYS_CACHE_STASHING=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PCIE3=y
+-CONFIG_PCIE4=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=2
+-CONFIG_MP=y
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_RAMBOOT_PBL=y
+-CONFIG_SPIFLASH=y
+-CONFIG_SYS_FSL_PBL_PBI="$(SRCTREE)/board/nxp/t104xrdb/t104x_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="$(SRCTREE)/board/nxp/t104xrdb/t1042d4_spi_rcw.cfg"
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/ram rw console=$consoledev,$baudrate $othbootargs;setenv ramdiskaddr 0x02000000;setenv fdtaddr 0x00c00000;setenv loadaddr 0x1000000;bootm $loadaddr $ramdiskaddr $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_SILENT_CONSOLE=y
+-CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x28000
+-CONFIG_SPL_PAD_TO=0x40000
+-CONFIG_SPL_SPI_BOOT=y
+-CONFIG_SPL_FSL_PBL=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_SKIP_RELOCATE=y
+-CONFIG_SPL_GD_ADDR=0xfffc8000
+-CONFIG_SPL_RELOC_STACK=0xfffd8000
+-CONFIG_SPL_RELOC_MALLOC=y
+-CONFIG_SPL_RELOC_MALLOC_ADDR=0xfffcb000
+-CONFIG_SPL_RELOC_MALLOC_SIZE=0x7800
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_HUSH_PARSER=y
+-CONFIG_CMD_IMLS=y
+-CONFIG_CMD_GREPENV=y
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fe8000000.nor,nand0=fff800000.flash,spi0=spife110000.0"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fe8000000.nor:1m(uboot),5m(kernel),128k(dtb),96m(fs),-(user);fff800000.flash:2m(uboot),9m(kernel),128k(dtb),96m(fs),-(user);spife110000.0:2m(uboot),9m(kernel),128k(dtb),-(user)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="FM1@DTSEC4"
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_FSL_CAAM=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_CHIP_SELECTS_PER_CTRL=2
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x118000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x118100
+-CONFIG_SYS_FSL_HAS_I2C3_OFFSET=y
+-CONFIG_SYS_FSL_I2C3_OFFSET=0x119000
+-CONFIG_SYS_FSL_HAS_I2C4_OFFSET=y
+-CONFIG_SYS_FSL_I2C4_OFFSET=0x119100
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=1024
+-CONFIG_SYS_MAX_FLASH_BANKS=2
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_FMAN_ENET=y
+-CONFIG_SYS_FMAN_FW_ADDR=0x110000
+-CONFIG_MII=y
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_U_QE=y
+-CONFIG_SYS_QE_FW_ADDR=0x130000
+-CONFIG_SYS_QE_FMAN_FW_IN_SPIFLASH=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_DS1337=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_MAX_CONTROLLER_COUNT=2
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+-CONFIG_SYS_NUM_ADDR_MAP=64
+diff --git a/configs/T1042D4RDB_defconfig b/configs/T1042D4RDB_defconfig
+deleted file mode 100644
+index 6e53e581c81..00000000000
+--- a/configs/T1042D4RDB_defconfig
++++ /dev/null
+@@ -1,114 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0xEFF40000
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_SECT_SIZE=0x20000
+-CONFIG_DEFAULT_DEVICE_TREE="t1042d4rdb"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_ENV_ADDR=0xEFF20000
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-CONFIG_TARGET_T1042D4RDB=y
+-CONFIG_MPC85XX_HAVE_RESET_VECTOR=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_BOOK3E_HV=y
+-CONFIG_SYS_CACHE_STASHING=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PCIE3=y
+-CONFIG_PCIE4=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=2
+-CONFIG_MP=y
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/ram rw console=$consoledev,$baudrate $othbootargs;setenv ramdiskaddr 0x02000000;setenv fdtaddr 0x00c00000;setenv loadaddr 0x1000000;bootm $loadaddr $ramdiskaddr $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_SILENT_CONSOLE=y
+-CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-CONFIG_HUSH_PARSER=y
+-CONFIG_CMD_IMLS=y
+-CONFIG_CMD_GREPENV=y
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fe8000000.nor,nand0=fff800000.flash,spi0=spife110000.0"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fe8000000.nor:1m(uboot),5m(kernel),128k(dtb),96m(fs),-(user);fff800000.flash:2m(uboot),9m(kernel),128k(dtb),96m(fs),-(user);spife110000.0:2m(uboot),9m(kernel),128k(dtb),-(user)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_FLASH=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="FM1@DTSEC4"
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_FSL_CAAM=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_CHIP_SELECTS_PER_CTRL=2
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x118000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x118100
+-CONFIG_SYS_FSL_HAS_I2C3_OFFSET=y
+-CONFIG_SYS_FSL_I2C3_OFFSET=0x119000
+-CONFIG_SYS_FSL_HAS_I2C4_OFFSET=y
+-CONFIG_SYS_FSL_I2C4_OFFSET=0x119100
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=1024
+-CONFIG_SYS_MAX_FLASH_BANKS=2
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_FMAN_ENET=y
+-CONFIG_SYS_FMAN_FW_ADDR=0xEFF00000
+-CONFIG_MII=y
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_U_QE=y
+-CONFIG_SYS_QE_FW_ADDR=0xEFF10000
+-CONFIG_SYS_QE_FMAN_FW_IN_NOR=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_DS1337=y
+-CONFIG_SPECIFY_CONSOLE_INDEX=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SYS_NS16550=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_MAX_CONTROLLER_COUNT=2
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+-CONFIG_SYS_NUM_ADDR_MAP=64
+diff --git a/include/configs/T104xRDB.h b/include/configs/T104xRDB.h
+deleted file mode 100644
+index 01db298f38e..00000000000
+--- a/include/configs/T104xRDB.h
++++ /dev/null
+@@ -1,397 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright 2014 Freescale Semiconductor, Inc.
+- * Copyright 2020-2023 NXP
+- */
+-
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
+-
+-#include <linux/stringify.h>
+-
+-/*
+- * T104x RDB board configuration file
+- */
+-#include <asm/config_mpc85xx.h>
+-
+-#ifdef CONFIG_RAMBOOT_PBL
+-#define RESET_VECTOR_OFFSET		0x27FFC
+-#define BOOT_PAGE_OFFSET		0x27000
+-
+-#ifdef CONFIG_MTD_RAW_NAND
+-#ifdef CONFIG_NXP_ESBC
+-#define CFG_SYS_NAND_U_BOOT_SIZE	((768 << 10) + (16 << 10))
+-#else
+-#define CFG_SYS_NAND_U_BOOT_SIZE	(768 << 10)
+-#endif
+-#define CFG_SYS_NAND_U_BOOT_DST	0x30000000
+-#define CFG_SYS_NAND_U_BOOT_START	0x30000000
+-#endif
+-
+-#ifdef CONFIG_SPIFLASH
+-#define	CFG_RESET_VECTOR_ADDRESS		0x30000FFC
+-#define CFG_SYS_SPI_FLASH_U_BOOT_SIZE	(768 << 10)
+-#define CFG_SYS_SPI_FLASH_U_BOOT_DST		(0x30000000)
+-#define CFG_SYS_SPI_FLASH_U_BOOT_START	(0x30000000)
+-#define CFG_SYS_SPI_FLASH_U_BOOT_OFFS	(256 << 10)
+-#endif
+-
+-#ifdef CONFIG_SDCARD
+-#define	CFG_RESET_VECTOR_ADDRESS		0x30000FFC
+-#define CFG_SYS_MMC_U_BOOT_SIZE	(768 << 10)
+-#define CFG_SYS_MMC_U_BOOT_DST	(0x30000000)
+-#define CFG_SYS_MMC_U_BOOT_START	(0x30000000)
+-#define CFG_SYS_MMC_U_BOOT_OFFS	(260 << 10)
+-#endif
+-
+-#endif
+-
+-/* High Level Configuration Options */
+-
+-#ifndef CFG_RESET_VECTOR_ADDRESS
+-#define CFG_RESET_VECTOR_ADDRESS	0xeffffffc
+-#endif
+-
+-#define CFG_SYS_NUM_CPC		CONFIG_SYS_NUM_DDR_CTLRS
+-
+-/*
+- * These can be toggled for performance analysis, otherwise use default.
+- */
+-#define CFG_SYS_INIT_L2CSR0		L2CSR0_L2E
+-
+-/*
+- *  Config the L3 Cache as L3 SRAM
+- */
+-#define CFG_SYS_INIT_L3_ADDR		0xFFFC0000
+-/*
+- * For Secure Boot CFG_SYS_INIT_L3_ADDR will be redefined and hence
+- * Physical address (CFG_SYS_INIT_L3_ADDR) and virtual address
+- * (CFG_SYS_INIT_L3_VADDR) will be different.
+- */
+-#define CFG_SYS_INIT_L3_VADDR	0xFFFC0000
+-#define SPL_ENV_ADDR			(CONFIG_SPL_GD_ADDR + 4 * 1024)
+-
+-#define CFG_SYS_DCSRBAR		0xf0000000
+-#define CFG_SYS_DCSRBAR_PHYS		0xf00000000ull
+-
+-/*
+- * DDR Setup
+- */
+-#define CFG_SYS_DDR_SDRAM_BASE	0x00000000
+-#define CFG_SYS_SDRAM_BASE		CFG_SYS_DDR_SDRAM_BASE
+-
+-#define SPD_EEPROM_ADDRESS	0x51
+-
+-#define CFG_SYS_SDRAM_SIZE	4096	/* for fixed parameter use */
+-
+-/*
+- * IFC Definitions
+- */
+-#define CFG_SYS_FLASH_BASE	0xe8000000
+-#define CFG_SYS_FLASH_BASE_PHYS	(0xf00000000ull | CFG_SYS_FLASH_BASE)
+-
+-#define CFG_SYS_NOR_CSPR_EXT	(0xf)
+-#define CFG_SYS_NOR_CSPR	(CSPR_PHYS_ADDR(CFG_SYS_FLASH_BASE) | \
+-				CSPR_PORT_SIZE_16 | \
+-				CSPR_MSEL_NOR | \
+-				CSPR_V)
+-#define CFG_SYS_NOR_AMASK	IFC_AMASK(128*1024*1024)
+-
+-/*
+- * TDM Definition
+- */
+-#define T1040_TDM_QUIRK_CCSR_BASE	0xfe000000
+-
+-/* NOR Flash Timing Params */
+-#define CFG_SYS_NOR_CSOR	CSOR_NAND_TRHZ_80
+-#define CFG_SYS_NOR_FTIM0	(FTIM0_NOR_TACSE(0x4) | \
+-				FTIM0_NOR_TEADC(0x5) | \
+-				FTIM0_NOR_TEAHC(0x5))
+-#define CFG_SYS_NOR_FTIM1	(FTIM1_NOR_TACO(0x35) | \
+-				FTIM1_NOR_TRAD_NOR(0x1A) |\
+-				FTIM1_NOR_TSEQRAD_NOR(0x13))
+-#define CFG_SYS_NOR_FTIM2	(FTIM2_NOR_TCS(0x4) | \
+-				FTIM2_NOR_TCH(0x4) | \
+-				FTIM2_NOR_TWPH(0x0E) | \
+-				FTIM2_NOR_TWP(0x1c))
+-#define CFG_SYS_NOR_FTIM3	0x0
+-
+-#define CFG_SYS_FLASH_BANKS_LIST	{CFG_SYS_FLASH_BASE_PHYS}
+-
+-/* CPLD on IFC */
+-#define CPLD_LBMAP_MASK			0x3F
+-#define CPLD_BANK_SEL_MASK		0x07
+-#define CPLD_BANK_OVERRIDE		0x40
+-#define CPLD_LBMAP_ALTBANK		0x44 /* BANK OR | BANK 4 */
+-#define CPLD_LBMAP_DFLTBANK		0x40 /* BANK OR | BANK0 */
+-#define CPLD_LBMAP_RESET		0xFF
+-#define CPLD_LBMAP_SHIFT		0x03
+-
+-#if defined(CONFIG_TARGET_T1042D4RDB)
+-#define CPLD_DIU_SEL_DFP		0xc0
+-#endif
+-
+-#define CFG_SYS_CPLD_BASE	0xffdf0000
+-#define CFG_SYS_CPLD_BASE_PHYS	(0xf00000000ull | CFG_SYS_CPLD_BASE)
+-#define CFG_SYS_CSPR2_EXT	(0xf)
+-#define CFG_SYS_CSPR2	(CSPR_PHYS_ADDR(CFG_SYS_CPLD_BASE_PHYS) \
+-				| CSPR_PORT_SIZE_8 \
+-				| CSPR_MSEL_GPCM \
+-				| CSPR_V)
+-#define CFG_SYS_AMASK2	IFC_AMASK(64*1024)
+-#define CFG_SYS_CSOR2	0x0
+-/* CPLD Timing parameters for IFC CS2 */
+-#define CFG_SYS_CS2_FTIM0		(FTIM0_GPCM_TACSE(0x0e) | \
+-					FTIM0_GPCM_TEADC(0x0e) | \
+-					FTIM0_GPCM_TEAHC(0x0e))
+-#define CFG_SYS_CS2_FTIM1		(FTIM1_GPCM_TACO(0x0e) | \
+-					FTIM1_GPCM_TRAD(0x1f))
+-#define CFG_SYS_CS2_FTIM2		(FTIM2_GPCM_TCS(0x0e) | \
+-					FTIM2_GPCM_TCH(0x8) | \
+-					FTIM2_GPCM_TWP(0x1f))
+-#define CFG_SYS_CS2_FTIM3		0x0
+-
+-/* NAND Flash on IFC */
+-#define CFG_SYS_NAND_BASE		0xff800000
+-#define CFG_SYS_NAND_BASE_PHYS	(0xf00000000ull | CFG_SYS_NAND_BASE)
+-
+-#define CFG_SYS_NAND_CSPR_EXT	(0xf)
+-#define CFG_SYS_NAND_CSPR	(CSPR_PHYS_ADDR(CFG_SYS_NAND_BASE_PHYS) \
+-				| CSPR_PORT_SIZE_8 /* Port Size = 8 bit */ \
+-				| CSPR_MSEL_NAND	/* MSEL = NAND */ \
+-				| CSPR_V)
+-#define CFG_SYS_NAND_AMASK	IFC_AMASK(64*1024)
+-
+-#define CFG_SYS_NAND_CSOR    (CSOR_NAND_ECC_ENC_EN   /* ECC on encode */ \
+-				| CSOR_NAND_ECC_DEC_EN  /* ECC on decode */ \
+-				| CSOR_NAND_ECC_MODE_4  /* 4-bit ECC */ \
+-				| CSOR_NAND_RAL_3	/* RAL = 3Byes */ \
+-				| CSOR_NAND_PGS_4K	/* Page Size = 4K */ \
+-				| CSOR_NAND_SPRZ_224/* Spare size = 224 */ \
+-				| CSOR_NAND_PB(64))	/*Pages Per Block = 64*/
+-
+-/* ONFI NAND Flash mode0 Timing Params */
+-#define CFG_SYS_NAND_FTIM0		(FTIM0_NAND_TCCST(0x07) | \
+-					FTIM0_NAND_TWP(0x18)   | \
+-					FTIM0_NAND_TWCHT(0x07) | \
+-					FTIM0_NAND_TWH(0x0a))
+-#define CFG_SYS_NAND_FTIM1		(FTIM1_NAND_TADLE(0x32) | \
+-					FTIM1_NAND_TWBE(0x39)  | \
+-					FTIM1_NAND_TRR(0x0e)   | \
+-					FTIM1_NAND_TRP(0x18))
+-#define CFG_SYS_NAND_FTIM2		(FTIM2_NAND_TRAD(0x0f) | \
+-					FTIM2_NAND_TREH(0x0a) | \
+-					FTIM2_NAND_TWHRE(0x1e))
+-#define CFG_SYS_NAND_FTIM3		0x0
+-
+-#define CFG_SYS_NAND_BASE_LIST	{ CFG_SYS_NAND_BASE }
+-
+-#if defined(CONFIG_MTD_RAW_NAND)
+-#define CFG_SYS_CSPR0_EXT		CFG_SYS_NAND_CSPR_EXT
+-#define CFG_SYS_CSPR0		CFG_SYS_NAND_CSPR
+-#define CFG_SYS_AMASK0		CFG_SYS_NAND_AMASK
+-#define CFG_SYS_CSOR0		CFG_SYS_NAND_CSOR
+-#define CFG_SYS_CS0_FTIM0		CFG_SYS_NAND_FTIM0
+-#define CFG_SYS_CS0_FTIM1		CFG_SYS_NAND_FTIM1
+-#define CFG_SYS_CS0_FTIM2		CFG_SYS_NAND_FTIM2
+-#define CFG_SYS_CS0_FTIM3		CFG_SYS_NAND_FTIM3
+-#define CFG_SYS_CSPR1_EXT		CFG_SYS_NOR_CSPR_EXT
+-#define CFG_SYS_CSPR1		CFG_SYS_NOR_CSPR
+-#define CFG_SYS_AMASK1		CFG_SYS_NOR_AMASK
+-#define CFG_SYS_CSOR1		CFG_SYS_NOR_CSOR
+-#define CFG_SYS_CS1_FTIM0		CFG_SYS_NOR_FTIM0
+-#define CFG_SYS_CS1_FTIM1		CFG_SYS_NOR_FTIM1
+-#define CFG_SYS_CS1_FTIM2		CFG_SYS_NOR_FTIM2
+-#define CFG_SYS_CS1_FTIM3		CFG_SYS_NOR_FTIM3
+-#else
+-#define CFG_SYS_CSPR0_EXT		CFG_SYS_NOR_CSPR_EXT
+-#define CFG_SYS_CSPR0		CFG_SYS_NOR_CSPR
+-#define CFG_SYS_AMASK0		CFG_SYS_NOR_AMASK
+-#define CFG_SYS_CSOR0		CFG_SYS_NOR_CSOR
+-#define CFG_SYS_CS0_FTIM0		CFG_SYS_NOR_FTIM0
+-#define CFG_SYS_CS0_FTIM1		CFG_SYS_NOR_FTIM1
+-#define CFG_SYS_CS0_FTIM2		CFG_SYS_NOR_FTIM2
+-#define CFG_SYS_CS0_FTIM3		CFG_SYS_NOR_FTIM3
+-#define CFG_SYS_CSPR1_EXT		CFG_SYS_NAND_CSPR_EXT
+-#define CFG_SYS_CSPR1		CFG_SYS_NAND_CSPR
+-#define CFG_SYS_AMASK1		CFG_SYS_NAND_AMASK
+-#define CFG_SYS_CSOR1		CFG_SYS_NAND_CSOR
+-#define CFG_SYS_CS1_FTIM0		CFG_SYS_NAND_FTIM0
+-#define CFG_SYS_CS1_FTIM1		CFG_SYS_NAND_FTIM1
+-#define CFG_SYS_CS1_FTIM2		CFG_SYS_NAND_FTIM2
+-#define CFG_SYS_CS1_FTIM3		CFG_SYS_NAND_FTIM3
+-#endif
+-
+-/* define to use L1 as initial stack */
+-#define CFG_SYS_INIT_RAM_ADDR	0xfdd00000	/* Initial L1 address */
+-#define CFG_SYS_INIT_RAM_ADDR_PHYS_HIGH	0xf
+-#define CFG_SYS_INIT_RAM_ADDR_PHYS_LOW	0xfe03c000
+-/* The assembler doesn't like typecast */
+-#define CFG_SYS_INIT_RAM_ADDR_PHYS \
+-	((CFG_SYS_INIT_RAM_ADDR_PHYS_HIGH * 1ull << 32) | \
+-	  CFG_SYS_INIT_RAM_ADDR_PHYS_LOW)
+-#define CFG_SYS_INIT_RAM_SIZE		0x00004000
+-
+-#define CFG_SYS_INIT_SP_OFFSET	(CFG_SYS_INIT_RAM_SIZE - GENERATED_GBL_DATA_SIZE)
+-
+-/* Serial Port - controlled on board with jumper J8
+- * open - index 2
+- * shorted - index 1
+- */
+-#if !CONFIG_IS_ENABLED(DM_SERIAL)
+-#define CFG_SYS_NS16550_CLK		(get_bus_freq(0)/2)
+-#endif
+-
+-#define CFG_SYS_BAUDRATE_TABLE	\
+-	{300, 600, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200}
+-
+-#define CFG_SYS_NS16550_COM1	(CFG_SYS_CCSRBAR+0x11C500)
+-#define CFG_SYS_NS16550_COM2	(CFG_SYS_CCSRBAR+0x11C600)
+-#define CFG_SYS_NS16550_COM3	(CFG_SYS_CCSRBAR+0x11D500)
+-#define CFG_SYS_NS16550_COM4	(CFG_SYS_CCSRBAR+0x11D600)
+-
+-/* I2C bus multiplexer */
+-#define I2C_MUX_PCA_ADDR                0x70
+-#define I2C_MUX_CH_DEFAULT      0x8
+-
+-#if defined(CONFIG_TARGET_T1042D4RDB)
+-/*
+- * RTC configuration
+- */
+-#define CFG_SYS_I2C_RTC_ADDR         0x68
+-
+-#endif
+-
+-/*
+- * eSPI - Enhanced SPI
+- */
+-
+-/*
+- * General PCI
+- * Memory space is mapped 1-1, but I/O space must start from 0.
+- */
+-
+-#ifdef CONFIG_PCI
+-/* controller 1, direct to uli, tgtid 3, Base address 20000 */
+-#ifdef CONFIG_PCIE1
+-#define	CFG_SYS_PCIE1_MEM_VIRT	0x80000000
+-#define	CFG_SYS_PCIE1_MEM_PHYS	0xc00000000ull
+-#define CFG_SYS_PCIE1_IO_VIRT	0xf8000000
+-#define CFG_SYS_PCIE1_IO_PHYS	0xff8000000ull
+-#endif
+-
+-/* controller 2, Slot 2, tgtid 2, Base address 201000 */
+-#ifdef CONFIG_PCIE2
+-#define CFG_SYS_PCIE2_MEM_VIRT	0x90000000
+-#define CFG_SYS_PCIE2_MEM_PHYS	0xc10000000ull
+-#define CFG_SYS_PCIE2_IO_VIRT	0xf8010000
+-#define CFG_SYS_PCIE2_IO_PHYS	0xff8010000ull
+-#endif
+-
+-/* controller 3, Slot 1, tgtid 1, Base address 202000 */
+-#ifdef CONFIG_PCIE3
+-#define CFG_SYS_PCIE3_MEM_VIRT	0xa0000000
+-#define CFG_SYS_PCIE3_MEM_PHYS	0xc20000000ull
+-#endif
+-
+-/* controller 4, Base address 203000 */
+-#ifdef CONFIG_PCIE4
+-#define CFG_SYS_PCIE4_MEM_VIRT	0xb0000000
+-#define CFG_SYS_PCIE4_MEM_PHYS	0xc30000000ull
+-#endif
+-#endif	/* CONFIG_PCI */
+-
+-/*
+-* USB
+-*/
+-
+-#ifdef CONFIG_MMC
+-#define CFG_SYS_FSL_ESDHC_ADDR       CFG_SYS_MPC85xx_ESDHC_ADDR
+-#endif
+-
+-/* Qman/Bman */
+-#ifndef CONFIG_NOBQFMAN
+-#define CFG_SYS_BMAN_NUM_PORTALS	10
+-#define CFG_SYS_BMAN_MEM_BASE	0xf4000000
+-#define CFG_SYS_BMAN_MEM_PHYS	0xff4000000ull
+-#define CFG_SYS_BMAN_MEM_SIZE	0x02000000
+-#define CFG_SYS_BMAN_SP_CENA_SIZE    0x4000
+-#define CFG_SYS_BMAN_SP_CINH_SIZE    0x1000
+-#define CFG_SYS_BMAN_CENA_BASE       CFG_SYS_BMAN_MEM_BASE
+-#define CFG_SYS_BMAN_CENA_SIZE       (CFG_SYS_BMAN_MEM_SIZE >> 1)
+-#define CFG_SYS_BMAN_CINH_BASE       (CFG_SYS_BMAN_MEM_BASE + \
+-					CFG_SYS_BMAN_CENA_SIZE)
+-#define CFG_SYS_BMAN_CINH_SIZE       (CFG_SYS_BMAN_MEM_SIZE >> 1)
+-#define CFG_SYS_BMAN_SWP_ISDR_REG	0xE08
+-#define CFG_SYS_QMAN_NUM_PORTALS	10
+-#define CFG_SYS_QMAN_MEM_BASE	0xf6000000
+-#define CFG_SYS_QMAN_MEM_PHYS	0xff6000000ull
+-#define CFG_SYS_QMAN_MEM_SIZE	0x02000000
+-#define CFG_SYS_QMAN_SP_CINH_SIZE    0x1000
+-#define CFG_SYS_QMAN_CENA_SIZE       (CFG_SYS_QMAN_MEM_SIZE >> 1)
+-#define CFG_SYS_QMAN_CINH_BASE       (CFG_SYS_QMAN_MEM_BASE + \
+-					CFG_SYS_QMAN_CENA_SIZE)
+-#define CFG_SYS_QMAN_CINH_SIZE       (CFG_SYS_QMAN_MEM_SIZE >> 1)
+-#define CFG_SYS_QMAN_SWP_ISDR_REG	0xE08
+-#endif /* CONFIG_NOBQFMAN */
+-
+-#ifdef CONFIG_FMAN_ENET
+-#if defined(CONFIG_TARGET_T1042D4RDB)
+-#define CFG_SYS_SGMII1_PHY_ADDR             0x02
+-#define CFG_SYS_SGMII2_PHY_ADDR             0x03
+-#define CFG_SYS_SGMII3_PHY_ADDR             0x01
+-#endif
+-
+-#define CFG_SYS_RGMII1_PHY_ADDR             0x01
+-#define CFG_SYS_RGMII2_PHY_ADDR             0x02
+-#endif
+-
+-/*
+- * Miscellaneous configurable options
+- */
+-
+-/*
+- * For booting Linux, the board info and command line data
+- * have to be in the first 64 MB of memory, since this is
+- * the maximum mapped by the Linux kernel during initialization.
+- */
+-#define CFG_SYS_BOOTMAPSZ	(64 << 20)	/* Initial map for Linux*/
+-
+-/*
+- * Dynamic MTD Partition support with mtdparts
+- */
+-
+-/*
+- * Environment Configuration
+- */
+-
+-#define __USB_PHY_TYPE	utmi
+-#define RAMDISKFILE	"t104xrdb/ramdisk.uboot"
+-
+-#if defined(CONFIG_TARGET_T1042D4RDB)
+-#define FDTFILE		"t1042rdb/t1042d4rdb.dtb"
+-#endif
+-
+-#define	CFG_EXTRA_ENV_SETTINGS				\
+-	"hwconfig=fsl_ddr:bank_intlv=cs0_cs1;"			\
+-	"usb1:dr_mode=host,phy_type=" __stringify(__USB_PHY_TYPE) ";"\
+-	"usb2:dr_mode=host,phy_type=" __stringify(__USB_PHY_TYPE) "\0"\
+-	"netdev=eth0\0"						\
+-	"uboot=" CONFIG_UBOOTPATH "\0"		\
+-	"ubootaddr=" __stringify(CONFIG_TEXT_BASE) "\0"	\
+-	"tftpflash=tftpboot $loadaddr $uboot && "		\
+-	"protect off $ubootaddr +$filesize && "			\
+-	"erase $ubootaddr +$filesize && "			\
+-	"cp.b $loadaddr $ubootaddr $filesize && "		\
+-	"protect on $ubootaddr +$filesize && "			\
+-	"cmp.b $loadaddr $ubootaddr $filesize\0"		\
+-	"consoledev=ttyS0\0"					\
+-	"ramdiskaddr=2000000\0"					\
+-	"ramdiskfile=" __stringify(RAMDISKFILE) "\0"		\
+-	"fdtaddr=1e00000\0"					\
+-	"fdtfile=" __stringify(FDTFILE) "\0"			\
+-	"bdev=sda3\0"
+-
+-#include <asm/fsl_secure_boot.h>
+-
+-#endif	/* __CONFIG_H */
 -- 
 2.47.3
 
