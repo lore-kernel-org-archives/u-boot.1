@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE202CA6015
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 16:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54BE4CA6015
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 16:16:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 92824608F5;
-	Fri,  9 Oct 2026 16:16:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1CA2A608FA;
+	Fri,  9 Oct 2026 16:16:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GfulIFR6zH5X; Fri,  9 Oct 2026 16:16:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E6A69608C9
+ id 8xQMPzmYSz3C; Fri,  9 Oct 2026 16:16:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1F90C60A3A
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791562571;
-	b=hWKBnd29onACSfjIYxLlGHH52YeLvYy5Afn4Uv+DkQC2G++Yvqdp5T345ZvKNMLyD/R/
-	 TpyhYXS/x/PYPdkHL5qVyGcuciuT+XbE2JxmSDeHJue6Vt2+StIMF2AH4tlcE3EA2Zgyf
-	 KnjglJDpHB0JmzVsFDtO+zAfbnyvU7+udot+efwL9KC+gcnzJAGKtTZKLl38qPymuZXGM
-	 4wXj6yLBOVXCyBAmYslvqWL13wlWkmncz4HjMW69pzfFoOg7rj+SHHzV/BxwA0PLjDC/V
-	 Ki3f+egRm5VW/KGJx1Dy+DH18gXePlQPGAePcwcQKmerXdX8MLosVgSGynwulsEbTBw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791562575;
+	b=MiCwE9neYIDCG78w2YIVSVjuQFUE/qNM8DRl6l1QKF/bhG1Hz5HXwKtGBtVAqnGOD/O8
+	 i8Kpf3vizG0bfnVyh3+RvDmOkmaOcEsXEK4beVTAJnfZeQ2QfdccC3Dlwjl8WAE0n3kkA
+	 i5+0P0mKVkvUI8tJ+fOX6yncoZMf3UaOsNgwxkRiLlqrqp2VFyeCP02AJaVwBIzu+dPoI
+	 nB21d6022y32Xx4uCjQWLT0aT4egLBmi12Sp6d/RrX92lQELVSeEbWaJ/FRhFJ7zpDWCs
+	 /6jLzGd7aLommMk3m2uOWQd6zdgrF6dXJ25u6GYWsEz5oZAMMuxAg+z1ck73HnQ3qgA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791562571;
+	c=relaxed/relaxed; t=1791562575;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,134 +32,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=lpwFA+Tdw58uuNTxa6Ahmmwhi+Gx83oJ+aTrMA0Ok5U=;
-	b=curNYTHTz59oSO/ptv3GdtTxzToZ7VKNCM+1/HSJC67xNv19vY+qklJ5F4iT8KOw3QvI
-	 Z3TNyya/AYa57c6v53zwYUvzvh1xU0+zaX4bCIO194O9xwSX8+7TZs2cXcBsRCPBKsSeN
-	 l6j89778KogmKjiHP8ItW6cNXZfgvXg9vF1ZR1RR6/JSjzGrfKysEuL+Kbbn5fwGIG6wW
-	 XfHWbFb/KjtXIv4B+elO4MjR00i6relaJokwuhYjKkm90xGyuI9vk2i67wRXZkRUf/Y+z
-	 MTldSdmWTHvBkfu1LqDvEYUyC8pke3R7okqX9xsr38FIOokgLgTEtxo4wY1BHd3mYJw==
+	bh=kUHcQWtMJaIDMsiLmhwggwSd+nWOUA4FVHjkpKv+gfQ=;
+	b=boum2C70iwfyuH7w5rZ3MWS2nKlBRQz6JKyLNx9cjTx2qY8yWTQMsyHvc7HsyfI88D6X
+	 Lbnyo+MaDYdF2K4wo7qoHMxtDxbKTZHP/5CXzkKZS00TpsGl4Ks+9ZgNGm3f2Wlktrbxe
+	 6x2yBJQRHR9gDDiGhelaPC6etUk70Kyuxm/Ssa3SZ/MVO5md/qb+Oh5Lx66BcVuYtiwiB
+	 aXxQWWe7ipeozLW7TwJu9j71xxo5KWamahGZCUgVHgwyroI7NES+Dqr7qZc1WA8oeXgEV
+	 OYWLSScxlMDoccFtxCcvpf7LpT0k1YJpi8lHkzPdZSH6TYxZNqbtCnTTk5Nl68hnn9g==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791562571;
-	bh=lpwFA+Tdw58uuNTxa6Ahmmwhi+Gx83oJ+aTrMA0Ok5U=;
+	d=lists.u-boot-project.org; s=default; t=1791562575;
+	bh=kUHcQWtMJaIDMsiLmhwggwSd+nWOUA4FVHjkpKv+gfQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nhYLv3z5s+eG9dgJAi3wZVcy4RBIergVcw34Gf7NNyl/wi8euFwtHKZUcfvGLi7UK
-	 JBNeh5n1YGLtLdLL0S1P3tNSFpBqSUaT92dExAK7BCZmdLLbtBfsS0S7B/tJdEm6s9
-	 gPFn/rs67zzRYx8qwuQDTXahaua3W+l70NBU7xB/3usEEa3foTqGfUaFSv7ChWW6YP
-	 mK0WODPfEMMF5ok6ns8a4H0z+8fI+XDn4pzpUfVseWp4V832JGDyivhSWGZqePmZU5
-	 QzPpW0bMR6W1o+yBpIf+L1Zp+/GAXraHg0zqEeE6ji69ky8tzHKvCe0MSJh14rF1HN
-	 b2nnueTiHelbw==
+	b=dmgcWvDkoVvKRDX/nNimNXw9oT9PM1/KPFvNikECi0VDH8+nuIPAdJAMFmZRRzjyf
+	 Bb8pg5EtHIoq1b5/EgH2E1ib1KP0IOQqyVzyoWml7QFw7iQngx6/zZiy+lSLOALvst
+	 OZJGa0YoCdZzQ+EP7Qah3UbP/G5clZxI8+kYH+gIYmBBrzp/ExBg4ovqTRkBVwz4SI
+	 3DOu0yLPYx6qCAwKaOd9L2YmK/zopa56y0FTOFhgbI2P0QgnnxcoeS/d/TQwVW5pf4
+	 hs3mA/goFfd43D4U0gzfVbmmrHSchU6Mc8s06om6h2bFJrsKsnGGg+OfjoNLAaqEzd
+	 hbOFrBb8Abp0Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E6A69608C9;
-	Fri,  9 Oct 2026 16:16:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1F90C60A3A;
+	Fri,  9 Oct 2026 16:16:15 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id C31452AA
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:16:08 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 215932AA
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:16:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B53B040129
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:16:08 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1312A40050
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:16:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YXa2-P65KSpS for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 16:16:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org E029B40102
+ id EqObJxUUSPNK for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 16:16:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 37A9E40102
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::233"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791562568;
- b=QgrTXmTzvEcVz6NeT2ieUPX0yfhWuCfP0uPUs4pbUX9aLG0kW8Tp2fRpXIf6Gnbv+lS8
- Yw7Gc47LBLEBJeLQ5PiiOyiOuvOsR93Cg7cHbCk9OIPTyfftdc7UN3crjtKCSMWTaO00T
- ycPSlCirEmEgxx9GArNj+V6Jf33hd7510pJ3Sy1Aud0XJYiaMGo90WA06M0gVNr9YmFyU
- aQIK4MItcj5gNAzPQ8fbEqvBDI1mcxfOOG8HdWpZlOgajHy4wpO5kErUjWiCuU8cADpFr
- NQYrdfsWj6IG0wzLsQ+RpHVCQM1pf4d1HX/5HUEfIDlBucud2I2cnTdypjnNyJPViCQ==
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::22b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791562569;
+ b=VMuOuljGg4uvRCRiaalEXt/KXIaqi7+vr/wIzhUez9O1b9GcUozT0LnQgkdJFEF4IsCZ
+ H/KiQGn1Q4wMhN3R6B9jomKRTbYqpTI2+cb356URSW3TSqsVzU5OCFqbyG0vJ8Buzb5GP
+ fLRkglRdfi+HSQTSpQCgYZeN2Fc8KAGwT02lmSHfyGmh9AubU195ckaFnvXRJysj2GMO1
+ id1hM9R37MOeYp0j8sUu9ThCcFB5ZlniIiAqX6tYJV+kXx8dQOttyVyQ06dLFuAOqBgNF
+ j5Eldce6/hcoPIIjMWDrdhYp6zo9uqxQL3jBUytu6k/SarifKveakvoLcT+QmSELnLg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791562568;
+ c=relaxed/relaxed; t=1791562569;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=lpwFA+Tdw58uuNTxa6Ahmmwhi+Gx83oJ+aTrMA0Ok5U=;
- b=lmHm3dlDWVCa7b8lU9Xoh9Jl2Sy6fq5v16j6c98iIhO+y0zxg8aXEucoTchfLhFzMkmK
- EhTlLVUB16UGs3Oevoiqn6p1xu6wYxWKhWZlChLpmyx7HD2xRReGPXMOJ92MjGS3dfKiT
- EuxEvMLMmHrbmHivJcUMDTLQ2+UrZ9dEl/lkd3zJATkhfytS6z/lwnJwjrh3Nie2NbETx
- +w4kXt45BKVzFeDXuBxrTwlwYY+fK2Vk6AVgrikoRKGmJw4q6KiTxePNZ0/U/YhZrJ+36
- w+WK7DE1YRHHcXObWxnz26of9G6MTAhVfe+52ZZeU+b+kOgJ8+vG99qyLJaea67WOaA==
+ bh=kUHcQWtMJaIDMsiLmhwggwSd+nWOUA4FVHjkpKv+gfQ=;
+ b=YRKNzFH+06KYA7Sanvu0nP8VEhvvic0zeovzUTVv86mWUNXVneU7+NmGUdoamTqMVDy6
+ HwmmYOOw6K2O3aJZeZaN6jPKW6aD6M3wAR+UIEBeXSMg56+yK/b7hphjPCbAhaOVQuTMy
+ VLQE6Ex2rZ+AasDHn8Ql2chrlVvGAJbLnYbYeubDKl/DkjuP8Ys7lsHXXbHijB/8nGah6
+ LoXK7Ps3wY8IHdx2K3AwJffBEw31LvBhwt20Q8BGKlft9kMUEx0CkN57T4GjxBrpgkPv4
+ KPF7P4vmT9BgKtxmtUNzHdotKjvqlkW85E4ZKy+s9PGjU8HxTXyLk8IWuO2gpoOzkEg==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=none header.from=baylibre.com;
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=IYiDzqeg; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::233"
+ header.s=google header.b=Ih9a8iJh; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::22b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::233; helo=mail-oi1-x233.google.com;
+ client-ip=2607:f8b0:4864:20::22b; helo=mail-oi1-x22b.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=IYiDzqeg
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E029B40102
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:16:07 +0000 (UTC)
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-4a4cb36ae00so2564465b6e.0
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 09:16:07 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=Ih9a8iJh
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 37A9E40102
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 16:16:08 +0000 (UTC)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-4e4a4d77e5bso1188240b6e.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 09:16:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1791562566; x=1792167366;
+ d=baylibre.com; s=google; t=1791562568; x=1792167368;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=lpwFA+Tdw58uuNTxa6Ahmmwhi+Gx83oJ+aTrMA0Ok5U=;
- b=IYiDzqegAb6QmgTX1iKRQO7LS6IPrH0N/ewIq8LR1jHyx3B2uPQcH0j2ioRjHsOBRf
- h3iaJiCsiI9loG7ou58XxJT/WsgOk38KdPSNXszjFLIBEvQTy5POggiIB/2fLVYy2649
- cyJA2sP28aL50yhAhQ6HdA16aBBJEBwtxB6aS/gO9AiH7U8qlAvQysz80oCs9a/4TrZ8
- 27PyKygOxliFe67DPJVBlo5+QSXVSnbgGrWX8riRlIN94LpO9IrnvycIZq6xPyKRNubx
- qOUb67TyXWtE/aAa8rNd7RJ5qwwdhTFhBj1s1BT6TyAOkC2iULgQUJVgNjLiSN2BsZIh
- Qp/w==
+ bh=kUHcQWtMJaIDMsiLmhwggwSd+nWOUA4FVHjkpKv+gfQ=;
+ b=Ih9a8iJhXtOiAvLHE7sq1aA22yUyUXjPpCLe2bQ1CHlxNxLmI/gqj5ggQuPV0PykRO
+ U7VXmDvwUJxcfUcLP+mCBpAW5zXZjW8kHIDV4ZVWv6e+ipmN976jlkkYOtEmGzKzqbHA
+ Bm8BEPoi7owyWBJ6I3hASFDqN+GGrnmOn1W23NUPNhXVp/k/TRsk1fBa4cWGSAfvcLtn
+ kVNWOFq3SJWYZuJUxqfUApd8YVxAt41YTlMP+L/Jqg/Uzgi5Ra20ru7IivA9PK5w5v0W
+ uJ5UF7AA68Pt5wm7NF118B/R6iVLib0zooVNLZNBC+o30KxFljXLxKKoKiMZ+DfnJONG
+ Q1Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791562566; x=1792167366;
+ d=1e100.net; s=20260707; t=1791562568; x=1792167368;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=lpwFA+Tdw58uuNTxa6Ahmmwhi+Gx83oJ+aTrMA0Ok5U=;
- b=O0bEOj7rTHyqLzBqtO/S6xpUTlCJImFPbyLNEsS1vCU8hG2zHCPkgOJAxGQ/LhkDvE
- WIJC7ffRWEvhWwShF6hpDMflnVf4gMFriTgaZp5ERQhKyW38Q2kavpvvsbJq2DEIlkG5
- gUhBPzsXxcvePAb3eLIv40pdbeHl8/GpJ+PBYrmLYw0BZEDN2oCEvVUitP843W+F78CV
- wRZm+dOA4QBsisVbtPmrUOB2BGBUHOD4zO1GjFlUctKOFfNb7Ew3REIlH8QUQYPhyjig
- SOlqKOOrDU4fp8sI8gfNBVCJ7tESSMp+vPjdKNtM3SY2MQZXEoSyObbpDVYg0uAkoJWI
- +OkA==
-X-Gm-Message-State: AFuF++k+DU2IWnEz3EELwW1RULM7BupUtia9+kXB0Y1MaqVteobOtn8k
- tWnHtw5k57Xs5+UWQAEbKcDv4hI4Zp0FMUwLvVV3rNne/uOUEzqzxmmcUU+qpecXF0s=
-X-Gm-Gg: AYBFou0qp9+3nFlOa4jvTAlkQwA3BBc3bOCbAFqdKjO5hALxclDqkbXpaqyAWVAQgdV
- 8MOUuaaUimt2i6/AdQTrymVHpOQwU3QRsygI8oGquPy7abRR79zQUNd8Pqpa0GbJT5Ycmp7ZQO/
- Z++sdl5Fe6AQQqcBqgUwOygeH11d3DfvN+SMtMKpYMRWaHQ3XGbhKtCqxPqHF7UlNE14J+6xZG/
- RnFdOCfrCAD4G89CxV44f0QE1vJ+R69LLy9qsz2/ISnkbuTarAEQsqak5oZrlnXeTSU1F9EFNxV
- SB44bfZS6J0/L9i9sBrsy/e7aytEoows+8DaoJzPVBOmm/kMEiePsKxP15lP/BtNt9vcb3YMwiI
- yapsJqHefLccf4+5SdP51eieeNbS9sc+9VdKrOQKKNZYZ17zQgLkDDAQ5TQsGgUQmXbrCteNxkf
- tNyKJdM0L0d/ScmrXaUj7A4hNS/sWPr24fHTPVynCCU5Pa16izNqhh2wqT/aDIC+yVRXQ2zjYbq
- wCHSXJJXu6JWQ==
-X-Received: by 2002:a05:6808:2211:b0:4d6:90f3:74a1 with SMTP id
- 5614622812f47-50c58042fdbmr1699496b6e.44.1791562566399; 
- Fri, 09 Oct 2026 09:16:06 -0700 (PDT)
+ bh=kUHcQWtMJaIDMsiLmhwggwSd+nWOUA4FVHjkpKv+gfQ=;
+ b=yXpFaNgNV9ZEA9EsZp3mYSBEs9Hzh8pSXM1UTlfLIg6H6hPatSha0l7rtp17MvTjJO
+ y8VPsqgp/hv0XUtdX7Smvmf96ZfnqasFIvS0gn/UNlDXXBW//YNmtaCJTCVlvp6CE3Cw
+ DLAXC13kUS0G47cltfmlQPwiS8JsUy/Hh80ldI1aN1PywB3ZGUrCH9hvIgyX++e7J0Fx
+ CqjwC2xn+sVTu9COTA4sn64QkmdL9MsIS1AfV6+MTHCrLf4CrlfpR+JHwZ8kOcZGIg6y
+ ryfrHI0IeunqAyhdasK5vUYF+AYbL8NIvrZ5AK6GMLYTnRgshFzKIREl4ggZPClWsOSs
+ N8KQ==
+X-Gm-Message-State: AFuF++nRCX8r/hCr7oMP5CCar5Sij8YuJvLqaxcBJDJ7GbDqyqTkdC/z
+ oUUTOdU4ZvAhgfWM3LmSqYuFTod3opD5Pl5PSmLrhWku2HH86WvzAsRWZ7HiCGMi0D8=
+X-Gm-Gg: AYBFou2pQuE0J2B4xisb52Xe+Uoo1MkGvi7JD/M0S9aF6MCOtXjqF0fXz/LgM6P+OVb
+ jlOV8r5viymAETi9IJRJp156T8lFi61PTzcB34INe5QWceusBrlyIsgVDaLjyJNb1QcKHTbYZqB
+ b3seCHBYeg+ThscWXPjUYg34mCk5mdqSyOvhnbdD9YMhxk2w4OKTE8dGSBxf5jppjUgzSDtoWV8
+ +296QvgG2iqifs4ml5GX0vGRqkEgHU7o2CcpuO0NuJIGRja02MHY0Ib9cFHCHu2PCd6qso3XIvO
+ egyD65PVBTDr//c5Rnp377AjC+oK+fMimxEqMeO2m1fqR2MvRpHbiNr1gmPhlFWorfLF1Saxaxr
+ 2grsNbF8fNY4/TsiI1kzB8B8k5h5ymVihxcd7+2O+3/L0lM0erhCI5CC+NBLHU06Oqo/G7OqCx5
+ 1sZ2K1I8X3PR9KLcEkB5HZHrl9yU/PBKX6qoeYO7spi3NEIQE3TNJFdRpskxg8TBwi8p+/jNm17
+ UY=
+X-Received: by 2002:a05:6808:1a0d:b0:4e9:1d81:a952 with SMTP id
+ 5614622812f47-50b5f075b72mr1818375b6e.19.1791562567773; 
+ Fri, 09 Oct 2026 09:16:07 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:29bd:56f6:5ae7:35d2])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-50c0c5fe7d0sm2451506b6e.2.2026.10.09.09.16.05
+ 5614622812f47-50c0c5fe7d0sm2451506b6e.2.2026.10.09.09.16.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Oct 2026 09:16:05 -0700 (PDT)
+ Fri, 09 Oct 2026 09:16:06 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 09 Oct 2026 11:14:13 -0500
-Subject: [PATCH 10/13] arm: dts: mediatek: mt8189: add the eDP display path
+Date: Fri, 09 Oct 2026 11:14:14 -0500
+Subject: [PATCH 11/13] arm: dts: mediatek: describe the eDP panel on the
+ Genio 520 and 720 EVKs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261009-mtk-genio-720-edp-v1-10-4fbcf5b2904d@baylibre.com>
+Message-Id: <20261009-mtk-genio-720-edp-v1-11-4fbcf5b2904d@baylibre.com>
 References: <20261009-mtk-genio-720-edp-v1-0-4fbcf5b2904d@baylibre.com>
 In-Reply-To: <20261009-mtk-genio-720-edp-v1-0-4fbcf5b2904d@baylibre.com>
 To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
@@ -172,17 +173,17 @@ To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3783; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4595; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=OFnjDe609xNcrqbwuqPcF9aafPWCHtQlxkxjJFYZhY4=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqyRMVaIBYxu3miPdSU7Bt4AWHrucLMyA2KCS53
- clyJZeA64uJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaskTFRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AiSQH/RLWCILAlaXwA6L8nd84ytWbtMuLnxM4xCKfLxd
- NrMK4ScGYAk6aTlZJUIRCQkk5/ZLIRqmKGFz+dEVMsPLypiH1vkCCWyc10KXrMDXNM3ic9iUFqF
- BwqZ81yY25qFhG2vkBZ1Zw4Nl/2r4qKWzpzX+1Y8TvPnB6KxhK/vl2N03j/cn8mS6RrmTyL50TD
- n6R0RyjsXdCN5TjJS2lIa7IjFMwgIm79/7XSKzXSzyOHuDe/ElFXHKb+U5MnX07YShjJJRLcvZt
- ah1hZiigiw5WzY1AYfWU4aKntIDqetlZPLN+vBTnTWkEOy3ttodQH6fZmJmHAJNDNsq5vZdlxQl
- OeYA=
+ bh=zZqNFiIgVAr7tsr+ob+wyPJqE09ASDcgOhXaJfGvVng=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqyRMctmjsGmtqGyV4aUfjpDwTBoNFsteJ680/G
+ uwBeYkghxOJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaskTHBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AZaEH+wc8kaJL6MBgHtdACIOVWH3p+/N8ftBlAma00x5
+ gtPamAiFOgWiNJZFWSXR0myT60mRfG1zaCsm7G+x70IX6SX1IOhcHlvfLwCwAPbl/1VTbjZkueO
+ 8O22y3JsOSoTZjAdNmUkPJu4JXzZMN2NUDXuPx3AR1WLOs/cOklVSEGiCMvPqgWg/KunrYfFD7p
+ 40Zm65CIv9nOId2+j1Clu751EwcwVdkIZQClPJpmj9I8dL8OM8XMKj3g/mkrdf0tN474YsJG/S+
+ QZHLvZajR5g+jPkkUaAwT+HFgZf2uJNe4TIuH1PX/opqXiy3GNXakybBVHRjqy0S7TVePug6Hh6
+ 2hLQ=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -198,113 +199,205 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add the eDP transmitter, its PHY and the DVO output stage that feeds it,
-along with the DP_TX and EDP_TX_DORMANT power domains the transmitter
-sits in, which were missing from the SPM node. Label the apmixedsys
-clock controller so that the DVO node can name the PLL it retunes for
-the pixel clock.
+Describe the hardware behind the EVK's eDP connector: the panel on the
+transmitter's AUX bus and the display graph from the DVO through the
+transmitter to it, the panel's 3.3 V supply and the backlight's 12 V
+supply, the backlight driven from PWM1, and the pin configurations for
+the PWM, the hot plug detect line, the two regulator enables and the
+backlight enable.
 
-The transmitter's domain is nested below DP_TX, which is itself below
-the display domain, as in the in-flight "arm64: dts: mediatek: Add
-mt8189 evaluation board dts" series. U-Boot derives the power-on order
-from this nesting alone, so describing it flat would leave DP_TX
-unpowered when the transmitter is brought up.
+Each of the three enable lines gets a pin group that drives it low, so
+neither supply nor the backlight turns on before its consumer claims
+the GPIO.
 
-The PHY is described as a node of its own, referenced by the
-transmitter through "phys", the way the in-flight "PHY: MediaTek DP PHY
-refactor and MT8196 eDP" series describes the MT8196 eDP PHY. The PHY
-holds both its analog and its digital register banks, and the
-transmitter's registers start right after where the PHY used to sit in
-older SoCs, so the transmitter node starts at 0x11b72000.
-
-All three new nodes are disabled: a board enables them only if it
-routes the display pipeline to eDP rather than DSI.
+All of it is disabled, because the board drives the DSI panel by
+default and the two share the display pipeline.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- arch/arm/dts/mt8189.dtsi | 48 ++++++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 46 insertions(+), 2 deletions(-)
+ arch/arm/dts/mt8371-genio-common.dtsi | 134 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 134 insertions(+)
 
-diff --git a/arch/arm/dts/mt8189.dtsi b/arch/arm/dts/mt8189.dtsi
-index 22c1c7761f1..0f659908f32 100644
---- a/arch/arm/dts/mt8189.dtsi
-+++ b/arch/arm/dts/mt8189.dtsi
-@@ -179,7 +179,21 @@
- 							 <&mmsys CLK_MM_SMI_LARB>;
- 						clock-names = "disp", "ss-disp";
- 						mediatek,infracfg = <&infracfg_ao>;
--						#power-domain-cells = <0>;
-+						#address-cells = <1>;
-+						#size-cells = <0>;
-+						#power-domain-cells = <1>;
+diff --git a/arch/arm/dts/mt8371-genio-common.dtsi b/arch/arm/dts/mt8371-genio-common.dtsi
+index 95391a0585c..f6c0754d0ad 100644
+--- a/arch/arm/dts/mt8371-genio-common.dtsi
++++ b/arch/arm/dts/mt8371-genio-common.dtsi
+@@ -63,6 +63,44 @@
+ 		default-brightness-level = <576>;
+ 	};
+ 
++	backlight_lcd1: backlight-lcd1 {
++		compatible = "pwm-backlight";
++		pwms = <&disp_pwm1 0 500000>;
++		brightness-levels = <0 1023>;
++		num-interpolated-steps = <1023>;
++		default-brightness-level = <576>;
++		power-supply = <&reg_edp_backlight_12v>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&edp_backlight_en_pins>;
++		enable-gpios = <&pio 108 GPIO_ACTIVE_HIGH>;
++		post-pwm-on-delay-ms = <1>;
++		status = "disabled";
++	};
 +
-+						power-domain@MT8189_POWER_DOMAIN_DP_TX {
-+							reg = <MT8189_POWER_DOMAIN_DP_TX>;
-+							#address-cells = <1>;
-+							#size-cells = <0>;
-+							#power-domain-cells = <1>;
++	reg_edp_panel_3v3: regulator-edp-panel-3v3 {
++		compatible = "regulator-fixed";
++		regulator-name = "edp-panel-3v3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&edp_panel_3v3_en_pins>;
++		gpio = <&pio 109 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++		status = "disabled";
++	};
 +
-+							power-domain@MT8189_POWER_DOMAIN_EDP_TX_DORMANT {
-+								reg = <MT8189_POWER_DOMAIN_EDP_TX_DORMANT>;
-+								#power-domain-cells = <0>;
-+							};
-+						};
- 					};
- 				};
++	reg_edp_backlight_12v: regulator-edp-backlight-12v {
++		compatible = "regulator-fixed";
++		regulator-name = "edp-backlight-12v";
++		regulator-min-microvolt = <12000000>;
++		regulator-max-microvolt = <12000000>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&edp_backlight_12v_en_pins>;
++		gpio = <&pio 110 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++		status = "disabled";
++	};
++
+ 	reg_dsi0_vdd: regulator-dsi0-vdd {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "dsi0-vdd";
+@@ -150,6 +188,21 @@
+ 	status = "okay";
+ };
  
-@@ -399,7 +413,7 @@
- 			reg = <0 0x10001000 0 0x1000>;
- 		};
++&disp_dvo0 {
++	ports {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		port@1 {
++			reg = <1>;
++
++			dvo0_out: endpoint {
++				remote-endpoint = <&edp_in>;
++			};
++		};
++	};
++};
++
+ &disp_ovl0_4l {
+ 	status = "okay";
+ };
+@@ -160,6 +213,11 @@
+ 	status = "okay";
+ };
  
--		clock-controller@1000c000 {
-+		apmixedsys_clk: clock-controller@1000c000 {
- 			compatible = "mediatek,mt8189-apmixedsys", "syscon";
- 			reg = <0 0x1000c000 0 0x1000>;
- 			#clock-cells = <1>;
-@@ -816,6 +830,24 @@
- 			status = "disabled";
- 		};
++&disp_pwm1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&disp_pwm1_pins>;
++};
++
+ &disp_rdma0 {
+ 	status = "okay";
+ };
+@@ -200,6 +258,47 @@
+ 	};
+ };
  
-+		edp_tx: edp-tx@11b72000 {
-+			compatible = "mediatek,mt8189-edp-tx";
-+			reg = <0 0x11b72000 0 0x12000>;
-+			interrupts = <GIC_SPI 380 IRQ_TYPE_LEVEL_HIGH 0>;
-+			power-domains = <&spm MT8189_POWER_DOMAIN_EDP_TX_DORMANT>;
-+			phys = <&edp_phy>;
-+			max-linkrate-mhz = <5400>;
-+			status = "disabled";
++&edp_tx {
++	pinctrl-names = "default";
++	pinctrl-0 = <&edp_hpd_pins>;
++
++	aux-bus {
++		panel {
++			compatible = "edp-panel";
++			power-supply = <&reg_edp_panel_3v3>;
++			backlight = <&backlight_lcd1>;
++
++			port {
++				edp_panel_in: endpoint {
++					remote-endpoint = <&edp_out>;
++				};
++			};
++		};
++	};
++
++	ports {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		port@0 {
++			reg = <0>;
++
++			edp_in: endpoint {
++				remote-endpoint = <&dvo0_out>;
++			};
 +		};
 +
-+		edp_phy: phy@11e10000 {
-+			compatible = "mediatek,mt8189-edp-phy";
-+			reg = <0 0x11e10000 0 0x1500>;
-+			power-domains = <&spm MT8189_POWER_DOMAIN_EDP_TX_DORMANT>;
-+			#phy-cells = <0>;
-+			status = "disabled";
-+		};
++		port@1 {
++			reg = <1>;
 +
- 		mutex0: mutex@14001000 {
- 			compatible = "mediatek,mt8189-disp-mutex";
- 			reg = <0 0x14001000 0 0x1000>;
-@@ -879,6 +911,18 @@
- 			status = "disabled";
++			edp_out: endpoint {
++				remote-endpoint = <&edp_panel_in>;
++				data-lanes = <0 1 2 3>;
++			};
++		};
++	};
++};
++
+ &mipi_tx_config0 {
+ 	status = "okay";
+ };
+@@ -269,6 +368,13 @@
  		};
+ 	};
  
-+		disp_dvo0: dvo@14017000 {
-+			compatible = "mediatek,mt8189-edp-dvo";
-+			reg = <0 0x14017000 0 0x1000>;
-+			interrupts = <GIC_SPI 325 IRQ_TYPE_LEVEL_HIGH 0>;
-+			power-domains = <&spm MT8189_POWER_DOMAIN_DISP>;
-+			clocks = <&mmsys CLK_MMSYS_1_DISP_DVO>,
-+				 <&mmsys CLK_MMSYS_0_DISP_DVO>,
-+				 <&apmixedsys_clk CLK_APMIXED_TVDPLL2>;
-+			clock-names = "pixel", "engine", "pll";
-+			status = "disabled";
++	disp_pwm1_pins: disp-pwm1-pins {
++		pins {
++			pinmux = <PINMUX_GPIO30__FUNC_DISP_PWM1>;
++			output-high;
 +		};
++	};
 +
- 		smi_larb0: larb@1401c000 {
- 			compatible = "mediatek,mt8189-smi-larb";
- 			reg = <0 0x1401c000 0 0x1000>;
+ 	dsi0_iovcc_pins: dsi0-iovcc-pins {
+ 		pins {
+ 			pinmux = <PINMUX_GPIO58__FUNC_GPIO58>;
+@@ -290,6 +396,34 @@
+ 		};
+ 	};
+ 
++	edp_backlight_12v_en_pins: edp-backlight-12v-en-pins {
++		pins {
++			pinmux = <PINMUX_GPIO110__FUNC_GPIO110>;
++			output-low;
++		};
++	};
++
++	edp_backlight_en_pins: edp-backlight-en-pins {
++		pins {
++			pinmux = <PINMUX_GPIO108__FUNC_GPIO108>;
++			output-low;
++		};
++	};
++
++	edp_hpd_pins: edp-hpd-pins {
++		pins {
++			pinmux = <PINMUX_GPIO28__FUNC_EDP_TX_HPD>;
++			bias-pull-up;
++		};
++	};
++
++	edp_panel_3v3_en_pins: edp-panel-3v3-en-pins {
++		pins {
++			pinmux = <PINMUX_GPIO109__FUNC_GPIO109>;
++			output-low;
++		};
++	};
++
+ 	panel0_pins: panel0-pins {
+ 		pins {
+ 			pinmux = <PINMUX_GPIO13__FUNC_GPIO13>,
 
 -- 
 2.53.0
