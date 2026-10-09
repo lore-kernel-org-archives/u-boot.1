@@ -4,184 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE719CA5FED
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 05:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4DCECA5FED
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 06:26:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F0820813CE;
-	Fri,  9 Oct 2026 05:49:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 32475813FD;
+	Fri,  9 Oct 2026 06:26:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9cZWc6S0q0jN; Fri,  9 Oct 2026 05:49:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 05A6B813A6
+ id TUGam9PxnNBD; Fri,  9 Oct 2026 06:26:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1989D813F5
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791524993;
-	b=NMfimppVKFFikwKisy6wjoPUsywVX8ZgipafDjF4Khkx1DFufy+o6gKL9LbkiO/JO2Gy
-	 R1EDYENTHmQX6l9bB7qCpvXKrAgCmFXIt7GRrc7zA1h1r36OWORYFfHzYNMx//OFQJd94
-	 6Mqf/rzpisLBQSOcP2RxXIde6moxtgxkNmJcFF5WWTCr5vRVqda9LZ3NOGl46SQChhbNK
-	 bv8+z5t3esJbmh7FcntaW7UMON3kdfSfr0W/ceGQ0WmL80P73YzKitKAHHRDbV/V7sQkJ
-	 WMhmNvRt7Q/EsErRsKqEavEopjeT36BeY0/grDf/IPPj9hdrHysF35i83BRl4er2QBQ==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791524993;
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791527189;
+	b=mbDgpza7L/X7AnZGG2J9y9HCnzZCJsuoIidlCKzsGQUtUsNhw4toxzZhn4fZe2HClHUZ
+	 JcaIU2UTlzATJrh0+oNOC8V84AufUxjqHQ8Lxfo5vDmggV3qV7Zo1fqSwbPa/87xmo616
+	 VpfAOFGka1fvZvJNlp5NdPfylJr3vuhSB7jt/E+Lrk2Rgobds/B70vEMtDdV5y1kdWwAZ
+	 Xj2PgWwD5tNIXG8Fd8i633OToCXKNncuPO1W/jx7wUFtpAsu7kW5o0mOekdJk+kpMrWO0
+	 fwT4TY4l9cPZywJzGmuxLrUl8FA8Uk7xrvxPMM9k+ErwWDR8g2zykKvLK4EhQ/LAoUA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791527189;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=oxwfQ15ivh+OfcJOFwXGZAa6xLdlmmIQKezW+zudlrU=;
-	b=X1AM6t0+XcbHvuk/lsUfkWxnMyBy1QnSJDbdT0pdwU9J2myf7gukEWD4mZtLXrR+I2lJ
-	 Ng+BUFXmK3vcaK9d2SifmFcuLUNyjA1aKEKNBM53vPtntSZojT0WwV7I+qU4inq3RfkPz
-	 H6ZCFD+ExTIGNU8Dqr2LHu+kf3rjSfPggH5db7aOzXdo3K7BP6L5p3T675jheFAHy2KOH
-	 cagqdbUXmMdWzFv2U8lP4vowwHzJOPRqrWZF3SdUKPtX/xquBw24V7F8GGXpT43kLZ5bq
-	 /fOPiK/01IbeS1I3c2IZN1b+tGGfO9e44fIpysin6uwj6XVvDSTDNYuDL2Q+N+R2PzQ==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	bh=5aOEKw3LFd3iAJVnlYhDdLVD1ZXu5TEJcgpRNnqxgFg=;
+	b=It8/TEytgfF73AP7X5zFO3lHY6+L0NxDFUfESI1f8XtxUsqq1UpqwZexk6qLuWM7qEE2
+	 eArlqXIDwIwnNaJtQx5pkmgFWipKB8YoMFFF/J8CgK8uXPXPbSboIuOmx8pcxkJsw1XHm
+	 VV/2sspsfpDJ8utGoRdGCrSb9IgYbbhS93hFs314Ye6E3VyBLj7zJQsDxq/xkA1DjoeZV
+	 iJQEU+JVKUUFgE/HPKQMfaoeqjckrzzI+HJyJDan8gJDJbn9fmtUdDZiUzf1ZqG0BPOs6
+	 iFIJGNU2nJXqNtXItLrW/fRGjq5OhEafLrmov+NIO+iqOH9fWTpJk4O5XONPFu59ETw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791524993;
-	bh=oxwfQ15ivh+OfcJOFwXGZAa6xLdlmmIQKezW+zudlrU=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791527189;
+	bh=5aOEKw3LFd3iAJVnlYhDdLVD1ZXu5TEJcgpRNnqxgFg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MC+zY3uKxoyttidnpWV/WPUWneTZKMRMIiTVllvHFpxnE+yTyT1k/l9S3o/jxHl7P
-	 1Hi7vY1na+lXEaXGFEi3OBt6fAEUKxcADQIjFCPFT9pCYFk0Y960TvWSj9nkMgWWA2
-	 DyWXCkbLrL+IzOo/QfaR9puiAr9REvw5AROUQ8dcdD3ihVMEmS2XQkNRlI9Zz5jPpG
-	 Hh943JVFmdvD9Mc8notZ7nqkUqayx7xT2pAXu9TvtzPwqwFKbUXZlbn7VnVpZOvv86
-	 eNC4mRWbGV+uSpgNfatVtAdO0ripKZ9iTRrU/BERyrrm/cmOkTTUcFvAGMq2eXWa8N
-	 aga1Foj+7r11Q==
+	b=JxfoHIXcLPWkOpUly1vjeBAjSJQaUaj3bkQ8K9Uiqu83zrxG2uDNYdgCWbwkqtmvZ
+	 eG6C27Rd12rkMnxRSfC8q6gYiCbgdXdAodMhdWcxXFPxWYi2YccFREyDOksXxip+cx
+	 5DuMIpMgjtugiKCQEZ1nSHm7bCZi4iyp0NF+guEsGdC9dhESnLpJ8lLYSAcjOUu/lU
+	 fp4iHZPnYYu7FXylXvoHPeEb12D1BiKPQEHgo32a04VFK/A8Yb0XtK0mKNW/Plj8JX
+	 XSmvieOT8+szOVxhr2FJb9n7b0zE57HZG3RWGeTJQoJUAP4jW4UMRcTftYhFEwZ7hZ
+	 8G3JN6UkwJ0uw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 05A6B813A6;
-	Fri,  9 Oct 2026 05:49:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1989D813F5;
+	Fri,  9 Oct 2026 06:26:29 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 8BFBB1D2
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 05:49:51 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id A24FA75
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 06:26:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 71D334009C
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 05:49:51 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A02FC4009C
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 06:26:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lNwpfEnapRMc for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 05:49:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 3273540061
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::112c"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791524990;
- b=qkCXBKM1mf/PTkTjRNnLX9JMzFe/Y0fkAFZ4cCalPO8Fw2TPjjzvLZKa02YD6Q5phDN+
- SPlIVfDS6iI889afdXvLzDmSj6wCswQW3IHDBbUcWOPJQXeycdIrWpIOPdoJrqDiJfSFY
- SiA5E986So+sWmFo+kNNQQ2YjgEABv98t9e1zp3EKilNtvsFQbeMY+HpC+gyqEV4xlTGZ
- v0tSJFRsDzwYFAKeGr16yv04w7y16Dq1UqMGKyVCKNTW2fbIxWSCNGpWosPLQ4HLBJwqo
- BnJkW9IdrQjzE1jlmYzSZY+5z/J41gUqiw9fS0pEBEIpWDVcDT79nXncjHr/78sniEw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791524990;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type;
- bh=oxwfQ15ivh+OfcJOFwXGZAa6xLdlmmIQKezW+zudlrU=;
- b=eXpeSoQpm4kPH6VSUgVYVCLFZQuV/70D78+Rx6wCxniqa5q3QZzrR6bxR9AckdSBaPEA
- OjpyOC+Pzhdh9WrCxdcmbKwmIAlR4n/iLFc6Vrd/gNhlUNd5j4kwiWmWhe/UuiB7UlMDL
- DwLEyxwCUDxAt/526QQIjtmaYCGDWBYJDQbRYXB0ZaOnDH39J+UIcR+aG58gT2KF4POF2
- JxykVAVUGIWN70lGjPs1gRxF/JUTBo2CBOrDkCU8MVQknvJt0sAAh8IyTbEpteD8jG8zU
- UBTcE6rVA5sNsvuAA7ecXKSEJHZs3CyNoqw9SkPhRwCA0G6+y2MYKPiJJQziCLoJ8UA==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=nM4+Z8FC; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::112c"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::112c; helo=mail-yw1-x112c.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+ id EifRJYmPJ0xK for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 06:26:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org BE7DD40061
 Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ arc=none smtp.remote-ip=172.234.252.31
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791527186;
+ b=iY0JOBZrpl7G25qVIjy84j/josjaZfrMoKUH0jpoijyEzfOFXtOl/vBiusi9fDojOrlh
+ K3mtGsTTFacV600xeyAUvEeL8Col7ohAunGsfAS96X3gZsV0Zc+OD7wwELszClJg9q7zT
+ mKD7nup+bUUMGZLkBP0/By/nms36nT8GApPePBl7h0peXFnIVFOKFJq40kFGA5O0Ya3mL
+ 5wYz5jn3M6mATfDLDFnYml4qSR0IsiULU3roVSUgli3en2aVUDkb7EyrHc5xxENGanH5h
+ 8VhtKUhQul+7V6GZ6NhgB2VWoQxiqdlnvg0DLOL5hlpcWN2HB34VRs0sea496gosWAQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791527186;
+ h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To;
+ bh=5aOEKw3LFd3iAJVnlYhDdLVD1ZXu5TEJcgpRNnqxgFg=;
+ b=T458gHiorzNDjIXeQVLHRdBGRwGWH6mUmRTLc8L0zoq2yC61EPUOQDQ+Xqyof+5pKzLQ
+ c6F6I1ZygRdtSCtPCKzMd5KML+kKlWIFhKBH4uM1QpN7ywQGGH4sjWym6FshuoB0vz4WH
+ OW7vOMquRraCNxqupyseaBEO/ZFcXfYn/ATzDwsW2Bm7hj28MuY0JJiCK6ALkd/yccqjt
+ JADU4gLydNiN9kauMEaGBfjlbJDdzYlr4J9J4K0/fE/SA0H4zdD2ZSSM5fAtOf6WAFpO3
+ BzJQmzGC64GqAAh3J+C4ELPobzNY6RTz07lnZ0/lhuLonDGVMv5QYRSfzMH4QNG686A==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=kernel.org;
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=bAf5yti7; 
+ arc=none smtp.remote-ip=172.234.252.31
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org; envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=nM4+Z8FC
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3273540061
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 05:49:49 +0000 (UTC)
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-8ab43af5e97so15321327b3.1
- for <u-boot@lists.u-boot-project.org>; Thu, 08 Oct 2026 22:49:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791524988; cv=none;
- d=google.com; s=arc-20260327;
- b=scMv4OK2Q29prl2gtlF6l+F1DOx8KIKXUfoz4KvMKzDaJCl3USQOY+q02e3doIpyQE
- scRl7du9n2iIyAaXQBMlrsBUG34ndXmzcN6SsdP1iTAjl0CY28+F6ToolISfctRZtkn0
- 8fKPQNfVY3oKMxLFbs7t/lU8S1lrY0uqobH+cbtTTZJu1ucb4ap1OLNnk1u6Gew6toCt
- wgDkmYmRhZL+EWGm4DcqhZskDt5xNnx8P0qoP5X7JcA6PIjfZZ+/AV9W3FNXTAmR1fQm
- DjYRMraPWMk4nd5CcnSkvZG6nCfQIoPzrGZVTFOZ6e1VWzPLSeu9EExgBQ8GylaFN4qE
- B8rg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=oxwfQ15ivh+OfcJOFwXGZAa6xLdlmmIQKezW+zudlrU=;
- fh=qIHU5praJnpEG8pvGcO48d+yRv1dP1geKvuZ9YauhUg=;
- b=dobSoQBCEPRqS7m3vh+yP5dDT+oKkMe6TzjUstbT2KPEdMhuc83pyRw5nUEBZbNBqg
- wotp7ymjjqUD/mMrPuvlCehSja2XU92vMq17TQMYkBuIfM+B2C3ULdcmuoVJrnLSp8Qs
- TVXdnZHr6ka0e3McxiqFA/ycq+qRX/B7FuDNHE3Z959vBVb6ePgFwOhSVd9VwsiLqrkg
- XP3iLPvp/K0gLqdcRF2Y6wSJk5m4IBRh7YvBr8HI09fuWWGirf0zjdpKB1zmp4ryzSef
- G360xAoBBpTeoZ59QryJL+U88HuxwVOrOHFBoA7B9GhOME2+LobKB9GdeDrF3AXhjTIU
- SsLw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1791524988; x=1792129788;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=oxwfQ15ivh+OfcJOFwXGZAa6xLdlmmIQKezW+zudlrU=;
- b=nM4+Z8FCX8EoQeJ76mIWk+R3npVb+iifTp/Z0hipj0xvOKsdrWrFJB4EjH5ccomtSG
- rHlkFEkoQhe9vd054MTBrIJoWijohwVQFtNnIqeiB0X7upsIkv/Vps2lj1P+gM+y5HSu
- IYJWFGDtjKqMZC2bK4Ceu9CRdlPwW7p/enNNroXG4m3BY/v0XRF00lu7ce/OpgLLu1Gd
- QxlXJldrAvmb3phuXH2SVpuStKlNUiGCog8oInFqlq6kon7K0ITk4B7r0qJD5vHehSc3
- vZ47+vfeW7uiTmQYnYpcc1hBqxIIy9EkdByHArwXXV5WCCLLYuGTfsCour2uy2cQ3IuC
- Vkig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791524988; x=1792129788;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=oxwfQ15ivh+OfcJOFwXGZAa6xLdlmmIQKezW+zudlrU=;
- b=i9pbh2cDTzNezCIcbJy+Rl2OAbHELjKEFqnfZVH2g3aY/5hfQ+y981rTWCyP6ItXcs
- LElyhW9yb9/BcSwkSPqLj09LpeK1iCBg0f0nTGOdeRqDhvM5hWrbIhYJ2ZJkNFcqyIx1
- +TSzRbJm9cwKn/9C3DUWDO+WF4NEwn6ibPFWus639QNvtP2eK+0q7Y8QyzvRp39u1l0h
- fSh+DkB7HB4SdlPMhpk3UsCSlLKsznDCZDZ9Dy8wUOl7lUwX+HA0iwZZ9JdEg1rN47Tb
- VA92gF2DV3z1hq6XIrvJzq1kFjq1QgfCjZMkU9HUD+S0VPFfqwqCaR264HiDymBAvYT7
- fTRg==
-X-Gm-Message-State: AFq9FYL9FlGv72PjIVu9pdYbhYQEYEe4STLI2qi93u8p9Afv1ctlfhZw
- L0lUNN3pzb85b5RiVC3WHzVb0ysIakjl8xk0lUVJupJHkhZP9Qc9kVIiF+/MaL778han6RljGuN
- Wk+q17vbTFEV54c56UXJEKEgziDgjZKZFILb964Ad0w==
-X-Gm-Gg: AYBFou01UliJCPBUe9dIO5B7rE5M8QXQrYyoDyZ/5KTCr5zGMpUCW8VFxWr0CIf0V0T
- ofeZagNw/sEdiqF0orhKpQc3h18Y4MKjrBmZoM6HdN1YoPWGkNhF4zK20SWUb7HKnI+tof/4JnT
- feWKkBKJHsJjSjSapkZ1s8TJL93rBQX2Umm9SeKPeJPPrnH8L1cZSC6kR1fdB0shW5SXKSn5/2d
- Fx/ZXdZMCvhvJCcAFca/3lYELwdZd/gKbafVi2AkZ5U+lJ71IgKZyRsYXmmTQW+3ZLBJye+V3nX
- rhRecV81sRYvBT8Edl5g9duOsaRVS9ZBc0yQ3dCXRW3G8Dmm6/eD8baxBrDSFOI8sWpG9pRtSx2
- MuWs79aT76Xz4IhN7sl9Y/xNhWbN++IB2kur7hETitZ1ZyyPskXT/R6uZ6AJnte6sd/2XHS1+2P
- axCkCmyN3Hkk6SOOhPlKIxsB+FHujm7KmyslLoy3e1x8F2P4ZVngPBi6nQz0nZgrf8mOM0YyYOV
- embzblsEtSL4QMtRMzBKuVCbi3qcLtSsAG7kcY9TiUZThvMZx6ZJgY7rSIYKoFISrlxgnzToAuE
- LMTtXmi+FG99k8rgczZpUShIRXpAd1AEGujGn5+NhRYygFRFKD+zN7oCysC0qFVe/EBCdrfAQJO
- Iz4Modpw+M5uaRLfCOnMOSGM4ThDZ9Fnhgkn6M66b3pjan/zgoae293WkDTlDuUZo
-X-Received: by 2002:a05:690c:ec8:b0:87e:645c:182b with SMTP id
- 00721157ae682-8b07edc852emr2834287b3.26.1791524988351; Thu, 08 Oct 2026
- 22:49:48 -0700 (PDT)
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=bAf5yti7
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BE7DD40061
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 06:26:25 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 1FFA941B44;
+ Fri,  9 Oct 2026 06:26:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0508A1F00893;
+ Fri,  9 Oct 2026 06:26:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1791527185;
+ bh=5aOEKw3LFd3iAJVnlYhDdLVD1ZXu5TEJcgpRNnqxgFg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=bAf5yti7f2Wb81wfkC9rvJn4roG72UA7PTDRr0yYx1S08X/XXnha8RkKl2q9IUWSl
+ OA60HVWIU9RnTBjXhue54+27XrU7gJKdCo3gb7i3E9sq4je9/DYWuPzpT88G/Al/Oz
+ UcF4bBMgTAVz7QpfS+DPoi2G7yinbu0+GSp1do/Z3+cPHG4Yywyu3SVDHLS2HMgvzO
+ uv71k0KKyADHW/hF9P/VHoiiHIJb0VY9MZfzjxCYnBwEuC26l1/Kzc4zvFP4GjT8+Y
+ oEPdhnt5PvvSk8k2KB5moL+y2H49MDlIjHGY65y/dxqxd2sorGT5C6D4EEjjMeMg9X
+ ACAHHFY0C0eaw==
+Date: Fri, 9 Oct 2026 06:26:19 +0000
+From: Yixun Lan <dlan@kernel.org>
+To: E Shattow <e@freeshell.de>
+Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>,
+ Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Hiago De Franco <hfranco@baylibre.com>,
+ Junhui Liu <junhui.liu@pigmoral.tech>
+Subject: Re: [PATCH v4 1/4] board: spacemit: add SpacemiT K3 Pico-ITX
+Message-ID: <20261009062619-GKD2005@kernel.org>
+References: <20261007-00-basic-spacemit-k3-v4-0-c44d09937088@kernel.org>
+ <20261007-00-basic-spacemit-k3-v4-1-c44d09937088@kernel.org>
+ <f5f4086a-3208-4f1b-b2f3-06c1a60ff3d8@freeshell.de>
 MIME-Version: 1.0
-References: <20261006155217.187050-1-michael.haener@siemens.com>
- <20261008215518.209510-1-michael.haener@siemens.com>
- <20261008215518.209510-2-michael.haener@siemens.com>
-In-Reply-To: <20261008215518.209510-2-michael.haener@siemens.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 9 Oct 2026 08:49:11 +0300
-X-Gm-Features: AclHuK8SaXJft4hljM4hkc_sTuUgF6uBG0dU3j-S-XtC1A9MRAmjzcxF5d4mR-8
-Message-ID: <CAC_iWjLvTF+JnYwZZvuFvv68hk9PzOQMsGEdQcf8-f6Up+813w@mail.gmail.com>
-Subject: Re: [PATCH v4 1/3] tpm: Add an option to start the TPM during init
-To: Michael Haener <michael.haener@siemens.com>
-Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <f5f4086a-3208-4f1b-b2f3-06c1a60ff3d8@freeshell.de>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -195,203 +146,251 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Fri, 9 Oct 2026 at 00:55, Michael Haener <michael.haener@siemens.com> wrote:
->
-> Add CONFIG_TPM_AUTOSTART, which runs the TPM startup and self-test
-> sequence from an EVT_LAST_STAGE_INIT handler. This is the same thing the
-> 'tpm autostart' command does, but it does not depend on a boot script or
-> on the environment.
->
-> Today a TPM is only started automatically when either CONFIG_MEASURED_BOOT
-> is used (and then only from bootm) or when booting via EFI with
-> CONFIG_EFI_TCG2_PROTOCOL. A plain booti/bootm therefore leaves the chip
-> uninitialised and the OS has to start it itself, which Linux reports as
-> "A TPM error (256) occurred attempting the self test". Boards have worked
-> around this by putting 'tpm autostart' into their environment, see
-> board/xilinx/zynqmp/zynqmp_kria.env.
->
-> The startup is done from an event rather than in the uclass probe:
-> nothing probes the TPM on a plain booti/bootm, and the event runs exactly
-> once in U-Boot proper without changing what probing a TPM means for the
-> existing callers. The startup itself is in tpm_autostart_init(), so that
-> it can also be called directly, e.g. from tests.
->
-> Boards that share one binary between variants with and without a TPM
-> fitted can enable this safely: when no TPM device is found the startup is
-> skipped silently. Other errors are reported as warnings but do not stop
-> the boot. Note that the full self-test adds to the boot time.
->
-> Signed-off-by: Michael Haener <michael.haener@siemens.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
+Hi E Shattow,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On 03:51 Wed 07 Oct     , E Shattow wrote:
+> Hi Yixun, we should refresh MAINTAINERS such as file rename and added
+> changes requested are now settled. Keep R-by tag from me on the refresh
+> if there's no v5 before merge, thanks!
+> 
+Ok, I will no send a new version, since it's really minor changes 
 
-> Changes in v4:
-> - Move the startup into tpm_autostart_init(), so that tests can call it
->   without sending EVT_LAST_STAGE_INIT
-> - Add Reviewed-by from Simon
->
-> Changes in v3:
-> - Split the tests and the Kria conversion into separate patches
->
-> Changes in v2:
-> - Move the code to lib/tpm_autostart.c and the option to lib/Kconfig
-> - Stay silent only when no TPM device exists (-ENODEV), warn otherwise
-> - Use u32 and %#x for the tpm_auto_start() result
-> - Mention the boot-time cost of the self-test in the help text
-> - Document the option in doc/usage/measured_boot.rst
-> - Explain in the commit message why an event is used instead of probe
->
->  doc/usage/measured_boot.rst | 18 ++++++++++++++
->  include/tpm_api.h           | 10 ++++++++
->  lib/Kconfig                 | 19 +++++++++++++++
->  lib/Makefile                |  1 +
->  lib/tpm_autostart.c         | 48 +++++++++++++++++++++++++++++++++++++
->  5 files changed, 96 insertions(+)
->  create mode 100644 lib/tpm_autostart.c
->
-> diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
-> index 488dd546f13..d74cfab2594 100644
-> --- a/doc/usage/measured_boot.rst
-> +++ b/doc/usage/measured_boot.rst
-> @@ -55,3 +55,21 @@ Requirements
->  * The operating system must also be configured to use the memory regions
->    specified in the U-Boot device-tree in order to make use of the event
->    log.
-> +
-> +Starting the TPM without measured boot
-> +--------------------------------------
-> +
-> +Measured boot starts the TPM as a side effect, but only on the boot paths
-> +listed above. A plain booti/bootm without CONFIG_MEASURED_BOOT, or a boot
-> +which does not go through the EFI subsystem, leaves the chip uninitialised
-> +and the operating system has to start it itself. Some kernels report this as
-> +an error.
-> +
-> +CONFIG_TPM_AUTOSTART runs the same startup and self-test sequence as the
-> +'tpm autostart' command from an EVT_LAST_STAGE_INIT handler, independently of
-> +the boot path, the environment and any boot script. When no TPM device is
-> +found the startup is skipped, so a board which shares one binary between
-> +variants with and without a TPM fitted can enable it safely.
-> +
-> +Note that a full self-test can take a noticeable amount of time on a TPMv2,
-> +which is added to every boot even when the TPM is not used afterwards.
-> diff --git a/include/tpm_api.h b/include/tpm_api.h
-> index 022a8bbaeca..73c0ac6b3e7 100644
-> --- a/include/tpm_api.h
-> +++ b/include/tpm_api.h
-> @@ -339,4 +339,14 @@ static inline bool tpm_is_v2(struct udevice *dev)
->   */
->  u32 tpm_auto_start(struct udevice *dev);
->
-> +/**
-> + * tpm_autostart_init() - start up the first TPM, if there is one
-> + *
-> + * This is run from EVT_LAST_STAGE_INIT when CONFIG_TPM_AUTOSTART is enabled.
-> + * Errors are reported as warnings.
-> + *
-> + * Return: 0 if OK or if there is no TPM, -ve on error
-> + */
-> +int tpm_autostart_init(void);
-> +
->  #endif /* __TPM_API_H */
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index ff7655e1496..33ae8037479 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -565,6 +565,25 @@ config TPM
->           If you want a fully functional TPM enable all hashing algorithms.
->           If you enabled measured boot all hashing algorithms are selected.
->
-> +config TPM_AUTOSTART
-> +       bool "Start the TPM during board initialisation"
-> +       depends on TPM
-> +       select EVENT
-> +       help
-> +         Run the TPM startup and self-test sequence from an EVT_LAST_STAGE_INIT
-> +         handler, which is the same thing the 'tpm autostart' command does.
-> +         Without this the chip is still uninitialised when the OS takes over
-> +         and the OS has to start it itself, which some kernels report as an
-> +         error.
-> +
-> +         Boards that share one binary between variants with and without a TPM
-> +         fitted can enable this safely: when no TPM device is found the
-> +         startup is skipped silently.
-> +
-> +         Note that a full self-test can take a noticeable amount of time on
-> +         a TPMv2, so this adds to the boot time of every boot, even when the
-> +         TPM is not used afterwards.
-> +
->  config SPL_TPM
->         bool "Trusted Platform Module (TPM) Support in SPL"
->         depends on SPL_DM
-> diff --git a/lib/Makefile b/lib/Makefile
-> index 93a389b10e4..b31861fe4b5 100644
-> --- a/lib/Makefile
-> +++ b/lib/Makefile
-> @@ -59,6 +59,7 @@ obj-$(CONFIG_$(PHASE_)OF_LIVE) += of_live.o
->  obj-$(CONFIG_$(PHASE_)TPM) += tpm-common.o
->  ifeq ($(CONFIG_$(PHASE_)TPM),y)
->  obj-$(CONFIG_TPM) += tpm_api.o
-> +obj-$(CONFIG_TPM_AUTOSTART) += tpm_autostart.o
->  obj-$(CONFIG_TPM_V1) += tpm-v1.o
->  obj-$(CONFIG_TPM_V2) += tpm-v2.o
->  obj-$(CONFIG_EFI_TCG2_PROTOCOL) += tpm_tcg2.o
-> diff --git a/lib/tpm_autostart.c b/lib/tpm_autostart.c
-> new file mode 100644
-> index 00000000000..ae69f797652
-> --- /dev/null
-> +++ b/lib/tpm_autostart.c
-> @@ -0,0 +1,48 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Start the TPM during init, so that the OS does not have to do it.
-> + *
-> + * Copyright (c) 2026 Siemens AG
-> + */
-> +
-> +#define LOG_CATEGORY UCLASS_TPM
-> +
-> +#include <dm.h>
-> +#include <errno.h>
-> +#include <event.h>
-> +#include <log.h>
-> +#include <tpm_api.h>
-> +
-> +int tpm_autostart_init(void)
-> +{
-> +       struct udevice *dev;
-> +       int ret;
-> +       u32 rc;
-> +
-> +       ret = uclass_first_device_err(UCLASS_TPM, &dev);
-> +       if (ret) {
-> +               /* a board may share one binary between variants without a TPM */
-> +               if (ret == -ENODEV)
-> +                       return 0;
-> +
-> +               log_warning("Cannot init TPM (err=%dE)\n", ret);
-> +               return ret;
-> +       }
-> +
-> +       rc = tpm_auto_start(dev);
-> +       if (rc) {
-> +               log_warning("TPM startup failed (rc=%#x)\n", rc);
-> +               return -EIO;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int tpm_evt_autostart(void)
-> +{
-> +       /* errors are reported above and must not stop the boot */
-> +       tpm_autostart_init();
-> +
-> +       return 0;
-> +}
-> +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, tpm_evt_autostart);
-> --
-> 2.55.0
->
+> On 10/6/26 22:11, Yixun Lan wrote:
+> > Add initial support for K3 Pico-ITX board, in this version, the DRAM
+> > information is parsed from DTS "/memory" node. And with UART enabled,
+> > the U-Boot serial console works fine now.
+> > 
+> > Reviewed-by: E Shattow <e@freeshell.de>
+> > Signed-off-by: Yixun Lan <dlan@kernel.org>
+> > ---
+> >  arch/riscv/Kconfig            |  5 +++++
+> >  arch/riscv/cpu/k3/Kconfig     | 18 ++++++++++++++++++
+> >  arch/riscv/cpu/k3/Makefile    |  5 +++++
+> >  arch/riscv/cpu/k3/dram.c      | 21 +++++++++++++++++++++
+> >  board/spacemit/k3/Kconfig     | 30 ++++++++++++++++++++++++++++++
+> >  board/spacemit/k3/MAINTAINERS |  8 ++++++++
+> >  include/configs/spacemit-k3.h | 13 +++++++++++++
+> >  7 files changed, 100 insertions(+)
+> > 
+> > diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+> > index c1b2890f1f3..386241efd4a 100644
+> > --- a/arch/riscv/Kconfig
+> > +++ b/arch/riscv/Kconfig
+> > @@ -53,6 +53,9 @@ config TARGET_SIPEED_MAIX
+> >  config TARGET_SPACEMIT_K1
+> >  	bool "Support Spacemit K1 SoC"
+> >  
+> > +config TARGET_SPACEMIT_K3
+> > +	bool "Support SpacemiT K3 SoC"
+> > +
+> >  config TARGET_STARFIVE_VISIONFIVE2
+> >  	bool "Support StarFive VisionFive2 Board"
+> >  	select BOARD_LATE_INIT
+> > @@ -124,6 +127,7 @@ source "board/sophgo/milkv_duo/Kconfig"
+> >  source "board/sophgo/milkv_duo_256m/Kconfig"
+> >  source "board/sophgo/licheerv_nano/Kconfig"
+> >  source "board/spacemit/k1/Kconfig"
+> > +source "board/spacemit/k3/Kconfig"
+> >  source "board/starfive/visionfive2/Kconfig"
+> >  source "board/thead/th1520_lpi4a/Kconfig"
+> >  source "board/xilinx/mbv/Kconfig"
+> > @@ -138,6 +142,7 @@ source "arch/riscv/cpu/mpfs/Kconfig"
+> >  source "arch/riscv/cpu/generic/Kconfig"
+> >  source "arch/riscv/cpu/jh7110/Kconfig"
+> >  source "arch/riscv/cpu/k1/Kconfig"
+> > +source "arch/riscv/cpu/k3/Kconfig"
+> >  source "arch/riscv/cpu/k230/Kconfig"
+> >  source "arch/riscv/cpu/th1520/Kconfig"
+> >  
+> > diff --git a/arch/riscv/cpu/k3/Kconfig b/arch/riscv/cpu/k3/Kconfig
+> > new file mode 100644
+> > index 00000000000..5474ac11243
+> > --- /dev/null
+> > +++ b/arch/riscv/cpu/k3/Kconfig
+> > @@ -0,0 +1,18 @@
+> > +# SPDX-License-Identifier: GPL-2.0-or-later
+> > +#
+> > +# Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
+> > +
+> > +if TARGET_SPACEMIT_K3
+> > +
+> > +config SPACEMIT_K3
+> > +	bool
+> > +	select BINMAN
+> > +	select ARCH_EARLY_INIT_R
+> > +	select SYS_CACHE_SHIFT_6
+> > +	imply CPU
+> > +	imply CPU_RISCV
+> > +	imply RISCV_TIMER if RISCV_SMODE
+> > +	imply CMD_CPU
+> > +	imply OF_UPSTREAM
+> > +
+> > +endif
+> > diff --git a/arch/riscv/cpu/k3/Makefile b/arch/riscv/cpu/k3/Makefile
+> > new file mode 100644
+> > index 00000000000..fba4e4b0a3f
+> > --- /dev/null
+> > +++ b/arch/riscv/cpu/k3/Makefile
+> > @@ -0,0 +1,5 @@
+> > +# SPDX-License-Identifier: GPL-2.0-or-later
+> > +#
+> > +# Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
+> > +
+> > +obj-y += dram.o
+> > diff --git a/arch/riscv/cpu/k3/dram.c b/arch/riscv/cpu/k3/dram.c
+> > new file mode 100644
+> > index 00000000000..e20d35dc1bf
+> > --- /dev/null
+> > +++ b/arch/riscv/cpu/k3/dram.c
+> > @@ -0,0 +1,21 @@
+> > +// SPDX-License-Identifier: GPL-2.0-or-later
+> > +/*
+> > + * Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
+> > + */
+> > +
+> > +#include <fdtdec.h>
+> > +#include <init.h>
+> > +#include <linux/sizes.h>
+> > +#include <asm/global_data.h>
+> > +
+> > +DECLARE_GLOBAL_DATA_PTR;
+> > +
+> > +int dram_init(void)
+> > +{
+> > +	return fdtdec_setup_mem_size_base();
+> > +}
+> > +
+> > +int dram_init_banksize(void)
+> > +{
+> > +	return fdtdec_setup_memory_banksize();
+> > +}
+> > diff --git a/board/spacemit/k3/Kconfig b/board/spacemit/k3/Kconfig
+> > new file mode 100644
+> > index 00000000000..1a63c73b6bb
+> > --- /dev/null
+> > +++ b/board/spacemit/k3/Kconfig
+> > @@ -0,0 +1,30 @@
+> > +# SPDX-License-Identifier: GPL-2.0-or-later
+> > +#
+> > +# Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
+> > +
+> > +if TARGET_SPACEMIT_K3
+> > +
+> > +config SYS_BOARD
+> > +	default "k3"
+> > +
+> > +config SYS_VENDOR
+> > +	default "spacemit"
+> > +
+> > +config SYS_CPU
+> > +	default "k3"
+> > +
+> > +config SYS_CONFIG_NAME
+> > +	default "spacemit-k3"
+> > +
+> > +config TEXT_BASE
+> > +	default 0x102000000
+> > +
+> > +config SPL_OPENSBI_LOAD_ADDR
+> > +	hex
+> > +	default 0x100000000
+> > +
+> > +config BOARD_SPECIFIC_OPTIONS
+> > +	def_bool y
+> > +	select SPACEMIT_K3
+> > +
+> > +endif
+> > diff --git a/board/spacemit/k3/MAINTAINERS b/board/spacemit/k3/MAINTAINERS
+> > new file mode 100644
+> > index 00000000000..34cf1ed4453
+> > --- /dev/null
+> > +++ b/board/spacemit/k3/MAINTAINERS
+> > @@ -0,0 +1,8 @@
+> > +SPACEMIT K3
+> > +M:	Yixun Lan <dlan@kernel.org>
+> > +S:	Maintained
+> > +F:	arch/riscv/cpu/k3/
+> > +F:	board/spacemit/k3/
+> > +F:	configs/spacemit_k3_defconfig
+> > +F:	include/configs/k3.h
+> 
+> -F:	include/configs/k3.h
+> +F:	include/configs/spacemit-k3.h
+> 
+> > +F:	arch/riscv/dts/k3-u-boot.dtsi
+> 
+> -F:	arch/riscv/dts/k3-u-boot.dtsi
+> +F:	arch/riscv/dts/spacemit-k3-binman.dtsi
+> +F:	arch/riscv/dts/spacemit-k3-u-boot.dtsi
+> 
+> Note aside that K1 dtsi are listed in source tree root MAINTAINERS,
+> which is probably needing to be changed separately and follow the
+> example of per-board like you are doing here for K3. We are missing
+> something in per-board MAINTAINERS here for
+> doc/board/spacemit/spacemit-pico-itx.rst and it could be added here or
+> not, it is matching anyways by the source tree root MAINTAINERS on
+> 'spacemit' search.
+> 
+> Other modified files (with required dependency patches applied) for our
+> reference:
+> 
+> not applicable arch/riscv/Kconfig
+> drivers/clk/spacemit/Kconfig
+> drivers/clk/spacemit/Makefile
+> drivers/clk/spacemit/clk-k3.c
+> drivers/clk/spacemit/clk_common.h
+> drivers/clk/spacemit/clk_mix.c
+> drivers/clk/spacemit/clk_mix.h
+> drivers/clk/spacemit/clk_pll.c
+> drivers/clk/spacemit/clk_pll.h
+> drivers/gpio/Kconfig
+> drivers/gpio/spacemit_gpio.c
+> not applicable drivers/reset/Kconfig
+> not applicable drivers/reset/Makefile
+> drivers/reset/spacemit/Kconfig
+> drivers/reset/spacemit/Makefile
+> drivers/reset/spacemit/reset-spacemit-common.c
+> drivers/reset/spacemit/reset-spacemit-common.h
+> drivers/reset/spacemit/reset-spacemit-k1.c
+> drivers/reset/spacemit/reset-spacemit-k3.c
+> include/soc/spacemit/k3-reset.h
+> include/soc/spacemit/k3-syscon.h
+> 
+> With the expectation that those drivers' patches are to be merged
+> in-order before this K3 Pico-ITX series, I think this all makes good
+> sense, and all dependency series will be covered by source tree root
+> MAINTAINERS on 'spacemit' search.
+> 
+Ok, I will do some adjustment for the file name, maybe only keep
+the K3 specific files..
+
+But, I'd rather not bother to add all the files which already covered by
+'spacemit' keyword imply with the top MAINTAINERS file, it would simplify
+the file list a bit..
+
+> > diff --git a/include/configs/spacemit-k3.h b/include/configs/spacemit-k3.h
+> > new file mode 100644
+> > index 00000000000..9dd545e2a3b
+> > --- /dev/null
+> > +++ b/include/configs/spacemit-k3.h
+> > @@ -0,0 +1,13 @@
+> > +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> > +/*
+> > + * Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
+> > + */
+> > +
+> > +#ifndef __SPACEMIT_K3_H
+> > +#define __SPACEMIT_K3_H
+> > +
+> > +#define CFG_SYS_NS16550_IER	0x40
+> > +
+> > +#define RISCV_SMODE_TIMER_FREQ	24000000
+> > +
+> > +#endif /* __SPACEMIT_K3_H */
+> > 
+> 
+> Reviewed-by: E Shattow <e@freeshell.de>
+Thanks for the review
+
+-- 
+Yixun Lan (dlan)
