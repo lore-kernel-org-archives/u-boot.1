@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5439CA601F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 18:14:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 918A8CA601F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 18:14:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9E8F6810E2;
-	Fri,  9 Oct 2026 18:14:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 417DC40952;
+	Fri,  9 Oct 2026 18:14:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id W9scw2F_TjLJ; Fri,  9 Oct 2026 18:14:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 99736813C9
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791569655;
-	b=j8MqyIvueDQV1AI/CxdKBBvkWJUBBYtNCWLN35JAAMFkgTf9WQgbAbo9ZPyH2BWPOBRn
-	 HSZOfJnB2zD4qn7ZxSEEtL4INvxSOmuPF83r6zbBG9WAmb0C+gP9lug1HRWiLTnXYhBPr
-	 9EslYEnJZAMvgJ2MhwHGBAftj24Ao/kaov58j0LrqQhutEAHdm+uUqlfhKdpmFxcFnMbR
-	 6Oz5Nh5h7u7WaPlLnbHcmukHBK/BdxXruxekJWN5NDS0MJjHrhG1GPK9BN0dDicI6JL3L
-	 WOZkzMBIghNa6pFMPd/aqWOFO6T+zDUe5VvDPUoofDD+gUHfU3g1D/tkzCZ9tQDphXw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id T9UTWIJGGpRo; Fri,  9 Oct 2026 18:14:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 747FD40945
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791569661;
+	b=lXo0URibqjbHlvK3UoUQCkrmXyrxxTgyXlSIjhCwoKLeKMFpofQu3J/m/E94oGK03Mhr
+	 zpID9q4ByJ90HyXzWkz1186aWLheAGVdbtFZ5wJhsBoByfoAsE4+dSMhfTL1zzYDXhDCu
+	 XPFncqXDc8iP7LvNseWq9TLWjWT2SAPqUGgzhZoNnsIQ5HlEK70vbPhD9ZcRZTYfjckrU
+	 WAhbySrzTG8Dd4qn9Qjya2vd9Aom628CDTh+hGTS0Lj+PJ7SG05WbCPoHJ5sX2UlNc4p6
+	 wRk94pA/+80/qh6DWTIMt2c921cCekFpk1Ez5GnsJuHYWSeeobkIeYX7TarhNb1XCvA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791569655;
+	c=relaxed/relaxed; t=1791569661;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -30,163 +30,163 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
 	 Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
 	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=wKr+CVbzz7zZjfQFtIUuU4FfIqiGnMOs8PA2HAUWWok=;
-	b=Cc5KEXX1fLYQzihMcelcezRT3aVb9LRRr0RdNmvE5lYxCPx9G1DPjF3RYKK+C8cvfkkX
-	 sFhTwb7qxgoBzXQo0j5TprRjdHjEUBeO87O5epw8B9c/4TjVtDEse170T9uVOZayeM0N7
-	 EokE63f+tNmR+hsjq0x4syaUo54uxfPsN0rLty+xS2DVmYQ+fEsxaqP1Qv/eAF2lwSt2O
-	 kaFjxWYEUJIx4TJqnsnHPRDvkA1gONSSqKOjHFa8edgErqeQ+WYaKLpxR9EeKw2mRFtD0
-	 zDEqA21f1io9EVTyv8pXrzrI1TAZQy0CNRLG8Cspd2tfGuvfnMgdz542kYAQ93xT9CQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=zE9nNPxG54ucsB9MVte1xZaX8A3IfC5FAVRy4RARHM4=;
+	b=AW6a7kNl5tZPPH7ol/CTw9KpQ8FORVVpuRPJblia7pii7DPCDGaG+SHMEbPwp4tb/Aqq
+	 pklDMoCCe46qF1JFLFvJtjYn02T0Z2aVjFeljM7Y8g08GCQB6MBJ7NqIU1gaaJsqND9+0
+	 maKnbfArj3HUbRI6VhIGkwAeSFYQEYevE9TBje00xWzBU7tJufLPjMa2VgVDXUG6z5UsH
+	 aPe5hk8JoEtyj9hj8ZrraQSvSwmNQ/BKoj6tWhu21uj6vMbrJZvsLFyDlyiG5AkjWMDDE
+	 DHGAb74W9AACcrmedStADHpo/V2QKPMBGZhEO1wq4GSSvzrWlAhCQZiCEEa5QW/QldQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791569655;
-	bh=wKr+CVbzz7zZjfQFtIUuU4FfIqiGnMOs8PA2HAUWWok=;
+	d=lists.u-boot-project.org; s=default; t=1791569661;
+	bh=zE9nNPxG54ucsB9MVte1xZaX8A3IfC5FAVRy4RARHM4=;
 	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=EFVBvwwxQvFG5z5w7eERzYjqCQfC+kY1ncayHGCNb2V5zin0vkZUwGpIQNnQ8pBPD
-	 GAbWnC11/vK1f7GlU56OvMeozF5u5cojfbp9HK3/qs6bL6fB8hqYPb44zkqKh1jfYG
-	 +OcnNFCRh142oenvUYVVo9znlCyGyVsTzd1r3GKZFFt4GH/ntEU8EFIjkihpdfyc7P
-	 wBMvKndlLgNJ/a8mwz2gBExMZvOvYyco64MGVDcddCGsluyx6T4iW6z5+sQvFAAsmN
-	 JLbaAJvxNFTFyu6Q4WZ1ou3HriPvlfAn7QyJ4IRfF1dOVonX1CnLUoOd4yKldCdiGo
-	 taA/xb19/YdMQ==
+	b=cYKUurgc65kKW0r0nIu66A/ZysFa6nmUQOEOQ+HsMuljSl9lEBaOHQTPD40Pm2rXu
+	 mTVflgyAaJyEZbAKHP9O60+F+nIdKM4S+PD4jLRnzmpPLxU7TqQN6bFWzSrm573wpi
+	 FI1GIUeYMnoSGhrf/XyiumCai5lroOqAfMw04GS0gFAvu/n1jpCnUZU3tFNZRDaDDg
+	 FUHLrP1b1OrRRd0jf8xU8xWkaPqVAIY/mL71HL3Eh9PpoRy7Tcx9nrMCpUiA9ZvECr
+	 5C3vqOMx7M9C7R4MOpMh25SLA/4n9vm2Pi2gTwbxPL/VEuUFHBg31s4HrI06E4I7Hk
+	 g8ZEPOF2Nqgqg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 99736813C9;
-	Fri,  9 Oct 2026 18:14:15 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id B5B491DE
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 18:14:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 747FD40945;
+	Fri,  9 Oct 2026 18:14:21 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 415D41DE
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 18:14:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A72C14016B
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 18:14:13 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 269308149A
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 18:14:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XHsYJ64HJRUA for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 18:14:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org D036E40053
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ytEcWi02Nzsn for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 18:14:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 659CF814BE
+Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791569653;
- b=bnbZG6EmXrsLaGNngfgiPJhB48Hg9gyGLR9utoHapL2sw/sHa9jn4O621kQwNGp2s8R3
- pLUu8/R+JTphQnk4rvMke1/+52K2hH5aRkrXkwvPhYGTJipK0d6he6khx0fRzDkAkm5Fu
- InCEW1862zWSVR6z+YxC9ukaVjmIC4a0XPwlJ+cONpkq5dw/KOr9f/N/zNgt3kph+wf/z
- aJ+dHwzLh8CT1Jte+vqypT0nB/bZv2nJ8elaIxth+M1/u9IsesuAjRp5iskLpJgq0dgWu
- tq0ZR9VCpTGIjgHJhSETv/8zkMYYKRDLjQndAN3im4XM8NlypsVXUhilS7ni7y496Ew==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791569659;
+ b=FeSuz/C/x2ikhdOJ+QV1ZHQDOi7rShIhiRnrZs1UXCoNIJlJs0yvT1LW9LfWCWnpIf6u
+ N3NksjSWjTDSkDKfEg7LAupFdXvVa4udvoMHaGz4YGFeyRqTNk0LGGQvGPOvth19NfUwT
+ 5RruCLwOFqtKr/dv1oWfyWQMpvh4BeEWVKBKzHDsqCaVq6Kuih6GOW7HzOrnkRQHBZhj1
+ nmrZgFYxL9quq13xeiwGFFE4CRlLvRtpCbdcI9JZG6HjM0EsAZvKQ5ikvNn+CXXRlXYiJ
+ 0QOBT7zvfHdDUw9DZvdGbIUEd2m9wu5nRt8+jEhhLElNYLCZgm/OO3/HF4rT3W1NhXA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791569653;
+ c=relaxed/relaxed; t=1791569659;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
  X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:
  Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
- X-Authority-Analysis:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+ Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+ X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
  X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
  X-Proofpoint-Spam-Details;
- bh=wKr+CVbzz7zZjfQFtIUuU4FfIqiGnMOs8PA2HAUWWok=;
- b=naVooIbWFHLM6QvPT1c+yIXVYgty0/Aur6VY+7y5joHYQkohjBCKjye49UpkX48IShgz
- 1wTYAIpYe4xecI0L1Tr4ZiJoZLtelc9TkgDmNJu4v7hKRzKC3MglB48TFpKXib8ZtRx1X
- 43obUs1xEhPkkzc0+40VcaduadyzhcCA1uSZTdVDK2fZ1t3rLiEw4h+7GY/dHf6gGg4sD
- dZWcW+PfGtJhhl5MXV1kU1ev3VVMJ6j9iSWhPnhXmuBxurDNQBlMEVUcH8lKmSe8HHFBD
- 9IEovIcm0MY0vqN5mSSZktR1+hbHAyR8F715enyWaHugUr8KoWgxsgopykRGu1hCvVQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=zE9nNPxG54ucsB9MVte1xZaX8A3IfC5FAVRy4RARHM4=;
+ b=pnmOZce8tqc9g3lkEsM2oefTGATruJaQgIXj5IeP6rXBkNrmIhJQ7gCu9UzPLzvUSIwi
+ irjkH42BrUJpVJYO+gs66H2wvIz9FVJZYBR/8SatPSq/HNs+PIiqC5XmL/f6X4aczjLKl
+ xpcX7XYhz4morSvgkdiwRagyhuz/eOa+FQPsxE5f3xJ2qelr05bRiZyJeTq77rMBLVs/t
+ TwxicK2Kj8Sk3hg6ISjql+hO5Cdbuz6SqABWnT6drvwrPiN7AhniqbROmKJXNgZDpkQkG
+ jwZ678uCbbNKdNJbVhU3/n6eKGkMisTMGKpAMADLUYz7OgDMUnIUPoeEgLzlTZLkI3g==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b="W56aaOH/"; 
+ header.s=qcppdkim1 header.b=d5mQcs7M; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=Hi2zOTyZ; 
+ header.a=rsa-sha256 header.s=google header.b=Ht56y5ga; 
  arc=none smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
  helo=mx0a-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=W56aaOH/; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=d5mQcs7M; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=Hi2zOTyZ
+ header.a=rsa-sha256 header.s=google header.b=Ht56y5ga
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D036E40053
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 18:14:12 +0000 (UTC)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 659CF814BE
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 18:14:19 +0000 (UTC)
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 699HZQEV1620112
- for <u-boot@lists.u-boot-project.org>; Fri, 9 Oct 2026 18:14:12 GMT
+ 699HZVr43477983
+ for <u-boot@lists.u-boot-project.org>; Fri, 9 Oct 2026 18:14:18 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=wKr+CVbzz7z
- ZjfQFtIUuU4FfIqiGnMOs8PA2HAUWWok=; b=W56aaOH/fc7Clr7hatpn7qQaszg
- pEpi08/WvirijJ+GkFV7eowRulLK4V2fVYH7t7d8RZirnLIIoCBTjChzfht7qghj
- meEp48DGnKHDreDFK9LkaqIZwVcOgf75Btpf4yKeQEDI0t89mZbAU/vUeDbwarqF
- Eb/smtJlltBk/LMGrKFoMkDcjp9C/vtj0rqaSHBLRqGz9uxrv4YhTXjRlCw6R1rz
- f+u4VXfZpcw6AJVphs7rm+LRXx7r8ln3+j2Z7i3zu8he0u6CN6QuTaVDtmaai6u/
- 3aiYe5qolXOudjXBZNZcQkFtGAWA0MXz6Uk4gU6fdSKtXFjlSU3qsLD+GWw==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h74t70505-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=zE9nNPxG54u
+ csB9MVte1xZaX8A3IfC5FAVRy4RARHM4=; b=d5mQcs7MESfL7izbUIPAaZrMpYb
+ BqJvCD5BOE4xgsheYkVIpalwkKw8QObO91C/rp0qdgn91bscqVl392ecLVNT70jw
+ JmzEG3Y5RPSkHbuEiICwxbbM/003bA7a7Ocx9yiljX/eBzg1E8PrxqNaPUTDMPVm
+ tu+joyusjPsdCl4XDsDTQXTNNnLQXFTlYv137gjn+Hb0KQESZn6FEk7ji//CIoDi
+ FelS1X2qroyI5ou61iwwMTf/M/bl3KSxGsvdExxy7bg8zHq2JtYpuzdo0kdYaJT/
+ 5qPiD6+w1EQVYOtMTdiHhWgH7cY/WqUlcDnAHX59JuXs60NYKe71ROJ2crQ==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h74t8051t-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 18:14:11 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2d02df2bf09so117015ad.0
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 11:14:11 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 18:14:18 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2d55d8cd938so80115ad.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 11:14:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791569651; x=1792174451;
+ d=oss.qualcomm.com; s=google; t=1791569658; x=1792174458;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=wKr+CVbzz7zZjfQFtIUuU4FfIqiGnMOs8PA2HAUWWok=;
- b=Hi2zOTyZcJBpWzBV8nTEtEkGN8nLfXGX00GaJJh6ygxHyNxgf69nvXtNmtSnPAmnXx
- arW7OpKTK7dQMQty/Y4QhLU/8GYKRMOe5vMBQKxpHRqewHUiEiNX+Bhk39uz2RodMvpt
- vKSTFbrC2E+Xd0NR1J/eF0IR7s1NEZPdtS9A7kZGWel12pHsPRy6wNuXorYCg8SsuU6v
- 34RqYolNzJcc2psZRLY0JT5b543lOuNooJ/khcqizy4xlvZvdOClo+4RbGpXrHqS1/KN
- q2PGTX9bcMRtN6oW3CSnzZe3cNqOY0Kk+6wpXkRszkMMLCQIxztKBv0XN9AuawQWbzfe
- Oo5A==
+ bh=zE9nNPxG54ucsB9MVte1xZaX8A3IfC5FAVRy4RARHM4=;
+ b=Ht56y5gaWGQEm+527A8ls4R5JOILox3sNAdgw0mHHs+e+gFXWxgdqdevaXFOpc171I
+ y5mVkre1cEohfnjzqf3cH22YMg4KnOX3ldK+Wv0008W6eFYhngWB8hWHE3ViBCJ9QOsP
+ VHLa3I5zECzZC4HXLFsARJV1YnndKF/btxq5fUC0/grVaaWi4o1VyzJ9KwoAkkA9rK3N
+ bC/sXdOQ+BeEbjqRKZ0+JF5TKu3F1OexwjKpzeUx37slvPSQrcEiahVRbehXsR7VTqKY
+ GwAlvQDLNJNxerx9kuY+EhafbHcKg/NoPR+6AdyhY8FZ9Rgbyo2G0g+SHubPPVpX3Wyy
+ IDZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791569651; x=1792174451;
+ d=1e100.net; s=20260707; t=1791569658; x=1792174458;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=wKr+CVbzz7zZjfQFtIUuU4FfIqiGnMOs8PA2HAUWWok=;
- b=bLaH5r0DQOaWdEE0x0eScypl/Ggeew50R6F2S15DDUU7oTVeu1qgdccU2JqJGxb9yd
- 9K/xxVEV9pfZYmPs+k5tB/qlBhaXJNjYww32OY9LIBCvLgDbnHBS0DrZJbqjBPeYsRYZ
- qTzLd1SLqEVsc7zAWlwCqUlQ9bP5pCuuyXUTG8EW4CVUeqqGWMdDIixO9WClAUzJQ8RW
- U+n8Fcxf/oKcjveNq9Sw1BCDJH+YVFVKZZkx/rBEStMQ0aOUpmiDL3BXhuKFSPc6KIke
- 8rHdp6a4FKXsI9Ibuw6mo0S393xbiDHPQe+x7QMkUxuBEkIgSGpOmm2yKtG1+E4OHfOZ
- lbSw==
+ bh=zE9nNPxG54ucsB9MVte1xZaX8A3IfC5FAVRy4RARHM4=;
+ b=2AnWp84+bEIi2zELXx8rA6NPfsAF3xC/q3bJpKyDZeBuKroPQvCe2CqenhEwz1lEAA
+ y8hBg4NjpeEkk5TKheqXiKJO+8+PN8DjEOX287lOn3NWB7wPp2Y1lbX4nOGGC8qCLpvv
+ u8VOMqyn/1bqzkbymGneky3hAqYi/mOmwxm0XpaH7wdDfuPyYdpUygrCuWqTmB5ThxAy
+ 6vVJYo83dQlPcLYKM3m26DRpsmxKssf9HWorfVGs42CbR76KgiOjrOTtJaoSDkT5NNO3
+ bMo7Z3sN2v4y/myWPh8/Ozi9PWZfsAxmlca+t2bXrP3p1iZAj1J23+Ij8YdmhmDtWV5z
+ bxXQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy6WnOufbacZxAmZtCheK5NVa0MayfuwZIdCMdLlKS4fn15ICrAEmVhqr+NmmMeZoRVRrcRy+c=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJJ6MaN/AS9zJp5qYrSPfpjim0BUf9wXvq8XNRS6N0fkDrvEB6X
- sI71D8qi+gELinav4tvX8WqkVdupBd4YTOHDFJa0nzZZIU8TtjOKkEoTEIATBK8jN8aQgpaqABX
- cxi0JO7bJzoMPXe0K6AREY4v7HNCkSVSWzghA7jm3ySWDiSIt0NOD2d3V4DggEBKV2hSElhA=
-X-Gm-Gg: AYBFou3sl6bBEFozsb6/mGyOFScIKiUKXKAmDoj8htrrR5gZJiZ52hDwcw5tPydOzwX
- 7xdWe7gWJ+LQuoI+PRsa+DqeQZgoO4+WDl3qQOhdJf1lTs5od/AFFNzWQZQWMP1g7HyhmKOP2Kh
- mXri4PHLMebLIhDkocDZxiZR7kCKYJsyrewGgtFnGewG3399uQb5K2E634Y3LnJGCNKS7EJJfMp
- 5S/hVoOtWuyge0KCJjElOZ/omvL8XfM+yc4q4eDQUVmxt3oNsKvXz7J6Y9DN2BxErfySL4jgWx0
- c/iEzSpWqHobTA0y8h+jV9WueJIxlf/9obfwEsXJS78D4QsUJORdcGKlX4vh0eOTBlr6pp6ePuH
- XtNpFP2ukoleu+wQo+asMwBU4jcorNcCn0YTeAilJmkOWR4LUhK6I9iQfPQWwlkucgnhCsp9eh9
- MI/rkp9kw4aLtqqUe04A==
-X-Received: by 2002:a17:902:f790:b0:2df:a4d8:57ad with SMTP id
- d9443c01a7336-2e842f20c98mr22600635ad.72.1791569651175; 
- Fri, 09 Oct 2026 11:14:11 -0700 (PDT)
-X-Received: by 2002:a17:902:f790:b0:2df:a4d8:57ad with SMTP id
- d9443c01a7336-2e842f20c98mr22600185ad.72.1791569650631; 
- Fri, 09 Oct 2026 11:14:10 -0700 (PDT)
+ AKwUvBzAYc8Y5OAWxhV091q6Gcce4bd4QXFoDRPRP7TQ+QkBW1MF2d2Ub5NDzJZ/+jPtCcikSnUlVW0=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJEpcAAD6W47IdHbVN5jcspoKoA80Z6nHNsp4mIBQaOedn+6D4L
+ 6uWb1dpL74/fx7/VOH+tmICvvkefl96mjNFojJNMCFO96MUqk18u/SiSXoLyvPphMLmPtK6gpDp
+ LlmP5NeBDFANwpfIAtWfy6xF7Z73+gMrTec4hM8YUWvx9e9QWhaMbkFvtHim0R/NlY3W0HUY=
+X-Gm-Gg: AYBFou2bX8u8EgnY4st5Url/qFzsZwS5hmqJCyyZdOlAbx8kkPyIxEfAQhxt3pA0aty
+ D6l50fR9XL1HCk6VxRdoOpUYS2PY2LHrt5lQkMqH9EnMwjl49C8gPuo3/HDsxhvp26w5fhfl0It
+ GKudNcdrgRQCuF7PkOK2gtD3JUcC7W1QLnd0chkDBr8eoremm85fy1+D5rIn7sovN52XR145acv
+ xk/wC5d1AsNWdEwp/wp3YYHYl93a2ZUbQC98BEleNVmNzzqzNFIyxbYS5UI2npQla3E20WxdDNn
+ 4aphFTTxlipBjIeH36mZz9GwT/xjeJ8OgGdNZI0P6uWgGrPsG+wTofbS/cQhZr+7WZ+gkSjUMaq
+ h1BSmLd91cFjtthmAP5KpOvI6QmOTkIYo6jSgwtN4yG4I3UwCbZtOKvMjLxR0sb9h2+o+yhPHxb
+ zN9/lri7GInpoTbQBz7g==
+X-Received: by 2002:a17:902:ef45:b0:2e8:2f7:4a60 with SMTP id
+ d9443c01a7336-2e842cd211emr21717665ad.51.1791569657564; 
+ Fri, 09 Oct 2026 11:14:17 -0700 (PDT)
+X-Received: by 2002:a17:902:ef45:b0:2e8:2f7:4a60 with SMTP id
+ d9443c01a7336-2e842cd211emr21717505ad.51.1791569657091; 
+ Fri, 09 Oct 2026 11:14:17 -0700 (PDT)
 Received: from hu-aswinm-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2e8422e2aa4sm14599845ad.71.2026.10.09.11.14.04
+ d9443c01a7336-2e8422e2aa4sm14599845ad.71.2026.10.09.11.14.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Oct 2026 11:14:10 -0700 (PDT)
+ Fri, 09 Oct 2026 11:14:16 -0700 (PDT)
 From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 To: sjg@chromium.org, trini@konsulko.com, casey.connolly@linaro.org,
  neil.armstrong@linaro.org, sumit.garg@kernel.org, seanga2@gmail.com,
@@ -196,39 +196,39 @@ To: sjg@chromium.org, trini@konsulko.com, casey.connolly@linaro.org,
  marcello.bauer@9elements.com, anshuld@ti.com,
  tan.siewert@9elements.com, james.hilliard1@gmail.com,
  u-boot@lists.u-boot-project.org, u-boot-qcom@groups.io
-Subject: [PATCH RESEND v5 6/7] test: dm: add comprehensive tests for NVMEM bit
- field operations
-Date: Fri,  9 Oct 2026 23:42:51 +0530
-Message-Id: <20261009181252.2334254-7-aswin.murugan@oss.qualcomm.com>
+Subject: [PATCH RESEND v5 7/7] misc: update API documentation for bit field
+ support in NVMEM
+Date: Fri,  9 Oct 2026 23:42:52 +0530
+Message-Id: <20261009181252.2334254-8-aswin.murugan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261009181252.2334254-1-aswin.murugan@oss.qualcomm.com>
 References: <20261009181252.2334254-1-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA5MDA3MiBTYWx0ZWRfXxDl2lXUjd+Bn
- 3xyUxED6u4Cixc95qT7ntzSBt/s66rUeTg19Ae1lZZe0xJb36nrt0GCtkXxCo5MZJQhkiXAExZj
- FNqo+vYQWPAaUahvCDDjS5T/noYAG+8c0WXKB0hjOBTVmPmh7lpOZLIvtsZ9YBuZwUlvuk4CKa8
- orKFSkBoftO+bb+JokW4Tw5m/Ne7Xi4nETBR49LK47CBlG6M610HnRnxC/I++OMjz4QxuycdsM7
- tw0bnFFxGLbGp1Jk7DEZk77uUNtQCEEOU62edBeGgXDe1l9JfqDeG7v9Rpy8Pd8woWQDgEjy2sX
- G0KM6k6IgG1nBwb4GEefoIMoL5bNAd2wiWldA1TQpZKUmgYgcsfHSiLcLeGfI/C7NZU0AfvUX/W
- 70LDRsxIBbDKcuvmqewKH39CthuYtIRrce8GjZ0d3jHuOxGgKVuha4CTyI6iwSOzW8hKYl7sQ2h
- UTqsrkAWcS2RxlR3EXA==
-X-Authority-Analysis: v=2.4 cv=Zt94uN7G c=1 sm=1 tr=0 ts=6ac92ef3 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA5MDA3MiBTYWx0ZWRfX4Xe+FdDA7PWh
+ hmLp5MC+74+sSzd14w39TM+isdyKczQXBghEwq0xJwBKCR6C216nIX9iviEghlfBSMs5Ktpt3XO
+ kx5vmZnYRnAR4MmeQowDQfpF8OZ943U=
+X-Authority-Analysis: v=2.4 cv=NPtAaE6g c=1 sm=1 tr=0 ts=6ac92efa cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=W1BiHNyAc7_2oUjjS0wA:9 a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA5MDA3MiBTYWx0ZWRfXyps/vU/nQ42q
- pDP7RkFiFg4NyRzY2ArE0WYYOBpnnK0alSh2aA1Bb9XgFIF9y9mWZcL1HXd7IOBVNLquM2hOwW8
- 2/Z4CT9jUNnTe0EnvMQ4isLFvImZYXQ=
-X-Proofpoint-GUID: wPnzUww3YW1FKUplIU0l0kZ39m02Pvt-
-X-Proofpoint-ORIG-GUID: wPnzUww3YW1FKUplIU0l0kZ39m02Pvt-
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=xnw-sE8SsPs_kYMhUbAA:9 a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-GUID: --g_dRw7921Grtr6XD1whNOp8jDH-GRi
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA5MDA3MiBTYWx0ZWRfX2dLID0zUPRTN
+ PUOq/Yd2aUyzSD1FrgxZdPE2DVv7wybmXRW2d6D/u9/EpMxqTffhfWPkCJ6jcm8h8CBt3JBmh9L
+ OFT+0mxFdsU45ztdKprnmd5mVE0NpNoezqVqzIhUbNi+ZVSsF2La/YI8Pf7pLJ1zhPwDgzGFPVz
+ H/YW+rRP6d5Em5pfA+oRO3Lkoeyt2XRZ2yUfVgSnX0GK3S8Obz9pfxyP1VGCxCrEsWSM8YH781T
+ 5fK86yXPmNtqEdOuMYUj8pS4Y1iYge6uRdULwE8tgw+vr7zeHnFkXoUsflvQ2QpHOHOVq53XTZm
+ zFFTmgEmBu3vAfJujXfSRt3e4qfZGpYePw8ahR0+em51+TUN6SdzoHRMNH1px7d4jT0wQGdWrXI
+ K/GLk+/cqqpS9uFhaHN4cAvC926+oRbf6xI0JncIsNK9y1qKoHcVEqhKWhYdDmaUU1enlW3s0vE
+ BOzKnJNKZEb9k2SWoAw==
+X-Proofpoint-ORIG-GUID: --g_dRw7921Grtr6XD1whNOp8jDH-GRi
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-09_05,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 bulkscore=0 priorityscore=1501 impostorscore=0 clxscore=1015
- phishscore=0 adultscore=0 spamscore=0 lowpriorityscore=0 suspectscore=0
+ bulkscore=0 priorityscore=1501 spamscore=0 suspectscore=0 malwarescore=0
+ clxscore=1015 adultscore=0 impostorscore=0 lowpriorityscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610090072
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -244,245 +244,92 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a mock I2C EEPROM device (nvmem-test@50) to the sandbox device tree
-to support NVMEM bit field operation testing.
+Update the nvmem_cell_read() and nvmem_cell_write() documentation to
+describe the new bit field operation mode.
 
-Add test coverage for NVMEM bit field read and write operations to
-validate the new bit field support in the NVMEM subsystem.
+The documentation now clearly explains:
 
-Test cases include:
-- 1-byte cell with 7-bit field (Qualcomm SDAM reboot reason use case)
-- 2-byte cell with 12-bit field spanning a byte boundary
-- 4-byte cell without a bit field (legacy byte-level access)
-- 4-byte cell with a 16-bit field in the upper 2 bytes
+For bit field mode (nbits > 0):
+- Read: extracts the bit field from raw hardware bytes
+- Write: performs read-modify-write to preserve other bits
+- Requirements: buffer size must be sizeof(u32), cell size <= 4 bytes
 
-Error validation tests cover:
-- Bit field exceeding the cell size
-- Bit field exceeding the 32-bit maximum
-- Invalid bit_offset and nbits combinations
-- Buffer size mismatch in non-bit-field mode
+For non-bit-field mode (nbits == 0):
+- Read/Write: direct byte-level access
+- Requirements: buffer size must equal the cell size
 
-The tests verify:
-- Correct bit extraction during read operations
-- Read-modify-write behavior preserving unrelated bits
-- Proper error handling for invalid configurations
+This helps developers understand when to use each mode and the
+associated buffer size requirements.
 
 Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
- arch/sandbox/dts/test.dts |  12 +++
- test/dm/Makefile          |   1 +
- test/dm/nvmem.c           | 160 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 173 insertions(+)
- create mode 100644 test/dm/nvmem.c
+ include/nvmem.h | 36 ++++++++++++++++++++++++++++++++----
+ 1 file changed, 32 insertions(+), 4 deletions(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 25c99ef8147..9d1a450d09c 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -1054,6 +1054,11 @@
- 				sandbox,filename = "i2c.bin";
- 				sandbox,size = <256>;
- 			};
-+			emul_nvmem_test: emul-nvmem-test {
-+				compatible = "sandbox,i2c-eeprom";
-+				sandbox,filename = "nvmem-test.bin";
-+				sandbox,size = <256>;
-+			};
- 			emul0: emul0 {
- 				compatible = "sandbox,i2c-rtc-emul";
- 			};
-@@ -1081,6 +1086,13 @@
- 			regulator-name = "sandbox-pmbus-vout";
- 			sandbox,emul = <&emul_pmbus>;
- 		};
-+
-+		/* Mock NVMEM device for bit field testing */
-+		nvmem-test@50 {
-+			reg = <0x50>;
-+			compatible = "i2c-eeprom";
-+			sandbox,emul = <&emul_nvmem_test>;
-+		};
- 	};
+diff --git a/include/nvmem.h b/include/nvmem.h
+index dd82122f16f..c3d845c3a7e 100644
+--- a/include/nvmem.h
++++ b/include/nvmem.h
+@@ -43,13 +43,27 @@ struct udevice;
  
- 	i3c0 {
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index 5dd6b57bbe8..cfe1d24fcc9 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -82,6 +82,7 @@ obj-$(CONFIG_CMD_MUX) += mux-cmd.o
- obj-$(CONFIG_MULTIPLEXER) += mux-emul.o
- obj-$(CONFIG_MUX_MMIO) += mux-mmio.o
- obj-y += fdtdec.o
-+obj-$(CONFIG_NVMEM) += nvmem.o
- obj-$(CONFIG_MTD_RAW_NAND) += nand.o
- obj-$(CONFIG_IP_DEFRAG) += net_defrag.o
- obj-$(CONFIG_CMD_NFS) += nfs.o
-diff --git a/test/dm/nvmem.c b/test/dm/nvmem.c
-new file mode 100644
-index 00000000000..dd8d0151d2b
---- /dev/null
-+++ b/test/dm/nvmem.c
-@@ -0,0 +1,160 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Test for NVMEM bit field support
-+ */
-+
-+#include <dm.h>
-+#include <i2c_eeprom.h>
-+#include <nvmem.h>
-+#include <dm/test.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+static int nvmem_test_write_raw(struct udevice *dev, uint offset,
-+				const void *buf, uint size)
-+{
-+	return i2c_eeprom_write(dev, offset, buf, size);
-+}
-+
-+static int nvmem_test_read_raw(struct udevice *dev, uint offset,
-+			       void *buf, uint size)
-+{
-+	return i2c_eeprom_read(dev, offset, buf, size);
-+}
-+
-+/* Test NVMEM bit field operations */
-+static int dm_test_nvmem_bitfield(struct unit_test_state *uts)
-+{
-+	struct udevice *nvmem_dev;
-+	struct nvmem_cell cell;
-+	u32 value;
-+	u8 hw_value_u8;
-+	u32 hw_value_u32;
-+
-+	ut_assertok(uclass_get_device_by_name(UCLASS_I2C_EEPROM,
-+					      "nvmem-test@50", &nvmem_dev));
-+
-+	cell.nvmem = nvmem_dev;
-+
-+	/* Test reg = <0x0 0x1>; bits = <1 7>: */
-+	cell.offset = 0x0;
-+	cell.size = 1;
-+	cell.bit_offset = 1;
-+	cell.nbits = 7;
-+	hw_value_u8 = 0x01;
-+	ut_assertok(nvmem_test_write_raw(nvmem_dev, cell.offset, &hw_value_u8, 1));
-+	value = 0x7f;
-+	ut_assertok(nvmem_cell_write(&cell, &value, sizeof(value)));
-+	value = 0;
-+	ut_assertok(nvmem_cell_read(&cell, &value, sizeof(value)));
-+	ut_asserteq(0x7f, value);
-+	ut_assertok(nvmem_test_read_raw(nvmem_dev, cell.offset, &hw_value_u8, 1));
-+	ut_asserteq(0xff, hw_value_u8);
-+
-+	/* Test reg = <0x18 0x4>; bits = <4 12>: Spanning byte boundary */
-+	cell.offset = 0x18;
-+	cell.size = 4;
-+	cell.bit_offset = 4;
-+	cell.nbits = 12;
-+	hw_value_u32 = 0x0000000f;
-+	ut_assertok(nvmem_test_write_raw(nvmem_dev, cell.offset, (u8 *)&hw_value_u32, 4));
-+	value = 0xfff;
-+	ut_assertok(nvmem_cell_write(&cell, &value, sizeof(value)));
-+	value = 0;
-+	ut_assertok(nvmem_cell_read(&cell, &value, sizeof(value)));
-+	ut_asserteq(0xfff, value);
-+	ut_assertok(nvmem_test_read_raw(nvmem_dev, cell.offset, (u8 *)&hw_value_u32, 4));
-+	ut_asserteq(0x0000ffff, hw_value_u32);
-+
-+	/* Test reg = <0x9 0x4>: Full 4-byte access without bit field */
-+	cell.offset = 0x9;
-+	cell.bit_offset = 0;
-+	cell.nbits = 0;
-+	value = 0x12345678;
-+	ut_assertok(nvmem_cell_write(&cell, &value, sizeof(value)));
-+	value = 0;
-+	ut_assertok(nvmem_cell_read(&cell, &value, sizeof(value)));
-+	ut_asserteq(0x12345678, value);
-+
-+	/* Test reg = <0xc 0x4>; bits = <16 16>: Upper 2 bytes */
-+	cell.offset = 0xc;
-+	cell.bit_offset = 16;
-+	cell.nbits = 16;
-+	hw_value_u32 = 0x0000ffff;
-+	ut_assertok(nvmem_test_write_raw(nvmem_dev, cell.offset, (u8 *)&hw_value_u32, 4));
-+	value = 0xffff;
-+	ut_assertok(nvmem_cell_write(&cell, &value, sizeof(value)));
-+	value = 0;
-+	ut_assertok(nvmem_cell_read(&cell, &value, sizeof(value)));
-+	ut_asserteq(0xffff, value);
-+	ut_assertok(nvmem_test_read_raw(nvmem_dev, cell.offset, (u8 *)&hw_value_u32, 4));
-+	ut_asserteq(0xffffffff, hw_value_u32);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_nvmem_bitfield,
-+	UTF_PROBE_TEST | UTF_SCAN_FDT | UTF_FLAT_TREE);
-+
-+/* Test NVMEM error handling for invalid configurations */
-+static int dm_test_nvmem_bitfield_errors(struct unit_test_state *uts)
-+{
-+	struct udevice *nvmem_dev;
-+	struct nvmem_cell cell;
-+	u32 value;
-+	int ret;
-+
-+	ut_assertok(uclass_get_device_by_name(UCLASS_I2C_EEPROM,
-+					      "nvmem-test@50", &nvmem_dev));
-+
-+	/* Test bit field exceeding cell size */
-+	cell.nvmem = nvmem_dev;
-+	cell.offset = 0xd;
-+	cell.size = 1;
-+	cell.bit_offset = 0;
-+	cell.nbits = 9;
-+
-+	value = 0xff;
-+	ret = nvmem_cell_write(&cell, &value, sizeof(value));
-+	ut_asserteq(-EINVAL, ret);
-+
-+	ret = nvmem_cell_read(&cell, &value, sizeof(value));
-+	ut_asserteq(-EINVAL, ret);
-+
-+	/* Test bit field exceeding 32 bits */
-+	cell.size = 4;
-+	cell.bit_offset = 0;
-+	cell.nbits = 33;
-+
-+	ret = nvmem_cell_write(&cell, &value, sizeof(value));
-+	ut_asserteq(-EINVAL, ret);
-+
-+	ret = nvmem_cell_read(&cell, &value, sizeof(value));
-+	ut_asserteq(-EINVAL, ret);
-+
-+	/* Test invalid bit_offset + nbits */
-+	cell.size = 1;
-+	cell.bit_offset = 7;
-+	cell.nbits = 2;
-+
-+	ret = nvmem_cell_write(&cell, &value, sizeof(value));
-+	ut_asserteq(-EINVAL, ret);
-+
-+	ret = nvmem_cell_read(&cell, &value, sizeof(value));
-+	ut_asserteq(-EINVAL, ret);
-+
-+	/* Test nbits=0 requires buffer size == cell size */
-+	cell.size = 1;
-+	cell.bit_offset = 0;
-+	cell.nbits = 0;
-+
-+	value = 0xff;
-+	ret = nvmem_cell_write(&cell, &value, sizeof(value));
-+	ut_asserteq(-EINVAL, ret);
-+
-+	ret = nvmem_cell_read(&cell, &value, sizeof(value));
-+	ut_asserteq(-EINVAL, ret);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_nvmem_bitfield_errors,
-+	UTF_PROBE_TEST | UTF_SCAN_FDT | UTF_FLAT_TREE);
+ /**
+  * nvmem_cell_read() - Read the value of an nvmem cell
+- * @cell: The nvmem cell to read
++ * @cell: The nvmem cell to read, containing:
++ *        - @cell->offset: Byte offset within the NVMEM device
++ *        - @cell->size: Size of the cell in bytes
++ *        - @cell->nbits: Number of bits to extract (0 = read entire cell)
++ *        - @cell->bit_offset: Starting bit position for extraction
+  * @buf: The buffer to read into
+  * @size: The size of @buf
+  *
++ * For cells with bit fields (@cell->nbits > 0), this function:
++ * - Reads the raw bytes from @cell->offset in hardware
++ * - Extracts the bit field using @cell->bit_offset and @cell->nbits
++ * - Returns the extracted value in @buf
++ * - Requires @size == sizeof(u32) and @cell->size <= sizeof(u32)
++ *
++ * For cells without bit fields (@cell->nbits == 0):
++ * - Reads raw bytes directly from @cell->offset
++ * - Requires @size == @cell->size
++ *
+  * Return:
+  * * 0 on success
+- * * -EINVAL if @buf is not the same size as @cell.
++ * * -EINVAL if @size doesn't match requirements
+  * * -ENOSYS if CONFIG_NVMEM is disabled
+  * * A negative error if there was a problem reading the underlying storage
+  */
+@@ -57,13 +71,27 @@ int nvmem_cell_read(struct nvmem_cell *cell, void *buf, size_t size);
+ 
+ /**
+  * nvmem_cell_write() - Write a value to an nvmem cell
+- * @cell: The nvmem cell to write
++ * @cell: The nvmem cell to write, containing:
++ *        - @cell->offset: Byte offset within the NVMEM device
++ *        - @cell->size: Size of the cell in bytes
++ *        - @cell->nbits: Number of bits to write (0 = write entire cell)
++ *        - @cell->bit_offset: Starting bit position for insertion
+  * @buf: The buffer to write from
+  * @size: The size of @buf
+  *
++ * For cells with bit fields (@cell->nbits > 0), this function:
++ * - Performs Read-Modify-Write to preserve other bits at @cell->offset
++ * - Masks and shifts the value to @cell->bit_offset position
++ * - Merges with existing bits outside the @cell->nbits field
++ * - Requires @size == sizeof(u32) and @cell->size <= sizeof(u32)
++ *
++ * For cells without bit fields (@cell->nbits == 0):
++ * - Writes raw bytes directly to @cell->offset
++ * - Requires @size == @cell->size
++ *
+  * Return:
+  * * 0 on success
+- * * -EINVAL if @buf is not the same size as @cell
++ * * -EINVAL if @size doesn't match requirements
+  * * -ENOSYS if @cell is read-only, or if CONFIG_NVMEM is disabled
+  * * A negative error if there was a problem writing the underlying storage
+  */
 -- 
 2.34.1
 
