@@ -4,199 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02D6DCA6019
-	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 09:21:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D0B8CA6019
+	for <u-boot@archiver.kernel.org>; Fri,  9 Oct 2026 09:29:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A09E7608AB;
-	Fri,  9 Oct 2026 09:21:42 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E171A606F3;
+	Fri,  9 Oct 2026 09:29:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Epeh499SKLQX; Fri,  9 Oct 2026 09:21:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C68E5606F3
+ id i6gKk6sA4kyR; Fri,  9 Oct 2026 09:29:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CF610607B2
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791537701;
-	b=SoshsDkReed4sVJtIRq7uFxQXBnIJAOOuFTQSg+4VxKrTTiNeE8XyECOcGXzY1AyeQwf
-	 Ewe7vTGprRVPPCfoBAhmKCQJw6RrBKWL2KlRIQCI0P6+IxUtadHL4RgWL8FmW2mmsxqE6
-	 R/KKqr51jmLlRzZk3Tr4x5fcMECX31p8cG/AyGFHTSYa9mZi1lDBmZjGMXOdvNH8Azyqf
-	 58R/i0K6TOcRlXCFB+TVe4o/+nwlYe8cYladwvnsyIwZ/wM31psmeouvgj8vJre6uiGjj
-	 /iqPvpptHbbmvJG1Ns88CBH8bj+Z8eRR3tJsP0vEiOuGLJ3f8eXDQTWZ2UlmZXSXWqQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791538190;
+	b=c6JC2Byc/jNm+dznHPqP4LKazL+QfM+9P3Y4lCvZha+vPYYhfAad4uO3CtuhzJ3OmCkq
+	 7IUnkRFUvd48IPqlcLwsEjlvLLESgidLPdhU15kYQAKlbJchXFvUXCj75hbCl8nVbHf3u
+	 s9lwKgMY8CLsvbe8UkYhIR4gAtvtyc/tjrR5qAr2sj/J0dTP1WQyn0b2Enj3Q3ePupJDU
+	 LQJ9npuEyoinqpo5W+GjVKsMDRH/GONVq1Pt0p5TjC70Ka0cZK67auTm+Y2j7vK1oiyFq
+	 TmOSgHdCQ6qPDASs4U4rXKV9AVhatCyVsK7JPvZ3xm8Mk09NBEOP3Ne74bRH3CZ8sSg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791537701;
+	c=relaxed/relaxed; t=1791538190;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:From:
-	 Subject:To:Cc:References:Content-Language:Autocrypt:Organization:
-	 In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
+	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:
+	 Content-Language:To:Cc:References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Last-TLS-Session-Version:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=NOEndm6xZxON68GJlhIU8fq/k9azRdAwO9gJ09w6r5w=;
-	b=FCsO23dVLRkUG/1aArjDfnkWnA+kf6wi8VBtYDfjKL2xfllSVLlisPQXuiNbk/CVa1RT
-	 4w48qASlDCr54XZ5J7IM06sHCP51I2IiByN8TcmEFqBNRlD1+Hu2EDkk5aNBz4SzkDFu4
-	 T92EvB/+UXaPPZ/O/bghtB1+Nz+agTz7fmdVW2LlzrOfDQUmsTZNd/LyuBygG2qMdQC2k
-	 1swyjqkPHCq5rsoiSEGKzrMMdLiz/1DWiUCE6aOSzw1xJ8z0wPm2qdPPdGcfS933ipzO/
-	 W9rnU32wC+8Eja+Q1FgvFmaP9UlpgGMtc/daxmAz1VN7C62SMNwgvhhNM0tsROWltRg==
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=68MMHB4WavuCDUxhKRFeTJW39yoaGNkLgL9abXPDsoU=;
+	b=A/adYOLSKb6zOfE/7ofItpm0Bg/2wyI81rsq8J25yhL8DRePCqtRkArcf+NH05Z2okqu
+	 bBlcMLYk6FaCMHb+DeOI/q8+P9xcoPMreP7C5+KeB6GFCwkIXFH1SUFb3oRPemDaFxAPK
+	 +1AngTH9pTKqDaIFzbWZS7r3weQNNPIEutD8KyRuWTZQAXEFxrcbNmKkJNSq7F3PzEXq5
+	 W2qHRhoDkdor6IfUsGt72mHlGl69mIvFOhr4WX9pTKSaYp4R+B5OoMATMm8ZXXykzRn42
+	 GBHADdONKLZSltRc0qBaFsFjGVe92FPlJUNz3g1aCMhGlt2gDsZqrA+8HdTmbcHUpLw==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791537701;
-	bh=NOEndm6xZxON68GJlhIU8fq/k9azRdAwO9gJ09w6r5w=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791538189;
+	bh=68MMHB4WavuCDUxhKRFeTJW39yoaGNkLgL9abXPDsoU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=Pb/vZPhAdRC9EiTzscFiZ3j/q3pzFD2+Lcb0jxpBeRPGK5brMmN5Us3XXndi8Tidp
-	 cDiQXCmV7v8QXcxEI+YZi6EAyX/fonjZdZk51JoBmQznXotJvEbimG9DGsKW7CVs0k
-	 gGIZCTEj+gBXwQEY58RSymzuquewcnX6fciGQK4gBC/sMr4QgZi3orNV6ZH5Xwrcdw
-	 gPITzguvSPFSu3XPDtp19wcCfEwjSiWnBiyKV5795j6yhyW1G71PAAgOX8LoZ6y/tP
-	 QQM9s2CIge7SAgOp4Neuc+I7a8JHD9CoLR0T/NeAqYDdl7d/pZ2/lzRIUcsE3ePtV4
-	 fanKA2s91UD6Q==
+	 From;
+	b=nsvjQb4g1y814r2142ln6CCfanJxuiK780hGlVcIEdTgxRWgQWcAyi0Qcbk5nPmM0
+	 u6QSJJMD2KFn43W1Bd+kVSBLj4B2khMReaftWKWl6N+mNB7G69VOGYDh1BR5cpgvHL
+	 bkxa7RwXvmHy5zjc3FQ0mSpECXew2NR3nIgEjScib1BsKPXGnusm56sTL9leEVt9iu
+	 EGwLjigWJDFN1E5EuEUxqAeGX+0fmkur8cQz4EnavJ2KlAZaonQGi28BF7V0/IoijM
+	 vM7Dw5p2uZUc5TVby9JZxqdbEx7jnngYc2GGY39DKwtHTDBHoPRDgEKwXHp5LsNo8o
+	 +bhdHxrVQnliA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C68E5606F3;
-	Fri,  9 Oct 2026 09:21:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CF610607B2;
+	Fri,  9 Oct 2026 09:29:49 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 2C9B6356
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 09:21:38 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 0A20075
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 09:29:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1283040911
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 09:21:38 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E3F9140919
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 09:29:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Mmm10o1Dy7Cy for <u-boot@lists.u-boot-project.org>;
- Fri,  9 Oct 2026 09:21:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6F83C408F8
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::62a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791537697;
- b=WPqYIR/KHgObsm6wI2D4QS6NU6QrsSwPkDzrng6CkXBzGJYJ9+ZrNbrAD9rDwFtnJWB3
- 6zXsma8kdyNz2is+wMDIkktV7TSZdC/Jhwu/ejxLSQy2UyNd4+nY3g4EFRTbKbcNBIudz
- +tHMjSNiwgJ7pDhlPzJ5Ht9vRE5VNiwkboAuKMW2AxL+FZfuLUzMKhQa3wonlHSFChMFK
- sAUnKSsT0Zx2WrXOWDAHFCZ7igsXNv7NCHRtsRe6FRsLnHIanTl1vWzkT6z6WiqdGSTa6
- RwHGfJEiFaz+XI5o9UXpN/GQPuIXk2dwDXOElrrpxywCmHPdTfqjlNabUm75ci/giNA==
+ id 2Q5YDgj8HhF3 for <u-boot@lists.u-boot-project.org>;
+ Fri,  9 Oct 2026 09:29:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3D93E40911
+Authentication-Results: smtp4.osuosl.org; arc=none
+ smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791538186;
+ b=GfLciEYiJmSJ/08zx4egPCH41WgB5XH9irPEfsFi04NkrX81lXfNPV7tyItdfbWiYXfi
+ 1zHVVMRZUJRfzsv+rMV7E5um2kCYuhnjfg4yOd0ozpP6ntutuF5dmCKDQI9T+cHOcw2ys
+ 0lp2HEFcNoil3vDp30toaVCenBOG4KU6fcvh18h9lQF1nd7HaYxu0xmbNHshv0bVUmGXw
+ ImDu1Bf0OT4EfPPISrHG2EwqV7UllzZdSS/IE4UQiKhR+TPy3w96XZds3Zej3m+53yiFz
+ lCdWx9UdeO9dGtcQrBy64IcOETNSTieJeUFn2OzroIHh0eWcEuY52bqZ2u5J7JrXWDA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791537697;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
- MIME-Version:User-Agent:From:Reply-To:Subject:To:Cc:References:
- Content-Language:Autocrypt:Organization:In-Reply-To:Content-Type:
- Content-Transfer-Encoding;
- bh=NOEndm6xZxON68GJlhIU8fq/k9azRdAwO9gJ09w6r5w=;
- b=ZdsKIbP5v0A5CVJ+zip9JIduhwgVHPFw0oCyY4XsjkwP+1KPso31e7ce+lYbIU2mH5aU
- DTkqRDHBwwAcKFzWE0ywwAlN0HgIZJ0LKIIU8pcFGcZeCFTQVaO6s8ARJv97G/DCXwSOP
- PUrRgaDrGh1S2p2IVJ3DNbA3f/HNrVdNc3H+OXq1vzHtGeDLcW364Mc9d9l4Ky9wYBioC
- oSVZd0De3+vXR7Tjao4ykkTA4hsOgV8d8qDoWBISwKT4J4z3xsUmUvLF5qWvrC4eDr76s
- fOVhtHA/1vD/fn+c5vPJcfhA/scvcAvuQBFysofC8B6pykQoZGmpCet7rlYDa8LNHwg==
+ c=relaxed/relaxed; t=1791538186;
+ h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+ User-Agent:Subject:Content-Language:To:Cc:References:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version;
+ bh=68MMHB4WavuCDUxhKRFeTJW39yoaGNkLgL9abXPDsoU=;
+ b=lr56CpIDhPJyeSGNz6d+wrr/G8rdyevCnEwPEhmnS6u4evi7BBV9lLonHQVyTHNkNsIh
+ chiUKM0U/Ow89DgvdP4OXf9L2ranDY9jsCXTyDMqFOyNlpoLdDFcxs7VHkccMT2euUo6V
+ bYa7hTI9QkTSzOzj0s4qsmjLiBZIS34+/p8o6ykaUtqWyuOkUj7yeot2DmjUq79I0COQW
+ RvJyI76/X5F2+0ElJdAjve0PygjlUCE5fr22O2G54Th+nttuq3xVxsJvwmIK8kota13JN
+ jJ0SDCJJy14LRK0eD7i5BERQS6rx+9xIIyhwlg3rFylXXKhIt2PDHr5YGnJBr3kW/Lw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=LyeGODNO; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::62a"
+ dmarc=pass header.from=nabladev.com;
+ dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=eAHme7Jh; 
+ arc=none smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62a; helo=mail-ej1-x62a.google.com;
- envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
+ envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=LyeGODNO
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6F83C408F8
- for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 09:21:35 +0000 (UTC)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c2e26719a0fso384159666b.3
- for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 02:21:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1791537693; x=1792142493;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=NOEndm6xZxON68GJlhIU8fq/k9azRdAwO9gJ09w6r5w=;
- b=LyeGODNOk25rXqRPTy+QCdg3Tn0rWIdMQRI1yW6bAUKCKlYHfe57OAJq6353kVW/Cs
- dyYZNeVvKY35+9zap5kiy9ujgxustQvJF9QSVfLVNQqqQJe7PGDuwLg9RTOHl+GpsIVU
- rb0FkKFE70TvYNWmgDQXyx7F1KUhEhZ6OrCDQztDifXp3lJSJ7d7RprGTm8HT31JPiEj
- TC+jRyuAD0VYOS1YJnNQnByReSklX0Dn1diVaJt/Z/aRqDJWn6EgEuHCV5LUoj1wFQMP
- rYJn9EqF4TahQQpTM6Fruz/I67YGjI4OmloyOQVhe+nyjlJYOHUIwX3YaZK/vSd88V5Q
- ssng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791537693; x=1792142493;
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=NOEndm6xZxON68GJlhIU8fq/k9azRdAwO9gJ09w6r5w=;
- b=id4ioL3rK7qHp8Bkou7wqqzy0hayy6gIlgEd7ooXAbCpB8zb/nBLzvoCfSI6BEtn2N
- jSCJPMkyzZrTNCUhpLmYOMeUWrWrbF6ZH528hvluMSRoxKvaCb91DGdHQVld5c11MIzU
- f/kYw1iBVBIw/fIFMVRWe7a0St9mEjBdK7gZIYmb8iLgbJVq0jwnpyqw0H5f7+1zj9GP
- Vrq/KIP4qTFuhgfm/29r6Pov5XSXS5yEz6tPDqjQViXXaufvNXT8IZpT8k1+VWXhZBwT
- Y7Lfm3sEWMc8ODYcZp1VsOSqSkOHPlMM8bpGDr+MtJuwh8uEGGw/G91LMjNzXw6Jdm4r
- OlOQ==
-X-Gm-Message-State: AFq9FYKWlTHg5yAnoKD209wXIWb54EOsvMctDUl7iNquVTXjWsxLF4J8
- 3FnrCxOyvM3u5SJjZj+GYiEwLL3kUaYuw9KaX6HrZUR2twpnzyt718dD3cXRmS4eI9U=
-X-Gm-Gg: AYBFou2uG2jqPkJfBeOdQiq8/C7PB1Yc0NitDHcfo4mV8XA7/1hMdwqKB/swzrj95YS
- UrWeH7vmgOO/jxR4GYuTit1HTp0YkXrMLs7+MWyJiHgPIHUtT7RckbVQIAlNthIX0av+QawVPxo
- DWZArdaF3Fvfm5ZoE8dG79iexxS06C1ji6L6Fg5cmmIN+Ps0OfUh0s+3+fT9U7ggx6rjt3JnqwV
- Qp0rD7gJYO0b9w+Fw9fUXL7Wi6BpOq/gaz5WfW06KRR1rJ5x3czIG5ay0PnCliPpiRF4LYcflLi
- vb7z0JHtBRFgxiiq2QLmTE1hoxKkUYYSs6x3DgZvaNEcQHWGgDdChtAEJFAeSboG52zasDgnk1w
- CtmtGkfrSWMcEEBU8zD5czmY5grbdVals6zJhFIR9qhv/85/M8QmS4idcsN/2GX5Nxz2G03DT6F
- yxr8WY8dA7IltCpSZ9Kq2t/GTQXpuhbmQQlLBbkiSr1ntt01VFwcMyV+WP1FeTBX4TPc6ajiFp4
- aM9yJycoLt9tVzQJNLpWURov3mzOTc=
-X-Received: by 2002:a17:907:9694:b0:c20:9447:bd5e with SMTP id
- a640c23a62f3a-c31a9fa1d3amr130540466b.9.1791537693193; 
- Fri, 09 Oct 2026 02:21:33 -0700 (PDT)
-Received: from [192.168.151.76] (90-182-211-1.rcp.o2.cz. [90.182.211.1])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18be97d1esm71139245e9.8.2026.10.09.02.21.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 09 Oct 2026 02:21:31 -0700 (PDT)
-Message-ID: <f7aca815-72db-498a-bf22-c2d481c44c2e@linaro.org>
-Date: Fri, 9 Oct 2026 11:21:30 +0200
+ unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=eAHme7Jh
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3D93E40911
+ for <u-boot@lists.u-boot-project.org>; Fri,  9 Oct 2026 09:29:45 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 72049105EE1; Fri, 09 Oct 2026 11:29:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1791538179;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=68MMHB4WavuCDUxhKRFeTJW39yoaGNkLgL9abXPDsoU=;
+ b=eAHme7Jh6fBxGmssREtZmrcGv9hWe2DO8uOvLDqpc/pIfvhl4zTdbJCpZddl3P2A0HpC5A
+ WJ+x9lCKG3o8WCd+USB2axE8fwOCFlJsqtNbWAtsROa5Y1UJeevGdcZQ7+Uk0XehlUjCDj
+ 4fgyW0jaZiCHbWU2qyp6v48IfMkBG+Zfa0NcAR8az1LnJ5m+zuV9Rs9fHnu3wCAhDKWyyH
+ oUtDzo90gKvcRCV6Po7NF1QNfNQjBlL+H40uwEXjcNEaAerR3uR/my112NL5+IdGOzyNSj
+ T9Z3KIqgSf3hF5mFCvgN75gBnLoE76HdXO1qafNdJKXupehi0/YDjtsXvqEdqg==
+Message-ID: <d19b3b84-86fe-4f46-a9f3-95bb18b20d13@nabladev.com>
+Date: Fri, 9 Oct 2026 11:28:50 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [ANN] Meetup during the Embedded Linux Conference / Open-Source
- Summit Europe 2026 in Prague
-To: marek.vasut+u-boot@mailbox.org, tgamblin@baylibre.com,
- glaroque@baylibre.com, msuchanek@suse.de, andrey.lalaev@gmail.com,
- rui.silva@linaro.org, monstr@monstr.eu, marko.makela@iki.fi,
- henri.sundelin@iki.fi, nbelin@baylibre.com
-Cc: u-boot@lists.u-boot-project.org
-References: <dac81055-ff78-4b28-9539-ea533c12cb33@linaro.org>
- <b5d52786-4dfa-447b-9ca0-886bb00fd444@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <b5d52786-4dfa-447b-9ca0-886bb00fd444@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v2 3/5] mtd: add driver for the Microchip 23LCV1024 SPI
+ SRAM
+Content-Language: en-US
+To: Takahiro.Kuwano@infineon.com, sjg@chromium.org
+Cc: u-boot@lists.u-boot-project.org, marek.vasut+renesas@mailbox.org,
+ vigneshr@ti.com, jbx6244@gmail.com, stefan.bigler@securiton.ch,
+ quentin.schulz@cherry.de, trini@konsulko.com, vjardin@free.fr
+References: <20261004040657.3156402-1-hs@nabladev.com>
+ <20261004040657.3156402-4-hs@nabladev.com>
+ <CAFLszThGYtvGYmYi1iOjRiqBANzbNSOt00n1HHzOWX8GXw3P0A@mail.gmail.com>
+ <e66df57a82424e6d9b1fe8e2e5b7041f@infineon.com>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <e66df57a82424e6d9b1fe8e2e5b7041f@infineon.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -208,50 +147,128 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi All,
+Hello Takahiro.Kuwano,
 
-It was great connecting with everyone at dinner last night. Despite the unexpected heavy rain, I am glad we all made it and had such a great time!
+just answer here, before I looked into the comments from Simon...
 
-A special thank you to ARM for generously covering all of our food and drinks.
+On 09.10.26 10:29, Takahiro.Kuwano@infineon.com wrote:
+> Hi Heiko and Simon,
+> 
+>> Hi Heiko,
+>>
+>> On 2026-10-04T04:06:44, Heiko Schocher <hs@nabladev.com> wrote:
+>>> mtd: add driver for the Microchip 23LCV1024 SPI SRAM
+>>>
+>>> The 23LCV1024 is a 1 Mbit serial SRAM with battery backup, sitting on
+>>> an SPI bus and used as non volatile scratch storage. Register it as an
+>>> MTD device of type MTD_RAM, so the mtd command reaches it.
+>>>
+>>> The device powers up in byte operation, where every command carries
+>>> exactly one data byte. Select sequential operation once during probe,
+>>
+>> Just to check, is this right? My understanding is that the
+>> 23LC1024/23LCV1024 data sheet gives sequential mode (01) as the MODE
+>> register default; byte mode is the default only on the older 23K256.
+>> The Linux mchp23k256 driver never writes the MODE register. Setting it
+>> explicitly is still a fine defensive step, since something else could
+>> have changed the mode and the part keeps it while on battery. Please
+>> can you reword the commit message and the comment in spi_ram_probe()
+>> to match?
+>>
+>>> so that a read or a write of any length is served by a single command
+>>> and the bus is claimed once per transfer.
+>>>
+>>> Writing needs no erase. The driver therefore implements no erase
+>>> operation and says MTD_NO_ERASE in the MTD flags.
+>>>
+>>> Signed-off-by: Stefan Bigler <stefan.bigler@securiton.ch>
+>>> Signed-off-by: Heiko Schocher <hs@nabladev.com>
+>>>
+>>> MAINTAINERS               |   5 ++
+>>>   configs/sandbox_defconfig |   1 +
+>>>   drivers/mtd/Kconfig       |  14 +++
+>>>   drivers/mtd/Makefile      |   1 +
+>>>   drivers/mtd/spi_ram.c     | 222 ++++++++++++++++++++++++++++++++++++++++++++++
+>>>   5 files changed, 243 insertions(+)
+>>
+>>> diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
+>>> @@ -194,6 +194,20 @@ config ALTERA_QSPI
+>>> +config SPI_RAM
+>>> +     bool "Microchip 23LCV1024 SPI SRAM"
+>>> +     depends on DM_SPI && DM_MTD
+>>
+>> SPI_RAM, spi_ram.c and the spi_ram driver name are very generic for a
+>> driver that handles one Microchip part. Linux already supports this
+>> chip in drivers/mtd/devices/mchp23k256.c (CONFIG_MTD_MCHP23K256), and
+>> the binding in dts/upstream/Bindings/mtd/microchip,mchp23k256.yaml
+>> lists both microchip,mchp23k256 and microchip,mchp23lcv1024. How about
+>> using the Linux names, here and in MAINTAINERS?
+>>
+> 
+> I would rather have a generic SPI-RAM driver that also supports MRAM [1]
+> and FRAM devices using the common opcode set without erase.
+> 
+> Currently, some FRAM chips are handled by SPI-NOR, but new devices should
+> be added to the SPI-RAM driver if it exists.
+> 
+> What are your thoughts on this?
 
-Looking forward to seeing you at the next in-person event!
+Seems like a valid argument to me. Simon? What do you think?
 
-Neil
+Thanks!
 
-On 10/7/26 23:27, Neil Armstrong wrote:
-> Hi All,
+bye,
+Heiko
 > 
-> Just confirming our meetup for tomorrow! A table for 14 has been reserved at Krušovická chalupa for 19:00.
+> Thanks,
+> Takahiro
 > 
-> We booked a few extra spots, so please feel free to invite anyone else who might like to join us.
-> 
-> As a reminder, it's about a 10-minute walk (700m) from the Prague Conference Center.
-> 
-> The exact address is:
-> 5. Května 798/62, 140 00 Praha
-> 
-> Looking forward to seeing you tomorrow!
-> 
-> Neil
-> 
-> On 9/28/26 20:28, Neil Armstrong wrote:
->> Hi All,
+>>> diff --git a/drivers/mtd/spi_ram.c b/drivers/mtd/spi_ram.c
+>>> @@ -0,0 +1,222 @@
+>>> +static int spi_ram_xfer(struct spi_slave *spi, const u8 *cmd, size_t cmd_len,
+>>> +                     const void *data_out, void *data_in, size_t data_len)
+>>> +{
+>>> +     unsigned long flags = SPI_XFER_BEGIN;
+>>> +     int ret;
+>>> +
+>>> +     if (!data_len)
+>>> +             flags |= SPI_XFER_END;
 >>
->> Next week, during the Embedded Linux Conference / Open Source Summit Europe 2026 in Prague,
->> we plan to meet up on Thursday the 8th around 19:15 at the Krušovická chalupa bar,
->> which is a 10-minute walk from the Conference Center.
+>> This duplicates spi_write_then_read() in drivers/spi/spi-uclass.c,
+>> which has the same flag handling and debug messages. You could drop
+>> this function and use that one instead?
 >>
->> The place has a large variety of food and drinks (menu at https://krusovickachalupa.cz/menu/).
+>>> diff --git a/drivers/mtd/spi_ram.c b/drivers/mtd/spi_ram.c
+>>> @@ -0,0 +1,222 @@
+>>> +     ret = spi_claim_bus(spi);
+>>> +     if (ret) {
+>>> +             dev_dbg(dev, "failed to claim SPI bus: %d\n", ret);
+>>> +             return ret;
+>>> +     }
+>>> +
+>>> +     ret = spi_ram_xfer(spi, cmd, sizeof(cmd), data_out, data_in, len);
 >>
->> Please add yourself to the list at https://pad.sfconservancy.org/p/uboot-eoss-2026-meetup shared document.
+>> A read or write of the whole 128KB goes out as a single spi_xfer().
+>> This fails on controllers that only implement spi-mem ops or that
+>> limit the transfer size, where the SPI NAND driver you are modelling
+>> this on would work. Using spi_mem_exec_op() with
+>> spi_mem_adjust_op_size() in a loop would cover both cases. I'm not
+>> sure how much that matters for your boards, so I'm just mentioning it.
 >>
->> We will make a reservation based on the headcount from the list, plus a few extra spots.
+>> In any case:
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
 >>
->> Looking forward to seeing you there!
->>
->> Neil
+>> Regards,
+>> Simon
+> 
+> [1] https://lore.kernel.org/u-boot/20261008-everspin_mr24h40_mram_support-v1-0-d8f14da1a997@gmail.com/
 > 
 
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
