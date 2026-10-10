@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13AD0CA9EC5
-	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 13:12:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D05C5CA9EC7
+	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 13:12:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C2AFB81209;
-	Sat, 10 Oct 2026 13:12:28 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9AED260A40;
+	Sat, 10 Oct 2026 13:12:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id p56BK8J6pE1m; Sat, 10 Oct 2026 13:12:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 08B01811E4
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791637948;
-	b=LJx+D0B3Jljd3/Vbp25SjfZ7KyNUspvy+AymCvRLegnwLCnGXMuWbcFycGD0R9swVrVx
-	 An96XLWbeP07j1d6fxsp5cLFAcRa+YGNInlH454dzSywKyQMcuBk5ddiXl5N2arCle724
-	 vGiv9fWgjA1atkbsq8KS1vt4F1e77yxdIPSKFjbIEV3zs84ch4TfImvvkOpVFYgVbesf7
-	 HqSkkvseekteMZyWxDkDcbeW+b6iz7igq9LCR1QhGwq9FrgZvJjplro/3vZqXNEW2tDBC
-	 2KYuVvODtG/0hbIVpPMdWRii+VYRyd1gHR0snpLzqYYnR6Dq8tzZ/TVeHFrA8KsH13w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hElmOo0w69Te; Sat, 10 Oct 2026 13:12:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 948816090B
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791637949;
+	b=WmpMGWI6nzL78cSmjBImmZD67nGYDgP8mGx4S4W2IURL7vZikAb37js3Qoq4TNoLhiZ9
+	 SucaM/PTWYlHOKz4PfdgAfaB6DM5ubj8jDVqu9UgQML4T+fqOmrctBVjSqjDRMmOXSCXN
+	 KTIizdaZKyR8sS9sNiMXfiNmhVwXxWwYEA1bNMLFg1sbg/M6aq1Mqq0p/EaD0UEi7n8mq
+	 gH96MQVEj5nJ8/9h/ehwa68l/IKE7hL5W9ZJe/nxaCDRXNQL17sRE9iXYXkFsCSDVx9iE
+	 +7nkTxb5RS/W6VxtTEnUBtYwp0PNrQFyHYieaTM9HXjLLZdR1TVV74U/vR2Oyc40VLg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791637948;
+	c=relaxed/relaxed; t=1791637949;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,135 +32,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=bUfF+SXp8QHGflztGdCFBaru3J+V3o62Gt48IdAfJSg=;
-	b=mCSdfjq+N7dA25AsWMPoxKmtc4APTPm1SoKYZmWd+nIuxrhNV4/phksvzEtytmEVCDwW
-	 F/1IGe9uVcT/hx/c6hVdZhZLmV6u/FUf2S9ONDeYDyDwVzlXpDs/+gSlaIpU2zPXNqFah
-	 hrHiezwRQQletFxPH+taeumeOrJn0zDhzRXfUq4xlsoaIAqVFqOOfZCprGwLx8TXxiEBB
-	 JstP5L37iBOR/fH4gbjulaf8Ki9jA5rfH7IpwgCpdtN/aly7wJZOOlaI8U9ZvFebk7JR4
-	 uAd/g1eAaZxSiLR+ws0738PMbTmeqAMNlNCaiZ3hcPtOsXsl72QO/XIHMT8vp7l6+MQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=eQna9oYg7niZHXc8+sYUmaB9BwYMO1qLhpvZVXwhspQ=;
+	b=nL06ES0zZ6oU9wwVKvrivGYRy/grkn9erdVUvgARprzheGrM1316esr+wRA978aiaT61
+	 yr+CLmOy6Dx011Fim2t8rdOeyr8u4IbJDAQ0atFAobfxGsh3Y73YFNzAz9jbDYUAwE7Ks
+	 E8x8ZplZ/NAw19MHnPhgU11deca4TTyfPDJCIeui7XaGvZyl0/pZpMZ+9jZUc7+FqEwq1
+	 KZ3yIPYGF2twmy6Js8T5QoCjSmMT5h6cHc9pjvZQYpASAo9DCUNq4JD2jCuHdlmKSLAgp
+	 vAqM+cMIs2lV6MIhHSZsTvcbxMB6qU8+mZq97MEEP0WPrU9KJsCEuTc1IPK+OBAhNeA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791637948;
-	bh=bUfF+SXp8QHGflztGdCFBaru3J+V3o62Gt48IdAfJSg=;
+	d=lists.u-boot-project.org; s=default; t=1791637949;
+	bh=eQna9oYg7niZHXc8+sYUmaB9BwYMO1qLhpvZVXwhspQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ToIX9EKUOejiLYcql0KmzsStf+EYZnwCHHT/AxEdeJpdhKzLSo/rmJW/IuzxNcZDK
-	 DcTqAmt88KMTGt/p3JmbLLdy61y8DRUjOSVnidPh8MudJ6FwMN6pSg93m3OqKchHF7
-	 Tbpmpl6oI2dMOJ9G6bDQxYs1gG026zgAxl6ZkeHIJtrUG9KgMd0Qz/IFIaKcwdB5FT
-	 oa6tJa2rJdJ7YmwzFx87dCh3fyCArS/ru9lsimCw5/uHT5tCvfq/7gb2zmGUlzbSii
-	 63Nl4kUX+jjV6VjXNlf61Rl4YlCVaIF7peAzDGXcc5w2GzJ8bAfUTCjb/fBa1tB22g
-	 WL1XOS6CBaWQw==
+	b=cOAZLzf76aok6PpkXMErLd2mtouz5Rx7wKYQtAHrMTuujCqOqTql8ucZLHIvvjJh3
+	 HAdaunheDzKA0fxMinjfGo1Ay1Wd39u/lWOOvOjDcvbZG6ZnFWT4ABO6oDbrvGByZp
+	 pSEi0T/GZWtqGHeTTO0XwUkzDevERrgoTd2gtOR/q3atDuzB9oZtMSsMd3I9dXNa4E
+	 47i6GeNDwspvRDY9KUCUIft3js67XJqD0LxXDjr7wQLH1OsIJ2dXzllFbD6oRvnb1Z
+	 F7wDtIoQ5hCRwnfqpUM2uQd9awsVXF73e7/HlRayn78Ie8mz82MQVkKtlak/DIo2vi
+	 /KyeyWW1Sm2PQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 08B01811E4;
-	Sat, 10 Oct 2026 13:12:28 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 53B10156
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 13:12:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 948816090B;
+	Sat, 10 Oct 2026 13:12:29 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1CE4D22B
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 13:12:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2748140098
+ by smtp4.osuosl.org (Postfix) with ESMTP id F22124080E
  for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 13:12:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SRPWtgAkGBbQ for <u-boot@lists.u-boot-project.org>;
- Sat, 10 Oct 2026 13:12:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 39D3240004
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::635"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791637939;
- b=NOV611Kax+F8iYT3WAyBwdfLZHvODKX/4ELjPNZRiNT0eYNGBQv936sGx0gWQH9eR9mV
- FALQhVJxbLsMb8WVyi+HEmSFds/cPKRl4dmuyuBkLtZ7V/nkB2TNapwLpnkLH4O+av3e5
- T8psi5vSHbhvjgRk1PytBGaIN7wLZ89JLYcpYtGHXBNH68H+wQuVXVwEH0VZxjg3+cPhf
- 5+hzszXfI34BIX87GB+uAFhZ6OhNAGsKva1nHRBgbMZ9zNNXXqoWv1zvKIKc0Utb78cgL
- UiH/mA0xd25npJdFPiIVy6NHbk4Y0AVCLGzRK/Sz/hp+KYSG2ku+mBO0xsc988utQ0Q==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qE6gJqQzpN3J for <u-boot@lists.u-boot-project.org>;
+ Sat, 10 Oct 2026 13:12:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B7B0540809
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::630"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791637940;
+ b=duRGPsLHBq24FgIJ7t3ERK9pbZQBcurqvFd6TPD1bnNDXsMzjBssAO+pHx1x5Ts9uaU4
+ VB3eiwXWxSbOrJemMWm9Zvc4bl7kF/aYi1joFx9Dng8VbrzvKxtmiRkvh7ZUMt8vrjvc+
+ PhczMt8cZy0wYMdvPyzwYaPlLYuX8k+05K9lIFxz0KNNA1l7UVfTSVbURNT2HZFpgBgZH
+ woKAw1qevKOaTKNzCV19+1VKVcClPHO6JW4vHpuW5w5+gU7JW2TWzHIM9OYhX05zoI952
+ EMUqNuyn18QczW9mF5TcK7YzJo7Wbfi0xAInTOV/wrk1EiEysciog8qCAkDvYsxFAbQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791637939;
+ c=relaxed/relaxed; t=1791637940;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=bUfF+SXp8QHGflztGdCFBaru3J+V3o62Gt48IdAfJSg=;
- b=FewLe6NR3vU+RUEnL80Hor+SK5tqyvnHeP3oIzEf/lmOz0fPLvj/91pNKCi3tJcenCm0
- VoXNted0K3J+s9zBosphayYjWB7bnzRLzDTObCkDmVNEo0isPlHkRtvdsiy7RloJPYwlr
- AL9SpyXj7kxzXFl78YPQP5EcxE16soe9fiQx45GItTcAX1xseBdmwxhq3VehJSfdFEjCE
- Sz81etQms9zgPlGc7gZmHxsoOaujvSKxVAS/PU/HDTz7NYj3zY8dbywhW9+5Pqt+c7FCV
- pqY/eVjVJGywc/805byQvI6l5DeUEZS5j9y5V1rNfa5aaEH7+AQ1AgVq/m8TBMgG3OQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=eQna9oYg7niZHXc8+sYUmaB9BwYMO1qLhpvZVXwhspQ=;
+ b=Cp3r6lqipsMar8MxUXyc8Fmv5yaZRsbOsDZ2xqE6nrEtaPufcP4aIQD/U7AjbOH4rdov
+ 2t93B6HzPUrgqXmr5bqlYz00bhEvcXQWcoatNHO1pjc8hzgV6Ghf5s5zD9sAFvvCV0zTy
+ XLnvVk9OYBw8cJt76GlCgHwWeUBQmvuBlZLT5tA1xKs/2nth9QzUVvsyuIBfY0iiebD+t
+ 4c+1gtmVgniy7v+ZjRuauy9mxWCvCpsLAylBaEyGbbhUPT24lHLZf97SuWS2d+O1jKwaw
+ nz5JdlEoznp5SwTzlu0+YTJTf3fgazL6RQY2lxWd/GQBg2nPQ7Gfi2febFj53qfz8Dw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=flipper.net;
  dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=lRmIkhF3; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::635"
+ header.s=google header.b=mS82VJ8j; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::630"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::635; helo=mail-ej1-x635.google.com;
+ client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=lRmIkhF3
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 39D3240004
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 13:12:18 +0000 (UTC)
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-c2e8e738ae0so101846366b.1
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 06:12:18 -0700 (PDT)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
+ header.a=rsa-sha256 header.s=google header.b=mS82VJ8j
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B7B0540809
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 13:12:19 +0000 (UTC)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-c20ce3c118aso143108366b.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 06:12:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=flipper.net; s=google; t=1791637937; x=1792242737;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=bUfF+SXp8QHGflztGdCFBaru3J+V3o62Gt48IdAfJSg=;
- b=lRmIkhF39jVvDRouKIYC5wyfCgkD6cGQws5+1f58zO2pWD2mw9RwTR5PpdCmMJ6Siu
- +IixObrOHiHn1i0B8FIJgJMrfLJe0+5CyacI8z2IITBk/b89JFxKvT6J2zU/ILNWarZZ
- DQ/zXGPwmzHlKOkvJILF5b8QqDFc88jpCXyVxXeego0xYSsJHReoWUw/RGBquBtISYyn
- fXk9ESHvxLQALTXhO32YPxbf6GLd4kdZ2DnotCzLzOlYUYdKHhhFO/S9AlteatBVvIHT
- LZIPkMeFAD2VuRgXrRl+WbcBI6axufAT9omNQtlNh+Q6evLLgJs1NPzccxqp7bCibOz8
- Y95Q==
+ bh=eQna9oYg7niZHXc8+sYUmaB9BwYMO1qLhpvZVXwhspQ=;
+ b=mS82VJ8jlWfVMyY87pssydFP0gkkRxFhQb12BgliVs6kf38tlBCFF/ZTSClGJGEGmV
+ WHXXxFdlwOU8cUyPRTwkBB5Im5w1ICZ0Zvk9IyFJSrc2Wm7BsI/uA20fqlF4IXbFX05p
+ CvuB+tSc3F+LsInWRSecO+e7zoRfs5YCJGAUBkp8E/8qnrJjzobnmJBD/qs4t1DKjYiW
+ de7RafRJbEcDc+BZdGnbWh8hMzffGDJ94q5b/TkpF3ZklGGULF+JsnkOwCGAq6duUtN2
+ s8sMGvHWZoXuJaChbUJ7z2CgwHe8zceCkFqwuORIXDQYwqr9EcL5IpfU2rTr910hX7k0
+ PBZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20260707; t=1791637937; x=1792242737;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=bUfF+SXp8QHGflztGdCFBaru3J+V3o62Gt48IdAfJSg=;
- b=MJhUdT55YE9Wg+Tc4rfVvtPXlDzMUJLk0PKNRY455cVEX9TTRyGwvukTBeQOZi//oW
- RIDe639EyYE0I6vE6SN08ahxud3NQ9vs6lsA4+QDXRABBcqF24JAto0fxw9+wrFg6MVV
- NjK7jXyGpBJnEnm7rAbI3U4PmGbagdMgVQo0UHeRGRbWEoOU9jM1Yu9MmrHqPspIH6xz
- MrckDk5O5vBHc37D7GoHgraVoCFGGOl2xRxWKKRW2xQ7w8XzHib7Jw9Mc2X8vNdqkk2+
- GZIxQtISCF+LiZ/7sFgzKmuI/czeOh2uPca49XM6ErO98X2zuiodu0PCBB5C8D8PLdtu
- r+hQ==
-X-Gm-Message-State: AFq9FYLbBS34EZTfQ7qTpJRnvn9Vmducf/Oe0YHnCnNuj5FPLGJaLX6/
- OMXtb/6VoqM/7VAFTiuETcg+FHGX952fV+MqDbYPJ5sKGKrMq5rOqutBB+2czha1c9U=
-X-Gm-Gg: AYBFou0AeNezjFFJVc1Rafzep1Fd72bAvVAH6iXdrgZXhk/Pdol8AcQkQx7+LSXx2a0
- 3xheHcbY+tjjJeuIYFNfJiwPR94huQ3DYeXI5jtN5j6GjMo+oEuQNEgssiGl13rlNN9tx86xSoK
- EmJpcIBOvYaKznyfkCz87/keJH+d0NfR13UTPId/8YjUJOW39YYsjkTNNQizE2ysjXMBSmSkn6r
- xpfVtDBMj19CNqqoJQV5KlXtw4CuNPzlivDjd7Qd0MkSjpOmyTGF5IW3UbPyqfqMnXuQFX1kyBz
- V5VK1caRuWZg+BHhk5SfVCJYo3S2/Fk27W3pCugT2LdrBGHlRZd/GxPxioanpAdbtRJd4et7xuZ
- NLLdWugAGVOg4gkcgyfzH6pY6m25QXatcYM1YerStxj1k4WShpiGrzZB7fA0Bp41h924EFxGB2n
- ilzutGNryjHkg+HFmkPkif7qogxYGxwiGp9BjOXptUpyWnnuM6fe6GJ1P4isRWUFC2PdF7d8yPx
- i13hmaok9kt1PmxMsDXp9+/CLWfVfN0
-X-Received: by 2002:a17:907:9712:b0:c2e:808a:f781 with SMTP id
- a640c23a62f3a-c31a9f8bc7cmr468351366b.34.1791637935122; 
- Sat, 10 Oct 2026 06:12:15 -0700 (PDT)
+ bh=eQna9oYg7niZHXc8+sYUmaB9BwYMO1qLhpvZVXwhspQ=;
+ b=bY9Q5wjrP3EtnIRw03lXDcnKpFzIfaY1VWXhgZd3ivOpPye9AoRtHC/RVw1n5tUcEh
+ Myly0oPRAHOgOg49xL8hxqc8qlAh6OEmJmt3TscWOysI2+Rx4LFfo76Q8OlRbix8C2As
+ 04nQvPW8AElUYtJvQC0TMAkLRyCtUu0GrbnkCzvPFVo5EUf6dDUfWpWVqaslGDqVMoV6
+ C8Tl6RuROxoG87k2g3EE9KvjRno1/V4yiPwxwJhkhgJqlNHND44C25+dHRGejzY4uvEd
+ nyrUjJWSS5m35UPSFfhxaV9fEGXa5MvQmujHfsR0sO+/WrPrTgBHY6Tel1+bUXmjcEd8
+ SxFg==
+X-Gm-Message-State: AFq9FYKxe7wYPQxGhgnPG6IHbylYDkBAw9OwHpB8kPBk5rpnFOprQinP
+ 6/wsl1rzyQoVIVAfQWzCX7PIDxwyqCLTcwvN4Lg70wMcvcmM9TRfWZX7Mx+ouHmJjUo=
+X-Gm-Gg: AYBFou36z5cm87ni0g/V5WVM4AYkhTJwPZB4wJO60TI+2+BGrRUJSB3diLU7HUlvtlS
+ cDEvfeWAIJVsNB+bncSwVpyn7fbh6bE25CsDT79e31o6NkORqGbKG1KYk74NVRuUxAEbhEZRofZ
+ hukM/3AG+Lg33qqlUof+ke8Yi1KrnNZQUfDJ+I8dFf5wpBjngI+7q7ktev2kn4A5df+zcR0IpWr
+ /5g04M1NrCipKHRZVlX28rENKG+g/2tG5sdiooYeEvcnQ1v0dyl7jL7XhqAi/2QIP9VyMLI6yp9
+ W1NMdMfXQfz+MtML/VbMk1Po57ixAxQCol2z6sAjARjgu1mbVEzfyg/VZIdmz5w6gq08Yr5K0vk
+ rwYBUj5mQVfYDaDob6BhgNwm2XWJqq3R33EAI290uqj91dscbEptD+igLnD1UCyqt7CMIxfU+3A
+ 7gfrQ9DGv1o4ZFeoKuXtHxJlXKwTXX+7zYmLvmTVFUqEiJMHNucLz3i8dOx6Wsy2+ikXbE8FPXk
+ 4X+vnldfYYM2TZyATdo
+X-Received: by 2002:a17:907:7210:b0:c2d:d4dd:8d0 with SMTP id
+ a640c23a62f3a-c31a702e5c8mr507152566b.16.1791637937292; 
+ Sat, 10 Oct 2026 06:12:17 -0700 (PDT)
 Received: from alchark-surface.localdomain ([185.209.196.154])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c31a9a71d42sm240051766b.32.2026.10.10.06.12.13
+ a640c23a62f3a-c31a9a71d42sm240051766b.32.2026.10.10.06.12.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 Oct 2026 06:12:14 -0700 (PDT)
+ Sat, 10 Oct 2026 06:12:17 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Sat, 10 Oct 2026 17:11:43 +0400
-Subject: [PATCH v3 6/7] test: py: gpt: Bind the disk image in
- test_gpt_write_part_type()
+Date: Sat, 10 Oct 2026 17:11:44 +0400
+Subject: [PATCH v3 7/7] test: py: gpt: Test the GPT layout on a device with
+ 4096-byte blocks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261010-gpt-4k-v3-6-89fd290f85cb@flipper.net>
+Message-Id: <20261010-gpt-4k-v3-7-89fd290f85cb@flipper.net>
 References: <20261010-gpt-4k-v3-0-89fd290f85cb@flipper.net>
 In-Reply-To: <20261010-gpt-4k-v3-0-89fd290f85cb@flipper.net>
 To: u-boot@lists.u-boot-project.org, 
@@ -174,12 +174,12 @@ Cc: Alexey Charkov <alchark@flipper.net>, Tom Rini <trini@konsulko.com>,
  Andre Przywara <andre.przywara@arm.com>, Quentin Schulz <u-boot@0leil.net>, 
  Kever Yang <kever.yang@rock-chips.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1545; i=alchark@flipper.net;
- h=from:subject:message-id; bh=vPKOWbxaes67b+WZ0i64n1guXVxa+sY6CD4xEwh40KM=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWSdsly0ri1+SpB62rlLTowPG0ra+1axx/axtWss3j5vU
- g5vbhxXx0QWBjEuBksxRZa535bYTjXim7XLw+MrzBxWJpAh0iINDEDAwsCXm5hXaqRjpGeqbahn
- aKRjrGPEwMUpAFM9byvDf9eW/jWH60o5/2yw2vzzY8LHuuz7tytmdRxjnFh8Q+nonSKGf4rBrne
- TsyJ+mTLXR4sub93syzF3+eEtbb8nvpnav8RtDRMA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6987; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=Ao/wOLPIZOxyG7gi4exFpVOhhnr4peoffJfqNQ1Yitc=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWSdslzEpq5WeMje02a2StVv7i1CUce63pkzWp9ecZDvY
+ 5pgZY53x0QWBjEuBksxRZa535bYTjXim7XLw+MrzBxWJpAh0iINDEDAwsCXm5hXaqRjpGeqbahn
+ aKRjrGPEwMUpAFOt+J+R4WWv3IkJZ1P+tne+nTn7JBerUQLDSq8pa5Kibrj+jZAP8WRkuKYveqS
+ mLHvm20DhCacETqwp+de9tOf7U8OneREf3wvc5QYA
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -195,35 +195,181 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Unlike every other test in this file, test_gpt_write_part_type() never
-binds the disk image it operates on. It has worked since it was added
-only because some test that ran before it left host 0 bound to the
-image this fixture provides.
+Bind a blank image with a 4096-byte logical block size, let U-Boot write a
+GPT to it, and then check the result both through 'part list' and by
+unpacking the primary and backup headers straight out of the image. The
+interesting assertion is that the backup partition entry array ends
+immediately before the backup header in the last block, which is what
+regresses when the array size is computed with a hardcoded block count.
 
-That breaks as soon as a test which binds something else is added
-above it, and it means the test silently depends on collection order
-rather than on its own fixture. Bind the image like the other tests do.
+No sgdisk is needed since U-Boot creates the table itself, so unlike the
+other tests here this one has no requiredtool marker. The number of entries
+comes from the build config rather than being hardcoded to 128, so the
+expected LBAs are recomputed for builds that set
+CONFIG_EFI_PARTITION_ENTRIES_NUMBERS differently.
 
-Fixes: 7a598e633a53 ("test/py: tests: gpt: add test_gpt_write_part_type")
+Unbind the device at the end. Every test in this file binds the label '0'
+and none of them unbinds it, which works only because they all bind the
+same kind of device; this one does not, so leaving a 4096-byte device
+behind would change what the next test sees.
+
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- test/py/tests/test_gpt.py | 1 +
- 1 file changed, 1 insertion(+)
+ test/py/tests/test_gpt.py | 119 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 119 insertions(+)
 
 diff --git a/test/py/tests/test_gpt.py b/test/py/tests/test_gpt.py
-index e6d8792ac1fc..fb4c8ba67d48 100644
+index fb4c8ba67d48..ef592f4d22a9 100644
 --- a/test/py/tests/test_gpt.py
 +++ b/test/py/tests/test_gpt.py
-@@ -338,6 +338,7 @@ def test_gpt_write(state_disk_image, ubman):
- def test_gpt_write_part_type(state_disk_image, ubman):
-     """Test the gpt command with part type uuid."""
+@@ -6,6 +6,7 @@
  
-+    ubman.run_command('host bind 0 ' + state_disk_image.path)
-     output = ubman.run_command('gpt write host 0 "name=part1,type=data,size=1M;name=part2,size=512K,type=system;name=part3,size=65536,type=u-boot-env;name=part4,size=65536,type=375a56f7-d6c9-4e81-b5f0-09d41ca89efe;name=part5,size=-,type=linux"')
-     assert 'Writing GPT: success!' in output
-     output = ubman.run_command('part list host 0')
+ import os
+ import pytest
++import struct
+ import utils
+ 
+ """
+@@ -45,6 +46,28 @@ def parse_gpt_parts(disk_str):
+ 
+     return parts
+ 
++# Layout of gpt_header from include/part_efi.h. It is __packed and
++# little-endian, and struct.calcsize() of this is 92, its header_size.
++GPT_HEADER_FMT = '<8sIIIIQQQQ16sQIII'
++GPT_HEADER_FIELDS = (
++    'signature', 'revision', 'header_size', 'header_crc32', 'reserved1',
++    'my_lba', 'alternate_lba', 'first_usable_lba', 'last_usable_lba',
++    'disk_guid', 'partition_entry_lba', 'num_partition_entries',
++    'sizeof_partition_entry', 'partition_entry_array_crc32')
++
++def parse_gpt_header(blob):
++    """Unpack a raw GPT header.
++
++    Args:
++        blob: Bytes starting at the first byte of the header
++
++    Returns:
++        A dict mapping each gpt_header field name to its value
++    """
++    size = struct.calcsize(GPT_HEADER_FMT)
++    return dict(zip(GPT_HEADER_FIELDS,
++                    struct.unpack(GPT_HEADER_FMT, blob[:size])))
++
+ class GptTestDiskImage(object):
+     """Disk Image used by the GPT tests."""
+ 
+@@ -93,6 +116,36 @@ class GptTestDiskImage(object):
+         cmd = ('cp', persistent, self.path)
+         utils.run_and_log(ubman, cmd)
+ 
++class BlankDiskImage(object):
++    """Zero-filled disk image with no partition table on it."""
++
++    def __init__(self, ubman, size=4 * 1024 * 1024):
++        """Initialize a new BlankDiskImage object.
++
++        Args:
++            ubman: A U-Boot console.
++            size: Image size in bytes. Must be a multiple of the block size
++                the image is later bound with.
++
++        Returns:
++            Nothing.
++        """
++
++        self.size = size
++        self.path = os.path.join(ubman.config.result_dir,
++                                 'test_gpt_blank_disk_image.bin')
++        ubman.log.action('Generating ' + self.path)
++        with open(self.path, 'wb') as fd:
++            fd.truncate(size)
++
++@pytest.fixture(scope='function')
++def blank_disk_image(ubman):
++    """pytest fixture to provide an empty BlankDiskImage object to tests.
++    This is function-scoped because it uses ubman, which is also
++    function-scoped."""
++
++    return BlankDiskImage(ubman)
++
+ @pytest.fixture(scope='function')
+ def state_disk_image(ubman):
+     """pytest fixture to provide a GptTestDiskImage object to tests.
+@@ -330,6 +383,72 @@ def test_gpt_write(state_disk_image, ubman):
+     output = ubman.run_command('gpt guid host 0')
+     assert '375a56f7-d6c9-4e81-b5f0-09d41ca89efe' in output
+ 
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.buildconfigspec('cmd_gpt')
++@pytest.mark.buildconfigspec('cmd_part')
++def test_gpt_write_4k_sectors(blank_disk_image, ubman):
++    """Test the GPT layout written to a device with 4096-byte sectors.
++
++    The partition entry array takes up fewer blocks on a device with large
++    sectors, and the backup array has to end immediately before the backup
++    header in the last block whatever the block size is.
++    """
++
++    blksz = 4096
++    entry_sz = 128
++    nblocks = blank_disk_image.size // blksz
++    entries = int(ubman.config.buildconfig.get(
++        'config_efi_partition_entries_numbers', 128))
++    pte_blocks = -(-entries * entry_sz // blksz)
++
++    first_usable = 2 + pte_blocks
++    last_usable = nblocks - pte_blocks - 2
++
++    ubman.run_command(f'host bind 0 {blank_disk_image.path} {blksz}')
++
++    output = ubman.run_command('gpt write host 0 "name=all,size=0"')
++    assert 'Writing GPT: success!' in output
++    output = ubman.run_command('gpt verify host 0')
++    assert 'Verify GPT: success!' in output
++
++    output = ubman.run_command('part list host 0')
++    assert f'0x{first_usable:08x}\t0x{last_usable:08x}\t"all"' in output
++
++    with open(blank_disk_image.path, 'rb') as fd:
++        data = fd.read()
++
++    # The primary header sits in block 1 and describes the whole layout
++    prim = parse_gpt_header(data[blksz:])
++    assert prim['signature'] == b'EFI PART'
++    assert prim['my_lba'] == 1
++    assert prim['alternate_lba'] == nblocks - 1
++    assert prim['partition_entry_lba'] == 2
++    assert prim['first_usable_lba'] == first_usable
++    assert prim['last_usable_lba'] == last_usable
++    assert prim['num_partition_entries'] == entries
++    assert prim['sizeof_partition_entry'] == entry_sz
++
++    # The backup header sits in the very last block...
++    bkp = parse_gpt_header(data[(nblocks - 1) * blksz:])
++    assert bkp['signature'] == b'EFI PART'
++    assert bkp['my_lba'] == nblocks - 1
++    assert bkp['alternate_lba'] == 1
++    assert bkp['first_usable_lba'] == first_usable
++    assert bkp['last_usable_lba'] == last_usable
++
++    # ...and its entry array must end immediately before it
++    assert bkp['partition_entry_lba'] == last_usable + 1
++    assert bkp['partition_entry_lba'] + pte_blocks == nblocks - 1
++
++    # The backup array holds the same entries as the primary one
++    pte_len = entries * entry_sz
++    bkp_off = bkp['partition_entry_lba'] * blksz
++    assert data[bkp_off:bkp_off + pte_len] == data[2 * blksz:2 * blksz + pte_len]
++
++    # Unlike the other tests here this one binds a device with a non-default
++    # block size, so drop it again rather than leave it for whatever runs next
++    ubman.run_command('host unbind 0')
++
+ @pytest.mark.boardspec('sandbox')
+ @pytest.mark.buildconfigspec('cmd_gpt')
+ @pytest.mark.buildconfigspec('cmd_part')
 
 -- 
 2.55.0
