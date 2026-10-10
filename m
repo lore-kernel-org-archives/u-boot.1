@@ -4,184 +4,173 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D05C5CA9EC7
-	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 13:12:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FF49CA9EC3
+	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 13:14:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9AED260A40;
-	Sat, 10 Oct 2026 13:12:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 311C36064C;
+	Sat, 10 Oct 2026 13:14:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hElmOo0w69Te; Sat, 10 Oct 2026 13:12:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 948816090B
+ id amlIw-j2xvT0; Sat, 10 Oct 2026 13:14:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org F296260603
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791637949;
-	b=WmpMGWI6nzL78cSmjBImmZD67nGYDgP8mGx4S4W2IURL7vZikAb37js3Qoq4TNoLhiZ9
-	 SucaM/PTWYlHOKz4PfdgAfaB6DM5ubj8jDVqu9UgQML4T+fqOmrctBVjSqjDRMmOXSCXN
-	 KTIizdaZKyR8sS9sNiMXfiNmhVwXxWwYEA1bNMLFg1sbg/M6aq1Mqq0p/EaD0UEi7n8mq
-	 gH96MQVEj5nJ8/9h/ehwa68l/IKE7hL5W9ZJe/nxaCDRXNQL17sRE9iXYXkFsCSDVx9iE
-	 +7nkTxb5RS/W6VxtTEnUBtYwp0PNrQFyHYieaTM9HXjLLZdR1TVV74U/vR2Oyc40VLg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791638084;
+	b=Y44+6av4K8rpbNySPJV9CrJWNkVBRIS6BsWZ3bsZNmVFzCknQU+IayNY+uRcHrGNiwpA
+	 yEnmtXZ8KVZnTBePY9Jogb6/Oq9b75kLUkNPSohmyKniQ9ocwLzI2kzxPAJKCq25IvS8F
+	 sJCjzGjL+riru6MP/+vZ6oNZk0Tx21HYSjF8X9QqnmcsGxm89MxGSai707G4GgSGhpTIF
+	 rpyESC2Q4xXyzTaJAg4OYRs6uvvctjT/d3voS9z9RqTg+mRuMtyY7CWy9SnJkfyp/KIdQ
+	 LmV/B3Wfc3DN4/L813Kris68qzqTQLIxllP+BcofDYl2l8tO84iF5DtLO8gosH26e/g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791637949;
+	c=relaxed/relaxed; t=1791638084;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=eQna9oYg7niZHXc8+sYUmaB9BwYMO1qLhpvZVXwhspQ=;
-	b=nL06ES0zZ6oU9wwVKvrivGYRy/grkn9erdVUvgARprzheGrM1316esr+wRA978aiaT61
-	 yr+CLmOy6Dx011Fim2t8rdOeyr8u4IbJDAQ0atFAobfxGsh3Y73YFNzAz9jbDYUAwE7Ks
-	 E8x8ZplZ/NAw19MHnPhgU11deca4TTyfPDJCIeui7XaGvZyl0/pZpMZ+9jZUc7+FqEwq1
-	 KZ3yIPYGF2twmy6Js8T5QoCjSmMT5h6cHc9pjvZQYpASAo9DCUNq4JD2jCuHdlmKSLAgp
-	 vAqM+cMIs2lV6MIhHSZsTvcbxMB6qU8+mZq97MEEP0WPrU9KJsCEuTc1IPK+OBAhNeA==
+	bh=jh5AJMBeHMfUqWhGlQprkmb4niSgBesI5JlUNVXlW5Q=;
+	b=mfgLN9n9pVnzJQO0ZN89uZQ0IcEVUz7PNje7oDqlFyQcMKlZeAixuFzkvFt717C1Um63
+	 TV8s/g6aeiF/BL6DV+pG3x/xkGFcydvgxeXlFC1j0wDJzEYWujX4wUGvPbvFp4eXvw64K
+	 HKk7Plvzfq/B+xIiKXBCAFSAjsGK9RBFPTNNokQxRxUmei3EXx4rQRrea8t2WLY2FU+jr
+	 VH2+KX+wsVtLymf5WqjzbLN+T7RVZtby2JFPIU0qH4QvifWq2aWC+8gjFBSPKZVP96jJP
+	 8IZs4rCgW1LMxySipi+RCsRk+6FHzVaBIA+HQa3YMKQWYFsJMUufPpQPgH38JnH/qrw==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791637949;
-	bh=eQna9oYg7niZHXc8+sYUmaB9BwYMO1qLhpvZVXwhspQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791638084;
+	bh=jh5AJMBeHMfUqWhGlQprkmb4niSgBesI5JlUNVXlW5Q=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=cOAZLzf76aok6PpkXMErLd2mtouz5Rx7wKYQtAHrMTuujCqOqTql8ucZLHIvvjJh3
-	 HAdaunheDzKA0fxMinjfGo1Ay1Wd39u/lWOOvOjDcvbZG6ZnFWT4ABO6oDbrvGByZp
-	 pSEi0T/GZWtqGHeTTO0XwUkzDevERrgoTd2gtOR/q3atDuzB9oZtMSsMd3I9dXNa4E
-	 47i6GeNDwspvRDY9KUCUIft3js67XJqD0LxXDjr7wQLH1OsIJ2dXzllFbD6oRvnb1Z
-	 F7wDtIoQ5hCRwnfqpUM2uQd9awsVXF73e7/HlRayn78Ie8mz82MQVkKtlak/DIo2vi
-	 /KyeyWW1Sm2PQ==
+	b=qYuoXzbgwmAVlCUe5Xy7UBWTo8sNozwoZCwtcO4s9Iy9IHtm0hQS/iIPeIyTL5ZA+
+	 yGljkxmDtNtuQCyZR3OHaBlzAjOMIncCK/Fd8RwMDLnkObdWzvNWnHBLdON9FHQyod
+	 82o9Oegls6RqNQXuwWnsSf0gspZJmPjtnUtIklrhSMkyI8fBiG0xbvCTqNwRPsdiW1
+	 kK4LwzXBfggY8zX+dpkkS45j/AaDi3evD0FhOoHAGcgSSPhOu8S27cvDi7b0oK5Yro
+	 HFYN8S79SWVTkBtCGDos/m/C/9iFnWglqdbYiwWTmsGxpiVAxe1GZGnP64S435LDpB
+	 DbzMACJ6Eh9JQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 948816090B;
-	Sat, 10 Oct 2026 13:12:29 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1CE4D22B
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 13:12:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id F296260603;
+	Sat, 10 Oct 2026 13:14:43 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id CA1E71DE
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 06:17:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id F22124080E
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 13:12:20 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id AFBB8400CC
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 06:17:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qE6gJqQzpN3J for <u-boot@lists.u-boot-project.org>;
- Sat, 10 Oct 2026 13:12:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B7B0540809
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::630"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791637940;
- b=duRGPsLHBq24FgIJ7t3ERK9pbZQBcurqvFd6TPD1bnNDXsMzjBssAO+pHx1x5Ts9uaU4
- VB3eiwXWxSbOrJemMWm9Zvc4bl7kF/aYi1joFx9Dng8VbrzvKxtmiRkvh7ZUMt8vrjvc+
- PhczMt8cZy0wYMdvPyzwYaPlLYuX8k+05K9lIFxz0KNNA1l7UVfTSVbURNT2HZFpgBgZH
- woKAw1qevKOaTKNzCV19+1VKVcClPHO6JW4vHpuW5w5+gU7JW2TWzHIM9OYhX05zoI952
- EMUqNuyn18QczW9mF5TcK7YzJo7Wbfi0xAInTOV/wrk1EiEysciog8qCAkDvYsxFAbQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cnC8jO65j1xM for <u-boot@lists.u-boot-project.org>;
+ Sat, 10 Oct 2026 06:17:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 700FD40004
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::42b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791613032;
+ b=O0lYBp/kERpi1uxixBxSULt8pYcvcS1OXjxY134CpKQgF0wCBl/wHyQsxQqQu/4gOzqc
+ aCBtD/UxKhBMk2sTqYJdbc0Zx5oH/iITkJD1b0seDWe/cj08nfzFIFy26C8jPyyk/jI6+
+ +ClsaQvWkFT9jPP9Q2wE0a3noDdYKGZzI4k9RTbjNz0LuLpcgL/luwl007w0TLeNkLb22
+ AdoJIUbxFyVzbnNlEHsGWbalA5poWfI2eN8p8FkYkBFdMM3LCVPn8o3+QCxDzE18bRuzB
+ oT8JEzdSZKyss6DjZxGIxWIFH3ahfyWOfd3N6R4HvQG4TDZACjMxmcu+sxDMUNJV1zQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791637940;
+ c=relaxed/relaxed; t=1791613032;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
- References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
- X-Developer-Key;
- bh=eQna9oYg7niZHXc8+sYUmaB9BwYMO1qLhpvZVXwhspQ=;
- b=Cp3r6lqipsMar8MxUXyc8Fmv5yaZRsbOsDZ2xqE6nrEtaPufcP4aIQD/U7AjbOH4rdov
- 2t93B6HzPUrgqXmr5bqlYz00bhEvcXQWcoatNHO1pjc8hzgV6Ghf5s5zD9sAFvvCV0zTy
- XLnvVk9OYBw8cJt76GlCgHwWeUBQmvuBlZLT5tA1xKs/2nth9QzUVvsyuIBfY0iiebD+t
- 4c+1gtmVgniy7v+ZjRuauy9mxWCvCpsLAylBaEyGbbhUPT24lHLZf97SuWS2d+O1jKwaw
- nz5JdlEoznp5SwTzlu0+YTJTf3fgazL6RQY2lxWd/GQBg2nPQ7Gfi2febFj53qfz8Dw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=flipper.net;
- dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=mS82VJ8j; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::630"
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+ MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+ From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ bh=jh5AJMBeHMfUqWhGlQprkmb4niSgBesI5JlUNVXlW5Q=;
+ b=SXlliOGwSjEX1t1Qq9mYFqXkfm717Yqfk4y+h8cVINdWLu2lA5EPsgxAJNDbn8IsV6tX
+ NA/ZNj6aW5FnMo72pFrNo9ybA+ay42wLWWQ88JEHni79VVwtt9yalqWMWtBtTwqj2awar
+ VU8SiyGpcaekc2P+9ia4onwX8R+QXx6WnVpmiTkn3CQNCApR4kGi0v96ghqLwjkYmv3QX
+ NR3lPNg/oimS5cYOEAKEffLgwWCNuyjm4MW1H/42Gqoy2TrqNaAwxv3HgP4hF4I+VXy6B
+ n2ICiZei138w5XZz0JDdJz1S1rHtLJKOauRTby4zYE/CkMlXHcpr3SEQyLRAPc4xuPA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=gmail.com;
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=sgA5oDol; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::42b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
- header.a=rsa-sha256 header.s=google header.b=mS82VJ8j
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B7B0540809
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 13:12:19 +0000 (UTC)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c20ce3c118aso143108366b.0
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 06:12:19 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::42b; helo=mail-pf1-x42b.google.com;
+ envelope-from=sycamoremoon376@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=sgA5oDol
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 700FD40004
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 06:17:11 +0000 (UTC)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-891d19d00ceso90591b3a.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 09 Oct 2026 23:17:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1791637937; x=1792242737;
+ d=gmail.com; s=20251104; t=1791613031; x=1792217831;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=eQna9oYg7niZHXc8+sYUmaB9BwYMO1qLhpvZVXwhspQ=;
- b=mS82VJ8jlWfVMyY87pssydFP0gkkRxFhQb12BgliVs6kf38tlBCFF/ZTSClGJGEGmV
- WHXXxFdlwOU8cUyPRTwkBB5Im5w1ICZ0Zvk9IyFJSrc2Wm7BsI/uA20fqlF4IXbFX05p
- CvuB+tSc3F+LsInWRSecO+e7zoRfs5YCJGAUBkp8E/8qnrJjzobnmJBD/qs4t1DKjYiW
- de7RafRJbEcDc+BZdGnbWh8hMzffGDJ94q5b/TkpF3ZklGGULF+JsnkOwCGAq6duUtN2
- s8sMGvHWZoXuJaChbUJ7z2CgwHe8zceCkFqwuORIXDQYwqr9EcL5IpfU2rTr910hX7k0
- PBZw==
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=jh5AJMBeHMfUqWhGlQprkmb4niSgBesI5JlUNVXlW5Q=;
+ b=sgA5oDolTZbCvWsPuH0dQyUzXpz8li4PDhXaEDUnj+vdw6IXq+DLfAPgci8zo/rGFI
+ PHoiBEy3syL7jQTOyv8hSif0cWeLtAuMCyH0aL8kkG261dhgL0IejQ5BwGUmPVfz9TAm
+ sWlmByRtHdSYAU0enNcd3quohIADfThR/uqrh0oAO5XJBnNZzkLHb+MaRcjzD4hZFG2T
+ B3W6liWN0I4ua+CTYMiNPl2D6O7N0xhtbEH28KBNgBL7/VFbGB3hCU9r892vLPG33UGr
+ /Qf7I8xtIUbW/jjpdnbbJAVUd3YkPMiDtFLHX9ko9IB1/STwXeQJcg8pfuWoDnzBhQla
+ l2xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791637937; x=1792242737;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=eQna9oYg7niZHXc8+sYUmaB9BwYMO1qLhpvZVXwhspQ=;
- b=bY9Q5wjrP3EtnIRw03lXDcnKpFzIfaY1VWXhgZd3ivOpPye9AoRtHC/RVw1n5tUcEh
- Myly0oPRAHOgOg49xL8hxqc8qlAh6OEmJmt3TscWOysI2+Rx4LFfo76Q8OlRbix8C2As
- 04nQvPW8AElUYtJvQC0TMAkLRyCtUu0GrbnkCzvPFVo5EUf6dDUfWpWVqaslGDqVMoV6
- C8Tl6RuROxoG87k2g3EE9KvjRno1/V4yiPwxwJhkhgJqlNHND44C25+dHRGejzY4uvEd
- nyrUjJWSS5m35UPSFfhxaV9fEGXa5MvQmujHfsR0sO+/WrPrTgBHY6Tel1+bUXmjcEd8
- SxFg==
-X-Gm-Message-State: AFq9FYKxe7wYPQxGhgnPG6IHbylYDkBAw9OwHpB8kPBk5rpnFOprQinP
- 6/wsl1rzyQoVIVAfQWzCX7PIDxwyqCLTcwvN4Lg70wMcvcmM9TRfWZX7Mx+ouHmJjUo=
-X-Gm-Gg: AYBFou36z5cm87ni0g/V5WVM4AYkhTJwPZB4wJO60TI+2+BGrRUJSB3diLU7HUlvtlS
- cDEvfeWAIJVsNB+bncSwVpyn7fbh6bE25CsDT79e31o6NkORqGbKG1KYk74NVRuUxAEbhEZRofZ
- hukM/3AG+Lg33qqlUof+ke8Yi1KrnNZQUfDJ+I8dFf5wpBjngI+7q7ktev2kn4A5df+zcR0IpWr
- /5g04M1NrCipKHRZVlX28rENKG+g/2tG5sdiooYeEvcnQ1v0dyl7jL7XhqAi/2QIP9VyMLI6yp9
- W1NMdMfXQfz+MtML/VbMk1Po57ixAxQCol2z6sAjARjgu1mbVEzfyg/VZIdmz5w6gq08Yr5K0vk
- rwYBUj5mQVfYDaDob6BhgNwm2XWJqq3R33EAI290uqj91dscbEptD+igLnD1UCyqt7CMIxfU+3A
- 7gfrQ9DGv1o4ZFeoKuXtHxJlXKwTXX+7zYmLvmTVFUqEiJMHNucLz3i8dOx6Wsy2+ikXbE8FPXk
- 4X+vnldfYYM2TZyATdo
-X-Received: by 2002:a17:907:7210:b0:c2d:d4dd:8d0 with SMTP id
- a640c23a62f3a-c31a702e5c8mr507152566b.16.1791637937292; 
- Sat, 10 Oct 2026 06:12:17 -0700 (PDT)
-Received: from alchark-surface.localdomain ([185.209.196.154])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c31a9a71d42sm240051766b.32.2026.10.10.06.12.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 Oct 2026 06:12:17 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Sat, 10 Oct 2026 17:11:44 +0400
-Subject: [PATCH v3 7/7] test: py: gpt: Test the GPT layout on a device with
- 4096-byte blocks
+ d=1e100.net; s=20260707; t=1791613031; x=1792217831;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=jh5AJMBeHMfUqWhGlQprkmb4niSgBesI5JlUNVXlW5Q=;
+ b=2rtWiUXyl2BCoF/5uzdIN6wgT1w9y8agE8Lo16JPVZPrioMUrSD7IHpUJMSMK0FrP8
+ u2Xcr9OfIshNKWgyG1QEDSNWD/c8NzvhRFVUMvYcw3BT27jotmDq+OmQ4Oxgw8yfnk72
+ Yb4jh2L7DRwAWax7VqC7EOuNiYPUOB9DeJtNAo6rl9KrRnZFSs6AXue7s19lcA3W57Sn
+ TdJhMQHCTLi3xjupP25aVun6Sx4aQMdg0i5ckyeKyPu6xoaPu0VgkPYR52/l5SqVA33q
+ K0JkRb5dVZCCnCVKcCH7YiegWlnRn+KvVLndd/RhoSmclnAOulROt2BMtu+wJLJ7sg5A
+ xzOQ==
+X-Gm-Message-State: AFq9FYJZSaf/T3Q38UjLXD2zxwVnJqOHJo57pKojt4/fm4p4PnoExaS1
+ jWm4hZ/sG+ljZmLtF1Y/WcIuVESNcsayWlwXAYSCalrbM64YTgBjpX+n
+X-Gm-Gg: AYBFou37Xwf2ydfE74hdoXxJfDgEhgt08zS3MVMxqc4lGwBsslHBCk8C4HvisL8tTag
+ I5hxutf5D/OIQnnNPyWz9UJdgMg5i1aKCf0x/2WlquhBnJ2SRmm/MHvMbgu54MpB3YcKn7cy/Hg
+ 2VFm5G/XyK/W+/GBtCZzDHVhcrRn8Qrr92KmkOR5gpe78Ae6SNJZmG1p2srZGSjdWebu+qPh7Na
+ exOR3jVoo6qPXGem8SBEsQRi4ZtwCxV0tQSz0pSF8SIF0HL9NbwTFJvvZuxk4VUvtfmVmYKe8IM
+ Fxe/uv9+RwEvcepUsCZs6FGRiPgnCTjiso6XwTzH1Y7zVCS7a+XOA5BPoFAPzrTtSywom+ozuWX
+ dpXW53LmUWfp+ztT2ZXx2r7u0u07Xxy0XEXT7u05R8h3zDD4Rmq+8lWbwtyd+AqH3P63QNHDFd6
+ HdMc7cKDnyHZOfAeZRXLNPvn2DoWl3x2Qnz2hXBA3+u7SYrCQh58S4ijJWJJ0HV5iH+ZZ0kHQHK
+ 0KobdcwTg==
+X-Received: by 2002:a05:6a20:a10a:b0:3e0:e46f:7bab with SMTP id
+ adf61e73a8af0-3e16be08710mr3273695637.32.1791613031200; 
+ Fri, 09 Oct 2026 23:17:11 -0700 (PDT)
+Received: from [0.0.0.0] ([20.89.104.82]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-896c3ecb01dsm1926639b3a.36.2026.10.09.23.17.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 09 Oct 2026 23:17:10 -0700 (PDT)
+Message-ID: <a57e47d3-fe8c-44dc-8afe-2c256ed49d71@gmail.com>
+Date: Sat, 10 Oct 2026 14:17:07 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261010-gpt-4k-v3-7-89fd290f85cb@flipper.net>
-References: <20261010-gpt-4k-v3-0-89fd290f85cb@flipper.net>
-In-Reply-To: <20261010-gpt-4k-v3-0-89fd290f85cb@flipper.net>
-To: u-boot@lists.u-boot-project.org, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Alexey Charkov <alchark@flipper.net>, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Denis Mukhin <dmukhin@ford.com>, Simon Glass <sjg@chromium.org>, 
- Paul Burton <paulburton@kernel.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Andre Przywara <andre.przywara@arm.com>, Quentin Schulz <u-boot@0leil.net>, 
- Kever Yang <kever.yang@rock-chips.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6987; i=alchark@flipper.net;
- h=from:subject:message-id; bh=Ao/wOLPIZOxyG7gi4exFpVOhhnr4peoffJfqNQ1Yitc=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWSdslzEpq5WeMje02a2StVv7i1CUce63pkzWp9ecZDvY
- 5pgZY53x0QWBjEuBksxRZa535bYTjXim7XLw+MrzBxWJpAh0iINDEDAwsCXm5hXaqRjpGeqbahn
- aKRjrGPEwMUpAFOt+J+R4WWv3IkJZ1P+tne+nTn7JBerUQLDSq8pa5Kibrj+jZAP8WRkuKYveqS
- mLHvm20DhCacETqwp+de9tOf7U8OneREf3wvc5QYA
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] mmc: k1: let the SPL read SD cards more than one
+ block at a time
+To: Dave Klotz <DaveWK225@protonmail.com>, Yixun Lan <dlan@kernel.org>,
+ Eric Chung <eric.chung@riscstar.com>, Peng Fan <peng.fan@nxp.com>
+Cc: u-boot@lists.u-boot-project.org, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>, Tom Rini
+ <trini@konsulko.com>, u-boot-spacemit@groups.io
+References: <cover.1790975596.git.DaveWK225@protonmail.com>
+ <20261005T134748-0400.mmc-v2-cover.DaveWK225@protonmail.com>
+ <20261005T135733-0400.mmc-v2-0002.DaveWK225@protonmail.com>
+Content-Language: en-US
+From: Zixian Zeng <sycamoremoon376@gmail.com>
+In-Reply-To: <20261005T135733-0400.mmc-v2-0002.DaveWK225@protonmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 10 Oct 2026 13:14:42 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -195,182 +184,255 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Bind a blank image with a 4096-byte logical block size, let U-Boot write a
-GPT to it, and then check the result both through 'part list' and by
-unpacking the primary and backup headers straight out of the image. The
-interesting assertion is that the backup partition entry array ends
-immediately before the backup header in the last block, which is what
-regresses when the array size is computed with a hardcoded block count.
+Hi, Dave:
 
-No sgdisk is needed since U-Boot creates the table itself, so unlike the
-other tests here this one has no requiredtool marker. The number of entries
-comes from the build config rather than being hardcoded to 128, so the
-expected LBAs are recomputed for builds that set
-CONFIG_EFI_PARTITION_ENTRIES_NUMBERS differently.
+On 2026/10/6 02:01, Dave Klotz wrote:
+> spacemit_sdhci_get_b_max() limits every SD read in the SPL to a single
+> block, so loading a ~1 MiB u-boot.itb from a card takes about 2000
+> separate commands. The controller handles multi-block PIO reads in the
+> SPL: the OrangePi RV2 has loaded U-Boot from microSD with them through
+> the v2026.07 and v2026.10 trees.
+>
+> Drop the limit and use the host's b_max.
+>
+> The merged v13 cover retains the v9 changelog entry choosing single-
+> block SD reads in SPL. This reverses that deliberate policy for the
+> recorded RV2 SPL boot use case; no general multi-card reliability claim
+> is made. K1 does not advertise MMC_CAP_CMD23, so the MMC core sends
+> CMD12 after a multi-block read rather than requiring CMD23. Additional
+> card models, cold boots and transfer-error recovery remain required.
+>
+> Signed-off-by: Dave Klotz <DaveWK225@protonmail.com>
+> Reviewed-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+> ---
+> Validation: unchanged executable change from v1; exact-base source
+> replay and checkpatch pass. The corrected combined integration, with
+> separate clock/MMC and DDR relocation fixes, passed SD SPL/FIT and
+> automatic NVMe EFI boot on the 4 GiB RV2 in a warm-boot trial. This is
+> an integration result, not an isolated test of this patch.
+>
+>   drivers/mmc/spacemit_sdhci.c | 11 -----------
+>   1 file changed, 0 insertions(+), 11 deletions(-)
+>
+> diff --git a/drivers/mmc/spacemit_sdhci.c b/drivers/mmc/spacemit_sdhci.c
+> index 6488ae0fdb..4284553177 100644
+> --- a/drivers/mmc/spacemit_sdhci.c
+> +++ b/drivers/mmc/spacemit_sdhci.c
+> @@ -324,16 +324,6 @@
+>   	return 0;
+>   }
+>   
+> -static int spacemit_sdhci_get_b_max(struct udevice *dev, void *dst,
+> -				    lbaint_t blkcnt)
+> -{
+> -	struct mmc *mmc = mmc_get_mmc_dev(dev);
+> -
+> -	if (IS_ENABLED(CONFIG_SPL_BUILD) && mmc && IS_SD(mmc))
+> -		return 1;
+> -	return mmc->cfg->b_max;
+> -}
+> -
+>   static void spacemit_sdhci_set_control_reg(struct sdhci_host *host)
+>   {
+>   	struct mmc *mmc = host->mmc;
+> @@ -574,7 +564,6 @@
+>   
+>   	spacemit_mmc_ops = sdhci_ops;
+>   	spacemit_mmc_ops.wait_dat0 = spacemit_sdhci_wait_dat0;
+> -	spacemit_mmc_ops.get_b_max = spacemit_sdhci_get_b_max;
+>   
+>   	ret = clk_get_bulk(dev, &plat->clks);
+>   	if (ret) {
+Using the current version of the next branch u-boot (ed869863c7),
+with your MMC patch series applied.
+Since the SPI controller is not enabled by default on the BananaPi-F3,
+I also applied another patch series:
+Link: 
+https://lore.kernel.org/u-boot/cover.1790976767.git.DaveWK225@protonmail.com/ 
 
-Unbind the device at the end. Every test in this file binds the label '0'
-and none of them unbinds it, which works only because they all bind the
-same kind of device; this one does not, so leaving a 4096-byte device
-behind would change what the next test sees.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
----
- test/py/tests/test_gpt.py | 119 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 119 insertions(+)
+I tested u-boot SPL with three SD cards on a BananaPi-F3 and found
+a reproducible issue, the specific error I encountered is spl: partition 
+error (Error: -38)
+At the meantime, when i was revert the commit:
+mmc: k1: let the SPL read SD cards more than one block at a time
+the error has gone. Same SD card, same operation steps.
+Maybe BananaPi-F3 do not support read SD cards more than one block at a 
+time?
 
-diff --git a/test/py/tests/test_gpt.py b/test/py/tests/test_gpt.py
-index fb4c8ba67d48..ef592f4d22a9 100644
---- a/test/py/tests/test_gpt.py
-+++ b/test/py/tests/test_gpt.py
-@@ -6,6 +6,7 @@
- 
- import os
- import pytest
-+import struct
- import utils
- 
- """
-@@ -45,6 +46,28 @@ def parse_gpt_parts(disk_str):
- 
-     return parts
- 
-+# Layout of gpt_header from include/part_efi.h. It is __packed and
-+# little-endian, and struct.calcsize() of this is 92, its header_size.
-+GPT_HEADER_FMT = '<8sIIIIQQQQ16sQIII'
-+GPT_HEADER_FIELDS = (
-+    'signature', 'revision', 'header_size', 'header_crc32', 'reserved1',
-+    'my_lba', 'alternate_lba', 'first_usable_lba', 'last_usable_lba',
-+    'disk_guid', 'partition_entry_lba', 'num_partition_entries',
-+    'sizeof_partition_entry', 'partition_entry_array_crc32')
-+
-+def parse_gpt_header(blob):
-+    """Unpack a raw GPT header.
-+
-+    Args:
-+        blob: Bytes starting at the first byte of the header
-+
-+    Returns:
-+        A dict mapping each gpt_header field name to its value
-+    """
-+    size = struct.calcsize(GPT_HEADER_FMT)
-+    return dict(zip(GPT_HEADER_FIELDS,
-+                    struct.unpack(GPT_HEADER_FMT, blob[:size])))
-+
- class GptTestDiskImage(object):
-     """Disk Image used by the GPT tests."""
- 
-@@ -93,6 +116,36 @@ class GptTestDiskImage(object):
-         cmd = ('cp', persistent, self.path)
-         utils.run_and_log(ubman, cmd)
- 
-+class BlankDiskImage(object):
-+    """Zero-filled disk image with no partition table on it."""
-+
-+    def __init__(self, ubman, size=4 * 1024 * 1024):
-+        """Initialize a new BlankDiskImage object.
-+
-+        Args:
-+            ubman: A U-Boot console.
-+            size: Image size in bytes. Must be a multiple of the block size
-+                the image is later bound with.
-+
-+        Returns:
-+            Nothing.
-+        """
-+
-+        self.size = size
-+        self.path = os.path.join(ubman.config.result_dir,
-+                                 'test_gpt_blank_disk_image.bin')
-+        ubman.log.action('Generating ' + self.path)
-+        with open(self.path, 'wb') as fd:
-+            fd.truncate(size)
-+
-+@pytest.fixture(scope='function')
-+def blank_disk_image(ubman):
-+    """pytest fixture to provide an empty BlankDiskImage object to tests.
-+    This is function-scoped because it uses ubman, which is also
-+    function-scoped."""
-+
-+    return BlankDiskImage(ubman)
-+
- @pytest.fixture(scope='function')
- def state_disk_image(ubman):
-     """pytest fixture to provide a GptTestDiskImage object to tests.
-@@ -330,6 +383,72 @@ def test_gpt_write(state_disk_image, ubman):
-     output = ubman.run_command('gpt guid host 0')
-     assert '375a56f7-d6c9-4e81-b5f0-09d41ca89efe' in output
- 
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('cmd_gpt')
-+@pytest.mark.buildconfigspec('cmd_part')
-+def test_gpt_write_4k_sectors(blank_disk_image, ubman):
-+    """Test the GPT layout written to a device with 4096-byte sectors.
-+
-+    The partition entry array takes up fewer blocks on a device with large
-+    sectors, and the backup array has to end immediately before the backup
-+    header in the last block whatever the block size is.
-+    """
-+
-+    blksz = 4096
-+    entry_sz = 128
-+    nblocks = blank_disk_image.size // blksz
-+    entries = int(ubman.config.buildconfig.get(
-+        'config_efi_partition_entries_numbers', 128))
-+    pte_blocks = -(-entries * entry_sz // blksz)
-+
-+    first_usable = 2 + pte_blocks
-+    last_usable = nblocks - pte_blocks - 2
-+
-+    ubman.run_command(f'host bind 0 {blank_disk_image.path} {blksz}')
-+
-+    output = ubman.run_command('gpt write host 0 "name=all,size=0"')
-+    assert 'Writing GPT: success!' in output
-+    output = ubman.run_command('gpt verify host 0')
-+    assert 'Verify GPT: success!' in output
-+
-+    output = ubman.run_command('part list host 0')
-+    assert f'0x{first_usable:08x}\t0x{last_usable:08x}\t"all"' in output
-+
-+    with open(blank_disk_image.path, 'rb') as fd:
-+        data = fd.read()
-+
-+    # The primary header sits in block 1 and describes the whole layout
-+    prim = parse_gpt_header(data[blksz:])
-+    assert prim['signature'] == b'EFI PART'
-+    assert prim['my_lba'] == 1
-+    assert prim['alternate_lba'] == nblocks - 1
-+    assert prim['partition_entry_lba'] == 2
-+    assert prim['first_usable_lba'] == first_usable
-+    assert prim['last_usable_lba'] == last_usable
-+    assert prim['num_partition_entries'] == entries
-+    assert prim['sizeof_partition_entry'] == entry_sz
-+
-+    # The backup header sits in the very last block...
-+    bkp = parse_gpt_header(data[(nblocks - 1) * blksz:])
-+    assert bkp['signature'] == b'EFI PART'
-+    assert bkp['my_lba'] == nblocks - 1
-+    assert bkp['alternate_lba'] == 1
-+    assert bkp['first_usable_lba'] == first_usable
-+    assert bkp['last_usable_lba'] == last_usable
-+
-+    # ...and its entry array must end immediately before it
-+    assert bkp['partition_entry_lba'] == last_usable + 1
-+    assert bkp['partition_entry_lba'] + pte_blocks == nblocks - 1
-+
-+    # The backup array holds the same entries as the primary one
-+    pte_len = entries * entry_sz
-+    bkp_off = bkp['partition_entry_lba'] * blksz
-+    assert data[bkp_off:bkp_off + pte_len] == data[2 * blksz:2 * blksz + pte_len]
-+
-+    # Unlike the other tests here this one binds a device with a non-default
-+    # block size, so drop it again rather than leave it for whatever runs next
-+    ubman.run_command('host unbind 0')
-+
- @pytest.mark.boardspec('sandbox')
- @pytest.mark.buildconfigspec('cmd_gpt')
- @pytest.mark.buildconfigspec('cmd_part')
+The issue logs are as follows:
 
--- 
-2.55.0
+⋊> hack@morise ⋊> ~/k/u-boot on k1-dave-mmc ↑ git log --oneline 
+origin/next..HEAD
+6b4af8b1dd8 (HEAD -> k1-dave-mmc) mmc: k1: do not release the shared AXI 
+clock and reset on probe failure
+4114764d716 mmc: k1: let the SPL read SD cards more than one block at a 
+time
+6676ce89521 mmc: k1: handle a missing max-frequency and clk_set_rate()'s 
+return value
+6427189ef33 spacemit: k1: fall back to the other boot devices in SPL
+b58a31797d7 spacemit: k1: do not require a PMIC or an SPI controller in SPL
+⋊> hack@morise ⋊> ~/k/u-boot on k1-dave-mmc ↑ export 
+CROSS_COMPILE=riscv64-linux-gnu- ARCH=riscv
+                                               export 
+DDR=/home/hack/k1/spacemit-firmware/k1/v0.2/ddr_fw.bin
+                                               export 
+SBI=/home/hack/k1/opensbi/build/platform/generic/firmware/fw_dynamic.bin
+⋊> hack@morise ⋊> ~/k/u-boot on k1-dave-mmc ↑ make O=build-fix 
+spacemit_k1_defconfig
+                                               make O=build-fix 
+DDR_FW_FILE=$DDR OPENSBI=$SBI DEVICE_TREE=spacemit/k1-bananapi-f3 
+-j"$(nproc)"
+   GEN     Makefile
+#
+# configuration written to .config
+#
+   GEN     Makefile
+scripts/kconfig/conf  --syncconfig Kconfig
+   CFG     u-boot.cfg
+   GEN     include/autoconf.mk.dep
+   CFG     spl/u-boot.cfg
+   GEN     include/autoconf.mk
+   GEN     spl/include/autoconf.mk
+   GEN     Makefile
+   UPD     include/generated/timestamp_autogenerated.h
+   ENVC    include/generated/env.txt
+   Using .. as source for U-Boot
+   ENVP    include/generated/env.in
+   ENVT    include/generated/environment.h
+   PYMOD   rebuild
+   LDS     u-boot.lds
+   CC      common/version.o
+   AR      common/built-in.a
+   CC      env/common.o
+   AR      env/built-in.a
+   LD      u-boot
+   OBJCOPY u-boot.srec
+   OBJCOPY u-boot-nodtb.bin
+   SYM     u-boot.sym
+   MKIMAGE fit-dtb.blob
+   MKIMAGE u-boot.img
+   CC      spl/common/spl/spl.o
+   MKIMAGE u-boot-dtb.img
+   CAT     u-boot-fit-dtb.bin
+   COPY    u-boot.bin
+   AR      spl/common/spl/built-in.a
+   LD      spl/u-boot-spl
+   OBJCOPY spl/u-boot-spl-nodtb.bin
+   SYM     spl/u-boot-spl.sym
+   CAT     spl/u-boot-spl-dtb.bin
+   COPY    spl/u-boot-spl.bin
+   BINMAN  .binman_stamp
+   OFCHK   .config
+⋊> hack@morise ⋊> ~/k/u-boot on k1-dave-mmc ↑ cd ~/k1/uboot-2022.10/
+⋊> hack@morise ⋊> ~/k/uboot-2022.10 on k1-bl-v2.2.y ◦ cat mainline-fsbl.sh
+SPL=$1
+FSBL=$2
+cd /home/hack/k1/uboot-2022.10
+cp "$SPL" board/spacemit/k1-x/
+python3 tools/build_binary_file.py \
+     -c board/spacemit/k1-x/configs/fsbl_ddr.json \
+     -o "$FSBL"
+rm -f board/spacemit/k1-x/u-boot-spl-ddr.bin
+echo "Mainline SPL is included in $FSBL"
+⋊> hack@morise ⋊> ~/k/uboot-2022.10 on k1-bl-v2.2.y ◦ bash 
+mainline-fsbl.sh /home/hack/k1/u-boot/build-fix/u-boot-spl-ddr.bin 
+/home/hack/k1/uboot-2022.10/mainline-spl/FSBL-dave.bin
+(2026-10-09 21:37:10,279) arch : RISCV64
+(2026-10-09 21:37:10,279) description : spacemit k1x fsbl image
+writing RSA key
+writing RSA key
+Mainline SPL is included in 
+/home/hack/k1/uboot-2022.10/mainline-spl/FSBL-dave.bin
+⋊> hack@morise ⋊> ~/k/uboot-2022.10 on k1-bl-v2.2.y ◦ lsblk /dev/mmcblk0
+NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+mmcblk0     179:0    0 29.7G  0 disk
+├─mmcblk0p1 179:1    0  256K  0 part
+├─mmcblk0p2 179:2    0   64K  0 part
+├─mmcblk0p3 179:3    0    1M  0 part
+├─mmcblk0p4 179:4    0    2M  0 part
+├─mmcblk0p5 179:5    0  256M  0 part
+└─mmcblk0p6 179:6    0 29.5G  0 part
+⋊> hack@morise ⋊> ~/k/uboot-2022.10 on k1-bl-v2.2.y ◦ sudo dd 
+if=/home/hack/k1/flash-dir/factory/bootinfo_sd.bin of=/dev/mmcblk0 
+bs=512 seek=0 count=1 conv=notrunc status=progress
+0+1 records in
+0+1 records out
+80 bytes copied, 0.685238 s, 0.1 kB/s
+⋊> hack@morise ⋊> ~/k/uboot-2022.10 on k1-bl-v2.2.y ◦ sudo dd 
+if=/home/hack/k1/uboot-2022.10/mainline-spl/FSBL-dave.bin 
+of=/dev/mmcblk0 bs=512 seek=256 conv=notrunc status=progress
+304+1 records in
+304+1 records out
+156128 bytes (156 kB, 152 KiB) copied, 0.72263 s, 216 kB/s
+⋊> hack@morise ⋊> ~/k/uboot-2022.10 on k1-bl-v2.2.y ◦ sudo dd 
+if=/home/hack/k1/u-boot/build-fix/u-boot.itb of=/dev/mmcblk0 bs=512 
+seek=4096 conv=notrunc status=progress
+1953+1 records in
+1953+1 records out
+1000145 bytes (1.0 MB, 977 KiB) copied, 0.818001 s, 1.2 MB/s
+⋊> hack@morise ⋊> ~/k/uboot-2022.10 on k1-bl-v2.2.y ◦ sync
+⋊> hack@morise ⋊> ~/k/uboot-2022.10 on k1-bl-v2.2.y ◦ picocom -b 115200 
+/dev/ttyUSB1
+picocom v3.1
 
+port is        : /dev/ttyUSB1
+flowcontrol    : none
+baudrate is    : 115200
+parity is      : none
+databits are   : 8
+stopbits are   : 1
+escape is      : C-a
+local echo is  : no
+noinit is      : no
+noreset is     : no
+hangup is      : no
+nolock is      : no
+send_cmd is    : sz -vv
+receive_cmd is : rz -vv -E
+imap is        :
+omap is        :
+emap is        : crcrlf,delbs,
+logfile is     : none
+initstring     : none
+exit_after is  : not set
+exit is        : no
+
+Type [C-a] [C-h] to see available commands
+Terminal ready
+sys: 0x0
+try sd...
+bm:3
+j...
+
+<debug_uart>
+
+U-Boot SPL 2026.10-rc5-00639-g6b4af8b1dd89 (Oct 09 2026 - 21:36:48 +0800)
+Fail to detect board:-2
+vdd_core, value:900000
+vdd_1v8, value:1800000
+vdd_1v8_mmc, value:1800000
+DDR firmware: [0xc081d340]:0xf0227179, size:0x8d98
+DDR is ready
+No SPI controller (-19)
+Trying to boot from MMC2
+spl: partition error
+Error: -38
+SPL: Unsupported Boot Device!
+Trying to boot from MMC1
+alloc space exhausted ptr 104380 limit 100000
+Aligned buffer alloc failed
+spl: could not find mmc device 0. error: -19
+Error: -19
+SPL: Unsupported Boot Device!
+Trying to boot from SPI
+Invalid bus 0 (err=-19)
+SPI probe failed.
+Error: -19
+SPL: Unsupported Boot Device!
+SPL: Unsupported Boot Device!
+SPL: failed to boot from all boot devices
+
+### ERROR ### Please RESET the board ###
+
+Reported-by: Zixian Zeng <sycamoremoon376@gmail.com>
