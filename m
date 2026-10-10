@@ -1,139 +1,139 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56AC5CA6017
-	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 19:10:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF69DCA6017
+	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 19:10:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DA20F40953;
-	Sat, 10 Oct 2026 19:10:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 798046071B;
+	Sat, 10 Oct 2026 19:10:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RKWl6jbAbq3X; Sat, 10 Oct 2026 19:10:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D7E874089A
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791659400;
-	b=nufJvGGZ0v/AQXU01WbQs95O6XGZtrV9AHTweRfgIZ/ylr0tFECJHZ3tOfnxrWhLr+8g
-	 eqhx19fSzIe/a9heDoy1bRZZD3OH8C/cxVR6CbzsPdT65FgcKP0RTf9FPzMVbw4FRBRRQ
-	 Ql8OihkxhIDqRtNDWzCUIIt45asJAVuWv4fw2hNjY6sx9+cvYjKILRlNX5Umvshf2OPd+
-	 f4MM+M25wDcFf8mVpwY7LsC6p/j/Va/QxK2TNB/SjiYEdWzUgU4co5I/QhQzjY2+UnN1k
-	 OSUPJKBxzldV1JSdxaGpkBYHmDvCShCo7cBZuTt3PLU5ew+GlxhC+WsJqGtCUXHnl4Q==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VH-EpCguyRL0; Sat, 10 Oct 2026 19:10:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 9768D60718
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791659401;
+	b=ONVtM91RHBp/ti6uMKI82r0iUR/iGMMFsbNygTEhqCvJROUlJXI/WAj2ASwFu7ll2k2m
+	 V/4uzDm6Hzvf+HAhkER08z/JcaTIq56YC+ehZ7ChxAeyYFvgIAnBIUhchlloCKZnFL5hJ
+	 j80LPvxsfkvmbu+nT+X5aN5cbJLR2XO2aPwBlT8VLUaBwR9+nOsd3FIiDBE/d+yfg1AM0
+	 LZD8xt2t7lJ0gFE7B2YI3N1u87QU1IAi1LoAIwIKIWTHuHPCKIxuSYDm+xv1rBG4JXqr7
+	 JHOEkx/e+5lgHy61R3J1Kay3B6nFO7HoLmbmcVi8oCDGP67NbEZ7XpJxNpvluwqAZ6Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791659400;
+	c=relaxed/relaxed; t=1791659401;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=qmVjGw8kXIOZEDJuss7douCRDU9U59dcxZjVd0XrIoY=;
-	b=GWllfTlbrK2rex1MQahptIHJ16Y317XPb49zjGady3cXwrjUFSEO2kiVDPLFolgyUFkL
-	 5PmQRPU6uDf0tBiSEPZ/cTuPIGyWZxE0XrvJPV9IUPP77sxQYBV5hnTuRmWYhGDFCyyK7
-	 3zdA7r5BUr0hq7MP1ljVN88/J7ZDzMFGTvIof3Jb3MeGKP5eUgZMnkuQ7C15VQcXII6pf
-	 KFiGtvZV4kEQw+V6fnAeSfjKSJqVN16ifSP7zoqoS7NseqqP+KBpq659gblvTR+KhmGsH
-	 BUA0eP0Sm2g5OWKI15RL6mnLBMha7wKSY1saIQtlUGwxrvTuvFRGe0JFrVY9x6+vfhA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=rPg9ECB7daxzgrpbF8lp9BkwiJWNwBTMeQYg2kCzeDI=;
+	b=ewCO3nXtaBgFfsJHFAS/GsIC3MUyHETwfSuYCh619e4C9xYsNxfATSlPHFqAN2t0kG01
+	 YX+xUa/ilRQbqlY4G+zeugYVZ+lRpY9pPvYbk31KGYt9ycyjPmltFuHSw0obCTrxGvB/W
+	 TwtXGGsgEQTvD0cTF7IwNjIyo5oUNX6XUxrZt+wmw1N20rohsreA+a3fJnQy0E8yapXCs
+	 yDA7waMF6eyKrtDDsR8UE9cQnupnw1Dixvi4eA9+RFpCAM/j50wA/aSPeT3SPD0B09L/o
+	 XxWSLQOZsx0TToFHNqwXXtEn3XxCM1Hgblf9LmY7Fqw83vti/JPx6i4APDQpZ/v/WLQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791659400;
-	bh=qmVjGw8kXIOZEDJuss7douCRDU9U59dcxZjVd0XrIoY=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=xD5Xrd9QW1BjF1x5Y6LIoebImkBB1yyhmTfx1H9U1TwFrQNw6r+5PC9VpILN9OyX8
-	 WjId66/BWUHradH4gQLFAkXiqBPhvBb4Sp6LUfZenHjBeUT1WS01APNoFUkbMDc8Nm
-	 wSyLfZCdq3SCKC0PhywcrjOhaY1046VHblZiPtpfCSSDylHPzUOeLs3GqXDO0deYbG
-	 WjmZn/zPjXqLPsOVWhdEJcRDrEQxIfmPjmOArNjStzWrDGS+kwCSfKAU4GN+B/JCWZ
-	 RGSOyUjYTAbjO5d4RTRGvqGb8/FnTERwAoIKUOUZbG8PlfowY9r00MBjapcqFePSm6
-	 eN8SVI+ZC++EA==
+	d=lists.u-boot-project.org; s=default; t=1791659401;
+	bh=rPg9ECB7daxzgrpbF8lp9BkwiJWNwBTMeQYg2kCzeDI=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=oM8uvr0fs9FPHreFYghdxS1VpVRP8I+NXVRwp3RSa4iDUxW9TDPkWZPQpLM6R1gva
+	 9n1JsGN2qGTON0SxMZJDBL46okeejhrA06nbYjB08FlL3BQt6PT3oXjQbmt5nTVETx
+	 GCUKfR0YASysl0TLUMK3xpLTaa3ci9RhIj5n+XloFpXHhDTfXCDtDdxyPciwQuUV9d
+	 ld5b/XfNnRuvMLBb7w6fne2Gs3WgNRF/zJGVDNwpbGwOgcfTsPoKTMgeDCKI5FYrKh
+	 PxBmRQ1Ds5bOJmmmijDkdjT/UC7q8m4EFyc6yfQR0KlOtJdh6Kczg+0Fk0QeXZePG8
+	 F8IpoAR8NZuZw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D7E874089A;
-	Sat, 10 Oct 2026 19:09:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6FC2D1A6
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 14:24:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9768D60718;
+	Sat, 10 Oct 2026 19:10:01 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9CDF5317
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 14:24:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 55C9140071
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 14:24:54 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8EF9381209
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 14:24:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 85VxFHrj94jW for <u-boot@lists.u-boot-project.org>;
- Sat, 10 Oct 2026 14:24:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org AF40D40004
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=172.234.252.31
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791642293;
- b=ZgbmO1+SXaX95NILOZBerZkQGZVd+vrvuxbf0RhYsYl1VGI2QkzU3+BPLRIvL3j5+6nQ
- aWII1zkl3G31xmxUHeMYWkOfYDF0x7M5TcYCd5YCw9fYGZxAE3iLhI7qGKMOZO6FnqhQ0
- sF/yBsycPNH621+55hbKDOanUJ2ejkwvjGzG3IT6WRawKbyZ/pqgycyL1DqW4LbLEI4Hr
- JaEfqT7uCVLyDegEG0QfFcMVllYCiyWmh0qGem/6Zt+24mgK4bDSWuOA2JZFYJmJZ+PhN
- S89Oj7j/Se5V2atuFowrtt+RAiFCIaCxOYOVfB0ctM/7D86XMEr1bIoOZiytO4VwADw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id voqoSfhCOetj for <u-boot@lists.u-boot-project.org>;
+ Sat, 10 Oct 2026 14:24:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DFEEC81208
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791642295;
+ b=mccNhQVBJNOfcBYe1SKHTz6sMrco6raxN3tw8IxnFygUZTCrD5ZX/b3xtupAhioc73XD
+ Lu+cWR67uCrnfeCAC1Jc9f7G2Cf4sMsnMI9XOlVVx/TYjMlY70GRGIiPXGMi+udIUY7kv
+ HyH6YNfLyM8oC0O7Av/63fVfzc5JQH9QkdMxf2gcjJkB7G1YEcI3lFE9yHa2tU4vPG6z+
+ ty+XTwDA9YlzFIOMGQznn/EA4ytn0N6bu5dclodGGToJPxQ50AowdybMTf4giB76sDGse
+ 8f7Panclk9XwtgbjPzjKWWiD6wzq+eMYtpgK789WUjxJjDnsh2eMBnXJ4rZkvGo6EDQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791642293;
- h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
- Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
- X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
- X-Original-From:Reply-To;
- bh=qmVjGw8kXIOZEDJuss7douCRDU9U59dcxZjVd0XrIoY=;
- b=amDAgBGgvJZ4S+q0KEj3fWVndrL0qE1P4fgssqlHtm9qIV9QOnM74kTnhscqcWVQxx/t
- xXWiYbfD5lMkbqqhLgRtpAe6i3CeYbAps9xtUSYE+XyQF6iU9MshLQb2A+untWxO/G6su
- jyuLd8j00ah8XfhfP8HfMsHv7nl6TI0BcEsXvIc84mLnIUAP+nEaDBV3qvUDilw99Zw/w
- EqsC0jr3KJFdn1+xDBm/Cja6HQV2/6nlVBJZ93KrCCOu38pTldAv8abKc5uuWQujZowVl
- HVw1Ht50Lv77g8X5x/dzJoIyFAqpENQ2Ibn9KwtL4/xiwpw6KtRL4y5pCy5Kbhs0dSw==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ c=relaxed/relaxed; t=1791642295;
+ h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Subject:
+ Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Developer-Key:X-Endpoint-Received:X-Original-From:Reply-To;
+ bh=rPg9ECB7daxzgrpbF8lp9BkwiJWNwBTMeQYg2kCzeDI=;
+ b=pWp/qMyH49PDYX2b9UVirftjGmQmDv42q3Jq8usudPDnqpPqBr7eylrNUI1iOde4Ffuk
+ fCUvL0kH8ZwSNehsAH1P3V9jzo/9u6F8M2CYIinfKkT3JhHAkteJdGeafM/1DBHuDslbK
+ XAQvt1cHqIjjwwTeHe690J/qDY2+5ln2zScf9yHoadvY0maJKHih2U0OGudSAhZ9OghSP
+ +0GeHJZuJy1gILKeXnb9S0OhkkYuTeGZAOLkw24Xj85L32w47+VL7AYeCK2mhthLPh+hq
+ c4Z42d60CEVFZrL5Bd6sAfgj7deTuy8RlthHiCkYNp/O/6a35EtDgRQaD1q1xeq14tQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=ZD1XTruc; 
- arc=none smtp.remote-ip=172.234.252.31
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org;
+ header.s=k20201202 header.b=WnCWU7Q6; 
+ arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org;
  envelope-from=devnull+petr.hodina.protonmail.com@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=ZD1XTruc
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id AF40D40004
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 14:24:53 +0000 (UTC)
+ header.a=rsa-sha256 header.s=k20201202 header.b=WnCWU7Q6
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DFEEC81208
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 14:24:54 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C214642E1F;
+ by tor.source.kernel.org (Postfix) with ESMTP id D7680600D4;
  Sat, 10 Oct 2026 14:24:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A348FC2BCFC;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8A4F9C2BCB9;
  Sat, 10 Oct 2026 14:24:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1791642292;
- bh=rWempJW2vnD5YGnix3gyHUk4h74F/oUXtjVVdJ4JyN8=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=ZD1XTrucYZeE548h0RzL1Gc+6AIWWamanogyBgatIN0CoMMGbT4US/J9xdMSYHWl2
- 9SmC2lUbYvyK7PrcCSghWfAiAyHhCoNOSwgTMdEjgQRpmtq+lJeGNLfjrfUj4/z3lF
- N3RXqdeORmp9D0jy5ppzJ4DqBP1Gd1iMBCcHvRZ6efAlhM5v2Dar/+HPV3P4jeDf8f
- hnfQHFETmE7rg7DgQH7440j6VWgP49xZEMB9YBqjAuCbEos/4xvJu+OLL6dSQ3YiTw
- Ta/3M8JGbTkLg5mlvyc2zEq7/JJjOB4cbcwrnKo2V9RDuCkyzvFbKLXJrnBebtYUe5
- yxzWrkE1LwaCg==
+ bh=qJWDiDovEmfT81HjKbVzJn0ktLPTALKy8ZNdma0jFio=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=WnCWU7Q6H3FjHDyrOPdlXrUjhpy4iMoBPu9IX/Af0mZzuFfjEDyWofNhXXTt2KMfJ
+ +53yMhPUv6Ac/l6aRd3hp/5ZEjsTWZeqR0mdLWVhl+1g0Ph0lt3kxSkK2uiiLa8Rfg
+ 4TUB/mrE+iv6B/NsVYy4aGXR0VNDV0cDB5SsX1Ayag4Upih92xnuQ5rZ/OX+IsWhjJ
+ 0oKyNxs6aJFGX0pTV1FYG5ZqIIYefPqjBha4tSYBET7oJ+NX+NB1SWKegyAHUTgdmU
+ YlcViY7RfN99n7rt76qWk9ybxOufSy2K0gcUTKBVwRZdXe1mDtI4a61fiyNhekvRMx
+ h+6y8pY/pZn/w==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 8771BCA9EC3;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 65115CA9EC1;
  Sat, 10 Oct 2026 14:24:52 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Date: Sat, 10 Oct 2026 16:24:46 +0200
-Subject: [PATCH 2/4] binman: test: Add fit fdt compression device trees
+Subject: [PATCH 0/4] binman: fit: compress generated fdt images and use it
+ on Rockchip
+Date: Sat, 10 Oct 2026 16:24:44 +0200
+Message-Id: <20261010-b4-binman-fit-fdt-compression-v1-0-4465558758cc@protonmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261010-b4-binman-fit-fdt-compression-v1-2-4465558758cc@protonmail.com>
-References: <20261010-b4-binman-fit-fdt-compression-v1-0-4465558758cc@protonmail.com>
-In-Reply-To: <20261010-b4-binman-fit-fdt-compression-v1-0-4465558758cc@protonmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQrCMBCF4auUWTuQqW0WXkVcdJKJjtBUMlGE0
+ rs31eXP430rmBQVg0u3QpGPmi65BZ06CI8p3wU1tobe9Z4cOeQBWfM8ZUxaMcWKYZlfRex44pm
+ 858CRRh6hGW1I+v3519u/7c1PCfVAYdt23Ar8ZIEAAAA=
+X-Change-ID: 20261010-b4-binman-fit-fdt-compression-3166bcbd15b5
 To: u-boot@lists.u-boot-project.org
 Cc: Simon Glass <sjg@chromium.org>, 
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, 
@@ -145,11 +145,11 @@ Cc: Simon Glass <sjg@chromium.org>,
  Petr Pavlata <petr@acrux.cz>, David Heidelberg <david@ixit.cz>, 
  Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791642291; l=3589;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791642291; l=1548;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=25dRcKDeN8eZSGb06AEbdr13LFy88eBHoMFpYEseEBA=;
- b=eSf8AKTUVR6DeEHtlFtoffeLkp2FEW4BbFvWP57ybAUDZ7EEHbwaT87noRvmCR1wkAJslVn/t
- S/dgSpQk+tKAGF+qk08yHnl+A7JwtZPGryr8caAKWW1Zn9WZkdu54xU
+ bh=qJWDiDovEmfT81HjKbVzJn0ktLPTALKy8ZNdma0jFio=;
+ b=B50cU6mk0REWRoQr3ppNbOZpaXEVWMyRDOyzng6LXmnNkWictjRzwgRlE210zOSOykXKZJltb
+ Knsglz7zczfA9Kxm9iyxpn18IYgAkXZC9SHLGdrJ4hi22AkMPgipYI7
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -170,175 +170,39 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Reply-To: petr.hodina@protonmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Petr Hodina <petr.hodina@protonmail.com>
+Entry_fit's @fdt-SEQ generator copies the node's "compression" property
+into the FIT. However, it embeds the raw .dtb. A FIT can therefore claim
+"compression = lzma" while holding uncompressed data and SPL will fail
+to decompress it during boot.
 
-Add two copies of fit/fdt.dts whose @fdt-SEQ template asks for "lzma"
-and for an unsupported algorithm ("bzip2").
+The patchset fixes the following:
+ - Patch 1 makes the generator act on the property (lzma onl)
+ - Patch 2 adds the test device trees
+ - Patch 3 adds the tests covering both the lzma round trip
+   and the unsupported-algorithm error.
+ - Patch 4 uses it on Rockchip where the shared @fdt-SEQ template gets
+   FIT_FDT_COMP, "lzma" when SPL_LZMA is enabled and "none" otherwise
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
+Petr Hodina (4):
+      binman: fit: Actually compress generated fdt images
+      binman: test: Add fit fdt compression device trees
+      binman: test: Check compression of generated fit fdt images
+      rockchip: LZMA-compress the FDT image in the FIT based on FIT_FDT_COMP
+
+ arch/arm/dts/rockchip-u-boot.dtsi      |  8 +++-
+ tools/binman/etype/fit.py              | 12 ++++++
+ tools/binman/ftest.py                  | 29 ++++++++++++++
  tools/binman/test/fit/fdt_bad_comp.dts | 72 ++++++++++++++++++++++++++++++++++
  tools/binman/test/fit/fdt_lzma.dts     | 72 ++++++++++++++++++++++++++++++++++
- 2 files changed, 144 insertions(+)
+ 5 files changed, 192 insertions(+), 1 deletion(-)
+---
+base-commit: ece349ade2973e220f524ce59e59711cc919263f
+change-id: 20261010-b4-binman-fit-fdt-compression-3166bcbd15b5
 
-diff --git a/tools/binman/test/fit/fdt_bad_comp.dts b/tools/binman/test/fit/fdt_bad_comp.dts
-new file mode 100644
-index 00000000000..26a74895ac7
---- /dev/null
-+++ b/tools/binman/test/fit/fdt_bad_comp.dts
-@@ -0,0 +1,72 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		u-boot {
-+		};
-+		fit {
-+			description = "test-desc";
-+			#address-cells = <1>;
-+			fit,fdt-list = "of-list";
-+
-+			images {
-+				atf {
-+					description = "atf firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
-+				uboot {
-+					description = "U-Boot firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
-+				kernel {
-+					description = "Vanilla Linux kernel";
-+					type = "kernel";
-+					arch = "ppc";
-+					os = "linux";
-+					compression = "gzip";
-+					load = <00000000>;
-+					entry = <00000000>;
-+					hash-1 {
-+						algo = "crc32";
-+					};
-+					hash-2 {
-+						algo = "sha1";
-+					};
-+					u-boot {
-+					};
-+				};
-+				@fdt-SEQ {
-+					description = "fdt-NAME.dtb";
-+					type = "flat_dt";
-+					compression = "bzip2";
-+					hash {
-+						algo = "sha256";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "@config-DEFAULT-SEQ";
-+				@config-SEQ {
-+					description = "conf-NAME.dtb";
-+					firmware = "uboot";
-+					loadables = "atf";
-+					fdt = "fdt-SEQ";
-+				};
-+			};
-+		};
-+		u-boot-nodtb {
-+		};
-+	};
-+};
-diff --git a/tools/binman/test/fit/fdt_lzma.dts b/tools/binman/test/fit/fdt_lzma.dts
-new file mode 100644
-index 00000000000..1a25ded4b8b
---- /dev/null
-+++ b/tools/binman/test/fit/fdt_lzma.dts
-@@ -0,0 +1,72 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		u-boot {
-+		};
-+		fit {
-+			description = "test-desc";
-+			#address-cells = <1>;
-+			fit,fdt-list = "of-list";
-+
-+			images {
-+				atf {
-+					description = "atf firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
-+				uboot {
-+					description = "U-Boot firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
-+				kernel {
-+					description = "Vanilla Linux kernel";
-+					type = "kernel";
-+					arch = "ppc";
-+					os = "linux";
-+					compression = "gzip";
-+					load = <00000000>;
-+					entry = <00000000>;
-+					hash-1 {
-+						algo = "crc32";
-+					};
-+					hash-2 {
-+						algo = "sha1";
-+					};
-+					u-boot {
-+					};
-+				};
-+				@fdt-SEQ {
-+					description = "fdt-NAME.dtb";
-+					type = "flat_dt";
-+					compression = "lzma";
-+					hash {
-+						algo = "sha256";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "@config-DEFAULT-SEQ";
-+				@config-SEQ {
-+					description = "conf-NAME.dtb";
-+					firmware = "uboot";
-+					loadables = "atf";
-+					fdt = "fdt-SEQ";
-+				};
-+			};
-+		};
-+		u-boot-nodtb {
-+		};
-+	};
-+};
-
--- 
-2.55.0
+Best regards,
+--  
+Petr Hodina <petr.hodina@protonmail.com>
 
 
