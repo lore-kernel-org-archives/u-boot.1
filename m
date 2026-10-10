@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2480DCA9EC5
-	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 22:32:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E437ECA9ECA
+	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 22:32:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DC4DE40953;
-	Sat, 10 Oct 2026 22:32:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A500F80DC7;
+	Sat, 10 Oct 2026 22:32:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QW5OxMV2IvrK; Sat, 10 Oct 2026 22:32:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 1484940949
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791671541;
-	b=rq4oqjXkMw4/scaYZrVa6y6PsTePlJnJTHlxGdHQbL7/uK76iEkS5EkIroP1/KwjbhMT
-	 RBgbUr7fvDA0l7u2YCzRLeRWCYLg7karIBQGIMLeeHCV1GZPmGMoSnQHGKkJdx0wOwPWA
-	 NHB83EM7JN4kHOsFtm7Cf7Myy+f+6NZwJ+x6yXV3WOWDjHnUy2UVeBt6p6retHlV/2N2A
-	 yaZCVqzHUtuetZtWzK4ZW0zpcMeCz2gvBIJczV4KmUGCZUrwlFrjYNfzwiWx4USQ7aMLf
-	 dZQy7dyiS4lxQplelUNPSrI4DyIKvG5Jx3fHV0tQiEQJkDCJwyguDOebwWOkwd+8SNw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DfKw5FOtkmkd; Sat, 10 Oct 2026 22:32:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BDE7480FA6
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791671542;
+	b=WYtOuhxF28uiVICSB2N8v3rqwBYCrGs95b1SIR+58dH+DP2jRdIMNlA/V7Zel7Tq//G6
+	 QfpJ4sVJVO8+z7w9Py4w8jOg3M/S0w1/kC8xngIDxproe1CGu1e1Z0HR4L4ECkwrW+6Sa
+	 YqE8rhI0f2QgqHQwoo8/PHD90dmQCFZygkaylnkLnejon2RO9xW2CZiTtexbKohLH6tmC
+	 dI42LjObtlNbuyGqKQ0Nox4htARaW1QtkgDXxeZKTJpzRWHAQwuw51rdSz8jSqUtQXhzB
+	 WzN9J7/Psyp+EE5wWnFxh3+moqnlj2QCHmTwIZb36CV0HIdgTxu4FazoPKK9WibF7Cg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791671541;
+	c=relaxed/relaxed; t=1791671542;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,50 +32,50 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=NIWPqiTcXB3s2dI2nil9n9e+0Frgy6ijk+3D+YzJF3M=;
-	b=gMAn1GMqpR/bMP/uw5fe7lDTAXy8MSY+Mj9yErkKd9bklOCLILg0FpRRla/tzajvLnJM
-	 rOrKm0riOFHtLyio78SVK99BOSKvNFDmUmNul2s6iXAwJm7AH6alJrj+vOxXJFZ3NrhWC
-	 ErD4wYYjv/Guc/pyAKvjFORd6hTHHiWxH/CCvOV9hqVeM+oFrvn5EcOTW8+oHeGku+5JN
-	 fwIUXu1ezGtwHD+f78y4ECr75QS4VU5gpti/tZLH0tAldwMPknTDusQQEiolNj39bf8PB
-	 t9c9WrzmO/SYm1a4zqA5SxM98lZD1pN8qqGUS0SVFtLH04S3uTAgeLYlX++bTXv46vw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=3i6ZFl8JgJ434buHAh4mWfsD707cPAKyhE5UPqtsb7Q=;
+	b=UxC6HMShtRJEJqxq+gKJ+6Kq68EItQHbmi+ETMJCdX+b2+ISH8X6xbT/QNfrokCwS3Jp
+	 qOlx9zE6Ya9JFTOKnxj5DvDKgT95HWQnN9F0/Z8ZM7bNmoNKwVEZyU127TPOziUUGLq6F
+	 ceKkj3wVzN3DBxLywGoxlRolxleXku6pDSbKUAq0zQn73EQfXAjLr6qJWhh+gQfC1txtO
+	 u0q0BV0H4TdcfC5Md7vLL2cBRdTUKPhLJxEpWe1vkTpEBCo+LWLpjPPr1bxI0RjfceL2P
+	 qOcFpivHcNp1jrlKIi02gTDHfsHiDrsM1ufMVAvBzgnnxlzvIUlD4c0Ob1t5F1NZ+Cw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791671541;
-	bh=NIWPqiTcXB3s2dI2nil9n9e+0Frgy6ijk+3D+YzJF3M=;
+	d=lists.u-boot-project.org; s=default; t=1791671542;
+	bh=3i6ZFl8JgJ434buHAh4mWfsD707cPAKyhE5UPqtsb7Q=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=PFFO+Z0jBVauH20RaCZgVQfZFnfouTGRbvHzfnMpX3qhCHvH6pqhdvwVaBSS6GDk8
-	 /lhWGEu2b6IRCPZWOyA+PfJwje8bXg15UcWhOOiH+st69Cf0lyo+/IAqnhz7X5PKxi
-	 VmVz3XsgAG/iFwdHPaPk1bZ/ukTVTtIo4ev8QsZVrKy76fAAkFp8Z+PdiGQSqKB7Bm
-	 NmnaO0KhMfXn/ekzFIiY4l0tdQIkJp9qGVKqrrf4BOFSEccC2QzdjNxVZ6WgLYs0o6
-	 JAaXPFb+7Y2xN7XSxR9EUaRnJKpHRltUM7giicznHSwQSM6xfzlq7p+Nobc5jZrgO7
-	 tZn15OUza8M8w==
+	b=nMbf9N0zZ7NW0QGr4qPadJyVKXyq2MmWxY4lEgZiMJfrHPW75F0tpgSfhzFEYhvjl
+	 aF8LuGNmdBO3kss51MYfXaCyZhgNRME0ikIz5ue/nOPFyRE1bPFkNjoDXgyNXO8R+t
+	 p9D6gzhRHjwoHXY8b6xQlkR2ywSdd4gCtdGqaACl3gLt98Df/TJXikzKStGI5zThrd
+	 H1r/Zjhq/Wlsj/Dw+6r/PxewI4Zpq59qrTxB7eAhh+8G89DUHQnRuYxfBRXhzmEAu3
+	 xesTRbF4gXDe7/x82cnXUUFkbD3i7xSn0f0xN2m026DvvrWQdUav9YtX1Lb5fz0mDM
+	 Dtvw3QSbukA6w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1484940949;
-	Sat, 10 Oct 2026 22:32:21 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id C38499D1
+	by smtp1.osuosl.org (Postfix) with ESMTP id BDE7480FA6;
+	Sat, 10 Oct 2026 22:32:22 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D2E6DDE0
  for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 21:08:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A823F400D5
+ by smtp2.osuosl.org (Postfix) with ESMTP id B77B64005A
  for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 21:08:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id N65ledK5kyLd for <u-boot@lists.u-boot-project.org>;
+ id AIv2OfcDeiW8 for <u-boot@lists.u-boot-project.org>;
  Sat, 10 Oct 2026 21:08:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org F25C140068
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 004B0400AE
 Authentication-Results: smtp2.osuosl.org; arc=none
  smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791666489;
- b=tHFplTJzzt3GDhS1/t76kMOO8jpS5Rd9px+cf504xZ2OOb8FvaVcL/U+kQrkkTG5eIJA
- bA/sEdSnLzP0/FuS3Q1oqDVv2cm2NTq3n8K5PZW6EPdAkVRnN6gdYZnEjKX8pxLHkiR1z
- 9C/z9qEcGt6xVCkIAYFZeaJS5T/KPupDdQyvXcGJaDI9Hnn4kz/3BLvTMTgqqHPvfQe41
- VGAOMFoRBW9o6yCbqDoxZS/80dtjrXvE33fmy8W8EcSzHKeyz/fYxM4K7iLdUmwTacaN9
- Hm99a0sUQse5rUfn/V3jewxI81wMIGm/k413LkFupXH//XgcW3ZmrJUQj3mRkM5iOVA==
+ b=BTdCCxIeN8ZFHgRycTjh/wG5D4KID8zKR8j3HrTN+K8IIhBSl4kqM2NzwYvgNjuIHSJF
+ cmvAIPvPCLOZyHm6nFgzvszcWreSg7A6YRKpDVe733uZsJ/CRoWWI5THUAgvBG1B8wmtV
+ YvY9xuSk1iEdnK4ou86xyvF5NaS1vKysHUIsGLdyj21dUs36o+UY8TNRddkA3ylsnf0SK
+ b6cgXQOka+6yO0JXtTodoe1iLuXl+gMeSADWyzqJcpiBDEm67nxddxe7XUW8rTfV1G1Rz
+ X26jZX7Z9roIzeZMSUJecAicdmd7B2d51u92x8ANNvr8Kq9N+2vXOhCcC3/Y43e5iNQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1791666489;
  h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
@@ -83,16 +83,16 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
  X-Original-From:Reply-To;
- bh=NIWPqiTcXB3s2dI2nil9n9e+0Frgy6ijk+3D+YzJF3M=;
- b=dM3QxB70W3/junl7A944j63u++GIII+bW9+jb8qXvcq7WwZoHCjOn+LiKnTFaj/fi+HQ
- JWreP7NLQDAgx+v2fUkOnMc8tcmvcG911qp1N0RZQRqDi7IDYsPV/7j+Akj2b8kTtXbsv
- yIrQKrAtr4682azlsguR2HDZ4G9K/exEzgV2SyJK1ALC4XOcm7ex7YAgvsziJfLSK1TdH
- GnFySevAFclLLYut8AUwDDKSnu2MpLt1BjyhKtl2xvQO9GeikcDfu6fe6bVwOts2AHh9h
- usagjJ6eL1vEkCx5lG4odqW7YpdzUUUSSsRbS/FkpVOanEVPXuq2DaaCzF9LwInnLLw==
+ bh=3i6ZFl8JgJ434buHAh4mWfsD707cPAKyhE5UPqtsb7Q=;
+ b=NQRLyHT8cIVVHdw8hl55CjHuyPAf1TEvWmLYRxyzA0c58UQud/W3FZ/B7boJfjTwKdiw
+ 3SbhMtMtmpTV16p3bvgB9Akx+trTGCk3Gli7r/qc2pW3mt0jc5IAcl0RuWeXK7cVzn1Kw
+ Nje8GKthwEt1z6l23KEEFAaobb6yrSVOCj6Rw0x1FO5JF1d7F+bq748NI0p/RSeW/YJU3
+ 1SClnLi4OvDn4ZQwX8bYPQgaEpfGEuPF6n5ehdLaaTrj8PlO426hUdztOL3fWnNQE+7/m
+ Q3fOnNqofO02lPMl/I01nUrGqPv3vQsL8dTkmSfLOlcJqUsy/aRIdZBUEkKtXqo8cOQ==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=GJhjZcej; 
+ header.s=k20201202 header.b=nNwUVkNY; 
  arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
@@ -102,37 +102,37 @@ Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=GJhjZcej
+ header.a=rsa-sha256 header.s=k20201202 header.b=nNwUVkNY
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp2.osuosl.org (Postfix) with ESMTPS id F25C140068
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 004B0400AE
  for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 21:08:08 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 4EA09436FC;
+ by sea.source.kernel.org (Postfix) with ESMTP id 94D174401F;
  Sat, 10 Oct 2026 21:08:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 2E69BC2BCFC;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 79A89C2BCFF;
  Sat, 10 Oct 2026 21:08:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1791666487;
- bh=fnukDp2d7uGRx8Lpnhl51eg+d7YX6AdC3vb5yKmwbgs=;
+ bh=PbN+a3HXLj90XUgJCWdBUU3f9g5tMM7fgWivYUT0yH8=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=GJhjZcejPH/euKHAnMwTJ+mMQVKdn1huP2fcaLe4pFUsiMrmIARy8Ps3jbg+1taws
- +Z/MbMmatS5ZIlPCuS0rXkP2kNLA72kVZJSgbgnMUDxv1vd/EGE7QT/cD1vWY7QIPX
- 3a2Eth81qJeBEJHghoy86hoaxRQ6qC5W43f0gFrAWuuI7+WDTmBeLebk+/elQVYEus
- FC33c9JrDXmPGQPgWky0X47+xNVku/QAno7ojv8TGo7U/5X8Hpj7P7xGQ8nZ7jatvm
- bRS9U7r85l/OYSiYRUcZyd73Y+9yI720JbOMV12XsEp5f/dSLlUB/DbgRm858BCRpg
- paFwVLHxhd+4A==
+ b=nNwUVkNYzXLuoB55rP8eUkncpYRdytlvZBXSw+PxEmeOdJJuL55aFHLReNmnzFQ0p
+ NnCrvqHfnJpKtJCFh/n6CiaWmhoyuMeK0vDWhRSSwyI+k71Jeni4c7Gwx9QOu0Kj92
+ IUl5fxi0aYZr7UzGqAjWL1NaCIRyJRN/goZzOB7r5/9FNArhn2FQwdoobsHBkoNQLc
+ 6v3TnSsrd469vyBgayuGvcpO9hPDfslW9TvUMREsBps1wGHnNPqXL1o7C7GXTs1UkC
+ pn7NGNkl8VxnXehl8W675BikOPAmtGpHOqlotBIw6BOBMecHT6A/AMs+K0RIVjF/fO
+ AvrLwEZ4zvazA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 16D2ACA9EC1;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 68EDBCA9EC1;
  Sat, 10 Oct 2026 21:08:07 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Date: Sat, 10 Oct 2026 23:07:51 +0200
-Subject: [PATCH 03/11] cmd: phonemenu: mirror the menu to byte-stream consoles
+Date: Sat, 10 Oct 2026 23:07:56 +0200
+Subject: [PATCH 08/11] cmd: phonemenu: show PMIC PON status in the header
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261010-b4-phonemenu-series-v1-3-bfa23de6eb0b@protonmail.com>
+Message-Id: <20261010-b4-phonemenu-series-v1-8-bfa23de6eb0b@protonmail.com>
 References: <20261010-b4-phonemenu-series-v1-0-bfa23de6eb0b@protonmail.com>
 In-Reply-To: <20261010-b4-phonemenu-series-v1-0-bfa23de6eb0b@protonmail.com>
 To: u-boot@lists.u-boot-project.org
@@ -155,11 +155,11 @@ Cc: Tom Rini <trini@konsulko.com>,
  Alexander Martinz <amartinz@shiftphones.com>, 
  Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791666485; l=4352;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791666485; l=4846;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=/mKdxYAuxwGadyLKCtPHJTCiuo/hLdKQi7LAU63mz2Y=;
- b=VbnozkMPmOu9ywmvEnEyFZZmSrveQ/JXB4SlrdHd+unag4NBI9CzpFgfy/AiIz8kb4kZRuQpz
- m6kjOaBZMIXBi1mWaw5Tn/F/eOPMV6l4aCGnQ7TSB19aiMB/8kpwfEN
+ bh=u1rUtxX6vWbMpiKwFd7SUmHwHmkYwGmjTNjSk2KAbiQ=;
+ b=iSCrAwApJhluMQSO6VJAiB0J0sHhZpsWXtL6x2ATwphYNLZgy3XERkSaDe44xY3AJ9tg7DLh5
+ t24LS8LrA+0CjA5gY1JKex52DAxUa1U0ZVa+MnVBf+p7RlrZT0gz0b5
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -182,150 +182,166 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Petr Hodina <petr.hodina@protonmail.com>
 
-The pixel-drawn menu is rendered to serial or USB CDC-ACM.
-Add pm_term_puts()/pm_term_render() to render the same menu as ANSI
-escapes over those byte-stream consoles.
-
-Wire it into pm_render_all() for initial draw and the up/down navigation
-in pm_run().
+Show in the boot menu header the PMIC Power-On Notification trigger
+from the QPNP-PON block of a PMIC, distinguishing cold vs. warm reset
+and its cause.
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
- cmd/phonemenu.c | 80 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 80 insertions(+)
+ cmd/phonemenu.c      | 10 +++++++
+ cmd/phonemenu_qcom.c | 84 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ include/phonemenu.h  |  3 ++
+ 3 files changed, 97 insertions(+)
 
 diff --git a/cmd/phonemenu.c b/cmd/phonemenu.c
-index 30f994bcb64..e83394714c3 100644
+index 8f29d8d704b..f031b891641 100644
 --- a/cmd/phonemenu.c
 +++ b/cmd/phonemenu.c
-@@ -1,5 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
-+#include <ansi.h>
- #include <cli.h>
- #include <command.h>
- #include <dm.h>
-@@ -9,6 +10,8 @@
- #include <log.h>
- #include <malloc.h>
- #include <menu.h>
-+#include <stdio.h>
-+#include <stdio_dev.h>
- #include <video.h>
- #include <video_console.h>
- #include <version.h>
-@@ -234,6 +237,76 @@ static void pm_draw_frame(struct pm_state *s)
- 		COL_FOOTER, COL_BG, foot);
+@@ -458,6 +458,12 @@ __weak int phonemenu_ab_slot(void)
+ 	return ab_select_slot(desc, &misc, false);
  }
  
-+/* ANSI escape sequences and line ending used on the byte-stream consoles */
-+#define PM_TERM_EOL		"\r\n"
-+#define PM_TERM_CLEAR		ANSI_CLEAR_CONSOLE "\e[H"
-+#define PM_TERM_CURSOR_HIDE	ANSI_CURSOR_HIDE
-+#define PM_TERM_CURSOR_SHOW	ANSI_CURSOR_SHOW
-+#define PM_TERM_REVERSE		ANSI_COLOR_REVERSE
-+#define PM_TERM_RESET		ANSI_COLOR_RESET
-+
-+/* Mirror the menu to byte-stream consoles (serial UART, USB CDC ACM) */
-+static void pm_term_puts(const char *str)
++/* PMIC power-on trigger for the header, NULL if unknown */
++__weak const char *phonemenu_pon_status(void)
 +{
-+	static const char * const names[] = { "serial", "usbacm" };
-+	struct stdio_dev *d;
-+	size_t i;
-+
-+	for (i = 0; i < ARRAY_SIZE(names); i++) {
-+		d = stdio_get_by_name(names[i]);
-+		if (!d || !d->puts)
-+			continue;
-+
-+		if (!strcmp(names[i], "usbacm") && !d->priv)
-+			continue;
-+
-+		d->puts(d, str);
-+	}
++	return NULL;
 +}
 +
-+static void pm_term_render(struct pm_state *s)
-+{
-+	enum pm_section prev = PM_SEC_COUNT;
-+	char buf[160];
-+	int i;
-+
-+	/* Clear screen, cursor home, hide cursor while we paint. */
-+	pm_term_puts(PM_TERM_CLEAR PM_TERM_CURSOR_HIDE);
-+
-+	snprintf(buf, sizeof(buf), "  %s" PM_TERM_EOL, s->title);
-+	pm_term_puts(buf);
-+	if (s->subtitle && *s->subtitle) {
-+		snprintf(buf, sizeof(buf), "  %s" PM_TERM_EOL, s->subtitle);
-+		pm_term_puts(buf);
-+	}
-+	if (s->version && *s->version) {
-+		snprintf(buf, sizeof(buf), "  %s" PM_TERM_EOL, s->version);
-+		pm_term_puts(buf);
-+	}
-+	pm_term_puts(PM_TERM_EOL);
-+
-+	for (i = 0; i < s->count; i++) {
-+		if (s->items[i].section != prev) {
-+			snprintf(buf, sizeof(buf), "  [%s]" PM_TERM_EOL,
-+				 pm_section_label[s->items[i].section]);
-+			pm_term_puts(buf);
-+			prev = s->items[i].section;
-+		}
-+		if (i == s->active)
-+			snprintf(buf, sizeof(buf),
-+				 "    " PM_TERM_REVERSE "> %s" PM_TERM_RESET PM_TERM_EOL,
-+				 s->items[i].label);
-+		else
-+			snprintf(buf, sizeof(buf), "      %s" PM_TERM_EOL,
-+				 s->items[i].label);
-+		pm_term_puts(buf);
-+	}
-+
-+	pm_term_puts(PM_TERM_EOL
-+		     "  Vol up/down or arrows to move    Power or Enter to select"
-+		     PM_TERM_EOL);
-+}
-+
- static void pm_render_all(struct pm_state *s)
+ static const char *pm_slot(void)
  {
- 	int i;
-@@ -242,6 +315,8 @@ static void pm_render_all(struct pm_state *s)
- 	for (i = 0; i < s->count; i++)
- 		pm_draw_item(s, i, i == s->active);
- 	video_sync(s->vid, true);
-+
-+	pm_term_render(s);
+ 	int slot;
+@@ -510,6 +516,7 @@ static int do_phonemenu(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	static char slot_line[96];
+ 	const char *slot = pm_slot();
+ 	const char *reason = pm_reason();
++	const char *pon = phonemenu_pon_status();
+ 	const char *sub = (argc > 1) ? argv[1] : "main";
+ 	int n = 0;
+ 
+@@ -519,6 +526,9 @@ static int do_phonemenu(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	if (reason)
+ 		n += snprintf(slot_line + n, sizeof(slot_line) - n,
+ 			      "%s%s", n ? "  -  " : "", reason);
++	if (pon)
++		n += snprintf(slot_line + n, sizeof(slot_line) - n,
++			      "%s%s", n ? "  -  " : "", pon);
+ 
+ 	if (!strcmp(sub, "advanced"))
+ 		return pm_run(pm_advanced, ARRAY_SIZE(pm_advanced),
+diff --git a/cmd/phonemenu_qcom.c b/cmd/phonemenu_qcom.c
+index d8a295c10dc..20a1cced8d9 100644
+--- a/cmd/phonemenu_qcom.c
++++ b/cmd/phonemenu_qcom.c
+@@ -5,8 +5,12 @@
+ 
+ #include <android_ab.h>
+ #include <blk.h>
++#include <dm.h>
++#include <dm/ofnode.h>
++#include <dm/uclass.h>
+ #include <part.h>
+ #include <phonemenu.h>
++#include <power/pmic.h>
+ #include <linux/errno.h>
+ 
+ #if IS_ENABLED(CONFIG_ARCH_SNAPDRAGON)
+@@ -25,4 +29,84 @@ int phonemenu_ab_slot(void)
+ 	return ab_select_slot(desc, &unused, false);
  }
  
- static int pm_run(const struct pm_item *items, int count,
-@@ -290,6 +365,7 @@ static int pm_run(const struct pm_item *items, int count,
- 			pm_draw_item(&s, s.last_active, false);
- 			pm_draw_item(&s, s.active, true);
- 			video_sync(s.vid, true);
-+			pm_term_render(&s);
- 			break;
- 		case BKEY_DOWN:
- 			/* Wrap from the last item back to item 0. */
-@@ -298,6 +374,7 @@ static int pm_run(const struct pm_item *items, int count,
- 			pm_draw_item(&s, s.last_active, false);
- 			pm_draw_item(&s, s.active, true);
- 			video_sync(s.vid, true);
-+			pm_term_render(&s);
- 			break;
- 		case BKEY_SELECT:
- 			running = false;
-@@ -318,6 +395,9 @@ static int pm_run(const struct pm_item *items, int count,
- 	s.vp->colour_bg = COL_BG;
- 	video_sync(s.vid, true);
- 
-+	/* Reset the terminal: clear screen, show cursor, reset colours. */
-+	pm_term_puts(PM_TERM_CLEAR PM_TERM_CURSOR_SHOW PM_TERM_RESET);
++/*
++ * PMIC PON ("Power-On Notification") boot trigger from the QPNP-PON block
++ * in the primary PMIC. Two registers are interesting:
++ *
++ *   PON_REASON1 (PON base + 0x0c) - cold-reset trigger:
++ *     0x80 KPDPWR   = power button press
++ *     0x40 CBLPWR   = cable inserted while off
++ *     0x20 PON1     = generic PON
++ *     0x10 USB_CHG  = USB charger inserted
++ *     0x08 DC_CHG   = DC charger inserted
++ *     0x04 RTC      = RTC alarm
++ *     0x02 SMPL     = sudden mains power loss / auto-restart
++ *     0x01 HARDRST  = hard reset requested
++ *
++ *   WARM_RESET_REASON1 (PON base + 0x0a) - warm-reset trigger:
++ *     0x80 KPDPWR        = power-button reset
++ *     0x40 RESIN         = volume-down (or assigned) reset
++ *     0x20 KPDPWR_RESIN  = power + vol-down combo (force reset)
++ *     0x04 PMIC_WD       = PMIC watchdog
++ *     0x02 PS_HOLD       = SoC pulled PS_HOLD low (normal reboot)
++ *     0x01 SOFT          = soft reset request
++ *
++ * If WARM_RESET_REASON1 is non-zero this was a warm reboot and we use it;
++ * otherwise PON_REASON1 wins. Returned strings are short for the menu
++ * subtitle. NULL if we can't find a PM660-class PMIC at all.
++ */
++const char *phonemenu_pon_status(void)
++{
++	struct udevice *pmic;
++	int r;
 +
- 	cmd = items[s.active].command;
- 	if (cmd && cmd[0])
- 		run_command((char *)cmd, 0);
++	for (uclass_first_device(UCLASS_PMIC, &pmic);
++	     pmic;
++	     uclass_next_device(&pmic)) {
++		if (ofnode_device_is_compatible(dev_ofnode(pmic),
++						"qcom,pm660"))
++			break;
++	}
++	if (!pmic)
++		return NULL;
++
++	r = pmic_reg_read(pmic, 0x80a);
++	if (r > 0) {
++		if (r & 0x20)
++			return "warm: pwr+vol-";
++		if (r & 0x80)
++			return "warm: pwr";
++		if (r & 0x40)
++			return "warm: vol-";
++		if (r & 0x04)
++			return "warm: wdog";
++		if (r & 0x02)
++			return "warm: reboot";
++		if (r & 0x01)
++			return "warm: soft";
++		return "warm";
++	}
++
++	r = pmic_reg_read(pmic, 0x80c);
++	if (r > 0) {
++		if (r & 0x80)
++			return "cold: pwr";
++		if (r & 0x40)
++			return "cold: cable";
++		if (r & 0x10)
++			return "cold: usb";
++		if (r & 0x08)
++			return "cold: dc";
++		if (r & 0x04)
++			return "cold: rtc";
++		if (r & 0x02)
++			return "cold: smpl";
++		if (r & 0x01)
++			return "cold: hardrst";
++		if (r & 0x20)
++			return "cold";
++	}
++	return NULL;
++}
++
+ #endif /* CONFIG_ARCH_SNAPDRAGON */
+diff --git a/include/phonemenu.h b/include/phonemenu.h
+index 5d6ded84197..ad33e9511c1 100644
+--- a/include/phonemenu.h
++++ b/include/phonemenu.h
+@@ -11,4 +11,7 @@ struct blk_desc *phonemenu_storage_desc(void);
+ /* Active A/B slot (0 = a, 1 = b) or a negative errno */
+ int phonemenu_ab_slot(void);
+ 
++/* Short PMIC power-on trigger string, or NULL if unknown */
++const char *phonemenu_pon_status(void);
++
+ #endif
 
 -- 
 2.55.0
