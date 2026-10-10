@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 670C0CA9ECE
-	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 22:32:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB76DCA9ECA
+	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 22:32:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 37BF260A44;
-	Sat, 10 Oct 2026 22:32:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B441F40878;
+	Sat, 10 Oct 2026 22:32:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8VjCCcPubBlL; Sat, 10 Oct 2026 22:32:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2AFB960702
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791671550;
-	b=EC3ky3TpWRGJAz7aEwBoo02YyGTBO9ImIvbHQUoxtDMX2edmigpgUgKwzgmCTS4rTz/E
-	 jY3hhOIJqKQld0hrhtCsjvABbACiEsdqK5hg2TtFmvXsNs6Ks7UlxDfyWXW/Mo/4rq7sv
-	 HzhtbVOci26s/UeAXjITUdSETz/I6LcswZ1Av/4f2BD3FYGNl8i7TaLE/Zqxp4OWx+QJM
-	 vPF8cgifKamJV2ojj8PjhT86bdIaJfYPM6VZ+a/cHC/spmBUa1DouFaEYArXYv8WIS+cJ
-	 kTu6Qx6sy9ON2g4wO5sbv3TCuyj8Vtk4J4bNwNd6rHD6i/koPqKe0t9WASTisNhT7yQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bqUo9lp99ZTf; Sat, 10 Oct 2026 22:32:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org F14BB40960
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791671552;
+	b=Gg3SBWhn/y7goy/J8vQC3hqkglF3TnL1GqJoDDMwpSf+b7mMY5Wxk/4Yhdz3YsiKyeSw
+	 het2EIlaFQAZTEo7nY2URrNoUk5Om/8W7M/yml4V8LpPCaLxydCTGyFAfbWRaA1N/DoGq
+	 fIOVwYZ6XczFc24OLOniP6qL5pWKVkuwXyzHHNCy3RVDEB2RpHG7uxWMXo97m+enkDLUK
+	 HDJuWBDrqNOjHawH7t8yjFMbHqhD+0iwwgvosy6g5+GNSBLZBb8E2/zQibv5nCgZxqOuu
+	 9ntGrBXa5qdAAPW3bt5iuGB+QE5+mhCAt/OLKHcHNjEeGohHPaaO9gvi5sHTwNWFppw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791671550;
+	c=relaxed/relaxed; t=1791671552;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,50 +32,52 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=f6czWl/9KXlkpCEnFRyYWuvof6fd/ddUetakSqb9cSk=;
-	b=dY5aVyRnad73IFWIpsbh+e8Lhd3sX8o4R94ca6qHJHJlTYVdTDpTRUQForOlXNg1lVHV
-	 ys0yYD9VR3JX4zXaEA8wxXHoTbdsIrXqnDVjhhzwzzwmnffuNGURjERF0BEs8uM0Su8O9
-	 cmtwM4WmdYqOUtnuw+M2z7wRltN4fLIofMjhOiYlVGhilzOprB22ivE1Q5797bHFupf7p
-	 GOppRMZc73vnAxCR2rvBnx2jwNNbgvu4g7M/QAR15TAIdLzlYH75N6RLYdKJGfhyesRlR
-	 hRI3lZBANIrLHotrbnhqVRmBiJXQdArU/bJZjY0Gw2Tu1zAxj9VKki6ftSjyZaIDlfg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=mtNEPWdilQ/l4uF48YhmtVaQ4W8DBfZD+MnoH+3Y+no=;
+	b=MECZazLPmUxkLyNQI+VS+OX1bMsP29Y04HG5RptuG/lBJmzf1pBTDpA0BBEcJce9/6NP
+	 JgpFfuUM8R6d1LmvCnHZSDwabfE9DSRsZl1cUZ/0JOjQba59Nal+i+smtwfSz0H8hjsp6
+	 BQeqa6oJCMwgzuALyqWrkTk+3JYu3IfZAb+acfI7llewJsc+mU4dvzxqUjDvIUKiI7H/A
+	 MTv+BcTMkjz27uX+s4hBfJON3nyi3fXjSN890bwVtVNLQUQL/Fec2LxgNGHhITekktAM+
+	 hSjj9/QNS+UwXt5SjxJxcTUuU1MH8V4SgbVSkMj1r3N+hJLknWKp9nSpOi8RPhG9l0w==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=DauXenOg;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791671550;
-	bh=f6czWl/9KXlkpCEnFRyYWuvof6fd/ddUetakSqb9cSk=;
+	d=lists.u-boot-project.org; s=default; t=1791671552;
+	bh=mtNEPWdilQ/l4uF48YhmtVaQ4W8DBfZD+MnoH+3Y+no=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=UXp/nmM8lFGPn/jY+K/wHKdNs4UNCHMmGXiTzG9hr81Ric/PJ2DlmbpZkV2VlfxGe
-	 KfoHs+qAR+/zYP2MB8d1sBGBdCvzhYSScdvJVPknrco3j7G4IZd97OKl02MxTueVCe
-	 zLHPT7aNQaTf5TbGghG3qlkG8dqB0AASeHpuGohksa39IoyPtuh63GgoDbJaCOVZLV
-	 8k4+UsivLmkSDLDr9e5dfkGU3tu0YrnuhEg5vYDpNXn38gUxGKCSzETCRKzd7Aar1Q
-	 g935+UVJr1n9vee3slEdXN9N672QdQH3ixZW7t41ci8RaBV62i+dUbPN3ZdB/f/2q9
-	 6nEahvb31vyBw==
+	b=cYc4py0VdKWuYaaZ+8VoNXaJhrjxeY6DmcVG8lk503OzWZzVnXAtKD67HnnPNq3Po
+	 UIKbd1bTYyjncYyLAhA7vlqTprMSc5fepM0C6DDJVLu3ZXP2UWFn7BRPRkrvMqkeAH
+	 iqcNaIsHnvH4FuHO9Ij1gDHrPjDjLpWE2aaAYU9ParQgICrY5b2zda/nPyLg2iz/it
+	 lONFK8g10bCG5J4TI7v4WDWooaH2qD/TwCReGJpZNLak4gW6SSfEHmlc8bwR+7mciv
+	 2aIiUPYmnrDAor/Tt5EXXtOhiY+/XsAREP90AsmHY8OOiNMYVDwBEq4oH/LtzH038h
+	 OY7IY0WgsYHfQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2AFB960702;
-	Sat, 10 Oct 2026 22:32:30 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id B2E1B356
+	by smtp4.osuosl.org (Postfix) with ESMTP id F14BB40960;
+	Sat, 10 Oct 2026 22:32:31 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id B70089D1
  for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 21:08:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A543A4082C
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9D1C44082D
  for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 21:08:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uuDLAdj9iSNy for <u-boot@lists.u-boot-project.org>;
+ id 1_cbVQECOEaA for <u-boot@lists.u-boot-project.org>;
  Sat, 10 Oct 2026 21:08:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CEF844082A
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E28DC4082C
 Authentication-Results: smtp4.osuosl.org; arc=none
  smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791666490;
- b=QWz3GOouzFFGDXCjY5G+mFSfKRtyhVkdCiz+4ezPOy95wvl69FK3wv+yqvzRqUkKayMq
- 5nokaQ26snj5MX0a1mcZVCG+IErH6abKtAcB9769VeqBE03Lhw/Lifd0mOnIuLobOlrsg
- SAY7jbmSeOv1Z3MrO//kSZ2f9311SaCkHFnCQmuK85WNB0kB9o5VGdjYhh5Zlqmbpauty
- cAfgVGgztkK20LO23wJfdBY+ew7ATaFWOZbgiJheHVMEXRvRKvZupruWZh0MWwsbpDU1q
- BOu0bgjUpDXaQ5cle+DRQf92MtEzGx6gGm1r+kcGqqmryTNyM06zwhxKo9c2m4/+3vQ==
+ b=jEwtJe0opOnV7DBJuXxlGVi0wfrly+INPvWv00V7rk0lBwuPpaq1UgCFBVNR9NORXYK0
+ qZ5UH2QI4eoG8ZMYkPT8JfPBKyKACAGQdSItnI6/RmSUirpwbHI4XU5aXWOcxHVujWDHH
+ wf4k1WuDy7Gqwwvun7qPy5osUC9fKQRN1EgCvklKZ/k0eaT/Ko0FfMYXZ2SKdLqu0Xit4
+ M71wZXUeHit8Qr5YVz8hIhOMoN9VQBNzOOXVfKX+NNfv4LvrYQjQJNg9Vi4HObdsCFGx+
+ yNRtVL+F45dyMwi/TN+1aeslD4TqlGdXMGlDFUHgavDD69F/EAatirmgUjTyRBeEtbA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1791666490;
  h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
@@ -83,16 +85,16 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
  X-Original-From:Reply-To;
- bh=f6czWl/9KXlkpCEnFRyYWuvof6fd/ddUetakSqb9cSk=;
- b=rfwb7aUTjrMdy+2j9Y0CZ7bXF+zE/6fAFvHWw4v8VsAGkbxkh5bvOKU7ud3ALNQ4UdNs
- iJRrM5+18t7KScnmSuXW0Gi4fPFoWG+keFI8fXSCGSO+wbG7QfrAow6GlDhRhKBiL4qXK
- krAnuh0DmYKxKqf8ad0N8pgcC8/OJMTgzUA4XB23VySfG/lUEPV0YwiXHnkNL1IZN3BzA
- cpKr799ygVY+0I04i50+4iTYEtK7OQEUTQh/Ofo4Dtf2sos2IDYNu83ahjFchCLAjkRUM
- rTYN61NRJKQGD9BmHvmBnhN4oET1spIfGhmQlS1PPmXt+8aRfoQiutl8/cZNm8dN8SA==
+ bh=mtNEPWdilQ/l4uF48YhmtVaQ4W8DBfZD+MnoH+3Y+no=;
+ b=b7kAuGiW+WWNXJ0ikHgffFWH8mDPzHbFufwiiobx62rcLyTviuZtJ9ju9prH/sOI2sqF
+ aaGuQCSL8FddWNH/hBRflwWJEnRMrUUIfx0Kyrsgo/GV+fzZNLZGC2Ig5Xd3/OVB5J+lc
+ sekPQM4E2DeTcDvXViSOKSLwDhKifc9s5EFL9+JsNwFARnU/Jr5ueykeQo/ml/vqA/rgy
+ WoSMhDsobdcYijjKWFfx4Q1cP7c6p3bxTyf4nbLNupkhdbGPOb3DziH9KvcrSzYMKW4CD
+ 5RIlz27qBG3j4+UNNV6YMt+yxQb8B9IhMwv/K0iDCcQKjDY1OZgT4JIwgX2AWGdHMww==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=N5wKjA9x; 
+ header.s=k20201202 header.b=DauXenOg; 
  arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
@@ -102,38 +104,38 @@ Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=N5wKjA9x
+ header.a=rsa-sha256 header.s=k20201202 header.b=DauXenOg
 Received: from tor.source.kernel.org (tor.source.kernel.org
  [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CEF844082A
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E28DC4082C
  for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 21:08:09 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id A2BC06053B;
+ by tor.source.kernel.org (Postfix) with ESMTP id 8AF80602D1;
  Sat, 10 Oct 2026 21:08:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 581C4C2BCFB;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 3C193C2BCFA;
  Sat, 10 Oct 2026 21:08:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1791666487;
- bh=coKEoZ5d4mrzTmZoVC2FvC0JOpQAMboHhDBtatFRxhA=;
+ bh=x6k/VA/8ymJD6YpmDlr+uywvqsjyz/d5SBVX5RcPKoI=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=N5wKjA9xs8PAUnabHM0qTwdAxlqEhzHOPXlcxygCiqoucWNeAFmEhDWfrK1ASvjKn
- 4RHiUK2uynk/wt+nbhUMA5I2tI37uI7on9Q2aUBPKJVEghqoictdrIBQTIInj3oiel
- 8HQI1lNAJTvyDifXE1ipNj2QJ4EWkU0HApQLKL3ZZ3iKd0dng5j46WwGmk7cO0ishj
- CogkTqmWZRaq6V0MyVSdWe/8YifKAAs8+y9IhTMERTTbVqV8aaW0CtHpmA98ScNy74
- iOQdSPT2xuVjF6aAsWgbiaGeX9OmJ3FtPpSk7c6MPA+0yRTzNiIb5+SlkjWlZhBa4w
- zqO8rU1kpLSWg==
+ b=DauXenOgZz1pJRoPiwMZxPkcemadqHR7AGmCT/C1kDHHMiei4OcnkWSRX5RBbNrlr
+ FLMID84WBRBbtZ30DzrMfO8VXekefy5t+Cfsg8t7BIx9qusDznGzv/alyILz+svE4D
+ K/TriCHfFYZraQhTWuveOsEE+VagEmXKg1wqiy1QWmiLBuIXFVSg3v+G1XQjDqnwTf
+ 1pNkEI/Fddr7mouIhOff73Cxa/letIi8yaCwz+DM2VCxcRAeTDJTeGn3ADEU2tyCFG
+ /xBT6ZjPq7FKM1JYozwTHH/XQd6bRc4XrLBU1K2/bYjd1RaFN4zsgD9+W06RbpDMKH
+ HgAjHiaIo4odw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 4903CCA9ECA;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 28186CA9ECC;
  Sat, 10 Oct 2026 21:08:07 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Date: Sat, 10 Oct 2026 23:07:54 +0200
-Subject: [PATCH 06/11] cmd: phonemenu: read the A/B slot on Snapdragon
- without "misc"
+Date: Sat, 10 Oct 2026 23:07:52 +0200
+Subject: [PATCH 04/11] boot: android_ab: read the A/B slot from the GPT on
+ Snapdragon
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261010-b4-phonemenu-series-v1-6-bfa23de6eb0b@protonmail.com>
+Message-Id: <20261010-b4-phonemenu-series-v1-4-bfa23de6eb0b@protonmail.com>
 References: <20261010-b4-phonemenu-series-v1-0-bfa23de6eb0b@protonmail.com>
 In-Reply-To: <20261010-b4-phonemenu-series-v1-0-bfa23de6eb0b@protonmail.com>
 To: u-boot@lists.u-boot-project.org
@@ -156,11 +158,11 @@ Cc: Tom Rini <trini@konsulko.com>,
  Alexander Martinz <amartinz@shiftphones.com>, 
  Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791666485; l=2210;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791666485; l=2142;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=cCQTs89iJndVMQmPdK8pwsF9GljpgofHT26OXllY6lI=;
- b=+739HSpKLV8UKpSy7KMnYpX1O2S5PBZTxQ/mHHwiXUzxt8/ssqELItCeRprsm037cxxHAniwJ
- R51AEke2zfCC9IQjZhja4vc+t6B/8zkLs5vxR4Lhwd2knDmsVL4nBVd
+ bh=//DmpccicaexghVlCBHa4ZEw776XyWUG38BTdmOwT/c=;
+ b=h3jpZxqENsNLkODNvYYzin5PdF1qljqJp5cI93q0YvK/icOhsIiekPzG1fc7O7vxm6rMJktKW
+ 8AiHekXUXlfCDzL7xycKDJ02ccRMeM97NMLrimSaDY7aGHXHQOPRG+U
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -183,77 +185,73 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Petr Hodina <petr.hodina@protonmail.com>
 
-Snapdragon keeps the slot state in the boot_a/boot_b GPT attribute
-flags, handled by ab_select_slot(), so no "misc" partition is needed.
-Override phonemenu_ab_slot() in a new Qualcomm specific file so the
-generic code does not require one.
+Qualcomm devices don't use the bootloader_control block in "misc". The
+slot active/unbootable state lives in the attribute flags (top 16 bits)
+of each "boot_a"/"boot_b" GPT partition entry instead.
+
+Make ab_select_slot() read those flags on CONFIG_ARCH_SNAPDRAGON.
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
- MAINTAINERS          |  1 +
- cmd/Makefile         |  2 +-
- cmd/phonemenu_qcom.c | 28 ++++++++++++++++++++++++++++
- 3 files changed, 30 insertions(+), 1 deletion(-)
+ boot/android_ab.c | 42 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8734a683221..e4c108a0412 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -689,6 +689,7 @@ S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
- F:	cmd/phone_util.c
- F:	cmd/phonemenu.c
-+F:	cmd/phonemenu_qcom.c
- F:	include/phonemenu.h
- F:	configs/qcm6490_defconfig
- F:	configs/qcs9100_defconfig
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 913d94abdb2..2fb613228f6 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -36,7 +36,7 @@ obj-$(CONFIG_CMD_BMP) += bmp.o
- obj-$(CONFIG_CMD_BOOTCOUNT) += bootcount.o
- obj-$(CONFIG_CMD_BOOTEFI) += bootefi.o
- obj-$(CONFIG_CMD_BOOTMENU) += bootmenu.o
--obj-$(CONFIG_CMD_PHONEMENU) += phone_util.o phonemenu.o
-+obj-$(CONFIG_CMD_PHONEMENU) += phone_util.o phonemenu.o phonemenu_qcom.o
- obj-$(CONFIG_CMD_BOOTSTAGE) += bootstage.o
- obj-$(CONFIG_CMD_BOOTZ) += bootz.o
- obj-$(CONFIG_CMD_BOOTI) += booti.o
-diff --git a/cmd/phonemenu_qcom.c b/cmd/phonemenu_qcom.c
-new file mode 100644
-index 00000000000..d8a295c10dc
---- /dev/null
-+++ b/cmd/phonemenu_qcom.c
-@@ -0,0 +1,28 @@
-+// SPDX-License-Identifier: GPL-2.0+
+diff --git a/boot/android_ab.c b/boot/android_ab.c
+index f2b1110aa24..aedeb1edf28 100644
+--- a/boot/android_ab.c
++++ b/boot/android_ab.c
+@@ -191,9 +191,51 @@ static int ab_compare_slots(const struct slot_metadata *a,
+ 	return 0;
+ }
+ 
 +/*
-+ * Qualcomm specific header information for phonemenu.
++ * Qualcomm devices don't use the bootloader_control_block in "misc" at all.
++ * Slot active/successful/unbootable state is stored directly in the top 16
++ * bits of each "boot_a"/"boot_b" GPT partition entry's own attribute flags.
 + */
++#define QCOM_AB_ATTR_SLOT_ACTIVE	(0x1 << 2)
++/* Not queried below, that is SBL's call */
++#define QCOM_AB_ATTR_BOOT_SUCCESSFUL	(0x1 << 6)
++#define QCOM_AB_ATTR_UNBOOTABLE		(0x1 << 7)
 +
-+#include <android_ab.h>
-+#include <blk.h>
-+#include <part.h>
-+#include <phonemenu.h>
-+#include <linux/errno.h>
-+
-+#if IS_ENABLED(CONFIG_ARCH_SNAPDRAGON)
-+
-+/*
-+ * Slot state comes from the boot_a/boot_b GPT attribute flags
-+ */
-+int phonemenu_ab_slot(void)
++static int qcom_gpt_select_slot(struct blk_desc *dev_desc)
 +{
-+	struct blk_desc *desc = phonemenu_storage_desc();
-+	struct disk_partition unused = { 0 };
++	static const char * const names[] = { "boot_a", "boot_b" };
++	struct disk_partition part;
++	int slot = -1, i;
 +
-+	if (!desc)
++	for (i = 0; i < ARRAY_SIZE(names); i++) {
++		if (part_get_info_by_name(dev_desc, names[i], &part) < 0)
++			continue;
++		if (part.type_flags & QCOM_AB_ATTR_SLOT_ACTIVE) {
++			slot = i;
++			break;
++		}
++	}
++
++	if (slot < 0) {
++		log_err("qcom A/B: no slot marked active in the GPT\n");
 +		return -ENODEV;
++	}
 +
-+	return ab_select_slot(desc, &unused, false);
++	if (part.type_flags & QCOM_AB_ATTR_UNBOOTABLE) {
++		log_err("qcom A/B: active slot %c is marked unbootable\n",
++			BOOT_SLOT_NAME(slot));
++		return -ENODEV;
++	}
++
++	return slot;
 +}
 +
-+#endif /* CONFIG_ARCH_SNAPDRAGON */
+ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+ 		   bool dec_tries)
+ {
++	if (IS_ENABLED(CONFIG_ARCH_SNAPDRAGON))
++		return qcom_gpt_select_slot(dev_desc);
++
+ 	struct bootloader_control *abc = NULL;
+ 	struct bootloader_control *backup_abc = NULL;
+ 	u32 crc32_le;
 
 -- 
 2.55.0
