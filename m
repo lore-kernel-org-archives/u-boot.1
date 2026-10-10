@@ -1,162 +1,155 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF31FCA9EC3
-	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 13:14:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8B96CA6017
+	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 13:14:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A6FC660A3D;
-	Sat, 10 Oct 2026 13:14:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A303E8136E;
+	Sat, 10 Oct 2026 13:14:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uSXBTzcfxIAl; Sat, 10 Oct 2026 13:14:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 97F7860A45
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791638095;
-	b=reFiPv+onNBQCobrl97orz4HKdy6XShJA9ipT5iQzxpTMsDJHtrDfvDM9xrEYGW28+oe
-	 zO8t8oa5avEpNe7rOYDHahg/3d3y/cwW33IrOQIKwLi/1VSvjkOqBPpFsLfU0jQOq+Ybi
-	 kB4QJU4TrDBAO4Lh4kqNrWpHwht3Px5LUIbjDM2Lq31ZRYFQ8UkTeK2XCMPbw+XGGaCCF
-	 0CjC9/VEHnej8TLx3eAZP9/+eAYbU5svxlABO7qTB6qYQ0YF0fvOnGLiA6M3o2Z7iFkip
-	 Ws14lZcji97zOl4O4eHdM96MXI57GF4MHmrNkoFXjRbVgzltvokRKJJXx2/LhWsLwLw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LSYj38Ce_PnI; Sat, 10 Oct 2026 13:14:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DBF5C81299
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791638098;
+	b=IjdZ27xfN6eL1xmZTh6wgJdCwDyF2v/fA7bkH839zJdzry4QYst8m739hIDmgKwAZRx4
+	 GrKmEl+jEENc8uF37rZ0eAJCmQcftv7l4r7Ew+6KrWxLlIMezwmhkASBn2g6NJqN7qy+R
+	 JWQecAXciDCvfNLjPCqgZNWrLMJK9bF7eJoBXC9fkDEPBXwIbriosIBbXrWUxsXXpy78A
+	 EP5jm+YgmB4YGn74CveEAaGa5Am+Y+gm2CEWTGSqxqL78j51z45KrlByVGdfhCg2/Tau7
+	 38Skzzot/Sb0TcFStXjZtI40lJmOpQ6tM5f0vV37buEyJ3uOygw8meewZMMdz/gvY/g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791638095;
+	c=relaxed/relaxed; t=1791638098;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:DKIM-Signature:Date:From:To:CC:Subject:In-Reply-To:
-	 References:Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=BHZLZA0ELqGtcFsLFhhFiBqfM1nH/kyq/71Vt50G8f8=;
-	b=ml6qw8wARy6csSbXMsboVFep7Ak04Y8HYzzhrrp3ZStkP7YQmT287wlsxpC4vZ88roeg
-	 D0Y5Y6SAFXnXB2VzpWp4CDiSSpZCjpEwFn1AN2KEmIJhMmLgcYB0EfQ1HsI+eCmYcMyS4
-	 N6RCouPBqRPqhN6x+525DplzSYSyvg/F01o6RNjcCsS6qrqC0h1z8aXhQs7JaRNpYGNOo
-	 5CzbP0c6kdSb6LOdOs0dH8p+CpBgh5Cgz6I1XO6ZL5diSkzehtaRmHJrOkgOeuTvjJUFr
-	 VugfnrdwY6Exh6fNneLjZdUvpAIp3EuEUYmcRJe6zUwLRGZtczOpJYsD5ZdH3xWiVWw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=pass header.from=mainlining.org;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=AGvGmXbs;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=Bp43Vl1m;
+	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
+	bh=j4XGP4xl2SWBh8r0lXbsf/zSNJw1lx8/F45ZE5IqlTo=;
+	b=MBuYegeBKtE5h+2hYa1eQfrjMG7vu5hHD57KKco6fuYwlEk8eBGMZKTtaEWafPpQMFFq
+	 p70orxQuijN9oEEJZ/AKi90diISQKmYX7Wh1al2rWrGCY38cB4SBmvLoykB/rSMmbSoZF
+	 LJgLcGBcEkR/STSZoKmArZ8sJqYWHQ5j5OS7ZX6Cp5prXhiY6lC7ZYnYi326p/XgmnbXs
+	 chTPhE4ixhMOQjJnBMgrQsGnkioSQn6Fr27Xl7F5zPF1fR9OjXjBVJTBAE+I9hf07ov38
+	 c8xQltSOsWp/LsxpwlRxjA7sdNHFMwgRbczpf/NqLj9jxZ6VYW5l3+zGvIx0sMnyrug==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=XBwfodlN;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791638095;
-	bh=BHZLZA0ELqGtcFsLFhhFiBqfM1nH/kyq/71Vt50G8f8=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791638098;
+	bh=j4XGP4xl2SWBh8r0lXbsf/zSNJw1lx8/F45ZE5IqlTo=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=yybyt1TnjuF0MUSVnbTQoYGiydBXhr+3W5iG0kCIavfU3qtIqa57EJilr4YDKQ1yB
-	 M0YcVCpIGUl0r6O97X5qYoiTJy+wBsrEV2VRNczWLQ8sCwRjzBjECY1WPlX8vC/hrX
-	 20z8xyv5+DQgalpbm6W1cwVUzCPokzMGvJTRniTQnb9kyfF2c82MvOEJT0ivWalvdn
-	 W0kElC1rmYhdmITcfTxidEWcEenSBRyZtwDNtAXiYVtMz0jgflHByE27ovinxi3Ioc
-	 IryZm5psrAJ6MxNK9/j39AuWd8eEvSAseSxN2grWD6ifhBmnATFb6TvUwh0tL3ZgCq
-	 8BGap2X1kIe8Q==
+	 Reply-To:From;
+	b=zrPbACx7HwU/38l5MQ+fcAfrklE8LApMlbC+MnJrvc2/MGxfzhI+978aVPIopX9vs
+	 yzz+10pxYJoOXnsfvWbh+sWVXIhIoxXeKMiPJGnwT7qnG/vKImMzbrpVX7qMa+rfYQ
+	 82O9BLIu3V2vLI7nwaiIaxciBZybsjfRIH8rQlZ1d9SlDFux16+CFqvh3jfrsP6ncj
+	 AkNNu+7rVVbfldQkEyZdL/e/K9rPkPhOsW03jrwDP4X3RyaCBb6CQGOgcun3TS3amU
+	 0qdqjMU4sGwmIhxCJcOLWnzLMzn1K8qU2ml1Jv/tcmiAbg3d9vpRInfA1pECUIaPGW
+	 aX9YpV6EGb5ng==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 97F7860A45;
-	Sat, 10 Oct 2026 13:14:55 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 37D8C2E0
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 11:00:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DBF5C81299;
+	Sat, 10 Oct 2026 13:14:57 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3DFC822B
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 12:28:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1D24860672
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 11:00:14 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 247C481155
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 12:28:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cf2jCeF8NXT7 for <u-boot@lists.u-boot-project.org>;
- Sat, 10 Oct 2026 11:00:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DCEB460670
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791630013;
- b=EE+roM4DbYV5F2KNBYcPFLzHeufhYaZ2dCnncJrTYyiNrLCWX0meShMopMkO5PQtKDIm
- nlfUjWQiiGd7AN2NjPXAgVeR80FgO2iHwZlYCVO3fBSXW8L5tEdRQso8YVSUe/Znx+Vkw
- TAK3yz+//X1P7n7T+MeRWZz9NLRGY3OjGNBKsLL5yqABgEDzuyazLGMuZ7dEzV1ceqD2K
- cNiBiPI2w9+yGzHRiGCK51MxduUHVeED7ZkUkYVbYNgZjGUP2TeSNg46nrxgd+Y4UJ/c4
- JU757stZ8DircLKXBT0Mm2rPmO4jtBPgd6RyrQHhsZpo7izEm8Py3EmlzXPIiYh8RRA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id s9FWJGEw8pGd for <u-boot@lists.u-boot-project.org>;
+ Sat, 10 Oct 2026 12:28:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6865E81061
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=172.234.252.31
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791635301;
+ b=ni3fwIjXZjBvnYuJezO11SUYtxSMAYLyWUCd1ynbvDMxQAKXqfE4XcWhpNMMPpetMRQD
+ wo7TSEfNV9ZqBdYciK2JC/DbA8cB0diMGqCHADuwrzVYar++O5tvyEtmI50eT50y6VZMT
+ M+tHV3ggwb7WR6neqJshFRHFTzcSjx1Gp4PNrJ+Nvv9WXEWBGiheF1Z4IzF6wrKwDE5M5
+ 13yw4izuR6IAG/14SCvYyfJkclwJ5671zEYdW9JHUFeSub1wKEHCgPff7Xe/amtHW6sS1
+ vGXpt2LpTA3EOKTT9CoJRyNvpxAZfdmlOL5RqM+Xo078iuGkoLBTeMWpteWCsX7Dg7Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791630013;
- h=Received-SPF:DKIM-Signature:DKIM-Signature:Date:From:To:CC:Subject:
- In-Reply-To:References:Message-ID:MIME-Version:Content-Type:
- Content-Transfer-Encoding;
- bh=BHZLZA0ELqGtcFsLFhhFiBqfM1nH/kyq/71Vt50G8f8=;
- b=hfbzbpUqspmY1QuZr5okREIfFIbRXIfBWZGrNr0F/65gH653/68vgLAOxjxR00HUQ2Kg
- 2FCtC4yy+lzR91U24YM+/GsFIPN5HcIg7tort6H2QG9oYK2Qa1PJJdE60jvGzbU72EejM
- 5rIJ6YY0MB4dGDxKsR7KJ1Lb3XzBFUW8R24OBwjqjUI1EewTA6RZSJPct0fjGIe26Fc4G
- NH/i+TIlYH2g1NrUVmCl60l9eZYO4f2aP089Zj21t3PZ92ejKhxZ5+HShHKe4y6UUAB75
- UkFWTYbpqOj5jsXtwR8uNcgQBISzcsPg4k3uBiX8gD5jVoEMn6Re0H9CZ9MGqBj4Cnw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=mainlining.org;
- dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
- header.s=202507r header.b=AGvGmXbs; 
- dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=Bp43Vl1m; 
- arc=none smtp.remote-ip=5.75.144.95
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
- helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
+ c=relaxed/relaxed; t=1791635301;
+ h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+ X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+ X-Original-From:Reply-To;
+ bh=j4XGP4xl2SWBh8r0lXbsf/zSNJw1lx8/F45ZE5IqlTo=;
+ b=oeRS5oG4/6mrfpmyzUralRUaQRJNe4YSW4CYGakRajOrX0hNgWEv4iIYTkEJ02usijkX
+ BeQJhOCkylsNUFJ/1N0rpDrVc4pCS4/UQPTrO/48NYCpHkhabn4o18ZwtqD1iKGL5LJdp
+ AWywKk6Jaji21rbuRPxvYPut3ai5fMSLsJqseGzIqfy5No7HDXptAQlWo+Egomphg/ELi
+ KQdHjC3r+bA2ul5fNi2tvF17rCa3JHFx6Vysq3VHUsbi+lj6JistKlt3NOI1IlkLKzjiF
+ 9SJwLQp3zAeePrpnKJg/iChgm1CaXskOThtzeXHpDI5Q34pTPIj/vWJTUiawFCK41NA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=kernel.org;
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=XBwfodlN; 
+ arc=none smtp.remote-ip=172.234.252.31
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org;
+ envelope-from=devnull+petr.hodina.protonmail.com@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=mainlining.org
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mainlining.org
- header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r
- header.b=AGvGmXbs; 
- dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=Bp43Vl1m
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DCEB460670
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 11:00:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
- c=relaxed/relaxed; 
- h=Message-ID:Subject:To:From:Date; t=1791629938; bh=BHZLZA0ELqGtcFsLFhhFiBq
- fM1nH/kyq/71Vt50G8f8=; b=AGvGmXbsXEwbYyEbcBsxpvgHeFIPABIUscZNxJE76zC53pg5M6
- xEwdlcKaeFSVybGmdLar81IvEyUzlOl1c8WgTSPX7aWrbA8rWXHrC0rqxkDKytxqHFE6INWuWzb
- VCbt1yfCvWt8MXodzJplsco4T60Co//Qcyq209CXDPejIBE1ODk0PHwxTpi13Xd6YNTspdbL7y0
- /JcOgA5CBxN3tOaXM8a3XRksEFPW7mXEn34iBmAgWOmh+U/u9MeEO4eS/KuC/h7NI+I38LSAwXJ
- y4dpHdNaBm/lOGThKsJdVO3gsqc749/tiggMCOfPe4MqA9Jlvl7jCc5IdtYxY9ketvQ==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
- c=relaxed/relaxed; 
- h=Message-ID:Subject:To:From:Date; t=1791629938; bh=BHZLZA0ELqGtcFsLFhhFiBq
- fM1nH/kyq/71Vt50G8f8=; b=Bp43Vl1mnWwmsoajbBP9vcyAf0nvwOeX2aODazReZz9srCwjOx
- xmlL6SgokTkZK6yQx5V+KVl1xspPrRhhbiDQ==;
-Date: Sat, 10 Oct 2026 11:58:59 +0100
-From: Bradley Morgan <brads@mainlining.org>
-To: =?UTF-8?Q?=C5=81ukasz_Majewski?= <lukma@nabladev.com>,
- Tom Rini <trini@konsulko.com>
-CC: u-boot@lists.u-boot-project.org,
- =?ISO-8859-1?Q?Marek_Beh=FAn?= <kabel@kernel.org>,
- =?ISO-8859-1?Q?Marek_Moj=EDk?= <marek.mojik@nic.cz>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Alexey Charkov <alchark@flipper.net>, Anshul Dalal <anshuld@ti.com>,
- Daniel Golle <daniel@makrotopia.org>, Fabio Estevam <festevam@gmail.com>,
- Gaurav Jain <gaurav.jain@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- James Hilliard <james.hilliard1@gmail.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Johan Jonker <jbx6244@gmail.com>, Marek Vasut <marek.vasut+usb@mailbox.org>,
- Mario Six <mario.six@gdsys.cc>, Michael Walle <mwalle@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Pengpeng Hou <hppiscas@163.com>, Priyanka Jain <priyanka.jain@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Stefano Babic <sbabic@nabladev.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Torsten Rupp <torsten.rupp@8tronix.de>, Vincent Jardin <vjardin@free.fr>,
- Weijie Gao <weijie.gao@mediatek.com>
-Subject: Re: [PATCH 01/26] board: powerpc: Remove MPC8548CDS support
-In-Reply-To: <20261010125149.5b2ec50b@wsk>
-References: <20261009193704.13061-1-brads@mainlining.org>
- <20261009193704.13061-2-brads@mainlining.org>
- <20261009215538.GG769217@bill-the-cat> <20261010125149.5b2ec50b@wsk>
-Message-ID: <BE25EA10-9C90-42CA-9305-52B37782A0B1@mainlining.org>
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=XBwfodlN
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6865E81061
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 12:28:20 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 7718543C81;
+ Sat, 10 Oct 2026 12:28:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 501EBC2BCFC;
+ Sat, 10 Oct 2026 12:28:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1791635300;
+ bh=rcLjF6TEpSDJjnEo+5tIqtcWIZ7l/BHEPyV3oLz4DUk=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=XBwfodlNvELpwm6X3JZTfoTsETmZosjdxioRF7dC2SgCCdQVaDV3VsXi6JYnX7Hpk
+ lOUCCJOlz66rDHzJ+CdeybyLvZQ6hQqUEEfi4UTuiIRw6xkAF9Wq9VpWfNr88BQSsI
+ /J6vA6Ps0NySymzY0clXLkvLZKTOjUfX746WEkHcyOPpzfDggCwvQECfms0cqTUazF
+ QBldziRP4nOS6sKzpNPEJoFJB/0L+ZO3au54Vhro2Lxz8t31pDrk3d+ZLyTfSjqGlw
+ byGr4tF1SmACnSmdcj2XagB65EYWg/N1QTKdIFcWT3wszZjZXHf9V6VwpWoogcUc8Y
+ ohmv6U2zfMH4g==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 36C74CA9EC5;
+ Sat, 10 Oct 2026 12:28:20 +0000 (UTC)
+From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
+Date: Sat, 10 Oct 2026 14:27:53 +0200
+Subject: [PATCH v2 2/3] doc: button: document monitor subcommand
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261010-b4-button-live-monitor-v2-2-004f47a4a7b1@protonmail.com>
+References: <20261010-b4-button-live-monitor-v2-0-004f47a4a7b1@protonmail.com>
+In-Reply-To: <20261010-b4-button-live-monitor-v2-0-004f47a4a7b1@protonmail.com>
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, David Heidelberg <david@ixit.cz>, 
+ Simon Glass <sjg@chromium.org>, Petr Hodina <petr.hodina@protonmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791635298; l=1710;
+ i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
+ bh=V1QHc3j+E+u6j39lWYuquKXtDVoLT3DspVc7Br8oKdQ=;
+ b=el7dK8xFlZBrZucJ96yK0qIkvmxaiEEJkKUB8dGoqMr8BBO6jMTO5kQUuiSaNWIypi975G86K
+ Byj5Vd3jAcXBRXn22A9qS+95x0/q5TC8Uz6X/pF6fJjJCeXrEwcnSiT
+X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
+ pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
+X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
+ with auth_id=594
+X-Original-From: Petr Hodina <petr.hodina@protonmail.com>
 X-Mailman-Approved-At: Sat, 10 Oct 2026 13:14:42 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -169,57 +162,62 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+Reply-To: petr.hodina@protonmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 10 October 2026 11:51:49 BST, "Łukasz Majewski" <lukma@nabladev.com>
-wrote:
->Hi Tom, Bradley,
->
->> On Fri, Oct 09, 2026 at 07:36:39PM +0000, Bradley Morgan wrote:
->> 
->> > MPC8548 silicon is no longer manufactured, and the MPC8548CDS board
->> > is obsolete. Remove the board and its SoC support.
->> > 
->> > Signed-off-by: Bradley Morgan <brads@mainlining.org>  
->> 
->> So, globally. As has been discussed on IRC already, please take a more
->> neutral removal message in v2. The problem isn't that the boards
->> aren't manufactured, it's that (likely) they aren't being actively
->> tested and maintained in the community. We're fine with "obsolete"
->> hardware if someone is maintaining it. Also, please rework the CC
->> list (outside the cover letter) to include the listed board
->> maintainers, and then only people that have touched the relevant code
->> recently, perhaps with a manual audit or exclude some global or
->> common files, when looking for who else to CC. Thanks.
->> 
->
->Maybe I would add my 2 cents...
->
->There are a lot of MPC85xx systems out there - and probably (my guess)
->is that at some point some customers would be "forced" to refurbish
->them.
->
->Some companies need very long time to realize that their crucial legacy
->products may be removed from u-boot. I would opt for longer and more
->"broadcast" obsolence process.
->
->
->I had similar situation in the past when some Samsung SoCs were removed
->from u-boot - nobody was willing to pay for re-adding them upstrem -
->this means that they were kept out of tree.
+From: Petr Hodina <petr.hodina@protonmail.com>
 
-This opinion was basically said in IRC, that devices that weren't on Linux
-AND eol should go.
+Add the monitor subcommand to the synopsis, description and return
+value table of the button command page.
 
-The V2 series is submitted, with a pick structure, so every "EOL" board
-gets deleted. You wouldn't have to merge them all.
+Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
+---
+ doc/usage/cmd/button.rst | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/doc/usage/cmd/button.rst b/doc/usage/cmd/button.rst
+index 6c6794f31b8..49bc373b5d3 100644
+--- a/doc/usage/cmd/button.rst
++++ b/doc/usage/cmd/button.rst
+@@ -12,6 +12,7 @@ Synopsis
+ ::
+ 
+     button list
++    button monitor [timeout_ms]
+     button <name>
+ 
+ Description
+@@ -43,6 +44,19 @@ A list of all available buttons and their status can be displayed using
+ If a button device has not been probed yet, its status will be shown as
+ *<inactive>* in the list.
+ 
++To watch the buttons live, for example to verify wiring on a device, use
++
++::
++
++    button monitor [timeout_ms]
++
++This probes all buttons, clears the screen and shows a table of their status
++in the same format as *button list* (*on*, *off*, *<inactive>* if probing failed,
++or an error code), refreshed every 100ms together with the remaining time. The
++command exits when *timeout_ms* milliseconds have elapsed or when Ctrl-C is
++pressed. The default is 5000ms. A *timeout_ms* of 0 means to run until Ctrl-C
++is pressed.
++
+ Configuration
+ -------------
+ 
+@@ -61,6 +75,8 @@ The variable *$?* takes the following values
+ +---+-----------------------------+
+ | 0 | button list was shown       |
+ +---+-----------------------------+
++| 0 | button monitor ended        |
+++---+-----------------------------+
+ | 1 | button not found            |
+ +---+-----------------------------+
+ | 1 | invalid arguments           |
+
+-- 
+2.55.0
 
 
-
->
->
->
->
-
---- Thanks!
-"I'm not a very positive person" - Linus torvalds
