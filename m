@@ -1,131 +1,140 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 106EACA6017
-	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 04:31:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B1ECA6004
+	for <u-boot@archiver.kernel.org>; Sat, 10 Oct 2026 04:31:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2DC9D8142B;
-	Sat, 10 Oct 2026 04:31:03 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9B44B40920;
+	Sat, 10 Oct 2026 04:31:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1k--Um0Xqtvz; Sat, 10 Oct 2026 04:31:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 10EBE812D3
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791606662;
-	b=nIQfE/MoRvQx27xKj+zD6kft72M2t7lAoQIYS7VcWd3f9Kk8IXAIATGE0JD/6nlEC9HY
-	 l3EWv8CDn5vAnGvQwzBtp62Zu0NQOiW9xGWxhezDOwXKg6Lhj9USF16hUHcaOhQFK6W+o
-	 3Bhn3oB50TmZ3jeRvjFD+jvVGQlj0BJzNa3zCKmXQjn304GmGmIl1gV3+xDVXtW1Ngnxj
-	 q35AZDOuonqOWsOwz5PE839A8vxHU80uaU8XrriKitKVt14V4I2zetoyIwyQxmRJ4KPbo
-	 eW5efhw3zCzQbeitmuLr6Yavosz9jztFLsv69FzLIQDvMIvsUO1K5IbW9rIij6UMk2w==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PwvYgxiRzocY; Sat, 10 Oct 2026 04:31:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6BB05408F8
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791606706;
+	b=lCmRQZoexCop08Te8J3sTDJnt0ia9wwfuy8b2p58hHa1oDOBH5/3TEl5wxWMsLOWGaPC
+	 lAgxv2YpdAUyVtgA8Urcs3cWesTbSwSS5YvfRLA9AXM9enF7MMDVSwennPbnxXo9j719K
+	 x9hk3Fe5G0CusZO/mz4lIciA+Q9WpWRfKakbRPyE/JgGRGPCFm5lc5YUI4n6upqJhJOdH
+	 ftDRYAW5offvb6OVl1fLM4PNDKlcgAxVQq+1/p63HFrB7K2EvQh21f4d/kxaIaW1rDNM0
+	 2GTKTexuijteoGUZ2+yAW8BCKhhGsJg6sUkHf39q2E91cVlbKAWRmKZJ9RK9PWDdrUA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791606662;
+	c=relaxed/relaxed; t=1791606706;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 MIME-Version:Content-Type:Content-Disposition:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=DsYRxKGqXl61mDzx4xDdqRahyaXhdWBuluTfSM82kZY=;
-	b=OTa8/kSx0jf8cWHidK+Gr9Hog1UYpUJ2hbfoBFleoP6ETuKTIifoRi4JqTBQvOscrv3F
-	 e9kp4rNYYH39W4Kky3xeGxOeddsarIErD8sZSU2YoXxoGedyVEDZ/vKChTjZA5ew5U3Ou
-	 Wz04CqdYvvEHNZT3gS+74p3IWv4N50W8UYa1Crur/G1ntU1E2zxda9NYGctpXp33qAFlS
-	 YzOzXrkx6HIFiiwDcBum4kPpJGUrAGyw3ciiIZo2lZ5gBEPfsQZap2GpXwPFkLrLaA0cn
-	 DDut535t2yfRFuFnEtWFiaplpgWfndZgQSWBDeJBm1w8QaUjBsUtk9nnu0jw6o+3UGA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jdvWANM0;
+	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=tWEk3IEHIgQ7BJWbvGYAvaCjn/Tv1q46dwAajVCe0ds=;
+	b=Te4HpiBaM8y2zfq7FSgmd5ix88CWsHorjPnp/YPJTmlRjpwFk8bOwF+odfbRkpdr0vXt
+	 wuu70GQWV/oWoxg9MuvoovZTg+xpaMSUcJSKVKwkHnjwqIuiYBpVPzeiQ84y1zdBZWrJv
+	 zRnUQH4lgMu8WDqxNYFzglnbolz5Vd4OCbhWAwXZBmDBp/YXTmOV7kzTLTWWjKVlNvBES
+	 eN7+HRzFPjQoaF/W/9dq6Gulrud/VJ+ejyxNwUDxv03FpYoWXUhZOtIe992ICHPUi9kQx
+	 dLek2e4FcMUHmvkaRuVKRm4gxxBntfxHt+VS0SzRmoUVkD88Bse4Ne8VQ6iNVmERyuA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791606662;
-	bh=DsYRxKGqXl61mDzx4xDdqRahyaXhdWBuluTfSM82kZY=;
-	h=Date:From:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Uw6uldsp5crnI7uMxjIBYvPKkGk7YK0c3Lh3CKDxxTPvm0tW13nlhtpQp5twjpEqt
-	 8m24+4ijDKFFL6cNmIj1mWHZGxlx8kPpTxGhneKojow6aRtj2N3FYQ3A0iNP3i3aas
-	 rJ3EPaOlGqekKzcex2mkka8JX7BAg9mLpGkSCw8vO2LE9xDzKcUuLw5ZQzgpDxEYA2
-	 p8IOSWs27Ck/CbuHqzeemShtaTcp6lMsRdFsd3C9xnXPu1EgveKASvnuGz3KYKukPE
-	 tEUHIpL2teZjQG2EnMglpr4AUtyo6UDEHZcIs9GIU1vj2PVQgXt9dqXOSzur/29TfW
-	 aTiOToEtjOKhg==
+	d=lists.u-boot-project.org; s=default; t=1791606706;
+	bh=tWEk3IEHIgQ7BJWbvGYAvaCjn/Tv1q46dwAajVCe0ds=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=XoiTipsPekJAU+TbDHr//cKuAI2nxoSfU/7hjwxu51Kf5M+w9dKKiH72Avrpn3Qp4
+	 C7M7PKPTQSlUKcOldv5w2FfYPCqDdK7V/oSKWV4fdIb7861vSKoW6AaaScgLmX0MNR
+	 fBQHSK9dMQW5N4UZqef24RdHEYtnxouVZnqELPr0zOr727Gg5uVsDbdzfiwvXRE5Sh
+	 SZiFxSzhnfyxgDQJQO+Vna8pqeP+U3cUNPDw/AoJSg/ZVM8Oy75tXbog+0FdBiAH2+
+	 0BD3/vsQbVp+XmoVLnDMhZmRAImoNmVR2tYm00D1l3uos9gsR1l0xCzAnM9UCbJ4Ki
+	 hCCvVlcYGp2og==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 10EBE812D3;
-	Sat, 10 Oct 2026 04:31:02 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 3CDCF9D1
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 04:31:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6BB05408F8;
+	Sat, 10 Oct 2026 04:31:46 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id A4F6B9D1
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 04:31:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 27AAC81199
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 04:31:01 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8B2768119A
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 04:31:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MsLNPOZv7QK5 for <u-boot@lists.u-boot-project.org>;
- Sat, 10 Oct 2026 04:31:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 291F681191
-Authentication-Results: smtp1.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791606660;
- b=NiMrA7O73W/wIEAkbsJqmtxRkaqQPs3Fin5NSXAlVPJ08c94MFmsfPoMvLhgjQQYL2LZ
- COnUjyKhsw7lgs8+gaJPBSn9amV3euHK0YoCdcOyBzvZyfTQUsLLVow5q+c2JdPpn3YIT
- 64bOgb+h6+UuaRU6lAfCe7ad0ptQLfWoxUQ6r+m+Hok+5K5iAs2Q1SRe0tPOodwM0uSO6
- ce4F0EAD1fWvJUksgHElxPu/TIfaG+Gz+/LC38w39zKI0+vWqAZhyCOB0x0vO25AK3LQw
- f1ZPkjygF9WFZuduRZASYfnv+MMLZ3YjrMhZhNMdfTO5zpFxlsTRO5K/kkJswbasDqQ==
+ id QMBuYB4QUFX4 for <u-boot@lists.u-boot-project.org>;
+ Sat, 10 Oct 2026 04:31:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CBE8E81359
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791606705;
+ b=YjiOV59/rtK6egFw2B6rWzP5fcDoS+Jo/RXBG+4qBhg/LzKBQd3ZfPtN5PF/OOPsaLr+
+ 1pnMdyaaaSypnueZ5EDphMFy7VcVMKqAUNvSVewd6JguX9t/3kwZn+Z1Pf/T+JC1BwE7w
+ LfgWuaut0iMOQA4J+5XH3VxPhSFoYD2f3mB5bYabzkSzEHiLcFR2KC1gqmoqLeyZZI2Et
+ 7CyLWgDWGoaqj9GWKLISvPUi5vk0/fuBCVTyjKSkYcelJYojcCFBKRBoD/039gZ4cZTSJ
+ tEYyMqhUzZbwr/fl7VPRIAASdlLhjKW7WUKYTR9XVRwyYgyql9XrM2+0JjLeHMydn8w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791606660;
- h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
- Subject:Message-ID:MIME-Version:Content-Type:Content-Disposition;
- bh=DsYRxKGqXl61mDzx4xDdqRahyaXhdWBuluTfSM82kZY=;
- b=kNGfyTULSErXC0dYqkIav0Zw7gYK/lQ3C0VKxnnFkT2k/8XF132cZpvGqvDpsBbvsiWS
- l9yQGjzkjXYJyXHjwQG5yx4dhXe9MzQMkiUIf+g7i5yiYfORJ9USrM8Jrl2n3TygzTXcN
- XkOJ7dgcjUcMl3FYuulCg2VMCQgwW799wslcCNxPtBISDw9yys09XsKaKf0wd33xg2hyT
- ECdowPcR7qGU36J6jNd9dqnvJ7hnnnrqKi/qkyT6Kt2nKeRt9Y3BQp7pM5dczd9cgMnbE
- iID/9urCKn7LUYeVlQwDMy0VFg170pGDWzH9sDaDbWKDXDmtLY/eqadgem0I12Vd3Sw==
+ c=relaxed/relaxed; t=1791606705;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
+ Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Type:Content-Transfer-Encoding;
+ bh=tWEk3IEHIgQ7BJWbvGYAvaCjn/Tv1q46dwAajVCe0ds=;
+ b=mRLM1x1NuoYgJGyN6fYSEKQgHo7M1/5PGyFZqfYyq/kOAGqrvfcKxw8zoyN1dps2cRqe
+ 6zCeOBl+M97GWUGEF3YLfz2nO3ipzhP70S9wf8c7crxhe1Z2mHLd6roWEEObcZMTNSGSN
+ Wmsx/840byL70G53Qprl2kJSzGPrEWUq9EfgIpTm8b7SeJYY2q1kcg5gvaR+hp6qpZzlb
+ M7LVCqca4V1BSc7CCXnzKtdrGkP3HGSJLn7VrQZIYEQY1xwl6UJlRxYPdSKBcJdbagbr/
+ 9lg0LWFg0yqD4H5gbRtwsZDVo4RMH/PyrWpRCyXFtN989r3Vd5y++W0/lzC8GTyEu8Q==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=jdvWANM0; 
- arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
- envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+ header.s=k20260515 header.b=l+hjNUx3; 
+ arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=jdvWANM0
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 291F681191
- for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 04:30:59 +0000 (UTC)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=l+hjNUx3
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id CBE8E81359
+ for <u-boot@lists.u-boot-project.org>; Sat, 10 Oct 2026 04:31:44 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 8339240859;
- Sat, 10 Oct 2026 04:30:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF9091F000FF;
- Sat, 10 Oct 2026 04:30:57 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 1446B60211;
+ Sat, 10 Oct 2026 04:31:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C69641F000FF;
+ Sat, 10 Oct 2026 04:31:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1791606658;
- bh=DsYRxKGqXl61mDzx4xDdqRahyaXhdWBuluTfSM82kZY=;
- h=Date:From:To:Cc:Subject;
- b=jdvWANM0pUch1wRNDmqc38MVEdtaHwbBDnKZTpAdtdLlT9VChOc2EcECY00WI3pwN
- DYFmcDIXckP++vVN8TFWJ+xms95JPijnCLLIH5SAbrbzzquRfr6nbG+aTsr7wjBdHh
- VqO21Ir3vupsHO33YQrWnLzjU/ceySLTVZV6ofNXvT2ksHq3Yqdm79XMuuZ3dsdcol
- +NOWYn7R0zrSCxoSoCzWrNSYCmsXTMYG2pSWOz12+UdUa+jLd1jg1LW9Z6RmwT/SLR
- wfEu7D/gLabpbaTAyRwW6oI818icSFyzsPpzCa+w+L3a0/WB1Vsx8efDvlROVVbzPL
- QtGQD8e89uOOQ==
-Date: Sat, 10 Oct 2026 04:30:56 +0000
+ s=k20260515; t=1791606701;
+ bh=tWEk3IEHIgQ7BJWbvGYAvaCjn/Tv1q46dwAajVCe0ds=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=l+hjNUx3hW3Q7PBY1oJM2KSJU37ClgZrWLd+y4RvA2BHGZ+onlwlk/dReaOV66RAP
+ IZmr0j3cLbsPX9zRbHbck5XUh/ntfJ10XNgA6ksFYJfuMCsLtRVXzTS2UfYhQSGKqb
+ EizsmIX8QpnQdnMX7WPdwNjzY5YJk72X2/LxUrcdclEvWwTRlx2Px9vQgCy7OYVIZj
+ GurBRdFaBLTAweiToCpcVUFSiRU+DpKbfw1F10SEznEAewKrIalASZRDBC5By8FXu9
+ cNy2BpbJBAn4lM5gMoEX9iXYQV7xeScNxYz9Ey+JeWz1G3ax/2VoPt++e0utUORpH7
+ izUcKSqh5oapQ==
 From: Yixun Lan <dlan@kernel.org>
-To: trini@konsulko.com
-Cc: u-boot@lists.u-boot-project.org, E Shattow <e@freeshell.de>
-Subject: [GIT PULL] Please pull U-Boot spacemit-main-20261010
-Message-ID: <20261010043056-GKA26088@kernel.org>
+To: u-boot@lists.u-boot-project.org,
+	Yixun Lan <dlan@kernel.org>
+Cc: Tom Rini <trini@konsulko.com>, Jerome Forissier <jerome.forissier@arm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Peter Robinson <pbrobinson@gmail.com>, Johan Jonker <jbx6244@gmail.com>,
+ Julien Stephan <jstephan@baylibre.com>,
+ David Lechner <dlechner@baylibre.com>,
+ Junhui Liu <junhui.liu@pigmoral.tech>,
+ fanyi zhang <fanyi.zhang@mediatek.com>, E Shattow <e@freeshell.de>,
+ spacemit@lists.linux.dev
+Subject: Re: [PATCH v2] configs: spacemit: k3: Enable Ethernet support
+Date: Sat, 10 Oct 2026 04:31:34 +0000
+Message-ID: <179160668562.742055.17000397227078120105.b4-ty@b4>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261010-02-k3-ethernet-support-v2-1-af7f55dcf207@kernel.org>
+References: <20261010-02-k3-ethernet-support-v2-1-af7f55dcf207@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -139,114 +148,23 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Tom,
 
-Please pull from u-boot-spacemit into main, thanks.
+On Sat, 10 Oct 2026 01:52:39 +0000, Yixun Lan wrote:
+> Enable the SpacemiT platform glue for the DesignWare Ethernet QoS
+> controller together with the generic PHY framework, Gigabit Ethernet
+> PHY support and the Realtek PHY driver.
+> 
+> Enable DHCP, MII, ping and PXE commands for network configuration,
+> diagnostics and network boot. Allow U-Boot to generate a random
+> Ethernet address when no valid address is provided by the board.
+> 
+> [...]
 
-CI for this pull request is available here:
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/pipelines/1535
+Applied, thanks!
 
+[1/1] configs: spacemit: k3: Enable Ethernet support
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/-/commit/01b0d2681dac9a153b0426290d696166ae999de7
 
-The following changes since commit 0a55b098d6f5f6bafa84fc2f18b433dd167bf729:
-
-  Merge patch series "rng: airoha: add support for the Airoha TRNG" (2026-10-08 10:41:43 -0600)
-
-are available in the Git repository at:
-
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit/ tags/spacemit-main-20261010
-
-for you to fetch changes up to 01b0d2681dac9a153b0426290d696166ae999de7:
-
-  configs: spacemit: k3: Enable Ethernet support (2026-10-10 02:21:01 +0000)
-
-----------------------------------------------------------------
-Pull request spacemit-main-20261010.
-
-All SoC:
-- Fix mux clock
-
-K3 SoC:
-- Add pinctrl support
-- Add gpio support
-- Add clock and reset
-- Baisc board support
-- Enable ethernet
-
-----------------------------------------------------------------
-Dave Klotz (1):
-      clk: spacemit: program the mux when setting a mix clock's rate
-
-Yixun Lan (15):
-      pinctrl: spacemit: k3: add K3 pin support
-      gpio: spacemit: add support for K3 SoC
-      clk: spacemit: ccu_mix: fix inverted condition in ccu_mix_trigger_fc()
-      clk: spacemit: ccu_mix: add inverted enable gate clock
-      clk: spacemit: ccu_pll: add plla type clock
-      clk: spacemit: k3: extract common header
-      clk: spacemit: k3: add the clock tree
-      clk: spacemit: k3: add CPU PLL rate tables
-      reset: spacemit: Extract common K1 reset code
-      reset: spacemit: Add SpacemiT K3 reset driver
-      board: spacemit: add SpacemiT K3 Pico-ITX
-      riscv: dts: spacemit: k3: add binman node
-      configs: spacemit: Add K3 default configuration
-      doc: spacemit: k3: Add Pico-ITX board
-      configs: spacemit: k3: Enable Ethernet support
-
- arch/riscv/Kconfig                             |    5 +
- arch/riscv/cpu/k3/Kconfig                      |   18 +
- arch/riscv/cpu/k3/Makefile                     |    5 +
- arch/riscv/cpu/k3/dram.c                       |   21 +
- arch/riscv/dts/spacemit-k3-binman.dtsi         |    6 +
- arch/riscv/dts/spacemit-k3-u-boot.dtsi         |    6 +
- board/spacemit/k3/Kconfig                      |   30 +
- board/spacemit/k3/MAINTAINERS                  |    9 +
- configs/spacemit_k3_defconfig                  |   64 +
- doc/board/spacemit/index.rst                   |    1 +
- doc/board/spacemit/spacemit-pico-itx.rst       |  200 +++
- drivers/clk/spacemit/Kconfig                   |    9 +
- drivers/clk/spacemit/Makefile                  |    1 +
- drivers/clk/spacemit/clk-k3.c                  | 2049 ++++++++++++++++++++++++
- drivers/clk/spacemit/clk_common.h              |    1 +
- drivers/clk/spacemit/clk_mix.c                 |   96 +-
- drivers/clk/spacemit/clk_mix.h                 |   27 +-
- drivers/clk/spacemit/clk_pll.c                 |  124 +-
- drivers/clk/spacemit/clk_pll.h                 |   43 +-
- drivers/gpio/Kconfig                           |   11 +-
- drivers/gpio/spacemit_gpio.c                   |   97 +-
- drivers/pinctrl/spacemit/Kconfig               |    4 +-
- drivers/pinctrl/spacemit/pinctrl-k1.c          |  291 +++-
- drivers/reset/Kconfig                          |    1 +
- drivers/reset/Makefile                         |    2 +-
- drivers/reset/spacemit/Kconfig                 |   22 +
- drivers/reset/spacemit/Makefile                |    4 +-
- drivers/reset/spacemit/reset-spacemit-common.c |   93 ++
- drivers/reset/spacemit/reset-spacemit-common.h |   40 +
- drivers/reset/spacemit/reset-spacemit-k1.c     |  128 +-
- drivers/reset/spacemit/reset-spacemit-k3.c     |  242 +++
- include/configs/spacemit-k3.h                  |   13 +
- include/soc/spacemit/k3-reset.h                |   21 +
- include/soc/spacemit/k3-syscon.h               |  271 ++++
- 34 files changed, 3724 insertions(+), 231 deletions(-)
- create mode 100644 arch/riscv/cpu/k3/Kconfig
- create mode 100644 arch/riscv/cpu/k3/Makefile
- create mode 100644 arch/riscv/cpu/k3/dram.c
- create mode 100644 arch/riscv/dts/spacemit-k3-binman.dtsi
- create mode 100644 arch/riscv/dts/spacemit-k3-u-boot.dtsi
- create mode 100644 board/spacemit/k3/Kconfig
- create mode 100644 board/spacemit/k3/MAINTAINERS
- create mode 100644 configs/spacemit_k3_defconfig
- create mode 100644 doc/board/spacemit/spacemit-pico-itx.rst
- create mode 100644 drivers/clk/spacemit/clk-k3.c
- create mode 100644 drivers/reset/spacemit/Kconfig
- create mode 100644 drivers/reset/spacemit/reset-spacemit-common.c
- create mode 100644 drivers/reset/spacemit/reset-spacemit-common.h
- create mode 100644 drivers/reset/spacemit/reset-spacemit-k3.c
- create mode 100644 include/configs/spacemit-k3.h
- create mode 100644 include/soc/spacemit/k3-reset.h
- create mode 100644 include/soc/spacemit/k3-syscon.h
-
+Best regards,
 -- 
-Yixun Lan (dlan)
-
-
+Yixun Lan <dlan@kernel.org>
