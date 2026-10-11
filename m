@@ -1,140 +1,141 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7D8BCA9EBD
-	for <u-boot@archiver.kernel.org>; Sun, 11 Oct 2026 20:12:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09599CA9ED1
+	for <u-boot@archiver.kernel.org>; Sun, 11 Oct 2026 20:12:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 75F5C6062A;
-	Sun, 11 Oct 2026 20:12:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 418D640606;
+	Sun, 11 Oct 2026 20:12:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kuPvp3nlQBAH; Sun, 11 Oct 2026 20:12:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 706EE605EE
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791749577;
-	b=A708V8W2gLQ8NkduW2MXovZrVEFLEWC+CZLrYEUnwSog8sUU8C8h2ibTuHztRKxLyqJw
-	 PoUjG1Mj1o/s2Ud8FQpWpJc6NULsORHQjHvd8rmOmVBGcRyiWam9ngaKhtalbJS6MUtyo
-	 elP4wQSW/EkUf0autxiMESMP5JG7IG8KP2asiEDDTgf4wfQRTAlMu8g8UhEloOIEJI0iO
-	 94wxI/JbuhfYxEFKIMOEIuxa1POGsMcOIskRHX6adq9SrNP5fS2bkH62SxXUJHybAQGWU
-	 dOLYAysk3sHrUoVjtYLlQSj+vjGbuMVp2op8ZDxfgDlnEs0ULC7RbaaL4llBLyzTdzA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id O1XP4i9zHjcY; Sun, 11 Oct 2026 20:12:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 284A34060E
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791749575;
+	b=B/CW6yPq74XTcIXYCgTk3zxce2Yld/TFnjhKpxSEbCdhG78mPgNlbcrjOPVccaYvw2zZ
+	 FETJ9UAQmETNud1/ayWBocU31WJGv+nvMbq3JyfMzW5X7Z6Zwb+76D5jn5CpNoQ0HxCss
+	 9fvYryOeWIxf4k5963VwKldDb8GGlVoQyn3C85QX+jAc28vipSf0nFlEyCRepF03OhKWz
+	 bMOm7HrIABCjiYqfwnSPA+/NLrs/v36VhoS7fPu2ficbzWfcoP/uLCTrlPbvdiPAU9nV9
+	 WimGcfe2YXzXMfwCLPmyss9+EOBmUZl6MatyHAzzTi+J5e2fIsM0UYcn+nMGI/pcx2A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791749577;
+	c=relaxed/relaxed; t=1791749575;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=kAHw0tGFGPonNmk+btPXNiR7P6CUNKz3maqAwwRC4c0=;
-	b=WnONaVO9xzYIUUY1IFu4V0V2dPd27hEL0LMu7Pu7Q1ZNQIsSvt5UuE3yAB/guD5t43SU
-	 1xQnfpnzUMoRMZxoUtMsi3Lem9U23M0rZoOC+0yqqNM24fgNTynIwItT9skBQAPMAugLY
-	 nObBnu/223tATopc3fX326B3sYXXDTF1IpF6GDoMOIUOus2jelWquJjfxiDKjP1v2gTiz
-	 rUUJL3wJTHnh6Th219giterSgUgbKfCbo91aCkb6AqO1daLDBWZXostsAkZT6Yc/OA/6b
-	 ryBET6hSSuX1cytan3pjuwDsRN+mrYBlnzHx+gxkJEKIcFIgh8t4UVvaylf4L2Jw2KQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=kLE4yJx/nqHo6eyU2j1qSXRTb9qfaoPiyPxJ8/eVZIA=;
+	b=XL+rrRup2qubN7jq3r5L27Jcq5RAGTUJpvB5nqsCHT1tHGzKNXGO4sUHLbg3F6ZzWC08
+	 33dMFbmL9tGcifd7yo9tNLUPIS1EP0KnlDQm/VyAUybhm+e5OL1C5fRuo9uQA8SUDEdP4
+	 qeShJ5FY6SL7rhWrv3k/4tUPffYNrWiYBniZhaMp4cprjWHWH2M44t1OVXFh5ppGeAn+k
+	 l7mgC18JW7jzYUd7hc+RJU4HgAIUyLLZmHHatyB3waLNuSzNHQDnjyRg/FxfjuhqVT8xy
+	 oDmQVZaiH8hK3IvDB4QWhmp/eff9e6UyUYcZre4LrA3Tt9CI5n/rIgzc5DL6NHrihcg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791749577;
-	bh=kAHw0tGFGPonNmk+btPXNiR7P6CUNKz3maqAwwRC4c0=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=y6UyGsQy4TrDHRNjRfMaPP/0LSwClpZp4kyTJb7GfEAgwTGPWhHJ0CPuCldymOrpE
-	 v1T+IA6tsssPKvjYLNv/KoLPSgHXju3njKeLFPv4guO3uXHPbo5+fBT7f9w2kzLYEE
-	 DbeNqaLP/cRjQHIgcEek2bUSvzK1LFH2+WdDBmdy3tBv2cjjrFVLAN/8u25w8W2fKn
-	 nM9oQQix6mJAvc4FtXOpqEIXDPYa6OM/tLtiSY1ZK5PW2f0rFF+pjOLKEP1mCXs4us
-	 +3KkNoUnMrYWjhxuand62Y8EE69KECOmuCmzK+iPpGLrcWiC0I4R76WwsW5lMfIOvB
-	 0Rb730dbVDp7w==
+	d=lists.u-boot-project.org; s=default; t=1791749575;
+	bh=kLE4yJx/nqHo6eyU2j1qSXRTb9qfaoPiyPxJ8/eVZIA=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=ic2DkiWxH4PM8ZhL7Ody23+sVmTX+IXwCR89UTMbsodmQRLwy4OJm65z828At2fus
+	 +inm6kQH7fbBleWE+8c/ThuPf2poodXR+CbzVA3hni00OC/2yZKHM6ZvKmEJxnklQt
+	 ywyLMfVNNE7GzXTRveAvw/umH7Yy5VtirvgKwktQW42GeL80cnhmJXC78FWTGQLV10
+	 kJgaOP6EJL6yHoYF0OZ7GC8dBTRHyZHQAlNYv1Tsp7qL9ykmQDKZDrrPCG+YtqYIGj
+	 WRXF/w+LM6SAlMq6j585QjH/ao3UjvrZ+KzbILk8sqDdwWtwGDnFEvXw53zIsrPKSj
+	 QvZ0Wdqut/lkQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 706EE605EE;
-	Sun, 11 Oct 2026 20:12:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 284A34060E;
+	Sun, 11 Oct 2026 20:12:55 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id DAC8C1A6
+ by lists1.osuosl.org (Postfix) with ESMTP id CF87ADE0
  for <u-boot@lists.u-boot-project.org>; Sun, 11 Oct 2026 19:35:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CCF8E40075
+ by smtp2.osuosl.org (Postfix) with ESMTP id C15A54008B
  for <u-boot@lists.u-boot-project.org>; Sun, 11 Oct 2026 19:35:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tCkZUR3NC6Hp for <u-boot@lists.u-boot-project.org>;
+ id sPj0il473xO2 for <u-boot@lists.u-boot-project.org>;
  Sun, 11 Oct 2026 19:35:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org E1A264005F
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=172.234.252.31
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 28AA140075
+Authentication-Results: smtp2.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791747351;
- b=rkUxU1KzjnuG6/v00Z6NcJbxSr7U4McBqD1uGah1oUZP9IIVhzHB6DQwmOhVbS0VyQ0L
- XyeWR3QaaLLhqwXQmlzEGtVkqCqlLVqaoObEukVNce4R3S0TNFC0w7+ZKLhYn97AuG4GL
- UpxdTnOZ2lqA9puHNyYkARI3oUB/eUFu97cx+jonwwbZt9I2xWy0e0InmlHql2XdmVKFz
- OdRFfv3XUvqYIGTR5eTeNIZWyRtpEMlemTyEdQvseyYYAEjuVZ1wlZiwCQ7da08x3Y2Ig
- jtjiydfPGCgzNkJfAys7FWUrxnmSP9HvAI7UVjr+w9wTWVmPau9dPVmIwnsqYkmyQIw==
+ b=m2yRlsgxC7Swc7T+/SRbT5tawz8MC8QzWCLCaPQ/cOtYSJJ7y1RnioIA84+gT/VMV0lw
+ q0I3GPRG/q/3DBKk5CFGi/L3AZjWBZGL8Orh+MaDZzd56O6fPPspu5Ni9bJ1ee73le9bT
+ q5bILfY2TdzsBlxFwLMMS2ImOp0Zu6RNBfr9HwHf5H0OeYsn4N6eYYqqtWRgBO/FT2X76
+ j38xZASPbAGeAGLb0SNaH81ejnVhsYFauWCrMTWmFt5pN143s40mccG5gnNWMcmKzAHhN
+ ps2cIlvfxzzy5y6vp/am7ctE4Ot0VjfCASXubgcInZaCN0cpY8UeZaMVEJ3+oJ++LkA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1791747351;
- h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Subject:
- Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
- X-Developer-Key:X-Endpoint-Received:X-Original-From:Reply-To;
- bh=kAHw0tGFGPonNmk+btPXNiR7P6CUNKz3maqAwwRC4c0=;
- b=U1U01IysW3leXdnu3OC9OgqXooos+bVuN6TIdGpkUeXG/B8GpufAIqOU07yvNIp7ZrBi
- YeshdhL550i/5sUfnYvCxm1BLGbcOxNePJml8xmMkMATG0KRBccYIv9G2WsqGHJ7J9txO
- AVAzfzhd7qmpzmzvS/FvFFZErY+tMiTcR4TJoWNjwvf3bCfXd/vvkyWE0lh5pyiiHDzPg
- H7cIaUPcveXFX+AordIWr1X1rQ2erxMOkouXT9lHz230hQpiJoBqJ2Hx1UugNowoY5SIv
- IZ3I9vM3CgKI44zKHq0iwV0gdt6lPPp7L38yPf8sX7jXgvgNXq+L91Q4cQxyyW2iw2w==
+ h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+ X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+ X-Original-From:Reply-To;
+ bh=kLE4yJx/nqHo6eyU2j1qSXRTb9qfaoPiyPxJ8/eVZIA=;
+ b=PpE5jLoMAa7OplD1PItSa5eGZUW0yjirXjkAb70kq40QpExex+1k5cygxsIH8GoW3KfY
+ NnAmjLQMb+UFPVbzZEBAZARdWa30pqLRuNyvtEVzigqzeWYdjsaXrqdfUpmfJDgW7Srpd
+ Y/S6WA11kRaK1rId3Yp0axfwdzZ7ELv7faa/Kh7WZ+55UOxqTjC6dvqrJoey1iZPJFSEG
+ RGV6/p8LJavNCSFt/IyI6gDMWK3jGQppOWv6IIPaFpdxpXfA49RJwEdI63EGIoYoJLa8J
+ MsWsyqiECMf2eXfG79HbNSOIezlxzhfGW1WamicrJlDxSwbuZxj/0Sy1n9U4RTwwcpA==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=foiD5xMe; 
- arc=none smtp.remote-ip=172.234.252.31
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org;
+ header.s=k20201202 header.b=hL5nPjf8; 
+ arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
  envelope-from=devnull+petr.hodina.protonmail.com@kernel.org;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=foiD5xMe
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E1A264005F
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20201202 header.b=hL5nPjf8
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 28AA140075
  for <u-boot@lists.u-boot-project.org>; Sun, 11 Oct 2026 19:35:50 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 4CB60409E2;
+ by sea.source.kernel.org (Postfix) with ESMTP id 7070541199;
  Sun, 11 Oct 2026 19:35:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 2CDC9C2BCF5;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 52B97C2BCFA;
  Sun, 11 Oct 2026 19:35:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1791747349;
- bh=bMM97UtOmPn252lxqp+l7iRphjL6KRTbx5k7lFIxSBQ=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=foiD5xMeUfAzr/O5DuO1stGeP76Up4aoRDHeONDvxPVh/z1d1N69eWP86B3z+X163
- qk6JFHEWj5pmoLSSW87ov2HIHi/gD4O00/WVj+in1YWS5awogvOtdfGgjpXpUONCwn
- BxYpIjo06do1LWp4MVtMA/KDR2khhZwlPhkkXiku6SlhUXDnLDD9Njx6rH9/JM9b15
- B5VK+tPQuBw7PyMlXepm+nChnMNDDRPyFR0AgT+vpdJs29o8bND026VvW/RhP4Ru56
- 945Y5t7gSbU9rrx55aYSBJCeTWl5T6BKe+SjeruTQCrmL6tCNWQYf5zcF/gBUHZYlb
- zLDJ5q+eN+cUg==
+ bh=+z2ntvJzhdMQQBd7DY8LCLdU+MgCxaNQzMCzDYITTYQ=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=hL5nPjf8ZzbO33jIDW4H6xyv6wfPRSx+4a5I2K1npIZm7AoxmI1lc8wlrJdr/6yDl
+ LV4x0vSq9S+4788wEZFai+D15GgeGCf8s7nlbI5NXvoNWssH60Gl5alW0YUjZ6o/ow
+ 8auKJ6gUpn63/MerBOQX5GNuo/ZcfC1FJyu4vjOJLcn4CdGL2JaS+eDiQocWUak3oI
+ zc9KxjvFh0xIoSuIeT2+O/K8G94kku7kv0k6uuIbrB8O/7dAonEr7l/lzaqemEYGpg
+ oZIKy8NlLROGvjYJkBi6sqQXpzwkeGsamuDA18rDxDWihlXzHqZhgesamYZfCeIGIl
+ 7E9DMfAP1YhRQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 169A3CA9EC7;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 371BCCA9ECF;
  Sun, 11 Oct 2026 19:35:49 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Subject: [PATCH v2 0/9] pinephone-pro-rk3399: enable display and USB gadget
-Date: Sun, 11 Oct 2026 21:35:42 +0200
-Message-Id: <20261011-b4-pinephone-pro-defconfig-v2-0-6b7be35fbee7@protonmail.com>
+Date: Sun, 11 Oct 2026 21:35:44 +0200
+Subject: [PATCH v2 2/9] clk: rockchip: rk3399: add the clocks the DSI and
+ VOP paths need
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42NQQ6CMBBFr2K6dkxboUVX3sOwgDKFMdI2LRIN4
- e4WvIDLl//z3sISRsLEroeFRZwpkXcZ5PHAzNC4HoG6zExyqQQXHNoCAjkMg3cIIXro0BrvLPV
- gq3OjeKNLrTTLghDR0nuX3+sfp1f7QDNtxu0xUJp8/Oz1WWy/v0KzAAFlWVQaKyPVBW95n7wbG
- 3qejB9Zva7rFx63hgHbAAAA
-X-Change-ID: 20261010-b4-pinephone-pro-defconfig-f83a60a75767
+Message-Id: <20261011-b4-pinephone-pro-defconfig-v2-2-6b7be35fbee7@protonmail.com>
+References: <20261011-b4-pinephone-pro-defconfig-v2-0-6b7be35fbee7@protonmail.com>
+In-Reply-To: <20261011-b4-pinephone-pro-defconfig-v2-0-6b7be35fbee7@protonmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Peter Robinson <pbrobinson@gmail.com>, David Heidelberg <david@ixit.cz>, 
  Ondrej Jirman <megi@xff.cz>, Tom Rini <trini@konsulko.com>, 
@@ -145,11 +146,11 @@ Cc: Peter Robinson <pbrobinson@gmail.com>, David Heidelberg <david@ixit.cz>,
  Lukasz Majewski <lukma@denx.de>, 
  Anatolij Gustschin <ag.dev.uboot@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791747347; l=2951;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791747347; l=2340;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=bMM97UtOmPn252lxqp+l7iRphjL6KRTbx5k7lFIxSBQ=;
- b=k2sk7toprx89vGq4tQW1hVbejsbu9usxcQKs6Q7eNQBxHvGtLXI93KkdAKL4MSRbUDOi+arNA
- pe7bJvNifokCKPMtlqoUwv6PxnXzBWU/vX/djy4PcDRKKA6Wxy2LmQy
+ bh=WGZarjKqFfQaJpAXbo2NZOkBnnapWO5KF62gMGVIbbU=;
+ b=n7Xhs7hPa1UA/OQrwfRiW3rvwDkz7H7SkkcJHWwD+rujvRi2rcw8RPYI06tX37y7+8EOfY9Xb
+ 4nTmcLc6AHhD8SVPo3nesBXJJh9BXFHQlP8Z4/QzKuUWR5J0T/N9QmN
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -170,76 +171,79 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Reply-To: petr.hodina@protonmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Enable the MIPI-DSI panel and the USB gadget stack on the Pinephone
-Pro. Additionaly enable the buttons, DFU, mass storage and watchdog
-bits needed to drive it without a serial console. The volume keys depend on the
-separate "button: adc: implement get_code()" patch series. See:
+From: Petr Hodina <petr.hodina@protonmail.com>
 
-https://lore.kernel.org/all/20261010-b4-button-adc-get-code-v1-1-843d04f5dfd5@protonmail.com/T/#t
-
-The DSI/VOP display and the USB peripheral DTS are based on Ondrej
-Jirman's tree. Tested on a Pinephone Pro.
-
-See https://download.ixit.cz/ppro.jpeg
-
-For convenience the DFU targets the spinor so the initial sequence to
-flash the firmware needs to be done just once.
-
-'''
-rkdeveloptool db rk3399_loader_spinor_v1.15.114.bin
-rkdeveloptool wl 0 u-boot-rockchip-spi.bin
-rkdeveloptool rd
-'''
+Handle SCLK_DPHY_PLL (fixed 24MHz), set_rate for ACLK_VOP0 and
+HCLK_VOP0. Add enable/disable for SCLK_DPHY_TX0_CFG and
+PCLK_VIO_GRF.
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
-Changes in v2:
-- Add USB peripheral mode
-- Add the DSI/VOP display stack
-- Split into clk, DSI core, lane rate, dphy, display adapter and DTS
-- Update defconfig patch
-- Define DFU spinor target
-- Link to v1: https://patch.msgid.link/20261010-b4-pinephone-pro-defconfig-v1-1-55487e8c269e@protonmail.com
+ drivers/clk/rockchip/clk_rk3399.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-To: u-boot@lists.u-boot-project.org
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Ondrej Jirman <megi@xff.cz>
-Cc: Petr Hodina <petr.hodina@protonmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
+diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
+index 6e87db18be0..0ddd1f20176 100644
+--- a/drivers/clk/rockchip/clk_rk3399.c
++++ b/drivers/clk/rockchip/clk_rk3399.c
+@@ -1001,6 +1001,8 @@ static ulong rk3399_clk_get_rate(struct clk *clk)
+ 	case PCLK_WDT:
+ 		rate = rk3399_alive_get_clk(priv->cru);
+ 		break;
++	case SCLK_DPHY_PLL:
++		return 24000000;
+ 	default:
+ 		log_debug("Unknown clock %lu\n", clk->id);
+ 		return -ENOENT;
+@@ -1064,6 +1066,8 @@ static ulong rk3399_clk_set_rate(struct clk *clk, ulong rate)
+ 	case DCLK_VOP1:
+ 		ret = rk3399_vop_set_clk(priv->cru, clk->id, rate);
+ 		break;
++	case ACLK_VOP0:
++	case HCLK_VOP0:
+ 	case ACLK_VOP1:
+ 	case HCLK_VOP1:
+ 	case HCLK_SD:
+@@ -1168,6 +1172,11 @@ static int __maybe_unused rk3399_clk_set_parent(struct clk *clk,
+ 		return rk3399_gmac_set_parent(clk, parent);
+ 	case SCLK_PCIEPHY_REF:
+ 		return rk3399_pciephy_set_parent(clk, parent);
++	case DCLK_VOP1_DIV:
++	case DCLK_VOP0_DIV:
++	case DCLK_VOP1:
++	case DCLK_VOP0:
++		return 0;
+ 	}
+ 
+ 	debug("%s: unsupported clk %ld\n", __func__, clk->id);
+@@ -1261,6 +1270,12 @@ static int rk3399_clk_enable(struct clk *clk)
+ 		if (readl(&priv->cru->clksel_con[18]) & BIT(10))
+ 			rk_clrreg(&priv->cru->clkgate_con[12], BIT(6));
+ 		break;
++	case SCLK_DPHY_TX0_CFG:
++		rk_clrreg(&priv->cru->clkgate_con[21], BIT(1));
++		break;
++	case PCLK_VIO_GRF:
++		rk_clrreg(&priv->cru->clkgate_con[29], BIT(12));
++		break;
+ 	default:
+ 		debug("%s: unsupported clk %ld\n", __func__, clk->id);
+ 		return -ENOENT;
+@@ -1356,6 +1371,12 @@ static int rk3399_clk_disable(struct clk *clk)
+ 		if (readl(&priv->cru->clksel_con[18]) & BIT(10))
+ 			rk_setreg(&priv->cru->clkgate_con[12], BIT(6));
+ 		break;
++	case SCLK_DPHY_TX0_CFG:
++		rk_setreg(&priv->cru->clkgate_con[21], BIT(1));
++		break;
++	case PCLK_VIO_GRF:
++		rk_setreg(&priv->cru->clkgate_con[29], BIT(12));
++		break;
+ 	default:
+ 		debug("%s: unsupported clk %ld\n", __func__, clk->id);
+ 		return -ENOENT;
 
----
-Ondrej Jirman (1):
-      arm: dts: rk3399-pinephone-pro: Enable USB port (peripheral mode)
-
-Petr Hodina (8):
-      clk: rockchip: rk3399: add the clocks the DSI and VOP paths need
-      video: dw_mipi_dsi: sync LP command and clock lane handling with Linux
-      video: rockchip: dw_mipi_dsi: account for burst mode in the lane rate
-      video: rockchip: dw_mipi_dsi: tolerate -ENOENT for the optional dphy
-      video: rockchip: dw_mipi_dsi: add a UCLASS_DISPLAY adapter for rk_vop
-      arm: dts: rk3399-pinephone-pro-u-boot: drop VOP clock assignments
-      configs: pinephone-pro-rk3399: Update defconfig
-      configs: pinephone-pro-rk3399: add a DFU alt setting for the SPI NOR
-
- arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi | 33 +++++++++
- configs/pinephone-pro-rk3399_defconfig        | 17 ++++-
- drivers/clk/rockchip/clk_rk3399.c             | 21 ++++++
- drivers/video/dw_mipi_dsi.c                   | 33 ++++++---
- drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 96 ++++++++++++++++++++++-----
- include/configs/pinephone-pro-rk3399.h        |  3 +-
- 6 files changed, 176 insertions(+), 27 deletions(-)
----
-base-commit: ece349ade2973e220f524ce59e59711cc919263f
-change-id: 20261010-b4-pinephone-pro-defconfig-f83a60a75767
-
-Best regards,
---  
-Petr Hodina <petr.hodina@protonmail.com>
+-- 
+2.55.0
 
 
