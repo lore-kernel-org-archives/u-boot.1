@@ -4,239 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D012CA9EC7
-	for <u-boot@archiver.kernel.org>; Sun, 11 Oct 2026 09:18:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D52B8CA9EBD
+	for <u-boot@archiver.kernel.org>; Sun, 11 Oct 2026 10:01:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 005ED80E07;
-	Sun, 11 Oct 2026 09:18:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0ED9580DF9;
+	Sun, 11 Oct 2026 10:01:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id butAwM4nnSCu; Sun, 11 Oct 2026 09:18:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 58B0F80E13
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791710284;
-	b=hAgshgVLmcv9Uos+6RK4eSkxHGhiVLgqA/M0r6RTeTvLtM4hHgXn5YGBpMLTyE5yf0nm
-	 Obvw198g0ILEnjgpVMHPP+TF08zOw1EHfEl1Aa/OWHtbECTIsYqb2IPd+3r3GkB8D0W6A
-	 ZGssEaF46Chju5j2dbC1TiJhKFpJHG/vYoB1FMtsaDgGGnFCVaNDr8z38ejihEWOH9DY8
-	 xtG8KQoLT1OLknNIYBWY5hSzYPe7lY+MsJX+fFJMgmz2hJOfrY2QmakUut7mW47bpLEPp
-	 6WRMtyB75tLaIonhm38TZ5Oz0vaU3HXsPbzsL9rt6vvxnqpfMxm5NHvtPb4nAp4KJMw==
+ id lGPUjr35tRht; Sun, 11 Oct 2026 10:01:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BD27480EAA
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791712867;
+	b=hjc2MwTP3vbluHontokrlVGIrV4lT9cuh4tnztg8GGLjJ1x8b6zt2hQMbxFo7b7M/ZEH
+	 fMtusS++mQTUkclg1NeHgk5OPpY8Ip3C/Rk+dCpqK6j8nHrOt/uiWIwrrmiVLDLVct4rs
+	 n/MOnAhkgnKJeteOJoWqSruYyRVni4djgSRh/s2K0PUuYnqHmvep5HlRoiKJqRkEI4BCT
+	 Ug0V2KkeqgTHMYSwl6PZtFB2SsDL1TsmdKdkaD4xmBirZlXW00UhhcafuglqasGKzi/pp
+	 tG5L271I1VFY8CAnOIbrJCPTyMOeXFsqOrBF/XZta33QzqJn/T2HViVjF8BLpK3CWFA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791710284;
+	c=relaxed/relaxed; t=1791712867;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:X-MC-Unique:X-Mimecast-MFC-AGG-ID:Received:
-	 Received:Date:From:To:Cc:Subject:Message-ID:References:In-Reply-To:
-	 X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
-	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
-	 X-Mimecast-Spam-Score:X-Mimecast-MFC-PROC-ID:X-Mimecast-Originator:
-	 Content-Type:Content-Disposition:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=GL+ok7k34LD4mQrV8b1EZOIxc39nQT9oOBomlz4oMFI=;
-	b=DCukCKGPP6pPO/O9rqA0vhjVd2XaveM17KATNJ1e99RA0BaVPSVuZh8ggWHrauxFMSXF
-	 Y0gmS+MUhxIujE4+kwQZ4HJQqwA6YSyBrIWvnR6ugFwc2h2ifLoe5KRccN5RZGrs3cRLN
-	 rXd6ZJxgLQ7q6r6qt5YiOwDSj6/nUdCuC7243bxS66wk0CZ1ZkEDH45jjydKLpYeWW3+N
-	 ZxYMWk93L6qmID+WIuGQkZTV27lVw0jSoQmfSAZB9+BjtqQlL/74AckQVc0sqveY6mxC4
-	 DSgvIOKaWNLgJdUwJckuFwBkmz2RZXI2OYcXwPRbViXxP5kJjGUUymkOkdCXGG6Vlmg==
+	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
+	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
+	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=bQGz0RqRpCjiqcHvqAsYlNWjkq6Xf98qAJuTPU9uc70=;
+	b=bNCNNREKx8HqjL9yFJFI4O+k0b9BIAi6FVJfMWFWcwxozjUqHzTvqploSFNHm5pHq2Kc
+	 nAsV2/wO3qYHVQHfAmaQm0eD2eo3/n+9sU3AvUysq2XsS2zQvkZ7m0TuZk5GQ/OO2R45H
+	 H/O+9acSIAuFHUEYlRLq01mXwRd3av5GlNtQx/ZSKZkAqLE3Dgzjita7/QiOnWlOnZ3q3
+	 foc9ISLt380SqhFK5g5PQYaJw3FCO5RfGz099a10Y031/szH5Vm7xpVzMuXIeux4w12px
+	 2v9nvabJqr1Oz0BPlhpHU7h/Jcx5mUH1/YZUk5fsfQqpsGguZ2/El02nvxQ4RGBGHXA==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=toradex.com;
-	dkim=pass header.d=toradex.com header.i=@toradex.com header.a=rsa-sha256 header.s=toradex-com header.b=fgGaW+oG;
-	arc=fail smtp.remote-ip=140.211.166.142
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791710284;
-	bh=GL+ok7k34LD4mQrV8b1EZOIxc39nQT9oOBomlz4oMFI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791712866;
+	bh=bQGz0RqRpCjiqcHvqAsYlNWjkq6Xf98qAJuTPU9uc70=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Ohmn5RfihNq4avQv+1nzu6Xh1mIbcfeA01lW+fXyxdjGfQWtqezxBRoDBLBVvMBKq
-	 gNo/td2UN5Gr8gur3rTZUsBs8pUyItQJMnX2EV31BSy54w90wPOtK1CgzTBPg3+un/
-	 eUTvhf0jLdu1Y/MdxQAnu2iquXXWMNp19ztc4f+icw3RyzaLwr/PCg7+kATNitbYyA
-	 e4NokK0sLBH+hOztW82ffen2IQ4+MQ8qWF0zG5KY7v3AdeOdihMCWaBOyFJ54voQUb
-	 SkxfjLYRqEp7lkaKcpKu1EHZpaWbfBcYxOWK8XXQS9eUmyMz4WnSYwXZCHiluUFHV8
-	 Kplw/sgoce4hA==
+	b=rSOdCLEPKHbTSW42ywsdPrA3XK4wbYtCUawYnB/KZ9ljy5jTse4Maz5pEIU5Cc/DK
+	 NpM4gLfBv9tGPNsxcZNRCFYIMWFxCIhqYNPUH4+RbK0pC9xOCfD6vBX6mXTHFc0kNQ
+	 VDcLXvLTMn5IrsdyBn0yOmROeg0s38bq+S6QmxBjA2+pjZ0XoCTzH0cCvnEghCUh4x
+	 GVCYl+hA+cBtUuZIH8QFdtTLBrLKxdxUDeD6pfHoAtlEX6E1CAtcvMnIKykdXvlQms
+	 PsnfI1x2fEIjFlVneLeBWcfod1V1Px7IDGY+3AM8oocw7I28Zvrzov9Amem/IPlfMe
+	 aW95K2oo6npGA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 58B0F80E13;
-	Sun, 11 Oct 2026 09:18:04 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id CBCFE380
- for <u-boot@lists.u-boot-project.org>; Sun, 11 Oct 2026 09:18:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BD27480EAA;
+	Sun, 11 Oct 2026 10:01:06 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 898E3317
+ for <u-boot@lists.u-boot-project.org>; Sun, 11 Oct 2026 10:01:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B1B9380E13
- for <u-boot@lists.u-boot-project.org>; Sun, 11 Oct 2026 09:18:02 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7B1014067C
+ for <u-boot@lists.u-boot-project.org>; Sun, 11 Oct 2026 10:01:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gpGwTohMCP0s for <u-boot@lists.u-boot-project.org>;
- Sun, 11 Oct 2026 09:18:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DA24D80E07
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=194.104.109.113
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791710282;
- b=dPisQEfuK6hxaX0vQjfDDDOwukoa0mqyK2ReJdUK9s4qrWPm7XK8CzBnG0/LS9Yd6aR3
- WJMMVOP7E+Zv+ccaCmMiiKxPdkNujjKeTEF3i3/UBwkwoCP6AIAZJMSgrbw9F+pjWE97z
- sSA5mEqai8QtcL+9sny4hKBkg94sq+C6Yr+izkEtIbHiMzM2j6k/KN8EQNizHdQ9yhdEr
- g9bgU6BkD0JndIEmjiBXk/RBXBi6WVeH25b2Lo0+gADy57ivS+YQcqF8Do4uXRBiaDGX8
- czV926x05jYBuoRt5UWQI5GHxrKCUceuUHjxImQ3l3zIbadkrfdakv1PsA3nKt0JWoA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Wcv8jeLTGnjr for <u-boot@lists.u-boot-project.org>;
+ Sun, 11 Oct 2026 10:01:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C73BB40677
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=121.127.44.73
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791712864;
+ b=LF/03Vj7QLLtNKAWqu0YDf+yxs9Ig9YKIXbvuiT/7IsYgc2ubCxY9bXoMVFOXjvbmRcr
+ KwSBgARMZdtEvhWIxEgm7MUn9qDQhRaSUFbOYAE2B8CJ92A43LRll2cMleMhSfPoPM8eX
+ ovD8ayXpoS3VAKd+/jqIOLKUFH3OxgrpyKc0kaPnpXZ7t2kVkAy97pG8GA1WU1ENgmdKf
+ ezH7BCwOz2KTQEuGpJAIwbF+qi7cE2EscwmY/yF3RAQX/nIuO4f+oz1ARX/2LKBJVedeg
+ xgEPmJaIdj/88UxMAOFhgk8VxX+BsrY17gqzXfrc3kC1Lil+EOalIc5f68RH5VIzcTQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791710282;
- h=Received-SPF:DKIM-Signature:Received:X-MC-Unique:
- X-Mimecast-MFC-AGG-ID:Received:Received:Date:From:To:Cc:Subject:
- Message-ID:References:In-Reply-To:X-ClientProxiedBy:MIME-Version:
- X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
- X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
- X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
- X-OriginatorOrg:X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped:
- X-Mimecast-Spam-Score:X-Mimecast-MFC-PROC-ID:X-Mimecast-Originator:
- Content-Type:Content-Disposition:Content-Transfer-Encoding;
- bh=GL+ok7k34LD4mQrV8b1EZOIxc39nQT9oOBomlz4oMFI=;
- b=I5WjaeJ5LR8yG6LAzQm/Sdfspel+E050kXWbxCIqj9y0pOP1NWMljB7Y86T3KyAVxn4a
- qCdGqRQSMEAPIy5u+lQ487zLvWZi/pqnDs83FAN6wLWxYZCVL8E/f7dmvgPgiG62iRKBP
- ivxTUcwoc1/fcFkwvwmiVWEg7ycmpeyulMsfhXGqP4PERe5xTM7Unh8yyGf1YTtL7r9o0
- 402zU73/gEACEpY+1LaBllRVeIM6pXXkTpMR6FCAWYgcFwy95IQUJs+qzUeCZ+DVg6zpr
- OTiT/TDHrW9bOq6kQlfy2OOwgdu8I7lIATjgOFo3oBxiupquSD1vzB0KsRbsVK69zkQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=toradex.com;
- dkim=pass header.d=toradex.com header.i=@toradex.com header.a=rsa-sha256
- header.s=toradex-com header.b=fgGaW+oG; 
- arc=none smtp.remote-ip=194.104.109.113
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=194.104.109.113;
- helo=de-smtp-delivery-113.mimecast.com;
- envelope-from=francesco.dolcini@toradex.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=toradex.com header.i=@toradex.com
- header.a=rsa-sha256 header.s=toradex-com header.b=fgGaW+oG
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.109.113])
- by smtp1.osuosl.org (Postfix) with ESMTP id DA24D80E07
- for <u-boot@lists.u-boot-project.org>; Sun, 11 Oct 2026 09:18:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1791710279;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GL+ok7k34LD4mQrV8b1EZOIxc39nQT9oOBomlz4oMFI=;
- b=fgGaW+oGiXmektsPnEBkUiJ2xBdHErweMI5BB+bah3E/dNSc/oiBXQFl5qjq3/t5IqL9vs
- D3Mj+sD1RGO7sj8VqdP1JnVCRsR5HjwnreDCzLsT+14yyiLYkry1uLK19/EDPQzh4UzCAV
- pv+Yov/0iRpFthbJkFGt3celjG9t92E=
-Received: from GVAP278CU002.outbound.protection.outlook.com
- (mail-switzerlandwestazon11020093.outbound.protection.outlook.com
- [52.101.188.93]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- de-mta-17-zEV6DM4EOi6wdTVfRlvm6Q-1; Sun, 11 Oct 2026 09:17:57 +0000
-X-MC-Unique: zEV6DM4EOi6wdTVfRlvm6Q-1
-X-Mimecast-MFC-AGG-ID: zEV6DM4EOi6wdTVfRlvm6Q_1791710277
-Received: from ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:2e::8) by
- GV0P278MB1688.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:65::11) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.496.20; Sun, 11 Oct 2026 09:17:56 +0000
-Received: from ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
- ([fe80::88:6821:13f5:a5b2]) by ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
- ([fe80::88:6821:13f5:a5b2%6]) with mapi id 15.21.0496.019; Sun, 11 Oct 2026
- 09:17:55 +0000
-Date: Sun, 11 Oct 2026 11:17:54 +0200
-From: Francesco Dolcini <francesco.dolcini@toradex.com>
-To: ye.li@oss.nxp.com
-Cc: festevam@gmail.com, u-boot@lists.u-boot-project.org,
- emanuele.ghidoli@toradex.com, peng.fan@nxp.com, uboot-imx@nxp.com,
- alice.guo@nxp.com, ye.li@nxp.com
-Subject: Re: [PATCH 2/2] toradex: {aquila, smarc, verdin}-imx95: Enable
- caches in SPL
-Message-ID: <astUQpojAQPoglo7@francesco-nb>
-References: <20261010075951.3939861-1-ye.li@oss.nxp.com>
- <20261010075951.3939861-2-ye.li@oss.nxp.com>
-In-Reply-To: <20261010075951.3939861-2-ye.li@oss.nxp.com>
-X-ClientProxiedBy: ZR0P278CA0070.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:21::21) To ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:2e::8)
+ c=relaxed/relaxed; t=1791712864;
+ h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
+ X-Forward-Email-Sender:X-Forward-Email-Version:
+ X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+ X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
+ Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=bQGz0RqRpCjiqcHvqAsYlNWjkq6Xf98qAJuTPU9uc70=;
+ b=S22gkE9vFCvr+j25zO9Dj+oARxXOSYgUpJ6KggK06awckzTe8kQ6JJoAo+Pdx4Elkjm/
+ Yo5C8OaDVQ0RiYgCMeXlvjkivtEdsvj33JaZYXQi7qf/m66LOa9wasQb0PVnej5S150QY
+ CZ/s38ZHvs73/MzNxNbUvaMqeCWmQ5ottxw6W12xqeTumvSDDetmG9+2249J+KviSDmTj
+ GGqZmjiQ9lSqyokh6VZX1PwHvPbbPvCv/gjvuodKFe/JR3X7/x6zGiPEcW9zs6cuiMlYG
+ boOmScF8vaHkVLhrmPe5wAPdhPbkSihMEnuR5t7EisdvLBYfUyvhtPHRPUIJD/izBgA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=kwiboo.se;
+ dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=iFGkREcR; 
+ arc=none smtp.remote-ip=121.127.44.73
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=7247=ib=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=iFGkREcR
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C73BB40677
+ for <u-boot@lists.u-boot-project.org>; Sun, 11 Oct 2026 10:01:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1791712862;
+ bh=bQGz0RqRpCjiqcHvqAsYlNWjkq6Xf98qAJuTPU9uc70=;
+ b=iFGkREcROi6lucLQ9SHy4AzKc5mFbMS5jYMLCeHfPvuIBZt626uELSsWBiYivWakeZl2AtW+7
+ EAuhUF2ph1cUchwg3GsB2+eyGYQR0jvEYdSBVhGh+IZPmuSfOVlo1l7R5poYP8k2mpMe/kBFlIL
+ uMs0SaLMSnPVD2CJkkDhMqydLPBI8IFpxhQhD+Dzu2TjxBxjy+ch6YHt81vPc8WYGese4CdR66h
+ xPcpFhCvPtKW2R5zIsXhCwHasWZ0rFHdvmrrRcSPPJTjiAT7zM+n376yZB6zVld4c70tz8LSxEL
+ kpYgdlKjV3DvrNfZJL4rmzaZfWvvK9jJRFQ4aqRXNt1g==
+X-Forward-Email-ID: 6acb5e5a90d5aa3528e30a64
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.18.4
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <9c9adba7-1a83-43f9-8bbf-8473cd8cba06@kwiboo.se>
+Date: Sun, 11 Oct 2026 12:00:54 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: ZRAP278MB0495:EE_|GV0P278MB1688:EE_
-X-MS-Office365-Filtering-Correlation-Id: 401c424c-feb7-49f0-8389-08df277888dc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|1800799024|366016|10067099003|18002099003|22082099003|4143699003|56012099006
-X-Microsoft-Antispam-Message-Info: zcSNaELdspCyVr6+4zJjXWdg8EjKJlxhOWWUEIJB63tOAAFe7eJ0GnIgrMuAYVdY+X1lCD+F8p4HSBFBAz22w7M4jIjSljxOnyPOg1NXk3inMXeVJB29cCWtKGe/m9cyc39nokgkNEy30d8ndjUQr1MbaCXQHEj6K5uYcjbSdMq9ZINDKGyYn6AHerg8T0WARLYmeSc8yb8Di3UTzm/tYol0xOfhY79lvTwJa1JDUs31CMUZxr7KByOM5HQflONdm/rYqe4eBKIOFWf+72Enm9hfWL6fNDdlxNeJmoXSPatYmlDPEofsJewOyEvJd40xV3LgWM+8j+XVvFyLr3a+HIFrapnpsdYbO4L/k0oo+qUjdd5B6837ktymgZUoSFYyHy2/Z+nwn/N+3PkSc7KEsq+7x/KkTbGud24orVa2tO9uF4B78uVHesQrLwpkGqkaixez0ZAo6Amqfwt9Htp6BjN+pGxn2TDlLRMlryVT2fS1lUNOCVUj4F0hU0UPDzoKKDLGVIy2jPAHx9BJkbYr45Mx+eRoC3TBEH9RIGPuRcczSpKzlm2VZkmxFpvxhtmZBN7vgUkXbf9oz28p99IAhgzHoUSoT9dn0smA+ylJ2p/KTPodwt7M/DWagHiDnlk1wKLIk0jQpBL2Tu9i9KirwL9V5iIlKIrMnsHNnGOzfTc=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(10067099003)(18002099003)(22082099003)(4143699003)(56012099006);
- DIR:OUT; SFP:1102
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?4MUWz1TNaFup31X0gEVygmLXDeaz0eDBSIMHsO+PrZnfYFt8SNQd2cdvrtCG?=
- =?us-ascii?Q?sL4emCjsuM5y7q+SeeJJlW6v4rvgOfz+akXYu9++WYH+4fEh/36KQXKQ18fs?=
- =?us-ascii?Q?MWxMSgfnQTkB7l+UWtUdoE41ULhFANPc1uHG+uOurTt4vEik4qFazllJgtlP?=
- =?us-ascii?Q?xfj3Vm3OGx/ZDWj5jzDPPtSB/er9Z1lse2HjO41TubODt64wbnQT+w5LUINm?=
- =?us-ascii?Q?naCr6vaHsJn668t5+CEY/nNjGuwvZj6O4PjNyVawTBOEtd0PtpSXY9cMRwMg?=
- =?us-ascii?Q?X8mof/55WTJdZXdRBIghGXQZINOr1DxB9GDO24iTX11609wRywhWuXzRv7iM?=
- =?us-ascii?Q?Qh1wfo0vaalNKlxGYbypmehMUuOH4mvjBq0wjlYhAUpJiUx1ljJk11jIKFIk?=
- =?us-ascii?Q?sip8ny8orofSjgMCleP9UbUgRSelyTA5DgkTrXe9xLsaTiFIEBzU7rUNcdng?=
- =?us-ascii?Q?JrhxwRfesxW0DfJ+qe8BU9cvMqvEmXOnat1Enr3o863qVXehnnDTkRvbhzAh?=
- =?us-ascii?Q?P2B6FdoRC7QSg3LbU4e6+YFAoovdjoUWHFCdO5Sc2a5pIn/dRPfFCutI9J4E?=
- =?us-ascii?Q?c87OMk/rIKF3Fskv2c/1Hd1R/Hpjxfadri8ofrLwYlmwx4IFOxQFc96aQutL?=
- =?us-ascii?Q?srz3fZL8H32Q21QvDbjlv5WVBCxydv5U9r+QFz4AXXQMe9ewaya2cG4/vvyC?=
- =?us-ascii?Q?IjvSz3DLfOYIL6QtEAxmpGobrQfb8S6WtWllbV4dRuMMQZ4XiXz5KZRhdZ2y?=
- =?us-ascii?Q?vEhBBewbYNeR0xytjeZW8cDqMhd3NIPtTbizbqblaKW3BjLG7pnJA8dPnUQR?=
- =?us-ascii?Q?0GD7k8fKEOK4+1Mq70LLN83LiJo8KlT/cb5++stf6/7aymYfzqMRvVtkhOMc?=
- =?us-ascii?Q?Tu6nE9hlT6xR9g+Do+2QckOJ/3iF/z9vR72PMLIHrmJTKw8q837AUSV/LKXe?=
- =?us-ascii?Q?BFYtPMH3wkLM0qfQwZQ0JW/LFceYrEbFssX4AT5qAT8cqrmGCrqCMD139Bxu?=
- =?us-ascii?Q?nQqQPNpt8su7EvSAsS79ZQurAuQHoRtGJWyzVYPWi7WBSoMn30jZx3oJQlCe?=
- =?us-ascii?Q?U4E5MscD+mPLW1G98EzlyiQu9xzvf6UM44C3J57tcj/VrXzAALCUO71nFMVA?=
- =?us-ascii?Q?sdrOtWetrhv/GwUgUQJxI/xOHhGjJj69aKG31WvRlNkmMl88Zo2LdsB5Zfw9?=
- =?us-ascii?Q?UzelOqJnfFdvB9NOKB2MZczjZBQLIhQN0zNHStbPjxe5jXvHMiPedtqSk5jw?=
- =?us-ascii?Q?zJnMMeYIYWlEOq12wrfwYLXMy3TnOgXys2yJpEUHDBq0U5a4VDWAfcy0u+Kl?=
- =?us-ascii?Q?zXmq/qL1c7UFKlJoRQ1QQh6ro7GXgGJg8RAfuL1r50G1cUi5RWahz8NoyF/j?=
- =?us-ascii?Q?iHKD6DzLuV2XxTuQIlEs/c2WWTFA9PK6bbYuaBCDymgNhdPmcXMsHZUsDKB9?=
- =?us-ascii?Q?cXiLlBEUxMfnd9rBMG8zY8NjnGdb2XSaU/3GYSNqaTYEsk21C7hIOKPfGLHZ?=
- =?us-ascii?Q?4JLVbotFIt494Pke0oxzWOWbL871VjZmtjouBNRhq+bhM+0wTGosbdmDWUb1?=
- =?us-ascii?Q?6h2XJi7E/dt4SLLkp8IpK3jjXYp9//C4gpTruUBYEBoUGohgVC9wHl59fyWP?=
- =?us-ascii?Q?Q2vzokZ1t/1By29YI49lpJlgq0lC/AgNN9O/Yv01s/Yt9GJE5hlYSTRu/mdN?=
- =?us-ascii?Q?Ph7x4/wwYbBcFz1tLsC0/L8lvfpA1LLJjLHHk4w9XoskvOm65omYAcN1OfQc?=
- =?us-ascii?Q?LmWanxxOxnWipF0Q54q5SW6Y61jl22c=3D?=
-X-Exchange-RoutingPolicyChecked: VrxktzQUAY0qEtsBvN9TlOCyRLN5ZP6WnOv8TfHZq/LkFp7hNIFz++USQqbHWTgKoaWYyjxP1VCjrhbh6jvI574l0OU4xUiNxc+77P8U9OfzPGl6IuJisK14esUnCObCOeTIjdC19Qhw+frzo9eizHFG9AYkxJ8h4AjcIHFaigFXErTG9qVEHVAqu/+Dhny2FMp+jj9sgjdzRzCl35rE7UCdJm9Y1vRCsILjPIX9TM93QfALd/cvk6aD0zJTiz3xfuPQ2lRcsykJdmahvAnTKVB9BYByTrJZddMRcr/RWyEyvLUgaozM1UrxApVN47+Fk3iUNo/O2/MWEo4IMt5OVQ==
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 401c424c-feb7-49f0-8389-08df277888dc
-X-MS-Exchange-CrossTenant-AuthSource: ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Oct 2026 09:17:55.6922 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jS/G5MXwRt+hYp5rtKjWHBxbk4whsgw4KrFSQNXufRzXKcdPz5kFa8dJJ5OznHI4GKzL/o3GEMlvwciW7SE/tSbP1kCdF7+I3qKdpnveH9w=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV0P278MB1688
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 73TzHskRyZXpejW4lM5rEoYtz7zRAbuSJFH_w2j-ORQ_1791710277
-X-Mimecast-Originator: toradex.com
-Content-Type: text/plain; charset=WINDOWS-1252
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/10] rockchip: Remove unused rockchip_get_clk() helpers
+ for RK35xx
+To: Quentin Schulz <u-boot@0leil.net>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, u-boot@lists.u-boot-project.org
+References: <20260804214442.2592597-1-jonas@kwiboo.se>
+ <a3367c8d-6352-42d0-87d5-e325652fc225@0leil.net>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <a3367c8d-6352-42d0-87d5-e325652fc225@0leil.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -250,14 +155,86 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sat, Oct 10, 2026 at 03:59:51PM +0800, ye.li@oss.nxp.com wrote:
-> From: Ye Li <ye.li@nxp.com>
->=20
-> To enable icache and dcache in SPL, add the definition of secure DDR
-> space which could be accessed by SPL and move arch_cpu_init before
-> spl_early_init.
->=20
-> Signed-off-by: Ye Li <ye.li@nxp.com>
+Hi Quentin,
 
-Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+On 10/9/2026 10:10 AM, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 8/4/26 11:44 PM, Jonas Karlman wrote:
+>> This series takes the initial steps to try and remove use of
+>> rockchip_get_clk() to get the clock device or rockchip_get_cru() to get
+>> the CRU base address at runtime for the Rockchip platform.
+>>
+>> This series is similar to the "rockchip: Remove unneeded syscon driver
+>> for RK35xx" [1] series, but focuses on CRU instead of GRF.
+>>
+>> The CRU base addresses are fixed and known at compile time, yet drivers
+>> keep trying to resolve them at runtime delaying some operations by
+>> several ms.
+>>
+> 
+> I would rather use device tree whenever possible, instead of relying on 
+> hardcoded constants. Considering the contexts in which 
+> rockchip_get_cru() and rockchip_get_pmucru() are called (that is, in the 
+> DRAM driver will eventually be called only in DM-less TPL so cannot rely 
+> on DT being present to fetch CRU from it, and in the sysreset driver 
+> which doesn't have a description in the device tree), this here is 
+> acceptable to me as is. But we should think about documenting the 
+> exceptions to the "please get the info from device tree and do not use 
+> hardcoded addresses" rule. A problem for later :)
+
+I agree, we should use values from device tree where possible and
+appropriate. And as mentioned in the other thread, my acceptable
+exceptions are CRU, RAM and arch_cpu_init()+board_debug_uart_init() in
+xPL. With main reason being that anything in TPL (dram init) may or may
+not have access to DT, DM or otherwise be size constrained. And in SPL
+typically because of consistency, e.g. code may be shared with TPL, or
+we may need to do some one-off thing for a specific SoC, e.g. disable
+JTAG in arch_cpu_init().
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+> 
+>> In this initial part the RK3568 and RK3588 specific helpers are updated
+>> to use CRU base address constants, similar to the other RK35xx SoCs, and
+>> the rockchip_get_clk() helper is removed for all RK35xx SoCs.
+>>
+>> The changes included in this series have no intended behavior change for
+>> the affected RK35xx SoCs.
+>>
+>> A follow-up series will introduce a rockchip_sysreset_bind() helper that
+>> passes the CRU base address to the sysreset_rockchip driver, drops the
+>> call to rockchip_get_cru() along with implementing the get_status() ops.
+>>
+>> [1] https://patchwork.ozlabs.org/cover/2280781/
+>>
+>> Jonas Karlman (10):
+>>    rockchip: rk3588: Rename CRU_BASE to RK3588_CRU_BASE
+>>    rockchip: rk3588: Use fixed CRU base address
+>>    rockchip: rk3568: Use fixed CRU and PMU CRU base addresses
+>>    clk: rockchip: rk3568: Use fixed PMU CRU base address for PLL access
+>>    rockchip: rk3568: Remove unused rockchip_get_pmucru() helper
+>>    rockchip: rk3568: Remove unused rockchip_get_clk() helper
+>>    rockchip: rk3588: Remove unused rockchip_get_clk() helper
+>>    rockchip: rk3576: Remove unused rockchip_get_clk() helper
+>>    rockchip: rk3528: Remove unused rockchip_get_clk() helper
+>>    rockchip: rk3506: Remove unused rockchip_get_clk() helper
+>>
+>>   .../include/asm/arch-rockchip/cru_rk3568.h    |  5 ++-
+>>   .../include/asm/arch-rockchip/cru_rk3588.h    |  2 +-
+>>   arch/arm/mach-rockchip/rk3506/clk_rk3506.c    |  8 +---
+>>   arch/arm/mach-rockchip/rk3528/clk_rk3528.c    |  8 +---
+>>   arch/arm/mach-rockchip/rk3568/clk_rk3568.c    | 44 +------------------
+>>   arch/arm/mach-rockchip/rk3576/clk_rk3576.c    |  8 +---
+>>   arch/arm/mach-rockchip/rk3588/clk_rk3588.c    | 23 +---------
+>>   .../jaguar_rk3588/jaguar_rk3588.c             |  2 +-
+>>   .../tiger_rk3588/tiger_rk3588.c               |  2 +-
+>>   drivers/clk/rockchip/clk_rk3568.c             | 34 +++-----------
+>>   10 files changed, 18 insertions(+), 118 deletions(-)
+>>
+> 
 
