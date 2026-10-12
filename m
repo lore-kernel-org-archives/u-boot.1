@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F885CA9ED0
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 10:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B70CFCA9ED0
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 10:48:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E4EC780CB1;
-	Mon, 12 Oct 2026 10:48:24 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 253FB80D2B;
+	Mon, 12 Oct 2026 10:48:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LpkejkKvtxCT; Mon, 12 Oct 2026 10:48:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CD81C80C66
+ id Lnp-BQ1nAJXZ; Mon, 12 Oct 2026 10:48:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7C6CF80C66
 Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791802104;
-	b=rReXr1OXE8dJkNSVX4mgAOJ7NrmftmOc1tnVvdFp8SJmhKssd6CiL+csORQJC1/zaoAU
-	 OZ8a64Auq5zMcHfcTeWTFVJeSDU63e9VqzNN7/zBmQ1QzZZWOpGoVI51e4BH4kqXR3VCV
-	 xK1I13Fn0psWWmediXV0KCbZUvD3Ue8GNPY/l84/3zc5KxvhGQI3qUBLt2o9G5DFYogkN
-	 QAUm7G7YwM/6rFgo45+Qh8bHOe+I2zANFoxhF4G69QfDp9yCrZrsdXK1q9yAnjfFEr9Mr
-	 wNL+IdAz25H5HD4PPG0Z97TXVzI7EL3z+kXkjxQFS5Z3bKUcc8fVr9dRWFVQvGim17A==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791802105;
+	b=XFtnpsMJai5Zb5VUThQrlg/KwSekgz6tYJ4MiW6sl7ZkVokYPr0O6h5S8VJ2A5AjaTp9
+	 hEbulHieVY0iKYJRVTSP+oPI8Wr1pys35EUWpZ6kTfhIJFfUyX9FVGaI7DpMBXx28OQa5
+	 P7X8aqG13LI3AExl6SiPDfZjoYttJFaeRg+iXut8V2p8GmZSAWXHWjGdKnlRL+Nv62ooW
+	 AMWVDGGSghTkl5JqH8/UJo7uec01khyYTIXPbAZneE3Zo61lJFwly8iVxXsJRL501GyIB
+	 zgk9C2DKViIXPH6hTtF9rm7HIRGyef74Wm4nylbM1OJgw7VLELsq4/lj9Fsl8nljqdQ==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791802104;
+	c=relaxed/relaxed; t=1791802105;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -45,52 +45,52 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=4/UNJed2QfRAIZcVCm5bPj4KB/a6VzzDwkvVOtAWouE=;
-	b=NwssBVupdifI56E5nKVAgfpRYgWm8x4uIBM75NZk3ic58LgP+vPaSl8dLikVBz/IHuz0
-	 Tir4IIkj9WAZQvGXdFaeb1lH2W0k5cLcRJ23lPFUUXzznCiyiyDa90pFmJ6Gr30bsz+Me
-	 zKf7heeQd9GhGpokj3D8+ozewe0vcF6y/EjjT1A/W+PwDK7rhGg3j9khe20AWOlJDaGHo
-	 ArHS+SIIPYAGsTUlF8ymdmcjvDMF9PoxebXJR1+NZYCbTx4zDOPDUmT2bR3X/k1ieh4gt
-	 6hiB7lcg2plHlw5Y5MKpRIWMbpJU/0+8gV03kywumt+PxvbZ1xP+QfFvsGHpEYB7otg==
+	bh=YMclKi2xBuUa92z2mVCd/3LZYWFXk3IU/igywJDYgBY=;
+	b=ROGxMDPUde9qig7eWefrxdBiZVpoWCAICeYcRY3PEF8VngdKiewMXUhB5W5fBgGMo8p8
+	 S3tvDV1Z++/0V+8vXJDtMZua5WZoF4QHRzMdoqyycL/MMfNHRIPVNOlSMbT0tOnKPwe6b
+	 vmktBAjou0asfSYfZHKAD1aRSjNe/zwymlYaq/oqUclmn5bvn4PgrDaA/WyMyTcEz+f9Z
+	 j2m0nrsFx1efGIfs7Rs43aZHKF4/qkwPICm6E9CAb7KJgtvzu8R+jxpOAfdm4jEWvXBBG
+	 +XPHoRfRqXTYAI6Mtc+fA0MVKPTMJV6c+0gwSl4w5R4JgzOsgdcn+xdQVH+Eft+fpYQ==
 ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
 	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791802103;
-	bh=4/UNJed2QfRAIZcVCm5bPj4KB/a6VzzDwkvVOtAWouE=;
+	d=lists.u-boot-project.org; s=default; t=1791802105;
+	bh=YMclKi2xBuUa92z2mVCd/3LZYWFXk3IU/igywJDYgBY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=RdHJJPD3BzMD6XmNsDpHQP+qq7ukyBHvG74NXugH/LOlhUYiodW64jEiNgQuBJquf
-	 fyURQEATl5+COc27Es8lTPJ+vNqwewyGFglZBl99ecBDxL0cnSuQa5LQbty5gwE2NS
-	 Dpam/gxPj2eikkIECcrSM+R/UtSKzM6kWRc0NGoJSgmJPSZQgbqYU7Q5854F24xtRX
-	 YYE934v+yBQJwYlYM/DNOZ6byLUyNFOxzLG6kN9e0kvUflnfpGKcNnk8lUyyfjzpfO
-	 wmG42vQiafkuJ/6CV8lZfV8nOhmkKp4IlBz07/EraeL2fLOvaOarjDp8hPVd3lXvmI
-	 Av2E4cN/xxR6w==
+	b=t7vkY1RSAw+rXbiI/+l9SznO0shC65vK3R8+/+lz2hlHUeTXVBYQPoeVL/reMyidM
+	 EJTQQ8Z/iQJ8pSFm85++LMfEJT+3sDaMhbt9cEFlsMIPu0xgM5n/maYlgzlBr5qVSU
+	 NJMIuSNnFcT4y7Jnk508J1kxqqEiWQ5uJEvbMCjYLrsWNHyoy1YwxuzQ9k5N9UhsSj
+	 GZuXVo/EFxbqds3rL9cUBxasz6K2WayleRCLAU+9W++jNCcqDdwaSKrPgrVZY/ynNf
+	 IdLP9dUSqtSEq+vM2Eg3i7p3Nana/KV5/q3zk4aJEGkvNvvPENhkZtKOB07V8MwAjZ
+	 RJs8peFImQILA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CD81C80C66;
-	Mon, 12 Oct 2026 10:48:23 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id C4F2E9CF
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:48:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7C6CF80C66;
+	Mon, 12 Oct 2026 10:48:25 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id AAB91380
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:48:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B6A4D605ED
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:48:20 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 8D575400E9
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:48:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aozJ2Tjv5cI8 for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 10:48:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 59CC4605DE
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IiPjy3PezGBl for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 10:48:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1D797400D0
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2a01:111:f403:c20a::2"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791802099;
- b=mWJ6u3KIta8kLTJfkGsDE91F5gL+PWbWmM2MZP6w3g98eOo0LYxsg017W653bM7dYaKE
- v77CbPSnH2hGnSnEp7846RYdtSBje6SC8Amat7epLpmgT+8edMc+OajylSlNZNn3NAbVx
- 07Wjq0vWPS2Llav3VH3i2PF2VKm/R8HTAUeLa+GrChBNaRnV19w3ss4XA9B4OEx5t9t/t
- oJ4YRNed7A4vObUWRIksQxYdxR/Wuc1rf4oacfUoD3iEBAmWQxtVuZlZDdmHc/Ac5p0e3
- vrjjmZmSmf9gvUOz4v/rRdWJDdzAvna2LVkqv0tNQIq2Em9TNFQVDRFyHozEHFWaSgg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791802102;
+ b=SVc6WMmAJRQD0bOrVM3lkUwWA6VHropjdzAkTSFvCGmUbTsS5la9Otmm3Gz/+HOIzmPA
+ +pOs7WCejiY8/L06NaeGxOe3d9SzumZ+2aij5xmqZDavOD6PgZSNiT9y/m8HgyONGmun8
+ vrtw3gyzFwoqbh/6uf3Up7thWTWjb+DhcGaVSlIPmY5vU8AT/u+Wfxm+M05F0sChgGHRO
+ pR9j88X705qjqKHmW+tS/0kBQEIov+tPsFdif0b40frdQw57ncIhXc7gndZrvtf/eTT1t
+ 8BZW9c/Kc9h/gd9Bg3G4SkMFc7yTJUsoe0VN+9ejOOl3bKNRinAu48E/5z9WNqn0T2Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791802099;
+ c=relaxed/relaxed; t=1791802102;
  h=Received-SPF:DKIM-Signature:Received:Received:
  X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
@@ -109,40 +109,40 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
  X-MS-Exchange-CrossTenant-FromEntityHeader:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=4/UNJed2QfRAIZcVCm5bPj4KB/a6VzzDwkvVOtAWouE=;
- b=XM/V3sfHCGZ/2l8DfYSMnCgZjFAxuJycph+qOzXkI1uWNrRVU+OQVtS4SLO7KSAxj7Qd
- MhLxbVnd45X4pHL8h1/svfSBrqBZD1zU9+F5iAnOxM0UtxlZXg/5HI+gVh/sAc7NQKEfZ
- 2d4gjxPC9zKExYUYN5xyd86ps8+6zCY7tqZxXjrORUKFag4KIzI3LQlXSVZDC9ZzvEinH
- eP6VPUYes3AgKTQFqdGbxeNRHcP8piP2heqqeIXbwpvsxK/57p7vsGtEAFisYQQmuSLMO
- 6VW2d5oNBaRdhbTL09X4JEJXaVmfGF/3zia4UmXuUgA9dlSKoFggkfL0GbkleMi2kTg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ bh=YMclKi2xBuUa92z2mVCd/3LZYWFXk3IU/igywJDYgBY=;
+ b=mA4sjP3jtCtPuTkzp22iaC5ap6zBGxLSrgweoXrl5QO5isdfP2+S301hJ5TcbAVBdfZ9
+ QW55WQZCuPgRGokCNql4WmEFAs9//U1rOLDKRmB7g7wo28MtufkGDRw8Eep2AT81FHxOL
+ taPoT3F978DDCvLTMd4al2PuTEN2eOkrIgwy1h/Tg42304izDoAwlXVYjpiCbKPoklTYq
+ u1hsIogeY+ShFsHZaEZIS5ggmLOBSVNcCCYLMFWXSM5Guz1IfR8Z6QT7YgGiQRfI/nUhU
+ dXeFui8RxG7k017OtE+eGVRSdiMlS2IzznbkVZgaz4KtF+zYhHuAqZ1b1GsnmD1gM0g==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
  dmarc=none header.from=softathome.com;
  dkim=pass header.d=softathome1.onmicrosoft.com
  header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=bSMfVhd6; 
+ header.s=selector1-softathome1-onmicrosoft-com header.b=XKPnJl72; 
  arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20a::2"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a01:111:f403:c20a::2;
  helo=paup264cu001.outbound.protection.outlook.com;
  envelope-from=yan.wang@softathome.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=none (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
  header.from=softathome.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=softathome1.onmicrosoft.com
  header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=bSMfVhd6
+ header.s=selector1-softathome1-onmicrosoft-com header.b=XKPnJl72
 Received: from PAUP264CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170110002.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::2])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 59CC4605DE
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:48:18 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1D797400D0
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:48:21 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TxXGMOQjueIch3XPXFrNqp8hA30BQOGfR9rBVEGxIqvUbZuY8xPSNcVt+Zb33FA1BTY0wuMCg3gL7Kf1QjTUBw4itj4pPCiNNV0kwrbP6MNwW0NhrnIEYJQtz2ujm5PSeE2n2MtLDueQEKrVcP1tuEdY1HAr+c8ie//cmJF3K/o0W5ovdaZKtfyVs7Wvq8texhAcseE9Xr1gqPfiyomgUEer6OeVmgPdorGgp9W7+DQOw/yw9goTTXL5tbiA6iw2+mIYapAUC+mAmQgNcKNO95GwuekWJzf8yDTgjZwZeQBG7oFFDsFdcBTIoGZFrvdj+UM65ArY9OodECbE7/ARDg==
+ b=gC7oMdaO33ztk1oRv6tHkGiauqi+K9bhiyPvHZ6ZQZxeAXPNqF5pPVYyknsd7kF0E+phHJVzzAPUqDO9pC+UCTsJOnJ4mQjyKXEnyfgX+Dr9yZ7jTWaGdclVSRd7es/6xbuqsXm77bTt7RaR35SBcRo1/K2wwTkz78OVXxGBh40OJpRE4mUYRjx5K8Pckl7/glWL/mtNYoY5uApRU7qdufUi2ToVFKkmceJBtjeCpiFuWMb+T1q4alXA3AwWwjVW+ATYqAiREbjlzgcFg0I9unTIPX2XkpI1A1/nFNPYzRWaB0PyV6U3vPGpZCJlw+SMVoCeYrPAwq1hWRsjXaa2xw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4/UNJed2QfRAIZcVCm5bPj4KB/a6VzzDwkvVOtAWouE=;
- b=dnTQbvE6m3CqMLwjqrLc9c4RsPZwAwaGDoy88ek0jG+k4Sukhem1fNWL5u8J0rH59ADZyEIf2AGvn0JyFmx6TQrq0vryh4RTdjn84YrrOPf1BLanDYyCAjuYBucwtJndANES/L9k4FP7nZSQYx19jOUcPHnqYZ2HlWEYMcevn9pCSxbnvRfKjnK5mbv0OZzjXEkQ8OL+qK3Fhr81G23aMRcaIgJaHU8A4QpWtJ5u65DlkG3A09h14cxpTwetGAqW1ie+xAqLtdx80Fnge0DywB/QEyrdXM9FZvCeQNpaVNj1xgtFyxFPntSnIDp/jS+AlFd1A67hPHfP2tPemqTxZQ==
+ bh=YMclKi2xBuUa92z2mVCd/3LZYWFXk3IU/igywJDYgBY=;
+ b=tickxlmg2TUCb3kc0LQ+NG8YZ4h+Z0jvjaiBMoPUobSrIFf3qHpDTD4D7hvqdLVtCN9mScSAXDghedaEbpqjTjOMl7DMZXc1bRTCdS0WaaD+EJ/EToLlqxs30eHlpJOQ49rQ1RKIrJvCS2J7vv57o1N9jCNQq8zUKcbdzd5WHqFi/J57IPjkyIzm3mdjFkFZ8/3zHvA1yOZV5PLNrjqgeXVwyP++JTVjSzvWrtRHe8kzEGBmctUG2T1Mf1Nmyh8rZxOjMuuLy7oEUbNGPxIWt8PorN5VeiKAaiHZQIia0KPk/IkaLuSLU3+PZq+JJ7zdgqrO4ZFefJO5PuMePjAJZA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -150,16 +150,16 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4/UNJed2QfRAIZcVCm5bPj4KB/a6VzzDwkvVOtAWouE=;
- b=bSMfVhd6V5CGP3ZE1HEFZbq/H9x8W2g5BTbfMB+0r3lGymNZpXKovcjFZoE9tjZGUoWlXD3g93xI6VJAPWGlAImSI/nqDTbSCy2i++6Oi9PbaN2G+yw7cl7L2xgnqlvQmLPRfPwqcjfBzFL+Zelx5Icdp0ljcNKKjMAT36oy9DYwcLy5Q7kMncABq1JzJmJUtJ8cVh5ui5qyj0UF2DM8lL/T/9Zt6JdA9zTyA6JDU56nm2l73SPds1sz1wfiAvgpWjWmasZAzvZpsEtfZf6LOFoYnslVpnqj41516U7DrOPj6pe3WI/XiPuO/Mt3wWEhHetTYXLir9ErBc8XTlNVSg==
-Received: from MR1P264CA0184.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:58::6) by
- PASP264MB5694.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:497::8) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.496.21; Mon, 12 Oct 2026 10:48:14 +0000
-Received: from MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:58:cafe::26) by MR1P264CA0184.outlook.office365.com
- (2603:10a6:501:58::6) with Microsoft SMTP Server (version=TLS1_3,
+ bh=YMclKi2xBuUa92z2mVCd/3LZYWFXk3IU/igywJDYgBY=;
+ b=XKPnJl724lS6sk6OZZESRA/69fsldz7/NXV+/NBPosWOEm35cNxoYrRUYMC5iRVVIp2rg4twzemrocWU8aDljxKzPzggn6tzZorWLugXI492I3+kM4JyUa8ZTysmsVck5iNdQ+QCz2yOgGnsGAha/5dLoC0OzoI66ymrc7/bjWzArsI8HxYJQQImQGIkHD2MsI2QXWylbVc9JUKlBoH54S4HvL1UbcxC6Onf6mLOqoF2SD3XalhD7sU+JvVpnYCjfAaPH8vQ3suJO/M0BAg3y1J+V1dJtNydTohG1ae1x+fm0ita3rKMSxQJADYfNtrvlZvjgeGx4sUZIbkvyl1uJA==
+Received: from PR1P264CA0088.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:345::15)
+ by PR0P264MB3484.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:163::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.21; Mon, 12 Oct
+ 2026 10:48:14 +0000
+Received: from PA2PEPF00019231.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:345:cafe::21) by PR1P264CA0088.outlook.office365.com
+ (2603:10a6:102:345::15) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.496.5 via Frontend Transport; Mon, 12
  Oct 2026 10:48:14 +0000
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
@@ -172,21 +172,21 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D59.mail.protection.outlook.com (10.167.241.6) with Microsoft
+ PA2PEPF00019231.mail.protection.outlook.com (10.167.242.37) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.6
- via Frontend Transport; Mon, 12 Oct 2026 10:48:13 +0000
+ via Frontend Transport; Mon, 12 Oct 2026 10:48:14 +0000
 Received: from localhost.localdomain (unknown [192.168.72.213])
- by proxy.softathome.com (Postfix) with ESMTPSA id AFC6C20061;
- Mon, 12 Oct 2026 12:48:13 +0200 (CEST)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 730E820061;
+ Mon, 12 Oct 2026 12:48:14 +0200 (CEST)
 From: Yan WANG <yan.wang@softathome.com>
 To: trini+nodisclaimer@konsulko.com, sjg+nodisclaimer@chromium.org,
  alpernebiyasak+nodisclaimer@gmail.com, marex+nodisclaimer@nabladev.com
 Cc: philippe.reynes+nodisclaimer@softathome.com,
  paul.henrys_ext+nodisclaimer@softathome.com,
  u-boot@lists.u-boot-project.org, Yan WANG <yan.wang@softathome.com>
-Subject: [PATCH 1/5] binman: Add PKCS#11 signing support to pkcs11_tool
-Date: Mon, 12 Oct 2026 12:48:00 +0200
-Message-ID: <20261012104805.17297-2-yan.wang@softathome.com>
+Subject: [PATCH 2/5] binman: Add test for pkcs11_tool sign method
+Date: Mon, 12 Oct 2026 12:48:01 +0200
+Message-ID: <20261012104805.17297-3-yan.wang@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261012104805.17297-1-yan.wang@softathome.com>
 References: <20261012104805.17297-1-yan.wang@softathome.com>
@@ -195,29 +195,29 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D59:EE_|PASP264MB5694:EE_
-X-MS-Office365-Filtering-Correlation-Id: 70d3d53f-fac8-4a2f-bd86-08df284e50eb
+X-MS-TrafficTypeDiagnostic: PA2PEPF00019231:EE_|PR0P264MB3484:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6a08ff57-c8ac-43a4-614f-08df284e514c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700016|1800799024|23010399003|56012099006|18002099003|22082099003|6133799003|8126099003|261009223027099003|3023799007|10067099003;
-X-Microsoft-Antispam-Message-Info: Z3BewsvOelSXq2AKeTMI9pLbLnMzLjs844AdYiC7t1IMdlOazPsVwarK1PIpeFf6dBciw2QYJUtOyD2qnCK0zKFs/QXpmsFS5yXxuD25EqRDGIDNGOv3P+jJmC3PrLMly54YS30BlV/vLzge1/SeQrQ7UeGz1cBJAzZoMNV995SGQb23KxgQStvzK87BCHkHpEryTVvypjyUaSkTP45RVhtQgAGKaqqouG5D0Zklo+QJW2vT1YR2Ioasezyc6IR4lEEAmzRrjsm7NpLihpwUQqqlPiDap7m7j3VSqVHecLSqRcjdsxqUCMOjGKVvG1oDONZi751J3hUFM3NirefGaUt72e/sHZB8s0RwESCjZyFTrqJ4SAFQ3VVY/bMTA77ux07O/6qAo555I3jyvg2Mmf6PDQZ0f4sJ7Z8J2a/sHHaTjmciny5llg9dZlRKXo9xwUUyzbMHmT96D7pUVwSFth06tpRZP57IyTmbiAwyXv6rw4LEIBEYh8I+LDgwarYVNAj02XdlUMD0O9io++Y+kLn0uHI/tSxrNMVY9oVuOy6ofl+VJJVLZcZGZbiZqQSayOW7uYPiCcYmnUH0lrUEP6DDhVn/lrcuMFgLJrgKGtpWCANFb3zgyIaK+Fd8RjbZGzV9P7u6OJ9exuLeMpczzl/KNSk4VZHfEK3B5zz2weFZPHcS80H4FjEYXTrenrUjGbXC7t08LUcfoSdhAC20WA==
+ ARA:13230040|376014|1800799024|23010399003|82310400026|36860700016|56012099006|261009223027099003|10067099003|17002099007|22082099003|18002099003|6133799003|3023799007;
+X-Microsoft-Antispam-Message-Info: P5MCbADE4rU9f0/Rpw2XXUJAqU7Cy+g9wQ2PqqAjYvluelwDgJiYsNxCsQrFM1auvf481xfMeBkLpo9upmJ3VotC92mKk6LskFgl1sd1gu8CMRYsOBdLOE7uY0y1sONTmGRybYjcQnjdOl6+XnUhHeLp8oV25aRYvrjhXfNvchfmymxa0uQWloM3PHUB2IiGiBMb4xtub8KACtZ+5XKNDSZOf8KF57t6sundVVdC3hlMMhITN6xdCjtAkaFRNqHPPC/Cy/a+rg/GO4W3ejdk/vkRMXgJksJrAwOB+662hwAcbN6C9StvswLjuZ+xWr5ca+wjkKgZRNFW7lNAkXVbbWplc0IJ5G3ha2+StS3gqEL+Kv9nw4/gvDB0Sbw3IkTYRH1Pv6P+g5SoH0qY43OrgXPWheCFCpQEg2oCl22Kp2XS2WE0EBSv0HoCMiqVnr4zEbb43MY1KHmy0y4jAMNeF6yM8SLMWjQkW8gIXC+OeuDfeCERls0sqhIAiR0gvACqk+GbXHJMl3xlJnfS15YhXYoQ9YVxAVS/vTr6GdPX/ZJ2dsfjJKPQfIl36XZkyKFdL7UYQIsAc42NS+ldZ4baqs5FvR9lWI8gSKXDavzDKzqJGBAN0KmCk657WKfeZrG/MF3SNg75O7PZ80E8R/mhu4dKs4c/b+gi28lsUddd4ILpfKD9OcPYSWvScS5xqsQNQOX5Qr6apG+Th0eQSLqp7g==
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(23010399003)(56012099006)(18002099003)(22082099003)(6133799003)(8126099003)(261009223027099003)(3023799007)(10067099003);
+ SFS:(13230040)(376014)(1800799024)(23010399003)(82310400026)(36860700016)(56012099006)(261009223027099003)(10067099003)(17002099007)(22082099003)(18002099003)(6133799003)(3023799007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: oD2bRtTO7mW1rRERKTrmHu0ljiyYQx+/pRPRqd/V8qNzgQPz0PPfaMzkrq+dCa9mhq2uMJ56V58cvrlxT/jyYI0K9z4fG0h0/DQ+GJnAZLg0DqjO8Udkmvhg6RU1JsuU3SPvoHsK4NSEHdhdIH7wmjTW/nYoOcW1BlSFU+2BVAcmpI9uHTnL6EZekIcVYATo09Y3ZnJyFZ7eW9pF5lRTabcExluVEk6gmKgDnehRB0x/VWVMPQY6pb/Wam36H6Q/gsiZ6vNFlZm75rUPPLwyu98QoNQTjdVsSZRX3QaLsrFLd6bC1u306sLqffCdrVAwVaC98NvZjcIjsscdsMXuJrXKHK/bTO+HmnUTOOuvzH9e6p8j1hQ+qNvf/0cK3vb3GeK1zorWpYCRSwO8fDBQV5lwUi5dyLtu2jOUPA/iQSALHP9CIwmzOZtpEuiwcEoU
+X-MS-Exchange-AntiSpam-MessageData-0: z9aQ/qSWQ/yZQUp0GZB2drZRrffiNcT4eH8+EbCWR15HlN5NK0lZxhDDiPEGgZQM18BsYUsYZvq8CTW1/gYS36fDjYlVGSC25/opRf8sMPIMfr/5LCQSdJ6eNt4j49hCghAyW1wrReWDYhnrzduOkNnOfAq4YhpbGWSPN2HC47/mXDQ+mCte0ZYe0gAEI8bsfS0VSjwnKPzCc7JFbRBe0FLYsnVXHvANXyFOTCR/OySNbLUpTfkqbqX+Py4HxHevCKSSH46Io7FsSZ9YoWqaaDAS4I0cAn2Lsokc+LCDaYLUpxyM1dyMHVmq3T1XFfsNhHwex8gpCNJ948BboYkE2+GX8gAhmzCJZMpyegNF2lcUH+WMJvMP2XhKSrLymZSVvvMtNlwKzpgsIkE6R0Q/xkmn/2cKwGojsncb0k6YmMl2HB5RHS6cL1uqS1qSfRo6
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2026 10:48:13.9420 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 70d3d53f-fac8-4a2f-bd86-08df284e50eb
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2026 10:48:14.5926 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a08ff57-c8ac-43a4-614f-08df284e514c
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019231.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PASP264MB5694
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB3484
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -231,310 +231,413 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Implement the sign() method in the pkcs11_tool btool to enable
-HSM-based cryptographic signing using the PKCS#11 standard.
-This provides the core PKCS#11 interface needed for secure signing
-with hardware security modules in binman workflows.
+Exercise the three new methods added to the pkcs11_tool btool:
+sign(), _build_mechanism() and _verify_mechanism().
 
 Signed-off-by: Yan WANG <yan.wang@softathome.com>
 ---
- tools/binman/btool/pkcs11_tool.py | 275 ++++++++++++++++++++++++++++++
- 1 file changed, 275 insertions(+)
+ tools/binman/bintool_test.py | 374 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 374 insertions(+)
 
-diff --git a/tools/binman/btool/pkcs11_tool.py b/tools/binman/btool/pkcs11_tool.py
-index ca80943f98c..e380f585fc7 100644
---- a/tools/binman/btool/pkcs11_tool.py
-+++ b/tools/binman/btool/pkcs11_tool.py
-@@ -3,7 +3,12 @@
- #
- """Bintool implementation for pkcs11-tool"""
+diff --git a/tools/binman/bintool_test.py b/tools/binman/bintool_test.py
+index 7e8dafea94e..a3c8fb70422 100644
+--- a/tools/binman/bintool_test.py
++++ b/tools/binman/bintool_test.py
+@@ -21,6 +21,10 @@ from u_boot_pylib import terminal
+ from u_boot_pylib import test_util
+ from u_boot_pylib import tools
  
-+import os
-+import re
-+import tempfile
++# Shared namedtuple for mocking run_cmd_result() return values
++_CmdResult = collections.namedtuple(
++    '_CmdResult', ['return_code', 'stdout', 'stderr'])
 +
- from binman import bintool
-+from u_boot_pylib import tools
+ # pylint: disable=R0904
+ class TestBintool(unittest.TestCase):
+     """Tests for the Bintool class"""
+@@ -38,6 +42,12 @@ class TestBintool(unittest.TestCase):
+             shutil.rmtree(self._indir)
+         self._indir = None
  
++    def _make_module_path(self):
++        """Create and return a path to a fake PKCS#11 module file"""
++        path = os.path.join(self._indir, 'fake_module.so')
++        tools.write_file(path, b'')
++        return path
++
+     def test_missing_btype(self):
+         """Test that unknown bintool types are detected"""
+         with self.assertRaises(ValueError) as exc:
+@@ -354,6 +364,370 @@ class TestBintool(unittest.TestCase):
+             result = btool.run_cmd_result('fred')
+         self.assertIsNone(result)
  
- class Bintoolpkcs11_tool(bintool.Bintool):
-@@ -22,6 +27,276 @@ class Bintoolpkcs11_tool(bintool.Bintool):
-                          'PKCS #11 tokens managing tool',
-                          version_args='--show-info')
- 
-+    def _build_mechanism(self, hash_algo, sign_algo, padding):
-+        """Build a PKCS#11 mechanism name from algorithm parameters.
++    def test_pkcs11_tool_sign_errors(self):
++        """Test error handling in pkcs11-tool sign method"""
++        btool = Bintool.create('pkcs11_tool')
++        data = b'test data'
 +
-+        Derives the mechanism name dynamically from the hash algorithm,
-+        signing algorithm, and padding, supporting any PKCS#11-compatible
-+        combination without a fixed lookup table.
++        # Test unsupported signing algorithm family (dsa cannot be mapped)
++        with self.assertRaises(ValueError) as exc:
++            btool.sign(data, '/fake/module.so', token_label='test',
++                      key_label='test', hash_algo='sha256',
++                      sign_algo='dsa2048', padding='pkcs1v15')
++        self.assertIn('Unsupported signing algorithm', str(exc.exception))
 +
-+        The signing algorithm may include a key-size suffix (e.g. 'rsa2048',
-+        'ec256') which is stripped; only the algorithm family is used.
++        # Test missing token identification
++        with self.assertRaises(ValueError) as exc:
++            btool.sign(data, '/fake/module.so', key_label='test')
++        self.assertIn('Must specify either token_label or token_serial',
++                     str(exc.exception))
 +
-+        Args:
-+            hash_algo (str): Hash algorithm (e.g. 'sha256', 'sha384', 'sha512')
-+            sign_algo (str): Signing algorithm (e.g. 'rsa2048', 'rsa4096',
-+                'ec256', 'ecdsa384')
-+            padding (str): Padding scheme ('pkcs1v15', 'pkcs-1.5', or 'pss')
++        # Test missing key identification
++        with self.assertRaises(ValueError) as exc:
++            btool.sign(data, '/fake/module.so', token_label='test')
++        self.assertIn('Must specify either key_label or key_id',
++                     str(exc.exception))
 +
-+        Returns:
-+            str: PKCS#11 mechanism name (e.g. 'SHA256-RSA-PKCS')
++        # Test missing module path
++        with self.assertRaises(ValueError) as exc:
++            btool.sign(data, None, token_label='test', key_label='test')
++        self.assertIn('PKCS#11 module path is required',
++                     str(exc.exception))
 +
-+        Raises:
-+            ValueError: If the algorithm family cannot be mapped to a mechanism
-+        """
-+        hash_upper = hash_algo.upper()
++        # Test module not found
++        with self.assertRaises(ValueError) as exc:
++            btool.sign(data, '/nonexistent/module.so', token_label='test',
++                      key_label='test')
++        self.assertIn('PKCS#11 module not found', str(exc.exception))
 +
-+        # Strip trailing digits to extract the algorithm family:
-+        # 'rsa2048' -> 'RSA', 'ec256' -> 'EC', 'ecdsa384' -> 'ECDSA'
-+        m = re.match(r'([a-zA-Z]+)', sign_algo)
-+        if not m:
-+            raise ValueError(f"Cannot parse signing algorithm: {sign_algo!r}")
-+        algo_family = m.group(1).upper()
++    def test_pkcs11_tool_sign_failures(self):
++        """Test pkcs11-tool sign method failure cases"""
++        btool = Bintool.create('pkcs11_tool')
++        btool.present = True
++        data = b'test data'
 +
-+        # Normalize padding aliases
-+        pad = padding.lower()
-+        if pad == 'pkcs-1.5':
-+            pad = 'pkcs1v15'
++        module_path = self._make_module_path()
 +
-+        if algo_family == 'RSA':
-+            if pad == 'pss':
-+                return f'{hash_upper}-RSA-PKCS-PSS'
-+            else:
-+                return f'{hash_upper}-RSA-PKCS'
-+        elif algo_family in ('EC', 'ECDSA'):
-+            return f'ECDSA-{hash_upper}'
-+        else:
-+            raise ValueError(
-+                f"Unsupported signing algorithm: {sign_algo!r}"
-+            )
++        # Test tool not available
++        def fake_run_none(*args, **kwargs):
++            return None
 +
-+    def _verify_mechanism(self, mechanism, module, slot_index=None,
-+                          token_label=None):
-+        """Verify a mechanism against the token's allowed mechanisms list.
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_none):
++            with self.assertRaises(RuntimeError) as exc:
++                btool.sign(data, module_path, token_label='test',
++                          key_label='test')
++            self.assertIn('pkcs11-tool not available', str(exc.exception))
 +
-+        Calls pkcs11-tool --list-mechanisms to retrieve the set of mechanisms
-+        supported by the token and raises an error if the requested mechanism
-+        is absent. Verification is silently skipped when the list cannot be
-+        retrieved (tool unavailable, non-zero exit, or unparseable output).
++        # Test signing failure (non-zero return code)
++        def fake_run_error(*args, **kwargs):
++            return _CmdResult(1, b'', b'Error: PIN incorrect')
 +
-+        Args:
-+            mechanism (str): PKCS#11 mechanism name to verify
-+                (e.g. 'SHA256-RSA-PKCS')
-+            module (str): Path to PKCS#11 library (.so file)
-+            slot_index (str): Slot index to target (optional)
-+            token_label (str): Token label (optional, used when no slot_index)
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_error):
++            with self.assertRaises(RuntimeError) as exc:
++                btool.sign(data, module_path, token_label='test',
++                          key_label='test')
++            self.assertIn('pkcs11-tool signing failed', str(exc.exception))
++            self.assertIn('PIN incorrect', str(exc.exception))
 +
-+        Raises:
-+            ValueError: If mechanism is not in the token's allowed mechanisms
-+        """
-+        args = ['--list-mechanisms', '--module', module]
-+        if slot_index is not None:
-+            args += ['--slot-index', slot_index]
-+        elif token_label:
-+            args += ['--token-label', token_label]
++        # Test no signature output
++        def fake_run_no_output(*args, **kwargs):
++            return _CmdResult(0, b'', b'')
 +
-+        result = self.run_cmd_result(*args, raise_on_error=False)
-+        if result is None or result.return_code != 0:
-+            return  # Cannot verify; proceed and let pkcs11-tool report errors
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_no_output):
++            with self.assertRaises(RuntimeError) as exc:
++                btool.sign(data, module_path, token_label='test',
++                          key_label='test')
++            self.assertIn('no signature output', str(exc.exception))
 +
-+        stdout = (result.stdout.decode('utf-8', errors='replace')
-+                  if isinstance(result.stdout, bytes) else result.stdout)
++    def test_pkcs11_tool_cleanup_error(self):
++        """Test that cleanup errors in pkcs11-tool are handled gracefully"""
++        btool = Bintool.create('pkcs11_tool')
++        btool.present = True
++        data = b'test data'
 +
-+        # Parse mechanism names from lines like:
-+        #   SHA256-RSA-PKCS, keySize={512,4096}, hw, sign, verify
-+        # Only accept names that match the PKCS#11 identifier format
-+        # (uppercase alphanumeric with dashes, e.g. SHA256-RSA-PKCS).
-+        allowed = []
-+        for line in stdout.splitlines():
-+            line = line.strip()
-+            if not line or line.startswith(('Using ', 'Supported ', 'Mechanism')):
-+                continue
-+            mech_name = line.split(',')[0].strip()
-+            if re.match(r'^[A-Z][A-Z0-9-]+$', mech_name):
-+                allowed.append(mech_name)
++        module_path = self._make_module_path()
 +
-+        if allowed and mechanism not in allowed:
-+            raise ValueError(
-+                f"Mechanism '{mechanism}' is not in the token's allowed "
-+                f"mechanisms.\nAllowed: {', '.join(sorted(allowed))}"
-+            )
++        fake_sig = b'\x00' * 256
 +
-+    def find_slot_by_serial(self, module, serial):
-+        """Find slot index by token serial number.
++        def fake_run_result(*args, **kwargs):
++            """Mock successful signing"""
++            return _CmdResult(0, fake_sig, b'')
 +
-+        Args:
-+            module: Path to PKCS#11 library
-+            serial: Token serial number to find
++        # Mock os.unlink to raise OSError
++        original_unlink = os.unlink
 +
-+        Returns:
-+            Slot index as string, or None if not found
-+        """
-+        args = ['--module', module, '--list-slots']
-+        result = self.run_cmd(*args)
++        def fake_unlink(path):
++            if 'binman_sign_' in path:
++                raise OSError("Permission denied")
++            return original_unlink(path)
 +
-+        # Parse output line by line to find matching serial
-+        lines = result.stdout.split('\n')
-+        current_slot = None
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_result):
++            with unittest.mock.patch('os.unlink', side_effect=fake_unlink):
++                # Should not raise exception, cleanup error is silently ignored
++                sig = btool.sign(data, module_path, token_label='test',
++                               key_label='test')
++                self.assertEqual(fake_sig, sig)
 +
-+        for line in lines:
-+            # Track current slot number
-+            slot_match = re.search(r'Slot (\d+)', line)
-+            if slot_match:
-+                current_slot = slot_match.group(1)
++    def test_pkcs11_tool_find_slot_by_serial(self):
++        """Test find_slot_by_serial method"""
++        btool = Bintool.create('pkcs11_tool')
++        btool.present = True
 +
-+            # Check for serial number match
-+            if 'token serial num' in line.lower():
-+                serial_match = re.search(r'token serial num\s*:\s*(\S+)', line,
-+                                         re.IGNORECASE)
-+                if serial_match and serial_match.group(1) == serial:
-+                    return current_slot
++        # Test finding a slot with matching serial
++        slot_output = """Available slots:
++Slot 0 (0x123): SoftHSM slot ID 0x123
++  token label        : test-token
++  token manufacturer : SoftHSM project
++  token model        : SoftHSM v2
++  token flags        : login required, rng, token initialized, PIN initialized
++  hardware version   : 2.6
++  firmware version   : 2.6
++  Token serial num   : abc123xyz
 +
-+        return None
++Slot 1 (0x456): SoftHSM slot ID 0x456
++  token label        : another-token
++  token manufacturer : SoftHSM project
++  token model        : SoftHSM v2
++  token flags        : login required, rng, token initialized, PIN initialized
++  hardware version   : 2.6
++  firmware version   : 2.6
++  TOKEN SERIAL NUM   : def456uvw
++"""
++        def fake_run_cmd(*args, **kwargs):
++            result = collections.namedtuple('Result', ['stdout', 'stderr'])
++            return result(slot_output, '')
 +
-+    def sign(self, data, module, token_label=None, token_serial=None,
-+             slot_index=None, key_label=None, key_id=None, pin=None,
-+             hash_algo='sha256', sign_algo='rsa2048', padding='pkcs1v15'):
-+        """Sign data using PKCS#11 HSM
++        with unittest.mock.patch.object(btool, 'run_cmd',
++                                       side_effect=fake_run_cmd):
++            # Test finding first slot
++            slot_idx = btool.find_slot_by_serial('/fake/module.so', 'abc123xyz')
++            self.assertEqual('0', slot_idx)
 +
-+        This method signs data using a private key stored in a PKCS#11 token
-+        (HSM, smart card, or software token like SoftHSM). The data is hashed
-+        and signed by the HSM using the specified mechanism.
++            # Test finding second slot
++            slot_idx = btool.find_slot_by_serial('/fake/module.so', 'def456uvw')
++            self.assertEqual('1', slot_idx)
 +
-+        The mechanism name is derived dynamically from the algorithm parameters
-+        and validated against the token's allowed mechanisms list before
-+        signing.
++            # Test not finding a slot
++            slot_idx = btool.find_slot_by_serial('/fake/module.so', 'nonexistent')
++            self.assertIsNone(slot_idx)
 +
-+        Args:
-+            data (bytes): Data to sign (will be hashed and signed by the HSM)
-+            module (str): Path to PKCS#11 library (.so file)
-+            token_label (str): Token label (alternative to token_serial)
-+            token_serial (str): Token serial number (alternative to token_label)
-+            key_label (str): Private key label (alternative to key_id)
-+            key_id (str): Private key ID (alternative to key_label)
-+            pin (str): PIN/password to unlock the token
-+            hash_algo (str): Hash algorithm ('sha256', 'sha384', 'sha512', …)
-+                Default: 'sha256'
-+            sign_algo (str): Signature algorithm with optional key size
-+                (e.g. 'rsa2048', 'rsa4096', 'ec256')
-+                Default: 'rsa2048'
-+            padding (str): Padding scheme ('pkcs1v15', 'pkcs-1.5', or 'pss')
-+                Default: 'pkcs1v15'
++    def test_pkcs11_tool_sign_success_slot_index(self):
++        """Test successful signing with slot_index"""
++        btool = Bintool.create('pkcs11_tool')
++        btool.present = True
++        data = b'test data to sign'
 +
-+        Returns:
-+            bytes: Signature bytes
++        module_path = self._make_module_path()
 +
-+        Raises:
-+            ValueError: If mechanism is unsupported, parameters are invalid,
-+                or the mechanism is not in the token's allowed list
-+            RuntimeError: If signing operation fails
-+        """
-+        # Build mechanism name dynamically from algorithm parameters
-+        mechanism = self._build_mechanism(hash_algo, sign_algo, padding)
++        fake_sig = b'\x01\x02\x03\x04' * 64
 +
-+        # Validate token identification
-+        if not token_label and not token_serial and not slot_index:
-+            raise ValueError(
-+                "Must specify either token_label or token_serial or slot_index"
-+            )
++        def fake_run_result(*args, **kwargs):
++            if '--sign' in args:
++                self.assertIn('--slot-index', args)
++                self.assertIn('0', args)
++            return _CmdResult(0, fake_sig, b'')
 +
-+        # Validate key identification
-+        if not key_label and not key_id:
-+            raise ValueError(
-+                "Must specify either key_label or key_id"
-+            )
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_result):
++            sig = btool.sign(data, module_path, slot_index='0',
++                           key_label='test-key')
++            self.assertEqual(fake_sig, sig)
 +
-+        # Validate module path
-+        if not module:
-+            raise ValueError("PKCS#11 module path is required")
++    def test_pkcs11_tool_sign_success_key_id(self):
++        """Test successful signing with key_id instead of key_label"""
++        btool = Bintool.create('pkcs11_tool')
++        btool.present = True
++        data = b'test data to sign'
 +
-+        if not os.path.exists(module):
-+            raise ValueError(f"PKCS#11 module not found: {module}")
++        module_path = self._make_module_path()
 +
-+        # Resolve slot from serial number if needed (done early so that
-+        # mechanism verification targets the correct token)
-+        resolved_slot = slot_index
-+        if not slot_index and token_serial:
-+            slot_idx = self.find_slot_by_serial(module, token_serial)
-+            if slot_idx:
-+                resolved_slot = slot_idx
-+            else:
-+                raise ValueError(
-+                    f"Token with serial {token_serial} not found"
-+                )
++        fake_sig = b'\x05\x06\x07\x08' * 64
 +
-+        # Verify mechanism is in the token's allowed mechanisms list
-+        self._verify_mechanism(
-+            mechanism, module,
-+            slot_index=resolved_slot,
-+            token_label=token_label if not resolved_slot else None,
++        def fake_run_result(*args, **kwargs):
++            if '--sign' in args:
++                self.assertIn('--id', args)
++                self.assertIn('01', args)
++            return _CmdResult(0, fake_sig, b'')
++
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_result):
++            sig = btool.sign(data, module_path, token_label='test-token',
++                           key_id='01')
++            self.assertEqual(fake_sig, sig)
++
++    def test_pkcs11_tool_sign_success_with_pin(self):
++        """Test successful signing with PIN provided"""
++        btool = Bintool.create('pkcs11_tool')
++        btool.present = True
++        data = b'test data to sign'
++
++        module_path = self._make_module_path()
++
++        fake_sig = b'\x09\x0a\x0b\x0c' * 64
++
++        def fake_run_result(*args, **kwargs):
++            # Verify PIN is in the sign command args (not the mechanism check)
++            if '--sign' in args:
++                self.assertIn('--pin', args)
++                self.assertIn('1234', args)
++            return _CmdResult(0, fake_sig, b'')
++
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_result):
++            sig = btool.sign(data, module_path, token_label='test-token',
++                           key_label='test-key', pin='1234')
++            self.assertEqual(fake_sig, sig)
++
++    def test_pkcs11_tool_sign_token_serial_not_found(self):
++        """Test signing with token_serial when token is not found"""
++        btool = Bintool.create('pkcs11_tool')
++        btool.present = True
++        data = b'test data to sign'
++
++        module_path = self._make_module_path()
++
++        def fake_find_slot(module, serial):
++            return None
++
++        with unittest.mock.patch.object(btool, 'find_slot_by_serial',
++                                       side_effect=fake_find_slot):
++            with self.assertRaises(ValueError) as exc:
++                btool.sign(data, module_path, token_serial='nonexistent',
++                         key_label='test-key')
++            self.assertIn('Token with serial nonexistent not found',
++                         str(exc.exception))
++
++    def test_pkcs11_tool_sign_token_serial_found(self):
++        """Test that a resolved serial is forwarded as slot-index to the sign command"""
++        btool = Bintool.create('pkcs11_tool')
++        btool.present = True
++        data = b'test data to sign'
++        module_path = self._make_module_path()
++        fake_sig = b'\x01\x02\x03\x04' * 64
++
++        def fake_run_result(*args, **kwargs):
++            if '--sign' in args:
++                self.assertIn('--slot-index', args)
++                self.assertIn('0', args)
++            return _CmdResult(0, fake_sig, b'')
++
++        with unittest.mock.patch.object(btool, 'find_slot_by_serial',
++                                        return_value='0'):
++            with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                            side_effect=fake_run_result):
++                sig = btool.sign(data, module_path, token_serial='SN12345',
++                                 key_label='test-key')
++                self.assertEqual(fake_sig, sig)
++
++    def test_pkcs11_tool_build_mechanism(self):
++        """Test dynamic PKCS#11 mechanism name construction"""
++        btool = Bintool.create('pkcs11_tool')
++
++        # RSA PKCS#1 v1.5 combinations — key-size suffix is stripped
++        self.assertEqual('SHA256-RSA-PKCS',
++                         btool._build_mechanism('sha256', 'rsa2048', 'pkcs1v15'))
++        self.assertEqual('SHA384-RSA-PKCS',
++                         btool._build_mechanism('sha384', 'rsa3072', 'pkcs1v15'))
++        self.assertEqual('SHA512-RSA-PKCS',
++                         btool._build_mechanism('sha512', 'rsa4096', 'pkcs1v15'))
++
++        # RSA PSS combinations
++        self.assertEqual('SHA256-RSA-PKCS-PSS',
++                         btool._build_mechanism('sha256', 'rsa2048', 'pss'))
++        self.assertEqual('SHA512-RSA-PKCS-PSS',
++                         btool._build_mechanism('sha512', 'rsa4096', 'pss'))
++
++        # 'pkcs-1.5' alias is normalized to 'pkcs1v15'
++        self.assertEqual('SHA256-RSA-PKCS',
++                         btool._build_mechanism('sha256', 'rsa2048', 'pkcs-1.5'))
++
++        # EC / ECDSA families
++        self.assertEqual('ECDSA-SHA256',
++                         btool._build_mechanism('sha256', 'ec256', 'pkcs1v15'))
++        self.assertEqual('ECDSA-SHA384',
++                         btool._build_mechanism('sha384', 'ecdsa384', 'pkcs1v15'))
++
++        # Previously hard-coded combinations still resolve correctly
++        self.assertEqual('SHA384-RSA-PKCS',
++                         btool._build_mechanism('sha384', 'rsa4096', 'pkcs1v15'))
++
++        # Novel (non-table) combination: any hash works with RSA
++        self.assertEqual('SHA224-RSA-PKCS',
++                         btool._build_mechanism('sha224', 'rsa2048', 'pkcs1v15'))
++
++        # Unknown algorithm family raises ValueError
++        with self.assertRaises(ValueError) as exc:
++            btool._build_mechanism('sha256', 'dsa2048', 'pkcs1v15')
++        self.assertIn('Unsupported signing algorithm', str(exc.exception))
++
++        # sign_algo with no leading letters cannot be parsed by the regex
++        with self.assertRaises(ValueError) as exc:
++            btool._build_mechanism('sha256', '2048rsa', 'pkcs1v15')
++        self.assertIn('Cannot parse signing algorithm', str(exc.exception))
++
++    def test_pkcs11_tool_verify_mechanism(self):
++        """Test mechanism verification against token's allowed mechanisms list"""
++        btool = Bintool.create('pkcs11_tool')
++
++        mechanisms_output = (
++            'Using slot 0 with a present token (0x1)\n'
++            'Supported mechanisms:\n'
++            'SHA256-RSA-PKCS, keySize={512,4096}, hw, sign, verify\n'
++            'SHA384-RSA-PKCS, keySize={512,4096}, hw, sign, verify\n'
++            'SHA256-RSA-PKCS-PSS, keySize={512,4096}, hw, sign, verify\n'
 +        )
 +
-+        # Write data to temporary file (pkcs11-tool requires file input)
-+        input_fd, input_file = tempfile.mkstemp(suffix='.bin',
-+                                                prefix='binman_sign_')
-+        try:
-+            os.write(input_fd, data)
-+            os.close(input_fd)
++        def fake_run_ok(*args, **kwargs):
++            return _CmdResult(0, mechanisms_output.encode(), b'')
 +
-+            # Build pkcs11-tool command
-+            args = [
-+                '--sign',
-+                '--mechanism', mechanism,
-+                '--module', module,
-+                '--input-file', input_file,
-+            ]
++        # Mechanism present in the list — no error
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_ok):
++            btool._verify_mechanism('SHA256-RSA-PKCS', '/fake/module.so')
 +
-+            # Add token identification
-+            if resolved_slot:
-+                args += ['--slot-index', resolved_slot]
-+            elif token_label:
-+                args += ['--token-label', token_label]
++        # Mechanism absent from the list — raises ValueError
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_ok):
++            with self.assertRaises(ValueError) as exc:
++                btool._verify_mechanism('SHA512-RSA-PKCS', '/fake/module.so')
++            self.assertIn("not in the token's allowed mechanisms",
++                         str(exc.exception))
++            self.assertIn('SHA512-RSA-PKCS', str(exc.exception))
 +
-+            # Add key identification
-+            if key_label:
-+                args += ['--label', key_label]
-+            elif key_id:
-+                args += ['--id', key_id]
++        # Tool unavailable (returns None) — verification is skipped silently
++        def fake_run_none(*args, **kwargs):
++            return None
 +
-+            # Add PIN and login
-+            if pin:
-+                args += ['--pin', pin]
-+            args += ['--login']
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_none):
++            btool._verify_mechanism('SHA512-RSA-PKCS', '/fake/module.so')
 +
-+            # Execute signing (signature goes to stdout in binary format)
-+            result = self.run_cmd_result(*args, binary=True,
-+                                        raise_on_error=False)
++        # Non-zero exit code — verification is skipped silently
++        def fake_run_error(*args, **kwargs):
++            return _CmdResult(1, b'', b'error')
 +
-+            if result is None:
-+                raise RuntimeError(
-+                    "pkcs11-tool not available. Install the 'opensc' package"
-+                )
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_error):
++            btool._verify_mechanism('SHA512-RSA-PKCS', '/fake/module.so')
 +
-+            if result.return_code != 0:
-+                stderr = (result.stderr.decode('utf-8', errors='replace')
-+                          if result.stderr else '')
-+                raise RuntimeError(
-+                    f"pkcs11-tool signing failed "
-+                    f"(exit code {result.return_code}):\n{stderr}"
-+                )
++        # Slot index is forwarded to --list-mechanisms
++        received_args = []
 +
-+            if not result.stdout:
-+                raise RuntimeError("pkcs11-tool produced no signature output")
++        def fake_run_capture(*args, **kwargs):
++            received_args.extend(args)
++            return _CmdResult(0, b'', b'')
 +
-+            return result.stdout
++        with unittest.mock.patch.object(btool, 'run_cmd_result',
++                                       side_effect=fake_run_capture):
++            btool._verify_mechanism('SHA256-RSA-PKCS', '/fake/module.so',
++                                   slot_index='2')
++        self.assertIn('--slot-index', received_args)
++        self.assertIn('2', received_args)
 +
-+        finally:
-+            # Clean up temporary file
-+            try:
-+                os.unlink(input_file)
-+            except OSError:
-+                pass
-+
-     def fetch(self, method):
-         """Install opensc via APT """
-         if method != bintool.FETCH_BIN:
+ 
+ if __name__ == "__main__":
+     unittest.main()
 -- 
 2.43.0
 
