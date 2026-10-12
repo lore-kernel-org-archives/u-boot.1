@@ -4,142 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B365CA9ED1
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 16:23:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6776CA9ED0
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 16:42:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C71ED40596;
-	Mon, 12 Oct 2026 16:23:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 71740405CC;
+	Mon, 12 Oct 2026 16:42:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uz1gnXXSuJwe; Mon, 12 Oct 2026 16:23:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B172740576
+ id FLi94B6Ehd5A; Mon, 12 Oct 2026 16:42:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org AF33F4059A
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791822235;
-	b=pFLYgpN2tvdpn5auqlP0qQsEqz7xRLibtynlwLB2JdXQLRvDg5+pakHuH9nV7TvnYADf
-	 za4d2uGe6grRnCXhsox/fzIhU0FhufBgUTGJ6BvzIcp8of+8u4LRmZjiB4ijF8DgZxvlp
-	 hU8pvwkhUKEfbRGXIcFv7D7AL5V2Q4WaPfCAsnSvxWt8AdG/Ft29DqQ1BWzmKfdZPM532
-	 gHZLrp2HHeHBekICbMNqWZrA2Y+8DqTcguQ4nmjNETy/DyV57jpj3Obpi6fC38c4u7AhC
-	 Z7C0ofkWYk2EL77FJlpcSW3IB+TsPOdJJ1ezSwkVKpNL0GIFldnQK2Gmiy7inj0Fe2w==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791823333;
+	b=P8eHaPAXUSTaYH5rZJDzYLVaMO+Dqju21Srkx0XDGCHoqvjfj4qKZcnuMDlK5kMgmKqo
+	 AMm8MSgN13yWrgqsRltw8rLVnJbu7OvfawtncYohHvMGNgFpktLy5pjTWj1bV5Oc6cVcU
+	 Db1f0mwwzMKRUZ7hxNXyYZdS3kl9vreQS6QNxdbScE5VgxcD7t/bQk3iQ7BOjMkfoYxkT
+	 b7kJhq25jNi/yXNFjMUvoiXhI7zaGb/75n9a0KqCzY5twSDPXjHhFxjb6+n5y0+g8FfrK
+	 1mKoHmgA3aObfLhLR/vqaQ3WmSSmqpS1FI4Vqk8OVmkDPxTpP6gY9/+64oyUAtA2j4A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791822235;
+	c=relaxed/relaxed; t=1791823333;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=uP623c34yldOwQvBR4xBBTl5FyDqB/5fi+jcNCIdEZw=;
-	b=TfYPGicLS3ZO8PGe8liXMgcKZuDCFYJ/AH12KiWwHeflW62C0ML0FCO07RPi8YkXuEDb
-	 rsg5VCKGIiyUiHKDGTLKaXr6SqahTu5aMw3S0I6/fHSqudva4zjDFXTg7c4OGIMuU2hsK
-	 Hu+v7lags/FAI7LIZLP0gU+W+optTltBXj7aoi6wFgiwRJBRWgrPe24hJBVQuRBa0s9eu
-	 ZIti39Pdrt79s/knhfhe2aU81ud1UYVNb7aQykPoV/FXK5Npp6wSQn0aeVqUrY2Tt6dPr
-	 VsK4lZa2CjhwhFJBniwjmzKdFNOjtXpUH9POvUK+RWNM1rZxmWFcFHpBvivjJimDePg==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
+	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
+	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=2fjwur4unR7DOATK3IGrKR3e41wFVQfONl9wBN9R5Ho=;
+	b=SLJttiuQi5TNpeo9LnssGZMJF9MyLFXn0PRDJd4GbQ0C5t0GEX3d61oWbk5IhVpDdxOt
+	 mKt6u66CgvYBM7jZlUInTIV4GmxBpAgB+jlpYjAHOKGmDADEDr7eCpgqIVTkf3e1yY27o
+	 X6MDCMs8A/94upgHLE8VYkP252raWkkS4mLZkiU/Hh9ubNnkOn13rA5cKGiJbmyWg0PZ0
+	 7OrBFH31teo3v2XNakTSSkdVZQk5iQsiHXrGEwgW0VC3ZGo222K3xjqKTsDnIfRNbitWH
+	 nD9I4dbK3r8cg9ka38ym5EpDDSmoAoU0dmM5YTIbsNJyK423qDF7NTvlthmVgjNX1Zw==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791822235;
-	bh=uP623c34yldOwQvBR4xBBTl5FyDqB/5fi+jcNCIdEZw=;
+	d=lists.u-boot-project.org; s=default; t=1791823333;
+	bh=2fjwur4unR7DOATK3IGrKR3e41wFVQfONl9wBN9R5Ho=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uev21QTWkuTt8cE7bB6SaixyKiaJpA/R6nrA5jp/bUmq9f0k2UcRgCVGjmva3KRfF
-	 K3DaHe4YtUi2Vy+0k/K+mKuVVcFRtnZu2PTLnVb5nKqgOSM/vECMW2zFeccXWzjyVJ
-	 NIJ92/wiVAieQpRFDoHYOEsdMRpaRYaoMq7h6pSAfJZ6IsKF2cCi5gANUOuf/I8daQ
-	 12fUK2uvsvFAWhaSq5CndYvZB9JGNkKgv87D7bV/kcBW5pLKBGw4SgUxhffYUVvvOK
-	 ddHK2F3mo7IieXteMz42VIi9cYovkrwaAWaJYN4oO23TauOZgpb86KPJFjpYBgNENL
-	 faDa1+6uQCfNQ==
+	b=Cw1OobYZ/wLpxqbONimIHMBOk8MgJhQUjzVRCHDxVNCwlG2MRwusbOW2eFBx5IAVk
+	 m8b7N5Hx8xXhK22xf+2diuaTivafhmXXzVkch1rglBKB5bEZJqd5NQ2rPE4j+9BrEy
+	 vx9NFvRFULy35mFjlNaqealVXBcaldiXtq9zYBc8rzZbwVbmc+6JnPiYjsg5zWMRwA
+	 yQyQb6HQd6WKr4jk4ghmpblfXvf7JGUQoTfuAjETNRY0eKOjQiqrvCdiWz9h2+i/Go
+	 lrgbqf/7pdqR6sEAsZIWMJE623vLMJv8QF2jbFwfpiO9H5WglP5ap8ysCSJCXpI+bB
+	 wf59gRwDOJPdw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B172740576;
-	Mon, 12 Oct 2026 16:23:55 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 77B29380
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:23:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AF33F4059A;
+	Mon, 12 Oct 2026 16:42:13 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 52052105
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:42:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5E8AC40201
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:23:54 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 43CD2606EB
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:42:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6_aI9Jdsj_ui for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 16:23:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org BABCA400D7
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2001:1600:19:b8b8::42ab"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791822233;
- b=MaYps44Kn2AYMq4sCVEpX2900dOHx0Rq4B+klUr1lGtTCYpMBN5NDiCINsRNc1rsSqd7
- wDpUC9PQL6IOsJY/7xjjQuwbnlKfdMl8zpALr/LYhFh/Z2jCbZqZ8CJAQEtr/1EZVBc3N
- GzSZaB+zwSb3Pt2Z4ttQ4OBN+WTRFzVDETWPFAACRaTFeoX9Ibee3EsPMXUKZDdBS3Gka
- zFNZ2kiMXLHaXfUuivGDi+XCLvHGQIcIxL3lli+XB6BPRb1qTMKh8dhuVOH9jp0/jgbJZ
- oe07MCy2/ScX7/xbPRXwPJXh7N9hgPMghMh3vryqRBBZUd6+HpQgN0SfTXxD5olCMlQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DoVeo7aRKpWF for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 16:42:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 25C7060670
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=149.28.215.223
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791823331;
+ b=X7J4BeE/EqCM0QeVVgXyvdyKZd7n8gpXCyETU2oF90Z917VxMkDGtyJJcn0GCUc+v/jd
+ qoOBj496Teans/Ps8k6/jX/Nt3DzgI2Em8DZIyVtvHmkcn4S8eK3vAKEWwVofB5otZRen
+ 0H//dVPww4NgScPyNa4/+X04Fg+xg8gbBa01hd2rX5pbSZH6OE4iHR1SNK7vKw2kGhkyo
+ sbYkvPnS8EOzRo1Ja+OZAZviK1JGFdqwrQkHMkmwaHUtxPwhwJ8078rd4JCx4wg3aaUcG
+ 8vN2Voh2nnsE95zFk/mBJwgy2bU4iarEnUjA0LRN+sdJqrBuGJ95epcLsRECvlUs3Fw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791822233;
- h=Received-SPF:Received:DKIM-Signature:Received:Message-ID:Date:
- MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
- From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- X-Infomaniak-Routing;
- bh=uP623c34yldOwQvBR4xBBTl5FyDqB/5fi+jcNCIdEZw=;
- b=LTQq8KA9nf9qdnOU300FaRfWVBRF2ZLMzESFSwTvL64nsyfzHHURCbUrFk1vWRj+X0nl
- 2lQqAMSXNxfJ6cI3u0vR3M0OfjqNklvF4YWcaSWh1XmL1FsJmHA+5Qo+abgpVIOI3UBLJ
- 6xVNBLY/whegYdoDER8YPh86bJGYvyaySV5FgbB2z47+r/cK3AmSevrprY1WFlQ6B5y8H
- IB9f1L2CGDYGBtn/MngV6Z3SvpFNS6P755YAl4xhpPvvHTuE1Zy+ClJy+40uWHSjXXU8N
- S8x/FhzQx8RLcJXlJtoW53VzWsMtwsURT37yNoQBuX6i85wnS/bfz7aQG5lwhsumT5g==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=0leil.net;
- dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=Q2if+2EP; 
- arc=none smtp.remote-ip="2001:1600:19:b8b8::42ab"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:1600:19:b8b8::42ab; helo=smtp-42ab.mail.infomaniak.ch;
- envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=Q2if+2EP
-Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
- [IPv6:2001:1600:19:b8b8::42ab])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BABCA400D7
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:23:52 +0000 (UTC)
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4j3N7n5hk2zZYn;
- Mon, 12 Oct 2026 18:23:49 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1791822229;
- bh=uP623c34yldOwQvBR4xBBTl5FyDqB/5fi+jcNCIdEZw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Q2if+2EPtUC0kP6wCu7ojS6B0UI1AVxBw2gOPzqK+8tBWuM6PCuHU7BJVTe9C6APc
- /b4wuFNG6rDGAKMsUPT8YuQgi/VuobqXjqtj60VERTCFTJePQTNhPcbGmnBupKfwWu
- bDeJKvDCQoc3e0f2qXu0CHXxLoDjIIv/m56wN1K9AokbgkIXI8vukZNUxWeYGfXJca
- doUf5ohG5AfEI8Oq812VW2O7BdTlcQDgVGKQtz+vs3M20Bk9QBB3kfG3KBdf7NFmMJ
- iHMEI7cAvp6aA7HiYw4UmG1BSTfbt8GVkaCn7O9fOc0Yntzx+FZ/G/0hVYscopXjSM
- ba6HxzOeWaE1A==
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4j3N7m5mbHzpZM; Mon, 12 Oct 2026 18:23:48 +0200 (CEST)
-Message-ID: <dbfc0f85-c1c5-4085-ad1a-0460cea5617a@0leil.net>
-Date: Mon, 12 Oct 2026 18:23:48 +0200
+ c=relaxed/relaxed; t=1791823331;
+ h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
+ X-Forward-Email-Sender:X-Forward-Email-Version:
+ X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+ X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
+ Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=2fjwur4unR7DOATK3IGrKR3e41wFVQfONl9wBN9R5Ho=;
+ b=spOx9+hqGrEqLH1jL+UFysSM1YQ3syeDGpGWEEIVUPugDjXXl7kTb9jUqkw8RCI+aBUg
+ 15eong3erz2lDHQNnJg1kIlsQRNq7uxv+mv09Vdyz+yFrbPo+4s69fTLziOuX3wu2OjEW
+ 0F6JSSsKKqDSL2DiTE8S7jGSS5s0b7CN5sECttQCEAmLAepQl0ItE8muCf6X9zqXFO1ms
+ feLl8b77TuFeir5V9TKuQXdtiNpAiN8ZarPN3VKtBr6QVhbK9uR9Xi31/czWBCs6o2HGd
+ m0EI65NXjThz7n4EaC+YRYIui2PHg/qUp9Xt8SdCMtHeRlavy268v3PrPACbNuBZ7pg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=kwiboo.se;
+ dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=cuqoMsvr; 
+ arc=none smtp.remote-ip=149.28.215.223
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=d90e=id=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=cuqoMsvr
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 25C7060670
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:42:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1791823329;
+ bh=2fjwur4unR7DOATK3IGrKR3e41wFVQfONl9wBN9R5Ho=;
+ b=cuqoMsvrm3OQwomW5RZWqfPqMs0rvTRjU7WK7sTlOXVdeFI/mshUWbFOxdFRDxTXvVk1laCCA
+ M2usza1wkGCNhDMY7vU77r/qjzX6YWYu13qbkV28DTvesYQ2PmV14G1P7PvS5e1m4N4qsvPoWfZ
+ zwcBTFueukNtcAz6qQ7bAeZ2P/3I+7Az47oCHHIWuCQk3+zlP25Gay/uvhl7w4vltDlQOBNbnpM
+ Oo6xk4vD5eNWY5uz62sp6plC6HSP+LWftdUGx+BBUz3S89mx13kPjYyFhsAEHENasoXOFN2zaO/
+ 5BkJdB+YjWzw0tbvugf0wV5MYLAU7CBbm1z3TSd6mXvg==
+X-Forward-Email-ID: 6acd0dd98cb5e368044b3fdd
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.18.4
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <1cc0daef-1c0d-486c-990e-a7ce0445e27e@kwiboo.se>
+Date: Mon, 12 Oct 2026 18:41:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/10] rockchip: rk3568: Use fixed CRU and PMU CRU base
- addresses
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
-References: <20260804214442.2592597-1-jonas@kwiboo.se>
- <20260804214442.2592597-4-jonas@kwiboo.se>
- <6729005a-3875-4854-b6e6-54d64d5bc454@0leil.net>
- <f9bf319a-946e-422b-96d0-9f0d2fe14615@kwiboo.se>
+Subject: Re: [PATCH v2 1/4] clk: rockchip: rk3568: Always initialize clocks in
+ SPL
+To: Quentin Schulz <u-boot@0leil.net>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Lukasz Majewski <lukma@nabladev.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+References: <20261012111552.1173161-1-jonas@kwiboo.se>
+ <20261012111552.1173161-2-jonas@kwiboo.se>
+ <dfe79f19-2fa3-42ca-87a0-e80ee086c7e6@0leil.net>
 Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <f9bf319a-946e-422b-96d0-9f0d2fe14615@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <dfe79f19-2fa3-42ca-87a0-e80ee086c7e6@0leil.net>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -153,90 +157,72 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Hi Quentin,
 
-
-On 10/11/26 12:43 PM, Jonas Karlman wrote:
-> Hi Quentin,
+On 10/12/2026 6:00 PM, Quentin Schulz wrote:
+> Hi Jonas,
 > 
-> On 10/9/2026 10:35 AM, Quentin Schulz wrote:
->> Hi Jonas,
+> On 10/12/26 1:15 PM, Jonas Karlman wrote:
+>> The RK3568 clock driver initializes ACLK_BUS to 150 MHz when probed in
+>> SPL. However, the driver is only probed on demand, so this
+>> initialization is skipped when no SPL consumer requests a clock, e.g.
+>> when booting from RAM/USB.
 >>
->> On 8/4/26 11:44 PM, Jonas Karlman wrote:
->>> The rockchip_get_cru() helper is used by the sysreset_rockchip to get
->>> the SoC specific CRU base address, and the rockchip_get_pmucru() helper
->>> is only used by the RK3399 specific RAM driver. These helpers may
->>> trigger a full clock driver probe to get the fixed CRU base address from
->>> the clock driver private data, something that can take several ms.
->>>
->>> Change to return the fixed RK3568 specific CRU or PMU CRU base address
->>> directly to simplify and remove the unneeded complexity of using runtime
->>> lookup in SoC specific code.
->>>
->>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>> ---
->>>    .../include/asm/arch-rockchip/cru_rk3568.h    |  5 +--
->>>    arch/arm/mach-rockchip/rk3568/clk_rk3568.c    | 33 ++-----------------
->>>    2 files changed, 5 insertions(+), 33 deletions(-)
->>>
->>> diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3568.h b/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
->>> index d72f241d0150..e2dc3cda5577 100644
->>> --- a/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
->>> +++ b/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
->>> @@ -35,7 +35,6 @@ struct rk3568_clk_info {
->>>    	bool is_cru;
->>>    };
->>>    
->>> -/* Private data for the clock driver - used by rockchip_get_cru() */
->>>    struct rk3568_pmuclk_priv {
->>>    	struct rk3568_pmucru *pmucru;
->>>    	ulong ppll_hz;
->>> @@ -120,8 +119,10 @@ struct pll_rate_table {
->>>    	unsigned int frac;
->>>    };
->>>    
->>> -#define RK3568_PMU_MODE			0x80
->>> +#define RK3568_PMU_CRU_BASE		0xfdd00000
->>>    #define RK3568_PMU_PLL_CON(x)		((x) * 0x4)
->>> +#define RK3568_PMU_MODE			0x80
->>> +#define RK3568_CRU_BASE			0xfdd20000
->>>    #define RK3568_PLL_CON(x)		((x) * 0x4)
->>>    #define RK3568_MODE_CON			0xc0
->>>    
->>> diff --git a/arch/arm/mach-rockchip/rk3568/clk_rk3568.c b/arch/arm/mach-rockchip/rk3568/clk_rk3568.c
->>> index 1c6b2ece602b..ccd98a91cd16 100644
->>> --- a/arch/arm/mach-rockchip/rk3568/clk_rk3568.c
->>> +++ b/arch/arm/mach-rockchip/rk3568/clk_rk3568.c
->>> @@ -4,10 +4,7 @@
->>>     */
->>>    
->>>    #include <dm.h>
->>> -#include <syscon.h>
->>> -#include <asm/arch-rockchip/clock.h>
->>>    #include <asm/arch-rockchip/cru_rk3568.h>
->>> -#include <linux/err.h>
->>>    
->>>    int rockchip_get_clk(struct udevice **devp)
->>>    {
+>> Prior to the commit c6bba31dbdd4 ("rockchip: spl-boot-order: Defer probe
+>> of boot device") all boot devices where typically probed, with a side
+>> effect that clock driver likely also where probed, prior to the
+>> boot_from_devices() call.
 >>
->> There's no user of that function anymore after this patch, so just
->> squash the patch removing it later in this series with this patch here.
+>> Flag the clock driver to be probed after bind in SPL to help ensure a
+>> deterministic probe and clock initialization behavior prior to booting
+>> from devices.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>> ---
+>> Changes in v2:
+>> - Update commit message
+>> - Collect r-b tag
+>> ---
+>>   drivers/clk/rockchip/clk_rk3568.c | 4 ++++
+>>   1 file changed, 4 insertions(+)
+>>
+>> diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
+>> index 9f3e9322161e..5a05f1b4de00 100644
+>> --- a/drivers/clk/rockchip/clk_rk3568.c
+>> +++ b/drivers/clk/rockchip/clk_rk3568.c
+>> @@ -2934,6 +2934,10 @@ static int rk3568_clk_bind(struct udevice *dev)
+>>   	struct udevice *sys_child;
+>>   	struct sysreset_reg *priv;
+>>   
+>> +	/* Ensure clocks are initialized after bind in SPL build */
+>> +	if (IS_ENABLED(CONFIG_SPL_BUILD))
+>> +		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+>> +
 > 
-> This function is technically a public function declared in
-> asm/arch-rockchip/clock.h. Removing it in same patch that refactors to
-> use a constant seem like it would go against your normal stand on not
-> doing two different things in one patch, and a reason why it was split
-> to begin with ;-)
+> There's pmucru in this driver as well, shouldn't we also probe it after 
+> bind? Or how did you decide only the cru driver should be probed after 
+> bind and not pmucru?
+
+Good catch, I am not sure if I decided to exclude it or just missed it.
+Looking at the the code and DT references I do not think we need to
+probe pmucru other than to be consistent, at first glance it looks to be
+related to video and pcie. It most likely was not probed until U-Boot
+proper, but will look closer and run some tests.
+
+> As a general note for the commit log in v2, they are good enough for me. 
+> It clearly states we go back to what we used to do as a stop-gap measure 
+> to fix various issues we hadn't when we used to probe all boot devices, 
+> and hopefully we'll fix this properly once we know better. I don't 
+> really like it, but I think it's reasonable.
+
+Fully agree. At this time I cannot see how we can solve this more
+properly but as you mention hopefully we will know better in future :-)
+
+Regards,
+Jonas
+
 > 
+> Cheers,
+> Quentin
 
-Oh well, it was clear in my head this was a case of "it obviously must 
-be together" but now that you put it into words, I can see an argument 
-for it. I guess you could say the same for the last driver of a 
-subsystem, you likely will remove the driver separately from the 
-subsystem. Eh, pick for yourself for v2 what you want to do, it's not 
-too important :) This reminds me I probably should start using 
-Conventional Comments (https://conventionalcomments.org/) to make it 
-clear what is required to changed/nice-to-haves (obviously, something 
-marked as an issue/blocker can always be discussed and argued against :) ).
-
-Cheers,
-Quentin
