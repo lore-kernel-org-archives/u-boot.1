@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 695F6CA9ED1
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 14:01:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20207CA9ED1
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 14:01:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 51D6A80DC5;
-	Mon, 12 Oct 2026 14:01:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D74CB405D0;
+	Mon, 12 Oct 2026 14:01:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4BX-uzCkIP1c; Mon, 12 Oct 2026 14:01:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9C06880DB2
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791813683;
-	b=KrbVk/Oke9s6XOq9rV68HLXRo5fLdF5snxPQxM6cAv/Ff6w9Ft0ZI7RgrawomMJdLukZ
-	 O9QvJH6FT0lUUa7HZy+U3IjIPAYscN3hNj5exm0v8qBqe46oHUP9ByDiXDYsTkrLrlc2o
-	 XART4jWWYtIBE5ASeQYUXCel2zWm7gJ6f9rXSYZSlwAAXygCcdwP7by6+HSb2XJyRDPAx
-	 LPzWN8I0KZc5i4I9MjqGIkAcgTh6GsQTnPNfzXm3ZO6gdPxT8aeDoTEuYQT58xZcwCi8h
-	 TxNZozdmmtSp8R8wTNbf/pFR6tjgqsK07PgSlRhfKemzVPAbPVNwCcbpkSAkL99wweQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pIBG2iGjZNdK; Mon, 12 Oct 2026 14:01:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0F3154062E
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791813687;
+	b=BTIPVy/o/x6PdclW/3XfUu6ojuz070Or9EWBqYeHAjd/W3nXC+hh0fSFJUW11DAsVlAl
+	 FfQW+j3OO1xcI2tfYwnzpl0c1mb4xClbaeRVEafk+L0sdQqkBpj6Z5kK+ailXmUq5gZHg
+	 IZ9YGZm/AAnwqKBVXqUJnaaRrJZ4siZPq+jCWcMgmU8YsO6FSMu66wC2j1r2/5SAMOS2O
+	 3QRpE4BsHpPxBuXdPF3z4K9BgUd/YC5x/c1yNAb/seOQ/YQoHuzq8teAPSnBRel48nQCy
+	 iBwPMJsKJHyOBCPJ4Z8ITKrZZYgtJ8gT9AJBI2b6bLHB3tirKeObsbxQrfdkwoxTo7Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791813683;
+	c=relaxed/relaxed; t=1791813687;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,141 +32,143 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=O+2iEn2wJh10qhSoM1uM1UcZeaD/tRv048GX9axQpuE=;
-	b=CEzlg0aJ5LormqOXKy7jELkXLptaKhaItcDv8AqFGLUIN0xj3hv7YDFwxNy/oaQd+C3v
-	 D4KarCneUVaOGAKTcCuvJ7kMNR7n665Dm/3P3k57Xz7fMSn4k7+Xy+F6C8ErfZuhKoCS0
-	 PAvNu+iL+0HJLqcmiUYpKgbq1Ttb0PX52LsULK3+0Hf0ibkJtwmBQfZEW/IXMqGBdJoeZ
-	 OwhwUjx7wNfIxvqLV/k085e74B6XyIWuFIOKS9xETDYeWEVqOgXQKXbRRf7ylc/EH9Qvk
-	 +v0YIhhkZs1lm+5QJ/i9U8RUVwQUgpAKRNACtleF1qjv/vk29IFzFK0ttfwczEvu9ww==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=MuGF1x1+rJxSRSKdQHzryOc1MO1NkPUrc85yq6h43+4=;
+	b=KOzS43WSVJtnObUHuD2o5V67C7WsE3/NDjkSgdbaY8s/KLaFM5SmtE2TyofV7jZuKLKZ
+	 oo26uBoJx5m4AdtHg3zjCwwQUrTTJ1EuaclzVMR1GhANPJasRf6LcQaUmQosCD6xCii9V
+	 zWWAzjOYMoN7js31kTONeEURPMh4CZ6PUQ4sH88pcwMc+Vb0+e0/fjmiZs8JBlKVApihS
+	 RvqU9l5gxIvgGjnRcsdeFkxbkKZKz9sRDX6Z6bcG7NZHHlYbjMCvOHteWFkTAUFYGWcM9
+	 L8pv8v7u2pTh+DaEgcLycts8qj+h58oEbwN/+PjnkrJGarJSESB1xUnRS0VxkhX585w==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=canonical.com;
+	dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=TAciNsH2;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791813683;
-	bh=O+2iEn2wJh10qhSoM1uM1UcZeaD/tRv048GX9axQpuE=;
+	d=lists.u-boot-project.org; s=default; t=1791813687;
+	bh=MuGF1x1+rJxSRSKdQHzryOc1MO1NkPUrc85yq6h43+4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jqunLgRmyJW83q/Sc9hcnK2t2zxzykRle0mxnF+59rcvw8Fxa6pA5wPtGYEaQEkVY
-	 RhNt/jjkZweXrcrbMI/VsA6FxURHti5rDhIg3tasyHy7Q7aZnI3cgYH4MlExhTbkIy
-	 Fer1Tp9SYVOqclT9/SP3vlLn193QdJ5c85PinfUqVqf2zJ68nkhh1GfD/7iPEBYzQr
-	 RWV/giP4tKAPb8vr3UtrD7T345fKXruRrqJON9y37C3cLZWYKMEkG8Pd3J7pM0mL7A
-	 4kA6hitZchwDES12CZnpFbD5n2HjWPmQ1pW7tBr8C1fH8YyMXXO1AfT0ZwdHJe1S0t
-	 +uxj6uYbAKDOA==
+	b=gZMHGPmpR5wEBeJUIbpMHligI3+kL6qAwzc95pSxHv/QJ2+y3q8iIGxSxF16ffdjY
+	 BWYk67RGBq7TxRxcy9A4WtPia74+Dy7YHHZpcByZywTwLOoV4oFh3Ms4IRILxrRwui
+	 LmxRKLg5uXXuREWv+3hP4IXgElHMgpqnCrV3BDnnRxXXATJVpTuy+IMrJ+cgdpUogB
+	 yrokx+tqNqkXUQfszgpjEDHHy6CXrUeJSWpqw7PJ3qAjbVS4PEATA/r48K2vhX6LWd
+	 2qfzOckC2CJ8e3htZVW5l8RVcNrM54PmDGyrg9R8NbADIfo+xSKetu2uyEBSHk+iWl
+	 4fFONiPA7Fcmw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9C06880DB2;
-	Mon, 12 Oct 2026 14:01:23 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 519832E0
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 14:01:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0F3154062E;
+	Mon, 12 Oct 2026 14:01:27 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id DAF179DF
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 14:01:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 436CB401D5
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 14:01:21 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C104240649
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 14:01:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lxBlNSHKE-99 for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 14:01:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 449074004D
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=185.125.188.123
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791813680;
- b=pcRVZ+x9DxGBKk6lXteV/4aoVad7lI0ijvqgTQf5y6CMRDEqFS9ivIZJ5CMYJvDzhMyb
- O571OUjucMxuoJfQMyRIV7IDlEU1RV3u9JbEFp0ZVoCnxTsK73+CfHfHuKBIgIXLTnmJj
- G7KHHZNWHEg8m7N/lXC9wOkExgWPq70YsqFQG+n5oO0hMN110ZvfKJFn3iVuIHoUX/4Cm
- O2U3OCGFTo1ZFjwvyVXeFeXMdxvDXhjpLWA6Fw5BeT+ZBh85AbHTzZYCDsZK713bj88YB
- PhuQfdnsJAkpboSr+VkQbHvV12fVakYYz3X5LgHGEDUpbwMQFzX1y1XFcXXCa95w8EA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oaVdaw_qTktc for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 14:01:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 059404062E
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=185.125.188.122
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791813685;
+ b=pRS8gUvWdVI9K597IM648cnUBz3GH/T2qxyg38Q1itNAepS5lz83XLDXCyge9JJzzeKV
+ zodwclEJJ+AZSeyJSGq+70k4cS38gT482JYuD6ueUgtE0yHREPxGUOsDjvfdskSFvU+AM
+ AWn21gybiXiRONdYpJy+31YpvBxt2rqlhR9kWJI6a3d7fCN1kee+vDw5ypahYjJhKynYJ
+ YUUicNQFVdPt21X0e5CH1DWkLT3e81dcdjrUpXlnsp7nA6eH0Gd/Zw6lovLxXKRcBaIFJ
+ j0yNbCC1mAKK98dlmdaJilTaJ/rZmZ8TNhZ8W7emsYtQ9rBQJ5lboV1hqyEGT0W7bgQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791813680;
+ c=relaxed/relaxed; t=1791813685;
  h=Received-SPF:Received:DKIM-Signature:Received:
  X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
  X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=O+2iEn2wJh10qhSoM1uM1UcZeaD/tRv048GX9axQpuE=;
- b=aoc+obHax9U3ATPOK+iBATwAkiCXp3mJTJmARTGgt3Wbx8gm4dVIFlu5+dUHcT9YFK04
- c+5bdLT2NHaJXNxEJFkEm+tHH4wHKpdyWsPGMUpHr0SsdeFCOXJ07fVMW9eBch/h7cV6q
- BLJb9F5MabXnA0vkZypSYMGQIvDjFGwCjyG/tXZLUjRCogUV0QLpZxxoASDC3eBuezd3M
- MFWsIXapv57w6fp7DaH0HXA/5BcOGPVFsTewVCJDi2rHdHPOqwR9m6fC81kGIx9kyVdb+
- Ezgzw8mV28o8mJtk+/KRgWDuNPsoHGDxPY4TxYKFYW+ND8Zg5/pavFrSdSujjJacZpA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=MuGF1x1+rJxSRSKdQHzryOc1MO1NkPUrc85yq6h43+4=;
+ b=abk75Nd2meaUbeT62546ILUfLapJWFXUktZXjDBQ8e47+0Ds5cmM8yQV+gFyHparzHqu
+ Kl6RQFq+wDTSqXpp8VJu+krrkmQemhBd/gkDItOYhaQ78OBnFKHlUpNatGE1+Lm4ggfiS
+ AW1SAlRu4ZX/kmn/o4bNjyQtj5phmsxoSsjjL4XaKZ8GJb8XmfUqDgctx57TLHqA7nqdz
+ 1l5fo6W6lnxmBu4UXDlPpTdQT9/ajr2zqg2vdgpdi/WGk6Z6Wx8P72bRDdSq+VaT2WDcu
+ S97ZRhJ2t4xs6jbzdy6u+tnO3Ir6a9oZFPGis64+N5iCoisY0X1xovUsKppKWJa6xRg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=canonical.com;
  dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
- header.s=20251003 header.b=BIn14RBT; 
- arc=none smtp.remote-ip=185.125.188.123
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
- helo=smtp-relay-internal-1.canonical.com;
+ header.s=20251003 header.b=TAciNsH2; 
+ arc=none smtp.remote-ip=185.125.188.122
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
+ helo=smtp-relay-internal-0.canonical.com;
  envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=BIn14RBT
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 449074004D
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 14:01:19 +0000 (UTC)
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
+ header.a=rsa-sha256 header.s=20251003 header.b=TAciNsH2
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 059404062E
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 14:01:21 +0000 (UTC)
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 1A4A73F32D
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 14:01:17 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 831373F282
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 14:01:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1791813677;
- bh=O+2iEn2wJh10qhSoM1uM1UcZeaD/tRv048GX9axQpuE=;
+ s=20251003; t=1791813680;
+ bh=MuGF1x1+rJxSRSKdQHzryOc1MO1NkPUrc85yq6h43+4=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=BIn14RBTnyREQqb5/dDcnkrJXJXYwlIzO6lSbARnAcQfQ+6ZUwtTjr1hC9L9ISqwS
- TMto3gdP33dal+CLehkSeTCkQhw/qY6pCt7wNHqtHajDOW94T52IVg8qzVYG+qyWSI
- ZHbetuao0PDQc3ngb684Iysb804nq051jmsdWZox7iiQHT0q/TI5cYhH9kkCGg0OG9
- WBj01egwJUffGMAqpqvFKF65+eXmnfj5TFdp+tflEqnH5kZ4vI3nM1lsXurWwIKV8x
- iv1MOaXDNSkv48AIF+XoxZ1mewk1G8ECBtLsHHrZ35kLLI9A01aX+7AAAIJPaOByHC
- 0owwZMXwq5YDhuWXB72ZP4cyoXYLexCJQ0wk6s8qxWHUausARKBhD3J0CCZ8QETtAI
- Hqr63sN8n5p25iv12xmUjkHor0YGbGESRL2NDKjMToP67X3upXVqyGTQwGjCI2dVsq
- 3XIdNn3tGrjV+1n50mE0ltHkC0CGAzK3bHCW+/jbL1JDBbFndwslsgelpJupNunWF+
- lv9pAxzlNnUc7gvatbert8Kl4fZ66y+FyqtepJkKSEpKQICOOg9rwL9ulLDkxfYnDI
- 9qXV7sPTFKsg1MebjAvxVrauaeD2l4stf5gmmblyvd+08UcZqXPzHJvtmdrmbRV9rX
- w1tP5bsBFuAqZoN1AYcGwrdA=
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-49e6b5c5f44so32244885e9.2
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 07:01:17 -0700 (PDT)
+ b=TAciNsH2hRKxpAdzogGLDguEqogRJcOSF/djbOQcn6ouf8b3pdOZIkuf8hSjkhVu4
+ TS9Nm1PWe35NPnpzSk9bnpDawhH9PNO7+Bfp2gbNDYKLD5+JYp8uSH88n+VASxG9/Y
+ VF5ijRv1kpNzS3BgFFP6Aqvj57RjeFR6IUn5tcpV3W0Y3GhfQM/k3iQOZccY3cWWct
+ 6xZqXVl/vLUm1PVgepEoNvcz8mshkHQ+81oK/YpftCqMKkE/uwO/oaqp05iSsWOldz
+ Loo4IvVAeFXo1f6Sk+xSKeSjI9tFrEuYe1xsdiN/ATvqvueVX7cyIG76xSii4fahc9
+ jbnUGjOHJcYzVvO2Rc5Eo7epwqNscsYo9AmI42PqQBqkAW4jAbqv+3OnlDmniIM0fU
+ gzyx96lykhgIKPXZmuTOkA69QYz1PXTm7X9BOeEJgK9XMlRPbFCc3Zea8Aa3otVVhs
+ x/6dgylp3OlNvVT+G5wxwn03Cyf+2ohJ8PrQWFVKDqMMx7i0A2mbnCE8Y1KtYdp9pM
+ I1BKSiZvTtj5fykda/SIar+kk7y3LWD8PmKawBG4NxDc0h+frj7n7mQ9EmRf5K4Yja
+ 2Yt3HapamXU4hcf8+Cq5hfENYfJKOAXx70KA2E7pgtIVzr9ZquLEM0j1KyPcrlt7Au
+ NEtMMJGDwcDT3DmpCvyTen8Y=
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-4a0228f4a1bso10926695e9.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 07:01:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791813676; x=1792418476;
+ d=1e100.net; s=20260707; t=1791813680; x=1792418480;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=O+2iEn2wJh10qhSoM1uM1UcZeaD/tRv048GX9axQpuE=;
- b=pDOINSWfIyQ+C+0+0r5BVzf9tVuW5I3i7MBUIPIlnpaYiE4auptCohZUuNTzIMiPap
- uR1pt8uhbotrDHESJ6Nm6RvWZGV7dgAMeUiloOyZMbUchg0DS8AbpBzpTexaecsYN8n2
- j1YGtYNJ2FpJ9I4AyuOcOIqA5PlGub8DktB7RmDQ0S4eNmClYrYLrjjiHT8VmYPzh58U
- Kta4/nIxCp3wP9S0k2ysZAPcvB1KO68yqK4spJ+7dOuVIGmjaupK0QUM5xPIBRVGWD5z
- cJIBPj+gFapQLTUrui6FS93+z68SjLVbZ277LNbv72lW2nZzglJHIF8vNMEqdc3C1C4r
- ZxCw==
+ bh=MuGF1x1+rJxSRSKdQHzryOc1MO1NkPUrc85yq6h43+4=;
+ b=EF77hq5v3q2z3grk+L7oE9hXM0QE9Lh1s3q7BZcYkvBvy2Y3bp0VBuZwzl0TdFZZlx
+ EdleummgzkM2bx/OJVfhrJbRyhA0h+lWqFwDoWH3RYqtqOyWUwx4RBtEd25fvWJAn6a1
+ 7e48xtPZ4O38ed8BIY5n78XH7d5Ty9WgMWyAYf8X0/3gAYMdIw8DIq+9f2mstHtM5/vG
+ affP75Cj3IxNREmBRSZEFNi18DgCxQx8H2n9FtBlbx5rA4ylkZzQkt88CdJk5LxZ06ZX
+ x2upO1kwnmPYyO/GAdOYN0td8nL269UjLmGIbUSDONZToic060jcBU7TesI/pW2Yr4+W
+ /XQA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx0vri53CMjkgNnLV93LwyqTygjm7+UQ4M9oSFO9nAw5H8gOLoRI+BgyrgjuC+so1R1ZVbkyz8=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIQhqjIUSglgIHyIsvRaLAiuUJlnA/7ge69Br7DMZVgBGmVBVx5
- ParfWMARCRE9qZMSVxG6tJxk4Li1qT2S60gEAp2koNoVUgT2wT+J2tPnVuPZW/MggifEdDRKJh0
- hdX5snfaoWEqkxOtJG2EoJji0i5e1QjrlpxS0oeVWQ+9MOI7HFimBnXn+2kIuRn9grVMaoD3HjU
- sdvjsNB2qDkA==
-X-Gm-Gg: AYBFou0r0tJO/Pk0asicEnhPHEFsKUVExQ2Evei/uaJZ70oZ6G7KylLkN7oci7GOOmu
- BMBGRwcj9YGt8Zys28tqnxvmtV5642NRgOobNWJKAhT0IvL7OAx2DQVKPT2SGHH7pW0t1r8JX2H
- 5k9ZXjo1FfAQWj8l5QfTE6rINYCdde/zApo3EHkYIkys+uLix11cF1t0iTW5RpVPJpmFsHDlaW1
- 3OcmPWFpKUeTszpqfVPa61Y/lACQaxDfY9n8OHirVIlDAEUnVOOBy0UIIfl99oYNEroo0UijhOX
- zscMlLoptWc6QTSfmGOH4wsJJb8gnPUrrTRnJxyLetsdkY0vAixaF7kPE05+oqPttMRDI+pXzRE
- D4alFNG8RiixtPEYz779cPBASI4gW3R+pOWiOiJTE+r6Lv5gYpuInf7k=
-X-Received: by 2002:a05:600c:a00f:b0:4a1:6c0c:ab93 with SMTP id
- 5b1f17b1804b1-4a18e4e24c7mr185215095e9.28.1791813676279; 
- Mon, 12 Oct 2026 07:01:16 -0700 (PDT)
-X-Received: by 2002:a05:600c:a00f:b0:4a1:6c0c:ab93 with SMTP id
- 5b1f17b1804b1-4a18e4e24c7mr185214515e9.28.1791813675606; 
- Mon, 12 Oct 2026 07:01:15 -0700 (PDT)
+ AKwUvBwvF3//c0vvpXuOB860ezV2PmQgGdtqyW2rwqfN7zuGHygcukyPMC+TRYm/OpvxUcTVaVJkPKY=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYICaXRq0zn+lMulcrGNWocaviP925lzP+STZ7FXK+VZMzdH5iqf
+ Xiu4Xr/mmlTHb3Jb7LVXKTGOAdjvc3TqCBCgr5VBhl09tKrfG5oX/rwSEmRDkMWjEdUpI77f+HZ
+ MiiVFv3gZReD7wHA8EAOnLwvatbO3i83E5ZG8hoCCN8AxIUU5wBjIdlcevYYksjg1tC5qjSf3Y7
+ 6SCO08FPhhMg==
+X-Gm-Gg: AYBFou3GsSC2hFvY1brm5Yn//u07dHkUKE2wjNVDbGfXiclgBgnyLVK6dhianO91TKU
+ Ovm8mW9T2SGtfod8IHtHhwOWbHX8btla6VDJ2zy+Y56OS9ZWpGY3Z8zDBmmTwskWmdltmmZ9vPS
+ MuNsUOuSOjDIK8E9UWpAtquDNm/IHk03uxA/ZgxMECBKhlV2Dk6sqHG+ZtWuzLdyHIGNi+Ey/hp
+ dKCvkRO3xtL1q8OhzdjfTUkntnL4NZmR/Ju7JGOdmxiwxvqtK85pZJnfntiZ36oK5BANzUgRPwn
+ LbS54VMgxH2yQYrSlck8ZK2lDU/dSrWozSuDS8gklUI/3PeyP5HXVR+1YZzGeemtqf7xOK8EuSJ
+ YgY5wWbxEPePpjT4nG/d3+Tp4u6+BGW4iZwnt/hTTgcNQ+/vWxUtvwv4=
+X-Received: by 2002:a05:600c:1909:b0:4a1:722a:d2a3 with SMTP id
+ 5b1f17b1804b1-4a18e4a3f5amr206746345e9.23.1791813679935; 
+ Mon, 12 Oct 2026 07:01:19 -0700 (PDT)
+X-Received: by 2002:a05:600c:1909:b0:4a1:722a:d2a3 with SMTP id
+ 5b1f17b1804b1-4a18e4a3f5amr206745345e9.23.1791813679233; 
+ Mon, 12 Oct 2026 07:01:19 -0700 (PDT)
 Received: from workstation5 ([2a02:908:1242:30e0:468d:767c:32e6:22fa])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bf15691sm284551015e9.6.2026.10.12.07.01.14
+ 5b1f17b1804b1-4a18bf15691sm284551015e9.6.2026.10.12.07.01.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2026 07:01:15 -0700 (PDT)
+ Mon, 12 Oct 2026 07:01:18 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
@@ -175,9 +177,9 @@ Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
  joaomarcos.costa@bootlin.com, Aristo Chen <aristo.chen@canonical.com>,
  u-boot@lists.u-boot-project.org, linux-erofs@lists.ozlabs.org,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/9] fs: ext4: print change date in directory listing
-Date: Mon, 12 Oct 2026 16:00:42 +0200
-Message-ID: <20261012140048.214059-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 5/9] fs: ext4: set inode timestamps on write
+Date: Mon, 12 Oct 2026 16:00:44 +0200
+Message-ID: <20261012140048.214059-6-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261012140048.214059-1-heinrich.schuchardt@canonical.com>
 References: <20261012140048.214059-1-heinrich.schuchardt@canonical.com>
@@ -196,30 +198,108 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Declare FS_CAP_DATE in the ext4 fstype_info entry so that fs_ls_generic()
-displays the modification date alongside the file size:
+Replace the hardcoded zero timestamp in ext4fs_write() with the actual
+current time obtained from the RTC when CONFIG_DM_RTC is enabled.
 
- 4096 2024-03-15 09:30 filename.txt
+Per the ext2/3/4 specification (ext2 design document, section 4.2):
+  i_mtime  last data modification time
+  i_ctime  last inode change time (the 'c' stands for 'change', not
+           'create'; this is not a creation timestamp)
+  i_atime  last access time
+
+All three fields are set to the same value since writing data modifies
+both the file content (mtime) and the inode metadata (ctime), and any
+write also constitutes an access (atime).  If no RTC is available, the
+timestamp falls back to 2000-01-01 00:00:00 UTC, matching the FAT
+write driver behaviour.
+
+The ext4 i_crtime field (true file creation time, added in ext4) is
+stored in the extra inode area beyond the base 128-byte inode and is
+not modelled by struct ext2_inode, so it cannot be set here.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- fs/fs.c | 3 +++
- 1 file changed, 3 insertions(+)
+ fs/ext4/ext4_write.c | 45 ++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 43 insertions(+), 2 deletions(-)
 
-diff --git a/fs/fs.c b/fs/fs.c
-index ad577c475f5..c2a893f6ff3 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -262,6 +262,9 @@ static struct fstype_info fstypes[] = {
- 		.fstype = FS_TYPE_EXT,
- 		.name = "ext4",
- 		.null_dev_desc_ok = false,
-+#if !IS_ENABLED(CONFIG_XPL_BUILD)
-+		.caps = FS_CAP_DATE,
-+#endif
- 		.probe = ext4fs_probe,
- 		.close = ext4fs_close,
- 		.ls = fs_ls_generic,
+diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+index 2fba2197c19..0531190ddcd 100644
+--- a/fs/ext4/ext4_write.c
++++ b/fs/ext4/ext4_write.c
+@@ -21,14 +21,47 @@
+  */
+ 
+ #include <blk.h>
++#include <dm/uclass.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <memalign.h>
+ #include <part.h>
++#include <rtc.h>
+ #include <linux/stat.h>
+ #include <div64.h>
+ #include "ext4_common.h"
+ 
++/**
++ * define EXT4_TIMESTAMP_Y2K - 2000-01-01 00:00:00 UTC as a POSIX timestamp
++ *
++ * Used as a fallback timestamp when no RTC is available.
++ */
++#define EXT4_TIMESTAMP_Y2K	946684800
++
++/**
++ * ext4_current_timestamp() - get current time as a POSIX timestamp
++ *
++ * Returns the current time as seconds since the Unix epoch.
++ * Falls back to 2000-01-01 00:00:00 UTC if the RTC is unavailable,
++ * matching the behaviour of the FAT write driver.
++ */
++static time_t ext4_current_timestamp(void)
++{
++	if (CONFIG_IS_ENABLED(DM_RTC)) {
++		struct udevice *dev;
++		struct rtc_time tm;
++
++		uclass_first_device(UCLASS_RTC, &dev);
++		if (!dev)
++			goto fallback;
++		if (dm_rtc_get(dev, &tm))
++			goto fallback;
++		return rtc_mktime(&tm);
++	}
++fallback:
++	return EXT4_TIMESTAMP_Y2K;
++}
++
+ static inline void ext4fs_sb_free_inodes_inc(struct ext2_sblock *sb)
+ {
+ 	sb->free_inodes = cpu_to_le32(le32_to_cpu(sb->free_inodes) + 1);
+@@ -854,7 +887,7 @@ int ext4fs_write(const char *fname, const char *buffer,
+ 	unsigned char *inode_buffer = NULL;
+ 	int parent_inodeno;
+ 	int inodeno;
+-	time_t timestamp = 0;
++	time_t timestamp = ext4_current_timestamp();
+ 
+ 	uint64_t bytes_reqd_for_file;
+ 	unsigned int blks_reqd_for_file;
+@@ -979,7 +1012,15 @@ int ext4fs_write(const char *fname, const char *buffer,
+ 	}
+ 	if (existing_file_inode)
+ 		free(existing_file_inode);
+-	/* ToDo: Update correct time */
++	/*
++	 * mtime: last data modification time (ext2/3/4 spec 4.2)
++	 * ctime: last inode change time - NOT creation time despite the name
++	 * atime: last access time - set to now since we are writing data
++	 *
++	 * Note: ext4 i_crtime (true creation time) lives in the extended
++	 * inode area beyond the base 128-byte inode and is not modelled
++	 * by struct ext2_inode, so it cannot be set here.
++	 */
+ 	file_inode->mtime = cpu_to_le32(timestamp);
+ 	file_inode->atime = cpu_to_le32(timestamp);
+ 	file_inode->ctime = cpu_to_le32(timestamp);
 -- 
 2.55.0
 
