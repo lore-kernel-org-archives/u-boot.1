@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66DF4CA9ED1
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 15:44:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A25E6CA9EC5
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 15:48:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 14A764064E;
-	Mon, 12 Oct 2026 15:44:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 35A3D40659;
+	Mon, 12 Oct 2026 15:48:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EF_mAhB8sN02; Mon, 12 Oct 2026 15:44:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 19AE340624
+ id DI9G4c_uubPf; Mon, 12 Oct 2026 15:48:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4F82440651
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791819868;
-	b=Hz8Sht8k9O46BTxT2zMsM6UPFwiZTbAybRey8kREs9YZYieQaKjjxNwbohcbqdHbYh7Q
-	 yLQ8PAlQTBRs7zLmn+pH0KdMT2FaMKHQN/p0Smza8iHKGYtFnSU36pKzjgF5vP53Qw9sM
-	 pykGKpBuYmgG9tEc5lN3XooF9z3WgclmbgycrXeWe+351E56trxZrezR6vhRjgGu3zU4s
-	 2P/7H236xTIefMls5vXgN0/qtDAcxcTSDhGg+wTf9lxh/+L+7NagWMBZtAxkVfj+o/fJ6
-	 TP9UjZqSmMV6ljeYK6ZuOuieGic0lgh5NlYFVZ3DJIX7YsW+DP78YigjQbEYdZcvmnQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791820103;
+	b=PE26oqTegn0ESFAd8YUlfg05akiZvWoV0e9oHRHRt9leDUZtXzaznaqH1qS1EM327whO
+	 GkRMiiMxduRgE311vEYRmwmzgYwkYPaXZtOX22/XcJpng3WeeSDOHfsjtBNQ3NCRm0Mx1
+	 /QsU/qekKGSytD5/JCY8eSngOcGY2JkW5ijr5PGn/QOoqCQ6xA7+RTuau+nyf4ldSDXIc
+	 vmeBDcb62acfaJbismzkaKltSumCjPaRd2QJwPbeSeEQhIi+bJ1HbHr1i00F/XDA9byOV
+	 Va8kF4LqAJMZuPZqvcCaIMJG6KQo1fnpwzr19m+6Fm4lyOmAapRqkg/MigTySm7umIQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791819868;
+	c=relaxed/relaxed; t=1791820103;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,138 +32,138 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Organization:Content-Type:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=b/CwHOVBkeCOQ01mmPsOnT+9oefBtixE7b9i4h9AB18=;
-	b=nuzOlPq1dw4attgOnjX4gJRDfOd5s7kPClGGGdPIxGXA/QsulYQ+wnQNYzFRYylDzHjK
-	 JCIEkAu8kb1dAfZb+yBUnXI0EArzJLItjTIgRvx2J7lDbfpHxjb0fdZUIutgTxyC4Ccu0
-	 wTTH+VgiejnV1R9RfjH/fNtR3b4qjoEp5PNSN8HdcQmKvUE4l4HaXkuiBu4gbP1LROvlO
-	 c8UyPE2ES+2oCbCrQDu2NjUaGF/HqJ4c3aNabDqsxm2bZQfCEaX9DJg3xfygEEcdeA/is
-	 Jxh/oufB1gWriME4pK+5zWeq3qORXz8KFF1gTy1j+4fhhT9J8McgCmLpVH80BL0gXow==
+	bh=PgS786/bgLmo832rBrM/TEoTEL6xw03i4l85HaVU0vs=;
+	b=iMEjoy23kwW0IOXzZTVMnNjiJFJoA454Rvn50XKsCUgUnZtg5xi9SoHOQaX3RF/6nKxu
+	 SIDOaS7nzvUT+zDNoGOI0BnCurvaFZEk3q+ABAWhNr9CYh02PYyeYFBfMFVqHeB6CP1I+
+	 c/T7P16kEuynv4tMWpZN8kvhLRR7ZAEFgrrF4eT133ut3s2DE9dyW1gYjYbQFqMHUftYx
+	 8gQ0WWnpDVGX9QfF68oUQtjDLB1a2PebmONM4ROc8g6v/9amluZAqSoG8+WuryWeQcmIN
+	 YPPgVfM5PdNjYX2/QfoGZeRgqmwQRl2WNUXykGINIHPDcOAb0bvl3NjB4R0JnF5SLwQ==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791819868;
-	bh=b/CwHOVBkeCOQ01mmPsOnT+9oefBtixE7b9i4h9AB18=;
+	d=lists.u-boot-project.org; s=default; t=1791820103;
+	bh=PgS786/bgLmo832rBrM/TEoTEL6xw03i4l85HaVU0vs=;
 	h=Date:From:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=0REwJ20EQjNuybcbJwCswFzY4RVkOnIHDKw74X+nJK6oDhOxmxdztYl1eZo1f1Bt1
-	 /OXaW0TUyvMsZlmsDeT+rgz6KmAbt0etQ4Eq2G015GvBxKwu9s8Hc9vqWcYZKRKvpC
-	 lcOhBXnjiofB1W11YnbZB4XYgoViHnsVp49f9icYIbtRKF655OR9RcBD+nGDzlm2db
-	 Hv53EJJzjAhu2Z2H2dtQrBZx2fc7k+OzO44SdHFUYDm1tr+EroBC9A61NpYwPL7s+u
-	 oslAgZoLkiXb7PIQVmg9STPcEGldphtgfD0oMH1EXY/1Kjl2HbEe+8LLnhITX7VoxD
-	 hlABPEkmjWr8g==
+	b=Fyptcsco07crWS/+Wj8xfP0Bks8LHVmvY7HF5EOw5Xk0cwKkyEt4g/cICSiLfhpNw
+	 7mNQGlXw4R0Fh00AtK/1+opW6uJH+OTx2Q4lTV74gVwe9/Ra/VkUetAUYp6yZyQVcM
+	 FjgCTameHeDWc1LrKXJriRB+1pY8nk7NicDGlLuvgJoTtJNzzrijU+4sMYL5jwN6l3
+	 9E7N/x8RV2960nkCyiVUPCqc5GhIhSwABl187VfN8088DAmlvsafLsJyIvEj383hg2
+	 kFZ2y42CfNiK6Nksu5FFAqzlvEGEkmFJjy09l7qhJn7K/bSmRjHKTHRmClf2XgaiLO
+	 qzX/LAtd/ozbw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 19AE340624;
-	Mon, 12 Oct 2026 15:44:28 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id F1A69380
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 15:44:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4F82440651;
+	Mon, 12 Oct 2026 15:48:23 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0C466380
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 15:48:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D6E7660672
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 15:44:26 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id F20C480DCA
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 15:48:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id a-aNVBJ9PRPS for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 15:44:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7612C60643
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::433"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791819866;
- b=Wd0aw4ijYw5eHcl/v9SmtMKcj1/NjXK9JZtxHFv7kFwJFlpc9Fd6Vl2ZBEQ29H2yeKJ0
- ycx1Tvy5UvPZmj2HYghpkzFsHJuKarTibVNZXervrxAoLlcmRP+qzBcIDpr7SOAqQao4i
- 7BBvdVVrcO/7OoROMFqdYo9suZ92jCAeGX4GS7v2/SRyCOtoZuC8Tg1DIp80B10s55nWq
- RSOitIM1mJEUmgYKxu9z99lTlpQAHHhjLvcfm26a39JTqCAc5YyPq18JmVhYEMsjsQ0ka
- /5GPK34NbWcRbarT7IwM1cNmIwg7KaCMU44n8mv8WTZSrBN0FMKRZ8hvtLm8eqjqIFQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id P0JE_3WAayMd for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 15:48:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A2FB080DC5
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791820100;
+ b=gy8tGw3cFR6khlrwjNq2BnN3eu6TohqIkp7vUEQ3bG9HLSIOvPe9Yu5j2WbtRycxovI1
+ kOuUaflebdY+dkx2Pa7FkM2EqLJ/QZ3FFKCGtPJhdJLD+qaH3jzGtnw7ObwctH7WFWzk5
+ vZlKM+blOpsajdff87vV9bqdf2l74etvJVB2RBZ+e9BSWIAu3jPj8H0Ulz9YvIWi5U/6Y
+ FXqF1el3D9BQbA+DApdKsw5O63FQHGYq9qTVKbLYaXuTmQkSgGgujbJWIlY6l5UQRLqgz
+ 1QjSSMZW+irtYi5uG8W6ZR8VGjmYRs8MIHvBNO2tWVHh2LkjxrK/u17Ss4a1E9EQPSA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791819866;
+ c=relaxed/relaxed; t=1791820100;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Message-ID:Date:MIME-Version:User-Agent:From:Subject:Reply-To:To:Cc:
  Content-Language:Autocrypt:Organization:Content-Type:
  Content-Transfer-Encoding;
- bh=b/CwHOVBkeCOQ01mmPsOnT+9oefBtixE7b9i4h9AB18=;
- b=cCOvciESDCMEbUj2H6xEY38D4WIXRftDeE1qHMI4P5dH4ZtPkW4UFfTk5fBHfTO+z7ii
- rL2072BJPC2C0IPLMI+YusMQsPE796G7TTJ8dtS7PGITq8g/FaopoqsC5coqo4NYR+QwE
- m9GFUgCuOb4GZ7BH2OYCf7YrYPjNMbyU7RcIdJ89YGsjWD41HHAUm9krdVqKQTuUhW4g9
- B89K1HhvR7aUSfP5D3TsQLR/unCU4bLjBpbb1elxo4s2NpO7i1hlJqJ7kZB1CNHgl3zm8
- 9hGYWZVG4fsKb4yRWpbLlubsgjrQ+EQ58J3mN0+nIWwjsTTspRkBoNwpDPY4SaoJ86Q==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=PgS786/bgLmo832rBrM/TEoTEL6xw03i4l85HaVU0vs=;
+ b=pyPlMzFcTYymkLNds5dxlyLhHCq66G0Exv+pkLkbbp98XvJ3OpZ/KoFJM7lQZ9mI2Wdv
+ HV0VwUA5z5IhLnGhkSkDcmGEFl0JOHGINvn0xFuMnW/RTPY69/wwCk67tqqul9fIInvgg
+ Eh1E3Nt4h+kku7HrwcUCUFaoJD7+7G6TOmoZ143rs+wpyg1TnJ5nRL4Cd2EotTV2cmAy5
+ 2bmuiVtkgzyNHH6Bfj6dgkbg3KaRSWQC8b3qp/fWE+GIc9PN9OQ7Oyg7UaEZCyhEwDgMH
+ +EW1Cmf71B4GgA3v6NjHazVD71LSmg6L8voRUWZkTUKVhK6MXfnIEg+jMsIAsk1nVgw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=linaro.org;
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=rqdaRpLP; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::433"
+ header.s=google header.b="zQGo9g/J"; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
+ client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=rqdaRpLP
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7612C60643
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 15:44:24 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-48b0946c2c2so1187441f8f.3
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 08:44:24 -0700 (PDT)
+ header.s=google header.b=zQGo9g/J
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id A2FB080DC5
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 15:48:18 +0000 (UTC)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-48c02782159so1248727f8f.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 08:48:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1791819863; x=1792424663;
+ d=linaro.org; s=google; t=1791820097; x=1792424897;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:organization:autocrypt
  :content-language:cc:to:reply-to:subject:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=b/CwHOVBkeCOQ01mmPsOnT+9oefBtixE7b9i4h9AB18=;
- b=rqdaRpLPk1jzntOg8Hd3THn/f+g4LiTe8jBJfTh10we5tOYKLTNvOXoHGjzmX5KP4k
- 1e3zIXCRepbP3qoibpOEkW5WJMhCqaQNnAgFNrdErKXLTKrYPFI/rAGsPrcOtSdszG4i
- YXOyLdQ2opuGYwgvxfb4ciUJLvvTvzkcrfV2OkLZDxfuFm8NGI4AFfM9A5Udw86EWWxK
- ZTdjSp4vRumNjnYaWBKzjqN7TdXFj/O3AXnorY3XtgO64zB0PwofYnqjvoBGy6psBQZh
- TlpLrpUkbL+dJ0sAYF6q/BYQZVBQCaTYCxDcYaMlEzbO4sIKDhFWNN8RdglfzXyZFz25
- YeoA==
+ bh=PgS786/bgLmo832rBrM/TEoTEL6xw03i4l85HaVU0vs=;
+ b=zQGo9g/JR+lgK10+cSOY0OAvXulD0132V0L09U4Y6Pi/5Ihh+2qwfA79TxVs07oeaG
+ 3/qk328qtYFCIOYkWD5dTTElDtBuBMbQWEY+J/PZzZKFwSGmofsGDHpzXqH++p2Q1UUT
+ q7qjkEeyF0xTTFA0Jd+Hm6RuZTKsNlDzO6G9ceEtvU7IoXBVtKWMkjKg7JHpbMnAVUJh
+ q5Kwfl7BRx7S/dC+VyjnVfV1Ulc7mXj4HXWr9oCNdTI2Ync9z28AsEuvWS+J98/u3s+T
+ 70FNfraA574JrAkEbhAvwek3VOlOpq1iIRG1NygG4Ae7Oq+qE2axHwBxrpRwyIhWDGCc
+ wdsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791819863; x=1792424663;
+ d=1e100.net; s=20260707; t=1791820097; x=1792424897;
  h=content-transfer-encoding:content-type:organization:autocrypt
  :content-language:cc:to:reply-to:subject:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=b/CwHOVBkeCOQ01mmPsOnT+9oefBtixE7b9i4h9AB18=;
- b=d4EnIWJJlbpEu2R+IGn0GIaqmxyohJSC7ZnBQmNzsGhA9zf/KORJXnB+kzmwhJ+HjT
- Hly+jV61YoF/bh2iOnyPU5hL5cNdnxh1qsJJ0blhsjigz4w8vVcJXS15nWyTPz3lSJlO
- dlNC6q3Ko2Ks3MTKRZO26bmSltVdpR1tFNkm5B4UDjZsyU1JJrp7nwsjV/949IxAjAVH
- +Wrkyo0Q4GZTh/VTCuDqlkK98iGYKMiXJ76pCo0Dc5LQ5fVOlwEd+b27PLMw+QijrZVI
- bOAScojHZXb3l+DFwX/UcxErr8ztCJH9ZCYWhvIQDCWeZMIVspsKd4JUZmI9Kb2lQrRC
- b1qg==
+ bh=PgS786/bgLmo832rBrM/TEoTEL6xw03i4l85HaVU0vs=;
+ b=fz3v/tfLI23NGei2o/EaR14h27XrkcKqngcGzW1K0jX3B1M2YBDhMCa1+nypZknGhA
+ 9+5qo+iBsCSTcOpAT8A9GVZ2HpRbGNCLNLI0X59Ctd+fEK3QlV1gS72PeqZcCt6B8Bfn
+ JHNt74aZMaXIyQGty0vHlzY3QQm41mPEEH4IWQRQCfDKHyorxMqS1XKw5ltonXkf3e3J
+ CkaWss75wKFOTrkPSnOSwHNDgtLsbXRB4a84JDt0NsV/mUx6wLfIBs/uEg6k8rKdGZ1A
+ 0A3WAn8549WPQTvKdSSfdi72WM+YgelWlQbY1k2i/lBb8khiCCpAKRBu2nkg6tdpe43n
+ 3Nrw==
 X-Forwarded-Encrypted: i=1;
- AKwUvByjRfWmJG5tJQIRfbqhP1H0ZVkSuriIlCa0RccUHkmmCSNRO66EkK+N2sZd9vnfvz1iYECgAU4=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYKFr0Us6Fo71cMGzHTSo4p7IpUeKuVwkp7zpBnr+rJeKo6T3vmj
- TSQ3YMxWqOjy8iGA3ZYlO+BjFx+0lJJU1fm8pTwD9Ns68+E94ELop5/nJeWyIyHuhVk=
-X-Gm-Gg: AYBFou0kDYk5Xm8CeHuoxQrwnn7QTvENMoPffCzlvT6twRUiNQ3CokKuORz2Nn/yHG/
- NfaANaf0BW8yA86GS5b0gvgJBpZwA/Yi214HvO/bwsbZat4o275q43TrgFgPhXoqgzfA9StMMsG
- zciL2JA9yEucURC/LbWJtbcQB+YuSrUjHaXrdK/l4sEl4nEdB8oZrd5dDfg3t+2jXaCneDKbOJL
- 6o2lJgDAq0EiBkiSx+8GCtgm46EGEa0Mh84OQM3RoLrFJ2q9i9zXzzGLl7fQIQhqtM0wSH7ojLF
- 6kYy7lGwJGHHb/5yvH5d/dKk+TDjCm4cmQoyew7yOZgmiUFjiGnMa/+r75cAD/gi780rDkgyweb
- BqnqczIcee3fpUHtFPG3NL/L4BBF3r5x1LAqIt3BaCVPS/s7R9phfP31J/dTZXWXifmY5MAGPGU
- kkcjMiZQ7Ds0COXmJpiSAXalhcGhEFE+t8q3sblzyxCBFlk2wVkoKRX/5u4KxAow+absqxcMppe
- 6F5W9cj131FU2SO2v26qBEIpSBhl1NH0hoB
-X-Received: by 2002:a05:6000:989:b0:48d:b650:69aa with SMTP id
- ffacd0b85a97d-48dbacf596fmr17396840f8f.50.1791819862371; 
- Mon, 12 Oct 2026 08:44:22 -0700 (PDT)
+ AKwUvByDS0PU81IHC0Vi2Z1/zkjcOcmQp5v8ApP8StVUSrtPo9yIgw6NBIayy1uPGNU1+5TRuoyE/DU=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJniujNVPClO4jN9OlULYPsiNU0F0aKR+ND3VbOdrGHjGvUZ/Do
+ 4CI8GdL4JEJFh7oaLIQEWWSqmSwxPcnX5hCqetkB1tTj9/bvJP9dno5WBhs6u5Ovpmo=
+X-Gm-Gg: AYBFou0cHGPWorzODNH/cfvkvd5BP4O1qsCf27G7SN+1VI79pyscMFLMnNPMBEG96gw
+ 7h05u/VT9if261f+/ZIsRTQoC8HEEmoKkDmyFzgWWm4U7tp/GE4dp7q72dmT9ecyVQ/v5CzC4j0
+ zp2WcZKRKGy8COMP0RhFRtHsFBFlKLhAFyNzbB0ObN+FwMgxeJuNH+dC3n8NClB7qQokkXEr0Tm
+ 0zllc/tdGVJ9oh5L0c68nxZPy18Zk1PrtDrA49jOWTvhyo5jI14CBt+McHvSsJn3KWt3eVtvoDW
+ ViGHluL7HTSQmQsA8opOsJdrb3Yt2xGdk4XhQFlb3kkSTC8n6m1I9gP4O2nmtIf3dESM4MAjrmt
+ P7tSejOAlX+HxtDxkJXVW/C9D1vL+jhQ6GtzCjxGXw+88cT/KCb7QJhCGk9zv63zhwl+dG4nxM0
+ jTkv9uFElfFbpW2NqbJeJlZyiHua7ige8P9dN4Jat1iomj2oQpv4CGVLjeeyTlYZhSe6eSGxak/
+ oW+LY0gsJBM62+f8D1UOgyhO4l+A4PZyPlC1g2pe7VVuRY+pkE=
+X-Received: by 2002:a05:6000:4594:b0:48d:debc:dc12 with SMTP id
+ ffacd0b85a97d-48ddebcdc57mr2001702f8f.23.1791820096421; 
+ Mon, 12 Oct 2026 08:48:16 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:417e:f4c4:5b8:8c48?
  ([2a01:e0a:106d:1080:417e:f4c4:5b8:8c48])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48de0bd777fsm81885f8f.57.2026.10.12.08.44.21
+ ffacd0b85a97d-48de0bc5e0asm115443f8f.50.2026.10.12.08.48.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 08:44:22 -0700 (PDT)
-Message-ID: <eb8bab99-2d96-4089-b2ae-4492e763203d@linaro.org>
-Date: Mon, 12 Oct 2026 17:44:21 +0200
+ Mon, 12 Oct 2026 08:48:16 -0700 (PDT)
+Message-ID: <36787fa7-d029-4ecf-9f2c-0432a2a45bde@linaro.org>
+Date: Mon, 12 Oct 2026 17:48:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-amlogic-next-20261012
-To: trini@konsulko.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.u-boot-project.org
+Subject: [PULL] Please pull u-boot-interconnect-next-20261012
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.u-boot-project.org
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -208,8 +208,7 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 Hi Tom,
 
-Here's a set of Amlogic changes which enabled basic Amlogic S4 support for Khadas VIM1S,
-plus cleanup & update for Android support.
+Please pull this into next to support Qualcomm SC7280 & QCS8300 interconnect drivers.
 
 Thanks,
 Neil
@@ -220,102 +219,31 @@ The following changes since commit e1dcad5512b81009eaf7e472c20a8a15db8c4a0e:
 
 are available in the Git repository at:
 
-   https://git.u-boot-project.org/u-boot/custodians/neil.armstrong/u-boot-amlogic.git tags/u-boot-amlogic-next-20261012
+   https://git.u-boot-project.org/u-boot/custodians/neil.armstrong/u-boot-interconnect.git tags/u-boot-interconnect-next-20261012
 
-for you to fetch changes up to 9c048da44bed99311355450d70840bb0795e21f8:
+for you to fetch changes up to 9db5fb79c2630e9b4fcb0d17dd8b5f383c783cfb:
 
-   meson: Add Khadas VIM1S support (2026-10-08 10:45:27 +0200)
-
-----------------------------------------------------------------
-- Support watchdog for S4/T7
-- Add S4 support:
-  - reset
-  - serial
-  - clock
-  - mmc
-  - SoC support
-  - Khadas VIM1S
-- Remove Android support for SEI510/SEI610
-- Fix Android support for Khadas VIM3
+   interconnect: qcom: Add QCS8300 interconnect driver (2026-10-08 11:12:04 +0200)
 
 ----------------------------------------------------------------
-Guillaume La Roque (7):
-       configs: sei510: drop Android support
-       configs: sei610: drop Android support
-       configs: remove unused meson64_android.h
-       configs: khadas-vim3: drop non-A/B Android defconfigs
-       configs: khadas-vim3: enlarge the fastboot buffer
-       configs: khadas-vim3: update the Android partition layout
-       configs: khadas-vim3: fix the Android DTB index
+- Qualcomm SC7280 & QCS8300 drivers
 
-Sean Anderson (13):
-       watchdog: meson_gxbb: Add support for s4/t7 SoCs
-       reset: meson: Add s4 support
-       serial: meson: Add s4 support
-       mmc: meson: Parse devicetree properties
-       arm64: meson: Add s4 SoC support
-       clk: meson: a1: Eliminate separate id parameter
-       clk: meson: a1: Use clk_set_rate from meson_mux_set_rate
-       clk: meson: Use soc-specific naming for common functions
-       clk: meson: Export a1 functions to common file
-       clk: meson: Support fractional fixed-factor clocks
-       clk: meson: Support power-of-two dividers
-       clk: meson: Add s4 clock driver
-       meson: Add Khadas VIM1S support
+----------------------------------------------------------------
+Balaji Selvanathan (1):
+       interconnect: qcom: add SC7280 interconnect driver
 
-  MAINTAINERS                                        |   1 -
-  .../dts/meson-s4-s905y4-khadas-vim1s-u-boot.dtsi   |   5 +
-  arch/arm/include/asm/arch-meson/boot0.h            |  12 +
-  arch/arm/mach-meson/Kconfig                        |   7 +
-  arch/arm/mach-meson/Makefile                       |   1 +
-  arch/arm/mach-meson/board-info.c                   |   2 +
-  arch/arm/mach-meson/board-s4.c                     |  50 ++
-  board/amlogic/sei510/MAINTAINERS                   |   1 -
-  board/amlogic/sei610/MAINTAINERS                   |   1 -
-  board/amlogic/vim1s/MAINTAINERS                    |   7 +
-  board/amlogic/vim1s/Makefile                       |   1 +
-  board/amlogic/vim1s/vim1s.c                        |  26 +
-  board/amlogic/vim3/MAINTAINERS                     |   2 -
-  configs/khadas-vim1s_defconfig                     |  66 +++
-  configs/khadas-vim3_android_ab_defconfig           |   1 +
-  configs/khadas-vim3_android_defconfig              | 122 -----
-  configs/khadas-vim3l_android_ab_defconfig          |   1 +
-  configs/khadas-vim3l_android_defconfig             | 122 -----
-  configs/sei510_defconfig                           |  10 -
-  configs/sei610_defconfig                           |  10 -
-  drivers/clk/meson/Kconfig                          |   8 +
-  drivers/clk/meson/Makefile                         |   2 +
-  drivers/clk/meson/a1.c                             | 495 +----------------
-  drivers/clk/meson/axg-ao.c                         |  12 +-
-  drivers/clk/meson/axg.c                            |  16 +-
-  drivers/clk/meson/clk_meson.c                      | 376 +++++++++++++
-  drivers/clk/meson/clk_meson.h                      | 149 +++++
-  drivers/clk/meson/g12a-ao.c                        |  12 +-
-  drivers/clk/meson/g12a.c                           |  24 +-
-  drivers/clk/meson/gxbb.c                           |  24 +-
-  drivers/clk/meson/s4.c                             | 601 +++++++++++++++++++++
-  drivers/mmc/meson_gx_mmc.c                         |   3 +
-  drivers/reset/reset-meson.c                        |   9 +
-  drivers/serial/Kconfig                             |   2 +
-  drivers/serial/serial_meson.c                      |   1 +
-  drivers/watchdog/meson_gxbb_wdt.c                  |  22 +-
-  include/configs/khadas-vim3_android.h              |  36 +-
-  include/configs/khadas-vim3l_android.h             |  36 +-
-  include/configs/meson64_android.h                  | 279 ----------
-  include/configs/sei510.h                           |  30 -
-  include/configs/sei610.h                           |  30 -
-  41 files changed, 1422 insertions(+), 1193 deletions(-)
-  create mode 100644 arch/arm/dts/meson-s4-s905y4-khadas-vim1s-u-boot.dtsi
-  create mode 100644 arch/arm/include/asm/arch-meson/boot0.h
-  create mode 100644 arch/arm/mach-meson/board-s4.c
-  create mode 100644 board/amlogic/vim1s/MAINTAINERS
-  create mode 100644 board/amlogic/vim1s/Makefile
-  create mode 100644 board/amlogic/vim1s/vim1s.c
-  create mode 100644 configs/khadas-vim1s_defconfig
-  delete mode 100644 configs/khadas-vim3_android_defconfig
-  delete mode 100644 configs/khadas-vim3l_android_defconfig
-  create mode 100644 drivers/clk/meson/clk_meson.c
-  create mode 100644 drivers/clk/meson/s4.c
-  delete mode 100644 include/configs/meson64_android.h
-  delete mode 100644 include/configs/sei510.h
-  delete mode 100644 include/configs/sei610.h
+Balaji Selvanathan via U-Boot (1):
+       interconnect: qcom: Add QCS8300 interconnect driver
+
+  configs/qcom_defconfig              |    1 +
+  drivers/interconnect/qcom/Kconfig   |   12 +
+  drivers/interconnect/qcom/Makefile  |    2 +
+  drivers/interconnect/qcom/qcs8300.c |  269 +++++
+  drivers/interconnect/qcom/qcs8300.h |   24 +
+  drivers/interconnect/qcom/sc7280.c  | 1903 +++++++++++++++++++++++++++++++++++
+  drivers/interconnect/qcom/sc7280.h  |  154 +++
+  7 files changed, 2365 insertions(+)
+  create mode 100644 drivers/interconnect/qcom/qcs8300.c
+  create mode 100644 drivers/interconnect/qcom/qcs8300.h
+  create mode 100644 drivers/interconnect/qcom/sc7280.c
+  create mode 100644 drivers/interconnect/qcom/sc7280.h
