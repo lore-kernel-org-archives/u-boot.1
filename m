@@ -1,169 +1,239 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 684F7CA9EDE
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 17:37:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 633D2CC6B02
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 17:37:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B8361606DE;
-	Mon, 12 Oct 2026 17:37:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AF66080D60;
+	Mon, 12 Oct 2026 17:37:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QfSClezyP3j1; Mon, 12 Oct 2026 17:37:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B1589605AF
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791826652;
-	b=ZDWZR66QxMszKruBG/jqmeiARazbbVekyxutC3NVFii34AulPyeer9xkxm7+e84qsVig
-	 nDrZ331/8wfZFXj7uh5zlD1AK5HbqbTXaHc/hFFvont3l99dc2Gl9vwLMK8bEqxJeLjBP
-	 0ovYKvUbBtQ4YfrBhvxy07lv1ZB5b1mW/r/fwHpx+2Cz0ph8mO0FNUcx/z3WMw1/0H4Fq
-	 X9HrOfTp+kWdpa/O27PrRh4DOLUtNDe61dK7Rw55zxxKTTFxDh1BQLzfyWsa2Dgwmmyzt
-	 RWEhC+Rr/Q/TVTrauu4z6pVHkGsZRFxDsrXCcupUhrDmBIMW+da63zfTH5Fxko/10gA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CbIejTfISHnH; Mon, 12 Oct 2026 17:37:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 93C2180E0C
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791826654;
+	b=Oe6DrQFQgC0TC0RU2cx90Z0Lqhp0GfX0itpKIDHbYsHO62vi18NLS/FjKeNq+ItsepOS
+	 1bWD135HbF4nFponFY3cyJA+vrUBTDjs7PtRujiU+O8ESSTYGdSBF4Q6UoHTwPXKQl9rq
+	 kacDAWfLVI1mroRhG7EFpWKvits4oqYWtoPmVY4ckJ2lbonH8aPLYb4qwPTCUHO54/PEz
+	 0A5sS6KxF+LMIbwriZQzo5vj8B7R6JZn5Ek4uJ0m9ONpGqmtODCXY31KIqWmZRJwI9VYS
+	 yO+kraove4S+Aki89IM0HXfEI+NJvJaNDeeGzbKlYxLv+ne4kRm+CneR6UJsPlZR02A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791826652;
+	c=relaxed/relaxed; t=1791826654;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=PC9rLfORlBTlP0+RD3oiA9zopH5BkTxUSbJQueW6GR8=;
-	b=B1gPtc2+8dJKWWt2LeR3pnw5dZea1Ao8pX3RjAIRBqJAdYjP8+lMtAhKvYPnolkr4++v
-	 gR6ZqdlMortoscP+sjDC9zc6ZURgyNSyUGdk8LdWr7JETRNF6GS8Y3sluIA5iGbYIJa1y
-	 ePMmAfALsqBzTtIUpldKzzuNqYQeO2zr7P8eUtYvmU7OQAy9BpvwUg6AUa+q+uqzEa5FS
-	 dZKiw+HKxb0VWqerqTzukbPihpLdvOqz3lLDddTuQAGG5A25D4JfToJ5Wz2mwbRktoyv4
-	 bMUGd1Shgr4BtRix+VX5148pWR2YSXaX50i3m17RZ3D0gBT+Ud6wdvDfmJx3EIUw+tg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=r7LEV8ZG;
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:Date:From:To:Cc:Subject:
+	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
+	 In-Reply-To:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=yveN54QKKOlIfXo3OCNlLgsexRzNt+/0izLm+DLjvK4=;
+	b=e+dP4Q7Rt7fht4YujQMtFfvqYO47YONT//lmYoUqMyoaquTvaO1ELQBCXWyJnoruagOF
+	 w3CkDu0mUqeh87T+H6pdsTMhs00WyohBnHrFblNcPhvBZV+4WN75dqRg6V61d6w6ETGo7
+	 EGcovL67yQB+2vSA4gnBbiVZWuO7AJ5kh79zPKLhExmF7r/7vM8F9aqDr/R5HooV33spD
+	 j0l1usXmIXg7m+OrEvyIMP4BRTSBmfHFpk2+SUa9XvTZr2qY1v5GxzpVbDS+k9VYN1ORn
+	 0DExZ9Xroy8qdhTGX3MdalnOtegzGC8LQ6ImrrySaPPCHX6QKEFpBQTfmkHERau18wA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791826652;
-	bh=PC9rLfORlBTlP0+RD3oiA9zopH5BkTxUSbJQueW6GR8=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=NTH51A5bMI3AdCsvO1fXAMueBxiunY4F8kIya7kNtctmgLe3qqIBHVal84DuNs79E
-	 phlxhB/C5aadRuHJGrUG5ddIna3vjib1kEKOE/aDjtT25t2AMhZGUvvtNXDv2Rf1kj
-	 WBJcWZF1dtiWwoNxDyIw6HQdvzetIKziE1OoqZQo0eKy0Ns53XIbnYqd8PnGND086X
-	 bgXFgImk1ca6AWmbk3BLzonJpsc8whDQSLxJuUJ1hByzZtIZZUsaBciLgVZ8jiPV/T
-	 hAy4fIFelb4vywFierI0Yk1H2k9+d0Jlrha1bmesUHVKeMZ3P7jnKX/Gppod2jiWYi
-	 JeEy0aAqi0Kpg==
+	d=lists.u-boot-project.org; s=default; t=1791826654;
+	bh=yveN54QKKOlIfXo3OCNlLgsexRzNt+/0izLm+DLjvK4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=GcxEAvGlRln1y2cRnDc6rbazPksXV7sKbT6HaypXARlJR6bE+P68OO2GC7BowgGO8
+	 Q0B7oc2w7xekk25oWf8kWqgyAkziGVIsi0YRiEXreXkwEEKVLNKWApyDuuyShhywFZ
+	 aCDfWXu0DFT2pakXXqQ6QEpj2uyEoxqmTlCHePE8WbrV6SzMnxczIRssUIbou7nYDE
+	 P+h31Du9RAe3aX6QRDwVKDbhoyUoUOgo8qHEHtjoZZfTS5d4UX+Q7MNehcwlnZkbsl
+	 zKPG8f6UoIJgR1G+8ap6xf+i7QAQtFZd2VFxnxrduyYXaxmdVhsc5aiJvHzD9JdImV
+	 WUtAeC9wj1j/g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B1589605AF;
-	Mon, 12 Oct 2026 17:37:32 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id DED29380
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:27:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 93C2180E0C;
+	Mon, 12 Oct 2026 17:37:34 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 36F22179
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:39:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C506D60680
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:27:51 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1BF0B40577
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:39:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NaFeDg0odZs5 for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 16:27:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EDD2A605D1
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::1332"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791822471;
- b=A3bLZ6TcbTLrxNO1jmcKHP8BwAqkShXt5sBXszGZc/bN3Qph+SFm/fAvEPETZybITp9y
- gHQrujeCIpMCW8nVifrXI514I0yNQ/pD82jZMjDn0MpgbIzE+0tgh+zjDko7aeET88Mcj
- JhLYzOPcGeG9mSh9ayJoKyUm6TnTI+4n7zQt9rQs9wEp1wgvBNBYYhE41YgLai1W8cR1A
- 4BqyXIy7nnk0NF5BgqFhXAIQ/1Z83/trXtpeK5PRFR94OTnjBHuGv/WE6VoJfDdbTS272
- PUScccQPJuJG0SVt0mF0aOI6F8VFUkWfGHxmCETeOoSMYoGLB5vpg2kqsA7SrcOP+JA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DLCpMNR2ySVT for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 16:39:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 273DD40412
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791823163;
+ b=T9xzHNvJTddoEykqsmul70itGM0B8Y3pemwN9Y13m32aijmeyP9xgt6Cgonhia/Im7m+
+ fOGS7ipI8+U1mO4AN27sGvnx08QJ9NN/oAdANx2uPOiSAAgVY7zjDMUZ3RlyefHs6Ee8z
+ EUUnrbzZzaajxvTBL21gx2mR/B1gOIONF4ozoAjV9NBzkNqEunt6/gUiIJtRYKVawVlxg
+ uy7o04iho7RUcU2oYwN5oeEJjPpkwJHqbKZRG63tWcb0YeOmFVH5V0trV1Jw5XdkvZHhl
+ erlls9+Lr44Q8XX51uqJ6QguLqNnaR1av7gAr3IWY2TWZUJcXdXsAVvZTDGnWNdM/Tw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791822471;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=PC9rLfORlBTlP0+RD3oiA9zopH5BkTxUSbJQueW6GR8=;
- b=nMLm0ccRgNhJNehjtnDDWkMOuS3fYa0yDv4Aopt3pGZtPVVXEfnjItwiLM1lefMfRTZ4
- H0UK+/U9kLKGWhKCTRbxzrH/PIL7M21nkUt0aQ1iEo6Gi9aBSCUmpT/z4Lmq2ZrZJKc55
- nsLmMkGDuJ3Z7crlqDeJmnEDU2xsWipfqNK0xla3cuY7R3rwXKUBO/ewolzKahSVbsVGJ
- r2Ld47eki+jSjYUn5PsuQXrQn9kNapBsjiSfjpvfmaCKF5qBMaq21eRFjkG6KDUxpFExb
- MYESwtNvmaFv7uv7ejBB3rKCNPPhwjT8puPypYfBqTDPvoNBLV+xFeAUUJmsIkCkLpg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=r7LEV8ZG; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::1332"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1332; helo=mail-dy1-x1332.google.com;
- envelope-from=lucienzx159@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=r7LEV8ZG
-Received: from mail-dy1-x1332.google.com (mail-dy1-x1332.google.com
- [IPv6:2607:f8b0:4864:20::1332])
- by smtp3.osuosl.org (Postfix) with ESMTPS id EDD2A605D1
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:27:50 +0000 (UTC)
-Received: by mail-dy1-x1332.google.com with SMTP id
- 5a478bee46e88-3514e7cbbbaso5226278eec.1
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 09:27:50 -0700 (PDT)
+ c=relaxed/relaxed; t=1791823163;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+ To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-GUID:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=yveN54QKKOlIfXo3OCNlLgsexRzNt+/0izLm+DLjvK4=;
+ b=OZuXy0Jf+ZOo+mtyUA7hO3t/Kj3FtukOJc9FraUxL6HZGhjOvBYw6UVFe8FTXUbrxcYV
+ ST3IYfRc/el9nCepIS2sLASmyy2OOkuk4kg7qNmwety8XVTswcPW8OxrdSL0GGWKkMhnR
+ 3qIsBsShM5T4kImp1KeHUeyfJT6JfOMebEhQJZtWeSLlgL3weHRJ5v214kW22CQvRyJj9
+ v+5PtJP2lovf23bZDD1L1BlEvfrfI/Gq7klYUCidy6S+JUDFmtYyZ1LYjjtLh6Z7ydNi4
+ QpSNxoPCiiKYHw4EbsBh/yUFQoE94DeapYCpNS326s/xC/3CLSc9F6OEQGiUKoVucAg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=oss.qualcomm.com;
+ dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
+ header.s=qcppdkim1 header.b=LXFhIeGi; 
+ dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=gBLI5d0h; 
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=pavan.kondeti@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=LXFhIeGi; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=gBLI5d0h
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 273DD40412
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:39:22 +0000 (UTC)
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69CFexKZ3163182
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:39:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=yveN54QKKOlIfXo3OCNlLgse
+ xRzNt+/0izLm+DLjvK4=; b=LXFhIeGiYrKu9pRmaU+csJPcpFLNzAyxUQ+oG87Q
+ bxxrZNi2KuzeoMgE+Hu5Rcft5uaz1jFPBSo2srkdhMD1gzS1Bsr4DoIvqZitUEHk
+ DHznWRbXAEWdMxUa+ctI0/MklY0gUcfXAm0PoqBimlyMGdyd9tGevuBYq+Weosad
+ urAj+l2d/I1r5q1CfsvqLBrRIQ/UNb47QSrFOG/Ueg3QGnNP7hM9An5q+5uBlF7H
+ dEJPfoaB49eMJyz3shqd94NYyP41mrdEc1N4CdVRKKStdsfWn6vAhIxJhHHv/haj
+ 3/IfGL/85Tusbr4ok5uGsN239mT8Qz597mIIowKkjVnHyA==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
+ [74.125.82.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8sd1tyv9-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:39:21 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id
+ 5a478bee46e88-359b81ad4e8so2219252eec.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 09:39:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791822470; x=1792427270;
+ d=oss.qualcomm.com; s=google; t=1791823160; x=1792427960;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=PC9rLfORlBTlP0+RD3oiA9zopH5BkTxUSbJQueW6GR8=;
- b=r7LEV8ZGDbwmiBTIRWcJnjfL9ktWejbpmW/20P/BPcjQ8rs64LdrXzZNLBOP9INplg
- yCbIaN00RuwjemFkuD9ijb9J0ZT1qGzCbQWNYpiimgJqN3fMMkVryqez8ozFxqH4pKVm
- WSsRO8Jxqn7s4bXfaZph4L4SZsWUZnIbdv8E0v3EQLKcJ0YVz5lT9p5XhZ1nw4BXiZ+c
- 4AqPfytmvKeLmuWsJ0fQU2ECh8orT/AbeUakut0RN6xhX8fpd2A1eLNZLqVsY+T6eZeN
- 0gzaheqheEWtVThYC2m5vUejxeBaFjhR6UIu9GU9y7/6xlyuIXiY1FBsfQOrfcIz9vIL
- GZHQ==
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=yveN54QKKOlIfXo3OCNlLgsexRzNt+/0izLm+DLjvK4=;
+ b=gBLI5d0hdrpUZGOk5UDzmeNGk90jeyvCMofOT6NV8F2fJpGUMvWuPnue90roSAl3GJ
+ ReY7g/qT8E/1Bvq6zguNNvyXNbZUv+g4l7MthTLUJZBt6TqhWgWEVtJUQYv/jtypZx+Y
+ 4YWz0ZJQfxxh3AP9abHoopeKv/S00r0ZKsS0I524V4ODaovSkDFnG/NI+tWpSNSR3WNj
+ yxeTsVDG1ReRUF+RNlt0GNBpWwaSEPSWuE8V+q7WEtclJg3xnQCd/28PPCVCGcQGbOTe
+ qUxW2lMk6rUR0aPF7YXfEfs+9Me0aje2NCP1iMmkPFgS8wVUKRglwBd0LhAqBt4gw7oE
+ c3Qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791822470; x=1792427270;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=PC9rLfORlBTlP0+RD3oiA9zopH5BkTxUSbJQueW6GR8=;
- b=irWB24UI7AYhe4kWhSbdgCNwMjZ/qU3qwXTMOJw65un43GpW9rNA4vG+BYl3/qd81M
- gIpcSkzHyJKqFlpQwf4Fh2HgMF7LTE4280BKWMj/8ZWq8IO8wJ9PNqifm/Jn7nExRPvk
- NFsWAuz1Gah8Ulq5l4vwnv3/OO8EXk6kfNroot8wdZic7KeFKf/HulC6KQSScMQHuD8J
- +JxSMgugKAOfAlSjkJdeUdv419vQtagPthh04Am49FXZ2h6iYJ8eRfPgYkuNgjvEegbY
- wkSTFY8J2GQHzpZXjGwpvRXFvUNmuoBMJypCNAfGtSNtqRBK9TJaAQjUZ908wAO+/MjR
- hyJQ==
-X-Gm-Message-State: AFq9FYL1Qg6kY599lMuNjPm1uOTdwChW5I8LtyuAtB6jkkZ1LDmTIebi
- qH+h38IgDsjmsqd2iq7H7o0GQ4i4+ec1/m6fjaJeaQQCEDamZsL8jaDE2eKR6A==
-X-Gm-Gg: AYBFou0PJ6UeQKXolP6eSisiHNRK8kGyh2jY+xEc+e8+Wldw1O782sJEuh/99Ebrfec
- +SNEyXqMFANnObXwmW8r+miS828udaiSICeaBb6AfYDaCAYxtjbzZIWpTfnxHFLqEcAfMErM3th
- yaaPdyhB+PP9Db6LiC6w71NZwJbaUaHbmrtWIihfU6QdQKfpjuFPAbOOyXMbZf9RW0GAie/fdOu
- Ay7hme2hOl/AltXVrUFR4YzPeDw2GAbT31JBOeYkBLQtNa3J06T2LF2pRsVFWfxmrYgvq7FJTth
- 7iveeBmtkXAP2RoKjLiRNhZYB3N4UeMyMrw+1FR6ajs3ZLqG0DU7nVL+iBnHVhACV7WIvo1VQIW
- NHLUUYO/v9p+vHEmvUhW73+DJdHTZkT4msLfy83uFgMPZasY8vwSj0T7HEcjGC2OrcxbGhpO1+k
- PgzyEeTwORE0ttD3Zm8b7REW17YIwDvk6cI47fvjITOuOCRgnj/TvvFTDxFxGLn6bivy4IRYvCO
- 6CTwCZRTQtN+x8JhpfJ3BsDkeadZFpIPS6c79FzmI6yaUvB1uByKJ7Vxh3DRTDGSNxSIiboS+hC
- bs0l
-X-Received: by 2002:a05:701b:2512:b0:149:1feb:6da4 with SMTP id
- a92af1059eb24-16a6250bc3emr13248747c88.32.1791822469476; 
- Mon, 12 Oct 2026 09:27:49 -0700 (PDT)
-Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-169a4429603sm29760202c88.17.2026.10.12.09.27.40
+ d=1e100.net; s=20260707; t=1791823160; x=1792427960;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=yveN54QKKOlIfXo3OCNlLgsexRzNt+/0izLm+DLjvK4=;
+ b=ZfvXq1tgYN2JZzctjbBccUlw4OS4rPQou7cwxmPpvjDCmH0lWRxsmZ17+0LBfgi2sL
+ CP9wFcrkzs9KIrmQAwsaDSMkcyKhBJRnuT1ycce1dGauSEwacdLudlawE4aT5+3uEEU3
+ hgQ2ehdJJowYppQsGuqDjxFusdhZQd3gTy7BCOO5U52eHpxNAMqgPhkkl5aXCKw1n9/9
+ Mq/C5SisYPNvQheglM0wko2Tw97M6soBKRUPTNRZqwasV49J/z9yF/ML3S6gt3baJfkL
+ JYQC1y1qdNQ5vGcOGWlcJ5mfNmhpY61al03Knn+kCuUUiElxs2T0eH6hSjmMyLPLbbpI
+ aJBA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBypzDF0LoAUxBF3I12S9uw3TAJNiRhH0sp9B6aD96+AMU6+OVxsFITjUSM6u/xzXYdvHSzWDRo=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJoa7Dafqs+Z9RC5mwqooKmHINWcReMFQ1RA7qvwjNIWbxJZjCE
+ h2Uyld7sYt6frnXlzQLyU3/7M+hb0KLAoFWqsIGIOorlNqqay3/8SHi9Tqid/iVo2ZS8h8qBGxV
+ 8uDLTkqNkaPyA+Mx9WgeZ6js6nEdcrtaon4jLkUCUwxczYLBong2akhU4FPaUvOvPK/TTV28cP9
+ e/O14=
+X-Gm-Gg: AYBFou2XIoMWfdkMNeDJ+IbHUasXcqAC9j3HnwaF05H7qgMDfhb1kXbrUMKaewDZ0KN
+ M5XpdyxKm0hiGfI9oetK2RJT25mv6GH1J5DM4RstpmH+Yl0rz/4TM7UtHX14IuBu062qmCrxXXG
+ oxFlqnFSrvGucKcctC2H68MMuIzYiTGt4VIBm4FuTdSM6BaBlWYKRwQ4AwAviavCdUhbF3ozbIi
+ Af9+gYYVh8ChwjgYs2tvP4JH9aGOxJi2MBuTxl0ni1shGYGrgkvY6Y0zRLii2op5SQMO0sBhJWg
+ c8xBuGQmBcEpFAKWKwnnK8wU63EqUfmKT2zQE8MHqp1sZz7u0GDzBFjCGk9J8Kb9rioE3PFfTOw
+ oaVzlwYEeu9PkcXDr2murgUoHZKYVg5NS
+X-Received: by 2002:a05:7301:6e98:b0:353:599e:4f8f with SMTP id
+ 5a478bee46e88-3537e013215mr15406428eec.29.1791823159971; 
+ Mon, 12 Oct 2026 09:39:19 -0700 (PDT)
+X-Received: by 2002:a05:7301:6e98:b0:353:599e:4f8f with SMTP id
+ 5a478bee46e88-3537e013215mr15406392eec.29.1791823159322; 
+ Mon, 12 Oct 2026 09:39:19 -0700 (PDT)
+Received: from hu-pkondeti-hyd.qualcomm.com ([202.46.22.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-3537cacb61asm37114529eec.21.2026.10.12.09.39.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2026 09:27:49 -0700 (PDT)
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-To: u-boot@lists.u-boot-project.org, trini@konsulko.com,
- ryder.lee@mediatek.com, weijie.gao@mediatek.com, chunfeng.yun@mediatek.com,
- igor.belwon@mentallysanemainliners.org, dlechner@baylibre.com,
- jstephan@baylibre.com, GSS_MTK_Uboot_upstream@mediatek.com
-Cc: lucienzx159@gmail.com,
-	frank-w@public-files.de,
-	daniel@makrotopia.org
-Subject: [PATCH v1] clk: mediatek: mt7986: drop duplicate dt-bindings header
-Date: Tue, 13 Oct 2026 00:26:56 +0800
-Message-Id: <20261012162656.6918-1-lucienzx159@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Mon, 12 Oct 2026 09:39:19 -0700 (PDT)
+Date: Mon, 12 Oct 2026 22:09:13 +0530
+From: Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>
+To: Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>
+Cc: Tyler Baker <tyler.baker@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH v2 3/4] board: qualcomm: add Arduino VENTUNO Q support
+Message-ID: <d20bc0fb-ee72-490d-a6f0-d79c566a9881@quicinc.com>
+References: <20260928-monaco-ventuno-q-v2-0-0e046c8242be@oss.qualcomm.com>
+ <20260928-monaco-ventuno-q-v2-3-0e046c8242be@oss.qualcomm.com>
+ <3f4648b3-ccee-466b-b209-fb429aaee803@quicinc.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3f4648b3-ccee-466b-b209-fb429aaee803@quicinc.com>
+X-Proofpoint-ORIG-GUID: lseAqv5NEkih9-sdxb73RvB1ojOrWSlE
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA2NiBTYWx0ZWRfX6FMCi649Nii5
+ QP77kcUfa+CvW0SLVgZFFqmYsWQqfT1MAbZGN1B5+D6pRozuOqtCNub+LBzKPblVFazw2mC08mm
+ A0vxug6kTfk/atkSuWHaGJP6nKFiHBg=
+X-Authority-Analysis: v=2.4 cv=QtHLTlyd c=1 sm=1 tr=0 ts=6acd0d39 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=aYJjxoplV0FXhZmbNCQA:9 a=CjuIK1q_8ugA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-GUID: lseAqv5NEkih9-sdxb73RvB1ojOrWSlE
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA2NiBTYWx0ZWRfXwoCBpMy6JOl7
+ LvvYND5abnSO7HD4ekWImKELfZUp2fXi9Dpf00ZZji1hYdwVvNNL9f46F2NeTHDa7WeL4f20hme
+ Y/BHyqbeUddHpXqBGs/RTPb2JkBhsP/XazRRaG6ukYclhmh+99lSZgfPKDsjgyvjlmOQrXv2U3l
+ W/Js+ouYWeFYZs/9O1MgGK1E2YPoulegRqnekYwpuKEkt/kCqlPmBzkU8kxpznenu2A2G5YrZoS
+ E5MBViN3g8MAEBYcxT6yeFCofe8s+t7ipsXHWUYTdkjVd89mZvpzjoby14oJt5OChKztCtZ4LSs
+ KoOxzke/I5blxFSRXwThE9XHR6p8VwvKpwVljQpOlNkTwy7IBj9nfqBZBVat4cD+JqlJMXXXbpf
+ x9UTZycHtP4WrHg5O27OsiCOb13/6fUg2cYrRcu2HCYvqrUmqj7Q3yu28441Ttxa26RSuINKeqn
+ GqfhgWYfepmn6bceUKg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-12_05,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 malwarescore=0 bulkscore=0 clxscore=1015
+ lowpriorityscore=0 suspectscore=0 impostorscore=0 phishscore=0 adultscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610120066
 X-Mailman-Approved-At: Mon, 12 Oct 2026 17:37:26 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -178,281 +248,86 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: "Lucien Jheng" <lucienzx159@gmail.com>
+On Mon, Oct 12, 2026 at 09:45:41PM +0530, Pavan Kondeti wrote:
+> On Mon, Sep 28, 2026 at 02:06:53PM -0400, Tyler Baker wrote:
+> > Add a configuration fragment and memory map for the Arduino VENTUNO Q
+> > (QCS8275), running U-Boot after TF-A and OP-TEE.
+> > 
+> > Boot on a Cortex-A55 and exclude memory reserved by the boot firmware
+> > from the RAM map.
+> > 
+> > Assisted-by: Claude:claude-opus-5-5
+> > Signed-off-by: Tyler Baker <tyler.baker@oss.qualcomm.com>
+> > ---
+> > Changes in v2:
+> > - Renamed from "board: qualcomm: add Arduino VENTUNO Q config fragment".
+> > - Reworded the commit message and comments.
+> > ---
+> >  arch/arm/dts/monaco-arduino-monza-u-boot.dtsi | 26 ++++++++++++++++++++++++++
+> >  board/qualcomm/arduino-ventuno-q.config       |  5 +++++
+> >  2 files changed, 31 insertions(+)
+> > 
+> > diff --git a/arch/arm/dts/monaco-arduino-monza-u-boot.dtsi b/arch/arm/dts/monaco-arduino-monza-u-boot.dtsi
+> > new file mode 100644
+> > index 0000000000..e6ba8ba486
+> > --- /dev/null
+> > +++ b/arch/arm/dts/monaco-arduino-monza-u-boot.dtsi
+> > @@ -0,0 +1,26 @@
+> > +// SPDX-License-Identifier: BSD-3-Clause
+> > +/*
+> > + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> > + */
+> > +
+> > +/ {
+> > +	/*
+> > +	 * Boot firmware regions left out:
+> > +	 *   0x80000000  SAIL
+> > +	 *   0x908c0000  DDR training
+> > +	 *   0x90c00000  SAIL mailbox and OTA
+> > +	 *   0xd0100000  TZ carveouts and DBI dump
+> > +	 *   0xdb100000  TZ statistics
+> > +	 *   0xdb200000  CPUCP
+> > +	 */
+> > +	memory@80000000 {
+> > +		device_type = "memory";
+> > +		reg = <0x0 0x90000000 0x0 0x008c0000>,
+> > +		      <0x0 0x908c1000 0x0 0x0033f000>,
+> > +		      <0x0 0x91100000 0x0 0x3f000000>,
+> > +		      <0x0 0xd4400000 0x0 0x06d00000>,
+> > +		      <0x0 0xdb300000 0x0 0x24d00000>,
+> > +		      <0xa 0x00000000 0x2 0x00000000>,
+> > +		      <0xe 0x00000000 0x1 0x80000000>;
+> > +	};
+> > +};
+> > diff --git a/board/qualcomm/arduino-ventuno-q.config b/board/qualcomm/arduino-ventuno-q.config
+> > new file mode 100644
+> > index 0000000000..a8041cbe9d
+> > --- /dev/null
+> > +++ b/board/qualcomm/arduino-ventuno-q.config
+> > @@ -0,0 +1,5 @@
+> > +# Arduino VENTUNO Q; use with qcom_defconfig and tfa-optee.config.
+> > +CONFIG_DEFAULT_DEVICE_TREE="qcom/monaco-arduino-monza"
+> > +CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+> > +CONFIG_BOOT0_QCOM_BOOT_CPU=y
+> > +CONFIG_QCOM_BOOT_CPU_MPIDR=0x10000
+> > 
+> 
+> IIUC, Linux makes CPU with MPIDR ~= 0x10000 as CPU#0. This is
+> conflicting with the `reg` mentioned at
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/qcom/monaco.dtsi#n53
+> 
+> Do we see any issues with that? Also, what would be CPU#1 in Linux?
+> of_parse_and_init_cpus() indicates that CPUs are enumerated in the order
+> mentioned at cpus { } which means physical CPU#0 becomes logical CPU#1.
+> 
+> One immediate side effect of this is that `capacity-dmips-mhz` value
+> will go wrong which can result in suboptimal scheduler / cpufreq
+> decisions.
+> 
+Looked at Linux Kernel arch/arm64/kernel/topology.c closely, I don't
+see `capacity-dmips-mhz` values getting messed up since
+of_get_cpu_node() uses arch_match_cpu_phys_id().  Sorry about the
+incorrect note in my previous email.
 
-include/dt-bindings/clock/mt7986-clk.h duplicates the binding header
-that is already provided by dts/upstream/include/. Since the U-Boot
-include/ directory precedes dts/upstream/include/ in UBOOTINCLUDE, the
-local copy shadows the upstream one regardless of CONFIG_OF_UPSTREAM.
-
-Remove the local copy so that the upstream header is used. The only
-symbols used by the clock driver that differ from upstream are:
-
- - CLK_TOP_MMPLL_U2PHYD is named CLK_TOP_MMPLL_U2PHY upstream, with the
-   same value (14).
- - CLK_APMIXED_NR_CLK is a sentinel not defined upstream. Use
-   ARRAY_SIZE(fixed_pll_clks) instead, which is also 8, following the
-   ARRAY_SIZE() pattern used by clk-mt7987.c and clk-mt7988.c.
-
-No functional change.
-
-Co-developed-by: Frank Wunderlich <frank-w@public-files.de>
-Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
-Signed-off-by: Lucien Jheng <lucienzx159@gmail.com>
----
-
-Notes:
-    Tested on a Banana Pi R3 Mini (eMMC) using the downstream devicetree
-    arch/arm/dts/mt7986a-bpi-r3-mini-emmc.dts from Frank Wunderlich's
-    U-Boot tree, together with the upstream header
-    dts/upstream/include/dt-bindings/clock/mt7986-clk.h.
-    U-Boot boots normally and TFTP transfers work.
-
-    checkpatch warns that DT binding headers should be a separate patch.
-    That rule targets the Linux binding workflow; here the header is only
-    a stale local copy of the one in dts/upstream/. Removing it and
-    updating its users in clk-mt7986.c must happen together, otherwise the
-    tree does not build in between, so this is kept as a single patch.
-
-UBoot init log with upstream dt-bidings header:
-U-Boot 2026.07--gedb017c49881-dirty (Oct 13 2026 - 00:14:37 +0800)
-
-CPU:   MediaTek MT7986
-Model: Bananapi BPi-R3 Mini
-DRAM:  2 GiB
-Core:  46 devices, 22 uclasses, devicetree: separate
-MMC:   mmc@11230000: 0
-Loading Environment from MMC... Reading from MMC(0)... OK
-In:    serial@11002000
-Out:   serial@11002000
-Err:   serial@11002000
-Net:
-16384 bytes read in 2 ms (7.8 MiB/s)
-131072 bytes read in 9 ms (13.9 MiB/s)
-mtk-eth ethernet@15100000: MD32 firmware version: 24112802
-eth0: ethernet@15100000
-Hit any key to stop autoboot: 0
-
- drivers/clk/mediatek/clk-mt7986.c      |   6 +-
- include/dt-bindings/clock/mt7986-clk.h | 178 -------------------------
- 2 files changed, 3 insertions(+), 181 deletions(-)
- delete mode 100644 include/dt-bindings/clock/mt7986-clk.h
-
-diff --git a/drivers/clk/mediatek/clk-mt7986.c b/drivers/clk/mediatek/clk-mt7986.c
-index e4abddbd515..862e0ce912f 100644
---- a/drivers/clk/mediatek/clk-mt7986.c
-+++ b/drivers/clk/mediatek/clk-mt7986.c
-@@ -78,7 +78,7 @@ static const struct mtk_fixed_factor top_fixed_divs[] = {
- 	PLL_FACTOR(CLK_TOP_MMPLL_D8, "mmpll_d8", CLK_APMIXED_MMPLL, 1, 8),
- 	PLL_FACTOR(CLK_TOP_MMPLL_D8_D2, "mmpll_d8_d2", CLK_APMIXED_MMPLL, 1, 16),
- 	PLL_FACTOR(CLK_TOP_MMPLL_D3_D8, "mmpll_d3_d8", CLK_APMIXED_MMPLL, 1, 8),
--	PLL_FACTOR(CLK_TOP_MMPLL_U2PHYD, "mmpll_u2phy", CLK_APMIXED_MMPLL, 1, 30),
-+	PLL_FACTOR(CLK_TOP_MMPLL_U2PHY, "mmpll_u2phy", CLK_APMIXED_MMPLL, 1, 30),
- 	/* APLL2 */
- 	PLL_FACTOR(CLK_TOP_APLL2_D4, "apll2_d4", CLK_APMIXED_APLL2, 1, 4),
- 	/* NET1PLL */
-@@ -227,7 +227,7 @@ static const struct mtk_parent u2u3_sys_parents[] = {
- };
-
- static const struct mtk_parent da_u2_refsel_parents[] = {
--	TOP_PARENT(CLK_TOP_XTAL), TOP_PARENT(CLK_TOP_MMPLL_U2PHYD),
-+	TOP_PARENT(CLK_TOP_XTAL), TOP_PARENT(CLK_TOP_MMPLL_U2PHY),
- };
-
- #define TOP_MUX(_id, _name, _parents, _mux_ofs, _mux_set_ofs, _mux_clr_ofs,    \
-@@ -526,7 +526,7 @@ static const struct mtk_gate infracfg_gates[] = {
- static const struct mtk_clk_tree mt7986_fixed_pll_clk_tree = {
- 	.ext_clk_rates = ext_clock_rates,
- 	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
--	.fdivs_offs = CLK_APMIXED_NR_CLK,
-+	.fdivs_offs = ARRAY_SIZE(fixed_pll_clks),
- 	.fclks = fixed_pll_clks,
- 	.num_fclks = ARRAY_SIZE(fixed_pll_clks),
- 	.flags = CLK_PARENT_APMIXED,
-diff --git a/include/dt-bindings/clock/mt7986-clk.h b/include/dt-bindings/clock/mt7986-clk.h
-deleted file mode 100644
-index 5da260386fd..00000000000
---- a/include/dt-bindings/clock/mt7986-clk.h
-+++ /dev/null
-@@ -1,178 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (C) 2022 MediaTek Inc. All rights reserved.
-- *
-- * Author: Sam Shih <sam.shih@mediatek.com>
-- */
--
--#ifndef _DT_BINDINGS_CLK_MT7986_H
--#define _DT_BINDINGS_CLK_MT7986_H
--
--/* TOPCKGEN */
--
--#define CLK_TOP_XTAL			0
--#define CLK_TOP_XTAL_D2			1
--#define CLK_TOP_RTC_32K			2
--#define CLK_TOP_RTC_32P7K		3
--/* #define CLK_TOP_A_TUNER		4 */
--#define CLK_TOP_MPLL_D2			4
--#define CLK_TOP_MPLL_D4			5
--#define CLK_TOP_MPLL_D8			6
--#define CLK_TOP_MPLL_D8_D2		7
--#define CLK_TOP_MPLL_D3_D2		8
--#define CLK_TOP_MMPLL_D2			9
--#define CLK_TOP_MMPLL_D4			10
--#define CLK_TOP_MMPLL_D8			11
--#define CLK_TOP_MMPLL_D8_D2		12
--#define CLK_TOP_MMPLL_D3_D8		13
--#define CLK_TOP_MMPLL_U2PHYD		14
--#define CLK_TOP_APLL2_D4			15
--#define CLK_TOP_NET1PLL_D4		16
--#define CLK_TOP_NET1PLL_D5		17
--#define CLK_TOP_NET1PLL_D5_D2		18
--#define CLK_TOP_NET1PLL_D5_D4		19
--#define CLK_TOP_NET1PLL_D8_D2		20
--#define CLK_TOP_NET1PLL_D8_D4		21
--#define CLK_TOP_NET2PLL_D4		22
--#define CLK_TOP_NET2PLL_D4_D2		23
--#define CLK_TOP_NET2PLL_D3_D2		24
--#define CLK_TOP_WEDMCUPLL_D5_D2		25
--#define CLK_TOP_NFI1X_SEL		26
--#define CLK_TOP_SPINFI_SEL		27
--#define CLK_TOP_SPI_SEL			28
--#define CLK_TOP_SPIM_MST_SEL		29
--#define CLK_TOP_UART_SEL			30
--#define CLK_TOP_PWM_SEL			31
--#define CLK_TOP_I2C_SEL			32
--#define CLK_TOP_PEXTP_TL_SEL		33
--#define CLK_TOP_EMMC_250M_SEL		34
--#define CLK_TOP_EMMC_416M_SEL		35
--#define CLK_TOP_F_26M_ADC_SEL		36
--#define CLK_TOP_DRAMC_SEL		37
--#define CLK_TOP_DRAMC_MD32_SEL		38
--#define CLK_TOP_SYSAXI_SEL		39
--#define CLK_TOP_SYSAPB_SEL		40
--#define CLK_TOP_ARM_DB_MAIN_SEL		41
--#define CLK_TOP_ARM_DB_JTSEL		42
--#define CLK_TOP_NETSYS_SEL		43
--#define CLK_TOP_NETSYS_500M_SEL		44
--#define CLK_TOP_NETSYS_MCU_SEL		45
--#define CLK_TOP_NETSYS_2X_SEL		46
--#define CLK_TOP_SGM_325M_SEL		47
--#define CLK_TOP_SGM_REG_SEL		48
--#define CLK_TOP_A1SYS_SEL		49
--#define CLK_TOP_CONN_MCUSYS_SEL		50
--#define CLK_TOP_EIP_B_SEL		51
--#define CLK_TOP_PCIE_PHY_SEL		52
--#define CLK_TOP_USB3_PHY_SEL		53
--#define CLK_TOP_F26M_SEL			54
--#define CLK_TOP_AUD_L_SEL		55
--#define CLK_TOP_A_TUNER_SEL		56
--#define CLK_TOP_U2U3_SEL			57
--#define CLK_TOP_U2U3_SYS_SEL		58
--#define CLK_TOP_U2U3_XHCI_SEL		59
--#define CLK_TOP_DA_U2_REFSEL		60
--#define CLK_TOP_DA_U2_CK_1P_SEL		61
--#define CLK_TOP_AP2CNN_HOST_SEL		62
--#define CLK_TOP_NR_CLK			63
--
--/* INFRACFG */
--
--#define CLK_INFRA_SYSAXI_D2		0
--#define CLK_INFRA_UART0_SEL		1
--#define CLK_INFRA_UART1_SEL		2
--#define CLK_INFRA_UART2_SEL		3
--#define CLK_INFRA_SPI0_SEL		4
--#define CLK_INFRA_SPI1_SEL		5
--#define CLK_INFRA_PWM1_SEL		6
--#define CLK_INFRA_PWM2_SEL		7
--#define CLK_INFRA_PWM_BSEL		8
--#define CLK_INFRA_PCIE_SEL		9
--#define CLK_INFRA_GPT_STA		10
--#define CLK_INFRA_PWM_HCK		11
--#define CLK_INFRA_PWM_STA		12
--#define CLK_INFRA_PWM1_CK		13
--#define CLK_INFRA_PWM2_CK		14
--#define CLK_INFRA_CQ_DMA_CK		15
--#define CLK_INFRA_EIP97_CK		16
--#define CLK_INFRA_AUD_BUS_CK		17
--#define CLK_INFRA_AUD_26M_CK		18
--#define CLK_INFRA_AUD_L_CK		19
--#define CLK_INFRA_AUD_AUD_CK		20
--#define CLK_INFRA_AUD_EG2_CK		21
--#define CLK_INFRA_DRAMC_26M_CK		22
--#define CLK_INFRA_DBG_CK		23
--#define CLK_INFRA_AP_DMA_CK		24
--#define CLK_INFRA_SEJ_CK		25
--#define CLK_INFRA_SEJ_13M_CK		26
--#define CLK_INFRA_THERM_CK		27
--#define CLK_INFRA_I2C0_CK		28
--#define CLK_INFRA_UART0_CK		29
--#define CLK_INFRA_UART1_CK		30
--#define CLK_INFRA_UART2_CK		31
--#define CLK_INFRA_NFI1_CK		32
--#define CLK_INFRA_SPINFI1_CK		33
--#define CLK_INFRA_NFI_HCK_CK		34
--#define CLK_INFRA_SPI0_CK		35
--#define CLK_INFRA_SPI1_CK		36
--#define CLK_INFRA_SPI0_HCK_CK		37
--#define CLK_INFRA_SPI1_HCK_CK		38
--#define CLK_INFRA_FRTC_CK		39
--#define CLK_INFRA_MSDC_CK		40
--#define CLK_INFRA_MSDC_HCK_CK		41
--#define CLK_INFRA_MSDC_133M_CK		42
--#define CLK_INFRA_MSDC_66M_CK		43
--#define CLK_INFRA_ADC_26M_CK		44
--#define CLK_INFRA_ADC_FRC_CK		45
--#define CLK_INFRA_FBIST2FPC_CK		46
--#define CLK_INFRA_IUSB_133_CK		47
--#define CLK_INFRA_IUSB_66M_CK		48
--#define CLK_INFRA_IUSB_SYS_CK		49
--#define CLK_INFRA_IUSB_CK		50
--#define CLK_INFRA_IPCIE_CK		51
--#define CLK_INFRA_IPCIE_PIPE_CK		52
--#define CLK_INFRA_IPCIER_CK		53
--#define CLK_INFRA_IPCIEB_CK		54
--#define CLK_INFRA_TRNG_CK		55
--#define CLK_INFRA_AO_NR_CLK		46
--
--/* APMIXEDSYS */
--
--#define CLK_APMIXED_ARMPLL		0
--#define CLK_APMIXED_NET2PLL		1
--#define CLK_APMIXED_MMPLL		2
--#define CLK_APMIXED_SGMPLL		3
--#define CLK_APMIXED_WEDMCUPLL		4
--#define CLK_APMIXED_NET1PLL		5
--#define CLK_APMIXED_MPLL			6
--#define CLK_APMIXED_APLL2		7
--#define CLK_APMIXED_NR_CLK		8
--
--/* SGMIISYS_0 */
--
--#define CLK_SGM0_TX_EN			0
--#define CLK_SGM0_RX_EN			1
--#define CLK_SGM0_CK0_EN			2
--#define CLK_SGM0_CDR_CK0_EN		3
--#define CLK_SGMII0_NR_CLK		4
--
--/* SGMIISYS_1 */
--
--#define CLK_SGM1_TX_EN			0
--#define CLK_SGM1_RX_EN			1
--#define CLK_SGM1_CK1_EN			2
--#define CLK_SGM1_CDR_CK1_EN		3
--#define CLK_SGMII1_NR_CLK		4
--
--/* ETHSYS */
--
--#define CLK_ETH_FE_EN			0
--#define CLK_ETH_GP2_EN			1
--#define CLK_ETH_GP1_EN			2
--#define CLK_ETH_WOCPU1_EN		3
--#define CLK_ETH_WOCPU0_EN		4
--#define CLK_ETH_NR_CLK			5
--
--#endif
--
--/* _DT_BINDINGS_CLK_MT7986_H */
---
-2.34.1
-
+Thanks,
+Pavan
