@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94EC6CA9ED1
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 16:59:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD78CA9ED1
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 17:02:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4DB42606DE;
-	Mon, 12 Oct 2026 16:59:55 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 11A5B405DE;
+	Mon, 12 Oct 2026 17:02:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UwPo2gc13WQF; Mon, 12 Oct 2026 16:59:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5A5E860600
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791824394;
-	b=B8TluOdDkW+FARW72XzKq1Db4Yr78HhlNoOCNAO0MUvxrYhi1WJrH9bW2ybEnkJNAZbd
-	 9gm7XiabfiRg93e5zG0zKFFqeXcHi2GxVEV5/33UzXU03B5QHRIjBxH6XCo9i7gg0I21Q
-	 Ocq/DGygoYs3GDu5u7CIg4QnkTwaTOfYjhD/qwRfiCRTi/QCTeTKQDs5zv34CGjmh9d5x
-	 cy23rpKNXD0XZwi3yGrRNNrrLktTb6ItrKw3Nc+MSC4slU/tMXKQjMytpdStSChOXM5bp
-	 BFHiRLAbhVa2b880foBxSIcBl0xG/sRteOcjUz2/eGk5VRlMhFTzdtw7qBmuLpx/G+g==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id k7xVmIqnlfaS; Mon, 12 Oct 2026 17:02:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 61A7F40553
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791824576;
+	b=HS7nUr9dcWcp3Ry2g5VFanTZRlVhTYYOHrCBudwYLYC8QIUlq2AmkQ4kpPm85J65iI30
+	 OUGH+V5YibfZtAOvF0ju5ifJMLwuzHBHCpT56w7jOVsQB8gdgP1BsUQqlbKrbeWsNSQcV
+	 YZ2k8DMpwfsqTJYFaKPU+bt1iIG+eekn6GHi1HmRqMOYGliMj2s19YGu2C4Q3jdngj5yi
+	 pf7ddNp2AYNSMv248TI/qjda0sszGm+uOFq5R4jPWhFTrzkKxoMKQBegKRU3+qAcmOZel
+	 OJ9l3IfEhWVRIQNWblsoid7EuoN3xPhKninHbnDPuTzSrBFhxGWlc8+4vtaD/e9ZU4g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791824394;
+	c=relaxed/relaxed; t=1791824576;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -33,70 +33,68 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=RivGk72bb3eRnCQ/t0BoknEJ608PLPB5wB1DQ+F7inU=;
-	b=MlYRuZX5yF+07R7s/xg10H4Ka7SA1alJiz762HwBVPw1/JWUIFix7nAMKOqFLOnIOoy1
-	 umpssOQh9aca+U4Og8g9XXmfPmQ7fBuqxgWjWbRqmdt+h0zFWPpvkXLuIErSkKc4CGuhP
-	 64svh4bhpq0p/aEvJZL5yPAP8aqDbfk3VvCWNGKiYe72gYkx9zWK/C9WkidXbb1p5d34n
-	 mn79j8YLkOUcrpxb+TqURALpRvvctNUFjX6aCA2IcBsgN0FCLfaV1vGyFmQCC2y1q996d
-	 +L5kd5k0caEUB/9poEzSg2zSu2h0emIFOmOXpecM7jgmj2NzFPv1oX6mU5z0v1v4iSA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=pass header.from=kwiboo.se;
-	dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=amXhmBgO;
+	bh=R3RrxDxGMuhgZmvHMjPSrddoahGwUJ9xZ6lY8aaNySU=;
+	b=mjhhHSBisbuvEUWr75M0nqt77o0r+HsjCW4/ECEiw4vn9TWEhuyxQoR9PjUsW/XnM6cT
+	 IvZ0FtpEy+h6O9U51Uym66AL6/z1DOV+DBq7Yli4H+ZAbxIWJ7aw9muMuF6EErrFwzNt9
+	 vR/qf7cEyG/ulsi/uNbeL9EaAoZKDt0MsaMG/pvMnYv+QcLhhel0FvO1ClpZQvyO7Sxr3
+	 fAvc5cKIe/8vartZuoimTV1gfSFuNwpffigY84c9EsGAtD15T/qvXGrBGriK6SBCJ4vsj
+	 y4Kc0XfKVVl9rXM28e0pOA4WFcJcI3eDQKonGiTseuh3s5rHTsFwdgp/Lm31YvZct4Q==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791824394;
-	bh=RivGk72bb3eRnCQ/t0BoknEJ608PLPB5wB1DQ+F7inU=;
+	d=lists.u-boot-project.org; s=default; t=1791824576;
+	bh=R3RrxDxGMuhgZmvHMjPSrddoahGwUJ9xZ6lY8aaNySU=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=LEQmu193tu9AgrRZJgwYr8165GbbwZ0ed0jSdD3j/y2Z+U907xhPQP89HhyKfpWTf
-	 75AO37FHE6jkTDgy66L2drXg8BtZMobhG+6pSrCviFSTZpWUc1pllviFVbMX7NOBHq
-	 ELwfAoFqFjjmHI1lLe5NqsdJgLR3HAeHkxxUlFg7KlViYuiAzdj5rlHUGEznyLUhD/
-	 sLJKJKXlSWkjroPUUvBzguXZ1k9wqOBhexZ3mXCABGfMjPAtLokVRPNF1AM347nEBO
-	 CsIgV14LtAL5HOjEFkTwXR5M4aYNWLbDg1OdT3wq3PFUkU2vIHGEPNtkDuNA5Brk4w
-	 M9SzkDOnynFmQ==
+	b=yVQj1ugZymNkOHOX4WAoiUT6eKWtl3dDFYA64vz89J8ryliZN2j5vhO/+jt+Kroh3
+	 jiz1u6NwTnIpXn3b5jWit7baSFebPe2vHTpnBUWmUf3nX/7XB5WBLA8uSpkTI+r0iJ
+	 222vToxpn3ZivK8kLmF7B1yRbQDgCRc8wl9a5ICiH7LY/1QTzHIfvYMnzmY2sSATd4
+	 Nm0MHz9Pgq9Q1bkAgaL/9EqNx90tVsUpNHbi/yCoeD3SqkxfDytrQY1UxmDe9j5PWZ
+	 IQ/bC+8cYdKvrHbrmfL6B58gCfM1X/KGvELvalePx8EQOErHCkN3/ZYLqvkYzIBno8
+	 2W/jFGpMd/chg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5A5E860600;
-	Mon, 12 Oct 2026 16:59:54 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 6030C156
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:59:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 61A7F40553;
+	Mon, 12 Oct 2026 17:02:56 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 633D72E0
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 17:02:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 45CFF60600
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:59:52 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 554C860670
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 17:02:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1wi6o8IWXevj for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 16:59:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2A779605D1
+ id iXqyL8f3TtNb for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 17:02:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7AEE060600
 Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=149.28.215.223
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791824391;
- b=o5iHBBg4WdAzsb1WlW7Kbiab7C/o7CGPKA9TBGY+z4I4Xe+9RaPq0A0cxffcUc0fpv5Q
- WJFtg5ev/+xwdOKHwlUy4yRkCw66iM4oJK/qG64pRCAXh8M6ppt06Kky7zrDeeZ4t0Uwe
- 7ySnska6CAGcp2UxgKD51has2QSXv9n07UNvnqOzLwA9fm/u/uEi0x9Qj9zXCGWnC+AkD
- RSP5J6I7uGeCu2DaizA691lxH7TsPEteqQxdTNiJA+Nztj/JlupaHJKgnjXX4DXr/Rc1e
- HNAsqSMik+AH0wsB2EhQGeeyGeTXSfXnH8uWbPRgD9xoH6I7RzW+aRDOfE00buBmSJQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791824574;
+ b=i6eZaFUfJOoWp+ngdmZCRKaRlvClf5+oUTcLSmZ8lmJBD2Fkk9k2frkiUi8Lb96BkQlf
+ Z+OGkWOI/J3xR03lYHoi1rCYkrVXIY0BTaWqhGEJJ4Db9bUUhuKY9shvJ1Ugo7HFphoiq
+ VvtpbrpiuHY1WuecU4rIgrViZFkRh6TmJTAra3LmCWG+mnBqgkN+qRwSZD0L/7jOnR3jX
+ 4lmz71dnKfQ0Ym+cS4GtxSKD60iXqPp7dy/EjAmHzAwryu6/5xubKuQJHfnLLFiSrLuFd
+ 17dyghTeFnjA0wPlSsqEQhfCB+BqDGPnY14Z39jEHvrx9UPwzr1dVU2Hh36vo5KDqgQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791824391;
+ c=relaxed/relaxed; t=1791824574;
  h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
  X-Forward-Email-Sender:X-Forward-Email-Version:
  X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
  X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
  Cc:References:Content-Language:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding;
- bh=RivGk72bb3eRnCQ/t0BoknEJ608PLPB5wB1DQ+F7inU=;
- b=QRR8DKnb0b4mF47xl8Wr6D150IKFUCQCOGlXylQhBMYZoJmzJxLTXM9PjaIG7LxCTAfv
- 4Q4voW486ZEEZxW8X6qkJEg3FSG9OYYb6W/YrA5p8vdVoxDKD+JLIq3GaTo7E4lVbyP5b
- V9ajYOfCbhDHkmNIOmHA0k2s+ov/gZNp1wen17EIqrzzEecaymCztcPAu4k+YUwX4N3IE
- aLRL7xWvPZ4WhKrO2Jnh6po81tA1Yl0yW8pb6u/jRhXlCp8hz8bZ71jGfu0+mpEzvE76/
- t0c3R9erTzrk2u26xTf9ikwR6srd6mY+PGP9Ho7uKAITLiFb7xlyJswWIjvJSfonn3w==
+ bh=R3RrxDxGMuhgZmvHMjPSrddoahGwUJ9xZ6lY8aaNySU=;
+ b=RMh2QznnY1wPLUxmAEWLmpRE3+QYrX4UvDACyuhrclgvKM/01un8UamMdGl2MPjitEp/
+ KpUD2iRogFzxZNcYYAb4h5QMP1XbhJSOlXv0BMg6juSrRG5CJQFACJehorS2eQHzZBHDB
+ o05JW0N/HOV98is+/dtZi5cePa0Vl/3mY/Thjwg2ojeB9Hi7oIkRxsQRWlBlgBZOIRxfv
+ amO3DXu4eKgx4AG32tmWxZJ1uK+iLD7TbeW4hLI13Ql7zkMAYMjdLen5kHIgzXyF+86Vz
+ Ni/vShK0qoPsPvuO3a5hAF21mU4sLenkHpN90Gfz9aqC7mHZtc30JBpZyv9sXkh18Yg==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=kwiboo.se;
  dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=amXhmBgO; 
+ header.s=fe-e1b5cab7be header.b=ABJy0HcT; 
  arc=none smtp.remote-ip=149.28.215.223
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
  helo=smtp.forwardemail.net;
@@ -106,21 +104,21 @@ Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=amXhmBgO
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=ABJy0HcT
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2A779605D1
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:59:50 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7AEE060600
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 17:02:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1791824389;
- bh=RivGk72bb3eRnCQ/t0BoknEJ608PLPB5wB1DQ+F7inU=;
- b=amXhmBgO0z4NzOxaRM/3kFEP9Xwp/bMUoKWHm/qu6lqj8mYEWN3MUV8ZTYA4JpGZLR6EqXSEf
- tbA6KB7rlxEhrG8l2aUHmuQ8Q/rTUcrxPsr74ZeNEu7xvk2uTexxBeroPH2TaVi6IJO//n+vluv
- qic/oLExz7t3/t9389bqeakJjuTfNyKDBON5VIVQCrc1/5F23LfTEW6m/EFXApIgL5bBjvDbRuF
- C1ZqwX3bQPxCgpAgBLztO0F4pt0tGuopkqOBmAnGWdafIec6Bfe+RhSxntSS0WKD4zXBaiFrvLi
- mqf4TE1gBnc5QShVknBELE2iWa0e0xySlaq1mGfXVgiw==
-X-Forward-Email-ID: 6acd11fc9395ed86e9c48e35
+ s=fe-e1b5cab7be; t=1791824573;
+ bh=R3RrxDxGMuhgZmvHMjPSrddoahGwUJ9xZ6lY8aaNySU=;
+ b=ABJy0HcTz0USJoHWCtOnAfUTZSR+ebT7kuezcnkFxh+i+PYYIDiStHaqpR3ba47wXzlVyxLAs
+ dlfkyqWrQacl3H0DTcew5uSubibavV4inYCaxPfX7Wzxfu7gNWTVRoworca3Mq8MaFo2v1vzt/g
+ FZQS46XOsaPb1Kkd7wt9hbWDHBjLvW9fqdtsIofZBA8gA2z0BEqTBfyivDGFR7y32ONYmwOcf6p
+ 8vPk2p/S0Bd9kMeitQyBSUmhXK8IRRlUIZbtAiIEdt3gm4UCR0uj7C/uJ1nUiUTvqKQgzTJE2D3
+ eeqtsLqew59Dmcz4bWz4VhNKBBqYcYl4M15nkysZbhAw==
+X-Forward-Email-ID: 6acd12b99395ed86e9c4a4d5
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 2.18.4
@@ -128,21 +126,24 @@ X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <b20fed8c-4d7a-40bf-8e23-2c2440499f29@kwiboo.se>
-Date: Mon, 12 Oct 2026 18:59:38 +0200
+Message-ID: <38834bee-36d4-4871-8917-345ce6eb03ea@kwiboo.se>
+Date: Mon, 12 Oct 2026 19:02:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/4] rockchip: Always init clocks in SPL build for
- RK35xx
+Subject: Re: [PATCH 07/10] rockchip: rk3588: Remove unused rockchip_get_clk()
+ helper
 To: Quentin Schulz <u-boot@0leil.net>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Lukasz Majewski <lukma@nabladev.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.u-boot-project.org
-References: <20261012111552.1173161-1-jonas@kwiboo.se>
- <fdb4cc14-505c-4dfc-b6bb-4b13f7c84275@0leil.net>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+References: <20260804214442.2592597-1-jonas@kwiboo.se>
+ <20260804214442.2592597-8-jonas@kwiboo.se>
+ <af324bde-f2a8-4425-8d57-944ae5567c84@0leil.net>
+ <27039afb-0ef4-4cb0-b752-d5083d3cfd14@kwiboo.se>
+ <e7d919d0-c6e5-488c-8728-5607aefdbeb6@0leil.net>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <fdb4cc14-505c-4dfc-b6bb-4b13f7c84275@0leil.net>
+In-Reply-To: <e7d919d0-c6e5-488c-8728-5607aefdbeb6@0leil.net>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -160,69 +161,54 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 Hi Quentin,
 
-On 10/12/2026 6:11 PM, Quentin Schulz wrote:
+On 10/12/2026 6:16 PM, Quentin Schulz wrote:
 > Hi Jonas,
 > 
-> On 10/12/26 1:15 PM, Jonas Karlman wrote:
->> The RK35xx clock drivers typically initializes a few clocks when probed,
->> with some clocks only in SPL. However, the clock driver is only probed
->> on demand, so this initialization is fully skipped when no SPL consumer
->> requests a clock, e.g. when booting from RAM/USB.
+> On 10/11/26 12:55 PM, Jonas Karlman wrote:
+>> Hi Quentin,
 >>
->> Prior to the commit c6bba31dbdd4 ("rockchip: spl-boot-order: Defer probe
->> of boot device") all boot devices where typically probed, with a side
->> effect that clock driver likely also where probed, prior to the SPL
->> boot_from_devices() call.
+>> On 10/9/2026 11:55 AM, Quentin Schulz wrote:
+>>> Hi Jonas,
+>>>
+>>> On 8/4/26 11:44 PM, Jonas Karlman wrote:
+>>>> The rockchip_get_clk() helper is typically used by SDRAM init code of
+>>>> older SoC generations or to help get the CRU base address from the clock
+>>>> driver private data.
+>>>>
+>>>> RK3588 has no uses for the rockchip_get_clk() helper, let's drop it.
+>>>>
+>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>>> ---
+>>>>    arch/arm/mach-rockchip/rk3588/clk_rk3588.c | 8 +-------
+>>>>    1 file changed, 1 insertion(+), 7 deletions(-)
+>>>>
+>>>> diff --git a/arch/arm/mach-rockchip/rk3588/clk_rk3588.c b/arch/arm/mach-rockchip/rk3588/clk_rk3588.c
+>>>> index 9b112e45f1de..272d28e973b3 100644
+>>>> --- a/arch/arm/mach-rockchip/rk3588/clk_rk3588.c
+>>>> +++ b/arch/arm/mach-rockchip/rk3588/clk_rk3588.c
+>>>> @@ -3,15 +3,9 @@
+>>>>     * (C) Copyright 2020 Rockchip Electronics Co., Ltd.
+>>>>     */
+>>>>    
+>>>> -#include <dm.h>
+>>>> +#include <linux/kernel.h>
+>>>
+>>> Why do we need this included now?
 >>
->> This series flag RK35xx clock drivers to be probed after bind in SPL to
->> help ensure a deterministic probe and clock initialization behavior
->> prior to booting from devices.
->>
->> This should help restore old behavior, e.g. that SPLL is initialized on
->> RK3588 and CPU core rate is initialized on RK3576 when booting from
->> RAM/USB.
->>
->> The series may possible depend on the series "rockchip: Miscellaneous
->> RK35xx clock fixes" [1] for a clean apply.
->>
->> Changes in v2:
->> - Update cover letter and commit messages
->> - Collect r-b and t-b tags
->>
->> [1] https://patch.msgid.link/20261011222930.1085075-1-jonas@kwiboo.se/
->>
->> Jonas Karlman (4):
->>    clk: rockchip: rk3568: Always initialize clocks in SPL
->>    clk: rockchip: rk3588: Always initialize clocks in SPL
->>    clk: rockchip: rk3576: Always initialize clocks in SPL
->>    clk: rockchip: rk3528: Always initialize clocks in SPL
+>> It seems to be needed due to use of check_member() in the CRU header.
+>> Will make a note of it in the commit message for v2.
 >>
 > 
-> The RK3506 clock driver is notably missing from this list of "RK35xx 
-> clock drivers". I'm assuming this is because support for the RK3506 
-> clock driver got merged after commit c6bba31dbdd4 ("rockchip: 
-> spl-boot-order: Defer probe of boot device"), so it means if it's 
-> broken, it just never worked in the first place and we should rather dig 
-> into the problem instead of doing what we do for the other RK35xx SoCs, 
-> was this your conclusion as well or did I just incorrectly extrapolate?
+> Please instead fix the CRU header so it lists what it needs in its own 
+> include file (separate commit prior to removing the unused function 
+> please), otherwise we'll need all includers of the CRU header also 
+> include this.
 
-The RK3506 clock driver currently initialize a few clocks from bind()
-in XPL :-S
-
-So it is not affected, or rather it worked around the issue for USB/RAM
-boot in a different way. Should probably have mentioned something about
-the RK3506 situation in cover letter.
-
-In my work-in-progress branch at [1] I have a "WIP: clk: rockchip:
-rk3506: Rework early clock init" commit that re-work that clock init to
-use similar probe-after-bind style. I likely just deferred rk3506 for a
-future refactor series as it was already "working" and the diff to
-change it was very different to the patches in this series.
-
-[1] https://git.u-boot-project.org/u-boot/contributors/kwiboo/u-boot/-/commits/rk3562/drivers/clk/rockchip/clk_rk3506.c
+Sure, I will instead update the CRU headers to include any required
+header for v2.
 
 Regards,
-Jonas 
+Jonas
 
 > 
 > Cheers,
