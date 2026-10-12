@@ -4,146 +4,245 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6776CA9ED0
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 16:42:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B2A6CA9ED0
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 16:49:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 71740405CC;
-	Mon, 12 Oct 2026 16:42:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C76DA40576;
+	Mon, 12 Oct 2026 16:49:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FLi94B6Ehd5A; Mon, 12 Oct 2026 16:42:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org AF33F4059A
+ id lE8-gSXlC0uq; Mon, 12 Oct 2026 16:49:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BD0994052F
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791823333;
-	b=P8eHaPAXUSTaYH5rZJDzYLVaMO+Dqju21Srkx0XDGCHoqvjfj4qKZcnuMDlK5kMgmKqo
-	 AMm8MSgN13yWrgqsRltw8rLVnJbu7OvfawtncYohHvMGNgFpktLy5pjTWj1bV5Oc6cVcU
-	 Db1f0mwwzMKRUZ7hxNXyYZdS3kl9vreQS6QNxdbScE5VgxcD7t/bQk3iQ7BOjMkfoYxkT
-	 b7kJhq25jNi/yXNFjMUvoiXhI7zaGb/75n9a0KqCzY5twSDPXjHhFxjb6+n5y0+g8FfrK
-	 1mKoHmgA3aObfLhLR/vqaQ3WmSSmqpS1FI4Vqk8OVmkDPxTpP6gY9/+64oyUAtA2j4A==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791823333;
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791823780;
+	b=Ak/kFqG6nt1JIilVFLTCT3dG3ncGMRqMKMilrnRlTjXnN9GWE69vb6wPijIuHamSw//p
+	 fKxpwqLeVpQbZernp/dv4c5ngXrcZG+klkpFw2/4mwRV3HHigdht0AF0d9IQzGSkXUcwa
+	 R5O3rV9krAAOpjimYI5TZJnHM2B9t2Q1KX9+KNhLcWeR3Kyx4JD9aAFlLN+YjsC55sFvx
+	 l/LXjQTRZ+WQxYGhcmgWJQtkWBp1Ic1vmnl7BNvmjg4CpQXEOVepBhUSnpebRLdSIZnN5
+	 cSDt6R4T6oK8duKaBpopQyLwv+2Wp6eqMWfg+1pLZ6Fmx7za5RPADwBH53/FkRwFWTA==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791823780;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
-	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
-	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=2fjwur4unR7DOATK3IGrKR3e41wFVQfONl9wBN9R5Ho=;
-	b=SLJttiuQi5TNpeo9LnssGZMJF9MyLFXn0PRDJd4GbQ0C5t0GEX3d61oWbk5IhVpDdxOt
-	 mKt6u66CgvYBM7jZlUInTIV4GmxBpAgB+jlpYjAHOKGmDADEDr7eCpgqIVTkf3e1yY27o
-	 X6MDCMs8A/94upgHLE8VYkP252raWkkS4mLZkiU/Hh9ubNnkOn13rA5cKGiJbmyWg0PZ0
-	 7OrBFH31teo3v2XNakTSSkdVZQk5iQsiHXrGEwgW0VC3ZGo222K3xjqKTsDnIfRNbitWH
-	 nD9I4dbK3r8cg9ka38ym5EpDDSmoAoU0dmM5YTIbsNJyK423qDF7NTvlthmVgjNX1Zw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=1hGE4aob2dNVuCLgPvOkyipqStj7jlUSejILwGg2enE=;
+	b=EPoe6+UvYGSmD6Fi7WJr4D2Wl9ewIQ943FrZHISCiffmrtoD+6EAqBuRWOeLik+YRDzO
+	 /JN0EkBPoHL5JMUgrlKy6IHBgudswZwq8SvzI2RGWpPuXpdkhbPWyDvAvBezjR3vtCZ8j
+	 L37aGBc9XkggDElRHX1GILsL2g1Kd3ZAZDxiRBLtChJu/4XrT+RCIFn+fht0NRewo6Dzu
+	 dW2ut7ja8zQHHCyzcw5TXG+cRvGdzlxUHiInC81fVD8QYe0fntAtbmTgnrO5rhNqr3QGA
+	 ayLYlrFkjcQgtS59NnCtRUHehRKGVLe1Ye40BCZQByWY/2/yWPfpEbSXK6Q8uMR2CXQ==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791823333;
-	bh=2fjwur4unR7DOATK3IGrKR3e41wFVQfONl9wBN9R5Ho=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791823780;
+	bh=1hGE4aob2dNVuCLgPvOkyipqStj7jlUSejILwGg2enE=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Cw1OobYZ/wLpxqbONimIHMBOk8MgJhQUjzVRCHDxVNCwlG2MRwusbOW2eFBx5IAVk
-	 m8b7N5Hx8xXhK22xf+2diuaTivafhmXXzVkch1rglBKB5bEZJqd5NQ2rPE4j+9BrEy
-	 vx9NFvRFULy35mFjlNaqealVXBcaldiXtq9zYBc8rzZbwVbmc+6JnPiYjsg5zWMRwA
-	 yQyQb6HQd6WKr4jk4ghmpblfXvf7JGUQoTfuAjETNRY0eKOjQiqrvCdiWz9h2+i/Go
-	 lrgbqf/7pdqR6sEAsZIWMJE623vLMJv8QF2jbFwfpiO9H5WglP5ap8ysCSJCXpI+bB
-	 wf59gRwDOJPdw==
+	b=KcefbST3j1lsHyOfFesLK80IWv2LWsKLCcfOs/7JbRc1np/vIiMgZNyPbAZ4dvQ4i
+	 TCTqx5oRByAPNLGYimSIaDJ16tY6VgsxaK7XVb8OxQj99EbNbr8VhkXh4z8KnbEWHF
+	 VgCKtEkVRB31bV2S+EwNwSYiXn/cU1BkQtAXCBb1gzkuhWnXToRLqeazY7cd4CmXuL
+	 fbTYD13mM3iQ7gaLpsYTuFCDFBg1Ku1Byq0yNED4KCp+iEdtmPxcQEiAj2xVLCBGOt
+	 wUGiCGwZoShqCxv+oXZISHvV3E7J/A4PiS2bHeTsXm9RgT0n+jFQwFuqYKvybsZZcv
+	 UKE9rbzxo/5oA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AF33F4059A;
-	Mon, 12 Oct 2026 16:42:13 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 52052105
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:42:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BD0994052F;
+	Mon, 12 Oct 2026 16:49:40 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C9DF5156
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:49:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 43CD2606EB
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:42:12 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C66B240201
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:49:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DoVeo7aRKpWF for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 16:42:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 25C7060670
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=149.28.215.223
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791823331;
- b=X7J4BeE/EqCM0QeVVgXyvdyKZd7n8gpXCyETU2oF90Z917VxMkDGtyJJcn0GCUc+v/jd
- qoOBj496Teans/Ps8k6/jX/Nt3DzgI2Em8DZIyVtvHmkcn4S8eK3vAKEWwVofB5otZRen
- 0H//dVPww4NgScPyNa4/+X04Fg+xg8gbBa01hd2rX5pbSZH6OE4iHR1SNK7vKw2kGhkyo
- sbYkvPnS8EOzRo1Ja+OZAZviK1JGFdqwrQkHMkmwaHUtxPwhwJ8078rd4JCx4wg3aaUcG
- 8vN2Voh2nnsE95zFk/mBJwgy2bU4iarEnUjA0LRN+sdJqrBuGJ95epcLsRECvlUs3Fw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791823331;
- h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
- X-Forward-Email-Sender:X-Forward-Email-Version:
- X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
- X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
- Cc:References:Content-Language:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding;
- bh=2fjwur4unR7DOATK3IGrKR3e41wFVQfONl9wBN9R5Ho=;
- b=spOx9+hqGrEqLH1jL+UFysSM1YQ3syeDGpGWEEIVUPugDjXXl7kTb9jUqkw8RCI+aBUg
- 15eong3erz2lDHQNnJg1kIlsQRNq7uxv+mv09Vdyz+yFrbPo+4s69fTLziOuX3wu2OjEW
- 0F6JSSsKKqDSL2DiTE8S7jGSS5s0b7CN5sECttQCEAmLAepQl0ItE8muCf6X9zqXFO1ms
- feLl8b77TuFeir5V9TKuQXdtiNpAiN8ZarPN3VKtBr6QVhbK9uR9Xi31/czWBCs6o2HGd
- m0EI65NXjThz7n4EaC+YRYIui2PHg/qUp9Xt8SdCMtHeRlavy268v3PrPACbNuBZ7pg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=kwiboo.se;
- dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=cuqoMsvr; 
- arc=none smtp.remote-ip=149.28.215.223
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=d90e=id=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yO6j2TmqkXUC for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 16:49:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 3E962400D7
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=205.220.180.131
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791823778;
+ b=hUzHgPhKGxmLTvHxRlaOV6+SE6R60/zz6HhTk3i4r/S5rz0dzIcmVEIMJHn5lgfZfQSr
+ Prb1rqZvtATc5rajUkl51s3BbTMQCXRKK36ENldkkSEzsZNERXnnfdWc7MHWi5Dx6Hm3z
+ qnVp987Mbs0N+wewKQycbtsGEIJh7Q0kdSDeTuW8E4gHWKyDlaBxBYNerd8jfhmHLbzEk
+ b0RLJoIU7zoy3u492hsylTtaBNJrS3Kn7lElCztsk9c2Rlle8dNi/VpyEBkU68PBnCfHh
+ y1+j1n3aQ1PfZ0+vWv4m+amRcXrNcU55CDbXfGWHCgrbNrzYju+W39hS6onBjDElrFQ==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791823778;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+ X-Received:X-Received:MIME-Version:References:In-Reply-To:From:Date:
+ X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+ Content-Transfer-Encoding:X-Authority-Analysis:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=1hGE4aob2dNVuCLgPvOkyipqStj7jlUSejILwGg2enE=;
+ b=fVMu5aL163TcSStlcaQpafEpCKNDJVailGR7no4VWX+ATnNbvklM5e07mimLveWZxS2g
+ +tbBV8bdBnuQFHGfLaOS3Twh3iYcx8K4ylm4pLKWELV//d9z2nF1sygHMuQN3ZUG1+exE
+ eeIp2rzYqVQBDjO0ETKjDilaFSbCfQoLTPKHUNTZEhx1EHr2wfIIkqNxRkr7hDUHIS42c
+ NNPhC+EhhQNaM5s1ed3zb8w2BTo5SjQ6SSrmeASUt6i5iv99FlwytZ4SWLZwxpSkVpOPP
+ 4sOPtiaMCdfkuFLQ9tQglX/hUUnp2633+918lBQhcyUC06I9ZF1m9JSZaCgmuRCBxjQ==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ dmarc=pass header.from=oss.qualcomm.com;
+ dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
+ header.s=qcppdkim1 header.b=i0XKSsxx; 
+ dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=Vzk9QAAd; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=cuqoMsvr
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 25C7060670
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:42:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1791823329;
- bh=2fjwur4unR7DOATK3IGrKR3e41wFVQfONl9wBN9R5Ho=;
- b=cuqoMsvrm3OQwomW5RZWqfPqMs0rvTRjU7WK7sTlOXVdeFI/mshUWbFOxdFRDxTXvVk1laCCA
- M2usza1wkGCNhDMY7vU77r/qjzX6YWYu13qbkV28DTvesYQ2PmV14G1P7PvS5e1m4N4qsvPoWfZ
- zwcBTFueukNtcAz6qQ7bAeZ2P/3I+7Az47oCHHIWuCQk3+zlP25Gay/uvhl7w4vltDlQOBNbnpM
- Oo6xk4vD5eNWY5uz62sp6plC6HSP+LWftdUGx+BBUz3S89mx13kPjYyFhsAEHENasoXOFN2zaO/
- 5BkJdB+YjWzw0tbvugf0wV5MYLAU7CBbm1z3TSd6mXvg==
-X-Forward-Email-ID: 6acd0dd98cb5e368044b3fdd
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.18.4
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <1cc0daef-1c0d-486c-990e-a7ce0445e27e@kwiboo.se>
-Date: Mon, 12 Oct 2026 18:41:59 +0200
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=i0XKSsxx; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=Vzk9QAAd
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 3E962400D7
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:49:36 +0000 (UTC)
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69CFeulO2575553
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:49:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 1hGE4aob2dNVuCLgPvOkyipqStj7jlUSejILwGg2enE=; b=i0XKSsxx6ubmQURe
+ hwoBJ5pK0xeJW7OD6WQGV/Kj+7NqnHhCRevLV+1xxmFbqz1quTztMyhX/Nd4s71g
+ FNCQDYkP20vrs3CNjwkS1EPapsP9iz4UHyAtt1aR8OaHnBZwozZ1EvJhrN3oeOOY
+ z6IKcD7yK3eSUJKhASDgMzK+7lV56C94/Hfib34jc+sWjq/o+SV7cKcxsM10XEWv
+ GBCh5KiVAlsvxjOetORM2jMdbctufzQGhOSh3N3GyamEnKVzGMoiPuSbKGx+Rtfc
+ l7K9heQPikWwQ/6pXeLDq+qslZAa2QXy2kRFN+uBoTojDLERLsL1AAI3R4THS0CF
+ frKsSA==
+Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com
+ [209.85.128.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8sgu30ar-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:49:35 +0000 (GMT)
+Received: by mail-yw1-f200.google.com with SMTP id
+ 00721157ae682-891f27da5c6so20916857b3.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 09:49:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791823775; cv=none;
+ d=google.com; s=arc-20260327;
+ b=G0C7gLxL5zjbQlm5sC5JV2X704CDzdygMOBPsEX42bA2dRhWeJbotFqAgzDKp7XNnX
+ wJLS+WQWjB5+4bYTl4xOeXi2FUaF9in/8lvsxOQgB27n2iJakoqx7On+16YE0Z5q3yPM
+ 4xTy5WJPYH5kMRylPv+EV3PFLRI2fKHncNr6hrRdnri8zq3Hp3iWoCQ+Ln6GAf9HCU1k
+ WJuGwb3Fidom4qjBKt6ayCZyg3/HIITGDN6ojjyhsvebHUvT/Sm57Xx5hf25443V1fro
+ /f+zC6+oojG5KRdHm5xV86X7PZ36Xql1itnr+uUcQ8KGXz6qrOud0Oy3WpYbD0vKYCCV
+ emrQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=1hGE4aob2dNVuCLgPvOkyipqStj7jlUSejILwGg2enE=;
+ fh=lBVJB3Y07zjzHtgZx+CaxLKeS87ZQ6TNlD6qo8xH1yM=;
+ b=jfxCzhxd0IXCnat3mdEhkCMcfzy2++Qx3L1MRsRoHonnk/jQuiiEnYJMAHCYm0nLSE
+ hfPM28zzVKHtNfG4kQR2R/Df+P7bpDMGFz92UrBWJ5P4Okjp2S8Qn3PR4XB1NWkQ+S9h
+ 20uC3kVo+FeBfzvAZi9r7EKbk1Y//c54HLaMTlb64MoiuocO/doz8IphaRz+ShRf8V+n
+ zZieK/Z2Xs3IFPBtCauA5I+KjPtS9dEvfy/an5rZCKgyaFNUy2kGdStdJsyEgl1TD8bJ
+ Mr7dqvFqv3T6RANp8NLNbkaax4PSkoZAnH7gnCiV0vHZnqe7gojYbTLlBIK1PiXoO951
+ 2Z7A==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1791823775; x=1792428575;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=1hGE4aob2dNVuCLgPvOkyipqStj7jlUSejILwGg2enE=;
+ b=Vzk9QAAdNQKVICIKcBJsgYoatee9/K/H1hpAdmC6dyqwRAV+LTIPCLEVQ9HD6zSkNd
+ 8T5aAe7d7Gwn1+XDSgqRY6vN+pgBYCwa0ScFaO7Jl0WOwieeyy1PvkDjchTTyxiCkVyI
+ LpKyAQr9RQnZU88QXhFBh3L02b1e5dT8oqnkO0k8zSeb8VFOHL7McCZACt6Syj9C/RmR
+ m9/PNW+jLJc09nf/d+Sqvg2A63tcZBzKBFRliSEJy9ogpZHPmaqTWkeEqiZBa4uwxv/M
+ 4rmkP2l7+VaX9CSblyUQ/gpfKwgJBXH9/HM4dnQFCw+OlSObJ8vIP3MD2TIlp/3nAUYH
+ SoOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791823775; x=1792428575;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=1hGE4aob2dNVuCLgPvOkyipqStj7jlUSejILwGg2enE=;
+ b=dmBj+IkfQkllRiKAOAffUKujDFY/5mkyvJOrKu+XF2fizO+JoQsWCXachIkv42xHwQ
+ SSnVpQUYStORLLiwe6hEEjqfFL7CzrDGtTZzktAiKk4N4DCr6uckG36rix9dQ3o3P0RW
+ /NQzVlv74LC1FIARKEFx9G79giPo7Z1iC6Q1mqxVuNciuNp7tm10pDfbpdbYIkLY2O7b
+ Z9hDqgR8RUyXh/en3o+d8qnBq8CRIYAMRTKWKMjbM8FX+fg1OqCa5FHO/uhQXIgjf6Ek
+ +mZSsJlOG0A+bb8mxwgcVxGkpv3B0LCGfXacOLjxOfOfIAelUU0O0GiB7IH2pU85yiZc
+ 83yA==
+X-Gm-Message-State: AFq9FYJ1FOPhQJD5iF5/9mRe19zREXG4VJgTp+AComlVMsiWhfJwX1Vy
+ wF0BZGoevzTNpgnXlyefxPpbyZlyvuQzLpMFAf3fKnqHe73Pd2dVGDx2Y1wb1YjT5Hb05s0sh76
+ vtApNb3AAHbJ+NpOVbXCod9SQI6qF7FIMHyajs8LcyKzam/fgHzGcLBGuD6AiYXViaRDj6a3hVf
+ aeodJBOAZ90oe8IOQ9WfWB/f4utnEzmVz79cFvmslTh1iurg==
+X-Gm-Gg: AYBFou1g25GALKEPqQqRi71KhBI/mYKOnofxhLks98626yeOmUMdkt7bfiQ85Dh7T6n
+ nFQqT+QKKh3nS+kCp2zUE///usmde/8jeRTNCSsWUz2tOWlD9n4RL78mmSKxzFoFKP+1TU9uRo+
+ bie+GsTrAZwsPQytbeFuDFsKzFk1kLXpp5dx/6G3+nzd6nHo7prcL+z4JQfQ==
+X-Received: by 2002:a05:690c:4d47:b0:8b0:702f:3554 with SMTP id
+ 00721157ae682-8b07ec014eemr36656997b3.8.1791823774952; 
+ Mon, 12 Oct 2026 09:49:34 -0700 (PDT)
+X-Received: by 2002:a05:690c:4d47:b0:8b0:702f:3554 with SMTP id
+ 00721157ae682-8b07ec014eemr36656887b3.8.1791823774469; Mon, 12 Oct 2026
+ 09:49:34 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/4] clk: rockchip: rk3568: Always initialize clocks in
- SPL
-To: Quentin Schulz <u-boot@0leil.net>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Lukasz Majewski <lukma@nabladev.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-References: <20261012111552.1173161-1-jonas@kwiboo.se>
- <20261012111552.1173161-2-jonas@kwiboo.se>
- <dfe79f19-2fa3-42ca-87a0-e80ee086c7e6@0leil.net>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <dfe79f19-2fa3-42ca-87a0-e80ee086c7e6@0leil.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20261011-upstream-bootm_android_b4-v1-1-3e82462ac206@oss.qualcomm.com>
+ <CAFLszTgcEmk_pTufiP06dLzRfG938FoPa_60WRyaQ72QOQRYYg@mail.gmail.com>
+In-Reply-To: <CAFLszTgcEmk_pTufiP06dLzRfG938FoPa_60WRyaQ72QOQRYYg@mail.gmail.com>
+From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 18:49:22 +0200
+X-Gm-Features: AclHuK_O8zr2ve6p5J9TThAIzREOKqHX5dOL0IwvRV2fW9ZC8Jce1tQnBnDthaw
+Message-ID: <CAPzfCAaGzAjYjZ8df_32H9TR+Bpy2y0Jpq75Xx2-_bmagsdKyQ@mail.gmail.com>
+Subject: Re: [PATCH] bootm: set os.arch for Android boot images
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
+ Aristo Chen <aristo.chen@canonical.com>,
+ Nora Schiffer <nora.schiffer@ew.tq-group.com>,
+ Daniel Golle <daniel@makrotopia.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Authority-Analysis: v=2.4 cv=QdzzLcbv c=1 sm=1 tr=0 ts=6acd0f9f cx=c_pps
+ a=NMvoxGxYzVyQPkMeJjVPKg==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=rJkE3RaqiGZ5pbrm-msn:22 a=cm27Pg_UAAAA:8 a=EUspDBNiAAAA:8
+ a=V_cl12Xj7qB7ECqdeGIA:9 a=QEXdDO2ut3YA:10 a=kLokIza1BN8a-hAJ3hfR:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA2NyBTYWx0ZWRfX/+mhwqsCUOhO
+ f3MdXTgizx9reJi/4Q4ep0tSTGr6PIwGQ9IaCUmdIg2aO3QTHv09mEdGBboVvvFWvJMDNyxD3HV
+ 2rgLkAATgZIUyo5VkDHznGXJG2uksbiPvgGCr28pwviuhBiOOd3alU7/AzogtWZbddrtDaibGFL
+ XxDjRUmRuCfkhR/ThH0FNpAjUo4ey8dEsf0huY9ntPoyIiRWh7YSPFKucU8JZVOm4yqDt6Q/s3i
+ VdovN/TG7sc4xw2INix4ie/9dy864Wynrnbx1nLtTYzsl1AEy9e30exyyncg5HCvrJSrdDOaf8S
+ OXV7JOnD6CLsBX0AvIUAQLkNUUhpryM0kUH1dTa5iLTpCzXb9FYT7Bn8XQA4S6tIeZE1kf8JI2M
+ oe8LTPp6Lx0teE9EOhJYLAV3Bi4LzJlFUHdqn+xx6BeBavMJbPtmjhOKhqtNdBl+aPxZd7GigRM
+ Ci6HD7GXw2FwPv5EubA==
+X-Proofpoint-ORIG-GUID: 1fkMga_BwNkASuzZcFik4NxfPz2iejq4
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA2NyBTYWx0ZWRfXwSwN2y9FRrTq
+ nPGO0Tdf3Qm84ouPIZau+MNMvhZXnX0rzu/txXL2bZaM1jLY96QOZwztTPLtmzweTsnMxgGAXMF
+ EC91BfDygvnoOrdsfpST2TfYbvioNh0=
+X-Proofpoint-GUID: 1fkMga_BwNkASuzZcFik4NxfPz2iejq4
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-12_05,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 impostorscore=0 phishscore=0 spamscore=0 suspectscore=0
+ lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610120067
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -157,72 +256,116 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Quentin,
+Hi Simon,
 
-On 10/12/2026 6:00 PM, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 10/12/26 1:15 PM, Jonas Karlman wrote:
->> The RK3568 clock driver initializes ACLK_BUS to 150 MHz when probed in
->> SPL. However, the driver is only probed on demand, so this
->> initialization is skipped when no SPL consumer requests a clock, e.g.
->> when booting from RAM/USB.
->>
->> Prior to the commit c6bba31dbdd4 ("rockchip: spl-boot-order: Defer probe
->> of boot device") all boot devices where typically probed, with a side
->> effect that clock driver likely also where probed, prior to the
->> boot_from_devices() call.
->>
->> Flag the clock driver to be probed after bind in SPL to help ensure a
->> deterministic probe and clock initialization behavior prior to booting
->> from devices.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
->> ---
->> Changes in v2:
->> - Update commit message
->> - Collect r-b tag
->> ---
->>   drivers/clk/rockchip/clk_rk3568.c | 4 ++++
->>   1 file changed, 4 insertions(+)
->>
->> diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
->> index 9f3e9322161e..5a05f1b4de00 100644
->> --- a/drivers/clk/rockchip/clk_rk3568.c
->> +++ b/drivers/clk/rockchip/clk_rk3568.c
->> @@ -2934,6 +2934,10 @@ static int rk3568_clk_bind(struct udevice *dev)
->>   	struct udevice *sys_child;
->>   	struct sysreset_reg *priv;
->>   
->> +	/* Ensure clocks are initialized after bind in SPL build */
->> +	if (IS_ENABLED(CONFIG_SPL_BUILD))
->> +		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
->> +
-> 
-> There's pmucru in this driver as well, shouldn't we also probe it after 
-> bind? Or how did you decide only the cru driver should be probed after 
-> bind and not pmucru?
+On Mon, Oct 12, 2026 at 4:04=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Igor,
+>
+> On 2026-10-11T13:10:26, Igor Opaniuk <igor.opaniuk@oss.qualcomm.com> wrot=
+e:
+> > bootm: set os.arch for Android boot images
+> >
+> > bootm_find_os() leaves images.os.arch at IH_ARCH_INVALID for Android bo=
+ot
+> > images, so the arm64 Image relocation in bootm_load_os() (booti_setup()=
+) is
+> > skipped. An uncompressed kernel from a v3/v4 boot image is then execute=
+d in
+> > place at boot.img + page size, which is not 2 MiB aligned. The kernel
+> > reports "Kernel image misaligned at boot, please fix your bootloader!" =
+and
+> > dies early (observed as a stack overflow in start_kernel() with a GKI 6=
+.12
+> > kernel on QEMU virt).
+> >
+> > Mark the kernel with the default architecture, like the legacy and FIT
+> > paths effectively do, so booti_setup() moves it to a properly aligned
+> > address.
+>
+> The legacy and FIT paths read the arch from the image header rather
+> than using a default. Please can you say that the Android header has
+> no arch field, so IH_ARCH_DEFAULT is the best we can do? Also, the
+> in-place case is not specific to v3/v4:
+> android_image_get_kernel_addr() returns kernel_ptr for any
+> uncompressed kernel with the default kernel address, or with
+> ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR set.
 
-Good catch, I am not sure if I decided to exclude it or just missed it.
-Looking at the the code and DT references I do not think we need to
-probe pmucru other than to be consistent, at first glance it looks to be
-related to video and pcie. It most likely was not probed until U-Boot
-proper, but will look closer and run some tests.
+the Android boot image header carries no explicit architecture field, so
+IH_ARCH_DEFAULT is the only value avaliable, and the in-place execution
+happens for any uncompressed kernel whose header holds the
+default kernel address (or with ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR),
+whatever the header version. The v3/v4 mention came from my test setup, whe=
+re
+the kernel sits at boot.img + 4096 and nothing else can move it.
+I can reword the commit message and add this information for v2.
 
-> As a general note for the commit log in v2, they are good enough for me. 
-> It clearly states we go back to what we used to do as a stop-gap measure 
-> to fix various issues we hadn't when we used to probe all boot devices, 
-> and hopefully we'll fix this properly once we know better. I don't 
-> really like it, but I think it's reasonable.
+>
+> >
+> > Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+> >
+> > boot/bootm.c | 1 +
+> >  1 file changed, 1 insertion(+)
+>
+> > diff --git a/boot/bootm.c b/boot/bootm.c
+> > @@ -432,6 +432,7 @@ static int bootm_find_os(const char *cmd_name, cons=
+t char *addr_fit)
+> > +             images.os.arch =3D IH_ARCH_DEFAULT;
+>
+> Just to check, have you looked beyond arm64? Perhaps it would be safer
+> to limit this to arm64 with IS_ENABLED(CONFIG_ARM64), or explain in
+> the commit message why it is safe. What do you think?
 
-Fully agree. At this time I cannot see how we can solve this more
-properly but as you mention hopefully we will know better in future :-)
+I went through the readers of images.os.arch field after bootm_find_os():
+* bootm_load_os(): the booti relocation, only for IH_ARCH_ARM64, and
+  booti_setup() checks the Image magic first, so anything that is not an
+  arm64 Image fails cleanly instead of being moved.
+* arch/arm/lib/bootm.c: the AArch32-kernel-on-AArch64 switch only
+  triggers for IH_ARCH_ARM, so an Android image keeps taking the
+  AArch64 path exactly as with IH_ARCH_INVALID today. The other reader
+  is update_os_arch_secondary_cores(): the Layerscape implementation
+  marks the spin table entries OS_ARCH_SAME when os_arch equals
+  IH_ARCH_DEFAULT and OS_ARCH_DIFF otherwise, so with
+  IH_ARCH_INVALID an Android boot currently releases the secondary
+  cores as if the kernel were a different architecture. That is a second th=
+ing
+  this fixes.
+* bootm.c: the setup.bin lookup for IH_ARCH_I386/X86_64, only reachable
+  on an x86 U-Boot, where the Android format is not bootable through
+  bootm anyway (the kernel is expected to be an Image/zImage and x86
+  goes through zboot).
+* ARM32 and RISC-V do not read os.arch after bootm_find_os().
 
-Regards,
-Jonas
+So I would keep it unconditional: IH_ARCH_DEFAULT is by definition the
+one architecture this U-Boot can boot, and the legacy path refuses
+anything else through image_check_target_arch() anyway. I will put the
+above in the commit message. If you still prefer the IS_ENABLED(ARM64)
+guard I am fine with that too, it covers both the relocation and the
+Layerscape case.
 
-> 
-> Cheers,
-> Quentin
+> BTW, for a v0-v2 image whose ramdisk is used in place, booti_setup()
+> can now move the kernel forward by up to 2 MiB. The memmove() copies
+> image_size bytes, which includes BSS, so it overwrites the start of
+> the ramdisk that follows the kernel in boot.img. Executing in place
+> already has a similar problem, since the kernel clears its BSS early,
+> so this is not a regression, but it may be worth a note. The following
+> LMB reservation also still covers the old load range rather than the
+> relocated one, but that already happens with FIT.
 
+Good point, I will add a note. The proper fix for both is to stop
+executing the kernel in place, i.e. load it to kernel_addr_r like the
+a compressed case does, which is a separate change.
+
+The ramdisk is relocated by the ramdisk_high logic anyway when it is in
+use.
+
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Thanks. v2 will only change the commit message (and the guard, if you
+want it), so I will keep your tag unless you object.
+
+>
+> Regards,
+> Simon
