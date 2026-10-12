@@ -4,289 +4,175 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8933BCA9ED1
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 05:42:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3373CA9EC5
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 07:44:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2617C6062D;
-	Mon, 12 Oct 2026 05:42:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 530CE6061A;
+	Mon, 12 Oct 2026 07:44:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id x_5px7mh3PcN; Mon, 12 Oct 2026 05:42:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3ED90605F1
-Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791783766;
-	b=P7HUeG4nXcsApEZNIz/W5cx7cZoPqE+LLkKD6gJ8Z/P/Ly7qCscazBJiuPClTPzLQyRS
-	 /PcKavlyalqD5m30t04BN1CrAES0MGlC6VHBzUlaiGI/9ipzj+0jqudTkhPXiON56X9td
-	 Ib53DhhWQve7zaA1tLUVQGgUPdQPhO5qphISy+YUVcQB52KAL26zj5e5krNYGQ6WxIiBo
-	 Sj5PfwvvEQSF9vBXMVV7GWnmJtxx2ZLtQF9Zh2KDCLzRAaYiFBjyhoImxtRbPonSixS9b
-	 lCZOGqMd9RNYnaNtl2Ni9TkhGnCwlNERkXqd13h89CEb95qvslsQHZlkjxNe0IB9dzQ==
+ id TuZLjJlzceDB; Mon, 12 Oct 2026 07:44:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 041AB60602
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791791081;
+	b=NPvwA+Kf3y7uMdaQA2YeIWfOADxyDWFcrPqS09b9V/He/oBguTLPa2ihuIx0rh0sboi2
+	 J7+VL55mTGvF5Qm9RwxuuWxNwtl9Xx7CW5io1+l64OSnRTtXj+CtkMaJHeSuCTMV6goC+
+	 TOyd+vofwn8fs6TaWc2JI6ZUbDJsxlMfu7WAF7hv1UVvT+MFUAnUqEACDQhQjZLrQKrLn
+	 AUKoXHrvFj7mC5uItcACPs/KCJHO6cANLfFm/zmsx8k1ZyWX9p3i23EMyyHLVFGp/ZeR0
+	 lY40vCpB2aiTUOOkQHPytwprdYDtLZcAANiBPDbGgwLOO36LL0r+jzWDM4KA40yLxBg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791783766;
+	c=relaxed/relaxed; t=1791791081;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-AtpMessageProperties:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=AFYJ8bxpi6/bPtT4Xwz34emStRbqlqXNIWe27EWjyWo=;
-	b=r2Cys3Vn61XSpCOspB+5QpP9XHSDiPAh9v7BQjacbAFLm+SQ2GUd+pH5zrI1EDzSg2yw
-	 fVj8510+RkPnYVPSbEwBxYyMvtfSU/cx/aobW3JfA34bwHPH1r9R3NNpmdY+ihhxFlbci
-	 4RaD3092dDQhXwEfHhnCMkBrg44iziYnJSOeZVjWN0oIwWMpR7geE7xGYAGOk9TXMekJK
-	 BZyrsgOIc5OdLi9hI0lfroAnJw/jvyFXSMGLAYZICpUbnLkvRile52LyZwFbGnph5Pv3h
-	 mv+408Vxw8j2oeT5XCGwD3Ha+Ojjr2/E74bLKOKCNLibXQJbfM/mjhS3kf26ExQlqVA==
+	bh=WMXrAcZznjhm/X9X5d2x9IqRQTgO9qarG+vo4uTKaew=;
+	b=Jg0Od9+Iu1QhaObXQLUnN9EtyQ1JNgRFAuZ69vOcR4ic42nY7g0QhJc9sSosAA+8L+XV
+	 cGs09MJEB6tlFA+WzbW5otfqd/LkAkKvkyshU7VyMeJnTFla6bwZ6gfHgYkh/IUDdLGno
+	 sRJYyKBw4/TTULv5JORGcMgmiIOD4Q7J/jNB9WB6z2a+y3m6nFYSXOlen1ZyNIt1FMvtp
+	 I3K4PvaN+YendEt9pIPikgqL9lK3l7EJQFtydCZuJciUefJ08TX8+qNiOnmONHN9tLTlx
+	 DkHWmrfEl3MTFbqwccHkpdRTxkceljgkJX7vchWy06hDUIQquhMrCNCZDMn7AdS2vdg==
 ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
-	dmarc=pass header.from=siemens.com;
-	dkim=pass header.d=siemens.com header.i=@siemens.com header.a=rsa-sha256 header.s=selector2 header.b=wF7PdBLu;
-	arc=fail smtp.remote-ip=140.211.166.142
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791783766;
-	bh=AFYJ8bxpi6/bPtT4Xwz34emStRbqlqXNIWe27EWjyWo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791791081;
+	bh=WMXrAcZznjhm/X9X5d2x9IqRQTgO9qarG+vo4uTKaew=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=IlwuGc3Xiz5TRqqlfTcJetcO1ep6lrgkMmfCi6BLAGuQ9E2WAnN4d6INKAEM1jcKE
-	 cWCYV+IF8dr3Nqwq7coZZ4Esowpq3WZxMbiu4yZJpYvvWQv5VzxDCgdjA24BiB+j1O
-	 UQZB0uQBw8TkX35O8K0Ji6Rh3+ahYPkhRE/DEDCqq3xCceuWAkW+wVduvgd8v9zKll
-	 3GmhVrZAYM4Jez2M2ZgC+yST+ywo0i6Dw0+HBbPnB8cipyr1HY98fgW1EWNxXjBr/Z
-	 7jzjhlLUXqKZGe27nXrSyrMNrdCOuqqBWxHeENcEaRQm5+S5+pYnFI0KHO2e1D7QN9
-	 uKlsaRg8tELfw==
+	b=CTAB9EueZJ0ITcKZIZDdwDst3J4EsJ2zt05OGigXG1QCCwGFkugFPgzPVOUMdSOb0
+	 LnThpcHE9ntU67QkwJ5e+08hilRQxtLhPyI3PZ7agygnnHaHVmSfUAqnMqHclRAY8n
+	 +WPD99nizX7ArBLsjZBRAsDygOVJDn/5cUTJUVVOCQ8K2fX2HbNtNWQwIJqhLt5BXi
+	 w5C2YqztuI489h7zQfO33eA1IAzDl4Yw8fcmc5PpWxoBcloNohvSXDrkaoWnGKhdIY
+	 3XkOKITpJRtWWF2iVwP4CyyaKsKemxjlGZQHVXKTnxH5Q3kLG6q3eYXnNH6cuR2rPx
+	 jPF0rkosXUiGA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3ED90605F1;
-	Mon, 12 Oct 2026 05:42:46 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 2E86F9DF
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 05:42:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 041AB60602;
+	Mon, 12 Oct 2026 07:44:41 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E5E3675
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 07:44:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 11194605F1
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 05:42:44 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id DF42880CC5
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 07:44:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yb7n8CcaLpJg for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 05:42:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 08619605EC
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20a::7"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791783763;
- b=k8FiG94qRfR9xgjQjnrtQ2tnvRlcgwjeRruAPWz2BavJ/8w+yGJiDMHWDHOwh5yIPsIw
- 0kfwcpu0XcCdlQWBBGc7zPvc5vSMVnrvL3VhjzNhy97J5bWGsPfClS/PmEIyeXfaAG1ce
- Ty1Q4KVXniFLzGp0+4U/I0vtMGy+eKzsAWlILCWAEg5kVwC/461pM1W7YAB83qUmTy3ST
- 4VZ4MMvZNBwU8YnSUoPAXnbLKyopMomdmdQdvclx+uXSBKLRkzptKfrf2TaMBRurhoyI/
- /gHY9rSBNSitk+hqsQ+1d40AcRzC6ZSQjg05YwkPf7dFazs14C4OEzEYxljxSn1t+xA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id N6cdxUMgx7cs for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 07:44:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6B90A80AB2
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::534"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791791077;
+ b=l5kZLVBQgDxTbrhbct266g1h47pU2uuAzhps/3t8WmQHv5MuIMnSeshrjNf+PxJZmsEe
+ RdHB1Pjx6iDMDzi123pl0M+sAMNVRjqGgGor55O6ZuvWjVHhPua5ap5xNBWESKaS/aKQG
+ Gu87MAypKkjjtnDfRT6yREvHDtCuxTaCXjIouf0OdKNoE8ogPKwoCl+PZd7D70NgrLUxU
+ Bm/FL3vP09lM0U5c8g/HvjULXrFwrfTpml5byBiUABXYpU0fyy2foBhpZKfxA2eOFkq4k
+ O6P11xHmE2EtAUKL9sflBiF8ONK5QFwjeMW9K/iLgQYjX0kPzI2dOj+wijaRQjBNKgw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791783763;
- h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
- User-Agent:Subject:To:Cc:References:From:Content-Language:Autocrypt:
- In-Reply-To:Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:
- MIME-Version:X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
- X-MS-Office365-Filtering-Correlation-Id:
- X-MS-Exchange-AtpMessageProperties:X-MS-Exchange-SenderADCheck:
- X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=AFYJ8bxpi6/bPtT4Xwz34emStRbqlqXNIWe27EWjyWo=;
- b=P9kH5vpT+bH5wExk7GqeT9rnLqz2T7V92Sqo2s0RCS2476LOvrsbM67P31jmR2TeZ2tS
- +ZyGoLo6yuC0F72hxNl+iFMaMpWdkQsrbcz4s1CyjYWQP4BwNw9UkSWVHDA763aHbFHnQ
- 1uYvjrMnO3pwL+8pxLl6zoBIzuaniQur/PbXeabHmOqqeTIYQVMsg+ngGp0XepNvAwzbb
- 4nyuFSHXA8xJEQi0FmkgFpDlTirjpx7Ay/iGsHLIgXtUnQJTi6nD0xCMAXzbrDb7rAUrL
- ruA3AbemtbQdFaMRhL5cMCIyEIoSKws4InK72uV5OuF3cENoyEiyTS8jF+rG9A+UMwA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
- dmarc=pass header.from=siemens.com;
- dkim=pass header.d=siemens.com header.i=@siemens.com header.a=rsa-sha256
- header.s=selector2 header.b=wF7PdBLu; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20a::7"
+ c=relaxed/relaxed; t=1791791077;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+ In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+ Content-Type;
+ bh=WMXrAcZznjhm/X9X5d2x9IqRQTgO9qarG+vo4uTKaew=;
+ b=KG8Z0FCxeE9tIq7dBmc3DCArBCeahgB/MSeeMfW2hzKxEg6BV+6WOBvESNZz8Rhe18J3
+ 3DBJHE3/s15wUpJfa4dkVeoe7bUdroB8nYgCvEpHPoz7vx1rHlOhdJ3UulMig5VZWE9gk
+ iAvDQ/gA5zf24GgJgeiYJ5dhJ8Ahja7fFrZGb6kmMi7fS+sPlGNRDYSA0i5j9bSqi6N9z
+ AEiAuVNCVdXy9eBDpLks6dXOTUFvbc10eiSCSQyM/NIC3Be3BK8ELJm2maUXuAMCMtVkF
+ 7cnxFVOwDVQrmrmtniXzfT7vZXSK5XJYYw4EcH4a+jV4YWz4p7sYcIMxclj1EErCltA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ dmarc=pass header.from=chromium.org;
+ dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=KsxVwx3H; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::534"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20a::7;
- helo=pa4pr04cu001.outbound.protection.outlook.com;
- envelope-from=jan.kiszka@siemens.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=siemens.com header.i=@siemens.com header.a=rsa-sha256
- header.s=selector2 header.b=wF7PdBLu
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 08619605EC
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 05:42:40 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IHWK9kB6EEyIUP0/P1ezwJyI2EMMnEmqKFBltCePbPB8uqOOpGrRaHna7TVFanrz/AnIS8RyILq5QUxc8qLDg1ScIS9FtLPdHXRN+hgLkvT69DyctoGsPiy3BjxctedG5fKTm4cqDQUknjRjBQPMRbjeXVyThMd4Bj6o2I7tGTkbHvY5GyY+fya7tGfbpVYq0Ws0C/eIN+vlYzbu0sICh6cDtc0nqkAAvUtSgPxocq9T/AjVpt6dwry/ugZfElXOnHBOaB3q2wMhn+JjPxNbsVvCldVJcmaa+HcKa/7tV9KT9BZY8vrKGn3B9EryKImnGC9BWIHtuT0FAwFBiN3l9Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AFYJ8bxpi6/bPtT4Xwz34emStRbqlqXNIWe27EWjyWo=;
- b=LAcTan7DapRmnF3lct1LwXu/Jc7BIV7QZH0V9Hq9YpzTIxkNLUuPk6EXTozfCO3AqqSrRdB14k14n7wuVm6tjcMDDVKNSEL/RzIPqZItf8r0gY0Ynma5U1tlyBXoyEOV3YmBMpvlkfY9CX02uu0d4ZGLv8p27tK9GjIYdogWdQ3AXE47d5TY9GwJH3hLQfKxfwdy8xgCnKM8ZuOKvg1nmsn2b4d2qL7uUgxqryAeYhMxYqRI8TvwzlDupqnjLp2Qm6ehFQ9u9Lt1jPKp/shnshPPHdEvuwAYUGcoaGtdHF/vkVTwsEHRdF/eaGaTnI3vZbBq7I+ir6nc1BKtcdIOwA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AFYJ8bxpi6/bPtT4Xwz34emStRbqlqXNIWe27EWjyWo=;
- b=wF7PdBLueM3KssBYZa5hgeG/DQcmay1ocw9Cwf2Ii5g5LmsekdAj1HqF+mUJXGdMFLjvIYwoCLe0+aHMjSJcDrUgWXoQakhw/17hbPd9s8xx4dAcv6gG5zBwfbLBMTEjo6EAem8QT7EzMlbDjjUdzoZxdKguO5IGgKTslNsyMSivplQN34Tsy05ovOdEAGPxKhkJfPDFESMy/29dmTluoZXZKOsYeIEhgNaBrep8OqeKbPuGz+cWfDocJQiTRDZoIX0mNyBmtcdezhHwpEkCK+tbfHQXvmYiiVJbg+atreyoXW9D/LexeDdC5VRS1Ese0rxckm3xay5Rct7AfLvRSQ==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-Received: from AMCPR10MB992291.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:785::10) by PR3PR10MB3786.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:102:4f::23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.21; Mon, 12 Oct
- 2026 05:42:35 +0000
-Received: from AMCPR10MB992291.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::fbce:789a:27cf:d1e]) by AMCPR10MB992291.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::fbce:789a:27cf:d1e%5]) with mapi id 15.21.0496.020; Mon, 12 Oct 2026
- 05:42:35 +0000
-Message-ID: <77d8fc9b-ab0c-429d-a1e3-05e558188f45@siemens.com>
-Date: Mon, 12 Oct 2026 07:42:33 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] optee: do not announce RPMB from within a supplicant
- RPC
-To: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>,
- u-boot@lists.u-boot-project.org
-Cc: Jens Wiklander <jenswi@kernel.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20261011-upstream-optee_rpmb_b4-v1-0-7c63edca4b92@oss.qualcomm.com>
- <20261011-upstream-optee_rpmb_b4-v1-2-7c63edca4b92@oss.qualcomm.com>
-From: Jan Kiszka <jan.kiszka@siemens.com>
-Content-Language: en-US
-Autocrypt: addr=jan.kiszka@siemens.com; keydata=
- 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
-In-Reply-To: <20261011-upstream-optee_rpmb_b4-v1-2-7c63edca4b92@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0179.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:b7::9) To AMCPR10MB992291.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:785::10)
+ client-ip=2a00:1450:4864:20::534; helo=mail-ed1-x534.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=KsxVwx3H
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6B90A80AB2
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 07:44:36 +0000 (UTC)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-6b1afcd2d23so1005400a12.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 00:44:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791791075; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Frqi01eJm/tmNgR60fG7djFO9FRAJXAzV4bAGandvJ3YRVt/J52IhjJpGLNLTj40bQ
+ hvM8pIHZ3oAt30HLyUtx5Oex3vwYvcCvCoqdNVQ5GciPE0MRD8jzeWy2w3CrEzWFqpO6
+ fTJtZyJjssflfXTA+QxyP+maaxCnRkz9/xR98kgp4KE1B+glpGWLbctoTeDCw6vnDobd
+ OSF1HBRLwZWo1owEP/4uHKMd0nOLY+KrMF62d7Ytc0qh//x2WyFofqHnp8Fl+OMRaV/o
+ fvF6hCgIcsR6Msv8+C9Di9We7xK+pGixCq5vtlvB3qyQFZ/C1HiRcze3izs7pwSwrfiJ
+ Gbhw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=WMXrAcZznjhm/X9X5d2x9IqRQTgO9qarG+vo4uTKaew=;
+ fh=QSz2LWxXxIlE5sVY3cc6rCrz5I3EPoPd6wg5hM7ii44=;
+ b=a/Gz1/BkNxb5WmjNTFlQhDAimrRB34wDI8OfGXQ8vrIGDPk8nioHoeAWdfAs+RytbQ
+ s38lhOv79aWW7yr7bbEvPEJXtKzqIITulTPvKutn2aCLlqRPZ/QW0cHdTYffY5PCBSq8
+ 6VH+ViwRnhWfZ951902NhPYz208yD5Spnc6I6Drd3pj3rwghhkB8LJZxsFkMu+VtTmGV
+ dLWoorJ1eqqR3rM/Drq+9tYbNq6ZIbA56wO1IZHDj32WN45nnDveeiacO5XYAtjrR9ZB
+ SdYp1viQlydrQ3UHly5/ChcWa6SzXtG8nCB6NinXqMJdjeaVGZmhsSTQzm+VEcn24bgh
+ sAGw==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1791791075; x=1792395875;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=WMXrAcZznjhm/X9X5d2x9IqRQTgO9qarG+vo4uTKaew=;
+ b=KsxVwx3HHzHa3LVtjlaeuQHVTTpWtVa8RATSAu041PBJA7mSOl0C4TSxZulXwh29T/
+ kmh+hVFKqMStKFzCph6gGn1Wvu1IQkbQvnOGVDdUkKbqvpy77lEL3p+BiRXw+1XYNOdV
+ SVpSfa10wsR+upUQjOQOYRC5SrDkkT9jzHlVs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791791075; x=1792395875;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=WMXrAcZznjhm/X9X5d2x9IqRQTgO9qarG+vo4uTKaew=;
+ b=xhvinS0rIpMRlPIoNISYFy4L4uPtCdd0zYsHqtmJxPSU21ckM3YmjOnsiB+FMVnOd7
+ jHOrJixjaQoB1dpZKsEYMNVgp//ylwZlK44yzJ4eE3jlimfAe9K5G2xuGI5VSOeH9JjW
+ iocdcujRy/P2H+5+6MwbmQXiuQrxvZ4NSyy8BcnNuIB4GVnPyIFbVoZuifUuPXmx6tnA
+ FgFUirhxjlK8fIJqYVeAj7yF+LfLFrXbyTCqC8I/amKEHaXGny2MLKH+9TYRFy7ieijO
+ R3NIptLzH2qzKmLCJ6GCqILRZGEBbJyTOKtzppv60A4i9+zlX0z0GqrZ6/HsvBvEJM3d
+ fHiQ==
+X-Gm-Message-State: AFq9FYLtpbUvG8eJX61Z9kujPoqwG+6Qnv6hU+QmkZ65CKI0xzKfmTDn
+ 6I35snSfWSBLQ/aEsy7di8iMH67qPbA3DPUNkM4cHdWtJmmBx+rwMPqfysJWwfs4Bi+GsENjzZ3
+ O81LNMK5wTM6UEOmHDZw37KGHo8l64ROv72zR8mNC
+X-Gm-Gg: AYBFou0XFJud8dMxazRoZ7rrtu5OMCncoGs0GLV+HdUvegwNZmi4jEsJszYOBPrVO57
+ zweGl4MhcPINuz4a25dS7Tuj1njbsmWRvYpL9ABBk4qlQWuP4ukmAjEThnYKMBRIkwKqz5woQfV
+ AVRstWCinuBOu0N3KNLbeAzgf3XPcEhLu1Dj8fcBapcS/estBpTqDbFrs2gReAbPnXtnBzBAWzV
+ cTG+UnBKpjc/U+rN1m3V/In7eJIQv8sr99RSQ8JPF4z/qyxy5duLmSkeysKqHrM9NZO6yQZMrqB
+ fEPpqiRQIKX23eoMzzH9TO0PQEuBmRjKoSz5TeQ0idS3PDaGnBostW9A
+X-Received: by 2002:a05:6402:5285:b0:6b1:497d:1c64 with SMTP id
+ 4fb4d7f45d1cf-6b17c293eccmr7805926a12.45.1791791074925; Mon, 12 Oct 2026
+ 00:44:34 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMCPR10MB992291:EE_|PR3PR10MB3786:EE_
-X-MS-Office365-Filtering-Correlation-Id: f91b47da-7fa2-4c4e-3eb6-08df28239e7a
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|23010399003|366016|56012099006|11063799006|4143699003|261009223027099003|10067099003|18002099003|22082099003|55112099003|6133799003;
-X-Microsoft-Antispam-Message-Info: 30nqMx4xYyrlLrDrV8UpmfonRE6TNQixDhJhGwmCWuV6HVyx/LBHwzqmc/gUXcXow4FXzqB7DpK239AOU6llH3ycMMPQCG+YErxFCP01jvVucYtKFkAzHNlw5F1iqp5ruHsyfnOS3RLmxjvWIAAtd7/Of3Y75O2giUVOZgVX4TkNGHGLnQ2u/s02Tvjx6hxkIACEhfXrlX0qEcX+VWRMkfRzB6cpfVnWKPwkid/LAmALybmWWK9kUNQcY030LQL2fdTXfMFljx47gDOacIcDzshvxp4lbOl1GQMcu+OxAEMWQ5Ka3cJKBeWGISMY72i2s7wO+LYpD6Jg6/5or6xpCoTqaJs4ddeJJX9ignAkLrCz41HSLqJ2GWx3noQMsbZ+EZf+YZGHCzH7kcAzEa2AOqfPbGCPvV7K4NgGbWpsQoxbN/6ANx8J3hTBhb7a+gAlTTm75uI2aMzDFDcDdz0iypEHTeTGinCDa3Jc95VN+SyenQcbcM+0utWU36B/1UNMa9jScFwhJzbYhU4OE5f2X3+zR1mI5c/FsrolTDzY7lVMKUpj+Mw8wGipT8v2y18WiP9V44Rf8KI1jNcRksA/pSvpCUX66Go78aFB6FOKNlKEpoJlUngDOwjWNV8R+RetESY/K+N7YfTnjMPjr/IE7brFM0qUUAsAf1d05kGauqo=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AMCPR10MB992291.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(23010399003)(366016)(56012099006)(11063799006)(4143699003)(261009223027099003)(10067099003)(18002099003)(22082099003)(55112099003)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WVdQQkpDSHZoV0tCN1dIR0Z3SXpXUStuNmZnbHJpTndFeXBJZ0ZZVi9tZGdp?=
- =?utf-8?B?bi9KekJubGJJQXBFMXZvdjVmTXE4d2pwa1plZFcrUlJVZU4yWlR4U00rSFo2?=
- =?utf-8?B?ZGZtRjYxLzdZY1BEeGJKVk1yUGRXK3cyQ2liMXhnZEgrZTJyWjErZXRzSVNu?=
- =?utf-8?B?SXZoNU5MWGJLd2c3N0lRbUwvMVlHeGozcWF4em9jMWpuOTlDMlk5MnBGMGtY?=
- =?utf-8?B?ZEtMQXhCbllrZkhybGxEbk5LTElKVCszVyt2TVdTZ3g1L1hSZEFYc0JhbHBq?=
- =?utf-8?B?YndoUDRFdGVNZFQxNkM0eGZacSt3Um9Ib3FkdXp1REhXRFoydUlPb3hTSGEz?=
- =?utf-8?B?TlBBNk8vNDExSi85bm5aOEJuUEwwZnBGWGxpb0NVMk00OC93dUJuM3B2VG9C?=
- =?utf-8?B?VWQ3STdxenJrZ1ltMDJabnpPU01TQ2RuYXBGZjl3N3p1SmV5WUFZTGJ2TWtt?=
- =?utf-8?B?K2grNUVtRkRnZS9DdEpCVFFxV1EwOTluV2daSmViWDFmQUd4bWRhRHV6UFRy?=
- =?utf-8?B?L0FDNHhxRm9CM3pzOVBEcytDUzBZTi9FNkpFSC9iWnhHVnNINlY4ckFwRU9R?=
- =?utf-8?B?YzFTdU1ib3RFUitTcUhBRmVyaW0yY2RBbXAwcnJmUitMQU5nTWsrUDlTdHNy?=
- =?utf-8?B?VW4wclBBU0Z3QUxwN0hNZm9BbE5hL0dhY2NZbjRoQ2k5MkVKZjJuS2lPSkxT?=
- =?utf-8?B?eWVCVmVCZlRDOXlocEdSOGExQmdHeVhpMVNobngzdUFra2VtMWJUSXphamN4?=
- =?utf-8?B?eHVVemdIWS8yK3ptenNHWFlCcFB6bkdxZDdhRnRLYS95UmFUQjBkOFhGQVpZ?=
- =?utf-8?B?R3lTL3V0TGc2bnk2b3FWT0p3ZnphRTNWOEZGd2RrTHlyRDR6Y29OMnhVMkc3?=
- =?utf-8?B?NlV4dkVVN1FZWjRNRGkyNFBzNEhkTjhtZStpckhZd0xDeitGWWdBRnQrb0tK?=
- =?utf-8?B?Skk0VTNSdURqRUJ4UmhPMGEySTlza0dveWVtTEV5ckVjNmZRMVI1RlpWeEsx?=
- =?utf-8?B?UU5WYjdrNjYxYW8xMy83dENxR2M2bXlYZTdXK1lpTmhjV1R4NXFpSXg4dThI?=
- =?utf-8?B?VVo3c3BBc284VzRSbEZnSTJrclQzOG5HbTJaSmg4S0czWGFRTjI1ZHVJbFFu?=
- =?utf-8?B?Yzhucms3RnREL3F6RmlXVWNtSC94dzJkUFMwSnpKUFhDR3Q2YjR6QkM2Mzkx?=
- =?utf-8?B?bzAxTW1ybHZlN2c2N1hjc2xLREdueDRHV3ZsOGRRcXpIaTE5MGVGK0Uwc21a?=
- =?utf-8?B?QVoxK1F3NzY5MFh5SlN0cUYwSHRwbGZ0TmROYVhxa0NJNFVPazBJVDI0MG5w?=
- =?utf-8?B?dTUrMTdkVXRYM01PVWJiWEpNWG5sdytlWUloaFJJT1Y5WWdvZjJoeXJEbTlo?=
- =?utf-8?B?L1dnRWhtU3NyekwySllCQmhMZGdXMnYwRUVMaytJbDFXNVhkNVFrdG5ETEEx?=
- =?utf-8?B?bXAza2VoN0pjdHdNeWRlcFE3TTl0dnYzNm50TFlDQXUxQmJVTWx2T1F2emEv?=
- =?utf-8?B?dExLRm1xbEJXN3pjS09EUEpkWWVyeVc4WUNWek1pVzBVSDEvYlZ5TTVpaWRv?=
- =?utf-8?B?SmpDTlF1UTNZWVUxaFdCVGVBZnJiUTFWUyttMzNZV3lPVWdnaXlxTjBUZVdk?=
- =?utf-8?B?d205b3A4NjRaYmd2UG5sWlJQSTBad1BuZmFJUVRod2JhYmJTQ0JZYzl3R3JF?=
- =?utf-8?B?Sk1VcDVCUmRUbUhrZkJDN05UejhNa0MyelBiTyt4MENMSCtQOVhKOUltL3ha?=
- =?utf-8?B?Tk43K2JJcVN3ekdvOFNRTWhDdW5tL1lRUzJQRFdUTTlTSUpSc3RudVRWcGRR?=
- =?utf-8?B?cjg4WTVKQXMvZWcrMGxSc1NiL0VLeTdBNHEvUkVnTnNoRVovTWhPOEk3Q3U0?=
- =?utf-8?B?LzBNTVQxcVVHUCtEWXM5RmRVd2dpNFZJZ201eHVPeks5enVWWDhaZXNKbExy?=
- =?utf-8?B?L0d1WlNWWTd2THI0NTB4UGxWb29ocWdESUFPbVZCZ1FQYUFqUXlXRmw1Q2xZ?=
- =?utf-8?B?UFptRVJvOEVJYlBaQXlSakw1Y0srNVFTUi91bWRqNnd6eDcxZGN5T1Y2NXFt?=
- =?utf-8?B?cmNzQnF0endOdkVNL1lvV1Z5NWtBcGFjYTY0aVJZamVNT3dYdFBWZDVwdlJK?=
- =?utf-8?B?VDNSdXhpdnJLRmpPREFQWWlFTm01U0hoT3VESlNWMHAxMjdNbm5KWDNlSEw3?=
- =?utf-8?B?b1BMTE1iVTE4VFlkVnVqUmNOVUh1OEJJT3BhTDFwKzgvOHBpZXZ3eUYvTjB6?=
- =?utf-8?B?ZkdQV09mak1sMXIrdzdET3Z3STgrZmpHQlZ0V1dBaXF1WEplSmxjamZvbzhI?=
- =?utf-8?B?bCtnMW93SmJJdWxoUmI4L0k3V05jdVZKaklNcTlrZmtRdkVzTVY0Zz09?=
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f91b47da-7fa2-4c4e-3eb6-08df28239e7a
-X-MS-Exchange-CrossTenant-AuthSource: AMCPR10MB992291.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2026 05:42:35.8418 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZvSzwXZwnvYennLpe6k7GVRVJnGr3MMT0JX+mCDVVjl7pJuCX63Pl1tAu9U1Bx9zZ4lT+TW1VQ5cilzzrL0SMQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR10MB3786
+References: <20261009151005.2870671-1-hyyoxhk@163.com>
+In-Reply-To: <20261009151005.2870671-1-hyyoxhk@163.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 12 Oct 2026 08:44:23 +0100
+X-Gm-Features: AclHuK-Dg4m8c0HmtbEgyyizsXgsNTjT5ki_yK1mNpwc8PZSO9o4snFAiOeNffg
+Message-ID: <CAFLszTitXuRhtQkm7-xj6+9wwLGq_MQd_8ZVeYQx3fnxKS8qwA@mail.gmail.com>
+Subject: Re: [PATCH] bootstd: Add a bootmeth for scripts in raw partitions
+To: hyyoxhk@163.com
+Cc: u-boot@lists.u-boot-project.org, sjg@chromium.org, trini@konsulko.com, 
+ alchark@flipper.net, daniel@makrotopia.org, jbx6244@gmail.com, 
+ quentin.schulz@cherry.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -300,96 +186,131 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 11.10.26 15:07, Igor Opaniuk wrote:
-> mmc_init() calls optee_rpmb_available() once the card has been set up.
-> When the first initialisation of the eMMC is triggered by the RPMB
-> supplicant, that is while OP-TEE is blocked in an RPC and holds its RPMB
-> mutex, the announcement opens a nested session and OP-TEE's second thread
-> spins forever waiting for the mutex (U-Boot has no notification support
-> to put it to sleep). This happens whenever a TA touches its RPMB secure
-> storage before anything else in U-Boot has initialised the eMMC, for
-> example a TA call issued from the shell right after reset.
-> 
+Hi He,
 
-How do I trigger this exactly? I tried via StMM (env print -e), but that
-didn't cause issues in my setup.
+On 2026-10-09T15:10:05, He Yong <hyyoxhk@163.com> wrote:
+> bootstd: Add a bootmeth for scripts in raw partitions
+>
+> Some disk layouts store a U-Boot script image directly in a named
+> partition, without a filesystem. The existing script bootmeth cannot
+> find these images, so booting them requires a board-specific bootcmd.
+>
+> Add an optional script_raw bootmeth which matches a partition label and
+> reads the image from the first block. Determine the image size from its
+> header and check it against the partition size and a configurable limit
+> before allocating and reading the complete image.
+>
+> Support legacy script images and FIT scripts with embedded data. Check
+> legacy length-table bounds and validate the complete FIT before passing
+> it to image_locate_script(). Reject FIT external data to avoid following
+> references outside the loaded buffer. Use the existing script verification
+> policy and share the script boot handler to set the device environment
+> variables and execute the image.
 
-> Track whether a supplicant RPC is being serviced and skip the
-> announcement in that case: OP-TEE is using the RPMB already.
-> 
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-> ---
->  drivers/tee/optee/core.c          | 3 +++
->  drivers/tee/optee/optee_private.h | 2 ++
->  drivers/tee/optee/rpmb.c          | 9 +++++++++
->  3 files changed, 14 insertions(+)
-> 
-> diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
-> index a47c76811cd..b61f907a3ff 100644
-> --- a/drivers/tee/optee/core.c
-> +++ b/drivers/tee/optee/core.c
-> @@ -424,6 +424,7 @@ static int from_msg_param(struct tee_param *params, uint num_params,
->  static void handle_rpc(struct udevice *dev, struct rpc_param *param,
->  		       void *page_list)
->  {
-> +	struct optee_private *priv = dev_get_priv(dev);
->  	struct tee_shm *shm;
->  
->  	switch (OPTEE_SMC_RETURN_GET_RPC_FUNC(param->a0)) {
-> @@ -450,7 +451,9 @@ static void handle_rpc(struct udevice *dev, struct rpc_param *param,
->  		break;
->  	case OPTEE_SMC_RPC_FUNC_CMD:
->  		shm = reg_pair_to_ptr(param->a1, param->a2);
-> +		priv->in_supplicant++;
->  		optee_suppl_cmd(dev, shm, page_list);
-> +		priv->in_supplicant--;
+Rejecting external data is unexpected behaviour, but I suppose it is
+fair enough, since scripts are small and we don't expect any other
+images in the FIT.
 
-Wouldn't it be enough to track this from rpmb_process_request? The
-nesting issue is limited to RPMB requests, isn't it?
+>
+> Document the configuration and disk layout, and add sandbox tests for
+> legacy and FIT execution, invalid images, size limits, partition labels
 
->  		break;
->  	default:
->  		break;
-> diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
-> index daff3e04493..92e3b3bea10 100644
-> --- a/drivers/tee/optee/optee_private.h
-> +++ b/drivers/tee/optee/optee_private.h
-> @@ -42,6 +42,8 @@ struct optee_private {
->  	struct mmc *rpmb_mmc;
->  	int rpmb_dev_id;
->  	int rpmb_original_part;
-> +	/* Non-zero while a supplicant RPC from OP-TEE is being serviced */
-> +	int in_supplicant;
->  };
->  
->  struct optee_msg_arg;
-> diff --git a/drivers/tee/optee/rpmb.c b/drivers/tee/optee/rpmb.c
-> index ea5507af086..cc82fcead0e 100644
-> --- a/drivers/tee/optee/rpmb.c
-> +++ b/drivers/tee/optee/rpmb.c
-> @@ -224,6 +224,15 @@ void optee_rpmb_available(void)
->  		    !device_active(dev))
->  			continue;
->  
-> +		/*
-> +		 * mmc_init() may run from the RPMB supplicant itself, while
-> +		 * OP-TEE is blocked in that RPC and holds its RPMB lock. A
-> +		 * nested call would then deadlock, and OP-TEE is about to use
-> +		 * the device anyway.
-> +		 */
-> +		if (((struct optee_private *)dev_get_priv(dev))->in_supplicant)
+Philosophically speaking, it would be nice to extern the existing
+bootmeth_script - did you consider that.
 
-Using some local optee_priv variable might be nicer to read.
+> [...]
+>
+> MAINTAINERS                               |   1 +
+>  boot/Kconfig                              |  26 ++++
+>  boot/Makefile                             |   1 +
+>  boot/bootmeth_script.c                    |   4 +-
+>  boot/bootmeth_script_raw.c                | 202 ++++++++++++++++++++++++++++++
+>  doc/develop/bootstd/index.rst             |   1 +
+>  doc/develop/bootstd/script_raw.rst        |  45 +++++++
+>  doc/device-tree-bindings/bootmeth.txt     |   1 +
+>  include/bootmeth.h                        |  12 ++
+>  test/py/tests/test_bootmeth_script_raw.py |  97 ++++++++++++++
+>  10 files changed, 388 insertions(+), 2 deletions(-)
 
-> +			continue;
-> +
->  		if (optee_open_enum_session(dev, &tee_sess) != 0)
->  			continue;
->  
-> 
+> diff --git a/boot/bootmeth_script_raw.c b/boot/bootmeth_script_raw.c
+> @@ -0,0 +1,202 @@
+> +             lengths = buf + pos;
+> +             len = fdt32_to_cpu(*lengths);
+> +             do {
+> +                     if (size - pos < sizeof(*lengths))
+> +                             return -EINVAL;
+> +                     pos += sizeof(*lengths);
+> +             } while (*lengths++);
+> +             if (!len || len > size - pos)
+> +                     return -EINVAL;
 
-Jan
+This duplicates the legacy parsing in image_locate_script(), which
+takes a size but ignores it, so its 'while (*data++);' loop can run
+off the end of the buffer. Please can you add the bounds checks to
+image_locate_script() instead, in a separate patch? Then the existing
+script bootmeth and the 'source' command get the same protection, and
+this bootmeth can just call image_locate_script(). What do you think?
 
--- 
-Siemens AG, Foundational Technologies
-Linux Expert Center
+> diff --git a/boot/bootmeth_script_raw.c b/boot/bootmeth_script_raw.c
+> @@ -0,0 +1,202 @@
+> +             if (size < pos + 2 * sizeof(*lengths) ||
+> +                 image_get_data_size(hdr) != size - pos ||
+> +                 !image_check_hcrc(hdr))
+> +                     return -EINVAL;
+
+The caller computes 'size' from image_get_data_size() and has already
+checked the header CRC, so neither check can fail. The same applies to
+the 'fdt_totalsize(buf) != size' check in the FIT branch. Please drop
+these, so it is clearer which checks matter.
+
+> diff --git a/boot/bootmeth_script_raw.c b/boot/bootmeth_script_raw.c
+> @@ -0,0 +1,202 @@
+> +     if (size < sizeof(struct fdt_header)) {
+> +             ret = -EINVAL;
+> +             goto out;
+> +     }
+
+This only applies to FIT but also runs for legacy images. Please move
+it into the FIT branch above.
+
+> diff --git a/boot/bootmeth_script_raw.c b/boot/bootmeth_script_raw.c
+> @@ -0,0 +1,202 @@
+> +     if (!bflow->blk || !bflow->part)
+> +             return -ENOENT;
+> +     desc = dev_get_uclass_plat(bflow->blk);
+> +     ret = part_get_info(desc, bflow->part, &info);
+> +     if (ret)
+> +             return ret;
+
+Please use log_msg_ret() for error returns here and on the 'goto out'
+paths, as other bootmeths do. With so many rejection reasons, it helps
+when debugging why a partition is skipped.
+
+> diff --git a/doc/develop/bootstd/script_raw.rst b/doc/develop/bootstd/script_raw.rst
+> @@ -0,0 +1,45 @@
+> +Raw Script Bootmeth
+> +==================
+
+The underline is one character short, so Sphinx warns and 'make
+htmldocs' fails in CI.
+
+> diff --git a/test/py/tests/test_bootmeth_script_raw.py b/test/py/tests/test_bootmeth_script_raw.py
+> @@ -0,0 +1,97 @@
+> +@pytest.mark.boardspec('sandbox')
+> +@pytest.mark.buildconfigspec('bootmeth_script_raw')
+
+No defconfig enables CONFIG_BOOTMETH_SCRIPT_RAW, so CI always skips
+this test. Please can you enable it for sandbox? Check that the
+existing bootflow/bootmeth tests still pass, since they count the
+auto-bound bootmeths. The test also needs
+@pytest.mark.requiredtool('sgdisk'), as in test_ab.py.
+
+bootmeths should be tested in C, in test/boot/bootflow.c, with a disk
+image created by test/py/img/ - that is quicker than restarting U-Boot
+for each case and avoids the manual 'bind bootstd 0
+bootmeth_script_raw' step. See the docs here if you haven't already:
+
+https://docs.u-boot-project.org/en/latest/develop/tests_writing.html
+
+Regards,
+Simon
