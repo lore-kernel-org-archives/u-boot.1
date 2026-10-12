@@ -4,139 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C0BECA9ED1
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 16:11:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3730ACA9ED0
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 16:15:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4399D40663;
-	Mon, 12 Oct 2026 16:11:25 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EFD6A40581;
+	Mon, 12 Oct 2026 16:15:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MZtzsmp59SqQ; Mon, 12 Oct 2026 16:11:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 60F6B405A4
+ id NmbQPN2l4y4P; Mon, 12 Oct 2026 16:15:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2E4CB405A4
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791821484;
-	b=VqMHRWYfULCOylyImaEnBgX8UHCI38r2BY+I8AjwDsBKuPSngAI/gv+Krh8nJTL16vhf
-	 AZM2yMhpqDGLPu1HfjxTfshkv/n0hEC3eUhtdIX98DyRL4tVOcJnvBOeaWTQuOPIDV8eX
-	 xdwTGLdt+RL4OkiYiCZFvLIw9BTKYS20PorM0pz2p2Y95nuSPmdYMhknvXQu3YuwQneTO
-	 ruOFbvNolmE6P/m56FjMZuS7jbEmdTQ9xUBMaJOpcFSGfKMjksjN2mQYdmP/KHkr1hZic
-	 u6+ocsVqjWujedXHYxqhtr13tZVI0eGw0bwv+AEJy7ove7BvYI+ftH7MhFnANCmXKcQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791821484;
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791821756;
+	b=MZbBnGE6HKFBSqNTJ9YrIZslUSOiHq6cPkjvV+CKcJaMO+GLKR5TKZTou9K/wBEpRMjL
+	 26LWgdiRKCoHn7Z9YNpiHEjGq6SfQqE7ICxcmP4wqHDgSetxDnZzcerHGLjpZFJIgLEFE
+	 sNKyULrv1pczHHx9rp3COlE3F7g6YDrn2LqSMHWUmEa4vR6aDJX/WfWnJd/cfn8BKrXsK
+	 9D2PIT+4rWtXF36lLNQYKiUYTiFvgBahqBLU4ra+eLsq58Wx7aks7vUOT1YAWkDJgHWNk
+	 RKnJlojvdpor/Wx/YWRsjoaMkUkKrus8orW7wOPI9tDStQuaGrAB+wEykXCmtztNWlQ==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791821756;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=E6T2WrC3idd5vABD4L/jI+OOl4x6/pFq8zPdBbCDoO8=;
-	b=Xc30Oc1Ntub//3eZHw1uFu0MLId9wsvVbNI+v6myUd+jwBYmo6cFHT0/HLqlHQyGv+Lt
-	 3Rs6I4gTyl5f4n+kRS9+dNcE97uF4ZyObKPcRbiW7zo0eb7nZd0//9Z8HjsFsD2ca3z/M
-	 87V34nIgzTbzbC8l8or/rda5rOJG4SmOdYNkCao6WabXSNebYh0hAaLl4YRFlFlCeTM5Y
-	 1+3IsrTArtnU8ApsGjF7/r2kA1jmJc83eQtmpJN2SM2mWzTQlHUkcZZblxm//anB8NghP
-	 oSDURxjpon+19wh9+RFC68fuWOTd+3tGUY/p8aIkD09XQ8Ryk06R7XTu8Bm7eAR8vJg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=pass header.from=0leil.net;
-	dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=TevwRpR2;
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=elWiL/tbEQEMDU9fD7wZFPjd07hFyma4u5YkYr4G4j0=;
+	b=AJnOcldBhY+kqbbjTAj4ZvxAPErSM5Oq/PE/m2JR8Al+rY+Xox0NgM93o0UVHA5gDr7h
+	 ozXeoKcwdW3N7EahTBHDzSbOkyAeCmdJ0xPzJPysWKEhIpwjsmr4nuLtfjtumWMav9Rpp
+	 QkW58P8SQxAoJYbOcZvrRiDFEC3564DGWG/wCXwcmvKadjaKiD/MKaET/PA5QWO4hL2e3
+	 UKNtQIjPua3sc1ymOX/E2iXjD4jQdxTSgdbS/ZW0WK0AxMaxecbun2SiDtaYpyTRY6vgm
+	 SxdqGgL6QjZHzDPP0GpzO+736oqLh7wWutAJ07IdEY2sYFWxC61lyeZJq+AzkD4pSyQ==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791821484;
-	bh=E6T2WrC3idd5vABD4L/jI+OOl4x6/pFq8zPdBbCDoO8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791821756;
+	bh=elWiL/tbEQEMDU9fD7wZFPjd07hFyma4u5YkYr4G4j0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NmBbizCn1pOKbWQDl3CqFKxbsPhmuwHBetalAyIAfbHRfPULGzBe/w0RlYFg34Qz0
-	 JArgL8FI+jmh2n20KC1FUOV6e04ewywCikCpC1ugf9kphXmm91i9t7bSsa7AY/qCcV
-	 +ZSS902adwn1BVzqF6F5di4/PtsOnHLzJSw1TCe2jAL+6RECOTaJPX9HExP1xXyaj9
-	 ccPRGTCJHqGxPxoJH5lEh6nvS8gfc8FyRMSbU3kHG1Ou9X2XbW8b8UzewVIhHyHpki
-	 DereIGZA3aHBJRiY42S1yr6+fbidr6kZVXw8UdEOKq4a9dppNiSTUQ6qm2WaTRZ0x0
-	 30bGg8jwE8F8A==
+	b=JGpDMIDZz021krDqy3EUrnq6yCAVHZtAncs6AcXOK7toBNK4MX3ZcH3HmIQAUJBtZ
+	 z+5eauW8aedqEQhioMEEN8HILEILId6rXbNgBRLyI2GLRvmXTD8A3e5+a+ghFiLZnA
+	 NiWqu14doWDHt+pYLx0GK5g+FGVlywej3qHWV+yXlUv5xu51aKdsYfIm/gPOnLqdRx
+	 V87C0Wr0JBLrgNnYdse4e9JAYS23+ynlaqWC/ztOb75IxUJ8wqVjroijh+uxBmdKDe
+	 EyIp2pR6RJd6z5ouwBX6LsofYd1ApPHHK0xXBbFy2HSdgrD8zzvuaysUnSutluih0f
+	 NCqOmjK/k77tw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 60F6B405A4;
-	Mon, 12 Oct 2026 16:11:24 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 79852380
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:11:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2E4CB405A4;
+	Mon, 12 Oct 2026 16:15:56 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5C3B5105
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:15:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6ABA9405A4
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:11:23 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 4237D40210
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:15:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CnIocz1Au16l for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 16:11:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0382040572
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=45.157.188.12
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791821482;
- b=GUI6yfX7d63sU7LWZG0I1o4xbhIOZwuAsWWc7AM6Ljtgqbw6hPY6C1jSC8yip2CjE3ea
- M/dK25jHIc3CU7d8L6xHxK8A4WmEgoJOFFUJlBABgpI7KzhVbPnj4MH1edNpGwGgZTPQ0
- jYt6bHoegTbplMnzr2Rz4g6hyolpfD/5riuah2/b5OA+7DO6f1RkiRlbbIZvuSsyiSzEQ
- 3a63zUJb8AEjdoUn1/hZV6lvJ/aKi6VVDa1vn/o4dva1CSxLvOz9IqI/FaRO7nJ4En37m
- QAM4peHFA/1daxrZ8/60611BtbPJ5y23UuxjziX1H+Zu/DGJx8s4Va6/CLA3sMcqTiQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791821482;
- h=Received-SPF:Received:DKIM-Signature:Received:Message-ID:Date:
- MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
- From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- X-Infomaniak-Routing;
- bh=E6T2WrC3idd5vABD4L/jI+OOl4x6/pFq8zPdBbCDoO8=;
- b=gZp7nncgfa7//ibrV5V5iNLldwaQ/Fy0ibdopolGIr3oVasY1LQyGwmSv2My5r7lzlYF
- rlQ6z8uR7c9Aq0KDLFS3B5TchHQMcKYDqKcDTgQhmftvDhkDpyTiGhZ/53O37P00YaCCP
- JrFNTu9s85mxpTAQbaqUCbw0Zk2+brcGQrqcfmhfJhD74AXRPjBME2gWHCVgtzGgQ8Sli
- yQiyRCUI0aerllp+LLLdHFokN4TcjXlRPk7Qndk5oRRSuh1jsPAvDN0FDlQoJUW590bc6
- M/m6r4o2BPHKSOwfcqSe04aKR6VXRn/njbaCuNTdMz7xMXGDscxMXnfkSVEqo1iQMqw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=0leil.net;
- dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=TevwRpR2; 
- arc=none smtp.remote-ip=45.157.188.12
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=45.157.188.12;
- helo=smtp-bc0c.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
- header.a=rsa-sha256 header.s=20231125 header.b=TevwRpR2
-Received: from smtp-bc0c.mail.infomaniak.ch (smtp-bc0c.mail.infomaniak.ch
- [45.157.188.12])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0382040572
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:11:21 +0000 (UTC)
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4j3MsH3kvBzkNh;
- Mon, 12 Oct 2026 18:11:15 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1791821475;
- bh=E6T2WrC3idd5vABD4L/jI+OOl4x6/pFq8zPdBbCDoO8=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=TevwRpR2Y/t5RbMQzTY/4ci1nUnHkEIMOMAT3e1hUHIuc1eS3Q8i81zw4DFnhN6Jn
- tKAl0ti4szcRqpvszO2dDYgrBuJKgLc+yRfhOORnpETtR8rIFVWtl77iB5t20i1bDv
- zNBd9RKBeg6Aq8StX0Xf0YaMdISK6bCNiMAs6lidMXKm9rsvtF0XnO6RA+rt6b3BMs
- YoFdI0lLYGdTvENVsLm7zgK97WGHPqR4AcjefdLLeOmPq/ckHVl7NRKW5l2hkmOAU1
- JYLuB038OBmHZfL2fjdLjI2xhTVtSKyOy/wzQ4pyRbVmQl3Vzc9boSHDup7njoaUL4
- 9HTPAPPuUkZ/Q==
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4j3MsG2rxJzK01; Mon, 12 Oct 2026 18:11:14 +0200 (CEST)
-Message-ID: <fdb4cc14-505c-4dfc-b6bb-4b13f7c84275@0leil.net>
-Date: Mon, 12 Oct 2026 18:11:13 +0200
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qmkZ1ZhbjEUi for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 16:15:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 23F3F40201
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a0b:5c81:1c1::37"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791821753;
+ b=mwsY4aPzleXGdgWRq8u13xScKArrcJe4mKyJaWbpqsAW690Dv7PiK6sYFCvgsT0dNq9G
+ JlBhHsga1l2QwcxkgwfsC3yIfOAVY7sezjYvygJnM3FwpyQnZsReEaDWaqKRnxw6m9KYe
+ WadxbFbYDQYO+3SRnzAppkELGWSN1LsOD+TfnJfT2w/K7qy00veA7IqKqord8vOnGbT8E
+ RT5/71nKaEMpG69YsHoQqmzxAd69BwqgIEQ7YGiLYYWO2SV2e+oKOIdWg41jDcUYbyCy4
+ DFRuBaiZ9lafkz/gb1gk2HGRiYTSS+9tfZ8QCIhMa+/TeAAKPXYEKjuGk8UnGpJesaw==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791821753;
+ h=X-Greylist:Received-SPF:Received:DKIM-Signature:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:Content-Transfer-Encoding:In-Reply-To;
+ bh=elWiL/tbEQEMDU9fD7wZFPjd07hFyma4u5YkYr4G4j0=;
+ b=CArwk5hDTGRKTEdBuEHfhQJtVjE3Vmr9HU46st4NulbN3fX+596Z1sP47M/D8MCy7idz
+ KI+mhODdP/3ShGHn1/n5no9fzyBv2c84WVeOq/WE2Po9XtamtrGN+a43YsbCNvr4shdLK
+ FDBxr10jH3KSUQ7cI4jeiDcvuTK+00s6s/0IRilM31Icjfvur+ToaeuXOAVQn+HDYUDHr
+ GY2OTiNM/F+ajd7RntF8FNmJK6xwdMDU0KHmaixHL1NkhXcHuNWM8qn+gAz2W7z+nAHD2
+ l87IbPGyuXBvDu8GbsNI58acVAXKRu1sQ8sIs4L2rrGQHaixzFe++EKcNY/32TbRjTQ==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ dmarc=none header.from=iki.fi;
+ dkim=pass header.d=iki.fi header.i=@iki.fi header.a=rsa-sha256
+ header.s=lahtoruutu header.b=KgCiFqSL; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a0b:5c81:1c1::37"
+X-Greylist: delayed 498 seconds by postgrey-1.37 at util1.osuosl.org;
+ Mon, 12 Oct 2026 16:15:53 UTC
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=iki.fi header.i=@iki.fi header.a=rsa-sha256
+ header.s=lahtoruutu header.b=KgCiFqSL
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a0b:5c81:1c1::37;
+ helo=lahtoruutu.iki.fi; envelope-from=marko.makela@iki.fi; receiver=<UNKNOWN> 
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [IPv6:2a0b:5c81:1c1::37])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 23F3F40201
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:15:52 +0000 (UTC)
+Received: from kehys.lan (dsl-hkibng32-54fbf3-253.dhcp.inet.fi
+ [84.251.243.253])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ (Authenticated sender: msmakela)
+ by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4j3Mmr5DTyz49Q69;
+ Mon, 12 Oct 2026 19:07:24 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
+ t=1791821245;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=elWiL/tbEQEMDU9fD7wZFPjd07hFyma4u5YkYr4G4j0=;
+ b=KgCiFqSLmM+d+8veHtWniMrIE6mr3lmmvRYEhVqbs95X9aFIi0mTPEi0J25d7JDJ5hteSl
+ JyH1Sn7WI91hB62mVZk49gMDyk4Xk38t3BHzhwuUKY4T3dLTvotRNtvZ91Bd/aI1X5Nqws
+ Y3Bz1moyKPVJv1tAGKTVi0k6Kt45iPQneooY4WiucR70wzrIzVtCCWfF3nMpRbUXvAe+Zt
+ lVAmWWI30cgv+FAfMUN49mw6yLNlsFIdzIQ5pulej4HT/eFjiQWmPHGtpWfXUbNJ6FMyWI
+ hqWM+/UnT8fzzfrXTm33qxCL5yD1HbjKDliVJWPbLBjriauEieRuq+P5JkE5Nw==
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1791821245;
+ b=MTjTFEnY9eK/liyQ1VNua29HmHhbunFB1b+jORimPp/v2UfLT24UIjvz4wAD3xCx+Jo5un
+ O4j/+25llvwq8NCI0ZJL0y6zB5TzQ6G11Fwh+kU7ArONhT53fGvTYLSbssNb1anZ/2HSub
+ s2Us1wcLiiToD7zvBCo9njqDyIclfSS7uymPTWPqkNh8ouUC/aogRN3cI3R5ZuXquLC2uz
+ FFDgra5CkVOEmZTd9Vh/2DgvFVdvZmnU97tp5S2Qg8vOwWeKr11l0PaGDBpeWnz063aAdQ
+ 4d4dvJi8d9JpOkOqImxWtRtW83xFpX7BDpkIvhkqIKA8IG7nNLk3LBq8US7SPw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=lahtoruutu; t=1791821245;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=elWiL/tbEQEMDU9fD7wZFPjd07hFyma4u5YkYr4G4j0=;
+ b=s8gb83ircxkZY0gr3AJs96rvVG+0dNj7uatdMtkgvlQs9dSH8RUlQfea2oKsOrKe5cLG51
+ 4vmiLUhJAHVjB1W3M+sINVMmOoppq5LFXQYdBxyZ8onElPZ5JaqzhPyfnACrjsnRfMz9JW
+ cXwOtoqEDWhNcUpTfsVuaGkJ8iIc8kcb94ouIU5iX7F9/Fc46H+sEaaDqHSirQy0B1u+zS
+ 358J/7K2Lt/RkX5nPF9tMi62eFtf+lXVxBSN9il/kpaQfOgoqXsN9ZY49DSsvYO2LTQBzA
+ yJBC5jRnzXJrs8jToeV6B5t/iotobJENdf9fQ7sZUiEKQbOhqCln0s5YeFVDLA==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
+Date: Mon, 12 Oct 2026 19:07:23 +0300
+From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: jonny.green@keytechinc.com, raymondmaoca@gmail.com, trini@konsulko.com,
+ simon.glass@canonical.com, u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH v10 00/15] add software ecdsa support
+Message-ID: <as0Fuwvqy25b7uOF@kehys.lan>
+References: <20260904083719.53132-1-philippe.reynes@softathome.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/4] rockchip: Always init clocks in SPL build for
- RK35xx
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>
-Cc: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@nabladev.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-References: <20261012111552.1173161-1-jonas@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <20261012111552.1173161-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260904083719.53132-1-philippe.reynes@softathome.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -150,50 +169,19 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Jonas,
+Hi Tom, Raymond, all,
 
-On 10/12/26 1:15 PM, Jonas Karlman wrote:
-> The RK35xx clock drivers typically initializes a few clocks when probed,
-> with some clocks only in SPL. However, the clock driver is only probed
-> on demand, so this initialization is fully skipped when no SPL consumer
-> requests a clock, e.g. when booting from RAM/USB.
-> 
-> Prior to the commit c6bba31dbdd4 ("rockchip: spl-boot-order: Defer probe
-> of boot device") all boot devices where typically probed, with a side
-> effect that clock driver likely also where probed, prior to the SPL
-> boot_from_devices() call.
-> 
-> This series flag RK35xx clock drivers to be probed after bind in SPL to
-> help ensure a deterministic probe and clock initialization behavior
-> prior to booting from devices.
-> 
-> This should help restore old behavior, e.g. that SPLL is initialized on
-> RK3588 and CPU core rate is initialized on RK3576 when booting from
-> RAM/USB.
-> 
-> The series may possible depend on the series "rockchip: Miscellaneous
-> RK35xx clock fixes" [1] for a clean apply.
-> 
-> Changes in v2:
-> - Update cover letter and commit messages
-> - Collect r-b and t-b tags
-> 
-> [1] https://patch.msgid.link/20261011222930.1085075-1-jonas@kwiboo.se/
-> 
-> Jonas Karlman (4):
->    clk: rockchip: rk3568: Always initialize clocks in SPL
->    clk: rockchip: rk3588: Always initialize clocks in SPL
->    clk: rockchip: rk3576: Always initialize clocks in SPL
->    clk: rockchip: rk3528: Always initialize clocks in SPL
-> 
+Fri, Sep 04, 2026 at 10:37:04AM +0200, Philippe Reynes wrote:
+>This series adds the support of ecdsa with software
+>using mbedtls. So boards without ecdsa hardware may
+>also use signature with ecdsa.
 
-The RK3506 clock driver is notably missing from this list of "RK35xx 
-clock drivers". I'm assuming this is because support for the RK3506 
-clock driver got merged after commit c6bba31dbdd4 ("rockchip: 
-spl-boot-order: Defer probe of boot device"), so it means if it's 
-broken, it just never worked in the first place and we should rather dig 
-into the problem instead of doing what we do for the other RK35xx SoCs, 
-was this your conclusion as well or did I just incorrectly extrapolate?
+As far as I understand, each commit in the patch series v9 was reviewed 
+by Raymond, in the same week when this series v10 was posted. Only some 
+some minor formatting issue was addressed.
 
-Cheers,
-Quentin
+I wonder when we can expect this patch series to be applied to U-boot.
+
+With best regards,
+
+	Marko Mäkelä
