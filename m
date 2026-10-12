@@ -4,246 +4,193 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04CBFCA9ED1
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 16:04:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FE73CA9ED1
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 16:08:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C505A40519;
-	Mon, 12 Oct 2026 16:04:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 107384056C;
+	Mon, 12 Oct 2026 16:08:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id f4iYMdDk278Y; Mon, 12 Oct 2026 16:04:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2134740665
-Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791821068;
-	b=a15BLIye+1o6tMp+w6L5p+n3RsWVottWGbP09YUbwR5ICXQHfV1jcbWfAQgaCzC55lfu
-	 ImLcbA12ypSRvSs3mi9i5EeB2JkvtPml4mdPOkZ83+kVRH/h4Hpac2MClbUt3hsmMq7qC
-	 Oz9/ltsfs3W8Bl4Bec7fgGJWYMn665Z/whmb4zHFzCpXGMoRQqO7aoLwShobSJu8Ibxqr
-	 LtNcHbbTZ3pnsaCzZIfVNxqElnTiTWvUwIkOFom35OadzIQXkjallKP/xRtRA7Xpi9FMr
-	 pWXE3Gfjsd4YuYi/0icIisRvzCQxAxeUQmD6LzCo+amGZlUQLoSingURZhtDy9W6G2g==
+ id NQPeRM-SD2jd; Mon, 12 Oct 2026 16:08:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BA3F340556
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791821285;
+	b=MXgt4AOTDVyOCwiGTfaOsD0vSq+vYiGVzFihwkh3zprgVNKEeZN6q6ekKb9MEgP0xQC6
+	 2DXKEZm87p4xLuYqZ6jAARquakQ0NNAg2XYz+cmujWh14CbbBzaBtn0GMvoGlVt47klKl
+	 RYtmM9etlGo5a7zbfK+R6RU310DvD2MYJOLl0+zg6G2Wwoi7OCMiq3kkk46/uJ6pYGmZI
+	 t4UAsrzC2JyYWJ9o+EGQMrwgwc8QBoXxxaG4VvYX5+IcYlbxB3WZoDVJ8ji8K7ZarZgyq
+	 VD1luujLnVc5usrcTAE/bhGEU0E2VyPRwe6MKPZfAGvHZa3LrDOUZaRTv4KegovdRSQ==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791821068;
+	c=relaxed/relaxed; t=1791821285;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:
-	 X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=vvH4b3z3xyF819TmyV1n2ta7jU63DHit0mY8RYXbLE4=;
-	b=gYS67b00Cea3z17O79BEAHzPvrdzWKAxuJNLG+6U+r0m7WucIZyg5MxvvNix6lu1mOiB
-	 ZPsbtep7bqId+3yW54WMnLXx1FydeXb13uLbOQdHKleFx1A53dJ7nHTAgpM6EqC8rU7o+
-	 2h3sCp0HvAANI2wkG/V0jlu/bH9/vaC9gbeO86wYCqKPcWOJOQiV8P7fAiarKRGaCZCI8
-	 Q8En4cSul3SFqDktwBhzYNPs7z33flB1EHAoaTCKdrT2yyXPuwxMp4wj8NNaYppnKkIjN
-	 FG+JHtKHupXkYUc8a1cptqn+qp50cofqxIYwuYMFrgRAd63Bjy30kXy4jiNfdvSNx1Q==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=jL0gHi/c1SLyJ0gXK3ALJUHc+le+FMaXJvbaOx42ze8=;
+	b=rOBWINXphW1uAEabT9EpWahjyh5lx3IuGvf12JOGOX8O5xAzfdYaPQVK6AHj1QN55yND
+	 E810jEaWnOga0/L0nss4SDmiKCmAZafxk9bWaW1WD9RSWMuLx71na41p2d09nVLJeLeaL
+	 X1L6yZFLuI/TR00diFdeQ4plc6+XhGzhBiTbcTWJfhH3XllEIqdztOZcbk60EX1d5+5nK
+	 gHB03TvRssc1WuVHJSH1j+ANI3cRmzSlyiLdLFdrvGtvoeP4XqOkbtJSfemJRbCKokRvq
+	 aF2UkUgLfueS2WFOMjFK223iSVpGZG4LG6rjjpUx8aFmpnw9ddJaACvjKTycwePNRkA==
 ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
-	dmarc=pass header.from=cherry.de;
-	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=TqvrAzXM;
-	arc=fail smtp.remote-ip=140.211.166.142
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791821068;
-	bh=vvH4b3z3xyF819TmyV1n2ta7jU63DHit0mY8RYXbLE4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791821285;
+	bh=jL0gHi/c1SLyJ0gXK3ALJUHc+le+FMaXJvbaOx42ze8=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=d/z+96NOKHkmO3NjHNRT/OJq065AOJOtVBAFvjNVLO5yxIt3ynChC2AHCp17QiuAl
-	 Exzqd3I4R2jBP4/DF9KHjBoCmR3wt/qt2221bZ+p1wDJP/RvB1gfasBw8q95BPROr6
-	 kRpheYx9l9jJMeQgDPCDzDdXlB3Bd4Au96xHXHwV8ZWKDHhjiMCLHYq749FR+2bZPB
-	 CcVHw+HzDthZt9AhVoN6Nl1qYwDPtc/ODzqh6A7KmFgLEf4mbSzcXivYar0/V4mcCo
-	 gdycxORZGUILV5u3oHN1rzq4bgSQ+N7XPA6J0TTdIqSc4HgRI7fBrimLNZviQTl55o
-	 2bD/IJg6aMbYQ==
+	b=aPYWr7lFTM/H/mrDsB8eCNbklvdn1rqv3jwuCZVLt4NmZGzeCVHMaU97VTJHws76S
+	 opINdDmC434a8wSKUa6DUq1R9ib1Ew3RG7dZ9otzEV8LAvjTKG86beqOeRrcGibFh3
+	 p9RxCzb/r/J3hN6ecGkEyBLapKQw3s6Auz8TxRVOd+dKKUG6vy/MqjZqqzopMEsT+Z
+	 mXC3UAzDNBJOS7WnaYOo6jATQyvKMpVcXAAc2EYo8fFO7YihQAToBMdB2GxZqz6Kbf
+	 f4q6V8M19FsFV0+d0d/32c7utmkn0gVXcVBGdiuEyrtljCAwT5uZLKgvooCE3B2lec
+	 wqytjfXiGzURA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2134740665;
-	Mon, 12 Oct 2026 16:04:28 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 51529105
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:04:27 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BA3F340556;
+	Mon, 12 Oct 2026 16:08:05 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 491FB105
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:08:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3795D40665
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:04:27 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2FE6740201
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:08:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tx9iNjsaRlRe for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 16:04:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7059040519
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20a::7"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791821066;
- b=CUE1uD3GUMOWaEAXTCBjtSuC3nU5hViwSakU0Rq7OOR7eIGgj1VtqUAZFOTEOhor1r7b
- yWe6XxTrq9gFJeFX5oacZ0rlz1W+uABdmpg/bTtA2IjZF1tKXNIzmlEy4ukY1wU9qD7CD
- PZdc/MRQqVQ7IXutwkXFQsJU+kTCWh+KFh24NM8oKimR80SkELwmW3eSIDObZXf/mCeNt
- nHr4tGFMeBo2nmi0B80C85pHQjaHyUwV1GvRXQ4CmUayXPTKoWEnMTiD5mQDkMh08OfKh
- H4WnZuogtbZz4PencqR1xPu8LZofZ1LNwHTUpFgCoz/Ino00CBXFExlV2yuSRnmm+Uw==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ge21uSRpPHLr for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 16:08:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org BF10040200
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::636"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791821283;
+ b=AO3i9TQIcfgIK5E2w7PZQEdJqv2j05JpKXa/c+b9/TbaINwXuqmjXYnV3YiNgCNvKNHM
+ 52HKREftysTI+yJfweMwMVrZ5R1raBCmR7TbTe/cNTn8/CU3Pd9BBkDwfoVdQLr35bvFZ
+ xDHofDG9+EDhbiXJ9VX9Blv6wiEzF02EtTBiwbRMCCbFZK0d1dIcBtFS3QLPBpZKuqmUT
+ SN6LHrrLq3x5HDNRr90jhNQZEjjdUAnH0CLTrpHUVayJljrOaLew4T2rkoeucnKsaPM47
+ viWY7467it/IA6QRTm/7MHnfvYm++wKKajVfecCv5OLqzFFUEOQVIuSKzrIOOhiebgw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791821066;
- h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
- User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
- X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
- X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
- X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:
- X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=vvH4b3z3xyF819TmyV1n2ta7jU63DHit0mY8RYXbLE4=;
- b=h2X3GeF1Fl5e1I5vclmTAIayj2z6tJzwtDrQSzQGTywz/CR4V0K5yclXGMBoZk5zDWcs
- c6bC8QgI0Rh5e7hOrmB//wzsb1Lq02QFXYxf0kPyUDfpTph/PEn9y77jFjSMG1iTO5eap
- 1oUqTUc7r2zBFQuqXHWIPY3vnZw+w8rgP8/IcOAx9aPSDWxu27Q2CyAqmYfcqwxSURdGv
- L9hCQ3vTkIqqz6c/8yUVnXzZpOeq+6XLFWDU+1PwCeJ0HkxcPa9WtHcn7wtcLgKDP41Fl
- 3ZAGz5HdbfLV6yRMLenbAbLUkWUV/vmeD52hzT9ccf/0pKKtnpVpg3o019587YjW7fg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
- dmarc=pass header.from=cherry.de;
- dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=TqvrAzXM; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20a::7"
+ c=relaxed/relaxed; t=1791821283;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+ Message-ID:Subject:To:Cc:Content-Type;
+ bh=jL0gHi/c1SLyJ0gXK3ALJUHc+le+FMaXJvbaOx42ze8=;
+ b=jdKzbgYw8Xrk+5j/v6Gm/QHPgntJtryrL9tMhQUDQXBRuy+2urD1IXqARicjuq4NfPgt
+ ZOZSZFE/u3GnwD43dCLskbu5dgwWpex2+nLZAnifufai2tSZBAbn11T83wGs2ER5CeALp
+ ABTRM7iPp55ZizjNTJ3kHn/93MNQjA237A7bVcrFSlk5851pmVeybHnagU7J2pdCJegH7
+ jsRBE9584vo45grxvhllEJdNJ6cSCspotCEgdweGW+azVtZa/pEdW/Xk+ml/dww008uwQ
+ VLg0TJw16E5iNO2g6wD1GZ+SxDjgXNlODvAfL7yQ0VkqVl4EewmFJ3HD6B/whSH/+9A==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ dmarc=pass header.from=gmail.com;
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=XB+pr6cl; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::636"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20a::7;
- helo=pa4pr04cu001.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=TqvrAzXM
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7059040519
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:04:26 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JHCCESKk+FeOSi+aBKrVjcjzW760bxu4plbCddH15COEYKYGgZTQXzin7upSLbeVnK1xokOKPptVV98xmFzuBKdr8pht4HIPwWk+bl1dxuHCt4fbgMzn4uccFnfHo7o36257Jv/T8H1EG3XCRW/KSfy3hqyv7F7FPVqTfpxI1c6+f8r4wHmE8XIcjPQ1geTN5MepAP5FjNMBFPIu5VF3bfbU2t1uGmcQNnuuu3Eqbit29z2PE/nR8JPvRGto1ouFFtKTYGg0bYqrh5edQpW6FtlS5tqPAFUH/uFO5Dq9sKp+mwSEcfbgq+3vM82WgCGn+QFj/OuTXNXVPXhYShIjYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vvH4b3z3xyF819TmyV1n2ta7jU63DHit0mY8RYXbLE4=;
- b=wHVATLJ31AxQvcnnx65ngd9eCKqLQ0YpESWChR7X3M8f9kPnDiwr6dnL3MQmm+o6amYbSxOIwaCGe61uPEqwaNppE6w59LvETIiSqtnMcoVmrXv/HhhC+NP2nbzUEzKD0m9X40DecU3wVEJhaxSxdIvd/ZyCSfQJ1TRu1s7CZM+8SJ1eromMVn7huLQi5zDnLDuC0YCHSVR1oMvlByaF1g9ZGIhqKaLa9CkdJWnOuork03hGisrkro/ynYGkee2UvPBs5Na+JxmiIZq9LMV6Y4wQPfNuMpSxECeXCthp8XKRYTHETmbxY285eIvelXxbP/JRIrZuRVGjme9piiPXgA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vvH4b3z3xyF819TmyV1n2ta7jU63DHit0mY8RYXbLE4=;
- b=TqvrAzXMgj5ayAJobjfWnM8GqJZwFs8XkAtdrVXMbVdmcHadfrjeKaML2ohHaELJop0S1w9S43K3ANrHXV/G9fITsLtg82yManEnoTx4Iya5iWDdcKVmiRU1kQaax8nhgxlmQ2onG8n24mlwsfB2kN0i6B6DHDj8iLeMtk00Ao8=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by PA4PR04MB7581.eurprd04.prod.outlook.com (2603:10a6:102:f3::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.23; Mon, 12 Oct
- 2026 16:04:20 +0000
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0496.020; Mon, 12 Oct 2026
- 16:04:19 +0000
-Message-ID: <bb0fd02b-5031-46a9-80ca-5d3ca823da3e@cherry.de>
-Date: Mon, 12 Oct 2026 18:04:18 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] clk: rockchip: rk3576: Always initialize clocks in
- SPL
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Lukasz Majewski <lukma@nabladev.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, Alexey Charkov <alchark@flipper.net>
-References: <20261012111552.1173161-1-jonas@kwiboo.se>
- <20261012111552.1173161-4-jonas@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20261012111552.1173161-4-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR09CA0093.eurprd09.prod.outlook.com
- (2603:10a6:803:78::16) To PA3PR04MB11153.eurprd04.prod.outlook.com
- (2603:10a6:102:4ab::7)
+ client-ip=2a00:1450:4864:20::636; helo=mail-ej1-x636.google.com;
+ envelope-from=linux.amoon@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=XB+pr6cl
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BF10040200
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 16:08:02 +0000 (UTC)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-c360ab7a6f9so80926766b.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 09:08:02 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791821280; cv=none;
+ d=google.com; s=arc-20260327;
+ b=oJrz3TDOKzMuh84d2V6tY3Ix7iftLIrrNEF3Wi0mGng96ji3CvNXDdRY8b4AP1FmTT
+ KHvh+Hk7sYzOP0YCpxPlq4QwHl56RrdkeOAjVXW58sT72lkgFkKpMzaNli5X1B9TUGOC
+ 1Le80iBG82xWOH5VdK5xvCZdJTt4OHm1Bw6YX+2Td7DlMrEk8hjcBEaXuUBHy1Wqjgv7
+ YEI9zIPa2NQeA3qdUGXxySMFRH6T69iabzw1/J2qPTQlgnFnyBNhNgFSlYequOueMyOI
+ Fxlh+aiRXyuo7h5jE19r6vHB8rvCLazYVn4Vm//b7nOuKb+NXuxt3m6wJdXId2/WB7Hr
+ T9fQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=jL0gHi/c1SLyJ0gXK3ALJUHc+le+FMaXJvbaOx42ze8=;
+ fh=yGXDbT7MaF4SIksQ68riWnHQq7bSovbUxUoL7hQ44fk=;
+ b=ehULE7v5BVdUgsRpTZ+WtQ1hrBlGqDhtk64lxZ/FLt6BJyNBwsgA9jOmnAJql/EqZ8
+ oAonlW/0bBt+pmmJgRXyaBHdYfWHUftbwlgW4O1N9/CQHGak7rjRZc35ODG1ABgF3Qj7
+ 8VC8Tq47XgixrsRtTqgu5m/mYS7/2b9v3eg4mdW9AypwWtpqse39b3KGHkXuAB1VAbt4
+ yVs6xiR6Xb5QNLGgzINs7f1aGdBnjkatqV5bgRQMeEwPpdOdJGYJaGIhAzBojwcyz04S
+ mBaQho7beOx2/UHYxW0/UMOTh7NGCkRKTj5Xxt1L9mN1z7GIuRS5bCqBroiQnr2mmLGV
+ zaQQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1791821280; x=1792426080;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=jL0gHi/c1SLyJ0gXK3ALJUHc+le+FMaXJvbaOx42ze8=;
+ b=XB+pr6clY3Trt2ijMVS/UTRMPH0YXiQ78XdLxQzJBUQErpsbL7Z54Pt3hbkjGxpCPp
+ yUsAXS/pR/Ykw+NWeMmTEWxFgIeEN38ud+ZJaYFMbu9OOyproqBOpwJPSOODjSpZ1JMW
+ yxdNPFUcCpEbQTddkfuuyf03ArjC/dYgpLWV9PnNrony3qoqAc3kmbdbfzKrh9kwPeaR
+ MrICtTFs0h+yb8mL/FIf6CRCI/rVebtruFuVqvgHCfuwjq6KgMMdDVlNonKuTIW7AE36
+ 1nJVLeqXEcs/aQPOV+irBQd+yDTu59f3suSQT+9H4OZVFHubHQxWHhIWVEKiWhvw0H8M
+ ppfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791821280; x=1792426080;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=jL0gHi/c1SLyJ0gXK3ALJUHc+le+FMaXJvbaOx42ze8=;
+ b=jM4CjDMpZcEjlb3J2+Z5NUH2xxnyH5l4hwrlaTdT7lrVplnnHRzMkgwBIQj411LLci
+ nb8Hp9QuvOEUQIjJtohPcqOLEVmEmGsCTdDeKc8/9uP55Un/VfnH9XQcQj4PMyJW8FhX
+ 2nfyIlF78Ob8ZMcFRV6IUf8OJnpEwChyVSrNqxz9Y3Y8yDgRw5BWTuzrbioZyvPpTLwQ
+ OD4k9U84xD1igRh4+w8HuFCUXmGMv88DPxlMUjpg4faBy4/sGhKGtq2jE7xJVsBlqvcG
+ PbNTh3b6QDwuCZccPuARTPnADve8h97G6IbahdnkXG3poFdvUuCyxlmDo8OqWCXGnX5x
+ K8HA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBx4U203LjS6FC5cNIgZI4EnFULodW0xx7NHTivmQ5mF4wdw+Jq0oMm/aedPzNINdIEOIpPWMr4=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLQtsRQ4AghVsf7k/iXoF9R6fm0BAwswJJEvfxlQVV+xqGQ6dyG
+ /4mOQdPxr+NUOFMcmcVLIVEtBBdv3Jamcix+aixixrDuS9MttBD7QDa/SeXH42FrFX2Nv7YEjh8
+ CtGfyjR+HBCxYyzys6b3SZ/wPntiWaHk=
+X-Gm-Gg: AYBFou1U+vxt/zT5uQ2htes1GQks7i6rtCJmk+LrMi6h2UMMITwk6oREO9LGUFBZSfV
+ 8wItdcOWerK/g7LNkfZ/MVoLvXO8Oj3zddaguvpOH3fqYnybWslf5IkZ8+7XRqPPkEiwRrJi5RD
+ Y1k95ilPNguM5Q6cF7uHLlUgiCFvZbxGeRahDowgx04iEIgtYoIhT7+cnYr/YMlq16beQgjlddR
+ VRgoNP/ga1/HOhP6VhjYwDb2ANHLzqaOLR+ztQaV0FisSClV88KjX4kM7hvqfU1l1AHS0pQSFhH
+ kiq7tQ06X+e4f2Fq2mQACaNc+07G5VxOgZOXGdkPKNBLz+/9YfYnxBY=
+X-Received: by 2002:a17:907:720e:b0:c2e:51a9:ea7 with SMTP id
+ a640c23a62f3a-c31aa0bf634mr996147366b.48.1791821280029; Mon, 12 Oct 2026
+ 09:08:00 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|PA4PR04MB7581:EE_
-X-MS-Office365-Filtering-Correlation-Id: 16a2f77d-9f2c-4981-ef89-08df287a7964
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|10070799003|23010399003|1800799024|376014|366016|10067099003|11063799006|4143699003|6133799003|22082099003|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info: vgpwmizPmEpjsGcW5kPg8kTR7ntk50qtnWRkf/p3MmiDKDlNEucf7wK3ZkDdXhwU8D3O4ifBkBxFozATWvATlz6c+NuWghtpGlo77tViuDR83f7oOMF/qR1WZSQi+wa4KAgJ5Bb5JL+kGp1ZNIgkJcuN/PpOd9iMV9MaAKizxsbK2vyvhDRdW9yNbUb5ANywQYKJPfGwP78BpIk2c3FNzdyuXd+XRraVPdbJBt1YGG5iNNF4pE2CYreWqkPZoWLUoHzechRx3502opS2u67jz89SRhbGAsAsQoSUu8CmT4Dg9zzOUcL+CpGbgn+TNZCwGOdHFE9GFBrXtSdcGotdsvmq6K+1SQdbNBhoc7KIH0IcRg0vP5GSX65tGT2n+CexWjmgdrop6YLpLHk/6pTPtcQXe35STet1RTo3dWnESwtcXWkLLOYfoi2fkXU0ca+I5+z6PrMdt9ryaqTzvZuqyV6PeUGl1cXErI+wx/DvPH1u85+t/U28UajOie0R4kMlpRuoBYGXKNJBQP2gJN9882vYoSQLYz5Xi9ZdHbwpbuHd6OFJbUFMGxejFf5wwoHCFoxs6BJl15m7PKEN4zh5QFwBi9t+Z+wsT8hkac2YRMq0Nnp5mnNbvf/XrS3xW/rmxQWwVbda2Ts8+CTtgqlZNXvcZZptdxqkTFAw3+pA0Vo=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(23010399003)(1800799024)(376014)(366016)(10067099003)(11063799006)(4143699003)(6133799003)(22082099003)(18002099003)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?alNzMUphVFhxWHJpWG0rVXNaM3RwWVFMMGp5ZDcrVlkxcHJsWUxmS1hUVlQ3?=
- =?utf-8?B?MHFsMHd4NG5paXFSM0V4RmhuZDIyM0dSSmI3bEJ0NW1VbGJaS05uMmFJcXlV?=
- =?utf-8?B?Skx1VGcxeFVaOVNjb2d4dzJGZXh4Rm9vQjZuVWZXcDZkZ0U4UVRUOWdGamhn?=
- =?utf-8?B?TDlNaXhJOU5UbXFMTlFlSnpVd0kzKzRVbEwrWDFNMTUzVWhxMXVoZzJIL0w0?=
- =?utf-8?B?RldqaEFaK0VRdmthQSs5MTIwYkU0dGZzSlVUTzdMd2xwYzlhQ0JianJ4YUZa?=
- =?utf-8?B?SGJ3eVNsMWdFNWJoKyt2NWVId1NXcEw0cklCSnhRWkhJNFBidWdWeUIwT1o4?=
- =?utf-8?B?eWlNUXIxRmVhMFVWQTJYaVVkb0t0SURvb05lNzZPdXdkM3FsaDY3U2NnWkJ0?=
- =?utf-8?B?aGhvMklTRzMzZ1JNNHVBWHZ6NFFFQ2VBa3pzVzFrazQycmNwK1JlZm5yZGpN?=
- =?utf-8?B?OExGRDFxOUhtVzdzeDk5R3NKRFZzOVlHY0hxTEtJVklqN0ZLeHlBaWNFck0r?=
- =?utf-8?B?Y3FOcnA0eWRHcExXOC9BcjVVZFplRmhOT05DTU1Fd210WGFLaFRVRjB3N0hL?=
- =?utf-8?B?WUFabWE1c21NeGFoTWh0SFZTSVdKSnR6b1pDcVU5MklNeFpQSVBvNG5GbzZ3?=
- =?utf-8?B?eUdtUmVWeFNZZU1SbldUbHYzTnNTYjYzUkV2OGdwQVdkSXNualIvY1BvdDBT?=
- =?utf-8?B?SkQ4ajY2RWpJeXZKdVhWSjVYRHduME1kY2VORFkvTEZNL01taTh4RWhPMTdQ?=
- =?utf-8?B?Q29tSU00MG5wT0VMNWQ1cGMzL3JXemhPREpMV2YzQVhqemtNTFNraDF6OWdC?=
- =?utf-8?B?UDJya2VkRlpBaTVCVURLbis1eFpLMndtQStaMmVuNEc2N2VHNUlpS1VpRjUv?=
- =?utf-8?B?MUcyRGxaKzJHSnVtOXZMdFhyZ1hmM0ljUG1GRXBTZGM4YUJtYURzZTQyU0NS?=
- =?utf-8?B?cmtOSXUzQXhQTEhHeG9zRndpQ2VaTkVzVC9GTXorS295Wmx2Tk82azQ1SXBq?=
- =?utf-8?B?Q3JtdHJ6U203Um9kNnZlRnlMK2k3SWcxdmEycG5Zdi81S3gveWJ4ZHYrY3Zv?=
- =?utf-8?B?S0doektVT2ovQ3pVQXRYbHE2QS9DMVUwL05nMUFFMUt1VHdZN29XZi9uVG5P?=
- =?utf-8?B?MEJ6OWFhU1NvWlUvT2FRQXBBeERneXZHb3A1QlVDMWY3TCtsT3U5ZFpkVWUz?=
- =?utf-8?B?bGxRdGN1R1RrSElBeG42VjB6cFR3MHRETEJWcjV5TEErZjMvTDhVczhUa0Vs?=
- =?utf-8?B?Q3YxZUZYbEZCK0xDdk9WRUhtMncydnRBdjljQnZxWkliWHp5NHl4a3psYmdr?=
- =?utf-8?B?WDZWejI1K3RHQ2VuSGZnR0c2ZHlERjc5c1ZyUDkvV0tlRzk4aEFzK1E3TlZV?=
- =?utf-8?B?ek9XWW5WRHRFOFFsN201RXdhL0pyOEtjSm93dWJhUVpNcHpNUFBQZXlQUU1V?=
- =?utf-8?B?bXdmYWxOaGlhNFdHMUFjZ251VTFMNkthWjNacWgzNVloaWZoTDEvN2JydWhj?=
- =?utf-8?B?RVlqNTV2NzRRUHRxdkcrY0Q4OXJVTHA5Tm5EUUthWTZJYVlUY3lEVUM0ZHBQ?=
- =?utf-8?B?QThDMWY0UEZvNXpmakxjWnUwRlk4eE5sM09HNmFGQkR3aVlBUE1zSjlyZks5?=
- =?utf-8?B?Skw3UERTU1h0dUtVcGJ2Njg1WDA0Y1BFT2l1STdhV3JRL3Y0L09WNlN5aG1p?=
- =?utf-8?B?YVdZUkVGaFJhNzNwaFBzYnpxUWhwbThGNm05RGx4cWNsMjV0RW5hSEFUbSto?=
- =?utf-8?B?RHpXTHpINGQ5MTQ1VFFvTGFGSkVCbTFEOXFNTmZBajgvMW5JTWNEaVg1VlJ0?=
- =?utf-8?B?SDYxaXBYdnQya0pHT3N3MmZSWGFXWTVuQW9od2dROFBva3NGRG5YMkN1MFBY?=
- =?utf-8?B?MVFicXpSTFI3azNjekd3aFpIdFV1Rkx1VVpNcGdlaVM0ZFBZZm8zM1VVbm85?=
- =?utf-8?B?RFIvM2ZXcG1jbHd5RDh5cURYQ2Z1SDFFekpsZVhDeVB6N0hCcDEwV1N0Q25t?=
- =?utf-8?B?MG1DSUp4T2lDV3huN2hONFQ0a0lybXNQc2ZYaE1zb2dlOFJCZ1ZjTFlCVExl?=
- =?utf-8?B?M2tqTWJKTmlDSmc1RTdqWE5uNFczOGRRMGJ2Tldub1R1YTZzNFlpSU5MVW5p?=
- =?utf-8?B?bnN4YUpiUXFpZlZRRVc3V2lJRUt0UFFMR1dBQWNtRlVpSmFvNHlSQ2tVYThZ?=
- =?utf-8?B?Ulc0WkNUM29HWUQwVHFCelg4OFNjaFRsbStZKzRTZlpyeUkzWWRqWHY4cmdZ?=
- =?utf-8?B?VUk0aUtGWmwxS0c5RXZZYkx6NldzRlF5RWp2R1V5bU9BRUluczNaZGVMNUFr?=
- =?utf-8?B?NGpxSmZ6eUU3T09JSWNjTHdNNER6anBFMy9Gb254cjVoMU1mRVpJNGRHM3Uw?=
- =?utf-8?Q?9gKRUAAL+HlwZ11lNB7j7DgNFNQzkMxf5pEF/JROJIAqO?=
-X-MS-Exchange-AntiSpam-MessageData-1: nkx5oHCSuVhX5A==
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 16a2f77d-9f2c-4981-ef89-08df287a7964
-X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2026 16:04:19.9505 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hH5PjLN/SNDuwBzj34m7arwWUvro9RFhzIp0HeIW5G5sIFiSPdowd+mKYMILIpaPRr7AUY/mxUWaF+oB1vFnCJi4g1Uhx3QGiqYr12tzt24=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7581
+References: <cover.1790975596.git.DaveWK225@protonmail.com>
+ <20261005T134748-0400.mmc-v2-cover.DaveWK225@protonmail.com>
+ <20261005T135733-0400.mmc-v2-0002.DaveWK225@protonmail.com>
+ <a57e47d3-fe8c-44dc-8afe-2c256ed49d71@gmail.com>
+ <2ef42a4d-ee32-4650-819b-ea6d042bdad5@altera.com>
+ <c02f3812-e549-4f4a-9fc8-77da7ed6b883@altera.com>
+ <8a263ad7-5cf5-46f4-87a1-43e898a1d15a@gmail.com>
+ <6f00fd89-d418-4d64-a066-c893dff89994@altera.com>
+ <1f734cd0-cd75-4b0e-93ec-490ecfbb1ab0@gmail.com>
+In-Reply-To: <1f734cd0-cd75-4b0e-93ec-490ecfbb1ab0@gmail.com>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Mon, 12 Oct 2026 21:37:42 +0530
+X-Gm-Features: AclHuK-P5C8YFPjg0rgvyi_IkPVgSSM9hmRV7M3IQxnK3n1xRpuI5Wy30bqXl_c
+Message-ID: <CANAwSgSSbmQu0jzJQW1-4ZBSxUXnBD87svNa+fqyiEwF6JhYDg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] mmc: k1: let the SPL read SD cards more than one
+ block at a time
+To: Zixian Zeng <sycamoremoon376@gmail.com>
+Cc: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>,
+ Dave Klotz <DaveWK225@protonmail.com>, 
+ Yixun Lan <dlan@kernel.org>, Eric Chung <eric.chung@riscstar.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ u-boot@lists.u-boot-project.org, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Tom Rini <trini@konsulko.com>, u-boot-spacemit@groups.io
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -257,28 +204,224 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Jonas,
+Hi Zixian, Tanmay,
 
-On 10/12/26 1:15 PM, Jonas Karlman wrote:
-> The RK3576 clock driver configures the CPU PLLs and CPU clocks when
-> probed in SPL. However, the driver is only probed on demand, so this
-> configuration is skipped when no SPL consumer requests a clock, e.g.
-> when booting from RAM/USB.
-> 
-> Prior to the commit c6bba31dbdd4 ("rockchip: spl-boot-order: Defer probe
-> of boot device") all boot devices where typically probed, with a side
-> effect that clock driver likely also where probed, prior to the
-> boot_from_devices() call.
-> 
-> Flag the clock driver to be probed after bind in SPL to help ensure a
-> deterministic probe and clock configuration behavior prior to booting
-> from devices.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Tested-by: Alexey Charkov <alchark@flipper.net>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+On Mon, 12 Oct 2026 at 18:49, Zixian Zeng <sycamoremoon376@gmail.com> wrote:
+>
+> On 2026/10/11 22:31, Kathpalia, Tanmay wrote:
+> > Hi Zixian,
+> >
+> > Thanks for the logs.
+> >
+> > I hit the same pattern while testing the Cadence SD6HC driver.
+> > Multi-block reads failed and single-block reads worked. On that board
+> > the host and the card were in 1.8 V mode, but the I/O supply had been
+> > left at 3.3 V. A short transfer got through; a longer one failed on the
+> > data lines.
+> > Both stages on K1 use the same PIO loop, so a FIFO that drains slower
+> > than the card delivers would show up in U-Boot proper as well. Your
+> > SPL/proper split fits an electrical setup difference.
+> >
+> > The SPL failure is irq=408020. Bit 22 is the Data End Bit Error (EDEB,
+> > SD mode only): the controller detected 0 at the end-bit position of
+> > read data on DAT, or of the write CRC status. That is a bad edge on
+> > the data line during the transfer.
+> >
+> > On the Banana Pi F3, aldo1 is vqmmc-supply of &sdhci0. The U-Boot
+> > dtsi names it vdd_1v8_mmc, and the SPL prints "vdd_1v8_mmc,
+> > value:1800000" before MMC2. set_vdd_mmc() in board/spacemit/k1/spl.c,
+> > called from board_init_f(), writes 1800000. The dts leaves aldo1 at
+> > 0.5 V to 3.4 V. SD High Speed (mode=2) uses 3.3 V signaling; 1.8 V is
+> > only after a UHS switch. mmc1_cfg is power-source 3300, and
+> > mmc1_uhs_cfg is the 1.8 V state. For this mode the rail should be 3.3 V.
+> >
+> > CONFIG_SPL_MMC_IO_VOLTAGE is not set, so mmc_set_signal_voltage() is a
+> > stub and signal_voltage stays MMC_SIGNAL_VOLTAGE_000. aldo1 stays at
+> > 1.8 V. U-Boot proper has CONFIG_MMC_IO_VOLTAGE. mmc_set_initial_state()
+> > requests MMC_SIGNAL_VOLTAGE_330, so the driver writes 3300000 to the
+> > same vqmmc-supply and clears SDHCI_CTRL_VDD_180 before the transfer
+> > that succeeds.
+> >
+> > CONFIG_SPL_PINCTRL is not set either. The driver calls
+> > pinctrl_select_state() under IS_ENABLED(CONFIG_PINCTRL), but that
+> > function is a stub unless CONFIG_IS_ENABLED(PINCTRL), and the return
+> > is ignored. SPL never applies mmc1_cfg. Proper selects "default" for
+> > SD_HS, which is that state.
+> >
+> > Keeping the multi-block path, set_vdd_mmc() to 3300000, or enable
+> > CONFIG_SPL_MMC_IO_VOLTAGE. If the 32-block CMD18 still fails, enable
+> > CONFIG_SPL_PINCTRL so mmc1_cfg is applied. If either makes the read
+> > succeed, this is the F3 failure.
+> >
+> > Regards,
+> > Tanmay
+>
+> Hi Tanmay,
+>
+> Your diagnosis was right - it is the I/O voltage.
+> Enabling CONFIG_SPL_MMC_IO_VOLTAGE makes
+> the multi-block read work on the Banana Pi-F3:
+>
+> Based on previous commit, I patched the following changes:
+>
+> diff --git a/configs/spacemit_k1_defconfig b/configs/spacemit_k1_defconfig
+> index 9c15d96eae2..f5c717e5965 100644
+> --- a/configs/spacemit_k1_defconfig
+> +++ b/configs/spacemit_k1_defconfig
+> @@ -95,6 +95,7 @@ CONFIG_MMC=y
+>   CONFIG_MMC_SDHCI=y
+>   CONFIG_MMC_SDHCI_SPACEMIT=y
+>   CONFIG_MMC_IO_VOLTAGE=y
+> +CONFIG_SPL_MMC_IO_VOLTAGE=y
+>   CONFIG_MMC_HS200_SUPPORT=y
+>   CONFIG_MMC_HS400_SUPPORT=y
+>   CONFIG_MMC_HS400_ES_SUPPORT=y
+> diff --git a/drivers/mmc/spacemit_sdhci.c b/drivers/mmc/spacemit_sdhci.c
+> index 23c655c6def..58374c482b3 100644
+> --- a/drivers/mmc/spacemit_sdhci.c
+> +++ b/drivers/mmc/spacemit_sdhci.c
+> @@ -251,6 +251,10 @@ static void spacemit_sdhci_set_voltage(struct
+> sdhci_host *host)
+>                          bool ok;
+>                          int voltage_mv = to_180 ? 1800000 : 3300000;
+>
+> +                       printf("sdhci: voltage signal_voltage=%u
+> vqmmc=%s -> %dmV\n",
+> +                              mmc->signal_voltage,
+> +                              mmc->vqmmc_supply ?
+> mmc->vqmmc_supply->name : "none",
+> +                              voltage_mv);
+>                          if (spacemit_sdhci_set_vqmmc_voltage(mmc,
+> voltage_mv))
+>                                  return;
+>                          if (!IS_SD(mmc))
+> @@ -274,7 +278,8 @@ static void spacemit_sdhci_set_voltage(struct
+> sdhci_host *host)
+>                          break;
+>                  }
+>                  default:
+> -                       /* No signal voltage switch required */
+> +                       printf("sdhci: voltage signal_voltage=%u -> no
+> switch\n",
+> +                              mmc->signal_voltage);
+>                          return;
+>                  }
+>          }
+>
+> Booting logs as follows:
+>
+> U-Boot SPL 2026.10-rc5-00643-g6a99fe92389a (Oct 12 2026 - 21:13:00 +0800)
+> Fail to detect board:-2
+> vdd_core, value:900000
+> vdd_1v8, value:1800000
+> vdd_1v8_mmc, value:1800000
+> DDR firmware: [0xc081d880]:0xf0227179, size:0x8d98
+> DDR is ready
+> No SPI controller (-19)
+> Trying to boot from MMC2
+> sdhci: mmc@d4280000 path=PIO flags=0 caps_sdma=1 caps_adma2=1
+> max_clk=204800000
+> sdhci: voltage signal_voltage=0 -> no switch
+> sdhci: voltage signal_voltage=4 vqmmc=aldo1 -> 3300000mV
+> sdhci: voltage signal_voltage=4 vqmmc=aldo1 -> 3300000mV
+> sdhci: voltage signal_voltage=4 vqmmc=aldo1 -> 3300000mV
+> sdhci: voltage signal_voltage=4 vqmmc=aldo1 -> 3300000mV
+> sdhci: voltage signal_voltage=4 vqmmc=aldo1 -> 3300000mV
+> mmc: multi-blk blkcnt=32 clk=50000000 mode=2 width=4 caps=300207ef
+> cmd23_host=1 scr0=2358043 cmd23_card=1
+> sdhci: multi cmd18 arg=2 blks=32 blksz=512 mode=32 dma=0
+> mmc: multi-blk blkcnt=1956 clk=50000000 mode=2 width=4 caps=300207ef
+> cmd23_host=1 scr0=2358043 cmd23_card=1
+> sdhci: multi cmd18 arg=1000 blks=1956 blksz=512 mode=32 dma=0
+>
+> <debug_uart>
+>
+>
+> U-Boot 2026.10-rc5-00643-g6a99fe92389a (Oct 12 2026 - 21:13:00 +0800)
+>
+> DRAM:  4 GiB
+> Core:  338 devices, 22 uclasses, devicetree: separate
+> MMC:   sdhci: mmc@d4281000 path=PIO flags=0 caps_sdma=1 caps_adma2=1
+> max_clk=204800000
+> sdhci: mmc@d4280000 path=PIO flags=0 caps_sdma=1 caps_adma2=1
+> max_clk=204800000
+> mmc@d4280000: 1, mmc@d4281000: 0
+> Loading Environment from nowhere... OK
+> In:    serial@d4017000
+> Out:   serial@d4017000
+> Err:   serial@d4017000
+> Net:   No ethernet found.
+> =>
+>
+> With the voltage corrected, a single 1956 block PIO CMD18 loads
+> the whole FIT,so the controller is fine with the FIFO back pressure,
+> the slow SPL drain was a symptom, not the cause :-).
+>
+> Without the CONFIG_SPL_MMC_IO_VOLTAGE=y change the same driver printed
+> "sdhci: voltage signal_voltage=0 -> no switch".
+> Since mmc_set_signWith the voltage corrected, a single 1956 block PIO
+> CMD18 loads
+> the whole FIT,so the controller is fine with the FIFO back pressure,
+> the slow SPL drain was a symptom, not the cause :-).
+>
+> Without the CONFIG_SPL_MMC_IO_VOLTAGE=y change the same driver printed
+> "sdhci: voltage signal_voltage=0 -> no switch".
+> Since mmc_set_signal_voltage() is a stub in SPL, so mmc->signal_voltage
+> stayed MMC_SIGNAL_VOLTAGE_000, spacemit_sdhci_set_voltage() took the
+> "no switch required" path, and aldo1 stayed at the initial 1800000 that
+> set_vdd_mmc() writes in pmic_init(). The 32 block CMD18 then failed
+> after ~20 of 32 blocks. Single block reads passed at 1.8 V, which is
+> what hid it.
+>
+> On the pinctrl side I had already run the SPL with standalone
+> CONFIG_SPL_PINCTRL=y, with bootph-pre-ram on &pinctrl, mmc1_cfg and
+> mmc1_uhs_cfg plus their pin groups. I confirmed that
+> pinctrl_select_state() return successfully. The multi-block read still
+> failed the same way with the rail at 1.8V.
+>
+> Therefore, I suspect that configuring the MMC signal voltage to 1.8V
+> in pmic_init() may need to be modified.
+>
+> Thanks for your suggestions and guidance.
+>
+> Best regards,
+> Zixianal_voltage() is a stub in SPL, so mmc->signal_voltage
+> stayed MMC_SIGNAL_VOLTAGE_000, spacemit_sdhci_set_voltage() took the
+> "no switch required" path, and aldo1 stayed at the initial 1800000 that
+> set_vdd_mmc() writes in pmic_init(). The 32 block CMD18 then failed
+> after ~20 of 32 blocks. Single block reads passed at 1.8 V, which is
+> what hid it.
+>
+> On the pinctrl side I had already run the SPL with standalone
+> CONFIG_SPL_PINCTRL=y, with bootph-pre-ram on &pinctrl, mmc1_cfg and
+> mmc1_uhs_cfg plus their pin groups. I confirmed that
+> pinctrl_select_state() return successfully. The multi-block read still
+> failed the same way with the rail at 1.8V.
+>
+> Therefore, I suspect that configuring the MMC signal voltage to 1.8V
+> in pmic_init() may need to be modified.
+>
+> Thanks for your suggestions and guidance.
+>
+I have also made some changes related to SPL GPIO and pinctrl support.
+On the Banana Pi BPI-F3, the MMC controller uses the following
+regulator references,
+which are not currently configured in `k1-musepi-pro-u-boot.dtsi`:
+vmmc-supply = <&buck4>;
+vqmmc-supply = <&aldo1>;
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+To address this, I updated `k1-bananapi-f3-u-boot.dtsi` to include the
+required regulator
+configuration and make it available during SPL initialization.
 
-Thanks!
-Quentin
+Could you review these changes and assess whether they can be integrated
+into the mainline U-Boot code? I would also appreciate feedback on any
+changes needed
+to make the implementation suitable for upstream submission.
+> Best regards,
+> Zixian
+>
+[1] https://gist.github.com/moonlinux/2ae03be59f263b0797acb138bed226b5
+
+Thanks
+-Anand
