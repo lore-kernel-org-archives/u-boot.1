@@ -1,173 +1,182 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 932A8CA9ED0
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 12:37:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE003CA9EC5
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 13:19:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5261580BA6;
-	Mon, 12 Oct 2026 12:37:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3582B40580;
+	Mon, 12 Oct 2026 13:19:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9QezY_Hlstz2; Mon, 12 Oct 2026 12:37:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5F26380DB4
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791808620;
-	b=N2q1ntRu9x2eKnZOJCipnhdvBez4CWul4F5kYDakfmXr0nMDGVg+xSnaNS50g19zpOcM
-	 G49QDmYmr5Y3EC8VqxOJAWeqQj7/OietVmp3xbiixCAg18Pl0FQ0RgR7Rz/W/J5KlEbfC
-	 /ICQE5IwubQDPzn3XRnWoo2fYIxXpTP6VcRZPHUtMLKsMgFSOZbwJn6Oc67+58D2Dy5pN
-	 DOepI9Ywg292IIvVGDtl/t/zyzGXW9nW0+8xvEBYunYY5PJgwvAtbq6znqV8ab2MfIYMl
-	 wc4bNwawbGeeoITlbq5Ghbm0HGkg9WHDjuRcqb0FwPeZM+AZFjPk87l57YPbRIXGcrw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WRcKTgb9RjHE; Mon, 12 Oct 2026 13:19:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B652240555
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791811192;
+	b=qU5TPEZg3efHsjCBPt1/dCdxlRH8CSlEkotKMKKVphwshqC/lk6LjADV4vMHpEzb79Zc
+	 IHr0iuQHalkDkymMoIz8XXAxZPO30LlttHY1XjurvpdrmnT1DZGAIFLmAyVmWdyCprHk8
+	 FVrWCGlx5ntGwXlwy5QfbKC+JLlum9m6OJeLQMugf0F1IADN4JVZtG6zOUWl/RG5+EFcX
+	 3aeKgUUI+BgyHrUgVs2+AMaLJlwuHfkbVcBaa/e82hiKemWijzZdUGNPDqdzwX0s1HMH4
+	 r/4pxk+yaVtpsAFvhaKrZfsxM7OpuKH+Ma3majVlMz7foCk+vz8mfbLU+21MpPUYZoA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791808620;
+	c=relaxed/relaxed; t=1791811192;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=kATTCWJEbWLsix9n48IfPKskHbGbQwJ1IQEx0mjuLnM=;
-	b=KECsDJvDkHwtM0H89biOmbO9HvMVOFKZAUDUYyng+Ybs65b8vlDsSeyo229rQ7sK02LG
-	 +TokXjo2rjwXQFK5NX9B6zF8SLw6FHKE06gjArNKjKbpN2gzGwXYn2HayZ3xNlOi/T/3M
-	 CuIWzAC/3qFW5i+F3tTCMbEeYKpJAzjFCt0XsVZZUtwFUL3sJI4LzVkeO6JbSbwNj3jXc
-	 gQjotoA5+OzpZOkiwAjiEP64CYxqkep7eRsniRX1SZVcwVUMMDLwwYkQlmksCgpNWQvIm
-	 lio1flodow1MC4NkrdaLh4cC5yYpOrCDE3os0VS6Ho6JGV56zillAZ9ZJn2AE7PW0VQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	 X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:From:
+	 Subject:To:Cc:References:Content-Language:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=oH9PI5IH0mCbAyhRfr2b3DT6H2ImZN7dhfbXyytYI6c=;
+	b=lpnzxMxzq6uyP74RWfrHWnpXX2oCqjvIDkD2PfLypXBmJjCW9mRFIcrEMbtMuj02fPOx
+	 v355RUOaiqpfcI035WUQt2UgOB+14GCUAZnxn8v/2UjlGTzv5suQRCtO1ZJoOldiXJMpp
+	 42S6nrkTn+hxaenLxI3C64twzslRZc+KntzFmqBBSRv2bTxpNbMbhqDLXMBQtoRh0ThAZ
+	 zfYJ3cuZlGiBg40P8YCONmA80Q00FOqwUhiSQOWyJQND1UukFz3jsi2fDqdlS0ZRgoeVe
+	 CXo4GoMGyCxVVOhqe1ItUf0GLcvTb87E5RRC8Kt5A1UJwlCGbjO+hsT/xttLwBDqPrg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aQTMwl4W;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791808620;
-	bh=kATTCWJEbWLsix9n48IfPKskHbGbQwJ1IQEx0mjuLnM=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791811192;
+	bh=oH9PI5IH0mCbAyhRfr2b3DT6H2ImZN7dhfbXyytYI6c=;
+	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Ikf4tNyu3KZSyie0kxmSf/huCuq3x8qyRxSsPy+felZwIpD4XsaBTzffMjNSDhvmJ
-	 5lK1wavWIFAwGDxYa8Va9BgMxTkCdm6q6K/YrtdnzdDsZ94iV0SbPESySSwAX38MxY
-	 cnbDpew0AiDIFfCqTpEcPFn2kh26CXOLkaJSJJOytPeQs5xm6+6DQ5ReP3USuPe3uT
-	 uSnpF/Yn1J2u2XdZdVvObpp8tC2sgqkLxd6Gw9w7/s9+4A6zlc1aNHLEO6khUbyxOG
-	 v7cz/jlK5J6Pbw9Uy8sBtGUonS4C2r6x4qu6z+oJtANWS3ALoYqIdJW1ro9UXvZunG
-	 Lq59BJ7wI68mA==
+	b=VkB4to4jWTKefPPS/qUxEZb6LK1txlixIbWRUHa0aUqfeo24tZR3N3NzmedlxN93J
+	 X1GWjLx8OcqzqZkF4JSsaUxxqg0u+Vnss/jx3X0SYLHq2d7LyuL4Zfh++kXGGoZqVM
+	 OICorcEyZw3i//ZvLcWAVEBK4lusxWQ/78vb+1TP1f/U1sqjwIfjOM8CwEx9pglD7H
+	 2TvNK+duJt7cKS3zjytNeYFbhoq4FTdJyLc6WX0oLv98O7YuFdUlSjgTGSqZRG843X
+	 hPKRygnyvkvFaaXpN/DDAgWrrltQiD8iJkKBNRzVDrMRdouJYsiDRSJWb5qAD0+FCy
+	 v3HdAlGoBWnrg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5F26380DB4;
-	Mon, 12 Oct 2026 12:37:00 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 75A62380
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:11:06 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B652240555;
+	Mon, 12 Oct 2026 13:19:52 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4DDF9156
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:15:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A9AA040182
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:11:05 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3D14C40509
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:15:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id laNfUgTSDVI4 for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 10:11:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 39A1F400D0
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791799864;
- b=YC12/hauxlfRNfFttFs37eyRXT9N8xEclKpy9n6blIuiA9wA0wXljhb0F2/M85fRHgrL
- IpoMjd0rszqLnvt8ZiTgJnNIB5ykd5+X+0bR5seza3cwcx/IWzKWLUdC+g9mBNyvR0gmL
- z1FCR0+rgjNQRo98eYAR9OXDtbed0Vk3BpAh1/8eJurHXDHRsqb77gooAYYg9Ntgb88Ju
- auZZyQLJwxFTkb2v9/dwE0HCfNANx3DKbvVGvJllIhwHpd9ilLAQfP+OSXF0/bote37CF
- ptHBTarFpxPJK7YKfqysa9ZDGBnq8+U9lfYgp25jVdLDIp2XOxhSh3K0Z/vLr2a3FwQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xYJdhKQdbFjW for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 13:15:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5D3C740478
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::52c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791810931;
+ b=KSSNlrSEdxkHTJIYaCL1pGhXr8U5PCAgp79vF2uquMcWhxEG7YOuZ1FcLMIoYaTaWuIU
+ gTijZHQJUhdlfbV3f0FARfUmVK/T/Yp8rH8A78C9PFndmgtgSkAk9CK6DveiMYvYF9WSP
+ U43WMO3L179HcZKPTOSyuzopTOt1dsa6W5bo14nmS9tNi3tUgI9dflDbTAFR7OsUrmJzg
+ sbDRklN9+Se7UMLuNv9XfaPEFHuu2bzcVFVUVL7ooYXXJQcv8uYfAXdYm/CO4HvFGEwnU
+ a3T98DVlMqbCyKuFm5fTPbyB8u2PR9kZqjLp5n8g5ijKz5T/NTfgO+AUtWsjsR8qe2g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791799864;
+ c=relaxed/relaxed; t=1791810931;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding;
- bh=kATTCWJEbWLsix9n48IfPKskHbGbQwJ1IQEx0mjuLnM=;
- b=Mwtx2rqVoooga5m0OBK8dxzOzZkRA9U3lq1Op+sXL5UuHAMmDTMCMbH0oWe94gowEaHn
- voYAvmBNPLj5vmbyuZeUiuXL08vmz1lyv1LtDA0IG9gBKhj+x3MVNEVk8JaZ2BxLNeJ12
- NnUcSIEk1xSHg/O0VCOlnHAvoOpEhGjho49iyLeStP5IK9x+LnEjLTVblMF4CFCL6Ojuk
- PjYez7Wt9hM8dAJ7vk8mmehdTXmz7IQfpxZlyntm1acyJehH30Dc+gCRJaXB4UxG6gDc4
- TTHOQBlgr5scz8cDWQADr9DhYL772j7iPLkIChlIMI5El1WwWz1X7Jl/cYoNMGDZQOA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=sigma-star.at;
- dkim=pass header.d=sigma-star.at header.i=@sigma-star.at header.a=rsa-sha256
- header.s=google header.b=vOouJegv; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+ MIME-Version:User-Agent:From:Subject:To:Cc:References:
+ Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ bh=oH9PI5IH0mCbAyhRfr2b3DT6H2ImZN7dhfbXyytYI6c=;
+ b=Hwn4Ap64VdTB1vJ28rve91L1H7FjDx5SCWv9FIx7I/fPAt+h1M6G3PTTVaU3KWzSAGhB
+ J+Sl9VT/zXWmhTyZIwFXF+vmiJT8a0p47DJmin/MsCsx8PbBF1kDZ+I/CC/m4bopr48rs
+ 8THZshmy90dxqyJQvREMdahlkxbxk4fO+GjN5s/qiyBLWSoGLXbogIorykr97QrBrvE0n
+ P3l/NDqjOo+cl0TV1Y+8XlbCReNSO47UGzhTZzD8iM+oLQsewWhTBzdPw55L2biMb3zNR
+ WycJpQVzHw+6ILWRkfqN9y/t4Fc4EVuOmSnqachpI/RY9OvedmXW9gqfjfldKN0j0OQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=gmail.com;
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=aQTMwl4W; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::52c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
- envelope-from=lorenz@sigma-star.at; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=sigma-star.at
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=sigma-star.at header.i=@sigma-star.at
- header.a=rsa-sha256 header.s=google header.b=vOouJegv
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 39A1F400D0
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:11:03 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-48c4207ac26so1665336f8f.0
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 03:11:03 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::52c; helo=mail-pg1-x52c.google.com;
+ envelope-from=sycamoremoon376@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=aQTMwl4W
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5D3C740478
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:15:30 +0000 (UTC)
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-cd6028ff33fso404679a12.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 06:15:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sigma-star.at; s=google; t=1791799862; x=1792404662;
+ d=gmail.com; s=20251104; t=1791810930; x=1792415730;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=kATTCWJEbWLsix9n48IfPKskHbGbQwJ1IQEx0mjuLnM=;
- b=vOouJegvJHtKdC6hIevYUdsrq2dIY5lNfA9nT6EBUezHTQAA2oY0FkAEAOnoDEmoUt
- 925evnqnIhYja5ETi4C0gFibCjYoFljV5s5hsqUR7EK9Ob8QQhYJZ2rNKLMtppw84B7M
- Igq0cZQ6FP5UmREGJHEM7FmKw5J1Tcp79J5kuPVxDYQqaPafQ4ESRf+F6/AVzVgdSWmj
- yyH2rjusGrdTGFQmDlKYelDpQvuaW+OPvcCcZRBjMR5KfepouwtRu72joe1DLxeDgKte
- L+1Pxjgy9r3v38lwjq3aMHX5tefmlJw8+3Ivkiv5LGQtOJiaLntk+aLNFaT3Qoongbt6
- 7/Qw==
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:subject:from:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=oH9PI5IH0mCbAyhRfr2b3DT6H2ImZN7dhfbXyytYI6c=;
+ b=aQTMwl4W7k4LbFNsFiiW+kEDspjV7CXhSZI8ckJ2KrX1lZ8bRVX/RAY3RjpHs36czC
+ NK2yTSgmugwAfVLlKaatfhgPvyxPKwCZ0Hp/Rt8auW7DnGSeDImf6OvwxYpJGu18oPaZ
+ 1XyzaYA5yau0+LK1hSp2eQwZNlFZ3RQYADLTp76dzAlDG5blnX9lrAHQZR2n6poHEzfS
+ ASMf59WTs7zj4SlvdeklLvJXtNydHzMuH3OIRVS3F9ls1rUr87yKXk3DxSpHZ2kxQ4WW
+ +SdXrxHU0AMBoIm4RpMRpOVfMJwUaTTd7VAj9B89OE5P4BJzfoA7KPMQWbirnUf3g7Ll
+ MdAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791799862; x=1792404662;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=kATTCWJEbWLsix9n48IfPKskHbGbQwJ1IQEx0mjuLnM=;
- b=yfw0wTIGpJ6Og+i/E3SpvMU78oE4t8FxXwA8PBJScqQLCar+6Eg3Sqr3q9kYkbs/s1
- BhW4V3ikj52AuavY7C9s6D1Ls0qgRYm9praDVQHNXr/PsbgcEfXeMAJDfrFoRl2kAILC
- QsxPUCDL5NjlR35EUqjmBGFb7/bmcdzaZnvs7MQs/lP4n6Hwwtdt5XCa8HLGloX8FjwJ
- xz/4rvbQehSnbRSZDBkx2Cc3O6wbn6Puf1SvSy3lPL1mNohjtMtsdmpnpJVjTc7JdIAH
- 1TWZU0vkxdH2tQ7fwSp46JPZQ0e/ww7dKvlAzV/BothhWqW813sF6qdj6513igVIjwoV
- We+w==
-X-Gm-Message-State: AFq9FYIiJYv1OpMzI0U+NAclOMbw/8skVHAnpk3ojNR9QP1LZDxGqgMt
- vFKcEZAhdzSaOkN/KXEs6f2CoP5RYmi1eoxF5fTVNsvbyaBCPV/0NqX56GPXF1o0n1njXGIV/FL
- TK+EsqDLmkw==
-X-Gm-Gg: AYBFou0LCCSGZJk0CMbnPekxQyxwMV7vTpALtUlZbzL4rqcQ8WQT+yFYkVbsNTz4aBZ
- s1iZe18F8KC+O/CorRhaHc2UIyghhgnXo5toiuPqyyo1HYZQnkFY60YHZ3kbtXxZKtJA3qKUc0k
- w9Uq1r9GXftCj4Z4uMQgCXOPzdshi8aV3wWBGOC9LCowtc3UV+8E5YH7SIHvpxE6EfSACv0nS2m
- Yk8TETX0YP7AOsFXoJO1nM1MAFT/ugAezNFGGB8792U8BzRc3kM9LNaDnk+KlF+0xDt98cNBf4C
- aEakuaONQF8Tw+yorZTw0nOMJSIPcoUrp5NWQ5DpgDrXqNIt9c2Nz6QAXkccD8m+vTqtu6FLgmi
- qT8kImHaNuppOw/OM1vTH9DKd7oIyrM2CqWVZxaU3ZFDVx7oJKdnnhfW3UQFn67GbpCPZ3Ys4oQ
- eKibH+NQ2DQ2m/TsH1EZJAwAA29eoVm1zV1T6dufNrz/2mE0RR1kvYassfNU49JO/YckKq3Kbbu
- WDwkDKuJKkoyPsCdVKgeA==
-X-Received: by 2002:adf:e189:0:b0:48b:efb:4a64 with SMTP id
- ffacd0b85a97d-48dbaaefefemr15823358f8f.37.1791799861546; 
- Mon, 12 Oct 2026 03:11:01 -0700 (PDT)
-Received: from losig.fritz.box ([2a04:9546:1c54:8601:c375:8df8:9c4c:d013])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48db9abd57fsm18064559f8f.37.2026.10.12.03.11.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2026 03:11:00 -0700 (PDT)
-From: Lorenz Kofler <lorenz@sigma-star.at>
-To: u-boot@lists.u-boot-project.org
-Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- upstream+uboot@sigma-star.at, Lorenz Kofler <lorenz@sigma-star.at>
-Subject: [PATCH v2 4/4] binman: pre-load: Test signing with an OpenSSL engine
-Date: Mon, 12 Oct 2026 12:10:54 +0200
-Message-ID: <20261012101054.2104707-5-lorenz@sigma-star.at>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261012101054.2104707-1-lorenz@sigma-star.at>
-References: <20260917065545.1989088-1-lorenz@sigma-star.at>
- <20261012101054.2104707-1-lorenz@sigma-star.at>
+ d=1e100.net; s=20260707; t=1791810930; x=1792415730;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:subject:from:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=oH9PI5IH0mCbAyhRfr2b3DT6H2ImZN7dhfbXyytYI6c=;
+ b=HaMb53uxbET4Ess+iCr6W8yEELaoCkCmET3dryvyr05uWIWU6djhUKw2uWmssZuOz+
+ H4qbt6LJa/wmww8Uqrb3dNpiLNRzs1qgYsfC+f7k/Hftk91M9eNf6dcIZNQzhXl0YHSi
+ rOIRngeDZZlXQUPB773j3w6dsaLAyD+vBcouJksOgDokJXK7qztL36/C2q/b23AgCaC2
+ 0gyNwdlaCpGz2/3JqM3BxYMWrxYid2n3GrsUstrn6zpnjl1cQohFyKRBGuog1fCy6boH
+ s6yPVAvWbE8de2iQbKyT2kHQa2eU6/NJCfisedhZdnjiI9dnRmhq647Na+2OaJ2FPLJX
+ DhZg==
+X-Gm-Message-State: AFq9FYKgLB4jMnOY32gFHCi6N2ZwVqQ/lJCJ/tyfV8o0+Vn6paMb8DKo
+ yHIW3c4/0MoTyi2Snv1YaW2uLfTfUHoRk9g+gYyiGeNxjo2cowGHTtj2
+X-Gm-Gg: AYBFou3A5tBYFA+JeTrGvp5bxY/w8c0AeOHFIxN68Iph7ipEtCENcX0qMQ07JE5H7ry
+ lrQxlwzlfDablARtFETxptdAXq56DCranABU4B5HQB9eL/Ia89BkdEu8H1Sug84pAxPMCC6PDCx
+ c7FTcE3PWPgglnt1e1Dpo/rajjh8hwWUuiA/SuLckCa4hrWzfZ4oJiCXrVaVpC+ISHLStrHMnSJ
+ VTbzO+oFz3USh2vLzW3OD/Y+1HUfuUzo2gS9AWNCPcAeZawSyNk7J1Nxo/QmNjVqmIxlRPC/n1/
+ INdS94jX2rTI447v3ZUvPK/ZuxE7rIEhpw8PFMY/HFrpE24wA2eMvympAH8ocQcQI/LIkTVRStc
+ 6gF/EIhEZ5fmz/BcxFcHfaidQgQrIl9TwpWad49LK7tVmjxI61A/hbo9mUJqCA0Ir/orSktel8Y
+ HwMSqx6Psp4dxOpU04SAPXVaajFuHMKfAV5xPXe1RDgISlnys8dqzIlR4kTLQKecR7SYl0UaJH
+X-Received: by 2002:a17:902:f708:b0:2e2:d09f:d770 with SMTP id
+ d9443c01a7336-2e842ab67c2mr88768435ad.26.1791810930142; 
+ Mon, 12 Oct 2026 06:15:30 -0700 (PDT)
+Received: from [0.0.0.0] ([20.89.104.82]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2e8422c9944sm43543525ad.64.2026.10.12.06.15.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 12 Oct 2026 06:15:29 -0700 (PDT)
+Message-ID: <1f734cd0-cd75-4b0e-93ec-490ecfbb1ab0@gmail.com>
+Date: Mon, 12 Oct 2026 21:15:25 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 12 Oct 2026 12:36:48 +0000
+User-Agent: Mozilla Thunderbird
+From: Zixian Zeng <sycamoremoon376@gmail.com>
+Subject: Re: [PATCH v2 2/3] mmc: k1: let the SPL read SD cards more than one
+ block at a time
+To: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>,
+ Dave Klotz <DaveWK225@protonmail.com>, Yixun Lan <dlan@kernel.org>,
+ Eric Chung <eric.chung@riscstar.com>, Peng Fan <peng.fan@nxp.com>
+Cc: u-boot@lists.u-boot-project.org, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>, u-boot-spacemit@groups.io
+References: <cover.1790975596.git.DaveWK225@protonmail.com>
+ <20261005T134748-0400.mmc-v2-cover.DaveWK225@protonmail.com>
+ <20261005T135733-0400.mmc-v2-0002.DaveWK225@protonmail.com>
+ <a57e47d3-fe8c-44dc-8afe-2c256ed49d71@gmail.com>
+ <2ef42a4d-ee32-4650-819b-ea6d042bdad5@altera.com>
+ <c02f3812-e549-4f4a-9fc8-77da7ed6b883@altera.com>
+ <8a263ad7-5cf5-46f4-87a1-43e898a1d15a@gmail.com>
+ <6f00fd89-d418-4d64-a066-c893dff89994@altera.com>
+Content-Language: en-US
+In-Reply-To: <6f00fd89-d418-4d64-a066-c893dff89994@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Mon, 12 Oct 2026 13:19:50 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -181,159 +190,201 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Test pre-load signing through the pkcs11 engine with a key imported into
-SoftHSM.
+On 2026/10/11 22:31, Kathpalia, Tanmay wrote:
+> Hi Zixian,
+> 
+> Thanks for the logs.
+> 
+> I hit the same pattern while testing the Cadence SD6HC driver.
+> Multi-block reads failed and single-block reads worked. On that board
+> the host and the card were in 1.8 V mode, but the I/O supply had been
+> left at 3.3 V. A short transfer got through; a longer one failed on the
+> data lines.
+> Both stages on K1 use the same PIO loop, so a FIFO that drains slower
+> than the card delivers would show up in U-Boot proper as well. Your
+> SPL/proper split fits an electrical setup difference.
+> 
+> The SPL failure is irq=408020. Bit 22 is the Data End Bit Error (EDEB,
+> SD mode only): the controller detected 0 at the end-bit position of
+> read data on DAT, or of the write CRC status. That is a bad edge on
+> the data line during the transfer.
+> 
+> On the Banana Pi F3, aldo1 is vqmmc-supply of &sdhci0. The U-Boot
+> dtsi names it vdd_1v8_mmc, and the SPL prints "vdd_1v8_mmc,
+> value:1800000" before MMC2. set_vdd_mmc() in board/spacemit/k1/spl.c,
+> called from board_init_f(), writes 1800000. The dts leaves aldo1 at
+> 0.5 V to 3.4 V. SD High Speed (mode=2) uses 3.3 V signaling; 1.8 V is
+> only after a UHS switch. mmc1_cfg is power-source 3300, and
+> mmc1_uhs_cfg is the 1.8 V state. For this mode the rail should be 3.3 V.
+> 
+> CONFIG_SPL_MMC_IO_VOLTAGE is not set, so mmc_set_signal_voltage() is a
+> stub and signal_voltage stays MMC_SIGNAL_VOLTAGE_000. aldo1 stays at
+> 1.8 V. U-Boot proper has CONFIG_MMC_IO_VOLTAGE. mmc_set_initial_state()
+> requests MMC_SIGNAL_VOLTAGE_330, so the driver writes 3300000 to the
+> same vqmmc-supply and clears SDHCI_CTRL_VDD_180 before the transfer
+> that succeeds.
+> 
+> CONFIG_SPL_PINCTRL is not set either. The driver calls
+> pinctrl_select_state() under IS_ENABLED(CONFIG_PINCTRL), but that
+> function is a stub unless CONFIG_IS_ENABLED(PINCTRL), and the return
+> is ignored. SPL never applies mmc1_cfg. Proper selects "default" for
+> SD_HS, which is that state.
+> 
+> Keeping the multi-block path, set_vdd_mmc() to 3300000, or enable
+> CONFIG_SPL_MMC_IO_VOLTAGE. If the 32-block CMD18 still fails, enable
+> CONFIG_SPL_PINCTRL so mmc1_cfg is applied. If either makes the read
+> succeed, this is the F3 failure.
+> 
+> Regards,
+> Tanmay
 
-Add tests for:
+Hi Tanmay,
 
-- PKCS#11 signing with PKCS1.5 padding.
-- PKCS#11 signing with PSS padding.
-- Reporting a missing OpenSSL bintool.
-- Rejecting a missing engine key name before signing.
-- Rejecting an engine signature with an incorrect size.
+Your diagnosis was right - it is the I/O voltage.
+Enabling CONFIG_SPL_MMC_IO_VOLTAGE makes
+the multi-block read work on the Banana Pi-F3:
 
-Signed-off-by: Lorenz Kofler <lorenz@sigma-star.at>
----
-Changes in v2:
-- Use the separate SoftHSM setup refactor introduced in patch 3.
-- Use one device-tree for both paddings.
-- Add tests for a missing engine key name and an incorrect signature
-  size.
+Based on previous commit, I patched the following changes:
 
- tools/binman/ftest.py                         | 88 +++++++++++++++++++
- .../test/security/pre_load_engine_pkcs11.dts  | 24 +++++
- 2 files changed, 112 insertions(+)
- create mode 100644 tools/binman/test/security/pre_load_engine_pkcs11.dts
+diff --git a/configs/spacemit_k1_defconfig b/configs/spacemit_k1_defconfig
+index 9c15d96eae2..f5c717e5965 100644
+--- a/configs/spacemit_k1_defconfig
++++ b/configs/spacemit_k1_defconfig
+@@ -95,6 +95,7 @@ CONFIG_MMC=y
+  CONFIG_MMC_SDHCI=y
+  CONFIG_MMC_SDHCI_SPACEMIT=y
+  CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_SPL_MMC_IO_VOLTAGE=y
+  CONFIG_MMC_HS200_SUPPORT=y
+  CONFIG_MMC_HS400_SUPPORT=y
+  CONFIG_MMC_HS400_ES_SUPPORT=y
+diff --git a/drivers/mmc/spacemit_sdhci.c b/drivers/mmc/spacemit_sdhci.c
+index 23c655c6def..58374c482b3 100644
+--- a/drivers/mmc/spacemit_sdhci.c
++++ b/drivers/mmc/spacemit_sdhci.c
+@@ -251,6 +251,10 @@ static void spacemit_sdhci_set_voltage(struct 
+sdhci_host *host)
+                         bool ok;
+                         int voltage_mv = to_180 ? 1800000 : 3300000;
 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index f5eb895475f..c498e4c4959 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -5969,6 +5969,94 @@ def _SetupSoftHsm(self, softhsm2_util, prefix, private_key,
- 
-         return softhsm2_conf
- 
-+    def _CheckPreLoadEngine(self, padding):
-+        """Sign an image through the pkcs11 engine and check the signature
-+
-+        Args:
-+            padding (str): Padding used by the device tree
-+        """
-+        softhsm2_util = bintool.Bintool.create('softhsm2_util')
-+        self._CheckBintool(softhsm2_util)
-+
-+        try:
-+            tools.run('openssl', 'engine', 'dynamic', '-c', 'pkcs11')
-+        except ValueError:
-+            self.skipTest('PKCS11 engine setup not functional, '
-+                          'did you install libengine-pkcs11-openssl?')
-+
-+        softhsm2_conf = self._SetupSoftHsm(
-+            softhsm2_util, f'pre_load_engine_{padding}.',
-+            self.TestFile('dev.key'))
-+
-+        data = tools.read_file(
-+            self.TestFile('security/pre_load_engine_pkcs11.dts'))
-+        data = data.replace(b'padding-name = "pkcs-1.5";',
-+                            f'padding-name = "{padding}";'.encode())
-+        dts = self._MakeInputFile(f'pre_load_engine_{padding}.dts', data)
-+
-+        ossl_conf = self.TestFile('fit/openssl.conf')
-+        with unittest.mock.patch.dict('os.environ',
-+                                      {'OPENSSL_CONF': ossl_conf,
-+                                       'SOFTHSM2_CONF': softhsm2_conf}):
-+            data = self._DoReadFile(dts)
-+
-+        image_fname = tools.get_output_filename('image.bin')
-+        is_signed = self._CheckPreload(image_fname, self.TestFile('dev.key'),
-+                                       padding=padding)
-+
-+        self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
-+        self.assertEqual(PRE_LOAD_VERSION, data[4:4 + len(PRE_LOAD_VERSION)])
-+        self.assertEqual(PRE_LOAD_HDR_SIZE, data[8:8 + len(PRE_LOAD_HDR_SIZE)])
-+        self.assertEqual(is_signed, True)
-+
-+    def testPreLoadEnginePkcs11(self):
-+        """Test a pre-load header signed through the pkcs11 OpenSSL engine"""
-+        self._CheckPreLoadEngine('pkcs-1.5')
-+
-+    def testPreLoadEnginePkcs11Pss(self):
-+        """Test a pre-load header signed through the engine with pss padding"""
-+        self._CheckPreLoadEngine('pss')
-+
-+    def testPreLoadEngineMissingOpenssl(self):
-+        """Test that a missing openssl is reported when using an engine"""
-+        with terminal.capture() as (_, stderr):
-+            self._DoTestFile('security/pre_load_engine_pkcs11.dts',
-+                             force_missing_bintools='openssl')
-+        err = stderr.getvalue()
-+        self.assertRegex(err, "Image 'image'.*missing bintools.*: openssl")
-+
-+    def testPreLoadEngineMissingKey(self):
-+        """Test that an engine requires a key name before signing"""
-+        from binman.etype import pre_load
-+
-+        data = tools.read_file(
-+            self.TestFile('security/pre_load_engine_pkcs11.dts'))
-+        data = data.replace(
-+            b'key-name = "pkcs11:object=test_key;type=private";', b'')
-+        dts = self._MakeInputFile('pre_load_engine_missing_key.dts', data)
-+
-+        with unittest.mock.patch.object(
-+                pre_load.Entry_pre_load, '_sign',
-+                side_effect=AssertionError('signing should not be attempted')):
-+            with self.assertRaisesRegex(
-+                    ValueError, 'key-name must be provided when using an engine'):
-+                self._DoReadFile(dts)
-+
-+    def testPreLoadEngineInvalidKeySize(self):
-+        """Test that an engine signature with the wrong size is rejected"""
-+        from binman.btool import openssl
-+
-+        def sign(input_fname, output_fname, key, hash_name, padding_name,
-+                 engine=None):
-+            tools.write_file(output_fname, tools.get_bytes(0, 128))
-+            return ''
-+
-+        with unittest.mock.patch.object(openssl.Bintoolopenssl, 'sign',
-+                                        side_effect=sign):
-+            with self.assertRaisesRegex(ValueError,
-+                                        "don't have the expected size"):
-+                self._DoReadFile('security/pre_load_engine_pkcs11.dts')
-+
-     def _CheckSafeUniqueNames(self, *images):
-         """Check all entries of given images for unsafe unique names"""
-         for image in images:
-diff --git a/tools/binman/test/security/pre_load_engine_pkcs11.dts b/tools/binman/test/security/pre_load_engine_pkcs11.dts
-new file mode 100644
-index 00000000000..eb4957c35b4
---- /dev/null
-+++ b/tools/binman/test/security/pre_load_engine_pkcs11.dts
-@@ -0,0 +1,24 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		pre-load {
-+			content = <&image>;
-+			algo-name = "sha256,rsa2048";
-+			padding-name = "pkcs-1.5";
-+			key-name = "pkcs11:object=test_key;type=private";
-+			engine = "pkcs11";
-+			header-size = <4096>;
-+			version = <0x11223344>;
-+		};
-+
-+		image: blob-ext {
-+			filename = "refcode.bin";
-+		};
-+	};
-+};
--- 
-2.55.0
++                       printf("sdhci: voltage signal_voltage=%u 
+vqmmc=%s -> %dmV\n",
++                              mmc->signal_voltage,
++                              mmc->vqmmc_supply ? 
+mmc->vqmmc_supply->name : "none",
++                              voltage_mv);
+                         if (spacemit_sdhci_set_vqmmc_voltage(mmc, 
+voltage_mv))
+                                 return;
+                         if (!IS_SD(mmc))
+@@ -274,7 +278,8 @@ static void spacemit_sdhci_set_voltage(struct 
+sdhci_host *host)
+                         break;
+                 }
+                 default:
+-                       /* No signal voltage switch required */
++                       printf("sdhci: voltage signal_voltage=%u -> no 
+switch\n",
++                              mmc->signal_voltage);
+                         return;
+                 }
+         }
+
+Booting logs as follows:
+
+U-Boot SPL 2026.10-rc5-00643-g6a99fe92389a (Oct 12 2026 - 21:13:00 +0800)
+Fail to detect board:-2
+vdd_core, value:900000
+vdd_1v8, value:1800000
+vdd_1v8_mmc, value:1800000
+DDR firmware: [0xc081d880]:0xf0227179, size:0x8d98
+DDR is ready
+No SPI controller (-19)
+Trying to boot from MMC2
+sdhci: mmc@d4280000 path=PIO flags=0 caps_sdma=1 caps_adma2=1 
+max_clk=204800000
+sdhci: voltage signal_voltage=0 -> no switch
+sdhci: voltage signal_voltage=4 vqmmc=aldo1 -> 3300000mV
+sdhci: voltage signal_voltage=4 vqmmc=aldo1 -> 3300000mV
+sdhci: voltage signal_voltage=4 vqmmc=aldo1 -> 3300000mV
+sdhci: voltage signal_voltage=4 vqmmc=aldo1 -> 3300000mV
+sdhci: voltage signal_voltage=4 vqmmc=aldo1 -> 3300000mV
+mmc: multi-blk blkcnt=32 clk=50000000 mode=2 width=4 caps=300207ef 
+cmd23_host=1 scr0=2358043 cmd23_card=1
+sdhci: multi cmd18 arg=2 blks=32 blksz=512 mode=32 dma=0
+mmc: multi-blk blkcnt=1956 clk=50000000 mode=2 width=4 caps=300207ef 
+cmd23_host=1 scr0=2358043 cmd23_card=1
+sdhci: multi cmd18 arg=1000 blks=1956 blksz=512 mode=32 dma=0
+
+<debug_uart>
+
+
+U-Boot 2026.10-rc5-00643-g6a99fe92389a (Oct 12 2026 - 21:13:00 +0800)
+
+DRAM:  4 GiB
+Core:  338 devices, 22 uclasses, devicetree: separate
+MMC:   sdhci: mmc@d4281000 path=PIO flags=0 caps_sdma=1 caps_adma2=1 
+max_clk=204800000
+sdhci: mmc@d4280000 path=PIO flags=0 caps_sdma=1 caps_adma2=1 
+max_clk=204800000
+mmc@d4280000: 1, mmc@d4281000: 0
+Loading Environment from nowhere... OK
+In:    serial@d4017000
+Out:   serial@d4017000
+Err:   serial@d4017000
+Net:   No ethernet found.
+=>
+
+With the voltage corrected, a single 1956 block PIO CMD18 loads
+the whole FIT,so the controller is fine with the FIFO back pressure,
+the slow SPL drain was a symptom, not the cause :-).
+
+Without the CONFIG_SPL_MMC_IO_VOLTAGE=y change the same driver printed
+"sdhci: voltage signal_voltage=0 -> no switch".
+Since mmc_set_signWith the voltage corrected, a single 1956 block PIO 
+CMD18 loads
+the whole FIT,so the controller is fine with the FIFO back pressure,
+the slow SPL drain was a symptom, not the cause :-).
+
+Without the CONFIG_SPL_MMC_IO_VOLTAGE=y change the same driver printed
+"sdhci: voltage signal_voltage=0 -> no switch".
+Since mmc_set_signal_voltage() is a stub in SPL, so mmc->signal_voltage
+stayed MMC_SIGNAL_VOLTAGE_000, spacemit_sdhci_set_voltage() took the
+"no switch required" path, and aldo1 stayed at the initial 1800000 that
+set_vdd_mmc() writes in pmic_init(). The 32 block CMD18 then failed
+after ~20 of 32 blocks. Single block reads passed at 1.8 V, which is 
+what hid it.
+
+On the pinctrl side I had already run the SPL with standalone
+CONFIG_SPL_PINCTRL=y, with bootph-pre-ram on &pinctrl, mmc1_cfg and
+mmc1_uhs_cfg plus their pin groups. I confirmed that
+pinctrl_select_state() return successfully. The multi-block read still
+failed the same way with the rail at 1.8V.
+
+Therefore, I suspect that configuring the MMC signal voltage to 1.8V
+in pmic_init() may need to be modified.
+
+Thanks for your suggestions and guidance.
+
+Best regards,
+Zixianal_voltage() is a stub in SPL, so mmc->signal_voltage
+stayed MMC_SIGNAL_VOLTAGE_000, spacemit_sdhci_set_voltage() took the
+"no switch required" path, and aldo1 stayed at the initial 1800000 that
+set_vdd_mmc() writes in pmic_init(). The 32 block CMD18 then failed 
+after ~20 of 32 blocks. Single block reads passed at 1.8 V, which is 
+what hid it.
+
+On the pinctrl side I had already run the SPL with standalone
+CONFIG_SPL_PINCTRL=y, with bootph-pre-ram on &pinctrl, mmc1_cfg and
+mmc1_uhs_cfg plus their pin groups. I confirmed that
+pinctrl_select_state() return successfully. The multi-block read still
+failed the same way with the rail at 1.8V.
+
+Therefore, I suspect that configuring the MMC signal voltage to 1.8V
+in pmic_init() may need to be modified.
+
+Thanks for your suggestions and guidance.
+
+Best regards,
+Zixian
 
