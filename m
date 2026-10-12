@@ -1,162 +1,167 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7305ACA9ED0
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 21:50:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82B3ACA9EC5
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 21:50:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2601140539;
-	Mon, 12 Oct 2026 21:50:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D788560710;
+	Mon, 12 Oct 2026 21:50:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id B0hrIDmj2Omg; Mon, 12 Oct 2026 21:50:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 42A3540515
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791841813;
-	b=jfE+Y0aL+i4iYSqHwrTySfmL3iZV8RMCicxanQnKFTJa3vD98P6gn+wIICItlUi7yb+O
-	 HcwXZCvFsY6RifhXESYqNCoBD6vRezvXpiYyvKLAoQN36aFWeqoQZiK/hk/lQFRcS7pXZ
-	 3kvLBeo+4SoQXLjtflP7kJZDVqG5/czrrQeaBBz/P5YmY9R9p7/Ptis598lfoUX56+ZZf
-	 EIVOeAmG7Po0V665lMS6rkBewzXV1K7hhS7jKfCeD08aaMagk6eyhuDHQ12u4R+t868wd
-	 nVkPvCQLmZcK2RUnY7ZPRm/NDVKx4t1m6n8WZJ04MD5sISHw30lwAT1LqjuVst7Y5QQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VBVYosTaGQ6c; Mon, 12 Oct 2026 21:50:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 22FB4606F0
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791841815;
+	b=Ov7fzFXdCR9iXwlrsAwL39/Uq5Z8EJpdAIO6hNZtdcAeFA639jIw5QYcElF0dWjOrpIW
+	 jdTBtxepXTCkCBzaIQdfe3DlnNzh2wubmsN4nrrIU8ypd08lFJfZ/txp1Baucy1Z7sHJ2
+	 gufwzgaYzz2s6dkjxyeRpGYQTdzB0B6niSnMt+jeBSGT9wxOKARpjuWcMwV9dSvLqd5V9
+	 HG8iUQhP+VbZIqM8akafaqgn1o1i3OW67IKU771cVuRBT7tOxWdxW/hwWsF6KpVw8LEu9
+	 XAMRTf2B4szZdNk3v4WmIntxqVoIwregmkyduMQIGOv14FiFPMJ78IGI8iEYUWt27nQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791841813;
+	c=relaxed/relaxed; t=1791841815;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=DgXSAGTQSwSESsMeO0L4IDqHKiN5rKYynAkCBkqPKAg=;
-	b=CcxCXA9s2FufweydLrG1xbjd0bxaSXXsb2E+4xUS2gOIOOfU7m4gz5c8DlqDPbJUV085
-	 kdOvRGh3qqE7LYgCo9ijX/cMVyQVdnQRDIz+xcBYm8DturYNXAY9uEvXr2Ed/nlMn1Dk5
-	 dZE/41hCaqxac0GUT8ZzOhCiHPXxMsME06UZvX75V0BUPDcGTbod0jNHNfrTdT8xZozb2
-	 jXgrRhZRDHfKc//fUV+/AuQNbp85N0UTRxOWj7x6xzU0aauhFfCS9svrFm4uq1fJZ8MYZ
-	 JXv1NarHpHsJAO4Ut3W9BV2l2c4jxAckW4tJnfOIew4w+vjr8hIUp9//iHC+X5cvUtA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=jzJU0np9;
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=iJ8TV+5SiCbeMxxA0TRkovekTq5xoeL1DRJq8mMxcdc=;
+	b=mti7HEiMBB3DiLwwH7hiauirZekiN2F7oK6qmvlh96hYJiyMplr5zdHytuU7aRUvGVG+
+	 ZyL4ndMDHUXl+BSRIpikWggIhCfJENdSMhFXW7gqTgsLL8nu+aw75CcupuKhGSJFQ1ZlF
+	 Z168SWMJZJnE8EW6SUkQjSEfzIgzqaQCBENQvg9PE1yJbBmHjIWlqJUA45kU9Li37vL6h
+	 pM5mpqNQmIVUcEAQboEfeDuYdVzEQRZSyqz2yHEjdUe8UL/kBoQwd2kwDNr0fNjY8g461
+	 BZbArEDQ5TFkt5mcPUcIXoGJIrHYAKJt8X5KrOwkQ6JL4regu8eEIWd4z6M/1a66fgg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791841813;
-	bh=DgXSAGTQSwSESsMeO0L4IDqHKiN5rKYynAkCBkqPKAg=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=SX9/EoyHOEKIRd5c27bIFENa/qJrkOUNYbGnrx/DQuVsMIs6orhBtZPsNlgHtk1Ev
-	 KsTdeRsuS/FlB+CWWzuyEM1cmOz4+qUUpDvdhVTfB0tggsx9Q4IpqwS0d0zll+T9Wo
-	 xpVJXocqehD6F1bC57C0WG3mCLMkqP8BFlzWYYpLl9x/oZCj03VeIEjO1zEfjo0btB
-	 v/ssVbXdja2vqTaDYLWcr8ItAoGGwf5jKZRd+qLnJ0zf48zTLBpiCja64MZjGJAlqt
-	 NzKR5sdZfo3QwN9RpzvsFHTAazn/n7YnitrBdBcCQh2qCfnmveO7R6YPVrq80bIU+e
-	 AxQpOHKnzQkkw==
+	d=lists.u-boot-project.org; s=default; t=1791841815;
+	bh=iJ8TV+5SiCbeMxxA0TRkovekTq5xoeL1DRJq8mMxcdc=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=quf3ijtyJ4nWCUTfkOEaysmqlP21RyjsJEmEs9OyGeeaFl7AK1DRlUv5ed1fvxYln
+	 JPImdT2NbRMzM3u+bFQ1IlisWhZXRLkAeFGTJwCXkDDT3qIDqRLkD2ZNi+FtPxqXs6
+	 4c5BAZjHSXb2h2TI+fugRhuLf6dtwgPfn6fCG8K9X1A6sVdEv0OeENM2ecnNdSarik
+	 XNCsPbbR9GuPH7Pdhxijaqp/Zwo81ECatqMA1UUy1umV4xsKd/3vPaMJ4G+2wRpvFM
+	 TDvu1iz0d5f8HHjwJH3PzdDhGc2LZSgDiT46bjTUplC36A06wIUhsZdTkOOz56gqsT
+	 DipqP7QEkikQw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 42A3540515;
-	Mon, 12 Oct 2026 21:50:13 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 96BA4105
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 21:46:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 22FB4606F0;
+	Mon, 12 Oct 2026 21:50:15 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 75AE1362
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 21:46:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7CD00404EB
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 21:46:15 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5C24E80AC8
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 21:46:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gb1kzP_UknuL for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 21:46:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 74A38404E9
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::e2e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791841574;
- b=l2rAukMZbF0XypokZhxd+SuONvsGiqPa0RxRAQfEaikCnk7pQIU7ssfwcZS389dd33dX
- hQkfWP/7CwjDE9K4wyoORw6K2Ft0K5cPv3w1lqaLJA5LSn9kAA2ecRUh6nnpVNiRoIKKI
- j1zUOVySZhdyLP7RhFACzEmjTvqX2vVFqoBsXTKsZ0yssgO8d1L1SQXgYCijpHUwKVsza
- cYLkiwe41pdGOM0HjcDMgJOFGTakspZHfYOA+gMOFUL+PQ/xeBjZ9CUEDSb/NxM9rZt/c
- JjEajePM6ie+K8LWsNyYLq7pfVIPid4Cc7JDsmJ5HAUuFgaHjCX+d6lx4uWWRaMJhww==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PHSi8Dpi_FAh for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 21:46:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6891280AE7
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::e2b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791841576;
+ b=ElGkdHGU9AzLTudpZuJY5r0eSbiKEzuZjp2hdjP4hNy2oz7CmmeOP1GtUBQAlgI9qw8I
+ WMapnQZsa3EjX/+nCYRkXaYpl2JplqpCcjDSD0jnKQu7eAe1D7de5F32epw5XmeyWpY+y
+ ap8aHTIBoQpjHh++sKrGUINa57B3ErQq/cF1DSaa0cYLtpL2TxWT2fyf2oWjGawmTpNAo
+ 2fkEW2MdD/zukIfWj4XersxOIywv1oAE1odp1/Dmbvq8tHOP4wS6UXMRGw2YFoQARgTew
+ XHWV+jXYO7lUlxjdHMg5Wdqbs0itvUum8hWu18ZZPRbXy6wBwJTDcicwaRi00BuVoLg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791841574;
+ c=relaxed/relaxed; t=1791841576;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=DgXSAGTQSwSESsMeO0L4IDqHKiN5rKYynAkCBkqPKAg=;
- b=Vty2jicBUV+s0nPAqxCEsAv3wF74QLJjPNRbwVNHM3GAMkGAxZVysJNJ/9IE5A6x/mw6
- Tl0SgIz9yIa710xSaINeI9HPZbv6Zs0UNv3EFrgdzT+atGQbJF5ugF/S8LM/gmnCOhM3s
- iXBsVIZ/eaMsxhwhq/iw+2OlEVU2liKAS/MFwSZuoiIYJDHtUENElNtja0cibMJLo/BNs
- eS8wnjd8sKgkMiZUYdHWL/D+X5fUQccQj/zxnipd6Z7nwg3/kDHMIMYEEE3D4EoC3TNo8
- DUKP/Zg3E/VnDWL48jv+1W+CZ/khKjJOtCjfruL3A/qczbpvGVgjG17XUWofLCPZOiw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding;
+ bh=iJ8TV+5SiCbeMxxA0TRkovekTq5xoeL1DRJq8mMxcdc=;
+ b=Tl0tMTL7jZVAPJ+b6utMpIQESMaWshvaccYzA2IAaydstBI/sjVnuJodZgOUmDsu3NT6
+ SfetdGpQPS4nc14/CgtX9wbCp9D3ansS6QVHS6uuy135S5CMT94tateanXvsbN5525MUy
+ /IT+qKKcIhqcyoPElyMsa6nhDF1aMZ31ItkhlFjOwUvjzGnrdDtJzMyuODXvrkHfHYOeN
+ VUKl9qfBt1VXr5GHcGN4umHfKbcMk+pG8/6IeWjNgj10mBm+kUxpNmOMLaZU+d2nYAZdA
+ hjwhsLYuTajhMVeVyY8WygdFVC3dxqbr9KDU4MNnKoncY/yf9vYD/Y2eXw7qudkz1TA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=jzJU0np9; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::e2e"
+ header.s=20251104 header.b=s8pY0Nw3; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::e2b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::e2e; helo=mail-vs1-xe2e.google.com;
+ client-ip=2607:f8b0:4864:20::e2b; helo=mail-vs1-xe2b.google.com;
  envelope-from=sebasjosue84@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=jzJU0np9
-Received: from mail-vs1-xe2e.google.com (mail-vs1-xe2e.google.com
- [IPv6:2607:f8b0:4864:20::e2e])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 74A38404E9
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 21:46:13 +0000 (UTC)
-Received: by mail-vs1-xe2e.google.com with SMTP id
- ada2fe7eead31-78fb1fb9508so3866162137.1
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 14:46:13 -0700 (PDT)
+ header.s=20251104 header.b=s8pY0Nw3
+Received: from mail-vs1-xe2b.google.com (mail-vs1-xe2b.google.com
+ [IPv6:2607:f8b0:4864:20::e2b])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6891280AE7
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 21:46:15 +0000 (UTC)
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-7c03744ef27so579484137.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 14:46:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791841573; x=1792446373;
+ d=gmail.com; s=20251104; t=1791841575; x=1792446375;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=DgXSAGTQSwSESsMeO0L4IDqHKiN5rKYynAkCBkqPKAg=;
- b=jzJU0np9i09f+nTO9xIo0RsE8xhieMRDHKBnLBBJ+9C3TUo7iu7LBaikVznKN0XyqM
- jXKTfdIg+JKouapC45DFMbLDImmk0HfNe3BbDT/S2S0U3t2LliXOhG7i4V2H4Q9t7ovq
- pzEm5dc2qe3BDN8o3x9AZn/5JU9LhCTvsDZz/7s81ImEgPTtXtNbkKozA45sfphTepL0
- 04oxXz8cWGW8ifLiX8UlZqz18SqYjEd2pMOEbsCD0TrjwDjXFkicH406/B2y3faKPzCr
- yIThAWuo1nXWuFPIjOEEAD4B7KcIgr3hm0upUwZS/gCviO4K6K4oC3dGsxaY10wSD3G9
- 7MQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791841573; x=1792446373;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=DgXSAGTQSwSESsMeO0L4IDqHKiN5rKYynAkCBkqPKAg=;
- b=nRXKNQfXy2L0h+VIPF4Pr+PIrfb/5hHeqymjqeRFacfcYo73ieK6l41SmHj4nC/A+X
- 1RrQ8tOuV5EEpij24Ol0HtHxCAGIWJcwE57sX5f8/G/4lhb7Simheq/+HalSMgoR8ObT
- BI5d+FLojcwpkJcrSkcNmdOckRLqSRCORs+HC66y+mKdk1ePoHdaSzFXPY5ZWnM8AqSq
- DUM/SsbOM2v3hRmIsCtJfYv1TH7dIAusP5quQ04j21/ErqBwoHOi0yjYcYPQJ76Fsk5n
- 8v1wjjhbzqUG22oGuxh85sIe1pZPXfPUzpK808hdijO+rPkNhnDXAykdidyAvUvUEkLV
- 1XrA==
-X-Gm-Message-State: AFq9FYIIWcYQNawmuYr/u6urwVAWqpThx4v058sxfm6ZvmwsmEuBZa8R
- MMjJ1QpTXw4upn+4Yu1aBfdOLvTFUgINSK/DeMxxI1A+WtEUcPJQBcA45AxCScyqgbEOhQ==
-X-Gm-Gg: AYBFou0w6vXvg3nwcwfAYzFrKf8svg5GR4n20jbqiKwkPCt1wjCStn8UrCVf7h75fCS
- TZWg1yF51CHR5EysWNtRifHvRZ9mZ4/kS0TmKaTwd8mRBW3Y21EGbGDIaeVZwZj9uBm4LimKfQD
- DNqq8MskI2drmgwKotGumA88QVdlBn9OS6DgVnas4O75Clw+LC93KGDuDSrYp6RQ+j+NRIO32GY
- iFNS+Aex+vOGHjrQz46cykyeSmELBo0exTCo+P0hVtvIMC5YcE8bid0imFN26eF3kKxeXZlXTIj
- KFAdLnIt2TMPL0sAEekr935KrAIWa3hFr2BLuvStjSFUmQQf6MG5UYCnM+PAVm+tGMNSlSPHO1V
- 7uYW6Di/q8iLgqb3yp03UZu0d6h8O4n3ycPBkl6UhSZeQbM7cFRguZasan+xLlDVLtYfaFugF3H
- YQre+rKv9SN1D1wcclTlyu6Qm+FgIOl7sJRgIZpObaV7Ern3V56fXtZ1IOBk89XU7ldboPhHgnE
- ZT26pGKDM4Nd2n3/mteb6oefBRc30sA9zM8PCSib9KQKe5lksB/YrBe3eIz/0k=
-X-Received: by 2002:a05:6102:6449:b0:7c3:874d:60bb with SMTP id
- ada2fe7eead31-7cb426c067cmr2294628137.5.1791841572600; 
- Mon, 12 Oct 2026 14:46:12 -0700 (PDT)
+ bh=iJ8TV+5SiCbeMxxA0TRkovekTq5xoeL1DRJq8mMxcdc=;
+ b=s8pY0Nw3+VBNkXRqScLo8w/TS3otfceKoNib2AIIIxSWzQMycX7vlFjsMkYk+1VoNt
+ AquJAg1cEQaDBrO9OhxMymZdBDRJRh+zqgX6y+aZoIr4PYRG9Zhb314qk+YYfY1NN3jF
+ Ap0qokn3B5tbxM4j9qS7YfH2Fw8Fu9gfqz29rKr0w8u2MmBYWPj+cyD3Tl3gk9bbq4IL
+ vitgItE9kY9DPm34mEAypb7EhFE5ENzTTNKJjQpzEzfloRj6sPlPtYQAI7ugBp/IVyG8
+ 3wp5GGURDDIXINrEEvv89r44vyyxiYGHuSUF92QybvlAO92mAzmfi/zWuVeKqudShKGd
+ Agbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791841575; x=1792446375;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=iJ8TV+5SiCbeMxxA0TRkovekTq5xoeL1DRJq8mMxcdc=;
+ b=1xxf/L/v6+6SvxsfSMpfuRxNTWVOdcV67FmudQsERoFUtbt6SZ7HmTa6W/1bcwmH3y
+ epCXoQBgjCW+7fXa9USrr3zuLijLK0lKrIX/SGP2O/XUcfiS+d6o8YeQvK/u488wMZwH
+ x0JUyICihM+YNImBbPZXDG4NX59iWeaSt/JXKEQB11IxvZ2fzEEmhUHeuOxZfUvIgLYs
+ vPtp4OiFqTE8ZHnkSNv58zW4TDss0IBvluHRCkdOR3SBuRMTcN8N5F7cd9PXFdiv5mpA
+ KgzC/dKaFfBhATupJHVD/uslG9DhGwy/bMgdCwLWMX/YEHU31oVaBNcq7PwlUvygsJZj
+ 7Dgg==
+X-Gm-Message-State: AFq9FYJPKp/dnRc8mIFFVflsb8hTdSMhMVdCLs65SdZx1Okl189y1fBB
+ nYofFh7sMDGAOMD24eRrTgz0Voj3DQHRGsrCuG3jg6qizo+mJ01UHWlO9ie5MZaO50WN7w==
+X-Gm-Gg: AYBFou2f4gi2iJcff5ZZwzRM4Fn896fQlOAlCYbB0uVPZnsv7XCcyAHuBJHXZxmWTL7
+ GxBMVoObfNm3kNAqq82CZpC/2QOhCBY6XnO224KjJd/pZzoO4oGFuh8iFCgLa3NmPFnzJ5lW2KU
+ sPc3YvQ36Uf+ch2Y59Ng44fE1V5R/RgQ284LFEf1cV3MgC44fn5K/1kqSY2xdgP8RG4AYFiNI3a
+ rHDDsWqAK8MfSwES6wkq+bqCREXvXBAolQ69rKmsbxUALF5KAHaoEDpefkuZTfrMTsuWXC+miFm
+ KWez0sKtl9xqhmwpQVdafxr1kBMJNZSR/HxCKEaG0A8uI05ptUsr2UFk6WgPp3TBk7URG+pqU5a
+ FSkOeAsFk/sIDwwBFT38CdEPFdGYdWbZmgUwU4mQDGYwnUkWIZaL4Q9Jv/y+q2Usq5xnlKjkZgS
+ WmIDk8ujPdU2AoDPAOeq1wgG+E/7CfPCOrsB+DgTBVOIIyZ5sZLyNI1Wr3HWKVW8yXWpIoVxSFk
+ q81wnD7LUJ9TiLQPM7hpllKpJhsIJ8KTY3zFn8w1ktM0dY+oi5XzAfNIlVIe3I=
+X-Received: by 2002:a05:6102:149d:b0:7c3:c0b9:9031 with SMTP id
+ ada2fe7eead31-7cb37b2a030mr2521071137.36.1791841574565; 
+ Mon, 12 Oct 2026 14:46:14 -0700 (PDT)
 Received: from localhost.localdomain ([186.151.100.62])
  by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-7cb35471536sm7301225137.11.2026.10.12.14.46.10
+ ada2fe7eead31-7cb35471536sm7301225137.11.2026.10.12.14.46.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2026 14:46:11 -0700 (PDT)
+ Mon, 12 Oct 2026 14:46:13 -0700 (PDT)
 From: Sebastian Alba Vives <sebasjosue84@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: trini@konsulko.com, sjg@chromium.org, michal.simek@amd.com,
  Sebastian Alba Vives <sebasjosue84@gmail.com>
-Subject: [PATCH v2 0/2] spl: Fix the uninitialised /fit-images entry point
-Date: Mon, 12 Oct 2026 15:46:02 -0600
-Message-ID: <20261012214604.1477684-1-sebasjosue84@gmail.com>
+Subject: [PATCH v2 1/2] spl: atf: Keep the caller's default when the entry
+ lookup fails
+Date: Mon, 12 Oct 2026 15:46:03 -0600
+Message-ID: <20261012214604.1477684-2-sebasjosue84@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261012214604.1477684-1-sebasjosue84@gmail.com>
+References: <20261012214604.1477684-1-sebasjosue84@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 12 Oct 2026 21:50:12 +0000
@@ -173,50 +178,88 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Both the ATF and the OpenSBI hand-off paths look up the next stage's entry
-point in a /fit-images node, trying fit_image_get_entry() and falling back
-to fit_image_get_load(). Neither site tests the result of the fallback.
+spl_fit_images_get_entry() reads the entry point of a /fit-images node
+with fit_image_get_entry(), falling back to fit_image_get_load(). Both
+report failure through their return value and leave the caller's ulong
+untouched: fit_image_get_address() returns -1 before it reaches the
+*load assignment, both when the property is absent and when the value
+does not fit in a target ulong.
 
-fit_image_get_address() returns -1 before it reaches the assignment to
-*load in two cases: the property is absent, and the value does not fit in
-a target ulong. The caller's ulong is left untouched in both, so a node
-with neither property leaves the entry point uninitialised. It reaches
-bl31_entry() as the BL33 entry point on ARM, and opensbi_info.next_addr,
-the S-mode entry point, on RISC-V.
+The result was stored in ret but never tested, so a node carrying
+neither an entry nor a load property made the function return an
+uninitialised stack value, after first reading it in the debug() call.
+spl_invoke_atf() hands that value to bl31_entry() as the BL33 entry
+point, overwriting the CONFIG_TEXT_BASE default the caller set up for
+exactly this case.
 
-Both sites came from the same conversion in commit caa7fc2c5775 ("spl: Use
-standard FIT entries"). fdt_getprop_u32() returned the value and yielded
-FDT_ERROR on failure, so the variable was always assigned; the
-fit_image_get_*() accessors moved the failure signal into a return value
-that was then ignored.
+Before commit caa7fc2c5775 ("spl: Use standard FIT entries") the lookup
+used fdt_getprop_u32(), which returns the value itself and yields
+FDT_ERROR on failure, so the variable was always assigned. Switching to
+the fit_image_get_*() accessors moved the failure signal into the
+return value, where it was left unchecked.
 
-The two paths differ in what a failed lookup means, so they are fixed
-differently. In spl_invoke_atf() the caller has already initialised a
-sane default (0 for BL32, CONFIG_TEXT_BASE for BL33), so the out
-parameter is the whole fix and there is no status worth returning. In
-spl_invoke_opensbi() there is no default, so the boot fails.
+Pass the entry point out through a parameter instead. The accessors
+leave it untouched when they fail, so both call sites keep the default
+they initialised, and the uninitialised read is gone. A failed lookup
+is not an error the caller can act on - the default is the fallback -
+so the function returns void rather than a status nobody would check.
 
-Changes in v2:
- - 1/2: drop the int return type. Tom pointed out that neither call site
-   checked it, and there is nothing for them to do: the accessors leave
-   the out parameter untouched on failure, so the default the caller
-   already set up stands. The function is void and the commit message
-   now spells out that mechanism. Subject reworded to match.
- - 2/2: unchanged.
+Fixes: caa7fc2c5775 ("spl: Use standard FIT entries")
+Signed-off-by: Sebastian Alba Vives <sebasjosue84@gmail.com>
+---
+ common/spl/spl_atf.c | 21 ++++++++++++---------
+ 1 file changed, 12 insertions(+), 9 deletions(-)
 
-v1: https://lore.kernel.org/u-boot/20261012015542.1156811-1-sebasjosue84@gmail.com/
-
-Build-tested with no new warnings:
-  sifive_unmatched_defconfig   (riscv64, spl/u-boot-spl)
-  cm3588-nas-rk3588_defconfig  (aarch64, spl/u-boot-spl, covers spl_atf.c)
-
-Sebastian Alba Vives (2):
-  spl: atf: Keep the caller's default when the entry lookup fails
-  spl: opensbi: Check the return of the entry/load lookup
-
- common/spl/spl_atf.c     | 21 ++++++++++++---------
- common/spl/spl_opensbi.c |  5 +++++
- 2 files changed, 17 insertions(+), 9 deletions(-)
-
+diff --git a/common/spl/spl_atf.c b/common/spl/spl_atf.c
+index cb0604ce03..c1233b54cf 100644
+--- a/common/spl/spl_atf.c
++++ b/common/spl/spl_atf.c
+@@ -252,17 +252,20 @@ static int spl_fit_images_find(void *blob, int os)
+ 	return found;
+ }
+ 
+-ulong spl_fit_images_get_entry(void *blob, int node)
++void spl_fit_images_get_entry(void *blob, int node, ulong *entry)
+ {
+-	ulong  val;
+ 	int ret;
+ 
+-	ret = fit_image_get_entry(blob, node, &val);
++	ret = fit_image_get_entry(blob, node, entry);
+ 	if (ret)
+-		ret = fit_image_get_load(blob, node, &val);
+-
+-	debug("%s: entry point 0x%lx\n", __func__, val);
+-	return val;
++		ret = fit_image_get_load(blob, node, entry);
++	if (ret) {
++		debug("%s: no entry or load address, keeping 0x%lx\n",
++		      __func__, *entry);
++		return;
++	}
++
++	debug("%s: entry point 0x%lx\n", __func__, *entry);
+ }
+ 
+ void __noreturn spl_invoke_atf(struct spl_image_info *spl_image)
+@@ -280,7 +283,7 @@ void __noreturn spl_invoke_atf(struct spl_image_info *spl_image)
+ 	 */
+ 	node = spl_fit_images_find(blob, IH_OS_TEE);
+ 	if (node >= 0)
+-		bl32_entry = spl_fit_images_get_entry(blob, node);
++		spl_fit_images_get_entry(blob, node, &bl32_entry);
+ 
+ 	/*
+ 	 * Find the U-Boot binary (in /fit-images) load addreess or
+@@ -291,7 +294,7 @@ void __noreturn spl_invoke_atf(struct spl_image_info *spl_image)
+ 
+ 	node = spl_fit_images_find(blob, IH_OS_U_BOOT);
+ 	if (node >= 0)
+-		bl33_entry = spl_fit_images_get_entry(blob, node);
++		spl_fit_images_get_entry(blob, node, &bl33_entry);
+ 
+ 	/*
+ 	 * If ATF_NO_PLATFORM_PARAM is set, we override the platform
 -- 
 2.43.0
+
