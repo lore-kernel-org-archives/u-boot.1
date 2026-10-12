@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB2D7CA9ED5
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 05:37:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2C31CA9ED1
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 05:37:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 95C2B606F8;
-	Mon, 12 Oct 2026 05:37:07 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 69D7080D29;
+	Mon, 12 Oct 2026 05:37:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id W8mfvH69o6gy; Mon, 12 Oct 2026 05:37:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EAD1B6072B
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791783426;
-	b=AGTqlqsfePd1cuKcpQaRi6OiS5nH5FTfCztVIxDp3iqglEFZ715VO+9g8hOCj0Zlm8+g
-	 lWxUo1e+9g9uJ3u+6l7orlPS1atnvxefJS2d1V0SFbLoukWrqe3uQynauMeEq0cDuZGy/
-	 KNzdIn1nWqxQsgCDPe24ZMbQl54TcXCT+USIdsJwVGZxRH+nu16bWUE92r4VEaJ68Z3az
-	 UYHSyK9iYWjoBbm0SWj5jqkXDcdva15oNxLmfoqUZaf/0GL90Z2EdSbbeVNG0ER/f5xvS
-	 pVlEaCFuYjjuYpQ6FQHtRARjrkLtCdHYUKWdVqpGcWAQNFS2/rancoZApBx6RaHzrcw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6-FrDhMYexe4; Mon, 12 Oct 2026 05:37:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 91ACA80D18
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791783428;
+	b=TcITyCcmdqYJRPVktzgvpLVj2I1ABQtX506KCC7Nv3y7aK+3mHdclp5doFR7S1RzWq8I
+	 3z3ixH3EjJB/U0oNkxXoAyRz+Jzqo0ASU/SK+oDP9KMsXAJH6xcreZUDBj7HKRywMUcQu
+	 yHatt6IqmrKk7UKTSQJtllhnsUrGPRgzewtJwWxW+POIlxO+FGOaXzXRjM8bW6DgsFX4v
+	 Bp8JQFoL6Ax5O+x+8i5vm6NlTfcxLBrN3wplGAzPldO8EEivRprSSZpXTV4YP+2jAnvUb
+	 4o2yBh5RrgHFiTzOGhywC6Xz3LKB8fu5u4EqUaeasnqPvAwLLncjl9qc2JMUthgIrzw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791783426;
+	c=relaxed/relaxed; t=1791783428;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -32,109 +32,107 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=j8UDNZYlSwvNZN93odJaVd14X6XbTq99QdUuVrJpyrI=;
-	b=CgCqmpzW7If9hqNbTBSidAM8+AZQO8LzCUI120Sl3jxxc1mH9RjMs4QoB9oOhu36rpYV
-	 FY2N4ZhzvWIkIZVM9vcX2z8gAQCvlj/EeyEAdcsT9w1S2h2f9JR/8KOdpGcDTJUJQdXpb
-	 N78d1alyhdyxXbAqKnepEO0aLuznq0xdp6QKqpoPGHkITqzDNJUxS+AJxISvkGZqZQTP/
-	 IpoOYDJSgpvQ1+PrEOIV2gseAvIQQiJ+a9LmxFx1edf6KQ+Sc07npVmqsW0bi+U5kYVGK
-	 ru5llqMLhzSP3YloxfL46BLyCTcIVjezZbcvWKyqkzOaYNNr5c+hGyq05rPmHRdCA2w==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
-	dmarc=pass header.from=zohomail.com;
-	dkim=pass header.d=zohomail.com header.i=zhuxu_ran@zohomail.com header.a=rsa-sha256 header.s=zm2022 header.b=C6ew5vy3;
+	bh=XmcmvSkOCRhtbMJVgER2omyf0lh3XxCcboCSbGebE/4=;
+	b=KjdPHp7/8fJPFuOFrLo/QAHszfiK70/9uCm89HIABMdjxsO3Xb7NYjaI6sXM5dAe0xOq
+	 QcosnbRoD5bOAZ63X8CYPEcOencVQ0DSEnISa4Lpm5fl93DwMVvpLLH7f5xNl09EEcW0+
+	 ByL/Rp8LOJ4HKmud19P3uYwRR3mYV5V1rc+h8aQdJXBeWuFRud7NQ5tblUns0e1y0dnpK
+	 G2ay+5T2QVnA/N2k5KN1pYr0P2rUQUDxzgGs0yqOEMImjhcnbjaZFU64GAhUmwKIj8Hwv
+	 SRrEVFqQJ6pE/j5bDAKMJDd5CMEg9TF2P2/DHcUnM0NOKJDcepSBXK19OtGvnoR8Sjw==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791783426;
-	bh=j8UDNZYlSwvNZN93odJaVd14X6XbTq99QdUuVrJpyrI=;
+	d=lists.u-boot-project.org; s=default; t=1791783428;
+	bh=XmcmvSkOCRhtbMJVgER2omyf0lh3XxCcboCSbGebE/4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vk8lOXTlViKaRjU0Jccz9L75pwqOwORl4Tqg3ONM86pnHzvBllNV0hfILXVZmZX/s
-	 82k1nWCW9K8rNVxIm+0P0z6I3Bhj9uS0eMTc0i0JPWx538wMxiCZSLgGlKeopbZo7B
-	 Vkbb/f00pIv2/ZNaLYYk9ClJ2tS0N43kQXULOoe02rbRgi9ets797fkqMYIsgV1Uhd
-	 Hk1D5tFSjKdkkPxoCjN/0lk8P5fFMtH765y0RNwand8dzBWcFGSZSiwtQjEyos1ekK
-	 rRJ/tYOM3jIMh9D8d4/YfJcjGkHwI2GQyKpJPjVuYCuubH8bMVDw7Odph6vQIWSylB
-	 pPM7GGbfpK+zA==
+	b=AC/YWKwWiNCKcWoxTzTK+C8sCM1RYpKrtCpB8yxjwJkGL6Xda5zDwrNppkoQEizb9
+	 nJ1hYsUoLjbFnkgVIsh1TcHxcyypehDd0SmLvLmxBV2KkQOuVO/RNT3Kz7l3D0VIYk
+	 +HqV88oHwkeLyTJDf9Ix1NSb2GN4Cz2rYAsFFDJZFQ8/rPcI3D7IqxCqp+6JXpOjVl
+	 n2mXNUN8zO+Gnmcd3nXNJG7CVMMfTaAYZujgTwqPJtZEchtK/5r2KASwvi4oykKT/e
+	 EuIT3ZYMmA3Mi9jLLLi2CmqVHQo1PBrUKAkANHkLqBD2zKvn/bvSI5pxbPWFHdPjxk
+	 ayg1OP1I74izA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EAD1B6072B;
-	Mon, 12 Oct 2026 05:37:05 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 3BB8575
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 04:28:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 91ACA80D18;
+	Mon, 12 Oct 2026 05:37:08 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id A738E9CF
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 04:28:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 21B9B60619
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 04:28:17 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 98E8B400D8
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 04:28:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1e3XVl28YZ6K for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 04:28:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 20EC2605F1
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id L2TXn0Cv_Z_P for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 04:28:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org D54E24002B
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=165.173.182.95
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791779296;
- b=rliq0OkWJ5g6RMXorvgCTK1e5BnZ9U670oNDP8FBXJY4TqEoY/okb1Za5wDMVvZzM0St
- xQxc2ZeOXkwxZKqL4JN5zFTY0ZeWPvEMGvMUEvPgugqfJAWfblGeT4v49S68wbwJxJWKB
- AqVfFrHU1hijkjMA04r8apqEhROHSqFbu629s7M/+UizXhG1TmC/jmbRWnsLcMGO+Yf0V
- rENvUuNFm9cy6tK+qrgQzyDR3e28ijoedDX5uRD6etgEvlux25B94r1zHvwzUlmie/EYc
- GsdyqEs0BKApLd0WoxMx2g95rsFSYbZ48zUSAh85hijjd5DKzqS2i/1+8MrKbP8ujag==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791779328;
+ b=ewgz7wt92XFIGciCRbRzgdcRwIAigx1d94pt3gaEGp3nMeaXYN2OiVXBQhpK+RcSqy6X
+ AucJjbh6hz9dEBMY+EWR62UosZZvd2NlIzdxF/KRmpz4hE8cU8i5VyxFUXJReqMWN8J+g
+ BqVRTT2f8Dr9EKxvc5ERcvcr82a/maothHfBaiKnlHFyIiEz66cW3QEaHjfAEyWzLpQ89
+ /GE/QQy+pZqg7J7N/Qf/UYI72pEl9EDkXVYI6NToxSmUXVtwWph6dn4kjrmICdq3+Lzgx
+ EF3g73bV253c5dAMd3aStae3+n70wEeH/E2XO6iQmWIU0KDaCizdn8/hgM3gIKQOyWA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791779296;
+ c=relaxed/relaxed; t=1791779328;
  h=Received-SPF:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
  Content-Type:Content-Transfer-Encoding:Message-Id:References:
  In-Reply-To:To:Cc:X-Mailer:Feedback-ID:X-Zoho-CM-AccountID:
  X-ZohoMailClient;
- bh=j8UDNZYlSwvNZN93odJaVd14X6XbTq99QdUuVrJpyrI=;
- b=l67dlPLJEZMrDMy1h8FB5Vx4IhnzrCppM+mrejM8084eDVj4pFjZ36gTBCYNqjXx8k1Z
- i6blodpWUNkCxWfQc3nvWg57BIlnIMShm3FZKSNhjNBOIybIhvTaWbeGZNo8lRyo7rggI
- RY3YIDP5tiusClkemw+64YbLXqeOhmJ2N1Ray8Tm4bx7erreGN+fdlTrbjKCGIMdS0qB7
- j04dbWkux7/fiuMICvRCPadYQ88MWRIGR0WXAr4hBcoxOcBN7FL32r6pqudQ09mAvstLI
- HhqE2AIrj+w1gq44HVkgRa+ezvVNwg4qk7xrQcb9ZyMHwMOuWDO8WtWJG3Tg60CDV8g==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ bh=XmcmvSkOCRhtbMJVgER2omyf0lh3XxCcboCSbGebE/4=;
+ b=q/wGjiBmX6eHG0hnxHH+OtHBX0suYyE+3bqaKc/cWeojUx5My3JDEJj/Mm8YWI34CrKB
+ ylq6yfIA10AUSxNf7Dn2Tra8YuRWHI/vuGWr8n3AvyUgj2vRdM+azULgxVaJk13MoAyRX
+ AWeBTZMphNsIs4RcSPCI08/x9B4UiojzinKdRo3YaTAcJqnqKqUN14oJDGfCrhD4OvTUo
+ A1yBRdsyI5xCYmYmdxIcfsWrE9g6ZH9v3vQfBjQcaRw6vEHPnClvC3noBXkFd674AVr1C
+ GYtwPj4cy4XF3TvuZIA01bi02lUkNq6RIyjM06+t4IFkU0+aNEjA3paCAYImFDf6oGw==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
  dmarc=pass header.from=zohomail.com;
  dkim=pass header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
- header.a=rsa-sha256 header.s=zm2022 header.b=C6ew5vy3; 
+ header.a=rsa-sha256 header.s=zm2022 header.b=MsvoVwe8; 
  arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.182.95
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.95;
  helo=sender5-pp-o95.zoho.com; envelope-from=zhuxu_ran@zohomail.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=zohomail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
- header.a=rsa-sha256 header.s=zm2022 header.b=C6ew5vy3
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
+ header.a=rsa-sha256 header.s=zm2022 header.b=MsvoVwe8
 Received: from sender5-pp-o95.zoho.com (sender5-pp-o95.zoho.com
  [165.173.182.95])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 20EC2605F1
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 04:28:15 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1791779228; cv=none; 
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D54E24002B
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 04:28:47 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1791779242; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=ZuhwN8EqQWZ+qBwZwhQ7FD8XXYCfo6L0iAmH4fku14rFEV/jv4/TfTc5oxoD2pfsandGD8pch5d2TcPuQMmXIPQiv4Lsx/rc7psyxhlWv0ICjhbvszh430ks3eeRvLNmSi751NAaMdvtRYYUtcx1jXzk0TG5Ojvjxuetrppcez8=
+ b=dgDSvRAh+hBGslfNneGJQaGewFZJLiaIoXzZ7BCpHWDx5U1rWEr39tfBqVkx75o43ApXKE38dNioYj4OCPhnBcEGEKUjy/XKsLSIJvNhQVgEBrWuau1sGx/tioUOxzEZRfNY95+XWqm9bu2dni20lm9vNRcYzaA/sLZbYiIRNDQ=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1791779228;
+ s=zohoarc; t=1791779242;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=j8UDNZYlSwvNZN93odJaVd14X6XbTq99QdUuVrJpyrI=; 
- b=HNU+Bzu6e7GViwya3aCJM29+EbZT1KTJMXGbUFTTCtD4vNjQirdsGLL1crkdNj+YNY/AndfXHHz51t2Yp0AQr6PTRcx2kzv9neYIOvjUlTp+jJlo7oC8zA8ioulBA0yL+UJxaOwBgV72hnNt4uPXwY3NifT2jnh7jAGUXjPhljw=
+ bh=XmcmvSkOCRhtbMJVgER2omyf0lh3XxCcboCSbGebE/4=; 
+ b=hJJhtXQGf/zywHOaUN43mlRwE4NKOfv2QV0u6gduJSg+gF0rFAe2Ru7G1d1GRkpNY06h8jJVALvrwvTvWu8D2vRPO22e/tgkVGkvMaiMbdWxTWN2mEnMI3pyhpiPFH2JqUg538ieyyysY/cJKxGpb/u3SwPQWqZRzKwH42SvECY=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=zohomail.com;
  spf=pass  smtp.mailfrom=zhuxu_ran@zohomail.com;
  dmarc=pass header.from=<zhuxu_ran@zohomail.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1791779228; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1791779242; 
  s=zm2022; d=zohomail.com; i=zhuxu_ran@zohomail.com;
  h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:In-Reply-To:To:To:Cc:Cc:Feedback-ID:Reply-To;
- bh=j8UDNZYlSwvNZN93odJaVd14X6XbTq99QdUuVrJpyrI=;
- b=C6ew5vy3rG9Ce7wR28pGE696bq7ohu5lHaU0E1BL/BB8fa2+eXj+O1RZHSnvMvN5
- oCd+pN3Ros4jLasv7IFBp8eiQT196kSetsUX3Hg/B0iuZqJc6oHXSNYPqYj6zDzqCS7
- tEFV+vToG4RgHL8wvzWwR22Xs002r79XszCbi1Vs=
-Received: by smtp.zohomail.com with SMTPS id 1791779226503540.3782640273357;
- Sun, 11 Oct 2026 21:27:06 -0700 (PDT)
+ bh=XmcmvSkOCRhtbMJVgER2omyf0lh3XxCcboCSbGebE/4=;
+ b=MsvoVwe8GFsACWPdYe16aUnb5WgtSue8lzWjwgPdcQ6WiHRoDDHYKaStSlKVeKZe
+ A0SGBcjIzr/JaEYk8O3aNXp8Y/ABrUS6hvsdQA91ykTbW4X9Pdpr9yLmcNjQAKR3yQi
+ jWgQnOCN1SBk242+YsBFDLAOOBC3e9w+peC1Jo8A=
+Received: by smtp.zohomail.com with SMTPS id 1791779240356833.9144860788139;
+ Sun, 11 Oct 2026 21:27:20 -0700 (PDT)
 From: Zhuxu Ran <zhuxu_ran@zohomail.com>
-Date: Mon, 12 Oct 2026 11:47:33 +0800
-Subject: [PATCH v5 1/3] rtc: cv1800b: Add seconds counter support
+Date: Mon, 12 Oct 2026 11:47:34 +0800
+Subject: [PATCH v5 2/3] riscv: sophgo: Enable RTC-backed system reset
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261012-cv18xx-rtc-sysreset-v5-1-413de1605cb4@zohomail.com>
+Message-Id: <20261012-cv18xx-rtc-sysreset-v5-2-413de1605cb4@zohomail.com>
 References: <20261012-cv18xx-rtc-sysreset-v5-0-413de1605cb4@zohomail.com>
 In-Reply-To: <20261012-cv18xx-rtc-sysreset-v5-0-413de1605cb4@zohomail.com>
 To: u-boot@lists.u-boot-project.org
@@ -154,7 +152,7 @@ Cc: Yao Zi <me@ziyao.cc>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Zhuxu Ran <zhuxu_ran@zohomail.com>
 X-Mailer: b4 0.15.2
-Feedback-ID: zu0801122752575f1e6fecf4e756cf95c00000d73205b44509ed39b9642ef51d1fe43b6eb86ef7a6d52e2b95:ZohoMail
+Feedback-ID: zu0801122755241f188d073a39b7b7a2b70000be4fb1871c5d5fb30eafd314767ed90b261c320bf6efc4fbda:ZohoMail
 X-Zoho-CM-AccountID: 475a6e82b6074d1cdb8624e432e1257a5f0812bb6089f487c4846d9f660201e2
 X-ZohoMailClient: External
 X-Mailman-Approved-At: Mon, 12 Oct 2026 05:36:56 +0000
@@ -171,173 +169,80 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a driver for the CV1800B RTC seconds counter described by the
-upstream devicetree. Map the node's register range, enable the RTC
-clock, and implement reading and setting the 32-bit counter. Bind
-the existing sysreset driver as a child when enabled.
-
-Adapt the register definitions and seconds-counter sequence from
-Linux drivers/rtc/rtc-cv1800.c by Jingbao Qiu.
-
-Link: https://git.kernel.org/linus/d9f82683b123ce315cc36c4b20a5bc3d8644f947
+Enable the CV1800B RTC driver for Milk-V Duo, Milk-V Duo 256M,
+and LicheeRV Nano. Remove the board-level sysreset binding on
+Milk-V Duo now that the RTC driver binds the sysreset child from
+the devicetree node. Reset register access is unchanged here.
 
 Reviewed-by: Hiago De Franco <hfranco@baylibre.com>
 Reviewed-by: Yao Zi <me@ziyao.cc>
 Signed-off-by: Zhuxu Ran <zhuxu_ran@zohomail.com>
 ---
- drivers/rtc/Kconfig   |   9 +++++
- drivers/rtc/Makefile  |   1 +
- drivers/rtc/cv1800b.c | 110 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 120 insertions(+)
+ board/sophgo/milkv_duo/board.c         | 5 -----
+ configs/milkv_duo_256m_defconfig       | 2 ++
+ configs/milkv_duo_defconfig            | 2 ++
+ configs/sipeed_licheerv_nano_defconfig | 2 ++
+ 4 files changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
-index 5b44cc99c97..52d0e51acc3 100644
---- a/drivers/rtc/Kconfig
-+++ b/drivers/rtc/Kconfig
-@@ -54,6 +54,15 @@ config RTC_ARMADA38X
- 	  This adds support for the in-chip RTC that can be found in the
- 	  Armada 38x Marvell's SoC devices.
+diff --git a/board/sophgo/milkv_duo/board.c b/board/sophgo/milkv_duo/board.c
+index 34339c42925..3423f54012e 100644
+--- a/board/sophgo/milkv_duo/board.c
++++ b/board/sophgo/milkv_duo/board.c
+@@ -3,15 +3,10 @@
+  * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+  */
  
-+config RTC_CV1800B
-+	bool "Enable Sophgo CV1800B RTC driver"
-+	depends on DM_RTC
-+	select REGMAP
-+	help
-+	  Enable access to the RTC seconds counter found on Sophgo CV1800B
-+	  SoCs. When system reset support is enabled, the driver also
-+	  binds the reset function provided by the RTC subsystem.
-+
- config RTC_PCF2127
- 	bool "Enable PCF2127 driver"
- 	depends on DM_RTC
-diff --git a/drivers/rtc/Makefile b/drivers/rtc/Makefile
-index 742481ce185..3c480156498 100644
---- a/drivers/rtc/Makefile
-+++ b/drivers/rtc/Makefile
-@@ -7,6 +7,7 @@
- obj-$(CONFIG_$(PHASE_)DM_RTC) += rtc-uclass.o
+-#include <dm/lists.h>
+-
+ #include "../common/ethernet.h"
  
- obj-$(CONFIG_RTC_ARMADA38X) += armada38x.o
-+obj-$(CONFIG_RTC_CV1800B) += cv1800b.o
- obj-$(CONFIG_RTC_DAVINCI) += davinci.o
- obj-$(CONFIG_RTC_DS1307) += ds1307.o
- obj-$(CONFIG_RTC_DS1337) += ds1337.o
-diff --git a/drivers/rtc/cv1800b.c b/drivers/rtc/cv1800b.c
-new file mode 100644
-index 00000000000..4ef73ca05e8
---- /dev/null
-+++ b/drivers/rtc/cv1800b.c
-@@ -0,0 +1,110 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (C) 2025 Jingbao Qiu <qiujingbao.dlmu@gmail.com>
-+ * Copyright (C) 2026 Zhuxu Ran <zhuxu_ran@zohomail.com>
-+ *
-+ * Based on the Linux driver by Jingbao Qiu <qiujingbao.dlmu@gmail.com>.
-+ */
-+
-+#include <clk.h>
-+#include <dm.h>
-+#include <dm/lists.h>
-+#include <regmap.h>
-+#include <rtc.h>
-+#include <linux/bitops.h>
-+#include <linux/errno.h>
-+#include <linux/err.h>
-+
-+#define SEC_PULSE_GEN		0x1004
-+#define SET_SEC_CNTR_VAL	0x1010
-+#define SET_SEC_CNTR_TRIG	0x1014
-+#define SEC_CNTR_VAL		0x1018
-+#define MACRO_RG_SET_T		0x1498
-+
-+#define SEL_SEC_PULSE		BIT(31)
-+
-+struct cv1800b_rtc_priv {
-+	struct regmap *regmap;
-+};
-+
-+static int cv1800b_rtc_get(struct udevice *dev, struct rtc_time *time)
-+{
-+	struct cv1800b_rtc_priv *priv = dev_get_priv(dev);
-+	u32 value = 0;
-+
-+	regmap_read(priv->regmap, SEC_PULSE_GEN, &value);
-+	if (value & SEL_SEC_PULSE)
-+		return -EINVAL;
-+
-+	regmap_read(priv->regmap, SEC_CNTR_VAL, &value);
-+
-+	rtc_to_tm(value, time);
-+
-+	return 0;
-+}
-+
-+static int cv1800b_rtc_set(struct udevice *dev, const struct rtc_time *time)
-+{
-+	struct cv1800b_rtc_priv *priv = dev_get_priv(dev);
-+	time64_t seconds;
-+
-+	if (time->tm_year < 1970)
-+		return -EINVAL;
-+
-+	seconds = rtc_mktime(time);
-+	if (seconds < 0 || seconds > U32_MAX)
-+		return -ERANGE;
-+
-+	regmap_write(priv->regmap, SET_SEC_CNTR_VAL, seconds);
-+	regmap_write(priv->regmap, SET_SEC_CNTR_TRIG, 1);
-+	regmap_write(priv->regmap, MACRO_RG_SET_T, seconds);
-+	regmap_update_bits(priv->regmap, SEC_PULSE_GEN, SEL_SEC_PULSE, 0);
-+
-+	return 0;
-+}
-+
-+static int cv1800b_rtc_bind(struct udevice *dev)
-+{
-+	if (!CONFIG_IS_ENABLED(SYSRESET_CV1800B))
-+		return 0;
-+
-+	return device_bind_driver_to_node(dev, "cv1800b_sysreset",
-+					  "sysreset", dev_ofnode(dev), NULL);
-+}
-+
-+static int cv1800b_rtc_probe(struct udevice *dev)
-+{
-+	struct cv1800b_rtc_priv *priv = dev_get_priv(dev);
-+	struct clk clk;
-+	int ret;
-+
-+	priv->regmap = devm_regmap_init(dev, NULL, NULL, NULL);
-+	if (IS_ERR(priv->regmap))
-+		return PTR_ERR(priv->regmap);
-+
-+	ret = clk_get_by_name(dev, "rtc", &clk);
-+	if (ret)
-+		return ret;
-+
-+	return clk_enable(&clk);
-+}
-+
-+static const struct rtc_ops cv1800b_rtc_ops = {
-+	.get = cv1800b_rtc_get,
-+	.set = cv1800b_rtc_set,
-+};
-+
-+static const struct udevice_id cv1800b_rtc_ids[] = {
-+	{ .compatible = "sophgo,cv1800b-rtc" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(cv1800b_rtc) = {
-+	.name = "cv1800b_rtc",
-+	.id = UCLASS_RTC,
-+	.of_match = cv1800b_rtc_ids,
-+	.bind = cv1800b_rtc_bind,
-+	.probe = cv1800b_rtc_probe,
-+	.ops = &cv1800b_rtc_ops,
-+	.priv_auto = sizeof(struct cv1800b_rtc_priv),
-+};
+ int board_init(void)
+ {
+-	if (IS_ENABLED(CONFIG_SYSRESET_CV1800B))
+-		device_bind_driver(gd->dm_root, "cv1800b_sysreset", "sysreset", NULL);
+-
+ 	if (IS_ENABLED(CONFIG_NET_LEGACY))
+ 		cv1800b_ephy_init();
+ 
+diff --git a/configs/milkv_duo_256m_defconfig b/configs/milkv_duo_256m_defconfig
+index fda0baa3277..f15b41e1451 100644
+--- a/configs/milkv_duo_256m_defconfig
++++ b/configs/milkv_duo_256m_defconfig
+@@ -38,6 +38,8 @@ CONFIG_MMC_SDHCI_CV1800B=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_CV1800B=y
+ CONFIG_MDIO_MUX_MMIOREG=y
+ CONFIG_SYS_NS16550=y
+ CONFIG_SYS_NS16550_MEM32=y
+diff --git a/configs/milkv_duo_defconfig b/configs/milkv_duo_defconfig
+index 9d6b80362d5..77c8d89701d 100644
+--- a/configs/milkv_duo_defconfig
++++ b/configs/milkv_duo_defconfig
+@@ -35,6 +35,8 @@ CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_MMC_SDHCI_CV1800B=y
+ CONFIG_SPI_FLASH_MACRONIX=y
+ CONFIG_ETH_DESIGNWARE=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_CV1800B=y
+ CONFIG_SYS_NS16550=y
+ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SPI=y
+diff --git a/configs/sipeed_licheerv_nano_defconfig b/configs/sipeed_licheerv_nano_defconfig
+index 21b8fece201..75229787d2f 100644
+--- a/configs/sipeed_licheerv_nano_defconfig
++++ b/configs/sipeed_licheerv_nano_defconfig
+@@ -40,6 +40,8 @@ CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_MMC_SDHCI_CV1800B=y
+ CONFIG_SPI_FLASH_MACRONIX=y
+ CONFIG_ETH_DESIGNWARE=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_CV1800B=y
+ CONFIG_SYS_NS16550=y
+ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SPI=y
 
 -- 
 2.56.0
