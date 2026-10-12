@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C56CA9ED2
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 13:36:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DADDECA9ED1
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 13:37:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BA04F405F3;
-	Mon, 12 Oct 2026 13:36:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9F195606C0;
+	Mon, 12 Oct 2026 13:37:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AAhF346C_2Ia; Mon, 12 Oct 2026 13:36:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C2EB5405B1
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791812211;
-	b=TXDnhnbyuLrptZThXR1OJMnCj2AEbDcNPCi2H1kZaPItIW2wqvZ1nktnW4tQnKfoCWpe
-	 pGd0ltHPwGOOhPDkH6pVZ8lC6oASl7XEWfswae8E/ExcuA2GdZBosoZGVfjLX+QGEr9Cs
-	 oZy1LkPDSrmQ4spfzyNIsusC11ES1YiwyUZSs3Bov5s7AkGs5G7PEpLAY1c9nEASrsfmi
-	 LmY+O5vn7fCntY90+sIgME1fucOzvsX/Nu979P/lvkcv+3l9Sn/tpDbZET1A01c2zwC+v
-	 mgv+5JUXrAAqN+ZVomVGchx5rj7yrVfNrairu4cr05lPiTSqZ0LWX5c1UI1ev10cDug==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NuJNbt09Z193; Mon, 12 Oct 2026 13:36:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 93389605CF
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791812218;
+	b=LoOvP2lAhqAG8mC10hEht/XaU1LGqB71uD4Vc+5bKWxzfdkHpOmbryf5/NOD57epai4M
+	 ICLrWcxJ+hdz+FRa1Wo0z+duKrIV/HuMUSYKwpyEZNxKaizG9+yYRBOiMV0WDt7HDX+4F
+	 +/9kGEYi19bWxvnpYdLgf2nnPwe/Ppt0quSez6UJgPWsM7xn2DyJtYP2ki+GYB2R1QXCX
+	 A+hWhjadZAcO0fsGv8aK7UUvxeOv/OXxMKN18a15b4TkKO6sPO6y4+/eDmfifkNYhonJR
+	 gF1xrAKm0z4LmBRLlW8ZZBeS+3I8fUwFpZIqQmhaHiJsJ3nMoLGwvQdeiezFw/oi6Yg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791812211;
+	c=relaxed/relaxed; t=1791812218;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -30,166 +30,167 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
 	 Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=ScQF0SKMld8hmbrdT0qvxBvvK4VqrzMpXENN03R1zkU=;
-	b=lMYJGp6G9m2+356c1UZmtMXVeJlAS5y6Gqmarz/EMKOVSG0OuCIssUlqXp3O53zIVW0y
-	 Zeas7LH99pJaChVgYywMIteQXcJ6YApsku0+NPDg3RDz+h5dShkhTrdBT1nu//84eLFkA
-	 jXCpiorokflCA+Awk6grQYnPPayGvpwWuoWwnEpIzizfctjYkd5rQ4Ynsvgk6us42uJWl
-	 kc7v1K+jxgZpdQ05h1djdCMYoQQ2Fjegwq95QuKVUzuNmXdyk8G0cLRZ1bm2sJIC9GKRl
-	 kXeZRqmvuYbys0Wp//WNVnoDxoVkJvzQtMxBkX8WGBufzyMLJvh+CzQoSv1JPkb91RA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=/kqThYrKmtRe1JgVTBoAttQAkrKVYcXnwflSjNBjhIA=;
+	b=BXLfpAHm85FxqS6F/VSteY+xyEta3QnhQR0XaJZOY3+jV7KsCsiNgctU/3PM4SkUh2Wr
+	 xB4P7fncj4LnKtqL0CysEIlzOOC+ETL1/50aiDHLxOMaNzhUJHDFzuBDrVSkRUMIrYucc
+	 KoWOhpnuHzRgUM8xPp34u0xggt4UML+86iXMToMOo5KtHiyIs8nYcDrjt0w6tFMmaRtsI
+	 LL5yPglQuqbtcT7//7M6WkhisqCw/7vIQRdz5mBOkLpy3y49HiuvfzJJ8oLYpHylVKsCa
+	 FozLMNgsTeLQA/0wuWODpRjuT5FIqx+YeFHowlG4qtwOYPEqiZxiXrXmuMMTKjq5gZg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VeHTO4Zu;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=j3MeN6i8;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=V3DuHyXf;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=eORi5XZC;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791812211;
-	bh=ScQF0SKMld8hmbrdT0qvxBvvK4VqrzMpXENN03R1zkU=;
+	d=lists.u-boot-project.org; s=default; t=1791812218;
+	bh=/kqThYrKmtRe1JgVTBoAttQAkrKVYcXnwflSjNBjhIA=;
 	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=WHCacDQqzeaT+H5puV8AAjX+mtBm1zJUw80H0h6ud9oVfJWd7DSWiNL4aAnbIzZOq
-	 9qCOi6APvoetDJ6qDJvj5CSXHdusKN5FeaAzlIPxofAGXemxzjELQ9FBV8NKDj6E7p
-	 BD+zFnZ4+fFfZ1SfEb1Eqkakh+leYCLzjsZ0z3Z1UBisGIl6RYLqEVPc66JBB5Bq9M
-	 gc9WHUWzqAoswinHyfHglKf6dtXQXNXlPnOhwrS9S0gyXgfRcVxsTR73NiWHZVGLeu
-	 GfCpv2TAuNFrzWReFr9mhDgkTlKGV0oYw5lFG6/tZXcHB02KqoYf0pAAh8JdB9iNlg
-	 znpO7YDU4jLKg==
+	b=NyIKWg6xLmXoKCD+6fGvCv5LxFgsfWs5Maffq/OPnzPZTuWOVJAo77d+QAdpnl2dY
+	 3Yj2wi2UKKDWLK9Z43vUExhWdXxwQZ125jLSKqlGaVShMIjtD0EJAQFZK0svr7adq5
+	 pkLLwZoFjX/mz/W9WyWHtYOZsXc+5G1cLtpkm7g/vOsq6EbAHvzjEWICSjy0l9Ys5A
+	 IBJqizwzvXrcUAUVGo6SbuUBpHyjQjgIfabtRH2PBIng7yXnwfb4UM5rZlUA0/JIVG
+	 724rlHNh2vWAr316liSkS+0ftMxTIjSQQ2kOQpJLFZGXJHv5EubDyI67C8bjkwQt4w
+	 Arqc3ypzs37tQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C2EB5405B1;
-	Mon, 12 Oct 2026 13:36:51 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 7CEAFA58
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:36:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 93389605CF;
+	Mon, 12 Oct 2026 13:36:58 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 291D2A58
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:36:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6E784405B1
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:36:50 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0ECD7605CA
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:36:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tuxMhHEKQ1Lk for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 13:36:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B484240580
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791812209;
- b=Wtba3C4Nx2VgaZCxnzT+Dxb+wKkqktCYiYPoPCP/sFJvN9RELo4Ij5ZByhmFauWgUclc
- bZ0YjenlRfhZD3V2AE7XArGiW/g5yNhN4dE5VcNdQDnRYe6t1oyeT3dnzWMzo0Kh848g1
- xvANkJotMWyUuF+jd8N1tqfLCTjNW7AM5PRjmisi/3NtKhemlwhFyvn77TUQbqKx6Nf7G
- GCmjvZJ4jQtV9B6aiB8EcgfjGv2wng4xORF5KymGZTSPSuj6K1u9JFYls74TVEhYv0oIA
- 044Cfd992qkgeeNaHTDfbyVP6LlTE93IVF/8aajNrOFqzlNQA2enxhpHuXJUxErcqMQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dpRCTojkCXyb for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 13:36:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A2542605CF
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791812216;
+ b=V8rYJnqu/kkQ+hElxFDDQLaYU1btTUA532CC1IIf1bkaLXa2n5JP+sdU97jFmgDGCPhV
+ CFOg4tutMRsWCRy5ZYHsVtv27/d2Xv4sfCFQLzS9IB2Y6/vBw10pA3XttzJN/xt+vt6G5
+ JNZtxKJhi3S23AGzly21Ur0B9l61bRXmxAWrk9dZ4uUjaSI5CwDE62I78F0cI/bzj/HxK
+ mlCygQMTpPBIsgVEAYu7757YSCbx6KUcoG3Bk3BnFm+Gi9gz9/UKO2vkIPnrORYC5uGmV
+ DfgdqrskHS8P9fh4thJRm2p+/WGC10BNxouztdyQjdYg+4kzyc27y4TESCyFWh7j9AQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791812209;
+ c=relaxed/relaxed; t=1791812216;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
  X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:
  Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-Spam-Info:
- X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+ Content-Transfer-Encoding:X-Authority-Analysis:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
  X-Proofpoint-Spam-Details;
- bh=ScQF0SKMld8hmbrdT0qvxBvvK4VqrzMpXENN03R1zkU=;
- b=V+XBJu+cRwQ5eEQJ3sQ4o/SdxxzKNV8Qf7qib7jMoNS2FRCiA0qBu+XsH+YaouqNt1KO
- pWS4mtb/fdJgC0Rohk9LLr99HQjOPGYws1ZI03tstJ5pk0XZkM9bo40S+XP/qrKAITA1h
- 1BN4R3kmGn29Ym2FOwDQqIMt3kFWxHIgZ8A7pcUFCVdnNH5Vbyv7yXwjACyD/Vu2BQy7G
- e7hwEuT+tKsG+x3eGkHTkBpj3olWH/4eKQ4B6nMJhTdHDevH9YY+yoiQXliU6SkNQyXip
- ueYv1UlAzYhukPhWnFBF8lRKBkYpTFr20W93oBJuqnzv0g8SsSIptzHNqqG/Ya0g/GA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=/kqThYrKmtRe1JgVTBoAttQAkrKVYcXnwflSjNBjhIA=;
+ b=P5gD6TG7Zv0rmUI6RoUTkJH+INcT9EJ0fa5xdVqv6knaFOjpGTM8lHgx6cGd/qG41kXH
+ ezlCnubZtjrimfDyC3obGzOCkn2CEsWmfnXI+uBUJ5xiI3GbaNgce0MGJugS4OthJn/eF
+ XZdmWE6bntP6HkYSF4jAWlu4BTlcPRoxjckXyYKnpE0ADKsbjEOdkQy40aYiLoQ/6mXWY
+ JVL2os1jWy2JRn5uMkOjwc5xmo4m81L0MO8NuOBvW9hP5ISDjz1v2x3pjSu3AAHRfqh3K
+ qJnQ9neWIitsYn/Ra6BpSfCxqJAobs33l0cDh7dTDHrgbgHU4XukZJcmWP2QLjqlUxg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=VeHTO4Zu; 
+ header.s=qcppdkim1 header.b=V3DuHyXf; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=j3MeN6i8; 
- arc=none smtp.remote-ip=205.220.168.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com; envelope-from=badhrinath.s@oss.qualcomm.com;
+ header.a=rsa-sha256 header.s=google header.b=eORi5XZC; 
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=badhrinath.s@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=VeHTO4Zu; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=j3MeN6i8
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B484240580
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:36:48 +0000 (UTC)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=V3DuHyXf; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=eORi5XZC
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A2542605CF
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:36:53 +0000 (UTC)
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69CC0ATC2275878
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:36:48 GMT
+ 69CC0VL12088718
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:36:53 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=ScQF0SKMld8
- hmbrdT0qvxBvvK4VqrzMpXENN03R1zkU=; b=VeHTO4Zu1Q7cy72T1v2NEo+i4EZ
- qq6PGgXJ5HbBmpYug4nscHkbUwXyDEcVgAg8WXmjnUPbgNA3kDE+g+GwgT1e+/qa
- pAQaOuDFKmBxt/MCv5DyTaBwBbsZmGqvYW0kILvjbWD1vGCGHULVtvpOZkRyw2Dz
- qzeUqFf1fI34NTlLVpd8r1V08noC4JO7nRG5YF62/0pLYimsbthAPpE62hD48Vpk
- jAzekz3/R1KcTnrEvKq6y1K5kUpvvHgK8Bsn2zBpSaiYyD4AuJeMtI+/ysWi9RDX
- U5wlyLxWO+5shEBj9zGTtRufxGmAUZH+fQEF5u1O1vRwczXvXQdOKwicVlQ==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
- [74.125.82.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8udq1jd1-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=/kqThYrKmtR
+ e1JgVTBoAttQAkrKVYcXnwflSjNBjhIA=; b=V3DuHyXfChvlNBlyJOrcOWRn/1P
+ 7Eri1i0S9IFBxbP9zEdFN5KhXOnsq9wRnA2O8lWMAscEQkSrgLtKsg2T60SpuQKO
+ eOLdykWxaKk3geyIhXLsBqszVkL3rrGZERbKwTLGB2Q5zoaVr6YE9qEriQwEUpdP
+ +AQ76/6MfjEaei5uIZbSGojcZIUykzN1wgnmxlJpRF+W0A2OtYjI1jpfsyJWNACa
+ tXXevwab2aS6p76udqawvVZg3OiDMuD6uMpXZrg+6TE0xLUY78TJgyS2X6KRRVxF
+ GIe7S+gjS1TmFYlGT23YAkTgw2LeTUflwmmGAUVXB3Yd4pHjgwhsnUH4UIA==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
+ [74.125.82.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8sgu24y1-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:36:48 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id
- 5a478bee46e88-33c35f5ca6cso4851140eec.1
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 06:36:48 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 13:36:52 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id
+ 5a478bee46e88-351788121cfso4669737eec.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 06:36:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791812207; x=1792417007;
+ d=oss.qualcomm.com; s=google; t=1791812212; x=1792417012;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=ScQF0SKMld8hmbrdT0qvxBvvK4VqrzMpXENN03R1zkU=;
- b=j3MeN6i8H34UMsm098uyeKDrwxIfKYJFuF14Q68myv2zTDz9HiEf7zURgvB0hPbdk7
- qJ/Jt4ZmxKQhywmOfXJBEDvfgwNLH4poOoNeDEcmUE1fE98Zj8GNYkRK8kD+FO69JIYx
- DMjhrUslbpCKfH0gMp+cTO1ggEQbs2MQrTO0FH/LCQYM+A8Ix0qMB3Mpxxm0KTtyMjhc
- 5mvDTgNLcvfDUOCn74hupr2VZWxLbqPF1rGsh5zV9REf7HQNYjrk+aYBYRFdARgGv+Mf
- l3ryx5iOoELvZgMjdEkcqP0gwZmp1T13QJXF8pideWjEUVySB7JFwhQSdA6Sv4KULvk+
- 7qqQ==
+ bh=/kqThYrKmtRe1JgVTBoAttQAkrKVYcXnwflSjNBjhIA=;
+ b=eORi5XZCl6ziU7Dk0HCSbJd4Oevfo7RbTBKZo6SXZM/qXk4a/MRi7dyVI+urSP8uLk
+ ppjYJwmK5cy0OwY0JRVrKY/ckSAIsiAwYxEnIIp1jKpQhyiUKZz1N3XsU91fxJcvbBpH
+ I7GAi7d2OrLvQjxkj9rbPqKnLdUXj863NzMZ9lbCFxMURusYpI7ZP7PEjv8H/RE+RWNv
+ abzxc6WjKbPg0tbtn3LdjIIfranwVrCzZmasIvd2lAkopBlg8NeGEApx0iGEbjPsWF4v
+ LFmknUS/P9GaXODRz/YUNoaKJz06mtDryp6OUlgWUnixrVUA1GXoshTtKrUGbRYf4rrX
+ 5eDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791812207; x=1792417007;
+ d=1e100.net; s=20260707; t=1791812212; x=1792417012;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=ScQF0SKMld8hmbrdT0qvxBvvK4VqrzMpXENN03R1zkU=;
- b=pL8ofXQKoQj/kIlhGl0gbPpOFdzLVqKYXnTr7A4gnhHDTqhemBW0Ezp1NT6Bmlikwg
- 0GlxDGdCJ2Ad5VFax+h6swKW13+BFCGCV1xWbpi3sHxUj5tapk2Kd0auJldsXUh34tAx
- BJmeh5hw8yXCWt6LyNDn1+0EhZ81A47Nufk+N61ehgfsfY+cSoc520+vaLr4e6Sn0VIg
- KG2NuD2Pj7bdiSx8ywATQrBBHWqeJL0VIlvdGCqd2634XwpPJnQMgq0rWKCoouy7a3Pc
- CKhNAXOJ2BdHhroTxhVYqlQnOzE9ls3axO1YcnQlcFnKEQ0SkSGoivj/OL+KQDnu7w18
- hnhA==
+ bh=/kqThYrKmtRe1JgVTBoAttQAkrKVYcXnwflSjNBjhIA=;
+ b=QnlfAU4Rya9Oc/PgSY0+4trm0+RaFdsAmUTb/0yChg2+s58TLeBNou15risHuoecf+
+ lQV6LX9o2N86eMI6eZCmIlJIDLpdxWcyL46ojBanplo2CVMCvZb7T+riJkgXa0+tvY1J
+ tF9ne7M6srtVJ2/hfvs4fM2sirPap2nHQxbJXInJFnJEd7vIvnP6r405fpzTbw24coLR
+ VVwhsT9ZL+4NzElcv/apDNX8K+83TArG1zM88eA2flj345chZQWfVA+0P7YhmJ4xhmvj
+ xbUolaGqc6aJDKlOiouufMbTSQ9CyBtRoqXdEX8oSjYepRBUNuWt3O4RzvZBtZ0IQSbw
+ o0bw==
 X-Forwarded-Encrypted: i=1;
- AKwUvByrfEKrWga7XNGrapVp4RiVmax87bEGTlxkPsOuudj/WXQHK211Jmk2QioDACD/AE4mPMZT0wI=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJApkCQ5I4Go5Oc0I532em0klDDOcN8WqWS3NyHCGbjkzza7nW5
- mEyqhf7QwoWqKxiqIlgeqcsqOk/x7dBPeTy9knNqevz+cSh0qDfUWLvPRLiLQwFoRk9PH2SIlBg
- l7yCBvHULbi+AZ5jMbhzoZulitrpR2TdmGPbN3XJHfSaBnjf16yn+51Ry7Sw+6mG00NeNroM=
-X-Gm-Gg: AYBFou1sYcEplWmh1gDV8BKAvaOL3ibSbcyvHjaAXlZiWSa3zB6M9b4LjC5gLzpOmaa
- PHDK5iCtVGlGzSgsHF/zatXWYFSlWarZPshpOa4QVxme22lHxPcvQcxnxhIl1qMEyLk7v/f5QuT
- pkiazLmDPWTCkOOAu8fIFYyutRGKR2n3K+nBaBMizMMsHft3m4cz59eYeAhEsI/JmXrBLw3Qv5w
- 9qhJ76pAOPxvjzee/6HSkPREwn8wpaEzRwekE44CfTZoX7XvTzh+myPJih90n9bRISQ3mys4d9t
- Z3Mr3ZBRQOSNX5C2sxjAyd2kMc2o2EqM4fnNWkFmLPfbe0CoYUPdS4Nb2iek2V47FXmyALf84/n
- ymruj6hFw8bnV8+FzkariV2BGhYSerGjYCRdZC+5ZfVR1ioEcbC0KYvzh4P3LAD9z1xI+1Jg9mo
- tMITdYTIRNakPK1+S4ls4e
-X-Received: by 2002:a05:693c:895a:10b0:351:1e72:7470 with SMTP id
- 5a478bee46e88-3537e04414emr13762653eec.13.1791812207356; 
- Mon, 12 Oct 2026 06:36:47 -0700 (PDT)
-X-Received: by 2002:a05:693c:895a:10b0:351:1e72:7470 with SMTP id
- 5a478bee46e88-3537e04414emr13762600eec.13.1791812206585; 
- Mon, 12 Oct 2026 06:36:46 -0700 (PDT)
+ AKwUvBwlgNBrNxTdxEzhXp7luivZzptmpcBsvN/72nP5pvTqxEC1V4q4zNlU2d32cpaHdYCohZniyrg=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYKdhkmChie8GyaVvRyEwAqFiHpe1BvYX8GbQNj71Gcf8iNqOBbk
+ 8Hcz6Iqi8p1oH1TV9u1qjrOTDRAJmJ9XxTJ7q0305eSBn4bs4fEGVFWt2SGRnYYSNkKNaeb7Shk
+ QPb6jsUIMyNe922k5wHYzNGktWE+jZYmSAerzeeuAq9fWE4Dmh0ji4Rn+32QS4BcrRUGMDlI=
+X-Gm-Gg: AYBFou3IPHAFgG7AS54GfTPA9I788tcildl6GPPvtg9pI5jDyWwHI0s/6RmAdzMYeJu
+ Ufx2flpXyH7mhC0I58sAL7+EX9tlnD0CKCMxgkFKVWbEl7P3fLtUx2gEeO9nr643/QvN6xbDbK0
+ g4/04bMeqJkCmClduGB9ES3eqAYT2+gBw9g6GJ20uAlJKXrG4a/17zlDQZ0ajeB+JMHpyEk2siu
+ m73Ibp6i5VADTz8YJWnNdtOI/Jco6Mi3xLaVIazUaTZyljpdTdvFbrdJzrRpAvXgFeyDS4jx20F
+ lmS9NKrHg8IWGWhBGYuv/JFMwF2vuasRnEHq8l0l9V10vHKsYaU+aMqyuK6E/D3h3LSJPbq5hPL
+ 1YeLAhUYz1Pw3jmnwSj7XLH2sqNyb+7eMHSDpi/5AVamAFnmawv1cQkDQJM9Ac7ADaT+/YQ1mPt
+ sutDvqRd55DNDn6ySG7rbS
+X-Received: by 2002:a05:7300:fd03:b0:351:4866:255c with SMTP id
+ 5a478bee46e88-3537e058277mr18338044eec.32.1791812211856; 
+ Mon, 12 Oct 2026 06:36:51 -0700 (PDT)
+X-Received: by 2002:a05:7300:fd03:b0:351:4866:255c with SMTP id
+ 5a478bee46e88-3537e058277mr18338002eec.32.1791812211347; 
+ Mon, 12 Oct 2026 06:36:51 -0700 (PDT)
 Received: from hu-badhrina-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-359789fde97sm18323802eec.20.2026.10.12.06.36.42
+ 5a478bee46e88-359789fde97sm18323802eec.20.2026.10.12.06.36.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2026 06:36:46 -0700 (PDT)
+ Mon, 12 Oct 2026 06:36:50 -0700 (PDT)
 From: Badhrinath S <badhrinath.s@oss.qualcomm.com>
 To: trini@konsulko.com, ilias.apalodimas@linaro.org, peng.fan@nxp.com,
  jh80.chung@samsung.com, tanmay.kathpalia@altera.com,
@@ -197,40 +198,41 @@ To: trini@konsulko.com, ilias.apalodimas@linaro.org, peng.fan@nxp.com,
  sumit.garg@kernel.org, lukma@nabladev.com,
  badhrinath.s@oss.qualcomm.com, dlechner@baylibre.com,
  u-boot@lists.u-boot-project.org, u-boot-qcom@groups.io
-Subject: [PATCH v1 2/4] phy: qcom: snps-femto-v2: Add IPQ9650 init sequence
-Date: Mon, 12 Oct 2026 19:06:26 +0530
-Message-Id: <20261012133628.1569010-3-badhrinath.s@oss.qualcomm.com>
+Subject: [PATCH v1 3/4] arm: dts: ipq9650-rdp488: Set usb2 to peripheral mode
+Date: Mon, 12 Oct 2026 19:06:27 +0530
+Message-Id: <20261012133628.1569010-4-badhrinath.s@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261012133628.1569010-1-badhrinath.s@oss.qualcomm.com>
 References: <20261012133628.1569010-1-badhrinath.s@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=evJKXYpX c=1 sm=1 tr=0 ts=6acce270 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Authority-Analysis: v=2.4 cv=QdzzLcbv c=1 sm=1 tr=0 ts=6acce274 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
- a=E5kL15_kmtNO7nmjp6oA:9 a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA1NCBTYWx0ZWRfX7O8L90j+TFol
- +CZ5V9+QnjoMBlLUHUxA0Zbqhm8tTyx+fXh2dRCHxP2FDlRnEonw416Gj0U4yiv6WR5oDVpXaut
- NmFQSG6zfY4sxU8wVlMXbO3ZHSX6UrA=
-X-Proofpoint-GUID: qbcFGvLRCskf1JOvc08JbPD6nUOHTvJN
-X-Proofpoint-ORIG-GUID: qbcFGvLRCskf1JOvc08JbPD6nUOHTvJN
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA1NCBTYWx0ZWRfXw9gMqrehnbco
- O+QT8mDeiPW1zM5nhGrqlAo1pb2OBfx+RIk3EC8bIgJNIQWoO74fSTtBL84baxCA5SgqczJYBip
- xn6Irf62LOYkVGVUlF4WGdHrjMyyRlvw3CBCLl1Usww6FLRtcc+VKavefto0RlK2CWumjA4rSaq
- 6Gwmh7qxoCaD3YAvaYyjfZio8zzicCHoUOMv+nqidQBNTv8ViIyVnvjES8z20dodusb1oRHahP8
- 6qkVd2LmJ6rw3fMt/wQ46sdch4S/SoB8kf4Tp2zKXGgpA/Cp3exFY5+iVq4L9CurTJMUG45S0Tw
- FmxZQWWlOvmW4/Zfxg6oxhIjIwgD8SHrvq1JvhaLlJMUCeyVdMCONKEp9r1pdQeEyqlpKXZQFe3
- pIYLQkw38JAlP+AHIJYhbAlc61Y5/DsXidOW9U+4JX8u6t3PMffsa1nq9lq0bkbYM9519ZMzrxL
- UpDzCBNTpHMWajvhGXg==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
+ a=d-p-c2rNYXNZ1EqJuCEA:9 a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA1NCBTYWx0ZWRfX5Y0GTDaYqLLo
+ 1yfxSKBPXATit3+ZkXRsC7jfaH14bJCEOXUfHoPxDMZUkur0Q9t7C8/8d038ClKb6jlXRYGTdam
+ zdeGaHfWRLd1bYjkp9fzuzDdUaCGfroeTiZeyHVWXLIFLTBo10wX1/vWf7MYXZyAk9ejQSGJjxz
+ snmw4JGJWq7HCbEPjLqgqFdvVVIiwwKHQBZHUJTv/Y+VKB/yGyJjEmXr8gi024qtOYJ8Lq2JYMl
+ +fQE+JHmPYAgk9JL1QupEWeGVWP0wQii3vyRZ+n7Y0UAj7gBdN560LQM5hC4lh6W0QeeU48xlTP
+ yb6dDLEkFagTxd1iipiPB3dkoGUHIpcvrOccxEGHes8m78ZEyCii7HnP0GU/vaq2jAMSfRdQCvw
+ oygQ+DncIaM0wvEt9hiHVkV+0LtOnEyaeclbbBIsTQXTddyQSrMgQCSXJTJ31xogsWTif0gD5Dw
+ 9maSePJDs0tkh/PGHlg==
+X-Proofpoint-ORIG-GUID: -6_UhYX_x7-bVeX4z4nxJAOStTgp5HVd
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA1NCBTYWx0ZWRfX818unTxiigOr
+ Hj+cz4ZD0pMRX+RWPV0QC9VvqPJY4yjFX79719JNFIO9qsKVuaPJEGBBGXW82+K7Gb5lz+7DF5h
+ 8WqB9d4FFhjBa2HIPiNmo5o7fOJIa5g=
+X-Proofpoint-GUID: -6_UhYX_x7-bVeX4z4nxJAOStTgp5HVd
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-12_04,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0
- phishscore=0 adultscore=0 suspectscore=0 malwarescore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120054
+ bulkscore=0 impostorscore=0 phishscore=0 spamscore=0 suspectscore=0
+ lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610120054
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -244,192 +246,27 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-IPQ9650 requires a different PHY sequence compared to the existing SNPS
-femto v2 PHY init. Introduce a per-compatible init callback and add the
-IPQ9650-specific sequence, selected via the new "qcom,ipq9650-usb-hs-phy"
-compatible.
+Override usb2 dr_mode to "peripheral" for fastboot gadget mode
+on the U-Boot, since the upstream kernel DT defaults it to
+host mode.
 
 Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
 ---
- drivers/phy/qcom/phy-qcom-snps-femto-v2.c | 122 +++++++++++++++++++++-
- 1 file changed, 117 insertions(+), 5 deletions(-)
+ arch/arm/dts/ipq9650-rdp488-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/phy/qcom/phy-qcom-snps-femto-v2.c b/drivers/phy/qcom/phy-qcom-snps-femto-v2.c
-index bf1f16e4a22f..489bc8706975 100644
---- a/drivers/phy/qcom/phy-qcom-snps-femto-v2.c
-+++ b/drivers/phy/qcom/phy-qcom-snps-femto-v2.c
-@@ -28,12 +28,15 @@
+diff --git a/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi b/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
+index dd03de98b921..dcf4cda728fe 100644
+--- a/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
++++ b/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
+@@ -13,3 +13,7 @@
+ 	};
  
- #define USB2_PHY_USB_PHY_UTMI_CTRL5 (0x50)
- #define POR BIT(1)
-+#define ATERESET BIT(0)
- 
- #define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0 (0x54)
- #define SIDDQ BIT(2)
- #define RETENABLEN BIT(3)
- #define FSEL_MASK GENMASK(6, 4)
- #define FSEL_DEFAULT (0x3 << 4)
-+#define FSEL_24MHZ (0x2 << 4)
-+#define VATESTENB_MASK GENMASK(1, 0)
- 
- #define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1 (0x58)
- #define VBUSVLDEXTSEL0 BIT(4)
-@@ -50,6 +53,16 @@
- #define USB2_SUSPEND_N BIT(2)
- #define USB2_SUSPEND_N_SEL BIT(3)
- 
-+#define USB2_PHY_USB_PHY_HS_PHY_OVERRIDE_X1 (0x70)
-+#define TXPREEMPAMPTUNE0_MASK GENMASK(7, 6)
-+
-+#define USB2_PHY_USB_PHY_HS_PHY_TEST0 (0x80)
-+#define TESTDATAIN_MASK GENMASK(7, 0)
-+
-+#define USB2_PHY_USB_PHY_HS_PHY_TEST1 (0x84)
-+#define TESTDATAOUTSEL BIT(4)
-+#define TESTCLK BIT(6)
-+
- #define USB2_PHY_USB_PHY_CFG0 (0x94)
- #define UTMI_PHY_DATAPATH_CTRL_OVERRIDE_EN BIT(0)
- #define UTMI_PHY_CMN_CTRL_OVERRIDE_EN BIT(1)
-@@ -58,6 +71,12 @@
- #define REFCLK_SEL_MASK GENMASK(1, 0)
- #define REFCLK_SEL_DEFAULT (0x2 << 0)
- 
-+#define USB2_PHY_USB_PHY_FSEL_SEL (0xb8)
-+#define FSEL_SEL BIT(0)
-+
-+/* Special delay values */
-+#define DELAY_MIN_US 10
-+
- struct qcom_snps_hsphy {
- 	void __iomem *base;
- 	struct reset_ctl_bulk resets;
-@@ -135,16 +154,108 @@ static int qcom_snps_hsphy_usb_init(struct phy *phy)
- 	return 0;
- }
- 
-+static int ipq9650_hsphy_usb_init(struct phy *phy)
-+{
-+	struct qcom_snps_hsphy *priv = dev_get_priv(phy->dev);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_CFG0,
-+				   UTMI_PHY_CMN_CTRL_OVERRIDE_EN,
-+				   UTMI_PHY_CMN_CTRL_OVERRIDE_EN);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_UTMI_CTRL5,
-+				   POR, POR);
-+	udelay(DELAY_MIN_US + 10);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_FSEL_SEL,
-+				   FSEL_SEL, FSEL_SEL);
-+
-+	qcom_snps_hsphy_write_mask(priv->base,
-+				   USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0,
-+				   FSEL_MASK, FSEL_24MHZ);
-+
-+	qcom_snps_hsphy_write_mask(priv->base,
-+				   USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1,
-+				   PLLBTUNE, PLLBTUNE);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_REFCLK_CTRL,
-+				   REFCLK_SEL_MASK, REFCLK_SEL_DEFAULT);
-+
-+	qcom_snps_hsphy_write_mask(priv->base,
-+				   USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1,
-+				   VBUSVLDEXTSEL0, VBUSVLDEXTSEL0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL1,
-+				   VBUSVLDEXT0, VBUSVLDEXT0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base,
-+				   USB2_PHY_USB_PHY_HS_PHY_OVERRIDE_X1,
-+				   TXPREEMPAMPTUNE0_MASK, (0x1 << 6));
-+
-+	qcom_snps_hsphy_write_mask(priv->base,
-+				   USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON2,
-+				   VREGBYPASS, VREGBYPASS);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_UTMI_CTRL5,
-+				   ATERESET, 0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_TEST1,
-+				   TESTDATAOUTSEL, 0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_TEST1,
-+				   TESTCLK, 0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base,
-+				   USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0,
-+				   VATESTENB_MASK, 0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_TEST0,
-+				   TESTDATAIN_MASK, 0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL2,
-+				   USB2_SUSPEND_N_SEL, USB2_SUSPEND_N_SEL);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL2,
-+				   USB2_SUSPEND_N, USB2_SUSPEND_N);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_UTMI_CTRL0,
-+				   SLEEPM, SLEEPM);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_UTMI_CTRL5,
-+				   POR, 0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL2,
-+				   USB2_SUSPEND_N_SEL, 0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_CFG0,
-+				   UTMI_PHY_CMN_CTRL_OVERRIDE_EN, 0);
-+
-+	return 0;
-+}
-+
-+struct hsphy_data {
-+	int (*init)(struct phy *phy);
-+};
-+
-+static const struct hsphy_data hsphy_data_default = {
-+	.init = qcom_snps_hsphy_usb_init,
-+};
-+
-+static const struct hsphy_data hsphy_data_ipq9650 = {
-+	.init = ipq9650_hsphy_usb_init,
-+};
-+
- static int qcom_snps_hsphy_power_on(struct phy *phy)
- {
- 	struct qcom_snps_hsphy *priv = dev_get_priv(phy->dev);
-+	const struct hsphy_data *data =
-+		(const struct hsphy_data *)dev_get_driver_data(phy->dev);
- 	int ret;
- 
- 	ret = reset_deassert_bulk(&priv->resets);
- 	if (ret)
- 		return ret;
- 
--	ret = qcom_snps_hsphy_usb_init(phy);
-+	ret = data->init(phy);
- 	if (ret)
- 		return ret;
- 
-@@ -186,10 +297,11 @@ static struct phy_ops qcom_snps_hsphy_phy_ops = {
  };
- 
- static const struct udevice_id qcom_snps_hsphy_phy_ids[] = {
--	{ .compatible = "qcom,sm8150-usb-hs-phy" },
--	{ .compatible = "qcom,usb-snps-hs-5nm-phy" },
--	{ .compatible = "qcom,usb-snps-hs-7nm-phy" },
--	{ .compatible = "qcom,usb-snps-femto-v2-phy" },
-+	{ .compatible = "qcom,sm8150-usb-hs-phy", .data = (ulong)&hsphy_data_default },
-+	{ .compatible = "qcom,usb-snps-hs-5nm-phy", .data = (ulong)&hsphy_data_default },
-+	{ .compatible = "qcom,usb-snps-hs-7nm-phy", .data = (ulong)&hsphy_data_default },
-+	{ .compatible = "qcom,usb-snps-femto-v2-phy", .data = (ulong)&hsphy_data_default },
-+	{ .compatible = "qcom,ipq9650-usb-hs-phy", .data = (ulong)&hsphy_data_ipq9650 },
- 	{}
- };
- 
++
++&usb2 {
++	dr_mode = "peripheral";
++};
 -- 
 2.34.1
 
