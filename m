@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B40CECA9EC5
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 12:36:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89861CA9ED0
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 12:36:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5166940607;
-	Mon, 12 Oct 2026 12:36:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 342F080DA2;
+	Mon, 12 Oct 2026 12:36:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1TAvQYpK4s-A; Mon, 12 Oct 2026 12:36:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 1003F405E6
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791808610;
-	b=Ray9vFwF60sZoYKZj9TUev3R9MshVQFtDXeQD7SmOu66cKQx4+QyTzaoFa7SKba7AOgT
-	 IHrh6aTCi4anxDHuGRx2PuIIq2y66kwyepWyUZiyPfFsuRYXBPW0z8h38ADoX/ClqHKGk
-	 U+1nvPd4+U8y4CRDX4q1A6wBx+ONyA/FOCSge4r8X6WnWhrFdRcH8kKD60Whr05QfF3P5
-	 s51FmC0zUDm+Khvukvm8sEoZTJZXg1pGrVQao5KsrCCfKpI2oS3iwXXYrgP57jCOjwVhF
-	 rvsJ3ndxaPW0+oTwZwOKd/CrFkzoMub/ujXiRfGoLuXqGgQsr6zb4s569M+fi3vLWAA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MY5Z7iQXMXvx; Mon, 12 Oct 2026 12:36:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 44E9180D6A
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791808612;
+	b=ac4vJpPju5+gnBvorudKBYdOH2ehApS+x6B++QXB1HqzUqCCGsT66DIDLypC/Kx/i2hO
+	 MFQlox+EgLUPCQp6Ua/lc2mCFUcA0BcuJTicinUtTmUXW2AeVzNwAQimcvf+ge2d/3yGI
+	 HT9OCaB9ORreiZGxJJbSMq5XZrDOecJ3ZY++fuECusvxS6C/RVNtoN310lCOChMOxPMH/
+	 kWO4IG0tDlse3z62NerKZF635EjVIInuz2iquEzEFFpSBHAqvAqS850rIm43bnEGHzCaV
+	 X0yxHHdecmr8BaKUIxFdjNZV6wQu8EQ4jFyWlAS2N9Fraxqv3Ax2JiO9MmWWdhmsZog==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791808610;
+	c=relaxed/relaxed; t=1791808612;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,140 +32,139 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=SHFskS/OIfBXsuETvXk+TfZsyz8HTPkY4EM6C53u+Yw=;
-	b=IvBOhM4e6XmEAC9tQbxGBUA82TguTTrMBse3Vs1NbZnlhAihKUz7uqhomHXEHXqf7U52
-	 yYJCXxmjt1N7iJR/672NDqspQxKggzAMy1XxeCCeZ4tYCuGYt1ugEmtC9eAx0GCopxYwJ
-	 kCghJntOo6vj+VpHA16KG3/XZUKMloyqWQN/TE0vuLYWn+R7SKk5oGQ5gEos7YvCiu5e7
-	 I0gN7YtLeQbOxgCEZfiDOIYWbfE5UMYH4uCGNwYzhCPB08H315OSvE+dFa6GH/+fYqdxb
-	 Z1JKVOLPvw6G/KTAnu4QOc2VG9v8cbj10p4SX8I2CVR5oxCuOkhpjSB/mJsjKc09eXA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=pass header.from=sigma-star.at;
-	dkim=pass header.d=sigma-star.at header.i=@sigma-star.at header.a=rsa-sha256 header.s=google header.b=aUJ4toXv;
+	bh=SaBp2qo8pE6qalgIzwopZw50KZN4uPKoW3keE4UyZXY=;
+	b=tOd/Ym0XjPPSBUYsFWN4xCjqE8fHaTjzYp84ErbPtdXousm7ham4wnkQAW1VpZDSIk3N
+	 faXCm+xZJJOl+ZwRmjFumg8m2TX9QKXuNyePKmOvx3uHOI/cRrTVX4/zC2hqALpW1MN69
+	 7qigyfwZf7lB0z5v9SNAgst/Fac+06JRT2Qxpw6/i6S5guGJ17m32VS3P87EGk1vCmjkR
+	 IHuDONfi9fLcJptIKtjopYDWY+DJFzzSVHV4ncCpafAqhmA2NrUI1zIqY8G8FOHKHGOn5
+	 gVGE08v72ZPmRsw3DoTUUAp9YYPVHNSrBcglJE2bVuxB8Tcy5VAEQ/U3AT1heLM2gGA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791808610;
-	bh=SHFskS/OIfBXsuETvXk+TfZsyz8HTPkY4EM6C53u+Yw=;
+	d=lists.u-boot-project.org; s=default; t=1791808612;
+	bh=SaBp2qo8pE6qalgIzwopZw50KZN4uPKoW3keE4UyZXY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NlxYWpYhbAC2wfpk9Ay5Hol8KXCSjpc5cMjeUyj+cnHdivpUt7xk46ypEjLrva9z7
-	 1w0tEmDQtvXHfPPb4fNgbPOKGNGOAusk5kUb7RDbJUZIiNhIFW1Va43+FTG8NTFXx0
-	 FdEII4wa/2g8Hz8n5HNgvHgjMIJtqpNG5elkqIbCNU3HTtMZKnqGhgTHhh/cyr79c6
-	 YLNh3uVacDQrHAp3XKmyco/8lGUU/XfPuo3O4bjbjz/4ROZe1n5vZSxOpO7JUthVS8
-	 SUdy9lyGGo4MrGvblmnTNmvCiBP4k6HcGVilCeM3vT2/l+cqRTjxgfNr9xJHC+ZVDq
-	 grwTA+fCiD+Ug==
+	b=C5DpbAp3vOpswLNQXnBsreRkExW6Rrs7Iw6OzmEQlH32hw/ZV1Vpwnq44wGZs1Sec
+	 fRcnmo/+1bOc2xFM3U/HcxQIu9uZGyjh8c5joXR/wG9UubYI89Qpym+Ygd166iDKXc
+	 SOU8atq9WYW9ozU37sO9phONUhrv9RJJWisD7SwEkGz8KWFsiCTTdGN8ZzeChtfqoj
+	 eqwUhHA/lMN4atrUh+iLjG554OnrATupskQZiyaQxlF0/f1Mqsrgcfw+psaWDrSF8m
+	 lV2+WVy+9uPebF6D5DeBhEu9+zSHFsl8fKcLjD4CUFWgQW2XwiCA9wcEHkKv/tMHyh
+	 UxBdcUY3S7R2Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1003F405E6;
-	Mon, 12 Oct 2026 12:36:50 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 4C0032E0
+	by smtp1.osuosl.org (Postfix) with ESMTP id 44E9180D6A;
+	Mon, 12 Oct 2026 12:36:52 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8F46275
  for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:11:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 31B534059A
+ by smtp3.osuosl.org (Postfix) with ESMTP id 80879605EF
  for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:11:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HIR5l5ldKer3 for <u-boot@lists.u-boot-project.org>;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qrxBoxwHabsL for <u-boot@lists.u-boot-project.org>;
  Mon, 12 Oct 2026 10:11:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8512740599
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::334"
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CBC0B605EB
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::434"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791799861;
- b=cPXJZOOseoHw/c9Fy8wmZ7MfdfoD6brv8Rqsix/1HHOKIovwaKL02dee0iwn8yFkC6UR
- rMhpoPi1oMKcXmGHCGU4GMBkThE7vQLzPRyM3l/nxx0r0xeZ4fKcHkyBfzppIYDGVNOFG
- k2qMyDiTmYeB9QhmR8aYkHhX86hn1yerrbmSQRnpSL0se8Kib1amjHlZNwSEtYEs8XM5T
- GSb9xbUmrKI7lmsjCtxCazZg16fVTyL/ksk1e3Gep7Cu03AOiWf9ycugASZw8ZyZQBebm
- bt3kfPXXr30y+R0GSBwNB1Wrx6F/WBCISpt29MeBpT+9JkPe3SZrN2pv6Zh8fvRiOMg==
+ b=lCODXKtAsxbKjNju+usBz7TmBBmisOfYqve00sj25+y9hB5YH/SV/Svkq8tq3aYZC1Co
+ Iz2Vx09UaNA3PiyNbQmKFPy0PFAwD/35wF3OXJXFqXVBpOJt0nwBnObPqLazFMhsxypC7
+ Gm00FxZZUGNyjqm/b+t4qThigSvvI6O18MHmnXhPl5WaLxJocDGepYDP3hwAJ9pubVgn1
+ 4509WJfPIL/PokhLb/F5wrVjoRKwA5qhP2mGL7XM4IFTW44FjuWInFx8lIB4jQgw2yNGw
+ B+vJaUJht28XoAWaXrTbkejPbf3IJSWJPTaD00qPb7ndqNTxAfFMgxdOqYcaU2VbRBw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1791799861;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=SHFskS/OIfBXsuETvXk+TfZsyz8HTPkY4EM6C53u+Yw=;
- b=cRTSaa2ojpyLB6Z1nEknieKqGWSBd/JOwEpNiRnCvn2yKrqX1RQDIeUyX22DXk97UO2m
- eQU+7rowkmL1bf536jhG+5X1hNwgWz7dRQpcIlIBdpfRMZ0gebyjziX/6a0BwtLWcIWnt
- YsFH682W8o+NqxMxMOTHE0OJ2HOSBKjSoGH8E7zL9liiAVzWoFHLDyc6YmjYvNgyOk8XQ
- lAoMgnxzsJFr8KNgd1wHLEz8wI8uZWSiq2owZGYweoKST+QLkPpT0kqdG4FeJ0ANVuwUR
- KFckay7lENT+g/H/yN6aBny0npPttb2vwmIDUF2urJqIqyrnh70Mb0flJ70JBwVj8CA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=SaBp2qo8pE6qalgIzwopZw50KZN4uPKoW3keE4UyZXY=;
+ b=PI028J6bkRpV5+JgzwX9OSvKVoTTJIocLmD8bAXErNk5h/HfYHoLTizAD7kMOlDrddUS
+ WNsThvdEXC/E7JAAtrVGr2usY5PsWzyqD3xx3V6Rdn0yJgnMHP9byj6YYdpmMecVpaIZm
+ 8UvdDndpDc1OJq3aii3JV65PNetsPOInFlUhEH8VlI8VD1NzUnNo4o3zU4+foLF/oVnUs
+ md6IkR4rZxpLYJsZP5HC0ARtjtQFUruG03V/FdosynKTFAaBE50YU7sW9hg6C+DJ4TYy2
+ yOafQOxzwa+ZZm/jp63WJspthoX+/1rs5C50/H5ONS6YYQ0D6JckHD4rtJn5x3fgSxQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=sigma-star.at;
  dkim=pass header.d=sigma-star.at header.i=@sigma-star.at header.a=rsa-sha256
- header.s=google header.b=aUJ4toXv; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::334"
+ header.s=google header.b=k9nxhPM5; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::434"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::334; helo=mail-wm1-x334.google.com;
+ client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
  envelope-from=lorenz@sigma-star.at; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=sigma-star.at
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=sigma-star.at header.i=@sigma-star.at
- header.a=rsa-sha256 header.s=google header.b=aUJ4toXv
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8512740599
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:10:59 +0000 (UTC)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4a021c809e3so16751915e9.0
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 03:10:59 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=k9nxhPM5
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CBC0B605EB
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 10:11:00 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-48c02782159so989376f8f.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 03:11:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sigma-star.at; s=google; t=1791799857; x=1792404657;
+ d=sigma-star.at; s=google; t=1791799858; x=1792404658;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=SHFskS/OIfBXsuETvXk+TfZsyz8HTPkY4EM6C53u+Yw=;
- b=aUJ4toXvWVxM8B4IXHAT6TeH29DaG075OxKIT1/aSmVzhu+Q8QiUqGC4SEDWOkAkBq
- Je/prkzXdC+aL38K/8wDuCWt0an6tmqwkIihBHFZYbPTG/tq6odqY5lBrvqbWnSkEbaO
- zyjNun/t8dTQCVXqqRV00E/wXbL325oW42rFnCn8Pc+AGJGnkoWe1UFFSBTfikiTw4pU
- NGJUfO9+ccE9qJbQ5Eo+C5SwcOiEiieXLndcLt9LbhytG+IsYCiAloas1Iz3D7dGUTUm
- DUNdyvUVsCXjgQ1V0qURZogqxeaP5vB8x/er6I+z3psHTiPs1gE2wfzB/WSbWuwjkcsa
- nofQ==
+ bh=SaBp2qo8pE6qalgIzwopZw50KZN4uPKoW3keE4UyZXY=;
+ b=k9nxhPM5D1JBRCaKvHM3HcKE3bkRf9NESuXSojxr5UmTaHbFs7wWa7pK//L89LU3zU
+ xf+sjSJ9j/VEW7AOuctV9AiJBP9AZ6gcvblqqpwSXdUT569cIAwuZd9zG1oK/gSnCG8e
+ XQYTi9NXNps0Qb0rJNY292gBAQWKyOkrxQ3N3Vihv4YOF9vMKNC61KhHQmqDuHn2mdUR
+ gLmMyTh+0SIEhzGyn5T69bvoITRS1zRXtrwjRONaftYSwwKwB886dCSS382AXEI4EiD2
+ r7JT5gkoHqyI3un2nqHBinA76P/Xri837fkisZzcGDrLiIduG2okrnS29lwzC3IXsVqo
+ Ap2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791799857; x=1792404657;
+ d=1e100.net; s=20260707; t=1791799858; x=1792404658;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=SHFskS/OIfBXsuETvXk+TfZsyz8HTPkY4EM6C53u+Yw=;
- b=vkC79PeUW/iaODyvkepbpw4pzdeS9sFOOBta7EDzDzKsk+UQQNm0U9qGueUtXRMLz4
- aTtUaMIpVMq82ve7CMgqEbngahE6oI5zByxvEQxEMP+NccSQVNFhFx1FjfCs1mcwh0Lx
- c+08/M8h21hhd+Jwv8s9L0Gb5QxwlZXneHJVMWQjVD9ylIIXLfm+zF5j7gslHCZxC1wJ
- tzC7LISzGSQVRMUyaIKiR6T0XnadxAlzdbLkmFqd4rTFjBJ5fpDJjIwBondmOuV9nmIy
- K53kr2v04klUvydQPMJ0nsNSJ76EuHHzweKf4U3NEePeuBBqJvLWNXrjorn55unzCZEH
- FJCg==
-X-Gm-Message-State: AFq9FYJGN1PCuJzUSHXbEBDEvwYWpb1dKJEm8QZLlwRWjabEiM6zi5KQ
- AnEm1wbQRad+8vlESJy/hdzp1jo9zLr0Ed4+NdTl2SAMudOx+hnYwA7QV2CS6Tx/5k256KSRC9b
- 1tUdRmF4Dkg==
-X-Gm-Gg: AYBFou1581MUnIZO09NrxksBC4+YbLePbI57UibG5qlEFqW4fx9JsNfq/6SCMtnjUsB
- mrJxQb41hnh9GcJparv8GiNZ0Sbeuq4oIVeGy8kbOE6kSgiYv9uVN1Z/6X+h8KIPMTaiwcmabw3
- 3NeDWvmJXVJ3Yvt2XfpkNPDKPek676bchRUWYds+TGlnzgczv+2i1duyyuIswFJfktdnSiVsjpr
- uYfQn+rrLNpOo7HsS2PEJ4Po8n7K7y6MSydAE9+Q4fm56CDcggM2PFgjgR9FqovZp8QxDC1NKP5
- DZoXpSefrF/X+MnrzVQEWmGH6HQ+QZrqBKMQwHSf2Dx00Btr3d0QWDY5FDPXxHB2ad5zzC7B1pj
- oc07f4lZ7ISuET21OSbp0TnBp2xPBaWcdtXhxS2M6+XLl8t6OdUKKD6tPo1hTPbzVFr3vsFxtjI
- vOQy++KrqnJqWBpzffE2ZGNOfvfn5jgN0ZXWF06nwhnnq6Ddi0/2c5mcAoUWmux/JBhV9L8xNq4
- dJJ2uOLFA==
-X-Received: by 2002:a05:600c:6285:b0:4a1:70da:3350 with SMTP id
- 5b1f17b1804b1-4a18e4b8c6emr166085465e9.32.1791799857245; 
- Mon, 12 Oct 2026 03:10:57 -0700 (PDT)
+ bh=SaBp2qo8pE6qalgIzwopZw50KZN4uPKoW3keE4UyZXY=;
+ b=OznXRJDs6FyvFD7aP+e2Ks/MMmoXm2Mk1RonVkCBrcc6ZV58wL3paOUOCTbo811/05
+ EvZNcQiwTFbAmHljMSmPABi1v2XpASJDUyJspzi+a6peGdE9q+QdN4zVJ1CZ+6jwIihZ
+ /odBPs7Thp6CXYaHDn1PlE/n75H/aQPcu9/43dNoxrE/XExJ9S+wv/GluU1yycCKK8kW
+ T3l/1beRONEoVB24xEZeS2wCNRuc/FfpneMmJH9abCpzk+YYBsBqdV8k+kwzGtUe0Zwg
+ 0jbYfRVagUtgnTJKiSY/cs+MslGCoH7xol4bMgSpBuFXUtJgrbDb1ONK0cyqQxbKkRp3
+ jdVQ==
+X-Gm-Message-State: AFq9FYLLRqVRSDaaVIR6lNZ1MCewtTerzUPIxhX5t5RYJfdYTpsICORZ
+ HWXoaozkyy7eIa1T9WJETBDBc15JRiXV9Bqwc2lz8ErIsIu2/UDrAMcaYK+PCl/Oyx/AovuY7P2
+ T+Pw/Bhg2/w==
+X-Gm-Gg: AYBFou1p4ie4reYgs4zFgCH2S1Em0WyyPH92d6OYCi20YPmbR4EF8M+ZJmCvn0ry3Wn
+ +jm7cWBh8kC0Fv2ArPUFvwdQxakdsNnQokfcmz4fVUkY3hxIiCOE5KjdWv3lC2bUCrkCO4bT8fM
+ kf+KwcGl9xNW9YA7Ww5asH/bWsv5IfODU9zQDZJGxYWYFrJqNG21fnJ6O+Y5/JcFKiTp5RfvlaU
+ 4ASpdi1zSvyW1JvTe5ZG4g1SfA6VqP8ggLxaTtGEzcCNLXfuwK4xwbEv6AQ/DwRiAEJQDmuAvs/
+ Ntk0MZnSFGqC2jwWAltEZ/pO2SeD6Y0IfgTvPwsHdxgJtQ4SgpSwAeQ9gE1jMbqBVdkROjlO9RN
+ PlmvcCjF7hCV+h/ZDIDxd3KmW+f1Qy2Mwdll6qkt7LuVPFSmcs3yEbmyWVft6BxwsTXCdZ1Vxja
+ 2T0BUMc3Fam/imeC9Dx3FGPLBw0/8quFdOIqYQHPR+5nntyhTL4Lit1tj0FD9vxSfKgbC9wkXwq
+ 53jt28Nmw==
+X-Received: by 2002:a5d:56c3:0:b0:486:f97b:6412 with SMTP id
+ ffacd0b85a97d-48dbaceb3c2mr12635645f8f.46.1791799858193; 
+ Mon, 12 Oct 2026 03:10:58 -0700 (PDT)
 Received: from losig.fritz.box ([2a04:9546:1c54:8601:c375:8df8:9c4c:d013])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48db9abd57fsm18064559f8f.37.2026.10.12.03.10.56
+ ffacd0b85a97d-48db9abd57fsm18064559f8f.37.2026.10.12.03.10.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2026 03:10:56 -0700 (PDT)
+ Mon, 12 Oct 2026 03:10:57 -0700 (PDT)
 From: Lorenz Kofler <lorenz@sigma-star.at>
 To: u-boot@lists.u-boot-project.org
 Cc: Simon Glass <sjg@chromium.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  upstream+uboot@sigma-star.at, Lorenz Kofler <lorenz@sigma-star.at>
-Subject: [PATCH v2 0/4] binman: pre-load: Allow signing with an OpenSSL engine
-Date: Mon, 12 Oct 2026 12:10:50 +0200
-Message-ID: <20261012101054.2104707-1-lorenz@sigma-star.at>
+Subject: [PATCH v2 1/4] binman: pre-load: Move signing into its own function
+Date: Mon, 12 Oct 2026 12:10:51 +0200
+Message-ID: <20261012101054.2104707-2-lorenz@sigma-star.at>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260917065545.1989088-1-lorenz@sigma-star.at>
+In-Reply-To: <20261012101054.2104707-1-lorenz@sigma-star.at>
 References: <20260917065545.1989088-1-lorenz@sigma-star.at>
+ <20261012101054.2104707-1-lorenz@sigma-star.at>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 12 Oct 2026 12:36:48 +0000
@@ -182,46 +181,130 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The pre-load entry type signs with Cryptodome, which has no PKCS#11
-support, so the private key must be a file. Keys held in an HSM or on a
-smart card cannot be used.
+_CreateHeader() signs twice, once for the image and once for the first
+header, with the same key and padding. Move the signing into a _sign()
+helper rather than repeating it.
 
-Add an optional 'engine' property. When set, binman signs by running
-openssl with that engine and takes 'key-name' as the engine-specific key
-identifier.
+This is a preparation for signing with an OpenSSL engine, which needs a
+second implementation of _sign().
 
-Tested with SoftHSM via the new tests (both paddings) and with an RSA-2048
-key on a YubiKey PIV slot.
+Adjust testPreLoadInvalidKey() test to verify that signing is never
+attempted for a key with the wrong size.
 
-Simon, thank you for reviewing v1. I hope this version addresses
-your feedback.
-
+Signed-off-by: Lorenz Kofler <lorenz@sigma-star.at>
+---
 Changes in v2:
-- Reject a missing engine key-name before attempting to sign.
-- Remove automatic PKCS#11 URI construction. Pass the engine key
-  identifiers unchanged.
-- Explain that, when OpenSSL is missing, _sign_engine() returns
-  exactly RSAS[sign_name] zero-filled bytes so binman can report
-  the missing tool without failing the signature-size check.
-- Move the change to the testPreLoadInvalidKey() test to patch 1.
-- Add a separate SoftHSM setup refactor (patch 3).
-- Use one device-tree for both paddings.
-- Add tests for a missing engine key name and an incorrect signature
-  size.
+- Move the invalid-key test change into this patch to verify
+  that signing is not attempted for a key with the wrong size.
 
-Lorenz Kofler (4):
-  binman: pre-load: Move signing into its own function
-  binman: pre-load: Allow signing with an OpenSSL engine
-  binman: tests: Share SoftHSM token setup
-  binman: pre-load: Test signing with an OpenSSL engine
+ tools/binman/etype/pre_load.py | 49 +++++++++++++++++++++-------------
+ tools/binman/ftest.py          | 12 ++++++---
+ 2 files changed, 39 insertions(+), 22 deletions(-)
 
- tools/binman/btool/openssl.py                 |  28 +++
- tools/binman/etype/pre_load.py                | 131 +++++++++---
- tools/binman/ftest.py                         | 189 +++++++++++++-----
- .../test/security/pre_load_engine_pkcs11.dts  |  24 +++
- 4 files changed, 291 insertions(+), 81 deletions(-)
- create mode 100644 tools/binman/test/security/pre_load_engine_pkcs11.dts
-
+diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
+index 0d953cb258e..0cf635ab23a 100644
+--- a/tools/binman/etype/pre_load.py
++++ b/tools/binman/etype/pre_load.py
+@@ -86,6 +86,31 @@ def ReadNode(self):
+         if self.key_path is None:
+             self.key_path = ''
+ 
++    def _sign(self, data, key, hash_name, padding_name):
++        """Sign data with a key
++
++        Args:
++            data (bytes): Data to sign
++            key (RsaKey): Key to sign with
++            hash_name (str): Hash algorithm to use
++            padding_name (str): Padding to use
++
++        Returns:
++            bytes: Signature
++        """
++        hash_data = SHAS[hash_name].new()
++        hash_data.update(data)
++
++        if padding_name == "pss":
++            salt_len = key.size_in_bytes() - hash_data.digest_size - 2
++            padding = pss
++            padding_args = {'salt_bytes': salt_len}
++        else:
++            padding = pkcs1_15
++            padding_args = {}
++
++        return padding.new(key, **padding_args).sign(hash_data)
++
+     def _CreateHeader(self):
+         """Create a pre load header"""
+         hash_name, sign_name = self.algo_name.split(',')
+@@ -105,26 +130,13 @@ def _CreateHeader(self):
+         if key.size_in_bytes() != RSAS[sign_name]:
+             self.Raise("The key " + self.key_name + " don't have the expected size")
+ 
+-        # Compute the hash
+-        hash_image = SHAS[hash_name].new()
+-        hash_image.update(self.image)
+-
+-        # Compute the signature
+         if padding_name is None:
+             padding_name = "pkcs-1.5"
+-        padding = None
+-        padding_args = None
+-        if padding_name == "pss":
+-            salt_len = key.size_in_bytes() - hash_image.digest_size - 2
+-            padding = pss
+-            padding_args = {'salt_bytes': salt_len}
+-        elif padding_name == "pkcs-1.5":
+-            padding = pkcs1_15
+-            padding_args = {}
+-        else:
++        if padding_name not in ("pss", "pkcs-1.5"):
+             self.Raise(padding_name + " is not supported")
+ 
+-        sig = padding.new(key, **padding_args).sign(hash_image)
++        # Compute the signature
++        sig = self._sign(self.image, key, hash_name, padding_name)
+ 
+         hash_sig = SHA256.new()
+         hash_sig.update(sig)
+@@ -142,9 +154,8 @@ def _CreateHeader(self):
+                                    ofs_img_sig, flags, reserved0,
+                                    reserved1, hash_sig.digest())
+ 
+-        hash_first_header = SHAS[hash_name].new()
+-        hash_first_header.update(first_header)
+-        sig_first_header = padding.new(key, **padding_args).sign(hash_first_header)
++        sig_first_header = self._sign(first_header, key, hash_name,
++                                      padding_name)
+ 
+         data = first_header + sig_first_header + sig
+         pad  = bytearray(self.header_size - len(data))
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 2fb452b4e46..4002f6837f4 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -5903,12 +5903,18 @@ def testPreLoadInvalidAlgo(self):
+ 
+     def testPreLoadInvalidKey(self):
+         """Test an image with a pre-load header with an invalid key"""
++        from binman.etype import pre_load
++
+         entry_args = {
+             'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
+         }
+-        with self.assertRaises(ValueError) as e:
+-            data = self._DoReadFileDtb('security/pre_load_invalid_key.dts',
+-                                       entry_args=entry_args)
++        with unittest.mock.patch.object(
++                pre_load.Entry_pre_load, '_sign',
++                side_effect=AssertionError('signing should not be attempted')):
++            with self.assertRaisesRegex(ValueError,
++                                        "don't have the expected size"):
++                self._DoReadFileDtb('security/pre_load_invalid_key.dts',
++                                    entry_args=entry_args)
+ 
+     def testPreLoadEncryptedFit(self):
+         """Test an encrypted FIT image with a pre-load header"""
 -- 
 2.55.0
 
