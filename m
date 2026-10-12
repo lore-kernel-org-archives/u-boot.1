@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D367DCA9ED0
-	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 02:01:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 506F5CA9ECF
+	for <u-boot@archiver.kernel.org>; Mon, 12 Oct 2026 02:01:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9023880CEB;
-	Mon, 12 Oct 2026 02:01:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 12E9140641;
+	Mon, 12 Oct 2026 02:01:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bVy-zIBwC3kH; Mon, 12 Oct 2026 02:01:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3FEBC80CEC
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791770507;
-	b=ga513IS5ua1ZtX9+Tumqysth5KU2nQXRciDpFotrjRvyceneiwREIZ3X0akZErJIqATl
-	 k6XRI0wGKJtqY4MP43x250sB5z6h9MtEdE3YpJm7FcHKkAHw87ZeyMo4UampUGghXDscD
-	 8/cXwWMWQgfysf/ls080bg/JsHTR5Z3wWCw+Qt5xAQSje2n0GEA4s6n85rXaFJ5g2KvZE
-	 aozcq4xV4WbkkxlHIcinhO2Bmedx2Y0tcqM3WHn123RehDVz/qsyNU89ZO7DCtGPXj/9D
-	 g4nohzS716/9VextDUCgh9UcZ9TtVVhoblJCT12jXn7+JHLo96fzamSYrTqW938lFfQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dZCDQW2IzJ8U; Mon, 12 Oct 2026 02:01:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D60AB40637
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791770510;
+	b=pbGN5d/+6RE8PLFsgZliG6KNUmFqcof5XJrYdDvd+Lks3SmPvZIu8tK29+c7BYJkuvl5
+	 GtVKSepVHciK+vrfOPLuiOUCEdK3VlcRr/FVxLL5U6j0Y4mYN8UuCeqfoBy9a+0i5E6f3
+	 OZd75yk1mkrNBnGUU8B96dXRoticQ+rMRnJMV5tyif9vx0ThpuSHs8uYM7ttdXSc7RfOn
+	 L/L6RQQi4dyaVqa5TGSLeL9V2t8/8SKqgRivl69puB8z2DqBJtZ/x9FEIjSjVg1QRHWRk
+	 WfNVb9m4TiPmcK1ir/xcXFi6nOJ8E0iIV99Ijy4Z6YUG+QvR9rpBzyUasmILJGLb5Lg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791770507;
+	c=relaxed/relaxed; t=1791770510;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,123 +32,123 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=2PGBszCttwoIYArmBc/gFBX/rzGMzZH1VAHtiYJaEDc=;
-	b=i0uYsWvT32qP8PMwTXlXCNGjUR/Gp4oo4Fmjn7vlPNevF5bqrdUxD4Eewml+UvwMOmvD
-	 frxkICmV1auzMWMtTrXSvQyGN1bGcHKYzbJyhk1cQYJeRa/hMWG3qZ9Rghw+R8+vCzpBU
-	 AAl7oFHczfEOOz2xctFEbIpfYax/CROn2V703pX31SdATKbPuE8Cs9RJneTDONoR2T4UR
-	 U3K5HDO0eUAv6so5eQAkwRp9/cZ4Y/xZQB9GDAvwMxJZu2NIqnGRuwraOdTuTAZiue7Ra
-	 PHztMUrWi6XTo9q4CDt/uS5LbP2R8q+qP+fkJzKcCjZl1Rod1V+H9NTlRQjyHYIHztw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=lviH6JJfYVz298L3jUcHvKFOdksCjpP+18YSfvkXl9c=;
+	b=Rc/nlBYmrfu6fofy4BumXETbbo1oaxuYoB5plGuOUHslpohfWa4sfe3omNI4SP1mxtzp
+	 T85OVKHRrFIM9BFtMVW35ORtJXAmUkk8KcZhgCzWn4T5HrzWQuglUZ4bMvQuslbaXvJTO
+	 CMI3U23TzmbNc7eF0fG0b47AWAOmGE6b45UDNotnnNHAy8qFARVqTT0Ws/sDN9nz8y7dC
+	 JGzac9jQB9llaNNrenPe7EWR1FjZ61a2rt/KZghKqz0rJrsCC6CJsCZ6VrCQF3dhcPWnd
+	 6rLZ0SmYLhQsmWefu3cqdFdzDmTZuWlLARPl/ii3k4rpVU3zfJrCo62LptT3E2I+lDg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791770507;
-	bh=2PGBszCttwoIYArmBc/gFBX/rzGMzZH1VAHtiYJaEDc=;
+	d=lists.u-boot-project.org; s=default; t=1791770510;
+	bh=lviH6JJfYVz298L3jUcHvKFOdksCjpP+18YSfvkXl9c=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=OyObedVzB6CQBnT7XAS2JHairfTjPf7p+8pNsj/xYX4/2V74jRZ+0bJQqTgRE6NfX
-	 L9G+aDiDPGOlyLMm/t/Vb3ZPWRJgXX+ys/7oZako9zdMeP3yYjIuuc+Frwdv6ela+n
-	 AbFAlmof/YhlZ+SRXY+wiHKDhpZG6BA9NOvMCyL5l8K+iU6Zro80IyEPFC1xwv28k5
-	 5eMjEWFKdSV2yeeQkpYEYDtQvvZPvacANP5KIF8+sbo56c7PYmasfBbdE31dHruYK+
-	 rgNwajmF0f4oVp/WHela7j9u0s661TRp/wAp2tAKu7pYJC9yFrBz0BFOz4gVGq32nG
-	 Tmo3s3kZDiJjQ==
+	b=VbD6Bv305Y4la8zS9iCAi4OHll2n/+bffS7ipCB3ko2hylDD7H1JVAzc95xgtL++K
+	 XdyAvstNx+cE+nz4CMH1vPMIgQuiBKbtyaxbCOiVhHAPVPNH5WFaCgMz6JhL8Gbop7
+	 DNWozuw4qzrFHbhgp33FnnyzNHYB7RKdDaBSk1DacJ5TEoylG5gLY5S+Hs59gm2mPc
+	 sg/1XovNzE0MpY6gqDnVxLZZiA+KGI8nenQ/ZTZYPiZXGp2kByUjpZx4lNx0JTB5py
+	 Wt/4HmxqN+PPhbNqxSXIVGmqeo9PsFuWUFFTyCH2ZzZ5+20FGApYDOYd2R79Mc8Mgf
+	 1dYVim8+9SCIg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3FEBC80CEC;
-	Mon, 12 Oct 2026 02:01:47 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E1F20111
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 02:01:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D60AB40637;
+	Mon, 12 Oct 2026 02:01:49 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 722EA1A6
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 02:01:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D4455606EF
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 02:01:44 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 402A580CEA
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 02:01:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qg1r5JsdR_dQ for <u-boot@lists.u-boot-project.org>;
- Mon, 12 Oct 2026 02:01:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org ACBD4606D7
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::663"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791770503;
- b=Zqf9EXQHOqOAccJeX/8eu0VRvcIwpf7qz9hYUfxQ94VEw9X6dq988pVW6yN6XnwlDBb/
- cnVAKxhXD5axbEmz5Um9NNvTBwdYNbFqvht21q9jOTL+QeU/onPYmCI8Wc0VAhuc2jej9
- TNwuk5tadvatBo9aBPZZRHAPFVgg3BDjZwWdalFV+CC49CyhHui5CZomFwkZxO2tE+aVP
- Vgbh94dywx6iOH2aidvaQwoTekSZ9lUDp9W42EU9VfQnv8gyeh+CHlqSn/Glyf4svZAui
- lTh3HFe6Q6auljn/rnIaYJd6lLEUr24jcaUrUAoQDdJ2xuCjP4PiAp5t9wG69khpCmA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id eD2hIo917oiu for <u-boot@lists.u-boot-project.org>;
+ Mon, 12 Oct 2026 02:01:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 384AD80C41
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::662"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791770505;
+ b=OmsxxO2tImiSqv+IGAGuzivKqoznhD4dv+oSYQzJ6ZwnUrHDwhOHQhJmXwrynx/fsv+B
+ 9p0X6wtNQsTSgRYb/nNA2dbpgiYVqHQz3LFxK3lkyYSwIVQLB/Jr9bh+W25eKrvNbSuGt
+ JCrA83HxW9zoTFWfTJwIDB8FwW6ykdbMADUk+hO6oWmEp2aCxznEGhiGTJUI8DcFdNiPp
+ a1+M20x7kZ6pujKNcOnEyqsc4vJIzKbqRwx77JOH8SXNGta4deAZ/yOYs1DpogfLuje4Z
+ +9xKaOUBq+3dlowKyVgHB6v1T27opIHCsI1fbOxP9/V+ql9G8N10oxTSeIqDmCHbSEg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791770503;
+ c=relaxed/relaxed; t=1791770505;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:X-Relaying-Domain:From:
  To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding;
- bh=2PGBszCttwoIYArmBc/gFBX/rzGMzZH1VAHtiYJaEDc=;
- b=f6PgvMO0p0HchQPczfpxBBLWpeOZZ/kAtLK/R4tdbOYdFeP+8wEafmWTMFdSg8DmY+I3
- Z8of4WgO/9ev+EIUioHbHtuvzaMwIAk9kEYKAOfQeDb/YRtE+pfJocByZ8fGKhHgK7A+0
- Ot+EyEbUmoYjUA2PZQxyHR61sPnsa94se4r3k/R01YdWnBGecqdU5nrCDneNnTfzAsmE9
- NozyXcMMUNyZZ9BoSLox1mLVw9qcBHaZkA8Qsx1GxI+ypHZiZEHSOBlmWqB2fBdI/+d7g
- voVgjWCaAHXvg5Gl5/5d22u+fQT9wylTEPZCuEsB7JODAOffxzh5EhiCUfd2qFvLaLQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=lviH6JJfYVz298L3jUcHvKFOdksCjpP+18YSfvkXl9c=;
+ b=OgPrA83xNYGha2VhumEHqOli+Y+UVFy2iDwkPoTbXoJc4+l681e87Lytya1sNvp7CFG1
+ nEv1HFsMC+L/QF9Y53Aa07SiCqkDcvRY/hSF4dJ32xrp2XReR8/654eNEOtXWqQJI1dWV
+ ETe0coZRMAg0X2lJtnqxQVF/Dg0Y3554YR0foL9Wv/bGCLCnRHKwT6QbMuN5/LNxZH5fd
+ gwCn3jcGQAd0zUVZtY87WlzL+CrMOhmEEAPbp8pklBuUSbD/TdYeEiekoqGAAHhWb27ho
+ ApKgtRPc+Wdw95v1ceq600FvWoCWoSwGUqWAZah7zHfrvTDkduvSsK/eYs9tc4JP59w==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=ausil.us;
  dkim=pass header.d=ausil.us header.i=@ausil.us header.a=rsa-sha256
- header.s=google header.b=V8cwoPKb; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::663"
+ header.s=google header.b="hzyA/ZSi"; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::662"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::663; helo=mail-pl1-x663.google.com;
+ client-ip=2607:f8b0:4864:20::662; helo=mail-pl1-x662.google.com;
  envelope-from=dennis@ausil.us; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=ausil.us
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=ausil.us header.i=@ausil.us
- header.a=rsa-sha256 header.s=google header.b=V8cwoPKb
-Received: from mail-pl1-x663.google.com (mail-pl1-x663.google.com
- [IPv6:2607:f8b0:4864:20::663])
- by smtp3.osuosl.org (Postfix) with ESMTPS id ACBD4606D7
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 02:01:43 +0000 (UTC)
-Received: by mail-pl1-x663.google.com with SMTP id
- d9443c01a7336-2db80fcdf8bso7447345ad.2
- for <u-boot@lists.u-boot-project.org>; Sun, 11 Oct 2026 19:01:43 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=hzyA/ZSi
+Received: from mail-pl1-x662.google.com (mail-pl1-x662.google.com
+ [IPv6:2607:f8b0:4864:20::662])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 384AD80C41
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 02:01:44 +0000 (UTC)
+Received: by mail-pl1-x662.google.com with SMTP id
+ d9443c01a7336-2e623eda81cso7870285ad.0
+ for <u-boot@lists.u-boot-project.org>; Sun, 11 Oct 2026 19:01:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ausil.us; s=google; t=1791770503; x=1792375303; darn=lists.u-boot-project.org;
+ d=ausil.us; s=google; t=1791770504; x=1792375304; darn=lists.u-boot-project.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=2PGBszCttwoIYArmBc/gFBX/rzGMzZH1VAHtiYJaEDc=;
- b=V8cwoPKbEJf/c/cf+0eSQxnY0dy38WFfb4ucdWz6DHO34f0Bx2p6nGSH9EAgl3V3PU
- DwQXkNEcJIl3nqNHGcQBHqudRMsTEJ9yvEhTswLE2QOKje/Rrluk+KGPw4xzzGCO9cJw
- KIZrzJYeyj5ng2OraGrpdbDl1AVKM50OPTSGUlToAdYU9J6dbVaund+6dlPmmv8Fi9f+
- qEjMY8KfTw4t2pbK2l0chuUiAcSmoTgjxUi08ZlZPHerwb27g1VALFceBQyd25Mur3ot
- oW63hgbCjdqUHaS/I+aUt2hM8yjiR+e8lgv4h1VZpaf2uBU/HwFmxa6Cue78j5ewQA0l
- 941A==
+ bh=lviH6JJfYVz298L3jUcHvKFOdksCjpP+18YSfvkXl9c=;
+ b=hzyA/ZSieGV7rBgeyJMU/jiRQF7sMuS69NVrRqusRRAi5PftJg/SgnDYzJyX/0Vi7/
+ ItfVGcMpIKEsEKm5x0/5Q74YWwcjuwLrE6PQkuaKHEdfFLCvWI9aUO3N7Xcm4cFrtBmw
+ qZqLxwCqqoDich1JvXUiYnZmIDK6AQ+1dbFzqIH9Ro4xnbjnwSDBXw2upS0W6Ziba7hf
+ hDwqiSRUGPehxllP/EWlu33ZCIQq65jt4iXs5KOSR7wK2vZ1L4y91XwTMTntZlzXxr1j
+ Kgxtn20O6zNfz4VhLaIcK1VN57niWUrBsLdSLmA6ayy0VSry4fJNlFWqxzrdEWsrhIxG
+ hZIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791770503; x=1792375303;
+ d=1e100.net; s=20260707; t=1791770504; x=1792375304;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=2PGBszCttwoIYArmBc/gFBX/rzGMzZH1VAHtiYJaEDc=;
- b=ARWI5kRvfOcaG5NTpTxEaBnjguiTwcMFs/WSnWifGWZyZCKato4Xe3BfoI/agFnAfK
- zSzqeKtG46l8CHRVMAS2PasXGngcQKGQs30Scfw9K8n5KxDbb17J7p0V0KlQnsJTHMwd
- d18BdaDZoqq0U5xfA5KoznqJiaJt0ZQco6ZANac884ISuNeY864JdUQR5hMMUKqwK8wP
- DlG+sYFrleNsW68qTx1UHrNM0h+1G7r6gkpoEtz1UjQYuMSZ+eqZEW+NF1faKUqUiPN3
- RzEJZWJdK72Oi5JZpLbfbzsFiYlX/F01SBGjlH4fI12bGnlSW4EULrThpDgkfD/fW6G9
- iHTw==
-X-Gm-Message-State: AFq9FYL/dYVVydiGzuc2guf/LwdyetX0DyZVtML04Dwy0qjs0C38UlQz
- wIjncejEN0k/p3xCvwU7VuGhF+Scw5Dt+sVV9ipt0s9hLc1nPBgLJYpuME/k28mBhThTy8Hm+/c
- 1imYI8LGcgahULuN1NG1pTxQH2hRvQ82EoZ46s3CG0nd/
-X-Gm-Gg: AYBFou1SHrff8WrKpuYu6TkNDKe2/GbwWlLD5n316yXudTtxvPoW7RbqFgPbjJxo5DI
- NFfAsFKxDvJWgpB2gSOdVr7yy3Qm5OJj1Kr2Om8Zn9kVWoxyLoruQcQnd78hlMF46SJTDLuNwm8
- 1LisspM+NcTk3CFIn1DKfUg8TzSkvM7KtitweU7lRS0t29xntD9xVglED04LyJjz4wIciqWc1sU
- /vXdMmjsK/A6zgeMHJDkE69KWwLX0KxK2MiZ7yt78q/SYMDbZahCkUXMkDfCE1105LVLNUhiYR/
- 87NiYsp1OJ1hB91+zrrVxo64iFSajgBoms/R3l6ga5wKTzI+yvUlkzDB1GSbSMFomG3pMEdUi09
- dugEMA0g7iV3+NRkvxLqUnVwd
-X-Received: by 2002:a17:903:1c7:b0:2e2:c491:ec80 with SMTP id
- d9443c01a7336-2e8428a1d67mr56902505ad.22.1791770502892; 
- Sun, 11 Oct 2026 19:01:42 -0700 (PDT)
+ bh=lviH6JJfYVz298L3jUcHvKFOdksCjpP+18YSfvkXl9c=;
+ b=PTGrIkK1yUOzGtjz1EasApXSgbSCH8EWQacek4+ejnSqIU54XS+ZEpIZUEVbOb0snK
+ iVIQWTjQwauf9LZc1OQKWGUaMXVTJbpbEvvXvNnA1/3o9w7lGywrTEQqwwelxcvqHIwL
+ gNLKd+qiTF+Fl0SRNIgV5n3XnQY357qfe+rM2s6IaS8x+qc+2a9RAzYnkp2in9Excj9p
+ zqn4votVhCpzlCdX6WZ6XmNTYnDqtBbq9zTLTwkZdwQ1DpW+PgHtHz+mGhSHSK7z0XHr
+ KDH/vh+hkK3MgvjxXgukD4SqvYZXfVYeVU1filDdTMg9vOBYQNO3K1KIvB9jy7zk9p1a
+ ZLOg==
+X-Gm-Message-State: AFq9FYLHy9ZumYPRQ/0PlFQBl65Ss/TlFpUDeOUUw+mYGrY2g71yUc/O
+ 5yF/MhyFECQOxf7KbdwBDq2Dh0/7IkLiIMeBrkur5nzJjR8W0tW+kU+qJG6a95WBNBnvOs/cbK0
+ YzIHLYiK+pQNcvy+MTjNAdTBsZCUuY6+DHqcqEWX16FP8
+X-Gm-Gg: AYBFou25TtD7q6c32qnfz3janMH5RWQJZxYS9G6eCDMWGQyOcglx6/U18JFtotY0Zy8
+ jy45sZJjU1fl1Q64Mrj9J6OwmCwbp+upOsFKJSM7OV3C5Eq2uZLo4JWwaT1pQVakJHsQPMoOvUQ
+ vf3AqbcCkKhoFJLRVMyaV3R3FDk9uLOMq/h+6aeGAu4WhNb+bx2Cww13A7ZZp21Ola0dj7TIxI6
+ cIBOKWt9mxBhAjaYSq6+Z32RQ0lDFiRLRWhjXyLUqVQr88SJDuMMq6SrW71Ca9imE8l6Dl+Boik
+ A9/k8DIzQkG/bOhgU0IPlrbFGnoSTKey5iaM/0bkAK/+QXO9x9jC+n99qnrefGgvM5nIYimPAnN
+ 18hcgRXgZaQxM++goMS1TqCqV
+X-Received: by 2002:a17:903:1745:b0:2e6:2843:6e86 with SMTP id
+ d9443c01a7336-2e842ab6a3emr60212275ad.12.1791770504289; 
+ Sun, 11 Oct 2026 19:01:44 -0700 (PDT)
 Received: from tomin.ausil.us (207-179-239-100.mtco.net. [207.179.239.100])
  by smtp-relay.gmail.com with ESMTPS id
- d9443c01a7336-2e84131a272sm3254325ad.0.2026.10.11.19.01.41
+ d9443c01a7336-2e84131a272sm3254325ad.0.2026.10.11.19.01.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Oct 2026 19:01:42 -0700 (PDT)
+ Sun, 11 Oct 2026 19:01:44 -0700 (PDT)
 X-Relaying-Domain: ausil.us
 From: Dennis Gilmore <dennis@ausil.us>
 To: u-boot@lists.u-boot-project.org
@@ -157,9 +157,9 @@ Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
  Jonas Karlman <jonas@kwiboo.se>, Alexey Charkov <alchark@gmail.com>,
  Dennis Gilmore <dennis@ausil.us>, Peter Robinson <pbrobinson@gmail.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 4/5] arm64: dts: rockchip: Add Orange Pi 5 Pro board support
-Date: Sun, 11 Oct 2026 21:01:33 -0500
-Message-ID: <20261012020134.621305-5-dennis@ausil.us>
+Subject: [PATCH v2 5/5] board: rockchip: Add Xunlong Orange Pi 5 Pro
+Date: Sun, 11 Oct 2026 21:01:34 -0500
+Message-ID: <20261012020134.621305-6-dennis@ausil.us>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261012020134.621305-1-dennis@ausil.us>
 References: <20261012020134.621305-1-dennis@ausil.us>
@@ -178,406 +178,195 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add device tree for the Xunlong Orange Pi 5 Pro (RK3588S).
+The Xunlong Orange Pi 5 Pro is a single-board computer based on the
+Rockchip RK3588S SoC. The board provides many interfaces, including
+two HDMI output ports, a PCIe-attached Motorcomm YT6801 1GbE port,
+an M.2 M-Key slot, one USB 3.0 and four USB 2.0 ports.
 
-- eMMC module, you can optionally solder a SPI NOR in place and turn
- off the eMMC
-- PCIe-attached NIC (pcie2x1l2)
-- PCIe NVMe slot (pcie2x1l1)
-- AP6256 WiFi (BCM43456) via SDIO with mmc-pwrseq
-- BCM4345C5 Bluetooth
-- es8388 audio
-- USB 2.0 and USB 3.0
-- HDMI output is enabled
-- the second HDMI port connected to the DP bridge is left out for a
-  followup set
+Features tested on an Orange Pi 5 Pro 16GB:
+- SD-card boot
+- eMMC boot
+- PCIe/NVMe
 
-Vendors schematics are available at:
-https://drive.google.com/file/d/1qs1DratHuh7C6J6MEtQIwUsiSrg8qgTi/view
+The devicetree is taken from Linux v7.3 via the preceding dts/upstream
+picks.
 
+The upstream devicetree muxes the PERST# pin of pcie2x1l1 and
+pcie2x1l2 to the controller's dedicated function while also using it
+as reset-gpios. Linux switches the pin to GPIO when it is requested,
+U-Boot does not, and probing pcie2x1l2 then hangs. Override the
+pinctrl in the -u-boot.dtsi to use GPIO function for the reset pins,
+like rk3568-rock-3a-u-boot.dtsi does, until the Linux devicetree is
+fixed.
+
+Link: https://lore.kernel.org/linux-rockchip/20261002025746.3284691-1-dennis@ausil.us/
 Signed-off-by: Dennis Gilmore <dennis@ausil.us>
-Reviewed-by: Alexey Charkov <alchark@gmail.com>
-Link: https://patch.msgid.link/20260511025352.106126-5-dennis@ausil.us
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-
-[ upstream commit: f47af8ebbe5381e761a8019f29f3016ea9faee5b ]
-
-(cherry picked from commit e533117c341594763d507ad8182d127845e038fa)
-Signed-off-by: Dennis Gilmore <dennis@ausil.us>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 
 Changes in v2:
-- Add Reviewed-by from Quentin
+- Add Link to the Linux devicetree PERST# fix (Quentin)
+- Move MAINTAINERS entry into alphabetical order (Quentin)
+- Add Jonas as reviewer in MAINTAINERS (Jonas)
+- Drop USE_PREBOOT/PREBOOT (Quentin, Jonas)
+- Drop DISPLAY_BOARDINFO_LATE, Model and SoC were printed twice (Jonas)
+- Drop OF_SPL_REMOVE_PROPS, use the default (Quentin)
+- Drop VIDEO, DISPLAY, VIDEO_ROCKCHIP and DISPLAY_ROCKCHIP_HDMI, not
+  supported on RK3588 (Quentin, Jonas)
+- Enable LED and LED_PWM for the PWM LEDs, CMD_LED is enabled by
+  default (Quentin)
+- Drop EFI_SECURE_BOOT and CMD_NVEDIT_EFI
+- Add Reviewed-by from Jonas
 
- .../arm64/rockchip/rk3588s-orangepi-5-pro.dts | 358 ++++++++++++++++++
- 1 file changed, 358 insertions(+)
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3588s-orangepi-5-pro.dts
+ .../dts/rk3588s-orangepi-5-pro-u-boot.dtsi    | 25 +++++++
+ board/rockchip/evb_rk3588/MAINTAINERS         |  7 ++
+ configs/orangepi-5-pro-rk3588s_defconfig      | 74 +++++++++++++++++++
+ doc/board/rockchip/rockchip.rst               |  1 +
+ 4 files changed, 107 insertions(+)
+ create mode 100644 arch/arm/dts/rk3588s-orangepi-5-pro-u-boot.dtsi
+ create mode 100644 configs/orangepi-5-pro-rk3588s_defconfig
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3588s-orangepi-5-pro.dts b/dts/upstream/src/arm64/rockchip/rk3588s-orangepi-5-pro.dts
+diff --git a/arch/arm/dts/rk3588s-orangepi-5-pro-u-boot.dtsi b/arch/arm/dts/rk3588s-orangepi-5-pro-u-boot.dtsi
 new file mode 100644
-index 00000000000..c9679bac1db
+index 00000000000..142db4a0fcf
 --- /dev/null
-+++ b/dts/upstream/src/arm64/rockchip/rk3588s-orangepi-5-pro.dts
-@@ -0,0 +1,358 @@
++++ b/arch/arm/dts/rk3588s-orangepi-5-pro-u-boot.dtsi
+@@ -0,0 +1,25 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +
-+/dts-v1/;
++#include "rk3588s-u-boot.dtsi"
 +
-+#include "rk3588s-orangepi-5.dtsi"
-+
-+/ {
-+	model = "Xunlong Orange Pi 5 Pro";
-+	compatible = "xunlong,orangepi-5-pro", "rockchip,rk3588s";
-+
-+	aliases {
-+		mmc0 = &sdhci;
-+		mmc1 = &sdmmc;
-+		mmc2 = &sdio;
-+	};
-+
-+	analog-sound {
-+		compatible = "simple-audio-card";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&hp_detect>;
-+		simple-audio-card,format = "i2s";
-+		simple-audio-card,hp-det-gpios = <&gpio1 RK_PD5 GPIO_ACTIVE_HIGH>;
-+		simple-audio-card,mclk-fs = <256>;
-+		simple-audio-card,name = "rockchip,es8388";
-+		simple-audio-card,routing =
-+			"Headphones", "LOUT1",
-+			"Headphones", "ROUT1",
-+			"LINPUT1", "Microphone Jack",
-+			"RINPUT1", "Microphone Jack",
-+			"LINPUT2", "Onboard Microphone",
-+			"RINPUT2", "Onboard Microphone";
-+		simple-audio-card,widgets =
-+			"Microphone", "Microphone Jack",
-+			"Microphone", "Onboard Microphone",
-+			"Headphone", "Headphones";
-+
-+		simple-audio-card,cpu {
-+			sound-dai = <&i2s2_2ch>;
-+		};
-+
-+		simple-audio-card,codec {
-+			sound-dai = <&es8388>;
-+			system-clock-frequency = <12288000>;
-+		};
-+	};
-+
-+	pwm-leds {
-+		compatible = "pwm-leds";
-+
-+		led-0 {
-+			color = <LED_COLOR_ID_BLUE>;
-+			function = LED_FUNCTION_STATUS;
-+			linux,default-trigger = "heartbeat";
-+			max-brightness = <255>;
-+			pwms = <&pwm15 0 1000000 0>;
-+		};
-+
-+		led-1 {
-+			color = <LED_COLOR_ID_GREEN>;
-+			function = LED_FUNCTION_ACTIVITY;
-+			linux,default-trigger = "heartbeat";
-+			max-brightness = <255>;
-+			pwms = <&pwm3 0 1000000 0>;
-+		};
-+	};
-+
-+	fan: pwm-fan {
-+		compatible = "pwm-fan";
-+		#cooling-cells = <2>;
-+		cooling-levels = <0 50 100 150 200 255>;
-+		fan-supply = <&vcc5v0_sys>;
-+		pwms = <&pwm2 0 20000000 0>;
-+	};
-+
-+	vcc3v3_eth: regulator-vcc3v3-eth {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpios = <&gpio3 RK_PB7 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&ethernet_en>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-name = "vcc3v3_eth";
-+		startup-delay-us = <50000>;
-+		vin-supply = <&vcc_3v3_s3>;
-+	};
-+
-+	vcc5v0_otg: regulator-vcc5v0-otg {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpios = <&gpio0 RK_PC4 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&vcc5v0_otg_en>;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-name = "vcc5v0_otg";
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	sdio_pwrseq: sdio-pwrseq {
-+		compatible = "mmc-pwrseq-simple";
-+		clocks = <&hym8563>;
-+		clock-names = "ext_clock";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&wifi_enable_h>;
-+		post-power-on-delay-ms = <200>;
-+		reset-gpios = <&gpio0 RK_PD0 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	typea_con: usb-a-connector {
-+		compatible = "usb-a-connector";
-+		data-role = "host";
-+		label = "USB3 Type-A";
-+		power-role = "source";
-+		vbus-supply = <&vcc5v0_otg>;
-+	};
-+};
-+
-+&i2c1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&i2c1m4_xfer>;
-+	status = "okay";
-+};
-+
-+&i2c3 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&i2c3m0_xfer>;
-+	status = "okay";
-+
-+	es8388: audio-codec@11 {
-+		compatible = "everest,es8388", "everest,es8328";
-+		reg = <0x11>;
-+		#sound-dai-cells = <0>;
-+		AVDD-supply = <&vcca_3v3_s0>;
-+		DVDD-supply = <&vcca_1v8_s0>;
-+		HPVDD-supply = <&vcca_3v3_s0>;
-+		PVDD-supply = <&vcca_1v8_s0>;
-+		assigned-clock-rates = <12288000>;
-+		assigned-clocks = <&cru I2S2_2CH_MCLKOUT>;
-+		clocks = <&cru I2S2_2CH_MCLKOUT>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&i2s2m1_mclk>;
-+	};
-+};
-+
-+&i2c4 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&i2c4m3_xfer>;
-+	status = "okay";
-+};
-+
-+&i2s2_2ch {
-+	pinctrl-0 = <&i2s2m1_lrck &i2s2m1_sclk
-+		     &i2s2m1_sdi &i2s2m1_sdo>;
-+	status = "okay";
-+};
-+
-+&package_thermal {
-+	polling-delay = <1000>;
-+
-+	cooling-maps {
-+		map0 {
-+			trip = <&package_fan0>;
-+			cooling-device = <&fan THERMAL_NO_LIMIT 1>;
-+		};
-+
-+		map1 {
-+			trip = <&package_fan1>;
-+			cooling-device = <&fan 2 THERMAL_NO_LIMIT>;
-+		};
-+	};
-+
-+	trips {
-+		package_fan0: package-fan0 {
-+			hysteresis = <2000>;
-+			temperature = <55000>;
-+			type = "active";
-+		};
-+
-+		package_fan1: package-fan1 {
-+			hysteresis = <2000>;
-+			temperature = <65000>;
-+			type = "active";
-+		};
-+	};
-+};
-+
-+/* NVMe */
 +&pcie2x1l1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie30x1m1_1_perstn>, <&pcie30x1m1_1_clkreqn>,
++	pinctrl-0 = <&pcie2x1l1_reset_h>, <&pcie30x1m1_1_clkreqn>,
 +		    <&pcie30x1m1_1_waken>;
-+	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
-+	supports-clkreq;
-+	vpcie3v3-supply = <&vcc_3v3_s3>;
-+	status = "okay";
 +};
 +
-+/* NIC */
 +&pcie2x1l2 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie20x1m0_perstn>, <&pcie20x1m0_clkreqn>,
++	pinctrl-0 = <&pcie2x1l2_reset_h>, <&pcie20x1m0_clkreqn>,
 +		    <&pcie20x1m0_waken>;
-+	reset-gpios = <&gpio3 RK_PD1 GPIO_ACTIVE_HIGH>;
-+	vpcie3v3-supply = <&vcc3v3_eth>;
-+	status = "okay";
 +};
 +
 +&pinctrl {
-+	bluetooth {
-+		bt_wake_gpio: bt-wake-pin {
-+			rockchip,pins = <0 RK_PC6 RK_FUNC_GPIO &pcfg_pull_down>;
++	pcie {
++		pcie2x1l1_reset_h: pcie2x1l1-reset-h {
++			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
 +		};
 +
-+		bt_wake_host_irq: bt-wake-host-irq {
-+			rockchip,pins = <0 RK_PC5 RK_FUNC_GPIO &pcfg_pull_down>;
-+		};
-+	};
-+
-+	ethernet {
-+		ethernet_en: ethernet-en {
-+			rockchip,pins = <3 RK_PB7 RK_FUNC_GPIO &pcfg_pull_down>;
-+		};
-+	};
-+
-+	usb {
-+		vcc5v0_otg_en: vcc5v0-otg-en {
-+			rockchip,pins = <0 RK_PC4 RK_FUNC_GPIO &pcfg_pull_down>;
-+		};
-+	};
-+
-+	wlan {
-+		wifi_enable_h: wifi-enable-h {
-+			rockchip,pins = <0 RK_PD0 RK_FUNC_GPIO &pcfg_pull_down>;
-+		};
-+
-+		wifi_host_wake_irq: wifi-host-wake-irq {
-+			rockchip,pins = <0 RK_PA0 RK_FUNC_GPIO &pcfg_pull_down>;
++		pcie2x1l2_reset_h: pcie2x1l2-reset-h {
++			rockchip,pins = <3 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
 +		};
 +	};
 +};
+diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
+index b64dd4947ee..8dde58bd3ef 100644
+--- a/board/rockchip/evb_rk3588/MAINTAINERS
++++ b/board/rockchip/evb_rk3588/MAINTAINERS
+@@ -47,6 +47,13 @@ S:	Maintained
+ F:	configs/orangepi-5-plus-rk3588_defconfig
+ F:	arch/arm/dts/rk3588-orangepi-5-plus*
+ 
++ORANGEPI-5-PRO-RK3588S
++M:	Dennis Gilmore <dennis@ausil.us>
++R:	Jonas Karlman <jonas@kwiboo.se>
++S:	Maintained
++F:	configs/orangepi-5-pro-rk3588s_defconfig
++F:	arch/arm/dts/rk3588s-orangepi-5-pro-u-boot.dtsi
 +
-+&pwm15 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pwm15m2_pins>;
-+	status = "okay";
-+};
-+
-+&pwm2 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pwm2m1_pins>;
-+	status = "okay";
-+};
-+
-+&pwm3 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pwm3m2_pins>;
-+	status = "okay";
-+};
-+
-+&rk806 {
-+	regulators {
-+		vcca_1v8_s0: pldo-reg1 {
-+			regulator-name = "vcca_1v8_s0";
-+			regulator-always-on;
-+			regulator-boot-on;
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+
-+			regulator-state-mem {
-+				regulator-off-in-suspend;
-+				regulator-suspend-microvolt = <1800000>;
-+			};
-+		};
-+
-+		vcc_1v8_s0: pldo-reg2 {
-+			regulator-name = "vcc_1v8_s0";
-+			regulator-always-on;
-+			regulator-boot-on;
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+
-+			regulator-state-mem {
-+				regulator-off-in-suspend;
-+			};
-+		};
-+	};
-+};
-+
-+&sdhci {
-+	status = "okay";
-+};
-+
-+&sdio {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	bus-width = <4>;
-+	cap-sd-highspeed;
-+	cap-sdio-irq;
-+	keep-power-in-suspend;
-+	max-frequency = <150000000>;
-+	mmc-pwrseq = <&sdio_pwrseq>;
-+	no-mmc;
-+	no-sd;
-+	non-removable;
-+	sd-uhs-sdr104;
-+	status = "okay";
-+
-+	ap6256: wifi@1 {
-+		compatible = "brcm,bcm43456-fmac", "brcm,bcm4329-fmac";
-+		reg = <1>;
-+		interrupt-names = "host-wake";
-+		interrupt-parent = <&gpio0>;
-+		interrupts = <RK_PA0 IRQ_TYPE_LEVEL_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&wifi_host_wake_irq>;
-+	};
-+};
-+
-+&uart9 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart9m2_xfer &uart9m2_ctsn &uart9m2_rtsn>;
-+	uart-has-rtscts;
-+	status = "okay";
-+
-+	bluetooth {
-+		compatible = "brcm,bcm4345c5";
-+		clocks = <&hym8563>;
-+		clock-names = "lpo";
-+		device-wakeup-gpios = <&gpio0 RK_PC6 GPIO_ACTIVE_HIGH>;
-+		interrupt-names = "host-wakeup";
-+		interrupt-parent = <&gpio0>;
-+		interrupts = <RK_PC5 IRQ_TYPE_LEVEL_HIGH>;
-+		max-speed = <1500000>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&bt_wake_host_irq &bt_wake_gpio>;
-+		shutdown-gpios = <&gpio0 RK_PD5 GPIO_ACTIVE_HIGH>;
-+		vbat-supply = <&vcc_3v3_s3>;
-+		vddio-supply = <&vcc_1v8_s3>;
-+	};
-+};
-+
-+&u2phy0_otg {
-+	phy-supply = <&vcc5v0_otg>;
-+};
-+
-+&usb_host0_xhci {
-+	dr_mode = "host";
-+};
-+
-+&usbdp_phy0 {
-+	/*
-+	 * The USB3 Type-A host connector is wired to PHY lanes 2/3. Lanes 0/1
-+	 * are connected to the LT8711UXD DP-to-HDMI bridge on the board.
-+	 * dp-lane-mux routes USB3 SuperSpeed to the correct lanes.
-+	 */
-+	rockchip,dp-lane-mux = <0 1>;
-+};
+ ORANGEPI-5-RK3588-ULTRA
+ M:	Niu Zhihong <zhihong@nzhnb.com>
+ S:	Maintained
+diff --git a/configs/orangepi-5-pro-rk3588s_defconfig b/configs/orangepi-5-pro-rk3588s_defconfig
+new file mode 100644
+index 00000000000..b560cb32401
+--- /dev/null
++++ b/configs/orangepi-5-pro-rk3588s_defconfig
+@@ -0,0 +1,74 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-orangepi-5-pro"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_EVB_RK3588=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-orangepi-5-pro.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_MAX_SIZE=0x40000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_EFIDEBUG=y
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_PWM=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index de2df3046e2..dfaceb40f46 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -179,6 +179,7 @@ List of mainline supported Rockchip boards:
+      - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
+      - Xunlong Orange Pi 5 Max (orangepi-5-max-rk3588)
+      - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
++     - Xunlong Orange Pi 5 Pro (orangepi-5-pro-rk3588s)
+      - Xunlong Orange Pi 5 Ultra (orangepi-5-ultra-rk3588)
+      - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
+      - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
 -- 
 2.56.0
 
