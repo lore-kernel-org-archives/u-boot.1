@@ -1,143 +1,229 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 300C6CC6B03
-	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 11:04:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22F03CC6B03
+	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 11:06:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C9F7740478;
-	Tue, 13 Oct 2026 11:04:27 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PeVmMu0zFV5W; Tue, 13 Oct 2026 11:04:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C323A404C1
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791889466;
-	b=C/nSwvBBhumOKKJVae+DWn0Mls7UgyP1Oj+dMrTV7SO1W98KCKvEkIMJL9rDOyeRWBtM
-	 mYzfVXtoWV3UJdgXToWIYe5gcuZ40/ZiMp6FzBBF0RMT00Z2DwpEUALkIczZVOOkC4qrQ
-	 jdme4cuhuTvxpW9UiMKlemBaUvJNNSXIzy4IJDKZg9feGXljCSBDnkeSZE/4ol9G8y095
-	 8639FSqD3WvRGul9l4ysx7DadIHDYwDesuNxOhWsi8H8w5pmLW5bP8TDZzzu0uXJ7o419
-	 yJ4TJo/GpZPMMO107CbHFj/tA8B1y3Yb16KcsVS5dgva2Z/lnDQarYXrqRMGNpTm9qA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791889466;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=jIY+aDGl0MmnU8II9adddAp2CLBAt0rAm8LHrNQlc9g=;
-	b=OAFfJWgcdAy0rtWtx2f4Kuu4kbTSs/o0MF5rW3BcJWAwT6ez5ZLjDguNQkqzafxgi+pU
-	 4IK3vs5GzOTaijXg1FgNkdmYezX8FBzxP3VjbDTc4SZgmTTE8JXt+QwrqJ43djd5/+jni
-	 KfPDZcqir6xFkmccDI+Sj82Y/iaE1YDfNUficA+R46GBqJS3X5mZqbGU9JgPAOL3UlYFI
-	 ZeokWPKv6hpP7id+ozlbTdbOUxAcne4pQGuXEoS6lpF/gJX99DTEpqYjNy8QgARwR56wI
-	 NUsGV0bETuya7MQIa/KfAE8J7vYoZsIkBFJhzvj7pPhJZTy+U2f4X+4BWnCZIWtx4tw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791889466;
-	bh=jIY+aDGl0MmnU8II9adddAp2CLBAt0rAm8LHrNQlc9g=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=mXn0c29+APQ5+RiMkQLQtFSqZI45HNRhKKCEIzWZYNjNy06SsXmcfIwiF5V0L2Y/r
-	 iqGurvi1bL1GRFvng1tUL7/s1evmhZvWQyXXDOSTx/4hP5NcHhnkfHlH6q105qCFT/
-	 6e/srz5t+8vjR6H1qgrMwMysdkx/ZwWSBrmFzo6cO55rlU6nsfyXaoFRAxDCmNY5Iu
-	 9KIDifAVTXqUZIDQHezDzh8+yctr++cPNifX4Udm4uMAg2bH8uQCM5Arx48GkCWsPP
-	 hSlpwX0e+TzIn5YQYw3QQBMA7vQauSIJhsAM1f1axOLlKJSmsrKatXIVBtBwV8Am0X
-	 RSIQq2ghkKgKQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C323A404C1;
-	Tue, 13 Oct 2026 11:04:26 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 5034CDE0
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 11:04:25 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4194380AB5
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 11:04:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7E9AC80B33;
+	Tue, 13 Oct 2026 11:06:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RegP_8BIieKn for <u-boot@lists.u-boot-project.org>;
- Tue, 13 Oct 2026 11:04:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B3A91809CE
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=84.16.66.171
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791889464;
- b=InvhDlI7rhBAObzL8r8KTa2tLBOIjw32tZLAg0EyA+t7NgJ6hcMSfGxhUn8TpRmPSlhK
- i/cCQwDDO15cDGLG1ShbWVmI/0cpeMLvE8DziGcrBBJUWODKTf8OpdFtQxeg0XyEZD5H+
- aUUeztNWhQtz+Me9YMjKq4DnVs+MLAYAvRbQ6z6/Zd2vGoLNj0Yxyx2LuQqAxcYCDb0TU
- +3/K81ficKHy+yoHhkAfKELFQbNJYDR7K9zG7SijwRwjqFCxcq+v3FToIc2SAddolnU3L
- 0E4fzY1UPC1wMYNhTpiai73bTLElChX7J+WekUNdXnF1RrkBrLt5qPR1QkqBZSwTGDw==
+ id Hj1T69wWsNNl; Tue, 13 Oct 2026 11:06:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8B96A809CE
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791889580;
+	b=W25/e3tfvzxo36kLWKOmL1FhrmIBUxiiWlfSTb8hGPm5pdoKmNOrYFor+c1Tjd+LoFIm
+	 Xi3PDPR4ZgDV2H6I2GbuThC/i2p35BXW6+zdF3/CbPT3Lk4Xs0asDxoQ0VJW1f+NfzLXJ
+	 TQm0N+GePCnnv7ezTOedhVP4LOEXkCxVOL2Ot/DVfMUNVH9yWjqloZ4aMw8s2Abw5hpye
+	 2nuwqOUscxjmP68jbeR6TNLkbexjuRk8eO/A25LTpTbQeD/mi0Q/85kGZjF9lE4FDNiV5
+	 HZMwGTtQSv2anDS4qTe19r23MaAOJKXOIkRY7T7ltYRTnOsp0hyhlwylYNcvmDsuNOg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791889580;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
+	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=B7t0UjMoLbe8segCaLsauRQRch88tW83rlsq5/7JODg=;
+	b=evDl2VCcQ21LA/rmRaCfIHkM7IQNt6taGKALXU1MM64A/fpJtPPGXxmBdZQnmkX+221Z
+	 HIuYOOLCuR2rJ/Ahg+ESg88nNK+H4wiiuyZWMkjtpedQJrX00K9j0uZ4OQAcsxgh8qzAF
+	 MLlk5Yob0Goa5tAdPVl7owPxURFMfRMRps6kXehaLfDFuQcJQVb/ElRK8clQVStNFAQ9b
+	 in9+bJ3Dl6Hg5MlXkukEdEv0FsJTcHePwDFXkLraBi8tpbNZwu+RYdqptR6YcaTi1gvBn
+	 JO4PNsiyCsDctVdHr5oW4MxC91xW+ugfJPJa72GDk/hx5EkogPJ7K2EHjCJmWMPDDyg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1791889580;
+	bh=B7t0UjMoLbe8segCaLsauRQRch88tW83rlsq5/7JODg=;
+	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=J0BMOhD+XpTc63M65nOou0ujjsBTC1w4LnI0Whk4q13zeKaB6NqAEU02DcwEAD5fl
+	 2821CDl/ppTPNf1MVUAWYKNvyTlSpXEinKdW5HO/T3HHZbOoL7YKiBTplShw/Qw5to
+	 oyjLCfvmMm2dsXnBW82MtxqZMHhih/WLO100ieP8oQriuqvxRppyhUsam4lFfb7QIC
+	 0cvp4bkJ5QyoBfKXWbYFWWUw4rsFrz0DFg+5+wyjerj5JpRag9NdKwjdBeOi2CqVdd
+	 sFS1DDWlpW25MLSkrTyHPrIw8Y1NZMAQeA88Vfo3JXXU+40YNSP955xoReYBk46Ba9
+	 SPiwUah+26YuQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8B96A809CE;
+	Tue, 13 Oct 2026 11:06:20 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D2629A58
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 11:06:18 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id C3F1640277
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 11:06:18 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LKgCLFgVE__V for <u-boot@lists.u-boot-project.org>;
+ Tue, 13 Oct 2026 11:06:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org C5949400C5
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791889578;
+ b=dsFlnCUvfg82Ctev/92hJf0faglX4eenUrj1LyXxc3rYGtfy+OjvnXVjJ2PpwMNUmd0y
+ JAvzHRYJHv5BPPiJFfWlFpXlWwPeYGVEUDNGSLR8vzmP2ZT/W2Z0yM6ioIROv72SwlRbE
+ ZOtWPMoBy49WBL0qIp3mCHejBFO7MdFswGjJ8Q4+lBayW6sVhRsyBqDFBHUjamI9yD+9d
+ WAYaEu12k/LT0kdVMYkuJmTYJ+rj0jXE5LFLL4ty3/Uctt+oEIeRWsyjFarMDt3yjBQ4+
+ pvJ4bkWUEsHBxAMvRuSvkDyvaY+hJBklozzd/PnW04xHmoLmfrixyjQDRhC67PQ9oDQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791889464;
- h=Received-SPF:Received:DKIM-Signature:Received:Message-ID:Date:
- MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
- From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- X-Infomaniak-Routing;
- bh=jIY+aDGl0MmnU8II9adddAp2CLBAt0rAm8LHrNQlc9g=;
- b=n3Yb8RMDi5pjUAFeSjsbnuh69CAVi7kpmYBhDYUpI2U1REhfeGO2lub/7pSpAL+3qaGv
- uYubomQuhI9AFU6P75+6uc7JtiLCX0khSCEpr0R+0wK07mQmnL7xELWkVZTkBJZQbjQrX
- qNwkafBuDT4+xDtcjZJIqFYNf/fJiITuT5sdOn+UpQxV+TZQWguLc9OQtgGVeoI/XBZp7
- fFTaix3uxpfw+IDROJGf+JBZ7DtFezrnscFzrQudqNMeZdKMQnpHXi+1PyNscf16BrSjt
- p1dHNIk7/ej59UXs10rGG1c0akrF59cnfdBk1f9a9dJGvW4RntlZTn8Vlncc6Q1hLIg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=0leil.net;
- dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=XJyz7zr+; 
- arc=none smtp.remote-ip=84.16.66.171
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=84.16.66.171;
- helo=smtp-42ab.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
+ c=relaxed/relaxed; t=1791889578;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:
+ Subject:Date:Message-Id:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+ X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+ X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=B7t0UjMoLbe8segCaLsauRQRch88tW83rlsq5/7JODg=;
+ b=nJCFd1Hx36oK5jXmg2rl3xe6vCwNWrT3oc6+tqqkxx8/5Xg+1UiHJnxbAaL0jaEdcLmo
+ 3yH8n0AGRXvjCINZQwTnZ+dbpCn/HX5kRBCX8jU15uOPzCoWi+z6CcYIJ8OYyROXCTm3H
+ y+WVsKtB6h/KL1zeogaKkvBUiwImLuoAz+s0FPc8/3PyrC5UqPjdbZAZLQ7iDwzRNPU59
+ 0inr/DNkTLeOGB0W0MrZX2FsxhQdnioSzJ3e05nfiIu+4T1CYZqKeq2DzOasEeo8nlYK5
+ XisKi6ryuvXD1zfRsJ926BfCmT0wS+Uqwu31c1yzjBhbZRpYQfR3Jkd2I/Td310Vb2Q==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=oss.qualcomm.com;
+ dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
+ header.s=qcppdkim1 header.b=jyMZLI4t; 
+ dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=KWEevVE9; 
+ arc=none smtp.remote-ip=205.220.168.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
- header.a=rsa-sha256 header.s=20231125 header.b=XJyz7zr+
-Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
- [84.16.66.171])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B3A91809CE
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 11:04:22 +0000 (UTC)
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4j3s0g3KtDz109D;
- Tue, 13 Oct 2026 13:04:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1791889459;
- bh=jIY+aDGl0MmnU8II9adddAp2CLBAt0rAm8LHrNQlc9g=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=XJyz7zr++R/UKu8ppXoFz6CCx82ximiOMxQy9zSpV8ap5Oj3TH6+N0j3Gc8iOITKP
- kKuTABSTnAxis8AXCiDxIshRLBbqh7vvvezIqLXNfIluDaxvwl/RIvPgELW2AmGaK0
- oOGFMZM+IByaOCDxtP1fOUFiZr0xmxhiQNWavHdrfawLl6HaULnjJhxGEFos6xIBKw
- 9rdBh6SdbgwpsJqX+aXI+yfgfsuPJPnMgjUwIRTcJU+S416qfewM3lvXRYy9qydupy
- NT34/fdXXvqRioxTPyA0n53drTWPNAQiRsFWkxAFxHEWg7Fm/zk6ZwvnwVPBXzb14c
- OtkjZ/zvt1euw==
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4j3s0d6VzFzPmn; Tue, 13 Oct 2026 13:04:17 +0200 (CEST)
-Message-ID: <4ddd7d43-d5ab-45df-8823-1833d26a793c@0leil.net>
-Date: Tue, 13 Oct 2026 13:04:17 +0200
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=jyMZLI4t; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=KWEevVE9
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C5949400C5
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 11:06:17 +0000 (UTC)
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69D7OWrI015194
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 11:06:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=B7t0UjMoLbe8segCaLsauRQRch88tW83rls
+ q5/7JODg=; b=jyMZLI4twCMMlFlS4uy1jpgYjzTLroR48bmjpNdecLLiIf5rNYq
+ HNOFO+nEgZnUCxvSDtzVflkUU16y/rn8c+GrMW/bk4pCsUjD1oWknT70KJKgcQUO
+ Bi0Esh8VG/mAGGEWGPf/u16pgL9qHzpuOQyNLVf1GYobcHRbqa9C9b3P9hEmGLMs
+ 50/f2qVIkcNT2NNos52wVuv8p2zMeH0tN4fhmHk6dZ78bIin7lpBD7fhNHEQjV5r
+ hS+Kv5iOdHDPCnDEo4lO/eNUCIS/LzLH9lmThcf5vn8AkqXrYaH5ffRYPhLD6AJ3
+ CUKAVnZe45ZzAeaUumeaxN+GhSOIktQartQ==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
+ [74.125.82.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9g7ugx0a-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 11:06:16 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id
+ 5a478bee46e88-357e2bc3b1bso4934894eec.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 04:06:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1791889576; x=1792494376;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=B7t0UjMoLbe8segCaLsauRQRch88tW83rlsq5/7JODg=;
+ b=KWEevVE9XsBXkQ9WKp3OFBkhJIRAqS6irVzTxNbz744eqElIRGG0UooMsJvW3n0rlF
+ LS3LWn8/4N4MpXmIiH46/6JrkUw91zTiRtqda/UqufA0CcOyqJsDVGqdq68ApFmqvV59
+ eFPKU+7YHPnsdr3fLDdtbro2VTL3ZVBkkJGB83xlLbFYyCWku9/29v8XjR0IwcoXey/N
+ 90OmYKhE3qk3oZxd1F5tACZp+FS7jvkIjGt//dEEhNnAHXlLSmxyGnL1TTPbAooWjUzg
+ zs32Mxf3KwVDV6CUr996RuSd5M6mJJSXEFxUx6aOJq+cIp7/LkHzSEIi5vTotEA81mXY
+ iskg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791889576; x=1792494376;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=B7t0UjMoLbe8segCaLsauRQRch88tW83rlsq5/7JODg=;
+ b=vdH+nXeOtXBsLBtOuKw1iCaO2OfKXRf5KwjNPIwtAR+pHUPYp9FUWHi59b5o60q427
+ VBFaUXhPgPsfMjPH7pDvy7vPgrLf4kIDLI75tklp7cb8WRDDVngscCG94p0oqmcAllNg
+ 4ozz0e6mqRpvhxSsXhogWYqN7+8CrPkJrM9h7ccTZLgk6dKhxVCqC/biK5QOp8JEuv/b
+ jq0GcdkQtgM7MZol3QtuGzlcqdTt8mcrVie97pGivQL1YYfiYmMu4qFPgUQnHLJ1PRiB
+ tyZYdxTb/8pFQh24cqVZPbjjaOS1UGWNK8m1yDlLAhjhWPkyizhQH1/6sBXjqF2/TyGC
+ URdg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzBWfyUAgUkZVF7JqUTbfXgzmV73efMcY69AeGukKLfKuCfg+xJ0QP/A+lNzfFxgd5nNXoKFew=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYKEaZH/7K1XBVuGWqhMp6pCadtqkVsNmpy/U/O+EbTWshbt7FQr
+ FxbgCcrIxM8emk2QQwAQgk0W5EOD+okSzoalwcrCNPaMcQ1fgN2yOUi6jR/9Q7soxelwxl3cCpy
+ hivyCV9kmNmmzGAt7CrUkI1D9eb6AdD1SM4pr9Iepsa1UBA1yVMmy29BdygW1/TA0jW05qRc=
+X-Gm-Gg: AYBFou2m5N3Dimbxi/9JGqYYSaIKsNEt2X0XypsaTSEm9fHxESouu6+SgkXide3otkG
+ FLrTQ0McbuTBdX1s06X075r1Arh0YfDk9fNPpedoSQ3RLHJocfuw4rhcVJyV9nkqj0T04cFLv7X
+ yiALs3hONJxKj+zLpoTVhKpiwpIpzHM7duZA455wyzfCLux/TJuXSyf7P1Yc8XB2RofPU1wPby3
+ h0Iee1ygTxCmTDBGgfWXe9WY18ctPe/4QJfJocnyzJteW5aUGaY30CLNn7rLNvaALUrqAuceca1
+ HTmKFFLhbhODyyITE0m5PUBFAKKasJRFbETwpISv8oRgRjoEEpyjt7owFoC5+YKUZnmTRgDod45
+ 6I+dYRA/hMdh6Ovbt6v+32Tbi6tq3qW+jsZ6MMzGiF9Nl4FqAgqAiUv998ycDCGm7iQZgMV0bjo
+ xig+PE9qAMv4KiD+JL4g==
+X-Received: by 2002:a05:701b:42c2:10b0:168:6ad8:e88c with SMTP id
+ a92af1059eb24-16a63757d80mr19998843c88.39.1791889575701; 
+ Tue, 13 Oct 2026 04:06:15 -0700 (PDT)
+X-Received: by 2002:a05:701b:42c2:10b0:168:6ad8:e88c with SMTP id
+ a92af1059eb24-16a63757d80mr19998800c88.39.1791889575036; 
+ Tue, 13 Oct 2026 04:06:15 -0700 (PDT)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-1699718c547sm37460642c88.3.2026.10.13.04.06.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Oct 2026 04:06:14 -0700 (PDT)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: trini@konsulko.com, ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org,
+ quic_varada@quicinc.com, Michael.Srba@seznam.cz,
+ aswin.murugan@oss.qualcomm.com, balaji.selvanathan@oss.qualcomm.com,
+ u-boot-qcom@groups.io, u-boot@lists.u-boot-project.org
+Subject: [PATCH v5 0/3] mach-snapdragon: Add early EL2 hypervisor switch
+ support
+Date: Tue, 13 Oct 2026 16:35:22 +0530
+Message-Id: <20261013110525.2465737-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/9] ram: rockchip: rk3568: Simplify get_info() ops
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, u-boot@lists.u-boot-project.org
-References: <20260804105721.2402406-1-jonas@kwiboo.se>
- <20260804105721.2402406-2-jonas@kwiboo.se>
- <f2a4bf52-8532-4f57-9354-1d2a3e33d875@0leil.net>
- <973f0112-e7f7-4cfa-bc01-2e0328592fad@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <973f0112-e7f7-4cfa-bc01-2e0328592fad@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA0NCBTYWx0ZWRfX2FGgzX2rIUy1
+ NuVduc/LJex62Rw1Uz2Q2YIls20GQJSWlS6DwApA+FP7f2IT6xgRn5BWh8/7YoGvQYxJVcNZIEx
+ CuxSTrs8pxrV2KZr55sni80FmyiTKkxIsUw/n0bcT8Qu/WrJZK3VGN2bmaeJWjqYKFJ8v6KsUgm
+ 6buHi50YCfQnw+y+KxnI8unOAnwhY+kQr2uP9WI5DFCchS3VimEC1jJqE77o7wkumvuE9axT7kT
+ aGAdwbVJk6TDQxf1g0WaE5Fe9PwF0o7DRxwcXTVkWlFB5/vzSJoPSIzhZeXD3Lm+HugcrjkvXKA
+ kEmPlUJcXQV77Fj+kO5qvUI9dxql32MKgwUiUFwf01vvDIdQqMGVeHQ9W6riF8CZ2xiDFK+opV4
+ HaommpimnRPXJvq9kfVNAflaQcQm/uGsnViqTA7m6gL99NlowCFeIoQyUAv67nVWDunYDrJ+kO8
+ ADSF2pBAb3twgJamfJw==
+X-Authority-Analysis: v=2.4 cv=Z495j3RA c=1 sm=1 tr=0 ts=6ace10a8 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=8S4Ko0p2hYbYe84NMw8A:9 a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-ORIG-GUID: Wjiwl1mU4y3YnpqwcznDoDmN_CQ5oom3
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA0NCBTYWx0ZWRfX7kKeZDV+9Au5
+ NGyiukHKyVGUX9pJ63RDOSrm9C9dTkzZ3SdRksv41GSpG82awOyGdNj5WKWzM3AKHl8DpHP5Eir
+ zDf05NWjxdKwXtSNXHGJU3UX+WmhzyA=
+X-Proofpoint-GUID: Wjiwl1mU4y3YnpqwcznDoDmN_CQ5oom3
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 clxscore=1015
+ malwarescore=0 priorityscore=1501 phishscore=0 suspectscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130044
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,146 +237,49 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Jonas,
+This series adds support for exiting Gunyah hypervisor and switching to
+EL2 during early boot on Qualcomm Dragonwing family platforms. This
+enables U-Boot to run at EL2, which is required for supporting
+hypervisors that need EL2 privilege level.
 
-On 10/9/26 5:47 PM, Jonas Karlman wrote:
-> Hi Quentin,
-> 
-> On 10/9/2026 12:29 AM, Quentin Schulz wrote:
->> Hi Jonas,
->>
->> On 8/4/26 12:57 PM, Jonas Karlman wrote:
-[...]
->> 1) I would really like to avoid hardcoding stuff. Did you try using
->> syscon_regmap_lookup_by_phandle(dev, "rockchip,grf"); after adding a
->> rockchip,grf = <&pmugrf>; property to the dmc node? (maybe it'd make
->> sense to name the property rockchip,pmugrf but that's a detail). I also
->> see benefit in being consistent across all drivers using the GRF when DM
->> is enabled. One issue I could foresee is that this typically will be
->> part of the TPL once we have an open DRAM init, and then we don't have
->> DM in TPL so we won't be able to read the device tree to get GRF via
->> that property. Is this your current worry?
-> 
-> I agree that we should avoid hardcoding stuff in general, with the CRU,
-> RAM and arch_cpu_init()+board_debug_uart_init() in xPL as exceptions.
-> 
-> Those are that core parts that typically may be needed in xPL, where
-> size and speed is important and/or DM or OF_PLATDATA may or may not be
-> involved.
-> 
-> Resolving values from DT has been proven to be very very slow in xPL
-> and pre-relocation phases, primarily due to slow API for navigating
-> nodes.
-> 
-> I also cannot understand why we should need to waste multiple CPU cycles,
-> energy and code size on resolving a fixed known constant value that
-> never is going to change. So no I have not nor do I plan to try and use
-> any DT lookup here ;-)
-> 
+- Adds early boot0.h infrastructure to exit Gunyah via TrustZone SMC
+- Creates a reusable config fragment for easy platform enablement
+- Enables the feature on QCS9100 platform
 
-OK so I'm going to push this even further. Why do we even need a driver 
-for this?
+Changes in v5:
+- No code changes, rebased onto the latest main branch.
+Link to v4: https://lore.kernel.org/u-boot/20260703172634.140515-1-aswin.murugan@oss.qualcomm.com/
 
-I've been bothered for a long time by this DMC node not being described 
-in the bindings and nobody bothering to upstream it. Now that I've 
-looked a bit into it, I think except rk3288 and rk3399 (due to 
-Chromebooks), they all serve no real purpose once we are out of the xPL 
-stage that actually initializes the DRAM, they just report whatever size 
-the DRAM controller reports, by directly reading some register.
+Changes in v4:
+- Updated Kconfig and gunyah_exit_boot0.h header comments for better clarity on platform support
+- Split config changes into reusable fragment and qcs9100 platform enablement
+Link to v3: https://lore.kernel.org/u-boot/20260515130934.388894-1-aswin.murugan@oss.qualcomm.com/
 
-I would essentially remove all DMC nodes whose driver do not actually do 
-anything with the Device Tree, then remove the compatible from the 
-driver since we don't need it to probe the RAM driver. I hope the DRAM 
-driver still probes without a compatible (there for sure is some 
-mechanism as DM-less TPL can probe the DRAM driver just fine for the 
-SoCs for which we have an open DRAM init). Then it's clear there is no 
-mix between DT and non-DT logic.
-But maybe we could push even more, and delete the part of the DMC driver 
-that does nothing but report the size and base of the DRAM. We can move 
-this code to arch/arm/mach-rockchip/ for example with a weak function 
-that we need to implement for each SoC. Then we would be left with DMC 
-drivers that actually do DRAM initialization (if there's an open DRAM 
-init!), and not something completely different when it's in a different 
-stage. We likely would need to know when we can then call 
-uclass_get_device(UCLASS_RAM,...) and expect it to work (I guess 
-CONFIG_IS_ENABLED(RAM)?), e.g. in arch/arm/mach-rockchip/tpl.c and 
-arch/arm/mach-rockchip/sdram.c. ram_get_info() can then be replaced with 
-this new weak SoC-specific function.
+Change in v3:
+- Corrected the logic to accurately detect the current Exception Level (EL)
+  and fuction properly when U-Boot enters either EL2 or EL1.
+Link to v2: https://lore.kernel.org/u-boot/20260515065632.90772-1-aswin.murugan@oss.qualcomm.com/
 
-Does this make sense? What do you think?
+Change in v2:
+- EL2 switch is made at early stage instead of doing at the very last stage in
+  the previous version
+- This change is based on the patch [1]
+Link to v1: https://lore.kernel.org/u-boot/20260419173829.1074404-1-aswin.murugan@oss.qualcomm.com/
 
->>
->> 2) why rename to match the compatible? What really matters is that they
->> are unique across the whole U-Boot code base. I don't see really the
->> benefit, but if it scratches an itch, I could see one commit that
->> renames all Rockchip DRAM drivers to be consistently named
->> rockchip_<soc>_dmc. Not a blocker.
-> 
-> The rename is "for possible use with OF_PLATDATA". With OF_PLATDATA the
-> driver is looked up using a DT compatible to driver name mapping.
-> 
+Aswin Murugan (3):
+  mach-snapdragon: Add early EL2 hypervisor switch support
+  configs: qualcomm: Add Gunyah exit config fragment
+  configs: qcom_qcs9100: Enable Gunyah exit support
 
-I only see very old SoCs using that. SPL_OF_PLATDATA is only enabled for 
-the RK3288 Chromebooks, MK808 (rk3066) and Rock (RK3188). 
-TPL_OF_PLATDATA is enabled for PX5 (RK3368), RK3288, RK3328 and RV1126 
-(ok this one's not so old :) ). Do you have anything in mind related to 
-OF_PLATDATA? I just read doc/develop/driver-model/of-plat.rst and the 
-caveats section is scary.
+ arch/arm/mach-snapdragon/Kconfig              |  8 +++++
+ arch/arm/mach-snapdragon/include/mach/boot0.h |  2 ++
+ .../include/mach/gunyah_exit_boot0.h          | 36 +++++++++++++++++++
+ board/qualcomm/exit-gunyah.config             |  4 +++
+ configs/qcom_qcs9100_defconfig                |  1 +
+ 5 files changed, 51 insertions(+)
+ create mode 100644 arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
+ create mode 100644 board/qualcomm/exit-gunyah.config
 
-> Will split the rename to a separate commit for affected drivers in this
+-- 
+2.34.1
 
-Thanks.
-
-[...]
->>
->> 3) What is removing probe+priv_auto helping with? We now need to call
->> rockchip_sdram_size for each call to ram_get_info(), which we only have
->> one so it's not such a big deal but it's still a bit odd to me when the
->> DRAM isn't going to change between calls (so somewhat joining Simon on
->> the caching thing that's done here before your patch)
-> 
-> Simons concern where mostly related to caching the base address from DT,
-> not really related to caching the RAM size, if I understood correctly.
-> 
-> As mentioned in commit message, to simplify the driver. There is really
-> no need to do an extra malloc for priv data or pre-calculate DRAM size
-> at probe() time. Also to align with the RAM drivers that was added later
-> i.e. rk3576, rk3528 and rk3506. And that I have prepared for rk3562,
-> rv1126b, rv1106, rv1103b, rk3538 and rk3572 in [2] ;-).
-> 
-
-Separate commit please, with its own justification, but fine with me on 
-the reasoning.
-
-> On a technical side; to simplify and prepare for possible future DRAM
-> init. We typically need two completely different parts from the RAM
-> driver depending on what phase is running.
-> 
-> During DRAM init (in TPL or possible SPL for older SoCs) we only need to
-> initialize DRAM and write encoded DRAM info to OS_REGx, before returning
-> to BROM.
-> 
-> During next xPL phase and in proper we typically only need to read and
-> decode the DRAM info from the same OS_REGx.
-> 
-> To keep the driver as simple as possible we only need to implement
-> following ops to help keep the complexity low:
-> 
-> .probe = init DRAM in TPL and do nothing in remaining phases
-> .get_info = return the decoded DRAM size
-> 
-> And for size constrained targets the entire driver could be replaced
-> with a size optimized sdram_init() function in TPL.
-> 
-
-Circling back to what I suggested earlier in this mail, I'm not sure the 
-next xPL phase/proper part of the driver really makes sense to me. It's 
-like a massive overhead for what is essentially a call to one function 
-with one base register address.
-
-OK for the hardcoding of the register base address, based on the idea we 
-could eventually move this out of the DMC driver (e.g. into SoC-specific 
-code in arch/arm/mach-rockchip).
-
-Cheers,
-Quentin
