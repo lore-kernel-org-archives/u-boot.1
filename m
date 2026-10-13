@@ -1,248 +1,244 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56FE4CC6B12
-	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 15:32:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78385CC6B16
+	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 15:56:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 906BC404F9;
-	Tue, 13 Oct 2026 15:32:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0925680ADE;
+	Tue, 13 Oct 2026 15:56:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vye4XA8Hy3KG; Tue, 13 Oct 2026 15:32:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6976E4031F
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791905555;
-	b=BY/CAjT76wBhZWm3b+7eKC5LtLCkmGHzRnYLmh6ZeSlULjK6RfuIYZpS/TlLUOA8D2tq
-	 20rdEsbxD3qiOJHcC6kRgT7P3BJcJacFaO1b/dmj9cdH90uO88nCiRezp+RXF17sm0tcl
-	 OzZ6/B2ggEyPfGJKWOL+WYPZUduCPJ/Xmt0GE/i4tlF+YXFluezN96dwTVQnACNitB368
-	 QW8zLZyv0WKJDl4J+xrHjZzBxiuIIiFA2jdypiDvxuSXe9GaKobPRFaUJHFhzA7CcTb6u
-	 nor84YwA2m4DpN4m7IKLwDlwM7N2N7ywq9lUtAz9E17XUbcuJvE5X015IH3Qk9tZFqw==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791905555;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FMlUOublWDla; Tue, 13 Oct 2026 15:56:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 42BC980A56
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791907010;
+	b=Pv02IVNJ2fCrQwp6Ew4stIECxuq/AvYdhPXc8/+TDUxA74bRzCPaQyJ+opbx7DsmzaMv
+	 JM4KzueFWpB/hyFfl5mk+1wLSWhY4Q4zI2KoY2IQbSV0E2rXXJ54kiKoTfMvz66/pUmAJ
+	 PbWpBQkTjG8CSgTc0v/0lJiSvpGjAhoXiBuO0TIhcO6v7d67a/AD53cT7lS6Ikps0aGhR
+	 FXhyI4yuKt100Z/mOW8dX5fAETuQ0sNWbY+rZkwOnnB3xOmTkUsAgCyBDqwcyesOXoUPT
+	 rh492vYovFXfNKGcgKPXwcZy6LMy+MlWI5vhA25xNOR0PgwlU0cwCAWMEOoAK5RzcKA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791907010;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=1Tv/gccuxixoJlNSD4EsP7Qpom/UM01H8mUXQvT5HjA=;
-	b=Dm44uWRSeHaAZ5oG7PCd+XLLkKcYYGpWuxCMz5n5EcZGphdPRPTrlCOb2c3h+KQ3Mban
-	 JXBxK0Pczj5oNpy7RQ5K06ROgFBUBmSR8OjwWu6j55/afeN9meIbWWDj3DB/hiy9tWyys
-	 nbNYXAenqBM9cbRlRWdvJRG166QYAX6p5/r25KzmzvJrZojDTKprfUS5Iub7bFuYo73Zn
-	 TfVF/dtfXFcCzQ0xYb/+tVbIZONG00H+omf38+QLyRCzum33t+SRGots5VKSmdZpE/cZk
-	 xef5WplpIpOJoPq4dgGqPTfnIcZ309JZ/3LiCNTgFOaHsbASJxkq8BS8tF9N5KUqgHA==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=hsjQg6jWzl2gImT4jRxgXXGEeFEh1m9Ee7VkjMFDuRI=;
+	b=I2xb9KlTCPmnu87SD0Js8uotfPmmAf7Fb5o9j+SxNnadDb+bSMKHHjqp3Zi/MAt7V0oC
+	 7qJGwKyuEwJpRa1ZPtu3xbUwVR31wkWGuN9E+YWOFZ597mI1vg5r91xr1uopEnlgnIGXD
+	 2ATwP+BuAxSb1WvKwWZ3oACGXgv4n8VX3ZXNekRjM0oUclrsr6fYdnSrucyzT6uOIsGFY
+	 c4x5AfywaCoo1g9Sc8YyZFYl9dHtcc/bjfFNYaFfeV3JUJFL3O9D3+jMjsw8wvMEXWGLf
+	 mmY3FSWro1J/qb+64TPIN46/L+D7t8O2uuz4CYp4DR2Zdplvr2gVno6EguggnNCx4Yg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791905555;
-	bh=1Tv/gccuxixoJlNSD4EsP7Qpom/UM01H8mUXQvT5HjA=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=OY9kgIbyKLJZsrqPSBteVFmGD4yMGtAe7FhWCH4PqDoAwTAM25460LpcRFYyJJLuc
-	 f5KmVO6+jkzyPRWnR2SOo0Q560VIv99FIzL246S9wnln8Tn5H+XYEfJZvX44O+Zpip
-	 e9+CuVkG4esndUXtKI/otH1pY4KCtN0sLdE/gi2a5XdCSmJCs6FZ1wiD91WRl1gP0t
-	 /qhyJbUHpbxzUyI5Apkt4c2wen1JWZ4sxpxZlViXOK4NESZtGqpW+KW02c+4qO8swT
-	 ac2bkxKX4fRLrfS3c9CrlxjZqKn0I3QeQ44gzbHg0eXCG1g6y0DqFUGZaYQtiTu2uQ
-	 L3zCeMpySwU1A==
+	d=lists.u-boot-project.org; s=default; t=1791907010;
+	bh=hsjQg6jWzl2gImT4jRxgXXGEeFEh1m9Ee7VkjMFDuRI=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=zg3n32ygQcLfhrfG5Sy9G3RKjZsHyeJ3LBRjf8qJo6oxwMbvs9zTZ4xj50fej+H0S
+	 eC4p7A5gRHL0f6yhSoul0bEPX97Tj547Iby5jD/a2V/xjVadWkR9gXuxVh8p0Ods5x
+	 X4FzgwxKcSnMJwRCX3sYCehNMpxv/32A2xp/hcsPZndgRNMv1Qu2Q7ijmnwOI2wh9j
+	 Eh9dzdw2b/5wbh2Woeb8f/Ylg9zL5cBc2UT3zJGe9PwZjKTawy2s8/bGrNC4mNdbb0
+	 GedIy6SslRsXQPZejwza3VZ/7E350fcXw9/QmIk8jnioG9+J/M7myKeNvWScvTiHoQ
+	 0S+ZBlt88qZbA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6976E4031F;
-	Tue, 13 Oct 2026 15:32:35 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1690D788
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:32:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 42BC980A56;
+	Tue, 13 Oct 2026 15:56:50 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3EB1E788
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:56:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 08402402D3
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:32:34 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 304C040462
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:56:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 57KY-KKpa58B for <u-boot@lists.u-boot-project.org>;
- Tue, 13 Oct 2026 15:32:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org E2F3F402D2
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=205.220.180.131
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791905553;
- b=IYCc1oezMJ9f6OZptjdnhcTg+nQFN/KzxyjcjCmb7EganCZZhmAPpLrLsKjNViUzP4+m
- x3e5mbuQm05/xS/Tc1pm2GrtuYthDhuSWT/Qe39jusgj5KEVi3bA/KEYAVQ+5KKk6xbpX
- KRSWmppMYlXxAatGnwLlLRYqXwP+w7eFqbRskSCCuoDPM5CU28BrefoZoAil7sRwuk1RT
- hYmEbW8cEE4tCCpSbd81y3w/TXyypiSbgLfSOTikcQd5Qoh2l8hbG4hd8mC71V5rMlhob
- 35elmHeuhrHmtC2gNqRmuw0T5vrHG4lq23aCrvyHCS9lNilUepzuL2STVyLekUxvSgQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791905553;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9NNtm6pR3mtp for <u-boot@lists.u-boot-project.org>;
+ Tue, 13 Oct 2026 15:56:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5B8E74043A
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791907007;
+ b=CAfillYJxos02YXenPzoy8JoKoBVxo6SDWIBdHNNwiooE+rVjDShtZ+TAmbvxmfN3jQn
+ f2A5cZmrywvaO2NSF80e3XdvHTDdnjBjcGSvfjHbi944XOi2xZ5Wbl/UbNPcFihr02yNd
+ QdDipiaAfXgY7L9sa7jsvRozgjuGaX7f0mzKyA3xqE4KwlUjbglRkJj6wiQe11AwsDSSk
+ IIbSejgrCryiE7eF1vj6WDyMRBso/pitasR3kXtam5hSZn15qA3Z4tblqzJ38cSBkrFoS
+ WTttyGKHKmdVzywAmBacyYUC2uztsnW9doxt5LfPa6Si2w1+p9ClXBcwL1+KwRmF+nQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791907007;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
- DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
- X-Received:X-Received:MIME-Version:References:In-Reply-To:From:Date:
- X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
- Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
- X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+ X-Developer-Signature:X-Developer-Key:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+ X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
  X-Proofpoint-Spam-Details;
- bh=1Tv/gccuxixoJlNSD4EsP7Qpom/UM01H8mUXQvT5HjA=;
- b=NHiAl1nkn7egmzMNI9KTQkQLnsnftTliTIUwwnuSOX7TkHA2tEE4LczB8viZyO4a4A6s
- f539PMqIGvKyHn9o4W4OadXgugCtmgi3Bdl9WbqFcv/h2HLygSz3GS04YvnEELToaz/u0
- RalrLNgHGsfR55HluxuNCDDj7qJ4DBtQZCGRHuJNcgPBQnYtjUla5Aoq84/+DCWCyVuUI
- w9gQ4r8HhXCNCqswtH5JacVI/GdijDAVphQSPklqqB4hSCo9elJuxiD6tcNaLr/cOfLPC
- wiFtEjebvvsR+IIVc25VNFj5MWdJihEV9bAoCx4sTvaLWYy0syfloVBtfNOac6dxKpg==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ bh=hsjQg6jWzl2gImT4jRxgXXGEeFEh1m9Ee7VkjMFDuRI=;
+ b=bG0ZAJei0CW1AYNNxqYs4eMKqSP7foWJq9JJGyxZC/+cHSx+3FE1R5HCpIny1OxEH1oc
+ OE1NDqe2r8/KVlJUkzngS8DFOCC4+2tYwELDMYroaxIkVwxohtv7s0nXu1rJC3f4h2I8w
+ C2bEnHSbov0O04hEbyT+IiqXi3jFHxGE6Pb9zRD8Wb682Q+5ozhJLoSLPOx9x3AyD734a
+ jutdCS3AgVqyGZK3icQiVOaYcSRoO12Eg0JuXdUTjURdQeYJoMcBnYaDEP7X1KBzi+XV7
+ q4zlgjdB5Eh2JZRMMhCCNfQXAlYHafqjHaGhHM05hHdTARbj1F3OyUmlYgps6fQYEEw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=OnBUpQFj; 
+ header.s=qcppdkim1 header.b=ayYoHfjc; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=We1NHnCV; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
+ header.a=rsa-sha256 header.s=google header.b=QLPPIpQn; 
+ arc=none smtp.remote-ip=205.220.180.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ helo=mx0b-0031df01.pphosted.com;
+ envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
  header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=OnBUpQFj; dkim=pass (2048-bit key,
+ header.b=ayYoHfjc; dkim=pass (2048-bit key,
  unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=We1NHnCV
+ header.a=rsa-sha256 header.s=google header.b=QLPPIpQn
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E2F3F402D2
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:32:31 +0000 (UTC)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5B8E74043A
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:56:46 +0000 (UTC)
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69DE3fTl1143631
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:32:30 GMT
+ 69DEpxB41402910
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:56:45 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 1Tv/gccuxixoJlNSD4EsP7Qpom/UM01H8mUXQvT5HjA=; b=OnBUpQFjOwtQ8i79
- KUpgirjJIEYD+h73yyrJDEz8DOj7jrD0IZtGnyPIcyKajEHiCJd3MOar5mlJg2gW
- EMYzPHRWsgSu/cE6tjwIcLUdii5Nz4ZIqTO5afp6Hpsgp7ga2zqbgMNSKg/R4E0N
- S8r/Z8Jx1Li7X7h6Of6+pJTO6epLSl9pt8kc4O7TYwTONOp+h1LVtQ0HMpnC1ryN
- gI4uwoIvrPmXfkP7a55fygCwGZxK9yiJwFN9Z5zMxbSJ+dG3SjjyBmLrDCuOAOHS
- G56jH3hl1g9FFmHi6tcOlBKYsXW0AD3mwUqMKNrpl4U15OIajcp5m6n6U+4E3tg6
- N6ym8g==
-Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
- [209.85.128.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9hpg9ns8-1
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=hsjQg6jWzl2gImT4jRxgXX
+ GEeFEh1m9Ee7VkjMFDuRI=; b=ayYoHfjcsmXDWClw95CMLL26DlpCzcPVIA47px
+ 3UH/1zAnTiQa0/aEa9aY8XCtKR1TgTCX36v1nCz3h3rCW2tvvw9uhsvgzNcU/kZk
+ 2j6M7NY1qoKYbqL/fCVYcDQCEJkQkI0WQ+EM1Yruwd2E2sPcPo/T+IjUFS8WHxhh
+ m7eBgGyk5WJoKGLDRkzgwYWMhRx3HCLrtSyqyOKZft8C86etfPMbEs+h+1Zpmh6k
+ Wk9xyBJQ4F5up/DcPtv3EAupzDedvbDrDp48eelZaaQ7x5j5zqJR9xlG46oqmeY2
+ uxSEA0Sj0OoFEb0WypCsyRHubI7izxFNwS4/pmwTFpjPDwQQ==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9psk09mf-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:32:30 +0000 (GMT)
-Received: by mail-yw1-f197.google.com with SMTP id
- 00721157ae682-837aaa9a3f6so35050447b3.0
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 08:32:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791905550; cv=none;
- d=google.com; s=arc-20260327;
- b=VSo32VUyasnxjGwdoFht6uBRm0LqBBD5AOWPKt+NZbSdSNRdGWdFgDFq/5ziRH7gAN
- vVrqgVG2WEw3tRW5AICSY8xQFff7YdN72aINweknI2UmFecXq42NQ+nkkPfKkd3V4rzw
- 4/IeTiWwHDXQZ0c0qBgo11ucFuiOK1n4G69ThxdzuExxKM9myrqAxwsNJn+kqwHF+wvn
- IkuKahA/+Ia/PmpeTdwQG/N0i8wCfSWBs8B5qpW/e20jkcunFwv58oHTFnxkwVWgatI3
- ODO+o9AfMz9W30das8CwX+Oo+9ba2QCXdDPXA9HP4X2m1zM/BmBPYwpzs7AUBx917OME
- yTxw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=1Tv/gccuxixoJlNSD4EsP7Qpom/UM01H8mUXQvT5HjA=;
- fh=V/j6Ueum6vjVE9HmZZcWszPWP/Fm3sIbVCHpYxzP85s=;
- b=YrVTlbckihv5nMEYVutSM080xs17IgIcyH9PY1pD9Yiyhn2Xxu+szLY0Y3QFcsC4vH
- gAfkhBMzZCgsGKgs8szMpnWpWgGg7jdMq5Hqk7G1ILp0R/CQm2xPTS6Tr3RozG9FhD9I
- DaLiduiuE2NwSsCGKZsm8QAkrtZigUNr8vSfWpGzhGuCwOFL/h0ngqmV44Rxvl5BFbvk
- sxZhX4d9RgPCtLdkzD4r4VVKDKjPzu7199NwGFzLgtAci8Uec2CJPlnENljV04BDaOjZ
- K8QJ/MvsACM/VirxN9cvlOVx8mtqP7nS84I+7rD8/EH6YO7JNOthH91fkrCk7efvwUth
- 2Z9g==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:56:44 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id
+ a92af1059eb24-139b62317d0so12814347c88.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 08:56:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791905550; x=1792510350;
+ d=oss.qualcomm.com; s=google; t=1791907003; x=1792511803;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=1Tv/gccuxixoJlNSD4EsP7Qpom/UM01H8mUXQvT5HjA=;
- b=We1NHnCVGiOW199k13Ubc7Q+vaVo8TztNqybuaI390Na9H58aFprCYx2HBuWFo/KPL
- 9ebVaa1hkxizdHcbqSR47woy5G1QpHWxrdUk+ILB+R5/0YskjAtrOtwe0yu1ze2jYY6G
- 9mpoHgdMmFbPRa8H/GGMYT29d6xnYqj6IMlRDpYRJFmoLib9XQ8Czf2jCRpIxfS4OIX4
- gjRF/lhjFnnw6UQX4yt+CHuJlqfhTVZ9ZcSNKnZvbC6bCvIeKnCxN2aYrEMZfus67s4p
- rt/bxTRD0c/nCsYMJHBqDdSrEcZ6Ht/GX06MHRPXvaW22GjtGKKSrBJK5iE8E7cqXiY9
- +QAw==
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=hsjQg6jWzl2gImT4jRxgXXGEeFEh1m9Ee7VkjMFDuRI=;
+ b=QLPPIpQnoHt8ve9fcGQRTqwJ+gwyS9PK2KZknbgZXtSA1FUZyBuI9A6DikuXtjYwV4
+ w+ctoTPDd8DtvW3U8oyIEw+5DFzwMu9vXE+0tE5UDadXBXMgeNG+0t+OCwMaYerT79Hd
+ rfGv7J1IEdcPpW8duGbnJ0i4olaapYzxiYRj9TnNamdZzzgYoTRxGO+surUZBKchOyQq
+ FNibb2ZDX6LJ2YjKpRcq5eK2iUSIxD9iB5ifJmQexpKcC5rR+2aaKHhvp3mlAMDeTm7S
+ 2hXJhrsG/VVC37YyHAAJWQMU94391VoNkBwe3IFD8ezWkKbKzjkDiaCpp+rYCTuLywjs
+ rVug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791905550; x=1792510350;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=1Tv/gccuxixoJlNSD4EsP7Qpom/UM01H8mUXQvT5HjA=;
- b=IwrIsirHHvhS45on23PMoB0sroZo0m/EExQuTJw/9ux5qluZpqPjDjcN0N26swgEKG
- SvdaT1cjBWLc8VTsV+QsU5AepYnqvllREI0XYoTYlzc+7GG0sPsu8MqIPcp5wKAbYi2D
- jR51SCvNXCI1XRgAIo7mmQCeCVC0YMl5RoCibM5frlQ/ip0hQknRG+LxWbmqEuqTx3QG
- zEbetlvrGkWMJZCV1/O1Pi+mi5XF/gjTYrLiwOwBeHlWZWAokKwyhJUo1knSssUMsqea
- VRii+xdJJT608/b8RQyG6o3CTi++pBVsydNdXBiYVBK91BBV7sqltI6PdEc8weUWyTY2
- c5GA==
-X-Gm-Message-State: AFq9FYLuEEF2YfMAaeUTLQidzmhuHRpQvmT2PdSp5Ik7XuWMYueDOU5Z
- LfjGqYByd621JgzGCXagRXFhC4bYFIaPR40oUgUcXAIPMP5S5ypKh8qbh5ax9uhgFfr2Pxkyto0
- HICSDisrFbAYLMtIGwXi3YSd/sPBPIgUDWaTEglbfYTlcFKxaMPPIK8jyqbeNoHyON2io6iUpRn
- P0UCtmxcrOVd9iuHUjQqmm4x6RY/24YW6RX8enL0ve/Eo5Jw==
-X-Gm-Gg: AYBFou1cZDxL/JyXQqF917g+kniwUObMP2AAZ2mbh3Wt6ehoopX8cqYXj575dlG3uv+
- ifllJIBR56GX843FBTbsy2hIRzTC9hTwHwRiP2PL48QwDkT9Rysq144UHQ+xRx9JylUALo4JYGU
- RI8TaophW/xIGksFhDd9n+xU0jEPzvxQkHNKCVDNrIZZdAULgRacqWjT8OdQ==
-X-Received: by 2002:a05:690c:3:b0:8a8:316e:5973 with SMTP id
- 00721157ae682-8b07d3f4491mr48236347b3.14.1791905549799; 
- Tue, 13 Oct 2026 08:32:29 -0700 (PDT)
-X-Received: by 2002:a05:690c:3:b0:8a8:316e:5973 with SMTP id
- 00721157ae682-8b07d3f4491mr48236157b3.14.1791905549083; Tue, 13 Oct 2026
- 08:32:29 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1791907003; x=1792511803;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=hsjQg6jWzl2gImT4jRxgXXGEeFEh1m9Ee7VkjMFDuRI=;
+ b=02l1lURPnVaoWdrWwH8G+YWk36w8xbX+UvMYgF2bsCAcaFtG45pNuqTiB1UhjWPokk
+ Lkuald6eSSlE7a/IN3CTpDOt62Dg3oaI9DXgY/0gQnlmrmDZczE3tTrfJO8eAPhumFsw
+ MCLKmF4f4n8S6GVo6FXfN7LMA6Ms/WKYxi80u6loexba07/MC2Q7IgmXTbG2tXbj+PjO
+ xSFVqQt1l2wLfmHD97A5IiTvdxfUDVqlOhsmNIlmIOefk7LXEO6D07O1eynU8niWFlsk
+ 6qg1BK4R/Dt31pNwuD6UmGkVdWQk93mIhWrbQUvLEEeo1gftde9GCQP7kqQjdWuAi6o3
+ fDhA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzJRnI7udseI/XX7HZqG10smlJhsG+aZAnDy3IW4xqH510vFnGng29Y0vPPvhAT53N99toOswc=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYIddIhGGfgDwKXvjHYDKcIdhYE+5fOoxNflsfF6co+Vact1gJrF
+ 6IfKGzVHFXSS9rHkPj+LCnJHdq8OXWZFbK4RAPGOghE7Q36S6PxL4BS/lOGudi8172f32PpCjtL
+ WtCKi/rEsOZFui3RclA3ZEfJbP4ceCs31WHFAlHXO3B/8m+6b7xaIpj+5RKLZ1hLdZ/MAtew=
+X-Gm-Gg: AYBFou0GdsWoDQWhVy4MiiEQHATDo3PclnYHP4rl/bbILGc9+LL8NKApTDogZid2pzD
+ 8Zv8Hvlb7XeRdAxE56FD30qtrDasO8oK/i2O8Bl/orMPAOB/UVqLi6yDCRIrYRSwBXBKISkFSxO
+ asFLdB8QYyY8dYb2Mvep/QZ5lHT313tMtYApgbCZ4xJ7wNMSfkbTZ4G7iP0ERFskO75JUu0hLVu
+ 0bTDxbm6O5rh1/rd2sMV62q9SYFHm/JnHJErjWsgi/FIBSQl4a/AbyOAjIsdNYA/CYLBii7SPr6
+ eFFY/zEHEblfReBwaBsZPYmeA5PE4Se20W+IUEXqCz8eVsqqut+JFd+uw1bPf5tgC/pd9Ltxy6f
+ kJsy2H3EoPkKeYA3BpBl2fj/s5VoCL7CrPfXkb44Z8YEmWUXa4as05+WhQ/2ANg0/kk4ppsRi6R
+ n0sLi160/MTTShYRhCZ5Np38A0cDM=
+X-Received: by 2002:a05:7022:1706:b0:16b:fa6d:b11f with SMTP id
+ a92af1059eb24-16bfa7cf69dmr16692426c88.6.1791907003190; 
+ Tue, 13 Oct 2026 08:56:43 -0700 (PDT)
+X-Received: by 2002:a05:7022:1706:b0:16b:fa6d:b11f with SMTP id
+ a92af1059eb24-16bfa7cf69dmr16692381c88.6.1791907002422; 
+ Tue, 13 Oct 2026 08:56:42 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-1698de65af7sm42884316c88.0.2026.10.13.08.56.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Oct 2026 08:56:41 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Date: Tue, 13 Oct 2026 21:26:37 +0530
+Subject: [PATCH RESEND] configs: qualcomm: Add verified boot config
+ fragment
 MIME-Version: 1.0
-References: <20260915145629.995499-1-jan.kehren@emteria.com>
- <20261006092732.3577974-1-jan.kehren@emteria.com>
- <20261006092732.3577974-2-jan.kehren@emteria.com>
-In-Reply-To: <20261006092732.3577974-2-jan.kehren@emteria.com>
-From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Tue, 13 Oct 2026 17:32:17 +0200
-X-Gm-Features: AclHuK8fFYJGwchqkgBzzPAvIv8pLLO_ePHfALgM1Z12wEa9EJOHQNFIvlZ9gM8
-Message-ID: <CAPzfCAZp+gjiCNvS1gz5ouELvD4=zoTp8nyUG+dWyDOs3=C_ww@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] avb: Drop the mmc naming from the block IO helpers
-To: Jan Kehren <jan.kehren@emteria.com>
-Cc: u-boot@lists.u-boot-project.org, mkorpershoek@kernel.org,
- igor.opaniuk@gmail.com, sjg@chromium.org, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: SdXZGwg0FFYqH1G1h_LSRL6Ze4KlkRps
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA2MSBTYWx0ZWRfX/0QOuu6vMUVk
- YQPvrjkJTrCtV9XhC6tpzObpg8s4xDTp5r8i3HuPOjQSSA415PgLF5ePZj0rLUJfgsAZwkY7hR1
- xQS6UXmBEfIXrhCx1PQkKJfMrB3BqYQ=
-X-Proofpoint-ORIG-GUID: SdXZGwg0FFYqH1G1h_LSRL6Ze4KlkRps
-X-Authority-Analysis: v=2.4 cv=Z4Z5j3RA c=1 sm=1 tr=0 ts=6ace4f0e cx=c_pps
- a=0mLRTIufkjop4KoA/9S1MA==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=ZpdpYltYx_vBUK5n70dp:22 a=HAEnkh90AAAA:8 a=EUspDBNiAAAA:8
- a=e0XDPsRHzy03Rgelu4cA:9 a=QEXdDO2ut3YA:10 a=WgItmB6HBUc_1uVUp3mg:22
- a=LzkeyO55kmtmzvcb4Ayl:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA2MSBTYWx0ZWRfX4tNP8EJHVkYC
- pv9tOiDTbp6JJWV3q/V7CW/QZg5NEYtZahfjYRutO7+GmwGHF+KM/clsmioip5s/4eRF7IGzksk
- bNPezohf1XBZMuKOv8luIBFO5m1D9bP6QRl0Z37vHxlc979LiAcYmzKpf+SyZlb2Cx0pt2NIfHG
- qfd8CbDhjKdvbOBqAuHHdVrE3XGsA0/f+fOe+fxk3zPB7vpGmnpcLjWVgSgrU+ZH14m1F8iJNG5
- /BmpUAm2cloc6RQzDkyN7WAc4q/uf0ZJHHhzEnsIsfnm2ft6cICp/HlwZXo/o6tU9drPT27YT6T
- 2UDKdxLnr+PV26/QjhDIWyISmC8HOVKaDca93QMBLOfMNFO3Kgoug3vdpQ+s7FwlrmjlbiogDsB
- d23xh6tXJHyCFgwpnl4m3h+3AsfdO65dUXYU0c6xnrwoD/WgdU3zZRsBjhrSyJsg28BOiyIihPC
- 5SRJ4AQ7n+3oLNUq/SA==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261013-verified-boot-v1-1-df1fa48a7ac2@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIALRUzmoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzNDA0Nj3TKg+rTM1BTdpPz8El0L42SgoLlRWmqqqRJQT0FRalpmBdi8aKU
+ g12BXPxel2NpaALvrGf9nAAAA
+X-Change-ID: 20261013-verified-boot-83c01372fee5
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791906999; l=950;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=DY4lm146UYvrqp8MWLgP+Pybhiu36Z7HlrsJsEEbAQ4=;
+ b=oKSqBEgfPdPJRVDt4VteyQJ+4rkI+AXs9uAwR8OgshjmB34FYdA3DfhrQb/x9GE9o4jmS52e0
+ QQdFsW9/4/HDq1HeNNCLMQwkKtlhUv3FvrIhU3rTpEd5E9MnQtraZDZ
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Proofpoint-ORIG-GUID: sAomOiAhTQjpN8oUUvBLbbjHEdbxj_cs
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA2MyBTYWx0ZWRfX2kDSMXhrpGPG
+ 6UXG9sUrqhVSGnpskDL4FtitvTP2di47P9bBaCjQYgPBle1G/eX3G2RoR/jixGu7NLg2ymY3SSQ
+ g/YGzlSQI8C8CMrm2QbeUbNO6pTu3lQ=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA2MyBTYWx0ZWRfX+UiIJ5VPOu4G
+ MJwCorDPayY8tO7u6an9dHTcI575uUXSqZwZZHW/IpRP5wI+mi2OYsJ5UpTIhABZJ6sTLZTozkn
+ V+PTaL79MEP2fojRZaIM+J7+ccQEsdjIlghBwBywr9p3NdclXQa6Tdjv0T/437JruDZ3LoSvZQw
+ Swj6Gc0lt0nKgpTePqG9rdBTuMm2+9CCspLw3fO9wWVQWJnZP5vNWqS8OxU4QWjTK4a3EzGjahX
+ jRuhoRJ7jLS7NKTPJu8aUQMwT4RnRU1+34DyAAnFJjb8jJh4342DmReq/8WAtRYG/nLYjbjfuTP
+ D+vQEmeeKuVSrBDj75iznGpOQyb9r8twDSCC8qWOgKH/fSD5++iGVQZB0vFMkaas8PVsApQ9bF7
+ o4ZQn27XpK1fXK2r8kdjHPRHQp+w43jklu7cbq3kL+gqRH3QEi6h8PVulLlQ9xg0TcptYUO/X7m
+ gPsyIrNZv2fecV+xQxw==
+X-Authority-Analysis: v=2.4 cv=cbJHPXDM c=1 sm=1 tr=0 ts=6ace54bc cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=wIccDC1-F7bu2At-tl8A:9 a=QEXdDO2ut3YA:10 a=zZCYzV9kfG8A:10
+ a=vr4QvYf-bLy2KjpDp97w:22
+X-Proofpoint-GUID: sAomOiAhTQjpN8oUUvBLbbjHEdbxj_cs
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 impostorscore=0 phishscore=0 bulkscore=0 adultscore=0
- malwarescore=0 clxscore=1015 priorityscore=1501 spamscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610130061
+ clxscore=1015 lowpriorityscore=0 phishscore=0 adultscore=0 impostorscore=0
+ suspectscore=0 spamscore=0 malwarescore=0 bulkscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130063
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -256,365 +252,34 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Jan,
+Add a common configuration fragment enabling RSA-based FIT image
+signature verification and the required hash algorithms, for reuse
+across Qualcomm boards that verify a signed kernel FIT image
+(kernel + DTB + initramfs) as part of verified boot.
 
-On Tue, Oct 6, 2026 at 3:00=E2=80=AFPM Jan Kehren <jan.kehren@emteria.com> =
-wrote:
->
-> The AVB IO helpers and struct mmc_part only ever touched struct blk_desc:
-> nothing in them is mmc-specific. The names say otherwise, which makes the
-> mmc assumption in AVB look wider than it is.
->
-> Rename them after what they do, in the AVB namespace rather than the bloc=
-k
-> layer's: avb_blk_read_and_flush(), avb_blk_write(), avb_blk_byte_io(),
-> struct avb_blk_part and enum avb_io_type with AVB_IO_READ/AVB_IO_WRITE.
-> The block descriptor field loses its mmc_ prefix for the same reason.
->
-> No functional change.
->
-> Signed-off-by: Jan Kehren <jan.kehren@emteria.com>
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+ configs/qcom_verified_boot.config | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-Tested-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Reviewed-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+diff --git a/configs/qcom_verified_boot.config b/configs/qcom_verified_boot.config
+new file mode 100644
+index 00000000000..8aff098944c
+--- /dev/null
++++ b/configs/qcom_verified_boot.config
+@@ -0,0 +1,6 @@
++# Enables Verified Boot support
++CONFIG_RSA=y
++CONFIG_FIT_SIGNATURE=y
++CONFIG_FIT_RSASSA_PSS=y
++CONFIG_SHA512=y
++CONFIG_SHA384=y
 
-> ---
-> Changes in v2:
-> - New patch: split out of "avb: Take a storage interface in the AVB
->   operations" so the rename lands on its own, with no functional change
-> - Keep the _and_flush suffix on avb_blk_read_and_flush(), it still flushe=
-s
->   the cache after reading
-> - Re-align continuation lines that the longer helper names had broken
->
->  common/avb_verify.c  | 106 +++++++++++++++++++++----------------------
->  include/avb_verify.h |  12 ++---
->  2 files changed, 59 insertions(+), 59 deletions(-)
->
-> diff --git a/common/avb_verify.c b/common/avb_verify.c
-> index b96cd1ebd7..fc29433c3c 100644
-> --- a/common/avb_verify.c
-> +++ b/common/avb_verify.c
-> @@ -304,13 +304,13 @@ char *avb_set_enforce_verity(const char *cmdline)
->
->  /**
->   * =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
-> - * IO(mmc) auxiliary functions
-> + * Block IO auxiliary functions
->   * =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
->   */
-> -static unsigned long mmc_read_and_flush(struct mmc_part *part,
-> -                                       lbaint_t start,
-> -                                       lbaint_t sectors,
-> -                                       void *buffer)
-> +static unsigned long avb_blk_read_and_flush(struct avb_blk_part *part,
-> +                                           lbaint_t start,
-> +                                           lbaint_t sectors,
-> +                                           void *buffer)
->  {
->         unsigned long blks;
->         void *tmp_buf;
-> @@ -342,7 +342,7 @@ static unsigned long mmc_read_and_flush(struct mmc_pa=
-rt *part,
->                 tmp_buf =3D buffer;
->         }
->
-> -       blks =3D blk_dread(part->mmc_blk,
-> +       blks =3D blk_dread(part->blk,
->                          start, sectors, tmp_buf);
->         /* flush cache after read */
->         flush_cache((ulong)tmp_buf, sectors * part->info.blksz);
-> @@ -353,8 +353,8 @@ static unsigned long mmc_read_and_flush(struct mmc_pa=
-rt *part,
->         return blks;
->  }
->
-> -static unsigned long mmc_write(struct mmc_part *part, lbaint_t start,
-> -                              lbaint_t sectors, void *buffer)
-> +static unsigned long avb_blk_write(struct avb_blk_part *part, lbaint_t s=
-tart,
-> +                                  lbaint_t sectors, void *buffer)
->  {
->         void *tmp_buf;
->         size_t buf_size;
-> @@ -382,19 +382,19 @@ static unsigned long mmc_write(struct mmc_part *par=
-t, lbaint_t start,
->                 tmp_buf =3D buffer;
->         }
->
-> -       return blk_dwrite(part->mmc_blk,
-> +       return blk_dwrite(part->blk,
->                           start, sectors, tmp_buf);
->  }
->
-> -static struct mmc_part *get_partition(AvbOps *ops, const char *partition=
-)
-> +static struct avb_blk_part *get_partition(AvbOps *ops, const char *parti=
-tion)
->  {
->         int ret;
->         u8 dev_num;
->         int part_num =3D 0;
-> -       struct mmc_part *part;
-> -       struct blk_desc *mmc_blk;
-> +       struct avb_blk_part *part;
-> +       struct blk_desc *blk;
->
-> -       part =3D malloc(sizeof(struct mmc_part));
-> +       part =3D malloc(sizeof(struct avb_blk_part));
->         if (!part)
->                 return NULL;
->
-> @@ -421,20 +421,20 @@ static struct mmc_part *get_partition(AvbOps *ops, =
-const char *partition)
->                 }
->         }
->
-> -       mmc_blk =3D mmc_get_blk_desc(part->mmc);
-> -       if (!mmc_blk) {
-> +       blk =3D mmc_get_blk_desc(part->mmc);
-> +       if (!blk) {
->                 printf("%s: failed to obtain block descriptor\n", __func_=
-_);
->                 goto err;
->         }
->
-> -       ret =3D part_get_info_by_name(mmc_blk, partition, &part->info);
-> +       ret =3D part_get_info_by_name(blk, partition, &part->info);
->         if (ret < 0) {
->                 printf("%s: can't find partition '%s'\n", __func__, parti=
-tion);
->                 goto err;
->         }
->
->         part->dev_num =3D dev_num;
-> -       part->mmc_blk =3D mmc_blk;
-> +       part->blk =3D blk;
->
->         return part;
->  err:
-> @@ -442,22 +442,22 @@ err:
->         return NULL;
->  }
->
-> -static AvbIOResult mmc_byte_io(AvbOps *ops,
-> -                              const char *partition,
-> -                              s64 offset,
-> -                              size_t num_bytes,
-> -                              void *buffer,
-> -                              size_t *out_num_read,
-> -                              enum mmc_io_type io_type)
-> +static AvbIOResult avb_blk_byte_io(AvbOps *ops,
-> +                                  const char *partition,
-> +                                  s64 offset,
-> +                                  size_t num_bytes,
-> +                                  void *buffer,
-> +                                  size_t *out_num_read,
-> +                                  enum avb_io_type io_type)
->  {
->         ulong ret;
-> -       struct mmc_part *part;
-> +       struct avb_blk_part *part;
->         u64 start_offset, start_sector, sectors, residue;
->         u8 *tmp_buf;
->         size_t io_cnt =3D 0;
->         AvbIOResult io_ret =3D AVB_IO_RESULT_OK;
->
-> -       if (!partition || !buffer || io_type > IO_WRITE)
-> +       if (!partition || !buffer || io_type > AVB_IO_WRITE)
->                 return AVB_IO_RESULT_ERROR_IO;
->
->         part =3D get_partition(ops, partition);
-> @@ -486,11 +486,11 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
->                                 residue =3D num_bytes;
->                         }
->
-> -                       if (io_type =3D=3D IO_READ) {
-> -                               ret =3D mmc_read_and_flush(part,
-> -                                                        part->info.start=
- +
-> -                                                        start_sector,
-> -                                                        1, tmp_buf);
-> +                       if (io_type =3D=3D AVB_IO_READ) {
-> +                               ret =3D avb_blk_read_and_flush(part,
-> +                                                            part->info.s=
-tart +
-> +                                                            start_sector=
-,
-> +                                                            1, tmp_buf);
->
->                                 if (ret !=3D 1) {
->                                         printf("%s: read error (%ld, %lld=
-)\n",
-> @@ -505,10 +505,10 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
->                                 tmp_buf +=3D (start_offset % part->info.b=
-lksz);
->                                 memcpy(buffer, (void *)tmp_buf, residue);
->                         } else {
-> -                               ret =3D mmc_read_and_flush(part,
-> -                                                        part->info.start=
- +
-> -                                                        start_sector,
-> -                                                        1, tmp_buf);
-> +                               ret =3D avb_blk_read_and_flush(part,
-> +                                                            part->info.s=
-tart +
-> +                                                            start_sector=
-,
-> +                                                            1, tmp_buf);
->
->                                 if (ret !=3D 1) {
->                                         printf("%s: read error (%ld, %lld=
-)\n",
-> @@ -520,8 +520,8 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
->                                         start_offset % part->info.blksz,
->                                         buffer, residue);
->
-> -                               ret =3D mmc_write(part, part->info.start =
-+
-> -                                               start_sector, 1, tmp_buf)=
-;
-> +                               ret =3D avb_blk_write(part, part->info.st=
-art +
-> +                                                   start_sector, 1, tmp_=
-buf);
->                                 if (ret !=3D 1) {
->                                         printf("%s: write error (%ld, %ll=
-d)\n",
->                                                __func__, ret, start_secto=
-r);
-> @@ -538,16 +538,16 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
->                 }
->
->                 if (sectors) {
-> -                       if (io_type =3D=3D IO_READ) {
-> -                               ret =3D mmc_read_and_flush(part,
-> -                                                        part->info.start=
- +
-> -                                                        start_sector,
-> -                                                        sectors, buffer)=
-;
-> +                       if (io_type =3D=3D AVB_IO_READ) {
-> +                               ret =3D avb_blk_read_and_flush(part,
-> +                                                            part->info.s=
-tart +
-> +                                                            start_sector=
-,
-> +                                                            sectors, buf=
-fer);
->                         } else {
-> -                               ret =3D mmc_write(part,
-> -                                               part->info.start +
-> -                                               start_sector,
-> -                                               sectors, buffer);
-> +                               ret =3D avb_blk_write(part,
-> +                                                   part->info.start +
-> +                                                   start_sector,
-> +                                                   sectors, buffer);
->                         }
->
->                         if (!ret) {
-> @@ -564,7 +564,7 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
->         }
->
->         /* Set counter for read operation */
-> -       if (io_type =3D=3D IO_READ && out_num_read)
-> +       if (io_type =3D=3D AVB_IO_READ && out_num_read)
->                 *out_num_read =3D io_cnt;
->
->  out:
-> @@ -603,8 +603,8 @@ static AvbIOResult read_from_partition(AvbOps *ops,
->                                        void *buffer,
->                                        size_t *out_num_read)
->  {
-> -       return mmc_byte_io(ops, partition_name, offset_from_partition,
-> -                          num_bytes, buffer, out_num_read, IO_READ);
-> +       return avb_blk_byte_io(ops, partition_name, offset_from_partition=
-,
-> +                              num_bytes, buffer, out_num_read, AVB_IO_RE=
-AD);
->  }
->
->  /**
-> @@ -630,8 +630,8 @@ static AvbIOResult write_to_partition(AvbOps *ops,
->                                       size_t num_bytes,
->                                       const void *buffer)
->  {
-> -       return mmc_byte_io(ops, partition_name, offset_from_partition,
-> -                          num_bytes, (void *)buffer, NULL, IO_WRITE);
-> +       return avb_blk_byte_io(ops, partition_name, offset_from_partition=
-,
-> +                              num_bytes, (void *)buffer, NULL, AVB_IO_WR=
-ITE);
->  }
->
->  /**
-> @@ -883,7 +883,7 @@ static AvbIOResult get_unique_guid_for_partition(AvbO=
-ps *ops,
->                                                  char *guid_buf,
->                                                  size_t guid_buf_size)
->  {
-> -       struct mmc_part *part;
-> +       struct avb_blk_part *part;
->         size_t uuid_size;
->
->         part =3D get_partition(ops, partition);
-> @@ -920,7 +920,7 @@ static AvbIOResult get_size_of_partition(AvbOps *ops,
->                                          const char *partition,
->                                          u64 *out_size_num_bytes)
->  {
-> -       struct mmc_part *part;
-> +       struct avb_blk_part *part;
->
->         if (!out_size_num_bytes)
->                 return AVB_IO_RESULT_ERROR_INSUFFICIENT_SPACE;
-> diff --git a/include/avb_verify.h b/include/avb_verify.h
-> index 66655aab87..8c97adbfbf 100644
-> --- a/include/avb_verify.h
-> +++ b/include/avb_verify.h
-> @@ -32,16 +32,16 @@ struct AvbOpsData {
->  #endif
->  };
->
-> -struct mmc_part {
-> +struct avb_blk_part {
->         int dev_num;
->         struct mmc *mmc;
-> -       struct blk_desc *mmc_blk;
-> +       struct blk_desc *blk;
->         struct disk_partition info;
->  };
->
-> -enum mmc_io_type {
-> -       IO_READ,
-> -       IO_WRITE
-> +enum avb_io_type {
-> +       AVB_IO_READ,
-> +       AVB_IO_WRITE
->  };
->
->  AvbOps *avb_ops_alloc(int boot_device);
-> @@ -78,7 +78,7 @@ const char *str_avb_slot_error(AvbSlotVerifyResult res)=
-;
->   * I/O helper inline functions
->   * =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
->   */
-> -static inline uint64_t calc_offset(struct mmc_part *part, int64_t offset=
-)
-> +static inline uint64_t calc_offset(struct avb_blk_part *part, int64_t of=
-fset)
->  {
->         u64 part_size =3D part->info.size * part->info.blksz;
->
-> --
-> 2.43.0
->
+---
+base-commit: fed92546960a92177d67c0b8d7b22385f50fed29
+change-id: 20261013-verified-boot-83c01372fee5
+
+Best regards,
+-- 
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+
