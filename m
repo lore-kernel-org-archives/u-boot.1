@@ -1,156 +1,176 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E48CC6B1A
-	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 17:53:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1E32CC6B12
+	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 19:33:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A78454031B;
-	Tue, 13 Oct 2026 17:53:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1DC1560806;
+	Tue, 13 Oct 2026 19:33:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9IDla05qhsnI; Tue, 13 Oct 2026 17:53:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 02AB4403A7
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791914020;
-	b=BYlyV4A3aDZfl0oav1vVcCKpFBqkBs3qAtMN/FMF7OzqE58JaWegf7K8tQb/tsmo9wwk
-	 xP7oJBh/i2Xa9r5/sZvI+t+qQ7HIqgXpr2JoVq856onS/WM+MOEofRpWKg0E3j0P1InTp
-	 sf+HUxwZP4YaZjx1EQGMylLG4Qim9fcWcG9Gwbi0BSOGdNbQ23BtjifGGJhCsEqQ1XtLK
-	 XKpRqRTD8zfwqJEifkCJvqzCdblfOqvVCX6NdRam4/JLS7inA8z17NG69+Ez9qlzg5P9k
-	 tqhg1JnOtQYdrcUEP4w33XHH3SUhxniMCv1cOmehYvVuUCm3m352lFuK+D1So7OAHVQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oJUw8eSDgIYW; Tue, 13 Oct 2026 19:33:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A06BB607EF
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791920035;
+	b=BVuHfmc3UJdgX25bdGY4rzrDpRzMkC765JPNdsVKnfjiiOzLcxYuqUKNuBfXQSLQ9kPy
+	 8TCa/hufGagWuiP/KVJtnUUuLrvv8fQARMdG4RVY6njccYN1dJ9bC7QlgCvbCQjvhLVCn
+	 VAGu2PTcggB6Tmd0KHEFfzWZRSzSHT5gsHP/7t5kZ7yepL2DZ5429Ntk6gfuknKjSsVxm
+	 BpoDOLpzCnav7vNz1YLG/vi7KArup1SyNxvZ9apHDUwhmVZuLPTVbtJFASX57gI0QJKxM
+	 bo13Z8gHs63+0cCHtoFcpagUAizyPuMotB2xjACdXXaMWSugDbQSDZ1Nd6CLZnrvfig==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791914020;
+	c=relaxed/relaxed; t=1791920035;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:Errors-To;
-	bh=m+/O51oTcd4bxx3wFfiWXT1NZat5nTKbeMrLi4KFCec=;
-	b=M336KWUQQ8pY1Ul9FMyVh8LMJKqwb7HQX1Fbmp47YUkGIH12entVIbI2jNqewwqard2r
-	 Pyp2Fn3RSe56fAawUxyLOwwwSQamozNRZ8o1mDkdlc+6R/UuTkD3VkLZpXvAZVO6yF5DE
-	 PXucmKIz+c0bYKg7eU4efXBZ35Y8p2bCAvA4YqAWT2Os6pTUonilD4f8U2MF4DpW8HrDF
-	 0gnUxCzQTo0kcf0Zsq0D93VVKhzzf/VsM+3uz68PoXZj4eQJOkd6noRgtgjt2JruY4Ogm
-	 W6f+trMdHbZ1wIa2oKr1Euo68wVlACKOBBx4BX8nrFzzb5Ig97scfl0ywDxlEmodbcQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=lGeZyYtt;
+	 Errors-To;
+	bh=dNGNf/MRzGcUq6xc/Dpm6UQJg3KzD+qvPEusM3Nl1h8=;
+	b=szpY31ZvqXGCePWtyZDPwPhtfc4MqmUFxQgW77dFihYJVetc5V63MmTzhzCGWqNNNrs6
+	 B20aZ9h5U8U0hRtsigkepWQdslnOZAYkvB6GlI5dfjwi9hEzEcL/8L/pYY0TZ+DOKnCvs
+	 ctJ6bcZFlARHERTEyB3i9oPS8JeLV8idQSNnqIyp3pHGC5HoZAWIl6iknSsLT61MQdqRq
+	 5ib2O+BcBy5cJtjzkUM1W2iaNoUadrFCsL+tGvWy5orkHNR3RfHRZhZSRysRzthrupFgL
+	 d7rF7FX77jhKQNiFjsPy5ELLPsObDI7rKKy761oupG6+TRrBQeKjPpZyLQ6vZXOVgAA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791914020;
-	bh=m+/O51oTcd4bxx3wFfiWXT1NZat5nTKbeMrLi4KFCec=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=J9xsvgRhhhHc8ntehN+IqYAE6/Zcy2WwsL/vjxiaHZJymflUMvZLgg+OLfXqrXeBX
-	 JpPeXv0FCM4RhcHq7PJwG0rcsoqhHcpfclgvKM0R7bKp2cLGC+UK4+3TcuFKYXqQSr
-	 54aXv59oSinK5R61FaUUyu90BSQ/wGYW6xqfVWCzhORN/mqCzqkPqYKcy3cmeFqDx2
-	 g/1vxpgYpvrFhqbfCXpMcrmOrKqtEpPOcnfzpN/wTRG+Aozcu8UASznnH+X2XwKlLV
-	 h3xmYHNDsd1wReakjJ+OcirAKI5RlM2uyoUAfJC98ZL173BwWBY6u2vHY/jUBE7ZSa
-	 spSDJLak7atlg==
+	d=lists.u-boot-project.org; s=default; t=1791920035;
+	bh=dNGNf/MRzGcUq6xc/Dpm6UQJg3KzD+qvPEusM3Nl1h8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=FAjT8cjKyIJMYSNHdmyAH9mlgi/xKhSr9KPO5H3EoHKuP7Mm4/0mV9/h76WDr1AxM
+	 WcWvfVomPWsve1AM7iIymtAeNNyD2tdqcUkYGaFg9z6Y26nHq18IFPKfwToJuA1Won
+	 9wYCXe9cGDT2GtUt9qEVlslyty4gJSSNaPMrScXKRB39J2R9IzMdfBRPx9gsQ+12Po
+	 hncAZl/nuFPuujDFYRoYiLSMMSF1BjFgagpig3MCGrQZEPrBG494KxeG/31lUep+TB
+	 UKWKiyITmTzwh7wLFjQvoDsR9FhaJsUP64NEh6cnciko9jSemCMRsMAMHjINk0dbrq
+	 9EWjmEMJKV1IA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 02AB4403A7;
-	Tue, 13 Oct 2026 17:53:40 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 780B075
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 17:53:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A06BB607EF;
+	Tue, 13 Oct 2026 19:33:55 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2890E2AE
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 19:33:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 69C26403A7
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 17:53:38 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1A5B6402DA
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 19:33:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JWr-M6sIDhpi for <u-boot@lists.u-boot-project.org>;
- Tue, 13 Oct 2026 17:53:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C97F94031B
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=172.234.252.31
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791914017;
- b=PKGKSbaFlVc7ZWzwD+VZbg2QPp3HlVXn9WKgOB2biN1QxSKPoXx6rhHAZ/yB72vgqtFa
- skqmtcDhNL5xDfGjDXcusKGEqJ8/GOEw/33pRmYC8IJYiaL4ySIRQ7uppycqMKcl3OQ3z
- RxZiiE5u/sn3plRpXuLUiX5L+nTOfjnCruDnCfKNOtKi186whwMCYWibYOQEQc47yon3J
- A1zrnwV7gLIoQjhpqlCyADPXDMAyUHpLZrEKbYxlXNE6H/p9Sm976ZLqQHKOUtx//SlMF
- tMEfdx2kvjyKmora93AN0OsXPTpVbxiLQ3rVxGpfJA0DkkYqjDxVc6MIvm6jUYOLh7A==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id g-HSlDAP9EeD for <u-boot@lists.u-boot-project.org>;
+ Tue, 13 Oct 2026 19:33:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org DA46F4008F
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::3"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791920033;
+ b=NItHiBczdIWfNXki0xm/FYjvxzOyEFvEIdiHEgdDR/wytg03kuXUXmJM1InfZtyIHP8S
+ et3Tb4PvfvcKSsZOw++H/lwJvPTxZAVpCdM0SBLxrS+kyEP9omKDuWmH3pQ9cuHqeApwR
+ LSdudesirv5ddGhrxQPBvlmrzGNy7heELNfY+3yzTHZpl3YAFKl8Nztt2sUz5P/rqD1vR
+ IEQVoGlBRTFCm77JyFf2kiEUTOBLm6nonVmdZIzt3k/ln3tVr/dZTdb3s3HS6MuW0qQ8D
+ /OhujtziieVFeGoXTVkGPmBusCbYmQ93ttKcK1/h6cVi0FCmAFO0SB2Y/GkBa616KOA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791914017;
- h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
- Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:X-B4-Tracking:To:Cc:X-Mailer:X-Developer-Signature:
- X-Developer-Key:X-Endpoint-Received:X-Original-From:Reply-To;
- bh=m+/O51oTcd4bxx3wFfiWXT1NZat5nTKbeMrLi4KFCec=;
- b=mObXjDmAtC3+cKC8ichL+gs7jc9GR6DKizsUFJIoGcra4V4bIqrdp2tynfCgCtUlqi7D
- jGLmfrApb3GWOGNEAynTOk2aCXyudRPmUl8jSLvvnjQKDs1emho9+/12p1FgKmd7vDG4u
- 2HXrXS0pQHclIyGid1oa+9hJ7Wd+oFC4c6AchLeuCVC++ahOgwoZ6f2xdwopRO4MQ8k1h
- RdoEL0VrcNi8ppayzy9cG4DRdVwHSzvd6wXyzRph93oT2VuApOYcpkS7IomA0NKbRHEWV
- WfAkKiaGgnhJWBrPuXHe7LbwyW5XH4p+seBEK0jJO8LX3WdeGtem3iKC1OBP1R6nPbA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=kernel.org;
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=lGeZyYtt; 
- arc=none smtp.remote-ip=172.234.252.31
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org; envelope-from=devnull+iav.iav.lv@kernel.org;
+ c=relaxed/relaxed; t=1791920033;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To:X-Clacks-Overhead;
+ bh=dNGNf/MRzGcUq6xc/Dpm6UQJg3KzD+qvPEusM3Nl1h8=;
+ b=cYFOxsqGfOse5uIRjDhuA5Z58y6bYmSDpzQfVXQeIYagjGj+Na7X2T7iDncChVyfK1Sf
+ zNAXE6VSEkpml5/ClFpdcX0B3wlh2nWsKXxWajGbF3Egyl/e+VDlnazfU8uWRAKHkDU7x
+ wE9eufenriUAGh0nAYDsIhIAOoGAnHUJ5ze0cUpiSv5UCrKb1VU4SsuMQZp5ave/BSCWv
+ QP/hmLbuJWdxOv56M5vWOtrWm8owte7eh3cjKiCslN9dZyb+OEzsQksFk7z4JwlB5bx4p
+ N0E4Y3rL6uGmdL7V48q4QaoDhataiclYVm5wFR+JTcORYAVfyNp1kEkrfMG17Pk+U4A==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=konsulko.com;
+ dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=FsM7sSCN; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::3"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::3;
+ helo=mail-oo2-x03.google.com; envelope-from=trini@konsulko.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=lGeZyYtt
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C97F94031B
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 17:53:37 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 76B2640C52;
- Tue, 13 Oct 2026 17:53:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 58B41C2BCFA;
- Tue, 13 Oct 2026 17:53:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1791914016;
- bh=GjuW0xVjuChdhF8eXw8FxorM4tcTp3XzAHW7nNVgc2s=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=lGeZyYtt5pOCqGF2sFfA4neKLLdrjeXZ9Q/aL7dOR41vN2zl1vghbSqFZZX/OLtAD
- fOHof8oYzh18Bifqhofx8xAW5i6f7v0556ew/UHA0tyrBcjJ0FxmACNnKt0Bu/jX1y
- rb8SQHxRhxW51DkwUjD8W2XGdECJ0XJ3UX9OHyQbGiFjHziUyzN/eM9ziXI3eHhjZX
- a2U1/p7o7A7R96S3v2kA0FCQeFfX3F7RlBASv6A9UMJvw8ZfYFriFm7PXN36g35E8B
- ZTdlejOKqXpaJ5Og3XF0TCnKPDftTe6Ek2G1nw2duNajpmSp64V/RN4JjX3Rbg5MNL
- pMIkCGKrfDbEg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 44386CC6B12;
- Tue, 13 Oct 2026 17:53:36 +0000 (UTC)
-From: Igor Velkov via B4 Relay <devnull+iav.iav.lv@kernel.org>
-Date: Tue, 13 Oct 2026 20:53:34 +0300
-Subject: [PATCH] arm: dts: meson-sm1-odroid-hc4: power-cycle the SD card at
- init
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=FsM7sSCN
+Received: from mail-oo2-x03.google.com (mail-oo2-x03.google.com
+ [IPv6:2607:f8b0:4864:31::3])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DA46F4008F
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 19:33:52 +0000 (UTC)
+Received: by mail-oo2-x03.google.com with SMTP id
+ 006d021491bc7-6f4cc0bd537so259184eaf.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 12:33:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1791920031; x=1792524831;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=dNGNf/MRzGcUq6xc/Dpm6UQJg3KzD+qvPEusM3Nl1h8=;
+ b=FsM7sSCN3RMsY+BT04GHAUtqTR85V1ye7hLGpy0B6oDl+a+g2Tia5N9EAi/d7KtU6c
+ cWCglkNKie6ZydSOi36mNEfniOy0nHPZTyugMbr6MQt9sPVAJOMivO6bTLrH39c05zJo
+ emF3xOv2NVtQKvtBGm8AolHkc3CcCG2v1IlK4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791920031; x=1792524831;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=dNGNf/MRzGcUq6xc/Dpm6UQJg3KzD+qvPEusM3Nl1h8=;
+ b=VFEQcssfMf4JRSaWYsI3l52LEtR8uX13BbENGrACqZGJIKvdXtkeOyJ2R6BErC/ok5
+ qvzsVhSN8fJegtT7ezVBeJrF+B/W3jMleWihx/ucl/+fd+/+p4fca/J728cNu/jfZU3R
+ 9Sj0LRHR80tQAuaeEORMkbl0LxKTJh9HDPfE3hXJS048QZgHwixRlvzY1o9oebUD+BCR
+ Ikdk3OftztDfDYPf91zmzWYMI06bHnFrvaFQfPcX6j0glN/cy54wEA4FYdPJ8HDKcGbv
+ 3F7Ycg85rbkkyWhWw6a0Qj2tVAotLAKgRyuNJnu/6FJ0jSfHtHGasWFkkOA9oNgCuQvm
+ 0Ujg==
+X-Gm-Message-State: AFq9FYL8T9Ir5695dRP+A29+F3Z9RPY4xcjC4ItVFBerst7zQB5NeAqr
+ us7uvsP+uC4EXXFMUuBvkhixUNIUsbMLGbv7s1+j5B2HLuMC5zZYdOGwuxwOuzos9mQ=
+X-Gm-Gg: AYBFou0rWDedXM2SwSQ6NE2GgWPaC8Wp9wdKQlOq6PnaNg0R2JiYFH9iAJh9QyZOxcs
+ pGuiNK2VybEYQ8cVZraJ8MVZ4ZrtF0OhhYdPwlijLBc2D/iaygKQyqAIc9dwsU1ziN1+N6MEpOm
+ l1EBUGD9IzKfHe1R3WfpgIaomWsJ6TGGcbwM5f/Yq4Sk017KG9Kedoqt0DUHgVCEqsqARfu8D9J
+ aRHYJDLcElPVWADKRNsbqF25JTDrNmT2635tnr7SOQv2Oo8+TnPnyY2DTZ+SjmckV1+xO7GOOJ2
+ b4NQZ6pGhsxL1hfpBs9vjJv0sFMjClY8CE1+2sRQcnPClMGb5F2dZtLjzjtSoiQdFuwsuw+TEvU
+ cmmLpRMFD0+YIWrGEAD920KgIzbOuhHfIMZ60GYO6/TDLJsrpFP7pRVjRyh0mNZavSoOrR9maia
+ eoId7+trg/HGsS2u1CB5rrG40XdftAhMp1ZSV2y435kp4OG+QBxtGCGYGm4tMKCJIPK9otOAe19
+ JJLR5jo7jROMC3AMCJCNQImuamEiGmAvBL7WOzewASNGq0hRW3QUf7WcPUJDBXNA/zizpUKUvSi
+ 5kqw5nVP32wGEKuOPQo=
+X-Received: by 2002:a05:6820:1693:b0:6f8:2346:cd97 with SMTP id
+ 006d021491bc7-6f82346d9bcmr4089206eaf.6.1791920031417; 
+ Tue, 13 Oct 2026 12:33:51 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-830385b9cb0sm13496645a34.4.2026.10.13.12.33.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Oct 2026 12:33:50 -0700 (PDT)
+Date: Tue, 13 Oct 2026 13:33:48 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Vencislav Atanasov <user890104@freemyipod.org>
+Cc: u-boot@lists.u-boot-project.org, Janne Grunau <j@jannau.net>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@nabladev.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>
+Subject: Re: [PATCH] New platform: Samsung S5L87xx
+Message-ID: <20261013193348.GF4042005@bill-the-cat>
+References: <010701a10b3e4582-979b6c8d-12c9-4819-ad7f-7ce925de5824-000000@eu-central-1.amazonses.com>
+ <20261007191312.GD3079290@bill-the-cat>
+ <010701a125702538-042eab3f-9dd5-4f9a-b8cd-8d60474a8910-000000@eu-central-1.amazonses.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261013-b4-hc4-sd-power-cycle-v1-1-cde760a256a5@iav.lv>
-X-B4-Tracking: v=1; b=H4sIAB1wzmoC/x3MTQqAIBBA4avErBtIM6GuEi1SxxyICoV+kO6et
- PwW72VIFJkSDFWGSCcn3rcCUVdgw7wthOyKQTZSi0a0aBQGqzA5PPaLItrHroTeSKV170zbd1D
- aI5Ln+/+O0/t+ToIaRWcAAAA=
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.u-boot-project.org, 
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Igor Velkov <iav@iav.lv>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2119; i=iav@iav.lv;
- h=from:subject:message-id;
- bh=tR/RFYgAqbY87MOye/X3GfkLr/MIhX3x0TK79SL/+gg=;
- b=owGbwMvMwCVmNH1q96v4SmbG02pJDFnnCuTebzBRkLR1C+N5XVVhc/bU4ePe07ObuXzd3DYfD
- hEXkFvTUcrCIMbFICumyDLhkMatjCVX//p7mD+AmcPKBDKEgYtTACbyfB0jw96599raVr42938l
- /P38ued23S8717Ov2G1X7tM7XyKnaCPDP7WE9T/32Rj0sXgUvgkozkn1C6q3y+M9t+zDFY02/6v
- 7mAE=
-X-Developer-Key: i=iav@iav.lv; a=openpgp;
- fpr=90C228DA68A4D5FD4F4837E03297958BEA5F7903
-X-Endpoint-Received: by B4 Relay for iav@iav.lv/default with auth_id=1060
-X-Original-From: Igor Velkov <iav@iav.lv>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="fn+S73J9R2iSg8y5"
+Content-Disposition: inline
+In-Reply-To: <010701a125702538-042eab3f-9dd5-4f9a-b8cd-8d60474a8910-000000@eu-central-1.amazonses.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -162,66 +182,257 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: iav@iav.lv
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Igor Velkov <iav@iav.lv>
 
-mmc_get_op_cond() power-cycles the card, but both SD supplies,
-TFLASH_VDD and TF_IO, are regulator-always-on in the Linux device tree,
-so regulator_set_enable_if_allowed() leaves them on. After a watchdog
-reset a UHS card is still at 1.8 V signalling and U-Boot fails with
-"No partition table - mmc 0".
+--fn+S73J9R2iSg8y5
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Drop regulator-always-on from both supplies for U-Boot, and keep
-TFLASH_VDD off for 100 ms before it is turned back on. Linux has to
-keep regulator-always-on: the boot ROM does not turn the supply back on,
-see Linux commit dc7f2cb218b5 ("arm64: dts: amlogic: odroid-n2: keep SD
-card regulator always on") for the same supply on ODROID-N2. TF_IO
-keeps regulator-boot-on: after a reset a pull-up on the board enables
-it at 3.3 V before U-Boot runs.
+On Sat, Oct 10, 2026 at 10:51:08AM +0000, Vencislav Atanasov wrote:
+> Hi Tom!
+>=20
+> Thanks for the review! Please find my answers below.
+>=20
+> > On 7 Oct 2026, at 22:13, Tom Rini <trini@konsulko.com> wrote:
+> >=20
+> > On Mon, Oct 05, 2026 at 08:46:32AM +0000, Vencislav Atanasov wrote:
+> >=20
+> >> Port U-Boot to the Samsung S5L87xx SoC family, which is used by the
+> >> Apple iPod nano (2nd to 7th generation), iPod classic (6th generation)
+> >> and iPod touch (2nd generation) digital audio players.
+> >=20
+> > It's very nice to see this. For the next iteration, please reword this
+> > so there's more information, and also the attributions, above the first
+> > "---" so git doesn't omit it.
+> Sorry, this is my first patch using the kernel/u-boot workflow, I was not
+> really sure which part to include in the commit and which part in the
+> description text.
 
-Tested on ODROID-HC4 with a UHS-I SDXC card and U-Boot in SPI flash:
-after a watchdog reset 3/3 boots from SD (v2026.07 without this change:
-0/3); cold boot, reboot and suspend to RAM unaffected.
+No worries.
 
-Signed-off-by: Igor Velkov <iav@iav.lv>
----
-The card holds a btrfs root, so the main build under test also had
-FS_BTRFS, CMD_BTRFS and ZSTD enabled; odroid-hc4_defconfig has none of
-them.
----
- arch/arm/dts/meson-sm1-odroid-hc4-u-boot.dtsi | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+> > [snip]
+> >=20
+> > Globally, there are spacing issues where the changes don't match the
+> > rest of the file, please fix those. Similarly, please run checkpatch.pl
+> > and make sure there's not other fixes like that to do as well.
+> I've ran checkpatch.pl (using b4 prep --check) before submitting and the
+> output is:
+>=20
+> $ b4 prep --check
+> Checking patches using:
+>   /Users/venci/Git/u-boot/scripts/checkpatch.pl -q --terse --no-summary
+> --mailback --showfile
+> ---
+> =E2=97=8F 93571ce45b81: New platform: Samsung S5L87xx
+>   =E2=97=8F checkpatch.pl: arch/arm/include/asm/arch-s5l87xx/s5l87xx.h:47=
+: CHECK: Macro
+>  argument reuse 'i' - possible side-effects?
+>   =E2=97=8F checkpatch.pl: arch/arm/include/asm/arch-s5l87xx/s5l87xx.h:67=
+: CHECK: Macro
+>  argument reuse 'rx_pin' - possible side-effects?
+>   =E2=97=8F checkpatch.pl: arch/arm/include/asm/arch-s5l87xx/s5l87xx.h:67=
+: CHECK: Macro
+>  argument reuse 'tx_pin' - possible side-effects?
+>   =E2=97=8F checkpatch.pl: arch/arm/include/asm/arch-s5l87xx/s5l87xx.h:69=
+: CHECK: Macro
+>  argument reuse 'fn' - possible side-effects?
+>   =E2=97=8F checkpatch.pl: board/apple/nxx-common/nxx.c:15: WARNING: Use =
+the livetree
+>  API (dev_read_...)
+>   =E2=97=8F checkpatch.pl: board/apple/nxx-common/nxx.c:20: WARNING: Use =
+the livetree
+>  API (dev_read_...)
+>   =E2=97=8F checkpatch.pl: drivers/serial/serial_s5p.c:16: WARNING: Use
+>  'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
+>   =E2=97=8F checkpatch.pl: drivers/serial/serial_s5p.c:65: WARNING: Use
+>  'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
+>   =E2=97=8F checkpatch.pl: drivers/serial/serial_s5p.c:123: WARNING: Use
+>  'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
+>   =E2=97=8F checkpatch.pl: drivers/serial/serial_s5p.c:140: WARNING: Use
+>  'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
+> ---
+> Success: 0, Warning: 10, Error: 0
+>=20
+> The first CHECK uses a u8 so no side effects, the next CHECKS use a compi=
+le
+> time constant. About the livetree API, it looks like a false positive to =
+me, as
+> these fdtdec_* functions look like the standard way to init DRAM and its =
+size.
+> And the serial_s5p code essentially needs to not get compiled at all for =
+this
+> specific platform, so it uses #if IS_ENABLED(x) rathen than if (IS_ENABLE=
+D(x)).
 
-diff --git a/arch/arm/dts/meson-sm1-odroid-hc4-u-boot.dtsi b/arch/arm/dts/meson-sm1-odroid-hc4-u-boot.dtsi
-index 963bf96b256..5f09ecc8f60 100644
---- a/arch/arm/dts/meson-sm1-odroid-hc4-u-boot.dtsi
-+++ b/arch/arm/dts/meson-sm1-odroid-hc4-u-boot.dtsi
-@@ -18,6 +18,16 @@
- 	vref-supply = <&vddao_1v8>;
- };
- 
-+/*
-+ * Let the MMC core power-cycle the SD card: after a watchdog reset a UHS card
-+ * is still powered and at 1.8 V signalling, and U-Boot cannot read it.
-+ */
- &tflash_vdd {
- 	gpio = <&gpio_ao GPIOAO_3 GPIO_OPEN_DRAIN>;
-+	/delete-property/ regulator-always-on;
-+	u-boot,off-on-delay-us = <100000>;
-+};
-+
-+&tf_io {
-+	/delete-property/ regulator-always-on;
- };
+OK, thanks.
 
----
-base-commit: b871f72273c183ab557e29f9bc52d9065e0aacf3
-change-id: 20261013-b4-hc4-sd-power-cycle-fb24669db395
+> So there were no spacing issues according to checkpatch.pl.
 
-Best regards,
--- 
-Igor Velkov <iav@iav.lv>
+Yes, it's not really a good tool for that. Changes should be consistent
+with the rest of a given file.
 
+> FWIW, the PIE changes in arm920t/start.S and arm1176/start.S
+> were directly copy/pasted from armv7/start.S and they are needed because =
+the
+> previous stage bootloader cannot be configured to load u-boot from a spec=
+ific
+> address. I'll fix the spaces without relying on checkpatch.pl to point it=
+ out
+> for me.
 
+Thanks.
+
+> > [snip]
+> >=20
+> > For all of these dts files, have you submitted them upstream?
+> No, as there isn't a working Linux port for all devices. There is a kernel
+> booting on 2nd, 5th, 6th and 7th gen iPod nanos, but from different branc=
+hes
+> because individual developers worked on each of the ports. But since gett=
+ing
+> u-boot to run is the easier part, and a pre-requisite for Linux, I decide=
+d to
+> wrap up and submit the u-boot port for review first.
+
+OK. They should be able to be upstreamed in some manner, at this point
+in time.
+
+> > [snip]
+> >=20
+> > Can we figure out a way to share includes? It seems like this one for
+> > example is cp'd a few times. Maybe arch-s5l8xxx ?
+> I was relying on the arch/arm/include/asm/arch symlink that points to the
+> corresponding arch-* folder at compile time. But since the files for all =
+s5l87xx
+> devices are essentially the same, I can modify the driver to just include=
+ a
+> common on in case of IS_ENABLED(CONFIG_ARCH_S5L87XX).
+
+Thanks.
+
+> > [snip]
+> >=20
+> > We should probably handle this as a "choice" statement
+> I'll fix this.
+>=20
+> Does this also apply to arch/arm/mach-s5l87xx/s5l8702/Kconfig and
+> eventually arch/arm/mach-s5l87xx/s5l8720/Kconfig, when it gets a second e=
+ntry
+> i.e. iPod touch (2nd generation)?
+
+I suspect so, yes.
+
+> > [snip]
+> >> +#obj-$(CONFIG_S5L8730) +=3D s5l87xx-buscon.o
+> >=20
+> > Commented out lines should be removed unless there's a very good reason
+> > to keep them (and in code, it should probably become some debug
+> > statement that'll be optimized out normally).
+> This code was an attempt to port arch/arm/mach-s5l87xx/relocate.S (Remap =
+SRAM
+> vectors) from ASM to C, but the vector copying needs to be done immediate=
+ly
+> after the remapping so I was not sure how to do it. I can leave just the =
+ASM
+> code for now and delete the C code.
+
+OK. And yes, please remove stuff like that in general.
+
+> > [snip]
+> >=20
+> > Empty functions like this should mean we just need to turn off a Kconfig
+> > symbol instead.
+> I've done it for the other CPU core types, but for ARM1176 there wasn't a=
+lready
+> a Kconfig symbol, and I saw that other platforms already do something sim=
+ilar
+> e.g.:
+>=20
+> arch/arm/mach-mvebu/cpu.c:47:
+> void lowlevel_init(void)
+> {
+> /*
+> * Dummy implementation, we only need LOWLEVEL_INIT
+> * on Armada to configure CP15 in start.S / cpu_init_cp15()
+> */
+> }
+>=20
+> arch/arm/mach-hpe/gxp/reset.c:15:
+> /* empty to satisfy current lowlevel_init, can be removed any time */
+> void lowlevel_init(void)
+> {
+> }
+>=20
+> If the goal is to clean up this pattern, I can modify
+> arch/arm/cpu/arm1176/start.S to include
+> #if !CONFIG_IS_ENABLED(SKIP_LOWLEVEL_INIT_ONLY), similar to the other ARM
+> platforms.
+
+Yes, there's a lot of places where the code can be cleaned up,
+especially for these older cores, now that we've moved to Kconfig,
+really. There generally speaking shouldn't be a need to add a dummy
+function today, it just means some symbol should be off, or needs to be
+able to be turned off (as part of migrating to Kconfig we did a lot of
+"everyone seems to set CONFIG_X, so keep setting it, without seeing if
+we could just turn off CONFIG_X and then drop some dummy functions).
+
+> > [snip]
+> >=20
+> > I can see this (and presumably the rest) weren't done via "make
+> > savedefconfig", so please do that for v2.
+> They weren't as I didn't know this is the way to generate a defconfig. I =
+will
+> redo them using savedefconfig in the next patch.
+
+OK.
+
+> > --=20
+> > Tom
+>=20
+> Thanks again for taking your time to review the patch. Should I submit the
+> corrections as a new patch which applies on top of this one, or as a
+> second version of this patch? Also I saw you have a GitLab instance, are =
+MRs
+> accepted there, or the email flow is the most recommended one? I'm more u=
+sed
+> to web-based MR and review, but I've already set up my email and git/b4
+> tooling, so I can continue submitting the patches via email.
+
+It should be a new iteration of the patch. And really, if you can split
+things up more (say, a patch per generation) that might also make review
+easier. We do have Gitlab, but email is how code is reviewed and
+eventually picked up, rather than merge requests.
+
+> Another thing to note is that I'm working on macOS so all building and te=
+sting
+> is done on a Mac. I also have a couple of Linux machines, is it a require=
+ment
+> to test if the patches build on Linux before submitting? I'm using
+> arm-none-eabi-gcc version 16.2.0 from Homebrew for the target and Apple c=
+lang
+> version 21.0.0 (clang-2100.3.34.2) with target arm64-apple-darwin27.0.0 f=
+or the
+> host tools. It seems to work well so far.
+
+It should be fine to keep working as you work. As documented at
+https://docs.u-boot-project.org/en/latest/develop/ci_testing.html it is
+possible to get a CI run done, when you're ready to try yourself, and
+that can be helpful.
+
+--=20
+Tom
+
+--fn+S73J9R2iSg8y5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCas6HmQAKCRAr4qD1Cr/k
+CrZKAP4127XSLaIR7vi5Rp8q4rdm3vk5Wz2ccahQjA6AMvecKAD+KjmCrclPTlK1
+OJXgeO/GXxeOcFnMElgOsODyQmq9eQQ=
+=zneI
+-----END PGP SIGNATURE-----
+
+--fn+S73J9R2iSg8y5--
