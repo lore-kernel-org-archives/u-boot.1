@@ -1,183 +1,182 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E509BCC6B12
-	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 22:01:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 114E6CC6B12
+	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 22:01:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id ABB22406FB;
-	Tue, 13 Oct 2026 22:01:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 75372608D5;
+	Tue, 13 Oct 2026 22:01:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DDLPSqnqgClB; Tue, 13 Oct 2026 22:01:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org DC87640709
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791928874;
-	b=i0SinvA1UClqgTozs6zSxfLYPzS3TtxyoRVfSo6KucTjavfFpGidyE9oQRPfmALoMqv1
-	 IkUO1gKACe32AREhwkDANs42SdX1FkVMrKTF3FanQJwplr6p5sy0b++7Fo4pgubicQFk5
-	 WlkF4GtSAt6ulrO5goso0KtBwDOema5PUfJGarZhQrOQX/Ers1V4OtMT6tOzjcBgV6NT9
-	 yTGZuvzKJmfsqgVSaLb/4q8B5P+J3ubAHf64wzdqKHhIiS9IitN/E5Xf4LeB14q/YHkxA
-	 WEs34OvTU8azwmALUvgZiWHNG3R4aGfqGl094snhPPKMeDKLFUL9F74RSUfquLTdYNA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sh2401MdDWL4; Tue, 13 Oct 2026 22:01:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 92E54608BF
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791928876;
+	b=ibCwPPj1iguqlQ+cagnuOuHaMq0pYEt4/exEEUD4pwXoURmc7jllQI84w4f8Ivn7hqS/
+	 0HiAU6Tm0ONUnqH8iorPn1THlxyeEUksQqWylTBYcPfRtZ/rR75+CljuTo9xiEowZSSDV
+	 Ncu7HkjnxqfI4b4p2ULBCETtolUog9iHicTB2rs40jsUMHD0AiMysXZlZES+XvVpTrtif
+	 xaZgmcfp8RTYV3fJcvu0Zb67CSteQKiZ0ZGAlyTkEpFAmiN5FxgbVor76gTiShXelH42c
+	 jjY0XwtBlgG5qybm88HBX08GhNtk5ZOm0/yRFvgUS/+dK/Bn45EwUSzCmKJmBrd1V9g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791928874;
+	c=relaxed/relaxed; t=1791928876;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=2K3AptX3sanO7VxZkkZgw3FXE3NK9UcZO2o9+oWc6Ps=;
-	b=d2tECGoNhEo4gJ6p5HBthuQNgnJ+fCw+oJKgap7q2U6DiYYvir3Ng1R9Uzy3N5j71ssp
-	 Gjm6KgmFzkHEwZoiXqgpYdrd5blO62ktwXnNFIs0HWOF2cd1ZwV+3fem4wuVnVcDOGpeD
-	 iszoVUF48sBQ8WmFJ9y8AtdCC979JfMf7cTUN+IwgZUHxzhHEgVZmta3Z11zZGgWIlQu1
-	 4V5s8/yxY+fweK9wFc2Lj5uWWk0x2LQToqDGKzCK4D7MNPv5ScQM2owTfW3TlVfA2Nebs
-	 Iieir/POg4YlrRmwhHdzcRn0qDTJGV9Tjt9KLWMVeXIqndWJ8USaJkFGuOm7Wym4k7Q==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=wgB5twfa4lCYNlMVwlHBPXwpEbEkYQpRBte07SIOpWI=;
+	b=jmXZRRujzr4EfLH+DwVcDASYCzOjCBJexxhDsfEhJnQNiNM3lZTo0EwjtN4jfYp+EQiN
+	 ecsieILhgTlXth+XdcS3vppIy8KwE9EAOFI7xew2sWkkJSmQJNzsQyX1CWqjhRCuIGllX
+	 j8sIOQ9R1/P36B5pSQe3x5I1S7fcPhQ/IqccBMzuFmjfHJfe1vUH39nlcIqhUSpGeQEeK
+	 +0FFDNH31evwMpRarfbd0aXl08+5kF9Rc/fNS0ngme7Gp5NmH9UFRmsbZ7M6Xi0NCKr26
+	 pfuPkfEYPv5aybTYYrsnFN9WLuQhn0ddSpvKwrbNITCaooWOUJ1XW+epdHEdA1ck2Ew==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791928874;
-	bh=2K3AptX3sanO7VxZkkZgw3FXE3NK9UcZO2o9+oWc6Ps=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ZiT5rJ06Z/MrrbTe+CQTXvVzszczLf+TM0aSHD0Snwf2yfY3IB4g306OZ+89noEnF
-	 Sm7d/Dvkjw9ZPicCl0ZGIIh/UOQbSwkgaNNZ1X8OmQ4QlKi0wGQqUlc+FJFiOwdQzi
-	 LH8WZsKP69SUjA14ABIKWuN1BngSKxTzvzigCNHhRLcoRnJmZ1UG/WDVFXXWA4cESe
-	 dVEungZOa/EjdjslrLFuQf4n1K0S9alJThSq6AzsymRzUjuBws7hsS1wCPjpKGbR2+
-	 WY/l07DwvQ09pp4TXSnq76/yjq04TrIrthudPv9hXbjn5lrbZhMTHYLtM1k64758m/
-	 2ATkomaX0/Abw==
+	d=lists.u-boot-project.org; s=default; t=1791928876;
+	bh=wgB5twfa4lCYNlMVwlHBPXwpEbEkYQpRBte07SIOpWI=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=LBnFVllOxjrAma3D87yOmdenassyGx2TlsR51VRj6Ojk32iLJjsHlh/2YSOIMQLRy
+	 YA6dCU8Rx7GDMtNeQXj/hUl5hJoEaQsXZ+vIQkwH4NTHtcNVkST49/K3sff5l+7FWh
+	 biTq2ZfhGK0BUU+9DoxlXhZ+rhOwjkPy0pxns71+Ez8+3f7Tr7wUMNssmA3oFaY/xM
+	 pqj0a3Rl3WSqM2q98Qgdjy9TLk1RLHZvaXhhek0IqzRHu7mKsqoNiSIv3bMDN3fW1r
+	 sjSYa3IHUycYdsIB9RzPQ7KRJDUio1i52RlihZ2Mp/3x9kp8GA6KaKWOMv4w8SZy+M
+	 L8CCRv3t7cYXw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DC87640709;
-	Tue, 13 Oct 2026 22:01:13 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id AE8582AC
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 22:01:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 92E54608BF;
+	Tue, 13 Oct 2026 22:01:16 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id DE5571DE
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 22:01:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AC4D58081F
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 22:01:12 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id CF120401A0
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 22:01:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bKVQPtU-QQLE for <u-boot@lists.u-boot-project.org>;
- Tue, 13 Oct 2026 22:01:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 28CE0807F9
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::333"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791928871;
- b=hMsOGjHX3Jny3SKmKWxN6j5/Pkw4gOOBDafl3vgcTuME/eqTGdhA5NARyw15m0sKLWSg
- 1pgBMMuluexrcQSX1/M0g9V5ykj1N+gKr+1kvKdHYexnt7MWkFrKkR+RNpqa7Zozwr5zO
- ekPn+bPi0xvVAQDyi78DLPN+M34bftS0melhbXN+mS97exYZ9rHb+jDnk8P7Y0GPxA/yY
- Dp5vjkXcnWN/m/EgznTsgjXPn9lK2YbuJq1WKmUSMRZ3km7nDMNAHQE7BZMh0/QUX0RMw
- ppzlejE4R/h4h5pb2Yyv29+51Dl9qhCF41/tN4Fdo7nh5614LfutpShDYIxUbQIpV6Q==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gAB5iROMO2s3 for <u-boot@lists.u-boot-project.org>;
+ Tue, 13 Oct 2026 22:01:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 383C04008F
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::330"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791928873;
+ b=tdrcFUkP2D77LzfHQoZ3iLRD+6D3tjTrNqDXyv0S+NG18bb71QFl3lX0dViUQakyp8LN
+ 2HOfmhpLZ+vK1DORjT7mOtW5VeRSofWmyVcimpXH6X7q7CFstBnqd2OUKb7zXkkAUQ1z0
+ uZ8bM8pyQygD9XYBEMTWoTF443M+r8WmUL18lv3ERu/t3X2q2lWx4A7Z8R3AHyv0Q/sSd
+ c11s1dzHJONBVg6VDjMj1KNnhB4y+AlnLKUpitwxDOI/QgqHltXyVuzsYvDg76GPbTuuu
+ C9NV8OBeYEwSPY54m703r1p8zFezPHMzrANvyn+Iw4wjqI9d0V2Ajdfp61ZKDWKrWIA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791928871;
+ c=relaxed/relaxed; t=1791928873;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
- Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=2K3AptX3sanO7VxZkkZgw3FXE3NK9UcZO2o9+oWc6Ps=;
- b=BBiRnP1ykZSzjE6dSqIrCe/RTl45XF8OXor2HMOa4lFdCfbnCDPncBYyoT1Ijezv6u/3
- T7FeUScnsDze4p24qYydY5dqBi9IiJrbsXjtFfLLmAzaxMSnc3XrbUkI6C3fMcn+kJKVf
- k6ROt9H50BYDKhQMRlYYzXX2cvg6CZ+c9ijQM3NM/C65nqzqPQIspEE4dnnjcF7XF9PtU
- /WOf6XOWMq7Q7YUQxPwiRU4PzY6Ixi1EDhyOrMQ9iPuMBeU5tNe0aW1VCgbWmo0njjYik
- BVF68CAaNQvfKotW2vS4mjfcO1m6JZ+WOWHM5BK/jjBCa3Pc7YxlNHWvycBbnSOJUcw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=wgB5twfa4lCYNlMVwlHBPXwpEbEkYQpRBte07SIOpWI=;
+ b=pUlvI49OH6z9w70dZy/911/19qhIJkpTRlSPNv6PbDcsbFLDOMxNuchLV6LWHyAJGN2+
+ 4tmDQYmxlzFDFZT8sJdz09D7gVXcuXWPPJ9XfwGGVZXpUmeScAjy5E39UKaxWI73N+Hk7
+ T/Fq1alHPuZhSxmF83wLa6deMSk9n7DJ/3xpii6k9V74cagsIthuqL7xyoiAyMsr5XI9n
+ 3f128ONg6Gr6oQ84RwaE3rXRn9p/s0sBmJ1YrQU0R2UfJhWFcdqp/H59tQOLOPodgvUYG
+ f2gkRNyD8upDe+0iw/0x5pLPMWmqCzaSTkP6K3Kn4mXwW0EasWEp4zDkW46jUI9eh8g==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=none header.from=baylibre.com;
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=SYk0NU5X; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::333"
+ header.s=google header.b=N4XZz7ox; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::333; helo=mail-ot1-x333.google.com;
+ client-ip=2607:f8b0:4864:20::330; helo=mail-ot1-x330.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=SYk0NU5X
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 28CE0807F9
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 22:01:10 +0000 (UTC)
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-825487fb37bso2163959a34.3
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:01:10 -0700 (PDT)
+ header.s=google header.b=N4XZz7ox
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 383C04008F
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 22:01:12 +0000 (UTC)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7f48c750afcso232432a34.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 15:01:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1791928869; x=1792533669;
+ d=baylibre.com; s=google; t=1791928871; x=1792533671;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=2K3AptX3sanO7VxZkkZgw3FXE3NK9UcZO2o9+oWc6Ps=;
- b=SYk0NU5XYETbKwLa56kBOzUayC2I6FsFsDZBtgnIYMB0Zc+UCiE84i3YMhsOtaM7ms
- B+LzTaxaqtEzJ+Qd2gUTWW7wv4JFTjMeKSxuLYdVM0m9fWyqAu9O0lWU4KL7BMkXdLsV
- i7GC2PyCBUGYqD5DDxGvlcI5FnbeNqf781ApxnDlSY7zZOudwgyjI7xxaKM698iha0Cn
- iOuF+gnex2QzwayXc/LhJYbNTqLK1bFQNB62eMdMph7VvsakDNvi8gO8l5QwkYvHU/xM
- yoezDWCAzJMMCaosaBrJoiO3t/9i3qCti4tnluqFsG0B4rrngQf/nCASpp+JTykLdOk4
- MYhA==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=wgB5twfa4lCYNlMVwlHBPXwpEbEkYQpRBte07SIOpWI=;
+ b=N4XZz7ox4HT5tovmlco5P8B+VxkeLgOQaUBdEUTYwk+vQnhfjT7lVQSHfuBsc9jt+s
+ pxGcCA2/vC9otHXTmxQeJpE6b+CqQklcSZre+w7yg66swbkSIbBP2MlW8+B6AjYs8cx1
+ V+OzTAK5NcVbTp2TKP+IjArTR/sLFCCTfy3hVi+t+wt/kGzlbZzrNwx70h6ynJ3+KSNO
+ VYCnR+wBWuTFlrW4hUgG4iQENrqI0mdn3tGSI5Yr9SKXznvrMus9WrxT6ubAT8xMZVi5
+ JkS5QZoqilbEL0n9brfj5zysCHKOI8jHSqM/x2EU8/09JQyH9DIMgnLQ2zh07VZLDd9j
+ 1XKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791928869; x=1792533669;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=2K3AptX3sanO7VxZkkZgw3FXE3NK9UcZO2o9+oWc6Ps=;
- b=onI+a1vXWbSSCTfAHqXQ566dUIW2Ciuvuy6pyBaIOwGkyOhL4z05qI45rtrf/372iw
- 2AHs1DCHWLNuib/ofrYmE8eeAm/WADMe80UTxWyftCeUXWoFGeuBypV8ALIQwMmshomy
- mfjBUf9TA4wslTkIg/j4MSBmDv/K6vG1ZV7Cr76ptZe1pf34dttJkmmOELnPQKt8aPWp
- Zt3/YpWd7t+3n4ELBufSgJ3976IwEHGRVDxx+Gbl+PRC2VuzBw8CNZjooDZVTUihL6s+
- lBS5iH0AbAOFv/POIZG4Cg8QumHj3oQWfqNzyvgtOGajTpwKXIGSJHXDmCR0/2kbBktr
- 6T3A==
-X-Gm-Message-State: AFq9FYKduFpt2Uh10WdB06ITVcGxKcOlUeVRfreV/vzKV5sfuCxGS12f
- zKDG3ephcfavpOjw/4A+0AAlXxYHxl0UPtCDVQactEYDZ/u1IATcnSwqspS1TXskUwGZNHoRcCS
- 4m1Ke
-X-Gm-Gg: AYBFou1WQsp2T4cIvKYTrFdq0Fl8QvbRkz+UWaoEnXb0hb3TizyzVAVoca6sFkgNy3S
- 27Dr0ID01PIUuu4vet2ljs7UGOIkR9tnai/iH3jY39WyFYPjXrtaZ0gCWQb6nRDWMfxoyk/MQNJ
- dJXUqPqaOsIkk8LwuN+ztKXDwytw+cqqjww2jIPDFsX5DmdNkkxHRh8Pqg/o+mDTiG5hse803oQ
- 8IRQ5UAXLAEPl6HirsNR3i66MKlnDSaOLLZOjkEtsPEBzlebIrFMi//liIjXFQog53bXwPBthbB
- NHlFJM0KldULIP3vs7zBlEc2PjU4V7nnBxnOBVvsK15T7sDh9dXX1fQmAMyA3ez9TF2JYt+zXaF
- ujiLEvDta+T8ZaUhnWdsPxuZ3xXICwkZnwuB9domrqBFtiKWML1TzlaXU19m3n/fKTc3ybkkmaY
- rMEMWP5RE86p9O1PKBVuPIuk6ePCn0eziiDZgEdKvLz4p8cDkCO/i7r9qTj6WsiOo93kAK73N0D
- jg=
-X-Received: by 2002:a05:6830:270d:b0:80c:d34f:5f63 with SMTP id
- 46e09a7af769-8309814be28mr12795833a34.28.1791928869412; 
- Tue, 13 Oct 2026 15:01:09 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1791928871; x=1792533671;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=wgB5twfa4lCYNlMVwlHBPXwpEbEkYQpRBte07SIOpWI=;
+ b=S/ke3ovieVkBqv86xoOmQUkf7fHJVF7QVWshefFH+jK5HyZo5++KK4G6gkup9g2Phy
+ 3PMAUzkjRP6h/GGzrH7PJ3DqXC2tc4jlDC/EtPp0yGbZwJlq194+9wkblHXYyIw2Lr7g
+ 5sWHUVrocKoqHsp6mTC4ZVe+iLUGyVqHadHHC7mphLegKJ3Ktb+GgrtfsV7djaYLC9Pm
+ XnmhyGjyhYuh1aOyELlmmgbAz/fbvWYm+/4Opuum7oDpMFbOxqgFIQ2V01PvgB/yKGAQ
+ i7QvF8sZdZBqfyM/Fx2yJQzYTXTPZm+rwYgcF8+Pgsf5Ve8Qo/tSlOKAVjzI1jOCyxWZ
+ MaNA==
+X-Gm-Message-State: AFq9FYJee8q74vligHLdWcwS9S6CZ5H+lUXw726tP0YppdgBlxClZAXy
+ 6ztTu10Im/SA8AQ1a1jVBXh+bqvMdLarQXiZx7jBmQdmcPt5fPFZqrl6PfYSnOEay3Q=
+X-Gm-Gg: AYBFou2YDPsUOG1GRY7N23RJLom0jgGm4t5p/gV4UuE9qw9o/RiBs9P8ZaFNnKc3nlL
+ 5E+Ix0pMUwsTT7skN7bTPddAPqBAj9LsKGxjZ60x8Ndbyy3pSJ1LzIR2Voj0093S5aBDVMBdDNR
+ +hQ0p3dgLvJyWpQsz58LgjbiYyvelBQF+Tk8q+lkPuRbNTBmvs1EO9JcqpY8ppLz6/joD1rpL5H
+ NIjS5udAYLta9+suE+E6KzTufOlVzHgvUwsqLHJ9gG7tyK0vwtSGLxB4CvE5vlBUkpzWpq8jU3X
+ /5ecvLa4Jk/6pToZTZ37WkXn+o2gAUDpZ2ZFLxps2zkyAV9zmVH3DftuPQ9c2L0fp4C7ZWLAs0D
+ 3V0Uv3Znsl8kPaxE9nJ7qYKINa+KnT1HHuE16AfOFdNpBkfEzNiPm6Z0EW+igsn/tm6NhKBZ1b+
+ 7w0/lrNLYpvoI6FFPZxNGS655bg8unzOw2dE6i2ztvgA0WEFBHVQFFdODy73eUHr3VLKRLdylGR
+ JY=
+X-Received: by 2002:a05:6830:640d:b0:804:ca33:4aff with SMTP id
+ 46e09a7af769-83094e783f6mr13353964a34.9.1791928871517; 
+ Tue, 13 Oct 2026 15:01:11 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:fc57:1703:6147:d976])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-83039a3dfa1sm13553348a34.18.2026.10.13.15.01.06
+ 46e09a7af769-83039a3dfa1sm13553348a34.18.2026.10.13.15.01.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Oct 2026 15:01:08 -0700 (PDT)
+ Tue, 13 Oct 2026 15:01:10 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH 0/2] boot: image-fdt: fix reservation errors above ram_top
-Date: Tue, 13 Oct 2026 17:00:38 -0500
-Message-Id: <20261013-image-fdt-above-ram-top-v1-0-f7db4b36d464@baylibre.com>
+Date: Tue, 13 Oct 2026 17:00:39 -0500
+Subject: [PATCH 1/2] boot: image-fdt: skip reserved memory above ram_top
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMSwqEMBBF0a1IjS0wkVZxK+Ign4pdDRpJogji3
- jvq8Dx494RIgSlCX5wQaOfIfskQZQHmq5aJkG02yEo2ohI18qzy6GxCpf1OGNSMya8oSJu2dd1
- HWgf5vQZyfDzlYXwdN/0jk+4cXNcfb2PgoXsAAAA=
-X-Change-ID: 20261013-image-fdt-above-ram-top-1ebc77f852df
+Message-Id: <20261013-image-fdt-above-ram-top-v1-1-f7db4b36d464@baylibre.com>
+References: <20261013-image-fdt-above-ram-top-v1-0-f7db4b36d464@baylibre.com>
+In-Reply-To: <20261013-image-fdt-above-ram-top-v1-0-f7db4b36d464@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Randolph Sapp <rs@ti.com>, 
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1346; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2151; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=QaY2cP9OUJ+VxnnojrelYo4o1VL+47AJSXl173WGXJc=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqzqoM4PZO0QMqTOEcCZ7L8HSev9DVT3CvLAPmS
- vBwZ6mF3WCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCas6qDBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AuycH/j2hmbEEkbqPAcP7reB/L+/WJFmjxn38wcJ/tRQ
- 3u6LZjNhocHGZiw25j/KCQWis5PPSu50lt0j91adZ/hzqhOqpJUKfcHXVeUhb7qxpT+Tcv43gTn
- YKP/jNpodYE0U4Sa0dmYFwLuWuqu78FmDT+/mYHhkF92BnF+w2sAg6Rr67q+HX9lc1sxejG5jTj
- sK1Gx0Glq+lX/yHr7ifOUtvg2BTET7qSjITTMQQeSJBrxeqVl00QmaRWr90Biaos5Jw56Ftw3LO
- Yqt7Ng/5Hded8XXZyCl3tCVIErMF4kNoiZw0qcBLqh4B8yXjpzAQ85Jby6lRvKviC+T9CTUt1pC
- Nd4Y=
+ bh=cqN7vGySnPXeHSYunerp52C9tMRJR5pug8zRVysvX0w=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqzqoTPlsAhvwok3K+iA0z2WGzuUUNvFRfy7y4h
+ xW+UGM8y02JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCas6qExYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AFP0H/inpV+gABmjZOryvuVdfBIimXrA6OqHWjledw9Y
+ XzbSBGQvszhfF4eYeygnX06AGie7nsimerFaxmBLmYsR4W0Qm1NtkW3AsJ6kM1Udn1magKNEA+I
+ lq94FA3phwHArmb0SPZyI5/TJdQN+jRhCHaEIHoemLXk3+J+EOPzDaGP7J7A7hM492/+gq97z6Q
+ IuUfdkdPh+pu6oFnjG4lNGfJZUHjxcgp/YYfrXLKINOdXkNAMCfBpg1jJf8i4lMrQHgzWOGlyjG
+ EcLs/Dx6XomQOMjDypDYLBERHrPonbbIZ+9kCR8BuassVnA0dmH6f8aHdr+KWlhx8auezDrgbZ1
+ Zp3A=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -193,36 +192,67 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-With LMB_LIMIT_DMA_BELOW_RAM_TOP, LMB reserves the memory above ram_top
-itself, so reserving a reserved-memory region there fails with -EEXIST
-and prints an error on every boot. A region that crosses ram_top fails
-the same way and leaves its lower part unreserved.
+Only reserve or free the part of an FDT memory reservation that lies
+below ram_top when LMB_LIMIT_DMA_BELOW_RAM_TOP is enabled.
 
-For example, on the MediaTek Genio 520 EVK, ram_top is limited to 4 GiB
-(MMC_MTK implies LMB_LIMIT_DMA_BELOW_RAM_TOP) and DRAM initialization
-reserves a page at the top of the second rank, which is above 4 GiB:
+With that option, LMB reserves all memory above ram_top itself, so that
+nothing is allocated there. A reserved-memory node above ram_top then
+overlaps that reservation, and reserving it fails with -EEXIST, which
+prints an irrelevant error on every boot. A reservation that crosses
+ram_top fails the same way, which also leaves its part below ram_top
+unreserved.
 
-  ERROR: reserving fdt memory region failed (addr=13ffff000 size=1000 flags=2): -17
+These regions cannot be allocated anyway, like the regions outside the
+LMB memory map that commit 94a09715bf4c ("boot: image-fdt: Restore
+suppression of irrelevant ERROR message") handled.
 
-Patch 1 skips the part above ram_top. Patch 2 adds a sandbox test, which
-needs LMB_LIMIT_DMA_BELOW_RAM_TOP enabled on sandbox.
-
+Fixes: 623f6c5b6ab7 ("boot: image-fdt: free old dtb reservations")
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-David Lechner (2):
-      boot: image-fdt: skip reserved memory above ram_top
-      test: boot: image_fdt: test reservations above ram_top
+ boot/image-fdt.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
- boot/image-fdt.c      | 21 +++++++++++++++
- lib/Kconfig           |  1 +
- test/boot/image_fdt.c | 75 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 97 insertions(+)
----
-base-commit: 03e0ee96b1cf21a20def03c079ca05427ebff208
-base-tree: https://git.u-boot-project.org/u-boot/u-boot.git main
-change-id: 20261013-image-fdt-above-ram-top-1ebc77f852df
+diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+index 956a3d97c42..7098ab068db 100644
+--- a/boot/image-fdt.c
++++ b/boot/image-fdt.c
+@@ -19,7 +19,9 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <asm/global_data.h>
++#include <linux/kernel.h>
+ #include <linux/libfdt.h>
++#include <linux/sizes.h>
+ #include <mapmem.h>
+ #include <asm/io.h>
+ #include <dm/ofnode.h>
+@@ -84,6 +86,25 @@ static void boot_fdt_handle_region(u64 addr, u64 size, u32 flags, bool free)
+ 	long ret;
+ 	phys_addr_t rsv_addr;
+ 
++	/*
++	 * LMB already reserves all memory above ram_top so that nothing is
++	 * allocated there. Only handle the part of the region below it.
++	 */
++	if (IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_RAM_TOP)) {
++		/* As in lmb_add_memory(), a ram_top of 0 means 4 GiB. */
++		u64 ram_top = gd->ram_top ?: SZ_4G;
++
++		if (addr >= ram_top) {
++			debug("   skip %s fdt memory region above ram_top: addr=%llx size=%llx flags=%x\n",
++			      free ? "freeing" : "reserving",
++			      (unsigned long long)addr,
++			      (unsigned long long)size, flags);
++			return;
++		}
++
++		size = min(size, ram_top - addr);
++	}
++
+ 	rsv_addr = (phys_addr_t)addr;
+ 	if (free)
+ 		ret = lmb_free(rsv_addr, size, flags);
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.53.0
 
