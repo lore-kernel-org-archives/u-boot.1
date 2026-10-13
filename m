@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F19CA9EDE
-	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 03:37:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F06ACCC6B09
+	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 03:37:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E072040624;
-	Tue, 13 Oct 2026 03:37:06 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BB9C740664;
+	Tue, 13 Oct 2026 03:37:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KFl42bkD78ed; Tue, 13 Oct 2026 03:37:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3427F405E6
+ id F50as6F9fhTR; Tue, 13 Oct 2026 03:37:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org ED06640634
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791862626;
-	b=eHS/Tpe9yDo1uZjbUoZNAlshCXUBlKLW9HXG/OpfknuPXy8oVunXf69qVtPAmSQE6iIf
-	 HRynyoW9Yk5nYSIZRM2qHsmzOmU7HNb5mHn3TG0xqW7X9T8wDEm7A4jNz3WrHOhqdtn1h
-	 VAJ6iC8QMmXmwpfdisbWSwIZotOjWDhNAJcE+xsMTwgzrFVpKnY3sdkiWO0bGNDx7rP5D
-	 Hnglb2p1TLUtkhnb9KsdexovBcQvjzgUZcVgj0rZmLuvk5ZYb8cv56zoDCUGJ4UYBO/G4
-	 77Y/BgW2R8wSoz2SqrVAtKywTFuhZvP/4ooQ7omiSWqFVUipnpNX9M1t3jeBZt98RvA==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791862630;
+	b=b/rWDJBim6bbNS50SS0AUPaIPSLSZUUFMf/niRwi6af/jdu2HEwHQwDJrVRMggiSsrqe
+	 qqbaCXp+WTMce5+65vypjHwrJtTG6zPO9MgQPjj6sGNrIqwhuG2m8JtAwmrFMyBaxUyff
+	 GAoHLUVmRv7FTvMxgnDKuut0HzGZvnkBzl/xnpfo4TfBBr8hWHyFk+55FQIoYHVlVcE40
+	 RfnmBigTU6YO/FQwld6C40gR3CeRBHM7Jh4q2GdNyw/rGZxCaR6gJr+vB30GB3TJpMBjT
+	 zpw6DivMSHd7OErNZbTRU8uUoUvBstjuRssPtLWoU+ZXwQ4pC2pG3D1SEJPqPjReQKA==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791862626;
+	c=relaxed/relaxed; t=1791862630;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,147 +32,148 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=MGRK5/NtAZoSRjlVvy9rmyNepxflCRrrNBGHVHUG47s=;
-	b=SOLLBEiNxqbpx6NGVihpGPYe/RBP7QftNwD9b+y6oNs0xjXVHJbeR61kOAfqerih5JqW
-	 LO+7xtGQkY/oBIa4k8FKykI9n+67hlWVgkN9uAJK1EqyaRkKGcnlyFvr7vBqfTmXVdEpG
-	 /imFpM90RCmxRrEGygGFid0sxrjKTIOQ8yn4fISkyADjKjGd+FUEG4Jc+XmHwycMuqq7L
-	 es3nwISdmobKZqjt9DlPxLrGAQSxr/ucsYYqSNeBvaBFRxaHUf4qEyF7l9iWiNev+7rkv
-	 GVTDmefn/L0xTH0HPxMSWtQMtRaywRQDAX0Tjx/01grfTK5tZ8Q2zHiT/qZXXSm8Q0w==
+	bh=X3GG+uYhO4nEzSGQNAQJBdjtvebhRgodGTCjdtZrloI=;
+	b=mePWIgJOcvkPTIGXQrdw0AHEYrXd9zuN0vGzJUe7dnPXaIKwrekv9345c2IhIsGNPqvt
+	 mDkOllMirb+tKb0yzjZzfKmW+MiF718bQ8iRmb//oLL2rA8hlVivgWhbPqIufpgZxHgAT
+	 TmICx/lR6e+yL/hI3dWijGddAT6xyYZ7LrJ0kyvSzOtXKKkO9jfeDzx0eD4xgHv7EGhAm
+	 qAiredQRIha3dyaxuFua6fRJtznR9uS2LEKBKaryQkUQw/nDd9sPIMePqxS482R3dE5Ua
+	 eGlJ5vh5FJL3VybEG88hfnwcStpAWjofb84aZLhN6ftpdf51/4nTo0ZiFi1k9YDyjrA==
 ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	dmarc=pass header.from=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=BbeDR1F8;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791862626;
-	bh=MGRK5/NtAZoSRjlVvy9rmyNepxflCRrrNBGHVHUG47s=;
+	d=lists.u-boot-project.org; s=default; t=1791862630;
+	bh=X3GG+uYhO4nEzSGQNAQJBdjtvebhRgodGTCjdtZrloI=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=E1HRhK2hw9jviYDU4X8ysryPzAOaFesKMiw4aXtuCJCnK4wxPr0KSDPxvYj3J6Y7J
-	 cJU+jSS7RPWzfxH7FVPk/Fxdx34Vyrtxaetntj3JGQ9e/XqX8t9/RRem2r43DnAjsX
-	 +3uet/+hROxapBs8xfdtItdrsEeqXhQ/Lz7fNo6eG0ZGMXPV+I/mjEIsUbi2svlDm3
-	 bT9NXv4dWhM1v09sVyU+yIbySYCTEfyvfAoZ7sxT5by6M3dyaNwCPn/Vevz2w3h5+o
-	 EzrxJuBmFboLcyD9lKSRA/+xBUDHcJBIOay8B4UGygROiPCFd0DsxLjedmJFKBe3xv
-	 LGiIbSZzb4a2A==
+	b=t1ASQxYrakD8zyCduB557jjMC9lVXEX+ZabQY92VaUhcV/dSyqNRLGhdkLYzTV442
+	 Ag9y2uqapm56LqMCHsi4n/BvvcklWzIocfM9NmDs4FJg4xt4gQKHL2ZcDhE6Y8Nra8
+	 dl96YO8BgopnBwONPMkw7Rl8S6pxb/O3Xv5Z+XmEVJPmc/Q69xDeyOfGt8u80JSrrz
+	 oafRPQMyiQxn8f1aXrR1ED5Fdo9WvtoHlPK3Rkz6V3Zi5+o24mdsMc6ABiGUrYajIi
+	 xSdXsoBHRYVyB/38/QozsFUYdI5jafIN8p8GIllbGVO0L3gMCFvyA70Gg9ra5iPSYW
+	 2WxoTK4jreO8A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3427F405E6;
-	Tue, 13 Oct 2026 03:37:06 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 359DC4DD
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:37:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id ED06640634;
+	Tue, 13 Oct 2026 03:37:09 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9D51C2A8
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:37:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 274B7606A7
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:37:04 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8EE5B405E6
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:37:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id w4_tr1nyI5e7 for <u-boot@lists.u-boot-project.org>;
- Tue, 13 Oct 2026 03:37:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1F85B60622
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:20::52e"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791862623;
- b=jsF3fQE+Z7PaRcCdYlTSVrfS5xCJ8rjK/SO6cgtIybJs/SKviaS5KO6/STVlJVsW+713
- bMjdliJbIj5Ljoa0wLU9k0eub2FoVz8idCtdSIevmgQnPUEPW7/ELVx33JxzxzdbIMYe4
- 2qtC3PWmSUOC1c0zjR8G7zprFqS8iYhOjeC2c+C5ug4K1Gprhiaf37pxMY5AEJT4rJZ9I
- 0geRPNnZT0ju/syiirSQNZT9w91Kdn5xSowhVly6EQU9JwmPNot33j55dIIWNAAeKgtdI
- NZZLTuQzBvU6HfZyQ+rl5qUKqKsVO33upDIW+y1cOnsgGebQiwczc3wk7YgTpdKdGKg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RfEGYa4Ff2yc for <u-boot@lists.u-boot-project.org>;
+ Tue, 13 Oct 2026 03:37:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9959840634
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::52c"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791862628;
+ b=bDkn/gtqRrcGdCIPeyazQmg8JoPOdNcDAFaHT+N2Oa7PuIuXgTulInnc7cPfd3EVXRI2
+ K9wCLadO8BhOifsSyrB0VLfdG4JoY/3eDmtrZojvdC1EAX1R8ihYNPV61JB123t8Hv7vs
+ J7cKXg5gYTVC9SQnqvLCRvvjqTzonuobNaEKAuFGJuQjj9S1zclJ48mBCuf/QWurU+iBc
+ fZ7JUeieS8kPoSoNExlOlLLh6BuxCsFzskEQOmqkAuEAOjl8J2aHuXodPDWYQON5l+5YX
+ g1w70NaQ+xoV2Ls2dLkFfd3NJTEoOkiFdL4dm7lj2kvKII4l2F5UazlJJJequ+ovlfQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791862623;
+ c=relaxed/relaxed; t=1791862628;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
  MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type;
- bh=MGRK5/NtAZoSRjlVvy9rmyNepxflCRrrNBGHVHUG47s=;
- b=CTMXaRyT1y+a65Eqv9tpbGfjU7S/4JE5Ca+7xkcEoiyMz+ytJN+/Ud3u/yVPELvEoBSC
- +cPKcezk30jETxgwYrsAUszJynDO3bUevHuGXRyi9bpQA22L1TDxPVmofMKCyu3is/2z9
- DP/NhFu+zB0WRZFhTVl4ZBnZmqcyzXdSbaQEy+OSqFIzj0tqSmsfQx2ki7QO9E5jhna6W
- pWs0VNi+2ZkdwIlXexOKTgzUL4YVKuAVfHb7ZYISbeAI1kEsQlrSPcQ+UPzQWiJk9bFog
- vNUpQ/DMbxr33JQLRBfTmZqNdBENXyzn90emdCLwCV27RZZBWQ6sdmVQotyBCQBYEew==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ bh=X3GG+uYhO4nEzSGQNAQJBdjtvebhRgodGTCjdtZrloI=;
+ b=G+QoTS4Mjk6JiqQhfaQZAAdRj9l9gmdJSxuR2ixMo0ou7OW8h7PlDDuFNNakVmf8neKd
+ zjadOjhicYkFIeSohR93iFLcr305/B+Ky+U15PfJ2kkD75rgpE9kX8ZJbyb33znZzS225
+ PLCIdOK2muSDaiRPDVyOyJ1SlbjeKAKMEuOaGgWLDuRv+zWC34R+D5mryZdul9ktDn/En
+ 9/ucpuZn9TddnfYnkvep3jaaYMW2cL9S6vALFajZISBcQCWokj7Nb3Y5pnds5e3RWMHLK
+ nvyYHPX9RMD9SM/9tWE00cSzIB6w1II7jln+sVOlLWbi+QkuqgalUlWtx1r4tmG6ngQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
  dmarc=pass header.from=chromium.org;
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=PuWKFt9u; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::52e"
+ header.s=google header.b=BbeDR1F8; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::52c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52e; helo=mail-ed1-x52e.google.com;
+ client-ip=2a00:1450:4864:20::52c; helo=mail-ed1-x52c.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=PuWKFt9u
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1F85B60622
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:37:01 +0000 (UTC)
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-6aa8d04fcddso5165196a12.0
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 20:37:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791862620; cv=none;
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=BbeDR1F8
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9959840634
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:37:07 +0000 (UTC)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-6b1ab2ad719so2595309a12.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 20:37:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791862625; cv=none;
  d=google.com; s=arc-20260327;
- b=bQAyXrUbZqpVu7eXHS7tDkU7zFgsqA9Kaf4P9fQ5diqg5JBxY0PRD/OOM4A1f1DbEd
- ACAI3WgVDMaiCacGHIn0wmwhoWcBX54Qope8SOab3xOwFZkuakCrjSMZqLIn5m9lCTPx
- ugLTmEZVBBgJoQxsLO5BV1ZMShe3psxkX/zWlwxdoi69WIgn8DEZ/7AUdvNS3sNA1mWK
- 9QMqBuv++6P32tPHIX+VL8SthiBQfLAWgWTYshbBS5NF++p1HoVBEw2nb37Ybfx61ODp
- 4Ctlgr+EdanFgdbyz8K1qoGbKholog8398Q2waVWZxJFnRKWCniKBZkuyxk2hNxk3PeQ
- fqJw==
+ b=DYIxHTjWDeo+BwTWUyC5ls+32wR66VUqCkmsIDqcp76eWH16Ljgrz9QSzlS21EXtlv
+ P5bfZZJSGCpa0EDIam0S12bYxWMHzm/C9czq6TSnpWwWSoKq/R3BKx0XoSvG3NIOyAO+
+ twcBWCFVdzz9ukvHlyppsFukEkn0fdXRQrTmAl60Z2rCKkeelJic8+jBJFWft3NsSJ4/
+ WZUSXZlWOh6jgMaF9hIGiU48AwgxKNLEnLNsB+wGsUP8QqQqr3vilNSzBwSEDr0oVNei
+ hB5AC+MklRl399RvwaoZU2iVSQSHrMpvAddXUADxdH1Z3hmqCRmnYwet4OGQLPzIXt6Y
+ YlTA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=MGRK5/NtAZoSRjlVvy9rmyNepxflCRrrNBGHVHUG47s=;
- fh=wOkildQjP3ynoYgrqprQOGZg0/pUcyiI8bSeQ7hRHQk=;
- b=YHDu9y+X0bw3CbNM93Lfs5IQWps/l0WB0vv35nwWl5gkFzSN16JX0ABVQN85SFQPjd
- MUY3jyb/ZIT8yVs9lXnNsEndErL/PZes3IyzsUGIQTJbTTV1MHR9WpmNHQUoboXxSODd
- +qzaTfDogq+JmKX3DBGS334ClUTp7JojIZ5phtwv8/tjEsnmapkRNAvhom7kX581qMXQ
- YGn52HWC6lB7y+vcuilWkSmHLfpwxM7+cYqQXnoA/N8D0oxWg8gEOvKTKkJOR3XDxV0c
- C+Xq0XDd5WYlXe11HoO6bDSWhQez0PC5R/1bmES4ymtoAF6Rb6T1mmHWH/c+3LOMk58o
- jOlA==; darn=lists.u-boot-project.org
+ bh=X3GG+uYhO4nEzSGQNAQJBdjtvebhRgodGTCjdtZrloI=;
+ fh=hlVWpZ0SLMiUmq3vONc+k3LcBPJnR0ZOCy+C7xHsHP8=;
+ b=G3AjJkD4v+GE7SSAMRdPn6ZZuylkK4YKMEaVceJ7/91IWNjAgwcurUbqW1Ouz5nb53
+ OaoUyBjgbvTt839/nfve3LbPJ/X/PcbeJQycs75bBTFhlAQneAB21Z9h1usIiE1CR4sn
+ iLYJUclNDXO92tm9S5yrlY/3RLm18qhM/cY93zEyA2A0zbKBJpCBY1S3OBzpJuUO5l6O
+ aepGfuzOCqnxpPfQheG4VDV92WFQq+2EpnlZdw0pkABazxrJENci8xXVU3DCGrYvBI1N
+ 4YoG71CGvorDtvfbnOGtRsAQrm2YOFtF/ym3MZ9jBufZMLGskLSxSPA9xorMS0967Jcg
+ WP1A==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1791862620; x=1792467420;
+ d=chromium.org; s=google; t=1791862625; x=1792467425;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=MGRK5/NtAZoSRjlVvy9rmyNepxflCRrrNBGHVHUG47s=;
- b=PuWKFt9ukbxKi+hRQP4N1DOPyrKQDolf2NrDBF3S8fDUmiAI2VlbYpaS6J2b9Ga6cK
- JMjv/6mFjpcSoDKJbvVA7+ZBq/UY2Z8EZ9YSRaVfK8XgijvyA45udz+90SkoOaBUirJu
- 5zdRbJ9YecHz5d0tkn/94HdRdUxwrIf+pagTg=
+ :content-type; bh=X3GG+uYhO4nEzSGQNAQJBdjtvebhRgodGTCjdtZrloI=;
+ b=BbeDR1F8CQZN3ohZtqvtwdc7ANNu8hei1i+QRwWq0G5L2v/FxNedQd+2CTB6LaMucm
+ EaekoPD5iL37mdgp5OgnwpWOleNQDKdy5D/wqHlrSMef3UfQP2rkFkekOz3qvMiGQhJ8
+ kETqjMdiWL1bEmmGRa75f8HcseEkXkHJOcVMQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791862620; x=1792467420;
+ d=1e100.net; s=20260707; t=1791862625; x=1792467425;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=MGRK5/NtAZoSRjlVvy9rmyNepxflCRrrNBGHVHUG47s=;
- b=H2ZwUs0XjbiX0DoL62Wo9IeGdx3jeFbvOoGsRsgCwN6WikK8tP20bb5wJKpZlJLDFU
- ZCr3anC0bKShGKVld6SloqwtDjs6AwlIXFM6O5ceygIRHEQWW/r3F3rdRvEo+lwUYvWn
- pYkPNGHSeO/I34lTTMfBbZNQHzObjq4i4h36cT7uMq9MRBaIYZoz0jkenaucyb48mtgj
- lgJbFd7E1xvtraRj6FkQmHNsAqvN4dKZkbj8C3Jx+u3Z13fN5zydMsMYseU7fDqTe86s
- 4aVzyNTHxisZEeS9cWsfOdPGzZmeEo2/Pg37Sy8lm2A+jNsc7P9yVHG0sC2WVogNk/Bc
- dqSg==
+ bh=X3GG+uYhO4nEzSGQNAQJBdjtvebhRgodGTCjdtZrloI=;
+ b=0XLxZDoDQyz7ANME5l6GQfLh1ogNJJzhAA7T5AX83duKS6eLUxDoH2+MqPCMDn6FSj
+ bq+F4N2Z7zDVnSDpZ0Yb07AAYiShWF3NDlF9OYjaDFF6sSMuG7LP9iDwES3WJXTN3vO2
+ FfBk/Cf39MiRko5KWgAMEhZ+M/hWKWmD1QLDtXy4jZP1Y9RiuDkCL1df31pBDVXT1qmz
+ nuMfg/pMJHbjOdSCRn7I8zkgw7OET+ceQqqPW6lRGqbsaTNMMhI8lkqI3K9gJURDZahg
+ 4ikqFH2B/p1ldiSffe/EIS+l6wNoFmOHxPKhm8+yTNaXl6n5ApgTL0oye89OJ6rWx2W+
+ iDMg==
 X-Forwarded-Encrypted: i=1;
- AKwUvByjRVzKN3VGtvyAme8Lu8B+x+EV+++4QGP5H5IwHHSE/zhajdSXRMoee4I92yG7qM0UhthkXBM=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIG4w3Wd5uu34Jwtjylp4HFVe0IFqwJAJ+hAy9OzFCs05rSPGXP
- 7/qBZY2LtLIJlmUc0fqRW1iYwdHWxFZSyduQoSDSKj39gr92UYhI3Z+BjUuuPDwg/0fO8h8RxQp
- MTztUZuCm6Lv4j7swhq2rM9VAcp/WKEBmvmV9viy8
-X-Gm-Gg: AYBFou2R30uTvZFOW+BA3xpuK74QmyD2IlzCtaylVSd51qQuA1eaq1pVbVtbdwRu9Tw
- JKMp/slds1wuAVXtAkpqImrxX8AEgnsiZCIbFM4xHDyU3rI62IaA1jmYVAHSuEXvGDj+zZPhskC
- 0MuwDOTuapoBmYL9mjv+3FtELEJllW/Wqrlki7vK6VPzw4peorPH3hCWimBkVb+/7ASbD8Hd48o
- Wwifda4iVku1oRqepJJKdR9PNr4XG6SWWYLWZYN3D7yO6mvN+LfwCTy9xpa7Jz8Vnq9mcugRw0w
- Yl9np37SYK3LeBhbMLEnljC+SGPxaytN8r0tCIFdmF+6qH0JF38BTwuRMg==
-X-Received: by 2002:a05:6402:4046:10b0:6b1:e072:763b with SMTP id
- 4fb4d7f45d1cf-6b1e072769amr1174182a12.5.1791862619770; Mon, 12 Oct 2026
- 20:36:59 -0700 (PDT)
+ AKwUvBzjIXaNTVfnqGu7apq33xN56INUMis67g+Kh6gB66XVrj2icNiypFPGwAHPFuG1vni5NOBLsew=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLxuqb7lHX6MIiFPx7LI6uv0kFytO3243I437qU0FKef76Izzqi
+ 9MM/QBJuw2w22LV99bJeUaCVhEA8COnwjdUNqEyQwDeCXPcx7mmsFsNlwfK43t4EpLY/TpYY2j/
+ bn6pmgBuKSQ0r4tcQvkV7HS84Z08X6BIg8R9rFZfZ
+X-Gm-Gg: AYBFou2pilSNKjw5yZUfWd49hSt8q+5a9K5lPEMbwd7R/VDcQMhxyYVRizANMF6LlUV
+ 27qYyVoEN8ntnYmRv5YYVgVS38YZZC0DqHLBNA/nEpyNj4QSGyqqdljMwcsnQiHDWedpDOAyh3t
+ fwwaoU1n7K2qIsPuRAG0zbBcRzFhlASovkZiORP5SRFWdbxylCdboNX2SeFOIQj9DZ8sNFqROZd
+ B0rMsWe+uK0yxbSGZjU2WHGn97GaJafn/ndnJtn5hQAfSq61Vx/nvgFZNCvW+VWkRsGgDwddkVY
+ J2G5EnDJACML7q/jqEZa3LPaTbOte51aoBhZ2JHvvHMLaCnXgw99aWKb
+X-Received: by 2002:a05:6402:c522:20b0:6b1:abe7:825c with SMTP id
+ 4fb4d7f45d1cf-6b1abe7834bmr3415593a12.8.1791862625230; Mon, 12 Oct 2026
+ 20:37:05 -0700 (PDT)
 MIME-Version: 1.0
 References: <20261012140048.214059-1-heinrich.schuchardt@canonical.com>
- <20261012140048.214059-9-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20261012140048.214059-9-heinrich.schuchardt@canonical.com>
+ <20261012140048.214059-10-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20261012140048.214059-10-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 13 Oct 2026 04:36:43 +0100
-X-Gm-Features: AclHuK9eMFSCbpaMTgcMw2HIYw5JBOzIecy9gUFBmDud5Hwe-av0W9GrCs-G0z0
-Message-ID: <CAFLszTi920A9kZ1Kw2959rz=BJNxqRP_dkdESNdXGZRBj2CErA@mail.gmail.com>
-Subject: Re: [PATCH 8/9] test: env: allow optional date field in ls output
- assertion
+Date: Tue, 13 Oct 2026 04:36:49 +0100
+X-Gm-Features: AclHuK99AxcR0B1aScRxiT6aFvpeO-qx10XUUW3g28qxq8QcOHLfMbNoi2UR99Q
+Message-ID: <CAFLszThhOee8bQav3hyeyCL+mhNz+bC_+Yb9pOvKSea3rrF9eQ@mail.gmail.com>
+Subject: Re: [PATCH 9/9] test: test_erofs: adjust expected ls output
 To: heinrich.schuchardt@canonical.com
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Huang Jianan <jnhuang95@gmail.com>, Daniel Munic <v-dmunic@microsoft.com>, 
@@ -198,43 +199,34 @@ Hi Heinrich,
 
 On 2026-10-12T14:00:39, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
-> test: env: allow optional date field in ls output assertion
+> test: test_erofs: adjust expected ls output
 >
-> fs_ls_generic() now prints a date between the file size and filename
-> when the filesystem sets FS_CAP_DATE (currently FAT and ext4).
->
-> Adjust the assert in test_env.py().
+> With the addition of the date field the space between columns in the ls
+> output has been reduced. Reflect this in the expected lines of the erofs
+> test.
 
-test_env.py is a file, not a function, so the brackets are wrong. I
-think you mean test_env_ext4(). Please can you also say why the old
-string match fails, as in the previous patch: with a date present
-there is no longer a run of three spaces between the size and the
-name.
+erofs never prints a date, so the date field is not what changes this
+output. Patch 2 changes the separator after the size and '<SYM>' from
+three spaces to one for every filesystem that uses fs_ls_generic(),
+whether or not FS_CAP_DATE is set. Please can you reword this to say
+that?
+
+> diff --git a/test/py/tests/test_fs/test_erofs.py b/test/py/tests/test_fs/test_erofs.py
+> @@ -65,8 +65,8 @@ def erofs_ls_at_root(ubman):
+> -    expected_lines = ['./', '../', '4096   f4096', '7812   f7812', 'subdir/',
+> -                      '<SYM>   symdir', '<SYM>   symfile', '4 file(s), 3 dir(s)']
+> +    expected_lines = ['./', '../', '4096 f4096', '7812 f7812', 'subdir/',
+> +                      '<SYM> symdir', '<SYM> symfile', '4 file(s), 3 dir(s)']
+
+squashfs needs the same fix. sqfsls also uses fs_ls_generic() and
+CONFIG_CMD_SQUASHFS is enabled in sandbox_defconfig. Can you check
+that test_sqfs_ls() passes with this series applied?
 
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >
-> test/py/tests/test_env.py | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-
-> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
-> @@ -523,7 +523,7 @@ def test_env_ext4(state_test_env):
-> -        assert '8192   uboot.env' in response
-> +        assert(re.search('8192 .*uboot.env', ''.join(response)))
-
-run_command() returns a string, not a list, so ''.join(response) does
-nothing and can be dropped. The rest of this file writes 'assert
-re.search(...)' without the outer brackets (see line 197), so please
-follow that.
-
-As with patch 7, ' .*' no longer checks the layout. With patch 5 in
-place the ext4 file should always have a valid date, so the test can
-check for it:
-
-    assert re.search(r'8192 +\d{4}-\d\d-\d\d \d\d:\d\d +uboot\.env', response)
-
-If you want the test to also pass on builds without the date, make the
-date group optional with '(...)?'. What do you think?
+> test/py/tests/test_fs/test_erofs.py | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 
 Regards,
 Simon
