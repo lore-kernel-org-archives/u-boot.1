@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67346CC6B19
-	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 16:48:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A788ACC6B0E
+	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 16:48:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2561D80A76;
-	Tue, 13 Oct 2026 16:48:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 119C080C53;
+	Tue, 13 Oct 2026 16:48:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9eyEQ6qzCzAf; Tue, 13 Oct 2026 16:48:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5D08980A88
+ id PR9ajIsAnE29; Tue, 13 Oct 2026 16:48:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0B17F80DDF
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791910113;
-	b=TAIGGN9ta1dhFy4+XRQPRhBYdJPNmHYquyNUGeMvFZiXJrQzQ/rb1UMV7ADvN1S5Xh9O
-	 mVEw1Wj3u4SkkFDKIw8eOCxRhW7kioDUyixlEIru4yQMkzs6aNW75m2wU/sEP6JtJyW+y
-	 k/eiD/0XI3wA7a1uBdh3GzKPbRp4aTPuoTOcWsRMU50HmaAR9qgQdguvG+QmtzqBgm/xI
-	 t1jUiiVKMY0lhQTTJgZJ+fyCsAwwk0KoDqAN21zSUQ571dmekiZ/9ME6+InHyVMd+66ow
-	 47yQLmWalQuF/dLn0nwWuVSXh3olhsSgKpQ7kAHV46SvlGICeMs8Vr/i0W9BCSkGzVw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791910115;
+	b=WteHiOViikvaCd26g5pb5xHVm6EKgfyrbdJcwRdauy+xDKyIuLs/io7SOQadgHyuKR02
+	 A07AS6UUWnCqN47gR7UqYiyvdOXQCbD2V/IBDXS/gMoyZnSn0GLcaB1zst5PeoXqoMdG6
+	 1u5xF0uiR17v21sdWn1zi4HrQTV2GK3lA2e8H8sg8Ha5WI+xcp9c1v5KX2Lc+N7Xe+bcK
+	 i4xQxYOFWDh8ReevScFTD72aSh5PeqbbAmQj6SxA5hjDrwcA9frp0aZcnWrT3XlqrrFqn
+	 Tpm/1xrUraKQzrFJfNfzeL7Oo0doL2CP/i4QRN6BuaagQ0UcbH9V8vVlL3CSnwg2jgQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791910113;
+	c=relaxed/relaxed; t=1791910115;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,50 +32,52 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=j4XGP4xl2SWBh8r0lXbsf/zSNJw1lx8/F45ZE5IqlTo=;
-	b=IfRhqLnjmcBxkZlYaTb/zBP9/bcAFc7hgjlbpDPGC1Y+vUDFfIIT3wjm8qQItu9w/DW6
-	 Eo890kGi+GKHIgVfCFYOxNpJ3hKRy76x3P32sUYQWFT7s6K5DVu16nsILEdsjZUl54uzF
-	 BDX5r0X3TQMKhgWMMphryFx5NKfBDst9FKoSmbKojVp19E6kt21gVDzqJ/0f1NLJ9k5DB
-	 f3/CtbsEMoE371c1lgS8Q+m2hxMI/le5li6wqlotkRSb/JdxHZJIolgtaOgOj3F7qLAH3
-	 Edvcnb3abTp8NQgNFh/6uAVzyY/1UXUTSFf3oEQycYG/D6JygVD7sBV4wHdpnOI2VGg==
+	bh=+pZ1epby9FlDq506o9BUn3h85MJWV6qJHcMUEGC2CJ0=;
+	b=CkrHoKmv1PSFQEOzv2J7OBM5bhE/hWn0cmwT4+b29A2TiZX05AGet9MOVp7wAhQWc1WS
+	 m/9oBCZ+VSwcMVbabrvoZUF1ExvK//DeOTFXGoN2pgg3YgQFwfaTvrpOURz9yNSvFyvaY
+	 1er+VOoSQ6gkveQlVvdRpbII404IlxCPC/6AnjFti6PW22nkqXLXKJPht5Qqpfu27uJeY
+	 zyEvDy4clER6utjWJ5OqYNxjKR7XZ0mc/NK+sB7YNrF6RDBel79C4Fq9MPMvjCYlE5B5p
+	 zbpvLJ1ZpI8iwdG2FEDFBBYNz5tUDx+Q/JEtv5uwUXfUWXHOmONXEzxYzyGuuO72GFA==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b="B/6Uznbd";
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791910113;
-	bh=j4XGP4xl2SWBh8r0lXbsf/zSNJw1lx8/F45ZE5IqlTo=;
+	d=lists.u-boot-project.org; s=default; t=1791910115;
+	bh=+pZ1epby9FlDq506o9BUn3h85MJWV6qJHcMUEGC2CJ0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=L34hxlGiEfVzP3/3pnOB7U6m0jYvL1YzF8PjphRCLNjfFcfz/quCw7r7IjHXx/i0V
-	 QvPRJP7xLSGayH4xrNKiKR2IhV/TwYQ3SvTTIKm3v+44rOn86wjcccPfvwRidYcz3X
-	 iLntGw/jTBJoG3zUWHpsbxgrPNazXEVCvF9+d2kzDDafAUnvH5Fjb0oFKF8p3zTndk
-	 JJuMf2cM3+/RilkYYwP8ydJzWHuCPDSDhXxY9bF3KdRtmezo0ZpdulmFzL8MPshyS0
-	 DB4RT3l8XNyxXhaOoC0+nZGDETf3WT+blUtE41FFKkw9pgZwlkeCCJ7/IaAX0GPzT8
-	 RLnXe3LskZQiQ==
+	b=z24Qb/cJcBl4ovjl2jltIFoQ06OVWepEITP9OL5edBR3NNZK3vRa7BOH0JLxUo3YA
+	 HkSJkFKVyVbJU6JJjoCur8QMNMUYJ+X35RjNL3XOrWec9J3HGq7QLcyL4jZ0dnMP+J
+	 2he6OTV/i6tJ9ZqVrbE1qi3DjFn7jppONqFkF79nSHOz16W4DVurqiSemzEhluBj2n
+	 JI6Ipji45MMHY/ycJX7qulypz4bcQSk/jUR1c4F/+ZXzHFaWlq/aG9461/jA/Wt+Kx
+	 hiVLWzWBqYLxpBpJLeEeFOBKjcB8FH0/Bj/VeEXoCrvlZN4EDAb+dYRXppscnVNkny
+	 vDgd+VVuyBBWA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5D08980A88;
-	Tue, 13 Oct 2026 16:48:33 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3C1051DE
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0B17F80DDF;
+	Tue, 13 Oct 2026 16:48:35 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 46962129B
  for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 16:33:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 224DB4009D
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2D4DC80C16
  for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 16:33:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0CVen0R0s1vl for <u-boot@lists.u-boot-project.org>;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yl52xmlFsezc for <u-boot@lists.u-boot-project.org>;
  Tue, 13 Oct 2026 16:33:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 8CFC240049
-Authentication-Results: smtp2.osuosl.org;
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8119680898
+Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip=172.234.252.31
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791909218;
- b=muNjvQ4ya7Jyx0cFWReRROf1Hs8YS5xGnmDZAYCDGx6vMd91AaYH/6eqoLsiyDwOeOCx
- HvcPALmOsAP7fcbeGNZ9KsQRoqxugD6H7Vrljf+VNxqNo8ZfKoM6xqIKG5gT4RlAnwuYL
- 6Mu/yBRxv1ngzdEZ0MC+eulsnuBt+iVMDpvyb4TnlAvFwshJHUSshEZQIDRssFUn3ZsGX
- ltouJHRyqD45FDA6bPTSF62ojjnjUxo16WIHbu/Kw2KCN41qH6T/8qXayVx7PsmRaYbKf
- +OhKa4BrRxeGtwWO9sIIMEDrevOBCxxMbnrVzTmYQqKVi373NBfEUkLSEZ9v4ZepxqA==
+ b=WwFmGoP4TZsuURlGoZ7unAe3T711lRICRj1dcGxTaUoGnG9mUfE1jeCtAL+AjeROIl+S
+ 118dmV7AcyCVVpVbakUpCu8gQaJV+jPloCu4XSUYE7q/mFOaMJWBcP/UkL1OU1Z7iwsMC
+ aGqyzOrTLqKMN78vXue/nNjwqNM7SwcVk9MuecUYA92HSXBrUr2cnlRZVUbyx6mpAx6j2
+ 0vDeagl0iQcH9v3UQ8FTvh1J7/oSHOeyFf1OH1XRGgFnA2KN8QRvySsSdhZHc4xWyGy0l
+ 7Dwb4K3DDpadEmEw7xlKan42OSoK3u2UA2hFRyO6FfTJ162iIVWWisbx1/Yka2I5lxw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1791909218;
  h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
@@ -83,66 +85,66 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
  X-Original-From:Reply-To;
- bh=j4XGP4xl2SWBh8r0lXbsf/zSNJw1lx8/F45ZE5IqlTo=;
- b=bxrULT7Z7P4mENv2KYIZRAsxVwC8YLS+wT9GbRJb9Eh02HxHK9En+Z/9bBf6yjg4c98G
- C/sKtie/0+CAkjnMCh1/nJ8pCHuOTDt5fDVoY7mkqSYPKjFJYdDRKiGVE0oJaJwdj6WUr
- jOxTQ9EAHsLwM+vzuFlC8L8s9MLyRvstMf5pGlrer/ewtAw8R/17Q/hv1UAQojZpERf4m
- 9hVCmhyz+Wxj3IUk8sOUDEhSngP/zOsUo21iy/ckuKo/nw4832ovMOD4BW5sgsG0ky2Jd
- U+z+EME6wJfLje0UYOd6bLVrItiU2Z6CTUERDMRgzugO94+1tCxFiv6jC4IVlVoif6w==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=+pZ1epby9FlDq506o9BUn3h85MJWV6qJHcMUEGC2CJ0=;
+ b=LskTAjrHrwk8I3r+UE0qNlK8b+MW7QFwHHJO9HXJ3cXjpvCSh4LhDbD2F4/aYRWqFBNq
+ PCNALl9RTpiPekI86c2QkLF10Wp3V3YO/2s2O2bSYMT8ty6wzCmrRqqiZriyOIQRM1pf5
+ YJt0VOVBQ6mn4EW/4xucb3tKOs1yrdZKZKSxg+yww0T41ejTylY7Phj0DMWwBFuEwsHcR
+ gVbnykuJAqsfjXpzFky3uZ6z5MpECmytgJ4NeMgzNDNLfJqzcJhgN8N+MFmEzwHbwq9b9
+ +eLpBZ+UCoh3e2P2NjND+3WmSc745jIRFwIyCVJosfCn9K9pq/MO1Z+2LKqpFMqp83A==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=gwbj6CW9; 
+ header.s=k20201202 header.b="B/6Uznbd"; 
  arc=none smtp.remote-ip=172.234.252.31
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
  helo=sea.source.kernel.org;
  envelope-from=devnull+petr.hodina.protonmail.com@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=gwbj6CW9
+ header.s=k20201202 header.b=B/6Uznbd
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 8CFC240049
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 16:33:38 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8119680898
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 16:33:37 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 2095641A1E;
+ by sea.source.kernel.org (Postfix) with ESMTP id 2DE534387E;
  Tue, 13 Oct 2026 16:33:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0330FC2BCFD;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 13B3BC2BCFB;
  Tue, 13 Oct 2026 16:33:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1791909217;
- bh=rcLjF6TEpSDJjnEo+5tIqtcWIZ7l/BHEPyV3oLz4DUk=;
+ bh=Bvu/hr4Q2MuVcZtS0O7U4GlV3AobnGBPK4GrWvM9nQg=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=gwbj6CW9LQZp8y1OA5wU693BPAp7eFvWODIdLziWHISc3MrMAcJKenTFV7+PSkDAb
- Igh6PeRxv8trQXxAldeVwEdNIo+gEiFfvYlaa4Q0saN1ZtPXfj8gbZUWwml9hVewcG
- bgthgJLOtQGtyqlMkG4YvgenJ1c/fXFugwtbhHxrc+XEI4LmtD4YhDxidIQ7p7e+Fu
- NwcwXLSbTfaD49L9r+MBSVyvzyzpcRvZ+nfNAWvycXbVYS66+AOqjle0Rv18zBUNv6
- dcbUQPDNJmksIXKMtwE8NZ3MYfqUTbrRR4Rz0CnORGgvBkibTi/pOyMWxmwelzCK7j
- 2Vg3OPzMyYBeg==
+ b=B/6UznbdizTlUfTl7XhV+DhFWzTUsRZP571W8pfmDByo1PIyRARG+Bge61Wi1HX3k
+ 5ex7OoNeXO53hYLWDUY1MHzUeJyvk66eNCgQGe6IG2j1bcx0mrE1tIjZtVYb9FjqRB
+ cp8KfkRkTOymjfBVByCwdSN2IA6T3Rg6lsAqc3UqdUHe23cmqKj3WfxdCIIy62m29d
+ lORLjN1kyIjHSVQQWt6zNvgqNkSdasMS+46ar6Rfx3rpCZrELZ/XRobaQJ5c44aB3Z
+ CYESGnjFzdzgsWJZXTfJarPT1p3pk81n68wGYUy8tUr9sLJcIDlFhkTjvBaff4HnBX
+ pfvNMSud9+PqA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id E3B68CC6B1C;
- Tue, 13 Oct 2026 16:33:36 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 02691CC6B0E;
+ Tue, 13 Oct 2026 16:33:37 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Date: Tue, 13 Oct 2026 18:33:33 +0200
-Subject: [PATCH v3 3/4] doc: button: document monitor subcommand
+Date: Tue, 13 Oct 2026 18:33:34 +0200
+Subject: [PATCH v3 4/4] test: button: add test for monitor subcommand
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261013-b4-button-live-monitor-v3-3-3563b4d3ccdf@protonmail.com>
+Message-Id: <20261013-b4-button-live-monitor-v3-4-3563b4d3ccdf@protonmail.com>
 References: <20261013-b4-button-live-monitor-v3-0-3563b4d3ccdf@protonmail.com>
 In-Reply-To: <20261013-b4-button-live-monitor-v3-0-3563b4d3ccdf@protonmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, David Heidelberg <david@ixit.cz>, 
  Simon Glass <sjg@chromium.org>, Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791909215; l=1710;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791909215; l=1455;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=V1QHc3j+E+u6j39lWYuquKXtDVoLT3DspVc7Br8oKdQ=;
- b=I8Mv/Y6mIGQNOSg/KWbOfeRqVtQWBDkvgGZuTHAyjSqU0vtc1/Xrc9pc6WBSBIbBadnCLqI2e
- NElnbFxbhLACQEQzJtTejE6CdJQYw3JFHehdmVh/FWIuhBUO6UfOJec
+ bh=QehWb3NebKCgyG7BwGaStqQlAJLjXcbgvj4YCLBcWUM=;
+ b=qeRtk62QhRfOtkQe6hdMYCfXPJiErQk3MQO6s1KO3vOwg8LEe34ZZU+BO7LpxgOKjmfAf+81p
+ ntD/kNJWvPsDK91mGcspynLpIxJ4Te1K2pwaNasCZ6IK8oC7qWNAKMq
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -165,55 +167,42 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Petr Hodina <petr.hodina@protonmail.com>
 
-Add the monitor subcommand to the synopsis, description and return
-value table of the button command page.
+Run 'button monitor 200' on sandbox and check that the output lists
+button1 and button2 and that the command returns 0 after the timeout.
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
- doc/usage/cmd/button.rst | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ test/py/tests/test_button.py | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/doc/usage/cmd/button.rst b/doc/usage/cmd/button.rst
-index 6c6794f31b8..49bc373b5d3 100644
---- a/doc/usage/cmd/button.rst
-+++ b/doc/usage/cmd/button.rst
-@@ -12,6 +12,7 @@ Synopsis
- ::
- 
-     button list
-+    button monitor [timeout_ms]
-     button <name>
- 
- Description
-@@ -43,6 +44,19 @@ A list of all available buttons and their status can be displayed using
- If a button device has not been probed yet, its status will be shown as
- *<inactive>* in the list.
- 
-+To watch the buttons live, for example to verify wiring on a device, use
+diff --git a/test/py/tests/test_button.py b/test/py/tests/test_button.py
+index f3f68169e14..494c7956543 100644
+--- a/test/py/tests/test_button.py
++++ b/test/py/tests/test_button.py
+@@ -37,3 +37,23 @@ def test_button_return_code(ubman):
+     response = ubman.run_command('button nonexistent-button; echo rc:$?')
+     assert('not found' in response)
+     assert('rc:1' in response)
 +
-+::
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.buildconfigspec('cmd_button')
++def test_button_monitor(ubman):
++    """Test the live monitor shows all buttons and exits on timeout"""
 +
-+    button monitor [timeout_ms]
++    response = ubman.run_command('button monitor 200; echo rc:$?')
++    assert('Button monitor' in response)
++    assert('button1' in response)
++    assert('button2' in response)
++    assert('rc:0' in response)
 +
-+This probes all buttons, clears the screen and shows a table of their status
-+in the same format as *button list* (*on*, *off*, *<inactive>* if probing failed,
-+or an error code), refreshed every 100ms together with the remaining time. The
-+command exits when *timeout_ms* milliseconds have elapsed or when Ctrl-C is
-+pressed. The default is 5000ms. A *timeout_ms* of 0 means to run until Ctrl-C
-+is pressed.
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.buildconfigspec('cmd_button')
++def test_button_monitor_bad_timeout(ubman):
++    """Test that an invalid monitor timeout is rejected"""
 +
- Configuration
- -------------
- 
-@@ -61,6 +75,8 @@ The variable *$?* takes the following values
- +---+-----------------------------+
- | 0 | button list was shown       |
- +---+-----------------------------+
-+| 0 | button monitor ended        |
-++---+-----------------------------+
- | 1 | button not found            |
- +---+-----------------------------+
- | 1 | invalid arguments           |
++    response = ubman.run_command('button monitor abc; echo rc:$?')
++    assert('Button monitor' not in response)
++    assert('rc:1' in response)
 
 -- 
 2.55.0
