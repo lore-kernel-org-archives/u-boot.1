@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE2E4CA9EDE
-	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 03:31:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4594CC6B03
+	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 03:31:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 82F75605DA;
-	Tue, 13 Oct 2026 03:31:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 811A2405CC;
+	Tue, 13 Oct 2026 03:31:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DYmvOGm_yU03; Tue, 13 Oct 2026 03:31:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C03F86066F
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791862268;
-	b=RBw4sMgh0OBEfxqz7F9RBsfg6ZaR9rOeWtzVp9++Bj5QRIyJ0AyPZeMg/PkilHHbMJWI
-	 t2Xa9E4p2yHwNWtkirWfbn7VnO3s1MK/A5VBSX9LfBBFjsV7xKeJdrzvJB1cJsqjvDqKT
-	 eWnu8XOzQObL/mNkWKp7SKb5ORn0zS4gQPGvxmgq4RQRqaRxeZIXUzHW/uDgUPI6IRROz
-	 k5AB1nsk8JmUS4N8Lz0hgK478jZNYNZf2uWCE0635vVkXyjnXkBwDuT8Z8Km8OqlbT6CZ
-	 un+TEniUST8DtuEgCdxKUYBsHrotVxynyo5Mi+DV4quCgRwAKBtgwIpuV82nlW+kGfQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZSMjGa1mq8kp; Tue, 13 Oct 2026 03:31:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9347B405A4
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791862283;
+	b=ROEFYm7vjz/PrazGZXdPJdY35dzjKhVKqatyNLAmrttDeUxDQpILNkfP4IXzrast1kBr
+	 RtabURY6BLViqRHUxqw3PY0YUit0NjBnQ7NJjxBv0JIwAxvLU6A00b/JxxjvjS51jbum5
+	 XdksMQ5HmSthGL32hz1E5wCxL56BBiTZD/SSCJTEZDiQqAam4RrY2L0D0xrNKl9AdPxOz
+	 2f4CdEc9OnR43JA6Y77DHPl6Mpxu8q+VDgGQdsgd2iGWo94FkPTSuXWNrBxEdIcuzqzp3
+	 bI1QtYN5Bmi1bbhDU4TqpBiub7StRUJLQdtYk2wIkg5eRuTzyx+fdYXsUvshGmwnbpg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791862268;
+	c=relaxed/relaxed; t=1791862283;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,148 +32,146 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=ixp0gwcDzT/gOTcIFY6ZgU5UUL8+seL2a4GqUvvZO4o=;
-	b=p8Z083HoVFSecpWUe/dWVVoSNflBPNyATj4F6dqU3g86WAkbEvke3uNm84FdwSZ5/rDT
-	 gW+5OdJyj5GX0w05H70QCSWnyF+oLJ6XTJsLneRsA/LbmhuG58+mblTJQwbSnES3ov+1D
-	 3rkiRdIWrcFV8G6YJUdeO1pk/puNBnuVhfhu/Jl+HOT5xtjSeWJkOfJ51XouwQBwt3kW+
-	 iKcBybpHHd/vtVnSGatN0yqL9eMbYrQsDMaDoLD67RZaWjUMWj+b0g5MYguUYGe/64eU1
-	 ih83BdVn7R/sxdTbJZEJJ/AezgBrdYh1BEYXHKWe3aEr67U3XoWk0KOYhZG/8YnNKqQ==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
-	dmarc=pass header.from=chromium.org;
-	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=JBWIMLmN;
+	bh=vcbZqrGBsK7o8arezNi7wMlzSqOMC0gjg9LpaUiRj/I=;
+	b=ImB9AtJIgwRcH+IdsPID6IMoYjVRHd3fDMZknQNVijM20b3Iav463n5XNMQtakFWgVBK
+	 hGxUQkvz4yyhyM68oj6N6xVsEq+XCV5CH+ZBqDJsHXdR9Cz7cp1S0uYSZSmVdVJU3riFt
+	 5NJPJ1jybIVTo10hx+oBwP72Pbm4EXx5gvoVFk+yvMRGhgtSTu7dvgpHy6M9WercD0y37
+	 A2Lg9EKhRdatpv+4l0Gnjfj3mukPjM2FU3bEQjkSNYi2o5DJXH9qq8jUaZaulXXJYJ2Sl
+	 dcL06c9smiuIIZau4+wob9A8MDsD0GFf2IIoQCfpW19EJvMZWPelFK+fWs+W/05BC4w==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791862268;
-	bh=ixp0gwcDzT/gOTcIFY6ZgU5UUL8+seL2a4GqUvvZO4o=;
+	d=lists.u-boot-project.org; s=default; t=1791862283;
+	bh=vcbZqrGBsK7o8arezNi7wMlzSqOMC0gjg9LpaUiRj/I=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FGcFKyuPR1+B1gQ0/VL9+1cznq/TH2Flm6J2PQFymbnsX4AVjGfV9E/fCdzfJlpmA
-	 3b00ov+tSWEBjDllls3L+jC/st57MDKn3o3DPXI8mPL6ifOcvFTuKeXLW9/Ce2PQpj
-	 eEkdVqYzhs3cK/GyZDvk3CTVr0XIX+4PdQAKBMZkwsV9Hl3QxqLq7/myodRpnmjAxa
-	 NFlRb7Wwjj3X9aja+KFSsSPBzd7T1c3YqJJPATTrpw3uDJAemFjgBeDbeKKoBPho0w
-	 B3NDSfE+P5z+asfd5BA4FpouO7l4N6xTS1Ad39uEanj1nJR2G226c0EQMlZjeWcsvJ
-	 s83dljhd1mAFQ==
+	b=DdkAqCEVA2jP5KpQSnaq111tqnUv9FRoH/SnaTqjLEQTP0c3ZxtcBgyfFAteTWKGb
+	 gMYd458Xfrh5IyoiesAn9VB3i7puQGpCSxvwwgzt0UHzpYhaRY6zuf2cwZTQY7RQsF
+	 W8T4nEQFiYsMzMLYdOPOXouk8tuKGMnk9fND42mDohTXvGfC9WG3IYMQhnHfkzkUEF
+	 TIdPNHGHSAaqlxSunNGL/38EoN4enZcfBkGHU2LhA68fiZlPdH8q9XkkwgPtfmOFTb
+	 3K8h6sKfRc85JpO3U91qODYT2yITucg/mtU13B12bj4BJVUrQg15CQj5HrxIhpDTLZ
+	 2yAyZNPZMsweQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C03F86066F;
-	Tue, 13 Oct 2026 03:31:08 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 19B291E9
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:31:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9347B405A4;
+	Tue, 13 Oct 2026 03:31:23 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id E4FB51E9
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:31:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 0B0756066F
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:31:07 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id D6B316073B
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:31:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1cUfOfH7qiXl for <u-boot@lists.u-boot-project.org>;
- Tue, 13 Oct 2026 03:31:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6AE68605DA
+ id VQ27TrfZwR4e for <u-boot@lists.u-boot-project.org>;
+ Tue, 13 Oct 2026 03:31:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 30CF6606A7
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::52e"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791862266;
- b=E80Tvtb3eJJHWrj3bBQrz3zYtigSt0SBzJEZQOaPD2UsxPufl741Y+VvbiGVw84Lm1oz
- fVyyX4irc2b6r6SDOW5jrJ0ydwyvCZDZ3Ct9PlhPGYL3bUzZX1IrshR856GuutKgzTN2x
- hAIQPj6J8Y7trp1Utyxc5Xft0UMXstwTGonFBcjmpQU8dHCMrVQ/ASiaf+cBqrx7QE6+a
- 1xN5OYSVm0Sf5dZ8Wb9/M3blm4EwncDeQlu6nELiJqDbIckhgdW6geNJWZ11l5nZpNwVY
- o/1ktlSUrRd7hLbH0Uf0iVfxzKVrgdOes1L+AZUYbtqcOaONz3BoeM7oWF6NpAhGXhA==
+ smtp.remote-ip="2607:f8b0:4864:20::1034"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791862281;
+ b=gEPvNpbKWtoE1yCbK9G7Un2QSeRIYN5Kza9pj48JXgYNBUYMb0zqv5EALki4RWAUoOwT
+ Cv2VEOW2QU/Orm4MqfkS2SOXtwNxaj5zVfl+Nnv4vm+ekfA9MdrZEvnzECfnm7iBcHZcZ
+ SnTMUxDeJ8r4hnqy1/Bz8Xx+ohkKgTu2NSycay3NU7KXIf481HsM3rwv9XTtFpImSQn6S
+ E/n+XZ98JTMBQ1AqCYI+I4blM7gnFxaiZkJbkn5ZUNJ/RsF0jt7CeWeeaQ4INVtUOEls2
+ BbJf3NNsQ2tEpghsrX979w/oKLM7Gv/5RM9uZlELPeg68uMwNz8PxoDFS/+QE+7/K3g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791862266;
+ c=relaxed/relaxed; t=1791862281;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
  MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type;
- bh=ixp0gwcDzT/gOTcIFY6ZgU5UUL8+seL2a4GqUvvZO4o=;
- b=J263ajv9qUoAEBXEYFGR5vhg6yc9J7uUjkxrZkrJAe48PEyhgTgIao7hrWER+zH9+xka
- 5MtKsE7GXvqKxNg1xYq23vulVhLFePUGn9UEvyfCoAf1U4oV4+ES3cjw78AOsrP3IMnoC
- zHU/e7nZIOjVdZFOi3jeeQFzD5Fa+2BDoXhbS6/eVn+68rSMnZV5gbpiTWYZ0vXPRhka0
- JGLwFX8KzUWT/mFWUfwF6lrr5m1bCmq8HAgr/AB4tml6JOA0dadv48uN0iMUUSjg1XBvW
- 2O57hABXCnark2YHWQ8yQptGL9OrQMRPOq1ulLLa+lNCGK/MlR64TQ4n6VYIeq3NLIg==
+ bh=vcbZqrGBsK7o8arezNi7wMlzSqOMC0gjg9LpaUiRj/I=;
+ b=XAmtLSTcr5+aZwmCQmN6v3IwtUNSl7ukjcMgbsH2sGgYKwJ/u6qm4g53F82i1eAH9fac
+ NWr/8rttPVkr9ab4qf74RanQL3jmHzSu1EdHOt6tkyO6d8RTl7pEqxlj0S59vIL3NeiFG
+ 1pV+70Q/hcQzNGxJafEdzXrtpVA1A6br/rHSfQ7jrjuaR8NVWJsX+HVUQDjH0BaggXIum
+ FknEJq0ohGdXwGGd0HBCL/vYzWpbIwy+j+qjjuWpgeFrTmNcFJvyknTuyOrY51m1wFrkD
+ oYa51pUcyfh9LbP/LAy3FLpVHc9wzOMgupH1yXnF015pItURMseguizumOJj4O5yhSA==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
  dmarc=pass header.from=chromium.org;
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=JBWIMLmN; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::52e"
+ header.s=google header.b=ED9Fv9Co; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1034"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::52e; helo=mail-pg1-x52e.google.com;
+ client-ip=2607:f8b0:4864:20::1034; helo=mail-pj1-x1034.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=JBWIMLmN
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6AE68605DA
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:31:06 +0000 (UTC)
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-cd3310348d2so1986076a12.1
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 20:31:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791862265; cv=none;
+ header.a=rsa-sha256 header.s=google header.b=ED9Fv9Co
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 30CF6606A7
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:31:20 +0000 (UTC)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-3a4b3ac8fb7so1005511a91.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 20:31:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791862280; cv=none;
  d=google.com; s=arc-20260327;
- b=rb9N8KEzRfIhdHNdO0BcGCPsg/5KlB1P+agNeG+sUX8TAq+M1WVCBBhzt0seP0q17/
- M+J9/PtvCizjF/tD/ompB4ezSr5irqtjfQJh0AG4YpF+95mA8C/qnK5kIurrKXC66miC
- om824MfBCsu56GIyVS2DGm/0JgSop7sDivRM5VDwqlQBuHcmG8zySG7uBus+MsfSaiDh
- /lL2v0gYmJYxrG5Iy+N0agpFo7mD5chJ8Oveplo90hebblj9zDLmhZhw6ssSkQ8B7kJf
- DdMlLcLfT7aJsQ2CT114yf2YZcCyXpkM/IXHEN5Ql19ENwDIKH4GC7IjHMJV4yiqRsvy
- 656A==
+ b=fyr6GTOVwOb9YFNuEVNXsn2A+jyck1jw+fsFtx0sQ/gOjDprh2luCHsBmz42u/nxKh
+ unoU56vEpNIqzh3nV8MwrSvWowbEcNrdM9QhoA1S/rqCijFnEYUIgZr0kW6NPDVok6jH
+ AFo0qOqE/kjvlaH1FisFecTbiT0JnQC0u+4ISV2jQd8Qzzv+Z1AjaKPO9SmUF2zc7mlU
+ Ff6qVE+sw9WtiAD8HSbXwQ2tL+qiDveIbzLMTxzzpX7S3atHrUpt4yoM6axayoCvKRcy
+ P8bK+mbX0cwmZ7EQKVskTzJCWZWgA/PAa96lHW09r3QxN6cweplvrnzeLxgHWzLvs0sZ
+ FmYw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=ixp0gwcDzT/gOTcIFY6ZgU5UUL8+seL2a4GqUvvZO4o=;
- fh=n+kXWT8FZtW+7hoJUYnZozArK8yo2Cr/UH60qgzQ5E0=;
- b=X5rlsmtxCYDqvSuJ21KLf97x/fS2duIYXjJRkFsGWx6SyzOyvydDIfPEiP0Afs2Q+s
- ytwT4g+kjS7eISjErqV95DjsXLQZrgrn7jnl5w/oqpkhQn31SO/gsuV95VzanUMOKix6
- m+wrfi23UqDZlp159pjIqL5sQKJtXHSutktoe4h9Gvq+y1d9I4BWyd1+ltHeB3SSA0OE
- F9LqMO7rtONxqo+oGrQlSah7hUtxRxQm6fakRcFc3kfviRagC2yz+cuDu61viqRu35YH
- oAeJpk3njbvJ8aDs+zcX2ycL2Jamg8cxAUhvo4vrf/bhTYul4Bbg7Q/hl1Nbp3NhQ/Yw
- NWCQ==; darn=lists.u-boot-project.org
+ bh=vcbZqrGBsK7o8arezNi7wMlzSqOMC0gjg9LpaUiRj/I=;
+ fh=s0aO8H2t235zedAC4+qknQB1gFmKrv707ngD0gkIlVY=;
+ b=Q/vEcBRE4bms57vY7L2o7KEn0YF5SX5kojYfexuda/GjUaT+RM1hCzg70GOso6zfPV
+ LrbuBRluzwOy9CwTSz9BFfklycqeDvq1fPQibq5dXsT8ntpDqgmoIHTo0N6SZuch/+me
+ Rd0Qtp1tBB4nnQQyC2KLd5PZ2O2o5ypW5w9f5kLyl531T6qt67h364xwS5RnqJ/DmAFA
+ lHYs68mbfrGHMb3HF9sKOqMYXFUNUMrf39+abmmm1a0qItDRY2X8Y2RrgZXSkxcspaVs
+ fZxIf9PAy5UUg6KPviXqbwFfc/qrPg+jqTnap8pfjLn2mHAnqTD56lEpRiKRjAbjvuiV
+ iPyQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1791862265; x=1792467065;
+ d=chromium.org; s=google; t=1791862280; x=1792467080;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=ixp0gwcDzT/gOTcIFY6ZgU5UUL8+seL2a4GqUvvZO4o=;
- b=JBWIMLmNiYVTTtpYkD/lCJ72OH9txypRlepdnXAkSqVT2KqKeZHxsdM0njYv+0Cueu
- y0MppwBKNCXTql0AqDAVW0uMnezfB6Tm/QbkKw/TBspA8hl/Ay5FPTI5YqwYK/6cgstm
- 7pif2jkBFw1SYH1tmQBVBjmIjPARdmmqh12e4=
+ :content-type; bh=vcbZqrGBsK7o8arezNi7wMlzSqOMC0gjg9LpaUiRj/I=;
+ b=ED9Fv9CoTw+KTcMsV6Mkl+hxQttLCbJ1K4nIA4tK974ZJ9mUyozospA2U8rjAWrmDV
+ 4uKpgPgH7Q+2w/JjHfo3KUu55FTMcO3mZsIaZFbpUx2st4wx/A5DJOf1n8rfNnUZ1LFo
+ GsfOikIAXs9B3rJUS5PbVfnKqy6mYghNsv5hA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791862265; x=1792467065;
+ d=1e100.net; s=20260707; t=1791862280; x=1792467080;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=ixp0gwcDzT/gOTcIFY6ZgU5UUL8+seL2a4GqUvvZO4o=;
- b=HQa1pMU1v/aYKZHVHLuSKcNXlF06nusroOIvRFAUvGG/rqVnXWln8c5s+MbBJ1w1sh
- ZLs5xww9KUxJAIsNKBQQfWOGFWuKvGLMQUPVfqQ3zhTu+0qDrCH4cXddBoLNEb22Ccey
- btjxoM/7h07tiyJZQspd9NDVxShb5AcKLjaNbDKKyY/npWtx+kXhDN6Kbgxs0i3j8Ada
- 8jJO8dadmqn4lMCnhimWy8vdf2wsqEgul27qcufO9qdULYkCqudD9cXkUKRWoCr5CqT0
- oMTS+qvhCiqpasRCFnU0FppTN3o+K7EA3UAcDktQi48jgf+eJ2Pf8Di4gYqC1J/BHyNQ
- dbFw==
+ bh=vcbZqrGBsK7o8arezNi7wMlzSqOMC0gjg9LpaUiRj/I=;
+ b=WzX7KUKOep4AwccSOW95jIPn1e4UNSHR8iwzfNm3YS9eeWBgIIda16g+ox54+Pbfy2
+ t5mQRVNb6UomThKYFvYa5LsIeMvVSfAG7h9NONg2aJ0pCMD56QD+5xaxO/Ie4y8/5G79
+ Cste+YmyCbUFXqk/Z5xZ6PNZY/jXaTjZuEreWtjoVrzrKsh3/q4bpgJcV48ANb9A1vvv
+ OfngH6BuDEiZcrPff/7iqgF5TrJsOy+vjYbCWmrZvalNLm1bmTbZUvaNs9JuJIq2EOTO
+ bk2FNK4n9qZE70HaRduKN1fPQi35F/umKqG3nLb4dDVOt2wPqihLB9sy0gQf/iYf35HF
+ t7Pw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxdwNxn6ap1hG+5BbdU5BwxfkNac6DF/BT0QACe8fKoYqUr5/RuA/UMn/AHam37lPBgoXh/grI=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIWQI2BiywjCFoto4dh7PKdI6Y/msol5kJ8SaIzsKe4ibZ5ZYko
- TgqLLMi0fxIc8242UTgeV4zFNVgjZSRzDOP2a7zxgv33jUEw8iE2uX1LhIhXnb0+qcXXA8flkSM
- TXdeM+yf2mgpWQrb8ZgToEGzGL+pyRizTaKmYFFOg
-X-Gm-Gg: AYBFou0z6WqfjqDexiySl8UnYhQ+AKalgYT5roE/5SWzp4aa/w1WxUZbPtIEbWXPhCM
- 87DyR6MN7bQskoVroYJm4bbbjsCzYyQ6Jr6sxyv6MkHCP0oiijsv6yTI6II/XdiCOhluMaqvySs
- G3wNHI8JzD8jcjWTMgY7ueGkT9IpwStt6a4f/dPFVo9sVWiwZk6LEffOvFyZ6Lyj4uuLIb6UNSl
- vZxmYkhbIQ0CBGk3wbveW3zTRo5QPVAdI1Fz2fAEDr/yAhoOfcjL/0k6pwMkDXQ758QSb2MQrRN
- kK6/kI1QNi2OA5eBRgcsozPJgZgPLwtNTLnwQAFoBJEAYeBw2Syp08mkWf+pMBetmug=
-X-Received: by 2002:a17:90b:3c0f:b0:3ab:b764:8256 with SMTP id
- 98e67ed59e1d1-3abb7649df1mr4024600a91.17.1791862265444; Mon, 12 Oct 2026
- 20:31:05 -0700 (PDT)
+ AKwUvBy8N1hJmu6Bk/HS0MvdvJHQwbVpHi/RORbfJLUBq1ArseW27sOhd+HS58X/FoxReuDeHhBlgrY=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYIvXHoUK6wdzAA8FTc+UgN+SaJW3wzHFSFR7HTqTl3Aq5mqPcFe
+ WJB11+1EWfoZIxqZTdqnoUp5FpdhMD2hhuj0cTpUujaJiHnI4cyh4UIF9BhiIrr6WKJXDG40J05
+ Cl/5Qu9EuA+g255PqQzcV3jxTiFfOVrPxvmepQu/p4syWkzUwbbPgs/rV
+X-Gm-Gg: AYBFou0ublXhU1mt6a6Mai4E//tDcQ5lbTc1xzFjYQhicCGPnDh+US2rIIv9Sgw6kBv
+ rw4PdvCALmneU+cQSOe52OApC0PnNWXGhOnAdHH4jTu1lmd5izeXzdpZRhTocbzpGLdmUuVp9vR
+ YO6LG2hCopy5KsPgz7KaDDPFCkcYPAYtLP5/ksgv8aTcDhmv4gmMxdlbF6ZY1m7lbTJFvKChP5e
+ /CsC3VWPpHT/TuTHGETY4o8FLByoixPbOYye30X99FN45hgZ0h2NszVL2Bjz8VR+sfh8xUIEQEH
+ P2dcsz0h+CHNOXhR7ZCMDduSJY/x2gRrVL7X0hEUaJnTCXVPnJY325K4
+X-Received: by 2002:a17:90a:e7cb:b0:3aa:ee81:a62d with SMTP id
+ 98e67ed59e1d1-3ab3a7480f9mr10165350a91.35.1791862280010; Mon, 12 Oct 2026
+ 20:31:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20261012140048.214059-1-heinrich.schuchardt@canonical.com>
- <20261012140048.214059-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20261012140048.214059-5-heinrich.schuchardt@canonical.com>
+ <20261012140048.214059-6-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20261012140048.214059-6-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 13 Oct 2026 04:30:48 +0100
-X-Gm-Features: AclHuK8WwdCSGkCMdXjk0bM2LSgGqGD0emanwMKwWErheekLFkiCYylny6MMJE0
-Message-ID: <CAFLszTj=uzZkXLhO0Ox1UqnAfF9DOoLc6F13+MjLg5CKNreErA@mail.gmail.com>
-Subject: Re: [PATCH 4/9] fs: ext4: don't read time fields in XPL
+Date: Tue, 13 Oct 2026 04:31:00 +0100
+X-Gm-Features: AclHuK929FrbUR7aOcQqwDw6f1SfnayjkyunAH_oU9aSTpiArx2EkM6gq1U84-k
+Message-ID: <CAFLszTirBLO+T=SCyPpuNAV9KmDbwxYd2fois5trtYOERZUBpw@mail.gmail.com>
+Subject: Re: [PATCH 5/9] fs: ext4: set inode timestamps on write
 To: heinrich.schuchardt@canonical.com
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Huang Jianan <jnhuang95@gmail.com>, Daniel Munic <v-dmunic@microsoft.com>, 
@@ -199,47 +197,86 @@ Hi Heinrich,
 
 On 2026-10-12T14:00:39, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
-> fs: ext4: don't read time fields in XPL
+> fs: ext4: set inode timestamps on write
 >
-> The ext4 readdir implementation populates dent time fields in XML
-> builds though that information is never used.
-
-Typo: 'XML' should be 'xPL'. Please can you also give the motivation?
-Presumably it is the code-size saving in SPL. Do you have a figure?
-
-> Guard the three rtc_to_tm() calls with !IS_ENABLED(CONFIG_XPL_BUILD),
-> consistent with the FAT driver.
-
-The patch also adds le32_to_cpu() to each of the three fields. That
-fixes a real bug on big-endian hosts, since the struct ext2_inode
-members are __le32. Please can you mention it here, or put it in its
-own patch? It is currently hidden behind the subject.
-
+> Replace the hardcoded zero timestamp in ext4fs_write() with the actual
+> current time obtained from the RTC when CONFIG_DM_RTC is enabled.
 >
-> Guard the three rtc_to_tm() calls with !IS_ENABLED(CONFIG_XPL_BUILD),
-> consistent with the FAT driver.
+> Per the ext2/3/4 specification (ext2 design document, section 4.2):
+>   i_mtime  last data modification time
+>   i_ctime  last inode change time (the 'c' stands for 'change', not
+>            'create'; this is not a creation timestamp)
+>   i_atime  last access time
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> All three fields are set to the same value since writing data modifies
+> both the file content (mtime) and the inode metadata (ctime), and any
+> write also constitutes an access (atime).  If no RTC is available, the
+> timestamp falls back to 2000-01-01 00:00:00 UTC, matching the FAT
+> write driver behaviour.
 >
-> fs/ext4/ext4fs.c | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
+> The ext4 i_crtime field (true file creation time, added in ext4) is
+> stored in the extra inode area beyond the base 128-byte inode and is
+> not modelled by struct ext2_inode, so it cannot be set here.
+> [...]
+>
+> fs/ext4/ext4_write.c | 45 +++++++++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 43 insertions(+), 2 deletions(-)
 
-> diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
-> @@ -319,9 +319,11 @@ int ext4fs_readdir(struct fs_dir_stream *fs_dirs, struct fs_dirent **dentp)
-> +             rtc_to_tm(le32_to_cpu(fdiro.inode.ctime), &dent->create_time);
+> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+> @@ -21,14 +21,47 @@
+> +/**
+> + * ext4_current_timestamp() - get current time as a POSIX timestamp
+> + *
+> + * Returns the current time as seconds since the Unix epoch.
+> + * Falls back to 2000-01-01 00:00:00 UTC if the RTC is unavailable,
+> + * matching the behaviour of the FAT write driver.
+> + */
+> +static time_t ext4_current_timestamp(void)
+> +{
+> +     if (CONFIG_IS_ENABLED(DM_RTC)) {
+> +             struct udevice *dev;
+> +             struct rtc_time tm;
+> +
+> +             uclass_first_device(UCLASS_RTC, &dev);
+> +             if (!dev)
+> +                     goto fallback;
+> +             if (dm_rtc_get(dev, &tm))
+> +                     goto fallback;
+> +             return rtc_mktime(&tm);
+> +     }
+> +fallback:
+> +     return EXT4_TIMESTAMP_Y2K;
+> +}
 
-Your next patch points out that i_ctime is the inode change time, not
-the creation time, yet here it is copied into create_time. Since you
-are touching this line, should create_time be left zeroed, or filled
-from i_crtime when the inode is large enough? What do you think?
+This copies the RTC lookup from dentry_set_time() in fat_write.c, and
+patch 6 adds a third copy in test/dm/host.c. I suggest a small common
+helper, e.g. in rtc-uclass.c, that returns the current time in seconds
+(or -ENODEV). FAT could convert that to its date/time format and ext4
+could use it directly. Then the Y2K fallback, and the RTC
+memory-allocation issue that 6/9 works around, are handled in one
+place, and the next filesystem that wants timestamps can use the
+helper too. What do you think?
 
-> dirs->fpos += le16_to_cpu(dirent.direntlen);
->       dent->size = fdiro.inode.size;
+For kernel-doc, please use a 'Return:' section rather than 'Returns'
+in the body.
 
-BTW, the line below has the same endianness problem: 'size' is __le32
-and is used without le32_to_cpu(). It also ignores size_high, so files
-of 4GB or more show the wrong size in ls. Not for this patch, but it
-may be worth a follow-up.
+> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+> @@ -979,7 +1012,15 @@ int ext4fs_write(const char *fname, const char *buffer,
+> -     /* ToDo: Update correct time */
+> +     /*
+> +      * mtime: last data modification time (ext2/3/4 spec 4.2)
+> +      * ctime: last inode change time - NOT creation time despite the name
+> +      * atime: last access time - set to now since we are writing data
+> +      *
+> +      * Note: ext4 i_crtime (true creation time) lives in the extended
+> +      * inode area beyond the base 128-byte inode and is not modelled
+> +      * by struct ext2_inode, so it cannot be set here.
+> +      */
+
+ext4fs_update_parent_dentry() changes the parent directory but does
+not update its mtime/ctime. That could be a follow-up, but please can
+you mention it in the commit message so it is clear that only the file
+inode is handled?
 
 Regards,
 Simon
