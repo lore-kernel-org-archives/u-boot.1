@@ -4,195 +4,182 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61522CA9ED2
-	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 10:34:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1D7ECC6B03
+	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 10:48:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0DB7980D9D;
-	Tue, 13 Oct 2026 10:34:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 00A5880843;
+	Tue, 13 Oct 2026 10:48:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0Tr5OWuMpymU; Tue, 13 Oct 2026 10:33:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8602C80D8F
+ id 2dzUB46V546O; Tue, 13 Oct 2026 10:48:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B6DC98081D
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791887637;
-	b=W7onB92mea69yUtH6tH1lDAD2nj54XRF+Bws1p/S/CByxnPd5PwltKFrPdz99aMSkAEQ
-	 B+4+nDPIG0VDnt04ISkxmaIC+6greiqBayO2CbHr+BrGHCFHrldtgGOZNpDVNv9Sthmi9
-	 e2OuTMjZs87EJsjyniqbr97aEqBgcM5cqzBgDgVr3UKkIVeveeT65Q6XOpovqcOQlR8st
-	 onnYbQQTDZHPwqehrdPm+Eo9MQjloy+gnjnUQTKfS1rgNCESh0o0aHAD4WqFyZIVZIyXq
-	 4dQG94LPYcwuDgJ9UdwCzpMqLUvGb6/sb3Ooe73QRa/gCohp0sAgTRYrnFl8J7aYqBQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791887637;
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791888525;
+	b=GPwJirWAP+LxscnQEOkgC9PdwXmVumsY08zrpA+tgp9zGxrCe8khg6WniqWkSigoO0yW
+	 tDyBAN/dfG1/znNjatV3iN9ED2tbKj3k+8mGxDA19KOigZQEh9jJsS9xsAWTeh58Gj9oR
+	 ZfXaHekd+SX/2rvnZW2/IdYMLbkl17HhZHcg9Q1mmnR6G/jMvPyjnYS/zLtvY5bExKC1/
+	 4BbwMBrCACuliujj8NhwkSqNlFoViHJv3SR7pEWimlJV+zcxmKgd8llQYnIeFucNsvJ/v
+	 avkjGsEJ7eZJes2Q87MwjdFaeFIfQhy9nCyreBD1IJdpLZHiqVTxZJdWrCC5NaiA/wQ==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791888525;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=8yOl7OQVTqCbuFyqmDla9Y5Tl/mZeG9xqRn7jHlXqaE=;
-	b=K41R7HShU94RazUZgekx7o9Faq8Zkmy+p0PcU75Xfu5coAILI8XSyKTq5PhVLYjYsoGK
-	 SlIYodGo7MBQ1lukmFgMI6FmD63I25NxY6+5z3ScUA4zXOP//4b43gfVbp0km2LY5Tly/
-	 /eOEFRDDMXzhs9ueNsjfFw/sPT9MVO+kUrJ+boEqb5AFuGQev28hEPPRqTLNT6r7VgyPW
-	 SsYhuSJplBe9OOwW+tGMCWB4R+KYkQObB6yoEslSXv5AA6P5r1e5XwS8Q8v2zFi3VHTKO
-	 y7ttRiu+EgpyiZ6AYy7ryQ4Z3lYf1Kl2GOgT6toFQtOHlqHNci4p79xJguxfCF853Ew==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=KF0tSsMybKCgU7jLatM4UYBr7V9ueSXbXqPRFxWIF40=;
+	b=FMHZMxcOPE7mk7zY7NI7DnvBQ/H8sWmKgMqiFVYFjdzCB+56ia8vfSthFdC/b69FqQLe
+	 Z37r1QngO79E833Jb7W4V6/cynax2Wq0khJY4ahn7Vt2yo5JNVRj1Hw0cwAZD7PscmbCZ
+	 cOerdQb2yCGkS9Z2WeIPCs5G9c0t4ea/oEgBnMMzv+J85XBpx3u46HmFQ7kgQc/EKTBAw
+	 hJcV5OCnzzcRMLcgQFk3V+dIKQCIeH9Z427o7YcoKyDvMJuk9hjj95psovDG+jS7NAdNk
+	 SuvNRFMMUQmJwNwz8+Nydc2JLPf8gGrtOHp+g1kGVX9HW5IGwyToeeZI+CSgn48l2Jw==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	dmarc=pass header.from=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=KiyGTCcH;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791887637;
-	bh=8yOl7OQVTqCbuFyqmDla9Y5Tl/mZeG9xqRn7jHlXqaE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791888525;
+	bh=KF0tSsMybKCgU7jLatM4UYBr7V9ueSXbXqPRFxWIF40=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=onYtCa002OMPmIV61lPxR22VXfDXf98KNuD90kt7x/KL9qPeFNl9FuIg7tmjKAB//
-	 MQDwhOo3sw9ft942gwQc5p/jLBKj20+2WzQUiw6wNUaA/kh1bA/Mk8rx4CHGYQdIIW
-	 TqIAJThH1hFZ0cmWIUvCs7Mzwgz0scEVCE2knpAmeqQHCn08PKInLkRSCYC0eD9vHE
-	 KD5BtRsYvCcqmodE0nuejvlZnK87kYBh/WJTSxE8V4oPQMVYzBapgtlEBzJn8dHzK7
-	 GD1j4TYJLBY9OO583CN8ctk6q12gJwJtY0ZtYyOCkwmNhMiBNRjDxvU4PfTx4c1S9/
-	 8hikJ0MW9Vnxw==
+	b=KJQktOKbf7ikc5akj9aHQbO6TbG7JJt08fd6uJ+cpD2b4avQTBIySnZ5gTDu0e2Ri
+	 nnXdTmsWyJtjzKxs/1/DocJ4QrMbbiv0v30nw8DUALhpGjX36MVhWGUIaxGsBtodAh
+	 owziv8mwOlqOSXaQ/l7YEbcqXxXbNAzIy0od3bwtb7kk3g62wLuERTzG7XHIU8lCDv
+	 cQete1tU1K0JzXjvPysZTT044MC3f3zThwv/F+uS1EJmPvAG2hE8hLaa2O5mym+6Lw
+	 HPV2oP77yvm+RdeLHfFuLn3xigwCK5ahInYtnyEGpS6q6gzGtjUuLPr5axdMOZwM71
+	 E3ijZ0ciqU5bA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8602C80D8F;
-	Tue, 13 Oct 2026 10:33:57 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id D1204A58
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 10:33:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B6DC98081D;
+	Tue, 13 Oct 2026 10:48:45 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id AB8FF75
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 10:48:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B75714027A
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 10:33:55 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A90338081D
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 10:48:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id l0IxJOOXIV0Y for <u-boot@lists.u-boot-project.org>;
- Tue, 13 Oct 2026 10:33:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 4C4A240277
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=185.125.188.123
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791887634;
- b=aQnDM+GQoKSCqDd5VCUDecWEdC3DfLPksO9xjwfxVZmgnYShRtaHYVNPgHo3cdg1MvIB
- WiJ16fNoIpHJ2QUG1CeqmOYyUqTnb24ZdzHNTuPJMy/CXvn/D66IzJjPt86JPLmVSAnQx
- 1F2CSYrKhskUq9AKWVwjBPrB8CIKq3AeH9R+MczAMtwE2PzMNcgOsIL7ml0Fq+hESF/Jv
- yS4axuoSEn5ggcBgV6W4UPAJe/lbzeGh2Sc39L/fpZbSqCwqJd1LaLIKVFlkgSDNsR20X
- ohezY83fN4BPMdbscQVA5Sxtip1B6rA2cTlNyra7d7uXhX0u5S1XOe75Q5VkuYAFxVw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791887634;
- h=Received-SPF:Received:DKIM-Signature:Received:
- X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
- X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:Subject:
- To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding;
- bh=8yOl7OQVTqCbuFyqmDla9Y5Tl/mZeG9xqRn7jHlXqaE=;
- b=UZlb/fS8gBxsgrx3BPLcBSUUZrnG13S7+J4P424niKUUZsyk5e3rUdOZmY6hjI17w67Z
- M/vegNPFPJH8vhjEkTQ/xJtUyQTb4r5oE6ZT+3YpcNqB22N9aQNLJJpdH2kQlE2enhHbr
- yzVhe0p/KfAFmQ9TS7oNyA61suuCLk1n+Cm411qm+bJUZ9+mer3kfFUDOe4FTftpYBZO7
- wQ2URlVjqD4IsT2XayY2g4BWyOMw74W7ANU8hH5m1Ci6jxZQlAzHaWwQJgi4efOqQds80
- 0eAzASh82GrUcQybjIPB+VNxxGe8VVSwX3SryiZ9vPXhLvn+10/uEluNa1/CTV46ViQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=canonical.com;
- dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
- header.s=20251003 header.b=e1LK0UQ4; 
- arc=none smtp.remote-ip=185.125.188.123
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
- helo=smtp-relay-internal-1.canonical.com;
- envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=e1LK0UQ4
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4C4A240277
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 10:33:53 +0000 (UTC)
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C98DC3F323
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 10:33:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1791887630;
- bh=8yOl7OQVTqCbuFyqmDla9Y5Tl/mZeG9xqRn7jHlXqaE=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=e1LK0UQ4YrZTl3L38b/J16c3WQ4Op1LnQdbCAZQQaMPkA4UfRyPd+SRO+60sQw0se
- a0XV2ODS8+7SP5UcyXzZSMnuKjUVkD84V1Yv2FkvlIyKWSMdwqbXMwtPz1MVL2v/tB
- w1UwacMXxUJ9r288fAxFlIggHoIeFsyeqKbilKYltj7TbcmVHMjlTuMNNQBM0WLROh
- y9kO3boSzZgPGUSmgvFkyl/ChcbSpq7qbRWiKJp6BBTgi0FcYta6SJZSgUFLME15rq
- 7d/ziJPgjB2k5EqRpy+bIY+uYeGnP+yfOTY/Sv/rCbxZ+b6Conjvj7cda2/Rt/GyV2
- drIEAZgbyK8wu69esVJtZeyKD0v59ElylZoGnDtmHvuO3HCC8skP3PnyI4X+f5pDl6
- oqsKHjPYYMXyLxagaOvtgcG1xxEAXpl8X4P9jwLZ9trgwBRZ76zC6qEbYSED7/S1qg
- QwJZL68mxx4k18MyCjAefy8cK274ilk7LBoip6ijFaNmLizw5oABxXae7roqs32x6a
- MaFNjQaxhjWaIQl/3MagGnwqY917kYU4JSl9gpWuE+DJlwzUacbHifkqY4+AgK0yuc
- MPkfGoZkp2G0RsQe+WbPU1pEF4qK2vj8tR1FKlBlpdnszg3v74QdekP98NBM4sZKDP
- J65K6lxjbw6HnQGG1TQWd+mw=
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-4887e5afd67so2268318f8f.3
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:33:50 -0700 (PDT)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id D5_HnxN4w6Z5 for <u-boot@lists.u-boot-project.org>;
+ Tue, 13 Oct 2026 10:48:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7491E80818
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::62b"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791888523;
+ b=IHL9A0hh2+7hgROC4ZES+QvCRMu6nxIEzoYpLBgWpEjo6v21pt6CO0PVNmdA7JbZ0pqI
+ 6DUfpPp0WyocMUXkC3yWLi4Bx3WlowlxWo0jtiQFDIG2Q53xyP999ark8LoeYjw0y9rzt
+ YVEpWsob12RCnFz9gx3WrCrn5PuuOvvhXiDR18qFFZ3U6dilxjkB2jvXuCYMFmDoChR+E
+ 30ptA+KGMaoeNF1Oz6CQcVK6CYa3XVo/z45rz0qNHSi9hJUYI5Mci8wtGH8cPcRZtXagW
+ 0IOgNZpA9qDpwp8npoOJ2/+ksFQftJV6yT+rWKy8TVaXNot97UmkOAisgNaqLc+YAlg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791888523;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+ Message-ID:Subject:To:Cc:Content-Type;
+ bh=KF0tSsMybKCgU7jLatM4UYBr7V9ueSXbXqPRFxWIF40=;
+ b=K6diLRVwtzpHxKn04Ue8o7rI8t7jP9KyRhlI9XQt8qGMc+bEcU1oq5TdN15UiiCg+F2A
+ AHave5LC23kcTO7VVSmZR/Ns7BZMng6WJniZmLLKC9MFO8UL004j9hPWZidCly8/aMm8I
+ rgjQnrX7D89m04atXHyi1tNpypgYQ/DGrZE0g7ff4YAfrrOg7tUyaMrQ0q+GWJDDiRC5I
+ Jc1YAMfGUZCMsAzJcrUHXuyA1rpWY9hTKaI+r2NI0lWtf8ojPzkwjTApLyJt6jo/mbNZy
+ QhiQIEBiSccPD8IgflaS3j0c2CfgF1/TmpDx9ri2eDYBne39oRcmwmGRlhNssJXEOXQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ dmarc=pass header.from=chromium.org;
+ dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=KiyGTCcH; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::62b"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::62b; helo=mail-ej1-x62b.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=KiyGTCcH
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7491E80818
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 10:48:41 +0000 (UTC)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-c263415982eso330369366b.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 03:48:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791888519; cv=none;
+ d=google.com; s=arc-20260327;
+ b=cZFo2BgVTf6tViwny7yZidQnRN7jztew2pol+HmHIZWOL8K9HzbZfVScqUQVn9qza5
+ 92Ycj0hK3AOyTOso9g1J8tr8nvS9L7UJf6lfmXkFWyVSzAEH/t9hXhXSVw3nefC6yWgm
+ 0YkCGSwRoYZStMI3i7u730iHwMiL1RlEUgsUjtNjTlTfPLR0zgkS/yHWf22g8eSAM4ec
+ kLXe+/vcHr/c81AzhQEcLKAPyr2DJPnIcWYL00sufi2yx7bBS0LxPLJfhgx0XI9EjqK1
+ qkByKXsCReZUA6SX+3p1UNRDg5WKE5vSkCqD+2ctszeaSHNSBsEnhgXs6hCLJC6hllo2
+ kCJQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=KF0tSsMybKCgU7jLatM4UYBr7V9ueSXbXqPRFxWIF40=;
+ fh=QoVswdEzJKgH4fCp/6w67GNuVr5Nz0yDB6OwWH/AuRs=;
+ b=WB9+ggQLgFqo/JC87qI/GluYemFi1Yha/zo4W2W4fARJaXFa0qR/PjGVr/bL9gta4K
+ sPxDLJ93r9vlyLRsLvYMJPlBuPJbzit6M/K1VWJIcsQIV1pgTCN+WTPEkztZ0qtoXYvO
+ YOGNVIHUQQXStzj+Mlo5hC+Ks81rRkh4XzRb6liNV/RvG/T7dqNWOPkGH3vxHmwyUeVk
+ nsVikY0CO2RE+bcyRNMIbELny5QGu2qLoAYE8vW6bc+6l/TzLz7ncYR60A6ERu7KI3nO
+ G6n5SA39eQYO0rbBLuULcCjd18iUxWT3hF4xINutZHp4LbEo+WGbY3l2xKecGVNvrarQ
+ IMlQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1791888519; x=1792493319;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=KF0tSsMybKCgU7jLatM4UYBr7V9ueSXbXqPRFxWIF40=;
+ b=KiyGTCcHHto0nAeI7ZfyBRHjp8fRyzNzhz6kF9Mma7dsnjo0mpixz3BtDzRfc5YpZK
+ L9OeRIy1TvujVQhia4TNfzbP8lVMbI3XSjcoUBBbNcmx5O+MdggQfI6kinmgXET6RxTw
+ w31+NVpFgXXCL7i2v8jv8KLra+2o9lNAfPVsY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791887630; x=1792492430;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=8yOl7OQVTqCbuFyqmDla9Y5Tl/mZeG9xqRn7jHlXqaE=;
- b=d4s4Usdkz7+dSD+jwrbhrJRIyJoKXhQURwWLbIjkXaf0MVbqKjTCVqgTbNjf0zdivJ
- L5A4Ma1WelCNB1WkjBos7iaKf/B4L4cpBB6aXpC8b/YKJvNBb5IwmJh7htj+4GlBkmCJ
- Tp/p3nhqZXjrryDjGSgvVOGxnyWvqVvKosLKCY4KWm0Fzw6vstfFs5FmOvaa94gyEOAC
- JcrZsiVOikRGOu98nLoZKZOf/R4B8Hn89RBgHDCjcAgjJm+JVo7YQIIh/QieiOQKlCK+
- PiQ4gYTHKYYQcDPbZe1GuI+L0M3M6vkzWomPtyRl9iVQLKR261dHWtgPgV9JcUge3ooZ
- dpJQ==
-X-Gm-Message-State: AFq9FYKSN8B0l9Q3lcY/IQqIvIPGf5xNBaFeb3wWJ39Y6P+heRLLLfLB
- ewh+dxugDEkUdeQGvfFviLG1Ak3NfIR+fZqJvU124ULjfWBwUoYy+8WNuAW9lxFNTpqycCzEOf5
- 0Epa5PBFnrHa3tt9UFASJcmmssrtcL/cZXrGa55Md4sV6qQAXxcdPyN3m6uG6LG8QpBR/ZfYlNV
- IZGxFj61Otwg==
-X-Gm-Gg: AYBFou27QRV5+trmWgdwuWWbAEkoJ/adG0vOICldWHcPa+7F0n1+zOZVB1pPpQ4zVjS
- mSsNqeu1ttxKxMmviDcdMg0gDW5zScKGiZKfOZ1a+FOgP6Hakc2t2RVDNGjw29o5JjxU3gT+Zj8
- /HHwhsOiS0/IU50JBfqut5jS9m77bBLvt2XLoTLCwN/ft8hPF1AeJdbv4Ix6Mxn70CIBjblmrpH
- Guyrg5Rhokk6uJUecvm2UW88QRzR+y+1cEeb/4TiP/coHMpcII3EzNqO47QnOA8rVGbNQ2OdJ6+
- 4UyKHdiw7bg7WVMeFBMHjTCi3qdWHbuPdxFn9nR6FKUTWjqI75Ny6jIZkH6XRmBwI8LVmiFAjua
- aM43+l2K8EIAnPKrz1GBZ6LmHFLEnlAslWaLrgG7L8jUlmBFDL2DPPH+JFXhBgFi4LjTjGCDJtO
- mPBcmbA/B5rhRSr+GFK6SHqJ8=
-X-Received: by 2002:a05:6000:491c:b0:486:e6a2:2d7c with SMTP id
- ffacd0b85a97d-48dba9dacebmr23002741f8f.15.1791887630370; 
- Tue, 13 Oct 2026 03:33:50 -0700 (PDT)
-X-Received: by 2002:a05:6000:491c:b0:486:e6a2:2d7c with SMTP id
- ffacd0b85a97d-48dba9dacebmr23002695f8f.15.1791887629968; 
- Tue, 13 Oct 2026 03:33:49 -0700 (PDT)
-Received: from ?IPV6:2a02:908:1242:30e0:74c2:18b4:3225:49fc?
- ([2a02:908:1242:30e0:74c2:18b4:3225:49fc])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48de0bc6b82sm4414338f8f.51.2026.10.13.03.33.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Oct 2026 03:33:48 -0700 (PDT)
-Message-ID: <442ea702-451e-435a-8b04-543750e929e6@canonical.com>
-Date: Tue, 13 Oct 2026 12:33:47 +0200
+ d=1e100.net; s=20260707; t=1791888519; x=1792493319;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=KF0tSsMybKCgU7jLatM4UYBr7V9ueSXbXqPRFxWIF40=;
+ b=JmwNRtGExUpoW/f8J/eLpGAvm+HcWucw7JEmO/1vHbkEraaA5WYsn2tN+WjNQCOBI1
+ 6OGrLcGncGPk9IXrb94OEJqWVmhlziasC5CNJQHNNsibYXuQozcM75sbZN4vXROWPXQ4
+ iQmESEiotBVmN1aRUMJM315ZVxs1ryMtVc/nqsylxvShzjf9rJPprZ4rfUAfgV5sGGA/
+ JTUEIGggLltnqwUahYg6edqGlGBnfnTzvTvKBRmjF0zUovXw3cBof+A00Ru6zxDHfgW+
+ ng5U0UoaP/5qCOasaMP/6/mPg5Mub8dDHHqmVUdy2fUCEeCATtJb4bdEg3zCDX2AzVUx
+ YJJw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByYxy3xmz5UyHsVVGjqAm00xrVNa5yFqnvkQmnazOJbMrY3EP5zl/6Eugc7oqPKPd06BUeRXos=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJWsjlHrRDNmkvWFtDVRVeZLMO0Iy+1hEFLnCwn36gme8Zmt4Wy
+ CaWBT8aAYoKWS8VVuFvyGOsUI7W8ChInpyR3jYQ3CBNFtMX+dVZITiAdSib6H9lkALxAaMyugwR
+ 3+nlfLvQjORuD1cxn578E7RORHlk7JaEPT0hT0ZmA
+X-Gm-Gg: AYBFou2tuwNbmh55JgV0lBbe31cLtp4cuRQLMsscYtB8fECAXkURlsy/Tir+2vScAOx
+ Qu7VsJc2LUlixzZAmpRIJe+oWNmfEd+kwm0vvxa1VaCst3VtovhWJkqLQUuf1Z5B7V+IDrWF7gI
+ YMQKvuNr0F5BRF2bY/jQ+cYykdugi1jtHHONUY0JviO9PFN0UIwCEzHGf+cK+LD2FPN8ajkbhwa
+ qtEw3lEtKR6RFOfAeFfXhzE1wkxN8za+eqVYew8ZbgrzTMdhTa2REdpydBDS7zUOZT/57h7VI+D
+ mKgDhi7SOXRe3wiCHZkBUpYrLqPSMdsuTX4rxbmku5Un0ynBjOOqap5s
+X-Received: by 2002:a17:907:9694:b0:c20:9447:bd5e with SMTP id
+ a640c23a62f3a-c31a9fa1d3amr1231293066b.9.1791888519212; Tue, 13 Oct 2026
+ 03:48:39 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/5] Add support for RPMI to U-Boot
-To: Michal Simek <michal.simek@amd.com>
-Cc: "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>,
- Paul Walmsley <pjw@kernel.org>, Rahul Pathak <rahul@summations.net>,
- Anup Patel <anup@brainfault.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
- Romain Caritey <romain.caritey@microchip.com>,
- Mame Maria Mbaye <MameMaria.Mbaye@microchip.com>,
- Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Conor Dooley <conor@kernel.org>,
- Yao Zi <me@ziyao.cc>, Peng Fan <peng.fan@oss.nxp.com>,
- Charles Perry <charles.perry@microchip.com>, Michal Simek <monstr@monstr.eu>
-References: <20260902141744.2422566-1-charles.perry@microchip.com>
- <cd52329c-e241-465f-a77e-588ae89f5f10@monstr.eu>
- <as1zWYeE7OGOZEmJ@MON-LT-C78453.mchp-main.com>
- <a83ccf7e-87ee-4c78-80d9-86dc0b246491@amd.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <a83ccf7e-87ee-4c78-80d9-86dc0b246491@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20260930-spi-probe-speed-v1-1-ff9aebfebdf9@iav.lv>
+ <CAFLszTj_fXh+4c2Ldq4cw8n973=R-1z38SrE1cp6-Z0hy4+USg@mail.gmail.com>
+ <179113522079.1894383.11891966557600672757@iav.lv>
+In-Reply-To: <179113522079.1894383.11891966557600672757@iav.lv>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 13 Oct 2026 11:48:26 +0100
+X-Gm-Features: AclHuK-BBCbxLMIBPP2OCMfEXN9mxzACZ5YEDK5IplC3gJzcHRgF7dsady-hq2o
+Message-ID: <CAFLszTj4r1dD0D828=yDYtH3ikwUkQ2-1_FH_OHMTBUzD05Hrg@mail.gmail.com>
+Subject: Re: [PATCH] spi: Probe a device tree device at the requested speed
+To: Igor Velkov <iav@iav.lv>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut@mailbox.org>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -206,74 +193,69 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 10/13/26 08:49, Michal Simek wrote:
-> 
-> 
-> On 10/13/26 01:55, Charles Perry wrote:
->> On Mon, Oct 12, 2026 at 11:47:51AM +0200, Michal Simek wrote:
->>> Hi, +Paul
->>
->> Hello Michal,
->>
->>>
->>> first of all do not use mailing list on denx.de.
->>
->> Ok, I sent this series at around the time U-Boot changed to
->> u-boot@lists.u-boot-project.org. Sorry for that.
->>
->>>
->>> On 9/2/26 16:17, Charles Perry wrote:
->>>> Hello,
->>>>
->>>> This series adds support for RISC-V Platform Management Interface 
->>>> (RPMI) to
->>>> U-Boot. RPMI is an OS-agnostic protocol for communication between an
->>>> Application Processor (AP) and a Platform Microcontroller (PuC) [1]. 
->>>> The
->>>> goals and purpose of RPMI are similar to ARM's SCMI.
->>> I have raised my concern at riscv minisummit at LPC and also talked 
->>> to Paul
->>> (riscv kernel maintainer) that this is not the right way to go. We 
->>> already
->>> have SCMI and there is no reason to introduce RPMI when it is said it is
->>> serving the same purpose.
->>
->> Cool! Thanks for bringing this topic to LPC!
->>
->> That being said, I don't understand why we can't have both SCMI and RPMI.
->> For sure its more code to maintain, but there are other things at play 
->> than
->> just the functionnality. We discussed this in v2 [1], the points of
->> contention were:
->>
->>   * Anup said that the main blocker for him is that the SCMI spec is not
->>     community driven while RPMI is.
-> 
-> Based on my information none really starts to talk to ARM about SCMI and 
-> this has been introduced serving the same purpose. None should introduce 
-> another interface which does the same thing. That never was the right 
-> way to go.
-> 
-> Thanks,
-> Michal
+Hi Igor,
 
-Hello Michal,
+On Sun, 4 Oct 2026 at 18:34, Igor Velkov <iav@iav.lv> wrote:
+>
+> Hi Simon,
+>
+> On Sat, 3 Oct 2026 at 06:41, Simon Glass <sjg@chromium.org> wrote:
+> > Please can you override just max_hz here?
+>
+> Yes, v2 will override only max_hz and keep the mode from the DT.
+>
+> > Their flashes are now probed at that speed and stay there, since
+> > slave->max_hz keeps it, rather than running at spi-max-frequency as
+> > they do today.
+>
+> Checking this led me through the history:
+>
+> - 96907c0fe50a and b0cc1b846fcb ("dm: spi: Read default speed and mode
+>   values from DT", 2016 and 2019): a device with a DT node gets the DT
+>   values; the second says "even if speed and mode are requested" and
+>   names SPL boot and the splash screen. The SF_DEFAULT_SPEED help says
+>   the same.
+> - e2e95e5e2542 ("spi: Update speed/mode on change", 2021): after the
+>   probe, _spi_get_bus_and_cs() calls spi_set_speed_mode() with the
+>   requested speed but does not update bus_data->speed.
+> - 3feea0ba196a ("spi: spi_flash_probe_bus_cs() rely on DT for spi speed
+>   and mode", 2022): callers that want the DT values use
+>   spi_flash_probe_bus_cs(); sf probe uses spi_flash_probe() only when a
+>   speed or mode is given.
+>
+> On sandbox at a6ab6a66146, spi_flash_probe(0, 0, 1000000, 0) on
+> spi.bin@0 (40 MHz in the DT) leaves the controller at 1 MHz after the
+> probe, after spi_claim_bus() and after spi_flash_read(), while
+> slave->max_hz and bus_data->speed stay at 40 MHz: the claim compares
+> against the stale cache and does not reprogram the bus. rk_spi behaves
+> the same, as its set_speed() takes effect on the next transfer. So
+> these callers already run at the requested speed after the probe; only
+> the ID read happens at spi-max-frequency. It also makes a sentence in
+> my v1 commit message wrong ("the next claim of the bus goes back to
+> that frequency").
+>
+> > Just to check: should a requested speed above spi-max-frequency be
+> > honoured here, rather than capped at it?
+>
+> I don't think this choice is mine to make; it is about what the SPI
+> uclass should promise. The options I see:
+>
+> A. Keep the v1 scope and override only max_hz for the probe, so the
+>    probe runs at the speed the callers already get after it, uncapped
+>    as today.
+> B. Honour the speed only for an explicit request from the shell
+>    (sf probe with a speed), where whoever is debugging answers for the
+>    value, and keep the DT speed for everyone else. That also needs the
+>    path from e2e95e5e2542 to stop overriding the DT speed for them,
+>    which is a separate fix.
+>
+> Which would you prefer? I will also add the checks you suggested to
+> the test, on spi.bin@1, whose DT node sets spi-cpol and spi-cpha, so
+> lost mode bits show up.
 
-RPMI is already used in the Linux kernel since 2025.
+This sounds like a decision for the maintainer - maybe B would be better?
 
-U-Boot has already lot of alternative interfaces implemented:
+Marek do you have any thoughts on this.
 
-* Xen and QEMU/KVM
-* half a dozen file systems
-* MBR and GPT
-* FIT images and UEFI
-
-I can't see anything special about RPMI.
-
-As nobody, including you, seems to be interested in driving a discussion 
-with ARM which would set back RISC-V for months or years, we should 
-proceed implementing what is needed.
-	
-Best regards
-
-Heinrich
+Regards,
+Simon
